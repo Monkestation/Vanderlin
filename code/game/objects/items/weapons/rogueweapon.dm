@@ -1,4 +1,5 @@
 /obj/item/weapon
+	abstract_type = /obj/item/weapon
 	name = "weapon"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
@@ -28,18 +29,24 @@
 		"embedded_pain_multiplier" = 1,
 		"embedded_fall_chance" = 0,
 	)
-	var/initial_sl
-	var/list/possible_enhancements
-	var/renamed_name
-	var/axe_cut = 0
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
+	var/axe_cut = 0
+	var/datum/special_intent/weapon_special
 
 /obj/item/weapon/Initialize(mapload)
 	. = ..()
 	if(!destroy_message)
 		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
+	if(ispath(weapon_special))
+		weapon_special = new weapon_special()
+
 	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+
+/obj/item/weapon/Destroy(force)
+	if(weapon_special)
+		QDEL_NULL(weapon_special)
+	return ..()
 
 /obj/item/weapon/attack_hand(mob/user)
 	if(is_species(user, /datum/species/werewolf)) //slop fix
@@ -57,6 +64,12 @@
 
 /obj/item/weapon/get_examine_string(mob/user, thats = FALSE)
 	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
+
+/obj/item/weapon/examine(mob/user)
+	. = ..()
+
+	if(weapon_special)
+		. += weapon_special.get_examine()
 
 /obj/item/weapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)
 	if(!get_sharpness() || !affecting.can_dismember(src))

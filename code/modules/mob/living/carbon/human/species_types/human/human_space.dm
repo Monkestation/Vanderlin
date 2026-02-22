@@ -102,10 +102,10 @@
 	return FALSE
 
 /datum/species/human/space/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/human/humnorm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/human/humnorf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/human/humnorm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/human/humnorf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/human/space/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/human/humnorlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/human/humnorlast.txt')
 	return last_names

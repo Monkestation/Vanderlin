@@ -569,7 +569,7 @@
 	if(!chosen_name) // with the way that sanitize_name works, it'll actually send the error message to the awakener as well.
 		to_chat(awakener, span_warning("Your weapon did not select a valid name! Please wait as they try again.")) // more verbose than what sanitize_name might pass in it's error message
 		return custom_name(awakener, iteration++)
-	return chosen_name
+	return chosen_one.fully_replace_character_name(chosen_one.name, chosen_name)
 
 ////////////////////////////////////////Magic resources go below here////////////////////
 

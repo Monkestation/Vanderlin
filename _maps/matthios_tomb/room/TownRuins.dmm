@@ -38,12 +38,6 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors/church)
-"aW" = (
-/obj/structure/bars/pipe{
-	dir = 8
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "aY" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/fishingrod,
@@ -140,12 +134,6 @@
 /obj/machinery/light/fueled/torchholder,
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/tomb/indoors)
-"co" = (
-/obj/structure/bars/pipe{
-	dir = 10
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "cz" = (
 /obj/machinery/light/fueled/torchholder,
 /turf/closed/wall/mineral/craftstone,
@@ -175,6 +163,10 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"dx" = (
+/obj/structure/fluff/walldeco/vinez/r,
+/turf/open/openspace,
+/area/under/tomb)
 "dy" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/food/snacks/fish{
@@ -213,6 +205,13 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors/church)
+"dY" = (
+/obj/structure/fluff/walldeco/vinez/l,
+/turf/open/openspace,
+/area/under/tomb)
+"ef" = (
+/turf/open/water/swamp/deep,
+/area/under/tomb)
 "ej" = (
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/cobble,
@@ -302,10 +301,6 @@
 "fJ" = (
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
-/area/under/tomb)
-"fN" = (
-/obj/effect/decal/cleanable/debris/glass,
-/turf/open/openspace,
 /area/under/tomb)
 "fQ" = (
 /obj/structure/stairs{
@@ -412,10 +407,8 @@
 /obj/item/clothing/face/facemask/goldmask,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
-"iA" = (
-/obj/structure/fluff/statue/pillar,
-/obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
+"iI" = (
+/turf/open/openspace,
 /area/under/tomb)
 "iO" = (
 /turf/open/floor/cobble,
@@ -439,10 +432,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"jn" = (
-/obj/structure/fluff/walldeco/vinez/r,
-/turf/open/openspace,
-/area/under/tomb)
 "jo" = (
 /turf/closed/wall/mineral/decostone/end{
 	dir = 4
@@ -465,6 +454,9 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/under/tomb)
+"jB" = (
+/turf/open/openspace,
+/area/under/tomb/indoors/church)
 "jN" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/effect/spawner/map_spawner/loot,
@@ -502,10 +494,6 @@
 /obj/effect/decal/cleanable/dyes,
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
-"ky" = (
-/obj/item/natural/dirtclod,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/under/tomb/indoors)
 "kD" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -516,17 +504,6 @@
 /obj/structure/door,
 /turf/open/floor/ruinedwood,
 /area/under/tomb/indoors)
-"kX" = (
-/obj/structure/bars/pipe{
-	dir = 1;
-	pixel_y = -25
-	},
-/obj/item/reagent_containers/glass/carafe/gold/redwine{
-	pixel_y = -3;
-	pixel_x = -5
-	},
-/turf/open/water/swamp/deep,
-/area/under/tomb)
 "lh" = (
 /obj/structure/door,
 /turf/open/floor/wood/nosmooth,
@@ -582,9 +559,6 @@
 /obj/structure/curtain/bounty,
 /turf/closed/wall/mineral/wooddark/window,
 /area/under/tomb/indoors)
-"lU" = (
-/turf/open/openspace,
-/area/under/tomb/indoors/church)
 "mq" = (
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/plank,
@@ -631,6 +605,10 @@
 "nd" = (
 /turf/open/floor/dirt/road,
 /area/under/tomb)
+"ng" = (
+/obj/structure/fluff/statue/pillar,
+/turf/open/water/swamp/deep,
+/area/under/tomb)
 "nu" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hexstone,
@@ -652,14 +630,6 @@
 	},
 /turf/open/floor/wood/nosmooth/saiga,
 /area/under/tomb/indoors)
-"of" = (
-/obj/structure/bars/pipe{
-	dir = 4;
-	pixel_y = -17;
-	layer = 2.81
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "og" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt,
@@ -676,13 +646,6 @@
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
-"on" = (
-/obj/structure/bars/pipe{
-	dir = 5;
-	pixel_y = -17
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "oo" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 10
@@ -835,10 +798,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp,
 /area/under/tomb)
-"pR" = (
-/obj/structure/bars,
-/turf/open/openspace,
-/area/under/tomb)
 "pX" = (
 /turf/open/floor/concrete,
 /area/under/tomb/indoors)
@@ -846,6 +805,10 @@
 /obj/structure/door/stone,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/church)
+"qn" = (
+/obj/structure/kneestingers,
+/turf/open/water/swamp/deep,
+/area/under/tomb)
 "qp" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned,
@@ -1071,6 +1034,14 @@
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/tomb/indoors)
+"uf" = (
+/obj/structure/bars/pipe{
+	dir = 4;
+	pixel_y = -1;
+	layer = 2.81
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "uw" = (
 /obj/structure/flora/grass/herb/atropa,
 /obj/structure/flora/grass,
@@ -1085,13 +1056,6 @@
 "uC" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/decostone,
-/area/under/tomb)
-"uI" = (
-/obj/structure/bars/pipe{
-	dir = 4;
-	pixel_x = -8
-	},
-/turf/open/openspace,
 /area/under/tomb)
 "uL" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -1134,6 +1098,13 @@
 	},
 /turf/open/floor/wood/nosmooth/saiga,
 /area/under/tomb/indoors)
+"vR" = (
+/obj/structure/bars/pipe{
+	dir = 4;
+	pixel_x = -8
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "vV" = (
 /turf/closed/wall/mineral/wooddark,
 /area/under/tomb)
@@ -1172,6 +1143,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors)
+"wK" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/openspace,
+/area/under/tomb)
 "wU" = (
 /obj/effect/decal/cleanable/dirt,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -1190,6 +1165,19 @@
 "xz" = (
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
+"xN" = (
+/obj/structure/bars/pipe{
+	dir = 4;
+	pixel_y = -17;
+	layer = 2.81
+	},
+/obj/structure/bars/pipe{
+	dir = 4;
+	pixel_y = -17;
+	layer = 2.81
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "xS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1219,6 +1207,23 @@
 "yP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/wooddark/end,
+/area/under/tomb)
+"zd" = (
+/obj/structure/bars/pipe{
+	dir = 1;
+	pixel_y = -25
+	},
+/obj/item/reagent_containers/glass/carafe/gold/redwine{
+	pixel_y = -3;
+	pixel_x = -5
+	},
+/turf/open/water/swamp/deep,
+/area/under/tomb)
+"zh" = (
+/obj/structure/bars/pipe{
+	dir = 8
+	},
+/turf/open/openspace,
 /area/under/tomb)
 "zo" = (
 /turf/closed/wall/mineral/decostone,
@@ -1264,13 +1269,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb)
-"Aj" = (
-/obj/structure/fluff/walldeco/vinez/l,
+"Al" = (
+/obj/structure/bars/pipe{
+	dir = 4;
+	pixel_y = -17;
+	layer = 2.81
+	},
 /turf/open/openspace,
-/area/under/tomb)
-"Am" = (
-/obj/structure/fluff/statue/pillar,
-/turf/open/water/swamp/deep,
 /area/under/tomb)
 "At" = (
 /obj/structure/stairs{
@@ -1356,13 +1361,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors)
-"CG" = (
-/obj/item/natural/dirtclod{
-	pixel_y = 7;
-	pixel_x = -12
-	},
-/turf/open/floor/ruinedwood/spiralfade,
-/area/under/tomb/indoors)
 "CJ" = (
 /turf/closed/wall/mineral/decostone/long,
 /area/under/tomb/indoors/church)
@@ -1393,6 +1391,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors/church)
+"Dh" = (
+/obj/structure/bars/pipe{
+	dir = 10
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "Dk" = (
 /obj/effect/decal/cleanable/debris/glass,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -1481,9 +1485,6 @@
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
-"Ef" = (
-/turf/open/openspace,
-/area/under/tomb)
 "Ek" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rooftop/green,
@@ -1523,6 +1524,10 @@
 "Fc" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/blocks/stonered/tiny,
+/area/under/tomb/indoors)
+"Fx" = (
+/obj/item/natural/clod/dirt,
+/turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "Fz" = (
 /turf/closed/wall/mineral/decostone/end{
@@ -1624,6 +1629,13 @@
 /obj/structure/chair/wood/alt/chair3,
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
+"Hf" = (
+/obj/structure/bars/pipe{
+	dir = 1;
+	pixel_y = -8
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "Hg" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/ruinedwood,
@@ -1695,15 +1707,31 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/mineral/wooddark,
 /area/under/tomb/indoors)
+"Ix" = (
+/obj/structure/bars/pipe{
+	dir = 6;
+	pixel_x = 1;
+	pixel_y = -1
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "IC" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
 /area/under/tomb)
+"IG" = (
+/turf/open/openspace,
+/area/under/tomb/indoors)
 "IU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood/plain,
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
+"IZ" = (
+/obj/structure/fluff/statue/pillar,
+/obj/structure/kneestingers,
+/turf/open/water/swamp/deep,
+/area/under/tomb)
 "Jg" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/fueled/torchholder/c,
@@ -1720,9 +1748,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"JD" = (
-/turf/open/water/swamp/deep,
-/area/under/tomb)
 "JE" = (
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors)
@@ -1799,14 +1824,6 @@
 	},
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors)
-"KP" = (
-/obj/structure/bars/pipe{
-	dir = 6;
-	pixel_x = 1;
-	pixel_y = -1
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "KT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/decostone/long{
@@ -1836,6 +1853,12 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
 /area/under/tomb)
+"LL" = (
+/obj/structure/bars/pipe{
+	dir = 6
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "Mc" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -1847,6 +1870,10 @@
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/under/tomb/indoors)
+"Mt" = (
+/obj/structure/bars/pipe,
+/turf/open/openspace,
+/area/under/tomb)
 "Mx" = (
 /obj/structure/door/fancy,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1868,9 +1895,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
 /area/under/tomb)
-"MT" = (
-/turf/open/openspace,
-/area/under/tomb/indoors)
 "MX" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/wood/plain,
@@ -1930,6 +1954,13 @@
 /obj/structure/kneestingers,
 /turf/open/water/swamp,
 /area/under/tomb)
+"NU" = (
+/obj/structure/bars/pipe{
+	dir = 6;
+	pixel_x = -9
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "NY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/book/cardgame,
@@ -1943,13 +1974,6 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/under/tomb)
-"Om" = (
-/obj/structure/bars/pipe{
-	dir = 6;
-	pixel_x = -9
-	},
-/turf/open/openspace,
 /area/under/tomb)
 "Ov" = (
 /obj/effect/decal/cleanable/dirt,
@@ -2033,10 +2057,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
-"QC" = (
-/obj/structure/kneestingers,
-/turf/open/water/swamp/deep,
-/area/under/tomb)
 "QJ" = (
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/grass,
@@ -2070,10 +2090,6 @@
 /obj/effect/decal/cleanable/debris/glass,
 /obj/structure/door/fancy,
 /turf/open/floor/carpet,
-/area/under/tomb)
-"Rp" = (
-/obj/structure/flora/grass/water/reeds,
-/turf/open/water/swamp/deep,
 /area/under/tomb)
 "Rq" = (
 /obj/structure/kneestingers,
@@ -2136,12 +2152,6 @@
 /obj/item/reagent_containers/food/snacks/fish,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
-"SD" = (
-/obj/structure/bars/pipe{
-	dir = 6
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "SY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/decostone/cand,
@@ -2207,14 +2217,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"Ut" = (
-/obj/structure/bars/pipe{
-	dir = 4;
-	pixel_y = -1;
-	layer = 2.81
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "Uw" = (
 /obj/structure/rack/shelf/biggest,
 /obj/structure/rack/shelf/biggest,
@@ -2236,23 +2238,14 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"UF" = (
-/obj/structure/bars/pipe{
-	dir = 4;
-	pixel_y = -17;
-	layer = 2.81
-	},
-/obj/structure/bars/pipe{
-	dir = 4;
-	pixel_y = -17;
-	layer = 2.81
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "Vf" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
+/area/under/tomb)
+"Vl" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/swamp/deep,
 /area/under/tomb)
 "Vs" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2296,13 +2289,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood,
 /area/under/tomb)
-"VP" = (
-/obj/structure/bars/pipe{
-	dir = 1;
-	pixel_y = -8
-	},
-/turf/open/openspace,
-/area/under/tomb)
 "VS" = (
 /obj/structure/flora/grass/herb/atropa,
 /obj/structure/flora/grass,
@@ -2328,6 +2314,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors/church)
+"WA" = (
+/obj/structure/bars,
+/turf/open/openspace,
+/area/under/tomb)
 "WQ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2431,6 +2421,13 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
+"Yt" = (
+/obj/structure/bars/pipe{
+	dir = 5;
+	pixel_y = -17
+	},
+/turf/open/openspace,
+/area/under/tomb)
 "Yv" = (
 /obj/structure/bars,
 /turf/open/floor/ruinedwood/turned,
@@ -2440,10 +2437,6 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors/church)
-"YQ" = (
-/obj/structure/bars/pipe,
-/turf/open/openspace,
-/area/under/tomb)
 "YT" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -3294,7 +3287,7 @@ PW
 zX
 PW
 PW
-JD
+ef
 "}
 (26,1,1) = {"
 mG
@@ -3326,7 +3319,7 @@ PW
 PW
 PW
 PW
-Am
+ng
 "}
 (27,1,1) = {"
 mG
@@ -3357,8 +3350,8 @@ NN
 PW
 NN
 tL
-JD
-JD
+ef
+ef
 "}
 (28,1,1) = {"
 mG
@@ -3388,9 +3381,9 @@ Qt
 PW
 LE
 PW
-iA
-JD
-Am
+IZ
+ef
+ng
 "}
 (29,1,1) = {"
 Gu
@@ -3416,13 +3409,13 @@ eB
 Kt
 NN
 PW
-JD
-JD
-JD
-JD
-kX
-JD
-JD
+ef
+ef
+ef
+ef
+zd
+ef
+ef
 "}
 (30,1,1) = {"
 hl
@@ -3447,22 +3440,22 @@ dz
 Kt
 Kt
 hw
-Rp
-JD
-QC
-JD
-JD
-JD
-QC
-JD
+Vl
+ef
+qn
+ef
+ef
+ef
+qn
+ef
 "}
 
 (1,1,2) = {"
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
 gC
 qY
 qY
@@ -3490,11 +3483,11 @@ qY
 gC
 "}
 (2,1,2) = {"
-Ef
-jn
-jn
-jn
-jn
+iI
+dx
+dx
+dx
+dx
 rV
 mS
 gZ
@@ -3508,11 +3501,11 @@ XD
 cc
 cc
 fJ
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
 rV
 ot
 gl
@@ -3522,7 +3515,7 @@ rk
 rV
 "}
 (3,1,2) = {"
-Ef
+iI
 gC
 qY
 fu
@@ -3540,11 +3533,11 @@ CP
 XD
 XD
 fJ
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
 rV
 tb
 fm
@@ -3554,7 +3547,7 @@ rk
 rV
 "}
 (4,1,2) = {"
-Ef
+iI
 mZ
 jr
 Pf
@@ -3575,8 +3568,8 @@ DG
 Ek
 Ek
 fo
-Ef
-Ef
+iI
+iI
 rV
 CZ
 CZ
@@ -3586,7 +3579,7 @@ rk
 rV
 "}
 (5,1,2) = {"
-Ef
+iI
 rV
 jr
 bb
@@ -3601,32 +3594,32 @@ Px
 pt
 kN
 rV
-Ef
+iI
 lK
-pR
+WA
 Ek
 Ek
 Ek
-Ef
-Ef
+iI
+iI
 lw
-Ef
-Ef
+iI
+iI
 rV
 Dw
-ky
+Fx
 rV
 "}
 (6,1,2) = {"
-Ef
+iI
 rV
 bb
 IU
 si
 MA
 Lv
-Ef
-Ef
+iI
+iI
 gQ
 rV
 VM
@@ -3650,14 +3643,14 @@ Yq
 rV
 "}
 (7,1,2) = {"
-Ef
+iI
 sn
 Hc
 eS
 bb
 MA
-Ef
-Ef
+iI
+iI
 gQ
 gQ
 rV
@@ -3677,12 +3670,12 @@ XT
 qp
 qp
 JL
-ky
+Fx
 rk
 rV
 "}
 (8,1,2) = {"
-co
+Dh
 gC
 pt
 qY
@@ -3709,12 +3702,12 @@ qp
 qp
 zx
 JL
-CG
+Fx
 rk
 rV
 "}
 (9,1,2) = {"
-YQ
+Mt
 eV
 TP
 jN
@@ -3746,7 +3739,7 @@ qY
 gC
 "}
 (10,1,2) = {"
-YQ
+Mt
 eV
 Px
 ms
@@ -3763,22 +3756,22 @@ VM
 rV
 cc
 IC
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
 "}
 (11,1,2) = {"
-YQ
+Mt
 Rj
 gC
 Iw
@@ -3795,23 +3788,23 @@ pt
 gC
 NJ
 IC
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
 "}
 (12,1,2) = {"
-YQ
-Ef
+Mt
+iI
 rV
 ms
 XJ
@@ -3842,13 +3835,13 @@ At
 Nl
 "}
 (13,1,2) = {"
-YQ
-Ef
+Mt
+iI
 TP
 lL
 Xh
-MT
-MT
+IG
+IG
 Xw
 lL
 tz
@@ -3874,13 +3867,13 @@ cc
 BK
 "}
 (14,1,2) = {"
-YQ
-Ef
+Mt
+iI
 TP
 Jg
 Ie
-MT
-MT
+IG
+IG
 Yp
 lL
 lL
@@ -3888,7 +3881,7 @@ wU
 WQ
 lL
 rV
-Ef
+iI
 kD
 cc
 Rr
@@ -3906,8 +3899,8 @@ aL
 XD
 "}
 (15,1,2) = {"
-YQ
-Ef
+Mt
+iI
 rV
 lL
 Ez
@@ -3920,7 +3913,7 @@ Tq
 sO
 Tq
 rV
-Ef
+iI
 kD
 XO
 Dk
@@ -3929,7 +3922,7 @@ qY
 pg
 CZ
 CZ
-MT
+IG
 qY
 qY
 AU
@@ -3938,8 +3931,8 @@ Ah
 Lb
 "}
 (16,1,2) = {"
-YQ
-Ef
+Mt
+iI
 gC
 AU
 AU
@@ -3952,15 +3945,15 @@ WX
 mB
 Xb
 rV
-Ef
+iI
 kD
 VN
-aW
+zh
 DK
 DK
 DK
 sI
-Ef
+iI
 rV
 lp
 oH
@@ -3970,11 +3963,11 @@ Vs
 af
 "}
 (17,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
+Mt
+iI
+iI
+iI
+iI
 mx
 ZJ
 nu
@@ -3984,15 +3977,15 @@ nu
 mB
 mB
 rV
-Ef
+iI
 Kt
 Kt
-Ef
-Ef
+iI
+iI
 Kt
 Kt
-KP
-Ef
+Ix
+iI
 rV
 rn
 vd
@@ -4002,11 +3995,11 @@ VO
 sx
 "}
 (18,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
+Mt
+iI
+iI
+iI
+iI
 mx
 ZT
 MX
@@ -4016,15 +4009,15 @@ oj
 pK
 MX
 rV
-Ef
+iI
 Kt
 Kt
-Ef
-Ef
+iI
+iI
 Kt
 Kt
-co
-Ef
+Dh
+iI
 rV
 NY
 vd
@@ -4034,11 +4027,11 @@ lh
 AU
 "}
 (19,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
+Mt
+iI
+iI
+iI
+iI
 gC
 qY
 qY
@@ -4048,15 +4041,15 @@ qY
 qY
 qY
 pt
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-YQ
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+Mt
+iI
 rV
 Gv
 Gv
@@ -4066,29 +4059,29 @@ vd
 rV
 "}
 (20,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
-Ef
+Mt
+iI
+iI
+iI
+iI
+iI
 zo
-Aj
-Aj
-Aj
-Aj
-Aj
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-YQ
-Ef
+dY
+dY
+dY
+dY
+dY
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+Mt
+iI
 rV
 vd
 Gv
@@ -4098,12 +4091,12 @@ yH
 rV
 "}
 (21,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
-fN
+Mt
+iI
+iI
+iI
+iI
+wK
 mG
 GW
 hl
@@ -4119,7 +4112,7 @@ gQ
 gQ
 Kt
 Kt
-YQ
+Mt
 TC
 lh
 zs
@@ -4130,12 +4123,12 @@ yH
 rV
 "}
 (22,1,2) = {"
-YQ
-Ef
-Ef
-Ef
-Ef
-Ef
+Mt
+iI
+iI
+iI
+iI
+iI
 mG
 fI
 fI
@@ -4151,7 +4144,7 @@ gQ
 gQ
 Kt
 Kt
-YQ
+Mt
 Oh
 AU
 qY
@@ -4162,12 +4155,12 @@ qY
 AU
 "}
 (23,1,2) = {"
-on
-of
-of
-UF
-of
-Ut
+Yt
+Al
+Al
+xN
+Al
+uf
 pr
 Gp
 fI
@@ -4177,14 +4170,14 @@ uL
 df
 fI
 mG
-fN
-Ef
-Ef
-Ef
-VP
-Ef
-YQ
-Ef
+wK
+iI
+iI
+iI
+Hf
+iI
+Mt
+iI
 rV
 rh
 Fc
@@ -4209,14 +4202,14 @@ hl
 QL
 PO
 Gu
-fN
-Ef
-Ef
-Ef
-VP
-Ef
-YQ
-Ef
+wK
+iI
+iI
+iI
+Hf
+iI
+Mt
+iI
 rV
 tX
 Ev
@@ -4247,8 +4240,8 @@ gQ
 gQ
 Kt
 Kt
-YQ
-Ef
+Mt
+iI
 rV
 qv
 wG
@@ -4279,8 +4272,8 @@ gQ
 gQ
 Kt
 Kt
-SD
-Ef
+LL
+iI
 rV
 Uw
 Tl
@@ -4291,13 +4284,13 @@ rV
 "}
 (27,1,2) = {"
 mG
-lU
-lU
-lU
-lU
-lU
-lU
-lU
+jB
+jB
+jB
+jB
+jB
+jB
+jB
 TY
 OP
 Js
@@ -4305,14 +4298,14 @@ fn
 ND
 fI
 Gu
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
 rV
 nv
 Cu
@@ -4323,28 +4316,28 @@ rV
 "}
 (28,1,2) = {"
 mG
-lU
-lU
-lU
-lU
-lU
-lU
-lU
-lU
+jB
+jB
+jB
+jB
+jB
+jB
+jB
+jB
 OP
 aV
 wu
 Wz
 fI
 hl
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
 AU
 qY
 qY
@@ -4355,14 +4348,14 @@ AU
 "}
 (29,1,2) = {"
 Gu
-lU
-lU
-lU
-lU
-lU
-lU
-lU
-lU
+jB
+jB
+jB
+jB
+jB
+jB
+jB
+jB
 JX
 AF
 Gu
@@ -4375,15 +4368,15 @@ gQ
 gQ
 Kt
 Kt
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
-Ef
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
+iI
 "}
 (30,1,2) = {"
 hl
@@ -4407,13 +4400,13 @@ gQ
 gQ
 Kt
 Kt
-uI
-uI
-uI
-uI
-uI
-uI
-Om
-Ef
-Ef
+vR
+vR
+vR
+vR
+vR
+vR
+NU
+iI
+iI
 "}

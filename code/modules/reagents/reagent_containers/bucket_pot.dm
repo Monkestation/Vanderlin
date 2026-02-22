@@ -21,7 +21,7 @@
 	. = ..()
 	reagents.flags = initial(reagent_flags)
 
-/obj/item/reagent_containers/glass/bucket/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/bucket/attackby(obj/item/I, mob/user, list/modifiers)
 	..()
 	if(istype(I, /obj/item/reagent_containers/powder/salt))
 		if(!reagents.has_reagent(/datum/reagent/consumable/milk, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/gote, 15))
@@ -95,7 +95,7 @@
 	icon_state = "pote_stone"
 	melting_material = null
 
-/obj/item/reagent_containers/glass/bucket/pot/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/bucket/pot/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/glass/bowl))
 		to_chat(user, "<span class='notice'>Filling the bowl...</span>")
 		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 70, FALSE)

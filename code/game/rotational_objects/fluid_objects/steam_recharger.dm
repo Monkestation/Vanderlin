@@ -138,12 +138,8 @@
 		to_chat(user, span_warning("[src] is already occupied!"))
 		return FALSE
 
-	if(!ishuman(automaton))
+	if(!automaton.GetComponent(/datum/component/steam_life))
 		to_chat(user, span_warning("[automaton] cannot use [src]!"))
-		return FALSE
-
-	if(!istype(automaton.dna?.species, /datum/species/automaton))
-		to_chat(user, span_warning("[automaton] is not an automaton!"))
 		return FALSE
 
 	placed_mob = automaton

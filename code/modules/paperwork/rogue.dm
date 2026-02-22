@@ -600,7 +600,7 @@
 	sell_prices = prices
 	if(!length(sell_prices))
 		sell_prices = generated_test_data()
-	writers_name = pick( world.file2list("strings/rt/names/human/humnorm.txt") )
+	writers_name = pick( file2list("strings/rt/names/human/humnorm.txt") )
 	rebuild_info()
 
 /obj/item/paper/scroll/sell_price_changes/update_icon_state()
