@@ -33675,6 +33675,13 @@
 /obj/item/natural/stone,
 /turf/open/water/cleanshallow,
 /area/outdoors/exposed/cell)
+"qqr" = (
+/obj/structure/fluff/railing/wood{
+	pixel_y = -4
+	},
+/obj/effect/waterfall,
+/turf/open/openspace,
+/area/outdoors/basin/safe)
 "qqC" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -119494,7 +119501,7 @@ qgA
 qFx
 wmF
 wmF
-pDN
+qqr
 dkX
 voQ
 voQ
