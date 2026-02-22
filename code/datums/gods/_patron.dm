@@ -1,5 +1,3 @@
-GLOBAL_LIST_EMPTY(patron_list)
-GLOBAL_LIST_EMPTY(patrons_by_faith)
 GLOBAL_LIST_EMPTY(prayers)
 
 /datum/patron

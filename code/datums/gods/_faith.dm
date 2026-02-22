@@ -1,5 +1,3 @@
-GLOBAL_LIST_EMPTY(faith_list)
-
 /datum/faith
 	abstract_type = /datum/faith
 	/// Name of the faith

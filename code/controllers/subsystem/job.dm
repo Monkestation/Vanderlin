@@ -140,7 +140,7 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with species, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+		if(length(job.allowed_patrons) && !(player_prefs.selected_patron in job.allowed_patrons))
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
@@ -218,7 +218,7 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: species blacklisted, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+	if(length(job.allowed_patrons) && !(player_prefs.selected_patron in job.allowed_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 

@@ -214,3 +214,10 @@ DEFINE_BITFIELD(toggles_maptext, list(
 	//"Disable hover text" = DISABLE_HOVER_TEXT,
 	"Disable runechat" = DISABLE_RUNECHAT,
 ))
+
+/// The non gender specific list that we get from init_sprite_accessory_subtypes()
+#define DEFAULT_SPRITE_LIST "default_sprites"
+/// The male specific list that we get from init_sprite_accessory_subtypes()
+#define MALE_SPRITE_LIST "male_sprites"
+/// The female specific list that we get from init_sprite_accessory_subtypes()
+#define FEMALE_SPRITE_LIST "female_sprites"

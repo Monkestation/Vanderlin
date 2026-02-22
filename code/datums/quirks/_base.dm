@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(quirk_registry, list())
+GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 GLOBAL_LIST_EMPTY(quirk_singletons)
 GLOBAL_LIST_EMPTY(quirk_points_by_type)
 

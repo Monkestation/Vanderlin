@@ -1538,7 +1538,7 @@ SUBSYSTEM_DEF(gamemode)
 		if(roundstart && istype(client?.mob, /mob/dead/new_player))
 			var/mob/dead/new_player/player = client.mob
 			if(player.ready == PLAYER_READY_TO_PLAY)
-				GLOB.patron_follower_counts[client.prefs.selected_patron.name]++
+				GLOB.patron_follower_counts[client.prefs.selected_patron::name]++
 
 		var/mob/living/living = client.mob
 		if(!istype(living))

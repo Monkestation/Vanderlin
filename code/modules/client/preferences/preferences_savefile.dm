@@ -373,11 +373,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
-	if(patron_typepath)
-		selected_patron = GLOB.patron_list[patron_typepath]
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patron_list[default_patron]
+		selected_patron = default_patron
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -509,7 +507,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["job_preferences"], job_preferences)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"], selected_patron.type)
+	WRITE_FILE(S["selected_patron"], selected_patron)
 
 	// Organs
 	WRITE_FILE(S["customizer_entries"], customizer_entries)

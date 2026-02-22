@@ -620,7 +620,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	</div>
 	<div class="sprite" style="top:30px; left:172px; width:42px; height:9px; background-image: url('header_patron.png');">
 		<a href='?_src_=prefs;preference=patron;task=input' style="text-decoration: none; display: block; width: 100%; height: 100%;">
-			<div id="char-patron" class="clickable-text auto-shrink" style="width:42px; height:9px;">[selected_patron.name]</div>
+			<div id="char-patron" class="clickable-text auto-shrink" style="width:42px; height:9px;">[selected_patron::name]</div>
 		</a>
 	</div>
 	<div class="sprite" style="top:30px; left:220px; width:31px; height:9px; background-image: url('header_pq.png');">
@@ -737,7 +737,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(!winexists(user, "preferences_browser"))
 		return
 
-	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron.associated_faith]
+	var/datum/faith/selected_faith = GLOB.faith_list[selected_patron::associated_faith]
 	var/datum/job/high_job
 	for(var/job_type in job_preferences)
 		if(job_preferences[job_type] != JP_HIGH)
@@ -759,7 +759,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(update_all || ("species" in fields_to_update))
 		params["species"] = pref_species.name
 	if(update_all || ("patron" in fields_to_update))
-		params["patron"] = selected_patron.name
+		params["patron"] = selected_patron::name
 	if(update_all || ("pq" in fields_to_update))
 		params["pq"] = get_playerquality(user.ckey, text = TRUE)
 	if(update_all || ("age" in fields_to_update))
@@ -1617,7 +1617,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						if(!faith.preference_accessible(src))
 							continue
 						faiths_named["\The [faith.name]"] = faith
-					var/faith_input = browser_input_list(user, "SELECT YOUR HERO'S BELIEF", "PUPPETS ON STRINGS", faiths_named, "\The [selected_patron.associated_faith::name]")
+					var/faith_input = browser_input_list(user, "SELECT YOUR HERO'S BELIEF", "PUPPETS ON STRINGS", faiths_named, "\The [selected_patron::associated_faith::name]")
 					if(faith_input)
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
@@ -1626,7 +1626,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("patron")
 					var/list/patrons_named = list()
-					for(var/datum/patron/patron as anything in GLOB.patrons_by_faith[selected_patron.associated_faith || initial(default_patron.associated_faith)])
+					for(var/datum/patron/patron as anything in GLOB.patrons_by_faith[selected_patron::associated_faith || default_patron::associated_faith])
 						patron = GLOB.patron_list[patron]
 						if(!patron.preference_accessible(src))
 							continue
@@ -1634,18 +1634,18 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						patrons_named[pref_name] = patron
 
 					if(length(patrons_named))
-						var/datum/faith/current_faith = GLOB.faith_list[selected_patron.associated_faith] || GLOB.faith_list[initial(default_patron.associated_faith)]
+						var/datum/faith/current_faith = GLOB.faith_list[selected_patron::associated_faith] || GLOB.faith_list[default_patron::associated_faith]
 						var/god_input = browser_input_list(user, "SELECT YOUR HERO'S PATRON GOD", uppertext("\The [current_faith.name]"), patrons_named, selected_patron)
 						if(god_input)
 							selected_patron = patrons_named[god_input]
 
-					to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
-					to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
-					to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
-					to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron.flaws]</font>")
-					to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
-					to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron.sins]</font>")
-					to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron.boons]</font>")
+					to_chat(user, "<font color='purple'>Patron: [selected_patron::name]</font>")
+					to_chat(user, "<font color='purple'>Domain: [selected_patron::domain]</font>")
+					to_chat(user, "<font color='purple'>Background: [selected_patron::desc]</font>")
+					to_chat(user, "<font color='purple'>Flawed aspects: [selected_patron::flaws]</font>")
+					to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron::worshippers]</font>")
+					to_chat(user, "<font color='red'>Considers these to be Sins: [selected_patron::sins]</font>")
+					to_chat(user, "<font color='white'>Blessed with boon(s): [selected_patron::boons]</font>")
 
 				if("voice")
 					var/new_voice = input(user, "SELECT YOUR HERO'S VOICE COLOR", "THE THROAT","#"+voice_color) as color|null
@@ -2531,7 +2531,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[SEX LOCK\]",
 			"<b>Sexes Needed:</b><br>[sexes_text]"
 		)
-	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
+	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/mult_patron in job.allowed_patrons)
 			var/datum/patron/P = new mult_patron
