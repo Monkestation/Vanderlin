@@ -79,6 +79,9 @@
 	var/proper_drying = FALSE
 	COOLDOWN_DECLARE(wet_stress_cd)
 
+	/// Defines for damage sounds, see [_DEFINES/clothing] and [pick_damage_sound]
+	var/material_category = ARMOR_MAT_LEATHER
+
 /obj/item/clothing/Initialize()
 	. = ..()
 	if(ispath(pocket_storage_component_path))
@@ -605,14 +608,44 @@ BLIND     // can't see anything
 
 	if(ratio <= 0.75 && ratio_old > 0.75)
 		text = "Armor <br><font color = '#8aaa4d'>marred</font>"
-		sound = 'sound/combat/armor_degrade1.ogg'
+		sound = pick_damage_sound(1)
 	if(ratio <= 0.5 && ratio_old > 0.5)
 		text = "Armor <br><font color = '#d4d36c'>damaged</font>"
-		sound = 'sound/combat/armor_degrade2.ogg'
+		sound = pick_damage_sound(2)
 	if(ratio <= 0.25 && ratio_old > 0.25)
 		text = "Armor <br><font color = '#a8705a'>sundered</font>"
-		sound = 'sound/combat/armor_degrade3.ogg'
+		sound = pick_damage_sound(3)
+
+	if(sound)
+		playsound(src, sound, 100, TRUE)
 
 	if(text)
-		playsound(src, sound, 100, TRUE)
 		balloon_alert_to_viewers(text, balloon_flag = DISABLE_BALLOON_COMBAT)
+
+/obj/item/clothing/proc/pick_damage_sound(tier)
+	var/picked_sound
+	switch(material_category)
+		if(ARMOR_MAT_PLATE)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_plate1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_plate2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_plate3.ogg'
+		if(ARMOR_MAT_CHAINMAIL)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_chain1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_chain2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_chain3.ogg'
+		if(ARMOR_MAT_LEATHER)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_leather1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_leather2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_leather3.ogg'

@@ -21,6 +21,8 @@
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/gloves/rare
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/gloves/rare/elfplate
 	name = "dark elf plate gauntlets"
 	desc = "Plate gauntlets of mystic dark elven alloy, lightweight yet incredibly protective. Typically worn by elite bladesingers."
