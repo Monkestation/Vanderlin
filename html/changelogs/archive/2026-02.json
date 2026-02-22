@@ -517,5 +517,162 @@
                 "bugfix": "Fixed packmule quirk"
             }
         ]
+    },
+    "2026-02-19": {
+        "realforest2001": [
+            {
+                "bugfix": "Automaton no longer lags everyone to death."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed no difference between right and middle mouse on the loot panel"
+            },
+            {
+                "bugfix": "Fixed the loot panel not allowing middle clicks"
+            }
+        ],
+        "Rockslp": [
+            {
+                "balance": "Exiled Warrior now gets eastern tattoo defenses."
+            },
+            {
+                "rscdel": "Removes some largely unused intents."
+            },
+            {
+                "qol": "Makes combat easier for laggy players by changing charge to clickcd on many melee weapons."
+            },
+            {
+                "balance": "Rebalances weapons & intents."
+            },
+            {
+                "bugfix": "Fixes various weapon issues."
+            },
+            {
+                "code_imp": "Some weapon define changes on values and intents, along with slight armor protection value changes."
+            },
+            {
+                "rscdel": "You can no longer de-skeletonize people by cauterizing them."
+            },
+            {
+                "balance": "You can no longer use a wooden psycross to cauterize people, it is wood. Silver still works."
+            },
+            {
+                "bugfix": "Makes it so the cautery actually gets the cauterization bonus."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscdel": "Reverted changes made to existing triumph buys"
+            },
+            {
+                "bugfix": "Fixed some things regarding when stress tries to display"
+            },
+            {
+                "bugfix": "fish was bit 0 times!!! 0!!!"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Adds a new theme for the Forest Garrison, with the previous theme being relegated to the Dendorite theme."
+            }
+        ]
+    },
+    "2026-02-20": {
+        "KevinfromHP": [
+            {
+                "qol": "Tweaked Tend Wound Surgeries so clinic apprentices can do then"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes a bug causing blunt intent to be affected by sharpness if the weapon had sharpness."
+            }
+        ]
+    },
+    "2026-02-21": {
+        "CheffieGithub": [
+            {
+                "rscadd": "Added more feedback to feinting"
+            }
+        ],
+        "TerraGS": [
+            {
+                "rscadd": "Adds sand. Dig it up with a shovel or your hand. Melt it into glass. Just keep it out of your eyes."
+            },
+            {
+                "qol": "Shovels can drop their load into sacks."
+            },
+            {
+                "image": "Adds icons for sand item and sand pile along with associated shovel icons."
+            },
+            {
+                "refactor": "Moved generic behavior out of dirtclod into new parent objects for clod and clodpile."
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Changed file2list from a world proc into global proc."
+            },
+            {
+                "admin": "Changed prefix during messages and asay depending on rank title."
+            },
+            {
+                "code_imp": "Added backend support for the above."
+            },
+            {
+                "admin": "Added a config setting to allow prefixes to use direct rank names."
+            },
+            {
+                "bugfix": "Fixed Templar Grandmaster being selected for major antags."
+            }
+        ],
+        "MrTCo1": [
+            {
+                "rscdel": "Wretch Vampire"
+            }
+        ]
+    },
+    "2026-02-22": {
+        "TerraGS": [
+            {
+                "bugfix": "using a shovel full of sand on dirt no longer replaces the sand with dirt"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added cooldown for automaton sounds."
+            },
+            {
+                "rscdel": "Removed access to the sillier automaton sounds, subject to change."
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "Guard command on Automaton is now 5 tiles instead of 3."
+            },
+            {
+                "bugfix": "Follow command removed. Use Custom command instead."
+            },
+            {
+                "admin": "Automatons show up correctly in player panel"
+            },
+            {
+                "bugfix": "Automatons no longer feel pain, sleep or be poisoned."
+            },
+            {
+                "bugfix": "Automatons no longer make human sounds"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Allow Royal Knight Advclass to choose their helmets"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixed the pitchfork's sharpness so it didn't deal absolute minimum like 1 force damage"
+            }
+        ]
     }
 }

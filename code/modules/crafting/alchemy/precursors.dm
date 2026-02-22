@@ -675,7 +675,7 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 		/datum/thaumaturgical_essence/water = 1
 	)
 	init_types = list(
-		/obj/item/natural/dirtclod,
+		/obj/item/natural/clod/dirt,
 		/obj/item/natural/clay
 	)
 

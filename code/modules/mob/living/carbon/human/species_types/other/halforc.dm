@@ -154,8 +154,8 @@
 	))
 
 /datum/species/halforc/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/halforcm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/halforcf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/halforcm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/halforcf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/halforc/get_possible_surnames(gender = MALE)

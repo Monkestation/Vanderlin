@@ -326,6 +326,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
 	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)
+	max_blade_int = 100
 
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -336,7 +337,6 @@
 	gripspriteonmob = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	blade_dulling = DULLING_BASHCHOP
 	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	melting_material = /datum/material/iron

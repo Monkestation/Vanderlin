@@ -154,7 +154,7 @@
 	)
 
 /datum/species/medicator/get_possible_names(gender)
-	return world.file2list('strings/rt/names/other/medicator.txt')
+	return file2list('strings/rt/names/other/medicator.txt')
 
 /datum/species/medicator/get_possible_surnames(gender)
 	return null

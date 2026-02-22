@@ -141,6 +141,10 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	name = "Dwarf"
 	used_table = /datum/chimeric_table/dwarf
 
+/datum/blood_type/human/dwarf/subterra
+	name = "Jarosite Dwarf"
+	used_table = /datum/chimeric_table/random/subterran_dwarf
+
 /datum/blood_type/human/elf
 	name = "Elf"
 	used_table = /datum/chimeric_table/elf

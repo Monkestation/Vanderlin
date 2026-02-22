@@ -35,6 +35,14 @@
 	/// Assoc list of statkey to value
 	var/list/effectedstats = list()
 
+	/// Variables to create a mob overlay if applicable
+	var/mob_overlay_icon
+	var/mob_overlay_icon_state
+	var/mob_overlay_layer
+
+	/// The AM for the mob visual
+	var/atom/movable/mob_visual
+
 /datum/status_effect/New(list/arguments)
 	on_creation(arglist(arguments))
 
@@ -98,6 +106,9 @@
 	for(var/stat in effectedstats)
 		owner.set_stat_modifier("[id]", stat, effectedstats[stat])
 
+	if(mob_overlay_icon && mob_overlay_icon_state)
+		mob_visual = build_mob_icon()
+
 	return TRUE
 
 /// Called before being fully removed (before on_remove)
@@ -111,9 +122,17 @@
 
 	owner.remove_stat_modifier("[id]")
 
+	if(mob_visual)
+		QDEL_NULL(mob_visual)
+
 /// Called instead of on_remove when a status effect is replaced by itself or when a status effect with on_remove_on_mob_delete = FALSE has its mob deleted
 /datum/status_effect/proc/be_replaced()
 	qdel(src)
+
+/// Build the on mob appearance for the overlay if applicable
+/datum/status_effect/proc/build_mob_icon()
+	var/mutable_appearance/appearance = mutable_appearance(mob_overlay_icon, mob_overlay_icon_state, mob_overlay_layer, ABOVE_LIGHTING_PLANE)
+	return owner.flick_overlay_view(appearance, duration - 1 DECISECONDS)
 
 /// Gets and formats examine text associated with our status effect.
 /// Return 'null' to have no examine text appear (default behavior).
