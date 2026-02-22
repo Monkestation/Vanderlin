@@ -307,7 +307,7 @@
 	if(prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash
 		prefs.save_preferences()
-		winset(src, "infobuttons.changelog", "font-style=;")
+		stat_panel.send_message("read_changelog")
 
 /client/verb/do_rp_prompt()
 	set name = "Lore Primer"

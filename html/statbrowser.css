@@ -132,6 +132,11 @@ img {
   background-color: #ececec;
 }
 
+.top-item.unread {
+  background-color: hsl(0, 53%, 45%);
+  color: white;
+}
+
 .statcontent {
   flex: 1;
   padding: 0.75em 0.5em;

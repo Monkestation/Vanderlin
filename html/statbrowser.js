@@ -888,6 +888,20 @@ Byond.subscribeTo("update_tickets", function (T) {
 
 Byond.subscribeTo("build_topbar", buildTopButtons);
 
+Byond.subscribeTo("unread_changelog", () => {
+  const changelog = document.getElementById("changelog");
+  if(changelog) {
+    changelog.className = "top-item unread";
+  }
+})
+
+Byond.subscribeTo("read_changelog", () => {
+  const changelog = document.getElementById("changelog");
+  if(changelog) {
+    changelog.className = "top-item";
+  }
+})
+
 Byond.subscribeTo("remove_sdql2", remove_sdql2);
 
 Byond.subscribeTo("remove_mc", remove_mc);

@@ -679,7 +679,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(CONFIG_GET(flag/aggressive_changelog))
 			changelog()
 		else
-			winset(src, "infobuttons.changelog", "font-style=bold")
+			stat_panel.send_message("unread_changelog")
 
 	if(prefs.toggles & TOGGLE_FULLSCREEN)
 		toggle_fullscreeny(TRUE)
