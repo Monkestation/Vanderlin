@@ -15,7 +15,7 @@
 
 	level = 1
 	check_flags = COVEN_CHECK_TORPORED
-	vitae_cost = 10
+	vitae_cost = 5
 	toggled = TRUE
 	cooldown_length = 30 SECONDS
 	duration_length = 3 SECONDS
@@ -54,15 +54,14 @@
 	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume + 10 * level, BLOOD_VOLUME_NORMAL)
+		owner.blood_volume = min(owner.blood_volume + vitae_cost-1, BLOOD_VOLUME_NORMAL)
 
 	// Heal wounds (only at higher levels)
 	if(length(owner.get_wounds()))
 		var/wounds_to_heal = min(1, length(owner.get_wounds()))
 		for(var/i in 1 to wounds_to_heal)
 			var/datum/wound/wound = owner.get_wounds()[i]
-			if(wound.severity-1 <= level)
-				wound.heal_wound(8 * level)
+			wound.heal_wound(vitae_cost)
 
 	// Brain damage healing (only at higher levels)
 	if(level >= 4)
@@ -80,15 +79,12 @@
 
 	// Masquerade violation check
 	if(level >= 3)
-		violates_masquerade = TRUE
 		if(prob(20)) // 20% chance per pulse to show visible healing
 			owner.visible_message(
 				span_warning("[owner]'s wounds slowly knit themselves back together!"),
 				span_warning("Your flesh slowly regenerates!")
 			)
 			owner.vampire_undisguise()
-	else
-		violates_masquerade = FALSE
 
 	owner.update_damage_overlays()
 	owner.update_health_hud()

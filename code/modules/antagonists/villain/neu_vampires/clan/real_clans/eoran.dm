@@ -5,7 +5,8 @@
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/frog,
 		/datum/action/cooldown/spell/charm/vampire,
-		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire
+		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
+		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/demand_submission,
@@ -37,7 +38,7 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
-		)
+	)
 
 	clan_covens = list(
 		/datum/coven/auspex,

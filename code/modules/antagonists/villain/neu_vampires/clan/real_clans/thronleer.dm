@@ -3,7 +3,8 @@
 	lord_spells = list(
 		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
-		/datum/action/cooldown/spell/undirected/shapeshift/mist
+		/datum/action/cooldown/spell/undirected/shapeshift/mist,
+		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/demand_submission,
