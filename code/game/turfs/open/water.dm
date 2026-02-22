@@ -266,19 +266,21 @@
 
 /turf/open/water/examine(mob/user)
 	. = ..()
-	if(water_volume >= 10)
-		if(fake_bottomless)
-			. += span_notice("I can't see the bottom...")
-		else if(water_height < WATER_HEIGHT_FULL)
-			var/depth_message
-			switch(water_height)
-				if(WATER_HEIGHT_ANKLE)
-					depth_message = "ankle deep."
-				if(WATER_HEIGHT_SHALLOW)
-					depth_message = "about waist high."
-				if(WATER_HEIGHT_DEEP)
-					depth_message = "rather deep."
-			. += span_notice("It looks [depth_message]")
+	if(water_volume < 10)
+		return
+	if(fake_bottomless)
+		. += span_notice("I can't see the bottom...")
+	else if(water_height >= WATER_HEIGHT_FULL)
+		return
+	var/depth_message
+	switch(water_height)
+		if(WATER_HEIGHT_ANKLE)
+			depth_message = "ankle deep."
+		if(WATER_HEIGHT_SHALLOW)
+			depth_message = "about waist high."
+		if(WATER_HEIGHT_DEEP)
+			depth_message = "rather deep."
+	. += span_notice("It looks [depth_message]")
 
 /turf/open/water/process()
 	if(cached_use)
@@ -493,7 +495,7 @@
 			return
 		if(L.stat != CONSCIOUS)
 			return
-		L.zSwim(UP)
+		L.zSwim(DOWN)
 
 /turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -504,30 +506,27 @@
 	var/list/wash = list('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg')
 	if(isliving(user))
 		var/mob/living/L = user
-		if(get_turf(L) == src && open_bottom)
-			L.zSwim(DOWN)
-		else
-			user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
-			if(do_after(L, 3 SECONDS, src))
-				if(wash_in)
-					user.wash(CLEAN_WASH)
-				var/datum/reagents/reagents = new()
-				reagents.add_reagent(water_reagent, 4)
-				reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
-				if(!mapped)
-					adjust_originate_watervolume(-2)
-				playsound(user, pick(wash), 100, FALSE)
+		user.visible_message("<span class='info'>[user] starts to wash in [src].</span>")
+		if(do_after(L, 3 SECONDS, src))
+			if(wash_in)
+				user.wash(CLEAN_WASH)
+			var/datum/reagents/reagents = new()
+			reagents.add_reagent(water_reagent, 4)
+			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = TOUCH)
+			if(!mapped)
+				adjust_originate_watervolume(-2)
+			playsound(user, pick(wash), 100, FALSE)
 
-				L.ExtinguishMob()
-				//handle hygiene and clean off alcohol
-				var/list/equipped_items = L.get_equipped_items()
-				if(length(equipped_items) > 0)
-					to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
-					L.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
-					L.adjust_fire_stacks(-4)
-				else
-					L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
-					L.adjust_fire_stacks(-2)
+			L.ExtinguishMob()
+			//handle hygiene and clean off alcohol
+			var/list/equipped_items = L.get_equipped_items()
+			if(length(equipped_items) > 0)
+				to_chat(user, span_notice("I could probably clean myself faster if I weren't wearing clothes..."))
+				L.adjust_hygiene(HYGIENE_GAIN_CLOTHED * cleanliness_factor)
+				L.adjust_fire_stacks(-4)
+			else
+				L.adjust_hygiene(HYGIENE_GAIN_UNCLOTHED * cleanliness_factor)
+				L.adjust_fire_stacks(-2)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/water/attackby_secondary(obj/item/item2wash, mob/user, list/modifiers)

@@ -262,6 +262,9 @@
 /datum/keybinding/living/lookup/down(client/user)
 	. = ..()
 	var/mob/living/L = user.mob
+	if(HAS_TRAIT(L, TRAIT_SUBMERGED))
+		L.zSwim(UP)
+		return FALSE
 	if(!lastrest || world.time > lastrest + 15)
 		L.look_up()
 		lastrest = world.time
