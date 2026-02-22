@@ -964,7 +964,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	popup.set_content(dat)
 	popup.open()
 
-#ifndef OPENDREAM
 /client/proc/tracy_next_round()
 	set name = "Toggle Tracy Next Round"
 	set desc = "Toggle running the byond-tracy profiler next round"
@@ -973,6 +972,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	if(!check_rights_for(src, R_DEBUG))
 		return
 
+#ifndef OPENDREAM
 	if(!fexists(TRACY_DLL_PATH))
 		to_chat(src, span_danger("byond-tracy library ([TRACY_DLL_PATH]) not present!"))
 		return
@@ -984,6 +984,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	message_admins(span_adminnotice("[key_name_admin(src)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round."))
 	log_admin("[key_name(src)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round.")
+#endif
 
 /client/proc/start_tracy()
 	set name = "Run Tracy Now"
@@ -993,6 +994,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	if(!check_rights_for(src, R_DEBUG))
 		return
 
+#ifndef OPENDREAM
 	if(Tracy.enabled)
 		to_chat(src, span_warning("byond-tracy is already running!"))
 		return
