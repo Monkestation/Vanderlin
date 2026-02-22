@@ -28832,6 +28832,12 @@
 "oaD" = (
 /turf/open/floor/greenstone,
 /area/indoors/town/keep/magician)
+"oaX" = (
+/obj/effect/waterfall,
+/turf/open/water/river{
+	dir = 8
+	},
+/area/outdoors/river)
 "oba" = (
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
@@ -75859,7 +75865,7 @@ ozq
 ozq
 ozq
 cyz
-qFx
+wVz
 qFx
 qFx
 qFx
@@ -76061,7 +76067,7 @@ ozq
 ozq
 ozq
 cyz
-qFx
+wVz
 qFx
 qFx
 qFx
@@ -76263,7 +76269,7 @@ nZm
 ozq
 ozq
 cyz
-qFx
+wVz
 qFx
 qFx
 qFx
@@ -76465,7 +76471,7 @@ ozq
 ozq
 ozq
 cyz
-qFx
+wVz
 qFx
 qFx
 qFx
@@ -78885,7 +78891,7 @@ qFx
 qFx
 qFx
 ozq
-ozq
+oaX
 qFx
 qFx
 qFx
@@ -79088,7 +79094,7 @@ qFx
 qFx
 ozq
 ozq
-qFx
+wVz
 qFx
 qFx
 qFx
