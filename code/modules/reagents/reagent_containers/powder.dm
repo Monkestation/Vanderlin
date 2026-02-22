@@ -325,7 +325,7 @@
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	list_reagents = list(/datum/reagent/blastpowder = 15)
 	sellprice = 15
-	primed = FALSE
+	var/primed = FALSE
 
 /obj/item/reagent_containers/powder/flashpowder/spark_act()
 	fire_act()
