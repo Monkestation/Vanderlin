@@ -317,3 +317,34 @@
 	target_turf.ScrapeAway()
 
 	qdel(src)
+
+/obj/item/reagent_containers/powder/flashpowder
+	name = "Flashpowder"
+	desc = "A incredibly small amount of blastpowder stirred with powdered metals, designed to inflict injury to the eyes when lit."
+	icon_state = "darkredpowder"
+	icon = 'icons/roguetown/misc/alchemy.dmi'
+	list_reagents = list(/datum/reagent/blastpowder = 15)
+	sellprice = 15
+	primed = FALSE
+
+/obj/item/reagent_containers/powder/flashpowder/spark_act()
+	fire_act()
+
+/obj/item/reagent_containers/powder/flashpowder/fire_act(added, maxstacks)
+	if(primed)
+		return
+	primed = TRUE
+	playsound(src, 'sound/items/fuse.ogg', 100)
+	addtimer(CALLBACK(src, PROC_REF(boom)), 5 SECONDS)
+	..()
+
+/obj/item/reagent_containers/powder/flashpowder/proc/boom()
+	turf/target_turf = get_turf(src)
+	exp_devi = 0
+	exp_heavy = 0
+	exp_light = 1
+	exp_flash = 10
+	explode_sound = 'sound/misc/explode/bomb.ogg'
+	explosion(target_turf, exp_devi, exp_heavy, exp_light, exp_flash, soundin = explode_sound)
+
+	qdel(src)

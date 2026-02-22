@@ -1,7 +1,7 @@
 /obj/projectile/bullet/gel
 	name = "Searing gel"
 	desc = "How can you see this?"
-	damage = 45
+	damage = 100
 	damage_type = BURN
 	woundclass = BCLASS_SHOT
 	range = 3
