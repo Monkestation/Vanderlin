@@ -1114,7 +1114,7 @@
 /atom/movable/proc/do_item_attack_animation(atom/attacked_atom, visual_effect_icon, obj/item/used_item, animation_type = ATTACK_ANIMATION_SWIPE)
 	if (visual_effect_icon)
 		var/mutable_appearance/attack_appearance = mutable_appearance('icons/effects/effects.dmi', visual_effect_icon)
-		attack_appearance.plane = attacked_atom.plane + 0.1
+		attack_appearance.plane = GAME_PLANE
 		// Scale the icon.
 		attack_appearance.transform *= 0.4
 		// The icon should not rotate.
@@ -1141,7 +1141,7 @@
 		return
 
 	var/mutable_appearance/attack_appearance = mutable_appearance(icon, icon_state)
-	attack_appearance.plane = attacked_atom.plane + 1
+	attack_appearance.plane = GAME_PLANE
 	attack_appearance.pixel_w = used_item.pixel_x + used_item.pixel_w
 	attack_appearance.pixel_z = used_item.pixel_y + used_item.pixel_z
 	// Scale the icon.
