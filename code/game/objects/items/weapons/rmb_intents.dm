@@ -176,25 +176,27 @@
 
 /datum/rmb_intent/riposte/special_attack(mob/living/user, atom/target)
 	if(user.has_status_effect(/datum/status_effect/buff/clash))
-		return
+		return FALSE
 
 	if(user.has_status_effect(/datum/status_effect/debuff/clashcd))
-		return
+		return FALSE
 
 	if(!user.get_active_held_item()) //Nothing in our hand to Guard with.
-		return
+		return FALSE
 
 	if(user.incapacitated()) //Not usable while grabs are in play.
-		return
+		return FALSE
 
 	if(user.IsImmobilized() || user.IsOffBalanced()) //Not usable while we're offbalanced or immobilized
-		return
+		return FALSE
 
 	if(user.m_intent == MOVE_INTENT_RUN)
 		to_chat(user, span_warning("I can't focus on this while running."))
-		return
+		return FALSE
 
 	user.apply_status_effect(/datum/status_effect/buff/clash)
+
+	return TRUE
 
 /datum/rmb_intent/guard
 	name = "guarde"

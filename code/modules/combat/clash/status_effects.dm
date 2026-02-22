@@ -28,7 +28,7 @@
 /datum/status_effect/buff/clash/on_creation(mob/living/new_owner, duration_override, ...)
 	. = ..()
 
-	RegisterSignal(new_owner, COMSIG_MOB_ITEM_ATTACK, PROC_REF(attacked_item))
+	RegisterSignal(new_owner, COMSIG_ATOM_ATTACKBY, PROC_REF(attacked_item))
 	RegisterSignal(new_owner, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attacked_hand))
 
 	RegisterSignal(new_owner, interrupt_signals, PROC_REF(cancel_clash))
@@ -68,7 +68,7 @@
 	if(!owner.get_active_held_item() || owner.is_blind())
 		owner.bad_guard()
 
-/datum/status_effect/buff/clash/proc/attacked_item(mob/living/assailant, mob/living/victim, obj/item/weapon)
+/datum/status_effect/buff/clash/proc/attacked_item(mob/living/victim, obj/item/weapon, mob/living/assailant, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(QDELETED(src) || !owner)
@@ -82,10 +82,10 @@
 		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
 		return
 
-	var/weapon_range = victim.used_intent?.reach
-	if(get_dist(victim, assailant) > weapon_range)
-		cancel_clash() // If we are getting stabbed by a spear, we can't clash unless we can match
-		return
+	// var/weapon_range = victim.used_intent?.reach
+	// if(get_dist(victim, assailant) > weapon_range)
+	// 	cancel_clash() // If we are getting stabbed by a spear, we can't clash unless we can match
+	// 	return
 
 	if(victim.dir == REVERSE_DIR(get_dir(victim, assailant)))
 		cancel_clash() // Attacked from behind
@@ -95,7 +95,7 @@
 
 	return COMPONENT_NO_ATTACK
 
-/datum/status_effect/buff/clash/proc/attacked_hand(mob/living/assailant, mob/living/victim)
+/datum/status_effect/buff/clash/proc/attacked_hand(mob/living/victim, mob/living/assailant)
 	SIGNAL_HANDLER
 
 	// Attacker has Guard / Clash active, and is hitting us who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
