@@ -109,6 +109,8 @@
 
 	victim.process_clash(assailant)
 
+	return COMPONENT_CANCEL_ATTACK_CHAIN
+
 /datum/status_effect/buff/clash/proc/cancel_clash()
 	SIGNAL_HANDLER
 
