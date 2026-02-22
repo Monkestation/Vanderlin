@@ -2347,7 +2347,6 @@
 #include "code\modules\clothing\npc_clothing\rousman.dm"
 #include "code\modules\clothing\outfits\atveri.dm"
 #include "code\modules\clothing\outfits\eastern.dm"
-#include "code\modules\clothing\outfits\gronn.dm"
 #include "code\modules\clothing\outfits\matyr.dm"
 #include "code\modules\clothing\outfits\patrons.dm"
 #include "code\modules\clothing\outfits\stealth.dm"
