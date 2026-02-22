@@ -129,19 +129,19 @@ GLOBAL_LIST_INIT(TAGGERLOCATIONS, list("Disposals",
 	"Testing Range", "Toxins", "Dormitories", "Virology",
 	"Xenobiology", "Law Office","Detective's Office"))
 
-GLOBAL_LIST_INIT(station_prefixes, world.file2list("strings/station_prefixes.txt") + "")
+GLOBAL_LIST_INIT(station_prefixes, file2list("strings/station_prefixes.txt") + "")
 
-GLOBAL_LIST_INIT(station_names, world.file2list("strings/station_names.txt" + ""))
+GLOBAL_LIST_INIT(station_names, file2list("strings/station_names.txt" + ""))
 
-GLOBAL_LIST_INIT(station_suffixes, world.file2list("strings/station_suffixes.txt"))
+GLOBAL_LIST_INIT(station_suffixes, file2list("strings/station_suffixes.txt"))
 
-GLOBAL_LIST_INIT(greek_letters, world.file2list("strings/greek_letters.txt"))
+GLOBAL_LIST_INIT(greek_letters, file2list("strings/greek_letters.txt"))
 
-GLOBAL_LIST_INIT(phonetic_alphabet, world.file2list("strings/phonetic_alphabet.txt"))
+GLOBAL_LIST_INIT(phonetic_alphabet, file2list("strings/phonetic_alphabet.txt"))
 
-GLOBAL_LIST_INIT(numbers_as_words, world.file2list("strings/numbers_as_words.txt"))
+GLOBAL_LIST_INIT(numbers_as_words, file2list("strings/numbers_as_words.txt"))
 
-GLOBAL_LIST_INIT(roundid, world.file2list("strings/roundid.txt"))
+GLOBAL_LIST_INIT(roundid, file2list("strings/roundid.txt"))
 
 /proc/generate_number_strings()
 	var/list/L[198]
@@ -163,6 +163,6 @@ GLOBAL_LIST_INIT(most_common_words, init_common_words())
 /proc/init_common_words()
 	. = list()
 	var/i = 1
-	for(var/word in world.file2list("strings/1000_most_common.txt"))
+	for(var/word in file2list("strings/1000_most_common.txt"))
 		.[word] = i
 		i += 1

@@ -439,8 +439,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 		.v-color-box { top: 136px; left: 34px; width: 48px; height: 15px; background-image: url('voice_colour.png'); }
 		.v-blob      { top: 4px;   left: 35px; width: 8px;  height: 7px;
-		               background-image: url('voice_colour_blob.png');
-		               background-blend-mode: multiply; }
+					   background-image: url('voice_colour_blob.png');
+					   background-blend-mode: multiply; }
 
 		.menu-keybinds {
 			top: 280px;
@@ -559,7 +559,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				var silhouette = document.getElementById('silhouette');
 				silhouette.style.backgroundImage = "url('features_bodytype_" + data.gender + ".png')";
 				if (data.gender === "F") silhouette.style.width = "15px";
-    			if (data.gender === "M") silhouette.style.width = "18px";
+				if (data.gender === "M") silhouette.style.width = "18px";
 			}
 
 			// Update voice color blob
@@ -1108,49 +1108,49 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 
 /datum/preferences/proc/update_job_preference(mob/user, role, desiredLvl)
-    if(!SSjob || !length(SSjob.joinable_occupations))
-        return
-    var/datum/job/job = SSjob.GetJob(role)
-    if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
-        user << browse(null, "window=mob_occupation")
-        update_menu_data(user, list("job"))
-        return
-    if(!isnum(desiredLvl))
-        to_chat(user, "<span class='danger'>update_job_preference - desired level was not a number. Please notify coders!</span>")
-        CRASH("update_job_preference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
+	if(!SSjob || !length(SSjob.joinable_occupations))
+		return
+	var/datum/job/job = SSjob.GetJob(role)
+	if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
+		user << browse(null, "window=mob_occupation")
+		update_menu_data(user, list("job"))
+		return
+	if(!isnum(desiredLvl))
+		to_chat(user, "<span class='danger'>update_job_preference - desired level was not a number. Please notify coders!</span>")
+		CRASH("update_job_preference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
 
-    var/jpval = null
-    // desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
-    // JP constants: JP_LOW=1, JP_MEDIUM=2, JP_HIGH=3
-    switch(desiredLvl)
-        if(1)
-            jpval = JP_HIGH  // 3
-        if(2)
-            jpval = JP_MEDIUM  // 2
-        if(3)
-            jpval = JP_LOW  // 1
-        if(4)
-            jpval = null  // NEVER
+	var/jpval = null
+	// desiredLvl comes from the links: 1=High, 2=Medium, 3=Low, 4=NEVER
+	// JP constants: JP_LOW=1, JP_MEDIUM=2, JP_HIGH=3
+	switch(desiredLvl)
+		if(1)
+			jpval = JP_HIGH  // 3
+		if(2)
+			jpval = JP_MEDIUM  // 2
+		if(3)
+			jpval = JP_LOW  // 1
+		if(4)
+			jpval = null  // NEVER
 
-    var/was_high = (jpval == JP_HIGH)
-    var/previous_high_job = null
+	var/was_high = (jpval == JP_HIGH)
+	var/previous_high_job = null
 
-    if(was_high)
-        for(var/job_title in job_preferences)
-            if(job_preferences[job_title] == JP_HIGH)
-                previous_high_job = job_title
-                break
+	if(was_high)
+		for(var/job_title in job_preferences)
+			if(job_preferences[job_title] == JP_HIGH)
+				previous_high_job = job_title
+				break
 
-    set_job_preference_level(job, jpval)
+	set_job_preference_level(job, jpval)
 
-    // Send back the desiredLvl value directly since that's what JavaScript expects
-    update_job_display(user, role, desiredLvl)
+	// Send back the desiredLvl value directly since that's what JavaScript expects
+	update_job_display(user, role, desiredLvl)
 
-    if(was_high && previous_high_job && previous_high_job != role)
-        update_job_display(user, previous_high_job, 2)  // Medium
+	if(was_high && previous_high_job && previous_high_job != role)
+		update_job_display(user, previous_high_job, 2)  // Medium
 
-    update_menu_data(user, list("job"))
-    return 1
+	update_menu_data(user, list("job"))
+	return 1
 
 /datum/preferences/proc/reset_jobs(mob/user, silent = FALSE)
 	job_preferences = list()
@@ -1270,31 +1270,38 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 /datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
-
 	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
 	dat += "<center><a href='?_src_=prefs;preference=antag;task=close' style='display:block;margin-bottom:2px'>Done</a></center>"
 	dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Villains</h2>"
-
 	if(is_total_antag_banned(user.ckey))
 		dat += "<font color=red><b>I am banned from antagonist roles.</b></font><br>"
 		src.be_special = list()
-
 	for (var/i in GLOB.special_roles_rogue)
 		if(is_antag_banned(user.ckey, i))
 			dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;bancheck=[i]'>BANNED</a><br>"
 		else
 			var/days_remaining = null
-			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs)) //If it's a game mode antag, check if the player meets the minimum age
+			if(ispath(GLOB.special_roles_rogue[i]) && CONFIG_GET(flag/use_age_restriction_for_jobs))
 				days_remaining = get_remaining_days(user.client)
-
 			if(days_remaining)
-				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS\]</font><br>"
+				dat += "<b>[capitalize(i)]:</b> <font color=red> \[IN [days_remaining] DAYS__~~\]~~__</font><br>"
 			else
 				dat += "<b>[capitalize(i)]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[i]'>[(i in be_special) ? "Enabled" : "Disabled"]</a><br>"
 
-	dat += "</body>"
+	var/list/vessel_ids = GLOB.vessel_ids
+	var/list/available_vessel_ids = list()
+	for(var/id in vessel_ids)
+		if(user.client.is_whitelisted(id))
+			available_vessel_ids += id
 
-	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340) //no reason not to reuse the occupation window, as it's cleaner that way
+	if(length(available_vessel_ids))
+		dat += "<h2 style='margin:5;padding:5;line-height:1.2'>Vessels</h2>"
+		for(var/id in available_vessel_ids)
+			var/enabled = (id in be_special)
+			dat += "<b>[id]:</b> <a href='?_src_=prefs;preference=antag;task=be_special;be_special_type=[id]'>[enabled ? "Enabled" : "Disabled"]</a><br>"
+
+	dat += "</body>"
+	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
@@ -2384,22 +2391,22 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			<html>
 			<head>
 			  <style>
-			    body {
-			      background-color: #ffffff;
-			      color: #000000;
-			    }
+				body {
+				  background-color: #ffffff;
+				  color: #000000;
+				}
 
-			    a {
-			      color: #1a0dab;
-			    }
+				a {
+				  color: #1a0dab;
+				}
 
-			    a:visited {
-			      color: #660099;
-			    }
+				a:visited {
+				  color: #660099;
+				}
 
-			    hr {
-			      border-top: 1px solid #ccc;
-			    }
+				hr {
+				  border-top: 1px solid #ccc;
+				}
 			  </style>
 			</head>
 			</html>
@@ -2411,19 +2418,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			<html>
 			<head>
 			  <style>
-			    body {
-			      background-color: #121212;
-			      color: #e0e0e0;
-			    }
-			    a {
-			      color: #90caf9;
-			    }
-			    a:visited {
-			      color: #ce93d8;
-			    }
-			    hr {
-			      border-top: 1px solid #444;
-			    }
+				body {
+				  background-color: #121212;
+				  color: #e0e0e0;
+				}
+				a {
+				  color: #90caf9;
+				}
+				a:visited {
+				  color: #ce93d8;
+				}
+				hr {
+				  border-top: 1px solid #444;
+				}
 			  </style>
 			</head>
 			</html>

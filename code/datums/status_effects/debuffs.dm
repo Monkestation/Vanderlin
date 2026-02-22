@@ -487,3 +487,67 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
+
+/// Prevents use of weapon special attacks
+/datum/status_effect/debuff/specialcd
+	id = "specialcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/specialcd
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
+
+/atom/movable/screen/alert/status_effect/debuff/specialcd
+	name = "Special Manouevre Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "specialcd"
+
+/datum/status_effect/debuff/exposed
+	id = "nofeint"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_exposed"
+
+/atom/movable/screen/alert/status_effect/debuff/exposed
+	name = "Exposed"
+	desc = "My defenses are exposed. I can be hit through my parry and dodge!"
+	icon_state = "exposed"
+
+/datum/status_effect/debuff/feinted
+	id = "feinted"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feinted
+	duration = 5 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feinted
+
+	name = "Feinted"
+	desc = span_boldwarning("I've been feinted. It won't happen again so soon.")
+	icon_state = "feinted"
+
+/datum/status_effect/debuff/feintcd
+	id = "feintcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feintcd
+	duration = 10 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feintcd
+	name = "Feint Cooldown"
+	desc = span_warning("I have feinted recently, my opponents will be wary.")
+	icon_state = "feinted"
+
+/// 2 Speed reduction for 8 seconds + slow
+/datum/status_effect/debuff/hobbled
+	id = "hobbled"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
+	effectedstats = list(STATKEY_SPD = -2)
+	duration = 8 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/hobbled
+	name = "Hobbled"
+	desc = "You've been struck in the leg! The force has left you staggered!"
+	icon_state = "dazed"
+
+/datum/status_effect/debuff/hobbled/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = 1.5)
+
+/datum/status_effect/debuff/hobbled/on_remove()
+	. = ..()
+	owner?.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))

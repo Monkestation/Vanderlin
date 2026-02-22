@@ -163,8 +163,8 @@
 	else
 		if(recipient.holder)
 			if(holder)	//both are admins
-				to_chat(recipient, "<span class='danger'>Admin PM from-<b>[key_name(src, recipient, 1)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
-				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
+				to_chat(recipient, "<span class='danger'>[holder.get_message_prefix()] PM from-<b>[key_name(src, recipient, 1)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
+				to_chat(src, "<span class='notice'>[holder.get_message_prefix()] PM to-<b>[key_name(recipient, src, 1)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
 
 				//omg this is dumb, just fill in both their tickets
 				var/interaction_message = "<font color='purple'>PM from-<b>[name_key_with_link]</b> to-<b>[key_name(recipient, TRUE, TRUE)]</b>: [keywords_lookup(msg)]</font>"
@@ -188,9 +188,9 @@
 					new /datum/admin_help(msg, recipient, TRUE)
 
 				to_chat(recipient, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-				to_chat(recipient, "<span class='adminsay'>Admin PM from-<b>[key_name(src, recipient, 0)]</b>: <span class='linkify'>[msg]</span></span>")
+				to_chat(recipient, "<span class='adminsay'>[holder.get_message_prefix()] PM from-<b>[key_name(src, recipient, 0)]</b>: <span class='linkify'>[msg]</span></span>")
 				to_chat(recipient, "<span class='adminsay'><i>Click on the administrator's name to reply.</i></span>")
-				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1)]</b>: <span class='linkify'>[msg]</span></span>")
+				to_chat(src, "<span class='notice'>[holder.get_message_prefix()] PM to-<b>[key_name(recipient, src, 1)]</b>: <span class='linkify'>[msg]</span></span>")
 
 				admin_ticket_log(recipient, "<font color='purple'>PM From [key_name_admin(src)]: [keywordparsedmsg]</font>", "<font color='purple'>PM From [key_name_admin(src)]: [keywordparsedmsg]</font>")
 				SSplexora.aticket_pm(recipient.current_ticket, msg, src)
