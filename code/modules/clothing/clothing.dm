@@ -80,7 +80,7 @@
 	COOLDOWN_DECLARE(wet_stress_cd)
 
 	/// Defines for damage sounds, see [_DEFINES/clothing] and [pick_damage_sound]
-	var/material_category = ARMOR_MAT_LEATHER
+	var/material_category = ARMOR_MAT_FABRIC
 
 /obj/item/clothing/Initialize()
 	. = ..()
@@ -641,7 +641,7 @@ BLIND     // can't see anything
 					return 'sound/combat/armor_degrade_chain2.ogg'
 				if(3)
 					return 'sound/combat/armor_degrade_chain3.ogg'
-		if(ARMOR_MAT_LEATHER)
+		if(ARMOR_MAT_FABRIC)
 			switch(tier)
 				if(1)
 					return 'sound/combat/armor_degrade_leather1.ogg'

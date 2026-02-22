@@ -10,5 +10,5 @@
 
 //Armor material categories
 #define ARMOR_MAT_PLATE 1
-#define ARMOR_MAT_LEATHER 2
+#define ARMOR_MAT_FABRIC 2
 #define ARMOR_MAT_CHAINMAIL 3

@@ -21,7 +21,7 @@
 	body_parts_covered = COVERAGE_FULL
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
-	material_category = ARMOR_MAT_LEATHER
+	material_category = ARMOR_MAT_FABRIC
 
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
