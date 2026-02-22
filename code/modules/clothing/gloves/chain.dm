@@ -54,3 +54,11 @@
 	desc = "A weathered gauntlet with an ancient design."
 	icon_state = "vgloves"
 	item_weight = 6 * STEEL_MULTIPLIER
+
+/obj/item/clothing/gloves/chain/gronn
+	name = "gronn byrine gloves"
+	desc = "A pair of leather gloves with chain to protects the wrists and back of the hand."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnchaingloves"
+	item_state = "gronnchaingloves"

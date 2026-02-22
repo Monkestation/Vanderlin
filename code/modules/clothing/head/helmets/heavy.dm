@@ -555,3 +555,21 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+
+//............... Gronn Heavy Helmet ...............//
+/obj/item/clothing/head/helmet/heavy/bucket/gronn
+	name = "gronn norsii horned helmet"
+	desc = "One of Gronn's infamous horned helms of solid iron. \
+		Styled after the appearance of invading knights of legend from the Northern Empty, \
+		brutal and bare, it is a reminder of a time before there was snow."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/gronn.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	icon_state = "gronnplatehelm"
+	item_state = "gronnplatehelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_BEHIND
+	smeltresult = /obj/item/ingot/iron
+	worn_x_dimension = 64
+	worn_y_dimension = 64

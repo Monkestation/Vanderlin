@@ -138,3 +138,13 @@
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//.............. Gronn Platelegs .................//
+
+/obj/item/clothing/pants/platelegs/iron/gronn
+	name = "gronn norsii iron chausses"
+	desc = "Iron chausses with an added layer of leather for comfort and padding. The knees are adorned with a skull-like shape, reminscent of the moon."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplatepants"
+	item_state = "gronnplatepants"

@@ -215,3 +215,15 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+//.............. Gronn Boots .................//
+
+/obj/item/clothing/shoes/boots/armor/gronn
+	name = "gronn norsii iron boots"
+	desc = "Thick iron boots, tied with a leather cord; protective and sturdy. \
+			Gronnic legend tells of a great warrior who fought for aeons until a hero speared him through the foot. \
+			The Northmen have since followed through by protecting their feet heavily."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplateboots"
+	item_state = "gronnplateboots"

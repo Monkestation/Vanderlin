@@ -85,3 +85,165 @@
 		switch(tag)
 			if("onback")
 				return list("shrink" = 0.7,"sx" = -17,"sy" = -15,"nx" = -15,"ny" = -15,"wx" = -12,"wy" = -15,"ex" = -18,"ey" = -15,"nturn" = 0,"sturn" = 0,"wturn" = 180,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 1,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
+
+// Gronnic subtypes of atgervi clothes
+/obj/item/clothing/head/helmet/leather/shaman_hood
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	name = "moose hood"
+	desc = "A deceptively strong moosehide hood with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans: To slay a Grinning Moose in the final hunt alone - and fashion a hood from its head."
+	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/gronn.dmi'
+	icon_state = "gronnfurhood"
+	item_state = "gronnfurhood"
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	armor = ARMOR_LEATHER_GOOD
+	flags_inv = HIDEEARS|HIDEFACE
+	worn_x_dimension = 32
+	worn_y_dimension = 48
+	sellprice = 10
+	anvilrepair = null
+	smeltresult = null
+	sewrepair = TRUE
+	blocksound = SOFTHIT
+	max_integrity = ARMOR_INT_HELMET_HARDLEATHER
+	salvage_result = /obj/item/natural/hide/cured
+	var/on = FALSE
+	var/lux_consumed = FALSE
+	var/lux_color = LIGHT_COLOR_CYAN
+	adjustable = CAN_CADJUST
+	light_color = LIGHT_COLOR_ORANGE
+	light_system = MOVABLE_LIGHT
+	light_outer_range = 3
+	light_power = 1
+	toggle_icon_state = TRUE
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/equipped(mob/user, slot)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		H.remove_status_effect(/datum/status_effect/debuff/lost_shaman_hood)
+		H.remove_stress(/datum/stress_event/shamanhoodlost)
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/dropped(mob/user)
+	. = ..()
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.merctype == 1) //Atgervi
+			H.apply_status_effect(/datum/status_effect/debuff/lost_shaman_hood)
+			H.add_stress(/datum/stress_event/shamanhoodlost)
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/Initialize(mapload)
+	. = ..()
+	set_light_on(FALSE)
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/MiddleClick(mob/user)
+	if(.)
+		return
+	if(adjustable == CADJUSTED)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+	toggle_helmet_light(user)
+	to_chat(user, span_info("I spark [src] [on ? "on" : "off"]."))
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/proc/toggle_helmet_light(mob/living/user)
+	on = !on
+	set_light_on(on)
+	if(on)
+		playsound(loc, 'sound/effects/hood_ignite.ogg', 100, TRUE)
+		do_sparks(2, FALSE, user)
+	else
+		playsound(loc, 'sound/misc/toggle_lamp.ogg', 100)
+	update_icon()
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/update_icon()
+	if(adjustable == CADJUSTED)
+		..()
+		return
+	if(on)
+		icon_state = "gronnfurhood_lit[lux_consumed ? "3" : "2"]"
+		item_state = "gronnfurhood_lit[lux_consumed ? "3" : "2"]"
+	else
+		icon_state = "gronnfurhood"
+		item_state = "gronnfurhood"
+	if(ishuman(loc))
+		var/mob/living/carbon/human/H = loc
+		H.update_inv_head()
+	..()
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/reagent_containers/lux))
+		if(adjustable == CADJUSTED)
+			to_chat(user, span_warning("The hood must be up for this to work!"))
+			return
+		if(lux_consumed)
+			to_chat(user, span_warning("It has already been infused."))
+			return
+		to_chat(user, span_warning("I infuse the hood with the soul energies!"))
+		lux_consumed = TRUE
+		set_light_range_power_color(6, 2, lux_color) //The light is doubled
+		if(!on)
+			toggle_helmet_light(user)
+		else
+			update_icon()
+		qdel(I)
+	. = ..()
+
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/AdjustClothes(mob/user)
+	if(loc == user)
+		if(adjustable == CAN_CADJUST)
+			playsound(src, 'sound/foley/equip/rummaging-03.ogg', 50, TRUE)
+			if(on)
+				toggle_helmet_light(user)
+			if(toggle_icon_state)
+				icon_state = "gronnfurhood_down"
+				item_state = "gronnfurhood_down"
+			adjustable = CADJUSTED
+			flags_inv = null
+			body_parts_covered = null
+		else if(adjustable == CADJUSTED)
+			playsound(src, 'sound/foley/equip/cloak (3).ogg', 50, TRUE)
+			ResetAdjust(user)
+		if(ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_neck()
+			H.update_inv_head()
+
+/obj/item/clothing/head/helmet/leather/shaman_hood/ResetAdjust(mob/user)
+	. = ..()
+	if(on)
+		set_light_on(FALSE)
+	update_icon()
+
+
+/obj/item/clothing/head/helmet/bascinet/atgervi/gronn
+	name = "gronnic ravager helm"
+	desc = "A helmet of hardened leather with a carved animal skull to appear similar to a human; a unique design of The Northern Empty. \
+			Its visage is said in Iskarn to scare the spirits of those defeated in the battlefield \
+			and preventing those of Necra and 'The Moose' from haunting them."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnleatherhelm"
+	item_state = "gronnleatherhelm"
+	block2add = null
+	body_parts_covered = HEAD|HAIR|EARS|EYES|NOSE
+	worn_x_dimension = 32
+	worn_y_dimension = 32
+
+/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
+	name = "gronnic ownel helmet"
+	desc = "A full helmet that adequately protect the eyes and head; \
+			The slits are decorated with a harsh gold dye - it is rumoured in Gronn to grant one the ability to see as keenly as an owl."
+	icon_state = "gronnhelm"
+	item_state = "gronnhelm"
+
+/obj/item/clothing/armor/brigandine/gronn
+	name = "gronn byrine hauberk"
+	desc = "A chain shirt of Gronnic design with a leather coat layered over, \
+			offering additional protection and superior movement. It is often used by sea raiders."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnchain"
+	item_state = "gronnchain"
+	smeltresult = /obj/item/ingot/iron

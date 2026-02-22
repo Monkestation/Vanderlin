@@ -215,3 +215,18 @@
 	name = "Psydonic Endurance"
 	desc = "I am protected by blessed Psydonian plate armor."
 	icon_state = "buff"
+
+//.............. Gronn Armor Sets .................//
+/obj/item/clothing/armor/plate/iron/gronn
+	name = "gronn norsii iron plate"
+	desc = "A suit of solid iron plate, adorned with tassets and roundels. \
+			The Northmen of Gronn rarely used plate, but when they did, \
+			it is said that whole armies would quake and shake in fear of what would ravage them."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplate"
+	item_state = "gronnplate"
+	boobed = FALSE
+	body_parts_covered = COVERAGE_ALL_BUT_LEGS
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
+	smeltresult = /obj/item/ingot/iron
