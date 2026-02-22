@@ -1140,7 +1140,7 @@
 	if (!used_item)
 		return
 
-	var/mutable_appearance/attack_appearance = mutable_appearance(icon, icon_state)
+	var/mutable_appearance/attack_appearance = mutable_appearance(used_item.icon, used_item.icon_state)
 	attack_appearance.plane = GAME_PLANE
 	attack_appearance.pixel_w = used_item.pixel_x + used_item.pixel_w
 	attack_appearance.pixel_z = used_item.pixel_y + used_item.pixel_z
