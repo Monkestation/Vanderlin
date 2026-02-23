@@ -42,7 +42,7 @@
 		return
 	if(world.time < (src.last_used[source] + SILVER_BANE_COOLDOWN))
 		return
-	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
+	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)) || !istype(source, /obj/projectile/bullet))
 		return
 
 	var/affected = affected_by_bane(target)
