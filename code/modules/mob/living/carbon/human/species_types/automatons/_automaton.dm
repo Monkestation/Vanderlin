@@ -31,6 +31,7 @@
 	meat = list()
 	no_equip = list(
 		ITEM_SLOT_SHIRT,
+		ITEM_SLOT_ARMOR,
 		ITEM_SLOT_MASK,
 		ITEM_SLOT_GLOVES,
 		ITEM_SLOT_SHOES,
