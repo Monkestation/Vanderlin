@@ -18,7 +18,7 @@
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL, AGE_CHILD)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
 	can_have_apprentices = FALSE
