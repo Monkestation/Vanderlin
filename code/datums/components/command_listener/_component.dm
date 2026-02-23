@@ -42,7 +42,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		/datum/follower_command/protect,
 		/datum/follower_command/kill,
 		/datum/follower_command/guard_position,
-		/datum/follower_command/follow,
+	//	/datum/follower_command/follow,
 	)
 
 /datum/component/command_follower/Initialize(list/command_typepaths = list())
@@ -60,6 +60,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
 	RegisterSignal(parent, COMSIG_PARENT_COMMAND_RECEIVED, PROC_REF(receive_command))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(on_ctrl_click))
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/command_follower/Destroy()
 	clear_command()
@@ -176,6 +177,9 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		return
 
 	SEND_SIGNAL(owner, COMSIG_PARENT_COMMAND_RECEIVED, new_cmd, clicker)
+
+/datum/component/command_follower/proc/on_examine(datum/source, mob/user, list/examine_list)
+	examine_list += span_blue("Ctrl-Click on this mob to give it a direct command.")
 
 /atom/movable/screen/command_display
 	name = "Command Display"
