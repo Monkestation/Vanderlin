@@ -157,6 +157,8 @@
 	)
 
 	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
+	if(!helmetchoice)
+		return
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"
