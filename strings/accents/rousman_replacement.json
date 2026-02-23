@@ -5,6 +5,7 @@
         "rous.": "little-kin.",
         "rous?": "little-kin?",
         "rousman": "kin-friend",
+        "rousmen": "kin-friends",
         "whatever": "no-care",
         "deadite": "rotty-thing",
         "yes ": "yes-yes ",
@@ -100,6 +101,7 @@
         "zenarii": "bright-shiny-coins",
         "mammon": "shiny-coin",
         "mammons": "shiny-coins",
+        "money": "shiny-coins",
         "steward": "shiny-coin-hoarder",
 
         "mage": "seer",
