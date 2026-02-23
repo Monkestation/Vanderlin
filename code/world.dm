@@ -20,6 +20,6 @@
 	name = "VANDERLIN"
 	fps = 20
 	cache_lifespan = 0
-#ifdef FIND_REF_NO_CHECK_TICK
-	loop_checks = FALSE
-#endif
+// #ifdef FIND_REF_NO_CHECK_TICK
+// 	loop_checks = FALSE
+// #endif
