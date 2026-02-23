@@ -3710,7 +3710,6 @@
 #include "code\modules\surgery\surgeries\extract_lux.dm"
 #include "code\modules\surgery\surgeries\fracture.dm"
 #include "code\modules\surgery\surgeries\healing.dm"
-#include "code\modules\surgery\surgeries\limb_replacement.dm"
 #include "code\modules\surgery\surgeries\organ_manipulation.dm"
 #include "code\modules\surgery\surgeries\organic_steps.dm"
 #include "code\modules\surgery\surgeries\plastic_surgery.dm"
