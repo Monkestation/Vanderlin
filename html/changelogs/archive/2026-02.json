@@ -674,5 +674,15 @@
                 "bugfix": "Fixed the pitchfork's sharpness so it didn't deal absolute minimum like 1 force damage"
             }
         ]
+    },
+    "2026-02-23": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixed an oversight from RK helmet PR"
+            },
+            {
+                "admin": "Custom Map insert spawner now works better."
+            }
+        ]
     }
 }
