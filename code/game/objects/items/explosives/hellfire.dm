@@ -14,7 +14,7 @@
 	. = ..()
 	if(ismob(target))
 		var/mob/living/carbon/human/species/werewolf = target
-		M.fire_act(30)
+		werewolf.fire_act(30)
 		target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 
 /obj/item/explosive/hell_fire
