@@ -703,7 +703,7 @@ SUBSYSTEM_DEF(job)
 	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
 	// Ready up bonus
-	if(!equipping.islatejoin)
+	if(!equipping.islatejoin && player_client)
 		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
 		equipping.hydration = 800 // Set higher hydration
 		equipping.nutrition = 800
