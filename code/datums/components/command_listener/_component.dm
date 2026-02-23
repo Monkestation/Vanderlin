@@ -153,7 +153,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		return
 	*/
 
-	if(!HAS_TRAIT(clicker, TRAIT_NOBLE_BLOOD) && !(clicker.job in GLOB.automaton_order_jobs))
+	if(!HAS_TRAIT(clicker, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(clicker, TRAIT_NOBLE_POWER) && !(clicker.job in GLOB.automaton_order_jobs))
 		to_chat(clicker, span_warning("You lack the authority to issue commands."))
 		return
 
