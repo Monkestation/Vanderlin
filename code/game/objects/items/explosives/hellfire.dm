@@ -10,12 +10,15 @@
 	speed = 0.9
 	reduce_crit_chance = 1
 
+	/obj/projectile/bullet/hellfire/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/projectile/bullet/hellfire/on_hit(target)
 	. = ..()
 	if(ismob(target))
 		var/mob/living/carbon/human/species/werewolf = target
 		werewolf.fire_act(30)
-		target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 
 /obj/item/explosive/hell_fire
 	name = "Psydons rebuke"
