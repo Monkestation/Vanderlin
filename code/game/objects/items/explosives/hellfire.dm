@@ -20,6 +20,8 @@
 		var/mob/living/carbon/human/species/werewolf = target
 		werewolf.fire_act(30)
 
+	target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
+
 /obj/item/explosive/hell_fire
 	name = "Psydons rebuke"
 	desc = "Once long ago, there was an outbreak of lycanthropia in Grenzelhoft, one stamped out by the populace with tenacity and blastpowder. This design of grenade is a sloppy yet effective weapon which is often used by the poor underclass in defense of nite-beasts.  Praise psydon, for it is he who grants us these gifts to make all those who prowl the nite run in fear. There is too little silver to harm vampires."
