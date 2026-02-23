@@ -162,6 +162,7 @@
 		return
 	COOLDOWN_START(src, detection_cooldown, 30 SECONDS)
 	detections += value
+	GLOB.vamp_detection += value
 	if(value > 0)
 		to_chat(src, span_boldannounce("DETECTED!"))
 
