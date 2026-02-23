@@ -119,6 +119,7 @@
 	var/advance = FALSE
 	if(do_after(user, modded_time, target = target, interaction_key = interaction_key)) //If we have the hippocratic oath, we can perform one surgery on each target, otherwise we can only do one surgery in total
 		if(try_to_fail || prob(fail_prob))
+			user.mind?.add_sleep_experience(surgery.skill_used, (user.STAINT * 0.3) + 1)
 			if(failure(user, target, target_zone, tool, surgery, fail_prob))
 				play_failure_sound(user, target, target_zone, tool, surgery)
 				advance = TRUE
@@ -138,6 +139,7 @@
 /// Advance the current surgery to the next step, return TRUE if complete
 /datum/surgery_step/proc/advance_surgery(mob/living/user, datum/surgery/surgery)
 	surgery.status++
+	user.mind?.add_sleep_experience(surgery.skill_used, user.STAINT * 0.4)
 	if(surgery.status > length(surgery.steps))
 		surgery.complete(user)
 		return TRUE

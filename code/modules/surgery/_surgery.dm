@@ -209,8 +209,10 @@
 		return new step_type
 	return null
 
-/datum/surgery/proc/complete(mob/surgeon)
+/datum/surgery/proc/complete(mob/living/surgeon)
 	SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
+	var/exp = (surgeon.STAINT * 0.75) * (0.15 * length(steps))
+	surgeon.mind?.add_sleep_experience(skill_used, exp)
 	qdel(src)
 
 /datum/surgery/proc/generate_html(mob/user)
