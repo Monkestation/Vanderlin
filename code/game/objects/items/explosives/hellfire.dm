@@ -10,7 +10,7 @@
 	speed = 0.9
 	reduce_crit_chance = 1
 
-	/obj/projectile/bullet/hellfire/Initialize(mapload)
+/obj/projectile/bullet/hellfire/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
