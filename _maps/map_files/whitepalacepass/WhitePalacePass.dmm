@@ -1635,9 +1635,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/chair/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -3494,9 +3493,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/clock/dense,
 /turf/open/floor/ruinedwood/darker,
@@ -4695,9 +4693,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/church)
@@ -5496,9 +5493,8 @@
 /turf/open/water/swamp,
 /area/under/cave)
 "fpu" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
-	icon_state = "borderfall";
 	pixel_x = 7
 	},
 /obj/structure/chair/wood{
@@ -6283,9 +6279,8 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/church)
 "fZf" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
-	icon_state = "borderfall";
 	pixel_x = 7
 	},
 /turf/open/floor/tile/diamond/blue,
@@ -7326,9 +7321,8 @@
 /turf/open/floor/carpet/purple,
 /area/indoors/town/keep/library)
 "gQp" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -8937,8 +8931,7 @@
 /turf/closed/wall/mineral/decorstone,
 /area/under/cave)
 "ifv" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_y = 4
 	},
@@ -9675,9 +9668,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/decal/cleanable/dirt,
@@ -11312,13 +11304,11 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/phys)
 "kyD" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -12088,9 +12078,8 @@
 /turf/open/floor/dirt/road,
 /area/indoors/town/smithy)
 "laL" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -12142,9 +12131,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/masonic/single,
@@ -13544,8 +13532,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/garrison)
 "mCU" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_y = 4
 	},
@@ -14293,9 +14280,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood,
@@ -17087,9 +17073,8 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/magician)
 "pFS" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -21588,9 +21573,8 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town)
 "tRr" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -21833,9 +21817,8 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors/church)
 "uba" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
-	icon_state = "borderfall";
 	pixel_x = 8
 	},
 /turf/open/floor/tile/diamond/blue,
@@ -21899,9 +21882,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/steward)
 "ueC" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -25428,8 +25410,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
 "xrG" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_x = -1;
 	pixel_y = 4
@@ -25514,9 +25495,8 @@
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/chapel)
 "xxl" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -26366,9 +26346,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/church)

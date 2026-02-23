@@ -2102,9 +2102,8 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -4402,9 +4401,8 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/bath)
 "cgt" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/lanternpost/fixed{
 	pixel_x = -2;
@@ -6315,9 +6313,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
 "cWD" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/water_vent,
 /obj/structure/fluff/railing/border{
@@ -7436,9 +7433,8 @@
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)
@@ -9502,9 +9498,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
 "eFK" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "Vanderlin Train Station";
@@ -11429,9 +11424,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fBt" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -11753,9 +11747,8 @@
 	},
 /area/under/cavewet)
 "fJQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 8
@@ -20344,9 +20337,8 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "jUk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/closed/mineral,
 /area/under/cave)
@@ -26017,9 +26009,8 @@
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/keep/knight)
 "mHH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -28782,9 +28773,8 @@
 	},
 /area/outdoors/river)
 "nZP" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "Vanderlin Train Station";
@@ -32034,9 +32024,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "pAn" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 4
@@ -33108,9 +33097,8 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "qav" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town)
@@ -42938,9 +42926,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
 "uIW" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/water_vent,
 /turf/open/floor/herringbone,
@@ -46666,9 +46653,8 @@
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
 "wpC" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)
@@ -49292,9 +49278,8 @@
 	pixel_x = -1;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)

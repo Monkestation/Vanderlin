@@ -2779,9 +2779,8 @@
 /turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "bNO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/ship/topdeck)
@@ -3638,9 +3637,8 @@
 	},
 /area/indoors/wilderness/magic)
 "dez" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog)
@@ -6904,9 +6902,8 @@
 /turf/closed/mineral/bedrock/cold,
 /area/under/cavewet)
 "hrY" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/outdoors/bog)
@@ -7824,9 +7821,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
@@ -8174,9 +8170,8 @@
 	},
 /area/under/cavewet)
 "jcE" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
@@ -14308,9 +14303,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fermentation_keg,
 /turf/open/floor/ruinedwood/turned/darker,
