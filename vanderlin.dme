@@ -3641,6 +3641,7 @@
 #include "code\modules\spells\spell_types\undirected\list_target\convert_role\guard.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\convert_role\mercenary.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\convert_role\milita.dm"
+#include "code\modules\spells\spell_types\undirected\list_target\convert_role\serjeant.dm"
 #include "code\modules\spells\spell_types\undirected\list_target\convert_role\servant.dm"
 #include "code\modules\spells\spell_types\undirected\projectile\_basic_projectile.dm"
 #include "code\modules\spells\spell_types\undirected\shapeshift\_shape_status.dm"
