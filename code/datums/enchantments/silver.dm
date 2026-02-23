@@ -20,8 +20,6 @@
 	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
 	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
-	registered_signals += COMSIG_PROJECTILE_SELF_ON_HIT
-	RegisterSignal(item, COMSIG_PROJECTILE_SELF_ON_HIT, PROC_REF(on_projectile_hit))
 
 /datum/enchantment/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
@@ -88,36 +86,6 @@
 	if(affected != AFFECTED_VLORD)
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
-
-/datum/enchantment/silver/proc/on_projectile_hit(obj/item/source, mob/living/carbon/human/target)
-	if(!ishuman(target))
-		return
-	if(world.time < (src.last_used[source] + SILVER_BANE_COOLDOWN))
-		return
-	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
-		return
-
-	var/affected = affected_by_bane(target)
-	if(!affected)
-		return
-
-	var/datum/antagonist/vampire/vamp_datum = target.mind?.has_antag_datum(/datum/antagonist/vampire)
-
-	to_chat(target, span_userdanger("I am struck by my BANE!"))
-
-	target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
-
-	// Fire damage
-	target.adjustFireLoss(10)
-	target.adjust_divine_fire_stacks(1)
-	target.IgniteMob()
-
-	if(vamp_datum && affected != AFFECTED_VLORD)
-		if(SEND_SIGNAL(target, COMSIG_DISGUISE_STATUS))
-			target.visible_message("<font color='white'>[target]'s curse manifests!</font>", ignored_mobs = list(target))
-
-	last_used[source] = world.time
-	return
 
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
