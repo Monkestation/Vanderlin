@@ -558,7 +558,7 @@
 	list_reagents = list(/datum/reagent/flour = 1)
 	volume = 1
 	sellprice = 0
-	var/water_added
+	var/water_added = FALSE
 
 /datum/reagent/flour
 	name = "flour"
@@ -576,26 +576,41 @@
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/powder/flour/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	var/found_table = locate(/obj/structure/table) in (loc)
-	var/obj/item/reagent_containers/glass/R = I
-	if(isturf(loc)&& (found_table))
-		if(!istype(R) || (water_added))
-			return ..()
-		if(!R.reagents.has_reagent(/datum/reagent/water, 10))
-			to_chat(user, span_notice("Needs more water to work it."))
-			return TRUE
-		to_chat(user, span_notice("Adding water, now it's time to knead it..."))
-		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
-		if(do_after(user, 1.5 SECONDS, src))
-			name = "wet flour"
-			desc = "Destined for greatness, at your hands."
-			R.reagents.remove_reagent(/datum/reagent/water, 10)
-			water_added = TRUE
-			color = "#d9d0cb"
-	else
+/obj/item/reagent_containers/powder/flour/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(water_added)
+		return NONE
+
+	if(!istype(tool, /obj/item/reagent_containers/glass))
+		return NONE
+
+	if(!isturf(loc))
+		return NONE
+
+	if(!(locate(/obj/structure/table) in (loc)))
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!tool.reagents.has_reagent(/datum/reagent/water, 10))
+		to_chat(user, span_notice("Needs more water to work it."))
+		return ITEM_INTERACT_BLOCKING
+
+	to_chat(user, span_notice("Adding water, now it's time to knead it..."))
+	playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
+
+	if(!do_after(user, 1.5 SECONDS, src))
+		ITEM_INTERACT_BLOCKING
+		return
+
+	name = "wet flour"
+	desc = "Destined for greatness, at your hands."
+	tool.reagents.remove_reagent(/datum/reagent/water, 10)
+	water_added = TRUE
+	color = "#d9d0cb"
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)

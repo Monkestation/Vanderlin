@@ -74,7 +74,7 @@
 
 /obj/item/weapon/tongs/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(held_item)
-		if(held_item.interact_with_atom(interacting_with, user, modifiers))
+		if(place_item_to_atom(interacting_with))
 			return ITEM_INTERACT_SUCCESS
 		return ITEM_INTERACT_BLOCKING
 

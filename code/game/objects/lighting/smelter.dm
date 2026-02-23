@@ -11,106 +11,105 @@
 	climb_offset = 10
 	on = TRUE
 	temperature_change = 80
+	fueluse = 30 MINUTES
+	crossfire = FALSE
 	var/list/ore = list()
 	var/maxore = 1
 	var/cooking = 0
 	var/actively_smelting = FALSE // Are we currently smelting?
 	var/max_crucible_temperature = 1850
-	fueluse = 30 MINUTES
-	crossfire = FALSE
 
-/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(istype(W, /obj/item/weapon/tongs))
-		if(!actively_smelting) // Prevents an exp gain exploit. - Foxtrot
-			var/obj/item/weapon/tongs/T = W
-			if(ore.len && !T.held_item)
-				var/obj/item/I = ore[ore.len]
-				ore -= I
-				I.forceMove(T)
-				T.held_item = I
-				if(user.mind && isliving(user) && T.held_item?:smeltresult) // Prevents an exploit with coal and runtimes with everything else
-					if(!istype(T.held_item, /obj/item/ore) && T.held_item?:smelted) // Burning items to ash won't level smelting.
-						var/mob/living/L = user
-						var/boon = user.get_learning_boon(/datum/skill/craft/smelting)
-						var/amt2raise = L.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
-						if(amt2raise > 0)
-							user.adjust_experience(/datum/skill/craft/smelting, amt2raise * boon, FALSE)
-							SEND_SIGNAL(user, COMSIG_ITEM_SMELTED)
-				user.visible_message("<span class='info'>[user] retrieves [I] from [src].</span>")
-				if(on)
-					var/tyme = world.time
-					T.hott = tyme
-					T.proxy_heat(150, max_crucible_temperature)
-					addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 50)
-					if(istype(T, /obj/item/weapon/tongs/stone))
-						T.take_damage(1, BRUTE, "blunt")
-				T.update_appearance(UPDATE_ICON_STATE)
-				return
+/obj/machinery/light/fueled/smelter/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-			for(var/obj/item/storage/crucible/crucible in contents)
-				user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src]!")
-				if(!do_after(user, 1.5 SECONDS, src))
-					return
-				crucible.forceMove(T)
-				T.held_item = crucible
-				T.update_appearance(UPDATE_ICON_STATE)
-				return
-			if(on)
-				to_chat(user, "<span class='info'>Nothing to retrieve from inside.</span>")
-				return // Safety for not smelting our tongs
-		else
+	if(istype(tool, /obj/item/weapon/tongs))
+		if(actively_smelting)
 			to_chat(user, "<span class='warning'>\The [src] is currently smelting. Wait for it to finish, or douse it with water to retrieve items from it.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
+		var/obj/item/weapon/tongs/T = tool
+		if(length(ore) && !T.held_item)
+			var/obj/item/I = ore[length(ore)]
+			ore -= I
+			I.forceMove(T)
+			T.held_item = I
+			if(user.mind && isliving(user) && T.held_item?:smeltresult) // Prevents an exploit with coal and runtimes with everything else
+				if(!istype(T.held_item, /obj/item/ore) && T.held_item?:smelted) // Burning items to ash won't level smelting.
+					var/mob/living/L = user
+					var/boon = user.get_learning_boon(/datum/skill/craft/smelting)
+					var/amt2raise = L.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
+					if(amt2raise > 0)
+						user.adjust_experience(/datum/skill/craft/smelting, amt2raise * boon, FALSE)
+						SEND_SIGNAL(user, COMSIG_ITEM_SMELTED)
+			user.visible_message("<span class='info'>[user] retrieves [I] from [src].</span>")
+			if(on)
+				var/tyme = world.time
+				T.hott = tyme
+				T.proxy_heat(150, max_crucible_temperature)
+				addtimer(CALLBACK(T, TYPE_PROC_REF(/obj/item/weapon/tongs, make_unhot), tyme), 50)
+				if(istype(T, /obj/item/weapon/tongs/stone))
+					T.take_damage(1, BRUTE, "blunt")
+			T.update_appearance(UPDATE_ICON_STATE)
+			return ITEM_INTERACT_SUCCESS
 
-	if(W.firefuel)
-		if(alert(usr, "Fuel \the [src] with [W]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
-			return ..()
+		for(var/obj/item/storage/crucible/crucible in contents)
+			user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src]!")
+			if(!do_after(user, 1.5 SECONDS, src))
+				return ITEM_INTERACT_BLOCKING
 
-	if(istype(W, /obj/item/storage/crucible))
-		W.forceMove(src)
+			crucible.forceMove(T)
+			T.held_item = crucible
+			T.update_appearance(UPDATE_ICON_STATE)
+			return ITEM_INTERACT_SUCCESS
+
+		to_chat(user, "<span class='info'>Nothing to retrieve from inside.</span>")
+		return ITEM_INTERACT_BLOCKING
+
+	if(istype(tool, /obj/item/storage/crucible))
+		tool.forceMove(src)
 		user.visible_message("Loads a crucible into [src].", "You load a crucible into [src].")
-		return ..()
+		return ITEM_INTERACT_SUCCESS
 
-	if(W.smeltresult)
-		if(ore.len < maxore)
-			if(!(W in user.held_items) || !user.temporarilyRemoveItemFromInventory(W))
-				return
-			W.forceMove(src)
-			ore += W
-			if(!isliving(user) || !user.mind)
-				ore[W] = SMELTERY_LEVEL_SPOIL
-			else
-				var/smelter_exp = user.get_skill_level(/datum/skill/craft/smelting) // 0 to 6
-				if(smelter_exp < 6)
-					ore[W] = floor(rand(smelter_exp*15, max(63, smelter_exp*25))/25) // Math explained below
-				else
-					ore[W] = floor(min(3, smelter_exp)) // Guarantees a return of 3 no matter how extra experience past 3000 you have.
-				/*
-				RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
-					NO SKILL: 		between 00 and 63
-					WEAK:	 		between 15 and 63
-					AVERAGE:	 	between 30 and 63
-					SKILLED: 		between 45 and 75
-					EXPERT: 		between 60 and 100
-					MASTER: 		between 75 and 125
-					LEGENDARY: 		between 90 and 150
+	if(tool.firefuel)
+		if(browser_alert(user, "Fuel \the [src] with [tool]?", "VANDERLIN", list("Fuel", "Smelt")) == "Fuel")
+			return NONE
 
-				PICKED NUMBER GETS DIVIDED BY 25 AND ROUNDED DOWN TO CLOSEST INTEGER.
-				RESULT DETERMINES QUALITY OF BAR. SEE code/__DEFINES/skills.dm
-					0 = SPOILED
-					1 = POOR
-					2 = NORMAL
-					3 = GOOD
-				*/
-			user.visible_message("<span class='warning'>[user] puts something in \the [src].</span>")
-			cooking = 0
-			return
+	if(tool.smeltresult)
+		if(length(ore) >= maxore)
+			to_chat(user, "<span class='warning'>\The [tool.name] [tool.smeltresult? "can" : "can't"] be smelted, but \the [src] is full.</span>")
+			return ITEM_INTERACT_BLOCKING
+
+		if(!(tool in user.held_items) || !user.temporarilyRemoveItemFromInventory(tool))
+			return ITEM_INTERACT_BLOCKING
+
+		tool.forceMove(src)
+		ore += tool
+
+		var/smelter_exp = user.get_skill_level(/datum/skill/craft/smelting) // 0 to 6
+		if(smelter_exp < 6)
+			ore[tool] = floor(rand(smelter_exp * 15, max(63, smelter_exp * 25)) / 25) // Math explained below
 		else
-			to_chat(user, "<span class='warning'>\The [W.name] [W.smeltresult? "can" : "can't"] be smelted, but \the [src] is full.</span>")
-	else
-		if(!W.firefuel && !istype(W, /obj/item/flint) && !istype(W, /obj/item/flashlight/flare/torch) && !istype(W, /obj/item/ore/coal))
-			to_chat(user, "<span class='warning'>\The [W.name] cannot be smelted.</span>")
-	return ..()
+			ore[tool] = floor(min(3, smelter_exp)) // Guarantees a return of 3 no matter how extra experience past 3000 you have.
+		/*
+		RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
+			NO SKILL: 		between 00 and 63
+			WEAK:	 		between 15 and 63
+			AVERAGE:	 	between 30 and 63
+			SKILLED: 		between 45 and 75
+			EXPERT: 		between 60 and 100
+			MASTER: 		between 75 and 125
+			LEGENDARY: 		between 90 and 150
+
+		PICKED NUMBER GETS DIVIDED BY 25 AND ROUNDED DOWN TO CLOSEST INTEGER.
+		RESULT DETERMINES QUALITY OF BAR. SEE code/__DEFINES/skills.dm
+			0 = SPOILED
+			1 = POOR
+			2 = NORMAL
+			3 = GOOD
+		*/
+		user.visible_message("<span class='warning'>[user] puts something in \the [src].</span>")
+		cooking = 0
+		return ITEM_INTERACT_SUCCESS
 
 // Gaining experience from just retrieving bars with your hands would be a hard-to-patch exploit.
 /obj/machinery/light/fueled/smelter/attack_hand(mob/user, list/modifiers)

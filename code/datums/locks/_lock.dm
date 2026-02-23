@@ -101,19 +101,17 @@
 	var/is_right = text2num(LAZYACCESS(modifiers, RIGHT_CLICK))
 	if(tool.can_lock_interact() && source.pre_lock_interact(user))
 		try_toggle(user, tool, is_right)
-		// :( these are technically the same thing
 		return ITEM_INTERACT_SUCCESS
 
 	if(is_type_in_list(tool, lockpicks))
 		if(source.pre_lock_interact(user) && user.try_pick(source, tool, lockpicks, wedges, difficulty))
-			// :( these are technically the same thing
-			return is_right ? COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN : COMPONENT_NO_AFTERATTACK
+			return ITEM_INTERACT_SUCCESS
 
 /// Try to toggle the lock with a tool
 /datum/lock/key/proc/try_toggle(mob/living/user, obj/item/tool, is_right)
 	var/silent = user?.m_intent == MOVE_INTENT_SNEAK
 
-	if(!check_access())
+	if(!check_access(tool))
 		holder?.lock_failed(user, silent)
 		return
 

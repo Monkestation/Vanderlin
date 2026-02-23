@@ -29,87 +29,90 @@
 		return hingot.attack_hand_secondary(user, modifiers)
 	. = ..()
 
-/obj/machinery/anvil/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(istype(W, /obj/item/weapon/tongs))
-		var/obj/item/weapon/tongs/T = W
+/obj/machinery/anvil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/T = tool
 		if(smithing)
 			to_chat(user, "<span class='warning'>[src] is currently being worked on!</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(hingot)
-			if(T.held_item && istype(T.held_item, /obj/item/ingot))
+			if(T.held_item)
+				if(!istype(T.held_item, /obj/item/ingot))
+					return ITEM_INTERACT_BLOCKING
 				if(hingot.currecipe && hingot.currecipe.needed_item && istype(T.held_item, hingot.currecipe.needed_item))
 					hingot.currecipe.item_added(user)
 					qdel(T.held_item)
 					T.held_item = null
 					T.update_appearance(UPDATE_ICON_STATE)
 					update_appearance(UPDATE_OVERLAYS)
-				return
-			else
-				hingot.forceMove(T)
-				T.held_item = hingot
-				hingot = null
-				T.update_appearance(UPDATE_ICON_STATE)
-				update_appearance(UPDATE_OVERLAYS)
-				return
-		else
-			if(T.held_item && istype(T.held_item, /obj/item/ingot))
-				T.held_item.forceMove(src)
-				hingot = T.held_item
-				T.held_item = null
-				hott = T.hott
-				if(hott)
-					START_PROCESSING(SSmachines, src)
-				T.update_appearance(UPDATE_ICON_STATE)
-				update_appearance(UPDATE_OVERLAYS)
-				return
-
-	if(istype(W, /obj/item/ingot))
-		if(!hingot)
-			W.forceMove(src)
-			hingot = W
-			hott = 0
+				return ITEM_INTERACT_SUCCESS
+			hingot.forceMove(T)
+			T.held_item = hingot
+			hingot = null
+			T.update_appearance(UPDATE_ICON_STATE)
 			update_appearance(UPDATE_OVERLAYS)
-			return
+			return ITEM_INTERACT_SUCCESS
+		else if(T.held_item && istype(T.held_item, /obj/item/ingot))
+			T.held_item.forceMove(src)
+			hingot = T.held_item
+			T.held_item = null
+			hott = T.hott
+			if(hott)
+				START_PROCESSING(SSmachines, src)
+			T.update_appearance(UPDATE_ICON_STATE)
+			update_appearance(UPDATE_OVERLAYS)
+			return ITEM_INTERACT_SUCCESS
 
-	if(istype(W, /obj/item/weapon/hammer))
-		var/obj/item/weapon/hammer/hammer = W
+	if(istype(tool, /obj/item/ingot))
+		if(hingot)
+			return ITEM_INTERACT_BLOCKING
+		tool.forceMove(src)
+		hingot = tool
+		hott = 0
+		update_appearance(UPDATE_OVERLAYS)
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/weapon/hammer))
+		var/obj/item/weapon/hammer/hammer = tool
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(!hingot)
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(!hott)
 			to_chat(user, "<span class='warning'>The bar has gone too cold to continue working on it.</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(smithing)
 			to_chat(user, "<span class='warning'>Already working on this!</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 		if(!hingot.currecipe)
 			if(!choose_recipe(user))
-				return
+				return ITEM_INTERACT_BLOCKING
 		if(has_world_trait(/datum/world_trait/delver))
 			if(!has_recipe_unlocked(user.key, hingot.currecipe.type))
-				return
+				return ITEM_INTERACT_BLOCKING
 
 		// Start the minigame instead of direct hammering
 		start_minigame(user, hammer)
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
+	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(tool, hingot.currecipe.needed_item))
 		hingot.currecipe.item_added(user)
-		if(istype(W, /obj/item/ingot))
-			var/obj/item/ingot/I = W
+		if(istype(tool, /obj/item/ingot))
+			var/obj/item/ingot/I = tool
 			hingot.currecipe.material_quality += I.recipe_quality
 			previous_material_quality = I.recipe_quality
 		else
 			hingot.currecipe.material_quality += previous_material_quality
 		hingot.currecipe.num_of_materials += 1
-		qdel(W)
-		return
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
 
-	if(W.anvilrepair)
-		user.visible_message("<span class='info'>[user] places \a [W] on the anvil.</span>")
-		W.forceMove(src.loc)
-		return
-	..()
+	if(user.temporarilyRemoveItemFromInventory(tool))
+		user.visible_message("<span class='info'>[user] places \an [tool] on the anvil.</span>")
+		tool.forceMove(get_turf(src))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
 	if(!hingot || !hingot.currecipe)
