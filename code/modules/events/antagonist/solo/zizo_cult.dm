@@ -12,7 +12,7 @@
 	base_antags = 1
 	maximum_antags = 4
 
-	min_players = 35
+	min_players = LOWPOP_THRESHOLD
 	weight = 6
 
 	earliest_start = 0 SECONDS
