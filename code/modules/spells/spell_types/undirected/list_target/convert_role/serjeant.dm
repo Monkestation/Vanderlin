@@ -27,7 +27,7 @@
 
 /datum/status_effect/buff/promoted_serjeant
 	id = "promoted_serjeant"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/drunk
+	alert_type = /atom/movable/screen/alert/status_effect/buff/promoted_serjeant
 	effectedstats = list(STATKEY_END = 1, STATKEY_PER = 1)
 
 /atom/movable/screen/alert/status_effect/buff/promoted_serjeant
