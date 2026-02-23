@@ -49,11 +49,12 @@
 	if(signal_result)
 		return signal_result
 
-	// if(length(processing_recipes))
-	// 	process_recipes(user, tool, processing_recipes)
-
 	if(QDELETED(tool))
 		return ITEM_INTERACT_SUCCESS // Safe-ish to assume that if we deleted our item something succeeded
+
+	if(!user.cmode && user.try_recipes(src, tool))
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
 
 	var/act_result = NONE // or FALSE, or null, as some things may return
 

@@ -179,12 +179,6 @@
 	if(!attacking_item.obj_flags_ignore && !(obj_flags & CAN_BE_HIT))
 		return FALSE
 
-	if(isliving(user) && !user.cmode)
-		var/mob/living/living_user = user
-		if(living_user.try_recipes(src, attacking_item))
-			user.changeNext_move(CLICK_CD_FAST)
-			return TRUE
-
 	return attacking_item.attack_atom(src, user, modifiers)
 
 /turf/attackby(obj/item/I, mob/living/user, list/modifiers)
