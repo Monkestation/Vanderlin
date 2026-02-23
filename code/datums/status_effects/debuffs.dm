@@ -506,7 +506,7 @@
 /datum/status_effect/debuff/clashcd
 	id = "clashcd"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/clashcd
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/clashcd
 	name = "Riposte / Guard Cooldown"
