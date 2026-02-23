@@ -90,7 +90,7 @@
 	if(!needs_reset)
 		return NONE
 
-	if(istype(tool, resetting_item))
+	if(!istype(tool, resetting_item))
 		return NONE
 
 	INVOKE_ASYNC(src, PROC_REF(start_reset), source, user, tool)
