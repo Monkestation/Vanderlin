@@ -282,6 +282,7 @@
 			if(!is_bandit && (real_name in GLOB.outlawed_players))
 				. += span_userdanger("OUTLAW!")
 
+
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)
 				. +=span_notice(inquisition_text)
