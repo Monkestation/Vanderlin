@@ -23,11 +23,11 @@
 	UnregisterSignal(parent, list(COMSIG_PARENT_EXAMINE))
 
 /datum/component/hideous_face/proc/on_examine(mob/living/carbon/human/source, mob/living/carbon/human/user, list/examine_list)
-	if((source.wear_mask?.flags_inv & HIDEFACE) && (source.head?.flags_inv & HIDEFACE))
+	if(!is_human_part_visible(source, HIDEFACE))
 		return
 	if(user.affects_masquerade())
 		var/all_caps_pronoun = uppertext(source.p_their())
-		examine_list += span_phobia("[all_caps_pronoun]! WHAT'S WRONG WITH [all_caps_pronoun] FACE?!")
+		examine_list += span_phobia("[all_caps_pronoun] FACE! WHAT'S WRONG WITH [all_caps_pronoun] FACE?!")
 	else
 		examine_list += span_boldred("[source.p_their(TRUE)] face is hideous.")
 	seen_callback?.Invoke(source, user)

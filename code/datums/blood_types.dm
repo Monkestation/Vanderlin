@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 /datum/blood_type/human/corrupted/goblin
 	name = "Goblin"
 	used_table = /datum/chimeric_table/goblin
-	vitae = 500 VITAE
+	vitae = 750 VITAE
 
 /datum/blood_type/human/corrupted/orc
 	name = "Orc"
@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 /datum/blood_type/human/corrupted/rousman
 	name = "Rousman"
 	used_table = /datum/chimeric_table/rousman
-	vitae = 500 VITAE
+	vitae = 750 VITAE
 
 /datum/blood_type/human/corrupted/rousman/get_blood_prefs(mob/living/carbon/human/sampled_from)
 	. = ..()
@@ -236,7 +236,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	if(!istype(sampled_from))
 		return
 	. |= BLOOD_PREFERENCE_DEAD
-	. &= ~BLOOD_PREFERENCE_DEAD
+	. &= ~BLOOD_PREFERENCE_LIVING
 
 /datum/blood_type/putrid
 	name = "Putrid"

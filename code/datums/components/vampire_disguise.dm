@@ -104,7 +104,7 @@
 		vclan.apply_vampire_look(H)
 
 	to_chat(H, span_warning("My true nature is revealed!"))
-	if(length(H.CheckEyewitness(H)))
+	if(!disguise_status() && length(H.CheckEyewitness(H)))
 		H.vampire_detected(1)
 	return TRUE
 
@@ -117,7 +117,7 @@
 	return TRUE
 
 /datum/component/vampire_disguise/proc/disguise_status()
-	return disguised
+	return disguised || !is_human_part_visible(parent, HIDEFACE)
 
 /datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list)
 	if(!istype(user) || disguise_status())
