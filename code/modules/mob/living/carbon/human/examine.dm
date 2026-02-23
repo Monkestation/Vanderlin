@@ -208,7 +208,7 @@
 					. += span_necrosis("That fish is ugly!")
 
 			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-				. += span_phobia("A foreigner...")
+				. += span_red("A foreigner...")
 
 			if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 				. += span_userdanger("ALCOHOLIC!")
@@ -281,11 +281,6 @@
 
 			if(!is_bandit && (real_name in GLOB.outlawed_players))
 				. += span_userdanger("OUTLAW!")
-
-			if(mind && mind?.special_role == "Vampire Lord")
-				var/datum/component/vampire_disguise/disguise_comp = GetComponent(/datum/component/vampire_disguise)
-				if(!disguise_comp.disguised)
-					. += span_userdanger("A MONSTER!")
 
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)

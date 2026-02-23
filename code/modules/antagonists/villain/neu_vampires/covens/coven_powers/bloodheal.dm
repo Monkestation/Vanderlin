@@ -20,7 +20,7 @@
 	cooldown_length = 30 SECONDS
 	duration_length = 3 SECONDS
 
-	violates_masquerade = FALSE
+	violates_masquerade = TRUE
 
 	grouped_powers = list(
 		/datum/coven_power/bloodheal/one,
@@ -115,7 +115,6 @@
 	level = 3
 	vitae_cost = 12
 	duration_length = 3 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 4
 /datum/coven_power/bloodheal/four
@@ -124,7 +123,6 @@
 	level = 4
 	vitae_cost = 15
 	duration_length = 2.5 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 5
 /datum/coven_power/bloodheal/five
@@ -133,7 +131,6 @@
 	level = 5
 	vitae_cost = 18
 	duration_length = 2 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 6
 /datum/coven_power/bloodheal/six
@@ -142,7 +139,6 @@
 	level = 6
 	vitae_cost = 22
 	duration_length = 1.8 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 7
 /datum/coven_power/bloodheal/seven
@@ -151,7 +147,6 @@
 	level = 7
 	vitae_cost = 25
 	duration_length = 1.5 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 8
 /datum/coven_power/bloodheal/eight
@@ -160,7 +155,6 @@
 	level = 8
 	vitae_cost = 28
 	duration_length = 1.2 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 9
 /datum/coven_power/bloodheal/nine
@@ -169,7 +163,6 @@
 	level = 9
 	vitae_cost = 32
 	duration_length = 1 SECONDS
-	violates_masquerade = TRUE
 
 //BLOODHEAL 10
 /datum/coven_power/bloodheal/ten
@@ -178,7 +171,6 @@
 	level = 10
 	vitae_cost = 35
 	duration_length = 0.8 SECONDS
-	violates_masquerade = TRUE
 
 #undef HEAL_BASHING_LETHAL
 #undef HEAL_AGGRAVATED

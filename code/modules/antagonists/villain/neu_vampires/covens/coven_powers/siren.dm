@@ -111,6 +111,7 @@
 	cooldown_length = 5 SECONDS
 	duration_length = 2 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/madrigal/activate()
 	. = ..()
@@ -192,6 +193,7 @@
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/sirens_beckoning/activate()
 	. = ..()
@@ -220,6 +222,7 @@
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/shattering_crescendo/activate()
 	. = ..()

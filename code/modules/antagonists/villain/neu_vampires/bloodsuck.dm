@@ -14,7 +14,7 @@
 /mob/living/proc/drinksomeblood(mob/living/carbon/victim, sublimb_grabbed, drink_amt = 10, ingest=TRUE, force = FALSE)
 	if(world.time <= next_move)
 		return 0
-	if(!force && world.time < last_drinkblood_use + 2 SECONDS)
+	if(!force && !COOLDOWN_FINISHED(src, drinkblood_use))
 		return 0
 	if(HAS_TRAIT(victim, TRAIT_HUSK) || (NOBLOOD in victim.dna?.species?.species_traits) || victim.blood_volume <= 0)
 		to_chat(src, span_warning("Sigh. No blood."))
@@ -25,7 +25,7 @@
 		to_chat(src, span_warning("Can't drink any more..."))
 		return 0
 
-	last_drinkblood_use = world.time
+	COOLDOWN_START(src, drinkblood_use, 1 SECONDS)
 	changeNext_move(CLICK_CD_MELEE)
 
 	var/mob/living/carbon/human/human_victim
@@ -39,17 +39,19 @@
 			return 0
 
 	var/used_vitae = 0
-	if(VDrinker && VVictim)
-		if(victim.bloodpool <= 0 && clan)
-			AdjustMasquerade(-1)
-			message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
-			log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
-			to_chat(src, span_danger("I have... consumed my kindred!"))
-			victim.death()
-			return 0
-		else
-			to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
-			used_vitae = min(250, victim.bloodpool)
+	if(VDrinker)
+		if(length(CheckEyewitness(victim)))
+			vampire_detected(1)
+		if(VVictim)
+			if(victim.bloodpool <= 0 && clan)
+				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
+				log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
+				to_chat(src, span_danger("I have consumed my kindred!"))
+				victim.death()
+				return 0
+			else
+				to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
+				used_vitae = min(250, victim.bloodpool)
 
 	drink_amt = min(victim.blood_volume, drink_amt)
 	if(ingest)
