@@ -215,6 +215,9 @@
 	..()
 
 /obj/item/bodypart/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(!iscarbon(interacting_with))
 		return NONE
 

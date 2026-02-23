@@ -105,8 +105,6 @@
 		icon_state = initial(icon_state)
 		return ITEM_INTERACT_BLOCKING
 
-	record_round_statistic(STATS_DENDOR_SACRIFICES)
-
 	var/paths = list(TRAIT_DENDOR_GROWING, TRAIT_DENDOR_STINGING, TRAIT_DENDOR_DEVOURING, TRAIT_DENDOR_LORDING)
 	for(var/T in paths)
 		if(HAS_TRAIT(user, T) && T != path_trait)
@@ -134,6 +132,8 @@
 		var/datum/blueprint_recipe/R = unlocks_recipe
 		if(R && initial(R.name))
 			to_chat(user, span_good("I have learned how to make [initial(R.name)]!"))
+
+	record_round_statistic(STATS_DENDOR_SACRIFICES)
 
 	qdel(src)
 

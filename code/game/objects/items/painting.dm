@@ -25,7 +25,6 @@
 
 	var/obj/structure/S = new deployed_structure(user.loc)
 	switch(direction)
-
 		if(NORTH)
 			S.pixel_y = S.base_pixel_y - 32
 		if(SOUTH)

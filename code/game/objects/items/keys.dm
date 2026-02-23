@@ -59,7 +59,7 @@
 	if(user.cmode)
 		return NONE
 
-	if(istype(tool, /obj/item/weapon/hammer))
+	if(!istype(tool, /obj/item/weapon/hammer))
 		return NONE
 
 	if(lockids)

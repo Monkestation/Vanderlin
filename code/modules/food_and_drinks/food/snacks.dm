@@ -436,7 +436,7 @@ All foods are distributed among various categories. Use common sense.
 
 	on_consume(eater)
 
-	user.changeNext_move(CLICK_CD_MELEE)
+	user.changeNext_move(CLICK_CD_FAST)
 
 	if(!reagents?.total_volume)
 		qdel(src)
