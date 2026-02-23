@@ -204,7 +204,7 @@
 
 	starting_atom = /obj/item/natural/fibers
 	attacked_atom = /obj/item/reagent_containers/glass/bottle
-	output = /obj/item/explosive/hellfire
+	output = /obj/item/explosive/hell_fire
 	craft_time = 1 SECONDS
 	subtypes_allowed = TRUE
 	reagent_subtypes_allowed = TRUE
