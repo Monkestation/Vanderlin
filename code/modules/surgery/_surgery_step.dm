@@ -193,7 +193,7 @@
 /datum/surgery_step/proc/play_success_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!success_sound)
 		return
-	playsound(get_turf(target), success_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
+	playsound(target, success_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
 /**
  * When fail_prob triggers, we fail.
@@ -225,7 +225,7 @@
 /datum/surgery_step/proc/play_failure_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(!failure_sound)
 		return
-	playsound(get_turf(target), failure_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
+	playsound(target, failure_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
 /// Replaces visible_message during operations so only people looking over the surgeon can see them.
 /datum/surgery_step/proc/display_results(mob/user, mob/living/target, self_message, detailed_message, vague_message, target_detailed = FALSE)

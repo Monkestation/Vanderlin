@@ -74,16 +74,17 @@
 
 	return prioritized
 
-/obj/machinery/essence/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(!istype(weapon, /obj/item/essence_connector))
-		return
+/obj/machinery/essence/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/essence_connector))
+		return NONE
+
 	if(length(output_connections) || length(input_connections))
 		show_connection_menu(user)
 
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/essence/proc/show_connection_menu(mob/user)
 	var/list/options = list()
