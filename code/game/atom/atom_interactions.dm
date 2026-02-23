@@ -37,6 +37,10 @@
 	if(interact_return)
 		return interact_return
 
+	if(!user.cmode && user.try_recipes(src, tool))
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
+
 	var/tool_type = tool.tool_behaviour
 	if(!tool_type) // here on only deals with ... tools
 		return NONE
@@ -51,10 +55,6 @@
 
 	if(QDELETED(tool))
 		return ITEM_INTERACT_SUCCESS // Safe-ish to assume that if we deleted our item something succeeded
-
-	if(!user.cmode && user.try_recipes(src, tool))
-		user.changeNext_move(CLICK_CD_FAST)
-		return ITEM_INTERACT_SUCCESS
 
 	var/act_result = NONE // or FALSE, or null, as some things may return
 

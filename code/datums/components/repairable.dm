@@ -60,7 +60,6 @@
 		if(!istype(tool, item_repair_broken))
 			return ITEM_INTERACT_BLOCKING
 
-		. = COMPONENT_NO_AFTERATTACK
 		INVOKE_ASYNC(src, PROC_REF(async_start), source, user, tool, modifiers)
 		return ITEM_INTERACT_SUCCESS
 
