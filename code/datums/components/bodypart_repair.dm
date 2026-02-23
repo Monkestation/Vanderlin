@@ -7,51 +7,49 @@
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/easy_repair/RegisterWithParent()
-	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attacked))
+	RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interact))
 
 /datum/component/easy_repair/UnregisterFromParent()
-	UnregisterSignal(parent, COMSIG_ATOM_ATTACKBY)
+	UnregisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION)
 
-/datum/component/easy_repair/proc/on_attacked(datum/source, obj/item/held, mob/living/carbon/attacker, modifiers)
+/datum/component/easy_repair/proc/on_item_interact(datum/source, mob/living/user, obj/item/tool, modifiers)
 	SIGNAL_HANDLER
 
+	if(user.cmode)
+		return NONE
+
 	var/mob/living/carbon/carbon_parent = parent
-	if(attacker == carbon_parent)
-		return
+	if(user == carbon_parent)
+		return NONE
 
-	if(!held || !(istype(held, /obj/item/weapon/hammer)))
-		return
+	if(!istype(tool, /obj/item/weapon/hammer))
+		return NONE
 
-	if(attacker.cmode)
-		return
-
-	var/zone = attacker.zone_selected
-	var/obj/item/bodypart/targeted_part = carbon_parent.get_bodypart(zone)
+	var/obj/item/bodypart/targeted_part = carbon_parent.get_bodypart(user.zone_selected)
 
 	if(!targeted_part)
-		return
+		return NONE
 
 	if(targeted_part.status != BODYPART_ROBOTIC)
-		return NONE // not robotic, do nothing
+		return NONE
 
-	INVOKE_ASYNC(src, TYPE_PROC_REF(/datum/component/easy_repair, try_heal), source, held, attacker, modifiers)
+	INVOKE_ASYNC(src, PROC_REF(try_heal), user, tool, targeted_part)
 
-	return COMPONENT_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
 
-/datum/component/easy_repair/proc/try_heal(datum/source, obj/item/held, mob/living/carbon/attacker, modifiers)
+/datum/component/easy_repair/proc/try_heal(mob/living/user, obj/item/tool, obj/item/bodypart/repaired)
 	var/mob/living/carbon/carbon_parent = parent
-	var/zone = attacker.zone_selected
-	var/obj/item/bodypart/targeted_part = carbon_parent.get_bodypart(zone)
+
 	var/damaged = TRUE
 	while(damaged)
-		if(!do_after(attacker, 3 SECONDS, parent))
+		if(!do_after(user, 3 SECONDS, carbon_parent))
 			return
-		held.play_tool_sound(carbon_parent)
-		var/heal_value = held.force * max(1, (0.5 * attacker.get_skill_level(/datum/skill/craft/engineering)))
-		targeted_part.heal_damage(heal_value,heal_value) // repairs brute and burn equal to tool force
-		attacker.visible_message(
-			span_notice("[attacker] taps [carbon_parent]'s [targeted_part.name] with [held], straightening out the damage."),
-			span_notice("You tap [carbon_parent]'s [targeted_part.name] with [held], repairing some damage.")
+		tool.play_tool_sound(carbon_parent)
+		var/heal_value = tool.force * max(1, (0.5 * user.get_skill_level(/datum/skill/craft/engineering)))
+		repaired.heal_damage(heal_value, heal_value) // repairs brute and burn equal to tool force
+		user.visible_message(
+			span_notice("[user] taps [carbon_parent]'s [repaired.name] with [tool], straightening out the damage."),
+			span_notice("You tap [carbon_parent]'s [repaired.name] with [tool], repairing some damage.")
 		)
 		damaged = carbon_parent.getBruteLoss() + carbon_parent.getFireLoss()
-		attacker.adjust_experience(/datum/skill/craft/engineering, 10)
+		user.adjust_experience(/datum/skill/craft/engineering, 10)

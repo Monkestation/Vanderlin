@@ -17,11 +17,11 @@
 	x_offset = x
 	y_offset = y
 	starting_angle = rotation
-	RegisterSignal(target, COMSIG_ITEM_ATTACK_OBJ, PROC_REF(tuck_into_bed))
+	RegisterSignal(target, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(tuck_into_bed))
 
 /datum/element/bed_tuckable/Detach(obj/target)
 	. = ..()
-	UnregisterSignal(target, list(COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_PICKUP))
+	UnregisterSignal(target, list(COMSIG_ITEM_INTERACTING_WITH_ATOM, COMSIG_ITEM_PICKUP))
 
 /**
  * Tuck our object into bed.
@@ -30,14 +30,14 @@
  * target_bed - the bed we're tucking them into
  * tucker - the guy doing the tucking
  */
-/datum/element/bed_tuckable/proc/tuck_into_bed(obj/item/tucked, obj/structure/bed/target_bed, mob/living/tucker)
+/datum/element/bed_tuckable/proc/tuck_into_bed(obj/item/tucked, mob/living/tucker, obj/structure/bed/target_bed)
 	SIGNAL_HANDLER
 
 	if(!istype(target_bed))
-		return
+		return NONE
 
 	if(!tucker.transferItemToLoc(tucked, target_bed.drop_location()))
-		return
+		return NONE
 
 	if(istype(tucked, /obj/item/bedsheet))
 		var/obj/item/bedsheet/sheet = tucked
@@ -48,6 +48,7 @@
 		tucker.nobles_seen_servant_work()
 	else
 		to_chat(tucker, span_notice("You lay [tucked] out on [target_bed]."))
+
 	tucked.dir = target_bed.dir
 	tucked.pixel_x = tucked.base_pixel_x + (target_bed.dir & EAST ? -x_offset : x_offset)
 	tucked.pixel_y = tucked.base_pixel_y + y_offset + target_bed.pixel_y
@@ -58,7 +59,7 @@
 		tucked.transform = turn(tucked.transform, rotation_degree)
 		RegisterSignal(tucked, COMSIG_ITEM_PICKUP, PROC_REF(untuck))
 
-	return COMPONENT_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
 
 /**
  * If we rotate our object, then we need to un-rotate it when it's picked up
