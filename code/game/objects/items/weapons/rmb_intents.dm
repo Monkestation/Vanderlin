@@ -145,7 +145,7 @@
 		user.apply_status_effect(/datum/status_effect/debuff/feintcd)
 		if(special_message)
 			to_chat(user, special_message)
-		return
+		return TRUE
 
 	if(defender.has_status_effect(/datum/status_effect/buff/clash))
 		defender.remove_status_effect(/datum/status_effect/buff/clash)
