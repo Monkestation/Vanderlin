@@ -35,7 +35,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 4,
 		/datum/skill/misc/stealing = 4,
 		/datum/skill/misc/lockpicking = 4,

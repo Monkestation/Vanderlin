@@ -42,7 +42,7 @@
 		/datum/skill/misc/reading = 2,
 		/datum/skill/magic/holy = 2,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/sewing = 2
+		/datum/skill/craft/sewing = 2
 	)
 
 	traits = list(

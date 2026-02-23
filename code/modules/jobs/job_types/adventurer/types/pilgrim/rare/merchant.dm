@@ -21,7 +21,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/alchemy = 1,
 		/datum/skill/labor/mathematics = 5
 	)
@@ -45,7 +45,7 @@
 			if("HEAL")
 				spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 			if("SILK")
-				spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+				spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
 			if("GEMS")
 				spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 	// Randomize it again for the next possible merchant

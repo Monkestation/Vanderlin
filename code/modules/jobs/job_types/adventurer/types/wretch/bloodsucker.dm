@@ -235,7 +235,7 @@
 
 	picker.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
 	picker.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-	picker.adjust_skillrank(/datum/skill/misc/sewing, 4, TRUE)
+	picker.adjust_skillrank(/datum/skill/craft/sewing, 4, TRUE)
 	picker.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 
 	picker.base_fortune = rand(7, 20)
@@ -259,7 +259,7 @@
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/unarmed = 5,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/carpentry = 3
 	)

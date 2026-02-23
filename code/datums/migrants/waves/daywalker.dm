@@ -24,7 +24,7 @@
 		/datum/skill/misc/climbing = 5,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/medicine = 2,
 		///removed firearms skill, why did they even get this?

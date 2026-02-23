@@ -33,7 +33,7 @@
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/reading = 5,
 		/datum/skill/labor/mathematics = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/medicine = 5,
 		/datum/skill/craft/alchemy = 3,
