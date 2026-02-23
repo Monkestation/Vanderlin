@@ -153,3 +153,59 @@
 	output = /obj/item/smokebomb/napgas
 	craft_time = 1 SECONDS
 	subtypes_allowed = TRUE
+
+
+/datum/repeatable_crafting_recipe/bomb/dynamite
+	name = "Blast Gel"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/spiderhoney = 1,
+		/obj/item/alch/feaudust = 1,
+		/obj/item/alch/firedust = 2,
+		/obj/item/ammo_casing/caseless/grenadeshell = 1,
+		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,
+		/obj/item/natural/fibers = 1,
+	)
+	starting_atom = /obj/item/natural/fibers
+	attacked_atom = /obj/item/ammo_casing/caseless/grenadeshell
+	output = /obj/item/explosive/dynamite
+	craft_time = 11 SECONDS
+	craftdiff = 5
+	subtypes_allowed = TRUE
+	reagent_subtypes_allowed = TRUE
+
+/datum/repeatable_crafting_recipe/bomb/flashpowder
+	name = "Flashpowder"
+
+	requirements = list(
+		/obj/item/reagent_containers/powder/blastpowder = 1,
+		/obj/item/alch/irondust = 2,
+	)
+	tool_usage = list(
+		/obj/item/pestle = list(span_notice("starts to grind together"), span_notice("start to grind together"), 'sound/foley/mortarpestle.ogg'),
+	)
+
+	attacked_atom = /obj/item/reagent_containers/glass/mortar
+	starting_atom = /obj/item/pestle
+	output = /obj/item/reagent_containers/powder/flashpowder
+	output_amount = 3
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/bomb/hellfire
+	name = "Silver bomb"
+
+	requirements = list(
+		/obj/item/natural/fibers = 1,
+		/obj/item/reagent_containers/powder/blastpowder = 1,
+		/obj/item/reagent_containers/glass/bottle = 1,
+		/obj/item/alch/silverdust = 1,
+		/obj/item/reagent_containers/food/snacks/tallow/red =1,
+	)
+
+	starting_atom = /obj/item/natural/fibers
+	attacked_atom = /obj/item/reagent_containers/glass/bottle
+	output = /obj/item/explosive/hellfire
+	craft_time = 1 SECONDS
+	subtypes_allowed = TRUE
+	reagent_subtypes_allowed = TRUE
+	craftdiff = 1
