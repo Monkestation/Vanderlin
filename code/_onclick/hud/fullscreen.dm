@@ -296,8 +296,8 @@
 	//color = SSoutdoor_effects.last_color
 
 /atom/movable/screen/fullscreen/lighting_backdrop/sunlight/Destroy()
-	. = ..()
 	SSoutdoor_effects.sunlighting_planes -= src
+	return ..()
 
 /atom/movable/screen/fullscreen/astral_border
 	icon = 'icons/mob/screens/vampire.dmi'

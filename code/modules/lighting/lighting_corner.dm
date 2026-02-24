@@ -111,7 +111,7 @@
 	var/lum_r = src.lum_r
 	var/lum_g = src.lum_g
 	var/lum_b = src.lum_b
-	var/largest_color_luminosity  = max(lum_r, lum_g, lum_b) // Scale it so one of them is the strongest lum, if it is above 1.
+	var/largest_color_luminosity = max(lum_r, lum_g, lum_b) // Scale it so one of them is the strongest lum, if it is above 1.
 	. = 1 // factor
 	if (largest_color_luminosity  > 1)
 		. = 1 / largest_color_luminosity
