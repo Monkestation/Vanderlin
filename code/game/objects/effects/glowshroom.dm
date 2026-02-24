@@ -57,7 +57,7 @@
 /obj/structure/kneestingers/Initialize(mapload, obj/item/neuFarm/seed/newseed, mutate_stats)
 	. = ..()
 
-	set_light(1.5, 1.5, 1.5, l_color ="#d4fcac")
+	set_light(1.5, 1.5, l_color ="#d4fcac")
 
 	if(icon_state == "glowshroom1" )
 		icon_state = "glowshroom[rand(1,3)]"

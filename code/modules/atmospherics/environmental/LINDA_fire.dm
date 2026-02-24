@@ -22,7 +22,7 @@
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
 	layer = GASFIRE_LAYER
-	light_outer_range =  LIGHT_RANGE_FIRE
+	light_range =  LIGHT_RANGE_FIRE
 	light_color = LIGHT_COLOR_FIRE
 	blend_mode = BLEND_ADD
 
@@ -170,11 +170,6 @@
 	if(isliving(AM))
 		var/mob/living/L = AM
 		L.fire_act(1, 20)
-
-/obj/effect/dummy/lighting_obj/moblight/fire
-	name = "fire"
-	light_color = LIGHT_COLOR_FIRE
-	light_outer_range =  LIGHT_RANGE_FIRE
 
 /obj/effect/hotspot/proc/handle_automatic_spread()
 	///maybe add sound probably not

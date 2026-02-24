@@ -240,7 +240,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psycenser"
 	item_state = "psycenser"
-	light_outer_range = 8
+	light_range = 8
 	light_color ="#70d1e2"
 	possible_item_intents = list(/datum/intent/flail/strike/smash/golgotha)
 	fuel = 999 MINUTES

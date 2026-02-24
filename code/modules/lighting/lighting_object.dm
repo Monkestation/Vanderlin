@@ -6,6 +6,9 @@
 	///the turf that our light is applied to
 	var/turf/affected_turf
 
+// Global list of lighting underlays, indexed by z level
+GLOBAL_LIST_EMPTY(default_lighting_underlays_by_z)
+
 /datum/lighting_object/New(turf/source)
 	if(!isturf(source))
 		qdel(src, force=TRUE)
@@ -14,7 +17,7 @@
 
 	. = ..()
 
-	current_underlay = mutable_appearance(LIGHTING_ICON, "transparent", source.z, LIGHTING_PLANE, 255, appearance_flags = (RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM))
+	current_underlay = new(GLOB.default_lighting_underlays_by_z[source.z])
 
 	affected_turf = source
 	if(affected_turf.lighting_object)

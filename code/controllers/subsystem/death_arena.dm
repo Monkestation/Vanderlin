@@ -227,4 +227,4 @@ SUBSYSTEM_DEF(death_arena)
 
 /obj/structure/underworld/necra/Initialize()
 	. = ..()
-	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)

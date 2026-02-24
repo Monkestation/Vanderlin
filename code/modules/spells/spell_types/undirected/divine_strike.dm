@@ -38,7 +38,7 @@
 	. = ..()
 	if(istype(I) && !(I.item_flags & ABSTRACT))
 		buffed_item = WEAKREF(I)
-		if(!I.light_outer_range && I.light_system == STATIC_LIGHT)
+		if(!I.light_range && I.light_system == STATIC_LIGHT)
 			I.set_light(1)
 		RegisterSignal(I, COMSIG_ITEM_AFTERATTACK, PROC_REF(item_afterattack))
 	else

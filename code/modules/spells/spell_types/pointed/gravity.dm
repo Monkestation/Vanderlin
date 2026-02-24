@@ -44,5 +44,5 @@
 	randomdir = FALSE
 	duration = 3 SECONDS
 	light_power = 1
-	light_outer_range = 2
+	light_range = 2
 	light_color = COLOR_PALE_PURPLE_GRAY

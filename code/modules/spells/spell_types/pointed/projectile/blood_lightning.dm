@@ -34,7 +34,7 @@
 	nodamage = FALSE
 	speed = 0.3
 	light_color = "#802121"
-	light_outer_range =  7
+	light_range =  7
 
 /obj/projectile/magic/bloodlightning/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()

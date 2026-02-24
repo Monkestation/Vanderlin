@@ -334,19 +334,19 @@
 	name = "incoming acid"
 	color = "#00ff00"
 	light_color = "#00ff00"
-	light_outer_range = 3
+	light_range = 3
 
 /obj/effect/temp_visual/bombard_incoming/neurotoxin
 	name = "incoming neurotoxin"
 	color = "#9900ff"
 	light_color = "#9900ff"
-	light_outer_range = 3
+	light_range = 3
 
 /obj/effect/temp_visual/target/bombard_preview
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "trap"
 	layer = BELOW_MOB_LAYER
-	light_outer_range = 2
+	light_range = 2
 	duration = 0.5 SECONDS
 	alpha = 128
 
@@ -394,7 +394,7 @@
 	icon_state = "acid_weak"
 	color = "#00ff00"
 	light_color = "#00ff00"
-	light_outer_range = 3
+	light_range = 3
 
 /obj/effect/bombard_zone/acid/apply_effect(mob/living/M)
 	M.apply_damage(5, BURN)
@@ -406,7 +406,7 @@
 	icon_state = "smoke"
 	color = "#9900ff"
 	light_color = "#9900ff"
-	light_outer_range = 3
+	light_range = 3
 
 /obj/effect/bombard_zone/neurotoxin/apply_effect(mob/living/carbon/C)
 	C.adjustOxyLoss(3)
@@ -427,7 +427,7 @@
 	if(parent_zone)
 		color = parent_zone.color
 		light_color = parent_zone.light_color
-		light_outer_range = 1
+		light_range = 1
 
 #undef BOMBARD_ACID
 #undef BOMBARD_NEUROTOXIN

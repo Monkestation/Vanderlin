@@ -308,7 +308,7 @@
 	icon_state = "voidlamp"
 	item_state = "voidlamp"
 	desc = "An old lamptern that seems darker and darker the longer you look at it."
-	light_outer_range = 8
+	light_range = 8
 	light_color = "#000000"
 	light_power = -3
 	on = FALSE

@@ -7,7 +7,7 @@
 	has_initial_mana_pool = TRUE
 	plane = GAME_PLANE_UPPER
 	layer = ABOVE_MOB_LAYER
-	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = COLOR_CYAN
 	density = TRUE
 

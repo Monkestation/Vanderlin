@@ -164,9 +164,7 @@
 	/// Bitflags to determine lighting-related atom properties.
 	var/light_flags = NONE
 	/// Range of the maximum brightness of light in tiles. Zero means no light.
-	var/light_inner_range = 0
-	/// Range where light begins to taper into darkness in tiles.
-	var/light_outer_range = 0
+	var/light_range = 0
 	/// Intensity of the light. The stronger, the less shadows you will see on the lit area.
 	var/light_power = 1
 	/// Hexadecimal RGB string representing the colour of the light. White by default.
@@ -258,7 +256,7 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
+	if(light_system == STATIC_LIGHT && light_power && light_range)
 		update_light()
 
 	if(opacity && isturf(loc))

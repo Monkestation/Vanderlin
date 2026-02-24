@@ -88,7 +88,7 @@
 	visible_mask = new()
 	if(!isnull(_range))
 		movable_parent.set_light_range(_range, _range)
-	set_range(parent, movable_parent.light_inner_range, movable_parent.light_outer_range)
+	set_range(parent, movable_parent.light_range)
 	if(!isnull(_power))
 		movable_parent.set_light_power(_power)
 	set_power(parent, movable_parent.light_power)
@@ -279,13 +279,15 @@
 
 
 ///Changes the range which the light reaches. 0 means no light, 9 is the maximum value.
-/datum/component/overlay_lighting/proc/set_range(atom/source, old_inner_range, old_outer_range)
+/datum/component/overlay_lighting/proc/set_range(atom/source, old_range)
 	SIGNAL_HANDLER
-	var/new_range = source.light_outer_range
+
+	var/new_range = source.light_range
 	if(range == new_range)
 		return
 	if(range == 0)
 		turn_off()
+
 	range = clamp(CEILING(new_range, 0.5), 1, 9)
 	var/pixel_bounds = ((range - 1) * 64) + 32
 	lumcount_range = CEILING(range, 1)

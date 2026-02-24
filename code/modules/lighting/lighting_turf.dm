@@ -101,18 +101,3 @@
 	old_area.turfs_to_uncontain_by_zlevel[z] += src
 	new_area.turfs_by_zlevel[z] += src
 	new_area.contents += src
-
-/turf/proc/generate_missing_corners()
-	if(!lighting_corner_NE)
-		lighting_corner_NE = new/datum/lighting_corner(src, NORTH|EAST)
-
-	if(!lighting_corner_SE)
-		lighting_corner_SE = new/datum/lighting_corner(src, SOUTH|EAST)
-
-	if(!lighting_corner_SW)
-		lighting_corner_SW = new/datum/lighting_corner(src, SOUTH|WEST)
-
-	if(!lighting_corner_NW)
-		lighting_corner_NW = new/datum/lighting_corner(src, NORTH|WEST)
-
-	lighting_corners_initialised = TRUE
