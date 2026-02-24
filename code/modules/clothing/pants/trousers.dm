@@ -170,13 +170,12 @@
 	item_state = "gronnchainpants"
 
 /obj/item/clothing/pants/trou/leather/gronn
-name = "gronnic fur pants"
-desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
-		Those of Gronn adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
-icon_state = "gronnleatherpants"
-item_state = "gronnleatherpants"
-armor = ARMOR_GRONN_LIGHT
-max_integrity = ARMOR_INT_LEG_HARDLEATHER
-icon = 'icons/roguetown/clothing/special/gronn.dmi'
-mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
-
+	name = "gronnic fur pants"
+	desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
+			Those of Gronn adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
+	icon_state = "gronnleatherpants"
+	item_state = "gronnleatherpants"
+	armor = ARMOR_GRONN_LIGHT
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'

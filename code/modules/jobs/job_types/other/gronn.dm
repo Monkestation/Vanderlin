@@ -5,7 +5,6 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
-	outfit = /datum/outfit/job/mercenary/gronn
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
@@ -21,89 +20,122 @@
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 	)
 
-/datum/outfit/job/mercenary/gronn/pre_equip(mob/living/carbon/human/H)
-	..()
+	pack_title = "Available archetypes"
+	pack_message = "Choose your archetypes"
+	job_packs = list(
+		/datum/job_pack/gronn/grunt,
+		/datum/job_pack/gronn/ravager,
+	)
 
-	//Universal gear
-	backl = /obj/item/storage/backpack/satchel/black
-	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backpack_contents = list(
+/datum/job_pack/gronn/grunt
+	name = "Leðurháls - Byrine Grunt"
+	pack_skills = list(
+		/datum/skill/combat/swords = 4,
+		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/knives = 3,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+	)
+	pack_stats = list(
+		STAT_KEY_STR = 2,
+		STAT_KEY_PER = 2,
+		STAT_KEY_CON = 2,
+		STAT_KEY_INT = -1,
+	)
+	pack_contents = list(
+		/obj/item/storage/backpack/satchel/black = ITEM_SLOT_BACK_L,
+		/obj/item/storage/belt/leather = ITEM_SLOT_BELT,
+		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
+		/obj/item/clothing/shoes/boots/leather/atgervi =ITEM_SLOT_SHOES,
+		/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel = ITEM_SLOT_HEAD,
+		/obj/item/clothing/gloves/chain/gronn = ITEM_SLOT_GLOVES,
+		/obj/item/clothing/armor/brigandine/gronn = ITEM_SLOT_ARMOR,
+		/obj/item/clothing/pants/trou/leather/splint/gronn = ITEM_SLOT_PANTS,
+		/obj/item/clothing/wrists/bracers/iron = ITEM_SLOT_WRISTS,
+		/obj/item/weapon/shield/tower/buckleriron = ITEM_SLOT_BACK_R,
+		/obj/item/weapon/scabbard/sword = ITEM_SLOT_BELT_R,
+		/obj/item/clothing/neck/coif = ITEM_SLOT_NECK,
+	)
+	pack_backpack_contents = list(
 		/obj/item/flashlight/flare/torch/metal = 1,
 		/obj/item/key/mercenary = 1,
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/weapon/scabbard/knife = 1
-		)
+		/obj/item/weapon/scabbard/knife = 1,
+	)
 
-	// CLASS ARCHETYPES
-	if(H.mind)
-		var/classes = list("Leðurháls - Byrine Grunt", "Skemmdarvargur - Ravager")
-		var/classchoice = input(H, "Choose your archetypes", "Available archetypes") as anything in classes
+/datum/job_pack/gronn/grunt/pick_pack(mob/living/carbon/human/picker)
+	. = ..()
+	picker.merctype = 1
+	ADD_TRAIT(picker, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	picker.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 
-		switch(classchoice)
-			if("Leðurháls - Byrine Grunt")	//Medium armor, pick between swords or axes. Boots-on-the-ground for hire.
-				to_chat(H, span_warning("Clad in their unique leatherbound chainmaille and shortsword, The Danheim Leðurháls - roughly translated in Imperial to 'Leatherneck' due to their choice of leather gorgets over forged metal - are known for their harsh dogmatisms and steady personalities."))
-				shoes = /obj/item/clothing/shoes/boots/leather/atgervi
-				head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
-				gloves = /obj/item/clothing/gloves/chain/gronn
-				armor = /obj/item/clothing/armor/brigandine/gronn
-				pants = /obj/item/clothing/pants/trou/leather/splint/iron/gronn
-				wrists = /obj/item/clothing/wrists/bracers/iron
-				backr = /obj/item/weapon/shield/tower/buckleriron
-				beltr = /obj/item/weapon/scabbard/sword
-				l_hand = /obj/item/weapon/sword/short/gronn //New heavy shortsword.
-				neck = /obj/item/clothing/neck/coif
-				H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-				H.change_stat(STATKEY_STR, 2)
-				H.change_stat(STATKEY_PER, 2) //You technically wield a shortsword
-				H.change_stat(STATKEY_CON, 2)
-				H.change_stat(STATKEY_INT, -1) //Unga swordsman.
-				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-				H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
+	var/obj/item/weapon/sword/short/gronn/item = new()
+	picker.put_in_hands(item, forced = TRUE) //New heavy shortsword
 
+/datum/job_pack/gronn/ravager
+	name = "Skemmdarvargur - Ravager"
+	pack_skills = list(
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/whipsflails = 3,
+		/datum/skill/combat/shields = 3,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/athletics = 4,
+		/datum/skill/combat/wrestling = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/craft/traps = 3,
+	)
+	pack_stats = list(
+		STAT_KEY_CON = 2,
+		STAT_KEY_SPD = 2,
+	)
+	pack_contents = list(
+		/obj/item/storage/backpack/satchel/black = ITEM_SLOT_BACK_L,
+		/obj/item/storage/belt/leather = ITEM_SLOT_BELT,
+		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
+		/obj/item/clothing/shoes/boots/leather/atgervi = ITEM_SLOT_SHOES,
+		/obj/item/clothing/head/helmet/bascinet/atgervi/gronn = ITEM_SLOT_HEAD,
+		/obj/item/clothing/gloves/angle/gronnfur = ITEM_SLOT_GLOVES,
+		/obj/item/clothing/armor/leather/heavy/gronn = ITEM_SLOT_ARMOR,
+		/obj/item/clothing/wrists/bracers/leather/masterwork = ITEM_SLOT_WRISTS,
+		/obj/item/clothing/pants/trou/leather/gronn = ITEM_SLOT_PANTS,
+		/obj/item/clothing/neck/coif = ITEM_SLOT_NECK,
+	)
+	pack_backpack_contents = list(
+		/obj/item/flashlight/flare/torch/metal = 1,
+		/obj/item/key/mercenary = 1,
+		/obj/item/weapon/knife/hunting = 1,
+		/obj/item/weapon/scabbard/knife = 1,
+	)
 
+/datum/job_pack/gronn/ravager/pick_pack(mob/living/carbon/human/picker)
+	. = ..()
+	picker.merctype = 1
+	ADD_TRAIT(picker, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
+	picker.dna.species.soundpack_m = new /datum/voicepack/male/evil() //Dodge builds are evil
 
-			if("Skemmdarvargur - Ravager")	//Light armor, beast claws or dual handaxes.
-				to_chat(H, span_warning("The Skemmdarvargur are famously known to hail from the northern city of Skugge, the first line of defense for the Northern Empty. Although highly superstitious with their various carved armaments, they lack the mystical miracles of the Iskarn Shamans."))
-				shoes = /obj/item/clothing/shoes/boots/leather/atgervi
-				head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn
-				gloves = /obj/item/clothing/gloves/angle/gronnfur
-				armor = /obj/item/clothing/armor/leather/heavy/gronn
-				wrists = /obj/item/clothing/wrists/bracers/leather/masterwork
-				pants = /obj/item/clothing/pants/trou/leather/gronn
-				neck = /obj/item/clothing/neck/coif
-				H.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 2, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 3, 3, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/shields, 3, 3, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 2, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 4, 4, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 3, 3, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 2, 2, TRUE)
-				H.clamped_adjust_skillrank(/datum/skill/craft/traps, 3, 3, TRUE)//Ditto
-				H.change_stat(STATKEY_CON, 2)
-				H.change_stat(STATKEY_SPD, 2)
-				ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-				H.dna.species.soundpack_m = new /datum/voicepack/male/evil() //Dodge builds are evil
-				var/weapons = list("Handclaws","Dual Handaxes")
-				var/weapon_choice = input(H, "Choose your weapon.", "TAKE UP ARMS") as anything in weapons
-				if(H.mind)
-					switch(weapon_choice)
-						if("Handclaws")
-							H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, SKILL_LEVEL_EXPERT, TRUE)
-							l_hand = /obj/item/weapon/handclaw/gronn //You dont get the insane fucking steel or the special Iskarn ones
-						if("Dual Handaxes")
-							H.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, SKILL_LEVEL_EXPERT, SKILL_LEVEL_EXPERT, TRUE)
-							r_hand = /obj/item/weapon/axe/stone
-							l_hand = /obj/item/weapon/axe/stone
-							ADD_TRAIT(H, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+	var/static/list/selectable = list(
+        "Handclaws" = /obj/item/weapon/handclaw/gronn, //You dont get the insane fucking steel or the special Iskarn ones
+		"Dual Handaxes" = /obj/item/weapon/axe/stone,
+    )
 
-	H.merctype = 1
+	var/choice = picker.select_equippable(picker, selectable, message = "Choose your weapon.", title = "TAKE UP ARMS")
+
+	if(!choice)
+		return
+
+	switch(choice)
+		if("Handclaws")
+			picker.clamped_adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_EXPERT, SKILL_LEVEL_EXPERT, TRUE)
+
+		if("Dual Handaxes")
+			picker.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, SKILL_LEVEL_EXPERT, SKILL_LEVEL_EXPERT, TRUE)
+			ADD_TRAIT(picker, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+
+			//and another
+			var/obj/item/weapon/axe/stone/ax = new(picker.loc)
+			picker.equip_to_appropriate_slot(ax)
 
 //the scary mook
 /datum/job/advclass/mercenary/gronnheavy
@@ -144,7 +176,7 @@
 /datum/outfit/job/mercenary/gronnheavy/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.dna.species.soundpack_m = new /datum/voicepack/male/evil() //It's fucking cool okay
-	shoes = /obj/item/clothing/shoes/boots/armor/iron/gronn
+	shoes = /obj/item/clothing/shoes/boots/armor/gronn
 	head = /obj/item/clothing/head/helmet/heavy/bucket/gronn
 	gloves = /obj/item/clothing/gloves/plate/iron/gronn
 	armor = /obj/item/clothing/armor/plate/iron/gronn
@@ -166,7 +198,7 @@
 	H.merctype = 1
 
 //the special mooks
-/datum/job/advclass/mercenary/shamanaaa
+/datum/job/advclass/mercenary/shaman
 	title = "Atgervi Shaman"
 	tutorial = "You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast Gods through ritualistic violence, rather than idle prayer."
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervishaman
@@ -194,6 +226,12 @@
 		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/magic/holy = SKILL_LEVEL_JOURNEYMAN,
 	)
+
+/datum/job/advclass/mercenary/shaman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/datum/devotion/cleric = new /datum/devotion(spawned, spawned.patron)
+	cleric.grant_to(spawned)
+	cleric.make_shaman()//Capped to T2 miracles.
 
 /datum/outfit/job/roguetown/mercenary/atgervishaman/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -228,10 +266,6 @@
 			neck = /obj/item/clothing/neck/psycross/dendor/gronn
 		else
 			neck = /obj/item/clothing/neck/psycross/inhumen/gronn/special //Failsafe. Gives a specially-fluffed version of Zizo's talisman, which can be reinterpreted as needed.
-
-	var/datum/devotion/cleric = new /datum/devotion(H, H.patron)
-	cleric.grant_to(H)
-	cleric.make_shaman()//Capped to T2 miracles.
 
 	backpack_contents = list(
 		/obj/item/key/mercenary = 1,
