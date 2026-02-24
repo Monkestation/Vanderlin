@@ -10,14 +10,16 @@
 	speed = 0.9
 	reduce_crit_chance = 1
 
-/obj/projectile/bullet/hellfire/Initialize(mapload)
+/obj/projectile/bullet/hellfire/on_hit(target)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	var/datum/species/bang = /datum/species/werewolf || target.mind.has_antag_datum(/datum/antagonist/vampire)
+		target.fire_act(30)
+		target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 
 /obj/item/explosive/hell_fire
 	name = "Psydons rebuke"
 	desc = "Once long ago, there was an outbreak of lycanthropia in Grenzelhoft, one stamped out by the populace with tenacity and blastpowder. This design of grenade is a sloppy yet effective weapon which is often used by the poor underclass in defense of nite-beasts.  Praise psydon, for it is he who grants us these gifts to make all those who prowl the nite run in fear. There is too little silver to harm vampires."
-	icon_state = "hellfire" ///This is a REALLY badly sprited bomb, mainly because I do not want to steal from the grenade shell sprite again.
+	icon_state = "hellfire"
 	icon = 'icons/obj/bombs.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
 	throwforce = 0
