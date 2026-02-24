@@ -187,7 +187,7 @@
 	if(clan)
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
 	if(cleric)
-		. += "Devotion: [cleric.devotion]/[cleric.max_devotion]"
+		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
