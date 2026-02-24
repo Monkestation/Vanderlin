@@ -23,7 +23,7 @@
 		/datum/skill/misc/stealing = 4, // Worse than a Thief, but still very possible to pickpocket
 		/datum/skill/combat/bows = 3,
 		/datum/skill/craft/tanning = 2, // Dendor asks us to use every part of the beast
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/craft/carpentry = 1, // Can upgrade to Longbow if they desire to

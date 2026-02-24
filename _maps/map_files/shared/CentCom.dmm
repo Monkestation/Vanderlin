@@ -586,7 +586,6 @@
 /area/indoors/vampire_manor)
 "bS" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/weapon/sword/long/vlord,
 /obj/structure/fluff/walldeco/mona{
 	pixel_x = -14
 	},
@@ -3846,10 +3845,11 @@
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
 /obj/item/weapon/knife/copper,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/twig,
 /area/under/cavelava/acid)
 "vH" = (

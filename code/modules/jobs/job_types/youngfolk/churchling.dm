@@ -33,7 +33,7 @@
 		/datum/skill/misc/sneaking = 4,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/magic/holy = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/craft/cooking = 1

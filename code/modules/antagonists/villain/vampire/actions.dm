@@ -1,3 +1,53 @@
+/mob/living/carbon/human/proc/sire_spawn()
+	set name = "Sire Mortal"
+	set category = "RoleUnique.Vampire"
+
+	if(!mind)
+		return
+
+	if(!clan)
+		return
+	if(!clan_position?.can_assign_positions)
+		to_chat(src, span_warning("I cannot sire..."))
+		return
+
+	var/obj/item/grabbing/bite/bite = get_item_by_slot(ITEM_SLOT_MOUTH)
+	if(!ishuman(bite?.grabbed) || bite.sublimb_grabbed != BODY_ZONE_PRECISE_NECK)
+		to_chat(src, span_warning("I must have someone's neck within my jaws."))
+		return
+	var/mob/living/carbon/human/victim = bite.grabbed
+	if(!(victim.ckey || ckey(victim.last_mind?.key)))
+		to_chat(src, span_warning("[victim.p_theyre(TRUE)] too simple to be sired."))
+		return
+	if(HAS_TRAIT(victim, "offered_vampirism"))
+		to_chat(src, span_warning("[victim.p_theyve(TRUE)] already been offered a blessing."))
+		return
+	var/obj/item/organ/brain/victim_brain = victim.getorgan(/obj/item/organ/brain)
+	if(!victim_brain)
+		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is gone."))
+		return
+	if(victim_brain.brain_death)
+		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is too damaged."))
+		return
+	if(victim.blood_volume > BLOOD_VOLUME_BAD)
+		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to sire [victim.p_them()]."))
+		return
+	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
+	if(Z?.revived)
+		to_chat(src, span_warning("The dead already walk. This one is the Dark Lady's servant."))
+	if(victim.clan || victim.mind.has_antag_datum(/datum/antagonist/vampire))
+		to_chat(src, span_warning("[victim] has already been sired."))
+		return
+	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(src, span_warning("[victim] tastes of beast. [victim.p_they()] will not sire."))
+		return
+	if(stat == DEAD && (world.time - victim.timeofdeath) > 4 MINUTES)
+		to_chat(src, span_warning("[victim.p_their(TRUE)] body has gone stiff. Too far gone to sire."))
+		return
+	if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
+		to_chat(src, span_warning("I decide [victim] is unworthy."))
+		return
+	INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
 
 /mob/living/carbon/human/proc/vampire_telepathy()
 	var/TELEPATHY_COOLDOWN = 30 SECONDS

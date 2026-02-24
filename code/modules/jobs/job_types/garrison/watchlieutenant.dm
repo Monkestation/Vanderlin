@@ -17,7 +17,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50

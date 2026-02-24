@@ -3623,6 +3623,7 @@
 #include "code\modules\spells\spell_types\undirected\conjure_item\summon_lockpick.dm"
 #include "code\modules\spells\spell_types\undirected\conjure_item\summon_parchment.dm"
 #include "code\modules\spells\spell_types\undirected\conjure_item\summon_trident.dm"
+#include "code\modules\spells\spell_types\undirected\conjure_item\vamp_sword.dm"
 #include "code\modules\spells\spell_types\undirected\jaunt\_jaunt.dm"
 #include "code\modules\spells\spell_types\undirected\jaunt\bush_jaunt.dm"
 #include "code\modules\spells\spell_types\undirected\jaunt\ethereal_jaunt.dm"

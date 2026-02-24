@@ -222,7 +222,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_STEELHEARTED
 	)
 
@@ -334,6 +334,9 @@
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd(get_turf(spawned)), TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+	if(spawned.dna?.species.id == SPEC_ID_HUMEN)
+		spawned.dna.species.native_language = "Psydonic"
+		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/vet/merc
 	name = "Retired Mercenary (Veteran)"
