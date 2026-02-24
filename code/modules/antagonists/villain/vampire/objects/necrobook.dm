@@ -1,5 +1,5 @@
-#define SUN_STEAL_COST 5000
-#define DEATH_KNIGHT_COST 2500
+#define SUN_STEAL_COST 4500
+#define DEATH_KNIGHT_COST 3000
 
 /obj/structure/vampire/necromanticbook // Used to summon undead to attack town/defend manor.
 	name = "Tome of Souls"

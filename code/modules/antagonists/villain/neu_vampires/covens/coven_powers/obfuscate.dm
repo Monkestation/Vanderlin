@@ -286,6 +286,7 @@
 		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
 		/datum/coven_power/obfuscate/cloak_the_gathering
 	)
+	violates_masquerade = FALSE
 
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye/activate()
 	. = ..()
@@ -339,6 +340,7 @@
 		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
 		/datum/coven_power/obfuscate/cloak_the_gathering
 	)
+	violates_masquerade = TRUE
 
 /datum/coven_power/obfuscate/cloak_the_gathering/pre_activation_checks()
 	. = ..()

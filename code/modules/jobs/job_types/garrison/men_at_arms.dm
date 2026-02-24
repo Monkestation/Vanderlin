@@ -15,7 +15,7 @@
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/watchman

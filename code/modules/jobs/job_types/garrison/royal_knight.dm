@@ -59,7 +59,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)

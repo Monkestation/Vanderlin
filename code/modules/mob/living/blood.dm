@@ -97,6 +97,8 @@
 	if(!(sigreturn & HANDLE_BLOOD_NO_NUTRITION_DRAIN))
 		if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
 			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5)
+		if(stat != DEAD && HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
+			adjust_bloodpool(3)
 
 	//Effects of bloodloss
 	if(!(sigreturn & HANDLE_BLOOD_NO_EFFECTS))
@@ -235,6 +237,28 @@
 	AM.reagents.add_reagent(blood.reagent_type, amount, blood.get_blood_data(src), bodytemperature)
 	return 1
 
+/// Transfers the blood of a mob factoring in the impure reagents in their blood
+/// Returns the actual amount of blood transferred
+/mob/living/proc/transfer_blood_impurities(datum/reagents/transfer_to, amount, impurity_mult = BLOODLETTING_MULT, mob/transferred_by)
+	var/blacklisted_reagents = list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup)
+	var/blood_purity = 1 // what % of the amt are we actually taking as blood?
+	amount = min(amount, transfer_to.maximum_volume - transfer_to.total_volume) // the volume of our transfer
+	if(reagents.total_volume)
+		var/impurity_volume = reagents.total_volume
+		for(var/reagent_type in blacklisted_reagents)
+			impurity_volume -= reagents.get_reagent_amount(reagent_type, FALSE)
+		if(impurity_volume > 0)
+			blood_purity = blood_volume / (blood_volume + impurity_volume)
+			reagents.trans_to(transfer_to, amount * impurity_mult * (1 - blood_purity), transfered_by=transferred_by, ignored_reagents=blacklisted_reagents)
+	var/blood_transferred = min(blood_volume, amount * blood_purity)  // how much of the drip is straight up blood, final value
+	var/datum/blood_type/blood = get_blood_type()
+	var/list/blood_data = blood?.get_blood_data(src)
+	var/datum/reagents/holder = new(maximum = blood_transferred)
+	// if someone adds kool aid as a blood type then blood_data here might need some work
+	holder.add_reagent(blood.reagent_type, blood_transferred, blood_data, no_react = TRUE)
+	holder.trans_to(transfer_to, blood_transferred, method = INGEST)
+	return blood_transferred
+
 
 /mob/living/proc/get_blood_type()
 	RETURN_TYPE(/datum/blood_type)
@@ -331,12 +355,14 @@
 			W.water_maximum = 10
 			W.water_volume = 10
 			return
-	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
+
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
+
+	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in T
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(src))
-	else
+		amt = amt - transfer_blood_impurities(container.reagents, amt, BLOODLETTING_MULT, src,  list(/datum/reagent/steam, /datum/reagent/water, /datum/reagent/blood, /datum/reagent/consumable/nutriment, /datum/reagent/consumable/soup))
+
+	if(amt > 0.5)
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in T
 		if(P)
 			P.blood_vol += amt

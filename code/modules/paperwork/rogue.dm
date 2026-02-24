@@ -489,7 +489,7 @@
 	. = ..()
 	if(!user.mind)
 		return
-	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+	if(!HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(user, TRAIT_NOBLE_POWER))
 		return
 	if(length(fingers) >= names)
 		to_chat(user, span_notice("[src] is full"))

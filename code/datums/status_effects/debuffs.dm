@@ -154,7 +154,7 @@
 
 	if(ishuman(owner) && sleptonground)
 		var/mob/living/carbon/human/human_owner = owner
-		if(HAS_TRAIT(human_owner, TRAIT_NOBLE))
+		if(HAS_TRAIT(human_owner, TRAIT_NOBLE_BLOOD))
 			human_owner.add_stress(/datum/stress_event/sleepfloornoble)
 		else
 			human_owner.add_stress(/datum/stress_event/sleepfloor)

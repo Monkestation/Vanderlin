@@ -8,6 +8,7 @@
 	name = "Celerity power name"
 	desc = "Celerity power description"
 	var/multiplicative_slowdown = -0.5
+	violates_masquerade = TRUE
 
 /obj/effect/celerity
 	name = "Afterimage"
