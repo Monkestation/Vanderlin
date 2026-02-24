@@ -328,13 +328,13 @@
 		if("Zweihander")
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // Changed it to two so you dont get the chance to not have strengh to wield weapon
+			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
 		if("Halberd")
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd(get_turf(spawned)), TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 	if(spawned.dna?.species.id == SPEC_ID_HUMEN)
-		spawned.dna.species.native_language = "Old Psydonic"
+		spawned.dna.species.native_language = "Psydonic"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
 
 /datum/outfit/vet/merc
@@ -343,7 +343,7 @@
 	wrists = /obj/item/clothing/wrists/bracers
 	shirt = /obj/item/clothing/shirt/grenzelhoft
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
-	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
+	armor = /obj/item/clothing/armor/cuirass/iron
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
