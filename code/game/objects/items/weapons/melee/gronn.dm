@@ -168,6 +168,7 @@
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
 	name = "maul"
 	desc = "Who would need something this large? It looks like it was made for tearing down walls, rather than men."
+	icon = 'icons/roguetown/weapons/64/maces.dmi'
 	icon_state = "sledge"
 	wlength = WLENGTH_LONG
 	swingsound = BLUNTWOOSH_HUGE
