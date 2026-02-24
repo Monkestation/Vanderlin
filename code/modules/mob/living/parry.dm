@@ -6,7 +6,19 @@
  * @return TRUE if parry successful, FALSE otherwise
  */
 /mob/living/proc/attempt_parry(datum/intent/intenty, mob/living/user, prob2defend)
-	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS) || (pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || (pulling && grab_state >= GRAB_AGGRESSIVE) ||  (world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte)) || has_status_effect(/datum/status_effect/debuff/feinted) || has_status_effect(/datum/status_effect/debuff/riposted) || (intenty && !intenty.canparry))
+	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
+		return FALSE
+
+	if(intenty && !intenty.canparry)
+		return FALSE
+
+	if(incapacitated())
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
 	last_parry = world.time
@@ -243,9 +255,11 @@
 	else
 		flash_fullscreen("blackflash2")
 
-	var/dam2take = round((get_complex_damage(AB, user, used_weapon.blade_dulling)/2), 1)
+	var/dam2take = round((get_complex_damage(AB, user, FALSE)/2), 1)
 	if(dam2take)
-		used_weapon.take_damage(max(dam2take, 1), BRUTE, used_weapon.damage_type)
+		var/intdam = used_weapon.max_blade_int ? INTEG_PARRY_DECAY : INTEG_PARRY_DECAY_NOSHARP
+		used_weapon.take_damage(intdam, BRUTE, used_weapon.damage_type)
+		used_weapon.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 
 /**
  * Handle parrying attacks with a weapon
@@ -274,13 +288,16 @@
 			src.visible_message("<span class='boldwarning'><b>[src]</b> ripostes [user] with [W]!</span>")
 		else if(istype(W, /obj/item/weapon/shield))
 			src.visible_message("<span class='boldwarning'><b>[src]</b> blocks [user] with [W]!</span>")
+		else
+			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
+		if(W.max_blade_int)
+			W.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 
 			// Check shield integrity
 			var/shieldur = round(((W.get_integrity() / W.max_integrity) * 100), 1)
 			if(shieldur <= 30)
 				src.visible_message("<span class='boldwarning'><b>\The [W] is about to break!</b></span>")
-		else
-			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
+
 	else
 		// Non-human parry (simpler)
 		if(W)

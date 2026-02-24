@@ -9,13 +9,13 @@
 	force = DAMAGE_WHIP
 	throwforce = DAMAGE_WHIP - 15
 	wdefense = BAD_PARRY
+	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
 	minstr = 4
 
 	sharpness = IS_BLUNT
-	//dropshrink = 0.75
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/skill/combat/whipsflails
@@ -44,6 +44,7 @@
 	minstr = 7
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 50
 
@@ -53,8 +54,10 @@
 	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on Nitebeasts."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip_lesser"
+	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
 
@@ -71,6 +74,7 @@
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
 
@@ -162,7 +166,7 @@
 	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/skill/craft/weaponsmithing
 
-/obj/item/weapon/whip/nagaika
+/obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
 	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
 	icon_state = "nagaika"
@@ -176,11 +180,12 @@
 	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP + 3
+	wbalance = HARD_TO_DODGE
 	wdefense = BAD_PARRY // Parrying with a whip sword is inherently badass, plus its a small benefit for it since its supposed to have less durability.
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
-	max_blade_int = 175
-	max_integrity = INTEGRITY_STANDARD
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
 	minstr = 5
 
 	anvilrepair = /datum/skill/craft/weaponsmithing
@@ -193,23 +198,26 @@
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
 	icon_state = "urumi_iron"
-	force = DAMAGE_WHIP + 2
-	melting_material = /datum/material/iron
+	force = DAMAGE_WHIP
 	max_blade_int = 150
+	max_integrity = INTEGRITY_STANDARD
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/whip/urumi/bronze
 	name = "bronze urumi"
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
-	melting_material = /datum/material/bronze
 	max_blade_int = 100
+	max_integrity = INTEGRITY_POOR
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
 	icon_state = "urumi_silver"
-	force = DAMAGE_WHIP + 2
+	force = DAMAGE_WHIP + 1
+	max_blade_int = 160
+	max_integrity = INTEGRITY_STRONG * 0.8
 	melting_material = /datum/material/silver
-	max_blade_int= 130
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

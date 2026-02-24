@@ -37,7 +37,7 @@
 
 /datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/townannouncement
+	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
 	var/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
@@ -57,7 +57,7 @@
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Elder Announcement"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Elder"
 	if(stat)
 		return
 
@@ -114,7 +114,7 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_SEEPRICES,
 		TRAIT_BARDIC_TRAINING
 	)
@@ -188,7 +188,7 @@
 		/datum/skill/craft/carpentry,
 		/datum/skill/craft/engineering,
 		/datum/skill/craft/smelting,
-		/datum/skill/misc/sewing,
+		/datum/skill/craft/sewing,
 		/datum/skill/labor/farming,
 		/datum/skill/misc/medicine,
 		/datum/skill/craft/tanning,
@@ -243,7 +243,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 2,
@@ -313,7 +313,7 @@
 			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
 			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
@@ -415,7 +415,7 @@
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/music = 6,

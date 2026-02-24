@@ -29,7 +29,7 @@
 		/datum/skill/combat/shields = 2,
 		/datum/skill/magic/holy = 1,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/mathematics = 2,
 	)
@@ -55,7 +55,7 @@
 			if(/datum/patron/divine/astrata)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 			if(/datum/patron/divine/dendor)
-				spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+				spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 			if(/datum/patron/divine/necra)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 				ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)

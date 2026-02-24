@@ -5193,7 +5193,7 @@
 /area/indoors/mountains)
 "DN" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked,
+/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "DO" = (

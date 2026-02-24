@@ -105,7 +105,7 @@
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
 	if((user.job != "Priest") && (user.job != "Priestess"))
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
-		playsound(user, 'sound/misc/gods/astrata_scream.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		spawn(30)
 			if(loc == user)
 				user.adjust_divine_fire_stacks(5)

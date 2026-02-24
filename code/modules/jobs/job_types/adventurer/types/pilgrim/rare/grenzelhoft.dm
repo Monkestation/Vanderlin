@@ -31,7 +31,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_FOREIGNER
 	)
 
@@ -40,7 +41,7 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 
 /datum/job/advclass/pilgrim/rare/grenzelhoft/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

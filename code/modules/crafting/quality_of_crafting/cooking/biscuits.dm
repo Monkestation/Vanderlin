@@ -6,6 +6,7 @@
 		/obj/item/reagent_containers/food/snacks/raisins = 1,
 		/obj/item/reagent_containers/food/snacks/butterdough_slice = 1,
 	)
+	subtypes_allowed = TRUE
 	attacked_atom = /obj/item/reagent_containers/food/snacks/butterdough_slice
 	starting_atom = /obj/item/reagent_containers/food/snacks/raisins
 	output = /obj/item/reagent_containers/food/snacks/foodbase/biscuit_raw

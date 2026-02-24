@@ -12,7 +12,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/guardsman
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)
@@ -27,7 +27,7 @@
 
 /datum/job/guardsman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/guardsman
 	name = "City Watchmen Base"
@@ -200,5 +200,5 @@
 
 /mob/proc/haltyell()
 	set name = "HALT!"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("haltyell")

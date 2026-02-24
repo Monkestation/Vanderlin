@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
 
-#define istransparentturf(A) (HAS_TRAIT(A, TURF_Z_TRANSPARENT_TRAIT))
+#define istransparentturf(A) (HAS_TRAIT(A, TRAIT_Z_TRANSPARENT))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -60,6 +60,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define iscarbon(A) (istype(A, /mob/living/carbon))
 #define isroguespirit(A) (istype(A, /mob/living/carbon/spirit)) //underworld spirit
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
+#define isautomaton(A) (istype(A, /mob/living/carbon/human/species/automaton))
 
 //Human sub-species
 #define ishumanspecies(A) (is_species(A, /datum/species/human))
@@ -70,6 +71,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 //RT species
 #define ishumannorthern(A) (is_species(A, /datum/species/human/northern))
 #define isdwarfmountain(A) (is_species(A, /datum/species/dwarf/mountain))
+#define isdwarfjarosite(A) (is_species(A, /datum/species/dwarf/jarosite))
 #define isdarkelf(A) (is_species(A, /datum/species/elf/dark))
 #define issnowelf(A) (is_species(A, /datum/species/elf/snow))
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
@@ -85,6 +87,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define istriton(A) (is_species(A, /datum/species/triton))
 #define ishalfling(A) (is_species(A, /datum/species/halfling))
 
+#define isgoblin(A) (is_species(A, /datum/species/goblin))
+#define isorc(A) (is_species(A, /datum/species/orc))
 //more carbon mobs
 #define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
 

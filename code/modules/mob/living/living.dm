@@ -664,7 +664,7 @@
 
 /mob/living/verb/stop_pulling1()
 	set name = "Stop Pulling"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	stop_pulling()
 
@@ -741,7 +741,7 @@
 
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(IsSleeping())
 		to_chat(src, "<span class='warning'>I am already sleeping!</span>")
@@ -755,7 +755,7 @@
 
 /mob/living/proc/lay_down()
 	set name = "Lay down"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(stat)
 		return
@@ -767,7 +767,7 @@
 
 /mob/living/proc/stand_up()
 	set name = "Stand up"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	if(stat)
 		return
@@ -789,7 +789,7 @@
 
 /mob/living/verb/toggle_rest_verb()
 	set name = "Rest"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	toggle_rest()
 
@@ -957,6 +957,7 @@
 		GLOB.alive_mob_list += src
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
+		timeofdeath = 0
 		updatehealth() //then we check if the mob should wake up.
 		// if(full_heal_flags & HEAL_ADMIN)
 		// 	get_up(TRUE)
@@ -970,7 +971,6 @@
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
-		client?.verbs -= /client/proc/descend
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")
@@ -1063,13 +1063,14 @@
 		return FALSE
 	return TRUE
 
-
 /mob/living/carbon/human/can_be_revived()
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(H)
-		if(H.rotted || H.skeletonized || H.brainkill)
-			return FALSE
+	if(!istype(H) || H.rotted || H.skeletonized)
+		return FALSE
+	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!istype(B) || B.brain_death)
+		return FALSE
 
 
 /mob/living/proc/update_damage_overlays()
@@ -1211,7 +1212,7 @@
 
 /mob/living/verb/resist()
 	set name = "Resist"
-	set category = "IC"
+	set category = "IC.Interaction"
 	set hidden = 1
 	DEFAULT_QUEUE_OR_CALL_VERB(VERB_CALLBACK(src, PROC_REF(execute_resist)))
 
@@ -1249,13 +1250,13 @@
 
 /mob/living/carbon/human/verb/ic_pray()
 	set name = "Prayer"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	emote("pray", intentional = TRUE)
 
 /mob/living/verb/submit()
 	set name = "Yield"
-	set category = "IC"
+	set category = "IC.Interaction"
 
 	if(surrendering)
 		return

@@ -18,11 +18,11 @@
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL, AGE_CHILD)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
 	can_have_apprentices = FALSE
-	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 
 	outfit = /datum/outfit/forestguard
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)
@@ -37,7 +37,7 @@
 
 /datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -81,7 +81,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/whipsflails = 3,
@@ -137,7 +137,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
@@ -190,7 +190,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
@@ -238,7 +238,7 @@
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/labor/butchering = 2,
 		/datum/skill/combat/bows = 1,
 		/datum/skill/combat/crossbows = 1,
@@ -266,7 +266,7 @@
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
 
-	spawned.verbs |= /mob/proc/haltyellorphan
+	add_verb(spawned, /mob/proc/haltyellorphan)
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
@@ -285,5 +285,5 @@
 
 /mob/proc/haltyellorphan()
 	set name = "HALT!"
-	set category = "Noises"
+	set category = "Emotes.Noises"
 	emote("haltyellorphan")

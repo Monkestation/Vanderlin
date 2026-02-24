@@ -3,6 +3,7 @@
 */
 
 /datum/triumph_buy
+	abstract_type = /datum/triumph_buy
 	/// Display name shown as a title above the description
 	var/name = "UNNAMED TRIUMPH BUY"
 	/// Desc shown for it on the menu
@@ -31,22 +32,45 @@
 	var/stock = 0
 	/// List of things it can conflict with
 	var/list/conflicts_with = list()
+	/// Can be refunded
+	var/can_be_refunded = TRUE
 	/// Disables this triumph from being buyable, admin only.
 	var/disabled = FALSE
 
 /// We call this when someone buys it in the triumph shop
-/datum/triumph_buy/proc/on_buy()
+/datum/triumph_buy/proc/on_buy(client/client)
 	if(!manual_activation)
-		on_activate()
+		on_activate(client.mob)
 
 /// We call this when someone is trying to remove it aka on refund or otherwise
 /datum/triumph_buy/proc/on_removal()
 	return
 
 /// We call this on when the triumph buy effect is active
-/datum/triumph_buy/proc/on_activate(mob/living/carbon/human/H)
+/datum/triumph_buy/proc/on_activate(mob/owner)
 	activated = TRUE
 
 /// Called on job after spawn
-/datum/triumph_buy/proc/on_after_spawn(mob/living/carbon/human/H)
+/datum/triumph_buy/proc/on_after_spawn(mob/owner)
 	return
+
+/// Triumph buy that persists over seasons
+/// These shouldn't have conflicts with any triumph buys since they can only be removed by admins
+/datum/triumph_buy/seasonal
+	abstract_type = /datum/triumph_buy/seasonal
+	category = TRIUMPH_CAT_SEASONAL
+	can_be_refunded = FALSE
+	allow_multiple_buys = FALSE
+	visible_on_active_menu = TRUE
+	manual_activation = FALSE // defined already but to be safe since this would break
+	/// Amount of seasons this lasts
+	var/seasons_max = 1
+
+/datum/triumph_buy/seasonal/on_activate(mob/owner)
+	. = ..()
+	SStriumphs.add_seasonal_triumph_buy(owner.ckey, triumph_buy_id)
+
+/// When the buy is reactivated via SStriumphs [activate_seasonal_buys()]
+/// This can happen MULTIPLE times per round
+/datum/triumph_buy/seasonal/proc/on_reloaded()
+	activated = TRUE

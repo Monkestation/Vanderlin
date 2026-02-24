@@ -44,9 +44,6 @@
 	return ..()
 
 /obj/structure/fake_machine/hailer/interact(mob/user)
-	ui_interact(user)
-
-/obj/structure/fake_machine/hailer/ui_interact(mob/user)
 	. = ..()
 	var/auth = TRUE
 	var/dat = "<B>[name]</B><BR>"
@@ -132,11 +129,7 @@
 	message = span_danger(message)
 	say(message)
 
-/obj/structure/fake_machine/hailerboard/attack_hand(mob/user)
-	. = ..()
-	ui_interact(user)
-
-/obj/structure/fake_machine/hailerboard/ui_interact(mob/user)
+/obj/structure/fake_machine/hailerboard/interact(mob/user)
 	. = ..()
 	var/dat = "<B>[name]</B><BR>"
 	for(var/obj/item/H in SSroguemachine.hailer)

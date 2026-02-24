@@ -36,8 +36,8 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
-	languages = list(/datum/language/oldpsydonic)
+	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/migrant/grenzelhoft_count/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -108,8 +108,8 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
-	languages = list(/datum/language/oldpsydonic)
+	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/job/migrant/grenzelhoft_countess/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -173,7 +173,7 @@
 	)
 
 	traits = list(TRAIT_HEAVYARMOR)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/migrant/grenzelhoft_knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -237,7 +237,7 @@
 	)
 
 	traits = list(TRAIT_MEDIUMARMOR)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/migrant/grenzelhoft_man_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)

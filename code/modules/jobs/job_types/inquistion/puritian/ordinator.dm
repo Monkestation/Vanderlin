@@ -44,7 +44,7 @@
 		"Covenant And Creed (Broadsword + Shield)",
 		"Covenant and Consecratia (Flail + Shield)",
 		"Crusade (Greatsword) and a Silver Dagger",
-		"The Forgotten Blade",
+		"Remembrance (Long Sword)",
 	)
 	var/gear_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
 	switch(gear_choice)
@@ -73,8 +73,8 @@
 			if(spawned.age == AGE_OLD)
 				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 				spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		if("The Forgotten Blade")
-			spawned.put_in_hands(new /obj/item/weapon/sword/long/forgotten(get_turf(spawned)), TRUE)
+		if("Remembrance (Long Sword)")
+			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 			if(spawned.age == AGE_OLD)
 				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)

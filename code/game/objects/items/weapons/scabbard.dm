@@ -6,7 +6,6 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
-	blade_dulling = DULLING_BASHCHOP
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
@@ -84,6 +83,14 @@
 	icon_state = "rsheath"
 	sellprice = 100
 
+/obj/item/weapon/scabbard/knife/hand
+	name = "hand's bracers"
+	desc = "Discretion had always been the better part of valour, and nobody understands that better than the one holding an ace up their sleeve."
+	slot_flags = ITEM_SLOT_WRISTS
+	sellprice = 50
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	icon_state = "bracersheath"
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."
@@ -145,10 +152,16 @@
 	desc = "A decorated cane bearing the visage of a vulture."
 	icon_state = "doccanesheath"
 
+/obj/item/weapon/scabbard/cane/hand
+	name = "fancy cane"
+	desc = "A decorated silver cane bearing a rontz at the top."
+	icon_state = "staffsheath"
+
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/sword)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()

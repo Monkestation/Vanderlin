@@ -81,7 +81,7 @@
 						shoes_check.polished = 1
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						target.add_stress(/datum/stress_event/shiny_shoes)
 						to_chat(user, ("You polished the [shoes_check]."))
@@ -94,7 +94,7 @@
 					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
 					if(do_after(user, 2 SECONDS, src))
 						shoes_check.polished = 2
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
 						if(particle_spewer)
@@ -108,8 +108,7 @@
 					to_chat(user, ("You can't possibily make it shine more."))
 
 /mob/living/carbon/human/Initialize()
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 
 	//initialize limbs first
 	create_bodyparts()
@@ -122,6 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	culture = new()
 
 	. = ..()
 
@@ -132,6 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
+	QDEL_NULL(culture)
 	GLOB.human_list -= src
 	return ..()
 
@@ -181,15 +182,10 @@
 	dna.initialize_dna()
 	reset_limb_fingerprints()
 
-/mob/living/carbon/human/Stat()
-	..()
-	if(!client)
-		return
-	if(mind)
-		if(clan)
-			if(statpanel("Stats"))
-				stat("Vitae:",bloodpool)
-	return
+/mob/living/carbon/human/get_status_tab_items()
+	. = ..()
+	if(clan)
+		. += "VITAE: [bloodpool]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -1024,7 +1020,7 @@
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))

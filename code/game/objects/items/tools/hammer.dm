@@ -5,6 +5,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	force = DAMAGE_HAMMER
+	usesound = list('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg')
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
@@ -18,6 +19,7 @@
 	grid_width = 32
 	grid_height = 64
 	var/time_multiplier = 1
+	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
 
 /obj/proc/unbreak()
 	return
@@ -164,6 +166,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 1.2
+	no_spark = TRUE
 
 /obj/item/weapon/hammer/wood/getonmobprop(tag)
 	. = ..()
@@ -183,6 +186,7 @@
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/copper
 	time_multiplier = 1.1
+	no_spark = TRUE
 
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"

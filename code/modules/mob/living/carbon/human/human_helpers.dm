@@ -44,10 +44,8 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
-	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
+	if(!is_human_part_visible(src, HIDEFACE))
 		return if_no_face
-	if( head && (head.flags_inv&HIDEFACE) )
-		return if_no_face		//Likewise for hats
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
 	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || O.skeletonized )	//disfigured. use id-name if possible
 		return if_no_face
@@ -162,8 +160,8 @@
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_donator))]
-		set_species(new rando_race(), FALSE)
+		var/rando_race = GLOB.species_list[pick(GLOB.roundstart_species)]
+		set_species(rando_race, FALSE)
 
 	var/datum/species/species = dna.species
 

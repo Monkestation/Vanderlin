@@ -1,25 +1,10 @@
 /// The default command report announcement sound.
 #define DEFAULT_ANNOUNCEMENT_SOUND "default_announcement"
 
-/// Verb to change the global command name.
-/client/proc/cmd_change_command_name()
-	set category = "Special"
-	set name = "Change Command Name"
-
-	if(!check_rights(R_ADMIN))
-		return
-
-	var/input = input(usr, "Please input a new name for priority announcements.", "What?", "") as text|null
-	if(!input)
-		return
-	change_command_name(input)
-	message_admins("[key_name_admin(src)] has changed the priority announcement name to [input]")
-	log_admin("[key_name(src)] has changed the priority announcement name to: [input]")
-
 /// Verb to open the create command report window and send command reports.
-/client/proc/cmd_admin_create_centcom_report()
-	set category = "Special"
-	set name = "Create Command Report"
+/client/proc/cmd_admin_create_announcement()
+	set category = "GameMaster.Gods"
+	set name = "Announcement"
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -41,6 +26,8 @@
 	var/encode_report = TRUE
 	/// The sound that's going to accompany our message.
 	var/played_sound = DEFAULT_ANNOUNCEMENT_SOUND
+	/// If this is only for testing and won't be sent to everyone.
+	var/test_only = FALSE
 
 /datum/command_report_menu/New(mob/user)
 	ui_user = user
@@ -95,9 +82,15 @@
 			<h2>Announcement Sound</h2>
 			<select name="sound">
 				<option value="['sound/misc/alert.ogg']">Decree</option>
-				<option value="['sound/misc/bell.ogg']" selected>Bell</option>
+				<option value="['sound/misc/bell.ogg']">Bell</option>
 				<option value="['sound/misc/lawdeclaration.ogg']">Law Declaration</option>
-				<option value="['sound/misc/evilevent.ogg']">Bad Omen</option>
+				<option value="['sound/misc/evilevent.ogg']">Generic Bad Omen</option>
+				<option value="['sound/misc/gods/astrata_omen.ogg']">Astrata Omen</option>
+				<option value="['sound/misc/gods/xylix_omen.ogg']">Xylix Omen</option>
+				<option value="['sound/misc/gods/zizo_omen.ogg']">Zizo Omen</option>
+				<option value="['sound/misc/gods/graggar_omen.ogg']">Graggar Omen</option>
+				<option value="['sound/misc/gods/matthios_omen.ogg']">Matthios Omen</option>
+				<option value="['sound/misc/gods/baotha_omen.ogg']">Baotha Omen</option>
 			</select>
 		</div>
 
@@ -106,6 +99,11 @@
 		<div>
 			<input type="checkbox" name="encode" value=[TRUE] [NULLABLE(encode_report) && "checked"]/>
 			<label>Encode body</label>
+		</div>
+
+		<div>
+			<input type="checkbox" name="testonly" value=[test_only] [NULLABLE(test_only) && "checked"]/>
+			<label>Test Announcement</label>
 		</div>
 
 		<div>
@@ -132,8 +130,12 @@
 	command_report_content = href_list["body"]
 	encode_report = text2num(href_list["encode"]) || FALSE
 	played_sound = fexists(href_list["sound"]) && file(href_list["sound"])
+	test_only = href_list["testonly"]
 
-	send_announcement()
+	if(test_only)
+		test_announcement()
+	else
+		send_announcement()
 	build_ui(usr)
 
 
@@ -149,5 +151,9 @@
 	message_admins("[key_name_admin(ui_user)] has created a command report, sent from \"[command_name]\" with the sound \"[played_sound]\"")
 
 	command_report_content = initial(command_report_content)
+
+/datum/command_report_menu/proc/test_announcement()
+	var/send_message = "[command_report_content]\n\n\nSound Used: [played_sound]"
+	priority_announce(send_message, "TEST: [command_name]", played_sound, players = list(ui_user), encode_title = encode_report, encode_text = encode_report)
 
 #undef DEFAULT_ANNOUNCEMENT_SOUND

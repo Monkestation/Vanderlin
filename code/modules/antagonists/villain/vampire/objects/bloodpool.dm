@@ -1,7 +1,7 @@
-#define VAMPCOST_ONE 5000
-#define VAMPCOST_TWO 6000
-#define VAMPCOST_THREE 7500
-#define VAMPCOST_FOUR 10000
+#define VAMPCOST_ONE 3000
+#define VAMPCOST_TWO VAMPCOST_ONE * 1.5
+#define VAMPCOST_THREE VAMPCOST_TWO * 1.5
+#define VAMPCOST_FOUR VAMPCOST_THREE * 1.5
 
 /obj/structure/vampire/bloodpool
 	name = "Crimson Crucible"
@@ -363,7 +363,7 @@
 /datum/vampire_project/armor_crafting
 	display_name = "Wicked Plate"
 	description = "Craft a complete set of vampiric armor from crystallized blood."
-	total_cost = 5000
+	total_cost = VAMPCOST_ONE
 	completion_sound = 'sound/misc/vcraft.ogg'
 
 /datum/vampire_project/armor_crafting/on_complete(atom/movable/creation_point)

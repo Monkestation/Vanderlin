@@ -51,14 +51,14 @@
 	var/mob/living/carbon/human/H = owner
 	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, rand(-2, -5))
 
-	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_UGLY, QUIRK_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_FISHFACE, QUIRK_TRAIT)
 
 	if(prob(50))
-		ADD_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+		ADD_TRAIT(H, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	else if(prob(30))
-		ADD_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+		ADD_TRAIT(H, TRAIT_UGLY, QUIRK_TRAIT)
 
 /datum/quirk/peculiarity/witless_pixie/on_remove()
 	if(!ishuman(owner))
@@ -67,6 +67,26 @@
 	// Remove stat penalty (inverse of what was applied)
 	// This is approximate since we randomized on spawn
 	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, 3)
+
+/datum/quirk/peculiarity/ugly
+	name = "Ugly"
+	desc = "Your appearance turns heads... in all the wrong ways. With features ranging from unsightly to grotesque, you likely have yet to find anyone impressed with your looks."
+
+/datum/quirk/peculiarity/ugly/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+
+	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
+
+	ADD_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+
+/datum/quirk/peculiarity/ugly/on_remove()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	REMOVE_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
 
 /datum/quirk/peculiarity/virgin
 	name = "Virgin"
@@ -114,24 +134,24 @@
 	find_keeper()
 
 /datum/quirk/peculiarity/mystery_box/proc/find_keeper()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/human/box_owner = owner
 
 	// Find a random player to be the keeper
 	var/list/possible_keepers = list()
-	for(var/mob/living/carbon/human/P in GLOB.player_list)
-		if(P != H && P.mind && P.stat != DEAD)
-			possible_keepers += P
+	for(var/mob/living/carbon/human/possible_keeper in GLOB.player_list)
+		if(possible_keeper != box_owner && possible_keeper.mind && possible_keeper.stat != DEAD && !isautomaton(possible_keeper))
+			possible_keepers += possible_keeper
 
 	if(length(possible_keepers))
 		keeper = pick(possible_keepers)
 
 		// Give keeper the knowledge with flavor
 		to_chat(keeper, span_notice("A memory surfaces... you know the passcode to a mysterious box: \"[passcode]\""))
-		keeper.mind.store_memory("Passcode to [H.real_name]'s box: \"[passcode]\"")
+		keeper.mind.store_memory("Passcode to [box_owner.real_name]'s box: \"[passcode]\"")
 
-		to_chat(H, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
+		to_chat(box_owner, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
 	else
-		to_chat(H, span_warning("You can't remember who knows the passcode..."))
+		to_chat(box_owner, span_warning("You can't remember who knows the passcode..."))
 
 	RegisterSignal(mystery_box, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine), TRUE)
 

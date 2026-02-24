@@ -9,7 +9,7 @@
 	is_recognized = TRUE
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 3,
@@ -38,7 +38,7 @@
 
 /datum/job/advclass/combat/puritan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 
 
 /datum/outfit/folkhero/puritan

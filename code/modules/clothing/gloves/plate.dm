@@ -65,6 +65,19 @@
 	item_weight = 7 * BLACKSTEEL_MULTIPLIER
 	sellprice = VALUE_SILVER_ITEM * 2
 
+/obj/item/clothing/gloves/plate/silver
+	name = "silver gauntlets"
+	desc = "Finely forged gauntlets made out of silver."
+	icon_state = "silvergloves"
+	armor = ARMOR_PLATE_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 12 * SILVER_MULTIPLIER
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/gloves/plate/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 	//............... Evil Gloves ............... //
 
 /obj/item/clothing/gloves/plate/zizo

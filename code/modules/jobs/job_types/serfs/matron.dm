@@ -13,7 +13,7 @@
 
 	allowed_sexes = list(FEMALE)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/matron
@@ -35,7 +35,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 4,
 		/datum/skill/misc/stealing = 4,
 		/datum/skill/misc/lockpicking = 4,
@@ -94,7 +94,7 @@
 	cloak = /obj/item/clothing/cloak/matron
 
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel = 1,
+		/obj/item/weapon/knife/dagger/steel/stiletto = 1,
 		/obj/item/key/matron = 1
 	)
 

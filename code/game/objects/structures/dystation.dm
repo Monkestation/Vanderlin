@@ -100,10 +100,7 @@
 	icon_state = "dye_bin_full"
 	updateUsrDialog()
 
-/obj/structure/dye_bin/attack_hand(mob/living/user)
-	ui_interact(user)
-
-/obj/structure/dye_bin/ui_interact(mob/living/user)
+/obj/structure/dye_bin/interact(mob/living/user)
 	var/list/dat = list("<STYLE> * {text-align: center;} </STYLE>")
 	if(!inserted)
 		dat += "No item inserted."

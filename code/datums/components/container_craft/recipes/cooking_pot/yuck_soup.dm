@@ -10,7 +10,7 @@
 	requirements = list(/obj/item/natural/poo = 1)
 
 /datum/container_craft/cooking/yuck_soup/toxicshrooms
-	requirements = list(/obj/item/reagent_containers/food/snacks/toxicshrooms = 1)
+	requirements = list(/obj/item/reagent_containers/food/snacks/truffles/toxic = 1)
 
 /datum/container_craft/cooking/yuck_soup/worms
 	requirements = list(/obj/item/natural/worms = 1)

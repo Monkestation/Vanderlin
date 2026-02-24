@@ -22,7 +22,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 2,
@@ -42,7 +42,8 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
@@ -54,8 +55,8 @@
 
 /datum/job/migrant/specialinquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
-	spawned.verbs |= /mob/living/carbon/human/proc/faith_test
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
 	spawned.add_spell(/datum/action/cooldown/spell/undirected/call_bird/inquisitor)
 
@@ -117,7 +118,7 @@
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/cooking = 1,
 	)
 

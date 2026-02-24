@@ -43,13 +43,13 @@
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/traps = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2
 	)
 
 /datum/job/jailor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.verbs |= /mob/living/carbon/human/proc/torture_victim
+	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, pick(4,5,6))
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, pick(-4,-5,-6))

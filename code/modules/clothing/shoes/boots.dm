@@ -184,6 +184,19 @@
 	armor = ARMOR_PLATE_GOOD
 	item_weight = 5 * STEEL_MULTIPLIER
 
+/obj/item/clothing/shoes/boots/armor/silver
+	name = "silver boots"
+	desc = "Finely forged boots made out of silver."
+	icon_state = "silverboots"
+	armor = ARMOR_PLATE_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 12 * SILVER_MULTIPLIER
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/shoes/boots/armor/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //............... Evil Boots ............... //
 
 /obj/item/clothing/shoes/boots/armor/zizo

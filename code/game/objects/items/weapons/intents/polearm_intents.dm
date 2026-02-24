@@ -6,12 +6,13 @@
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
-	chargetime = 1
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = AP_POLEARM_THRUST
 	swingdelay = 1
-	misscost = 10
+	clickcd = 14
+	misscost = 8
+	acc_bonus = 12
 	item_damage_type = "stab"
 
 /datum/intent/polearm/thrust/spear
@@ -25,13 +26,10 @@
 	attack_verb = list("bashes", "strikes")
 	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
 	penfactor = AP_POLEARM_BASH
-	damfactor = 0.8
+	damfactor = 0.9
 	swingdelay = 1
 	misscost = 5
 	item_damage_type = "blunt"
-
-/datum/intent/polearm/bash/ranged
-	reach = 2
 
 // POLEARM CUT INTENTS //
 /datum/intent/polearm/cut
@@ -47,13 +45,8 @@
 	misscost = 10
 	item_damage_type = "slash"
 
-/datum/intent/spear/cut/bardiche/scythe //Unique intent for Dendorite Templar
-	reach = 2
-
-/datum/intent/spear/cut/naginata
+/datum/intent/polearm/cut/naginata
 	damfactor = 1.2
-	chargetime = 0
-
 
 // POLEARM CHOP INTENTS //
 /datum/intent/polearm/chop
@@ -63,13 +56,15 @@
 	animname = "chop"
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
+	reach = 2
 	penfactor = AP_POLEARM_CHOP
-	chargetime = 1.5
-	damfactor = 1.2
+	clickcd = 18
+	damfactor = 1.1
 	swingdelay = 2
-	misscost = 20
+	misscost = 12
 	warnie = "mobwarning"
 	item_damage_type = "slash"
+	acc_bonus = 10
 
 // POLEARM REND INTENTS //
 /datum/intent/rend
@@ -78,17 +73,15 @@
 	attack_verb = list("rends")
 	animname = "cut"
 	blade_class = BCLASS_CHOP
-	reach = 1
 	damfactor = 1.2
-	chargetime = 10
-	no_early_release = TRUE
+	clickcd = 16
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	misscost = 10
+	misscost = 8
 
 /datum/intent/rend/reach
 	name = "long rend"
-	penfactor = -100
-	misscost = 5
-	chargetime = 5
+	penfactor = AP_POLEARM_CHOP - 5
+	misscost = 10
 	reach = 2
+	clickcd = 18

@@ -252,23 +252,34 @@
 	if(loc == user)
 		user.regenerate_clothes()
 
-/obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
-	if(slot_flags & slot)
-		if(M.gender in allowed_sex)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.dna)
-					if(!(H.age in allowed_ages))
-						return FALSE
-					if(H.dna.species.id in allowed_race)
-						return TRUE
-					else
-						return FALSE
-			return TRUE
-		else
-			return FALSE
+
+	if(!(slot_flags & slot))
+		return FALSE
+
+	if(!(M.gender in allowed_sex))
+		return FALSE
+
+	if(!ishuman(M))
+		return FALSE
+
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	var/datum/species/species = H.dna?.species
+	if(!species)
+		return FALSE
+
+	var/used_species_id = species.id_override ? species.id_override : species.id
+
+	if(!(used_species_id in allowed_race))
+		return FALSE
+
+	return TRUE
 
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
@@ -564,7 +575,7 @@ BLIND     // can't see anything
 			particle_spewer.RemoveComponent()
 
 	if(wet.use_water(0.7))
-		if(HAS_TRAIT(C, TRAIT_NOBLE) && wet.water_stacks == 0)
+		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)
 			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
 
 		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))

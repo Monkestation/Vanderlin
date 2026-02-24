@@ -11,15 +11,15 @@
 	var/mob/M = parent
 
 	combat_music_loop = new /datum/looping_sound/theme_song(M, FALSE)
-	M.verbs += /mob/proc/toggle_custom_music
-	M.verbs += /mob/proc/set_custom_music
+	add_verb(M, /mob/proc/toggle_custom_music)
+	add_verb(M, /mob/proc/set_custom_music)
 
 	RegisterSignal(M, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
 /datum/component/theme_music/Destroy(force)
 	var/mob/M = parent
-	M.verbs -= /mob/proc/toggle_custom_music
-	M.verbs -= /mob/proc/set_custom_music
+	remove_verb(M, /mob/proc/toggle_custom_music)
+	remove_verb(M, /mob/proc/set_custom_music)
 
 	if(combat_music_loop)
 		combat_music_loop.stop()
@@ -95,22 +95,22 @@
 
 /mob/proc/toggle_custom_music()
 	set name = "Toggle Theme Music"
-	set category = "Music"
+	set category = "IC.Music"
 
 	var/datum/component/theme_music/theme = src.GetComponent(/datum/component/theme_music)
 	if(theme)
 		theme.toggle_music()
 	else
-		src.verbs -= /mob/proc/toggle_custom_music
+		remove_verb(src, /mob/proc/toggle_custom_music)
 		to_chat(src, span_notice("You are not supposed to have this, Report the bug."))
 
 /mob/proc/set_custom_music()
 	set name = "Set Custom Music"
-	set category = "Music"
+	set category = "IC.Music"
 
 	var/datum/component/theme_music/theme = src.GetComponent(/datum/component/theme_music)
 	if(theme)
 		theme.upload_custom_music()
 	else
-		src.verbs -= /mob/proc/set_custom_music
+		remove_verb(src, /mob/proc/set_custom_music)
 		to_chat(src, span_notice("You are not supposed to have this, Report the bug."))

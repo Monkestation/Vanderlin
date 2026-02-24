@@ -208,7 +208,7 @@
 /datum/supply_pack/weapons/steel/assegai
 	name = "Steel Assegai"
 	cost = 60
-	contains = /obj/item/weapon/polearm/spear/steel/assegai
+	contains = /obj/item/weapon/polearm/spear/assegai/steel
 
 /datum/supply_pack/weapons/steel/atgervi
 	name = "Steel Atgervi Axe"
