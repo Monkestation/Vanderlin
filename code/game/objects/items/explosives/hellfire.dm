@@ -13,8 +13,8 @@
 /obj/projectile/bullet/hellfire/on_hit(target)
 	. = ..()
 	var/datum/species/bang = /datum/species/werewolf || target.mind.has_antag_datum(/datum/antagonist/vampire)
-		target.fire_act(30)
-		target.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
+		bang.fire_act(30)
+		bang.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 
 /obj/item/explosive/hell_fire
 	name = "Psydons rebuke"
