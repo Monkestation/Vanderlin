@@ -514,10 +514,17 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 /mob/living/carbon/human/species/rousman/seer/stronger/with_ai
 	ai_controller = /datum/ai_controller/human_npc
 
-/mob/living/carbon/human/species/rousman/seer/stronger/after_creation()
+/mob/living/carbon/human/species/rousman/seer_stronger/after_creation()
 	. = ..()
+	AddComponent(/datum/component/ai_aggro_system)
 	job = "Seer Rousman"
+	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/rousman/seer_stronger)
+	dodgetime = 13
+	canparry = TRUE
+	flee_in_pain = TRUE
+	wander = TRUE
 
 /datum/outfit/npc/rousman/seer/pre_equip(mob/living/carbon/human/seer)
 	..()
