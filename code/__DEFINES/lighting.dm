@@ -156,6 +156,8 @@ GLOBAL_LIST_INIT(em_mask_matrix, EM_MASK_MATRIX)
 /// The default falloff curve for all atoms. It's a magic number you should adjust until it looks good.
 #define LIGHTING_DEFAULT_FALLOFF_CURVE 3
 
+///Object doesn't use any of the light systems. Should be changed to add a light source to the object.
+#define NO_LIGHT_SUPPORT 0
 ///Light made with the lighting datums, applying a matrix.
 #define STATIC_LIGHT 1
 ///Light made by masking the lighting darkness plane.

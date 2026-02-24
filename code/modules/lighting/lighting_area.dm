@@ -1,5 +1,5 @@
 /area
-	luminosity           = TRUE
+	luminosity = TRUE
 	var/dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 
 /area/proc/set_dynamic_lighting(new_dynamic_lighting = DYNAMIC_LIGHTING_ENABLED)

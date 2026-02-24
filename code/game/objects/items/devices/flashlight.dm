@@ -138,7 +138,6 @@
 	var/max_uses = 12
 	max_integrity = 40
 	fuel = 30 MINUTES
-	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
 

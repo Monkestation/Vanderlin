@@ -44,7 +44,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	max_integrity = 200
 	fuel = 10 MINUTES
-	light_depth = 0
 	light_height = 0
 
 /obj/item/flashlight/flare/light/getonmobprop(tag)

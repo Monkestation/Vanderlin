@@ -244,33 +244,33 @@ SUBSYSTEM_DEF(outdoor_effects)
 
 // Updates overlays and vis_contents for outdoor effects
 /datum/controller/subsystem/outdoor_effects/proc/update_outdoor_effect_overlays(atom/movable/outdoor_effect/OE)
-	var/mutable_appearance/MA
-	if ((OE.state != SKY_BLOCKED) || istype(OE.source_turf, /turf/closed/sea_fog))
-		MA = get_sunlight_overlay(1, 1, 1, 1) /* fully lit */
-	else //Indoor - do proper corner checks
-		/* check if we are globally affected or not */
-		var/static/datum/lighting_corner/dummy/dummy_lighting_corner = new
+	// var/mutable_appearance/MA
+	// if ((OE.state != SKY_BLOCKED) || istype(OE.source_turf, /turf/closed/sea_fog))
+	// 	MA = get_sunlight_overlay(1, 1, 1, 1) /* fully lit */
+	// else //Indoor - do proper corner checks
+	// 	/* check if we are globally affected or not */
+	// 	var/static/datum/lighting_corner/dummy/dummy_lighting_corner = new
 
-		var/list/corners = OE.source_turf.corners
-		if(!length(corners))
-			OE.source_turf.generate_missing_corners()
-			corners = OE.source_turf.corners
-		var/datum/lighting_corner/cr = corners[3] || dummy_lighting_corner
-		var/datum/lighting_corner/cg = corners[2] || dummy_lighting_corner
-		var/datum/lighting_corner/cb = corners[4] || dummy_lighting_corner
-		var/datum/lighting_corner/ca = corners[1] || dummy_lighting_corner
+	// 	var/list/corners = OE.source_turf.corners
+	// 	if(!length(corners))
+	// 		OE.source_turf.generate_missing_corners()
+	// 		corners = OE.source_turf.corners
+	// 	var/datum/lighting_corner/cr = corners[3] || dummy_lighting_corner
+	// 	var/datum/lighting_corner/cg = corners[2] || dummy_lighting_corner
+	// 	var/datum/lighting_corner/cb = corners[4] || dummy_lighting_corner
+	// 	var/datum/lighting_corner/ca = corners[1] || dummy_lighting_corner
 
-		var/fr = cr.sunFalloff
-		var/fg = cg.sunFalloff
-		var/fb = cb.sunFalloff
-		var/fa = ca.sunFalloff
+	// 	var/fr = cr.sunFalloff
+	// 	var/fg = cg.sunFalloff
+	// 	var/fb = cb.sunFalloff
+	// 	var/fa = ca.sunFalloff
 
-		MA = get_sunlight_overlay(fr, fg, fb, fa)
+	// 	MA = get_sunlight_overlay(fr, fg, fb, fa)
 
-	OE.sunlight_overlay = MA
-	//Get weather overlay if not weatherproof
-	OE.overlays = OE.weatherproof ? list(OE.sunlight_overlay) : list(OE.sunlight_overlay, get_weather_overlay())
-	OE.luminosity = MA.luminosity
+	// OE.sunlight_overlay = MA
+	// //Get weather overlay if not weatherproof
+	// OE.overlays = OE.weatherproof ? list(OE.sunlight_overlay) : list(OE.sunlight_overlay, get_weather_overlay())
+	// OE.luminosity = MA.luminosity
 
 //Retrieve an overlay from the list - create if necessary
 /datum/controller/subsystem/outdoor_effects/proc/get_sunlight_overlay(fr = 0, fg = 0, fb = 0, fa = 0)
