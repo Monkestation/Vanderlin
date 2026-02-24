@@ -1,0 +1,2 @@
+/obj/item/natural/dirtclod : /obj/item/natural/clod/dirt
+/obj/structure/fluff/clodpile : /obj/structure/fluff/clodpile/dirt

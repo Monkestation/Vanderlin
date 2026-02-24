@@ -383,6 +383,13 @@
 				/obj/item/natural/silk = 2)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/sewing/weaving/chasuble_psydonite
+	name = "chasuble"
+	output = /obj/item/clothing/cloak/chasuble/psydon
+	requirements = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 2)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/sewing/weaving/stole_gold
 	name = "stole (gold)"
 	output = /obj/item/clothing/cloak/stole
@@ -421,6 +428,14 @@
 /datum/repeatable_crafting_recipe/sewing/weaving/paddedgambeson
 	name = "padded gambeson"
 	output = /obj/item/clothing/armor/gambeson/heavy
+	requirements = list(/obj/item/natural/cloth = 6,
+				/obj/item/natural/fibers = 4)
+	craftdiff = 4
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/handgamb
+	name = "noble undercoat"
+	output = /obj/item/clothing/armor/gambeson/hand
 	requirements = list(/obj/item/natural/cloth = 6,
 				/obj/item/natural/fibers = 4)
 	craftdiff = 4

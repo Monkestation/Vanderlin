@@ -9,7 +9,7 @@
 	spawn_positions = 0
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/alchemist
 	give_bank_account = 12

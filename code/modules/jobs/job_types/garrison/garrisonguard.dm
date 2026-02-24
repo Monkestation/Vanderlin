@@ -12,7 +12,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/guardsman
 	advclass_cat_rolls = list(CTAG_GARRISON = 20)

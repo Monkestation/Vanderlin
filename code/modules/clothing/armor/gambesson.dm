@@ -81,9 +81,25 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/steward.dmi'
 	icon_state = "stewardtailcoat"
 	item_state = "stewardtailcoat"
-	armor = ARMOR_PADDED_GOOD
+	armor = ARMOR_PADDED
 	icon = 'icons/roguetown/clothing/special/steward.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/steward.dmi'
+
+/obj/item/clothing/armor/gambeson/hand
+	name = "noble undercoat"
+	desc = "A thick undercoat with polished golden buttons."
+	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	icon_state = "handgambeson"
+	item_state = "handgambeson"
+	armor = ARMOR_PADDED_GOOD
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_BERRY_BLUE
+
+/obj/item/clothing/armor/gambeson/hand/spy
+	detail_color = CLOTHING_ROYAL_PURPLE
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress

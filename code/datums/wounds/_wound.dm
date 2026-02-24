@@ -424,7 +424,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 			return
 	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
 	MOBTIMER_SET(human_owner, MT_PUKE)
-	human_owner.vomit(1, blood = TRUE, stun = FALSE)
 	werewolf_infection_timer = addtimer(CALLBACK(src, PROC_REF(wake_werewolf)), werewolf_infection_time, TIMER_STOPPABLE)
 	severity = WOUND_SEVERITY_BIOHAZARD
 	if(bodypart_owner)

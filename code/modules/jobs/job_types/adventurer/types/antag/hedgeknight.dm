@@ -33,7 +33,7 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 /datum/outfit/bandit/hedgeknight

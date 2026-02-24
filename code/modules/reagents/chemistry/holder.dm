@@ -176,7 +176,7 @@
 
 	return master
 
-/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, ignore_stomach = FALSE)
+/datum/reagents/proc/trans_to(obj/target, amount = 1, multiplier = 1, preserve_data = TRUE, no_react = FALSE, mob/transfered_by, remove_blacklisted = FALSE, method = null, show_message = TRUE, round_robin = FALSE, ignore_stomach = FALSE, list/ignored_reagents)
 	//if preserve_data=0, the reagents data will be lost. Usefull if you use data for some strange stuff and don't want it to be transferred.
 	//if round_robin=TRUE, so transfer 5 from 15 water, 15 sugar and 15 plasma becomes 10, 15, 15 instead of 13.3333, 13.3333 13.3333. Good if you hate floating point errors
 	if(isliving(target) && transfered_by != target)
@@ -185,6 +185,7 @@
 				SEND_SIGNAL(transfered_by, COMSIG_LIVING_MEDICINE_APPLIED)
 				break
 
+	//ignored_reagents will not factor it into the total volume of the solution. It calculates as if they did not exist.
 	var/list/cached_reagents = reagent_list
 	if(!target || !total_volume)
 		return
@@ -211,13 +212,17 @@
 			R = target.reagents
 			target_atom = target
 
-	amount = min(min(amount, src.total_volume), R.maximum_volume-R.total_volume)
+	var/used_volume = src.total_volume
+	for(var/datum/reagent/T as anything in cached_reagents)
+		if(is_type_in_list(T, ignored_reagents))
+			used_volume -= T.volume
+	amount = min(min(amount, used_volume), R.maximum_volume-R.total_volume)
 	var/trans_data = null
 	var/transfer_log = list()
 	if(!round_robin)
-		var/part = amount / src.total_volume
+		var/part = amount / used_volume
 		for(var/datum/reagent/T as anything in cached_reagents)
-			if(remove_blacklisted && !T.can_synth)
+			if((remove_blacklisted && !T.can_synth) || is_type_in_list(T, ignored_reagents))
 				continue
 			var/transfer_amount = T.volume * part
 			if(preserve_data)
@@ -767,10 +772,10 @@
 					return FALSE
 	return FALSE
 
-/datum/reagents/proc/get_reagent_amount(reagent)
+/datum/reagents/proc/get_reagent_amount(reagent, strict = TRUE)
 	var/list/cached_reagents = reagent_list
 	for(var/datum/reagent/R as anything in cached_reagents)
-		if (R.type == reagent)
+		if (strict ? R.type == reagent : istype(R, reagent))
 			return round(R.volume, CHEMICAL_QUANTISATION_LEVEL)
 
 	return 0
@@ -888,7 +893,7 @@
 				continue
 
 			if(istype(R, /datum/reagent/consumable/nutriment))
-				var/list/taste_data = R.data
+				var/list/taste_data = LAZYACCESS(R.data, "tastes")
 				for(var/taste in taste_data)
 					var/ratio = taste_data[taste]
 					var/amount = ratio * R.taste_mult * R.volume

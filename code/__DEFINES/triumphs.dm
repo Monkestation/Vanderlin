@@ -3,7 +3,6 @@
 
 #define TRIUMPH_BUY_RACE_ALL "race_all"
 #define TRIUMPH_BUY_ANY_CLASS "pick_any"
-#define TRIUMPH_BUY_ANY_CLASS_ALL "pick_any_all"
 #define TRIUMPH_BUY_ADOPTION "adoption"
 #define TRIUMPH_BUY_FART "fart"
 #define TRIUMPH_BUY_SECRET_OFFICIANT "secret_officiant"

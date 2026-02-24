@@ -25,7 +25,7 @@
 		/datum/skill/misc/sneaking = 6,
 		/datum/skill/misc/stealing = 6,
 		/datum/skill/misc/lockpicking = 5,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/craft/bombs = 3 // To craft Smoke Bombs.
 	)
 

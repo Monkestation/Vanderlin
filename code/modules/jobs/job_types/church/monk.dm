@@ -28,7 +28,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/combat/unarmed = 1,
@@ -99,7 +99,7 @@
 			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
 			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)

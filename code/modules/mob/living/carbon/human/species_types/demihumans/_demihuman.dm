@@ -49,6 +49,14 @@
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
+		/obj/item/natural/fur/gote = 0.1,
+		/obj/item/natural/fur/volf = 0.1,
+		/obj/item/natural/fur/rous = 0.1,
+		/obj/item/natural/fur/cabbit = 0.1,
+		/obj/item/natural/fur/fox = 0.1,
+		/obj/item/natural/fur/bobcat = 0.1,
+	)
 	exotic_bloodtype = /datum/blood_type/human/demihuman
 
 	offset_features_m = list(

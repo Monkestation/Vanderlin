@@ -40,7 +40,7 @@
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/medicine = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/combat/firearms = 4,
 	)
 

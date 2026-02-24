@@ -118,8 +118,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Do we use a blood type seperate from default? (Yes, yes we do)
 	var/datum/blood_type/exotic_bloodtype
 
-	/// What meat do we get from butchering this species?
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak
+	/// What meat do we get from butchering this species? These are weighted odds.
+	var/list/meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1)
 	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
 	/// Food we (SHOULD) get a mood debuff from
@@ -460,8 +460,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
-	var/static/list/male_names = world.file2list('strings/names/first_male.txt')
-	var/static/list/female_names = world.file2list('strings/names/first_female.txt')
+	var/static/list/male_names = file2list('strings/names/first_male.txt')
+	var/static/list/female_names = file2list('strings/names/first_female.txt')
 
 	return (gender == FEMALE) ? female_names : male_names
 
@@ -476,7 +476,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			break
 
 /datum/species/proc/get_possible_surnames(gender = MALE) as /list
-	var/static/list/last_names = world.file2list('strings/names/last.txt')
+	var/static/list/last_names = file2list('strings/names/last.txt')
 
 	return last_names
 
@@ -1759,6 +1759,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -2463,7 +2465,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	else
 		if(!I.force)
 			return
-		if(!I.sharpness)
+		if(user.used_intent.knockback)
 			if(!target.resting)
 				var/endurance = target.STAEND
 				var/knockback_tiles = 0

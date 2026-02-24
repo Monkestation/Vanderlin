@@ -489,7 +489,7 @@
 	. = ..()
 	if(!user.mind)
 		return
-	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+	if(!HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(user, TRAIT_NOBLE_POWER))
 		return
 	if(length(fingers) >= names)
 		to_chat(user, span_notice("[src] is full"))
@@ -600,7 +600,7 @@
 	sell_prices = prices
 	if(!length(sell_prices))
 		sell_prices = generated_test_data()
-	writers_name = pick( world.file2list("strings/rt/names/human/humnorm.txt") )
+	writers_name = pick( file2list("strings/rt/names/human/humnorm.txt") )
 	rebuild_info()
 
 /obj/item/paper/scroll/sell_price_changes/update_icon_state()

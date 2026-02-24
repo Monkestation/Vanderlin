@@ -5,7 +5,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/mastercarpenter
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
-	total_positions = 0
+	total_positions = 1
 	roll_chance = 0
 	apprentice_name = "Carpenter Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
@@ -32,7 +32,7 @@
 		/datum/skill/craft/engineering = 1,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/labor/lumberjacking = 4
 	)
 

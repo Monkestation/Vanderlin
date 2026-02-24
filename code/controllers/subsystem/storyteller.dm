@@ -574,7 +574,7 @@ SUBSYSTEM_DEF(gamemode)
 			checked_one_box = TRUE
 
 		if(living_players && isliving(player))
-			if(!ishuman(player))
+			if(!ishuman(player) || isautomaton(player))
 				continue
 
 			var/datum/job/tested_job = player.mind.assigned_role

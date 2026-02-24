@@ -17,7 +17,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/fibers
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 	output = /obj/item/natural/cloth
 
 /datum/repeatable_crafting_recipe/survival/thorn_needle
@@ -42,6 +42,19 @@
 	attacked_atom = /obj/item/natural/fibers
 	output = /obj/item/rope
 	crafting_message = "starts to braid some fibers"
+
+/datum/repeatable_crafting_recipe/survival/net
+	name = "rope net"
+	requirements = list(
+		/obj/item/rope = 2
+	)
+
+	starting_atom = /obj/item/rope
+	attacked_atom = /obj/item/rope
+	output = /obj/item/rope/net
+	crafting_message = "starts to braid some rope"
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/survival/woodenbucket
 	name = "wooden bucket"
@@ -156,6 +169,17 @@
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/knife/stone
 
+/datum/repeatable_crafting_recipe/survival/stone_sword
+	name = "stone sword"
+	requirements = list (
+		/obj/item/natural/rock = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/weapon/knife
+	attacked_atom = /obj/item/natural/rock
+	output = /obj/item/weapon/sword/stone
+
 /datum/repeatable_crafting_recipe/survival/stone_hoe
 	name = "stone hoe"
 	requirements = list(
@@ -226,7 +250,7 @@
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/storage/sack
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 
 /datum/repeatable_crafting_recipe/survival/sack_clothing
 	name = "head sack"
@@ -241,19 +265,19 @@
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/clothing/head/sack
 	craftdiff = 1
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 	subtypes_allowed = TRUE
 
 /datum/repeatable_crafting_recipe/survival/clay
 	name = "clay lump"
 	requirements = list(
-		/obj/item/natural/dirtclod= 3,
+		/obj/item/natural/clod/dirt= 3,
 	)
 	reagent_requirements = list(
 		/datum/reagent/water = 10
 	)
-	attacked_atom = /obj/item/natural/dirtclod
-	starting_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
+	starting_atom = /obj/item/natural/clod/dirt
 	output = /obj/item/natural/clay
 
 /datum/repeatable_crafting_recipe/survival/wicker_basket

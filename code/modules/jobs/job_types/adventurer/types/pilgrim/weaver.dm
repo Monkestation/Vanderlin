@@ -12,7 +12,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 4,
+		/datum/skill/craft/sewing = 4,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/medicine = 2,

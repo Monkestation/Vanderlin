@@ -11,7 +11,7 @@
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/kick)
 	possible_rmb_intents = list()
-	bloodpool = 1000 // Not as much vitae from them as humans to avoid vampires cheesing mobs
+	bloodpool = 1500 // Not as much vitae from them as humans to avoid vampires cheesing mobs
 
 /mob/living/carbon/human/species/orc/slaved
 	ai_controller = /datum/ai_controller/human_npc
@@ -190,6 +190,7 @@
 	changesource_flags = WABBAJACK
 	var/raceicon = "orc"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/orc
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
 
 /datum/species/orc/update_damage_overlays(mob/living/carbon/human/H)
 	return

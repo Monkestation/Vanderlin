@@ -54,7 +54,7 @@
 			backr = /obj/item/weapon/polearm/halberd/bardiche/woodcutter
 			beltl = /obj/item/weapon/sword/iron
 		if("Claymore")
-			backr = /obj/item/weapon/sword/long/greatsword/ironclaymore
+			backr = /obj/item/weapon/sword/long/greatsword/claymore/iron
 			beltl = /obj/item/weapon/axe/iron
 			
 

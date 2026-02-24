@@ -51,7 +51,7 @@
 	skills = list(
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/misc/medicine = 3,

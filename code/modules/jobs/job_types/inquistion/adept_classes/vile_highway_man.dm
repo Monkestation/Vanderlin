@@ -18,7 +18,7 @@
 		/datum/skill/misc/riding = 1,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/cooking = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/labor/mathematics = 2,
 		/datum/skill/misc/reading = 2,

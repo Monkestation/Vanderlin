@@ -14,7 +14,7 @@
 	name = "corset"
 	desc = "A leather binding to constrict one's figure... and lungs."
 	icon_state = "corset"
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
 
 //................ Amazon chainkini ............... //
