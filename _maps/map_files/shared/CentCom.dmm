@@ -586,7 +586,6 @@
 /area/indoors/vampire_manor)
 "bS" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/weapon/sword/long/vlord,
 /obj/structure/fluff/walldeco/mona{
 	pixel_x = -14
 	},

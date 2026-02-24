@@ -212,6 +212,12 @@ SUBSYSTEM_DEF(mapping)
 #ifdef TESTING
 	INIT_ANNOUNCE("Loading [config.map_name]...")
 #endif
+	//set the primary level to be the designated "town"
+	if(islist(config.traits))
+		for(var/list/level in config.traits)
+			if (!(ZTRAIT_TOWN in level))
+				level[ZTRAIT_TOWN] = TRUE
+
 	LoadGroup(FailedZs, config.map_name, config.map_path, config.map_file, config.traits, ZTRAITS_TOWN, delve = config.delve)
 
 	var/list/otherZ = list()

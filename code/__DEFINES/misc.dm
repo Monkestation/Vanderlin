@@ -222,7 +222,6 @@ GLOBAL_LIST_INIT(ghost_accs_options, list(GHOST_ACCS_NONE, GHOST_ACCS_DIR, GHOST
 #define GHOST_MAX_VIEW_RANGE 24
 
 
-GLOBAL_LIST_EMPTY(coven_breakers_list)
 GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DEFAULT_SPRITE, GHOST_OTHERS_THEIR_SETTING)) //Same as ghost_accs_options.
 
 //pda fonts
