@@ -73,7 +73,7 @@
 	return null
 
 /proc/is_human_part_visible(mob/living/carbon/human/human, flags_inv)
-	if(!human)
+	if(!istype(human))
 		return TRUE
 	if(flags_inv == NONE)
 		return TRUE

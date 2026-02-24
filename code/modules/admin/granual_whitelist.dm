@@ -119,6 +119,8 @@ GLOBAL_LIST_INIT(vessel_ids, list(WHITELIST_AUTOMATON))
 	log_admin(msg)
 
 /client/proc/is_whitelisted(whitelist_id)
+	if(check_rights(R_ADMIN, FALSE))
+		return TRUE
 	var/datum/save_manager/SM = get_save_manager(ckey)
 	if(!SM)
 		return FALSE

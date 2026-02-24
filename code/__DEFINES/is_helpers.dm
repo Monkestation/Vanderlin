@@ -60,6 +60,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define iscarbon(A) (istype(A, /mob/living/carbon))
 #define isroguespirit(A) (istype(A, /mob/living/carbon/spirit)) //underworld spirit
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
+#define isautomaton(A) (istype(A, /mob/living/carbon/human/species/automaton))
 
 //Human sub-species
 #define ishumanspecies(A) (is_species(A, /datum/species/human))

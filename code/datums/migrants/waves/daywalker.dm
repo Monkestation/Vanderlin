@@ -1,3 +1,5 @@
+GLOBAL_VAR_INIT(vamp_detection, FALSE)
+
 /datum/migrant_role/daywalker
 	name = "Daywalker"
 	greet_text = "Some knaves are always trying to wade upstream. You witnessed your entire village be consumed by a subservient vampiric horde - the local Priest grabbed you, and brought you to a remote Monastery; ever since then you've sworn revenge against the restless dead. The Templars showed you everything you needed to know. You walk in the day, so that the undead may only walk in the night."
@@ -24,7 +26,7 @@
 		/datum/skill/misc/climbing = 5,
 		/datum/skill/misc/swimming = 4,
 		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/medicine = 2,
 		///removed firearms skill, why did they even get this?

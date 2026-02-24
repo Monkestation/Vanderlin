@@ -29,7 +29,7 @@
 		/datum/skill/combat/shields = 2,
 		/datum/skill/magic/holy = 1,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/mathematics = 2,
 	)

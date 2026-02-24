@@ -674,5 +674,33 @@
                 "bugfix": "Fixed the pitchfork's sharpness so it didn't deal absolute minimum like 1 force damage"
             }
         ]
+    },
+    "2026-02-23": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixed an oversight from RK helmet PR"
+            },
+            {
+                "admin": "Custom Map insert spawner now works better."
+            }
+        ]
+    },
+    "2026-02-24": {
+        "Ordosian": [
+            {
+                "rscadd": "Automatons can now be picked in traumatized vice."
+            },
+            {
+                "code_imp": "Inquisition traumatized check"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "The captain can promote a serjeant now"
+            },
+            {
+                "rscadd": "new blood drinking mechanics and the ability to consume blood"
+            }
+        ]
     }
 }

@@ -289,7 +289,7 @@
 /datum/backstory/craft/tailor
 	name = "Former Tailor"
 	desc = "You sewed garments for nobles and commoners alike."
-	granted_skill = /datum/skill/misc/sewing
+	granted_skill = /datum/skill/craft/sewing
 	stat_penalty = STATKEY_STR
 
 /datum/backstory/craft/tanner
