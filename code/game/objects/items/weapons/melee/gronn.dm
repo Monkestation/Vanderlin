@@ -169,16 +169,11 @@
 	name = "maul"
 	desc = "Who would need something this large? It looks like it was made for tearing down walls, rather than men."
 	icon_state = "sledge"
-	icon = 'icons/roguetown/weapons/blunt64.dmi'
 	wlength = WLENGTH_LONG
 	swingsound = BLUNTWOOSH_HUGE
 	slot_flags = null //No.
 	minstr = 14
 	wdefense = 3
-	pixel_y = -16
-	pixel_x = -16
-	inhand_x_dimension = 64
-	inhand_y_dimension = 64
 	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE

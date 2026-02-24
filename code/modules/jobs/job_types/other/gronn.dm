@@ -16,7 +16,7 @@
 		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/labor/fishing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT, //All of you can suck my dick they're SEAMEN
-		/datum/skill/misc/sewing = SKILL_LEVEL_NOVICE,
+		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 	)
 
@@ -164,7 +164,7 @@
 		/datum/skill/craft/tanning = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/labor/fishing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_EXPERT, //All of you can suck my dick they're SEAMEN
-		/datum/skill/misc/sewing = SKILL_LEVEL_NOVICE,
+		/datum/skill/craft/sewing = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/axesmaces = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
