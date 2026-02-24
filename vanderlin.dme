@@ -2404,6 +2404,8 @@
 #include "code\modules\clothing\wrists\misc.dm"
 #include "code\modules\combat\_special_intent.dm"
 #include "code\modules\combat\special_intents.dm"
+#include "code\modules\combat\clash\clash.dm"
+#include "code\modules\combat\clash\status_effects.dm"
 #include "code\modules\cooking\NeuFood.dm"
 #include "code\modules\cooking\Teas_and_Brews.dm"
 #include "code\modules\cooking\cooked\NeuFood_pies.dm"
