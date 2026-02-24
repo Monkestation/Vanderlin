@@ -20,7 +20,7 @@
 		/datum/skill/labor/butchering = 2,
 		/datum/skill/labor/taming = 4,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/craft/traps = 3,
 		/datum/skill/misc/athletics = 3,

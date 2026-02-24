@@ -6,7 +6,7 @@
 
 /datum/slapcraft_step/use_item/sewing
 	abstract_type = /datum/slapcraft_step/use_item/sewing
-	skill_type = /datum/skill/misc/sewing
+	skill_type = /datum/skill/craft/sewing
 
 
 /datum/slapcraft_step/use_item/carpentry
