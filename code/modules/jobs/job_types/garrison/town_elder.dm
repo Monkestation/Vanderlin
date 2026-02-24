@@ -188,7 +188,7 @@
 		/datum/skill/craft/carpentry,
 		/datum/skill/craft/engineering,
 		/datum/skill/craft/smelting,
-		/datum/skill/misc/sewing,
+		/datum/skill/craft/sewing,
 		/datum/skill/labor/farming,
 		/datum/skill/misc/medicine,
 		/datum/skill/craft/tanning,
@@ -243,7 +243,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 2,
@@ -415,7 +415,7 @@
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/music = 6,

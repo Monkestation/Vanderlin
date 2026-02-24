@@ -87,6 +87,16 @@
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
+/datum/enchantment/silver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
+	var/affected = affected_by_bane(user)
+	if(!affected)
+		return FALSE
+	to_chat(user, span_userdanger("They wear my BANE!"))
+	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
+	if(affected != AFFECTED_VLORD)
+		user.Paralyze(1 SECONDS)
+	return TRUE
+
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane

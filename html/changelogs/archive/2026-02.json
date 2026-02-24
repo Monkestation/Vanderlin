@@ -684,5 +684,23 @@
                 "admin": "Custom Map insert spawner now works better."
             }
         ]
+    },
+    "2026-02-24": {
+        "Ordosian": [
+            {
+                "rscadd": "Automatons can now be picked in traumatized vice."
+            },
+            {
+                "code_imp": "Inquisition traumatized check"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "The captain can promote a serjeant now"
+            },
+            {
+                "rscadd": "new blood drinking mechanics and the ability to consume blood"
+            }
+        ]
     }
 }
