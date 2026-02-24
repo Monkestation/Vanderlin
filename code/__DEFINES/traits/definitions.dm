@@ -336,7 +336,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STRONGBITE "Strong Bite"
 #define TRAIT_HATEWOMEN	"Ladykiller"
 #define TRAIT_SEEDKNOW "Seed Knower"
-#define TRAIT_NOBLE TRAIT_NOBLE_BLOOD // Compat for vamp changes. Temporary measure.
 #define TRAIT_NOBLE_BLOOD	"Noble Blooded"
 #define TRAIT_NOBLE_POWER	"Noble Authority"
 #define TRAIT_EMPATH "Empath"
