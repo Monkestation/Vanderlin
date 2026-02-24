@@ -511,15 +511,23 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	flee_in_pain = TRUE
 	wander = TRUE
 
-/datum/outfit/npc/rousman/seer/pre_equip(mob/living/carbon/human/H)
+/mob/living/carbon/human/species/rousman/seer/stronger/with_ai
+	ai_controller = /datum/ai_controller/human_npc
+
+/mob/living/carbon/human/species/rousman/seer/stronger/after_creation()
+	. = ..()
+	job = "Seer Rousman"
+	equipOutfit(new /datum/outfit/npc/rousman/seer_stronger)
+
+/datum/outfit/npc/rousman/seer/pre_equip(mob/living/carbon/human/seer)
 	..()
-	H.base_strength = rand(4, 8)
-	H.base_perception = rand(6, 10)
-	H.base_intelligence = rand(10, 16)
-	H.base_constitution = rand(4, 8)
-	H.base_endurance = rand(7, 10)
-	H.base_speed = rand(10, 15)
-	H.recalculate_stats(FALSE)
+	seer.base_strength = rand(4, 8)
+	seer.base_perception = rand(6, 10)
+	seer.base_intelligence = rand(10, 16)
+	seer.base_constitution = rand(4, 8)
+	seer.base_endurance = rand(7, 10)
+	seer.base_speed = rand(10, 15)
+	seer.recalculate_stats(FALSE)
 
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
@@ -535,12 +543,52 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	H.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-	H.adjust_spell_points(17)
-	H.generate_random_attunements(rand(4,6))
-	H.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
-	H.mana_pool.adjust_mana(100)
+	seer.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)
+	seer.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
+	seer.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+	seer.adjust_spell_points(17)
+	seer.generate_random_attunements(rand(4,6))
+	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
-		H.add_spell(spell)
+		seer.add_spell(spell)
+
+/datum/outfit/npc/rousman/seer_stronger/pre_equip(mob/living/carbon/human/seer)
+	..()
+	seer.base_strength = rand(4, 8)
+	seer.base_perception = rand(8, 12)
+	seer.base_intelligence = rand(12, 18)
+	seer.base_constitution = rand(6, 10)
+	seer.base_endurance = rand(8, 11)
+	seer.base_speed = rand(11, 16)
+	seer.recalculate_stats(FALSE)
+
+	seer.grant_language(/datum/language/common)
+
+	armor = /obj/item/clothing/shirt/robe/rousseer
+	head = /obj/item/clothing/head/roguehood/rousman/rousseer
+	r_hand = /obj/item/weapon/polearm/woodstaff/seer
+	belt = /obj/item/storage/belt/leather/black
+	l_pocket = /obj/item/book/granter/spellbook/expert
+
+	var/list/spells = list(
+		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
+		/datum/action/cooldown/spell/conjure/rous,
+		/datum/action/cooldown/spell/undirected/arcyne_eye,
+		/datum/action/cooldown/spell/projectile/fetch,
+		/datum/action/cooldown/spell/projectile/sickness,
+		/datum/action/cooldown/spell/eyebite,
+		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/blood_bolt,
+		/datum/action/cooldown/spell/sundering_lightning,
+	)
+
+	seer.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)
+	seer.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
+	seer.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+	seer.adjust_spell_points(17)
+	seer.generate_random_attunements(rand(4,6))
+	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+	seer.mana_pool.adjust_mana(100)
+	for(var/spell in spells)
+		seer.add_spell(spell)
