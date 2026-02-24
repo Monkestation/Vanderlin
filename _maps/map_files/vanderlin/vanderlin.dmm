@@ -9143,6 +9143,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
+"etk" = (
+/mob/living/carbon/human/species/automaton/prefilled_vessel,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/town/basement)
 "etw" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/darker,
@@ -29473,7 +29477,6 @@
 /obj/structure/door/violet{
 	name = "Royal Guard's Storage"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -76700,7 +76703,7 @@ qFx
 qFx
 dHC
 vpQ
-dIz
+etk
 jTO
 oqo
 jTO

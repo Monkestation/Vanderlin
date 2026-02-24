@@ -35,7 +35,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 /datum/job/advclass/combat/paladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)

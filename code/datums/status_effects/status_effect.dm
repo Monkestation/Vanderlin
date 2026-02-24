@@ -36,7 +36,7 @@
 	var/list/effectedstats = list()
 
 	/// Variables to create a mob overlay if applicable
-	var/mob_overlay_icon
+	var/mob_overlay_icon = 'icons/mob/mob_effects.dmi'
 	var/mob_overlay_icon_state
 	var/mob_overlay_layer
 

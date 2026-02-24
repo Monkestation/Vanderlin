@@ -344,11 +344,11 @@
 /datum/special_trait/blueblood
 	name = "Noble Lineage"
 	greet_text = span_notice("I come of noble blood.")
-	restricted_traits = list(TRAIT_NOBLE)
+	restricted_traits = list(TRAIT_NOBLE_BLOOD)
 	weight = 100
 
 /datum/special_trait/blueblood/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_NOBLE, "[type]")
+	ADD_TRAIT(character, TRAIT_NOBLE_BLOOD, "[type]")
 	character.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 
 /datum/special_trait/burdened

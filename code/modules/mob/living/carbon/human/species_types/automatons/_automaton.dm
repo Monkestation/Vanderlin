@@ -1,6 +1,15 @@
 /mob/living/carbon/human/species/automaton
 	race = /datum/species/automaton
 	footstep_type = FOOTSTEP_MOB_METAL
+	job = "Automaton"
+
+/mob/living/carbon/human/species/automaton/vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel, /obj/item/reagent_containers/lux)
+
+/mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel)
 
 /datum/species/automaton
 	name = "Automaton"
@@ -22,6 +31,7 @@
 	meat = list()
 	no_equip = list(
 		ITEM_SLOT_SHIRT,
+		ITEM_SLOT_ARMOR,
 		ITEM_SLOT_MASK,
 		ITEM_SLOT_GLOVES,
 		ITEM_SLOT_SHOES,
@@ -49,6 +59,11 @@
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTHEAT,
 		TRAIT_NOBREATH,
+		TRAIT_NOPAIN,
+		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
+		TRAIT_TOXIMMUNE,
+		TRAIT_FEARLESS
 	)
 
 	specstats_m = list(
@@ -72,13 +87,17 @@
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 
-	possible_ages = ALL_AGES_LIST
+	possible_ages = list(AGE_IMMORTAL)
 	use_skintones = TRUE
 
 	native_language = "Common"
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/automaton.dmi'
+
+	soundpack_m = /datum/voicepack/silent/m
+	soundpack_f = /datum/voicepack/silent/f
+
 
 	enflamed_icon = "widefire"
 
@@ -113,6 +132,8 @@
 	C.AddComponent(/datum/component/steam_life)
 	C.AddComponent(/datum/component/command_follower)
 	C.AddComponent(/datum/component/augmentable)
+	C.AddComponent(/datum/component/easy_repair)
+	C.AddComponent(/datum/component/damage_shutdown)
 
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
@@ -121,6 +142,9 @@
 		C.add_spell(action)
 
 	C.add_movespeed_modifier("automaton", multiplicative_slowdown = 0.9)
+
+	for(var/obj/item/bodypart/part as anything in C.bodyparts)
+		part.status = BODYPART_ROBOTIC
 
 /datum/species/automaton/on_species_loss(mob/living/carbon/C)
 	. = ..()
@@ -174,12 +198,10 @@
 /obj/item/organ/heart/automaton
 	name = "steam engine"
 	desc = "A miniature steam engine that powers the automaton's movements."
-	icon_state = "steam_heart"
 
 /obj/item/organ/eyes/automaton
 	name = "optical sensors"
 	desc = "Glowing lenses that allow the automaton to perceive the world."
-	icon_state = "automaton_eyes"
 
 /datum/blood_type/oil
 	name = "Lubricating Oil"

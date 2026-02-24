@@ -8,7 +8,8 @@
 	lord_spells = list(
 		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
-		/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire
+		/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire,
+		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/demand_submission,
@@ -30,14 +31,16 @@
 		/datum/coven/bloodheal
 	)
 	blood_preference = BLOOD_PREFERENCE_RATS | BLOOD_PREFERENCE_DEAD | BLOOD_PREFERENCE_KIN
+	blood_disgust = BLOOD_PREFERENCE_FANCY
+
 	clane_traits = list(
 		TRAIT_STRONGBITE,
+		TRAIT_BLOODDRINKER,
 		TRAIT_KEENEARS,
 		TRAIT_NOENERGY,
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOSLEEP,
 		TRAIT_VAMPMANSION,
@@ -45,6 +48,8 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
+		TRAIT_NASTY_EATER,
+		TRAIT_POISON_RESILIENCE,
 	)
 
 /datum/clan/nosferatu/get_downside_string()
@@ -66,5 +71,7 @@
 	H.AddComponent(/datum/component/vampire_disguise)
 	H.AddComponent(/datum/component/hideous_face, CALLBACK(src, TYPE_PROC_REF(/datum/clan/nosferatu, face_seen)))
 
-/datum/clan/nosferatu/proc/face_seen(mob/living/carbon/human/nosferatu)
-	nosferatu.AdjustMasquerade(-1)
+/datum/clan/nosferatu/proc/face_seen(mob/living/carbon/human/nosferatu, mob/living/carbon/user)
+	user.add_stress(/datum/stress_event/nosferatu_seen)
+	if(length(nosferatu.CheckEyewitness(user)))
+		nosferatu.vampire_detected(1)

@@ -36,7 +36,7 @@
 		/datum/skill/misc/climbing = 1,
 	)
 
-	traits = list(TRAIT_NOBLE, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED)
+	traits = list(TRAIT_NOBLE_BLOOD, TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED)
 	languages = list(/datum/language/undead)
 	cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 

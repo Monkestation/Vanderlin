@@ -24,7 +24,7 @@
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/reading = 1,

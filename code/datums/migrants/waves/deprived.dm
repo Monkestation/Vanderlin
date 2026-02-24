@@ -24,7 +24,7 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/tanning = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/labor/fishing = 2,
 	)
