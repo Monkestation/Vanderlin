@@ -23,6 +23,7 @@
 	grid_height = 64
 	grid_width = 32
 
+	weapon_special = /datum/special_intent/axe_swing
 
 //................ Stone Axe ............... //
 /obj/item/weapon/axe/stone
