@@ -69,7 +69,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE) //so they're slightly better at the three things they can do while incarcerated.
+		spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE) //so they're slightly better at the three things they can do while incarcerated.
 		spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, 2)
