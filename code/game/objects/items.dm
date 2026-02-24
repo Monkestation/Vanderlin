@@ -1535,4 +1535,5 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!ismob(loc))
 		return
 
-	balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
+	if(!silent)
+		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
