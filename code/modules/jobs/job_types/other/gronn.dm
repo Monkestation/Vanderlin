@@ -183,7 +183,7 @@
 	cloak = /obj/item/clothing/cloak/volfmantle	//Aura farming.
 	wrists = /obj/item/clothing/wrists/bracers/iron //Weakspot.
 	pants = /obj/item/clothing/pants/platelegs/iron/gronn
-	r_hand = /obj/item/weapon/mace/maul
+	r_hand = /obj/item/weapon/mace/goden/maul
 	neck = /obj/item/clothing/neck/bevor/iron
 	backl = /obj/item/storage/backpack/satchel/black
 	belt = /obj/item/storage/belt/leather

@@ -162,13 +162,12 @@
 
 //Mauls. Woe. Most characters will not be able to engage with this, beyond hobbling.
 //Why? The unique strength lockout. The minimum strength is not a suggestion.
-/obj/item/weapon/mace/maul
+/obj/item/weapon/mace/goden/maul
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD - 3 //-3 compared to grand mace(steel goden). Better intents.
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
 	name = "maul"
 	desc = "Who would need something this large? It looks like it was made for tearing down walls, rather than men."
-	icon = 'icons/roguetown/weapons/64/maces.dmi'
 	icon_state = "sledge"
 	wlength = WLENGTH_LONG
 	swingsound = BLUNTWOOSH_HUGE
