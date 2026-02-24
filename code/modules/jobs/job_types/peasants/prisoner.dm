@@ -63,7 +63,7 @@
 		spawned.adjust_skillrank(/datum/skill/labor/mathematics, 3, TRUE)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 3)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 3)
-		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 	else
 		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
