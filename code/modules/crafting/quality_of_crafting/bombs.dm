@@ -210,3 +210,4 @@
 	reagent_subtypes_allowed = TRUE
 	craftdiff = 1
 */
+//READD WHEN THE MAIN ITEM IS DONE, AKA NEVER OR WHEN WE NEED IT
