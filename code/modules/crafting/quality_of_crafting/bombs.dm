@@ -190,7 +190,7 @@
 	output = /obj/item/reagent_containers/powder/flashpowder
 	output_amount = 3
 	craft_time = 5 SECONDS
-
+/*
 /datum/repeatable_crafting_recipe/bomb/hellfire
 	name = "Silver bomb"
 
@@ -209,3 +209,4 @@
 	subtypes_allowed = TRUE
 	reagent_subtypes_allowed = TRUE
 	craftdiff = 1
+*/

@@ -1,3 +1,6 @@
+//Uncraftable because I had too much trouble coding this and it wasnt needed as of now. Finish when vamps and WW become OP again
+
+
 /obj/projectile/bullet/hellfire
 	name = "melted silver"
 	desc = "How can you see this?"
@@ -10,11 +13,6 @@
 	speed = 0.9
 	reduce_crit_chance = 1
 
-/obj/projectile/bullet/hellfire/on_hit(target)
-	. = ..()
-	var/datum/species/bang = /datum/species/werewolf || target.mind.has_antag_datum(/datum/antagonist/vampire)
-		bang.fire_act(30)
-		bang.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 
 /obj/item/explosive/hell_fire
 	name = "Psydons rebuke"
