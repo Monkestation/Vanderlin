@@ -105,8 +105,8 @@
 	if(!istype(cast_on))
 		return
 
-	if(do_after(owner, 7 SECONDS, cast_on))
-		var/ramount = 5
+	if(do_after(owner, 4 SECONDS, cast_on))
+		var/ramount = 5 // fully metabolized just under 9 seconds. DO NOT ALLOW REAGENT STACKING
 		var/rid = /datum/reagent/medicine/healthpot
 		cast_on.reagents.add_reagent(rid, ramount)
 
