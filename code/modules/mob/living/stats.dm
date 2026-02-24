@@ -88,6 +88,7 @@
 				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
+				H.virginity = TRUE
 			// nothing for adults/immortals,
 			if(AGE_MIDDLEAGED)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
@@ -110,12 +111,6 @@
 			change_stat(STATKEY_LCK, -3)
 			H.voice_color = "c71d76"
 			set_eye_color(H, "#c71d76", "#c71d76")
-
-		if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
-			change_stat(STATKEY_LCK, 1)
-
-		if(HAS_TRAIT(src, TRAIT_UGLY))
-			change_stat(STATKEY_LCK, -1)
 
 	has_rolled_for_stats = TRUE
 	return TRUE

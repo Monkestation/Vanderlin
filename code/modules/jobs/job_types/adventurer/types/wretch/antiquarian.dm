@@ -25,7 +25,7 @@
 		/datum/skill/misc/sneaking = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/misc/stealing = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
-		/datum/skill/misc/sewing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/sewing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/craft/bombs = SKILL_LEVEL_JOURNEYMAN // To craft Smoke Bombs.
 	)
 

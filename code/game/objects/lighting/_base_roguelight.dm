@@ -247,7 +247,7 @@
 		return
 	else
 		if(on)
-			if(istype(W, /obj/item/natural/dirtclod))
+			if(istype(W, /obj/item/natural/clod))
 				if(!user.temporarilyRemoveItemFromInventory(W))
 					return
 				on = FALSE

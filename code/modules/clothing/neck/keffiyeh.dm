@@ -22,7 +22,7 @@
 	color = CLOTHING_LINEN
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	prevent_crits = MINOR_CRITICALS
 	armor = ARMOR_LEATHER_GOOD
 	max_integrity = INTEGRITY_WORST

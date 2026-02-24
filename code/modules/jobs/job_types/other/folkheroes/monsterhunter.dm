@@ -9,7 +9,7 @@
 	is_recognized = TRUE
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 3,

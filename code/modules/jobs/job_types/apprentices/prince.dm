@@ -118,7 +118,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/mathematics = 3
 	)
 
@@ -178,7 +178,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1
+		/datum/skill/craft/sewing = 1
 	)
 
 	traits = list(

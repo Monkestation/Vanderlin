@@ -381,6 +381,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SEEPRICES "Golden Blood" //See prices
 #define TRAIT_SEE_LEYLINES "Magical Visions"
 #define TRAIT_POISONBITE "Poison Bite"
+#define TRAIT_BLOODDRINKER "Blood Drinker" // Can drink blood without vomiting
 #define TRAIT_FORAGER "Expert Forager"
 #define TRAIT_TINY "Tiny"
 #define TRAIT_DREAM_WATCHER	"Noc Blessed" //Unique Trait of the Dream Watcher Town Elder Class, they have a chance to know about antags or gods influences.
@@ -425,7 +426,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FISHFACE "Fishface"
 #define TRAIT_FAT "Obese"
 #define TRAIT_SCHIZO_FLAW "Schizophrenic"
-#define TRAIT_VIOLATOR "Violator of the Coven"
 #define TRAIT_TORPOR "Endless Slumber"
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"

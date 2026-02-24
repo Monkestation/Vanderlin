@@ -3,8 +3,8 @@
 	desc = ""
 	icon_state = "srat"
 	icon = 'icons/roguetown/mob/monster/rat.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	pass_flags = PASSDOORS
@@ -28,13 +28,12 @@
 	user.visible_message(span_warning("[user] drinks from [src]!"),\
 	span_warning("I drink from [src]."))
 	playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
-	user.adjust_bloodpool(50)
 	var/blood_handle = BLOOD_PREFERENCE_RATS
 	if(dead)
 		blood_handle |= BLOOD_PREFERENCE_DEAD
 	else
 		blood_handle |= BLOOD_PREFERENCE_LIVING
-	user.clan.handle_bloodsuck(user, blood_handle)
+	user.adjust_bloodpool(user.clan.handle_bloodsuck(user, blood_handle, 150))
 	playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
 	if(dead)
 		qdel(src)
@@ -47,7 +46,7 @@
 	name = "fried rat"
 	icon_state = "cookedrat"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	rotprocess = SHELFLIFE_SHORT

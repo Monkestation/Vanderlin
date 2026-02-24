@@ -33,6 +33,7 @@
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
 		/datum/language/deepspeak
@@ -128,7 +129,7 @@
 		/datum/skill/misc/reading = 6,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/labor/mathematics = 4
 	)

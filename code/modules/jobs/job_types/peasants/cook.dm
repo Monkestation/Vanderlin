@@ -30,7 +30,7 @@
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/cooking = 4,
 		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/butchering = 3,
 		/datum/skill/labor/taming = 1,
 		/datum/skill/labor/farming = 1

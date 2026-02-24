@@ -26,7 +26,7 @@
 	name = "Reliquary Key"
 	desc = "The single use key with which to unleash woe. Choose wisely."
 
-/obj/structure/reliquarybox/attackby(obj/item/W, mob/user, params)
+/obj/structure/reliquarybox/attackby(obj/item/W, mob/user, list/modifiers)
 	if(ishuman(user))
 		if(istype(W, /obj/item/key/psydonkey))
 			if(opened)
@@ -1036,7 +1036,8 @@
 		bagcheck(target)
 		if(do_after(user, timetobag, target))
 			bagging = FALSE
-			headgear.doStrip(user, target)
+			if(headgear)
+				headgear.doStrip(user, target)
 			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
@@ -1045,7 +1046,8 @@
 		bagcheck(target)
 		if(do_after(user, timetobag / 2, target))
 			bagging = FALSE
-			headgear.doStrip(user, target)
+			if(headgear)
+				headgear.doStrip(user, target)
 			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 		else
 			bagging = FALSE
@@ -1180,7 +1182,7 @@
 	openstate = "broken"
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/inqarticles/bmirror/attack_self(mob/user, params)
+/obj/item/inqarticles/bmirror/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!user.mind)
 		return
@@ -1310,7 +1312,7 @@
 		fedblood = TRUE
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/inqarticles/bmirror/attackby(obj/item/I, mob/user, params)
+/obj/item/inqarticles/bmirror/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/natural/cloth))
 		return
@@ -1326,7 +1328,7 @@
 		bloody = FALSE
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, params)
+/obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
 

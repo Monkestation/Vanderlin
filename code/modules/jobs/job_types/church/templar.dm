@@ -42,7 +42,7 @@
 		/datum/skill/misc/reading = 2,
 		/datum/skill/magic/holy = 2,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/sewing = 2
+		/datum/skill/craft/sewing = 2
 	)
 
 	traits = list(
@@ -66,7 +66,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/necra)
 			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)

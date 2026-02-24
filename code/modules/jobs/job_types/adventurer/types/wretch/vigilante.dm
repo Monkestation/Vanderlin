@@ -24,7 +24,7 @@
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/sewing = 4,
+		/datum/skill/craft/sewing = 4,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/misc/lockpicking = 2,
 		/datum/skill/combat/firearms = 4,

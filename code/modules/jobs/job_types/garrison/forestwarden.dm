@@ -54,7 +54,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/tanning = 2
 	)
 

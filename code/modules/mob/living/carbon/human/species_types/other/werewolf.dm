@@ -36,7 +36,8 @@
 		TRAIT_HARDDISMEMBER,
 		TRAIT_UNDODGING,
 		TRAIT_UNPARRYING,
-		TRAIT_LONGSTRIDER
+		TRAIT_LONGSTRIDER,
+		TRAIT_BLOODDRINKER,
 	)
 
 	inherent_biotypes = MOB_HUMANOID
@@ -66,6 +67,8 @@
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
+
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
 
 	changesource_flags = WABBAJACK
 	bleed_mod = 0.6
