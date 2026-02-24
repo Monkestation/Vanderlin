@@ -40,7 +40,7 @@
 /area/outdoors)
 "ag" = (
 /turf/closed/basic,
-/area)
+/area/empty_space)
 "ah" = (
 /obj/item/weapon/sword/short,
 /obj/item/weapon/sword/short,
@@ -131,9 +131,6 @@
 "au" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/indoors)
-"av" = (
-/turf/open/floor/carpet/royalblack,
-/area)
 "aw" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors)
@@ -256,7 +253,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "aQ" = (
 /obj/item/weapon/pick,
 /obj/item/weapon/pick,
@@ -1448,7 +1445,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "fZ" = (
 /obj/structure/rotation_piece{
 	dir = 8
@@ -1762,7 +1759,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "ik" = (
 /obj/structure/winch{
 	gid = "vamplordmanor";
@@ -2064,7 +2061,7 @@
 /obj/item/clothing/shirt/undershirt/colored/black,
 /obj/item/clothing/pants/tights/colored/black,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "ke" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -2228,7 +2225,7 @@
 /obj/item/clothing/shirt/robe/noc,
 /obj/item/clothing/head/padded/deathface,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "lo" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/blocks/paving,
@@ -2519,7 +2516,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "nw" = (
 /obj/structure/flora/grass,
 /mob/living/simple_animal/hostile/retaliate/cow,
@@ -2796,9 +2793,6 @@
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"pa" = (
-/turf/closed/mineral/bedrock,
-/area/outdoors/beach)
 "pf" = (
 /turf/open/floor/concrete,
 /area/outdoors/woods_safe)
@@ -3225,7 +3219,7 @@
 /area/indoors/vampire_manor)
 "rQ" = (
 /turf/closed,
-/area)
+/area/empty_space)
 "rS" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = 15;
@@ -3610,7 +3604,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "uk" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -3637,7 +3631,7 @@
 /obj/item/clothing/shirt/undershirt/colored/green,
 /obj/item/clothing/pants/tights/colored/green,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "uy" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/tree,
@@ -4090,7 +4084,7 @@
 /obj/item/clothing/shirt/robe/eora/alt,
 /obj/item/clothing/head/roguehood/eora,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "xt" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
@@ -4136,7 +4130,7 @@
 /obj/item/clothing/shirt/undershirt/colored/red,
 /obj/item/clothing/pants/tights/colored/red,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "xK" = (
 /obj/structure/stairs{
 	dir = 1
@@ -4240,6 +4234,9 @@
 /obj/item/weapon/knife/dagger,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/bandit_lair)
+"yr" = (
+/turf/closed/mineral/bedrock,
+/area/empty_space)
 "yu" = (
 /turf/closed/wall/mineral/craftstone,
 /area/overlord_lair)
@@ -4368,7 +4365,7 @@
 "zp" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/carpet/royalblack,
-/area)
+/area/indoors)
 "zr" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 8
@@ -4695,7 +4692,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "BD" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/carpet,
@@ -4722,7 +4719,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/item/clothing/shirt/undershirt/colored/uncolored,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "BL" = (
 /obj/structure/door/iron/bars{
 	lockid = "mansionvampire"
@@ -4745,7 +4742,7 @@
 /obj/item/clothing/head/priesthat,
 /obj/item/clothing/shirt/robe/priest,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "BT" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/cobblerock,
@@ -4769,7 +4766,7 @@
 /obj/item/clothing/shirt/robe/priest,
 /obj/item/clothing/head/roguehood/priest,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "BY" = (
 /obj/effect/landmark/mapGenerator/forest{
 	endTurfX = 128;
@@ -4878,7 +4875,7 @@
 "CK" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/carpet/royalblack,
-/area)
+/area/indoors)
 "CL" = (
 /turf/open/floor/twig,
 /area/indoors/lich)
@@ -4922,7 +4919,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "CV" = (
 /obj/structure/chair/wood/alt/fancy,
 /turf/open/floor/carpet/red,
@@ -5034,7 +5031,7 @@
 /obj/item/clothing/shirt/undershirt/colored/lord,
 /obj/item/clothing/pants/tights/colored/lord,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "DX" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -5230,7 +5227,7 @@
 /obj/item/clothing/shirt/robe/dendor,
 /obj/item/clothing/head/padded/briarthorns,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Fz" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -5380,6 +5377,9 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
+"GJ" = (
+/turf/closed,
+/area/indoors)
 "GK" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
@@ -5897,7 +5897,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "JJ" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
@@ -6334,7 +6334,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Nh" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -6683,7 +6683,7 @@
 /obj/item/clothing/shirt/robe/pestra,
 /obj/item/clothing/head/padded/pestra,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "PJ" = (
 /obj/item/natural/rock,
 /turf/open/floor/grass/red,
@@ -6740,9 +6740,6 @@
 /obj/item/storage/belt/pouch,
 /turf/open/floor/carpet,
 /area/indoors)
-"Qe" = (
-/turf/closed/wall/mineral/decowood,
-/area)
 "Qh" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "We are looking into adding living thralls for vamps, as support classes. This is dedicating space for them"
@@ -6791,7 +6788,7 @@
 /obj/structure/mannequin/male,
 /obj/item/clothing/shirt/robe/magus,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Qv" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach{
@@ -6823,7 +6820,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "QA" = (
 /turf/closed/wall/mineral/decostone,
 /area/indoors/lich)
@@ -6900,7 +6897,7 @@
 "Ra" = (
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Rb" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/admin,
@@ -7115,7 +7112,7 @@
 /obj/structure/mannequin/male,
 /obj/item/clothing/shirt/robe/necromancer,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Se" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
@@ -7281,7 +7278,7 @@
 /obj/item/clothing/shirt/robe/eora,
 /obj/item/clothing/head/roguehood/eora,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Te" = (
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
@@ -7302,7 +7299,7 @@
 /obj/item/clothing/shirt/undershirt/colored/purple,
 /obj/item/clothing/pants/tights/colored/purple,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Tk" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/storage/backpack/satchel,
@@ -7646,9 +7643,6 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
-"Vm" = (
-/turf/closed/wall/mineral/wooddark,
-/area)
 "Vq" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
@@ -7748,7 +7742,7 @@
 /obj/item/clothing/shirt/robe/astrata,
 /obj/item/clothing/head/roguehood/astrata,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "VW" = (
 /obj/structure/fluff/wallclock/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -7916,7 +7910,7 @@
 /obj/item/clothing/shirt/robe/necra,
 /obj/item/clothing/head/helmet/heavy/necked/necra,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "Xi" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -8007,7 +8001,7 @@
 /obj/item/clothing/pants/tights/colored/uncolored,
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
-/area)
+/area/indoors)
 "XN" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
@@ -8426,7 +8420,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -8556,7 +8550,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -8686,7 +8680,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -8816,7 +8810,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -8946,7 +8940,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9053,30 +9047,30 @@ rQ
 rQ
 rQ
 rQ
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9183,7 +9177,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9199,14 +9193,14 @@ RX
 RX
 RX
 Vz
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9313,7 +9307,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9329,14 +9323,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9443,7 +9437,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9459,14 +9453,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9573,7 +9567,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9589,14 +9583,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9703,7 +9697,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9719,14 +9713,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9833,7 +9827,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9849,14 +9843,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -9963,7 +9957,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -9979,14 +9973,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10093,7 +10087,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10109,14 +10103,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10223,7 +10217,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10239,14 +10233,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10353,7 +10347,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10369,14 +10363,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10483,7 +10477,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10499,14 +10493,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10613,7 +10607,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10629,14 +10623,14 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
+yr
 rQ
 rQ
 ag
@@ -10743,7 +10737,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10759,15 +10753,15 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 AU
 AU
 AU
@@ -10873,7 +10867,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -10889,15 +10883,15 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 xO
 vj
 vj
@@ -11003,7 +10997,7 @@ rQ
 rQ
 rQ
 rQ
-bX
+yr
 RX
 RX
 RX
@@ -11019,15 +11013,15 @@ RX
 RX
 RX
 RX
-bX
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 Ke
 al
 UR
@@ -11133,31 +11127,31 @@ rQ
 rQ
 rQ
 rQ
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
 rQ
 rQ
 rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 Ke
 al
 al
@@ -11286,8 +11280,8 @@ rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 Ke
 sD
 LE
@@ -11416,8 +11410,8 @@ rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 Ke
 LE
 GP
@@ -11546,8 +11540,8 @@ rQ
 rQ
 rQ
 rQ
-bX
-bX
+yr
+AU
 Ke
 al
 sl
@@ -11643,41 +11637,41 @@ Iw
 (26,1,1) = {"
 rQ
 rQ
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+yr
+AU
 aY
 Zd
 Zd
@@ -11807,8 +11801,8 @@ ag
 ag
 ag
 ag
-bX
-pa
+AU
+AU
 AU
 ec
 aJ
@@ -13629,9 +13623,9 @@ iu
 eF
 iu
 vI
-Qe
-Qe
-Vm
+aw
+aw
+vI
 AU
 Ix
 Do
@@ -13759,9 +13753,9 @@ iu
 eF
 iu
 be
-rQ
-rQ
-Qe
+GJ
+GJ
+aw
 AU
 bp
 pE
@@ -13889,9 +13883,9 @@ iu
 eF
 iu
 aw
-rQ
-rQ
-Qe
+GJ
+GJ
+aw
 AU
 pU
 bp
@@ -14019,9 +14013,9 @@ iu
 eF
 iu
 be
-rQ
-rQ
-Qe
+GJ
+GJ
+aw
 AU
 AU
 bp
@@ -14060,7 +14054,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 yE
 yE
@@ -14149,9 +14143,9 @@ iu
 iu
 iu
 aw
-rQ
-rQ
-Qe
+GJ
+GJ
+aw
 rQ
 AU
 AU
@@ -14190,7 +14184,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 UB
 Vu
@@ -14279,9 +14273,9 @@ or
 eF
 eF
 aw
-rQ
-rQ
-Qe
+GJ
+GJ
+aw
 rQ
 rQ
 fC
@@ -14320,7 +14314,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 VQ
 jZ
@@ -14409,11 +14403,11 @@ vI
 aw
 aw
 vI
-Qe
-Qe
-Vm
-Qe
-Vm
+aw
+aw
+vI
+aw
+vI
 AU
 AU
 pE
@@ -14450,7 +14444,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 cQ
 Ba
@@ -14529,21 +14523,21 @@ ag
 ag
 ag
 ag
-Qe
-av
-av
+aw
+ba
+ba
 CK
-av
-av
+ba
+ba
 CK
-av
-av
+ba
+ba
 CK
-av
-av
+ba
+ba
 CK
-av
-Qe
+ba
+aw
 AU
 bp
 pE
@@ -14580,7 +14574,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 ct
 Js
 bE
@@ -14659,8 +14653,8 @@ ag
 ag
 ag
 ag
-Qe
-av
+aw
+ba
 BJ
 kb
 DT
@@ -14672,8 +14666,8 @@ Qz
 nv
 fU
 aO
-av
-Qe
+ba
+aw
 ob
 lh
 lh
@@ -14710,7 +14704,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 ct
 dg
 Ba
@@ -14789,8 +14783,8 @@ ag
 ag
 ag
 ag
-Qe
-av
+aw
+ba
 Ra
 Ra
 Ra
@@ -14802,8 +14796,8 @@ CR
 JH
 ij
 Ng
-av
-Qe
+ba
+aw
 lh
 nQ
 eU
@@ -14832,15 +14826,15 @@ ag
 ag
 ag
 ag
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 ck
 Ba
@@ -14919,21 +14913,21 @@ ag
 ag
 ag
 ag
-Qe
-av
-av
-av
-av
-av
-av
-av
-av
-av
-av
-av
-av
-av
-Qe
+aw
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+aw
 au
 jv
 eU
@@ -14962,7 +14956,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 gZ
 gZ
 gZ
@@ -15049,8 +15043,8 @@ ag
 ag
 ag
 ag
-Qe
-av
+aw
+ba
 SW
 xs
 BX
@@ -15062,8 +15056,8 @@ Qt
 Fx
 VS
 Ra
-av
-Qe
+ba
+aw
 ob
 bw
 eU
@@ -15092,7 +15086,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 yE
 Ei
@@ -15179,8 +15173,8 @@ ag
 ag
 ag
 ag
-Qe
-av
+aw
+ba
 BP
 Ra
 Ra
@@ -15192,8 +15186,8 @@ Ra
 Ra
 Ra
 Ra
-av
-Qe
+ba
+aw
 lh
 UY
 hi
@@ -15219,10 +15213,10 @@ ag
 rQ
 rQ
 rQ
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
 ep
 eW
 Zl
@@ -15309,21 +15303,21 @@ ag
 ag
 ag
 ag
-Qe
-av
-av
+aw
+ba
+ba
 zp
-av
-av
+ba
+ba
 zp
-av
-av
+ba
+ba
 zp
-av
-av
+ba
+ba
 zp
-av
-Qe
+ba
+aw
 lh
 xe
 AD
@@ -15349,7 +15343,7 @@ ag
 rQ
 rQ
 rQ
-Iw
+gZ
 yE
 EU
 yE
@@ -15439,21 +15433,21 @@ ag
 ag
 ag
 ag
-Vm
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Qe
-Vm
+vI
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+vI
 ob
 bw
 eU
@@ -15479,7 +15473,7 @@ ag
 rQ
 rQ
 rQ
-Iw
+gZ
 ct
 vN
 IU
@@ -15609,7 +15603,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 hJ
 bO
@@ -15739,7 +15733,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 Ac
 bO
@@ -15869,7 +15863,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 Im
 bO
@@ -15999,7 +15993,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 ct
 oZ
 At
@@ -16129,7 +16123,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 QO
 yE
@@ -16259,10 +16253,10 @@ ag
 ag
 ag
 ag
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
 ep
 HL
 Zl
@@ -16392,7 +16386,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 yE
 yE
 yE
@@ -16401,8 +16395,8 @@ Ei
 yE
 JX
 yE
-Iw
-Iw
+gZ
+gZ
 yE
 yE
 vE
@@ -16522,7 +16516,7 @@ ag
 ag
 ag
 ag
-Iw
+gZ
 gZ
 gZ
 gZ
@@ -16531,8 +16525,8 @@ gZ
 gZ
 gZ
 yE
-Iw
-Iw
+gZ
+gZ
 yE
 Kb
 Zl
@@ -16652,17 +16646,17 @@ ag
 ag
 ag
 ag
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 yE
 dy
@@ -16790,10 +16784,10 @@ NW
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
 yE
 Vt
 GM
@@ -16920,10 +16914,10 @@ NW
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
 yE
 yE
 yE
@@ -17050,13 +17044,13 @@ Zj
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 bS
 xI
@@ -17180,13 +17174,13 @@ fJ
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 yE
 yE
@@ -17310,18 +17304,18 @@ fJ
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 cZ
 rw
@@ -17440,18 +17434,18 @@ NW
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 cn
 rO
@@ -17570,18 +17564,18 @@ vK
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 Sh
 cn
 dx
@@ -17700,18 +17694,18 @@ vK
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 cn
 sa
@@ -17830,18 +17824,18 @@ vK
 NW
 NW
 NW
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
+gZ
 yE
 yE
 yE
