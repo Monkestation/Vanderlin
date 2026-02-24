@@ -121,7 +121,7 @@ And it also helps for the character set panel
 		apply_vampire_look(H)
 
 		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
-		disguise_comp.apply_disguise(H)
+		disguise_comp?.apply_disguise(H)
 
 		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clan_covens)

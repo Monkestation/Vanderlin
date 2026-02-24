@@ -174,3 +174,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
 	armor = ARMOR_PADDED
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
+
+/obj/item/clothing/armor/gambeson/heavy/inq/daewalker
+	name = "dark inquisitorial leather tunic"
+	color = CLOTHING_ROYAL_BLACK

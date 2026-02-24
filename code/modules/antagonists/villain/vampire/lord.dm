@@ -7,6 +7,9 @@
 		"I AM THE LAND!",
 		"FIRSTBORNE CHILD OF KAIN!",
 	)
+	var/chooses_name = TRUE
+	var/outfit = /datum/outfit/vamplord
+	var/patron = /datum/patron/godless/autotheist
 
 	var/ascended = FALSE
 
@@ -19,7 +22,7 @@
 		vampire.purge_combat_knowledge()
 		vampire.remove_all_traits()
 	. = ..()
-	if(SSmapping.config.map_name != "Voyage")
+	if(SSmapping.config.map_name != "Voyage" && chooses_name)
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
 
@@ -74,8 +77,8 @@
 		owner.share_identities(found_mind)
 
 	var/mob/living/carbon/human/source_mob = owner.current
-	source_mob.equipOutfit(/datum/outfit/vamplord)
-	source_mob.set_patron(/datum/patron/godless/autotheist)
+	source_mob.equipOutfit(outfit)
+	source_mob.set_patron(patron)
 
 	return TRUE
 

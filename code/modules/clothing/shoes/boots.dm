@@ -116,11 +116,23 @@
 	name = "watch boots"
 	color = "#d5c2aa"
 	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
-	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_WATCH_BOOT_STEP))
+
+/obj/item/clothing/shoes/boots/leather/advanced/daewalker
+	name = "armored noble boots"
+	desc = "These boots are reinforced with a thick padding. While protective, they leave no room for hiding daggers."
+	icon_state = "nobleboots"
+	item_state = "nobleboots"
+	max_integrity = INTEGRITY_STANDARD + 100
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
+	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+
+/obj/item/clothing/shoes/boots/leather/advanced/daewalker/Initialize()
 	. = ..()
 	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_WATCH_BOOT_STEP))
 

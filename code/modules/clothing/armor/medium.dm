@@ -115,3 +115,8 @@
 	melting_material =  /datum/material/steel
 	blocksound = PLATEHIT
 
+/obj/item/clothing/armor/medium/scale/inqcoat/armored/daewalker
+	name = "dark armored inquisitorial duster"
+	desc = "You'd have to be outta your damn mind to fight someone wearing this."
+	color = CLOTHING_ROYAL_BLACK
+	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak

@@ -17,7 +17,7 @@
 	check_flags = COVEN_CHECK_TORPORED
 	vitae_cost = 5
 	toggled = TRUE
-	cooldown_length = 30 SECONDS
+	cooldown_length = 3 SECONDS
 	duration_length = 3 SECONDS
 
 	violates_masquerade = TRUE

@@ -87,9 +87,17 @@
 	name = "hand's bracers"
 	desc = "Discretion had always been the better part of valour, and nobody understands that better than the one holding an ace up their sleeve."
 	slot_flags = ITEM_SLOT_WRISTS
+	gender = PLURAL
 	sellprice = 50
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	icon_state = "bracersheath"
+
+/obj/item/weapon/scabbard/knife/hand/daewalker
+	name = "leather bracers"
+	desc = "Tucked just out of sight is a knife sheath."
+	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 15, "fire" = 0, "acid" = 0)
+	max_integrity = INTEGRITY_STRONG
+	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
