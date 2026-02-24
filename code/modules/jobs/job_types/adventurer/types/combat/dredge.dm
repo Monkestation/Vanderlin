@@ -124,9 +124,9 @@
 			spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-			if(!spawned.has_language(/datum/language/oldpsydonic))
-				spawned.grant_language(/datum/language/oldpsydonic)
-				to_chat(spawned, "<span class='info'>I can speak Old Psydonic with ,m before my speech.</span>")
+			if(!spawned.has_language(/datum/language/newpsydonic))
+				spawned.grant_language(/datum/language/newpsydonic)
+				to_chat(spawned, "<span class='info'>I can speak New Psydonic with ,n before my speech.</span>")
 			if(!istype(spawned.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
 				spawned.set_patron(/datum/patron/psydon, TRUE)
 			to_chat(spawned,span_info("\
@@ -179,7 +179,7 @@
 			spawned.change_stat(STATKEY_END, -1)
 			spawned.change_stat(STATKEY_CON, -1)
 			spawned.change_stat(STATKEY_SPD, 1)
-			ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			to_chat(spawned,span_info("\
 			I'm an unloved bastard child. Calloused hands do not suit me.")
@@ -198,7 +198,7 @@
 		if("BKnight") // RARE. DO NOT GIVE THEM BLACKSTEEL SHIT.
 			spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE) // heavy armor user
 			ADD_TRAIT(spawned, TRAIT_HEAVYARMOR, TRAIT_GENERIC) // Keep this rare. Only a handful of armor users get this.
-			ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 			spawned.change_stat(STATKEY_CON, 3)
 			spawned.change_stat(STATKEY_PER, -3)
 			spawned.change_stat(STATKEY_STR, 2)
@@ -456,7 +456,7 @@
 			Fish fear me. I've lived off Abyssor's bounty, both salt-and-freshwater.")
 			)
 		if("Doctor")
-			spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
 			spawned.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 			spawned.change_stat(STATKEY_INT, 1)
 			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
@@ -535,7 +535,7 @@
 			I'm knowledgeable about potions. Concoctions and tinctures were once my livelihood.")
 			)
 		if("Torturer")
-			spawned.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/sewing, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
 			add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 			spawned.change_stat(STATKEY_INT, -1)

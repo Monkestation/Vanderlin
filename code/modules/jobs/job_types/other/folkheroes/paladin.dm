@@ -35,7 +35,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 /datum/job/advclass/combat/paladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -49,14 +49,14 @@
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-			spawned.grant_language(/datum/language/oldpsydonic)
+			spawned.grant_language(/datum/language/newpsydonic)
 			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, TRAIT_GENERIC)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 		if(/datum/patron/divine/abyssor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/necra)

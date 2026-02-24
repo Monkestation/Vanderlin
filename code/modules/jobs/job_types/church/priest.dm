@@ -47,7 +47,7 @@
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/labor/mathematics = 3

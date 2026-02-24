@@ -16,6 +16,7 @@
 	var/datum/skill/related_skill
 	var/skill_xp_gained
 	var/action_time = 3 SECONDS
+	var/process_sound = 'sound/foley/dropsound/food_drop.ogg'
 	///list of atoms we pass to the output item
 	var/list/atoms_to_pass = list()
 
@@ -71,7 +72,7 @@
 					continue
 				if(!do_after(user, modified_action_time, hosted_source))
 					return
-				playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
+				playsound(user, process_sound, 30, TRUE, -1)
 				requirements[requirement]--
 				if(requirements[requirement] <= 0)
 					requirements -= list(requirement) // See Remove() behavior documentation
@@ -87,7 +88,7 @@
 		if(istype(attacking_item, requirement))
 			if(!do_after(user, modified_action_time, hosted_source))
 				return
-			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
+			playsound(user, process_sound, 30, TRUE, -1)
 			requirements[requirement]--
 			if(requirements[requirement] <= 0)
 				requirements -= requirement

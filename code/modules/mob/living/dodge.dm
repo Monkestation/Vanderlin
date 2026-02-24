@@ -6,8 +6,19 @@
  * @return TRUE if dodge successful, FALSE otherwise
  */
 /mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
-	// Early return conditions specifically for dodging
-	if((pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || pulling || (world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte)) ||  has_status_effect(/datum/status_effect/debuff/riposted) || src.loc == user.loc || (intenty && !intenty.candodge) || !candodge)
+	if(intenty && !intenty.candodge)
+		return FALSE
+
+	if(loc == user.loc)
+		return FALSE
+
+	if(incapacitated())
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
 	// Calculate dodge directions based on relative positions
@@ -16,18 +27,20 @@
 	// Find a valid dodge turf
 	var/turf/turfy = find_dodge_turf(dirry)
 
-	if(do_dodge(user, turfy, can_dodge_see))
-		flash_fullscreen("blackflash2")
-		user.aftermiss()
-		var/attacking_item = user.get_active_held_item()
-		if(!(!src.mind || !user.mind))
-			log_defense(src, user, "dodged", attacking_atom = attacking_item,
-					   addition = "(INTENT:[uppertext(user.used_intent.name)])")
+	if(!do_dodge(user, turfy, can_dodge_see))
+		return FALSE
 
-		if(src.client)
-			record_round_statistic(STATS_DODGES)
-		return TRUE
-	return FALSE
+	flash_fullscreen("blackflash2")
+	user.aftermiss()
+	var/attacking_item = user.get_active_held_item()
+	if(!(!src.mind || !user.mind))
+		log_defense(src, user, "dodged", attacking_atom = attacking_item,
+					addition = "(INTENT:[uppertext(user.used_intent.name)])")
+
+	if(client)
+		record_round_statistic(STATS_DODGES)
+
+	return TRUE
 
 /**
  * Handles dodge attempts by the mob

@@ -334,6 +334,17 @@
 		/datum/sprite_accessory/hair/head/unkemptcurls,
 		/datum/sprite_accessory/hair/head/viper,
 		/datum/sprite_accessory/hair/head/shrinepriestess,
+		/datum/sprite_accessory/hair/head/knots,
+		/datum/sprite_accessory/hair/head/sun,
+		/datum/sprite_accessory/hair/head/mediumlocs,
+		/datum/sprite_accessory/hair/head/longbraids,
+		/datum/sprite_accessory/hair/head/shortlocs,
+		/datum/sprite_accessory/hair/head/poofycurls,
+		/datum/sprite_accessory/hair/head/messylocs,
+		/datum/sprite_accessory/hair/head/dualtwists,
+		/datum/sprite_accessory/hair/head/twistbun,
+		/datum/sprite_accessory/hair/head/longestcurls,
+		/datum/sprite_accessory/hair/head/sidebraid
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton

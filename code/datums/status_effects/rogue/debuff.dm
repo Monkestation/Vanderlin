@@ -198,8 +198,8 @@
 /datum/status_effect/debuff/uncookedfood
 	id = "uncookedfood"
 	effectedstats = null
-	duration = 10 MINUTES
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -212,14 +212,15 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(100)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/uncookedfood)
 
 /datum/status_effect/debuff/badmeal
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/badmeal
 	id = "badmeal"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/badmeal
 	name = "Foul Food!"
@@ -233,17 +234,18 @@
 		C.add_stress(/datum/stress_event/badmeal)
 
 /datum/status_effect/debuff/burnedfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	id = "burnedfood"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stress_event/burntmeal)
-		C.add_nausea(100)
+		C.add_nausea(50)
 
 /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	name = "Burnt Food!"
@@ -251,23 +253,24 @@
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/rotfood
 	id = "rotfood"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/rotfood
 	name = "Rotten Food!"
-	desc = "<span class='warning'>MAGGOT-INFESTED BILE RISES TO MY THROAT!</span>\n"
+	desc = "<span class='warning'>I felt a maggot wriggle as I swallowed...</span>\n"
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood/on_apply()
-	if(HAS_TRAIT(owner, TRAIT_ROT_EATER))
+	if(HAS_TRAIT(owner, TRAIT_ROT_EATER) || HAS_TRAIT(owner, TRAIT_NASTY_EATER))
 		return FALSE
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(200)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/rotfood)
 
 /datum/status_effect/debuff/bleeding

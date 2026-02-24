@@ -15,7 +15,7 @@
 	RegisterSignal(parent, COMSIG_MOB_ITEM_ATTACK, PROC_REF(try_eat))
 	RegisterSignal(parent, COMSIG_LIVING_POSTBITE_SELF, PROC_REF(eat_turf))
 
-/datum/component/UnregisterFromParent()
+/datum/component/abberant_eater/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_POSTBITE_SELF))
 
 /datum/component/abberant_eater/proc/try_eat(mob/living/user, mob/living/M, obj/item/source)

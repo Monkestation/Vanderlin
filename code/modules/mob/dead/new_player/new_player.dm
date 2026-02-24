@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
+GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player
 	flags_1 = NONE
@@ -102,6 +102,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		return FALSE
 
 	var/datum/preferences/P = client.prefs
+	// 0 Validation on any of this
 	P.real_name = char_data["real_name"]
 	P.gender = char_data["gender"]
 	P.age = char_data["age"]
@@ -125,6 +126,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	P.default_slot = char_data["slot"]
 	multi_ready_index = index
+
+	if(!P.job_preferences)
+		P.job_preferences = list()
+
 	return TRUE
 
 /mob/dead/new_player/Topic(href, href_list[])
@@ -174,6 +179,22 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(client && client.prefs.is_active_migrant())
 		to_chat(usr, span_boldwarning("You are in the migrant queue."))
 		return
+
+	if(href_list["PossessVessel"])
+		var/id = href_list["PossessVessel"]
+		if(!client.is_whitelisted(id))
+			to_chat(src, span_boldwarning("You are not whitelisted for [id]."))
+			return
+		var/list/group = GLOB.active_ghost_vessels[id]
+		if(!length(group))
+			to_chat(src, span_warning("No vessels of that type are available."))
+			return
+		var/mob/living/carbon/human/vessel_mob = pick(group)
+		var/datum/component/ghost_vessel/gc = vessel_mob.GetComponent(/datum/component/ghost_vessel)
+		if(!gc || !gc.being_offered)
+			to_chat(src, span_warning("That vessel is no longer available."))
+			return
+		gc.possess_vessel(src)
 
 	if(href_list["late_join"])
 		if(!SSticker?.IsRoundInProgress())
@@ -565,6 +586,23 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			column_counter++
 			if(column_counter > 0 && (column_counter % 4 == 0))
 				dat += "</td><td valign='top'>"
+	if(length(GLOB.active_ghost_vessels))
+		var/list/available_vessel_ids = list()
+		for(var/id in GLOB.active_ghost_vessels)
+			if(client.is_whitelisted(id))
+				available_vessel_ids += id
+
+		if(length(available_vessel_ids))
+			dat += "<fieldset style='width: 185px; border: 2px solid #8B4513; display: inline'>"
+			dat += "<legend align='center' style='font-weight: bold; color: #8B4513'>Vessels</legend>"
+			for(var/id in available_vessel_ids)
+				var/count = length(GLOB.active_ghost_vessels[id])
+				dat += "<a class='job' href='byond://?src=[REF(src)];PossessVessel=[id]'>Join as [id] ([count] available)</a>"
+			dat += "</fieldset><br>"
+			column_counter++
+			if(column_counter > 0 && (column_counter % 4 == 0))
+				dat += "</td><td valign='top'>"
+
 	dat += "</td></tr></table></center>"
 	dat += "</div></div>"
 	var/datum/browser/popup = new(src, "latechoices", "Choose Class", 720, 580)

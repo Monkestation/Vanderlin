@@ -25,7 +25,7 @@
 		/datum/skill/craft/engineering = 3,
 		/datum/skill/craft/traps = 2,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/blacksmithing = 3,
 		/datum/skill/craft/armorsmithing = 3,
 		/datum/skill/craft/weaponsmithing = 3,

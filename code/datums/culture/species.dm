@@ -18,7 +18,7 @@
 	)
 
 /datum/culture/species/elven/costal
-	name = "Costal Tribes"
+	name = "Coastal Tribes"
 	description = "Known by humens to be haughty, wealthy, disconnected pricks. \
 	Much of the culture has since been absorbed by Wintermare. Never ask their opinions on any of the Sea Tribes."
 	pre_append = "the "

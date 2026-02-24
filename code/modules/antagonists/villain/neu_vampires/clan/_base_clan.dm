@@ -5,7 +5,7 @@ This datum stores a declarative description of clans, in order to make an instan
 And it also helps for the character set panel
 */
 /datum/clan
-	var/name = "Caitiff"
+	var/name = "Base Clan"
 	var/desc = "The clanless. The rabble. Of no importance."
 
 	var/list/clan_covens = list() //coven datums
@@ -14,12 +14,12 @@ And it also helps for the character set panel
 
 	/// List of traits that are applied to members of this Clan
 	var/list/clane_traits = list(
+		TRAIT_BLOODDRINKER,
 		TRAIT_STRONGBITE,
 		TRAIT_NOENERGY,
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOSLEEP,
 		TRAIT_VAMPMANSION,
@@ -29,7 +29,8 @@ And it also helps for the character set panel
 		TRAIT_LIMBATTACHMENT,
 	)
 
-	var/blood_preference = BLOOD_PREFERENCE_ALL
+	var/blood_preference = null
+	var/blood_disgust = BLOOD_PREFERENCE_RATS
 
 	var/list/disliked_clans = list()
 	var/list/liked_clans = list()
@@ -72,20 +73,23 @@ And it also helps for the character set panel
 /datum/clan/proc/get_blood_preference_string()
 	return "any blood"
 
-/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
-	var/unwanted_blood = (blood_types & ~blood_preference)
+/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types, vitae)
+	var/wanted_blood = (blood_types & blood_preference)
+	var/unwanted_blood = (blood_types & blood_disgust)
 
-	if(blood_types & BLOOD_PREFERENCE_EUPHORIC)
-		drinker.apply_status_effect(/datum/status_effect/debuff/blood_euphoria)
-
-	if(!unwanted_blood)
-		return
-	drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
-	to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	if(wanted_blood && !unwanted_blood)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_preference)
+		vitae *= 1.5
+	if(unwanted_blood && !wanted_blood)
+		vitae *= 0.5
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
+		to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	return vitae
 
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
+	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose), H)
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -104,6 +108,7 @@ And it also helps for the character set panel
 		H.has_reflection = FALSE
 		H.cut_overlay(H.reflective_icon)
 		H.mob_biotypes = MOB_UNDEAD
+		H.physiology?.bleed_mod /= 2
 
 		if(alt_sprite)
 			if (!alt_sprite_greyscale)
@@ -250,10 +255,9 @@ And it also helps for the character set panel
  * Arguments:
  * * vampire - Human losing the Clan.
  */
-/datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
+/datum/clan/proc/on_lose(datum/source, mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-
-	UnregisterSignal(vampire, COMSIG_HUMAN_LIFE)
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -273,6 +277,7 @@ And it also helps for the character set panel
 	vampire.has_reflection = TRUE
 	vampire.create_reflection()
 	vampire.update_reflection()
+	vampire.physiology?.bleed_mod *= 2
 
 	clan_members -= vampire
 
@@ -347,6 +352,7 @@ And it also helps for the character set panel
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
+	add_verb(H, /mob/living/carbon/human/proc/sire_spawn)
 
 
 	H.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
@@ -431,7 +437,7 @@ And it also helps for the character set panel
  */
 /mob/living/carbon/human/proc/set_clan_direct(datum/clan/new_clan)
 	var/datum/clan/previous_clan = clan
-	previous_clan?.on_lose(src)
+	previous_clan?.on_lose(vampire = src)
 	clan = new_clan
 	if (!new_clan)
 		return
@@ -463,7 +469,7 @@ And it also helps for the character set panel
 	// Convert typepaths to Clan singletons, or just directly assign if already singleton
 	var/datum/clan/new_clan = ispath(setting_clan) ? GLOB.vampire_clans[setting_clan] : setting_clan
 
-	previous_clan?.on_lose(src)
+	previous_clan?.on_lose(vampire = src)
 
 	clan = new_clan
 
@@ -526,28 +532,28 @@ And it also helps for the character set panel
 	timer = 10 MINUTES
 
 
-/datum/status_effect/debuff/blood_euphoria
-	id = "blood_euphoria"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/datum/status_effect/debuff/blood_preference
+	id = "blood_preference"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_preference
 	duration = 30 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 
-/atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/atom/movable/screen/alert/status_effect/buff/blood_preference
 	name = "Sanguine Euphoria"
 	desc = span_good("This type of blood goes down incredibly well.")
 	icon_state = "hunger2"
 
-/datum/status_effect/buff/blood_euphoria/on_apply()
+/datum/status_effect/buff/blood_preference/on_apply()
 	. = ..()
 	if(.)
 		owner.add_stress(/datum/stress_event/good_blood)
 		owner.adjustBruteLoss(-5)
 
-/datum/status_effect/buff/blood_euphoria/tick()
+/datum/status_effect/buff/blood_preference/tick()
 	. = ..()
 	owner.adjustBruteLoss(-2)
 
-/datum/status_effect/buff/blood_euphoria/on_remove()
+/datum/status_effect/buff/blood_preference/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/good_blood)
 

@@ -355,6 +355,3 @@
 /obj/item/clothing/shirt/undershirt/easttats/tribal
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
-	armor = ARMOR_NONE
-	prevent_crits = null
-	resistance_flags = INDESTRUCTIBLE

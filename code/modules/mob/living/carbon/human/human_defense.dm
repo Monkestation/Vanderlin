@@ -578,6 +578,8 @@
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
+	if(!deep_examination)
+		deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		m1 = "I am"
 		examination += "<span class='notice'>Let's see how I am doing.</span>"
@@ -586,8 +588,6 @@
 				"<span class='notice'>I check myself for injuries.</span>")
 	else if(user)
 		m1 = "[p_they(TRUE)] [p_are()]"
-		if(!deep_examination)
-			deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 		examination += "<span class='notice'>Let's see how [src] is doing.</span>"
 		if(!user.stat && !silent)
 			user.visible_message("<span class='notice'>[user] examines [src].</span>", \
@@ -643,21 +643,19 @@
 /mob/living/carbon/human/proc/check_limb_for_injuries(mob/user = src, choice = BODY_ZONE_CHEST, advanced = FALSE, silent = FALSE)
 	choice = check_zone(choice)
 	var/list/examination = list("<span class='info'>ø ------------ ø")
-	var/deep_examination = advanced
+	var/deep_examination = advanced || HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		examination += "<span class='notice'>Let's see how my [parse_zone(choice)] is doing.</span>"
 		if(!stat && !silent)
 			visible_message("<span class='notice'>[src] examines [p_their()] [parse_zone(choice)].</span>")
 	else if(user)
-		if(!deep_examination)
-			deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 		examination += "<span class='notice'>Let's see how [src]'s [parse_zone(choice)] is doing.</span>"
 		if(!user.stat && !silent)
 			visible_message("<span class='notice'>[user] examines [src]'s [parse_zone(choice)].</span>")
 
 	var/obj/item/bodypart/examined_part = get_bodypart(choice)
 	if(examined_part)
-		examination += examined_part.check_for_injuries(user, advanced)
+		examination += examined_part.check_for_injuries(user, deep_examination)
 	else
 		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><B>MISSING</B></span></span>"
 	examination += "ø ------------ ø</span>"
