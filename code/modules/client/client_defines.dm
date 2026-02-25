@@ -117,7 +117,7 @@
 	///these persist between logins/logouts during the same round.
 	var/datum/player_details/player_details
 
-	///Should only be a key-value list of north/south/east/west = atom/movable/screen.
+	///Should only be a key-value list of stringified (cardinal) dir, e.g. "[NORTH]" = new /atom/movable/screen/char_preview.
 	var/list/char_render_holders
 
 	///Amount of keydowns in the last keysend checking interval
