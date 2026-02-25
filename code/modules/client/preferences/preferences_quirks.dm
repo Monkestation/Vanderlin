@@ -257,7 +257,7 @@
 	popup.add_script("quirk_menu", 'html/browser/quirk_menu.js')
 
 	popup.set_content(get_quirk_menu_content())
-	popup.open()
+	popup.open(use_onclose = FALSE) // without use_onclose = false it acts as if we've closed the prefs menu and clears our preview
 
 /datum/preferences/proc/get_quirk_menu_content()
 	var/balance = calculate_quirk_balance()
