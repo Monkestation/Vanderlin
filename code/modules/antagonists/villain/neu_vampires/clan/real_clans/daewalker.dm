@@ -13,6 +13,7 @@
 		/datum/coven/celerity,
 		/datum/coven/potence,
 	)
+	intro_music = 'sound/music/daewalkerintro.ogg'
 	blood_preference = BLOOD_PREFERENCE_KIN
 	blood_disgust = BLOOD_PREFERENCE_HOLY | BLOOD_PREFERENCE_EUPHORIC
 	clane_traits = list(

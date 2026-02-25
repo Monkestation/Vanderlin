@@ -108,6 +108,19 @@
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
+/obj/item/clothing/wrists/bracers/leather/scabbard
+	name = "leather bracers"
+	desc = "Discretion had always been the better part of valour, and nobody understands that better than the one holding an ace up their sleeve."
+	sellprice = 40
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	icon_state = "bracersheath"
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
+	AddComponent(/datum/component/storage/concrete/scabbard/knife)
+
 /obj/item/clothing/wrists/bracers/psythorns
 	name = "psydonian thorns"
 	desc = "Thorns fashioned from pliable yet durable blacksteel - woven and interlinked, fashioned to be wrapped around the wrists."

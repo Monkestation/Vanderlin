@@ -66,6 +66,7 @@ And it also helps for the character set panel
 	var/datum/clan_leader/leader = /datum/clan_leader/lord
 	var/force_VL_if_clan_is_empty = TRUE
 	var/selectable_by_vampires = TRUE // Set to FALSE for clans that shouldn't be selectable
+	var/intro_music = 'sound/music/vampintro.ogg'
 
 /datum/clan/proc/get_downside_string()
 	return "burn in sunlight"
@@ -123,7 +124,8 @@ And it also helps for the character set panel
 		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
 		disguise_comp?.apply_disguise(H)
 
-		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
+		if(intro_music)
+			H.playsound_local(H, intro_music, 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clan_covens)
 			H.give_coven(coven)
 	else

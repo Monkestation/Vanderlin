@@ -845,26 +845,6 @@
 	desc = "A horrid sword with a silvered grip, a jeweled hilt and a honed blade; a design unfit for a true paladin."
 	color = CLOTHING_SOOT_BLACK
 
-/obj/item/weapon/sword/long/daewalker
-	name = "\proper the Daewalker's blade"
-	icon_state = "churchsword"
-	desc = "A blade blessed with Pysdon's blood, now a tool of Astrata's Daewalker. It's open season on all suckheads."
-	force_wielded = DAMAGE_GREATSWORD_WIELD
-	wdefense = ULTMATE_PARRY
-	max_blade_int = 50000
-	max_integrity = 50000
-	randomize_blade_int = FALSE
-	resistance_flags = INDESTRUCTIBLE
-	sellprice = 0
-
-/obj/item/weapon/sword/long/daewalker/Initialize(mapload)
-	. = ..()
-	enchant(/datum/enchantment/vampiric)
-	enchant(/datum/enchantment/silver)
-
-/obj/item/weapon/sword/long/daewalker/equipped(mob/user, slot, initial)
-	. = ..()
-
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
 	name = "\improper Jaded Fang"
