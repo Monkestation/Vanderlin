@@ -1,38 +1,73 @@
 /datum/reagent/blood
-	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null)
+	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
+	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=null, "vitae"=0)
 	name = "Blood"
-	color = "#C80000" // rgb: 200, 0, 0
-	metabolization_rate = 5 //fast rate so it disappears fast.
+	color = COLOR_BLOOD
+	metabolization_rate = 20 //SUPER fast
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_icon_state = "glass_red"
 	glass_name = "glass of tomato juice"
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassred"
+	var/toxicity = 0.7 // how toxic will this be to digest to people who cannot drink it
 
 /datum/reagent/blood/tiefling
 	name = "Tiefling Blood"
 	glows = TRUE
+	toxicity = 0 // yum
+
+/datum/reagent/blood/putrid
+	name = "Putrid Blood"
+	color = "#94463b"
+	taste_description = "rot"
+	taste_mult = 1.8
+	toxicity = 3
+
+/datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
+	if(!ismob(A))
+		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
+	. = ..()
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
-		var/datum/blood_type/blood = L.get_blood_type()
-		if(blood?.reagent_type == type && ((method & INJECT) || ((method & INGEST) && C.dna && C.dna.species && (DRINKSBLOOD in C.dna.species.species_traits))))
-			if((data["blood_type"] in blood.compatible_types))
-				C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
-
-	if((method & INGEST) && L.clan)
-		L.adjust_bloodpool(reac_volume)
-		L.clan.handle_bloodsuck(BLOOD_PREFERENCE_FANCY)
-	if((method & INJECT) || (HAS_TRAIT(L, TRAIT_SANGUINE) && (method & INGEST)))
-		SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
-
-/datum/reagent/blood/on_merge(list/mix_data)
 	. = ..()
-	if(data && mix_data)
-		if(data["blood_DNA"] != mix_data["blood_DNA"])
-			data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
+	if(!(. && method & (INJECT|INGEST)))
+		return
+	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
+	var/datum/dna/L_dna = L.has_dna()
+	var/drinking_self = L_dna?.unique_enzymes && L_dna.unique_enzymes == data["blood_DNA"]
+	//if the dna matches, you're drinking your own blood freak.
+	if(!drinking_self && L.clan && data["vitae"] > 0)
+		var/vitae = L.clan.handle_bloodsuck(L, data["preferences"], reac_volume * data["vitae"])
+		L.adjust_bloodpool(vitae)
+		L.adjust_hydration(vitae * 0.1)
+
+	var/mob/living/carbon/C = L
+	if(istype(C) && (NOBLOOD in C.dna?.species?.species_traits))
+		return
+	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
+	if(method & INJECT)
+		L.blood_volume = min(L.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		return
+	if(method & INGEST)
+		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER))))
+			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
+				L.adjust_hydration(reac_volume * 0.2)
+			if(L.blood_volume < BLOOD_VOLUME_NORMAL)
+				L.blood_volume = min(L.blood_volume + reac_volume * 0.2 , BLOOD_VOLUME_NORMAL)
+			return
+		var/tox = toxicity * reac_volume
+		if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
+			tox *= 0.5
+		L.adjustToxLoss(tox)
+		C.add_nausea(tox * 2)
+
+/datum/reagent/blood/on_merge(list/mix_data, other_volume)
+	. = ..()
+	data["vitae"] = (data["vitae"] * volume + (mix_data?["vitae"] || 0) * other_volume) / (volume + other_volume) // weighted average of both vitae
+	data["preferences"] |= mix_data?["preferences"] // i have no idea how to effectively deal with this issue, this is gonna get weird sometimes.
+	if(mix_data && data["blood_DNA"] != mix_data["blood_DNA"])
+		data["cloneable"] = 0 //On mix, consider the genetic sampling unviable for pod cloning if the DNA sample doesn't match.
 	return 1
 
 /datum/reagent/blood/reaction_turf(turf/T, reac_volume)//splash the blood all over the place
@@ -40,15 +75,12 @@
 		return
 	if(reac_volume < 3)
 		return
-
 	var/obj/effect/decal/cleanable/blood/B = locate() in T //find some blood here
 	if(!B)
 		B = new(T)
 	if(data["blood_DNA"])
 		B.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
 
-/datum/reagent/blood/green
-	color = "#05af01"
 
 /datum/reagent/water
 	name = "Water"

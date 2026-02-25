@@ -1,7 +1,10 @@
+GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
+
 /datum/component/command_follower
 	var/datum/follower_command/current_command
 	var/atom/movable/screen/command_display/hud_element
 	var/mob/living/carbon/human/owner
+	/*
 	var/list/order_priority = list(
 		/datum/job/lord = 1,
 		/datum/job/consort = 2,
@@ -32,13 +35,14 @@
 		/datum/job/monk = 28,
 		/datum/job/adept = 28
 	)
+	*/
 
 	var/list/available_commands = list(
 		/datum/follower_command/custom,
 		/datum/follower_command/protect,
 		/datum/follower_command/kill,
 		/datum/follower_command/guard_position,
-		/datum/follower_command/follow,
+	//	/datum/follower_command/follow,
 	)
 
 /datum/component/command_follower/Initialize(list/command_typepaths = list())
@@ -56,6 +60,7 @@
 	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
 	RegisterSignal(parent, COMSIG_PARENT_COMMAND_RECEIVED, PROC_REF(receive_command))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(on_ctrl_click))
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/command_follower/Destroy()
 	clear_command()
@@ -101,11 +106,13 @@
 /datum/component/command_follower/proc/receive_command(datum/source, datum/follower_command/new_command, mob/living/carbon/human/issuer)
 	if(!new_command || !issuer)
 		return FALSE
+	/*
 	if(current_command)
 		var/current_priority = get_job_priority(current_command.issuer_job)
 		var/new_priority = get_job_priority(issuer.job_type)
 		if(new_priority > current_priority)
 			owner.say("Command rejected: [issuer] lacks authority to override [current_command.issuer_name]'s command.", forced = TRUE)
+	*/
 	clear_command()
 	current_command = new_command
 	current_command.issuer_name = issuer.real_name
@@ -121,12 +128,14 @@
 		QDEL_NULL(current_command)
 	update_hud()
 
+/*
 /datum/component/command_follower/proc/get_job_priority(job_type)
 	if(!job_type)
 		return 999
 	if(job_type in order_priority)
 		return order_priority[job_type]
 	return 999
+*/
 
 /datum/component/command_follower/proc/on_ctrl_click(datum/source, mob/living/clicker)
 	SIGNAL_HANDLER
@@ -137,8 +146,14 @@
 		return
 
 	// Check if clicker has authority
+	/*
 	var/clicker_priority = get_job_priority(clicker.job_type)
 	if(clicker_priority >= 999)
+		to_chat(clicker, span_warning("You lack the authority to issue commands."))
+		return
+	*/
+
+	if(!HAS_TRAIT(clicker, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(clicker, TRAIT_NOBLE_POWER) && !(clicker.job in GLOB.automaton_order_jobs))
 		to_chat(clicker, span_warning("You lack the authority to issue commands."))
 		return
 
@@ -162,6 +177,9 @@
 		return
 
 	SEND_SIGNAL(owner, COMSIG_PARENT_COMMAND_RECEIVED, new_cmd, clicker)
+
+/datum/component/command_follower/proc/on_examine(datum/source, mob/user, list/examine_list)
+	examine_list += span_blue("Ctrl-Click on this mob to give it a direct command.")
 
 /atom/movable/screen/command_display
 	name = "Command Display"

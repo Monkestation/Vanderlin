@@ -38,7 +38,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 	)
 
 	languages = list(/datum/language/zalad)
@@ -123,7 +124,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 	)
 
 	languages = list(/datum/language/zalad)
@@ -204,7 +206,8 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,

@@ -59,7 +59,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -141,9 +141,24 @@
 /datum/outfit/royalknight/knight
 	name = "Royal Knight"
 	armor = /obj/item/clothing/armor/plate/full
-	head = /obj/item/clothing/head/helmet/visored/royalknight
 	gloves = /obj/item/clothing/gloves/plate
 	shoes = /obj/item/clothing/shoes/boots/armor
+
+// Helmet Selection (Royal Knight Exclusive)
+/datum/job/advclass/royalknight/knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectablehelmets = list(
+		"Hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
+		"Royal Knight Helmet" = /obj/item/clothing/head/helmet/visored/royalknight,
+		"Knight Helmet" = /obj/item/clothing/head/helmet/visored/knight,
+		"Decorated Knight Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/knight,
+		"Visored Sallet" = /obj/item/clothing/head/helmet/visored/sallet,
+		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
+	)
+
+	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
+	if(!helmetchoice)
+		return
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"

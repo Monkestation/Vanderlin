@@ -88,6 +88,7 @@
 				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
+				H.virginity = TRUE
 			// nothing for adults/immortals,
 			if(AGE_MIDDLEAGED)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)

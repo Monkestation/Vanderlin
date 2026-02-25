@@ -1403,6 +1403,10 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"ke" = (
+/mob/living/carbon/human/species/automaton/prefilled_vessel,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "ki" = (
 /obj/structure/rotation_piece/cog{
 	dir = 4
@@ -16632,7 +16636,7 @@ QN
 Wr
 QN
 zg
-GB
+ke
 GB
 vD
 vD

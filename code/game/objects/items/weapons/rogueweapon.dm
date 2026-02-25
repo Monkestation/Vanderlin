@@ -41,7 +41,8 @@
 	if(ispath(weapon_special))
 		weapon_special = new weapon_special()
 
-	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+	if(randomize_blade_int)
+		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
 	if(weapon_special)

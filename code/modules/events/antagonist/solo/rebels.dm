@@ -17,7 +17,7 @@
 	typepath = /datum/round_event/antagonist/solo/rebel
 	antag_datum = /datum/antagonist/prebel/head
 
-	min_players = 30
+	min_players = LOWPOP_THRESHOLD
 	weight = 6
 
 	restricted_roles = list(
@@ -33,6 +33,7 @@
 		/datum/job/adept,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
+		/datum/job/gmtemplar,
 		/datum/job/templar,
 	)
 

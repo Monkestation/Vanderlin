@@ -586,7 +586,6 @@
 /area/indoors/vampire_manor)
 "bS" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/weapon/sword/long/vlord,
 /obj/structure/fluff/walldeco/mona{
 	pixel_x = -14
 	},
@@ -931,12 +930,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"cY" = (
-/obj/effect/landmark/start/jarosite{
-	dir = 1
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "cZ" = (
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
@@ -1426,6 +1419,9 @@
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/church,
 /area/indoors/lich)
+"fJ" = (
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "fL" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -1759,6 +1755,12 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
+"ie" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 32
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "ij" = (
 /obj/item/clothing/shirt/dress/gen/colored/maid,
 /obj/item/clothing/shoes/shortboots,
@@ -1845,6 +1847,11 @@
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"iG" = (
+/obj/structure/bed/shit,
+/obj/effect/landmark/start/jarosite,
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "iH" = (
 /obj/structure/bridge_stakes{
 	dir = 4
@@ -1899,6 +1906,12 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobble,
 /area/indoors/lich)
+"je" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "jf" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -1958,18 +1971,6 @@
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
-"jx" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/weapon/knife/copper,
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "jA" = (
 /obj/structure/bed/inn/double,
 /turf/open/floor/carpet/purple,
@@ -2787,6 +2788,11 @@
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
 /area/indoors)
+"oS" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot/stone,
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "oV" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
@@ -2834,9 +2840,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
-"pl" = (
-/turf/closed/mineral/bedrock,
-/area/under/cavelava/acid)
 "pr" = (
 /turf/open/floor/dirt,
 /area/outdoors)
@@ -3604,12 +3607,6 @@
 /obj/item/plate,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/lich)
-"uf" = (
-/obj/effect/landmark/start/jarosite{
-	dir = 1
-	},
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "ug" = (
 /obj/item/bin/water,
 /turf/open/floor/blocks,
@@ -3675,11 +3672,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
-"uG" = (
-/obj/machinery/light/fueled/hearth,
-/obj/item/reagent_containers/glass/bucket/pot/stone,
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "uL" = (
 /obj/structure/well,
 /turf/open/floor/cobblerock,
@@ -3810,6 +3802,12 @@
 	},
 /turf/open/floor/tile/checker_green,
 /area/indoors/lich)
+"vs" = (
+/obj/effect/landmark/start/jarosite{
+	dir = 4
+	},
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "vt" = (
 /obj/structure/table/wood{
 	dir = 8;
@@ -3841,6 +3839,19 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"vG" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/weapon/knife/copper,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "vH" = (
 /obj/structure/window/openclose,
 /obj/structure/rotation_piece,
@@ -3849,6 +3860,9 @@
 "vI" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors)
+"vK" = (
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "vL" = (
 /obj/structure/closet/dirthole/grave,
 /obj/effect/decal/remains/saiga{
@@ -3876,6 +3890,12 @@
 /obj/item/clothing/pants/chainlegs,
 /turf/open/floor/carpet,
 /area/indoors)
+"vQ" = (
+/obj/effect/landmark/start/jarosite{
+	dir = 1
+	},
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "vS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/fake_world,
@@ -4055,19 +4075,6 @@
 /obj/item/coin/gold/pile,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
-"xg" = (
-/obj/structure/table/stone_small,
-/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve,
-/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
-	pixel_y = 5;
-	pixel_x = -7
-	},
-/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
-	pixel_y = 7;
-	pixel_x = 7
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "xh" = (
 /obj/structure/fluff/statue/zizo,
 /turf/open/floor/cobble,
@@ -4530,12 +4537,6 @@
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/concrete,
 /area/outdoors/woods_safe)
-"Aw" = (
-/obj/effect/landmark/start/jarosite{
-	dir = 8
-	},
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "Ax" = (
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/tile/checker_green,
@@ -4659,6 +4660,19 @@
 "Bj" = (
 /turf/open/floor/dirt,
 /area/indoors/lich)
+"Bm" = (
+/obj/structure/table/stone_small,
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve,
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
+	pixel_y = 5;
+	pixel_x = -7
+	},
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
+	pixel_y = 7;
+	pixel_x = 7
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "Bn" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 1
@@ -4670,11 +4684,6 @@
 /mob/living/carbon/human/species/skeleton/npc,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"Bs" = (
-/obj/structure/bed/shit,
-/obj/effect/landmark/start/jarosite,
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "Bv" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/twig,
@@ -4726,10 +4735,6 @@
 /obj/item/clothing/shirt/undershirt/colored/uncolored,
 /turf/open/floor/wood,
 /area)
-"BK" = (
-/obj/structure/bed/shit,
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "BL" = (
 /obj/structure/door/iron/bars{
 	lockid = "mansionvampire"
@@ -4741,6 +4746,12 @@
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
+"BO" = (
+/obj/structure/fluff/nest{
+	name = "patch of straw"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "BP" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/head/priesthat,
@@ -5194,6 +5205,10 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
+"Fj" = (
+/obj/machinery/light/fueled/campfire,
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "Fk" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/indoors/lich)
@@ -5462,6 +5477,12 @@
 /obj/item/clothing/armor/leather/splint,
 /turf/open/floor/carpet,
 /area/indoors)
+"Hw" = (
+/obj/effect/landmark/start/jarosite{
+	dir = 1
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "Hy" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/grass/yel,
@@ -5598,10 +5619,6 @@
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
-"Ik" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "Im" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/reagent_containers/glass/bottle/tiefling_wine,
@@ -5688,6 +5705,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"IC" = (
+/obj/structure/bed/shit,
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "ID" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 8
@@ -6064,9 +6085,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/churchbrick,
 /area/overlord_lair)
-"Lm" = (
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "Lo" = (
 /obj/item/clothing/head/helmet/leather/inquisitor,
 /obj/structure/mannequin/male,
@@ -6110,6 +6128,13 @@
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/lich)
+"LA" = (
+/obj/structure/bed/shit,
+/obj/effect/landmark/start/jarosite{
+	dir = 1
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "LD" = (
 /obj/structure/fluff/big_chain{
 	pixel_y = 14
@@ -6192,6 +6217,10 @@
 /obj/item/clothing/head/helmet/leather/volfhelm,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/bandit_lair)
+"Mf" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "Mg" = (
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/grass,
@@ -6288,9 +6317,6 @@
 /obj/item/rope,
 /turf/open/floor/church,
 /area/indoors/lich)
-"MO" = (
-/turf/open/lava/acid,
-/area/under/cavelava/acid)
 "MP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -6465,6 +6491,9 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"NW" = (
+/turf/closed/mineral/bedrock,
+/area/under/cavelava/acid)
 "NX" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/lord/left,
@@ -6500,6 +6529,10 @@
 /obj/effect/decal/cobblerockedge,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Ok" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "On" = (
 /obj/structure/rack,
 /obj/item/cooking/pan,
@@ -6544,6 +6577,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/lich)
+"OB" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "OC" = (
 /obj/effect/decal/cobblerockedge,
 /turf/open/floor/grass/yel,
@@ -6576,12 +6617,6 @@
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
-"OT" = (
-/obj/structure/fluff/nest{
-	name = "patch of straw"
-	},
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "OX" = (
 /obj/item/weapon/sword/long/exe,
 /obj/item/weapon/sword/long/exe,
@@ -6649,14 +6684,6 @@
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/twig,
 /area/outdoors/bog/inhumen_camp)
-"Py" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/obj/item/reagent_containers/food/snacks/hardtack,
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "PD" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 4
@@ -6701,10 +6728,6 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
-"PX" = (
-/obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "Qb" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/dirt/road,
@@ -7187,6 +7210,12 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
 /area/indoors)
+"SB" = (
+/obj/effect/landmark/start/jarosite{
+	dir = 8
+	},
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "SC" = (
 /obj/structure/stairs/stone/church{
 	dir = 8
@@ -7198,13 +7227,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/church,
 /area/indoors/lich)
-"SE" = (
-/obj/structure/bed/shit,
-/obj/effect/landmark/start/jarosite{
-	dir = 1
-	},
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "SG" = (
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
@@ -7535,6 +7557,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
+"UH" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 8
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -7713,12 +7741,6 @@
 /obj/item/clothing/armor/amazon_chainkini,
 /turf/open/floor/carpet,
 /area/indoors)
-"VN" = (
-/obj/effect/landmark/start/jarosite{
-	dir = 4
-	},
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "VO" = (
 /obj/structure/kneestingers,
 /obj/structure/fluff/railing/border{
@@ -7755,6 +7777,10 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
+"VZ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "Wd" = (
 /obj/item/clothing/shirt/dress/silkdress,
 /obj/item/clothing/shirt/dress/silkdress,
@@ -7970,6 +7996,9 @@
 /obj/item/clothing/pants/trou/leather,
 /turf/open/floor/carpet,
 /area/indoors)
+"XB" = (
+/turf/open/lava/acid,
+/area/under/cavelava/acid)
 "XC" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass/yel,
@@ -7997,10 +8026,6 @@
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
 /area)
-"XM" = (
-/obj/structure/fluff/clodpile/dirt,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "XN" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
@@ -8282,10 +8307,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Ze" = (
-/obj/structure/fluff/traveltile/from_acid_caves,
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "Zh" = (
 /obj/structure/rack,
 /obj/item/weapon/sword/short,
@@ -8296,20 +8317,17 @@
 /obj/structure/flora/grass/bush/wall/tall/bog,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"Zj" = (
+/obj/structure/fluff/traveltile/from_acid_caves,
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "Zl" = (
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"Zo" = (
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "Zq" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/dirt,
 /area/indoors/lich)
-"Zs" = (
-/obj/machinery/light/fueled/campfire,
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "Zt" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
@@ -9649,7 +9667,7 @@ jW
 QZ
 jW
 Sq
-XM
+Ok
 Ek
 UX
 xt
@@ -16783,13 +16801,13 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -16913,13 +16931,13 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17041,15 +17059,15 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-Ze
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+Zj
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17171,15 +17189,15 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-Lm
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+fJ
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17301,15 +17319,15 @@ ag
 ag
 ag
 ag
-pl
-pl
-Ze
-Lm
-Lm
-Lm
-pl
-pl
-pl
+NW
+NW
+Zj
+fJ
+fJ
+fJ
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17431,15 +17449,15 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Zo
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+vK
+NW
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17562,14 +17580,14 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-Zo
-Zo
-pl
-pl
-pl
+NW
+NW
+NW
+UH
+vK
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17691,15 +17709,15 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-Zo
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+vK
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17820,16 +17838,16 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-pl
-Zo
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+NW
+vK
+NW
+NW
+NW
 Iw
 Iw
 Iw
@@ -17949,23 +17967,23 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-Lm
-Lm
-pl
-Zo
-Zo
-Zo
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+fJ
+fJ
+NW
+vK
+vK
+vK
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 HZ
 HZ
 HZ
@@ -18079,23 +18097,23 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Lm
-Lm
-Zo
-Zo
-Lm
-Lm
-pl
-jx
-Py
-pl
-xg
-pl
-pl
+NW
+NW
+fJ
+fJ
+fJ
+fJ
+vK
+vK
+fJ
+fJ
+NW
+vG
+OB
+NW
+Bm
+NW
+NW
 HZ
 Ae
 Ae
@@ -18209,23 +18227,23 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Lm
-Lm
-MO
-MO
-Lm
-Lm
-Zo
-Zo
-Zo
-Zo
-cY
-pl
-pl
+NW
+NW
+fJ
+fJ
+fJ
+fJ
+XB
+XB
+fJ
+fJ
+vK
+vK
+vK
+vK
+Hw
+NW
+NW
 HZ
 Ae
 mX
@@ -18338,24 +18356,24 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Lm
-Zo
-MO
-MO
-MO
-MO
-Zo
-Zo
-Zo
-Zo
-pl
-pl
-pl
-pl
+NW
+NW
+fJ
+fJ
+fJ
+vK
+XB
+XB
+XB
+XB
+vK
+vK
+vK
+je
+NW
+NW
+NW
+NW
 HZ
 Ae
 VB
@@ -18467,25 +18485,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-Lm
-Lm
-Zo
-Zo
-MO
-MO
-MO
-MO
-MO
-Lm
-VN
-Lm
-Lm
-uG
-pl
-pl
+NW
+NW
+NW
+fJ
+fJ
+vK
+vK
+XB
+XB
+XB
+XB
+XB
+fJ
+vs
+fJ
+fJ
+oS
+NW
+NW
 HZ
 Ae
 mX
@@ -18597,25 +18615,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-Lm
-Lm
-Zo
-Ik
-Zo
-MO
-MO
-MO
-MO
-Lm
-Lm
-Lm
-Lm
-Lm
-pl
-pl
+NW
+NW
+NW
+fJ
+fJ
+vK
+VZ
+vK
+XB
+XB
+XB
+XB
+fJ
+fJ
+fJ
+fJ
+fJ
+NW
+NW
 HZ
 Ae
 mX
@@ -18727,25 +18745,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Lm
-Zo
-Zo
-PX
-MO
-MO
-MO
-MO
-Lm
-Zs
-Lm
-uf
-Lm
-pl
-pl
+NW
+NW
+fJ
+fJ
+fJ
+vK
+vK
+Mf
+XB
+XB
+XB
+XB
+fJ
+Fj
+fJ
+vQ
+fJ
+NW
+NW
 HZ
 Ae
 mX
@@ -18857,25 +18875,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Zo
-Ik
-Zo
-MO
-MO
-MO
-MO
-Lm
-Lm
-Lm
-Lm
-Lm
-Lm
-pl
-pl
+NW
+NW
+ie
+fJ
+vK
+VZ
+vK
+XB
+XB
+XB
+XB
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+NW
+NW
 HZ
 Ae
 mX
@@ -18987,25 +19005,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Zo
-Zo
-MO
-MO
-MO
-MO
-MO
-Lm
-Lm
-Aw
-Lm
-Lm
-pl
-pl
-pl
+NW
+NW
+fJ
+fJ
+vK
+vK
+XB
+XB
+XB
+XB
+XB
+fJ
+fJ
+SB
+fJ
+fJ
+NW
+NW
+NW
 HZ
 Ae
 mX
@@ -19117,25 +19135,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Zo
-Zo
-MO
-MO
-MO
-MO
-MO
-cY
-Lm
-Lm
-Lm
-Zo
-pl
-pl
-pl
+NW
+NW
+fJ
+fJ
+vK
+vK
+XB
+XB
+XB
+XB
+XB
+Hw
+fJ
+fJ
+fJ
+vK
+NW
+NW
+NW
 HZ
 Ae
 VB
@@ -19247,25 +19265,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Zo
-PX
-MO
-MO
-MO
-MO
-Zo
-Zo
-Zo
-pl
-pl
-Zo
-pl
-pl
-pl
+NW
+NW
+fJ
+fJ
+vK
+Mf
+XB
+XB
+XB
+XB
+vK
+UH
+vK
+NW
+NW
+vK
+NW
+NW
+NW
 HZ
 QA
 WG
@@ -19377,25 +19395,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Lm
-Lm
-Zo
-Zo
-MO
-MO
-Zo
-Zo
-pl
-pl
-pl
-pl
-Zo
-Zo
-SE
-pl
+NW
+NW
+fJ
+fJ
+fJ
+vK
+vK
+XB
+XB
+vK
+vK
+NW
+NW
+NW
+NW
+vK
+vK
+LA
+NW
 HZ
 Up
 ZU
@@ -19507,25 +19525,25 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Lm
-Lm
-Zo
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-Bs
-Lm
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+fJ
+fJ
+vK
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+iG
+fJ
+NW
+NW
+NW
 HZ
 Up
 yT
@@ -19638,24 +19656,24 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Lm
-Lm
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-Lm
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+fJ
+fJ
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+fJ
+NW
+NW
+NW
 HZ
 Up
 Dq
@@ -19769,23 +19787,23 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Lm
-Lm
-Lm
-pl
-pl
-pl
-pl
-pl
-OT
-Lm
-BK
-pl
-pl
+NW
+NW
+NW
+NW
+fJ
+fJ
+fJ
+NW
+NW
+NW
+NW
+NW
+BO
+fJ
+IC
+NW
+NW
 HZ
 Up
 Qp
@@ -19901,21 +19919,21 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Lm
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+fJ
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 HZ
 Up
 ML
@@ -20031,17 +20049,17 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-Zo
-Zo
-Zo
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+vK
+vK
+vK
+NW
+NW
+NW
+NW
 ag
 ag
 ag
@@ -20161,17 +20179,17 @@ ag
 ag
 ag
 ag
-pl
-pl
-Lm
-Zo
-Zo
-pl
-Zo
-pl
-pl
-pl
-pl
+NW
+NW
+fJ
+vK
+UH
+NW
+vK
+NW
+NW
+NW
+NW
 ag
 ag
 ag
@@ -20291,17 +20309,17 @@ ag
 ag
 ag
 ag
-pl
-pl
-Ze
-pl
-pl
-pl
-Zo
-Lm
-Ze
-pl
-pl
+NW
+NW
+Zj
+NW
+NW
+NW
+vK
+fJ
+Zj
+NW
+NW
 ag
 ag
 ag
@@ -20421,17 +20439,17 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 ag
 ag
 ag
@@ -20551,17 +20569,17 @@ ag
 ag
 ag
 ag
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
-pl
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
+NW
 ag
 ag
 ag

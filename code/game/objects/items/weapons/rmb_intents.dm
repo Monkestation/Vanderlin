@@ -17,65 +17,7 @@
 		return potential
 
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
-	if(!user)
-		return FALSE
-
-	if(!user.Adjacent(target))
-		return FALSE
-
-	if(user.incapacitated(IGNORE_GRAB))
-		return FALSE
-
-	var/mob/living/L = get_target(target)
-	if(!istype(L))
-		return FALSE
-
-	user.changeNext_move(CLICK_CD_FAST)
-	playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
-	user.visible_message(span_danger("[user] feints an attack at [target]!"))
-	var/perc = 50
-	if(user.mind)
-		var/obj/item/I = user.get_active_held_item()
-		var/ourskill = 0
-		var/theirskill = 0
-		if(I)
-			if(I.associated_skill)
-				ourskill = user.get_skill_level(I.associated_skill, TRUE)
-			if(L.mind)
-				I = L.get_active_held_item()
-				if(I?.associated_skill)
-					theirskill = L.get_skill_level(I.associated_skill, TRUE)
-		perc += (ourskill - theirskill) * 15 	//skill is of the essence
-		perc += (user.STAINT - L.STAINT) * 10	//but it's also mostly a mindgame
-		perc += (user.STASPD - L.STASPD) * 5 	//yet a speedy feint is hard to counter
-		perc += (user.STAPER - L.STAPER) * 5 	//a good eye helps
-
-	if(!user.cmode)
-		perc = 0
-
-	if(L.has_status_effect(/datum/status_effect/debuff/exposed))
-		perc = 0
-
-	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
-		perc -= rand(10,30)
-
-	user.apply_status_effect(/datum/status_effect/debuff/feintcd)
-	perc = CLAMP(perc, 0, 90) //no zero risk superfeinting
-
-	if(prob(perc)) //feint intent increases the immobilize duration significantly
-		if(istype(user.rmb_intent, /datum/rmb_intent/feint))
-			L.changeNext_move(10)
-			L.Immobilize(15)
-		else
-			L.changeNext_move(4)
-			L.Immobilize(5)
-		L.apply_status_effect(/datum/status_effect/debuff/exposed, 5 SECONDS)
-		to_chat(user, span_notice("[L] fell for my feint attack!"))
-		to_chat(L, span_danger("I fall for [user]'s feint attack!"))
-	else if(user.client?.prefs.showrolls)
-		to_chat(user, span_warning("[L] did not fall for my feint... [perc]%"))
-
-	return TRUE
+	return
 
 /datum/rmb_intent/aimed
 	name = "aimed"
@@ -127,19 +69,134 @@
 
 /datum/rmb_intent/feint
 	name = "feint"
-	desc = "(RMB WHILE DEFENSE IS ACTIVE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard. Useless against someone who is dodging."
+	desc = "(RMB WHILE IN COMBAT MODE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard.."
 	icon_state = "rmbfeint"
 	def_bonus = 10
+	/// Duration of the feint expose / vulnerable effect
+	var/feint_duration = 7.5 SECONDS
 
-/datum/status_effect/debuff/riposted
-	id = "riposted"
-	duration = 30
+/datum/rmb_intent/feint/special_attack(mob/living/user, atom/target)
+	if(!user)
+		return FALSE
+
+	if(user == target)
+		return FALSE
+
+	if(user.incapacitated(IGNORE_GRAB))
+		return FALSE
+
+	if(user.has_status_effect(/datum/status_effect/debuff/feintcd))
+		return FALSE
+
+	var/mob/living/defender = get_target(target)
+	if(!istype(defender))
+		return FALSE
+
+	var/obj/item/attacker_item = user.get_active_held_item()
+	if(!attacker_item && !user.Adjacent(target))
+		return FALSE
+
+	if(get_dist(user, target) > user.used_intent?.reach)
+		return FALSE
+
+	user.visible_message(
+		span_danger("[user] feints an attack at [defender]!"),
+		span_userdanger("I feint an attack at [defender]!"),
+	)
+
+	var/perc = 50
+	var/ourskill = 0
+	var/theirskill = 0
+	var/skill_factor = 0
+
+
+	if(attacker_item?.associated_skill)
+		ourskill = user.get_skill_level(attacker_item.associated_skill)
+
+	var/obj/item/defender_item = defender.get_active_held_item()
+	if(defender_item?.associated_skill)
+		theirskill = defender.get_skill_level(defender_item.associated_skill)
+
+	perc += (ourskill - theirskill) * 12 //skill is of the essence
+	perc += (user.STAINT - defender.STAINT) * 8 //but it's also mostly a mindgame
+	perc += (user.STASPD - defender.STASPD) * 3 //yet a speedy feint is hard to counter
+	perc += (user.STAPER - defender.STAPER) * 3 //a good eye helps
+
+	skill_factor = (ourskill - theirskill) / 2
+
+	var/special_message
+	var/cooldown_override = 20 SECONDS
+
+	if(defender.has_status_effect(/datum/status_effect/debuff/exposed) || \
+		defender.has_status_effect(/datum/status_effect/debuff/vulnerable))
+		perc = 0
+
+	if(defender.is_blind() || !defender.can_see_cone(user))
+		perc = 0
+		cooldown_override = 5 SECONDS
+		special_message = span_warning("They need to see me for me to feint them!")
+
+	perc = CLAMP(perc, 0, 90)
+
+	if(!prob(perc))
+		playsound(user, 'sound/combat/feint.ogg', 100, TRUE)
+		if(user.client?.prefs.showrolls)
+			to_chat(user, span_warning("[defender.p_they(TRUE)] did not fall for my feint... [perc]%"))
+		user.apply_status_effect(/datum/status_effect/debuff/feintcd)
+		if(special_message)
+			to_chat(user, special_message)
+		return TRUE
+
+	if(defender.has_status_effect(/datum/status_effect/buff/clash))
+		defender.remove_status_effect(/datum/status_effect/buff/clash)
+		defender.balloon_alert(user, "guard interrupted!")
+
+	var/effect_to_apply = defender.mind ? /datum/status_effect/debuff/vulnerable : /datum/status_effect/debuff/exposed
+
+	defender.apply_status_effect(effect_to_apply, feint_duration)
+	defender.apply_status_effect(/datum/status_effect/debuff/clickcd, max(1.5 SECONDS + skill_factor, 2.5 SECONDS))
+	defender.Immobilize(0.5 SECONDS)
+	defender.adjust_stamina(defender.stamina * 0.1)
+	defender.Slowdown(2)
+
+	user.changeNext_move(CLICK_CD_FAST)	//We don't want the feint effect to be popped instantly.
+	user.apply_status_effect(/datum/status_effect/debuff/feintcd, cooldown_override)
+
+	to_chat(user, span_notice("[defender.p_they(TRUE)] fell for my feint attack!"))
+	to_chat(defender, span_danger("I fall for [user.p_their()] feint attack!"))
+	playsound(user, 'sound/combat/riposte.ogg', 100, TRUE)
+
+	return TRUE
 
 /datum/rmb_intent/riposte
 	name = "defend"
 	desc = "No delay between dodge and parry rolls."
 	icon_state = "rmbdef"
 	def_bonus = 10
+
+/datum/rmb_intent/riposte/special_attack(mob/living/user, atom/target)
+	if(user.has_status_effect(/datum/status_effect/buff/clash))
+		return FALSE
+
+	if(user.has_status_effect(/datum/status_effect/debuff/clashcd))
+		return FALSE
+
+	if(!user.get_active_held_item()) //Nothing in our hand to Guard with.
+		return FALSE
+
+	if(user.incapacitated()) //Not usable while grabs are in play.
+		return FALSE
+
+	if(user.IsImmobilized() || user.IsOffBalanced()) //Not usable while we're offbalanced or immobilized
+		return FALSE
+
+	if(user.m_intent == MOVE_INTENT_RUN)
+		to_chat(user, span_warning("I can't focus on this while running."))
+		return FALSE
+
+	user.apply_status_effect(/datum/status_effect/buff/clash)
+
+	return TRUE
 
 /datum/rmb_intent/guard
 	name = "guarde"

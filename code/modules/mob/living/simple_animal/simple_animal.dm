@@ -12,6 +12,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	simpmob_attack = 45
 	simpmob_defend = 45
+	bloodpool = 0
 
 	var/icon_living = ""
 	///Icon when the animal is dead. Don't use animated icons for this.

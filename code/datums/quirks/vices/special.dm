@@ -152,10 +152,13 @@
 		/datum/species/halfling,
 		/datum/species/demihuman,
 		/datum/species/dwarf,
-		/datum/species/elf,
+		/datum/species/elf/snow,
+		/datum/species/elf/dark,
 		/datum/species/triton,
 		/datum/species/rakshari,
+		/datum/species/medicator,
 		/datum/species/kobold,
+		/datum/species/automaton,
 		/datum/oratorium,
 		"Nobles",
 	)
@@ -197,7 +200,7 @@
 				to_chat(H, span_userdanger("You see [human] and freeze in terror!"))
 				next_scream_time = world.time + 25 SECONDS
 				return
-	else
+	else if(fear_type == /datum/oratorium)
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
 				continue
