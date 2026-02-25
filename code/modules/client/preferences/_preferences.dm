@@ -297,12 +297,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	save_character()		//let's save this new random character so it doesn't keep generating new ones.
 	menuoptions = list()
 
-/datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
+// I don't think this ever runs currently, because the prefs window has can_close = FALSE by default
+// and we close it via a button which doesn't trigger this.
+/*
+/datum/preferences/Topic(href, href_list, hsrc) //yeah, gotta do this I guess..
 	. = ..()
 	if(href_list["close"])
 		var/client/C = usr.client
 		if(C)
 			C.clear_character_previews()
+*/
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
@@ -731,7 +735,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	// This should really be a browser datum
 	user << browse(dat.Join(), "window=preferences_browser;size=816x945")
 	update_preview_icon()
-	onclose(user, "stonekeep_prefwin", src)
+	// onclose(user, "stonekeep_prefwin", src)
 
 /datum/preferences/proc/update_menu_data(mob/user, list/fields_to_update)
 	if(!winexists(user, "preferences_browser"))
@@ -1193,7 +1197,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "capturekeypress", "<div align='center'>Keybindings</div>", 350, 300)
 	popup.set_content(HTML)
 	popup.open(use_onclose = FALSE)
-	onclose(user, "capturekeypress", src)
+	// onclose(user, "capturekeypress", src) // this would act as if the main prefs window was closed, so it didn't actually do anything. plus use_onclose was false
 
 /datum/preferences/proc/reset_patron(mob/user, silent = FALSE)
 	selected_patron = default_patron
@@ -2171,6 +2175,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 					winshow(user, "stonekeep_prefwin", FALSE)
 					user << browse(null, "window=preferences_browser")
+					user.client?.clear_character_previews() // browse null doesn't call on-close directly as far as i can tell
 					user << browse(null, "window=lobby_window")
 					return
 
