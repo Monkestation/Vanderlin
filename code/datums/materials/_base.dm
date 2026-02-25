@@ -21,4 +21,5 @@
 	var/hardness
 
 	var/can_be_molded = FALSE
+	/// What ingot does this material form
 	var/obj/item/ingot/ingot_type

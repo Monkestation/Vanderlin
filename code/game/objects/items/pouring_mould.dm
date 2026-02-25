@@ -140,9 +140,9 @@
 		STOP_PROCESSING(SSobj, src)
 		create_item()
 
-/obj/item/mould/on_reagent_change(changetype)
+/obj/item/mould/proc/on_reagent_change(datum/reagents/holder, ...)
+	SIGNAL_HANDLER
 	update_appearance(UPDATE_OVERLAYS)
-	return NONE
 
 /obj/item/mould/proc/create_item()
 	if(output_atom)

@@ -26,6 +26,10 @@
 	color = pick("#766f8c", "#565c5c", "#8d3a2d", "#4f3524")
 	START_PROCESSING(SSobj, src)
 
+/obj/item/storage/crucible/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignal(reagents, COMSIG_REAGENTS_HOLDER_UPDATED, PROC_REF(on_reagent_change))
+
 /obj/item/storage/crucible/examine(mob/user)
 	. = ..()
 	if(crucible_temperature)
@@ -138,9 +142,9 @@
 	melting_pot -= item
 	qdel(item)
 
-/obj/item/storage/crucible/on_reagent_change(changetype)
+/obj/item/storage/crucible/proc/on_reagent_change(datum/reagents/holder, ...)
+	SIGNAL_HANDLER
 	update_appearance(UPDATE_OVERLAYS)
-	return NONE
 
 /obj/item/storage/crucible/random/Initialize()
 	. = ..()

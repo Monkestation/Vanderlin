@@ -6,6 +6,14 @@
 
 	var/datum/material/largest_metal
 
+/datum/reagent/molten_metal/on_new(list/incoming_data)
+	. = ..()
+	RegisterSignal(holder, COMSIG_REAGENTS_TEMP_CHANGE, PROC_REF(on_temp_change))
+
+/datum/reagent/molten_metal/Destroy()
+	UnregisterSignal(holder, COMSIG_REAGENTS_TEMP_CHANGE)
+	return ..()
+
 /datum/reagent/molten_metal/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume, show_message = TRUE, touch_protection = 0)
 	. = ..()
 	if(methods & INGEST)
@@ -41,9 +49,9 @@
 
 	try_metal_merge()
 
-/datum/reagent/molten_metal/on_temp_change(chem_temp)
-	. = ..()
-	if(!chem_temp)
+/datum/reagent/molten_metal/proc/on_temp_change(datum/source, new_temp, old_temp)
+	SIGNAL_HANDLER
+	if(new_temp < old_temp)
 		return
 
 	try_metal_merge()

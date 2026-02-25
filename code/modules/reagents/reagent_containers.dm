@@ -66,6 +66,10 @@
 	if(is_open_container())
 		GLOB.weather_act_upon_list |= src
 
+/obj/item/reagent_containers/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignal(reagents, COMSIG_REAGENTS_HOLDER_UPDATED, PROC_REF(on_reagent_change))
+
 /obj/item/reagent_containers/examine(mob/user)
 	. = ..()
 	if(has_variable_transfer_amount && length(possible_transfer_amounts) > 1)
@@ -110,7 +114,8 @@
 /obj/item/reagent_containers/temperature_expose(exposed_temperature, exposed_volume)
 	reagents.expose_temperature(exposed_temperature)
 
-/obj/item/reagent_containers/on_reagent_change(changetype)
+/obj/item/reagent_containers/proc/on_reagent_change(datum/reagents/holder, ...)
+	SIGNAL_HANDLER
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/reagent_containers/update_overlays()

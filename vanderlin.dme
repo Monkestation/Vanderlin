@@ -242,6 +242,7 @@
 #include "code\__DEFINES\dcs\signals\signals_organ.dm"
 #include "code\__DEFINES\dcs\signals\signals_projectile.dm"
 #include "code\__DEFINES\dcs\signals\signals_rage.dm"
+#include "code\__DEFINES\dcs\signals\signals_reagents.dm"
 #include "code\__DEFINES\dcs\signals\signals_spatial_grid.dm"
 #include "code\__DEFINES\dcs\signals\signals_spell.dm"
 #include "code\__DEFINES\dcs\signals\signals_subsystems.dm"
