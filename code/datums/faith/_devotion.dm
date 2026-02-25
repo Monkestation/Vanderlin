@@ -59,6 +59,12 @@
 	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
+	RegisterSignal(holder, COMSIG_MOB_CLIENT_LOGIN, PROC_REF(LateInitHUD))
+
+/datum/devotion/proc/LateInitHUD(client/holder)
+	SIGNAL_HANDLER
+	holder_mob?.hud_used?.initialize_bloodpool()
+	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
