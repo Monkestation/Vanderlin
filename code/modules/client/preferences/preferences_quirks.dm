@@ -169,6 +169,7 @@
 	if(custom_value)
 		quirk_customizations[quirk_type] = custom_value
 	save_character()
+	update_preview_icon() // should fix issues with visual quirks not affecting our character
 	return TRUE
 
 /datum/preferences/proc/remove_quirk(quirk_type)
