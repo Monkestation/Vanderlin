@@ -5,7 +5,7 @@
 	lord_title = "Daewalker"
 
 /datum/clan/daewalker
-	name = "The Daewalker"
+	name = "Astrata's Will"
 	desc = "todo"
 	curse = "todo"
 	clan_covens = list(
@@ -30,6 +30,7 @@
 		TRAIT_NOENERGY,
 		TRAIT_ZJUMP,
 	)
+	leader_title = "Daewalker"
 	leader = /datum/clan_leader/daewalker
 	selectable_by_vampires = FALSE
 	allows_non_vampires = FALSE
@@ -38,8 +39,11 @@
 	return "the blood of bloodsuckers"
 
 /datum/clan/daewalker/initialize_hierarchy()
-	. = ..()
-	hierarchy_root?.can_assign_positions = FALSE
+	// Create the root leadership position
+	hierarchy_root = new /datum/clan_hierarchy_node("Daewalker", "Astrata's Chosen", 0)
+	hierarchy_root.position_color = "#gold"
+	hierarchy_root.max_subordinates = 0
+	all_positions += hierarchy_root
 
 /datum/clan/daewalker/apply_vampire_look(mob/living/carbon/human/H)
 	return

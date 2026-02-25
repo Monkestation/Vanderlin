@@ -115,7 +115,10 @@
 		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
-		statement_of_identity += "<EM>[article ? "[article] " : "\a "][used_name]</EM>"
+		if(article)
+			statement_of_identity += "<EM>[article] [used_name]</EM>"
+		else
+			statement_of_identity += "<EM>\a [used_name]</EM>"
 
 		var/appendage_to_name
 		if(race_name) // race name

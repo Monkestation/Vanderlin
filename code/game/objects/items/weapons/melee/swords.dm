@@ -847,8 +847,7 @@
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
-	name = "\improper Jaded Fang"
-	article = "the"
+	name = "\proper the Jaded Fang"
 	desc = "An ancestral long blade with an ominous glow, serrated with barbs along its edges. Stained with a strange green tint."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	sellprice = 0

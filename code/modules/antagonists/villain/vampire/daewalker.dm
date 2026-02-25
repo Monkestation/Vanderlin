@@ -29,8 +29,10 @@
 	blade.age = AGE_ADULT
 	blade.clear_quirks()
 	blade.set_species(/datum/species/human/northern)
+	blade.culture = GLOB.culture_singletons[/datum/culture/universal/grenzelhoft]
 
 	blade.skin_tone = SKIN_COLOR_CRIMSONLANDS
+	blade.voice_color = "#ffff00"
 	blade.set_eye_color("#ffff00")
 	blade.set_hair_color("#181a1d", FALSE)
 	blade.set_facial_hair_color("#181a1d", FALSE)
@@ -43,14 +45,15 @@
 	forcing_clan = new /datum/clan/daewalker()
 	. = ..()
 
-	blade.modifier_set_stat_to("[type]", STATKEY_STR, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_PER, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_INT, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_CON, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_END, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_SPD, 15)
-	blade.modifier_set_stat_to("[type]", STATKEY_LCK, 13)
-
+	blade.adjust_stat_modifier_list("[type]", list(
+		STATKEY_STR = 5,
+		STATKEY_PER = 5,
+		STATKEY_INT = 5,
+		STATKEY_CON = 5,
+		STATKEY_END = 5,
+		STATKEY_SPD = 5,
+		STATKEY_LCK = 5,
+	))
 	blade.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
 	blade.adjust_skillrank(/datum/skill/combat/firearms, 6, TRUE)
 	blade.adjust_skillrank(/datum/skill/combat/knives, 5, TRUE)
@@ -94,11 +97,6 @@
 /datum/antagonist/vampire/lord/daewalker/greet()
 	to_chat(owner.current, span_userdanger("todo"))
 
-
-/datum/antagonist/vampire/lord/daewalker/equip()
-	. = ..()
-	return TRUE
-
 /datum/antagonist/vampire/lord/daewalker/move_to_spawnpoint()
 	return
 
@@ -110,7 +108,7 @@
 	pants = /obj/item/clothing/pants/trou/beltpants/daewalker
 	shoes = /obj/item/clothing/shoes/boots/leather/daewalker
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker
-	gloves = /obj/item/clothing/gloves/eastgloves2
+	gloves = /obj/item/clothing/gloves/fingerless
 	ring =  /obj/item/clothing/ring/active/nomag
 
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
@@ -124,7 +122,7 @@
 /datum/outfit/daewalker/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.backr?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(/obj/item/weapon/sword/long/daewalker)
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/daewalker))
 
 // The Sword
 
@@ -204,6 +202,7 @@
 	name = "dark boots"
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
+	color = CLOTHING_ROYAL_BLACK
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	max_integrity = INTEGRITY_STRONG
@@ -214,6 +213,7 @@
 	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_WATCH_BOOT_STEP))
 
 /obj/item/clothing/pants/trou/beltpants/daewalker
+	color = CLOTHING_ROYAL_BLACK
 	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = INTEGRITY_STRONG
