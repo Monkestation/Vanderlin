@@ -3,7 +3,7 @@
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
-	allowed_races = RACES_PLAYER_ALL
+	allowed_races = list(SPEC_ID_ROUSMAN)
 	spawn_type = /mob/living/carbon/human/species/rousman
 	outfit = /datum/outfit/rousman
 	give_bank_account = FALSE
