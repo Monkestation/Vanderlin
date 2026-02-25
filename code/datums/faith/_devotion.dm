@@ -50,8 +50,11 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	holder_mob?.hud_used?.initialize_bloodpool()
-	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(holder_mob?.hud_used)
+		holder_mob?.hud_used?.initialize_bloodpool()
+		holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	else
+		RegisterSignal(holder, COMSIG_MOB_CLIENT_LOGIN, PROC_REF(LateInitHUD))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
@@ -59,7 +62,6 @@
 	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
-	RegisterSignal(holder, COMSIG_MOB_CLIENT_LOGIN, PROC_REF(LateInitHUD))
 
 /datum/devotion/proc/LateInitHUD(client/holder)
 	SIGNAL_HANDLER
