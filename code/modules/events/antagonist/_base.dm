@@ -118,7 +118,7 @@
 		for(var/mob/M in GLOB.mob_living_list)
 			if (M.stat == DEAD)
 				continue // Dead players cannot count as opponents
-			if (M.mind && (M.mind.assigned_role.title in enemy_roles))
+			if (M.mind && (M.mind.assigned_role))
 				job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that
 				enemy_players += M
 

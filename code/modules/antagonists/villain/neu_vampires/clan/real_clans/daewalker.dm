@@ -6,8 +6,7 @@
 
 /datum/clan/daewalker
 	name = "Astrata's Will"
-	desc = "todo"
-	curse = "todo"
+	desc = "Walk the dae so they may remember to fear it."
 	clan_covens = list(
 		/datum/coven/bloodheal,
 		/datum/coven/celerity,
@@ -34,6 +33,9 @@
 	leader = /datum/clan_leader/daewalker
 	selectable_by_vampires = FALSE
 	allows_non_vampires = FALSE
+
+/datum/clan/daewalker/get_blood_preference_string()
+	return "serve Astrata eternally."
 
 /datum/clan/daewalker/get_blood_preference_string()
 	return "the blood of bloodsuckers"

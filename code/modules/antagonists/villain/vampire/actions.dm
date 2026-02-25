@@ -168,20 +168,6 @@
 	src.playsound_local(get_turf(src), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 
 
-/datum/status_effect/buff/celerity
-	id = "celerity"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/celerity
-	effectedstats = list(STATKEY_SPD = 15, STATKEY_PER = 10)
-	duration = 30 SECONDS
-
-/datum/status_effect/buff/celerity/nextmove_modifier()
-	return 0.60
-
-/atom/movable/screen/alert/status_effect/buff/celerity
-	name = "Quickening"
-	desc = ""
-	icon_state = "bleed1"
-
 /mob/living/carbon/human/proc/blood_fortitude()
 	set name = "Armor of Darkness"
 	set category = "RoleUnique.Vampire"

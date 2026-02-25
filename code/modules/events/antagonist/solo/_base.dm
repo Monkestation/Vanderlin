@@ -182,6 +182,11 @@
 		qdel(old_mob)
 	return new_character
 
+/datum/round_event/antagonist/solo/ghost
+	startWhen = 35 SECONDS
+	endWhen = 35 SECONDS
+	announceWhen = 30 SECONDS
+
 /datum/round_event/antagonist/solo/ghost/start()
 	for(var/datum/mind/antag_mind as anything in setup_minds)
 		add_datum_to_mind(antag_mind)
@@ -195,24 +200,14 @@
 	prompted_picking = cast_control.prompted_picking
 	var/list/candidates = cast_control.get_candidates()
 
-	//guh
-	var/list/cliented_list = list()
-	for(var/mob/living/mob as anything in candidates)
-		cliented_list += mob.client
-
-	/*
 	if(prompted_picking)
-		candidates = SSpolling.poll_candidates(
-			question = "Would you like to be a [cast_control.name]?",
-			check_jobban = antag_flag,
-			role = antag_flag,
-			poll_time = 20 SECONDS,
+		candidates = pollCandidates(
+			Question = "Would you like to be \a [cast_control.name]?",
+			jobbanType = antag_flag,
+			poll_time = announceWhen,
+			ignore_category = "storyteller",
 			group = candidates,
-			alert_pic = antag_datum,
-			role_name_text = lowertext(cast_control.name),
-			chat_text_border_icon = antag_datum,
 		)
-	*/
 
 	var/selected_count = 0
 	while(length(candidates) && selected_count < antag_count)
@@ -230,6 +225,7 @@
 		setup_minds += new_human.mind
 		selected_count++
 	setup = TRUE
+	startWhen = activeFor
 
 
 ///Uses stripped down and bastardized code from respawn character

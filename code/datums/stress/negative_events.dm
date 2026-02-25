@@ -216,6 +216,11 @@
 		user.playsound_local(user, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
 		user.freak_out()
 
+/datum/stress_event/its_the_fucking_daewalker
+	timer = 3 MINUTES
+	stress_change = 3
+	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
+
 /datum/stress_event/fishface
 	timer = 30 SECONDS
 	stress_change = 1
