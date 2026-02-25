@@ -156,7 +156,7 @@
 	to_chat(owner.current, span_danger(antag_memory))
 
 /datum/antagonist/vampire/lord/daewalker/move_to_spawnpoint()
-	owner.current.forceMove(get_spawn_turf_for_job("Adventurer"))
+	return
 
 
 /datum/outfit/daewalker
