@@ -40,6 +40,11 @@
 /datum/clan/daewalker/get_blood_preference_string()
 	return "the blood of bloodsuckers"
 
+/datum/clan/daewalker/on_gain(mob/living/carbon/human/H, is_vampire)
+	. = ..()
+	//canceling it out
+	H.mob_biotypes &= ~MOB_UNDEAD
+
 /datum/clan/daewalker/initialize_hierarchy()
 	// Create the root leadership position
 	hierarchy_root = new /datum/clan_hierarchy_node("Daewalker", "Astrata's Chosen", 0)
