@@ -136,3 +136,16 @@
 	supports_directions = TRUE
 	craftdiff = 5
 
+
+/datum/blueprint_recipe/engineering/landmine
+	name = "Landmine"
+	desc = "A hidden explosive trap."
+	result_type = /obj/structure/trap/mine
+	required_materials = list(
+		/obj/item/ingot/tin = 2, //Gotta be soft metal, otherwise it would be hard to shape into the bomb canister
+		/obj/item/restraints/legcuffs/beartrap = 1,
+		/obj/item/reagent_containers/powder/blastpowder = 3,
+	)
+	supports_directions = TRUE
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 2
