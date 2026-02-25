@@ -511,7 +511,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	flee_in_pain = TRUE
 	wander = TRUE
 
-/mob/living/carbon/human/species/rousman/seer/stronger/with_ai
+/mob/living/carbon/human/species/rousman/seer_stronger/with_ai
 	ai_controller = /datum/ai_controller/human_npc
 
 /mob/living/carbon/human/species/rousman/seer_stronger/after_creation()
