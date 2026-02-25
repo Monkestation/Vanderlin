@@ -65,6 +65,7 @@
 	SIGNAL_HANDLER
 	holder_mob?.hud_used?.initialize_bloodpool()
 	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	UnregisterSignal(holder_mob, COMSIG_MOB_CLIENT_LOGIN)
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
