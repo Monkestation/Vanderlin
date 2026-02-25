@@ -29,7 +29,7 @@
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 	)
 

@@ -15,7 +15,10 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/captain
-	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard)
+	spells = list(
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/guard,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
+		)
 	give_bank_account = 120
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
@@ -56,7 +59,8 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS
 	)

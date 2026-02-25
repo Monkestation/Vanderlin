@@ -59,7 +59,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -157,6 +157,8 @@
 	)
 
 	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
+	if(!helmetchoice)
+		return
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"

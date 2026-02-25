@@ -341,7 +341,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STRONGBITE "Strong Bite"
 #define TRAIT_HATEWOMEN	"Ladykiller"
 #define TRAIT_SEEDKNOW "Seed Knower"
-#define TRAIT_NOBLE	"Noble Blooded"
+#define TRAIT_NOBLE_BLOOD	"Noble Blooded"
+#define TRAIT_NOBLE_POWER	"Noble Authority"
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
@@ -386,6 +387,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SEEPRICES "Golden Blood" //See prices
 #define TRAIT_SEE_LEYLINES "Magical Visions"
 #define TRAIT_POISONBITE "Poison Bite"
+#define TRAIT_BLOODDRINKER "Blood Drinker" // Can drink blood without vomiting
 #define TRAIT_FORAGER "Expert Forager"
 #define TRAIT_TINY "Tiny"
 #define TRAIT_DREAM_WATCHER	"Noc Blessed" //Unique Trait of the Dream Watcher Town Elder Class, they have a chance to know about antags or gods influences.
@@ -430,7 +432,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_FISHFACE "Fishface"
 #define TRAIT_FAT "Obese"
 #define TRAIT_SCHIZO_FLAW "Schizophrenic"
-#define TRAIT_VIOLATOR "Violator of the Coven"
 #define TRAIT_TORPOR "Endless Slumber"
 #define TRAIT_SATE "SATE"
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
@@ -458,6 +459,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_INQUISITION "Member of the Oratorium Throni Vacui"
 #define TRAIT_PURITAN "Puritan"
 #define TRAIT_SILVER_BLESSED "Silver Blessed"
+#define TRAIT_DIVINE_CENTRIST "Divine Centrist"
+#define TRAIT_DIVINE_SERVANT "Divine Servant"
+#define TRAIT_DIVINE_CONVERT "Divine Convert"
 
 // Inhumen patron trait bonuses
 #define TRAIT_ORGAN_EATER "Blessing of Graggar"//Can eat organs (duh.) and raw meat

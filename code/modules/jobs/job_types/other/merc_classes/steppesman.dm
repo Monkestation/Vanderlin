@@ -20,7 +20,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/riding = 5, // I don't think riding skill has that big of an effect
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/craft/tanning = 2,
 		/datum/skill/misc/swimming = 1,

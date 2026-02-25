@@ -29,6 +29,8 @@
 	var/list/datum/devotion_task/tasks = list()
 	var/list/viable_tasks = list()
 
+	var/devotion_class = DEVOTION_CLASS_CLERIC
+
 /datum/devotion/Destroy(force)
 	remove()
 	STOP_PROCESSING(SSprocessing, src)
@@ -150,21 +152,32 @@
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
 	)
+	devotion_class = DEVOTION_CLASS_PRIEST
+
+/datum/devotion/proc/make_gmtemplar()
+	devotion = 150
+	max_devotion = 350
+	progression = CLERIC_REQ_3
+	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_GRANDMASTER
 
 /datum/devotion/proc/make_templar()
 	devotion = 50
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
+	devotion_class = DEVOTION_CLASS_TEMPLAR
 
 /datum/devotion/proc/make_absolver()
 	devotion = 100
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_3
 	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
+	devotion_class = DEVOTION_CLASS_ACOLYTE
 
 /datum/devotion/proc/make_cleric()
 	devotion = 50
@@ -172,7 +185,7 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_3
 
-/datum/devotion/proc/make_churching()
+/datum/devotion/proc/make_churchling()
 	max_devotion = CLERIC_REQ_1
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_1
@@ -180,6 +193,7 @@
 		/datum/action/cooldown/spell/undirected/touch/orison/lesser,
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
+	devotion_class = DEVOTION_CLASS_CHURCHLING
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"

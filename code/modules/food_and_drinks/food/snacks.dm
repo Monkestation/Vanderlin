@@ -375,7 +375,7 @@ All foods are distributed among various categories. Use common sense.
 
 		if(fork_check)
 			if(!plate_check)
-				if(HAS_TRAIT(M,TRAIT_NOBLE))
+				if(HAS_TRAIT(M,TRAIT_NOBLE_BLOOD))
 					M.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
 			else
 				if(plate_check.dirty)

@@ -1,6 +1,6 @@
 /proc/CheckZoneCoven(mob/target)
 	var/area/area = get_area(target)
-	return !area.coven_protected
+	return area.coven_protected
 
 /mob/living
 	var/cached_island_id = null
@@ -21,11 +21,12 @@
 
 	var/enhanced_strip = FALSE
 	var/datum/clan/clan
-	var/bloodpool = 1000
+	var/bloodpool = 1500
 	var/maxbloodpool = 3000
-	var/masquerade = 5
 
-	var/last_masquerade_violation = 0
+	COOLDOWN_DECLARE(detection_cooldown)
+	var/detections = 0
+
 	var/resistant_to_covens = FALSE
 
 	var/coven_time_plus = 0
@@ -35,7 +36,7 @@
 	var/last_frenzy_check = 0
 	var/atom/frenzy_target = null
 
-	var/last_drinkblood_use = 0
+	COOLDOWN_DECLARE(drinkblood_use)
 	var/last_bloodpower_click = 0
 	var/last_drinkblood_click = 0
 
@@ -104,56 +105,67 @@
 	else
 		hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
 
-/mob/living/proc/CheckEyewitness(mob/living/source, mob/attacker, range = 0, affects_source = FALSE)
-	var/actual_range = max(1, round(range*(attacker.alpha/255)))
-	var/list/seenby = list()
-	for(var/mob/living/carbon/human/human in oviewers(1, source))
-		if(get_turf(src) != turn(human.dir, 180))
-			seenby |= human
-	for(var/mob/living/carbon/human/human in viewers(actual_range, source))
-		if(affects_source)
-			if(human == source)
-				seenby |= human
-		if(!human.pulledby)
-			var/turf/LC = get_turf(attacker)
-			if(LC.get_lumcount() > 0.25 || get_dist(human, attacker) <= 1)
-				if(!attacker.InCone(human))
-					if((human == source) && !affects_source)
-						continue
-					seenby |= human
-	if(length(seenby) >= 1)
-		return TRUE
+/mob/proc/affects_masquerade()
 	return FALSE
 
-/mob/living/proc/AdjustMasquerade(value, forced = FALSE)
-	return
+/mob/living/carbon/affects_masquerade(town_only=TRUE)
+	. = FALSE
+	if(!mind)
+		return
+	if(CheckZoneCoven(src))
+		return
+	if(town_only && !is_town_level(z))
+		return
+	if(stat >= UNCONSCIOUS)
+		return
+	if(clan)
+		return
+	if(mind.has_antag_datum(/datum/antagonist/vampire) || mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/werewolf))
+		return
+	if((FACTION_UNDEAD in faction) || (MOB_UNDEAD in mob_biotypes))
+		return
+	return TRUE
 
-/mob/living/carbon/human/AdjustMasquerade(value, forced = FALSE)
+
+/// Check Eye witnesses to vampire stuff in an area.
+/// Called by the perpetrator
+/// atom/source = The atom/location of the thing of interest - what people are looking at
+/mob/living/proc/CheckEyewitness(atom/source, range = 7, affects_source = FALSE)
+	var/actual_range = max(1, round(range*(alpha/255)))
+	var/list/seenby = list()
+	var/turf/T = get_turf(src)
+	for(var/mob/living/carbon/human/H in oviewers(1, src))
+		if(!H.affects_masquerade())
+			continue
+		if(T != get_step(H, turn(H.dir, 180)))
+			seenby |= H
+
+	for(var/mob/living/carbon/human/H in viewers(actual_range, source))
+		if(H == src)
+			continue
+		if(!H.affects_masquerade())
+			continue
+		if(affects_source && H == source)
+			seenby |= H
+			continue
+		if(source.has_light_nearby() || H.has_nightvision() || get_dist(H, source) <= 1)
+			if(InCone(H))
+				seenby |= H
+	return seenby
+
+/mob/living/proc/vampire_detected(value, forced = FALSE)
 	if(!clan)
 		return
-	if (!forced)
-		if(value > 0)
-			if(HAS_TRAIT(src, TRAIT_VIOLATOR))
-				return
-		if(!CheckZoneCoven(src))
-			return
-	if(!is_special_character(src) || forced)
-		if(((last_masquerade_violation + 10 SECONDS) < world.time) || forced)
-			last_masquerade_violation = world.time
-			if(value < 0)
-				if(masquerade > 0)
-					masquerade = max(0, masquerade+value)
-					to_chat(src, "<span class='userdanger'><b>MASQUERADE VIOLATION!</b></span>")
-			if(value > 0)
-				if(masquerade < 5)
-					masquerade = min(5, masquerade+value)
-					to_chat(src, "<span class='userhelp'><b>MASQUERADE REINFORCED!</b></span>")
+	if(CheckZoneCoven(src))
+		return
+	if(!COOLDOWN_FINISHED(src, detection_cooldown) && !forced)
+		return
+	COOLDOWN_START(src, detection_cooldown, 30 SECONDS)
+	detections += value
+	GLOB.vamp_detection += value
+	if(value > 0)
+		to_chat(src, span_boldannounce("DETECTED!"))
 
-	if(src in GLOB.coven_breakers_list)
-		if(masquerade > 2)
-			GLOB.coven_breakers_list -= src
-	else if(masquerade < 3)
-		GLOB.coven_breakers_list |= src
 
 /**
  * Creates an action button and applies post_gain effects of the given Coven.
@@ -295,7 +307,6 @@
 
 	// Handle low bloodpool effects
 	handle_bloodpool_effects()
-	blood_volume = BLOOD_VOLUME_SAFE
 
 	// Coffin regeneration
 	var/total_damage = getBruteLoss() + getFireLoss()
@@ -305,6 +316,7 @@
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		heal_overall_damage(5, 5)
+		adjustToxLoss(-5)
 		set_bloodpool(min(maxbloodpool * 0.25, bloodpool + 10))
 	if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (total_damage <= 0 || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)

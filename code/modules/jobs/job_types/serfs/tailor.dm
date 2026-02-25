@@ -29,7 +29,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/craft/tanning = 2,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/combat/knives = 2,
@@ -48,7 +48,7 @@
 
 /datum/job/tailor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/sewing, pick(1, 2), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/sewing, pick(1, 2), TRUE)
 	spawned.adjust_skillrank(/datum/skill/craft/tanning, pick(1, 2), TRUE)
 
 /datum/outfit/tailor

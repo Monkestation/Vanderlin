@@ -134,24 +134,24 @@
 	find_keeper()
 
 /datum/quirk/peculiarity/mystery_box/proc/find_keeper()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/human/box_owner = owner
 
 	// Find a random player to be the keeper
 	var/list/possible_keepers = list()
-	for(var/mob/living/carbon/human/P in GLOB.player_list)
-		if(P != H && P.mind && P.stat != DEAD)
-			possible_keepers += P
+	for(var/mob/living/carbon/human/possible_keeper in GLOB.player_list)
+		if(possible_keeper != box_owner && possible_keeper.mind && possible_keeper.stat != DEAD && !isautomaton(possible_keeper))
+			possible_keepers += possible_keeper
 
 	if(length(possible_keepers))
 		keeper = pick(possible_keepers)
 
 		// Give keeper the knowledge with flavor
 		to_chat(keeper, span_notice("A memory surfaces... you know the passcode to a mysterious box: \"[passcode]\""))
-		keeper.mind.store_memory("Passcode to [H.real_name]'s box: \"[passcode]\"")
+		keeper.mind.store_memory("Passcode to [box_owner.real_name]'s box: \"[passcode]\"")
 
-		to_chat(H, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
+		to_chat(box_owner, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
 	else
-		to_chat(H, span_warning("You can't remember who knows the passcode..."))
+		to_chat(box_owner, span_warning("You can't remember who knows the passcode..."))
 
 	RegisterSignal(mystery_box, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine), TRUE)
 

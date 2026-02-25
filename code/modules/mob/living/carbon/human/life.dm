@@ -30,9 +30,6 @@
 
 	. = ..()
 
-	if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
-		adjust_bloodpool(3)
-
 	if (QDELETED(src))
 		return 0
 

@@ -558,12 +558,10 @@
  * of using this power amongst NPCs.
  */
 /datum/coven_power/proc/do_masquerade_violation(atom/target)
-	if (violates_masquerade)
-		if (owner.CheckEyewitness(target ? target : owner, owner, 7, TRUE))
-			//TODO: detach this from being a human
-			if (ishuman(owner))
-				var/mob/living/carbon/human/human = owner
-				human.AdjustMasquerade(-1)
+	if(!violates_masquerade)
+		return
+	if(length(owner.CheckEyewitness(target ? target : owner, 7)))
+		owner.vampire_detected(1)
 
 /**
  * Overridable proc handling the spending of resources (vitae/blood)
@@ -754,6 +752,8 @@
 
 	if (deactivate_sound)
 		owner.playsound_local(owner, deactivate_sound, 50, FALSE)
+
+	INVOKE_ASYNC(src, PROC_REF(do_masquerade_violation), target)
 
 	owner.update_action_buttons()
 

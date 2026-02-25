@@ -15,7 +15,7 @@
 	var/ignite_chance = 2
 	var/traits_applied = list(TRAIT_NOPAIN, TRAIT_NOPAINSTUN, TRAIT_LONGSTRIDER)
 	var/stat_bonus_martyr = 3
-	var/mob/living/current_holder
+	var/mob/living/bound_user
 	var/is_active = FALSE
 	var/allow_all = FALSE
 	var/is_activating
@@ -79,10 +79,10 @@
 
 /datum/component/martyrweapon/proc/handle_end()
 	deactivate()
-	var/mob/living/carbon/C = current_holder
+	var/mob/living/carbon/C = bound_user
 	switch(current_state)
 		if(STATE_SAFE)
-			var/area/A = get_area(current_holder)
+			var/area/A = get_area(bound_user)
 			var/success = FALSE
 			for(var/AR in allowed_areas)	//Are we in a whitelisted area? (Church, mainly)
 				if(istype(A, AR))
@@ -95,9 +95,9 @@
 						if(istype(mercyarea, AR))
 							success = TRUE
 			if(success)
-				to_chat(current_holder, span_notice("The weapon fizzles out, its energies dissipating across the holy grounds."))
+				to_chat(bound_user, span_notice("The weapon fizzles out, its energies dissipating across the holy grounds."))
 			else
-				to_chat(current_holder, span_notice("The weapon begins to fizzle out, but the energy has nowhere to go!"))
+				to_chat(bound_user, span_notice("The weapon begins to fizzle out, but the energy has nowhere to go!"))
 				C.freak_out()
 				deathprocess()
 
@@ -106,20 +106,20 @@
 			deathprocess()
 
 /datum/component/martyrweapon/proc/deathprocess()
-	if(current_holder)
-		current_holder.Stun(16000, 1, 1)	//Even if you glitch out to survive you're still permastunned, you are not meant to come back from this
-		var/mob/living/carbon/human/H = current_holder
+	if(bound_user)
+		bound_user.Stun(16000, 1, 1)	//Even if you glitch out to survive you're still permastunned, you are not meant to come back from this
+		var/mob/living/carbon/human/H = bound_user
 		if(H.cmode)	//Turn off the music
 			H.toggle_cmode()
 		addtimer(CALLBACK(src, PROC_REF(killhost)), 30 SECONDS)
-		current_holder.visible_message(span_warning("[current_holder] falls to their knees, planting their weapon into the ground as holy energies pulse from their body!"), span_warning("My oath is fulfilled. I hope I made it count. I have thirty seconds to make peace with the Gods and my Kin."))
-		current_holder.playsound_local(current_holder, 'sound/health/fastbeat.ogg', 100)
+		bound_user.visible_message(span_warning("[bound_user] falls to their knees, planting their weapon into the ground as holy energies pulse from their body!"), span_warning("My oath is fulfilled. I hope I made it count. I have thirty seconds to make peace with the Gods and my Kin."))
+		bound_user.playsound_local(bound_user, 'sound/health/fastbeat.ogg', 100)
 
 /datum/component/martyrweapon/proc/killhost()
-	if(current_holder)
-		var/mob/living/carbon/human/H = current_holder
-		current_holder.playsound_local(current_holder, 'sound/magic/ahh1.ogg', 100)
-		current_holder.visible_message(span_info("[current_holder] fades away."), span_info("Your life led up to this moment. In the face of the decay of the world, you endured. Now you rest. You feel your soul shed from its mortal coils, and the embrace of [H.patron.name]"))
+	if(bound_user)
+		var/mob/living/carbon/human/H = bound_user
+		bound_user.playsound_local(bound_user, 'sound/magic/ahh1.ogg', 100)
+		bound_user.visible_message(span_info("[bound_user] fades away."), span_info("Your life led up to this moment. In the face of the decay of the world, you endured. Now you rest. You feel your soul shed from its mortal coils, and the embrace of [H.patron.name]"))
 		H.dust(drop_items = TRUE)
 		is_dying = FALSE
 
@@ -127,18 +127,18 @@
 /datum/component/martyrweapon/proc/timehint()
 	var/result = round((end_activation - world.time) / 600)	//Minutes
 	if(result != last_time && last_time != 30)
-		to_chat(current_holder,span_notice("[result + 1] minute[result ? "s" : ""] left."))
+		to_chat(bound_user,span_notice("[result + 1] minute[result ? "s" : ""] left."))
 		last_time = result
 		return result
 	if(result == 0)
 		var/resultadv = (end_activation - world.time) / 10	//Seconds
 		if(resultadv < 30 && resultadv > 27 && last_time != 30)
-			to_chat(current_holder,span_notice("30 SECONDS! MY POWER SURGES!!"))
+			to_chat(bound_user,span_notice("30 SECONDS! MY POWER SURGES!!"))
 			last_time = 30
 			return 30
 		else
 			if(resultadv == 10 && last_time != 10)
-				to_chat(current_holder,span_crit("10 SECONDS"))
+				to_chat(bound_user,span_crit("10 SECONDS"))
 				last_time = resultadv
 	return 0
 
@@ -179,17 +179,20 @@
 				to_chat(H, span_warn("It slips from my grasp. I can't get a hold."))
 				H.dropItemToGround(parent)
 				return
-			else
+			if(!bound_user)
+				bound_user = user
+				to_chat(user, SPAN_GOD_ASTRATA("The weapon binds to you."))
+			if(user == bound_user)
 				RegisterSignal(user, COMSIG_CLICK_ALT, PROC_REF(altclick), override = TRUE)
-				current_holder = user
-			if(J.title == "Grandmaster Templar")
-				to_chat(user, span_warning("The weapon binds to you."))
 	else
-		RegisterSignal(user, COMSIG_CLICK_ALT, PROC_REF(altclick), override = TRUE)
-		current_holder = user
+		if(!bound_user)
+			bound_user = user
+			to_chat(user, SPAN_GOD_ASTRATA("The weapon binds to you."))
+		if(user == bound_user)
+			RegisterSignal(user, COMSIG_CLICK_ALT, PROC_REF(altclick), override = TRUE)
 
 /datum/component/martyrweapon/proc/altclick(mob/user)
-	if(user == current_holder && !is_active && !is_activating)
+	if(user == bound_user && !is_active && !is_activating)
 		var/holding = user.get_active_held_item()
 		if(holding == parent)
 			if(COOLDOWN_FINISHED(src, weaponactivate))
@@ -227,13 +230,13 @@
 
 //IF it gets dropped, somehow (likely delimbing), turn it off immediately.
 /datum/component/martyrweapon/proc/on_drop(datum/source, mob/user)
-	if(current_holder == user)
+	if(bound_user == user)
 		UnregisterSignal(user, COMSIG_CLICK_ALT)
 	if(current_state == STATE_SAFE && is_active)
 		deactivate()
 
 /datum/component/martyrweapon/proc/on_examine(datum/source, mob/user, list/examine_list)
-	if(current_holder && current_holder == user)
+	if(bound_user && bound_user == user)
 		examine_list += span_notice("It looks to be bound to you. Alt + right click to activate it.")
 	if(!COOLDOWN_FINISHED(src, weaponactivate))
 		examine_list += span_notice("The time remaining until it is prepared: [COOLDOWN_TIMELEFT(src, weaponactivate) / 600] minutes")
@@ -241,19 +244,19 @@
 		examine_list += span_notice("It looks ready to be used again.")
 	if(is_active)
 		examine_list += span_warningbig("It is lit afire by godly energies!")
-		if(user == current_holder)
+		if(user == bound_user)
 			examine_list += span_warningbig("<i>SLAY THE HERETICS! TAKE THEM WITH YOU!</i>")
 
 /datum/component/martyrweapon/proc/adjust_traits(remove = FALSE)
 	for(var/trait in traits_applied)
 		if(!remove)
-			ADD_TRAIT(current_holder, trait, "martyrweapon")
+			ADD_TRAIT(bound_user, trait, "martyrweapon")
 		else
-			REMOVE_TRAIT(current_holder, trait, "martyrweapon")
+			REMOVE_TRAIT(bound_user, trait, "martyrweapon")
 
 /datum/component/martyrweapon/proc/adjust_stats(state)
-	if(current_holder)
-		var/mob/living/carbon/human/H = current_holder
+	if(bound_user)
+		var/mob/living/carbon/human/H = bound_user
 		switch(state)
 			if(STATE_SAFE) //Lowered damage due to BURN damage type and SAFE activation
 				var/obj/item/I = parent
@@ -263,20 +266,20 @@
 					I.force_wielded = active_safe_damage_wielded
 				return
 			if(STATE_MARTYR)
-				current_holder.STASTR += stat_bonus_martyr
-				//current_holder.STASPD += stat_bonus_martyr
-				current_holder.STACON += stat_bonus_martyr
-				current_holder.STAEND += stat_bonus_martyr
-				current_holder.STAINT += stat_bonus_martyr
-				current_holder.STAPER += stat_bonus_martyr
-				current_holder.STALUC += stat_bonus_martyr
+				bound_user.STASTR += stat_bonus_martyr
+				//bound_user.STASPD += stat_bonus_martyr
+				bound_user.STACON += stat_bonus_martyr
+				bound_user.STAEND += stat_bonus_martyr
+				bound_user.STAINT += stat_bonus_martyr
+				bound_user.STAPER += stat_bonus_martyr
+				bound_user.STALUC += stat_bonus_martyr
 				H.adjust_energy(9999)
 			if(STATE_MARTYRULT) // This ONLY triggers a minute and a half into the ult. They'll have this for thirty seconds and then DIE. Go off King.
-				ADD_TRAIT(current_holder, TRAIT_NOSTAMINA, TRAIT_GENERIC)
-				current_holder.STASTR = 20
-				current_holder.STAPER = 20
-				current_holder.STACON = 20
-				current_holder.STAEND = 20
+				ADD_TRAIT(bound_user, TRAIT_NOSTAMINA, TRAIT_GENERIC)
+				bound_user.STASTR = 20
+				bound_user.STAPER = 20
+				bound_user.STACON = 20
+				bound_user.STAEND = 20
 
 //This is called regardless of the activated state (safe or not)
 /datum/component/martyrweapon/proc/deactivate()
@@ -287,7 +290,7 @@
 	I.damtype = BRUTE
 	I.possible_item_intents = inactive_intents
 	I.gripped_intents = inactive_intents_wielded
-	current_holder.update_a_intents()
+	bound_user.update_a_intents()
 	I.force = initial(I.force)
 	I.force_wielded = initial(I.force_wielded)
 	I.max_integrity = initial(I.max_integrity)
@@ -320,11 +323,11 @@
 		I.item_state = initial(I.item_state)
 		I.toggle_state = null
 
-	current_holder.regenerate_icons()
+	bound_user.regenerate_icons()
 
 //This is called once all the checks are passed and the options are made by the player to commit.
 /datum/component/martyrweapon/proc/activate(mob/user, status_flag)
-	current_holder.visible_message("[span_notice("[current_holder] begins invoking their Oath!")]", span_notice("You begin to invoke your oath."))
+	bound_user.visible_message("[span_notice("[bound_user] begins invoking their Oath!")]", span_notice("You begin to invoke your oath."))
 	if(do_after(user, 5 SECONDS, parent))
 		flash_lightning(user)
 		var/obj/item/I = parent
@@ -343,8 +346,8 @@
 			if(STATE_SAFE)
 				end_activation = world.time + safe_duration	//Only a duration and nothing else.
 				adjust_stats(current_state)	//Lowers the damage of the sword due to safe activation.
-				current_holder.energy = current_holder.max_energy
-				current_holder.stamina = 0
+				bound_user.energy = bound_user.max_energy
+				bound_user.stamina = 0
 				I.blade_int = I.max_blade_int
 			if(STATE_MARTYR)
 				end_activation = world.time + martyr_duration
@@ -353,8 +356,8 @@
 				I.blade_int = I.max_blade_int
 				adjust_stats(current_state)	//Gives them extra stats.
 
-				current_holder.stamina = 0
-				current_holder.energy = current_holder.max_energy
+				bound_user.stamina = 0
+				bound_user.energy = bound_user.max_energy
 
 			if(STATE_MARTYRULT)
 				end_activation = world.time + ultimate_duration
@@ -363,22 +366,22 @@
 				I.max_blade_int = 9999
 				I.blade_int = I.max_blade_int
 
-				current_holder.adjust_skillrank(/datum/skill/misc/athletics, 6, FALSE)
+				bound_user.adjust_skillrank(/datum/skill/misc/athletics, 6, FALSE)
 
 				adjust_stats(STATE_MARTYR)
 
-				current_holder.energy = current_holder.max_energy
-				current_holder.stamina = 0
+				bound_user.energy = bound_user.max_energy
+				bound_user.stamina = 0
 
-				current_holder.adjust_skillrank(/datum/skill/combat/swords, 1, FALSE)
-				current_holder.adjust_skillrank(/datum/skill/combat/axesmaces, 1, FALSE)
-				current_holder.adjust_skillrank(/datum/skill/combat/polearms, 1, FALSE)
+				bound_user.adjust_skillrank(/datum/skill/combat/swords, 1, FALSE)
+				bound_user.adjust_skillrank(/datum/skill/combat/axesmaces, 1, FALSE)
+				bound_user.adjust_skillrank(/datum/skill/combat/polearms, 1, FALSE)
 
 			else
 				end_activation = world.time + safe_duration
 
-		if(ishuman(current_holder))
-			var/mob/living/carbon/human/H = current_holder
+		if(ishuman(bound_user))
+			var/mob/living/carbon/human/H = bound_user
 			switch(status_flag)
 				if(STATE_MARTYR)
 					SEND_SOUND(H, sound(null))
@@ -397,7 +400,7 @@
 		is_active = TRUE
 	else
 		is_activating = FALSE
-		SEND_SOUND(current_holder, sound(null))
+		SEND_SOUND(bound_user, sound(null))
 
 #undef STATE_SAFE
 #undef STATE_MARTYR
