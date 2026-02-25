@@ -91,6 +91,7 @@
 				span_warning("Your flesh slowly regenerates!")
 			)
 			owner.vampire_undisguise()
+			do_masquerade_violation(owner)
 
 	owner.update_damage_overlays()
 	owner.update_health_hud()
