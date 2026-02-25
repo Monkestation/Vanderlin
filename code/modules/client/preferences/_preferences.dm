@@ -2252,6 +2252,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/apply_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	if(QDELETED(character) || !ishuman(character))
 		return
+	character.clear_quirks() // clear preexisting quirks to undo things like transform changes
+	character.transform = matrix() // reset transforms anyway just in case, to avoid drift from setting and unsetting small/large build
 	character.age = age
 	character.gender = gender
 	character.set_patron(selected_patron)
