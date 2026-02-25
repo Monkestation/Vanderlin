@@ -394,6 +394,8 @@
 	grid_height = 96
 	grid_width = 64
 
+	weapon_special = /datum/special_intent/axe_swing
+
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()
 	if(tag)

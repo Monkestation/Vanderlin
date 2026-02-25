@@ -179,10 +179,10 @@
 /datum/special_intent/flail_sweep/build_affected_turfs(mob/living/user, turf/start_override)
 	var/list/affected = list()
 
-	for(var/turf/adjacent as anything in get_adjacent_open_turfs(user))
+	for(var/turf/adjacent in orange(1, user))
 		if(adjacent.is_blocked_turf(TRUE))
 			continue
-		affected += adjacent
+		LAZYADDASSOCLIST(affected, adjacent, 0)
 
 	return affected
 
