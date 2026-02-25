@@ -77,6 +77,12 @@
 			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
+	if(level >= 7 && prob(10) && owner.regenerate_limbs(list(BODY_ZONE_HEAD)))
+		owner.visible_message(
+			span_warning("[owner]'s limbs regenerate!"),
+			span_warning("Your limbs regenerate themselves!")
+		)
+
 	// Masquerade violation check
 	if(level >= 3)
 		if(prob(20)) // 20% chance per pulse to show visible healing
@@ -143,7 +149,7 @@
 //BLOODHEAL 7
 /datum/coven_power/bloodheal/seven
 	name = "Grand Bloodheal"
-	desc = "Reconstruct your form from grievous damage."
+	desc = "Reconstruct entire limbs."
 	level = 7
 	vitae_cost = 25
 	duration_length = 1.5 SECONDS

@@ -19,6 +19,9 @@
 		TRAIT_DODGEEXPERT,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FEARLESS,
+		TRAIT_NOAMBUSH,
+		TRAIT_NOHYGIENE, // too cool to stink
+		TRAIT_PSYDONIAN_GRIT,
 	)
 	antag_memory = "It's open season on all bloodsuckers. Nothing else matters.\n\
 		Avoid the Oratorium Throni Vacui. They know naught who they serve. Attack them as a last resort.\n\
