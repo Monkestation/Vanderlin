@@ -12,7 +12,6 @@
 	var/bonus_active = FALSE //If the faction damage bonus is active
 	var/list/nemesis_factions //Any mob with a faction that exists in this list will take bonus damage/effects
 	var/w_class_on = WEIGHT_CLASS_BULKY
-	var/clumsy_check = TRUE
 
 /obj/item/melee/transforming/Initialize()
 	. = ..()

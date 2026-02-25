@@ -331,7 +331,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/before_firing(atom/target, mob/user)
 	if(!HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return
-	var/obj/projectile/arrow = chambered?.BB
+	var/obj/projectile/arrow = chambered?.loaded_projectile
 	var/old_dam
 	var/old_pen
 	if(arrow)
@@ -341,7 +341,7 @@
 	arrow = new /obj/projectile/bullet/reusable/arrow/spiced
 	arrow.damage = old_dam || arrow.damage
 	arrow.armor_penetration = old_pen || arrow.armor_penetration
-	chambered.BB = arrow
+	chambered.loaded_projectile = arrow
 
 /obj/projectile/bullet/reusable/arrow/spiced
 	name = "spiced arrow"

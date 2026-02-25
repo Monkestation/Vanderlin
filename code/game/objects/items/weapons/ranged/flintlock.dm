@@ -141,15 +141,15 @@
 	else
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
-		var/obj/projectile/BB = CB.BB
+		var/obj/projectile/loaded_projectile = CB.loaded_projectile
 		if(user.client)
 			if(user.client.chargedprog >= 100)
-				BB.accuracy += 15 //better accuracy for fully aiming
+				loaded_projectile.accuracy += 15 //better accuracy for fully aiming
 		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3) //+3 accuracy per level in firearms
+			loaded_projectile.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			loaded_projectile.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		loaded_projectile.damage = loaded_projectile.damage * damage_mult // 80 * 1.5 = 130 of damage.
+		loaded_projectile.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3) //+3 accuracy per level in firearms
 	playsound(src, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
 	rammed = FALSE

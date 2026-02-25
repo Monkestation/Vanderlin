@@ -231,23 +231,23 @@
 		playsound(src, 'sound/foley/industrial/pneumatichiss.ogg', 100, FALSE)
 		return FALSE
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
-		var/obj/projectile/BB = CB.BB
+		var/obj/projectile/loaded_projectile = CB.loaded_projectile
 		if(user.client.chargedprog >= 100)
-			BB.accuracy += 15 //better accuracy for fully aiming
+			loaded_projectile.accuracy += 15 //better accuracy for fully aiming
 		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+			loaded_projectile.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			loaded_projectile.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
 		//fixed boost is intended
 		if(user.STAPER > 10)
-			BB.damage *= 1.1
+			loaded_projectile.damage *= 1.1
 
-		BB.damage *= ((1 + pressure_to_use) / 3) //2/3rds damage at pressure 1, normal at pressure 2, 4/3rds at pressure 3
+		loaded_projectile.damage *= ((1 + pressure_to_use) / 3) //2/3rds damage at pressure 1, normal at pressure 2, 4/3rds at pressure 3
 
 		if(user.STAPER > 10)
-			BB.accuracy += (user.STAPER - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
-			BB.bonus_accuracy += (user.STAPER - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering, TRUE) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
+			loaded_projectile.accuracy += (user.STAPER - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
+			loaded_projectile.bonus_accuracy += (user.STAPER - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		loaded_projectile.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering, TRUE) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, pressure_to_use * 100, "airgun")
 	. = ..()
 	cranked = FALSE

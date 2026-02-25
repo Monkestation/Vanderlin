@@ -39,22 +39,22 @@
 	else
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
-		var/obj/projectile/BB = CB.BB
+		var/obj/projectile/loaded_projectile = CB.loaded_projectile
 		if(user.client.chargedprog < 100)
-			BB.damage = BB.damage - (BB.damage * (user.client.chargedprog / 100))
-			BB.embedchance = 5
+			loaded_projectile.damage = loaded_projectile.damage - (loaded_projectile.damage * (user.client.chargedprog / 100))
+			loaded_projectile.embedchance = 5
 		else
-			BB.damage = BB.damage
-			BB.embedchance = 100
-			BB.accuracy += 15 //fully aiming blow makes your accuracy better.
+			loaded_projectile.damage = loaded_projectile.damage
+			loaded_projectile.embedchance = 100
+			loaded_projectile.accuracy += 15 //fully aiming blow makes your accuracy better.
 
 		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+			loaded_projectile.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			loaded_projectile.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 		if(user.STAEND > 10) // Every point over 10 END adds 10% damage
-			BB.damage = BB.damage * (user.STAEND / 10)
-		BB.damage *= damfactor // Apply blow's inherent damage multiplier regardless of PER
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+			loaded_projectile.damage = loaded_projectile.damage * (user.STAEND / 10)
+		loaded_projectile.damage *= damfactor // Apply blow's inherent damage multiplier regardless of PER
+		loaded_projectile.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 	. = ..()
 	if(.)
 		if(istype(user) && user.mind)
