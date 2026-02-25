@@ -128,31 +128,31 @@
 
 /datum/culture/species/kobold/emberhide
 	name = "Emberhide tribes"
-	description = "These kobolds are mainly found in Kruskros, serving the Great-Wyrm. Among kobold races, they're one of those more prone to burrowing, making the less-civilised ones among them a bit of a nuisance when they migrate out of their mountain home."
+	description = "Known by humens to be mainly found in Kruskros, serving the Great-Wyrm. Among kobold races, they're one of those more prone to burrowing, making the less-civilised ones among them a bit of a nuisance when they migrate out of their mountain home."
 
 /datum/culture/species/kobold/moonshade
 	name = "Moonshade tribes"
-	description = "These kobolds originate in the Isle of Enigma, they were often underfoot in Heartfelt and Rockhill before the fall, digging around the great chasm that held Heartfelt's main automaton controller, and living in the massive brass cooling pipes of the machine. Many of them were caught in the fall of Heartfelt, and most of the survivors fled out of the island."
+	description = "Known by humens to originate in the Isle of Enigma, they were often underfoot in Heartfelt and Rockhill before the fall, digging around the great chasm that held Heartfelt's main automaton controller, and living in the massive brass cooling pipes of the machine. Many of them were caught in the fall of Heartfelt, and most of the survivors fled out of the island."
 
 /datum/culture/species/kobold/sandswept
 	name = "Sandswept tribes"
-	description = "These kobolds are mainly in Kingsfield, with many of them aiming to eat the fossilized tree in the grand church, much to the displeasure of the local aasimar. The tree is what's given these kobolds their pale colour."
+	description = "Known to humens as pests in Kingsfield, with many of them aiming to eat the fossilized tree in the grand church, much to the displeasure of the local aasimar. The tree is what's given these kobolds their pale colour."
 
 /datum/culture/species/kobold/stonepaw
 	name = "Stonepaw tribes"
-	description = "These kobolds originate from the mountains of the Dwarven Federations, and tend to be hard workers, getting along well with the dwarves, though it varies between groups of kobolds. They mine and burrow as fast as the dwarves, and this habit often carries over even when they leave the mountains. Some migrated to Grenzelhoft with the dwarven population there and promptly became a pest eating the stone foundations of cellars."
+	description = "Known to humens and dwarves as proficient burrowers from the mountains of the Dwarven Federations, and tend to be hard workers, getting along well with the dwarves, though it varies between groups of kobolds. They mine and burrow as fast as the dwarves, and this habit often carries over even when they leave the mountains. Some migrated to Grenzelhoft with the dwarven population there and promptly became a pest eating the stone foundations of cellars."
 
 /datum/culture/species/kobold/sunstreak
 	name = "Sunstreak tribes"
-	description = "These kobolds evolved in volcanoes, adjusting to the heat and turning the same orange as the lava for camouflage. They are crafters, specialising in glass-blowing, one of the few crafts they beat the taller races at. The leader of any given Sunstreak tribe is the kobold who can make the largest unbroken glass globe. They lose their position if it breaks - or if a jealous rival smashes it."
+	description = "Known to humens to be rare and surprisingly skilled, these kobolds evolved in volcanoes, adjusting to the heat and turning the same orange as the lava for camouflage. They are crafters, specialising in glass-blowing, one of the few crafts they beat the taller races at. The leader of any given Sunstreak tribe is the kobold who can make the largest unbroken glass globe. They lose their position if it breaks - or if a jealous rival smashes it."
 
 /datum/culture/species/kobold/icepack
 	name = "Icepack tribes"
-	description = "These kobolds evolved in Subterra, learning to be quick and harsher among the difficult wildlife. The Zizo-led drow often use them as miners, when they manage to actually catch the lizards. They're a bit more eccentric and suspicious of strangers compared to the other kobold races, owing to the vigilance demanded of their home."
+	description = "Known to humens as sneaky little bastards, these kobolds evolved in Subterra, learning to be quick and harsher among the difficult wildlife. The Zizo-led drow often use them as miners, when they manage to actually catch the lizards. They're a bit more eccentric and suspicious of strangers compared to the other kobold races, owing to the vigilance demanded of their home."
 
 /datum/culture/species/medicator
 	name = "Swamps of Enigma"
-	description = "The polluted swamps of the Isle of Enigma, particularly around Rockhill. The birthplace of the medicator species.\
+	description = "Known to humens to be from the polluted swamps of the Isle of Enigma, particularly around Rockhill, where the land's pollution gave birth to the medicator species.\
 	At least, before they developed sapience."
 	species = list(
 		SPEC_ID_MEDICATOR
