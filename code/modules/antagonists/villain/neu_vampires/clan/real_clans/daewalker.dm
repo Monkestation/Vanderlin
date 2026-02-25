@@ -34,7 +34,7 @@
 	selectable_by_vampires = FALSE
 	allows_non_vampires = FALSE
 
-/datum/clan/daewalker/get_blood_preference_string()
+/datum/clan/daewalker/get_downside_string()
 	return "serve Astrata eternally."
 
 /datum/clan/daewalker/get_blood_preference_string()

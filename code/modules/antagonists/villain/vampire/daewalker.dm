@@ -55,13 +55,13 @@
 	. = ..()
 
 	blade.adjust_stat_modifier_list("[type]", list(
-		STATKEY_STR = 5,
-		STATKEY_PER = 5,
-		STATKEY_INT = 5,
-		STATKEY_CON = 5,
-		STATKEY_END = 5,
-		STATKEY_SPD = 5,
-		STATKEY_LCK = 5,
+		STATKEY_STR = 6,
+		STATKEY_PER = 6,
+		STATKEY_INT = 6,
+		STATKEY_CON = 6,
+		STATKEY_END = 6,
+		STATKEY_SPD = 6,
+		STATKEY_LCK = 6,
 	))
 	blade.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
 	blade.adjust_skillrank(/datum/skill/combat/firearms, 6, TRUE)
