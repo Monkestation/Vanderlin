@@ -164,7 +164,7 @@
 
 /datum/outfit/daewalker
 	mask = /obj/item/clothing/face/spectacles/sglasses/daewalker
-	neck = /obj/item/clothing/neck/psycross/silver/astrata
+	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored/daewalker
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq/daewalker
 	pants = /obj/item/clothing/pants/trou/beltpants/daewalker
