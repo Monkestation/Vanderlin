@@ -191,6 +191,7 @@
 				break
 
 		save_character()
+		update_preview_icon() // should fix issues with visual quirks not affecting our character
 		return TRUE
 	return FALSE
 
@@ -198,6 +199,7 @@
 	quirks = list()
 	quirk_customizations = list()
 	save_character()
+	update_preview_icon() // should fix issues with visual quirks not affecting our character
 
 /datum/preferences/proc/apply_quirks_to_character(mob/living/carbon/human/H)
 	if(!H)
