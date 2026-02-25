@@ -150,13 +150,13 @@
 	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/roguehood/astrata
-			neck = /obj/item/clothing/neck/psycross/silver/astrata
+			neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 			wrists = /obj/item/clothing/wrists/wrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/astrata
 		if(/datum/patron/divine/necra)
 			head = /obj/item/clothing/head/padded/deathshroud
-			neck = /obj/item/clothing/neck/psycross/silver/necra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 			shoes = /obj/item/clothing/shoes/boots
 			pants = /obj/item/clothing/pants/trou/leather/mourning
 			armor = /obj/item/clothing/shirt/robe/necra
@@ -167,46 +167,46 @@
 				backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 		if(/datum/patron/divine/eora)
 			mask = /obj/item/clothing/face/operavisage
-			neck = /obj/item/clothing/neck/psycross/silver/eora
+			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/eora
 		if(/datum/patron/divine/noc)
 			head = /obj/item/clothing/head/roguehood/nochood
-			neck = /obj/item/clothing/neck/psycross/silver/noc
+			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 			wrists = /obj/item/clothing/wrists/nocwrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/noc
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/padded/pestra
-			neck = /obj/item/clothing/neck/psycross/silver/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/pestra
 			backpack_contents += /obj/item/needle/blessed
 		if(/datum/patron/divine/dendor)
 			head = /obj/item/clothing/head/padded/briarthorns
-			neck = /obj/item/clothing/neck/psycross/silver/dendor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/dendor
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/padded/abyssor
-			neck = /obj/item/clothing/neck/psycross/silver/abyssor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/abyssor
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/leather/headscarf
-			neck = /obj/item/clothing/neck/psycross/silver/ravox
+			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 			shoes = /obj/item/clothing/shoes/boots
 			shirt = /obj/item/clothing/armor/gambeson/light
 			armor = /obj/item/clothing/armor/leather
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/roguehood/colored/random
-			neck = /obj/item/clothing/neck/psycross/silver/xylix
+			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/headband/colored/red
-			neck = /obj/item/clothing/neck/psycross/silver/malum
+			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 			shoes = /obj/item/clothing/shoes/boots
 			armor = /obj/item/clothing/shirt/robe/colored/red
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff

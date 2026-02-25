@@ -433,7 +433,7 @@
 /obj/item/clothing/pants/trou/leather/mourning,
 /obj/item/clothing/shirt/robe/necra,
 /obj/item/clothing/head/padded/deathshroud,
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "IB" = (

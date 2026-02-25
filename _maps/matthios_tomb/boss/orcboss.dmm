@@ -116,7 +116,7 @@
 /area/under/tomb/indoors)
 "wr" = (
 /obj/structure/toilet,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /obj/item/natural/poo{
 	pixel_y = 9
 	},

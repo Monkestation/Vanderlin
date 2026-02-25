@@ -61,7 +61,7 @@
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_PROGENY), 10 SECONDS)
 
 	if(spawned.dna.species.id != SPEC_ID_TIEFLING)
-		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 
 	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)

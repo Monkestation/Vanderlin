@@ -63,7 +63,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 	if(sampled_from.mind?.has_antag_datum(/datum/antagonist/vampire))
 		. |= BLOOD_PREFERENCE_DEAD|BLOOD_PREFERENCE_KIN
 		. &= ~BLOOD_PREFERENCE_LIVING
-	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE))
+	if(HAS_TRAIT(sampled_from, TRAIT_NOBLE_BLOOD))
 		. |= BLOOD_PREFERENCE_FANCY
 	if(HAS_TRAIT(sampled_from, TRAIT_SILVER_BLESSED))
 		. |= BLOOD_PREFERENCE_EUPHORIC

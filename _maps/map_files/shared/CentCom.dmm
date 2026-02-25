@@ -3133,13 +3133,13 @@
 "rf" = (
 /obj/item/clothing/neck/mercator,
 /obj/item/clothing/neck/shalal,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/eora,
-/obj/item/clothing/neck/psycross/g,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/noc,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/gold,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/wood,
 /area/indoors)
 "ri" = (
@@ -6233,7 +6233,7 @@
 /obj/item/clothing/pants/grenzelpants,
 /obj/item/clothing/shirt/grenzelhoft,
 /obj/item/clothing/shoes/rare/grenzelhoft,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "Mm" = (

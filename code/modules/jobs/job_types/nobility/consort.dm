@@ -33,7 +33,7 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_NUTCRACKER
 	)
 
@@ -96,6 +96,7 @@
 	)
 
 	traits = list(
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_SEEPRICES
 	)
 

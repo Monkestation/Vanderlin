@@ -62,12 +62,12 @@
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
-		devotion.make_templar()
+		devotion.make_gmtemplar()
 		devotion.grant_to(spawned)
 
 	var/static/list/selectableweapon = list(
 		"Longsword" = /obj/item/weapon/sword/long/grandmaster,
-		"Spear" = /obj/item/weapon/polearm/spear/grandmaster,
+		"Trident" = /obj/item/weapon/polearm/spear/grandmaster,
 		"Axe" = /obj/item/weapon/greataxe/steel/grandmaster,
 		"Mace" = /obj/item/weapon/mace/goden/steel/grandmaster,
 	)
@@ -101,7 +101,7 @@
 	belt = /obj/item/storage/belt/leather/black
 	ring = /obj/item/clothing/ring/silver/rontz
 	gloves = /obj/item/clothing/gloves/plate/silver
-	wrists = /obj/item/clothing/neck/psycross/silver/ravox
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 
 
 

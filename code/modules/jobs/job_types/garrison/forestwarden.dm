@@ -60,7 +60,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
 	)
 

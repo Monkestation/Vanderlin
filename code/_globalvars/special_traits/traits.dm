@@ -344,11 +344,11 @@
 /datum/special_trait/blueblood
 	name = "Noble Lineage"
 	greet_text = span_notice("I come of noble blood.")
-	restricted_traits = list(TRAIT_NOBLE)
+	restricted_traits = list(TRAIT_NOBLE_BLOOD)
 	weight = 100
 
 /datum/special_trait/blueblood/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_NOBLE, "[type]")
+	ADD_TRAIT(character, TRAIT_NOBLE_BLOOD, "[type]")
 	character.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 
 /datum/special_trait/burdened
@@ -877,7 +877,7 @@
 	var/holder = character.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
-		devotion.make_churching()
+		devotion.make_churchling()
 		devotion.grant_to(character)
 	character.mind.special_items["Baotha's Gift"] = /obj/item/clothing/head/corruptflower
 	character.AddComponent(/datum/component/theme_music)

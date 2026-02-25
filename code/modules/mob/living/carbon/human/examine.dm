@@ -261,6 +261,9 @@
 				else
 					. += span_redtext("[m1] an ex-agent of the court.")
 
+			if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
+				. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
+
 			if(real_name in GLOB.excommunicated_players)
 				. += span_userdanger("EXCOMMUNICATED!")
 
@@ -284,6 +287,14 @@
 			if(!is_bandit && (real_name in GLOB.outlawed_players))
 				. += span_userdanger("OUTLAW!")
 
+
+			if(isautomaton(user))
+				if(HAS_TRAIT(src, TRAIT_NOBLE_BLOOD))
+					. += span_blue("They are a Blue-blooded Noble.")
+				else if(HAS_TRAIT(src, TRAIT_NOBLE_POWER))
+					. += span_blue("They are a crown-recognised Noble.")
+				if(job in GLOB.automaton_order_jobs)
+					. += span_blue("They are an authenticated Artificer.")
 
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)

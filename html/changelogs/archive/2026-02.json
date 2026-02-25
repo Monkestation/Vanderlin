@@ -702,5 +702,91 @@
                 "rscadd": "new blood drinking mechanics and the ability to consume blood"
             }
         ]
+    },
+    "2026-02-25": {
+        "realforest2001": [
+            {
+                "rscadd": "Town Roles are now accessible to all races."
+            },
+            {
+                "rscadd": "Town Watch, Lieutenant and MAA are also."
+            },
+            {
+                "rscadd": "Feldsher can only be accessed by 'non heretical' species, due to handling of lux."
+            },
+            {
+                "bugfix": "Fixed Automatons being affected by Xylix Vicious Mimicry."
+            },
+            {
+                "bugfix": "Fixed Automatons becoming antags."
+            },
+            {
+                "bugfix": "Fixed Automatons knowing mystery box phrases."
+            },
+            {
+                "code_imp": "Made sewing a craft skill."
+            },
+            {
+                "bugfix": "Fixed Lich taking Inquisition roles on spawn, and stopped it spawning on lowpop (<35)."
+            },
+            {
+                "bugfix": "Fixed black bag not working if the target isn't wearing anything on their head."
+            },
+            {
+                "bugfix": "Fixed GMT becoming Zizo Cult, Maniac or Rebel."
+            },
+            {
+                "rscadd": "Automatons can now sense who is a noble and who is a verified artificer, regardless of masking."
+            },
+            {
+                "bugfix": "Automatons no longer get selected for mystery box phrases."
+            },
+            {
+                "bugfix": "Automatons can no longer wear armour."
+            },
+            {
+                "rscdel": "Kobolds can no longer be MAA, Watch LT or Matron."
+            }
+        ],
+        "Tasteofdeath386": [
+            {
+                "rscadd": "Added Grenzel accent to the human mercenary veteran"
+            },
+            {
+                "rscadd": "Added Mail Training to the necromancer class"
+            },
+            {
+                "spellcheck": "fixed typo in rusted cuirass name"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Tiefling can be grenzel mercs"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "map": "Small Daftmarsh fixes"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added Astratan chasuble and its crafting recipe."
+            },
+            {
+                "image": "Added Astratan chasuble"
+            },
+            {
+                "rscadd": "Traumatized: split elves in 2 and added medicators"
+            }
+        ],
+        "Cheffie, FreeStylaLT": [
+            {
+                "rscadd": "Added active parrying to guard intent. See PR for more details."
+            },
+            {
+                "rscadd": "Rebalanced feint intent."
+            }
+        ]
     }
 }

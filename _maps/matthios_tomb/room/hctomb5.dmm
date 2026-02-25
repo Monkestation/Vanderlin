@@ -307,7 +307,7 @@
 /turf/open/floor/wood,
 /area/under/tomb/indoors/rest)
 "Pa" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = -6;
 	pixel_y = 0
 	},
