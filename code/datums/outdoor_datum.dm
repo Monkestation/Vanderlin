@@ -104,8 +104,8 @@ Sunlight System
 	var/list/affecting_corners = src.affecting_corners
 	for (var/datum/lighting_corner/corner as anything in new_corners)
 		var/falloff = SUN_FALLOFF(corner, source_turf)
-		corner.sunFalloff += falloff
 		if (falloff != 0)
+			corner.sunFalloff += falloff
 			affecting_corners[corner] = falloff
 			for (var/turf/master as anything in corner.get_masters())
 				SSoutdoor_effects.queue_turf_corners(master)
