@@ -158,7 +158,7 @@
 		return
 	if(!COOLDOWN_FINISHED(src, detection_cooldown) && !forced)
 		return
-	COOLDOWN_START(src, detection_cooldown, 30 SECONDS)
+	COOLDOWN_START(src, detection_cooldown, 20 SECONDS)
 	detections += value
 	GLOB.vamp_detection += value
 	if(value > 0)
