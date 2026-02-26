@@ -29,6 +29,8 @@
 	var/light_range
 	/// The height of the light. The larger this is, the dimmer we'll start
 	var/light_height
+	/// The falloff modifier of the light.
+	var/light_falloff
 	/// The colour of the light, string, decomposed by parse_light_color()
 	var/light_color
 
@@ -162,7 +164,7 @@
 #define SETUP_CORNERS_CACHE(lighting_source) \
 	var/_turf_x = lighting_source.pixel_turf.x; \
 	var/_turf_y = lighting_source.pixel_turf.y; \
-	var/_range_divisor = max(1, lighting_source.light_range); \
+	var/_range_divisor = max(1, lighting_source.light_range / lighting_source.light_falloff); \
 	var/_light_power = lighting_source.light_power; \
 	var/_applied_lum_r = lighting_source.applied_lum_r; \
 	var/_applied_lum_g = lighting_source.applied_lum_g; \
@@ -241,6 +243,10 @@
 
 	if (source_atom.light_height != light_height)
 		light_height = source_atom.light_height
+		update = TRUE
+
+	if (source_atom.light_falloff != light_falloff)
+		light_falloff = source_atom.light_falloff
 		update = TRUE
 
 	if (!top_atom)
