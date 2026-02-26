@@ -2137,6 +2137,8 @@
 			return
 		if(incapacitated())
 			return
+		if(!step(src,get_dir(over,src.loc)))
+			return
 		for(var/obj/item/grabbing/G in grabbedby)
 			if(G.grab_state == GRAB_AGGRESSIVE)
 				return
