@@ -156,7 +156,7 @@ Sunlight System
 
 	SSoutdoor_effects.queue_work |= src
 
-	for(var/datum/lighting_corner/corner as anything in corners)
+	for(var/datum/lighting_corner/corner in corners)
 		for(var/turf/turf as anything in corner.get_masters())
 			SSoutdoor_effects.queue_work |= turf
 
