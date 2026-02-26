@@ -1,7 +1,7 @@
 GLOBAL_VAR_INIT(vamp_detection, FALSE)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/daewalker
-	name = "the Daewalker"
+	name = "The Daewalker"
 	tags = list(
 		TAG_ASTRATA,
 		TAG_BLOOD,
@@ -78,7 +78,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 
 
 /datum/round_event/antagonist/solo/ghost/daewalker
-	announceChance = 50
+	transfer_prefs = FALSE
 
 /datum/round_event/antagonist/solo/ghost/daewalker/announce()
 	var/list/suckheads = list()

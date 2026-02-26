@@ -186,6 +186,7 @@
 	startWhen = 35 SECONDS
 	endWhen = 35 SECONDS
 	announceWhen = 30 SECONDS
+	var/transfer_prefs = TRUE
 
 /datum/round_event/antagonist/solo/ghost/start()
 	for(var/datum/mind/antag_mind as anything in setup_minds)
@@ -219,7 +220,7 @@
 
 		if(!candidate.mind)
 			candidate.mind = new /datum/mind(candidate.key)
-		var/mob/living/carbon/human/new_human = make_body(candidate)
+		var/mob/living/carbon/human/new_human = make_body(candidate, transfer_prefs)
 		new_human.mind.special_role = antag_flag
 		new_human.mind.restricted_roles = restricted_roles
 		setup_minds += new_human.mind
@@ -229,7 +230,7 @@
 
 
 ///Uses stripped down and bastardized code from respawn character
-/proc/make_body(mob/dead/observer/ghost_player)
+/proc/make_body(mob/dead/observer/ghost_player, transfer_prefs)
 	if(!ghost_player || !ghost_player.key)
 		return
 
@@ -241,7 +242,8 @@
 	else
 		SSjob.SendToLateJoin(new_character)
 
-	ghost_player.client.prefs.safe_transfer_prefs_to(new_character)
+	if(transfer_prefs)
+		ghost_player.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	new_character.key = ghost_player.key
 
