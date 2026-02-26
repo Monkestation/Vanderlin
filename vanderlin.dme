@@ -1451,6 +1451,7 @@
 #include "code\datums\status_effects\debuffs\drowsiness.dm"
 #include "code\datums\status_effects\debuffs\drugginess.dm"
 #include "code\datums\status_effects\debuffs\eye_blur.dm"
+#include "code\datums\status_effects\debuffs\gronn.dm"
 #include "code\datums\status_effects\debuffs\jitteriness.dm"
 #include "code\datums\status_effects\debuffs\phobia.dm"
 #include "code\datums\status_effects\debuffs\silenced.dm"
