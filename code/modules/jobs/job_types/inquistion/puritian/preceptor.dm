@@ -68,7 +68,7 @@
 	head = /obj/item/clothing/head/headband/naledi
 	mask = /obj/item/clothing/face/lordmask/naledi/sojourner
 	gloves = /obj/item/clothing/gloves/bandages/pugilist
-	neck = /obj/item/clothing/neck/psycross/g
+	neck = /obj/item/clothing/neck/psycross/gold
 	wrists = /obj/item/clothing/wrists/bracers/naledi
 	ring = /obj/item/clothing/ring/signet
 

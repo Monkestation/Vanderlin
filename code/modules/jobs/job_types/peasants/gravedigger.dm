@@ -65,7 +65,7 @@
 /datum/outfit/undertaker
 	name = "Gravetender"
 	head = /obj/item/clothing/head/padded/deathshroud
-	neck = /obj/item/clothing/neck/psycross/silver/necra
+	neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 	pants = /obj/item/clothing/pants/trou/leather/mourning
 	armor = /obj/item/clothing/shirt/robe/necra
 	shoes = /obj/item/clothing/shoes/boots

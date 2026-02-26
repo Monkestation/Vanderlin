@@ -45,7 +45,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 /datum/outfit/daywalker
 	name = "Daywalker (Migrant Wave)"
 	wrists = /obj/item/clothing/wrists/bracers/leather
-	neck = /obj/item/clothing/neck/psycross/silver/astrata
+	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	shirt = /obj/item/clothing/shirt/tunic/colored/black

@@ -1573,7 +1573,7 @@
 /area/under/cavewet)
 "aLT" = (
 /obj/structure/fluff/nest,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -1653,7 +1653,7 @@
 /area/under/cavewet)
 "aNI" = (
 /obj/structure/fluff/nest,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/abyss_tile/two{
 	color = "#29404E"
 	},
@@ -2077,7 +2077,7 @@
 /area/under/cavewet)
 "aYN" = (
 /obj/structure/fluff/nest,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/abyss_tile{
 	color = "#547285"
 	},
@@ -2950,7 +2950,7 @@
 /mob/living/carbon/human/species/triton/base/unskilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /obj/item/clothing/head/padded/abyssor,
 /obj/item/weapon/sword/gladius,
 /turf/open/floor/abyss_tile/three{
@@ -4668,7 +4668,7 @@
 /obj/item/weapon/mace/steel/rungu,
 /obj/item/clothing/head/helmet/heavy/abyssorgreathelm,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -8308,7 +8308,7 @@
 /obj/structure/closet/crate/drawer{
 	color = "#7D9BAE"
 	},
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/carpet/royalblack,
 /area/under/cavewet)
 "jlv" = (
@@ -8586,7 +8586,7 @@
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog)
 "jCT" = (
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
 	},
@@ -8774,7 +8774,7 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/fisherhat,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /obj/item/weapon/polearm/spear/hoplite/abyssal,
 /turf/open/floor/abyss_tile/three{
 	color = "#7D9BAE"
@@ -12815,7 +12815,7 @@
 /mob/living/carbon/human/species/triton/base/very_skilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /obj/item/clothing/head/crown/circlet/sleepless,
 /obj/item/clothing/neck/mana_star,
 /obj/structure/carpet/blue,
@@ -12853,7 +12853,7 @@
 /mob/living/carbon/human/species/triton/base/unskilled/naked,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /obj/item/weapon/polearm/spear/hoplite/abyssal,
 /obj/item/clothing/head/padded/abyssor,
 /turf/open/floor/abyss_tile/three{

@@ -151,7 +151,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
 "aU" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -159,7 +159,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "aW" = (
@@ -4301,11 +4301,11 @@
 	pixel_x = -9;
 	pixel_y = 0
 	},
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 2;
 	pixel_y = 8
 	},
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /obj/effect/decal/remains/human,
 /turf/open/water/blood,
 /area/indoors/lich)
@@ -4677,12 +4677,12 @@
 /turf/open/floor/churchrough,
 /area/indoors/cave)
 "Ba" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 2;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = -20;
 	pixel_y = 13
 	},
@@ -5247,7 +5247,7 @@
 /turf/open/floor/grass/cold,
 /area/indoors/mountains)
 "Ef" = (
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
@@ -6683,7 +6683,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/lich)
 "ME" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 5;
 	pixel_y = 7
 	},
@@ -6691,8 +6691,8 @@
 	pixel_x = -6;
 	pixel_y = 6
 	},
-/obj/item/clothing/neck/psycross/silver/ravox,
-/obj/item/clothing/neck/psycross/silver/noc{
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/noc{
 	pixel_x = 15;
 	pixel_y = -2
 	},
@@ -7493,11 +7493,11 @@
 	pixel_x = 6;
 	pixel_y = 11
 	},
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = -10;
 	pixel_y = 10
 	},
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
 "Sb" = (

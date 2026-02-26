@@ -40,13 +40,13 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 5,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/whipsflails = 2,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/bows = 2,
@@ -80,6 +80,20 @@
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
+	var/static/list/selectableweapon = list(
+		"Law and Order" = list(/obj/item/weapon/sword/sabre/captain, /obj/item/weapon/shield/tower/buckleriron/captain),
+		"Deliverer of Justice" = /obj/item/weapon/polearm/halberd/bardiche/captain,
+	)
+
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose thy blade", title = "CAPTAIN")
+	if(!choice)
+		return
+	switch(choice)
+		if("Law and Order")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 5, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/shields, 2, 4, TRUE)
+		if("Deliverer of Justice")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 5, TRUE)
 
 /datum/outfit/captain
 	name = "Captain"
@@ -91,12 +105,9 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
 	shoes = /obj/item/clothing/shoes/boots
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/shield/tower/metal
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/dec
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
-	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
 	backpack_contents = list(
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
