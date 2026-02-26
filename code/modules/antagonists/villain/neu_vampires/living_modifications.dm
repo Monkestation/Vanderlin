@@ -27,8 +27,6 @@
 	COOLDOWN_DECLARE(detection_cooldown)
 	var/detections = 0
 
-	var/resistant_to_covens = FALSE
-
 	var/coven_time_plus = 0
 
 	var/last_rage_hit = 0

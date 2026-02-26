@@ -19,6 +19,7 @@
 	name = "Celerity power name"
 	desc = "Celerity power description"
 	violates_masquerade = TRUE
+	refresh_violations = TRUE
 	duration_length = 3 SECONDS
 	cooldown_length = 3 SECONDS
 
@@ -35,14 +36,16 @@
 
 /datum/coven_power/celerity/activate()
 	. = ..()
-	owner.AddComponent(/datum/component/after_image)
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(MOVESPEED_ID_CELERITY, multiplicative_slowdown = -0.2 * level)
 	owner.apply_status_effect(buff, -1)
+	if(level > 1)
+		owner.LoadComponent(/datum/component/after_image)
 
 /datum/coven_power/celerity/deactivate()
 	. = ..()
-	qdel(owner.GetComponent(/datum/component/after_image))
+	if(level > 1)
+		qdel(owner.GetComponent(/datum/component/after_image))
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(MOVESPEED_ID_CELERITY)
 	owner.remove_status_effect(buff, -1)
@@ -53,6 +56,7 @@
 	level = 1
 	buff = /datum/status_effect/buff/celerity
 	vitae_cost = 15
+	violates_masquerade = FALSE
 
 /datum/coven_power/celerity/two
 	name = "Celerity 2"
@@ -87,7 +91,7 @@
 	id = "celerity"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/celerity
 	effectedstats = list(STATKEY_SPD = 1, STATKEY_PER = 1)
-	duration = 30 SECONDS
+	duration = 3 SECONDS
 	status_type = STATUS_EFFECT_REPLACE
 
 /datum/status_effect/buff/celerity/two
@@ -106,6 +110,6 @@
 	return 0.60
 
 /atom/movable/screen/alert/status_effect/buff/celerity
-	name = "Quickening"
+	name = "Celerity"
 	desc = ""
 	icon_state = "adrrush"

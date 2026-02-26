@@ -16,6 +16,7 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_SIXTHSENSE,
 		TRAIT_DODGEEXPERT,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FEARLESS,
@@ -108,7 +109,7 @@
 
 /datum/antagonist/vampire/lord/daewalker/on_removal()
 	if(owner.current)
-		owner.current?.remove_stat_modifier("[type]")
+		owner.current.remove_stat_modifier("[type]")
 		UnregisterSignal(owner.current, COMSIG_PARENT_EXAMINE)
 	. = ..()
 

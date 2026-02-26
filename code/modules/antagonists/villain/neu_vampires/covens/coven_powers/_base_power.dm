@@ -29,6 +29,8 @@
 	var/hostile = FALSE
 	/// If use of this power creates a visible Masquerade breach.
 	var/violates_masquerade = FALSE
+	/// If this violates the masquerade every refresh, assuming it does at all
+	var/refresh_violations = FALSE
 
 	/* HOW AND WHEN IT'S ACTIVATED AND DEACTIVATED */
 	/// If this Discipline doesn't automatically expire, but rather periodically drains blood.
@@ -830,6 +832,8 @@
  * * target - what the targeted Discipline (null otherwise) is being used on.
  */
 /datum/coven_power/proc/on_refresh(atom/target)
+	if(refresh_violations)
+		do_masquerade_violation(target)
 	return
 
 /**

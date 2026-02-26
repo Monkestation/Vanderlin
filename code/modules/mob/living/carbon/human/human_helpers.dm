@@ -139,6 +139,7 @@
 
 	var/damage = 12
 	var/used_str = STASTR
+	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
 		return 30 * multiplier

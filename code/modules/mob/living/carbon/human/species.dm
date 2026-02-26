@@ -277,6 +277,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/amtfail = 0
 
 	var/punch_damage = 0
+	var/kick_damage = 0
 
 	/// Native language for accents
 	var/native_language = "Imperial"
