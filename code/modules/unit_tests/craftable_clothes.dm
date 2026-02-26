@@ -93,6 +93,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/shirt/robe/kimono, //these are mob holders only
 		/obj/item/clothing/armor/regenerating, ///uh no
 		/obj/item/clothing/head/inqarticles, //inqports
+		/obj/item/clothing/neck/psycross/inhumen, //gronn exclusive subtypes
 	)
 
 	/// excludes paths that are subtypes of these types and only subtypes
