@@ -58,23 +58,28 @@
 
 		return TRUE
 
+	var/item_skip = FALSE
 	if(isitem(A))
 		var/obj/item/I = A
-		if(I.w_class >= WEIGHT_CLASS_GIGANTIC)
-			if(used_intent.type == INTENT_GRAB)
-				if(istype(I) && !I.anchored)
-					start_pulling(A) //add params to grab bodyparts based on loc
-					return TRUE
-			else if(used_intent.type == INTENT_DISARM)
-				if(istype(I) && !I.anchored)
-					var/jadded = max(100-(STASTR*10),5)
-					if(adjust_stamina(jadded))
-						visible_message(span_info("[src] pushes [I]."))
-						PushAM(I, MOVE_FORCE_STRONG)
-					else
-						visible_message(span_warning("[src] pushes [I]."))
-					changeNext_move(CLICK_CD_MELEE)
-					return TRUE
+		if(I.w_class < WEIGHT_CLASS_GIGANTIC)
+			item_skip = TRUE
+
+	if(!item_skip && ismovable(A))
+		var/atom/movable/thing = A
+		if(istype(used_intent, INTENT_GRAB))
+			if(!thing.anchored)
+				start_pulling(thing) //add params to grab bodyparts based on loc
+				return TRUE
+
+		if(istype(used_intent, INTENT_DISARM))
+			if(!thing.anchored)
+				var/stam_loss = max(100 - (STASTR * 10), 5)
+				visible_message(span_info("[src] pushes [thing]."), span_info("I push [thing]."))
+				if(adjust_stamina(stam_loss))
+					PushAM(thing, MOVE_FORCE_STRONG)
+
+				changeNext_move(CLICK_CD_MELEE)
+				return TRUE
 
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(A.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
@@ -218,93 +223,94 @@
 
 
 /mob/living/MiddleClickOn(atom/A, list/modifiers)
-	..()
+	. = ..()
 	if(!mmb_intent)
 		if(!A.Adjacent(src))
 			return
 		A.MiddleClick(src, modifiers)
-	else
-		switch(mmb_intent.type)
-			if(INTENT_KICK)
-				if(src.usable_legs < 2)
+		return
+
+	SEND_SIGNAL(src, COMSIG_MOB_PRE_SPECIAL_MIDDLE, A)
+
+	switch(mmb_intent.type)
+		if(INTENT_KICK)
+			if(src.usable_legs < 2)
+				return
+			if(!A.Adjacent(src))
+				return
+			if(A == src)
+				var/list/mobs_here = list()
+				for(var/mob/M in get_turf(src))
+					if(M.invisibility || M == src)
+						continue
+					mobs_here += M
+				if(mobs_here.len)
+					A = pick(mobs_here)
+				if(A == src) //auto aim couldn't select another target
 					return
-				if(!A.Adjacent(src))
-					return
-				if(A == src)
-					var/list/mobs_here = list()
-					for(var/mob/M in get_turf(src))
-						if(M.invisibility || M == src)
-							continue
-						mobs_here += M
-					if(mobs_here.len)
-						A = pick(mobs_here)
-					if(A == src) //auto aim couldn't select another target
+			if(IsOffBalanced())
+				to_chat(src, span_warning("I haven't regained my balance yet."))
+				return
+			changeNext_move(mmb_intent.clickcd)
+			face_atom(A)
+
+			if(ismob(A))
+				var/mob/living/M = A
+				if(src.used_intent)
+
+					do_attack_animation(M, visual_effect_icon = ATTACK_EFFECT_KICK, used_item = FALSE, atom_bounce = TRUE)
+					playsound(src, pick(PUNCHWOOSH), 100, FALSE, -1)
+
+					sleep(src.used_intent.swingdelay)
+					if(QDELETED(src) || QDELETED(M))
 						return
-				if(IsOffBalanced())
-					to_chat(src, span_warning("I haven't regained my balance yet."))
-					return
-				changeNext_move(mmb_intent.clickcd)
-				face_atom(A)
-
-				if(ismob(A))
-					var/mob/living/M = A
-					if(src.used_intent)
-
-						do_attack_animation(M, visual_effect_icon = ATTACK_EFFECT_KICK, used_item = FALSE, atom_bounce = TRUE)
-						playsound(src, pick(PUNCHWOOSH), 100, FALSE, -1)
-
-						sleep(src.used_intent.swingdelay)
-						if(QDELETED(src) || QDELETED(M))
-							return
-						if(!M.Adjacent(src))
-							return
-						if(src.incapacitated(IGNORE_GRAB))
-							return
-						if(M.checkmiss(src))
-							return
-						if(M.checkdefense(src.used_intent, src))
-							return
+					if(!M.Adjacent(src))
+						return
+					if(src.incapacitated(IGNORE_GRAB))
+						return
 					if(M.checkmiss(src))
 						return
-					if(!M.checkdefense(mmb_intent, src))
-						if(ishuman(M))
-							var/mob/living/carbon/human/H = M
-							H.dna.species.kicked(src, H)
-						else
-							M.onkick(src)
-							OffBalance(15) // Off balance for human enemies moved to dna.species.onkick
-				else
-					A.onkick(src)
-					OffBalance(10)
-				return
-			if(INTENT_JUMP)
-				jump_action(A)
-			if(INTENT_BITE)
-				if(!A.Adjacent(src))
-					return
-				if(A == src)
-					return
-				if(src.incapacitated(IGNORE_GRAB))
-					return
-				if(stat != CONSCIOUS)
-					return
-				if(is_mouth_covered())
-					to_chat(src, span_warning("My mouth is blocked."))
-					return
-				if(HAS_TRAIT(src, TRAIT_NO_BITE))
-					to_chat(src, span_warning("I can't bite."))
-					return
-				if(iscarbon(src))
-					var/mob/living/carbon/C = src
-					if(C.mouth)
-						to_chat(src, span_warning("My mouth has something in it."))
+					if(M.checkdefense(src.used_intent, src))
 						return
-				changeNext_move(mmb_intent.clickcd)
-				face_atom(A)
-				bite(A)
+				if(M.checkmiss(src))
+					return
+				if(!M.checkdefense(mmb_intent, src))
+					if(ishuman(M))
+						var/mob/living/carbon/human/H = M
+						H.dna.species.kicked(src, H)
+					else
+						M.onkick(src)
+						OffBalance(15) // Off balance for human enemies moved to dna.species.onkick
+			else
+				A.onkick(src)
+				OffBalance(10)
+		if(INTENT_JUMP)
+			jump_action(A)
+		if(INTENT_BITE)
+			if(!A.Adjacent(src))
 				return
-			if(INTENT_STEAL)
-				steal_action(A)
+			if(A == src)
+				return
+			if(src.incapacitated(IGNORE_GRAB))
+				return
+			if(stat != CONSCIOUS)
+				return
+			if(is_mouth_covered())
+				to_chat(src, span_warning("My mouth is blocked."))
+				return
+			if(HAS_TRAIT(src, TRAIT_NO_BITE))
+				to_chat(src, span_warning("I can't bite."))
+				return
+			if(iscarbon(src))
+				var/mob/living/carbon/C = src
+				if(C.mouth)
+					to_chat(src, span_warning("My mouth has something in it."))
+					return
+			changeNext_move(mmb_intent.clickcd)
+			face_atom(A)
+			bite(A)
+		if(INTENT_STEAL)
+			steal_action(A)
 
 //Return TRUE to cancel other attack hand effects that respect it.
 /atom/proc/attack_hand(mob/user, list/modifiers)
@@ -518,6 +524,10 @@
 		if(!HAS_TRAIT(src, TRAIT_ZJUMP))
 			to_chat(src, span_warning("That's too high for me..."))
 			return
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		to_chat(src, span_warning("I'm exposed and lost my footing! I can't jump!"))
+		return FALSE
 
 	changeNext_move(mmb_intent?.clickcd ? mmb_intent.clickcd : CLICK_CD_MELEE)
 

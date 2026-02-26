@@ -6,7 +6,7 @@
 
 ///mmmm yumymumyumuymuymym
 #define DIET_KOBOLD list(\
-	/obj/item/natural/dirtclod,\
+	/obj/item/natural/clod,\
 	/obj/item/natural/stone,\
 	/obj/item/coin,\
 	/obj/item/gem,\
@@ -164,12 +164,12 @@
 	))
 
 /datum/species/kobold/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/dwarf/dwarmm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/dwarf/dwarmf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/dwarf/dwarmm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/dwarf/dwarmf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/kobold/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/dwarf/dwarmlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/dwarf/dwarmlast.txt')
 	return last_names
 
 #undef DIET_TURF_KOBOLD

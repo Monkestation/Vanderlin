@@ -47,7 +47,7 @@
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 	if(prob(5))
 		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/mining, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
 

@@ -720,7 +720,7 @@
 /area/indoors/dungeon)
 "iJ" = (
 /obj/structure/table/wood/fancy/orange,
-/obj/item/clothing/neck/psycross/silver/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
 "iK" = (
@@ -1878,7 +1878,7 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/shirt/robe/necra,
 /obj/item/clothing/head/padded/deathshroud,
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /obj/item/weapon/flail,
 /obj/item/weapon/shield/tower/buckleriron,
 /obj/item/jingle_bells,
@@ -2011,7 +2011,7 @@
 /area/outdoors/mountains)
 "xK" = (
 /obj/structure/table/stone_small,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
@@ -2588,7 +2588,7 @@
 	name = "Saint's coffin"
 	},
 /obj/item/clothing/head/flowercrown/salvia,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
 "DW" = (

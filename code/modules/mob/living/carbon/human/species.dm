@@ -314,6 +314,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return strings("accents/halfling_replacement.json", "halfling")
 		if("Gutter")
 			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
 		if("Deepspeak")
 			return strings("accents/triton_replacement.json", "triton")
 		if("Pirate")
@@ -460,8 +462,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
-	var/static/list/male_names = world.file2list('strings/names/first_male.txt')
-	var/static/list/female_names = world.file2list('strings/names/first_female.txt')
+	var/static/list/male_names = file2list('strings/names/first_male.txt')
+	var/static/list/female_names = file2list('strings/names/first_female.txt')
 
 	return (gender == FEMALE) ? female_names : male_names
 
@@ -476,7 +478,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			break
 
 /datum/species/proc/get_possible_surnames(gender = MALE) as /list
-	var/static/list/last_names = world.file2list('strings/names/last.txt')
+	var/static/list/last_names = file2list('strings/names/last.txt')
 
 	return last_names
 
@@ -1760,6 +1762,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey

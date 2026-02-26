@@ -30,7 +30,7 @@
 		/datum/skill/labor/farming = 3,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/swimming = 2
 	)
 
@@ -67,7 +67,7 @@
 	name = "Briar (Pilgrim)"
 	belt = /obj/item/storage/belt/leather/rope
 	mask = /obj/item/clothing/face/druid
-	neck = /obj/item/clothing/neck/psycross/silver/dendor
+	neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 	shirt = /obj/item/clothing/armor/leather/vest
 	armor = /obj/item/clothing/shirt/robe/dendor
 	wrists = /obj/item/clothing/wrists/bracers/leather

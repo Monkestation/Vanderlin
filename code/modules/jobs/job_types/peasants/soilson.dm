@@ -37,7 +37,7 @@
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/combat/whipsflails = 1,
 		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/farming = 4,
 		/datum/skill/labor/taming = 5,
 		/datum/skill/misc/reading = 1,
@@ -67,7 +67,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/sewing, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/swimming, pick(0,1,1), TRUE)
 		spawned.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)

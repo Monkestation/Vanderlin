@@ -11,7 +11,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 /datum/tennite_schism/New(datum/patron/challenger)
 	. = ..()
 	challenger_god = WEAKREF(challenger)
-	astrata_god = WEAKREF(GLOB.patron_list[/datum/patron/divine/astrata])
+	astrata_god = WEAKREF(GLOB.patrons_by_type[/datum/patron/divine/astrata])
 	GLOB.tennite_schisms += src
 
 /datum/tennite_schism/Destroy()
@@ -181,9 +181,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 			START_PROCESSING(SSprocessing, C)
 		add_verb(selected_priest, /mob/living/carbon/human/proc/devotionreport)
 		add_verb(selected_priest, /mob/living/carbon/human/proc/clericpray)
-		add_verb(selected_priest, /mob/living/carbon/human/proc/churchexcommunicate)
-		add_verb(selected_priest, /mob/living/carbon/human/proc/churchcurse)
-		add_verb(selected_priest, /mob/living/carbon/human/proc/churchannouncement)
+		selected_priest.give_priest_verbs(coronate = FALSE, penance = FALSE)
 
 		priority_announce("[challenger.name] has selected [selected_priest.real_name] as a new [male ? "Vice Priest" : "Vice Priestess"]! Power sharing begins!", "[male ? "Vice Priest" : "Vice Priestess"] rises", 'sound/magic/inspire_02.ogg')
 
@@ -388,7 +386,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 	var/astrata_influence = get_storyteller_influence(ASTRATA) || 0
 
 	for(var/type in subtypesof(/datum/patron/divine) - list(/datum/patron/divine/astrata, /datum/patron/divine/eora))
-		var/datum/patron/divine/god = GLOB.patron_list[type]
+		var/datum/patron/divine/god = GLOB.patrons_by_type[type]
 		if(!god)
 			continue
 

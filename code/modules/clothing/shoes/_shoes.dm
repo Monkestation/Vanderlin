@@ -123,7 +123,7 @@
 			cloth_check.reagents.remove_all(1)
 			polished = 1
 			AddComponent(/datum/component/particle_spewer/sparkle)
-			if(HAS_TRAIT(user, TRAIT_NOBLE))
+			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
 			addtimer(CALLBACK(src, PROC_REF(lose_shine)), 10 SECONDS)
 			to_chat(user, ("You polished the [name]."))
@@ -135,7 +135,7 @@
 		to_chat(user, ("You start polishing even more the [name] with the animal fat."))
 		if(do_after(user, 2 SECONDS, src))
 			polished = 2
-			if(HAS_TRAIT(user, TRAIT_NOBLE))
+			if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 				user.add_stress(/datum/stress_event/noble_polishing_shoe)
 			var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
 			if(particle_spewer)
@@ -150,9 +150,9 @@
 /obj/item/clothing/shoes/examine(mob/user)
 	. = ..()
 	if(polished == 1)
-		desc += ("\nThis shoe was polished, it looks quite nice.")
+		. += ("\nThis shoe was polished, it looks quite nice.")
 	if(polished == 2)
-		desc += span_notice("\nThis shoe was polished to a shine, it looks immaculate!")
+		. += span_notice("\nThis shoe was polished to a shine, it looks immaculate!")
 
 /obj/item/clothing/shoes/proc/lose_shine()
 	if(polished == 1 || polished == 2)

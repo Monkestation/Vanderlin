@@ -22,7 +22,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 2,
@@ -42,7 +42,8 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
@@ -117,7 +118,7 @@
 		/datum/skill/misc/riding = 4,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/cooking = 1,
 	)
 

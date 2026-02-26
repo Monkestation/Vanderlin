@@ -789,4 +789,5 @@
 	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, span_warning("Sigh. It's not bleeding."))
 		return
-	user.drinksomeblood(grabbed, sublimb_grabbed)
+	var/drink_amt = user.mind?.has_antag_datum(/datum/antagonist/vampire) ? 80 : 10
+	user.drinksomeblood(grabbed, sublimb_grabbed, drink_amt)

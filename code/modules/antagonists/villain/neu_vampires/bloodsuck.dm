@@ -8,107 +8,63 @@
 /mob/living/carbon/human/proc/remove_bite()
 	remove_overlay(BITE_LAYER)
 
-
-/mob/living/proc/drinksomeblood(mob/living/carbon/victim, sublimb_grabbed)
+/// Returns the amount of blood drank
+/// ingest - results in blood reagents/impurities being transferred to the mob.
+/// force - ignores the cooldown for drinking again.
+/mob/living/proc/drinksomeblood(mob/living/carbon/victim, sublimb_grabbed, drink_amt = 10, ingest=TRUE, force = FALSE)
 	if(world.time <= next_move)
-		return
-	if(world.time < last_drinkblood_use + 2 SECONDS)
-		return
-	if(victim.dna?.species && (NOBLOOD in victim.dna.species.species_traits))
+		return 0
+	if(!force && !COOLDOWN_FINISHED(src, drinkblood_use))
+		return 0
+	if(HAS_TRAIT(victim, TRAIT_HUSK) || (NOBLOOD in victim.dna?.species?.species_traits) || victim.blood_volume <= 0)
 		to_chat(src, span_warning("Sigh. No blood."))
-		return
-	if(victim.blood_volume <= 0)
-		to_chat(src, span_warning("Sigh. No blood."))
-		return
-	if(ishuman(victim))
-		var/mob/living/carbon/human/human_victim = victim
-		for(var/I in victim.contents)
-			if(SSenchantment.has_enchantment(I, /datum/enchantment/silver))
-				to_chat(src, span_userdanger("THEY ARE WEARING MY BANE! HISSS!!!"))
-				Paralyze(1)
-				return
+		return 0
+	var/datum/antagonist/vampire/VDrinker = mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/VVictim = victim.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(ingest && reagents.total_volume >= reagents.maximum_volume)
+		to_chat(src, span_warning("Can't drink any more..."))
+		return 0
 
-		human_victim.add_bite_animation()
-
-	last_drinkblood_use = world.time
+	COOLDOWN_START(src, drinkblood_use, 1 SECONDS)
 	changeNext_move(CLICK_CD_MELEE)
 
-	var/datum/antagonist/vampire/VDrinker = mind.has_antag_datum(/datum/antagonist/vampire)
-	var/datum/antagonist/vampire/VVictim = victim.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/mob/living/carbon/human/human_victim
+	if(ishuman(victim))
+		human_victim = victim
+		human_victim.add_bite_animation()
 
-	if(mind && victim.mind)
+	for(var/atom/I in victim.get_equipped_items())
+		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
+		if(ench?.on_bite(I, src))
+			return 0
+
+	var/used_vitae = 0
+	if(VDrinker)
+		if(length(CheckEyewitness(victim)))
+			vampire_detected(1)
 		if(VVictim)
-			to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
-		var/zomwerewolf = victim.mind.has_antag_datum(/datum/antagonist/werewolf)
-		if(!zomwerewolf)
-			if(victim.stat != DEAD)
-				zomwerewolf = victim.mind.has_antag_datum(/datum/antagonist/zombie)
-		if(VDrinker)
-			if(zomwerewolf)
-				to_chat(src, span_danger("I'm going to puke..."))
-				addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
+			if(victim.bloodpool <= 0 && clan)
+				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
+				log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
+				to_chat(src, span_danger("I have consumed my kindred!"))
+				victim.death()
+				return 0
 			else
-				var/blood_handle
-				if(victim.stat == DEAD)
-					blood_handle |= BLOOD_PREFERENCE_DEAD
-				else
-					blood_handle |= BLOOD_PREFERENCE_LIVING
+				to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
+				used_vitae = min(250, victim.bloodpool)
 
-				if(victim.job in list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", "Churchling", "Crusader", "Inquisitor"))
-					blood_handle |= BLOOD_PREFERENCE_HOLY
-				if(VVictim)
-					blood_handle |= BLOOD_PREFERENCE_KIN
-					blood_handle  &= ~BLOOD_PREFERENCE_LIVING
-
-				if(HAS_TRAIT(victim, TRAIT_SILVER_BLESSED))
-					blood_handle |= BLOOD_PREFERENCE_FANCY
-					blood_handle |= BLOOD_PREFERENCE_EUPHORIC
-
-				if(victim.bloodpool > 0)
-					victim.blood_volume = max(victim.blood_volume-45, 0)
-					if(ishuman(victim))
-						var/used_vitae = 150
-						if(victim.bloodpool < used_vitae)
-							used_vitae = victim.bloodpool // We assume they're left with 250 vitae or less, so we take it all
-							to_chat(src, "<span class='warning'>...But alas, only leftovers...</span>")
-						src.adjust_bloodpool(used_vitae)
-						src.adjust_hydration(used_vitae * 0.1)
-						if(VVictim)
-							victim.adjust_bloodpool(-used_vitae) //twice the loss
-						victim.adjust_bloodpool(-used_vitae)
-					clan.handle_bloodsuck(src, blood_handle)
-				else
-					if(ishuman(victim))
-						if(victim.clan && clan)
-							AdjustMasquerade(-1)
-							message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
-							log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
-							to_chat(src, span_danger("I have... Consumed my kindred!"))
-							victim.death()
-							victim.adjustBruteLoss(-50, TRUE)
-							victim.adjustFireLoss(-50, TRUE)
-							return
-					if(ishuman(victim) && !victim.clan)
-						if(victim.stat != DEAD)
-							to_chat(src, "<span class='warning'>Your victim faints from the excessive draining.</span>")
-							victim.SetUnconscious(50 SECONDS)
-					if(!ishuman(victim))
-						if(victim.stat != DEAD)
-							victim.SetUnconscious(50 SECONDS)
-		else // Don't larp as a vampire, kids.
-			to_chat(src, span_warning("I'm going to puke..."))
-			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
-	else
-		if(mind) // We're drinking from a mob or a person who disconnected from the game
-			if(mind.has_antag_datum(/datum/antagonist/vampire))
-				victim.blood_volume = max(victim.blood_volume-45, 0)
-				if(victim.bloodpool >= 250)
-					src.adjust_bloodpool(250, 250)
-				else
-					to_chat(src, span_warning("And yet, not enough vitae can be extracted from them... Tsk."))
-
-	victim.blood_volume = max(victim.blood_volume-5, 0)
-	victim.handle_blood()
+	drink_amt = min(victim.blood_volume, drink_amt)
+	if(ingest)
+		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5, src)
+	if(used_vitae > 0)
+		var/datum/blood_type/victim_blood = victim.get_blood_type()
+		var/list/blood_data = victim_blood?.get_blood_data(victim)
+		// if you added taste pref mults here kin could just suck each other off so dont
+		// also no erp
+		clan?.handle_bloodsuck(src, blood_data?["preferences"])
+		adjust_bloodpool(used_vitae)
+		victim.adjust_bloodpool(-used_vitae)
+	victim.blood_volume = max(victim.blood_volume - drink_amt, 0)
 
 	playsound(src, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
 
@@ -116,30 +72,39 @@
 					span_userdanger("[src] drinks from my [parse_zone(sublimb_grabbed)]!"), span_hear("..."), COMBAT_MESSAGE_RANGE, src)
 	to_chat(src, span_warning("I drink from [victim]'s [parse_zone(sublimb_grabbed)]."))
 	log_combat(src, victim, "drank blood from ")
-
-	if(ishuman(victim) && mind)
-		if(clan_position?.can_assign_positions && victim.bloodpool <= 150 && !HAS_TRAIT(victim, TRAIT_BLOODLOSS_IMMUNE))
-			if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
-				to_chat(src, span_warning("I decide [victim] is unworthy."))
-			else
-				INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
+	return drink_amt
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
-	if(HAS_TRAIT(src, "choosing"))
+	if(HAS_TRAIT(src, "offered_vampirism"))
+		return // my testing allowed to double up the prompts, so just incase
+	if(!istype(sire?.mind?.has_antag_datum(/datum/antagonist/vampire), /datum/antagonist/vampire) || !sire.clan)
 		return
-	var/datum/antagonist/vampire/VDrinker = sire?.mind?.has_antag_datum(/datum/antagonist/vampire)
-	if(!istype(VDrinker))
+	//we've confirmed a sire by this point
+	var/mob/client_victim = src
+	if(!client_victim.client)
+		client_victim = get_ghost(FALSE, TRUE)
+		if(!client_victim?.client)
+			client_victim = get_spirit()
+			if(!client_victim?.client)
+				to_chat(sire, span_warning("[src]'s soul is beyond your grasp."))
+				return
+
+	var/datum/clan/C = sire.clan
+	ADD_TRAIT(src, "offered_vampirism", INNATE_TRAIT)
+	var/choice = browser_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
+	if(QDELETED(src))
 		return
-	ADD_TRAIT(src, "choosing", INNATE_TRAIT)
-	if(browser_alert(src, "Would you like to rise as a vampire spawn? Warning: you will die shall you reject.", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
-		REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
-		to_chat(sire, span_danger("Your victim twitches, yet the curse fails to take over. As if something otherworldly intervenes..."))
+	if(choice != "I ACCEPT")
+		to_chat(client_victim, span_bloody("So be it."))
+		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
+		B?.brain_death = TRUE
 		death()
+		if(!QDELETED(sire)) // sire coulda gibbed or some shit
+			to_chat(sire, span_warning("[src] has refused your blessing."))
 		return
-	REMOVE_TRAIT(src, "choosing", INNATE_TRAIT)
-	visible_message(span_danger("Some dark energy begins to flow from [sire] into [src]..."))
+	grab_ghost(TRUE, TRUE)
+	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS), 500, TRUE)
+	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
+	set_bloodpool(500)
+	visible_message(span_danger("Some dark energy begins to flow into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))
-	var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(sire.clan, TRUE)
-	mind.add_antag_datum(new_antag)
-	adjust_bloodpool(500)
-	fully_heal()

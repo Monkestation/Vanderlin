@@ -9,7 +9,7 @@
 	is_recognized = TRUE
 
 	skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/combat/wrestling = 3,
@@ -65,10 +65,10 @@
 			if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 				wrists = /obj/item/clothing/neck/psycross/silver
 			if(/datum/patron/divine/astrata)
-				wrists = /obj/item/clothing/neck/psycross/silver/astrata
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
 			if(/datum/patron/divine/necra)
-				wrists = /obj/item/clothing/neck/psycross/silver/necra
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 			if(/datum/patron/divine/pestra)
-				wrists = /obj/item/clothing/neck/psycross/silver/pestra
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			else
 				wrists = /obj/item/clothing/neck/silveramulet
