@@ -52,7 +52,7 @@
 	. = ..()
 	icon_state = pick(list("lair_1", "lair_2", "lair_3"))
 
-	set_light(2, 2, 1, l_color = "#ff6533")
+	set_light(2, 1, l_color = "#ff6533")
 
 /obj/structure/meatvine/lair/Destroy()
 	puff_gas(TRUE)

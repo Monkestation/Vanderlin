@@ -70,7 +70,7 @@
 
 /datum/vine_mutation/light/on_grow(obj/structure/vine/holder)
 	if(holder.energy)
-		holder.set_light(severity, severity, 0.3)
+		holder.set_light(severity, 0.3)
 
 /datum/vine_mutation/healing
 	name = "healing"

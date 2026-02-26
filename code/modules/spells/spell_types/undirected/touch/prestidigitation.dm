@@ -61,9 +61,7 @@
 		var/skill_level = owner.get_skill_level(associated_skill)
 		var/mote_power = clamp(4 + (skill_level - 3), 4, 7) // every step above journeyman should get us 1 more tile of brightness
 		mote = new
-		mote.set_light_range(mote_power)
-		if(mote.light_system == STATIC_LIGHT)
-			mote.update_light()
+		mote.set_light(l_power = mote_power)
 
 		var/list/icon_dimensions = get_icon_dimensions(owner.icon)
 		var/orbitsize = (icon_dimensions["width"] + icon_dimensions["height"]) * 0.5

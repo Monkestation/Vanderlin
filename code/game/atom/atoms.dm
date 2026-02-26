@@ -167,6 +167,8 @@
 	var/light_range = 0
 	/// Intensity of the light. The stronger, the less shadows you will see on the lit area.
 	var/light_power = 1
+	/// Falloff factor for the light, must be above 1. Higher the value more aggressive the falloff into darkness is
+	var/light_falloff = 1
 	/// Hexadecimal RGB string representing the colour of the light. White by default.
 	var/light_color = COLOR_WHITE
 	/// Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
@@ -937,7 +939,42 @@
 		flags_1 |= ADMIN_SPAWNED_1
 	. = ..()
 	switch(var_name)
-		if("color")
+		if(NAMEOF(src, light_range))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_range = var_value)
+			else
+				set_light_range(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_power))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_power = var_value)
+			else
+				set_light_power(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_falloff))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_falloff = var_value)
+			else
+				set_light_falloff(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_color))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_color = var_value)
+			else
+				set_light_color(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_on))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_on = var_value)
+			else
+				set_light_on(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, color))
 			add_atom_colour(color, ADMIN_COLOUR_PRIORITY)
 
 /**

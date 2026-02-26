@@ -22,18 +22,21 @@
 // The proc you should always use to set the light of this atom.
 // Nonesensical value for l_color default, so we can detect if it gets set to null.
 #define NONSENSICAL_VALUE -99999
-/atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE, l_on)
+/atom/proc/set_light(l_range, l_power, l_falloff = NONSENSICAL_VALUE, l_color = NONSENSICAL_VALUE, l_on)
 	if(l_range > 0 && l_range < MINIMUM_USEFUL_LIGHT_RANGE)
 		l_range = MINIMUM_USEFUL_LIGHT_RANGE //Brings the range up to 1.4, which is just barely brighter than the soft lighting that surrounds players.
 
 	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT, l_range, l_power, l_color, l_on) & COMPONENT_BLOCK_LIGHT_UPDATE)
 		return
 
+	if(!isnull(l_range))
+		set_light_range(l_range)
+
 	if(!isnull(l_power))
 		set_light_power(l_power)
 
-	if(!isnull(l_range))
-		set_light_range(l_range)
+	if(l_falloff != NONSENSICAL_VALUE)
+		set_light_falloff(max(l_falloff, 1))
 
 	if(l_color != NONSENSICAL_VALUE)
 		set_light_color(l_color)
@@ -44,16 +47,6 @@
 	update_light()
 
 #undef NONSENSICAL_VALUE
-
-/// Setter for the light color of this atom.
-/atom/proc/set_light_color(new_color)
-	if(new_color == light_color)
-		return
-	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_COLOR, new_color) & COMPONENT_BLOCK_LIGHT_UPDATE)
-		return
-	. = light_color
-	light_color = new_color
-	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_COLOR, .)
 
 /// Setter for the light range of this atom.
 /atom/proc/set_light_range(new_range)
@@ -74,6 +67,25 @@
 	. = light_power
 	light_power = new_power
 	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_POWER, .)
+
+/atom/proc/set_light_falloff(new_falloff)
+	if(new_falloff == light_falloff)
+		return
+	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_FALLOFF, new_falloff) & COMPONENT_BLOCK_LIGHT_UPDATE)
+		return
+	. = light_falloff
+	light_falloff = new_falloff
+	SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_FALLOFF, .)
+
+/// Setter for the light color of this atom.
+/atom/proc/set_light_color(new_color)
+	if(new_color == light_color)
+		return
+	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_COLOR, new_color) & COMPONENT_BLOCK_LIGHT_UPDATE)
+		return
+	. = light_color
+	light_color = new_color
+	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_COLOR, .)
 
 /// Setter for whether or not this atom's light is on.
 /atom/proc/set_light_on(new_value)

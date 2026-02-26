@@ -29,7 +29,7 @@
 /obj/structure/mana_pylon/Initialize(mapload, ...)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
-	set_light(1.4, 1.4, 0.75, l_color = COLOR_CYAN)
+	set_light(1.4, 0.75, l_color = COLOR_CYAN)
 
 /obj/structure/mana_pylon/Destroy()
 	if(linked_pylon)

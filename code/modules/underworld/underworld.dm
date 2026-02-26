@@ -63,7 +63,7 @@
 
 /obj/structure/underworld/carriageman/Initialize()
 	. = ..()
-	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)
 
 /obj/structure/underworld/carriageman/attack_hand(mob/living/carbon/spirit/user)
 	if(!user.paid)
@@ -113,7 +113,7 @@
 
 /obj/structure/underworld/carriage/Initialize()
 	. = ..()
-	set_light(5, 3, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(4, 30, l_color = LIGHT_COLOR_BLUE)
 
 /obj/structure/underworld/carriage/attack_hand(mob/living/carbon/spirit/user)
 	if(user.paid)

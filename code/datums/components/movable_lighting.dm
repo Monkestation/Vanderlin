@@ -30,6 +30,8 @@
 	var/lum_power = 0.5
 	///Transparency value.
 	var/set_alpha = 0
+	///Falloff modifier
+	var/falloff_mod = 1
 	///For light sources that can be turned on and off.
 	var/overlay_lighting_flags = NONE
 
@@ -86,24 +88,28 @@
 	. = ..()
 
 	visible_mask = new()
+
 	if(!isnull(_range))
 		movable_parent.set_light_range(_range, _range)
 	set_range(parent, movable_parent.light_range)
+
 	if(!isnull(_power))
 		movable_parent.set_light_power(_power)
 	set_power(parent, movable_parent.light_power)
+
 	if(!isnull(_color))
 		movable_parent.set_light_color(_color)
 	set_color(parent, movable_parent.light_color)
+
 	if(!isnull(starts_on))
 		movable_parent.set_light_on(starts_on)
-
 
 /datum/component/overlay_lighting/RegisterWithParent()
 	. = ..()
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_parent_moved))
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_RANGE, PROC_REF(set_range)) // proc handles old values
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_POWER, PROC_REF(set_power))
+	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_FALLOFF, PROC_REF(set_falloff))
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_COLOR, PROC_REF(set_color))
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_ON, PROC_REF(on_toggle))
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_FLAGS, PROC_REF(on_light_flags_change))
@@ -127,11 +133,12 @@
 		COMSIG_ATOM_SET_LIGHT_COLOR,
 		COMSIG_ATOM_SET_LIGHT_ON,
 		COMSIG_ATOM_SET_LIGHT_FLAGS,
-		))
+	))
+
 	if(overlay_lighting_flags & LIGHTING_ON)
 		turn_off()
-	return ..()
 
+	return ..()
 
 /datum/component/overlay_lighting/Destroy()
 	set_parent_attached_to(null)
@@ -140,13 +147,11 @@
 	QDEL_NULL(visible_mask)
 	return ..()
 
-
 ///Clears the affected_turfs lazylist, removing from its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/clean_old_turfs()
 	for(var/turf/lit_turf as anything in affected_turfs)
 		lit_turf.dynamic_lumcount -= lum_power
 	affected_turfs = null
-
 
 ///Populates the affected_turfs lazylist, adding to its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/get_new_turfs()
@@ -156,14 +161,12 @@
 		lit_turf.dynamic_lumcount += lum_power
 		LAZYADD(affected_turfs, lit_turf)
 
-
 ///Clears the old affected turfs and populates the new ones.
 /datum/component/overlay_lighting/proc/make_luminosity_update()
 	clean_old_turfs()
 	if(!isturf(current_holder?.loc))
 		return
 	get_new_turfs()
-
 
 ///Adds the luminosity and source for the afected movable atoms to keep track of their visibility.
 /datum/component/overlay_lighting/proc/add_dynamic_lumi(atom/movable/affected_movable)
@@ -195,7 +198,6 @@
 		RegisterSignal(parent_attached_to, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_attached_to_qdel))
 		RegisterSignal(parent_attached_to, COMSIG_MOVABLE_MOVED, PROC_REF(on_parent_attached_to_moved))
 	check_holder()
-
 
 ///Called to change the value of current_holder.
 /datum/component/overlay_lighting/proc/set_holder(atom/movable/new_holder)
@@ -232,25 +234,25 @@
 		return
 	set_holder(null)
 
-
 ///Called when the current_holder is qdeleted, to remove the light effect.
 /datum/component/overlay_lighting/proc/on_holder_qdel(atom/movable/source, force)
 	SIGNAL_HANDLER
+
 	UnregisterSignal(current_holder, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
 	set_holder(null)
-
 
 ///Called when current_holder changes loc.
 /datum/component/overlay_lighting/proc/on_holder_moved(atom/movable/source, OldLoc, Dir, Forced)
 	SIGNAL_HANDLER
+
 	if(!(overlay_lighting_flags & LIGHTING_ON))
 		return
 	make_luminosity_update()
 
-
 ///Called when parent changes loc.
 /datum/component/overlay_lighting/proc/on_parent_moved(atom/movable/source, OldLoc, Dir, Forced)
 	SIGNAL_HANDLER
+
 	var/atom/movable/movable_parent = parent
 	if(overlay_lighting_flags & LIGHTING_ATTACHED)
 		set_parent_attached_to(ismovable(movable_parent.loc) ? movable_parent.loc : null)
@@ -259,24 +261,23 @@
 		return
 	make_luminosity_update()
 
-
 ///Called when the current_holder is qdeleted, to remove the light effect.
 /datum/component/overlay_lighting/proc/on_parent_attached_to_qdel(atom/movable/source, force)
 	SIGNAL_HANDLER
+
 	UnregisterSignal(parent_attached_to, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
 	if(parent_attached_to == current_holder)
 		set_holder(null)
 	set_parent_attached_to(null)
 
-
 ///Called when parent_attached_to changes loc.
 /datum/component/overlay_lighting/proc/on_parent_attached_to_moved(atom/movable/source, OldLoc, Dir, Forced)
 	SIGNAL_HANDLER
+
 	check_holder()
 	if(!(overlay_lighting_flags & LIGHTING_ON) || !current_holder)
 		return
 	make_luminosity_update()
-
 
 ///Changes the range which the light reaches. 0 means no light, 9 is the maximum value.
 /datum/component/overlay_lighting/proc/set_range(atom/source, old_range)
@@ -285,16 +286,22 @@
 	var/new_range = source.light_range
 	if(range == new_range)
 		return
-	if(range == 0)
+
+	update_range(new_range, old_range)
+
+/// Update overlay range
+/datum/component/overlay_lighting/proc/update_range(new_range, old_range)
+	if(new_range == 0)
 		turn_off()
 
-	range = clamp(CEILING(new_range, 0.5), 1, 9)
+	range = clamp(CEILING(new_range / falloff_mod, 0.5), 1, 9)
 	var/pixel_bounds = ((range - 1) * 64) + 32
 	lumcount_range = CEILING(range, 1)
 	visible_mask.icon = light_overlays["[pixel_bounds]"]
 	if(pixel_bounds == 32)
 		visible_mask.transform = null
 		return
+
 	var/offset = (pixel_bounds - 32) * 0.5
 	var/matrix/transform = new
 	transform.Translate(-offset, -offset)
@@ -302,33 +309,42 @@
 	if(overlay_lighting_flags & LIGHTING_ON)
 		make_luminosity_update()
 
-
 ///Changes the intensity/brightness of the light by altering the visual object's alpha.
 /datum/component/overlay_lighting/proc/set_power(atom/source, new_power)
 	SIGNAL_HANDLER
+
 	set_lum_power(new_power >= 0 ? 0.5 : -0.5)
 	//set_alpha = min(230, (abs(new_power) * 120) + 30)
 	visible_mask.alpha = 255
 
+/datum/component/overlay_lighting/proc/set_falloff(atom/source, new_falloff)
+	SIGNAL_HANDLER
+
+	if(falloff_mod == new_falloff)
+		return
+
+	falloff_mod = max(new_falloff, 1)
+	update_range(range)
 
 ///Changes the light's color, pretty straightforward.
 /datum/component/overlay_lighting/proc/set_color(atom/source, new_color)
 	SIGNAL_HANDLER
-	visible_mask.color = new_color
 
+	visible_mask.color = new_color
 
 ///Toggles the light on and off.
 /datum/component/overlay_lighting/proc/on_toggle(atom/source, new_value)
 	SIGNAL_HANDLER
+
 	if(new_value) //Truthy value input, turn on.
 		turn_on()
 		return
 	turn_off() //Falsey value, turn off.
 
-
 ///Triggered right before the parent light flags change.
 /datum/component/overlay_lighting/proc/on_light_flags_change(atom/source, new_value)
 	SIGNAL_HANDLER
+
 	var/atom/movable/movable_parent = parent
 	if(new_value & LIGHT_ATTACHED)
 		if(!(movable_parent.light_flags & LIGHT_ATTACHED)) //Gained the LIGHT_ATTACHED property.
@@ -339,7 +355,6 @@
 		overlay_lighting_flags &= ~LIGHTING_ATTACHED
 		set_parent_attached_to(null)
 
-
 ///Toggles the light on.
 /datum/component/overlay_lighting/proc/turn_on()
 	if(overlay_lighting_flags & LIGHTING_ON)
@@ -348,7 +363,6 @@
 		add_dynamic_lumi(current_holder)
 	overlay_lighting_flags |= LIGHTING_ON
 	get_new_turfs()
-
 
 ///Toggles the light off.
 /datum/component/overlay_lighting/proc/turn_off()
@@ -359,7 +373,6 @@
 	overlay_lighting_flags &= ~LIGHTING_ON
 	clean_old_turfs()
 
-
 ///Here we append the behavior associated to changing lum_power.
 /datum/component/overlay_lighting/proc/set_lum_power(new_lum_power)
 	if(lum_power == new_lum_power)
@@ -369,7 +382,6 @@
 	var/difference = . - lum_power
 	for(var/turf/lit_turf as anything in affected_turfs)
 		lit_turf.dynamic_lumcount -= difference
-
 
 #undef LIGHTING_ON
 #undef LIGHTING_ATTACHED
