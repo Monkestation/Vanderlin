@@ -1694,7 +1694,7 @@ ____________End of Example*/
 			ADD_TRAIT(M, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
 			to_chat(M, "<span class='god_[lowertext(new_patron.name)]'>You have devoted yourself to [new_patron.name]!</span>")
 			log_game("PATRON: [key_name(M)] changed their patron from [old_patron.name] to [new_patron.name]")
-			visible_message("A bright light flashes out from [src] as it channels divine focus.")
+			visible_message("A bright light flashes out from [M] as it channels divine focus.")
 			playsound(src, 'sound/magic/bless.ogg', 50, TRUE)
 			M.set_patron(new_patron)
 
