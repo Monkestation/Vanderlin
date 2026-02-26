@@ -3000,7 +3000,6 @@
 #include "code\modules\lighting\lighting_object.dm"
 #include "code\modules\lighting\lighting_source.dm"
 #include "code\modules\lighting\lighting_turf.dm"
-#include "code\modules\lighting\sunlight\_outdoor_effect.dm"
 #include "code\modules\lootpanel\_lootpanel.dm"
 #include "code\modules\lootpanel\contents.dm"
 #include "code\modules\lootpanel\handlers.dm"

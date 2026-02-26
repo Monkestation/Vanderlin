@@ -87,6 +87,14 @@
 			master_NW = master
 			master.lighting_corner_SE = src
 
+/datum/lighting_corner/proc/get_masters()
+	return list(
+		master_NE,
+		master_NW,
+		master_SE,
+		master_SW,
+	)
+
 /datum/lighting_corner/proc/self_destruct_if_idle()
 	if (!LAZYLEN(affecting))
 		qdel(src, force = TRUE)
@@ -152,7 +160,7 @@
 		return
 #endif
 
-	var/datum/lighting_object/lighting_object = master_NE?.lighting_object
+	var/atom/movable/lighting_object/lighting_object = master_NE?.lighting_object
 	if (lighting_object && !lighting_object.needs_update)
 		lighting_object.needs_update = TRUE
 		SSlighting.objects_queue += lighting_object

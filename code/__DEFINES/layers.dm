@@ -143,11 +143,11 @@
 #define SUNLIGHTING_PLANE 140
 #define SUNLIGHTING_RENDER_TARGET "*SUNLIGHT_RENDER_TARGET"
 
-///Normal 1 per turf dynamic lighting underlays
+///Normal 1 per turf dynamic lighting objects
 #define LIGHTING_PLANE 150
 #define LIGHTING_RENDER_TARGET "LIGHT_RENDER_TARGET"
 
-///Lighting underlays that are "free floating"
+///Lighting objects that are "free floating"
 #define O_LIGHTING_VISUAL_PLANE 160
 #define O_LIGHTING_VISUAL_RENDER_TARGET "O_LIGHT_VISUAL_RENDER_TARGET"
 

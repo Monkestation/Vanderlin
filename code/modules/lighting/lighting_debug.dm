@@ -24,7 +24,7 @@
 		QDEL_NULL(current)
 
 /datum/proximity_monitor/advanced/debug_lights/proc/get_color_matrix(turf/target)
-	return target.lighting_object.current_underlay.color
+	return target.lighting_object?.color
 
 /datum/proximity_monitor/advanced/debug_lights
 	var/list/managed = list()

@@ -18,7 +18,7 @@
 	if(!IS_DYNAMIC_LIGHTING(our_area) && !light_sources)
 		return
 
-	new /datum/lighting_object(src)
+	new /atom/movable/lighting_object(src)
 
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
@@ -49,7 +49,7 @@
 	if(outdoor_effect && outdoor_effect.state)
 		totalSunFalloff = 4
 
-	// totallums += totalSunFalloff / 4
+	totallums += totalSunFalloff / 4
 
 	totallums /= 12 // 4 corners, each with 3 channels, get the average.
 
@@ -66,7 +66,7 @@
 	if (!lighting_object)
 		return FALSE
 
-	return !(luminosity || dynamic_lumcount)
+	return !(lighting_object.luminosity || dynamic_lumcount)
 
 // Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
 /turf/proc/recalc_atom_opacity()
@@ -85,9 +85,7 @@
 		reconsider_lights()
 
 /turf/proc/change_area(area/old_area, area/new_area)
-	GLOB.SUNLIGHT_QUEUE_WORK += src
-	if(outdoor_effect)
-		GLOB.SUNLIGHT_QUEUE_UPDATE += outdoor_effect
+	SSoutdoor_effects.queue_work |= src
 	if(SSlighting.initialized)
 		if (new_area.dynamic_lighting != old_area.dynamic_lighting)
 			if (new_area.dynamic_lighting)

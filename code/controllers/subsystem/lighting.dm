@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 2
+	wait = 1
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
 	priority = FIRE_PRIORITY_DEFAULT
@@ -75,7 +75,7 @@ SUBSYSTEM_DEF(lighting)
 
 	queue = objects_queue
 	for (i in 1 to length(queue))
-		var/datum/lighting_object/O = queue[i]
+		var/atom/movable/lighting_object/O = queue[i]
 
 		if (QDELETED(O))
 			continue
@@ -100,6 +100,6 @@ SUBSYSTEM_DEF(lighting)
 			continue
 		for(var/list/zlevel_turfs as anything in dynamic_area.get_zlevel_turf_lists())
 			for(var/turf/area_turf as anything in zlevel_turfs)
-				new /datum/lighting_object(area_turf)
+				new /atom/movable/lighting_object(area_turf)
 			CHECK_TICK
 		CHECK_TICK
