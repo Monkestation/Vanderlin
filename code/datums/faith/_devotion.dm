@@ -191,7 +191,7 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_1
 
-/datum/devotion/proc/make_churchling()
+/datum/devotion/proc/make_churching()
 	max_devotion = CLERIC_REQ_1
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_1

@@ -253,19 +253,19 @@
 
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/zizo)
-			neck = /obj/item/clothing/neck/psycross/inhumen/gronn
+			neck = /obj/item/clothing/neck/psycross/gronn
 		if(/datum/patron/inhumen/graggar)
-			neck = /obj/item/clothing/neck/psycross/inhumen/graggar/gronn
+			neck = /obj/item/clothing/neck/psycross/gronn/graggar
 		if(/datum/patron/inhumen/matthios)
-			neck = /obj/item/clothing/neck/psycross/inhumen/matthios/gronn
+			neck = /obj/item/clothing/neck/psycross/gronn/matthios
 		if(/datum/patron/inhumen/baotha)
-			neck = /obj/item/clothing/neck/psycross/inhumen/baothagronn
+			neck = /obj/item/clothing/neck/psycross/gronn/baothagronn
 		if(/datum/patron/divine/abyssor)
-			neck = /obj/item/clothing/neck/psycross/abyssor/gronn
+			neck = /obj/item/clothing/neck/psycross/gronn/abyssor
 		if(/datum/patron/divine/dendor)
-			neck = /obj/item/clothing/neck/psycross/dendor/gronn
+			neck = /obj/item/clothing/neck/psycross/gronn/dendor
 		else
-			neck = /obj/item/clothing/neck/psycross/inhumen/gronn/special //Failsafe. Gives a specially-fluffed version of Zizo's talisman, which can be reinterpreted as needed.
+			neck = /obj/item/clothing/neck/psycross/gronn/special //Failsafe. Gives a specially-fluffed version of Zizo's talisman, which can be reinterpreted as needed.
 
 	backpack_contents = list(
 		/obj/item/key/mercenary = 1,
