@@ -11,14 +11,16 @@
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
 	skills = list(
-		/datum/skill/misc/reading = 4,
+		/datum/skill/misc/reading = 6,
 		/datum/skill/misc/music = 1,
 		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/whipsflails = 2
 	)
 
 	traits = list(
-		TRAIT_FOREIGNER
+		TRAIT_FOREIGNER,
+		TRAIT_SHEPERD,
 	)
 
 	languages = list(/datum/language/newpsydonic)
@@ -33,7 +35,7 @@
 	name = "Preacher (Pilgrim)"
 	shoes = /obj/item/clothing/shoes/shortboots
 	belt = /obj/item/storage/belt/leather/rope
-	beltr = /obj/item/flashlight/flare/torch/lantern
+	beltr = /obj/item/flashlight/flare/torch/lantern/copper
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
 	neck = /obj/item/clothing/neck/psycross

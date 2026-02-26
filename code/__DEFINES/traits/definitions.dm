@@ -352,6 +352,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CRITICAL_RESISTANCE "Critical Resistance"
 #define TRAIT_CRITICAL_WEAKNESS	"Critical Weakness"
 #define TRAIT_MANIAC_AWOKEN	"Awoken"
+/// for faith conversions
+#define TRAIT_SHEPERD "Sheperd"
 /// Doesn't consume stamina
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep

@@ -1685,13 +1685,27 @@ ____________End of Example*/
 	verses_file = "strings/psybibble.txt"
 
 /obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
-	if(istype(user) && istype(user.patron, /datum/patron/psydon))
-		if(!user.can_read(src))
+	var/datum/patron/old_patron = M.patron
+	var/datum/patron/new_patron = user.patron
+	if(open && HAS_TRAIT(user, TRAIT_SHEPERD))
+		if(old_patron == new_patron)
 			return
-		M.apply_status_effect(/datum/status_effect/buff/blessed)
-		user.visible_message(span_notice("[user] blesses [M]."))
-		playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
-		return
+		if(alert(M, "Accept [new_patron.name] as your new master?", "BAPTIZE", "YES", "NO") != "NO")
+			ADD_TRAIT(M, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
+			to_chat(M, "<span class='god_[lowertext(new_patron.name)]'>You have devoted yourself to [new_patron.name]!</span>")
+			log_game("PATRON: [key_name(M)] changed their patron from [old_patron.name] to [new_patron.name]")
+			visible_message("A bright light flashes out from [src] as it channels divine focus.")
+			playsound(src, 'sound/magic/bless.ogg', 50, TRUE)
+			M.set_patron(new_patron)
+
+	else
+		if(istype(user) && istype(user.patron, /datum/patron/psydon))
+			if(!user.can_read(src))
+				return
+			M.apply_status_effect(/datum/status_effect/buff/blessed)
+			user.visible_message(span_notice("[user] blesses [M]."))
+			playsound(user, 'sound/magic/bless.ogg', 100, FALSE)
+			return
 
 /datum/status_effect/buff/blessed
 	id = "blessed"

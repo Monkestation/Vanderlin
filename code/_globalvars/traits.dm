@@ -188,6 +188,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Recognized" = TRAIT_RECOGNIZED,
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
+		"Soul Shepherd" = TRAIT_SHEPERD,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -318,6 +319,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
+	TRAIT_SHEPERD = span_notice("I have been chosen by the gods to enact their word. I can manipulate their faith"),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global
