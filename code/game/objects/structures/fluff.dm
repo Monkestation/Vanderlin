@@ -6,7 +6,7 @@
 	icon_state = "minibar"
 	anchored = TRUE
 	density = FALSE
-	opacity = 0
+	opacity = FALSE
 	blade_dulling = DULLING_BASHCHOP
 	max_integrity = 150
 	var/deconstructible = TRUE
@@ -1425,7 +1425,7 @@
 	icon_state = "subduedstatue"
 	anchored = TRUE
 	density = FALSE
-	opacity = 0
+	opacity = FALSE
 	blade_dulling = DULLING_BASHCHOP
 	max_integrity = 999999
 	deconstructible = FALSE

@@ -166,7 +166,7 @@
 	linked_lock.icon_state = "lock"
 	linked_lock.plane = FLOAT_PLANE
 	linked_lock.layer = 2
-	linked_lock.mouse_opacity = 0
+	linked_lock.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	vis_contents += linked_lock
 
 	linked_wedge = new(src)

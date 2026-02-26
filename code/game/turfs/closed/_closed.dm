@@ -2,7 +2,7 @@
 	name = ""
 	icon_state = "black"
 	layer = CLOSED_TURF_LAYER
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	blocks_air = TRUE
 	baseturfs = /turf/open/floor/naturalstone
@@ -265,7 +265,7 @@
 /turf/closed/indestructible/roguewindow
 	name = "window"
 	desc = ""
-	opacity = 0
+	opacity = FALSE
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "window-solid"
 

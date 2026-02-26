@@ -7,7 +7,7 @@
 	icon = 'icons/visual_ui/booklet.dmi'
 	icon_state = "book_close"
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
 
 /obj/abstract/visual_ui_element/hoverable/book_close/Click()
 	var/datum/visual_ui/ancestor = parent.get_ancestor()
@@ -17,6 +17,6 @@
 	icon = 'icons/visual_ui/booklet.dmi'
 	icon_state = "book_move"
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
 
 	move_whole_ui = TRUE

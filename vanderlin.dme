@@ -1092,6 +1092,7 @@
 #include "code\datums\elements\frozen.dm"
 #include "code\datums\elements\hat_wearer.dm"
 #include "code\datums\elements\holy_weakness.dm"
+#include "code\datums\elements\light_blocking.dm"
 #include "code\datums\elements\mob_overlay_effect.dm"
 #include "code\datums\elements\movetype_handler.dm"
 #include "code\datums\elements\no_mouse_drop.dm"

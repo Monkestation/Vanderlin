@@ -4,7 +4,7 @@
 	name = "kneestingers"
 	desc = "They're said to glow with Dendor's wrath."
 	anchored = TRUE
-	opacity = 0
+	opacity = FALSE
 	density = FALSE
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "glowshroom1" //replaced in New

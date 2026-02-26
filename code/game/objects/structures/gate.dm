@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(biggates)
 	name = ""
 	desc = ""
 	icon = null
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	opacity = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
@@ -124,9 +124,9 @@ GLOBAL_LIST_EMPTY(biggates)
 	layer = initial(layer)
 	sleep(15)
 	density = FALSE
-	opacity = FALSE
+	set_opacity(FALSE)
 	for(var/obj/gblock/B in blockers)
-		B.opacity = FALSE
+		B.set_opacity(FALSE)
 	isSwitchingStates = FALSE
 	update_appearance(UPDATE_ICON)
 
@@ -144,10 +144,10 @@ GLOBAL_LIST_EMPTY(biggates)
 			M.log_message("has been crushed by the [src]!", LOG_ATTACK)
 			crush(M)
 	density = initial(density)
-	opacity = initial(opacity)
+	set_opacity(initial(opacity))
 	layer = initial(layer)
 	for(var/obj/gblock/B in blockers)
-		B.opacity = initial(B.opacity)
+		B.set_opacity(initial(B.opacity))
 	isSwitchingStates = FALSE
 	update_appearance(UPDATE_ICON)
 

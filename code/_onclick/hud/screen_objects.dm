@@ -1783,7 +1783,7 @@
 
 /atom/movable/screen/heatstamover
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "heatstamover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = stamina_loc
@@ -1791,7 +1791,7 @@
 
 /atom/movable/screen/mana_over
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "manaover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
@@ -1802,7 +1802,7 @@
 	icon_state = "crt"
 	name = ""
 	screen_loc = ui_backhudl
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
 	plane = HUD_PLANE
 	blend_mode = BLEND_MULTIPLY

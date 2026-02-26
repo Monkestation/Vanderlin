@@ -203,7 +203,6 @@
 /obj/structure/window/proc/force_open()
 	playsound(src, 'sound/foley/doors/windowup.ogg', 100, FALSE)
 	climbable = TRUE
-	opacity = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/window/attackby(obj/item/W, mob/user, list/modifiers)
