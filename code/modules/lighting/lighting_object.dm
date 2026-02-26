@@ -35,6 +35,9 @@
 	affected_turf.luminosity = 0
 	luminosity = 1
 
+	needs_update = TRUE
+	SSlighting.objects_queue += src
+
 /atom/movable/lighting_object/Destroy(force)
 	if (!force)
 		return QDEL_HINT_LETMELIVE
@@ -48,7 +51,6 @@
 		affected_turf.luminosity = 1
 	affected_turf = null
 	return ..()
-
 
 /atom/movable/lighting_object/proc/update()
 	var/turf/affected_turf = src.affected_turf
@@ -94,7 +96,7 @@
 #endif
 
 	if(!set_luminosity)
-		icon_state = "dark"
+		icon_state = "lighting_dark"
 		color = null
 	else
 		icon_state = null

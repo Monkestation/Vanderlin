@@ -75,11 +75,11 @@ Sunlight System
 		if(SKY_VISIBLE_BORDER)
 			calc_sunlight_spread()
 
-#define GLOBAL_LIGHT_RANGE 3
+#define GLOBAL_LIGHT_RANGE 2
 
 #define HARD_SUN 0.5 /* our hyperboloidy modifyer funky times - I wrote this in like, 2020 and can't remember how it works - I think it makes a 3D cone shape with a flat top */
 /* calculate the indoor corners we are affecting */
-#define SUN_FALLOFF(C, T) (1 - CLAMP01(sqrt((C.x - T.x) ** 2 + (C.y - T.y) ** 2 - HARD_SUN) / max(1, GLOBAL_LIGHT_RANGE)))
+#define SUN_FALLOFF(C, T) (1 - CLAMP01(sqrt((C.x - T.x) ** 2 + (C.y - T.y) ** 2 - HARD_SUN) / GLOBAL_LIGHT_RANGE))
 
 /atom/movable/outdoor_effect/proc/calc_sunlight_spread()
 	var/list/datum/lighting_corner/corners = list()
