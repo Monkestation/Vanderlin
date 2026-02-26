@@ -60,7 +60,7 @@ Sunlight System
 /atom/movable/outdoor_effect/proc/disable_sunlight()
 	for(var/datum/lighting_corner/C as anything in affecting_corners)
 		C.sunFalloff -= affecting_corners[C]
-		for(var/turf/turf as anything in C.get_masters())
+		for(var/turf/turf in C.get_masters())
 			SSoutdoor_effects.queue_turf_corners(turf)
 
 	SSoutdoor_effects.queue_turf_corners(source_turf)
@@ -107,13 +107,13 @@ Sunlight System
 		if (falloff != 0)
 			corner.sunFalloff += falloff
 			affecting_corners[corner] = falloff
-			for (var/turf/master as anything in corner.get_masters())
+			for (var/turf/master in corner.get_masters())
 				SSoutdoor_effects.queue_turf_corners(master)
 
 	var/list/datum/lighting_corner/gone_corners = affecting_corners - corners
 	for (var/datum/lighting_corner/corner as anything in gone_corners)
 		corner.sunFalloff -= affecting_corners[corner]
-		for (var/turf/master as anything in corner.get_masters())
+		for (var/turf/master in corner.get_masters())
 			SSoutdoor_effects.queue_turf_corners(master)
 
 	affecting_corners -= gone_corners
@@ -157,7 +157,7 @@ Sunlight System
 	SSoutdoor_effects.queue_work |= src
 
 	for(var/datum/lighting_corner/corner in corners)
-		for(var/turf/turf as anything in corner.get_masters())
+		for(var/turf/turf in corner.get_masters())
 			SSoutdoor_effects.queue_work |= turf
 
 	var/turf/T = GET_TURF_BELOW(src)
