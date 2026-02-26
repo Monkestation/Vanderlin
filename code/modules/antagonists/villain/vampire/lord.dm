@@ -23,7 +23,8 @@
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 	vampire.grant_undead_eyes()
 
-/datum/antagonist/vampire/proc/get_thralls()
+/datum/antagonist/vampire/proc/get_thralls(override_num = 0, make_spawn = FALSE)
+	var/made_spawn = FALSE
 	if(!clan_selected)
 		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
 		return
@@ -41,24 +42,33 @@
 		/datum/job/adept,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
+		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/monk,
 		/datum/job/churchling,
 	))
 
 	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
-	var/thralls = rand(2, 3)
+	var/max_thralls = rand(2, 3)
+	if(override_num)
+		max_thralls = override_num
 
 	candidates -= owner.current
 
 	if(!length(candidates))
 		return
 
-	for(var/i = 1 to thralls)
+	for(var/i = 1 to max_thralls)
 		var/mob/living/carbon/human/human = pick_n_take(candidates)
-		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
+		var/datum/antagonist/vampire/new_antag
+		var/pool_amt = 500
+		if(make_spawn && !made_spawn)
+			new_antag = new /datum/antagonist/vampire/lords_spawn(owner.current.clan, TRUE)
+			pool_amt = 750
+		else
+			new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
 		human?.mind.add_antag_datum(new_antag)
-		human.adjust_bloodpool(500)
+		human.adjust_bloodpool(pool_amt)
 
 /datum/antagonist/vampire/lord/greet()
 	to_chat(owner.current, span_userdanger("I am ancient. I am the Land. And I am now awoken to trespassers upon my domain."))
