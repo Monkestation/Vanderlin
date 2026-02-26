@@ -371,26 +371,26 @@
 	. = ..()
 	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
-			neck = /obj/item/clothing/neck/psycross/silver/astrata
+			neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/necra)
-			neck = /obj/item/clothing/neck/psycross/silver/necra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 		if(/datum/patron/divine/eora)
-			neck = /obj/item/clothing/neck/psycross/silver/eora
+			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 		if(/datum/patron/divine/noc)
-			neck = /obj/item/clothing/neck/psycross/silver/noc
+			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/pestra)
-			neck = /obj/item/clothing/neck/psycross/silver/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 			backpack_contents += /obj/item/needle/blessed
 		if(/datum/patron/divine/dendor)
-			neck = /obj/item/clothing/neck/psycross/silver/dendor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)
-			neck = /obj/item/clothing/neck/psycross/silver/abyssor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 		if(/datum/patron/divine/ravox)
-			neck = /obj/item/clothing/neck/psycross/silver/ravox
+			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 		if(/datum/patron/divine/xylix)
-			neck = /obj/item/clothing/neck/psycross/silver/xylix
+			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/malum)
-			neck = /obj/item/clothing/neck/psycross/silver/malum
+			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 			backpack_contents += /obj/item/weapon/hammer/iron
 		else
 			neck = /obj/item/clothing/neck/psycross/silver

@@ -22,7 +22,7 @@
 
 	var/amulet_found = FALSE
 	for(var/obj/item/clothing/neck/current_item in owner.current.get_equipped_items(TRUE))
-		if(current_item.type in list(/obj/item/clothing/neck/psycross/silver/abyssor))
+		if(current_item.type in list(/obj/item/clothing/neck/psycross/silver/divine/abyssor))
 			amulet_found = TRUE
 
 	if(!amulet_found)

@@ -17,6 +17,7 @@
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stress_event/drunk)
+
 /datum/status_effect/buff/drunk/on_remove()
 	. = ..()
 	if(iscarbon(owner))

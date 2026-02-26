@@ -62,7 +62,7 @@
 	name = "Grenzelhoft Count (Pilgrim)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/brigandine
 	belt = /obj/item/storage/belt/leather/plaquesilver

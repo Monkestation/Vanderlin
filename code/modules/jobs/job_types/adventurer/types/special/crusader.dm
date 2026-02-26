@@ -82,13 +82,13 @@
 	switch(equipped_human.patron?.type)
 		if(/datum/patron/divine/astrata)
 			cloak = /obj/item/clothing/cloak/stabard/templar/astrata
-			wrists = /obj/item/clothing/neck/psycross/silver/astrata
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/necra)
 			cloak = /obj/item/clothing/cloak/stabard/templar/necra
-			wrists = /obj/item/clothing/neck/psycross/silver/necra
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 		else
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
-			wrists = /obj/item/clothing/neck/psycross/silver/ravox
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 
 	if(equipped_human.gender == FEMALE)
 		head = /obj/item/clothing/head/helmet/heavy/crusader/t

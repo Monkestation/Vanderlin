@@ -314,6 +314,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return strings("accents/halfling_replacement.json", "halfling")
 		if("Gutter")
 			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
 		if("Deepspeak")
 			return strings("accents/triton_replacement.json", "triton")
 		if("Pirate")
@@ -1759,6 +1761,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey

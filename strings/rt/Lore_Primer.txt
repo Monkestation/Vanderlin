@@ -231,6 +231,17 @@ While it's not required reading, leadership roles may find this information usef
 	<br><br>
 
 	<details>
+		<summary><strong> Divine Centrism </strong></summary>
+		<br>
+		<em>Equal, and perhaps confused, worship of The Ten.</em>
+		<br><br>
+		A common stance for youths who are too young or uninformed to truly devote themselves to a sole pantheon, it is the duty of The Church to guide them to choose and profess themselves to a sole patron god.
+		<br><br>
+		For an adult not in direct service of the pantheon to profess themselves with such faith is a slight upon the gods. They should be shamed, educated, and brought to the light of a sole patron. Astrata turns her gaze away from such indecisiveness.
+		<br><br>
+	</details>
+
+	<details>
 		<summary><strong> Astrata </strong></summary>
 		<br>
 		<b><span style="display:block; color:#e5d569; font-size:130%"> "THY DEVOTION IS NO MERE SUGGESTION. I DEMAND IT." </span></b>
