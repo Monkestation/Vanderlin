@@ -1444,7 +1444,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					set_keybinds(user)
 					return
 
-				var/new_key = uppertext(href_list["key"])
+				var/new_key = normalize_keys(uppertext(href_list["key"]))
 				var/AltMod = text2num(href_list["alt"]) ? "Alt" : ""
 				var/CtrlMod = text2num(href_list["ctrl"]) ? "Ctrl" : ""
 				var/ShiftMod = text2num(href_list["shift"]) ? "Shift" : ""
