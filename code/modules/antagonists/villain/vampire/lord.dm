@@ -63,6 +63,8 @@
 		var/datum/antagonist/vampire/new_antag
 		var/pool_amt = 500
 		if(make_spawn && !made_spawn)
+			if(SSmapping.config.map_name != "Voyage")
+				antag_mind.current.unequip_everything()
 			new_antag = new /datum/antagonist/vampire/lords_spawn(owner.current.clan, TRUE)
 			pool_amt = 750
 		else
