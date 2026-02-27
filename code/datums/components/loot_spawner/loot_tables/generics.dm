@@ -169,7 +169,6 @@
 			/obj/item/weapon/mace/spiked = 8,
 			/obj/item/weapon/mace/rungu = 4,
 			/obj/item/weapon/mace/elvenclub = 6,
-			/obj/item/weapon/mace/shishpar/iron = 3,
 			/obj/item/weapon/sword/kaskara/iron = 4,
 			/obj/item/weapon/sword/long/shotel/iron = 2,
 			/obj/item/weapon/sword/sabre/dadao/iron = 4,
