@@ -20,7 +20,7 @@
 
 // gronn subtypes
 /obj/item/clothing/gloves/angle/gronn
-	name = "gronnic fur-lined leather gloves"
+	name = "osslandic fur-lined leather gloves"
 	desc = "Thick, padded gloves made for the harshest of climates and the wildest of beasts encountered in the untamed north."
 	icon_state = "gronnleathergloves"
 	item_state = "gronnleathergloves"
@@ -29,7 +29,7 @@
 	color = "#ffffff"
 
 /obj/item/clothing/gloves/angle/gronnfur
-	name = "gronnic fur-lined bone gloves"
+	name = "osslandic fur-lined bone gloves"
 	desc = "A pair of hardened leather gloves with bone reinforcements across the wrists\
 			and the back of the hand, offering superior protection against\
 			the claws of beasts and plants alike. Commonly worn by gatherers."

@@ -356,9 +356,9 @@
 
 // gronnic subtype
 /obj/item/clothing/armor/leather/heavy/gronn
-	name = "gronnic ravager mantle"
+	name = "osslandic ravager mantle"
 	desc = "A carefully created mantle of bone and hardened leather. It offers superior protection against the threats of the wild while remaining light, \
-			A popular design in Iskarn is to adorn a shoulder with a wolf pelt and skull. So that a great beast is always with you."
+			A popular design in Ossland is to adorn a shoulder with a wolf pelt, a symbol of the Great Hunt."
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnleatherarmor"
