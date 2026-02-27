@@ -40,8 +40,7 @@
 
 	var/used_vitae = 0
 	if(VDrinker)
-		if(length(CheckEyewitness(victim)))
-			vampire_detected(1)
+		vampire_detected(length(CheckEyewitness(victim)))
 		if(VVictim)
 			if(victim.bloodpool <= 0 && clan)
 				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")

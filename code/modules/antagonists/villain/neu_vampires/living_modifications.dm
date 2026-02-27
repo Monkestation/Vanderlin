@@ -114,6 +114,8 @@
 		return
 	if(town_only && !is_town_level(z))
 		return
+	if(is_blind())
+		return
 	if(stat >= UNCONSCIOUS)
 		return
 	if(clan)
@@ -128,31 +130,40 @@
 /// Check Eye witnesses to vampire stuff in an area.
 /// Called by the perpetrator
 /// atom/source = The atom/location of the thing of interest - what people are looking at
-/mob/living/proc/CheckEyewitness(atom/source, range = 7, affects_source = FALSE)
-	var/actual_range = max(1, round(range*(alpha/255)))
+/mob/living/proc/CheckEyewitness(atom/source, range = DEFAULT_MESSAGE_RANGE, affects_source = FALSE)
+	var/actual_range = max(1, round(range*(source.alpha/255)))
 	var/list/seenby = list()
 	var/turf/T = get_turf(src)
+	//anyone right next to us counts counts
 	for(var/mob/living/carbon/human/H in oviewers(1, src))
 		if(!H.affects_masquerade())
 			continue
+		//assuming they're not looking directly away
 		if(T != get_step(H, turn(H.dir, 180)))
 			seenby |= H
 
 	for(var/mob/living/carbon/human/H in viewers(actual_range, source))
 		if(H == src)
 			continue
-		if(!H.affects_masquerade())
-			continue
 		if(affects_source && H == source)
 			seenby |= H
 			continue
-		if(source.has_light_nearby() || H.has_nightvision() || get_dist(H, source) <= 1)
-			if(InCone(H))
-				seenby |= H
+		if(!H.affects_masquerade())
+			continue
+		if(!(source.has_light_nearby() || H.has_nightvision() || get_dist(H, source) <= 1))
+			continue
+		if(!H.can_see_cone(src))
+			continue
+		seenby |= H
 	return seenby
 
+/// Increases a vampire's detection value by a number of points.
+/// Usually I based the value off of the the number of eyewitnesses.
+/// If the vampire was the source of the eyewitness I decreased it by 1
 /mob/living/proc/vampire_detected(value, forced = FALSE)
-	if(!clan)
+	if(value <= 0)
+		return
+	if(!clan || istype(clan, /datum/clan/daewalker))
 		return
 	if(CheckZoneCoven(src))
 		return
@@ -161,8 +172,7 @@
 	COOLDOWN_START(src, detection_cooldown, 20 SECONDS)
 	detections += value
 	GLOB.vamp_detection += value
-	if(value > 0)
-		to_chat(src, span_boldannounce("DETECTED!"))
+	to_chat(src, span_boldannounce("DETECTED x[value]!"))
 
 
 /**
@@ -307,17 +317,19 @@
 	handle_bloodpool_effects()
 
 	// Coffin regeneration
-	var/total_damage = getBruteLoss() + getFireLoss()
 	var/obj/structure/closet/crate/coffin/coffin = loc
-	if(istype(coffin) && total_damage && (src in coffin.contents))
-		if(!HAS_TRAIT(src, TRAIT_DEATHCOMA))
+	if(istype(coffin) && (src in coffin.contents))
+		if(InCritical() && !HAS_TRAIT(src, TRAIT_DEATHCOMA))
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		heal_overall_damage(5, 5)
 		adjustToxLoss(-5)
-		if(bloodpool < maxbloodpool * 0.25)
-			set_bloodpool(min(maxbloodpool * 0.25, bloodpool + 10))
-	if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (total_damage <= 0 || (!istype(coffin) || !(src in coffin.contents))))
+		heal_wounds(25)
+		if(prob(3))
+			regenerate_limb(silent=FALSE)
+		blood_volume = max(blood_volume, min(BLOOD_VOLUME_SAFE, blood_volume + 10))
+		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 10)))
+	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!InCritical() || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
 

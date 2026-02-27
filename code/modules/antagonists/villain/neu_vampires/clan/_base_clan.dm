@@ -90,7 +90,7 @@ And it also helps for the character set panel
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
-	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose), H)
+	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -257,7 +257,7 @@ And it also helps for the character set panel
  * Arguments:
  * * vampire - Human losing the Clan.
  */
-/datum/clan/proc/on_lose(datum/source, mob/living/carbon/human/vampire)
+/datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
 	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
 
@@ -440,7 +440,7 @@ And it also helps for the character set panel
  */
 /mob/living/carbon/human/proc/set_clan_direct(datum/clan/new_clan)
 	var/datum/clan/previous_clan = clan
-	previous_clan?.on_lose(vampire = src)
+	previous_clan?.on_lose(src)
 	clan = new_clan
 	if (!new_clan)
 		return
@@ -472,7 +472,7 @@ And it also helps for the character set panel
 	// Convert typepaths to Clan singletons, or just directly assign if already singleton
 	var/datum/clan/new_clan = ispath(setting_clan) ? GLOB.vampire_clans[setting_clan] : setting_clan
 
-	previous_clan?.on_lose(vampire = src)
+	previous_clan?.on_lose(src)
 
 	clan = new_clan
 

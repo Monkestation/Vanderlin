@@ -13,6 +13,7 @@
 	var/list/needed_job
 	var/event_icon_state
 	var/minor_roleset = FALSE
+	///these events are secondary triggers that will only spawn when there are more than 45 players.
 	var/list/secondary_events = list(
 		/datum/round_event_control/antagonist/solo/aspirant,
 		/datum/round_event_control/antagonist/solo/maniac

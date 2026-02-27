@@ -751,7 +751,30 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .redtext				{color: #FF0000;}
 .clown					{color: #FF69Bf;	font-size: 3;	font-family: "Comic Sans MS", cursive, sans-serif;	font-weight: bold;}
 .his_grace				{color: #15D512;	font-family: "Courier New", cursive, sans-serif;	font-style: italic;}
-.hypnophrase			{color: #3bb5d3;	font-weight: bold;	animation: hypnocolor 1500ms infinite;}
+
+.hypnophrase			{color: #3bb5d3;	font-weight: bold;	animation: hypnocolor 1500ms infinite; animation-direction: alternate;}
+.reallybighypnophrase	{color: #3bb5d3;	font-weight: bold;	animation: hypnocolor 1500ms infinite; animation-direction: alternate; font-size: 180%;}
+@keyframes hypnocolor {
+	0% {
+    	color: hsl(0, 0%, 12.5%);
+	}
+
+	25% {
+    	color: hsl(265.8, 97.7%, 34.1%);
+	}
+
+	50% {
+    	color: hsl(272, 86.3%, 60%);
+	}
+
+	75% {
+		color: hsl(266.2, 69.6%, 36.1%);
+	}
+
+	100% {
+		color: hsl(191.9, 83.4%, 71.6%);
+	}
+}
 
 .phobia					{color: #dd0000;	font-weight: bold;}
 

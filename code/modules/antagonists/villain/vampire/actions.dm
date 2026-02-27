@@ -30,7 +30,7 @@
 		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is too damaged."))
 		return
 	if(victim.blood_volume > BLOOD_VOLUME_BAD)
-		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to sire [victim.p_them()]."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to be sired."))
 		return
 	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
 	if(Z?.revived)

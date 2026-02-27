@@ -52,15 +52,10 @@
 	// Heal different damage types
 	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume + vitae_cost-1, BLOOD_VOLUME_NORMAL)
+	owner.blood_volume = max(owner.blood_volume, min(BLOOD_VOLUME_NORMAL, owner.blood_volume + vitae_cost))
 
-	// Heal wounds (only at higher levels)
-	if(length(owner.get_wounds()))
-		var/wounds_to_heal = min(1, length(owner.get_wounds()))
-		for(var/i in 1 to wounds_to_heal)
-			var/datum/wound/wound = owner.get_wounds()[i]
-			wound.heal_wound(vitae_cost)
+	//this is quadratic so expect it to scale like crazy
+	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6)
 
 	if(level >= 3)
 		if(prob(20)) // 20% chance per pulse to show visible healing
@@ -85,11 +80,8 @@
 			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
-	if(level >= 7 && prob(10) && owner.regenerate_limbs(list(BODY_ZONE_HEAD)))
-		owner.visible_message(
-			span_warning("[owner]'s limbs regenerate!"),
-			span_warning("Your limbs regenerate themselves!")
-		)
+	if(level >= 7 && prob(5))
+		owner.regenerate_limb(silent = FALSE)
 
 	// Masquerade violation check
 
@@ -102,7 +94,7 @@
 	name = "Minor Bloodheal"
 	desc = "Slowly regenerate minor wounds using your vitae."
 	level = 1
-	vitae_cost = 5
+	vitae_cost = 6
 	duration_length = 4 SECONDS
 
 //BLOODHEAL 2
@@ -110,7 +102,7 @@
 	name = "Bloodheal"
 	desc = "Regenerate wounds at a steady pace."
 	level = 2
-	vitae_cost = 8
+	vitae_cost = 9
 	duration_length = 3.5 SECONDS
 
 //BLOODHEAL 3

@@ -9,7 +9,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 		TAG_WAR,
 	)
 	antag_datum = /datum/antagonist/vampire/lord/daewalker
-	antag_flag = ROLE_NBEAST
+	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = null
 	minor_roleset = TRUE
 	max_occurrences = 1

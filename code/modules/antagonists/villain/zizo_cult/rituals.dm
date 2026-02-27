@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
 	if(istype(target.patron, /datum/patron/inhumen/zizo))
-		target.blood_volume = BLOOD_VOLUME_MAXIMUM
+		target.blood_volume = BLOOD_VOLUME_NORMAL
 		to_chat(target, span_notice("My elixir of life is stagnant once again."))
 		qdel(src)
 		return

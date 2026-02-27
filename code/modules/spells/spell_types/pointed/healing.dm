@@ -44,6 +44,7 @@
 		cast_on.emote("scream")
 		return
 
+	var/datum/component/vampire_disguise/vampire_disguise = cast_on.GetComponent(/datum/component/vampire_disguise)
 	if(!is_profane)
 		if(HAS_TRAIT(cast_on, TRAIT_ASTRATA_CURSE))
 			cast_on.visible_message(span_danger("[cast_on] recoils in pain!"), span_userdanger("Divine healing shuns me!"))
@@ -56,16 +57,17 @@
 			cast_on.cursed_freak_out()
 			return
 		if(cast_on.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-			if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
-				cast_on.visible_message(span_warning("[cast_on] overpowers being burned!"), span_greentext("I overpower being burned!"))
+			if(!(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) && vampire_disguise?.disguised)) //vampire disguises are handled later
+				if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
+					cast_on.visible_message(span_warning("[cast_on] overpowers being burned!"), span_greentext("I overpower being burned!"))
+					return
+				cast_on.visible_message(span_danger("[cast_on] is burned by holy light!"), span_userdanger("I'm burned by holy light!"))
+				if(stun_undead)
+					cast_on.Paralyze(5 SECONDS)
+				cast_on.adjustFireLoss(base_healing)
+				cast_on.adjust_divine_fire_stacks(1)
+				cast_on.IgniteMob()
 				return
-			cast_on.visible_message(span_danger("[cast_on] is burned by holy light!"), span_userdanger("I'm burned by holy light!"))
-			if(stun_undead)
-				cast_on.Paralyze(5 SECONDS)
-			cast_on.adjustFireLoss(base_healing)
-			cast_on.adjust_divine_fire_stacks(1)
-			cast_on.IgniteMob()
-			return
 		if(((cast_on.real_name in GLOB.excommunicated_players) || (cast_on.real_name in GLOB.heretical_players)) && !HAS_TRAIT(cast_on, TRAIT_FANATICAL))
 			cast_on.visible_message(
 				span_warning("The angry Ten sear the flesh of [cast_on]! a foolish blasphemer and heretic!"),
@@ -76,6 +78,7 @@
 
 	var/conditional_buff = FALSE
 	var/situational_bonus = 10
+	var/situational_blood = 0
 	//this if chain is stupid, replace with variables on /datum/patron when possible?
 	if(isliving(owner))
 		var/mob/living/living_owner = owner
@@ -112,6 +115,7 @@
 				if(istype(get_turf(cast_on), /turf/open/water) || istype(get_turf(owner), /turf/open/water))
 					conditional_buff = TRUE
 					situational_bonus = 15
+				situational_blood += BLOOD_VOLUME_SURVIVE/2
 
 			if(/datum/patron/divine/ravox)
 				cast_on.visible_message(span_info("An air of righteous defiance rises near [cast_on]!"), span_notice("I'm filled with an urge to fight on!"))
@@ -140,7 +144,7 @@
 				cast_on.visible_message(span_info("An aura of clinical care encompasses [cast_on]!"), span_notice("I'm sewn back together by sacred medicine!"))
 				// pestra always heals a little more toxin damage and restores a bit more blood
 				cast_on.adjustToxLoss(-situational_bonus)
-				cast_on.blood_volume += BLOOD_VOLUME_SURVIVE/2
+				situational_blood += BLOOD_VOLUME_SURVIVE/2
 
 			if(/datum/patron/divine/malum)
 				cast_on.visible_message(span_info("A tempering heat is discharged out of [cast_on]!"), span_notice("I feel the heat of a forge soothing my pains!"))
@@ -213,10 +217,19 @@
 		to_chat(owner, span_greentext("Channeling my patron's power is easier in these conditions!"))
 		amount_healed += situational_bonus
 
+	if(vampire_disguise?.disguised) //vamps can pretend to be normal for a little bit
+		var/vitae_loss = amount_healed * (cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord) ? 0.3 : 0.6)
+		cast_on.adjust_bloodpool(-vitae_loss)
+		if(cast_on.bloodpool)
+			to_chat(cast_on, span_danger("My disguise holds at the cost of [round(vitae_loss)] vitae!"))
+		else
+			vampire_disguise.force_undisguise(cast_on)
+		return
+
 	SEND_SIGNAL(owner, COMSIG_LIVING_HEALED_OTHER, amount_healed)
 	cast_on.adjustToxLoss(-amount_healed)
 	cast_on.adjustOxyLoss(-amount_healed)
-	cast_on.blood_volume += blood_restoration
+	cast_on.blood_volume = max(cast_on.blood_volume, min(cast_on.blood_volume + blood_restoration + situational_blood, BLOOD_VOLUME_NORMAL))
 	if(!iscarbon(cast_on))
 		cast_on.adjustBruteLoss(-amount_healed)
 		cast_on.adjustFireLoss(-amount_healed)

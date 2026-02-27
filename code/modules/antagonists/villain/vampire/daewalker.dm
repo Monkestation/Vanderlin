@@ -16,13 +16,14 @@
 		TRAIT_SILVER_BLESSED,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
-		TRAIT_SIXTHSENSE,
+		TRAIT_BLINDFIGHTING,
 		TRAIT_DODGEEXPERT,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FEARLESS,
 		TRAIT_NOAMBUSH,
 		TRAIT_NOHYGIENE, // too cool to stink
 		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_NOPAINSTUN
 	)
 	antag_memory = "It's open season on all bloodsuckers. Nothing else matters.\n\
 		Avoid the Oratorium Throni Vacui. They know naught who they serve. Attack them as a last resort.\n\
@@ -118,12 +119,8 @@
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
 		return span_boldnotice("A deadite.")
-	if(get_dist(examiner, examined) > 3)
-		return
-	if(istype(examined_datum, /datum/antagonist/vampire))
-		return span_bloody("A suckhead.")
 	if(istype(examined_datum, /datum/antagonist/purishep))
-		return span_red("Silver-bloods.")
+		return span_red("Silverblood.")
 
 
 /datum/antagonist/vampire/lord/daewalker/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
@@ -142,9 +139,6 @@
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("The legally distinct vampire hunter!")
 
-
-/datum/antagonist/vampire/lord/daewalker/get_thralls()
-	return
 
 /datum/antagonist/vampire/lord/daewalker/greet()
 	to_chat(owner.current, span_silver( \

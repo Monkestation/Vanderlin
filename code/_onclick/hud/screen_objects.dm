@@ -762,7 +762,7 @@
 			iris.icon_state = "oeye_fixed"
 		else
 			iris.icon_state = "oeye"
-	iris.color = "#[human.get_eye_color()]"
+	iris.color = human.get_eye_color()
 	. += iris
 
 /atom/movable/screen/eye_intent/proc/toggle(mob/user)

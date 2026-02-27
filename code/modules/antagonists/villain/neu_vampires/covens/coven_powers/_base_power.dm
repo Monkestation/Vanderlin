@@ -562,8 +562,11 @@
 /datum/coven_power/proc/do_masquerade_violation(atom/target)
 	if(!violates_masquerade)
 		return
-	if(length(owner.CheckEyewitness(target ? target : owner, 7)))
-		owner.vampire_detected(1)
+	var/atom/focus = target || owner
+	var/witnesses = length(owner.CheckEyewitness(focus))
+	if(focus == owner)
+		witnesses-- // if you're the target, you need two people to see it for it to count
+	owner.vampire_detected(witnesses)
 
 /**
  * Overridable proc handling the spending of resources (vitae/blood)

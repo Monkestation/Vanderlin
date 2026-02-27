@@ -99,6 +99,9 @@
 	owner.update_sight()
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M) //updates eye icon
+	if(M.hud_used) // hud icon
+		var/atom/movable/screen/eye_intent/eyet = locate() in M.hud_used.static_inventory
+		eyet?.update_appearance(UPDATE_OVERLAYS)
 
 
 

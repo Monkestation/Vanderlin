@@ -8,7 +8,7 @@
 		TAG_VILLAIN,
 	)
 	roundstart = TRUE
-	antag_flag = ROLE_NBEAST
+	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 	denominator = 40
 
@@ -64,22 +64,8 @@
 /datum/round_event/antagonist/solo/vampires_and_werewolves/proc/add_vampire(datum/mind/antag_mind)
 	if(!antag_mind)
 		CRASH("add_vampire was called without an antag datum!")
-	if(ishuman(antag_mind.current))
-		var/mob/living/carbon/human/vampire = antag_mind.current
-		vampire.adv_hugboxing_cancel() // workaround for pilgrims and adventurers being in the adv_class pick menu
 	if(!leader)
-		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
-		J?.adjust_current_positions(-1)
-		if(SSmapping.config.map_name != "Voyage")
-			antag_mind.current.unequip_everything()
 		antag_mind.add_antag_datum(/datum/antagonist/vampire/lord)
 		leader = TRUE
-		return
-	else
-		if(!antag_mind.has_antag_datum(/datum/antagonist/vampire))
-			var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
-			J?.adjust_current_positions(-1)
-			if(SSmapping.config.map_name != "Voyage")
-				antag_mind.current.unequip_everything()
-			antag_mind.add_antag_datum(/datum/antagonist/vampire/lords_spawn)
-		return
+	else if(!antag_mind.has_antag_datum(/datum/antagonist/vampire))
+		antag_mind.add_antag_datum(/datum/antagonist/vampire/lords_spawn)

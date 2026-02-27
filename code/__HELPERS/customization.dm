@@ -13,7 +13,7 @@
 /mob/living/carbon/human/proc/get_eye_color()
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
 	if(!eyes)
-		return "FFFFFF"
+		return "#FFFFFF"
 	return eyes.eye_color
 
 /mob/living/carbon/human/proc/get_chest_color()

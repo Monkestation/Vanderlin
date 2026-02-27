@@ -1,6 +1,6 @@
 /datum/coven/celerity
 	name = "Celerity"
-	desc = "Boosts your speed. Violates Masquerade."
+	desc = "Boosts your speed."
 	icon_state = "celerity"
 	power_type = /datum/coven_power/celerity
 

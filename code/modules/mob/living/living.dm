@@ -2543,12 +2543,12 @@
 			found_ping(get_turf(potential_track), client, "hidden")
 			potential_track.handle_revealing(src)
 
-/proc/found_ping(atom/A, client/C, state)
+/proc/found_ping(atom/A, client/C, state, duration = 3 SECONDS)
 	if(!A || !C || !state)
 		return
 	var/image/I = image('icons/effects/effects.dmi', A, state)
 	I.plane = ABOVE_LIGHTING_PLANE
-	flick_overlay(I, list(C), 3 SECONDS)
+	flick_overlay(I, list(C), duration)
 
 /**
  * look_up Changes the perspective of the mob to any openspace turf above the mob
