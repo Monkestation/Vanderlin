@@ -174,7 +174,7 @@
 			/obj/item/weapon/sword/long/shotel/iron = 2,
 			/obj/item/weapon/sword/sabre/dadao/iron = 4,
 			/obj/item/weapon/whip/urumi/iron = 3,
-			/obj/item/weapon/knife/dagger/kukri/iron = 3,
+			/obj/item/weapon/knife/hunting/kukri/iron = 3,
 			/obj/item/weapon/sword/scimitar/wodao/iron = 4,
 			/obj/item/weapon/sword/scimitar/messer = 10,
 			/obj/item/weapon/mace/elvenclub = 7,
