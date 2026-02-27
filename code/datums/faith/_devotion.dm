@@ -65,7 +65,7 @@
 /datum/devotion/proc/initialize_hud()
 	holder_mob?.hud_used?.initialize_bloodpool()
 	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
-	update_devotion(0)
+	update_devotion(0) //hack to force meter to reflect the starting devotion
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
