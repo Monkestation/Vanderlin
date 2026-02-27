@@ -11,7 +11,7 @@ export const defaultSettings: SettingsState = {
   statFontSize: 13,
   statLinked: true,
   statTabsStyle: 'default',
-  theme: 'light',
+  theme: 'dark',
   version: 1,
   view: {
     visible: false,

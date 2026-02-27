@@ -128,8 +128,8 @@ img {
 }
 
 .top-item.unread {
-  background-color: hsl(0, 53%, 45%);
-  color: white;
+  background-color: #0668b8;
+  color: rgb(0, 0, 0);
 }
 
 .statcontent {
@@ -299,6 +299,11 @@ body.dark {
 .dark #under-content,
 .dark #under-topbar {
   background-color: hsl(0, 0%, 8%);
+}
+
+.dark .top-item.unread {
+  background-color: hsl(0, 53%, 45%);
+  color: white;
 }
 
 .dark .grid-item {

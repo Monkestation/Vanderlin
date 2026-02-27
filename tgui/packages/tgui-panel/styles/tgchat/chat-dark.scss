@@ -11,21 +11,16 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  font-family: Pterra;
 }
 
 body {
   background: #c9c1ba;
+  font-family: Pterra;
   font-size: 13px;
   line-height: 1.2;
   overflow-x: hidden;
   overflow-y: scroll;
   word-wrap: break-word;
-}
-
-em {
-  font-style: normal;
-  font-weight: bold;
 }
 
 img {
@@ -293,6 +288,11 @@ h2.alert {
   color: hsl(28, 12.2%, 75.88%);
 }
 
+em {
+  font-style: normal;
+  font-weight: bold;
+}
+
 .ooc {
   color: hsl(0, 0%, 77.25%);
 }
@@ -311,6 +311,10 @@ h2.alert {
 
 .admin {
   color: hsl(223, 100%, 61%);
+}
+
+.name {
+  font-weight: bold;
 }
 
 .chat_box {
@@ -707,10 +711,6 @@ h2.alert {
   font-size: 60%;
 }
 
-.smaller {
-  font-size: 90%;
-}
-
 .slightly_larger {
   font-size: 115%;
 }
@@ -813,18 +813,6 @@ h2.alert {
 
 .bone {
   color: hsl(39, 32%, 84%);
-}
-
-.dead {
-  color: hsl(272, 60%, 69%);
-}
-
-.dead {
-  color: hsl(272, 60%, 69%);
-}
-
-.dead {
-  color: hsl(272, 60%, 69%);
 }
 
 .silver{
