@@ -11,7 +11,7 @@
 
 	weight = 12
 
-	denominator = 20
+	denominator = 15
 
 	base_antags = 1
 	maximum_antags = 4

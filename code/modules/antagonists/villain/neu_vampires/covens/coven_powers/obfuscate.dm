@@ -242,7 +242,7 @@
 //VANISH FROM THE MIND'S EYE - Instant stealth activation + memory wipe
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye
 	name = "Vanish from the Mind's Eye"
-	desc = "Disappear from plain view instantly, and wipe your presence from recent memory."
+	desc = "Disappear from plain view instantly, and wipe your presence from the last 30 seconds of memory."
 	level = 4
 	cooldown_length = 5 MINUTES
 	duration_length = 30 SECONDS
@@ -265,13 +265,14 @@
 		if(HAS_TRAIT(viewer, TRAIT_COVEN_RESISTANT) || viewer.can_block_magic(MAGIC_RESISTANCE_MIND, 1))
 			to_chat(viewer, span_boldannounce("You resist [src]'s hypnosis!"))
 			found_ping(viewer, owner.client, "trap")
+			log_combat(owner, viewer, "used [name] on", addition = "and FAILED")
 			continue
 
 		bordered_message(viewer, list(
 			"<h1>[span_hypnophrase("<center>FORGET</center>")]</h1>",
-			span_mind_control("<center>You have forgotten the last minute of your memory.</center>")
+			span_mind_control("<center>You have forgotten the last 30 seconds of your memory.</center>")
 		))
-
+		log_combat(owner, viewer, "used [name] on", addition = "and SUCCEEDED. Their memories from the last 30 seconds are wiped.")
 		if(viewer.cmode)
 			viewer.toggle_cmode()
 		viewer.flash_fullscreen("blackflash")
