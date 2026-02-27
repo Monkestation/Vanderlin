@@ -1,7 +1,7 @@
 //the mooks
 /datum/job/advclass/mercenary/gronn
-	title = "Gronnic Privateer"
-	tutorial = "You are one of many upstarts from Gronn, who sailed from the coastal capital of Danheim to the southern beaches of Azuria in search of a more... honest means of profit than the Sea Raiders of infamy."
+	title = "Osslandic Privateer"
+	tutorial = "You are one of many upstarts from Ossland, who sailed from the coastal capital of the north to the southern beaches of the inland sea in search of a more... honest means of profit than the Sea Raiders of infamy."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
@@ -28,7 +28,7 @@
 	)
 
 /datum/job_pack/gronn/grunt
-	name = "Leðurháls - Byrine Grunt"
+	name = "Leðurháls - Grunt"
 	pack_skills = list(
 		/datum/skill/combat/swords = 4,
 		/datum/skill/combat/shields = 4,
@@ -140,7 +140,7 @@
 //the scary mook
 /datum/job/advclass/mercenary/gronnheavy
 	title = "Fjall Járnklæddur"
-	tutorial = "Even within Fjall, few bear witness to the Horned Visages of the Járnklæddur; Ironclad warriors who stand against the undead armies that rise out of the 'Red Blizzard'. Those who do not have the blessing of the Iskarn Shamans within the Northern Empty oft-seek the protection of the Járnklæddur, despite their steep costs."
+	tutorial = "Even within the north, few bear witness to the Horned Visages of the Járnklæddur; Ironclad warriors who are thought to reincarnate into a divinely blessed species - a rarity among the northmen. "
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	total_positions = 1 //Hopefully this works.
@@ -199,8 +199,8 @@
 
 //the special mooks
 /datum/job/advclass/mercenary/shaman
-	title = "Atgervi Shaman"
-	tutorial = "You are a Shaman of the Fjall, The Northern Empty. Shamans are savage combatants who commune with the Ecclesical Beast Gods through ritualistic violence, rather than idle prayer."
+	title = "Osslandic Cleric-Priest"
+	tutorial = "You are a cleric-priest of the northern hunters. You revere the four aspects mirrored in the ceremonial claws: The Traveler. The Hunter. The Woods. The Skull."
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervishaman
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL

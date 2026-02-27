@@ -144,8 +144,8 @@
 //.............. Gronn Platelegs .................//
 
 /obj/item/clothing/pants/platelegs/iron/gronn
-	name = "gronn norsii iron chausses"
-	desc = "Iron chausses with an added layer of leather for comfort and padding. The knees are adorned with a skull-like shape, reminscent of the moon."
+	name = "osslandic iron chausses"
+	desc = "Iron chausses with an added layer of leather for comfort and padding. The knees are adorned with a skull-like shape, reminscent of the hunt.
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnplatepants"

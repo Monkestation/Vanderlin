@@ -558,10 +558,10 @@
 
 //............... Gronn Heavy Helmet ...............//
 /obj/item/clothing/head/helmet/heavy/bucket/gronn
-	name = "gronn norsii horned helmet"
-	desc = "One of Gronn's infamous horned helms of solid iron. \
-		Styled after the appearance of invading knights of legend from the Northern Empty, \
-		brutal and bare, it is a reminder of a time before there was snow."
+	name = "osslandic horned helmet"
+	desc = "A horned helms of solid iron. \
+		A suitable replacement for the precious skull-helms worn in Ossland. \
+		For of course, to have your skull-helm smashed is the highest of disrespects."
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/gronn.dmi'
 	bloody_icon = 'icons/effects/blood64x64.dmi'

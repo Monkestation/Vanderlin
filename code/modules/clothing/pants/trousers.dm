@@ -162,7 +162,7 @@
 
 //gronn trou
 /obj/item/clothing/pants/trou/leather/splint/gronn
-	name = "gronn byrine chausses"
+	name = "osslandic chain chausses"
 	desc = "A pair of chain-wrapped pants with a leather subligar, ensuring both protection and comfort."
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
@@ -170,9 +170,9 @@
 	item_state = "gronnchainpants"
 
 /obj/item/clothing/pants/trou/leather/gronn
-	name = "gronnic fur pants"
+	name = "osslandic fur pants"
 	desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
-			Those of Gronn adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
+			Those of Ossland adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
 	icon_state = "gronnleatherpants"
 	item_state = "gronnleatherpants"
 	armor = ARMOR_GRONN_LIGHT

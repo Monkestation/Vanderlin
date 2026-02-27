@@ -1,14 +1,14 @@
 
 /obj/item/clothing/armor/chainmail/hauberk/atgervi
-	name = "vagarian hauberk"
-	desc = "The pride of the Hammerhold mercenaries a well crafted blend of chain and leather into a dense protective coat."
+	name = "dwarven-make hauberk"
+	desc = "The pride of mercenaries from the Dwarven Federation, a well crafted blend of chain and leather into a dense protective coat."
 	icon_state = "atgervi_raider_mail"
 	item_state = "atgervi_raider_mail"
 	max_integrity = 400
 
 /obj/item/clothing/armor/leather/heavy/atgervi
-	name = "shamanic coat"
-	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
+	name = "shaman's coat"
+	desc = "A furred protective coat, often made by hand from a beast killed in the bearer's hunt."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
 
@@ -26,7 +26,7 @@
 
 /obj/item/clothing/gloves/plate/atgervi
 	name = "beast claws"
-	desc = "A menacing pair of plated claws, A closely protected tradition of the Shamans. The four claws embodying the four great beasts. Decorated with symbols of the gods they praise and the Gods they reject."
+	desc = "A menacing pair of plated claws, a ceremonial weapon of the Osslandic hunters. The four claws symbolize the four godly aspects they revere."
 	icon_state = "atgervi_shaman_gloves"
 	item_state = "atergvi_shaman_gloves"
 
@@ -45,7 +45,7 @@
 
 /obj/item/clothing/head/helmet/leather/saiga/atgervi
 	name = "moose hood"
-	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans, To slay a Grinning moose in the final hunt alone and fashion a hood from its head."
+	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. A suitable memorial for a worthy beast."
 	icon_state = "atgervi_shaman"
 	item_state = "atgervi_shaman"
 	flags_inv = HIDEEARS|HIDEFACE
@@ -218,10 +218,10 @@
 
 
 /obj/item/clothing/head/helmet/bascinet/atgervi/gronn
-	name = "gronnic ravager helm"
-	desc = "A helmet of hardened leather with a carved animal skull to appear similar to a human; a unique design of The Northern Empty. \
-			Its visage is said in Iskarn to scare the spirits of those defeated in the battlefield \
-			and preventing those of Necra and 'The Moose' from haunting them."
+	name = "osslandic skull-helm"
+	desc = "A helmet of hardened leather with a carefully preserved animal skull. \
+			The skull integrated is a trophy of the bearer's great hunt, and a symbol of their reincarnation after death."
+
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnleatherhelm"
@@ -232,15 +232,15 @@
 	worn_y_dimension = 32
 
 /obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
-	name = "gronnic ownel helmet"
+	name = "osslandic scout's helmet"
 	desc = "A full helmet that adequately protect the eyes and head; \
-			The slits are decorated with a harsh gold dye - it is rumoured in Gronn to grant one the ability to see as keenly as an owl."
+			The slits are decorated with a harsh gold dye - it is rumoured in Ossland to grant one the ability to see as keenly as The Hunter himself."
 	icon_state = "gronnhelm"
 	item_state = "gronnhelm"
 
 /obj/item/clothing/armor/brigandine/gronn
-	name = "gronn byrine hauberk"
-	desc = "A chain shirt of Gronnic design with a leather coat layered over, \
+	name = "osslandic chain hauberk"
+	desc = "A chain shirt of Osslandic design with a leather coat layered over, \
 			offering additional protection and superior movement. It is often used by sea raiders."
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
