@@ -21,7 +21,7 @@
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/farming = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/crafting = 4,

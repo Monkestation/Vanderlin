@@ -37,7 +37,7 @@
 
 	var/amulet_found = FALSE
 	for(var/obj/item/clothing/neck/current_item in user.get_equipped_items(TRUE))
-		if(current_item.type in list(/obj/item/clothing/neck/psycross/silver/necra))
+		if(current_item.type in list(/obj/item/clothing/neck/psycross/silver/divine/necra))
 			amulet_found = TRUE
 
 	if(!amulet_found)
@@ -63,7 +63,7 @@
 
 /datum/objective/personal/listen_whispers/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, OBJECTIVE_TRAIT)
 
 /datum/objective/personal/listen_whispers/update_explanation_text()
 	explanation_text = "Necra wants you to understand death better. Spend at least [time_required / (1 MINUTES)] minutes in the church listening to the whispers of the dead while wearing an amulet of Necra."

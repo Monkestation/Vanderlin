@@ -204,7 +204,7 @@
 	var/message = ""
 	message = pick_list_replacements("maniac.json", "dreamer_ahelp")
 	to_chat(target, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-	to_chat(target, span_adminsay("Admin PM from-<b><span style='color: #0000EE; text-decoration: underline;'>[fakemin]</span></b>: [message]"))
+	to_chat(target, span_adminsay("ADMIN PM from-<b><span style='color: #0000EE; text-decoration: underline;'>[fakemin]</span></b>: [message]"))
 	to_chat(target, span_adminsay("<i>Click on the administrator's name to [pick("DIE", "CRY", "RISE", "WAKE UP")].</i>"))
 	SEND_SOUND(target, sound('sound/adminhelp.ogg'))
 

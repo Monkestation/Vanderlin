@@ -27,7 +27,7 @@
 	mind_traits = list(
 		TRAIT_KNOW_INQUISITION_DOORS
 	)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
 	)
@@ -397,7 +397,7 @@
 						return
 
 				if(HAS_TRAIT_FROM(src, TRAIT_CONFESSED_FOR, held_confession.bad_type))
-					visible_message(span_warning("[name] has already confessed for this!"), "I have confessed this!")
+					say("I have confessed!", forced = TRUE)
 					return
 				ADD_TRAIT(src, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
 				ADD_TRAIT(src, TRAIT_CONFESSED_FOR, held_confession.bad_type)

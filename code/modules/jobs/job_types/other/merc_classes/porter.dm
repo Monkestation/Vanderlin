@@ -28,7 +28,7 @@
 		/datum/skill/misc/stealing = 2,
 		/datum/skill/misc/lockpicking = 2,
 		//Jack of All Trade, Master of None.
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/labor/fishing = 3,
 		/datum/skill/labor/butchering = 3,

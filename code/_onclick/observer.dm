@@ -47,8 +47,8 @@
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		ShiftClickOn(clicked_atom, modifiers)
 		return
-	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		AltClickNoInteract(src, clicked_atom, modifiers)
+	if(LAZYACCESS(modifiers, ALT_CLICKED) && LAZYACCESS(modifiers, RIGHT_CLICK))
+		AltRightClickOn(clicked_atom, modifiers)
 		return
 	if(LAZYACCESS(modifiers, CTRL_CLICKED))
 		CtrlClickOn(clicked_atom, modifiers)

@@ -28,7 +28,7 @@
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/craft/tanning = 1

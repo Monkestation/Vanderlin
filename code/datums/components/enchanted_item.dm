@@ -25,22 +25,23 @@
 	var/decay_timer
 
 /datum/component/enchanted_weapon/Initialize(
-	duration = 15 MINUTES,
-	refresh_count = 4,
-	refresh_skill = /datum/skill/magic/arcane,
-	skill_threshold = SKILL_LEVEL_JOURNEYMAN,
-	enchant_type = SEARING_BLADE_ENCHANT,
-	current_user,
+	n_duration = 15 MINUTES,
+	n_refresh_count = 4,
+	n_refresh_skill = /datum/skill/magic/arcane,
+	n_skill_threshold = SKILL_LEVEL_JOURNEYMAN,
+	n_enchant_type = SEARING_BLADE_ENCHANT,
+	n_current_user,
 )
 	if(!istype(parent, /obj/item/weapon))
 		return COMPONENT_INCOMPATIBLE
 
-	src.duration = duration
-	src.refresh_count = refresh_count
-	src.refresh_skill = refresh_skill
-	src.enchant_type = enchant_type
-	if(current_user)
-		src.current_user = WEAKREF(current_user)
+	duration = n_duration
+	refresh_count = n_refresh_count
+	refresh_skill = n_refresh_skill
+	skill_threshold = n_skill_threshold
+	enchant_type = n_enchant_type
+	if(n_current_user)
+		current_user = WEAKREF(n_current_user)
 
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
@@ -59,6 +60,8 @@
 			I.add_filter(FORCE_FILTER, 2, outline_filter(1, "#9400D3"))
 		if(SEARING_BLADE_ENCHANT)
 			I.add_filter(SEARING_FILTER, 2, outline_filter(1, "#64af18"))
+		if(DIVINE_FIRE_ENCHANT)
+			I.add_filter(DIVINE_FILTER, 2, outline_filter(1, "#dddddd"))
 		if(DURABILITY_ENCHANT)
 			I.modify_max_integrity(I.max_integrity + DURABILITY_INCREASE)
 			I.add_filter(DURABILITY_FILTER, 2, outline_filter(1, "#808080"))
@@ -108,6 +111,8 @@
 			I.remove_filter(FORCE_FILTER)
 		if(SEARING_BLADE_ENCHANT)
 			I.remove_filter(SEARING_FILTER)
+		if(DIVINE_FIRE_ENCHANT)
+			I.remove_filter(DIVINE_FILTER)
 		if(DURABILITY_ENCHANT)
 			I.modify_max_integrity(I.max_integrity - DURABILITY_INCREASE, can_break = FALSE)
 			I.remove_filter(DURABILITY_FILTER)
@@ -124,12 +129,15 @@
 	current_user = null
 
 /datum/component/enchanted_weapon/proc/on_examine(datum/source, mob/user, list/examine_list)
-	if(enchant_type == SEARING_BLADE_ENCHANT)
-		examine_list += "This weapon is enchanted with a green flame enchantment."
-	else if(enchant_type == FORCE_BLADE_ENCHANT)
-		examine_list += "This weapon is enchanted with a force blade enchantment."
-	else if(enchant_type == DURABILITY_ENCHANT)
-		examine_list += "This weapon is enchanted with a durability enchantment."
+	switch(enchant_type)
+		if(SEARING_BLADE_ENCHANT)
+			examine_list += "This weapon is enchanted with a green flame enchantment."
+		if(FORCE_BLADE_ENCHANT)
+			examine_list += "This weapon is enchanted with a force blade enchantment."
+		if(DURABILITY_ENCHANT)
+			examine_list += "This weapon is enchanted with a durability enchantment."
+		if(DIVINE_FIRE_ENCHANT)
+			examine_list += "This weapon is enchanted with a divine flame enchantment."
 	examine_list += "It will last for [timeleft(decay_timer) / 10] more seconds."
 
 /datum/component/enchanted_weapon/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
@@ -137,8 +145,18 @@
 		return
 	if(enchant_type == SEARING_BLADE_ENCHANT)
 		if(isliving(target))
-			var/mob/living/M = target
-			M.adjustFireLoss(SEARING_BLADE_DAMAGE)
-			to_chat(M, span_warning("Flames leaps from [source] and singes you!"))
+			var/mob/living/target_mob = target
+			target_mob.adjustFireLoss(SEARING_BLADE_DAMAGE)
+			target_mob.visible_message(span_warning("Flames leap from [source], burning [target_mob]!"), span_warning("Flames leap from [source] and singes you!"))
+			// Permanent temporary solution until I figure out how to hack a dynamic on mob sprites
+			// Bypass parry & dodge btw.
+	else if(enchant_type == DIVINE_FIRE_ENCHANT)
+		if(isliving(target))
+			var/mob/living/target_mob = target
+			var/damage_amt = DIVINE_FIRE_DAMAGE
+			if(source.has_enchantment(/datum/enchantment/silver))
+				damage_amt = damage_amt*1.5
+			target_mob.adjustFireLoss(damage_amt)
+			target_mob.visible_message(span_warning("Divine fire leaps from [source], burning [target_mob]!"), span_warning("Divine fire leaps from [source] and singes you!"))
 			// Permanent temporary solution until I figure out how to hack a dynamic on mob sprites
 			// Bypass parry & dodge btw.

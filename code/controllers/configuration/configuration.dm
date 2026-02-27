@@ -54,6 +54,7 @@
 	LoadMOTD()
 	LoadPolicy()
 	LoadChatFilter()
+	LoadRelays()
 
 	if(Master)
 		Master.OnConfigLoad()
@@ -109,7 +110,7 @@
 	stack = stack + filename_to_test
 
 	log_config("Loading config file [filename]...")
-	var/list/lines = world.file2list("[directory]/[filename]")
+	var/list/lines = file2list("[directory]/[filename]")
 	var/list/_entries = entries
 	for(var/L in lines)
 		L = trim(L)
@@ -250,7 +251,7 @@ Example config:
 /datum/controller/configuration/proc/loadmaplist(filename)
 	log_config("Loading config file [filename]...")
 	filename = "[directory]/[filename]"
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = file2list(filename)
 
 	var/datum/map_config/currentmap = null
 	for(var/t in Lines)
@@ -314,7 +315,7 @@ Example config:
 
 	log_config("Loading config file in_character_filter.txt...")
 
-	for(var/line in world.file2list("[directory]/in_character_filter.txt"))
+	for(var/line in file2list("[directory]/in_character_filter.txt"))
 		if(!line)
 			continue
 		if(findtextEx(line,"#",1,2))
@@ -328,3 +329,20 @@ Example config:
 //Message admins when you can.
 /datum/controller/configuration/proc/DelayedMessageAdmins(text)
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(message_admins), text), 0)
+
+/datum/controller/configuration/proc/LoadRelays()
+	var/config_path = "[directory]/relays.toml"
+	if(!fexists(file(config_path)))
+		log_config("relays.toml does not exist.")
+		return
+
+	var/list/result = rustg_raw_read_toml_file(config_path)
+	if(!result["success"])
+		log_config("Notify Server Operators: The relay config (relays.toml) is not configured correctly! [result["content"]]")
+		return
+
+	var/list/content = json_decode(result["content"])
+	if(!length(content))
+		return
+
+	GLOB.relay_config = content["relay"]

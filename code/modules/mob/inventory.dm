@@ -233,7 +233,7 @@
 	I.dropped(src)
 	return FALSE
 
-/mob/proc/drop_all_held_items()
+/mob/proc/drop_all_held_items(silent=TRUE)
 	. = FALSE
 	for(var/obj/item/I in held_items)
 		. |= dropItemToGround(I)

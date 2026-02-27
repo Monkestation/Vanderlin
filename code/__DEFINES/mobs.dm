@@ -32,13 +32,12 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
-#define BLOOD_VOLUME_MAXIMUM 2240
-#define BLOOD_VOLUME_SLIME_SPLIT 1120
-#define BLOOD_VOLUME_NORMAL 1120
-#define BLOOD_VOLUME_SAFE 950
-#define BLOOD_VOLUME_OKAY 672
-#define BLOOD_VOLUME_BAD 448
-#define BLOOD_VOLUME_SURVIVE 244
+#define BLOOD_VOLUME_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
+#define BLOOD_VOLUME_NORMAL		1200
+#define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
+#define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
+#define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
+#define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -318,7 +317,7 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.2	//factor at which mob nutrition decreases
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.

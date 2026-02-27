@@ -114,6 +114,8 @@
 		body += "<a href='?_src_=holder;[HrefToken()];showtriumphs=add;mob=[REF(M)]'>\[Check Triumphs\]</a> "
 		body += "<br>"
 		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
 
 		var/patron = ""
 		if(isliving(M))
@@ -336,6 +338,20 @@
 	M.revive(ADMIN_HEAL_ALL)
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
+
+/datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
+	set name = "Trigger Subclass Menu"
+	set desc = "Triggers the subclass menu of a mob."
+	set category = "Admin.Admin"
+
+	if(!check_rights())
+		return
+	if(tgui_alert(usr, "This will trigger a no adv class restriction triumph if the player has bought it.", "Confirm", list("Proceed", "Cancel")) != "Proceed")
+		return FALSE
+
+	SSrole_class_handler.setup_class_handler(mob)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(mob)]!</span>")
+	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(mob)].")
 
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Curse"
@@ -1099,11 +1115,7 @@
 			HL.mind.set_assigned_role(/datum/job/villager)
 			HL.job = "Ex-Priest"
 
-
-			remove_verb(HL, /mob/living/carbon/human/proc/coronate_lord)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchexcommunicate)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchcurse)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchannouncement)
+			HL.remove_priest_verbs()
 			priest_job?.remove_spells(HL)
 			GLOB.excommunicated_players |= HL.real_name
 			HL.cleric?.excommunicate()
@@ -1117,10 +1129,7 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_priest()
 		devotion.grant_to(M)
-	add_verb(M, /mob/living/carbon/human/proc/coronate_lord)
-	add_verb(M, /mob/living/carbon/human/proc/churchexcommunicate)
-	add_verb(M, /mob/living/carbon/human/proc/churchcurse)
-	add_verb(M, /mob/living/carbon/human/proc/churchannouncement)
+	M.give_priest_verbs()
 	removeomen(OMEN_NOPRIEST)
 	priority_announce("Astrata has anointed [M.real_name] as the new head of the Church of the Ten!", title = "Astrata Shines!", sound = 'sound/misc/bell.ogg')
 

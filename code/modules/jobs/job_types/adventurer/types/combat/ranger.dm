@@ -28,7 +28,7 @@
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/misc/climbing = 4,
 		/datum/skill/labor/taming = 2,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/craft/traps = 1,
 		/datum/skill/misc/athletics = 2,

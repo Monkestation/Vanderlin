@@ -98,3 +98,6 @@
 
 /// This is used as a reference point for dynamic wounds, so it's better off as a define.
 #define ARTERY_LIMB_BLEEDRATE 25
+
+/// Multiplier applied to reagents in blood when factoring in total volume for "purity"
+#define BLOODLETTING_MULT 5

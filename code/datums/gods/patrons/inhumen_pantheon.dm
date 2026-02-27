@@ -1,8 +1,7 @@
 /datum/patron/inhumen
-	name = null
+	abstract_type = /datum/patron/inhumen
 	associated_faith = /datum/faith/inhumen_pantheon
 
-	profane_words = list()
 	confess_lines = list(
 		"PSYDON AND HIS CHILDREN ARE THE DEMIURGE!",
 		"THE TEN ARE WORTHLESS COWARDS!",
@@ -47,8 +46,8 @@
 	flaws = "Rage, Hatred, Bloodthirst"
 	worshippers = "Greenskins, The Revenge-Driven, Sadists, Misogynists"
 	sins = "Compassion, Frailty, Servility"
-	boons = "You are drawn to the flavour of raw flesh and organs, and may consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER)
+	boons = "You are drawn to the flavour of raw flesh, organs, and blood. You may consume without worry."
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER)
 	devotion_holder = /datum/devotion/inhumen/graggar
 	confess_lines = list(
 		"GRAGGAR IS THE BEAST I WORSHIP!",
@@ -100,13 +99,15 @@
 	worshippers = "Broken Minds, Overshared Secrets, Space-Faring Species Like You, Misanthropes"
 	sins = "The Unseen, Secrets, Worthless Pigs"
 	boons = "You are drawn to the flavour of other followers of Zizo, and may see them when you consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_CABAL)
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER, TRAIT_CABAL)
 	confess_lines = list(
 		"WHERE AM I!",
 		"NONE OF THIS IS REAL!",
 		"WHO AM I WORSHIPPING?!"
 	)
-	preference_accessible = FALSE
+
+/datum/patron/inhumen/graggar_zizo/preference_accessible(datum/preferences/prefs)
+	return FALSE
 
 /datum/patron/inhumen/graggar_zizo/can_pray(mob/living/follower)
 	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)

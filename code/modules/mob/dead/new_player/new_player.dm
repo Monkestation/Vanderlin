@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
+GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 
 /mob/dead/new_player
 	flags_1 = NONE
@@ -102,6 +102,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		return FALSE
 
 	var/datum/preferences/P = client.prefs
+	// 0 Validation on any of this
 	P.real_name = char_data["real_name"]
 	P.gender = char_data["gender"]
 	P.age = char_data["age"]
@@ -125,6 +126,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	P.default_slot = char_data["slot"]
 	multi_ready_index = index
+
+	if(!P.job_preferences)
+		P.job_preferences = list()
+
 	return TRUE
 
 /mob/dead/new_player/Topic(href, href_list[])
@@ -144,15 +149,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 		relevant_cap = max(hpc, epc)
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src, 4)
+		client.prefs.show_choices(src, 4)
 		return 1
 
 	if(href_list["show_options"])
-		client.prefs.ShowChoices(src, 1)
+		client.prefs.show_choices(src, 1)
 		return 1
 
 	if(href_list["show_keybinds"])
-		client.prefs.ShowChoices(src, 3)
+		client.prefs.show_choices(src, 3)
 		return 1
 
 	if(href_list["ready"])
@@ -174,6 +179,22 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 	if(client && client.prefs.is_active_migrant())
 		to_chat(usr, span_boldwarning("You are in the migrant queue."))
 		return
+
+	if(href_list["PossessVessel"])
+		var/id = href_list["PossessVessel"]
+		if(!client.is_whitelisted(id))
+			to_chat(src, span_boldwarning("You are not whitelisted for [id]."))
+			return
+		var/list/group = GLOB.active_ghost_vessels[id]
+		if(!length(group))
+			to_chat(src, span_warning("No vessels of that type are available."))
+			return
+		var/mob/living/carbon/human/vessel_mob = pick(group)
+		var/datum/component/ghost_vessel/gc = vessel_mob.GetComponent(/datum/component/ghost_vessel)
+		if(!gc || !gc.being_offered)
+			to_chat(src, span_warning("That vessel is no longer available."))
+			return
+		gc.possess_vessel(src)
 
 	if(href_list["late_join"])
 		if(!SSticker?.IsRoundInProgress())
@@ -314,7 +335,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 //used for latejoining
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
+	if(QDELETED(src))
+		return JOB_UNAVAILABLE_GENERIC
+
 	var/datum/job/job = SSjob.GetJob(rank)
+	var/datum/preferences/player_prefs = client.prefs
 	//TODO: This fucking sucks.
 
 	if(is_skeleton_knight_job(job)) //has to be first because it's a subtype of skeleton
@@ -350,39 +375,47 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 
 	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
 		return JOB_UNAVAILABLE_SLOTFULL
+
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
+
 	if(CONFIG_GET(flag/usewhitelist))
 		if(job.whitelist_req && (!client.whitelisted()))
 			return JOB_UNAVAILABLE_GENERIC
 
 	if(is_role_banned(client.ckey, job.title))
 		return JOB_UNAVAILABLE_BANNED
-	if(is_race_banned(client.ckey, client.prefs.pref_species.id))
+
+	if(is_race_banned(client.ckey, player_prefs.pref_species.id))
 		return JOB_UNAVAILABLE_RACE_BANNED
+
 	if(job.banned_leprosy && is_misc_banned(client.ckey, BAN_MISC_LEPROSY))
 		return JOB_UNAVAILABLE_BANNED
+
 	if(job.banned_lunatic && is_misc_banned(client.ckey, BAN_MISC_LUNATIC))
 		return JOB_UNAVAILABLE_BANNED
 
-	if(QDELETED(src))
-		return JOB_UNAVAILABLE_GENERIC
 	if(!job.player_old_enough(client))
 		return JOB_UNAVAILABLE_ACCOUNTAGE
+
 	if(job.required_playtime_remaining(client))
 		return JOB_UNAVAILABLE_PLAYTIME
+
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if((length(job.allowed_races) && !(client.prefs.pref_species.id in job.allowed_races)) || \
-		(length(job.blacklisted_species) && (client.prefs.pref_species.id in job.blacklisted_species)))
-		if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-			return JOB_UNAVAILABLE_RACE
-	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
+
+	if(!client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL) && !job.prefs_species_check(player_prefs))
+		return JOB_UNAVAILABLE_RACE
+
+	if(length(job.allowed_sexes) && !(player_prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
-	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
+
+	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		return JOB_UNAVAILABLE_AGE
-	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
+
+	if((player_prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_LASTCLASS
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
@@ -553,6 +586,23 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/Lore_Primer.txt"))
 			column_counter++
 			if(column_counter > 0 && (column_counter % 4 == 0))
 				dat += "</td><td valign='top'>"
+	if(length(GLOB.active_ghost_vessels))
+		var/list/available_vessel_ids = list()
+		for(var/id in GLOB.active_ghost_vessels)
+			if(client.is_whitelisted(id))
+				available_vessel_ids += id
+
+		if(length(available_vessel_ids))
+			dat += "<fieldset style='width: 185px; border: 2px solid #8B4513; display: inline'>"
+			dat += "<legend align='center' style='font-weight: bold; color: #8B4513'>Vessels</legend>"
+			for(var/id in available_vessel_ids)
+				var/count = length(GLOB.active_ghost_vessels[id])
+				dat += "<a class='job' href='byond://?src=[REF(src)];PossessVessel=[id]'>Join as [id] ([count] available)</a>"
+			dat += "</fieldset><br>"
+			column_counter++
+			if(column_counter > 0 && (column_counter % 4 == 0))
+				dat += "</td><td valign='top'>"
+
 	dat += "</td></tr></table></center>"
 	dat += "</div></div>"
 	var/datum/browser/popup = new(src, "latechoices", "Choose Class", 720, 580)

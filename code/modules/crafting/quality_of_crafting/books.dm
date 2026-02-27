@@ -845,6 +845,7 @@
 		/datum/repeatable_crafting_recipe/engineering,
 		/datum/blueprint_recipe/engineering,
 		/datum/artificer_recipe,
+		/datum/orderless_slapcraft/automaton,
 	)
 
 /obj/item/recipe_book/masonry

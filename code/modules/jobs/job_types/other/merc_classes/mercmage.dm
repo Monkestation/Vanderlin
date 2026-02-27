@@ -48,7 +48,7 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD
 	)
 
 /datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)

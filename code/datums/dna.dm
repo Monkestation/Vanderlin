@@ -30,14 +30,15 @@
 
 	return ..()
 
-/datum/dna/proc/transfer_identity(mob/living/carbon/destination, update_prints)
+/datum/dna/proc/transfer_identity(mob/living/carbon/destination, set_species=TRUE)
 	if(!istype(destination))
 		return
 	destination.dna.unique_enzymes = unique_enzymes
 	destination.dna.unique_identity = unique_identity
 	destination.dna.human_blood_type = human_blood_type
 	destination.dna.organ_dna = organ_dna
-	destination.set_species(species.type, icon_update=0)
+	if(set_species)
+		destination.set_species(species.type, icon_update=0)
 	destination.dna.body_markings = deepCopyList(body_markings)
 	destination.dna.features = features.Copy()
 	destination.dna.real_name = real_name
@@ -199,8 +200,8 @@
 /mob/living/carbon/proc/create_dna()
 	dna = new /datum/dna(src)
 	if(!dna.species)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species())]
-		set_species(new rando_race(), FALSE)
+		var/datum/species/random_species = GLOB.species_list[pick(GLOB.roundstart_species)]
+		set_species(random_species, TRUE)
 
 //proc used to update the mob's appearance after its dna UI has been changed
 /mob/living/carbon/proc/updateappearance(icon_update=1, mutcolor_update=0, mutations_overlay_update=0)

@@ -117,7 +117,7 @@
 	///these persist between logins/logouts during the same round.
 	var/datum/player_details/player_details
 
-	///Should only be a key-value list of north/south/east/west = atom/movable/screen.
+	///Should only be a key-value list of stringified (cardinal) dir, e.g. "[NORTH]" = new /atom/movable/screen/char_preview.
 	var/list/char_render_holders
 
 	///Amount of keydowns in the last keysend checking interval
@@ -161,5 +161,5 @@
 	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [/atom/proc/examine_more] instead of [/atom/proc/examine] on them when examining
 	var/list/recent_examines
 
-	/// Datum for storing turf contents on stat panel
-	var/datum/object_window_info/obj_window = null
+	/// Loot panel for the client
+	var/datum/lootpanel/loot_panel

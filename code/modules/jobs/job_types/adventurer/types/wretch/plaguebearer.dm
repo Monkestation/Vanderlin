@@ -24,7 +24,7 @@
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/medicine = 4,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/craft/alchemy = 5,
 		/datum/skill/labor/farming = 3,
 		/datum/skill/craft/bombs = 3
