@@ -209,7 +209,6 @@
 			/obj/item/weapon/mace/steel/shishpar = 2,
 			/obj/item/weapon/hammer/sledgehammer/war = 2,
 			/obj/item/weapon/whip/urumi = 1,
-			/obj/item/weapon/sword/scimitar/ngombe = 1
 		)
 	)
 
