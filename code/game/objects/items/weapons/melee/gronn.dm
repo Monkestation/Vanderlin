@@ -1,7 +1,7 @@
 // Weapons
 /obj/item/weapon/sword/short/gronn
-	name = "gronnic hinterblade"
-	desc = "Due to the shortage of forged steel in Gronn, their iron blades have become hardier and thicker than what one may see elsewhere. The favoured weapon of choice for any able-bodied northman of Gronn, the hinterblade is the heftier, unwieldy cousin of the arming sword."
+	name = "Osslandic hinterblade"
+	desc = "Due to the shortage of forged steel in Ossland, their iron blades have become hardier and thicker than what one may see elsewhere. The favoured weapon of choice for any able-bodied hunter of Ossland, the hinterblade is the heftier, unwieldy cousin of the arming sword."
 	possible_item_intents = list(/datum/intent/sword/cut/militia, /datum/intent/sword/chop/militia, /datum/intent/sword/thrust/short)
 	icon_state = "gronnsword"
 	gripped_intents = null
@@ -27,7 +27,7 @@
 /obj/item/weapon/handclaw
 	name = "Iron Hound Claws"
 	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh, \
-			A show of the continual worship and veneration of beasts of strength in Gronn."
+			a show of the continual worship and veneration of the Great Hunt in Ossland."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "ironclaws"
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
@@ -53,7 +53,7 @@
 
 /obj/item/weapon/handclaw/steel
 	name = "Steel Mantis Claws"
-	desc = "A pair of steel claws, An uncommon sight in Gronn as they do not forge their own steel, \
+	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel, \
 			Their longer blades offer a superior defence option but their added weight slows them down."
 	icon_state = "steelclaws"
 	wdefense = 6
@@ -65,10 +65,10 @@
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/weapon/handclaw/gronn
-	name = "Gronn Beast Claws"
-	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the Iskarn shamans of the Northern Empty. \
+	name = "Ossland Beast Claws"
+	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
 			Their unique design aids them in slipping between the plates in armor and their light weight supports rapid aggressive slashes. \
-			'To see the claws of the four, Is to see the true danger of the north. Not man, Not land but beast. We are all prey in their eyes.'"
+			'The cycle of predator and prey continues. To hunt is to be hunted is to hunt in return.'"
 	icon_state = "gronnclaws"
 	wdefense = 3
 	force = 25
