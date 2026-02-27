@@ -167,7 +167,7 @@
 			/obj/item/weapon/mace = 10,
 			/obj/item/weapon/mace/bludgeon = 10,
 			/obj/item/weapon/mace/spiked = 8,
-			/obj/item/weapon/mace/rungu/iron = 4,
+			/obj/item/weapon/mace/rungu = 4,
 			/obj/item/weapon/mace/elvenclub = 6,
 			/obj/item/weapon/mace/shishpar/iron = 3,
 			/obj/item/weapon/sword/kaskara/iron = 4,
