@@ -77,7 +77,7 @@
 			/obj/item/statue/silver/vase = 3,
 			/obj/item/statue/silver/figurine = 3,
 			/obj/item/weapon/sword/rapier/nimcha = 2,
-			/obj/item/weapon/mace/silver/gada = 2,
+			/obj/item/weapon/mace/gada = 2,
 			/obj/item/weapon/whip/urumi/silver = 1,
 			/obj/item/weapon/sword/silver = 3
 		)
