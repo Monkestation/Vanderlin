@@ -212,9 +212,19 @@
 #define MALUM "Malum"
 #define EORA "Eora"
 #define DENDOR "Dendor"
+#define DIVINE_CENTRIST "Enlightened Centrism"
 
 // Inhumen pantheon
 #define ZIZO "Zizo"
 #define BAOTHA "Baotha"
 #define GRAGGAR "Graggar"
 #define MATTHIOS "Matthios"
+
+// Devotion Classes
+#define DEVOTION_CLASS_PRIEST "Priest"
+#define DEVOTION_CLASS_GRANDMASTER "Grandmaster"
+#define DEVOTION_CLASS_TEMPLAR "Templar"
+#define DEVOTION_CLASS_ACOLYTE "Acolyte"
+#define DEVOTION_CLASS_ABSOLVER "Absolver"
+#define DEVOTION_CLASS_CLERIC "Cleric"
+#define DEVOTION_CLASS_CHURCHLING "Churchling"

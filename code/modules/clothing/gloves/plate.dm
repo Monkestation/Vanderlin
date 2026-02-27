@@ -25,6 +25,8 @@
 	grid_height = 32
 	item_weight = 7 * IRON_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/gloves/plate/ancient
 	name = "ancient gauntlets"
 	desc = "Ancient plated gauntlets made out of steel."

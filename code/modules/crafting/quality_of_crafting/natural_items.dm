@@ -17,7 +17,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/fibers
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 	output = /obj/item/natural/cloth
 
 /datum/repeatable_crafting_recipe/survival/thorn_needle
@@ -250,7 +250,7 @@
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/storage/sack
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 
 /datum/repeatable_crafting_recipe/survival/sack_clothing
 	name = "head sack"
@@ -265,19 +265,19 @@
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/clothing/head/sack
 	craftdiff = 1
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 	subtypes_allowed = TRUE
 
 /datum/repeatable_crafting_recipe/survival/clay
 	name = "clay lump"
 	requirements = list(
-		/obj/item/natural/dirtclod= 3,
+		/obj/item/natural/clod/dirt= 3,
 	)
 	reagent_requirements = list(
 		/datum/reagent/water = 10
 	)
-	attacked_atom = /obj/item/natural/dirtclod
-	starting_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
+	starting_atom = /obj/item/natural/clod/dirt
 	output = /obj/item/natural/clay
 
 /datum/repeatable_crafting_recipe/survival/wicker_basket

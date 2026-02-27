@@ -957,6 +957,7 @@
 		GLOB.alive_mob_list += src
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
+		timeofdeath = 0
 		updatehealth() //then we check if the mob should wake up.
 		// if(full_heal_flags & HEAL_ADMIN)
 		// 	get_up(TRUE)
@@ -1062,13 +1063,14 @@
 		return FALSE
 	return TRUE
 
-
 /mob/living/carbon/human/can_be_revived()
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(H)
-		if(H.rotted || H.skeletonized || H.brainkill)
-			return FALSE
+	if(!istype(H) || H.rotted || H.skeletonized)
+		return FALSE
+	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!istype(B) || B.brain_death)
+		return FALSE
 
 
 /mob/living/proc/update_damage_overlays()
@@ -1263,23 +1265,20 @@
 	if(stat)
 		return
 	surrendering = 1
-	if(alert(src, "Yield in surrender?",,"YES","NO") == "YES")
-		record_round_statistic(STATS_YIELDS)
-		changeNext_move(CLICK_CD_EXHAUSTED)
-		var/image/flaggy = image('icons/effects/effects.dmi',src,"surrender",ABOVE_MOB_LAYER)
-		flaggy.appearance_flags = RESET_TRANSFORM|KEEP_APART
-		flaggy.transform = null
-		flaggy.pixel_y = 12
-		flick_overlay_view(flaggy, 150)
-		drop_all_held_items()
-		Stun(150)
-		src.visible_message("<span class='notice'>[src] yields!</span>")
-		playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
-		toggle_cmode()
-		sleep(150)
-		log_attack("[key_name(src)] has yielded!")
-	surrendering = 0
+	if(!alert(src, "Yield in surrender?",,"YES","NO") == "YES")
+		return
 
+	record_round_statistic(STATS_YIELDS)
+	changeNext_move(CLICK_CD_EXHAUSTED)
+	var/mutable_appearance/flaggy = mutable_appearance('icons/effects/effects.dmi', "surrender", ABOVE_MOB_LAYER, appearance_flags = RESET_TRANSFORM|KEEP_APART)
+	flaggy.pixel_y = 12
+	flick_overlay_view(flaggy, 150)
+	drop_all_held_items()
+	Stun(15 SECONDS)
+	visible_message("<span class='notice'>[src] yields!</span>")
+	playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
+	toggle_cmode()
+	addtimer(VARSET_CALLBACK(src, surrendering, FALSE), 15 SECONDS)
 
 /mob/proc/stop_attack(message = FALSE)
 	if(atkswinging)

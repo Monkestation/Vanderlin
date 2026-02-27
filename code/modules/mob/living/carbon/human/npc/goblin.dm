@@ -16,7 +16,7 @@
 	possible_rmb_intents = list(/datum/rmb_intent/feint, /datum/rmb_intent/swift, /datum/rmb_intent/riposte, /datum/rmb_intent/weak)
 	flee_in_pain = TRUE
 	stand_attempts = 6
-	bloodpool = 250 // Small, frail creechers with not so much vitality to gain from.
+	bloodpool = 500 // Small, frail creechers with not so much vitality to gain from.
 	dodgetime = 30 //they can dodge easily, but have a cooldown on it
 
 /mob/living/carbon/human/species/goblin/apply_prefs_job(client/player_client, datum/job/job)

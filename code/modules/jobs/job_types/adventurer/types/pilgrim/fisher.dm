@@ -25,7 +25,7 @@
 
 /datum/job/advclass/pilgrim/fisher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/sewing, pick(1, 2), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/sewing, pick(1, 2), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(2, 2, 3), TRUE)
 
 	if(spawned.age == AGE_OLD)

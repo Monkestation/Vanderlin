@@ -31,7 +31,7 @@
 
 	var/mob/living/carbon/human/H = hit
 	if(H.bloodpool >= 500) // You'll only get vitae IF they have vitae.
-		H.bloodpool -= 500
+		H.adjust_bloodpool(-500)
 		firer.adjust_bloodpool(500)
 
 /obj/projectile/magic/bloodsteal

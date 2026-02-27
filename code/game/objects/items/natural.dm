@@ -220,6 +220,93 @@
 		storage.update_item(src)
 		storage.orient2hud()
 
+/obj/item/natural/clod
+	name = "generic clod"
+	desc = "A handful of nothing."
+	icon_state = "clod1"
+	dropshrink = 0
+	throwforce = 0
+	w_class = WEIGHT_CLASS_TINY
+	var/pile = null
+	var/clod_type = null
+
+/obj/item/natural/clod/attackby(obj/item/W, mob/user, list/modifiers)
+	if(istype(W, /obj/item/weapon/shovel))
+		var/obj/item/weapon/shovel/S = W
+		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
+			if(!(src.item_flags & IN_STORAGE))
+				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+				src.forceMove(S)
+				S.heldclod = src
+				W.update_appearance(UPDATE_ICON_STATE)
+				return
+	return ..()
+
+/obj/item/natural/clod/Moved(oldLoc, dir)
+	..()
+	if((!throwing || throwing.target_turf == loc) && isturf(loc) && oldLoc != loc)
+		var/turf/T = loc
+		for(var/obj/structure/fluff/clodpile/C in T)
+			if(C == pile)
+				C.dirtamt = min(C.dirtamt+1, 5)
+				qdel(src)
+				return
+		var/dirtcount = 1
+		var/list/dirts = list()
+		for(var/obj/item/natural/clod/D in T)
+			if(D.clod_type == clod_type)
+				dirtcount++
+				dirts += D
+		if(dirtcount >=5)
+			for(var/obj/item/I in dirts)
+				qdel(I)
+			qdel(src)
+			new pile(T)
+
+/obj/item/natural/clod/attack_self(mob/living/user, params)
+	user.visible_message("<span class='warning'>[user] scatters [src].</span>")
+	qdel(src)
+
+/obj/structure/fluff/clodpile
+	name = "mystery pile"
+	desc = "There is no telling what this is or why it exists. In fact, it shouldn't."
+	icon = 'icons/roguetown/items/natural.dmi'
+	icon_state = "clodpile"
+	var/dirtamt = 5
+	climbable = FALSE
+	density = FALSE
+	climb_offset = 10
+	var/dirt_type = null
+
+/obj/structure/fluff/clodpile/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)
+
+/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/weapon/shovel))
+		var/obj/item/weapon/shovel/S = W
+		if(user.used_intent.type == /datum/intent/shovelscoop)
+			if(!S.heldclod)
+				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+				var/obj/item/J = new dirt_type(S)
+				S.heldclod = J
+				W.update_appearance(UPDATE_ICON_STATE)
+				dirtamt--
+				if(dirtamt <= 0)
+					qdel(src)
+				return
+			else
+				playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
+				var/obj/item/I = S.heldclod
+				S.heldclod = null
+				qdel(I)
+				W.update_appearance(UPDATE_ICON_STATE)
+				dirtamt++
+				if(dirtamt > 5)
+					dirtamt = 5
+				return
+	return ..()
+
 /obj/item/natural/infernalash//T1 mage summon loot
 	name = "infernal ash"
 	icon_state = "infernalash"
