@@ -37,7 +37,8 @@
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
-		/datum/job/magician
+		/datum/job/magician,
+		/datum/job/archivist
 	)
 
 /datum/round_event_control/antagonist/solo/vampires/valid_for_map()

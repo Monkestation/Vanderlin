@@ -37,6 +37,8 @@
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
+		/datum/job/magician,
+		/datum/job/archivist
 	)
 
 /datum/round_event_control/antagonist/solo/vampires_and_werewolves/valid_for_map()
@@ -45,27 +47,27 @@
 	return FALSE
 
 /datum/round_event/antagonist/solo/vampires_and_werewolves
-	var/leader = FALSE
+	var/datum/antagonist/vampire/lord/lord
+	/// True for vamps, false for ww
+	var/spawn_type = FALSE
+	/// True for vampire spawn, false for normal vamp
+	var/vampire_spawn = FALSE
 
 /datum/round_event/antagonist/solo/vampires_and_werewolves/start()
-	var/vampire = TRUE
-	for(var/datum/mind/antag_mind as anything in setup_minds)
-		if(vampire)
-			add_vampire(antag_mind)
-		else
-			add_werewolf(antag_mind, antag_mind.current)
-		vampire = !vampire
+	spawn_type = prob(50) // randomizes who gets more on an odd number of antags
+	. = ..()
 
-/datum/round_event/antagonist/solo/vampires_and_werewolves/proc/add_werewolf(datum/mind/antag_mind)
-	if(!antag_mind)
-		CRASH("add_werewolf was called without an antag datum!")
-	antag_mind.add_antag_datum(/datum/antagonist/werewolf)
+/datum/round_event/antagonist/solo/vampires_and_werewolves/add_datum_to_mind(datum/mind/antag_mind)
+	spawn_type = !spawn_type
+	if(spawn_type)
+		if(!lord)
+			lord = antag_mind.add_antag_datum(antag_datum)
+			return
+		lord.starting_thralls += antag_mind.add_antag_datum(vampire_spawn ? /datum/antagonist/vampire/lords_spawn : /datum/antagonist/vampire)
+		vampire_spawn = !vampire_spawn
+	else
+		antag_mind.add_antag_datum(/datum/antagonist/werewolf)
 
-/datum/round_event/antagonist/solo/vampires_and_werewolves/proc/add_vampire(datum/mind/antag_mind)
-	if(!antag_mind)
-		CRASH("add_vampire was called without an antag datum!")
-	if(!leader)
-		antag_mind.add_antag_datum(/datum/antagonist/vampire/lord)
-		leader = TRUE
-	else if(!antag_mind.has_antag_datum(/datum/antagonist/vampire))
-		antag_mind.add_antag_datum(/datum/antagonist/vampire/lords_spawn)
+/datum/round_event/antagonist/solo/vampires_and_werewolves/kill()
+	lord = null
+	. = ..()
