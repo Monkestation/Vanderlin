@@ -21,7 +21,7 @@
 	scroll_handle = /obj/abstract/visual_ui_element/hoverable/scroll_handle/dummy
 	scroll_track = /obj/abstract/visual_ui_element/scroll_track/dummy
 
-	mouse_opacity = MOUSE_OPACITY_OPAQUE
+	mouse_opacity = MOUSE_OPACITY_ICON
 	var/list/lines = list()
 	var/max_lines = 1000
 	var/line_height = 18

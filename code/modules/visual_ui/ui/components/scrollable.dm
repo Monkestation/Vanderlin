@@ -2,7 +2,7 @@
 /obj/abstract/visual_ui_element/scrollable
 	name = "UI Scrollable Container"
 	icon_state = "scroll_background"
-	mouse_opacity = MOUSE_OPACITY_OPAQUE
+	mouse_opacity = MOUSE_OPACITY_ICON
 	layer = VISUAL_UI_STEP_BACK
 	var/list/container_elements = list() // Elements contained within this scrollable area
 	var/max_height = 320 // Content height in pixels

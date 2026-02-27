@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 	layer = ABOVE_OPEN_TURF_LAYER
 	plane = GAME_PLANE
 
-	mouse_opacity = MOUSE_OPACITY_OPAQUE //So we can actually click these
+	mouse_opacity = MOUSE_OPACITY_ICON //So we can actually click these
 
 	//Whether the rune is pulsating
 	var/animated = 0

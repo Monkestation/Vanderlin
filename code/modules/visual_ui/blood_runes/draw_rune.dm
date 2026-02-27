@@ -10,7 +10,7 @@
 /obj/abstract/visual_ui_element/hoverable/rune_word/appear()
 	. = ..()
 	if (word && !mouse_opacity)
-		mouse_opacity = MOUSE_OPACITY_OPAQUE
+		mouse_opacity = MOUSE_OPACITY_ICON
 		flick("rune_appear", src)
 
 /obj/abstract/visual_ui_element/hoverable/rune_word/proc/get_word_order()
