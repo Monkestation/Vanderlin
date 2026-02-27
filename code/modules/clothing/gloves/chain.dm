@@ -24,6 +24,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 50
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 /obj/item/clothing/gloves/chain/psydon
 	name = "grenzelhoftian chain gauntlets"
 	icon_state = "psydongloveschain"

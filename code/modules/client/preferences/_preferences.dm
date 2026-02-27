@@ -297,12 +297,16 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	save_character()		//let's save this new random character so it doesn't keep generating new ones.
 	menuoptions = list()
 
-/datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
+// I don't think this ever runs currently, because the prefs window has can_close = FALSE by default
+// and we close it via a button which doesn't trigger this.
+/*
+/datum/preferences/Topic(href, href_list, hsrc) //yeah, gotta do this I guess..
 	. = ..()
 	if(href_list["close"])
 		var/client/C = usr.client
 		if(C)
 			C.clear_character_previews()
+*/
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
@@ -731,7 +735,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	// This should really be a browser datum
 	user << browse(dat.Join(), "window=preferences_browser;size=816x945")
 	update_preview_icon()
-	onclose(user, "stonekeep_prefwin", src)
+	// onclose(user, "stonekeep_prefwin", src)
 
 /datum/preferences/proc/update_menu_data(mob/user, list/fields_to_update)
 	if(!winexists(user, "preferences_browser"))
@@ -1094,7 +1098,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "mob_occupation", "<div align='center'>Class Selection</div>", 1000, 700)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(HTML)
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/set_job_preference_level(datum/job/job, level)
 	if(!job)
@@ -1192,8 +1196,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	winshow(user, "capturekeypress", TRUE)
 	var/datum/browser/noclose/popup = new(user, "capturekeypress", "<div align='center'>Keybindings</div>", 350, 300)
 	popup.set_content(HTML)
-	popup.open(FALSE)
-	onclose(user, "capturekeypress", src)
+	popup.open(use_onclose = FALSE)
+	// onclose(user, "capturekeypress", src) // this would act as if the main prefs window was closed, so it didn't actually do anything. plus use_onclose was false
 
 /datum/preferences/proc/reset_patron(mob/user, silent = FALSE)
 	selected_patron = default_patron
@@ -1266,7 +1270,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "keybind_setup", "<div align='center'>Keybinds</div>", 600, 600) //no reason not to reuse the occupation window, as it's cleaner that way
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/set_antag(mob/user)
 	var/list/dat = list()
@@ -1304,7 +1308,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup = new(user, "antag_setup", "<div align='center'>Special Roles</div>", 265, 340)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/lore_popup(mob/user)
 	if(!user || !user.client)
@@ -1313,7 +1317,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/datum/browser/noclose/popup  = new(user, "lore_primer", "<div align='center'>Lore Primer</div>", 650, 900)
 	dat += GLOB.roleplay_readme
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -1696,7 +1700,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					dat += "Minimum OOC Notes: <b>[MINIMUM_OOC_NOTES]</b> characters."
 					var/datum/browser/popup = new(user, "Formatting Help", width = 400, height = 350)
 					popup.set_content(dat.Join())
-					popup.open(FALSE)
+					popup.open(use_onclose = FALSE)
 				if("loadout_item")
 					var/list/loadouts_available = list("None" = null)
 					for(var/datum/loadout_item/item as anything in GLOB.loadout_items)
@@ -1805,7 +1809,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						dat += "[ooc_extra]"
 					var/datum/browser/popup = new(user, "[real_name]", "<center>[real_name]</center>", width = 480, height = 700)
 					popup.set_content(dat.Join())
-					popup.open(FALSE)
+					popup.open(use_onclose = FALSE)
 				if("ooc_extra")
 					if(!donator)
 						to_chat(user, "This is a donator exclusive feature, your OOC Extra link will be applied but others will only be able to view it if you are a patreon supporter or Twitch Subscriber.")
@@ -1989,10 +1993,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						setspouse = newspouse
 					else
 						setspouse = null
-				//Gender_choice is part of the family subsytem. It will check existing families members with the same preference of this character and attempt to place you in this family.
+
 				if("select_quirks")
 					open_quirk_menu(user)
 
+				//Gender_choice is part of the family subsytem. It will check existing families members with the same preference of this character and attempt to place you in this family.
 				if("gender_choice")
 					// If pronouns are neutral, lock to ANY_GENDER
 					if(pronouns == THEY_THEM || pronouns == IT_ITS)
@@ -2170,6 +2175,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 					winshow(user, "stonekeep_prefwin", FALSE)
 					user << browse(null, "window=preferences_browser")
+					user.client?.clear_character_previews() // browse null doesn't call on-close directly as far as i can tell
 					user << browse(null, "window=lobby_window")
 					return
 
@@ -2252,6 +2258,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/apply_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	if(QDELETED(character) || !ishuman(character))
 		return
+	character.clear_quirks() // clear preexisting quirks to undo things like transform changes
+	character.transform = matrix() // reset transforms anyway just in case, to avoid drift from setting and unsetting small/large build
 	character.age = age
 	character.gender = gender
 	character.set_patron(selected_patron)

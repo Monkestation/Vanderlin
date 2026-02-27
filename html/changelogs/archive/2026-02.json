@@ -848,5 +848,44 @@
                 "bugfix": "Fixed message spam when equipping/moving grandmaster weapons in hands."
             }
         ]
+    },
+    "2026-02-27": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes double sharpness loss on parry."
+            },
+            {
+                "rscadd": "Added guaranteed point blank crits to firearms"
+            },
+            {
+                "balance": "Removed the decreased crit chance from lead bullets"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Kobolds playing forest guard are limited to Forest Rat (Ruffian)"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added public balloon alert feedback to armour breaking and at certain damage thresholds. (FreeStylaLT)"
+            },
+            {
+                "rscadd": "Added balloon alerts to missing swings on your targeted zone."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "Prisoners can now choose to not be nobility, giving them a few crime and labor skills instead of courtly ones."
+            },
+            {
+                "rscadd": "Tieflings, Hollowkin, and Medicators can now be Prisoners, but only the Commoner version, not Noble."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "map": "Added more adventurer spawns to the murderwoods"
+            }
+        ]
     }
 }

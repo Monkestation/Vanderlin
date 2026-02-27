@@ -19,6 +19,8 @@
 	max_integrity = INTEGRITY_STRONGEST
 	abstract_type = /obj/item/clothing/shoes/boots/rare
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/shoes/boots/rare/elfplate
 	name = "dark elvish plated boots"
 	desc = "Bizarrely shaped boots of exquisite dark elven craftsmanship, forged from steel alloyed in ways unbeknownst to every other species."

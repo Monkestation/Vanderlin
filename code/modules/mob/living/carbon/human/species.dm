@@ -1826,8 +1826,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	if(!selzone)
 		selzone = user.zone_selected
+
 	if(!accurate)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
+		if(selzone != user.zone_selected)
+			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+
 	affecting = H.get_bodypart(check_zone(selzone))
 
 	if(!affecting)

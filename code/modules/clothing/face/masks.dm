@@ -44,6 +44,8 @@
 	melting_material = /datum/material/iron
 	melt_amount = 50
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
 	icon_state = "nosechain_g"
