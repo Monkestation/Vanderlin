@@ -4,7 +4,6 @@
 	tutorial = "You are one of many upstarts from Ossland, who sailed from the coastal capital of the north to the southern beaches of the inland sea in search of a more... honest means of profit than the Sea Raiders of infamy."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
@@ -148,7 +147,6 @@
 	traits = list(TRAIT_HEAVYARMOR)
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
-	allowed_patrons = ALL_GRONNIC_PATRONS //Subvariant of the 'ALL_INHUMEN_PATRONS' tag, with Abyssor and Dendor as situational additions. Do not add any more to this, no matter what.
 	jobstats = list(
 		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7 and it's limited to one, singular slot. This is fine.
 		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
@@ -204,7 +202,6 @@
 	outfit = /datum/outfit/job/roguetown/mercenary/atgervishaman
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	allowed_patrons = ALL_GRONNIC_PATRONS
 	languages = list(/datum/language/gronnic)
 	cmode_music = 'sound/music/combat_shaman2.ogg'
 	traits = list(TRAIT_STRONGBITE, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_NOPAINSTUN)
@@ -250,22 +247,6 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/flashlight/flare/torch
 	H.put_in_hands(new /obj/item/weapon/handclaw/gronn)
-
-	switch(H.patron?.type)
-		if(/datum/patron/inhumen/zizo)
-			neck = /obj/item/clothing/neck/psycross/gronn
-		if(/datum/patron/inhumen/graggar)
-			neck = /obj/item/clothing/neck/psycross/gronn/graggar
-		if(/datum/patron/inhumen/matthios)
-			neck = /obj/item/clothing/neck/psycross/gronn/matthios
-		if(/datum/patron/inhumen/baotha)
-			neck = /obj/item/clothing/neck/psycross/gronn/baothagronn
-		if(/datum/patron/divine/abyssor)
-			neck = /obj/item/clothing/neck/psycross/gronn/abyssor
-		if(/datum/patron/divine/dendor)
-			neck = /obj/item/clothing/neck/psycross/gronn/dendor
-		else
-			neck = /obj/item/clothing/neck/psycross/gronn/special //Failsafe. Gives a specially-fluffed version of Zizo's talisman, which can be reinterpreted as needed.
 
 	backpack_contents = list(
 		/obj/item/key/mercenary = 1,

@@ -18,7 +18,7 @@
 	sellprice = 0
 	experimental_onhip = TRUE
 
-// GRONN PSYCROSSES
+/* // GRONN PSYCROSSES
 /obj/item/clothing/neck/psycross/gronn
 	name = "carved talisman" //plotting talisman
 	desc = "'The hunt, the studying of your prey, the learning of its routes, the knowledge our ancestors passed down, the empowerment of your people and yourself. Learn of the world, or fade away.'  </br>  </br>The Plotting Wolf embodies the virtues of progress and knowledge, so that no obstacle nor threat to the homeland remains insurmountable. To understand the truths of beast-and-bronze is to lighten the future's hardships. Do not humor magicka, however, for playing with fire shall always end in someone being burned."
@@ -52,6 +52,7 @@
 /obj/item/clothing/neck/psycross/gronn/special
 	name = "carved talisman" //familial talisman
 	desc = "'The memories of the past, and the dreams of the future. A fetish of a beaste, and the carvings of a force that no one beyond your homeland could understand. Sail gracefully, countryman.'"
+ */
 
 // SILVER PSYCROSS START
 
