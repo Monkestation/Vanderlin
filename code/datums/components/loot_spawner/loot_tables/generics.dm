@@ -55,7 +55,6 @@
 			/obj/item/clothing/head/crown/circlet = 2,
 			/obj/item/clothing/head/crown/circlet/golddiadem = 2,
 			/obj/item/clothing/head/crown/circlet/silverdiadem = 3,
-			/obj/item/clothing/head/crown/hemhem = 1,
 			/obj/item/clothing/head/crown/circlet/silverheaddress = 2,
 			/obj/item/clothing/head/crown/circlet/goldheaddress = 1,
 			/obj/item/clothing/face/facemask/goldnosechain = 1,
