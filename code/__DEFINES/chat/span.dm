@@ -100,7 +100,7 @@
 #define span_lightpurple(str) ("<span class='lightpurple'>" + str + "</span>")
 #define span_radio(str) ("<span class='radio'>" + str + "</span>")
 #define span_reallybig(str) ("<span class='reallybig'>" + str + "</span>")
-#define span_reallybighypnophrase(str) ("<span class='reallybighypnophrase'>" + str + "</span>")
+#define span_reallybighypnophrase(str) ("<span class='hypnophrase reallybig'>" + str + "</span>")
 #define span_reallybigredtext(str) ("<span class='reallybigredtext'>" + str + "</span>")
 #define span_red(str) ("<span class='red'>" + str + "</span>")
 #define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
