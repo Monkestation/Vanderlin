@@ -73,12 +73,9 @@
 		if(SSmapping.config.map_name != "Voyage")
 			antag_mind.current.unequip_everything()
 		antag_mind.add_antag_datum(/datum/antagonist/vampire/lord)
-		var/datum/antagonist/vampire/lord/lord = antag_mind.has_antag_datum(/datum/antagonist/vampire/lord)
-		lord.get_thralls(1, TRUE)
 		leader = TRUE
 		return
-	return
-/*	else
+	else
 		if(!antag_mind.has_antag_datum(/datum/antagonist/vampire))
 			var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 			J?.adjust_current_positions(-1)
@@ -86,4 +83,3 @@
 				antag_mind.current.unequip_everything()
 			antag_mind.add_antag_datum(/datum/antagonist/vampire/lords_spawn)
 		return
-*/
