@@ -3,7 +3,7 @@
 	name = "cheap dyes"
 	recipe_name = "Cheap dyes"
 	starting_item = /obj/item/fertilizer/ash
-	related_skill = /datum/skill/misc/sewing
+	related_skill = /datum/skill/craft/sewing
 	skill_xp_gained = 2
 	requirements = list(
 		list(

@@ -68,7 +68,7 @@
 						psicross_bonus = 0.3
 					if(/obj/item/clothing/neck/psycross/silver)
 						psicross_bonus = 0.4
-					if(/obj/item/clothing/neck/psycross/g) // PURITY AFLOAT.
+					if(/obj/item/clothing/neck/psycross/gold) // PURITY AFLOAT.
 						psicross_bonus = 0.4
 		if(damtotal >= 300) // ARE THEY ENDURING MUCH, IN ONE WAY OR ANOTHER?
 			situational_bonus += 0.3

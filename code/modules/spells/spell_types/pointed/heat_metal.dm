@@ -8,7 +8,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/malum)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/malum)
 
 	invocation = "Metal bends to the heat of Malum's forge!"
 	invocation_type = INVOCATION_SHOUT

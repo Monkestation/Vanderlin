@@ -27,7 +27,7 @@
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/craft/traps = 3
 	)

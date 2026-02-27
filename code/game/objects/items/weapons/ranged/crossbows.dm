@@ -241,9 +241,9 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/update_icon_state()
 	. = ..()
 	if(cocked)
-		icon_state = "crossbow1"
+		icon_state = "[initial(item_state)]1"
 	else
-		icon_state = "crossbow0"
+		icon_state = "[initial(item_state)]0"
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/update_overlays()
 	. = ..()
