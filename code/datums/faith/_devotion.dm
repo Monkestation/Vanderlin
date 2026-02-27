@@ -50,11 +50,10 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	if(holder_mob?.hud_used)
-		holder_mob?.hud_used?.initialize_bloodpool()
-		holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
 	else
-		RegisterSignal(holder, COMSIG_MOB_CLIENT_LOGIN, PROC_REF(LateInitHUD))
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
@@ -63,11 +62,10 @@
 	check_progression()
 	initialize_tasks()
 
-/datum/devotion/proc/LateInitHUD(client/holder)
-	SIGNAL_HANDLER
+/datum/devotion/proc/initialize_hud()
 	holder_mob?.hud_used?.initialize_bloodpool()
 	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
-	UnregisterSignal(holder_mob, COMSIG_MOB_CLIENT_LOGIN)
+	update_devotion(0)
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
