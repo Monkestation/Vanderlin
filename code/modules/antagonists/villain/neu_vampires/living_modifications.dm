@@ -172,7 +172,7 @@
 	COOLDOWN_START(src, detection_cooldown, 20 SECONDS)
 	detections += value
 	GLOB.vamp_detection += value
-	to_chat(src, span_boldannounce("DETECTED x[value]!"))
+	to_chat(src, "<h2>[span_boldannounce("DETECTED x[value]!")]</h2>")
 
 
 /**
@@ -328,7 +328,7 @@
 		if(prob(3))
 			regenerate_limb(silent=FALSE)
 		blood_volume = max(blood_volume, min(BLOOD_VOLUME_SAFE, blood_volume + 10))
-		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 10)))
+		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 5)))
 	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!InCritical() || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
