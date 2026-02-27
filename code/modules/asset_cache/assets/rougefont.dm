@@ -1,21 +1,10 @@
 
-/datum/asset/simple/roguefonts
-	assets = list(
-		"PixelifySans.ttf" = 'interface/fonts/PixelifySans.ttf',
-		"Vaticanus.ttf" = 'interface/fonts/Vaticanus.ttf',
-		"pterra.ttf" = 'interface/fonts/pterra.ttf',
-		"BlackmoorLET.ttf" = 'interface/fonts/BlackmoorLET.ttf',
-		"book1.ttf" = 'interface/fonts/book1.ttf',
-		"book2.ttf" = 'interface/fonts/book1.ttf',
-		"book3.ttf" = 'interface/fonts/book1.ttf',
-		"book4.ttf" = 'interface/fonts/book1.ttf',
-		"dwarf.ttf" = 'interface/fonts/languages/dwarf.ttf',
-		"Dauphinn.ttf" = 'interface/fonts/languages/Dauphinn.ttf',
-		"oldpsydonic.ttf" = 'interface/fonts/languages/oldpsydonic.ttf',
-		"zalad.ttf" = 'interface/fonts/languages/zalad.ttf',
-		"hell.ttf" = 'interface/fonts/languages/hell.ttf',
-		"orc.ttf" = 'interface/fonts/languages/orc.ttf',
-		"celestial.ttf" = 'interface/fonts/languages/celestial.ttf',
-		"undead.ttf" = 'interface/fonts/languages/undead.ttf',
-		"deepspeak.ttf" = 'interface/fonts/languages/deepspeak.ttf',
-	)
+/datum/asset/simple/namespaced/fonts
+	parents = list("fonts.css" = 'interface/fonts/fonts.css')
+
+/datum/asset/simple/namespaced/fonts/New()
+	for(var/datum/font/font as anything in subtypesof(/datum/font))
+		var/file_string = "[font::font_family]"
+		var/file_path = copytext(file_string, findlasttext(file_string, "/") + 1)
+		assets[file_path] = file(file_string)
+	return ..()

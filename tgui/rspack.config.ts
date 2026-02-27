@@ -132,8 +132,6 @@ export default defineConfig({
       'tgui-panel': path.resolve(dirname, './packages/tgui-panel'),
       'tgui-dev-server': path.resolve(dirname, './packages/tgui-dev-server'),
       'tgui-say': path.resolve(dirname, './packages/tgui-say'),
-      'fonts/languages': path.resolve(dirname, "../interface/fonts/languages"),
-      'fonts': path.resolve(dirname, "../interface/fonts"),
     },
   },
   stats: createStats(true),

@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Pterra';
-  src: url('pterra.ttf') format('truetype');
-}
-
 .light:root {
   --color-base: #ffffff;
   --scrollbar-base: #f2f2f2;

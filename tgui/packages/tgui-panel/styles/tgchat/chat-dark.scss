@@ -6,61 +6,6 @@
 @use 'sass:map';
 @use 'sass:color';
 
-@font-face {
-  font-family: 'Pterra';
-  src: url('~fonts/pterra.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Blackmoor LET';
-  src: url('~fonts/BlackmoorLET.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Underwater Love';
-  src: url('~fonts/languages/deepspeak.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Dauphin';
-  src: url('~fonts/languages/Dauphinn.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Thief by The Riddler';
-  src: url('~fonts/languages/orc.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'MasonAlternate';
-  src: url('~fonts/languages/dwarf.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Breitkopf Fraktur';
-  src: url('~fonts/languages/oldpsydonic.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Byzantine';
-  src: url('~fonts/languages/zalad.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Arabolical';
-  src: url('~fonts/languages/celestial.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Nosfer';
-  src: url('~fonts/languages/undead.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Xaphan';
-  src: url('~fonts/languages/hell.ttf') format('truetype');
-}
-
 html,
 body {
   padding: 0;
