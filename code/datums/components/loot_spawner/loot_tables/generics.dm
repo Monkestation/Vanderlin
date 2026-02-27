@@ -196,7 +196,7 @@
 			/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long = 5,
 			/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow = 5,
 			/obj/item/weapon/axe/steel = 5,
-			/obj/item/weapon/axe/nsapo = 2,
+			/obj/item/weapon/axe/steel/nsapo = 2,
 			/obj/item/weapon/sword/long/greatsword = 2,
 			/obj/item/weapon/sword/sabre/dadao = 2,
 			/obj/item/weapon/sword/kaskara = 2,
