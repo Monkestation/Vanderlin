@@ -649,7 +649,11 @@
 			if(brutestate)
 				var/image/brute_image = image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
 				if(owner)
-					brute_image.color = owner.get_blood_type().color
+					owner.get_blood_type().color
+				else if(original_owner)
+					original_owner.get_blood_type().color
+				else
+					brute_image.color = COLOR_BLOOD
 				. += brute_image
 			if(burnstate)
 				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
