@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: 'Breitkopf Fraktur';
-  src: url('~Breitkopf_Fraktu.ttf') format('truetype');
+  src: url('Breitkopf_Fraktur.ttf') format('truetype');
 }
 
 @font-face {
@@ -63,4 +63,9 @@
 @font-face {
   font-family: 'Underwater Love';
   src: url('Underwater_Love.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Xaphan';
+  src: url('Xaphan.ttf') format('truetype');
 }
