@@ -28,6 +28,8 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 9 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/pants/platelegs/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_STEP)

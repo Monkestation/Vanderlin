@@ -34,6 +34,8 @@
 	sellprice = 25
 	item_weight = 7 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
 	icon_state = "soldierboots"
