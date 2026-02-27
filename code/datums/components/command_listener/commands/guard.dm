@@ -11,7 +11,7 @@
 	bound_component = automaton.AddComponent(/datum/component/bounded, \
 		guard_location, \
 		0, \
-		3, \
+		5, \
 		null, \
 		null, \
 		FALSE, \

@@ -18,10 +18,10 @@
 	animname = "strike"
 	blade_class = BCLASS_BLUNT
 	hitsound = list('sound/combat/hits/blunt/daze_hit.ogg')
-	chargetime = 0
-	penfactor = 50
+	penfactor = 45
 	swingdelay = 6
 	damfactor = 0.5
+	acc_bonus = 15
 	item_damage_type = "blunt"
 	intent_effect = /datum/status_effect/debuff/dazed
 	target_parts = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_SKULL)

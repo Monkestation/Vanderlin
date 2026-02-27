@@ -10,8 +10,8 @@
 		SPEC_ID_ELF,\
 		SPEC_ID_HALF_DROW,\
 	) // excluding harpies because their weak as hell, excluding rakshari, hollowkin, and kobolds because they have no lux, which is incredibly taboo in lakkarian society/culture, half orcs are excluded as well becausee theyll be too damn strong
-	total_positions = 2
-	roll_chance = 30
+	total_positions = 0 //Lakkari disabled
+	roll_chance = 0
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 	outfit = /datum/outfit/adventurer/sekketianshinobi
@@ -33,7 +33,7 @@
 		/datum/skill/misc/climbing = 5,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/mathematics = 1,
 		/datum/skill/misc/lockpicking = 2, //these guys free slaves, they probably know how to disarm traps and unlock things

@@ -34,7 +34,7 @@
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/stealing = 3
 	)
@@ -114,7 +114,7 @@
 		/datum/skill/labor/butchering = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/farming = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/stealing = 3
@@ -136,7 +136,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/recipe_book/cooking = 1, TRUE)
+	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 	neck = /obj/item/key/tavern
 
 /datum/outfit/tapster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -176,7 +176,7 @@
 		/datum/skill/labor/butchering = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/farming = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/stealing = 3,
@@ -235,7 +235,7 @@
 		/datum/skill/labor/butchering = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/farming = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/misc/sneaking = 2,
 		/datum/skill/misc/stealing = 3,

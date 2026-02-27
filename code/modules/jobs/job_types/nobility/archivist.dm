@@ -33,6 +33,7 @@
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
 		/datum/language/deepspeak
@@ -42,7 +43,8 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/archivist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -91,7 +93,7 @@
 	beltl = /obj/item/storage/keyring/archivist
 	beltr = /obj/item/book/granter/spellbook/apprentice
 	backl = /obj/item/storage/backpack/satchel
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backpack_contents = list(
 		/obj/item/textbook = 1,
 		/obj/item/natural/feather = 1
@@ -128,7 +130,7 @@
 		/datum/skill/misc/reading = 6,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/labor/mathematics = 4
 	)
@@ -155,7 +157,7 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/archivist
 	wrists = /obj/item/clothing/wrists/nocwrappings
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,

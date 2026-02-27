@@ -327,7 +327,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!doctor || QDELETED(src))
 		return FALSE
 
-	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 12.5
+	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 12.5
 	var/was_completed = FALSE
 
 	var/mob/living/patient = owner
@@ -424,7 +424,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 			return
 	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
 	MOBTIMER_SET(human_owner, MT_PUKE)
-	human_owner.vomit(1, blood = TRUE, stun = FALSE)
 	werewolf_infection_timer = addtimer(CALLBACK(src, PROC_REF(wake_werewolf)), werewolf_infection_time, TIMER_STOPPABLE)
 	severity = WOUND_SEVERITY_BIOHAZARD
 	if(bodypart_owner)
@@ -638,7 +637,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	// BUT only effects value reduction not sewing progress
 	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
 	// Reduces the upgrade values by this percentage, can never fully deplete the said values
-	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
+	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 1.4) // Vibe numbers...
 
 	downgrade(healing_power)
 

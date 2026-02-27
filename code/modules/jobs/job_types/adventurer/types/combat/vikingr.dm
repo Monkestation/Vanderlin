@@ -5,6 +5,7 @@
 	outfit = /datum/outfit/adventurer/vikingr
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
+	total_positions = 0 //Kaledon isn't in
 
 /datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -49,7 +50,7 @@
 			head = /obj/item/clothing/head/helmet/nasal
 			beltl = /obj/item/weapon/sword/iron
 		if("Claymore")
-			backr = /obj/item/weapon/sword/long/greatsword/ironclaymore
+			backr = /obj/item/weapon/sword/long/greatsword/claymore/iron
 			beltl = /obj/item/weapon/axe/iron
 			beltr = /obj/item/storage/belt/pouch/coins/poor
 			head = /obj/item/clothing/head/helmet/nasal

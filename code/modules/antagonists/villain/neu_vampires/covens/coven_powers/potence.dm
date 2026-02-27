@@ -118,6 +118,7 @@
 		/datum/coven_power/potence/three,
 		/datum/coven_power/potence/five
 	)
+	violates_masquerade = TRUE
 
 /datum/coven_power/potence/four/activate()
 	. = ..()
@@ -149,6 +150,7 @@
 		/datum/coven_power/potence/three,
 		/datum/coven_power/potence/four
 	)
+	violates_masquerade = TRUE
 
 /datum/coven_power/potence/five/activate()
 	. = ..()

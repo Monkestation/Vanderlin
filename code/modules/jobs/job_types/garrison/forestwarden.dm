@@ -54,13 +54,13 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/tanning = 2
 	)
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
 	)
 
@@ -74,7 +74,7 @@
 	spawned.real_name = "[honorary] [prev_real_name]"
 	spawned.name = "[honorary] [prev_name]"
 
-	spawned.verbs |= /mob/proc/haltyell
+	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestwarden
 	name = "Forest Warden"

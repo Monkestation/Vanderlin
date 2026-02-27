@@ -47,7 +47,7 @@
 	icon = 'icons/obj/broodmother_32x.dmi'
 	icon_state = "broodmother_lux"
 
-/obj/item/reagent_containers/lux/pragmas/attack_self(mob/user, params)
+/obj/item/reagent_containers/lux/pragmas/attack_self(mob/user, list/modifiers)
 	. = ..()
 	var/datum/action/cooldown/spell/pragmas_charm/charm = new()
 	charm.Grant(user)

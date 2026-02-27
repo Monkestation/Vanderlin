@@ -11,7 +11,7 @@
 \---------------*/
 
 /obj/item/reagent_containers/food/snacks/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_VPOOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	do_random_pixel_offset = FALSE // disables the random placement on creation for this object
 
@@ -45,6 +45,7 @@
 	desc = "A vile decaying morsel, its last hope is to become food for the soil."
 	color = "#6c6897"
 	eat_effect = /datum/status_effect/debuff/rotfood
+	list_reagents = list(/datum/reagent/yuck = 5)
 
 /obj/item/reagent_containers/food/snacks/rotten/Initialize()
 	var/mutable_appearance/rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
@@ -57,7 +58,7 @@
 	icon_state = "meat"
 
 /obj/item/reagent_containers/food/snacks/rotten/bacon
-	name = "rotten pigflesh"
+	name = "rotten flesh"
 	icon_state = "pigflesh"
 
 /obj/item/reagent_containers/food/snacks/rotten/sausage
@@ -598,7 +599,7 @@
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)
-		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking))*5))
+		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			var/obj/item/reagent_containers/food/snacks/dough_base/base = new /obj/item/reagent_containers/food/snacks/dough_base(get_turf(src))

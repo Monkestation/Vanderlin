@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
+GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"

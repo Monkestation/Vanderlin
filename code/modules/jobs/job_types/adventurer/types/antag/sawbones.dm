@@ -22,7 +22,7 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 1,
 		/datum/skill/misc/medicine = 5,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/craft/alchemy = 2,
 	)
 

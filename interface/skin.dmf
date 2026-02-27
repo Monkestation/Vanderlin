@@ -161,8 +161,8 @@ window "statwindow"
 		background-color = #000000
 		saved-params = "pos;size"
 		is-pane = true
-	elem "stat"
-		type = INFO
+	elem "statbrowser"
+		type = BROWSER
 		pos = 0,0
 		size = 640x480
 		anchor1 = 0,0
@@ -172,7 +172,7 @@ window "statwindow"
 		font-style = "6"
 		text-color = #d6dbd5
 		background-color = #000000
-		is-default = true
+		is-visible = false
 		saved-params = ""
 		highlight-color = #f9bb00
 		tab-text-color = #d6dbd5
@@ -199,7 +199,7 @@ window "stonekeep_prefwin"
 	elem "stonekeep_prefwin"
 		type = MAIN
 		pos = 291,0
-		size = 816x879
+		size = 816x945
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		background-color = none
@@ -217,7 +217,7 @@ window "stonekeep_prefwin"
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
-		size = 816x879
+		size = 816x945
 		anchor1 = 0,0
 		anchor2 = 75,100
 		background-color = none

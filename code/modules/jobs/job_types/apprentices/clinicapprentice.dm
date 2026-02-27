@@ -53,6 +53,8 @@
 
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
 
+	skill_multipliers = list(/datum/skill/misc/medicine = 1.25, /datum/skill/craft/alchemy = 1.25)
+
 /datum/job/clinicapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age != AGE_CHILD)

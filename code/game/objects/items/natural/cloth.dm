@@ -115,10 +115,10 @@
 			return TRUE
 	return ..()
 
-/obj/item/natural/cloth/attack_self(mob/user, params)
+/obj/item/natural/cloth/attack_self(mob/user, list/modifiers)
 	wring_cloth(user.loc, user)
 
-/obj/item/natural/cloth/attack_hand_secondary(mob/user, params)
+/obj/item/natural/cloth/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -208,7 +208,7 @@
 	if(affecting.bandage)
 		to_chat(user, "<span class='warning'>There is already a bandage.</span>")
 		return
-	var/used_time = bandage_speed * (1 - (H.get_skill_level(/datum/skill/misc/medicine) * 0.15))
+	var/used_time = bandage_speed * (1 - (H.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 	if(!do_after(user, used_time, M))
 		return

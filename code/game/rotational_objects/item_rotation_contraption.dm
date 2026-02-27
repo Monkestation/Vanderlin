@@ -84,7 +84,7 @@
 		if(!pipe)
 			return
 	visible_message("[user] starts placing down [src].", "You start to place [src].")
-	if(!do_after(user, 1.2 SECONDS - user.get_skill_level(/datum/skill/craft/engineering), T))
+	if(!do_after(user, 1.2 SECONDS - user.get_skill_level(/datum/skill/craft/engineering, TRUE), T))
 		return
 	var/obj/structure/structure = new placed_type(T)
 	if(place_behavior == PLACE_TOWARDS_USER)

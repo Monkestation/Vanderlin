@@ -15,11 +15,11 @@
 			if(has_world_trait(/datum/world_trait/delver))
 				handle_profession_sharpen(I, user)
 			else
-				I.add_bintegrity(999)
+				I.restore_bintegrity()
 		return
 	if(!has_world_trait(/datum/world_trait/delver))
 		if(istype(I, /obj/item/grown/log/tree/small))
-			var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking)
+			var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
 			var/wood_time = (4 SECONDS - (skill_level * 5))
 			playsound(src, pick('sound/misc/slide_wood (2).ogg', 'sound/misc/slide_wood (1).ogg'), 100, FALSE)
 			if(do_after(user, wood_time, src))

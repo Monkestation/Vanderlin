@@ -122,7 +122,7 @@
 	dat += print_descriptors_page()
 	var/datum/browser/popup = new(user, "descriptors_customization", "<div align='center'>Describe myself</div>", 350, 510)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/has_descriptor_type_in_entries(descriptor_type)
 	for(var/datum/descriptor_entry/entry as anything in descriptor_entries)

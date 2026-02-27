@@ -228,9 +228,9 @@
 	var/combat_modifier = positioning_mod // Start with positioning
 
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 	if(M.mind)
-		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling))
+		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))
 
 	if(M.surrendering)
 		combat_modifier *= 2
@@ -388,7 +388,7 @@
 			if(I)
 				if(M.mind)
 					if(I.associated_skill)
-						probby -= M.get_skill_level(I.associated_skill) * 5
+						probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
 				if(HAS_TRAIT(I, TRAIT_WIELDED))
 					probby -= 20
 				if(prob(probby))
@@ -789,4 +789,5 @@
 	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, span_warning("Sigh. It's not bleeding."))
 		return
-	user.drinksomeblood(grabbed, sublimb_grabbed)
+	var/drink_amt = user.mind?.has_antag_datum(/datum/antagonist/vampire) ? 80 : 10
+	user.drinksomeblood(grabbed, sublimb_grabbed, drink_amt)

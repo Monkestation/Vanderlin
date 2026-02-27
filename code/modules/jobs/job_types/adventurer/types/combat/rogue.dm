@@ -16,7 +16,7 @@
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 5,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/sneaking = 5,
 		/datum/skill/misc/stealing = 5,
 		/datum/skill/misc/lockpicking = 4,

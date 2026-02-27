@@ -117,7 +117,7 @@
 	///these persist between logins/logouts during the same round.
 	var/datum/player_details/player_details
 
-	///Should only be a key-value list of north/south/east/west = atom/movable/screen.
+	///Should only be a key-value list of stringified (cardinal) dir, e.g. "[NORTH]" = new /atom/movable/screen/char_preview.
 	var/list/char_render_holders
 
 	///Amount of keydowns in the last keysend checking interval
@@ -148,3 +148,18 @@
 	var/list/real_like_cooldowns  = list()
 	/// Total Real likes received in a round - For Mentor
 	var/real_likes_received  = 0
+
+	/// our current tab
+	var/stat_tab
+
+	/// whether our browser is ready or not yet
+	var/statbrowser_ready = FALSE
+
+	/// list of all tabs
+	var/list/panel_tabs = list()
+
+	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [/atom/proc/examine_more] instead of [/atom/proc/examine] on them when examining
+	var/list/recent_examines
+
+	/// Loot panel for the client
+	var/datum/lootpanel/loot_panel

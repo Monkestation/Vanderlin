@@ -6,7 +6,22 @@
  * @return TRUE if parry successful, FALSE otherwise
  */
 /mob/living/proc/attempt_parry(datum/intent/intenty, mob/living/user, prob2defend)
-	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS) || (pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || (pulling && grab_state >= GRAB_AGGRESSIVE) ||  (world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte)) || has_status_effect(/datum/status_effect/debuff/feinted) || has_status_effect(/datum/status_effect/debuff/riposted) || (intenty && !intenty.canparry))
+	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
+		return FALSE
+
+	if(intenty && !intenty.canparry)
+		return FALSE
+
+	if(incapacitated())
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
+		return FALSE
+
+	if(world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
 	last_parry = world.time
@@ -107,7 +122,7 @@
 	if(!istype(shield))
 		return 0
 
-	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields))
+	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields, TRUE))
 
 	return shield.wdefense * shield_skill * 2
 /**
@@ -125,11 +140,11 @@
 	var/weapon_parry = FALSE
 
 	if(mainhand && mainhand.can_parry)
-		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill) * 20) : 20)
+		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill, TRUE) * 20) : 20)
 		mainhand_defense += (mainhand.wdefense * 10)
 
 	if(offhand && offhand.can_parry)
-		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill) * 20) : 20)
+		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill, TRUE) * 20) : 20)
 		offhand_defense += (offhand.wdefense * 10)
 		if(istype(offhand, /obj/item/weapon/shield))
 			force_shield = TRUE
@@ -145,7 +160,7 @@
 		used_weapon = offhand
 		highest_defense += offhand_defense
 
-	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed) * 20) : 20
+	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20) : 20
 	if(highest_defense <= unarmed_defense)
 		weapon_parry = FALSE
 	else
@@ -154,7 +169,7 @@
 	return list(
 		"used_weapon" = used_weapon,
 		"weapon_parry" = weapon_parry,
-		"defense_bonus" = weapon_parry ? highest_defense : (get_skill_level(/datum/skill/combat/unarmed) * 20)
+		"defense_bonus" = weapon_parry ? highest_defense : (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20)
 	)
 
 /**
@@ -171,20 +186,20 @@
 	var/skill_modifier = 0
 
 	if(weapon_parry)
-		defender_skill = get_skill_level(used_weapon.associated_skill)
+		defender_skill = get_skill_level(used_weapon.associated_skill, TRUE)
 	else
-		defender_skill = get_skill_level(/datum/skill/combat/unarmed)
+		defender_skill = get_skill_level(/datum/skill/combat/unarmed, TRUE)
 
 	if(user.mind)
 		var/obj/item/master = intenty.get_master_item()
 		if(master)
-			attacker_skill = user.get_skill_level(master.associated_skill)
+			attacker_skill = user.get_skill_level(master.associated_skill, TRUE)
 			skill_modifier -= (attacker_skill * 20)
 
 			if(master.wbalance > 0 && user.STASPD > src.STASPD)
 				skill_modifier -= ((user.STASPD - src.STASPD) * 10)
 		else
-			attacker_skill = user.get_skill_level(/datum/skill/combat/unarmed)
+			attacker_skill = user.get_skill_level(/datum/skill/combat/unarmed, TRUE)
 			skill_modifier -= (attacker_skill * 20)
 
 
@@ -243,9 +258,11 @@
 	else
 		flash_fullscreen("blackflash2")
 
-	var/dam2take = round((get_complex_damage(AB, user, used_weapon.blade_dulling)/2), 1)
+	var/dam2take = round((get_complex_damage(AB, user, FALSE)/2), 1)
 	if(dam2take)
-		used_weapon.take_damage(max(dam2take, 1), BRUTE, used_weapon.damage_type)
+		var/intdam = used_weapon.max_blade_int ? INTEG_PARRY_DECAY : INTEG_PARRY_DECAY_NOSHARP
+		used_weapon.take_damage(intdam, BRUTE, used_weapon.damage_type)
+		used_weapon.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 
 /**
  * Handle parrying attacks with a weapon
@@ -274,13 +291,14 @@
 			src.visible_message("<span class='boldwarning'><b>[src]</b> ripostes [user] with [W]!</span>")
 		else if(istype(W, /obj/item/weapon/shield))
 			src.visible_message("<span class='boldwarning'><b>[src]</b> blocks [user] with [W]!</span>")
+		else
+			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
 
 			// Check shield integrity
 			var/shieldur = round(((W.get_integrity() / W.max_integrity) * 100), 1)
 			if(shieldur <= 30)
 				src.visible_message("<span class='boldwarning'><b>\The [W] is about to break!</b></span>")
-		else
-			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
+
 	else
 		// Non-human parry (simpler)
 		if(W)

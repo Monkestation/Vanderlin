@@ -64,7 +64,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
@@ -109,7 +110,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	head = /obj/item/clothing/head/crown/serpcrown
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquegold
-	beltl = /obj/item/weapon/knife/dagger/steel/special
+	beltl = /obj/item/weapon/knife/dagger/steel/royal
 	beltr = /obj/item/weapon/sword/rapier
 	scabbards = list(/obj/item/weapon/scabbard/knife/royal, /obj/item/weapon/scabbard/sword/royal)
 	ring = /obj/item/clothing/ring/active/nomag

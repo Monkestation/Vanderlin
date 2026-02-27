@@ -21,13 +21,14 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/alchemy = 1,
 		/datum/skill/labor/mathematics = 5
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,//Not sure if they ought to be a noble but I'll leave it as is.
+		TRAIT_NOBLE_POWER,
 		TRAIT_SEEPRICES,
 		TRAIT_FOREIGNER
 	)
@@ -45,7 +46,7 @@
 			if("HEAL")
 				spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 			if("SILK")
-				spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+				spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
 			if("GEMS")
 				spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 	// Randomize it again for the next possible merchant

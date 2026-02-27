@@ -20,9 +20,9 @@
 
 	outfit = /datum/outfit/priest
 	spells = list(
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/templar,
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/acolyte,
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/churchling,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/templar,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/acolyte,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/churchling,
 		/datum/action/cooldown/spell/undirected/call_bird/priest,
 	)
 
@@ -47,7 +47,7 @@
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/labor/mathematics = 3
@@ -62,11 +62,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
-	spawned.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	spawned.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	spawned.verbs |= /mob/living/carbon/human/proc/churchcurse
-	spawned.verbs |= /mob/living/carbon/human/proc/churchannouncement
-	spawned.verbs += list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb)
+	spawned.give_priest_verbs()
 
 	spawned.virginity = TRUE
 
@@ -78,7 +74,7 @@
 
 /datum/outfit/priest
 	name = "Priest"
-	neck = /obj/item/clothing/neck/psycross/silver/astrata
+	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	head = /obj/item/clothing/head/priestmask
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -113,7 +109,7 @@
 
 /mob/living/carbon/human/proc/coronate_lord()
 	set name = "Coronate"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Divine"
 	if(!mind)
 		return
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
@@ -164,7 +160,7 @@
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Excommunicate"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
@@ -195,7 +191,7 @@
 
 /mob/living/carbon/human/proc/churchcurse()
 	set name = "Curse"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
@@ -225,7 +221,7 @@
 
 /mob/living/carbon/human/proc/churchannouncement()
 	set name = "Priest Announcement"
-	set category = "RoleUnique"
+	set category = "RoleUnique.Divine"
 	if(stat)
 		return
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
@@ -235,3 +231,21 @@
 			return FALSE
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")
+
+/// Helper for giving priest verbs, and whether that should include coronation or penance verbs.
+/mob/living/carbon/human/proc/give_priest_verbs(coronate = TRUE, penance = TRUE)
+	add_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
+	add_verb(src, /mob/living/carbon/human/proc/churchcurse)
+	add_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	if(coronate)
+		add_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+	if(penance)
+		add_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+
+/// Helper for removing priest verbs
+/mob/living/carbon/human/proc/remove_priest_verbs()
+	remove_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
+	remove_verb(src, /mob/living/carbon/human/proc/churchcurse)
+	remove_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	remove_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+	remove_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))

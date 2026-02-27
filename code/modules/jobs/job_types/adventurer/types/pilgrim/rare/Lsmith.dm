@@ -28,7 +28,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/craft/masonry = 2,
 		/datum/skill/craft/engineering = 4,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/traps = 3,
 		/datum/skill/misc/lockpicking = 1,
 		/datum/skill/craft/blacksmithing = 6,

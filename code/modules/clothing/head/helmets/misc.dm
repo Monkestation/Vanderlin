@@ -185,8 +185,8 @@
 	item_weight = 5.5 * IRON_MULTIPLIER
 
 /obj/item/clothing/head/helmet/ironpot/lakkariancap
-	name = "lakkarian crowned cap"
-	desc = "a crimson red iron cap decorated with gold trims and embellishments. The design of this Lakkarian helmet hasn't changed in centuries."
+	name = "embellished crowned cap"
+	desc = "A crimson red iron cap decorated with gold trims and embellishments."
 	icon_state = "lakkaricap"
 	item_state = "lakkaricap"
 	sellprice = 50
@@ -548,6 +548,15 @@
 	worn_y_dimension = 64
 
 /obj/item/clothing/head/helmet/visored/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/head/helmet/visored/silver/armet
+	name = "silver armet"
+	desc = "A finely forged silver armet, with adjustable visor to protect the face."
+	icon_state = "silverarmet"
+
+/obj/item/clothing/head/helmet/visored/silver/armet/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 

@@ -13,7 +13,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	trainable_skills = list(/datum/skill/craft/alchemy)
+	trainable_skills = list(/datum/skill/craft/alchemy = 0.1)
 	max_apprentices = 2
 	apprentice_name = "Apothecary-in-training"
 	can_have_apprentices = TRUE
@@ -42,7 +42,7 @@
 		TRAIT_LEGENDARY_ALCHEMIST,
 	)
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/apothecary
 	give_bank_account = 100

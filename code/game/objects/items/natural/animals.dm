@@ -128,7 +128,7 @@
 	if(held_item)
 		var/path_to_check = ispath(held_item) ? held_item : held_item.type
 		if(ispath(path_to_check, /obj/item/weapon/knife))
-			var/butchering_skill = user.get_skill_level(/datum/skill/labor/butchering)
+			var/butchering_skill = user.get_skill_level(/datum/skill/labor/butchering, TRUE)
 			var/used_time = 8
 			used_time = (used_time - 0.5 * butchering_skill) SECONDS
 			visible_message("[user] begins to butcher \the [src].")

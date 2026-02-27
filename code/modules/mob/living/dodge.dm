@@ -6,8 +6,25 @@
  * @return TRUE if dodge successful, FALSE otherwise
  */
 /mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
-	// Early return conditions specifically for dodging
-	if((pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) || pulling || (world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte)) ||  has_status_effect(/datum/status_effect/debuff/riposted) || src.loc == user.loc || (intenty && !intenty.candodge) || !candodge)
+	if(!candodge)
+		return FALSE
+
+	if(intenty && !intenty.candodge)
+		return FALSE
+
+	if(loc == user.loc)
+		return FALSE
+
+	if(incapacitated())
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
+		return FALSE
+
+	if(world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
 	// Calculate dodge directions based on relative positions
@@ -16,18 +33,20 @@
 	// Find a valid dodge turf
 	var/turf/turfy = find_dodge_turf(dirry)
 
-	if(do_dodge(user, turfy, can_dodge_see))
-		flash_fullscreen("blackflash2")
-		user.aftermiss()
-		var/attacking_item = user.get_active_held_item()
-		if(!(!src.mind || !user.mind))
-			log_defense(src, user, "dodged", attacking_atom = attacking_item,
-					   addition = "(INTENT:[uppertext(user.used_intent.name)])")
+	if(!do_dodge(user, turfy, can_dodge_see))
+		return FALSE
 
-		if(src.client)
-			record_round_statistic(STATS_DODGES)
-		return TRUE
-	return FALSE
+	flash_fullscreen("blackflash2")
+	user.aftermiss()
+	var/attacking_item = user.get_active_held_item()
+	if(!(!src.mind || !user.mind))
+		log_defense(src, user, "dodged", attacking_atom = attacking_item,
+					addition = "(INTENT:[uppertext(user.used_intent.name)])")
+
+	if(client)
+		record_round_statistic(STATS_DODGES)
+
+	return TRUE
 
 /**
  * Handles dodge attempts by the mob
@@ -93,12 +112,15 @@
 
 	if(client?.prefs.showrolls)
 		to_chat(src, span_info("Roll under [dodge_score] to dodge... [dodgeroll]"))
-		if(dodgeroll > dodge_score)
-			return FALSE
-		if(attacker_dualwielding)
+
+	if(dodgeroll > dodge_score)
+		return FALSE
+
+	if(attacker_dualwielding)
+		if(client?.prefs.showrolls)
 			to_chat(src, span_info("Twice! Roll under [dodge_score] to dodge... [second_dodgeroll]"))
-			if(second_dodgeroll > dodge_score)
-				return FALSE
+		if(second_dodgeroll > dodge_score)
+			return FALSE
 
 	try_dodge_to(user, target_turf, dodge_speed)
 
@@ -165,7 +187,7 @@
 
 	if(attacking_item)
 		if(attacking_human?.mind)
-			dodge_score -= (attacking_human.get_skill_level(attacking_item.associated_skill) * 10)
+			dodge_score -= (attacking_human.get_skill_level(attacking_item.associated_skill, TRUE) * 10)
 
 		if(attacking_item.wbalance > 0)
 			dodge_score -= ((user.STASPD - STASPD) * 5)
@@ -193,11 +215,11 @@
 		if(!attacking_item.associated_skill)
 			dodge_score += 10  // Improvised weapon penalty
 		else
-			dodge_score += (defending_human.get_skill_level(attacking_item.associated_skill) * 10)
+			dodge_score += (defending_human.get_skill_level(attacking_item.associated_skill, TRUE) * 10)
 
 	if(defending_human?.mind && attacking_human?.mind && attacking_human.used_intent.unarmed)
-		dodge_score -= (attacking_human.get_skill_level(/datum/skill/combat/unarmed) * 10)
-		dodge_score += (defending_human.get_skill_level(/datum/skill/combat/unarmed) * 10)
+		dodge_score -= (attacking_human.get_skill_level(/datum/skill/combat/unarmed, TRUE) * 10)
+		dodge_score += (defending_human.get_skill_level(/datum/skill/combat/unarmed, TRUE) * 10)
 
 	return dodge_score
 

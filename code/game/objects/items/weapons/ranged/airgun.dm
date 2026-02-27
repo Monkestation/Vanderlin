@@ -52,7 +52,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering) * 3)
+		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -72,7 +72,7 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering) * 3)
+		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
 		//per block
 		newtime = newtime + 20
 		newtime = newtime - (master.STAPER)
@@ -100,7 +100,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/airgun/shoot_with_empty_chamber(mob/user)
 		to_chat(user, span_warning("[src] has nothing to fire!"))
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attackby(obj/item/A, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attackby(obj/item/A, mob/user, list/modifiers)
 	if((istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing)))
 		if(!(user.is_holding(src)))
 			to_chat(user, span_warning("I need to hold \the [src] to load it!"))
@@ -113,7 +113,7 @@
 			return
 	. = ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_self(mob/living/user, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
@@ -139,7 +139,7 @@
 		return
 	. = ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_hand_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -153,7 +153,7 @@
 	if(!choice || choice == "cancel")
 		return
 	var/use_time = 4 //how much time the player needs to crank a knob, pull a lever, etc. in seconds
-	use_time = use_time - (user.get_skill_level(/datum/skill/craft/engineering) / 2)
+	use_time = use_time - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 2)
 	switch(choice)
 		if("Increase Pressure")
 			if(pressure_to_use < maximum_pressure)
@@ -247,7 +247,7 @@
 		if(user.STAPER > 10)
 			BB.accuracy += (user.STAPER - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
 			BB.bonus_accuracy += (user.STAPER - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
+		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering, TRUE) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, pressure_to_use * 100, "airgun")
 	. = ..()
 	cranked = FALSE

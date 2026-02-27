@@ -12,6 +12,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	simpmob_attack = 45
 	simpmob_defend = 45
+	bloodpool = 0
 
 	var/icon_living = ""
 	///Icon when the animal is dead. Don't use animated icons for this.
@@ -223,7 +224,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/realchance = tame_chance
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
@@ -580,13 +581,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(speed == 0)
 		remove_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE)
 	add_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE, 100, multiplicative_slowdown = speed, override = TRUE)
-
-/mob/living/simple_animal/Stat()
-	..()
-	return //RTCHANGE
-/* 	if(statpanel("Status"))
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
-		return 1 */
 
 /mob/living/simple_animal/proc/drop_loot()
 	if(loot.len)

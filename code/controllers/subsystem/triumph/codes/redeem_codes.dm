@@ -2,7 +2,7 @@
 
 /client/verb/redeem_code()
 	set name = "Redeem Code"
-	set category = "OOC"
+	set category = "OOC.Links"
 	set desc = "Redeem a code given to you."
 	var/code = browser_input_text(usr, "Please enter the code", "Code Redemption")
 	if(!code)

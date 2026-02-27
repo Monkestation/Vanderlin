@@ -23,7 +23,7 @@
 	else
 		icon_state = "pilltin"
 
-/obj/item/storage/fancy/pilltin/MiddleClick(mob/user, params)
+/obj/item/storage/fancy/pilltin/MiddleClick(mob/user, list/modifiers)
 	is_open = !is_open
 	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, span_notice("[src] is now [is_open ? "open" : "closed"]."))

@@ -44,6 +44,8 @@
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
 		TRAIT_CABAL,
+		TRAIT_BLOODDRINKER,
+		TRAIT_NASTY_EATER,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -55,6 +57,7 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
+		TRAIT_NASTY_EATER,
 	)
 	var/mutable_appearance/rotflies
 
@@ -114,7 +117,7 @@
 		return
 
 	zombie.cut_overlay(rotflies)
-	zombie.verbs -= /mob/living/carbon/human/proc/zombie_seek
+	remove_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	zombie.mind?.special_role = special_role
 	zombie.ambushable = ambushable
 	if(zombie.dna?.species)
@@ -203,7 +206,7 @@
 	zombie.faction += FACTION_UNDEAD
 	zombie.faction -= FACTION_TOWN
 	zombie.faction -= FACTION_NEUTRAL
-	zombie.verbs |= /mob/living/carbon/human/proc/zombie_seek
+	add_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!zombie_part.rotted && !zombie_part.skeletonized)
 			zombie_part.rotted = TRUE
@@ -257,7 +260,7 @@
 		return
 
 	record_round_statistic(STATS_DEADITES_WOKEN_UP)
-	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
+	zombie.blood_volume = BLOOD_VOLUME_NORMAL
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
 	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
 	if(!infected_wake) //if we died, heal all of this too
@@ -275,7 +278,7 @@
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(!mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE
