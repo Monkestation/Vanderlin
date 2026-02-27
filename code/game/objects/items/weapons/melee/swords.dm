@@ -229,6 +229,12 @@
 	icon_state = "decsaber"
 	sellprice = 140
 
+/obj/item/weapon/sword/sabre/captain
+	name = "Law"
+	desc = "A sabre decorated with gold forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
+	icon_state = "capsaber"
+	sellprice = 140
+
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
 	desc = "A once elegant blade of mythril, diminishing under the suns gaze"

@@ -314,6 +314,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return strings("accents/halfling_replacement.json", "halfling")
 		if("Gutter")
 			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
 		if("Deepspeak")
 			return strings("accents/triton_replacement.json", "triton")
 		if("Pirate")
@@ -1824,8 +1826,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	if(!selzone)
 		selzone = user.zone_selected
+
 	if(!accurate)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
+		if(selzone != user.zone_selected)
+			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+
 	affecting = H.get_bodypart(check_zone(selzone))
 
 	if(!affecting)
