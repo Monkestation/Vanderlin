@@ -681,11 +681,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		else
 			stat_panel.send_message("unread_changelog")
 
-	if(prefs.toggles & TOGGLE_FULLSCREEN)
-		toggle_fullscreeny(TRUE)
-	else
-		toggle_fullscreeny(FALSE)
-
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
 			to_chat(src, message)
@@ -731,10 +726,11 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	loot_panel = new(src)
 
-	view_size = new(src, getScreenSize())
+	view_size = new(src)
+	toggle_fullscreeny((prefs.toggles & TOGGLE_FULLSCREEN), logging_in = TRUE)
 	view_size.resetFormat()
 	view_size.setZoomMode()
-	fit_viewport()
+	view_size.apply()
 	SSjob.load_player_boosts(ckey)
 	enable_seasonal_buys()
 
@@ -922,13 +918,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(new_player)
 		player_age = -1
 	. = player_age
-
-/client/proc/toggle_fullscreeny(new_value)
-	if(new_value)
-		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
-	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
-	winset(src, "mainwindow", "is-maximized=true")
 
 /client/proc/log_client_to_db_connection_log()
 	if(!SSdbcore.shutting_down)
@@ -1493,6 +1482,26 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		null,
 	)
 	return address in localhost_addresses
+
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "Preferences.Options"
+
+	if(prefs)
+		prefs.toggles ^= TOGGLE_FULLSCREEN
+		toggle_fullscreeny(prefs.toggles & TOGGLE_FULLSCREEN)
+
+/client/proc/toggle_fullscreeny(new_value, logging_in = FALSE)
+	//no need to set every login to not fullscreen, they already aren't.
+	//we also dont need to call attempt_auto_fit_viewport, Login does that for us.
+	if(logging_in)
+		var/fullscreen = (prefs.toggles & TOGGLE_FULLSCREEN)
+		if(fullscreen)
+			winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
+		return
+
+	winset(src, "mainwindow", "menu=;is-fullscreen=[new_value ? "true" : "false"]")
+	attempt_auto_fit_viewport()
 
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND

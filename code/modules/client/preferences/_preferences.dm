@@ -2125,7 +2125,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
-					user.client.view_size.setDefault(getScreenSize(widescreenpref))
+					var/datum/view_data/view = user.client.view_size
+					view.setDefault(view.getScreenSize(widescreenpref))
 
 				if("pixel_size")
 					switch(pixel_size)
