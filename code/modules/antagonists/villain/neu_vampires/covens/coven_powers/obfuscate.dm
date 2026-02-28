@@ -134,6 +134,7 @@
 	var/old_hair
 	var/old_hair_color
 	var/old_eye_color
+	var/old_second_color
 	var/old_facial_hair
 	var/old_facial_hair_color
 	var/old_gender
@@ -151,7 +152,8 @@
 	old_dna = transformer.dna
 	old_hair = feature?.accessory_type
 	old_hair_color = transformer.get_hair_color()
-	old_eye_color = transformer.get_eye_color()
+	old_eye_color = transformer.get_eye_color(TRUE)
+	old_second_color = transformer.get_eye_color(FALSE)
 	old_facial_hair_color = transformer.get_facial_hair_color()
 	old_facial_hair = facial?.accessory_type
 	old_gender = transformer.gender
@@ -197,8 +199,10 @@
 	var/datum/bodypart_feature/hair/target_feature = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
 	var/datum/bodypart_feature/hair/target_facial = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
 
-	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-	eyes.eye_color = target.get_eye_color()
+	var/datum/organ_dna/eyes/eye_dna = target.dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(istype(eye_dna))
+		user.set_eye_color(eye_dna.eye_color, eye_dna.heterochromia ? eye_dna.second_color : eye_dna.eye_color)
+
 	user.set_hair_color(target.get_hair_color(), FALSE)
 	user.set_hair_style(target_feature?.accessory_type, FALSE)
 	user.set_facial_hair_color(target.get_facial_hair_color(), FALSE)
@@ -227,8 +231,7 @@
 	user.name = user.get_visible_name()
 	user.gender = old_gender
 
-	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-	eyes.eye_color = old_eye_color
+	user.set_eye_color(old_eye_color, old_second_color, FALSE)
 	user.set_facial_hair_color(old_facial_hair_color, FALSE)
 	user.set_facial_hair_style(old_facial_hair, FALSE)
 	user.set_hair_color(old_hair_color, FALSE)

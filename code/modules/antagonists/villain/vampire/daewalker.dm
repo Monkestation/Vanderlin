@@ -41,8 +41,8 @@
 	blade.set_species(/datum/species/human/northern)
 
 	blade.skin_tone = SKIN_COLOR_CRIMSONLANDS
-	blade.voice_color = "#ffff00"
-	blade.set_eye_color("#ffff00")
+	blade.set_eye_color("#ffff00", updates_dna = TRUE)
+	blade.voice_color = "ffff00"
 	blade.set_hair_color("#181a1d", FALSE)
 	blade.set_facial_hair_color("#181a1d", FALSE)
 	blade.set_hair_style(/datum/sprite_accessory/hair/head/hunter, FALSE)

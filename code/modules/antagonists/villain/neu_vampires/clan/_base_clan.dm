@@ -149,13 +149,9 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/apply_non_vampire_look(mob/living/carbon/human/H)
-	// Subtle changes for non-vampires - they look more human but with slight clan influence
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 
-	if(eyes && prob(50)) // Only sometimes change eye color
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#AA0000" // Darker red than vampires
-
+	if(prob(50)) // Only sometimes change eye color
+		H.set_eye_color("#AA0000", updates_dna = TRUE)
 	H.update_body()
 	H.update_body_parts(redraw = TRUE)
 
@@ -371,16 +367,12 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/apply_vampire_look(mob/living/carbon/human/H)
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-
 	// Apply vampire appearance
 	H.skin_tone = "c9d3de"
 	H.set_hair_color("#181a1d", FALSE)
 	H.set_facial_hair_color("#181a1d", FALSE)
 
-	if(eyes)
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#FF0000"
+	H.set_eye_color("#FF0000", null, FALSE, FALSE)
 
 	H.update_organ_colors()
 	H.update_body()

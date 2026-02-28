@@ -1355,7 +1355,7 @@
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
-	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna["eyes"]
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
 	if(!eye_dna)
 		return
 	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
