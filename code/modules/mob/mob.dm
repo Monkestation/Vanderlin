@@ -1308,7 +1308,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))

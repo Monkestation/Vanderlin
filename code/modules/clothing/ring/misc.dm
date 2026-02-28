@@ -146,7 +146,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.visible_message("<span class='warning'>[user] twists the [src]!</span>")
 	if(activate_sound)
-		playsound(user, activate_sound, 100, FALSE, -1)
+		playsound(user, activate_sound, 50, FALSE, -1)
 	cooldowny = world.time
 	addtimer(CALLBACK(src, PROC_REF(demagicify)), activetime)
 	active = TRUE

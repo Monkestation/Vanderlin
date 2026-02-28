@@ -179,7 +179,7 @@
 			spawned.change_stat(STATKEY_END, -1)
 			spawned.change_stat(STATKEY_CON, -1)
 			spawned.change_stat(STATKEY_SPD, 1)
-			ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			to_chat(spawned,span_info("\
 			I'm an unloved bastard child. Calloused hands do not suit me.")
@@ -198,7 +198,7 @@
 		if("BKnight") // RARE. DO NOT GIVE THEM BLACKSTEEL SHIT.
 			spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE) // heavy armor user
 			ADD_TRAIT(spawned, TRAIT_HEAVYARMOR, TRAIT_GENERIC) // Keep this rare. Only a handful of armor users get this.
-			ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 			spawned.change_stat(STATKEY_CON, 3)
 			spawned.change_stat(STATKEY_PER, -3)
 			spawned.change_stat(STATKEY_STR, 2)

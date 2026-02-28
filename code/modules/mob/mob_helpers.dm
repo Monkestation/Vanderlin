@@ -675,10 +675,16 @@
 	var/old_zone = zone_selected
 	if(isnum(input))
 		aimheight = input
-	if(input == "up")
-		aimheight = min(aimheight+1, 19)
-	if(input == "down")
-		aimheight = max(aimheight-1, 1)
+	else
+		if(input == "up")
+			aimheight++
+		else if(input == "down")
+			aimheight--
+		//im too stupid to get the modular division to make this not an if statement
+		if(aimheight < 1)
+			aimheight = 19
+		else if(aimheight > 19)
+			aimheight = 1
 
 	switch(aimheight)
 		if(19)

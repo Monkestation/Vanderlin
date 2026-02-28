@@ -83,7 +83,6 @@
 	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
 	var/t_has = p_have(temp_gender, ignore_pronouns)
 	var/t_is  = p_are(temp_gender, ignore_pronouns)
-
 	var/m1
 	var/m2
 	var/m3
@@ -116,7 +115,10 @@
 		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
-		statement_of_identity += "<EM>[used_name]</EM>"
+		if(article)
+			statement_of_identity += "<EM>[article] [used_name]</EM>"
+		else
+			statement_of_identity += "<EM>\a [used_name]</EM>"
 
 		var/appendage_to_name
 		if(race_name) // race name
@@ -259,6 +261,9 @@
 				else
 					. += span_redtext("[m1] an ex-agent of the court.")
 
+			if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
+				. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
+
 			if(real_name in GLOB.excommunicated_players)
 				. += span_userdanger("EXCOMMUNICATED!")
 
@@ -282,6 +287,14 @@
 			if(!is_bandit && (real_name in GLOB.outlawed_players))
 				. += span_userdanger("OUTLAW!")
 
+
+			if(isautomaton(user))
+				if(HAS_TRAIT(src, TRAIT_NOBLE_BLOOD))
+					. += span_blue("They are a Blue-blooded Noble.")
+				else if(HAS_TRAIT(src, TRAIT_NOBLE_POWER))
+					. += span_blue("They are a crown-recognised Noble.")
+				if(job in GLOB.automaton_order_jobs)
+					. += span_blue("They are an authenticated Artificer.")
 
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)

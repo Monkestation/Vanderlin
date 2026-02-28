@@ -366,6 +366,11 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			marque_value += 2
 		if(is_accused)
 			marque_value -= 4
+		if(confession.signee?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+			to_chat(user, SPAN_GOD_PSYDON("Wunderbar. This was no small task to undertake.\
+			\nThe House of Thronleer wishes you to speak. Finish your duties and return immediately.\
+			\nCongratulations."))
+			marque_value += 50
 
 		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
 		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
@@ -497,7 +502,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
-			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn)
+			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn, /datum/antagonist/vampire/lord/daewalker)
 				is_correct = TRUE
 				break
 
@@ -554,7 +559,9 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		var/marque_value = accusation.marquevalue
 		if(!is_indexed)
 			marque_value += 2
-
+		if(subject?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+			to_chat(user, SPAN_GOD_PSYDON("The Daewalker is among you?! Get their confession immediately, my child. You will be well rewarded for your efforts."))
+			marque_value += 6
 		budget2change(marque_value, user, "MARQUE")
 		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
 		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)

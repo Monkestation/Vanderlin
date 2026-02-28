@@ -139,6 +139,7 @@
 
 	var/damage = 12
 	var/used_str = STASTR
+	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
 		return 30 * multiplier
@@ -185,8 +186,7 @@
 		skin_tone = pick_assoc(skin_list)
 
 	if(randomise_flags & RANDOMIZE_EYE_COLOR)
-		var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-		eyes.eye_color = random_eye_color()
+		set_eye_color(random_eye_color(TRUE))
 
 	// if(randomise_flags & RANDOMIZE_FEATURES)
 	// 	dna.features = random_features()

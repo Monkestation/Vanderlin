@@ -18,7 +18,7 @@
 	apprentice_name = "Feldsher-in-training"
 	can_have_apprentices = TRUE
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_NONHERETICAL
 
 	jobstats = list(
 		STATKEY_STR = -1,

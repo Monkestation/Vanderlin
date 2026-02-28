@@ -42,7 +42,7 @@
 		TRAIT_LEGENDARY_ALCHEMIST,
 	)
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/apothecary
 	give_bank_account = 100

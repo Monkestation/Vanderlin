@@ -27,7 +27,8 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,//Not sure if they ought to be a noble but I'll leave it as is.
+		TRAIT_NOBLE_POWER,
 		TRAIT_SEEPRICES,
 		TRAIT_FOREIGNER
 	)

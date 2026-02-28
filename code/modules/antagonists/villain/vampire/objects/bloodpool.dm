@@ -14,6 +14,7 @@
 	var/list/available_project_types = list(
 		/datum/vampire_project/power_growth,
 		/datum/vampire_project/amulet_crafting,
+		/datum/vampire_project/maille_crafting,
 		/datum/vampire_project/armor_crafting
 	)
 
@@ -360,20 +361,42 @@
 		P.name = amulet_name
 	creation_point.visible_message(span_notice("An amulet materializes from the crimson crucible."))
 
+/datum/vampire_project/maille_crafting
+	display_name = "Ancient Maille"
+	description = "Craft a complete set of vampiric maille from crystallized blood."
+	total_cost = VAMPCOST_ONE * 0.75
+	completion_sound = 'sound/misc/vcraft.ogg'
+
+/datum/vampire_project/maille_crafting/on_complete(atom/movable/creation_point)
+	var/turf/T = get_turf(bloodpool)
+	new /obj/item/clothing/head/helmet/ancient(T)
+	new /obj/item/clothing/neck/chaincoif/ancient(T)
+	new /obj/item/clothing/armor/cuirass/ancient(T)
+	new /obj/item/clothing/armor/chainmail/hauberk/ancient(T)
+	new /obj/item/clothing/gloves/chain/ancient(T)
+	new /obj/item/clothing/pants/chainlegs/kilt/ancient(T)
+	new /obj/item/clothing/shoes/boots/armor/ancient(T)
+	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
+
 /datum/vampire_project/armor_crafting
-	display_name = "Wicked Plate"
+	display_name = "Ancient Plate"
 	description = "Craft a complete set of vampiric armor from crystallized blood."
 	total_cost = VAMPCOST_ONE
 	completion_sound = 'sound/misc/vcraft.ogg'
 
 /datum/vampire_project/armor_crafting/on_complete(atom/movable/creation_point)
-	new /obj/item/clothing/pants/platelegs/vampire (bloodpool.loc)
-	new /obj/item/clothing/gloves/chain/vampire (bloodpool.loc)
-	new /obj/item/clothing/armor/chainmail/hauberk/vampire (bloodpool.loc)
-	new /obj/item/clothing/armor/plate/vampire (bloodpool.loc)
-	new /obj/item/clothing/shoes/boots/armor/vampire (bloodpool.loc)
-	new /obj/item/clothing/head/helmet/heavy/vampire (bloodpool.loc)
+	var/turf/T = get_turf(bloodpool)
+	new /obj/item/clothing/head/helmet/heavy/ancient(T)
+	new /obj/item/clothing/face/facemask/steel/ancient(T)
+	new /obj/item/clothing/neck/gorget/ancient(T)
+	new /obj/item/clothing/armor/plate/ancient(T)
+	new /obj/item/clothing/armor/chainmail/ancient(T)
+	new /obj/item/clothing/wrists/bracers/ancient(T)
+	new /obj/item/clothing/gloves/plate/ancient(T)
+	new /obj/item/clothing/pants/platelegs/ancient(T)
+	new /obj/item/clothing/shoes/boots/armor/ancient(T)
 	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
+
 
 #undef VAMPCOST_ONE
 #undef VAMPCOST_TWO

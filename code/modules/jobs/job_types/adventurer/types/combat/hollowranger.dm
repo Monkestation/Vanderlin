@@ -58,7 +58,7 @@
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	beltr = /obj/item/weapon/knife/cleaver/combat
 	armor = /obj/item/clothing/armor/leather/jacket
-	wrists = /obj/item/clothing/neck/psycross/silver/dendor
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 	gloves = /obj/item/clothing/gloves/fingerless
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/black
 

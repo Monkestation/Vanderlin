@@ -1171,6 +1171,38 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 	max_integrity = 450
 
+/obj/structure/fluff/psycross/attack_hand_secondary(mob/living/carbon/user, list/modifiers)
+	. = ..()
+	if(!istype(user))
+		return
+	if(!divine)
+		return
+	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == "Churchling")))
+		return
+	if(user?.patron.type != /datum/patron/divine/centrist)
+		return
+
+	var/datum/patron/old_patron = user.patron
+	var/pick_one = tgui_alert(user, "Do you wish to devote yourself to a Patron?", "Pick a Patron", list("Yes","No"))
+	if(pick_one != "Yes")
+		return
+
+	var/datum/patron/new_patron = GLOB.patrons_by_name[tgui_input_list(user, "Choose your new Patron.", "Pick a Patron", TEMPLE_PATRON_NAMES)]
+	if(!istype(new_patron, /datum/patron) || !(new_patron.type in ALL_TEMPLE_PATRONS))
+		return
+
+	var/confirm = tgui_alert(user, "Your new Patron is [new_patron]. Is this correct?", "Confirm choice", list("Yes", "No"))
+	if(confirm != "Yes")
+		return
+
+	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
+	user.set_patron(new_patron)
+	to_chat(user, "<span class='god_[lowertext(new_patron.name)]'>You have devoted yourself to [new_patron]!</span>")
+	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [new_patron]")
+	visible_message("A bright light flashes out from [src] as it channels divine focus.")
+	AOE_flash(user, range = 5)
+	playsound(src, 'sound/magic/bless.ogg', 50, TRUE)
+
 /obj/structure/fluff/psycross/attackby(obj/item/W, mob/living/carbon/human/user, list/modifiers)
 	if(!user.mind)
 		return ..()

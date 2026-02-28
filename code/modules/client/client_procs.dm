@@ -1310,7 +1310,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/atom/movable/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(O)
 			screen -= O
-			char_render_holders -= O
+			// no need to remove it from char_render_holders, it gets overwritten a few lines down
 			qdel(O)
 		O = new
 		LAZYSET(char_render_holders, "[D]", O)
@@ -1328,8 +1328,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				O.screen_loc = "character_preview_map:0:4,0:26"
 
 /client/proc/clear_character_previews()
-	for(var/atom/movable/screen/S in char_render_holders)
-//		var/atom/movable/screen/S = char_render_holders[index]
+	for(var/index in char_render_holders) // associative list, have to index
+		var/atom/movable/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
 	char_render_holders = list()

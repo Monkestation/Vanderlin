@@ -10,7 +10,7 @@
 	spawn_positions = 3
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK

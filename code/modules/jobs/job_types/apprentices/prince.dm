@@ -35,7 +35,8 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/prince/after_spawn(mob/living/carbon/human/spawned, client/player_client)

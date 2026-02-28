@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/eora)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
 
 	invocation = "Be at peace with Eora."
 	invocation_type = INVOCATION_SHOUT

@@ -14094,7 +14094,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/villagegarrison)
 "ncN" = (
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "ndy" = (
@@ -15360,24 +15360,24 @@
 /area/indoors/soilsons)
 "ogV" = (
 /obj/structure/table/wood/crafted,
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = 7;
 	pixel_y = -5
 	},
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = 11;
 	pixel_y = 5
 	},
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = -9;
 	pixel_y = -6
 	},
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata{
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata{
 	pixel_x = -11;
 	pixel_y = 11
 	},
-/obj/item/clothing/neck/psycross/silver/astrata{
+/obj/item/clothing/neck/psycross/silver/divine/astrata{
 	pixel_x = 5;
 	pixel_y = 8
 	},
@@ -17844,35 +17844,35 @@
 /area/indoors/town/keep/knight)
 "qoo" = (
 /obj/structure/table/wood/crafted,
-/obj/item/clothing/neck/psycross/silver/xylix,
-/obj/item/clothing/neck/psycross/silver/xylix{
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/obj/item/clothing/neck/psycross/silver/divine/xylix{
 	pixel_x = 2;
 	pixel_y = 6
 	},
-/obj/item/clothing/neck/psycross/silver/xylix{
+/obj/item/clothing/neck/psycross/silver/divine/xylix{
 	pixel_y = 16
 	},
-/obj/item/clothing/neck/psycross/silver/pestra{
+/obj/item/clothing/neck/psycross/silver/divine/pestra{
 	pixel_x = -11;
 	pixel_y = -5
 	},
-/obj/item/clothing/neck/psycross/silver/pestra{
+/obj/item/clothing/neck/psycross/silver/divine/pestra{
 	pixel_x = -9;
 	pixel_y = 18
 	},
-/obj/item/clothing/neck/psycross/silver/pestra{
+/obj/item/clothing/neck/psycross/silver/divine/pestra{
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/clothing/neck/psycross/silver/dendor{
+/obj/item/clothing/neck/psycross/silver/divine/dendor{
 	pixel_x = 11;
 	pixel_y = 13
 	},
-/obj/item/clothing/neck/psycross/silver/dendor{
+/obj/item/clothing/neck/psycross/silver/divine/dendor{
 	pixel_x = 7;
 	pixel_y = -3
 	},
-/obj/item/clothing/neck/psycross/silver/dendor{
+/obj/item/clothing/neck/psycross/silver/divine/dendor{
 	pixel_x = 11;
 	pixel_y = 5
 	},
@@ -19122,27 +19122,27 @@
 /area/indoors/town/bath)
 "rBg" = (
 /obj/structure/table/wood/crafted,
-/obj/item/clothing/neck/psycross/silver/necra{
+/obj/item/clothing/neck/psycross/silver/divine/necra{
 	pixel_x = 8;
 	pixel_y = -5
 	},
-/obj/item/clothing/neck/psycross/silver/necra{
+/obj/item/clothing/neck/psycross/silver/divine/necra{
 	pixel_x = 11;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/necra{
+/obj/item/clothing/neck/psycross/silver/divine/necra{
 	pixel_x = -6;
 	pixel_y = 11
 	},
-/obj/item/clothing/neck/psycross/silver/noc{
+/obj/item/clothing/neck/psycross/silver/divine/noc{
 	pixel_x = -2;
 	pixel_y = -4
 	},
-/obj/item/clothing/neck/psycross/silver/noc{
+/obj/item/clothing/neck/psycross/silver/divine/noc{
 	pixel_x = 7;
 	pixel_y = 5
 	},
-/obj/item/clothing/neck/psycross/silver/noc{
+/obj/item/clothing/neck/psycross/silver/divine/noc{
 	pixel_x = -10;
 	pixel_y = 9
 	},
@@ -21799,26 +21799,26 @@
 /area/indoors/town/keep/halls/s)
 "uaa" = (
 /obj/structure/table/wood/crafted,
-/obj/item/clothing/neck/psycross/silver/ravox{
+/obj/item/clothing/neck/psycross/silver/divine/ravox{
 	pixel_y = -5
 	},
-/obj/item/clothing/neck/psycross/silver/ravox{
+/obj/item/clothing/neck/psycross/silver/divine/ravox{
 	pixel_x = -9;
 	pixel_y = -1
 	},
-/obj/item/clothing/neck/psycross/silver/ravox{
+/obj/item/clothing/neck/psycross/silver/divine/ravox{
 	pixel_x = -6;
 	pixel_y = 12
 	},
-/obj/item/clothing/neck/psycross/silver/malum{
+/obj/item/clothing/neck/psycross/silver/divine/malum{
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/item/clothing/neck/psycross/silver/malum{
+/obj/item/clothing/neck/psycross/silver/divine/malum{
 	pixel_x = 9;
 	pixel_y = -1
 	},
-/obj/item/clothing/neck/psycross/silver/malum{
+/obj/item/clothing/neck/psycross/silver/divine/malum{
 	pixel_x = 10;
 	pixel_y = 8
 	},

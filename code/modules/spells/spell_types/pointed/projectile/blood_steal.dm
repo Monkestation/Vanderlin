@@ -61,4 +61,4 @@
 			span_userdanger("Blood erupts from my body!"),
 			span_hear("I hear a fluid spill..."),
 		)
-		new /obj/effect/decal/cleanable/blood/puddle(get_turf(H))
+		new /obj/effect/decal/cleanable/blood/puddle(get_turf(H), H.get_blood_type().color)

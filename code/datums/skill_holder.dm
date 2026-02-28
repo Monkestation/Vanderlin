@@ -164,20 +164,26 @@
 
 /datum/skill_holder/Destroy(force, ...)
 	set_current(null)
+	apprentices = null
 	. = ..()
 
 /datum/skill_holder/proc/set_current(mob/incoming)
 	if(current)
-		UnregisterSignal(current, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF)
+		UnregisterSignal(current, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_PARENT_QDELETING))
 		current.skills = null
 	current = incoming
 	if(current)
 		current.skills = src
 		RegisterSignal(current, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(upon_mind_transfer))
+		RegisterSignal(current, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_deleted))
 
 /datum/skill_holder/proc/upon_mind_transfer(mob/living/source_old_mob, mob/living/new_mob)
 	SIGNAL_HANDLER
 	set_current(new_mob)
+
+/datum/skill_holder/proc/on_owner_deleted()
+	SIGNAL_HANDLER
+	qdel(src)
 
 /**
  * Offer apprenticeship to a youngling

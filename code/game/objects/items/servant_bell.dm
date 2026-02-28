@@ -70,7 +70,7 @@
 			to_chat(user, span_warning("What good is a dead servant?"))
 		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
 			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
-		else if(HAS_TRAIT(H, TRAIT_NOBLE) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
+		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
 			to_chat(user, span_warning("The enchantment seems to fail."))
 		else
 			add_servant(H)
@@ -205,7 +205,7 @@
 		add_servant(spawned)
 
 /obj/item/servant_bell/proc/is_bell_proficient(mob/living/user)
-	return HAS_TRAIT(user, TRAIT_NOBLE) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
+	return HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) || HAS_TRAIT(user, TRAIT_NOBLE_POWER) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
 
 /// Keep Bell
 /obj/item/servant_bell/lord

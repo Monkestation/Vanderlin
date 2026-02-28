@@ -30,7 +30,7 @@
 		to_chat(src, span_warning("[victim.p_their(TRUE)] brain is too damaged."))
 		return
 	if(victim.blood_volume > BLOOD_VOLUME_BAD)
-		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to sire [victim.p_them()]."))
+		to_chat(src, span_warning("[victim.p_their(TRUE)] blood is not thin enough to be sired."))
 		return
 	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
 	if(Z?.revived)
@@ -167,20 +167,6 @@
 	to_chat(src, "<span class='greentext'>! QUICKENING !</span>")
 	src.playsound_local(get_turf(src), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 
-
-/datum/status_effect/buff/celerity
-	id = "celerity"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/celerity
-	effectedstats = list(STATKEY_SPD = 15, STATKEY_PER = 10)
-	duration = 30 SECONDS
-
-/datum/status_effect/buff/celerity/nextmove_modifier()
-	return 0.60
-
-/atom/movable/screen/alert/status_effect/buff/celerity
-	name = "Quickening"
-	desc = ""
-	icon_state = "bleed1"
 
 /mob/living/carbon/human/proc/blood_fortitude()
 	set name = "Armor of Darkness"

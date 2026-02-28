@@ -81,7 +81,7 @@
 						shoes_check.polished = 1
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						target.add_stress(/datum/stress_event/shiny_shoes)
 						to_chat(user, ("You polished the [shoes_check]."))
@@ -94,7 +94,7 @@
 					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
 					if(do_after(user, 2 SECONDS, src))
 						shoes_check.polished = 2
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
 						if(particle_spewer)
@@ -185,7 +185,10 @@
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 	if(clan)
-		. += "VITAE: [bloodpool]"
+		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
+	if(cleric)
+		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -408,7 +411,7 @@
 		addtimer(CALLBACK(src, PROC_REF(end_electrocution_animation), electrocution_skeleton_anim), anim_duration)
 
 	else //or just do a generic animation
-		flick_overlay_view(image(icon,src,"electrocuted_generic",ABOVE_MOB_LAYER), src, anim_duration)
+		flick_overlay_view(mutable_appearance(icon, "electrocuted_generic", ABOVE_MOB_LAYER), anim_duration)
 
 /mob/living/carbon/human/proc/end_electrocution_animation(mutable_appearance/MA)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, "#000000")
@@ -1020,7 +1023,7 @@
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))

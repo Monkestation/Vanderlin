@@ -145,7 +145,8 @@
 		return
 	if(MOBTIMER_EXISTS(src, MT_REBELOFFER))
 		return
-
+	if(is_antag_banned(ckey, ROLE_PREBEL))
+		return
 	var/datum/team/prebels/RT = mind_datum.rev_team
 	var/shittime = world.time
 	playsound_local(src, 'sound/misc/rebel.ogg', 100, FALSE)

@@ -1355,17 +1355,12 @@
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
-	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	var/eyecolor = eyes.eye_color
-	var/eyesecond = eyes.second_color
-	if(eyes)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	eyes = new /obj/item/organ/eyes/night_vision/zombie
-	eyes.eye_color = eyecolor
-	eyes.second_color = eyesecond
-	eyes.Insert(src)
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()

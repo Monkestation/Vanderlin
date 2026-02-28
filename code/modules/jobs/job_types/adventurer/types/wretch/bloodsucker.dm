@@ -60,7 +60,7 @@
 	)
 
 	pack_traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_DODGEEXPERT
 	)
 
@@ -156,7 +156,7 @@
 
 	pack_traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 	pack_contents = list(
