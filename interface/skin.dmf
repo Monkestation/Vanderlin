@@ -360,6 +360,7 @@ window "stonekeep_prefwin"
 		is-visible = false
 		saved-params = "pos;is-minimized;is-maximized"
 		statusbar = false
+		can-resize = true
 		icon = 'icons\\tg_32.png'
 	elem "preferences_browser"
 		type = BROWSER
