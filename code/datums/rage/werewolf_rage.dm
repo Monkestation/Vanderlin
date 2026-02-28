@@ -10,6 +10,7 @@
 		WW_RAGE_HIGH = list(),
 		WW_RAGE_CRITICAL = list(),
 	)
+	rage_color = "#F0C420"
 
 /datum/rage/werewolf/grant_to_holder(mob/living/carbon/human/holder)
 	. = ..()
