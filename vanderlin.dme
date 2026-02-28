@@ -3826,6 +3826,7 @@
 #include "interface\skin.dmf"
 #include "interface\fonts\datums\_fonts_datum.dm"
 #include "interface\fonts\datums\arabolical.dm"
+#include "interface\fonts\datums\blackmoor.dm"
 #include "interface\fonts\datums\byzantine.dm"
 #include "interface\fonts\datums\dauphin.dm"
 #include "interface\fonts\datums\frisky.dm"
