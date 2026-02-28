@@ -362,14 +362,7 @@ window "stonekeep_prefwin"
 		is-visible = false
 		saved-params = "pos;is-minimized;is-maximized"
 		statusbar = false
-		can-close = false
-		can-resize = false
 		icon = 'icons\\tg_32.png'
-		outer-size = 716x690
-		outer-pos = 291,0
-		inner-size = 700x650
-		inner-pos = 8,31
-		screen-size = 1920x1032
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
@@ -382,12 +375,10 @@ window "stonekeep_prefwin"
 		type = MAP
 		pos = 30,155
 		size = 282x237
-		anchor1 = 75,0
-		anchor2 = 100,100
+		anchor1 = 0,0
+		anchor2 = 0,0
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"
-		icon-size = 64
-		zoom-mode = distort
 
 window "native_say"
 	elem "native_say"
