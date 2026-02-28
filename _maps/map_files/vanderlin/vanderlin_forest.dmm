@@ -90,6 +90,9 @@
 	aportalgoesto = "vanderlin-forest_bog-bog2";
 	aportalid = "vanderlin-forest_bog-forest2"
 	},
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "bK" = (
@@ -688,6 +691,13 @@
 "iq" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/outpost/vanderlin)
+"iw" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "iy" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/table/wood/fancy/orange,
@@ -1240,6 +1250,12 @@
 "oF" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/tavern)
+"oI" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "oL" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 13;
@@ -1851,6 +1867,10 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"vH" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "vK" = (
 /obj/structure/trap/spike,
 /turf/open/floor/hexstone,
@@ -2037,6 +2057,12 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"xU" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "xY" = (
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
@@ -2178,6 +2204,10 @@
 /mob/living/simple_animal/hostile/retaliate/bat,
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
+"zY" = (
+/obj/effect/landmark/start/adventurerlate,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "zZ" = (
 /obj/structure/bridge,
 /turf/open/water/river{
@@ -2398,6 +2428,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"Cu" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/adventurerlate,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Cv" = (
 /obj/structure/inert_bonepile,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -2926,6 +2961,13 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/dungeon)
+"Hx" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/adventurerlate{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Hy" = (
 /turf/open/floor/rooftop{
 	dir = 4
@@ -3921,6 +3963,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains)
+"Sz" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "SH" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -4009,6 +4055,12 @@
 "TF" = (
 /turf/open/floor/twig,
 /area/indoors/wilderness/tavern)
+"TH" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 4
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "TI" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -4125,6 +4177,9 @@
 	aportalgoesto = "vanderlin-forest_bog-bog2";
 	aportalid = "vanderlin-forest_bog-forest2"
 	},
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness)
 "UP" = (
@@ -4174,6 +4229,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"Vl" = (
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Vm" = (
 /turf/open/floor/sandstone_tile/three,
 /area/indoors/dungeon)
@@ -26610,7 +26671,7 @@ ZV
 tk
 TW
 ZV
-qS
+gr
 gr
 ZV
 ZV
@@ -26807,10 +26868,10 @@ Nf
 gr
 gr
 gr
-ZV
-ZV
 gr
 ZV
+gr
+TH
 ZV
 ZV
 ZV
@@ -27008,11 +27069,11 @@ ZV
 ZV
 gr
 gr
-tk
-ZV
-Nf
-ZV
-ZV
+zY
+Iz
+Iz
+Iz
+Iz
 ZV
 gr
 tk
@@ -27209,12 +27270,12 @@ tk
 gr
 gr
 ZV
+Iz
 ZV
-ZV
-ZV
-ZV
-Jo
-ZV
+Iz
+Sz
+Iz
+Vl
 gr
 Nf
 gr
@@ -27412,10 +27473,10 @@ gr
 gr
 ZV
 ZV
-tk
 gr
-ZV
-ZV
+gr
+Iz
+Iz
 tk
 gr
 ZV
@@ -27616,8 +27677,8 @@ tk
 ZV
 gr
 ZV
-ZV
-ZV
+oI
+gr
 Nf
 ZV
 gr
@@ -31931,7 +31992,7 @@ Nf
 ZV
 ZV
 gr
-ZV
+Hx
 ZV
 gr
 tk
@@ -32130,12 +32191,12 @@ ZV
 gr
 gr
 ZV
-ZV
+Cu
 ZV
 Iz
 gr
 Iz
-ZV
+xU
 tk
 yC
 ZV
@@ -32334,7 +32395,7 @@ gr
 ZV
 ZV
 Iz
-gr
+vH
 Iz
 Iz
 Iz
@@ -32740,7 +32801,7 @@ ZV
 Iz
 Iz
 ZV
-ZV
+iw
 gr
 ZV
 ZV

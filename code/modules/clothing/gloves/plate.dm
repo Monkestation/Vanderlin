@@ -25,6 +25,8 @@
 	grid_height = 32
 	item_weight = 7 * IRON_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."

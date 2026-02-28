@@ -36,6 +36,8 @@
 	item_weight = 7 * IRON_MULTIPLIER
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 //................ Brigandine ............... //
 /obj/item/clothing/armor/brigandine
 	name = "brigandine"
