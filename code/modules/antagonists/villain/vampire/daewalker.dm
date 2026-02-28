@@ -142,7 +142,7 @@
 
 /datum/antagonist/vampire/lord/daewalker/greet()
 	to_chat(owner.current, span_silver( \
-	"You were the most promising Sacresant in all of the Ordo. Your dedication led to a steady rise through the ranks until your induction to the Sanctae Cruoris. \
+	"You were the most promising Sacrestant in all of the Oratorium. Your dedication led to a steady rise through the ranks until your induction to the Sanctae Cruoris. \
 	Still, you rose further until you were to begin your training as a Ritter to House Thronleer, the highest noble house in all of Grenzelhoft. \
 	It was at this point you were witness to something you should not have seen - the true faces of Thronleer, and consequently, Grenzelhoft. \
 	Psydon was a marionette, and these were the puppeteers. \
