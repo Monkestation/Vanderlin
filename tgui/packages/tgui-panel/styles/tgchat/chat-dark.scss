@@ -288,6 +288,12 @@ h2.alert {
   color: hsl(28, 12.2%, 75.88%);
 }
 
+.alert_holder{
+	border: 0.1rem solid hsl(0, 0%, 100%);
+	border-radius: 0.6rem;
+	padding: 1rem;
+}
+
 em {
   font-style: normal;
   font-weight: bold;
