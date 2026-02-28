@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Pterra';
+  src: url('Pterra.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Blackmoor LET';
+  src: url('BlackmoorLET.ttf') format('truetype');
+}
+
 .light:root {
   --color-base: #ffffff;
   --scrollbar-base: #f2f2f2;
@@ -83,12 +93,13 @@ img {
 }
 
 .button {
+  font-family: "Blackmoor LET";
   display: inline-table;
   cursor: pointer;
   user-select: none;
   -ms-user-select: none; /* Remove after Byond 516 */
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.2em;
   min-width: 2.9em;
   padding: 0.5em 0.5em 0.4em;
   background-color: transparent;
@@ -110,14 +121,15 @@ img {
 }
 
 .top-item {
+  font-family: "Blackmoor LET";
   cursor: pointer;
   display: inline-table;
   user-select: none;
   -ms-user-select: none; /* Remove after Byond 516 */
   text-align: center;
-  font-size: 0.9em;
+  font-size: 1.1em;
   width: 100%;
-  padding: 0.5em 0.5em 0.4em;
+  padding: 0.25em 0.25em;
   background-color: transparent;
   border: 0;
   border-radius: 0.25em;

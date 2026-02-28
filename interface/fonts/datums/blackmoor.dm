@@ -1,3 +1,3 @@
 /datum/font/blackmoor
-	name = "BlackmoorLET"
+	name = "Blackmoor LET"
 	font_family = 'interface/fonts/BlackmoorLET.ttf'
