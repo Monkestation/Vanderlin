@@ -838,7 +838,7 @@ SUBSYSTEM_DEF(job)
 		destination.JoinPlayerHere(M, FALSE)
 		return
 
-	if(!length(latejoin_trackers))
+	if(length(latejoin_trackers))
 		destination = pick(latejoin_trackers)
 		destination.JoinPlayerHere(M, buckle)
 		return

@@ -24,6 +24,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 50
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 /obj/item/clothing/gloves/chain/psydon
 	name = "grenzelhoftian chain gauntlets"
 	icon_state = "psydongloveschain"
@@ -47,10 +49,4 @@
 	desc = "Gauntlets with gilded fingers fashioned into talons. The tips are all too dull to be of harm."
 	icon_state = "shadowgauntlets"
 	allowed_race = RACES_PLAYER_ELF_ALL
-	item_weight = 6 * STEEL_MULTIPLIER
-
-/obj/item/clothing/gloves/chain/vampire
-	name = "ancient ceremonial gloves"
-	desc = "A weathered gauntlet with an ancient design."
-	icon_state = "vgloves"
 	item_weight = 6 * STEEL_MULTIPLIER

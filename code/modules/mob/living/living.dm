@@ -1184,12 +1184,14 @@
 				if((newdir in GLOB.cardinals) && (prob(50)))
 					newdir = turn(get_dir(target_turf, start), 180)
 				if(!blood_exists)
-					new /obj/effect/decal/cleanable/trail_holder(start)
+					new /obj/effect/decal/cleanable/trail_holder(start, get_blood_type().color)
 
 				for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
 					if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 						TH.existing_dirs += newdir
-						TH.add_overlay(image('icons/effects/blood.dmi', trail_type, dir = newdir))
+						var/image/bloodthing = image('icons/effects/blood.dmi', trail_type, dir = newdir)
+						bloodthing.color = get_blood_type().color
+						TH.add_overlay(bloodthing)
 						TH.transfer_mob_blood_dna(src)
 
 /mob/living/carbon/human/makeTrail(turf/T)
@@ -2546,12 +2548,12 @@
 			found_ping(get_turf(potential_track), client, "hidden")
 			potential_track.handle_revealing(src)
 
-/proc/found_ping(atom/A, client/C, state)
+/proc/found_ping(atom/A, client/C, state, duration = 3 SECONDS)
 	if(!A || !C || !state)
 		return
 	var/image/I = image('icons/effects/effects.dmi', A, state)
 	I.plane = ABOVE_LIGHTING_PLANE
-	flick_overlay(I, list(C), 3 SECONDS)
+	flick_overlay(I, list(C), duration)
 
 /**
  * look_up Changes the perspective of the mob to any openspace turf above the mob

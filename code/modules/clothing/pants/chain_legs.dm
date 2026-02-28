@@ -27,6 +27,8 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 6 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 /obj/item/clothing/pants/chainlegs/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle)

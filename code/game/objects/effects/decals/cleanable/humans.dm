@@ -3,6 +3,7 @@
 	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "floor1"
+	color = COLOR_BLOOD
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6")
 	blood_state = BLOOD_STATE_HUMAN
 	bloodiness = BLOOD_AMOUNT_PER_DECAL
@@ -48,7 +49,7 @@
 		H.bloody_hands++
 		H.update_inv_gloves()
 
-/obj/effect/decal/cleanable/blood/Initialize(mapload)
+/obj/effect/decal/cleanable/blood/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
@@ -58,6 +59,8 @@
 	pixel_y = base_pixel_y + rand(5,5)
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,15 MINUTES), TIMER_STOPPABLE)
 	GLOB.weather_act_upon_list += src
+	if(override_color)
+		color = override_color
 
 
 /obj/effect/decal/cleanable/blood/proc/become_dry()
@@ -91,7 +94,6 @@
 		C.alpha = initial(alpha)
 		C.bloodiness = initial(bloodiness)
 		C.name = initial(name)
-		C.color = initial(color)
 
 /obj/effect/decal/cleanable/blood/Destroy()
 	deltimer(blood_timer)
@@ -117,13 +119,13 @@
 
 /obj/effect/decal/cleanable/blood/splatter/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/splatter/P = C
-		P.drips++
-		if(P.drips > 2)
+		var/obj/effect/decal/cleanable/blood/splatter/previous = C
+		previous.drips++
+		if(previous.drips > 2)
 			var/turf/T = loc
 			if(istype(T))
-				new /obj/effect/decal/cleanable/blood(T)
-				qdel(P)
+				new /obj/effect/decal/cleanable/blood(T, previous.color)
+				qdel(previous)
 		return TRUE
 
 
@@ -144,11 +146,13 @@
 	appearance_flags = NO_CLIENT_COLOR
 	var/blood_timer
 
-/obj/effect/decal/cleanable/trail_holder/Initialize(mapload)
+/obj/effect/decal/cleanable/trail_holder/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,8 MINUTES), TIMER_STOPPABLE)
+	if(override_color)
+		color = override_color
 
 /obj/effect/decal/cleanable/trail_holder/Destroy()
 	deltimer(blood_timer)
@@ -185,7 +189,7 @@
 	for(var/i in 0 to rand(1,3))
 		sleep(2)
 		if(i > 0)
-			new /obj/effect/decal/cleanable/blood/splatter(loc, diseases)
+			new /obj/effect/decal/cleanable/blood/splatter(loc, color)
 		if(!step_to(src, get_step(src, direction), 0))
 			break
 
@@ -252,21 +256,21 @@
 		if(istype(T))
 			var/obj/effect/decal/cleanable/blood/puddle/PUD = locate() in T
 			if(!PUD)
-				PUD = new(T)
+				PUD = new(T, color)
 				PUD.blood_vol = blood_vol
 
 /obj/effect/decal/cleanable/blood/drip/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/drip/P = C
-		P.drips++
-		if(P.drips > 5)
+		var/obj/effect/decal/cleanable/blood/drip/previous = C
+		previous.drips++
+		if(previous.drips > 5)
 			var/turf/T = loc
 			if(istype(T))
-				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T)
+				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T, previous.color)
 				PUD.blood_vol = blood_vol
-				qdel(P)
+				qdel(previous)
 		else
-			P.update_appearance(UPDATE_ICON_STATE)
+			previous.update_appearance(UPDATE_ICON_STATE)
 		return TRUE
 
 /obj/effect/decal/cleanable/blood/puddle
@@ -294,9 +298,10 @@
 
 /obj/effect/decal/cleanable/blood/puddle/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/puddle/P = C
-		P.blood_vol += 10
-		P.update_appearance(UPDATE_ICON_STATE)
+		var/obj/effect/decal/cleanable/blood/puddle/previous = C
+		previous.blood_vol += 10
+		previous.update_appearance(UPDATE_ICON_STATE)
+		previous.color = color
 		return TRUE
 
 

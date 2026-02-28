@@ -488,7 +488,7 @@
 
 	msg_stage++
 
-/// Prevent clicks for the duration of the ability
+/// Prevent clicks for the "duration" of the status
 /datum/status_effect/debuff/clickcd
 	id = "clickcd"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/clickcd
@@ -538,7 +538,7 @@
 /datum/status_effect/debuff/feinted
 	id = "feinted"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/feinted
-	duration = 30 SECONDS
+	duration = 20 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/feinted
 	name = "Feinted"

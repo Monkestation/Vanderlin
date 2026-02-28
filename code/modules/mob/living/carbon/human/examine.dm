@@ -83,7 +83,6 @@
 	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
 	var/t_has = p_have(temp_gender, ignore_pronouns)
 	var/t_is  = p_are(temp_gender, ignore_pronouns)
-
 	var/m1
 	var/m2
 	var/m3
@@ -116,7 +115,10 @@
 		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
-		statement_of_identity += "<EM>[used_name]</EM>"
+		if(article)
+			statement_of_identity += "<EM>[article] [used_name]</EM>"
+		else
+			statement_of_identity += "<EM>\a [used_name]</EM>"
 
 		var/appendage_to_name
 		if(race_name) // race name
