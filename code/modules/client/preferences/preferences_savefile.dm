@@ -372,8 +372,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!culture)
 		culture = src::culture
 
-	var/patron_typepath
-	S["selected_patron"] >> patron_typepath
+	S["selected_patron"] >> selected_patron
 
 	if(!selected_patron) //failsafe
 		selected_patron = default_patron
