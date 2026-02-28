@@ -353,6 +353,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			background-image: url('Charsheet_BG.1.png');
 			background-size: cover;
 			transform: scale(3);
+			zoom: 100%;
 		}
 		.sprite { position: absolute; background-repeat: no-repeat; cursor: pointer; }
 
