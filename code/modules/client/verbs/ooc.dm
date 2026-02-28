@@ -84,23 +84,20 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 
 	var/keyname = get_display_ckey(ckey)
 	var/color2use = prefs.voice_color
-	var/admin_message_color = prefs.ooccolor
-	if(!color2use)
-		color2use = "#FFFFFF"
-	else
-		color2use = "#[color2use]"
-	var/chat_color = "#c5c5c5"
+	color2use = "#[color2use]"
 	var/msg_to_send = ""
+	var/admin_message_color = prefs.ooccolor
+	if(isnull(admin_message_color))
+		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/pre_keyfield = C.holder ? "[keyname]([key])" : keyname
 		var/keyfield = conditional_tooltip_alt(pre_keyfield, prefs.oocpronouns, length(prefs.oocpronouns) && !is_misc_banned(ckey, BAN_MISC_OOCPRONOUNS))
 		if(C.prefs.chat_toggles & CHAT_OOC)
-			msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
 			to_chat(C, msg_to_send)
-
 
 /client/proc/lobbyooc(msg as text)
 	set category = "OOC"
@@ -161,9 +158,11 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		color2use = "#FFFFFF"
 	else
 		color2use = "#[color2use]"
-	var/chat_color = "#c5c5c5"
+
 	var/msg_to_send = ""
 	var/admin_message_color = prefs.ooccolor
+	if(isnull(admin_message_color))
+		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/real_key = C.holder ? "([key])" : ""
@@ -172,12 +171,11 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 				if(SSticker.current_state != GAME_STATE_FINISHED && !istype(C.mob, /mob/dead/new_player))
 					continue
 
-			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
 
 			to_chat(C, msg_to_send)
-
 
 /proc/toggle_ooc(toggle = null)
 	if(toggle != null) //if we're specifically en/disabling ooc

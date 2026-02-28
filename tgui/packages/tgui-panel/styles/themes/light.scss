@@ -7,7 +7,7 @@
 @use 'sass:meta';
 
 .theme-light:root {
-  --chat-text-color: var(--color-black);
+  --chat-text-color: hsl(0, 0%, 5%);
 
   // Base
   --color-base: hsl(0, 0%, 93%);
