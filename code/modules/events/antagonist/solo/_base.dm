@@ -246,5 +246,6 @@
 		ghost_player.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	new_character.key = ghost_player.key
+	SEND_SOUND(new_character, sound(null))
 
 	return new_character

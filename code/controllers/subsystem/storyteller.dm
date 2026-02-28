@@ -570,7 +570,7 @@ SUBSYSTEM_DEF(gamemode)
 				continue
 			checked_one_box = TRUE
 
-		if(observers && (isobserver(player) || isnewplayer(player)))
+		if(observers && isobserver(player))
 			checked_one_box = TRUE
 
 		if(living_players && isliving(player))
