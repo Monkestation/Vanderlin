@@ -9,9 +9,9 @@
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	weight = 12
+	weight = 10
 
-	denominator = 15
+	denominator = 25
 
 	base_antags = 1
 	maximum_antags = 4
