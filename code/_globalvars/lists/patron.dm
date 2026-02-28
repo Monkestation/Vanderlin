@@ -10,10 +10,11 @@ GLOBAL_LIST_INIT(faith_list, init_faith_list())
 
 	return faiths
 
+GLOBAL_LIST_EMPTY(patrons_by_name)
 GLOBAL_LIST_EMPTY(patrons_by_faith)
-GLOBAL_LIST_INIT(patron_list, init_patron_list())
+GLOBAL_LIST_INIT(patron_list, init_patron_lists())
 
-/proc/init_patron_list()
+/proc/init_patron_lists()
 	var/list/faiths = list()
 	for(var/datum/patron/patron as anything in subtypesof(/datum/patron))
 		if(IS_ABSTRACT(patron))
@@ -21,6 +22,7 @@ GLOBAL_LIST_INIT(patron_list, init_patron_list())
 
 		faiths[patron] = new patron()
 
+		LAZYADDASSOCLIST(GLOB.patrons_by_name, patron::name, patron)
 		LAZYADDASSOCLIST(GLOB.patrons_by_faith, patron::associated_faith, patron)
 
 	return faiths
