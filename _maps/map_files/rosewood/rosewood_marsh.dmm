@@ -3100,13 +3100,13 @@
 "sO" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/coin/gold/pile,
-/obj/item/clothing/shoes/boots/armor/vampire{
+/obj/item/clothing/shoes/boots/armor/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/gloves/chain/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/pants/platelegs/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
 /obj/item/clothing/armor/cuirass/vampire{

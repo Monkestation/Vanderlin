@@ -132,10 +132,10 @@
 		examine_list += span_boldred("TRAITOR! His capture has been ordered by the highest authority!")
 	else if(user.mind?.has_antag_datum(/datum/antagonist/werewolf))
 		examine_list += span_boldred("The bloodsucker of Astrata...")
+	else if(is_priest_job(user.mind?.assigned_role))
+		examine_list += SPAN_GOD_ASTRATA("The servant of our Sun Queen!")
 	else if(istype(user.culture, /datum/culture/universal/grenzelhoft))
 		examine_list += span_boldred("The nitebeast of Grenz! He's here!")
-	else if(istype(user.patron, /datum/patron/divine/astrata))
-		examine_list += SPAN_GOD_ASTRATA("The servant of our Sun Queen!")
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("The legally distinct vampire hunter!")
 

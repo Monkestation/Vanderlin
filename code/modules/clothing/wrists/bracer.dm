@@ -5,7 +5,8 @@
 	body_parts_covered = ARMS
 	icon_state = "bracers"
 	item_state = "bracers"
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 60, "fire" = 0, "acid" = 0)
+	armor_class = AC_HEAVY
+	armor = ARMOR_PLATE
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
@@ -14,12 +15,6 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
 
-/obj/item/clothing/wrists/bracers/ancient
-	name = "ancient vambraces"
-	desc = "Very old vambraces."
-	icon_state = "ancientbracers"
-	item_state = "ancientbracers"
-
 /obj/item/clothing/wrists/bracers/naledi
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. It provides more freedom of movement than the traditional steel thorns."
@@ -27,6 +22,7 @@
 	body_parts_covered = ARMS
 	icon_state = "nocwrappings"
 	item_state = "nocwrappings"
+	armor_class = AC_LIGHT
 	armor = ARMOR_PADDED_GOOD
 	blade_dulling = DULLING_BASHCHOP
 	color = "#48443B"
@@ -49,6 +45,7 @@
 	desc = "Thin strips of steel attached to small shoulder and elbow plates, worn on the outside of the arms to protect against slashes."
 	icon_state = "jackchain"
 	item_state = "jackchain"
+
 	armor = ARMOR_MAILLE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = CUT_AND_MINOR_CRITS
@@ -61,6 +58,8 @@
 	desc = "Thin strips of iron and small plates attached to small shoulder and elbow guards, worn on the outside of the arms to protect against slashes, bludgeons and whatever they block."
 	icon_state = "ijackchain"
 	item_state = "ijackchain"
+
+	armor_class = AC_MEDIUM
 	armor = ARMOR_MAILLE
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = CUT_AND_MINOR_CRITS
@@ -73,6 +72,7 @@
 	desc = "Boiled leather bracers typically worn by archers to protect their forearms."
 	icon_state = "lbracers"
 	item_state = "lbracers"
+	armor_class = AC_LIGHT
 	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 15, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_CUT)
 	resistance_flags = null
@@ -127,6 +127,7 @@
 	body_parts_covered = ARMS
 	icon_state = "psybarbs"
 	item_state = "psybarbs"
+	armor_class = AC_MEDIUM
 	armor = list("blunt" = 80, "slash" = 100, "stab" = 90, "piercing" = 80, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	blocksound = PLATEHIT

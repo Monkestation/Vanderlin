@@ -17,7 +17,7 @@
 	. = ..()
 	vampire.grant_undead_eyes()
 	ADD_TRAIT(vampire, TRAIT_FOREIGNER, JOB_TRAIT)
-	SSrole_class_handler.setup_class_handler(vampire, list(CTAG_ADVENTURER = 5, CTAG_PILGRIM=1))
+	SSrole_class_handler.setup_class_handler(vampire, list(CTAG_ADVENTURER = 5, CTAG_PILGRIM=2))
 
 /datum/antagonist/vampire/lords_spawn/equip()
 	. = ..()
