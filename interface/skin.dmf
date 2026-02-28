@@ -375,8 +375,7 @@ window "stonekeep_prefwin"
 		type = MAP
 		pos = 30,155
 		size = 282x237
-		anchor1 = 0,0
-		anchor2 = 0,0
+		anchor1 = 50,100
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"
 
