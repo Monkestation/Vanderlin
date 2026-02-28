@@ -79,7 +79,6 @@ window "info_and_buttons"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #000000
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
 	elem "info_button_child"
@@ -88,7 +87,6 @@ window "info_and_buttons"
 		size = 640x477
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #000000
 		saved-params = "splitter"
 		left = "infobuttons"
 		right = "infowindow"
@@ -360,6 +358,7 @@ window "stonekeep_prefwin"
 		anchor2 = -1,-1
 		background-color = none
 		is-visible = false
+		can-resize = false
 		saved-params = "pos;is-minimized;is-maximized"
 		statusbar = false
 		icon = 'icons\\tg_32.png'
