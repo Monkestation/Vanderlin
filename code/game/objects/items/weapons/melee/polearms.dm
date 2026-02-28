@@ -468,6 +468,13 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	melting_material = /datum/material/steel
 
+/obj/item/weapon/polearm/halberd/bardiche/captain
+	name = "Deliverance"
+	desc = "A glaive decorated with gold forged for the Captain alongside their armor. To deliver justice with every wide swing."
+	sellprice = 200
+	icon_state = "capglaive"
+	melting_material = /datum/material/steel
+
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
 	name = "eagle's beak"

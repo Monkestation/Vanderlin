@@ -114,6 +114,8 @@
 		body += "<a href='?_src_=holder;[HrefToken()];showtriumphs=add;mob=[REF(M)]'>\[Check Triumphs\]</a> "
 		body += "<br>"
 		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
 
 		var/patron = ""
 		if(isliving(M))
@@ -1113,11 +1115,7 @@
 			HL.mind.set_assigned_role(/datum/job/villager)
 			HL.job = "Ex-Priest"
 
-
-			remove_verb(HL, /mob/living/carbon/human/proc/coronate_lord)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchexcommunicate)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchcurse)
-			remove_verb(HL, /mob/living/carbon/human/proc/churchannouncement)
+			HL.remove_priest_verbs()
 			priest_job?.remove_spells(HL)
 			GLOB.excommunicated_players |= HL.real_name
 			HL.cleric?.excommunicate()
@@ -1131,10 +1129,7 @@
 		var/datum/devotion/devotion = new holder()
 		devotion.make_priest()
 		devotion.grant_to(M)
-	add_verb(M, /mob/living/carbon/human/proc/coronate_lord)
-	add_verb(M, /mob/living/carbon/human/proc/churchexcommunicate)
-	add_verb(M, /mob/living/carbon/human/proc/churchcurse)
-	add_verb(M, /mob/living/carbon/human/proc/churchannouncement)
+	M.give_priest_verbs()
 	removeomen(OMEN_NOPRIEST)
 	priority_announce("Astrata has anointed [M.real_name] as the new head of the Church of the Ten!", title = "Astrata Shines!", sound = 'sound/misc/bell.ogg')
 

@@ -7,15 +7,15 @@
 /datum/objective/personal/nobility/on_creation()
 	. = ..()
 	if(owner?.current)
-		if(HAS_TRAIT(owner.current, TRAIT_NOBLE))
+		if(HAS_TRAIT(owner.current, TRAIT_NOBLE_POWER))
 			on_nobility_granted()
 		else
-			RegisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE), PROC_REF(on_nobility_granted))
+			RegisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE_POWER), PROC_REF(on_nobility_granted))
 	update_explanation_text()
 
 /datum/objective/personal/nobility/Destroy()
 	if(owner?.current)
-		UnregisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE))
+		UnregisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE_POWER))
 	return ..()
 
 /datum/objective/personal/nobility/proc/on_nobility_granted()
@@ -29,7 +29,7 @@
 	. = ..()
 	to_chat(owner.current, span_greentext("You have earned nobility and completed Astrata's objective!"))
 	adjust_storyteller_influence(ASTRATA, 20)
-	UnregisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE))
+	UnregisterSignal(owner.current, SIGNAL_ADDTRAIT(TRAIT_NOBLE_POWER))
 
 /datum/objective/personal/nobility/reward_owner()
 	. = ..()

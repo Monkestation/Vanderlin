@@ -1290,7 +1290,7 @@
 		if(!ishuman(M))
 			return
 
-		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patron_list)
+		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patrons_by_type)
 		if(!patron_to_change_to)
 			return
 
@@ -1328,6 +1328,18 @@
 		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s job from [mind_of_mob.assigned_role ? mind_of_mob.assigned_role.title : "NA"] to [new_job.title]")
 
 		mind_of_mob.set_assigned_role(new_job)
+
+	else if(href_list["open_whitelist_panel"])
+		var/mob/M = locate(href_list["open_whitelist_panel"])
+		if(!M?.ckey)
+			return
+		WP.show_ui(usr, ckey(M.ckey))
+
+	if(href_list["open_boost_panel"])
+		var/mob/M = locate(href_list["open_boost_panel"])
+		if(!M?.ckey)
+			return
+		BP.show_ui(usr, ckey(M.ckey))
 
 	else if(href_list["roleban"])
 		if(!check_rights(R_ADMIN))

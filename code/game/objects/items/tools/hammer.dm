@@ -5,6 +5,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	force = DAMAGE_HAMMER
+	usesound = list('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg')
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH)
 	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
