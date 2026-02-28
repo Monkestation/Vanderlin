@@ -32,7 +32,6 @@
 	)
 
 /datum/job/skeleton/knight/after_spawn(mob/living/carbon/spawned, client/player_client)
-	SSmapping.find_and_remove_world_trait(/datum/world_trait/death_knight)
 	SSmapping.retainer.death_knights |= spawned.mind
 	. = ..()
 

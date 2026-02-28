@@ -399,6 +399,10 @@ SUBSYSTEM_DEF(migrants)
 		return FALSE
 	if(migrant_job.banned_lunatic && is_misc_banned(player.ckey, BAN_MISC_LUNATIC))
 		return FALSE
+	if(migrant_job.antag_role)
+		var/antag_type = migrant_job.antag_role::job_rank // ugh
+		if(antag_type && is_antag_banned(player.ckey, antag_type))
+			return FALSE
 
 	var/datum/preferences/prefs = player.prefs
 	if(!player.prefs.allowed_respawn())

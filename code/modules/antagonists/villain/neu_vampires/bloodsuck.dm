@@ -88,8 +88,12 @@
 				to_chat(sire, span_warning("[src]'s soul is beyond your grasp."))
 				return
 
-	var/datum/clan/C = sire.clan
 	ADD_TRAIT(src, "offered_vampirism", INNATE_TRAIT)
+	if(is_antag_banned(client_victim.ckey, ROLE_VAMPIRE))
+		to_chat(sire, span_warning("[src] could not be sired."))
+		return
+
+	var/datum/clan/C = sire.clan
 	var/choice = browser_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
 		return
