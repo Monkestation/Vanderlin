@@ -47,6 +47,8 @@
 #define DISABLE_RUNECHAT (1<<0)
 #define DISABLE_HOVER_TEXT (1<<1)
 #define DISABLE_BALLOON_ALERTS (1<<3)
+#define DISABLE_BALLOON_COMBAT (1<<4)
+#define DISABLE_BALLOON_EXP (1<<5)
 
 #define PARALLAX_INSANE -1 //for show offs
 #define PARALLAX_HIGH    0 //default.

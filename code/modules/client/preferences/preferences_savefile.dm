@@ -77,17 +77,18 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	// Restructuring of skin tones and culture addition
 	if(current_version < 31)
-		var/datum/culture/culture = S["culture"]
-		if(!culture)
-			culture = /datum/culture/universal/ambiguous
-			WRITE_FILE(S["culture"], culture)
+		culture = /datum/culture/universal/ambiguous
+		WRITE_FILE(S["culture"], culture)
 
 		var/list/assoc_skins = pref_species.get_skin_list()
-		// If current skin tone matches one of the current list, we are fine
+		var/list/skins = list()
+
 		for(var/skin in assoc_skins)
-			if(skin_tone != assoc_skins[skin]) // otherwise its gambling time
-				skin_tone = pick_assoc(assoc_skins)
-				break
+			skins += assoc_skins[skin]
+
+		if(!(skin_tone in skins))
+			skin_tone = pick_assoc(assoc_skins)
+			WRITE_FILE(S["skin_tone"], skin_tone)
 
 	if(current_version < 32)
 		var/species_name = S["species"]
@@ -449,9 +450,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 
 	//Validate job prefs
-	for(var/j in job_preferences)
-		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
-			job_preferences -= j
+	if(!job_preferences)
+		job_preferences = list()
+	else
+		for(var/j in job_preferences)
+			if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+				job_preferences -= j
 
 	S["customizer_entries"] >> customizer_entries
 	validate_customizer_entries()

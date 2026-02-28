@@ -33,62 +33,58 @@
 	enchant(/datum/enchantment/silver)
 
 // PANTHEON SILVER PSYCROSSES START
+/obj/item/clothing/neck/psycross/silver/divine
+	name = "amulet of the ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided"
+	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/astrata
+/obj/item/clothing/neck/psycross/silver/divine/astrata
 	name = "amulet of Astrata"
 	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
 	icon_state = "astrata"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/noc
+/obj/item/clothing/neck/psycross/silver/divine/noc
 	name = "amulet of Noc"
 	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
 	icon_state = "noc"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/dendor
+/obj/item/clothing/neck/psycross/silver/divine/dendor
 	name = "amulet of Dendor"
 	desc = "Nature is a body of which we are but its entrails."
 	icon_state = "dendor"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/abyssor
+/obj/item/clothing/neck/psycross/silver/divine/abyssor
 	name = "amulet of Abyssor"
 	desc = "Oceanshaper and guardian of the seas, make them remember his name."
 	icon_state = "abyssor"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/necra
+/obj/item/clothing/neck/psycross/silver/divine/necra
 	name = "amulet of Necra"
 	desc = "Where, grave, thy victory? I triumph still while the Veiled Lady abides by me."
 	icon_state = "necra"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/ravox
+/obj/item/clothing/neck/psycross/silver/divine/ravox
 	name = "amulet of Ravox"
 	desc = "Struggle. Challenge. And rise to struggle again. That is the sword of he who yet lives to fight again."
 	icon_state = "ravox"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/xylix
+/obj/item/clothing/neck/psycross/silver/divine/xylix
 	name = "amulet of Xylix"
 	desc = "Be not fooled, and be not afraid to."
 	icon_state = "xylix"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/eora
+/obj/item/clothing/neck/psycross/silver/divine/eora
 	name = "amulet of Eora"
 	desc = "And I love thee because thou art love."
 	icon_state = "eora"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/holy/eora
+/obj/item/clothing/neck/psycross/silver/divine/eora/potion
 	name = "Eora's love potion"
 	desc = "Eora's blessing is upon thy, use me on someone else and you shall be soulbond."
 	icon_state = "eora"
-	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/holy/eora/attack(mob/living/love_target, mob/user, list/modifiers)
+/obj/item/clothing/neck/psycross/silver/divine/eora/potion/attack(mob/living/love_target, mob/user, list/modifiers)
 	if(!isliving(love_target) || love_target.stat == DEAD)
 		to_chat(user, span_warning("The love potion only works on living things, sicko!"))
 		return ..()
@@ -110,25 +106,25 @@
 	love_target.apply_status_effect(/datum/status_effect/in_love, user)
 	qdel(src)
 
-/obj/item/clothing/neck/psycross/silver/pestra
+/obj/item/clothing/neck/psycross/silver/divine/pestra
 	name = "amulet of Pestra"
 	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate."
 	icon_state = "pestra"
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/malum
+/obj/item/clothing/neck/psycross/silver/divine/malum
 	name = "amulet of Malum"
 	desc = "Blessed be our works, made in His name."
 	icon_state = "malum"
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/silver/malum/steel
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel
 	name = "amulet of Malum"
 	desc = "Let the tools that guide thee be thy hands."
 	icon_state = "malum_alt"
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/neck/psycross/g
+/obj/item/clothing/neck/psycross/gold
 	name = "golden psycross"
 	desc = "Let His name be naught but forgot'n. Let devotion to Him endure, in heart and in deed, beyond the veil of sight."
 	icon_state = "psycross_gold"
@@ -136,9 +132,3 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
-
-/obj/item/clothing/neck/psycross/silver/undivided
-	name = "amulet of the ten"
-	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
-	icon_state = "undivided"
-

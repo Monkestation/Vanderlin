@@ -33,10 +33,14 @@ SUBSYSTEM_DEF(statpanels)
 		if(cached)
 			global_data += "Next Map: [cached.map_name]"
 
+
+		var/true_round_time = "[ROUND_TIME()]"
+		if(SSticker.HasRoundStarted())
+			true_round_time = "[DisplayTimeText(world.time - SSticker.round_start_time, 1)]"
 		global_data += list(
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
-			"Round Time: [ROUND_TIME()]",
+			"Round Time: [true_round_time]",
 			"In-Character Time: [station_time_timestamp()]",
 			"Time of Day: [GLOB.tod]",
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",

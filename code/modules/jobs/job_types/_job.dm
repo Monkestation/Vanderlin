@@ -307,15 +307,6 @@
 		for(var/datum/mind/found_mind in get_minds(X))
 			spawned.mind.learn_target_identity(found_mind)
 
-	// Ready up bonus
-	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		spawned.hydration = 800 // Set higher hydration
-		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
-
-
 	var/used_title = get_informed_title(spawned)
 	if(spawned.islatejoin && (job_flags & JOB_ANNOUNCE_ARRIVAL)) //to be moved somewhere more appropriate
 		scom_announce("[spawned.real_name] the [used_title] arrives from [SSmapping.config.immigrant_origin].")
@@ -394,11 +385,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patron_list)
+	for(var/god in GLOB.patrons_by_type)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patron_list[god]
+		var/datum/patron/P = GLOB.patrons_by_type[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 

@@ -115,8 +115,8 @@
 	/// Do we use a blood type seperate from default? (Yes, yes we do)
 	var/datum/blood_type/exotic_bloodtype
 
-	/// What meat do we get from butchering this species?
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak
+	/// What meat do we get from butchering this species? These are weighted odds.
+	var/list/meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1)
 	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
 	/// Food we (SHOULD) get a mood debuff from
@@ -274,6 +274,7 @@
 	var/amtfail = 0
 
 	var/punch_damage = 0
+	var/kick_damage = 0
 
 	/// Native language for accents
 	var/native_language = "Imperial"
@@ -287,34 +288,38 @@
 ///////////
 
 /datum/species/proc/get_accent(language, variant = 0)
-	if(language == "Old Psydonic")
-		return strings("accents/grenz_replacement.json", "grenz")
-	if(language == "Zalad")
-		return strings("accents/zalad_replacement.json", "arabic")
-	if(language == "Imperial")
-		return
-	if(language == "Elfish" && variant == 1)
-		return strings("accents/russian_replacement.json", "russian")
-	if(language == "Elfish" && variant == 2)
-		return strings("accents/french_replacement.json", "french")
-	if(language == "Dwarfish")
-		return strings("accents/dwarf_replacement.json", "dwarf")
-	if(language == "Infernal")
-		return strings("accents/spanish_replacement.json", "spanish")
-	if(language == "Celestial")
-		return
-	if(language == "Orcish")
-		return strings("accents/halforc_replacement.json", "halforc")
-	if(language == "Halfling")
-		return strings("accents/halfling_replacement.json", "halfling")
-	if(language == "Gutter")
-		return strings("accents/kobold_replacement.json", "kobold")
-	if(language == "Deepspeak")
-		return strings("accents/triton_replacement.json", "triton")
-	if(language == "Pirate")
-		return strings("accents/pirate_replacement.json", "pirate")
-	if(language == "Zizo Chant")
-		return
+	switch(language)
+		if("Old Psydonic", "Psydonic")
+			return strings("accents/grenz_replacement.json", "grenz")
+		if("Zalad")
+			return strings("accents/zalad_replacement.json", "arabic")
+		if("Imperial")
+			return
+		if("Elfish")
+			if(variant == 1)
+				return strings("accents/russian_replacement.json", "russian")
+			else
+				return strings("accents/french_replacement.json", "french")
+		if("Dwarfish")
+			return strings("accents/dwarf_replacement.json", "dwarf")
+		if("Infernal")
+			return strings("accents/spanish_replacement.json", "spanish")
+		if("Celestial")
+			return
+		if("Orcish")
+			return strings("accents/halforc_replacement.json", "halforc")
+		if("Halfling")
+			return strings("accents/halfling_replacement.json", "halfling")
+		if("Gutter")
+			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
+		if("Deepspeak")
+			return strings("accents/triton_replacement.json", "triton")
+		if("Pirate")
+			return strings("accents/pirate_replacement.json", "pirate")
+		if("Zizo Chant")
+			return
 	return
 
 /datum/species/proc/handle_speech(datum/source, list/speech_args)
@@ -404,12 +409,18 @@
 				/datum/language/zalad = "Zalad",
 				/datum/language/deepspeak = "Deepspeak",
 				/datum/language/oldpsydonic = "Old Psydonic",
+				/datum/language/newpsydonic = "Psydonic",
 				/datum/language/undead = "Zizo Chant"
 			)
 
 			if (language in language_map)
 				language_check = language_map[language]
-			if(nativelang != language_check || special_accent)
+			var/unaccented = FALSE
+			if(((language_check == "Psydonic") && (nativelang == "Old Psydonic")) || ((language_check == "Old Psydonic") && (nativelang == "Psydonic")))
+				unaccented = TRUE
+			else if(nativelang == language_check)
+				unaccented = TRUE
+			if(!unaccented || special_accent)
 				if(species_accent)
 					for(var/key in species_accent)
 						var/value = species_accent[key]
@@ -449,8 +460,8 @@
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
-	var/static/list/male_names = world.file2list('strings/names/first_male.txt')
-	var/static/list/female_names = world.file2list('strings/names/first_female.txt')
+	var/static/list/male_names = file2list('strings/names/first_male.txt')
+	var/static/list/female_names = file2list('strings/names/first_female.txt')
 
 	return (gender == FEMALE) ? female_names : male_names
 
@@ -465,7 +476,7 @@
 			break
 
 /datum/species/proc/get_possible_surnames(gender = MALE) as /list
-	var/static/list/last_names = world.file2list('strings/names/last.txt')
+	var/static/list/last_names = file2list('strings/names/last.txt')
 
 	return last_names
 
@@ -1747,6 +1758,8 @@
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -1810,8 +1823,12 @@
 
 	if(!selzone)
 		selzone = user.zone_selected
+
 	if(!accurate)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
+		if(selzone != user.zone_selected)
+			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+
 	affecting = H.get_bodypart(check_zone(selzone))
 
 	if(!affecting)
@@ -1893,7 +1910,7 @@
 				bloody = 1
 				var/turf/location = H.loc
 				var/splatter_dir = get_dir(H, user)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
@@ -2451,7 +2468,7 @@
 	else
 		if(!I.force)
 			return
-		if(!I.sharpness)
+		if(user.used_intent.knockback)
 			if(!target.resting)
 				var/endurance = target.STAEND
 				var/knockback_tiles = 0

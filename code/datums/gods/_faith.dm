@@ -15,7 +15,7 @@
 		return FALSE
 
 	for(var/datum/patron/patron as anything in patrons)
-		patron = GLOB.patron_list[patron]
+		patron = GLOB.patrons_by_type[patron]
 
 		if(patron.preference_accessible(prefs))
 			return TRUE

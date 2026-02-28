@@ -47,6 +47,8 @@ GLOBAL_LIST_EMPTY(prayers)
 	return TRUE
 
 /datum/patron/proc/on_gain(mob/living/pious)
+	if(HAS_TRAIT(pious, TRAIT_DIVINE_CONVERT))
+		return
 	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)

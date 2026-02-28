@@ -19,6 +19,8 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 /obj/item/clothing/armor/chainmail/iron
 	name = "iron haubergeon"
 	desc = "Made out of interlocked iron rings. Offers good resistance against arrows, stabs and cuts. \nUsually worn as padding for proper armor."
@@ -64,19 +66,3 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * IRON_MULTIPLIER
 
-//................ Ancient Haubergon ............... //
-/obj/item/clothing/armor/chainmail/hauberk/vampire
-	name = "ancient haubergeon"
-	desc = "A style of armor long out of use, rests easy on the shoulders. Has sleeves but doesn't cover the legs."
-	icon_state = "vunder"
-	sellprice = VALUE_STEEL_ARMOR_FINE
-
-	armor_class = AC_LIGHT
-	armor = ARMOR_SCALE
-	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	item_weight = 7 * STEEL_MULTIPLIER
-
-/obj/item/clothing/armor/chainmail/hauberk/ancient
-	name = "ancient hauberk"
-	desc = "A very old hauberk."
-	icon_state = "ancienthauberk"

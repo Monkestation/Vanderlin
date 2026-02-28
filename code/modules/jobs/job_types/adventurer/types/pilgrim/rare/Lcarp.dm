@@ -32,7 +32,7 @@
 		/datum/skill/craft/engineering = 1,
 		/datum/skill/misc/reading = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/labor/lumberjacking = 4
 	)
 

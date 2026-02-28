@@ -38,7 +38,7 @@
 		/datum/skill/misc/sneaking = 5,
 		/datum/skill/misc/stealing = 3,
 		/datum/skill/misc/lockpicking = 4,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/riding = 3,
 		/datum/skill/misc/athletics = 4,
 		/datum/skill/misc/medicine = 2,
@@ -451,7 +451,7 @@
 	name = "Servant"
 
 	pack_skills = list(
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 1,
 		/datum/skill/craft/cooking = 3,
 	)

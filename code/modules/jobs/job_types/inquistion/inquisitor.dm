@@ -27,7 +27,7 @@
 	mind_traits = list(
 		TRAIT_KNOW_INQUISITION_DOORS
 	)
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
 	)
@@ -362,6 +362,9 @@
 						held_confession.antag = initial(antag_type:name)
 					if(/datum/antagonist/vampire/lord)
 						held_confession.bad_type = "THE BLOOD-LORD OF VANDERLIN"
+						held_confession.antag = initial(antag_type:name)
+					if(/datum/antagonist/vampire/lord/daewalker)
+						held_confession.bad_type = "THE DAEWALKER, TRAITOR OF THE ORDO AND GRENZELHOFT"
 						held_confession.antag = initial(antag_type:name)
 					if(/datum/antagonist/vampire/lords_spawn)
 						held_confession.bad_type = "AN UNDERLING OF THE BLOOD-LORD"
