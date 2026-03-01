@@ -903,9 +903,13 @@ em {
   margin-left: 2.5em;
 }
 
+.tooltip_alt,
+.tooltip {
+  border-bottom: 1px dashed hsl(0, 0%, 100%);
+}
+
 .tooltip {
   font-style: italic;
-  border-bottom: 1px dashed #fff;
 }
 
 .fieldset_legend {

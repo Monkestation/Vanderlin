@@ -911,9 +911,13 @@ h2.alert {
   margin-left: 3em;
 }
 
+.tooltip_alt,
+.tooltip {
+  border-bottom: 1px dashed hsl(0, 0%, 0%);
+}
+
 .tooltip {
   font-style: italic;
-  border-bottom: 1px dashed #000;
 }
 
 .fieldset_legend {
