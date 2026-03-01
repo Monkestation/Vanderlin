@@ -76,8 +76,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
 					topiclimiter[ADMINSWARNED_AT] = minute
 					msg += " Administrators have been informed."
-					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
 					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute with [hsrc ? "[hsrc] " : ""][href].")
 				to_chat(src, span_danger("[msg]"))
 				return
 
@@ -91,6 +91,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				topiclimiter[SECOND_COUNT] = 0
 			topiclimiter[SECOND_COUNT] += 1
 			if (topiclimiter[SECOND_COUNT] > stl)
+				log_game("[key_name(src)] Has hit the per-second topic limit of [stl] topic calls in a given game second with [hsrc ? "[hsrc] " : ""][href].")
 				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
 				return
 
