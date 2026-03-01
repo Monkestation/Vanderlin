@@ -1448,7 +1448,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					set_keybinds(user)
 					return
 
-				var/new_key = uppertext(href_list["key"])
+				var/new_key = normalize_keys(uppertext(href_list["key"]))
 				var/AltMod = text2num(href_list["alt"]) ? "Alt" : ""
 				var/CtrlMod = text2num(href_list["ctrl"]) ? "Ctrl" : ""
 				var/ShiftMod = text2num(href_list["shift"]) ? "Shift" : ""
@@ -2274,11 +2274,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.dna.features = features.Copy()
 	character.dna.real_name = character.real_name
 
-	var/obj/item/organ/eyes/organ_eyes = character.getorgan(/obj/item/organ/eyes)
-	if(organ_eyes)
-		organ_eyes.eye_color = eye_color
-		organ_eyes.old_eye_color = eye_color
-
 	character.skin_tone = skin_tone
 	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
@@ -2508,7 +2503,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+	var/fails_blacklist = length(job.blacklisted_species) && (user.client.prefs.pref_species.id in job.blacklisted_species)
 	if(job.required_playtime_remaining(user.client))
 		var/list/lines = list()
 		for(var/t in job.exp_requirements)

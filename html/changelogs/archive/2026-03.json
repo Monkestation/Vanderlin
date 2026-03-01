@@ -1,0 +1,48 @@
+{
+    "2026-03-01": {
+        "7erracotta": [
+            {
+                "rscadd": "Added new loot pool items"
+            },
+            {
+                "balance": "made greatswords spawn less"
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "Devotion meter should now appear round start"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added more species-specific subcultures."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Gave staff of testimonium master rod powers"
+            },
+            {
+                "code_imp": "Use correct span for master rod job check"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Stress value fixes"
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "Fixed blood not using the right colors."
+            },
+            {
+                "image": "Changed all wounds and blood to whitescale."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added special intents to various weapons. They are started with Strong intent right clicks in combat mode and have differing effects."
+            }
+        ]
+    }
+}

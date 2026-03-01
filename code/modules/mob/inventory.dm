@@ -384,12 +384,12 @@
 		items += wear_shirt
 	return items
 
-/mob/living/proc/unequip_everything()
+/mob/living/proc/unequip_everything(silent = TRUE)
 	var/list/items = list()
 	items |= get_equipped_items(TRUE)
 	for(var/I in items)
-		dropItemToGround(I)
-	drop_all_held_items()
+		dropItemToGround(I, TRUE, silent)
+	drop_all_held_items(silent)
 
 
 /mob/living/carbon/proc/check_obscured_slots(transparent_protection)

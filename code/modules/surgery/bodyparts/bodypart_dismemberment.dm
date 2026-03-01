@@ -410,14 +410,26 @@
 	var/list/limb_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 	if(excluded_zones)
 		limb_list -= excluded_zones
+	var/list/generated_limbs = list()
 	for(var/limb_zone in limb_list)
-		. += regenerate_limb(limb_zone)
+		var/obj/item/bodypart/limb = regenerate_limb(limb_zone)
+		if(limb)
+			generated_limbs += limb
+	return generated_limbs
 
-/mob/living/carbon/proc/regenerate_limb(limb_zone)
+/// Restore a limb. Pass with no args to choose a random missing one.
+/mob/living/carbon/proc/regenerate_limb(limb_zone, silent=TRUE)
+	if(!limb_zone)
+		limb_zone = safepick(get_missing_limbs())
+		if(!limb_zone)
+			return
+
 	var/obj/item/bodypart/limb
 	if(get_bodypart(limb_zone))
-		return FALSE
+		return
 	limb = newBodyPart(limb_zone, 0, 0)
 	if(limb)
 		limb.attach_limb(src, TRUE)
-		return TRUE
+		if(!silent)
+			visible_message(span_green("[src]'s [limb] regenerates!"), span_green("My [limb] regenerates!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		return limb

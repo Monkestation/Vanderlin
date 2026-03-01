@@ -109,7 +109,6 @@
 	var/theirskill = 0
 	var/skill_factor = 0
 
-
 	if(attacker_item?.associated_skill)
 		ourskill = user.get_skill_level(attacker_item.associated_skill)
 

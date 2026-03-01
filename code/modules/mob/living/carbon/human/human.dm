@@ -186,6 +186,7 @@
 	. = ..()
 	if(clan)
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
 	if(cleric)
 		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
