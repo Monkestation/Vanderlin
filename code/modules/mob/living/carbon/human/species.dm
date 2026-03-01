@@ -2296,7 +2296,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/clear_temperature_debuffs(mob/living/carbon/human/H)
 	if(H.temp_debuff_level)
-		H.remove_movespeed_modifier("heat_stress")
+		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 		H.temp_debuff_level = null
 	H.remove_stress(list(
 		/datum/stress_event/cold_mild,
