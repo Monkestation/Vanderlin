@@ -13,7 +13,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/necra)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
 
 	invocation = "Undermaiden avert your gaze!"
 	invocation_type = INVOCATION_SHOUT
@@ -28,6 +28,11 @@
 		"The sound of a placid river drifts into hearing, followed by the ominous toll of a ferryman's bell...",
 		"Some vast, immeasurably distant figure looms beyond my perception - I feel it, more than I see. It waits. It watches.",
 	)
+
+/datum/action/cooldown/spell/avert/templar
+	name = "Divine Grace"
+	invocation = "May The Ten grace you with time!"
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
 
 /datum/action/cooldown/spell/avert/is_valid_target(atom/cast_on)
 	. = ..()

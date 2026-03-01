@@ -1,3 +1,18 @@
+/datum/devotion/divine/centrist
+	traits = list(TRAIT_DIVINE_SERVANT)
+
+/datum/devotion/divine/make_gmtemplar()
+	. = ..()
+	miracles = list(
+		CLERIC_T0 = /datum/action/cooldown/spell/healing,
+		CLERIC_T1 = /datum/action/cooldown/spell/avert/templar,
+		CLERIC_T2 = /datum/action/cooldown/spell/enchantment/holy_flame,
+		CLERIC_T3 = /datum/action/cooldown/spell/status/divine_shield,
+	)
+	viable_tasks = list(
+		/datum/devotion_task/astrata_purge,
+	)
+
 /datum/devotion/divine/astrata
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing,
@@ -8,6 +23,7 @@
 	viable_tasks = list(
 		/datum/devotion_task/astrata_purge,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/noc
 	miracles = list(
@@ -21,6 +37,7 @@
 		/datum/devotion_task/noc_write,
 		/datum/devotion_task/noc_read,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/dendor
 	miracles = list(
@@ -34,6 +51,7 @@
 		/datum/devotion_task/dendor_harvest,
 		/datum/devotion_task/dendor_bless,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/abyssor
 	miracles = list(
@@ -46,6 +64,7 @@
 		/datum/devotion_task/abyssor_sail,
 		/datum/devotion_task/abyssor_fish,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/necra
 	miracles = list(
@@ -58,7 +77,7 @@
 		/datum/devotion_task/necra_bury,
 		/datum/devotion_task/astrata_purge,
 	)
-	traits = list(TRAIT_DEATHSIGHT)
+	traits = list(TRAIT_DIVINE_SERVANT, TRAIT_DEATHSIGHT)
 
 /datum/devotion/divine/ravox
 	miracles = list(
@@ -67,6 +86,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/divine_strike,
 		CLERIC_T3 = /datum/action/cooldown/spell/persistence,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/xylix
 	miracles = list(
@@ -79,6 +99,7 @@
 		/datum/devotion_task/xylix_gamble,
 		/datum/devotion_task/xylix_trick,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/pestra
 	miracles = list(
@@ -91,6 +112,7 @@
 		/datum/devotion_task/pestra_heal,
 		/datum/devotion_task/pestra_medicine,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/malum
 	miracles = list(
@@ -104,6 +126,7 @@
 		/datum/devotion_task/malum_smelt,
 		/datum/devotion_task/malum_forge,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/eora
 	miracles = list(
@@ -120,6 +143,7 @@
 		/datum/devotion_task/eora_create,
 		/datum/devotion_task/eora_hug,
 	)
+	traits = list(TRAIT_DIVINE_SERVANT)
 
 // Inhumen
 /datum/devotion/inhumen/make_cleric()
@@ -134,7 +158,7 @@
 		/datum/action/cooldown/spell/healing/profane,
 	)
 
-/datum/devotion/inhumen/make_churching()
+/datum/devotion/inhumen/make_churchling()
 	. = ..()
 	miracles_extra += list(
 		/datum/action/cooldown/spell/healing/profane,

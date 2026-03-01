@@ -31,6 +31,7 @@
 	meat = list()
 	no_equip = list(
 		ITEM_SLOT_SHIRT,
+		ITEM_SLOT_ARMOR,
 		ITEM_SLOT_MASK,
 		ITEM_SLOT_GLOVES,
 		ITEM_SLOT_SHOES,
@@ -44,7 +45,6 @@
 	species_traits = list(
 		NO_UNDERWEAR,
 		NOTRANSSTING,
-		NOBLOOD
 	)
 	inherent_traits = list(
 		TRAIT_NOMOOD,
@@ -101,6 +101,8 @@
 	enflamed_icon = "widefire"
 
 	exotic_bloodtype = /datum/blood_type/oil
+
+	bleed_mod = 0.2 // 80% less bleed rate from injuries
 
 	custom_id = "automaton"
 	custom_clothes = FALSE

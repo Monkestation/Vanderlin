@@ -70,7 +70,7 @@
 	if(!holder_mob || holder_mob.stat >= DEAD)
 		return
 
-	var/new_stress_amount = new_stress.stress_change
+	var/new_stress_amount = new_stress.get_stress(holder_mob)
 	// Calculate rage gain based on total stress - global multiplier
 	// At 0 stress: 1x multiplier, at 5 stress: 1.33x, at 10 stress: 1.67x, at 15 stress: 2x
 	// Negative stress reduces rage gain

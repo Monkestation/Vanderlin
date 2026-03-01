@@ -48,7 +48,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/helmet/heavy/ordinatorhelm, ///special item //! probably can add this at some point
 		/obj/item/clothing/head/roguehood/psydon/confessor, ///inqport
 		/obj/item/clothing/face/facemask/steel/confessor, ///inqport
-		/obj/item/clothing/neck/psycross/silver/undivided, //Not supposed to get this, not yet at the very least.
 		/obj/item/clothing/gloves/bandages/pugilist,
 		/obj/item/clothing/armor/gambeson/heavy/otavan/inq, ///inqport
 		/obj/item/clothing/armor/gambeson/heavy/otavan, ///null
@@ -83,7 +82,7 @@ abstract types are automatically excluded.
 	var/list/excluded_paths_with_their_subtypes = list(
 		/obj/item/clothing/neck/mercmedal, // only earnable via hermes
 		/obj/item/clothing/neck/shalal, // this is a medal
-		/obj/item/clothing/neck/psycross/silver/holy, // unimplemented
+		/obj/item/clothing/neck/psycross/silver/divine/eora/potion, // unimplemented
 		/obj/item/clothing/armor/skin_armor, // bruh
 		/obj/item/clothing/head/hooded, // abstract items connected to a cloak, shouldn't be craftable
 		/obj/item/clothing/accessory, // ???

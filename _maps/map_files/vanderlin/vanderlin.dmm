@@ -1737,18 +1737,18 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/xylix,
-/obj/item/clothing/neck/psycross/silver/xylix,
-/obj/item/clothing/neck/psycross/silver/xylix,
-/obj/item/clothing/neck/psycross/silver/ravox,
-/obj/item/clothing/neck/psycross/silver/ravox,
-/obj/item/clothing/neck/psycross/silver/ravox,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/obj/item/clothing/neck/psycross/silver/divine/xylix,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "aPp" = (
@@ -2102,9 +2102,8 @@
 /obj/structure/stairs{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -4402,9 +4401,8 @@
 /turf/open/floor/metal/barograte,
 /area/indoors/town/bath)
 "cgt" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/lanternpost/fixed{
 	pixel_x = -2;
@@ -4869,9 +4867,9 @@
 /obj/item/clothing/head/padded/deathshroud,
 /obj/item/clothing/head/padded/deathshroud,
 /obj/item/clothing/head/padded/deathshroud,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
@@ -5460,7 +5458,7 @@
 /area/indoors/town/keep/gate)
 "cEP" = (
 /obj/structure/table/wood/plain/alt,
-/obj/item/clothing/neck/psycross/silver/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
 /obj/item/clothing/head/padded/briarthorns,
 /turf/open/floor/ruinedwood/chevron,
 /area/outdoors/mountains)
@@ -6315,9 +6313,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
 "cWD" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/water_vent,
 /obj/structure/fluff/railing/border{
@@ -6844,9 +6841,9 @@
 /obj/item/clothing/head/roguehood/eora,
 /obj/item/clothing/head/roguehood/eora,
 /obj/item/clothing/head/roguehood/eora,
-/obj/item/clothing/neck/psycross/silver/eora,
-/obj/item/clothing/neck/psycross/silver/eora,
-/obj/item/clothing/neck/psycross/silver/eora,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "dlo" = (
@@ -7436,9 +7433,8 @@
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)
@@ -8406,7 +8402,7 @@
 /area/outdoors/town)
 "dYC" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/clothing/neck/psycross/silver/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/church)
 "dYE" = (
@@ -9502,9 +9498,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/steward)
 "eFK" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "Vanderlin Train Station";
@@ -10896,7 +10891,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church)
 "fnr" = (
-/obj/item/clothing/neck/psycross/silver/eora,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
 /obj/item/candle/eora/lit,
 /obj/item/candle/eora/lit{
 	pixel_x = 7;
@@ -11429,9 +11424,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fBt" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -11753,9 +11747,8 @@
 	},
 /area/under/cavewet)
 "fJQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 8
@@ -13381,7 +13374,7 @@
 /area/indoors/town/keep/halls/w)
 "gxi" = (
 /obj/structure/table/church,
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = -2;
 	pixel_y = 11
 	},
@@ -18517,7 +18510,7 @@
 /area/indoors/town/keep/magician)
 "iZU" = (
 /obj/structure/table/wood/plain/alt,
-/obj/item/clothing/neck/psycross/silver/necra{
+/obj/item/clothing/neck/psycross/silver/divine/necra{
 	pixel_x = 8;
 	pixel_y = 5
 	},
@@ -19574,9 +19567,9 @@
 /obj/item/clothing/shirt/robe/abyssor,
 /obj/item/clothing/shirt/robe/abyssor,
 /obj/item/clothing/shirt/robe/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "jzG" = (
@@ -20344,9 +20337,8 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "jUk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/closed/mineral,
 /area/under/cave)
@@ -24042,7 +24034,7 @@
 "lJX" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/table/wood/plain/alt,
-/obj/item/clothing/neck/psycross/silver/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
 /obj/item/clothing/shirt/robe/dendor,
 /turf/open/floor/ruinedwood/chevron,
 /area/outdoors/mountains)
@@ -26017,9 +26009,8 @@
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/keep/knight)
 "mHH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -28782,9 +28773,8 @@
 	},
 /area/outdoors/river)
 "nZP" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "Vanderlin Train Station";
@@ -32034,9 +32024,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "pAn" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 4
@@ -33108,9 +33097,8 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "qav" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town)
@@ -35276,9 +35264,9 @@
 /obj/item/clothing/shirt/robe/phys,
 /obj/item/clothing/head/roguehood/phys,
 /obj/item/clothing/head/roguehood/phys,
-/obj/item/clothing/neck/psycross/silver/pestra,
-/obj/item/clothing/neck/psycross/silver/pestra,
-/obj/item/clothing/neck/psycross/silver/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "raJ" = (
@@ -38884,9 +38872,9 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/obj/item/clothing/neck/psycross/silver/noc,
-/obj/item/clothing/neck/psycross/silver/noc,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "sLQ" = (
@@ -41491,7 +41479,7 @@
 /obj/structure/table/church{
 	dir = 1
 	},
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = -2;
 	pixel_y = 11
 	},
@@ -42938,9 +42926,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
 "uIW" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/water_vent,
 /turf/open/floor/herringbone,
@@ -43565,9 +43552,9 @@
 /obj/item/clothing/head/roguehood/astrata,
 /obj/item/clothing/head/roguehood/astrata,
 /obj/item/clothing/head/roguehood/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
 "uWU" = (
@@ -46666,9 +46653,8 @@
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
 "wpC" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)
@@ -49292,9 +49278,8 @@
 	pixel_x = -1;
 	pixel_y = 6
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town)

@@ -7,26 +7,44 @@
 @use 'sass:meta';
 
 .theme-light:root {
-  --chat-text-color: var(--color-black);
+  --chat-text-color: hsl(0, 0%, 5%);
 
   // Base
   --color-base: hsl(0, 0%, 93%);
+  --color-primary: hsl(201, 100%, 50%);
   --color-section: var(--color-white);
   --color-text: var(--color-black);
-  --color-label: hsl(0, 0%, 33%);
+  --color-label: hsl(0, 2%, 17%);
   --color-action: hsl(0, 0%, 90%);
   --color-scrollbar-thumb: var(--color-light-gray);
+
   --primary-lightness: 60%;
   --primary-saturation: 60%;
   --border-primary-alpha: 0.66;
 
+  --color-good: hsl(94, 60%, 46%);
+  --color-average: hsl(32, 69%, 47%);
+  --color-bad: hsl(0, 63%, 60%);
+
   // Components
+  --button-color: hsl(120, 4%, 15%);
   --button-background-selected: hsl(from var(--color-primary) h 100 l);
   --button-background-caution: hsl(27.5, 90%, 38%);
   --button-background-danger: hsl(60, 100%, 30%);
+
+  --tab-color: hsl(120, 2%, 20%);
   --tab-color-selected: var(--color-black);
+
+  --input-color: hsl(0, 4%, 36%);
   --input-background: var(--color-base);
+
   --tooltip-background-lightness: 90;
+
+  --notice-box-color: hsl(0, 7%, 76%);
+
+  --section-title-color: hsl(0, 6%, 47%);
+
+  --base-gradient-spread: 0;
 
   // Chat styles
   @include meta.load-css('../tgchat/chat-light.scss');

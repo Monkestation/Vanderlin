@@ -489,7 +489,7 @@
 	. = ..()
 	if(!user.mind)
 		return
-	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+	if(!HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(user, TRAIT_NOBLE_POWER))
 		return
 	if(length(fingers) >= names)
 		to_chat(user, span_notice("[src] is full"))
@@ -564,6 +564,16 @@
 	ADD_TRAIT(user.mind, TRAIT_KNOW_KEEP_DOORS, "[type]")
 	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
+/obj/item/paper/scroll/rous_plans
+	name = "rous tunnel drawings"
+	desc = "Paper etched with the a winding mess of tunnels."
+
+/obj/item/paper/scroll/rous_plans/read(mob/user)
+	if(!user.mind)
+		return
+	to_chat(user, span_purple("<b>These look like secret passages...</b>"))
+	ADD_TRAIT(user.mind, TRAIT_KNOW_ROUS_DOORS, "[type]")
+	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
 /obj/item/paper/scroll/sold_manifest
 	name = "shipping manifest"

@@ -189,6 +189,38 @@
 	stress_change = 1
 	desc = span_red("Same old ugly mug...")
 
+/datum/stress_event/vampire_seen
+	timer = 2 MINUTES
+	stress_change = 2
+	desc = span_boldred("A VAMPIRE!!")
+
+/datum/stress_event/vampire_seen/can_apply(mob/living/user)
+	return user.affects_masquerade(FALSE)
+
+/datum/stress_event/nosferatu_seen
+	timer = 3 MINUTES
+	stress_change = 3
+	desc = span_phobia("WHAT WAS THAT THING??")
+	/// prevents the jumpscare from triggering from repeated examines
+	var/is_refresh = FALSE
+
+/datum/stress_event/nosferatu_seen/can_apply(mob/living/user)
+	return user.affects_masquerade(FALSE)
+
+/datum/stress_event/nosferatu_seen/on_apply(mob/living/user)
+	. = ..()
+	if(is_refresh)
+		return
+	is_refresh = TRUE
+	if(prob(20) && !(HAS_TRAIT(user, TRAIT_STEELHEARTED) || HAS_TRAIT(user, TRAIT_FEARLESS)))
+		user.playsound_local(user, pick('sound/misc/jumpscare (1).ogg','sound/misc/jumpscare (2).ogg','sound/misc/jumpscare (3).ogg','sound/misc/jumpscare (4).ogg'), 100)
+		user.freak_out()
+
+/datum/stress_event/its_the_fucking_daewalker
+	timer = 3 MINUTES
+	stress_change = 3
+	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
+
 /datum/stress_event/fishface
 	timer = 30 SECONDS
 	stress_change = 1
@@ -315,10 +347,6 @@
 	stress_change = 1
 	desc = "<span class='red'>I drank from a lesser creature.</span>"
 	timer = 1 MINUTES
-
-/datum/stress_event/lowvampire
-	stress_change = 1
-	desc = "<span class='red'>I'm dead... what comes next?</span>"
 
 /datum/stress_event/oziumoff
 	stress_change = 20
@@ -768,15 +796,32 @@
 	max_stacks = 3
 	stress_change_per_extra_stack = 1
 	quality_modifier = -2
-	hidden = TRUE
-	desc = span_red("I feel the malaguero of another.")
+	desc = span_red("The Hellspawn is making things worse...")
+	hidden = TRUE // until 2nd stack
 
 /datum/stress_event/malaguero/on_apply(mob/living/user)
 	. = ..()
 	if(istiefling(user))
 		max_stacks = 1
 		stress_change = 0
+		stress_change_per_extra_stack = 0
 		quality_modifier = 0
 
 /datum/stress_event/malaguero/can_show(mob/living/user)
-	return istiefling(user) || ..()
+	if(istiefling(user))
+		return TRUE
+	if(stacks > 1)
+		return TRUE
+	return ..()
+
+/datum/stress_event/malaguero/get_desc(mob/living/user)
+	if(istiefling(user))
+		return span_red("I feel the Malaguero of another.")
+	if(HAS_TRAIT(user, TRAIT_TOLERANT))
+		return span_red("The misfortune of the Tiefling becomes my own.")
+	return ..()
+
+/datum/stress_event/malaguero/get_stress(mob/living/user)
+	if(istiefling(user))
+		return 0
+	return ..()

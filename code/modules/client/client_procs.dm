@@ -54,10 +54,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
 		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
-		//because we skip the limiter, we have to make sure this is a valid arrival and not somebody tricking us
-		//	into letting append to a list without limit.
-		if (asset_cache_job > 0 && asset_cache_job <= last_asset_job && !(asset_cache_job in completed_asset_jobs))
-			completed_asset_jobs += asset_cache_job
+		if(!asset_cache_job)
 			return
 
 	var/atom/ref = locate(href_list["src"])
@@ -76,8 +73,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
 					topiclimiter[ADMINSWARNED_AT] = minute
 					msg += " Administrators have been informed."
-					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
 					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute with [hsrc ? "[hsrc] " : ""][href].")
 				to_chat(src, span_danger("[msg]"))
 				return
 
@@ -91,12 +88,16 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				topiclimiter[SECOND_COUNT] = 0
 			topiclimiter[SECOND_COUNT] += 1
 			if (topiclimiter[SECOND_COUNT] > stl)
+				log_game("[key_name(src)] Has hit the per-second topic limit of [stl] topic calls in a given game second with [hsrc ? "[hsrc] " : ""][href].")
 				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
 				return
 
 	// Tgui Topic middleware
 	if(tgui_Topic(href_list))
 		return
+
+	if(href_list["reload_tguipanel"])
+		nuke_chat()
 
 	if(href_list["reload_statbrowser"])
 		stat_panel.reinitialize()
@@ -109,6 +110,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
 		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
 		src << browse("...", "window=asset_cache_browser")
+
+	if(href_list["asset_cache_preload_data"])
+		asset_cache_preload_data(href_list["asset_cache_preload_data"])
+		return
 
 	// Keypress passthrough
 	if(href_list["__keydown"])
@@ -272,8 +277,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		if("vars")
 			return view_var_Topic(href,href_list,hsrc)
-		if("chat")
-			return chatOutput.Topic(href, href_list)
 
 	switch(href_list["action"])
 		if("openLink")
@@ -436,10 +439,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	stat_panel = new(src, "statbrowser")
 	stat_panel.subscribe(src, PROC_REF(on_stat_panel_message))
 
-	chatOutput = new /datum/chatOutput(src)
-	spawn(5) // Goonchat does some non-instant checks in start()
-		chatOutput.start()
-
 	GLOB.ahelp_tickets.ClientLogin(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
@@ -490,6 +489,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.clientfps
+
+	// Instantiate tgui panel
+	tgui_panel = new(src, "browseroutput")
 
 	if(fexists(roundend_report_file()))
 		add_verb(src, /client/proc/show_previous_roundend_report)
@@ -575,12 +577,16 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	)
 	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
 
-//	chatOutput.start() // Starts the chat
+	// Initalize tgui panel
+	tgui_panel.initialize()
+
 	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
 
-	if(alert_mob_dupe_login)
-		spawn()
-			alert(mob, "You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+	if(alert_mob_dupe_login && !holder)
+		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
+		spawn(0.5 SECONDS) //needs to run during world init, do not convert to add timer
+			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
+			to_chat_immediate(mob, span_danger(dupe_login_message))
 
 	connection_time = world.time
 	connection_realtime = world.realtime
@@ -667,14 +673,15 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	send_resources()
 
-
 	generate_clickcatcher()
 	apply_clickcatcher()
 
-	if(prefs.toggles & TOGGLE_FULLSCREEN)
-		toggle_fullscreeny(TRUE)
-	else
-		toggle_fullscreeny(FALSE)
+	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
+		to_chat(src, span_info("You have unread updates in the changelog."))
+		if(CONFIG_GET(flag/aggressive_changelog))
+			changelog()
+		else
+			stat_panel.send_message("unread_changelog")
 
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
@@ -684,8 +691,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
 
-
 	to_chat(src, get_message_output("message", ckey))
+
+	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
 	update_ambience_pref()
 
@@ -714,16 +723,16 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if (menuitem)
 			menuitem.Load_checked(src)
 
-
-	if(byond_version >= 516) // Enable 516 compat browser storage mechanisms
-		winset(src, null, "browser-options=byondstorage,find,devtools")
+	if(byond_version >= 516) // byondstorage handled by tgui
+		winset(src, null, "browser-options=find,devtools")
 
 	loot_panel = new(src)
 
-	view_size = new(src, getScreenSize())
+	view_size = new(src)
+	toggle_fullscreeny((prefs.toggles & TOGGLE_FULLSCREEN), logging_in = TRUE)
 	view_size.resetFormat()
 	view_size.setZoomMode()
-	fit_viewport()
+	view_size.apply()
 	SSjob.load_player_boosts(ckey)
 	enable_seasonal_buys()
 
@@ -761,6 +770,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	GLOB.clients -= src
 	GLOB.directory -= ckey
+
+	QDEL_NULL(tgui_panel)
 
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)
@@ -909,13 +920,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(new_player)
 		player_age = -1
 	. = player_age
-
-/client/proc/toggle_fullscreeny(new_value)
-	if(new_value)
-		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
-	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
-	winset(src, "mainwindow", "is-maximized=true")
 
 /client/proc/log_client_to_db_connection_log()
 	if(!SSdbcore.shutting_down)
@@ -1310,7 +1314,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/atom/movable/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(O)
 			screen -= O
-			char_render_holders -= O
+			// no need to remove it from char_render_holders, it gets overwritten a few lines down
 			qdel(O)
 		O = new
 		LAZYSET(char_render_holders, "[D]", O)
@@ -1328,8 +1332,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				O.screen_loc = "character_preview_map:0:4,0:26"
 
 /client/proc/clear_character_previews()
-	for(var/atom/movable/screen/S in char_render_holders)
-//		var/atom/movable/screen/S = char_render_holders[index]
+	for(var/index in char_render_holders) // associative list, have to index
+		var/atom/movable/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
 	char_render_holders = list()
@@ -1454,7 +1458,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			continue
 		panel_tabs |= verb_to_init.category
 		verblist[++verblist.len] = list(verb_to_init.category, verb_to_init.name)
-	src.stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
+	stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
 
 /**
  * Handles incoming messages from the stat-panel TGUI.
@@ -1480,6 +1484,27 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		null,
 	)
 	return address in localhost_addresses
+
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "Preferences.Options"
+
+	if(prefs)
+		prefs.toggles ^= TOGGLE_FULLSCREEN
+		toggle_fullscreeny(prefs.toggles & TOGGLE_FULLSCREEN)
+
+/client/proc/toggle_fullscreeny(new_value, logging_in = FALSE)
+	//no need to set every login to not fullscreen, they already aren't.
+	//we also dont need to call attempt_auto_fit_viewport, Login does that for us.
+	if(logging_in)
+		var/fullscreen = (prefs.toggles & TOGGLE_FULLSCREEN)
+		if(fullscreen)
+			winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
+		return
+
+	winset(src, "mainwindow", "menu=;is-fullscreen=[new_value ? "true" : "false"]")
+	attempt_auto_fit_viewport()
+
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND
 #undef SECOND_COUNT

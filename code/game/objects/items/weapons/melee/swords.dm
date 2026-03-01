@@ -121,6 +121,8 @@
 	icon_state = "sword1"
 	sellprice = 30
 
+	weapon_special = /datum/special_intent/shin_swipe
+
 /obj/item/weapon/sword/arming/Initialize()
 	. = ..()
 	if(icon_state == "sword1")
@@ -227,6 +229,12 @@
 	name = "decorated sabre"
 	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
 	icon_state = "decsaber"
+	sellprice = 140
+
+/obj/item/weapon/sword/sabre/captain
+	name = "Law"
+	desc = "A sabre decorated with gold forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
+	icon_state = "capsaber"
 	sellprice = 140
 
 /obj/item/weapon/sword/sabre/stalker
@@ -470,6 +478,8 @@
 	SET_BASE_PIXEL(-16, -16)
 	dropshrink = 0.8
 
+	weapon_special = /datum/special_intent/piercing_lunge
+
 /obj/item/weapon/sword/rapier/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -674,6 +684,8 @@
 	grid_height = 96
 	grid_width = 64
 
+	weapon_special = /datum/special_intent/side_sweep
+
 /obj/item/weapon/sword/long/shotel
 	name = "steel shotel"
 	icon_state = "shotel_steel"
@@ -847,12 +859,12 @@
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
-	name = "Jaded Fang"
+	name = "\proper the Jaded Fang"
 	desc = "An ancestral long blade with an ominous glow, serrated with barbs along its edges. Stained with a strange green tint."
-	force = DAMAGE_SWORD - 2
 	force_wielded = DAMAGE_GREATSWORD_WIELD
-	sellprice = 363
+	sellprice = 0
 	static_price = TRUE
+	randomize_blade_int = FALSE
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
@@ -988,6 +1000,8 @@
 	swingsound = BLADEWOOSH_HUGE
 	slot_flags = ITEM_SLOT_BACK
 	sellprice = 90
+
+	weapon_special = /datum/special_intent/greatsword_swing
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()

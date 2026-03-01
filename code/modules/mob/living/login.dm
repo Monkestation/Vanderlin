@@ -37,6 +37,7 @@
 /mob/living/proc/funeral_login()
 	if(QDELETED(src) || QDELETED(mind))
 		return FALSE
+
 	if(!client)
 		return FALSE
 

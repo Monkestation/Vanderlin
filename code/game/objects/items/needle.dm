@@ -62,7 +62,7 @@
 			return
 		else
 			to_chat(user, "I begin threading the needle with additional fibers...")
-			if(do_after(user, 6 SECONDS - user.get_skill_level(/datum/skill/misc/sewing, TRUE), I))
+			if(do_after(user, 6 SECONDS - user.get_skill_level(/datum/skill/craft/sewing, TRUE), I))
 				stringamt += 5
 				to_chat(user, "I replenish the needle's thread!")
 				qdel(I)
@@ -89,7 +89,7 @@
 			to_chat(user, span_warning("[src] cannot be used to repair [A]!"))
 			return TRUE
 		var/armor_value = 0
-		var/skill_level = user.get_skill_level(/datum/skill/misc/sewing)
+		var/skill_level = user.get_skill_level(/datum/skill/craft/sewing)
 		for(var/key in I.armor.getList()) // Here we are checking if the armor value of the item is 0 so we can know if the item is armor without having to make a snowflake var
 			armor_value += I.armor.getRating(key)
 		if((armor_value == 0 && skill_level < 1) || (armor_value > 0 && skill_level < 2))
@@ -117,7 +117,7 @@
 				I.take_damage(50, BRUTE, "slash")
 				user.visible_message(span_warning("[user] damaged [I] due to a lack of skill!"))
 				playsound(src, 'sound/foley/cloth_rip.ogg', 50, TRUE)
-			user.mind.add_sleep_experience(/datum/skill/misc/sewing, (user.STAINT) / 2) // Only failing if we have no idea what we're doing
+			user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT) / 2) // Only failing if we have no idea what we're doing
 		return TRUE
 	return ..()
 
