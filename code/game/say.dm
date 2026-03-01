@@ -111,7 +111,7 @@
 					namepart = "Unknown [appendage]"
 				else
 					namepart = "Unknown"
-			spanpart1 = "<span class='smallyell'>"
+			spanpart1 = "<span class='small yell'>"
 	var/languageicon = ""
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	if(istype(D) && D.display_icon(src))
