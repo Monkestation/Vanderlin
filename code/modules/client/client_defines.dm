@@ -108,9 +108,6 @@
 	///Used for limiting the rate of clicks sends by the client to avoid abuse
 	var/list/clicklimiter
 
-	///goonchat chatoutput of the client
-	var/datum/chatOutput/chatOutput
-
 	///lazy list of all credit object bound to this client
 	var/list/credits = list()
 
@@ -134,7 +131,8 @@
 
 	/// Messages currently seen by this client
 	var/list/seen_messages
-	var/datum/viewData/view_size
+
+	var/datum/view_data/view_size
 
 	var/list/current_weathers = list()
 	var/last_lighting_update = 0
@@ -160,6 +158,12 @@
 
 	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [/atom/proc/examine_more] instead of [/atom/proc/examine] on them when examining
 	var/list/recent_examines
+
+	var/list/sent_assets = list() // List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
+	var/list/completed_asset_jobs = list() /// List of all completed blocking send jobs awaiting acknowledgement by send_asset
+
+	var/last_asset_job = 0 /// Last asset send job id.
+	var/last_completed_asset_job = 0
 
 	/// Loot panel for the client
 	var/datum/lootpanel/loot_panel

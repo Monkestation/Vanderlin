@@ -6,9 +6,21 @@
 @use 'sass:map';
 @use 'sass:color';
 
-em {
-  font-style: normal;
-  font-weight: bold;
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #c9c1ba;
+  font-family: Pterra;
+  font-size: 13px;
+  line-height: 1.2;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-wrap: break-word;
 }
 
 img {
@@ -209,8 +221,7 @@ a:visited {
 /* MOTD */
 
 .motd {
-  color: hsl(213.6, 37.9%, 74.1%);
-  font-family: Verdana, sans-serif;
+  color: hsl(75, 100%, 26%);
   white-space: normal;
 }
 
@@ -220,7 +231,7 @@ a:visited {
 .motd h4,
 .motd h5,
 .motd h6 {
-  color: hsl(213.6, 37.9%, 74.1%);
+  color: hsl(75, 100%, 26%);
   text-decoration: underline;
 }
 
@@ -229,17 +240,20 @@ a:visited {
 .motd a:visited,
 .motd a:active,
 .motd a:hover {
-  color: hsl(213.6, 37.9%, 74.1%);
+  color: hsl(75, 100%, 26%);
 }
 
 /* ADD HERE FOR BOLD */
 
 .bold,
+.bolddanger,
 .name,
 .prefix,
 .ooc,
 .looc,
 .adminooc,
+.adminobserverooc,
+.adminsay,
 .admin,
 .medal,
 .yell {
@@ -265,13 +279,20 @@ h3,
 h4,
 h5,
 h6 {
-  color: hsl(213.6, 37.9%, 74.1%);
-  font-family: Georgia, Verdana, sans-serif;
+  color: hsl(28, 12.2%, 75.88%);
+  font-family: "Blackmoor LET";
+  font-weight: normal;
 }
 
 h1.alert,
 h2.alert {
-  color: hsl(213.6, 37.9%, 74.1%);
+  color: hsl(28, 12.2%, 75.88%);
+}
+
+.alert_holder{
+	border: 0.1rem solid hsl(0, 0%, 100%);
+	border-radius: 0.6rem;
+	padding: 1rem;
 }
 
 em {
@@ -280,47 +301,68 @@ em {
 }
 
 .ooc {
-  color: hsl(47.9, 100%, 40%);
-  font-weight: bold;
+  color: hsl(0, 0%, 77.25%);
 }
 
 .adminobserverooc {
-  color: hsl(195, 100%, 40%);
-  font-weight: bold;
+  color: hsl(48, 100%, 40%);
 }
 
 .adminooc {
-  color: hsl(226.6, 52.8%, 50.2%);
-  font-weight: bold;
+  color: hsl(218, 46%, 51%);
 }
 
 .adminsay {
-  color: hsl(16.2, 100%, 50%);
-  font-weight: bold;
+  color: hsl(16, 100%, 50%);
 }
 
 .admin {
-  color: hsl(227, 63.5%, 60.2%);
-  font-weight: bold;
+  color: hsl(223, 100%, 61%);
 }
 
 .name {
   font-weight: bold;
 }
 
+.chat_box {
+	display: inline-block;
+	width: calc(100% - 1em);
+	margin: 0.5em;
+	padding: 0.5em 0.75em;
+	box-sizing: border-box;
+}
+
+.examine_block {
+	background: hsl(0, 0%, 6%);
+	border: 1px solid hsl(240, 3%, 12%);
+}
+
+.mentor_block {
+	background: hsl(310, 24%, 20%);
+	border: 1px dotted hsl(311, 32%, 38%)4;
+}
+
+.announcement_block {
+	background: hsl(296, 88%, 10%);
+	border: 6px inset hsl(338, 87%, 32%);
+}
+
 .say,
-.emote,
 .infoplain,
 .oocplain,
 .warningplain {
 }
 
+.emote {
+  color: hsl(81.4, 17%, 67.8%);
+}
+
 .deadsay {
-  color: hsl(271.9, 100%, 87.8%);
+  color: hsl(272, 100%, 88%);
 }
 
 .binarysay {
-  color: hsl(209.6, 100%, 55.9%);
+  color: hsl(114, 86%, 41%);
 }
 
 .binarysay a {
@@ -339,118 +381,54 @@ em {
   color: hsl(132.8, 74.4%, 45.9%);
 }
 
-.sciradio {
-  color: hsl(271.6, 91.7%, 76.5%);
-}
-
-.comradio {
-  color: hsl(53, 97.6%, 50%);
-}
-
-.secradio {
-  color: hsl(0, 71.2%, 53.7%);
-}
-
-.medradio {
-  color: hsl(202, 83.6%, 64.1%);
-}
-
-.engradio {
-  color: hsl(17, 87.8%, 61.4%);
-}
-
-.suppradio {
-  color: hsl(33.7, 44.9%, 49.8%);
-}
-
-.servradio {
-  color: hsl(88.1, 60.6%, 40.8%);
-}
-
-.enteradio {
-  color: hsl(157.1, 39.6%, 62.4%);
-}
-
 .syndradio {
   color: hsl(359.1, 31.8%, 42.5%);
-}
-
-.gangradio {
-  color: hsl(305.2, 57.8%, 42.7%);
-}
-
-.centcomradio {
-  color: hsl(197, 62.6%, 39.8%);
-}
-
-.aiprivradio {
-  color: hsl(332.2, 59.6%, 60.2%);
-}
-
-.redteamradio {
-  color: hsl(0, 100%, 63.3%) !important;
-}
-
-.blueteamradio {
-  color: hsl(240, 98%, 59.8%) !important;
-}
-
-.greenteamradio {
-  color: hsl(120, 98%, 59.8%) !important;
-}
-
-.yellowteamradio {
-  color: hsl(60, 98%, 59.8%) !important;
-}
-
-.captaincast {
-  color: hsl(157.1, 39.6%, 62.4%);
-}
-
-.yell {
-  font-weight: bold;
 }
 
 .alert {
   color: hsl(0, 74.2%, 48.6%);
 }
 
-.userdanger {
-  color: hsl(0, 73.6%, 44.5%);
-  font-weight: bold;
-  font-size: 185%;
-}
-
-.bolddanger {
-  color: hsl(0, 73.6%, 44.5%);
-  font-weight: bold;
-}
-
-.danger {
-  color: hsl(0, 73.6%, 44.5%);
-}
-
-.tinydanger {
-  color: hsl(0, 73.6%, 44.5%);
-  font-size: 85%;
+.danger,
+.bolddanger,
+.smalldanger,
+.tinydanger  {
+  color: hsl(2.96, 62.3%, 44.7%);
 }
 
 .smalldanger {
-  color: hsl(0, 73.6%, 44.5%);
   font-size: 90%;
 }
+
+.tinydanger {
+  font-size: 85%;
+}
+
+.crit,
+.userdanger {
+  color: hsl(328.6, 74.6%, 44.7%);
+  font-weight: bold;
+}
+
+.crit {
+  font-size: 160%;
+}
+
+.userdanger {
+  font-size: 140%;
+}
+
 .warning {
-  color: hsl(0, 73.6%, 44.5%);
-  font-style: italic;
+  color: hsl(15.5, 64.8%, 44.5%);
 }
 
 .alertwarning {
-  color: hsl(0, 100%, 50%);
+  color: hsl(15.5, 64.8%, 44.5%);
   font-weight: bold;
 }
 
 .boldwarning {
-  color: hsl(0, 73.6%, 44.5%);
+  color: hsl(15.5, 64.8%, 44.5%);
   font-style: italic;
   font-weight: bold;
 }
@@ -499,25 +477,24 @@ em {
 }
 
 .rose {
-  color: hsl(0, 100%, 65.7%);
+  color: hsl(322, 46%, 83%);
 }
 
 .info {
-  color: hsl(226.9, 100%, 80.2%);
+  color: hsl(254, 10%, 68%);
 }
 
 .notice {
-  color: hsl(227, 87.7%, 68%);
+  color: hsl(48, 83%, 68%);
+}
+
+.boldnotice {
+  color: hsl(48, 83%, 68%);
+  font-weight: bold;
 }
 
 .tinynotice {
-  color: hsl(227, 87.7%, 68%);
-  font-size: 85%;
-}
-
-.tinynoticeital {
-  color: hsl(227, 87.7%, 68%);
-  font-style: italic;
+  color: hsl(48, 83%, 68%);
   font-size: 85%;
 }
 
@@ -526,19 +503,8 @@ em {
   font-size: 90%;
 }
 
-.smallnoticeital {
-  color: hsl(227, 87.7%, 68%);
-  font-style: italic;
-  font-size: 90%;
-}
-
 .bolditalic {
   font-style: italic;
-  font-weight: bold;
-}
-
-.boldnotice {
-  color: hsl(227, 87.7%, 68%);
   font-weight: bold;
 }
 
@@ -596,16 +562,6 @@ em {
   font-size: 85%;
 }
 
-.blob {
-  color: hsl(16.1, 100%, 46.7%);
-}
-
-.blobannounce {
-  color: hsl(82, 39%, 30.2%);
-  font-weight: bold;
-  font-size: 185%;
-}
-
 .cult {
   color: hsl(2, 43.8%, 41.2%);
 }
@@ -633,18 +589,6 @@ em {
   font-size: 185%;
 }
 
-.narsie {
-  color: hsl(2, 43.8%, 41.2%);
-  font-weight: bold;
-  font-size: 925%;
-}
-
-.narsiesmall {
-  color: hsl(2, 43.8%, 41.2%);
-  font-weight: bold;
-  font-size: 370%;
-}
-
 .colossus {
   color: hsl(358.6, 52.1%, 32.7%);
   font-size: 310%;
@@ -663,10 +607,6 @@ em {
 
 .purple {
   color: hsl(272.2, 58.7%, 58.2%);
-}
-
-.holoparasite {
-  color: hsl(257.1, 12.4%, 55.7%);
 }
 
 .revennotice {
@@ -711,48 +651,6 @@ em {
   font-weight: bold;
 }
 
-.alien {
-  color: hsl(300, 17.7%, 44.3%);
-}
-
-.noticealien {
-  color: hsl(132.8, 93.4%, 29.6%);
-}
-
-.alertalien {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-weight: bold;
-}
-
-.changeling {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-style: italic;
-}
-
-.alertsyndie {
-  color: hsl(0, 100%, 50%);
-  font-size: 185%;
-  font-weight: bold;
-}
-
-.spiderbroodmother {
-  color: hsl(272, 100%, 50%);
-  font-weight: bold;
-  font-size: 185%;
-}
-
-.spiderbreacher {
-  color: hsl(35, 72.3%, 67.5%);
-  font-weight: bold;
-  font-size: 140%;
-}
-
-.spiderscout {
-  color: hsl(242.9, 68%, 35.5%);
-  font-weight: bold;
-  font-size: 120%;
-}
-
 .interface {
   color: hsl(300, 78.6%, 25.7%);
 }
@@ -774,22 +672,54 @@ em {
   font-family: 'Courier New', cursive, sans-serif;
 }
 
-.command_headset {
-  font-weight: bold;
-  font-size: 160%;
+.elf {
+  font-family: Dauphin, Pterra;
 }
 
-.soapbox {
-  font-weight: bold;
-  font-size: 135%;
+.dwarf {
+  font-family: MasonAlternate, Pterra;
+}
+
+.celestial {
+  font-family: Arabolical, Pterra;
+}
+
+.hellspeak {
+  font-family: Xaphan, Pterra;
+  font-size: 110%
+}
+
+.beast,
+.orc {
+  font-family: "Thief by The Riddler", Pterra;
+}
+
+.deepspeak {
+  font-family: "Underwater Love", Pterra;
+}
+
+.zalad {
+  font-family: Byzantine, Pterra;
+}
+
+.undead {
+  font-family: Nosfer, Pterra;
+}
+
+.oldpsydonic {
+  font-family: "Breitkopf Fraktur", Pterra;
+}
+
+.torture {
+  color: hsl(111, 100%, 56%);
 }
 
 .small {
-  font-size: 60%;
+  font-size: 90%;
 }
 
 .smaller {
-  font-size: 90%;
+  font-size: 60%;
 }
 
 .slightly_larger {
@@ -810,29 +740,14 @@ em {
 
 .greentext {
   color: hsl(132.8, 93.4%, 29.6%);
-  font-size: 185%;
 }
 
 .redtext {
   color: hsl(0, 73.6%, 44.5%);
-  font-size: 185%;
-}
-
-.clown {
-  color: hsl(326, 100%, 72%);
-  font-size: 160%;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-weight: bold;
 }
 
 .singing {
   font-family: 'Trebuchet MS', cursive, sans-serif;
-  font-style: italic;
-}
-
-.his_grace {
-  color: hsl(119.1, 84.4%, 45.3%);
-  font-family: 'Courier New', cursive, sans-serif;
   font-style: italic;
 }
 
@@ -885,6 +800,34 @@ em {
   }
 }
 
+.dead {
+  color: hsl(272, 60%, 69%);
+}
+
+.bloody {
+  color: hsl(0, 86%, 43%);
+}
+
+.artery {
+  color: hsl(359, 30%, 47%);
+}
+
+.infection {
+  color: hsl(91, 64%, 47%);
+}
+
+.necrosis {
+  color: hsl(91, 63%, 34%);
+}
+
+.bone {
+  color: hsl(39, 32%, 84%);
+}
+
+.silver{
+  color: hsl(0, 0%, 75%);
+}
+
 .icon {
   height: 1em;
   width: auto;
@@ -908,38 +851,11 @@ em {
   font-size: 125%;
 }
 
-.abductor {
-  color: hsl(300, 96%, 38.8%);
-  font-style: italic;
-}
-
 .mind_control {
   color: hsl(320, 71.7%, 55.7%);
   font-size: 100%;
   font-weight: bold;
   font-style: italic;
-}
-
-.slime {
-  color: hsl(180.9, 100%, 41%);
-}
-
-.drone {
-  color: hsl(60, 100%, 50%);
-  background-color: hsl(287 62% 36%);
-  font-style: italic;
-}
-
-.monkey {
-  color: hsl(17.8, 50.2%, 39.4%);
-}
-
-.swarmer {
-  color: hsl(219.2, 100%, 58.6%);
-}
-
-.resonate {
-  color: hsl(174.1, 55.4%, 36.1%);
 }
 
 .upside_down {
@@ -987,9 +903,13 @@ em {
   margin-left: 2.5em;
 }
 
+.tooltip_alt,
+.tooltip {
+  border-bottom: 1px dashed hsl(0, 0%, 100%);
+}
+
 .tooltip {
   font-style: italic;
-  border-bottom: 1px dashed;
 }
 
 .fieldset_legend {
@@ -1265,5 +1185,460 @@ $border-width-px: $border-width * 1px;
       $lightness: -5%,
       $space: hsl
     );
+  }
+}
+
+/* ############################### PRAYERS ############################### */
+
+.god_generic {
+  color: hsl(0, 86%, 71%);
+  font-weight: bold;
+  animation: prayer_flicker 1s infinite;
+}
+
+@keyframes prayer_flicker {
+	25% {
+		color: hsl(0, 86%, 71%);
+	}
+
+	50% {
+		color: hsl(0, 71%, 64%);
+	}
+
+	75% {
+		color: hsl(0, 65%, 72%);
+	}
+
+	100% {
+		color: hsl(0, 86%, 66%);
+	}
+}
+
+/* ##### ASTRATA ##### */
+.god_astrata {
+  color: hsl(52, 70%, 65%);
+  font-weight: bold;
+  animation: astrata_flicker 1s infinite;
+}
+
+@keyframes astrata_flicker {
+	25% {
+		color: hsl(52, 70%, 65%);
+	}
+
+	50% {
+		color: hsl(52, 40%, 49%);
+	}
+
+	75% {
+		color: hsl(52, 76%, 59%);
+	}
+
+	100% {
+		color: hsl(52, 44%, 47%);
+	}
+}
+/* ##### END ##### */
+
+
+/* ##### NOC ##### */
+.god_noc {
+  color: hsl(219, 53%, 68%);
+  font-weight: bold;
+  animation: noc_flicker 1s infinite;
+}
+
+@keyframes noc_flicker {
+	25% {
+		color: hsl(219, 53%, 68%);
+	}
+
+	50% {
+		color: hsl(219, 39%, 55%);
+	}
+
+	75% {
+		color: hsl(218, 18%, 50%);
+	}
+
+	100% {
+		color: hsl(219, 76%, 69%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### ABYSSOR ##### */
+.god_abyssor {
+  color: hsl(352, 51%, 36%);
+  font-weight: bold;
+  animation: abyssor_flicker 1s infinite;
+}
+
+@keyframes abyssor_flicker {
+	25% {
+		color: hsl(352, 51%, 36%);
+	}
+
+	50% {
+		color: hsl(351, 45%, 27%);
+	}
+
+	75% {
+		color: hsl(352, 50%, 50%);
+	}
+
+	100% {
+		color: hsl(352, 62%, 44%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### DENDOR ##### */
+.god_dendor {
+  color: hsl(85, 20%, 44%);
+  font-weight: bold;
+  animation: dendor_flicker 1s infinite;
+}
+
+@keyframes dendor_flicker {
+	25% {
+		color: hsl(85, 20%, 44%);
+	}
+
+	50% {
+		color: hsl(85, 28%, 50%);
+	}
+
+	75% {
+		color: hsl(84, 24%, 35%);
+	}
+
+	100% {
+		color: hsl(84, 13%, 48%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### RAVOX ##### */
+.god_ravox {
+  color: hsl(8, 27%, 37%);
+  font-weight: bold;
+  animation: ravox_flicker 1s infinite;
+}
+
+@keyframes ravox_flicker {
+	25% {
+		color: hsl(8, 27%, 37%);
+	}
+
+	50% {
+		color: hsl(8, 35%, 40%);
+	}
+
+	75% {
+		color: hsl(8, 31%, 53%);
+	}
+
+	100% {
+		color: hsl(9, 20%, 31%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### MALUM ##### */
+.god_malum {
+  color: hsl(29, 58%, 59%);
+  font-weight: bold;
+  animation: malum_flicker 1s infinite;
+}
+
+@keyframes malum_flicker {
+	25% {
+		color: hsl(29, 58%, 59%);
+	}
+
+	50% {
+		color: hsl(29, 47%, 49%);
+	}
+
+	75% {
+		color: hsl(29, 71%, 68%);
+	}
+
+	100% {
+		color: hsl(29, 36%, 48%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### EORA ##### */
+.god_eora {
+  color: hsl(297, 47%, 82%);
+  font-weight: bold;
+  animation: eora_flicker 1s infinite;
+ }
+
+@keyframes eora_flicker {
+	25% {
+		color: hsl(297, 47%, 82%);
+	}
+
+	50% {
+		color: hsl(297, 67%, 82%);
+	}
+
+	75% {
+		color: hsl(297, 30%, 66%);
+	}
+
+	100% {
+		color: hsl(296, 19%, 71%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### XYLIX ##### */
+.god_xylix {
+  color: hsl(70, 47%, 82%);
+  font-weight: bold;
+  animation: xylix_flicker 1s infinite;
+}
+
+@keyframes xylix_flicker {
+	25% {
+		color: hsl(70, 47%, 82%);
+	}
+
+	50% {
+		color: hsl(70, 41%, 70%);
+	}
+
+	75% {
+		color: hsl(71, 21%, 59%);
+	}
+
+	100% {
+		color: hsl(71, 19%, 71%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### PESTRA ##### */
+.god_pestra {
+  color: hsl(70, 70%, 37%);
+  font-weight: bold;
+  animation: pestra_flicker 1s infinite;
+}
+
+@keyframes pestra_flicker {
+	25% {
+		color: hsl(70, 70%, 37%);
+	}
+
+	50% {
+		color: hsl(70, 76%, 42%);
+	}
+
+	75% {
+		color: hsl(70, 75%, 31%);
+	}
+
+	100% {
+		color: hsl(70, 62%, 39%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### NECRA ##### */
+.god_necra {
+  color: hsl(243, 60%, 58%);
+  font-weight: bold;
+  animation: necra_flicker 1s infinite;
+}
+
+@keyframes necra_flicker {
+	25% {
+		color: hsl(243, 60.8%, 58%);
+	}
+
+	50% {
+		color: hsl(243, 43%, 54%);
+	}
+
+	75% {
+		color: hsl(243, 48%, 46%);
+	}
+
+	100% {
+		color: hsl(243, 74%, 59%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### MATTHIOS ##### */
+.god_matthios {
+  color: hsl(220, 6.1%, 9.6%);
+  font-weight: bold;
+  animation: matthios_flicker 1s infinite;
+}
+
+@keyframes matthios_flicker {
+	25% {
+		color: hsl(220, 6.1%, 9.6%);
+	}
+
+	50% {
+		color: hsl(225, 4.1%, 19.2%);
+	}
+
+	75% {
+		color: hsl(221.5, 8.8%, 28.8%);
+	}
+
+	100% {
+		color: hsl(220, 3%, 21%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### BAOTHA ##### */
+.god_baotha {
+  color: hsl(294.9, 26.5%, 43.7%);
+  font-weight: bold;
+  animation: baotha_flicker 1s infinite;
+}
+
+@keyframes baotha_flicker {
+	25% {
+		color: hsl(294.9, 26.5%, 43.7%);
+	}
+
+	50% {
+		color: hsl(295.1, 29.4%, 49.4%);
+	}
+
+	75% {
+		color: hsl(295.7, 29.8%, 36.9%);
+	}
+
+	100% {
+		color: hsl(295.6, 21.8%, 48.6%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### GRAGGAR ##### */
+.god_graggar {
+  color: hsl(125.9, 49.1%, 32.4%);
+  font-weight: bold;
+  animation: graggar_flicker 1s infinite;
+}
+
+@keyframes graggar_flicker {
+	25% {
+		color: hsl(125.9, 49.1%, 32.4%);
+	}
+
+	50% {
+		color: hsl(125.9, 52.9%, 34.1%);
+	}
+
+	75% {
+		color: hsl(126.3, 52.8%, 28.2%);
+	}
+
+	100% {
+		color: hsl(125.7, 42.9%, 28.8%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### ZIZO ##### */
+.god_zizo {
+  color: hsl(338.7, 59.2%, 29.8%);
+  font-weight: bold;
+  animation: zizo_flicker 1s infinite;
+}
+
+@keyframes zizo_flicker {
+	25% {
+		color: hsl(338.7, 59.2%, 29.8%);
+	}
+
+	50% {
+		color: hsl(339.1, 65.3%, 32.8%);
+	}
+
+	75% {
+		color: hsl(339.2, 61%, 24.1%);
+	}
+
+	100% {
+		color: hsl(338.8, 52.2%, 32%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### PSYDON ##### */
+.god_psydon {
+  color: hsl(190.9, 36.3%, 82.2%);
+  font-weight: bold;
+  animation: psydon_flicker 1s infinite;
+}
+
+@keyframes psydon_flicker {
+	25% {
+		color: hsl(190.9, 36.3%, 82.2%);
+	}
+
+	50% {
+		color: hsl(191.3, 54.6%, 81%);
+	}
+
+	75% {
+		color: hsl(190.8, 26.5%, 71.2%);
+	}
+
+	100% {
+		color: hsl(189.5, 17.1%, 78.2%);
+	}
+}
+/* ##### END ##### */
+
+.highlight-bounce {
+  animation: bounce 2s infinite;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+.highlight-slide {
+  background: linear-gradient(90deg, transparent 30%, var(--highlight-color, #ffdd44) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: slide 2s infinite;
+  border-radius: 3px;
+}
+
+@keyframes slide {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
