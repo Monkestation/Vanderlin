@@ -417,11 +417,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	remove_client_colour(/datum/client_colour/monochrome)
-	client.view_size.setDefault(getScreenSize())
+	client.view_size.setDefault(client.view_size.getScreenSize())
 	mind.current_ghost = null
 	mind.current.ckey = ckey(key)
 	return TRUE
-
 
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
@@ -465,8 +464,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	M.key = key
 //	M.Login()	//wat
-	return
-
 
 /mob/dead/observer/verb/stay_dead()
 	set category = "Spirit"

@@ -179,11 +179,13 @@
 		if(web_sound_url || stop_web_sounds)
 			for(var/mob/M as anything in GLOB.player_list)
 				var/client/C = M.client
-				if((C.prefs.toggles & SOUND_MIDI) && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
+				if((C.prefs.toggles & SOUND_MIDI))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_LOBBYMUSIC))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_ADMIN))
 					if(!stop_web_sounds)
-						C.chatOutput.sendMusic(web_sound_url, music_extra_data)
+						C.tgui_panel?.play_music(web_sound_url, music_extra_data)
 					else
-						C.chatOutput.stopMusic()
+						C.tgui_panel?.stop_music()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
@@ -210,6 +212,5 @@
 	for(var/mob/M in GLOB.player_list)
 		SEND_SOUND(M, sound(null))
 		var/client/C = M.client
-		if(C && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
-			C.chatOutput.stopMusic()
+		C.tgui_panel?.stop_music()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop All Playing Sounds") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

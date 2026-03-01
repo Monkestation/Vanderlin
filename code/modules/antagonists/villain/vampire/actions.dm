@@ -80,6 +80,7 @@
 	src.last_telepathy_use = world.time
 
 	var/message = span_narsie("<B>A message from <span style='color:#[voice_color]'>[real_name]</span>: [msg]</B>")
+	log_telepathy("[key_name(src)] used vampiric telepathy to say: [msg]")
 	to_chat(clan?.clan_members, message)
 
 /mob/living/carbon/human/proc/disguise_button()

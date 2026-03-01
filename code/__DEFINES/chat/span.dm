@@ -100,7 +100,7 @@
 #define span_lightpurple(str) ("<span class='lightpurple'>" + str + "</span>")
 #define span_radio(str) ("<span class='radio'>" + str + "</span>")
 #define span_reallybig(str) ("<span class='reallybig'>" + str + "</span>")
-#define span_reallybighypnophrase(str) ("<span class='reallybighypnophrase'>" + str + "</span>")
+#define span_reallybighypnophrase(str) ("<span class='hypnophrase reallybig'>" + str + "</span>")
 #define span_reallybigredtext(str) ("<span class='reallybigredtext'>" + str + "</span>")
 #define span_red(str) ("<span class='red'>" + str + "</span>")
 #define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
@@ -153,13 +153,14 @@
 /// Ones where span_X isn't just the class
 #define span_admin_log(str) ("<span class='admin'><span class='prefix'>ADMIN LOG: </span><span class='message linkify'>" + str + "</span></span>")
 
-/// Normal tooltip with underline and default styling
-#define span_tooltip(tip, main_text) ("<span data-tooltip=\"" + tip + "\" class=\"tooltip-trigger\">" + main_text + "</span>")
+/* Tooltips */
+#define span_tooltip(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip\">" + main_text + "</span>")
 
-/// No italics, potentially different styling if 'tooltip-alt-trigger' has unique CSS rules
-#define span_tooltip_alt(tip, main_text) ("<span data-tooltip=\"" + tip + "\" class=\"tooltip-trigger tooltip-alt-trigger\">" + main_text + "</span>")
+// No italics
+#define span_tooltip_alt(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip_alt\">" + main_text + "</span>")
 
 /// Helper which creates a chat message which may have a tooltip in some contexts, but not others.
-#define conditional_tooltip(normal_text, tooltip_text, condition) ((condition) ? (span_tooltip(tooltip_text, normal_text)) : (normal_text))
+#define conditional_tooltip(normal_text, tooltip_text, condition) (condition ? span_tooltip(tooltip_text, normal_text) : normal_text)
+
 /// No italics
-#define conditional_tooltip_alt(normal_text, tooltip_text, condition) ((condition) ? (span_tooltip_alt(tooltip_text, normal_text)) : (normal_text))
+#define conditional_tooltip_alt(normal_text, tooltip_text, condition) (condition ? span_tooltip_alt(tooltip_text, normal_text) : normal_text)

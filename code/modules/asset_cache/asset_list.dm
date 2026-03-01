@@ -116,6 +116,10 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	for (var/asset_name in assets)
 		SSassets.transport.unregister_asset(asset_name)
 
+// If you use a file(...) object, instead of caching the asset it will be loaded from disk every time it's requested.
+// This is useful for development, but not recommended for production.
+// And if TGS is defined, we're being run in a production environment.
+
 // For registering or sending multiple others at once
 /datum/asset/group
 	abstract_type = /datum/asset/group

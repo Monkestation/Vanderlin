@@ -53,6 +53,7 @@
 
 /mob/living/carbon/human/examine(mob/user)
 	var/self_inspect = (user == src)
+	var/is_observer = isobserver(user)
 
 	var/is_family_member = FALSE
 	if(ishuman(user))
@@ -62,8 +63,8 @@
 
 	var/temp_gender = null
 	var/obscure_name = FALSE
-	var/person_known = self_inspect
-	if(!self_inspect && !isobserver(user))
+	var/person_known = (self_inspect || is_observer)
+	if(!self_inspect && !is_observer)
 		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
 			obscure_name = TRUE
 			temp_gender = PLURAL
@@ -109,7 +110,7 @@
 		on_examine_face(user, self_inspect)
 
 		var/used_name = name
-		if(isobserver(user))
+		if(is_observer)
 			used_name = real_name
 
 		var/used_title = get_role_title(person_known)
@@ -682,7 +683,7 @@
 			. += "<img src=[headshot_link] width=100 height=100/>"
 
 	if(Adjacent(user))
-		if(isobserver(user))
+		if(is_observer)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
 				BODY_ZONE_CHEST,

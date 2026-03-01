@@ -76,8 +76,6 @@ SUBSYSTEM_DEF(statpanels)
 		if(!target.holder)
 			target.stat_panel.send_message("remove_admin_tabs")
 		else
-			//target.stat_panel.send_message("update_split_admin_tabs", !!(target.prefs.toggles & SPLIT_ADMIN_TABS))
-
 			if(!("MC" in target.panel_tabs) || !("Tickets" in target.panel_tabs))
 				target.stat_panel.send_message("add_admin_tabs", target.holder.href_token)
 
@@ -214,4 +212,8 @@ SUBSYSTEM_DEF(statpanels)
 		set_SDQL2_tab(target)
 
 /// Stat panel window declaration
-/client/var/datum/tgui_window/stat_panel
+/client/var/datum/tgui_window/stat/stat_panel
+
+/datum/tgui_window/stat/initialize(strict_mode, fancy, assets, inline_html, inline_js, inline_css)
+	. = ..()
+	send_message("build_topbar") // This is the best way of doing it... don't @ me
