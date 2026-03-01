@@ -29,13 +29,13 @@
 /datum/job_pack/gronn/grunt
 	name = "Leðurháls - Grunt"
 	pack_skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/swords = 3,
+		/datum/skill/combat/shields = 2,
+		/datum/skill/combat/axesmaces = 1,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/unarmed = 1,
 	)
 	pack_stats = list(
 		STAT_KEY_STR = 2,

@@ -830,8 +830,3 @@
 	stress_change = 3
 	desc = span_boldred("I have lost my hood! My failure to protect it defiles my future reincarnations!")
 	timer = 999 MINUTES
-	if(istiefling(user))
-		return TRUE
-	if(stacks > 1)
-		return TRUE
-	return ..()
