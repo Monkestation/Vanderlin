@@ -27,11 +27,6 @@
 
 	material_category = ARMOR_MAT_PLATE
 
-/obj/item/clothing/gloves/plate/ancient
-	name = "ancient gauntlets"
-	desc = "Ancient plated gauntlets made out of steel."
-	icon_state = "agauntlets"
-
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."

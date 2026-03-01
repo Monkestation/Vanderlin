@@ -103,9 +103,9 @@
 		var/datum/clan/vclan = H.clan
 		vclan.apply_vampire_look(H)
 
-	to_chat(H, span_warning("My true nature is revealed!"))
-	if(!disguise_status() && length(H.CheckEyewitness(H)))
-		H.vampire_detected(1)
+	if(!disguise_status())
+		H.visible_message(H, span_bloody("[H]'s true nature is revealed!"), span_warning("My true nature is revealed!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		H.vampire_detected(length(H.CheckEyewitness(H))-1) // -1 so it needs 2 people to qualify for detection
 	return TRUE
 
 /datum/component/vampire_disguise/proc/force_undisguise(mob/living/carbon/human/H)
@@ -122,10 +122,11 @@
 /datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list)
 	if(!istype(user) || disguise_status())
 		return
+	if(user == vampire)
+		return
 	if(!user.affects_masquerade(FALSE))
 		examine_list += span_warningbig("[vampire.p_theyre(TRUE)] in [vampire.p_their()] true form.")
 		return
 	user.add_stress(/datum/stress_event/vampire_seen)
-	examine_list += span_danger("BLOODSUCKER!")
-	if(length(vampire.CheckEyewitness(user)))
-		vampire.vampire_detected(1)
+	examine_list += span_danger("NITEBEAST!")
+	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))

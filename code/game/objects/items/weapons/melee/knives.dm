@@ -215,6 +215,8 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	sellprice = 12
 
+	weapon_special = /datum/special_intent/triple_stab
+
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
 	desc = "A curved iron dagger from the fallen east."

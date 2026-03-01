@@ -272,8 +272,6 @@
 	. = ..()
 	if(.)
 		return
-	if(user.body_position == LYING_DOWN && get_dist(src, user) > 0)
-		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	toggle(user)
 

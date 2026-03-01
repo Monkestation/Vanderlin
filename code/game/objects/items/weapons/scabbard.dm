@@ -9,27 +9,11 @@
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
+	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-
-/obj/item/weapon/scabbard/update_icon_state()
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-
-	if(length(contents))
-		var/obj/item/sheathed_weapon = contents[1]
-		var/icon/possible_sheaths = icon(icon) //hehe
-		var/list/extensions = list()
-		for(var/s in possible_sheaths.IconStates(1))
-			extensions[s] = TRUE
-		qdel(possible_sheaths)
-		if(extensions[icon_state+"_[sheathed_weapon.icon_state]"])
-			icon_state += "_[sheathed_weapon.icon_state]"
-		else
-			icon_state += "-sheathed"
-	return ..()
 
 /*
 	GENERIC SCABBARDS
@@ -82,14 +66,6 @@
 	desc = "A slingable sheath made of leather, enamored with exquisite golden decorations, often seen on the hips of royalty"
 	icon_state = "rsheath"
 	sellprice = 100
-
-/obj/item/weapon/scabbard/knife/hand
-	name = "hand's bracers"
-	desc = "Discretion had always been the better part of valour, and nobody understands that better than the one holding an ace up their sleeve."
-	slot_flags = ITEM_SLOT_WRISTS
-	sellprice = 50
-	icon = 'icons/roguetown/clothing/special/hand.dmi'
-	icon_state = "bracersheath"
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"

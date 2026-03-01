@@ -50,8 +50,10 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	holder_mob?.hud_used?.initialize_bloodpool()
-	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
@@ -59,6 +61,11 @@
 	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
+
+/datum/devotion/proc/initialize_hud()
+	holder_mob?.hud_used?.initialize_bloodpool()
+	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	update_devotion(0) //hack to force meter to reflect the starting devotion
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)

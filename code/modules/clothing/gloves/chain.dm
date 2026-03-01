@@ -51,12 +51,6 @@
 	allowed_race = RACES_PLAYER_ELF_ALL
 	item_weight = 6 * STEEL_MULTIPLIER
 
-/obj/item/clothing/gloves/chain/vampire
-	name = "ancient ceremonial gloves"
-	desc = "A weathered gauntlet with an ancient design."
-	icon_state = "vgloves"
-	item_weight = 6 * STEEL_MULTIPLIER
-
 /obj/item/clothing/gloves/chain/gronn
 	name = "osslandic chain gloves"
 	desc = "A pair of leather gloves with chain to protects the wrists and back of the hand."
