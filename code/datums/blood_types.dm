@@ -76,7 +76,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
  * * new_splat - whether this is a newly instantiated blood decal, or an existing one this blood is being added to
  */
 /datum/blood_type/proc/set_up_blood(obj/effect/decal/cleanable/blood/blood, new_splat = FALSE)
-	return
+	blood.color = color
 
 /// A base type for all blood used by humans (NOT humanoids), for organization's sake
 /datum/blood_type/human

@@ -590,8 +590,10 @@
 					cursedblood = 1
 				if(M.mind.has_antag_datum(/datum/antagonist/vampire, FALSE))
 					cursedblood = 2
-				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord))
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord, FALSE))
 					cursedblood = 3
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+					cursedblood = 5 //hoo mama
 			update_appearance(UPDATE_ICON_STATE)
 			takeblood(M, user)
 		else

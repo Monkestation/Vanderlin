@@ -4,7 +4,7 @@
 /obj/structure/vampire/necromanticbook // Used to summon undead to attack town/defend manor.
 	name = "Tome of Souls"
 	icon_state = "tome"
-	var/list/useoptions = list("Create Death Knight", "Steal the Sun")
+	var/list/useoptions = list("Steal the Sun")
 	var/sunstolen = FALSE
 
 /obj/structure/vampire/necromanticbook/attack_hand(mob/living/carbon/human/user)
@@ -16,7 +16,8 @@
 		return TRUE
 
 	switch(browser_input_list(user, "What to do?", null, useoptions))
-		if("Create Death Knight")
+//TO DO: move this to zizo cult or something
+/* 		if("Create Death Knight")
 			if(browser_alert(user, "Create a Death Knight?<BR>Cost:[DEATH_KNIGHT_COST]",null,DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 				return
 			if(length(SSmapping.retainer.death_knights) >= 3)
@@ -27,19 +28,14 @@
 				return
 			if(!do_after(user, 10 SECONDS, src))
 				return
-			if(!user.has_bloodpool_cost(DEATH_KNIGHT_COST))
-				to_chat(user, span_warning("I do not have enough vitae, I need [DEATH_KNIGHT_COST] vitae for a Death Knight."))
-				return
 
 			user.adjust_bloodpool(-DEATH_KNIGHT_COST)
 			user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
 			to_chat(user, span_notice("I have summoned a knight from the underworld. I need only wait for them to materialize."))
-			SSmapping.add_world_trait(/datum/world_trait/death_knight, -1)
-			for(var/mob/dead/observer/D in GLOB.player_list)
-				D.death_knight_spawn()
-			for(var/mob/living/carbon/spirit/D in GLOB.player_list)
-				D.death_knight_spawn()
-
+			var/list/candidates = pollGhostCandidates("Would you like to play as a Death Knight?", ROLE_NECRO_SKELETON, poll_time = 20 SECONDS, ignore_category = POLL_IGNORE_NECROMANCER_SKELETON, new_players = TRUE)
+			if(!length(candidates))
+				to_chat(span_warning("But none answered my will."))
+ */
 		if("Steal the Sun")
 			if(!can_steal_sun(user))
 				return

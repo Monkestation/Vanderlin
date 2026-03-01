@@ -29,6 +29,8 @@
 	grid_width = 32
 	grid_height = 96
 
+	weapon_special = /datum/special_intent/flail_sweep
+
 /obj/item/weapon/flail/getonmobprop(tag)
 	. = ..()
 	if(tag)
