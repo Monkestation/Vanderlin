@@ -25,6 +25,12 @@
 		else
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 
+/atom/movable
+	var/facepull = TRUE
+
+/mob
+	facepull = FALSE
+
 /**
  * Move a client in a direction
  *
@@ -36,7 +42,7 @@
  * Things that stop you moving as a mob:
  * * world time being less than your next move_delay
  * * not being in a mob, or that mob not having a loc
- * * missing the n and direction parameters
+ * * missing the new_loc and direction parameters
  * * being in remote control of an object (calls Moveobject instead)
  * * being dead (it ghosts you instead)
  *
@@ -61,43 +67,39 @@
  * (if you ask me, this should be at the top of the move so you don't dance around)
  *
  */
-/atom/movable
-	var/facepull = TRUE
-
-/mob
-	facepull = FALSE
-
-/client/Move(n, direct)
+/client/Move(atom/new_loc, direct)
 	if(world.time < move_delay) //do not move anything ahead of this check please
 		return FALSE
+
 	next_move_dir_add = 0
 	next_move_dir_sub = 0
 	var/old_move_delay = move_delay
 	move_delay = world.time + world.tick_lag //this is here because Move() can now be called mutiple times per tick
-	if(!mob || !mob.loc)
+
+	if(!direct || !new_loc)
 		return FALSE
-	if(!n || !direct)
+
+	if(!mob?.loc)
 		return FALSE
+
 	if(HAS_TRAIT(mob, TRAIT_NO_TRANSFORM))
 		return FALSE	//This is sota the goto stop mobs from moving var
+
 	if(mob.control_object)
 		return Move_object(direct)
+
 	if(!isliving(mob))
-		return mob.Move(n, direct)
-	else
-		if (HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
-			return FALSE
+		move_delay += mob.cached_multiplicative_slowdown
+		return mob.Move(new_loc, direct)
+
+	if(HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
+		return FALSE
 
 	if(mob.stat == DEAD)
-#ifdef TESTSERVER
-		mob.ghostize()
-		return FALSE
-#endif
 		if(MOBTIMER_FINISHED(mob, MT_LASTDIED, 60 SECONDS))
 			mob.ghostize()
-		else
-			if(!world.time%5)
-				to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
+		else if(!world.time % 5)
+			to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
 
 	if(mob.force_moving)
@@ -117,12 +119,12 @@
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)
 
-	if(HAS_TRAIT(L, TRAIT_IMMOBILIZED))
+	if(!(L.mobility_flags & MOBILITY_MOVE))
 		return FALSE
 
-	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
-		var/atom/O = mob.loc
-		return O.relaymove(mob, direct)
+	if(ismovable(mob.loc)) //Inside an object, tell it we moved
+		var/atom/loc_atom = mob.loc
+		return loc_atom.relaymove(mob, direct)
 
 	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_MOVE, args) & COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE)
 		return FALSE
@@ -137,25 +139,24 @@
 	else
 		move_delay = world.time
 
-	var/target_dir = get_dir(L, n)
+	var/target_dir = get_dir(L, new_loc)
 
 	//backpedal and strafe slowdown for quick intent
-	if(L.fixedeye || L.tempfixeye)
-		if(L.dir != target_dir)
+	if(L.dir != target_dir)
+		if(L.fixedeye || L.tempfixeye)
 			add_delay += 2
 			if(L.m_intent == MOVE_INTENT_RUN)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
-	else
-		if(L.dir != target_dir)
-			// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
-			if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
-				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
+
+		// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
+		if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
+			L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 
 	var/old_direct = mob.dir
 
 	. = ..()
 
-	if((direct & (direct - 1)) && mob.loc == n) //moved diagonally successfully
+	if((direct & (direct - 1)) && mob.loc == new_loc) //moved diagonally successfully
 		add_delay *= sqrt(2)
 
 	var/after_glide = 0

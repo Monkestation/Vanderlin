@@ -71,44 +71,24 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	var/last_helld = 0
 
 /mob/dead/observer/rogue
-//	see_invisible = SEE_INVISIBLE_LIVING
+	icon_state = "ghost1"
 	sight = 0
 	see_in_dark = 2
-	var/next_gmove
-	var/misting = 0
 	draw_icon = TRUE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
-	icon_state = "ghost1"
+
+/mob/dead/observer/rogue/Initialize(mapload)
+	. = ..()
+	add_movespeed_modifier(MOVESPEED_ID_GHOST, multiplicative_slowdown = 0.3)
 
 /mob/dead/observer/rogue/nodraw
-	draw_icon = FALSE
 	icon = 'icons/roguetown/mob/misc.dmi'
 	icon_state = "ghost"
+	draw_icon = FALSE
 	alpha = 100
 
-/mob/dead/observer/rogue/Move(n, direct)
-	if(world.time < next_gmove)
-		return
-	next_gmove = world.time + 2
-	var/turf/T = n
-
-	setDir(direct)
-
-	if(!loc.Exit(src, T))
-		return
-
-	if(istype(T))
-		if(T.density)
-			return
-		for(var/obj/item/reagent_containers/powder/salt/S in T)
-//			go2hell()
-//			next_gmove = world.time + 30
-			return
-	. = ..()
-
 /mob/dead/observer/screye
-//	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
 	see_in_dark = 0
 	hud_type = /datum/hud/obs
