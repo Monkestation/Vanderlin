@@ -123,7 +123,7 @@
 
 		var/appendage_to_name
 		if(race_name) // race name
-			appendage_to_name += " [race_name]"
+			appendage_to_name += race_name
 
 		// job name, don't show job of foreigners.
 		if(used_title && !HAS_TRAIT(src, TRAIT_FACELESS) && (!HAS_TRAIT(src, TRAIT_FOREIGNER) || HAS_TRAIT(src, TRAIT_RECRUITED) || HAS_TRAIT(src, TRAIT_RECOGNIZED)))
@@ -153,15 +153,18 @@
 			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
 
 		if(culture)
-			if(!person_known || istype(culture, /datum/culture/universal/ambiguous))
-				if(!self_inspect)
-					. += span_info("[capitalize(t_He)] could be from anywhere.")
-			else
+			var/same_culture = FALSE
+			if(ishuman(user))
+				var/mob/living/carbon/human/cultured = user
+				same_culture == istype(culture, cultured.culture.type)
+			if((person_known || same_culture) && !istype(culture, /datum/culture/universal/ambiguous))
 				var/pre_string = "[capitalize(m1)]"
 				if(!self_inspect)
 					pre_string = "I believe [m1]"
 
 				. += span_info("[pre_string] from [culture.examined_string(src, user)].")
+			else if(!self_inspect)
+				. += span_info("[capitalize(t_He)] could be from anywhere.")
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/stranger = user
