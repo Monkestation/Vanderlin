@@ -232,7 +232,7 @@
 	if(can_see_runechat(speaker) && can_hear())
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose message for AI hrefs, language incomprehension.
-	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
+	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods, TRUE)
 	// voice muffling
 	if(stat == UNCONSCIOUS)
 		message = "<I>... You can almost hear something ...</I>"
@@ -315,7 +315,7 @@
 		eavesdropping = stars(message)
 		eavesrendered = compose_message(src, message_language, eavesdropping, null, spans, message_mods)
 
-	var/rendered = compose_message(src, message_language, message, null, spans, message_mods)
+	var/rendered = compose_message(src, message_language, message, null, spans, message_mods, TRUE)
 
 	for(var/atom/movable/hearing_movable as anything in listening)
 		if(!hearing_movable)
