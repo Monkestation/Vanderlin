@@ -54,3 +54,16 @@ export function useSettings() {
 
   return { settings, updateSettings };
 }
+
+export function importTGSettings() {
+    async function fetchSettings(): Promise<void> {
+      try {
+        const storedSettings = await storage.get('panel-settings');
+        console.log('Loaded panel settings from storage:', storedSettings);
+        startSettingsMigration(storedSettings);
+      } catch (error) {
+        console.error('Failed to load panel settings:', error);
+      }
+    }
+    fetchSettings();
+}

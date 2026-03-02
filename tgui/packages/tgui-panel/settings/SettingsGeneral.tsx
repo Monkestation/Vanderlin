@@ -15,7 +15,7 @@ import { chatRenderer } from '../chat/renderer';
 import { FONTS, THEMES } from './constants';
 import { resetPaneSplitters, setEditPaneSplitters } from './scaling';
 import { exportChatSettings, importChatSettings } from './settingsImExport';
-import { useSettings } from './use-settings';
+import { useSettings, importTGSettings } from './use-settings';
 
 export function SettingsGeneral(props) {
   const { settings, updateSettings } = useSettings();
@@ -157,27 +157,35 @@ export function SettingsGeneral(props) {
               }
             />
           </LabeledList.Item>
-          <LabeledList.Item label="Disable Combining">
-            <Button.Checkbox
-              checked={settings.disableCombine}
-              tooltip="Disable combining for duplicate messages"
-              onClick={() =>
-                updateSettings({
-                  disableCombine: !settings.disableCombine,
-                })
-              }
-            />
-          </LabeledList.Item>
-          <LabeledList.Item label="Zebra Highlight">
-            <Button.Checkbox
-              checked={settings.zebraHighlight}
-              tooltip="Highlight every other message background"
-              onClick={() =>
-                updateSettings({
-                  zebraHighlight: !settings.zebraHighlight,
-                })
-              }
-            />
+          <LabeledList.Item label="Extra">
+            <Stack>
+              <Stack.Item>
+                <Button.Checkbox
+                  checked={settings.disableCombine}
+                  tooltip="Disable combining for duplicate messages"
+                  onClick={() =>
+                    updateSettings({
+                      disableCombine: !settings.disableCombine,
+                    })
+                  }
+                >
+                  Disable combining
+                </Button.Checkbox>
+              </Stack.Item>
+              <Stack.Item>
+                <Button.Checkbox
+                  checked={settings.zebraHighlight}
+                  tooltip="Highlight every other message background"
+                  onClick={() =>
+                    updateSettings({
+                      zebraHighlight: !settings.zebraHighlight,
+                    })
+                  }
+                >
+                  Zebra Highlight
+                </Button.Checkbox>
+              </Stack.Item>
+            </Stack>
           </LabeledList.Item>
         </LabeledList>
       </Section>
@@ -189,7 +197,7 @@ export function SettingsGeneral(props) {
               tooltip="Export chat settings"
               onClick={exportChatSettings}
             >
-              Export settings
+              Export
             </Button>
           </Stack.Item>
           <Stack.Item mt={0.15}>
@@ -199,8 +207,17 @@ export function SettingsGeneral(props) {
               icon="arrow-up-from-bracket"
               onSelectFiles={importChatSettings}
             >
-              Import settings
+              Import
             </Button.File>
+          </Stack.Item>
+          <Stack.Item>
+            <Button
+              icon="arrow-up-from-bracket"
+              tooltip="Import settings from the TG key to the new one"
+              onClick={importTGSettings}
+            >
+              Import old
+            </Button>
           </Stack.Item>
           <Stack.Item grow mt={0.15}>
             <Button
@@ -208,7 +225,7 @@ export function SettingsGeneral(props) {
               tooltip="Export current tab history into HTML file"
               onClick={() => chatRenderer.saveToDisk()}
             >
-              Save chat log
+              Save chatlog
             </Button>
           </Stack.Item>
           <Stack.Item mt={0.15}>
