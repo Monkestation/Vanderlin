@@ -99,7 +99,7 @@
 	adjustEarDamage(0, 6000)
 	Stun(6000, 1, 1)
 	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
-	walk(src, 0) //stops them mid pathing even if they're stunimmune
+	SSmove_manager.stop_looping(src)
 	if(client)
 		add_verb(client, /client/proc/commendsomeone)
 

@@ -69,7 +69,7 @@
 /mob/living/simple_animal/hostile/Life()
 	. = ..()
 	if(!.) //dead
-		walk(src, 0) //stops walking
+		SSmove_manager.stop_looping(src)
 		return 0
 
 /mob/living/proc/AttackingTarget(mob/living/passed_target)

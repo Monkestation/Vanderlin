@@ -998,11 +998,9 @@
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direct, glide_size_override)
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)
-		if(!buckled_mob.Move(newloc, direct, glide_size_override))
-			forceMove(buckled_mob.loc)
+		if(!buckled_mob.Move(newloc, direct, glide_size_override)) //If a mob buckled to us can't make the same move as us
+			Move(buckled_mob.loc, direct) //Move back to its location
 			last_move = buckled_mob.last_move
-			inertia_dir = last_move
-			buckled_mob.inertia_dir = last_move
 			return FALSE
 	return TRUE
 
