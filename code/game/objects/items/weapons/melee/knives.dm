@@ -255,7 +255,7 @@
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
-	desc = "A curved iron dagger from the Queendom of Lakkari. Before Zizo's ascension, nobles were commonly buried with them."
+	desc = "A curved steel dagger from the Queendom of Lakkari. Before Zizo's ascension, nobles were commonly buried with them."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
 	sellprice = 20
