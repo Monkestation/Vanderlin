@@ -60,7 +60,8 @@
 
 		patron = new patron()
 
-		GLOB.patron_list[patron.type] = patron
+		GLOB.patrons_by_type[patron.type] = patron
+		GLOB.patrons_by_name[patron.name] = patron
 
 		LAZYINITLIST(GLOB.patrons_by_faith[patron.associated_faith])
 

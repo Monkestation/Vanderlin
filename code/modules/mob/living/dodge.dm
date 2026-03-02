@@ -6,6 +6,9 @@
  * @return TRUE if dodge successful, FALSE otherwise
  */
 /mob/living/proc/attempt_dodge(datum/intent/intenty, mob/living/user, can_dodge_see = TRUE)
+	if(!candodge)
+		return FALSE
+
 	if(intenty && !intenty.candodge)
 		return FALSE
 
@@ -16,6 +19,9 @@
 		return FALSE
 
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		return FALSE
+
+	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
 		return FALSE
 
 	if(world.time < last_dodge + dodgetime && !istype(rmb_intent, /datum/rmb_intent/riposte))

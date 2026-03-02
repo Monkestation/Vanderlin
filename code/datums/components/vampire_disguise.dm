@@ -24,8 +24,16 @@
 	var/mob/living/carbon/human/H = parent
 	cache_original_appearance(H)
 
+/datum/component/vampire_disguise/RegisterWithParent()
+	. = ..()
 	RegisterSignal(parent, COMSIG_HUMAN_LIFE, PROC_REF(handle_disguise_upkeep))
 	RegisterSignal(parent, COMSIG_DISGUISE_STATUS, PROC_REF(disguise_status))
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+
+/datum/component/vampire_disguise/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_PARENT_EXAMINE))
+
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
@@ -96,6 +104,8 @@
 		vclan.apply_vampire_look(H)
 
 	to_chat(H, span_warning("My true nature is revealed!"))
+	if(!disguise_status() && length(H.CheckEyewitness(H)))
+		H.vampire_detected(1)
 	return TRUE
 
 /datum/component/vampire_disguise/proc/force_undisguise(mob/living/carbon/human/H)
@@ -107,4 +117,15 @@
 	return TRUE
 
 /datum/component/vampire_disguise/proc/disguise_status()
-	return disguised
+	return disguised || !is_human_part_visible(parent, HIDEFACE)
+
+/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list)
+	if(!istype(user) || disguise_status())
+		return
+	if(!user.affects_masquerade(FALSE))
+		examine_list += span_warningbig("[vampire.p_theyre(TRUE)] in [vampire.p_their()] true form.")
+		return
+	user.add_stress(/datum/stress_event/vampire_seen)
+	examine_list += span_danger("BLOODSUCKER!")
+	if(length(vampire.CheckEyewitness(user)))
+		vampire.vampire_detected(1)

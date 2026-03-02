@@ -632,5 +632,267 @@
                 "rscdel": "Wretch Vampire"
             }
         ]
+    },
+    "2026-02-22": {
+        "TerraGS": [
+            {
+                "bugfix": "using a shovel full of sand on dirt no longer replaces the sand with dirt"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added cooldown for automaton sounds."
+            },
+            {
+                "rscdel": "Removed access to the sillier automaton sounds, subject to change."
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "Guard command on Automaton is now 5 tiles instead of 3."
+            },
+            {
+                "bugfix": "Follow command removed. Use Custom command instead."
+            },
+            {
+                "admin": "Automatons show up correctly in player panel"
+            },
+            {
+                "bugfix": "Automatons no longer feel pain, sleep or be poisoned."
+            },
+            {
+                "bugfix": "Automatons no longer make human sounds"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Allow Royal Knight Advclass to choose their helmets"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixed the pitchfork's sharpness so it didn't deal absolute minimum like 1 force damage"
+            }
+        ]
+    },
+    "2026-02-23": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixed an oversight from RK helmet PR"
+            },
+            {
+                "admin": "Custom Map insert spawner now works better."
+            }
+        ]
+    },
+    "2026-02-24": {
+        "Ordosian": [
+            {
+                "rscadd": "Automatons can now be picked in traumatized vice."
+            },
+            {
+                "code_imp": "Inquisition traumatized check"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "The captain can promote a serjeant now"
+            },
+            {
+                "rscadd": "new blood drinking mechanics and the ability to consume blood"
+            }
+        ]
+    },
+    "2026-02-25": {
+        "realforest2001": [
+            {
+                "rscadd": "Town Roles are now accessible to all races."
+            },
+            {
+                "rscadd": "Town Watch, Lieutenant and MAA are also."
+            },
+            {
+                "rscadd": "Feldsher can only be accessed by 'non heretical' species, due to handling of lux."
+            },
+            {
+                "bugfix": "Fixed Automatons being affected by Xylix Vicious Mimicry."
+            },
+            {
+                "bugfix": "Fixed Automatons becoming antags."
+            },
+            {
+                "bugfix": "Fixed Automatons knowing mystery box phrases."
+            },
+            {
+                "code_imp": "Made sewing a craft skill."
+            },
+            {
+                "bugfix": "Fixed Lich taking Inquisition roles on spawn, and stopped it spawning on lowpop (<35)."
+            },
+            {
+                "bugfix": "Fixed black bag not working if the target isn't wearing anything on their head."
+            },
+            {
+                "bugfix": "Fixed GMT becoming Zizo Cult, Maniac or Rebel."
+            },
+            {
+                "rscadd": "Automatons can now sense who is a noble and who is a verified artificer, regardless of masking."
+            },
+            {
+                "bugfix": "Automatons no longer get selected for mystery box phrases."
+            },
+            {
+                "bugfix": "Automatons can no longer wear armour."
+            },
+            {
+                "rscdel": "Kobolds can no longer be MAA, Watch LT or Matron."
+            }
+        ],
+        "Tasteofdeath386": [
+            {
+                "rscadd": "Added Grenzel accent to the human mercenary veteran"
+            },
+            {
+                "rscadd": "Added Mail Training to the necromancer class"
+            },
+            {
+                "spellcheck": "fixed typo in rusted cuirass name"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Tiefling can be grenzel mercs"
+            }
+        ],
+        "Bloo4420": [
+            {
+                "map": "Small Daftmarsh fixes"
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Added Astratan chasuble and its crafting recipe."
+            },
+            {
+                "image": "Added Astratan chasuble"
+            },
+            {
+                "rscadd": "Traumatized: split elves in 2 and added medicators"
+            }
+        ],
+        "Cheffie, FreeStylaLT": [
+            {
+                "rscadd": "Added active parrying to guard intent. See PR for more details."
+            },
+            {
+                "rscadd": "Rebalanced feint intent."
+            }
+        ]
+    },
+    "2026-02-26": {
+        "MrTCo1": [
+            {
+                "rscadd": "Added Law and Order to the Captain"
+            },
+            {
+                "rscadd": "Added Deliverance to the Captain"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added rousman language and accent. Accent applies for them with all languages, similar to kobolds."
+            },
+            {
+                "bugfix": "Fixed some offsets for things equipped on rousmen."
+            },
+            {
+                "rscadd": "Tweaked skills for rousman seer to match up with their starting spells."
+            },
+            {
+                "rscadd": "Added a slightly buffed version of the rousman seer."
+            },
+            {
+                "rscadd": "Added Enlightened Centrism as a Patron option for the Divine Pantheon."
+            },
+            {
+                "rscadd": "Centrist worshippers do not get healed by the Astratan greater healing miracle, but can still be resurrected."
+            },
+            {
+                "bugfix": "Known/branded Heretics no longer get healed by healing miracles, to match excommunicated people."
+            },
+            {
+                "rscadd": "Centrist worshippers can devote themselves to a sole patron through right-click interaction at a pantheon cross."
+            },
+            {
+                "code_imp": "Changed the backend for set_patron to account for existing clerical powers."
+            },
+            {
+                "rscadd": "Added Holy Fire enchantment and accompanying miracle."
+            },
+            {
+                "rscadd": "Added Divine Shield miracle."
+            },
+            {
+                "code_imp": "Repathed holy amulets."
+            },
+            {
+                "code_imp": "Added helper procs for adding and removing verbs for the priest."
+            },
+            {
+                "bugfix": "Fixed some misplaced parameters for weapon enchantments."
+            },
+            {
+                "bugfix": "Priest can no longer recruit roles with existing cleric powers into church roles."
+            },
+            {
+                "bugfix": "Fixed message spam when equipping/moving grandmaster weapons in hands."
+            }
+        ]
+    },
+    "2026-02-27": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes double sharpness loss on parry."
+            },
+            {
+                "rscadd": "Added guaranteed point blank crits to firearms"
+            },
+            {
+                "balance": "Removed the decreased crit chance from lead bullets"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Kobolds playing forest guard are limited to Forest Rat (Ruffian)"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added public balloon alert feedback to armour breaking and at certain damage thresholds. (FreeStylaLT)"
+            },
+            {
+                "rscadd": "Added balloon alerts to missing swings on your targeted zone."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "Prisoners can now choose to not be nobility, giving them a few crime and labor skills instead of courtly ones."
+            },
+            {
+                "rscadd": "Tieflings, Hollowkin, and Medicators can now be Prisoners, but only the Commoner version, not Noble."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "map": "Added more adventurer spawns to the murderwoods"
+            }
+        ]
+    },
+    "2026-02-28": {
+        "KevinfromHP": [
+            {
+                "qol": "keybind fixes"
+            }
+        ]
     }
 }

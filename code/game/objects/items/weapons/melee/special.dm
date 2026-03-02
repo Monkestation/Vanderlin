@@ -338,6 +338,8 @@
 	grid_width = 64
 	grid_height = 32
 
+	weapon_special = /datum/special_intent/upper_cut
+
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()
 	if(tag)

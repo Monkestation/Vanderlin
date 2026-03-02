@@ -429,6 +429,8 @@
 	parrysound = "parrywood"
 	sellprice = 35
 
+	weapon_special = /datum/special_intent/ground_smash
+
 /obj/item/weapon/mace/goden/getonmobprop(tag)
 	. = ..()
 	if(tag)

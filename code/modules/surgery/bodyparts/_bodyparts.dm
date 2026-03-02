@@ -666,7 +666,7 @@
 
 	var/skel = skeletonized ? "_s" : ""
 
-	if(is_organic_limb())
+	if(is_organic_limb() || (is_species(owner, /datum/species/automaton) && species_icon))//fuck this stupid rendering system
 		if(should_draw_greyscale)
 			limb.icon = species_icon
 			if(should_draw_gender)

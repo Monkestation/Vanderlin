@@ -23,6 +23,7 @@
 	grid_height = 64
 	grid_width = 32
 
+	weapon_special = /datum/special_intent/axe_swing
 
 //................ Stone Axe ............... //
 /obj/item/weapon/axe/stone
@@ -392,6 +393,8 @@
 	sellprice = 60
 	grid_height = 96
 	grid_width = 64
+
+	weapon_special = /datum/special_intent/axe_swing
 
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()

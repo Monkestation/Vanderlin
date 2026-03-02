@@ -107,7 +107,7 @@
 /datum/keybinding/mob/target_head_cycle
 	hotkey_keys = list("Numpad8")
 	name = "target_head_cycle"
-	full_name = "Target: Cycle head"
+	full_name = "Target: Cycle Head"
 	description = ""
 
 /datum/keybinding/mob/target_head_cycle/down(client/user)
@@ -127,9 +127,9 @@
 	return TRUE
 
 /datum/keybinding/mob/target_eyes
-	hotkey_keys = list("Numpad7")
+	hotkey_keys = list("Numpad9")
 	name = "target_eyes"
-	full_name = "Target: Cycle Eyes"
+	full_name = "Target: Cycle Eyes/Ears"
 	description = ""
 
 /datum/keybinding/mob/target_eyes/down(client/user)

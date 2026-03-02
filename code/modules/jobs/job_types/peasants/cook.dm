@@ -10,7 +10,7 @@
 	spawn_positions = 3
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK
@@ -30,7 +30,7 @@
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/cooking = 4,
 		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/butchering = 3,
 		/datum/skill/labor/taming = 1,
 		/datum/skill/labor/farming = 1

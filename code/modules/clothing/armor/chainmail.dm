@@ -19,6 +19,8 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 6 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 /obj/item/clothing/armor/chainmail/iron
 	name = "iron haubergeon"
 	desc = "Made out of interlocked iron rings. Offers good resistance against arrows, stabs and cuts. \nUsually worn as padding for proper armor."
