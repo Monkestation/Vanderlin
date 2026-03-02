@@ -63,16 +63,14 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	player.prefs.next_special_trait = null
 
 /proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
-	if(player.prefs.voice_type_override)
-		switch(player.prefs.voice_type)
-			if(VOICE_TYPE_MASC_FOP)
-				character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
-			if(VOICE_TYPE_FEM_DAINTY)
-				character.dna.species.soundpack_f = new /datum/voicepack/female/dainty()
-			if(VOICE_TYPE_FEM_HAUGHTY)
-				character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
-	else
-		return
+	switch(player.prefs.voice_type)
+		if(VOICE_TYPE_MASC_FOP)
+			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
+		if(VOICE_TYPE_FEM_DAINTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/dainty()
+		if(VOICE_TYPE_FEM_HAUGHTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
+	return
 
 /proc/apply_loadouts(mob/living/carbon/human/character, client/player)
 	if(!player)
