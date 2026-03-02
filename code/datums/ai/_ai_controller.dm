@@ -83,8 +83,6 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	UnpossessPawn(FALSE)
 	our_cells = null
 	set_movement_target(type, null)
-	if(ai_movement.moving_controllers[src])
-		ai_movement.stop_moving_towards(src)
 	return ..()
 
 ///Sets the current movement target, with an optional param to override the movement behavior
@@ -274,6 +272,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 ///Proc for deinitializing the pawn to the old controller
 /datum/ai_controller/proc/UnpossessPawn(destroy)
 	UnregisterSignal(pawn, list(COMSIG_MOVABLE_Z_CHANGED, COMSIG_MOB_LOGIN, COMSIG_MOB_LOGOUT, COMSIG_MOB_STATCHANGE))
+	if(ai_movement.moving_controllers[src])
+		ai_movement.stop_moving_towards(src)
 	var/turf/pawn_turf = get_turf(pawn)
 	if(pawn_turf)
 		GLOB.ai_controllers_by_zlevel[pawn_turf.z] -= src
@@ -298,15 +298,20 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/can_move()
 	if(QDELETED(pawn))
 		return
+
 	var/mob/living/living_pawn = pawn
 	if(HAS_TRAIT(living_pawn, TRAIT_INCAPACITATED))
 		return FALSE
+
 	if(ai_traits & STOP_MOVING_WHEN_PULLED && living_pawn.pulledby)
 		return FALSE
+
 	if(!isturf(living_pawn.loc)) //No moving if not on a turf
 		return FALSE
+
 	if(HAS_TRAIT(living_pawn, TRAIT_IMMOBILIZED))
 		return FALSE
+
 	if(living_pawn.pulledby?.grab_state > GRAB_PASSIVE)
 		return FALSE
 
@@ -353,7 +358,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /// Generates a plan and see if our existing one is still valid.
 /datum/ai_controller/process(delta_time)
 	if(!able_to_run())
-		walk(pawn, 0) //stop moving
+		GLOB.move_manager.stop_looping(pawn) //stop moving
 		return //this should remove them from processing in the future through event-based stuff.
 
 	if(!LAZYLEN(current_behaviors) && idle_behavior)
