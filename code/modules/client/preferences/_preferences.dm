@@ -82,6 +82,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	/// The type of voice soundpack the mob should use.
 	var/voice_type = VOICE_TYPE_MASC
 
+	/// Whether or not we're overriding species defaults.
+	var/voice_type_override = FALSE
+
 	/// Age of character.
 	var/age = AGE_ADULT
 
