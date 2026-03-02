@@ -12,7 +12,7 @@
 	G.follow()
 
 /atom/movable/screen/ghost/reenter_corpse
-	name = "Re-enter orpse"
+	name = "Re-enter Corpse"
 	screen_loc = "SOUTH:6,CENTER-1:24"
 	icon_state = "reenter_corpse"
 
@@ -27,7 +27,7 @@
 
 /atom/movable/screen/ghost/teleport/Click()
 	var/mob/dead/observer/G = usr
-	//G.dead_tele()
+	G.dead_tele()
 
 /atom/movable/screen/ghost/ghost_up
 	name = "Ghost Up"
