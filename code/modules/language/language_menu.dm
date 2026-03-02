@@ -65,6 +65,7 @@
 			if(language_datum && AM.can_speak_in_language(language_datum))
 				language_holder.selected_default_language = language_datum
 				. = TRUE
+
 		if("grant_language")
 			if((is_admin || isobserver(AM)) && language_datum)
 				language_holder.grant_language(language_datum)
@@ -72,6 +73,7 @@
 					message_admins("[key_name_admin(user)] granted the [language_name] language to [key_name_admin(AM)].")
 					log_admin("[key_name(user)] granted the language [language_name] to [key_name(AM)].")
 				. = TRUE
+
 		if("remove_language")
 			if((is_admin || isobserver(AM)) && language_datum)
 				language_holder.remove_language(language_datum)
@@ -79,6 +81,7 @@
 					message_admins("[key_name_admin(user)] removed the [language_name] language from [key_name_admin(AM)].")
 					log_admin("[key_name(user)] removed the language [language_name] from [key_name(AM)].")
 				. = TRUE
+
 		if("toggle_omnitongue")
 			if(is_admin || isobserver(AM))
 				language_holder.omnitongue = !language_holder.omnitongue

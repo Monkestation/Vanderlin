@@ -623,7 +623,6 @@ BLIND     // can't see anything
 		balloon_alert_to_viewers(text, balloon_flag = DISABLE_BALLOON_COMBAT)
 
 /obj/item/clothing/proc/pick_damage_sound(tier)
-	var/picked_sound
 	switch(material_category)
 		if(ARMOR_MAT_PLATE)
 			switch(tier)
