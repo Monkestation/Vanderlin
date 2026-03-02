@@ -1,6 +1,6 @@
 /datum/job/advclass/mercenary/expegasusknight
 	title = "Ex-Pegasus Knight"
-	tutorial = "A former pegasus knight hailing from the Queendom of Lakkari. Once a graceful warrior that ruled the skies, now a traveling sellsword that rules the streets, doing Faience's dirtiest work."
+	tutorial = "A former pegasus knight hailing from the Queendom of Lakkari. The horrors of your homeland were too much for you to bear, so you deserted from your post. You now wander the streets instead of the skies, doing Faience's dirtiest work."
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/mercenary/expegasusknight
 	category_tags = list(CTAG_MERCENARY)

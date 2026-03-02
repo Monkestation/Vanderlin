@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/lakkariancleric // terra was here! <3
 	title = "Lakkarian Cleric"
-	tutorial = "A cleric hailing from the Queendom of Lakkari. Your life as a humble clergymember wass upended by the onslaught of undead. and have since traveled across the world to return the restless dead back into Necra's embrace."
+	tutorial = "A cleric hailing from the Queendom of Lakkari. Your life as a humble clergymember was upended by the onslaught of undead, and have since traveled across the world to return the restless dead back into Necra's embrace."
 	allowed_patrons = list(/datum/patron/divine/necra) // xylixians and malumites soon. theres alot i need to do still
 	outfit = /datum/outfit/folkhero/lakkariancleric
 	category_tags = list(CTAG_FOLKHEROES)

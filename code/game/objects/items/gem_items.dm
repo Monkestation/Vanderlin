@@ -730,8 +730,8 @@
 	sellprice = 95
 
 /obj/item/carvedgem/turq/ka
-	name = "ceruleabaster ka statue"
-	desc = "A large carving of a Ka, a spirit originating from Lakkarian myth."
+	name = "ceruleabaster spirit statue"
+	desc = "A large carving of a bird-like spirit."
 	icon_state = "ka_turq"
 	grid_height = 64
 	grid_width = 32

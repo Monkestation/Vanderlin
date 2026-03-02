@@ -248,7 +248,7 @@
 
 /obj/item/gem/turq
 	name = "raw ceruleabaster"
-	desc = "A beautiful teal gem that is easily carved. It is prized by Necrans."
+	desc = "A beautiful teal gem that is easily carved. It is prized by Necrans, as it's believed that she shed them as tears."
 	icon = 'icons/roguetown/gems/gem_turq.dmi'
 	icon_state = "raw_turq"
 	sellprice = 75

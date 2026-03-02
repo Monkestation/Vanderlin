@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/sekketianshinobi
-	title = "Desert Shinobi"
-	tutorial = "You belong to the Shinobi of the Dunes. An elusive order of Xylixian freedom fighters originating from the Zaladin Dynasty. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
+	title = "Bell-Bearer"
+	tutorial = "You belong to the Toll of the Free. An elusive order of Xylixian freedom fighters originating from the Zaladin Dynasty. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
 	allowed_patrons = list(/datum/patron/divine/xylix)
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
@@ -49,7 +49,7 @@
 
 	)
 
-/datum/outfit/adventurer/sekketianshinobi
+/datum/outfit/adventurer/sekketianshinobi // this outfit will probably be changed in the future
 	name = "Desert Shinobi (Adventurer)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf/colored/red
 	neck = /obj/item/clothing/neck/coif/cloth/colored/berryblue

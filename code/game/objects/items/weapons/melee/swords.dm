@@ -593,7 +593,7 @@
 
 /obj/item/weapon/sword/rapier/nimcha
 	name = "nimcha"
-	desc = "An embellished swift sword originating from the Queendom of Lakkari. Its most associated with the Queendom's Kandake, Iteru of the dunes."
+	desc = "An embellished swift sword originating from the Queendom of Lakkari. Its most associated with the Queendom's Kandake."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "nimcha"
 	dropshrink = 0.8
