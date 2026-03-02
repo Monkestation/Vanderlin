@@ -7,13 +7,40 @@
 	insert_verb = "slide"
 	insert_preposition = "in"
 
+/datum/component/storage/concrete/scabbard/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(update_icon_state))
+
+/datum/component/storage/concrete/scabbard/UnregisterFromParent()
+	UnregisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE)
+	. = ..()
+
+/datum/component/storage/concrete/scabbard/proc/update_icon_state(obj/item/I)
+	if(!istype(I))
+		return
+	I.icon_state = initial(I.icon_state)
+	I.item_state = initial(I.item_state)
+
+	if(length(I.contents))
+		var/obj/item/sheathed_weapon = I.contents[1]
+		var/icon/possible_sheaths = icon(I.icon) //hehe
+		var/list/extensions = list()
+		for(var/s in possible_sheaths.IconStates(1))
+			extensions[s] = TRUE
+		qdel(possible_sheaths)
+		if(extensions[I.icon_state+"_[sheathed_weapon.icon_state]"])
+			I.icon_state += "_[sheathed_weapon.icon_state]"
+		else
+			I.icon_state += "-sheathed"
+
+
 /datum/component/storage/concrete/scabbard/knife/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))
 
 /datum/component/storage/concrete/scabbard/sword/New(list/raw_args)
 	. = ..()
-	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
+	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/long/daewalker))
 
 /datum/component/storage/concrete/scabbard/kazengun/New(list/raw_args)
 	. = ..()

@@ -155,9 +155,6 @@
  * See: [/obj/item/proc/melee_attack_chain]
  */
 /atom/proc/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	if(user.used_intent.tranged)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
 	var/signal_result = SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY_SECONDARY, weapon, user, modifiers)
 
 	if(signal_result & COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN)
@@ -165,6 +162,10 @@
 
 	if(signal_result & COMPONENT_SECONDARY_CONTINUE_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CONTINUE_CHAIN
+
+	if(user.cmode)
+		if(user.rmb_intent?.special_attack(user, src))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -207,11 +208,11 @@
 
 /mob/living/attackby_secondary(obj/item/weapon, mob/living/user, list/modifiers)
 	. = ..()
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(user.cmode)
 		// Normal attackby updates click cooldown, so we have to make up for it
 		var/result = weapon.attack_secondary(src, user, modifiers)
 
@@ -227,7 +228,9 @@
 
 	if(weapon.item_flags & ABSTRACT)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(src == user)
 		if(offered_item_ref)
 			cancel_offering_item()
@@ -604,7 +607,7 @@
 	//This is returning the maximum of the arguments meaning this is to prevent negative values.
 	newforce = max(newforce, 1)
 	if(dullness_ratio)
-		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD)
+		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
 			var/lerpratio = LERP(0, SHARPNESS_TIER2_THRESHOLD, (dullness_ratio / SHARPNESS_TIER2_THRESHOLD))
 			if(prob(33))
 				to_chat(user, span_info("The blade is dull..."))

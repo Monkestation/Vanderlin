@@ -375,10 +375,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)
-		selected_patron = GLOB.patron_list[patron_typepath]
+		selected_patron = GLOB.patrons_by_type[patron_typepath]
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patron_list[default_patron]
+		selected_patron = GLOB.patrons_by_type[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -452,9 +452,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 
 	//Validate job prefs
-	for(var/j in job_preferences)
-		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
-			job_preferences -= j
+	if(!job_preferences)
+		job_preferences = list()
+	else
+		for(var/j in job_preferences)
+			if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+				job_preferences -= j
 
 	S["customizer_entries"] >> customizer_entries
 	validate_customizer_entries()

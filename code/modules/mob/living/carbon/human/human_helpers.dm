@@ -44,10 +44,8 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
-	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
+	if(!is_human_part_visible(src, HIDEFACE))
 		return if_no_face
-	if( head && (head.flags_inv&HIDEFACE) )
-		return if_no_face		//Likewise for hats
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
 	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || O.skeletonized )	//disfigured. use id-name if possible
 		return if_no_face
@@ -141,6 +139,7 @@
 
 	var/damage = 12
 	var/used_str = STASTR
+	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
 		return 30 * multiplier
@@ -187,8 +186,7 @@
 		skin_tone = pick_assoc(skin_list)
 
 	if(randomise_flags & RANDOMIZE_EYE_COLOR)
-		var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-		eyes.eye_color = random_eye_color()
+		set_eye_color(random_eye_color(TRUE))
 
 	// if(randomise_flags & RANDOMIZE_FEATURES)
 	// 	dna.features = random_features()

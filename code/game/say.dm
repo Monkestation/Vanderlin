@@ -38,15 +38,15 @@
 	var/namepart = "[speaker.GetVoice()]"
 	if(speaker.get_alt_name())
 		namepart = "[speaker.get_alt_name()]"
-	var/colorpart = "<span style='text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+	var/colorpart = null
 	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
 		if(face_name)
 			namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
 		if(H.voice_color)
-			colorpart = "<span style='color:#[H.voice_color];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+			colorpart = "<span style='color:#[H.voice_color];'>"
 	if(speaker.voicecolor_override)
-		colorpart = "<span style='color:#[speaker.voicecolor_override];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+		colorpart = "<span style='color:#[speaker.voicecolor_override];'>"
 	//End name span.
 	var/endspanpart = "</span></span>"
 
@@ -111,7 +111,7 @@
 					namepart = "Unknown [appendage]"
 				else
 					namepart = "Unknown"
-			spanpart1 = "<span class='smallyell'>"
+			spanpart1 = "<span class='small yell'>"
 	var/languageicon = ""
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	if(istype(D) && D.display_icon(src))

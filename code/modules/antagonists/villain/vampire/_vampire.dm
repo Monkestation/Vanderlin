@@ -21,14 +21,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 
-/datum/antagonist/vampire/New(datum/clan/incoming_clan = /datum/clan/nosferatu, forced_clan = FALSE)
+/datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
 	if(forced_clan)
-		if(!istype(incoming_clan))
+		if(!istype(incoming_clan) && ispath(incoming_clan))
 			incoming_clan = new incoming_clan()
 		forced = forced_clan
 		forcing_clan = incoming_clan
-	else
+	else if(incoming_clan)
 		default_clan = incoming_clan
 
 /datum/antagonist/vampire/outcast
@@ -37,6 +37,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	antag_hud_name = "vamplesser"
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
+		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
+		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
@@ -58,19 +61,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.adv_hugboxing_cancel()
 		vampdude.hud_used?.shutdown_bloodpool()
 		vampdude.hud_used?.initialize_bloodpool()
 		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
 
-		if(!forced)
-			// Show clan selection interface
-			if(!clan_selected)
-				show_clan_selection(vampdude)
-			else
-				// Apply the selected clan
-				vampdude.set_clan(default_clan)
-		else
+		if(forced)
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
 

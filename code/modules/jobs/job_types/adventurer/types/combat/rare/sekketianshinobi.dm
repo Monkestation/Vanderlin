@@ -33,7 +33,7 @@
 		/datum/skill/misc/climbing = 5,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/mathematics = 1,
 		/datum/skill/misc/lockpicking = 2, //these guys free slaves, they probably know how to disarm traps and unlock things

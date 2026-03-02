@@ -1,4 +1,5 @@
 #define ALL_TEMPLE_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
+#define UNDIVIDED_TEMPLE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/divine/centrist)
 #define ALL_CLERIC_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
 #define ALL_PALADIN_PATRONS 	list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
 #define ALL_TEMPLAR_PATRONS 	list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/eora, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/pestra, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/malum, /datum/patron/divine/xylix)
@@ -7,6 +8,7 @@
 
 /// Currently same as ALL_ICONOCLAST_PATRONS, but in text format because byond sucks and won't read things properly.
 #define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha")
+#define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
 
 GLOBAL_LIST_INIT(curse_names, list())
 
@@ -130,16 +132,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
-
-#define ANY_CLASS_CTAGS list(\
-	CTAG_PILGRIM, \
-	CTAG_ADVENTURER, \
-	CTAG_TOWNER, \
-	CTAG_MERCENARY, \
-	CTAG_GARRISON, \
-	CTAG_FORGARRISON, \
-	CTAG_MENATARMS, \
-)
 
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it

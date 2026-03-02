@@ -38,14 +38,14 @@
 	Never ask them their opinions of Grenzelhoft."
 
 /datum/culture/universal/grenzelhoft
-	name = "Grenzelholf"
+	name = "Grenzelhoft"
 	description = "Known for their mighty weiners, meals, and talented jesters. \
 	Potentially some of the most grim, bigoted people one could ever meet. Never ask them their opinions of Wintermare."
 
 /datum/culture/universal/amber_hollow
 	name = "Amber Hollow"
 	description = "Almost all whom trace hollow-kin ancestry have family history reaching back to the hollow, \
-	a triumph over their dark elven once-overlords. Mighty redwoods make Hollow Dwellers proficient vertical navigators"
+	a triumph over their dark elven once-overlords. Mighty redwoods make Hollow Dwellers proficient vertical navigators."
 
 /datum/culture/universal/crimsonlands
 	name = "Crimsonlands"

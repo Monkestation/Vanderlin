@@ -265,26 +265,26 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		trey_liam.SetSleeping(25 SECONDS)
 		trey_liam.add_stress(/datum/stress_event/maniac_woke_up)
 		sleep(1.5 SECONDS)
-		to_chat(trey_liam, span_deadsay("<span class='reallybig'>... WHERE AM I? ...</span>"))
+		to_chat(trey_liam, span_userdanger("<span class='reallybig'>... WHERE AM I? ...</span>"))
 		sleep(1.5 SECONDS)
 		var/static/list/slop_lore = list(
-			span_deadsay("... Rockhill? Vanderlin? No ... They don't exist ..."),
-			span_deadsay("... My name is Trey. Trey Liam, Scientific Overseer ..."),
-			span_deadsay("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
-			span_deadsay("... Launched into the stars, preserving their memories ... Their personalities ..."),
-			span_deadsay("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
-			span_deadsay("... There is no hope left. Only the program lets me live through the avatars ..."),
-			span_deadsay("... What have I done?! ..."),
+			span_userdanger("... Rockhill? Vanderlin? No ... They don't exist ..."),
+			span_userdanger("... My name is Trey. Trey Liam, Scientific Overseer ..."),
+			span_userdanger("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
+			span_userdanger("... Launched into the stars, preserving their memories ... Their personalities ..."),
+			span_userdanger("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
+			span_userdanger("... There is no hope left. Only the program lets me live through the avatars ..."),
+			span_userdanger("... What have I done?! ..."),
 		)
 		for(var/slop in slop_lore)
 			to_chat(trey_liam, slop)
 			sleep(3 SECONDS)
-		to_chat(trey_liam, span_big(span_deadsay("I have to go back, I have to go back, I have to go back to Vanderlin.")))
+		to_chat(trey_liam, span_big(span_userdanger("I have to go back, I have to go back, I have to go back to Vanderlin.")))
 	else
 		INVOKE_ASYNC(src, GLOBAL_PROC_REF(cant_wake_up), dreamer)
 		cull_competitors(dreamer)
 	// sleep(15 SECONDS)
-	// to_chat(world, span_deadsay("<span class='reallybig'>The Maniac has TRIUMPHED!</span>"))
+	// to_chat(world, span_userdanger("<span class='reallybig'>The Maniac has TRIUMPHED!</span>"))
 	// SSticker.declare_completion()
 
 /proc/cant_wake_up(mob/living/target)
@@ -292,11 +292,11 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		return
 	ADD_TRAIT(target, TRAIT_SHAKY_SPEECH, TRAIT_GENERIC)
 	target.Knockdown(10 SECONDS)
-	to_chat(target, span_deadsay("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
+	to_chat(target, span_userdanger("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
 	target.say("I CAN'T WAKE UP!", spans = list("reallybig"), ignore_spam = TRUE)
 	sleep(2 SECONDS)
 	for(var/i in 1 to 10)
-		to_chat(target, span_deadsay("<span class='reallybig'>ICANTWAKEUP</span>"))
+		to_chat(target, span_userdanger("<span class='reallybig'>ICANTWAKEUP</span>"))
 		target.say("ICANTWAKEUP!!", spans = list("reallybig"), ignore_spam = TRUE)
 		sleep(0.5 SECONDS)
 	var/obj/item/organ/brain/brain = target.getorganslot(ORGAN_SLOT_BRAIN)

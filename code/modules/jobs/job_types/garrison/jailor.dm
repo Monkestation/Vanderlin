@@ -43,7 +43,7 @@
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/traps = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2
 	)
 

@@ -377,7 +377,7 @@
 					"eastabove" = 0,
 					"westabove" = 0)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self_secondary(mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attack_self_secondary(mob/user, list/modifiers)
 	if(bayonet)
 		if(do_after(user, 2 SECONDS, src))
 			user.put_in_hands(bayonet)
@@ -398,7 +398,7 @@
 		update_appearance(UPDATE_ICON_STATE)
 	..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
 	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
 	if(ishuman(user))

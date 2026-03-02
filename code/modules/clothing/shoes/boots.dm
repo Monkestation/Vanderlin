@@ -34,12 +34,14 @@
 	sellprice = 25
 	item_weight = 7 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
 	icon_state = "soldierboots"
 	item_state = "soldierboots"
 	desc = "Lightly armored boots made from iron offering protection against both melee and ranged attacks."
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 60, "fire" = 0, "acid" = 0)
+	armor = ARMOR_BRIGANDINE
 	max_integrity = INTEGRITY_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
@@ -116,7 +118,6 @@
 	name = "watch boots"
 	color = "#d5c2aa"
 	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
-	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
 
@@ -174,15 +175,6 @@
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 	item_weight = 2
-
-/obj/item/clothing/shoes/boots/armor/vampire
-	name = "ancient ceremonial boots"
-	desc = "Antediluvian boots with ceremonial ornaments from ages past."
-	icon_state = "vboots"
-	item_state = "vboots"
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	armor = ARMOR_PLATE_GOOD
-	item_weight = 5 * STEEL_MULTIPLIER
 
 /obj/item/clothing/shoes/boots/armor/silver
 	name = "silver boots"

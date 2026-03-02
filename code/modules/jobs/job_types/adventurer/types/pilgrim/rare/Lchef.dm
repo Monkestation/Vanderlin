@@ -5,7 +5,7 @@
 	Now you find yourself approaching Vanderlin... perhaps this will be a perfect location to prepare your next great feast?"
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/masterchef
-	total_positions = 0
+	total_positions = 1
 	roll_chance = 0
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	apprentice_name = "Chef Apprentice"
@@ -21,7 +21,7 @@
 		/datum/skill/combat/wrestling = 1,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/farming = 3,
 		/datum/skill/misc/reading = 4,
 		/datum/skill/craft/crafting = 4,

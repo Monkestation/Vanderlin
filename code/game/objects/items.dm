@@ -463,8 +463,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	//Randomizes blade sharpness on initialize to between 60-100%
 	if(max_blade_int && !blade_int)
-		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
-
+		blade_int = max_blade_int
+		if(randomize_blade_int)
+			blade_int += rand(-(max_blade_int * 0.4), 0)
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)
@@ -1357,6 +1358,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	wdefense -= 1
 	user.update_a_intents()
 
+/obj/item/proc/is_wielded()
+	var/datum/component/two_handed/two_handed = GetComponent(/datum/component/two_handed)
+	return two_handed?.wielded
+
 /obj/item/proc/toggle_altgrip(mob/user, override_state)
 	if(!alt_intents)
 		return
@@ -1428,7 +1433,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(!istype(loc, /turf))
 			return
 		source = loc
-	var/image/pickup_animation = image(icon = src, layer = layer + 0.1)
+	var/mutable_appearance/pickup_animation = mutable_appearance(icon, icon_state, layer = layer + 0.1)
 	pickup_animation.plane = GAME_PLANE
 	pickup_animation.transform.Scale(0.75)
 	pickup_animation.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
@@ -1528,3 +1533,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
+/obj/item/atom_break(damage_flag, silent)
+	. = ..()
+
+	if(!ismob(loc))
+		return
+
+	if(!silent)
+		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))

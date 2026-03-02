@@ -92,22 +92,19 @@
 		. = FALSE
 
 /datum/emote/living/custom/run_emote(mob/user, params, type_override = null, intentional = FALSE)
+	if(QDELETED(user))
+		return FALSE
+
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
-	else if(QDELETED(user))
-		return FALSE
-	else if(user.client && user.client.prefs.muted & MUTE_IC)
+
+	if(user.client?.prefs.muted & MUTE_IC)
 		to_chat(user, "<span class='boldwarning'>I cannot send IC messages (muted).</span>")
 		return FALSE
-	else if(!params)
-		var/custom_emote = copytext(sanitize(input("What does your character do?") as text|null), 1, MAX_MESSAGE_LEN)
-		if(custom_emote && !check_invalid(user, custom_emote))
-			message = custom_emote
-			emote_type = EMOTE_VISIBLE
-	else
-		message = params
-		if(type_override)
-			emote_type = type_override
+
+	message = params
+	if(type_override)
+		emote_type = type_override
 	. = ..()
 	message = null
 	emote_type = EMOTE_VISIBLE

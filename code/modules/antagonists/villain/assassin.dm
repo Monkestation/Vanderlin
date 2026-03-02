@@ -53,6 +53,7 @@
 /datum/antagonist/assassin/on_removal()
 	if(!silent && owner.current)
 		to_chat(owner.current,"<span class='danger'>The red fog in my mind is fading. I am no longer an [name]!</span>")
+	remove_verb(owner.current, /mob/living/carbon/human/proc/who_targets)
 	return ..()
 
 /datum/antagonist/assassin/roundend_report()

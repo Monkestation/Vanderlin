@@ -26,6 +26,8 @@
 	grid_width = 32
 	grid_height = 64
 
+	weapon_special = /datum/special_intent/whip_coil
+
 /obj/item/weapon/whip/getonmobprop(tag)
 	. = ..()
 	if(tag)
