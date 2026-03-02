@@ -89,6 +89,7 @@
 // Gronnic subtypes of atgervi clothes
 /obj/item/clothing/head/helmet/leather/shaman_hood
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	misc_flags = CRAFTING_TEST_EXCLUDE //special item with unique mechanics, not craftable
 	name = "moose hood"
 	desc = "A deceptively strong moosehide hood with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans: To slay a Grinning Moose in the final hunt alone - and fashion a hood from its head."
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
