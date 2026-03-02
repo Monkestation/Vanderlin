@@ -72,11 +72,6 @@
 	cost = 65
 	contains = /obj/item/clothing/armor/plate/iron
 
-/datum/supply_pack/armor/steel/osslandic_iron_plate
-	name = "Osslandic Iron Plate"
-	cost = 65
-	contains = /obj/item/clothing/armor/plate/iron/gronn
-
 /datum/supply_pack/armor/light/ifull_plate
 	name = "Iron Plate Armor"
 	cost = 80
@@ -137,10 +132,6 @@
 	contains = /obj/item/clothing/gloves/chain/iron
 
 // PANTS
-/datum/supply_pack/armor/light/plate_gloves_iron
-	name = "Osslandic Iron Gauntlets"
-	cost = 30
-	contains = /obj/item/clothing/gloves/plate/iron/gronn
 
 /datum/supply_pack/armor/light/chainlegs_iron
 	name = "Iron Chain Chausses"
@@ -158,11 +149,6 @@
 	name = "Iron Boots"
 	cost = 25
 	contains = /obj/item/clothing/shoes/boots/armor/light
-
-/datum/supply_pack/armor/light/light_armor_boots_gronn
-	name = "Osslandic Iron Boots"
-	cost = 40
-	contains = /obj/item/clothing/shoes/boots/armor/gronn
 
 // STEEL GEAR
 
@@ -204,11 +190,6 @@
 	name = "Great Helm"
 	cost = 55
 	contains = /obj/item/clothing/head/helmet/heavy/bucket
-
-/datum/supply_pack/armor/steel/buckethelm_gronn
-	name = "Osslandic Horned Helmet"
-	cost = 55
-	contains = /obj/item/clothing/head/helmet/heavy/bucket/gronn
 
 /datum/supply_pack/armor/steel/pegasushelm
 	name = "Pegasus Knight Helm"
@@ -346,11 +327,6 @@
 	name = "Plate Boots"
 	cost = 50
 	contains = /obj/item/clothing/shoes/boots/armor
-
-/datum/supply_pack/armor/steel/steel_boots_gronn
-	name = "Osslandic Iron Boots"
-	cost = 50
-	contains = /obj/item/clothing/shoes/boots/armor/gronn
 
 /datum/supply_pack/armor/steel/zplateboots
 	name = "Zalad Plate Boots"
