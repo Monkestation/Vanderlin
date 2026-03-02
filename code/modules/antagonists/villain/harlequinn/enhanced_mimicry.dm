@@ -26,7 +26,7 @@
 	var/old_voice
 	var/transformed = FALSE
 	var/old_honorary
-	var/_old_honorary_s
+	var/old_honorary_s
 
 	var/transformation_stability = 100 // Decreases over time
 
