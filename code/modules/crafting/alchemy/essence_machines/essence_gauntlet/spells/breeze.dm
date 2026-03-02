@@ -21,4 +21,4 @@
 
 	for(var/obj/item/I in target_turf)
 		if(I.w_class <= WEIGHT_CLASS_SMALL && prob(50))
-			SSmove_manager.move_rand(I)
+			GLOB.move_manager.move_rand(I)

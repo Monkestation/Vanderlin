@@ -148,7 +148,7 @@
 		var/moved = FALSE
 
 		if(length(walk_to_cached_path))
-			SSmove_manager.stop_looping(src)
+			GLOB.move_manager.stop_looping(src)
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 			step_to(src, walk_to_cached_path[1], 0)
 			face_atom(walk_to_target)
@@ -156,7 +156,7 @@
 			walk_to_cached_path.Cut(1, 2)
 			moved = TRUE
 		else
-			SSmove_manager.home_onto(src, walk_to_target, total_multiplicative_slowdown())
+			GLOB.move_manager.home_onto(src, walk_to_target, total_multiplicative_slowdown())
 			moved = TRUE
 
 		if(moved)
@@ -166,7 +166,7 @@
 
 /mob/living/carbon/human/proc/remove_walk_to_trait()
 	REMOVE_TRAIT(src, TRAIT_MOVEMENT_BLOCKED, VAMPIRE_TRAIT)
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 	walk_to_target = null
 	walk_to_duration = 0
 	walk_to_steps_taken = 0

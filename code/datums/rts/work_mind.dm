@@ -361,7 +361,7 @@
 	current_task = null
 	movement_target = null
 	set_paused_state(FALSE, "work finished")
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 
 /datum/worker_mind/proc/stop_working()
 	var/stopped_task = current_task
@@ -372,11 +372,11 @@
 	if(stopped_task)
 		SEND_SIGNAL(src, COMSIG_WORKER_TASK_FAILED, stopped_task, "work stopped")
 
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 
 /datum/worker_mind/proc/set_movement_target(atom/target)
 	var/old_target = movement_target
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 	movement_target = target
 	SEND_SIGNAL(src, COMSIG_WORKER_MOVEMENT_SET, old_target, target)
 
@@ -472,7 +472,7 @@
 	set_paused_state(TRUE, "task paused for [duration/10] seconds")
 
 /datum/worker_mind/proc/stop_chase()
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 
 /datum/worker_mind/proc/suppress_attack()
 	var/old_target = attack_mode?.current_target

@@ -15,7 +15,7 @@
 	if(!start_delay)
 		start_delay = speed
 	var/atom/movable/moving_parent = parent
-	var/datum/move_loop/loop = SSmove_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags=MOVEMENT_LOOP_IGNORE_PRIORITY)
+	var/datum/move_loop/loop = GLOB.move_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags=MOVEMENT_LOOP_IGNORE_PRIORITY)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(should_move))
 	RegisterSignal(loop, COMSIG_PARENT_QDELETING, PROC_REF(loop_ended))
 
@@ -182,7 +182,7 @@
 	if(QDELETED(moving))
 		return
 
-	var/datum/move_loop/move/existing_loop = SSmove_manager.processing_on(moving, SSconveyors)
+	var/datum/move_loop/move/existing_loop = GLOB.move_manager.processing_on(moving, SSconveyors)
 	if(existing_loop)
 		existing_loop.direction = movedir
 		existing_loop.delay = get_move_delay()
@@ -193,7 +193,7 @@
 /obj/structure/roller/proc/stop_conveying(atom/movable/thing)
 	if(!ismovable(thing))
 		return
-	SSmove_manager.stop_looping(thing, SSconveyors)
+	GLOB.move_manager.stop_looping(thing, SSconveyors)
 
 /obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, turf/exit_turf)
 	SIGNAL_HANDLER

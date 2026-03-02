@@ -83,31 +83,6 @@
 				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
 		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
 
-/mob/proc/do_game_over()
-	if(SSticker.current_state != GAME_STATE_FINISHED)
-		return
-	status_flags |= GODMODE
-	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, ROUNDSTART_TRAIT)
-	ai_controller?.set_ai_status(AI_STATUS_OFF)
-	if(client)
-		add_verb(client, /client/proc/lobbyooc)
-		add_verb(client, /client/proc/view_stats)
-		client.show_game_over()
-
-/mob/living/do_game_over()
-	..()
-	adjustEarDamage(0, 6000)
-	Stun(6000, 1, 1)
-	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
-	SSmove_manager.stop_looping(src)
-	if(client)
-		add_verb(client, /client/proc/commendsomeone)
-
-/client/proc/show_game_over()
-	var/atom/movable/screen/splash/credits/S = new(null, null, src, FALSE, FALSE)
-	S.Fade(FALSE,FALSE)
-	RollCredits()
-
 /datum/controller/subsystem/ticker/proc/declare_completion()
 	set waitfor = FALSE
 

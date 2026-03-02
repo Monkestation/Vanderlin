@@ -69,7 +69,7 @@
 /mob/living/simple_animal/hostile/Life()
 	. = ..()
 	if(!.) //dead
-		SSmove_manager.stop_looping(src)
+		GLOB.move_manager.stop_looping(src)
 		return 0
 
 /mob/living/proc/AttackingTarget(mob/living/passed_target)

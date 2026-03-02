@@ -3042,3 +3042,12 @@
 	if(hud_used)
 		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_ICON)
+
+/mob/living/do_game_over()
+	. = ..()
+	adjustEarDamage(0, 6000)
+	Stun(6000, 1, 1)
+	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
+	GLOB.move_manager.stop_looping(src)
+	if(client)
+		add_verb(client, /client/proc/commendsomeone)

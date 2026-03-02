@@ -1,6 +1,6 @@
-///from [/datum/move_loop/start_loop] ():
+///from [/datum/move_loop/loop_started] ():
 #define COMSIG_MOVELOOP_START "moveloop_start"
-///from [/datum/move_loop/stop_loop] ():
+///from [/datum/move_loop/loop_stopped] ():
 #define COMSIG_MOVELOOP_STOP "moveloop_stop"
 ///from [/datum/move_loop/process] ():
 #define COMSIG_MOVELOOP_PREPROCESS_CHECK "moveloop_preprocess_check"

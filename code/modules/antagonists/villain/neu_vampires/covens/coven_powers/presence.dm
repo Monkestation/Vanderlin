@@ -99,7 +99,7 @@
 	target.remove_overlay(MUTATIONS_LAYER)
 
 /mob/living/carbon/human/proc/step_away_caster(mob/living/step_from)
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 	if(!CheckFrenzyMove())
 		set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 		step_away(src, step_from, 99)
@@ -207,7 +207,7 @@
 	target.remove_overlay(MUTATIONS_LAYER)
 
 /mob/living/carbon/human/proc/step_toward_caster(mob/living/step_to)
-	SSmove_manager.stop_looping(src)
+	GLOB.move_manager.stop_looping(src)
 	if(!CheckFrenzyMove())
 		set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 		step_towards(src, step_to, 99)

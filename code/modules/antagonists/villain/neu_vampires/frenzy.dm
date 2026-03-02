@@ -206,7 +206,7 @@
 		frenzy_last_pos = current_pos
 
 	if(length(frenzy_cached_path))
-		SSmove_manager.stop_looping(src)
+		GLOB.move_manager.stop_looping(src)
 		step_to(src, frenzy_cached_path[1], 0)
 		frenzy_cached_path.Cut(1, 2)
 	else
