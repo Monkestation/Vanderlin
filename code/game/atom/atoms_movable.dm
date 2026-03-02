@@ -515,7 +515,6 @@
 
 /atom/movable/Move(atom/newloc, direct, glide_size_override = 0, update_dir = TRUE)
 	var/atom/movable/pullee = pulling
-	var/mob/living/puller = pulledby
 	var/turf/T = loc
 	if(!moving_from_pull)
 		check_pulling()
@@ -649,17 +648,6 @@
 
 	if(.)
 		Moved(oldloc, direct)
-	// Snowflake code, make sure conditions match those in /client/proc/Process_Grab()
-	if(. && isliving(pulledby) && pulledby == puller && pulledby != pulling && pulledby.cmode && pulledby.grab_state == GRAB_PASSIVE) //NICHE case of being in a first tier grab state.
-		if(pulledby.anchored)
-			pulledby.stop_pulling()
-		else
-			var/pull_dir = get_dir(src, pulledby)
-			//puller and pullee more than one tile away or in diagonal position
-			if(get_dist(src, pulledby) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
-				pulledby.moving_from_pull = src
-				pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
-				pulledby.moving_from_pull = null
 	if(. && pulling && pulling == pullee && pulling != moving_from_pull) //we were pulling a thing and didn't lose it during our move.
 		if(pulling.anchored)
 			stop_pulling()
