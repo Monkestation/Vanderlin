@@ -36,8 +36,6 @@
 	)
 	add_verb(src, verbs)
 
-	grant_all_languages()
-
 /mob/dead/observer/rogue/arcaneeye/Destroy()
 	vampirelord = null
 	return ..()
@@ -134,4 +132,6 @@
 	eye.vampirelord = src
 	eye.ghostize_time = world.time
 	eye.key = key
+	qdel(eye.language_holder)
+	eye.language_holder = language_holder.copy(eye)
 	return eye

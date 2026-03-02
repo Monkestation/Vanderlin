@@ -70,6 +70,11 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	var/isinhell
 	var/last_helld = 0
 
+	/// Grants this observer mob all languages
+	var/grant_all_languages = TRUE
+	/// If grant all is not true, the languages we grant
+	var/list/languages_to_grant = list(/datum/language/common)
+
 /mob/dead/observer/rogue
 	icon_state = "ghost1"
 	verb_say = "moans"
@@ -78,6 +83,9 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	draw_icon = TRUE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
+
+	grant_all_languages = FALSE
+	languages_to_grant = list(/datum/language/undead)
 
 /mob/dead/observer/rogue/Initialize(mapload)
 	. = ..()
@@ -198,16 +206,12 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 			add_verb(src, GLOB.ghost_verbs)
 			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
-	grant_all_languages()
-
-//	show_data_huds()
-//	data_huds_on = 1
-
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 10)
+	if(grant_all_languages)
+		grant_all_languages()
+	else
+		remove_all_languages()
+		for(var/datum/language/lang as anything in languages_to_grant)
+			grant_language(lang)
 
 /mob/dead/observer/Destroy()
 	mind?.current_ghost = null
