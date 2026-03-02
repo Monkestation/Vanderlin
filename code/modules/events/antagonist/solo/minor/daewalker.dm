@@ -48,8 +48,12 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 		if(M.current && M.current.stat < DEAD)
 			fuckheads |= M.current
 	for(var/datum/clan/rave in GLOB.vampire_clans)
-		suckheads |= rave.clan_members
-		fuckheads |= rave.non_vampire_members
+		for(var/mob/living/vamp in rave.clan_members)
+			if(!QDELETED(vamp) && vamp.stat < DEAD) // this shouldnt be possible since they ash but hey, never know.
+				suckheads |= vamp
+		for(var/mob/living/ghoul in rave.non_vampire_members)
+			if(!QDELETED(ghoul) && ghoul.stat < DEAD)
+				fuckheads |= ghoul
 	// how many living vampires + how many living thralls + how many times they've been seen
 	var/attention = length(suckheads) + length(fuckheads) * 0.5 + GLOB.vamp_detection * 0.125
 	if(OMEN_SUNSTEAL in GLOB.badomens)
@@ -81,9 +85,14 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	transfer_prefs = FALSE
 
 /datum/round_event/antagonist/solo/ghost/daewalker/announce()
-	var/list/suckheads = list()
 	for(var/datum/mind/M in SSmapping.retainer.vampires)
-		if(M.current)
-			suckheads |= M.current
-	if(length(suckheads))
-		priority_announce("The Daewalker Approaches", SPAN_GOD_ASTRATA("ASTRATA'S WILL"), 'sound/music/daewalkerintro.ogg', players = suckheads)
+		if(!M.current?.client)
+			continue
+		var/mob/living/suckhead = M.current
+		bordered_message(suckhead, list(
+			"<h1>[SPAN_GOD_ASTRATA("<center>ASTRATA HAS NOTICED YOU</center>")]</h1>",
+			"<h2>[span_boldannounce("<center>THE DAEWALKER APPROACHES</center>")]</h2>"
+		))
+		var/vol = suckhead.client.prefs?.musicvol
+		if(vol)
+			suckhead.playsound_local(M.current, 'sound/music/daewalkerintro.ogg', vol)

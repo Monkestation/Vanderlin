@@ -5,13 +5,13 @@ import type { HighlightSetting, HighlightState, SettingsState } from './types';
 export const defaultSettings: SettingsState = {
   adminMusicVolume: 0.5,
   fontFamily: FONTS[0],
-  fontSize: 13,
+  fontSize: 14,
   initialized: false,
-  lineHeight: 1.2,
-  statFontSize: 12,
+  lineHeight: 1.3,
+  statFontSize: 13,
   statLinked: true,
   statTabsStyle: 'default',
-  theme: 'light',
+  theme: 'dark',
   version: 1,
   view: {
     visible: false,

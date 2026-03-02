@@ -195,11 +195,13 @@
 /datum/round_event/antagonist/solo/ghost/setup()
 	var/datum/round_event_control/antagonist/solo/cast_control = control
 	antag_count = cast_control.get_antag_amount()
+	var/list/candidates = cast_control.get_candidates()
+	message_admins("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
+	log_storyteller("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
 	antag_flag = cast_control.antag_flag
 	antag_datum = cast_control.antag_datum
 	restricted_roles = cast_control.restricted_roles
 	prompted_picking = cast_control.prompted_picking
-	var/list/candidates = cast_control.get_candidates()
 
 	if(prompted_picking)
 		candidates = pollCandidates(

@@ -91,7 +91,7 @@
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
-	beltr = /obj/item/book/granter/spellbook/apprentice
+	beltr = /obj/item/book/granter/spellbook/expert
 	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backpack_contents = list(

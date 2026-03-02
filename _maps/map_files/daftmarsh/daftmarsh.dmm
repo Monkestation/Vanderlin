@@ -3864,9 +3864,8 @@
 /turf/open/floor/wood,
 /area/outdoors/town)
 "ddo" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/marsh,
 /area/under/town/sewer)
@@ -4356,9 +4355,8 @@
 /turf/open/water/marsh,
 /area/outdoors/town)
 "dCZ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/hexstone,
 /area/under/town/sewer)
@@ -18008,9 +18006,8 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
 "pIE" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/tile/bfloorz,
 /area/under/town/sewer)

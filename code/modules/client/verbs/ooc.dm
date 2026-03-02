@@ -84,23 +84,20 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 
 	var/keyname = get_display_ckey(ckey)
 	var/color2use = prefs.voice_color
-	var/admin_message_color = prefs.ooccolor
-	if(!color2use)
-		color2use = "#FFFFFF"
-	else
-		color2use = "#[color2use]"
-	var/chat_color = "#c5c5c5"
+	color2use = "#[color2use]"
 	var/msg_to_send = ""
+	var/admin_message_color = prefs.ooccolor
+	if(isnull(admin_message_color))
+		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/pre_keyfield = C.holder ? "[keyname]([key])" : keyname
 		var/keyfield = conditional_tooltip_alt(pre_keyfield, prefs.oocpronouns, length(prefs.oocpronouns) && !is_misc_banned(ckey, BAN_MISC_OOCPRONOUNS))
 		if(C.prefs.chat_toggles & CHAT_OOC)
-			msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>[keyfield]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
 			to_chat(C, msg_to_send)
-
 
 /client/proc/lobbyooc(msg as text)
 	set category = "OOC"
@@ -161,9 +158,11 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		color2use = "#FFFFFF"
 	else
 		color2use = "#[color2use]"
-	var/chat_color = "#c5c5c5"
+
 	var/msg_to_send = ""
 	var/admin_message_color = prefs.ooccolor
+	if(isnull(admin_message_color))
+		admin_message_color = GLOB.OOC_COLOR
 
 	for(var/client/C in GLOB.clients)
 		var/real_key = C.holder ? "([key])" : ""
@@ -172,12 +171,11 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 				if(SSticker.current_state != GAME_STATE_FINISHED && !istype(C.mob, /mob/dead/new_player))
 					continue
 
-			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
 
 			to_chat(C, msg_to_send)
-
 
 /proc/toggle_ooc(toggle = null)
 	if(toggle != null) //if we're specifically en/disabling ooc
@@ -295,87 +293,6 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		if(search)
 			return lowertext(copytext(jd, pos+9, search))
 
-/client/verb/fix_chat()
-	set name = "Fix Chat"
-	set category = "OOC.Fix"
-	if (!chatOutput || !istype(chatOutput))
-		var/action = alert(src, "Invalid Chat Output data found!\nRecreate data?", "Wot?", "Recreate Chat Output data", "Cancel")
-		if (action != "Recreate Chat Output data")
-			return
-		chatOutput = new /datum/chatOutput(src)
-		chatOutput.start()
-		action = alert(src, "Goon chat reloading, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-		if (action == "Fixed")
-			log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by re-creating the chatOutput datum")
-		else
-			chatOutput.load()
-			action = alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-			if (action == "Yes")
-				log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by re-creating the chatOutput datum and forcing a load()")
-			else
-				action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-				if (action == "Switch to old chat")
-					winset(src, "output", "is-visible=true;is-disabled=false")
-					winset(src, "browseroutput", "is-visible=false")
-				log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window after recreating the chatOutput and forcing a load()")
-
-	else if (chatOutput.loaded)
-		var/action = alert(src, "ChatOutput seems to be loaded\nDo you want me to force a reload, wiping the chat log or just refresh the chat window because it broke/went away?", "Hmmm", "Force Reload", "Refresh", "Cancel")
-		switch (action)
-			if ("Force Reload")
-				chatOutput.loaded = FALSE
-				chatOutput.start() //this is likely to fail since it asks , but we should try it anyways so we know.
-				action = alert(src, "Goon chat reloading, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-				if (action == "Fixed")
-					log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a start()")
-				else
-					chatOutput.load()
-					action = alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-					if (action == "Yes")
-						log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a load()")
-					else
-						action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-						if (action == "Switch to old chat")
-							winset(src, "output", "is-visible=true;is-disabled=false")
-							winset(src, "browseroutput", "is-visible=false")
-						log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window forcing a start() and forcing a load()")
-
-			if ("Refresh")
-				chatOutput.showChat()
-				action = alert(src, "Goon chat refreshing, wait a bit and tell me if it's fixed", "", "Fixed", "Nope, force a reload")
-				if (action == "Fixed")
-					log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a show()")
-				else
-					chatOutput.loaded = FALSE
-					chatOutput.load()
-					action = alert(src, "How about now? (give it a moment)", "", "Yes", "No")
-					if (action == "Yes")
-						log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a load()")
-					else
-						action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-						if (action == "Switch to old chat")
-							winset(src, "output", "is-visible=true;is-disabled=false")
-							winset(src, "browseroutput", "is-visible=false")
-						log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window forcing a show() and forcing a load()")
-		return
-
-	else
-		chatOutput.start()
-		var/action = alert(src, "Manually loading Chat, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-		if (action == "Fixed")
-			log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by manually calling start()")
-		else
-			chatOutput.load()
-			alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-			if (action == "Yes")
-				log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by manually calling start() and forcing a load()")
-			else
-				action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-				if (action == "Switch to old chat")
-					winset(src, "output", list2params(list("on-show" = "", "is-disabled" = "false", "is-visible" = "true")))
-					winset(src, "browseroutput", "is-disabled=true;is-visible=false")
-				log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window after manually calling start() and forcing a load()")
-
 /client/proc/validate_oocpronouns(value)
 	value = lowertext(value)
 
@@ -462,7 +379,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		return
 	var/motd = global.config.motd
 	if(motd)
-		to_chat(src, "<div class=\"motd\">[motd]</div>", handle_whitespace=FALSE)
+		to_chat(src, "<div class=\"motd\">[motd]</div>")
 	else
 		to_chat(src, "<span class='notice'>The Message of the Day has not been set.</span>")
 
@@ -530,26 +447,52 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 
 /client/verb/fit_viewport()
 	set name = "Fit Viewport"
-	set category = "Preferences.Options"
-	set desc = ""
-	set hidden = 1
-	if(!holder)
-		return
+	set category = "OOC"
+	set desc = "Fit the width of the map window to match the viewport"
+
 	// Fetch aspect ratio
 	var/view_size = getviewsize(view)
-	var/aspect_ratio = view_size[1] / (view_size[2] / 1.3)
+	var/aspect_ratio = view_size[1] / view_size[2]
 
 	// Calculate desired pixel width using window size and aspect ratio
-	var/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
-	var/map_size = splittext(sizes["mapwindow.size"], "x")
-	var/height = text2num(map_size[2])
-	var/desired_width = round(height * aspect_ratio)
+	var/list/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
+
+	// Client closed the window? Some other error? This is unexpected behaviour, let's
+	// CRASH with some info.
+	if(!sizes["mapwindow.size"])
+		CRASH("sizes does not contain mapwindow.size key. This means a winget failed to return what we wanted. --- sizes var: [sizes] --- sizes length: [length(sizes)]")
+
+	var/list/map_size = splittext(sizes["mapwindow.size"], "x")
+
+	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
+	var/split_width = text2num(split_size[1])
+
+	// Window is minimized, we can't get proper data so return to avoid division by 0
+	if (!split_width)
+		return
+
+	// Gets the type of zoom we're currently using from our view datum
+	// If it's 0 we do our pixel calculations based off the size of the mapwindow
+	// If it's not, we already know how big we want our window to be, since zoom is the exact pixel ratio of the map
+	var/zoom_value = src.view_size?.zoom || 0
+
+	var/desired_width = 0
+	if(zoom_value)
+		desired_width = round(view_size[1] * zoom_value * ICON_SIZE_X)
+	else
+		// Looks like we expect mapwindow.size to be "ixj" where i and j are numbers.
+		// If we don't get our expected 2 outputs, let's give some useful error info.
+		if(length(map_size) != 2)
+			CRASH("map_size of incorrect length --- map_size var: [map_size] --- map_size length: [length(map_size)]")
+		var/height = text2num(map_size[2])
+		desired_width = round(height * aspect_ratio)
+
 	if (text2num(map_size[1]) == desired_width)
 		// Nothing to do
 		return
 
-	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
-	var/split_width = text2num(split_size[1])
+	// Avoid auto-resizing the statpanel and chat into nothing.
+	desired_width = min(desired_width, split_width - 300)
 
 	// Calculate and apply a best estimate
 	// +4 pixels are for the width of the splitter's handle
@@ -576,6 +519,12 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 		pct += delta
 		winset(src, "mainwindow.split", "splitter=[pct]")
 
+/// Attempt to automatically fit the viewport, assuming the user wants it
+/client/proc/attempt_auto_fit_viewport()
+	if (!prefs?.auto_fit_viewport)
+		return
+
+	INVOKE_ASYNC(src, VERB_REF(fit_viewport))
 
 /client/verb/policy()
 	set name = "Show Policy"

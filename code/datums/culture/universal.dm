@@ -45,7 +45,7 @@
 /datum/culture/universal/amber_hollow
 	name = "Amber Hollow"
 	description = "Almost all whom trace hollow-kin ancestry have family history reaching back to the hollow, \
-	a triumph over their dark elven once-overlords. Mighty redwoods make Hollow Dwellers proficient vertical navigators"
+	a triumph over their dark elven once-overlords. Mighty redwoods make Hollow Dwellers proficient vertical navigators."
 
 /datum/culture/universal/crimsonlands
 	name = "Crimsonlands"
