@@ -1,4 +1,4 @@
-/datum/voicepack/male/get_sound(soundin, modifiers)
+/datum/voicepack/male/foppish/get_sound(soundin, modifiers)
 	var/used
 	switch(modifiers)
 		if("old")
