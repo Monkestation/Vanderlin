@@ -72,6 +72,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 /mob/dead/observer/rogue
 	icon_state = "ghost1"
+	verb_say = "moans"
 	sight = 0
 	see_in_dark = 2
 	draw_icon = TRUE
