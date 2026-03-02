@@ -1529,7 +1529,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10), 0, 95)))//check if we actually shove them
 			//Thank you based whoneedsspace
-			qdel(user.check_arm_grabbed(user.active_hand_index))
+			target.stop_pulling(TRUE)
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 			if(target_collateral_mob)
 				shove_blocked = TRUE
