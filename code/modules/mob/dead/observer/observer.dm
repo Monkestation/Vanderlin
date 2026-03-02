@@ -486,22 +486,50 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/verb/follow()
 	set category = "Spirit"
-	set name = "Orbit" // "Haunt"
+	set name = "Orbit"
 	set desc = ""
 	set hidden = 1
-	var/list/mobs
-	if(client.holder)
-		if(check_rights(R_WATCH,0))
-			mobs = getpois(mobs_only=1,skip_mindless=1)
-		else
-			mobs = gethaunt()
-	else
-		mobs = gethaunt()
 
-	var/input = input("Who?!", "Haunt", null, null) as null|anything in mobs
+	var/list/mobs = getpois(mobs_only = TRUE, skip_mindless = TRUE)
+
+	if(!length(mobs))
+		to_chat(src, span_dead("No souls to orbit."))
+		return
+
+	var/input = browser_input_list(src, "Who?!", "Orbit", null, mobs)
+	if(!input || QDELETED(src))
+		return
+
 	var/mob/target = mobs[input]
+	if(!target)
+		return
+
 	ManualFollow(target)
 
+/mob/dead/observer/proc/dead_tele()
+	set category = "Ghost"
+	set name = "Teleport"
+	set desc= "Teleport to a location"
+	set hidden = 1
+
+	if(!isobserver(src))
+		to_chat(src, span_warning("Not when you're not dead!"))
+		return
+
+	var/area/thearea  = browser_input_list(src, "Area to jump to", "Where?", GLOB.areas)
+
+	if(!thearea || QDELETED(src))
+		return
+
+	var/list/L = list()
+	for(var/turf/T in get_area_turfs(thearea.type))
+		L += T
+
+	if(!length(L))
+		to_chat(src, span_warning("No location available!"))
+		return
+
+	forceMove(pick(L))
 
 #define HAUNTTIME (10 MINUTES)
 
