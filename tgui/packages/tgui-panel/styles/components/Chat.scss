@@ -93,3 +93,7 @@
     pointer-events: none;
   }
 }
+
+.ChatMessage--zebra {
+  background-color: hsl(from var(--color-base) h s calc(l - 10));
+}

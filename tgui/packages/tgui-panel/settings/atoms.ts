@@ -12,6 +12,8 @@ export const defaultSettings: SettingsState = {
   statLinked: true,
   statTabsStyle: 'default',
   theme: 'dark',
+  disableCombine: false,
+  zebraHighlight: false,
   version: 1,
   view: {
     visible: false,
