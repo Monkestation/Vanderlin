@@ -43,17 +43,46 @@
 		/datum/action/cooldown/spell/undirected/conjure_item/puffer
 	)
 
+	honoraries = list(
+ 		"Big Iron" = 0,
+ 		"Bodystacker" = 1,
+ 		"Corpsestacker" = 1,
+ 		"Dead or Alive" = 0,
+ 		"Guns Blazing" = 0,
+ 		"Heaven's Smile" = 0,
+ 		"High Noon" = 0,
+ 		"Last Sight" = 0,
+ 		"Lethal Shot" = 0,
+ 		"Mammon Shot" = 0,
+ 		"Mattarella" = 0,
+ 		"Freyja's-Dae Nite" = 0,
+ 		"Number One" = 0,
+ 		"of No Paradise" = 1,
+ 		"of the Gallows" = 1,
+ 		"Flintlock Chirurgeon" = 0,
+ 		"Subterra-Walker" = 1,
+ 		"the Cleaner" = 1,
+ 		"the Courier" = 1,
+ 		"the Desperado" = 1,
+ 		"the Equalizer" = 1,
+ 		"the First Murderer" = 1,
+ 		"the Gunslinger" = 1,
+ 		"the Hanged Man" = 1,
+ 		"the Hitman" = 1,
+ 		"the Killer Seven" = 1,
+ 		"the Lifestealer" = 1,
+ 		"the Mammon-Taker" = 1,
+ 		"the One Who Sold Creation" = 1,
+ 		"the Opposition" = 1,
+ 		"the Power-Monger" = 1,
+ 		"the Renegade" = 1,
+		"the Showoff" = 1,
+ 		"the Son of a Bitch" = 1,
+ 		"the Wanted Man" = 1,
+	)
+
 /datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
-		var/prev_real_name = spawned.real_name
-		var/prev_name = spawned.name
-		var/title
-		var/list/titles = list("The Showoff", "The Gunslinger", "Mammon Shot", "The Desperado", "Last Sight", "The Courier", "Lethal Shot", "Guns Blazing", "Punished Shade", "The One Who Sold Creation", "V1", "V2", "The Opposition", "Mattarella", "High Noon", "Subterra-Walker", "Big Iron", "The Hanged Man", "The Equalizer", "Bodystacker", "Schotgonne Surgeon", "Of The Gallows", "The Renegade", "The Wanted Man", "Dead or Alive", "The Killer Seven", "The Cleaner", "The Son of a Bitch", "Mister Fridae Nite", "Heaven's Smile", "Of No Paradise", "Number One", "The Hitman", "Corpsestacker", "The First Murderer", "The Mammon-Taker", "The Lifestealer", "The Power-Monger")
-		title = pick(titles)
-		spawned.real_name = "[prev_real_name], [title]"
-		spawned.name = "[prev_name], [title]"
-
 	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/vigilante

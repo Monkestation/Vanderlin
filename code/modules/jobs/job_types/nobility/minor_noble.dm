@@ -19,6 +19,9 @@
 	spells = list(/datum/action/cooldown/spell/undirected/call_bird)
 	job_bitflag = BITFLAG_ROYALTY
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
 	jobstats = list(
@@ -45,14 +48,6 @@
 
 /datum/job/minor_noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Lord"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Lady"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1,2))
 
 	if(istype(spawned.patron, /datum/patron/inhumen/baotha))

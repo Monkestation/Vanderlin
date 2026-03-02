@@ -26,6 +26,7 @@
 		EXP_TYPE_CHURCH = 900,
 		EXP_TYPE_COMBAT = 900
 	)
+	honorary = "Grandmaster"
 
 	jobstats = list(
 		STATKEY_STR = 2,

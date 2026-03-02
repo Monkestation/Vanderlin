@@ -24,6 +24,9 @@
 		EXP_TYPE_LIVING = 300
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	jobstats = list(
 		STATKEY_STR = -2,
 		STATKEY_INT = 5,

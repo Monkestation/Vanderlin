@@ -20,6 +20,7 @@
 	give_bank_account = 35
 	can_have_apprentices = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
+	honorary = "Miss"
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/hag_call,

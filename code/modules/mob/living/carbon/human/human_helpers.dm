@@ -29,7 +29,7 @@
 	return if_no_id
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
-/mob/living/carbon/human/get_visible_name()
+/mob/living/carbon/get_visible_name()
 	var/face_name = get_face_name("")
 	var/id_name = get_id_name("")
 	if(name_override)
@@ -43,17 +43,24 @@
 	return "Unknown"
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
+/mob/living/carbon/proc/get_face_name(if_no_face = "Unknown")
 	if(!is_human_part_visible(src, HIDEFACE))
 		return if_no_face
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
 	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || O.skeletonized )	//disfigured. use id-name if possible
 		return if_no_face
-	return real_name
+	/// This sure does suck
+	if(SSticker.regent_mob == src)
+		. += "Regent "
+	if(honorary)
+		. += "[honorary] "
+	. += real_name
+	if(honorary_suffix)
+		. += " [honorary_suffix]"
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
 //Useful when player is being seen by other mobs
-/mob/living/carbon/human/proc/get_id_name(if_no_id = "Unknown")
+/mob/living/carbon/proc/get_id_name(if_no_id = "Unknown")
 	. = if_no_id	//to prevent null-names making the mob unclickable
 	return
 

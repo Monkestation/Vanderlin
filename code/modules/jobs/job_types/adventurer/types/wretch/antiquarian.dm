@@ -53,7 +53,43 @@
 		///datum/action/cooldown/spell/aoe/snuff,
 		/datum/action/cooldown/spell/undirected/conjure_item/calling_card
 	)
-
+	honoraries = list(
+		"Acquisitions Expert" = 0,
+		"the Cleptologist" = 1,
+		"the One Who Walks" = 1,
+		"of Deadly Shadows" = 1,
+		"the Prince of Shadows" = 1,
+		"the Recovery Specialist" = 1,
+		"the Acquirer" = 1,
+		"the Antiquarian" = 1,
+		"the Art Critic" = 1,
+		"the Collector" = 1,
+		"the Courier" = 1,
+		"the Crow" = 1,
+		"the Fence" = 1,
+		"the Filcher" = 1,
+		"the Ghost" = 1,
+		"the Grifter" = 1,
+		"the Infiltrator" = 1,
+		"the Intruder" = 1,
+		"the Invisible" = 1,
+		"the Keeper" = 1,
+		"the Locksmith" = 1,
+		"the Lurker" = 1,
+		"the Magpie" = 1,
+		"the Mask" = 1,
+		"the Master Thief" = 1,
+		"the Night Watch" = 1,
+		"the Phantom" = 1,
+		"the Raven" = 1,
+		"the Respectable Citizen" = 1,
+		"the Shadow" = 1,
+		"the Skeleton Key" = 1,
+		"the Specialist" = 1,
+		"the Stalker" = 1,
+		"the Trickster" = 1,
+		"the Watcher" = 1,
+	)
 
 /datum/outfit/wretch/antiquarian/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -76,15 +112,7 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 
+
 /datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
-		var/prev_real_name = spawned.real_name
-		var/prev_name = spawned.name
-		var/title
-		var/list/titles = list("The Keeper", "The Phantom", "The Crow", "The Raven", "The Magpie", "The Courier", "The Mask", "The Shadow", "The Ghost", "The Fence", "The Intruder", "The Infiltrator", "The Filcher", "The Grifter", "He Who Walks", "The Invisible", "The Watcher", "The Master Thief", "The Dark Project", "The Lurker", "Prince of Shadows", "The Night Watch", "The Antiquarian", "Acquisitions Expert", "Cleptologist", "The Specialist", "The Stalker", "Of Deadly Shadows", "The Trickster", "The Respectable Citizen", "The Locksmith", "The Acquirer", "The Collector", "The Skeleton Key", "The Art Critic", "Recovery Specialist" ) //Dude, Trust.
-		title = pick(titles)
-		spawned.real_name = "[prev_real_name], [title]"
-		spawned.name = "[prev_name], [title]"
-
 	wretch_select_bounty(spawned)

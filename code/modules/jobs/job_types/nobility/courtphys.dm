@@ -27,6 +27,10 @@
 		STATKEY_CON = -1
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
+
 	skills = list(
 		/datum/skill/misc/reading = 5,
 		/datum/skill/craft/crafting = 2,
