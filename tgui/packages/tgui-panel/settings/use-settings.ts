@@ -20,7 +20,7 @@ export function useSettings() {
 
     async function fetchSettings(): Promise<void> {
       try {
-        const storedSettings = await storage.get('panel-settings');
+        const storedSettings = await storage.get('rogue-panel-settings');
         console.log('Loaded panel settings from storage:', storedSettings);
         startSettingsMigration(storedSettings);
       } catch (error) {
@@ -36,7 +36,7 @@ export function useSettings() {
   function storeSettings(update: SettingsState): void {
     setSettings(update);
     console.log('Updated panel settings:', update);
-    storage.set('panel-settings', { ...update, ...highlights });
+    storage.set('rogue-panel-settings', { ...update, ...highlights });
   }
 
   /** Updates any set of keys. Offers type safety based on the selection */
