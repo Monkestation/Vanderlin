@@ -246,7 +246,7 @@
 		var/mob/living/L = mob.pulling
 		var/mob/living/M = mob
 		// If passive grab and trying to pull someone who doesn't want to be pulled
-		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !HAS_TRAIT(L, TRAIT_INCAPACITATED))
+		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !L.incapacitated(IGNORE_GRAB))
 			// Reuse shove check probability
 			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
 				COOLDOWN_START(src, move_delay, 1 SECONDS)
