@@ -46,8 +46,6 @@
 
 /obj/structure/plasticflaps/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(pass_info.is_living)
-		if(pass_info.is_bot)
-			return TRUE
 		if(pass_info.mob_size != MOB_SIZE_TINY)
 			return FALSE
 	if(pass_info.pulling_info)

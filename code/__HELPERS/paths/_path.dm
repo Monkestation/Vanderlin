@@ -136,9 +136,6 @@
  * It's kinda annoying, but there's some proc chains we can't convert to this datum
  */
 /datum/can_pass_info
-	/// If we have no id, public airlocks are walls
-	var/no_id = FALSE
-
 	/// What we can pass through. Mirrors /atom/movable/pass_flags
 	var/pass_flags = NONE
 	/// What access we have, airlocks, windoors, etc
@@ -154,8 +151,6 @@
 	var/is_observer = FALSE
 	/// Are we a living mob?
 	var/is_living = FALSE
-	/// Are we a bot?
-	var/is_bot = FALSE
 	/// What is the size of our mob
 	var/mob_size = null
 	/// Is our mob incapacitated
@@ -175,13 +170,13 @@
 	/// Require a movable
 	var/datum/weakref/requester_ref = null
 
-/datum/can_pass_info/New(atom/movable/construct_from, list/access, no_id = FALSE, call_depth = 0)
+/datum/can_pass_info/New(atom/movable/construct_from, list/access, call_depth = 0)
 	// No infiniloops
 	if(call_depth > 10)
 		return
+
 	if(access)
 		src.access = access.Copy()
-	src.no_id = no_id
 
 	if(isnull(construct_from))
 		return
@@ -193,10 +188,9 @@
 	src.anchored = construct_from.anchored
 
 	if(ismob(construct_from))
-		var/mob/living/mob_construct = construct_from
-		src.incapacitated = mob_construct.incapacitated()
+		var/mob/mob_construct = construct_from
 		if(mob_construct.buckled)
-			src.buckled_info = new(mob_construct.buckled, access, no_id, call_depth + 1)
+			src.buckled_info = new(mob_construct.buckled, access, call_depth + 1)
 
 	if(isobserver(construct_from))
 		src.is_observer = TRUE
@@ -204,33 +198,9 @@
 	if(isliving(construct_from))
 		var/mob/living/living_construct = construct_from
 		src.is_living = TRUE
+		src.incapacitated = living_construct.incapacitated()
 		src.mob_size = living_construct.mob_size
 		src.incorporeal_move = living_construct.incorporeal_move
 
 	if(construct_from.pulling)
-		src.pulling_info = new(construct_from.pulling, access, no_id, call_depth + 1)
-
-/// List of vars on /datum/can_pass_info to use when checking two instances for equality
-GLOBAL_LIST_INIT(can_pass_info_vars, GLOBAL_PROC_REF(can_pass_check_vars))
-
-/proc/can_pass_check_vars()
-	var/datum/can_pass_info/lamb = new()
-	var/datum/isaac = new()
-	var/list/altar = assoc_to_keys(lamb.vars - isaac.vars)
-	// Don't compare against calling atom, it's not relevant here
-	altar -= "requester_ref"
-	ASSERT("requester_ref" in lamb.vars, "requester_ref var was not found in /datum/can_pass_info, why are we filtering for it?")
-	// We will bespoke handle pulling_info
-	altar -= "pulling_info"
-	ASSERT("pulling_info" in lamb.vars, "pulling_info var was not found in /datum/can_pass_info, why are we filtering for it?")
-	return altar
-
-/datum/can_pass_info/proc/compare_against(datum/can_pass_info/check_against)
-	for(var/comparable_var in GLOB.can_pass_info_vars)
-		if(!(vars[comparable_var] ~= check_against.vars[comparable_var]))
-			return FALSE
-	if(!pulling_info != !check_against.pulling_info)
-		return FALSE
-	if(pulling_info && !pulling_info.compare_against(check_against.pulling_info))
-		return FALSE
-	return TRUE
+		src.pulling_info = new(construct_from.pulling, access, call_depth + 1)
