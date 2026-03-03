@@ -37,6 +37,8 @@
 	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
 	beltr = /obj/item/weapon/mace/steel
 	backl = /obj/item/weapon/shield/tower/buckleriron
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)
 
 /datum/outfit/mercenary/malaguero/pre_equip(mob/living/carbon/human/H)
 	. = ..()
