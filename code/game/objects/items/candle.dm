@@ -165,6 +165,7 @@
 	infinite = TRUE
 	icon_state = "scandelabra"
 	base_icon_state = "scandelabra"
+	sellprice = M_SILVER*2
 
 /obj/item/candle/scandelabra/lit
 	start_lit = TRUE
@@ -177,6 +178,7 @@
 	infinite = TRUE
 	icon_state = "singlescandelabra"
 	base_icon_state = "singlescandelabra"
+	sellprice = M_SILVER
 
 /obj/item/candle/scandelabrasingle/lit
 	start_lit = TRUE
@@ -189,6 +191,7 @@
 	infinite = TRUE
 	icon_state = "gcandelabra"
 	base_icon_state = "gcandelabra"
+	sellprice = M_GOLD*2
 
 /obj/item/candle/gcandelabra/lit
 	start_lit = TRUE
@@ -201,6 +204,7 @@
 	infinite = TRUE
 	icon_state = "singlegcandelabra"
 	base_icon_state = "singlegcandelabra"
+	sellprice = M_GOLD
 
 /obj/item/candle/gcandelabrasingle/lit
 	start_lit = TRUE
@@ -213,6 +217,7 @@
 	infinite = TRUE
 	icon_state = "scandle"
 	base_icon_state = "scandle"
+	sellprice = M_SILVER/2
 
 /obj/item/candle/scandle/lit
 	start_lit = TRUE
@@ -225,6 +230,7 @@
 	infinite = TRUE
 	icon_state = "gcandle"
 	base_icon_state = "gcandle"
+	sellprice = M_GOLD/2
 
 /obj/item/candle/gcandle/lit
 	start_lit = TRUE
