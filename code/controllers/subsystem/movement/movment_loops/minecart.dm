@@ -49,5 +49,5 @@
 
 	moving.Move(new_loc, direction)
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
-	return old_loc != moving.loc
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
