@@ -547,14 +547,13 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	if(victim.stat == DEAD)
 		return
-
-	target.Knockdown(5 SECONDS)
-	target.emote("agony", forced = TRUE)
+	victim.Knockdown(5 SECONDS)
+	victim.emote("agony", forced = TRUE)
 	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
 	victim.mind.transfer_to(wll)
 	wll.set_patron(/datum/patron/godless/naivety)
 	victim.gib()
-	addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "NEW FACE NEW LIFE"), 5 SECONDS)
+	addtimer(CALLBACK(wll.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "NEW FACE NEW LIFE"), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
