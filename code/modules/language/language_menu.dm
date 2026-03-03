@@ -41,7 +41,7 @@
 		UNTYPED_LIST_ADD(data["languages"], lang_data)
 
 	data["is_living"] = isliving(speaker)
-	data["admin_mode"] = check_rights_for(user.client, R_ADMIN) || isobserver(speaker)
+	data["admin_mode"] = check_rights_for(user.client, R_ADMIN) || (isobserver(speaker) && !isrogueobserver(speaker))
 	data["omnitongue"] = language_holder.omnitongue
 
 	return data
