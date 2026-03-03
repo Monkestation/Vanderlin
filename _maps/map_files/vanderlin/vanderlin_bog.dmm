@@ -3534,7 +3534,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "cBU" = (
 /turf/closed/wall/mineral/tent,
 /area/indoors/shelter/bog)
@@ -7792,7 +7792,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/roguetent,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "hvl" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -8956,7 +8956,7 @@
 	},
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "iMM" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 8
@@ -10542,7 +10542,7 @@
 "ksV" = (
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "ktl" = (
 /obj/structure/wild_plant/nospread/blackberry,
 /obj/structure/flora/grass/maneater/real,
@@ -14671,7 +14671,7 @@
 /obj/effect/decal/cobbleedge/alt,
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "ptZ" = (
 /mob/living/simple_animal/hostile/retaliate/troll/bog,
 /turf/open/floor/grass,
@@ -16988,7 +16988,7 @@
 "skw" = (
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "skJ" = (
 /turf/open/water/ocean,
 /area/outdoors/bog)
@@ -18478,7 +18478,7 @@
 	},
 /obj/structure/tent_wall,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/indoors/shelter/bog)
 "ugl" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -110940,7 +110940,7 @@ xVO
 uUh
 iMK
 skw
-qhN
+auq
 ksV
 qhN
 xqP
@@ -111141,8 +111141,8 @@ oyx
 xVO
 gLO
 ksV
-qhN
-qhN
+auq
+auq
 huH
 tCm
 tCm
