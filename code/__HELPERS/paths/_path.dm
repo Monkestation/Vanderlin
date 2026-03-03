@@ -1,0 +1,236 @@
+/// The datum used to handle pathfinding, completely self-contained
+/datum/pathfind
+	/// The turf we started at
+	var/turf/start
+
+	// general pathfinding vars/args
+	/// The maximum number of steps a path can be before it is considered too long and ignored. Diagonals are 2 steps, so it's Manhattan distance.
+	var/max_steps = 30
+	/// A specific turf we're avoiding, like if a mulebot is being blocked by someone t-posing in a doorway we're trying to get through
+	var/turf/avoid
+	/// The callbacks to invoke when we're done working, passing in the completed product
+	/// Invoked in order
+	var/list/datum/callback/on_finish
+	/// Datum that holds the canpass info of this pathing attempt. This is what CanAstarPass sees
+	var/datum/can_pass_info/pass_info
+
+/datum/pathfind/Destroy(force)
+	. = ..()
+	SSpathfinder.active_pathing -= src
+	SSpathfinder.currentrun -= src
+	hand_back(null)
+	avoid = null
+
+/**
+ * "starts" off the pathfinding, by storing the values this datum will need to work later on
+ *  returns FALSE if it fails to setup properly, TRUE otherwise
+ */
+/datum/pathfind/proc/start()
+	if(!start)
+		stack_trace("Invalid pathfinding start")
+		return FALSE
+	return TRUE
+
+/**
+ * search_step() is the workhorse of pathfinding. It'll do the searching logic, and will slowly build up a path
+ * returns TRUE if everything is stable, FALSE if the pathfinding logic has failed, and we need to abort
+ */
+/datum/pathfind/proc/search_step()
+	return TRUE
+
+/**
+ * early_exit() is called when something goes wrong in processing, and we need to halt the pathfinding NOW
+ */
+/datum/pathfind/proc/early_exit()
+	hand_back(null)
+	qdel(src)
+
+/**
+ * Cleanup pass for the pathfinder. This tidies up the path, and fufills the pathfind's obligations
+ */
+/datum/pathfind/proc/finished()
+	qdel(src)
+
+/**
+ * Call to return a value to whoever spawned this pathfinding work
+ * Will fail if it's already been called
+ */
+/datum/pathfind/proc/hand_back(value)
+	for(var/datum/callback/finished as anything in on_finish)
+		finished.Invoke(value)
+	on_finish = null
+
+/**
+ * For seeing if we can actually move between 2 given turfs while accounting for our access and the requester's pass_flags
+ *
+ * Assumes destinantion turf is non-dense - check and shortcircuit in code invoking this proc to avoid overhead.
+ * Makes some other assumptions, such as assuming that unless declared, non dense objects will not block movement.
+ * It's fragile, but this is VERY much the most expensive part of pathing, so it'd better be fast
+ *
+ * Arguments:
+ * * destination_turf - Where are we going from where we are?
+ * * pass_info - Holds all the info about what this path attempt can go through
+*/
+/turf/proc/LinkBlockedWithAccess(turf/destination_turf, datum/can_pass_info/pass_info)
+	var/actual_dir = get_dir(src, destination_turf)
+	if(actual_dir == 0)
+		return FALSE
+
+	var/is_diagonal_movement = ISDIAGONALDIR(actual_dir)
+
+	if(is_diagonal_movement) //diagonal
+		var/in_dir = get_dir(destination_turf,src) // eg. northwest (1+8) = 9 (00001001)
+		var/first_step_direction_a = in_dir & 3 // eg. north   (1+8)&3 (0000 0011) = 1 (0000 0001)
+		var/first_step_direction_b = in_dir & 12 // eg. west   (1+8)&12 (0000 1100) = 8 (0000 1000)
+
+		for(var/first_step_direction in list(first_step_direction_a,first_step_direction_b))
+			var/turf/midstep_turf = get_step(destination_turf,first_step_direction)
+			var/way_blocked = midstep_turf.density || LinkBlockedWithAccess(midstep_turf, pass_info) || midstep_turf.LinkBlockedWithAccess(destination_turf, pass_info)
+			if(!way_blocked)
+				return FALSE
+
+		return TRUE
+
+	/// These are generally cheaper than looping contents so they go first
+	switch(destination_turf.pathing_pass_method)
+		if(TURF_PATHING_PASS_DENSITY)
+			if(destination_turf.density)
+				return TRUE
+
+		if(TURF_PATHING_PASS_PROC)
+			if(!destination_turf.CanAStarPass(actual_dir, pass_info))
+				return TRUE
+
+		if(TURF_PATHING_PASS_NO)
+			return TRUE
+
+	var/static/list/directional_blocker_cache = typecacheof(list(/obj/structure/fluff/railing, /obj/structure/meatvineborder))
+	// Source border object checks
+	for(var/obj/border in src)
+		if(!directional_blocker_cache[border.type])
+			continue
+		if(!border.density && border.can_astar_pass == CANASTARPASS_DENSITY)
+			continue
+		if(!border.CanAStarPass(actual_dir, pass_info, TRUE))
+			return TRUE
+
+	// Destination blockers check
+	var/reverse_dir = get_dir(destination_turf, src)
+	for(var/obj/iter_object in destination_turf)
+		// This is an optimization because of the massive call count of this code
+		if(!iter_object.density && iter_object.can_astar_pass == CANASTARPASS_DENSITY)
+			continue
+		if(!iter_object.CanAStarPass(reverse_dir, pass_info))
+			return TRUE
+
+	return FALSE
+
+// Could easily be a struct if/when we get that
+/**
+ * Holds all information about what an atom can move through
+ * Passed into CanAStarPass to provide context for a pathing attempt
+ *
+ * Also used to check if using a cached path_map is safe
+ * There are some vars here that are unused. They exist to cover cases where requester_ref is used
+ * They're the properties of requester_ref used in those cases.
+ * It's kinda annoying, but there's some proc chains we can't convert to this datum
+ */
+/datum/can_pass_info
+	/// If we have no id, public airlocks are walls
+	var/no_id = FALSE
+
+	/// What we can pass through. Mirrors /atom/movable/pass_flags
+	var/pass_flags = NONE
+	/// What access we have, airlocks, windoors, etc
+	var/list/access = null
+	/// What sort of movement do we have. Mirrors /atom/movable/movement_type
+	var/movement_type = NONE
+	/// Are we being thrown?
+	var/thrown = FALSE
+	/// Are we anchored
+	var/anchored = FALSE
+
+	/// Are we a ghost? (they have effectively unique pathfinding)
+	var/is_observer = FALSE
+	/// Are we a living mob?
+	var/is_living = FALSE
+	/// Are we a bot?
+	var/is_bot = FALSE
+	/// What is the size of our mob
+	var/mob_size = null
+	/// Is our mob incapacitated
+	var/incapacitated = FALSE
+	/// Is our mob incorporeal
+	var/incorporeal_move = FALSE
+	/// If our mob has a rider, what does it look like
+	var/datum/can_pass_info/rider_info = null
+	/// If our mob is buckled to something, what's it like
+	var/datum/can_pass_info/buckled_info = null
+
+	/// Pass information for the object we are pulling, if any
+	var/datum/can_pass_info/pulling_info = null
+
+	/// Weakref to the requester used to generate this info
+	/// Should not use this almost ever, it's for context and to allow for proc chains that
+	/// Require a movable
+	var/datum/weakref/requester_ref = null
+
+/datum/can_pass_info/New(atom/movable/construct_from, list/access, no_id = FALSE, call_depth = 0)
+	// No infiniloops
+	if(call_depth > 10)
+		return
+	if(access)
+		src.access = access.Copy()
+	src.no_id = no_id
+
+	if(isnull(construct_from))
+		return
+
+	src.requester_ref = WEAKREF(construct_from)
+	src.pass_flags = construct_from.pass_flags
+	src.movement_type = construct_from.movement_type
+	src.thrown = !!construct_from.throwing
+	src.anchored = construct_from.anchored
+
+	if(ismob(construct_from))
+		var/mob/living/mob_construct = construct_from
+		src.incapacitated = mob_construct.incapacitated()
+		if(mob_construct.buckled)
+			src.buckled_info = new(mob_construct.buckled, access, no_id, call_depth + 1)
+
+	if(isobserver(construct_from))
+		src.is_observer = TRUE
+
+	if(isliving(construct_from))
+		var/mob/living/living_construct = construct_from
+		src.is_living = TRUE
+		src.mob_size = living_construct.mob_size
+		src.incorporeal_move = living_construct.incorporeal_move
+
+	if(construct_from.pulling)
+		src.pulling_info = new(construct_from.pulling, access, no_id, call_depth + 1)
+
+/// List of vars on /datum/can_pass_info to use when checking two instances for equality
+GLOBAL_LIST_INIT(can_pass_info_vars, GLOBAL_PROC_REF(can_pass_check_vars))
+
+/proc/can_pass_check_vars()
+	var/datum/can_pass_info/lamb = new()
+	var/datum/isaac = new()
+	var/list/altar = assoc_to_keys(lamb.vars - isaac.vars)
+	// Don't compare against calling atom, it's not relevant here
+	altar -= "requester_ref"
+	ASSERT("requester_ref" in lamb.vars, "requester_ref var was not found in /datum/can_pass_info, why are we filtering for it?")
+	// We will bespoke handle pulling_info
+	altar -= "pulling_info"
+	ASSERT("pulling_info" in lamb.vars, "pulling_info var was not found in /datum/can_pass_info, why are we filtering for it?")
+	return altar
+
+/datum/can_pass_info/proc/compare_against(datum/can_pass_info/check_against)
+	for(var/comparable_var in GLOB.can_pass_info_vars)
+		if(!(vars[comparable_var] ~= check_against.vars[comparable_var]))
+			return FALSE
+	if(!pulling_info != !check_against.pulling_info)
+		return FALSE
+	if(pulling_info && !pulling_info.compare_against(check_against.pulling_info))
+		return FALSE
+	return TRUE

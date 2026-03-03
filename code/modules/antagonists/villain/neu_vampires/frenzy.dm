@@ -202,7 +202,7 @@
 
 	// Only regenerate path if we've moved to a different position or don't have a cached path
 	if(!frenzy_cached_path || frenzy_last_pos != current_pos)
-		frenzy_cached_path = get_path_to(src, target_pos, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 33, 250, 1)
+		frenzy_cached_path = astar_path_to(src, target_pos, max_steps = 100)
 		frenzy_last_pos = current_pos
 
 	if(length(frenzy_cached_path))

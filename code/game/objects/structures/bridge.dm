@@ -8,6 +8,7 @@
 	max_integrity = 100
 	layer = ABOVE_OPEN_TURF_LAYER
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	can_astar_pass = CANASTARPASS_ALWAYS_PROC
 
 	/// Remember initial sprite
 	var/base_icon

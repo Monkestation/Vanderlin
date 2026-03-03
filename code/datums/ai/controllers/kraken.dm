@@ -1,6 +1,6 @@
 /datum/ai_controller/swamp_kraken
 	movement_delay = 0.5 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
 	)
@@ -31,7 +31,7 @@
 
 /datum/ai_controller/kraken_tentacle
 	movement_delay = 0.3 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
 	)

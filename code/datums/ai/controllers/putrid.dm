@@ -2,7 +2,7 @@
 /datum/ai_controller/meatvine_defender
 	movement_delay = 0.5 SECONDS
 	max_target_distance = 200
-	ai_movement = /datum/ai_movement/hybrid_pathing/wormhole_aware
+	ai_movement = /datum/ai_movement/astar ///datum/ai_movement/hybrid_pathing/wormhole_aware
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	blackboard = list(

@@ -1,7 +1,7 @@
 /datum/ai_controller/crawler
 	movement_delay = 0.6 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 
 	blackboard = list(
 		BB_HELLHOUND_FIRE = 0,

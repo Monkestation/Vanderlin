@@ -142,7 +142,7 @@
 
 		// Only regenerate path if we've moved to a different position or don't have a cached path
 		if(!walk_to_cached_path || walk_to_last_pos != current_pos)
-			walk_to_cached_path = get_path_to(src, target_pos, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 33, 250, 1)
+			walk_to_cached_path = astar_path_to(src, target_pos, max_steps = 100)
 			walk_to_last_pos = current_pos
 
 		var/moved = FALSE

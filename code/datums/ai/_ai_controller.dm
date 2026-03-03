@@ -551,6 +551,17 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/get_access()
 	return
 
+///Returns the minimum required distance to preform one of our current behaviors. Honestly this should just be cached or something but fuck you
+/datum/ai_controller/proc/get_minimum_distance()
+	var/minimum_distance = max_target_distance
+	// right now I'm just taking the shortest minimum distance of our current behaviors, at some point in the future
+	// we should let whatever sets the current_movement_target also set the min distance and max path length
+	// (or at least cache it on the controller)
+	for(var/datum/ai_behavior/iter_behavior as anything in current_behaviors)
+		if(iter_behavior.required_distance < minimum_distance)
+			minimum_distance = iter_behavior.required_distance
+	return minimum_distance
+
 /// Returns true if we have a blackboard key with the provided key and it is not qdeleting
 /datum/ai_controller/proc/blackboard_key_exists(key)
 	var/datum/key_value = blackboard[key]

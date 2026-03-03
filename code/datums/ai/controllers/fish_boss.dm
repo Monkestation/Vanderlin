@@ -1,6 +1,6 @@
 /datum/ai_controller/fishboss
 	movement_delay = 1 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic(),
 		BB_MINIONS_TO_SPAWN = 2,

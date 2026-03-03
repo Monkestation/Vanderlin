@@ -1,7 +1,7 @@
 /datum/ai_controller/void_obelisk
 	movement_delay = 1.1 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()

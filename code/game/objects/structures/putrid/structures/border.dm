@@ -34,15 +34,3 @@
 		return TRUE
 	if(pass_throwing && mover.throwing)
 		return TRUE
-
-/obj/structure/meatvineborder/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
-	if(dir in CORNERDIRS)
-		return TRUE
-
-	if(pass_info.movement_type & (FLOATING|FLYING))
-		return TRUE
-
-	if(to_dir != dir)
-		return TRUE
-
-	return FALSE

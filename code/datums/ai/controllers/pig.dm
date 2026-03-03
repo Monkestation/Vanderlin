@@ -1,7 +1,7 @@
 /datum/ai_controller/pig
 	movement_delay = 0.8 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	ai_traits = STOP_MOVING_WHEN_PULLED
 
 	blackboard = list(

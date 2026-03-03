@@ -1,7 +1,7 @@
 /datum/ai_controller/bog_bug
 	movement_delay = 0.2 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()

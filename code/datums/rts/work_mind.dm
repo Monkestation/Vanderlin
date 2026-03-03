@@ -489,6 +489,5 @@
 	if(!movement_target)
 		return
 
-	current_path = get_path_to(worker, get_turf(movement_target),
-		TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250, 1)
+	current_path = astar_path_to(worker, movement_target, max_steps = 100)
 	SEND_SIGNAL(src, COMSIG_AI_PATH_GENERATED, current_path)

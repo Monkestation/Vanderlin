@@ -1,6 +1,6 @@
 /datum/ai_controller/minotaur
 	movement_delay = 0.7 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
 		BB_MINOTAUR_RAGE_METER = 0,

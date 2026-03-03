@@ -33,7 +33,7 @@
 	)
 
 	ai_traits = STOP_MOVING_WHEN_PULLED
-	ai_movement = /datum/ai_movement/hybrid_pathing/gnome
+	ai_movement = /datum/ai_movement/astar ///datum/ai_movement/hybrid_pathing/gnome
 	idle_behavior = /datum/idle_behavior/gnome_enhanced_idle
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/pet_planning,

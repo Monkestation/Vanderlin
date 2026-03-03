@@ -1,46 +1,102 @@
+
+/// Queues and manages pathfinding steps
 SUBSYSTEM_DEF(pathfinder)
 	name = "Pathfinder"
 	init_order = INIT_ORDER_PATH
-	flags = SS_NO_FIRE
-	var/datum/flowcache/mobs
-	var/datum/flowcache/circuits
+	priority = FIRE_PRIORITY_PATHFINDING
+	/// List of pathfind datums we are currently trying to process
+	var/list/datum/pathfind/active_pathing = list()
+	/// List of pathfind datums being ACTIVELY processed. exists to make subsystem stats readable
+	var/list/datum/pathfind/currentrun = list()
 
-/datum/controller/subsystem/pathfinder/Initialize()
-	mobs = new(10)
-	circuits = new(3)
+/datum/controller/subsystem/pathfinder/stat_entry(msg)
+	msg = "P:[length(active_pathing)]"
 	return ..()
 
-/datum/flowcache
-	var/lcount
-	var/run
-	var/free
-	var/list/flow
+// This is another one of those subsystems (hey lighting) in which one "Run" means fully processing a queue
+// We'll use a copy for this just to be nice to people reading the mc panel
+/datum/controller/subsystem/pathfinder/fire(resumed)
+	if(!resumed)
+		src.currentrun = active_pathing.Copy()
 
-/datum/flowcache/New(n)
-	. = ..()
-	lcount = n
-	run = 0
-	free = 1
-	flow = new/list(lcount)
+	// Dies of sonic speed from caching datum var reads
+	var/list/currentrun = src.currentrun
+	while(length(currentrun))
+		var/datum/pathfind/path = currentrun[length(currentrun)]
+		if(!path.search_step()) // Something's wrong
+			path.early_exit()
+			currentrun.len--
+			continue
+		if(MC_TICK_CHECK)
+			return
+		path.finished()
+		// Next please
+		currentrun.len--
 
-/datum/flowcache/proc/getfree(atom/M)
-	if(run < lcount)
-		run += 1
-		while(flow[free])
-			CHECK_TICK
-			free = (free % lcount) + 1
-		var/t = addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/flowcache, toolong), free), 150, TIMER_STOPPABLE)
-		flow[free] = t
-		flow[t] = M
-		return free
-	else
-		return 0
+/datum/controller/subsystem/pathfinder/proc/astar_pathfind(
+	atom/movable/invoker,
+	atom/end,
+	max_steps = 30,
+	mintargetdist,
+	list/access,
+	turf/exclude,
+	skip_first = TRUE,
+	use_diagonals = TRUE,
+	list/on_finish,
+	datum/callback/heuristic,
+)
 
-/datum/flowcache/proc/toolong(l)
-	log_game("Pathfinder route took longer than 150 ticks, src bot [flow[flow[l]]]")
-	found(l)
+	var/datum/pathfind/astar/path = new(
+		invoker,
+		end,
+		access,
+		max_steps,
+		mintargetdist,
+		exclude,
+		skip_first,
+		use_diagonals,
+		on_finish,
+		heuristic,
+	)
 
-/datum/flowcache/proc/found(l)
-	deltimer(flow[l])
-	flow[l] = null
-	run -= 1
+	if(path.start())
+		active_pathing += path
+		return TRUE
+
+	return FALSE
+
+/datum/controller/subsystem/pathfinder/proc/astar_pathfind_now(
+	atom/movable/invoker,
+	atom/end,
+	max_steps = 14,
+	mintargetdist,
+	list/access,
+	turf/exclude,
+	skip_first = TRUE,
+	use_diagonals = TRUE,
+	datum/callback/heuristic,
+)
+
+	var/datum/pathfind/astar/path = new(
+		invoker,
+		end,
+		access,
+		max_steps,
+		mintargetdist,
+		exclude,
+		skip_first,
+		use_diagonals,
+		null,
+		heuristic,
+	)
+
+	if(!path.start())
+		return FALSE
+
+	if(!path.search_step(FALSE))
+		path.early_exit()
+		return FALSE
+
+	path.finished()
+
+	return path.path

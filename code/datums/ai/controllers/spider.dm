@@ -1,7 +1,7 @@
 /datum/ai_controller/spider
 	movement_delay = 0.4 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 
 	blackboard = list(
 		BB_HOME_PATH = /obj/structure/spider/nest,

@@ -6,7 +6,7 @@
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic,
 	)
 
-	ai_movement = /datum/ai_movement/hybrid_pathing/gnome
+	ai_movement = /datum/ai_movement/astar ///datum/ai_movement/hybrid_pathing/gnome
 	idle_behavior = /datum/idle_behavior/idle_random_walk/not_while_on_target/trader
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/target_retaliate,

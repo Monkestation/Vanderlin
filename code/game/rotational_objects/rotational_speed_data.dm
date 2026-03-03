@@ -64,10 +64,6 @@
 	new type(get_turf(src))
 	qdel(src)
 
-// You can path over a dense structure if it's climbable.
-/obj/structure/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
-	. = climbable || ..()
-
 /obj/structure/return_rotation_chat()
 	if(!rotation_network)
 		return

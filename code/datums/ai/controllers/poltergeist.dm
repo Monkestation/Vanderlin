@@ -1,7 +1,7 @@
 /datum/ai_controller/polter
 	movement_delay = 0.5 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 
 	blackboard = list(
 		BB_TARGET_HELD_ITEM = /obj/item/clothing/neck/psycross,

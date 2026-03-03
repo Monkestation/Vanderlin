@@ -1,6 +1,6 @@
 /datum/ai_controller/raccoon
 	movement_delay = 0.4 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
 		BB_PET_TARGETING_DATUM = new /datum/targetting_datum/basic/not_friends(),

@@ -81,7 +81,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
 	/datum/admins/proc/togglelooc,
 	/datum/admins/proc/fix_death_area,
-	/datum/admins/proc/toggle_debug_pathfinding,
 	/datum/admins/proc/give_all_triumphs,
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
@@ -227,6 +226,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/cmd_regenerate_asset_cache,
 	/client/proc/cmd_clear_smart_asset_cache,
 	/client/proc/select_job_pack_debug,
+	/client/proc/debug_pathfinding,
 )
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)

@@ -6,7 +6,7 @@
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items/holding_item,
 		BB_PET_TARGETING_DATUM = new /datum/targetting_datum/basic/not_friends,
 	)
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/pet_planning,
