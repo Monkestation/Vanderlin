@@ -24,6 +24,8 @@
 #define span_average(str) ("<span class='average'>" + str + "</span>")
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
 
+#define SPAN_SLIGHTLY_BIG(str) ("<span class='slightly_larger'>" + str + "</span>")
+
 #define span_big(str) ("<span class='big'>" + str + "</span>")
 #define span_bigbold(str) ("<span class='bigbold'>" + str + "</span>")
 #define span_bigicon(str) ("<span class='bigicon'>" + str + "</span>")

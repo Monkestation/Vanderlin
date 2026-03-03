@@ -2141,6 +2141,9 @@
 			return
 		if(incapacitated())
 			return
+		//if(!step(src,get_dir(src,over)))
+		//	to_chat(src, span_warning("You can't climb into [over] whilst it's there."))
+		//	return
 		for(var/obj/item/grabbing/G in grabbedby)
 			if(G.grab_state == GRAB_AGGRESSIVE)
 				return

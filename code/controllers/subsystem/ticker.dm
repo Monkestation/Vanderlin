@@ -419,6 +419,8 @@ SUBSYSTEM_DEF(ticker)
 				continue
 			if(!player.client.is_whitelisted(id))
 				continue
+			if(player.client.prefs.job_preferences["Monarch"] == JP_HIGH)
+				continue
 			if(!vessel_candidates[id])
 				vessel_candidates[id] = list()
 			vessel_candidates[id] += player
