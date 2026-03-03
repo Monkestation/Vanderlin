@@ -9,6 +9,7 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
+	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY)
 	outfit = /datum/outfit/courtphys/male
