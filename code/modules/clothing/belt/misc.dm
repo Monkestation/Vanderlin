@@ -176,6 +176,18 @@
 	grid_height = 64
 	grid_width = 32
 
+/obj/item/storage/belt/pouch/medicine
+	populate_contents = list(
+		/obj/item/needle,
+		/obj/item/natural/bundle/cloth/bandage/full,
+		/obj/item/reagent_containers/glass/bottle/healthpot
+	)
+
+/obj/item/storage/belt/pouch/food
+	populate_contents = list(
+		/obj/item/reagent_containers/food/snacks/hardtack,
+	)
+
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
 	var/obj/item/coin/silver/pile/H = new(loc)

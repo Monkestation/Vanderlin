@@ -33,6 +33,7 @@
 #define SURGICAL_TOOL			(1<<12)	//Tool commonly used for surgery: won't attack targets in an active surgical operation on help intent (in case of mistakes)
 #define SHRINK_ENCHANT			(1<<13)
 #define ITEM_ONLY_BREAK 		(1<<14)
+#define HIGH_VALUE (1<<15)
 
 // Flags for the clothing_flags var on /obj/item/clothing
 

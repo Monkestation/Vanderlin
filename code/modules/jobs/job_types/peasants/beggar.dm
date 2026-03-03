@@ -85,3 +85,5 @@
 	else
 		pants = /obj/item/clothing/pants/tights/colored/vagrant
 		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
+
+	neck = /obj/item/storage/belt/pouch

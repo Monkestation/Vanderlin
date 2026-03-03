@@ -10,7 +10,6 @@
 //	var/gob_outfit = /datum/outfit/npc/orc/ambush removed to apply different classes to the orcs
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/kick)
-	possible_rmb_intents = list()
 	bloodpool = 1500 // Not as much vitae from them as humans to avoid vampires cheesing mobs
 
 /mob/living/carbon/human/species/orc/slaved
@@ -38,12 +37,18 @@
 	canparry = TRUE
 	flee_in_pain = FALSE
 
+	var/orc_outfit
 	wander = FALSE
 
 /mob/living/carbon/human/species/orc/npc/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	AddComponent(/datum/component/combat_noise, list("aggro" = 2))
+
+/mob/living/carbon/human/species/orc/npc/after_creation()
+	..()
+	if(orc_outfit)
+		equipOutfit(new orc_outfit)
 
 /mob/living/carbon/human/species/orc/ambush
 	ai_controller = /datum/ai_controller/human_npc
@@ -183,7 +188,7 @@
 	id = SPEC_ID_ORC
 	species_traits = list(NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE,TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
-	no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
+	//no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = ""

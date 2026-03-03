@@ -9,6 +9,11 @@
 #define span_adminprefix(str) ("<span class='adminprefix'>" + str + "</span>")
 #define span_adminsay(str) ("<span class='adminsay'>" + str + "</span>")
 
+#define span_achievementrare(str) ("<span class='achievementrare'>" + str + "</span>")
+#define span_achievementgood(str) ("<span class='achievementgood'>" + str + "</span>")
+#define span_achievementneutral(str) ("<span class='achievementneutral'>" + str + "</span>")
+#define span_achievementbad(str) ("<span class='achievementbad'>" + str + "</span>")
+
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_alertalien(str) ("<span class='alertalien'>" + str + "</span>")
 #define span_alertsyndie(str) ("<span class='alertsyndie'>" + str + "</span>")

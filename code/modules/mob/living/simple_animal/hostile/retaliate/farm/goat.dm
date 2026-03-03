@@ -56,6 +56,7 @@
 	buckle_lying = FALSE
 	can_buckle = TRUE
 	remains_type = /obj/effect/decal/remains/cow
+	generate_genetics = TRUE
 
 	ai_controller = /datum/ai_controller/gote
 	happy_funtime_mob = TRUE
@@ -103,9 +104,6 @@
 	deaggroprob = 50
 	if(can_buckle)
 		AddComponent(/datum/component/riding/gote)
-
-/mob/living/simple_animal/hostile/retaliate/goat/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 /// Called when we attack something in order to piece together the intent of the AI/user and provide desired behavior. The element might be okay here but I'd rather the fluff.
 /// Goats are really good at beating up plants by taking bites out of them, but we use the default attack for everything else
@@ -194,6 +192,7 @@
 
 	ai_controller = /datum/ai_controller/gote
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/Initialize()
 	. = ..()
@@ -300,6 +299,7 @@
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/goat
 	can_buckle = FALSE
 	can_breed = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goat/goatlet/udder_component()
 	return

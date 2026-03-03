@@ -5,6 +5,8 @@
 /mob/proc/get_active_held_item()
 	return get_item_for_held_index(active_hand_index)
 
+/mob/proc/get_active_held_items()
+	return list(get_item_for_held_index(active_hand_index), get_item_for_held_index(get_inactive_hand_index()))
 
 //Finds the opposite limb for the active one (eg: upper left arm will find the item in upper right arm)
 //So we're treating each "pair" of limbs as a team, so "both" refers to them

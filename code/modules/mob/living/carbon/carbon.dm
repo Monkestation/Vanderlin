@@ -7,6 +7,7 @@
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
+	QDEL_LIST_ASSOC_VAL(chem_effects)
 
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
@@ -350,7 +351,7 @@
 		ExtinguishMob(TRUE)
 	return
 
-/mob/living/carbon/resist_restraints()
+/mob/living/carbon/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	var/type = 0
 	if(handcuffed)
@@ -366,10 +367,10 @@
 		if(type == 2)
 			changeNext_move(CLICK_CD_RANGE)
 			last_special = world.time + CLICK_CD_RANGE
-		cuff_resist(I)
+		cuff_resist(I, instant = instant)
 
 
-/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0)
+/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(I.item_flags & BEING_REMOVED)
 		to_chat(src, span_warning("I'm already trying to get out of \the [I]\s!"))
 		return
@@ -380,6 +381,10 @@
 		breakouttime = I.breakouttime
 	if(STASTR > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
 		cuff_break = INSTANT_CUFFBREAK
+
+	if(instant)
+		cuff_break = INSTANT_CUFFBREAK
+
 	if(!cuff_break)
 		to_chat(src, span_notice("I try to get out of \the [I]\s..."))
 		if(do_after(src, breakouttime, timed_action_flags = (IGNORE_HELD_ITEM)))

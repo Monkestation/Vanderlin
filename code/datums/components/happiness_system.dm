@@ -8,6 +8,7 @@
 	///list of all befriended refs
 	var/list/befriended_refs = list()
 	var/visible_level = TRUE
+	var/happiness_multiplier = 1.0
 
 /datum/component/friendship_container/Initialize(friendship_levels = list(), befriend_level , visible_level)
 	. = ..()
@@ -27,6 +28,7 @@
 	RegisterSignal(parent, COMSIG_FRIENDSHIP_CHECK_LEVEL, PROC_REF(check_friendship_level))
 	RegisterSignal(parent, COMSIG_FRIENDSHIP_CHANGE, PROC_REF(change_friendship))
 	RegisterSignal(parent, COMSIG_FRIENDSHIP_PASS_FRIENDSHIP, PROC_REF(pass_friendship))
+	RegisterSignal(parent, COMSIG_MOB_SET_HAPPINESS_MULTIPLIER, PROC_REF(set_happiness_multiplier))
 	if(visible_level)
 		RegisterSignal(parent, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(view_friendship))
 
@@ -35,18 +37,20 @@
 	UnregisterSignal(parent, COMSIG_FRIENDSHIP_CHANGE)
 	UnregisterSignal(parent, COMSIG_FRIENDSHIP_PASS_FRIENDSHIP)
 	UnregisterSignal(parent, COMSIG_ATOM_MOUSE_ENTERED)
+	UnregisterSignal(parent, COMSIG_MOB_SET_HAPPINESS_MULTIPLIER)
 
 /datum/component/friendship_container/proc/change_friendship(mob/living/source, atom/target, amount)
+	if(amount > 0)
+		amount *= happiness_multiplier
+
 	for(var/datum/weakref/ref as anything in weakrefed_friends)
 		if(!IS_WEAKREF_OF(target, ref))
 			continue
-		///handles registering pet commands and other things that use BEFRIEND
 		if(amount < 0)
 			if((friendship_levels[befriend_level] > weakrefed_friends[ref]) && (ref in befriended_refs))
 				SEND_SIGNAL(parent, COMSIG_LIVING_UNFRIENDED, ref.resolve())
 				befriended_refs -= ref
 				source.ai_controller?.remove_thing_from_blackboard_key(BB_FRIENDS_LIST, target)
-
 		else if((friendship_levels[befriend_level] <= weakrefed_friends[ref]) && !(ref in befriended_refs))
 			befriended_refs += ref
 			if(!(target in source.ai_controller?.blackboard[BB_FRIENDS_LIST]))
@@ -57,6 +61,10 @@
 		return TRUE
 	weakrefed_friends += list(WEAKREF(target) = amount)
 	return TRUE
+
+/datum/component/friendship_container/proc/set_happiness_multiplier(datum/source, new_multiplier)
+	SIGNAL_HANDLER
+	happiness_multiplier = new_multiplier
 
 ///Returns {TRUE} if friendship is above a certain threshold else returns {FALSE}
 /datum/component/friendship_container/proc/check_friendship_level(mob/living/source, atom/target, friendship_level)

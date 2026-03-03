@@ -603,6 +603,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
 	sellprice = 3
+	flags_ai_inventory = AI_ITEM_THROWING
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"

@@ -781,9 +781,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 	QDEL_NULL(loot_panel)
 
-	if(player_details)
-		player_details.achievements.save()
-
 	if(movingmob != null)
 		movingmob.client_mobs_in_contents -= mob
 		UNSETEMPTY(movingmob.client_mobs_in_contents)
@@ -1341,8 +1338,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 /client/proc/fullscreen()
 	winset(src, "mainwindow", "statusbar=false")
 
-/client/proc/give_award(achievement_type, mob/user)
-	return	player_details.achievements.unlock(achievement_type, mob/user)
+/client/proc/give_award(achievement_type, mob/user, amount = 1)
+	return	player_details.achievements.unlock(achievement_type, user, amount)
 
 /client/proc/ghostize(can_reenter_corpse = 1, mob/current)
 	if(current)

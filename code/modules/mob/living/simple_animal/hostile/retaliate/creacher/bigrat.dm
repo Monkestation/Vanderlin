@@ -95,6 +95,7 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
+	AddElement(/datum/element/kill_achievement, string_list(list(/datum/award/achievement/progress/rat_genocide), 3))
 
 
 /mob/living/simple_animal/hostile/retaliate/bigrat/death(gibbed)
