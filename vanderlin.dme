@@ -318,6 +318,7 @@
 #include "code\__HELPERS\weakref.dm"
 #include "code\__HELPERS\paths\_path.dm"
 #include "code\__HELPERS\paths\path_astar.dm"
+#include "code\__HELPERS\paths\path_debug.dm"
 #include "code\__HELPERS\paths\path_helpers.dm"
 #include "code\__HELPERS\sorts\helpers.dm"
 #include "code\__HELPERS\sorts\sort_instances.dm"
