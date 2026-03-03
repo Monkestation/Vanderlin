@@ -5,6 +5,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	max_storage = 20
 	ammo_type = list (/obj/item/ammo_casing/caseless/arrow, /obj/item/ammo_casing/caseless/bolt)
+	flags_ai_inventory = AI_ITEM_QUIVER
 
 /obj/item/ammo_holder/quiver/arrows
 	fill_type = /obj/item/ammo_casing/caseless/arrow
@@ -48,7 +49,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK
 	max_storage = 10
 	ammo_type = list(/obj/item/ammo_casing/caseless/bullet)
-	
+
 /obj/item/ammo_holder/bullet/bullets
 	fill_type = /obj/item/ammo_casing/caseless/bullet
 

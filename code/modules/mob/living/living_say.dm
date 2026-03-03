@@ -59,7 +59,7 @@
 
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
-		to_chat(src, "<span class='warning'>That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span></span>")
+		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
 
@@ -67,29 +67,29 @@
 	var/original_message = message
 	message = get_message_mods(message, message_mods)
 	var/datum/saymode/saymode = SSradio.saymodes[message_mods[RADIO_KEY]]
-	var/in_critical = InCritical()
 
-	if(message_mods[RADIO_EXTENSION] == MODE_ADMIN)
-		if(client)
-			client.cmd_admin_say(message)
-		return
-
-	if(message_mods[RADIO_EXTENSION] == MODE_DEADMIN)
-		if(client)
-			client.dsay(message)
-		return
+	if(client)
+		switch(message_mods[RADIO_EXTENSION])
+			if(MODE_ADMIN)
+				client.cmd_admin_say(message)
+				return
+			if(MODE_DEADMIN)
+				client.dsay(message)
+				return
 
 	if(stat == DEAD)
 		say_dead(original_message)
 		return
 
-	if(check_emote(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
+	if(!can_speak_basic(original_message, ignore_spam, forced))
+		return
+	if(check_emote(original_message, forced))
+		return
+	if(check_whisper(original_message, forced))
 		return
 
-	if(check_whisper(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
-		return
-
-	if(in_critical) // There are cheaper ways to do this, but they're less flexible, and this isn't ran all that often
+	var/in_crit = InCritical()
+	if(in_crit) // There are cheaper ways to do this, but they're less flexible, and this isn't ran all that often
 		var/end = TRUE
 		for(var/index in message_mods)
 			if(crit_allowed_modes[index])
@@ -107,9 +107,11 @@
 			return
 
 	language = message_mods[LANGUAGE_EXTENSION] || get_default_language()
+	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
+	var/signed = speaker_language?.flags & SIGNLANG
 
-	if(!can_speak_vocal(message))
-		to_chat(src, "<span class='warning'>I can't talk.</span>")
+	if(signed && !can_speak_vocal(message))
+		to_chat(src, span_warning("I can't talk."))
 		return
 
 	var/message_range = 7
@@ -117,7 +119,7 @@
 	var/succumbed = FALSE
 
 	var/fullcrit = InFullCritical()
-	if((InCritical() && !fullcrit) || message_mods[WHISPER_MODE] == MODE_WHISPER)
+	if((in_crit && !fullcrit) || message_mods[WHISPER_MODE] == MODE_WHISPER)
 		message_range = 1
 		message_mods[WHISPER_MODE] = MODE_WHISPER
 		src.log_talk("whispered: [message]", LOG_WHISPER)
@@ -151,16 +153,15 @@
 
 	spans |= speech_span
 
-	if(language)
-		var/datum/language/L = GLOB.language_datum_instances[language]
+	if(speaker_language)
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
 			if(H.dna?.species)
-				var/list/stuff = H.dna.species.get_span_language(L)
+				var/list/stuff = H.dna.species.get_span_language(speaker_language)
 				if(stuff)
 					spans |= stuff
 		else
-			spans |= L.spans
+			spans |= speaker_language.spans
 
 	if(message_mods[MODE_SING])
 		var/randomnote = pick("\u2669", "\u266A", "\u266B", "\u266C")
@@ -185,8 +186,7 @@
 	if(radio_return & NOPASS)
 		return TRUE
 
-	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
-	if(speaker_language?.flags & SIGNLANG)
+	if(signed)
 		send_speech_sign(message, message_range, src, bubble_type, spans, language, message_mods, original_message)
 	else
 		send_speech(message, message_range, src, bubble_type, spans, language, message_mods, original_message)

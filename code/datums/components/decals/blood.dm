@@ -8,6 +8,8 @@
 	RegisterSignal(parent, COMSIG_ATOM_GET_EXAMINE_NAME, PROC_REF(get_examine_name))
 
 /datum/component/decal/blood/generate_appearance(_icon, _icon_state, _dir, _layer, _color)
+	var/imported_color = _color || COLOR_BLOOD
+
 	var/obj/item/I = parent
 	if(I.bigboy)
 		if(!_icon)
@@ -32,11 +34,11 @@
 		blood_splatter_icon.Blend(icon(_icon, _icon_state), ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 		pic = mutable_appearance(blood_splatter_icon, initial(I.icon_state))
 		blood_splatter_appearances[index] = pic
+	pic.color = imported_color
 	pic.alpha = 150
 	return TRUE
 
 /datum/component/decal/blood/apply(atom/thing)
-	//pic.color = source.get_blood_dna_color() || COLOR_BLOOD
 	return ..()
 
 /datum/component/decal/blood/proc/get_examine_name(datum/source, mob/user, list/override)

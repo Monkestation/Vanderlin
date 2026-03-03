@@ -66,6 +66,7 @@ And it also helps for the character set panel
 	var/datum/clan_leader/leader = /datum/clan_leader/lord
 	var/force_VL_if_clan_is_empty = TRUE
 	var/selectable_by_vampires = TRUE // Set to FALSE for clans that shouldn't be selectable
+	var/intro_music = 'sound/music/vampintro.ogg'
 
 /datum/clan/proc/get_downside_string()
 	return "burn in sunlight"
@@ -89,7 +90,7 @@ And it also helps for the character set panel
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
-	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose), H)
+	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -107,7 +108,7 @@ And it also helps for the character set panel
 		// Apply vampire-specific changes
 		H.has_reflection = FALSE
 		H.cut_overlay(H.reflective_icon)
-		H.mob_biotypes = MOB_UNDEAD
+		H.mob_biotypes |= MOB_UNDEAD
 		H.physiology?.bleed_mod /= 2
 
 		if(alt_sprite)
@@ -121,9 +122,10 @@ And it also helps for the character set panel
 		apply_vampire_look(H)
 
 		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
-		disguise_comp.apply_disguise(H)
+		disguise_comp?.apply_disguise(H)
 
-		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
+		if(intro_music)
+			H.playsound_local(H, intro_music, 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clan_covens)
 			H.give_coven(coven)
 	else
@@ -147,13 +149,9 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/apply_non_vampire_look(mob/living/carbon/human/H)
-	// Subtle changes for non-vampires - they look more human but with slight clan influence
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 
-	if(eyes && prob(50)) // Only sometimes change eye color
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#AA0000" // Darker red than vampires
-
+	if(prob(50)) // Only sometimes change eye color
+		H.set_eye_color("#AA0000", updates_dna = TRUE)
 	H.update_body()
 	H.update_body_parts(redraw = TRUE)
 
@@ -255,7 +253,7 @@ And it also helps for the character set panel
  * Arguments:
  * * vampire - Human losing the Clan.
  */
-/datum/clan/proc/on_lose(datum/source, mob/living/carbon/human/vampire)
+/datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
 	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
 
@@ -278,6 +276,7 @@ And it also helps for the character set panel
 	vampire.create_reflection()
 	vampire.update_reflection()
 	vampire.physiology?.bleed_mod *= 2
+	vampire.mob_biotypes &= ~MOB_UNDEAD
 
 	clan_members -= vampire
 
@@ -368,16 +367,12 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/apply_vampire_look(mob/living/carbon/human/H)
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-
 	// Apply vampire appearance
 	H.skin_tone = "c9d3de"
 	H.set_hair_color("#181a1d", FALSE)
 	H.set_facial_hair_color("#181a1d", FALSE)
 
-	if(eyes)
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#FF0000"
+	H.set_eye_color("#FF0000", null, FALSE, FALSE)
 
 	H.update_organ_colors()
 	H.update_body()
@@ -437,7 +432,7 @@ And it also helps for the character set panel
  */
 /mob/living/carbon/human/proc/set_clan_direct(datum/clan/new_clan)
 	var/datum/clan/previous_clan = clan
-	previous_clan?.on_lose(vampire = src)
+	previous_clan?.on_lose(src)
 	clan = new_clan
 	if (!new_clan)
 		return
@@ -469,7 +464,7 @@ And it also helps for the character set panel
 	// Convert typepaths to Clan singletons, or just directly assign if already singleton
 	var/datum/clan/new_clan = ispath(setting_clan) ? GLOB.vampire_clans[setting_clan] : setting_clan
 
-	previous_clan?.on_lose(vampire = src)
+	previous_clan?.on_lose(src)
 
 	clan = new_clan
 

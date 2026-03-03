@@ -41,7 +41,7 @@
 
 	cast_on.visible_message(span_warning("[cast_on.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
-	if(cast_on.ckey) //player still inside body
+	if(cast_on.ckey && !is_antag_banned(cast_on.ckey, ROLE_NECRO_SKELETON)) //player still inside body
 		var/offer = browser_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
 
 		if(offer == CHOICE_YES)
@@ -52,7 +52,7 @@
 		else
 			to_chat(cast_on, span_danger("Another soul will take over."))
 
-	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", null, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
+	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", ROLE_NECRO_SKELETON, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
 	if(length(candidates))
 		var/mob/C = pick(candidates)
 		cast_on.turn_to_minion(owner, C.ckey)
@@ -81,6 +81,7 @@
 	clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
 
 	mind.current.job = null
+	mind.add_antag_datum(/datum/antagonist/skeleton)
 
 	dna.species.species_traits |= NOBLOOD
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()

@@ -1,0 +1,1 @@
+{"author":"realforest2001","delete-after":true,"changes":[{"bugfix":"The readied Monarch can no longer be made an automaton."},{"bugfix":"Fixed Hand, Consort and Heir being able to use the train."},{"bugfix":"Fixed flight never ending if wings are removed."},{"bugfix":"Vampires Antag event won't roll below lowpop threshold."}]}

@@ -363,6 +363,9 @@
 					if(/datum/antagonist/vampire/lord)
 						held_confession.bad_type = "THE BLOOD-LORD OF VANDERLIN"
 						held_confession.antag = initial(antag_type:name)
+					if(/datum/antagonist/vampire/lord/daewalker)
+						held_confession.bad_type = "THE DAEWALKER, TRAITOR OF THE ORDO AND GRENZELHOFT"
+						held_confession.antag = initial(antag_type:name)
 					if(/datum/antagonist/vampire/lords_spawn)
 						held_confession.bad_type = "AN UNDERLING OF THE BLOOD-LORD"
 						held_confession.antag = initial(antag_type:name)

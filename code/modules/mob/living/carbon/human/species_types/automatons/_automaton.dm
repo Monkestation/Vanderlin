@@ -11,6 +11,14 @@
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel)
 
+/mob/living/carbon/human/species/automaton/vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel, /obj/item/reagent_containers/lux)
+
+/mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel)
+
 /datum/species/automaton
 	name = "Automaton"
 	id = SPEC_ID_AUTOMATON
@@ -45,7 +53,6 @@
 	species_traits = list(
 		NO_UNDERWEAR,
 		NOTRANSSTING,
-		NOBLOOD
 	)
 	inherent_traits = list(
 		TRAIT_NOMOOD,
@@ -102,6 +109,8 @@
 	enflamed_icon = "widefire"
 
 	exotic_bloodtype = /datum/blood_type/oil
+
+	bleed_mod = 0.2 // 80% less bleed rate from injuries
 
 	custom_id = "automaton"
 	custom_clothes = FALSE

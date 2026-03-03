@@ -407,16 +407,20 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(istype(src, /mob/dead/observer/profane))
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
+	if(is_antag_banned(ckey, ROLE_ZOMBIE))
+		var/datum/antagonist/zombie/is_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
+		if(is_zombie?.revived)
+			to_chat(src, span_warning("I am banned from playing deadites."))
+			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
 
 	remove_client_colour(/datum/client_colour/monochrome)
-	client.view_size.setDefault(getScreenSize())
+	client.view_size.setDefault(client.view_size.getScreenSize())
 	mind.current_ghost = null
 	mind.current.ckey = ckey(key)
 	return TRUE
-
 
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
@@ -460,8 +464,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	M.key = key
 //	M.Login()	//wat
-	return
-
 
 /mob/dead/observer/verb/stay_dead()
 	set category = "Spirit"

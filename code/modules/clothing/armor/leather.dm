@@ -21,6 +21,8 @@
 	salvage_result = /obj/item/natural/hide/cured
 	item_weight = 3.2
 
+	material_category = ARMOR_MAT_FABRIC
+
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK ARMOUR ARE INTENDED
 //KEEP THIS IN MIND
 

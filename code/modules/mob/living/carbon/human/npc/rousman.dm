@@ -11,7 +11,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	rot_type = /datum/component/rot/corpse/rousman
 	ambushable = FALSE
 	base_intents = list(INTENT_STEAL, INTENT_HELP, INTENT_DISARM, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/jump)
-	possible_rmb_intents = list()
 	bloodpool = 500
 
 /mob/living/carbon/human/species/rousman/Initialize()

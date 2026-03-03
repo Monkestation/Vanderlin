@@ -104,7 +104,6 @@
 			slow += (health_deficiency / 25)
 	add_movespeed_modifier(MOVESPEED_ID_MONKEY_HEALTH_SPEEDMOD, TRUE, 100, override = TRUE, multiplicative_slowdown = slow)
 
-
 /mob/living/carbon/spirit/returntolobby()
 	set name = "{RETURN TO LOBBY}"
 	set category = "Preferences.Options"
