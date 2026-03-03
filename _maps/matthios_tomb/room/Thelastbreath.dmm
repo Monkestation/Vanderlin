@@ -490,7 +490,7 @@
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "gS" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "gU" = (
 /obj/structure/door/stone,
@@ -718,7 +718,7 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
 "jI" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "jR" = (
 /obj/structure/door/stone,
@@ -1321,7 +1321,7 @@
 /obj/structure/floordoor/gatehatch/outer{
 	redstone_id = "trap1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "sJ" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -1465,7 +1465,7 @@
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "trap1"
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "uG" = (
 /obj/effect/decal/cleanable/blood,
@@ -1519,7 +1519,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "vk" = (
 /obj/structure/closet/crate/chest/gold,
@@ -1577,7 +1577,7 @@
 /obj/effect/waterfall/acid{
 	pixel_y = 32
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "wg" = (
 /obj/structure/floordoor/gatehatch/outer{
@@ -1587,7 +1587,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "wy" = (
 /obj/structure/chair/bench/couchablack,
@@ -1939,7 +1939,7 @@
 /obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
 /obj/item/clothing/pants/trou/shadowpants,
 /obj/item/clothing/ring/gold/blortz,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
 "BV" = (
@@ -2050,7 +2050,7 @@
 	redstone_id = "trap1"
 	},
 /mob/living/carbon/human/species/rousman/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Ea" = (
 /obj/item/reagent_containers/food/snacks/badrecipe,
@@ -2569,7 +2569,7 @@
 /obj/item/clothing/armor/plate/rust,
 /obj/item/clothing/armor/chainmail,
 /obj/item/clothing/ring/gold/rontz,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
 	base_speed = 12;
 	base_strength = 15;
@@ -2996,7 +2996,7 @@
 /area/under/tomb/indoors)
 "Rn" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/food/snacks/pie/cooked/poison,
+/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "Rr" = (
@@ -3505,7 +3505,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "Xz" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "XA" = (
 /turf/closed/wall/mineral/tent,

@@ -16,6 +16,7 @@
 	var/datum/skill/related_skill
 	var/skill_xp_gained
 	var/action_time = 3 SECONDS
+	var/process_sound = 'sound/foley/dropsound/food_drop.ogg'
 	///list of atoms we pass to the output item
 	var/list/atoms_to_pass = list()
 
@@ -61,6 +62,8 @@
 /datum/orderless_slapcraft/proc/try_process_item(obj/item/attacking_item, mob/user)
 	var/return_value = FALSE
 	var/modified_action_time = get_action_time(attacking_item, user)
+	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
+		modified_action_time *= 0.9
 
 	for(var/requirement as anything in requirements)
 		if(islist(requirement))
@@ -69,7 +72,7 @@
 					continue
 				if(!do_after(user, modified_action_time, hosted_source))
 					return
-				playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
+				playsound(user, process_sound, 30, TRUE, -1)
 				requirements[requirement]--
 				if(requirements[requirement] <= 0)
 					requirements -= list(requirement) // See Remove() behavior documentation
@@ -85,7 +88,7 @@
 		if(istype(attacking_item, requirement))
 			if(!do_after(user, modified_action_time, hosted_source))
 				return
-			playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
+			playsound(user, process_sound, 30, TRUE, -1)
 			requirements[requirement]--
 			if(requirements[requirement] <= 0)
 				requirements -= requirement
@@ -106,7 +109,7 @@
 		if(!istype(attacking_item, finishing_item))
 			return FALSE
 		var/keep_item = process_finishing_item(attacking_item, user)
-		playsound(get_turf(user), 'sound/foley/dropsound/gen_drop.ogg', 30, TRUE, -1)
+		playsound(user, 'sound/foley/dropsound/gen_drop.ogg', 30, TRUE, -1)
 		if(keep_item)
 			attacking_item.forceMove(locate(1,1,1))
 		else
@@ -121,6 +124,8 @@
 
 /datum/orderless_slapcraft/proc/try_finish(mob/user)
 	user.adjust_experience(related_skill, skill_xp_gained)
+	if(related_skill == /datum/skill/craft/cooking)
+		user.nobles_seen_servant_work()
 	var/turf/source_turf = get_turf(hosted_source)
 	if(output_item)
 		var/obj/item/new_item = new output_item(source_turf)

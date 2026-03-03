@@ -18,9 +18,22 @@
 	else
 		. += E.bang_protect
 
-/mob/living/carbon/is_mouth_covered(head_only = 0, mask_only = 0)
-	if( (!mask_only && head && (head.flags_cover & HEADCOVERSMOUTH)) || (!head_only && wear_mask && (wear_mask.flags_cover & MASKCOVERSMOUTH)) )
-		return TRUE
+/mob/living/carbon/proc/check_equipment_cover_flags(flags = NONE)
+	for(var/obj/item/thing in get_equipped_items())
+		if(thing.flags_cover & flags)
+			return thing
+	return null
+
+/mob/living/carbon/is_mouth_covered(check_flags = ALL)
+	for(var/obj/item/grabbing/grab in grabbedby)
+		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+			return TRUE
+	var/needed_coverage = NONE
+	if(check_flags & ITEM_SLOT_HEAD)
+		needed_coverage |= HEADCOVERSMOUTH
+	if(check_flags & ITEM_SLOT_MASK)
+		needed_coverage |= MASKCOVERSMOUTH
+	return check_equipment_cover_flags(needed_coverage)
 
 /mob/living/carbon/is_eyes_covered(check_glasses = TRUE, check_head = TRUE, check_mask = TRUE)
 	if(check_head && head && (head.flags_cover & HEADCOVERSEYES))
@@ -49,25 +62,21 @@
 	return TRUE
 
 /mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	if(!skipcatch)	//ugly, but easy
-		if(can_catch_item())
-			if(istype(AM, /obj/item))
-				if(!istype(AM, /obj/item/net))
-					var/obj/item/I = AM
-					if(isturf(I.loc))
-						I.attack_hand(src)
-						if(get_active_held_item() == I) //if our attack_hand() picks up the item...
-							visible_message("<span class='warning'>[src] catches [I]!</span>", \
-											"<span class='danger'>I catch [I] in mid-air!</span>")
-							throw_mode_off()
-							return 1
-				else
-					var/obj/item/net/N
-					visible_message("<span class='warning'>[src] tries to catch \the [N] but gets snared by it!</span>", \
-									"<span class='danger'>Why did I even try to do this...?</span>") // Hahaha dumbass!!!
-					throw_mode_off()
-					N.ensnare(src)
-					return
+	if(!skipcatch && can_catch_item() && isitem(AM) && isturf(AM.loc))	//ugly, but easy
+		if(istype(AM, /obj/item/rope/net))
+			var/obj/item/rope/net/N = AM
+			visible_message(span_warning("[src] tries to catch [N] but gets snared by it!"), \
+							span_danger("Why did I try to catch it??")) // Hahaha dumbass!!!
+			throw_mode_off()
+			N.ensnare(src)
+			return
+		var/obj/item/I = AM
+		I.attack_hand(src)
+		if(get_active_held_item() == I) //if our attack_hand() picks up the item...
+			visible_message(span_warning("[src] catches [I]!"), \
+							span_danger("I catch [I] in mid-air!"))
+			throw_mode_off()
+			return 1
 	..()
 
 
@@ -105,34 +114,35 @@
 			if(used_limb == parse_zone(BODY_ZONE_PRECISE_R_HAND) || used_limb == parse_zone(BODY_ZONE_PRECISE_L_HAND))
 				record_round_statistic(STATS_HANDS_HELD)
 		target.visible_message(span_warning("[src] grabs [target]'s [used_limb]."), \
-						span_warning("[src] grabs my [used_limb]."), span_hear("I hear shuffling."), null, list(src))
-		to_chat(src, span_info("I grab [target]'s [used_limb]."))
+						src != target ? span_warning("[src] grabs my [used_limb].") : "", \
+						span_hear("I hear shuffling."), null, list(src))
+		to_chat(src, span_info("I grab [src != target ? "[target]'s" : "my"] [used_limb]."))
 	else
 		target.visible_message(span_warning("[src] grabs [target]."), \
-						span_warning("[src] grabs me."), span_hear("I hear shuffling."), null, list(src))
-		to_chat(src, span_info("I grab [target]."))
+						src != target ? span_warning("[src] grabs me.") : "",
+						span_hear("I hear shuffling."), null, list(src))
+		to_chat(src, span_info("I grab [src != target ? "[target]" : "myself"]."))
 
 /mob/living/carbon/send_grabbed_message(mob/living/carbon/user)
 	var/used_limb = "chest"
 	var/obj/item/grabbing/I
 	if(user.active_hand_index == 1)
-		I = user.r_grab
+		I = user.r_grab || user.l_grab
 	else
-		I = user.l_grab
+		I = user.l_grab || user.r_grab
 	if(I)
 		used_limb = parse_zone(I.sublimb_grabbed)
 
-	if(HAS_TRAIT(user, TRAIT_NOTIGHTGRABMESSAGE))
-		return
-
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		visible_message("<span class='danger'>[user] firmly grips [src]'s [used_limb]!</span>",
-						"<span class='danger'>[user] firmly grips my [used_limb]!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
-		to_chat(user, "<span class='danger'>I firmly grip [src]'s [used_limb]!</span>")
+		visible_message(span_danger("[user] firmly grips [src]'s [used_limb]!"),
+						src != user ? span_danger("[user] firmly grips my [used_limb]!") : "",
+						span_hear("I hear aggressive shuffling!"), null, user)
+		to_chat(user, span_danger("I firmly grip [src != user ? "[src]'s" : "my"] [used_limb]!"))
 	else
-		visible_message("<span class='danger'>[user] tightens [user.p_their()] grip on [src]'s [used_limb]!</span>", \
-						"<span class='danger'>[user] tightens [user.p_their()] grip on my [used_limb]!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
-		to_chat(user, "<span class='danger'>I tighten my grip on [src]'s [used_limb]!</span>")
+		visible_message(span_danger("[user] tightens [user.p_their()] grip on [src]'s [used_limb]!"), \
+						src != user ? span_danger("[user] tightens [user.p_their()] grip on my [used_limb]!") : "",
+						span_hear("I hear aggressive shuffling!"), null, user)
+		to_chat(user, span_danger("I tighten my grip on [src != user ? "[src]'s" : "my"] [used_limb]!"))
 
 /mob/living/carbon/proc/precise_attack_check(zone, obj/item/bodypart/affecting) //for striking eyes, throat, etc
 	if(zone && affecting)
@@ -219,7 +229,7 @@
 				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(src)
 				var/splatter_dir = get_dir(user, src)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir, get_blood_type())
 				if(affecting.body_zone == BODY_ZONE_HEAD)
 					if(wear_mask)
 						wear_mask.add_mob_blood(src)
@@ -242,10 +252,10 @@
 			I.add_mob_blood(src)
 		return TRUE //successful attack
 
-//ATTACK HAND IGNORING PARENT RETURN VALUE
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		. = TRUE
+	. = ..()
+	if(.)
+		return TRUE
 
 	if(!lying_attack_check(user))
 		return FALSE
@@ -338,16 +348,15 @@
 		if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
 			Paralyze(3 SECONDS)
 		//Jitter and other fluff.
-		jitteriness += 1000
-		do_jitter_animation(jitteriness)
+		do_jitter_animation(300)
+		adjust_jitter(20 SECONDS)
 		stuttering += 2
 		emote("painscream")
 	addtimer(CALLBACK(src, PROC_REF(secondary_shock), should_stun), 20)
 	return shock_damage
 
-///Called slightly after electrocute act to reduce jittering and apply a secondary stun.
+///Called slightly after electrocute act to apply a secondary stun.
 /mob/living/carbon/proc/secondary_shock(should_stun)
-	jitteriness = max(jitteriness - 990, 10)
 	if(should_stun && !HAS_TRAIT(src, TRAIT_NOPAINSTUN) && !has_status_effect(/datum/status_effect/shock_recovery))
 		Paralyze(6 SECONDS)
 		apply_shock_paralyze_immunity(12 SECONDS)
@@ -392,7 +401,7 @@
 	AdjustImmobilized(-60)
 	set_resting(FALSE)
 
-	playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 
 
 /mob/living/carbon/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
@@ -421,17 +430,17 @@
 			eyes.applyOrganDamage(rand(12, 16))
 
 		if(eyes.damage > 10)
-			blind_eyes(damage)
-			blur_eyes(damage * rand(3, 6))
+			adjust_temp_blindness(damage)
+			set_eye_blur_if_lower(damage * rand(6 SECONDS, 12 SECONDS))
 
 			if(eyes.damage > 20)
 				if(prob(eyes.damage - 20))
-					if(!HAS_TRAIT(src, TRAIT_NEARSIGHT))
+					if(!is_nearsighted_from(EYE_DAMAGE))
 						to_chat(src, "<span class='warning'>My eyes start to burn badly!</span>")
 					become_nearsighted(EYE_DAMAGE)
 
 				else if(prob(eyes.damage - 25))
-					if(!HAS_TRAIT(src, TRAIT_BLIND))
+					if(!is_blind_from(EYE_DAMAGE))
 						to_chat(src, "<span class='warning'>I can't see anything!</span>")
 					eyes.applyOrganDamage(eyes.maxHealth)
 

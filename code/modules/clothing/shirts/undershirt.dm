@@ -94,6 +94,7 @@
 	return ..()
 
 /obj/item/clothing/shirt/undershirt/webs
+
 	name = "webbed shirt"
 	desc = "Exotic silk finely woven into.. this? Might as well be wearing a spiderweb."
 	icon_state = "webs"
@@ -118,6 +119,15 @@
 /obj/item/clothing/shirt/undershirt/sash/colored/white
 	color = CLOTHING_CHALK_WHITE
 
+/obj/item/clothing/shirt/undershirt/sash/colored/blue
+	color = CLOTHING_BERRY_BLUE
+
+/obj/item/clothing/shirt/undershirt/sash/colored/mageblue
+	color = CLOTHING_MAGE_BLUE
+
+/obj/item/clothing/shirt/undershirt/sash/colored/green
+	color = CLOTHING_SPRING_GREEN
+
 /obj/item/clothing/shirt/undershirt/sash/colored/random/Initialize()
 	color = pick(CLOTHING_CHALK_WHITE, CLOTHING_ROYAL_RED, CLOTHING_LINEN, CLOTHING_MAGE_ORANGE, CLOTHING_ROYAL_TEAL, CLOTHING_SWAMPWEED)
 	return ..()
@@ -127,3 +137,25 @@
 	desc = "A comfortable yet functional dress shirt often worn by the staff of a noble household."
 	icon_state = "butlershirt"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_maids.dmi'
+
+/obj/item/clothing/shirt/undershirt/courtphysician
+	name = "sanguine vest"
+	desc = "A silk vest, perhaps it will make it another dae without being bloodied."
+	icon_state = "docvest"
+	item_state = "docvest"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/shirt/undershirt/courtphysician/female
+	name = "sanguine blouse"
+	desc = "A silk blouse, elegant, but it does you no good in surgery."
+	icon_state = "docblouse"
+	item_state = "docblouse"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY

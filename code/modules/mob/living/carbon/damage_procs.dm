@@ -87,6 +87,12 @@
 		amount += BP.burn_dam
 	return amount
 
+/mob/living/carbon/setBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+	var/current = getBruteLoss()
+	var/diff = amount - current
+	if(!diff)
+		return
+	adjustBruteLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
 	if(!forced && (status_flags & GODMODE))
@@ -96,6 +102,13 @@
 	else
 		heal_overall_damage(abs(amount), 0, required_status ? required_status : BODYPART_ORGANIC, updating_health)
 	return amount
+
+/mob/living/carbon/setFireLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+	var/current = getFireLoss()
+	var/diff = amount - current
+	if(!diff)
+		return
+	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
 	if(!forced && (status_flags & GODMODE))
@@ -175,7 +188,7 @@
 //It automatically updates damage overlays if necessary
 //It automatically updates health status
 /mob/living/carbon/heal_bodypart_damage(brute = 0, burn = 0, updating_health = TRUE, required_status)
-	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute,burn,required_status)
+	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status)
 	if(!parts.len)
 		return
 	var/obj/item/bodypart/picked = pick(parts)
@@ -198,7 +211,7 @@
 /mob/living/carbon/heal_overall_damage(brute = 0, burn = 0, required_status, updating_health = TRUE)
 	. = FALSE
 
-	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, stamina, required_status)
+	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_status)
 	var/update = NONE
 	while(length(parts) && (brute > 0 || burn > 0))
 		var/obj/item/bodypart/picked = pick(parts)

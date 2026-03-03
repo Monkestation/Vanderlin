@@ -26,6 +26,11 @@
 	var/list/favored_miracles = list()
 	var/devotion_color = "#3C41A4"
 
+	var/list/datum/devotion_task/tasks = list()
+	var/list/viable_tasks = list()
+
+	var/devotion_class = DEVOTION_CLASS_CLERIC
+
 /datum/devotion/Destroy(force)
 	remove()
 	STOP_PROCESSING(SSprocessing, src)
@@ -45,20 +50,48 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	holder_mob?.hud_used?.initialize_bloodpool()
-	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
-	holder_mob.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
+	initialize_tasks()
+
+/datum/devotion/proc/initialize_hud()
+	holder_mob?.hud_used?.initialize_bloodpool()
+	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	update_devotion(0) //hack to force meter to reflect the starting devotion
+
+/datum/devotion/proc/initialize_tasks()
+	if(!holder_mob?.patron)
+		return
+
+	var/list/task_types = get_patron_tasks()
+	for(var/task_type in task_types)
+		add_task(task_type)
+
+/datum/devotion/proc/get_patron_tasks()
+	return viable_tasks
+
+/datum/devotion/proc/add_task(datum/devotion_task/task_type)
+	var/datum/devotion_task/new_task = new task_type(src)
+	tasks += new_task
+	return new_task
+
+/datum/devotion/proc/remove_task(datum/devotion_task/task)
+	tasks -= task
+	qdel(task)
 
 /datum/devotion/proc/remove()
 	if(holder_mob)
 		holder_mob.cleric = null
 		holder_mob.remove_spells(source = src)
-		holder_mob.verbs -= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+		remove_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 		for(var/trait as anything in traits)
 			REMOVE_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	holder_mob = null
@@ -126,21 +159,32 @@
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
 	)
+	devotion_class = DEVOTION_CLASS_PRIEST
+
+/datum/devotion/proc/make_gmtemplar()
+	devotion = 150
+	max_devotion = 350
+	progression = CLERIC_REQ_3
+	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_GRANDMASTER
 
 /datum/devotion/proc/make_templar()
 	devotion = 50
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
+	devotion_class = DEVOTION_CLASS_TEMPLAR
 
 /datum/devotion/proc/make_absolver()
 	devotion = 100
 	max_devotion = CLERIC_REQ_3
 	progression = CLERIC_REQ_3
 	max_progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
+	devotion_class = DEVOTION_CLASS_ACOLYTE
 
 /datum/devotion/proc/make_cleric()
 	devotion = 50
@@ -148,7 +192,7 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_3
 
-/datum/devotion/proc/make_churching()
+/datum/devotion/proc/make_churchling()
 	max_devotion = CLERIC_REQ_1
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_1
@@ -156,10 +200,11 @@
 		/datum/action/cooldown/spell/undirected/touch/orison/lesser,
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
+	devotion_class = DEVOTION_CLASS_CHURCHLING
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return
@@ -170,7 +215,7 @@
 
 /mob/living/carbon/human/proc/clericpray()
 	set name = "Give Prayer"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	if(!ishuman(src))
 		return

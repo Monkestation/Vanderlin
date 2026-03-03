@@ -118,6 +118,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 	var/list/notes = list() //RTD add notes button
 
+	//assoc list of frumentarii you know of to a BOOL of if they are still frumentarii
 	var/list/cached_frumentarii = list()
 
 	var/datum/sleep_adv/sleep_adv = null
@@ -157,47 +158,55 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		if(is_role)
 			. += M
 
-/// proc that adds us to their lists, and they are added to ours
-/datum/mind/proc/i_know_person(person)
-	if(!person)
+/// Gives our identity to a target mind, and gives theirs to us.
+/datum/mind/proc/share_identities(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
 		return
-	if(person == src)
+	if(target_mind == src)
 		return
-	var/datum/mind/M = person
-	if(ishuman(M.current))
-		var/mob/living/carbon/human/H = M.current
-		if(!known_people[H.real_name])
-			known_people[H.real_name] = list()
-		known_people[H.real_name]["VCOLOR"] = H.voice_color
-		var/used_title = H.get_role_title()
+
+	learn_target_identity(target_mind)
+	give_source_identity(target_mind)
+
+/// Learn the identity of a target mind (and their mob).
+/datum/mind/proc/learn_target_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
+		return
+	if(target_mind == src)
+		return
+	if(ishuman(target_mind.current))
+		var/mob/living/carbon/human/target_mob = target_mind.current
+		if(!known_people[target_mob.real_name])
+			known_people[target_mob.real_name] = list()
+		known_people[target_mob.real_name]["VCOLOR"] = target_mob.voice_color
+		var/used_title = target_mob.get_role_title()
 		if(!used_title)
 			used_title = "Unknown"
-		known_people[H.real_name]["FJOB"] = used_title
-		known_people[H.real_name]["FGENDER"] = H.gender
-		known_people[H.real_name]["FAGE"] = H.age
+		known_people[target_mob.real_name]["FJOB"] = used_title
+		known_people[target_mob.real_name]["FGENDER"] = target_mob.gender
+		known_people[target_mob.real_name]["FAGE"] = target_mob.age
 
-/// we are added to their lists, they are added to ours
-/datum/mind/proc/person_knows_me(person)
-	if(!person)
+/// Give the identity of source mind (and mob) to target mind.
+/datum/mind/proc/give_source_identity(datum/mind/target_mind)
+	if(!target_mind || !ismind(target_mind))
 		return
-	if(person == src)
+	if(target_mind == src)
 		return
-	var/datum/mind/M = person
-	if(M.known_people)
+	if(target_mind.known_people)
 		if(ishuman(current))
-			var/mob/living/carbon/human/H = current
-			if(!M.known_people[H.real_name])
-				M.known_people[H.real_name] = list()
-			M.known_people[H.real_name]["VCOLOR"] = H.voice_color
+			var/mob/living/carbon/human/source_mob = current
+			if(!target_mind.known_people[source_mob.real_name])
+				target_mind.known_people[source_mob.real_name] = list()
+			target_mind.known_people[source_mob.real_name]["VCOLOR"] = source_mob.voice_color
 			var/used_title
-			if(H.job)
-				var/datum/job/job = SSjob.GetJob(H.job)
-				used_title = job.get_informed_title(H)
+			if(source_mob.job)
+				var/datum/job/job = SSjob.GetJob(source_mob.job)
+				used_title = job.get_informed_title(source_mob)
 			if(!used_title)
 				used_title = "Unknown"
-			M.known_people[H.real_name]["FJOB"] = used_title
-			M.known_people[H.real_name]["FGENDER"] = H.gender
-			M.known_people[H.real_name]["FAGE"] = H.age
+			target_mind.known_people[source_mob.real_name]["FJOB"] = used_title
+			target_mind.known_people[source_mob.real_name]["FGENDER"] = source_mob.gender
+			target_mind.known_people[source_mob.real_name]["FAGE"] = source_mob.age
 
 /// check if this mind knows X
 /datum/mind/proc/do_i_know(datum/mind/person, name)
@@ -217,7 +226,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	return FALSE
 
 /// we are removed from X's known people
-/datum/mind/proc/become_unknown_to(person)
+/datum/mind/proc/forget_source_identity(person)
 	if(!person)
 		return
 	if(person == src)
@@ -228,8 +237,10 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		if(M.known_people[H.real_name])
 			M.known_people[H.real_name] = null
 
-/// removes all known people from your known_people list
-/datum/mind/proc/unknow_all_people()
+/// Removes everyone from known list, and clears you from theirs.
+/datum/mind/proc/forget_and_be_forgotten()
+	for(var/datum/mind/found_mind in get_minds())
+		forget_source_identity(found_mind)
 	known_people = list()
 
 /// show known people to the player
@@ -299,8 +310,6 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		C.last_mind = src
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
-	if(old_current.skills)
-		old_current.skills.set_current(current)
 
 	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
@@ -384,8 +393,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// removes all antag datums from a mind
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		antag_datum_ref.on_removal()
 
 /**
@@ -397,8 +405,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/has_antag_datum(datum_type, check_subtypes = TRUE)
 	if(!datum_type)
 		CRASH("has_antag_datum was called without an antag datum specified!")
-	for(var/a in antag_datums)
-		var/datum/antagonist/antag_datum_ref = a
+	for(var/datum/antagonist/antag_datum_ref as anything in antag_datums)
 		if(check_subtypes && istype(antag_datum_ref, datum_type))
 			return antag_datum_ref
 		else
@@ -507,13 +514,20 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /// Output current targets to the player
 /datum/mind/proc/recall_targets(mob/recipient, window=1)
 	var/output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
-	for (var/mob/living/carbon in GLOB.mob_living_list) // Iterate through all mobs in the world
-		if ((carbon.real_name != recipient.real_name) && ((carbon.has_flaw(/datum/charflaw/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))//To be on the list they must be hunted, not be the user and not be a dummy (There is a dummy that has all vices for some reason)
-			output += "<br>[carbon.real_name]"
+	for (var/mob/living/carbon in GLOB.mob_living_list)
+		if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(carbon, TRAIT_ZIZOID_HUNTED)) && (!istype(carbon, /mob/living/carbon/human/dummy))))
+			output += "<br><b>[carbon.real_name]</b>"
 			if (carbon.job)
 				output += " - [carbon.job]"
-	output += "<br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 
+			// Get the hunted quirk and display the reason
+			var/datum/quirk/vice/hunted/hunted_quirk = carbon.get_quirk(/datum/quirk/vice/hunted)
+			if(hunted_quirk && hunted_quirk.customization_value && hunted_quirk.customization_value != "")
+				output += "<br><i>Hunted for: [hunted_quirk.customization_value]</i>"
+			else
+				output += "<br><i>Hunted for: Unknown reasons</i>"
+
+	output += "<br><br>Your creed is blood, your faith is steel. You will not rest until these souls are yours. Use the profane dagger to trap their souls for Graggar."
 	if(window)
 		recipient << browse(output,"window=memory")
 
@@ -531,6 +545,13 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 			to_chat(usr, span_warning("Invalid antagonist ref to be removed."))
 			return
 		antag_datum_ref.admin_remove(usr)
+
+	else if(href_list["vv_antag"])
+		var/datum/antagonist/antag_datum_ref = locate(href_list["vv_antag"]) in antag_datums
+		if(!istype(antag_datum_ref))
+			to_chat(usr, span_warning("Invalid antagonist ref to view variables."))
+			return
+		usr.client.debug_variables(antag_datum_ref)
 
 	else if (href_list["memory_edit"])
 		var/new_memo = copytext(sanitize(input("Write new memory", "Memory", memory) as null|message),1,MAX_MESSAGE_LEN)
@@ -780,7 +801,15 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
  ** check_apprentice - do apprentices receive skill experience too?
 */
 /datum/mind/proc/add_sleep_experience(skill, amt, silent = FALSE, check_apprentice = TRUE)
+	if(HAS_TRAIT(current, TRAIT_NO_EXPERIENCE))
+		return FALSE
 	amt *= GLOB.sleep_experience_modifier
+
+	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+		amt *= 1.2
+
+	amt *= current.get_skill_exp_multiplier(skill)
+
 	if(check_apprentice)
 		current.adjust_apprentice_exp(skill, amt, silent)
 	if(sleep_adv.add_sleep_experience(skill, amt, silent))

@@ -21,10 +21,10 @@
 	)
 
 	jobstats = list(
-		STATKEY_PER = 3,
-		STATKEY_SPD = 3,
+		STATKEY_PER = 4,
+		STATKEY_SPD = 4,
 		STATKEY_INT = 2,
-	) //8 Statline
+	) //10 Statline
 
 	skills = list(
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
@@ -37,7 +37,7 @@
 		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/sewing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/firearms = SKILL_LEVEL_EXPERT,
 	)
 
@@ -49,7 +49,7 @@
 		"Retribution (Rapier)",
 		"Daybreak (Whip)",
 		"Sanctum (Halberd)",
-		"The Forgotten Blade",
+		"Remembrance (Long Sword)",
 	)
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR RELIQUARY PIECE.", "WIELD THEM IN HIS NAME.", gear)
 	switch(weapon_choice)
@@ -57,19 +57,28 @@
 			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(spawned), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		if("Daybreak (Whip)")
 			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		if("Sanctum (Halberd)")
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
-		if("The Forgotten Blade")
-			spawned.put_in_hands(new /obj/item/weapon/sword/long/forgotten(spawned), TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+				spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1) //So they don't have a 33% chance if being unable to wield their weapon.
+		if("Remembrance (Long Sword)")
+			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
+			if(spawned.age == AGE_OLD)
+				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 
 
 /datum/outfit/inquisitor/inspector
-	name = "Inspector"
+	name = "Inspector (Herr Prafekt)"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	neck = /obj/item/clothing/neck/gorget

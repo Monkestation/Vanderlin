@@ -107,8 +107,7 @@
 
 /proc/get_mob_by_key(key)
 	var/ckey = ckey(key)
-	for(var/i in GLOB.player_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.player_list)
 		if(M.ckey == ckey)
 			return M
 	return null
@@ -185,13 +184,6 @@
 /area/flick_overlay_view(mutable_appearance/display, duration)
 	return
 
-/proc/flick_overlay_view(image/I, atom/target, duration) //wrapper for the above, flicks to everyone who can see the target atom
-	var/list/viewing = list()
-	for(var/mob/M as anything in viewers(target))
-		if(M.client)
-			viewing += M.client
-	flick_overlay(I, viewing, duration)
-
 /proc/get_active_player_count(alive_check = 0, afk_check = 0, human_check = 0)
 	// Get active players who are playing in the round
 	var/active_players = 0
@@ -255,6 +247,22 @@
 
 	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
 
+
+/proc/pollGhostCandidatesWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, ignore_category = null, flashwindow = TRUE, new_players = FALSE, whitelist_type)
+	var/list/candidates = list()
+
+	for(var/mob/dead/observer/G in GLOB.player_list)
+		if(G.client.is_whitelisted(whitelist_type))
+			candidates += G
+	if(new_players)
+		for(var/mob/dead/new_player/G as anything in GLOB.new_player_list)
+			if(!G.client)
+				continue
+			candidates += G
+
+	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
+
+
 /proc/pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, ignore_category = null, flashwindow = TRUE, list/group = null)
 	var/time_passed = world.time
 	if (!Question)
@@ -262,6 +270,8 @@
 	var/list/result = list()
 	for(var/mob/M as anything in group)
 		if(!M.key || !M.client || (ignore_category && GLOB.poll_ignore[ignore_category] && (M.ckey in GLOB.poll_ignore[ignore_category])))
+			continue
+		if(jobbanType && is_banned_from(M.ckey, list(jobbanType)))
 			continue
 		if(be_special_flag)
 			if(!(M.client.prefs) || !(be_special_flag in M.client.prefs.be_special))
@@ -283,6 +293,12 @@
 
 /proc/pollCandidatesForMob(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, mob/M, ignore_category = null, new_players = FALSE)
 	var/list/L = pollGhostCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, new_players = new_players)
+	if(!M || QDELETED(M) || !M.loc)
+		return list()
+	return L
+
+/proc/pollCandidatesForMobWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag = 0, poll_time = 300, mob/M, ignore_category = null, new_players = FALSE, whitelist_type)
+	var/list/L = pollGhostCandidatesWhitelisted(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, new_players = new_players, whitelist_type = whitelist_type)
 	if(!M || QDELETED(M) || !M.loc)
 		return list()
 	return L
@@ -384,3 +400,75 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 /// Returns if the given client is an admin, REGARDLESS of if they're deadminned or not.
 /proc/is_admin(client/client)
 	return !isnull(GLOB.admin_datums[client.ckey]) || !isnull(GLOB.deadmins[client.ckey])
+
+/**
+ * Checks a given message to see if any of the words are something we want to treat specially, as detailed below.
+ *
+ * There are 3 cases where a word is something we want to act on
+ * 1. Admin pings, like @adminckey. Pings the admin in question, text is not clickable
+ * 2. Datum refs, like @0x2001169 or @mob_23. Clicking on the link opens up the VV for that datum
+ * 3. Ticket refs, like #3. Displays the status and ahelper in the link, clicking on it brings up the ticket panel for it.
+ * Returns a list being used as a tuple. Index ASAY_LINK_NEW_MESSAGE_INDEX contains the new message text (with clickable links and such)
+ * while index ASAY_LINK_PINGED_ADMINS_INDEX contains a list of pinged admin clients, if there are any.
+ *
+ * Arguments:
+ * * msg - the message being scanned
+ */
+/proc/check_asay_links(msg)
+	var/list/msglist = splittext(msg, " ") //explode the input msg into a list
+	var/list/pinged_admins = list() // if we ping any admins, store them here so we can ping them after
+	var/modified = FALSE // did we find anything?
+
+	var/i = 0
+	for(var/word in msglist)
+		i++
+		if(!length(word))
+			continue
+
+		switch(word[1])
+			if("@")
+				var/stripped_word = ckey(copytext(word, 2))
+
+				// first we check if it's a ckey of an admin
+				var/client/client_check = GLOB.directory[stripped_word]
+				if(client_check?.holder)
+					msglist[i] = "<u>[word]</u>"
+					pinged_admins[stripped_word] = client_check
+					modified = TRUE
+					continue
+
+				// then if not, we check if it's a datum ref
+
+				var/word_with_brackets = "\[[stripped_word]\]" // the actual memory address lookups need the bracket wraps
+				var/datum/datum_check = locate(word_with_brackets)
+				if(!istype(datum_check))
+					continue
+				msglist[i] = "<u><a href='byond://?_src_=vars;[HrefToken(forceGlobal = TRUE)];Vars=[word_with_brackets]'>[word]</A></u>"
+				modified = TRUE
+
+			if("#") // check if we're linking a ticket
+				var/possible_ticket_id = text2num(copytext(word, 2))
+				if(!possible_ticket_id)
+					continue
+
+				var/datum/admin_help/ahelp_check = GLOB.ahelp_tickets?.TicketByID(possible_ticket_id)
+				if(!ahelp_check)
+					continue
+
+				var/state_word
+				switch(ahelp_check.state)
+					if(AHELP_ACTIVE)
+						state_word = "Active"
+					if(AHELP_CLOSED)
+						state_word = "Closed"
+					if(AHELP_RESOLVED)
+						state_word = "Resolved"
+
+				msglist[i]= "<u><A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];ahelp=[REF(ahelp_check)];ahelp_action=ticket'>[word] ([state_word] | [ahelp_check.initiator_key_name])</A></u>"
+				modified = TRUE
+
+	if(modified)
+		var/list/return_list = list()
+		return_list[ASAY_LINK_NEW_MESSAGE_INDEX] = jointext(msglist, " ") // without tuples, we must make do!
+		return_list[ASAY_LINK_PINGED_ADMINS_INDEX] = pinged_admins
+		return return_list

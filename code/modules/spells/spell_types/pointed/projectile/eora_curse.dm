@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/eora)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
 
 	invocation =  "Nulla felicitas sine amore!"
 	invocation_type = INVOCATION_WHISPER
@@ -34,7 +34,7 @@
 		L.visible_message(span_info("A purple haze shrouds [target]!"), span_notice("I feel incredibly drunk..."))
 		L.reagents.add_reagent(/datum/reagent/berrypoison, 1)
 		L.apply_status_effect(/datum/status_effect/debuff/eoradrunk)
-		L.blur_eyes(20)
+		L.set_eye_blur_if_lower(40 SECONDS)
 
 /obj/projectile/magic/eora/on_range()
 	. = ..()
@@ -75,5 +75,5 @@
 		L.reagents.add_reagent(/datum/reagent/berrypoison, 1)
 		L.apply_status_effect(/datum/status_effect/debuff/eoradrunk)
 		L.visible_message(span_info("A purple haze shrouds [L]!"), span_notice("I feel incredibly drunk..."))
-		L.blur_eyes(20)
+		L.set_eye_blur_if_lower(40 SECONDS)
 	qdel(src)

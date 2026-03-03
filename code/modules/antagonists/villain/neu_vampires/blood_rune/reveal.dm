@@ -154,7 +154,7 @@
 		if (!vic)
 			qdel(src)
 			return
-	playsound(loc, 'sound/effects/vampire/shock.ogg', 20, 0, 0)
+	playsound(src, 'sound/effects/vampire/shock.ogg', 20, 0, 0)
 	victim = vic
 	duration = dur
 	victim.Stun(duration)

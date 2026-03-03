@@ -25,6 +25,8 @@ GLOBAL_PROTECT(href_token)
 
 	var/deadmined
 	var/datum/role_ban_panel/role_ban_panel
+	var/datum/whitelist_panel/WP
+	var/datum/job_boost_panel/BP
 	var/datum/pathfind_debug/path_debug
 	var/datum/create_wave/create_wave
 
@@ -49,6 +51,8 @@ GLOBAL_PROTECT(href_token)
 	admin_signature = "Nanotrasen Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	href_token = GenerateToken()
 	role_ban_panel = new /datum/role_ban_panel(src)
+	WP = new /datum/whitelist_panel(src)
+	BP = new /datum/job_boost_panel(src)
 	if(R.rights & R_DEBUG) //grant profile access
 		world.SetConfig("APP/admin", ckey, "role=admin")
 	//only admins with +ADMIN start admined
@@ -94,8 +98,9 @@ GLOBAL_PROTECT(href_token)
 	var/client/C
 	if ((C = owner) || (C = GLOB.directory[target]))
 		disassociate()
-		C.verbs += /client/proc/readmin
+		add_verb(C, /client/proc/readmin)
 	QDEL_NULL(path_debug)
+	C?.native_say?.refresh_channels()
 
 /datum/admins/proc/associate(client/C)
 	if(IsAdminAdvancedProcCall())
@@ -115,8 +120,11 @@ GLOBAL_PROTECT(href_token)
 		owner = C
 		owner.holder = src
 		owner.add_admin_verbs()	//TODO <--- todo what? the proc clearly exists and works since its the backbone to our entire admin system
-		owner.verbs -= /client/proc/readmin
+		remove_verb(owner, /client/proc/readmin)
+		add_verb(owner, /client/proc/deadmin)
 		GLOB.admins |= C
+		if(!deadmined)
+			C?.native_say?.refresh_channels()
 
 /datum/admins/proc/disassociate()
 	if(IsAdminAdvancedProcCall())
@@ -210,3 +218,11 @@ you will have to do something like if(client.rights & R_ADMIN) myself.
 /proc/HrefTokenFormField(forceGlobal = FALSE)
 	return "<input type='hidden' name='admin_token' value='[RawHrefToken(forceGlobal)]'>"
 
+/datum/admins/proc/get_message_prefix()
+	if(CONFIG_GET(flag/asay_simple_titles))
+		return rank?.name
+	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_ADMIN])
+		return "ADMIN"
+	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_MAINT])
+		return "MAINT"
+	return "STAFF"

@@ -247,7 +247,7 @@
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
 "GQ" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/wilds)
 "Hx" = (
 /obj/structure/bed/hay,

@@ -44,6 +44,8 @@
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
 		TRAIT_CABAL,
+		TRAIT_BLOODDRINKER,
+		TRAIT_NASTY_EATER,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -55,13 +57,14 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
+		TRAIT_NASTY_EATER,
 	)
 	var/mutable_appearance/rotflies
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire))
 		if(!SEND_SIGNAL(examined_datum.owner, COMSIG_DISGUISE_STATUS))
-			return "<span class='boldnotice'>Another kind of deadite.</span>"
+			return span_boldnotice("Not food, not right..")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return "<span class='boldnotice'>Another deadite. My ally.</span>"
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -114,7 +117,7 @@
 		return
 
 	zombie.cut_overlay(rotflies)
-	zombie.verbs -= /mob/living/carbon/human/proc/zombie_seek
+	remove_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	zombie.mind?.special_role = special_role
 	zombie.ambushable = ambushable
 	if(zombie.dna?.species)
@@ -122,8 +125,6 @@
 		zombie.dna.species.soundpack_f = soundpack_f
 	zombie.base_intents = base_intents
 	zombie.update_a_intents()
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = FALSE
 	zombie.update_body()
 	zombie.remove_stat_modifier("[type]")
 	zombie.cmode_music = old_cmode_music
@@ -201,13 +202,11 @@
 	ambushable = zombie.ambushable
 	zombie.ambushable = FALSE
 
-	if(zombie.charflaw)
-		zombie.charflaw.ephemeral = TRUE
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.faction += FACTION_UNDEAD
 	zombie.faction -= FACTION_TOWN
 	zombie.faction -= FACTION_NEUTRAL
-	zombie.verbs |= /mob/living/carbon/human/proc/zombie_seek
+	add_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!zombie_part.rotted && !zombie_part.skeletonized)
 			zombie_part.rotted = TRUE
@@ -227,7 +226,6 @@
 
 	zombie.bloodpool = 0 // Again, just in case.
 
-	// zombies cant rp, thus shouldnt be playable for most people
 	zombie.ghostize()
 
 /datum/antagonist/zombie/greet()
@@ -261,7 +259,7 @@
 		return
 
 	record_round_statistic(STATS_DEADITES_WOKEN_UP)
-	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
+	zombie.blood_volume = BLOOD_VOLUME_NORMAL
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
 	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
 	if(!infected_wake) //if we died, heal all of this too
@@ -279,7 +277,7 @@
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
-	set category = "ZOMBIE"
+	set category = "RoleUnique.Zizo"
 
 	if(!mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE

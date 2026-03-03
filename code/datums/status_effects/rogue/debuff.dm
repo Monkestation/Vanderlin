@@ -91,24 +91,6 @@
 	. = ..()
 	to_chat(owner, "<span class='danger'>I am starving to death! I need to eat something before it's too late!</span>")
 
-
-//SILVER DAGGER EFFECT
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
-	duration = 1 MINUTES
-
-/*	Pointless subtype, code doesnt handle it well, dont use
-/datum/status_effect/debuff/silver_curse/greater
-	duration = 10 SECONDS
-*/
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"
-
 /datum/status_effect/debuff/wiz
 	id = "wiz"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/wiz
@@ -216,8 +198,8 @@
 /datum/status_effect/debuff/uncookedfood
 	id = "uncookedfood"
 	effectedstats = null
-	duration = 10 MINUTES
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -230,14 +212,15 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(100)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/uncookedfood)
 
 /datum/status_effect/debuff/badmeal
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/badmeal
 	id = "badmeal"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/badmeal
 	name = "Foul Food!"
@@ -251,17 +234,18 @@
 		C.add_stress(/datum/stress_event/badmeal)
 
 /datum/status_effect/debuff/burnedfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	id = "burnedfood"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stress_event/burntmeal)
-		C.add_nausea(100)
+		C.add_nausea(50)
 
 /atom/movable/screen/alert/status_effect/debuff/burntmeal
 	name = "Burnt Food!"
@@ -269,23 +253,24 @@
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/rotfood
 	id = "rotfood"
 	effectedstats = null
-	duration = 10 MINUTES
+	alert_type = null
+	duration = 4 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
 /atom/movable/screen/alert/status_effect/debuff/rotfood
 	name = "Rotten Food!"
-	desc = "<span class='warning'>MAGGOT-INFESTED BILE RISES TO MY THROAT!</span>\n"
+	desc = "<span class='warning'>I felt a maggot wriggle as I swallowed...</span>\n"
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood/on_apply()
-	if(HAS_TRAIT(owner, TRAIT_ROT_EATER))
+	if(HAS_TRAIT(owner, TRAIT_ROT_EATER) || HAS_TRAIT(owner, TRAIT_NASTY_EATER))
 		return FALSE
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		C.add_nausea(200)
+		C.add_nausea(50)
 		C.add_stress(/datum/stress_event/rotfood)
 
 /datum/status_effect/debuff/bleeding
@@ -406,17 +391,6 @@
 /atom/movable/screen/alert/status_effect/debuff/revive
 	name = "Revival Sickness"
 	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
-	icon_state = "muscles"
-
-/datum/status_effect/debuff/viciousmockery
-	id = "viciousmockery"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	duration = 1 MINUTES
-	effectedstats = list(STATKEY_STR = -2, STATKEY_SPD = -2,STATKEY_END = -2)
-
-/atom/movable/screen/alert/status_effect/debuff/viciousmockery
-	name = "Vicious Mockery"
-	desc = "<span class='warning'>THAT SPOONY BARD! ARGH!</span>\n"
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/chilled
@@ -613,3 +587,14 @@
 	name = "Electrified"
 	desc = "Your body is charged with unstable electricity!"
 	icon_state = "dazed"
+
+/datum/status_effect/debuff/cursed
+	id = "cursed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
+	effectedstats = list(STATKEY_LCK = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
+	duration = 10 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/cursed
+	name = "Cursed"
+	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
+	icon_state = "debuff"

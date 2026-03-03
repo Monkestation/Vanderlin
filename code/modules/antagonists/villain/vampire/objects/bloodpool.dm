@@ -1,7 +1,7 @@
-#define VAMPCOST_ONE 5000
-#define VAMPCOST_TWO 6000
-#define VAMPCOST_THREE 7500
-#define VAMPCOST_FOUR 10000
+#define VAMPCOST_ONE 3000
+#define VAMPCOST_TWO VAMPCOST_ONE * 1.5
+#define VAMPCOST_THREE VAMPCOST_TWO * 1.5
+#define VAMPCOST_FOUR VAMPCOST_THREE * 1.5
 
 /obj/structure/vampire/bloodpool
 	name = "Crimson Crucible"
@@ -14,6 +14,7 @@
 	var/list/available_project_types = list(
 		/datum/vampire_project/power_growth,
 		/datum/vampire_project/amulet_crafting,
+		/datum/vampire_project/maille_crafting,
 		/datum/vampire_project/armor_crafting
 	)
 
@@ -332,11 +333,13 @@
 			to_chat(user, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
 			lord.ascended = TRUE
 			var/list/all_subordinates = user.clan_position.get_all_subordinates()
-			for(var/mob/living/carbon/human/subordinate_body  in all_subordinates)
+			for(var/datum/clan_hierarchy_node/node as anything in all_subordinates)
+				var/mob/living/carbon/human/subordinate_body = node.assigned_member
+				if(!subordinate_body)
+					continue
 				subordinate_body.maxbloodpool += 1000
 				for(var/S in MOBSTATS)
 					subordinate_body.change_stat(S, 2)
-
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth_4
 			break
 /datum/vampire_project/amulet_crafting
@@ -358,20 +361,42 @@
 		P.name = amulet_name
 	creation_point.visible_message(span_notice("An amulet materializes from the crimson crucible."))
 
+/datum/vampire_project/maille_crafting
+	display_name = "Ancient Maille"
+	description = "Craft a complete set of vampiric maille from crystallized blood."
+	total_cost = VAMPCOST_ONE * 0.75
+	completion_sound = 'sound/misc/vcraft.ogg'
+
+/datum/vampire_project/maille_crafting/on_complete(atom/movable/creation_point)
+	var/turf/T = get_turf(bloodpool)
+	new /obj/item/clothing/head/helmet/ancient(T)
+	new /obj/item/clothing/neck/chaincoif/ancient(T)
+	new /obj/item/clothing/armor/cuirass/ancient(T)
+	new /obj/item/clothing/armor/chainmail/hauberk/ancient(T)
+	new /obj/item/clothing/gloves/chain/ancient(T)
+	new /obj/item/clothing/pants/chainlegs/kilt/ancient(T)
+	new /obj/item/clothing/shoes/boots/armor/ancient(T)
+	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
+
 /datum/vampire_project/armor_crafting
-	display_name = "Wicked Plate"
+	display_name = "Ancient Plate"
 	description = "Craft a complete set of vampiric armor from crystallized blood."
-	total_cost = 5000
+	total_cost = VAMPCOST_ONE
 	completion_sound = 'sound/misc/vcraft.ogg'
 
 /datum/vampire_project/armor_crafting/on_complete(atom/movable/creation_point)
-	new /obj/item/clothing/pants/platelegs/vampire (bloodpool.loc)
-	new /obj/item/clothing/gloves/chain/vampire (bloodpool.loc)
-	new /obj/item/clothing/armor/chainmail/hauberk/vampire (bloodpool.loc)
-	new /obj/item/clothing/armor/plate/vampire (bloodpool.loc)
-	new /obj/item/clothing/shoes/boots/armor/vampire (bloodpool.loc)
-	new /obj/item/clothing/head/helmet/heavy/vampire (bloodpool.loc)
+	var/turf/T = get_turf(bloodpool)
+	new /obj/item/clothing/head/helmet/heavy/ancient(T)
+	new /obj/item/clothing/face/facemask/steel/ancient(T)
+	new /obj/item/clothing/neck/gorget/ancient(T)
+	new /obj/item/clothing/armor/plate/ancient(T)
+	new /obj/item/clothing/armor/chainmail/ancient(T)
+	new /obj/item/clothing/wrists/bracers/ancient(T)
+	new /obj/item/clothing/gloves/plate/ancient(T)
+	new /obj/item/clothing/pants/platelegs/ancient(T)
+	new /obj/item/clothing/shoes/boots/armor/ancient(T)
 	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
+
 
 #undef VAMPCOST_ONE
 #undef VAMPCOST_TWO

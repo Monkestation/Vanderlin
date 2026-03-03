@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/abyssor)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/abyssor)
 
 	invocation = "Feel Abyssor's rage!"
 	invocation_type = INVOCATION_SHOUT
@@ -52,7 +52,7 @@
 	fish_movement_type = /datum/fish_movement/accelerando
 	force = DAMAGE_DAGGER
 	dropshrink = 0.8
-	possible_item_intents = list(/datum/intent/dagger/thrust, /datum/intent/food)
+	possible_item_intents = list(DAGGER_THRUST, /datum/intent/food)
 	sellprice = 50
 	beauty = 8
 	favorite_bait = list(
@@ -67,4 +67,4 @@
 			FISH_BAIT_VALUE = VEGETABLES,
 		),
 	)
-	fish_traits = list(/datum/fish_trait/predator, /datum/fish_trait/territorial)
+	fish_traits = list(/datum/fish_trait/predator, /datum/fish_trait/carnivore)

@@ -104,8 +104,8 @@
 		click_list |= LEFT_CLICK
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		click_list |= ALT_CLICKED
-	if(LAZYACCESS(modifiers, CTRL_CLICK))
-		click_list |= CTRL_CLICK
+	if(LAZYACCESS(modifiers, CTRL_CLICKED))
+		click_list |= CTRL_CLICKED
 
 	var/good_hit = TRUE
 	if(!choice.check_click(click_list))
@@ -116,16 +116,17 @@
 			anvil_presses -= anvil_presses[choice]
 			user.balloon_alert(user, "Great Hit!")
 			playsound(host_anvil, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
-			for(var/mob/M in GLOB.player_list)
-				if(!is_in_zweb(M.z,host_anvil.z))
-					continue
-				var/turf/M_turf = get_turf(M)
-				var/far_smith_sound = sound(pick('sound/items/smithdist1.ogg','sound/items/smithdist2.ogg','sound/items/smithdist3.ogg'))
-				if(M_turf)
-					var/dist = get_dist(M_turf, host_anvil.loc)
-					if(dist < 7)
-						continue
-					M.playsound_local(M_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
+
+			// for(var/mob/player as anything in GLOB.player_list)
+			// 	if(!is_in_zweb(player.z, host_anvil.z))
+			// 		continue
+			// 	var/turf/player_turf = get_turf(player)
+			// 	var/far_smith_sound = sound(pick('sound/items/smithdist1.ogg','sound/items/smithdist2.ogg','sound/items/smithdist3.ogg'))
+			// 	if(player_turf)
+			// 		var/dist = get_dist(player_turf, host_anvil.loc)
+			// 		if(dist < 7)
+			// 			continue
+			// 		player.playsound_local(player_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
 
 
 		else
@@ -149,6 +150,9 @@
 	return TRUE
 
 /datum/anvil_challenge/process(seconds_per_tick)
+	if(!user.Adjacent(host_anvil))
+		end_minigame(FALSE)
+		return
 	for(var/note in anvil_presses)
 		if(anvil_presses[note] + 0.6 SECONDS > REALTIMEOFDAY)
 			continue
@@ -161,16 +165,7 @@
 			else
 				generate_anvil_beats()
 
-/datum/anvil_challenge/proc/end_minigame()
-	var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
-	if(host_anvil.always_perfect)
-		failed_notes = 0
-		off_time = 0
-		success = 100
-
-	// Calculate quality score based on performance
-	success = max(smithlevel * 5, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)) +((smithlevel * 5) - 15)))
-
+/datum/anvil_challenge/proc/end_minigame(completed = TRUE)
 	UnregisterSignal(user.client, COMSIG_CLIENT_CLICK_DIRTY)
 	user.client.show_popup_menus = had_context
 	STOP_PROCESSING(SSanvil, src)
@@ -181,7 +176,19 @@
 	user.client?.screen -= anvil_hud
 	QDEL_NULL(anvil_hud)
 	host_anvil.smithing = FALSE
-	host_anvil.process_minigame_result(success, user, (failed_notes == total_notes))
+
+	if(completed)
+		var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
+		if(host_anvil.always_perfect)
+			failed_notes = 0
+			off_time = 0
+			success = 100
+
+		// Calculate quality score based on performance
+		success = max(smithlevel * 5, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)) +((smithlevel * 5) - 15)))
+
+		host_anvil.process_minigame_result(success, user, (failed_notes == total_notes))
+
 	host_anvil = null
 
 /atom/movable/screen/anvil_hud
@@ -242,10 +249,10 @@
 			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
 			icon_state = "note-right-alt"
 		if(5)
-			click_requirements = list(LEFT_CLICK, CTRL_CLICK)
+			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
 			icon_state = "note-ctrl"
 		if(6)
-			click_requirements = list(RIGHT_CLICK, CTRL_CLICK)
+			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
 			icon_state = "note-right-ctrl"
 
 /atom/movable/screen/hud_note/proc/check_click(list/click_modifiers)

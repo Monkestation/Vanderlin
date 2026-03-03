@@ -5,7 +5,7 @@
 	pixel_x = 19;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "al" = (
 /obj/structure/bars/pipe{
@@ -13,7 +13,7 @@
 	pixel_x = 1;
 	pixel_y = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "ap" = (
 /obj/effect/mapping_helpers/secret_door_creator{
@@ -52,7 +52,7 @@
 	pixel_x = 1;
 	pixel_y = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "aF" = (
 /obj/item/paper{
@@ -91,7 +91,7 @@
 	pixel_x = 17;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "bh" = (
 /obj/structure/chair/wood/alt,
@@ -106,7 +106,7 @@
 	pixel_x = -18;
 	pixel_y = -1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "bm" = (
 /obj/structure/door/violet,
@@ -165,7 +165,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "cb" = (
 /obj/structure/fermentation_keg/random/beer,
@@ -174,7 +174,7 @@
 /area/under/tomb/indoors)
 "cf" = (
 /obj/item/soap,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "cg" = (
 /obj/item/chair/stool/bar,
@@ -296,7 +296,7 @@
 	pixel_x = -2;
 	pixel_y = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "dU" = (
 /obj/structure/bookcase,
@@ -769,7 +769,7 @@
 	pixel_y = -1;
 	pixel_x = -13
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "iT" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
@@ -795,7 +795,7 @@
 /area/under/tomb/indoors/royal)
 "iV" = (
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "iW" = (
 /obj/structure/table/stone_small,
@@ -827,7 +827,7 @@
 	pixel_x = -1;
 	pixel_y = 13
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "jk" = (
 /obj/structure/table/wood/reinf_long,
@@ -989,7 +989,7 @@
 	pixel_x = -2;
 	pixel_y = -14
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "lh" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
@@ -1029,7 +1029,7 @@
 /turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
 "lw" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "lA" = (
 /obj/structure/bars/pipe{
@@ -1037,7 +1037,7 @@
 	dir = 8;
 	pixel_x = -2
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "lF" = (
 /obj/structure/rack/shelf/biggest,
@@ -1050,8 +1050,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "lQ" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush_meagre,
@@ -1063,7 +1062,7 @@
 	pixel_x = -14;
 	pixel_y = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "lT" = (
 /obj/structure/closet/crate/crafted_closet/dark,
@@ -1095,7 +1094,7 @@
 	pixel_x = -11;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "mf" = (
 /obj/structure/trap/poison,
@@ -1113,7 +1112,7 @@
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "mj" = (
 /obj/item/plate,
@@ -1403,7 +1402,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
 "pc" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "pf" = (
 /obj/structure/fluff/walldeco/painting{
@@ -1508,7 +1507,7 @@
 /obj/structure/bars/pipe{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "qN" = (
 /obj/structure/spider/stickyweb,
@@ -1554,7 +1553,7 @@
 	pixel_x = -12;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "rh" = (
 /obj/structure/flora/grass/bush,
@@ -1617,7 +1616,7 @@
 	pixel_y = -1;
 	pixel_x = -17
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "rV" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
@@ -1758,11 +1757,10 @@
 	pixel_x = -14;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "um" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush,
@@ -1874,7 +1872,7 @@
 	dir = 1;
 	pixel_y = -8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "vK" = (
 /obj/structure/chair/bench,
@@ -1886,8 +1884,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "vR" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush/wall/tall,
@@ -1953,7 +1950,7 @@
 /obj/structure/bars/pipe{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "wR" = (
 /obj/item/chair/fancy,
@@ -2057,7 +2054,7 @@
 	pixel_x = -2;
 	pixel_y = -15
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "xD" = (
 /obj/structure/fluff/railing/border,
@@ -2091,11 +2088,11 @@
 /obj/structure/bars/pipe{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "xX" = (
 /obj/item/ammo_casing/caseless/arrow,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "xZ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -2292,7 +2289,7 @@
 	pixel_x = 1;
 	pixel_y = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "Ab" = (
 /obj/structure/easel,
@@ -2339,7 +2336,7 @@
 	pixel_x = 34;
 	pixel_y = 48
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Aq" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -2452,7 +2449,7 @@
 /obj/structure/bars/pipe{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Bn" = (
 /obj/structure/rack/shelf/big,
@@ -2533,7 +2530,7 @@
 /obj/item/clothing/shoes/jester,
 /obj/item/clothing/head/jester,
 /obj/item/clothing/pants/tights/colored/jester,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "BC" = (
 /obj/effect/decal/cleanable/sigil,
@@ -2561,7 +2558,7 @@
 	pixel_x = -3;
 	pixel_y = 2
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "BL" = (
 /obj/structure/spider/stickyweb,
@@ -2591,7 +2588,7 @@
 	pixel_x = -4;
 	pixel_y = -15
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Cd" = (
 /obj/structure/fluff/railing/border,
@@ -2681,8 +2678,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "Dc" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush,
@@ -2818,7 +2814,7 @@
 /area/under/tomb/indoors)
 "EY" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "EZ" = (
 /obj/item/chair/chair_nobles,
@@ -2836,7 +2832,7 @@
 	pixel_y = -1;
 	pixel_x = -11
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "Fi" = (
 /mob/living/carbon/human/species/orc/marauder,
@@ -2914,7 +2910,7 @@
 	pixel_y = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Ga" = (
 /obj/structure/fluff/railing/border{
@@ -2973,7 +2969,7 @@
 	pixel_x = 18;
 	pixel_y = 13
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "GI" = (
 /obj/structure/table/stone_small,
@@ -3067,7 +3063,7 @@
 /obj/structure/bars/pipe{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Hp" = (
 /obj/structure/winch{
@@ -3297,7 +3293,7 @@
 /area/under/tomb)
 "JS" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Kb" = (
 /obj/item/plate,
@@ -3320,7 +3316,7 @@
 	pixel_x = -2;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Ks" = (
 /turf/closed/wall/mineral/pipe,
@@ -3564,7 +3560,7 @@
 	pixel_x = -18;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Ns" = (
 /obj/structure/fluff/railing/border{
@@ -3738,8 +3734,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/wilds)
 "OR" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/flora/grass/bush/wall/tall,
@@ -3826,7 +3821,7 @@
 /area/under/tomb)
 "PK" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "PN" = (
 /obj/item/reagent_containers/glass/cup,
@@ -3956,7 +3951,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors)
 "Ri" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "Rj" = (
 /obj/structure/bars/pipe{
@@ -3964,7 +3959,7 @@
 	pixel_x = -14;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Rm" = (
 /obj/structure/fluff/railing/border{
@@ -4000,7 +3995,7 @@
 	pixel_x = -2;
 	pixel_y = -16
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "RK" = (
 /obj/effect/mapping_helpers/secret_door_creator{
@@ -4071,7 +4066,7 @@
 	pixel_x = 17;
 	pixel_y = 19
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Su" = (
 /obj/structure/closet/crate/chest,
@@ -4097,7 +4092,7 @@
 	pixel_y = -1;
 	pixel_x = -15
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "SE" = (
 /obj/structure/fluff/railing/border{
@@ -4164,7 +4159,7 @@
 /area/under/tomb/indoors)
 "TJ" = (
 /obj/item/natural/glass/shard,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "TM" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
@@ -4208,7 +4203,7 @@
 	pixel_x = -1;
 	pixel_y = 13
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Uc" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
@@ -4258,7 +4253,7 @@
 	pixel_x = 1;
 	pixel_y = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "Uq" = (
 /obj/item/ammo_casing/caseless/arrow,
@@ -4329,7 +4324,7 @@
 	pixel_x = -17;
 	pixel_y = 17
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "UV" = (
 /obj/structure/fluff/railing/border{
@@ -4398,7 +4393,7 @@
 	pixel_x = -12;
 	pixel_y = 0
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "VD" = (
 /turf/open/floor/tile,
@@ -4458,7 +4453,7 @@
 /obj/structure/bars/pipe{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Wu" = (
 /obj/item/natural/stone,
@@ -4509,7 +4504,7 @@
 	pixel_x = -2;
 	pixel_y = -17
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "WO" = (
 /obj/structure/bookcase/random/archive,
@@ -4705,7 +4700,7 @@
 	pixel_x = 18;
 	pixel_y = 13
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Zb" = (
 /turf/open/floor/cobblerock,

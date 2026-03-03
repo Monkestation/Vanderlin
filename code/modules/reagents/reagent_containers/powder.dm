@@ -36,11 +36,11 @@
 		var/mob/living/carbon/C = hit_atom
 		if(canconsume(C, silent = TRUE))
 			if(reagents.total_volume)
-				playsound(get_turf(C), 'sound/items/sniff.ogg', 100, FALSE)
+				playsound(C, 'sound/items/sniff.ogg', 100, FALSE)
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 	if(M == user)
@@ -61,10 +61,10 @@
 			if(!do_after(user, 1 SECONDS, M))
 				return FALSE
 
-	playsound(get_turf(M), 'sound/items/sniff.ogg', 100, FALSE)
+	playsound(M, 'sound/items/sniff.ogg', 100, FALSE)
 
 	if(reagents.total_volume)
-		reagents.trans_to(M, reagents.total_volume, transfered_by = user, method = "swallow")
+		reagents.trans_to(M, reagents.total_volume, transfered_by = user, method = SNORT)
 		SEND_SIGNAL(M, COMSIG_DRUG_SNIFFED, user)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 		record_round_statistic(STATS_DRUGS_SNORTED)
@@ -96,20 +96,21 @@
 	show_when_dead = FALSE
 
 /datum/reagent/druqks/on_mob_life(mob/living/carbon/M)
-	M.set_drugginess(30)
+	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+	M.set_drugginess(30 SECONDS)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
 	if(prob(5))
 		if(M.gender == FEMALE)
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	..()
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/M)
 	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	if(M.client)
 		ADD_TRAIT(M, TRAIT_DRUQK, "based")
 		M.refresh_looping_ambience()
@@ -147,8 +148,9 @@
 	metabolization_rate = 0.2
 
 /datum/reagent/ozium/on_mob_life(mob/living/carbon/M)
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	if(prob(5))
 		M.flash_fullscreen("whiteflash")
 	M.apply_status_effect(/datum/status_effect/buff/ozium)
@@ -187,10 +189,11 @@
 	animate(M.client)
 
 /datum/reagent/moondust/on_mob_life(mob/living/carbon/M)
-	if(M.reagents.has_reagent(/datum/reagent/moondust_purest))
+	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+	if(M.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(40, 0)
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	M.apply_status_effect(/datum/status_effect/buff/moondust)
 	if(prob(2))
 		M.flash_fullscreen("whiteflash")
@@ -232,10 +235,11 @@
 	M.remove_status_effect(/datum/status_effect/buff/moondust_purest)
 
 /datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M)
-	if(M.reagents.has_reagent(/datum/reagent/moondust))
+	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+	if(M.has_reagent(/datum/reagent/moondust))
 		M.Sleeping(40, 0)
-	if(M.has_flaw(/datum/charflaw/addiction/junkie))
-		M.sate_addiction()
+	if(M.has_quirk(/datum/quirk/vice/junkie))
+		M.sate_addiction(/datum/quirk/vice/junkie)
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
 	if(prob(20))
 		M.flash_fullscreen("whiteflash")

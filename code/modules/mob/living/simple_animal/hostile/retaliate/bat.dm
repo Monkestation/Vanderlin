@@ -37,18 +37,17 @@
 
 /mob/living/simple_animal/hostile/retaliate/bat/Initialize()
 	. = ..()
-	verbs += list(/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up,
-	/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down)
+	add_verb(src, list(/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up, /mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down))
 
 /mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up()
-	set category = "Bat Form"
+	set category = "RoleUnique.Vampire Bat"
 	set name = "Move Up"
 
 	if(zMove(UP, TRUE))
 		to_chat(src, "<span class='notice'>I fly upwards.</span>")
 
 /mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down()
-	set category = "Bat Form"
+	set category = "RoleUnique.Vampire Bat"
 	set name = "Move Down"
 
 	if(zMove(DOWN, TRUE))

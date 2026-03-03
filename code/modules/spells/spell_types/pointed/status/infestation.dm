@@ -33,7 +33,7 @@
 	. = ..()
 	var/mob/living/target = owner
 	to_chat(owner, span_danger("I am suddenly surrounded by a cloud of bugs!"))
-	target.Jitter(20)
+	target.adjust_jitter(20 SECONDS)
 	target.add_overlay(rotten)
 	RegisterSignal(owner, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(wash_off))
 
@@ -72,7 +72,7 @@
 
 	if(prob(33) && iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.add_nausea(pick(10,20))
+		C.add_nausea(rand(10,20))
 		to_chat(C, span_warning(pick(messages)))
 
 /atom/movable/screen/alert/status_effect/debuff/infestation

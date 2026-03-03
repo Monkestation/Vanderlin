@@ -180,7 +180,7 @@
 /turf/closed/mineral,
 /area/under/tomb/cave)
 "Z" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 
 (1,1,1) = {"

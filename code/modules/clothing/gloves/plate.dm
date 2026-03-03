@@ -25,6 +25,8 @@
 	grid_height = 32
 	item_weight = 7 * IRON_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
@@ -59,6 +61,19 @@
 	armor = ARMOR_PLATE_GOOD
 	item_weight = 7 * BLACKSTEEL_MULTIPLIER
 	sellprice = VALUE_SILVER_ITEM * 2
+
+/obj/item/clothing/gloves/plate/silver
+	name = "silver gauntlets"
+	desc = "Finely forged gauntlets made out of silver."
+	icon_state = "silvergloves"
+	armor = ARMOR_PLATE_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 12 * SILVER_MULTIPLIER
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/gloves/plate/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 	//............... Evil Gloves ............... //
 

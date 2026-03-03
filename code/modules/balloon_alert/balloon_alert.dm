@@ -15,14 +15,14 @@
  * * mob/viewer: The mob the text will be shown to. Nullable (But only in the form of it won't runtime).
  * * text: The text to be shown to viewer. Must not be null.
  */
-/atom/proc/balloon_alert(mob/viewer, text)
+/atom/proc/balloon_alert(mob/viewer, text, balloon_flag)
 	SHOULD_NOT_SLEEP(TRUE)
 
-	INVOKE_ASYNC(src, PROC_REF(balloon_alert_perform), viewer, text)
+	INVOKE_ASYNC(src, PROC_REF(balloon_alert_perform), viewer, text, balloon_flag)
 
 /// Create balloon alerts (text that floats up) to everything within range.
 /// Will only display to people who can see.
-/atom/proc/balloon_alert_to_viewers(message, self_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs)
+/atom/proc/balloon_alert_to_viewers(message, self_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, balloon_flag)
 	SHOULD_NOT_SLEEP(TRUE)
 
 	var/list/hearers = get_hearers_in_view(vision_distance, src, RECURSIVE_CONTENTS_CLIENT_MOBS)
@@ -38,12 +38,15 @@
 // MeasureText blocks. I have no idea for how long.
 // I would've made the maptext_height update on its own, but I don't know
 // if this would look bad on laggy clients.
-/atom/proc/balloon_alert_perform(mob/viewer, text)
+/atom/proc/balloon_alert_perform(mob/viewer, text, balloon_flag)
 	var/client/viewer_client = viewer?.client
 	if(isnull(viewer_client))
 		return
 
-	if(viewer.client?.prefs.toggles_maptext & DISABLE_BALLOON_ALERTS)
+	var/balloon_disabled = viewer_client.prefs.toggles_maptext & DISABLE_BALLOON_ALERTS
+	var/flag_disabled = viewer_client.prefs.toggles_maptext & balloon_flag
+
+	if(balloon_disabled || flag_disabled)
 		to_chat(viewer, span_emote("[name]: [text]"))
 		return
 

@@ -53,8 +53,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/datum/mind/tested = new_owner || owner
 	if(tested.has_antag_datum(type))
 		return FALSE
-	for(var/i in tested.antag_datums)
-		var/datum/antagonist/A = i
+	for(var/datum/antagonist/A as anything in tested.antag_datums)
 		if(is_type_in_typecache(src, A.typecache_datum_blacklist))
 			return FALSE
 
@@ -113,9 +112,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 		apply_innate_effects()
 		add_antag_hud(antag_hud_type, antag_hud_name)
 		give_antag_stress()
-		if(owner.current.has_flaw(/datum/charflaw/pacifist))
+		if(owner.current.has_quirk(/datum/quirk/vice/pacifist))
 			var/mob/living/carbon/human/human_user = owner.current
-			QDEL_NULL(human_user?.charflaw)
+			human_user.remove_quirk(/datum/quirk/vice/pacifist)
 			was_pacifist = TRUE
 		if(is_banned(owner.current) && replace_banned)
 			replace_banned_player()
@@ -152,8 +151,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 			owner.current.refresh_looping_ambience()
 			if(was_pacifist)
 				var/mob/living/carbon/human/human_user = owner.current
-				human_user.set_flaw(/datum/charflaw/pacifist)
-				human_user.charflaw.after_spawn(human_user, TRUE)
+				human_user.add_quirk(/datum/quirk/vice/pacifist)
 			if(!silent)
 				farewell()
 	var/datum/team/team = get_team()

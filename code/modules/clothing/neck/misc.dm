@@ -17,7 +17,7 @@
 /obj/item/clothing/neck/silveramulet
 	name = "silver amulet"
 	icon_state = "amulets"
-	slot_flags = ITEM_SLOT_NECK
+	slot_flags = ITEM_SLOT_NECK | ITEM_SLOT_WRISTS // It needs this or else it is less useful than a psycross
 	equip_sound = 'sound/foley/equip/cloak_equip.ogg'
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -253,6 +253,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
+	material_category = ARMOR_MAT_CHAINMAIL
 
 /obj/item/clothing/neck/chaincoif/AdjustClothes(mob/user)
 	if(loc == user)
@@ -333,6 +334,8 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
@@ -369,6 +372,8 @@
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
@@ -378,10 +383,18 @@
 	icon_state = "collar_of_servitude"
 	desc = "an ordinary gorget that has been imbued with a curse of the explosive sort by the inquisition. It is a powerfui tool designed to keep its wearer \
 		servile and obedient under threat of its explosive potential detonating on their necks."
+	clothing_flags = null
 	var/collar_unlocked = TRUE
 	var/is_in_neck_slot = FALSE
 	var/is_going_to_boom = FALSE
-	clothing_flags = null
+
+/obj/item/clothing/neck/gorget/explosive/Initialize(mapload, ...)
+	. = ..()
+	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
+
+/obj/item/clothing/neck/gorget/explosive/Destroy()
+	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
+	return ..()
 
 /obj/item/clothing/neck/gorget/explosive/examine(mob/user)
 	. = ..()
@@ -389,15 +402,6 @@
 		. += "The red gem gleams faintly, it seems to be unpowered."
 	else
 		. += "The red gem gleams intensely, piercing your gaze with its aura."
-
-/obj/item/clothing/neck/gorget/explosive/Initialize()
-	. = ..()
-
-	RegisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP, PROC_REF(tries_to_unequip))
-
-/obj/item/clothing/neck/gorget/explosive/Destroy()
-	UnregisterSignal(src, COMSIG_ITEM_PRE_UNEQUIP)
-	return ..()
 
 /obj/item/clothing/neck/gorget/explosive/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -408,6 +412,10 @@
 		return
 
 	//this checks if its inhand, instead of neck slot
+	is_in_neck_slot = FALSE
+
+/obj/item/clothing/neck/gorget/explosive/dropped(mob/user)
+	. = ..()
 	is_in_neck_slot = FALSE
 
 /obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
@@ -424,10 +432,15 @@
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
-	if(collar_unlocked)
+
+	if(!ismob(loc))
 		return
 
-	visible_message(span_warning("The [src] resists the pull to be unlocked!"))
+	if(collar_unlocked || !is_in_neck_slot)
+		return
+
+	to_chat(loc, span_warning("The [src] resists the pull to be unlocked!"))
+
 	return COMPONENT_ITEM_BLOCK_UNEQUIP
 
 /obj/item/clothing/neck/gorget/explosive/proc/prepare_to_go_boom()
@@ -475,7 +488,7 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!iscarbon(target))
 		return
@@ -516,6 +529,8 @@
 	clothing_flags = CANT_SLEEP_IN
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
+
+	material_category = ARMOR_MAT_CHAINMAIL
 
 /obj/item/clothing/neck/highcollier/AdjustClothes(mob/user)
 	if(loc == user)
@@ -588,7 +603,7 @@
 	. = ..()
 	. += span_info("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, params)
+/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
 	if(isturf(A))

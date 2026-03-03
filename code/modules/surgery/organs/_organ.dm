@@ -33,7 +33,7 @@
 	dropshrink = 0.85
 
 	/// What food typepath should be used when eaten
-	var/food_type = /obj/item/reagent_containers/food/snacks/organ
+	var/food_type = /obj/item/reagent_containers/food/snacks/meat/organ
 	/// Original owner of the organ, the one who had it inside them last
 	var/mob/living/carbon/last_owner = null
 
@@ -50,7 +50,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/organ/attack(mob/living/carbon/M, mob/user)
+/obj/item/organ/attack(mob/living/carbon/M, mob/user, list/modifiers)
 	if(M == user && ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(status == ORGAN_ORGANIC)
@@ -175,7 +175,7 @@
 		. += span_warning("[src] is starting to look discolored.")
 
 /obj/item/organ/proc/prepare_eat(mob/living/carbon/human/user)
-	var/obj/item/reagent_containers/food/snacks/organ/S = new food_type()
+	var/obj/item/reagent_containers/food/snacks/meat/organ/S = new food_type()
 	S.name = name
 	S.desc = desc
 	S.icon = icon
@@ -187,46 +187,6 @@
 		S.eat_effect = /datum/status_effect/debuff/rotfood
 	S.rotprocess = S.rotprocess * ((high_threshold - damage) / high_threshold)
 	return S
-
-/obj/item/reagent_containers/food/snacks/organ
-	name = "appendix"
-	icon_state = "appendix"
-	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 3)
-	foodtype = RAW | MEAT | GROSS
-	eat_effect = /datum/status_effect/debuff/uncookedfood
-	rotprocess = 5 MINUTES
-	var/obj/item/organ/organ_inside
-
-/obj/item/reagent_containers/food/snacks/organ/on_consume(mob/living/eater)
-	if(HAS_TRAIT(eater, TRAIT_ORGAN_EATER) && eat_effect != /datum/status_effect/debuff/rotfood)
-		eat_effect = /datum/status_effect/buff/foodbuff
-	if(bitecount >= bitesize)
-		record_featured_stat(FEATURED_STATS_CRIMINALS, eater)
-		record_round_statistic(STATS_ORGANS_EATEN)
-		SEND_SIGNAL(eater, COMSIG_ORGAN_CONSUMED, type, organ_inside)
-	. = ..()
-	eat_effect = initial(eat_effect)
-
-/obj/item/reagent_containers/food/snacks/organ/Destroy()
-	QDEL_NULL(organ_inside)
-	return ..()
-
-/obj/item/reagent_containers/food/snacks/organ/heart
-	name = "heart"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/lungs
-	name = "lungs"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
-
-/obj/item/reagent_containers/food/snacks/organ/liver
-	name = "liver"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT, /datum/reagent/organpoison = 2)
-	grind_results = list(/datum/reagent/organpoison = 6)
 
 ///Adjusts an organ's damage by the amount "d", up to a maximum amount, which is by default max damage
 /obj/item/organ/proc/applyOrganDamage(d, maximum = maxHealth)	//use for damaging effects
@@ -292,25 +252,66 @@
 /mob/living/carbon/regenerate_organs()
 	if(dna?.species)
 		dna.species.regenerate_organs(src)
+
+		// Species regenerate organs doesn't ALWAYS handle healing the organs because it's dumb
+		for(var/obj/item/organ/organ as anything in internal_organs)
+			organ.setOrganDamage(0)
+		set_heartattack(FALSE)
+
+		// heal ears after healing traits, since ears check TRAIT_DEAF trait
+		// when healing.
+		restoreEars()
+
 		return
 
+	// Default organ fixing handling
+	// May result in kinda cursed stuff for mobs which don't need these organs
+	var/obj/item/organ/lungs/lungs = getorganslot(ORGAN_SLOT_LUNGS)
+	if(!lungs)
+		lungs = new()
+		lungs.Insert(src)
+	lungs.setOrganDamage(0)
+
+	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
+	if(heart)
+		set_heartattack(FALSE)
 	else
-		if(!getorganslot(ORGAN_SLOT_LUNGS))
-			var/obj/item/organ/lungs/L = new()
-			L.Insert(src)
+		heart = new()
+		heart.Insert(src)
+	heart.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_HEART))
-			var/obj/item/organ/heart/H = new()
-			H.Insert(src)
+	var/obj/item/organ/tongue/tongue = getorganslot(ORGAN_SLOT_TONGUE)
+	if(!tongue)
+		tongue = new()
+		tongue.Insert(src)
+	tongue.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_TONGUE))
-			var/obj/item/organ/tongue/T = new()
-			T.Insert(src)
+	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
+	if(!eyes)
+		eyes = new()
+		eyes.Insert(src)
+	eyes.setOrganDamage(0)
 
-		if(!getorganslot(ORGAN_SLOT_EYES))
-			var/obj/item/organ/eyes/E = new()
-			E.Insert(src)
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+	if(!ears)
+		ears = new()
+		ears.Insert(src)
+	// ears.adjustEarDamage(-INFINITY, -INFINITY) // actually do: set_organ_damage(0) and deaf = 0
 
-		if(!getorganslot(ORGAN_SLOT_EARS))
-			var/obj/item/organ/ears/ears = new()
-			ears.Insert(src)
+	// heal ears after healing traits, since ears check TRAIT_DEAF trait
+	// when healing.
+	restoreEars()
+
+GLOBAL_LIST_INIT(all_organ_slots, get_all_slots())
+
+/// Get all possible organ slots by checking every organ, and then store it and give it whenever needed
+/proc/get_all_slots()
+	var/list/all_organ_slots = list()
+
+	if(!length(all_organ_slots))
+		for(var/obj/item/organ/an_organ as anything in subtypesof(/obj/item/organ))
+			if(!initial(an_organ.slot))
+				continue
+			all_organ_slots |= initial(an_organ.slot)
+
+	return all_organ_slots

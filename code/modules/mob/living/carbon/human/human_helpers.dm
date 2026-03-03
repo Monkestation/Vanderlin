@@ -2,9 +2,6 @@
 /mob/living/carbon/human/proc/change_name(new_name)
 	real_name = new_name
 
-// /mob/living/carbon/human/restrained(ignore_grab)
-// 	. = ((wear_armor && wear_armor.breakouttime) || ..())
-
 /mob/living/carbon/human/check_language_hear(language)
 	var/mob/living/carbon/V = src
 	if(!language)
@@ -13,7 +10,7 @@
 		if(istype(wear_neck, /obj/item/clothing/neck/talkstone))
 			return TRUE
 	if(!has_language(language))
-		if(has_flaw(/datum/charflaw/paranoid))
+		if(has_quirk(/datum/quirk/vice/paranoid))
 			V.add_stress(/datum/stress_event/paratalk)
 
 /mob/living/carbon/human/canBeHandcuffed()
@@ -39,18 +36,16 @@
 		return name_override
 	if(face_name)
 		if(id_name && (id_name != face_name))
-			return "Unknown [(pronouns == SHE_HER) ? "Woman" : "Man"]"
+			return "Unknown [(gender == FEMALE) ? "Woman" : "Man"]"
 		return face_name
 	if(id_name)
 		return id_name
 	return "Unknown"
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/human/proc/get_face_name(if_no_face="Unknown")
-	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
+/mob/living/carbon/human/proc/get_face_name(if_no_face = "Unknown")
+	if(!is_human_part_visible(src, HIDEFACE))
 		return if_no_face
-	if( head && (head.flags_inv&HIDEFACE) )
-		return if_no_face		//Likewise for hats
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
 	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || O.skeletonized )	//disfigured. use id-name if possible
 		return if_no_face
@@ -144,6 +139,7 @@
 
 	var/damage = 12
 	var/used_str = STASTR
+	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
 		return 30 * multiplier
@@ -160,13 +156,13 @@
 
 /// Fully randomizes everything in the character.
 // Reflect changes in [datum/preferences/proc/randomise_appearance_prefs]
-/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_patreon = TRUE)
+/mob/living/carbon/human/proc/randomize_human_appearance(randomise_flags = ALL, include_donator = TRUE)
 	if(!dna)
 		return
 
 	if(randomise_flags & RANDOMIZE_SPECIES)
-		var/rando_race = GLOB.species_list[pick(get_selectable_species(include_patreon))]
-		set_species(new rando_race(), FALSE)
+		var/rando_race = GLOB.species_list[pick(GLOB.roundstart_species)]
+		set_species(rando_race, FALSE)
 
 	var/datum/species/species = dna.species
 
@@ -190,8 +186,7 @@
 		skin_tone = pick_assoc(skin_list)
 
 	if(randomise_flags & RANDOMIZE_EYE_COLOR)
-		var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-		eyes.eye_color = random_eye_color()
+		set_eye_color(random_eye_color(TRUE))
 
 	// if(randomise_flags & RANDOMIZE_FEATURES)
 	// 	dna.features = random_features()

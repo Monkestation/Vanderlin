@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/ravox)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/ravox)
 
 	invocation = "Ravox deems your persistence worthy!"
 	invocation_type = INVOCATION_SHOUT
@@ -58,7 +58,7 @@
 	desc = "Your next attack deals additional damage and slows your target."
 	icon_state = "stressvg"
 
-/datum/status_effect/divine_strike/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+/datum/status_effect/divine_strike/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		return
 	if(!isliving(target))

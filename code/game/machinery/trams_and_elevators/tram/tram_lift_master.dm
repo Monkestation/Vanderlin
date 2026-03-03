@@ -41,6 +41,9 @@
 
 	var/obj/effect/landmark/tram/callback_platform
 
+	///this is our destination nation
+	var/datum/nation/destination
+
 /datum/lift_master/tram/New(obj/structure/industrial_lift/tram/lift_platform)
 	. = ..()
 	horizontal_speed = lift_platform.horizontal_speed

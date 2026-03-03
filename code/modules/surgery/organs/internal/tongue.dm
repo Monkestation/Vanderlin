@@ -14,14 +14,17 @@
 		/datum/language/dwarvish,
 		/datum/language/elvish,
 		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
 		/datum/language/beast,
+		/datum/language/rousman,
 		/datum/language/thievescant,
 		/datum/language/orcish,
 		/datum/language/deepspeak,
-		/datum/language/undead
+		/datum/language/undead,
+		/datum/language/halfling
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
@@ -58,10 +61,7 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/fish/handle_speech(datum/source, list/speech_args)
-	var/static/regex/fishtongue_s = new("s", "g")
-	var/static/regex/fishtongue_S = new("S", "g")
-	var/static/regex/fishtongue_z = new("z", "g")
-	var/static/regex/fishtongue_Z = new("Z", "g")
+	var/static/regex/fishtongue_sibilants = regex(@"([sz])", "gi")
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(!message)
 		return
@@ -71,10 +71,7 @@
 		return
 
 	if(message[1] != "*")
-		message = fishtongue_s.Replace(message, "sss")
-		message = fishtongue_S.Replace(message, "SSS")
-		message = fishtongue_z.Replace(message, "zzz")
-		message = fishtongue_Z.Replace(message, "ZZZ")
+		message = fishtongue_sibilants.Replace(message, "$1$1$1") // triple the letter
 	speech_args[SPEECH_MESSAGE] = message
 
 /obj/item/organ/tongue/fly
@@ -93,58 +90,6 @@
 		message = fly_buzz.Replace(message, "zzz")
 		message = fly_buZZ.Replace(message, "ZZZ")
 	speech_args[SPEECH_MESSAGE] = message
-
-/obj/item/organ/tongue/abductor
-	name = "superlingual matrix"
-	desc = ""
-	icon_state = "tongueayylmao"
-	say_mod = "gibbers"
-	taste_sensitivity = 101 // ayys cannot taste anything.
-	modifies_speech = TRUE
-	var/mothership
-
-/obj/item/organ/tongue/abductor/attack_self(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-
-	var/obj/item/organ/tongue/abductor/T = H.getorganslot(ORGAN_SLOT_TONGUE)
-	if(!istype(T))
-		return
-
-	if(T.mothership == mothership)
-		to_chat(H, "<span class='notice'>[src] is already attuned to the same channel as my own.</span>")
-
-	H.visible_message("<span class='notice'>[H] holds [src] in their hands, and concentrates for a moment.</span>", "<span class='notice'>I attempt to modify the attunement of [src].</span>")
-	if(do_after(H, 1.5 SECONDS, src))
-		to_chat(H, "<span class='notice'>I attune [src] to my own channel.</span>")
-		mothership = T.mothership
-
-/obj/item/organ/tongue/abductor/examine(mob/M)
-	. = ..()
-	if(HAS_TRAIT(M, TRAIT_ABDUCTOR_TRAINING) || HAS_TRAIT(M.mind, TRAIT_ABDUCTOR_TRAINING) || isobserver(M))
-		if(!mothership)
-			. += "<span class='notice'>It is not attuned to a specific mothership.</span>"
-		else
-			. += "<span class='notice'>It is attuned to [mothership].</span>"
-
-/obj/item/organ/tongue/abductor/handle_speech(datum/source, list/speech_args)
-	//Hacks
-	var/message = speech_args[SPEECH_MESSAGE]
-	var/mob/living/carbon/human/user = usr
-	var/rendered = "<span class='abductor'><b>[user.real_name]:</b> [message]</span>"
-	user.log_talk(message, LOG_SAY, tag="abductor")
-	for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
-		var/obj/item/organ/tongue/abductor/T = H.getorganslot(ORGAN_SLOT_TONGUE)
-		if(!istype(T))
-			continue
-		if(mothership == T.mothership)
-			to_chat(H, rendered)
-
-	for(var/mob/M in GLOB.dead_mob_list)
-		var/link = FOLLOW_LINK(M, user)
-		to_chat(M, "[link] [rendered]")
-
-	speech_args[SPEECH_MESSAGE] = ""
 
 /obj/item/organ/tongue/zombie
 	name = "rotting tongue"
@@ -222,11 +167,7 @@
 	modifies_speech = TRUE
 
 /obj/item/organ/tongue/snail/handle_speech(datum/source, list/speech_args)
-	var/new_message
 	var/message = speech_args[SPEECH_MESSAGE]
-	for(var/i in 1 to length(message))
-		if(findtext("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", message[i])) //Im open to suggestions
-			new_message += message[i] + message[i] + message[i] //aaalllsssooo ooopppeeennn tttooo sssuuuggggggeeessstttiiiooonsss
-		else
-			new_message += message[i]
-	speech_args[SPEECH_MESSAGE] = new_message
+	var/static/regex/stretch_regex = regex(@"(\l)", "g") // every letter, case-insensitive, return match in group 1
+	stretch_regex.Replace(message, "$1$1$1") // triple every letter
+	speech_args[SPEECH_MESSAGE] = stretch_regex.Replace(message, "$1$1$1") // triple every letter

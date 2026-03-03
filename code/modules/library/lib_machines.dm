@@ -15,7 +15,7 @@
 
 	var/static/list/manuel_name_to_path = list()
 
-/obj/machinery/printingpress/attackby(obj/item/O, mob/user, params)
+/obj/machinery/printingpress/attackby(obj/item/O, mob/user, list/modifiers)
 	if(printing)
 		to_chat(user, span_warning("[src] is currently printing. Please wait."))
 		return
@@ -92,7 +92,7 @@
 		to_chat(user, span_warning("[src] is empty."))
 		return
 
-/obj/machinery/printingpress/attack_hand_secondary(mob/user, params)
+/obj/machinery/printingpress/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -132,7 +132,7 @@
 	printing = TRUE
 	src.icon_state = "Ppress_Printing"
 	to_chat(user, span_warning("[src] starts printing..."))
-	playsound(src.loc, 'sound/misc/ppress.ogg', 100, FALSE)
+	playsound(src, 'sound/misc/ppress.ogg', 100, FALSE)
 	// Delete the blank paper as it's consumed during printing
 	if(loaded_paper)
 		qdel(loaded_paper)

@@ -1,4 +1,5 @@
 /obj/item/weapon
+	abstract_type = /obj/item/weapon
 	name = "weapon"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
@@ -19,8 +20,8 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = 200
-	wdefense = 3
+	max_integrity = INTEGRITY_STANDARD
+	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
 	embedding = list(
@@ -28,22 +29,28 @@
 		"embedded_pain_multiplier" = 1,
 		"embedded_fall_chance" = 0,
 	)
-	var/initial_sl
-	var/list/possible_enhancements
-	var/renamed_name
-	var/axe_cut = 0
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
+	var/axe_cut = 0
+	var/datum/special_intent/weapon_special
 
 /obj/item/weapon/Initialize(mapload)
 	. = ..()
 	if(!destroy_message)
-		var/yea = pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")
-		destroy_message = "<span class='warning'>[yea]</span>"
+		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
-	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0))
+	if(ispath(weapon_special))
+		weapon_special = new weapon_special()
+
+	if(randomize_blade_int)
+		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+
+/obj/item/weapon/Destroy(force)
+	if(weapon_special)
+		QDEL_NULL(weapon_special)
+	return ..()
 
 /obj/item/weapon/attack_hand(mob/user)
-	if(istype(user, /mob/living/carbon/human/species/werewolf)) //slop fix
+	if(is_species(user, /datum/species/werewolf)) //slop fix
 		return TRUE
 	. = ..()
 
@@ -58,6 +65,12 @@
 
 /obj/item/weapon/get_examine_string(mob/user, thats = FALSE)
 	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
+
+/obj/item/weapon/examine(mob/user)
+	. = ..()
+
+	if(weapon_special)
+		. += weapon_special.get_examine()
 
 /obj/item/weapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)
 	if(!get_sharpness() || !affecting.can_dismember(src))
@@ -106,3 +119,7 @@
 	else if(easy_dismember)
 		return probability * 1.5
 	return probability
+
+/obj/item/weapon/OnCrafted(dirin, mob/user)
+	. = ..()
+	update_integrity(max_integrity)

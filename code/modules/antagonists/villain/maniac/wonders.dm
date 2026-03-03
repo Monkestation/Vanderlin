@@ -108,8 +108,6 @@
 	if(H && !QDELETED(dream_master))
 		if(!length(H.maniacs))
 			V.add_stress(/datum/stress_event/saw_wonder)
-			V.add_curse(/datum/curse/schizophrenic, silent = TRUE) //let's not jumpscare normal people
-		//	V.add_client_colour(/datum/client_colour/maniac_marked) //Hurt peoples's eyes, we instead give them zizo's curse which make them experience the maniac's hallucinations, how cool.
 		if(!(dream_master in H.maniacs))
 			var/inscryption = "[key_text] - [key_num]"
 			LAZYSET(H.inscryptions, dream_master, inscryption)
@@ -117,7 +115,7 @@
 			LAZYSET(H.maniacs2wonder_ids, dream_master, wonder_id)
 			H.maniacs += dream_master
 			V.emote("scream")
-			V.blur_eyes(2)
+			V.set_eye_blur_if_lower(4 SECONDS)
 			SEND_SOUND(V, 'sound/villain/seen_wonder.ogg')
 			V.Paralyze(5 SECONDS)
 			gazed_at = TRUE

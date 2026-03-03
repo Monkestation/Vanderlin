@@ -8,7 +8,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/malum)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/malum)
 
 	invocation = "Let the weight of Malum's hammer fall!"
 	invocation_type = INVOCATION_SHOUT
@@ -22,7 +22,6 @@
 		/obj/item/weapon/hammer,
 		/obj/item/weapon/mace/goden/steel/warhammer,
 		/obj/item/weapon/mace/warhammer,
-		/obj/item/weapon/mace/goden/steel/malum,
 	))
 
 /datum/action/cooldown/spell/hammer_fall/can_cast_spell(feedback)

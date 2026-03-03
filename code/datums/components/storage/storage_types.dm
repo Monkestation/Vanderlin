@@ -7,13 +7,40 @@
 	insert_verb = "slide"
 	insert_preposition = "in"
 
+/datum/component/storage/concrete/scabbard/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(update_icon_state))
+
+/datum/component/storage/concrete/scabbard/UnregisterFromParent()
+	UnregisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE)
+	. = ..()
+
+/datum/component/storage/concrete/scabbard/proc/update_icon_state(obj/item/I)
+	if(!istype(I))
+		return
+	I.icon_state = initial(I.icon_state)
+	I.item_state = initial(I.item_state)
+
+	if(length(I.contents))
+		var/obj/item/sheathed_weapon = I.contents[1]
+		var/icon/possible_sheaths = icon(I.icon) //hehe
+		var/list/extensions = list()
+		for(var/s in possible_sheaths.IconStates(1))
+			extensions[s] = TRUE
+		qdel(possible_sheaths)
+		if(extensions[I.icon_state+"_[sheathed_weapon.icon_state]"])
+			I.icon_state += "_[sheathed_weapon.icon_state]"
+		else
+			I.icon_state += "-sheathed"
+
+
 /datum/component/storage/concrete/scabbard/knife/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))
 
 /datum/component/storage/concrete/scabbard/sword/New(list/raw_args)
 	. = ..()
-	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
+	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/long/daewalker))
 
 /datum/component/storage/concrete/scabbard/kazengun/New(list/raw_args)
 	. = ..()
@@ -42,7 +69,7 @@
 	UnregisterSignal(parent, COMSIG_ITEM_DROPPED)
 	return ..()
 
-/datum/component/storage/concrete/boots/attackby(datum/source, obj/item/attacking_item, mob/user, params, storage_click)
+/datum/component/storage/concrete/boots/attackby(datum/source, obj/item/attacking_item, mob/user, list/modifiers, storage_click)
 	if(isatom(parent) && can_be_inserted(attacking_item, stop_messages = TRUE))
 		var/atom/boots = parent
 		if(istype(attacking_item, /obj/item/weapon/knife) && ishuman(boots?.loc))
@@ -50,13 +77,13 @@
 			if(unlucky.shoes == parent && prob(40 - max((unlucky.STALUC * 4), 0)))
 				var/cached_aim = user.zone_selected
 				user.zone_selected = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-				unlucky.attackby(attacking_item, user, params)
+				unlucky.attackby(attacking_item, user, modifiers)
 				to_chat(unlucky, span_danger("UNLUCKY! I've stabbed myself with [attacking_item]!"))
 				user.zone_selected = cached_aim
 
 	return ..()
 
-/datum/component/storage/concrete/boots/handle_item_insertion(obj/item/I, prevent_warning, mob/M, datum/component/storage/remote, params, storage_click)
+/datum/component/storage/concrete/boots/handle_item_insertion(obj/item/I, prevent_warning, mob/M, datum/component/storage/remote, list/modifiers, storage_click)
 	. = ..()
 	if(!.)
 		return

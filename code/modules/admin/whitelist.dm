@@ -9,7 +9,7 @@ GLOBAL_PROTECT(whitelist)
 
 /proc/load_whitelist()
 	GLOB.whitelist = list()
-	for(var/line in world.file2list(WHITELISTFILE))
+	for(var/line in file2list(WHITELISTFILE))
 		if(!line)
 			continue
 		if(findtextEx(line,"#",1,2))
@@ -21,7 +21,8 @@ GLOBAL_PROTECT(whitelist)
 		load_whitelist()
 #ifdef TESTSERVER
 	var/plevel = check_patreon_lvl(ckey)
-	if(plevel >= 3)
+	var/tlevel = check_twitch_lvl(ckey)
+	if(plevel >= 3 || tlevel >= 1)
 		return TRUE
 #endif
 	return (ckey in GLOB.whitelist)

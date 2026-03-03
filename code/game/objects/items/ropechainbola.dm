@@ -54,7 +54,7 @@
 			M.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
 	return ..()
 
-/obj/item/rope/attack(mob/living/carbon/C, mob/living/user)
+/obj/item/rope/attack(mob/living/carbon/C, mob/living/user, list/modifiers)
 	if(user.used_intent.type != /datum/intent/tie)
 		..()
 		return
@@ -103,7 +103,7 @@
 		if(target.handcuffed)
 			return
 
-		if(!user.temporarilyRemoveItemFromInventory(src) )
+		if(user && !user.temporarilyRemoveItemFromInventory(src) )
 			return
 
 		var/obj/item/cuffs = src
@@ -112,12 +112,12 @@
 		target.set_handcuffed(cuffs)
 
 		target.update_handcuffed()
-		return
+		return TRUE
 	else
 		if(target.legcuffed)
 			return
 
-		if(!user.temporarilyRemoveItemFromInventory(src) )
+		if(user && !user.temporarilyRemoveItemFromInventory(src))
 			return
 
 		var/obj/item/cuffs = src
@@ -128,7 +128,7 @@
 		target.add_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, multiplicative_slowdown = legcuff_multiplicative_slowdown)
 
 		target.update_inv_legcuffed()
-		return
+		return TRUE
 
 /obj/item/rope/chain
 	name = "chain"
@@ -136,30 +136,24 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "chain"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	force = 10
+	force = DAMAGE_WHIP - 10
+	throwforce = DAMAGE_WHIP - 15
+	wdefense = MEDIOCRE_PARRY
+	possible_item_intents = list(/datum/intent/tie, WHIP_LASH)
 	blade_dulling = DULLING_BASHCHOP
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = WHIPWOOSH
-	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	associated_skill = /datum/skill/combat/whipsflails
-	wdefense = 1
 	throw_speed = 1
 	throw_range = 3
 	breakouttime = 30 SECONDS
 	slipouttime = 1 MINUTES
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
 	melting_material = /datum/material/iron
 	melt_amount = 40
 	firefuel = null
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
-
-/datum/intent/whip
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("whips", "strikes", "smacks")
-	penfactor = 40
-	chargetime = 5
 
 /obj/item/rope/net
 	name = "rope net"
@@ -167,46 +161,40 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "net"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	force = 10
-	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	icon_state = "net"
+	throw_speed = 1.5
 	breakouttime = 3.5 SECONDS //easy to apply, easy to break out of
 	gender = NEUTER
-	var/knockdown = 0
+	var/knockdown = 2 SECONDS
+	legcuff_multiplicative_slowdown = 2
 
-/obj/item/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	if(!..())
-		return
-	playsound(src.loc,'sound/blank.ogg', 75, TRUE)
+/obj/item/rope/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
+	. = ..()
+	if(.)
+		playsound(src,'sound/combat/wooshes/flail_swing.ogg', 75, TRUE)
 
-/obj/item/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/item/rope/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
 		return//abort
-	ensnare(hit_atom)
+	if(prob(100 * (throwingdatum?.thrower?.get_skill_level(/datum/skill/craft/traps, TRUE) || 1) / 3))
+		ensnare(hit_atom)
 
-/obj/item/net/proc/ensnare(mob/living/carbon/C)
-	if(!C.legcuffed && C.num_legs >= 2)
-		visible_message("<span class='danger'>\The [src] ensnares [C]!</span>")
-		C.legcuffed = src
-		forceMove(C)
-		C.update_inv_legcuffed()
+/obj/item/rope/net/proc/ensnare(mob/living/carbon/C)
+	if(C.num_legs >= 2 && apply_cuffs(C, leg = TRUE))
+		C.visible_message(span_danger("[src] ensnares [C]!"), span_userdanger("[src] entraps you!!"))
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
-		to_chat(C, "<span class='danger'>\The [src] entraps you!</span>")
-		//C.Knockdown(knockdown)
 		C.apply_status_effect(/datum/status_effect/debuff/netted)
-		playsound(src, 'sound/blank.ogg', 50, TRUE)
+		playsound(src, 'sound/combat/hits/nodmg (2).ogg', 100, TRUE)
+		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
+			C.Knockdown(knockdown)
 
 // Failsafe in case the item somehow ends up being destroyed
-/obj/item/net/Destroy()
+/obj/item/rope/net/Destroy()
 	if(iscarbon(loc))
 		var/mob/living/carbon/M = loc
 		if(M.legcuffed == src)
-			M.legcuffed = null
-			M.remove_movespeed_modifier(MOVESPEED_ID_LEGCUFF_SLOWDOWN, TRUE)
-			M.update_inv_legcuffed()
-			if(M.has_status_effect(/datum/status_effect/debuff/netted))
-				M.remove_status_effect(/datum/status_effect/debuff/netted)
+			M.remove_status_effect(/datum/status_effect/debuff/netted)
 	return ..()
 
 /obj/structure/noose
@@ -231,7 +219,7 @@
 
 /obj/structure/noose/gallows
 	name = "gallows"
-	desc = "Stranded and hanging, limp and dead."
+	desc = "Read through six lines written by the most honest man in the world, and one will find enough in them to hang him."
 	icon_state = "gallows"
 	SET_BASE_PIXEL(0, 0)
 	max_integrity = 100
@@ -239,15 +227,14 @@
 /obj/structure/noose/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(has_buckled_mobs())
-		for(var/m in buckled_mobs)
-			var/mob/living/buckled_mob = m
+		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
 			buckled_mob.adjustBruteLoss(10)
 			buckled_mob.Knockdown(60)
 	return ..()
 
-/obj/structure/noose/attackby(obj/item/W, mob/user, params)
+/obj/structure/noose/attackby(obj/item/W, mob/user, list/modifiers)
 	if (W.get_sharpness())
 		if(do_after(user, 1 SECONDS, src))
 			new /obj/item/rope(loc)
@@ -288,7 +275,7 @@
 				to_chat(M, "<span class='userdanger'>I tie \the [src] over my neck...</span>")
 			else
 				to_chat(M, "<span class='userdanger'>[user] ties \the [src] over my neck!</span>")
-			playsound(user.loc, 'sound/foley/noosed.ogg', 50, 1, -1)
+			playsound(user, 'sound/foley/noosed.ogg', 50, 1, -1)
 			return TRUE
 	user.visible_message("<span class='warning'>[user] fails to tie \the [src] over [M]'s neck!</span>")
 	to_chat(user, "<span class='warning'>I fail to tie \the [src] over [M]'s neck.</span>")
@@ -312,8 +299,7 @@
 	if(!has_buckled_mobs())
 		STOP_PROCESSING(SSobj, src)
 		return
-	for(var/m in buckled_mobs)
-		var/mob/living/buckled_mob = m
+	for(var/mob/living/buckled_mob as anything in buckled_mobs)
 		if(buckled_mob.get_bodypart("head"))
 			if(buckled_mob.stat != DEAD)
 				if(locate(/obj/structure/chair) in get_turf(src)) // So you can kick down the chair and make them hang, and stuff.
@@ -327,7 +313,7 @@
 											"<span class='danger'>[buckled_mob]'s hands are desperately clutching the noose.</span>",\
 											"<span class='danger'>[buckled_mob]'s limbs sway back and forth with diminishing strength.</span>")
 					buckled_mob.visible_message(pick(flavor_text))
-				playsound(buckled_mob.loc, 'sound/foley/noose_idle.ogg', 30, 1, -3)
+				playsound(buckled_mob, 'sound/foley/noose_idle.ogg', 30, 1, -3)
 			else
 				if(prob(1))
 					var/obj/item/bodypart/head/head = buckled_mob.get_bodypart("head")

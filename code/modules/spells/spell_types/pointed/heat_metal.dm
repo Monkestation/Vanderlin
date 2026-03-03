@@ -8,7 +8,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/malum)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/malum)
 
 	invocation = "Metal bends to the heat of Malum's forge!"
 	invocation_type = INVOCATION_SHOUT
@@ -112,7 +112,7 @@
 	target.dropItemToGround(targeteditem)
 	target.visible_message("<font color='yellow'>[target]'s [targeteditem.name] glows brightly and sears their flesh!</font>", "<font color='yellow'>Your [targeteditem.name] glows brightly, burning your hand!</font>")
 	target.emote("painscream")
-	playsound(target.loc, 'sound/misc/frying.ogg', 80, FALSE, -1)
+	playsound(target, 'sound/misc/frying.ogg', 80, FALSE, -1)
 	var/datum/effect_system/spark_spread/sparks = new()
 	sparks.set_up(1, 1, target.loc)
 	sparks.start()
@@ -149,7 +149,7 @@
 	)
 
 	target.emote("painscream")
-	playsound(target.loc, 'sound/misc/frying.ogg', 80, FALSE, -1)
+	playsound(target, 'sound/misc/frying.ogg', 80, FALSE, -1)
 	var/datum/effect_system/spark_spread/sparks = new()
 	sparks.set_up(1, 1, target.loc)
 	sparks.start()

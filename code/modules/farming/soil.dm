@@ -95,7 +95,7 @@
 	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
 
 	return_nutrients_to_soil()
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming, TRUE)
 	var/chance_to_ruin = 50 - (farming_skill * 25)
 	if(prob(chance_to_ruin))
 		ruin_produce()
@@ -122,8 +122,9 @@
 		record_round_statistic(STATS_PLANTS_HARVESTED)
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
+	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
-/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
 		if(!plant || !produce_ready)
 			to_chat(user, span_warning("There is nothing to harvest!"))
@@ -133,7 +134,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user)
 	var/obj/item/old_item
 	if(istype(attacking_item, /obj/item/storage/sack))
 		var/list/seeds = list()
@@ -153,7 +154,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		to_chat(user, span_notice("I begin to uproot the crop..."))
@@ -165,7 +166,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		var/obj/item/weapon/hoe/hoe = attacking_item
 		to_chat(user, span_notice("I begin to till the soil..."))
@@ -177,7 +178,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user)
 	var/water_amount = 0
 	if(istype(attacking_item, /obj/item/reagent_containers))
 		if(water >= MAX_PLANT_WATER * 0.8)
@@ -201,7 +202,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user)
 	var/fertilize_success = FALSE
 
 	if(istype(attacking_item, /obj/item/fertilizer))
@@ -236,7 +237,7 @@
 	adjust_potassium(fert.potassium_content)
 	return TRUE
 
-/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user, params)
+/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user)
 	if(weeds < MAX_PLANT_WEEDS * 0.3)
 		return FALSE
 	if(attacking_item == null)
@@ -246,16 +247,18 @@
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
 			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
 		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user)
 	if(plant)
 		return FALSE
 	if(istype(attacking_item, /obj/item/weapon/shovel))
@@ -292,7 +295,7 @@
 		return
 	. = ..()
 
-/obj/structure/soil/attack_hand_secondary(mob/user, params)
+/obj/structure/soil/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -300,7 +303,7 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -310,22 +313,22 @@
 	if(try_handle_flatten(weapon, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_seed_planting(attacking_item, user, params))
+	if(try_handle_seed_planting(attacking_item, user))
 		return
-	if(try_handle_uprooting(attacking_item, user, params))
+	if(try_handle_uprooting(attacking_item, user))
 		return
-	if(try_handle_tilling(attacking_item, user, params))
+	if(try_handle_tilling(attacking_item, user))
 		return
-	if(try_handle_watering(attacking_item, user, params))
+	if(try_handle_watering(attacking_item, user))
 		return
-	if(try_handle_harvest(attacking_item, user, params))
+	if(try_handle_harvest(attacking_item, user))
 		return
-	if(try_handle_fertilizing(attacking_item, user, params))
+	if(try_handle_fertilizing(attacking_item, user))
 		return
 	for(var/obj/item/bagged_item in attacking_item.contents)
-		if(try_handle_fertilizing(bagged_item, user, params))
+		if(try_handle_fertilizing(bagged_item, user))
 			return
 	return ..()
 
@@ -365,7 +368,7 @@
 	if(plant && plant_dead)
 		plant_dead = FALSE
 		plant_health = 10.0
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 
 	// Dendor provides balanced nutrients if low
 	if(nitrogen < 30)
@@ -382,7 +385,7 @@
 	// And it grows a little!
 	if(plant)
 		if(add_growth(2 MINUTES))
-			update_icon()
+			update_appearance(UPDATE_OVERLAYS)
 
 /// adjust water
 /obj/structure/soil/proc/adjust_water(adjust_amount)
@@ -652,14 +655,14 @@
 
 	// Calculate max quality points based on total potential time
 	// Base time + production time + reasonable harvest window
-	var/total_potential_time = plant.maturation_time + plant.produce_time
+	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
 
 	var/progress_ratio = quality_points / max_quality_points
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += dt * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds

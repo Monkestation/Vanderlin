@@ -122,8 +122,8 @@
 /datum/action/cooldown/spell/enslave_mortal/proc/complete_enslavement_ritual(mob/living/carbon/human/vampire, mob/living/carbon/human/target)
 	target.make_vampire_slave(vampire)
 
-	playsound(vampire.loc, 'sound/magic/ethereal_exit.ogg', 75, TRUE)
-	playsound(target.loc, 'sound/magic/ethereal_exit.ogg', 75, TRUE)
+	playsound(vampire, 'sound/magic/ethereal_exit.ogg', 75, TRUE)
+	playsound(target, 'sound/magic/ethereal_exit.ogg', 75, TRUE)
 
 	vampire.visible_message(
 		span_boldwarning("Dark energy erupts around [vampire] and [target] as the ritual completes! [target] staggers as their will is broken!"),
@@ -136,4 +136,3 @@
 
 /datum/action/cooldown/spell/enslave_mortal/proc/create_enslavement_effects(mob/living/carbon/human/vampire, mob/living/carbon/human/target)
 	make_tracker_effects(vampire.loc, vampire, 1, "soul", 3, /obj/effect/tracker/drain, 3)
-	// make_tracker_effects(target.loc, target, 1, "soul", 3, /obj/effect/tracker/drain, 3)

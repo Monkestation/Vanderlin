@@ -78,6 +78,8 @@ SUBSYSTEM_DEF(job)
 	if(!latejoin)
 		position_limit = job.spawn_positions
 	JobDebug("Player: [player] is now Rank: [job.get_informed_title(player)], JCP:[job.current_positions], JPL:[position_limit]")
+	if(istype(player) && player?.client?.prefs.multi_char_ready)
+		player.finalize_multi_ready_character()
 	player.mind.set_assigned_role(job)
 	unassigned -= player
 	job.adjust_current_positions(1)
@@ -100,32 +102,33 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/GiveRandomJob(mob/dead/new_player/player)
 	JobDebug("GRJ Giving random job, Player: [player]")
 	. = FALSE
+	var/client/player_client = player.client
+	var/datum/preferences/player_prefs = player_client.prefs
+
 	for(var/datum/job/job as anything in shuffle(joinable_occupations))
+		if(QDELETED(player))
+			return
+
 		if(job.title in GLOB.noble_positions) //If you want a command position, select it!
 			continue
 
-		if(is_role_banned(player.ckey, job.title) || QDELETED(player))
-			if(QDELETED(player))
-				JobDebug("GRJ isbanned failed, Player deleted")
-				break
+		if(is_role_banned(player.ckey, job.title))
 			JobDebug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 			continue
 
-		if(is_race_banned(player.ckey, player.client.prefs.pref_species.id)|| QDELETED(player))
-			if(QDELETED(player))
-				JobDebug("GRJ is_race_banned failed, Player deleted")
-				break
-			JobDebug("GRJ is_race_banned failed, Player: [player], Race: [player.client.prefs.pref_species.id]")
+		if(is_race_banned(player.ckey, player_prefs.pref_species.id))
+			JobDebug("GRJ is_race_banned failed, Player: [player], Race: [player_prefs.pref_species.id]")
 			continue
 
 		if(!job.can_random)
 			JobDebug("GRJ can't random into this job, Job: [job.title], Player: [player]")
 			continue
 
-		if(!job.player_old_enough(player.client))
+		if(!job.player_old_enough(player_client))
 			JobDebug("GRJ player not old enough, Player: [player]")
 			continue
-		if(job.required_playtime_remaining(player.client))
+
+		if(job.required_playtime_remaining(player_client))
 			JobDebug("GRJ player not enough playtime, Player: [player], Job: [job.title]")
 			continue
 
@@ -133,20 +136,19 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with antagonist role, Player: [player], Job: [job.title]")
 			continue
 
-		if((length(job.allowed_races) && !(player.client.prefs.pref_species.id in job.allowed_races)) || \
-			(length(job.blacklisted_species) && (player.client.prefs.pref_species.id in job.blacklisted_species)))
-			JobDebug("GRJ incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
+		if(!job.prefs_species_check(player_prefs))
+			JobDebug("GRJ incompatible with species, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
-			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
+		if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
-			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
+		if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
+			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+		if(length(job.allowed_sexes) && !(player_prefs.gender in job.allowed_sexes))
 			JobDebug("GRJ incompatible with sex, Player: [player], Job: [job.title]")
 			continue
 
@@ -175,19 +177,128 @@ SUBSYSTEM_DEF(job)
 			if(AssignRole(player, job))
 				return TRUE
 
+/// Consolidated job eligibility check
+/datum/controller/subsystem/job/proc/check_job_eligibility(mob/dead/new_player/player, datum/job/job)
+	if(QDELETED(player))
+		return FALSE
+
+	var/datum/preferences/player_prefs = player.client.prefs
+
+	if(is_role_banned(player.ckey, job.title))
+		JobDebug("Eligibility failed: role banned, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(is_race_banned(player.ckey, player_prefs.pref_species.id))
+		JobDebug("Eligibility failed: race banned, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(!job.player_old_enough(player.client))
+		JobDebug("Eligibility failed: not old enough, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(job.required_playtime_remaining(player.client))
+		JobDebug("Eligibility failed: playtime, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(player.mind && (job.title in player.mind.restricted_roles))
+		JobDebug("Eligibility failed: restricted role, Player: [player], Job: [job.title]")
+		return FALSE
+
+	var/dominated_species_check = FALSE
+	var/player_species_id_job = player_prefs.pref_species.id_override ? player_prefs.pref_species.id_override : player_prefs.pref_species.id
+
+	if(length(job.allowed_races) && !(player_species_id_job in job.allowed_races))
+		if(player.client?.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
+			dominated_species_check = TRUE
+		else
+			JobDebug("Eligibility failed: species not allowed, Player: [player], Job: [job.title]")
+			return FALSE
+
+	if(length(job.blacklisted_species) && (player_species_id_job in job.blacklisted_species))
+		JobDebug("Eligibility failed: species blacklisted, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
+		JobDebug("Eligibility failed: lastclass, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
+		JobDebug("Eligibility failed: leprosy, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
+		JobDebug("Eligibility failed: lunatic, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(CONFIG_GET(flag/usewhitelist))
+		if(job.whitelist_req && (!player.client.whitelisted()))
+			JobDebug("Eligibility failed: whitelist, Player: [player], Job: [job.title]")
+			return FALSE
+
+	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
+		JobDebug("Eligibility failed: age, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(length(job.allowed_sexes) && !(player_prefs.gender in job.allowed_sexes))
+		JobDebug("Eligibility failed: sex, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(!job.special_job_check(player))
+		JobDebug("Eligibility failed: special check, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(!job.enabled)
+		JobDebug("Eligibility failed: disabled, Player: [player], Job: [job.title]")
+		return FALSE
+
+	// Activate triumph if we passed with it
+	if(dominated_species_check)
+		player.client?.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
+
+	return TRUE
+
+/// Get job preferences for a player, considering multi-char
+/datum/controller/subsystem/job/proc/get_player_job_prefs(mob/dead/new_player/player, char_index = 0)
+	if(char_index > 0 && length(player.multi_ready_characters) >= char_index)
+		return player.multi_ready_characters[char_index]["job_preferences"]
+	return player.client.prefs.job_preferences
+
+/// Lock in the current character selection - call this after job assignment succeeds
+/mob/dead/new_player/proc/finalize_multi_ready_character()
+	if(!length(multi_ready_characters) || !client?.prefs)
+		return
+
+	var/list/char_data = multi_ready_characters[multi_ready_index]
+	if(!char_data)
+		return
+
+	// Make sure we've loaded the correct slot
+	var/target_slot = char_data["slot"]
+
+	multi_ready_assigned_slot = target_slot
+
+	if(client.prefs.default_slot != target_slot)
+		client.prefs.load_character(target_slot)
+		client.prefs.default_slot = target_slot
+
+
 /** Proc DivideOccupations
  *  fills var "assigned_role" for all ready players.
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/job/proc/DivideOccupations(list/required_jobs)
-	//Setup new player list and get the jobs list
 	JobDebug("Running DO")
 
 	//Get the players who are ready
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences() && player.mind && is_unassigned_job(player.mind.assigned_role))
 			unassigned += player
+			// Cache multi-ready characters if enabled
+			player.cache_multi_ready_characters()
 
 	initial_players_to_assign = unassigned.len
 
@@ -195,7 +306,7 @@ SUBSYSTEM_DEF(job)
 	if(unassigned.len == 0)
 		return validate_required_jobs(required_jobs)
 
-	//Jobs will have fewer access permissions if the number of players exceeds the threshold defined in game_options.txt
+	// Jobs will have fewer access permissions if the number of players exceeds the threshold
 	var/mat = CONFIG_GET(number/minimal_access_threshold)
 	if(mat)
 		if(mat > unassigned.len)
@@ -203,27 +314,21 @@ SUBSYSTEM_DEF(job)
 		else
 			CONFIG_SET(flag/jobs_have_minimal_access, TRUE)
 
-	//Shuffle players and jobs
+	// Shuffle players and jobs
 	unassigned = shuffle(unassigned)
 
 	HandleFeedbackGathering()
 
-
-	//Select one head
+	// Select required jobs (lord, merchant)
 	JobDebug("DO, Running Head Check")
 	do_required_jobs()
 	JobDebug("DO, Head Check end")
 
-	//Other jobs are now checked
 	JobDebug("DO, Running Standard Check")
 
-
-	// New job giving system by Donkie
-	// This will cause lots of more loops, but since it's only done once it shouldn't really matter much at all.
-	// Hopefully this will add more randomness and fairness to job giving.
-
-	// Loop through all levels from high to low
 	var/list/shuffledoccupations = shuffle(joinable_occupations)
+
+	// Loop through all priority levels from high to low
 	for(var/level in level_order)
 		// Create a weighted list of players based on their boosts
 		var/list/weighted_players = list()
@@ -234,123 +339,112 @@ SUBSYSTEM_DEF(job)
 				continue
 
 			// Calculate player's boost weight
-			var/player_weight = 1 // Base weight
+			var/player_weight = 1
 			var/list/player_boosts = get_player_boosts(player)
 
 			for(var/datum/job_priority_boost/boost in player_boosts)
 				if(boost.is_valid())
 					player_weight += boost.boost_amount
 
-			// Add player multiple times based on weight
 			weighted_players[player] = player_weight
 
 		// Shuffle the weighted player list
 		weighted_players = shuffle(weighted_players)
 
-		// Loop through weighted players (players with boosts appear more often)
+		// Loop through weighted players
 		for(var/i = 1 to length(weighted_players))
 			var/mob/dead/new_player/player = pickweight(weighted_players)
 			weighted_players -= player
 			if(!player)
 				continue
-			// Loop through all jobs
-			for(var/datum/job/job in shuffledoccupations)
-				if(!job)
-					continue
+			if(!(player in unassigned))
+				continue
+			if(QDELETED(player))
+				JobDebug("DO player deleted during assignment")
+				continue
 
-				// Standard job checks...
-				if(is_role_banned(player.ckey, job.title))
-					JobDebug("DO isbanned failed, Player: [player], Job:[job.title]")
-					continue
+			// Loop through characters FIRST (in priority order), then their preferred jobs
+			var/assigned = FALSE
 
-				if(is_race_banned(player.ckey, player.client.prefs.pref_species.id))
-					JobDebug("DO is_race_banned, Player: [player], Race: [player.client.prefs.pref_species.id]")
-					continue
+			if(length(player.multi_ready_characters))
+				for(var/char_idx in 1 to length(player.multi_ready_characters))
+					if(assigned)
+						break
 
-				if(QDELETED(player))
-					JobDebug("DO player deleted during job ban check")
-					break
+					var/list/char_data = player.multi_ready_characters[char_idx]
+					var/list/char_job_prefs = char_data["job_preferences"]
 
-				if(!job.player_old_enough(player.client))
-					JobDebug("DO player not old enough, Player: [player], Job:[job.title]")
-					continue
-
-				if(job.required_playtime_remaining(player.client))
-					JobDebug("DO player not enough playtime, Player: [player], Job: [job.title]")
-					continue
-
-				if(player.mind && (job.title in player.mind.restricted_roles))
-					JobDebug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
-					continue
-
-				var/list/player_boosts = get_player_boosts(player)
-
-				if((length(job.allowed_races) && !(player.client.prefs.pref_species.id in job.allowed_races)) || \
-					(length(job.blacklisted_species) && (player.client.prefs.pref_species.id in job.blacklisted_species)))
-					if(!player.client?.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
-						JobDebug("DO incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
-						continue
-					else
-						player.client?.activate_triumph_buy(TRIUMPH_BUY_RACE_ALL)
-
-				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
-					JobDebug("DO incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
-					continue
-
-				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
-					JobDebug("DO player already played class, Player: [player], Job: [job.title]")
-					continue
-
-				if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
-					JobDebug("DO incompatible with leprosy, Player: [player], Job: [job.title]")
-					continue
-
-				if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
-					JobDebug("DO incompatible with lunatic, Player: [player], Job: [job.title]")
-					continue
-
-				if(CONFIG_GET(flag/usewhitelist))
-					if(job.whitelist_req && (!player.client.whitelisted()))
+					if(!length(char_job_prefs))
 						continue
 
-				if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
-					JobDebug("DO incompatible with age, Player: [player], Job: [job.title]")
-					continue
+					// Apply this character temporarily for eligibility checks
+					player.apply_multi_ready_character(char_idx)
 
-				if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
-					JobDebug("DO incompatible with gender preference, Player: [player], Job: [job.title]")
-					continue
+					// Now check all jobs this character wants at this priority level
+					for(var/datum/job/job in shuffledoccupations)
+						if(!job)
+							continue
 
-				if(!job.special_job_check(player))
-					JobDebug("DO player did not pass special check, Player: [player], Job:[job.title]")
-					continue
+						// Does this character want this job at this priority level?
+						if(char_job_prefs[job.title] != level)
+							continue
 
-				if(!job.enabled)
-					JobDebug("DO player tried to play a disabled job, Player: [player], Job:[job.title]")
-					continue
+						// Is the job available?
+						if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
+							continue
 
-				// If the player wants that job on this level, then try give it to him.
-				if(player.client.prefs.job_preferences[job.title] == level)
-					// If the job isn't filled
-					if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-						// Use boost if applicable
+						// Is this character eligible?
+						if(!check_job_eligibility(player, job))
+							continue
+
+						// Success! Assign the job
+						JobDebug("Multi-char DO: Player [player], Char [char_idx] (Slot [char_data["slot"]]), Job [job.title]")
+						if(AssignRole(player, job))
+
+							// Handle boosts
+							var/list/player_boosts = get_player_boosts(player)
+							for(var/datum/job_priority_boost/boost in player_boosts)
+								if(boost.can_boost_job(job))
+									boost.use_boost()
+									JobDebug("DO boost used, Player: [player], Job: [job.title]")
+
+							assigned = TRUE
+							break
+			else
+				// Single character mode: just loop through jobs normally
+				for(var/datum/job/job in shuffledoccupations)
+					if(!job)
+						continue
+
+					if(player.client.prefs.job_preferences[job.title] != level)
+						continue
+
+					if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
+						continue
+
+					if(!check_job_eligibility(player, job))
+						continue
+
+					JobDebug("Single-char DO: Player [player], Job [job.title]")
+					if(AssignRole(player, job))
+						var/list/player_boosts = get_player_boosts(player)
 						for(var/datum/job_priority_boost/boost in player_boosts)
 							if(boost.can_boost_job(job))
 								boost.use_boost()
-								JobDebug("DO boost used, Player: [player], Job: [job.title], Boost: [boost.name]")
-
-						AssignRole(player, job)
-						unassigned -= player
-						JobDebug("DO job assigned with boost consideration, Player: [player], Job: [job.title]")
+								JobDebug("DO boost used, Player: [player], Job: [job.title]")
+						assigned = TRUE
 						break
 
+			if(assigned)
+				unassigned -= player
+
 	JobDebug("DO, Handling unassigned.")
-	// Hand out random jobs to the people who didn't get any in the last check
+	// Hand out random jobs to the people who didn't get any
 	for(var/mob/dead/new_player/player in unassigned)
 		HandleUnassigned(player)
 
 	JobDebug("DO, Handling unrejectable unassigned")
-	//Mop up people who can't leave.
+	// Mop up people who can't leave
 	for(var/mob/dead/new_player/player in unassigned)
 		RejectPlayer(player)
 
@@ -474,68 +568,65 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/do_required_jobs()
 	var/amt_picked = 0
 	var/list/require = list(/datum/job/lord, /datum/job/merchant)
+
 	for(var/job_type in require)
 		var/datum/job/job = GetJobType(job_type)
+
 		for(var/mob/dead/new_player/player in unassigned)
-			if(is_role_banned(player.ckey, job.title))
-				continue
-
-			if(is_race_banned(player.ckey, player.client.prefs.pref_species.id))
-				continue
-
 			if(QDELETED(player))
 				break
 
-			if(!job.player_old_enough(player.client))
-				continue
+			// MULTI-CHARACTER MODE
+			if(length(player.multi_ready_characters))
+				var/found_eligible_char = FALSE
 
-			if(job.required_playtime_remaining(player.client))
-				continue
+				for(var/char_idx in 1 to length(player.multi_ready_characters))
+					var/list/char_data = player.multi_ready_characters[char_idx]
+					var/list/char_job_prefs = char_data["job_preferences"]
 
-			if(player.mind && (job.title in player.mind.restricted_roles))
-				continue
+					// Does this character want this job at HIGH priority?
+					if(char_job_prefs[job.title] != JP_HIGH)
+						continue
 
-			if(length(job.allowed_races) && !(player.client.prefs.pref_species.id in job.allowed_races))
-				continue
+					// Apply this character for eligibility check
+					player.apply_multi_ready_character(char_idx)
 
-			if(length(job.blacklisted_species) && (player.client.prefs.pref_species.id in job.blacklisted_species))
-				return
+					// Check eligibility
+					if(!check_job_eligibility(player, job))
+						continue
 
-			if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
-				continue
+					// Check if job has room
+					if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
+						continue
 
-			if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
-				continue
+					// Success!
+					JobDebug("Required job multi-char: Player [player], Char [char_idx], Slot [char_data["slot"]], Job [job.title]")
+					if(AssignRole(player, job))
+						player.finalize_multi_ready_character()
+						unassigned -= player
+						amt_picked++
+						found_eligible_char = TRUE
+						break
 
-			if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
-				continue
+				if(found_eligible_char)
+					continue // Move to next player
 
-			if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
-				continue
-
-			if(CONFIG_GET(flag/usewhitelist))
-				if(job.whitelist_req && (!player.client.whitelisted()))
+			// SINGLE CHARACTER MODE (original logic but using check_job_eligibility)
+			else
+				if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
 					continue
 
-			if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
-				continue
+				if(!check_job_eligibility(player, job))
+					continue
 
-			if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
-				continue
+				if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
+					continue
 
-			if(!job.special_job_check(player))
-				continue
-
-			if(!job.enabled)
-				continue
-
-			// If the player wants that job on this level, then try give it to him.
-			if(player.client.prefs.job_preferences[job.title] == JP_HIGH)
-				// If the job isn't filled
-				if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
-					AssignRole(player, job)
+				JobDebug("Required job single-char: Player [player], Job [job.title]")
+				if(AssignRole(player, job))
 					unassigned -= player
 					amt_picked++
+
 	return amt_picked
 
 /datum/controller/subsystem/job/proc/validate_required_jobs(list/required_jobs)
@@ -576,8 +667,11 @@ SUBSYSTEM_DEF(job)
 			RejectPlayer(player)
 
 /// Gives the player the stuff they should have with their rank
-/datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client)
+/datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client, reset_job_stats = TRUE)
 	equipping.job = job.title
+	equipping.job_type = job.type
+	if(job.parent_job)
+		equipping.job_type = job.parent_job.type
 
 	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
 
@@ -600,7 +694,29 @@ SUBSYSTEM_DEF(job)
 		if(related_policy)
 			to_chat(player_client, related_policy)
 
-	job.after_spawn(equipping, player_client)
+	job.after_spawn(equipping, player_client, reset_job_stats)
+
+	if(length(job.advclass_cat_rolls) || !ishuman(equipping))
+		return
+
+	var/mob/living/carbon/human/equipping_human = equipping
+	for(var/datum/quirk/quirk in equipping_human.quirks)
+		quirk.after_job_spawn(job)
+	// Ready up bonus
+	if(!equipping.islatejoin && player_client)
+		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
+		equipping.hydration = 800 // Set higher hydration
+		equipping.nutrition = 800
+		var/triumphs = 1
+		if(is_lord_job(job)) //monarch bonus
+			to_chat(player_client, span_notice("Heavy is the weight of the crown. But you have the resolve to wear it high. In this, you TRIUMPH."))
+			triumphs++
+			if(length(GLOB.clients) < LOWPOP_THRESHOLD) // every 5 players below lowpop racks the monarch another triumph
+				triumphs += ceil((LOWPOP_THRESHOLD - length(GLOB.clients)) / 5)
+		else
+			to_chat(player_client, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
+		player_client.adjust_triumphs(triumphs)
+
 
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method
@@ -632,8 +748,7 @@ SUBSYSTEM_DEF(job)
 		var/never = 0 //never
 		var/banned = 0 //banned
 		var/young = 0 //account too young
-		for(var/i in GLOB.new_player_list)
-			var/mob/dead/new_player/player = i
+		for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 			if(!(player.ready == PLAYER_READY_TO_PLAY && player.mind && !player.mind.assigned_role))
 				continue //This player is not ready
 			if(is_role_banned(player.ckey, job.title) || QDELETED(player))
@@ -723,7 +838,7 @@ SUBSYSTEM_DEF(job)
 		destination.JoinPlayerHere(M, FALSE)
 		return
 
-	if(!length(latejoin_trackers))
+	if(length(latejoin_trackers))
 		destination = pick(latejoin_trackers)
 		destination.JoinPlayerHere(M, buckle)
 		return
@@ -740,15 +855,17 @@ SUBSYSTEM_DEF(job)
 	//return GET_ERROR_ROOM
 
 /datum/controller/subsystem/job/proc/CanPickJob(mob/living/player, datum/job/job)
+	if(QDELETED(player))
+		return
+
 	. = FALSE
+
+	var/datum/preferences/player_prefs = player.client.prefs
 
 	if(is_role_banned(player.ckey, job.title))
 		return
 
-	if(is_race_banned(player.ckey, player.client.prefs.pref_species.id))
-		return
-
-	if(QDELETED(player))
+	if(is_race_banned(player.ckey, player_prefs.pref_species.id))
 		return
 
 	if(!job.player_old_enough(player.client))
@@ -760,16 +877,10 @@ SUBSYSTEM_DEF(job)
 	if(player.mind && (job.title in player.mind.restricted_roles))
 		return
 
-	if(length(job.allowed_races) && !(player.client.prefs.pref_species.id in job.allowed_races))
+	if(!job.prefs_species_check(player_prefs))
 		return
 
-	if(length(job.blacklisted_species) && (player.client.prefs.pref_species.id in job.blacklisted_species))
-		return
-
-	if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
-		return
-
-	if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
+	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
 		return
 
 	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
@@ -782,10 +893,10 @@ SUBSYSTEM_DEF(job)
 		if(job.whitelist_req && (!player.client.whitelisted()))
 			return
 
-	if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		return
 
-	if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+	if(length(job.allowed_sexes) && !(player_prefs.gender in job.allowed_sexes))
 		return
 
 	if(!job.special_job_check(player))

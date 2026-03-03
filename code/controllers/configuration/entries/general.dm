@@ -93,6 +93,8 @@
 
 /datum/config_entry/flag/allow_admin_asaycolor //Allows admins with relevant permissions to have a personalized asay color
 
+/datum/config_entry/flag/asay_simple_titles	// Use admin rank names as titles in asay/PMs
+
 /datum/config_entry/flag/allow_vote_restart	// allow votes to restart
 
 /datum/config_entry/flag/allow_vote_mode	// allow votes to change mode
@@ -516,3 +518,10 @@
 //Endpoint for Github Issues, the `owner/repo` part.
 /datum/config_entry/string/issue_slug
 	protection = CONFIG_ENTRY_LOCKED
+
+/**
+ * Tgui ui_act payloads larger than 2kb are split into chunks a maximum of 1kb in size.
+ * This flag represents the maximum chunk count the server is willing to receive.
+ */
+/datum/config_entry/number/tgui_max_chunk_count
+	default = 32

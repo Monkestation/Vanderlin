@@ -42,8 +42,8 @@
 		to_chat(H, span_warning("You must target a normal, living tree adjacent to you!"))
 		return
 
-	var/turf/below = get_step_multiz(target, DOWN)
-	if(below && istype(below, /turf/open/transparent/openspace))
+	var/turf/below = GET_TURF_BELOW(get_turf(target))
+	if(below && istype(below, /turf/open/openspace))
 		to_chat(H, span_warning("You must target the base of the tree!"))
 		return
 

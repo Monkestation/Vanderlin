@@ -9,7 +9,7 @@
 
 /// Deprecated: Use /datum/asset/spritesheet_batched where possible
 /datum/asset/spritesheet
-	_abstract = /datum/asset/spritesheet
+	abstract_type = /datum/asset/spritesheet
 	cross_round_cachable = TRUE
 	var/name
 	/// List of arguments to pass into queuedInsert
@@ -64,6 +64,8 @@
 		fdel("data/spritesheets/[name]_[size_id].png")
 	sizes = list()
 	to_generate = list()
+	cached_serialized_url_mappings = null
+	cached_serialized_url_mappings_transport_type = null
 	fully_generated = FALSE
 	var/old_load = load_immediately
 	load_immediately = TRUE
@@ -405,7 +407,7 @@
 /// Spritesheet that only uses simple PNGs and CSS keys. See `assets` variable.
 /// Deprecated: Use /datum/asset/spritesheet_batched where possible
 /datum/asset/spritesheet/simple
-	_abstract = /datum/asset/spritesheet/simple
+	abstract_type = /datum/asset/spritesheet/simple
 	/// Associative list of icon keys (CSS class names) -> PNG filepaths (single quote!)
 	/// File paths MUST be PNGs
 	var/list/assets

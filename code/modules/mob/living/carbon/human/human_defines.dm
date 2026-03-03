@@ -26,6 +26,7 @@
 	var/detail_color = "000"
 
 	var/skin_tone = "caucasian1"	//Skin tone
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 	var/lip_color = "white"
@@ -137,7 +138,7 @@
 	var/voice_type = null //  defines what sound pack we use. keep this null so mobs resort to their typical gender typing - preferences set this
 
 	blocks_emissive = NONE
-	var/datum/charflaw/charflaw
+	var/list/datum/quirk/quirks = list()
 
 	/// Assoc list of culinary preferences of the mob
 	var/list/culinary_preferences = list()

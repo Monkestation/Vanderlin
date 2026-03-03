@@ -65,6 +65,7 @@
 	var/aghost_toggle
 	var/last_charge_process
 	var/datum/patreon_data/patreon
+	var/datum/twitch_data/twitch
 	var/toggled_leylines = FALSE
 	/// The DPI scale of the client. 1 is equivalent to 100% window scaling, 2 will be 200% window scaling
 	var/window_scaling
@@ -174,12 +175,6 @@
 				updateprogbar()
 			else
 				mouse_pointer_icon = 'icons/effects/mousemice/human_attack.dmi'
-
-/mob
-	var/obj/effect/spell_rune/spell_rune
-	var/datum/intent/curplaying
-	var/accent = ACCENT_DEFAULT
-	var/cmode_timer
 
 /client/MouseUp(object, location, control, params)
 	if(!control)

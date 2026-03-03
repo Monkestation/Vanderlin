@@ -17,13 +17,12 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 4,
+		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/shields = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/medicine = 2,
@@ -38,7 +37,7 @@
 	spawned.merctype = 9
 
 /datum/outfit/mercenary/housecarl
-	name = "Housecarl"
+	name = "Housecarl (Mercenary)"
 	head = /obj/item/clothing/head/helmet/nasal
 	shoes = /obj/item/clothing/shoes/boots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
@@ -52,4 +51,4 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/weapon/sword/short/iron
 	pants = /obj/item/clothing/pants/trou/leather
-	backl = /obj/item/weapon/shield/wood
+	backl = /obj/item/storage/backpack/satchel

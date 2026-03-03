@@ -27,6 +27,7 @@ Basically, the items they pull cannot be pulled (except by the puller)
 	if(!istype(pulled, /obj/structure/closet))
 		return
 	strongpulling = pulled
+	UnregisterSignal(strongpulling, list(COMSIG_ATOM_CAN_BE_PULLED, COMSIG_ATOM_NO_LONGER_PULLED))
 	RegisterSignal(strongpulling, COMSIG_ATOM_CAN_BE_PULLED, PROC_REF(reject_further_pulls))
 	RegisterSignal(strongpulling, COMSIG_ATOM_NO_LONGER_PULLED, PROC_REF(on_no_longer_pulled))
 	// if(istype(strongpulling, /obj/structure/closet) && !istype(strongpulling, /obj/structure/closet/body_bag))
@@ -39,7 +40,7 @@ Basically, the items they pull cannot be pulled (except by the puller)
 /datum/component/strong_pull/proc/reject_further_pulls(datum/source, mob/living/puller)
 	SIGNAL_HANDLER
 	if(puller != parent) //for increasing grabs, you need to have a valid pull. thus, parent should be able to pull the same object again
-		to_chat(puller, "[strongpulling] is being gripped too tightly!")
+		to_chat(puller, span_warning("[strongpulling] is being gripped too tightly!"))
 		return COMSIG_ATOM_CANT_PULL
 
 /*

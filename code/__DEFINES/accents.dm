@@ -11,6 +11,8 @@
 #define ACCENT_MIDDLE_SPEAK "Middle Speak (Old Half-Orc)"
 #define ACCENT_ZALAD "Zalad Accent"
 #define ACCENT_HALFLING "No Swearing!"
+#define ACCENT_KOBOLD "Scale-thing!"
+#define ACCENT_ROUSMAN "Ratty Accent"
 
 GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_NONE = list(),
@@ -26,4 +28,6 @@ GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_MIDDLE_SPEAK = strings("accents/middlespeak.json", "full"),
 	ACCENT_ZALAD = strings("accents/zalad_replacement.json", "arabic"),
 	ACCENT_HALFLING = strings("accents/halfling_replacement.json", "halfling"),
+	ACCENT_KOBOLD = strings("accents/kobold_replacement.json", "kobold"),
+	ACCENT_ROUSMAN = strings("accents/rousman_replacement.json", "rous"),
 ))

@@ -108,7 +108,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "vi" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "vD" = (
 /obj/structure/roguetent,
@@ -116,7 +116,7 @@
 /area/under/tomb/indoors)
 "wr" = (
 /obj/structure/toilet,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /obj/item/natural/poo{
 	pixel_y = 9
 	},
@@ -278,7 +278,7 @@
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "Um" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Wk" = (
 /obj/item/clothing/neck/elfears,

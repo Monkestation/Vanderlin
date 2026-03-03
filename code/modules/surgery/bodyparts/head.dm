@@ -37,10 +37,7 @@
 	grabtargets = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	resistance_flags = FLAMMABLE
 
-	/// Brainkill means that this head is considered dead and revival is impossible
-	var/brainkill = FALSE
-
-/obj/item/bodypart/head/grabbedintents(mob/living/user, precise)
+/obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
 	switch(used_limb)
 		if(BODY_ZONE_HEAD)
@@ -58,7 +55,10 @@
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_NECK)
-			return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage)
+			if(user == grabbed)
+				return list(/datum/intent/grab/move, /datum/intent/grab/choke)
+			else
+				return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage)
 
 /obj/item/bodypart/head/Destroy()
 	QDEL_NULL(brainmob) //order is sensitive, see warning in handle_atom_del() below
@@ -174,7 +174,7 @@
 			eyes_overlay.icon_state = eyes.eye_icon_state
 
 			if(eyes.eye_color)
-				eyes_overlay.color = "#" + eyes.eye_color
+				eyes_overlay.color = eyes.eye_color
 
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'

@@ -36,4 +36,4 @@
 /datum/supply_pack/storage/tray
 	name = "Tray"
 	cost = 10
-	contains = /obj/item/storage/bag/tray
+	contains = /obj/item/tray

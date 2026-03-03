@@ -56,11 +56,11 @@
 /datum/repeatable_crafting_recipe/crafting/wickercloak
 	name = "wicker cloak"
 	requirements = list(
-		/obj/item/natural/dirtclod = 2,
+		/obj/item/natural/clod/dirt = 2,
 		/obj/item/grown/log/tree/stick= 4,
 		/obj/item/natural/fibers = 3,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/cloak/wickercloak
 	craftdiff = 0
@@ -68,11 +68,11 @@
 /datum/repeatable_crafting_recipe/crafting/bog_cowl
 	name = "bog cowl"
 	requirements = list(
-		/obj/item/natural/dirtclod= 1,
+		/obj/item/natural/clod/dirt= 1,
 		/obj/item/grown/log/tree/stick= 3,
 		/obj/item/natural/fibers = 2,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/neck/bogcowl
 	craftdiff = 0
@@ -347,6 +347,36 @@
 	output = /obj/item/weapon/whip/cane
 	craftdiff = 0
 
+/datum/repeatable_crafting_recipe/crafting/cane
+	name = "wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/naturalcane
+	name = "natural wooden cane"
+	requirements = list(
+		/obj/item/grown/log/tree/small= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/weapon/mace/cane/natural
+	required_intent = /datum/intent/dagger/cut
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/spoon
 	name = "wooden spoon"
 	requirements = list(
@@ -430,7 +460,7 @@
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
-	output = /obj/item/plate/tray
+	output = /obj/item/tray
 	output_amount = 2
 	craft_time = 5 SECONDS
 
@@ -567,7 +597,7 @@
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
 /datum/repeatable_crafting_recipe/crafting/bigflail
-	name = "great militia flail"
+	name = "great studded flail"
 	requirements = list(
 		/obj/item/weapon/thresher= 1,
 		/obj/item/rope/chain = 1,
@@ -637,6 +667,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/grain/wheat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/oatbait
 	name = "bait (oat)"
@@ -647,6 +678,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/grain/oat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/sweetbait
 	name = "sweet bait (apple)"
@@ -657,6 +689,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/apple
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/berrybait
 	name = "sweet bait (berry)"
@@ -667,6 +700,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 /datum/repeatable_crafting_recipe/crafting/bloodbait
 	name = "blood bait"
@@ -677,6 +711,7 @@
 	)
 	starting_atom = /obj/item/reagent_containers/food/snacks/meat
 	attacked_atom = /obj/item/natural/cloth
+	craftdiff = 0
 
 //carveable glass? Sure why not
 /datum/repeatable_crafting_recipe/crafting/alchemical_vial
@@ -1021,7 +1056,7 @@
 	name = "opened clam"
 	output = list (
 		/obj/item/carvedgem/shell/openoyster,
-		/obj.item/carvedgem/rose/rawrose
+		/obj/item/carvedgem/rose/rawrose
 	)
 
 	requirements = list(

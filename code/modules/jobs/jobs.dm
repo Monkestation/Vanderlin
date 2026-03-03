@@ -12,6 +12,21 @@ GLOBAL_LIST_INIT(noble_positions, list(
 ))
 GLOBAL_PROTECT(noble_positions)
 
+GLOBAL_LIST_INIT(noble_courthand_positions, list(
+	/datum/job/lord::title,
+	/datum/job/consort::title,
+	/datum/job/hand::title,
+	/datum/job/prince::title,
+	/datum/job/captain::title,
+	/datum/job/steward::title,
+	/datum/job/magician::title,
+	/datum/job/archivist::title,
+	/datum/job/courtphys::title,
+	/datum/job/minor_noble::title,
+	/datum/job/adventurer/courtagent::title,
+))
+GLOBAL_PROTECT(noble_positions)
+
 GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/royalknight::title,
 	/datum/job/veteran::title,
@@ -30,6 +45,7 @@ GLOBAL_PROTECT(garrison_positions)
 
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
+	/datum/job/gmtemplar::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
@@ -48,8 +64,7 @@ GLOBAL_PROTECT(inquisition_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
-	/datum/job/armorsmith::title,
-	/datum/job/weaponsmith::title,
+	/datum/job/blacksmith::title,
 	/datum/job/tailor::title,
 	/datum/job/alchemist::title,
 	/datum/job/artificer::title,
@@ -70,6 +85,7 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	/datum/job/butcher::title,
 	/datum/job/cook::title,
 	/datum/job/carpenter::title,
+	/datum/job/mason::title,
 	/datum/job/jester::title,
 	/datum/job/hunter::title,
 	/datum/job/fisher::title,

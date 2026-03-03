@@ -1,5 +1,5 @@
 /datum/surgery/extract_chimeric_node
-	name = "Extract Chimeric Node"
+	name = "Extract Humors"
 	category = "Pestran"
 	heretical = TRUE
 	steps = list(
@@ -14,7 +14,7 @@
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/extract_chimeric_node
-	name = "Extract Chimeric Node"
+	name = "Extract Humors"
 	implements = list(
 		TOOL_SCALPEL = 80,
 		TOOL_SHARP = 60,
@@ -28,7 +28,7 @@
 
 /datum/surgery_step/extract_chimeric_node/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	if(HAS_TRAIT(target, TRAIT_NODE_EXTRACTED))
-		to_chat(user, span_warning("[target] has no chimeric nodes to extract!"))
+		to_chat(user, span_warning("[target] has no humors to extract!"))
 		return FALSE
 
 	if(!istype(target.buckled, /obj/structure/meathook))

@@ -13,7 +13,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 /obj/structure/industrial_lift
 	name = "lift platform"
 	desc = "A lightweight lift platform. It moves up and down."
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/wood.dmi'
 	icon_state = "weird1"
 	density = FALSE
 	anchored = TRUE
@@ -671,7 +671,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		return FALSE
 	return TRUE
 
-/obj/structure/industrial_lift/attack_hand(mob/user, params)
+/obj/structure/industrial_lift/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -696,7 +696,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 	return open_lift_radial(user)
 
-/obj/structure/industrial_lift/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/industrial_lift/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(!radial_travel)
 		return ..()
 

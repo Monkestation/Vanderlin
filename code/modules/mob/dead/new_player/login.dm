@@ -14,13 +14,10 @@
 
 	var/motd = global.config.motd
 	if(motd)
-		to_chat(src, "<div class=\"motd\">[motd]</div>", handle_whitespace=FALSE)
+		to_chat(src, "<div class=\"motd\">[motd]</div>")
 
 	if(GLOB.rogue_round_id)
 		to_chat(src, "<span class='info'>ROUND ID: [GLOB.rogue_round_id]</span>")
-
-//	if(motd)
-//		to_chat(src, "<B>If this is your first time here,</B> <a href='byond://?src=[REF(src)];rpprompt=1'>read this lore primer.</a>", handle_whitespace=FALSE)
 
 	if(GLOB.admin_notice)
 		to_chat(src, "<span class='notice'><b>Admin Notice:</b>\n \t [GLOB.admin_notice]</span>")
@@ -31,7 +28,6 @@
 
 	sight |= SEE_TURFS
 
-	new_player_panel()
 	client?.playtitlemusic()
 	if(SSticker.current_state < GAME_STATE_SETTING_UP)
 		var/tl = SSticker.GetTimeLeft()

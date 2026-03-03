@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(mobs)
 	var/datum/mob_affix_system/affix_system
 
 /datum/controller/subsystem/mobs/stat_entry()
-	..("P:[GLOB.mob_living_list.len]")
+	..("P:[GLOB.mob_living_list.len - SSmatthios_mobs.matthios_mobs.len - SSisland_mobs.island_mobs.len]")
 
 /datum/controller/subsystem/mobs/proc/MaxZChanged()
 	if (!islist(clients_by_zlevel))

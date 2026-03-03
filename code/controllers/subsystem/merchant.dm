@@ -26,7 +26,32 @@ SUBSYSTEM_DEF(merchant)
 	var/list/faction_rotation_schedule = list() // When each faction becomes active
 	var/list/active_faction_traders = list()
 
+	///this is our list of created nations
+	var/list/nations = list()
+
+	/// Cache of recipe component costs to avoid recalculation
+	var/static/list/recipe_base_values = list()
+	/// Cached list of all valid bounty items (items that can be obtained through gameplay)
+	var/static/list/valid_bounty_items = list()
+	/// This is a static of possible bounty items
+	var/static/list/obtainable_items = list()
+	/// Cached list of exclusions for the craft requirements
+	var/static/list/exclusions = list()
+	/// Same as above but adds all the subtypes
+	var/static/list/exclusion_subtypes = list(
+		/obj/item/ingot,
+		/obj/item/ore,
+		/obj/item/natural,
+	)
+
+
+
 /datum/controller/subsystem/merchant/Initialize(timeofday)
+	setup_map_nations()
+	// Initialize recipe values and bounty cache BEFORE factions cause they use it
+	initialize_recipe_values()
+	initialize_bounty_cache()
+
 	// Initialize supply packs
 	for(var/pack in subtypesof(/datum/supply_pack))
 		var/datum/supply_pack/P = new pack()
@@ -39,6 +64,256 @@ SUBSYSTEM_DEF(merchant)
 	// Initialize factions
 	initialize_factions()
 	return ..()
+
+/datum/controller/subsystem/merchant/proc/setup_map_nations()
+	return //! TODO: when lore done set this up
+
+/**
+ * Initializes recipe base values for ALL recipes
+ * This runs once and calculates component costs for every craftable item
+ */
+/datum/controller/subsystem/merchant/proc/initialize_recipe_values()
+	if(length(recipe_base_values))
+		return // Already initialized
+
+	log_game("Calculating recipe component costs for all craftable items...")
+
+	// Process ALL repeatable crafting recipes
+	for(var/datum/repeatable_crafting_recipe/recipe_type as anything in subtypesof(/datum/repeatable_crafting_recipe))
+		var/datum/repeatable_crafting_recipe/recipe = new recipe_type()
+		var/output = recipe.output
+
+		if(output)
+			var/cost = calculate_component_cost(recipe.requirements, recipe.reagent_requirements)
+			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
+
+		qdel(recipe)
+
+	// Process ALL orderless slapcraft recipes
+	for(var/datum/orderless_slapcraft/recipe_type as anything in subtypesof(/datum/orderless_slapcraft))
+		var/datum/orderless_slapcraft/recipe = new recipe_type()
+		var/output = recipe.output_item
+
+		if(output)
+			var/cost = calculate_component_cost(recipe.requirements)
+			recipe_base_values[output] = cost + 10
+
+		qdel(recipe)
+
+	// Process ALL anvil recipes
+	for(var/datum/anvil_recipe/recipe_type as anything in subtypesof(/datum/anvil_recipe))
+		var/datum/anvil_recipe/recipe = new recipe_type()
+		var/output = recipe.created_item
+
+		if(output)
+			var/list/all_requirements = list()
+			if(recipe.req_bar)
+				all_requirements[recipe.req_bar] = recipe.num_of_materials
+
+			if(length(recipe.additional_items))
+				for(var/item in recipe.additional_items)
+					all_requirements[item] = 1
+
+			var/cost = calculate_component_cost(all_requirements)
+			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
+
+		qdel(recipe)
+
+	// Process ALL artificer recipes
+	for(var/datum/artificer_recipe/recipe_type as anything in subtypesof(/datum/artificer_recipe))
+		var/datum/artificer_recipe/recipe = new recipe_type()
+		var/output = recipe.created_item
+
+		if(output)
+			var/list/all_requirements = list()
+			if(recipe.required_item)
+				all_requirements[recipe.required_item] = 1
+
+			if(length(recipe.additional_items))
+				for(var/item in recipe.additional_items)
+					all_requirements[item] = 1
+
+			var/cost = calculate_component_cost(all_requirements)
+			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
+
+		qdel(recipe)
+
+	// Process ALL container craft recipes
+	for(var/datum/container_craft/recipe_type as anything in subtypesof(/datum/container_craft))
+		var/datum/container_craft/recipe = new recipe_type()
+		var/output = recipe.output
+
+		if(output)
+			var/cost = calculate_component_cost(recipe.requirements, recipe.reagent_requirements)
+			recipe_base_values[output] = cost + 10
+
+		qdel(recipe)
+
+	log_game("Calculated recipe values for [length(recipe_base_values)] craftable items")
+
+/**
+ * Initializes the cache of valid bounty items
+ * This includes items that BOTH have sell values AND can be obtained through gameplay
+ */
+/datum/controller/subsystem/merchant/proc/initialize_bounty_cache()
+	if(length(valid_bounty_items))
+		return
+
+	// Build obtainable items list
+	for(var/datum/supply_pack/pack_type as anything in subtypesof(/datum/supply_pack))
+		var/datum/supply_pack/pack = new pack_type()
+
+		if(islist(pack.contains))
+			for(var/item_type in pack.contains)
+				obtainable_items |= item_type
+		else if(pack.contains)
+			obtainable_items |= pack.contains
+
+		qdel(pack)
+
+	for(var/path in exclusion_subtypes)
+		obtainable_items |= subtypesof(path)
+
+	for(var/path in exclusions)
+		obtainable_items |= path
+
+	for(var/datum/repeatable_crafting_recipe/recipe as anything in subtypesof(/datum/repeatable_crafting_recipe))
+		var/output = initial(recipe.output)
+		if(output)
+			obtainable_items |= output
+
+	for(var/datum/container_craft/recipe as anything in subtypesof(/datum/container_craft))
+		var/output = initial(recipe.output)
+		if(output)
+			obtainable_items |= output
+
+	for(var/datum/orderless_slapcraft/recipe as anything in subtypesof(/datum/orderless_slapcraft))
+		var/output = initial(recipe.output_item)
+		if(output)
+			obtainable_items |= output
+
+	for(var/datum/anvil_recipe/recipe as anything in subtypesof(/datum/anvil_recipe))
+		var/output = initial(recipe.created_item)
+		if(output)
+			obtainable_items |= output
+
+	for(var/datum/artificer_recipe/recipe as anything in subtypesof(/datum/artificer_recipe))
+		var/output = initial(recipe.created_item)
+		if(output)
+			obtainable_items |= output
+
+	// Only include items that are both obtainable AND have a base value
+	for(var/obj_type in obtainable_items)
+		var/base_value = get_item_base_value(obj_type)
+		if(base_value > 0)
+			valid_bounty_items |= obj_type
+
+	log_game("Initialized [length(valid_bounty_items)] valid bounty items (out of [length(obtainable_items)] obtainable items)")
+
+/**
+ * Calculates the total cost of components in a recipe
+ * Arguments:
+ *   requirements - List of required items (path = amount)
+ *   reagent_requirements - Optional list of required reagents
+ * Returns:
+ *   Total component cost, or 0 if cannot be calculated
+ */
+/datum/controller/subsystem/merchant/proc/calculate_component_cost(list/requirements, list/reagent_requirements)
+	var/total_cost = 0
+
+	// Calculate item component costs
+	if(length(requirements))
+		for(var/component_type in requirements)
+			var/amount = 1
+
+			// Handle different requirement formats
+			if(isnum(requirements[component_type]))
+				amount = requirements[component_type]
+			else if(islist(requirements[component_type]))
+				amount = length(requirements[component_type])
+
+			var/component_value = get_item_base_value(component_type)
+
+			if(component_value <= 0)
+				// If we can't determine a component's value, we can't calculate total cost
+				return 0
+
+			total_cost += component_value * amount
+
+	// Calculate reagent costs (simplified - you may want to add actual reagent values)
+	if(length(reagent_requirements))
+		for(var/reagent in reagent_requirements)
+			var/amount = reagent_requirements[reagent]
+			// Use a base cost per unit of reagent (adjust as needed)
+			total_cost += amount * 0.5
+
+	return total_cost
+
+/**
+ * Gets the base value of an item
+ * Checks recipe values first, then falls back to sellprice
+ * Arguments:
+ *   item_type - The path of the item
+ * Returns:
+ *   The base value, or 0 if not found
+ */
+/datum/controller/subsystem/merchant/proc/get_item_base_value(item_type)
+	// Check if it's a craftable item with recipe cost
+	if(item_type in recipe_base_values)
+		return recipe_base_values[item_type]
+
+	// Otherwise use sellprice directly
+	var/obj/item/temp = item_type
+	var/sellprice = initial(temp.sellprice)
+
+	if(sellprice && sellprice > 0)
+		return sellprice
+
+	return 0
+
+/datum/controller/subsystem/merchant/proc/get_sell_price(atom/sell_type, datum/world_faction/faction, sell_modifier = 1)
+	if(!faction)
+		faction = active_faction
+
+	if(!faction)
+		return 0
+
+	return faction.get_actual_sell_price(sell_type, sell_modifier)
+
+/datum/controller/subsystem/merchant/proc/get_sell_modifier(atom/sell_type, datum/world_faction/faction)
+	if(!faction)
+		faction = active_faction
+
+	if(!faction)
+		return 1
+
+	return faction.return_sell_modifier(sell_type)
+
+/datum/controller/subsystem/merchant/proc/is_bounty_item(atom/item_type, datum/world_faction/faction)
+	if(!faction)
+		faction = active_faction
+
+	if(!faction)
+		return FALSE
+
+	return (item_type in faction.bounty_items)
+
+/datum/controller/subsystem/merchant/proc/get_bounty_multiplier(atom/item_type, datum/world_faction/faction)
+	if(!faction)
+		faction = active_faction
+
+	if(!faction || !(item_type in faction.bounty_items))
+		return 0
+
+	return faction.bounty_items[item_type]
+
+/datum/controller/subsystem/merchant/proc/register_sellable_item(atom/sell_type)
+	if(sell_type in staticly_setup_types)
+		return
+
+	staticly_setup_types |= sell_type
+	for(var/datum/world_faction/faction in world_factions)
+		faction.setup_sell_data(sell_type)
 
 /datum/controller/subsystem/merchant/proc/initialize_factions()
 
@@ -185,9 +460,6 @@ SUBSYSTEM_DEF(merchant)
 	for(var/datum/world_faction/active_faction in world_factions)
 		active_faction.draw_selling_changes()
 
-/datum/controller/subsystem/merchant/proc/return_sell_modifier(atom/sell_type)
-	return active_faction.return_sell_modifier(sell_type)
-
 /datum/controller/subsystem/merchant/proc/set_faction_sell_values(atom/sell_type)
 	staticly_setup_types |= sell_type
 	for(var/datum/world_faction/active_faction in world_factions)
@@ -226,9 +498,30 @@ SUBSYSTEM_DEF(merchant)
 	// Reset for next boat
 	selected_faction.reset_trader_schedule()
 
+/datum/controller/subsystem/merchant/proc/unlock_supply_packs(list/incoming_packs)
+	for(var/datum/supply_pack/pack in supply_packs)
+		if(!(pack.type in incoming_packs))
+			continue
+		pack.unlocked = TRUE
+
+/datum/controller/subsystem/merchant/proc/handle_lift_contents(obj/structure/industrial_lift/tram/platform, list/items, datum/nation/shipped_nation)
+	if(!length(nations))
+		return
+	if(shipped_nation)
+		shipped_nation.handle_import_shipment(items, platform)
+	for(var/datum/nation/other_nation in nations)
+		if(shipped_nation == other_nation)
+			continue
+		shipped_nation.handle_global_shipment(items)
+
+
 /obj/Initialize()
 	. = ..()
 	if(sellprice)
 		if(!(type in SSmerchant.staticly_setup_types))
 			if(!istype(src, /obj/item/coin))
 				SSmerchant.set_faction_sell_values(type)
+
+/obj/item/proc/get_sell_price(datum/world_faction/faction, sell_modifier = 1)
+	return SSmerchant.get_sell_price(type, faction, sell_modifier)
+

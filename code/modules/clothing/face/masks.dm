@@ -44,6 +44,8 @@
 	melting_material = /datum/material/iron
 	melt_amount = 50
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
 	icon_state = "nosechain_g"
@@ -345,7 +347,7 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -440,10 +442,10 @@
 /obj/item/clothing/face/courtphysician
 	name = "court physican's mask"
 	desc = "Similar to a feldsher's mask, this one is made with actual bone! Don't ask whose."
-	icon_state = "courtmask"
-	item_state = "courtmask"
+	icon_state = "docmask"
+	item_state = "docmask"
 	resistance_flags = FLAMMABLE
-	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	sewrepair = TRUE

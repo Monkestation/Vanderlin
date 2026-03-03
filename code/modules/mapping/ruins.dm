@@ -20,8 +20,7 @@
 
 		testing("Ruin \"[name]\" placed at ([central_turf.x], [central_turf.y], [central_turf.z])")
 
-		for(var/i in get_affected_turfs(central_turf, 1))
-			var/turf/T = i
+		for(var/turf/T as anything in get_affected_turfs(central_turf, 1))
 			for(var/obj/structure/spawner/nest in T)
 				qdel(nest)
 			for(var/mob/living/simple_animal/monster in T)
@@ -108,8 +107,7 @@
 				if(current_pick.always_spawn_with) //If the ruin has part below, make sure that z exists.
 					for(var/v in current_pick.always_spawn_with)
 						if(current_pick.always_spawn_with[v] == PLACE_BELOW)
-							var/turf/T = locate(1,1,target_z)
-							if(!GET_TURF_BELOW(T))
+							if(!SSmapping.multiz_levels[target_z][Z_LEVEL_DOWN])
 								if(forced_z)
 									continue outer
 								else

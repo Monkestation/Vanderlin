@@ -1,5 +1,5 @@
-/mob/living/carbon/human/MiddleClick(mob/user, params)
-	..()
+/mob/living/carbon/human/MiddleClick(mob/user, list/modifiers)
+	. = ..()
 	if(!user)
 		return
 	var/obj/item/held_item = user.get_active_held_item()
@@ -14,7 +14,18 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/artery/neck)
-	else
+
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+			if(user == src)
+				user.visible_message(span_danger("[user] starts to shave [user.p_their()] hair with [held_item].</span>"))
+			else
+				user.visible_message(span_danger("[user] starts to shave [src]'s hair with [held_item].</span>"))
+			if(do_after(user, 10 SECONDS, src))
+				set_hair_style(/datum/sprite_accessory/hair/head/bald)
+				update_body()
+
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
@@ -28,7 +39,7 @@
 						has_stubble = FALSE
 						update_body()
 					else
-						held_item.melee_attack_chain(user, src, params)
+						held_item.melee_attack_chain(user, src, modifiers)
 				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
 					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
 					if(user == src)
@@ -44,11 +55,60 @@
 								var/mob/living/carbon/V = src
 								V.add_stress(/datum/stress_event/dwarfshaved)
 					else
-						held_item.melee_attack_chain(user, src, params)
+						held_item.melee_attack_chain(user, src, modifiers)
+		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
+			var/obj/item/clothing/shoes/shoes_check
+			var/mob/living/carbon/target
+			if(user == src)
+				return
+			else if(iscarbon(src))
+				target = src
+				shoes_check = locate(/obj/item/clothing/shoes) in list(target.shoes)
+			if(shoes_check)
+				if(istype(held_item, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 0)
+					var/obj/item/natural/cloth/cloth_check = held_item
+					if(cloth_check.reagents.total_volume < 0.1)
+						to_chat(user, span_warning("[cloth_check] is too dry to polish with!"))
+						return
+					var/DirtyWater = cloth_check.reagents.get_reagent_amount(/datum/reagent/water/gross)
+					if(DirtyWater)
+						to_chat(user, span_warning("[cloth_check] water is too dirty to polish anything with it!"))
+						return
+					to_chat(user, ("You start polishing the [shoes_check] with the [cloth_check]"))
+					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
+					if(do_after(user, 2 SECONDS, src))
+						cloth_check.reagents.remove_all(1)
+						shoes_check.polished = 1
+						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
+						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
+							user.add_stress(/datum/stress_event/noble_polishing_shoe)
+						target.add_stress(/datum/stress_event/shiny_shoes)
+						to_chat(user, ("You polished the [shoes_check]."))
+					return
+				else if(istype(held_item, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 1)
+					to_chat(user, span_notice("The [shoes_check] are already polished."))
+					return
+				if(istype(held_item, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 1)
+					to_chat(user, ("You start polishing the [shoes_check] with the animal"))
+					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
+					if(do_after(user, 2 SECONDS, src))
+						shoes_check.polished = 2
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
+							user.add_stress(/datum/stress_event/noble_polishing_shoe)
+						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
+						if(particle_spewer)
+							qdel(particle_spewer)
+						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle, shine_more = TRUE)
+						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
+						target.add_stress(/datum/stress_event/extra_shiny_shoes)
+						to_chat(user, ("You polished the [shoes_check]."))
+					return
+				if(istype(held_item, /obj/item/reagent_containers/food/snacks/fat) && user?.used_intent?.type == INTENT_USE && shoes_check.polished == 2)
+					to_chat(user, ("You can't possibily make it shine more."))
 
 /mob/living/carbon/human/Initialize()
-	// verbs += /mob/living/proc/mob_sleep
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 
 	//initialize limbs first
 	create_bodyparts()
@@ -61,6 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+	culture = new()
 
 	. = ..()
 
@@ -71,6 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
+	QDEL_NULL(culture)
 	GLOB.human_list -= src
 	return ..()
 
@@ -118,16 +180,15 @@
 	create_dna(src)
 	randomize_human(src)
 	dna.initialize_dna()
+	reset_limb_fingerprints()
 
-/mob/living/carbon/human/Stat()
-	..()
-	if(!client)
-		return
-	if(mind)
-		if(clan)
-			if(statpanel("Stats"))
-				stat("Vitae:",bloodpool)
-	return
+/mob/living/carbon/human/get_status_tab_items()
+	. = ..()
+	if(clan)
+		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
+	if(cleric)
+		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -350,7 +411,7 @@
 		addtimer(CALLBACK(src, PROC_REF(end_electrocution_animation), electrocution_skeleton_anim), anim_duration)
 
 	else //or just do a generic animation
-		flick_overlay_view(image(icon,src,"electrocuted_generic",ABOVE_MOB_LAYER), src, anim_duration)
+		flick_overlay_view(mutable_appearance(icon, "electrocuted_generic", ABOVE_MOB_LAYER), anim_duration)
 
 /mob/living/carbon/human/proc/end_electrocution_animation(mutable_appearance/MA)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, "#000000")
@@ -382,43 +443,70 @@
 	if(dna?.species?.update_health_hud())
 		return
 	else
-		if(hud_used.bloods && !stamina_only)
+		if(hud_used.bloods)
 			var/bloodloss = ((BLOOD_VOLUME_NORMAL - blood_volume) / BLOOD_VOLUME_NORMAL) * 100
 
-			var/burnhead = 0
-			var/brutehead = 0
-			var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
-			if(head)
-				burnhead = (head.burn_dam / head.max_damage) * 100
-				brutehead = (head.brute_dam / head.max_damage) * 100
-
 			var/toxloss = getToxLoss()
-			var/oxloss = getOxyLoss()
+			var/oxyloss = getOxyLoss()
+			var/painpercent = (get_complex_pain() / (STAEND * 12)) * 100
 
-			var/hungloss = nutrition*-1 //this is smart i think
 
 			var/usedloss = 0
 			if(bloodloss > 0)
 				usedloss = bloodloss
-			if(burnhead > usedloss)
-				usedloss = burnhead
-			if(brutehead > usedloss)
-				usedloss = brutehead
-			if(toxloss > usedloss)
-				usedloss = toxloss
-			if(oxloss > usedloss)
-				usedloss = oxloss
-			if(hungloss > usedloss)
-				usedloss = hungloss
 
+			hud_used.bloods.cut_overlays()
 			if(usedloss <= 0)
 				hud_used.bloods.icon_state = "dam0"
+				if(toxloss > 0)
+					var/toxoverlay
+					switch(toxloss)
+						if(1 to 20)
+							toxoverlay = "toxloss20"
+						if(21 to 49)
+							toxoverlay = "toxloss40"
+						if(50 to 79)
+							toxoverlay = "toxloss60"
+						if(80 to 99)
+							toxoverlay = "toxloss80"
+						if(100 to 999)
+							toxoverlay = "toxloss100"
+					hud_used.bloods.add_overlay(toxoverlay)
+
+				if(oxyloss > 0)
+					var/oxyoverlay
+					switch(oxyloss)
+						if(1 to 20)
+							oxyoverlay = "oxyloss20"
+						if(21 to 49)
+							oxyoverlay = "oxyloss40"
+						if(50 to 79)
+							oxyoverlay = "oxyloss60"
+						if(80 to 99)
+							oxyoverlay = "oxyloss80"
+						if(100 to 999)
+							oxyoverlay = "oxyloss100"
+					hud_used.bloods.add_overlay(oxyoverlay)
 			else
 				var/used = round(usedloss, 10)
 				if(used <= 80)
 					hud_used.bloods.icon_state = "dam[used]"
 				else
 					hud_used.bloods.icon_state = "damelse"
+			if(painpercent > 0)
+				var/painoverlay
+				switch(painpercent)
+					if(1 to 29)
+						painoverlay = "painloss20"
+					if(30 to 59)
+						painoverlay = "painloss40"
+					if(60 to 79)
+						painoverlay = "painloss60"
+					if(80 to 99)
+						painoverlay = "painloss80"
+					if(100 to 999)
+						painoverlay = "painloss100"
+				hud_used.bloods.add_overlay(painoverlay)
 			SEND_SIGNAL(src, COMSIG_MOB_HEALTHHUD_UPDATE, hud_used.bloods.icon_state)
 
 		if(hud_used.stamina)
@@ -476,16 +564,11 @@
 	if(hud_used.zone_select && !stamina_only)
 		hud_used.zone_select.update_appearance(UPDATE_OVERLAYS)
 
-/mob/living/carbon/human/fully_heal(admin_revive = FALSE)
-	dna?.species.spec_fully_heal(src)
-	if(admin_revive)
-		regenerate_limbs()
-		regenerate_organs()
-	spill_embedded_objects()
-	set_heartattack(FALSE)
-	drunkenness = 0
-	set_hygiene(HYGIENE_LEVEL_NORMAL)
-	..()
+/mob/living/carbon/human/fully_heal(heal_flags = HEAL_ALL)
+	// set_heartattack(FALSE)
+	if(heal_flags & HEAL_ESSENTIALS)
+		set_hygiene(HYGIENE_LEVEL_NORMAL)
+	return ..()
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)
 	. = ..()
@@ -565,7 +648,7 @@
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
-		lord_job?.get_informed_title(coronated, TRUE, new_title)
+		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
 		SSticker.rulermob = coronated
@@ -699,7 +782,7 @@
 
 /mob/living/carbon/human/do_after_coefficent()
 	. = ..()
-	. *= physiology.do_after_speed
+	. *= physiology?.do_after_speed
 
 /mob/living/carbon/human/updatehealth(amount)
 	. = ..()
@@ -751,6 +834,7 @@
 	copy_bodyparts(target)
 
 	target.dna.transfer_identity(src)
+	reset_limb_fingerprints()
 
 	updateappearance(mutcolor_update = TRUE)
 
@@ -802,6 +886,11 @@
 		ADD_TRAIT(src, TRAIT_FACELESS, TRAIT_GENERIC)
 	else
 		REMOVE_TRAIT(src, TRAIT_FACELESS, TRAIT_GENERIC)
+
+	if(HAS_TRAIT(target, TRAIT_ABOMINATION))
+		ADD_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
+	else
+		REMOVE_TRAIT(src, TRAIT_ABOMINATION, TRAIT_GENERIC)
 
 	regenerate_icons()
 
@@ -925,3 +1014,19 @@
 		return
 
 	message_admins("[ADMIN_LOOKUPFLW_PP(src)] is a [mind.assigned_role.get_informed_title(src)] and has been disconnected for more than 30 seconds!")
+
+/mob/living/carbon/human/nobles_seen_servant_work()
+	if(!is_servant_job(mind.assigned_role))
+		return
+
+	var/list/nobles = list()
+	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
+		if(!target.mind || target.stat != CONSCIOUS)
+			continue
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
+			continue
+		nobles += target
+	if(length(nobles))
+		for(var/mob/living/carbon/human/target as anything in nobles)
+			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
+				target.add_stress(/datum/stress_event/noble_seen_servant_work)

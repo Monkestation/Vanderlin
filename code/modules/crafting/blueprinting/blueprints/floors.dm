@@ -105,7 +105,7 @@
 	required_materials = list(
 		/obj/item/natural/stone = 1,
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 1
+		/obj/item/natural/clod/dirt = 1
 	)
 
 /datum/blueprint_recipe/floor/stonefloor_blocks
@@ -227,7 +227,7 @@
 	result_type = /turf/open/floor/dirt/road
 	required_materials = list(
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 3
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -239,7 +239,7 @@
 	result_type = /turf/open/floor/dirt
 	required_materials = list(
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 3
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -388,6 +388,19 @@
 	skillcraft = /datum/skill/craft/masonry
 	craftdiff = 2
 
+/datum/blueprint_recipe/floor/bath/pool
+	name = "Pool Edge Tile"
+	desc = "Clean bathroom-style tiling made of stone blocks."
+	result_type = /turf/open/floor/tile/bath/pool
+	required_materials = list(
+		/obj/item/natural/stoneblock = 2
+	)
+	construct_tool = /obj/item/weapon/hammer
+	category = "Floors"
+	floor_object = TRUE
+	skillcraft = /datum/skill/craft/masonry
+	craftdiff = 2
+
 /datum/blueprint_recipe/floor/bfloorz
 	name = "Blue Floor Tile"
 	desc = "Distinctive blue flooring made of stone blocks."
@@ -525,7 +538,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -538,7 +551,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -551,7 +564,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -564,7 +577,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -577,7 +590,20 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
+	)
+	construct_tool = /obj/item/weapon/shovel
+	category = "Floors"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/floor/grasshealthy
+	name = "Healthy Grass"
+	desc = "A bit of extra fertilizer makes the difference."
+	result_type = /turf/open/floor/grass/healthy
+	required_materials = list(
+		/obj/item/natural/fibers = 3,
+		/obj/item/neuFarm/seed = 1,
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -590,7 +616,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 3,
 		/obj/item/natural/chaff = 2,
-		/obj/item/natural/dirtclod = 1
+		/obj/item/natural/clod/dirt = 1
 	)
 	construct_tool = /obj/item/weapon/pitchfork
 	category = "Floors"
@@ -908,7 +934,7 @@
 	)
 	craftdiff = 2
 	skillcraft = /datum/skill/craft/carpentry
-	result_type = /turf/open/transparent/glass
+	result_type = /turf/open/glass
 
 /datum/blueprint_recipe/floor/concrete
 	name = "Concrete Floor"

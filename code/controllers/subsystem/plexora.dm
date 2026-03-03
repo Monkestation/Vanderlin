@@ -609,6 +609,35 @@ SUBSYSTEM_DEF(plexora)
 
 	client_mob.say(message, forced = TRUE)
 
+/datum/world_topic/plx_kick
+	keyword = "PLX_kick"
+	require_comms_key = TRUE
+
+/datum/world_topic/plx_kick/Run(list/input)
+	var/ckey = input["ckey"]
+	var/reason = input["reason"]
+	var/kicker = input["admin_ckey"]
+
+	if(!ckey || !kicker)
+		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "ckey/admin_ckey", "reason" = "missing required parameter")
+
+	var/client/client = disambiguate_client(ckey)
+
+	if(QDELETED(client))
+		return list("error" = PLEXORA_ERROR_CLIENTNOTEXIST)
+
+	// Mock admin
+	var/datum/client_interface/mockadmin = new(
+		key = kicker,
+	)
+
+	to_chat(client, span_boldannounce("You have been kicked from the server by [key_name_admin(mockadmin)]. Reason: [reason]"))
+
+	qdel(client)
+
+	log_admin("Discord: [key_name(mockadmin)] has kicked [key_name(client)] from the server! Reason: [reason]")
+	message_admins("Discord: [key_name_admin(mockadmin)] has kicked [key_name_admin(client)] from the server! Reason: [reason]")
+
 /datum/world_topic/plx_ticketaction
 	keyword = "PLX_ticketaction"
 	require_comms_key = TRUE
@@ -695,18 +724,14 @@ SUBSYSTEM_DEF(plexora)
 	message_admins("External message from [sender] to [recipient_name_linked] : [message]")
 	log_admin_private("External PM: [sender] -> [recipient_name] : [message]")
 
-	to_chat(recipient,
-		message = "<font color='red' size='4'><b>-- Administrator private message --</b></font>",
-		)
+	to_chat(recipient, html = "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 
 	recipient.receive_ahelp(
 		"<a href='?priv_msg=[stealthkey]'>[adminname]</a>",
 		message,
 	)
 
-	to_chat(recipient,
-		message = span_adminsay("<i>Click on the administrator's name to reply.</i>"),)
-
+	to_chat(recipient, html = span_adminsay("<i>Click on the administrator's name to reply.</i>"))
 
 	admin_ticket_log(recipient, "<font color='purple'>PM From [adminname]: [message]</font>", player_message = "<font color='purple'>PM From [adminname]: [message]</font>")
 
@@ -739,6 +764,26 @@ SUBSYSTEM_DEF(plexora)
 
 	SSblackbox.record_feedback("tally", "admin_say_relay", 1, "Asay external") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/world_topic/plx_givetriumphs
+	keyword = "PLX_givetriumphs"
+	require_comms_key = TRUE
+
+/datum/world_topic/plx_givetriumphs/Run(list/input)
+	var/ckey = input["ckey"]
+	var/amount = input["amount"]
+	var/reason = input["reason"]
+
+	if (!ckey)
+		return list("error" = PLEXORA_ERROR_MISSING_CKEY)
+
+	amount = text2num(amount)
+
+	if (!amount || amount <= 0)
+		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "amount", "reason" = "parameter must be a number greater than 0")
+
+	adjust_triumphs(ckey, amount, reason, counted = FALSE, silent = FALSE, override_bonus = TRUE)
+
+	return "[ckey] awarded [amount] triumphs.  They now have [SStriumphs.get_triumphs(ckey)]."
 
 #undef OLD_PLEXORA_CONFIG
 #undef AUTH_HEADER
@@ -778,10 +823,7 @@ SUBSYSTEM_DEF(plexora)
 
 
 /client/proc/receive_ahelp(reply_to, message, span_class = "adminsay")
-	to_chat(
-		src,
-		message = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>",
-	)
+	to_chat(src, html = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>")
 
 /// This should match the interface of /client wherever necessary.
 /datum/client_interface

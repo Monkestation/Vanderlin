@@ -54,7 +54,7 @@
 	owner.special_role = "Zizoid Lackey"
 	H.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	H.playsound_local(get_turf(H), 'sound/music/maniac.ogg', 80, FALSE, pressure_affected = FALSE)
-	H.verbs |= /mob/living/carbon/human/proc/communicate
+	add_verb(H, /mob/living/carbon/human/proc/communicate)
 
 	if(change_stats)
 		H.change_stat(STATKEY_STR, 2)
@@ -66,13 +66,14 @@
 			return
 		H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 3, TRUE)
 		H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+		H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 3, TRUE)
 		H.change_stat(STATKEY_INT, -2)
 		H.grant_language(/datum/language/undead)
 		return
 
 	add_objective(/datum/objective/zizo)
 	owner.special_role = ROLE_ZIZOIDCULTIST
-	H.verbs |= /mob/living/carbon/human/proc/release_minion
+	add_verb(H, /mob/living/carbon/human/proc/release_minion)
 	if(!change_stats)
 		return
 	H.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
@@ -99,10 +100,6 @@
 	. = ..()
 	if(.)
 		if(new_owner.current == SSticker.rulermob)
-			return FALSE
-		if(new_owner.assigned_role.title in GLOB.noble_positions)
-			return FALSE
-		if(new_owner.assigned_role.title in GLOB.garrison_positions)
 			return FALSE
 		if(new_owner.assigned_role.title in GLOB.church_positions)
 			return FALSE
@@ -188,18 +185,18 @@
 
 /mob/living/carbon/human/proc/praise()
 	set name = "Praise the Dark Lady!"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
 	record_round_statistic(STATS_ZIZO_PRAISED)
 	audible_message("\The [src] praises <span class='bold'>Zizo</span>!")
-	playsound(src.loc, 'sound/vo/cult/praise.ogg', 45, 1)
+	playsound(src, 'sound/vo/cult/praise.ogg', 45, 1)
 	log_say("[src] has praised zizo! (zizo cultist verb)")
 
 /mob/living/carbon/human/proc/communicate()
 	set name = "Communicate with Cult"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -283,7 +280,7 @@
 		return
 	var/list/rituals = list()
 	for(var/datum/ritual/ritual as anything in rituals_pre)
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		if(initial(ritual.is_cultist_ritual) && !(is_zizocultist(user.mind) || is_zizolackey(user.mind))) // some rituals are cultist exclusive
 			continue
@@ -429,7 +426,7 @@
 
 /mob/living/carbon/human/proc/draw_sigil()
 	set name = "Draw Sigil"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		return
 
@@ -449,7 +446,7 @@
 
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)

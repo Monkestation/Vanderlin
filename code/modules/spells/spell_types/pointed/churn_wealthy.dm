@@ -29,7 +29,7 @@
 	var/mammonsonperson = get_mammons_in_atom(cast_on)
 	var/mammonsinbank = SStreasury.bank_accounts[cast_on]
 	var/totalvalue = mammonsinbank + mammonsonperson
-	if(HAS_TRAIT(cast_on, TRAIT_NOBLE))
+	if(HAS_TRAIT(cast_on, TRAIT_NOBLE_BLOOD) || HAS_TRAIT(cast_on, TRAIT_NOBLE_POWER))
 		totalvalue += 101 // We're ALWAYS going to do a medium level smite minimum to nobles.
 	if(totalvalue <=10)
 		to_chat(owner, "<font color='yellow'>[cast_on] one has no wealth to hold against them.</font>")

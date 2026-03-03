@@ -74,7 +74,7 @@
 
 	return prioritized
 
-/obj/machinery/essence/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/machinery/essence/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

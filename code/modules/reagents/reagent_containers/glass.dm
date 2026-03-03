@@ -85,7 +85,7 @@
 	candodge = FALSE
 	misscost = 0
 
-/obj/item/reagent_containers/glass/attack(mob/living/M, mob/living/user, zone)
+/obj/item/reagent_containers/glass/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!user.used_intent)
 		return
 	if(user.used_intent.type == INTENT_GENERIC)
@@ -110,7 +110,7 @@
 		SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, M, reagents.reagent_list)
 		reagents.reaction(M, TOUCH)
 		chem_splash(M.loc, 2, list(reagents))
-		playsound(M.loc, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
+		playsound(M, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
 		log_combat(user, M, "splashed", R)
 		return
 	if(user.used_intent.type == INTENT_POUR)
@@ -130,13 +130,27 @@
 			// check to see if we're a noble drinking soup
 			if(ishuman(user) && istype(src, /obj/item/reagent_containers/glass/bowl))
 				var/mob/living/carbon/human/human_user = user
+				var/obj/item/reagent_containers/glass/bowl/bowl_check = src
+				if(bowl_check.dirty)
+					human_user.add_stress(/datum/stress_event/dirty_bowl)
+				else if(istype(bowl_check.reagents, /datum/reagent/consumable/soup))
+					var/datum/reagent/consumable/soup/soup_check = bowl_check.reagents
+					soup_check.taste_mult +=1
+				if(bowl_check.reagents.get_reagent_amount(/datum/reagent/water) != bowl_check.reagents.total_volume)
+					bowl_check.usages += 1
+				if(bowl_check.usages >= bowl_check.max_usages && !bowl_check.dirty)
+					bowl_check.dirty = TRUE
+					var/datum/component/particle_spewer = bowl_check.GetComponent(/datum/component/particle_spewer/sparkle)
+					if(particle_spewer)
+						qdel(particle_spewer)
+					bowl_check.update_appearance(UPDATE_OVERLAYS)
 				if(human_user.is_noble()) // egads we're an unmannered SLOB
 					human_user.add_stress(/datum/stress_event/noble_bad_manners)
 					if(prob(25))
 						to_chat(human_user, span_red("I've got better manners than this..."))
 			to_chat(user, span_notice("I swallow a gulp of [src]."))
 		addtimer(CALLBACK(reagents, TYPE_PROC_REF(/datum/reagents, trans_to), M, min(amount_per_transfer_from_this,5), TRUE, TRUE, FALSE, user, FALSE, INGEST), 5)
-		playsound(M.loc, pick(drinksounds), 100, TRUE)
+		playsound(M, pick(drinksounds), 100, TRUE)
 
 /obj/item/reagent_containers/glass/attack_atom(atom/attacked_atom, mob/living/user)
 	if(user.used_intent.type == INTENT_GENERIC)
@@ -212,7 +226,7 @@
 			user.visible_message(span_notice("[user] splashes the contents of [src] onto \the [newT]!"), \
 									span_notice("I splash the contents of [src] onto \the [newT]."))
 
-/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
+/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTERATTACK, target, user)
 	if(user.used_intent.type == INTENT_GENERIC)
 		return ..()
@@ -223,7 +237,7 @@
 	if(!spillable)
 		return
 
-/obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, list/modifiers)
 	var/hotness = I.get_temperature()
 	if(hotness && reagents)
 		reagents.expose_temperature(hotness)

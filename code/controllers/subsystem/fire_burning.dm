@@ -31,8 +31,19 @@ SUBSYSTEM_DEF(fire_burning)
 				return
 			continue
 
+		var/is_wet = FALSE
+
+		if(istype(O, /obj/item/clothing))
+			var/obj/item/clothing/cloth = O
+			if(cloth.wet)
+				var/dry_amount = round(fire_intensity / 5)
+				cloth.wet.use_water(dry_amount)
+
+				if(cloth.wet.water_stacks < 0)
+					is_wet = TRUE   // stop it from burning while it is wet
+
 		if(O.resistance_flags & ON_FIRE) //in case an object is extinguished while still in currentrun
-			if(!(O.resistance_flags & FIRE_PROOF))
+			if(!(O.resistance_flags & FIRE_PROOF) && !is_wet)
 				// Minimum of 8 burn per tick. Config for max fire damage per tick found in game_options.
 				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, "fire", 0)
 			else

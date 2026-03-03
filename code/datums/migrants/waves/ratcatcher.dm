@@ -29,7 +29,7 @@
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 	)
 
@@ -37,7 +37,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/ratcatcher
-	name = "Ratcatcher"
+	name = "Ratcatcher (Migrant Wave)"
 	r_hand = /obj/item/weapon/pitchfork
 	l_hand = /obj/item/flint
 	armor = /obj/item/clothing/armor/gambeson/light

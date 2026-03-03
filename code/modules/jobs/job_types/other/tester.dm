@@ -14,36 +14,46 @@
 
 	outfit = /datum/outfit/tester
 
-/datum/outfit/tester/pre_equip(mob/living/carbon/human/H)
-	..()
+	jobstats = list(
+		STATKEY_STR = 1
+	)
+
+
+/datum/job/tester/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_skillrank(/datum/skill/misc/swimming, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/climbing, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/bows, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/swords, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/polearms, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/combat/knives, rand(1,5), TRUE)
+	spawned.adjust_skillrank(/datum/skill/misc/reading, rand(1,5), TRUE)
+
+/datum/outfit/tester
+	name = "Tester"
+
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/gambeson/arming
-	if(prob(50))
-		armor = /obj/item/clothing/armor/gambeson
-	neck = /obj/item/key/mercenary
+	neck = /obj/item/clothing/neck/gorget
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	beltr = /obj/item/weapon/sword/sabre
-	if(prob(50))
-		beltr = /obj/item/weapon/sword/arming
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	pants = /obj/item/clothing/pants/trou/leather
-	neck = /obj/item/clothing/neck/gorget
-	if(H.gender == FEMALE)
+
+/datum/outfit/tester/pre_equip(mob/living/carbon/human/equipped_human)
+	. = ..()
+	if(equipped_human.gender == FEMALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
 		beltr = /obj/item/weapon/sword/sabre
-	H.adjust_skillrank(/datum/skill/misc/swimming, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/bows, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, rand(1,5), TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, rand(1,5), TRUE)
-	H.change_stat(STATKEY_STR, 1)
+	if(prob(50))
+		armor = /obj/item/clothing/armor/gambeson
+	if(prob(50))
+		beltr = /obj/item/weapon/sword/arming

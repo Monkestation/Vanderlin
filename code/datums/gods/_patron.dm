@@ -1,12 +1,10 @@
-#define CLERIC_SPELLS "Cleric"
-#define PRIEST_SPELLS "Priest"
-
-GLOBAL_LIST_EMPTY(patronlist)
-GLOBAL_LIST_EMPTY(patrons_by_faith) // Does not include patrons with preference_accessible as FALSE
-GLOBAL_LIST_EMPTY(preference_patrons) // Does not include patrons with preference_accessible as FALSE
+GLOBAL_LIST_EMPTY(patrons_by_type)
+GLOBAL_LIST_EMPTY(patrons_by_name)
+GLOBAL_LIST_EMPTY(patrons_by_faith)
 GLOBAL_LIST_EMPTY(prayers)
 
 /datum/patron
+	abstract_type = /datum/patron
 	/// Name of the god
 	var/name
 	/// Display name of the patron in the prefs menu
@@ -24,9 +22,7 @@ GLOBAL_LIST_EMPTY(prayers)
 	/// What boons the god may offer
 	var/boons = "Code errors"
 	/// Faith this god belongs to
-	var/datum/faith/associated_faith = /datum/faith
-	/// Whether or not we are accessible in preferences
-	var/preference_accessible = TRUE
+	var/datum/faith/associated_faith = null
 	/// All gods have related confessions
 	var/list/confess_lines
 
@@ -34,7 +30,7 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/datum/devotion/devotion_holder = null
 
 	/// List of words that this god considers profane.
-	var/list/profane_words = list("zizo","cock","dick","fuck","shit","pussy","cuck","cunt","asshole")
+	var/list/profane_words = list()
 
 	///our traits thats applied by set_patron and removed when changed
 	var/list/added_traits
@@ -47,17 +43,25 @@ GLOBAL_LIST_EMPTY(prayers)
 
 	var/datum/storyteller/storyteller
 
+/datum/patron/proc/preference_accessible(datum/preferences/prefs)
+	if(length(allowed_races) && !(prefs.pref_species.id in allowed_races))
+		return FALSE
+
+	return TRUE
+
 /datum/patron/proc/on_gain(mob/living/pious)
+	if(HAS_TRAIT(pious, TRAIT_DIVINE_CONVERT))
+		return
 	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs |= verb
+		add_verb(pious, verb)
 
 /datum/patron/proc/on_remove(mob/living/pious)
 	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
-		pious.verbs -= verb
+		remove_verb(pious, verb)
 
 /* -----PRAYERS----- */
 

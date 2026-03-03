@@ -113,13 +113,13 @@
 	if(obj_broken || switching_states)
 		return
 	if(door_opened)
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] shut!"), \
 			span_notice("I kick [src] shut!"))
 		force_closed()
 		return
 	if(!locked())
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] open!"), \
 			span_notice("I kick [src] open!"))
 		force_open(user)
@@ -127,18 +127,18 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		if(L.STASTR < initial(kickthresh))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks [src]! It's not effective."), \
 			span_notice("I kick [src]! It's not effective."))
 			return
 		if((prob(L.STASTR * 0.5) || kickthresh-- == 0))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks open [src]!"), \
 				span_notice("I kick open [src]!"))
 			unlock()
 			force_open(user)
 			return
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src]!"), \
 			span_notice("I kick [src]!"))
 
@@ -181,14 +181,14 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
+/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
 	if(switching_states)
 		return
 	if(I.can_lock_interact())
 		return (..() || attack_hand(user))
 	return ..()
 
-/obj/structure/door/attack_hand_secondary(mob/user, params)
+/obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -333,7 +333,7 @@
 /obj/structure/door/proc/Open(silent = FALSE, mob/user)
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), open_sound, 90)
+		playsound(src, open_sound, 90)
 	if(!windowed)
 		set_opacity(FALSE)
 	flick("[initial(icon_state)]opening",src)
@@ -368,7 +368,7 @@
 		return
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), close_sound, 90)
+		playsound(src, close_sound, 90)
 	if(!windowed)
 		set_opacity(TRUE)
 	flick("[initial(icon_state)]closing", src)

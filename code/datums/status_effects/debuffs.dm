@@ -4,6 +4,8 @@
 	tick_interval = 0
 	status_type = STATUS_EFFECT_REPLACE
 	alert_type = null
+	remove_on_fullheal = TRUE
+	heal_flag_necessary = HEAL_CC_STATUS
 	var/needs_update_stat = FALSE
 
 /datum/status_effect/incapacitating/on_creation(mob/living/new_owner, duration_override, ...)
@@ -152,7 +154,7 @@
 
 	if(ishuman(owner) && sleptonground)
 		var/mob/living/carbon/human/human_owner = owner
-		if(HAS_TRAIT(human_owner, TRAIT_NOBLE))
+		if(HAS_TRAIT(human_owner, TRAIT_NOBLE_BLOOD))
 			human_owner.add_stress(/datum/stress_event/sleepfloornoble)
 		else
 			human_owner.add_stress(/datum/stress_event/sleepfloor)
@@ -314,7 +316,6 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	duration = 300
 	tick_interval = 10
-	examine_text = "<span class='warning'>SUBJECTPRONOUN seems slow and unfocused.</span>"
 	var/stun = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/trance
 
@@ -323,10 +324,13 @@
 	desc = ""
 	icon_state = "high"
 
+/datum/status_effect/trance/get_examine_text()
+	return span_warning("They seem slow and unfocused.")
+
 /datum/status_effect/trance/tick()
 	if(stun)
 		owner.Stun(6 SECONDS, TRUE)
-	owner.dizziness = 20
+	owner.set_dizzy(20 SECONDS)
 
 /datum/status_effect/trance/on_apply()
 	. = ..()
@@ -347,7 +351,7 @@
 	. = ..()
 	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
 	REMOVE_TRAIT(owner, TRAIT_MUTE, "trance")
-	owner.dizziness = 0
+	owner.set_dizzy(0)
 	owner.remove_client_colour(/datum/client_colour/monochrome/trance)
 	to_chat(owner, "<span class='warning'>I snap out of my trance!</span>")
 
@@ -483,4 +487,103 @@
 		to_chat(owner, fake_msg)
 
 	msg_stage++
+
+/// Prevent clicks for the "duration" of the status
+/datum/status_effect/debuff/clickcd
+	id = "clickcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clickcd
+	duration = 3 SECONDS
+
+/datum/status_effect/debuff/clickcd/on_creation(mob/living/new_owner, duration_override, ...)
+	new_owner.changeNext_move(duration)
+	return ..()
+
+/atom/movable/screen/alert/status_effect/debuff/clickcd
+	name = "Action Delayed"
+	desc = "I cannot take another action."
+	icon_state = "clickcd"
+
+/datum/status_effect/debuff/clashcd
+	id = "clashcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/clashcd
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/clashcd
+	name = "Riposte / Guard Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "guardcd"
+
+/datum/status_effect/debuff/exposed
+	id = "exposed"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/exposed
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_exposed"
+
+/atom/movable/screen/alert/status_effect/debuff/exposed
+	name = "Exposed"
+	desc = "My defenses are completely exposed. I can be hit through my parry and dodge to great effect!"
+	icon_state = "exposed"
+
+/datum/status_effect/debuff/vulnerable
+	id = "vulnerable"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/vulnerable
+	duration = 10 SECONDS
+	mob_overlay_icon_state = "eff_vulnerable"
+
+/atom/movable/screen/alert/status_effect/debuff/vulnerable
+	name = "Vulnerable"
+	desc = "A mistake. I can be hit through my parry and dodge to a lighter effect!"
+	icon_state = "vulnerable"
+
+/datum/status_effect/debuff/feinted
+	id = "feinted"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feinted
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feinted
+	name = "Feinted"
+	desc = span_boldwarning("I've been feinted. It won't happen again so soon.")
+	icon_state = "feinted"
+
+/datum/status_effect/debuff/feintcd
+	id = "feintcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/feintcd
+	duration = 30 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/feintcd
+	name = "Feint Cooldown"
+	desc = span_warning("I have feinted recently, my opponents will be wary.")
+	icon_state = "feinted"
+
+/// Prevents use of weapon special attacks
+/datum/status_effect/debuff/specialcd
+	id = "specialcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/specialcd
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
+
+/atom/movable/screen/alert/status_effect/debuff/specialcd
+	name = "Special Manouevre Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "specialcd"
+
+/// 2 Speed reduction for 8 seconds + slow
+/datum/status_effect/debuff/hobbled
+	id = "hobbled"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
+	effectedstats = list(STATKEY_SPD = -2)
+	duration = 8 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/hobbled
+	name = "Hobbled"
+	desc = "You've been struck in the leg! The force has left you staggered!"
+	icon_state = "dazed"
+
+/datum/status_effect/debuff/hobbled/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = 1.5)
+
+/datum/status_effect/debuff/hobbled/on_remove()
+	. = ..()
+	owner?.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 

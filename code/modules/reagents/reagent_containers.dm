@@ -136,7 +136,7 @@
 	if(master?.glows)
 		. += emissive_appearance(filling.icon, filling.icon_state, alpha = filling.alpha)
 
-/obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!can_label_container || !(istype(I, /obj/item/paper) && !istype(I, /obj/item/paper/scroll)))
 		return
@@ -166,7 +166,7 @@
 	label_container(user, label_name, label_desc)
 	qdel(I)
 
-/obj/item/reagent_containers/MiddleClick(mob/user, params)
+/obj/item/reagent_containers/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(iscarbon(user))
 		remove_label(user)
@@ -179,7 +179,7 @@
 			to_chat(user, span_warning("\The [src] is already labelled."))
 		return
 	if(user)
-		playsound(get_turf(src), 'sound/foley/dropsound/paper_drop.ogg', 70)
+		playsound(src, 'sound/foley/dropsound/paper_drop.ogg', 70)
 		user.visible_message(span_notice("[user] applies a label to \the [src]."), span_notice("I label \the [src]."), vision_distance = 3)
 	name = label_prefix ? "[label_prefix][label_name]" : label_name
 	if(label_desc)
@@ -213,7 +213,7 @@
 		reagents.add_reagent_list(list_reagents)
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/AltClick(mob/user)
+/obj/item/reagent_containers/AltClick(mob/user, list/modifiers)
 	if(!user.Adjacent(src) || !has_variable_transfer_amount)
 		return
 	change_transfer_amount(user, FORWARD)
@@ -247,9 +247,9 @@
 		return FALSE
 	var/mob/living/carbon/C = eater
 	var/covered = ""
-	if(C.is_mouth_covered(head_only = 1))
+	if(C.is_mouth_covered(ITEM_SLOT_HEAD))
 		covered = "headgear"
-	else if(C.is_mouth_covered(mask_only = 1))
+	else if(C.is_mouth_covered(ITEM_SLOT_MASK))
 		covered = "mask"
 	if(C != user)
 		if(isturf(eater.loc))

@@ -48,7 +48,7 @@
 
 //Debug procs
 /client/proc/test_movable_UI()
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set name = "Spawn Movable UI Object"
 
 	var/atom/movable/screen/movable/M = new()
@@ -67,7 +67,7 @@
 
 
 /client/proc/test_snap_UI()
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set name = "Spawn Snap UI Object"
 
 	var/atom/movable/screen/movable/snap/S = new()

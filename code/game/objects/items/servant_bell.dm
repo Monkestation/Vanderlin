@@ -52,7 +52,7 @@
 		. += span_notice("Use on a commoner to bind their mind to the bell.")
 		. += span_notice("Right click with an open hand to relinquish servants.")
 
-/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/servant_bell/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, nearby_ring_bell) || !is_bell_proficient(user) || !ishuman(target))
 		return
@@ -70,14 +70,14 @@
 			to_chat(user, span_warning("What good is a dead servant?"))
 		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
 			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
-		else if(HAS_TRAIT(H, TRAIT_NOBLE) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
+		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
 			to_chat(user, span_warning("The enchantment seems to fail."))
 		else
 			add_servant(H)
 			to_chat(user, span_noticesmall("I bind [H] to [src]."))
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
 
-/obj/item/servant_bell/attack_hand_secondary(mob/user, params)
+/obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -205,7 +205,7 @@
 		add_servant(spawned)
 
 /obj/item/servant_bell/proc/is_bell_proficient(mob/living/user)
-	return HAS_TRAIT(user, TRAIT_NOBLE) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
+	return HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) || HAS_TRAIT(user, TRAIT_NOBLE_POWER) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
 
 /// Keep Bell
 /obj/item/servant_bell/lord

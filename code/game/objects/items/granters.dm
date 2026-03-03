@@ -41,7 +41,7 @@
 	. = ..()
 	reading = FALSE
 
-/obj/item/book/granter/attack_self(mob/user, params)
+/obj/item/book/granter/attack_self(mob/user, list/modifiers)
 	if(user.mind?.has_studied == TRUE)
 		to_chat(user, span_notice("I struggle to study my arcane notes more. Perhaps a good rest would help."))
 		return FALSE
@@ -101,9 +101,8 @@
 	. = ..()
 	if(!user.mind)
 		return
-	for(var/crafting_recipe_type in crafting_recipe_types)
-		var/datum/blueprint_recipe/R = crafting_recipe_type
-		user.mind.teach_crafting_recipe(crafting_recipe_type)
+	for(var/datum/blueprint_recipe/R as anything in crafting_recipe_types)
+		user.mind.teach_crafting_recipe(R)
 		to_chat(user,"<span class='notice'>I learned how to make [initial(R.name)].</span>")
 
 //! --MAGICK SCROLLS-- !/

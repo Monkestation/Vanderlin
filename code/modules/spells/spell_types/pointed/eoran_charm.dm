@@ -31,7 +31,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/eora)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
 
 	invocation = "Experiamur vim amoris!"
 	invocation_type = INVOCATION_SHOUT
@@ -71,5 +71,5 @@
 	cast_on.apply_status_effect(/datum/status_effect/debuff/mesmerised)
 	cast_on.Immobilize(40)
 	cast_on.Slowdown(15)
-	cast_on.blur_eyes(20)
+	cast_on.set_eye_blur_if_lower(40 SECONDS)
 	cast_on.emote("drool")

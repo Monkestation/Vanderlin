@@ -13,26 +13,27 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	trainable_skills = list(/datum/skill/misc/medicine)
+	trainable_skills = list(/datum/skill/misc/medicine = 0.1)
 	max_apprentices = 2
 	apprentice_name = "Feldsher-in-training"
 	can_have_apprentices = TRUE
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_NONHERETICAL
 
 	jobstats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 4,
-		STATKEY_CON = - 1,
+		STATKEY_PER = 1,
+		STATKEY_CON = -1
 	)
 
 	skills = list(
-		/datum/skill/combat/wrestling = 2,
+		/datum/skill/combat/wrestling = 1,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/combat/knives = 2,
 		/datum/skill/misc/reading = 5,
 		/datum/skill/labor/mathematics = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/medicine = 5,
 		/datum/skill/craft/alchemy = 3,

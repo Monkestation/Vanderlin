@@ -50,6 +50,83 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return
 #endif
 
+	// asset_cache
+	var/asset_cache_job
+	if(href_list["asset_cache_confirm_arrival"])
+		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
+		if(!asset_cache_job)
+			return
+
+	var/atom/ref = locate(href_list["src"])
+	if(!holder && (href_list["window_id"] != "statbrowser") && !istype(ref, /datum/native_say))
+		var/mtl = CONFIG_GET(number/minute_topic_limit)
+		if (mtl)
+			var/minute = round(world.time, 1 MINUTES)
+			if (!topiclimiter)
+				topiclimiter = new(LIMITER_SIZE)
+			if (minute != topiclimiter[CURRENT_MINUTE])
+				topiclimiter[CURRENT_MINUTE] = minute
+				topiclimiter[MINUTE_COUNT] = 0
+			topiclimiter[MINUTE_COUNT] += 1
+			if (topiclimiter[MINUTE_COUNT] > mtl)
+				var/msg = "Your previous action was ignored because you've done too many in a minute."
+				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
+					topiclimiter[ADMINSWARNED_AT] = minute
+					msg += " Administrators have been informed."
+					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
+				log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute with [hsrc ? "[hsrc] " : ""][href].")
+				to_chat(src, span_danger("[msg]"))
+				return
+
+		var/stl = CONFIG_GET(number/second_topic_limit)
+		if (stl)
+			var/second = round(world.time, 1 SECONDS)
+			if (!topiclimiter)
+				topiclimiter = new(LIMITER_SIZE)
+			if (second != topiclimiter[CURRENT_SECOND])
+				topiclimiter[CURRENT_SECOND] = second
+				topiclimiter[SECOND_COUNT] = 0
+			topiclimiter[SECOND_COUNT] += 1
+			if (topiclimiter[SECOND_COUNT] > stl)
+				log_game("[key_name(src)] Has hit the per-second topic limit of [stl] topic calls in a given game second with [hsrc ? "[hsrc] " : ""][href].")
+				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
+				return
+
+	// Tgui Topic middleware
+	if(tgui_Topic(href_list))
+		return
+
+	if(href_list["reload_tguipanel"])
+		nuke_chat()
+
+	if(href_list["reload_statbrowser"])
+		stat_panel.reinitialize()
+
+	//Logs all hrefs, except chat pings
+	if(!(href_list["_src_"] == "chat" && href_list["proc"] == "ping" && LAZYLEN(href_list) == 2))
+		log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
+
+	//byond bug ID:2256651
+	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
+		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
+		src << browse("...", "window=asset_cache_browser")
+
+	if(href_list["asset_cache_preload_data"])
+		asset_cache_preload_data(href_list["asset_cache_preload_data"])
+		return
+
+	// Keypress passthrough
+	if(href_list["__keydown"])
+		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
+		if(keycode)
+			keyDown(keycode)
+		return
+	if(href_list["__keyup"])
+		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
+		if(keycode)
+			keyUp(keycode)
+		return
+
 	// ANSWER SCHIZOHELP
 	if(href_list["schizohelp"])
 		var/datum/schizohelp/schizo = locate(href_list["schizohelp"])
@@ -136,11 +213,13 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!holder)
 			return
 		var/title = href_list["id"]
+		var/author = href_list["author_ckey"]
 		if(!title)
 			return
-		if(alert("Are you sure you want to delete the book '[title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
-			if(SSlibrarian.del_player_book(title))
-				message_admins("[key_name_admin(src)] has deleted player made book called: '[title]'")
+		var/real_title = url_decode(title)
+		if(alert("Are you sure you want to delete the book '[real_title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
+			if(SSlibrarian.del_player_book(title, author))
+				message_admins("[key_name_admin(src)] has deleted player made book called: '[real_title]' by [author]")
 				manage_books()
 
 	if(href_list["show_book"])
@@ -150,70 +229,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!title)
 			return
 		show_book_content(title)
-
-	// asset_cache
-	var/asset_cache_job
-	if(href_list["asset_cache_confirm_arrival"])
-		asset_cache_job = round(text2num(href_list["asset_cache_confirm_arrival"]))
-		//because we skip the limiter, we have to make sure this is a valid arrival and not somebody tricking us
-		//	into letting append to a list without limit.
-		if (asset_cache_job > 0 && asset_cache_job <= last_asset_job && !(asset_cache_job in completed_asset_jobs))
-			completed_asset_jobs += asset_cache_job
-			return
-
-	if(!holder && href_list["window_id"] != "statbrowser")
-		var/mtl = CONFIG_GET(number/minute_topic_limit)
-		if (mtl)
-			var/minute = round(world.time, 1 MINUTES)
-			if (!topiclimiter)
-				topiclimiter = new(LIMITER_SIZE)
-			if (minute != topiclimiter[CURRENT_MINUTE])
-				topiclimiter[CURRENT_MINUTE] = minute
-				topiclimiter[MINUTE_COUNT] = 0
-			topiclimiter[MINUTE_COUNT] += 1
-			if (topiclimiter[MINUTE_COUNT] > mtl)
-				var/msg = "Your previous action was ignored because you've done too many in a minute."
-				if (minute != topiclimiter[ADMINSWARNED_AT]) //only one admin message per-minute. (if they spam the admins can just boot/ban them)
-					topiclimiter[ADMINSWARNED_AT] = minute
-					msg += " Administrators have been informed."
-					log_game("[key_name(src)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-					message_admins("[ADMIN_LOOKUPFLW(usr)] [ADMIN_KICK(usr)] Has hit the per-minute topic limit of [mtl] topic calls in a given game minute")
-				to_chat(src, span_danger("[msg]"))
-				return
-
-		var/stl = CONFIG_GET(number/second_topic_limit)
-		if (stl)
-			var/second = round(world.time, 1 SECONDS)
-			if (!topiclimiter)
-				topiclimiter = new(LIMITER_SIZE)
-			if (second != topiclimiter[CURRENT_SECOND])
-				topiclimiter[CURRENT_SECOND] = second
-				topiclimiter[SECOND_COUNT] = 0
-			topiclimiter[SECOND_COUNT] += 1
-			if (topiclimiter[SECOND_COUNT] > stl)
-				to_chat(src, span_danger("Your previous action was ignored because you've done too many in a second"))
-				return
-
-	//Logs all hrefs, except chat pings
-	if(!(href_list["_src_"] == "chat" && href_list["proc"] == "ping" && LAZYLEN(href_list) == 2))
-		log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
-
-	//byond bug ID:2256651
-	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
-		to_chat(src, "<span class='danger'>An error has been detected in how my client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
-		src << browse("...", "window=asset_cache_browser")
-
-	// Keypress passthrough
-	if(href_list["__keydown"])
-		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
-		if(keycode)
-			keyDown(keycode)
-		return
-	if(href_list["__keyup"])
-		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
-		if(keycode)
-			keyUp(keycode)
-		return
 
 	// Admin PM
 	if(href_list["priv_msg"])
@@ -262,8 +277,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		if("vars")
 			return view_var_Topic(href,href_list,hsrc)
-		if("chat")
-			return chatOutput.Topic(href, href_list)
 
 	switch(href_list["action"])
 		if("openLink")
@@ -350,18 +363,18 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		return 0
 	return 1
 /*
- * Call back proc that should be checked in all paths where a client can send messages
- *
- * Handles checking for duplicate messages and people sending messages too fast
- *
- * The first checks are if you're sending too fast, this is defined as sending
- * SPAM_TRIGGER_AUTOMUTE messages in
- * 5 seconds, this will start supressing my messages,
- * if you send 2* that limit, you also get muted
- *
- * The second checks for the same duplicate message too many times and mutes
- * you for it
- */
+* Call back proc that should be checked in all paths where a client can send messages
+*
+* Handles checking for duplicate messages and people sending messages too fast
+*
+* The first checks are if you're sending too fast, this is defined as sending
+* SPAM_TRIGGER_AUTOMUTE messages in
+* 5 seconds, this will start supressing my messages,
+* if you send 2* that limit, you also get muted
+*
+* The second checks for the same duplicate message too many times and mutes
+* you for it
+*/
 /client/proc/handle_spam_prevention(message, mute_type)
 
 	//Increment message count
@@ -423,9 +436,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	GLOB.keys_by_ckey[ckey] = key
 	GLOB.directory[ckey] = src
 
-	chatOutput = new /datum/chatOutput(src)
-	spawn(5) // Goonchat does some non-instant checks in start()
-		chatOutput.start()
+	stat_panel = new(src, "statbrowser")
+	stat_panel.subscribe(src, PROC_REF(on_stat_panel_message))
 
 	GLOB.ahelp_tickets.ClientLogin(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
@@ -437,8 +449,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		holder.owner = src
 		connecting_admin = TRUE
 	else if(GLOB.deadmins[ckey])
-		verbs += /client/proc/readmin
+		add_verb(src, /client/proc/readmin)
 		connecting_admin = TRUE
+
 	if(CONFIG_GET(flag/autoadmin))
 		if(!GLOB.admin_datums[ckey])
 			var/datum/admin_rank/autorank
@@ -450,13 +463,18 @@ GLOBAL_LIST_EMPTY(respawncounts)
 				to_chat(world, "Autoadmin rank not found")
 			else
 				new /datum/admins(autorank, ckey)
+
 	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
 		var/localhost_addresses = list("127.0.0.1", "::1")
 		if(isnull(address) || (address in localhost_addresses))
 			var/datum/admin_rank/localhost_rank = new("!localhost!", R_EVERYTHING, R_DBRANKS, R_EVERYTHING) //+EVERYTHING -DBRANKS *EVERYTHING
 			new /datum/admins(localhost_rank, ckey, 1, 1)
-	// Init patreon data, used by prefs
+
+	// Init donator data, used by prefs
 	patreon = new(src)
+	twitch = new(src)
+	native_say = new(src)
+
 	//preferences datum - also holds some persistent data for the client (because we may as well keep these datums to a minimum)
 	prefs = GLOB.preferences_datums[ckey]
 	if(prefs)
@@ -472,8 +490,11 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.clientfps
 
+	// Instantiate tgui panel
+	tgui_panel = new(src, "browseroutput")
+
 	if(fexists(roundend_report_file()))
-		verbs += /client/proc/show_previous_roundend_report
+		add_verb(src, /client/proc/show_previous_roundend_report)
 
 	var/full_version = "[byond_version].[byond_build ? byond_build : "xxx"]"
 	log_access("Login: [key_name(src)] from [address ? address : "localhost"]-[computer_id] || BYOND v[full_version]")
@@ -548,12 +569,24 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		set_macros()
 		update_movement_keys()
 
-//	chatOutput.start() // Starts the chat
+	// Initialize stat panel
+	stat_panel.initialize(
+		inline_html = file("html/statbrowser.html"),
+		inline_js = file("html/statbrowser.js"),
+		inline_css = file("html/statbrowser.css"),
+	)
+	addtimer(CALLBACK(src, PROC_REF(check_panel_loaded)), 30 SECONDS)
+
+	// Initalize tgui panel
+	tgui_panel.initialize()
+
 	INVOKE_ASYNC(src, PROC_REF(acquire_dpi))
 
-	if(alert_mob_dupe_login)
-		spawn()
-			alert(mob, "You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+	if(alert_mob_dupe_login && !holder)
+		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
+		spawn(0.5 SECONDS) //needs to run during world init, do not convert to add timer
+			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
+			to_chat_immediate(mob, span_danger(dupe_login_message))
 
 	connection_time = world.time
 	connection_realtime = world.realtime
@@ -588,17 +621,17 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			to_chat(src, "Required version to remove this message: [cwv] or later")
 			to_chat(src, "Visit <a href=\"https://secure.byond.com/download\">BYOND's website</a> to get the latest version of BYOND.")
 
-	if (connection == "web" && !connecting_admin)
-		if (!CONFIG_GET(flag/allow_webclient))
+	if(connection == "web" && !connecting_admin)
+		if(!CONFIG_GET(flag/allow_webclient))
 			to_chat(src, "Web client is disabled")
 			qdel(src)
 			return 0
-		if (CONFIG_GET(flag/webclient_only_byond_members) && !IsByondMember())
+		if(CONFIG_GET(flag/webclient_only_byond_members) && !IsByondMember())
 			to_chat(src, "Sorry, but the web client is restricted to byond members only.")
 			qdel(src)
 			return 0
 
-	if( (world.address == address || !address) && !GLOB.host )
+	if((world.address == address || !address) && !GLOB.host)
 		GLOB.host = key
 		world.update_status()
 
@@ -606,22 +639,22 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		add_admin_verbs()
 		to_chat(src, get_message_output("memo"))
 		adminGreet()
-	if (mob && reconnecting)
+	if(mob && reconnecting)
 		var/area/joined_area = get_area(mob.loc)
 		if(joined_area)
 			joined_area.reconnect_game(mob)
 
 	add_verbs_from_config()
 	var/cached_player_age = set_client_age_from_db(tdata) //we have to cache this because other shit may change it and we need it's current value now down below.
-	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
+	if(isnum(cached_player_age) && cached_player_age == -1) //first connection
 		player_age = 0
 	var/nnpa = CONFIG_GET(number/notify_new_player_age)
-	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
-		if (nnpa >= 0)
+	if(isnum(cached_player_age) && cached_player_age == -1) //first connection
+		if(nnpa >= 0)
 			message_admins("New user: [key_name_admin(src)] [ADMIN_PP(mob)] is connecting here for the first time.")
-			if (CONFIG_GET(flag/irc_first_connection_alert))
+			if(CONFIG_GET(flag/irc_first_connection_alert))
 				send2irc_adminless_only("New-user", "[key_name(src)] is connecting for the first time!")
-	else if (isnum(cached_player_age) && cached_player_age < nnpa)
+	else if(isnum(cached_player_age) && cached_player_age < nnpa)
 		message_admins("New user: [key_name_admin(src)] just connected with an age of [cached_player_age] day[(player_age==1?"":"s")]")
 	if(CONFIG_GET(flag/use_account_age_for_jobs) && account_age >= 0)
 		player_age = account_age
@@ -638,16 +671,17 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(!ban_cache_start && SSban_cache?.query_started)
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(build_ban_cache), src)
 
-//	send_resources()
-
+	send_resources()
 
 	generate_clickcatcher()
 	apply_clickcatcher()
 
-	if(prefs.toggles & TOGGLE_FULLSCREEN)
-		toggle_fullscreeny(TRUE)
-	else
-		toggle_fullscreeny(FALSE)
+	if(prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
+		to_chat(src, span_info("You have unread updates in the changelog."))
+		if(CONFIG_GET(flag/aggressive_changelog))
+			changelog()
+		else
+			stat_panel.send_message("unread_changelog")
 
 	if(ckey in GLOB.clientmessages)
 		for(var/message in GLOB.clientmessages[ckey])
@@ -657,66 +691,56 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(CONFIG_GET(flag/autoconvert_notes))
 		convert_notes_sql(ckey)
 
-
 	to_chat(src, get_message_output("message", ckey))
 
-
-
-//	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-//		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
+	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
 	update_ambience_pref()
-
 
 	//This is down here because of the browse() calls in tooltip/New()
 	if(!tooltips)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for (var/thing in topmenus)
+	for(var/thing in topmenus)
 		var/datum/verbs/menu/topmenu = thing
 		var/topmenuname = "[topmenu]"
-		if (topmenuname == "[topmenu.type]")
+		if(topmenuname == "[topmenu.type]")
 			var/list/tree = splittext(topmenuname, "/")
 			topmenuname = tree[tree.len]
 		winset(src, "[topmenu.type]", "parent=menu;name=[url_encode(topmenuname)]")
 		var/list/entries = topmenu.Generate_list(src)
-		for (var/child in entries)
+		for(var/child in entries)
 			winset(src, "[child]", "[entries[child]]")
-			if (!ispath(child, /datum/verbs/menu))
+			if(!ispath(child, /datum/verbs/menu))
 				var/procpath/verbpath = child
 				if (copytext(verbpath.name,1,2) != "@")
 					new child(src)
 
-	for (var/thing in prefs.menuoptions)
+	for(var/thing in prefs.menuoptions)
 		var/datum/verbs/menu/menuitem = GLOB.menulist[thing]
 		if (menuitem)
 			menuitem.Load_checked(src)
 
+	if(byond_version >= 516) // byondstorage handled by tgui
+		winset(src, null, "browser-options=find,devtools")
 
-	if(byond_version >= 516) // Enable 516 compat browser storage mechanisms
-		winset(src, null, "browser-options=byondstorage,find,devtools")
+	loot_panel = new(src)
 
-	//fullscreen()
-
-	view_size = new(src, getScreenSize())
+	view_size = new(src)
+	toggle_fullscreeny((prefs.toggles & TOGGLE_FULLSCREEN), logging_in = TRUE)
 	view_size.resetFormat()
 	view_size.setZoomMode()
-	fit_viewport()
-	Master.UpdateTickRate()
+	view_size.apply()
 	SSjob.load_player_boosts(ckey)
+	enable_seasonal_buys()
+
+	Master.UpdateTickRate()
 
 //////////////
 //DISCONNECT//
 //////////////
-
-/// This grabs the DPI of the user per their skin
-/client/proc/acquire_dpi()
-	if(prefs && (prefs.toggles & UI_SCALE))
-		window_scaling = prefs.ui_scale
-	else if(isnull(window_scaling))
-		window_scaling = text2num(winget(src, null, "dpi"))
-	debug_admins("scalies: [window_scaling]")
 
 /client/Del()
 	if(!gc_destroyed)
@@ -747,11 +771,15 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	GLOB.clients -= src
 	GLOB.directory -= ckey
 
+	QDEL_NULL(tgui_panel)
+
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)
 
 	if(length(credits))
 		QDEL_LIST(credits)
+
+	QDEL_NULL(loot_panel)
 
 	if(player_details)
 		player_details.achievements.save()
@@ -892,13 +920,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(new_player)
 		player_age = -1
 	. = player_age
-
-/client/proc/toggle_fullscreeny(new_value)
-	if(new_value)
-		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=menu")
-	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
-	winset(src, "mainwindow", "is-maximized=true")
 
 /client/proc/log_client_to_db_connection_log()
 	if(!SSdbcore.shutting_down)
@@ -1182,9 +1203,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 /client/proc/add_verbs_from_config()
 	if(CONFIG_GET(flag/see_own_notes))
-		verbs += /client/proc/self_notes
+		add_verb(src, /client/proc/self_notes)
 	if(CONFIG_GET(flag/use_exp_tracking))
-		verbs += /client/proc/self_playtime
+		add_verb(src, /client/proc/self_playtime)
 
 
 #undef UPLOAD_LIMIT
@@ -1293,7 +1314,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/atom/movable/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(O)
 			screen -= O
-			char_render_holders -= O
+			// no need to remove it from char_render_holders, it gets overwritten a few lines down
 			qdel(O)
 		O = new
 		LAZYSET(char_render_holders, "[D]", O)
@@ -1302,17 +1323,17 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		O.dir = D
 		switch(pos)
 			if(1)
-				O.screen_loc = "character_preview_map:1:2,2:-18"
+				O.screen_loc = "character_preview_map:2:4,4:-36"
 			if(2)
-				O.screen_loc = "character_preview_map:0:2,2:-18"
+				O.screen_loc = "character_preview_map:0:4,4:-36"
 			if(3)
-				O.screen_loc = "character_preview_map:1:2,0:10"
+				O.screen_loc = "character_preview_map:2:4,0:26"
 			if(4)
-				O.screen_loc = "character_preview_map:0:2,0:10"
+				O.screen_loc = "character_preview_map:0:4,0:26"
 
 /client/proc/clear_character_previews()
-	for(var/atom/movable/screen/S in char_render_holders)
-//		var/atom/movable/screen/S = char_render_holders[index]
+	for(var/index in char_render_holders) // associative list, have to index
+		var/atom/movable/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
 	char_render_holders = list()
@@ -1389,6 +1410,100 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(SSsounds.initialized == TRUE)
 		for(var/sound_path as anything in SSsounds.all_music_sounds)
 			src << load_resource(sound_path, -1)
+
+/client/proc/is_donator()
+	if(patreon?.has_access(ACCESS_ASSISTANT_RANK))
+		return TRUE
+	if(twitch?.has_access(ACCESS_TWITCH_SUB_TIER_1))
+		return TRUE
+	return FALSE
+
+/// This grabs the DPI of the user per their skin
+/client/proc/acquire_dpi()
+	if(prefs && (prefs.toggles & UI_SCALE))
+		window_scaling = prefs.ui_scale
+	else if(isnull(window_scaling))
+		window_scaling = text2num(winget(src, null, "dpi"))
+	debug_admins("scalies: [window_scaling]")
+
+/client/proc/enable_seasonal_buys()
+	if(!SStriumphs.initialized)
+		SStriumphs.pending_clients_seasonal += src
+		return
+
+	SStriumphs.activate_seasonal_buys(src)
+
+/client/proc/check_panel_loaded()
+	if(stat_panel.is_ready())
+		return
+	to_chat(src, span_userdanger("Statpanel failed to load, click <a href='byond://?src=[REF(src)];reload_statbrowser=1'>here</a> to reload the panel "))
+
+/// compiles a full list of verbs and sends it to the browser
+/client/proc/init_verbs()
+	if(IsAdminAdvancedProcCall())
+		return
+	var/list/verblist = list()
+	var/list/verbstoprocess = verbs.Copy()
+	if(mob)
+		verbstoprocess += mob.verbs
+		for(var/atom/movable/thing as anything in mob.contents)
+			verbstoprocess += thing.verbs
+	panel_tabs.Cut() // panel_tabs get reset in init_verbs on JS side anyway
+	for(var/procpath/verb_to_init as anything in verbstoprocess)
+		if(!verb_to_init)
+			continue
+		if(verb_to_init.hidden)
+			continue
+		if(!istext(verb_to_init.category))
+			continue
+		panel_tabs |= verb_to_init.category
+		verblist[++verblist.len] = list(verb_to_init.category, verb_to_init.name)
+	stat_panel.send_message("init_verbs", list(panel_tabs = panel_tabs, verblist = verblist))
+
+/**
+ * Handles incoming messages from the stat-panel TGUI.
+ */
+/client/proc/on_stat_panel_message(type, payload)
+	switch(type)
+		if("Update-Verbs")
+			init_verbs()
+		if("Remove-Tabs")
+			panel_tabs -= payload["tab"]
+		if("Send-Tabs")
+			panel_tabs |= payload["tab"]
+		if("Reset-Tabs")
+			panel_tabs = list()
+		if("Set-Tab")
+			stat_tab = payload["tab"]
+			SSstatpanels.immediate_send_stat_data(src)
+
+/client/proc/is_localhost()
+	var/static/localhost_addresses = list(
+		"127.0.0.1",
+		"::1",
+		null,
+	)
+	return address in localhost_addresses
+
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "Preferences.Options"
+
+	if(prefs)
+		prefs.toggles ^= TOGGLE_FULLSCREEN
+		toggle_fullscreeny(prefs.toggles & TOGGLE_FULLSCREEN)
+
+/client/proc/toggle_fullscreeny(new_value, logging_in = FALSE)
+	//no need to set every login to not fullscreen, they already aren't.
+	//we also dont need to call attempt_auto_fit_viewport, Login does that for us.
+	if(logging_in)
+		var/fullscreen = (prefs.toggles & TOGGLE_FULLSCREEN)
+		if(fullscreen)
+			winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
+		return
+
+	winset(src, "mainwindow", "menu=;is-fullscreen=[new_value ? "true" : "false"]")
+	attempt_auto_fit_viewport()
 
 #undef LIMITER_SIZE
 #undef CURRENT_SECOND

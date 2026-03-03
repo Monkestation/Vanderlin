@@ -12,6 +12,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	simpmob_attack = 45
 	simpmob_defend = 45
+	bloodpool = 0
 
 	var/icon_living = ""
 	///Icon when the animal is dead. Don't use animated icons for this.
@@ -202,19 +203,19 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	return ..()
 
-/mob/living/simple_animal/attackby(obj/item/O, mob/user, params)
+/mob/living/simple_animal/attackby(obj/item/O, mob/user, list/modifiers)
 	if(!is_type_in_list(O, food_type))
 		return ..()
 	else
 		if(try_tame(O, user))
-			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, params) // for udder functionality
+			SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY, O, user, modifiers) // for udder functionality
 			return TRUE
 	. = ..()
 
 /mob/living/simple_animal/proc/try_tame(obj/item/O, mob/living/carbon/human/user)
 	if(!stat)
 		user.visible_message("<span class='info'>[user] hand-feeds [O] to [src].</span>", "<span class='notice'>I hand-feed [O] to [src].</span>")
-		playsound(loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		SEND_SIGNAL(src, COMSIG_MOB_FEED, O, 30, user)
 		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 		qdel(O)
@@ -223,7 +224,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/realchance = tame_chance
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming) * 20)
+				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
 			if(prob(realchance))
 				tamed(user)
 				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
@@ -377,7 +378,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/proc/handle_temperature_damage()
 	return
 
-/mob/living/simple_animal/MiddleClick(mob/living/user, params)
+/mob/living/simple_animal/MiddleClick(mob/living/user, list/modifiers)
 	if(stat == DEAD)
 		var/obj/item/held_item = user.get_active_held_item()
 		if(held_item)
@@ -477,23 +478,22 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(user.mind)
 			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * 0.5)
 		playsound(src, 'sound/foley/gross.ogg', 70, FALSE)
-	if(head_butcher)
-		var/obj/item/natural/head/head = new head_butcher(Tsec)
-		switch(butchery_skill_level)
-			if(SKILL_LEVEL_NONE to SKILL_LEVEL_NOVICE)
-				head.ButcheringResults(0)
-			if(SKILL_LEVEL_APPRENTICE to SKILL_LEVEL_EXPERT)
-				head.ButcheringResults(1)
-				if(prob(20 - user.STALUC))
-					head.ButcheringResults(0)
-				else
-					if(prob(user.STALUC))
-						head.ButcheringResults(2)
-			if(SKILL_LEVEL_MASTER to INFINITY)
-				head.ButcheringResults(2)
-		if(rotstuff)
-			head.ButcheringResults(-1)
 	if(isemptylist(butcher_results))
+		if(head_butcher)
+			var/obj/item/natural/head/head = new head_butcher(Tsec)
+			switch(butchery_skill_level)
+				if(SKILL_LEVEL_NONE to SKILL_LEVEL_NOVICE)
+					head.ButcheringResults(0)
+				if(SKILL_LEVEL_APPRENTICE to SKILL_LEVEL_EXPERT)
+					head.ButcheringResults(1)
+					if(prob(20 - user.STALUC))
+						head.ButcheringResults(0)
+					else if(prob(user.STALUC))
+						head.ButcheringResults(2)
+				if(SKILL_LEVEL_MASTER to INFINITY)
+					head.ButcheringResults(2)
+			if(rotstuff)
+				head.ButcheringResults(-1)
 		var/final_message = "I finish butchering: [butcher_summary(botch_count, normal_count, perfect_count, bonus_count, botch_chance, perfect_chance, happiness_bonus)]"
 		if(happiness_message)
 			final_message += " [happiness_message]"
@@ -582,13 +582,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		remove_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE)
 	add_movespeed_modifier(MOVESPEED_ID_SIMPLEMOB_VARSPEED, TRUE, 100, multiplicative_slowdown = speed, override = TRUE)
 
-/mob/living/simple_animal/Stat()
-	..()
-	return //RTCHANGE
-/* 	if(statpanel("Status"))
-		stat(null, "Health: [round((health / maxHealth) * 100)]%")
-		return 1 */
-
 /mob/living/simple_animal/proc/drop_loot()
 	if(loot.len)
 		for(var/i in loot)
@@ -630,7 +623,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(fire_stacks + divine_fire_stacks > 5)
 			apply_damage(10, BURN)
 
-/mob/living/simple_animal/revive(full_heal = FALSE, admin_revive = FALSE)
+/mob/living/simple_animal/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
 	if(!.)
 		return
@@ -767,7 +760,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		if(amt < 3) // Skilled prevents you from fumbling
 			M.Paralyze(50)
 			M.Stun(50)
-			playsound(src.loc, 'sound/foley/zfall.ogg', 100, FALSE)
+			playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 			M.visible_message("<span class='danger'>[M] falls off [src]!</span>")
 		else
 			return
@@ -809,7 +802,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE
 
-/mob/living/simple_animal/hostile/RangedAttack(atom/A, params) //Player firing
+/mob/living/simple_animal/hostile/RangedAttack(atom/A, list/modifiers) //Player firing
 	if(!ai_controller && ranged && ranged_cooldown <= world.time)
 		target = A
 		OpenFire(A)
@@ -864,7 +857,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					var/turf/open/T = loc
 					if(!do_footstep && T.footstep)
 						do_footstep = TRUE
-						playsound(loc,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
+						playsound(src,pick('sound/foley/footsteps/hoof/horserun (1).ogg','sound/foley/footsteps/hoof/horserun (2).ogg','sound/foley/footsteps/hoof/horserun (3).ogg'), 100, TRUE)
 					else
 						do_footstep = FALSE
 			else
@@ -872,7 +865,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					var/turf/open/T = loc
 					if(!do_footstep && T.footstep)
 						do_footstep = TRUE
-						playsound(loc,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
+						playsound(src,pick('sound/foley/footsteps/hoof/horsewalk (1).ogg','sound/foley/footsteps/hoof/horsewalk (2).ogg','sound/foley/footsteps/hoof/horsewalk (3).ogg'), 100, TRUE)
 					else
 						do_footstep = FALSE
 			if(user.mind)
@@ -891,7 +884,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 							unbuckle_mob(L)
 							L.Paralyze(50)
 							L.Stun(50)
-							playsound(L.loc, 'sound/foley/zfall.ogg', 100, FALSE)
+							playsound(L, 'sound/foley/zfall.ogg', 100, FALSE)
 							L.visible_message(span_danger("[L] falls off [src]!"))
 
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)
