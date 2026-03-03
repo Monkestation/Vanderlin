@@ -44,5 +44,38 @@
                 "rscadd": "Added special intents to various weapons. They are started with Strong intent right clicks in combat mode and have differing effects."
             }
         ]
+    },
+    "2026-03-02": {
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed wurm jarosite dwarves being able to ready merc without any classes."
+            },
+            {
+                "rscadd": "Added TGchat, report issues with styling like it having bad contrast or anything."
+            }
+        ],
+        "Bloo4420": [
+            {
+                "map": "Repathed all broken borderfall objects"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "The game no longer trolls you by saying it paid your carriage toll."
+            },
+            {
+                "rscadd": "Archivist Chronicler now has Expert spellbook instead of Apprentice."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "give housecarls satchels rather then wooden shields."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "code_imp": "Cleanup on the say proc"
+            }
+        ]
     }
 }
