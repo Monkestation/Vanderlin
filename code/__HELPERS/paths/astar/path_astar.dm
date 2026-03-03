@@ -1,6 +1,3 @@
-/// Multi-Z aware distance heuristic
-#define DISTANCE_3D(start, end) (abs(start.x - end.x) + abs(start.y - end.y) + abs(start.z - start.z) * 5)
-
 /// Check if we are close enough to be considered done
 #define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf) (end == checking_turf || (mintargetdist && (get_dist(checking_turf, end) <= mintargetdist)))
 

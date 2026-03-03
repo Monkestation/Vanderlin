@@ -529,6 +529,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // ************* turf traits
 /// Turf trait for when a turf is transparent
 #define TRAIT_Z_TRANSPARENT "turf_z_transparent"
+/// This turf can't be passed by AI
+#define TRAIT_AI_AVOID_TURF "ai_avoid_turf"
 
 // ************* Debug traits
 /// This object has sound debugging tools attached to it

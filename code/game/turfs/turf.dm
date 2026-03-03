@@ -151,7 +151,7 @@
 	return FALSE
 
 /turf/proc/can_traverse_safely(atom/movable/traveler)
-	return TRUE
+	return !HAS_TRAIT(src, TRAIT_AI_AVOID_TURF)
 
 /// WARNING WARNING
 /// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS

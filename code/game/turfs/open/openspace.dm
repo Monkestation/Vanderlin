@@ -25,6 +25,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
 
+	pathing_pass_method = TURF_PATHING_PASS_PROC
+
 /turf/open/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
 	vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
@@ -34,17 +36,26 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	. = ..()
 	AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
 
+/turf/open/openspace/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+	var/atom/movable/our_movable = pass_info.requester_ref.resolve()
+	if(!our_movable)
+		return
+	return can_traverse_safely(our_movable)
+
 /turf/open/openspace/can_traverse_safely(atom/movable/traveler)
-	var/turf/destination = GET_TURF_BELOW(src)
-	if(!destination)
-		return TRUE // this shouldn't happen
-	for(var/obj/structure/O in contents)
+	if(HAS_TRAIT(traveler, TRAIT_MOVE_FLYING))
+		return TRUE
+
+	for(var/obj/O in contents)
 		if(O.obj_flags & BLOCK_Z_OUT_DOWN)
 			return TRUE
-	if(!traveler.can_zTravel(destination, DOWN, src)) // something is blocking their fall!
+
+	if(!traveler.can_zTravel(null, DOWN, src)) // something is blocking their fall!
 		return TRUE
-	if(!traveler.can_zFall(src, DOWN, destination)) // they can't fall!
+
+	if(!traveler.can_zFall(src, 1, null, DOWN)) // they can't fall!
 		return TRUE
+
 	return FALSE
 
 /turf/open/openspace/add_neighborlay(dir, edgeicon, offset = FALSE)

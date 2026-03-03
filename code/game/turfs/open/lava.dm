@@ -22,6 +22,9 @@
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR
 	neighborlay_self = "lavedge"
 	turf_flags = NONE
+
+	pathing_pass_method = TURF_PATHING_PASS_PROC
+
 	var/flow = FALSE
 	/// How much fire damage we deal to living mobs stepping on us
 	var/lava_damage = 50
@@ -104,8 +107,14 @@
 /// Burns the target and makes the turf process (depending on the return value of do_burn()).
 #define LAVA_BE_BURNING 2
 
+/turf/open/lava/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+	var/atom/movable/our_movable = pass_info.requester_ref.resolve()
+	if(!our_movable)
+		return
+	return can_traverse_safely(our_movable)
+
 /turf/open/lava/can_traverse_safely(atom/movable/traveler)
-	return ..() && !can_burn_stuff(traveler) // can traverse safely if you won't burn in it
+	return HAS_TRAIT(traveler, immunity_trait) || HAS_TRAIT(traveler, TRAIT_MOVE_FLYING)
 
 ///Proc that sets on fire something or everything on the turf that's not immune to lava. Returns TRUE to make the turf start processing.
 /turf/open/lava/proc/burn_stuff(atom/movable/to_burn)

@@ -52,11 +52,13 @@
 
 	var/list/path = SSpathfinder.astar_pathfind_now(user, target, 100, 0, null, null, FALSE, diagonals, path_heuristic)
 
+	var/after_time = world.timeofday
+
 	if(!length(path))
 		to_chat(user, span_alert("Pathfinding could not be completed."))
 		return
 
-	to_chat(user, span_info("Path length [length(path)] took [DS2MS(world.timeofday - time)] ms to complete."))
+	to_chat(user, span_info("Path length [length(path)] took [DS2MS(after_time - time)] ms to complete."))
 
 	var/static/list/images
 
@@ -111,5 +113,7 @@
 		images += path_display
 		user.client.images += path_display
 
-/obj/item/pathfinding_stick/proc/generate_path(mob/living/user, atom/target, datum/callback/path_heuristic, include_diagonals)
-
+#undef CHEBYSHEV
+#undef EUCLIDEAN
+#undef MANHATTAN
+#undef OCTILE
