@@ -259,16 +259,21 @@
 				else
 					addtimer(CALLBACK(src, PROC_REF(Close), FALSE), delay)
 
-/obj/structure/door/CanAStarPass(ID, to_dir, datum/requester)
+/obj/structure/door/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	. = ..()
 	if(.) // we can already go through it
 		return TRUE
+
 	if(!anchored)
 		return FALSE
-	if(HAS_TRAIT(requester, TRAIT_BASHDOORS))
+
+	var/mob/living/requester = pass_info.requester_ref?.resolve()
+	if(istype(requester) && HAS_TRAIT(requester, TRAIT_BASHDOORS))
 		return TRUE // bash into it!
+
 	// it's openable
-	return ishuman(requester) && !locked()
+
+	return pass_info.is_living && !locked()
 
 /obj/structure/door/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()

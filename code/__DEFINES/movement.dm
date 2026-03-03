@@ -45,4 +45,9 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define MOVEMENT_BUCKET_TIME 1
 #define MOVEMENT_BUCKET_LIST 2
 
+///Return values for moveloop Move()
+#define MOVELOOP_FAILURE 0
+#define MOVELOOP_SUCCESS 1
+#define MOVELOOP_NOT_READY 2
+
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS

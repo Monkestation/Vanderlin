@@ -3,6 +3,8 @@
 	level = 1
 	hover_color = "#607d65"
 	uses_integrity = TRUE
+	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID
+	flags_1 = CAN_BE_DIRTY_1
 
 	var/intact = 1
 
@@ -19,7 +21,6 @@
 
 	var/blocks_air = FALSE
 
-	flags_1 = CAN_BE_DIRTY_1
 	var/turf_flags = NONE
 
 	var/list/image/blueprint_data //for the station blueprints, images of objects eg: pipes
@@ -40,8 +41,6 @@
 	/// If we were going to smooth with an Atom instead overlay this onto self
 	var/neighborlay_self
 
-	vis_flags = VIS_INHERIT_PLANE|VIS_INHERIT_ID
-
 	/// Uses colours defined by the monarch roundstart see [lordcolor.dm]
 	var/uses_lord_coloring = FALSE
 
@@ -49,6 +48,11 @@
 
 	///The typepath we use for lazy fishing on turfs, to save on world init time.
 	var/fish_source
+
+
+	/// How pathing algorithm will check if this turf is passable by itself (not including content checks). By default it's just density check.
+	/// WARNING: Currently to use a density shortcircuiting this does not support dense turfs with special allow through function
+	var/pathing_pass_method = TURF_PATHING_PASS_DENSITY
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")

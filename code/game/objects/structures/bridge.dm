@@ -74,7 +74,7 @@
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
-/obj/structure/bridge/CanAStarPass(ID, to_dir, requester)
+/obj/structure/bridge/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(to_dir != dir && to_dir != REVERSE_DIR(dir))
 		return FALSE
 	return TRUE

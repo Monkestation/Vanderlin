@@ -201,13 +201,6 @@
 /obj/get_dumping_location(datum/component/storage/source,mob/user)
 	return get_turf(src)
 
-/obj/proc/CanAStarPass(ID, to_dir, requester)
-	if(ismovable(requester))
-		var/atom/movable/AM = requester
-		if(AM.pass_flags & pass_flags_self)
-			return TRUE
-	. = !density
-
 /obj/proc/check_uplink_validity()
 	return 1
 

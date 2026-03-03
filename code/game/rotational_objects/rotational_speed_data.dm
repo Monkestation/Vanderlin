@@ -65,7 +65,7 @@
 	qdel(src)
 
 // You can path over a dense structure if it's climbable.
-/obj/structure/CanAStarPass(ID, to_dir, requester)
+/obj/structure/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	. = climbable || ..()
 
 /obj/structure/return_rotation_chat()

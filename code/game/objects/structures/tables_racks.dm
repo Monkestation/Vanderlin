@@ -95,12 +95,6 @@
 	if(locate(/obj/structure/table) in get_turf(mover))
 		return TRUE
 
-/obj/structure/table/CanAStarPass(ID, dir, requester)
-	. = !density
-	if(ismovableatom(requester))
-		var/atom/movable/mover = requester
-		. = . || (mover.pass_flags & PASSTABLE)
-
 /obj/structure/table/proc/tableplace(mob/living/user, mob/living/pushed_mob)
 	pushed_mob.forceMove(loc)
 	pushed_mob.set_resting(TRUE, TRUE)
@@ -410,12 +404,6 @@
 	destroy_sound = 'sound/combat/hits/onwood/destroyfurniture.ogg'
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 	blade_dulling = DULLING_BASHCHOP
-
-/obj/structure/rack/CanAStarPass(ID, dir, requester)
-	. = !density
-	if(ismovableatom(requester))
-		var/atom/movable/mover = requester
-		. = . || (mover.pass_flags & PASSTABLE)
 
 /obj/structure/rack/MouseDrop_T(obj/O, mob/user)
 	. = ..()

@@ -43,14 +43,11 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/plasticflaps/CanAStarPass(ID, to_dir, requester)
-	if(isliving(requester))
-		var/mob/living/M = requester
-		if(!M.ventcrawler && M.mob_size != MOB_SIZE_TINY)
-			return FALSE
-	var/atom/movable/M = requester
-	if(M && M.pulling)
-		return CanAStarPass(ID, to_dir, M.pulling)
+/obj/structure/plasticflaps/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+	if(pass_info.mob_size && pass_info.mob_size != MOB_SIZE_TINY)
+		return FALSE
+	if(pass_info.pulling_info)
+		return CanAStarPass(to_dir, pass_info.pulling_info)
 	return TRUE //diseases, stings, etc can pass
 
 /obj/structure/plasticflaps/CanAllowThrough(atom/movable/A, turf/T)

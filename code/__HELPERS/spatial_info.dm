@@ -460,3 +460,46 @@
 		if(our_area == get_area(carbon))
 			return FALSE
 	return TRUE
+
+///Returns the distance between two atoms
+/proc/get_dist_euclidean(atom/first_location, atom/second_location)
+	if(!first_location.z || !second_location.z)
+		return INFINITY
+
+	if(first_location == second_location)
+		return -1
+
+	var/dx = first_location.x - second_location.x
+	var/dy = first_location.y - second_location.y
+
+	var/dist = sqrt(dx ** 2 + dy ** 2)
+
+	return dist
+
+/// Returns the manhattan distance between two atoms. Returns INFINITY if either are not on a turf, for BYOND get_dist() parity.
+/proc/get_dist_manhattan(atom/first_location, atom/second_location)
+	if(!first_location.z || !second_location.z)
+		return INFINITY
+
+	if(first_location == second_location)
+		return -1
+
+	var/dx = first_location.x - second_location.x
+	var/dy = first_location.y - second_location.y
+	var/dz = first_location.z - second_location.z
+
+	return abs(dx) + abs(dy) + abs(dz)
+
+/// Returns the octile distance between two atoms. Returns INFINITY if either are not on a turf, for BYOND get_dist() parity.
+/proc/get_dist_octile(atom/first_location, atom/second_location)
+	if(!first_location.z || !second_location.z)
+		return INFINITY
+
+	if(first_location == second_location)
+		return -1
+
+	var/dx = abs(first_location.x - second_location.x)
+	var/dy = abs(first_location.y - second_location.y)
+	var/F = (sqrt(2) - 1)
+
+	return (dx < dy) ? F * dx + dy : F * dy + dx

@@ -35,13 +35,14 @@
 	if(pass_throwing && mover.throwing)
 		return TRUE
 
-/obj/structure/meatvineborder/CanAStarPass(ID, to_dir, requester)
+/obj/structure/meatvineborder/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(dir in CORNERDIRS)
 		return TRUE
-	if(ismovable(requester))
-		var/atom/movable/mover = requester
-		if(mover.movement_type & (FLOATING|FLYING))
-			return TRUE
-	if(to_dir == dir)
-		return FALSE
-	return TRUE
+
+	if(pass_info.movement_type & (FLOATING|FLYING))
+		return TRUE
+
+	if(to_dir != dir)
+		return TRUE
+
+	return FALSE

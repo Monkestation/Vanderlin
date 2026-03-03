@@ -36,3 +36,10 @@ block( \
 #define TURF_BEING_WEATHERED (1<<4)
 /// Turf is currently queued in GLOB.SUNLIGHT_QUEUE_CORNER and should not be re-queued to avoid duplicates
 #define TURF_SUNLIGHT_QUEUED (1<<5)
+
+/// Turf will be passable if density is 0
+#define TURF_PATHING_PASS_DENSITY 0
+/// Turf will be passable depending on [CanAStarPass] return value
+#define TURF_PATHING_PASS_PROC 1
+/// Turf is never passable
+#define TURF_PATHING_PASS_NO 2
