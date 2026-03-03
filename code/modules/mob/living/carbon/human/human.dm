@@ -132,7 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
-	QDEL_NULL(culture)
+	culture = null
 	GLOB.human_list -= src
 	return ..()
 
