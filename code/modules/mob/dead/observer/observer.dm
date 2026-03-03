@@ -500,7 +500,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, span_dead("No souls to orbit."))
 		return
 
-	var/input = browser_input_list(src, "Who?!", "Orbit", null, mobs)
+	var/input = browser_input_list(src, "Who?!", "Orbit", mobs)
 	if(!input || QDELETED(src))
 		return
 
