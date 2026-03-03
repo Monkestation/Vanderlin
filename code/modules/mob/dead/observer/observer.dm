@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	see_invisible = SEE_INVISIBLE_GHOST
 
 	grant_all_languages = FALSE
-	languages_to_grant = list(/datum/language/undead)
+	languages_to_grant = list(/datum/language/common, /datum/language/undead)
 
 /mob/dead/observer/rogue/Initialize(mapload)
 	. = ..()
