@@ -147,7 +147,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	r_hand = /obj/item/flashlight/flare/torch/prelit
 	cloak = /obj/item/clothing/cloak/tabard/crusader
-	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)
 
 /datum/outfit/adventurer/cleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
