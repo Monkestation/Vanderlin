@@ -113,7 +113,7 @@
 #define span_reallybighypnophrase(str) ("<span class='hypnophrase reallybig'>" + str + "</span>")
 #define span_reallybigredtext(str) ("<span class='reallybigredtext'>" + str + "</span>")
 #define span_red(str) ("<span class='red'>" + str + "</span>")
-#define span_redbig(str) ("<span class='redtextbig'>" + str + "</span>")
+#define span_redbig(str) ("<span class='redbig'>" + str + "</span>")
 #define span_rose(str) ("<span class='rose'>" + str + "</span>")
 #define span_sans(str) ("<span class='sans'>" + str + "</span>")
 #define span_say(str) ("<span class='say'>" + str + "</span>")

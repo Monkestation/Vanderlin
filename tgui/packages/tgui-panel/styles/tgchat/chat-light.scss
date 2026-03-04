@@ -774,6 +774,20 @@ h2.alert {
   color: hsl(120, 100%, 50%);
 }
 
+.redtext {
+  color: hsl(0, 73.6%, 44.5%);
+}
+
+.redtextbold{
+  color: hsl(0, 73.6%, 44.5%);
+  font-weight: bold;
+}
+
+.redtextbig {
+  color: hsl(0, 73.6%, 44.5%);
+  font-size: 125%;
+}
+
 .singing {
   font-family: 'Trebuchet MS', cursive, sans-serif;
   font-style: italic;
