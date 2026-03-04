@@ -130,14 +130,14 @@
 			appendage_to_name += ", [used_title]"
 
 		if(appendage_to_name) // if we got any of those paramaters add it to their name
-			statement_of_identity += " the [appendage_to_name]"
+			statement_of_identity += " the[appendage_to_name]"
 
 		statement_of_identity += "." // comma at the end
 		// full name with all paramaters would be: "John Serf the returning Rakshari, Minnie Bonnickers smithy apprentice.""
 		. += statement_of_identity
 
 		if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
-			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[name]]\".")
+			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[real_name]]\".")
 
 		if(dna.species.use_skintones)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
