@@ -56,6 +56,7 @@
 		spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
+		spawned.honorary = null
 		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, JOB_TRAIT)
 		ADD_TRAIT(spawned, TRAIT_NOBLE_POWER, JOB_TRAIT)
 
