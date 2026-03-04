@@ -29,6 +29,7 @@
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/traps = 2,
+		/datum/skill/misc/reading = 1,
 	)
 
 /datum/outfit/rousman_cheese/captain
@@ -44,18 +45,18 @@
 	beltl = /obj/item/weapon/pick/paxe
 	pants = /obj/item/clothing/pants/trou
 	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
-	backl = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel/cloth/big
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor)
 
-/datum/migrant_role/rousman_cheese/weaponsmith
+/datum/migrant_role/rousman_cheese/cheesemaker
 	name = "Rousman Weaponsmith"
 	greet_text = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
-	migrant_job = /datum/job/migrant/rousman_cheese/weaponsmith
+	migrant_job = /datum/job/migrant/rousman_cheese/cheesemaker
 
-/datum/job/migrant/rousman_cheese/weaponsmith
+/datum/job/migrant/rousman_cheese/cheesemaker
 	title = "Rousman Weaponsmith"
 	tutorial = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
-	outfit = /datum/outfit/rousman_cheese/weaponsmith
+	outfit = /datum/outfit/rousman_cheese/cheesemaker
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -72,10 +73,11 @@
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/traps = 2,
+		/datum/skill/misc/reading = 1,
 	)
 
-/datum/outfit/rousman_cheese/weaponsmith
-	name = "Rousman Weaponsmith (Migrant Wave)"
+/datum/outfit/rousman_cheese/cheesemaker
+	name = "Rousman Cheesemaker (Migrant Wave)"
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	head = /obj/item/clothing/head/hatfur
 	cloak = /obj/item/clothing/cloak/apron/brown
@@ -85,7 +87,7 @@
 	pants = /obj/item/clothing/pants/trou
 	backr = /obj/item/weapon/axe/steel
 
-/datum/outfit/rousman_cheese/weaponsmith/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/rousman_cheese/cheesemaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 
 	if(prob(50))
@@ -102,15 +104,15 @@
 		shoes = /obj/item/clothing/shoes/shortboots
 		backl = /obj/item/weapon/pick/paxe
 
-/datum/migrant_role/rousman_cheese/armorsmith
-	name = "Rousman Armorsmith"
+/datum/migrant_role/rousman_cheese/cheesemonger
+	name = "Rousman Cheesemonger"
 	greet_text = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
-	migrant_job = /datum/job/migrant/rousman_cheese/armorsmith
+	migrant_job = /datum/job/migrant/rousman_cheese/cheesemonger
 
-/datum/job/migrant/rousman_cheese/armorsmith
-	title = "Rousman Armorsmith"
+/datum/job/migrant/rousman_cheese/cheesemonger
+	title = "Rousman Cheesemonger"
 	tutorial = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
-	outfit = /datum/outfit/rousman_cheese/armorsmith
+	outfit = /datum/outfit/rousman_cheese/cheesemonger
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -127,10 +129,11 @@
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/traps = 2,
+		/datum/skill/misc/reading = 1,
 	)
 
-/datum/outfit/rousman_cheese/armorsmith
-	name = "Rousman Armorsmith"
+/datum/outfit/rousman_cheese/cheesemonger
+	name = "Rousman Cheesemonger (Migrant Wave)"
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	head = /obj/item/clothing/head/hatfur
 	pants = /obj/item/clothing/pants/trou
@@ -140,7 +143,7 @@
 	armor = /obj/item/clothing/armor/chainmail
 	backr = /obj/item/weapon/axe/steel
 
-/datum/outfit/rousman_cheese/armorsmith/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/rousman_cheese/cheesemonger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 
 	if(prob(50))
@@ -156,7 +159,7 @@
 		backl =	/obj/item/weapon/hammer/sledgehammer
 
 /datum/migrant_wave/rousman_cheese
-	name = "Rousman Expedition"
+	name = "Rousman Cheese Convoy"
 	max_spawns = 4
 	shared_wave_type = /datum/migrant_wave/rousman_cheese
 	downgrade_wave = /datum/migrant_wave/rousman_cheese_down
@@ -165,10 +168,10 @@
 	triumph_threshold = 50
 	roles = list(
 		/datum/migrant_role/rousman_cheese/captain = 1,
-		/datum/migrant_role/rousman_cheese/weaponsmith = 2,
-		/datum/migrant_role/rousman_cheese/armorsmith = 2
+		/datum/migrant_role/rousman_cheese/cheesemaker = 2,
+		/datum/migrant_role/rousman_cheese/cheesemonger = 2
 	)
-	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
+	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 /datum/migrant_wave/rousman_cheese_down
 	name = "Rousman Expedition"
@@ -178,10 +181,10 @@
 	can_roll = FALSE
 	roles = list(
 		/datum/migrant_role/rousman_cheese/captain = 1,
-		/datum/migrant_role/rousman_cheese/armorsmith = 1,
-		/datum/migrant_role/rousman_cheese/weaponsmith = 1
+		/datum/migrant_role/rousman_cheese/cheesemaker = 1,
+		/datum/migrant_role/rousman_cheese/cheesemonger = 1
 	)
-	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
+	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 /datum/migrant_wave/rousman_cheese_down_one
 	name = "Rousman Expedition"
@@ -191,6 +194,6 @@
 	roles = list(
 		/datum/migrant_role/rousman_cheese/captain = 1,
 	)
-	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
+	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 
