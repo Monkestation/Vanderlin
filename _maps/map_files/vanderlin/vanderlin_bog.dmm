@@ -3106,12 +3106,6 @@
 /obj/item/natural/stone,
 /turf/open/floor/abyss_sand/path,
 /area/outdoors/bog)
-"bZR" = (
-/obj/structure/chair/bench/couch/left/alt{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/shelter/bog)
 "caq" = (
 /turf/closed/wall/mineral/abyssal{
 	color = "#406379";
@@ -3583,7 +3577,7 @@
 /turf/open/floor/concrete,
 /area/outdoors/bog)
 "cHa" = (
-/obj/structure/chair/bench/couch/middle/alt{
+/obj/structure/chair/wood/alt/fancy{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -3992,6 +3986,7 @@
 	dir = 8;
 	pixel_y = -1
 	},
+/obj/item/candle/floorcandle0/lit,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/mountains)
 "dgi" = (
@@ -4269,6 +4264,12 @@
 	color = "#314C5D"
 	},
 /area/indoors/wilderness/magic)
+"dsu" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/shelter/bog)
 "dsy" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/cobblerock/alt,
@@ -6032,12 +6033,6 @@
 "fuB" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/shelter/bog)
-"fvt" = (
-/obj/structure/chair/bench/couch/corner/alt{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/shelter/bog)
 "fvF" = (
 /mob/living/simple_animal/hostile/deepone{
 	faction = list("Hostile");
@@ -6624,6 +6619,7 @@
 	dir = 8;
 	pixel_y = -1
 	},
+/obj/item/broom,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog)
 "gad" = (
@@ -7824,6 +7820,10 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"hud" = (
+/obj/item/chair/fancy,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/shelter/bog)
 "hug" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -9962,6 +9962,7 @@
 	},
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
 "jKA" = (
@@ -10424,12 +10425,6 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
-"klE" = (
-/obj/structure/chair/bench/couch/corner/alt{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/shelter/bog)
 "klJ" = (
 /obj/structure/fluff/customsign{
 	name = "Sunken Man";
@@ -11595,8 +11590,10 @@
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/shelter/bog)
 "lxu" = (
-/obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/cup/wooden,
+/obj/structure/table/wood/large/corner_new{
+	dir = 9
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "lxv" = (
@@ -12045,10 +12042,6 @@
 /area/indoors/ship)
 "mbt" = (
 /obj/structure/fluff/railing/wood,
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = 32;
-	pixel_y = 0
-	},
 /turf/open/openspace,
 /area/indoors/shelter/bog)
 "mbB" = (
@@ -12513,6 +12506,7 @@
 "mIn" = (
 /obj/structure/fluff/railing/wood,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
+/obj/item/candle/floorcandle1/lit,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/mountains)
 "mIy" = (
@@ -12667,7 +12661,9 @@
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
 "mUQ" = (
-/obj/item/broom,
+/obj/item/candle/floorcandle0/lit{
+	pixel_y = -5
+	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/bog)
 "mVa" = (
@@ -13653,8 +13649,10 @@
 /turf/open/floor/carpet/royalblack,
 /area/under/cavewet)
 "ocw" = (
-/obj/structure/table/wood/crafted,
 /obj/item/clothing/armor/cuirass/iron/rust,
+/obj/structure/table/wood/large/corner_new{
+	dir = 10
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "ocx" = (
@@ -14235,7 +14233,9 @@
 "oHq" = (
 /obj/structure/table/wood/folding,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/candle/yellow/lit/infinite,
+/obj/item/candle/scandle/lit{
+	pixel_y = 10
+	},
 /turf/open/floor/concrete,
 /area/indoors/shelter/bog)
 "oIu" = (
@@ -15745,7 +15745,9 @@
 /area/under/cavewet)
 "qPR" = (
 /obj/structure/table/wood/large/corner,
-/obj/item/candle/yellow/lit/infinite/strong,
+/obj/item/candle/scandle/lit{
+	pixel_y = 10
+	},
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
 "qPV" = (
@@ -16748,8 +16750,10 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
 "rMQ" = (
-/obj/structure/table/wood/crafted,
-/obj/structure/lootable_structure/mining_cache,
+/obj/item/candle/scandelabra/lit{
+	pixel_y = 10
+	},
+/obj/structure/table/wood/large/corner_new,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "rMT" = (
@@ -17611,6 +17615,12 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"sRr" = (
+/obj/item/candle/floorcandle1/lit{
+	pixel_y = -9
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/outdoors/bog)
 "sRy" = (
 /obj/structure/table/wood/fancy/cyan,
 /obj/structure/carpet/blue,
@@ -17827,7 +17837,10 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
 "teU" = (
-/obj/structure/table/wood/crafted,
+/obj/structure/lootable_structure/mining_cache,
+/obj/structure/table/wood/large/corner_new{
+	dir = 5
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "teW" = (
@@ -19742,12 +19755,6 @@
 "vxa" = (
 /turf/open/water/bath,
 /area/under/cavewet)
-"vxA" = (
-/obj/structure/chair/bench/couch/right/alt{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/shelter/bog)
 "vxO" = (
 /obj/effect/spawner/map_spawner/loot/potion_vitals,
 /turf/open/floor/abyss_tile{
@@ -20302,6 +20309,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"wgH" = (
+/obj/structure/table/wood/large/corner_new{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/shelter/bog)
 "wgT" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/spider/stickyweb,
@@ -20802,9 +20815,11 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/mountains)
 "wQx" = (
-/obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/cup/wooden,
 /obj/item/reagent_containers/glass/cup/wooden,
+/obj/structure/table/wood/large/corner_new{
+	dir = 6
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "wQW" = (
@@ -21360,7 +21375,7 @@
 	},
 /area/under/tomb/indoors/magic)
 "xzZ" = (
-/obj/structure/chair/bench/couch/middle/alt{
+/obj/structure/chair/wood/alt/fancy{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -41142,7 +41157,7 @@ frm
 rff
 mUQ
 dyP
-lAl
+sRr
 iZs
 iGo
 vhU
@@ -46851,9 +46866,9 @@ khH
 fzL
 ouz
 ouz
-vxA
 cHa
-klE
+cHa
+ouz
 jZr
 hqN
 lhE
@@ -47055,7 +47070,7 @@ ouz
 ouz
 lxu
 ocw
-fzL
+hud
 fzL
 hqN
 skJ
@@ -47255,9 +47270,9 @@ khH
 pUW
 ouz
 dpX
-ouz
+wgH
 rMQ
-fzL
+dsu
 hEC
 hqN
 skJ
@@ -47459,7 +47474,7 @@ ouz
 ouz
 teU
 wQx
-fzL
+hud
 veW
 hqN
 hqN
@@ -47659,9 +47674,9 @@ kzn
 fzL
 ouz
 ouz
-bZR
 xzZ
-fvt
+xzZ
+ouz
 eec
 wMv
 hqN
