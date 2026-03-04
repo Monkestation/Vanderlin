@@ -136,58 +136,65 @@
 
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
-	head = /obj/item/clothing/head/helmet/skullcap
-	armor = /obj/item/clothing/armor/chainmail/iron
+	head = /obj/item/clothing/neck/chaincoif/iron/clericcoif
+	neck = /obj/item/clothing/neck/psycross/silver/divine
+	armor = /obj/item/clothing/armor/cuirass/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	gloves = /obj/item/clothing/gloves/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	neck = /obj/item/clothing/neck/chaincoif/iron
 	belt = /obj/item/storage/belt/leather/adventurer
 	backl = /obj/item/storage/backpack/satchel
 	r_hand = /obj/item/flashlight/flare/torch/prelit
 	cloak = /obj/item/clothing/cloak/tabard/crusader
-	wrists = /obj/item/clothing/neck/psycross/silver
+	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)
 
 /datum/outfit/adventurer/cleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	head = pick(/obj/item/clothing/head/helmet/skullcap, /obj/item/clothing/head/helmet/ironpot, /obj/item/clothing/head/helmet/sallet/iron, /obj/item/clothing/head/helmet/leather/headscarf)
-	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron)
-	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)
 	backl = pick(/obj/item/storage/backpack/satchel, /obj/item/storage/backpack/satchel/cloth)
 
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)
 			if(/datum/patron/divine/astrata)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/astrata
+				neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 				cloak = /obj/item/clothing/cloak/stabard/templar/astrata
 			if(/datum/patron/divine/dendor)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/dendor
+				neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 				cloak = /obj/item/clothing/cloak/stabard/templar/dendor
 			if(/datum/patron/divine/necra)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/necra
+				neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 				cloak = /obj/item/clothing/cloak/stabard/templar/necra
 				beltr = /obj/item/weapon/shovel/small
 			if(/datum/patron/divine/eora)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/eora
+				neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 				cloak = /obj/item/clothing/cloak/stabard/templar/eora
 			if(/datum/patron/divine/ravox)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/ravox
+				neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 				cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			if(/datum/patron/divine/noc)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/noc
+				neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 				cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			if(/datum/patron/divine/pestra)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/pestra
+				neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 				cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			if(/datum/patron/divine/abyssor)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/abyssor
+				neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 				cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 				beltl = /obj/item/fishingrod
 			if(/datum/patron/divine/malum)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/malum
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/malum
+				neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 				cloak = /obj/item/clothing/cloak/stabard/templar/malum
 			if(/datum/patron/divine/xylix)
-				wrists = /obj/item/clothing/neck/psycross/silver/divine/xylix
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/xylix
+				neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 				cloak = /obj/item/clothing/cloak/stabard/templar/xylix

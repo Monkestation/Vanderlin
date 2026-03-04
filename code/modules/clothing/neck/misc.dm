@@ -290,9 +290,55 @@
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 100
-
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
+
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif
+	icon_state = "clericcoif"
+	name = "wrapped coif"
+	desc = "A chain coif thats been wrapped and reinforced with strips of cloth, a fashion befitting of the average cleric. "
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
+	adjustable = FALSE
+	detail_tag = "_detail"
+	armor = ARMOR_MAILLE_IRON
+	dyeable = TRUE
+	max_integrity = INTEGRITY_STRONG
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/eora
+	detail_color = CLOTHING_WISTERIA
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/ravox
+	detail_color = CLOTHING_ROYAL_RED
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/noc
+	detail_color = CLOTHING_DIRT
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/xylix
+	detail_color = CLOTHING_CHALK_WHITE
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/astrata
+	detail_color = CLOTHING_YELLOW
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/necra
+	detail_color = CLOTHING_BERRY_BLUE
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/pestra
+	detail_color = CLOTHING_TARAXACUM_YELLOW
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/dendor
+	detail_color = CLOTHING_DARK_GREEN
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/abyssor
+	detail_color = CLOTHING_MAGE_ORANGE
+
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/malum
+	detail_color = CLOTHING_BURLAP
 
 /obj/item/clothing/neck/gorget/copper
 	name = "neck protector"

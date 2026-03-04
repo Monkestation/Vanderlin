@@ -171,6 +171,12 @@
 	recipe_name = "a gorget"
 	created_item = /obj/item/clothing/neck/gorget
 
+/datum/anvil_recipe/armor/iron/clericcoif
+	name = "Wrapped Coif (+ 1 Cloth)"
+	recipe_name = "a Wrapped Coif"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/neck/chaincoif/iron/clericcoif
+
 /datum/anvil_recipe/armor/iron/chaincoif
 	name = "Iron Chain Coif"
 	recipe_name = "a Chain Coif"
