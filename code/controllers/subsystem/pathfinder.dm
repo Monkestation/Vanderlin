@@ -44,9 +44,11 @@ SUBSYSTEM_DEF(pathfinder)
 	use_diagonals = TRUE,
 	list/on_finish,
 	datum/callback/heuristic,
+	multi_z = FALSE
 )
+	var/datum/pathfind/a_star = multi_z ? /datum/pathfind/astar/multi : /datum/pathfind/astar
 
-	var/datum/pathfind/astar/path = new(
+	var/datum/pathfind/astar/path = new a_star(
 		invoker,
 		end,
 		access,
@@ -75,9 +77,11 @@ SUBSYSTEM_DEF(pathfinder)
 	skip_first = TRUE,
 	use_diagonals = TRUE,
 	datum/callback/heuristic,
+	multi_z = FALSE
 )
+	var/datum/pathfind/a_star = multi_z ? /datum/pathfind/astar/multi : /datum/pathfind/astar
 
-	var/datum/pathfind/astar/path = new(
+	var/datum/pathfind/astar/path = new a_star(
 		invoker,
 		end,
 		access,

@@ -79,12 +79,12 @@
 	var/is_diagonal_movement = ISDIAGONALDIR(actual_dir)
 
 	if(is_diagonal_movement) //diagonal
-		var/in_dir = get_dir(destination_turf,src) // eg. northwest (1+8) = 9 (00001001)
+		var/in_dir = get_dir(destination_turf, src) // eg. northwest (1+8) = 9 (00001001)
 		var/first_step_direction_a = in_dir & 3 // eg. north   (1+8)&3 (0000 0011) = 1 (0000 0001)
 		var/first_step_direction_b = in_dir & 12 // eg. west   (1+8)&12 (0000 1100) = 8 (0000 1000)
 
 		for(var/first_step_direction in list(first_step_direction_a,first_step_direction_b))
-			var/turf/midstep_turf = get_step(destination_turf,first_step_direction)
+			var/turf/midstep_turf = get_step(destination_turf, first_step_direction)
 			var/way_blocked = midstep_turf.density || LinkBlockedWithAccess(midstep_turf, pass_info) || midstep_turf.LinkBlockedWithAccess(destination_turf, pass_info)
 			if(!way_blocked)
 				return FALSE

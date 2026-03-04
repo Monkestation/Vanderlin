@@ -1,6 +1,3 @@
-/// Check if we are close enough to be considered done
-#define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf) (end == checking_turf || (mintargetdist && (get_dist(checking_turf, end) <= mintargetdist)))
-
 /// A datum to hold astar node information
 /datum/astar_node
 	/// The turf associated with this node
@@ -84,6 +81,7 @@
 	open_binary_tree = null
 	open_turf_to_node = null
 	closed = null
+	heuristic_function = null
 	return ..()
 
 /**

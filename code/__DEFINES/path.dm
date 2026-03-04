@@ -18,5 +18,6 @@
  * If you really want to optimize things, optimize this, cuz this gets called a lot.
  */
 #define CAN_STEP(cur_turf, next, pass_info, avoid) (next && (next != avoid) && !cur_turf.LinkBlockedWithAccess(next, pass_info))
-/// Another helper macro for JPS, for telling when a node has forced neighbors that need expanding
-#define STEP_NOT_HERE_BUT_THERE(cur_turf, dirA, dirB) ((!CAN_STEP(cur_turf, get_step(cur_turf, dirA), pass_info, avoid) && CAN_STEP(cur_turf, get_step(cur_turf, dirB), pass_info, avoid)))
+/// Check if we are close enough to be considered done
+/// Only relevant for a point on the same Z level
+#define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf) (end == checking_turf || (mintargetdist && (get_dist(checking_turf, end) <= mintargetdist)))

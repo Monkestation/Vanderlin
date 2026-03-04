@@ -41,9 +41,6 @@ Actual Adjacent procs :
 	node[TOTAL_COST_F] = new_g + new_h * (1 + PF_TIEBREAKER); \
 	node[NODE_TURN] = new_nt
 
-#define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf, mintargetdist) \
-	(checking_turf == end || (mintargetdist && (get_dist_3d(checking_turf, end) <= mintargetdist)))
-
 #define SORT_TOTAL_COST_F(list) (list[TOTAL_COST_F])
 
 #define PF_TIEBREAKER 0.005
@@ -204,4 +201,4 @@ Actual Adjacent procs :
 #undef BLOCKED_FROM
 #undef ASTAR_NODE
 #undef ASTAR_UPDATE_NODE
-#undef ASTAR_CLOSE_ENOUGH_TO_END
+//#undef ASTAR_CLOSE_ENOUGH_TO_END
