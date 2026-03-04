@@ -76,9 +76,7 @@
 	if(actual_dir == 0)
 		return FALSE
 
-	var/is_diagonal_movement = ISDIAGONALDIR(actual_dir)
-
-	if(is_diagonal_movement) //diagonal
+	if(ISDIAGONALDIR(actual_dir))
 		var/in_dir = get_dir(destination_turf, src) // eg. northwest (1+8) = 9 (00001001)
 		var/first_step_direction_a = in_dir & 3 // eg. north   (1+8)&3 (0000 0011) = 1 (0000 0001)
 		var/first_step_direction_b = in_dir & 12 // eg. west   (1+8)&12 (0000 1100) = 8 (0000 1000)
@@ -93,10 +91,6 @@
 
 	/// These are generally cheaper than looping contents so they go first
 	switch(destination_turf.pathing_pass_method)
-		if(TURF_PATHING_PASS_DENSITY)
-			if(destination_turf.density)
-				return TRUE
-
 		if(TURF_PATHING_PASS_PROC)
 			if(!destination_turf.CanAStarPass(actual_dir, pass_info))
 				return TRUE

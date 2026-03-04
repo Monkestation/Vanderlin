@@ -17,7 +17,8 @@
  * Note that this can only be used inside the [datum/pathfind][pathfind datum] since it uses variables from said datum.
  * If you really want to optimize things, optimize this, cuz this gets called a lot.
  */
-#define CAN_STEP(cur_turf, next, pass_info, avoid) (next && (next != avoid) && !cur_turf.LinkBlockedWithAccess(next, pass_info))
+#define CAN_STEP(cur_turf, next, pass_info, avoid) \
+	(next && !next.density && (next != avoid) && !cur_turf.LinkBlockedWithAccess(next, pass_info))
 /// Check if we are close enough to be considered done
 /// Only relevant for a point on the same Z level
 #define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf) (end == checking_turf || (mintargetdist && (get_dist(checking_turf, end) <= mintargetdist)))

@@ -20,7 +20,8 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/move_manager/proc/astar_move(moving,
+/datum/move_manager/proc/astar_move(
+	moving,
 	chasing,
 	delay,
 	timeout,
@@ -31,12 +32,15 @@
 	turf/avoid,
 	skip_first,
 	subsystem,
-	diagonal_handling,
 	priority,
 	flags,
 	datum/extra_info,
-	initial_path)
-	return add_to_loop(moving,
+	initial_path,
+	use_diagonals,
+	datum/callback/heuristic,
+)
+	return add_to_loop(
+		moving,
 		subsystem,
 		/datum/move_loop/has_target/astar,
 		priority,
@@ -51,8 +55,10 @@
 		access,
 		avoid,
 		skip_first,
-		diagonal_handling,
-		initial_path)
+		initial_path,
+		use_diagonals,
+		heuristic,
+	)
 
 /datum/move_loop/has_target/astar
 	///How often we're allowed to recalculate our path
@@ -73,6 +79,8 @@
 	var/use_diagonals
 	///Cooldown for repathing, prevents spam
 	COOLDOWN_DECLARE(repath_cooldown)
+	///Cooldown for anticipated paths
+	COOLDOWN_DECLARE(repath_anticipated_cooldown)
 	///Bool used to determine if we're already making a path in Astar. this prevents us from re-pathing while we're already busy.
 	var/is_pathing = FALSE
 	///Callbacks to invoke once we make a path
@@ -84,7 +92,20 @@
 	. = ..()
 	on_finish_callbacks += CALLBACK(src, PROC_REF(on_finish_pathing))
 
-/datum/move_loop/has_target/astar/setup(delay, timeout, atom/chasing, repath_delay, max_path_length, minimum_distance, list/access, turf/avoid, skip_first, list/initial_path, use_diagonals, datum/callback/heuristic)
+/datum/move_loop/has_target/astar/setup(
+	delay,
+	timeout,
+	atom/chasing,
+	repath_delay,
+	max_path_length,
+	minimum_distance,
+	list/access,
+	turf/avoid,
+	skip_first,
+	list/initial_path,
+	use_diagonals,
+	datum/callback/heuristic,
+)
 	. = ..()
 	if(!.)
 		return
@@ -129,7 +150,7 @@
 
 /datum/move_loop/has_target/astar/loop_started()
 	. = ..()
-	if(!movement_path)
+	if(!length(movement_path))
 		INVOKE_ASYNC(src, PROC_REF(recalculate_path))
 
 /datum/move_loop/has_target/astar/loop_stopped()

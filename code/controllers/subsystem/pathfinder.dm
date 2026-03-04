@@ -4,6 +4,8 @@ SUBSYSTEM_DEF(pathfinder)
 	name = "Pathfinder"
 	init_order = INIT_ORDER_PATH
 	priority = FIRE_PRIORITY_PATHFINDING
+	flags = SS_NO_INIT
+	wait = 0.5
 	/// List of pathfind datums we are currently trying to process
 	var/list/datum/pathfind/active_pathing = list()
 	/// List of pathfind datums being ACTIVELY processed. exists to make subsystem stats readable
@@ -44,11 +46,9 @@ SUBSYSTEM_DEF(pathfinder)
 	use_diagonals = TRUE,
 	list/on_finish,
 	datum/callback/heuristic,
-	multi_z = FALSE
 )
-	var/datum/pathfind/a_star = multi_z ? /datum/pathfind/astar/multi : /datum/pathfind/astar
 
-	var/datum/pathfind/astar/path = new a_star(
+	var/datum/pathfind/astar/path = new(
 		invoker,
 		end,
 		access,
