@@ -130,6 +130,14 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 /datum/quirk/proc/on_remove()
 	return
 
+/// Called when you examine someone
+/datum/quirk/proc/examinate(mob/user, list/P, list/examine_contents)
+	return
+
+/// Called when you are examined
+/datum/quirk/proc/on_examined(mob/user, list/P, list/examine_contents)
+	return
+
 /// Called every life tick if implemented
 /datum/quirk/proc/on_life(mob/living/user)
 	return

@@ -38,8 +38,8 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
@@ -112,8 +112,8 @@
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
@@ -177,8 +177,8 @@
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
@@ -238,8 +238,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 
 /datum/job/migrant/footman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -294,8 +294,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/migrant/pikeman_bannerman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

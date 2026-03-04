@@ -83,8 +83,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/guardsman/footman
 	name = "City Watch Footman"
@@ -131,8 +131,8 @@
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/guardsman/archer
 	name = "City Watch Archer"
@@ -180,8 +180,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/guardsman/pikeman
 	name = "City Watch Pikeman"

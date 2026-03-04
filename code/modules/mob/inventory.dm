@@ -350,6 +350,16 @@
 		items += wear_mask
 	if(wear_neck)
 		items += wear_neck
+	if(shoes)
+		items += shoes
+	if(gloves)
+		items += gloves
+	if(mouth)
+		items += mouth
+	if(handcuffed)
+		items += handcuffed
+	if(legcuffed)
+		items += legcuffed
 	return items
 
 /mob/living/carbon/human/get_equipped_items(include_pockets = FALSE)
@@ -360,14 +370,6 @@
 		items += beltr
 	if(beltl)
 		items += beltl
-	if(backr)
-		items += backr
-	if(backl)
-		items += backl
-	if(gloves)
-		items += gloves
-	if(shoes)
-		items += shoes
 	if(wear_ring)
 		items += wear_ring
 	if(wear_wrists)
@@ -378,8 +380,6 @@
 		items += wear_pants
 	if(cloak)
 		items += cloak
-	if(mouth)
-		items += mouth
 	if(wear_shirt)
 		items += wear_shirt
 	return items
@@ -405,6 +405,7 @@
 		obscured |= ITEM_SLOT_NECK
 	if(hidden_slots & HIDEMASK)
 		obscured |= ITEM_SLOT_MASK
+		obscured |= ITEM_SLOT_MOUTH
 	if(hidden_slots & HIDEGLOVES)
 		obscured |= ITEM_SLOT_GLOVES
 	if(hidden_slots & HIDEJUMPSUIT)
@@ -417,6 +418,18 @@
 		obscured |= ITEM_SLOT_BELT
 
 	return obscured
+
+/// Returns an associative list of slots to the item they have
+/mob/living/carbon/proc/get_unobscured_items(transparent_protection)
+	var/list/items = list()
+	var/obscured_slots = check_obscured_slots(transparent_protection)
+	for(var/slot in SLOT_DISPLAY_PRIORITY)
+		if(obscured_slots & slot)
+			continue
+		var/obj/item/I = get_item_by_slot(slot)
+		if(I)
+			items[slot] = I
+	return items
 
 /obj/item/proc/equip_to_best_slot(mob/M)
 	if(src != M.get_active_held_item())

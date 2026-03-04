@@ -30,8 +30,8 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 
 /datum/job/gatemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)

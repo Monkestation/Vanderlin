@@ -725,10 +725,15 @@ if (length(L) < I) { \
 	for(var/key in key_list)
 		. |= key_list[key]
 
-/proc/make_associative(list/flat_list)
+/proc/make_associative(list/flat_list, fill_with=TRUE)
 	. = list()
 	for(var/thing in flat_list)
 		.[thing] = TRUE
+
+/**
+ * Takes a flat list and turns it into a list of lists
+ */
+/proc/make_recursive_list(list/flat_list)
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
 #define DEFAULTPICK(L, default) ((islist(L) && length(L)) ? pick(L) : default)

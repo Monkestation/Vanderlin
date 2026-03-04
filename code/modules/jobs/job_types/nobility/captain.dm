@@ -63,8 +63,8 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/captain/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

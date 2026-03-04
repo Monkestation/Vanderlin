@@ -54,8 +54,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/lieutenant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -72,6 +72,7 @@
 #include "code\__DEFINES\emotions.dm"
 #include "code\__DEFINES\enchantments.dm"
 #include "code\__DEFINES\events.dm"
+#include "code\__DEFINES\examine.dm"
 #include "code\__DEFINES\exports.dm"
 #include "code\__DEFINES\faith.dm"
 #include "code\__DEFINES\fantasy_affixes.dm"

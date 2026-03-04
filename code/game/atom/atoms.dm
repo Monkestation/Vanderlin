@@ -442,18 +442,16 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-	if(article)
-		. = "[article] <b>[src]</b>"
-		override[EXAMINE_POSITION_ARTICLE] = article
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
+/atom/proc/get_examine_name(mob/user, use_article=FALSE)
+	return use_article && article ? "[article] <b>[name]</b>" : "\a <b>[name]</b>"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""][get_examine_name(user)]"
+	. = get_examine_name(user, TRUE)
+	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+		. = override.Join("")
+	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
 
 /atom/proc/get_inspect_button()
 	return ""

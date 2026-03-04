@@ -1,3 +1,5 @@
+#define html_tag(tag, str) ("<"+tag+">" + str + "</"+tag+">")
+
 #define span_abductor(str) ("<span class='abductor'>" + str + "</span>")
 #define span_admin(str) ("<span class='admin'>" + str + "</span>")
 #define span_adminhelp(str) ("<span class='adminhelp'>" + str + "</span>")

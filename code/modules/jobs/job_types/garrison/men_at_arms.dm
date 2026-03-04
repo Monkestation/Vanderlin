@@ -85,9 +85,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_MEDIUMARMOR
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/pikeman
 	name = "Pikeman Men-At-Arms"
@@ -136,8 +136,8 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/axeman
 	name = "Axeman Men-At-Arms"
@@ -181,9 +181,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_DODGEEXPERT
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
@@ -238,9 +238,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_MEDIUMARMOR
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/swordsman
 	name = "Swordsman Men-At-Arms"
