@@ -12,6 +12,10 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	ambushable = FALSE
 	base_intents = list(INTENT_STEAL, INTENT_HELP, INTENT_DISARM, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/jump)
 	bloodpool = 500
+	var/randomize_rous_name = FALSE
+
+/mob/living/carbon/human/species/rousman/apply_prefs_job(client/player_client, datum/job/job)
+	return
 
 /mob/living/carbon/human/species/rousman/Initialize()
 	. = ..()
@@ -127,6 +131,12 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	headprice = 2
 	sellprice = 2
 
+
+
+/mob/living/carbon/human/species/rousman/random_name
+	randomize_rous_name = TRUE
+
+
 // ##################################### SPECIES BIT #####################################
 /datum/species/rousman
 	name = "rousman"
@@ -143,11 +153,13 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		TRAIT_NASTY_EATER,
 		TRAIT_LEECHIMMUNE,
 		TRAIT_INHUMENCAMP,
+		TRAIT_NOMOOD,
+		TRAIT_NOHUNGER,
 	)
 
 	no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
-	offset_features_m = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5))
-	offset_features_f = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5))
+	offset_features_m = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5), OFFSET_BACK = list(0,-4))
+	offset_features_f = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5), OFFSET_BACK = list(0,-4))
 	dam_icon_f = null
 	dam_icon_m = null
 	damage_overlay_type = ""
@@ -156,6 +168,38 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	exotic_bloodtype = /datum/blood_type/human/corrupted/rousman
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
 	native_language = "Rous"
+	possible_ages = NORMAL_AGES_LIST
+
+/datum/species/rousman/random_character(mob/living/carbon/human/species/rousman/target_mob)
+	if(istype(target_mob) && target_mob.randomize_rous_name)
+		target_mob.real_name = random_name(target_mob.gender, TRUE)
+	target_mob.age = pick(possible_ages)
+	var/list/skins = get_skin_list()
+	target_mob.skin_tone = skins[pick(skins)]
+	target_mob.accessory = "Nothing"
+
+	target_mob.update_body()
+	target_mob.update_body_parts()
+
+/datum/species/rousman/get_possible_names(gender = MALE)
+	var/static/list/rousman_names = list(
+		"Rekri",
+		"Remi",
+		"Ravek",
+		"Rousabek",
+		"Reshik",
+		"Rir",
+		"Rummek",
+		"Ruren",
+		"Rorkash",
+		"Ressit",
+		"Rukri",
+		"Rousar",
+		"Rousrik",
+		"Rakri",
+		"Reshar"
+	)
+	return rousman_names
 
 /datum/species/rousman/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -257,11 +301,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))
 		faction |= "islander"
-	name = "rousman"
-	real_name = "rousman"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	if(!randomize_rous_name)
+		name = "rousman"
+		real_name = "rousman"
 
 /datum/component/rot/corpse/rousman/process()
 	var/amt2add = 10 //1 second

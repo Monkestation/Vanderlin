@@ -321,6 +321,14 @@
 	craftdiff = 1
 	category = "Storage"
 
+/datum/repeatable_crafting_recipe/sewing/clothrucksack
+	name = "cloth rucksack"
+	output = /obj/item/storage/backpack/satchel/cloth/big
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 4)
+	craftdiff = 2
+	category = "Storage"
+
 /datum/repeatable_crafting_recipe/sewing/pcoif
 	name = "cloth coif"
 	output = /obj/item/clothing/neck/coif/cloth

@@ -130,7 +130,7 @@
 			appendage_to_name += ", [used_title]"
 
 		if(appendage_to_name) // if we got any of those paramaters add it to their name
-			statement_of_identity += " the [appendage_to_name]"
+			statement_of_identity += " the[appendage_to_name]"
 
 		statement_of_identity += "." // comma at the end
 		// full name with all paramaters would be: "John Serf the returning Rakshari, Minnie Bonnickers smithy apprentice.""
