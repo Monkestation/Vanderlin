@@ -285,11 +285,11 @@
 		var/str = I.get_examine_string(user)
 		if(slot_title)
 			str += " [slot_title]"
-		. += "[icon2html(I, user, icon_state = I.get_examine_icon_state(user))] - wearing [str]."
+		. += "[I.get_examine_icon(user)] - wearing [str]."
 	var/obj/item/offhand/wielding = locate() in held_items
 	for(var/obj/item/I in held_items)
 		if(!(I.item_flags & ABSTRACT))
-			. += "[icon2html(I, user, icon_state = I.get_examine_icon_state(user))] - [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+			. += "[I.get_examine_icon(user)] - [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
 /// Things that are physical but do not need to see your face to establish.
