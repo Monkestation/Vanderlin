@@ -565,6 +565,17 @@ h2.alert {
   color: hsl(0, 100%, 50%);
 }
 
+.smallred {
+  color: hsl(0, 100%, 50%);
+  font-size: 85%;
+}
+
+.redbig {
+  color: hsl(0, 100%, 50%);
+  font-size: 125%;
+}
+
+
 .blue {
   color: hsl(240, 100%, 50%);
 }
@@ -573,12 +584,12 @@ h2.alert {
   color: hsl(132.6, 78.7%, 36.9%);
 }
 
-.boldnicegreen {
+.span_boldgreen {
   color: hsl(132.6, 78.7%, 36.9%);
   font-weight: bold;
 }
 
-.tinynicegreen {
+.smallgreen {
   color: hsl(132.6, 78.7%, 36.9%);
   font-size: 85%;
 }
@@ -761,10 +772,6 @@ h2.alert {
 
 .greentext {
   color: hsl(120, 100%, 50%);
-}
-
-.redtext {
-  color: hsl(0, 100%, 50%);
 }
 
 .singing {

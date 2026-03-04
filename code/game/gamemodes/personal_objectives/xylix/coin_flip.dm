@@ -44,7 +44,7 @@
 			change_rules(our_coin)
 			return
 	else
-		to_chat(user, span_redtext("Sadly, the coin didn't land on the winning side... Better luck next time! Xylix takes the coin!"))
+		to_chat(user, span_red("Sadly, the coin didn't land on the winning side... Better luck next time! Xylix takes the coin!"))
 		qdel(our_coin)
 		return
 

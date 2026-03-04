@@ -1,4 +1,5 @@
 
+/// Used by the examine pronoun list as keys.
 #define THEY	"they"
 #define THEM	"them"
 #define THEIR	"their"
@@ -12,13 +13,14 @@
  * These are used to establish an indexing format for examine sections.
  * EXAMINE_SECTS are just numbers, so they can only be used in alists
  */
-#define EXAMINE_SECT_NAME		1
-#define EXAMINE_SECT_SPECIES	2
-#define EXAMINE_SECT_FACE		3
-#define EXAMINE_SECT_PREGEAR	4
-#define EXAMINE_SECT_GEAR		5
-#define EXAMINE_SECT_BODY		6
-#define EXAMINE_SECT_WARNING	7
-#define EXAMINE_SECT_HEALTH		8
-#define EXAMINE_SECT_LAST		9
-#define EXAMINE_SECT_HEADSHOT	10
+#define EXAMINE_SECT_NAME		1 // The name/title. Maybe don't use this line?
+#define EXAMINE_SECT_SPECIES	2 // The species line. Gets combined into a single string.
+#define EXAMINE_SECT_FACE		3 // The face line. Usually stuff that only shows up from their face.
+#define EXAMINE_SECT_PREGEAR	4 // Misc things before gear, used by antags a lot.
+#define EXAMINE_SECT_GEAR		5 // Equipment box
+#define EXAMINE_SECT_BODY		6 // Sort of like face, but always shows up. Based on physical stuff.
+#define EXAMINE_SECT_WARNING	7 // Things to inform the player of, e.g. whether they're soaked.
+#define EXAMINE_SECT_HEALTH		8 // Things pertinent to health. Like whether you're bleeding or missing a limb.
+#define EXAMINE_SECT_LAST		9 // Things you wanna cram at the very end.
+#define EXAMINE_SECT_HEADSHOT	10 // The headshot / examine closer buttons.
+// If you add anything past this, the character won't be the only relevant headshot

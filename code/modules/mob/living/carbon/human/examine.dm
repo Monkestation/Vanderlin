@@ -40,7 +40,7 @@
 	// Culture
 	if(culture)
 		// do we know them, are we an observer, or do we share a culture
-		if(do_i_know || O || istype(culture, H?.culture?.type) && !istype(culture, /datum/culture/universal/ambiguous))
+		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
 			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
 		// are they from anywhere

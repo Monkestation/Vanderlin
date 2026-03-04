@@ -465,7 +465,7 @@
 
 		var/obj_count = 1
 		for(var/datum/objective/personal/objective as anything in mind.personal_objectives)
-			var/result = objective.check_completion() ? span_greentext("TRIUMPH!") : span_redtext("FAIL")
+			var/result = objective.check_completion() ? span_greentext("TRIUMPH!") : span_red("FAIL")
 			parts += "<B>Goal #[obj_count]</B>: [objective.explanation_text] - [result]"
 			obj_count++
 
@@ -581,11 +581,11 @@
 	var/text = "<b>[usede]</b> was <b>[ply.name]</b>[jobtext] and"
 	if(ply.current)
 		if(ply.current.stat == DEAD)
-			text += span_redtext(" died.")
+			text += span_red(" died.")
 		else
 			text += span_greentext(" survived.")
 	else
-		text += span_redtext(" died.")
+		text += span_red(" died.")
 	return text
 
 /proc/printplayerlist(list/datum/mind/players,fleecheck)

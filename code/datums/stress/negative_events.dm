@@ -224,7 +224,7 @@
 /datum/stress_event/fishface
 	timer = 1 MINUTES
 	stress_change = 1
-	desc = span_redtext("That thing is hideous!")
+	desc = span_red("That thing is hideous!")
 	var/is_helpless_child = FALSE
 	/// prevents the jumpscare from triggering from repeated examines
 	var/is_refresh = FALSE

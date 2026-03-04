@@ -119,7 +119,7 @@
 				var/beauty_desc = "gorgeous"
 				if(pronouns == SHE_HER) beauty_desc = "beautiful"
 				else if(pronouns == HE_HIM) beauty_desc = "handsome"
-				. += span_love("[P[THEYRE]] [beauty_desc]!")
+				. += span_rose("[P[THEYRE]] [beauty_desc]!")
 				user.add_stress(self_inspect ? /datum/stress_event/beautiful_self : /datum/stress_event/beautiful)
 			else // you can only be ugly then, huh.
 				. += span_necrosis("[P[THEYRE]] hideous!")
@@ -129,7 +129,7 @@
 	if(!self_inspect)
 		//Old Party
 		if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
-			. += span_smallgreen("Ahh... my old friend!")
+			. += span_nicegreen("Ahh... my old friend!")
 			user.add_stress(/datum/stress_event/saw_old_party)
 		// Intolerant
 		else if(!HAS_TRAIT(user, TRAIT_TOLERANT)) // friendship is kinda like tolerance after all
