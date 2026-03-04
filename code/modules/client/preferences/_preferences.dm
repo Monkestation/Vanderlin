@@ -1704,18 +1704,34 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("loadout_item")
 					var/list/loadouts_available = list("None" = null)
 					for(var/datum/loadout_item/item as anything in GLOB.loadout_items)
-						loadouts_available[item.name] += item
-
+						var/datum/loadout_item/singleton = GLOB.loadout_items[item]
+						if(singleton.is_unlocked_for(user.client))
+							loadouts_available[item.name] = item
+						else
+							// Show it but greyed out with a hint, so players know it exists
+							var/datum/award/A = SSachievements.awards[item.required_award]
+							var/locked_name = "\[Locked\] [item.name]"
+							if(A?.name)
+								locked_name += " (Requires: [A.name]"
+								// Show progress for progress-type awards
+								if(istype(A, /datum/award/achievement/progress))
+									locked_name += " - [user.client.player_details.achievements.get_progress_string(item.required_award)]"
+								locked_name += ")"
+							loadouts_available[locked_name] = null // Maps to null so set_loadout gets nothing if somehow selected
 					var/loadout_input = browser_input_list(
 						user,
 						"Choose your character's loadout item. RMB a tree, statue or clock to collect.",
 						"Loadout",
 						loadouts_available,
-						)
-
+					)
 					var/loadout_number = href_list["loadout_number"]
-
-					set_loadout(user, loadout_number, loadouts_available[loadout_input])
+					// Re-validate on submission in case of href manipulation
+					var/datum/loadout_item/chosen = loadouts_available[loadout_input]
+					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[loadout_input]
+					if(chosen && !chosen_singleton.is_unlocked_for(user.client))
+						to_chat(user, span_warning("You haven't unlocked that loadout item yet."))
+						return
+					set_loadout(user, loadout_number, chosen)
 
 				if("species")
 					selected_accent = ACCENT_DEFAULT

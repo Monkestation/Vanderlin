@@ -812,7 +812,7 @@
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && modifiers)
+	if(isliving(source) && length(modifiers))
 		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]

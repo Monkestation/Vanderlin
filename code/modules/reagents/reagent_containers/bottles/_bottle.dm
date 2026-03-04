@@ -86,9 +86,10 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	toggle_cork(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user)
+/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user, modify_nextmove = TRUE)
 	closed = !closed
-	user.changeNext_move(CLICK_CD_RAPID)
+	if(modify_nextmove)
+		user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags

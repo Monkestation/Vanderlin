@@ -597,7 +597,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	melting_material = null
 
-/obj/item/weapon/spear/naginata
+/obj/item/weapon/polearm/spear/naginata
 	name = "Naginata"
 	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
@@ -609,7 +609,7 @@
 	max_blade_int = 100 //Nippon suteeru (dogshit)
 	minstr = 7
 
-/obj/item/weapon/spear/naginata/getonmobprop(tag)
+/obj/item/weapon/polearm/spear/naginata/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

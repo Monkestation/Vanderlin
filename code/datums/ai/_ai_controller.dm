@@ -47,6 +47,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	// Movement related things here
 	///Reference to the movement datum we use. Is a type on initialize but becomes a ref afterwards.
 	var/datum/ai_movement/ai_movement = /datum/ai_movement/dumb
+	/// this shouldn't be a component tbh but uh reusing code go brrr
+	var/datum/component/ai_inventory_manager/inventory_component
 	///Cooldown until next movement
 	COOLDOWN_DECLARE(movement_cooldown)
 	///Delay between movements. This is on the controller so we can keep the movement datum singleton
@@ -82,6 +84,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/Destroy(force, ...)
 	UnpossessPawn(FALSE)
 	our_cells = null
+	inventory_component = null
 	set_movement_target(type, null)
 	if(ai_movement.moving_controllers[src])
 		ai_movement.stop_moving_towards(src)
@@ -101,6 +104,45 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		RegisterSignal(current_movement_target, COMSIG_PARENT_PREQDELETED, PROC_REF(on_movement_target_delete))
 	if(new_movement)
 		change_ai_movement_type(new_movement)
+
+
+/**
+ * Removes a subtree from planning_subtrees by typepath.
+ * Safe to call whether planning_subtrees holds instances or typepaths.
+ */
+/datum/ai_controller/proc/remove_subtree(datum/ai_planning_subtree/subtree_type)
+	for(var/datum/ai_planning_subtree/subtree as anything in planning_subtrees)
+		if(subtree.type == subtree_type)
+			planning_subtrees -= subtree
+			return
+
+/**
+ * Adds a subtree at a given position (1-indexed) by typepath, resolving the singleton instance.
+ * If the subtree is already present it will not be added again.
+ * Position is clamped so 1 = top, length+1 (or any value beyond the list) = bottom.
+ */
+/datum/ai_controller/proc/add_subtree_at(datum/ai_planning_subtree/subtree_type, index = 1)
+	for(var/datum/ai_planning_subtree/subtree as anything in planning_subtrees)
+		if(subtree.type == subtree_type)
+			return // already present, do nothing
+
+	var/datum/ai_planning_subtree/subtree_instance = GLOB.ai_subtrees[subtree_type]
+	if(!subtree_instance)
+		CRASH("add_subtree_at: subtree type [subtree_type] not found in GLOB.ai_subtrees")
+
+	LAZYINITLIST(planning_subtrees)
+	index = clamp(index, 1, length(planning_subtrees) + 1)
+	planning_subtrees.Insert(index, subtree_instance)
+
+/**
+ * Returns the index of a subtree in planning_subtrees by typepath, or 0 if not found.
+ */
+/datum/ai_controller/proc/get_subtree_index(datum/ai_planning_subtree/subtree_type)
+	for(var/i in 1 to length(planning_subtrees))
+		var/datum/ai_planning_subtree/subtree = planning_subtrees[i]
+		if(subtree.type == subtree_type)
+			return i
+	return 0
 
 ///Overrides the current ai_movement of this controller with a new one
 /datum/ai_controller/proc/change_ai_movement_type(datum/ai_movement/new_movement)
@@ -168,7 +210,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	return !QDELETED(pawn)
 
 ///Interact with objects
-/datum/ai_controller/proc/ai_interact(target, combat_mode, nextmove = FALSE, list/modifiers)
+/datum/ai_controller/proc/ai_interact(target, combat_mode, nextmove = FALSE, list/modifiers, maintain_position = FALSE)
 	if(!ai_can_interact())
 		return FALSE
 
@@ -181,10 +223,11 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(nextmove && living_pawn.next_move > world.time)
 		return FALSE
 
-	if(living_pawn.body_position == LYING_DOWN)
-		living_pawn.aimheight_change(rand(1,9))
-	else
-		living_pawn.aimheight_change(rand(10,19))
+	if(!maintain_position)
+		if(living_pawn.body_position == LYING_DOWN)
+			living_pawn.aimheight_change(rand(1,9))
+		else
+			living_pawn.aimheight_change(rand(10,19))
 
 	var/params = list2params(modifiers)
 
@@ -371,6 +414,16 @@ have ways of interacting with a specific atom and control it. They posses a blac
 			return
 
 	SEND_SIGNAL(src, COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS, current_behaviors, planned_behaviors)
+
+	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
+		var/action_delta_time = max(current_behavior.get_cooldown(src) * 0.1, delta_time)
+
+		if(!(current_behavior.behavior_flags & AI_BEHAVIOR_EXECUTE_ALONGSIDE))
+			continue
+		if(behavior_cooldowns[current_behavior] > world.time)
+			continue
+		ProcessBehavior(action_delta_time, current_behavior)
+
 	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
 		// Convert the current behaviour action cooldown to realtime seconds from deciseconds.current_behavior
 		// Then pick the max of this and the delta_time passed to ai_controller.process()
@@ -513,7 +566,16 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		behavior_args -= behavior_type
 	SEND_SIGNAL(src, AI_CONTROLLER_BEHAVIOR_QUEUED(behavior_type), arguments)
 
+/datum/ai_controller/proc/get_inventory()
+	RETURN_TYPE(/datum/component/ai_inventory_manager)
+	if(!inventory_component)
+		return pawn?.GetComponent(/datum/component/ai_inventory_manager)
+	return inventory_component
+
 /datum/ai_controller/proc/ProcessBehavior(delta_time, datum/ai_behavior/behavior)
+	var/mob/living/liver = pawn
+	if(liver.doing())
+		return
 	var/list/arguments = list(delta_time, src)
 	var/list/stored_arguments = behavior_args[behavior.type]
 	if(stored_arguments)
@@ -793,25 +855,30 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	while(index <= length(remove_queue))
 		var/list/next_to_clear = remove_queue[index]
 		for(var/inner_value in next_to_clear)
-			var/associated_value = next_to_clear[inner_value]
-			// We are a lists of lists, add the next value to the queue so we can handle references in there
-			// (But we only need to bother checking the list if it's not empty.)
-			if(islist(inner_value) && length(inner_value))
-				UNTYPED_LIST_ADD(remove_queue, inner_value)
+			if(isnum(inner_value))
+				if(inner_value == source)
+					next_to_clear -= inner_value
+					SEND_SIGNAL(pawn, COMSIG_AI_BLACKBOARD_KEY_CLEARED(inner_value))
+			else
+				var/associated_value = next_to_clear[inner_value]
+				// We are a lists of lists, add the next value to the queue so we can handle references in there
+				// (But we only need to bother checking the list if it's not empty.)
+				if(islist(inner_value) && length(inner_value))
+					UNTYPED_LIST_ADD(remove_queue, inner_value)
 
-			// We found the value that's been deleted. Clear it out from this list
-			else if(inner_value == source)
-				next_to_clear -= inner_value
+				// We found the value that's been deleted. Clear it out from this list
+				else if(inner_value == source)
+					next_to_clear -= inner_value
 
-			// We are an assoc lists of lists, the list at the next value so we can handle references in there
-			// (But again, we only need to bother checking the list if it's not empty.)
-			if(islist(associated_value) && length(associated_value))
-				UNTYPED_LIST_ADD(remove_queue, associated_value)
+				// We are an assoc lists of lists, the list at the next value so we can handle references in there
+				// (But again, we only need to bother checking the list if it's not empty.)
+				if(islist(associated_value) && length(associated_value))
+					UNTYPED_LIST_ADD(remove_queue, associated_value)
 
-			// We found the value that's been deleted, it was an assoc value. Clear it out entirely
-			else if(associated_value == source)
-				next_to_clear -= inner_value
-				SEND_SIGNAL(pawn, COMSIG_AI_BLACKBOARD_KEY_CLEARED(inner_value))
+				// We found the value that's been deleted, it was an assoc value. Clear it out entirely
+				else if(associated_value == source)
+					next_to_clear -= inner_value
+					SEND_SIGNAL(pawn, COMSIG_AI_BLACKBOARD_KEY_CLEARED(inner_value))
 
 		index += 1
 

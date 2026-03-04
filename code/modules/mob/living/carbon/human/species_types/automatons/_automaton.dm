@@ -11,6 +11,14 @@
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel)
 
+/mob/living/carbon/human/species/automaton/vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel, /obj/item/reagent_containers/lux)
+
+/mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/ghost_vessel)
+
 /datum/species/automaton
 	name = "Automaton"
 	id = SPEC_ID_AUTOMATON

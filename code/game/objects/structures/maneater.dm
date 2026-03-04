@@ -138,6 +138,8 @@
 			return
 		if(L.buckling)
 			return // Something else is buckling them, maybe another maneater even
+		if(!L.client)
+			return
 		buckle_mob(L, TRUE, check_loc = FALSE)
 		START_PROCESSING(SSobj, src)
 		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
