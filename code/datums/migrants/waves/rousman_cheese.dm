@@ -36,26 +36,20 @@
 	name = "Rousman Captain (Migrant Wave)"
 	armor = /obj/item/clothing/armor/cuirass
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	shirt = /obj/item/clothing/armor/chainmail
-	neck = /obj/item/clothing/neck/gorget
-	head = /obj/item/clothing/head/helmet/coppercap
-	backr = /obj/item/weapon/shield/wood
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/black
 	beltr = /obj/item/flashlight/flare/torch/lantern
-	beltl = /obj/item/weapon/pick/paxe
-	pants = /obj/item/clothing/pants/trou
-	shoes = /obj/item/clothing/shoes/simpleshoes/buckle
+	beltl = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel/cloth/big
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor)
+	backpack_contents = list()
 
 /datum/migrant_role/rousman_cheese/cheesemaker
-	name = "Rousman Weaponsmith"
-	greet_text = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
+	name = "Rousman Cheesemaker"
+	greet_text = "You are the cheesemaker of a rousman clan, listen to your leader as they work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemaker
 
 /datum/job/migrant/rousman_cheese/cheesemaker
-	title = "Rousman Weaponsmith"
-	tutorial = " You are the weaponsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
+	title = "Rousman Cheesemaker"
+	tutorial = "You are the cheesemaker of a rousman clan, listen to your leader as they work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemaker
 
 	jobstats = list(
@@ -79,39 +73,19 @@
 /datum/outfit/rousman_cheese/cheesemaker
 	name = "Rousman Cheesemaker (Migrant Wave)"
 	ring = /obj/item/clothing/ring/silver/makers_guild
-	head = /obj/item/clothing/head/hatfur
-	cloak = /obj/item/clothing/cloak/apron/brown
-	beltl = /obj/item/storage/belt/pouch/coins/poor
 	armor = /obj/item/clothing/armor/leather/splint
-	belt = /obj/item/storage/belt/leather
-	pants = /obj/item/clothing/pants/trou
-	backr = /obj/item/weapon/axe/steel
-
-/datum/outfit/rousman_cheese/cheesemaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-
-	if(prob(50))
-		head = /obj/item/clothing/head/hatblu
-
-	if(equipped_human.gender == MALE)
-		shoes = /obj/item/clothing/shoes/boots/leather
-		shirt = /obj/item/clothing/shirt/shortshirt
-		beltl = /obj/item/storage/belt/pouch/coins/poor
-		backl =	/obj/item/weapon/hammer/sledgehammer
-	else
-		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-		armor = /obj/item/clothing/armor/leather/splint
-		shoes = /obj/item/clothing/shoes/shortboots
-		backl = /obj/item/weapon/pick/paxe
+	belt = /obj/item/storage/belt/leather/black
+	beltl = /obj/item/storage/belt/pouch/coins/poor
+	backl = /obj/item/storage/backpack/satchel/cloth/big
 
 /datum/migrant_role/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger"
-	greet_text = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
+	greet_text = "You are the cheesemonger of a rousman clan, listen to your leader as they work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemonger
 
 /datum/job/migrant/rousman_cheese/cheesemonger
 	title = "Rousman Cheesemonger"
-	tutorial = " You are the armorsmith of a dwarven expedition, obey your foreman as they lead you in Malum's name into the tomb of Matthios."
+	tutorial = "You are the cheesemonger of a rousman clan, listen to your leader as they work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemonger
 
 	jobstats = list(
@@ -135,13 +109,9 @@
 /datum/outfit/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger (Migrant Wave)"
 	ring = /obj/item/clothing/ring/silver/makers_guild
-	head = /obj/item/clothing/head/hatfur
-	pants = /obj/item/clothing/pants/trou
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-	cloak = /obj/item/clothing/cloak/apron/brown
-	armor = /obj/item/clothing/armor/chainmail
-	backr = /obj/item/weapon/axe/steel
+	backl = /obj/item/storage/backpack/satchel/cloth/big
 
 /datum/outfit/rousman_cheese/cheesemonger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
