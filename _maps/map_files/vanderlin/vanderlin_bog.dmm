@@ -14425,7 +14425,6 @@
 /turf/open/openspace,
 /area/outdoors/mountains)
 "oZi" = (
-/obj/structure/stairs/stone,
 /obj/structure/stairs/stone{
 	dir = 8
 	},
@@ -20482,13 +20481,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/ship/topdeck)
-"wry" = (
-/obj/structure/stairs/stone,
-/obj/structure/stairs/stone{
-	dir = 8
-	},
-/turf/open/floor/blocks/newstone/alt,
-/area/outdoors/bog)
 "wsH" = (
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor,
@@ -56515,7 +56507,7 @@ fzL
 skj
 sLp
 oZi
-wry
+sLp
 cyZ
 xjU
 vhU
