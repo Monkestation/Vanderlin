@@ -139,7 +139,7 @@
 	C.grant_language(/datum/language/common)
 
 	for(var/datum/action/action as anything in actions)
-		action = new(src)
+		action = new action(src)
 		action.Grant(C)
 
 	C.add_movespeed_modifier(MOVESPEED_ID_AUTOMATON, multiplicative_slowdown = 0.9)
