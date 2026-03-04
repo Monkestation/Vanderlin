@@ -1,12 +1,11 @@
 /mob/living/carbon/get_examine_name(mob/user)
 	if(IsAdminGhost(user))
 		return ..()
-	return get_visible_name(html_tags = "EM")
+	return get_visible_name(html_tags = list("EM"))
 
 
 /mob/living/carbon/examine(mob/user)
-	. = list("<span class='info'>")
-	. += "ᛉ ------------ ᛉ"
+	. = list()
 
 	var/list/P
 	if(user == src)
@@ -30,36 +29,54 @@
 			THEYVE = p_theyve(TRUE)
 		)
 
-	var/list/list/examine_box = get_examine_list(user, P)
+	var/alist/examine_sections = get_examine_list(user, P)
 
 	//The wrap-up. Anything else we need to do before we start spanning things, we do it here.
 	//Note that this also sends a copy of our subjective pronouns.
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_box, P)
+	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_sections, P)
+
+	var/alist/rounded_sections = alist()
+	for(var/section_index in examine_sections)
+		var/list/section = examine_sections[section_index]
+		if(!length(section))
+			continue
+		LAZYADDASSOC(rounded_sections, floor(section_index), section)
+
+	for(var/section_index in rounded_sections)
+		var/list/section = rounded_sections[section_index]
+		var/join_marker = "\n"
+		if(section_index == EXAMINE_SECT_SPECIES)
+			join_marker = " "
+		var/joined_section = section.Join(join_marker)
+		// post modifiers
+		switch(section_index)
+			if(EXAMINE_SECT_WARNING)
+				joined_section = span_tinywarning(joined_section)
+			if(EXAMINE_SECT_GEAR)
+				joined_section = examine_block(html_tag("B", "[P[THEYRE]]:\n") + span_slightlylarger(joined_section))
+		. += joined_section
 
 
-	. += "ᛉ -------------- ᛉ"
-	. += "</span>"
-
-
-/// the contents of the examine box between the the ᛉ -------------- ᛉ
-/// user = the examiner
-/// P = the list of pronouns with a defined key, like THEY
+/**
+ * The contents of the examine box.
+ * user = the examiner
+ * P = the list of pronouns with a defined key, like THEY
+ **/
 /mob/living/carbon/proc/get_examine_list(mob/user, list/P)
-	. = list()
+	. = alist()
 	// Our name
-	LAZYADDASSOCLIST(., EXAMINE_SECT_NAME, "[get_examine_string(user, TRUE)].")
-
+	LAZYADDASSOCLIST(., EXAMINE_SECT_NAME, span_larger("[get_examine_string(user, TRUE)]."))
 	// Our face
 	var/can_see_face = IsAdminGhost(user) || is_human_part_visible(src, HIDEFACE)
-	LAZYADDASSOC(., EXAMINE_SECT_FACE, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_FACE+0.5, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
 	// Our gear
-	LAZYADDASSOC(., EXAMINE_SECT_GEAR, get_examine_gear(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_GEAR+0.5, get_examine_gear(user, P, .))
 	/// Our physical aspects
-	LAZYADDASSOC(., EXAMINE_SECT_BODY, get_examine_body(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_BODY+0.5, get_examine_body(user, P, .))
 	/// Warnings
-	LAZYADDASSOC(., EXAMINE_SECT_WARNING, get_examine_warnings(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_WARNING+0.5, get_examine_warnings(user, P, .))
 	/// Our health
-	LAZYADDASSOC(., EXAMINE_SECT_HEALTH, get_examine_health(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_HEALTH+0.5, get_examine_health(user, P, .))
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
@@ -112,7 +129,7 @@
 	if(!self_inspect)
 		//Old Party
 		if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
-			. += span_green("Ahh... my old friend!")
+			. += span_smallgreen("Ahh... my old friend!")
 			user.add_stress(/datum/stress_event/saw_old_party)
 		// Intolerant
 		else if(!HAS_TRAIT(user, TRAIT_TOLERANT)) // friendship is kinda like tolerance after all
@@ -125,32 +142,32 @@
 
 		// Excommunications
 		if(real_name in GLOB.excommunicated_players)
-			. += span_redtextbig("EXCOMMUNICATED!")
+			. += span_boldred("EXCOMMUNICATED!")
 		if(real_name in GLOB.heretical_players)
-			. += span_redtextbig("HERETIC! SHAME!")
+			. += span_boldred("HERETIC! SHAME!")
 
 		// Outlaws
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
-			. += span_redtextbig(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
+			. += span_boldred(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
 		var/list/known_frumentarii = user.mind?.cached_frumentarii
 		if(name in known_frumentarii)
 			if(known_frumentarii[name])
-				. += span_greentext("[P[THEYRE]] an agent of the court.")
+				. += span_smallgreen("[P[THEYRE]] an agent of the court.")
 			else
-				. += span_redtext("[P[THEYRE]] an ex-agent of the court.")
+				. += span_smallred("[P[THEYRE]] an ex-agent of the court.")
 
 		// Faceless
 		if(HAS_TRAIT(src, TRAIT_FACELESS))
 			. += span_userdanger("NO FACE!!")
 		// Foreigner
 		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			. += span_warning("A foreigner.")
+			. += span_tinywarning("A foreigner.")
 			user.add_stress(/datum/stress_event/para/foreigner)
 		// Thuild
 		if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
-			. += span_green("A member of the Thieves' Guild.")
+			. += span_smallgreen("A member of the Thieves' Guild.")
 		// Cabal
 		if(HAS_TRAIT(user, TRAIT_CABAL) && (istype(patron, /datum/patron/inhumen/zizo) || HAS_TRAIT(src, TRAIT_CABAL)))
 			. += span_purple("A fellow seeker of Her ascension.")
@@ -198,11 +215,11 @@
 			if(STRESS_INSANE to 15)
 				stress_msg = span_red("[P[THEYRE]] twitching at the eyes.")
 			if(STRESS_VBAD to STRESS_INSANE)
-				stress_msg = span_boldwarning("[P[THEY]] look[pl] really stressed.")
+				stress_msg = span_warning("[P[THEY]] look[pl] really stressed.")
 			if(STRESS_BAD to STRESS_VBAD)
-				stress_msg = span_warning("[P[THEY]] look[pl] stressed.")
+				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
-				stress_msg = span_noticesmall("[P[THEY]] look[pl] stressed.")
+				stress_msg = span_tinynotice("[P[THEY]] look[pl] stressed.")
 		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
 			. += stress_msg
 
@@ -236,11 +253,11 @@
 /mob/living/carbon/proc/get_examine_gear(mob/user, list/P, list/examine_list)
 	. = list()
 	var/list/unobscured = get_unobscured_items(FALSE)
-	for(var/slot in unobscured)
+	for(var/obj/item/I in unobscured)
 		var/slot_title = null
-		switch(slot) // this could probably be abstracted into its own proc at some point
-			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK)
-				slot_title = null // we dont need to specify where these are
+		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
+			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
+				slot_title = null
 			if(ITEM_SLOT_HEAD)
 				slot_title = "on [P[THEIR]] head"
 			if(ITEM_SLOT_MASK)
@@ -265,14 +282,14 @@
 				slot_title = "on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = "on [P[THEIR]] right side"
-		var/obj/item/I = unobscured[slot]
 		var/str = I.get_examine_string(user)
 		if(slot_title)
 			str += " [slot_title]"
-		. += str
+		. += "[icon2html(I, user)] - wearing [str]."
+	var/obj/item/offhand/wielding = locate() in held_items
 	for(var/obj/item/I in held_items)
 		if(!(I.item_flags & ABSTRACT))
-			. += "[P[THEYRE]] holding [I.get_examine_string(user)] in [P[THEIR]] [get_held_index_name(get_held_index_of_item(I))]."
+			. += "[icon2html(I, user)] - [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
 /// Things that are physical but do not need to see your face to establish.
@@ -291,11 +308,11 @@
 	var/datum/species/species = dna?.species
 	if(species)
 		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, span_info("[P[THEYRE]] \a [species_name]."))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
 
 	// Maniac, higher up than others
 	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.5, span_phobia(html_tag("h2", "THE WORLD TWISTS! MANIAC!")))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_phobia(html_tag("h2", "THE WORLD TWISTS! MANIAC!")))
 	// Leper
 	if(HAS_TRAIT(src, TRAIT_LEPROSY))
 		. += span_necrosis("A LEPER...")
@@ -304,11 +321,11 @@
 		. += span_boldnotice("[P[THEYRE]] obese!")
 	// Pricing
 	if(HAS_TRAIT(user, TRAIT_SEEPRICES) && sellprice)
-		. += span_notice("[P[THEYRE]] worth around [sellprice] mammon\s.")
+		. += span_tinynoticeital("[P[THEYRE]] worth around [sellprice] mammon\s.")
 	if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 		var/atom/item = get_most_expensive()
 		if(item)
-			. += span_notice("You get the feeling [P[THEIR]] most valuable possession is [item.get_examine_name(user, TRUE)].")
+			. += span_tinynoticeital("You get the feeling [P[THEIR]] most valuable possession is [item.get_examine_name(user, TRUE)].")
 
 
 	if(isautomaton(user))
@@ -329,6 +346,7 @@
 			final_con = 10
 			final_spd = 10
 
+		var/list/comp_msg = list()
 		var/str_msg
 		switch(final_str - L.STASTR)
 			if(5 to INFINITY)
@@ -343,7 +361,8 @@
 				str_msg = "[P[THEY]] look[pl] weaker than me."
 			else
 				str_msg =  html_tag("B", "[P[THEY]] look[pl] much weaker than me.")
-		. += span_warning(str_msg)
+		if(str_msg)
+			comp_msg += str_msg
 
 		if(L.STAPER >= 12)
 			var/con_msg
@@ -358,7 +377,8 @@
 					con_msg = "[P[THEY]] look[pl] frailer than me."
 				else
 					con_msg =  html_tag("B", "[P[THEY]] look[pl] much frailer than me.")
-			. += span_warning(con_msg)
+			if(con_msg)
+				comp_msg += con_msg
 
 			var/spd_msg
 			switch(final_spd - L.STASPD)
@@ -372,12 +392,15 @@
 					spd_msg = "[P[THEY]] look[pl] slower than me."
 				else
 					spd_msg =  html_tag("B", "[P[THEY]] look[pl] much slower than me.")
-			. += span_warning(spd_msg)
+			if(spd_msg)
+				comp_msg += spd_msg
+		if(length(comp_msg))
+			. += span_warning(comp_msg.Join(" "))
 
 
 /// General miscellaneous stuff that's typically good to know about someone.
 /mob/living/carbon/proc/get_examine_warnings(mob/user, list/P, list/examine_list)
-	var/self_inspect = user == src
+	//var/self_inspect = user == src
 	//var/pl = self_inspect ? "" : p_s()
 	//var/mob/dead/observer/O = isobserver(user) ? user : null
 	var/mob/living/L = isliving(user) ? user : null

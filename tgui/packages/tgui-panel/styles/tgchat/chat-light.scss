@@ -431,6 +431,11 @@ h2.alert {
   color: hsl(0, 100%, 50%);
 }
 
+.tinywarning {
+  color: hsl(0, 100%, 50%);
+  font-size: 85%;
+}
+
 .alertwarning {
   color: hsl(0, 100%, 50%);
   font-weight: bold;
@@ -734,8 +739,12 @@ h2.alert {
   font-size: 60%;
 }
 
-.slightly_larger {
+.slightlylarger {
   font-size: 115%;
+}
+
+.larger {
+  font-size: 140%;
 }
 
 .big {

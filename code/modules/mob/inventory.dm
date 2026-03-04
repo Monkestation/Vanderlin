@@ -419,7 +419,7 @@
 
 	return obscured
 
-/// Returns an associative list of slots to the item they have
+/// Returns an associative list of items to the slot they are in.
 /mob/living/carbon/proc/get_unobscured_items(transparent_protection)
 	var/list/items = list()
 	var/obscured_slots = check_obscured_slots(transparent_protection)
@@ -428,7 +428,7 @@
 			continue
 		var/obj/item/I = get_item_by_slot(slot)
 		if(I)
-			items[slot] = I
+			items[I] = slot
 	return items
 
 /obj/item/proc/equip_to_best_slot(mob/M)

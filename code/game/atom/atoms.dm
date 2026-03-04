@@ -443,7 +443,7 @@
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
 /atom/proc/get_examine_name(mob/user, use_article=FALSE)
-	return use_article && article ? "[article] <b>[name]</b>" : "\a <b>[name]</b>"
+	return use_article && article ? "[article] <b>[name]</b>" : "[gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"]"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
@@ -452,6 +452,9 @@
 	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 		. = override.Join("")
 	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
+
+/atom/proc/get_examine_desc(mob/user)
+	return desc
 
 /atom/proc/get_inspect_button()
 	return ""
@@ -474,8 +477,9 @@
 	else
 		. = list()
 
-	if(desc)
-		. += "<span class='info'>[desc]</span>"
+	var/examine_desc = get_examine_desc(user)
+	if(examine_desc)
+		. += "<span class='info'>[examine_desc]</span>"
 
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)

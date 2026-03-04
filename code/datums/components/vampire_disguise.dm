@@ -128,5 +128,5 @@
 		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
 		return
 	user.add_stress(/datum/stress_event/vampire_seen)
-	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE-0.4, span_boldannounce("MONSTER!"))
+	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
 	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))

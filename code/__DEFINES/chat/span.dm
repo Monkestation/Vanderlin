@@ -21,6 +21,8 @@
 #define span_average(str) ("<span class='average'>" + str + "</span>")
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
 
+#define span_slightlylarger(str) ("<span class='slightlylarger'>" + str + "</span>")
+#define span_larger(str) ("<span class='larger'>" + str + "</span>")
 #define span_big(str) ("<span class='big'>" + str + "</span>")
 #define span_bigbold(str) ("<span class='bigbold'>" + str + "</span>")
 #define span_bigicon(str) ("<span class='bigicon'>" + str + "</span>")
@@ -121,6 +123,7 @@
 #define span_unconscious(str) ("<span class='unconscious'>" + str + "</span>")
 #define span_userdanger(str) ("<span class='userdanger'>" + str + "</span>")
 #define span_warn(str) ("<span class='warn'>" + str + "</span>")
+#define span_tinywarning(str) ("<span class='tinywarning'>" + str + "</span>")
 #define span_warning(str) ("<span class='warning'>" + str + "</span>")
 #define span_warningbig(str) ("<span class='warningbig'>" + str + "</span>")
 #define span_yell(str) ("<span class='yell'>" + str + "</span>")

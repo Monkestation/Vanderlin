@@ -3,7 +3,7 @@
 	var/used_title = get_role_title(src)
 	if(!used_title)
 		return
-	if(user != src && !IsAdminGhost(user))
+	if(!IsAdminGhost(user))
 		if(!get_face_name(null)) // face covered?
 			return
 		var/is_family_member = FALSE
@@ -31,7 +31,7 @@
 	// Skin tone procs on face but shows up with species
 	var/datum/species/species = dna?.species
 	if(species?.use_skintones)
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, \
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
 			"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
 			is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
@@ -39,13 +39,13 @@
 
 	// Culture
 	if(culture)
-		// are they from anywhere
-		if(istype(culture, /datum/culture/universal/ambiguous) && !self_inspect)
-			. += "[P[THEY]] could be from anywhere."
 		// do we know them, are we an observer, or do we share a culture
-		else if(do_i_know || O || istype(culture, H?.culture?.type))
+		if(do_i_know || O || istype(culture, H?.culture?.type) && !istype(culture, /datum/culture/universal/ambiguous))
 			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
-			. += "[culture_msg] from [culture.examined_string(src, user)]."
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
+		// are they from anywhere
+		else if(!self_inspect)
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[P[THEY]] could be from anywhere.")
 
 	// Pre-Non-Self Inspections
 	if(!self_inspect)
@@ -59,9 +59,9 @@
 		// Know check
 		if(!is_family && !O)
 			if(do_i_know)
-				. += span_noticesmall("I know [P[THEM]].")
+				. += span_tinynotice("I know [P[THEM]].")
 			else
-				. += span_warning("I do not know [P[THEM]].")
+				. += span_tinywarning("I do not know [P[THEM]].")
 
 	// Normal stuff
 	. += ..()
@@ -85,20 +85,20 @@
 			var/datum/reagent/consumable/fav_drink = culinary_preferences[CULINARY_FAVOURITE_DRINK]
 			if(fav_food)
 				if(fav_drink)
-					. += span_noticesmall("[capitalize(P[THEIR])] favourites are [fav_food.name] and [fav_drink.name].")
+					. += span_tinynotice("[capitalize(P[THEIR])] favourites are [fav_food.name] and [fav_drink.name].")
 				else
-					. += span_noticesmall("[capitalize(P[THEIR])] favourite is [fav_food.name].")
+					. += span_tinynotice("[capitalize(P[THEIR])] favourite is [fav_food.name].")
 			else if(fav_drink)
-				. += span_noticesmall("[capitalize(P[THEIR])] favourite is [fav_drink.name].")
+				. += span_tinynotice("[capitalize(P[THEIR])] favourite is [fav_drink.name].")
 			var/obj/item/reagent_containers/food/snacks/hated_food = culinary_preferences[CULINARY_HATED_FOOD]
 			var/datum/reagent/consumable/hated_drink = culinary_preferences[CULINARY_HATED_DRINK]
 			if(hated_food)
 				if(hated_drink)
-					. += span_noticesmall("[P[THEY]] hate [hated_food.name] and [hated_drink.name].")
+					. += span_tinynotice("[P[THEY]] hate [hated_food.name] and [hated_drink.name].")
 				else
-					. += span_noticesmall("[P[THEY]] hate [hated_food.name].")
+					. += span_tinynotice("[P[THEY]] hate [hated_food.name].")
 			else if(hated_drink)
-				. += span_noticesmall("[P[THEY]] hate [hated_drink.name].")
+				. += span_tinynotice("[P[THEY]] hate [hated_drink.name].")
 
 	if(!HAS_TRAIT(src, TRAIT_FACELESS))
 		// Headshots ALWAYS go last.

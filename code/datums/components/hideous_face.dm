@@ -26,8 +26,8 @@
 	if(!is_human_part_visible(source, HIDEFACE))
 		return
 	if(source != user && user.affects_masquerade())
-		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE-0.5, html_tag("h2", span_boldannounce("[uppertext(P[THEIR])] FACE! WHAT'S WRONG WITH [uppertext(P[THEIR])] FACE?!")))
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, html_tag("h2", span_boldannounce("[uppertext(P[THEIR])] FACE! WHAT'S WRONG WITH [uppertext(P[THEIR])] FACE?!")))
 	else
-		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE-0.1,span_boldannounce("[capitalize(P[THEIR])] face is hideous."))
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("[capitalize(P[THEIR])] face is hideous."))
 	seen_callback?.Invoke(source, user)
 
