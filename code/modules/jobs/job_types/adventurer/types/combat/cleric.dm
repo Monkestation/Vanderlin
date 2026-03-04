@@ -96,6 +96,7 @@
 		"Great flail" = /obj/item/weapon/flail/peasant,
 		"Goedendag" = /obj/item/weapon/mace/goden,
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,
+		"Whip" = /obj/item/weapon/whip
 	)
 
 	var/weaponchoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "Warrior of the ten!")
@@ -112,7 +113,7 @@
 			weapon_skill_path = /datum/skill/combat/axesmaces
 		if("Spear")
 			weapon_skill_path = /datum/skill/combat/polearms
-		if("Flail", "Great flail")
+		if("Flail", "Great flail", "Whip")
 			weapon_skill_path = /datum/skill/combat/whipsflails
 
 	if(weapon_skill_path)
