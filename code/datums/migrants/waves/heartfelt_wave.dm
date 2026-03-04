@@ -80,8 +80,8 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
-	honorary = "Lord"
-	honorary_f = "Lady"
+	honorary = "Baron"
+	honorary_f = "Baroness"
 
 
 	jobstats = list(
