@@ -110,7 +110,7 @@
 	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
 	var/signed = speaker_language?.flags & SIGNLANG
 
-	if(signed && !can_speak_vocal(message))
+	if(!signed && !can_speak_vocal(message))
 		to_chat(src, span_warning("I can't talk."))
 		return
 
