@@ -77,5 +77,40 @@
                 "code_imp": "Cleanup on the say proc"
             }
         ]
+    },
+    "2026-03-04": {
+        "dwasint": [
+            {
+                "rscadd": "human npcs are more dynamic in their interaction"
+            },
+            {
+                "rscadd": "threat system to areas to scale ambush intensity, decreases as ambushes are spawned so FG can work"
+            },
+            {
+                "rscadd": "questing system"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Fixes serjeant convert button"
+            },
+            {
+                "bugfix": "The readied Monarch can no longer be made an automaton."
+            },
+            {
+                "bugfix": "Fixed Hand, Consort and Heir being able to use the train."
+            },
+            {
+                "bugfix": "Fixed flight never ending if wings are removed."
+            },
+            {
+                "bugfix": "Vampires Antag event won't roll below lowpop threshold."
+            }
+        ],
+        "Spitegremlin": [
+            {
+                "rscadd": "Added new hair"
+            }
+        ]
     }
 }
