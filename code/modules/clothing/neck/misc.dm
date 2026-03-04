@@ -326,7 +326,7 @@
 	detail_color = CLOTHING_YELLOW
 
 /obj/item/clothing/neck/chaincoif/iron/clericcoif/necra
-	detail_color = CLOTHING_BERRY_BLUE
+	detail_color = CLOTHING_EGGPLANT
 
 /obj/item/clothing/neck/chaincoif/iron/clericcoif/pestra
 	detail_color = CLOTHING_TARAXACUM_YELLOW
