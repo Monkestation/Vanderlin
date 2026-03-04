@@ -12,12 +12,8 @@
 	tutorial = "You are the captain of a dwarven's expedition, following the tracks of Matthios's influence you shall lead your party in Malum's name."
 	outfit = /datum/outfit/rousman_cheese/captain
 	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = 1,
+		STATKEY_PER = 3,
+		STATKEY_INT = 3,
 	)
 
 	skills = list(
@@ -29,7 +25,8 @@
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/crafting = 3,
 		/datum/skill/craft/traps = 2,
-		/datum/skill/misc/reading = 1,
+		/datum/skill/misc/reading = 3,
+		/datum/skill/labor/mathematics = 2,
 	)
 
 /datum/outfit/rousman_cheese/captain
@@ -53,9 +50,8 @@
 	outfit = /datum/outfit/rousman_cheese/cheesemaker
 
 	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
+		STATKEY_PER = 2,
+		STATKEY_INT = 2,
 	)
 
 	skills = list(
@@ -77,6 +73,7 @@
 	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel/cloth/big
+	backpack_contents = list()
 
 /datum/migrant_role/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger"
@@ -89,9 +86,8 @@
 	outfit = /datum/outfit/rousman_cheese/cheesemonger
 
 	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
+		STATKEY_PER = 2,
+		STATKEY_INT = 2,
 	)
 
 	skills = list(
@@ -112,6 +108,7 @@
 	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel/cloth/big
+	backpack_contents = list()
 
 /datum/outfit/rousman_cheese/cheesemonger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
