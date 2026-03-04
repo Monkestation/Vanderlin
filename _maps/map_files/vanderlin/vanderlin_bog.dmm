@@ -2680,6 +2680,10 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"bBB" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/bog)
 "bBH" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/concrete,
@@ -2975,6 +2979,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"bSy" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/twig,
+/area/outdoors/bog)
 "bSP" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/grass,
@@ -8218,7 +8226,7 @@
 /area/indoors/town/clocktower)
 "hTb" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/quest_spawner/hard,
+/obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/bog)
 "hTx" = (
@@ -8803,11 +8811,6 @@
 	pixel_y = 0
 	},
 /area/under/cavewet)
-"iBG" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/quest_spawner/medium,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog)
 "iCu" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -11558,7 +11561,7 @@
 /area/indoors/shelter/bog)
 "lvw" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/quest_spawner/hard,
+/obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
 "lvO" = (
@@ -14964,6 +14967,11 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"pKL" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/ruinedwood/turned/alt,
+/area/outdoors/mountains)
 "pKN" = (
 /obj/structure/bridge,
 /turf/open/water/river/dirt{
@@ -17950,6 +17958,10 @@
 	color = "#7D9BAE"
 	},
 /area/under/tomb/indoors/magic)
+"tvk" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass,
+/area/outdoors/bog)
 "tvK" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/abyss_tile{
@@ -29069,7 +29081,7 @@ mqv
 rqe
 jux
 vhU
-mqv
+bBB
 jux
 vhU
 jux
@@ -35546,7 +35558,7 @@ jux
 mqv
 fTW
 dyu
-dyu
+bSy
 mqv
 vhU
 gPS
@@ -59344,7 +59356,7 @@ bNm
 jux
 mqv
 vhU
-mqv
+tvk
 vhU
 jux
 jux
@@ -68661,7 +68673,7 @@ oyx
 oyx
 oyx
 ode
-aPD
+pKL
 aPD
 lWs
 oyx
@@ -69672,7 +69684,7 @@ oyx
 guq
 adn
 kaO
-iBG
+jOX
 qqm
 guq
 oyx
@@ -93470,7 +93482,7 @@ pqg
 oLu
 ktH
 sva
-qhN
+obe
 qhN
 oLu
 oYJ
