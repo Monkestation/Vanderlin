@@ -5999,12 +5999,6 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
-"ftL" = (
-/obj/structure/bridge{
-	dir = 4
-	},
-/turf/open/water/swamp/deep,
-/area/outdoors/bog)
 "ftU" = (
 /obj/structure/stairs{
 	dir = 1
@@ -12523,10 +12517,6 @@
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/outdoors/bog)
-"mJG" = (
-/obj/structure/bridge,
-/turf/open/water/swamp/deep,
 /area/outdoors/bog)
 "mLA" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -27871,7 +27861,7 @@ gPS
 gPS
 bMG
 bMG
-ftL
+qUw
 gPS
 bNm
 gPS
@@ -28073,7 +28063,7 @@ gPS
 gPS
 bMG
 bMG
-ftL
+qUw
 gPS
 bci
 jux
@@ -28275,7 +28265,7 @@ gPS
 gPS
 gPS
 gPS
-ftL
+qUw
 bNm
 jux
 jux
@@ -28477,7 +28467,7 @@ bMG
 bMG
 gPS
 gPS
-ftL
+qUw
 jux
 jux
 vhU
@@ -33544,7 +33534,7 @@ bNm
 bNm
 vRR
 bNm
-ftL
+qUw
 jux
 jux
 jux
@@ -33746,7 +33736,7 @@ bNm
 gPS
 bNm
 bMG
-ftL
+qUw
 bMG
 bMG
 jux
@@ -33948,7 +33938,7 @@ gPS
 bNm
 mYv
 qUg
-ftL
+qUw
 bMG
 bMG
 mvi
@@ -37950,7 +37940,7 @@ jux
 jux
 bNm
 gPS
-ftL
+qUw
 gPS
 gPS
 bNm
@@ -38152,7 +38142,7 @@ gPS
 gPS
 bNm
 gPS
-ftL
+qUw
 gPS
 bNm
 gPS
@@ -38354,7 +38344,7 @@ gPS
 bNm
 bMG
 gPS
-ftL
+qUw
 gPS
 gPS
 gPS
@@ -38556,7 +38546,7 @@ bMG
 vRR
 gPS
 gPS
-ftL
+qUw
 gPS
 gPS
 gPS
@@ -41334,10 +41324,10 @@ xjU
 xjU
 aFE
 uSu
-mJG
-mJG
-mJG
-mJG
+uSu
+uSu
+uSu
+uSu
 uSu
 rgs
 xjU
@@ -42152,8 +42142,8 @@ vhU
 xjU
 cXm
 uSu
-mJG
-mJG
+uSu
+uSu
 uSu
 rgs
 xjU
@@ -59972,9 +59962,9 @@ dyu
 dyu
 rtH
 uSu
-mJG
-mJG
-mJG
+uSu
+uSu
+uSu
 uSu
 bQW
 vhU
