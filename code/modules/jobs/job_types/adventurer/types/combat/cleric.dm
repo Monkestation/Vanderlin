@@ -158,44 +158,44 @@
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)
 			if(/datum/patron/divine/astrata)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/astrata
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/astrata
 				neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 				cloak = /obj/item/clothing/cloak/stabard/templar/astrata
 			if(/datum/patron/divine/dendor)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/dendor
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/dendor
 				neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 				cloak = /obj/item/clothing/cloak/stabard/templar/dendor
 			if(/datum/patron/divine/necra)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/necra
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/necra
 				neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 				cloak = /obj/item/clothing/cloak/stabard/templar/necra
 				beltr = /obj/item/weapon/shovel/small
 			if(/datum/patron/divine/eora)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/eora
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/eora
 				neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 				cloak = /obj/item/clothing/cloak/stabard/templar/eora
 			if(/datum/patron/divine/ravox)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/ravox
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/ravox
 				neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 				cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			if(/datum/patron/divine/noc)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/noc
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/noc
 				neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 				cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			if(/datum/patron/divine/pestra)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/pestra
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/pestra
 				neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 				cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			if(/datum/patron/divine/abyssor)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/abyssor
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/abyssor
 				neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 				cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 				beltl = /obj/item/fishingrod
 			if(/datum/patron/divine/malum)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/malum
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/malum
 				neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 				cloak = /obj/item/clothing/cloak/stabard/templar/malum
 			if(/datum/patron/divine/xylix)
-				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/xylix
+				head = /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/xylix
 				neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 				cloak = /obj/item/clothing/cloak/stabard/templar/xylix

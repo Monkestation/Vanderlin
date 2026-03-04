@@ -310,34 +310,34 @@
 /obj/item/clothing/neck/chaincoif/iron/clericcoif/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/eora
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/eora
 	detail_color = CLOTHING_WISTERIA
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/ravox
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/ravox
 	detail_color = CLOTHING_ROYAL_RED
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/noc
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/noc
 	detail_color = CLOTHING_DIRT
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/xylix
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/xylix
 	detail_color = CLOTHING_CHALK_WHITE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/astrata
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/astrata
 	detail_color = CLOTHING_YELLOW
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/necra
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/necra
 	detail_color = CLOTHING_EGGPLANT
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/pestra
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/pestra
 	detail_color = CLOTHING_TARAXACUM_YELLOW
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/dendor
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/dendor
 	detail_color = CLOTHING_DARK_GREEN
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/abyssor
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/abyssor
 	detail_color = CLOTHING_MAGE_ORANGE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/malum
+/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/malum
 	detail_color = CLOTHING_BURLAP
 
 /obj/item/clothing/neck/gorget/copper
