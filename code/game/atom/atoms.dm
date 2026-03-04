@@ -456,6 +456,9 @@
 /atom/proc/get_examine_desc(mob/user)
 	return desc
 
+/atom/proc/get_examine_icon_state(mob/user)
+	return icon_state
+
 /atom/proc/get_inspect_button()
 	return ""
 

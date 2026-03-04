@@ -373,6 +373,11 @@
 	if(HAS_TRAIT(user, TRAIT_ASSASSIN))
 		. += "profane dagger whispers, \"[span_danger("Here we are!")]\""
 
+/obj/item/weapon/knife/dagger/steel/profane/get_examine_icon_state(mob/user)
+	if(IsAdminGhost(user) || HAS_TRAIT(user, TRAIT_ASSASSIN) || get_dist(user, src < 1))
+		return ..()
+	return "sdagger"
+
 /obj/item/weapon/knife/dagger/steel/profane/pickup(mob/living/M)
 	. = ..()
 	if(ishuman(M))
