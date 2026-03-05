@@ -153,8 +153,6 @@
 
 /datum/outfit/adventurer/cleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	backl = pick(/obj/item/storage/backpack/satchel, /obj/item/storage/backpack/satchel/cloth)
-
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)
 			if(/datum/patron/divine/astrata)
