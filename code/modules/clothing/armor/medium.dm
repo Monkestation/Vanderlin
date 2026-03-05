@@ -114,4 +114,3 @@
 	melt_amount = 150
 	melting_material =  /datum/material/steel
 	blocksound = PLATEHIT
-

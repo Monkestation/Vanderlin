@@ -86,25 +86,6 @@
 	icon_state = "topfhelm_gold"
 	item_weight = 9 * GOLD_MULITPLIER
 
-// Vampire Lord is no longer as OP, but the armor should protect against dreaded stabs or it makes the vitae spent on it pointless.
-/obj/item/clothing/head/helmet/heavy/vampire
-	name = "savoyard"
-	desc = "A terrifying yet crude helmet shaped like a humen skull. Commands the inspiring terror of inhumen tyrants from yils past."
-	icon_state = "savoyard"
-	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	max_integrity = INTEGRITY_STRONGEST // steel
-	body_parts_covered = HEAD_NECK
-	block2add = FOV_BEHIND
-
-/obj/item/clothing/head/helmet/heavy/ancient
-	name = "ancient savoyard"
-	desc = "A terrifying old savoyard."
-	icon_state = "ancientsavoyard"
-	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-	block2add = FOV_BEHIND
-
 //............... Frog Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/frog
 	name = "frog helmet"

@@ -18,7 +18,7 @@
 		/datum/skill/misc/reading = 3,
 		/datum/skill/magic/holy = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/labor/mathematics = 1,
 	)
@@ -68,7 +68,7 @@
 	armor = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	gloves = /obj/item/clothing/gloves/leather
-	wrists = /obj/item/clothing/neck/psycross/silver/astrata
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	pants = /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/blue
 	shoes = /obj/item/clothing/shoes/boots/leather
 	neck = /obj/item/clothing/neck/coif/cloth // price to pay for being a speedy class, less neck protection

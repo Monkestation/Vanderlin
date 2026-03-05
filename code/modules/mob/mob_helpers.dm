@@ -45,6 +45,19 @@
 
 	return zone
 
+///Returns a TRUE / FALSE if the zone is a FACE coverage subzone. Used mainly by accuracy_check & bait.
+/proc/check_face_subzone(zone)
+	if(!zone)
+		return FALSE
+	var/list/zones = list(
+		BODY_ZONE_PRECISE_R_EYE,
+		BODY_ZONE_PRECISE_L_EYE,
+		BODY_ZONE_PRECISE_MOUTH,
+		BODY_ZONE_PRECISE_NOSE,
+		BODY_ZONE_PRECISE_EARS,
+	)
+	return (zone in zones)
+
 /**
  * Return the zone or randomly, another valid zone
  *
@@ -675,10 +688,16 @@
 	var/old_zone = zone_selected
 	if(isnum(input))
 		aimheight = input
-	if(input == "up")
-		aimheight = min(aimheight+1, 19)
-	if(input == "down")
-		aimheight = max(aimheight-1, 1)
+	else
+		if(input == "up")
+			aimheight++
+		else if(input == "down")
+			aimheight--
+		//im too stupid to get the modular division to make this not an if statement
+		if(aimheight < 1)
+			aimheight = 19
+		else if(aimheight > 19)
+			aimheight = 1
 
 	switch(aimheight)
 		if(19)
@@ -995,7 +1014,9 @@
 		used_title = return_our_apprentice_name()
 	else if(job)
 		var/datum/job/job_datum = SSjob.GetJob(job)
-		var/datum/job/used_job = job_datum.parent_job ? job_datum.parent_job : job_datum
+		if(!job_datum)
+			return job
+		var/datum/job/used_job = job_datum?.parent_job ? job_datum.parent_job : job_datum
 		if(!used_job)
 			return job
 		if(steward_check && (used_job.department_flag == OUTSIDERS))

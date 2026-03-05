@@ -45,6 +45,7 @@
 	level = 2
 	check_flags = COVEN_CHECK_CONSCIOUS
 	vitae_cost = 250
+	violates_masquerade = TRUE
 
 /datum/coven_power/auspex/psychic_projection/activate()
 	. = ..()

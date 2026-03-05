@@ -139,6 +139,7 @@
 				if(rotten && istype(I,/obj/item/reagent_containers/food/snacks))
 					var/obj/item/reagent_containers/food/snacks/F = I
 					F.become_rotten()
+
 				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 				user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
 				qdel(src)

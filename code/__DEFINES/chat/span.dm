@@ -9,6 +9,11 @@
 #define span_adminprefix(str) ("<span class='adminprefix'>" + str + "</span>")
 #define span_adminsay(str) ("<span class='adminsay'>" + str + "</span>")
 
+#define span_achievementrare(str) ("<span class='achievementrare'>" + str + "</span>")
+#define span_achievementgood(str) ("<span class='achievementgood'>" + str + "</span>")
+#define span_achievementneutral(str) ("<span class='achievementneutral'>" + str + "</span>")
+#define span_achievementbad(str) ("<span class='achievementbad'>" + str + "</span>")
+
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_alertalien(str) ("<span class='alertalien'>" + str + "</span>")
 #define span_alertsyndie(str) ("<span class='alertsyndie'>" + str + "</span>")
@@ -18,6 +23,8 @@
 #define span_announce(str) ("<span class='announce'>" + str + "</span>")
 #define span_average(str) ("<span class='average'>" + str + "</span>")
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
+
+#define SPAN_SLIGHTLY_BIG(str) ("<span class='slightly_larger'>" + str + "</span>")
 
 #define span_big(str) ("<span class='big'>" + str + "</span>")
 #define span_bigbold(str) ("<span class='bigbold'>" + str + "</span>")
@@ -100,7 +107,7 @@
 #define span_lightpurple(str) ("<span class='lightpurple'>" + str + "</span>")
 #define span_radio(str) ("<span class='radio'>" + str + "</span>")
 #define span_reallybig(str) ("<span class='reallybig'>" + str + "</span>")
-#define span_reallybighypnophrase(str) ("<span class='reallybighypnophrase'>" + str + "</span>")
+#define span_reallybighypnophrase(str) ("<span class='hypnophrase reallybig'>" + str + "</span>")
 #define span_reallybigredtext(str) ("<span class='reallybigredtext'>" + str + "</span>")
 #define span_red(str) ("<span class='red'>" + str + "</span>")
 #define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
@@ -153,13 +160,14 @@
 /// Ones where span_X isn't just the class
 #define span_admin_log(str) ("<span class='admin'><span class='prefix'>ADMIN LOG: </span><span class='message linkify'>" + str + "</span></span>")
 
-/// Normal tooltip with underline and default styling
-#define span_tooltip(tip, main_text) ("<span data-tooltip=\"" + tip + "\" class=\"tooltip-trigger\">" + main_text + "</span>")
+/* Tooltips */
+#define span_tooltip(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip\">" + main_text + "</span>")
 
-/// No italics, potentially different styling if 'tooltip-alt-trigger' has unique CSS rules
-#define span_tooltip_alt(tip, main_text) ("<span data-tooltip=\"" + tip + "\" class=\"tooltip-trigger tooltip-alt-trigger\">" + main_text + "</span>")
+// No italics
+#define span_tooltip_alt(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip_alt\">" + main_text + "</span>")
 
 /// Helper which creates a chat message which may have a tooltip in some contexts, but not others.
-#define conditional_tooltip(normal_text, tooltip_text, condition) ((condition) ? (span_tooltip(tooltip_text, normal_text)) : (normal_text))
+#define conditional_tooltip(normal_text, tooltip_text, condition) (condition ? span_tooltip(tooltip_text, normal_text) : normal_text)
+
 /// No italics
-#define conditional_tooltip_alt(normal_text, tooltip_text, condition) ((condition) ? (span_tooltip_alt(tooltip_text, normal_text)) : (normal_text))
+#define conditional_tooltip_alt(normal_text, tooltip_text, condition) (condition ? span_tooltip_alt(tooltip_text, normal_text) : normal_text)

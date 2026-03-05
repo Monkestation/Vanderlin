@@ -5,6 +5,8 @@
 /mob/proc/get_active_held_item()
 	return get_item_for_held_index(active_hand_index)
 
+/mob/proc/get_active_held_items()
+	return list(get_item_for_held_index(active_hand_index), get_item_for_held_index(get_inactive_hand_index()))
 
 //Finds the opposite limb for the active one (eg: upper left arm will find the item in upper right arm)
 //So we're treating each "pair" of limbs as a team, so "both" refers to them
@@ -384,12 +386,12 @@
 		items += wear_shirt
 	return items
 
-/mob/living/proc/unequip_everything()
+/mob/living/proc/unequip_everything(silent = TRUE)
 	var/list/items = list()
 	items |= get_equipped_items(TRUE)
 	for(var/I in items)
-		dropItemToGround(I)
-	drop_all_held_items()
+		dropItemToGround(I, TRUE, silent)
+	drop_all_held_items(silent)
 
 
 /mob/living/carbon/proc/check_obscured_slots(transparent_protection)

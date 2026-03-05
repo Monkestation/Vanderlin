@@ -119,14 +119,14 @@
 						user.mind.add_sleep_experience(appro_skill, amt2raise, FALSE)
 
 		if(breakthrough)
-			user.visible_message("<span class='deadsay'>[user] deftly strikes the bar!</span>")
+			user.visible_message(span_greentext("[user] deftly strikes the bar!"))
 		else
-			user.visible_message("<span class='info'>[user] strikes the bar!</span>")
+			user.visible_message(span_info("[user] strikes the bar!"))
 		return TRUE
 
 /datum/anvil_recipe/proc/item_added(mob/user)
 	needed_item = null
-	user.visible_message("<span class='info'>[user] adds a [needed_item_text].</span>")
+	user.visible_message(span_info("[user] adds a [needed_item_text]."))
 	needed_item_text = null
 
 

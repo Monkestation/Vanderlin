@@ -11,6 +11,10 @@
 	var/datum/job/parent_job
 	/// When joining the round, this text will be shown to the player.
 	var/tutorial = null
+	/// Whether this job is intended to give quests
+	var/is_quest_giver = FALSE
+	/// How many quests this job can take at once
+	var/max_active_quests = 3
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -385,11 +389,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patron_list)
+	for(var/god in GLOB.patrons_by_type)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patron_list[god]
+		var/datum/patron/P = GLOB.patrons_by_type[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 

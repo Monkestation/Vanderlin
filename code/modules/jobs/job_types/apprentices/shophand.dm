@@ -10,6 +10,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_SHOPHAND
+	is_quest_giver = TRUE
 	give_bank_account = 10
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE

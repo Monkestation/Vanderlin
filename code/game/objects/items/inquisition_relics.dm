@@ -590,8 +590,10 @@
 					cursedblood = 1
 				if(M.mind.has_antag_datum(/datum/antagonist/vampire, FALSE))
 					cursedblood = 2
-				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord))
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord, FALSE))
 					cursedblood = 3
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+					cursedblood = 5 //hoo mama
 			update_appearance(UPDATE_ICON_STATE)
 			takeblood(M, user)
 		else
@@ -1042,7 +1044,7 @@
 	bagcheck(M)
 	if(do_after(user, timetobag, M))
 		bagging = FALSE
-		M.transferItemToLoc(headgear, src)
+		headgear?.doStrip(user, M)
 		M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 	else
 		bagging = FALSE

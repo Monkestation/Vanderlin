@@ -391,6 +391,10 @@
 /obj/item/clothing/pants/tights,
 /turf/open/floor/carpet,
 /area/indoors)
+"bd" = (
+/obj/item/flint,
+/turf/open/floor/concrete,
+/area/outdoors)
 "bf" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -1079,6 +1083,11 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep)
+"dJ" = (
+/obj/structure/flora/grass,
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "dK" = (
 /obj/structure/chair/bench/couch/middle{
 	dir = 8
@@ -1261,6 +1270,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area)
+"gS" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/concrete,
+/area/outdoors)
 "hd" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock,
@@ -1282,10 +1295,6 @@
 /obj/structure/dungeon_entry/center,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"hJ" = (
-/obj/machinery/light/fueled/firebowl,
-/turf/open/floor/concrete,
-/area/outdoors)
 "hN" = (
 /obj/structure/hotspring/border/two,
 /obj/structure/bridge{
@@ -1305,6 +1314,26 @@
 	dir = 8
 	},
 /area/outdoors/mountains/decap)
+"hQ" = (
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/turf/open/floor/concrete,
+/area/outdoors)
 "hY" = (
 /obj/structure/soil/debug_soil/random,
 /obj/structure/rotation_piece{
@@ -1394,6 +1423,10 @@
 	dir = 4
 	},
 /obj/structure/closet/crate/miningcar,
+/turf/open/floor/grass/yel,
+/area/outdoors)
+"kd" = (
+/obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "ke" = (
@@ -1629,12 +1662,6 @@
 /obj/effect/island_tester,
 /turf/closed/basic,
 /area/outdoors)
-"pI" = (
-/obj/structure/redstone/comparator{
-	pixel_y = 1
-	},
-/turf/open/floor/cobblerock,
-/area)
 "pQ" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/wood,
@@ -1825,12 +1852,12 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"ts" = (
-/obj/machinery/light/fueled/smelter,
-/turf/open/floor/concrete,
-/area/outdoors)
 "tA" = (
 /turf/closed,
+/area/outdoors)
+"tE" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass/yel,
 /area/outdoors)
 "tH" = (
 /turf/closed/basic,
@@ -1902,15 +1929,18 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"uG" = (
-/obj/structure/table/optable,
-/mob/living/carbon/human/species/human/northern,
+"uq" = (
+/obj/machinery/anvil,
 /turf/open/floor/concrete,
 /area/outdoors)
 "uL" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"uR" = (
+/obj/structure/redstone/torch,
+/turf/open/floor/cobblerock,
+/area)
 "uV" = (
 /turf/open/lava/flow{
 	dir = 8
@@ -2010,10 +2040,6 @@
 /obj/item/reagent_containers/glass/carafe/water,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"wV" = (
-/obj/item/storage/backpack/satchel/surgbag,
-/turf/open/floor/concrete,
-/area/outdoors)
 "wY" = (
 /obj/structure/flora/sakura{
 	pixel_y = -13
@@ -2026,22 +2052,6 @@
 /turf/open/water/river{
 	dir = 4
 	},
-/area/outdoors)
-"xl" = (
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/turf/open/floor/concrete,
 /area/outdoors)
 "xp" = (
 /turf/open/water/river,
@@ -2072,6 +2082,22 @@
 /obj/structure/carpet/red,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"yj" = (
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/turf/open/floor/concrete,
+/area/outdoors)
 "yr" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
@@ -2098,6 +2124,9 @@
 /obj/structure/hotspring/border/three,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"zb" = (
+/turf/open/floor/concrete,
+/area/outdoors)
 "zc" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt/road,
@@ -2105,9 +2134,6 @@
 "zg" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep)
-"zh" = (
-/turf/open/floor/concrete,
-/area/outdoors)
 "zk" = (
 /turf/closed/wall/mineral/tent,
 /area/outdoors/mountains/decap)
@@ -2349,10 +2375,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"zU" = (
-/obj/item/bin/water,
-/turf/open/floor/concrete,
-/area/outdoors)
 "zZ" = (
 /obj/structure/throne,
 /turf/open/floor/cobble,
@@ -2428,13 +2450,6 @@
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/wood,
 /area/indoors)
-"AT" = (
-/obj/effect/decal/carpet/kover_black{
-	dir = 1;
-	pixel_y = -5
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Be" = (
 /obj/structure/floordoor,
 /turf/open/floor/cobblerock,
@@ -2600,6 +2615,10 @@
 /obj/machinery/anvil,
 /turf/open/floor/cobble,
 /area/indoors)
+"Fw" = (
+/obj/machinery/light/fueled/forge,
+/turf/open/floor/concrete,
+/area/outdoors)
 "Fx" = (
 /obj/structure/bridge{
 	layer = 4;
@@ -2623,6 +2642,11 @@
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
+/area/outdoors)
+"Gp" = (
+/obj/structure/table/optable,
+/mob/living/carbon/human/species/human/northern,
+/turf/open/floor/concrete,
 /area/outdoors)
 "Gu" = (
 /obj/structure/pottery_lathe,
@@ -2673,6 +2697,10 @@
 /obj/structure/rotation_piece,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/mountains/decap)
+"Hg" = (
+/obj/machinery/light/fueled/smelter,
+/turf/open/floor/concrete,
+/area/outdoors)
 "Hl" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river{
@@ -2726,12 +2754,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"HQ" = (
-/obj/structure/redstone/repeater{
-	delay_ticks = 4
-	},
-/turf/open/floor/cobblerock,
-/area)
 "HU" = (
 /obj/structure/rack/shelf/biggest,
 /obj/structure/carpet/cyan,
@@ -2980,26 +3002,6 @@
 /obj/structure/gearbox,
 /turf/open/floor/dirt,
 /area/outdoors)
-"MP" = (
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/turf/open/floor/concrete,
-/area/outdoors)
 "MQ" = (
 /obj/structure/redstone/repeater{
 	dir = 8;
@@ -3007,6 +3009,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area)
+"MS" = (
+/obj/item/storage/backpack/satchel/surgbag,
+/turf/open/floor/concrete,
+/area/outdoors)
 "MV" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/grass,
@@ -3125,10 +3131,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
-"QV" = (
-/obj/structure/redstone/torch,
-/turf/open/floor/cobblerock,
-/area)
 "Rc" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -3164,10 +3166,12 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
-"Sb" = (
-/obj/machinery/light/fueled/forge,
-/turf/open/floor/concrete,
-/area/outdoors)
+"Sm" = (
+/obj/structure/redstone/repeater{
+	delay_ticks = 4
+	},
+/turf/open/floor/cobblerock,
+/area)
 "Sx" = (
 /obj/structure/flora/grass,
 /obj/structure/minecart_rail,
@@ -3252,10 +3256,6 @@
 /obj/structure/flora/grass/herb/hypericum,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
-"TM" = (
-/obj/machinery/anvil,
-/turf/open/floor/concrete,
-/area/outdoors)
 "TO" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = -15
@@ -3516,10 +3516,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"Xn" = (
-/obj/item/flint,
-/turf/open/floor/concrete,
-/area/outdoors)
 "Xx" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -3568,6 +3564,14 @@
 /obj/structure/carpet/green,
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"Yl" = (
+/obj/effect/decal/carpet/kover_black{
+	dir = 1;
+	pixel_y = -5
+	},
+/obj/structure/fake_machine/contractledger,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "Yr" = (
 /obj/structure/rotation_piece/cog/large,
 /turf/open/floor/grass/yel,
@@ -3595,6 +3599,12 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep)
+"Zj" = (
+/obj/structure/redstone/comparator{
+	pixel_y = 1
+	},
+/turf/open/floor/cobblerock,
+/area)
 "Zm" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/blocks,
@@ -3614,6 +3624,10 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors)
+"ZF" = (
+/obj/item/bin/water,
+/turf/open/floor/concrete,
+/area/outdoors)
 "ZO" = (
 /obj/item/essence_vial{
 	pixel_y = 18;
@@ -6138,7 +6152,7 @@ as
 Vh
 Be
 rN
-QV
+uR
 IZ
 Zn
 rN
@@ -9737,7 +9751,7 @@ Vh
 Vh
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 yu
@@ -9991,7 +10005,7 @@ ac
 ac
 Vh
 rN
-QV
+uR
 IZ
 Zn
 rN
@@ -10251,7 +10265,7 @@ Vh
 Vh
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 yu
@@ -11016,13 +11030,13 @@ as
 as
 as
 Vh
-QV
+uR
 IZ
 Zn
 rN
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 yu
@@ -11276,7 +11290,7 @@ rN
 rN
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 rN
@@ -11530,13 +11544,13 @@ as
 as
 as
 Vh
-QV
+uR
 IZ
 Zn
 rN
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 yu
@@ -14620,7 +14634,7 @@ Vh
 Vh
 Vh
 rN
-HQ
+Sm
 IZ
 rN
 Be
@@ -15134,7 +15148,7 @@ Vh
 Vh
 Vh
 Vh
-QV
+uR
 IZ
 Zn
 yu
@@ -16163,7 +16177,7 @@ Vh
 Vh
 Be
 rN
-pI
+Zj
 IZ
 Vh
 Vh
@@ -16199,7 +16213,7 @@ QN
 Wr
 QN
 aq
-QN
+tE
 QN
 ky
 ew
@@ -16950,7 +16964,7 @@ QN
 Wr
 Wr
 EQ
-AT
+Yl
 GB
 vD
 vD
@@ -20807,15 +20821,15 @@ QN
 QN
 ai
 QN
-hJ
-Xn
-xl
-MP
-hJ
-zh
-zh
-zh
-hJ
+gS
+bd
+yj
+hQ
+gS
+zb
+zb
+zb
+gS
 Wr
 ai
 Wr
@@ -21064,15 +21078,15 @@ QN
 QN
 QN
 ai
-zh
-Sb
-zh
-ts
-zh
-wV
-zh
-uG
-zh
+zb
+Fw
+zb
+Hg
+zb
+MS
+zb
+Gp
+zb
 ai
 QN
 ai
@@ -21321,15 +21335,15 @@ ai
 QN
 Wr
 QN
-zh
-TM
-zh
-ts
-zh
-zh
-zh
-zh
-zh
+zb
+uq
+zb
+Hg
+zb
+zb
+zb
+zb
+zb
 QN
 Wr
 Wr
@@ -21578,15 +21592,15 @@ ai
 QN
 QN
 ai
-zh
-zU
-zh
-ts
-zh
-zh
-zh
-uG
-zh
+zb
+ZF
+zb
+Hg
+zb
+zb
+zb
+Gp
+zb
 Wr
 Wr
 ai
@@ -21835,15 +21849,15 @@ se
 QN
 ai
 Wr
-hJ
-zh
-zh
-zh
-hJ
-zh
-zh
-zh
-hJ
+gS
+zb
+zb
+zb
+gS
+zb
+zb
+zb
+gS
 ai
 ai
 QN
@@ -22092,15 +22106,15 @@ mL
 QN
 Wr
 Wr
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
 ai
 QN
 ai
@@ -22349,17 +22363,17 @@ pf
 QN
 ai
 QN
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
 ai
-QN
+kd
 ai
 tA
 tA
@@ -22606,15 +22620,15 @@ DF
 QN
 Wr
 ai
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
-zh
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
+zb
 ai
 ai
 QN
@@ -22863,15 +22877,15 @@ DF
 QN
 QN
 QN
-hJ
-zh
-zh
-zh
-hJ
-zh
-zh
-zh
-hJ
+gS
+zb
+zb
+zb
+gS
+zb
+zb
+zb
+gS
 Wr
 ai
 QN
@@ -76074,7 +76088,7 @@ QN
 qc
 QN
 ky
-qc
+dJ
 QN
 ky
 jC

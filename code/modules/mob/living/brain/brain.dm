@@ -6,6 +6,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	base_intents = list(INTENT_HELP, INTENT_HARM) //for mechas
 	speech_span = SPAN_ROBOT
+	bloodpool = 0
 
 /mob/living/brain/Initialize()
 	. = ..()

@@ -280,7 +280,7 @@
 /area/outdoors/bog)
 "ON" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /turf/open/floor/blocks,
 /area/outdoors/bog)
 "OQ" = (
@@ -344,7 +344,7 @@
 /area/outdoors/bog)
 "Wo" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/blocks/paving,
 /area/outdoors/bog)
 "WF" = (
@@ -357,7 +357,7 @@
 /area/outdoors/bog)
 "YA" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/blocks/paving,
 /area/outdoors/bog)
 

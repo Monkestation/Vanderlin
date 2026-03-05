@@ -28,13 +28,12 @@
 	user.visible_message(span_warning("[user] drinks from [src]!"),\
 	span_warning("I drink from [src]."))
 	playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
-	user.adjust_bloodpool(50)
 	var/blood_handle = BLOOD_PREFERENCE_RATS
 	if(dead)
 		blood_handle |= BLOOD_PREFERENCE_DEAD
 	else
 		blood_handle |= BLOOD_PREFERENCE_LIVING
-	user.clan.handle_bloodsuck(user, blood_handle)
+	user.adjust_bloodpool(user.clan.handle_bloodsuck(user, blood_handle, 150))
 	playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
 	if(dead)
 		qdel(src)

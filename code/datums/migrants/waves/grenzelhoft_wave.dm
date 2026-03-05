@@ -36,7 +36,7 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
+	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
 	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
@@ -58,7 +58,7 @@
 	name = "Grenzelhoft Count (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/brigandine
 	belt = /obj/item/storage/belt/leather/plaquesilver
@@ -108,7 +108,7 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
+	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
 	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
@@ -130,7 +130,7 @@
 	name = "Grenzelhoft Countess (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/gambeson/heavy/dress/alt
 	belt = /obj/item/storage/belt/leather/plaquesilver

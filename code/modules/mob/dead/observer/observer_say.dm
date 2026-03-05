@@ -63,7 +63,6 @@
 	. = ..()
 	var/atom/movable/to_follow = speaker
 	var/link = FOLLOW_LINK(src, to_follow)
-	// Create map text prior to modifying message for goonchat
 	if(client?.prefs)
 		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)

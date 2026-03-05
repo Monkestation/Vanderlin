@@ -59,7 +59,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_KNOWBANDITS,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -110,7 +110,7 @@
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
 
 	if(grant_shield)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1)
+		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
@@ -157,6 +157,8 @@
 	)
 
 	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
+	if(!helmetchoice)
+		return
 
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"

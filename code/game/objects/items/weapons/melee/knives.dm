@@ -129,7 +129,7 @@
 	if(!item.sewrepair || !item.salvage_result) // We can only salvage objects which can be sewn!
 		return NONE
 
-	var/skill_level = user.get_skill_level(/datum/skill/misc/sewing, TRUE)
+	var/skill_level = user.get_skill_level(/datum/skill/craft/sewing, TRUE)
 
 	var/salvage_time = (7 SECONDS - (skill_level * 10))
 	if(!do_after(user, salvage_time, item))
@@ -147,7 +147,7 @@
 		to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
 		playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 		qdel(item)
-		user.mind.add_sleep_experience(/datum/skill/misc/sewing, (user.STAINT)) //Getting exp for failing
+		user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT)) //Getting exp for failing
 		return ITEM_INTERACT_SUCCESS
 
 	item.salvage_amount -= item.torn_sleeve_number
@@ -158,7 +158,7 @@
 	user.visible_message(span_notice("[user] salvages [item] into usable materials."))
 	playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
 	qdel(item)
-	user.mind.add_sleep_experience(/datum/skill/misc/sewing, (user.STAINT))
+	user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT))
 
 	return ITEM_INTERACT_SUCCESS
 
@@ -233,6 +233,8 @@
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	sellprice = 12
+
+	weapon_special = /datum/special_intent/triple_stab
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
@@ -620,6 +622,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
 	sellprice = 3
+	flags_ai_inventory = AI_ITEM_THROWING
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"

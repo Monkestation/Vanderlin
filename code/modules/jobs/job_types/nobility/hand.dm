@@ -31,7 +31,8 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /*/datum/outfit/hand
@@ -160,7 +161,7 @@
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
-	wrists = /obj/item/weapon/scabbard/knife/hand
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	belt = /obj/item/storage/belt/leather/black
 	beltl =  /obj/item/weapon/knife/dagger/steel/hand
 	beltr = /obj/item/weapon/knife/dagger/steel/hand/parry

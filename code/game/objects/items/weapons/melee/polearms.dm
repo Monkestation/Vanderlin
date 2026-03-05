@@ -98,16 +98,6 @@
 	max_integrity = INTEGRITY_STRONGEST
 	minstr = 7
 
-//................ Staff of the Testimonium ............... //
-/obj/item/weapon/polearm/woodstaff/aries
-	name = "staff of the testimonium"
-	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
-	icon_state = "aries"
-	force_wielded =  DAMAGE_STAFF_WIELD + 1
-	resistance_flags = FIRE_PROOF // Leniency for unique items
-	dropshrink = 0.6
-	sellprice = 100
-
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -468,6 +458,13 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	melting_material = /datum/material/steel
 
+/obj/item/weapon/polearm/halberd/bardiche/captain
+	name = "Deliverance"
+	desc = "A glaive decorated with gold forged for the Captain alongside their armor. To deliver justice with every wide swing."
+	sellprice = 200
+	icon_state = "capglaive"
+	melting_material = /datum/material/steel
+
 //................ Eagle Beak ............... //
 /obj/item/weapon/polearm/eaglebeak
 	name = "eagle's beak"
@@ -600,7 +597,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	melting_material = null
 
-/obj/item/weapon/spear/naginata
+/obj/item/weapon/polearm/spear/naginata
 	name = "Naginata"
 	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
@@ -612,7 +609,7 @@
 	max_blade_int = 100 //Nippon suteeru (dogshit)
 	minstr = 7
 
-/obj/item/weapon/spear/naginata/getonmobprop(tag)
+/obj/item/weapon/polearm/spear/naginata/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)

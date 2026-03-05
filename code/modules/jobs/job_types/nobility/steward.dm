@@ -11,6 +11,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	is_quest_giver = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/steward
@@ -42,7 +43,8 @@
 
 	traits = list(
 		TRAIT_SEEPRICES,
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)

@@ -23,7 +23,7 @@
 		/datum/skill/misc/stealing = 4, // Worse than a Thief, but still very possible to pickpocket
 		/datum/skill/combat/bows = 3,
 		/datum/skill/craft/tanning = 2, // Dendor asks us to use every part of the beast
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 2,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/craft/carpentry = 1, // Can upgrade to Longbow if they desire to
@@ -58,7 +58,7 @@
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	beltr = /obj/item/weapon/knife/cleaver/combat
 	armor = /obj/item/clothing/armor/leather/jacket
-	wrists = /obj/item/clothing/neck/psycross/silver/dendor
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 	gloves = /obj/item/clothing/gloves/fingerless
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/black
 

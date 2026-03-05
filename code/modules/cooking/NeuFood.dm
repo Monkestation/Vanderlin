@@ -527,7 +527,7 @@
 /datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M)
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER ))
 		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_MAXIMUM)
+			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_NORMAL)
 		M.adjustBruteLoss(-0.2, 0)
 		M.adjustFireLoss(-0.2, 0)
 		M.adjust_energy(5)

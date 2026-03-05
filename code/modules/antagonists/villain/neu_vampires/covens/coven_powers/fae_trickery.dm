@@ -93,7 +93,7 @@
 	var/strength = 5
 	var/attached = 0
 
-/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
+/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
 	..()
 	if(atom_integrity < 90)
 		Die()

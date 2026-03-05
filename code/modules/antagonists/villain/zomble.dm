@@ -44,6 +44,8 @@
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
 		TRAIT_CABAL,
+		TRAIT_BLOODDRINKER,
+		TRAIT_NASTY_EATER,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -55,6 +57,7 @@
 		TRAIT_TOXIMMUNE,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_ROTMAN,
+		TRAIT_NASTY_EATER,
 	)
 	var/mutable_appearance/rotflies
 
@@ -223,7 +226,6 @@
 
 	zombie.bloodpool = 0 // Again, just in case.
 
-	// zombies cant rp, thus shouldnt be playable for most people
 	zombie.ghostize()
 
 /datum/antagonist/zombie/greet()
@@ -257,7 +259,7 @@
 		return
 
 	record_round_statistic(STATS_DEADITES_WOKEN_UP)
-	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
+	zombie.blood_volume = BLOOD_VOLUME_NORMAL
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
 	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
 	if(!infected_wake) //if we died, heal all of this too

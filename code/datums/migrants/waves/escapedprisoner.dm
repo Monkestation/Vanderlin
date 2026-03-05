@@ -44,7 +44,7 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_CRITICAL_RESISTANCE,
 	)
 

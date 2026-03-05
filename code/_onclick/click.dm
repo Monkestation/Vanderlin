@@ -631,6 +631,8 @@
 /mob/living/MouseWheelOn(atom/clicked_atom, delta_x, delta_y, params)
 	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+		cycle_rmb_intent(delta_y)
+	else
 		if(delta_y > 0)
 			aimheight_change("up")
 		else

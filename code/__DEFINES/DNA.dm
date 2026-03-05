@@ -63,7 +63,7 @@
 #define NO_UNDERWEAR	11
 #define NOSTOMACH		12
 #define NO_DNA_COPY     13
-#define DRINKSBLOOD		14
+// #define DRINKSBLOOD	14 // Deprecated, use TRAIT_BLOODDRINKER
 /// Use this if you want to change the race's color without the player being able to pick their own color. AKA special color shifting
 #define DYNCOLORS		15
 #define AGENDER			16

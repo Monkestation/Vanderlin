@@ -586,7 +586,6 @@
 /area/indoors/vampire_manor)
 "bS" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/weapon/sword/long/vlord,
 /obj/structure/fluff/walldeco/mona{
 	pixel_x = -14
 	},
@@ -1814,9 +1813,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "iw" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
@@ -2305,9 +2303,8 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -2317,9 +2314,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3049,9 +3045,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/water/swamp/deep,
@@ -3104,9 +3099,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3134,13 +3128,13 @@
 "rf" = (
 /obj/item/clothing/neck/mercator,
 /obj/item/clothing/neck/shalal,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/eora,
-/obj/item/clothing/neck/psycross/g,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/noc,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/gold,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/wood,
 /area/indoors)
 "ri" = (
@@ -3846,10 +3840,11 @@
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
 /obj/item/weapon/knife/copper,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/twig,
 /area/under/cavelava/acid)
 "vH" = (
@@ -3993,9 +3988,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "wl" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -6233,7 +6227,7 @@
 /obj/item/clothing/pants/grenzelpants,
 /obj/item/clothing/shirt/grenzelhoft,
 /obj/item/clothing/shoes/rare/grenzelhoft,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "Mm" = (

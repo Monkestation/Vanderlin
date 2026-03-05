@@ -53,6 +53,7 @@
 
 /mob/living/carbon/human/examine(mob/user)
 	var/self_inspect = (user == src)
+	var/is_observer = isobserver(user)
 
 	var/is_family_member = FALSE
 	if(ishuman(user))
@@ -62,8 +63,8 @@
 
 	var/temp_gender = null
 	var/obscure_name = FALSE
-	var/person_known = self_inspect
-	if(!self_inspect && !isobserver(user))
+	var/person_known = (self_inspect || is_observer)
+	if(!self_inspect && !is_observer)
 		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
 			obscure_name = TRUE
 			temp_gender = PLURAL
@@ -83,7 +84,6 @@
 	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
 	var/t_has = p_have(temp_gender, ignore_pronouns)
 	var/t_is  = p_are(temp_gender, ignore_pronouns)
-
 	var/m1
 	var/m2
 	var/m3
@@ -110,13 +110,16 @@
 		on_examine_face(user, self_inspect)
 
 		var/used_name = name
-		if(isobserver(user))
+		if(is_observer)
 			used_name = real_name
 
 		var/used_title = get_role_title(person_known)
 
 		// building the examine identity
-		statement_of_identity += "<EM>[used_name]</EM>"
+		if(article)
+			statement_of_identity += "<EM>[article] [used_name]</EM>"
+		else
+			statement_of_identity += "<EM>\a [used_name]</EM>"
 
 		var/appendage_to_name
 		if(race_name) // race name
@@ -208,7 +211,7 @@
 					. += span_necrosis("That fish is ugly!")
 
 			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-				. += span_phobia("A foreigner...")
+				. += span_red("A foreigner...")
 
 			if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 				. += span_userdanger("ALCOHOLIC!")
@@ -259,16 +262,22 @@
 				else
 					. += span_redtext("[m1] an ex-agent of the court.")
 
+			if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
+				. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
+
 			if(real_name in GLOB.excommunicated_players)
 				. += span_userdanger("EXCOMMUNICATED!")
 
 			if(real_name in GLOB.heretical_players)
 				. += span_userdanger("HERETIC! SHAME!")
 
-			if(user.mind)
-				if(is_zizocultist(user.mind) || is_zizolackey(user.mind))
-					if(virginity)
-						. += span_userdanger("VIRGIN!")
+			if(virginity)
+				var/incel_detector = user.mind && (is_zizocultist(user.mind) || is_zizolackey(user.mind))
+				if(!incel_detector)
+					var/mob/living/carbon/c_user = user
+					incel_detector = istype(c_user) && (c_user.clan?.blood_preference & BLOOD_PREFERENCE_VIRGIN)
+				if(incel_detector)
+					. += span_userdanger("VIRGIN!")
 
 			var/is_bandit = FALSE
 			if(mind?.special_role == "Bandit")
@@ -279,10 +288,14 @@
 			if(!is_bandit && (real_name in GLOB.outlawed_players))
 				. += span_userdanger("OUTLAW!")
 
-			if(mind && mind?.special_role == "Vampire Lord")
-				var/datum/component/vampire_disguise/disguise_comp = GetComponent(/datum/component/vampire_disguise)
-				if(!disguise_comp.disguised)
-					. += span_userdanger("A MONSTER!")
+
+			if(isautomaton(user))
+				if(HAS_TRAIT(src, TRAIT_NOBLE_BLOOD))
+					. += span_blue("They are a Blue-blooded Noble.")
+				else if(HAS_TRAIT(src, TRAIT_NOBLE_POWER))
+					. += span_blue("They are a crown-recognised Noble.")
+				if(job in GLOB.automaton_order_jobs)
+					. += span_blue("They are an authenticated Artificer.")
 
 			var/inquisition_text =get_inquisition_text(user)
 			if(inquisition_text)
@@ -299,7 +312,11 @@
 						. += examine_friend_or_foe_append
 
 		if(user.mind?.has_antag_datum(/datum/antagonist/vampire))
-			. += span_userdanger("Blood Volume: [blood_volume]")
+			. += span_bloody("Blood Volume: [round(blood_volume)]")
+			var/datum/blood_type/BT = get_blood_type()
+			if(istype(BT) && BT.vitae)
+				var/list/BD = BT.get_blood_data(src)
+				. += span_bloody("Vitae: [round(blood_volume * BD["vitae"])]")
 
 		if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 			var/atom/item = get_most_expensive()
@@ -666,7 +683,7 @@
 			. += "<img src=[headshot_link] width=100 height=100/>"
 
 	if(Adjacent(user))
-		if(isobserver(user))
+		if(is_observer)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
 				BODY_ZONE_CHEST,

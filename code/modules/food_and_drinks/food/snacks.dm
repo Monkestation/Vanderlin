@@ -380,7 +380,7 @@ All foods are distributed among various categories. Use common sense.
 
 	if(istype(fork_check))
 		if(!plate_check)
-			if(HAS_TRAIT(eater, TRAIT_NOBLE))
+			if(HAS_TRAIT(eater, TRAIT_NOBLE_BLOOD))
 				eater.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
 		else if(plate_check.dirty)
 			eater.add_stress(/datum/stress_event/dirty_platter)
@@ -393,38 +393,6 @@ All foods are distributed among various categories. Use common sense.
 			if(particle_spewer)
 				qdel(particle_spewer)
 			plate_check.update_appearance(UPDATE_OVERLAYS)
-
-	if(interacting_with == user)
-		switch(eater.nutrition)
-			if(NUTRITION_LEVEL_FAT to INFINITY)
-				user.visible_message(
-					span_notice("[user] forces [eater.p_them()]self to eat \the [src]."),
-					span_notice("I force myself to eat \the [src]."),
-				)
-			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_FAT)
-				user.visible_message(
-					span_notice("[user] [eatverb]s \the [src]."),
-					span_notice("I [eatverb] \the [src]."),
-				)
-			if(0 to NUTRITION_LEVEL_STARVING)
-				user.visible_message(
-					span_notice("[user] hungrily [eatverb]s \the [src], gobbling it down!"),
-					span_notice("I hungrily [eatverb] \the [src], gobbling it down!"),
-				)
-	else if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
-		eater.visible_message(
-			span_warning("[user] cannot force any more of [src] down [eater]'s throat!"),
-			span_warning("[user] cannot force any more of [src] down your throat!"),
-		)
-		return ITEM_INTERACT_BLOCKING
-	else
-		eater.visible_message(
-			span_danger("[user] tries to feed [eater] [src]."),
-			span_danger("[user] tries to feed me [src]."),
-		)
-		if(!do_after(user, 3 SECONDS, eater))
-			return ITEM_INTERACT_BLOCKING
-		log_combat(user, eater, "fed", reagents.log_list())
 
 	if(eater.satiety > -200)
 		eater.satiety -= junkiness
