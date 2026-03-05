@@ -2579,9 +2579,8 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep)
 "boK" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor{
@@ -5870,9 +5869,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
@@ -6480,9 +6478,8 @@
 /turf/open/openspace,
 /area/indoors/villagegarrison)
 "cZh" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fake_machine/musicbox/mannor,
 /turf/open/floor/tile,
@@ -6995,9 +6992,8 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
 "dol" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/book/law,
@@ -7319,8 +7315,7 @@
 	},
 /area/outdoors/town/roofs)
 "dwb" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /turf/open/floor/cobble/snow,
@@ -8344,9 +8339,8 @@
 /obj/structure/fluff/statue/astrata{
 	pixel_y = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
@@ -10672,9 +10666,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "ffx" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 1
@@ -11512,8 +11505,7 @@
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
 "fzE" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /turf/closed/wall/mineral/stone,
@@ -11726,14 +11718,12 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep)
 "fGJ" = (
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 4;
-	icon_state = "borderfall";
 	pixel_y = -14
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -12086,8 +12076,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "fPW" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /turf/open/floor/cobblerock/snow,
@@ -12403,13 +12392,11 @@
 /turf/open/floor/cobble,
 /area/indoors/town/church/inquisition)
 "fYr" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
-	icon_state = "borderfall";
 	pixel_y = 0;
 	pixel_x = -9
 	},
@@ -14955,9 +14942,8 @@
 /turf/open/floor/blocks/paving,
 /area/indoors/town/garrison)
 "hir" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 1
@@ -15473,9 +15459,8 @@
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "hvk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/shadow_floor,
@@ -21242,8 +21227,7 @@
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town)
 "kqe" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/pillory,
@@ -22006,13 +21990,11 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/town/shop)
 "kHO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 1;
-	icon_state = "borderfall";
 	pixel_y = 0;
 	pixel_x = 7
 	},
@@ -22787,9 +22769,8 @@
 /turf/open/floor/twig,
 /area/indoors/town/bath)
 "kZD" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
@@ -23411,9 +23392,8 @@
 /turf/open/floor/blocks,
 /area/indoors/town/church/inquisition)
 "lqH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor{
@@ -23601,9 +23581,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/orphanage)
 "lxc" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/wood,
@@ -23943,9 +23922,8 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town)
 "lFT" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 1
@@ -24713,9 +24691,8 @@
 	pixel_x = -3;
 	pixel_y = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
@@ -27206,9 +27183,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "nlu" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep)
@@ -29690,9 +29666,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "ood" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/wood,
@@ -32292,9 +32267,8 @@
 /turf/open/floor/rooftop,
 /area/outdoors/town/roofs)
 "pBI" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fake_machine/musicbox/mannor,
 /turf/open/floor/wood,
@@ -36542,9 +36516,8 @@
 	pixel_x = 2;
 	pixel_y = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
@@ -37526,13 +37499,11 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood/turned,
@@ -37842,9 +37813,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -38379,9 +38349,8 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/town/roofs)
 "sEE" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/tile/masonic{
 	dir = 1
@@ -38455,9 +38424,8 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
 "sGF" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/stairs{
 	dir = 1
@@ -39313,9 +39281,8 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -41126,9 +41093,8 @@
 /turf/open/floor/herringbone,
 /area/indoors/town)
 "tTv" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/wood,
@@ -41450,13 +41416,11 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/firebowl,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -44373,9 +44337,8 @@
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep)
 "vBn" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
 /obj/effect/decal/shadow_floor{
@@ -44999,13 +44962,11 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/villagegarrison)
 "vRO" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
-/obj/effect/decal/cobbleedge{
+/obj/effect/decal/borderfall{
 	dir = 8;
-	icon_state = "borderfall";
 	pixel_y = -14
 	},
 /obj/structure/fluff/railing/border{
@@ -46610,8 +46571,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/basin)
 "wJo" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/structure/fluff/railing/border{

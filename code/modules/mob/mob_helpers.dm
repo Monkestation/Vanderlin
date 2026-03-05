@@ -1001,7 +1001,9 @@
 		used_title = return_our_apprentice_name()
 	else if(job)
 		var/datum/job/job_datum = SSjob.GetJob(job)
-		var/datum/job/used_job = job_datum.parent_job ? job_datum.parent_job : job_datum
+		if(!job_datum)
+			return job
+		var/datum/job/used_job = job_datum?.parent_job ? job_datum.parent_job : job_datum
 		if(!used_job)
 			return job
 		if(steward_check && (used_job.department_flag == OUTSIDERS))

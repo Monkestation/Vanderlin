@@ -7,11 +7,17 @@
 	desc = "Makes you less noticeable for living and un-living beings."
 	icon_state = "obfuscate"
 	power_type = /datum/coven_power/obfuscate
+	experience_multiplier = 1.5
 
 /datum/coven_power/obfuscate
 	name = "Obfuscate power name"
 	desc = "Obfuscate power description"
-	duration_length = 0.5 MINUTES
+
+	duration_length = 30 SECONDS
+	cooldown_length = 15 SECONDS
+	check_flags = COVEN_CHECK_CAPABLE
+	/// Can this power be activated with witnesses?
+	var/must_be_alone = FALSE
 
 	var/static/list/aggressive_signals = list(
 		COMSIG_MOB_ATTACK_HAND,
@@ -19,6 +25,19 @@
 		COMSIG_ATOM_ATTACK_HAND,
 		COMSIG_ATOM_ATTACKBY,
 	)
+	grouped_powers = list(
+		/datum/coven_power/obfuscate/cloak_of_shadows,
+		/datum/coven_power/obfuscate/unseen_presence,
+		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
+		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
+		/datum/coven_power/obfuscate/cloak_the_gathering
+	)
+
+/datum/coven_power/obfuscate/pre_activation_checks()
+	if(must_be_alone && length(owner.CheckEyewitness(owner)))
+		to_chat(owner, span_warning("You cannot use [src] while you're being observed!"))
+		return FALSE
+	return ..()
 
 /datum/coven_power/obfuscate/proc/on_combat_signal(datum/source)
 	SIGNAL_HANDLER
@@ -29,43 +48,16 @@
 	deltimer(cooldown_timer)
 	cooldown_timer = addtimer(CALLBACK(src, PROC_REF(cooldown_expire)), COMBAT_COOLDOWN_LENGTH, TIMER_STOPPABLE)
 
-/datum/coven_power/obfuscate/proc/is_seen_check()
-	for (var/mob/living/viewer in oviewers(7, owner))
-		//cats cannot stop you from Obfuscating
-		if (!istype(viewer, /mob/living/carbon) && !viewer.client)
-			continue
-
-		//the corpses are not watching you
-		if (viewer.is_blind() || viewer.stat >= UNCONSCIOUS)
-			continue
-
-		to_chat(owner, span_warning("You cannot use [src] while you're being observed!"))
-		return FALSE
-
-	return TRUE
 
 //CLOAK OF SHADOWS - Basic stealth, broken by movement
 /datum/coven_power/obfuscate/cloak_of_shadows
 	name = "Cloak of Shadows"
 	desc = "Meld into the shadows and stay unnoticed so long as you draw no attention. Broken by any movement."
-
 	level = 1
-	check_flags = COVEN_CHECK_CAPABLE
+
 	vitae_cost = 25
-
 	toggled = TRUE
-
-	grouped_powers = list(
-		/datum/coven_power/obfuscate/cloak_of_shadows,
-		/datum/coven_power/obfuscate/unseen_presence,
-		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
-		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
-		/datum/coven_power/obfuscate/cloak_the_gathering
-	)
-
-/datum/coven_power/obfuscate/cloak_of_shadows/pre_activation_checks()
-	. = ..()
-	return is_seen_check()
+	violates_masquerade = TRUE
 
 /datum/coven_power/obfuscate/cloak_of_shadows/activate()
 	. = ..()
@@ -94,28 +86,17 @@
 /datum/coven_power/obfuscate/unseen_presence
 	name = "Unseen Presence"
 	desc = "Move among the crowds without ever being noticed. Achieve invisibility while walking."
-
 	level = 2
-	check_flags = COVEN_CHECK_CAPABLE
-	vitae_cost = 25
 
+	vitae_cost = 10
+	duration_length = 3 SECONDS
 	toggled = TRUE
+	must_be_alone = TRUE
 
-	grouped_powers = list(
-		/datum/coven_power/obfuscate/cloak_of_shadows,
-		/datum/coven_power/obfuscate/unseen_presence,
-		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
-		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
-		/datum/coven_power/obfuscate/cloak_the_gathering
-	)
-
-/datum/coven_power/obfuscate/unseen_presence/pre_activation_checks()
-	. = ..()
-	return is_seen_check()
 
 /datum/coven_power/obfuscate/unseen_presence/activate()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
@@ -123,7 +104,7 @@
 
 /datum/coven_power/obfuscate/unseen_presence/deactivate()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
@@ -143,13 +124,9 @@
 /datum/coven_power/obfuscate/mask_of_a_thousand_faces
 	name = "Mask of a Thousand Faces"
 	desc = "Be noticed, but incorrectly. Assume the appearance of others for a limited time."
-
 	level = 3
-	check_flags = COVEN_CHECK_CAPABLE
-	vitae_cost = 50
-	duration_length = 30 SECONDS
 
-	toggled = FALSE
+	vitae_cost = 50
 
 	var/mask_timer
 
@@ -157,6 +134,7 @@
 	var/old_hair
 	var/old_hair_color
 	var/old_eye_color
+	var/old_second_color
 	var/old_facial_hair
 	var/old_facial_hair_color
 	var/old_gender
@@ -164,14 +142,8 @@
 	var/transformed = FALSE
 	var/mob/living/carbon/human/current_target
 
-	grouped_powers = list(
-		/datum/coven_power/obfuscate/cloak_of_shadows,
-		/datum/coven_power/obfuscate/unseen_presence,
-		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
-		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
-		/datum/coven_power/obfuscate/cloak_the_gathering
-	)
-
+// this shit isnt even remotely good, we need a better system  for transferring identities and storing them than this
+// not fixing it now though!
 /datum/coven_power/obfuscate/mask_of_a_thousand_faces/proc/store_original_appearance(mob/living/carbon/human/user)
 	var/mob/living/carbon/human/transformer = owner
 
@@ -180,7 +152,8 @@
 	old_dna = transformer.dna
 	old_hair = feature?.accessory_type
 	old_hair_color = transformer.get_hair_color()
-	old_eye_color = transformer.get_eye_color()
+	old_eye_color = transformer.get_eye_color(TRUE)
+	old_second_color = transformer.get_eye_color(FALSE)
 	old_facial_hair_color = transformer.get_facial_hair_color()
 	old_facial_hair = facial?.accessory_type
 	old_gender = transformer.gender
@@ -226,8 +199,10 @@
 	var/datum/bodypart_feature/hair/target_feature = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
 	var/datum/bodypart_feature/hair/target_facial = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
 
-	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-	eyes.eye_color = target.get_eye_color()
+	var/datum/organ_dna/eyes/eye_dna = target.dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(istype(eye_dna))
+		user.set_eye_color(eye_dna.eye_color, eye_dna.heterochromia ? eye_dna.second_color : eye_dna.eye_color)
+
 	user.set_hair_color(target.get_hair_color(), FALSE)
 	user.set_hair_style(target_feature?.accessory_type, FALSE)
 	user.set_facial_hair_color(target.get_facial_hair_color(), FALSE)
@@ -256,8 +231,7 @@
 	user.name = user.get_visible_name()
 	user.gender = old_gender
 
-	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-	eyes.eye_color = old_eye_color
+	user.set_eye_color(old_eye_color, old_second_color, FALSE)
 	user.set_facial_hair_color(old_facial_hair_color, FALSE)
 	user.set_facial_hair_style(old_facial_hair, FALSE)
 	user.set_hair_color(old_hair_color, FALSE)
@@ -271,40 +245,47 @@
 //VANISH FROM THE MIND'S EYE - Instant stealth activation + memory wipe
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye
 	name = "Vanish from the Mind's Eye"
-	desc = "Disappear from plain view instantly, and wipe your presence from recent memory."
-
+	desc = "Disappear from plain view instantly, and wipe your presence from the last 30 seconds of memory."
 	level = 4
-	check_flags = COVEN_CHECK_CAPABLE
-	vitae_cost = 100
+	cooldown_length = 5 MINUTES
+	duration_length = 30 SECONDS
 
-	toggled = TRUE
-
-	grouped_powers = list(
-		/datum/coven_power/obfuscate/cloak_of_shadows,
-		/datum/coven_power/obfuscate/unseen_presence,
-		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
-		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
-		/datum/coven_power/obfuscate/cloak_the_gathering
-	)
-	violates_masquerade = FALSE
+	vitae_cost = 150
 
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye/activate()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
-
+	owner.playsound_local(owner, 'sound/magic/PSY.ogg', 200)
 	owner.alpha = 10
 
 	// Memory wipe effect - make nearby people forget they saw you
-	for(var/mob/living/carbon/human/viewer in oviewers(7, owner))
-		if(viewer.client && viewer.stat < UNCONSCIOUS)
-			to_chat(viewer, span_hypnophrase("Wait... wasn't someone just here? No, must be my imagination..."))
-			// Could add more memory effects here like removing recent chat logs mentioning the user
+	for(var/mob/living/carbon/human/viewer in viewers(DEFAULT_MESSAGE_RANGE, owner))
+		viewer.playsound_local(viewer, 'sound/magic/PSY.ogg', 200)
+		if(!viewer.affects_masquerade(FALSE))
+			continue
+		if(HAS_TRAIT(viewer, TRAIT_COVEN_RESISTANT) || viewer.can_block_magic(MAGIC_RESISTANCE_MIND, 1))
+			to_chat(viewer, span_boldannounce("You resist [src]'s hypnosis!"))
+			found_ping(viewer, owner.client, "trap")
+			log_combat(owner, viewer, "used [name] on", addition = "and FAILED")
+			continue
+
+		bordered_message(viewer, list(
+			"<h1>[span_hypnophrase("<center>FORGET</center>")]</h1>",
+			span_mind_control("<center>You have forgotten the last 30 seconds of your memory.</center>")
+		))
+		log_combat(owner, viewer, "used [name] on", addition = "and SUCCEEDED. Their memories from the last 30 seconds are wiped.")
+		if(viewer.cmode)
+			viewer.toggle_cmode()
+		viewer.flash_fullscreen("blackflash")
+		viewer.set_eyes_closed(TRUE)
+		found_ping(viewer, owner.client, "hidden", 10 SECONDS)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), viewer, span_hypnophrase("Wait... what was I doing?")), 3 SECONDS)
 
 /datum/coven_power/obfuscate/vanish_from_the_minds_eye/deactivate()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
@@ -324,27 +305,14 @@
 /datum/coven_power/obfuscate/cloak_the_gathering
 	name = "Cloak the Gathering"
 	desc = "Hide yourself and others in a small area. All nearby allies become invisible."
-
 	level = 5
-	check_flags = COVEN_CHECK_CAPABLE
-	vitae_cost = 150
 
+	vitae_cost = 150
 	toggled = TRUE
 
 	var/list/cloaked_mobs = list()
-
-	grouped_powers = list(
-		/datum/coven_power/obfuscate/cloak_of_shadows,
-		/datum/coven_power/obfuscate/unseen_presence,
-		/datum/coven_power/obfuscate/mask_of_a_thousand_faces,
-		/datum/coven_power/obfuscate/vanish_from_the_minds_eye,
-		/datum/coven_power/obfuscate/cloak_the_gathering
-	)
 	violates_masquerade = TRUE
 
-/datum/coven_power/obfuscate/cloak_the_gathering/pre_activation_checks()
-	. = ..()
-	return is_seen_check()
 
 /datum/coven_power/obfuscate/cloak_the_gathering/activate()
 	. = ..()
@@ -358,7 +326,7 @@
 	for(var/mob/living/target in oviewers(3, owner))
 		if(target.client && target.stat < UNCONSCIOUS)
 			// Add faction/ally checks here as appropriate
-			ADD_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+			ADD_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 			target.alpha = 10
 			cloaked_mobs += target
 			to_chat(target, span_notice("You feel a supernatural veil fall over you..."))
@@ -373,7 +341,7 @@
 
 	// Restore visibility to all cloaked mobs
 	for(var/mob/living/target in cloaked_mobs)
-		REMOVE_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, TRAIT_GENERIC)
+		REMOVE_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, VAMPIRE_TRAIT)
 		target.alpha = 255
 		UnregisterSignal(target, aggressive_signals)
 		if(target != owner)

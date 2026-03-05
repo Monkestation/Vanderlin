@@ -227,6 +227,8 @@
 			if(BP.burnstate)
 				damage_overlay.add_overlay("[BP.dmg_overlay_type]_[BP.body_zone]_0[BP.burnstate]")
 
+	var/datum/blood_type/bloodtype = get_blood_type()
+	damage_overlay.color = bloodtype.color
 	apply_overlay(DAMAGE_LAYER)
 
 

@@ -186,6 +186,7 @@
 	. = ..()
 	if(clan)
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
 	if(cleric)
 		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
@@ -392,7 +393,7 @@
 		else
 			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
 
-/mob/living/carbon/human/cuff_resist(obj/item/I)
+/mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
 		dropItemToGround(I)
 
@@ -416,11 +417,11 @@
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, "#000000")
 	cut_overlay(MA)
 
-/mob/living/carbon/human/resist_restraints()
+/mob/living/carbon/human/resist_restraints(instant = FALSE)
 	if(wear_armor && wear_armor.breakouttime)
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
-		cuff_resist(wear_armor)
+		cuff_resist(wear_armor, instant = instant)
 	else
 		..()
 

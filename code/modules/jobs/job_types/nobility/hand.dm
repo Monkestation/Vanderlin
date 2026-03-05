@@ -161,7 +161,7 @@
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
-	wrists = /obj/item/weapon/scabbard/knife/hand
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	belt = /obj/item/storage/belt/leather/black
 	beltl =  /obj/item/weapon/knife/dagger/steel/hand
 	beltr = /obj/item/weapon/knife/dagger/steel/hand/parry

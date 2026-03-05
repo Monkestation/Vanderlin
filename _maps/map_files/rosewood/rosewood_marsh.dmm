@@ -1387,9 +1387,8 @@
 /turf/open/floor/church/purple,
 /area/indoors/lich)
 "hS" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/bog)
@@ -3100,13 +3099,13 @@
 "sO" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/coin/gold/pile,
-/obj/item/clothing/shoes/boots/armor/vampire{
+/obj/item/clothing/shoes/boots/armor/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/gloves/chain/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/pants/platelegs/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
 /obj/item/clothing/armor/cuirass/vampire{
@@ -5743,9 +5742,8 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "GZ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /turf/open/floor/cobble,
 /area/outdoors/bog)
@@ -7992,9 +7990,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
 "UQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /turf/open/openspace,
 /area/indoors/lich)

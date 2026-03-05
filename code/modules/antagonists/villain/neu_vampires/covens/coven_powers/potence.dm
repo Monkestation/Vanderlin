@@ -9,156 +9,132 @@
 	name = "Potence power name"
 	desc = "Potence power description"
 
-//POTENCE 1
-/datum/coven_power/potence/one
-	name = "Potence 1"
-	desc = "Enhance your muscles. Never hit softly."
-
-	level = 1
-
 	check_flags = COVEN_CHECK_CAPABLE
-
 	toggled = TRUE
 	duration_length = 2 TURNS
-
 	grouped_powers = list(
+		/datum/coven_power/potence/one,
 		/datum/coven_power/potence/two,
 		/datum/coven_power/potence/three,
 		/datum/coven_power/potence/four,
 		/datum/coven_power/potence/five
 	)
+	duration_length = 3 SECONDS
+	cooldown_length = 3 SECONDS
+	violates_masquerade = TRUE
+	refresh_violations = TRUE
 
-/datum/coven_power/potence/one/activate()
-	. = ..()
-	owner.dna.species.punch_damage += 8
-	owner.potence_weapon_buff = 1
+	vitae_cost = 20
+	var/punch_bonus = 8
+	var/kick_bonus = 8
+	var/weapon_buff = 1
+	var/buff = /datum/status_effect/buff/potence
 
-/datum/coven_power/potence/one/deactivate()
+/datum/coven_power/potence/activate()
 	. = ..()
-	owner.dna.species.punch_damage -= 8
+	owner.dna.species.punch_damage += punch_bonus
+	owner.dna.species.kick_damage += kick_bonus
+	owner.potence_weapon_buff = weapon_buff
+	owner.apply_status_effect(buff, -1)
+	if(level >= 4)
+		ADD_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE, "[type]")
+		if(level >= 5)
+			ADD_TRAIT(owner, TRAIT_NODEATH, "[type]") // good, but not as busted as it sounds
+
+
+/datum/coven_power/potence/deactivate()
+	owner.dna.species.punch_damage -= punch_bonus
+	owner.dna.species.kick_damage -= kick_bonus
 	owner.potence_weapon_buff = 0
-	owner.remove_overlay(POTENCE_LAYER)
+	owner.remove_overlay(POTENCE_LAYER) // we dont even have anything here but...alright. sure.
+	owner.remove_status_effect(buff, -1)
+	REMOVE_TRAIT(owner, TRAIT_BLOODLOSS_IMMUNE, "[type]")
+	REMOVE_TRAIT(owner, TRAIT_NODEATH, "[type]")
+	. = ..()
+
+
+//POTENCE 1
+/datum/coven_power/potence/one
+	name = "Potence 1"
+	desc = "Enhance your muscles. Never hit softly."
+	level = 1
+
+	vitae_cost = 20
+	punch_bonus = 8
+	kick_bonus = 8
+	weapon_buff = 1
+	violates_masquerade = FALSE
+	buff = /datum/status_effect/buff/potence
 
 //POTENCE 2
 /datum/coven_power/potence/two
 	name = "Potence 2"
 	desc = "Become powerful beyond your muscles. Wreck people and things."
-
 	level = 2
 
-	check_flags = COVEN_CHECK_CAPABLE
-
-	toggled = TRUE
-	duration_length = 2 TURNS
-
-	grouped_powers = list(
-		/datum/coven_power/potence/one,
-		/datum/coven_power/potence/three,
-		/datum/coven_power/potence/four,
-		/datum/coven_power/potence/five
-	)
-
-/datum/coven_power/potence/two/activate()
-	. = ..()
-	owner.dna.species.punch_damage += 16
-	owner.potence_weapon_buff = 2
-
-/datum/coven_power/potence/two/deactivate()
-	. = ..()
-	owner.dna.species.punch_damage -= 16
-	owner.potence_weapon_buff = 0
-	owner.remove_overlay(POTENCE_LAYER)
+	vitae_cost = 35
+	punch_bonus = 12
+	kick_bonus = 12
+	weapon_buff = 2
+	buff = /datum/status_effect/buff/potence/two
 
 //POTENCE 3
 /datum/coven_power/potence/three
 	name = "Potence 3"
 	desc = "Become a force of destruction. Lift and break the unliftable and the unbreakable."
-
 	level = 3
 
-	check_flags = COVEN_CHECK_CAPABLE
-
-	toggled = TRUE
-	duration_length = 2 TURNS
-
-	grouped_powers = list(
-		/datum/coven_power/potence/one,
-		/datum/coven_power/potence/two,
-		/datum/coven_power/potence/four,
-		/datum/coven_power/potence/five
-	)
-
-/datum/coven_power/potence/three/activate()
-	. = ..()
-	owner.dna.species.punch_damage += 24
-	owner.potence_weapon_buff = 3
-
-
-/datum/coven_power/potence/three/deactivate()
-	. = ..()
-	owner.dna.species.punch_damage -= 24
-	owner.potence_weapon_buff = 0
-	owner.remove_overlay(POTENCE_LAYER)
+	vitae_cost = 55
+	punch_bonus = 18
+	kick_bonus = 18
+	weapon_buff = 3
+	buff = /datum/status_effect/buff/potence/three
 
 //POTENCE 4
 /datum/coven_power/potence/four
 	name = "Potence 4"
 	desc = "Become an unyielding machine for as long as your Vitae lasts."
-
 	level = 4
 
-	check_flags = COVEN_CHECK_CAPABLE
-
-	toggled = TRUE
-	duration_length = 2 TURNS
-
-	grouped_powers = list(
-		/datum/coven_power/potence/one,
-		/datum/coven_power/potence/two,
-		/datum/coven_power/potence/three,
-		/datum/coven_power/potence/five
-	)
-	violates_masquerade = TRUE
-
-/datum/coven_power/potence/four/activate()
-	. = ..()
-	owner.dna.species.punch_damage += 32
-	owner.potence_weapon_buff = 4
-
-/datum/coven_power/potence/four/deactivate()
-	. = ..()
-	owner.dna.species.punch_damage -= 32
-	owner.potence_weapon_buff = 0
-	owner.remove_overlay(POTENCE_LAYER)
+	vitae_cost = 75
+	punch_bonus = 26
+	kick_bonus = 26
+	weapon_buff = 4
+	buff = /datum/status_effect/buff/potence/four
 
 
 //POTENCE 5
 /datum/coven_power/potence/five
 	name = "Potence 5"
 	desc = "The people could worship you as a god if you showed them this."
-
 	level = 5
 
-	check_flags = COVEN_CHECK_CAPABLE
+	vitae_cost = 120
+	punch_bonus = 36
+	kick_bonus = 36
+	weapon_buff = 5
+	buff = /datum/status_effect/buff/potence/five
 
-	toggled = TRUE
-	duration_length = 2 TURNS
+/datum/status_effect/buff/potence
+	id = "potence"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/potence
+	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 1)
+	duration = 3 SECONDS
+	status_type = STATUS_EFFECT_REPLACE
 
-	grouped_powers = list(
-		/datum/coven_power/potence/one,
-		/datum/coven_power/potence/two,
-		/datum/coven_power/potence/three,
-		/datum/coven_power/potence/four
-	)
-	violates_masquerade = TRUE
+/datum/status_effect/buff/potence/two
+	effectedstats = list(STATKEY_STR = 2, STATKEY_END = 2)
 
-/datum/coven_power/potence/five/activate()
-	. = ..()
-	owner.dna.species.punch_damage += 40
-	owner.potence_weapon_buff = 5
+/datum/status_effect/buff/potence/three
+	effectedstats = list(STATKEY_STR = 3, STATKEY_END = 3)
 
-/datum/coven_power/potence/five/deactivate()
-	. = ..()
-	owner.dna.species.punch_damage -= 40
-	owner.potence_weapon_buff = 0
-	owner.remove_overlay(POTENCE_LAYER)
+/datum/status_effect/buff/potence/four
+	effectedstats = list(STATKEY_STR = 4, STATKEY_END = 4)
+
+/datum/status_effect/buff/potence/five
+	effectedstats = list(STATKEY_STR = 5, STATKEY_END = 5)
+
+/atom/movable/screen/alert/status_effect/buff/potence
+	name = "Potence"
+	desc = ""
+	icon_state = "adrrush"

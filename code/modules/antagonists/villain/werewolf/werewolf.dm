@@ -123,6 +123,8 @@
 /mob/living/carbon/human/proc/can_werewolf()
 	if(!mind)
 		return FALSE
+	if(is_antag_banned(ckey, ROLE_WEREWOLF))
+		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/vampire))

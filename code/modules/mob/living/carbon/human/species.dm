@@ -277,6 +277,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/amtfail = 0
 
 	var/punch_damage = 0
+	var/kick_damage = 0
 
 	/// Native language for accents
 	var/native_language = "Imperial"
@@ -385,7 +386,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
 				ACCENT_HALFLING,
-				ACCENT_KOBOLD
+				ACCENT_KOBOLD,
+				ACCENT_ROUSMAN
 			)
 
 			///This will only trigger for donators
@@ -1913,7 +1915,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				bloody = 1
 				var/turf/location = H.loc
 				var/splatter_dir = get_dir(H, user)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
