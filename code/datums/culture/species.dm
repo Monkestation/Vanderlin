@@ -188,13 +188,10 @@
 		SPEC_ID_DWARF
 	)
 
-/datum/culture/species/dwarf/federation
-	name = "Federation of Longbears"
-	description = "Hate Long Ears. Hate Drow. Hate Naturists. Luv Malum. Love ale. Simple As."
+//TODO: Dwarf Culture
+// /datum/culture/species/dwarf/federation
 
-/datum/culture/species/dwarf/brass
-	name = "BIG BRASS ONES"
-	description = "DESCRIPTION HERE."
+// /datum/culture/species/dwarf/brass
 
 
 //dark elf here
