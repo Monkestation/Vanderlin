@@ -67,7 +67,7 @@
 		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
-	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods, TRUE)
+	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 	if(IsAdminGhost(src))
 		to_chat(src, "[link] [message]")
 	else

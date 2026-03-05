@@ -42,23 +42,22 @@
 	return if_none || "Unknown" // I'm really not sure why you would try and call this null but just in case
 
 /// Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
-/mob/living/carbon/proc/get_face_name(if_no_face = "Unknown", list/html_tags)
+/mob/living/carbon/proc/get_face_name(if_no_face = "Unknown", list/html_tags, include_honoraries=TRUE)
 	if(!is_human_part_visible(src, HIDEFACE))
 		return if_no_face
 	var/obj/item/bodypart/O = get_bodypart(BODY_ZONE_HEAD)
 	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || O.skeletonized )	//disfigured. use id-name if possible
 		return if_no_face
-	/// This sure does suck
-	if(SSticker.regent_mob == src)
-		. += "Regent "
-	if(honorary)
-		. += "[honorary] "
-	var/namepart = real_name
+	. = real_name
 	for(var/tag in html_tags)
-		namepart = html_tag(tag, namepart)
-	. += article ? "[article] [namepart]" : "\a [namepart]"
-	if(honorary_suffix)
-		. += " [honorary_suffix]"
+		. = html_tag(tag, .)
+	if(include_honoraries)
+		if(honorary)
+			. = "[honorary] [.]"
+		if(SSticker.regent_mob == src)
+			. = "Regent [.]"
+		if(honorary_suffix)
+			. += " [honorary_suffix]"
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
 //Useful when player is being seen by other mobs

@@ -232,7 +232,7 @@
 	if(can_see_runechat(speaker) && can_hear())
 		create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose message for AI hrefs, language incomprehension.
-	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods, TRUE)
+	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
 	// voice muffling
 	if(stat == UNCONSCIOUS)
 		message = "<I>... You can almost hear something ...</I>"

@@ -20,7 +20,7 @@
 	return TRUE
 
 /atom/movable/proc/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, list/message_mods = list(), original_message)
-	var/rendered = compose_message(src, message_language, message, null, spans, message_mods, TRUE)
+	var/rendered = compose_message(src, message_language, message, null, spans, message_mods)
 	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(range, source))
 		if(!hearing_movable) // theoretically this should use as anything because it shouldnt be able to get nulls but there are reports that it does.
 			stack_trace("somehow there's a null returned from get_hearers_in_view() in send_speech!")
