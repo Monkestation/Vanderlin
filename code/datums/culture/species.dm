@@ -45,6 +45,17 @@
 		SPEC_ID_AASIMAR,
 	)
 
+/datum/culture/species/elven/lakkarian
+
+	name = "Lakkari"
+	description = "Known vaguely by humens to be sentimental and traditional. \
+	Lakkarians value craftsmanship, freedom, and their deep connection to their ancestors."
+	species = list(
+		SPEC_ID_ELF,
+		SPEC_ID_HALF_ELF,
+		SPEC_ID_DWARF, //Sekket has alot of dwelves
+	)
+
 /datum/culture/species/half_orc
 	abstract_type = /datum/culture/species/half_orc
 	species = list(
