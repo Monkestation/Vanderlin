@@ -46,7 +46,7 @@
 	. = ..()
 	if(spawned.gender == MALE && spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-var/weapons = list("Sword", "Axes")
+	var/weapons = list("Sword", "Axes")
 	var/weapon_choice = input(spawned,"CHOOSE YOUR WEAPON.", "SPILL SOME BLOOD.") as anything in weapons
 	switch(weapon_choice)
 		if("Sword")
