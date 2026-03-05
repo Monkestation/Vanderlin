@@ -25,8 +25,8 @@
 			THEIR = p_their(),
 			HAVE = p_have(),
 			ARE = p_are(),
-			THEYRE = p_theyre(TRUE),
-			THEYVE = p_theyve(TRUE)
+			THEYRE = "[p_they(TRUE)] [p_are()]",
+			THEYVE = "[p_they(TRUE)] [p_have()]",
 		)
 
 	var/alist/examine_sections = get_examine_list(user, P)

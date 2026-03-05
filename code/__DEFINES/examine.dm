@@ -1,13 +1,13 @@
 
 /// Used by the examine pronoun list as keys.
-#define THEY	"they"
-#define THEM	"them"
-#define THEIR	"their"
-#define HAVE	"have"
-#define ARE		"are"
-#define THEYRE	"theyre"
-#define THEYVE	"theyve"
-
+#define THEY		"they"
+#define THEM		"them"
+#define THEIR		"their"
+#define HAVE		"have"
+#define ARE			"are"
+#define THEYRE		"theyre"
+#define THEYVE		"theyve"
+#define THEYHAVE	"they have"
 
 /**
  * These are used to establish an indexing format for examine sections.
