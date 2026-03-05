@@ -189,8 +189,12 @@
 	)
 
 /datum/culture/species/dwarf/federation
+	name = "Federation of Longbears"
+	description = "Hate Long Ears. Hate Drow. Hate Naturists. Luv Malum. Love ale. Simple As."
 
 /datum/culture/species/dwarf/brass
+	name = "BIG BRASS ONES"
+	description = "DESCRIPTION HERE."
 
 
 //dark elf here
