@@ -98,18 +98,19 @@
 	if(!is_active || !bound_user)
 		return PROCESS_KILL
 
-	var/time_left = timeleft(active_timer)
+	var/time_left = round(timeleft(active_timer), 10)
 	if(time_left <= 0)
-		return
-
-	if(current_state != STATE_SAFE && time_left <= 11 SECONDS)
-		bound_user.balloon_alert(bound_user, span_red("my time is nigh!"))
-		var/message = span_red("[time2text(time_left - 1 SECONDS, "mm:ss", 0)] remains!")
-		addtimer(CALLBACK(bound_user, TYPE_PROC_REF(/atom, balloon_alert), bound_user, message), 1 SECONDS)
 		return PROCESS_KILL
 
-	var/round = round(time_left, 10)
-	if((round % 30 SECONDS) != 0)
+	if(current_state != STATE_SAFE && time_left <= 10 SECONDS)
+		if((time_left % 100) == 0)
+			bound_user.balloon_alert(bound_user, "<font color='#e32323'>my time is nigh! 10 seconds!</font>")
+			return
+
+		bound_user.balloon_alert(bound_user, "<font color='#e32323'>[time2text(round(time_left), "ss", 0)]!</font>")
+		return
+
+	if((time_left % 300) != 0)
 		return
 
 	bound_user.balloon_alert(bound_user, span_red("[time2text(time_left, "mm:ss", 0)] remains"))
@@ -121,11 +122,6 @@
 		return
 
 	if(bound_user)
-		return
-
-	if(is_active) // fuck you
-		user.adjust_divine_fire_stacks(5)
-		user.IgniteMob()
 		return
 
 	if(allow_all)
@@ -287,7 +283,12 @@
 	user.adjust_skillrank(/datum/skill/combat/polearms, 1, FALSE)
 
 /datum/component/martyr_weapon/proc/duration_ended(mob/living/user)
-	if(QDELETED(user) || QDELETED(parent))
+	if(QDELETED(parent))
+		return
+
+	deactivate(user)
+
+	if(QDELETED(user))
 		return
 
 	if(current_state != STATE_SAFE)
@@ -314,10 +315,11 @@
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		C.freak_out()
+
 	if(user.cmode)
 		user.toggle_cmode()
 		user.refresh_looping_ambience()
-	deactivate(user)
+
 	user.Stun(1 HOURS, TRUE)
 	user.visible_message(
 		span_warning("[user] falls to [user.p_their()] knees, planting [user.p_their()] weapon into the ground as holy energies pulse from [user.p_their()] body!"),
