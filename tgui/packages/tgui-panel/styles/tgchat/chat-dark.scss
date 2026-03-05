@@ -557,12 +557,12 @@ em {
   color: hsl(132.8, 93.4%, 29.6%);
 }
 
-.span_boldgreen {
+.boldnicegreen {
   color: hsl(132.8, 93.4%, 29.6%);
   font-weight: bold;
 }
 
-.smallgreen {
+.tinynicegreen {
   color: hsl(132.8, 93.4%, 29.6%);
   font-size: 85%;
 }
@@ -754,22 +754,6 @@ em {
 .redtext {
   color: hsl(0, 73.6%, 44.5%);
 }
-
-.smallred {
-  color: hsl(0, 73.6%, 44.5%);
-  font-size: 90%;
-}
-
-.boldred{
-  color: hsl(0, 73.6%, 44.5%);
-  font-weight: bold;
-}
-
-.bigred {
-  color: hsl(0, 73.6%, 44.5%);
-  font-size: 125%;
-}
-
 
 .singing {
   font-family: 'Trebuchet MS', cursive, sans-serif;

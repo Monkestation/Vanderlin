@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(antagonist_teams)
 			if(objective.check_completion())
 				report += "<B>[objective.flavor] #[objective_count]</B>: [objective.explanation_text] [span_greentext("TRIUMPH!")]"
 			else
-				report += "<B>[objective.flavor] #[objective_count]</B>: [objective.explanation_text] [span_red("FAIL.")]"
+				report += "<B>[objective.flavor] #[objective_count]</B>: [objective.explanation_text] [span_redtext("FAIL.")]"
 				win = FALSE
 
 		var/result_sound
@@ -70,7 +70,7 @@ GLOBAL_LIST_EMPTY(antagonist_teams)
 			result_sound = 'sound/misc/triumph.ogg'
 			roundend_success()
 		else
-			report += span_red("\The [name] FAILED!")
+			report += span_redtext("\The [name] FAILED!")
 			result_sound = 'sound/misc/fail.ogg'
 			roundend_failure()
 			triumph_count = 0

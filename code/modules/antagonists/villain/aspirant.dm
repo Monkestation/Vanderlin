@@ -98,12 +98,12 @@
 	create_objectives()
 
 /datum/antagonist/aspirant/greet()
-	to_chat(owner, span_redbig("I have grown weary of being near the throne, but never on it. I have decided that it is time I ruled [SSmapping.config.map_name]."))
+	to_chat(owner, span_redtextbig("I have grown weary of being near the throne, but never on it. I have decided that it is time I ruled [SSmapping.config.map_name]."))
 	addtimer(CALLBACK(src, PROC_REF(show_supporters_to_aspirant)), 10 SECONDS) // this is ass but I can't think of anything else rn, it's 22:00
 	..()
 
 /datum/antagonist/aspirant/supporter/greet()
-	to_chat(owner, span_redbig("Long live the Monarch! But not this one. I have been approached by an Aspirant and swayed to their cause. I must ensure they take the throne."))
+	to_chat(owner, span_redtextbig("Long live the Monarch! But not this one. I have been approached by an Aspirant and swayed to their cause. I must ensure they take the throne."))
 	addtimer(CALLBACK(src, PROC_REF(show_aspirant_to_supporter)), 10 SECONDS) // this is ass but I can't think of anything else rn, it's 22:00
 
 /datum/antagonist/aspirant/ruler/greet() // No alert for the ruler to always keep them guessing.
@@ -201,7 +201,7 @@
 		if(win)
 			to_chat(world, span_greentext("The Aspirant has ascended! SUCCESS!"))
 		else
-			to_chat(world, span_red("The Aspirant was thwarted! FAIL!"))
+			to_chat(world, span_redtext("The Aspirant was thwarted! FAIL!"))
 
 /datum/antagonist/aspirant/ruler/roundend_report()
 	to_chat(owner, span_header(" * [name] * "))
@@ -220,7 +220,7 @@
 		if(win)
 			to_chat(owner, span_greentext("You defended your throne! SUCCESS!"))
 		else
-			to_chat(owner, span_red("You were deposed! FAIL!"))
+			to_chat(owner, span_redtext("You were deposed! FAIL!"))
 
 /datum/antagonist/aspirant/supporter/roundend_report()
 	to_chat(owner, span_header(" * [name] * "))
@@ -239,7 +239,7 @@
 		if(win)
 			to_chat(owner, span_greentext("Your claimant took the throne! SUCCESS!"))
 		else
-			to_chat(owner, span_red("Your claimant failed! FAIL!"))
+			to_chat(owner, span_redtext("Your claimant failed! FAIL!"))
 
 /datum/antagonist/aspirant/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(examined_datum.type == /datum/antagonist/aspirant)
