@@ -210,7 +210,7 @@ export function SettingsGeneral(props) {
               Import
             </Button.File>
           </Stack.Item>
-          <Stack.Item>
+          <Stack.Item mt={0.15}>
             <Button
               icon="arrow-up-from-bracket"
               tooltip="Import settings from the TG key to the new one"
