@@ -36,17 +36,6 @@
 	name = "Crimson Tribes"
 	description = "Known by humens to be naive and weak. How they manage to survive the harsh steppe with roaming orc bands is anyone's guess."
 
-/datum/culture/species/elven/lakkarian
-
-	name = "Lakkari"
-	description = "Known vaguely by humens to be sentimental and traditional. \
-	Lakkarians value craftsmanship, freedom, and their deep connection to their ancestors."
-	species = list(
-		SPEC_ID_ELF,
-		SPEC_ID_HALF_ELF,
-		SPEC_ID_DWARF, //Sekket has alot of dwelves
-	)
-
 /datum/culture/species/elven/obsidian
 	name = "Obsidian Tribes"
 	description = "Known by humens to be miserably devout Necrans. \
