@@ -35785,10 +35785,12 @@
 "rpc" = (
 /obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/item/reagent_containers/food/snacks/meat/steak,
 /obj/structure/closet/crate/chest/neu,
 /obj/effect/decal/cleanable/dirt/dust,
