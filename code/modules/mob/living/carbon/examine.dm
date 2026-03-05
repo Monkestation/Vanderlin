@@ -53,7 +53,7 @@
 			if(EXAMINE_SECT_WARNING)
 				joined_section = span_tinywarning(joined_section)
 			if(EXAMINE_SECT_GEAR)
-				joined_section = examine_block(span_bold("[P[THEYRE]]:\n") + span_slightlylarger(joined_section))
+				joined_section = "<hr>" + span_slightlylarger(joined_section) + "<hr>"
 		. += joined_section
 
 
@@ -142,9 +142,9 @@
 
 		// Excommunications
 		if(real_name in GLOB.excommunicated_players)
-			. += span_boldred("EXCOMMUNICATED!")
+			. += span_redtextbig("EXCOMMUNICATED!")
 		if(real_name in GLOB.heretical_players)
-			. += span_boldred("HERETIC! SHAME!")
+			. += span_redtextbig("HERETIC! SHAME!")
 
 		// Outlaws
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
@@ -156,7 +156,7 @@
 			if(known_frumentarii[name])
 				. += span_smallgreen("[P[THEYRE]] an agent of the court.")
 			else
-				. += span_smallred("[P[THEYRE]] an ex-agent of the court.")
+				. += span_redtextsmall("[P[THEYRE]] an ex-agent of the court.")
 
 		// Faceless
 		if(HAS_TRAIT(src, TRAIT_FACELESS))
@@ -219,7 +219,7 @@
 			if(STRESS_BAD to STRESS_VBAD)
 				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
-				stress_msg = span_tinynotice("[P[THEY]] look[pl] stressed.")
+				stress_msg = span_tinynotice("[P[THEY]] look[pl] a little stressed.")
 		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
 			. += stress_msg
 
@@ -257,40 +257,37 @@
 		var/slot_title = null
 		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
 			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
-				slot_title = null
+				slot_title = " on"
 			if(ITEM_SLOT_HEAD)
-				slot_title = "on [P[THEIR]] head"
+				slot_title = " on [P[THEIR]] head"
 			if(ITEM_SLOT_MASK)
-				slot_title = "on [P[THEIR]] face"
+				slot_title = " on [P[THEIR]] face"
 			if(ITEM_SLOT_MOUTH)
-				slot_title = "in [P[THEIR]] mouth"
+				slot_title = " in [P[THEIR]] mouth"
 			if(ITEM_SLOT_NECK)
-				slot_title = "around [P[THEIR]] neck"
+				slot_title = " around [P[THEIR]] neck"
 			if(ITEM_SLOT_BACK_L)
-				slot_title = "on [P[THEIR]] left shoulder"
-			if(ITEM_SLOT_BACK_L)
-				slot_title = "on [P[THEIR]] right shoulder"
+				slot_title = " on [P[THEIR]] left shoulder"
+			if(ITEM_SLOT_BACK_R)
+				slot_title = " on [P[THEIR]] right shoulder"
 			if(ITEM_SLOT_WRISTS)
-				slot_title = "on [P[THEIR]] wrists"
+				slot_title = " on [P[THEIR]] wrist[I.gender == PLURAL ? "s" : ""]"
 			if(ITEM_SLOT_GLOVES)
-				slot_title = "on [P[THEIR]] hands"
+				slot_title = " on [P[THEIR]] hand[I.gender == PLURAL ? "s" : ""]"
 			if(ITEM_SLOT_RING)
-				slot_title = "on [P[THEIR]] finger"
+				slot_title = " on [P[THEIR]] finger[I.gender == PLURAL ? "s" : ""]"
 			if(ITEM_SLOT_BELT)
-				slot_title = "around [P[THEIR]] waist"
+				slot_title = " around [P[THEIR]] waist"
 			if(ITEM_SLOT_BELT_L)
-				slot_title = "on [P[THEIR]] left side"
+				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
-				slot_title = "on [P[THEIR]] right side"
-		var/str = I.get_examine_string(user)
-		if(slot_title)
-			str += " [slot_title]"
-		. += "[I.get_examine_icon(user)] - wearing [str]."
+				slot_title = " on [P[THEIR]] right side"
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user)][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
 /// Things that are physical but do not need to see your face to establish.
@@ -313,7 +310,7 @@
 
 	// Maniac, higher up than others
 	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_phobia(html_tag("h2", "THE WORLD TWISTS! MANIAC!")))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_big(span_phobia("THE WORLD TWISTS! MANIAC!")))
 	// Leper
 	if(HAS_TRAIT(src, TRAIT_LEPROSY))
 		. += span_necrosis("A LEPER...")
@@ -351,7 +348,7 @@
 		var/str_msg
 		switch(final_str - L.STASTR)
 			if(5 to INFINITY)
-				str_msg = html_tag("B", "[P[THEY]] look[pl] much stronger than me.")
+				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
 				user.add_stress(/datum/stress_event/para/str)
 			if(1 to 5)
 				str_msg = "[P[THEY]] look[pl] stronger than me."
@@ -361,7 +358,7 @@
 			if(-5 to -1)
 				str_msg = "[P[THEY]] look[pl] weaker than me."
 			else
-				str_msg =  html_tag("B", "[P[THEY]] look[pl] much weaker than me.")
+				str_msg =  span_bold("[P[THEY]] look[pl] much weaker than me.")
 		if(str_msg)
 			comp_msg += str_msg
 
@@ -369,7 +366,7 @@
 			var/con_msg
 			switch(final_con - L.STACON)
 				if(5 to INFINITY)
-					con_msg = html_tag("B", "[P[THEY]] look[pl] much more bulky than me.")
+					con_msg = span_bold("[P[THEY]] look[pl] much more bulky than me.")
 				if(1 to 5)
 					con_msg = "[P[THEY]] look[pl] more bulky than me."
 				if(0)
@@ -377,14 +374,14 @@
 				if(-5 to -1)
 					con_msg = "[P[THEY]] look[pl] frailer than me."
 				else
-					con_msg =  html_tag("B", "[P[THEY]] look[pl] much frailer than me.")
+					con_msg =  span_bold("[P[THEY]] look[pl] much frailer than me.")
 			if(con_msg)
 				comp_msg += con_msg
 
 			var/spd_msg
 			switch(final_spd - L.STASPD)
 				if(5 to INFINITY)
-					spd_msg = html_tag("B", "[P[THEY]] look[pl] much quicker than me.")
+					spd_msg = span_bold("[P[THEY]] look[pl] much quicker than me.")
 				if(1 to 5)
 					spd_msg = "[P[THEY]] look[pl] quicker than me."
 				if(0)
@@ -392,7 +389,7 @@
 				if(-5 to -1)
 					spd_msg = "[P[THEY]] look[pl] slower than me."
 				else
-					spd_msg =  html_tag("B", "[P[THEY]] look[pl] much slower than me.")
+					spd_msg =  span_bold("[P[THEY]] look[pl] much slower than me.")
 			if(spd_msg)
 				comp_msg += spd_msg
 		if(length(comp_msg))
@@ -587,11 +584,14 @@
 				BODY_ZONE_R_LEG,
 				BODY_ZONE_L_LEG,
 			)
+			var/list/zone_str = list()
 			for(var/zone in check_zones)
 				var/obj/item/bodypart/bodypart = get_bodypart(zone)
 				if(!bodypart)
 					continue
-				. += "<a href='byond://?src=[REF(src)];inspect_limb=[zone]'>Inspect [parse_zone(zone)]</a>"
+				zone_str += "<a href='byond://?src=[REF(src)];inspect_limb=[zone]'>Inspect [parse_zone(zone)]</a>"
+			if(length(zone_str))
+				. += zone_str.Join(" ")
 			. += "<a href='byond://?src=[REF(src)];check_hb=1'>Check Heartbeat</a>"
 		else
 			var/checked_zone = check_zone(user.zone_selected)

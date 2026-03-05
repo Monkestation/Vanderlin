@@ -130,6 +130,7 @@
 #define span_greentext(str) ("<span class='greentext'>" + str + "</span>")
 #define span_greentextbig(str) ("<span class='greentext big'>" + str + "</span>")
 #define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
+#define span_redtextsmall(str) ("<span class='redtext tiny'>" + str + "</span>")
 #define span_redtextbig(str) ("<span class='redtext big'>" + str + "</span>")
 
 #define span_warning(str) ("<span class='warning'>" + str + "</span>")
