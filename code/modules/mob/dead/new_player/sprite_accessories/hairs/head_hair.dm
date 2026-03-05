@@ -853,6 +853,18 @@
 	gender = NEUTER
 	specuse = list(SPEC_ID_ELF)
 
+/datum/sprite_accessory/hair/head/tangled_curls
+	name = "Tangled Curls"
+	icon_state = "tangled_curls"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/wild_fluff
+	name = "Wild Fluff"
+	icon_state = "wild_fluff"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
 // Hairs below ported from Azure
 
 /datum/sprite_accessory/hair/head/gloomy
