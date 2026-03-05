@@ -189,7 +189,7 @@ export function SettingsGeneral(props) {
           </LabeledList.Item>
         </LabeledList>
       </Section>
-      <Section>
+      <Section scrollableHorizontal>
         <Stack fill>
           <Stack.Item mt={0.15}>
             <Button
