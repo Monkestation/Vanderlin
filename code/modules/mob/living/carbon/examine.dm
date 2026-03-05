@@ -80,7 +80,7 @@
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
-		antag_datum.examine_target(user, src, P, antag_datum, .)
+		antag_datum.examine_target(user, src, P, .)
 
 
 // Details we will only surmise by seeing their face
