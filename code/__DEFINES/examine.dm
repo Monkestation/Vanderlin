@@ -7,7 +7,6 @@
 #define ARE			"are"
 #define THEYRE		"theyre"
 #define THEYVE		"theyve"
-#define THEYHAVE	"they have"
 
 /**
  * These are used to establish an indexing format for examine sections.
