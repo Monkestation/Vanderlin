@@ -112,5 +112,20 @@
                 "rscadd": "Added new hair"
             }
         ]
+    },
+    "2026-03-05": {
+        "KevinfromHP": [
+            {
+                "balance": "Tweaked maneater resisting to factor in wrestling and strength."
+            },
+            {
+                "bugfix": "Fixes an issue where the Daewalker was spawning outside his prerequisites"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscdel": "Removed slur. oops."
+            }
+        ]
     }
 }
