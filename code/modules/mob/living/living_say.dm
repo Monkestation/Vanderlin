@@ -290,16 +290,27 @@
 			if(QDELETED(player_mob)) // Some times nulls and deleteds stay in this list. This is a workaround to prevent ic chat breaking for everyone when they do.
 				continue // Remove if underlying cause (likely byond issue) is fixed. See TG PR #49004.
 			// If yelling !! check all alive players if they are in range and in the same Z level group
-			if(player_mob.stat == DEAD)
-				continue
-			if(z_message_type != Z_MODE_ALL)
-				continue
-			if(!is_in_zweb(player_mob.z, source.z))
-				continue
-			if(get_dist(player_mob, src) > message_range)
+			if(player_mob.stat != DEAD)
+				if(z_message_type != Z_MODE_ALL)
+					continue
+				if(!is_in_zweb(player_mob.z, source.z))
+					continue
+				if(get_dist(player_mob, src) > message_range)
+					continue
+				listening |= player_mob
 				continue
 
-			listening |= player_mob
+			// For aghosts check prefs
+			if(holder && isobserver(player_mob))
+				if(!is_in_zweb(player_mob.z, source.z) || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
+					if(player_mob.client.prefs)
+						if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
+							continue
+						if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
+							continue
+					the_dead[player_mob] = TRUE
+					listening |= player_mob
+					continue
 
 	var/eavesdropping
 	var/eavesrendered
@@ -335,7 +346,7 @@
 			if(listener_has_ceiling && speaker_has_ceiling)	//Both have a ceiling, on different z-levels -- no hearing at all
 				continue
 
-		if(eavesdrop_range && get_dist(source, hearing_movable) > message_range + keenears_range_bonus && !(the_dead[hearing_movable]))
+		if(eavesdrop_range && !the_dead[hearing_movable] && get_dist(source, hearing_movable) > (message_range + keenears_range_bonus))
 			hearing_movable.Hear(eavesrendered, src, message_language, eavesdropping, null, spans, message_mods, original_message)
 		else
 			hearing_movable.Hear(rendered, src, message_language, message, null, spans, message_mods, original_message)
