@@ -290,24 +290,16 @@
 			if(QDELETED(player_mob)) // Some times nulls and deleteds stay in this list. This is a workaround to prevent ic chat breaking for everyone when they do.
 				continue // Remove if underlying cause (likely byond issue) is fixed. See TG PR #49004.
 			// If yelling !! check all alive players if they are in range and in the same Z level group
-			if(player_mob.stat != DEAD)
-				if(z_message_type != Z_MODE_ALL)
-					continue
-				if(get_dist(player_mob, src) > message_range)
-					continue
-				if(!is_in_zweb(player_mob.z, source.z))
-					continue
-				listening |= player_mob
+			if(player_mob.stat == DEAD)
 				continue
-			// Else if dead check prefs
-			if(!is_in_zweb(player_mob.z, source.z) || get_dist(player_mob, src) > message_range) //they're out of range of normal hearing
-				if(player_mob.client.prefs)
-					if(eavesdrop_range && !(player_mob.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
-						continue
-					if(!(player_mob.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
-						continue
-				the_dead[player_mob] = TRUE
-				listening |= player_mob
+			if(z_message_type != Z_MODE_ALL)
+				continue
+			if(!is_in_zweb(player_mob.z, source.z))
+				continue
+			if(get_dist(player_mob, src) > message_range)
+				continue
+
+			listening |= player_mob
 
 	var/eavesdropping
 	var/eavesrendered
