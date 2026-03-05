@@ -4,7 +4,7 @@
 	if(!used_title)
 		return
 	if(!IsAdminGhost(user))
-		if(!get_face_name(null)) // face covered?
+		if(!get_face_name("")) // face covered?
 			return
 		var/is_family_member = FALSE
 		if(ishuman(user))
@@ -16,6 +16,12 @@
 			if(!user.mind?.do_i_know(mind, real_name))
 				return
 	. += ", the [used_title]"
+
+/mob/living/carbon/human/get_examine_list(mob/user, list/P)
+	. = ..()
+	// quirks
+	for(var/datum/quirk/Q in quirks)
+		Q.on_examined(user, P, .)
 
 
 /mob/living/carbon/human/get_examine_face(mob/user, list/P, list/examine_list)

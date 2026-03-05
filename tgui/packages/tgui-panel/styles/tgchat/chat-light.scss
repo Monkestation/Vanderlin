@@ -415,14 +415,6 @@ h2.alert {
   font-size: 140%;
 }
 
-.small {
-  font-size: 90%;
-}
-
-.smaller {
-  font-size: 60%;
-}
-
 .tinydanger {
   font-size: 85%;
 }
@@ -440,6 +432,8 @@ h2.alert {
   color: hsl(0, 100%, 50%);
   font-weight: bold;
 }
+
+
 
 .boldwarning {
   color: hsl(0, 100%, 50%);
@@ -512,20 +506,8 @@ h2.alert {
   font-size: 85%;
 }
 
-.tinynoticeital {
-  color: hsl(240, 100%, 30%);
-  font-style: italic;
-  font-size: 85%;
-}
-
 .smallnotice {
   color: hsl(240, 100%, 30%);
-  font-size: 90%;
-}
-
-.smallnoticeital {
-  color: hsl(240, 100%, 30%);
-  font-style: italic;
   font-size: 90%;
 }
 
@@ -725,16 +707,20 @@ h2.alert {
   color: hsl(111, 100%, 56%);
 }
 
-.small {
+.smaller {
   font-size: 60%;
+}
+
+.tiny {
+  font-size: 85%;
+}
+
+.small {
+  font-size: 90%;
 }
 
 .slightlylarger {
   font-size: 115%;
-}
-
-.larger {
-  font-size: 140%;
 }
 
 .big {
@@ -743,6 +729,10 @@ h2.alert {
 
 .reallybig {
   font-size: 135%;
+}
+
+.larger {
+  font-size: 140%;
 }
 
 .extremelybig {

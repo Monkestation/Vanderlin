@@ -557,16 +557,6 @@ em {
   color: hsl(132.8, 93.4%, 29.6%);
 }
 
-.boldnicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-weight: bold;
-}
-
-.tinynicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-size: 85%;
-}
-
 .cult {
   color: hsl(2, 43.8%, 41.2%);
 }
@@ -719,20 +709,20 @@ em {
   color: hsl(111, 100%, 56%);
 }
 
-.small {
-  font-size: 90%;
-}
-
 .smaller {
   font-size: 60%;
 }
 
-.slightlylarger {
-  font-size: 115%;
+.tiny {
+  font-size: 85%;
 }
 
-.larger {
-  font-size: 140%;
+.small {
+  font-size: 90%;
+}
+
+.slightlylarger {
+  font-size: 115%;
 }
 
 .big {
@@ -741,6 +731,10 @@ em {
 
 .reallybig {
   font-size: 135%;
+}
+
+.larger {
+  font-size: 140%;
 }
 
 .extremelybig {
