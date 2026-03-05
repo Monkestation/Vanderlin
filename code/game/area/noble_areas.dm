@@ -1,7 +1,7 @@
 ///// MANOR AREAS //////
 
 /area/indoors/town/keep
-	name = "Manor"
+	name = "Keep"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor"
 	background_track = 'sound/music/area/manor.ogg'
