@@ -32,6 +32,9 @@
 	if(!.)
 		return FALSE
 
+	if(!check_enemies())
+		return FALSE
+
 	if(!check_required())
 		return FALSE
 

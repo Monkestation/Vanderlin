@@ -13,6 +13,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	base_intents = list(INTENT_STEAL, INTENT_HELP, INTENT_DISARM, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/jump)
 	bloodpool = 500
 
+/mob/living/carbon/human/species/rousman/apply_prefs_job(client/player_client, datum/job/job)
+	return
+
 /mob/living/carbon/human/species/rousman/Initialize()
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)

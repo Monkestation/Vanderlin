@@ -2519,7 +2519,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (user.client.prefs.pref_species.id in job.blacklisted_species)
+	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
 	if(job.required_playtime_remaining(user.client))
 		var/list/lines = list()
 		for(var/t in job.exp_requirements)
