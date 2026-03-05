@@ -15,7 +15,7 @@
 	if(!.)
 		return
 	var/datum/job/J = SSjob.GetJobType(cast_on.job_type)
-	if(!(is_type_in_list(J, /datum/job/men_at_arms, /datum/job/advclass/menatarms) || is_type_in_list(J?.parent_job, /datum/job/men_at_arms, /datum/job/advclass/menatarms)))
+	if(!(is_type_in_list(J, list(/datum/job/men_at_arms, /datum/job/advclass/menatarms)) || is_type_in_list(J?.parent_job, list(/datum/job/men_at_arms, /datum/job/advclass/menatarms))))
 		return
 	return TRUE
 

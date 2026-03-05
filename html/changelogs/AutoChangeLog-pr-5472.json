@@ -1,0 +1,1 @@
+{"author":"realforest2001","delete-after":true,"changes":[{"bugfix":"Fixed granted titles breaking if your name isn't correct."},{"bugfix":"Fixed rousman siege spawning invisible rousmen."},{"bugfix":"Fixed recognising folkheroes when their faces are hidden."},{"bugfix":"Fixed the really annoying warning left by an unused variable."}]}

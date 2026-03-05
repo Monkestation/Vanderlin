@@ -190,6 +190,10 @@
 	if(!examiner.mind || !source_mob.mind)
 		return
 
+	// Probably a better way to do it
+	if(source_mob.name in list("Unknown", "Unknown Man", "Unknown Woman", "Unknown Figure"))
+		return
+
 	// Folk heroes are recognized by others
 	if(prob(80)) // 80% chance people recognize them
 		examine_list += span_notice("You recognize [source_mob.real_name], the folk hero!")
