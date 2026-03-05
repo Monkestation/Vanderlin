@@ -46,11 +46,12 @@ GLOBAL_LIST_EMPTY(antagonists)
 	return ..()
 
 /datum/antagonist/proc/examine_target(mob/examiner, mob/examined, list/P, list/examine_contents)
-	if(examiner != examined)
-		for(var/datum/antagonist/examined_antag_datum in examined.mind?.antag_datums)
-			var/examine_friend_or_foe_append = examined_antag_datum.examine_friendorfoe(examined_antag_datum, examiner, examined)
-			if(examine_friend_or_foe_append)
-				LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, examine_friend_or_foe_append)
+	if(examiner == examined)
+		return
+	for(var/datum/antagonist/examined_antag_datum in examined.mind?.antag_datums)
+		var/examine_friend_or_foe_append = examined_antag_datum.examine_friendorfoe(examined_antag_datum, examiner, examined)
+		if(examine_friend_or_foe_append)
+			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, examine_friend_or_foe_append)
 
 /datum/antagonist/proc/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	return
