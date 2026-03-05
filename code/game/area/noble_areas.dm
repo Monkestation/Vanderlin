@@ -1,4 +1,4 @@
-///// MANOR AREAS //////
+///// KEEP AREAS //////
 
 /area/indoors/town/keep
 	name = "Keep"
@@ -156,7 +156,7 @@
 	icon_state = "manorgarri"
 
 /area/indoors/town/keep/gate
-	name = "Manor Gate"
+	name = "Keep Gate"
 	icon_state = "manorgate"
 	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
