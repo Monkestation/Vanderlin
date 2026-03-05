@@ -463,6 +463,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(SSticker.regent_mob)
 		var/mob/living/carbon/human/regent = SSticker.regent_mob
 		priority_announce("[regent.real_name] is no longer regent.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
+		SSticker.regent_mob = null
 		return TRUE
 	var/list/mob/living/carbon/possible_mobs = orange(2, src)
 	if(!possible_mobs)
