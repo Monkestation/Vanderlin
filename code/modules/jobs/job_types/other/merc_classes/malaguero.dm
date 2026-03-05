@@ -3,7 +3,11 @@
 	tutorial = "A former soldier fighting against the forces of Zizo, something drove you to flee your post. Now, you fight for coin, rather than for the authority and command of generals you would never meet."
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/mercenary/malaguero
-	jobstats = list(STATKEY_CON = 2)
+	jobstats = list(
+		STATKEY_CON = 2,
+		STATKEY_STR = 2,
+		STATKEY_END = 1
+		)
 	skills = list(
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 3,
@@ -28,12 +32,12 @@
 /datum/outfit/mercenary/malaguero
 	name = "Malaguero (Mercenary)"
 	neck = /obj/item/clothing/neck/chaincoif
-	pants = /obj/item/clothing/pants/grenzelpants
-	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
+	pants = /obj/item/clothing/pants/trou/leather
+	shoes = /obj/item/clothing/shoes/boots
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	belt = /obj/item/storage/belt/leather/mercenary
-	shirt = /obj/item/clothing/shirt/grenzelhoft
-	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
+	shirt = /obj/item/clothing/armor/gambeson/heavy
+	head = /obj/item/clothing/head/helmet/visored/sallet/iron
 	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
 	beltr = /obj/item/weapon/mace/steel
 	backl = /obj/item/weapon/shield/tower/buckleriron
