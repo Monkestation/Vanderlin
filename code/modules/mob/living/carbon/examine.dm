@@ -289,7 +289,7 @@
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
-		var/wielding = I.is_wielded
+		var/wielding = I.is_wielded()
 		. += "[I.get_examine_icon(user)] - [wielding ? "wielding" : "holding"] [I.get_examine_string(user)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
 
