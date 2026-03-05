@@ -24,3 +24,7 @@
 #define EXAMINE_SECT_LAST		9 // Things you wanna cram at the very end.
 #define EXAMINE_SECT_HEADSHOT	10 // The headshot / examine closer buttons.
 // If you add anything past this, the character won't be the only relevant headshot
+
+// used for weird cases with variable honorary titles to determine their position
+#define HONORARY_PREFIX 0
+#define HONORARY_SUFFIX 1

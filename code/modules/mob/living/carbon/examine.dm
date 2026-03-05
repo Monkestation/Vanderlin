@@ -53,7 +53,7 @@
 			if(EXAMINE_SECT_WARNING)
 				joined_section = span_tinywarning(joined_section)
 			if(EXAMINE_SECT_GEAR)
-				joined_section = examine_block(html_tag("B", "[P[THEYRE]]:\n") + span_slightlylarger(joined_section))
+				joined_section = examine_block(span_bold("[P[THEYRE]]:\n") + span_slightlylarger(joined_section))
 		. += joined_section
 
 
@@ -253,7 +253,7 @@
 /mob/living/carbon/proc/get_examine_gear(mob/user, list/P, list/examine_list)
 	. = list()
 	var/list/unobscured = get_unobscured_items(FALSE)
-	for(var/obj/item/I in unobscured)
+	for(var/obj/item/I as anything in unobscured)
 		var/slot_title = null
 		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
 			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
@@ -325,7 +325,7 @@
 	if(HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 		var/atom/item = get_most_expensive()
 		if(item)
-			. += span_tinynoticeital("You get the feeling [P[THEIR]] most valuable possession is [item.get_examine_name(user, TRUE)].")
+			. += span_tinynoticeital("You get the feeling [P[THEIR]] most valuable possession is [item.get_examine_name(user)].")
 
 
 	if(isautomaton(user))

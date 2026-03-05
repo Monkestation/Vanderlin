@@ -442,12 +442,14 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user, use_article=FALSE)
-	return use_article && article ? "[article] <b>[name]</b>" : "[gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"]"
+/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+	if(use_article)
+		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
+	return "<b>[name]</b>"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	. = get_examine_name(user, TRUE)
+	. = get_examine_name(user)
 	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
 	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 		. = override.Join("")
@@ -457,7 +459,7 @@
 	return desc
 
 /atom/proc/get_examine_icon(mob/user)
-	return ma2html(mutable_appearance(icon, icon_state), user)
+	return ma2html(src, user)
 
 /atom/proc/get_inspect_button()
 	return ""
