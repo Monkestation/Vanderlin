@@ -61,7 +61,7 @@
 			if(EXAMINE_SECT_WARNING)
 				joined_section = span_tinywarning(joined_section)
 			if(EXAMINE_SECT_GEAR)
-				joined_section = "<hr>" + span_slightlylarger(joined_section) + "<hr>"
+				joined_section = "<hr>[joined_section]<hr>"
 		. += joined_section
 
 
