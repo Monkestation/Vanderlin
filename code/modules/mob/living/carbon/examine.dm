@@ -35,21 +35,29 @@
 	//Note that this also sends a copy of our subjective pronouns.
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_sections, P)
 
-	var/alist/rounded_sections = alist()
-	for(var/section_index in examine_sections)
-		var/list/section = examine_sections[section_index]
+
+	// round any decimal sections up to the rest of the group
+	var/list/rounded_sections = list()
+	for(var/section_index,section in examine_sections)
 		if(!length(section))
 			continue
-		LAZYADDASSOC(rounded_sections, floor(section_index), section)
+		var/rounded_index = floor(section_index)
+		LISTASSERTLEN(rounded_sections, rounded_index, list())
+		LAZYADDASSOC(rounded_sections, rounded_index, section)
 
-	for(var/section_index in rounded_sections)
-		var/list/section = rounded_sections[section_index]
-		var/join_marker = "\n"
-		if(section_index == EXAMINE_SECT_SPECIES)
-			join_marker = " "
+	for(var/i=1, i < length(rounded_sections), i++)
+		var/list/section = rounded_sections[i]
+		if(!length(section))
+			continue
+		var/join_marker
+		switch(i)
+			if(EXAMINE_SECT_SPECIES)
+				join_marker = " "
+			else
+				join_marker = "\n"
 		var/joined_section = section.Join(join_marker)
 		// post modifiers
-		switch(section_index)
+		switch(i)
 			if(EXAMINE_SECT_WARNING)
 				joined_section = span_tinywarning(joined_section)
 			if(EXAMINE_SECT_GEAR)
