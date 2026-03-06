@@ -1,16 +1,17 @@
-/datum/migrant_role/rousman_cheese/captain
-	name = "Rousman Captain"
-	greet_text = "You are the captain of a dwarven's expedition, following the tracks of Matthios's influence you shall lead your party in Malum's name."
-	migrant_job = /datum/job/migrant/rousman_cheese/captain
+// The Overseer, a bit brighter and knows how to count. There to lead the group and motivate those that require it.
+/datum/migrant_role/rousman_cheese/overseer
+	name = "Rousman Overseer"
+	greet_text = "You are an overseer of a rousman clan. A somewhat more intelligent group of rousmen, lead your fellows to make and sell their cheese products."
+	migrant_job = /datum/job/migrant/rousman_cheese/overseer
 
 /datum/job/migrant/rousman_cheese
 	allowed_races = RACES_PLAYER_ALL
 	spawn_type = /mob/living/carbon/human/species/rousman/random_name
 
-/datum/job/migrant/rousman_cheese/captain
-	title = "Rousman Captain"
-	tutorial = "You are the captain of a dwarven's expedition, following the tracks of Matthios's influence you shall lead your party in Malum's name."
-	outfit = /datum/outfit/rousman_cheese/captain
+/datum/job/migrant/rousman_cheese/overseer
+	title = "Rousman Overseer"
+	tutorial = "You are an overseer of a rousman clan. A somewhat more intelligent group of rousmen, lead your fellows to make and sell their cheese products."
+	outfit = /datum/outfit/rousman_cheese/overseer
 	jobstats = list(
 		STATKEY_PER = 3,
 		STATKEY_INT = 3,
@@ -18,35 +19,44 @@
 
 	skills = list(
 		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/whipsflails = 2,
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/cooking = 3,
 		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/traps = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/labor/mathematics = 2,
 	)
+	languages = list(/datum/language/common)
 
-/datum/outfit/rousman_cheese/captain
-	name = "Rousman Captain (Migrant Wave)"
-	armor = /obj/item/clothing/armor/cuirass
-	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+/datum/outfit/rousman_cheese/overseer
+	name = "Rousman Overseer (Migrant Wave)"
+	ring = /obj/item/clothing/ring/amber
+	armor = /obj/item/clothing/armor/leather/hide/rousman
+	cloak = /obj/item/clothing/cloak/poncho/yellow
+	r_hand = /obj/item/weapon/knife/dagger/bronze
+	wrists = /obj/item/weapon/scabbard/knife
 	belt = /obj/item/storage/belt/leather/black
-	beltr = /obj/item/flashlight/flare/torch/lantern
+	beltr = /obj/item/weapon/whip
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel/cloth/big
-	backpack_contents = list()
+	backpack_contents = list(
+		/obj/item/reagent_containers/glass/bottle/black/cheese_soup,
+		/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	)
 
+
+// The cheesemaker, the one that makes the cheese.
 /datum/migrant_role/rousman_cheese/cheesemaker
 	name = "Rousman Cheesemaker"
-	greet_text = "You are the cheesemaker of a rousman clan, listen to your leader as they work to sell your wares to the locals."
+	greet_text = "You are a cheesemaker of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemaker
 
 /datum/job/migrant/rousman_cheese/cheesemaker
 	title = "Rousman Cheesemaker"
-	tutorial = "You are the cheesemaker of a rousman clan, listen to your leader as they work to sell your wares to the locals."
+	tutorial = "You are a cheesemaker of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemaker
 
 	jobstats = list(
@@ -61,28 +71,35 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/traps = 2,
+		/datum/skill/craft/crafting = 2,
 		/datum/skill/misc/reading = 1,
 	)
+	languages = list(/datum/language/common)
 
 /datum/outfit/rousman_cheese/cheesemaker
 	name = "Rousman Cheesemaker (Migrant Wave)"
-	ring = /obj/item/clothing/ring/silver/makers_guild
-	armor = /obj/item/clothing/armor/leather/splint
+	armor = /obj/item/clothing/armor/leather/hide/rousman
+	r_hand = /obj/item/reagent_containers/glass/bucket/pot/copper
 	belt = /obj/item/storage/belt/leather/black
+	beltr = /obj/item/weapon/knife/dagger/bronze
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel/cloth/big
-	backpack_contents = list()
+	backpack_contents = list(
+		/obj/item/reagent_containers/food/snacks/cheddar,
+		/obj/item/reagent_containers/food/snacks/cheddar/aged,
+		/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	)
 
+
+// Cheesemonger, the seller and officianado
 /datum/migrant_role/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger"
-	greet_text = "You are the cheesemonger of a rousman clan, listen to your leader as they work to sell your wares to the locals."
+	greet_text = "You are a cheesemonger of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemonger
 
 /datum/job/migrant/rousman_cheese/cheesemonger
 	title = "Rousman Cheesemonger"
-	tutorial = "You are the cheesemonger of a rousman clan, listen to your leader as they work to sell your wares to the locals."
+	tutorial = "You are a cheesemonger of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemonger
 
 	jobstats = list(
@@ -96,49 +113,46 @@
 		/datum/skill/combat/unarmed = 2,
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/cooking = 3,
+		/datum/skill/craft/cooking = 2,
 		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/traps = 2,
 		/datum/skill/misc/reading = 1,
 	)
+	languages = list(/datum/language/common)
 
 /datum/outfit/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger (Migrant Wave)"
-	ring = /obj/item/clothing/ring/silver/makers_guild
+	armor = /obj/item/clothing/armor/leather/hide/rousman
 	belt = /obj/item/storage/belt/leather/black
+	beltr = /obj/item/weapon/knife/dagger/bronze
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel/cloth/big
-	backpack_contents = list()
+	backpack_contents = list(
+		/obj/item/reagent_containers/food/snacks/cheesebun,
+		/obj/item/reagent_containers/food/snacks/cheesebun,
+		/obj/item/reagent_containers/food/snacks/cheesebun,
+		/obj/item/reagent_containers/food/snacks/cheesebun,
+		/obj/item/reagent_containers/food/snacks/cheesecake_cooked,
+		/obj/item/reagent_containers/food/snacks/cheesecake_cooked,
+		/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	)
 
-/datum/outfit/rousman_cheese/cheesemonger/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
 
-	if(prob(50))
-		head = /obj/item/clothing/head/hatblu
-
-	if(equipped_human.gender == MALE)
-		shoes = /obj/item/clothing/shoes/simpleshoes/buckle
-		shirt = /obj/item/clothing/shirt/shortshirt
-		backl = /obj/item/weapon/pick/paxe
-	else
-		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-		shoes = /obj/item/clothing/shoes/shortboots
-		backl =	/obj/item/weapon/hammer/sledgehammer
+// The wave
 
 /datum/migrant_wave/rousman_cheese
 	name = "Rousman Cheese Convoy"
 	max_spawns = 4
 	shared_wave_type = /datum/migrant_wave/rousman_cheese
 	downgrade_wave = /datum/migrant_wave/rousman_cheese_down
-	can_roll = TRUE
+	can_roll = FALSE // Admin activated only
 	weight = 0
 	triumph_threshold = 50
 	roles = list(
-		/datum/migrant_role/rousman_cheese/captain = 1,
+		/datum/migrant_role/rousman_cheese/overseer = 1,
 		/datum/migrant_role/rousman_cheese/cheesemaker = 2,
 		/datum/migrant_role/rousman_cheese/cheesemonger = 2
 	)
-	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
+	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 /datum/migrant_wave/rousman_cheese_down
 	name = "Rousman Expedition"
@@ -147,11 +161,11 @@
 	downgrade_wave = /datum/migrant_wave/rousman_cheese_down_one
 	can_roll = FALSE
 	roles = list(
-		/datum/migrant_role/rousman_cheese/captain = 1,
+		/datum/migrant_role/rousman_cheese/overseer = 1,
 		/datum/migrant_role/rousman_cheese/cheesemaker = 1,
 		/datum/migrant_role/rousman_cheese/cheesemonger = 1
 	)
-	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
+	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 /datum/migrant_wave/rousman_cheese_down_one
 	name = "Rousman Expedition"
@@ -159,8 +173,8 @@
 	shared_wave_type = /datum/migrant_wave/rousman_cheese
 	can_roll = FALSE
 	roles = list(
-		/datum/migrant_role/rousman_cheese/captain = 1,
+		/datum/migrant_role/rousman_cheese/overseer = 1,
 	)
-	greet_text = "A more intelligent branch of the rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
+	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
 
