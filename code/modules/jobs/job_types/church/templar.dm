@@ -48,8 +48,8 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	languages = list(/datum/language/celestial)
 

@@ -782,9 +782,8 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "lv" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
@@ -1050,9 +1049,8 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon/lower)
 "oH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/signage{
 	name = "Tips Please"
@@ -1885,9 +1883,8 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "zQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "The Grave Tunes"
@@ -3456,9 +3453,8 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
 "Ui" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
@@ -3883,9 +3879,8 @@
 /turf/closed/wall/mineral/stonebrick,
 /area/under/mountains/anvil/dungeon)
 "Zk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/item/bin,
 /turf/open/floor/cobblerock,

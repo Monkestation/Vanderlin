@@ -455,8 +455,9 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_health_warnings(mob/user, always_deep = FALSE)
 	if(!always_deep)
 		return
+
 	if(status == FISH_DEAD)
-		return span_deadsay("It's dead.")
+		return span_warning("It's dead.")
 
 	var/list/warnings = list()
 	if(get_starvation_mult())

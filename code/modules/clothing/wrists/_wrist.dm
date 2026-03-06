@@ -9,6 +9,7 @@
 	anvilrepair = null
 	sewrepair = TRUE
 	fiber_salvage = FALSE
+	gender = PLURAL
 	grid_width = 32
 	grid_height = 64
 	item_weight = 4

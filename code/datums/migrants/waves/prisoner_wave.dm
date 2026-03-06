@@ -151,8 +151,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 

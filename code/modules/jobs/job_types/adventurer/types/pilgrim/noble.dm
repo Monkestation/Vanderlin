@@ -12,6 +12,8 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird = 1,
 	)
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	jobstats = list(
 		STATKEY_INT = 1,
@@ -37,13 +39,6 @@
 /datum/job/advclass/pilgrim/noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1, 2), TRUE)
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Lord"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Lady"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 	var/static/list/selectable = list( \
 		"Dagger" = /obj/item/weapon/knife/dagger/silver, \

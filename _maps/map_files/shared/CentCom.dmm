@@ -1813,9 +1813,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "iw" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
@@ -2304,9 +2303,8 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -2316,9 +2314,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3048,9 +3045,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/water/swamp/deep,
@@ -3103,9 +3099,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3993,9 +3988,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "wl" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 8;

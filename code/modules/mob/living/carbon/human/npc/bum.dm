@@ -7,7 +7,6 @@ GLOBAL_LIST_INIT(bum_aggro, file2list('strings/rt/bumaggrolines.txt'))
 	ambushable = FALSE
 	dodgetime = 30
 	flee_in_pain = TRUE
-	possible_rmb_intents = list()
 
 	wander = FALSE
 

@@ -747,7 +747,6 @@ GLOBAL_LIST(teleport_runes)
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE
@@ -764,7 +763,6 @@ GLOBAL_LIST(teleport_runes)
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE

@@ -139,6 +139,7 @@
 				if(rotten && istype(I,/obj/item/reagent_containers/food/snacks))
 					var/obj/item/reagent_containers/food/snacks/F = I
 					F.become_rotten()
+
 				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 				user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
 				qdel(src)
@@ -298,7 +299,7 @@
 			return TRUE
 		if(is_species(user, /datum/species/werewolf))
 			visible_message(span_danger("[user] ravenously consumes [src]!"), span_warning("I feed on succulent flesh. I feel reinvigorated."))
-			H.rage_datum?.update_rage(text2num(WW_RAGE_HIGH))
+			H.rage_datum?.update_rage(WW_RAGE_HIGH)
 			gib()
 		return TRUE
 	if(!src.apply_damage(damage, BRUTE))

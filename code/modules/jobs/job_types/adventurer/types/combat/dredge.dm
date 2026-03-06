@@ -204,11 +204,7 @@
 			spawned.change_stat(STATKEY_STR, 2)
 			spawned.change_stat(STATKEY_END, 2)
 			spawned.change_stat(STATKEY_SPD, -5)
-			var/prev_real_name = spawned.real_name
-			var/prev_name = spawned.name
-			var/honorary = "Black Knight"
-			spawned.real_name = "[honorary] [prev_real_name]"
-			spawned.name = "[honorary] [prev_name]"
+			spawned.honorary = "Black Knight"
 			to_chat(spawned,span_info("\
 			Forgive me majesty for intruding unannounced. Todae I tilted with a Black Knight from a far land, and unseated him roundly with my lances' blow. I take no credit, because I was sneakily attacked by his ally, and soon dumped in the dirt myself.")
 			)

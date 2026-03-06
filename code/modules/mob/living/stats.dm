@@ -140,7 +140,7 @@
 			change_stat(STATKEY_INT, -3)
 			change_stat(STATKEY_LCK, -3)
 			H.voice_color = "c71d76"
-			set_eye_color(H, "#c71d76", "#c71d76")
+			H.set_eye_color("#c71d76", updates_dna = TRUE) //majenta
 
 	has_rolled_for_stats = TRUE
 	return TRUE

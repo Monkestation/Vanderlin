@@ -1,0 +1,160 @@
+{
+    "2026-03-01": {
+        "7erracotta": [
+            {
+                "rscadd": "Added new loot pool items"
+            },
+            {
+                "balance": "made greatswords spawn less"
+            }
+        ],
+        "TerraGS": [
+            {
+                "bugfix": "Devotion meter should now appear round start"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added more species-specific subcultures."
+            }
+        ],
+        "snowyseshi": [
+            {
+                "rscadd": "Gave staff of testimonium master rod powers"
+            },
+            {
+                "code_imp": "Use correct span for master rod job check"
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Stress value fixes"
+            }
+        ],
+        "Ordosian": [
+            {
+                "bugfix": "Fixed blood not using the right colors."
+            },
+            {
+                "image": "Changed all wounds and blood to whitescale."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added special intents to various weapons. They are started with Strong intent right clicks in combat mode and have differing effects."
+            }
+        ]
+    },
+    "2026-03-02": {
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed wurm jarosite dwarves being able to ready merc without any classes."
+            },
+            {
+                "rscadd": "Added TGchat, report issues with styling like it having bad contrast or anything."
+            }
+        ],
+        "Bloo4420": [
+            {
+                "map": "Repathed all broken borderfall objects"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "The game no longer trolls you by saying it paid your carriage toll."
+            },
+            {
+                "rscadd": "Archivist Chronicler now has Expert spellbook instead of Apprentice."
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "give housecarls satchels rather then wooden shields."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "code_imp": "Cleanup on the say proc"
+            }
+        ]
+    },
+    "2026-03-04": {
+        "dwasint": [
+            {
+                "rscadd": "human npcs are more dynamic in their interaction"
+            },
+            {
+                "rscadd": "threat system to areas to scale ambush intensity, decreases as ambushes are spawned so FG can work"
+            },
+            {
+                "rscadd": "questing system"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Fixes serjeant convert button"
+            },
+            {
+                "bugfix": "The readied Monarch can no longer be made an automaton."
+            },
+            {
+                "bugfix": "Fixed Hand, Consort and Heir being able to use the train."
+            },
+            {
+                "bugfix": "Fixed flight never ending if wings are removed."
+            },
+            {
+                "bugfix": "Vampires Antag event won't roll below lowpop threshold."
+            }
+        ],
+        "Spitegremlin": [
+            {
+                "rscadd": "Added new hair"
+            }
+        ]
+    },
+    "2026-03-05": {
+        "KevinfromHP": [
+            {
+                "balance": "Tweaked maneater resisting to factor in wrestling and strength."
+            },
+            {
+                "bugfix": "Fixes an issue where the Daewalker was spawning outside his prerequisites"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscdel": "Removed slur. oops."
+            }
+        ]
+    },
+    "2026-03-06": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixed granted titles breaking if your name isn't correct."
+            },
+            {
+                "bugfix": "Fixed rousman siege spawning invisible rousmen."
+            },
+            {
+                "bugfix": "Fixed recognising folkheroes when their faces are hidden."
+            },
+            {
+                "bugfix": "Fixed the really annoying warning left by an unused variable."
+            }
+        ],
+        "Cheffie, FreeStylaLT": [
+            {
+                "rscadd": "Added the bait rmb special."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Bandage crafting recipe"
+            },
+            {
+                "balance": "Mercenary cloth in belt -> Proper Bandage\\n:cl:\\n<!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->\\n<!-- You can use multiple of the same prefix (they're only used for the icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs should generally represent how a player might be affected by the changes rather than a summary of the PR's contents. -->\\n## Pre-Merge Checklist\\n<!-- Don't bother filling these in while creating your Pull Request, just click the checkboxes after the Pull Request is opened and you are redirected to the page. -->\\n- [x] You tested this on a local server.\\n- [x] This code did not runtime during testing.\\n- [x] You documented all of your changes.\\n<!-- Neither the compiler nor workflow checks are perfect at detecting runtimes and errors. It is important to test your code/feature/fix locally. -->"
+            }
+        ]
+    }
+}

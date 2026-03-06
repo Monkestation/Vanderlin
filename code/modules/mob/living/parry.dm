@@ -293,8 +293,6 @@
 			src.visible_message("<span class='boldwarning'><b>[src]</b> blocks [user] with [W]!</span>")
 		else
 			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
-		if(W.max_blade_int)
-			W.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 
 			// Check shield integrity
 			var/shieldur = round(((W.get_integrity() / W.max_integrity) * 100), 1)
