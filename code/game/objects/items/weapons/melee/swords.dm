@@ -99,7 +99,7 @@
 
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
-	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	desc = "A steel short sword with a leaf-shaped blade. Associated with the commoners of Lakkari."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_steel"
 	force = DAMAGE_SHORTSWORD + 4
@@ -107,7 +107,7 @@
 
 /obj/item/weapon/sword/short/iron/ida
 	name = "iron ida"
-	desc = "A short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
+	desc = "A short sword with a leaf-shaped blade. Associated with the commoners of Lakkari."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "ida_iron"
 	force = DAMAGE_SHORTSWORD + 2
@@ -186,30 +186,6 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 
-/obj/item/weapon/sword/short/ida
-	name = "steel ida"
-	desc = "A steel short sword with a leaf-shaped blade. Associated with the commonfolk of the Queendom of Lakkari."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ida_steel"
-	wdefense = GOOD_PARRY
-	minstr = 5
-	sellprice = 50
-
-/obj/item/weapon/sword/short/iron/ida
-	name = "iron ida"
-	desc = "A short sword with a leaf-shaped blade. Associated with commonfolk of the Queendom of Lakkari."
-	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
-	icon_state = "ida_iron"
-	sellprice = 20
-
-/obj/item/weapon/sword/rapier/caneblade
-	name = "cane blade"
-	desc = "A steel blade with a gold handle, intended to be concealed inside of a cane. Has a focus on stabbing"
-	icon = 'icons/roguetown/weapons/32/swords.dmi'
-	icon_state = "caneblade"
-	sellprice = 100 //Gold handle
-	bigboy = FALSE
-	SET_BASE_PIXEL(0, 0)
 /obj/item/weapon/sword/stone
 	name = "stone sword"
 	desc = "A crudely made sword, wielded by savages."

@@ -235,7 +235,7 @@
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
-	desc = "A broad iron dagger from the Queendom of Lakkari. It decorates the banners of the nation's most impoverished families."
+	desc = "A broad iron dagger from the Queendom of Lakkari. A symbol for refugees."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
@@ -263,7 +263,7 @@
 
 /obj/item/weapon/knife/dagger/steel/njora
 	name = "steel seme"
-	desc = "A broad steel dagger from the Queendom of Lakkari. It decorates the banners of the nation's most impoverished families."
+	desc = "A broad steel dagger from the Queendom of Lakkari. A symbol for refugees."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "njora_steel"
 	wbalance = HARD_TO_DODGE
