@@ -45,6 +45,19 @@
 
 	return zone
 
+///Returns a TRUE / FALSE if the zone is a FACE coverage subzone. Used mainly by accuracy_check & bait.
+/proc/check_face_subzone(zone)
+	if(!zone)
+		return FALSE
+	var/list/zones = list(
+		BODY_ZONE_PRECISE_R_EYE,
+		BODY_ZONE_PRECISE_L_EYE,
+		BODY_ZONE_PRECISE_MOUTH,
+		BODY_ZONE_PRECISE_NOSE,
+		BODY_ZONE_PRECISE_EARS,
+	)
+	return (zone in zones)
+
 /**
  * Return the zone or randomly, another valid zone
  *
