@@ -182,9 +182,9 @@
 	var/mob_name = source_mob.get_visible_name("")
 	if(!mob_name)
 		return
-	LAZYADDASSOC(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
-	if(!examiner.mind.do_i_know(source_mob.mind))
-		examiner.mind.learn_target_identity(source_mob.mind)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
+	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
+		examiner.mind.learn_target_identity(source_mob.mind, source_mob.real_name)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"
