@@ -47,7 +47,7 @@
 	if(spawned.gender == MALE && spawned.dna?.species)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 	var/weapons = list("Sword", "Axes")
-	var/weapon_choice = input(spawned,"CHOOSE YOUR WEAPON.", "SPILL SOME BLOOD.") as anything in weapons
+	var/weapon_choice = tgui_input_list(player_client, "CHOOSE YOUR WEAPON.", "SPILL SOME BLOOD.", weapons)
 	switch(weapon_choice)
 		if("Sword")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/arming, ITEM_SLOT_BELT_R, TRUE)
