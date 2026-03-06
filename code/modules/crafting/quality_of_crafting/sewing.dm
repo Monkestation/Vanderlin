@@ -1741,7 +1741,7 @@
 	)
 	craftdiff = 2.5
 	skillcraft = /datum/skill/misc/medicine
-	subtypes_allowed = FALSE
+	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
 
 /datum/repeatable_crafting_recipe/sewing/barding
 	name = "padded barding (saiga)"
