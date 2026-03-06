@@ -106,7 +106,7 @@
 
 /datum/stress_event/freakout
 	timer = 15 SECONDS
-	stress_change = 2
+	stress_change = 5
 	desc = "<span class='red'>I'm panicking!</span>"
 
 /datum/stress_event/felldown
@@ -125,7 +125,7 @@
 
 /datum/stress_event/hatezizo
 	timer = 99999 MINUTES
-	stress_change = 666 // :)
+	stress_change = 10 // :)
 	desc = "<span class='red'>ZIZOZIZOZIZO</span>"
 
 /datum/stress_event/burntmeal
@@ -222,19 +222,45 @@
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
 
 /datum/stress_event/fishface
-	timer = 30 SECONDS
+	timer = 1 MINUTES
 	stress_change = 1
-	desc = "<span class='red'>That thing is hideous!.</span>"
+	desc = span_red("That thing is hideous!")
+	var/is_helpless_child = FALSE
+	/// prevents the jumpscare from triggering from repeated examines
+	var/is_refresh = FALSE
 
-/datum/stress_event/fish_monster
-	timer = 30 SECONDS
-	stress_change = 1
-	desc = span_boldred("<B>IT'S A HIDEOUS MONSTER!!!</B>")
+/datum/stress_event/fishface/can_apply(mob/living/user)
+	. = ..()
+	if(is_refresh) // no point in doing these checks again
+		return
+	if(HAS_ANY_OF_TRAITS(user, list(TRAIT_FISHFACE, TRAIT_TOLERANT)))
+		stress_change = 0
+		return
+	//checking for kid now
+	var/mob/living/carbon/human/H = user
+	if(!istype(H) || H.age != AGE_CHILD)
+		return
+	if(HAS_ANY_OF_TRAITS(user, list(TRAIT_STEELHEARTED, TRAIT_FEARLESS)))
+		return
+	is_helpless_child = TRUE
+	stress_change = 3
 
-/datum/stress_event/fishfaceaintthatugly
-	timer = 30 SECONDS
-	stress_change = 0
-	desc = "Eh, I've seen worse faces than that fish."
+/datum/stress_event/fishface/on_apply(mob/living/user)
+	. = ..()
+	if(is_refresh)
+		return
+	is_refresh = TRUE
+	if(is_helpless_child && prob(30))
+		user.freak_out()
+
+/datum/stress_event/fishface/get_desc(mob/living/user)
+	if(HAS_TRAIT(src, TRAIT_FISHFACE))
+		return "Eh, I've seen worse faces than that."
+	if(HAS_TRAIT(src, TRAIT_TOLERANT))
+		return "Poor thing. It's how they look I guess."
+	if(is_helpless_child)
+		return span_phobia("I SAW A MONSTER!")
+	return ..()
 
 /datum/stress_event/delf
 	timer = 30 SECONDS
@@ -251,30 +277,39 @@
 	stress_change = 1
 	desc = "<span class='red'>A beast in human skin.</span>"
 
-/datum/stress_event/paracrowd
+// ........ Paranoia ........ //
+
+// this is a hell of a lot easier than checking in the moment
+/datum/stress_event/para/str/can_apply(mob/living/user)
+	if(!user.has_quirk(/datum/quirk/vice/paranoid))
+		return FALSE
+	return ..()
+
+/datum/stress_event/para/crowd
 	timer = 15 SECONDS
 	stress_change = 2
-	desc = "<span class='red'>There are too many people who don't look like me here.</span>"
+	desc = span_red("There are too many people who don't look like me here.")
 
-/datum/stress_event/parablood
+/datum/stress_event/para/blood
 	timer = 15 SECONDS
 	stress_change = 3
-	desc = "<span class='red'>There is so much blood here... it's like a battlefield!</span>"
+	desc = span_red("There is so much blood here... it's like a battlefield!")
 
-/datum/stress_event/parastr
+/datum/stress_event/para/str
 	timer = 2 MINUTES
 	stress_change = 2
-	desc = "<span class='red'>That beast is stronger... and might easily kill me!</span>"
+	desc = span_red("That beast is stronger... and might easily kill me!")
 
-/datum/stress_event/paratalk
+/datum/stress_event/para/talk
 	timer = 2 MINUTES
 	stress_change = 2
-	desc = "<span class='red'>They are plotting against me in evil tongues...</span>"
+	desc = span_red("They are plotting against me in evil tongues...")
 
-/datum/stress_event/paraforeigner
+/datum/stress_event/para/foreigner
 	timer = 2 MINUTES
 	stress_change = 2
-	desc = "<span class='red'>A foreigner... are they planning to invade us?</span>"
+	desc = span_red("A foreigner... are they planning to invade us?")
+
 
 /datum/stress_event/crowd
 	timer = 2 MINUTES
@@ -289,7 +324,11 @@
 /datum/stress_event/hunted // When a hunted character sees someone in a mask
 	timer = 2 MINUTES
 	stress_change = 2
-	desc = "<span class='red'>I can't see their face! Have they found me!?</span>"
+	desc = span_red("I can't see their face! Have they found me!?")
+
+/datum/stress_event/hunted/can_apply(mob/living/user)
+	if(user.has_quirk(/datum/quirk/vice/hunted))
+		return
 
 /datum/stress_event/profane // When a non-assassin touches a profane dagger
 	timer = 3 MINUTES

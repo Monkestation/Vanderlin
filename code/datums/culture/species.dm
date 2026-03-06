@@ -188,9 +188,10 @@
 		SPEC_ID_DWARF
 	)
 
-/datum/culture/species/dwarf/federation
+//TODO: Dwarf Culture
+// /datum/culture/species/dwarf/federation
 
-/datum/culture/species/dwarf/brass
+// /datum/culture/species/dwarf/brass
 
 
 //dark elf here

@@ -323,6 +323,10 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stress_event/sleepytime)
 
+/datum/status_effect/debuff/sleepytime/get_examine_text(mob/user, list/P)
+	if(HAS_TRAIT(user, TRAIT_EXTEROCEPTION))
+		return "[P[THEYRE]] looking a little tired."
+
 // We use this to not have triumph gain and dreaming tied to tiredness
 /datum/status_effect/debuff/dreamytime
 	id = "dreamytime"

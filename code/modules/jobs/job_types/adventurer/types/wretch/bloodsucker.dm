@@ -87,14 +87,6 @@
 
 /datum/job_pack/bloodsucker_noble/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	var/prev_real_name = picker.real_name
-	var/prev_name = picker.name
-	var/honorary = "Lord"
-	if(picker.pronouns == SHE_HER)
-		honorary = "Lady"
-	picker.real_name = "[honorary] [prev_real_name]"
-	picker.name = "[honorary] [prev_name]"
-
 	picker.adjust_skillrank(/datum/skill/misc/music, pick(1,2), TRUE)
 
 	if(picker.gender == FEMALE)
@@ -186,13 +178,6 @@
 
 /datum/job_pack/bloodsucker_count/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	var/prev_real_name = picker.real_name
-	var/prev_name = picker.name
-	var/honorary = "Count"
-	if(picker.pronouns == SHE_HER)
-		honorary = "Countess"
-	picker.real_name = "[honorary] [prev_real_name]"
-	picker.name = "[honorary] [prev_name]"
 
 	if(!picker.has_language(/datum/language/oldpsydonic))
 		picker.grant_language(/datum/language/oldpsydonic)

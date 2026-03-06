@@ -211,6 +211,7 @@
  */
 /client/proc/Process_Grab()
 	if(mob.pulledby && mob.pulledby != mob)
+		var/mob/mob_puller = mob.pulledby
 		if(HAS_TRAIT(mob, TRAIT_INCAPACITATED))
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I can't move!"))
@@ -219,26 +220,38 @@
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I'm restrained! I can't move!"))
 			return TRUE
-		else if(mob.pulledby != mob.pulling || mob.pulledby.grab_state > GRAB_PASSIVE || mob.cmode || mob.pulledby.cmode)	//Don't autoresist passive grabs if we're grabbing them too.
-			return mob.resist_grab(TRUE)
+		//Don't autoresist passive grabs if we're grabbing them too.
+		else if(mob_puller == mob.pulling) // START: If we are grabbing each other,
+			if(mob_puller.grab_state > mob.grab_state) // COND 1: and our grabber has a stronger grab state,
+				return mob.resist_grab(TRUE) // END 1: attempt to break the grab.
+			if(isliving(mob) && mob_puller.cmode) // COND 2: and they are hostile,
+				// END 2: we roll to try to move.
+				var/mob/living/living_mob = mob
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			// END 3: we can move freely.
+		else
+			var/mob/living/living_mob = mob
+			if(mob_puller.grab_state == GRAB_PASSIVE && mob_puller.cmode)
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			else
+				return living_mob.resist_grab(TRUE)
 
 	if(mob.pulling && isliving(mob.pulling))
 		var/mob/living/L = mob.pulling
 		var/mob/living/M = mob
 		// If passive grab and trying to pull someone who doesn't want to be pulled
-		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !HAS_TRAIT(L, TRAIT_INCAPACITATED))
+		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !L.incapacitated(IGNORE_GRAB))
 			// Reuse shove check probability
-			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10),0,100)))
+			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
 				COOLDOWN_START(src, move_delay, 1 SECONDS)
 				to_chat(src, span_warning("[L]'s footing is too sturdy!"))
 				return TRUE
-
-	var/mob/living/simple_animal/bound = mob.pulling
-	if(istype(bound))
-		if(bound?.binded)
-			COOLDOWN_START(src, move_delay, 1 SECONDS)
-			to_chat(src, span_warning("[bound] is bound in a summoning circle. I can't move them!"))
-			return TRUE
 
 	return FALSE
 

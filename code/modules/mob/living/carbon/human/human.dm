@@ -641,13 +641,16 @@
 			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "Monarch")
 				HL.job = "Ex-Monarch"
+				HL.honorary = null
 				lord_job?.remove_spells(HL)
 			if(HL.job == "Consort")
 				HL.job = "Ex-Consort"
+				HL.honorary = null
 				consort_job?.remove_spells(HL)
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
+		lord_job?.assign_honorary_titles(coronated)
 		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
@@ -860,6 +863,8 @@
 	has_stubble = target.has_stubble
 	headshot_link = target.headshot_link
 	flavortext = target.flavortext
+	honorary = target.honorary
+	honorary = target.honorary_suffix
 	set_bloodpool(target.bloodpool)
 
 	var/obj/item/bodypart/head/target_head = target.get_bodypart(BODY_ZONE_HEAD)

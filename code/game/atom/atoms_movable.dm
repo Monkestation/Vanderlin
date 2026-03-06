@@ -401,7 +401,7 @@
 	SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
 	SEND_SIGNAL(src, COMSIG_ATOM_NO_LONGER_PULLING, old_pulling)
 
-/atom/movable/proc/Move_Pulled(atom/movable/A)
+/atom/movable/proc/Move_Pulled(atom/movable/atom_location)
 	if(!pulling)
 		return FALSE
 	if(pulling.anchored || pulling.move_resist > move_force || !pulling.Adjacent(src))
@@ -412,9 +412,11 @@
 		if(L.buckled && L.buckled.buckle_prevents_pull) //if they're buckled to something that disallows pulling, prevent it
 			stop_pulling()
 			return FALSE
-	if(A == loc && pulling.density)
+	if(atom_location == loc && pulling.density)
 		return FALSE
-	var/move_dir = get_dir(pulling.loc, A)
+	if(isgroundlessturf(atom_location)) // so you can't move someone into an openspace
+		return FALSE
+	var/move_dir = get_dir(pulling.loc, atom_location)
 	var/turf/pre_turf = get_turf(pulling)
 	pulling.Move(get_step(pulling.loc, move_dir), move_dir, glide_size)
 	var/turf/post_turf = get_turf(pulling)
@@ -428,12 +430,11 @@
 /atom/movable/proc/after_being_moved_by_pull(atom/movable/puller)
 	return
 
-/mob/living/Move_Pulled(atom/movable/A)
+/mob/living/Move_Pulled(atom/movable/atom_location)
 	. = ..()
-	if(!. || !isliving(A))
+	if(!. || !isliving(pulling))
 		return
-	var/mob/living/L = A
-	set_pull_offsets(L, grab_state)
+	set_pull_offsets(pulling, grab_state)
 
 /atom/movable/proc/check_pulling()
 	if(pulling)

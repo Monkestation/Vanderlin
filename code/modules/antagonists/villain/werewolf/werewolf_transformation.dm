@@ -13,8 +13,8 @@
 						COOLDOWN_START(src, message_cooldown, 5 SECONDS)
 				human_user.rage_datum.update_rage(10)
 
-	if(transformed && !HAS_TRAIT(human_user, TRAIT_PARALYSIS))
-		if(human_user.rage_datum.check_rage(text2num(WW_RAGE_MEDIUM)))
+	if(transformed && !HAS_TRAIT(human_user, TRAIT_PARALYSIS) && !human_user.has_status_effect(/datum/status_effect/debuff/silver_bane))
+		if(human_user.rage_datum.check_rage(WW_RAGE_MEDIUM))
 			if(human_user.blood_volume > BLOOD_VOLUME_SURVIVE)
 				for(var/datum/wound/wound as anything in human_user.get_wounds())
 					wound.heal_wound(1.2)
@@ -33,26 +33,31 @@
 		return FALSE
 	return TRUE
 
-/datum/antagonist/werewolf/proc/begin_transform()
-	set waitfor = 0
-
-	if(!try_transform_checks()) return
+/datum/antagonist/werewolf/proc/begin_transform(datum/source, stage = 1)
+	SIGNAL_HANDLER
 
 	var/mob/living/carbon/human/human_user = owner.current
-	ADD_TRAIT(human_user, TRAIT_NO_TRANSFORM, REF(src))
-	human_user.flash_fullscreen("redflash3")
-	human_user.emote("agony", forced = TRUE)
-	to_chat(human_user, span_userdanger("UNIMAGINABLE PAIN!"))
-	human_user.Stun(5.1 SECONDS, ignore_canstun = TRUE)
-	human_user.Knockdown(5.1 SECONDS, ignore_canstun = TRUE)
-	sleep(2.5 SECONDS)
-	human_user.emote("agony", forced = TRUE)
-	sleep(2.5 SECONDS)
-	REMOVE_TRAIT(human_user, TRAIT_NO_TRANSFORM, REF(src))
 
-	if(!try_transform_checks()) return
+	if(stage == 1)
+		if(!try_transform_checks())
+			return
+		ADD_TRAIT(human_user, TRAIT_NO_TRANSFORM, REF(src))
+		human_user.flash_fullscreen("redflash3")
+		INVOKE_ASYNC(human_user, TYPE_PROC_REF(/mob, emote), "agony", null, null, FALSE, TRUE)
+		to_chat(human_user, span_userdanger("UNIMAGINABLE PAIN!"))
+		human_user.Stun(5.1 SECONDS, ignore_canstun = TRUE)
+		human_user.Knockdown(5.1 SECONDS, ignore_canstun = TRUE)
+		addtimer(CALLBACK(src, PROC_REF(begin_transform), null, 2), 2.5 SECONDS, TIMER_DELETE_ME)
 
-	werewolf_transform()
+	if(stage == 2)
+		INVOKE_ASYNC(human_user, TYPE_PROC_REF(/mob, emote), "agony", null, null, FALSE, TRUE)
+		addtimer(CALLBACK(src, PROC_REF(begin_transform), null, 3), 2.5 SECONDS, TIMER_DELETE_ME)
+
+	if(stage == 3)
+		REMOVE_TRAIT(human_user, TRAIT_NO_TRANSFORM, REF(src))
+		if(!try_transform_checks())
+			return
+		INVOKE_ASYNC(src, PROC_REF(werewolf_transform))
 
 /datum/antagonist/werewolf/proc/werewolf_transform()
 	if(!try_transform_checks()) return
@@ -78,7 +83,7 @@
 	new_werewolf.adjustOxyLoss(human_user.getOxyLoss() / 2)
 	new_werewolf.adjustCloneLoss(human_user.getCloneLoss() / 2)
 	new_werewolf.blood_volume = human_user.blood_volume
-	human_user.fully_heal(HEAL_DAMAGE|HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
+	human_user.fully_heal(HEAL_BLOOD|HEAL_WOUNDS|HEAL_RESTRAINTS)
 
 	playsound(new_werewolf, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	new_werewolf.playsound_local(get_turf(new_werewolf), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
@@ -92,8 +97,14 @@
 /datum/antagonist/werewolf/proc/pre_transformation()
 	var/mob/living/carbon/human/human_user = owner.current
 	for(var/obj/item/item as anything in human_user.get_equipped_items(FALSE))
-		if(istype(item, /obj/item/clothing) || istype(item, /obj/item/storage/belt))
+		if(istype(item, /obj/item/storage/belt))
 			item.take_damage(damage_amount = item.max_integrity * 0.15, sound_effect = FALSE)
+		else if(istype(item, /obj/item/clothing))
+			var/obj/item/clothing/clothing_item = item
+			if(clothing_item.armor_class >= AC_HEAVY)
+				human_user.dropItemToGround(clothing_item, silent = TRUE)
+			else
+				clothing_item.take_damage(damage_amount = item.max_integrity * 0.35, sound_effect = FALSE)
 		else
 			human_user.dropItemToGround(item, silent = TRUE)
 
@@ -132,7 +143,7 @@
 	for(var/obj/item/dropped_item in werewolf_user)
 		werewolf_user.dropItemToGround(dropped_item, silent = TRUE)
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
-	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream")
+	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream", null, null, FALSE, TRUE)
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
@@ -140,13 +151,18 @@
 	caster_mob.Stun(30)
 	caster_mob.rage_datum.remove_secondary()
 	caster_mob.rage_datum.rage_change_on_life += transformed_rage_decay
+	caster_mob.apply_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform)
 
-	caster_mob.adjustBruteLoss(werewolf_user.getBruteLoss() / 2)
-	caster_mob.adjustFireLoss(werewolf_user.getFireLoss() / 2)
-	caster_mob.adjustToxLoss(werewolf_user.getToxLoss() / 2)
-	caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss() / 2)
-	caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss() / 2)
+	// caster_mob.adjustBruteLoss(werewolf_user.getBruteLoss() / 2)
+	// caster_mob.adjustFireLoss(werewolf_user.getFireLoss() / 2)
+	// caster_mob.adjustToxLoss(werewolf_user.getToxLoss() / 2)
+	// caster_mob.adjustOxyLoss(werewolf_user.getOxyLoss() / 2)
+	// caster_mob.adjustCloneLoss(werewolf_user.getCloneLoss() / 2)
 	// caster_mob.blood_volume = werewolf_user.blood_volume
 
 	UnregisterSignal(werewolf_user, COMSIG_LIVING_UNSHAPESHIFTED)
 	transformed = FALSE
+
+// After untransforming, debuffs and blocks rage from damage/stress
+/datum/status_effect/debuff/barbfalter/werewolf_untransform
+	duration = 5 MINUTES

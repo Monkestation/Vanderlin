@@ -160,7 +160,7 @@
 	. = ..()
 	if(.)
 		return
-	user.Move_Pulled(src)
+	// user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
 	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)

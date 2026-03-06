@@ -1044,3 +1044,8 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 /mob/living/simple_animal/proc/eat_food_after(obj/item/reagent_containers/food/snacks/eaten)
 	qdel(eaten)
+
+/mob/living/simple_animal/can_be_pulled()
+	if(binded)
+		return FALSE
+	. = ..()

@@ -72,6 +72,12 @@
 	debuff = /datum/status_effect/debuff/addiction/alcoholic
 	needsate_text = "Time for a drink."
 
+
+/datum/quirk/vice/alcoholic/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Drinker..."))
+
+
 /datum/quirk/vice/smoker
 	name = "Smoker"
 	desc = "I need to smoke something to take the edge off."
@@ -79,6 +85,10 @@
 	time = 40 MINUTES
 	debuff = /datum/status_effect/debuff/addiction/smoker
 	needsate_text = "Time for a flavorful smoke."
+
+/datum/quirk/vice/smoker/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Smoker..."))
 
 /datum/quirk/vice/junkie
 	name = "Junkie"
@@ -88,6 +98,10 @@
 	debuff = /datum/status_effect/debuff/addiction/junkie
 	needsate_text = "Time to reach a new high."
 
+/datum/quirk/vice/junkie/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Narco..."))
+
 /datum/quirk/vice/pyromaniac
 	name = "Fire Servant"
 	desc = "The warmth and just seeing something turn to ash is so much fun!"
@@ -96,6 +110,10 @@
 	debuff = /datum/status_effect/debuff/addiction/pyromaniac
 	needsate_text = "I need to see something turn to ash, or be on fire. Anything!"
 
+/datum/quirk/junkie/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pyro!"))
+
 /datum/quirk/vice/kleptomaniac
 	name = "Thief-Borne"
 	desc = "As a child I had to rely on theft to survive. Whether that changed or not, I just can't get over it."
@@ -103,6 +121,10 @@
 	time = 30 MINUTES
 	debuff = /datum/status_effect/debuff/addiction/kleptomaniac
 	needsate_text = "I need to STEAL something! I'll die if I don't!"
+
+/datum/quirk/vice/kleptomaniac/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Klepto..."))
 
 /datum/quirk/vice/godfearing
 	name = "Devout Follower"
@@ -135,3 +157,7 @@
 	point_value = 2
 	debuff = /datum/status_effect/debuff/addiction/maniac
 	needsate_text = "Where's all the blood?"
+
+/datum/quirk/vice/maniac/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Sadist..."))

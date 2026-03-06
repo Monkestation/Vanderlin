@@ -1732,6 +1732,17 @@
 	craftdiff = 2
 	category = "Gloves"
 
+/datum/repeatable_crafting_recipe/sewing/bandage
+	name = "Bandage"
+	output = /obj/item/natural/cloth/bandage
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 2.5
+	skillcraft = /datum/skill/misc/medicine
+	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
+
 /datum/repeatable_crafting_recipe/sewing/barding
 	name = "padded barding (saiga)"
 	category = "Armor"

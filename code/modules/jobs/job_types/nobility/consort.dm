@@ -20,6 +20,8 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	noble_income = 22
 
+	honorary = "Consort"
+
 	job_bitflag = BITFLAG_ROYALTY
 
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_NOBLE)
@@ -37,6 +39,13 @@
 		TRAIT_NUTCRACKER
 	)
 
+/datum/job/consort/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = "[SSmapping.config.monarch_title] Consort"
+		honorary_f = "[SSmapping.config.monarch_title] Consort" //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = "[SSmapping.config.monarch_title_f] Consort"
 
 /datum/job/consort/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

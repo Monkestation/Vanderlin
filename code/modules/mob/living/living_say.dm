@@ -110,7 +110,7 @@
 	var/datum/language/speaker_language = GLOB.language_datum_instances[language]
 	var/signed = speaker_language?.flags & SIGNLANG
 
-	if(signed && !can_speak_vocal(message))
+	if(!signed && !can_speak_vocal(message))
 		to_chat(src, span_warning("I can't talk."))
 		return
 
@@ -315,7 +315,7 @@
 		eavesdropping = stars(message)
 		eavesrendered = compose_message(src, message_language, eavesdropping, null, spans, message_mods)
 
-	var/rendered = compose_message(src, message_language, message, null, spans, message_mods)
+	var/rendered = compose_message(src, message_language, message, null, spans, message_mods, TRUE)
 
 	for(var/atom/movable/hearing_movable as anything in listening)
 		if(!hearing_movable)

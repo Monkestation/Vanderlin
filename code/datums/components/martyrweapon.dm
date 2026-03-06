@@ -138,12 +138,12 @@
 
 		var/datum/job/J = SSjob.GetJob(H.job)
 		if(!allowed_jobs[J.type])
-			to_chat(H, span_warn("It slips from my grasp. I can't get a hold."))
+			to_chat(H, span_warning("It slips from my grasp. I can't get a hold."))
 			H.dropItemToGround(parent)
 			return
 
 		if(!allowed_patrons[H.patron.type])
-			to_chat(H, span_warn("It slips from my grasp. I can't get a hold."))
+			to_chat(H, span_warning("It slips from my grasp. I can't get a hold."))
 			H.dropItemToGround(parent)
 			return
 
