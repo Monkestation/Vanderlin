@@ -48,6 +48,17 @@
 	)
 
 
+/datum/outfit/rousman_cheese/overseer/post_equip(mob/living/carbon/human/H, visuals_only)
+	. = ..()
+	var/turf/target_turf = get_turf(H)
+	var/obj/structure/handcart/cart = new(target_turf)
+	var/obj/item/reagent_containers/glass/bucket/pot/copper/pot = new(target_turf)
+	var/obj/item/tent_kit/tent = new(target_turf)
+
+	cart.put_in(null, pot, TRUE)
+	cart.put_in(null, tent, TRUE)
+
+
 // The cheesemaker, the one that makes the cheese.
 /datum/migrant_role/rousman_cheese/cheesemaker
 	name = "Rousman Cheesemaker"
@@ -90,8 +101,7 @@
 		/obj/item/reagent_containers/glass/bottle/black/cheese_soup
 	)
 
-
-// Cheesemonger, the seller and officianado
+// Cheesemonger, the seller and aficionado
 /datum/migrant_role/rousman_cheese/cheesemonger
 	name = "Rousman Cheesemonger"
 	greet_text = "You are a cheesemonger of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
