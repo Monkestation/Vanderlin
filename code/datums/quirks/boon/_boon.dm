@@ -170,37 +170,23 @@
 	)
 	preview_render = FALSE
 
-/datum/quirk/boon/folk_hero/on_spawn()
-	if(!ishuman(owner))
+/datum/quirk/boon/folk_hero/on_examined(mob/user, list/P, list/examine_contents)
+	if(user == owner)
 		return
-	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-
-/datum/quirk/boon/folk_hero/on_remove()
-	if(!ishuman(owner))
+	var/mob/living/carbon/source_mob = owner
+	var/mob/living/examiner = user
+	if(!istype(source_mob) || !istype(examiner))
 		return
-	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
-
-/datum/quirk/boon/folk_hero/proc/on_examine(mob/living/source, mob/user, list/examine_list)
-	if(!ishuman(user) || !ishuman(source))
-		return
-
-	var/mob/living/carbon/human/source_mob = source
-	var/mob/living/carbon/human/examiner = user
-
 	if(!examiner.mind || !source_mob.mind)
 		return
-
-	// Probably a better way to do it
-	if(source_mob.name in list("Unknown", "Unknown Man", "Unknown Woman", "Unknown Figure"))
+	if(examiner.STAINT < 8)
 		return
-
-	// Folk heroes are recognized by others
-	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [source_mob.real_name], the folk hero!")
-
-		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(source_mob.mind))
-			examiner.mind.share_identities(source_mob.mind)
+	var/mob_name = source_mob.get_visible_name("")
+	if(!mob_name)
+		return
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
+	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
+		examiner.mind.learn_target_identity(source_mob.mind, source_mob.real_name)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"

@@ -80,6 +80,19 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/datum/antagonist/maniac/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
+	. = ..()
+	if(!istype(examined))
+		return
+	var/obj/item/organ/heart/heart = examined.getorganslot(ORGAN_SLOT_HEART)
+	if(!heart)
+		return
+
+	var/inscryption_key = LAZYACCESS(heart.inscryption_keys, src) // SPECIFICALLY the key that WE wrote
+	if(inscryption_key && (inscryption_key in key_nums))
+		. += span_danger("[P[THEY]] know[examined.p_s()] [inscryption_key], I AM SURE OF IT!")
+
+
 /datum/antagonist/maniac/on_gain()
 	. = ..()
 	SSfake_world.should_bother = TRUE

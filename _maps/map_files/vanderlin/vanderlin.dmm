@@ -23719,7 +23719,7 @@
 /area/indoors/town/garrison/lieutenant)
 "lCu" = (
 /obj/structure/fake_machine/mail/r{
-	mailtag = "Manor Kitchen";
+	mailtag = "Keep Kitchen";
 	pixel_y = 32;
 	pixel_x = 0
 	},
@@ -26987,7 +26987,7 @@
 "ndE" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/fake_machine/mail{
-	mailtag = "Manor Meeting Room"
+	mailtag = "Keep Meeting Room"
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep/guest/meeting)
@@ -35694,7 +35694,7 @@
 /area/indoors/town)
 "rlK" = (
 /obj/structure/fake_machine/mail{
-	mailtag = "Manor Dining Hall"
+	mailtag = "Keep Dining Hall"
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
@@ -36110,7 +36110,7 @@
 /area/indoors/town/tavern)
 "ryh" = (
 /obj/structure/fake_machine/mail/l{
-	mailtag = "Manor Guest Room 1"
+	mailtag = "Keep Guest Room 1"
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
@@ -37346,7 +37346,7 @@
 /area/indoors/town/noble_manor/yellow)
 "saB" = (
 /obj/structure/fake_machine/mail/r{
-	mailtag = "Manor Guest Room 2"
+	mailtag = "Keep Guest Room 2"
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
@@ -41064,7 +41064,7 @@
 /area/indoors/town/church/inquisition)
 "tNy" = (
 /obj/structure/fake_machine/mail/r{
-	mailtag = "Manor Dungeon";
+	mailtag = "Keep Dungeon";
 	pixel_y = -30;
 	pixel_x = 0
 	},

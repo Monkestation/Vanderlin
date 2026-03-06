@@ -1,3 +1,5 @@
+#define html_tag(tag, str) ("<"+tag+">" + str + "</"+tag+">")
+
 #define span_abductor(str) ("<span class='abductor'>" + str + "</span>")
 #define span_admin(str) ("<span class='admin'>" + str + "</span>")
 #define span_adminhelp(str) ("<span class='adminhelp'>" + str + "</span>")
@@ -16,21 +18,16 @@
 
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_alertalien(str) ("<span class='alertalien'>" + str + "</span>")
-#define span_alertsyndie(str) ("<span class='alertsyndie'>" + str + "</span>")
-#define span_alertwarning(str) ("<span class='alertwarning'>" + str + "</span>")
 
 #define span_alien(str) ("<span class='alien'>" + str + "</span>")
 #define span_announce(str) ("<span class='announce'>" + str + "</span>")
 #define span_average(str) ("<span class='average'>" + str + "</span>")
 #define span_bad(str) ("<span class='bad'>" + str + "</span>")
 
-#define SPAN_SLIGHTLY_BIG(str) ("<span class='slightly_larger'>" + str + "</span>")
 
-#define span_big(str) ("<span class='big'>" + str + "</span>")
-#define span_bigbold(str) ("<span class='bigbold'>" + str + "</span>")
+#define span_bigbold(str) ("<span class='big bold'>" + str + "</span>")
 #define span_bigicon(str) ("<span class='bigicon'>" + str + "</span>")
 #define span_biginfo(str) ("<span class='biginfo'>" + str + "</span>")
-#define span_bignotice(str) ("<span class='bignotice'>" + str + "</span>")
 
 #define span_binarysay(str) ("<span class='binarysay'>" + str + "</span>")
 #define span_blue(str) ("<span class='blue'>" + str + "</span>")
@@ -38,8 +35,6 @@
 
 #define span_bold(str) ("<span class='bold'>" + str + "</span>")
 #define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")
-#define span_boldnotice(str) ("<span class='boldnotice'>" + str + "</span>")
-#define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
 
 #define span_clown(str) ("<span class='clown'>" + str + "</span>")
 #define span_colossus(str) ("<span class='colossus'>" + str + "</span>")
@@ -56,18 +51,9 @@
 #define span_deadsay(str) ("<span class='deadsay'>" + str + "</span>")
 
 #define span_emote(str) ("<span class='emote'>" + str + "</span>")
-#define span_extremelybig(str) ("<span class='extremelybig'>" + str + "</span>")
 #define span_ghostalert(str) ("<span class='ghostalert'>" + str + "</span>")
 #define span_good(str) ("<span class='good'>" + str + "</span>")
-
-#define span_green(str) ("<span class='green'>" + str + "</span>")
-#define span_smallgreen(str) ("<span class='smallgreen'>" + str + "</span>")
-#define span_boldgreen(str) ("<span class='boldgreen'>" + str + "</span>")
-#define span_smallred(str) ("<span class='smallred'>" + str + "</span>")
-#define span_boldred(str) ("<span class='boldred'>" + str + "</span>")
 #define span_greenannounce(str) ("<span class='greenannounce'>" + str + "</span>")
-#define span_greentext(str) ("<span class='greentext'>" + str + "</span>")
-#define span_greentextbig(str) ("<span class='greentextbig'>" + str + "</span>")
 
 #define span_hear(str) ("<span class='hear'>" + str + "</span>")
 #define span_header(str) ("<span class='header'>" + str + "</span>")
@@ -85,6 +71,7 @@
 #define span_linkoff(str) ("<span class='linkOff'>" + str + "</span>")
 #define span_linkon(str) ("<span class='linkon'>" + str + "</span>")
 #define span_looc(str) ("<span class='looc'>" + str + "</span>")
+#define span_linkify(str) ("<span class='linkify'>" + str + "</span>")
 #define span_memo(str) ("<span class='memo'>" + str + "</span>")
 #define span_memoedit(str) ("<span class='memoedit'>" + str + "</span>")
 #define span_mind_control(str) ("<span class='mind_control'>" + str + "</span>")
@@ -95,10 +82,7 @@
 #define span_necrosis(str) ("<span class='necrosis'>" + str + "</span>")
 #define span_neutraltext(str) ("<span class='neutraltext'>" + str + "</span>")
 #define span_neutraltextbig(str) ("<span class='neutraltextbig'>" + str + "</span>")
-#define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
-#define span_notice(str) ("<span class='notice'>" + str + "</span>")
 #define span_noticealien(str) ("<span class='noticealien'>" + str + "</span>")
-#define span_noticesmall(str) ("<span class='noticesmall'>" + str + "</span>")
 #define span_ooc(str) ("<span class='ooc'>" + str + "</span>")
 #define span_papyrus(str) ("<span class='papyrus'>" + str + "</span>")
 #define span_phobia(str) ("<span class='phobia'>" + str + "</span>")
@@ -106,32 +90,67 @@
 #define span_purple(str) ("<span class='purple'>" + str + "</span>")
 #define span_lightpurple(str) ("<span class='lightpurple'>" + str + "</span>")
 #define span_radio(str) ("<span class='radio'>" + str + "</span>")
-#define span_reallybig(str) ("<span class='reallybig'>" + str + "</span>")
 #define span_reallybighypnophrase(str) ("<span class='hypnophrase reallybig'>" + str + "</span>")
 #define span_reallybigredtext(str) ("<span class='reallybigredtext'>" + str + "</span>")
-#define span_red(str) ("<span class='red'>" + str + "</span>")
-#define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
-#define span_redtextbig(str) ("<span class='redtextbig'>" + str + "</span>")
 #define span_rose(str) ("<span class='rose'>" + str + "</span>")
 #define span_sans(str) ("<span class='sans'>" + str + "</span>")
 #define span_say(str) ("<span class='say'>" + str + "</span>")
 #define span_singing(str) ("<span class='singing'>" + str + "</span>")
-#define span_small(str) ("<span class='small'>" + str + "</span>")
-#define span_smallnotice(str) ("<span class='smallnotice'>" + str + "</span>")
-#define span_smallnoticeital(str) ("<span class='smallnoticeital'>" + str + "</span>")
 #define span_suicide(str) ("<span class='suicide'>" + str + "</span>")
-#define span_tinynotice(str) ("<span class='tinynotice'>" + str + "</span>")
-#define span_tinynoticeital(str) ("<span class='tinynoticeital'>" + str + "</span>")
 #define span_tooltip_container(str) ("<span class='tooltip_container'>" + str + "</span>")
 #define span_unconscious(str) ("<span class='unconscious'>" + str + "</span>")
 #define span_userdanger(str) ("<span class='userdanger'>" + str + "</span>")
-#define span_warn(str) ("<span class='warn'>" + str + "</span>")
-#define span_warning(str) ("<span class='warning'>" + str + "</span>")
-#define span_warningbig(str) ("<span class='warningbig'>" + str + "</span>")
 #define span_yell(str) ("<span class='yell'>" + str + "</span>")
 #define span_silver(str) ("<span class='silver'>" + str + "</span>")
 #define span_artery(str) ("<span class='artery'>" + str + "</span>")
 #define span_love(str) ("<span class='love'>" + str + "</span>")
+
+
+//Sizes
+// arbitary names. ordered by smallest to biggest
+#define span_smaller(str) ("<span class='smaller'>" + str + "</span>")
+#define span_tiny(str) ("<span class='small'>" + str + "</span>")
+#define span_small(str) ("<span class='small'>" + str + "</span>")
+
+#define span_slightlylarger(str) ("<span class='slightlylarger'>" + str + "</span>")
+#define span_big(str) ("<span class='big'>" + str + "</span>")
+#define span_larger(str) ("<span class='larger'>" + str + "</span>")
+#define span_reallybig(str) ("<span class='reallybig'>" + str + "</span>")
+#define span_extremelybig(str) ("<span class='extremelybig'>" + str + "</span>")
+
+
+// commonly used spans
+#define span_green(str) ("<span class='green'>" + str + "</span>")
+#define span_smallgreen(str) ("<span class='small green'>" + str + "</span>")
+#define span_boldgreen(str) ("<span class='bold green'>" + str + "</span>")
+
+#define span_red(str) ("<span class='red'>" + str + "</span>")
+#define span_smallred(str) ("<span class='small red'>" + str + "</span>")
+#define span_boldred(str) ("<span class='bold red'>" + str + "</span>")
+
+#define span_greentext(str) ("<span class='greentext'>" + str + "</span>")
+#define span_greentextbig(str) ("<span class='greentext big'>" + str + "</span>")
+#define span_redtext(str) ("<span class='redtext'>" + str + "</span>")
+#define span_redtextsmall(str) ("<span class='redtext tiny'>" + str + "</span>")
+#define span_redtextbig(str) ("<span class='redtext big'>" + str + "</span>")
+
+#define span_warning(str) ("<span class='warning'>" + str + "</span>")
+#define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
+#define span_tinywarning(str) ("<span class='tinywarning'>" + str + "</span>")
+#define span_warningbig(str) ("<span class='warning big'>" + str + "</span>")
+#define span_alertwarning(str) ("<span class='alertwarning'>" + str + "</span>")
+
+#define span_notice(str) ("<span class='notice'>" + str + "</span>")
+#define span_boldnotice(str) ("<span class='bold notice'>" + str + "</span>")
+#define span_bignotice(str) ("<span class='big notice'>" + str + "</span>")
+#define span_smallnotice(str) ("<span class='smallnotice'>" + str + "</span>")
+#define span_smallnoticeital(str) ("<span class='smallnotice italics'>" + str + "</span>")
+#define span_tinynotice(str) ("<span class='tinynotice'>" + str + "</span>")
+#define span_tinynoticeital(str) ("<span class='tinynotice italics'>" + str + "</span>")
+
+#define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
+#define span_boldnicegreen(str) ("<span class='bold nicegreen'>" + str + "</span>")
+
 
 /// Wrapper used to allow easy tracking of prayers within a chat tab.
 #define SPAN_PRAYER_WRAPPER(str) ("<span class='prayer'>" + str + "</span>")

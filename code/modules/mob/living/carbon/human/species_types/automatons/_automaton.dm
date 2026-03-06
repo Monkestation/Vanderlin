@@ -148,16 +148,20 @@
 	C.grant_language(/datum/language/common)
 
 	for(var/datum/action/action as anything in actions)
-		C.add_spell(action)
+		action = new action(src)
+		action.Grant(C)
 
-	C.add_movespeed_modifier("automaton", multiplicative_slowdown = 0.9)
+	C.add_movespeed_modifier(MOVESPEED_ID_AUTOMATON, multiplicative_slowdown = 0.9)
 
 	for(var/obj/item/bodypart/part as anything in C.bodyparts)
-		part.status = BODYPART_ROBOTIC
+		part.status = BODYPART_ROBOTIC // bro
 
 /datum/species/automaton/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, list(COMSIG_MOB_SAY))
+
+	C.remove_movespeed_modifier(MOVESPEED_ID_AUTOMATON)
+
+	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 
 /datum/species/automaton/check_roundstart_eligible()

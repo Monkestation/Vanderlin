@@ -97,8 +97,8 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/infantry
 	name = "Forest Ravager"
@@ -151,8 +151,8 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/ranger
 	name = "Forest Ranger"
@@ -206,8 +206,8 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/reaver
 	name = "Forest Reaver"
@@ -259,8 +259,8 @@
 		TRAIT_FORAGER,
 		TRAIT_ORPHAN,
 		TRAIT_BRUSHWALK,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/advclass/forestguard/ruffian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -306,8 +306,8 @@
 		TRAIT_FORAGER,
 		TRAIT_ORPHAN,
 		TRAIT_BRUSHWALK,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/advclass/forestguard/rat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -14,6 +14,8 @@
 		STATKEY_END = 2,
 		STATKEY_PER = 2,
 	)
+	honorary_suffix = "Khan"
+	honorary_suffix_f = "Khatun"
 
 	skills = list(
 		/datum/skill/combat/swords = 4,
@@ -47,13 +49,6 @@
 
 /datum/job/migrant/khan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Khan"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Khatun"
-	spawned.real_name = "[prev_real_name] [honorary]"
-	spawned.name = "[prev_name] [honorary]"
 	new /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled(get_turf(spawned))
 
 /datum/outfit/khan
