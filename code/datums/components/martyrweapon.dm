@@ -129,7 +129,7 @@
 		return
 
 	if(user.mob_biotypes & (MOB_UNDEAD | MOB_BEAST))
-		to_chat(user, span_warn("It burns and sizzles! It does not tolerate my pallid flesh!"))
+		to_chat(user, span_warning("It burns and sizzles! It does not tolerate my pallid flesh!"))
 		user.dropItemToGround(parent)
 		return
 
