@@ -171,6 +171,8 @@
 	preview_render = FALSE
 
 /datum/quirk/boon/folk_hero/on_examined(mob/user, list/P, list/examine_contents)
+	if(user == owner)
+		return
 	var/mob/living/carbon/source_mob = owner
 	var/mob/living/examiner = user
 	if(!istype(source_mob) || !istype(examiner))
