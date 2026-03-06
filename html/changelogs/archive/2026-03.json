@@ -127,5 +127,34 @@
                 "rscdel": "Removed slur. oops."
             }
         ]
+    },
+    "2026-03-06": {
+        "realforest2001": [
+            {
+                "bugfix": "Fixed granted titles breaking if your name isn't correct."
+            },
+            {
+                "bugfix": "Fixed rousman siege spawning invisible rousmen."
+            },
+            {
+                "bugfix": "Fixed recognising folkheroes when their faces are hidden."
+            },
+            {
+                "bugfix": "Fixed the really annoying warning left by an unused variable."
+            }
+        ],
+        "Cheffie, FreeStylaLT": [
+            {
+                "rscadd": "Added the bait rmb special."
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Bandage crafting recipe"
+            },
+            {
+                "balance": "Mercenary cloth in belt -> Proper Bandage\\n:cl:\\n<!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->\\n<!-- You can use multiple of the same prefix (they're only used for the icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs should generally represent how a player might be affected by the changes rather than a summary of the PR's contents. -->\\n## Pre-Merge Checklist\\n<!-- Don't bother filling these in while creating your Pull Request, just click the checkboxes after the Pull Request is opened and you are redirected to the page. -->\\n- [x] You tested this on a local server.\\n- [x] This code did not runtime during testing.\\n- [x] You documented all of your changes.\\n<!-- Neither the compiler nor workflow checks are perfect at detecting runtimes and errors. It is important to test your code/feature/fix locally. -->"
+            }
+        ]
     }
 }

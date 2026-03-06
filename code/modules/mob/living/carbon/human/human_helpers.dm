@@ -264,3 +264,20 @@
 //Perspective stranger looks at --> src
 /mob/living/carbon/human/proc/ReturnRelation(mob/living/carbon/human/stranger)
 	return family_datum.ReturnRelation(src, stranger)
+
+/mob/living/carbon/human/proc/highest_ac_worn(check_hands = FALSE)
+	var/list/slots = DEFAULT_SLOT_PRIORITY - (check_hands ? null : ITEM_SLOT_HANDS)
+
+	var/highest_ac = ARMOR_CLASS_NONE
+	for(var/slot in slots)
+		var/obj/item/clothing/clothes = get_item_by_slot(slot)
+		if(!istype(clothes))
+			continue
+
+		if(clothes.armor_class == AC_HEAVY)
+			return AC_HEAVY
+
+		if(clothes.armor_class > highest_ac)
+			highest_ac = clothes.armor_class
+
+	return highest_ac
