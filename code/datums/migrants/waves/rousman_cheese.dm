@@ -30,6 +30,7 @@
 		/datum/skill/labor/mathematics = 2,
 	)
 	languages = list(/datum/language/common)
+	honorary = "Overseer"
 
 /datum/outfit/rousman_cheese/overseer
 	name = "Rousman Overseer (Migrant Wave)"
