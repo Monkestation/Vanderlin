@@ -570,7 +570,7 @@
 			if(NUTRITION_LEVEL_STARVING-50 to NUTRITION_LEVEL_STARVING)
 				nutrition_msg = "starved"
 		if(nutrition_msg)
-			. += span_warning("[P[THEY]] look[pl] [nutrition_msg].")
+			. += span_tinywarning("[P[THEY]] look[pl] [nutrition_msg].")
 		var/hydration_msg
 		switch(hydration)
 			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
@@ -580,7 +580,7 @@
 			if(0 to HYDRATION_LEVEL_DEHYDRATED)
 				hydration_msg = html_tag("B", "dehydrated")
 		if(hydration_msg)
-			. += span_warning("[P[THEY]] look[pl] [hydration_msg].")
+			. += span_tinywarning("[P[THEY]] look[pl] [hydration_msg].")
 
 	if(Adjacent(user))
 		if(O)
