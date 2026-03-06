@@ -113,7 +113,7 @@
 	if((time_left % 300) != 0)
 		return
 
-	bound_user.balloon_alert(bound_user, span_red("[time2text(time_left, "mm:ss", 0)] remains"))
+	bound_user.balloon_alert(bound_user, "[time2text(time_left, "mm:ss", 0)] remains")
 
 /datum/component/martyr_weapon/proc/on_equip(datum/source, mob/living/user, slot)
 	SIGNAL_HANDLER
