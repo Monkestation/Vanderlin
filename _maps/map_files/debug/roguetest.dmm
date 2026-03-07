@@ -269,6 +269,10 @@
 /obj/item/clothing/head/helmet/sallet,
 /turf/open/floor/carpet,
 /area/indoors)
+"aO" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "aP" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/carpet,
@@ -1066,10 +1070,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"dh" = (
-/mob/living/carbon/human/species/automaton/prefilled_vessel,
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "dl" = (
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
@@ -1407,6 +1407,10 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"ke" = (
+/mob/living/carbon/human/species/automaton/prefilled_vessel,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "ki" = (
 /obj/structure/rotation_piece/cog{
 	dir = 4
@@ -2070,6 +2074,14 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"yK" = (
+/obj/effect/decal/carpet/kover_black{
+	dir = 1;
+	pixel_y = -5
+	},
+/obj/structure/fake_machine/contractledger,
+/turf/open/floor/wood,
+/area/indoors/town/keep)
 "yP" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/mountains/decap)
@@ -2400,13 +2412,6 @@
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/wood,
 /area/indoors)
-"AT" = (
-/obj/effect/decal/carpet/kover_black{
-	dir = 1;
-	pixel_y = -5
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep)
 "Be" = (
 /obj/structure/floordoor,
 /turf/open/floor/cobblerock,
@@ -3143,6 +3148,11 @@
 /obj/item/key/lord,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"SO" = (
+/obj/structure/flora/grass,
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "SS" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -3557,6 +3567,10 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors)
+"Zz" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "ZO" = (
 /obj/item/essence_vial{
 	pixel_y = 18;
@@ -16142,7 +16156,7 @@ QN
 Wr
 QN
 aq
-QN
+Zz
 QN
 ky
 ew
@@ -16636,7 +16650,7 @@ QN
 Wr
 QN
 zg
-dh
+ke
 GB
 vD
 vD
@@ -16893,7 +16907,7 @@ QN
 Wr
 Wr
 EQ
-AT
+yK
 GB
 vD
 vD
@@ -22302,7 +22316,7 @@ tA
 tA
 tA
 ai
-QN
+aO
 ai
 tA
 tA
@@ -76017,7 +76031,7 @@ QN
 qc
 QN
 ky
-qc
+SO
 QN
 ky
 jC

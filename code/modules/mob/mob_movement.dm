@@ -25,6 +25,12 @@
 		else
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 
+/atom/movable
+	var/facepull = TRUE
+
+/mob
+	facepull = FALSE
+
 /**
  * Move a client in a direction
  *
@@ -36,7 +42,7 @@
  * Things that stop you moving as a mob:
  * * world time being less than your next move_delay
  * * not being in a mob, or that mob not having a loc
- * * missing the n and direction parameters
+ * * missing the new_loc and direction parameters
  * * being in remote control of an object (calls Moveobject instead)
  * * being dead (it ghosts you instead)
  *
@@ -61,43 +67,39 @@
  * (if you ask me, this should be at the top of the move so you don't dance around)
  *
  */
-/atom/movable
-	var/facepull = TRUE
-
-/mob
-	facepull = FALSE
-
-/client/Move(n, direct)
+/client/Move(atom/new_loc, direct)
 	if(world.time < move_delay) //do not move anything ahead of this check please
 		return FALSE
+
 	next_move_dir_add = 0
 	next_move_dir_sub = 0
 	var/old_move_delay = move_delay
 	move_delay = world.time + world.tick_lag //this is here because Move() can now be called mutiple times per tick
-	if(!mob || !mob.loc)
+
+	if(!direct || !new_loc)
 		return FALSE
-	if(!n || !direct)
+
+	if(!mob?.loc)
 		return FALSE
+
 	if(HAS_TRAIT(mob, TRAIT_NO_TRANSFORM))
 		return FALSE	//This is sota the goto stop mobs from moving var
+
 	if(mob.control_object)
 		return Move_object(direct)
+
 	if(!isliving(mob))
-		return mob.Move(n, direct)
-	else
-		if (HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
-			return FALSE
+		move_delay += mob.cached_multiplicative_slowdown
+		return mob.Move(new_loc, direct)
+
+	if(HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
+		return FALSE
 
 	if(mob.stat == DEAD)
-#ifdef TESTSERVER
-		mob.ghostize()
-		return FALSE
-#endif
 		if(MOBTIMER_FINISHED(mob, MT_LASTDIED, 60 SECONDS))
 			mob.ghostize()
-		else
-			if(!world.time%5)
-				to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
+		else if(!world.time % 5)
+			to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
 
 	if(mob.force_moving)
@@ -117,12 +119,12 @@
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)
 
-	if(HAS_TRAIT(L, TRAIT_IMMOBILIZED))
+	if(!(L.mobility_flags & MOBILITY_MOVE))
 		return FALSE
 
-	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
-		var/atom/O = mob.loc
-		return O.relaymove(mob, direct)
+	if(ismovable(mob.loc)) //Inside an object, tell it we moved
+		var/atom/loc_atom = mob.loc
+		return loc_atom.relaymove(mob, direct)
 
 	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_MOVE, args) & COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE)
 		return FALSE
@@ -137,25 +139,24 @@
 	else
 		move_delay = world.time
 
-	var/target_dir = get_dir(L, n)
+	var/target_dir = get_dir(L, new_loc)
 
 	//backpedal and strafe slowdown for quick intent
-	if(L.fixedeye || L.tempfixeye)
-		if(L.dir != target_dir)
+	if(L.dir != target_dir)
+		if(L.fixedeye || L.tempfixeye)
 			add_delay += 2
 			if(L.m_intent == MOVE_INTENT_RUN)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
-	else
-		if(L.dir != target_dir)
-			// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
-			if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
-				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
+
+		// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
+		if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
+			L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 
 	var/old_direct = mob.dir
 
 	. = ..()
 
-	if((direct & (direct - 1)) && mob.loc == n) //moved diagonally successfully
+	if((direct & (direct - 1)) && mob.loc == new_loc) //moved diagonally successfully
 		add_delay *= sqrt(2)
 
 	var/after_glide = 0
@@ -211,6 +212,7 @@
  */
 /client/proc/Process_Grab()
 	if(mob.pulledby && mob.pulledby != mob)
+		var/mob/mob_puller = mob.pulledby
 		if(HAS_TRAIT(mob, TRAIT_INCAPACITATED))
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I can't move!"))
@@ -219,26 +221,38 @@
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I'm restrained! I can't move!"))
 			return TRUE
-		else if(mob.pulledby != mob.pulling || mob.pulledby.grab_state > GRAB_PASSIVE || mob.cmode || mob.pulledby.cmode)	//Don't autoresist passive grabs if we're grabbing them too.
-			return mob.resist_grab(TRUE)
+		//Don't autoresist passive grabs if we're grabbing them too.
+		else if(mob_puller == mob.pulling) // START: If we are grabbing each other,
+			if(mob_puller.grab_state > mob.grab_state) // COND 1: and our grabber has a stronger grab state,
+				return mob.resist_grab(TRUE) // END 1: attempt to break the grab.
+			if(isliving(mob) && mob_puller.cmode) // COND 2: and they are hostile,
+				// END 2: we roll to try to move.
+				var/mob/living/living_mob = mob
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			// END 3: we can move freely.
+		else
+			var/mob/living/living_mob = mob
+			if(mob_puller.grab_state == GRAB_PASSIVE && mob_puller.cmode)
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			else
+				return living_mob.resist_grab(TRUE)
 
 	if(mob.pulling && isliving(mob.pulling))
 		var/mob/living/L = mob.pulling
 		var/mob/living/M = mob
 		// If passive grab and trying to pull someone who doesn't want to be pulled
-		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !HAS_TRAIT(L, TRAIT_INCAPACITATED))
+		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !L.incapacitated(IGNORE_GRAB))
 			// Reuse shove check probability
-			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10),0,100)))
+			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
 				COOLDOWN_START(src, move_delay, 1 SECONDS)
 				to_chat(src, span_warning("[L]'s footing is too sturdy!"))
 				return TRUE
-
-	var/mob/living/simple_animal/bound = mob.pulling
-	if(istype(bound))
-		if(bound?.binded)
-			COOLDOWN_START(src, move_delay, 1 SECONDS)
-			to_chat(src, span_warning("[bound] is bound in a summoning circle. I can't move them!"))
-			return TRUE
 
 	return FALSE
 

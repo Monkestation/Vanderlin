@@ -1,125 +1,138 @@
-///Datum that handles
 /datum/achievement_data
 	///Ckey of this achievement data's owner
-	var/key
-	///Up to date list of all achievements and their info.
-	var/data = list()
-	///Original status of achievement.
-	var/original_cached_data = list()
-	///All icons for the UI of achievements
-	var/list/AchievementIcons = null
+	var/owner_ckey
+	///Current values for each achievement typepath (TRUE/FALSE for achievements, numeric for scores/progress)
+	var/list/data = list()
+	///Snapshot of values at load time, used to detect dirty state (kept for compatibility, less critical now)
+	var/list/original_cached_data = list()
 	///Have we done our set-up yet?
 	var/initialized = FALSE
+	///Save file name used in the save manager
+	var/save_file_name = "achievements"
 
-/datum/achievement_data/New(key)
-	src.key = key
+/datum/achievement_data/New(ckey)
+	owner_ckey = ckey
 	if(SSachievements.initialized && !initialized)
 		InitializeData()
 
 /datum/achievement_data/proc/InitializeData()
 	initialized = TRUE
-	load_all_achievements() //So we know which achievements we have unlocked so far.
+	load_all_achievements()
 
-	var/datum/asset/spritesheet_batched/assets = get_asset_datum(/datum/asset/spritesheet_batched/achievements)
-	AchievementIcons = list()
-	for(var/achievement_type in SSachievements.achievements)
-		var/datum/award/achievement = SSachievements.achievements[achievement_type]
-		var/list/SL = list()
-		SL["htmltag"] = assets.icon_tag(achievement.icon)
-		AchievementIcons[achievement.name] += list(SL)
+/// Saves all dirty achievement data via the save manager.
+/datum/achievement_data/proc/save_achievements()
+	var/datum/save_manager/SM = get_save_manager(owner_ckey)
+	if(!SM)
+		return FALSE
 
-///Saves any out-of-date achievements to the hub.
-/datum/achievement_data/proc/save()
+	// Serialize the data list: keys are typepaths (stringified), values are the achievement state.
+	// We store the entire achievement data blob as a single key for simplicity.
+	var/list/serialized = list()
 	for(var/T in data)
-		var/datum/award/A = SSachievements.awards[T]
+		serialized["[T]"] = data[T]
 
-		if(data[T] != original_cached_data[T])//If our data from before is not the same as now, save it to the hub. This check prevents unnecesary polling.
-			A.save(key,data[T])
+	return SM.set_data(save_file_name, "achievement_data", serialized)
 
-///Loads data for all achievements to the caches.
-/datum/achievement_data/proc/load_all()
-	for(var/T in subtypesof(/datum/award))
-		get_data(T)
-
+/// Loads all achievements from the save manager, falling back to defaults.
 /datum/achievement_data/proc/load_all_achievements()
-	set waitfor = FALSE
-	for(var/T in subtypesof(/datum/award/achievement))
-		get_data(T)
+	var/datum/save_manager/SM = get_save_manager(owner_ckey)
+	var/list/saved = list()
 
-///Gets the data for a specific achievement and caches it
+	if(SM)
+		saved = SM.get_data(save_file_name, "achievement_data", list())
+		if(!islist(saved))
+			saved = list()
+
+	for(var/T in subtypesof(/datum/award))
+		var/datum/award/A = SSachievements.awards[T]
+		if(!A || !A.name) // Skip abstract types
+			continue
+
+		var/text_key ="[T]"
+		if(text_key in saved)
+			data[T] = A.parse_value(saved[text_key])
+		else
+			data[T] = A.default_value
+
+		original_cached_data[T] = data[T]
+
+/// Ensures a specific achievement's data is loaded (lazy load fallback, now just checks local cache).
 /datum/achievement_data/proc/get_data(achievement_type)
 	var/datum/award/A = SSachievements.awards[achievement_type]
-	if(!A.name)
+	if(!A || !A.name)
 		return FALSE
-	if(!data[achievement_type])
-		data[achievement_type] = A.load(key)
-		original_cached_data[achievement_type] = data[achievement_type]
+	// If somehow not in cache, populate with default
+	if(isnull(data[achievement_type]))
+		data[achievement_type] = A.default_value
+		original_cached_data[achievement_type] = A.default_value
 
-///Unlocks an achievement of a specific type.
-/datum/achievement_data/proc/unlock(achievement_type, mob/user)
+/**
+ * Unlocks or increments an achievement.
+ *
+ * - For /datum/award/achievement: one-shot unlock (idempotent).
+ * - For /datum/award/achievement/progress: increments progress by `value`; unlocks when progress >= required_progress.
+ * - For /datum/award/score: increments the score by `value`.
+ *
+ * @param achievement_type  Typepath of the /datum/award subtype.
+ * @param user              Mob receiving the award (for notifications).
+ * @param value             Amount to increment (ignored for plain achievements).
+ */
+/datum/achievement_data/proc/unlock(achievement_type, mob/user, value = 1)
+	set waitfor = FALSE
+	if(!SSachievements.achievements_enabled)
+		return
 	var/datum/award/A = SSachievements.awards[achievement_type]
-	get_data(achievement_type) //Get the current status first
-	if(istype(A, /datum/award/achievement))
-		data[achievement_type] = TRUE
-		A.on_unlock(user) //Only on default achievement, as scores keep going up.
-	else if(istype(A, /datum/award/score))
-		data[achievement_type] += 1
+	if(!A)
+		return
+	get_data(achievement_type)
 
-///Getter for the status/score of an achievement
+	if(istype(A, /datum/award/achievement/progress))
+		var/datum/award/achievement/progress/PA = A
+		if(data[achievement_type] >= PA.required_progress) // Already completed
+			return
+		data[achievement_type] = min(data[achievement_type] + value, PA.required_progress)
+		if(user && PA.show_progress_messages)
+			to_chat(user, span_notice("[PA.name]: [data[achievement_type]]/[PA.required_progress]"))
+		if(data[achievement_type] >= PA.required_progress)
+			A.inform_user(user)
+			A.on_unlock(user)
+		save_achievements()
+
+	else if(istype(A, /datum/award/achievement))
+		if(data[achievement_type]) // Already unlocked
+			return
+		data[achievement_type] = TRUE
+		A.inform_user(user)
+		A.on_unlock(user)
+		save_achievements()
+
+	else if(istype(A, /datum/award/score))
+		data[achievement_type] += value
+		A.inform_user(user)
+		save_achievements()
+
+/// Returns the current status/score/progress of an achievement.
 /datum/achievement_data/proc/get_achievement_status(achievement_type)
 	return data[achievement_type]
 
-///Resets an achievement to default values.
+/// Returns progress info for a progress achievement as a text string, e.g. "5/10".
+/datum/achievement_data/proc/get_progress_string(achievement_type)
+	var/datum/award/A = SSachievements.awards[achievement_type]
+	if(!istype(A, /datum/award/achievement/progress))
+		return null
+	var/datum/award/achievement/progress/PA = A
+	return "[data[achievement_type]]/[PA.required_progress]"
+
+/// Resets an achievement to its default value and saves.
 /datum/achievement_data/proc/reset(achievement_type)
+	if(!SSachievements.achievements_enabled)
+		return
 	var/datum/award/A = SSachievements.awards[achievement_type]
 	get_data(achievement_type)
-	if(istype(A, /datum/award/achievement))
+	if(istype(A, /datum/award/achievement)) // covers progress too since it's a subtype
 		data[achievement_type] = FALSE
+		if(istype(A, /datum/award/achievement/progress))
+			data[achievement_type] = 0
 	else if(istype(A, /datum/award/score))
 		data[achievement_type] = 0
-
-/datum/achievement_data/ui_assets(mob/user)
-	return list(
-		get_asset_datum(/datum/asset/spritesheet_batched/achievements)
-	)
-
-/datum/achievement_data/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "achievements", "Achievements Menu", 800, 1000)
-		ui.open()
-
-/datum/achievement_data/ui_data(mob/user)
-	var/ret_data = list() // screw standards (qustinnus you must rename src.data ok)
-	ret_data["categories"] = list("Bosses", "Misc")
-	ret_data["achievements"] = list()
-
-	var/datum/asset/spritesheet_batched/assets = get_asset_datum(/datum/asset/spritesheet_batched/achievements)
-
-	for(var/achievement_type in SSachievements.achievements)
-		if(!SSachievements.achievements[achievement_type].name) //No name? we a subtype.
-			continue
-		if(isnull(data[achievement_type])) //We're still loading
-			continue
-		var/list/this = list(
-			"name" = SSachievements.achievements[achievement_type].name,
-			"desc" = SSachievements.achievements[achievement_type].desc,
-			"category" = SSachievements.achievements[achievement_type].category,
-			"icon_class" = assets.icon_class_name(SSachievements.achievements[achievement_type].icon),
-			"achieved" = data[achievement_type]
-		)
-
-		ret_data["achievements"] += list(this)
-
-	return ret_data
-
-/client/verb/checkachievements()
-	set category = "OOC"
-	set name = "Check achievements"
-	set desc = ""
-	set hidden = 1
-	if(!holder)
-		return
-
-	player_details.achievements.ui_interact(usr)
-
+	save_achievements()

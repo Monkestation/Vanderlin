@@ -11,6 +11,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	is_quest_giver = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/steward
@@ -23,6 +24,9 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
+
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	jobstats = list(
 		STATKEY_STR = -2,

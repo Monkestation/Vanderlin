@@ -725,7 +725,7 @@ if (length(L) < I) { \
 	for(var/key in key_list)
 		. |= key_list[key]
 
-/proc/make_associative(list/flat_list)
+/proc/make_associative(list/flat_list, fill_with=TRUE)
 	. = list()
 	for(var/thing in flat_list)
 		.[thing] = TRUE

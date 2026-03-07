@@ -8,7 +8,7 @@
 /mob/living/carbon/human/GetVoice()
 	if(GetSpecialVoice())
 		return GetSpecialVoice()
-	return real_name
+	return name
 
 /mob/living/carbon/human/IsVocal()
 	// how do species that don't breathe talk? magic, that's what.
@@ -31,14 +31,14 @@
 	return special_voice
 
 /mob/living/carbon/human/get_alt_name()
-	if(name != GetVoice())
+	if(get_face_name("") != GetVoice())
 		// This isn't accurate purposely
-		var/appendage = "Figure"
+		var/appendage = age == AGE_CHILD ? "Child" : "Figure"
 		switch(client?.prefs.voice_type)
 			if(VOICE_TYPE_FEM)
-				appendage = "Woman"
+				appendage = age == AGE_CHILD ? "Girl" : "Woman"
 			if(VOICE_TYPE_MASC)
-				appendage = "Man"
+				appendage = age == AGE_CHILD ? "Boy" : "Man"
 		return "Unknown [appendage]"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri

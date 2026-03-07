@@ -150,6 +150,18 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
+"aU" = (
+/obj/item/clothing/neck/psycross/gold{
+	pixel_x = -7;
+	pixel_y = -3
+	},
+/obj/item/clothing/neck/psycross/silver{
+	pixel_x = 1;
+	pixel_y = 7
+	},
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
+/turf/open/floor/cobble,
+/area/indoors/lich)
 "aW" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -433,19 +445,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/bog)
-"cV" = (
-/obj/item/clothing/neck/psycross/silver{
-	pixel_x = -9;
-	pixel_y = 0
-	},
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = 2;
-	pixel_y = 8
-	},
-/obj/item/clothing/neck/psycross/silver/divine/necra,
-/obj/effect/decal/remains/human,
-/turf/open/water/blood,
-/area/indoors/lich)
 "cW" = (
 /obj/structure/spider/stickyweb,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -1387,13 +1386,6 @@
 	},
 /turf/open/floor/church/purple,
 /area/indoors/lich)
-"hS" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/bog)
 "hU" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood/darker,
@@ -1685,6 +1677,9 @@
 /obj/structure/forcefield/strong,
 /turf/closed,
 /area/indoors/lich)
+"jA" = (
+/turf/open/water/clean,
+/area/indoors/cave)
 "jB" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -2800,6 +2795,12 @@
 /obj/structure/hotspring/border/two,
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/bog)
+"qT" = (
+/obj/effect/decal/borderfall{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/indoors/lich)
 "qU" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood,
@@ -2982,9 +2983,6 @@
 /obj/structure/chair/wood/alt,
 /turf/open/floor/ruinedwood,
 /area/indoors/lich)
-"rV" = (
-/turf/open/water/clean,
-/area/indoors/cave)
 "rW" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood,
@@ -3100,36 +3098,6 @@
 "sL" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
-"sO" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/coin/gold/pile,
-/obj/item/clothing/shoes/boots/armor/vampire{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/gloves/chain/vampire{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/pants/platelegs/vampire{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/armor/cuirass/vampire{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/head/vampire{
-	name = "Crown of Murder";
-	desc = "A crown made of pure void, the red gems imbedded into the strange metal looks like eyes..."
-	},
-/obj/item/weapon/sword/sabre/stalker{
-	name = "Murder"
-	},
-/obj/item/coin/silver/pile,
-/obj/item/ingot/silver,
-/obj/item/ingot/silver,
-/obj/item/clothing/ring/gold/dorpel,
-/obj/item/gem/green,
-/obj/item/clothing/ring/silver,
-/turf/open/floor/church/purple,
 /area/indoors/lich)
 "sS" = (
 /obj/structure/fluff/railing/border{
@@ -3542,18 +3510,6 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
-"uP" = (
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = -7;
-	pixel_y = -3
-	},
-/obj/item/clothing/neck/psycross/silver{
-	pixel_x = 1;
-	pixel_y = 7
-	},
-/obj/item/clothing/neck/psycross/silver/divine/pestra,
-/turf/open/floor/cobble,
 /area/indoors/lich)
 "uQ" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -4034,18 +3990,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/water/blood,
 /area/indoors/lich)
-"xr" = (
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = 2;
-	pixel_y = 7
-	},
-/obj/item/clothing/neck/psycross/silver/divine/astrata,
-/obj/item/clothing/neck/psycross/silver/divine/eora{
-	pixel_x = -20;
-	pixel_y = 13
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/lich)
 "xs" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
@@ -4199,6 +4143,36 @@
 /obj/item/chair/stool,
 /turf/open/floor/grass/cold,
 /area/outdoors/bog)
+"yk" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/coin/gold/pile,
+/obj/item/clothing/shoes/boots/armor/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/gloves/chain/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/gloves/chain/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/armor/cuirass/vampire{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/head/vampire{
+	name = "Crown of Murder";
+	desc = "A crown made of pure void, the red gems imbedded into the strange metal looks like eyes..."
+	},
+/obj/item/weapon/sword/sabre/stalker{
+	name = "Murder"
+	},
+/obj/item/coin/silver/pile,
+/obj/item/ingot/silver,
+/obj/item/ingot/silver,
+/obj/item/clothing/ring/gold/dorpel,
+/obj/item/gem/green,
+/obj/item/clothing/ring/silver,
+/turf/open/floor/church/purple,
+/area/indoors/lich)
 "yn" = (
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/cobblerock/alt,
@@ -4320,6 +4294,19 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/ring/gold/ravox,
 /turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/lich)
+"yY" = (
+/obj/item/clothing/neck/psycross/silver{
+	pixel_x = -9;
+	pixel_y = 0
+	},
+/obj/item/clothing/neck/psycross/gold{
+	pixel_x = 2;
+	pixel_y = 8
+	},
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/effect/decal/remains/human,
+/turf/open/water/blood,
 /area/indoors/lich)
 "za" = (
 /obj/structure/closet/crate/chest/old_crate,
@@ -4688,6 +4675,18 @@
 /obj/structure/closet/burial_shroud,
 /turf/open/floor/churchrough,
 /area/indoors/cave)
+"Ba" = (
+/obj/item/clothing/neck/psycross/gold{
+	pixel_x = 2;
+	pixel_y = 7
+	},
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_x = -20;
+	pixel_y = 13
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/lich)
 "Bb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
@@ -5246,6 +5245,11 @@
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/grass/cold,
 /area/indoors/mountains)
+"Ef" = (
+/obj/item/clothing/neck/psycross/gold,
+/obj/effect/decal/remains/human,
+/turf/open/floor/dirt,
+/area/outdoors/bog)
 "Eh" = (
 /obj/structure/bookcase,
 /turf/open/floor/tile/masonic/single,
@@ -5737,13 +5741,6 @@
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
-"GZ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/bog)
 "Hb" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/zizo,
@@ -6354,11 +6351,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/twig,
 /area/indoors/mountains)
-"Ku" = (
-/obj/item/clothing/neck/psycross/gold,
-/obj/effect/decal/remains/human,
-/turf/open/floor/dirt,
-/area/outdoors/bog)
 "Kw" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/ruinedwood,
@@ -6682,6 +6674,23 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/lich)
+"ME" = (
+/obj/item/clothing/neck/psycross/gold{
+	pixel_x = 5;
+	pixel_y = 7
+	},
+/obj/item/clothing/neck/psycross/silver{
+	pixel_x = -6;
+	pixel_y = 6
+	},
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/noc{
+	pixel_x = 15;
+	pixel_y = -2
+	},
+/obj/effect/decal/remains/human,
+/turf/open/floor/cobblerock,
+/area/indoors/lich)
 "MG" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/cobble,
@@ -6978,23 +6987,6 @@
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
-"OJ" = (
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = 5;
-	pixel_y = 7
-	},
-/obj/item/clothing/neck/psycross/silver{
-	pixel_x = -6;
-	pixel_y = 6
-	},
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/obj/item/clothing/neck/psycross/silver/divine/noc{
-	pixel_x = 15;
-	pixel_y = -2
-	},
-/obj/effect/decal/remains/human,
-/turf/open/floor/cobblerock,
-/area/indoors/lich)
 "OL" = (
 /obj/effect/decal/cleanable/food/pie_smudge,
 /turf/open/floor/tile/kitchen,
@@ -7247,6 +7239,12 @@
 /obj/structure/window,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
+"Qe" = (
+/obj/effect/decal/borderfall{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/bog)
 "Qg" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/cobblerock,
@@ -7338,6 +7336,12 @@
 	dir = 4
 	},
 /turf/open/floor/churchmarble,
+/area/outdoors/bog)
+"QR" = (
+/obj/effect/decal/borderfall{
+	dir = 4
+	},
+/turf/open/floor/cobble,
 /area/outdoors/bog)
 "QS" = (
 /obj/structure/bookcase,
@@ -7483,6 +7487,23 @@
 	},
 /turf/open/floor/churchrough/purple,
 /area/indoors/lich)
+"Sa" = (
+/obj/effect/decal/cleanable/blood{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/clothing/neck/psycross/silver,
+/obj/item/clothing/neck/psycross/silver{
+	pixel_x = 6;
+	pixel_y = 11
+	},
+/obj/item/clothing/neck/psycross/gold{
+	pixel_x = -10;
+	pixel_y = 10
+	},
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/turf/open/floor/cobblerock,
+/area/indoors/lich)
 "Sb" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -7521,23 +7542,6 @@
 /obj/item/reagent_containers/food/snacks/meat/salami,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
-"Si" = (
-/obj/effect/decal/cleanable/blood{
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/clothing/neck/psycross/silver,
-/obj/item/clothing/neck/psycross/silver{
-	pixel_x = 6;
-	pixel_y = 11
-	},
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = -10;
-	pixel_y = 10
-	},
-/obj/item/clothing/neck/psycross/silver/divine/abyssor,
-/turf/open/floor/cobblerock,
-/area/indoors/lich)
 "Sl" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/darker,
@@ -7991,13 +7995,6 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
-"UQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/turf/open/openspace,
-/area/indoors/lich)
 "US" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
@@ -26669,8 +26666,8 @@ xd
 dE
 HP
 ch
-cV
-xr
+yY
+Ba
 VN
 CH
 dL
@@ -26872,7 +26869,7 @@ dE
 Jy
 ch
 NN
-Si
+Sa
 Tk
 Ts
 NN
@@ -27073,8 +27070,8 @@ xd
 dE
 sj
 ch
-uP
-OJ
+aU
+ME
 xH
 qr
 YP
@@ -41983,7 +41980,7 @@ BO
 ST
 bD
 bD
-Ku
+Ef
 bD
 bD
 Hl
@@ -78813,8 +78810,8 @@ JF
 JF
 JF
 JF
-rV
-rV
+jA
+jA
 JF
 JF
 JF
@@ -79014,10 +79011,10 @@ JF
 JF
 JF
 JF
-rV
-rV
-rV
-rV
+jA
+jA
+jA
+jA
 JF
 JF
 JF
@@ -79215,11 +79212,11 @@ JF
 JF
 JF
 JF
-rV
-rV
+jA
+jA
 XD
-rV
-rV
+jA
+jA
 JF
 JF
 JF
@@ -79415,14 +79412,14 @@ WT
 WT
 JF
 JF
-rV
-rV
-rV
-rV
+jA
+jA
+jA
+jA
 XD
 XD
-rV
-rV
+jA
+jA
 JF
 JF
 JF
@@ -79616,8 +79613,8 @@ WT
 WT
 WT
 JF
-rV
-rV
+jA
+jA
 JF
 JF
 XD
@@ -79625,9 +79622,9 @@ Vs
 XD
 XD
 JF
-rV
-rV
-rV
+jA
+jA
+jA
 JF
 JF
 JF
@@ -79819,16 +79816,16 @@ WT
 WT
 JF
 JF
-rV
-rV
-rV
+jA
+jA
+jA
 XD
 XD
 YZ
 XD
-rV
-rV
-rV
+jA
+jA
+jA
 JF
 JF
 JF
@@ -80022,17 +80019,17 @@ WT
 JF
 JF
 JF
-rV
-rV
-rV
-rV
+jA
+jA
+jA
+jA
 XD
 JK
 XD
 XD
-rV
-rV
-rV
+jA
+jA
+jA
 JF
 JF
 JF
@@ -80223,20 +80220,20 @@ WT
 WT
 JF
 JF
-rV
-rV
+jA
+jA
 JF
 JF
-rV
-rV
+jA
+jA
 XD
 XD
-rV
-rV
-rV
+jA
+jA
+jA
 JF
-rV
-rV
+jA
+jA
 JF
 JF
 JF
@@ -80430,14 +80427,14 @@ JF
 JF
 JF
 JF
-rV
+jA
 XD
-rV
-rV
-rV
-rV
-rV
-rV
+jA
+jA
+jA
+jA
+jA
+jA
 JF
 JF
 JF
@@ -80630,13 +80627,13 @@ JF
 JF
 JF
 JF
-rV
-rV
-rV
-rV
-rV
-rV
-rV
+jA
+jA
+jA
+jA
+jA
+jA
+jA
 JF
 JF
 JF
@@ -80833,11 +80830,11 @@ JF
 JF
 JF
 JF
-rV
-rV
-rV
+jA
+jA
+jA
 JF
-rV
+jA
 JF
 JF
 JF
@@ -81037,9 +81034,9 @@ JF
 JF
 JF
 JF
-rV
-rV
-rV
+jA
+jA
+jA
 JF
 JF
 JF
@@ -114940,10 +114937,10 @@ uw
 uw
 dE
 dE
-UQ
-UQ
-UQ
-UQ
+qT
+qT
+qT
+qT
 dE
 dE
 uw
@@ -118665,8 +118662,8 @@ GS
 ex
 ex
 vJ
-GZ
-GZ
+QR
+QR
 IC
 IC
 IC
@@ -119675,7 +119672,7 @@ ex
 ex
 GS
 vJ
-hS
+Qe
 IC
 IC
 IC
@@ -123413,7 +123410,7 @@ mY
 uY
 jz
 jz
-sO
+yk
 Kb
 PY
 Bv

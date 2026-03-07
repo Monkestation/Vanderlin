@@ -887,5 +887,12 @@
                 "map": "Added more adventurer spawns to the murderwoods"
             }
         ]
+    },
+    "2026-02-28": {
+        "KevinfromHP": [
+            {
+                "qol": "keybind fixes"
+            }
+        ]
     }
 }

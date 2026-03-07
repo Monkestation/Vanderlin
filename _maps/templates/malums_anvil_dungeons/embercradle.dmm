@@ -633,6 +633,13 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/twig,
 /area/under/mountains/anvil/dungeon)
+"jZ" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/item/bin,
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/dungeon)
 "ka" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bonepile,
@@ -767,21 +774,6 @@
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
-"li" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/obj/item/clothing/shirt/robe/noc,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
-/obj/item/clothing/head/roguehood/nochood,
-/obj/item/clothing/gloves/leather/black,
-/obj/item/clothing/shoes/boots/leather,
-/obj/item/clothing/pants/trou/leather,
-/obj/item/clothing/shirt/undershirt/colored/uncolored,
-/obj/item/storage/belt/leather/cloth,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/wrists/nocwrappings,
-/obj/item/weapon/knife/dagger/steel/dirk,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon/lower)
 "lk" = (
 /obj/structure/fluff/statue/knight/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -795,13 +787,6 @@
 "ls" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon)
-"lv" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "ly" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -824,24 +809,6 @@
 "lJ" = (
 /obj/structure/ladder,
 /turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon/lower)
-"lK" = (
-/obj/item/clothing/head/helmet/heavy/necked/noc,
-/obj/item/clothing/cloak/stabard/templar/noc,
-/obj/item/clothing/armor/chainmail/hauberk,
-/obj/item/clothing/gloves/chain,
-/obj/item/clothing/pants/chainlegs,
-/obj/item/clothing/gloves/chain,
-/obj/item/clothing/shoes/boots/armor/light,
-/obj/item/weapon/shield/tower/metal,
-/obj/item/weapon/sword,
-/obj/item/storage/belt/leather/plaquesilver,
-/obj/item/clothing/ring/silver/noc,
-/obj/item/clothing/wrists/nocwrappings,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
 "lO" = (
 /mob/living/simple_animal/hostile/haunt,
@@ -982,11 +949,6 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
 /area/under/mountains/anvil/dungeon/lower)
-"ny" = (
-/obj/structure/table/church,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon/lower)
 "nM" = (
 /obj/structure/rack,
 /obj/item/clothing/head/helmet/leather/minershelm,
@@ -1087,16 +1049,6 @@
 /obj/item/weapon/shovel,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon/lower)
-"oH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/signage{
-	name = "Tips Please"
-	},
-/turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon)
 "oJ" = (
 /obj/structure/rack/shelf/big,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
@@ -1442,6 +1394,13 @@
 /obj/item/reagent_containers/glass/bottle/elfblue,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
+"sD" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/machinery/light/fueled/firebowl/standing,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "sE" = (
 /obj/structure/rack,
 /obj/item/coin/silver/pile,
@@ -1886,9 +1845,6 @@
 /obj/item/natural/bundle/cloth,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"zd" = (
-/turf/open/water/clean,
-/area/under/mountains/anvil/dungeon/lower)
 "zk" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/gold,
@@ -1924,16 +1880,6 @@
 /obj/structure/fluff/walldeco/skullspike,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon)
-"zQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/buysign{
-	name = "The Grave Tunes"
-	},
-/turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "zU" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2453,13 +2399,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"GP" = (
-/obj/structure/table/church{
-	dir = 1
-	},
-/obj/item/clothing/neck/psycross/gold,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon/lower)
 "GS" = (
 /obj/structure/rack,
 /obj/item/organ/tongue,
@@ -2498,6 +2437,24 @@
 /obj/structure/flora/grass/pyroclasticflowers,
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass,
+/area/under/mountains/anvil/dungeon/lower)
+"Hw" = (
+/obj/item/clothing/head/helmet/heavy/necked/noc,
+/obj/item/clothing/cloak/stabard/templar/noc,
+/obj/item/clothing/armor/chainmail/hauberk,
+/obj/item/clothing/gloves/chain,
+/obj/item/clothing/pants/chainlegs,
+/obj/item/clothing/gloves/chain,
+/obj/item/clothing/shoes/boots/armor/light,
+/obj/item/weapon/shield/tower/metal,
+/obj/item/weapon/sword,
+/obj/item/storage/belt/leather/plaquesilver,
+/obj/item/clothing/ring/silver/noc,
+/obj/item/clothing/wrists/nocwrappings,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/turf/open/floor/carpet/purple,
 /area/under/mountains/anvil/dungeon/lower)
 "HB" = (
 /obj/structure/spider/stickyweb,
@@ -2604,6 +2561,15 @@
 /obj/item/reagent_containers/glass/bottle/elfred,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
+"IB" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fluff/buysign{
+	name = "The Grave Tunes"
+	},
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "IG" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -2676,6 +2642,15 @@
 "Jd" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
+/area/under/mountains/anvil/dungeon)
+"Jm" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fluff/signage{
+	name = "Tips Please"
+	},
+/turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "Js" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -2820,6 +2795,12 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
+	},
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
+"KZ" = (
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
@@ -3288,6 +3269,13 @@
 /obj/item/weapon/knife/cleaver/combat,
 /turf/open/floor/carpet,
 /area/under/mountains/anvil/dungeon)
+"Rs" = (
+/obj/structure/table/church{
+	dir = 1
+	},
+/obj/item/clothing/neck/psycross/gold,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon/lower)
 "Ru" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -3307,6 +3295,9 @@
 "RQ" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon/lower)
+"RR" = (
+/turf/open/water/clean,
 /area/under/mountains/anvil/dungeon/lower)
 "Sa" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -3470,14 +3461,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
 /area/under/mountains/anvil/dungeon)
-"Ui" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/machinery/light/fueled/firebowl/standing,
+"Uf" = (
+/obj/structure/table/church,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
+/area/under/mountains/anvil/dungeon/lower)
 "Uo" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobble,
@@ -3725,6 +3713,21 @@
 /obj/item/reagent_containers/food/snacks/crow,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
+"Xr" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/item/clothing/shirt/robe/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/head/roguehood/nochood,
+/obj/item/clothing/gloves/leather/black,
+/obj/item/clothing/shoes/boots/leather,
+/obj/item/clothing/pants/trou/leather,
+/obj/item/clothing/shirt/undershirt/colored/uncolored,
+/obj/item/storage/belt/leather/cloth,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/wrists/nocwrappings,
+/obj/item/weapon/knife/dagger/steel/dirk,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon/lower)
 "XB" = (
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/cobble,
@@ -3881,14 +3884,6 @@
 	redstone_id = "minotaur_pit"
 	},
 /turf/closed/wall/mineral/stonebrick,
-/area/under/mountains/anvil/dungeon)
-"Zk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/item/bin,
-/turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "Zn" = (
 /obj/structure/rack,
@@ -4291,13 +4286,13 @@ Xc
 Xc
 Vz
 ul
-zd
-zd
-zd
-zd
-zd
-zd
-zd
+RR
+RR
+RR
+RR
+RR
+RR
+RR
 ul
 Vz
 Xc
@@ -4357,13 +4352,13 @@ Xc
 Xc
 Vz
 ot
-zd
+RR
 IK
 nr
 GG
 nr
 IK
-zd
+RR
 ot
 Vz
 Xc
@@ -4423,13 +4418,13 @@ Xc
 Xc
 Vz
 Io
-zd
+RR
 vD
 vD
 vD
 vD
 vD
-zd
+RR
 Io
 Vz
 Xc
@@ -4489,13 +4484,13 @@ Xc
 Xc
 Vz
 xC
-zd
+RR
 cT
 cT
 Qk
 cT
 cT
-zd
+RR
 xC
 Vz
 Xc
@@ -4555,13 +4550,13 @@ Xc
 Xc
 Vz
 kn
-zd
+RR
 cT
 cT
 UD
 cT
 cT
-zd
+RR
 kn
 Vz
 Xc
@@ -4621,13 +4616,13 @@ Xc
 Xc
 Vz
 Io
-zd
+RR
 Tj
 Tj
 lO
 Tj
 Tj
-zd
+RR
 Io
 Vz
 Xc
@@ -4687,13 +4682,13 @@ Xc
 Xc
 Vz
 Ht
-zd
+RR
 Tj
 Tj
 HG
 Tj
 Tj
-zd
+RR
 Ht
 Vz
 Xc
@@ -4753,13 +4748,13 @@ Xc
 Xc
 Vz
 ul
-zd
+RR
 Tj
 Tj
 HG
 Tj
 Tj
-zd
+RR
 ul
 Vz
 Xc
@@ -4817,17 +4812,17 @@ Xc
 Xc
 Xc
 Xc
-zd
-zd
-zd
+RR
+RR
+RR
 Tj
 wg
 HG
 wg
 Tj
-zd
-zd
-zd
+RR
+RR
+RR
 Xc
 Xc
 Xc
@@ -5789,7 +5784,7 @@ Xc
 ag
 XJ
 XJ
-zd
+RR
 XJ
 Xc
 "}
@@ -5854,8 +5849,8 @@ Xc
 Xc
 Xc
 Nc
-zd
-zd
+RR
+RR
 XJ
 Xc
 "}
@@ -5919,8 +5914,8 @@ Xc
 Xc
 Xc
 Oi
-zd
-zd
+RR
+RR
 Ja
 XJ
 Xc
@@ -6317,7 +6312,7 @@ Xc
 Xc
 Xc
 ag
-zd
+RR
 ag
 Xc
 "}
@@ -6383,8 +6378,8 @@ Xc
 Xc
 TG
 ag
-zd
-zd
+RR
+RR
 Xc
 "}
 (38,1,1) = {"
@@ -6406,7 +6401,7 @@ EU
 As
 uP
 Wq
-lK
+Hw
 Wq
 FM
 Ad
@@ -6448,9 +6443,9 @@ Xc
 Xc
 rQ
 ag
-zd
+RR
 ag
-zd
+RR
 Xc
 "}
 (39,1,1) = {"
@@ -6479,7 +6474,7 @@ XB
 rx
 XB
 rx
-ny
+Uf
 FM
 rx
 GY
@@ -6544,7 +6539,7 @@ qv
 Wq
 Wq
 rx
-li
+Xr
 II
 FM
 vb
@@ -6611,7 +6606,7 @@ qR
 Wq
 qR
 rx
-GP
+Rs
 FM
 Hm
 Wq
@@ -10825,7 +10820,7 @@ OQ
 BR
 BR
 qT
-Ui
+sD
 eC
 gW
 Jd
@@ -10891,7 +10886,7 @@ kZ
 xn
 Jd
 cd
-lv
+KZ
 SI
 pa
 hS
@@ -10957,7 +10952,7 @@ FQ
 iQ
 rR
 cd
-zQ
+IB
 iC
 sh
 pa
@@ -11023,7 +11018,7 @@ gj
 qZ
 Jd
 cd
-lv
+KZ
 eC
 Jd
 Ci
@@ -11089,7 +11084,7 @@ DP
 st
 eC
 cd
-lv
+KZ
 eC
 eC
 eC
@@ -11155,7 +11150,7 @@ kZ
 iQ
 vz
 cd
-oH
+Jm
 OC
 pa
 pa
@@ -11221,7 +11216,7 @@ Va
 nP
 Jd
 bQ
-Zk
+jZ
 iC
 sh
 sh
@@ -11287,7 +11282,7 @@ Tx
 me
 cV
 qo
-Ui
+sD
 Ci
 Ub
 Jd

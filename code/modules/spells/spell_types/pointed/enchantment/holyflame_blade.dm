@@ -10,7 +10,6 @@
 
 	charge_required = FALSE
 	spell_cost = 30
-	spell_flags = SPELL_RITUOS
 	enchantment = DIVINE_FIRE_ENCHANT
 	spell_type = SPELL_MIRACLE
 	associated_skill = /datum/skill/magic/holy

@@ -7,6 +7,7 @@
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
+	QDEL_LIST_ASSOC_VAL(chem_effects)
 
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
@@ -350,7 +351,7 @@
 		ExtinguishMob(TRUE)
 	return
 
-/mob/living/carbon/resist_restraints()
+/mob/living/carbon/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	var/type = 0
 	if(handcuffed)
@@ -366,10 +367,10 @@
 		if(type == 2)
 			changeNext_move(CLICK_CD_RANGE)
 			last_special = world.time + CLICK_CD_RANGE
-		cuff_resist(I)
+		cuff_resist(I, instant = instant)
 
 
-/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0)
+/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(I.item_flags & BEING_REMOVED)
 		to_chat(src, span_warning("I'm already trying to get out of \the [I]\s!"))
 		return
@@ -380,6 +381,10 @@
 		breakouttime = I.breakouttime
 	if(STASTR > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
 		cuff_break = INSTANT_CUFFBREAK
+
+	if(instant)
+		cuff_break = INSTANT_CUFFBREAK
+
 	if(!cuff_break)
 		to_chat(src, span_notice("I try to get out of \the [I]\s..."))
 		if(do_after(src, breakouttime, timed_action_flags = (IGNORE_HELD_ITEM)))
@@ -1345,7 +1350,7 @@
 	var/speed_factor = 1 / (1 + exponential)
 	var/precentage =  CLAMP(speed_factor, 0, 1)
 
-	add_movespeed_modifier("encumbrance", override = TRUE, multiplicative_slowdown = 5 * precentage)
+	add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 5 * precentage)
 
 /// skeletonize all limbs of a carbon mob, pass TRUE as an argument if it's lethal, FALSE if it's not.
 /mob/living/carbon/proc/skeletonize(lethal = TRUE)
@@ -1355,17 +1360,12 @@
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
-	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	var/eyecolor = eyes.eye_color
-	var/eyesecond = eyes.second_color
-	if(eyes)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	eyes = new /obj/item/organ/eyes/night_vision/zombie
-	eyes.eye_color = eyecolor
-	eyes.second_color = eyesecond
-	eyes.Insert(src)
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()

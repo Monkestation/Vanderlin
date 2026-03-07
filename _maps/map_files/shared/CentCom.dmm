@@ -581,6 +581,13 @@
 /obj/structure/chair/bench/coucha/r,
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
+"bS" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/structure/fluff/walldeco/mona{
+	pixel_x = -14
+	},
+/turf/open/floor/carpet,
+/area/indoors/vampire_manor)
 "bT" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/natural/bundle/cloth{
@@ -1196,19 +1203,6 @@
 "eh" = (
 /turf/closed/wall/mineral/decostone/moss/long,
 /area/indoors/lich)
-"en" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/powder/salt,
-/obj/item/weapon/knife/copper,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/turf/open/floor/twig,
-/area/under/cavelava/acid)
 "ep" = (
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/craftstone,
@@ -1812,22 +1806,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
 /area/indoors)
-"iw" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9;
-	pixel_x = 26;
-	pixel_y = 2
-	},
-/obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/floor/naturalstone,
-/area/outdoors/bog/inhumen_camp)
 "ix" = (
 /obj/structure/bed/wool,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -2299,29 +2277,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"lO" = (
-/obj/structure/fluff/railing/border{
-	dir = 4;
-	pixel_x = -24
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
-	},
-/obj/effect/decal/cobbleedge/alt,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
-"lS" = (
-/obj/structure/kneestingers,
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "lT" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/church,
@@ -2783,22 +2738,6 @@
 /obj/structure/flora/tree/wise,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"oN" = (
-/obj/machinery/light/fueled/wallfire/candle/weak/r,
-/turf/open/water/clean,
-/area/indoors/vampire_manor)
-"oO" = (
-/obj/item/clothing/neck/mercator,
-/obj/item/clothing/neck/shalal,
-/obj/item/clothing/neck/psycross/silver/divine/astrata,
-/obj/item/clothing/neck/psycross/silver/divine/dendor,
-/obj/item/clothing/neck/psycross/silver/divine/eora,
-/obj/item/clothing/neck/psycross/gold,
-/obj/item/clothing/neck/psycross/silver/divine/necra,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/turf/open/floor/wood,
-/area/indoors)
 "oR" = (
 /obj/item/clothing/head/menacing,
 /obj/structure/mannequin/male,
@@ -2930,6 +2869,17 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"pY" = (
+/obj/effect/decal/borderfall{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/effect/decal/cobbleedge/alt,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "qb" = (
 /obj/structure/rack,
 /obj/item/weapon/sword/iron,
@@ -3060,17 +3010,6 @@
 	},
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
-"qM" = (
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/obj/machinery/light/fueled/wallfire/candle/skull/l,
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "qO" = (
 /turf/open/floor/cobble,
 /area/indoors)
@@ -3115,16 +3054,6 @@
 /obj/item/book/tales1,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"qY" = (
-/obj/structure/fluff/railing/border{
-	pixel_y = 24
-	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
-	},
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/inhumen_camp)
 "qZ" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -3146,6 +3075,18 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
+"rf" = (
+/obj/item/clothing/neck/mercator,
+/obj/item/clothing/neck/shalal,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/gold,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/turf/open/floor/wood,
+/area/indoors)
 "ri" = (
 /obj/structure/fluff/walldeco/painting/skull{
 	pixel_y = 32
@@ -3169,6 +3110,10 @@
 /obj/item/rope/chain,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
+"rm" = (
+/obj/structure/bars,
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "ro" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -3248,9 +3193,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"rT" = (
-/turf/open/water/clean,
-/area/indoors/vampire_manor)
 "rY" = (
 /obj/item/weapon/mace/cudgel,
 /obj/structure/table/wood{
@@ -3842,6 +3784,19 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"vG" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/powder/salt,
+/obj/item/weapon/knife/copper,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/turf/open/floor/twig,
+/area/under/cavelava/acid)
 "vH" = (
 /obj/structure/window/openclose,
 /obj/structure/rotation_piece,
@@ -3982,18 +3937,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/wood,
 /area/indoors)
-"wl" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8;
-	pixel_x = 24
-	},
-/obj/effect/decal/cobbleedge/alt,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "ws" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/dirt,
@@ -4408,6 +4351,17 @@
 /obj/item/storage/keyring,
 /turf/open/floor/carpet,
 /area/indoors)
+"zI" = (
+/obj/structure/fluff/railing/border{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/effect/decal/borderfall{
+	dir = 8
+	},
+/obj/effect/decal/cobbleedge/alt,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "zJ" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/cloak/raincloak/colored/green,
@@ -5227,6 +5181,9 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic,
 /area/overlord_lair)
+"Ft" = (
+/turf/open/water/clean,
+/area/outdoors/woods_safe)
 "Fx" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/shirt/robe/dendor,
@@ -5386,17 +5343,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
-"GL" = (
-/obj/structure/mannequin/male,
-/obj/structure/fluff/walldeco/maidendrape,
-/obj/item/clothing/gloves/angle/grenzel,
-/obj/item/clothing/head/helmet/skullcap/grenzelhoft,
-/obj/item/clothing/pants/grenzelpants,
-/obj/item/clothing/shirt/grenzelhoft,
-/obj/item/clothing/shoes/rare/grenzelhoft,
-/obj/item/clothing/neck/psycross/gold,
-/turf/open/floor/herringbone,
-/area/indoors/vampire_manor)
 "GM" = (
 /obj/structure/fluff/globe,
 /turf/open/floor/herringbone,
@@ -5437,6 +5383,21 @@
 "GZ" = (
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
+"Hb" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9;
+	pixel_x = 26;
+	pixel_y = 2
+	},
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/floor/naturalstone,
 /area/outdoors/bog/inhumen_camp)
 "Hf" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -6013,6 +5974,9 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/bog/inhumen_camp)
+"KF" = (
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "KG" = (
 /obj/structure/door/window,
 /turf/open/floor/cobble,
@@ -6077,9 +6041,6 @@
 	aportalloc = "bandit"
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
-"Li" = (
-/turf/open/water/clean,
 /area/outdoors/woods_safe)
 "Lj" = (
 /obj/structure/flora/grass,
@@ -6177,10 +6138,6 @@
 /obj/item/gem/yellow,
 /turf/open/floor/carpet,
 /area/indoors)
-"LM" = (
-/obj/structure/bars,
-/turf/open/water/clean,
-/area/indoors/vampire_manor)
 "LP" = (
 /obj/structure/door/weak/bolt{
 	dir = 1
@@ -6233,6 +6190,17 @@
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
+"Mk" = (
+/obj/structure/mannequin/male,
+/obj/structure/fluff/walldeco/maidendrape,
+/obj/item/clothing/gloves/angle/grenzel,
+/obj/item/clothing/head/helmet/skullcap/grenzelhoft,
+/obj/item/clothing/pants/grenzelpants,
+/obj/item/clothing/shirt/grenzelhoft,
+/obj/item/clothing/shoes/rare/grenzelhoft,
+/obj/item/clothing/neck/psycross/gold,
+/turf/open/floor/herringbone,
+/area/indoors/vampire_manor)
 "Mm" = (
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/tile,
@@ -6368,6 +6336,16 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"Nn" = (
+/obj/structure/kneestingers,
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/turf/open/water/swamp/deep,
+/area/outdoors/bog/inhumen_camp)
 "No" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -6614,6 +6592,10 @@
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"OU" = (
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "OX" = (
 /obj/item/weapon/sword/long/exe,
 /obj/item/weapon/sword/long/exe,
@@ -6686,6 +6668,15 @@
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
+/area/outdoors/bog/inhumen_camp)
+"PE" = (
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
 "PI" = (
 /obj/structure/mannequin/male,
@@ -6868,13 +6859,6 @@
 	},
 /turf/open/floor/church,
 /area/indoors/lich)
-"QM" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/structure/fluff/walldeco/mona{
-	pixel_x = -14
-	},
-/turf/open/floor/carpet,
-/area/indoors/vampire_manor)
 "QN" = (
 /obj/structure/door/iron/bars{
 	lockid = "banditcamp"
@@ -7418,6 +7402,16 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/carpet/stellar,
 /area/indoors/lich)
+"TG" = (
+/obj/structure/fluff/railing/border{
+	pixel_y = 24
+	},
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle/skull/l,
+/turf/open/water/swamp/deep,
+/area/outdoors/bog/inhumen_camp)
 "TH" = (
 /obj/structure/rack,
 /obj/item/weapon/mace,
@@ -12150,8 +12144,8 @@ bz
 so
 xt
 Te
-Li
-Li
+Ft
+Ft
 Te
 BM
 so
@@ -12279,10 +12273,10 @@ Sy
 bz
 so
 xt
-Li
-Li
-Li
-Li
+Ft
+Ft
+Ft
+Ft
 Te
 so
 so
@@ -12409,9 +12403,9 @@ Sy
 so
 so
 Te
-Li
-Li
-Li
+Ft
+Ft
+Ft
 xt
 bz
 so
@@ -12540,7 +12534,7 @@ so
 so
 bz
 Te
-Li
+Ft
 xt
 xt
 so
@@ -13120,7 +13114,7 @@ ag
 aw
 sP
 iu
-oO
+rf
 ba
 ba
 ba
@@ -14217,7 +14211,7 @@ bP
 TH
 yE
 yE
-GL
+Mk
 Zl
 Yk
 NB
@@ -16708,7 +16702,7 @@ dH
 dH
 Qy
 Qy
-Li
+Ft
 Te
 bB
 Te
@@ -16835,11 +16829,11 @@ Tf
 dR
 yE
 bB
-Li
-Li
+Ft
+Ft
 Qy
-Li
-Li
+Ft
+Ft
 Te
 Te
 dH
@@ -16964,13 +16958,13 @@ zm
 cN
 dR
 yE
-Li
-Li
-Li
+Ft
+Ft
+Ft
 Qy
-Li
-Li
-Li
+Ft
+Ft
+Ft
 Te
 dH
 dI
@@ -17076,7 +17070,7 @@ Iw
 Iw
 Iw
 yE
-QM
+bS
 xI
 ME
 yE
@@ -17094,13 +17088,13 @@ cN
 cN
 yE
 yE
-Li
-Li
-Li
+Ft
+Ft
+Ft
 pf
-Li
-Li
-Li
+Ft
+Ft
+Ft
 Te
 dH
 dI
@@ -17224,13 +17218,13 @@ fS
 yE
 yE
 Te
-Li
-Li
+Ft
+Ft
 Av
 JF
 Av
-Li
-Li
+Ft
+Ft
 Te
 Te
 dI
@@ -17354,13 +17348,13 @@ cZ
 cZ
 yE
 Te
-Li
-Li
-Li
-Li
-Li
-Li
-Li
+Ft
+Ft
+Ft
+Ft
+Ft
+Ft
+Ft
 Te
 dH
 dI
@@ -17471,7 +17465,7 @@ Iw
 Iw
 Iw
 yE
-rT
+KF
 rO
 rw
 Ys
@@ -17485,12 +17479,12 @@ tB
 yE
 Zz
 bB
-Li
-Li
-Li
-Li
-Li
-Li
+Ft
+Ft
+Ft
+Ft
+Ft
+Ft
 Te
 Te
 dI
@@ -17600,8 +17594,8 @@ Iw
 Iw
 Iw
 Iw
-LM
-rT
+rm
+KF
 dx
 qj
 rw
@@ -17616,10 +17610,10 @@ yE
 Zz
 Zz
 Te
-Li
-Li
-Li
-Li
+Ft
+Ft
+Ft
+Ft
 Te
 Zz
 Zz
@@ -17731,8 +17725,8 @@ Iw
 Iw
 Iw
 yE
-rT
-oN
+KF
+OU
 dX
 cZ
 Su
@@ -18108,7 +18102,7 @@ vK
 fJ
 fJ
 NW
-en
+vG
 OB
 NW
 Bm
@@ -19576,7 +19570,7 @@ sA
 KH
 np
 SD
-wl
+pY
 Zt
 mX
 mX
@@ -19836,7 +19830,7 @@ np
 np
 AP
 mR
-lO
+zI
 mX
 Ri
 Aj
@@ -20737,7 +20731,7 @@ lB
 WZ
 yn
 WZ
-qM
+TG
 ZP
 ZP
 gY
@@ -20867,7 +20861,7 @@ Sg
 WZ
 yn
 WZ
-qY
+PE
 Yo
 JY
 ZP
@@ -20997,7 +20991,7 @@ Aq
 WZ
 yn
 WZ
-qY
+PE
 rb
 ZP
 tg
@@ -21127,7 +21121,7 @@ Aq
 WZ
 yn
 WZ
-lS
+Nn
 ZP
 GY
 ZP
@@ -21517,7 +21511,7 @@ QK
 ZX
 Vy
 ZX
-iw
+Hb
 VB
 VB
 VB

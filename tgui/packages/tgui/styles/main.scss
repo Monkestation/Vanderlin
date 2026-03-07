@@ -30,6 +30,8 @@
 @include meta.load-css('./layouts/TitleBar.scss');
 @include meta.load-css('./layouts/Window.scss');
 
+@include meta.load-css('~highlight.js/scss/a11y-dark.scss');
+
 // Themes
 @include meta.load-css('./themes/grim.scss');
 
