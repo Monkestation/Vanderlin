@@ -284,7 +284,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "afu" = (
 /obj/structure/flora/kelp,
 /obj/structure/flora/grass/water,
@@ -1040,7 +1040,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ayc" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile/two{
@@ -1690,7 +1690,7 @@
 	dir = 10
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "aNm" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -1712,7 +1712,7 @@
 	dir = 5
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "aNA" = (
 /obj/structure/flora/shells,
 /obj/structure/fluff/walldeco/church/line{
@@ -1760,7 +1760,7 @@
 	},
 /obj/structure/chair/wood/alt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "aOH" = (
 /turf/open/water/river/blood{
 	dir = 8
@@ -1783,7 +1783,7 @@
 "aPD" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "aPF" = (
 /turf/open/water/blood,
 /area/under/cavewet)
@@ -2262,7 +2262,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bbC" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -2284,7 +2284,7 @@
 /obj/item/ore/coal,
 /obj/item/ore/coal,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bcV" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile{
@@ -2300,7 +2300,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bea" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb/solo,
@@ -2468,7 +2468,7 @@
 	},
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bqT" = (
 /obj/structure/fermentation_keg{
 	pixel_x = 5;
@@ -2687,7 +2687,7 @@
 "bBH" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bCH" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -2749,7 +2749,7 @@
 	pixel_x = -5
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bEP" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -3021,7 +3021,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/landmark/quest_spawner,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "bVf" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -3207,7 +3207,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/end,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cju" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
@@ -3291,7 +3291,7 @@
 	pixel_x = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cps" = (
 /obj/structure/fluff/steamvent,
 /obj/structure/fake_machine/camera/left,
@@ -3356,7 +3356,7 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cuu" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -3573,13 +3573,13 @@
 /area/indoors/shelter/bog)
 "cDX" = (
 /turf/closed/wall/mineral/wooddark,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cFU" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cGJ" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/concrete,
@@ -3651,7 +3651,7 @@
 /area/outdoors/bog)
 "cKS" = (
 /turf/open/floor/rooftop/green,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cMd" = (
 /obj/structure/inert_bonepile,
 /turf/open/floor/abyss_tile/two{
@@ -3692,7 +3692,7 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cOQ" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 4
@@ -3725,7 +3725,7 @@
 /turf/open/floor/rooftop/green{
 	dir = 1
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cPX" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -3742,7 +3742,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "cQX" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/carpet/royalblack,
@@ -3996,7 +3996,7 @@
 	},
 /obj/item/candle/floorcandle0/lit,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "dgi" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/torchholder{
@@ -4060,7 +4060,7 @@
 /area/under/cavewet)
 "dhR" = (
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "div" = (
 /obj/structure/chair/bench/church/smallbench{
 	dir = 8
@@ -4428,7 +4428,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "dCA" = (
 /obj/structure/rack,
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow{
@@ -5097,7 +5097,7 @@
 "eke" = (
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ekK" = (
 /obj/structure/flora/shells,
 /turf/open/floor/abyss_sand/path,
@@ -5341,7 +5341,7 @@
 	pixel_y = 26
 	},
 /turf/open/floor/cobble,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "eGu" = (
 /obj/structure/trap/wall_projectile{
 	invisibility = 1
@@ -5399,7 +5399,7 @@
 /turf/closed/wall/mineral/decostone/end{
 	dir = 1
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "eKx" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/abyss_tile/three{
@@ -5509,7 +5509,7 @@
 	dir = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "eOR" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 10
@@ -5528,7 +5528,7 @@
 	dir = 10
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "eQc" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -5630,7 +5630,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "eYl" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -5680,7 +5680,7 @@
 /area/indoors/wilderness/magic)
 "faJ" = (
 /turf/closed/mineral/bedrock,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fbh" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -5797,7 +5797,7 @@
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fgf" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
@@ -5817,7 +5817,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fgO" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
@@ -5885,7 +5885,7 @@
 	},
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fjH" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/wood,
@@ -5918,7 +5918,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "flC" = (
 /obj/structure/flora/ocean_plants,
 /obj/effect/waterfall,
@@ -5941,7 +5941,7 @@
 "fmV" = (
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fnb" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile{
@@ -6049,7 +6049,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fwb" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/chainmail/iron/orc,
@@ -6066,7 +6066,7 @@
 	dir = 6
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fww" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/natural/rock,
@@ -6262,7 +6262,7 @@
 "fFz" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fGo" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -6361,7 +6361,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/moss,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fMA" = (
 /obj/structure/table/wood/fancy/purple,
 /turf/open/floor/carpet/royalblack,
@@ -6370,7 +6370,7 @@
 /turf/open/floor/rooftop{
 	dir = 1
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fNM" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -6409,7 +6409,7 @@
 	},
 /obj/item/rope,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fON" = (
 /obj/structure/table/wood/fancy,
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
@@ -6589,7 +6589,7 @@
 /area/outdoors/bog)
 "fYv" = (
 /turf/open/floor/rooftop,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "fYA" = (
 /obj/structure/table/wood/fancy/cyan,
 /obj/structure/carpet/blue,
@@ -6920,7 +6920,7 @@
 "gly" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "gma" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/swamp,
@@ -7099,7 +7099,7 @@
 /obj/item/broom,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "gzy" = (
 /obj/item/natural/stoneblock{
 	pixel_x = 9;
@@ -7132,7 +7132,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "gCd" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -7197,7 +7197,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "gFw" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -7304,7 +7304,7 @@
 "gLO" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "gLZ" = (
 /obj/structure/flora/grass/herb/matricaria,
 /turf/open/floor/grass,
@@ -7563,7 +7563,7 @@
 	pixel_y = 13
 	},
 /turf/open/floor/church/green,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hbS" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile/three{
@@ -7573,7 +7573,7 @@
 "hei" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "heS" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -7732,7 +7732,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hmA" = (
 /obj/structure/stairs{
 	dir = 1
@@ -7753,7 +7753,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hnS" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/debris/stone{
@@ -7853,7 +7853,7 @@
 	dir = 5
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hvO" = (
 /obj/structure/bars,
 /turf/open/floor/abyss_tile/two{
@@ -7940,7 +7940,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hBZ" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -8023,7 +8023,7 @@
 /obj/effect/decal/cleanable/dirt,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hEN" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -8056,7 +8056,7 @@
 /area/outdoors/bog)
 "hGQ" = (
 /turf/closed/mineral/bedrock/cold,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hHi" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -8089,7 +8089,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hKf" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -8278,7 +8278,7 @@
 "hWf" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hWw" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -8301,7 +8301,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "hYf" = (
 /obj/item/paper,
 /turf/open/floor/abyss_tile/three{
@@ -8359,7 +8359,7 @@
 "iew" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/mineral/wooddark,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ieH" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /obj/effect/decal/cleanable/dirt,
@@ -8389,7 +8389,7 @@
 	pixel_y = -1
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ifL" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -8575,7 +8575,7 @@
 "isj" = (
 /obj/machinery/anvil/crafted,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "isD" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8816,7 +8816,7 @@
 	dir = 6
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iCY" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile/three{
@@ -8865,7 +8865,7 @@
 /area/under/cavewet)
 "iFK" = (
 /turf/closed/sea_fog,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iFU" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -8876,7 +8876,7 @@
 	},
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iGn" = (
 /obj/effect/decal/shadow_floor,
 /turf/open/floor/concrete,
@@ -9092,7 +9092,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iQM" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog)
@@ -9178,7 +9178,7 @@
 "iTy" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iTX" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -9241,7 +9241,7 @@
 	},
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "iWL" = (
 /turf/open/floor/ruinedwood,
 /area/outdoors/bog)
@@ -9516,7 +9516,7 @@
 	dir = 8
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jnl" = (
 /obj/structure/fluff/nest,
 /obj/item/clothing/neck/bellcollar,
@@ -9691,7 +9691,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/moss/long,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jvM" = (
 /obj/structure/flora/tree/underworld{
 	color = "#7D9BAE";
@@ -9741,7 +9741,7 @@
 	dir = 6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jyA" = (
 /obj/structure/bookcase{
 	color = "#7D9BAE"
@@ -10024,7 +10024,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jOX" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -10069,7 +10069,7 @@
 	dir = 1
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jUO" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -10138,7 +10138,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "jYy" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/abyss_tile{
@@ -10201,7 +10201,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kah" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	redstone_id = "bogmaus"
@@ -10280,7 +10280,7 @@
 "kdH" = (
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kdO" = (
 /obj/structure/closet/dirthole/grave,
 /obj/structure/gravemarker,
@@ -10444,7 +10444,7 @@
 "kmK" = (
 /obj/structure/stairs/stone,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "knc" = (
 /obj/structure/fluff/nest,
 /obj/item/reagent_containers/food/snacks/cooked/egg{
@@ -10503,7 +10503,7 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kpA" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -10612,13 +10612,13 @@
 "kts" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ktH" = (
 /obj/item/natural/stoneblock{
 	pixel_y = 16
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kuH" = (
 /obj/structure/bars/pipe{
 	dir = 8
@@ -10713,7 +10713,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kzn" = (
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/ruinedwood/darker,
@@ -10839,7 +10839,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kEQ" = (
 /obj/effect/spawner/map_spawner/loot/potion_stats,
 /turf/open/floor/abyss_tile{
@@ -10914,7 +10914,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kIP" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/twig,
@@ -10975,7 +10975,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kMe" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -11050,7 +11050,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kRy" = (
 /mob/living/simple_animal/hostile/retaliate/snapper{
 	faction = list("Undead")
@@ -11115,7 +11115,7 @@
 /obj/structure/ladder,
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "kVR" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
@@ -11212,7 +11212,7 @@
 /obj/effect/decal/remains/saiga,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lbo" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/abyss_tile/three{
@@ -11365,7 +11365,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lmD" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/abyss_tile/two{
@@ -11470,7 +11470,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lrm" = (
 /obj/item/reagent_containers/powder/salt{
 	pixel_x = 2;
@@ -11599,7 +11599,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lxy" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -11630,7 +11630,7 @@
 /obj/structure/fluff/railing/wood,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lzQ" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -11837,7 +11837,7 @@
 /area/indoors/ship)
 "lPo" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lPT" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/effect/decal/cleanable/blood,
@@ -11958,7 +11958,7 @@
 /obj/structure/fluff/railing/wood,
 /obj/item/chair/stool,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "lXW" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -12062,7 +12062,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mcB" = (
 /obj/structure/flora/rock/water,
 /turf/open/water/ocean,
@@ -12163,7 +12163,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mkF" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/metal/barograte,
@@ -12224,7 +12224,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mnT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/wicker,
@@ -12381,7 +12381,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mAd" = (
 /mob/living/simple_animal/hostile/retaliate/troll/quiet,
 /turf/open/floor/twig,
@@ -12493,7 +12493,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mHW" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 8
@@ -12505,7 +12505,7 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mIy" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -12581,7 +12581,7 @@
 "mRx" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mRD" = (
 /obj/item/weapon/polearm/spear/hoplite/abyssal,
 /obj/item/clothing/cloak/stabard/templar/abyssor,
@@ -12609,7 +12609,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "mTs" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/clothing/armor/plate/blkknight/death,
@@ -12853,7 +12853,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nij" = (
 /mob/living/simple_animal/hostile/deepone/arm{
 	faction = list("Hostile");
@@ -12881,7 +12881,7 @@
 	},
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nke" = (
 /obj/item/rope,
 /obj/effect/decal/cleanable/dirt,
@@ -12972,10 +12972,10 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nqY" = (
 /turf/closed/wall/mineral/tent,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nrj" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line,
@@ -13047,7 +13047,7 @@
 "nvS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nwe" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/turned,
@@ -13157,7 +13157,7 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nDZ" = (
 /obj/structure/bookcase{
 	color = "#7D9BAE"
@@ -13220,7 +13220,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nFz" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -1
@@ -13257,7 +13257,7 @@
 	dir = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nHH" = (
 /obj/item/reagent_containers/powder/salt{
 	pixel_x = 10;
@@ -13317,7 +13317,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nMh" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water/reeds,
@@ -13411,7 +13411,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nQj" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -13595,7 +13595,7 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "nZa" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -13626,7 +13626,7 @@
 "obe" = (
 /obj/effect/landmark/quest_spawner,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "obh" = (
 /obj/structure/table/wood/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -13685,7 +13685,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "odn" = (
 /obj/structure/fluff/psycross/psycrucifix/silver,
 /turf/open/floor/abyss_tile/three{
@@ -13771,7 +13771,7 @@
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "okx" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -13871,7 +13871,7 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oot" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -14071,7 +14071,7 @@
 /area/under/cavewet)
 "oyx" = (
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oyM" = (
 /obj/fae_trickery_trap/disorient,
 /turf/open/floor/abyss_tile/three{
@@ -14260,7 +14260,7 @@
 "oJN" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oKA" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/statue/gold/fish,
@@ -14278,10 +14278,10 @@
 "oLc" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oLu" = (
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oLH" = (
 /obj/structure/lever/hidden{
 	redstone_id = "bog5"
@@ -14366,17 +14366,17 @@
 	pixel_x = 7
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oRu" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oSz" = (
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oSR" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	pixel_x = -8;
@@ -14410,7 +14410,7 @@
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oYA" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = -32;
@@ -14426,7 +14426,7 @@
 	dir = 1
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "oZi" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -14586,7 +14586,7 @@
 /area/indoors/town/clocktower)
 "pia" = (
 /turf/closed/wall/mineral/decostone/moss,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pio" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -14639,7 +14639,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pmP" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/ruinedwood/turned,
@@ -14692,7 +14692,7 @@
 "pqg" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pql" = (
 /obj/structure/chair/bench/couch/right/alt{
 	dir = 4
@@ -14703,7 +14703,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "prg" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -14874,7 +14874,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pBd" = (
 /obj/structure/inert_bonepile,
 /turf/open/floor/dirt,
@@ -14971,7 +14971,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pKN" = (
 /obj/structure/bridge,
 /turf/open/water/river/dirt{
@@ -14992,13 +14992,13 @@
 "pLO" = (
 /obj/structure/fluff/railing/stonehedge,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pMf" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pMC" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/railing/tall/palisade{
@@ -15006,7 +15006,7 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pNh" = (
 /obj/structure/table/wood/bar,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -15138,7 +15138,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "pXy" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile/three{
@@ -15318,7 +15318,7 @@
 /area/under/cavewet)
 "qhN" = (
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qiP" = (
 /obj/structure/roguetent,
 /turf/open/floor/twig,
@@ -15442,7 +15442,7 @@
 "qrv" = (
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qrx" = (
 /turf/open/floor/tile/kitchen,
 /area/under/cavewet)
@@ -15584,7 +15584,7 @@
 "qyI" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qyO" = (
 /obj/item/rope/chain,
 /turf/open/floor/abyss_tile/three{
@@ -15633,7 +15633,7 @@
 /obj/structure/chair/stool,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qCj" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -15672,13 +15672,13 @@
 /area/under/tomb/indoors/magic)
 "qIw" = (
 /turf/closed/wall/mineral/wooddark/end,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qIT" = (
 /obj/structure/bridge_stakes{
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qJl" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
@@ -15719,7 +15719,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qNb" = (
 /obj/item/plate/silver,
 /turf/open/floor/abyss_tile{
@@ -15838,7 +15838,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "qSY" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -15975,7 +15975,7 @@
 "raq" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "raw" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -16005,7 +16005,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rbz" = (
 /obj/structure/carpet/blue,
 /obj/structure/closet/crate/chest/neu_fancy,
@@ -16041,7 +16041,7 @@
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rcD" = (
 /turf/closed/sea_fog,
 /area/indoors/town/clocktower)
@@ -16127,7 +16127,7 @@
 	dir = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rhf" = (
 /obj/effect/decal/remains/human,
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -16204,7 +16204,7 @@
 	pixel_y = -1
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rjQ" = (
 /obj/structure/flora/rock,
 /turf/open/floor/dirt,
@@ -16215,7 +16215,7 @@
 	pixel_x = 15
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rks" = (
 /obj/structure/flora/shells,
 /turf/open/floor/dirt,
@@ -16245,13 +16245,13 @@
 "rmr" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rmU" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 9
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rnj" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/abyss_tile{
@@ -16301,7 +16301,7 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rqS" = (
 /obj/machinery/light/fueled/oven/west,
 /turf/open/floor/tile,
@@ -16312,7 +16312,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rqY" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -16348,7 +16348,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rsm" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -16494,7 +16494,7 @@
 	},
 /obj/structure/fluff/railing/stonehedge,
 /turf/open/floor/blocks/newstone/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rzX" = (
 /obj/structure/table/wood/fancy/cyan,
 /obj/item/clothing/armor/basiceast/crafteast,
@@ -16590,7 +16590,7 @@
 "rEf" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rEt" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -16619,7 +16619,7 @@
 /area/indoors/shelter/bog)
 "rFI" = (
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rGe" = (
 /turf/closed/wall/mineral/wooddark/end,
 /area/indoors/shelter/bog)
@@ -16804,7 +16804,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/natural/stoneblock,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rTp" = (
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog)
@@ -16814,7 +16814,7 @@
 /area/outdoors/bog)
 "rUe" = (
 /turf/open/floor/cobble,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "rVm" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/red,
@@ -17011,7 +17011,7 @@
 	},
 /obj/item/weapon/knife/villager,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sgC" = (
 /obj/item/natural/rock,
 /turf/open/floor/cobblerock/alt,
@@ -17094,7 +17094,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "smV" = (
 /obj/structure/stairs{
 	dir = 8
@@ -17240,7 +17240,7 @@
 "sva" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "svo" = (
 /obj/structure/fluff/psycross/psycrucifix/silver,
 /turf/open/floor/abyss_tile{
@@ -17440,7 +17440,7 @@
 "sHW" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sJd" = (
 /obj/structure/stairs{
 	dir = 1
@@ -17472,7 +17472,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sKv" = (
 /obj/structure/stairs/stone/church{
 	dir = 1;
@@ -17568,7 +17568,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sPq" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -17691,7 +17691,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sYi" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/ruinedwood/turned,
@@ -17722,7 +17722,7 @@
 /obj/structure/fluff/railing/wood,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "sZR" = (
 /mob/living/simple_animal/hostile/deepone/spit{
 	faction = list("Hostile");
@@ -17755,7 +17755,7 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tbX" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/kelp,
@@ -17807,7 +17807,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tep" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
@@ -17871,7 +17871,7 @@
 "tlR" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tmA" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -18025,7 +18025,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "txq" = (
 /obj/structure/trap/shock{
 	invisibility = 1
@@ -18080,7 +18080,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tBa" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/metal/alt,
@@ -18103,7 +18103,7 @@
 "tCm" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tCA" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -18115,7 +18115,7 @@
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tDk" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -18182,7 +18182,7 @@
 /obj/effect/decal/cleanable/debris/wood,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tIz" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -18344,7 +18344,7 @@
 "tTW" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tUi" = (
 /obj/structure/table/wood/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -18472,7 +18472,7 @@
 /area/indoors/ship)
 "tZf" = (
 /turf/open/floor/churchrough/green,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "tZF" = (
 /obj/structure/grindwheel,
 /obj/effect/decal/cleanable/dirt,
@@ -18503,12 +18503,12 @@
 	},
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ucQ" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "udT" = (
 /obj/structure/stairs/stone/church{
 	dir = 8;
@@ -18647,7 +18647,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "ukr" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 10
@@ -18839,7 +18839,7 @@
 	pixel_x = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "utq" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/polearm/spear/assegai/steel,
@@ -18933,7 +18933,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uAz" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -18997,7 +18997,7 @@
 	dir = 1
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uEG" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -19011,7 +19011,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uFg" = (
 /obj/structure/fluff/walldeco/vinez/red{
 	icon = 'icons/turf/flesh_tile.dmi';
@@ -19080,7 +19080,7 @@
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uKI" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/reagent_containers/food/snacks/meat/steak,
@@ -19143,7 +19143,7 @@
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uNb" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
@@ -19189,7 +19189,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uPG" = (
 /obj/structure/bookcase{
 	color = "#7D9BAE"
@@ -19276,7 +19276,7 @@
 	},
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "uWM" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -19524,7 +19524,7 @@
 "vju" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vjX" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/water/swamp,
@@ -19631,7 +19631,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/moss,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vqO" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -19644,7 +19644,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vqW" = (
 /obj/structure/flora/shells,
 /turf/open/floor/sand,
@@ -19746,7 +19746,7 @@
 	dir = 4
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vwT" = (
 /obj/item/reagent_containers/food/snacks/fish/carp,
 /turf/open/floor/abyss_tile{
@@ -19819,12 +19819,12 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vEK" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vFL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/natural/stoneblock{
@@ -19950,7 +19950,7 @@
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "vMF" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/walldeco/vinez/red,
@@ -20300,7 +20300,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wfl" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
@@ -20379,7 +20379,7 @@
 "wkA" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wkO" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
@@ -20460,7 +20460,7 @@
 	dir = 6
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wpg" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -20469,14 +20469,14 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/paving,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wpo" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
 	},
 /obj/structure/fluff/railing/stonehedge,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wqA" = (
 /mob/living/simple_animal/hostile/orc/ranged,
 /turf/open/floor/dirt/road,
@@ -20536,7 +20536,7 @@
 "wuY" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wvo" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/dirt,
@@ -20572,7 +20572,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wBs" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -20727,7 +20727,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wJR" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -20761,7 +20761,7 @@
 	pixel_x = -4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wMv" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/sand,
@@ -20807,7 +20807,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/item/natural/wood/plank,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wQx" = (
 /obj/item/reagent_containers/glass/cup/wooden,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -20889,7 +20889,7 @@
 /obj/structure/fluff/railing/border,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wUm" = (
 /obj/item/natural/stoneblock,
 /obj/structure/fluff/walldeco/vinez/red{
@@ -20915,7 +20915,7 @@
 "wWi" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wWG" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -20953,7 +20953,7 @@
 "wXF" = (
 /obj/structure/bridge,
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "wYs" = (
 /obj/structure/bars,
 /turf/open/water/river{
@@ -20985,7 +20985,7 @@
 /area/outdoors/bog)
 "xau" = (
 /turf/closed/wall/mineral/craftstone,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xax" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/craftstone,
@@ -21203,7 +21203,7 @@
 	pixel_x = -4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xse" = (
 /obj/structure/trap/shock{
 	invisibility = 1
@@ -21427,7 +21427,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/concrete,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xDe" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -21566,7 +21566,7 @@
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/mince/fish = 5, /obj/item/alch/viscera = 2)
 	},
 /turf/closed/sea_fog,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xLE" = (
 /obj/structure/closet/crate/crafted_closet/inn{
 	color = "#7D9BAE"
@@ -21769,7 +21769,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xSx" = (
 /obj/structure/rack,
 /obj/item/clothing/head/helmet/goblin,
@@ -21831,7 +21831,7 @@
 	dir = 1
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "xVT" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/diamond/purple,
@@ -21934,7 +21934,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/mountains)
+/area/outdoors/bog)
 "yen" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile/two{
