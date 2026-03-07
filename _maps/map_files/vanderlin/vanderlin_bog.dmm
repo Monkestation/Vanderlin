@@ -3315,13 +3315,6 @@
 	},
 /turf/open/floor/concrete,
 /area/outdoors/mountains)
-"cpp" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog/witch)
 "cps" = (
 /obj/structure/fluff/steamvent,
 /obj/structure/fake_machine/camera/left,
@@ -11317,7 +11310,7 @@
 	},
 /obj/item/broom,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog/witch)
+/area/outdoors/bog)
 "lfg" = (
 /obj/item/natural/stone,
 /turf/open/floor/cobblerock/alt,
@@ -16473,7 +16466,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog/witch)
+/area/outdoors/bog)
 "rsm" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -19534,7 +19527,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog/witch)
+/area/outdoors/bog)
 "uYA" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
@@ -20331,7 +20324,7 @@
 "vVd" = (
 /obj/effect/decal/shadow_floor,
 /turf/closed/wall/mineral/wooddark,
-/area/indoors/shelter/bog/witch)
+/area/outdoors/bog)
 "vVv" = (
 /obj/item/chair/wood{
 	dir = 1
@@ -40982,9 +40975,9 @@ gPS
 vhU
 vhU
 xjU
-jDN
+bci
 rrS
-cpp
+cAX
 uYr
 leC
 rrS
