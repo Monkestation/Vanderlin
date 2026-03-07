@@ -45,7 +45,6 @@
 	backr = /obj/item/weapon/shield/wood
 	beltl = /obj/item/weapon/mace/bludgeon
 	wrists = /obj/item/clothing/wrists/bracers/jackchain
-	r_hand = /obj/item/flashlight/flare/torch/prelit
 	cloak = /obj/item/clothing/cloak/apron
 	backpack_contents = list(
 		/obj/item/weapon/surgery/scalpel/ = 1,
