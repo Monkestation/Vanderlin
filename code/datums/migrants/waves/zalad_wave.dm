@@ -10,6 +10,8 @@
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_ZALADIN
 	is_recognized = TRUE
+	honorary = "Emir"
+	honorary_f = "Amirah"
 
 	jobstats = list(
 		STATKEY_INT = 1,
@@ -47,10 +49,6 @@
 
 /datum/job/migrant/zalad_migration/emir/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	spawned.real_name = "Emir [prev_real_name]"
-	spawned.name = "Emir [prev_name]"
 
 	if(spawned.dna?.species)
 		if(spawned.dna.species.id == SPEC_ID_HUMEN)
@@ -102,6 +100,10 @@
 		STATKEY_END = 2,
 	)
 
+	honorary = "Emir"
+	honorary_f = "Amirah"
+
+
 	skills = list(
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
@@ -133,12 +135,6 @@
 
 /datum/job/migrant/zalad_migration/amirah/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-
-	spawned.real_name = "Amirah [prev_real_name]"
-	spawned.name = "Amirah [prev_name]"
-
 	if(spawned.dna?.species)
 		if(spawned.dna.species.id == SPEC_ID_HUMEN)
 			spawned.dna.species.native_language = "Zalad"

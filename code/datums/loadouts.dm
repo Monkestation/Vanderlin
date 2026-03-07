@@ -1,4 +1,12 @@
-GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
+GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
+
+/proc/init_loadout_items()
+	. = list()
+	for(var/datum/loadout_item/item as anything in subtypesof(/datum/loadout_item))
+		if(IS_ABSTRACT(item))
+			continue
+		.[item] = new item()
+	return .
 
 /datum/loadout_item
 	abstract_type = /datum/loadout_item
@@ -8,6 +16,26 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 	var/description
 	/// Path to the item to spawn
 	var/item_path
+	/// Typepath of a /datum/award that must be unlocked to use this loadout item. Null = no requirement.
+	var/required_award = null
+
+/// Returns TRUE if the given client has satisfied this loadout item's award requirement.
+/datum/loadout_item/proc/is_unlocked_for(client/C)
+	if(!required_award)
+		return TRUE
+	if(!C?.player_details?.achievements)
+		return FALSE
+	var/datum/award/A = SSachievements.awards[required_award]
+	if(!A)
+		return FALSE
+	if(istype(A, /datum/award/achievement/progress))
+		var/datum/award/achievement/progress/PA = A
+		return C.player_details.achievements.get_achievement_status(required_award) >= PA.required_progress
+	if(istype(A, /datum/award/achievement))
+		return C.player_details.achievements.get_achievement_status(required_award) == TRUE
+	if(istype(A, /datum/award/score))
+		return C.player_details.achievements.get_achievement_status(required_award) > 0
+	return FALSE
 
 //Miscellaneous
 
@@ -266,3 +294,8 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 /datum/loadout_item/ragmask
 	name = "Halfmask"
 	item_path = /obj/item/clothing/face/shepherd/rag
+
+/datum/loadout_item/pocket_rous
+	name = "Pocket Rous"
+	item_path = /obj/item/reagent_containers/food/snacks/smallrat
+	required_award = /datum/award/achievement/progress/rat_genocide

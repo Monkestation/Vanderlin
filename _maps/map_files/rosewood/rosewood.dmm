@@ -2194,8 +2194,26 @@
 /turf/open/water/swamp/deep,
 /area/outdoors/basin)
 "bck" = (
-/obj/structure/toilet,
-/obj/structure/fluff/clodpile/dirt,
+/obj/structure/toilet/filled,
+/obj/item/natural/poo{
+	pixel_y = -3
+	},
+/obj/item/natural/poo{
+	pixel_y = -7;
+	pixel_x = -5
+	},
+/obj/item/natural/poo{
+	pixel_y = -7;
+	pixel_x = 3
+	},
+/obj/item/natural/poo{
+	pixel_y = -10;
+	pixel_x = 6
+	},
+/obj/item/natural/poo{
+	pixel_y = -11;
+	pixel_x = -6
+	},
 /turf/open/floor/greenstone,
 /area/under/town/basement)
 "bcv" = (
@@ -2563,8 +2581,8 @@
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
 "boy" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/structure/toilet/filled,
 /turf/open/floor/greenstone,
 /area/indoors/town/bath)
 "boE" = (
@@ -8137,8 +8155,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/orphanage)
 "dRO" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/smithy)
 "dRP" = (
@@ -8251,7 +8269,7 @@
 /area/indoors/town/tavern)
 "dVn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/tile/bath,
 /area/under/town/basement)
 "dVH" = (
@@ -16152,8 +16170,8 @@
 /turf/open/floor/carpet,
 /area/outdoors/town)
 "hMn" = (
-/obj/structure/toilet,
 /obj/effect/decal/cleanable/blood/old,
+/obj/structure/toilet/filled,
 /turf/open/floor/cobble,
 /area/indoors/town/church/inquisition)
 "hMq" = (
@@ -16641,8 +16659,8 @@
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/dwarfin)
 "hYS" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/toilet/filled,
 /turf/open/floor/tile/bath,
 /area/indoors/town/tavern)
 "hZi" = (
@@ -20035,7 +20053,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/bath)
 "jJq" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town)
 "jJr" = (
@@ -23188,7 +23206,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
 "lln" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep)
 "llx" = (
@@ -24099,7 +24117,7 @@
 	},
 /area/outdoors/river)
 "lJP" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/shop)
 "lJT" = (
@@ -26595,7 +26613,7 @@
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "mXX" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/wood,
 /area/indoors/town/cell)
 "mXY" = (
@@ -28179,11 +28197,6 @@
 "nHl" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/garrison)
-"nHv" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/toilet,
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "nHw" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/mineral,
@@ -35384,8 +35397,8 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town)
 "rhP" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/orphanage)
 "riz" = (
@@ -36357,8 +36370,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "rFy" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/toilet/filled,
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "rGd" = (
@@ -36555,9 +36568,9 @@
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "rKp" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /mob/living/simple_animal/hostile/retaliate/bigrat,
+/obj/structure/toilet/filled,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/magician)
 "rKu" = (
@@ -40276,7 +40289,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "twG" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/greenstone,
 /area/indoors/town/garrison)
 "twN" = (
@@ -45897,8 +45910,8 @@
 /turf/open/floor/dirt,
 /area/indoors/soilsons)
 "wqo" = (
-/obj/structure/toilet,
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/toilet/filled,
 /turf/open/floor/church,
 /area/indoors/town/church)
 "wqq" = (
@@ -46266,7 +46279,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "wzC" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/orphanage)
 "wzN" = (
@@ -48252,7 +48265,7 @@
 /turf/closed/wall/mineral/stone/moss,
 /area/outdoors/town)
 "xAs" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/smithy)
 "xAu" = (
@@ -146514,7 +146527,7 @@ iSS
 peB
 paB
 qjP
-nHv
+rFy
 gDj
 qjP
 gDj

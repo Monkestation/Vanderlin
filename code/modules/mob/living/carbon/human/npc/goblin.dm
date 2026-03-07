@@ -13,7 +13,6 @@
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	a_intent = INTENT_HELP
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
-	possible_rmb_intents = list(/datum/rmb_intent/feint, /datum/rmb_intent/swift, /datum/rmb_intent/riposte, /datum/rmb_intent/weak)
 	flee_in_pain = TRUE
 	stand_attempts = 6
 	bloodpool = 500 // Small, frail creechers with not so much vitality to gain from.

@@ -11,7 +11,7 @@
 	icon_state = "recipe_button"
 
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 	scroll_height = 18
 	maptext_width = 130
