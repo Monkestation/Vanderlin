@@ -49,12 +49,12 @@
 	backl = /obj/item/storage/backpack/backpack
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/knife/hunting
-  	beltr = /obj/item/ammo_holder/quiver/arrows
-  	scabbards = list(/obj/item/weapon/scabbard/knife)
-  	backpack_contents = list(
-    	/obj/item/pestle,
+	beltr = /obj/item/ammo_holder/quiver/arrows
+	scabbards = list(/obj/item/weapon/scabbard/knife)
+	backpack_contents = list(
+		/obj/item/pestle,
 		/obj/item/reagent_containers/glass/alchemical = 6, //for vial arrows
-    	/obj/item/reagent_containers/glass/bottle = 2, //for smokebombs
-    	/obj/item/reagent_containers/glass/mortar,
+		/obj/item/reagent_containers/glass/bottle = 2, //for smokebombs
+		/obj/item/reagent_containers/glass/mortar,
 		/obj/item/flint
 	)
