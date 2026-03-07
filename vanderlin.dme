@@ -2839,6 +2839,8 @@
 #include "code\modules\jobs\job_types\adventurer\types\antag\sawbones.dm"
 #include "code\modules\jobs\job_types\adventurer\types\antag\sellsword.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\amazon.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\chirurgeon.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\hospitalier.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\barbarian.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\cleric.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\clericinhumen.dm"
