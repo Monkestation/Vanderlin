@@ -42,7 +42,7 @@
 	neck = /obj/item/clothing/neck/coif/cloth
 	belt = /obj/item/storage/belt/leather/adventurer
 	backl = /obj/item/storage/backpack/backpack
-	back2 = /obj/item/weapon/shield/wood
+	backr = /obj/item/weapon/shield/wood
 	beltl = /obj/item/weapon/mace/bludgeon
 	wrists = /obj/item/clothing/wrists/bracers/jackchain
 	r_hand = /obj/item/flashlight/flare/torch/prelit
