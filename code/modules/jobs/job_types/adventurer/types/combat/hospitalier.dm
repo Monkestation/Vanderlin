@@ -1,6 +1,8 @@
 /datum/job/advclass/combat/hospitalier
 	title = "Hospitalier"
-	tutorial = "Across all species, there are those who seek to help others.  Whether you were a goblins wars veteran, a weary traveller, a failed cleric, or an adventurous noble, you decided that saving lives was your calling in life.  Go forth, noble hero, and minister to these desperate lands."
+	tutorial = "Hospitaliers are selfless individuals who take it upon \
+	themselves to aid those in need.  With only your mace, shield and wits \
+	to keep you safe, you have set out on a journey to aid others."
 	outfit = /datum/outfit/adventurer/hospitalier
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	category_tags = list(CTAG_ADVENTURER)
