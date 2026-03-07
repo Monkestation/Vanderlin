@@ -174,19 +174,19 @@
 
 /datum/culture/species/triton/reef
 	name = "Reef colonies"
-	description = "Known to humens to be fond of bright colours, these triton often collect shells and other trinkets to adorn themselves and impress their allies."
+	description = "Known to humens to be fond of bright colours, these triton often collect shells and other trinkets to adorn themselves and impress their allies. They perform the most ritualistic traditions of the known triton cultures."
 
 /datum/culture/species/triton/depths
 	name = "Deepwater colonies"
-	description = "Barely known to humens, these triton tend to be solitary hunters. Those who come to the surface are often paranoid, with light-sensitive eyes."
+	description = "Barely known to humens, these triton tend to be solitary hunters. Those who come to the surface are often paranoid, with light-sensitive eyes. This caution makes them excellent guards."
 
 /datum/culture/species/triton/abyssal
 	name = "Abyssal colonies"
-	description = "Nearly entirely unknown to humens. Those deepest in the darkest of depths hear Abyssor's demands for worship, and another voice whispering beneath."
+	description = "Nearly entirely unknown to humens. Those deepest in the darkest depths hear Abyssor's demands for worship, and another voice whispering beneath."
 
 /datum/culture/species/triton/shallows
 	name = "Shallow colonies"
-	description = "Known to humens as the most sociable of triton cultures, they tend to be much more open to trade, and often join ships on their journeys across the seas."
+	description = "Known to humens as the most sociable of triton cultures, they tend to be much more open to trade, and often join ships on their journeys across the seas, saving the lives of many a sailor fallen overboard."
 
 /datum/culture/species/tiefling
 	abstract_type = /datum/culture/species/tiefling
@@ -212,7 +212,7 @@
 
 /datum/culture/species/aasimar/seer
 	name = "Great Tree"
-	description =  = "Known by humens to originate from Kingsfield, falling from the crystal leaf buds of the great petrified tree. These aasimar have no memory of what they were doing within the tree, waking within craters from their fall."
+	description = "Known by humens to originate from Kingsfield, falling from the crystal leaf buds of the great petrified tree. These aasimar have no memory of what they were doing within the tree, waking within craters from their fall."
 	pre_append = "the "
 
 /datum/culture/species/dwarf
@@ -228,13 +228,11 @@
 
 /datum/culture/species/dwarf/brass
 	name = "Brass clan"
-	description = ""
-//	heartfelt and hearthhill
+	description = "Known to humens to be clever inventors, these dwarves are mostly seen around the Isle of Enigma, Vanderlin, and the newly-discovered Hearthhill."
 
 /datum/culture/species/dwarf/iron
 	name = "Iron clan"
-	description = ""
-//	smithing
+	description = "Known to humens to be capable of incredibly skilled blacksmithing, these dwarves are mostly in the mountains of the Federation, but often travel to sell their wares and prove their skill."
 
 /datum/culture/species/dwarf/blackpowder
 	name = "Blackpowder clan"
