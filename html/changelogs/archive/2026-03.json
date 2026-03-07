@@ -156,5 +156,80 @@
                 "balance": "Mercenary cloth in belt -> Proper Bandage\\n:cl:\\n<!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->\\n<!-- You can use multiple of the same prefix (they're only used for the icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs should generally represent how a player might be affected by the changes rather than a summary of the PR's contents. -->\\n## Pre-Merge Checklist\\n<!-- Don't bother filling these in while creating your Pull Request, just click the checkboxes after the Pull Request is opened and you are redirected to the page. -->\\n- [x] You tested this on a local server.\\n- [x] This code did not runtime during testing.\\n- [x] You documented all of your changes.\\n<!-- Neither the compiler nor workflow checks are perfect at detecting runtimes and errors. It is important to test your code/feature/fix locally. -->"
             }
         ]
+    },
+    "2026-03-07": {
+        "realforest2001": [
+            {
+                "rscadd": "Added area names to unique areas that were missing one."
+            },
+            {
+                "rscadd": "Changed all references of Manor to Keep (where talking about the keep)."
+            }
+        ],
+        "MissyNym": [
+            {
+                "map": "Four stilt houses in the northwest, southwest, south, and eastern sides of the bog, to give the second z-level a little love."
+            },
+            {
+                "map": "A busted-up plank road has been established towards the northern entrance of the bog, leading further inward. This might be extended on future runs depending on how well this works."
+            },
+            {
+                "map": "Two broken highroad structures have been added to the northwestern and eastern sides of the bog. These structures represent the Golden Age of Psydon, and tower high over the rest of the bog even as they've crumbled. Still, the people of the bog have made do with what's there."
+            },
+            {
+                "map": "The witch hut has been reworked to add a full apothecary setup, as well as some extra space and tools for farming. Given the new lab, a second floor has been added. This is part of planning for potential future changes."
+            },
+            {
+                "map": "The graveyard to the south of the witch hut has been reworked into a more orderly setup with a small mausoleum. Maybe there's something more to that building?"
+            },
+            {
+                "map": "A little secret's been added to the southern inn, as well as some changes to the inn's furniture."
+            },
+            {
+                "map": "Quest locations have been added to various spots in the bog. Adventure awaits!"
+            }
+        ],
+        "Ben10083": [
+            {
+                "bugfix": "Resolved runtime causing Dwarves to be unable to select a culture. Praise Malum!"
+            }
+        ],
+        "Rockslp": [
+            {
+                "balance": "Raised musket integrity"
+            }
+        ],
+        "PotatoTomahto": [
+            {
+                "balance": "grab back to make it harder for wrestlers to manipulate your position"
+            },
+            {
+                "balance": "werewolf nerfs"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Made ghosts much better to play."
+            },
+            {
+                "rscdel": "Disabled LOOC for ghosts, moan to your fellow ghosts in deadchat."
+            },
+            {
+                "bugfix": "Fixed various slowdowns being completely broken."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "rscadd": "Honorary Titles"
+            }
+        ],
+        "Hembrent": [
+            {
+                "rscadd": "Added Malaguero, proper Tiefling Grenzelhoft merc."
+            },
+            {
+                "rscdel": "Removed Tiefling from normal Grenzelhoft merc."
+            }
+        ]
     }
 }

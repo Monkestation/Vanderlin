@@ -437,17 +437,20 @@
 	icon_state = "martyrsword"
 
 /datum/intent/sword/cut/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CUT
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
 /datum/intent/sword/thrust/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_PICK
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
+
 /datum/intent/sword/strike/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_SMASH
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
 /datum/intent/sword/chop/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CHOP
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
 
 /obj/item/weapon/sword/long/grandmaster/Initialize()
 	. = ..()
@@ -455,7 +458,7 @@
 	var/list/active_intents_wielded = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr, /datum/intent/sword/chop/martyr)
 	var/safe_damage = 25
 	var/safe_damage_wielded = 30
-	AddComponent(/datum/component/martyrweapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
 
 /obj/item/weapon/greataxe/steel/grandmaster
@@ -465,26 +468,26 @@
 	icon_state = "martyraxe"
 
 /datum/intent/axe/cut/battle/greataxe/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CUT
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
 
 /datum/intent/axe/cut/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CUT
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
 
 /datum/intent/axe/chop/battle/greataxe/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CHOP
-		swingdelay = 5
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
 
 /datum/intent/axe/chop/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CHOP
-		swingdelay = 5
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
 
 /datum/intent/axe/bash/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_SMASH
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
 
 /obj/item/weapon/greataxe/steel/grandmaster/Initialize()
 	. = ..()
@@ -492,20 +495,20 @@
 	var/list/active_intents_wielded = list(/datum/intent/axe/cut/battle/greataxe/martyr, /datum/intent/axe/chop/battle/greataxe/martyr, /datum/intent/axe/bash/martyr)
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
-	AddComponent(/datum/component/martyrweapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
 
 /datum/intent/polearm/cut/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_CUT
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
 
 /datum/intent/polearm/thrust/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_PICK
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
 
 /datum/intent/polearm/bash/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_SMASH
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
 
 /obj/item/weapon/polearm/spear/grandmaster
 	name = "divine trident"
@@ -519,16 +522,16 @@
 	var/list/active_intents_wielded = list(/datum/intent/polearm/cut/martyr, /datum/intent/polearm/thrust/martyr, /datum/intent/polearm/bash/martyr)
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
-	AddComponent(/datum/component/martyrweapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
 
 /datum/intent/mace/strike/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_BLUNT
+	item_damage_type = "fire"
+	blade_class = BCLASS_BLUNT
 
 /datum/intent/mace/smash/martyr
-		item_damage_type = "fire"
-		blade_class = BCLASS_SMASH
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
 
 /obj/item/weapon/mace/goden/steel/grandmaster
 	name = "divine grandmace"
@@ -542,5 +545,5 @@
 	var/list/active_intents_wielded = list(/datum/intent/mace/strike/martyr, /datum/intent/mace/smash/martyr)
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
-	AddComponent(/datum/component/martyrweapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)

@@ -827,7 +827,7 @@
 /datum/stress_event/poohit
 	timer = 3 MINUTES
 	stress_change = 2
-	desc = span_red("I'm covered in feces! Disgusting!")
+	desc = span_red("I've been covered in shite! Disgusting!")
 
 /datum/stress_event/malaguero
 	timer = 1 MINUTES

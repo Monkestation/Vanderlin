@@ -29,7 +29,7 @@
 		to_chat(owner, span_warning("There is nothing to enchant!"))
 		return FALSE
 
-	if(enchant_item.GetComponent(/datum/component/martyrweapon))
+	if(enchant_item.GetComponent(/datum/component/martyr_weapon))
 		to_chat(owner, span_warning("You cannot imbue such a powerful weapon with any more divine power!"))
 		return FALSE
 

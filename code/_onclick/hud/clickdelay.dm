@@ -25,7 +25,7 @@
 	name = "click delay"
 	icon = 'icons/mob/roguehud.dmi'
 	icon_state = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = 22.1
 	plane = 22
 	alpha = 230

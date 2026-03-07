@@ -3,7 +3,7 @@
 	icon = 'icons/visual_ui/quake_console.dmi'
 	icon_state = "quake_input"
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	offset_x = -190
 	offset_y = -215
 

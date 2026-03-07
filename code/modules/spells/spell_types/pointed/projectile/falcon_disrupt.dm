@@ -130,7 +130,7 @@
 	icon_state = "falconing"
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 	var/mob/living/owner_mob
 	var/cycle_count = 0
