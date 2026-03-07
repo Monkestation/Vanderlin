@@ -236,27 +236,22 @@
 
 /datum/culture/species/dwarf/blackpowder
 	name = "Blackpowder clan"
-	description = ""
-	//grenzel
+	description = "Known to humens as inventors of the modern firearm and explosive. They have strong ties with Grenzelhoft, especially after the rise of Zizo's hordes."
 
 /datum/culture/species/dwarf/malachite
 	name = "Malachite clan"
-	description = ""
-	//gemcarving, gem weaponry?
+	description = "Known to humens as the premier jewelers of Psydonia, these dwarves are both the primary source of dwarven wedding gems, and the makers of crowns and royal rings."
 
 /datum/culture/species/dwarf/cerargyrite
 	name = "Cerargyrite clan"
-	description = ""
-	//runes/enchantments, towards the surface
+	description = "Known to humens for their unmatched skill in enchanting, these dwarves are among the most common to see outside the Federation."
 
 /datum/culture/species/dwarf/aurum
 	name = "Aurum clan"
-	description = ""
-	//acolytes of malum, beer
+	description = "Known to humens for their faith in Malum and their endless toil in brewing alcohol. Prone to bar fights. Their beers are the best in the land."
 
 /datum/culture/species/dwarf/platinum
 	name = "Platinum clan"
-	description = ""
-	//textiles
+	description = "Known to humens for their peerless talent as clothiers. Many monarchs strive to adorn themselves in the textiles of the Platinum dwarves."
 
 //dark elf here
