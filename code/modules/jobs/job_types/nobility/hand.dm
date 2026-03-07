@@ -27,6 +27,9 @@
 		EXP_TYPE_NOBLE = 300,
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS
 	)
@@ -67,7 +70,7 @@
 
 /datum/job/advclass/hand/hand
 	title = "Hand"
-	tutorial = " You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
+	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
@@ -93,6 +96,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/labor/mathematics = 3
 	)
+	honorary = "General"
 
 	traits = list(
 		TRAIT_HEAVYARMOR
@@ -128,6 +132,7 @@
 		STATKEY_SPD = 4,
 		STATKEY_INT = 2
 	)
+	honorary = "Spymaster"
 
 	skills = list(
 		/datum/skill/combat/axesmaces = 2,
@@ -194,6 +199,7 @@
 		STATKEY_INT = 4,
 		STATKEY_PER = 3
 	)
+	honorary = "Councilor"
 
 	skills = list(
 		/datum/skill/combat/crossbows = 3,

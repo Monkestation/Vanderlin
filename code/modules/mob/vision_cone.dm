@@ -329,6 +329,6 @@
 	icon_state = "combat"
 	name = " "
 	screen_loc = "1,1"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = HUD_PLANE-1
 

@@ -3970,7 +3970,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/outdoors/town)
 "djr" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/under/town/basement)
 "djy" = (
@@ -6968,7 +6968,7 @@
 /area/under/cavelava)
 "fTq" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/keep)
 "fTN" = (
@@ -7614,10 +7614,10 @@
 /area/indoors/town/dwarfin)
 "gtJ" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/toilet,
 /obj/effect/landmark/start/vagrant{
 	dir = 8
 	},
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
 /area/outdoors/town)
 "gtT" = (
@@ -23864,7 +23864,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "vga" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/cobble,
 /area/indoors/town/garrison)
 "vgM" = (
@@ -25922,7 +25922,7 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/inquisition)
 "wPn" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "wPt" = (
@@ -27396,7 +27396,7 @@
 	},
 /area/indoors/town/smithy)
 "yes" = (
-/obj/structure/toilet,
+/obj/structure/toilet/filled,
 /turf/open/floor/wood,
 /area/indoors/town/cell)
 "yex" = (

@@ -219,6 +219,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 			pois[avoid_assoc_duplicate_keys(A.name, namecounts)] = A
 
 	return pois
+
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()

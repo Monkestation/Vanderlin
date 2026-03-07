@@ -206,8 +206,8 @@
 		spam_penalty = 1 + (C.grab_fatigue * 0.15)
 		C.add_grab_fatigue(1)
 	// Check for mutual grab breaking first
-	if(M.mutual_grab_break())
-		return FALSE
+	// if(M.mutual_grab_break())
+	// 	return FALSE
 
 	if(M != grabbed)
 		if(!istype(limb_grabbed, /obj/item/bodypart/head))
@@ -359,8 +359,8 @@
 			else
 				user.adjust_stamina(rand(5,10) * spam_penalty)
 				if(prob(clamp((((4 + ((user.STASTR - (M.STACON+2))/2) + skill_diff) * 10 + rand(-5, 5)) * combat_modifier), 5, 95)))
-					M.Knockdown(max(10 + (skill_diff * 2), 1))
-					M.set_resting(TRUE, TRUE)
+					var/tackle_time = max(10 + (skill_diff * 2), 1)
+					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
 					if(user.l_grab && user.l_grab.grabbed == M && user.r_grab && user.r_grab.grabbed == M && user.r_grab.grab_state == GRAB_AGGRESSIVE )
 						M.visible_message(span_danger("[user] throws [M] to the ground!"), \
@@ -368,7 +368,7 @@
 					else
 						M.visible_message(span_danger("[user] tackles [M] to the ground!"), \
 						span_userdanger("[user] tackles me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
-						user.set_resting(TRUE, TRUE)
+						user.Knockdown(tackle_time / 2)
 				else
 					M.visible_message(span_warning("[user] tries to shove [M]!"), \
 									span_danger("[user] tries to shove me!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE)

@@ -56,7 +56,7 @@
 				var/mob/living/target_collateral_mob
 				var/obj/structure/table/target_table
 				var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
-				if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10),0,100)))//check if we actually shove them
+				if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10), 0, 95)))//check if we actually shove them
 					target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 					if(target_collateral_mob)
 						shove_blocked = TRUE

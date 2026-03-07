@@ -7,6 +7,8 @@
 	total_positions = 1
 	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
+	honorary = "Ritter"
+	honorary_f = "Ritterin"
 
 	skills = list(
 		/datum/skill/combat/wrestling = 2,
@@ -32,14 +34,6 @@
 
 /datum/job/advclass/combat/swordmaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Ritter"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Ritterin"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	var/datum/species/species = spawned.dna?.species
 	if(species && species.id == SPEC_ID_HUMEN)
 		species.native_language = "Old Psydonic"
