@@ -31405,6 +31405,9 @@
 	pixel_x = 7;
 	pixel_y = 9
 	},
+/obj/item/reagent_containers/food/snacks/produce/grain/oat{
+	pixel_y = 11
+	},
 /turf/open/floor/cobblerock,
 /area/indoors/town/garrison)
 "pfF" = (
@@ -39897,6 +39900,7 @@
 "tos" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/reagent_containers/food/snacks/meat/poultry,
+/obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/meat/steak,
