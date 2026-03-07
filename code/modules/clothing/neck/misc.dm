@@ -294,7 +294,7 @@
 	max_integrity = INTEGRITY_STRONG
 
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif
+/obj/item/clothing/neck/chaincoif/iron/cleric
 	icon_state = "clericcoif"
 	name = "wrapped coif"
 	desc = "A chain coif thats been wrapped and reinforced with strips of cloth, a fashion befitting of the average cleric. "
