@@ -1126,6 +1126,7 @@
 #include "code\datums\elements\holy_weakness.dm"
 #include "code\datums\elements\interrupt_on_damage.dm"
 #include "code\datums\elements\kill_award.dm"
+#include "code\datums\elements\light_blocking.dm"
 #include "code\datums\elements\locked_item.dm"
 #include "code\datums\elements\mob_overlay_effect.dm"
 #include "code\datums\elements\movetype_handler.dm"

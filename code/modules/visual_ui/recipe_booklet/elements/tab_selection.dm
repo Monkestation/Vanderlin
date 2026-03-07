@@ -3,7 +3,7 @@
 	icon_state = "tab_1"
 
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 	var/tab_key
 
