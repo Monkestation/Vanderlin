@@ -106,9 +106,9 @@
 
 /mob/living/proc/update_wallpress_slowdown()
 	if(wallpressed)
-		add_movespeed_modifier("wallpress", TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
+		add_movespeed_modifier(MOVESPEED_ID_WALLPRESS, TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
 	else
-		remove_movespeed_modifier("wallpress")
+		remove_movespeed_modifier(MOVESPEED_ID_WALLPRESS)
 
 /turf/closed/Bumped(atom/movable/AM)
 	..()
@@ -216,7 +216,7 @@
 	else
 		..()
 
-/turf/closed/attack_hand_secondary(mob/user, params)
+/turf/closed/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

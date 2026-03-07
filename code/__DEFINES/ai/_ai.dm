@@ -30,6 +30,8 @@
 #define AI_BEHAVIOR_KEEP_MOVING_TOWARDS_TARGET_ON_FINISH (1<<4)
 ///Does this behavior NOT block planning?
 #define AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION (1<<5)
+///This behavior executes before all others and does not consume the process tick, allowing normal behaviors to run after it
+#define AI_BEHAVIOR_EXECUTE_ALONGSIDE (1<<6)
 
 ///Cooldown on planning if planning failed last time
 #define AI_FAILED_PLANNING_COOLDOWN 1.5 SECONDS
@@ -223,7 +225,40 @@
 #define BB_CAT_HOME "cat_home"
 /// key that holds the human we will beg
 #define BB_HUMAN_BEG_TARGET "human_beg_target"
+#define BB_HUMAN_NPC_ATTACK_ZONE_COUNTER "human_npc_attack_zone_counter"
+#define BB_HUMAN_NPC_LAST_ATTACK_ZONE    "human_npc_last_attack_zone"
+#define BB_HUMAN_NPC_WEAKPOINT           "human_npc_weakpoint"
+#define BB_HUMAN_NPC_JUMP_COOLDOWN       "human_npc_jump_cooldown"
+#define BB_HUMAN_NPC_FLANK_ANGLE         "human_npc_flank_angle"
+#define BB_HUMAN_NPC_FLANK_TARGET        "human_npc_flank_target"
+#define BB_HUMAN_NPC_HARASS_MODE         "human_npc_harass_mode"
+#define BB_HUMAN_NPC_HARASS_RETREATING   "human_npc_harass_retreating"
+#define BB_HUMAN_NPC_HARASS_COOLDOWN     "human_npc_harass_cooldown"
+#define BB_HUMAN_NPC_JUKE_COOLDOWN       "human_npc_juke_cooldown"
+#define BB_HUMAN_NPC_CURRENT_INTENT_ATTACKS_LEFT "human_npc_intent_attacks"
 #define BB_BEGGING_FOOD_ITEM "item_beg_target"
+#define BB_ARCHER_NPC_TARGET_ARROW      "archer_target_arrow"
+#define BB_ARCHER_NPC_STASHED_WEAPON    "archer_stashed_weapon"
+#define BB_ARCHER_NPC_EQUIPMENT_CACHE_EXPIRY "archer_npc_equipment_cache_expiry"
+#define BB_ARCHER_NPC_BOW               "archer_npc_bow"
+#define BB_ARCHER_NPC_QUIVER            "archer_npc_quiver"
+#define BB_INVENTORY_MAP        "inventory_map"        // list(category = list(item_ref = slot_name))
+#define BB_CONTAINER_REFS       "container_refs"       // list(slot_name = item_ref)
+#define BB_INVENTORY_DIRTY      "inventory_dirty"      // bool, triggers reappraisal
+#define BB_HELD_CONSUMABLE      "held_consumable"      // item we pulled out to use
+#define BB_TARGET_ZONE_OVERRIDE	"bb_target_override"
+#define BB_LOOT_TARGET "loot_target"
+#define BB_LOOT_TARGET_ITEM "loot_target_item"
+#define BB_LOOT_BLACKLIST "loot_blacklist"
+#define BB_MUG_DEMAND_ELAPSED "mug_elapsed_time"
+#define BB_MUG_TARGET "mug_target"
+#define BB_MUG_TARGET_ITEM "mug_rootbeer"
+
+#define ARCHER_NPC_EQUIPMENT_CACHE_TIME (40 SECONDS)
+#define ARCHER_NPC_MIN_RANGE            3   // tiles - closer than this, prefer melee
+#define ARCHER_NPC_ARROW_SEARCH_RANGE   9
+#define ARCHER_NPC_SIMULATED_CHARGETIME 1.5 SECONDS // fallback charge wait in deciseconds
+
 
 #define BB_CAT_KITTEN_TARGET "BB_cat_kitten_target"
 #define BB_CAT_HOLDING_FOOD "BB_cat_holding_food"
@@ -298,3 +333,37 @@
 #define ACTION_STATE_CONTINUE 1
 #define ACTION_STATE_COMPLETE 2
 #define ACTION_STATE_FAILED 3
+
+#define AI_ITEM_BANDAGE         (1<<0)   // stops bleeding, applied to self/others
+#define AI_ITEM_HEALING_DRINK   (1<<1)   // drinkable healing reagent container
+#define AI_ITEM_FOOD            (1<<2)   // edible
+#define AI_ITEM_POWDER          (1<<3)   // snortable /obj/item/reagent_containers/powder
+#define AI_ITEM_KEY             (1<<4)
+#define AI_ITEM_TOOL            (1<<5)
+#define AI_ITEM_AMMO            (1<<6)
+#define AI_ITEM_GRENADE         (1<<7)
+#define AI_ITEM_MELEE           (1<<8)
+#define AI_ITEM_GUN             (1<<9)
+#define AI_ITEM_DRINK           (1<<10)  // generic drinkable (not necessarily healing)
+#define AI_ITEM_THROWING        (1<<11)
+#define AI_ITEM_QUIVER          (1<<12)
+
+GLOBAL_LIST_INIT(ai_item_flags, list(
+	AI_ITEM_BANDAGE,
+	AI_ITEM_HEALING_DRINK,
+	AI_ITEM_FOOD,
+	AI_ITEM_POWDER,
+	AI_ITEM_KEY,
+	AI_ITEM_TOOL,
+	AI_ITEM_AMMO,
+	AI_ITEM_GRENADE,
+	AI_ITEM_MELEE,
+	AI_ITEM_GUN,
+	AI_ITEM_DRINK,
+	AI_ITEM_THROWING,
+	AI_ITEM_QUIVER,
+))
+
+#define AI_INVENTORY_WATCHED_SLOTS (ITEM_SLOT_BELT | ITEM_SLOT_BACK_L | ITEM_SLOT_BACK_R | \
+    ITEM_SLOT_BELT_L | ITEM_SLOT_BELT_R | ITEM_SLOT_ARMOR | ITEM_SLOT_PANTS | \
+    ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK | ITEM_SLOT_BACK | ITEM_SLOT_NECK)

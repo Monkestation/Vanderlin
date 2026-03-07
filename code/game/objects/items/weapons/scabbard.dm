@@ -6,31 +6,14 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
-	blade_dulling = DULLING_BASHCHOP
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
+	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-
-/obj/item/weapon/scabbard/update_icon_state()
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-
-	if(length(contents))
-		var/obj/item/sheathed_weapon = contents[1]
-		var/icon/possible_sheaths = icon(icon) //hehe
-		var/list/extensions = list()
-		for(var/s in possible_sheaths.IconStates(1))
-			extensions[s] = TRUE
-		qdel(possible_sheaths)
-		if(extensions[icon_state+"_[sheathed_weapon.icon_state]"])
-			icon_state += "_[sheathed_weapon.icon_state]"
-		else
-			icon_state += "-sheathed"
-	return ..()
 
 /*
 	GENERIC SCABBARDS
@@ -145,10 +128,16 @@
 	desc = "A decorated cane bearing the visage of a vulture."
 	icon_state = "doccanesheath"
 
+/obj/item/weapon/scabbard/cane/hand
+	name = "fancy cane"
+	desc = "A decorated silver cane bearing a rontz at the top."
+	icon_state = "staffsheath"
+
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/sword)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()

@@ -18,7 +18,7 @@
 		/datum/skill/misc/riding = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/sewing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/labor/mathematics = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
@@ -28,12 +28,12 @@
 	traits = list(
 		TRAIT_FORAGER,
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS,
 		TRAIT_INQUISITION,
 		TRAIT_BLACKBAGGER,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	jobstats = list(
 		STATKEY_PER = 1,

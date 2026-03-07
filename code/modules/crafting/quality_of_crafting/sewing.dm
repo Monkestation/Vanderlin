@@ -9,7 +9,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/skill/craft/sewing
 	craftdiff = 0
 	subtypes_allowed = TRUE // so you can use any subtype of fur
 	category = "Shirt"
@@ -1731,3 +1731,50 @@
 	)
 	craftdiff = 2
 	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/sewing/bandage
+	name = "Bandage"
+	output = /obj/item/natural/cloth/bandage
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 2
+	)
+	craftdiff = 2.5
+	skillcraft = /datum/skill/misc/medicine
+	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
+
+/datum/repeatable_crafting_recipe/sewing/barding
+	name = "padded barding (saiga)"
+	category = "Armor"
+	output = /obj/item/clothing/barding
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/sewing/barding/honse
+	name = "padded barding (honse)"
+	output = /obj/item/clothing/barding/honse
+
+/datum/repeatable_crafting_recipe/sewing/caparison
+	name = "caparison"
+	category = "Armor"
+	output =/obj/item/caparison
+	requirements = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/sewing/caparison/psy
+	name = "psydonite caparison"
+	output =/obj/item/caparison/psy
+
+/datum/repeatable_crafting_recipe/sewing/caparison/astrata
+	name = "astratan caparison"
+	output =/obj/item/caparison/astrata
+
+/datum/repeatable_crafting_recipe/sewing/caparison/eora
+	name = "eoran caparison"
+	output =/obj/item/caparison/eora
+
+/datum/repeatable_crafting_recipe/sewing/caparison/honse
+	name = "honse caparison"
+	output =/obj/item/caparison/honse

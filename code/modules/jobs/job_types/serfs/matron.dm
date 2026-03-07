@@ -13,13 +13,14 @@
 
 	allowed_sexes = list(FEMALE)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/matron
 	give_bank_account = 35
 	can_have_apprentices = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
+	honorary = "Miss"
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/hag_call,
@@ -35,7 +36,7 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 4,
 		/datum/skill/misc/stealing = 4,
 		/datum/skill/misc/lockpicking = 4,

@@ -14,7 +14,7 @@
 	name = "corset"
 	desc = "A leather binding to constrict one's figure... and lungs."
 	icon_state = "corset"
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
 
 //................ Amazon chainkini ............... //
@@ -35,6 +35,8 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 7 * IRON_MULTIPLIER
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
+
+	material_category = ARMOR_MAT_CHAINMAIL
 
 //................ Brigandine ............... //
 /obj/item/clothing/armor/brigandine

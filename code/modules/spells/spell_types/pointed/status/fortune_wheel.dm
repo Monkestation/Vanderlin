@@ -6,7 +6,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/xylix)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/xylix)
 
 	charge_required = FALSE
 	spell_cost = 35

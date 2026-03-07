@@ -436,8 +436,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
 
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
-
 // Check if we notice an observer
 /mob/living/proc/peek_examine_check(mob/living/observer)
 	if(!istype(observer))
@@ -1082,7 +1080,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * Args:
  *  light_amount (optional) - A decimal amount between 1.0 through 0.0 (default is 0.2)
 **/
-/mob/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
+/atom/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
 	var/turf/mob_location = get_turf(src)
 	var/area/mob_area = get_area(src)
 
@@ -1308,7 +1306,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))
@@ -1321,3 +1319,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	. = list("") //we want to offset unique stuff from standard stuff
 	SEND_SIGNAL(src, COMSIG_MOB_GET_STATUS_TAB_ITEMS, .)
 	return .
+
+/mob/get_examine_name(mob/user, use_article=FALSE)
+	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
+

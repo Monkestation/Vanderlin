@@ -401,7 +401,7 @@
 	SEND_SIGNAL(old_pulling, COMSIG_ATOM_NO_LONGER_PULLED, src)
 	SEND_SIGNAL(src, COMSIG_ATOM_NO_LONGER_PULLING, old_pulling)
 
-/atom/movable/proc/Move_Pulled(atom/movable/A)
+/atom/movable/proc/Move_Pulled(atom/movable/atom_location)
 	if(!pulling)
 		return FALSE
 	if(pulling.anchored || pulling.move_resist > move_force || !pulling.Adjacent(src))
@@ -412,9 +412,11 @@
 		if(L.buckled && L.buckled.buckle_prevents_pull) //if they're buckled to something that disallows pulling, prevent it
 			stop_pulling()
 			return FALSE
-	if(A == loc && pulling.density)
+	if(atom_location == loc && pulling.density)
 		return FALSE
-	var/move_dir = get_dir(pulling.loc, A)
+	if(isgroundlessturf(atom_location)) // so you can't move someone into an openspace
+		return FALSE
+	var/move_dir = get_dir(pulling.loc, atom_location)
 	var/turf/pre_turf = get_turf(pulling)
 	pulling.Move(get_step(pulling.loc, move_dir), move_dir, glide_size)
 	var/turf/post_turf = get_turf(pulling)
@@ -428,12 +430,11 @@
 /atom/movable/proc/after_being_moved_by_pull(atom/movable/puller)
 	return
 
-/mob/living/Move_Pulled(atom/movable/A)
+/mob/living/Move_Pulled(atom/movable/atom_location)
 	. = ..()
-	if(!. || !isliving(A))
+	if(!. || !isliving(pulling))
 		return
-	var/mob/living/L = A
-	set_pull_offsets(L, grab_state)
+	set_pull_offsets(pulling, grab_state)
 
 /atom/movable/proc/check_pulling()
 	if(pulling)
@@ -1113,13 +1114,13 @@
 
 /atom/movable/proc/do_item_attack_animation(atom/attacked_atom, visual_effect_icon, obj/item/used_item, animation_type = ATTACK_ANIMATION_SWIPE)
 	if (visual_effect_icon)
-		var/image/attack_image = image(icon = 'icons/effects/effects.dmi', icon_state = visual_effect_icon)
-		attack_image.plane = attacked_atom.plane + 1
+		var/mutable_appearance/attack_appearance = mutable_appearance('icons/effects/effects.dmi', visual_effect_icon)
+		attack_appearance.plane = GAME_PLANE
 		// Scale the icon.
-		attack_image.transform *= 0.4
+		attack_appearance.transform *= 0.4
 		// The icon should not rotate.
-		attack_image.appearance_flags = APPEARANCE_UI
-		var/atom/movable/flick_visual/attack = attacked_atom.flick_overlay_view(attack_image, 1 SECONDS)
+		attack_appearance.appearance_flags = APPEARANCE_UI
+		var/atom/movable/flick_visual/attack = attacked_atom.flick_overlay_view(attack_appearance, 1 SECONDS)
 		var/matrix/copy_transform = new(initial(transform))
 		attack.dir = get_dir(src, attacked_atom)
 		animate(
@@ -1140,16 +1141,16 @@
 	if (!used_item)
 		return
 
-	var/image/attack_image = image(icon = used_item, icon_state = used_item.icon_state)
-	attack_image.plane = attacked_atom.plane + 1
-	attack_image.pixel_w = used_item.pixel_x + used_item.pixel_w
-	attack_image.pixel_z = used_item.pixel_y + used_item.pixel_z
+	var/mutable_appearance/attack_appearance = mutable_appearance(used_item.icon, used_item.icon_state)
+	attack_appearance.plane = GAME_PLANE
+	attack_appearance.pixel_w = used_item.pixel_x + used_item.pixel_w
+	attack_appearance.pixel_z = used_item.pixel_y + used_item.pixel_z
 	// Scale the icon.
-	attack_image.transform *= 0.5
+	attack_appearance.transform *= 0.5
 	// The icon should not rotate.
-	attack_image.appearance_flags = APPEARANCE_UI
+	attack_appearance.appearance_flags = APPEARANCE_UI
 
-	var/atom/movable/flick_visual/attack = attacked_atom.flick_overlay_view(attack_image, 1 SECONDS)
+	var/atom/movable/flick_visual/attack = attacked_atom.flick_overlay_view(attack_appearance, 1 SECONDS)
 	var/matrix/copy_transform = new(transform)
 	var/x_sign = 0
 	var/y_sign = 0

@@ -12,7 +12,7 @@
 	name = "burn rot"
 	implements = list(
 		TOOL_CAUTERY = 85,
-		/obj/item/clothing/neck/psycross = 85,
+		/obj/item/clothing/neck/psycross/silver = 85,
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
 	)
@@ -40,7 +40,7 @@
 	if(!has_rot && iscarbon(target))
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/bodypart as anything in stinky.bodyparts)
-			if(bodypart.rotted || bodypart.skeletonized)
+			if(bodypart.rotted)
 				has_rot = TRUE
 				break
 	if(was_zombie)
@@ -54,7 +54,6 @@
 		var/mob/living/carbon/stinky = target
 		for(var/obj/item/bodypart/rotty in stinky.bodyparts)
 			rotty.rotted = FALSE
-			rotty.skeletonized = FALSE
 			rotty.update_limb()
 			if(rotty.can_be_disabled)
 				rotty.update_disabled()

@@ -30,6 +30,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
+	honorary = "Warden"
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -54,26 +55,18 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/tanning = 2
 	)
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
 	)
 
 /datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	add_verb(spawned, /mob/proc/haltyell)
 
 /datum/outfit/forestwarden

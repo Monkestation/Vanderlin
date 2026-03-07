@@ -1,0 +1,1 @@
+/obj/effect/decal/cobbleedge{icon_state = "borderfall"} : /obj/effect/decal/borderfall{@OLD ;icon_state = @SKIP}

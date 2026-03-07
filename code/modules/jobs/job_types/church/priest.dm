@@ -20,11 +20,12 @@
 
 	outfit = /datum/outfit/priest
 	spells = list(
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/templar,
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/acolyte,
-		/datum/action/cooldown/spell/undirected/list_target/convert_role/churchling,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/templar,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/acolyte,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/churchling,
 		/datum/action/cooldown/spell/undirected/call_bird/priest,
 	)
+	honorary = "Vicar"
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
@@ -47,7 +48,7 @@
 		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/axesmaces = 2,
 		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/labor/mathematics = 3
@@ -62,11 +63,7 @@
 		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
-	add_verb(spawned, /mob/living/carbon/human/proc/coronate_lord)
-	add_verb(spawned, /mob/living/carbon/human/proc/churchexcommunicate)
-	add_verb(spawned, /mob/living/carbon/human/proc/churchcurse)
-	add_verb(spawned, /mob/living/carbon/human/proc/churchannouncement)
-	add_verb(spawned, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+	spawned.give_priest_verbs()
 
 	spawned.virginity = TRUE
 
@@ -78,7 +75,7 @@
 
 /datum/outfit/priest
 	name = "Priest"
-	neck = /obj/item/clothing/neck/psycross/silver/astrata
+	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	head = /obj/item/clothing/head/priestmask
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -147,6 +144,7 @@
 		if(HL.job == "Monarch")
 			HL.job = "Ex-Monarch"
 			lord_job?.remove_spells(HL)
+			HL.honorary = "Former [lord_job.honorary]"
 		if(HL.job == "Consort")
 			HL.job = "Ex-Consort"
 			consort_job?.remove_spells(HL)
@@ -235,3 +233,21 @@
 			return FALSE
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")
+
+/// Helper for giving priest verbs, and whether that should include coronation or penance verbs.
+/mob/living/carbon/human/proc/give_priest_verbs(coronate = TRUE, penance = TRUE)
+	add_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
+	add_verb(src, /mob/living/carbon/human/proc/churchcurse)
+	add_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	if(coronate)
+		add_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+	if(penance)
+		add_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+
+/// Helper for removing priest verbs
+/mob/living/carbon/human/proc/remove_priest_verbs()
+	remove_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
+	remove_verb(src, /mob/living/carbon/human/proc/churchcurse)
+	remove_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	remove_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+	remove_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))

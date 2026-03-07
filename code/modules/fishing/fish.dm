@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slices_num = 1
 	slice_bclass = BCLASS_CHOP
 	faretype = FARE_IMPOVERISHED //incase someone decides to eat raw fish
-	list_reagents = list(/datum/reagent/consumable/nutriment = 3)
+	nutrition = RAWMEAT_NUTRITION
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)
@@ -455,8 +455,9 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_health_warnings(mob/user, always_deep = FALSE)
 	if(!always_deep)
 		return
+
 	if(status == FISH_DEAD)
-		return span_deadsay("It's dead.")
+		return span_warning("It's dead.")
 
 	var/list/warnings = list()
 	if(get_starvation_mult())
@@ -1260,7 +1261,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish
 	icon = 'icons/roguetown/misc/fish.dmi'
 	trash = null
-	list_reagents = list(/datum/reagent/consumable/nutriment = 10)
+	nutrition = RAWMEAT_NUTRITION * DRIED_MOD
 	tastes = list("fish" = 1)
 	name = "cooked fish"
 	faretype = FARE_POOR
@@ -1330,8 +1331,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	desc = "Plundered Grenzelhoftian chocolate drizzled over fish, this abomination is a delicacy to dark elves. In this case the eyeless cave fish has been substituted for a carp."
 	icon_state = "chocolatecarp"
 	bitesize = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
 	tastes = list("a horrible clash of salty fish and sweet chocolate" = 1)
 	faretype = FARE_IMPOVERISHED
 	rotprocess = null
+	nutrition = CHOCCY_NUTRITION + RAWMEAT_NUTRITION*COOK_MOD
 	eat_effect = /datum/status_effect/buff/foodbuff

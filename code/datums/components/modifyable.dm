@@ -31,7 +31,7 @@
 	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_apply_combat_effects))
 	RegisterSignal(parent, COMSIG_PROJECTILE_ON_HIT, PROC_REF(on_apply_combat_effects_ranged))
 
-/datum/component/modifications/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/user, params)
+/datum/component/modifications/proc/on_attackby(obj/item/source, obj/item/attacking_item, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(istype(attacking_item, /obj/item/gem))

@@ -41,6 +41,13 @@
 		visible_message(span_warning("[L] crushes [src] underfoot."))
 		qdel(src)
 
+/obj/item/neuFarm/seed/get_over_text_content(mob/user)
+	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
+		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
+		if(plant_def_instance)
+			return plant_def_instance.seed_identity
+	return ..()
+
 /obj/item/neuFarm/seed/examine(mob/user)
 	. = ..()
 	var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
@@ -49,7 +56,7 @@
 		var/datum/plant_genetics/seed_genetics_instance = seed_genetics
 		if(seed_genetics_instance.seed_identity_modifier)
 			examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
-		. += span_info("I can tell these are [examine_name].")
+		. += span_notice("I can tell these are [examine_name].")
 		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
 			. += plant_def_instance.get_examine_details()
 

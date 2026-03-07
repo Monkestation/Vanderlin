@@ -7,13 +7,13 @@
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 250
-	buckle_lying = 0
+	buckle_lying = TRUE
 	can_buckle = TRUE
 	buckle_prevents_pull = TRUE
 
 	var/draining_blood = FALSE
 
-/obj/structure/meathook/attackby(obj/item/I, mob/user, params)
+/obj/structure/meathook/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/container = I
 		if(!container.is_open_container())
@@ -49,6 +49,7 @@
 		return FALSE
 
 	var/mob/living/L = user.pulling
+	playsound(src, 'sound/foley/butcher.ogg', 25, TRUE)
 	L.visible_message(span_danger("[user] starts hanging [L] on [src]!"), span_danger("[user] starts hanging you on [src]]!"), span_hear("I hear the sound of clanging chains..."))
 	if(!do_after(user, 12 SECONDS, src))
 		return FALSE
@@ -60,19 +61,16 @@
 	if(user.pulling != L)
 		return FALSE
 
-	playsound(src, 'sound/foley/butcher.ogg', 25, TRUE)
 	L.visible_message(span_danger("[user] hangs [L] on [src]!"), span_danger("[user] hangs you on [src]]!"))
 	L.forceMove(drop_location())
 	L.emote("scream")
 	L.add_splatter_floor()
 	L.adjustBruteLoss(30)
-	L.setDir(2)
+	L.setDir(SOUTH)
+	ADD_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
 	buckle_mob(L, force=1)
-	var/matrix/m90 = matrix(L.transform)
-	m90.Turn(90)
-	m90.Translate(12,12)
-	animate(L, transform = m90, time = 3)
-	L.pixel_y = L.get_standard_pixel_x_offset()
+	L.set_lying_angle(180)
+	playsound(src, 'sound/combat/newstuck.ogg', 80, vary = TRUE)
 	draining_blood = FALSE
 	return TRUE
 
@@ -113,12 +111,12 @@
 		STOP_PROCESSING(SSmachines, src)
 		return
 	L.blood_drained++
+	var/datum/blood_type/bloodtype = L.get_blood_type()
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = L.get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(L))
+		container.reagents.add_reagent(initial(bloodtype.reagent_type), 5, data = bloodtype.get_blood_data(L))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in get_turf(src)
 		if(P)
@@ -131,18 +129,15 @@
 				D.drips++
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				new /obj/effect/decal/cleanable/blood/drip(get_turf(src))
+				new /obj/effect/decal/cleanable/blood/drip(get_turf(src), bloodtype.color)
 
 /obj/structure/meathook/proc/release_mob(mob/living/M)
-	var/matrix/m270 = matrix(M.transform)
-	m270.Translate(-12,-12)
-	m270.Turn(-90)
-	animate(M, transform = m270, time = 3)
-	M.pixel_y = M.get_standard_pixel_y_offset()
+	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
 	M.adjustBruteLoss(30)
 	src.visible_message(span_danger("[M] falls free of [src]!"))
 	unbuckle_mob(M,force=1)
-	M.emote("scream")
+	M.set_lying_angle(pick(90,270))
+	M.emote("painscream")
 	M.AdjustParalyzed(20)
 	draining_blood = FALSE
 

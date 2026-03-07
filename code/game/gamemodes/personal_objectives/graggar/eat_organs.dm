@@ -27,7 +27,7 @@
 
 	organs_consumed++
 
-	if(ispath(organ_type, /obj/item/reagent_containers/food/snacks/organ/heart))
+	if(ispath(organ_type, /obj/item/reagent_containers/food/snacks/meat/organ/heart))
 		hearts_consumed++
 		to_chat(owner.current, span_cult("You feel Graggar's pleasure as you consume a heart!"))
 	else

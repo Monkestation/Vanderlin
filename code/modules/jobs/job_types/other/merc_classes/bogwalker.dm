@@ -28,7 +28,7 @@
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/labor/butchering = 2,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/craft/traps = 3,

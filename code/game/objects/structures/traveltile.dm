@@ -49,11 +49,27 @@
 	var/can_gain_by_walking = FALSE
 	var/check_other_side = FALSE
 	var/list/revealed_to = list()
+	var/area/cached_destination_area
 
 /obj/structure/fluff/traveltile/Initialize()
 	GLOB.traveltiles += src
 	hide_if_needed()
 	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/structure/fluff/traveltile/LateInitialize()
+	. = ..()
+	// Find our paired portal and cache what area it's in
+	resolve_destination_area()
+
+/obj/structure/fluff/traveltile/proc/resolve_destination_area()
+	if(!aportalgoesto)
+		return
+	for(var/obj/structure/fluff/traveltile/other as anything in GLOB.traveltiles)
+		if(other.aportalid == aportalgoesto)
+			cached_destination_area = get_area(other)
+			return
 
 /obj/structure/fluff/traveltile/Destroy()
 	GLOB.traveltiles -= src

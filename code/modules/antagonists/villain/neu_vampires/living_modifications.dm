@@ -1,6 +1,6 @@
 /proc/CheckZoneCoven(mob/target)
 	var/area/area = get_area(target)
-	return !area.coven_protected
+	return area.coven_protected
 
 /mob/living
 	var/cached_island_id = null
@@ -21,12 +21,11 @@
 
 	var/enhanced_strip = FALSE
 	var/datum/clan/clan
-	var/bloodpool = 1000
+	var/bloodpool = 1500
 	var/maxbloodpool = 3000
-	var/masquerade = 5
 
-	var/last_masquerade_violation = 0
-	var/resistant_to_covens = FALSE
+	COOLDOWN_DECLARE(detection_cooldown)
+	var/detections = 0
 
 	var/coven_time_plus = 0
 
@@ -35,7 +34,7 @@
 	var/last_frenzy_check = 0
 	var/atom/frenzy_target = null
 
-	var/last_drinkblood_use = 0
+	COOLDOWN_DECLARE(drinkblood_use)
 	var/last_bloodpower_click = 0
 	var/last_drinkblood_click = 0
 
@@ -104,56 +103,77 @@
 	else
 		hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
 
-/mob/living/proc/CheckEyewitness(mob/living/source, mob/attacker, range = 0, affects_source = FALSE)
-	var/actual_range = max(1, round(range*(attacker.alpha/255)))
-	var/list/seenby = list()
-	for(var/mob/living/carbon/human/human in oviewers(1, source))
-		if(get_turf(src) != turn(human.dir, 180))
-			seenby |= human
-	for(var/mob/living/carbon/human/human in viewers(actual_range, source))
-		if(affects_source)
-			if(human == source)
-				seenby |= human
-		if(!human.pulledby)
-			var/turf/LC = get_turf(attacker)
-			if(LC.get_lumcount() > 0.25 || get_dist(human, attacker) <= 1)
-				if(!attacker.InCone(human))
-					if((human == source) && !affects_source)
-						continue
-					seenby |= human
-	if(length(seenby) >= 1)
-		return TRUE
+/mob/proc/affects_masquerade()
 	return FALSE
 
-/mob/living/proc/AdjustMasquerade(value, forced = FALSE)
-	return
-
-/mob/living/carbon/human/AdjustMasquerade(value, forced = FALSE)
-	if(!clan)
+/mob/living/carbon/affects_masquerade(town_only=TRUE)
+	. = FALSE
+	if(!mind)
 		return
-	if (!forced)
-		if(value > 0)
-			if(HAS_TRAIT(src, TRAIT_VIOLATOR))
-				return
-		if(!CheckZoneCoven(src))
-			return
-	if(!is_special_character(src) || forced)
-		if(((last_masquerade_violation + 10 SECONDS) < world.time) || forced)
-			last_masquerade_violation = world.time
-			if(value < 0)
-				if(masquerade > 0)
-					masquerade = max(0, masquerade+value)
-					to_chat(src, "<span class='userdanger'><b>MASQUERADE VIOLATION!</b></span>")
-			if(value > 0)
-				if(masquerade < 5)
-					masquerade = min(5, masquerade+value)
-					to_chat(src, "<span class='userhelp'><b>MASQUERADE REINFORCED!</b></span>")
+	if(CheckZoneCoven(src))
+		return
+	if(town_only && !is_town_level(z))
+		return
+	if(is_blind())
+		return
+	if(stat >= UNCONSCIOUS)
+		return
+	if(clan)
+		return
+	if(mind.has_antag_datum(/datum/antagonist/vampire) || mind.has_antag_datum(/datum/antagonist/zombie) || mind.has_antag_datum(/datum/antagonist/werewolf))
+		return
+	if((FACTION_UNDEAD in faction) || (MOB_UNDEAD in mob_biotypes))
+		return
+	return TRUE
 
-	if(src in GLOB.coven_breakers_list)
-		if(masquerade > 2)
-			GLOB.coven_breakers_list -= src
-	else if(masquerade < 3)
-		GLOB.coven_breakers_list |= src
+
+/// Check Eye witnesses to vampire stuff in an area.
+/// Called by the perpetrator
+/// atom/source = The atom/location of the thing of interest - what people are looking at
+/mob/living/proc/CheckEyewitness(atom/source, range = DEFAULT_MESSAGE_RANGE, affects_source = FALSE)
+	var/actual_range = max(1, round(range*(source.alpha/255)))
+	var/list/seenby = list()
+	var/turf/T = get_turf(src)
+	//anyone right next to us counts counts
+	for(var/mob/living/carbon/human/H in oviewers(1, src))
+		if(!H.affects_masquerade())
+			continue
+		//assuming they're not looking directly away
+		if(T != get_step(H, turn(H.dir, 180)))
+			seenby |= H
+
+	for(var/mob/living/carbon/human/H in viewers(actual_range, source))
+		if(H == src)
+			continue
+		if(affects_source && H == source)
+			seenby |= H
+			continue
+		if(!H.affects_masquerade())
+			continue
+		if(!(source.has_light_nearby() || H.has_nightvision() || get_dist(H, source) <= 1))
+			continue
+		if(!H.can_see_cone(src))
+			continue
+		seenby |= H
+	return seenby
+
+/// Increases a vampire's detection value by a number of points.
+/// Usually I based the value off of the the number of eyewitnesses.
+/// If the vampire was the source of the eyewitness I decreased it by 1
+/mob/living/proc/vampire_detected(value, forced = FALSE)
+	if(value <= 0)
+		return
+	if(!clan || istype(clan, /datum/clan/daewalker))
+		return
+	if(CheckZoneCoven(src))
+		return
+	if(!COOLDOWN_FINISHED(src, detection_cooldown) && !forced)
+		return
+	COOLDOWN_START(src, detection_cooldown, 20 SECONDS)
+	detections += value
+	GLOB.vamp_detection += value
+	to_chat(src, "<h2>[span_boldannounce("DETECTED x[value]!")]</h2>")
+
 
 /**
  * Creates an action button and applies post_gain effects of the given Coven.
@@ -295,18 +315,21 @@
 
 	// Handle low bloodpool effects
 	handle_bloodpool_effects()
-	blood_volume = BLOOD_VOLUME_SAFE
 
 	// Coffin regeneration
-	var/total_damage = getBruteLoss() + getFireLoss()
 	var/obj/structure/closet/crate/coffin/coffin = loc
-	if(istype(coffin) && total_damage && (src in coffin.contents))
-		if(!HAS_TRAIT(src, TRAIT_DEATHCOMA))
+	if(istype(coffin) && (src in coffin.contents))
+		if(InCritical() && !HAS_TRAIT(src, TRAIT_DEATHCOMA))
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		heal_overall_damage(5, 5)
-		set_bloodpool(min(maxbloodpool * 0.25, bloodpool + 10))
-	if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (total_damage <= 0 || (!istype(coffin) || !(src in coffin.contents))))
+		adjustToxLoss(-5)
+		heal_wounds(25)
+		if(prob(3))
+			regenerate_limb(silent=FALSE)
+		blood_volume = max(blood_volume, min(BLOOD_VOLUME_SAFE, blood_volume + 10))
+		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 5)))
+	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!InCritical() || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
 
@@ -332,7 +355,7 @@
 		if(last_frenzy_check + 5 MINUTES < world.time)
 			rollfrenzy()
 
-/mob/living/carbon/human/proc/get_clan_hierarchy_examine(mob/living/carbon/human/examiner)
+/mob/living/proc/get_clan_hierarchy_examine(mob/living/examiner)
 	if(!clan || !clan_position || !examiner.clan)
 		return ""
 

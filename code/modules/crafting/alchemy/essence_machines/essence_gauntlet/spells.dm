@@ -353,12 +353,12 @@
 
 /datum/status_effect/buff/wind_walking/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("wind_walking", multiplicative_slowdown = -0.3)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = -0.3)
 	to_chat(owner, span_notice("You step upon the wind itself!"))
 
 /datum/status_effect/buff/wind_walking/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("wind_walking")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/aerial_speed
 	id = "aerial_speed"
@@ -367,12 +367,12 @@
 
 /datum/status_effect/buff/aerial_speed/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("aerial_speed", multiplicative_slowdown = -0.5)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = -0.5)
 	to_chat(owner, span_notice("Air currents propel you forward!"))
 
 /datum/status_effect/buff/aerial_speed/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("aerial_speed")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/probability_flux
 	id = "probability_flux"
@@ -408,13 +408,13 @@
 
 /datum/status_effect/buff/momentum_boost/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("momentum", multiplicative_slowdown = -0.4)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = -0.4)
 	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Kinetic energy surges through you!"))
 
 /datum/status_effect/buff/momentum_boost/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("momentum")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/regeneration_cycle
@@ -440,11 +440,11 @@
 
 /datum/status_effect/buff/elven_grace/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("elven_grace", multiplicative_slowdown = -0.2)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = -0.2)
 
 /datum/status_effect/buff/elven_grace/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("elven_grace")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/balanced_mind
 	id = "balanced_mind"

@@ -10,12 +10,16 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	honorary = "Captain"
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/captain
-	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard)
+	spells = list(
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/guard,
+		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
+		)
 	give_bank_account = 120
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
@@ -37,13 +41,13 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/swords = 5,
+		/datum/skill/combat/swords = 3,
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 4,
+		/datum/skill/combat/shields = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/polearms = 2,
+		/datum/skill/combat/polearms = 3,
 		/datum/skill/combat/whipsflails = 2,
 		/datum/skill/combat/crossbows = 3,
 		/datum/skill/combat/bows = 2,
@@ -56,26 +60,33 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/captain/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	add_verb(spawned, /mob/proc/haltyell)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
+	var/static/list/selectableweapon = list(
+		"Law and Order" = list(/obj/item/weapon/sword/sabre/captain, /obj/item/weapon/shield/tower/buckleriron/captain),
+		"Deliverer of Justice" = /obj/item/weapon/polearm/halberd/bardiche/captain,
+	)
+
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose thy blade", title = "CAPTAIN")
+	if(!choice)
+		return
+	switch(choice)
+		if("Law and Order")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 5, TRUE)
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/shields, 2, 4, TRUE)
+		if("Deliverer of Justice")
+			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 5, TRUE)
 
 /datum/outfit/captain
 	name = "Captain"
@@ -87,12 +98,9 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
 	shoes = /obj/item/clothing/shoes/boots
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/shield/tower/metal
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/dec
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
-	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
 	backpack_contents = list(
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
