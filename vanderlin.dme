@@ -1250,7 +1250,6 @@
 #include "code\datums\migrants\migrant_role.dm"
 #include "code\datums\migrants\migrant_wave.dm"
 #include "code\datums\migrants\waves\bodyguard.dm"
-#include "code\datums\migrants\waves\chirurgeon.dm"
 #include "code\datums\migrants\waves\crusader_wave.dm"
 #include "code\datums\migrants\waves\deprived.dm"
 #include "code\datums\migrants\waves\dwarven_company.dm"
