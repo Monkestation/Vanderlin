@@ -24,6 +24,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 
+/mob/living/carbon/human/species/rousman/init_faith()
+	patron = GLOB.patrons_by_type[/datum/patron/godless/naivety]
+
 /mob/living/carbon/human/species/rousman/death(gibbed)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
