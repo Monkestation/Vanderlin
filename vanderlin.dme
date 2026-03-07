@@ -2838,6 +2838,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\antag\roguemage.dm"
 #include "code\modules\jobs\job_types\adventurer\types\antag\sawbones.dm"
 #include "code\modules\jobs\job_types\adventurer\types\antag\sellsword.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\alchemist.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\amazon.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\barbarian.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\cleric.dm"
