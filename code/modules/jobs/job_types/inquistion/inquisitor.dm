@@ -1,5 +1,6 @@
 /datum/job/inquisitor
 	title = "Herr Prafekt"
+	f_title = "Frau Prafekt"
 	department_flag = INQUISITION
 	faction = "Station"
 	total_positions = 1
@@ -10,6 +11,8 @@
 		SPEC_ID_HUMEN,\
 		SPEC_ID_DWARF,\
 	)
+	honorary = "Herr Prafekt"
+	honorary_f = "Frau Prafekt"
 	//You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
 	allowed_patrons = list(/datum/patron/psydon) // you have to keep the official church stance, no way an extremist psydonite could become inquisitor
 	tutorial = "This is the week. All your lessons have led to this moment. Your students follow you with eager steps and breathless anticipation. You’re to observe their hunt, and see if they can banish the evils haunting Psydonia, and rise up to become true inquisitors. A guide to them, a monster to others. You are the thing that goes bump in the night."
@@ -55,14 +58,6 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
-
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Herr Prafekt"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Frau Prafekt"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)

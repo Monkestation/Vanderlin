@@ -53,7 +53,43 @@
 		///datum/action/cooldown/spell/aoe/snuff,
 		/datum/action/cooldown/spell/undirected/conjure_item/calling_card
 	)
-
+	honoraries = list(
+		"Acquisitions Expert" = HONORARY_PREFIX,
+		"the Cleptologist" = HONORARY_SUFFIX,
+		"the One Who Walks" = HONORARY_SUFFIX,
+		"of Deadly Shadows" = HONORARY_SUFFIX,
+		"the Prince of Shadows" = HONORARY_SUFFIX,
+		"the Recovery Specialist" = HONORARY_SUFFIX,
+		"the Acquirer" = HONORARY_SUFFIX,
+		"the Antiquarian" = HONORARY_SUFFIX,
+		"the Art Critic" = HONORARY_SUFFIX,
+		"the Collector" = HONORARY_SUFFIX,
+		"the Courier" = HONORARY_SUFFIX,
+		"the Crow" = HONORARY_SUFFIX,
+		"the Fence" = HONORARY_SUFFIX,
+		"the Filcher" = HONORARY_SUFFIX,
+		"the Ghost" = HONORARY_SUFFIX,
+		"the Grifter" = HONORARY_SUFFIX,
+		"the Infiltrator" = HONORARY_SUFFIX,
+		"the Intruder" = HONORARY_SUFFIX,
+		"the Invisible" = HONORARY_SUFFIX,
+		"the Keeper" = HONORARY_SUFFIX,
+		"the Locksmith" = HONORARY_SUFFIX,
+		"the Lurker" = HONORARY_SUFFIX,
+		"the Magpie" = HONORARY_SUFFIX,
+		"the Mask" = HONORARY_SUFFIX,
+		"the Master Thief" = HONORARY_SUFFIX,
+		"the Night Watch" = HONORARY_SUFFIX,
+		"the Phantom" = HONORARY_SUFFIX,
+		"the Raven" = HONORARY_SUFFIX,
+		"the Respectable Citizen" = HONORARY_SUFFIX,
+		"the Shadow" = HONORARY_SUFFIX,
+		"the Skeleton Key" = HONORARY_SUFFIX,
+		"the Specialist" = HONORARY_SUFFIX,
+		"the Stalker" = HONORARY_SUFFIX,
+		"the Trickster" = HONORARY_SUFFIX,
+		"the Watcher" = HONORARY_SUFFIX,
+	)
 
 /datum/outfit/wretch/antiquarian/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -76,15 +112,7 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 
+
 /datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
-		var/prev_real_name = spawned.real_name
-		var/prev_name = spawned.name
-		var/title
-		var/list/titles = list("The Keeper", "The Phantom", "The Crow", "The Raven", "The Magpie", "The Courier", "The Mask", "The Shadow", "The Ghost", "The Fence", "The Intruder", "The Infiltrator", "The Filcher", "The Grifter", "He Who Walks", "The Invisible", "The Watcher", "The Master Thief", "The Dark Project", "The Lurker", "Prince of Shadows", "The Night Watch", "The Antiquarian", "Acquisitions Expert", "Cleptologist", "The Specialist", "The Stalker", "Of Deadly Shadows", "The Trickster", "The Respectable Citizen", "The Locksmith", "The Acquirer", "The Collector", "The Skeleton Key", "The Art Critic", "Recovery Specialist" ) //Dude, Trust.
-		title = pick(titles)
-		spawned.real_name = "[prev_real_name], [title]"
-		spawned.name = "[prev_name], [title]"
-
 	wretch_select_bounty(spawned)

@@ -422,6 +422,11 @@ em {
   color: hsl(15.5, 64.8%, 44.5%);
 }
 
+.tinywarning {
+  color: hsl(15.5, 64.8%, 44.5%);
+  font-size: 85%;
+}
+
 .alertwarning {
   color: hsl(15.5, 64.8%, 44.5%);
   font-weight: bold;
@@ -550,16 +555,6 @@ em {
 
 .nicegreen {
   color: hsl(132.8, 93.4%, 29.6%);
-}
-
-.boldnicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-weight: bold;
-}
-
-.tinynicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-size: 85%;
 }
 
 .cult {
@@ -714,15 +709,19 @@ em {
   color: hsl(111, 100%, 56%);
 }
 
-.small {
-  font-size: 90%;
-}
-
 .smaller {
   font-size: 60%;
 }
 
-.slightly_larger {
+.tiny {
+  font-size: 85%;
+}
+
+.small {
+  font-size: 90%;
+}
+
+.slightlylarger {
   font-size: 115%;
 }
 
@@ -732,6 +731,10 @@ em {
 
 .reallybig {
   font-size: 135%;
+}
+
+.larger {
+  font-size: 140%;
 }
 
 .extremelybig {

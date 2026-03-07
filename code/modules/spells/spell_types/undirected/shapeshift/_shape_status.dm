@@ -14,7 +14,6 @@
 	var/already_restored = FALSE
 	/// Do we keep the caster's skill levels and experience for the mob?
 	var/keep_skills = TRUE
-	var/datum/skill_holder/stored_skill_holder
 
 /datum/status_effect/shapechange_mob/on_creation(mob/living/new_owner, mob/living/caster, keep_skills = TRUE)
 	// If any type or subtype of shapeshift mob is on the new_owner already throw an error and self-delete
@@ -36,11 +35,16 @@
 /datum/status_effect/shapechange_mob/on_apply()
 	. = ..()
 	owner.gender = caster_mob.gender
-	if(!keep_skills)
-		stored_skill_holder = caster_mob.ensure_skills()
-		stored_skill_holder.set_current(null)
 	owner.regenerate_icons()
+
+	var/datum/skill_holder/temporary_holder
+	if(!keep_skills)
+		temporary_holder = caster_mob.ensure_skills()
+		temporary_holder.set_current(null)
 	caster_mob.mind?.transfer_to(owner)
+	if(temporary_holder)
+		temporary_holder.set_current(caster_mob)
+
 	caster_mob.forceMove(owner)
 	ADD_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
 	ADD_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
@@ -102,12 +106,12 @@
 	REMOVE_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
 	REMOVE_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
 	caster_mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
-	owner.mind?.transfer_to(caster_mob)
 
+	// We aren't keeping skills, so trash the owner's skills. Don't qdel in case we're caching the owner's skill holder for some reason.
 	if(!keep_skills)
-		caster_mob.skills?.set_current(null)
-		stored_skill_holder.set_current(caster_mob)
-		stored_skill_holder = null
+		owner.ensure_skills().set_current(null)
+
+	owner.mind?.transfer_to(caster_mob)
 
 	if(kill_caster_after)
 		caster_mob.death()
@@ -217,8 +221,7 @@
 	if(caster_mob.stat != DEAD)
 		caster_mob.revive(HEAL_DAMAGE|HEAL_BLOOD)
 
-		// var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
-		var/damage_to_apply = owner.getBruteLoss()
+		var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
 		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
 
 	if(iscarbon(owner))

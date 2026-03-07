@@ -686,7 +686,7 @@
 
 /obj/structure/fluff/statue/OnCrafted(dirin, mob/user)
 	. = ..()
-	for(var/obj/structure/fluff/statue/carving_block in contents)
+	for(var/obj/structure/fluff/carving_block in contents)
 		dir = carving_block.dir
 		qdel(carving_block)
 	update_appearance(UPDATE_ICON_STATE)
@@ -1502,17 +1502,21 @@
 		icon_state = pick("knightstatue2_l", "knightstatue2_r")
 	return ..()
 
-/obj/structure/fluff/statue/carving_block
+/obj/structure/fluff/carving_block
 	name = "carving block"
 	desc = "Ready for sculpting."
+	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	icon_state = "block"
 	density = TRUE
 	anchored = FALSE
+	layer = ABOVE_MOB_LAYER
+	plane = GAME_PLANE_UPPER
+	blade_dulling = DULLING_BASH
 	max_integrity = 100
 	debris = list(/obj/item/natural/stoneblock = 1)
 	drag_slowdown = 3
 
-/obj/structure/fluff/statue/carving_block/Initialize(mapload, ...)
+/obj/structure/fluff/carving_block/Initialize(mapload, ...)
 	. = ..()
 	AddComponent(/datum/component/simple_rotation)
 

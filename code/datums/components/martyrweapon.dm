@@ -171,12 +171,12 @@
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(HAS_TRAIT(user, TRAIT_ROTMAN) || HAS_TRAIT(user, TRAIT_NOBREATH))
-				to_chat(H, span_warn("It burns and sizzles! It does not tolerate my pallid flesh!"))
+				to_chat(H, span_warning("It burns and sizzles! It does not tolerate my pallid flesh!"))
 				H.dropItemToGround(parent)
 				return
 			var/datum/job/J = SSjob.GetJob(H.job)
 			if(J.title != "Grandmaster Templar")
-				to_chat(H, span_warn("It slips from my grasp. I can't get a hold."))
+				to_chat(H, span_warning("It slips from my grasp. I can't get a hold."))
 				H.dropItemToGround(parent)
 				return
 			if(!bound_user)
