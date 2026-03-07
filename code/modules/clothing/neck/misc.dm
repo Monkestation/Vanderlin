@@ -307,37 +307,37 @@
 	dyeable = TRUE
 	max_integrity = INTEGRITY_STRONG
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/eora
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/eora
 	detail_color = CLOTHING_WISTERIA
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/ravox
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/ravox
 	detail_color = CLOTHING_ROYAL_RED
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/noc
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/noc
 	detail_color = CLOTHING_DIRT
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/xylix
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/xylix
 	detail_color = CLOTHING_CHALK_WHITE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/astrata
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/astrata
 	detail_color = CLOTHING_YELLOW
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/necra
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/necra
 	detail_color = CLOTHING_EGGPLANT
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/pestra
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/pestra
 	detail_color = CLOTHING_TARAXACUM_YELLOW
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/dendor
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/dendor
 	detail_color = CLOTHING_DARK_GREEN
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/abyssor
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/abyssor
 	detail_color = CLOTHING_MAGE_ORANGE
 
-/obj/item/clothing/neck/chaincoif/iron/clericcoif/colored/malum
+/obj/item/clothing/neck/chaincoif/iron/cleric/colored/malum
 	detail_color = CLOTHING_BURLAP
 
 /obj/item/clothing/neck/gorget/copper
