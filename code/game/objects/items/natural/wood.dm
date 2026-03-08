@@ -194,7 +194,7 @@
 
 	var/obj/item/natural/bundle/stick/B = tool
 	if(B.amount < B.maxamount)
-		to_chat(user, span_notice("I add [src] to [B]."))
+		user.balloon_alert(user, "[name] added.")
 		B.amount += 1
 		B.update_bundle()
 		qdel(src)
@@ -212,7 +212,7 @@
 	qdel(tool)
 	qdel(src)
 	user.put_in_hands(F)
-	to_chat(user, "You collect the [F.stackname] into a bundle.")
+	user.balloon_alert(user, "[F.stackname] bundled.")
 
 	return ITEM_INTERACT_SUCCESS
 

@@ -114,15 +114,14 @@
 	. = ..()
 	icon_state = active ? "smoker_lit" : "smoker"
 
-/obj/item/bee_smoker/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/natural/bundle/cloth))
-		var/obj/item/natural/bundle/cloth/C = I
+/obj/item/bee_smoker/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/bundle/cloth))
+		var/obj/item/natural/bundle/cloth/C = tool
 		if(C.amount >= 1 && fuel < max_fuel)
 			to_chat(user, span_notice("You stuff some cloth into [src]."))
 			C.use(1)
 			fuel = min(fuel + 5, max_fuel)
-			return TRUE
-	return ..()
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/magnifying_glass
 	name = "magnifying glass"

@@ -133,13 +133,10 @@
  * Each one is split into its own proc
  */
 /obj/item/reagent_containers/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!user.used_intent)
+	if(!user.used_intent || !spillable)
 		return NONE
 
 	if(user.used_intent.type == INTENT_GENERIC)
-		return NONE
-
-	if(!spillable)
 		return NONE
 
 	if(user.used_intent.type == INTENT_SPLASH)
@@ -147,6 +144,9 @@
 			return ITEM_INTERACT_SUCCESS
 
 		return ITEM_INTERACT_BLOCKING
+
+	if(!interacting_with.reagents)
+		return NONE
 
 	if(user.used_intent.type == INTENT_POUR)
 		if(ismob(interacting_with))
