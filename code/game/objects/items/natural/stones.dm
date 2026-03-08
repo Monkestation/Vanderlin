@@ -323,6 +323,26 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 
 	return ITEM_INTERACT_SUCCESS
 
+/obj/item/natural/stone/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(isitem(interacting_with))
+		var/obj/item/sharpening = interacting_with
+		if(!sharpening.max_blade_int)
+			return NONE
+		playsound(src, pick('sound/items/sharpen_long1.ogg','sound/items/sharpen_long2.ogg'), 100)
+		user.visible_message("<span class='notice'>[user] sharpens [src]!</span>")
+		degrade_bintegrity(1)
+		add_bintegrity(max_blade_int * 0.1, user)
+		if(prob(35))
+			var/datum/effect_system/spark_spread/S = new()
+			var/turf/front = get_step(user,user.dir)
+			S.set_up(1, 1, front)
+			S.start()
+
+		return ITEM_INTERACT_SUCCESS
+
 /obj/item/natural/rock
 	name = "rock"
 	desc = "A large stone that looks breakable."
