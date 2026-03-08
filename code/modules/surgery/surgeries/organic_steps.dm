@@ -5,8 +5,8 @@
 	name = "Incise"
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 80,
 	)
 
 	time = 1.6 SECONDS
@@ -48,9 +48,8 @@
 	name = "Clamp bleeders"
 
 	implements = list(
-		TOOL_HEMOSTAT = 75,
-		TOOL_WIRECUTTER = 60,
-		TOOL_IMPROVISED_HEMOSTAT = 38,
+		TOOL_HEMOSTAT = 100,
+		TOOL_IMPROVISED_HEMOSTAT = 70,
 	)
 
 	time = 2.4 SECONDS
@@ -82,10 +81,8 @@
 	name = "Retract incision"
 
 	implements = list(
-		TOOL_RETRACTOR = 75,
-		TOOL_SCREWDRIVER = 50,
-		TOOL_IMPROVISED_RETRACTOR = 38,
-		TOOL_WIRECUTTER = 35,
+		TOOL_RETRACTOR = 100,
+		TOOL_IMPROVISED_RETRACTOR = 75,
 	)
 
 	time = 2.4 SECONDS
@@ -159,8 +156,8 @@
 	name = "Saw bone"
 
 	implements = list(
-		TOOL_SAW = 80,
-		TOOL_IMPROVISED_SAW = 65,
+		TOOL_SAW = 100,
+		TOOL_IMPROVISED_SAW = 75,
 		/obj/item/weapon/shovel = 50,
 		/obj/item = 25,
 	)

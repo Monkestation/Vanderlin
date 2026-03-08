@@ -21,7 +21,7 @@
 	name = "Implant limb"
 
 	implements = list(
-		/obj/item/bodypart = 80,
+		/obj/item/bodypart = 90,
 	)
 
 	time = 3 SECONDS
@@ -118,7 +118,7 @@
 
 	implements = list(
 		TOOL_SAW = 90,
-		TOOL_IMPROVISED_SAW = 60,
+		TOOL_IMPROVISED_SAW = 70,
 	)
 
 	preop_sound = 'sound/foley/sewflesh.ogg'

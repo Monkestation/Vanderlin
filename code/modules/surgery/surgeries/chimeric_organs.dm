@@ -17,7 +17,6 @@
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/create_chimeric_organ,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST, BODY_ZONE_HEAD)
@@ -28,8 +27,8 @@
 	name = "perform chimeric ritual"
 	desc = "Transform a normal organ into a chimeric organ capable of accepting grafted nodes."
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 75,
 	)
 	time = 10 SECONDS
 
@@ -102,7 +101,6 @@
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/graft_chimeric_node,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST, BODY_ZONE_HEAD)
@@ -114,8 +112,8 @@
 	desc = "Graft a harvested humor into a chimeric organ."
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 75,
 	)
 
 	time = 8 SECONDS
@@ -309,7 +307,6 @@
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/repair_chimeric_organ,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST, BODY_ZONE_HEAD)
@@ -321,8 +318,8 @@
 	desc = "Try to repair a failed chimeric organ. Does not restore blood requirements."
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 75,
 	)
 
 	time = 15 SECONDS

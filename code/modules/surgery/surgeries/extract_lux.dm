@@ -8,7 +8,6 @@
 		/datum/surgery_step/retract,
 		/datum/surgery_step/saw,
 		/datum/surgery_step/extract_lux,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST)
@@ -40,8 +39,8 @@
 	name = "Extract Lux"
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 75,
 		/obj/item/kitchen/spoon = 40,
 	)
 

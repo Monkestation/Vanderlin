@@ -7,7 +7,6 @@
 		/datum/surgery_step/retract,
 		/datum/surgery_step/saw,
 		/datum/surgery_step/infuse_lux,
-		/datum/surgery_step/cauterize,
 	)
 	possible_locs = list(BODY_ZONE_CHEST)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)

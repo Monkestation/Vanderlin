@@ -7,7 +7,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/relocate_bone,
-		/datum/surgery_step/cauterize,
 	)
 
 	possible_locs = list(
@@ -29,8 +28,8 @@
 
 	accept_hand = TRUE
 	implements = list(
-		TOOL_BONESETTER = 90,
-		TOOL_HAND = 50,
+		TOOL_BONESETTER = 10,
+		TOOL_HAND = 60,
 	)
 
 	time = 6.4 SECONDS

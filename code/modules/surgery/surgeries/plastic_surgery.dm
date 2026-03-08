@@ -6,7 +6,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/reshape_face,
-		/datum/surgery_step/cauterize,
 	)
 
 	possible_locs = list(BODY_ZONE_HEAD)
@@ -19,9 +18,9 @@
 	name = "Reshape face"
 
 	implements = list(
-		TOOL_SCALPEL = 70,
-		TOOL_WIRECUTTER = 50,
-		/obj/item = 35,
+		TOOL_SCALPEL = 100,
+		TOOL_WIRECUTTER = 65,
+		/obj/item = 45,
 	)
 
 	time = 6.4 SECONDS

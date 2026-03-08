@@ -9,7 +9,6 @@
 		/datum/surgery_step/retract,
 		/datum/surgery_step/saw,
 		/datum/surgery_step/extract_chimeric_node,
-		/datum/surgery_step/cauterize
 	)
 	possible_locs = list(BODY_ZONE_CHEST)
 
@@ -19,8 +18,8 @@
 	name = "Extract Humors"
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		/obj/item = 60,
+		TOOL_SCALPEL = 100,
+		/obj/item = 75,
 		/obj/item/kitchen/spoon = 40,
 	)
 

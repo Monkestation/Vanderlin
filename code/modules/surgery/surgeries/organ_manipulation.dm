@@ -8,7 +8,6 @@
 		/datum/surgery_step/retract,
 		/datum/surgery_step/saw,
 		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/cauterize,
 	)
 
 	possible_locs = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
@@ -25,7 +24,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/incise,
 		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(
@@ -42,7 +40,7 @@
 	accept_hand = TRUE
 
 	implements = list(
-		/obj/item/organ = 80,
+		/obj/item/organ = 100,
 	)
 
 	preop_sound = 'sound/surgery/organ2.ogg'

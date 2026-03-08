@@ -22,7 +22,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/heal/brute,
-		/datum/surgery_step/cauterize,
 	)
 
 /datum/surgery/healing/burn
@@ -33,7 +32,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/heal/burn,
-		/datum/surgery_step/cauterize,
 	)
 
 /datum/surgery/healing/burn/combo
@@ -44,7 +42,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/heal/combo,
-		/datum/surgery_step/cauterize,
 	)
 
 	skill_median = SKILL_LEVEL_EXPERT
@@ -53,10 +50,9 @@
 	name = "Repair body"
 
 	implements = list(
-		TOOL_SUTURE = 80,
-		TOOL_HEMOSTAT = 60,
-		TOOL_IMPROVISED_HEMOSTAT = 50,
-		TOOL_SCREWDRIVER = 50,
+		TOOL_SUTURE = 100,
+		TOOL_HEMOSTAT = 75,
+		TOOL_IMPROVISED_HEMOSTAT = 60,
 	)
 
 	time = 4 SECONDS

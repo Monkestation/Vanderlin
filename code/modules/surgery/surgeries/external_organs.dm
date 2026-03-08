@@ -37,9 +37,9 @@
 	name = "Sever External Organ"
 
 	implements = list(
-		TOOL_SCALPEL = 80,
-		TOOL_SAW = 60,
-		TOOL_IMPROVISED_SAW = 50,
+		TOOL_SCALPEL = 100,
+		TOOL_SAW = 75,
+		TOOL_IMPROVISED_SAW = 60,
 		/obj/item = 40,
 	)
 

@@ -5,7 +5,6 @@
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/burn_rot,
-		/datum/surgery_step/cauterize,
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST)
@@ -17,10 +16,9 @@
 	name = "burn rot"
 
 	implements = list(
-		TOOL_CAUTERY = 85,
-		/obj/item/clothing/neck/psycross/silver = 85,
-		TOOL_WELDER = 70,
-		/obj/item = 35,
+		TOOL_CAUTERY = 100,
+		/obj/item/clothing/neck/psycross/silver = 80,
+		/obj/item = 45,
 	)
 
 	time = 8 SECONDS

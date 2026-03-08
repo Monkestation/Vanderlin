@@ -25,8 +25,8 @@
 	name = "Amputate"
 
 	implements = list(
+		TOOL_SAW = 100,
 		TOOL_SCALPEL = 80,
-		TOOL_SAW = 60,
 		TOOL_IMPROVISED_SAW = 50,
 		/obj/item = 40,
 	)

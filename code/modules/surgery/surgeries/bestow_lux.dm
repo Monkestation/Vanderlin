@@ -6,7 +6,6 @@
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/bestow_lux,
-		/datum/surgery_step/cauterize
 	)
 
 	possible_locs = list(BODY_ZONE_CHEST)
