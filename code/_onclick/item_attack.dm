@@ -256,6 +256,7 @@
 	if(HAS_TRAIT(offered_item, TRAIT_NODROP))
 		to_chat(user, span_warning("I can't offer this."))
 		return
+
 	user.offer_item(src, offered_item)
 
 /**

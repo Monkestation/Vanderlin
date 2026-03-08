@@ -34,7 +34,7 @@
 			soil.user_till_soil(user)
 			return TRUE
 
-		if(location.is_blocked_turf(TRUE))
+		if(location.is_blocked_turf(TRUE, src))
 			balloon_alert(user, "blocked!")
 			return
 
