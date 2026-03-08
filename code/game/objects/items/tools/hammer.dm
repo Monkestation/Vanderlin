@@ -87,6 +87,9 @@
 		else
 			user.visible_message(span_warning("[user] fumbles trying to repair [attacked_prosthetic]!"))
 			attacked_prosthetic.take_damage(attacked_prosthetic.max_integrity * 0.1, BRUTE, "blunt")
+
+		user.changeNext_move(CLICK_CD_MELEE)
+
 		return ITEM_INTERACT_SUCCESS
 
 	if(isitem(O))
@@ -118,6 +121,9 @@
 		else
 			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
 			attacked_item.take_damage(attacked_item.max_integrity * 0.1, BRUTE, "blunt")
+
+		user.changeNext_move(CLICK_CD_MELEE)
+
 		return ITEM_INTERACT_SUCCESS
 
 	if(isstructure(O))
@@ -139,6 +145,9 @@
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		user.visible_message(span_info("[user] repairs [attacked_structure]!"))
+
+		user.changeNext_move(CLICK_CD_MELEE)
+
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/hammer/getonmobprop(tag)
