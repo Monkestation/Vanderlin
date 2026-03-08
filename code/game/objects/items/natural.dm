@@ -9,42 +9,46 @@
 	var/bundletype = null
 	var/quality = SMELTERY_LEVEL_NORMAL // To not ruin blacksmith recipes
 
-/obj/item/natural/attackby(obj/item/W, mob/living/user, list/modifiers)
-	if(istype(W, /obj/item/natural/bundle))
-		if(item_flags & IN_STORAGE)
-			to_chat(user, span_warning("It's hard to find [src] in my bag."))
-			return
-		var/obj/item/natural/bundle/B = W
-		if(istype(src, B.stacktype))
-			if(B.amount < B.maxamount)
-				B.amount++
-				B.update_bundle()
-				to_chat(user, span_notice("You add [src] to [W]."))
-				qdel(src)
-				user.changeNext_move(CLICK_CD_RANGE)
-			else
-				to_chat(user, span_warning("There's not enough space in [W]."))
-			return
-	return ..()
+/obj/item/natural/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/bundle))
+		var/obj/item/natural/bundle/B = tool
+		if(!istype(src, B.stacktype))
+			return NONE
 
-/obj/item/natural/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(istype(A, /obj/item/natural))
 		if(item_flags & IN_STORAGE)
-			to_chat(user, span_warning("It's hard to find [src] in my bag."))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		var/obj/item/natural/B = A
-		if(bundletype && bundletype == B.bundletype)
-			if(!user.temporarilyRemoveItemFromInventory(src))
-				return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-			var/obj/item/natural/bundle/N = new bundletype(loc)
-			to_chat(user, span_notice("You collect the [N.stackname] into a bundle."))
-			qdel(B)
+			user.balloon_alert(user, "can't reach!")
+			return ITEM_INTERACT_BLOCKING
+
+		if(B.amount < B.maxamount)
+			B.amount++
+			B.update_bundle()
+			user.balloon_alert(user, "[name] added.")
 			qdel(src)
-			user.put_in_active_hand(N)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+			user.changeNext_move(CLICK_CD_RANGE)
+		else
+			user.balloon_alert(user, "no space!")
+
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/natural))
+		var/obj/item/natural/natural = tool
+		if(!ispath(natural.bundletype, bundletype))
+			return NONE
+
+		if(!isturf(loc))
+			return NONE
+
+		if(item_flags & IN_STORAGE)
+			user.balloon_alert(user, "can't reach!")
+			return ITEM_INTERACT_BLOCKING
+
+		var/obj/item/natural/bundle/N = new bundletype(loc)
+		user.put_in_hands(N)
+		user.balloon_alert(user, "[N.stackname] bundled.")
+		qdel(natural)
+		qdel(src)
+
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/bundle
 	name = "bundle"
@@ -69,54 +73,126 @@
 	var/base_width = 32
 	var/base_height = 32
 
-/obj/item/natural/bundle/attackby(obj/item/W, mob/living/user, list/modifiers)
+/obj/item/natural/bundle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(amount <= 0) //how did you manage to do this
 		qdel(src)
-		return
-	if(istype(W, /obj/item/natural/bundle))
-		var/obj/item/natural/bundle/B = W
-		if(src.stacktype == B.stacktype)
-			if(src.amount + B.amount > maxamount)
-				amount = (src.amount + B.amount) - maxamount
-				B.amount = maxamount
-				B.update_bundle()
-				to_chat(user, span_warning("There's not enough space in [B]."))
-				if(amount == 1)
-					var/obj/H = new stacktype(src.loc)
-					user.put_in_hands(H)
-					qdel(src)
-				else
-					update_bundle()
-			else
-				to_chat(user, span_notice("You add [src] to [B]."))
-				B.amount += amount
-				B.update_bundle()
-				qdel(src)
-			return
-	else if(istype(W, stacktype))
+		return ITEM_INTERACT_SUCCESS
+
+	if(user.cmode)
+		return NONE
+
+	if(istype(tool, stacktype))
 		if(item_flags & IN_STORAGE)
-			return
-		if(src.amount < src.maxamount)
-			to_chat(user, span_notice("You add [W] to [src]."))
-			src.amount++
+			return NONE
+
+		if(amount >= maxamount)
+			user.balloon_alert(user, "full!")
+			return ITEM_INTERACT_BLOCKING
+
+		user.balloon_alert(user, "[tool.name] added.")
+		amount++
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/natural/bundle))
+		if(item_flags & IN_STORAGE)
+			return NONE
+
+		var/obj/item/natural/bundle/B = tool
+		if(!ispath(B.stacktype, stacktype))
+			return NONE
+
+		if((amount + B.amount) < maxamount)
+			user.balloon_alert(user, "[tool.name] added.")
+			B.amount += amount
 			update_bundle()
-			qdel(W)
+			qdel(src)
+			return ITEM_INTERACT_SUCCESS
+
+		B.amount = maxamount
+		B.update_bundle()
+		amount = (amount + B.amount) - maxamount
+		user.balloon_alert(user, "not enough space!")
+
+		if(amount == 1)
+			var/obj/H = new stacktype(get_turf(src))
+			user.put_in_hands(H)
+			qdel(src)
 		else
-			to_chat(user, span_warning("There's not enough space in [src]."))
-		return
-	return ..()
+			update_bundle()
+
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/natural/bundle/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(amount <= 0) //how did you manage to do this
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
+
+	if(user.cmode)
+		return NONE
+
+	if(ismob(interacting_with))
+		return NONE
+
+	if(amount >= maxamount)
+		to_chat(user, span_warning("There's not enough space in [src]."))
+		return ITEM_INTERACT_BLOCKING
+
+	user.changeNext_move(CLICK_CD_FAST)
+	user.visible_message(
+		span_notice("[user] begins to gather all the [stackname] in front of them."),
+		span_notice("I begin gathering all the [stackname] in front of me..."),
+	)
+
+	var/turf/turflocation = get_turf(interacting_with)
+	for(var/obj/item/item in turflocation)
+		if(amount >= maxamount)
+			return ITEM_INTERACT_BLOCKING
+
+		if(!do_after(user, 5 DECISECONDS, src))
+			return ITEM_INTERACT_BLOCKING
+
+		if(!istype(item, stacktype) && !istype(item, /obj/item/natural/bundle))
+			continue
+
+		if(item.loc != turflocation)
+			continue
+
+		if(istype(item, stacktype))
+			amount++
+			qdel(item)
+		else if(istype(item, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = item
+			if(B.stacktype == stacktype)
+				if(amount + B.amount > maxamount)
+					B.amount = (amount + B.amount) - maxamount
+					amount = maxamount
+					if(B.amount == 1)
+						new B.stacktype(B.loc)
+						qdel(B)
+					else
+						B.update_bundle()
+				else
+					amount += B.amount
+					qdel(B)
+		update_bundle()
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/bundle/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(item_flags & IN_STORAGE)
-		to_chat(user, span_warning("I can't reach [src]!"))
+		user.balloon_alert(user, "can't reach!")
 		return
+
 	if(amount <= 0) //how did you manage to do this
 		qdel(src)
 		return
+
 	var/mob/living/carbon/human/H = user
 	switch(amount)
 		if(2)
@@ -139,57 +215,13 @@
 			amount -= 1
 			var/obj/F = new stacktype(get_turf(src))
 			H.put_in_hands(F)
-			to_chat(user, span_notice("You remove \a [F] from [src]."))
+			user.balloon_alert(user, "I remove \a [F].")
 
 	update_bundle()
 
 /obj/item/natural/bundle/examine(mob/user)
 	. = ..()
 	. += span_notice("There are [amount] [stackname] in this bundle.")
-
-/obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(amount <= 0) //how did you manage to do this
-		qdel(src)
-		return
-	if(ismob(A))
-		return SECONDARY_ATTACK_CALL_NORMAL
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(amount >= maxamount)
-		to_chat(user, span_warning("There's not enough space in [src]."))
-		return TRUE
-	user.visible_message("[user] begins to gather all the [stackname] in front of them.", "I begin gathering all the [stackname] in front of me...")
-	var/turf/turflocation = get_turf(A)
-	for(var/obj/item/item in turflocation)
-		if(amount >= maxamount)
-			break
-		if(!istype(item, stacktype) && !istype(item, /obj/item/natural/bundle))
-			continue
-		if(!do_after(user, 5 DECISECONDS, src))
-			break
-		if(item.loc != turflocation)
-			continue
-		if(istype(item, stacktype))
-			amount++
-			qdel(item)
-		else if(istype(item, /obj/item/natural/bundle))
-			var/obj/item/natural/bundle/B = item
-			if(B.stacktype == stacktype)
-				if(amount + B.amount > maxamount)
-					B.amount = (amount + B.amount) - maxamount
-					amount = maxamount
-					if(B.amount == 1)
-						new B.stacktype(B.loc)
-						qdel(B)
-					else
-						B.update_bundle()
-				else
-					amount += B.amount
-					qdel(B)
-		update_bundle()
 
 /obj/item/natural/bundle/proc/update_bundle()
 	if(firefuel != 0)
