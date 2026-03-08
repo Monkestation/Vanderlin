@@ -2,27 +2,23 @@
 /obj/item/weapon/sword/short/gronn
 	name = "Osslandic hinterblade"
 	desc = "Due to the shortage of forged steel in Ossland, their iron blades have become hardier and thicker than what one may see elsewhere. The favoured weapon of choice for any able-bodied hunter of Ossland, the hinterblade is the heftier, unwieldy cousin of the arming sword."
-	possible_item_intents = list(/datum/intent/sword/cut/militia, /datum/intent/sword/chop/militia, /datum/intent/sword/thrust/short)
 	icon_state = "gronnsword"
-	gripped_intents = null
-	minstr = 10 //NO TWINKS!!
-	wdefense = 3 // Use it with a shield jackass
+	force = DAMAGE_SWORD
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(/datum/intent/sword/cut/militia, /datum/intent/sword/chop/militia, SHORT_THRUST)
 	wlength = WLENGTH_SHORT
+	gripped_intents = null
+	minstr = 9 //NO TWINKS!!
 	w_class = WEIGHT_CLASS_NORMAL
 
 	grid_width = 32
 	grid_height = 96
 
 /datum/intent/sword/cut/militia
-	penfactor = 30
-	damfactor = 1.2
-	no_early_release = TRUE
+	penfactor = 10
 
 /datum/intent/sword/chop/militia
-	penfactor = 50
-	swingdelay = 0
-	damfactor = 1.0
-	no_early_release = TRUE
+	penfactor = 10
 
 /obj/item/weapon/handclaw
 	name = "Iron Hound Claws"
@@ -31,23 +27,22 @@
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "ironclaws"
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
-	force = 30
-	throwforce = 12
-	thrown_bclass = BCLASS_CUT
+	force = DAMAGE_KATAR + 5
+	throwforce = DAMAGE_KATAR - 3
+	wbalance = DODGE_CHANCE_NORMAL
 	wdefense = ULTMATE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/claw/cut/iron, /datum/intent/claw/lunge/iron, /datum/intent/claw/rend)
-	wbalance = DODGE_CHANCE_NORMAL
+	possible_item_intents = list(/datum/intent/claw/cut/iron, /datum/intent/claw/lunge, /datum/intent/claw/rend)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STANDARD
 
-	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
+	thrown_bclass = BCLASS_CUT
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	associated_skill = /datum/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
+	melting_material = /datum/material/iron
 	anvilrepair = /datum/skill/craft/weaponsmithing
-	smeltresult = /obj/item/ingot/iron
 	grid_height = 96
 	grid_width = 32
 
@@ -56,13 +51,13 @@
 	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel, \
 			Their longer blades offer a superior defence option but their added weight slows them down."
 	icon_state = "steelclaws"
-	wdefense = 6
-	force = 35
+	force = DAMAGE_KATAR + 7
+	wdefense = GOOD_PARRY
 	possible_item_intents = list(/datum/intent/claw/cut/steel, /datum/intent/claw/lunge/steel, /datum/intent/claw/rend/steel)
 	wbalance = EASY_TO_DODGE
-	max_blade_int = 180
-	max_integrity = 200
-	smeltresult = /obj/item/ingot/steel
+	max_blade_int = 250
+	max_integrity = INTEGRITY_STRONG
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/handclaw/gronn
 	name = "Ossland Beast Claws"
@@ -70,12 +65,9 @@
 			Their unique design aids them in slipping between the plates in armor and their light weight supports rapid aggressive slashes. \
 			'The cycle of predator and prey continues. To hunt is to be hunted is to hunt in return.'"
 	icon_state = "gronnclaws"
-	wdefense = 3
-	force = 25
-	possible_item_intents = list(/datum/intent/claw/cut/gronn, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
+	wdefense = GOOD_PARRY
+	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
 	wbalance = HARD_TO_DODGE
-	max_blade_int = 200
-	max_integrity = 200
 
 
 /obj/item/weapon/handclaw/getonmobprop(tag)
@@ -94,24 +86,18 @@
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-
-/datum/intent/claw/lunge/iron
-	damfactor = 1.2
-	swingdelay = 8
-	clickcd = CLICK_CD_MELEE
-	penfactor = 35
+	swingdelay = 10
+	penfactor = 20
+	misscost = 4
 
 /datum/intent/claw/lunge/steel
-	damfactor = 1.2
+	damfactor = 1.1
 	swingdelay = 12
 	clickcd = CLICK_CD_RESIST
 	penfactor = 35
 
 /datum/intent/claw/lunge/gronn
-	damfactor = 1.1
-	swingdelay = 5
 	clickcd = 10
-	penfactor = 45
 
 /datum/intent/claw/cut
 	name = "cut"
@@ -121,6 +107,9 @@
 	blade_class = BCLASS_CUT
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
 	item_damage_type = "slash"
+	misscost = 4
+	penfactor = 10
+	swingdelay = 3
 
 /datum/intent/claw/cut/iron
 	penfactor = 20
@@ -147,33 +136,34 @@
 	animname = "cut"
 	blade_class = BCLASS_CHOP
 	reach = 1
-	penfactor = AP_CLUB_SMASH
-	swingdelay = 20
-	damfactor = 2.5
-	clickcd = CLICK_CD_RESIST
+	penfactor = AP_AXE_CHOP
+	swingdelay = 5
+	clickcd = 16
+	damfactor = 1.1
 	no_early_release = TRUE
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	misscost = 10
+	misscost = 8
 	damfactor = 0.05
 
 /datum/intent/claw/rend/steel
-	damfactor = 3
+	damfactor = 1.2
 
 //Mauls. Woe. Most characters will not be able to engage with this, beyond hobbling.
 //Why? The unique strength lockout. The minimum strength is not a suggestion.
 /obj/item/weapon/mace/goden/maul
-	force_wielded = DAMAGE_HEAVYCLUB_WIELD - 3 //-3 compared to grand mace(steel goden). Better intents.
-	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
 	name = "maul"
 	desc = "Who would need something this large? It looks like it was made for tearing down walls, rather than men."
 	icon_state = "sledge"
+	force_wielded = DAMAGE_HEAVYCLUB_WIELD - 3 //-3 compared to grand mace(steel goden). Better intents.
+	wdefense = GOOD_PARRY
 	wlength = WLENGTH_LONG
+	possible_item_intents = list(/datum/intent/mace/strike)
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/effect/daze, /datum/intent/effect/hobble)
+	minstr = 12
+
 	swingsound = BLUNTWOOSH_HUGE
 	slot_flags = null //No.
-	minstr = 14
-	wdefense = 3
 	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -189,7 +179,6 @@
 	swingdelay = 6
 	damfactor = 0.8
 	penfactor = AP_CLUB_STRIKE
-	clickcd = CLICK_CD_RESIST
 	item_damage_type = "blunt"
 	intent_effect = /datum/status_effect/debuff/hobbled
 	target_parts = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) //Intentionally leaving out feet. If you know, you know.

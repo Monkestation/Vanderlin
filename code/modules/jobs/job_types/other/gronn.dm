@@ -9,14 +9,10 @@
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
 	skills = list(
 	//Universal skills
-		/datum/skill/misc/reading = SKILL_LEVEL_NONE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_NONE,
 		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
 		/datum/skill/labor/fishing = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
-		/datum/skill/craft/sewing = SKILL_LEVEL_NONE,
-		/datum/skill/craft/cooking = SKILL_LEVEL_NONE,
 	)
 
 	pack_title = "Available archetypes"
@@ -148,7 +144,6 @@
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	jobstats = list(
-		STATKEY_WIL = 3, //People see big numbers and start shitting their pants, but their weighted stats are 7 and it's limited to one, singular slot. This is fine.
 		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
 		STATKEY_INT = 2,
 		STATKEY_CON = 3,
