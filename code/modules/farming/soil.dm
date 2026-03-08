@@ -303,7 +303,7 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+/obj/structure/soil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(try_handle_seed_planting(tool, user))
 		return ITEM_INTERACT_SUCCESS
 

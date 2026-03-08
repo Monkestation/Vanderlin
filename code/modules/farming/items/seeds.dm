@@ -61,6 +61,9 @@
 			. += plant_def_instance.get_examine_details()
 
 /obj/item/neuFarm/seed/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(!isturf(interacting_with))
 		return NONE
 
@@ -71,24 +74,27 @@
 		try_plant_seed(user, soil)
 		return ITEM_INTERACT_SUCCESS
 
-	if(istype(T, /turf/open/floor/dirt))
-		if(T.is_blocked_turf(TRUE))
-			balloon_alert(user, "blocked!")
-			return ITEM_INTERACT_BLOCKING
+	if(!istype(T, /turf/open/floor/dirt))
+		return ITEM_INTERACT_BLOCKING
 
-		if(!(user.get_skill_level(/datum/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
-			balloon_alert(user, "not enough skill!")
-			return ITEM_INTERACT_BLOCKING
+	if(T.is_blocked_turf(TRUE))
+		balloon_alert(user, "blocked!")
+		return ITEM_INTERACT_BLOCKING
 
-		balloon_alert(user, "making a mound...")
-		if(!do_after(user, get_farming_do_time(user, 10 SECONDS), target = src))
-			return ITEM_INTERACT_BLOCKING
+	if(!(user.get_skill_level(/datum/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
+		balloon_alert(user, "not enough skill!")
+		return ITEM_INTERACT_BLOCKING
 
-		apply_farming_fatigue(user, 30)
+	balloon_alert(user, "making a mound...")
+	if(!do_after(user, get_farming_do_time(user, 10 SECONDS), target = src))
+		return ITEM_INTERACT_BLOCKING
 
-		if(!(locate(/obj/structure/soil) in T))
-			new /obj/structure/soil(T)
-		return ITEM_INTERACT_SUCCESS
+	apply_farming_fatigue(user, 30)
+
+	if(!(locate(/obj/structure/soil) in T))
+		new /obj/structure/soil(T)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/neuFarm/seed/proc/try_plant_seed(mob/living/user, obj/structure/soil/soil)
 	if(soil.plant)
