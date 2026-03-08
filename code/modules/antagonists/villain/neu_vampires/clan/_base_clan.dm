@@ -91,6 +91,7 @@ And it also helps for the character set panel
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
 	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
+	RegisterSignal(H, COMSIG_MOB_EXAMINATE_CARBON, PROC_REF(examine_target))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -255,7 +256,7 @@ And it also helps for the character set panel
  */
 /datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -347,6 +348,15 @@ And it also helps for the character set panel
 
 /datum/clan/proc/on_vampire_life(mob/living/carbon/human/H)
 	H.process_vampire_life()
+
+/datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
+	if(user != examined) // no need to beat yourself up over it buddy
+		var/mob/living/carbon/human/H = examined
+		if(istype(H) && H.virginity && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
+			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_boldred("[P[THEYRE]] a virgin!"))
+	var/clan_examine = examined.get_clan_hierarchy_examine(user)
+	if(clan_examine)
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, clan_examine)
 
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	add_verb(H, /mob/living/carbon/human/proc/disguise_button)

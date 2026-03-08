@@ -82,8 +82,8 @@
  ** amt - how much to change the skill
  ** silent - wether the player will be notified about their skill change or not
 */
-/mob/proc/adjust_skillrank(skill, amt, silent=FALSE)
-	return ensure_skills().adjust_skillrank(skill, amt, silent)
+/mob/proc/adjust_skillrank(skill, amt, silent = FALSE, remainder = TRUE)
+	return ensure_skills().adjust_skillrank(skill, amt, silent, remainder)
 
 /mob/proc/return_our_apprentice_name()
 	return ensure_skills().our_apprentice_name
@@ -369,7 +369,7 @@
  ** amt - how much to change the skill
  ** silent - wether the player will be notified about their skill change or not
 */
-/datum/skill_holder/proc/adjust_skillrank(skill, amt, silent = FALSE)
+/datum/skill_holder/proc/adjust_skillrank(skill, amt, silent = FALSE, remainder = TRUE)
 	if(!amt)
 		return
 	if(!GetSkillRef(skill))
@@ -383,28 +383,29 @@
 	var/experience_change = 0
 	var/current_experience = skill_experience[skill]
 
-	var/remainder = target_level %% 1 // See DM documentation on why %% is used instead of %
+	// Reminder that %% is the modulus operator
+	var/xp_remainder = remainder ? target_level %% 1 : 0
 	switch(target_level)
 		if(SKILL_LEVEL_LEGENDARY to INFINITY)
 			experience_change = SKILL_EXP_LEGENDARY - current_experience
 		if(SKILL_LEVEL_MASTER to SKILL_LEVEL_LEGENDARY)
 			experience_change = SKILL_EXP_MASTER - current_experience
-			experience_change += (SKILL_EXP_LEGENDARY - SKILL_EXP_MASTER) * remainder
+			experience_change += (SKILL_EXP_LEGENDARY - SKILL_EXP_MASTER) * xp_remainder
 		if(SKILL_LEVEL_EXPERT to SKILL_LEVEL_MASTER)
 			experience_change = SKILL_EXP_EXPERT - current_experience
-			experience_change += (SKILL_EXP_MASTER - SKILL_EXP_EXPERT) * remainder
+			experience_change += (SKILL_EXP_MASTER - SKILL_EXP_EXPERT) * xp_remainder
 		if(SKILL_LEVEL_JOURNEYMAN to SKILL_LEVEL_EXPERT)
 			experience_change = SKILL_EXP_JOURNEYMAN - current_experience
-			experience_change += (SKILL_EXP_EXPERT - SKILL_EXP_JOURNEYMAN) * remainder
+			experience_change += (SKILL_EXP_EXPERT - SKILL_EXP_JOURNEYMAN) * xp_remainder
 		if(SKILL_LEVEL_APPRENTICE to SKILL_LEVEL_JOURNEYMAN)
 			experience_change = SKILL_EXP_APPRENTICE - current_experience
-			experience_change += (SKILL_EXP_JOURNEYMAN - SKILL_EXP_APPRENTICE) * remainder
+			experience_change += (SKILL_EXP_JOURNEYMAN - SKILL_EXP_APPRENTICE) * xp_remainder
 		if(SKILL_LEVEL_NOVICE to SKILL_LEVEL_APPRENTICE)
 			experience_change = SKILL_EXP_NOVICE - current_experience
-			experience_change += (SKILL_EXP_APPRENTICE - SKILL_EXP_NOVICE) * remainder
+			experience_change += (SKILL_EXP_APPRENTICE - SKILL_EXP_NOVICE) * xp_remainder
 		if(SKILL_LEVEL_NONE to SKILL_LEVEL_NOVICE)
 			experience_change = SKILL_EXP_NONE - current_experience
-			experience_change += (SKILL_EXP_NOVICE - SKILL_EXP_NONE) * remainder
+			experience_change += (SKILL_EXP_NOVICE - SKILL_EXP_NONE) * xp_remainder
 
 	adjust_experience(skill, experience_change, silent, check_apprentice = FALSE)
 

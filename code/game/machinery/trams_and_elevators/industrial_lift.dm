@@ -779,7 +779,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	lift_id = TRAM_LIFT_ID
 	lift_master_type = /datum/lift_master/tram
 	radial_travel = FALSE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 	/// Set by the tram control console in late initialize
 	var/travelling = FALSE

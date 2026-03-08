@@ -11,6 +11,9 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
+	honorary = "Baron"
+	honorary_f = "Baroness"
+
 
 	jobstats = list(
 		STATKEY_STR = 1,
@@ -77,6 +80,9 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
+	honorary = "Baron"
+	honorary_f = "Baroness"
+
 
 	jobstats = list(
 		STATKEY_INT = 3,
@@ -145,6 +151,9 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -209,6 +218,8 @@
 		STATKEY_SPD = -1,
 		STATKEY_INT = 2,
 	)
+	honorary = "Sir"
+	honorary_f = "Dame"
 
 	skills = list(
 		/datum/skill/craft/engineering = 3,
@@ -249,14 +260,6 @@
 		if(!index)
 			index = spawned.real_name
 		S.name = "knight tabard ([index])"
-
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 	var/obj/item/clothing/cloak/boiler/boiler = locate() in spawned.get_all_gear()
 	if(boiler)

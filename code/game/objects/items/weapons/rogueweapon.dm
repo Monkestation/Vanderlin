@@ -63,9 +63,6 @@
 		H.Paralyze(4 SECONDS)
 		return
 
-/obj/item/weapon/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
-
 /obj/item/weapon/examine(mob/user)
 	. = ..()
 

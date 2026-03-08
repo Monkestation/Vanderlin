@@ -190,6 +190,13 @@
 	/// Do we get passive income every day from our noble estates?
 	var/noble_income = FALSE
 
+	/// Honorary titles appended to names. Based off pronouns
+	var/honorary
+	var/honorary_f
+	/// Same as above, but for suffixes. See Khan
+	var/honorary_suffix
+	var/honorary_suffix_f
+
 	/// Antagonist role to grant with this job
 	var/datum/antagonist/antag_role
 
@@ -348,6 +355,7 @@
 	if(voicepack_f)
 		spawned.dna?.species.soundpack_f = new voicepack_f()
 
+	assign_honorary_titles(spawned)
 	/// WHY WAS THIS ON OUTFIT??? It shouldn't be HERE either
 	if(spawned.familytree_pref != FAMILY_NONE && !spawned.family_datum)
 		SSfamilytree.AddLocal(spawned, spawned.familytree_pref)
@@ -604,6 +612,16 @@
 			return f_title
 
 	return title
+
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(honorary)
+		grantee.honorary = honorary
+	if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions
