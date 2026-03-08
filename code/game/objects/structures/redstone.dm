@@ -442,7 +442,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/delay2close = 0
 	resistance_flags = INDESTRUCTIBLE
 	no_over_text = TRUE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	redstone_structure = TRUE
 
 /obj/structure/floordoor/gatehatch/Initialize()

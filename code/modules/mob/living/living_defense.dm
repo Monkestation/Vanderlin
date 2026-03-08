@@ -226,11 +226,10 @@
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
 		playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(1 SECONDS)
-		user.changeNext_move(1 SECONDS)
+		user.Immobilize(0.5 SECONDS)
+		user.changeNext_move(CLICK_CD_GRABBING)
 		user.adjust_stamina(rand(2,6))
-		src.Immobilize(0.5 SECONDS)
-		src.changeNext_move(0.5 SECONDS)
+		src.Immobilize(0.25 SECONDS)
 		return
 
 	if(!instant)

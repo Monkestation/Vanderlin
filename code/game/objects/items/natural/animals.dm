@@ -299,7 +299,7 @@
 			return TRUE
 		if(is_species(user, /datum/species/werewolf))
 			visible_message(span_danger("[user] ravenously consumes [src]!"), span_warning("I feed on succulent flesh. I feel reinvigorated."))
-			H.rage_datum?.update_rage(text2num(WW_RAGE_HIGH))
+			H.rage_datum?.update_rage(WW_RAGE_HIGH)
 			gib()
 		return TRUE
 	if(!src.apply_damage(damage, BRUTE))

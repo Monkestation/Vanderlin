@@ -27,6 +27,7 @@
 		STATKEY_PER = -1
 	)
 
+
 	skills = list(
 		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/medicine = 3,

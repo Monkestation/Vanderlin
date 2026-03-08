@@ -78,6 +78,7 @@
 	// owner.current should now be the original human mob, if not something is terribly wrong
 	if(!silent && owner.current)
 		to_chat(owner.current,span_danger("I am no longer a [special_role]!"))
+	REMOVE_TRAIT(owner, TRAIT_NO_TRANSFORM, REF(src))
 	owner.special_role = null
 	owner.current.remove_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
 	owner.current.remove_language(/datum/language/beast)

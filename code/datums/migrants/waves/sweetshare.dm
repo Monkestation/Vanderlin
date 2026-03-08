@@ -19,6 +19,8 @@
 		STATKEY_STR = -2,
 		STATKEY_CON = -1,
 	)
+	honorary_suffix = "the Candyman"
+	honorary_suffix_f = "the Candywoman"
 
 	skills = list(
 		/datum/skill/combat/knives = 1,
@@ -37,14 +39,6 @@
 
 /datum/job/migrant/sweetshare/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Candyman"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Candywoman"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 /datum/outfit/sweetshare
 	name = "Candyman (Migrant Wave)"

@@ -460,3 +460,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 
 /// If a carbon is thrown at a speed faster than normal and impacts something solid, they take extra damage for every extra speed up to this number (see [/mob/living/carbon/proc/throw_impact])
 #define CARBON_MAX_IMPACT_SPEED_BONUS 5
+
+/// A define so the cooldown on the baited status and the duration of the baitcd status are the same
+#define BAIT_COOLDOWN_TIME 15 SECONDS

@@ -18,13 +18,8 @@
 /mob/dead/observer/profane/DblClickOn(atom/clicked_atom, params) // Souls trapped by the dagger should not be jumping around.
 	return
 
-/mob/dead/observer/rogue/DblClickOn(atom/clicked_atom, params)
-	if(check_click_intercept(params2list(params), clicked_atom))
-		return
-
-	if(can_reenter_corpse && mind && mind.current)
-		if(clicked_atom == mind.current || (mind.current in clicked_atom))
-			reenter_corpse()
+/mob/dead/observer/rogue/arcaneeye/DblClickOn(atom/clicked_atom, params)
+	return
 
 /mob/dead/observer/ClickOn(atom/clicked_atom, params)
 	var/list/modifiers = params2list(params)
@@ -38,18 +33,23 @@
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED) && LAZYACCESS(modifiers, MIDDLE_CLICK))
 		ShiftMiddleClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED) && LAZYACCESS(modifiers, CTRL_CLICKED))
 		CtrlShiftClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, MIDDLE_CLICK))
 		MiddleClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		ShiftClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, ALT_CLICKED) && LAZYACCESS(modifiers, RIGHT_CLICK))
 		AltRightClickOn(clicked_atom, modifiers)
 		return
+
 	if(LAZYACCESS(modifiers, CTRL_CLICKED))
 		CtrlClickOn(clicked_atom, modifiers)
 		return
