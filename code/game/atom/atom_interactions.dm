@@ -12,6 +12,10 @@
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 	var/is_left_clicking = !is_right_clicking
 
+	if(!user.cmode && is_left_clicking && user.try_recipes(src, tool))
+		user?.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
+
 	var/early_sig_return = NONE
 	if(is_left_clicking)
 		early_sig_return = SEND_SIGNAL(src, COMSIG_ATOM_ITEM_INTERACTION, user, tool, modifiers) \
@@ -36,10 +40,6 @@
 
 	if(interact_return)
 		return interact_return
-
-	if(!user.cmode && user.try_recipes(src, tool))
-		user.changeNext_move(CLICK_CD_FAST)
-		return ITEM_INTERACT_SUCCESS
 
 	var/tool_type = tool.tool_behaviour
 	if(!tool_type) // here on only deals with ... tools

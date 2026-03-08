@@ -601,8 +601,7 @@
 	playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
 
 	if(!do_after(user, 1.5 SECONDS, src))
-		ITEM_INTERACT_BLOCKING
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	name = "wet flour"
 	desc = "Destined for greatness, at your hands."

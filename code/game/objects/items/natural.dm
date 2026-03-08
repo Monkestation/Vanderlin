@@ -10,6 +10,9 @@
 	var/quality = SMELTERY_LEVEL_NORMAL // To not ruin blacksmith recipes
 
 /obj/item/natural/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(istype(tool, /obj/item/natural/bundle))
 		var/obj/item/natural/bundle/B = tool
 		if(!istype(src, B.stacktype))
@@ -35,20 +38,23 @@
 		if(!ispath(natural.bundletype, bundletype))
 			return NONE
 
-		if(!isturf(loc))
-			return NONE
-
 		if(item_flags & IN_STORAGE)
 			user.balloon_alert(user, "can't reach!")
 			return ITEM_INTERACT_BLOCKING
 
 		var/obj/item/natural/bundle/N = new bundletype(loc)
-		user.put_in_hands(N)
 		user.balloon_alert(user, "[N.stackname] bundled.")
 		qdel(natural)
 		qdel(src)
+		user.put_in_hands(N)
 
 		return ITEM_INTERACT_SUCCESS
+
+/obj/item/natural/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	// Interaction happens first and we want to do the collect all behaviour here
+	if(istype(tool, /obj/item/natural/bundle))
+		return NONE
+	return item_interaction(user, tool, modifiers)
 
 /obj/item/natural/bundle
 	name = "bundle"
