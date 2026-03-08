@@ -151,6 +151,7 @@
 	if(user.used_intent.type == INTENT_POUR)
 		if(ismob(interacting_with))
 			if(try_feed(user, interacting_with))
+				user.changeNext_move(CLICK_CD_FAST)
 				return ITEM_INTERACT_SUCCESS
 		else if(try_pour(user, interacting_with))
 			return ITEM_INTERACT_SUCCESS
