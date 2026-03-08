@@ -18,6 +18,8 @@
 		STATKEY_END = 3,
 		STATKEY_SPD = -2,
 	)
+	honorary = "Sir"
+	honorary_f = "Dame"
 
 	skills = list(
 		/datum/skill/combat/polearms = 4,
@@ -47,11 +49,6 @@
 
 /datum/job/migrant/itinerant_knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Itinerant Knight"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 /datum/outfit/itinerant_knight
 	name = "Itinerant Knight (Migrant Wave)"

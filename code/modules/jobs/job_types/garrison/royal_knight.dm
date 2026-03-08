@@ -29,6 +29,9 @@
 		EXP_TYPE_COMBAT = 1200
 	)
 
+	honorary = "Sir"
+	honorary_f = "Dame"
+
 	jobstats = list(
 		STATKEY_STR = 3,
 		STATKEY_PER = 2,
@@ -58,9 +61,9 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS,
 		TRAIT_NOBLE_POWER
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -68,14 +71,6 @@
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Sir"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Dame"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
 
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE

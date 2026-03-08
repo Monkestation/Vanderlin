@@ -131,3 +131,57 @@
 	if(!istype(user) || (user.shoes != parent) )
 		return
 	user.remove_stress(/datum/stress_event/fullshoe)
+
+/datum/component/storage/concrete/toilet
+	allow_look_inside = FALSE
+	max_w_class = WEIGHT_CLASS_NORMAL
+	max_combined_w_class = 5
+	max_items = 5
+	silent = TRUE
+
+/datum/component/storage/concrete/toilet/attackby(datum/source, obj/item/attacking_item, mob/user, list/modifiers, storage_click)
+	if(isliving(user) && !user.cmode)
+		if(istype(attacking_item, /obj/item/reagent_containers))
+			var/obj/item/reagent_containers/RG = attacking_item
+			if(istype(RG, /obj/item/reagent_containers/glass/bottle))
+				var/obj/item/reagent_containers/glass/bottle/B = RG
+				if(B.closed)
+					return TRUE
+			if(user.used_intent.type == INTENT_FILL)
+				RG.reagents.add_reagent(/datum/reagent/water/gross, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+				to_chat(user, span_notice("I fill [RG] from the toilet."))
+			else if(user.used_intent.type == INTENT_POUR && RG.reagents.total_volume > 0)
+				RG.reagents.remove_all(RG.amount_per_transfer_from_this)
+				to_chat(user, span_notice("I pour [RG] down the toilet."))
+			else if(user.used_intent.type == INTENT_SPLASH && RG.reagents.total_volume > 0)
+				RG.reagents.clear_reagents()
+				to_chat(user, span_notice("I empty [RG] into the toilet."))
+			return TRUE
+		else if(!can_be_inserted(attacking_item, user))
+			return TRUE
+		to_chat(user, span_notice("I carefully place [attacking_item] into the toilet."))
+	return ..()
+
+/datum/component/storage/concrete/toilet/can_be_inserted(obj/item/I, mob/M, list/modifiers, storage_click)
+	if(!istype(I) || (I.item_flags & ABSTRACT))
+		return FALSE //Not an item
+	var/atom/real_location = real_location()
+	var/atom/host = parent
+	if(!isturf(host.loc))
+		return FALSE
+	if(I.w_class > max_w_class)
+		to_chat(M, span_warning("[I] does not fit!"))
+		return FALSE
+	if(real_location.contents.len >= max_items)
+		to_chat(M, span_warning("The toilet is full!"))
+		return FALSE //Storage item is full
+	var/sum_w_class = I.w_class
+	for(var/obj/item/_I in real_location)
+		sum_w_class += _I.w_class //Adds up the combined w_classes which will be in the storage item if the item is added to it.
+	if(sum_w_class > max_combined_w_class)
+		to_chat(M, span_warning("The toilet is too full to fit [I]!"))
+		return FALSE
+	if(HAS_TRAIT(I, TRAIT_NODROP)) //SHOULD be handled in unEquip, but better safe than sorry.
+		to_chat(M, span_warning("\the [I] is stuck to your hand, you can't put it in \the [host]!"))
+		return FALSE
+	return TRUE

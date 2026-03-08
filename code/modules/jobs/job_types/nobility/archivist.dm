@@ -27,6 +27,9 @@
 		EXP_TYPE_LIVING = 300
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	languages = list(
 		/datum/language/elvish,
 		/datum/language/dwarvish,

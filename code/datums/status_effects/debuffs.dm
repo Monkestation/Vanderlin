@@ -503,6 +503,59 @@
 	desc = "I cannot take another action."
 	icon_state = "clickcd"
 
+/datum/status_effect/stacking/baited
+	id = "bait"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/baited
+	tick_interval = BAIT_COOLDOWN_TIME * 2
+	stack_threshold = 2
+	max_stacks = 2
+
+	COOLDOWN_DECLARE(bait_cooldown)
+
+/datum/status_effect/stacking/baited/on_apply()
+	. = ..()
+	if(!.)
+		return
+
+	var/fatiguemod = 1
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		var/armor_class = human_owner.highest_ac_worn()
+		switch(armor_class)
+			if(ARMOR_CLASS_NONE)
+				fatiguemod = 5
+			if(AC_LIGHT, AC_MEDIUM)
+				fatiguemod = 4
+			if(AC_HEAVY)
+				fatiguemod = 3
+
+	COOLDOWN_START(src, bait_cooldown, BAIT_COOLDOWN_TIME)
+
+	owner.adjust_stamina(owner.maximum_stamina / fatiguemod)
+	owner.emote("huh", forced = TRUE)
+	owner.Slowdown(3)
+	owner.Immobilize(0.5 SECONDS)
+
+/datum/status_effect/stacking/baited/threshold_cross_effect()
+	owner.emote("gasp", forced = TRUE)
+	owner.OffBalance(2 SECONDS)
+	owner.Immobilize(2 SECONDS)
+
+/atom/movable/screen/alert/status_effect/debuff/baited
+	name = "Baited"
+	desc = "I fell for it. I'm exposed. I won't fall for it again. For now."
+	icon_state = "bait"
+
+/datum/status_effect/debuff/baitcd
+	id = "baitcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/baitedcd
+	duration = 20 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/baitedcd
+	name = "Bait Cooldown"
+	desc = "I used it. I must wait."
+	icon_state = "baitcd"
+
 /datum/status_effect/debuff/clashcd
 	id = "clashcd"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/clashcd

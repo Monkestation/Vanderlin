@@ -1,7 +1,6 @@
 /mob/living/proc/update_stamina() //update hud and regen after last_fatigued delay on taking
 	var/athletics_skill = 0
-	if(mind)
-		athletics_skill = get_skill_level(/datum/skill/misc/athletics, TRUE)
+	athletics_skill = get_skill_level(/datum/skill/misc/athletics, TRUE)
 	maximum_stamina = (STAEND + athletics_skill) * 10 //This here is the calculation for max STAMINA / GREEN
 
 	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == TOD_DAWN || GLOB.tod == TOD_DAY)) ? 11 : 20
@@ -168,7 +167,7 @@
 		heart_attack()
 	else
 		emote("fatigue", forced = TRUE)
-		if(stress > 15)
+		if(stress > 10)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob, do_freakout_scream)), rand(30,50))
 	if(hud_used)
 		var/matrix/skew = matrix()

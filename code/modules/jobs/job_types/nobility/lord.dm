@@ -35,6 +35,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		EXP_TYPE_LEADERSHIP = 300
 	)
 
+	//These change on map load
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	jobstats = list(
 		STATKEY_STR = 1,
 		STATKEY_INT = 3,
@@ -72,6 +76,14 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 
 	voicepack_m = /datum/voicepack/male/evil
+
+/datum/job/lord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = SSmapping.config.monarch_title
+		honorary_f = SSmapping.config.monarch_title //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = SSmapping.config.monarch_title_f
 
 /datum/job/lord/get_informed_title(mob/mob, ignore_pronouns, change_title = FALSE, new_title)
 	if(change_title)
@@ -158,16 +170,14 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_LORD
+	honorary = "Former Lord"
+	honorary_f = "Former Lady"
 
-/proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)
-	if(!GLOB.lordsurname)
-		return
-	if(preserve_original)
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-		return family_guy.real_name
-	var/list/chopped_name = splittext(family_guy.real_name, " ")
-	if(length(chopped_name) > 1)
-		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
-	else
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-	return family_guy.real_name
+/datum/job/exlord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = "Former [SSmapping.config.monarch_title]"
+		honorary_f = "Former [SSmapping.config.monarch_title]" //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = "Former [SSmapping.config.monarch_title_f]"
+

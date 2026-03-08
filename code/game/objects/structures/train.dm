@@ -13,8 +13,11 @@
 	var/static/list/uncryoable = list(
 		/datum/job/lord,
 		/datum/job/hand,
+		/datum/job/advclass/hand,
 		/datum/job/prince,
+		/datum/job/advclass/heir,
 		/datum/job/consort,
+		/datum/job/advclass/consort,
 		/datum/job/priest,
 		/datum/job/captain,//Rest of these roles cannot cryo, as they must ahelp first before leaving the round.
 		/datum/job/gaffer //opening up the slot will break the gaffer ring code

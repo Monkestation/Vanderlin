@@ -23,6 +23,8 @@
 		/datum/skill/labor/mathematics = 3,
 	)
 
+	honorary = "Paladin"
+
 	jobstats = list(
 		STATKEY_STR = 2,
 		STATKEY_PER = 2,

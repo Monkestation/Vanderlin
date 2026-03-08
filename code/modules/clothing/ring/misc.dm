@@ -433,6 +433,10 @@
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
 	sellprice = 90
 
+/obj/item/clothing/ring/signet/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(tallowed)

@@ -70,45 +70,33 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	var/isinhell
 	var/last_helld = 0
 
+	/// Grants this observer mob all languages
+	var/grant_all_languages = TRUE
+	/// If grant all is not true, the languages we grant
+	var/list/languages_to_grant = list(/datum/language/common)
+
 /mob/dead/observer/rogue
-//	see_invisible = SEE_INVISIBLE_LIVING
+	icon_state = "ghost1"
+	verb_say = "moans"
 	sight = 0
 	see_in_dark = 2
-	var/next_gmove
-	var/misting = 0
 	draw_icon = TRUE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
-	icon_state = "ghost1"
+
+	grant_all_languages = TRUE
+
+/mob/dead/observer/rogue/Initialize(mapload)
+	. = ..()
+	add_movespeed_modifier(MOVESPEED_ID_GHOST, multiplicative_slowdown = 0.3)
 
 /mob/dead/observer/rogue/nodraw
-	draw_icon = FALSE
 	icon = 'icons/roguetown/mob/misc.dmi'
 	icon_state = "ghost"
+	draw_icon = FALSE
 	alpha = 100
 
-/mob/dead/observer/rogue/Move(n, direct)
-	if(world.time < next_gmove)
-		return
-	next_gmove = world.time + 2
-	var/turf/T = n
-
-	setDir(direct)
-
-	if(!loc.Exit(src, T))
-		return
-
-	if(istype(T))
-		if(T.density)
-			return
-		for(var/obj/item/reagent_containers/powder/salt/S in T)
-//			go2hell()
-//			next_gmove = world.time + 30
-			return
-	. = ..()
-
 /mob/dead/observer/screye
-//	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
 	see_in_dark = 0
 	hud_type = /datum/hud/obs
@@ -217,16 +205,12 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 			add_verb(src, GLOB.ghost_verbs)
 			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
-	grant_all_languages()
-
-//	show_data_huds()
-//	data_huds_on = 1
-
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 10)
+	if(grant_all_languages)
+		grant_all_languages()
+	else
+		remove_all_languages()
+		for(var/datum/language/lang as anything in languages_to_grant)
+			grant_language(lang)
 
 /mob/dead/observer/Destroy()
 	mind?.current_ghost = null
@@ -508,22 +492,50 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/verb/follow()
 	set category = "Spirit"
-	set name = "Orbit" // "Haunt"
+	set name = "Orbit"
 	set desc = ""
 	set hidden = 1
-	var/list/mobs
-	if(client.holder)
-		if(check_rights(R_WATCH,0))
-			mobs = getpois(mobs_only=1,skip_mindless=1)
-		else
-			mobs = gethaunt()
-	else
-		mobs = gethaunt()
 
-	var/input = input("Who?!", "Haunt", null, null) as null|anything in mobs
+	var/list/mobs = getpois(mobs_only = TRUE, skip_mindless = TRUE)
+
+	if(!length(mobs))
+		to_chat(src, span_dead("No souls to orbit."))
+		return
+
+	var/input = browser_input_list(src, "Who?!", "Orbit", mobs)
+	if(!input || QDELETED(src))
+		return
+
 	var/mob/target = mobs[input]
+	if(!target)
+		return
+
 	ManualFollow(target)
 
+/mob/dead/observer/proc/dead_tele()
+	set category = "Ghost"
+	set name = "Teleport"
+	set desc= "Teleport to a location"
+	set hidden = 1
+
+	if(!isobserver(src))
+		to_chat(src, span_warning("Not when you're not dead!"))
+		return
+
+	var/area/thearea  = browser_input_list(src, "Area to jump to", "Where?", GLOB.areas)
+
+	if(!thearea || QDELETED(src))
+		return
+
+	var/list/L = list()
+	for(var/turf/T in get_area_turfs(thearea.type))
+		L += T
+
+	if(!length(L))
+		to_chat(src, span_warning("No location available!"))
+		return
+
+	forceMove(pick(L))
 
 #define HAUNTTIME (10 MINUTES)
 

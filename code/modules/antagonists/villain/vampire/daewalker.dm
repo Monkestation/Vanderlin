@@ -205,7 +205,7 @@
 /obj/item/weapon/sword/long/daewalker/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || user.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
-		. += span_noticesmall("The handle will score the hand of anyone who tries to pick it up.")
+		. += span_smallnotice("The handle will score the hand of anyone who tries to pick it up.")
 
 /obj/item/weapon/sword/long/daewalker/Destroy()
 	UnregisterSignal(src, COMSIG_ITEM_AFTER_PICKUP)

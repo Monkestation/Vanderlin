@@ -62,7 +62,7 @@
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
-	user.visible_message(span_noticesmall("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
+	user.visible_message(span_smallnotice("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
 	if(do_after(user, 6 SECONDS, H))
 		if((H.real_name in bound_servants) && H.name == H.real_name)
 			to_chat(user, span_warning("[src] is already bound to this bell."))
@@ -74,7 +74,7 @@
 			to_chat(user, span_warning("The enchantment seems to fail."))
 		else
 			add_servant(H)
-			to_chat(user, span_noticesmall("I bind [H] to [src]."))
+			to_chat(user, span_smallnotice("I bind [H] to [src]."))
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
 
 /obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
@@ -100,10 +100,10 @@
 				return
 			for(var/s_name in servants)
 				remove_servant(servant = s_name)
-			to_chat(user, span_noticesmall("All servants have been relinquished."))
+			to_chat(user, span_smallnotice("All servants have been relinquished."))
 		else
 			remove_servant(servant = remove)
-			to_chat(user, span_noticesmall("[remove] has been relinquished."))
+			to_chat(user, span_smallnotice("[remove] has been relinquished."))
 
 /obj/item/servant_bell/attack_self(mob/living/user, params)
 	. = ..()

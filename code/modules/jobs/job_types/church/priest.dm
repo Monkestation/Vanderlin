@@ -25,6 +25,7 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/churchling,
 		/datum/action/cooldown/spell/undirected/call_bird/priest,
 	)
+	honorary = "Vicar"
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
@@ -143,6 +144,7 @@
 		if(HL.job == "Monarch")
 			HL.job = "Ex-Monarch"
 			lord_job?.remove_spells(HL)
+			HL.honorary = "Former [lord_job.honorary]"
 		if(HL.job == "Consort")
 			HL.job = "Ex-Consort"
 			consort_job?.remove_spells(HL)

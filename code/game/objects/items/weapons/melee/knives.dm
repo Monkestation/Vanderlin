@@ -373,6 +373,11 @@
 	if(HAS_TRAIT(user, TRAIT_ASSASSIN))
 		. += "profane dagger whispers, \"[span_danger("Here we are!")]\""
 
+/obj/item/weapon/knife/dagger/steel/profane/get_examine_icon(mob/user)
+	if(isobserver(user) || HAS_TRAIT(user, TRAIT_ASSASSIN) || get_dist(user, src) < 1)
+		return ..()
+	return ma2html(mutable_appearance(icon, "sdagger"), user)
+
 /obj/item/weapon/knife/dagger/steel/profane/pickup(mob/living/M)
 	. = ..()
 	if(ishuman(M))
@@ -603,6 +608,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
 	sellprice = 3
+	flags_ai_inventory = AI_ITEM_THROWING
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"

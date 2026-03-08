@@ -33,6 +33,8 @@
 		if(answer == CHOICE_CONFIRM)
 			owner.say("I HEREBY STRIP YOU, [uppertext(cast_on.name)], OF NOBILITY!")
 			REMOVE_TRAIT(cast_on, TRAIT_NOBLE_POWER, TRAIT_GENERIC)
+			cast_on.honorary = null
+			cast_on.honorary_suffix = null
 		else
 			reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
@@ -41,3 +43,4 @@
 	. = ..()
 	owner.say("I HEREBY GRANT YOU, [uppertext(cast_on.name)], NOBILITY!")
 	ADD_TRAIT(cast_on, TRAIT_NOBLE_POWER, TRAIT_GENERIC)
+	cast_on.honorary = cast_on.pronouns == SHE_HER ? "Lady" : "Lord"

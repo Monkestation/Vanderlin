@@ -37,6 +37,13 @@
 		TRAIT_CABAL,
 	)
 
+/datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
+	var/mob/living/carbon/human/H = examined
+	if(istype(H) && H.virginity)
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
+	. = ..()
+
+
 /datum/antagonist/zizocultist/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/zizocultist/leader))
 		return span_boldnotice("OUR LEADER!")
