@@ -172,11 +172,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, span_warning("I need to do this from the prayer hall."))
+		return FALSE
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, span_warning("I need to do this from the chapel."))
-			return FALSE
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. The Ten hear their prayers once more!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -203,11 +203,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		if(inputty in GLOB.heretical_players)
 			GLOB.heretical_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -233,11 +233,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")
 
@@ -260,7 +260,7 @@
 /datum/action/priestly_powers
 	name = "Invoke Divine Authority"
 	desc = "Invoke your divine authority."
-	button_icon_state = "voice"
+	button_icon_state = "recruit_acolyte"
 	check_flags = AB_CHECK_CONSCIOUS
 	var/list/authorized_powers = list(PRIEST_ANNOUNCE, PRIEST_CURSE, PRIEST_EXCOMMUNICATE)
 
