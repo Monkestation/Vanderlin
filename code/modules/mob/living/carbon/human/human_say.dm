@@ -35,9 +35,9 @@
 		// This isn't accurate purposely
 		var/appendage = age == AGE_CHILD ? "Child" : "Figure"
 		switch(client?.prefs.voice_type)
-			if(VOICE_TYPE_FEM)
+			if(VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY)
 				appendage = age == AGE_CHILD ? "Girl" : "Woman"
-			if(VOICE_TYPE_MASC)
+			if(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
 				appendage = age == AGE_CHILD ? "Boy" : "Man"
 		return "Unknown [appendage]"
 
