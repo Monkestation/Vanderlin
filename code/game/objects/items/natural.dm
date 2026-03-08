@@ -109,9 +109,9 @@
 			qdel(src)
 			return ITEM_INTERACT_SUCCESS
 
+		amount = (amount + B.amount) - maxamount
 		B.amount = maxamount
 		B.update_bundle()
-		amount = (amount + B.amount) - maxamount
 		user.balloon_alert(user, "not enough space!")
 
 		if(amount == 1)
