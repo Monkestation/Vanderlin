@@ -262,7 +262,7 @@
 
 	return TRUE
 
-/obj/item/reagent_containers/proc/try_fill(mob/living/user, atom/to_fill)
+/obj/item/reagent_containers/proc/try_pour(mob/living/user, atom/to_pour)
 	if(!is_open_container() || !spillable)
 		return FALSE
 
@@ -270,47 +270,47 @@
 		to_chat(user, span_danger("[src] is empty!"))
 		return FALSE
 
-	if(!to_fill.is_refillable())
+	if(!to_pour.is_refillable())
 		return FALSE
 
-	if(to_fill.reagents.holder_full())
-		to_chat(user, span_danger("[to_fill] is full."))
+	if(to_pour.reagents.holder_full())
+		to_chat(user, span_danger("[to_pour] is full."))
 		return FALSE
 
 	var/stealthy = user.rogue_sneaking
 
 	if(stealthy)
-		to_chat(user, span_notice("I pour [src] into [to_fill]."))
+		to_chat(user, span_notice("I pour [src] into [to_pour]."))
 	else
 		user.visible_message(
-			span_notice("[user] pours [src] into [to_fill]."),
-			span_notice("I pour [src] into [to_fill]."),
+			span_notice("[user] pours [src] into [to_pour]."),
+			span_notice("I pour [src] into [to_pour]."),
 		)
 
 	if(!stealthy && poursounds)
 		playsound(user, pick(poursounds), 100, TRUE)
 
 	for(var/i in 1 to 22)
-		if(!do_after(user, 8 DECISECONDS, to_fill, hidden = stealthy))
+		if(!do_after(user, 8 DECISECONDS, to_pour, hidden = stealthy))
 			break
 		if(!reagents.total_volume)
 			break
-		if(to_fill.reagents.holder_full())
+		if(to_pour.reagents.holder_full())
 			break
-		if(!reagents.trans_to(to_fill, amount_per_transfer_from_this, transfered_by = user))
-			reagents.reaction(to_fill, TOUCH, amount_per_transfer_from_this)
+		if(!reagents.trans_to(to_pour, amount_per_transfer_from_this, transfered_by = user))
+			reagents.reaction(to_pour, TOUCH, amount_per_transfer_from_this)
 
 	return TRUE
 
-/obj/item/reagent_containers/proc/try_pour(mob/living/user, atom/to_pour)
+/obj/item/reagent_containers/proc/try_fill(mob/living/user, atom/filling_from)
 	if(!is_open_container() || !spillable)
 		return FALSE
 
-	if(!to_pour.reagents?.total_volume)
-		to_chat(user, span_danger("[to_pour] is empty!"))
+	if(!filling_from.reagents?.total_volume)
+		to_chat(user, span_danger("[filling_from] is empty!"))
 		return FALSE
 
-	if(!to_pour.is_drainable())
+	if(!filling_from.is_drainable())
 		return FALSE
 
 	if(reagents.holder_full())
@@ -320,25 +320,25 @@
 	var/stealthy = user.rogue_sneaking
 
 	if(stealthy)
-		to_chat(user, span_notice("I fill [src] with [to_pour]."))
+		to_chat(user, span_notice("I fill [src] with [filling_from]."))
 	else
 		user.visible_message(
-			span_notice("[user] fills [src] with [to_pour]."),
-			span_notice("I fill [src] with [to_pour]."),
+			span_notice("[user] fills [src] with [filling_from]."),
+			span_notice("I fill [src] with [filling_from]."),
 		)
 
 	if(!stealthy && fillsounds)
 		playsound(user, pick(fillsounds), 100, TRUE)
 
 	for(var/i in 1 to 22)
-		if(!do_after(user, 8 DECISECONDS, to_pour, hidden = stealthy))
+		if(!do_after(user, 8 DECISECONDS, filling_from, hidden = stealthy))
 			break
-		if(!to_pour.reagents.total_volume)
+		if(!filling_from.reagents.total_volume)
 			break
 		if(reagents.holder_full())
 			break
-		if(!to_pour.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user))
-			to_pour.reagents.reaction(src, TOUCH, amount_per_transfer_from_this)
+		if(!filling_from.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user))
+			filling_from.reagents.reaction(src, TOUCH, amount_per_transfer_from_this)
 
 	return TRUE
 
