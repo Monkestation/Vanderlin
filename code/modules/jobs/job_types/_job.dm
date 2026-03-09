@@ -104,6 +104,9 @@
 	// Change values
 	/// Patrons allowed for this job, sets to a random one in this list if list has values
 	var/list/allowed_patrons
+	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
+	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt)
+
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
 

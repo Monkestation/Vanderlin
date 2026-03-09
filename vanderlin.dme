@@ -2953,6 +2953,7 @@
 #include "code\modules\jobs\job_types\nobility\minor_noble.dm"
 #include "code\modules\jobs\job_types\nobility\steward.dm"
 #include "code\modules\jobs\job_types\nobility\titles.dm"
+#include "code\modules\jobs\job_types\other\bogwitch.dm"
 #include "code\modules\jobs\job_types\other\deathknight.dm"
 #include "code\modules\jobs\job_types\other\folkhero.dm"
 #include "code\modules\jobs\job_types\other\goblin.dm"

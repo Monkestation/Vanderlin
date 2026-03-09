@@ -91,3 +91,6 @@
 #define ACCESS_APART_XVIII "apartment18"
 #define ACCESS_APART_XIX "apartment19"
 #define ACCESS_APART_XX "apartment20"
+
+// Other
+#define ACCESS_BOGWITCH "bogwitch"

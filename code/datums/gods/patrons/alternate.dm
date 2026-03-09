@@ -39,6 +39,7 @@
 		"WE ALL DIE SOMEDAY!",
 		"LET ME BE HUNTED, NOT SLAUGHTERED LIKE THIS!"
 	)
+	devotion_holder = /datum/devotion/alternate/great_hunt
 
 /datum/patron/alternate/great_hunt/preference_accessible(datum/preferences/prefs)
 	return FALSE

@@ -1765,6 +1765,7 @@
 	pixel_y = -1
 	},
 /obj/structure/chair/wood/alt,
+/obj/effect/landmark/start/bogwitch,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog)
 "aOH" = (
@@ -4363,6 +4364,8 @@
 /area/outdoors/bog)
 "dyP" = (
 /obj/structure/door/red,
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "dyZ" = (
@@ -4723,6 +4726,7 @@
 /obj/item/clothing/shoes/apothboots,
 /obj/item/clothing/shoes/boots,
 /obj/item/clothing/cloak/black_cloak,
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "dSC" = (
@@ -6612,6 +6616,9 @@
 	dir = 8
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
+/obj/effect/landmark/start/bogwitch{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog/witch)
 "gad" = (
@@ -17676,6 +17683,7 @@
 /obj/item/essence_vial,
 /obj/item/essence_node_jar,
 /obj/item/essence_node_jar,
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
 "sRy" = (
@@ -18170,6 +18178,7 @@
 /obj/item/reagent_containers/glass/bottle,
 /obj/item/reagent_containers/glass/bottle,
 /obj/structure/closet/crate/chest/neu,
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "tCh" = (
@@ -18777,6 +18786,13 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog)
+"umY" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bogwitch{
+	dir = 4
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/shelter/bog/witch)
 "unE" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
@@ -19584,6 +19600,7 @@
 /obj/item/reagent_containers/glass/alchemical,
 /obj/item/reagent_containers/glass/alchemical,
 /obj/item/reagent_containers/glass/alchemical,
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
 "vgg" = (
@@ -82505,7 +82522,7 @@ oyx
 ola
 scN
 nbd
-nbd
+umY
 crc
 crc
 scN

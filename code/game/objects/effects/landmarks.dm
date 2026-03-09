@@ -420,6 +420,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	alpha = 20
 	delete_after_roundstart = FALSE
 
+/obj/effect/landmark/start/bogwitch
+	name = "Bog Witch"
+	icon_state = "arrow"
+
 //Antagonist spawns
 
 /obj/effect/landmark/start/bandit
