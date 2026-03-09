@@ -492,3 +492,96 @@ Keep them reasonable to make
 		/datum/thaumaturgical_essence/air = 4,
 		/datum/thaumaturgical_essence/cycle = 2,
 	)
+// Apothecary's Valeriana Sleep Draught (calming/sleep aid) (2 valeriana, 1 mentha)
+/datum/alch_cauldron_recipe/valeriana_draught
+	recipe_name = "Valeriana Sleep Draught"
+	smells_like = "valeriana"
+	output_reagents = list(datum/reagent/medicine/herbal/valeriana_draught = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/fire = 2,
+		/datum/thaumaturgical_essence/life = 1,
+		/datum/thaumaturgical_essence/water = 2,
+		/datum/thaumaturgical_essence/frost = 1,
+	)
+
+// Apothecary's Benedictus Vigor Tea (stamina enhancement)
+/datum/alch_cauldron_recipe/benedictus_vigor
+	recipe_name = "Benedictus Vigor Tea"
+	smells_like = "benedictus"
+	output_reagents = list(/datum/reagent/buff/herbal/benedictus_vigor = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/order = 4,
+		/datum/thaumaturgical_essence/crystal = 2,
+	)
+
+// Paris Numbing Poultice (topical anesthetic)
+/datum/container_craft/cooking/herbal_salve/paris_poultice
+	recipe_name = "Anaesthetic of Paris"
+	smells_like = "paris"
+	output_reagents = list(/datum/reagent/medicine/herbal/paris_poultice = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/water = 4,
+		/datum/thaumaturgical_essence/poison = 2,
+		/datum/thaumaturgical_essence/fire = 2,
+		/datum/thaumaturgical_essence/life = 1,
+	)
+
+// Complex Multi-Herb Recipes
+
+// Herbalist's Panacea (multiple healing herbs)
+/datum/alch_cauldron_recipe/herbalist_panacea
+	recipe_name = "Herbalist's Panacea"
+	smells_like = "strong potpourri"
+	output_reagents = list(/datum/reagent/medicine/herbal/herbalist_panacea = 10)
+		required_essences = list(
+		/datum/thaumaturgical_essence/air = 4,
+		/datum/thaumaturgical_essence/fire = 2,
+		/datum/thaumaturgical_essence/life = 2,
+		/datum/thaumaturgical_essence/void = 1,
+	)
+
+// Witch's Bane (anti-poison blend)
+/datum/alch_cauldron_recipe/witches_bane
+	recipe_name = "Witch's Bane"
+	smells_like = "fresh laundry"
+	output_reagents = list(/datum/reagent/medicine/herbal/witches_bane = 10)
+		required_essences = list(
+		/datum/thaumaturgical_essence/order = 2,
+		/datum/thaumaturgical_essence/life = 1,
+		/datum/thaumaturgical_essence/fire = 2,
+		/datum/thaumaturgical_essence/cycle = 1,
+	)
+
+// Scholar's Focus (mental enhancement)
+/datum/alch_cauldron_recipe/scholar_focus
+	recipe_name = "Scholar's Focus Tea"
+	smells_like = "mint"
+	output_reagents = list(/datum/reagent/buff/herbal/scholar_focus = 10)
+		required_essences = list(
+		/datum/thaumaturgical_essence/air = 2,
+		/datum/thaumaturgical_essence/cycle = 1,
+	)
+
+// Moonwater Elixir (magical enhancement)
+/datum/alch_cauldron_recipe/moonwater_elixir
+	recipe_name = "Moonwater Elixir"
+	smells_like = "fresh water"
+	output_reagents = list(/datum/reagent/buff/herbal/moonwater_elixir = 10)
+		required_essences = list(
+		/datum/thaumaturgical_essence/fire = 2,
+		/datum/thaumaturgical_essence/cycle = 2,
+		/datum/thaumaturgical_essence/water = 2,
+	)
+
+// Battle Stim (combat enhancement)
+/datum/alch_cauldron_recipe/battle_stim
+	name = "Warrior's Battle Broth"
+	smells_like = "dirty socks"
+	output_reagents = list(/datum/reagent/buff/herbal/battle_stim = 10)
+		required_essences = list(
+		/datum/thaumaturgical_essence/order = 4,
+		/datum/thaumaturgical_essence/air = 2,
+		/datum/thaumaturgical_essence/crystal = 1,
+		/datum/thaumaturgical_essence/motion = 1,
+		/datum/thaumaturgical_essence/void = 1,
+	)
