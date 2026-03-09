@@ -102,7 +102,7 @@
 	return has_access() && can_unlock
 
 /// Mob animation to animate to door
-/mob/proc/lock_unlock_animation(obj/door, obj/item) // this is only mob level and not living because all the lock/unlock procs expect mob and I don't want to rewrite it right now.
+/mob/living/proc/lock_unlock_animation(obj/door, obj/item)
 	animate(src, time = 0.3 SECONDS, pixel_w = ((door.x - src.x) * 5), pixel_z = ((door.y - src.y) * 5), easing = SINE_EASING, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL)
 	animate(time = 0.3 SECONDS, pixel_w = ((door.x - src.x) * -5), pixel_z = ((door.y - src.y) * -5), easing = SINE_EASING, flags = ANIMATION_RELATIVE)
 	if(!item)

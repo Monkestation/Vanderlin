@@ -78,6 +78,7 @@
 
 /datum/lock/key/proc/examine(obj/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
+
 	if(tampered)
 		examine_list += span_notice("[source] has been tampered with.")
 

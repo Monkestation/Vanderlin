@@ -58,7 +58,7 @@
 	var/atom/atom_parent = parent
 	if(broken_parent)
 		if(!istype(tool, item_repair_broken))
-			return ITEM_INTERACT_BLOCKING
+			return NONE
 
 		INVOKE_ASYNC(src, PROC_REF(async_start), source, user, tool, modifiers)
 		return ITEM_INTERACT_SUCCESS
@@ -74,7 +74,7 @@
 			break
 
 	if(!repair_item_path || !istype(tool, repair_item_path))
-		return ITEM_INTERACT_BLOCKING
+		return NONE
 
 	INVOKE_ASYNC(src, PROC_REF(async_start), source, user, tool, modifiers, repair_value)
 
