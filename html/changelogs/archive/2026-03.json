@@ -231,5 +231,95 @@
                 "rscdel": "Removed Tiefling from normal Grenzelhoft merc."
             }
         ]
+    },
+    "2026-03-08": {
+        "TerraGS": [
+            {
+                "rscadd": "Adds pre-loaded toilets"
+            },
+            {
+                "bugfix": "reagent container underlays properly update when emptied"
+            },
+            {
+                "map": "replaces many toilets with the new subtype"
+            },
+            {
+                "code_imp": "Toilets now use a storage component. Removed cistern code."
+            }
+        ],
+        "HelennaC": [
+            {
+                "map": "modified the farming area of keep"
+            },
+            {
+                "map": "modified church's door to locked"
+            },
+            {
+                "map": "removed outside candle on the third floor of the inn"
+            },
+            {
+                "map": "removed flying roof at the keep"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed issues with the martyr weapons"
+            },
+            {
+                "balance": "No super sword on 30 seconds for martyr weapons because of code restraints"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Bog is not mountains now"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added more culture selection options for individual species."
+            }
+        ]
+    },
+    "2026-03-09": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed Headshots / Features not loading in the examine window"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the ravox god boon"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added a Foppish/Twinky masculine voicepack."
+            },
+            {
+                "rscadd": "Added Dainty and Haughty feminine voicepacks. Note: These voicepacks only change a few sounds each."
+            },
+            {
+                "rscadd": "All three voicepacks are appropriate for humans and are unlikely to fit other races, save elves."
+            },
+            {
+                "rscadd": "Added a preference to override species voicepack. Above voicepacks won't activate without this preference active."
+            },
+            {
+                "admin": "Added search mob directory verb."
+            },
+            {
+                "bugfix": "Fixed virgin quirk."
+            }
+        ],
+        "Teoti4001": [
+            {
+                "balance": "Herbal teas are now slightly worse than basic potions, most herbals have been given REM"
+            }
+        ],
+        "Mitchs98": [
+            {
+                "rscadd": "Dungeoneer, Noble, Veteran, Matron, Court Physician, Bard, and Fisher can now all be played two(or more) rounds in a row without spending triumphs."
+            }
+        ]
     }
 }

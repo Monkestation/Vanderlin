@@ -1,3 +1,10 @@
+#define PRIEST_ADD_PENANCE "Assign Penance"
+#define PRIEST_REMOVE_PENANCE "Absolve Penance"
+#define PRIEST_EXCOMMUNICATE "Excommunicate"
+#define PRIEST_CORONATE "Coronate"
+#define PRIEST_ANNOUNCE "Announcement"
+#define PRIEST_CURSE "Curse"
+
 /datum/job/priest
 	title = "Priest"
 	f_title = "Priestess"
@@ -165,11 +172,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, span_warning("I need to do this from the prayer hall."))
+		return FALSE
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, span_warning("I need to do this from the chapel."))
-			return FALSE
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. The Ten hear their prayers once more!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -196,11 +203,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		if(inputty in GLOB.heretical_players)
 			GLOB.heretical_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -226,28 +233,65 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")
 
 /// Helper for giving priest verbs, and whether that should include coronation or penance verbs.
 /mob/living/carbon/human/proc/give_priest_verbs(coronate = TRUE, penance = TRUE)
-	add_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
-	add_verb(src, /mob/living/carbon/human/proc/churchcurse)
-	add_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	var/datum/action/priestly_powers/action = new(src)
+
 	if(coronate)
-		add_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+		action.authorized_powers += PRIEST_CORONATE
 	if(penance)
-		add_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+		action.authorized_powers += PRIEST_ADD_PENANCE
+		action.authorized_powers += PRIEST_REMOVE_PENANCE
+	action.Grant(src)
 
 /// Helper for removing priest verbs
 /mob/living/carbon/human/proc/remove_priest_verbs()
-	remove_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
-	remove_verb(src, /mob/living/carbon/human/proc/churchcurse)
-	remove_verb(src, /mob/living/carbon/human/proc/churchannouncement)
-	remove_verb(src, /mob/living/carbon/human/proc/coronate_lord)
-	remove_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+	for(var/datum/action/priestly_powers/priest_action in actions)
+		priest_action.Remove(src)
+
+/datum/action/priestly_powers
+	name = "Invoke Divine Authority"
+	desc = "Invoke your divine authority."
+	button_icon_state = "recruit_acolyte"
+	check_flags = AB_CHECK_CONSCIOUS
+	var/list/authorized_powers = list(PRIEST_ANNOUNCE, PRIEST_CURSE, PRIEST_EXCOMMUNICATE)
+
+/datum/action/priestly_powers/Trigger(trigger_flags)
+	. = ..()
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/priest = owner
+
+	var/choice = tgui_input_list(priest, "What right do you wish to invoke?", "Choice", authorized_powers)
+	if(!choice)
+		return
+
+	switch(choice)
+		if(PRIEST_ANNOUNCE)
+			priest.churchannouncement()
+		if(PRIEST_CURSE)
+			priest.churchcurse()
+		if(PRIEST_EXCOMMUNICATE)
+			priest.churchexcommunicate()
+		if(PRIEST_ADD_PENANCE)
+			priest.assign_penance_verb()
+		if(PRIEST_REMOVE_PENANCE)
+			priest.absolve_penance_verb()
+		if(PRIEST_CORONATE)
+			priest.coronate_lord()
+
+#undef PRIEST_ANNOUNCE
+#undef PRIEST_CURSE
+#undef PRIEST_EXCOMMUNICATE
+#undef PRIEST_ADD_PENANCE
+#undef PRIEST_REMOVE_PENANCE
+#undef PRIEST_CORONATE
