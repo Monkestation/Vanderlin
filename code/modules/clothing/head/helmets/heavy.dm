@@ -43,7 +43,7 @@
 	block2add = FOV_BEHIND
 
 //................ Iron Plate Helmet ............... //
-/obj/item/clothing/head/helmet/heavy/ironplate5
+/obj/item/clothing/head/helmet/heavy/ironplate
 	name = "iron plate helmet"
 	desc = "An iron masked helmet usually worn by armed men, it is a solid design yet antiquated and cheap."
 	icon_state = "ironplate"
