@@ -306,9 +306,25 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		loadout3 = null
 		return FALSE
 
-	for(var/i in 1 to 3)
-		if(!(vars["loadout[i]"] in GLOB.loadout_items)) // bite me
-			vars["loadout[i]"] = null
+	var/pass = TRUE
+	var/datum/loadout_item/testing_item
+	if(loadout1)
+		testing_item = GLOB.loadout_items[loadout1]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout1 = null
+			pass = FALSE
+	if(loadout2)
+		testing_item = GLOB.loadout_items[loadout2]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout2 = null
+			pass = FALSE
+	if(loadout3)
+		testing_item = GLOB.loadout_items[loadout3]
+		if(!testing_item.is_unlocked_for(parent))
+			loadout3 = null
+			pass = FALSE
+
+	return pass
 
 /datum/preferences/proc/_load_culinary_preferences(S)
 	var/list/loaded_culinary_preferences
