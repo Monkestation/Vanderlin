@@ -2,13 +2,14 @@
 	var/name = "intent"
 	var/desc = ""
 	var/icon_state = ""
+	/// Bonus/Malus to parry and dodge
 	var/def_bonus = 0
 	/// Whether the rclick will try to get turfs as target.
 	var/target_turf = FALSE
 	/// Needs the user to be Adjacent to the target or be in weapon range
 	var/check_range = TRUE
 
-/datum/rmb_intent/proc/get_target(atom/initial_target)
+/datum/rmb_intent/proc/get_target(mob/living/user, atom/initial_target)
 	if(target_turf)
 		return get_turf(initial_target)
 
@@ -26,6 +27,14 @@
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
 	if(!user || !target)
 		return FALSE
+
+	if(target.loc == user)
+		return FALSE
+
+	if(isitem(target))
+		var/obj/item/item_target = target
+		if(item_target.item_flags & IN_STORAGE)
+			return FALSE
 
 	if(check_range)
 		var/obj/item/attacker_item = user.get_active_held_item()
