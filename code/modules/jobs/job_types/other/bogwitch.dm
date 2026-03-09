@@ -16,7 +16,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/bogwitch
-	give_bank_account = 120
+	give_bank_account = 10
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	banned_patrons = list()
 
@@ -86,13 +86,13 @@
 	head = /obj/item/clothing/head/wizhat/witch
 	mask = /obj/item/clothing/face/spectacles
 	shirt = /obj/item/clothing/shirt/robe/colored/black
-	backr = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/storage/backpack/satchel/surgbag
 	cloak = /obj/item/clothing/cloak/wickercloak
 	//ring = /obj/item/clothing/ring/gold
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/keyring/bogwitch
-	backl = /obj/item/weapon/polearm/woodstaff
+	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff
 	shoes = /obj/item/clothing/shoes/boots/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather

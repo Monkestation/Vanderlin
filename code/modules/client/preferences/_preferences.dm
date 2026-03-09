@@ -2580,7 +2580,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 
 		return make_lock_row(
 			used_name,
-			"\[PATRON LOCK\]",
+			"\[PATRON BAN\]",
 			"<b>Patrons Banned:</b><br>[patron_text]"
 		)
 	// No lock

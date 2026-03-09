@@ -17403,8 +17403,7 @@
 "sCw" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -16;
-	pixel_y = 30;
-	crossfire = 1
+	pixel_y = 32
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/shelter/bog/witch)
