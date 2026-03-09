@@ -496,7 +496,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/valeriana_draught
 	recipe_name = "Valeriana Sleep Draught"
 	smells_like = "valeriana"
-	output_reagents = list(datum/reagent/medicine/herbal/valeriana_draught = 10)
+	output_reagents = list(/datum/reagent/medicine/herbal/valeriana_draught = 10)
 	required_essences = list(
 		/datum/thaumaturgical_essence/fire = 2,
 		/datum/thaumaturgical_essence/life = 1,
@@ -515,7 +515,7 @@ Keep them reasonable to make
 	)
 
 // Paris Numbing Poultice (topical anesthetic)
-/datum/container_craft/cooking/herbal_salve/paris_poultice
+/datum/alch_cauldron_recipe/paris_poultice
 	recipe_name = "Anaesthetic of Paris"
 	smells_like = "paris"
 	output_reagents = list(/datum/reagent/medicine/herbal/paris_poultice = 10)
@@ -575,7 +575,7 @@ Keep them reasonable to make
 
 // Battle Stim (combat enhancement)
 /datum/alch_cauldron_recipe/battle_stim
-	name = "Warrior's Battle Broth"
+	recipe_name = "Warrior's Battle Broth"
 	smells_like = "dirty socks"
 	output_reagents = list(/datum/reagent/buff/herbal/battle_stim = 10)
 	required_essences = list(
