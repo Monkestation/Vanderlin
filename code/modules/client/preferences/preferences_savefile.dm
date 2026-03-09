@@ -438,7 +438,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	eye_color = sanitize_hexcolor(eye_color, 3, 0)
 	voice_color = voice_color
 	pronouns = sanitize_text(pronouns, THEY_THEM)
-	voice_type = sanitize_inlist(VOICE_TYPES_LIST, voice_type, VOICE_TYPE_MASC)
+	voice_type = sanitize_inlist(voice_type, VOICE_TYPES_LIST, VOICE_TYPE_MASC)
 	skin_tone = skin_tone
 	family = family
 	gender_choice = gender_choice
