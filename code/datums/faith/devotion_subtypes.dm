@@ -217,32 +217,7 @@
 
 /datum/devotion/alternate/great_hunt
 	miracles = list(
-		CLERIC_T0 = /datum/action/cooldown/spell/healing
-	)
-
-
-
-/*
-		CLERIC_T0 = /datum/action/cooldown/spell/healing,
-		CLERIC_T1 = /datum/action/cooldown/spell/undirected/bless_crops,
+		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert, /datum/action/cooldown/spell/undirected/conjure_item/summon_leech),
+		CLERIC_T1 = list(/datum/action/cooldown/spell/undirected/call_to_slaughter, /datum/action/cooldown/spell/aoe/on_turf/circle/flower_field/holy),
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/beast_sense,
-		CLERIC_T3 = /datum/action/cooldown/spell/beast_tame,
-
-
-		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/undirected/conjure_item/summon_leech),
-		CLERIC_T1 = /datum/action/cooldown/spell/projectile/swordfish,
-		CLERIC_T2 = /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle,
-		CLERIC_T3 = /datum/action/cooldown/spell/ocean_embrace,
-
-
-		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert),
-		CLERIC_T1 = /datum/action/cooldown/spell/burial_rites,
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
-		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
-
-
-		CLERIC_T0 = /datum/action/cooldown/spell/undirected/bloodrage,
-		CLERIC_T1 = /datum/action/cooldown/spell/undirected/call_to_slaughter,
-		CLERIC_T2 = /datum/action/cooldown/spell/projectile/blood_net,
-		CLERIC_T3 = /datum/action/cooldown/spell/revel_in_slaughter,
-*/
+	)
