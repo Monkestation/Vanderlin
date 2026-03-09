@@ -17,6 +17,10 @@
 		return "[desc]<br><br><b>Reason:</b> [reason]"
 	return "[desc]<br><br><b>Reason:</b> Unknown - a mystery from your past."
 
+/datum/quirk/vice/hunted/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Graggar's Prey..."))
+
 /datum/quirk/vice/hunted/on_life(mob/living/user)
 	if(!ishuman(user))
 		return
@@ -38,6 +42,10 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+
+/datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Luxless..."))
 
 /datum/quirk/vice/luxless/on_spawn()
 	if(!ishuman(owner))
@@ -61,6 +69,10 @@
 		return
 
 	ADD_TRAIT(owner, TRAIT_PACIFISM, "[type]")
+
+/datum/quirk/vice/pacifist/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pacifist..."))
 
 /datum/quirk/vice/pacifist/on_remove()
 	if(owner)
@@ -166,6 +178,10 @@
 	var/fear_type
 	var/next_scream_time = 0
 
+/datum/quirk/vice/traumatized/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Traumatized..."))
+
 /datum/quirk/vice/traumatized/on_spawn()
 	if(!ishuman(owner))
 		return
@@ -223,6 +239,10 @@
 	name = "Tortured"
 	desc = "You were once tortured by bandits, Drow raiders, or your own kingdom. You fear it happening again and always answer truthfully when tortured."
 	point_value = 2
+
+/datum/quirk/vice/tortured/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Tortured..."))
 
 /datum/quirk/vice/tortured/on_spawn()
 	if(!ishuman(owner))
@@ -306,6 +326,10 @@
 	incompatible_quirks = list(
 		/datum/quirk/boon/iron_will
 	)
+
+/datum/quirk/vice/weak_heart/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Weak-Hearted..."))
 
 /datum/quirk/vice/weak_heart/on_spawn()
 	if(!ishuman(owner))

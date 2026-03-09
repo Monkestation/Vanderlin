@@ -96,13 +96,13 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
+	H.virginity = TRUE
 
 /datum/quirk/peculiarity/virgin/after_job_spawn()
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
+	H.virginity = TRUE
 
 
 /datum/quirk/peculiarity/mystery_box

@@ -644,11 +644,9 @@
 		stop_pulling()
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
-	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
-		var/wrestling_cooldown_reduction = 0
-		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
-		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
+	if(pulling_broke_free && ismob(pulling))
+		var/wrestling_cooldown_reduction = 0.1 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
 		if(grabber_item.grabbed == pulling)
@@ -1033,7 +1031,7 @@
 			if(heal_flags & ADMIN_HEAL_ALL)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp)
+				wound.heal_wound(wound.whp, forced = TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
@@ -1143,6 +1141,18 @@
 
 	update_sneak_invis()
 
+	// Complete and utter shitcode, make sure conditions match those in /client/proc/Process_Grab()
+	if(. && client && isliving(pulledby) && pulledby != pulling && pulledby.cmode && pulledby.grab_state == GRAB_PASSIVE) //NICHE case of being in a first tier grab state.
+		if(pulledby.anchored)
+			pulledby.stop_pulling()
+		else
+			var/pull_dir = get_dir(src, pulledby)
+			//puller and pullee more than one tile away or in diagonal position
+			if(get_dist(src, pulledby) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
+				pulledby.moving_from_pull = src
+				pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
+				pulledby.moving_from_pull = null
+
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1 && (pulledby != moving_from_pull))//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
 	else
@@ -1225,7 +1235,6 @@
 	if(!can_resist() || surrendering)
 		return
 
-	changeNext_move(CLICK_CD_RESIST)
 
 	if(atkswinging)
 		stop_attack(FALSE)
@@ -1236,6 +1245,8 @@
 		log_combat(src, pulledby, "resisted grab")
 		resist_grab()
 		return
+
+	changeNext_move(CLICK_CD_RESIST)
 
 	//unbuckling yourself
 	if(buckled && last_special <= world.time)
@@ -1527,10 +1538,13 @@
 		to_chat(src, span_warning("I'm restrained!"))
 		return
 
+	// Passive grabs without cmode can be instantly broken and do not block movement
+	if(pulledby.grab_state == GRAB_PASSIVE && !pulledby.cmode)
+		pulledby.stop_pulling()
+		return FALSE
+
 	if(!MOBTIMER_FINISHED(pulledby, MT_RESIST_GRAB, 2 SECONDS))
 		return
-
-	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist)
 
 	var/wrestling_diff = 0
 	var/resist_chance = BASE_GRAB_RESIST_CHANCE
@@ -1627,6 +1641,7 @@
 						span_warning("I struggle against [L]'s grasp![shitte]"), null, null)
 		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 		pulledby.Immobilize(rand(1, 3))
+		Immobilize(3)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist, .)
 

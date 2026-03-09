@@ -21,6 +21,8 @@
 
 /datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant/on_conversion(mob/living/carbon/human/cast_on)
 	. = ..()
+	cast_on.honorary = "Serjeant"
+	cast_on.honorary_suffix = null
 	cast_on.apply_status_effect(/datum/status_effect/buff/promoted_serjeant)
 	var/mob/living/living_owner = owner
 	living_owner.remove_spell(src)

@@ -144,6 +144,19 @@
 	admin_ticket_log(src, msg)
 	return ..()
 
+/client/proc/search_mob_dir()
+	set category = "Admin.Admin"
+	set name = "Search Mob Directory"
+
+	if(!holder)
+		return
+
+	var/mob/chosen_mob
+	chosen_mob = tgui_input_list(usr, "Which mob are you looking for?", "Search Directory", GLOB.mob_directory)
+	if(!chosen_mob)
+		return
+	debug_variables(locate(chosen_mob))
+
 /client/proc/Getkey()
 	set category = "Admin.Admin"
 	set name = "Get Key"

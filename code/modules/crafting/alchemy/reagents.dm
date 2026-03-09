@@ -485,6 +485,10 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustToxLoss(3)
 	else
 		M.adjustToxLoss(6)
+	if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
+		M.adjustOxyLoss(1)
+	else
+		M.adjustOxyLoss(2)
 	return ..()
 
 /datum/reagent/killersice

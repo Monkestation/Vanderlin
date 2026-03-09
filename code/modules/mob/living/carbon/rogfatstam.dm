@@ -167,7 +167,7 @@
 		heart_attack()
 	else
 		emote("fatigue", forced = TRUE)
-		if(stress > 15)
+		if(stress > 10)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob, do_freakout_scream)), rand(30,50))
 	if(hud_used)
 		var/matrix/skew = matrix()

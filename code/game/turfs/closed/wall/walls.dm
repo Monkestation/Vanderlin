@@ -347,7 +347,7 @@
 	name = "stone wall"
 	icon = 'icons/turf/walls.dmi'
 	resistance_flags = INDESTRUCTIBLE
-	opacity = 0
+	opacity = FALSE
 	icon_state = "decostone-l"
 
 /turf/closed/wall/mineral/decostone/center

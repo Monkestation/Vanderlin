@@ -1513,6 +1513,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(user.loc == target.loc)
 		return FALSE
 	else
+		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(target, ATTACK_EFFECT_DISARM, used_item = FALSE, atom_bounce = TRUE)
 		playsound(target, 'sound/combat/shove.ogg', 100, TRUE, -1)
 
@@ -1528,8 +1529,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 //		var/obj/machinery/disposal/bin/target_disposal_bin
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
-		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10),0,100)))//check if we actually shove them
+		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10), 0, 95)))//check if we actually shove them
 			//Thank you based whoneedsspace
+			target.stop_pulling(TRUE)
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 			if(target_collateral_mob)
 				shove_blocked = TRUE
@@ -1540,7 +1542,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	//				target_disposal_bin = locate(/obj/machinery/disposal/bin) in target_shove_turf.contents
 					if(target_table)
 						shove_blocked = TRUE
-			qdel(user.check_arm_grabbed(user.active_hand_index))
 
 /*		if(target.IsKnockdown() && !target.IsParalyzed())
 			target.Paralyze(SHOVE_CHAIN_PARALYZE)
@@ -1686,7 +1687,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 
 		if(target.pulling && target.grab_state < GRAB_AGGRESSIVE)
-			target.stop_pulling()
+			target.stop_pulling(TRUE)
 
 		var/turf/target_oldturf = target.loc
 		var/shove_dir = get_dir(user.loc, target_oldturf)
@@ -2302,7 +2303,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/clear_temperature_debuffs(mob/living/carbon/human/H)
 	if(H.temp_debuff_level)
-		H.remove_movespeed_modifier("heat_stress")
+		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 		H.temp_debuff_level = null
 	H.remove_stress(list(
 		/datum/stress_event/cold_mild,
