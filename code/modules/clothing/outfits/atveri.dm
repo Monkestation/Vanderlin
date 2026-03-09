@@ -88,16 +88,16 @@
 
 // Gronnic subtypes of atgervi clothes
 /obj/item/clothing/head/helmet/leather/shaman_hood
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
-	misc_flags = CRAFTING_TEST_EXCLUDE //special item with unique mechanics, not craftable
 	name = "moose hood"
-	desc = "A deceptively strong moosehide hood with a pair of large heavy antlers. It is the reward of the fourth trial of the Iskarn Shamans: To slay a Grinning Moose in the final hunt alone - and fashion a hood from its head."
-	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	desc = "A deceptively strong hood of hide with a pair of large heavy antlers. A suitable memorial for a worthy beast."
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/gronn.dmi'
 	icon_state = "gronnfurhood"
 	item_state = "gronnfurhood"
 	bloody_icon = 'icons/effects/blood64x64.dmi'
+	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	misc_flags = CRAFTING_TEST_EXCLUDE //special item with unique mechanics, not craftable
 	armor = ARMOR_LEATHER_GOOD
 	flags_inv = HIDEEARS|HIDEFACE
 	worn_x_dimension = 32
@@ -138,7 +138,9 @@
 	. = ..()
 	set_light_on(FALSE)
 
-/obj/item/clothing/head/helmet/leather/shaman_hood/MiddleClick(mob/user)
+/obj/item/clothing/head/helmet/leather/shaman_hood/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+
 	if(.)
 		return
 	if(adjustable == CADJUSTED)
@@ -157,7 +159,7 @@
 		playsound(loc, 'sound/misc/toggle_lamp.ogg', 100)
 	update_icon()
 
-/obj/item/clothing/head/helmet/leather/shaman_hood/update_icon()
+/obj/item/clothing/head/helmet/leather/shaman_hood/update_icon_state()
 	if(adjustable == CADJUSTED)
 		..()
 		return
@@ -239,7 +241,7 @@
 	icon_state = "gronnhelm"
 	item_state = "gronnhelm"
 
-/obj/item/clothing/armor/brigandine/gronn
+/obj/item/clothing/armor/chainmail/hauberk/gronn
 	name = "osslandic chain hauberk"
 	desc = "A chain shirt of Osslandic design with a leather coat layered over, \
 			offering additional protection and superior movement. It is often used by sea raiders."

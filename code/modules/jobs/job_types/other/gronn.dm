@@ -46,7 +46,7 @@
 		/obj/item/clothing/shoes/boots/leather/atgervi =ITEM_SLOT_SHOES,
 		/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel = ITEM_SLOT_HEAD,
 		/obj/item/clothing/gloves/chain/gronn = ITEM_SLOT_GLOVES,
-		/obj/item/clothing/armor/brigandine/gronn = ITEM_SLOT_ARMOR,
+		/obj/item/clothing/armor/chainmail/hauberk/gronn = ITEM_SLOT_ARMOR,
 		/obj/item/clothing/pants/trou/leather/splint/gronn = ITEM_SLOT_PANTS,
 		/obj/item/clothing/wrists/bracers/iron = ITEM_SLOT_WRISTS,
 		/obj/item/weapon/shield/tower/buckleriron = ITEM_SLOT_BACK_R,
@@ -170,7 +170,7 @@
 	..()
 	H.dna.species.soundpack_m = new /datum/voicepack/male/evil() //It's fucking cool okay
 	shoes = /obj/item/clothing/shoes/boots/armor/gronn
-	head = /obj/item/clothing/head/helmet/heavy/bucket/gronn
+	head = /obj/item/clothing/head/helmet/heavy/ironplate/gronn
 	gloves = /obj/item/clothing/gloves/plate/iron/gronn
 	armor = /obj/item/clothing/armor/plate/iron/gronn
 	cloak = /obj/item/clothing/cloak/volfmantle	//Aura farming.

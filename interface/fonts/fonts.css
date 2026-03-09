@@ -69,3 +69,8 @@
   font-family: 'Xaphan';
   src: url('Xaphan.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Jorvik Informal';
+  src: url('JorvikInformal.ttf') format('truetype');
+}

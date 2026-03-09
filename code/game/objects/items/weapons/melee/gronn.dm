@@ -182,14 +182,3 @@
 	item_damage_type = "blunt"
 	intent_effect = /datum/status_effect/debuff/hobbled
 	target_parts = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) //Intentionally leaving out feet. If you know, you know.
-
-/datum/status_effect/debuff/hobbled
-	id = "hobbled"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
-	effectedstats = list(STATKEY_SPD = -2)
-	duration = 8 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/hobbled
-	name = "Hobbled"
-	desc = "You've been struck in the leg! The force has left you staggered!"
-	icon_state = "dazed"

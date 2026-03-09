@@ -43,7 +43,7 @@
 	block2add = FOV_BEHIND
 
 //................ Iron Plate Helmet ............... //
-/obj/item/clothing/head/helmet/heavy/ironplate
+/obj/item/clothing/head/helmet/heavy/ironplate5
 	name = "iron plate helmet"
 	desc = "An iron masked helmet usually worn by armed men, it is a solid design yet antiquated and cheap."
 	icon_state = "ironplate"
@@ -538,7 +538,7 @@
 	max_integrity = 400
 
 //............... Gronn Heavy Helmet ...............//
-/obj/item/clothing/head/helmet/heavy/bucket/gronn
+/obj/item/clothing/head/helmet/heavy/ironplate/gronn
 	name = "osslandic horned helmet"
 	desc = "A horned helms of solid iron. \
 		A suitable replacement for the precious skull-helms worn in Ossland. \
@@ -548,9 +548,7 @@
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	icon_state = "gronnplatehelm"
 	item_state = "gronnplatehelm"
-	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_BEHIND
-	smeltresult = /obj/item/ingot/iron
 	worn_x_dimension = 64
 	worn_y_dimension = 64
