@@ -229,36 +229,6 @@
 
 		return result
 
-	if(weapon.item_flags & ABSTRACT)
-		return
-
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(src == user)
-		if(offered_item_ref)
-			cancel_offering_item()
-		else
-			to_chat(user, span_warning("I can't offer myself an item!"))
-		return
-
-	var/obj/offered_item
-	if(user.offered_item_ref)
-		offered_item = user.offered_item_ref.resolve()
-		if(offered_item == weapon)
-			user.cancel_offering_item()
-			return
-		else
-			to_chat(user, span_notice("I'm already offering [offered_item]!"))
-			return
-
-	offered_item = user.get_active_held_item()
-
-	if(HAS_TRAIT(offered_item, TRAIT_NODROP))
-		to_chat(user, span_warning("I can't offer this."))
-		return
-
-	user.offer_item(src, offered_item)
-
 /**
  * Called from [/mob/living/proc/attackby]
  *

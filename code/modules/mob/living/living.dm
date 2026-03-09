@@ -2975,7 +2975,7 @@
 /mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))
 		stack_trace("no offered_to or offered_item in offer_item()")
-		return
+		return FALSE
 
 	var/time_left = COOLDOWN_TIMELEFT(src, offer_cooldown)
 
@@ -3001,11 +3001,14 @@
 
 	new /obj/effect/temp_visual/offered_item_effect(get_turf(src), offered_item, src, offered_to, stealthy)
 
+	return TRUE
+
 /mob/living/proc/cancel_offering_item(stealthy)
 	var/obj/offered_item = offered_item_ref?.resolve()
 	if(isnull(offered_item))
 		stop_offering_item()
 		return
+
 	if(stealthy)
 		to_chat(src, "I stop offering [offered_item ? offered_item : "the item"].")
 	else
