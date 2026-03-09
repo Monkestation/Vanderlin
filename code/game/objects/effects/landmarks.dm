@@ -421,8 +421,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/bogwitch
-	name = "Bog Witch"
+	name = JOB_BOGWITCH
 	icon_state = "arrow"
+
+/obj/effect/landmark/start/bogwitch_apprentice
+	name = JOB_BOGWITCH_APP
 
 //Antagonist spawns
 

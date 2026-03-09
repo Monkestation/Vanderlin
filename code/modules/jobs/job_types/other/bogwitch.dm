@@ -1,9 +1,6 @@
 /datum/job/bogwitch
-	title = "Bog Witch"
-	tutorial = "A seer of dreams, a reader of stars, and a master of the arcyne. Along a band of unlikely heroes, you shaped the fate of these lands.\
-	Now the days of adventure are gone, replaced by dusty tomes and whispered prophecies. The ruler's coin funds your studies,\
-	but debts both magical and mortal are never so easily repaid. With age comes wisdom, but also the creeping dread that your greatest spell work\
-	may already be behind you."
+	title = JOB_BOGWITCH
+	tutorial = "Wild at heart and certainly wild in appearance. A healer and worker of miracles, in a manner of speaking anyway."
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH
@@ -16,8 +13,9 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/bogwitch
-	give_bank_account = 10
-	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
+	is_foreigner = TRUE
+	is_recognized = TRUE
+	cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 	banned_patrons = list()
 
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_CHURCH, EXP_TYPE_MEDICAL)
@@ -82,7 +80,7 @@
 
 
 /datum/outfit/bogwitch
-	name = "Bog Witch"
+	name = JOB_BOGWITCH
 	head = /obj/item/clothing/head/wizhat/witch
 	mask = /obj/item/clothing/face/spectacles
 	shirt = /obj/item/clothing/shirt/robe/colored/black

@@ -181,3 +181,5 @@
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
 
+#define JOB_BOGWITCH "Bog Witch"
+#define JOB_BOGWITCH_APP "Bog Witch's Apprentice"
