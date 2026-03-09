@@ -43,7 +43,7 @@
 		/obj/item/storage/backpack/satchel/black = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather = ITEM_SLOT_BELT,
 		/obj/item/storage/belt/pouch/coins/poor = ITEM_SLOT_BELT_L,
-		/obj/item/clothing/shoes/boots/leather =ITEM_SLOT_SHOES,
+		/obj/item/clothing/shoes/boots/leather = ITEM_SLOT_SHOES,
 		/obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel = ITEM_SLOT_HEAD,
 		/obj/item/clothing/gloves/chain/gronn = ITEM_SLOT_GLOVES,
 		/obj/item/clothing/armor/chainmail/hauberk/gronn = ITEM_SLOT_ARMOR,
