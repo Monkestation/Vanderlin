@@ -533,7 +533,7 @@ Keep them reasonable to make
 	recipe_name = "Herbalist's Panacea"
 	smells_like = "strong potpourri"
 	output_reagents = list(/datum/reagent/medicine/herbal/herbalist_panacea = 10)
-		required_essences = list(
+	required_essences = list(
 		/datum/thaumaturgical_essence/air = 4,
 		/datum/thaumaturgical_essence/fire = 2,
 		/datum/thaumaturgical_essence/life = 2,
@@ -545,7 +545,7 @@ Keep them reasonable to make
 	recipe_name = "Witch's Bane"
 	smells_like = "fresh laundry"
 	output_reagents = list(/datum/reagent/medicine/herbal/witches_bane = 10)
-		required_essences = list(
+	required_essences = list(
 		/datum/thaumaturgical_essence/order = 2,
 		/datum/thaumaturgical_essence/life = 1,
 		/datum/thaumaturgical_essence/fire = 2,
@@ -557,7 +557,7 @@ Keep them reasonable to make
 	recipe_name = "Scholar's Focus Tea"
 	smells_like = "mint"
 	output_reagents = list(/datum/reagent/buff/herbal/scholar_focus = 10)
-		required_essences = list(
+	required_essences = list(
 		/datum/thaumaturgical_essence/air = 2,
 		/datum/thaumaturgical_essence/cycle = 1,
 	)
@@ -567,7 +567,7 @@ Keep them reasonable to make
 	recipe_name = "Moonwater Elixir"
 	smells_like = "fresh water"
 	output_reagents = list(/datum/reagent/buff/herbal/moonwater_elixir = 10)
-		required_essences = list(
+	required_essences = list(
 		/datum/thaumaturgical_essence/fire = 2,
 		/datum/thaumaturgical_essence/cycle = 2,
 		/datum/thaumaturgical_essence/water = 2,
@@ -578,7 +578,7 @@ Keep them reasonable to make
 	name = "Warrior's Battle Broth"
 	smells_like = "dirty socks"
 	output_reagents = list(/datum/reagent/buff/herbal/battle_stim = 10)
-		required_essences = list(
+	required_essences = list(
 		/datum/thaumaturgical_essence/order = 4,
 		/datum/thaumaturgical_essence/air = 2,
 		/datum/thaumaturgical_essence/crystal = 1,
