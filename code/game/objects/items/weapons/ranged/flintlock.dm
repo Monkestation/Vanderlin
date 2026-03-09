@@ -287,7 +287,7 @@
 	rod = /obj/item/ramrod/musket
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet
 	can_parry = TRUE
-	max_integrity = 30
+	max_integrity = 100
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/Initialize()
 	. = ..()

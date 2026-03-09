@@ -74,6 +74,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/neck/gorget/ancient,
 		/obj/item/clothing/pants/platelegs/ancient,
 		/obj/item/clothing/wrists/bracers/ancient,
+		/obj/item/clothing/head/menacing/mad_touched_treasure_hunter, //cursed
+		/obj/item/clothing/face/facemask/steel/mad_touched, //cursed
 
 		/obj/item/clothing/wrists/bracers/naledi //Inqstuff
 	)

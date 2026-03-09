@@ -2,7 +2,7 @@
 	name = ""
 	icon_state = "black"
 	layer = CLOSED_TURF_LAYER
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	blocks_air = TRUE
 	baseturfs = /turf/open/floor/naturalstone
@@ -106,9 +106,9 @@
 
 /mob/living/proc/update_wallpress_slowdown()
 	if(wallpressed)
-		add_movespeed_modifier("wallpress", TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
+		add_movespeed_modifier(MOVESPEED_ID_WALLPRESS, TRUE, 100, override = TRUE, multiplicative_slowdown = 3)
 	else
-		remove_movespeed_modifier("wallpress")
+		remove_movespeed_modifier(MOVESPEED_ID_WALLPRESS)
 
 /turf/closed/Bumped(atom/movable/AM)
 	..()
@@ -265,7 +265,7 @@
 /turf/closed/indestructible/roguewindow
 	name = "window"
 	desc = ""
-	opacity = 0
+	opacity = FALSE
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "window-solid"
 

@@ -73,7 +73,8 @@
 			SSticker.missing_lord_time = world.time
 		if(world.time > SSticker.missing_lord_time + 10 MINUTES)
 			SSticker.missing_lord_time = world.time
-			addomen(OMEN_NOLORD)
+			if(!SSticker.vote_started)
+				addomen(OMEN_NOLORD)
 		return FALSE
 	else
 		return TRUE

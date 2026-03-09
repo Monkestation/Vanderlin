@@ -436,8 +436,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
 
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
-
 // Check if we notice an observer
 /mob/living/proc/peek_examine_check(mob/living/observer)
 	if(!istype(observer))
@@ -1321,3 +1319,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	. = list("") //we want to offset unique stuff from standard stuff
 	SEND_SIGNAL(src, COMSIG_MOB_GET_STATUS_TAB_ITEMS, .)
 	return .
+
+/mob/get_examine_name(mob/user, use_article=FALSE)
+	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
+

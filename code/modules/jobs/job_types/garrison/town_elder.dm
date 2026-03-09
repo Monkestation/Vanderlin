@@ -11,6 +11,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
+	honorary = "Elder"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONHERETICAL
@@ -92,6 +93,7 @@
 		/datum/action/cooldown/spell/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
+	honorary = "Mayor"
 
 	jobstats = list(
 		STATKEY_STR = -1,
@@ -159,6 +161,7 @@
 		STATKEY_END = 2,
 		STATKEY_INT = 2
 	)
+	honorary = "Foreman"
 
 	skills = list(
 		/datum/skill/misc/reading = 1,
@@ -235,6 +238,7 @@
 	outfit = /datum/outfit/town_elder/hearth_acolyte
 	category_tags = list(CTAG_TOWN_ELDER)
 	allowed_patrons = ALL_TEMPLE_PATRONS
+	//honorary = "STUPID DUMB CLASS WHICH I HATE"
 
 	jobstats = list(
 		STATKEY_STR = 2,

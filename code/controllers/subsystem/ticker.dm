@@ -75,7 +75,9 @@ SUBSYSTEM_DEF(ticker)
 	var/mob/living/carbon/human/rulermob = null
 	/// The appointed regent mob
 	var/mob/living/carbon/human/regent_mob = null
-	var/failedstarts = 0
+	var/vote_started = FALSE
+	var/voting = FALSE
+	var/pre_vote = 0
 	var/list/manualmodes = list()
 
 	var/end_party = FALSE
@@ -305,9 +307,14 @@ SUBSYSTEM_DEF(ticker)
 							continue
 					readied_jobs.Add(V)
 
-	if(CONFIG_GET(flag/ruler_required))
+	if(CONFIG_GET(flag/ruler_required) && !vote_started)
+		if(pre_vote > 4 && !voting)
+			voting = TRUE
+			SSvote.initiate_vote("norulervote", "The Gods")
 		if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
 			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
+			if(!voting)
+				pre_vote++
 			return FALSE
 
 	job_change_locked = TRUE
@@ -411,6 +418,8 @@ SUBSYSTEM_DEF(ticker)
 			if(!(id in player.client.prefs.be_special))
 				continue
 			if(!player.client.is_whitelisted(id))
+				continue
+			if(player.client.prefs.job_preferences["Monarch"] == JP_HIGH)
 				continue
 			if(!vessel_candidates[id])
 				vessel_candidates[id] = list()

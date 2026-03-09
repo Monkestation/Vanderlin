@@ -22,6 +22,9 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
 	advclass_cat_rolls = list(CTAG_HEIR = 20)
+	honorary = "Prince"
+	honorary_f = "Princess"
+
 
 	outfit = /datum/outfit/heir
 

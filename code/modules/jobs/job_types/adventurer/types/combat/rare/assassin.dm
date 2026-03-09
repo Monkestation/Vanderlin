@@ -259,13 +259,7 @@
 
 /datum/job_pack/assassin/assassin_noble/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	var/prev_real_name = picker.real_name
-	var/prev_name = picker.name
-	var/honorary = "Lord"
-	if(picker.pronouns == SHE_HER)
-		honorary = "Lady"
-	picker.real_name = "[honorary] [prev_real_name]"
-	picker.name = "[honorary] [prev_name]"
+	picker.honorary = picker.pronouns == SHE_HER ? "Lady" : "Lord"
 
 	if(picker.gender == MALE)
 		picker.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)

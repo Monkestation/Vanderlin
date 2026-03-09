@@ -207,6 +207,10 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"dq" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "dr" = (
 /obj/structure/door/stone,
 /obj/structure/trap/shock,
@@ -309,6 +313,10 @@
 /obj/structure/bed/hay,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/garrison)
+"eC" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "eD" = (
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/grass,
@@ -1050,6 +1058,10 @@
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"lZ" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "md" = (
 /mob/living/simple_animal/hostile/retaliate/elemental/behemoth{
 	color = "#FFC000"
@@ -1064,6 +1076,10 @@
 "mk" = (
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
+"ml" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "mn" = (
 /turf/closed/basic,
 /area/outdoors/wilderness)
@@ -1555,6 +1571,10 @@
 /area/indoors/villagegarrison)
 "sd" = (
 /turf/closed/wall/mineral/wooddark,
+/area/outdoors/wilderness)
+"sh" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "sk" = (
 /obj/structure/fluff/walldeco/vinez,
@@ -2065,6 +2085,10 @@
 /area/indoors/dungeon)
 "yg" = (
 /turf/closed/wall/mineral/stone/moss,
+/area/outdoors/wilderness)
+"yj" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass,
 /area/outdoors/wilderness)
 "yl" = (
 /obj/structure/fluff/walldeco/painting/skull,
@@ -4122,6 +4146,10 @@
 "Uj" = (
 /turf/closed/mineral/random/med,
 /area/indoors/cave)
+"Un" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Uo" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -4253,6 +4281,10 @@
 /obj/structure/closet/crate/drawer/inn,
 /turf/open/floor/twig,
 /area/indoors/wilderness/tavern)
+"VC" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "VJ" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -8138,7 +8170,7 @@ ZV
 Nf
 ZV
 ZV
-ZV
+dq
 tk
 ZV
 tk
@@ -8923,7 +8955,7 @@ Uj
 xa
 ZV
 gr
-gr
+Un
 ZV
 gr
 ZV
@@ -8991,7 +9023,7 @@ tk
 gr
 gr
 ZV
-gr
+Un
 gr
 ZV
 ZV
@@ -9418,7 +9450,7 @@ Nf
 Nf
 ZV
 gr
-ZV
+dq
 gr
 ZV
 Nf
@@ -9642,7 +9674,7 @@ tk
 tk
 ZV
 ZV
-ZV
+eC
 tk
 ZV
 gr
@@ -9941,7 +9973,7 @@ ZV
 gr
 ZV
 ZV
-ZV
+eC
 gr
 ZV
 ZV
@@ -10336,7 +10368,7 @@ gr
 ZV
 gr
 ZV
-gr
+sh
 ZV
 ZV
 ZV
@@ -10569,7 +10601,7 @@ ZV
 Nf
 gr
 ZV
-gr
+sh
 ZV
 gr
 IK
@@ -11399,7 +11431,7 @@ ZV
 gr
 ZV
 ZV
-ZV
+eC
 ZV
 ZV
 Nf
@@ -12828,7 +12860,7 @@ ZV
 tk
 ZV
 ZV
-ZV
+yj
 ZV
 ZV
 Nf
@@ -13082,7 +13114,7 @@ gr
 Nf
 Nf
 ZV
-gr
+Un
 gr
 gr
 ZV
@@ -14376,7 +14408,7 @@ ZV
 gr
 Nf
 Nf
-ZV
+yj
 ZV
 ZV
 tk
@@ -14549,7 +14581,7 @@ gr
 ZV
 ZV
 ZV
-gr
+sh
 gr
 ZV
 tk
@@ -15038,7 +15070,7 @@ gr
 ZV
 Nf
 ZV
-ZV
+yj
 ZV
 ZV
 ZV
@@ -15759,7 +15791,7 @@ ZV
 ZV
 Nf
 ZV
-gr
+Un
 tk
 ZV
 RO
@@ -15808,7 +15840,7 @@ gr
 gr
 ZV
 gr
-ZV
+yj
 ZV
 ZV
 tk
@@ -16033,7 +16065,7 @@ ZV
 Nf
 Nf
 ZV
-ZV
+yj
 gr
 gr
 tk
@@ -16042,7 +16074,7 @@ gr
 Nf
 tk
 ZV
-ZV
+eC
 IK
 gr
 gr
@@ -16278,7 +16310,7 @@ ZV
 ZV
 gr
 ZV
-ZV
+yj
 ZV
 gr
 gr
@@ -16938,7 +16970,7 @@ gr
 TW
 gr
 gr
-ZV
+yj
 ZV
 Nf
 tk
@@ -17164,7 +17196,7 @@ ZV
 Fw
 ZV
 Nf
-ZV
+yj
 iQ
 Iz
 iQ
@@ -18020,7 +18052,7 @@ ZV
 ZV
 ZV
 ZV
-ZV
+eC
 gr
 gr
 tk
@@ -18384,7 +18416,7 @@ Nf
 Nf
 gr
 ZV
-gr
+ml
 ZV
 RO
 gr
@@ -18533,7 +18565,7 @@ ZV
 ZV
 gr
 gr
-ZV
+yj
 tk
 ZV
 tk
@@ -18636,7 +18668,7 @@ Nf
 ZV
 ZV
 gr
-gr
+ml
 ZV
 gr
 tk
@@ -19351,7 +19383,7 @@ Iz
 iQ
 Iz
 gr
-gr
+ml
 gr
 Nf
 gr
@@ -19508,7 +19540,7 @@ gr
 gr
 zd
 zd
-ZV
+yj
 gr
 ZV
 ZV
@@ -19626,7 +19658,7 @@ gr
 ZV
 Nf
 gr
-gr
+Un
 gr
 gr
 Nf
@@ -19889,7 +19921,7 @@ gr
 ZV
 ZV
 ZV
-ZV
+eC
 gr
 gr
 ZV
@@ -20063,7 +20095,7 @@ gr
 gr
 ZV
 tk
-ZV
+yj
 gr
 Nf
 tk
@@ -20333,7 +20365,7 @@ gr
 ZV
 ZV
 ZV
-ZV
+yj
 ZV
 ZV
 zd
@@ -20726,7 +20758,7 @@ ZV
 yV
 ZV
 ZV
-ZV
+yj
 zd
 gr
 gr
@@ -21721,7 +21753,7 @@ Nf
 Nf
 ZV
 ZV
-ZV
+eC
 gr
 ZV
 ZV
@@ -21817,7 +21849,7 @@ ZV
 ZV
 Nf
 gr
-gr
+sh
 ZV
 ZV
 Nf
@@ -22752,7 +22784,7 @@ gr
 Nf
 tk
 ZV
-gr
+sh
 gr
 ZV
 gr
@@ -22794,7 +22826,7 @@ iQ
 HC
 HC
 ZV
-gr
+ml
 ZV
 Fw
 Fw
@@ -24203,7 +24235,7 @@ Fw
 gr
 ZV
 ZV
-gr
+ml
 gr
 Nf
 tk
@@ -27068,7 +27100,7 @@ Iz
 Iz
 Iz
 ZV
-gr
+Un
 tk
 gr
 gr
@@ -27097,7 +27129,7 @@ ZV
 gr
 gr
 gr
-gr
+sh
 gr
 gr
 ZV
@@ -27642,7 +27674,7 @@ tk
 ZV
 ZV
 gr
-gr
+ml
 gr
 gr
 HC
@@ -28619,7 +28651,7 @@ Nf
 Nf
 Nf
 ZV
-gr
+sh
 gr
 gr
 gr
@@ -29095,7 +29127,7 @@ gr
 ZV
 ZV
 ZV
-tk
+sh
 gr
 ZV
 gr
@@ -29518,7 +29550,7 @@ Nf
 gr
 Nf
 Iz
-ZV
+dq
 gr
 gr
 ZV
@@ -29571,7 +29603,7 @@ ZV
 ZV
 Iz
 Iz
-Iz
+VC
 ZV
 gr
 ZV
@@ -29743,7 +29775,7 @@ tk
 ZV
 ZV
 Nf
-ZV
+eC
 ZV
 gr
 Nf
@@ -30695,7 +30727,7 @@ iQ
 Nf
 ZV
 ZV
-gr
+ml
 ZV
 gr
 gr
@@ -32376,7 +32408,7 @@ Nf
 ZV
 ZV
 gr
-gr
+Un
 ZV
 tk
 ZV
@@ -32514,7 +32546,7 @@ gr
 gr
 gr
 ZV
-gr
+ml
 tk
 tk
 tk
@@ -32901,7 +32933,7 @@ gr
 ZV
 Nf
 gr
-ZV
+yj
 gr
 Nf
 Nf
@@ -33367,7 +33399,7 @@ hx
 tk
 ZV
 Nf
-ZV
+dq
 gr
 gr
 Nf
@@ -33608,7 +33640,7 @@ ZV
 ZV
 ZV
 ZV
-gr
+Un
 ZV
 Nf
 Nf
@@ -35491,7 +35523,7 @@ gr
 gr
 ZV
 gr
-ZV
+eC
 gr
 Nf
 Nf
@@ -35527,7 +35559,7 @@ Iz
 Iz
 ZV
 gr
-ZV
+yj
 gr
 gr
 gr
@@ -36563,7 +36595,7 @@ Jo
 gr
 ZV
 ZV
-ZV
+eC
 gr
 ZV
 gr
@@ -38242,7 +38274,7 @@ Nf
 gr
 gr
 ZV
-ZV
+dq
 yC
 Iz
 ZV
@@ -39963,7 +39995,7 @@ ZV
 gr
 tk
 gr
-ZV
+yj
 ZV
 ZV
 Nf
@@ -41117,7 +41149,7 @@ ZV
 gr
 ZV
 ZV
-ZV
+dq
 ZV
 tk
 yC
@@ -41290,7 +41322,7 @@ gr
 gr
 Iz
 Iz
-Iz
+lZ
 Iz
 gr
 Nf
@@ -41331,7 +41363,7 @@ yC
 ZV
 ZV
 gr
-Iz
+VC
 gr
 gr
 Nf
@@ -41552,7 +41584,7 @@ Iz
 ZV
 ZV
 ZV
-ZV
+yj
 ZV
 ZV
 ZV
@@ -43500,7 +43532,7 @@ ZV
 gr
 ZV
 ZV
-ZV
+dq
 gr
 Nf
 Nf

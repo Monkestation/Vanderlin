@@ -119,14 +119,14 @@
 /datum/component/vampire_disguise/proc/disguise_status()
 	return disguised || !is_human_part_visible(parent, HIDEFACE)
 
-/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list)
+/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list, list/P)
 	if(!istype(user) || disguise_status())
 		return
 	if(user == vampire)
 		return
 	if(!user.affects_masquerade(FALSE))
-		examine_list += span_warningbig("[vampire.p_theyre(TRUE)] in [vampire.p_their()] true form.")
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
 		return
 	user.add_stress(/datum/stress_event/vampire_seen)
-	examine_list += span_danger("NITEBEAST!")
+	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
 	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))
