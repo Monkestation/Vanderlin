@@ -375,3 +375,120 @@ Keep them reasonable to make
 		/datum/thaumaturgical_essence/light = 3,
 		/datum/thaumaturgical_essence/water = 3,
 	)
+//This is Carolina trying to figure out how basic things work.
+
+// Apothecary's Symphitum Tea Recipe
+/datum/alch_cauldron_recipe/symphitum_tea
+	recipe_name = "Extract of Symphitum"
+	smells_like = "symphitum"
+	output_reagents = list(/datum/reagent/medicine/herbal/symphitum_tea = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/air = 4,
+		/datum/thaumaturgical_essence/life = 2,
+	)
+
+// Apothecary's Taraxacum Extract Recipe
+/datum/alch_cauldron_recipe/taraxacum_extract
+	recipe_name = "Extract of Taraxacum"
+	smells_like = "taraxacum"
+	output_reagents = list(/datum/reagent/medicine/herbal/taraxacum_extract = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/fire = 6,
+		/datum/thaumaturgical_essence/motion = 3,
+	)
+
+// Apothecary's Urtica Brew Recipe
+/datum/alch_cauldron_recipe/urtica_brew
+	recipe_name = "Extract of Urtica"
+	smells_like = "urtica"
+	output_reagents = list(/datum/reagent/medicine/herbal/urtica_brew = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/air = 4,
+		/datum/thaumaturgical_essence/void = 2,
+	)
+
+// Apothecary's Calendula Salve Recipe
+/datum/alch_cauldron_recipe/calendula_salve
+	recipe_name = "Extract of Calendula"
+	smells_like = "calendula"
+	output_reagents = list(/datum/reagent/medicine/herbal/calendula_salve = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/fire = 6,
+		/datum/thaumaturgical_essence/life = 3,
+	)
+
+// Apothecary's Hypericum Tonic Recipe
+/datum/alch_cauldron_recipe/hypericum_tonic
+	recipe_name = "Extract of Hypericum"
+	smells_like = "hypericum"
+	output_reagents = list(/datum/reagent/medicine/herbal/hypericum_tonic = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/fire = 4,
+		/datum/thaumaturgical_essence/cycle = 2,
+	)
+
+// Apothecary's Mentha Tea Recipe
+/datum/alch_cauldron_recipe/mentha_tea
+	recipe_name = "Mentha Tea"
+	smells_like = "mentha"
+	output_reagents = list(/datum/reagent/medicine/herbal/mentha_tea = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/water = 4,
+		/datum/thaumaturgical_essence/frost = 2,
+	)
+
+// Apothecary's Herbal Buff Teas
+/datum/alch_cauldron_recipe/salvia_wisdom
+	recipe_name = "Salvia Wisdom Tea"
+	smells_like = "salvia"
+	output_reagents = list(/datum/reagent/buff/herbal/salvia_wisdom = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/earth = 4,
+		/datum/thaumaturgical_essence/void = 2,
+	)
+
+/datum/alch_cauldron_recipe/artemisia_luck
+	recipe_name = "Artemisia Fortune Tea"
+	smells_like = "artemisia"
+	output_reagents = list(/datum/reagent/buff/herbal/artemisia_luck = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/water = 4,
+		/datum/thaumaturgical_essence/cycle = 2,
+	)
+
+/datum/alch_cauldron_recipe/euphorbia_strength
+	recipe_name = "Euphorbia Strength Tea"
+	smells_like = "euphorbia"
+	output_reagents = list(/datum/reagent/buff/herbal/euphorbia_strength = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/earth = 4,
+		/datum/thaumaturgical_essence/life = 2,
+	)
+
+// Apothecary's Mild Poison Recipes
+/datum/alch_cauldron_recipe/weak_atropa
+	recipe_name = "Diluted Extract of Atropa"
+	smells_like = "atropa"
+	output_reagents = list(/datum/reagent/poison/herbal/weak_atropa = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/earth = 2,
+		/datum/thaumaturgical_essence/poison = 1,
+	)
+
+/datum/alch_cauldron_recipe/matricaria_irritant
+	recipe_name = "Matricaria Irritant"
+	smells_like = "matricaria"
+	output_reagents = list(/datum/reagent/poison/herbal/matricaria_irritant = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/earth = 4,
+		/datum/thaumaturgical_essence/cycle = 2,
+	)
+
+/datum/alch_cauldron_recipe/euphrasia_wash
+	recipe_name = "Euphrasia Eye Wash"
+	smells_like = "euphrasia"
+	output_reagents = list(/datum/reagent/medicine/herbal/euphrasia_eye_wash = 10)
+	required_essences = list(
+		/datum/thaumaturgical_essence/air = 4,
+		/datum/thaumaturgical_essence/cycle = 2,
+	)
