@@ -3945,5 +3945,6 @@
 #include "interface\fonts\datums\riddler.dm"
 #include "interface\fonts\datums\underwater_love.dm"
 #include "interface\fonts\datums\vaticanus.dm"
-#include "interface\fonts\datums\xaphan.dm"
+#include "interface\fonts\datums\wernicke.dm"
+#include "interface\fonts\datums\yataghan.dm"
 // END_INCLUDE
