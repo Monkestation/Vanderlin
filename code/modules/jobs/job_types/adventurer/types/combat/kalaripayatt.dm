@@ -13,7 +13,8 @@
 	)
 	allowed_patrons = ALL_TEMPLE_PATRONS // I dont think the inhumen pantheon would appreciate the nuance of dance.
 	tutorial = "Hailing from one of many Faience's classical dance companies; Kalaripayatt's are skilled dancers trained in martial arts, dedicated to celebrating the natural wonders of the vigorous body. Fighting with a grace unseen in many other combatants." //shout out to hembrent for helping me write this!
-	total_positions = 4
+	total_positions = 2
+	roll_chance = 25
 	outfit = /datum/outfit/adventurer/kalaripayatt
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
