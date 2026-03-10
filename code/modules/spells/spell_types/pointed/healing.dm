@@ -231,7 +231,7 @@
 						to_chat(owner, span_warning("This head is not valuable enough to aid in healing!"))
 					else
 						situational_blood = animal_head.blood_value
-						animal_head.visible_message(span_notice("The [animal_head] disintegrates into a red mist."))
+						animal_head.visible_message(span_notice("[animal_head] disintegrates into a red mist."))
 						qdel(animal_head)
 
 			else

@@ -219,6 +219,5 @@
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing/hunt,
 		CLERIC_T1 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/undirected/will_of_woods),
-		CLERIC_T2 = /datum/action/cooldown/spell/conjure/hunters_trick,
-		CLERIC_T3 = /datum/action/cooldown/spell/undirected/hunters_grace,
+		CLERIC_T2 = list(/datum/action/cooldown/spell/conjure/hunters_trick, /datum/action/cooldown/spell/undirected/hunters_grace)
 	)

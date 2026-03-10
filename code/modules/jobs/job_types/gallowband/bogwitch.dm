@@ -2,7 +2,7 @@
 	title = JOB_BOGWITCH
 	tutorial = "Wild at heart and certainly wild in appearance. A healer and worker of miracles, in a manner of speaking anyway."
 	department_flag = OUTSIDERS
-	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
+	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH
 	faction = FACTION_TOWN
 	total_positions = 0
@@ -59,7 +59,25 @@
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/chosen_path = tgui_input_list(spawned, "Choose a specialist path", "Specialist Path", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
+
+	spawned.apply_status_effect(/datum/status_effect/buff/bone_ward)
+
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(spawned)
+
+	// This is hopefully temporary, as I couldn't make a tgui input list trigger, and this proc always triggers before proceeding.
+	var/static/list/selectable = list(
+		"Generalist" = /obj/item/weapon/knife/dagger,
+		"Path of Bone" = /obj/item/weapon/knife/dagger,
+		"Path of Nature" = /obj/item/weapon/knife/dagger,
+		"Path of The Hunt" = /obj/item/weapon/knife/dagger,
+	)
+	var/chosen_path = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose a specialist path", title = "Specialist Path")
+
+//	var/chosen_path = tgui_input_list(spawned, "Choose a specialist path", "Specialist Path", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
 	switch(chosen_path)
 		if("Path of Bone")//Plus to Surgery
 			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
@@ -73,13 +91,6 @@
 			spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/craft/alchemy, -1, TRUE)
 			spawned.adjust_skillrank(/datum/skill/misc/medicine, -1, TRUE)
-
-
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_acolyte()
-		devotion.grant_to(spawned)
 
 /datum/job/bogwitch/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
@@ -112,5 +123,3 @@
 	backpack_contents = list(
 		/obj/item/scrying = 1
 	)
-
-/datum/outfit/bogwitch/post_equip(mob/living/carbon/human/equipped_human, visuals_only)

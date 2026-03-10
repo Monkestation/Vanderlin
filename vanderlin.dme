@@ -1491,6 +1491,7 @@
 #include "code\datums\status_effects\debuffs\silenced.dm"
 #include "code\datums\status_effects\debuffs\traps.dm"
 #include "code\datums\status_effects\rogue\alerts.dm"
+#include "code\datums\status_effects\rogue\bone_ward.dm"
 #include "code\datums\status_effects\rogue\debuff.dm"
 #include "code\datums\status_effects\rogue\roguebuff.dm"
 #include "code\datums\status_effects\rogue\roguestatus.dm"
