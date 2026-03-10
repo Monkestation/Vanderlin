@@ -789,13 +789,6 @@
 		if(msg)
 			user.schizohelp(msg)
 
-/datum/emote/living/moan
-	key = "moan"
-	key_third_person = "moans"
-	message = "moans."
-	message_mime = "appears to moan!"
-	emote_type = EMOTE_AUDIBLE
-
 // ............... N ..................
 /datum/emote/living/nod
 	key = "nod"
@@ -1263,6 +1256,7 @@
 	key_third_person = "moans"
 	message = "moans."
 	emote_type = EMOTE_AUDIBLE
+
 /datum/emote/living/zombiemoan/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(user.gender == MALE)

@@ -423,6 +423,7 @@
 "ala" = (
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/structure/door/window,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "ale" = (
@@ -1005,15 +1006,6 @@
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/blue)
-"ayM" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/turf/open/floor/rooftop{
-	dir = 8
-	},
-/area/outdoors/town/roofs)
 "ayQ" = (
 /obj/structure/closet/crate/chest{
 	lockid = "priest"
@@ -39774,10 +39766,6 @@
 /obj/structure/fluff/walldeco/wantedposter,
 /turf/open/floor/blocks,
 /area/outdoors/town)
-"thu" = (
-/obj/structure/dryclothes,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep)
 "thv" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/lord_appt)
@@ -41404,10 +41392,6 @@
 "tYM" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/keep)
-"tYX" = (
-/obj/structure/dryclothes,
-/turf/open/floor/grass,
-/area/outdoors/town/keep)
 "tYY" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
@@ -108207,7 +108191,7 @@ qXY
 hGN
 hGN
 eqL
-tYX
+sSi
 xTl
 xTl
 xTl
@@ -109013,7 +108997,7 @@ hGN
 arB
 hGN
 hGN
-thu
+oho
 eqL
 oho
 oho
@@ -109618,9 +109602,9 @@ xwx
 xwx
 jnT
 tfg
+tfg
 xTl
-xTl
-xTl
+tfg
 xTl
 xTl
 xTl
@@ -190217,7 +190201,7 @@ tZe
 tZe
 tZe
 alu
-xnl
+biy
 stS
 biy
 biy
@@ -195313,7 +195297,7 @@ biy
 tZe
 tZe
 tZe
-ayM
+tZe
 xhZ
 pny
 cUs
@@ -196094,7 +196078,7 @@ biy
 biy
 biy
 biy
-izG
+biy
 biy
 xhZ
 xAw

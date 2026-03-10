@@ -1,1 +1,0 @@
-{"author":"TerraGS","delete-after":true,"changes":[{"rscadd":"Adds pre-loaded toilets"},{"bugfix":"reagent container underlays properly update when emptied"},{"map":"replaces many toilets with the new subtype"},{"code_imp":"Toilets now use a storage component. Removed cistern code."}]}
