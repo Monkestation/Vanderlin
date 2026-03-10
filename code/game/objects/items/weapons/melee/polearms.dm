@@ -244,7 +244,7 @@
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	name = "simple spear"
-	desc = "With this weapon, the tribes of humenity became the chosen people of Psydon."
+	desc = "One of the first weapons wielded by humenity, still as versatile now as it was then."
 	icon_state = "stonespear"
 	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
@@ -598,7 +598,7 @@
 	melting_material = null
 
 /obj/item/weapon/polearm/spear/naginata
-	name = "Naginata"
+	name = "naginata"
 	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"
