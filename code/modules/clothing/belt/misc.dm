@@ -5,7 +5,7 @@
 	item_state = "leather"
 	equip_sound = 'sound/blank.ogg'
 	var/empty_when_dropped = TRUE
-
+	var/misc_flags = TRUE
 /obj/item/storage/belt/leather/dropped(mob/living/carbon/human/user)
 	..()
 	if(QDELETED(src))
@@ -152,7 +152,6 @@
 	icon_state = "beltshawl"
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
-
 
 /obj/item/storage/belt/leather/shawl/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
