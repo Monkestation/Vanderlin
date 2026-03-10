@@ -1053,7 +1053,7 @@
 
 /datum/repeatable_crafting_recipe/sewing/waistshawl
 	name = "waist shawl"
-	output = /obj/item/storage/belt/leather/cloth/waistshawl
+	output = /obj/item/storage/belt/leather/shawl
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
