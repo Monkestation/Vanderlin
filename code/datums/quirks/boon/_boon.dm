@@ -182,7 +182,7 @@
 	if(examiner.STAINT < 8)
 		return
 	var/mob_name = source_mob.get_visible_name("")
-	if(!mob_name)
+	if(!mob_name || (mob_name == "Unknown"))
 		return
 	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
 	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
