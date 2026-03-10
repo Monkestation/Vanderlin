@@ -226,4 +226,4 @@
 	desc = "A dusty, ancient bottle with a red-ochre coloring."
 	list_reagents = list(/datum/reagent/consumable/ethanol/komuchisake = 48)
 	auto_label_name = "komuchisake"
-	auto_label_desc = "It bears an intricately detailed golden skull seal, and the markings on it are clearly of the Shogunate. It looks to be filled with herbs inside."
+	auto_label_desc = "It bears an intricately detailed golden skull seal. It looks to be filled with herbs inside."
