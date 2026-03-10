@@ -9,7 +9,7 @@
 	/// Needs the user to be Adjacent to the target or be in weapon range
 	var/check_range = TRUE
 
-/datum/rmb_intent/proc/get_target(mob/living/user, atom/initial_target)
+/datum/rmb_intent/proc/get_target(atom/initial_target)
 	if(target_turf)
 		return get_turf(initial_target)
 
