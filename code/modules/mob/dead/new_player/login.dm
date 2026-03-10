@@ -13,10 +13,10 @@
 	..()
 
 	if(GLOB.join_motd)
-		to_chat(src, span_info("ROUND ID: [GLOB.join_motd]"))
+		to_chat(src, span_info("MOTD: [GLOB.join_motd]"))
 
 	if(GLOB.current_tms)
-		to_chat(src, span_info("ROUND ID: [GLOB.current_tms]"))
+		to_chat(src, span_info("Testmerges: [GLOB.current_tms]"))
 
 	if(GLOB.rogue_round_id)
 		to_chat(src, span_info("ROUND ID: [GLOB.rogue_round_id]"))
