@@ -1,7 +1,7 @@
 /obj/effect/particle_effect/expl_particles
 	name = "fire"
 	icon_state = "explosion_particle"
-	opacity = 0
+	opacity = FALSE
 	anchored = TRUE
 
 /obj/effect/particle_effect/expl_particles/Initialize()

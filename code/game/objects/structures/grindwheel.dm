@@ -15,7 +15,7 @@
 			if(has_world_trait(/datum/world_trait/delver))
 				handle_profession_sharpen(I, user)
 			else
-				I.add_bintegrity(999)
+				I.restore_bintegrity()
 		return
 	if(!has_world_trait(/datum/world_trait/delver))
 		if(istype(I, /obj/item/grown/log/tree/small))

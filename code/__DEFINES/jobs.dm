@@ -40,6 +40,7 @@
 	FACTION_RATS, \
 	FACTION_ORCS, \
 	FACTION_BUMS, \
+	FACTION_VIKINGS, \
 	FACTION_MATTHIOS \
 )
 
@@ -57,6 +58,7 @@
 #define FACTION_ORCS		"Orcs"
 #define FACTION_BUMS		"Bums"
 #define FACTION_MATTHIOS	"Matthios"
+#define FACTION_VIKINGS     "Vikings"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
@@ -110,6 +112,7 @@
 #define JDO_FORGUARD 11.1
 
 #define JDO_PRIEST 12
+#define JDO_GMTEMPLAR 12.1
 #define JDO_CLERIC 13
 #define JDO_MONK 14
 #define JDO_GRAVETENDER 15
@@ -124,8 +127,7 @@
 
 #define JDO_TAILOR 19
 
-#define JDO_ARMORER 20
-#define JDO_WSMITH 21
+#define JDO_BLACKSMITH 21
 #define JDO_BAPP 22
 #define JDO_ARTIFICER 23
 

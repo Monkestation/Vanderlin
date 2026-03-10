@@ -644,11 +644,9 @@
 		stop_pulling()
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
-	if(pulling_broke_free && ismob(pulling) && grab_state >= GRAB_AGGRESSIVE)
-		var/wrestling_cooldown_reduction = 0
-		if(pulledby?.get_skill_level(/datum/skill/combat/wrestling))
-			wrestling_cooldown_reduction = 0.2 SECONDS * pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
-		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
+	if(pulling_broke_free && ismob(pulling))
+		var/wrestling_cooldown_reduction = 0.1 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
 		if(grabber_item.grabbed == pulling)
@@ -957,6 +955,7 @@
 		GLOB.alive_mob_list += src
 		set_suicide(FALSE)
 		set_stat(UNCONSCIOUS) //the mob starts unconscious,
+		timeofdeath = 0
 		updatehealth() //then we check if the mob should wake up.
 		// if(full_heal_flags & HEAL_ADMIN)
 		// 	get_up(TRUE)
@@ -967,9 +966,11 @@
 		. = TRUE
 		if(mind)
 			mind.remove_antag_datum(/datum/antagonist/zombie)
+
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
+
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
 			log_combat(src, src, "revived")
@@ -1030,7 +1031,7 @@
 			if(heal_flags & ADMIN_HEAL_ALL)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp)
+				wound.heal_wound(wound.whp, forced = TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
@@ -1062,13 +1063,14 @@
 		return FALSE
 	return TRUE
 
-
 /mob/living/carbon/human/can_be_revived()
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(H)
-		if(H.rotted || H.skeletonized || H.brainkill)
-			return FALSE
+	if(!istype(H) || H.rotted || H.skeletonized)
+		return FALSE
+	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!istype(B) || B.brain_death)
+		return FALSE
 
 
 /mob/living/proc/update_damage_overlays()
@@ -1139,6 +1141,18 @@
 
 	update_sneak_invis()
 
+	// Complete and utter shitcode, make sure conditions match those in /client/proc/Process_Grab()
+	if(. && client && isliving(pulledby) && pulledby != pulling && pulledby.cmode && pulledby.grab_state == GRAB_PASSIVE) //NICHE case of being in a first tier grab state.
+		if(pulledby.anchored)
+			pulledby.stop_pulling()
+		else
+			var/pull_dir = get_dir(src, pulledby)
+			//puller and pullee more than one tile away or in diagonal position
+			if(get_dist(src, pulledby) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
+				pulledby.moving_from_pull = src
+				pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
+				pulledby.moving_from_pull = null
+
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1 && (pulledby != moving_from_pull))//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
 	else
@@ -1182,12 +1196,14 @@
 				if((newdir in GLOB.cardinals) && (prob(50)))
 					newdir = turn(get_dir(target_turf, start), 180)
 				if(!blood_exists)
-					new /obj/effect/decal/cleanable/trail_holder(start)
+					new /obj/effect/decal/cleanable/trail_holder(start, get_blood_type().color)
 
 				for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
 					if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 						TH.existing_dirs += newdir
-						TH.add_overlay(image('icons/effects/blood.dmi', trail_type, dir = newdir))
+						var/image/bloodthing = image('icons/effects/blood.dmi', trail_type, dir = newdir)
+						bloodthing.color = get_blood_type().color
+						TH.add_overlay(bloodthing)
 						TH.transfer_mob_blood_dna(src)
 
 /mob/living/carbon/human/makeTrail(turf/T)
@@ -1219,7 +1235,6 @@
 	if(!can_resist() || surrendering)
 		return
 
-	changeNext_move(CLICK_CD_RESIST)
 
 	if(atkswinging)
 		stop_attack(FALSE)
@@ -1230,6 +1245,8 @@
 		log_combat(src, pulledby, "resisted grab")
 		resist_grab()
 		return
+
+	changeNext_move(CLICK_CD_RESIST)
 
 	//unbuckling yourself
 	if(buckled && last_special <= world.time)
@@ -1261,23 +1278,20 @@
 	if(stat)
 		return
 	surrendering = 1
-	if(alert(src, "Yield in surrender?",,"YES","NO") == "YES")
-		record_round_statistic(STATS_YIELDS)
-		changeNext_move(CLICK_CD_EXHAUSTED)
-		var/image/flaggy = image('icons/effects/effects.dmi',src,"surrender",ABOVE_MOB_LAYER)
-		flaggy.appearance_flags = RESET_TRANSFORM|KEEP_APART
-		flaggy.transform = null
-		flaggy.pixel_y = 12
-		flick_overlay_view(flaggy, 150)
-		drop_all_held_items()
-		Stun(150)
-		src.visible_message("<span class='notice'>[src] yields!</span>")
-		playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
-		toggle_cmode()
-		sleep(150)
-		log_attack("[key_name(src)] has yielded!")
-	surrendering = 0
+	if(!alert(src, "Yield in surrender?",,"YES","NO") == "YES")
+		return
 
+	record_round_statistic(STATS_YIELDS)
+	changeNext_move(CLICK_CD_EXHAUSTED)
+	var/mutable_appearance/flaggy = mutable_appearance('icons/effects/effects.dmi', "surrender", ABOVE_MOB_LAYER, appearance_flags = RESET_TRANSFORM|KEEP_APART)
+	flaggy.pixel_y = 12
+	flick_overlay_view(flaggy, 150)
+	drop_all_held_items()
+	Stun(15 SECONDS)
+	visible_message("<span class='notice'>[src] yields!</span>")
+	playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
+	toggle_cmode()
+	addtimer(VARSET_CALLBACK(src, surrendering, FALSE), 15 SECONDS)
 
 /mob/proc/stop_attack(message = FALSE)
 	if(atkswinging)
@@ -1524,10 +1538,13 @@
 		to_chat(src, span_warning("I'm restrained!"))
 		return
 
+	// Passive grabs without cmode can be instantly broken and do not block movement
+	if(pulledby.grab_state == GRAB_PASSIVE && !pulledby.cmode)
+		pulledby.stop_pulling()
+		return FALSE
+
 	if(!MOBTIMER_FINISHED(pulledby, MT_RESIST_GRAB, 2 SECONDS))
 		return
-
-	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist)
 
 	var/wrestling_diff = 0
 	var/resist_chance = BASE_GRAB_RESIST_CHANCE
@@ -1624,6 +1641,7 @@
 						span_warning("I struggle against [L]'s grasp![shitte]"), null, null)
 		playsound(src.loc, 'sound/combat/grabstruggle.ogg', 50, TRUE, -1)
 		pulledby.Immobilize(rand(1, 3))
+		Immobilize(3)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST_GRAB, src, pulledby, moving_resist, .)
 
@@ -1659,7 +1677,7 @@
 /mob/living/proc/resist_fire()
 	return
 
-/mob/living/proc/resist_restraints()
+/mob/living/proc/resist_restraints(instant = FALSE)
 	return
 
 /mob/living/proc/get_visible_name()
@@ -2138,6 +2156,9 @@
 			return
 		if(incapacitated())
 			return
+		//if(!step(src,get_dir(src,over)))
+		//	to_chat(src, span_warning("You can't climb into [over] whilst it's there."))
+		//	return
 		for(var/obj/item/grabbing/G in grabbedby)
 			if(G.grab_state == GRAB_AGGRESSIVE)
 				return
@@ -2544,12 +2565,12 @@
 			found_ping(get_turf(potential_track), client, "hidden")
 			potential_track.handle_revealing(src)
 
-/proc/found_ping(atom/A, client/C, state)
+/proc/found_ping(atom/A, client/C, state, duration = 3 SECONDS)
 	if(!A || !C || !state)
 		return
 	var/image/I = image('icons/effects/effects.dmi', A, state)
 	I.plane = ABOVE_LIGHTING_PLANE
-	flick_overlay(I, list(C), 3 SECONDS)
+	flick_overlay(I, list(C), duration)
 
 /**
  * look_up Changes the perspective of the mob to any openspace turf above the mob

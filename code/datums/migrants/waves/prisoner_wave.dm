@@ -39,7 +39,7 @@
 		/datum/skill/misc/climbing = 1,
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/craft/traps = 3,
 	)
 
@@ -151,8 +151,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 

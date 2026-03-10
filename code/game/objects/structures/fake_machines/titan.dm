@@ -428,7 +428,12 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	possible_positions += GLOB.apprentices_positions
 	possible_positions += GLOB.youngfolk_positions
 	possible_positions += GLOB.allmig_positions
-	possible_positions -= list("Monarch", "Innkeepers Son")
+	possible_positions -= list(
+		/datum/job/lord::title,
+		/datum/job/innkeep_son::title,
+		/datum/job/wretch::title,
+		/datum/job/bandit::title,
+	)
 	var/new_pos = input(user, "Select their new position", src, null) as anything in possible_positions
 	if(isnull(victim))
 		return
@@ -442,6 +447,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 	if(victim.mind?.assigned_role)
 		new_pos = victim.mind.assigned_role.get_informed_title(victim)
+		victim.mind.assigned_role.assign_honorary_titles(victim)
 
 	if(!SScommunications.can_announce(user))
 		return
@@ -457,6 +463,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(SSticker.regent_mob)
 		var/mob/living/carbon/human/regent = SSticker.regent_mob
 		priority_announce("[regent.real_name] is no longer regent.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
+		SSticker.regent_mob = null
 		return TRUE
 	var/list/mob/living/carbon/possible_mobs = orange(2, src)
 	if(!possible_mobs)

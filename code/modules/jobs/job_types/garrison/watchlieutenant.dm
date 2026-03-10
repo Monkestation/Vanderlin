@@ -17,7 +17,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
@@ -25,6 +25,7 @@
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
+	honorary = "Lieutenant"
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -53,8 +54,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/lieutenant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

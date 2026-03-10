@@ -31,7 +31,7 @@
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/alchemy = 1,
 	)

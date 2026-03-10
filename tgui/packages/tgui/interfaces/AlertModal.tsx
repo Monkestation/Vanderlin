@@ -139,6 +139,7 @@ function HorizontalButtons(props: ButtonDisplayProps) {
       {buttons.map((button, index) => (
         <Stack.Item grow={large_buttons ? 1 : undefined} key={index}>
           <Button
+            color="transparent"
             fluid={!!large_buttons}
             minWidth={5}
             onClick={() => act('choose', { choice: button })}
@@ -181,6 +182,7 @@ function VerticalButtons(props: ButtonDisplayProps) {
           m={0}
         >
           <Button
+            color="transparent"
             fluid
             minWidth={20}
             onClick={() => act('choose', { choice: button })}

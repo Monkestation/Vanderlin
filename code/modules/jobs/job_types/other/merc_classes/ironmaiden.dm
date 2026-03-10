@@ -19,7 +19,7 @@
 	skills = list(
 		/datum/skill/combat/knives = 1,
 		/datum/skill/misc/medicine = 4,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/reading = 3, // Using the higher value (3) since there were two entries with different values
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/craft/crafting = 2,

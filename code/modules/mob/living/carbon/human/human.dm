@@ -81,7 +81,7 @@
 						shoes_check.polished = 1
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						target.add_stress(/datum/stress_event/shiny_shoes)
 						to_chat(user, ("You polished the [shoes_check]."))
@@ -94,7 +94,7 @@
 					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
 					if(do_after(user, 2 SECONDS, src))
 						shoes_check.polished = 2
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
 						if(particle_spewer)
@@ -121,7 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
-	culture = new()
+	culture = GLOB.culture_singletons[culture]
 
 	. = ..()
 
@@ -132,7 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
-	QDEL_NULL(culture)
+	culture = null
 	GLOB.human_list -= src
 	return ..()
 
@@ -185,7 +185,10 @@
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 	if(clan)
-		. += "VITAE: [bloodpool]"
+		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
+	if(cleric)
+		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -390,7 +393,7 @@
 		else
 			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
 
-/mob/living/carbon/human/cuff_resist(obj/item/I)
+/mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
 		dropItemToGround(I)
 
@@ -408,17 +411,17 @@
 		addtimer(CALLBACK(src, PROC_REF(end_electrocution_animation), electrocution_skeleton_anim), anim_duration)
 
 	else //or just do a generic animation
-		flick_overlay_view(image(icon,src,"electrocuted_generic",ABOVE_MOB_LAYER), src, anim_duration)
+		flick_overlay_view(mutable_appearance(icon, "electrocuted_generic", ABOVE_MOB_LAYER), anim_duration)
 
 /mob/living/carbon/human/proc/end_electrocution_animation(mutable_appearance/MA)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, "#000000")
 	cut_overlay(MA)
 
-/mob/living/carbon/human/resist_restraints()
+/mob/living/carbon/human/resist_restraints(instant = FALSE)
 	if(wear_armor && wear_armor.breakouttime)
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
-		cuff_resist(wear_armor)
+		cuff_resist(wear_armor, instant = instant)
 	else
 		..()
 
@@ -638,13 +641,16 @@
 			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "Monarch")
 				HL.job = "Ex-Monarch"
+				HL.honorary = null
 				lord_job?.remove_spells(HL)
 			if(HL.job == "Consort")
 				HL.job = "Ex-Consort"
+				HL.honorary = null
 				consort_job?.remove_spells(HL)
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
+		lord_job?.assign_honorary_titles(coronated)
 		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
@@ -857,6 +863,8 @@
 	has_stubble = target.has_stubble
 	headshot_link = target.headshot_link
 	flavortext = target.flavortext
+	honorary = target.honorary
+	honorary = target.honorary_suffix
 	set_bloodpool(target.bloodpool)
 
 	var/obj/item/bodypart/head/target_head = target.get_bodypart(BODY_ZONE_HEAD)
@@ -1020,7 +1028,7 @@
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))

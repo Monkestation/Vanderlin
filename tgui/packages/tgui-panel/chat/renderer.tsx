@@ -53,9 +53,13 @@ function createHighlightNode(text, color) {
   return node;
 }
 
-function createMessageNode() {
+function createMessageNode(messageOdd) {
   const node = document.createElement('div');
-  node.className = 'ChatMessage';
+  let className = 'ChatMessage';
+  if(messageOdd) {
+    className = 'ChatMessage--zebra';
+  }
+  node.className = className;
   return node;
 }
 
@@ -117,6 +121,8 @@ class ChatRenderer {
   scrollTracking: boolean;
   lastScrollHeight: number;
   highlightParsers: Array<any> | null;
+  zebraHighlight: boolean;
+  disableCombine: boolean;
   handleScroll: (type: any) => void;
 
   constructor() {
@@ -132,6 +138,8 @@ class ChatRenderer {
     this.scrollNode = null;
     this.scrollTracking = true;
     this.lastScrollHeight = 0;
+    this.zebraHighlight = false;
+    this.disableCombine = false;
     this.handleScroll = (evt) => {
       const node = this.scrollNode;
       if (!node) {
@@ -363,11 +371,13 @@ class ChatRenderer {
     for (const payload of batch) {
       const message = createMessage(payload);
       // Combine messages
-      const combinable = this.getCombinableMessage(message);
-      if (combinable) {
-        combinable.times = (combinable.times || 1) + 1;
-        updateMessageBadge(combinable);
-        continue;
+      if(!this.disableCombine) {
+        const combinable = this.getCombinableMessage(message);
+        if (combinable) {
+          combinable.times = (combinable.times || 1) + 1;
+          updateMessageBadge(combinable);
+          continue;
+        }
       }
       // Reuse message node
       if (message.node) {
@@ -379,7 +389,11 @@ class ChatRenderer {
       }
       // Create message node
       else {
-        node = createMessageNode();
+        let oddMessage: boolean = false;
+        if(this.zebraHighlight) {
+          oddMessage = (this.visibleMessages.length % 2) === 0;
+        }
+        node = createMessageNode(oddMessage);
         // Payload is plain text
         if (message.text) {
           node.textContent = message.text;

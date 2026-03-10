@@ -308,7 +308,7 @@ SUBSYSTEM_DEF(migrants)
 
 	/// And back to non copy pasta code
 
-	to_chat(character, span_alertsyndie("I am a [role_instance.name]!"))
+	to_chat(character, span_alert("I am a [role_instance.name]!"))
 	to_chat(character, span_notice(wave.greet_text))
 	to_chat(character, span_notice(role_instance.greet_text))
 
@@ -399,6 +399,10 @@ SUBSYSTEM_DEF(migrants)
 		return FALSE
 	if(migrant_job.banned_lunatic && is_misc_banned(player.ckey, BAN_MISC_LUNATIC))
 		return FALSE
+	if(migrant_job.antag_role)
+		var/antag_type = migrant_job.antag_role::job_rank // ugh
+		if(antag_type && is_antag_banned(player.ckey, antag_type))
+			return FALSE
 
 	var/datum/preferences/prefs = player.prefs
 	if(!player.prefs.allowed_respawn())

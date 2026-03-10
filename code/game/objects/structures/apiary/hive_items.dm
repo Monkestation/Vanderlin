@@ -114,7 +114,7 @@
 	. = ..()
 	icon_state = active ? "smoker_lit" : "smoker"
 
-/obj/item/bee_smoker/attackby(obj/item/I, mob/user, params)
+/obj/item/bee_smoker/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/natural/bundle/cloth))
 		var/obj/item/natural/bundle/cloth/C = I
 		if(C.amount >= 1 && fuel < max_fuel)

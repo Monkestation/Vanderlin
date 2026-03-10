@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX 32
+#define SAVEFILE_VERSION_MAX 33
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -77,17 +77,18 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	// Restructuring of skin tones and culture addition
 	if(current_version < 31)
-		var/datum/culture/culture = S["culture"]
-		if(!culture)
-			culture = /datum/culture/universal/ambiguous
-			WRITE_FILE(S["culture"], culture)
+		culture = /datum/culture/universal/ambiguous
+		WRITE_FILE(S["culture"], culture)
 
 		var/list/assoc_skins = pref_species.get_skin_list()
-		// If current skin tone matches one of the current list, we are fine
+		var/list/skins = list()
+
 		for(var/skin in assoc_skins)
-			if(skin_tone != assoc_skins[skin]) // otherwise its gambling time
-				skin_tone = pick_assoc(assoc_skins)
-				break
+			skins += assoc_skins[skin]
+
+		if(!(skin_tone in skins))
+			skin_tone = pick_assoc(assoc_skins)
+			WRITE_FILE(S["skin_tone"], skin_tone)
 
 	if(current_version < 32)
 		var/species_name = S["species"]
@@ -96,6 +97,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			if(species_type::name == species_name)
 				pref_species = new species_type()
 				WRITE_FILE(S["species"], pref_species.id)
+
+	if(current_version < 33)
+		switch(voice_type)
+			if("Masculine")
+				voice_type = VOICE_TYPE_MASC
+			if("Feminine")
+				voice_type = VOICE_TYPE_FEM
+		WRITE_FILE(S["voice_type"], voice_type)
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -374,10 +383,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/patron_typepath
 	S["selected_patron"] >> patron_typepath
 	if(patron_typepath)
-		selected_patron = GLOB.patron_list[patron_typepath]
+		selected_patron = GLOB.patrons_by_type[patron_typepath]
 
 	if(!selected_patron) //failsafe
-		selected_patron = GLOB.patron_list[default_patron]
+		selected_patron = GLOB.patrons_by_type[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -429,7 +438,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	eye_color = sanitize_hexcolor(eye_color, 3, 0)
 	voice_color = voice_color
 	pronouns = sanitize_text(pronouns, THEY_THEM)
-	voice_type = sanitize_text(voice_type, VOICE_TYPE_MASC)
+	voice_type = sanitize_inlist(VOICE_TYPES_LIST, voice_type, VOICE_TYPE_MASC)
 	skin_tone = skin_tone
 	family = family
 	gender_choice = gender_choice
@@ -451,9 +460,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 
 	//Validate job prefs
-	for(var/j in job_preferences)
-		if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
-			job_preferences -= j
+	if(!job_preferences)
+		job_preferences = list()
+	else
+		for(var/j in job_preferences)
+			if(job_preferences[j] != JP_LOW && job_preferences[j] != JP_MEDIUM && job_preferences[j] != JP_HIGH)
+				job_preferences -= j
 
 	S["customizer_entries"] >> customizer_entries
 	validate_customizer_entries()

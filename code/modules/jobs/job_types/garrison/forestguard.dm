@@ -18,11 +18,11 @@
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL, AGE_CHILD)
-	allowed_races = RACES_PLAYER_GUARD
+	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	give_bank_account = 30
 	can_have_apprentices = FALSE
-	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 
 	outfit = /datum/outfit/forestguard
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)
@@ -64,6 +64,7 @@
 	outfit = /datum/outfit/forestguard/infantry
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -81,7 +82,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/axesmaces = 3,
 		/datum/skill/combat/whipsflails = 3,
@@ -96,8 +97,8 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/infantry
 	name = "Forest Ravager"
@@ -120,6 +121,7 @@
 	outfit = /datum/outfit/forestguard/ranger
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	jobstats = list(
 		STATKEY_STR = -3,
@@ -137,7 +139,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/bows = 3,
 		/datum/skill/combat/crossbows = 3,
@@ -149,8 +151,8 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/ranger
 	name = "Forest Ranger"
@@ -173,6 +175,7 @@
 	outfit = /datum/outfit/forestguard/reaver
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -190,7 +193,7 @@
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/labor/lumberjacking = 1,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/tanning = 1,
 		/datum/skill/combat/wrestling = 3,
 		/datum/skill/combat/unarmed = 3,
@@ -203,8 +206,8 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_FORAGER,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/forestguard/reaver
 	name = "Forest Reaver"
@@ -227,6 +230,7 @@
 	outfit = /datum/outfit/forestguard/ruffian
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_CHILD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	jobstats = list(
 		STATKEY_PER = 1
@@ -238,7 +242,7 @@
 		/datum/skill/misc/athletics = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/labor/butchering = 2,
 		/datum/skill/combat/bows = 1,
 		/datum/skill/combat/crossbows = 1,
@@ -255,8 +259,8 @@
 		TRAIT_FORAGER,
 		TRAIT_ORPHAN,
 		TRAIT_BRUSHWALK,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/advclass/forestguard/ruffian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -267,6 +271,55 @@
 	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
 
 	add_verb(spawned, /mob/proc/haltyellorphan)
+
+/datum/job/advclass/forestguard/rat
+	title = "Forest Rat"
+	tutorial = "Fed up with your antics in the city, you were rounded up by the city's Watch and put to work in the infamous forest garrison. \n\n Who knows, even despite your disadvantages, - you might just become more than a troublemaker."
+	outfit = /datum/outfit/forestguard/ruffian
+	category_tags = list(CTAG_FORGARRISON)
+	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+
+	jobstats = list(
+		STATKEY_PER = 1
+	)
+
+	skills = list(
+		/datum/skill/misc/swimming = 3,
+		/datum/skill/misc/climbing = 4,
+		/datum/skill/misc/athletics = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/craft/carpentry = 1,
+		/datum/skill/craft/sewing = 2,
+		/datum/skill/labor/butchering = 2,
+		/datum/skill/combat/bows = 1,
+		/datum/skill/combat/crossbows = 1,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/axesmaces = 1,
+		/datum/skill/combat/wrestling = 1,
+		/datum/skill/craft/cooking = 2,
+		/datum/skill/misc/sneaking = 2,
+		/datum/skill/misc/stealing = 3,
+		/datum/skill/craft/tanning = 2
+	)
+
+	traits = list(
+		TRAIT_FORAGER,
+		TRAIT_ORPHAN,
+		TRAIT_BRUSHWALK,
+	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
+
+/datum/job/advclass/forestguard/rat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, rand(-1, 1))
+	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, rand(-2, 2))
+	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, rand(-1, 1))
+	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
+	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
+
+	add_verb(spawned, /mob/proc/haltyellorphan)
+
+
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"

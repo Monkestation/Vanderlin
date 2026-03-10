@@ -9,6 +9,7 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
+	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY)
 	outfit = /datum/outfit/courtphys/male
@@ -27,11 +28,15 @@
 		STATKEY_CON = -1
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
+
 	skills = list(
 		/datum/skill/misc/reading = 5,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/medicine = 5,
 		/datum/skill/craft/alchemy = 3,
 		/datum/skill/labor/mathematics = 3
@@ -52,7 +57,10 @@
 		spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
-		ADD_TRAIT(spawned, TRAIT_NOBLE, TRAIT_GENERIC)
+		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, JOB_TRAIT)
+		ADD_TRAIT(spawned, TRAIT_NOBLE_POWER, JOB_TRAIT)
+	else
+		spawned.honorary = null
 
 /datum/outfit/courtphys
 	name = "Court Physician Base"

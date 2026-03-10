@@ -19,7 +19,7 @@
 	weight = 12
 
 	earliest_start = 0 SECONDS
-	min_players = 35
+	min_players = LOWPOP_THRESHOLD
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf
@@ -38,6 +38,8 @@
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/templar,
+		/datum/job/gmtemplar,
+		/datum/job/advclass/combat/assassin,
 	)
 
 /datum/round_event_control/antagonist/solo/werewolf/valid_for_map()
