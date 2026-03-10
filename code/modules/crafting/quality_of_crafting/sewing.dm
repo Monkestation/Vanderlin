@@ -1051,6 +1051,14 @@
 	craftdiff = 3
 	category = "Belt"
 
+/datum/repeatable_crafting_recipe/sewing/waistshawl
+	name = "waist shawl"
+	output = /obj/item/storage/belt/leather/cloth/waistshawl
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Belt"
+
 
 /* .............. recipes requiring skill 4 ..............*/
 

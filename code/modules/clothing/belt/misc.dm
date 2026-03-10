@@ -146,6 +146,21 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/belt/cloth
 
+/obj/item/storage/belt/leather/shawl
+	name = "waist shawl"
+	desc = "A simple shawl worn at the waist."
+	icon_state = "beltshawl"
+	salvage_result = /obj/item/natural/cloth
+	component_type = /datum/component/storage/concrete/grid/belt/cloth
+
+
+/obj/item/storage/belt/leather/shawl/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/storage/belt/leather/shawl/colored/random/Initialize()
+	color = pick(CLOTHING_WISTERIA, CLOTHING_ROYAL_RED, CLOTHING_LINEN, CLOTHING_BOG_GREEN, CLOTHING_SWAMPWEED)
+	return ..()
+
 /obj/item/storage/belt/leather/cloth/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
