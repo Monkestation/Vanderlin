@@ -713,3 +713,19 @@
 		/obj/item/natural/silk = 2
 	)
 	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/sewing/weaving/saree
+	name = "Saree"
+	output = /obj/item/clothing/shirt/dress/gown/saree
+	requirements = list(/obj/item/natural/silk = 3)
+	craftdiff = 4
+	sellprice = 50
+	category = "Dress"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/dhoti
+	name = "Dhoti"
+	output = /obj/item/clothing/pants/tights/dhoti
+	requirements = list(/obj/item/natural/silk = 3)
+	craftdiff = 4
+	sellprice = 50
+	category = "Pants"

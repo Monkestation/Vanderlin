@@ -348,6 +348,12 @@
 	recipe_name = "a Gold Diadem"
 	created_item = /obj/item/clothing/head/crown/circlet/golddiadem
 
+/datum/anvil_recipe/valuables/gold/dancer
+	name = "Dancer's Headdress (+ Cloth)"
+	recipe_name = "a Dancer's Headdress"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/head/crown/circlet/dancer
+
 /datum/anvil_recipe/valuables/gold/nosechain
 	name = "2x Gold Nosechain's"
 	recipe_name = "two Silver Nosechains"

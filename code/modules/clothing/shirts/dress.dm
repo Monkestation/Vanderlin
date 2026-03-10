@@ -222,3 +222,18 @@
 	icon_state = "fallgown"
 	boobed = TRUE
 	detail_color = "#8b3f00"
+
+/obj/item/clothing/shirt/dress/gown/saree
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
+	name = "silk saree"
+	desc = "A beautiful and fashionable saree weaved out of silk."
+	icon_state = "saree"
+	boobed = FALSE
+	detail_color = CLOTHING_CHALK_WHITE
+
+/obj/item/clothing/shirt/dress/gown/saree/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/shirt/dress/gown/saree/colored/dancer
+	color = CLOTHING_BOG_GREEN
+	detail_color = CLOTHING_ROYAL_RED

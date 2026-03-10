@@ -2845,6 +2845,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\combat\dredge.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\dwarfranger.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\hollowranger.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\kalaripayatt.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\mage.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\monk.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\ranger.dm"

@@ -89,6 +89,12 @@
 	icon_state = "circlet_opal"
 	sellprice = 95
 
+/obj/item/clothing/head/crown/circlet/dancer
+	name = "dancer's headdress"
+	desc = "A golden headdress decorated with puffs of dyed cloth, it's typically worn by female dancers."
+	icon_state = "dancer"
+	sellprice = VALUE_GOLD_ITEM
+
 /obj/item/clothing/head/crown/nyle
 	name = "jewel of nyle"
 	icon_state = "nile"

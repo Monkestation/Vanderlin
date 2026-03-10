@@ -62,3 +62,16 @@
 /obj/item/clothing/pants/tights/sailor
 	name = "pants"
 	icon_state = "sailorpants"
+
+/obj/item/clothing/pants/tights/dhoti
+	name = "silk dhoti"
+	desc = "A fashionable pair of pants weaved out of silk."
+	icon_state = "dhoti"
+	detail_tag = "_detail"
+
+/obj/item/clothing/pants/tights/dhoti/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/pants/tights/dhoti/colored/dancer
+	color = CLOTHING_BOG_GREEN
+	detail_color = CLOTHING_ROYAL_RED
