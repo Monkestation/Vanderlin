@@ -18,12 +18,11 @@
 	cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 	banned_patrons = list()
 
-	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_CHURCH, EXP_TYPE_MEDICAL)
-	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_CHURCH, EXP_TYPE_MEDICAL)
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_MEDICAL)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_MEDICAL)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_ADVENTURER = 300,
-		EXP_TYPE_CHURCH = 300,
 		EXP_TYPE_MEDICAL = 300
 	)
 
@@ -34,20 +33,21 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/craft/alchemy = 2,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/labor/farming = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1
+		/datum/skill/misc/athletics = SKILL_LEVEL_NOVICE,
+		/datum/skill/craft/alchemy = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/labor/farming = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE
 	)
 
 	traits = list(
 		TRAIT_FORAGER,
 		TRAIT_STEELHEARTED
 	)
+	selection_color = "#a33096"
 
 /datum/job/bog_apprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -80,8 +80,3 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather
 	neck = /obj/item/clothing/neck/psycross/great_hunt
-
-/datum/outfit/bogwitch/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-
-

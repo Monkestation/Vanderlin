@@ -35,17 +35,19 @@
 	)
 
 	skills = list(
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/labor/farming = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/sewing = 2
+		/datum/skill/misc/athletics = SKILL_LEVEL_NOVICE,
+		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/labor/farming = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/magic/holy = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE
 	)
+
+	spells = list(/datum/action/cooldown/spell/diagnose)
 
 	traits = list(
 		TRAIT_DEADNOSE,
@@ -53,12 +55,25 @@
 		TRAIT_LEGENDARY_ALCHEMIST,
 		TRAIT_STEELHEARTED
 	)
+	selection_color = "#a33096"
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
+	var/chosen_path = tgui_input_list(spawned, "Choose a specialist path", "Specialist Path", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
+	switch(chosen_path)
+		if("Path of Bone")//Plus to Surgery
+			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/alchemy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/magic/holy, -1, TRUE)
+		if("Path of Nature")//Plus to Alchemy
+			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/misc/medicine, -1, TRUE)
+		if("Path of The Hunt")//Plus to Miracles
+			spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/craft/alchemy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/skill/misc/medicine, -1, TRUE)
+
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
@@ -99,6 +114,3 @@
 	)
 
 /datum/outfit/bogwitch/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-
-
