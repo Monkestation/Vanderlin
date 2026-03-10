@@ -1,5 +1,5 @@
-/datum/job/bogwitch
-	title = JOB_BOGWITCH
+/datum/job/bog_apprentice
+	title = JOB_BOGWITCH_APP
 	tutorial = "Wild at heart and certainly wild in appearance. A healer and worker of miracles, in a manner of speaking anyway."
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -10,9 +10,9 @@
 	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
-	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
+	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 	allowed_sexes = list(MALE, FEMALE)
-	outfit = /datum/outfit/bogwitch
+	outfit = /datum/outfit/bog_apprentice
 	is_foreigner = TRUE
 	is_recognized = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
@@ -28,45 +28,35 @@
 	)
 
 	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
+		STATKEY_INT = 1,
 		STATKEY_CON = 1,
 		STATKEY_END = 1
 	)
 
 	skills = list(
 		/datum/skill/misc/athletics = 1,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/misc/climbing = 2,
+		/datum/skill/craft/alchemy = 2,
 		/datum/skill/craft/crafting = 3,
-		/datum/skill/labor/farming = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/polearms = 3,
+		/datum/skill/labor/farming = 2,
+		/datum/skill/misc/medicine = 2,
 		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/sewing = 2
+		/datum/skill/combat/unarmed = 1,
+		/datum/skill/combat/wrestling = 1
 	)
 
 	traits = list(
-		TRAIT_DEADNOSE,
 		TRAIT_FORAGER,
-		TRAIT_LEGENDARY_ALCHEMIST,
 		TRAIT_STEELHEARTED
 	)
 
-/datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/bog_apprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
+	if(spawned.age == AGE_ADULT)
+		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1)
+		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1)
+		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1)
 
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_acolyte()
-		devotion.grant_to(spawned)
-
-/datum/job/bogwitch/adjust_patron(mob/living/carbon/human/spawned)
+/datum/job/bog_apprentice/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
 	if(old_patron?.type == /datum/patron/alternate/great_hunt)
 		return
@@ -79,25 +69,17 @@
 		but the path I tread todae has accustomed me to [new_patron.display_name ? new_patron.display_name : new_patron]."))
 
 
-/datum/outfit/bogwitch
-	name = JOB_BOGWITCH
-	head = /obj/item/clothing/head/wizhat/witch
-	mask = /obj/item/clothing/face/spectacles
+/datum/outfit/bog_apprentice
+	name = JOB_BOGWITCH_APP
 	shirt = /obj/item/clothing/shirt/robe/colored/black
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/storage/backpack/satchel/surgbag
-	cloak = /obj/item/clothing/cloak/wickercloak
-	//ring = /obj/item/clothing/ring/gold
+	backr = /obj/item/storage/backpack/satchel/surgbag/shit
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/keyring/bogwitch
-	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff
 	shoes = /obj/item/clothing/shoes/boots/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather
-	//neck = /obj/item/clothing/neck/psycross/great_hunt
-	backpack_contents = list(
-		/obj/item/scrying = 1
-	)
+	neck = /obj/item/clothing/neck/psycross/great_hunt
 
 /datum/outfit/bogwitch/post_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

@@ -2709,6 +2709,13 @@
 	color = "#7D9BAE"
 	},
 /area/under/tomb/indoors/magic)
+"bCR" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bogwitch_apprentice{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/shelter/bog/witch)
 "bDt" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -5973,6 +5980,7 @@
 	pixel_x = 0;
 	pixel_y = -11
 	},
+/obj/effect/landmark/start/bogwitch_apprentice,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "foi" = (
@@ -12088,6 +12096,9 @@
 /obj/structure/chair/wood/alt{
 	dir = 8
 	},
+/obj/effect/landmark/start/bogwitch_apprentice{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog/witch)
 "mcy" = (
@@ -14774,6 +14785,12 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"psh" = (
+/obj/effect/landmark/start/bogwitch_apprentice{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/indoors/shelter/bog/witch)
 "psq" = (
 /obj/structure/table/vtable/v2,
 /obj/item/weapon/knife/dagger/silver/arcyne,
@@ -17683,6 +17700,7 @@
 /obj/item/essence_node_jar,
 /obj/item/essence_node_jar,
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
 "sRy" = (
@@ -18178,6 +18196,7 @@
 /obj/item/reagent_containers/glass/bottle,
 /obj/structure/closet/crate/chest/neu,
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "tCh" = (
@@ -19600,6 +19619,7 @@
 /obj/item/reagent_containers/glass/alchemical,
 /obj/item/reagent_containers/glass/alchemical,
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
 "vgg" = (
@@ -42321,7 +42341,7 @@ jux
 mqv
 mIn
 uYT
-dUG
+psh
 crc
 mPz
 cgB
@@ -82924,8 +82944,8 @@ oyx
 oyx
 ola
 crc
-nbd
-nbd
+bCR
+bCR
 crc
 hmA
 cAg

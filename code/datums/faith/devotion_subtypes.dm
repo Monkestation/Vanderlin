@@ -217,7 +217,8 @@
 
 /datum/devotion/alternate/great_hunt
 	miracles = list(
-		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert, /datum/action/cooldown/spell/undirected/conjure_item/summon_leech),
-		CLERIC_T1 = list(/datum/action/cooldown/spell/undirected/call_to_slaughter, /datum/action/cooldown/spell/aoe/on_turf/circle/flower_field/holy),
-		CLERIC_T2 = /datum/action/cooldown/spell/undirected/beast_sense,
+		CLERIC_T0 = /datum/action/cooldown/spell/healing/hunt,
+		CLERIC_T1 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/undirected/will_of_woods),
+		CLERIC_T2 = /datum/action/cooldown/spell/conjure/hunters_trick,
+		CLERIC_T3 = /datum/action/cooldown/spell/undirected/hunters_grace,
 	)

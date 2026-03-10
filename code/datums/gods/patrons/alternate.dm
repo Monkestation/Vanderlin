@@ -43,3 +43,12 @@
 
 /datum/patron/alternate/great_hunt/preference_accessible(datum/preferences/prefs)
 	return FALSE
+
+/datum/patron/alternate/great_hunt/can_pray(mob/living/carbon/human/follower)
+	var/amulet_type = /obj/item/clothing/neck/psycross/great_hunt
+
+	if(istype(follower.wear_wrists, amulet_type) || istype(follower.wear_neck, amulet_type) || istype(follower.get_active_held_item(), amulet_type))
+		return TRUE
+
+	to_chat(follower, span_danger("I need an amulet of the hunt for my prayers to be heard..."))
+	return FALSE

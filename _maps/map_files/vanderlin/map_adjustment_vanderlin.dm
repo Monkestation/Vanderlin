@@ -8,4 +8,5 @@
 	map_file_name = "vanderlin.dmm"
 	slot_adjust = list(
 		/datum/job/bogwitch = 1,
+		/datum/job/bog_apprentice = 1,
 	)

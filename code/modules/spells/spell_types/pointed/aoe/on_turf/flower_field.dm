@@ -64,11 +64,6 @@
 	for(var/mob/living/L in victim)
 		field.Crossed(L)
 
-/datum/action/cooldown/spell/aoe/on_turf/circle/flower_field/holy
-	name = "Flower Circle"
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
-
 /*-----------------\
 |  Flower Fields   |
 \-----------------*/
