@@ -32,6 +32,16 @@
 	languages = list(/datum/language/common)
 	honorary = "Overseer"
 
+/datum/job/migrant/rousman_cheese/overseer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	var/turf/target_turf = get_turf(H)
+	var/obj/structure/handcart/cart = new(target_turf)
+	var/obj/item/reagent_containers/glass/bucket/pot/copper/pot = new(target_turf)
+	var/obj/item/tent_kit/tent = new(target_turf)
+
+	cart.put_in(null, pot, TRUE)
+	cart.put_in(null, tent, TRUE)
+
 /datum/outfit/rousman_cheese/overseer
 	name = "Rousman Overseer (Migrant Wave)"
 	ring = /obj/item/clothing/ring/amber
@@ -47,18 +57,6 @@
 		/obj/item/reagent_containers/glass/bottle/black/cheese_soup,
 		/obj/item/reagent_containers/glass/bottle/black/cheese_soup
 	)
-
-
-/datum/outfit/rousman_cheese/overseer/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	var/turf/target_turf = get_turf(H)
-	var/obj/structure/handcart/cart = new(target_turf)
-	var/obj/item/reagent_containers/glass/bucket/pot/copper/pot = new(target_turf)
-	var/obj/item/tent_kit/tent = new(target_turf)
-
-	cart.put_in(null, pot, TRUE)
-	cart.put_in(null, tent, TRUE)
-
 
 // The cheesemaker, the one that makes the cheese.
 /datum/migrant_role/rousman_cheese/cheesemaker
