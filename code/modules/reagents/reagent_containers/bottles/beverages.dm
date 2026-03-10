@@ -126,7 +126,7 @@
 	auto_label_desc = "An especially tart cider from the Grenzelhoftian regenwald. Rumor has it the brewers let the barrels age in the bog, which results in that especially strong flavour."
 
 /obj/item/reagent_containers/glass/bottle/nred
-	desc = "A bottle with the City of Norwandine cork-seal."
+	desc = "A bottle with the Aurum cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/nred = 48)
 	auto_label_name = "molten gold"
 	auto_label_desc = "A red ale brewed to perfection in the lands of the aurum dwarves."
