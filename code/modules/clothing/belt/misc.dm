@@ -298,12 +298,6 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
-/obj/item/storage/backpack/satchel/heartfelt
-	populate_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper/heartfelt,
-	)
-
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
