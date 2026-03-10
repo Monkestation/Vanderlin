@@ -205,6 +205,13 @@
 	converted_type = /area/indoors/shelter/bog
 	threat_region = THREAT_REGION_TERRORBOG
 
+/area/outdoors/bog/e_highroad
+	name = "the eastern highroad"
+	first_time_text = "THE EASTERN HIGHROAD"
+
+/area/outdoors/bog/w_highroad
+	name = "the western highroad"
+
 /area/indoors/shelter/bog
 	icon_state = "bog"
 	background_track = 'sound/music/area/bog.ogg'
@@ -213,6 +220,9 @@
 
 /area/indoors/shelter/bog/witch
 	name = "bog witch's hut"
+
+/area/indoors/shelter/bog/e_highroad_camp
+	name = "the eastern highroad camp"
 
 /area/outdoors/beach
 	name = "sophia's cry"

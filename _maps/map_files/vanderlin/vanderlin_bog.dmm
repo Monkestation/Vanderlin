@@ -284,7 +284,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "afu" = (
 /obj/structure/flora/kelp,
 /obj/structure/flora/grass/water,
@@ -565,7 +565,7 @@
 "aol" = (
 /obj/item/chair/stool,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "aoB" = (
 /obj/structure/abyss_window{
 	color = "#7D9BAE"
@@ -1036,11 +1036,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"axX" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 1
-	},
-/area/outdoors/bog)
 "ayc" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile/two{
@@ -1699,7 +1694,7 @@
 	dir = 10
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "aNm" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -1721,7 +1716,7 @@
 	dir = 5
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "aNA" = (
 /obj/structure/flora/shells,
 /obj/structure/fluff/walldeco/church/line{
@@ -2275,7 +2270,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "bbC" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 1
@@ -2283,6 +2278,9 @@
 /obj/item/gear/metal/iron,
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
+"bbX" = (
+/turf/closed/wall/mineral/decowood,
+/area/indoors/shelter/bog/e_highroad_camp)
 "bci" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/bog)
@@ -2297,7 +2295,7 @@
 /obj/item/ore/coal,
 /obj/item/ore/coal,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "bcV" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile{
@@ -2353,6 +2351,14 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"bhe" = (
+/turf/open/floor/blocks/newstone,
+/area/outdoors/bog/w_highroad)
+"bho" = (
+/obj/structure/flora/grass/water,
+/obj/structure/bridge,
+/turf/open/water/swamp,
+/area/outdoors/bog)
 "bif" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -2362,6 +2368,9 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"bip" = (
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "biC" = (
 /obj/effect/decal/carpet/kover_purple,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -2698,7 +2707,7 @@
 "bBH" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "bCH" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -2760,7 +2769,7 @@
 	pixel_x = -5
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "bEP" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -3038,7 +3047,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/landmark/quest_spawner,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "bVf" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -3116,6 +3125,12 @@
 /obj/structure/fluid_drain,
 /turf/open/water/bath,
 /area/indoors/town/clocktower)
+"bYJ" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "bZo" = (
 /obj/structure/flora/ocean_plants{
 	color = "#880808"
@@ -3224,7 +3239,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/end,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "cju" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clocktower)
@@ -3341,7 +3356,7 @@
 	pixel_x = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "cps" = (
 /obj/structure/fluff/steamvent,
 /obj/structure/fake_machine/camera/left,
@@ -3416,7 +3431,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "cvl" = (
 /obj/structure/stairs{
 	dir = 4
@@ -3479,6 +3494,12 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"cyN" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "cyR" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -3617,7 +3638,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "cGE" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3629,6 +3650,13 @@
 /obj/item/natural/stoneblock,
 /turf/open/floor/concrete,
 /area/outdoors/bog)
+"cGM" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/torchholder{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "cHa" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 4
@@ -3645,6 +3673,9 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"cHq" = (
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "cHL" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4018,7 +4049,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "dgn" = (
 /obj/structure/stairs/stone/church{
 	dir = 1;
@@ -4231,6 +4262,10 @@
 /obj/item/natural/rock,
 /turf/open/water/ocean,
 /area/outdoors/bog)
+"doV" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "doZ" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -4370,6 +4405,12 @@
 	},
 /turf/open/floor/grass/cold,
 /area/under/cavewet)
+"dwB" = (
+/obj/effect/decal/cobbleedge/alt{
+	dir = 5
+	},
+/turf/open/openspace,
+/area/outdoors/bog/w_highroad)
 "dyu" = (
 /turf/open/floor/twig,
 /area/outdoors/bog)
@@ -4505,7 +4546,7 @@
 "dFK" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "dFU" = (
 /obj/structure/fake_machine/camera/left,
 /turf/open/floor/blocks,
@@ -4876,6 +4917,10 @@
 	dir = 1
 	},
 /area/outdoors/bog)
+"ead" = (
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "eaf" = (
 /obj/structure/chair/hotspring_bench/right,
 /turf/open/floor/abyss_tile/three{
@@ -5000,11 +5045,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/rooftop/green,
 /area/under/cavewet)
-"efC" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bucket/pot,
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
 "efN" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /obj/structure/flora/grass/maneater/real,
@@ -5097,7 +5137,7 @@
 "eke" = (
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "ekK" = (
 /obj/structure/flora/shells,
 /turf/open/floor/abyss_sand/path,
@@ -5342,7 +5382,7 @@
 	pixel_y = 26
 	},
 /turf/open/floor/cobble,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "eGu" = (
 /obj/structure/trap/wall_projectile{
 	invisibility = 1
@@ -5400,7 +5440,7 @@
 /turf/closed/wall/mineral/decostone/end{
 	dir = 1
 	},
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "eKx" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/abyss_tile/three{
@@ -5510,7 +5550,7 @@
 	dir = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "eOR" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 10
@@ -5529,7 +5569,7 @@
 	dir = 10
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "eQc" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
@@ -5622,6 +5662,10 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/bog)
+"eXM" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/closed/wall/mineral/decowood,
+/area/indoors/shelter/bog/e_highroad_camp)
 "eYj" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/structure/fluff/railing/stonehedge{
@@ -5631,7 +5675,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "eYl" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -5643,6 +5687,20 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"eYr" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "eYK" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -5801,7 +5859,7 @@
 	pixel_y = 26
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "fgh" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
@@ -5911,6 +5969,10 @@
 /obj/effect/spawner/map_spawner/loot/magic,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/clocktower)
+"flw" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "fly" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -5941,7 +6003,7 @@
 "fmV" = (
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "fnb" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile{
@@ -6272,7 +6334,7 @@
 "fFz" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "fGo" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -6381,6 +6443,12 @@
 	dir = 1
 	},
 /area/outdoors/bog)
+"fMP" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/outdoors/bog/w_highroad)
 "fMY" = (
 /obj/effect/decal/carpet/kover_black{
 	pixel_x = 17;
@@ -6681,6 +6749,10 @@
 	},
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
+"gaB" = (
+/obj/effect/landmark/quest_spawner,
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "gaP" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
@@ -6729,6 +6801,9 @@
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"gdS" = (
+/turf/open/floor/cobble,
+/area/outdoors/bog/e_highroad)
 "gea" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/railing/border{
@@ -6944,7 +7019,10 @@
 "gly" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
+"glA" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/shelter/bog/e_highroad_camp)
 "gma" = (
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/swamp,
@@ -7078,7 +7156,7 @@
 	pixel_y = 26
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "gwW" = (
 /turf/open/floor/ruinedwood,
 /area/under/cavewet)
@@ -7154,7 +7232,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "gCd" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -7219,7 +7297,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "gFw" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -7270,6 +7348,9 @@
 	},
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
+"gGN" = (
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "gIG" = (
 /obj/item/clothing/cloak/stabard/templar/abyssor,
 /obj/item/clothing/armor/brigandine/abyssor,
@@ -7336,7 +7417,7 @@
 "gLO" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "gLZ" = (
 /obj/structure/flora/grass/herb/matricaria,
 /turf/open/floor/grass,
@@ -7430,6 +7511,12 @@
 	},
 /turf/open/water/blood,
 /area/under/cavewet)
+"gSY" = (
+/obj/effect/decal/cobbleedge/alt{
+	dir = 9
+	},
+/turf/open/openspace,
+/area/outdoors/bog/w_highroad)
 "gSZ" = (
 /obj/structure/flora/driftwood,
 /turf/open/water/ocean,
@@ -7746,7 +7833,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "hmM" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile/three{
@@ -7840,6 +7927,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"htu" = (
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "hud" = (
 /obj/item/chair/fancy,
 /turf/open/floor/ruinedwood/spiral,
@@ -7847,6 +7937,12 @@
 "hug" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 26
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog)
+"huA" = (
+/obj/structure/bridge_stakes{
+	dir = 8
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog)
@@ -7871,7 +7967,7 @@
 	dir = 5
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "hvO" = (
 /obj/structure/bars,
 /turf/open/floor/abyss_tile/two{
@@ -8057,7 +8153,7 @@
 /obj/item/clothing/shirt/undershirt/colored/uncolored,
 /obj/item/clothing/pants/tights,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "hGn" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile/two{
@@ -8097,6 +8193,10 @@
 /obj/item/natural/stone,
 /turf/open/water/swamp,
 /area/outdoors/bog)
+"hJc" = (
+/obj/effect/decal/cobbleedge/alt,
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "hJT" = (
 /obj/item/candle/floorcandle1/lit{
 	pixel_y = -9
@@ -8314,7 +8414,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "hYf" = (
 /obj/item/paper,
 /turf/open/floor/abyss_tile/three{
@@ -8326,7 +8426,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "hZS" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -8339,6 +8439,9 @@
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/floor/grass,
 /area/outdoors/bog)
+"ibY" = (
+/turf/open/floor/concrete,
+/area/outdoors/bog/e_highroad)
 "icB" = (
 /obj/structure/bookcase{
 	color = "#7D9BAE"
@@ -8347,6 +8450,12 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"icE" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/bog/e_highroad)
 "icF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/dirt,
@@ -8372,13 +8481,16 @@
 "iew" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/closed/wall/mineral/wooddark,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "ieH" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/natural/wood/plank,
 /turf/open/floor/carpet/red,
 /area/indoors/ship)
+"ieZ" = (
+/turf/open/floor/ruinedwood/turned,
+/area/indoors/shelter/bog/e_highroad_camp)
 "ifa" = (
 /obj/structure/chair/stool/bar,
 /mob/living/simple_animal/hostile/deepone/arm{
@@ -8597,10 +8709,14 @@
 "iqw" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/bog)
+"ira" = (
+/obj/structure/ladder,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "isj" = (
 /obj/machinery/anvil/crafted,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "isD" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8746,6 +8862,10 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/town/clocktower)
+"iwc" = (
+/obj/structure/ladder,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "iwj" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/essence/infuser,
@@ -8838,7 +8958,7 @@
 	dir = 6
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "iCY" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile/three{
@@ -9099,7 +9219,7 @@
 /obj/structure/bed/shit,
 /obj/item/bedsheet/cloth,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "iPK" = (
 /obj/structure/wild_plant/nospread/blackberry,
 /turf/open/floor/dirt,
@@ -9110,7 +9230,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "iQM" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog)
@@ -9140,6 +9260,9 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"iSo" = (
+/turf/closed/wall/mineral/wooddark,
+/area/outdoors/bog/e_highroad)
 "iSu" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -9253,7 +9376,7 @@
 	},
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "iWL" = (
 /turf/open/floor/ruinedwood,
 /area/outdoors/bog)
@@ -9521,7 +9644,7 @@
 	dir = 8
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "jnl" = (
 /obj/structure/fluff/nest,
 /obj/item/clothing/neck/bellcollar,
@@ -9619,7 +9742,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "jpM" = (
 /obj/machinery/light/fueled/oven/west,
 /obj/structure/table/wood/bar,
@@ -9642,7 +9765,7 @@
 "jrq" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "jss" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -9667,10 +9790,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog)
-"jtz" = (
-/obj/structure/chair/stool,
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
 "juc" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood/darker,
@@ -9690,7 +9809,7 @@
 	dir = 6
 	},
 /turf/closed/wall/mineral/decostone/moss/long,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "jvm" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -16;
@@ -9748,7 +9867,7 @@
 	dir = 6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "jyA" = (
 /obj/structure/bookcase{
 	color = "#7D9BAE"
@@ -9892,6 +10011,11 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog)
+"jGD" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/cooking/pan,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "jGR" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/abyss_tile{
@@ -10072,7 +10196,7 @@
 	dir = 1
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "jUO" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -10288,7 +10412,7 @@
 "kdH" = (
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kdO" = (
 /obj/structure/closet/dirthole/grave,
 /obj/structure/gravemarker,
@@ -10385,7 +10509,7 @@
 	pixel_x = -9
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "kjk" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/railing/border,
@@ -10514,7 +10638,7 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kpA" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -10623,7 +10747,7 @@
 "kts" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "ktz" = (
 /turf/open/openspace,
 /area/indoors/shelter/bog/witch)
@@ -10632,7 +10756,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kuH" = (
 /obj/structure/bars/pipe{
 	dir = 8
@@ -10727,7 +10851,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kzn" = (
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/ruinedwood/darker,
@@ -10845,7 +10969,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kEQ" = (
 /obj/effect/spawner/map_spawner/loot/potion_stats,
 /turf/open/floor/abyss_tile{
@@ -10864,6 +10988,22 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"kGN" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/fatty,
+/obj/item/reagent_containers/food/snacks/meat/sausage,
+/obj/item/reagent_containers/food/snacks/meat/sausage,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "kGO" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/food/snacks/rotten/chickenleg,
@@ -10920,7 +11060,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kIP" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/twig,
@@ -10931,6 +11071,10 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog)
+"kJh" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "kJA" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/scrying{
@@ -10981,7 +11125,7 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "kMe" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -11056,7 +11200,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "kRy" = (
 /mob/living/simple_animal/hostile/retaliate/snapper{
 	faction = list("Undead")
@@ -11144,7 +11288,7 @@
 /obj/item/chair/stool,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "kXh" = (
 /obj/effect/decal/cleanable/food/salt,
 /obj/item/reagent_containers/food/snacks/saltfish,
@@ -11221,7 +11365,7 @@
 /obj/effect/decal/remains/saiga,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "lbo" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/abyss_tile/three{
@@ -11260,7 +11404,7 @@
 /obj/structure/fermentation_keg/random/water,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "lfg" = (
 /obj/item/natural/stone,
 /turf/open/floor/cobblerock/alt,
@@ -11312,6 +11456,9 @@
 /obj/structure/kneestingers,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog)
+"liW" = (
+/turf/open/floor/cobble,
+/area/outdoors/bog/w_highroad)
 "ljF" = (
 /obj/structure/door/swing,
 /turf/open/floor/ruinedwood/alt,
@@ -11375,7 +11522,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "lmD" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/abyss_tile/two{
@@ -11480,7 +11627,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "lrm" = (
 /obj/item/reagent_containers/powder/salt{
 	pixel_x = 2;
@@ -11698,7 +11845,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "lDd" = (
 /obj/item/natural/rock,
 /turf/open/floor/abyss_tile,
@@ -11820,9 +11967,6 @@
 	color = "#29404E"
 	},
 /area/under/tomb/indoors/magic)
-"lMl" = (
-/turf/closed/wall/mineral/decowood,
-/area/indoors/shelter/bog)
 "lMw" = (
 /mob/living/simple_animal/hostile/deepone{
 	faction = list("Hostile");
@@ -11867,7 +12011,7 @@
 	pixel_y = 3
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "lRp" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
@@ -11966,6 +12110,12 @@
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
+"lWO" = (
+/obj/effect/decal/cobbleedge/alt{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/outdoors/bog/w_highroad)
 "lXW" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -12073,7 +12223,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "mcB" = (
 /obj/structure/flora/rock/water,
 /turf/open/water/ocean,
@@ -12178,7 +12328,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "mkF" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/metal/barograte,
@@ -12189,6 +12339,12 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"mlZ" = (
+/obj/structure/fluff/railing/stonehedge{
+	dir = 8
+	},
+/turf/open/floor/blocks/newstone,
+/area/outdoors/bog/w_highroad)
 "mmh" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile/two{
@@ -12476,7 +12632,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "mFP" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/flashlight/flare/torch/lantern/psycenser,
@@ -12520,7 +12676,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "mHW" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 8
@@ -12908,7 +13064,7 @@
 	},
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "nke" = (
 /obj/item/rope,
 /obj/effect/decal/cleanable/dirt,
@@ -13067,11 +13223,11 @@
 /area/indoors/shelter/bog)
 "nvH" = (
 /turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nvS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "nwe" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/turned,
@@ -13248,7 +13404,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "nFz" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -1
@@ -13296,12 +13452,16 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/bog)
+"nJE" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "nJQ" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nKt" = (
 /mob/living/simple_animal/hostile/retaliate/direbear{
 	dir = 8;
@@ -13338,7 +13498,7 @@
 /obj/structure/bed/wool,
 /obj/item/bedsheet/pelt,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nLJ" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -13356,7 +13516,7 @@
 /obj/item/bedsheet/cloth,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nNn" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /turf/open/floor/cobble,
@@ -13377,7 +13537,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nOP" = (
 /obj/structure/table/wood/large/corner{
 	dir = 9
@@ -13405,7 +13565,7 @@
 	pixel_x = 6
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nPg" = (
 /obj/structure/table/wood/crafted,
 /obj/structure/spider/stickyweb,
@@ -13551,7 +13711,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "nTD" = (
 /obj/item/candle/floorcandle0/lit{
 	pixel_y = -5
@@ -13660,7 +13820,7 @@
 "obe" = (
 /obj/effect/landmark/quest_spawner,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "obh" = (
 /obj/structure/table/wood/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -13805,7 +13965,7 @@
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "okx" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -14307,7 +14467,7 @@
 "oJN" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oKA" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/statue/gold/fish,
@@ -14325,10 +14485,10 @@
 "oLc" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oLu" = (
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oLH" = (
 /obj/structure/lever/hidden{
 	redstone_id = "bog5"
@@ -14386,6 +14546,9 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"oQJ" = (
+/turf/closed/wall/mineral/wooddark/window,
+/area/indoors/shelter/bog/e_highroad_camp)
 "oQT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -14413,17 +14576,17 @@
 	pixel_x = 7
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oRu" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oSz" = (
 /obj/effect/decal/cleanable/debris/stone{
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oSR" = (
 /obj/structure/fluff/walldeco/bath/wallpipes{
 	pixel_x = -8;
@@ -14447,6 +14610,10 @@
 /obj/item/weapon/shovel,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
+"oVr" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "oWF" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
@@ -14461,7 +14628,7 @@
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "oYA" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_x = -32;
@@ -14695,7 +14862,7 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "pmP" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/ruinedwood/turned,
@@ -14755,7 +14922,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/bogbug,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "prg" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -14932,7 +15099,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "pBd" = (
 /obj/structure/inert_bonepile,
 /turf/open/floor/dirt,
@@ -15052,6 +15219,9 @@
 	dir = 4
 	},
 /area/outdoors/bog)
+"pLN" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "pLO" = (
 /obj/structure/fluff/railing/stonehedge,
 /turf/open/openspace,
@@ -15069,7 +15239,7 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "pNh" = (
 /obj/structure/table/wood/bar,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -15205,7 +15375,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "pXy" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_tile/three{
@@ -15247,7 +15417,7 @@
 /obj/structure/bed/shit,
 /obj/item/bedsheet/cloth,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "qbx" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -15429,6 +15599,10 @@
 "qlS" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/bog)
+"qmh" = (
+/obj/item/natural/stoneblock,
+/turf/open/floor/concrete,
+/area/outdoors/bog/e_highroad)
 "qmF" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -15520,7 +15694,7 @@
 "qrv" = (
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "qrx" = (
 /turf/open/floor/tile/kitchen,
 /area/under/cavewet)
@@ -15668,7 +15842,7 @@
 "qyI" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "qyO" = (
 /obj/item/rope/chain,
 /turf/open/floor/abyss_tile/three{
@@ -15750,6 +15924,13 @@
 /obj/item/weapon/hoe/copper,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog)
+"qEC" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "qFL" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -15759,14 +15940,16 @@
 	},
 /area/under/tomb/indoors/magic)
 "qIw" = (
-/turf/closed/wall/mineral/wooddark/end,
-/area/outdoors/bog)
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "qIT" = (
 /obj/structure/bridge_stakes{
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "qJl" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
@@ -15784,7 +15967,7 @@
 /obj/structure/table/wood/folding,
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "qKT" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
@@ -15807,7 +15990,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "qNb" = (
 /obj/item/plate/silver,
 /turf/open/floor/abyss_tile{
@@ -15834,7 +16017,7 @@
 	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "qPV" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line,
@@ -15945,6 +16128,12 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"qTc" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/plain_alt,
+/obj/item/weapon/knife/cleaver,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "qTu" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -16081,7 +16270,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rbz" = (
 /obj/structure/carpet/blue,
 /obj/structure/closet/crate/chest/neu_fancy,
@@ -16191,7 +16380,7 @@
 	dir = 4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rhf" = (
 /obj/effect/decal/remains/human,
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -16279,7 +16468,7 @@
 	pixel_x = 15
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rks" = (
 /obj/structure/flora/shells,
 /turf/open/floor/dirt,
@@ -16315,7 +16504,7 @@
 	dir = 9
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rnj" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/abyss_tile{
@@ -16376,7 +16565,7 @@
 	pixel_x = -6
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rqY" = (
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
@@ -16398,7 +16587,7 @@
 /obj/structure/bed/shit,
 /obj/item/bedsheet/cloth,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "rrz" = (
 /obj/structure/fluff/statue/knightalt/gen,
 /turf/open/floor/herringbone,
@@ -16731,7 +16920,7 @@
 "rHI" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "rJt" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -16876,7 +17065,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/natural/stoneblock,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "rTp" = (
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog)
@@ -16915,7 +17104,7 @@
 "rWm" = (
 /obj/structure/closet/crate/chest/wicker/random_mushroom,
 /turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "rWr" = (
 /obj/item/natural/chaff,
 /turf/open/floor/dirt,
@@ -17078,7 +17267,7 @@
 	},
 /obj/item/weapon/knife/villager,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "sgC" = (
 /obj/item/natural/rock,
 /turf/open/floor/cobblerock/alt,
@@ -17161,7 +17350,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "smV" = (
 /obj/structure/stairs{
 	dir = 8
@@ -17226,6 +17415,11 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/twig,
 /area/indoors/shelter/bog)
+"soL" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/glass/bucket/pot,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "spj" = (
 /obj/item/clothing/gloves/plate/rust,
 /obj/item/clothing/gloves/plate/rust,
@@ -17246,6 +17440,15 @@
 	},
 /turf/open/water/swamp,
 /area/outdoors/bog)
+"spO" = (
+/obj/structure/fluff/railing/stonehedge{
+	dir = 8
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1
+	},
+/turf/open/floor/blocks/newstone,
+/area/outdoors/bog/e_highroad)
 "srA" = (
 /obj/structure/flora/grass/water,
 /mob/living/simple_animal/hostile/retaliate/minotaur/axe{
@@ -17307,7 +17510,7 @@
 "sva" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "svo" = (
 /obj/structure/fluff/psycross/psycrucifix/silver,
 /turf/open/floor/abyss_tile{
@@ -17514,7 +17717,7 @@
 "sHW" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone/alt,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "sJd" = (
 /obj/structure/stairs{
 	dir = 1
@@ -17546,7 +17749,7 @@
 	dir = 1
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "sKv" = (
 /obj/structure/stairs/stone/church{
 	dir = 1;
@@ -17879,7 +18082,7 @@
 	dir = 1
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "tep" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
@@ -17978,6 +18181,16 @@
 	},
 /turf/open/floor/cobble/mossy,
 /area/outdoors/bog)
+"trE" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/clothing/head/strawhat{
+	pixel_y = -9
+	},
+/obj/item/clothing/head/fisherhat{
+	pixel_y = 5
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "tsd" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -18155,7 +18368,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "tBa" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/metal/alt,
@@ -18180,7 +18393,7 @@
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "tDk" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -18210,6 +18423,10 @@
 	},
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
+"tFn" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "tGE" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/ruinedwood/alt,
@@ -18241,7 +18458,7 @@
 /obj/effect/decal/cleanable/debris/wood,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "tIy" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -18684,6 +18901,12 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"ujB" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog)
 "ujN" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/effect/decal/cleanable/dirt,
@@ -18691,7 +18914,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "ukr" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 10
@@ -18883,7 +19106,7 @@
 	pixel_x = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "utq" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/polearm/spear/assegai/steel,
@@ -18970,7 +19193,7 @@
 	dir = 4
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "uAz" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -19052,7 +19275,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "uFg" = (
 /obj/structure/fluff/walldeco/vinez/red{
 	icon = 'icons/turf/flesh_tile.dmi';
@@ -19192,7 +19415,7 @@
 /obj/effect/decal/remains/human,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "uNb" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
@@ -19336,7 +19559,13 @@
 	},
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
+"uUA" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog/e_highroad_camp)
 "uWM" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -19623,6 +19852,12 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog)
+"vns" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1
+	},
+/turf/open/floor/blocks/newstone,
+/area/outdoors/bog/w_highroad)
 "vnT" = (
 /obj/item/natural/stone,
 /obj/structure/fluff/walldeco/vinez/red{
@@ -19680,7 +19915,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "vqW" = (
 /obj/structure/flora/shells,
 /turf/open/floor/sand,
@@ -19727,17 +19962,6 @@
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
-"vtp" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
 "vtP" = (
 /obj/structure/table/wood/fancy/royalblue,
 /obj/item/riddleofsteel,
@@ -19794,7 +20018,7 @@
 	dir = 4
 	},
 /turf/open/floor/blocks/newstone,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "vwT" = (
 /obj/item/reagent_containers/food/snacks/fish/carp,
 /turf/open/floor/abyss_tile{
@@ -20258,6 +20482,10 @@
 	color = "#7D9BAE"
 	},
 /area/under/tomb/indoors/magic)
+"wbw" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt/road,
+/area/outdoors/bog)
 "wbx" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -20348,7 +20576,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wfl" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
@@ -20376,7 +20604,7 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "whS" = (
 /obj/structure/table/stone_small{
 	color = "#7D9BAE"
@@ -20470,6 +20698,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
+"wlJ" = (
+/obj/structure/door/weak,
+/turf/open/floor/ruinedwood/alt,
+/area/indoors/shelter/bog/e_highroad_camp)
 "wmF" = (
 /obj/item/weapon/knife/cleaver,
 /turf/closed/wall/mineral/wooddark/horizontal,
@@ -20478,6 +20710,14 @@
 /obj/effect/waterfall,
 /turf/open/floor/metal,
 /area/indoors/town/clocktower)
+"wmX" = (
+/obj/structure/door/weak,
+/turf/open/floor/dirt,
+/area/indoors/shelter/bog/e_highroad_camp)
+"wne" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "wnm" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/abyss_sand,
@@ -20517,7 +20757,7 @@
 	dir = 8
 	},
 /turf/open/floor/blocks/paving,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wpo" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -20584,7 +20824,7 @@
 "wuY" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wvo" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/dirt,
@@ -20623,7 +20863,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wBs" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -20664,7 +20904,7 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "wDT" = (
 /obj/structure/door/abyss{
 	color = "#406379"
@@ -20813,7 +21053,7 @@
 	pixel_x = -4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wMv" = (
 /obj/structure/flora/driftwood,
 /turf/open/floor/sand,
@@ -21058,7 +21298,7 @@
 "wXF" = (
 /obj/structure/bridge,
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "wYs" = (
 /obj/structure/bars,
 /turf/open/water/river{
@@ -21144,7 +21384,7 @@
 "xbs" = (
 /obj/structure/table/wood/reinforced,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "xby" = (
 /obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
 /turf/open/water/swamp/deep,
@@ -21315,6 +21555,10 @@
 /obj/item/reagent_containers/glass/bowl/clay,
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
+"xnz" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/blocks/newstone,
+/area/outdoors/bog/w_highroad)
 "xoc" = (
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/ruinedwood,
@@ -21355,7 +21599,7 @@
 	pixel_x = -4
 	},
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/w_highroad)
 "xse" = (
 /obj/structure/trap/shock{
 	invisibility = 1
@@ -21582,7 +21826,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/concrete,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "xDe" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -21690,6 +21934,11 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"xGU" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/concrete,
+/area/outdoors/bog/w_highroad)
 "xId" = (
 /obj/structure/stairs/stone/church{
 	dir = 8;
@@ -21986,7 +22235,7 @@
 	dir = 1
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "xVT" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/diamond/purple,
@@ -22032,7 +22281,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/remains/human,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "xZy" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 9
@@ -22089,7 +22338,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/outdoors/bog)
+/area/outdoors/bog/e_highroad)
 "yen" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_tile/two{
@@ -22205,7 +22454,7 @@
 "ykQ" = (
 /obj/structure/door/weak/bolt,
 /turf/open/floor/twig,
-/area/indoors/shelter/bog)
+/area/indoors/shelter/bog/e_highroad_camp)
 "yly" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -35813,7 +36062,7 @@ vhU
 mqv
 mqv
 mqv
-vhU
+tcv
 mRx
 xjU
 vhU
@@ -39045,7 +39294,7 @@ mqv
 mqv
 vhU
 vhU
-xjU
+wbw
 mqv
 vhU
 vhU
@@ -42267,7 +42516,7 @@ mqv
 mqv
 vhU
 vhU
-xjU
+wbw
 dyu
 iRl
 xjU
@@ -44478,7 +44727,7 @@ anT
 fWR
 dPp
 vhU
-mqv
+vYn
 vhU
 vhU
 vhU
@@ -44487,9 +44736,9 @@ mqv
 mqv
 xjU
 xjU
-mqv
-mqv
-mqv
+xjU
+xjU
+xjU
 xjU
 xjU
 xjU
@@ -44689,12 +44938,12 @@ xjU
 vhU
 xjU
 xjU
-vhU
 xjU
 xjU
 xjU
-vhU
-vhU
+mqv
+mqv
+mqv
 jux
 vhU
 vhU
@@ -44714,13 +44963,13 @@ gPS
 gPS
 gPS
 jux
-jux
+bbX
+bbX
+bbX
+bbX
 vhU
 vhU
 vhU
-vhU
-jux
-jux
 gPS
 nCb
 gPS
@@ -44891,13 +45140,13 @@ vhU
 vhU
 mqv
 vhU
-xjU
+mqv
 vhU
 xjU
 xjU
-vhU
-vhU
-vhU
+xjU
+mqv
+mqv
 vhU
 vhU
 mqv
@@ -44915,14 +45164,14 @@ cyZ
 qdA
 gPS
 jux
-jux
+xjU
+oQJ
+cHq
+trE
+bbX
+xjU
 vhU
 vhU
-vhU
-vhU
-vhU
-vhU
-jux
 jux
 jux
 gPS
@@ -45096,10 +45345,10 @@ vhU
 mqv
 mqv
 xjU
-vhU
-mqv
-vhU
-mqv
+xjU
+xjU
+xjU
+xjU
 vhU
 jux
 mqv
@@ -45116,13 +45365,13 @@ skj
 skj
 jux
 jux
-jux
-vhU
-vhU
-vhU
-vhU
-bci
-bci
+xjU
+xjU
+wmX
+bip
+bip
+bbX
+hug
 vhU
 vhU
 vhU
@@ -45301,7 +45550,7 @@ vhU
 vhU
 xjU
 xjU
-vhU
+xjU
 vhU
 vhU
 vhU
@@ -45317,14 +45566,14 @@ jux
 jux
 jux
 jux
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
+xjU
+xjU
+xjU
+oQJ
+iwc
+uUA
+bbX
+xjU
 vhU
 vhU
 vhU
@@ -45502,8 +45751,8 @@ mqv
 vhU
 xjU
 vhU
-xjU
-mqv
+wbw
+ujB
 jux
 jux
 jux
@@ -45516,19 +45765,19 @@ bNm
 gPS
 mvi
 jux
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
-vhU
+mqv
+mqv
+mqv
 xjU
-vhU
 xjU
+xjU
+bbX
+bbX
+bbX
+bbX
+xjU
+xjU
+czi
 xjU
 vko
 mqv
@@ -45705,7 +45954,7 @@ vhU
 vhU
 jux
 jux
-jux
+qUw
 jux
 gPS
 bMG
@@ -45717,13 +45966,13 @@ gPS
 gPS
 mvi
 jux
-vhU
 mqv
 mqv
 mqv
-vhU
-vhU
-mqv
+xjU
+xjU
+xjU
+iRt
 bci
 vhU
 vhU
@@ -45906,8 +46155,8 @@ mqv
 vhU
 jux
 jux
-gPS
 lGN
+qUw
 gPS
 bMG
 bMG
@@ -45919,15 +46168,15 @@ gPS
 bMG
 jux
 jux
-vhU
 mqv
 mqv
-mqv
-vhU
-vhU
-vhU
 xjU
 xjU
+xjU
+mqv
+mqv
+mqv
+mqv
 xjU
 xjU
 xjU
@@ -46109,7 +46358,7 @@ jux
 dGj
 gPS
 gPS
-bNm
+qUw
 gsN
 jux
 gPS
@@ -46122,9 +46371,9 @@ bci
 bci
 jux
 mqv
-mqv
-vhU
-vhU
+xjU
+xjU
+xjU
 xjU
 xjU
 dkk
@@ -46311,7 +46560,7 @@ jux
 gPS
 gPS
 gsN
-gsN
+qUw
 jux
 jux
 jux
@@ -46513,9 +46762,9 @@ jux
 gPS
 gsN
 gsN
-xjU
+huA
 vhU
-xjU
+wbw
 jux
 gPS
 bMG
@@ -46524,9 +46773,9 @@ gPS
 mYv
 jux
 jux
-mqv
-vhU
-mqv
+xjU
+xjU
+xjU
 vhU
 mqv
 otM
@@ -46717,17 +46966,17 @@ jux
 mqv
 mqv
 mqv
-vhU
-jux
-gPS
-bMG
-gPS
-gPS
-gPS
-jux
+cXm
+uSu
+uSu
+bho
+uSu
+uSu
+uSu
+uSu
+rgs
 xjU
 xjU
-mqv
 xjU
 xjU
 kru
@@ -46926,7 +47175,7 @@ bMG
 nCb
 gPS
 jux
-xjU
+wbw
 mqv
 vhU
 mqv
@@ -67740,11 +67989,11 @@ cPR
 uJU
 uJU
 cKS
-hBX
+fMP
 oyx
 oyx
 oyx
-hBX
+fMP
 oYJ
 oyx
 oyx
@@ -67942,11 +68191,11 @@ oyx
 oyx
 oyx
 pLO
-gBJ
-hBX
-hBX
-hBX
-gBJ
+vns
+fMP
+fMP
+fMP
+vns
 oYJ
 oyx
 oyx
@@ -68144,11 +68393,11 @@ oyx
 oyx
 oyx
 oyx
-qKT
+xnz
 xqP
-bJM
-kRL
-oLu
+gGN
+doV
+bhe
 oYJ
 oyx
 oyx
@@ -68347,9 +68596,9 @@ oyx
 oyx
 pLO
 lbi
-kRL
+doV
 xqP
-kRL
+doV
 fFz
 oyx
 oyx
@@ -68548,11 +68797,11 @@ oyx
 oyx
 oyx
 pLO
-qKT
-bJM
-bJM
-bJM
-qKT
+xnz
+gGN
+gGN
+gGN
+xnz
 oYJ
 oyx
 oyx
@@ -68749,12 +68998,12 @@ oyx
 oyx
 oyx
 oyx
-oLu
-qKT
-fQX
-kRL
-bJM
-qKT
+bhe
+xnz
+xGU
+doV
+gGN
+xnz
 oYJ
 oyx
 oyx
@@ -68951,12 +69200,12 @@ oyx
 oyx
 pLO
 kRd
-qKT
-bJM
-fQX
-kRL
-bJM
-qKT
+xnz
+gGN
+xGU
+doV
+gGN
+xnz
 oyx
 oyx
 oyx
@@ -69153,11 +69402,11 @@ oyx
 pLO
 tel
 tCX
-bJM
-bJM
-fQX
-kRL
-qKT
+gGN
+gGN
+xGU
+doV
+xnz
 pmo
 oYJ
 oyx
@@ -69353,13 +69602,13 @@ oyx
 oyx
 oyx
 pLO
-oLu
-kRL
+bhe
+doV
 xqP
-kRL
-kRL
-qKT
-qKT
+doV
+doV
+xnz
+xnz
 jYp
 oyx
 oyx
@@ -69556,10 +69805,10 @@ oyx
 oyx
 pLO
 vwG
-bVf
-bVf
-bVf
-bVf
+bYJ
+bYJ
+bYJ
+bYJ
 vwG
 jYp
 oyx
@@ -84913,15 +85162,15 @@ oyx
 oyx
 oyx
 oyx
-bci
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-bci
+glA
+bbX
+bbX
+bbX
+oQJ
+bbX
+bbX
+bbX
+glA
 oyx
 oyx
 oyx
@@ -85115,15 +85364,15 @@ oyx
 oyx
 oyx
 oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
+bbX
+flw
+oVr
+qEC
+jGD
+kGN
+eYr
+soL
+bbX
 oyx
 oyx
 oyx
@@ -85317,15 +85566,15 @@ cyZ
 oyx
 oyx
 oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
+bbX
+ira
+flw
+oVr
+bip
+bip
+oVr
+flw
+oQJ
 oyx
 oyx
 oyx
@@ -85519,15 +85768,15 @@ oyx
 oyx
 oyx
 oyx
-oyx
-oyx
-axX
-bci
-bci
+bbX
+bbX
+bbX
+eXM
+flw
 qIw
-oyx
-oyx
-oyx
+qTc
+cyN
+bbX
 oyx
 oyx
 oyx
@@ -85721,15 +85970,15 @@ oyx
 oyx
 oyx
 oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
+bbX
+ira
+cHq
+cHq
+flw
+oVr
+oVr
+bip
+oQJ
 oyx
 oyx
 oyx
@@ -85923,15 +86172,15 @@ oyx
 oyx
 oyx
 oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
+bbX
+flw
+flw
+cGM
+oVr
+cHq
+flw
+flw
+bbX
 oyx
 oyx
 oyx
@@ -86125,15 +86374,15 @@ oyx
 oyx
 oyx
 oyx
-bci
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-oyx
-bci
+glA
+bbX
+bbX
+bbX
+oQJ
+bbX
+bbX
+bbX
+glA
 oyx
 oyx
 oyx
@@ -92205,7 +92454,7 @@ oyx
 oyx
 oyx
 oyx
-bci
+iSo
 oyx
 oyx
 oyx
@@ -92610,16 +92859,16 @@ oyx
 oyx
 rmr
 cFU
-dyu
-dyu
-dyu
-dyu
-dyu
-fDJ
+htu
+htu
+htu
+htu
+htu
+gdS
 nFu
-fDJ
-fDJ
-fDJ
+gdS
+gdS
+gdS
 aNf
 oyx
 oyx
@@ -92811,14 +93060,14 @@ oyx
 oyx
 oyx
 oyx
-fzL
-lMl
-lMl
-lMl
-lMl
-fzL
+glA
+bbX
+bbX
+bbX
+bbX
+glA
 eFp
-fDJ
+gdS
 eOJ
 eOJ
 rhd
@@ -93013,19 +93262,19 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 rWm
 dgi
 aol
 dFK
-lMl
+bbX
 oLu
 qMY
 sva
 sva
-bJM
+ibY
 sHW
-fDJ
+gdS
 oyx
 oyx
 oyx
@@ -93215,17 +93464,17 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 dFK
 nvH
-lbQ
+nJE
 jrq
-lMl
-dyu
-bJM
+bbX
+htu
+ibY
 sKh
 eke
-bJM
+ibY
 sKh
 rqT
 oYJ
@@ -93417,18 +93666,18 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 iPA
-lbQ
-jlE
-dFd
+nJE
+pLN
+ieZ
 ykQ
-fyq
+wne
 oLu
-bJM
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
+ibY
 iWC
 oYJ
 oyx
@@ -93619,18 +93868,18 @@ oyx
 oyx
 oyx
 oyx
-fzL
-lMl
-guq
-guq
-lMl
-fzL
-fyq
+glA
+bbX
+oQJ
+oQJ
+bbX
+glA
+wne
 oLu
 ktH
 sva
 obe
-bJM
+ibY
 oLu
 oYJ
 oyx
@@ -93829,10 +94078,10 @@ oyx
 oyx
 pLO
 gBJ
-bJM
-bJM
+ibY
+ibY
 sva
-bJM
+ibY
 gBJ
 oYJ
 oyx
@@ -94033,8 +94282,8 @@ pLO
 oSz
 sva
 sva
-bJM
-bJM
+ibY
+ibY
 oLu
 oYJ
 oyx
@@ -94233,7 +94482,7 @@ oyx
 oyx
 pLO
 iWC
-bJM
+ibY
 sva
 sva
 eke
@@ -94436,7 +94685,7 @@ oyx
 pLO
 lmt
 sKh
-bJM
+ibY
 sva
 sva
 nvS
@@ -94638,9 +94887,9 @@ oyx
 pLO
 uNa
 sKh
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
 nvS
 oYJ
 oyx
@@ -94842,7 +95091,7 @@ nvS
 kIp
 sva
 sva
-bJM
+ibY
 nvS
 oYJ
 oyx
@@ -95042,8 +95291,8 @@ oyx
 oyx
 nvS
 oLu
-bJM
-bJM
+ibY
+ibY
 sva
 oLu
 rbv
@@ -95244,10 +95493,10 @@ oyx
 oyx
 wpo
 nvS
-bJM
+ibY
 sva
 sva
-bJM
+ibY
 oLu
 oyx
 oyx
@@ -95449,8 +95698,8 @@ nvS
 oLu
 sva
 rjS
-cGJ
-bJM
+qmh
+ibY
 kdH
 oyx
 oyx
@@ -95851,9 +96100,9 @@ oyx
 oyx
 pLO
 iQI
-bJM
+ibY
 bBH
-bJM
+ibY
 sva
 oLu
 eYj
@@ -96053,10 +96302,10 @@ oyx
 oyx
 pLO
 nvS
-bJM
+ibY
 xCC
 tIt
-bJM
+ibY
 bBH
 nvS
 oYJ
@@ -96256,10 +96505,10 @@ oyx
 oyx
 nvS
 kdH
-bJM
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
+ibY
 nvS
 oYJ
 oyx
@@ -96459,8 +96708,8 @@ oyx
 pLO
 oLu
 oLu
-bJM
-bJM
+ibY
+ibY
 mcy
 nvS
 oyx
@@ -96661,7 +96910,7 @@ oyx
 oyx
 rzV
 oLu
-bJM
+ibY
 sva
 sva
 oLu
@@ -96863,9 +97112,9 @@ oyx
 oyx
 pLO
 oLu
-qSI
-qSI
-qSI
+icE
+icE
+icE
 oLu
 oYJ
 oyx
@@ -97064,11 +97313,11 @@ cPR
 ucQ
 ucQ
 cKS
-qSI
+icE
 oyx
 oyx
 oyx
-qSI
+icE
 oyx
 oyx
 oyx
@@ -110159,10 +110408,10 @@ oyx
 oyx
 pLO
 vwG
-bVf
-bVf
-bVf
-bVf
+bYJ
+bYJ
+bYJ
+bYJ
 vwG
 oYJ
 oyx
@@ -110359,13 +110608,13 @@ oyx
 oyx
 oyx
 pLO
-qKT
-qKT
-bJM
-bJM
-kRL
-bJM
-qKT
+xnz
+xnz
+gGN
+gGN
+doV
+gGN
+xnz
 oYJ
 oyx
 oyx
@@ -110560,13 +110809,13 @@ oyx
 oyx
 oyx
 oyx
-rbv
+mlZ
 lbi
-bJM
-kRL
+gGN
+doV
 xqP
-kRL
-oLu
+doV
+bhe
 pmo
 oYJ
 oyx
@@ -110756,19 +111005,19 @@ oyx
 oyx
 oyx
 oyx
-rmU
-fDJ
+gSY
+liW
 tel
-rbv
-qKT
+mlZ
+xnz
 kRd
-qKT
-bJM
-kRL
-kRL
-kRL
-bJM
-oLu
+xnz
+gGN
+doV
+doV
+doV
+gGN
+bhe
 oyx
 oyx
 oyx
@@ -110957,20 +111206,20 @@ oyx
 oyx
 oyx
 oyx
-rmU
-fDJ
+gSY
+liW
 psG
 ksV
 ksV
 ksV
-kRL
-bJM
-bJM
-kRL
-kRL
-bJM
-qKT
-qKT
+doV
+gGN
+gGN
+doV
+doV
+gGN
+xnz
+xnz
 oYJ
 oyx
 oyx
@@ -111159,19 +111408,19 @@ oyx
 oyx
 oyx
 oyx
-xVO
+lWO
 uUh
 iMK
 skw
 auq
 ksV
-bJM
+gGN
 xqP
 xqP
-obe
-bJM
-qKT
-qKT
+gaB
+gGN
+xnz
+xnz
 jYp
 oyx
 oyx
@@ -111361,17 +111610,17 @@ oyx
 oyx
 oyx
 oyx
-xVO
-gLO
+lWO
+hJc
 ksV
 auq
 auq
 huH
-kRL
-kRL
-bJM
-bJM
-qKT
+doV
+doV
+gGN
+gGN
+xnz
 pmo
 jYp
 oyx
@@ -111563,17 +111812,17 @@ oyx
 oyx
 oyx
 oyx
-aNx
+dwB
 jmi
 ufD
 cBM
 cBM
 ksV
-kRL
-kRL
-qKT
-qKT
-qKT
+doV
+doV
+xnz
+xnz
+xnz
 jYp
 oyx
 oyx
@@ -111766,13 +112015,13 @@ oyx
 oyx
 oyx
 oyx
-aNx
-fDJ
-gBJ
+dwB
+liW
+vns
 lbi
-qKT
-qKT
-qKT
+xnz
+xnz
+xnz
 bbi
 oYJ
 oyx
@@ -123689,10 +123938,10 @@ oyx
 oyx
 rmU
 nFu
-fDJ
+gdS
 rbv
 rbv
-tel
+spO
 oYJ
 oyx
 oyx
@@ -123889,7 +124138,7 @@ oyx
 oyx
 oyx
 rmU
-fDJ
+gdS
 gLO
 ffH
 ffH
@@ -124091,7 +124340,7 @@ oyx
 oyx
 oyx
 aNx
-fDJ
+gdS
 jxM
 ffH
 dCA
@@ -124293,8 +124542,8 @@ oyx
 oyx
 oyx
 rmU
-fDJ
-bJM
+gdS
+ibY
 ffH
 pgm
 kbi
@@ -124495,14 +124744,14 @@ oyx
 oyx
 oyx
 xVO
-fDJ
+gdS
 ePW
 ffH
 iOF
 vPO
 oHq
 uFi
-bJM
+ibY
 oLu
 oYJ
 oyx
@@ -124697,14 +124946,14 @@ oyx
 oyx
 oyx
 aNx
-fDJ
-fDJ
+gdS
+gdS
 ffH
 uAU
 auq
 vPO
 uFi
-bJM
+ibY
 gBJ
 oYJ
 oyx
@@ -124906,7 +125155,7 @@ ffH
 uFi
 fwR
 ffH
-bJM
+ibY
 oLu
 oYJ
 oyx
@@ -125105,9 +125354,9 @@ oyx
 pLO
 gBJ
 oLu
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
 sva
 oLu
 oYJ
@@ -125307,22 +125556,22 @@ oyx
 oyx
 wpo
 oLu
-bJM
-bJM
+ibY
+ibY
 pqx
 sva
 oLu
 oYJ
 oyx
-fzL
-lMl
-lMl
-lMl
-guq
-lMl
-lMl
-lMl
-fzL
+glA
+bbX
+bbX
+bbX
+oQJ
+bbX
+bbX
+bbX
+glA
 oyx
 oyx
 oyx
@@ -125511,20 +125760,20 @@ pLO
 oLu
 lrk
 sva
-bJM
+ibY
 rSe
 oLu
 oYJ
 oyx
-lMl
+bbX
 hFF
 xZg
-lMl
-efC
-cTI
+bbX
+cHq
+ead
 nOP
 lRm
-lMl
+bbX
 oyx
 oyx
 oyx
@@ -125705,28 +125954,28 @@ oyx
 oyx
 oyx
 oyx
-lMl
-fzL
-lMl
-fzL
-lMl
+bbX
+glA
+bbX
+glA
+bbX
 kdH
-bJM
+ibY
 sva
-bJM
+ibY
 sva
 oLu
-tel
+spO
 oYJ
-lMl
-khH
-rFh
+bbX
+iwc
+oVr
 rHI
-eon
+flw
 hZH
 jpD
 qPR
-lMl
+bbX
 oyx
 oyx
 oyx
@@ -125907,28 +126156,28 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 whM
-khH
-qlS
-pTV
-dyu
-bJM
+cHq
+bip
+wlJ
+htu
+ibY
 wLE
 sva
-bJM
+ibY
 fmV
 oLu
 oYJ
-lMl
+bbX
 nSL
-qlS
-lMl
+bip
+bbX
 gwN
-jtz
+ead
 wDS
 kjj
-lMl
+bbX
 oyx
 oyx
 oyx
@@ -126109,28 +126358,28 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 nME
 xZg
-eon
-lMl
+flw
+bbX
 gBJ
 oLu
-bJM
-bJM
+ibY
+ibY
 sva
-bJM
+ibY
 oLu
 oYJ
-lMl
-rFh
-eon
-lMl
-khH
-khH
+bbX
+oVr
+flw
+bbX
+cHq
+cHq
 kWY
 lef
-lMl
+bbX
 oyx
 oyx
 oyx
@@ -126311,28 +126560,28 @@ oyx
 oyx
 oyx
 oyx
-lMl
-lMl
-lMl
-lMl
-lMl
-lMl
+bbX
+bbX
+bbX
+bbX
+bbX
+bbX
 oLu
-cGJ
-bJM
+qmh
+ibY
 bUH
 sva
 oLu
 rbv
-lMl
+bbX
 nLo
 qKl
-lMl
-rFh
-khH
-eon
-vtp
-lMl
+bbX
+oVr
+cHq
+flw
+oVr
+bbX
 oyx
 oyx
 oyx
@@ -126514,27 +126763,27 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 nSL
-rFh
-eon
-pTV
-dyu
-bJM
-bJM
+oVr
+flw
+wlJ
+htu
+ibY
+ibY
 sva
 hYa
-bJM
+ibY
 oLu
-fzL
-lMl
-guq
-fzL
+glA
+bbX
+oQJ
+glA
 nJQ
-fzL
-guq
-lMl
-fzL
+glA
+oQJ
+bbX
+glA
 oyx
 oyx
 oyx
@@ -126716,25 +126965,25 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 rrb
-khH
-qlS
-lMl
+cHq
+bip
+bbX
 oLu
 oLu
-bJM
+ibY
 sva
 sva
-bJM
+ibY
 oLu
-tel
+spO
 wBi
-dyu
-dyu
-dyu
-dyu
-wfl
+htu
+htu
+htu
+htu
+kJh
 oyx
 oyx
 oyx
@@ -126918,27 +127167,27 @@ oyx
 oyx
 oyx
 oyx
-lMl
-lMl
-fzL
-fzL
-lMl
-lMl
+bbX
+bbX
+glA
+glA
+bbX
+bbX
 oLu
-bJM
+ibY
 wLE
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
 oLu
 rbv
 oLu
-dyu
-dyu
-dyu
+htu
+htu
+htu
 oLu
 rbv
-tel
+spO
 oYJ
 oyx
 oyx
@@ -127121,21 +127370,21 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 fgf
-khH
-rFh
+cHq
+oVr
 rHI
-dyu
-bJM
-bJM
-bJM
+htu
+ibY
+ibY
+ibY
 sva
 sva
 sva
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
 sva
 sva
 pqx
@@ -127323,14 +127572,14 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 nME
-eon
-qlS
-lMl
+flw
+bip
+bbX
 gBJ
 oLu
-bJM
+ibY
 sva
 sva
 sva
@@ -127338,11 +127587,11 @@ sva
 pqx
 sva
 sva
-cGJ
-bJM
+qmh
+ibY
 mkz
-bJM
-bJM
+ibY
+ibY
 kts
 wpg
 aNf
@@ -127525,29 +127774,29 @@ oyx
 oyx
 oyx
 oyx
-lMl
-lMl
-lMl
-lMl
-lMl
-lMl
+bbX
+bbX
+bbX
+bbX
+bbX
+bbX
 oLu
 oLu
 wLE
-bJM
-cGJ
-bJM
-bJM
-bJM
-bJM
-bJM
+ibY
+qmh
+ibY
+ibY
+ibY
+ibY
+ibY
 sva
 sva
-bJM
+ibY
 sva
-bJM
+ibY
 mHK
-fDJ
+gdS
 aNf
 oyx
 oyx
@@ -127728,28 +127977,28 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 mCO
-khH
-eon
+cHq
+flw
 rHI
-dyu
+htu
 oLu
 oLu
 kdH
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
 lrk
 sva
 sva
-bJM
-bJM
-bJM
-bJM
-bJM
+ibY
+ibY
+ibY
+ibY
+ibY
 hvz
-fDJ
+gdS
 oLc
 oyx
 oyx
@@ -127930,11 +128179,11 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 qbo
-khH
-rFh
-lMl
+cHq
+oVr
+bbX
 jOz
 jOz
 wpo
@@ -127942,16 +128191,16 @@ oLu
 oLu
 gBJ
 nvS
-mRx
-dyu
-dyu
-dyu
+tFn
+htu
+htu
+htu
 oLu
 kIp
 nvS
-bJM
+ibY
 bcv
-fDJ
+gdS
 oLc
 oyx
 oyx
@@ -128132,11 +128381,11 @@ oyx
 oyx
 oyx
 oyx
-lMl
-fzL
-lMl
-fzL
-lMl
+bbX
+glA
+bbX
+glA
+bbX
 oyx
 oyx
 oyx
@@ -128144,16 +128393,16 @@ jOz
 jOz
 jOz
 jOz
-fzL
-lMl
+glA
+bbX
 lBZ
-guq
-lMl
-fzL
+oQJ
+bbX
+glA
 gBJ
 oLu
 sva
-fDJ
+gdS
 oLc
 oyx
 oyx
@@ -128346,12 +128595,12 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 gwN
-eon
-jtz
+flw
+ead
 cvd
-lMl
+bbX
 wpo
 gly
 uEH
@@ -128548,12 +128797,12 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 nOl
-lMl
+bbX
 xbs
-lMl
-lMl
+bbX
+bbX
 oyx
 jOz
 jOz
@@ -128750,12 +128999,12 @@ oyx
 oyx
 oyx
 oyx
-lMl
+bbX
 gwN
-qlS
-eon
-khH
-lMl
+bip
+flw
+cHq
+bbX
 oyx
 oyx
 oyx
@@ -128952,12 +129201,12 @@ oyx
 oyx
 oyx
 oyx
-fzL
-lMl
-guq
+glA
+bbX
+oQJ
 nJQ
-guq
-fzL
+oQJ
+glA
 oyx
 oyx
 oyx
@@ -129156,9 +129405,9 @@ oyx
 oyx
 oyx
 lxv
-dyu
+htu
 tAX
-wfl
+kJh
 wIS
 oyx
 oyx
@@ -131984,9 +132233,9 @@ oyx
 oyx
 wkA
 kEN
-fyq
-dyu
-fyq
+wne
+htu
+wne
 vqV
 oyx
 oyx
@@ -132002,7 +132251,7 @@ oyx
 wkA
 sgx
 qrv
-dyu
+htu
 kLS
 oYr
 oyx
@@ -132186,9 +132435,9 @@ oyx
 oyx
 wkA
 oRu
-fyq
-bci
-dyu
+wne
+iSo
+htu
 oJN
 wXF
 wXF
@@ -132204,7 +132453,7 @@ wXF
 wXF
 jUu
 iew
-dyu
+htu
 iew
 qyI
 oyx
@@ -132389,8 +132638,8 @@ oyx
 wkA
 pMC
 weR
-fyq
-dyu
+wne
+htu
 ujN
 oyx
 oyx
@@ -132404,10 +132653,10 @@ oyx
 oyx
 oyx
 wkA
-fyq
-dyu
-dyu
-fyq
+wne
+htu
+htu
+wne
 ojY
 oyx
 oyx
