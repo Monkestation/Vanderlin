@@ -189,7 +189,7 @@
 		/datum/migrant_role/prisoner_guard = 2,
 		/datum/migrant_role/mig_prisoner = 4,
 	)
-	greet_text = "Nobody escape the rule of Vanderlin's monarchs. Some have fled to another kingdom and got caught, they are now on their way back."
+	greet_text = "Nobody escapes the rule of Vanderlin's monarchs. Some fled to another kingdom and got caught, they are now on their way back."
 
 /datum/migrant_wave/prisoner_convoy_down
 	name = "The Prisoners' Convoy"
