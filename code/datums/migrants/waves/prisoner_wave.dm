@@ -211,4 +211,4 @@
 		/datum/migrant_role/gaoler = 1,
 		/datum/migrant_role/mig_prisoner = 1,
 	)
-	greet_text = "Nobody escape the rule of Vanderlin's monarchs. Some have fled to another kingdom and got caught, they are now on their way back."
+	greet_text = "Nobody escapes the rule of Vanderlin's monarchs. Some fled to another kingdom and got caught, they are now on their way back."
