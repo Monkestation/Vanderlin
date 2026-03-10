@@ -224,7 +224,7 @@
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/weapon/scabbard/kazengun/gold
-	name = "gold-stained Xinyi scabbard"
+	name = "gold-stained scabbard"
 	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"
