@@ -1,6 +1,6 @@
 /datum/job/advclass/combat/amazon
 	title = "Amazon"
-	tutorial = "A savage and deft warrior-women, you hail from the mysterious isle of Issa. In your youth you learned to partake in the hunts amid the treetops and proved your worth through countless bouts."
+	tutorial = "A savage and deft warrior-women. In your youth you learned to partake in hunts amid the treetops and proved your worth through countless bouts."
 	allowed_sexes = list(FEMALE)
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DROW, SPEC_ID_HALF_DROW, SPEC_ID_TRITON)
 	outfit = /datum/outfit/adventurer/amazon
