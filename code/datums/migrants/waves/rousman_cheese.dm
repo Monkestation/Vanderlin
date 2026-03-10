@@ -34,7 +34,7 @@
 
 /datum/job/migrant/rousman_cheese/overseer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/turf/target_turf = get_turf(H)
+	var/turf/target_turf = get_turf(spawned)
 	var/obj/structure/handcart/cart = new(target_turf)
 	var/obj/item/reagent_containers/glass/bucket/pot/copper/pot = new(target_turf)
 	var/obj/item/tent_kit/tent = new(target_turf)
