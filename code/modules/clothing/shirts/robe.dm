@@ -378,7 +378,7 @@
 
 /obj/item/clothing/shirt/robe/kimono
 	name = "kimono"
-	desc = "Worn by merchants of Zhongese."
+	desc = "A flowing garment worn by faraway merchants."
 	color = null
 	icon_state = "kimono"
 	item_state = "kimono"

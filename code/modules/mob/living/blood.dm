@@ -331,7 +331,7 @@
 			W.water_volume = 10
 
 		return
-	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T)
+	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T, blood.color)
 
 	splatter.transfer_mob_blood_dna(src)
 	splatter.update_appearance(UPDATE_ICON_STATE)
@@ -376,7 +376,7 @@
 				D.transfer_mob_blood_dna(src)
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T)
+				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T, blood.color)
 				splatter.transfer_mob_blood_dna(src)
 				splatter.update_appearance(UPDATE_ICON_STATE)
 

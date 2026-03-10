@@ -184,13 +184,18 @@
 	if(skeletonized || !length(food_type))
 		to_chat(user, span_warning("[src] has no meat to eat."))
 		return
+	var/bloodcolor = COLOR_BLOOD
+	if(owner)
+		bloodcolor = owner.get_blood_type().color
+	else if(original_owner)
+		bloodcolor = original_owner.get_blood_type().color
 	var/obj/item/held_item = user.get_active_held_item()
 	if(isanimal(user))
 		visible_message("[user] begins to eat \the [src].")
 		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 		if(!do_after(user, 5 SECONDS, src))
 			return
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
 		qdel(src)
 		return
 	else if(held_item?.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
@@ -208,7 +213,7 @@
 			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
 			if(rotted)
 				food.become_rotten()
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
 		user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
 		qdel(src)
 		return
@@ -250,7 +255,12 @@
 	pixel_x = base_pixel_x + rand(-3, 3)
 	pixel_y = base_pixel_y + rand(-3, 3)
 	if(!skeletonized)
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		var/bloodcolor = COLOR_BLOOD
+		if(owner)
+			bloodcolor = owner.get_blood_type().color
+		else if(original_owner)
+			bloodcolor = original_owner.get_blood_type().color
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
@@ -637,7 +647,14 @@
 		image_dir = SOUTH
 		if(dmg_overlay_type)
 			if(brutestate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
+				var/image/brute_image = image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
+				if(owner)
+					owner.get_blood_type().color
+				else if(original_owner)
+					original_owner.get_blood_type().color
+				else
+					brute_image.color = COLOR_BLOOD
+				. += brute_image
 			if(burnstate)
 				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
 

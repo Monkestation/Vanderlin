@@ -39,7 +39,7 @@
 		/datum/skill/misc/stealing = 3
 	)
 
-	traits = list(
+	mind_traits = list(
 		TRAIT_ROYALSERVANT
 	)
 

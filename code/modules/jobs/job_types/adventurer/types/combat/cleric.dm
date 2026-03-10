@@ -160,34 +160,34 @@
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)
 			if(/datum/patron/divine/astrata)
-				wrists = /obj/item/clothing/neck/psycross/silver/astrata
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
 				cloak = /obj/item/clothing/cloak/stabard/templar/astrata
 			if(/datum/patron/divine/dendor)
-				wrists = /obj/item/clothing/neck/psycross/silver/dendor
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 				cloak = /obj/item/clothing/cloak/stabard/templar/dendor
 			if(/datum/patron/divine/necra)
-				wrists = /obj/item/clothing/neck/psycross/silver/necra
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 				cloak = /obj/item/clothing/cloak/stabard/templar/necra
 				beltr = /obj/item/weapon/shovel/small
 			if(/datum/patron/divine/eora)
-				wrists = /obj/item/clothing/neck/psycross/silver/eora
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
 				cloak = /obj/item/clothing/cloak/stabard/templar/eora
 			if(/datum/patron/divine/ravox)
-				wrists = /obj/item/clothing/neck/psycross/silver/ravox
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 				cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 			if(/datum/patron/divine/noc)
-				wrists = /obj/item/clothing/neck/psycross/silver/noc
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 				cloak = /obj/item/clothing/cloak/stabard/templar/noc
 			if(/datum/patron/divine/pestra)
-				wrists = /obj/item/clothing/neck/psycross/silver/pestra
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
 				cloak = /obj/item/clothing/cloak/stabard/templar/pestra
 			if(/datum/patron/divine/abyssor)
-				wrists = /obj/item/clothing/neck/psycross/silver/abyssor
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 				cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 				beltl = /obj/item/fishingrod
 			if(/datum/patron/divine/malum)
-				wrists = /obj/item/clothing/neck/psycross/silver/malum
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/malum
 				cloak = /obj/item/clothing/cloak/stabard/templar/malum
 			if(/datum/patron/divine/xylix)
-				wrists = /obj/item/clothing/neck/psycross/silver/xylix
+				wrists = /obj/item/clothing/neck/psycross/silver/divine/xylix
 				cloak = /obj/item/clothing/cloak/stabard/templar/xylix

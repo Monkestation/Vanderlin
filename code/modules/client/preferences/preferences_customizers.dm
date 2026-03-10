@@ -181,7 +181,7 @@
 	dat += print_customizers_page()
 	var/datum/browser/popup = new(user, "customization", "<div align='center'>Customization</div>", 630, 730)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/get_hair_color()
 	var/datum/customizer_entry/hair/entry = get_customizer_entry_of_type(/datum/customizer_entry/hair/head)

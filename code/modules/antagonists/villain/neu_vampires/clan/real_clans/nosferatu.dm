@@ -73,5 +73,5 @@
 
 /datum/clan/nosferatu/proc/face_seen(mob/living/carbon/human/nosferatu, mob/living/carbon/user)
 	user.add_stress(/datum/stress_event/nosferatu_seen)
-	if(length(nosferatu.CheckEyewitness(user)))
-		nosferatu.vampire_detected(1)
+	// so 2 people need to see you
+	nosferatu.vampire_detected(max(0, length(nosferatu.CheckEyewitness(nosferatu)) - 1))

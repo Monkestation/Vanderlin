@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/necra)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
 
 	invocation = "Undermaiden grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = INVOCATION_WHISPER

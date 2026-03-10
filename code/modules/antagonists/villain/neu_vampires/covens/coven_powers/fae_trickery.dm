@@ -93,7 +93,7 @@
 	var/strength = 5
 	var/attached = 0
 
-/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
+/obj/item/clothing/face/goblin_mask/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
 	..()
 	if(atom_integrity < 90)
 		Die()
@@ -403,7 +403,7 @@
 				if(RIDDLE)
 					if(RIDDLE.riddle_text == try_riddle)
 						actual_riddle = RIDDLE
-			target.add_movespeed_modifier("riddle", 5)
+			target.add_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY, multiplicative_slowdown = 5)
 			actual_riddle.ask(target)
 			owner.say(actual_riddle.riddle_text)
 	else
@@ -485,7 +485,7 @@
 					tongue.Remove(C)
 			to_chat(answerer,
 				span_danger("THE RIDDLE REMOVES YOUR LYING TONGUE AS IT FLEES."))
-			answerer.remove_movespeed_modifier("riddle")
+			answerer.remove_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY)
 			alert.bad_answers = 0
 			alert.riddle = null
 			answerer.clear_alert("riddle")
@@ -493,6 +493,6 @@
 		to_chat(answerer,
 			"<span class='nicegreen'>You feel the riddle's hold over you vanish.</span>")
 		alert.riddle = null
-		answerer.remove_movespeed_modifier("riddle")
+		answerer.remove_movespeed_modifier(MOVESPEED_ID_FAE_TRICKERY)
 		answerer.say(the_answer)
 		answerer.clear_alert("riddle")

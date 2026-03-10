@@ -12,6 +12,7 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
+	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	blacklisted_species = list(SPEC_ID_HALFLING)

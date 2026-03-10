@@ -60,7 +60,8 @@
 
 ///list of foods this mob likes
 #define BB_BASIC_FOODS "BB_basic_foods"
-
+///What creature we want to cocoon
+#define BB_BASIC_MOB_COCOON_TARGET "BB_basic_mob_cocoon_target"
 
 /// Flag to set on or off if you want your mob to prioritise running away
 #define BB_BASIC_MOB_FLEEING "BB_basic_fleeing"

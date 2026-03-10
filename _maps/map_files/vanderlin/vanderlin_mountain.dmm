@@ -2859,7 +2859,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/lavaexposed)
 "Rw" = (
-/obj/item/clothing/neck/psycross/silver/malum,
+/obj/item/clothing/neck/psycross/silver/divine/malum,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "RB" = (

@@ -143,6 +143,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
+"bF" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "bI" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/cobble,
@@ -710,6 +714,10 @@
 	},
 /turf/closed/mineral/random/med,
 /area/under/cave)
+"gR" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "gT" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
@@ -1235,6 +1243,10 @@
 /obj/item/reagent_containers/food/snacks/truffles,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/mountains/anvil/lower)
+"mt" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "mu" = (
 /obj/structure/fluff/walldeco/painting/seraphina,
 /turf/closed/wall/mineral/tent,
@@ -1303,6 +1315,10 @@
 	},
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
+"mR" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "mT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -1356,6 +1372,10 @@
 /obj/structure/roguetent,
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
+"no" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass,
+/area/outdoors/basin)
 "nB" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/hexstone,
@@ -1592,6 +1612,10 @@
 	dir = 8
 	},
 /area/outdoors/bog)
+"qp" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "qr" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog)
@@ -2488,6 +2512,10 @@
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/lower)
+"Ba" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Bc" = (
 /turf/open/floor/rooftop/green,
 /area/outdoors/mountains)
@@ -2698,6 +2726,10 @@
 "Dn" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/wilderness)
+"Ds" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/basin)
 "Dt" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/naturalstone,
@@ -3289,6 +3321,10 @@
 /obj/item/paint_palette/filled,
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
+"Js" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Jy" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/tree,
@@ -3385,6 +3421,10 @@
 	dir = 1
 	},
 /area/outdoors/mountains)
+"KC" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
+/area/outdoors/bog)
 "KD" = (
 /turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
@@ -3769,6 +3809,10 @@
 "OC" = (
 /turf/open/floor/carpet/lord/left,
 /area/under/mountains/anvil/lower)
+"OD" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass,
+/area/outdoors/mountains)
 "OE" = (
 /turf/closed/mineral/random/cold/med,
 /area/under/cave)
@@ -3849,6 +3893,10 @@
 "Px" = (
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"Py" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/bog)
 "Pz" = (
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood/gibs/limb,
@@ -4025,6 +4073,10 @@
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/twig,
 /area/indoors)
+"Rj" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Rl" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -4175,6 +4227,10 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/lower)
+"Sz" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass,
+/area/outdoors/bog)
 "SD" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/cobble,
@@ -4737,6 +4793,10 @@
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
+"YR" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/bog)
 "YW" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -4758,6 +4818,10 @@
 "Zj" = (
 /turf/closed/mineral/bedrock,
 /area/under/mountains/anvil/upper)
+"Zo" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/bog)
 "Zp" = (
 /obj/structure/stairs,
 /turf/open/floor/cobble,
@@ -32700,7 +32764,7 @@ pg
 pg
 pg
 pg
-pg
+Py
 pg
 pg
 pg
@@ -35929,7 +35993,7 @@ hZ
 nX
 pg
 pg
-pg
+KC
 nX
 nX
 pg
@@ -38156,7 +38220,7 @@ pg
 pg
 nX
 pg
-pg
+YR
 pg
 pg
 pg
@@ -39582,7 +39646,7 @@ pg
 pg
 pg
 pg
-nX
+Zo
 pg
 pg
 pg
@@ -41789,7 +41853,7 @@ nX
 nX
 nX
 pg
-nX
+Sz
 mp
 nX
 mp
@@ -42793,7 +42857,7 @@ pg
 gu
 pg
 pg
-pg
+Py
 pg
 pg
 wd
@@ -50357,7 +50421,7 @@ Lv
 Lv
 xT
 Lv
-Lv
+mR
 Lv
 Lv
 Lv
@@ -51707,7 +51771,7 @@ Lv
 Lv
 pS
 pS
-Lv
+mt
 Lv
 Lv
 Lv
@@ -52791,7 +52855,7 @@ pS
 Lv
 Lv
 Lv
-Lv
+mR
 Lv
 pS
 Lv
@@ -52977,7 +53041,7 @@ pS
 Lv
 Lv
 Lv
-Lv
+Rj
 Lv
 Lv
 Lv
@@ -55370,7 +55434,7 @@ xT
 Lv
 Lv
 Lv
-Lv
+Rj
 Lv
 Lv
 Lv
@@ -55389,7 +55453,7 @@ Lv
 pS
 Lv
 Lv
-Lv
+Rj
 pS
 Lv
 Lv
@@ -55810,7 +55874,7 @@ pS
 xT
 Lv
 Lv
-Lv
+mt
 pS
 pS
 Lv
@@ -57234,7 +57298,7 @@ Lv
 Lv
 Lv
 pS
-Lv
+Rj
 pS
 Lv
 xT
@@ -58195,7 +58259,7 @@ Lv
 Lv
 Lv
 Lv
-Lv
+Rj
 pS
 Lv
 Lv
@@ -60848,7 +60912,7 @@ Lv
 Lv
 Lv
 Lv
-pS
+Js
 Lv
 pS
 Lv
@@ -61004,7 +61068,7 @@ pS
 Lv
 Lv
 Lv
-Lv
+mt
 Lv
 Lv
 Lv
@@ -63052,7 +63116,7 @@ Lv
 Lv
 Lv
 Lv
-Lv
+mt
 Lv
 pS
 Lv
@@ -65428,7 +65492,7 @@ hZ
 pg
 pg
 pg
-nX
+Sz
 pg
 pg
 pg
@@ -65472,7 +65536,7 @@ Lv
 Lv
 Lv
 Lv
-Lv
+Rj
 Lv
 Lv
 Lv
@@ -66025,7 +66089,7 @@ pg
 pg
 pg
 nX
-pg
+Py
 pg
 nX
 pg
@@ -69054,7 +69118,7 @@ nX
 aU
 pg
 pg
-pg
+KC
 nX
 hZ
 pg
@@ -70084,7 +70148,7 @@ aU
 pg
 pg
 pg
-pg
+Py
 pg
 pg
 pg
@@ -71299,7 +71363,7 @@ nX
 nX
 pg
 pg
-nX
+Sz
 pg
 pg
 hZ
@@ -76357,7 +76421,7 @@ tl
 pg
 pg
 pg
-nX
+Zo
 nX
 pg
 aU
@@ -78192,12 +78256,12 @@ hZ
 nX
 nX
 pg
+Py
 pg
-pg
+nX
 nX
 nX
 nX
-nX
 pg
 pg
 pg
@@ -78205,7 +78269,7 @@ pg
 pg
 pg
 pg
-nX
+Zo
 pg
 pg
 nX
@@ -79838,7 +79902,7 @@ pg
 nX
 pg
 pg
-pg
+YR
 nX
 pg
 pg
@@ -80862,7 +80926,7 @@ pg
 pg
 nX
 nX
-nX
+Sz
 pg
 pg
 ge
@@ -81278,7 +81342,7 @@ nX
 nX
 pg
 nX
-nX
+Zo
 pg
 pg
 Lv
@@ -81492,7 +81556,7 @@ Lv
 Lv
 Lv
 Lv
-pS
+Ba
 Lv
 pS
 Lv
@@ -83073,7 +83137,7 @@ nX
 pg
 nX
 pg
-pg
+KC
 pg
 pg
 pg
@@ -83871,7 +83935,7 @@ nX
 nX
 pg
 hZ
-pg
+YR
 pg
 nX
 nX
@@ -84533,7 +84597,7 @@ Lv
 Lv
 Lv
 Lv
-Lv
+mR
 Lv
 Lv
 xT
@@ -84710,7 +84774,7 @@ nX
 pg
 pg
 pg
-pg
+KC
 pg
 nX
 nX
@@ -87062,7 +87126,7 @@ hG
 By
 hG
 Px
-Px
+OD
 Px
 Px
 uI
@@ -88345,7 +88409,7 @@ pS
 pS
 pS
 pS
-Lv
+Rj
 pS
 pS
 pS
@@ -96248,7 +96312,7 @@ pS
 pS
 pS
 pS
-pS
+Ba
 Lv
 pS
 pS
@@ -99474,7 +99538,7 @@ pS
 pS
 pS
 pS
-pS
+Js
 pS
 pS
 Lv
@@ -101276,7 +101340,7 @@ pS
 sr
 Lv
 pS
-pS
+Js
 pS
 pS
 pS
@@ -104125,7 +104189,7 @@ pS
 pS
 pS
 Lv
-Lv
+mR
 pS
 Lv
 pS
@@ -105112,7 +105176,7 @@ pS
 Lv
 pS
 pS
-pS
+Js
 pS
 pS
 pS
@@ -113142,7 +113206,7 @@ pS
 pS
 pS
 Lv
-Lv
+mt
 pS
 pS
 Lv
@@ -115823,7 +115887,7 @@ pS
 pS
 pS
 pS
-Lv
+Rj
 Lv
 Lv
 Lv
@@ -118663,7 +118727,7 @@ pS
 pS
 pS
 pS
-pS
+Ba
 pS
 Lv
 pS
@@ -120295,7 +120359,7 @@ pS
 pS
 Lv
 pS
-pS
+Js
 pS
 Lv
 pS
@@ -128983,7 +129047,7 @@ Fd
 Fd
 Fd
 Fd
-Fd
+no
 Fd
 Fd
 Fd
@@ -129777,7 +129841,7 @@ Fd
 Fd
 dJ
 Fd
-Fd
+Ds
 Fd
 Fd
 Fd
@@ -135672,7 +135736,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+qp
 Iv
 Iv
 Iv
@@ -136462,7 +136526,7 @@ pS
 pS
 Iv
 Iv
-Iv
+gR
 Iv
 Iv
 Iv
@@ -136896,7 +136960,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+qp
 Iv
 Iv
 KD
@@ -137292,7 +137356,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+bF
 Iv
 Iv
 Iv
@@ -141129,7 +141193,7 @@ Lv
 Lv
 Iv
 Iv
-Iv
+gR
 Iv
 Iv
 KD
@@ -142726,7 +142790,7 @@ Iv
 Lv
 Lv
 Iv
-Iv
+gR
 Lv
 Iv
 Iv
@@ -145161,7 +145225,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+gR
 Iv
 Yd
 Iv
@@ -148162,7 +148226,7 @@ Lv
 Iv
 Iv
 Iv
-Iv
+gR
 Iv
 Iv
 Iv
@@ -148985,7 +149049,7 @@ Iv
 Iv
 Yd
 Iv
-Iv
+gR
 Iv
 Lv
 Lv
@@ -151789,7 +151853,7 @@ KD
 KD
 Iv
 Iv
-Lv
+mR
 Iv
 Iv
 Iv
@@ -152388,7 +152452,7 @@ KD
 Iv
 Iv
 Lv
-Iv
+gR
 Iv
 Iv
 Iv
@@ -152407,7 +152471,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+bF
 Iv
 Iv
 FI
@@ -155055,7 +155119,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+gR
 Iv
 Iv
 Iv
@@ -158711,7 +158775,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+qp
 Iv
 Iv
 Iv
@@ -159296,7 +159360,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+qp
 Iv
 Iv
 KD
@@ -159910,7 +159974,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+bF
 Yd
 Iv
 XN
@@ -162143,7 +162207,7 @@ Iv
 Iv
 Iv
 Lv
-Iv
+gR
 Lv
 Lv
 Iv
@@ -164563,7 +164627,7 @@ Iv
 Lv
 Iv
 Iv
-Lv
+Rj
 Iv
 Iv
 Iv
@@ -164780,7 +164844,7 @@ Iv
 Iv
 Iv
 Iv
-Iv
+gR
 Lv
 Lv
 Iv

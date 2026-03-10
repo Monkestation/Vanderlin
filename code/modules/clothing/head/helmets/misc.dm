@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/gallowglass
 	name = "gallowglass helmet"
-	desc = "Worn by proud fighters of the clans of Kaledon."
+	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/fertilizer/ash

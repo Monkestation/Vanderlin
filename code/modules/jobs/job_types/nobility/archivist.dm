@@ -27,6 +27,9 @@
 		EXP_TYPE_LIVING = 300
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	languages = list(
 		/datum/language/elvish,
 		/datum/language/dwarvish,
@@ -91,9 +94,9 @@
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
-	beltr = /obj/item/book/granter/spellbook/apprentice
+	beltr = /obj/item/book/granter/spellbook/expert
 	backl = /obj/item/storage/backpack/satchel
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backpack_contents = list(
 		/obj/item/textbook = 1,
 		/obj/item/natural/feather = 1
@@ -157,7 +160,7 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/archivist
 	wrists = /obj/item/clothing/wrists/nocwrappings
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,

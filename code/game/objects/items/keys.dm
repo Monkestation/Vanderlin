@@ -260,8 +260,8 @@
 ////// MANOR
 
 /obj/item/key/manor
-	name = "manor key"
-	desc = "This key will open most Manor doors."
+	name = "keep key"
+	desc = "This key will open most Keep doors."
 	icon_state = "mazekey"
 	lockids = list(ACCESS_MANOR)
 
@@ -296,8 +296,8 @@
 	lockids = list(ACCESS_LORD)
 
 /obj/item/key/walls
-	name = "manor gatehouse key"
-	desc = "This is a rusty key for the Manor gatehouse."
+	name = "keep gatehouse key"
+	desc = "This is a rusty key for the Keep Gatehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_MANOR_GATE)
 

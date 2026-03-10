@@ -788,5 +788,111 @@
                 "rscadd": "Rebalanced feint intent."
             }
         ]
+    },
+    "2026-02-26": {
+        "MrTCo1": [
+            {
+                "rscadd": "Added Law and Order to the Captain"
+            },
+            {
+                "rscadd": "Added Deliverance to the Captain"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added rousman language and accent. Accent applies for them with all languages, similar to kobolds."
+            },
+            {
+                "bugfix": "Fixed some offsets for things equipped on rousmen."
+            },
+            {
+                "rscadd": "Tweaked skills for rousman seer to match up with their starting spells."
+            },
+            {
+                "rscadd": "Added a slightly buffed version of the rousman seer."
+            },
+            {
+                "rscadd": "Added Enlightened Centrism as a Patron option for the Divine Pantheon."
+            },
+            {
+                "rscadd": "Centrist worshippers do not get healed by the Astratan greater healing miracle, but can still be resurrected."
+            },
+            {
+                "bugfix": "Known/branded Heretics no longer get healed by healing miracles, to match excommunicated people."
+            },
+            {
+                "rscadd": "Centrist worshippers can devote themselves to a sole patron through right-click interaction at a pantheon cross."
+            },
+            {
+                "code_imp": "Changed the backend for set_patron to account for existing clerical powers."
+            },
+            {
+                "rscadd": "Added Holy Fire enchantment and accompanying miracle."
+            },
+            {
+                "rscadd": "Added Divine Shield miracle."
+            },
+            {
+                "code_imp": "Repathed holy amulets."
+            },
+            {
+                "code_imp": "Added helper procs for adding and removing verbs for the priest."
+            },
+            {
+                "bugfix": "Fixed some misplaced parameters for weapon enchantments."
+            },
+            {
+                "bugfix": "Priest can no longer recruit roles with existing cleric powers into church roles."
+            },
+            {
+                "bugfix": "Fixed message spam when equipping/moving grandmaster weapons in hands."
+            }
+        ]
+    },
+    "2026-02-27": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes double sharpness loss on parry."
+            },
+            {
+                "rscadd": "Added guaranteed point blank crits to firearms"
+            },
+            {
+                "balance": "Removed the decreased crit chance from lead bullets"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Kobolds playing forest guard are limited to Forest Rat (Ruffian)"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added public balloon alert feedback to armour breaking and at certain damage thresholds. (FreeStylaLT)"
+            },
+            {
+                "rscadd": "Added balloon alerts to missing swings on your targeted zone."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "Prisoners can now choose to not be nobility, giving them a few crime and labor skills instead of courtly ones."
+            },
+            {
+                "rscadd": "Tieflings, Hollowkin, and Medicators can now be Prisoners, but only the Commoner version, not Noble."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "map": "Added more adventurer spawns to the murderwoods"
+            }
+        ]
+    },
+    "2026-02-28": {
+        "KevinfromHP": [
+            {
+                "qol": "keybind fixes"
+            }
+        ]
     }
 }
