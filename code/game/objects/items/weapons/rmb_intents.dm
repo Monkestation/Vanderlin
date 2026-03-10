@@ -2,6 +2,7 @@
 	var/name = "intent"
 	var/desc = ""
 	var/icon_state = ""
+	/// Bonus/Malus to parry and dodge
 	var/def_bonus = 0
 	/// Whether the rclick will try to get turfs as target.
 	var/target_turf = FALSE
@@ -26,6 +27,14 @@
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
 	if(!user || !target)
 		return FALSE
+
+	if(target.loc == user)
+		return FALSE
+
+	if(isitem(target))
+		var/obj/item/item_target = target
+		if(item_target.item_flags & IN_STORAGE)
+			return FALSE
 
 	if(check_range)
 		var/obj/item/attacker_item = user.get_active_held_item()
@@ -67,10 +76,10 @@
 	if(baited && !COOLDOWN_FINISHED(baited, bait_cooldown))
 		return FALSE
 
-	// if(defender.is_blind() || !defender.can_see_cone(user))
-	// 	to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
-	// 	user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
-	// 	return TRUE
+	if(defender.is_blind() || !defender.can_see_cone(user))
+		to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
+		user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
+		return TRUE
 
 	user.visible_message(
 		span_danger("[user] baits an attack from [defender]."),
