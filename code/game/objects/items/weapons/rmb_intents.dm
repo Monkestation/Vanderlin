@@ -76,10 +76,10 @@
 	if(baited && !COOLDOWN_FINISHED(baited, bait_cooldown))
 		return FALSE
 
-	// if(defender.is_blind() || !defender.can_see_cone(user))
-	// 	to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
-	// 	user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
-	// 	return TRUE
+	if(defender.is_blind() || !defender.can_see_cone(user))
+		to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
+		user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
+		return TRUE
 
 	user.visible_message(
 		span_danger("[user] baits an attack from [defender]."),
