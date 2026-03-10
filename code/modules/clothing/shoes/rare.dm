@@ -60,7 +60,7 @@
 	allowed_race = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	allowed_sex = list(MALE)
 	desc = "The sabatons that march to the tune of a glorious nation. It is said that the boots \
-			are gilded with the tears of once native elves of the Grenzeholft lands, \
+			are gilded with the tears of elves within Grenzelhoft lands, \
 			as their great tree was reduced to cinders."
 	body_parts_covered = FEET|LEGS
 	icon_state = "human_swordshoes"
