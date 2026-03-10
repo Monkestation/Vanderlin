@@ -75,7 +75,7 @@
 
 /datum/job/migrant/mig_prisoner
 	title = "Prisoner (Migrant Wave)"
-	tutorial = "You had fled Vanderlin and took refuge another kingdom, yet the lords over there caught you and thus handed you over to those who sought you before."
+	tutorial = "You fled Vanderlin and took refuge another kingdom, yet the lords over there caught you and thus handed you over to those who sought you before."
 	outfit = /datum/outfit/mig_prisoner
 	is_foreigner = FALSE
 	jobstats = list(
