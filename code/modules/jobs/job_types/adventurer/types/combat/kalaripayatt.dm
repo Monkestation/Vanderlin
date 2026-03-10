@@ -12,7 +12,7 @@
 		SPEC_ID_TIEFLING,\
 	)
 	allowed_patrons = ALL_TEMPLE_PATRONS // I dont think the inhumen pantheon would appreciate the nuance of dance.
-	tutorial = "Hailing from one of many Faience's classical dance companies in the Southeast; Kalaripayatt's are skilled dancers trained in martial arts, dedicated to celebrating the natural wonders of the vigorous body. Fighting with a grace unseen in many other combatants." //shout out to hembrent for helping me write this!
+	tutorial = "Hailing from one of many Faience's classical dance companies; Kalaripayatt's are skilled dancers trained in martial arts, dedicated to celebrating the natural wonders of the vigorous body. Fighting with a grace unseen in many other combatants." //shout out to hembrent for helping me write this!
 	total_positions = 4
 	outfit = /datum/outfit/adventurer/kalaripayatt
 	category_tags = list(CTAG_ADVENTURER)
@@ -35,6 +35,7 @@
 		STATKEY_CON = -2, //they arent meant to get hit.
 		STATKEY_END = 2,
 		STATKEY_SPD = 1,
+		STATKEY_PER = 1,
 	)
 
 	traits = list(
