@@ -64,7 +64,7 @@
 	ring = /obj/item/scomstone
 	gloves = /obj/item/clothing/gloves/leather/black
 	beltl = /obj/item/weapon/sword/long
-	backl = /obj/item/storage/backpack/satchel/heartfelt
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/waterskin/purifier)
 
 /datum/migrant_role/heartfelt_lady

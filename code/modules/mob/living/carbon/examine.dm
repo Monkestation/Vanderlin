@@ -45,7 +45,7 @@
 		LISTASSERTLEN(rounded_sections, rounded_index, list())
 		LAZYADDASSOC(rounded_sections, rounded_index, section)
 
-	for(var/i=1, i < length(rounded_sections), i++)
+	for(var/i=1, i <= length(rounded_sections), i++)
 		var/list/section = rounded_sections[i]
 		if(!length(section))
 			continue

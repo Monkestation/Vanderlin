@@ -77,7 +77,7 @@
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 	)
 
-	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "WIZARD")
+	H.select_equippable(H, selectablehat, message = "Choose your hat of choice", title = "MAGE")
 
 	// Robe selection
 	var/static/list/selectablerobe = list(
@@ -85,4 +85,4 @@
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 	)
 
-	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
+	H.select_equippable(H, selectablerobe, message = "Choose your robe of choice", title = "MAGE")

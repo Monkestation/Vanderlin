@@ -211,6 +211,9 @@
 	background_track_dusk = null
 	background_track_night = null
 
+/area/indoors/shelter/bog/witch
+	name = "bog witch's hut"
+
 /area/outdoors/beach
 	name = "sophia's cry"
 	icon_state = "beach"

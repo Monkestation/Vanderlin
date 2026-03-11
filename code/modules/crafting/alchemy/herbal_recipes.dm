@@ -188,7 +188,7 @@
 	if(volume > 0.99)
 		M.add_nausea(1)
 		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.5) // Very mild stamina drain
+			M.adjust_stamina(0.5) // Very mild stamina drain
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
 		return ..()
 	if(volume > 2)
@@ -294,8 +294,8 @@
 	taste_description = "bitter numbness"
 
 /datum/reagent/medicine/herbal/paris_poultice/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-1)
-	M.adjustFireLoss(-0.5)
+	M.adjustBruteLoss(-1*REM)
+	M.adjustFireLoss(-0.5*REM)
 
 	for(var/obj/item/bodypart/BP in M.bodyparts)
 		if(BP.status == BODYPART_ROBOTIC)
@@ -327,11 +327,11 @@
 	M.add_stress(/datum/stress_event/herbal_wellness)
 
 /datum/reagent/medicine/herbal/herbalist_panacea/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-1.5)
-	M.adjustFireLoss(-1.5)
-	M.adjustToxLoss(-1)
+	M.adjustBruteLoss(-1.5*REM)
+	M.adjustFireLoss(-1.5*REM)
+	M.adjustToxLoss(-1*REM)
 	M.adjustOxyLoss(-1)
-	M.adjust_stamina(2)
+	M.adjust_stamina(2*REM)
 	if(prob(15))
 		M.heal_bodypart_damage(1, 1, 0)
 	. = ..()
@@ -494,7 +494,7 @@
 	M.add_stress(/datum/stress_event/battle_stim)
 
 /datum/reagent/buff/herbal/battle_stim/on_mob_life(mob/living/carbon/M)
-	M.adjust_stamina(2)
+	M.adjust_stamina(-2)
 	// Slight combat bonuses
 	if(prob(10))
 		M.heal_bodypart_damage(0.5, 0, 0)

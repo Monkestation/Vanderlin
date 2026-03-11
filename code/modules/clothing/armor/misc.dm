@@ -20,7 +20,7 @@
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
 	name = "amazonian armor"
-	desc = "Fur skirt and maille chest holder, typically worn by warrior women of the isle of Issa."
+	desc = "Fur skirt and maille chest holder, it doesn't cover very much."
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
