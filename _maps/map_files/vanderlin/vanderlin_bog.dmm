@@ -16921,6 +16921,12 @@
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/bog/e_highroad_camp)
+"rHJ" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog)
 "rJt" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -45777,7 +45783,7 @@ bbX
 bbX
 xjU
 xjU
-czi
+vhU
 xjU
 vko
 mqv
@@ -46183,7 +46189,7 @@ xjU
 vhU
 vhU
 xjU
-xjU
+rHJ
 xjU
 vhU
 vhU
@@ -46575,7 +46581,7 @@ xjU
 xjU
 xjU
 vhU
-vhU
+eyW
 kru
 qWs
 mqv
