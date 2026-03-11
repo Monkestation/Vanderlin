@@ -344,5 +344,15 @@
                 "code_imp": "The cancel checks (needing to be in the prayer hall) now happen before you try and do something, not after."
             }
         ]
+    },
+    "2026-03-11": {
+        "ModDownloading": [
+            {
+                "rscdel": "Removed the paper from the Heartfelt Lord migrant and Heartfelt Hand pilgrim saying they could be here for diplomatic or trade purposes. They had to come to grips with their ruined homeland eventually."
+            },
+            {
+                "bugfix": "Changed references to a lot of non-canonical locations and events in item descriptions."
+            }
+        ]
     }
 }
