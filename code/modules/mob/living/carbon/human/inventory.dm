@@ -4,61 +4,35 @@
 // Return the item currently in the slot ID
 /mob/living/carbon/human/get_item_by_slot(slot_id)
 	switch(slot_id)
-		if(ITEM_SLOT_MASK)
-			return wear_mask
-		if(ITEM_SLOT_NECK)
-			return wear_neck
-		if(ITEM_SLOT_HANDCUFFED)
-			return handcuffed
-		if(ITEM_SLOT_LEGCUFFED)
-			return legcuffed
 		if(ITEM_SLOT_BELT)
 			return belt
 		if(ITEM_SLOT_RING)
 			return wear_ring
 		if(ITEM_SLOT_WRISTS)
 			return wear_wrists
-		if(ITEM_SLOT_MOUTH)
-			return mouth
 		if(ITEM_SLOT_SHIRT)
 			return wear_shirt
 		if(ITEM_SLOT_CLOAK)
 			return cloak
-		if(ITEM_SLOT_BACK_R)
-			return backr
-		if(ITEM_SLOT_BACK_L)
-			return backl
 		if(ITEM_SLOT_BELT_L)
 			return beltl
 		if(ITEM_SLOT_BELT_R)
 			return beltr
-		if(ITEM_SLOT_GLOVES)
-			return gloves
-		if(ITEM_SLOT_HEAD)
-			return head
-		if(ITEM_SLOT_SHOES)
-			return shoes
 		if(ITEM_SLOT_ARMOR)
 			return wear_armor
 		if(ITEM_SLOT_PANTS)
 			return wear_pants
-	return null
+	return ..()
 
 /mob/living/carbon/human/get_slot_by_item(obj/item/looking_for)
-	if(looking_for == wear_mask)
-		return ITEM_SLOT_MASK
-
-	if(looking_for == wear_neck)
-		return ITEM_SLOT_NECK
-
-	if(looking_for == handcuffed)
-		return ITEM_SLOT_HANDCUFFED
-
-	if(looking_for == legcuffed)
-		return ITEM_SLOT_LEGCUFFED
-
 	if(looking_for == belt)
 		return ITEM_SLOT_BELT
+
+	if(looking_for == beltl)
+		return ITEM_SLOT_BELT_L
+
+	if(looking_for == beltr)
+		return ITEM_SLOT_BELT_R
 
 	if(looking_for == wear_ring)
 		return ITEM_SLOT_RING
@@ -66,35 +40,11 @@
 	if(looking_for == wear_wrists)
 		return ITEM_SLOT_WRISTS
 
-	if(looking_for == mouth)
-		return ITEM_SLOT_MOUTH
-
 	if(looking_for == wear_shirt)
 		return ITEM_SLOT_SHIRT
 
 	if(looking_for == cloak)
 		return ITEM_SLOT_CLOAK
-
-	if(looking_for == backr)
-		return ITEM_SLOT_BACK_R
-
-	if(looking_for == backl)
-		return ITEM_SLOT_BACK_L
-
-	if(looking_for == beltl)
-		return ITEM_SLOT_BELT_L
-
-	if(looking_for == beltr)
-		return ITEM_SLOT_BELT_R
-
-	if(looking_for == gloves)
-		return ITEM_SLOT_GLOVES
-
-	if(looking_for == head)
-		return ITEM_SLOT_HEAD
-
-	if(looking_for == shoes)
-		return ITEM_SLOT_SHOES
 
 	if(looking_for == wear_armor)
 		return ITEM_SLOT_ARMOR
@@ -102,54 +52,55 @@
 	if(looking_for == wear_pants)
 		return ITEM_SLOT_PANTS
 
-	if(looking_for == beltl)
-		return ITEM_SLOT_BELT_L
-
-	if(looking_for == beltr)
-		return ITEM_SLOT_BELT_R
-
 	return ..()
 
-/mob/living/carbon/human/proc/get_all_slots()
+/mob/living/carbon/proc/get_all_slots()
 	. = get_head_slots() | get_body_slots()
 
-/mob/living/carbon/human/proc/get_body_slots()
+/mob/living/carbon/proc/get_body_slots()
 	return list(
 		handcuffed,
 		legcuffed,
-		wear_armor,
 		gloves,
 		shoes,
-		belt,
+		backr,
+		backl,
+	)
+
+/mob/living/carbon/human/get_body_slots()
+	return ..() | list(
+		wear_armor,
 		wear_ring,
 		wear_wrists,
 		wear_pants,
 		wear_shirt,
 		cloak,
-		backr,
-		backl,
+		belt,
 		beltr,
 		beltl,
-		mouth
-		)
+	)
 
-/mob/living/carbon/human/proc/get_head_slots()
+/mob/living/carbon/proc/get_head_slots()
 	return list(
 		head,
+		mouth,
 		wear_mask,
 		wear_neck,
-		mouth,
-		)
+	)
 
-/mob/living/carbon/human/proc/get_storage_slots()
+/mob/living/carbon/proc/get_storage_slots()
 	return list(
-		belt,
 		backr,
 		backl,
+		mouth
+	)
+
+/mob/living/carbon/human/get_storage_slots()
+	return ..() | list(
+		belt,
 		beltr,
 		beltl,
-		mouth
-		)
+	)
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
 // Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
@@ -174,21 +125,6 @@
 				return
 			wear_wrists = equipping
 			update_inv_wrists()
-		if(ITEM_SLOT_HEAD)
-			if(head)
-				return
-			head = equipping
-			update_inv_head()
-		if(ITEM_SLOT_GLOVES)
-			if(gloves)
-				return
-			gloves = equipping
-			update_inv_gloves()
-		if(ITEM_SLOT_SHOES)
-			if(shoes)
-				return
-			shoes = equipping
-			update_inv_shoes()
 		if(ITEM_SLOT_ARMOR)
 			if(wear_armor)
 				return
@@ -225,22 +161,7 @@
 				return
 			beltr = equipping
 			update_inv_belt()
-		if(ITEM_SLOT_BACK_R)
-			if(backr)
-				return
-			backr = equipping
-			update_inv_back()
-		if(ITEM_SLOT_BACK_L)
-			if(backl)
-				return
-			backl = equipping
-			update_inv_back()
-		if(ITEM_SLOT_MOUTH)
-			if(mouth)
-				return
-			mouth = equipping
-			update_inv_mouth()
-		if(ITEM_SLOT_BACKPACK)
+		if(ITEM_SLOT_BACKPACK) // we don't need to check backpacks here, we already did in the carbon proc
 			not_handled = TRUE
 			if(beltr)
 				if(SEND_SIGNAL(beltr, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
@@ -250,12 +171,6 @@
 					not_handled = FALSE
 			if(belt && not_handled)
 				if(SEND_SIGNAL(belt, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE))
-					not_handled = FALSE
-			if(backr && not_handled)
-				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
-					not_handled = FALSE
-			if(backl && not_handled)
-				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_CAN_INSERT, equipping, src, TRUE))
 					not_handled = FALSE
 		else
 			not_handled = TRUE

@@ -22,13 +22,12 @@
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_PARENT_EXAMINE))
 
-/datum/component/hideous_face/proc/on_examine(mob/living/carbon/human/source, mob/living/carbon/human/user, list/examine_list)
+/datum/component/hideous_face/proc/on_examine(mob/living/carbon/human/source, mob/living/carbon/human/user, list/examine_list, list/P)
 	if(!is_human_part_visible(source, HIDEFACE))
 		return
-	if(user.affects_masquerade())
-		var/all_caps_pronoun = uppertext(source.p_their())
-		examine_list += span_phobia("[all_caps_pronoun] FACE! WHAT'S WRONG WITH [all_caps_pronoun] FACE?!")
+	if(source != user && user.affects_masquerade())
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, html_tag("h2", span_boldannounce("[uppertext(P[THEIR])] FACE! WHAT'S WRONG WITH [uppertext(P[THEIR])] FACE?!")))
 	else
-		examine_list += span_boldred("[source.p_their(TRUE)] face is hideous.")
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("[capitalize(P[THEIR])] face is hideous."))
 	seen_callback?.Invoke(source, user)
 

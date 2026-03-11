@@ -7,7 +7,7 @@
 	icon_state = "bloodheal"
 	power_type = /datum/coven_power/bloodheal
 	max_level = 10
-	experience_multiplier = 1.25
+	experience_multiplier = 1
 
 /datum/coven_power/bloodheal
 	name = "Bloodheal power name"
@@ -17,10 +17,8 @@
 	check_flags = COVEN_CHECK_TORPORED
 	vitae_cost = 5
 	toggled = TRUE
-	cooldown_length = 30 SECONDS
+	cooldown_length = 3 SECONDS
 	duration_length = 3 SECONDS
-
-	violates_masquerade = TRUE
 
 	grouped_powers = list(
 		/datum/coven_power/bloodheal/one,
@@ -43,6 +41,7 @@
 	trigger_healing()
 
 /datum/coven_power/bloodheal/on_refresh()
+	. = ..()
 	trigger_healing()
 
 /datum/coven_power/bloodheal/proc/trigger_healing()
@@ -53,15 +52,19 @@
 	// Heal different damage types
 	owner.heal_overall_damage(bashing_lethal_heal, aggravated_heal)
 	owner.adjustToxLoss(-aggravated_heal * 0.5)
-	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume + vitae_cost-1, BLOOD_VOLUME_NORMAL)
+	owner.blood_volume = max(owner.blood_volume, min(BLOOD_VOLUME_NORMAL, owner.blood_volume + vitae_cost))
 
-	// Heal wounds (only at higher levels)
-	if(length(owner.get_wounds()))
-		var/wounds_to_heal = min(1, length(owner.get_wounds()))
-		for(var/i in 1 to wounds_to_heal)
-			var/datum/wound/wound = owner.get_wounds()[i]
-			wound.heal_wound(vitae_cost)
+	//this is quadratic so expect it to scale like crazy
+	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6)
+
+	if(level >= 3)
+		if(prob(20)) // 20% chance per pulse to show visible healing
+			owner.visible_message(
+				span_warning("[owner]'s wounds slowly knit themselves back together!"),
+				span_warning("Your flesh slowly regenerates!")
+			)
+			owner.vampire_undisguise()
+			do_masquerade_violation(owner)
 
 	// Brain damage healing (only at higher levels)
 	if(level >= 4)
@@ -77,14 +80,10 @@
 			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
+	if(level >= 7 && prob(5))
+		owner.regenerate_limb(silent = FALSE)
+
 	// Masquerade violation check
-	if(level >= 3)
-		if(prob(20)) // 20% chance per pulse to show visible healing
-			owner.visible_message(
-				span_warning("[owner]'s wounds slowly knit themselves back together!"),
-				span_warning("Your flesh slowly regenerates!")
-			)
-			owner.vampire_undisguise()
 
 	owner.update_damage_overlays()
 	owner.update_health_hud()
@@ -95,18 +94,16 @@
 	name = "Minor Bloodheal"
 	desc = "Slowly regenerate minor wounds using your vitae."
 	level = 1
-	vitae_cost = 5
+	vitae_cost = 6
 	duration_length = 4 SECONDS
-	violates_masquerade = FALSE
 
 //BLOODHEAL 2
 /datum/coven_power/bloodheal/two
 	name = "Bloodheal"
 	desc = "Regenerate wounds at a steady pace."
 	level = 2
-	vitae_cost = 8
+	vitae_cost = 9
 	duration_length = 3.5 SECONDS
-	violates_masquerade = FALSE
 
 //BLOODHEAL 3
 /datum/coven_power/bloodheal/three
@@ -143,7 +140,7 @@
 //BLOODHEAL 7
 /datum/coven_power/bloodheal/seven
 	name = "Grand Bloodheal"
-	desc = "Reconstruct your form from grievous damage."
+	desc = "Reconstruct entire limbs."
 	level = 7
 	vitae_cost = 25
 	duration_length = 1.5 SECONDS

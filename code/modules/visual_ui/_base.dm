@@ -253,7 +253,7 @@ GLOBAL_LIST_INIT(visual_ui_id_to_type, list())
 	name = "Undefined UI Element"
 	icon = 'icons/visual_ui/32x32.dmi'
 	icon_state = ""
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	plane = HUD_PLANE
 
 	var/datum/visual_ui/parent = null
@@ -375,7 +375,7 @@ GLOBAL_LIST_INIT(visual_ui_id_to_type, list())
 
 /obj/abstract/visual_ui_element/failsafe
 	icon_state = "blank"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /datum/visual_ui/proc/animate_elements(start_y_offset, end_y_offset, duration, on_complete)
 	for(var/obj/abstract/visual_ui_element/element in elements)

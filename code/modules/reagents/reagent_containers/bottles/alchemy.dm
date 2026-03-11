@@ -7,9 +7,11 @@
 
 /obj/item/reagent_containers/glass/bottle/healthpot
 	list_reagents = list(/datum/reagent/medicine/healthpot = 75)
+	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
 
 /obj/item/reagent_containers/glass/bottle/stronghealthpot
 	list_reagents = list(/datum/reagent/medicine/stronghealth = 75)
+	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
 
 /obj/item/reagent_containers/glass/bottle/manapot
 	list_reagents = list(/datum/reagent/medicine/manapot = 75)

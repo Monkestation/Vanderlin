@@ -11,7 +11,7 @@
 	wallclimb = TRUE
 	baseturfs = /turf/open/floor/naturalstone
 	above_floor = /turf/open/floor/naturalstone
-	opacity = 1
+	opacity = TRUE
 	density = TRUE
 	var/turf/open/floor/turf_type = /turf/open/floor/naturalstone
 	var/obj/item/mineralType = null

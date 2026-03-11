@@ -7,7 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/dendor)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	spell_cost = 15
 	item_duration = 1 MINUTES
 	cooldown_time = 4 MINUTES

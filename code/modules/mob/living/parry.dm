@@ -18,6 +18,9 @@
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
 		return FALSE
 
+	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
+		return FALSE
+
 	if(world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
 
@@ -290,8 +293,6 @@
 			src.visible_message("<span class='boldwarning'><b>[src]</b> blocks [user] with [W]!</span>")
 		else
 			src.visible_message("<span class='boldwarning'><b>[src]</b> parries [user] with [W]!</span>")
-		if(W.max_blade_int)
-			W.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 
 			// Check shield integrity
 			var/shieldur = round(((W.get_integrity() / W.max_integrity) * 100), 1)

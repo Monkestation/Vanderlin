@@ -65,6 +65,7 @@
 
 	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
+		spawned.honorary = spawned.pronouns == SHE_HER ? "Rejected Princess" : "Rejected Prince"
 
 	wretch_select_bounty(spawned)
 

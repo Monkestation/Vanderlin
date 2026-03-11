@@ -7,8 +7,8 @@
 	num_random_icons = 2
 	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = -100, "acid" = 50)
 	blade_dulling = DULLING_CUT
-	opacity = 1
-	density = 1
+	opacity = TRUE
+	density = TRUE
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
 	climbable = FALSE

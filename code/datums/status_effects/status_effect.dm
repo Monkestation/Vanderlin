@@ -36,7 +36,7 @@
 	var/list/effectedstats = list()
 
 	/// Variables to create a mob overlay if applicable
-	var/mob_overlay_icon
+	var/mob_overlay_icon = 'icons/mob/mob_effects.dmi'
 	var/mob_overlay_icon_state
 	var/mob_overlay_layer
 
@@ -136,9 +136,10 @@
 
 /// Gets and formats examine text associated with our status effect.
 /// Return 'null' to have no examine text appear (default behavior).
-/// Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves
-/datum/status_effect/proc/get_examine_text()
-	return null
+/// This can be used in two ways. Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves,
+/// or you can use the provided list of pronouns. See examine defines
+/datum/status_effect/proc/get_examine_text(mob/user, list/P)
+	return examine_text
 
 /// Called every tick.
 /datum/status_effect/proc/tick()

@@ -183,7 +183,7 @@ Reel teleports the attached atom to the grabbed turf.
 		success = TRUE
 		var/list/visible = getline(Tu, Tt)
 		for(var/turf/T in visible)
-			if(T.opacity || T.density && T != Tu)	//Any dense or opaque turfs
+			if(IS_OPAQUE_TURF(T) || T.density && T != Tu)	//Any dense or opaque turfs
 				success = FALSE
 				return success
 			for(var/obj/O in (T.contents + Tt.contents))

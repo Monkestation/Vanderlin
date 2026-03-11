@@ -69,13 +69,13 @@
 		var/mob/living/carbon/human/HU = user
 
 		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, "<span class='danger'>The rod doesn't obey me.</span>")
+			to_chat(user, span_danger("The rod doesn't obey me."))
 			return
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 
-			user.visible_message("<span class='warning'>[user] points [src] at [target].</span>")
+			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
 
 			if(H == HU)
 				return
@@ -116,6 +116,94 @@
 				to_chat(H, span_danger("I'm silenced by the scepter!"))
 				COOLDOWN_START(src, scepter, 10 SECONDS)
 				return
+
+//................ Staff of the Testimonium ............... //
+/obj/item/weapon/polearm/woodstaff/aries
+	name = "staff of the testimonium"
+	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
+	icon_state = "aries"
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	resistance_flags = FIRE_PROOF // Leniency for unique items
+	dropshrink = 0.6
+	sellprice = 100
+	possible_item_intents = list(POLEARM_BASH, /datum/intent/priest_smite, /datum/intent/priest_silence)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
+	var/static/list/rod_jobs_priest = null
+	COOLDOWN_DECLARE(staff)
+
+/datum/intent/priest_smite
+	name = "smite"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/datum/intent/priest_silence
+	name = "silence"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/obj/item/weapon/polearm/woodstaff/aries/afterattack(atom/target, mob/user, flag)
+	. = ..()
+	if(get_dist(user, target) > 7)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+
+
+	if(!ishuman(user))
+		return
+
+	var/mob/living/carbon/human/HU = user
+
+	if(!is_priest_job(HU.mind?.assigned_role))
+		to_chat(user, span_danger("The staff doesn't obey me."))
+		return
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+
+		user.visible_message(span_warning("[user] points [src] at [target]."))
+
+		if(H == HU)
+			return
+
+		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+			return
+
+		if(!rod_jobs_priest)
+			rod_jobs_priest = GLOB.church_positions | list(
+			/datum/job/monk::title,
+			/datum/job/templar::title,
+			/datum/job/churchling::title,
+			/datum/job/undertaker::title,
+			/datum/job/gmtemplar,
+			)
+
+		if(!((H.mind?.assigned_role.title in rod_jobs_priest)))
+			return
+
+		if(!COOLDOWN_FINISHED(src, staff))
+			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_smite))
+			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+			H.electrocute_act(5, src)
+			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm smitten by the staff!"))
+			COOLDOWN_START(src, staff, 20 SECONDS)
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_silence))
+			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+			H.set_silence(20 SECONDS)
+			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm silenced by the staff!"))
+			COOLDOWN_START(src, staff, 10 SECONDS)
 
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"
@@ -337,6 +425,8 @@
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
+
+	weapon_special = /datum/special_intent/upper_cut
 
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()

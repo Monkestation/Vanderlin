@@ -34,7 +34,8 @@
 
 /obj/item/organ/vocal_cords/harpy/Remove(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
 	. = ..()
-	M.adjust_skillrank(/datum/skill/misc/music, -1, TRUE)
+	if(!QDELING(M))
+		M.adjust_skillrank(/datum/skill/misc/music, -1, TRUE)
 
 /datum/action/item_action/organ_action/use/harpy_sing
 	name = "Harpy's song"

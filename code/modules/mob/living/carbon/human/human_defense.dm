@@ -263,8 +263,10 @@
 	return dna.species.spec_attacked_by(I, user, affecting, used_intent, src, useder, accurate)
 
 /mob/living/carbon/human/attack_hand(mob/user)
-	if(..())	//to allow surgery to return properly.
-		return
+	. = ..()
+	if(.)
+		return TRUE
+
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		dna.species.spec_attack_hand(H, src)
