@@ -76,6 +76,7 @@
 	backr = /obj/item/storage/backpack/satchel/surgbag/shit
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/keyring/bogwitch
+	beltl = /obj/item/weapon/knife/villager
 	shoes = /obj/item/clothing/shoes/boots/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather

@@ -385,3 +385,11 @@
 	sleeved = null
 	sleevetype = null
 	item_flags = ABSTRACT
+
+/obj/item/clothing/shirt/robe/bogwitch
+	name = "bog witch robes"
+	desc = "Lorum ipsum"
+	color = null
+	sleeved = null
+	sleevetype = null
+	misc_flags = CRAFTING_TEST_EXCLUDE

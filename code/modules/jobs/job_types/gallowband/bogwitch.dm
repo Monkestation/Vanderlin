@@ -70,10 +70,10 @@
 
 	// This is hopefully temporary, as I couldn't make a tgui input list trigger, and this proc always triggers before proceeding.
 	var/static/list/selectable = list(
-		"Generalist" = /obj/item/weapon/knife/dagger,
-		"Path of Bone" = /obj/item/weapon/knife/dagger,
-		"Path of Nature" = /obj/item/weapon/knife/dagger,
-		"Path of The Hunt" = /obj/item/weapon/knife/dagger,
+		"Generalist" = /obj/item/weapon/knife/villager,
+		"Path of Bone" = /obj/item/weapon/knife/villager,
+		"Path of Nature" = /obj/item/weapon/knife/villager,
+		"Path of The Hunt" = /obj/item/weapon/knife/villager,
 	)
 	var/chosen_path = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose a specialist path", title = "Specialist Path")
 
@@ -107,9 +107,9 @@
 
 /datum/outfit/bogwitch
 	name = JOB_BOGWITCH
-	head = /obj/item/clothing/head/wizhat/witch
+	head = /obj/item/clothing/head/wizhat/bogwitch
 	mask = /obj/item/clothing/face/spectacles
-	shirt = /obj/item/clothing/shirt/robe/colored/black
+	shirt = /obj/item/clothing/shirt/robe/bogwitch
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/storage/backpack/satchel/surgbag
 	ring = /obj/item/clothing/ring/amber

@@ -111,6 +111,12 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/wizhat/bogwitch
+	name = "bog witch hat"
+	desc = "Lorum ipsum"
+	icon_state = "bogwitch"
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/head/wizhat/gen
 	icon_state = "wizardhatgen"
 
