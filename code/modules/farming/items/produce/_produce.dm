@@ -97,7 +97,7 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/oat
 	seed = /obj/item/neuFarm/seed/oat
 	name = "oat grain"
-	desc = "A staple grain. Used to create oatmeal, and to feed saigas and horses."
+	desc = "A staple grain. Used to create oatmeal, and to feed saigas."
 	icon_state = "oat"
 	gender = PLURAL
 	filling_color = "#b1d179"

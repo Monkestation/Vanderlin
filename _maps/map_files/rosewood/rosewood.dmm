@@ -9960,7 +9960,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/tabard,
 /obj/item/weapon/polearm/spear/bronze{
-	desc = "A bronze lance designed for horse riding combat. May the ten forgive anyone on the opposite end of this lance.";
+	desc = "A bronze lance designed for mounted combat. May the ten forgive anyone on the opposite end of this lance.";
 	name = "Bronze Lance"
 	},
 /turf/open/floor/cobblerock,
@@ -24448,7 +24448,7 @@
 /obj/item/clothing/cloak/tabard,
 /obj/item/weapon/polearm/spear/bronze{
 	name = "Bronze Lance";
-	desc = "A bronze lance designed for horse riding combat. May the ten forgive anyone on the opposite end of this lance."
+	desc = "A bronze lance designed for mounted riding combat. May the ten forgive anyone on the opposite end of this lance."
 	},
 /turf/open/floor/cobblerock,
 /area/under/town/basement)

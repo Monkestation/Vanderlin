@@ -358,7 +358,7 @@
 
 /datum/backstory/labor/tamer
 	name = "Beast Tamer"
-	desc = "You trained animals, from horses to more exotic beasts."
+	desc = "You trained animals, from saiga to more exotic beasts."
 	granted_skill = /datum/skill/labor/taming
 	stat_penalty = STATKEY_STR
 
@@ -397,7 +397,7 @@
 	stat_penalty = STATKEY_SPD
 
 /datum/backstory/misc/rider
-	name = "Horse Trainer"
+	name = "Saiga Trainer"
 	desc = "You rode and trained mounts for nobles and soldiers."
 	granted_skill = /datum/skill/misc/riding
 	stat_penalty = STATKEY_INT
