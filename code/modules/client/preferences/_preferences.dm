@@ -1726,8 +1726,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					var/loadout_number = href_list["loadout_number"]
 					// Re-validate on submission in case of href manipulation
 					var/datum/loadout_item/chosen = loadouts_available[loadout_input]
-					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[loadout_input]
-					if(chosen && !chosen_singleton.is_unlocked_for(user.client))
+					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[chosen]
+					if(!chosen || !chosen_singleton)
+						to_chat(user, span_warning("Error selecting [loadout_input] for loadout."))
+						return
+					if(!chosen_singleton.is_unlocked_for(user.client))
 						to_chat(user, span_warning("You haven't unlocked that loadout item yet."))
 						return
 					set_loadout(user, loadout_number, chosen)
@@ -2196,6 +2199,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					return
 
 				if("save")
+					to_chat(user, span_info("Preferences Saved."))
 					save_preferences()
 					save_character()
 					if(isnewplayer(user))

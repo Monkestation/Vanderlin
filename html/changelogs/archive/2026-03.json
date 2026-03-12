@@ -321,5 +321,38 @@
                 "rscadd": "Dungeoneer, Noble, Veteran, Matron, Court Physician, Bard, and Fisher can now all be played two(or more) rounds in a row without spending triumphs."
             }
         ]
+    },
+    "2026-03-10": {
+        "Draggeru": [
+            {
+                "map": "adds the bog witch hut"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed psydonian language font"
+            },
+            {
+                "bugfix": "Fixed self feinting when interacting with inventory"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Priest verbs are now controlled from an action button."
+            },
+            {
+                "code_imp": "The cancel checks (needing to be in the prayer hall) now happen before you try and do something, not after."
+            }
+        ]
+    },
+    "2026-03-11": {
+        "ModDownloading": [
+            {
+                "rscdel": "Removed the paper from the Heartfelt Lord migrant and Heartfelt Hand pilgrim saying they could be here for diplomatic or trade purposes. They had to come to grips with their ruined homeland eventually."
+            },
+            {
+                "bugfix": "Changed references to a lot of non-canonical locations and events in item descriptions."
+            }
+        ]
     }
 }

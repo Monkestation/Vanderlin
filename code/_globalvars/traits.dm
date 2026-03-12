@@ -109,6 +109,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Brushwalker" = TRAIT_BRUSHWALK,
 		"Dead Nose" = TRAIT_DEADNOSE,
 		"High Jumping" = TRAIT_ZJUMP,
+		"Flip Jumping" = TRAIT_FLIP_JUMP,
 		"Jesterophobia" = TRAIT_JESTERPHOBIA,
 		"Xenophobia" = TRAIT_XENOPHOBIC,
 		"Tolerant" = TRAIT_TOLERANT,

@@ -1,1 +1,0 @@
-{"author":"realforest2001","delete-after":true,"changes":[{"rscadd":"Priest verbs are now controlled from an action button."},{"code_imp":"The cancel checks (needing to be in the prayer hall) now happen before you try and do something, not after."}]}
