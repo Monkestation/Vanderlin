@@ -256,6 +256,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DENDOR_STINGING "trait_dendor_stinging"
 #define TRAIT_DENDOR_DEVOURING "trait_dendor_devouring"
 #define TRAIT_DENDOR_LORDING "trait_dendor_lording"
+/// Malum Patron Trait Buff
+#define TRAIT_MALUM_ANVIL "trait_malum_anvil"
 /// trait that makes you bounce when speaking
 #define TRAIT_SHAKY_SPEECH "Shaky Speech"
 /// Allows for offhand weapon usage

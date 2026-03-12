@@ -456,6 +456,16 @@
 	desc = span_notice("I am inspired to create!")
 	icon_state = "malum_buff"
 
+/datum/status_effect/buff/malum_anvil
+	id = "anvil_buff_malum"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
+	duration = 13 SECONDS
+	effectedstats = list(STATKEY_CON = 2, STATKEY_SPD = -2) // Anvils do not move that fast
+
+/atom/movable/screen/alert/status_effect/buff/malum_anvil
+	name = "TODO ANVIL NAME"
+	desc = span_notice("I LOVE ANVILS!")
+	icon_state = "malum_buff"
 
 /*-----------------\
 |   Inhumen Miracles |
