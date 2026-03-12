@@ -459,8 +459,16 @@
 /datum/status_effect/buff/malum_anvil
 	id = "anvil_buff_malum"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
-	duration = 13 SECONDS
+	duration = 13 MINUTES //change to seconds
 	effectedstats = list(STATKEY_CON = 2, STATKEY_SPD = -2) // Anvils do not move that fast
+
+/datum/status_effect/buff/malum_anvil/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_MALUM_ANVIL, TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/buff/malum_anvil/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_MALUM_ANVIL, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/malum_anvil
 	name = "TODO ANVIL NAME"

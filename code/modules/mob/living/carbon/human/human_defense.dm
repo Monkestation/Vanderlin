@@ -193,6 +193,8 @@
 
 /mob/living/carbon/human/proc/check_block()
 	if(mind)
+		if(HAS_TRAIT(src, TRAIT_MALUM_ANVIL)) //Cannot be shoved
+			return TRUE
 		if(mind.martial_art && prob(mind.martial_art.block_chance) && mind.martial_art.can_use(src) && in_throw_mode && !incapacitated(IGNORE_GRAB))
 			return TRUE
 	return FALSE

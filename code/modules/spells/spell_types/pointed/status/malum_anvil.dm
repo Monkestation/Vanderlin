@@ -1,4 +1,4 @@
-/datum/action/cooldown/spell/status/vigorous_craft
+/datum/action/cooldown/spell/status/malum_anvil
 	name = "Malum's Anvil MAKE NAME"
 	desc = ""
 	button_icon_state = "craft_buff"
@@ -20,10 +20,9 @@
 
 	status_effect = /datum/status_effect/buff/malum_anvil
 
-/datum/action/cooldown/spell/status/vigorous_craft/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/status/malum_anvil/cast(mob/living/cast_on)
 	. = ..()
 	if(cast_on == owner)
-		ADD_TRAIT(cast_on, TRAIT_MALUM_ANVIL, REF(src))
 		cast_on.visible_message( //TODO messages
 			"<font color='yellow'>Vibrant flames swirl around [owner].</font>",
 			"<font color='yellow'>Vibrant flames swirl around you, energizing your mind and muscles.</font>"
@@ -31,10 +30,7 @@
 		return
 	if(isliving(owner))
 		var/mob/living/L = owner
-		ADD_TRAIT(cast_on, TRAIT_MALUM_ANVIL, REF(src))
 		cast_on.visible_message( //TODO messages
 			"<font color='yellow'>Vibrant flames swirl around [cast_on] as a dance of energy flows from [owner].</font>",
 			"<font color='yellow'>A dance of energy flows from [owner], fueling vibrant flames that energize your mind and muscles.</font>"
 		)
-
-//TODO Proc for removing traits when duration ends

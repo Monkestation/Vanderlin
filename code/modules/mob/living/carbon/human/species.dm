@@ -1651,7 +1651,10 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			var/balance = 10
 			target.next_attack_msg.Cut()
 			var/nodmg = FALSE
-			if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
+			if(HAS_TRAIT(target, TRAIT_MALUM_ANVIL))
+				nodmg = TRUE
+				target.next_attack_msg += " <span class='warning'>But there is no effect.</span>"
+			else if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 				nodmg = TRUE
 				target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			else
@@ -1737,7 +1740,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				log_combat(user, target, "kicked", "onto [target_table] (table)")
 			else if(target_collateral_mob)
 				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
-				target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
+				if(!HAS_TRAIT(target_collateral_mob, TRAIT_MALUM_ANVIL)) // You are up against the wall and I AM THE FUCKING WALL
+					target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name] into [target_collateral_mob.name]!</span>",
 					"<span class='danger'>I'm kicked into [target_collateral_mob.name] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name] into [target_collateral_mob.name]!</span>")
@@ -1756,6 +1760,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/damage = user.get_kick_damage(1.4)
 		var/damage_blocked = FALSE
 
+		if(HAS_TRAIT(target, TRAIT_MALUM_ANVIL))
+			damage_blocked = TRUE
+			target.next_attack_msg += " <span class='warning'>But there is no effect.</span>"
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 			damage_blocked = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
