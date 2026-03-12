@@ -406,6 +406,32 @@
 	faretype = FARE_NEUTRAL
 	portable = FALSE
 
+/*	.............   Cocaumole   ................ */
+
+/obj/item/reagent_containers/food/snacks/cocaumole
+	name = "cocaumole"
+	icon_state = "cocuamole"
+	desc = "The delicious gooey inside of a cocuado. Makes for great topping."
+	bitesize = 3
+	slices_num = 3
+	slice_batch = TRUE
+	slice_path = /obj/item/reagent_containers/food/snacks/cocaumole/slice
+	nutrition = COOKED_VEGGIE_NUTRITION
+	foodtype = VEGETABLES
+	tastes = list("savory goo" = 1)
+	rotprocess = SHELFLIFE_DECENT
+	faretype = FARE_NEUTRAL
+	portable = FALSE
+
+/obj/item/reagent_containers/food/snacks/cocaumole/slice
+	name = "cocaumole slice"
+	icon_state = "cocuamole_slice"
+	bitesize = 1
+	slices_num = null
+	slice_batch = FALSE
+	slice_path = null
+	nutrition = COOKED_VEGGIE_NUTRITION/3
+
 /*---------------\
 | Chicken meals |
 \---------------*/

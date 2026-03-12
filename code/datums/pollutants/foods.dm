@@ -12,6 +12,14 @@
 	name = "apple pie"
 	scent = "apple pie"
 
+/datum/pollutant/food/blackberry_pie
+	name = "blackberry pie"
+	scent = "blackberry pie"
+
+/datum/pollutant/food/raspberry_pie
+	name = "raspberry pie"
+	scent = "raspberry pie"
+
 /datum/pollutant/food/pear_pie
 	name = "pear pie"
 	scent = "pear pie"

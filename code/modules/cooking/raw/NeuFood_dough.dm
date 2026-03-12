@@ -79,6 +79,88 @@
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
 
+/*	.................   Sunreed Dough   ................... */
+/obj/item/reagent_containers/food/snacks/masa_base
+	name = "unfinished sunreed dough"
+	desc = "Through innovation, folk survive. They always do."
+	icon_state = "masa_base"
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = FLOUR_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_LONG
+	foodtype = GRAIN | RAW
+	tastes = list("semi-sweet dough" = 1)
+
+/obj/item/reagent_containers/food/snacks/masa
+	name = "sunreed dough"
+	desc = "Survive long enough, and prosper. Or at least something close."
+	icon_state = "masa"
+	slices_num = 2
+	slice_batch = TRUE
+	slice_path = /obj/item/reagent_containers/food/snacks/masa_slice
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+	slice_sound = TRUE
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = DOUGH_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_LONG
+	foodtype = GRAIN | RAW
+	tastes = list("semi-sweet dough" = 1)
+
+/obj/item/reagent_containers/food/snacks/masa_slice
+	name = "sunreed dough piece"
+	desc = "A fraction of hope for something greater."
+	icon_state = "masa_slice"
+	w_class = WEIGHT_CLASS_NORMAL
+	slices_num = 0
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = SMALLDOUGH_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_LONG
+	foodtype = GRAIN | RAW
+	tastes = list("semi-sweet dough" = 1)
+
+/obj/item/reagent_containers/food/snacks/masa_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	if(.)
+		return
+	if(user.mind)
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+	var/found_table = locate(/obj/structure/table) in (loc)
+	if(istype(I, /obj/item/kitchen/rollingpin))
+		if(isturf(loc)&& (found_table))
+			playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+			to_chat(user, span_notice("Flattening [src]..."))
+			if(do_after(user,long_cooktime, src))
+				new /obj/item/reagent_containers/food/snacks/masa_flat(loc)
+				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.nobles_seen_servant_work()
+				qdel(src)
+		else
+			to_chat(user, span_warning("Put [src] on a table before working it!"))
+		return TRUE
+	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+/obj/item/reagent_containers/food/snacks/masa_flat
+	name = "sunreed flat-cake"
+	desc = "Something to keep our future safe."
+	icon_state = "masa_flat"
+	dropshrink = 0.9
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = SMALLDOUGH_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_LONG
+	foodtype = GRAIN | RAW
+	tastes = list("semi-sweet dough" = 1)
+
 /*------------\
 | Butterdough |
 \------------*/
@@ -230,7 +312,7 @@
 /obj/item/reagent_containers/food/snacks/bread/on_consume(mob/living/eater)
 	..()
 	if(slices_num)
-		if(bitecount >= 5)
+		if(bitecount >= bitesize)
 			changefood(slice_path, eater)
 		else
 			slices_num--
@@ -372,6 +454,356 @@
 
 /obj/item/reagent_containers/food/snacks/breadslice/raisin/poison
 	list_reagents = list(/datum/reagent/berrypoison = 5)
+
+/*	.................   Bookbread   ................... */
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread
+	name = "bookbread"
+	desc = "On the days when Noc's reign lengthens to its apex, all proper Ten fearing folk huddle by their warm hearths, exchanging both books and pastries such as this."
+	icon_state = "bookbread"
+	base_icon_state = "bookbread"
+	dropshrink = 0.8
+	bitesize = 4
+	slices_num = 5
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice
+	become_rot_type = null
+
+	nutrition = BOOKBREAD_NUTRITION
+	faretype = FARE_NEUTRAL
+	rotprocess = null
+	foodtype = GRAIN | DAIRY
+	tastes = list("chewy butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice
+	name = "sliced bookbread"
+	desc = "About the same size and taste as an encyclopedia."
+	icon_state = "bookbread_slice"
+	dropshrink = 0.8
+
+	nutrition = BOOKBREADSLICE_NUTRITION
+	faretype = FARE_NEUTRAL
+	rotprocess = null
+	foodtype = GRAIN | DAIRY
+	tastes = list("chewy butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
+	if(modified || !is_type_in_list(I, list(
+		/obj/item/reagent_containers/food/snacks/butterslice)))
+		return ..()
+	var/obj/item/reagent_containers/food/snacks/S = I
+	var/cooking = 5 SECONDS - (user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8
+	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
+	if(!do_after(user, cooking, src, display_over_user=TRUE))
+		return FALSE
+	modified = TRUE
+	user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+	user.nobles_seen_servant_work()
+	S.reagents?.trans_to(src, S.reagents.total_volume)
+	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition)
+	tastes |= S.tastes
+
+	name = "buttered [name]"
+	add_overlay("bookbread_buttered")
+	qdel(I)
+	return ..()
+
+/*	.................   Raspberry Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/raspberrybutterdough
+	name = "raspberry butterdough"
+	icon_state = "butterdough_raspberry"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried raspberries" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/raspberry
+	name = "raspberry bookbread"
+	desc = "Spending the long cold months in academic rather than intimate pursuit is preferable for most devout Noccians."
+	icon_state = "raspberry_bookbread"
+	base_icon_state = "raspberry_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/raspberry
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried raspberries" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/raspberry
+	name = "sliced raspberry bookbread"
+	desc = "Has a taste that puts one in the mood for a good romance novel. For obvious reasons, this flavor isnt very popular with mages."
+	icon_state = "raspberry_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried raspberries")
+
+/*	.................   Raisin Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/jacksberrybutterdough
+	name = "raisin butterdough"
+	icon_state = "butterdough_jacksberry"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + RAISIN_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "raisins" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry
+	name = "raisin bookbread"
+	desc = "As Nocsmas gained broader appeal, more and more commonfolk with poor access to books instead chose to simply forego their exchanging, focusing instead on the preparation of food."
+	icon_state = "jacksberry_bookbread"
+	base_icon_state = "jacksberry_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/jacksberry
+
+	nutrition = BOOKBREAD_NUTRITION + RAISIN_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "raisins" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/jacksberry
+	name = "sliced raisin bookbread"
+	desc = "Has an earthy taste that reminds the eater of growth cycles and rainfall percentages. Like a delicious almanac."
+	icon_state = "jacksberry_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + RAISIN_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "raisins")
+
+/*	.................   Raisin Bookbread (Poison)  ................... */
+/obj/item/reagent_containers/food/snacks/jacksberrybutterdough/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/jacksberry/poison
+	list_reagents = list(/datum/reagent/berrypoison = 5)
+
+/*	.................   Blackberry Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/blackberrybutterdough
+	name = "blackberry butterdough"
+	icon_state = "butterdough_blackberry"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried blackberries" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/blackberry
+	name = "blackberry bookbread"
+	desc = "Following Zizo's ascension, the great exchanging of books has met steady decline, as neighbor suspects neighbor more and more."
+	icon_state = "blackberry_bookbread"
+	base_icon_state = "blackberry_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/blackberry
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried blackberries" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/blackberry
+	name = "sliced blackberry bookbread"
+	desc = "It evokes a feeling of oncoming horror and dread, not unlike novels that may foretell a doom similar to what befell this very berry."
+	icon_state = "blackberry_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried blackberries")
+
+/*	.................   Pear Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/pearbutterdough
+	name = "pear butterdough"
+	icon_state = "butterdough_pear"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried pears" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/pear
+	name = "pear bookbread"
+	desc = "Children on Nocsmas are traditionally granted both book and pastry without expectation of exchange, this variety is prefered by most little ones."
+	icon_state = "pear_bookbread"
+	base_icon_state = "pear_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/pear
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried pears" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/pear
+	name = "sliced pear bookbread"
+	desc = "Evokes the sweetness of younger, simpler times, and simpler books."
+	icon_state = "pear_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried pears")
+
+/*	.................   Tangerine Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/tangerinebutterdough
+	name = "tangerine butterdough"
+	icon_state = "butterdough_tangerine"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried tangerines" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/tangerine
+	name = "tangerine bookbread"
+	desc = "Even the coldest, darkest nites end eventually. Better to weather them with friends than to hide away."
+	icon_state = "tangerine_bookbread"
+	base_icon_state = "tangerine_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/tangerine
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried tangerines" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/tangerine
+	name = "sliced tangerine bookbread"
+	desc = "Fills one with heroic vigor and hopeful enthusiasm, similar to historic-fantasies of old."
+	icon_state = "tangerine_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried tangerines")
+
+/*	.................   Plum Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/plumbutterdough
+	name = "plum butterdough"
+	icon_state = "butterdough_plum"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried plums" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/plum
+	name = "plum bookbread"
+	desc = "The origin of Nocsmas are shrouded in mystery, perhaps intentionally so, though some theorize it may have had its origins as an originally Psydonian holiday."
+	icon_state = "plum_bookbread"
+	base_icon_state = "plum_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/plum
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried plums" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/plum
+	name = "sliced plum bookbread"
+	desc = "A subtle flavor, best for enjoying subtler books. Mysteries prefered."
+	icon_state = "plum_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried plums")
+
+/*	.................   Lemon Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/lemonbutterdough
+	name = "lemon butterdough"
+	icon_state = "butterdough_lemon"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | FRUIT
+	tastes = list("buttery dough" = 1, "dried lemons" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/lemon
+	name = "lemon bookbread"
+	desc = "Though many followers of Z find the holiday laughable, it's undeniably an important respite from the doom and gloom of the darkest month."
+	icon_state = "lemon_bookbread"
+	base_icon_state = "lemon_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/lemon
+
+	nutrition = BOOKBREAD_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried lemons" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/lemon
+	name = "sliced lemon bookbread"
+	desc = "Sweet but a little sour, like a good Xylixian comedy."
+	icon_state = "lemon_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + DRIEDFRUIT_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | FRUIT
+	tastes = list("chewy butterdough" = 1, "dried lemons")
+
+/*	.................   Chocolate Bookbread   ................... */
+/obj/item/reagent_containers/food/snacks/chocolatebutterdough
+	name = "chocolate butterdough"
+	icon_state = "butterdough_chocolate"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_POOR
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | SUGAR
+	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/bread/bookbread/chocolate
+	name = "chocolate bookbread"
+	desc = "Nocsmas is not only a holiday for children and commoners, for Noccians are found most concentrated in the upper echelons of society. For these academics, it provies a much needed opportunity to share their secrets."
+	icon_state = "chocolate_bookbread"
+	base_icon_state = "chocolate_bookbread"
+	slice_path = /obj/item/reagent_containers/food/snacks/bookbreadslice/chocolate
+
+	nutrition = BOOKBREAD_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_LAVISH
+	foodtype = GRAIN | DAIRY | SUGAR
+	tastes = list("chewy butterdough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/bookbreadslice/chocolate
+	name = "sliced chocolate bookbread"
+	desc = "As thick and bitter as a book of law."
+	icon_state = "chocolate_bookbread_slice"
+
+	nutrition = BOOKBREADSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_LAVISH
+	foodtype = GRAIN | DAIRY | SUGAR
+	tastes = list("chewy butterdough" = 1, "rich chocolate")
 
 /*-----------\
 | Bread buns |
@@ -963,7 +1395,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake
 	name = "griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite their prevalence no one quite knows the origin."
 	bitesize = 6
 	icon_state = "griddlecake"
 	tastes = list("fluffy butterdough" = 1)
@@ -985,7 +1417,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/lemon
 	name = "lemon griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite their prevalence no one quite knows the origin."
 	bitesize = 6
 	icon_state = "griddlecakelemon"
 	tastes = list("fluffy butterdough" = 1, "sweet" = 1, "lemon" = 1)
@@ -1008,7 +1440,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	name = "apple griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite their prevalence no one quite knows the origin."
 	bitesize = 6
 	icon_state = "griddlecakeapple"
 	tastes = list("fluffy butterdough" = 1, "sweet" = 1, "apple" = 1)
@@ -1031,7 +1463,7 @@
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	name = "jacksberry griddlecake"
-	desc = "Enjoyed by mercenaries throughout Psydonia, though despite its prevalence no one quite knows its origin."
+	desc = "Enjoyed by mercenaries throughout Psydonia, though despite their prevalence no one quite knows the origin."
 	bitesize = 6
 	icon_state = "griddlecakeberry"
 	tastes = list("fluffy butterdough" = 1, "sweet" = 1, "berry" = 1)

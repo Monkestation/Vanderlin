@@ -56,6 +56,22 @@
 	overlay_state = "fill_pot"
 	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/pot_pie
 
+/datum/orderless_slapcraft/food/pie/blackberry
+	name = "Unbaked Blackberry Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/blackberry = 3
+	)
+	overlay_state = "fill_blackberry"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/blackberry
+
+/datum/orderless_slapcraft/food/pie/raspberry
+	name = "Unbaked Raspberry Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/raspberry = 3
+	)
+	overlay_state = "fill_raspberry"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/raspberry
+
 /datum/orderless_slapcraft/food/pie/apple
 	name = "Unbaked Apple Pie"
 	requirements = list(

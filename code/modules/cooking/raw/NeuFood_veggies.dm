@@ -57,3 +57,29 @@
 	rotprocess = null
 	eat_effect = /datum/status_effect/buff/foodbuff
 	faretype = FARE_NEUTRAL
+
+/*	..................	Cocaudo Half	................... */
+
+/obj/item/reagent_containers/food/snacks/veg/cocaudo_half
+	name = "cocaudo half"
+	icon_state = "cocaudo_split"
+	tastes = list("savory goo" = 1)
+	trash = /obj/item/reagent_containers/glass/cup/cocaudo_husk
+
+/obj/item/reagent_containers/food/snacks/veg/cocaudo_half/attackby(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	if(.)
+		return
+	if(user.mind)
+		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+	if(istype(I, /obj/item/kitchen/spoon))
+		playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+		to_chat(user, span_notice("Scooping out the [src]..."))
+		if(do_after(user, short_cooktime, src))
+			new /obj/item/reagent_containers/glass/cup/cocaudo_husk(loc)
+			new /obj/item/neuFarm/seed/cocaudo(loc)
+			new /obj/item/neuFarm/seed/cocaudo(loc)
+			new /obj/item/reagent_containers/food/snacks/cocaumole(loc)
+			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.nobles_seen_servant_work()
+			qdel(src)

@@ -505,6 +505,36 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustToxLoss(5)
 	return ..()
 
+/datum/reagent/drowsbane
+	name = "Drowsbane"
+	description = ""
+	reagent_state = LIQUID
+	color = "#810e0e"
+	taste_description = "each tastebud individually burning to a crisp"
+	scent_description = "brimstone"
+	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	var/tox = 1
+	var/oxy = 5
+
+/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M)
+	if(volume > 0.09)
+		if(istiefling(M))
+			M.adjustBruteLoss(-1*REM)
+			M.adjustFireLoss(-1*REM)
+		if(isdarkelf(M))
+			M.adjustToxLoss(tox)
+			M.adjustOxyLoss(oxy)
+			if(prob(10))
+				M.adjust_eye_blur(4 SECONDS)
+				to_chat(M, span_warning("My eyes water..."))
+				M.emote("cough")
+			if(prob(10))
+				M.emote("gasp")
+				to_chat(M, span_warning("My throat feels like it's on fire!"))
+		else
+			M.adjustOxyLoss(oxy/2)
+	return ..()
+
 /*----------\
 |Ingredients|
 \----------*/

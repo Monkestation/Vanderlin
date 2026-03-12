@@ -117,6 +117,20 @@
 	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/pot/good
 	cooked_smell = /datum/pollutant/food/pot_pie
 
+/datum/container_craft/oven/pie/blackberry
+	name = "Blackberry Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/blackberry = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/blackberry
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/blackberry
+	cooked_smell = /datum/pollutant/food/blackberry_pie
+
+/datum/container_craft/oven/pie/raspberry
+	name = "Raspberry Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/raspberry = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry
+	cooked_smell = /datum/pollutant/food/raspberry_pie
+
 /datum/container_craft/oven/pie/apple
 	name = "Apple Pie"
 	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/apple = 1)
@@ -150,6 +164,66 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/dough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread
 	cooked_smell = /datum/pollutant/food/bread
+
+/datum/container_craft/oven/bookbread
+	name = "Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/butterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/raspberrybookbread
+	name = "Raspberry Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raspberrybutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/raspberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/jacksberrybookbread
+	name = "Raisin Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/jacksberrybutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/poisonjacksberrybookbread
+	name = "Raisin Bookbread (Poison)"
+	requirements = list(/obj/item/reagent_containers/food/snacks/jacksberrybutterdough/poison = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry/poison
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/blackberrybookbread
+	name = "Blackberry Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/blackberrybutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/blackberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/pearbookbread
+	name = "Pear Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/pearbutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/pear
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/tangerinebookbread
+	name = "Tangerine Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/tangerinebutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/tangerine
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/plumbookbread
+	name = "Plum Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/plumbutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/plum
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/lemonbookbread
+	name = "Lemon Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/lemonbutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/lemon
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/chocolatebookbread
+	name = "Chocolate Bookbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/chocolatebutterdough = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/chocolate
+	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/bun
 	name = "Bun"
