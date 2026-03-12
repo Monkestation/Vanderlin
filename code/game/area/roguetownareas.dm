@@ -208,7 +208,7 @@
 /area/outdoors/bog/e_highroad
 	name = "the eastern highroad"
 	first_time_text = "THE EASTERN HIGHROAD"
-	custom_area_sound = 'sound/misc/stings/generic.ogg'
+	custom_area_sound = 'sound/misc/stings/RosewoodSting.ogg'
 
 /area/outdoors/bog/w_highroad
 	name = "the western highroad"
