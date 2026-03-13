@@ -103,51 +103,55 @@
 	reflective_icon.filters += filter(type = "alpha", icon = I)
 	add_overlay(reflective_icon)
 
-/mob/living/onZImpact(turf/T, levels)
-	if(SEND_SIGNAL(src, COMSIG_MOB_FALL_IMPACT, levels))
-		return
+/mob/living/onZImpact(turf/impacted_turf, levels, impact_flags = NONE)
+	if(!isgroundlessturf(impacted_turf))
+		impact_flags |= ZImpactDamage(impacted_turf, levels)
 
-	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
-		return
+		if(impact_flags & ZIMPACT_CANCEL_DAMAGE)
+			new /obj/effect/temp_visual/mook_dust/small(impacted_turf)
+			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
+				visible_message(span_danger("[src] gracefully lands on [impacted_turf]!"))
+		else
+			var/points = "!"
+			for(var/i in 1 to (levels / 2))
+				points += "!"
+			visible_message(span_danger("[src] crashes into [impacted_turf][points]"), span_danger("I crash into [impacted_turf][points]"))
 
-	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
-		if(levels <= 2)
-			return
+	impact_flags |= ZIMPACT_NO_MESSAGE | ZIMPACT_NO_SPIN // living mobs has its own messages
 
-	if(movement_type & (FLYING|FLOATING))
-		to_chat(src, span_info("You glide down to a more manageable height."))
-		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
-		return
+	for(var/mob/living/crumpled_mob in impacted_turf)
+		if(crumpled_mob == src)
+			continue
+		visible_message("[src] falls on top of [crumpled_mob]!")
+		crumpled_mob.Stun(1)
+		crumpled_mob.AdjustKnockdown(levels * 20)
+		crumpled_mob.take_overall_damage(levels * 10 * 3.5)
 
-	var/dex_save = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)
-	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
+	return ..()
+
+/mob/living/proc/ZImpactDamage(turf/impacted_turf, levels)
+	. = SEND_SIGNAL(src, COMSIG_LIVING_Z_IMPACT, levels, impacted_turf)
+	if(. & ZIMPACT_CANCEL_DAMAGE)
+		return .
+	var/can_brace_fall = (!incapacitated(IGNORE_RESTRAINTS) && body_position == STANDING_UP)
+	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2) && can_brace_fall)
+		return . | ZIMPACT_CANCEL_DAMAGE
+	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels <= 2)
+		return . | ZIMPACT_CANCEL_DAMAGE
+
+	if(can_brace_fall && GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing) >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
 			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
 			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
-			return
-
-	var/points
-	for(var/i in 2 to levels)
-		i++
-		points += "!"
-	visible_message(span_danger("[src] falls down[points]"), span_danger("I fall down[points]"))
+			return . | ZIMPACT_CANCEL_DAMAGE
 	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
-	if(!isgroundlessturf(T))
-		ZImpactDamage(T, levels)
-		record_round_statistic(STATS_MOAT_FALLERS)
-
-	return ..()
-
-/mob/living/proc/ZImpactDamage(turf/T, levels)
-	if(!density)
-		visible_message("<span class='notice'>The creature lands unharmed...</span>")
-		return
-	// Sigmoid maps tiers to ~0.001-0.971, so range is ~0.5 to ~0.986 (was 0.5 to 1.0)
-	var/encumberance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5)
-	adjustBruteLoss(((levels * 10) * encumberance_multiplier) ** 1.5)
-	AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
-	AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
+	if(!iscarbon(src)) // carbons need to do their own damage calculations based on bodyparts
+		var/encumberance_multiplier = 0.5 * (get_encumbrance() + 1) // half base falling damage. scale up to 100% based on encumberance
+		adjustBruteLoss(((levels * 10) * encumberance_multiplier) ** 1.5)
+		AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
+		AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
+	return .
 
 /mob/living/proc/OpenCraftingMenu()
 	return
@@ -520,7 +524,7 @@
 			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(used_limb))
 			C.grabbedby += O
 			O.grabbed = C
-			O.grabbee = src
+			O.set_grabber(src)
 			O.limb_grabbed = BP
 			BP.grabbedby += O
 			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
@@ -540,7 +544,7 @@
 			var/obj/item/grabbing/O = new()
 			O.name = "[M.name]"
 			O.grabbed = M
-			O.grabbee = src
+			O.set_grabber(src)
 			if(item_override)
 				O.sublimb_grabbed = item_override
 			else
@@ -561,7 +565,7 @@
 		var/obj/item/grabbing/O = new(src)
 		O.name = "[AM.name]"
 		O.grabbed = AM
-		O.grabbee = src
+		O.set_grabber(src)
 		src.put_in_hands(O)
 		O.update_hands(src)
 		O.update_grab_intents()
@@ -658,10 +662,6 @@
 	if(pulling_broke_free && ismob(pulling))
 		var/wrestling_cooldown_reduction = 0.1 SECONDS * GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
 		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
-
-	for(var/obj/item/grabbing/grabber_item in held_items)
-		if(grabber_item.grabbed == pulling)
-			dropItemToGround(grabber_item, silent = FALSE)
 
 	if(ismob(pulling))
 		reset_pull_offsets(pulling)
@@ -1131,18 +1131,17 @@
 	if(pixelshifted)
 		update_pixelshift(T, newloc, direct)
 
-	if(lying_angle)
-		if(direct & EAST)
-			lying_angle = 90
-		if(direct & WEST)
-			lying_angle = 270
-		update_transform()
-		lying_prev = lying_angle
+	if(lying_angle != 0)
+		lying_angle_on_movement(direct)
+
 	if (buckled && buckled.loc != newloc) //not updating position
 		if (!buckled.anchored)
-			return buckled.Move(newloc, direct, glide_size)
-		else
-			return FALSE
+			var/atom/movable/cached_buckled = buckled
+			buckled.moving_from_pull = moving_from_pull
+			. = buckled.Move(newloc, direct, glide_size)
+			if(!QDELETED(cached_buckled)) // EXPERIMENTAL: buckled being nulled after moving
+				cached_buckled.moving_from_pull = null
+		return
 
 	if(pulling)
 		update_pull_movespeed()
@@ -1152,23 +1151,20 @@
 	update_sneak_invis()
 
 	// Complete and utter shitcode, make sure conditions match those in /client/proc/Process_Grab()
-	if(. && client && isliving(pulledby) && pulledby != pulling && pulledby.cmode && pulledby.grab_state == GRAB_PASSIVE) //NICHE case of being in a first tier grab state.
-		if(pulledby.anchored)
-			pulledby.stop_pulling()
-		else
-			var/pull_dir = get_dir(src, pulledby)
-			//puller and pullee more than one tile away or in diagonal position
-			if(get_dist(src, pulledby) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
-				pulledby.moving_from_pull = src
-				pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
-				pulledby.moving_from_pull = null
+	// if(. && client && isliving(pulledby) && pulledby != pulling && pulledby.cmode && pulledby.grab_state == GRAB_PASSIVE) //NICHE case of being in a first tier grab state.
+	// 	if(pulledby.anchored)
+	// 		pulledby.stop_pulling()
+	// 	else
+	// 		var/pull_dir = get_dir(src, pulledby)
+	// 		//puller and pullee more than one tile away or in diagonal position
+	// 		if(get_dist(src, pulledby) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
+	// 			pulledby.moving_from_pull = src
+	// 			pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
+	// 			pulledby.moving_from_pull = null
 
-	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1 && (pulledby != moving_from_pull))//separated from our puller and not in the middle of a diagonal move.
-		pulledby.stop_pulling()
-	else
-		if(isliving(pulledby))
-			var/mob/living/L = pulledby
-			L.set_pull_offsets(src, pulledby.grab_state)
+	if(moving_diagonally != FIRST_DIAG_STEP && isliving(pulledby))
+		var/mob/living/puller = pulledby
+		puller.set_pull_offsets(src, puller.grab_state)
 
 //	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
 	if(active_storage)
@@ -1176,6 +1172,17 @@
 
 	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss() * (200/max(maxHealth, 1))))
 		makeTrail(newloc, T, old_direction)
+
+///Called by mob Move() when the lying_angle is different than zero, to better visually simulate crawling.
+/mob/living/proc/lying_angle_on_movement(direct)
+	if(buckled && buckled.buckle_lying != NO_BUCKLE_LYING)
+		set_lying_angle(buckled.buckle_lying)
+		return
+
+	if(direct & EAST)
+		set_lying_angle(LYING_ANGLE_EAST)
+	else if(direct & WEST)
+		set_lying_angle(LYING_ANGLE_WEST)
 
 /mob/living/setDir(newdir)
 	var/olddir = dir
@@ -2118,15 +2125,15 @@
 	return
 
 /mob/living/forceMove(atom/destination)
-//	stop_pulling()
-//	if(buckled)
-//		buckled.unbuckle_mob(src, force = TRUE)
-//	if(has_buckled_mobs())
-//		unbuckle_all_mobs(force = TRUE)
+	if(!currently_z_moving)
+		stop_pulling()
+		if(buckled && !HAS_TRAIT(src, TRAIT_CANNOT_BE_UNBUCKLED))
+			buckled.unbuckle_mob(src, force = TRUE)
+		if(has_buckled_mobs())
+			unbuckle_all_mobs(force = TRUE)
 	. = ..()
-	if(.)
-		if(client)
-			reset_perspective()
+	if(. && client)
+		reset_perspective()
 
 /mob/living/proc/update_z(new_z) // 1+ to register, null to unregister
 	if (registered_z != new_z)

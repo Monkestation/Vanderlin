@@ -41,11 +41,11 @@
 	if(get_dir(mover, loc) == dir)
 		return FALSE
 
-/obj/structure/chair/bench/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/chair/bench/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(istype(leaving, /obj/projectile))
 		return
-	if(get_dir(new_location, leaving.loc) == dir)
+	if(direction == REVERSE_DIR(dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -200,14 +200,14 @@
 		qdel(src)
 		return FALSE
 
-/obj/structure/chair/wood/alt/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/chair/wood/alt/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(!isliving(leaving))
 		return
 	var/mob/living/M = leaving
 	if(M.body_position == LYING_DOWN)
 		return
-	if(get_dir(leaving.loc, new_location) == REVERSE_DIR(dir))
+	if(direction == REVERSE_DIR(dir))
 		playsound(src, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
 		item_chair = null

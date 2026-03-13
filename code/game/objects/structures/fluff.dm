@@ -91,7 +91,7 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 
 	if(dir in CORNERDIRS)
@@ -100,7 +100,7 @@
 	if(isobserver(leaving))
 		return
 
-	if(get_dir(leaving.loc, new_location) != dir)
+	if(direction != dir)
 		return
 
 	if(leaving.movement_type & (FLOATING|FLYING))
@@ -443,9 +443,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -675,9 +675,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1121,9 +1121,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 

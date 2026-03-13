@@ -638,7 +638,7 @@
 /atom/proc/relaymove(mob/living/user, direction)
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 50
-		to_chat(user, "<span class='warning'>I should try resisting.</span>")
+		to_chat(user, span_warning("I should try resisting."))
 	return
 
 /// Handle what happens when your contents are exploded by a bomb
@@ -1053,13 +1053,13 @@
 /**
  * An atom is attempting to exit this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_EXIT
+ * Default behaviour is to send the [COMSIG_ATOM_EXIT]
  */
-/atom/Exit(atom/movable/AM, atom/newLoc)
+/atom/Exit(atom/movable/leaving, direction)
 	// Don't call `..()` here, otherwise `Uncross()` gets called.
 	// See the doc comment on `Uncross()` to learn why this is bad.
 
-	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, AM, newLoc) & COMPONENT_ATOM_BLOCK_EXIT)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, leaving, direction) & COMPONENT_ATOM_BLOCK_EXIT)
 		return FALSE
 
 	return TRUE
@@ -1341,8 +1341,9 @@
 	for(var/param in params)
 		filter_data[name][param] = params[param]
 
-/atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
-	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, AM, levels)
+/atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
+	SHOULD_CALL_PARENT(TRUE)
+	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)

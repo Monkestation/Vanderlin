@@ -67,11 +67,12 @@
 	if(direction != dir && direction != REVERSE_DIR(dir))
 		return FALSE
 
-/obj/structure/bridge/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/bridge/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(istype(leaving, /mob/camera))
 		return
-	var/direction = get_dir(loc, new_location)
+	if(leaving.throwing)
+		return
 	if(direction != dir && direction != REVERSE_DIR(dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT

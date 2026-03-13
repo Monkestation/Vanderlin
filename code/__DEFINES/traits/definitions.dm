@@ -204,6 +204,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BOOZE_SLIDER "booze-slider"
 /// Unused
 #define TRAIT_QUICK_CARRY "quick-carry"
+#define TRAIT_PASSTABLE "passtable"
 /// Unused
 #define TRAIT_QUICKER_CARRY "quicker-carry"
 /// Prevents the overlay from nearsighted
@@ -328,6 +329,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ANTIMAGIC_NO_SELFBLOCK "anti_magic_no_selfblock"
 /// makes your footsteps completely silent
 #define TRAIT_SILENT_FOOTSTEPS "silent_footsteps"
+/// Prevents a mob from being unbuckled, currently only used to prevent people from falling over on the tram
+#define TRAIT_CANNOT_BE_UNBUCKLED "cannot_be_unbuckled"
 /// Hides the SSD indicator. Used with scrying.
 #define TRAIT_NOSSDINDICATOR "nossdindicator"
 /// Instant grabs on someone else.
@@ -551,6 +554,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // ************* turf traits
 /// Turf trait for when a turf is transparent
 #define TRAIT_Z_TRANSPARENT "turf_z_transparent"
+
+/// Turf is one that ai mobs will generally avoid pathing through
+/// Doesn't need to be applied to any turfs that override can_cross_safely
+#define TRAIT_AI_AVOID_TURF "warning_turf"
 
 // ************* Debug traits
 /// This object has sound debugging tools attached to it

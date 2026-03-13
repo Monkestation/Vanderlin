@@ -53,41 +53,32 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/flora/newtree/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		var/turf/target = GET_TURF_ABOVE(get_turf(user))
-		if(!istype(target, /turf/open/openspace))
-			to_chat(user, "<span class='warning'>I can't climb here.</span>")
-			return
-		if(!L.can_zTravel(target, UP))
-			to_chat(user, "<span class='warning'>I can't climb there.</span>")
-			return
-		var/used_time = 0
-		var/exp_to_gain = 0
-		if(L.mind)
-			var/myskill = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/climbing)
-			exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * L.get_learning_boon(/datum/attribute/skill/misc/climbing)
-			var/obj/structure/table/TA = locate() in L.loc
-			if(TA)
-				myskill += 1
-			else
-				var/obj/structure/chair/CH = locate() in L.loc
-				if(CH)
-					myskill += 1
-			used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 3), 3 SECONDS)
+	. = ..()
+	if(.)
+		return
+	if(isliving(user) && user.can_z_move(UP, get_turf(user), z_move_flags = Z_MOVE_CLIMBING_FLAGS|ZMOVE_FEEDBACK))
+		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, UP)
+		return TRUE
+
+/obj/structure/flora/newtree/proc/start_traveling(mob/living/user, direction)
+	var/turf/target = get_step_multiz(user, direction)
+	var/myskill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/climbing)
+	if(locate(/obj/structure/table) in user.loc)
+		myskill += 1
+	if(locate(/obj/structure/chair) in user.loc)
+		myskill += 1
+	var/used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (user.STASPD * 3), 3 SECONDS)
+	if(user.m_intent != MOVE_INTENT_SNEAK)
 		playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-		user.visible_message("<span class='warning'>[user] starts to climb [src].</span>", "<span class='warning'>I start to climb [src]...</span>")
-		if(do_after(L, used_time, src))
-			var/pulling = user.pulling
-			if(ismob(pulling))
-				user.pulling.forceMove(target)
-			user.forceMove(target)
-			user.start_pulling(pulling,suppress_message = TRUE)
+	user.visible_message(span_warning("[user] starts to climb [src]."), span_warning("I start to climb [src]..."))
+	if(do_after(user, used_time, src, display_over_user = TRUE))
+		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
+		if(user.m_intent != MOVE_INTENT_SNEAK)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-			if(L.mind)
-				L.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
+		var/exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * L.get_learning_boon(/datum/attribute/skill/misc/climbing)
+		user.adjust_experience(/datum/skill/misc/climbing, exp_to_gain, FALSE)
+		var/turf/pitfall = user.loc
+		pitfall?.zFall(user)
 
 /obj/structure/flora/newtree/attacked_by(obj/item/I, mob/living/user)
 	. = ..()

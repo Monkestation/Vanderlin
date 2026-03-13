@@ -1105,6 +1105,12 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"dY" = (
+/obj/structure/floordoor{
+	redstone_id = "thronegrille"
+	},
+/turf/open/openspace,
+/area/outdoors)
 "ef" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks{
@@ -1258,6 +1264,10 @@
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
+"hp" = (
+/obj/structure/ladder,
+/turf/open/floor/cobblerock,
+/area/outdoors)
 "hs" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -1358,6 +1368,10 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"js" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "jt" = (
 /obj/structure/hotspring/border/three,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1416,6 +1430,10 @@
 /obj/structure/well,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"kn" = (
+/obj/effect/landmark/backup_join,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "kw" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
@@ -1451,6 +1469,16 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
+"ld" = (
+/obj/structure/ladder/crafted,
+/turf/open/openspace,
+/area/outdoors)
+"lg" = (
+/obj/structure/fluff/railing/tall{
+	dir = 4
+	},
+/turf/open/floor/grass/yel,
+/area/indoors)
 "lh" = (
 /obj/structure/dungeon_exit{
 	delve_level = 2
@@ -1627,6 +1655,14 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"pw" = (
+/obj/structure/lever{
+	redstone_id = "thronegrille";
+	pixel_x = 1;
+	pixel_y = 8
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors)
 "pD" = (
 /obj/structure/hotspring/border/fourteen,
 /turf/open/floor/dirt/road,
@@ -1690,6 +1726,12 @@
 	pixel_y = 32
 	},
 /obj/structure/flora/grass,
+/turf/open/floor/grass/yel,
+/area/outdoors)
+"qT" = (
+/obj/structure/fluff/railing/tall{
+	dir = 4
+	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "qZ" = (
@@ -2504,10 +2546,6 @@
 /obj/structure/hotspring,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
-"DA" = (
-/obj/effect/landmark/backup_join,
-/turf/open/floor/churchbrick,
-/area/indoors/town/keep)
 "DD" = (
 /obj/structure/rotation_piece,
 /obj/structure/flora/grass,
@@ -3003,6 +3041,13 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Nn" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors)
 "No" = (
 /obj/structure/water_pipe,
 /obj/structure/pressurizer{
@@ -3193,6 +3238,14 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors)
+"Tn" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "Tr" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/structure/flora/grass/herb/symphitum,
@@ -3241,6 +3294,10 @@
 /obj/structure/flora/grass/herb/hypericum,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"TL" = (
+/obj/structure/ladder/crafted,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "TO" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = -15
@@ -3532,6 +3589,13 @@
 "XT" = (
 /obj/structure/bridge_stakes{
 	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors)
+"Yb" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
@@ -15138,7 +15202,7 @@ ji
 VG
 jC
 VG
-QN
+js
 LA
 QN
 jC
@@ -15895,7 +15959,7 @@ EQ
 fK
 GB
 vD
-DA
+kn
 ua
 zg
 Fj
@@ -20261,10 +20325,10 @@ Wr
 qw
 QN
 QN
-Wr
+hp
 Wr
 ai
-Wr
+hp
 Wr
 ai
 ai
@@ -21032,7 +21096,7 @@ dl
 se
 QN
 QN
-QN
+TL
 ai
 tA
 tA
@@ -78352,9 +78416,9 @@ am
 pc
 am
 aj
-Kh
-QN
-QN
+lg
+qT
+qT
 nX
 QN
 QN
@@ -78363,9 +78427,9 @@ ss
 QN
 QN
 QN
-jC
-Wr
-al
+Tn
+Nn
+Yb
 cW
 QN
 qc
@@ -85539,11 +85603,11 @@ ac
 ac
 ac
 ac
+Wr
+Wr
+pw
 ss
-ss
-ss
-ss
-ss
+pw
 ss
 ss
 ss
@@ -85796,11 +85860,11 @@ ac
 ac
 ac
 ac
-ss
-ss
-ss
-ss
-ss
+Wr
+hp
+Wr
+dY
+hp
 ss
 ss
 ss
@@ -86053,11 +86117,11 @@ ac
 ac
 ac
 ac
+Wr
+Wr
+Wr
 ss
-ss
-ss
-ss
-ss
+Wr
 ss
 ss
 ss
@@ -86568,7 +86632,7 @@ ac
 ac
 ac
 ss
-ss
+ld
 ss
 ss
 ss

@@ -69,11 +69,6 @@
 	#define COMPONENT_BLOCK_TELEPORT 1
 #define COMSIG_ATOM_ORBIT_BEGIN "atom_orbit_begin"           //called when an atom starts orbiting another atom: (atom)
 #define COMSIG_ATOM_ORBIT_STOP "atom_orbit_stop"           //called when an atom stops orbiting another atom: (atom)
-/////////////////
-//This signal return value bitflags can be found in __DEFINES/misc.dm
-#define COMSIG_ATOM_INTERCEPT_Z_FALL "movable_intercept_z_impact"	//called for each movable in a turf contents on /turf/zImpact(): (atom/movable/A, levels)
-#define COMSIG_ATOM_FALL_INTERACT "atom_fall_interact"
-#define COMSIG_MOB_FALL_IMPACT	"mob_fall_impact"
 
 /////////////////
 

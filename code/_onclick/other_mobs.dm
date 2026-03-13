@@ -195,7 +195,7 @@
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
 		BP.grabbedby += B
 		B.grabbed = src
-		B.grabbee = user
+		B.grabbee = user // don't use set_grabber() since bites aren't actually pulls
 		B.limb_grabbed = BP
 		B.sublimb_grabbed = used_limb
 		SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, user) // black briar uses this for triggering infection on grabbers

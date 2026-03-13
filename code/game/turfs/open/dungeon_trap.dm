@@ -13,50 +13,72 @@
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
 
-/turf/open/dungeon_trap/can_traverse_safely(atom/movable/traveler)
-	//cheating this by checking if they can fall onto the same tile
-	if(!traveler.can_zFall(src, 0, null, DOWN))
-		return TRUE
-	return FALSE
 
-/turf/open/dungeon_trap/zPassIn(atom/movable/A, direction, turf/source)
+/turf/open/dungeon_trap/can_cross_safely(atom/movable/traveler)
+	return HAS_TRAIT(traveler, TRAIT_MOVE_FLYING) || !traveler.can_z_move(DOWN, src, z_move_flags = ZMOVE_FALL_FLAGS)
+
+// /turf/open/dungeon_trap/zPassIn(atom/movable/A, direction, turf/source)
+// 	if(direction == DOWN)
+// 		for(var/obj/O in contents)
+// 			if(O.obj_flags & BLOCK_Z_IN_DOWN)
+// 				return FALSE
+// 		return TRUE
+// 	if(direction == UP)
+// 		return FALSE // this shouldn't really happen, one way trip buddy
+// 	return FALSE
+
+// /turf/open/dungeon_trap/zPassOut(atom/movable/A, direction, turf/destination)
+// 	if(A.anchored && !isprojectile(A))
+// 		return FALSE
+// 	if(direction == DOWN)
+// 		for(var/obj/O in contents)
+// 			if(O.obj_flags & BLOCK_Z_OUT_DOWN)
+// 				return FALSE
+// 		return TRUE
+// 	return FALSE
+
+// /turf/open/dungeon_trap/can_zFall(atom/movable/A, levels = 1, turf/target)
+// 	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
+// 		return FALSE
+// 	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
+
+/turf/open/dungeon_trap/zPassIn(direction)
 	if(direction == DOWN)
-		for(var/obj/O in contents)
-			if(O.obj_flags & BLOCK_Z_IN_DOWN)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_IN_DOWN)
 				return FALSE
 		return TRUE
 	if(direction == UP)
-		return FALSE // this shouldn't really happen, one way trip buddy
-	return FALSE
-
-/turf/open/dungeon_trap/zPassOut(atom/movable/A, direction, turf/destination)
-	if(A.anchored && !isprojectile(A))
-		return FALSE
-	if(direction == DOWN)
-		for(var/obj/O in contents)
-			if(O.obj_flags & BLOCK_Z_OUT_DOWN)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_IN_UP)
 				return FALSE
 		return TRUE
 	return FALSE
 
-/turf/open/dungeon_trap/can_zFall(atom/movable/A, levels = 1, turf/target)
-	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
-		return FALSE
-	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
+/turf/open/dungeon_trap/zPassOut(direction)
+	if(direction == DOWN)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_OUT_DOWN)
+				return FALSE
+		return TRUE
+	if(direction == UP)
+		for(var/obj/contained_object in contents)
+			if(contained_object.obj_flags & BLOCK_Z_OUT_UP)
+				return FALSE
+		return TRUE
+	return FALSE
 
-/turf/open/dungeon_trap/zFall(atom/movable/A, levels = 1, force = FALSE)
-	if(!isobj(A) && !ismob(A))
+/turf/open/dungeon_trap/zFall(atom/movable/falling, levels = 1, force = FALSE, falling_from_move = FALSE)
+	if(!isobj(falling) && !ismob(falling))
 		return FALSE
 	var/turf/target = get_dungeon_tile()
 	if(!target)
 		return FALSE
 	levels += (SSdungeon_generator.dungeon_z + 2) - target.z //if you fall on the lower dungeon level, you're falling 3+ levels. If you're falling on the upper level, you're falling 2+.
-	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
+	if(!force && (!falling.can_z_move(DOWN, src, target)))
 		return FALSE
-	A.atom_flags |= Z_FALLING
-	A.forceMove(target)
-	A.atom_flags &= ~Z_FALLING
-	target.zImpact(A, levels, src)
+	falling.forceMove(target) // we're just going to fake the zmovement
+	target.zImpact(falling, levels, src)
 	return TRUE
 
 /proc/get_dungeon_tile()

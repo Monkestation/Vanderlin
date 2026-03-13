@@ -457,7 +457,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
 		face_atom(examinify)
 		if(m_intent != MOVE_INTENT_SNEAK)
-			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]"))
+			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]."))
 		else if(isliving(examinify))
 			var/mob/living/examaniee = examinify
 			if(examaniee.peek_examine_check(src))

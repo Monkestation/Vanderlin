@@ -195,13 +195,13 @@
 		return
 	SSmove_manager.stop_looping(thing, SSconveyors)
 
-/obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, turf/exit_turf)
+/obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, direction)
 	SIGNAL_HANDLER
 
 	if(!ismovable(exiting_atom))
 		return
 
-	var/obj/structure/roller/next_roller = locate(/obj/structure/roller) in exit_turf
+	var/obj/structure/roller/next_roller = locate(/obj/structure/roller) in get_step(src, direction)
 
 	// Stop conveying if no operating roller in exit direction
 	if(!next_roller || !next_roller.operating)

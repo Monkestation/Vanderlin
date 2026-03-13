@@ -206,7 +206,3 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 ///returns how much the object blocks an explosion. Used by subtypes.
 /obj/proc/GetExplosionBlock()
 	CRASH("Unimplemented GetExplosionBlock()")
-
-/obj/proc/on_fall_impact(mob/living/impactee, fall_speed)
-	SHOULD_CALL_PARENT(TRUE)
-	return

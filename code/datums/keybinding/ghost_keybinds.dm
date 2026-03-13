@@ -16,7 +16,7 @@
 	. = ..()
 	if(.)
 		return
-	user.mob.ghost_up()
+	user.mob.up()
 	return TRUE
 
 /datum/keybinding/ghost/zlevel_downwards
@@ -29,5 +29,5 @@
 	. = ..()
 	if(.)
 		return
-	user.mob.ghost_down()
+	user.mob.down()
 	return TRUE

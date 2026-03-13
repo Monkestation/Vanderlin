@@ -21,7 +21,7 @@
  * before adding them to non-living movables.
  */
 /datum/element/movetype_handler
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/list/attached_atoms = list()
 
 /datum/element/movetype_handler/Attach(datum/target)
@@ -76,6 +76,9 @@
 	source.movement_type &= ~flag
 	if((old_state & (MOVETYPE_NOT_TOUCHING_GROUND)) && !(source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)))
 		STOP_FLOATING_ANIM(source)
+		var/turf/pitfall = source.loc //Things that don't fly fall in open space.
+		if(istype(pitfall))
+			pitfall.zFall(source)
 	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_DISABLED, flag, old_state)
 
 /// Called when the TRAIT_NO_FLOATING_ANIM trait is added to the movable. Stops it from bobbing up and down.

@@ -365,6 +365,10 @@
 /// Humans are slowed by the difference between bodytemp and BODYTEMP_COLD_DAMAGE_LIMIT divided by this
 #define COLD_SLOWDOWN_FACTOR				20
 
+//Lying angles, which way your head points
+#define LYING_ANGLE_EAST 90
+#define LYING_ANGLE_WEST 270
+
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
 

@@ -128,10 +128,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	SIGNAL_HANDLER
 	if(!(potential_rider in lift_load))
 		return
-	/*
 	if(isliving(potential_rider) && HAS_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED))
 		REMOVE_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load -= potential_rider
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
@@ -150,10 +148,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	if(new_lift_contents in lift_load)
 		return FALSE
 
-	/*
 	if(isliving(new_lift_contents) && !HAS_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED))
 		ADD_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load += new_lift_contents
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))

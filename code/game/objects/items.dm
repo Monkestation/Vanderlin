@@ -1425,19 +1425,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			to_chat(user, span_notice("I wield [src] normally."))
 
-/obj/item/on_fall_impact(mob/living/impactee, fall_speed)
+/obj/item/onZImpact(turf/impacted_turf, levels, impact_flags)
 	. = ..()
+
 	if(!item_weight)
 		return
 
+	var/mob/living/carbon/human/impactee = locate(/mob/living/carbon/human) in impacted_turf
+	if (isnull(impactee))
+		return
+
 	var/target_zone = BODY_ZONE_HEAD
-	/*
-	if(impactee.lying)
+	if(impactee.body_position == LYING_DOWN)
 		target_zone = BODY_ZONE_CHEST
-	*/
-	playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	// playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	add_blood_DNA(GET_ATOM_BLOOD_DNA(impactee))
-	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("A [src] hits you in your [target_zone]!"))
+	var/fall_speed = levels * 0.75
+	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("[src] hits you in your [target_zone]!"))
 	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
 
 /obj/item/proc/on_consume(mob/living/eater)

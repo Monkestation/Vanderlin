@@ -34,6 +34,7 @@
 	RegisterSignal(parent, COMSIG_MOVABLE_BUCKLE, PROC_REF(vehicle_mob_buckle))
 	RegisterSignal(parent, COMSIG_MOVABLE_UNBUCKLE, PROC_REF(vehicle_mob_unbuckle))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(vehicle_moved))
+	RegisterSignal(parent, COMSIG_BUCKLED_CAN_Z_MOVE, PROC_REF(riding_can_z_move))
 
 /datum/component/riding/proc/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
 	var/atom/movable/AM = parent
@@ -233,6 +234,11 @@
 		else
 			qdel(O)
 	return TRUE
+
+/// Extra checks before buckled.can_z_move can be called in mob/living/can_z_move()
+/datum/component/riding/proc/riding_can_z_move(atom/movable/movable_parent, direction, turf/start, turf/destination, z_move_flags, mob/living/rider)
+	SIGNAL_HANDLER
+	return COMPONENT_RIDDEN_ALLOW_Z_MOVE
 
 /obj/item/riding_offhand
 	name = "offhand"

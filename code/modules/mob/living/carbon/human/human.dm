@@ -139,45 +139,6 @@
 	GLOB.human_list -= src
 	return ..()
 
-/mob/living/carbon/human/ZImpactDamage(turf/T, levels)
-	var/mob/living/carbon/V = src
-	var/obj/item/bodypart/affecting
-	var/dam = levels * rand(10,50)
-	V.add_stress(/datum/stress_event/felldown)
-	record_round_statistic(STATS_MOAT_FALLERS, -1) // If you get your ankles broken you fall. This makes sure only those that DIDN'T get damage get counted.
-	record_round_statistic(STATS_ANKLES_BROKEN)
-	var/chat_message
-	switch(rand(1,4))
-		if(1)
-			affecting = get_bodypart(pick(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
-			chat_message = "<span class='danger'>I fall on my [affecting]!</span>"
-		if(2)
-			affecting = get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
-			chat_message = "<span class='danger'>I fall on my arm!</span>"
-		if(3)
-			affecting = get_bodypart(BODY_ZONE_CHEST)
-			chat_message = "<span class='danger'>I fall flat! I'm winded!</span>"
-			emote("gasp")
-			adjustOxyLoss(50)
-		if(4)
-			affecting = get_bodypart(BODY_ZONE_HEAD)
-			chat_message = "<span class='danger'>I fall on my head!</span>"
-	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "blunt", damage = dam)))
-		update_damage_overlays()
-		if(levels >= 1)
-			//absurd damage to guarantee a crit
-			affecting.try_crit(BCLASS_TWIST, 300)
-
-	for(var/mob/living/M in T.contents)
-		visible_message("\The [src] hits \the [T]!")
-		M.AdjustKnockdown(levels * 20)
-		M.take_overall_damage(dam * 3.5)
-
-	if(chat_message)
-		to_chat(src, chat_message)
-
-	AdjustKnockdown(levels * 15)
-
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
 	create_dna(src)

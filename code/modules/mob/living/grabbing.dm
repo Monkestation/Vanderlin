@@ -97,13 +97,10 @@
 	var/sublimb_grabbed		//ref to what precise (sublimb) we are grabbing (if any) (text)
 	var/bleed_suppressing = 0.75 //multiplier for how much we suppress bleeding, can accumulate so two grabs means 25% bleeding
 	var/chokehold = FALSE
+	var/delete_from_stop_pull
 
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
-
-/obj/item/grabbing/Initialize()
-	. = ..()
-	START_PROCESSING(SSfastprocess, src)
 
 /obj/item/grabbing/process()
 	if(valid_check())
@@ -113,19 +110,16 @@
 			chokehold = FALSE
 
 /obj/item/grabbing/proc/valid_check()
+	// Mouth grabs aren't actual grabs and as such can't be handled by stop_pulling()
 	if(QDELETED(grabbee) || QDELETED(grabbed))
 		qdel(src)
 		return FALSE
-	// We should be conscious to do this, first of all...
-	if(grabbee.stat < UNCONSCIOUS)
-		// Mouth grab while we're adjacent is good
-		if(grabbee.mouth == src && grabbee.Adjacent(grabbed))
-			return TRUE
-		// Other grab requires adjacency and pull status, unless we're grabbing ourselves
-		if(grabbee.Adjacent(grabbed) && (grabbee.pulling == grabbed || grabbee == grabbed))
-			return TRUE
-	qdel(src)
-	return FALSE
+	// Mouth grab is only good while we're adjacent
+	if(grabbee.mouth == src && !grabbee.Adjacent(grabbed))
+		qdel(src)
+		return FALSE
+	// Otherwise we're depending on check_pulling() to handle broken grabs
+	return TRUE
 
 /obj/item/grabbing/Click(location, control, params)
 	if(!valid_check())
@@ -154,6 +148,19 @@
 				C.r_grab = src
 			else
 				C.l_grab = src
+
+/obj/item/grabbing/proc/set_grabber(mob/living/pulledby)
+	if(!istype(pulledby))
+		return
+	grabbee = pulledby
+	RegisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(upon_stop_pulling))
+	START_PROCESSING(SSfastprocess, src)
+
+/obj/item/grabbing/proc/upon_stop_pulling(datum/source, atom/movable/old_pulling)
+	SIGNAL_HANDLER
+	UnregisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING)
+	delete_from_stop_pull = TRUE // don't call stop_pulling() again in Destroy()
+	qdel(src)
 
 /obj/item/grabbing/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
@@ -190,10 +197,10 @@
 			grabbee.l_grab = null
 
 		if(stop_pull)
-			grabbee.stop_pulling()
-			for(var/mob/M as anything in grabbee.buckled_mobs)
-				if(M == grabbed)
-					grabbee.unbuckle_mob(M, force = TRUE)
+			if(grabbed in grabbee.buckled_mobs)
+				grabbee.unbuckle_mob(grabbed, force = TRUE)
+			if(!delete_from_stop_pull)
+				grabbee.stop_pulling()
 
 /obj/item/grabbing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!valid_check() || !istype(M))
