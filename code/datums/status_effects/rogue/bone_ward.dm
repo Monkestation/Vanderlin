@@ -21,6 +21,8 @@
 		return FALSE
 	if(!ishuman(attacker) || !attacker.client)
 		return FALSE
+	if(HAS_TRAIT(attacker, TRAIT_ASSASSIN))
+		return FALSE
 	attacker.apply_status_effect(arglist(list(/datum/status_effect/debuff/bone_ward, 60 SECONDS, attacked)))
 	return TRUE
 
