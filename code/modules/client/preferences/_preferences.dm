@@ -1632,7 +1632,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						selected_patron = GLOB.patrons_by_type[faith.godhead] || GLOB.patrons_by_type[pick(GLOB.patrons_by_faith[faith.type])]
+						var/datum/patron/pos_patron = GLOB.patrons_by_type[faith.godhead] || GLOB.patrons_by_type[pick(GLOB.patrons_by_faith[faith.type])]
+						if(!pos_patron.preference_accessible(src))
+							for(var/maybe_patron in GLOB.patrons_by_faith[faith.type])
+								var/datum/patron/real_patron = GLOB.patrons_by_type[maybe_patron]
+								if(real_patron.preference_accessible(src))
+									selected_patron = real_patron
+									break
 
 				if("patron")
 					var/list/patrons_named = list()
