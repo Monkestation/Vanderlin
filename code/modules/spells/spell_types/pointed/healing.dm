@@ -215,12 +215,9 @@
 
 			if(/datum/patron/alternate/great_hunt)
 				cast_on.visible_message(span_info("The smell of wet grass and earth surrounds [cast_on]!"), span_notice("I'm surrounded by the smell of wet grass and earth!"))
-				var/static/list/alch_bodyparts = typecacheof(list(/obj/item/alch/bone, /obj/item/alch/sinew, /obj/item/alch/horn))
-				situational_bonus = 0
 				// The more alchemically significant body parts around the caster, the greater the effect.
-				for(var/obj/O in oview(5, owner))
-					if(is_type_in_typecache(O, alch_bodyparts))
-						situational_bonus = min(situational_bonus + 0.5, 25)
+				situational_bonus = check_hunt_bonuses(owner, 5, 50, 0.5)
+				situational_bonus = min(situational_bonus, 25)
 				if(situational_bonus > 0)
 					conditional_buff = TRUE
 
@@ -231,8 +228,7 @@
 						to_chat(owner, span_warning("This head is not valuable enough to aid in healing!"))
 					else
 						situational_blood = animal_head.blood_value
-						animal_head.visible_message(span_notice("[animal_head] disintegrates into a red mist."))
-						qdel(animal_head)
+						consume_hunt_bonus(animal_head)
 
 			else
 				if(istype(living_owner.patron, /datum/patron/godless))

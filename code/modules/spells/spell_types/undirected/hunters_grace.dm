@@ -11,7 +11,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 
-	invocation = "Walk unopposed."
+	invocation = "The prey will not escape!"
 	invocation_type = INVOCATION_WHISPER
 
 	charge_time = 4 SECONDS
@@ -27,9 +27,19 @@
 		span_notice("I mutter the incantation and a dim pulse of light radiates out from me."),
 	)
 
-	var/duration_increase = max(0, attuned_strength * 2 MINUTES)
-	for(var/mob/living/L in viewers(1, owner))
-		L.apply_status_effect(/datum/status_effect/buff/hunters_grace, duration_increase)
+	var/used_duration = 3 MINUTES
+	var/duration_bonus = 0
+	var/aoe_distance = 1
+
+	// The more alchemically significant body parts around the caster, the greater the effect.
+	duration_bonus = check_hunt_bonuses(owner, 3, 66, 10 SECONDS)
+	var/aoe_change = clamp(floor(duration_bonus / 60 SECONDS), 0, 3)
+	used_duration += duration_bonus
+	aoe_distance += aoe_change
+
+	for(var/mob/living/L in viewers(aoe_distance, owner))
+		L.apply_status_effect(/datum/status_effect/buff/hunters_grace, used_duration)
+
 
 /datum/status_effect/buff/hunters_grace
 	id = "hunters_grace"
