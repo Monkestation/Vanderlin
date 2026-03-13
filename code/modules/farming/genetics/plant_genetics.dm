@@ -29,12 +29,12 @@
 	randomize_traits(10)  // ±10 points variation
 
 /datum/plant_genetics/proc/randomize_traits(variation = 20)
-	yield_trait = clamp(yield_trait + rand(-variation, variation), 10, 100)
-	disease_resistance = clamp(disease_resistance + rand(-variation, variation), 10, 100)
-	quality_trait = clamp(quality_trait + rand(-variation, variation), 10, 100)
-	growth_speed = clamp(growth_speed + rand(-variation, variation), 10, 100)
-	water_efficiency = clamp(water_efficiency + rand(-variation, variation), 10, 100)
-	cold_resistance = clamp(cold_resistance + rand(-variation, variation), 10, 100)
+	yield_trait = clamp(yield_trait + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
+	disease_resistance = clamp(disease_resistance + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
+	quality_trait = clamp(quality_trait + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
+	growth_speed = clamp(growth_speed + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
+	water_efficiency = clamp(water_efficiency + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
+	cold_resistance = clamp(cold_resistance + rand(-variation, variation), 0, TRAIT_GRADE_EXCELLENT)
 
 /datum/plant_genetics/proc/crossbreed_with(datum/plant_genetics/other)
 	var/datum/plant_genetics/offspring = new()

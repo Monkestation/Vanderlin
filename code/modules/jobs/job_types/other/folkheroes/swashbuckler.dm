@@ -26,7 +26,7 @@
 		/datum/skill/misc/climbing = 3,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/stealing = 3,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/craft/traps = 2,
@@ -59,7 +59,7 @@
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	beltr = /obj/item/weapon/knife/dagger
 	shoes = /obj/item/clothing/shoes/boots
-	neck = /obj/item/clothing/neck/psycross/silver/abyssor
+	neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 
 /datum/outfit/folkhero/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()

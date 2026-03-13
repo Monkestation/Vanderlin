@@ -72,7 +72,7 @@
 	if(A)
 		dropItemToGround(A, TRUE)
 
-/mob/living/carbon/human/resist_restraints()
+/mob/living/carbon/human/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	if(handcuffed)
 		I = handcuffed
@@ -81,7 +81,7 @@
 	if(I)
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
-		cuff_resist(I)
+		cuff_resist(I, instant = instant)
 
 // attack using a held weapon otherwise bite the enemy, then if we are angry there is a chance we might calm down a little
 /mob/living/carbon/human/proc/monkey_attack(mob/living/L)

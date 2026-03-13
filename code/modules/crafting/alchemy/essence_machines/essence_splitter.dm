@@ -196,7 +196,7 @@
 	addtimer(CALLBACK(src, PROC_REF(finish_bulk_splitting), all_precursors, user), process_time)
 
 /obj/machinery/essence/splitter/proc/finish_bulk_splitting(list/precursors, mob/living/user)
-	flick_overlay_view(image(icon, src, "split", ABOVE_MOB_LAYER), 1.2 SECONDS)
+	flick_overlay_view(mutable_appearance(icon, "split", ABOVE_MOB_LAYER), 1.2 SECONDS)
 
 	var/efficiency_bonus = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/splitter_efficiency)
 	var/list/total_produced = list()

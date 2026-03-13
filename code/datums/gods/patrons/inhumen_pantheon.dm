@@ -46,8 +46,8 @@
 	flaws = "Rage, Hatred, Bloodthirst"
 	worshippers = "Greenskins, The Revenge-Driven, Sadists, Misogynists"
 	sins = "Compassion, Frailty, Servility"
-	boons = "You are drawn to the flavour of raw flesh and organs, and may consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER)
+	boons = "You are drawn to the flavour of raw flesh, organs, and blood. You may consume without worry."
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER)
 	devotion_holder = /datum/devotion/inhumen/graggar
 	confess_lines = list(
 		"GRAGGAR IS THE BEAST I WORSHIP!",
@@ -99,7 +99,7 @@
 	worshippers = "Broken Minds, Overshared Secrets, Space-Faring Species Like You, Misanthropes"
 	sins = "The Unseen, Secrets, Worthless Pigs"
 	boons = "You are drawn to the flavour of other followers of Zizo, and may see them when you consume without worry."
-	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_CABAL)
+	added_traits = list(TRAIT_ORGAN_EATER, TRAIT_BLOODDRINKER, TRAIT_CABAL)
 	confess_lines = list(
 		"WHERE AM I!",
 		"NONE OF THIS IS REAL!",

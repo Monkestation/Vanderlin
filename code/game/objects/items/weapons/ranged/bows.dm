@@ -79,8 +79,12 @@
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB
-		if(user.client.chargedprog < 100)
-			BB.damage = BB.damage - (BB.damage * (user.client.chargedprog / 100))
+		if(user.client?.chargedprog < 100)
+			var/charge_prob = 1
+			if(user.client)
+				charge_prob = (user.client.chargedprog / 100)
+
+			BB.damage = BB.damage - (BB.damage * charge_prob)
 			BB.embedchance = 5
 		else
 			BB.damage = BB.damage
@@ -227,14 +231,14 @@
 		playsound(master_mob, pick('sound/combat/Ranged/bow-draw-04.ogg'), 100, FALSE)
 
 /datum/intent/shoot/bow/long
-	chargetime = 1.5
-	chargedrain = 1.5
+	chargetime = 1
+	chargedrain = 1.25
 	charging_slowdown = 3
 
 /datum/intent/arc/bow/long
-	chargetime = 1.5
-	chargedrain = 1.5
-	charging_slowdown = 3
+	chargetime = 1
+	chargedrain = 1.25
+	charging_slowdown = 2.5
 
 
 
@@ -254,11 +258,11 @@
 	damfactor = 0.9
 
 /datum/intent/shoot/bow/short
-	chargetime = 0.75
-	chargedrain = 1.5
-	charging_slowdown = 2.5
+	chargetime = 0.5
+	chargedrain = 1
+	charging_slowdown = 0.5
 
 /datum/intent/arc/bow/short
-	chargetime = 0.75
-	chargedrain = 1.5
-	charging_slowdown = 2.5
+	chargetime = 0.5
+	chargedrain = 1
+	charging_slowdown = 0.5

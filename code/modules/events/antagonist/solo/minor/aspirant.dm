@@ -78,7 +78,7 @@
 	for(var/mob/living/carbon/human/helper in GLOB.player_list)
 		if(!helper.client || !helper.mind)
 			continue
-		if(is_banned_from(helper.client.ckey, ROLE_ASPIRANT))
+		if(is_antag_banned(helper.client.ckey, ROLE_ASPIRANT))
 			continue
 		if(!is_type_in_list(helper.mind.assigned_role, helping))
 			continue

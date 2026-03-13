@@ -78,13 +78,15 @@
 		/datum/language/dwarvish,
 		/datum/language/deepspeak,
 		/datum/language/zalad,
-		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
 	if(!customization_value || !ispath(customization_value, /datum/language))
+		return
+	if(!(customization_value in customization_options))
 		return
 
 	if(ishuman(owner))
@@ -168,33 +170,23 @@
 	)
 	preview_render = FALSE
 
-/datum/quirk/boon/folk_hero/on_spawn()
-	if(!ishuman(owner))
+/datum/quirk/boon/folk_hero/on_examined(mob/user, list/P, list/examine_contents)
+	if(user == owner)
 		return
-	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-
-/datum/quirk/boon/folk_hero/on_remove()
-	if(!ishuman(owner))
+	var/mob/living/carbon/source_mob = owner
+	var/mob/living/examiner = user
+	if(!istype(source_mob) || !istype(examiner))
 		return
-	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
-
-/datum/quirk/boon/folk_hero/proc/on_examine(mob/living/source, mob/user, list/examine_list)
-	if(!ishuman(user) || !ishuman(source))
-		return
-
-	var/mob/living/carbon/human/source_mob = source
-	var/mob/living/carbon/human/examiner = user
-
 	if(!examiner.mind || !source_mob.mind)
 		return
-
-	// Folk heroes are recognized by others
-	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [source_mob.real_name], the folk hero!")
-
-		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(source_mob.mind))
-			examiner.mind.share_identities(source_mob.mind)
+	if(examiner.STAINT < 8)
+		return
+	var/mob_name = source_mob.get_visible_name("")
+	if(!mob_name || (mob_name == "Unknown"))
+		return
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
+	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
+		examiner.mind.learn_target_identity(source_mob.mind, source_mob.real_name)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"
@@ -283,17 +275,10 @@
 	point_value = -8
 	preview_render = FALSE
 
-	var/obj/item/storage/backpack/B
-
 /datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
-	var/turf/T = get_turf(owner)
-	B = new(T)
-	if(!owner.equip_to_appropriate_slot(B) || isturf(B.loc)) //missing a limb can cause phantom success procs
-		for(var/obj/item/storage/storage in owner.contents)
-			if(storage)
-				if(SEND_SIGNAL(storage, COMSIG_TRY_STORAGE_INSERT, B, null))
-					break
-	B = null
+	var/obj/item/storage/backpack/backpack/pack = new(get_turf(owner))
+	if(!owner.equip_to_appropriate_slot(pack))
+		owner.put_in_hands(pack)
 
 /datum/quirk/boon/rider
 	name = "Experienced Rider"

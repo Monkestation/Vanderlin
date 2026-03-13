@@ -636,7 +636,7 @@
 /area/under/tomb/indoors/church)
 "xM" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "yc" = (
@@ -843,8 +843,8 @@
 /obj/item/clothing/cloak/stabard/templar/astrata/alt,
 /obj/item/clothing/cloak/stabard/templar/astrata,
 /obj/item/clothing/cloak/stabard/templar/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
 /obj/item/clothing/shirt/robe/astrata,
 /obj/item/clothing/shirt/robe/astrata,
 /obj/item/clothing/head/helmet/heavy/necked/astrata,
@@ -1046,8 +1046,8 @@
 /area/under/tomb/indoors/church)
 "OD" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "OM" = (

@@ -18,7 +18,7 @@
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/craft/carpentry = 1,
 		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/labor/lumberjacking = 3

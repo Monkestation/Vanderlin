@@ -5,24 +5,26 @@
 
 	return pickweight(human_blood_type_weights)
 
-/proc/random_eye_color()
+/proc/random_eye_color(crunch = FALSE)
+	if(crunch)
+		. = "#"
 	switch(pick(20;"brown",20;"hazel",20;"grey",15;"blue",15;"green",1;"amber",1;"albino"))
 		if("brown")
-			return "630"
+			. += "630"
 		if("hazel")
-			return "542"
+			. += "542"
 		if("grey")
-			return pick("666","777","888","999","aaa","bbb","ccc")
+			. += pick("666","777","888","999","aaa","bbb","ccc")
 		if("blue")
-			return "36c"
+			. += "36c"
 		if("green")
-			return "060"
+			. += "060"
 		if("amber")
-			return "fc0"
+			. += "fc0"
 		if("albino")
-			return pick("c","d","e","f") + pick("0","1","2","3","4","5","6","7","8","9") + pick("0","1","2","3","4","5","6","7","8","9")
+			. += pick("c","d","e","f") + pick("0","1","2","3","4","5","6","7","8","9") + pick("0","1","2","3","4","5","6","7","8","9")
 		else
-			return "000"
+			. += "000"
 
 /proc/random_underwear(gender)
 	if(!GLOB.underwear_list.len)
@@ -328,33 +330,41 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 // Displays a message in deadchat, sent by source. Source is not linkified, message is, to avoid stuff like character names to be linkified.
 // Automatically gives the class deadsay to the whole message (message + source)
-/proc/deadchat_broadcast(message, source=null, mob/follow_target=null, turf/turf_target=null, speaker_key=null, message_type=DEADCHAT_REGULAR)
-	message = "<span class='deadsay'>[source]<span class='linkify'>[message]</span></span>"
+/proc/deadchat_broadcast(message, source = null, mob/follow_target = null, turf/turf_target = null, speaker_key = null, message_type = DEADCHAT_REGULAR, max_range = null)
+	message = span_deadsay("[source][span_linkify(message)]")
 	for(var/mob/M in GLOB.player_list)
-		var/datum/preferences/prefs
-		if(M.client.prefs)
-			prefs = M.client.prefs
-		else
-			prefs = new
+		var/chat_toggles = TOGGLES_DEFAULT_CHAT
+		var/toggles = TOGGLES_DEFAULT
+		var/list/ignoring
+
+		if(M.client?.prefs)
+			var/datum/preferences/prefs = M.client?.prefs
+			chat_toggles = prefs.chat_toggles
+			toggles = prefs.toggles
+			ignoring = prefs.ignoring
 
 		var/override = FALSE
-		if(M.client.holder && (prefs.chat_toggles & CHAT_DEAD))
+		if(M.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
+
 		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE))
 			override = TRUE
+
 		if(isnewplayer(M) && !override)
 			continue
+
 		if(M.stat != DEAD && !override)
 			continue
-		if(speaker_key && (speaker_key in prefs.ignoring))
+
+		if(speaker_key && (speaker_key in ignoring))
 			continue
 
 		switch(message_type)
 			if(DEADCHAT_DEATHRATTLE)
-				if(prefs.toggles & DISABLE_DEATHRATTLE)
+				if(toggles & DISABLE_DEATHRATTLE)
 					continue
 			if(DEADCHAT_ARRIVALRATTLE)
-				if(prefs.toggles & DISABLE_ARRIVALRATTLE)
+				if(toggles & DISABLE_ARRIVALRATTLE)
 					continue
 
 		if(isobserver(M))

@@ -1,4 +1,4 @@
-/datum/job/advclass/wretch/bloodsucker
+/*/datum/job/advclass/wretch/bloodsucker
 	title = "Bloodsucker"
 	tutorial = "You have recently been embraced as a vampire. You do not know whom your sire is, strange urges, unnatural strength, a thirst you can barely control. You were outed as a monster and are now on the run"
 	allowed_sexes = list(MALE, FEMALE)
@@ -60,7 +60,7 @@
 	)
 
 	pack_traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_DODGEEXPERT
 	)
 
@@ -87,14 +87,6 @@
 
 /datum/job_pack/bloodsucker_noble/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	var/prev_real_name = picker.real_name
-	var/prev_name = picker.name
-	var/honorary = "Lord"
-	if(picker.pronouns == SHE_HER)
-		honorary = "Lady"
-	picker.real_name = "[honorary] [prev_real_name]"
-	picker.name = "[honorary] [prev_name]"
-
 	picker.adjust_skillrank(/datum/skill/misc/music, pick(1,2), TRUE)
 
 	if(picker.gender == FEMALE)
@@ -156,7 +148,7 @@
 
 	pack_traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 	pack_contents = list(
@@ -186,16 +178,12 @@
 
 /datum/job_pack/bloodsucker_count/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	var/prev_real_name = picker.real_name
-	var/prev_name = picker.name
-	var/honorary = "Count"
-	if(picker.pronouns == SHE_HER)
-		honorary = "Countess"
-	picker.real_name = "[honorary] [prev_real_name]"
-	picker.name = "[honorary] [prev_name]"
 
 	if(!picker.has_language(/datum/language/oldpsydonic))
 		picker.grant_language(/datum/language/oldpsydonic)
+
+	if(!picker.has_language(/datum/language/newpsydonic))
+		picker.grant_language(/datum/language/newpsydonic)
 
 	if(picker.dna?.species.id == SPEC_ID_HUMEN)
 		picker.dna.species.native_language = "Old Psydonic"
@@ -232,7 +220,7 @@
 
 	picker.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
 	picker.adjust_skillrank(/datum/skill/craft/carpentry, 3, TRUE)
-	picker.adjust_skillrank(/datum/skill/misc/sewing, 4, TRUE)
+	picker.adjust_skillrank(/datum/skill/craft/sewing, 4, TRUE)
 	picker.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 
 	picker.base_fortune = rand(7, 20)
@@ -256,7 +244,7 @@
 		/datum/skill/combat/wrestling = 4,
 		/datum/skill/combat/unarmed = 5,
 		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/craft/crafting = 2,
 		/datum/skill/craft/carpentry = 3
 	)
@@ -286,4 +274,4 @@
 
 /datum/job_pack/bloodsucker_vagrant/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
-	picker.cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
+	picker.cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg' */

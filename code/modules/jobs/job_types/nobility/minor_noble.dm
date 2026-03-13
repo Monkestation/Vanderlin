@@ -9,6 +9,7 @@
 	faction = FACTION_TOWN
 	total_positions = 2
 	spawn_positions = 2
+	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
 	apprentice_name = "Servant"
@@ -18,6 +19,9 @@
 	allowed_ages = ALL_AGES_LIST_CHILD
 	spells = list(/datum/action/cooldown/spell/undirected/call_bird)
 	job_bitflag = BITFLAG_ROYALTY
+
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
@@ -39,19 +43,12 @@
 	)
 
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/minor_noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Lord"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Lady"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1,2))
 
 	if(istype(spawned.patron, /datum/patron/inhumen/baotha))

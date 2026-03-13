@@ -63,7 +63,7 @@
 // Bandit's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
-		/obj/item/natural/cloth,
+		/obj/item/natural/cloth/bandage,
 		/obj/item/key/mercenary,
 	)
 
@@ -176,6 +176,18 @@
 	grid_height = 64
 	grid_width = 32
 
+/obj/item/storage/belt/pouch/medicine
+	populate_contents = list(
+		/obj/item/needle,
+		/obj/item/natural/bundle/cloth/bandage/full,
+		/obj/item/reagent_containers/glass/bottle/healthpot
+	)
+
+/obj/item/storage/belt/pouch/food
+	populate_contents = list(
+		/obj/item/reagent_containers/food/snacks/hardtack,
+	)
+
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
 	var/obj/item/coin/silver/pile/H = new(loc)
@@ -277,12 +289,6 @@
 	item_state = "clothbackpack"
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth
-
-/obj/item/storage/backpack/satchel/heartfelt
-	populate_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper/heartfelt,
-	)
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"

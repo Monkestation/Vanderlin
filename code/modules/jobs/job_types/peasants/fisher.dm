@@ -9,6 +9,7 @@
 	faction = FACTION_TOWN
 	total_positions = 5
 	spawn_positions = 5
+	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
@@ -28,7 +29,7 @@
 		/datum/skill/misc/swimming = 3,
 		/datum/skill/craft/cooking = 2,
 		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/fishing = 4,
 		/datum/skill/misc/medicine = 1,
 		/datum/skill/misc/athletics = 2,
@@ -42,7 +43,7 @@
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, -1)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
 
-	spawned.adjust_skillrank(/datum/skill/misc/sewing, pick(0,1), TRUE)
+	spawned.adjust_skillrank(/datum/skill/craft/sewing, pick(0,1), TRUE)
 	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
 
 /datum/outfit/fisher

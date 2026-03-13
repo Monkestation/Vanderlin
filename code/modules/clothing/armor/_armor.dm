@@ -40,6 +40,8 @@
 	var/togglename = null
 	abstract_type = /obj/item/clothing/armor
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/armor/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, dummy_block = FALSE)
 	. = ..()
 	if(!isinhands)

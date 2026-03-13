@@ -83,37 +83,37 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/adventurerlate
 	name = "Adventurerlate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list("Pilgrim", "Adventurer", "Wretch")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/vagrantlate
 	name = "Beggarlate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list("Beggar")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/orphanlate
 	name = "Orphanlate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list("Orphan")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/mercenarylate
 	name = "Mercenarylate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list("Mercenary")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/villagerlate
 	name = "Townerlate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list("Towner")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/combatlate
 	name = "Combatlate"
-	icon_state = "arrow"
+	icon_state = "arrow_blue"
 	jobspawn_override = list( "Pilgrim", "Adventurer", "Mercenary")
 	delete_after_roundstart = FALSE
 
@@ -217,6 +217,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/templar
 	name = "Templar"
+	jobspawn_override = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/gmtemplar
+	name = "Grandmaster Templar"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/nightman
@@ -247,12 +252,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Archivist"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/weaponsmith
-	name = "Weaponsmith"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/armorsmith
-	name = "Armorer"
+/obj/effect/landmark/start/blacksmith
+	name = "Blacksmith"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/tailor
@@ -424,7 +425,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/bandit
 	name = "Bandit"
 	icon = 'icons/mob/landmarks.dmi'
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 	jobspawn_override = list("Bandit")
 	delete_after_roundstart = FALSE
 
@@ -435,7 +436,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/lich
 	name = "Lich"
 	icon = 'icons/mob/landmarks.dmi'
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 	jobspawn_override = list("Lich")
 	delete_after_roundstart = FALSE
 
@@ -455,7 +456,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/delf
 	name = "delf"
 	icon = 'icons/mob/landmarks.dmi'
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 
 /obj/effect/landmark/start/delf/Initialize()
 	. = ..()
@@ -464,7 +465,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/jarosite
 	name = "jarosite"
 	icon = 'icons/mob/landmarks.dmi'
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 
 /obj/effect/landmark/start/jarosite/Initialize()
 	. = ..()
@@ -483,6 +484,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/latejoin
 	name = "JoinLate"
+	icon_state = "arrow_blue"
 
 /obj/effect/landmark/latejoin/Initialize(mapload)
 	..()

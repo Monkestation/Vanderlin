@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(species_hostile, world.file2list('strings/rt/species_hostile.txt'))
+GLOBAL_LIST_INIT(species_hostile, file2list('strings/rt/species_hostile.txt'))
 
 /mob/living/carbon/human/species/aasimar/base
 	ai_controller = /datum/ai_controller/species_hostile

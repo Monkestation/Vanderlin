@@ -146,7 +146,7 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.visible_message("<span class='warning'>[user] twists the [src]!</span>")
 	if(activate_sound)
-		playsound(user, activate_sound, 100, FALSE, -1)
+		playsound(user, activate_sound, 50, FALSE, -1)
 	cooldowny = world.time
 	addtimer(CALLBACK(src, PROC_REF(demagicify)), activetime)
 	active = TRUE
@@ -433,7 +433,11 @@
 	desc = "A ring of blessed silver, bearing the Archbishop's symbol. By dipping it in melted redtallow, it can seal writs of religious importance."
 	sellprice = 90
 
-/obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/ring/signet/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(tallowed)
 		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")

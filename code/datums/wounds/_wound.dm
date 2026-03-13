@@ -282,14 +282,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return
 
 /// Heals this wound by the given amount, and deletes it if it's healed completely
-/datum/wound/proc/heal_wound(heal_amount)
+/datum/wound/proc/heal_wound(heal_amount, forced = FALSE)
 	// Wound cannot be healed normally, whp is null
 	if(isnull(whp) || !heal_amount)
 		return FALSE
 	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
 	if(whp <= 0)
-		if(!should_persist())
+		if(!forced && !should_persist())
 			if(bodypart_owner)
 				remove_from_bodypart(src)
 			else if(owner)
@@ -424,7 +424,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 			return
 	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
 	MOBTIMER_SET(human_owner, MT_PUKE)
-	human_owner.vomit(1, blood = TRUE, stun = FALSE)
 	werewolf_infection_timer = addtimer(CALLBACK(src, PROC_REF(wake_werewolf)), werewolf_infection_time, TIMER_STOPPABLE)
 	severity = WOUND_SEVERITY_BIOHAZARD
 	if(bodypart_owner)
@@ -611,7 +610,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Multiplier that wound pain is increased by
 	var/upgrade_pain = 0
 
-/datum/wound/dynamic/heal_wound(heal_amount)
+/datum/wound/dynamic/heal_wound(heal_amount, forced)
 	. = ..()
 	if(!. || QDELETED(src))
 		return

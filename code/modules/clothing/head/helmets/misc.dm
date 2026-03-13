@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/gallowglass
 	name = "gallowglass helmet"
-	desc = "Worn by proud fighters of the clans of Kaledon."
+	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/fertilizer/ash
@@ -548,6 +548,15 @@
 	worn_y_dimension = 64
 
 /obj/item/clothing/head/helmet/visored/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/head/helmet/visored/silver/armet
+	name = "silver armet"
+	desc = "A finely forged silver armet, with adjustable visor to protect the face."
+	icon_state = "silverarmet"
+
+/obj/item/clothing/head/helmet/visored/silver/armet/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 

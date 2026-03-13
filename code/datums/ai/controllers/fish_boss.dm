@@ -54,7 +54,7 @@
 				new /obj/effect/temp_visual/heal(get_turf(F))
 		else if( !("deepone" in L.faction))
 			// Slow down players/non-deep ones
-			L.add_movespeed_modifier("deep_water", 2)
+			L.add_movespeed_modifier(MOVESPEED_ID_FISH_BOSS, multiplicative_slowdown = 2)
 
 			// Small chance of damage from unseen creatures in the water
 			if(prob(5))
@@ -68,5 +68,12 @@
 
 /obj/effect/deep_water/Uncrossed(atom/movable/AM)
 	. = ..()
-	if(isliving(AM) && !("deepone" in AM:faction))
-		AM:remove_movespeed_modifier("deep_water", 2)
+
+	if(!isliving(AM))
+		return
+
+	var/mob/living/L = AM
+	if("deepone" in L.faction)
+		return
+
+	L.remove_movespeed_modifier(MOVESPEED_ID_FISH_BOSS)

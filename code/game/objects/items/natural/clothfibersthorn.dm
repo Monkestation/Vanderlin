@@ -143,6 +143,7 @@
 	icon1step = 5
 	icon2 = "clothroll2"
 	icon2step = 10
+	flags_ai_inventory = AI_ITEM_BANDAGE
 
 /obj/item/natural/bundle/cloth/full/Initialize()
 	. = ..()

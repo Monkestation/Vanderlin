@@ -22,6 +22,9 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
 	advclass_cat_rolls = list(CTAG_HEIR = 20)
+	honorary = "Prince"
+	honorary_f = "Princess"
+
 
 	outfit = /datum/outfit/heir
 
@@ -35,7 +38,8 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/prince/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -118,7 +122,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/labor/mathematics = 3
 	)
 
@@ -178,7 +182,7 @@
 		/datum/skill/misc/riding = 2,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 1
+		/datum/skill/craft/sewing = 1
 	)
 
 	traits = list(

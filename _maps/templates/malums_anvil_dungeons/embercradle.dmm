@@ -782,9 +782,8 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "lv" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
@@ -1050,9 +1049,8 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon/lower)
 "oH" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/signage{
 	name = "Tips Please"
@@ -1885,9 +1883,8 @@
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "zQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/buysign{
 	name = "The Grave Tunes"
@@ -2467,7 +2464,7 @@
 /obj/item/storage/belt/leather/plaquesilver,
 /obj/item/clothing/ring/silver/noc,
 /obj/item/clothing/wrists/nocwrappings,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/carpet/purple,
@@ -3265,7 +3262,7 @@
 /obj/structure/table/church{
 	dir = 1
 	},
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
 "Ru" = (
@@ -3452,13 +3449,12 @@
 /area/under/mountains/anvil/dungeon)
 "Uf" = (
 /obj/structure/table/church,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
 "Ui" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
@@ -3713,7 +3709,7 @@
 "Xr" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /obj/item/clothing/shirt/robe/noc,
-/obj/item/clothing/neck/psycross/silver/noc,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /obj/item/clothing/head/roguehood/nochood,
 /obj/item/clothing/gloves/leather/black,
 /obj/item/clothing/shoes/boots/leather,
@@ -3883,9 +3879,8 @@
 /turf/closed/wall/mineral/stonebrick,
 /area/under/mountains/anvil/dungeon)
 "Zk" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/item/bin,
 /turf/open/floor/cobblerock,

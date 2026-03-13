@@ -11,6 +11,10 @@
 	var/datum/job/parent_job
 	/// When joining the round, this text will be shown to the player.
 	var/tutorial = null
+	/// Whether this job is intended to give quests
+	var/is_quest_giver = FALSE
+	/// How many quests this job can take at once
+	var/max_active_quests = 3
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -186,6 +190,13 @@
 	/// Do we get passive income every day from our noble estates?
 	var/noble_income = FALSE
 
+	/// Honorary titles appended to names. Based off pronouns
+	var/honorary
+	var/honorary_f
+	/// Same as above, but for suffixes. See Khan
+	var/honorary_suffix
+	var/honorary_suffix_f
+
 	/// Antagonist role to grant with this job
 	var/datum/antagonist/antag_role
 
@@ -307,15 +318,6 @@
 		for(var/datum/mind/found_mind in get_minds(X))
 			spawned.mind.learn_target_identity(found_mind)
 
-	// Ready up bonus
-	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		spawned.hydration = 800 // Set higher hydration
-		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
-
-
 	var/used_title = get_informed_title(spawned)
 	if(spawned.islatejoin && (job_flags & JOB_ANNOUNCE_ARRIVAL)) //to be moved somewhere more appropriate
 		scom_announce("[spawned.real_name] the [used_title] arrives from [SSmapping.config.immigrant_origin].")
@@ -353,6 +355,7 @@
 	if(voicepack_f)
 		spawned.dna?.species.soundpack_f = new voicepack_f()
 
+	assign_honorary_titles(spawned)
 	/// WHY WAS THIS ON OUTFIT??? It shouldn't be HERE either
 	if(spawned.familytree_pref != FAMILY_NONE && !spawned.family_datum)
 		SSfamilytree.AddLocal(spawned, spawned.familytree_pref)
@@ -394,11 +397,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patron_list)
+	for(var/god in GLOB.patrons_by_type)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patron_list[god]
+		var/datum/patron/P = GLOB.patrons_by_type[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -609,6 +612,16 @@
 			return f_title
 
 	return title
+
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(honorary)
+		grantee.honorary = honorary
+	if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions

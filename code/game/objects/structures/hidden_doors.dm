@@ -419,3 +419,16 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 	memory_name = "thieves' guild's"
 	vips = list(/datum/job/matron)
+
+
+/obj/effect/mapping_helpers/secret_door_creator/rous
+	name = "Rous Secret Door Creator"
+	color = "#dcec4b"
+	override_floor = FALSE
+	hidden_dc = 16
+	use_phrases = TRUE
+	lang = list(/datum/language/rousman)
+	manager_id = "rousdoors"
+	accessor_trait = TRAIT_KNOW_ROUS_DOORS
+	memory_name = "Rous'"
+	vips = list(/datum/job/rousman)

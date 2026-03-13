@@ -15,6 +15,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
+	flags_ai_inventory = AI_ITEM_BANDAGE
 
 	var/datum/component/cleaner/cleaner_component = null
 	var/clean_speed = 0.4 SECONDS
@@ -115,10 +116,10 @@
 			return TRUE
 	return ..()
 
-/obj/item/natural/cloth/attack_self(mob/user, params)
+/obj/item/natural/cloth/attack_self(mob/user, list/modifiers)
 	wring_cloth(user.loc, user)
 
-/obj/item/natural/cloth/attack_hand_secondary(mob/user, params)
+/obj/item/natural/cloth/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

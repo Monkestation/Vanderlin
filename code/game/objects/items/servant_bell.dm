@@ -62,7 +62,7 @@
 	if(length(bound_servants) >= max_servants)
 		to_chat(user, span_warning("It can hold no more minds without relinquishing another."))
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
-	user.visible_message(span_noticesmall("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
+	user.visible_message(span_smallnotice("[user] rings [src] in front of [user == H ? "[user.p_them()]self" : H] like a pendulum..."))
 	if(do_after(user, 6 SECONDS, H))
 		if((H.real_name in bound_servants) && H.name == H.real_name)
 			to_chat(user, span_warning("[src] is already bound to this bell."))
@@ -70,14 +70,14 @@
 			to_chat(user, span_warning("What good is a dead servant?"))
 		else if(H.mind?.has_antag_datum(/datum/antagonist/zombie))
 			to_chat(user, span_warning("The deadite curse resists the bell's charm."))
-		else if(HAS_TRAIT(H, TRAIT_NOBLE) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
+		else if(HAS_TRAIT(H, TRAIT_NOBLE_BLOOD) || H.can_block_magic(MAGIC_RESISTANCE_MIND, 0) || H.job == "Faceless One") // this'll screw over a noble blood butler, thems the breaks
 			to_chat(user, span_warning("The enchantment seems to fail."))
 		else
 			add_servant(H)
-			to_chat(user, span_noticesmall("I bind [H] to [src]."))
+			to_chat(user, span_smallnotice("I bind [H] to [src]."))
 	COOLDOWN_START(src, nearby_ring_bell, nearby_cooldown)
 
-/obj/item/servant_bell/attack_hand_secondary(mob/user, params)
+/obj/item/servant_bell/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -100,10 +100,10 @@
 				return
 			for(var/s_name in servants)
 				remove_servant(servant = s_name)
-			to_chat(user, span_noticesmall("All servants have been relinquished."))
+			to_chat(user, span_smallnotice("All servants have been relinquished."))
 		else
 			remove_servant(servant = remove)
-			to_chat(user, span_noticesmall("[remove] has been relinquished."))
+			to_chat(user, span_smallnotice("[remove] has been relinquished."))
 
 /obj/item/servant_bell/attack_self(mob/living/user, params)
 	. = ..()
@@ -205,7 +205,7 @@
 		add_servant(spawned)
 
 /obj/item/servant_bell/proc/is_bell_proficient(mob/living/user)
-	return HAS_TRAIT(user, TRAIT_NOBLE) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
+	return HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) || HAS_TRAIT(user, TRAIT_NOBLE_POWER) || is_type_in_list(user.mind?.assigned_role, noble_exemptions) || is_type_in_list(SSjob.GetJob(user.job), noble_exemptions)
 
 /// Keep Bell
 /obj/item/servant_bell/lord
