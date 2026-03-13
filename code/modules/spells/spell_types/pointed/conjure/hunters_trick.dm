@@ -14,7 +14,7 @@
 		/datum/attunement/earth = 0.6,
 	)
 
-	invocation = "Treefather light the way."
+	invocation = "Forest bind them..."
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
