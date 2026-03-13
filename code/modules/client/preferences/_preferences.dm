@@ -1632,13 +1632,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						var/datum/patron/pos_patron = GLOB.patrons_by_type[faith.godhead] || GLOB.patrons_by_type[pick(GLOB.patrons_by_faith[faith.type])]
-						if(!pos_patron.preference_accessible(src))
-							for(var/maybe_patron in GLOB.patrons_by_faith[faith.type])
-								var/datum/patron/real_patron = GLOB.patrons_by_type[maybe_patron]
-								if(real_patron.preference_accessible(src))
-									selected_patron = real_patron
-									break
+						selected_patron = GLOB.patrons_by_type[faith.godhead] || GLOB.patrons_by_type[pick(GLOB.patrons_by_faith[faith.type])]
 
 				if("patron")
 					var/list/patrons_named = list()
@@ -2579,6 +2573,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			used_name,
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
+		)
+	if(length(job.banned_patrons) && (user.client.prefs.selected_patron.type in job.banned_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.banned_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
+
+		return make_lock_row(
+			used_name,
+			"\[PATRON BAN\]",
+			"<b>Patrons Banned:</b><br>[patron_text]"
 		)
 	// No lock
 	return FALSE
