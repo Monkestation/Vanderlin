@@ -88,7 +88,6 @@
 	crafting_message = "incorporate fresh cheese into the dough"
 	extra_chance = 100
 
-
 /datum/repeatable_crafting_recipe/cooking/grenzelbun
 	name = "Grenzel Bun"
 
@@ -98,6 +97,7 @@
 	)
 	attacked_atom = /obj/item/reagent_containers/food/snacks/bun
 	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/sausage
+	subtypes_allowed = TRUE
 	allow_inverse_start = TRUE
 	output = /obj/item/reagent_containers/food/snacks/grenzelbun
 	craft_time = 6 SECONDS
