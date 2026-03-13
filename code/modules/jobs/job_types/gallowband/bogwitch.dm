@@ -94,10 +94,10 @@
 
 /datum/job/bogwitch/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
-	if(old_patron?.type == /datum/patron/alternate/great_hunt)
+	if(old_patron?.type == /datum/patron/alternate/great_hunt/proven)
 		return
 
-	spawned.set_patron(/datum/patron/alternate/great_hunt, TRUE)
+	spawned.set_patron(/datum/patron/alternate/great_hunt/proven, TRUE)
 
 	var/datum/patron/new_patron = spawned.patron
 	if(old_patron != new_patron) // If the patron we selected first does not match the patron we end up with, display the message.

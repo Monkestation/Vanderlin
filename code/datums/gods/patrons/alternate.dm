@@ -21,18 +21,17 @@
 	allowed_races = list(SPEC_ID_DWARF_SUBTERRAN)
 
 /datum/patron/alternate/great_hunt
-	name = "The Great Hunt (Proven)"
+	name = "The Great Hunt (Unroven)"
 	desc = "In the cold reaches of Ossland, they worship the four aspects of the Great Hunt: \
 	Graggar as The Hunter, revered for the relation between predator and prey; \
 	Necra as The Skull, revered for the death that awaits every living being; \
 	Dendor as The Woods, revered for the wilds they live in and the beasts they hunt; \
 	Abyssor as The Traveler, revered for the safe passage of travelers and the unflinching weather that scours the north."
+	boons = "None. You have not proven worthy yet."
 	domain = "The Hunt, Travelers, Nature"
 	flaws = "Intense, Morbid"
 	worshippers = "Hunters, the Northmen"
 	sins = "Wasting any of your kills, Smashing skullmets, Exploiting nature"
-	added_traits = list(TRAIT_MANEATER_IMMUNITY, TRAIT_ENTANGLER_IMMUNITY)
-	boons = "You are left untouched by the flesh eating plants."
 
 	confess_lines = list(
 		"I WILL BE REBORN!",
@@ -43,7 +42,7 @@
 	devotion_holder = /datum/devotion/alternate/great_hunt
 
 /datum/patron/alternate/great_hunt/preference_accessible(datum/preferences/prefs)
-	return FALSE
+	return TRUE
 
 /datum/patron/alternate/great_hunt/can_pray(mob/living/carbon/human/follower)
 	var/amulet_type = /obj/item/clothing/neck/psycross/great_hunt
@@ -54,9 +53,10 @@
 	to_chat(follower, span_danger("I need an amulet of the hunt for my prayers to be heard..."))
 	return FALSE
 
-/datum/patron/alternate/great_hunt/unproven
-	name = "The Great Hunt (Unproven)"
-	boons = "None. You have not proven worthy yet."
+/datum/patron/alternate/great_hunt/proven
+	name = "The Great Hunt (Proven)"
+	added_traits = list(TRAIT_MANEATER_IMMUNITY, TRAIT_ENTANGLER_IMMUNITY)
+	boons = "You are left untouched by the flesh eating plants."
 
-/datum/patron/alternate/great_hunt/unproven/preference_accessible(datum/preferences/prefs)
-	return TRUE
+/datum/patron/alternate/great_hunt/proven/preference_accessible(datum/preferences/prefs)
+	return FALSE

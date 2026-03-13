@@ -213,7 +213,7 @@
 						situational_bonus = 25
 						break
 
-			if(/datum/patron/alternate/great_hunt)
+			if(/datum/patron/alternate/great_hunt/proven)
 				cast_on.visible_message(span_info("The smell of wet grass and earth surrounds [cast_on]!"), span_notice("I'm surrounded by the smell of wet grass and earth!"))
 				// The more alchemically significant body parts around the caster, the greater the effect.
 				situational_bonus = check_hunt_bonuses(owner, 5, 50, 0.5)
