@@ -31,7 +31,8 @@
 	flaws = "Intense, Morbid"
 	worshippers = "Hunters, the Northmen"
 	sins = "Wasting any of your kills, Smashing skullmets, Exploiting nature"
-	boons = ""
+	added_traits = list(TRAIT_MANEATER_IMMUNITY, TRAIT_ENTANGLER_IMMUNITY)
+	boons = "You are left untouched by the flesh eating plants."
 
 	confess_lines = list(
 		"I WILL BE REBORN!",

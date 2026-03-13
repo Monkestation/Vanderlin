@@ -47,7 +47,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/fae/agriopylon/Initialize(mapload)
 	. = ..()
-	ADD_TRAIT(src, TRAIT_ENTANGLER_IMMUNE, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_ENTANGLER_IMMUNITY, TRAIT_GENERIC)
 	AddComponent(/datum/component/obeys_commands, pet_commands)
 	AddComponent(/datum/component/ai_aggro_system)
 	flower_idle = mutable_appearance(icon, "flower_spirit_detail")

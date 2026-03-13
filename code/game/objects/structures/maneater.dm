@@ -134,6 +134,8 @@
 		return
 	if(isliving(AM))
 		var/mob/living/L = AM
+		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY))
+			return
 		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		if(L.status_flags & GODMODE)
