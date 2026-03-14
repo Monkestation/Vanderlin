@@ -36,7 +36,6 @@
 		/datum/job/adventurer/courtagent,
 		/datum/job/archivist,
 		/datum/job/templar,
-		/datum/job/wretch,
 		/datum/job/inquisitor,
 		/datum/job/absolver,
 		/datum/job/adept,

@@ -2,7 +2,7 @@
 	name = "Bandit Migration"
 	wave_type = /datum/migrant_wave/bandit
 
-	weight = 12
+	weight = 8
 
 	earliest_start = 20 MINUTES
 

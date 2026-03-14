@@ -17,7 +17,11 @@
 	/// Can either be normal list or a weighted list.
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
-	var/list/preferred_events
+	var/list/preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1.5,
+		/datum/round_event_control/antagonist/solo/aspirant = 1,
+		/datum/round_event_control/antagonist/solo/maniac = 1,
+	)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()

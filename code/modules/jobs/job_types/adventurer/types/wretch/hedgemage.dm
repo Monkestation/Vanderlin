@@ -32,7 +32,6 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_INHUMENCAMP
 	)
 
 	spells = list(
@@ -47,8 +46,6 @@
 	if(spawned.age == AGE_OLD)
 		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 		spawned.adjust_skillrank(/datum/skill/magic/arcane, 1)
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"

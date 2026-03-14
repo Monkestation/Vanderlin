@@ -1,12 +1,10 @@
 /datum/job/wretch
 	title = "Wretch"
-	tutorial = "Somewhere in your lyfe, you fell to the wrong side of civilization. Hounded by the consequences of your actions, you now threaten the peace of those who still heed the authority that condemned you."
 	department_flag = OUTSIDERS
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS)
 	display_order = JDO_WRETCH
-	faction = FACTION_NEUTRAL
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 
 	advclass_cat_rolls = list(CTAG_WRETCH = 20)
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -15,10 +13,6 @@
 	job_reopens_slots_on_death = FALSE
 	same_job_respawn_delay = 30 MINUTES
 
-	can_have_apprentices = FALSE
-	traits = list(TRAIT_NOAMBUSH)
-	antag_role = /datum/antagonist/wretch
-	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_types_granted = list(EXP_TYPE_COMBAT)
@@ -36,9 +30,13 @@
 
 /datum/job/advclass/wretch
 	abstract_type = /datum/job/advclass/wretch
+	job_flags = JOB_SHOW_IN_CREDITS
 	category_tags = list(CTAG_WRETCH)
 	spawn_with_torch = TRUE
+	faction = FACTION_NEUTRAL
 	department_flag = OUTSIDERS
+	can_have_apprentices = FALSE
+	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
 
 	/// An associative list of honorary titles to choose from.
 	/// The key is the title, the value indicates whether it is a prefix (0) or a suffix (1)
@@ -52,6 +50,7 @@
 			spawned.honorary_suffix = honorary
 		else
 			spawned.honorary = honorary
+	wretch_select_bounty(spawned)
 
 
 /datum/job/advclass/wretch/proc/wretch_select_bounty(mob/living/carbon/human/H)

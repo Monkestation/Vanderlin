@@ -36,7 +36,6 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_HEAVYARMOR,
 		TRAIT_RECOGNIZED,
-		TRAIT_INHUMENCAMP,
 	)
 
 	spells = list(
@@ -113,8 +112,6 @@
 		if("None")
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/disgraced
 	name = "Disgraced Knight (Wretch)"

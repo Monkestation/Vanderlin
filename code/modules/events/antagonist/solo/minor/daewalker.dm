@@ -27,6 +27,8 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	//not actually, see check_enemies proc
 	required_enemies = 10
 
+	max_occurrences = 1
+
 	min_players = 20
 	weight = 10
 	typepath = /datum/round_event/antagonist/solo/ghost/daewalker

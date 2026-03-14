@@ -43,10 +43,6 @@
 	)
 
 
-/datum/job/advclass/wretch/rouschild/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/rouschild
 	name = "Rouschild (Wretch)"
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown

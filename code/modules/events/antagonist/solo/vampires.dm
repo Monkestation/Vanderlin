@@ -10,12 +10,13 @@
 	shared_occurence_type = SHARED_HIGH_THREAT
 
 	min_players = LOWPOP_THRESHOLD
-	weight = 10
+	weight = 12
 
-	denominator = 25
+	denominator = 30
 
-	base_antags = 1
+	base_antags = 2
 	maximum_antags = 4
+	cost = 0.8
 
 	earliest_start = 0 SECONDS
 

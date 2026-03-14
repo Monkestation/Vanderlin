@@ -67,8 +67,6 @@
 		if("Sword")
 			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
 
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/berserker
 	name = "Reaver (Wretch)"
 	head = /obj/item/clothing/head/helmet/nasal

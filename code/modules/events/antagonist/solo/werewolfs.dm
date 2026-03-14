@@ -11,12 +11,13 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 55
+	denominator = 35
 
 	base_antags = 1
 	maximum_antags = 2
 
 	weight = 12
+	cost = 0.8
 
 	earliest_start = 0 SECONDS
 	min_players = LOWPOP_THRESHOLD
@@ -40,6 +41,8 @@
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
+		/datum/job/magician,
+		/datum/job/archivist
 	)
 
 /datum/round_event_control/antagonist/solo/werewolf/valid_for_map()

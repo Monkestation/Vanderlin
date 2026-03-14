@@ -116,6 +116,8 @@
 
 /// The concrete number for what is considered "lowpop" on Vanderlin
 #define LOWPOP_THRESHOLD 35
+/// What is high pop on Vanderlin?
+#define HIGHPOP_THRESHOLD 70
 
 #define MUNDANE_POINT_THRESHOLD 20
 #define MODERATE_POINT_THRESHOLD 35
