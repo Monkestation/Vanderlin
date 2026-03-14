@@ -35,6 +35,7 @@
 		TRAIT_MEDIUMARMOR
 	)
 
+
 /datum/outfit/mercenary/gloryhound
 	name = "Gloryhound (Mercenary)"
 	shoes = /obj/item/clothing/shoes/shortboots
@@ -46,12 +47,10 @@
 	armor = /obj/item/clothing/armor/cuirass
 	backl = /obj/item/storage/backpack/satchel
 	shirt = /obj/item/clothing/armor/gambeson
-	pants = /obj/item/clothing/pants/trou/leather/splint
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/villager = 1
-
 	)
 /datum/job/advclass/mercenary/gloryhound/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -61,11 +60,14 @@
 		if("Sword")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword, ITEM_SLOT_BELT_L, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
 			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		if("Polehammer")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak/lucerne, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather, ITEM_SLOT_PANTS)
 			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		if("Mace")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/steel, ITEM_SLOT_BELT_L, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BELT_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
 			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
