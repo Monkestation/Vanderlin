@@ -60,7 +60,7 @@
 /datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
-	var/healing_multiplier = 0.7 + user.get_skill_level(skill_used, TRUE) * 0.1
+	var/healing_multiplier = 0.7 + GET_MOB_SKILL_VALUE_OLD(user, skill_used) * 0.1
 	var/urhealedamt_brute = brutehealing * healing_multiplier
 	var/urhealedamt_burn = burnhealing * healing_multiplier
 	if(missinghpbonus)

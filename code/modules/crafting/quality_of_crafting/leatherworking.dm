@@ -9,7 +9,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/hide/cured
-	skillcraft = /datum/skill/craft/tanning
+	skillcraft = /datum/attribute/skill/craft/tanning
 	craftdiff = 0
 	subtypes_allowed = TRUE // so you can use any subtype of fur
 	category = "Leatherworking"

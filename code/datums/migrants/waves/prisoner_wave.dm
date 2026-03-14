@@ -3,6 +3,28 @@
 	greet_text = "The lords of Vanderlin sent you to repatriate some prisoners that were in a distant prison, you are now on your way back."
 	migrant_job = /datum/job/migrant/gaoler
 
+/datum/attribute_holder/sheet/job/migrant/gaoler
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = -2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		STAT_PERCEPTION = -1,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/traps = 30,
+	)
+
+
 /datum/job/migrant/gaoler
 	title = "Gaoler"
 	tutorial = "The lords of Vanderlin sent you to repatriate some prisoners that were in a distant prison, you are now on your way back."
@@ -20,28 +42,7 @@
 		SPEC_ID_HALF_ORC,
 	)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = -2,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1,
-		STATKEY_PER = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/traps = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/gaoler
 
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 	voicepack_m = /datum/voicepack/male/warrior
@@ -73,33 +74,34 @@
 	greet_text = "You fled Vanderlin and took refuge another kingdom, yet the lords over there caught you and thus handed you over to those who sought you before."
 	migrant_job = /datum/job/migrant/mig_prisoner
 
+/datum/attribute_holder/sheet/job/migrant/mig_prisoner
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = -1,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/misc/riding = 10,
+	)
+
 /datum/job/migrant/mig_prisoner
 	title = "Prisoner (Migrant Wave)"
 	tutorial = "You fled Vanderlin and took refuge another kingdom, yet the lords over there caught you and thus handed you over to those who sought you before."
 	outfit = /datum/outfit/mig_prisoner
 	is_foreigner = FALSE
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-		STATKEY_SPD = -1,
-		STATKEY_CON = -1,
-		STATKEY_END = -1,
-	)
 
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/misc/riding = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/mig_prisoner
 
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
@@ -112,6 +114,23 @@
 	name = "Convoy Guard"
 	greet_text = "You are a part of a convoy returning prisoners to Vanderlin. Obey the gaoler and ensure the prisoners get back to the dungeons."
 	migrant_job = /datum/job/migrant/mig_guard
+
+/datum/attribute_holder/sheet/job/migrant/mig_guard
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+	)
 
 /datum/job/migrant/mig_guard
 	title = "Convoy Guard"
@@ -130,24 +149,7 @@
 		SPEC_ID_HALF_ORC,
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/mig_guard
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

@@ -163,7 +163,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Generic traits tied to having the species and being female
 	var/list/inherent_traits_f
 	/// Associative list of skills to adjustments
-	var/list/inherent_skills = list()
+	var/datum/attribute_holder/sheet/job/inherent_sheet
 	/// Species-only traits used for drawing, can be found in DNA.dm
 	var/list/species_traits = list()
 	/// Components to add when spawning
@@ -240,11 +240,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// List all of body markings that the player can choose from in customization. Body markings from sets get added to here
 	var/list/body_markings
 
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
-
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
+	var/datum/attribute_holder/sheet/statsheet_male
+	var/datum/attribute_holder/sheet/statsheet_female
 
 	/// Can we be a youngling?
 	var/can_be_youngling = TRUE
@@ -777,8 +774,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		for(var/trait as anything in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.add_sheet(inherent_sheet)
 
 	for(var/component in components_to_add)
 		C.AddComponent(component)
@@ -809,8 +806,22 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	else
 		apply_customizers_to_character(C)
 
+	on_gender_update(C)
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
+/datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
+	if(old_gender)
+		if(statsheet_male || statsheet_female)
+			if(old_gender == MALE || !statsheet_female)
+				C.attributes?.subtract_sheet(statsheet_male)
+			else if(old_gender == FEMALE)
+				C.attributes?.subtract_sheet(statsheet_female)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.add_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.add_sheet(statsheet_female)
 
 /datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
@@ -818,8 +829,14 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, -inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.subtract_sheet(inherent_sheet)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.subtract_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -1177,7 +1194,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(HAS_TRAIT(H, TRAIT_CHUNKYFINGERS))
 		return do_after(H, 5 MINUTES)
 	var/doafter_flags = I.edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-	return do_after(H, min((I.equip_delay_self - H.STASPD), 1), timed_action_flags = doafter_flags)
+	return do_after(H, min((I.equip_delay_self - GET_MOB_ATTRIBUTE_VALUE(H, STAT_SPEED)), 1), timed_action_flags = doafter_flags)
 
 /// Equips the necessary species-relevant gear before putting on the rest of the uniform.
 /datum/species/proc/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
@@ -1419,7 +1436,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		var/damage = user.get_punch_dmg()
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 
@@ -1529,7 +1546,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 //		var/obj/machinery/disposal/bin/target_disposal_bin
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
-		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10), 0, 95)))//check if we actually shove them
+		if(prob(clamp(30 + (user.stat_compare(target, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))//check if we actually shove them
 			//Thank you based whoneedsspace
 			target.stop_pulling(TRUE)
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
@@ -1645,7 +1662,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			target.lastattacker_weakref = WEAKREF(user)
 			if(target.mind)
 				target.mind.attackedme[user.real_name] = world.time
-			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 			var/damage = user.get_kick_damage(2.5)
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
@@ -1749,7 +1766,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			to_chat(user, "<span class='danger'>I kick [target.name]!</span>")
 			log_combat(user, target, "kicked")
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
@@ -1976,11 +1993,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
-						if(damage_amount > ((H.STACON*10) / 3))
+						if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3))
 							H.emote("painscream")
 						else
 							H.emote("pain")
-				if(damage_amount > ((H.STACON*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
+				if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
 					H.Immobilize(4)
 					shake_camera(H, 2, 2)
 					H.stuttering += 5
@@ -2454,7 +2471,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/knockback(obj/item/I, mob/living/target, mob/living/user, nodmg, actual_damage)
 	if(!istype(I))
 		if(!target.resting)
-			var/chungus_str = target.STASTR
+			var/chungus_str = GET_MOB_ATTRIBUTE_VALUE(target, STAT_STRENGTH)
 			var/knockback_tiles = 0
 			var/damage = actual_damage
 			if(chungus_str >= 3)
@@ -2476,7 +2493,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return
 		if(user.used_intent.knockback)
 			if(!target.resting)
-				var/endurance = target.STAEND
+				var/endurance = GET_MOB_ATTRIBUTE_VALUE(target, STAT_ENDURANCE)
 				var/knockback_tiles = 0
 				var/newforce = actual_damage
 				if(endurance >= 3)
@@ -2499,7 +2516,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/skill_modifier = 10
 	if(istype(starting_turf) && !QDELETED(starting_turf))
 		distance = get_dist(starting_turf, src)
-	skill_modifier *= get_skill_level(/datum/skill/misc/athletics, TRUE)
+	skill_modifier *= GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
 	var/modifier = -distance
-	if(!prob(STAEND+skill_modifier+modifier))
+	if(!prob(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)+skill_modifier+modifier))
 		Knockdown(8)

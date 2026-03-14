@@ -205,7 +205,7 @@ GLOBAL_LIST_EMPTY(biggates)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = 10.5 SECONDS - (L.STASTR * 10)
+		var/used_time = 10.5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
 		user.visible_message("<span class='warning'>[user] cranks the winch.</span>")
 		playsound(src, 'sound/foley/winch.ogg', 100, extrarange = 3)
 		if(do_after(user, used_time))

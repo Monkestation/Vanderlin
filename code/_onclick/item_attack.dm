@@ -446,7 +446,7 @@
 	if(I.max_blade_int && I.sharpness != IS_BLUNT)
 		dullness_ratio = I.blade_int / I.max_blade_int
 	var/cont = FALSE
-	var/used_str = user.STASTR
+	var/used_str = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		/*
@@ -488,7 +488,7 @@
 		if(HAS_TRAIT(I, TRAIT_WIELDED))
 			effective *= 0.75
 		//Strength influence is reduced to 30%
-		if(effective > user.STASTR)
+		if(effective > GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH))
 			newforce = max(newforce*0.3, 1)
 
 	//Blade Dulling Starts here.
@@ -497,12 +497,12 @@
 			switch(user.used_intent.blade_class)
 				if(BCLASS_CUT)
 					var/mob/living/lumberjacker = user
-					var/lumberskill = lumberjacker.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+					var/lumberskill = GET_MOB_SKILL_VALUE_OLD(lumberjacker, /datum/attribute/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1, user))
 						dullfactor = 0.2
 					else
 						dullfactor = 0.45 + (lumberskill * 0.15)
-						lumberjacker.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
+						lumberjacker.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(lumberjacker, STAT_INTELLIGENCE)*0.2))
 					cont = TRUE
 				if(BCLASS_CHOP)
 					//Additional damage for axes against trees.
@@ -555,7 +555,7 @@
 					cont = TRUE
 				if(BCLASS_PICK)
 					var/mob/living/miner = user
-					var/mineskill = miner.get_skill_level(/datum/skill/labor/mining, TRUE)
+					var/mineskill = GET_MOB_SKILL_VALUE_OLD(miner, /datum/attribute/skill/labor/mining)
 					dullfactor = 1.6 - (mineskill * 0.1)
 					cont = TRUE
 			if(!cont)
@@ -568,14 +568,14 @@
 				return 0
 			var/mob/living/miner = user
 			//Mining Skill force multiplier.
-			var/mineskill = miner.get_skill_level(/datum/skill/labor/mining, TRUE)
+			var/mineskill = GET_MOB_SKILL_VALUE_OLD(miner, /datum/attribute/skill/labor/mining)
 			newforce = newforce * (8+(mineskill*1.5))
 			// Pick quality multiplier. Affected by smithing, or material of the pick.
 			if(istype(I, /obj/item/weapon/pick))
 				var/obj/item/weapon/pick/P = I
 				newforce *= P.pickmult
 			shake_camera(user, 1, 0.1)
-			miner.adjust_experience(/datum/skill/labor/mining, (miner.STAINT*0.2))
+			miner.adjust_experience(/datum/attribute/skill/labor/mining, (GET_MOB_ATTRIBUTE_VALUE(miner, STAT_INTELLIGENCE)*0.2))
 	/*
 	* Ill be honest this final thing is extremely confusing.
 	* Newforce after being altered by strength stat is then

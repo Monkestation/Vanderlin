@@ -162,7 +162,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	SIGNAL_HANDLER
 	for(var/mob/living/carbon/human/rider in buckled_mobs)
 		if(rider.m_intent == MOVE_INTENT_RUN)
-			var/rider_skill = rider.get_skill_level(/datum/skill/misc/riding)
+			var/rider_skill = GET_MOB_SKILL_VALUE_OLD(rider, /datum/attribute/skill/misc/riding)
 			if(rider_skill < SKILL_LEVEL_MASTER)
 				violent_dismount(rider)
 

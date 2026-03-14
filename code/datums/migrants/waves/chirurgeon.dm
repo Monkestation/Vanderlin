@@ -7,6 +7,23 @@
 	your competition, lest you find yourself dead and floating downstream."
 	migrant_job = /datum/job/migrant/chirurgeon
 
+/datum/attribute_holder/sheet/job/migrant/chirurgeon
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_SPEED = 1,
+		STAT_STRENGTH = -2,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/alchemy = 10,
+	)
+
 /datum/job/migrant/chirurgeon
 	title = "Chirurgeon"
 	tutorial = "You've no acclaim to the tenures you say you have, and the history you recount is shoddy at best, and false at \
@@ -17,24 +34,7 @@
 	outfit = /datum/outfit/chirurgeon
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
-	jobstats = list(
-		STATKEY_INT = 3,
-		STATKEY_SPD = 1,
-		STATKEY_STR = -2,
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/alchemy = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/chirurgeon
 
 	traits = list(
 		TRAIT_EMPATH,

@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/undertaker
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		STAT_FORTUNE = -1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20, //Wrestling the deadites
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/labor/mathematics = 20
+	)
+
 /datum/job/undertaker
 	title = "Gravetender"
 	tutorial = "As a servant of Necra, you embody the sanctity of her domain, \
@@ -24,26 +43,7 @@
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 2,
-		STATKEY_PER = -1,
-		STATKEY_LCK = -1
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 2, //Wrestling the deadites
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/labor/mathematics = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/undertaker
 
 	traits = list(
 		TRAIT_DEADNOSE,

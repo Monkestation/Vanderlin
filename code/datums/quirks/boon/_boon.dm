@@ -179,7 +179,7 @@
 		return
 	if(!examiner.mind || !source_mob.mind)
 		return
-	if(examiner.STAINT < 8)
+	if(GET_MOB_ATTRIBUTE_VALUE(examiner, STAT_INTELLIGENCE) < 8)
 		return
 	var/mob_name = source_mob.get_visible_name("")
 	if(!mob_name || (mob_name == "Unknown"))
@@ -246,8 +246,8 @@
 		L = new(T)
 		tent = new(T)
 		var/obj/structure/handcart/cart = new(T)
-		cart.put_in(null, L)
-		cart.put_in(null, tent)
+		cart.put_in(null, L, TRUE)
+		cart.put_in(null, tent, TRUE)
 
 	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
 
@@ -306,7 +306,7 @@
 		return
 
 	var/mob/living/carbon/human/H = owner
-	H.clamped_adjust_skillrank(/datum/skill/misc/riding, 2, 2, TRUE)
+	H.clamped_adjust_skill_level(/datum/attribute/skill/misc/riding, 20, 20, TRUE)
 
 /datum/quirk/boon/beautiful
 	name = "Strikingly Beautiful"

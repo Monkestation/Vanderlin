@@ -354,5 +354,33 @@
                 "bugfix": "Changed references to a lot of non-canonical locations and events in item descriptions."
             }
         ]
+    },
+    "2026-03-14": {
+        "realforest2001": [
+            {
+                "bugfix": "Hopefully fixes TMs not being displayed on join."
+            },
+            {
+                "rscadd": "New Psydonic has its own language icon now."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "bugfix": "Stopped NPCs from salting in deadchat."
+            },
+            {
+                "bugfix": "Commoner prisoners no longer have noble blood again."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes the Nefarious Tan Blood"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Adds a selectable variant of the Great Hunt patron."
+            }
+        ]
     }
 }

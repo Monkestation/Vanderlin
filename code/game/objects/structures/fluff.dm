@@ -194,7 +194,7 @@
 		var/chance = 100 - (I.w_class-1) * 30
 		if(isliving(I.throwing.thrower))
 			var/mob/living/L = I.throwing.thrower
-			chance += (L.STALUC - 10) * 10
+			chance += (GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) - 10) * 10
 		return prob(clamp(chance, 0, 100))
 
 /obj/structure/bars/bent
@@ -551,7 +551,7 @@
 /obj/structure/fluff/signage/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -564,7 +564,7 @@
 /obj/structure/fluff/buysign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -577,7 +577,7 @@
 /obj/structure/fluff/sellsign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -596,7 +596,7 @@
 	. = ..()
 	if(wrotesign)
 		if(!user.is_literate())
-			user.adjust_experience(/datum/skill/misc/reading, 2, FALSE)
+			user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
 			. += "I have no idea what it says."
 		else
 			. += "It says \"[wrotesign]\"."
@@ -884,7 +884,7 @@
 			if(W.associated_skill)
 				if(user.mind && isliving(user))
 					var/mob/living/L = user
-					var/probby = (L.STALUC / 10) * 100
+					var/probby = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) / 10) * 100
 					probby = min(probby, 99)
 					user.changeNext_move(CLICK_CD_MELEE)
 					if(W.max_blade_int)
@@ -897,18 +897,18 @@
 						probby = 0
 					if(L.body_position == LYING_DOWN)
 						probby = 0
-					if(L.STAINT < 3)
+					if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) < 3)
 						probby = 0
 					if(prob(probby) && !L.has_status_effect(/datum/status_effect/debuff/trainsleep) && !user.buckled)
 						user.visible_message("<span class='info'>[user] trains on [src]!</span>")
 						var/boon = user.get_learning_boon(W.associated_skill)
-						var/amt2raise = L.STAINT/2
-						if(user.get_skill_level(W.associated_skill) >= 2)
+						var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2
+						if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 15)
 							if(!HAS_TRAIT(user, TRAIT_INTRAINING))
 								to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 								amt2raise = 0
 							else
-								if(user.get_skill_level(W.associated_skill) >= 3)
+								if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 20)
 									to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 									amt2raise = 0
 						if(amt2raise > 0)
@@ -1024,11 +1024,11 @@
 		if(4)
 			I = new /obj/item/clothing/head/helmet/horned(user.loc)
 		if(6)
-			if(user.get_skill_level(/datum/skill/combat/polearms) > 2)
+			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
 				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
-			else if(user.get_skill_level(/datum/skill/combat/bows) > 2)
+			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
 				I = new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long(user.loc)
-			else if(user.get_skill_level(/datum/skill/combat/swords) > 2)
+			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
 				I = new /obj/item/weapon/sword/long(user.loc)
 			else
 				I = new /obj/item/weapon/mace/steel(user.loc)

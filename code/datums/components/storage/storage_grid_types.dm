@@ -9,6 +9,10 @@
 	screen_max_rows = 3
 	screen_max_columns = 2
 
+/datum/component/storage/concrete/grid/satchel/cloth/big
+	screen_max_rows = 3
+	screen_max_columns = 3
+
 /datum/component/storage/concrete/grid/backpack
 	screen_max_rows = 7
 	screen_max_columns = 4
