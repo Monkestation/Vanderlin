@@ -16,7 +16,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	allowed_storytellers = DIVINE_STORYTELLERS
 	dedicated_storytellers = list(/datum/storyteller/astrata)
 
-	cost = 1
+	cost = 0.7
 	checks_antag_cap = FALSE
 	base_antags = 1
 	maximum_antags = 1

@@ -30,7 +30,7 @@
 
 	denominator = 20
 
-	cost = 0.6
+	cost = 0.5
 
 	base_antags = 1
 	maximum_antags = 3

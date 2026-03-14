@@ -15,7 +15,7 @@
 	base_antags = 4
 	maximum_antags = 4
 
-	cost = 1.3
+	cost = 1.1
 
 	earliest_start = 0 SECONDS
 	min_players = HIGHPOP_THRESHOLD

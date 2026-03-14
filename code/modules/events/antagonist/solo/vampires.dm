@@ -16,7 +16,7 @@
 
 	base_antags = 2
 	maximum_antags = 4
-	cost = 0.8
+	cost = 0.9
 
 	earliest_start = 0 SECONDS
 
