@@ -41,9 +41,6 @@
 	)
 	devotion_holder = /datum/devotion/alternate/great_hunt
 
-/datum/patron/alternate/great_hunt/preference_accessible(datum/preferences/prefs)
-	return TRUE
-
 /datum/patron/alternate/great_hunt/can_pray(mob/living/carbon/human/follower)
 	var/amulet_type = /obj/item/clothing/neck/psycross/great_hunt
 
