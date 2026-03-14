@@ -2296,6 +2296,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.skin_tone = skin_tone
 	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
+	character.underwear_color = underwear_color
 	character.undershirt = undershirt
 	character.detail = detail
 	character.socks = socks

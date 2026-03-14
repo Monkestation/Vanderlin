@@ -1,3 +1,5 @@
+GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
+
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = ""
@@ -68,7 +70,7 @@
 		return
 	qdel(reagents)
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	bloodiness = 0
 
 /obj/effect/decal/cleanable/blood/lazy_init_reagents()
@@ -163,7 +165,7 @@
 	if(QDELETED(src))
 		return
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	alpha = 100
 	bloodiness = 0
 

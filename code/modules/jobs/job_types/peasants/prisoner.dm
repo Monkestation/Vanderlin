@@ -46,8 +46,7 @@
 	)
 
 	traits = list(
-		TRAIT_BANDITCAMP,
-		TRAIT_NOBLE_BLOOD
+		TRAIT_BANDITCAMP
 	)
 
 /datum/job/prisoner/after_spawn(mob/living/carbon/human/spawned, client/player_client)
