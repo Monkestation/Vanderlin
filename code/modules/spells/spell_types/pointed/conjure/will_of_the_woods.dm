@@ -70,7 +70,7 @@
 				summon_radius = 1
 			if(14 to INFINITY)
 				summon_amount = 1
-				summon_type = list(/mob/living/simple_animal/hostile/retaliate/troll/bog)
+				summon_type = list(/mob/living/simple_animal/hostile/retaliate/troll/bog/slaved)
 				summon_radius = 0
 
 	else
@@ -93,6 +93,6 @@
 				summon_radius = 2
 			if(14 to INFINITY)
 				summon_amount = 1
-				summon_type = list(/mob/living/simple_animal/hostile/retaliate/troll, /mob/living/simple_animal/hostile/retaliate/troll/axe)
+				summon_type = list(/mob/living/simple_animal/hostile/retaliate/troll/slaved, /mob/living/simple_animal/hostile/retaliate/troll/axe/slaved)
 				summon_radius = 0
 
