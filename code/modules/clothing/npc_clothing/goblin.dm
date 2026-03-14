@@ -7,7 +7,7 @@
 	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	allowed_race = list(SPEC_ID_GOBLIN)
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	max_integrity = 60
 	armor_class = AC_LIGHT // Otherwise they get knocked down TOO easily!!!
 	sellprice = 0

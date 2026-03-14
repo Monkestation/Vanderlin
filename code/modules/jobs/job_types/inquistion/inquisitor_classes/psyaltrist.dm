@@ -1,26 +1,26 @@
+/datum/attribute_holder/sheet/job/psyaltrist
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 3,
+		/datum/attribute/skill/misc/music = 50,
+		/datum/attribute/skill/magic/holy = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
 /datum/job/advclass/sacrestant/psyaltrist
 	title = "Psyaltrist"
 	tutorial = "Every inquisitor has their second. You aim to keep spirits and faith high, while handling the needs of the inquisitor. Not a glamorous role, but a vital one. “Maybe his lordship would prefer the lute, today, over the viola?”"
 	category_tags = list(CTAG_INQUISITION)
 	outfit = /datum/outfit/psyaltrist
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_SPD = 3,
-	) //4 Statline
-
-	skills = list(
-		/datum/skill/misc/music = SKILL_LEVEL_MASTER,
-		/datum/skill/magic/holy = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/psyaltrist
 
 	languages = list(
 		/datum/language/elvish,

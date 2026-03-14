@@ -43,8 +43,8 @@
 /mob/dead/observer/rogue/arcaneeye/Crossed(mob/living/L)
 	if(istype(L, /mob/living/carbon/human))
 		var/mob/living/carbon/human/V = L
-		var/holyskill = V.get_skill_level(/datum/skill/magic/holy)
-		var/magicskill = V.get_skill_level(/datum/skill/magic/arcane)
+		var/holyskill = GET_MOB_SKILL_VALUE_OLD(V, /datum/attribute/skill/magic/holy)
+		var/magicskill = GET_MOB_SKILL_VALUE_OLD(V, /datum/attribute/skill/magic/arcane)
 		if(magicskill >= 2)
 			to_chat(V, "<font color='red'>An ancient and unusual magic looms in the air around you.</font>")
 			return

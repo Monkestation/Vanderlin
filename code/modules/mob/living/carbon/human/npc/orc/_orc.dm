@@ -7,14 +7,13 @@
 	bodyparts = list(/obj/item/bodypart/chest/orc, /obj/item/bodypart/head/orc, /obj/item/bodypart/l_arm/orc,
 					/obj/item/bodypart/r_arm/orc, /obj/item/bodypart/r_leg/orc, /obj/item/bodypart/l_leg/orc)
 	rot_type = /datum/component/rot/corpse/orc
-//	var/gob_outfit = /datum/outfit/npc/orc/ambush removed to apply different classes to the orcs
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw, /datum/intent/simple/bite, /datum/intent/kick)
-	bloodpool = 1500 // Not as much vitae from them as humans to avoid vampires cheesing mobs
+	bloodpool = 1500
 
 /mob/living/carbon/human/species/orc/slaved
 	ai_controller = /datum/ai_controller/human_npc
-	dodgetime = 15 //they can dodge easily, but have a cooldown on it
+	dodgetime = 15
 	canparry = TRUE
 	wander = FALSE
 
@@ -33,10 +32,9 @@
 
 /mob/living/carbon/human/species/orc/npc
 	ai_controller = /datum/ai_controller/human_npc
-	dodgetime = 15 //they can dodge easily, but have a cooldown on it
+	dodgetime = 15
 	canparry = TRUE
 	flee_in_pain = FALSE
-
 	var/orc_outfit
 	wander = FALSE
 
@@ -131,17 +129,21 @@
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
+/datum/attribute_holder/sheet/job/orc_npc/configure_mind
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+	)
+
 /mob/living/carbon/human/species/orc/proc/configure_mind()
 	if(!mind)
 		mind = new /datum/mind(src)
 	mind.current = src
-
-	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/configure_mind)
 
 /mob/living/carbon/human/species/orc/after_creation()
 	..()
@@ -175,20 +177,12 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
-//	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
-//	blue breathes underwater, need a new specific one for this maybe organ cheque
-//	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-//	if(gob_outfit)
-//		var/datum/outfit/O = new gob_outfit
-//		if(O)
-//			equipOutfit(O)
 
 /datum/species/orc
 	name = "orc"
 	id = SPEC_ID_ORC
 	species_traits = list(NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE,TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
-	//no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = ""
@@ -215,7 +209,7 @@
 	return TRUE
 
 /datum/component/rot/corpse/orc/process()
-	var/amt2add = 10 //1 second
+	var/amt2add = 10
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)
 		amt2add = ((world.time - last_process)/10) * amt2add
@@ -254,36 +248,33 @@
 		else if(amount > 12 MINUTES)
 			C.update_body()
 
-/////
-////
-////
-//// OUTFIT//////////////////
-////
-///
+/datum/attribute_holder/sheet/job/orc_npc/ambush
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_SPEED = 2,
+		STAT_CONSTITUTION = 3,
+		STAT_ENDURANCE = 3,
+		STAT_INTELLIGENCE = -9,
+	)
 
 /datum/outfit/npc/orc/ambush/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 13
-	H.base_speed = 12
-	H.base_constitution = 13
-	H.base_endurance = 13
-	H.recalculate_stats(FALSE)
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/ambush)
 	var/loadout = rand(1,5)
 	switch(loadout)
-		if(1) //Stolen Tool armed raider
+		if(1)
 			r_hand = /obj/item/weapon/axe/iron
 			armor = /obj/item/clothing/armor/leather/hide/orc
-		if(2) //Stolen Tool armed raider
+		if(2)
 			r_hand = /obj/item/weapon/thresher
 			armor = /obj/item/clothing/armor/leather/hide/orc
-		if(3) //Stolen Tool armed raider
-			r_hand = /obj/item/weapon/pitchfork//removed the cudgel because it's way too good at knock people out
+		if(3)
+			r_hand = /obj/item/weapon/pitchfork
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			if(prob(10))
-				//head = /obj/item/clothing/head/helmet/orc
 				r_hand = /obj/item/weapon/sickle
 				armor = /obj/item/clothing/armor/leather/hide/orc
-		if(4) //lightly armored sword/flail/daggers
+		if(4)
 			if(prob(50))
 				head = /obj/item/clothing/head/helmet/orc
 				r_hand = /obj/item/weapon/mace/spiked
@@ -304,9 +295,9 @@
 				armor = /obj/item/clothing/armor/chainmail/iron/orc
 				pants = /obj/item/clothing/armor/leather/hide/orc
 				head = /obj/item/clothing/head/helmet/leather
-		if(5) //heavy armored sword/flail/shields
+		if(5)
 			if(prob(20))
-				r_hand = /obj/item/weapon/mace//readded the blunt weapon, this time with an very rare "slavist" orc
+				r_hand = /obj/item/weapon/mace
 				l_hand = /obj/item/weapon/whip
 				armor = /obj/item/clothing/armor/plate/orc
 				head = /obj/item/clothing/head/helmet/orc
@@ -339,7 +330,6 @@
 				armor = /obj/item/clothing/armor/plate/orc
 				head = /obj/item/clothing/head/helmet/orc
 
-//NEW ORCS WITH DIFFERENT GEAR AND SHIT
 /mob/living/carbon/human/species/orc/tribal
 	name = "Tribal Orc"
 	ai_controller = /datum/ai_controller/human_npc
@@ -360,40 +350,42 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/orc_npc/tribal
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_SPEED = 3,
+		STAT_CONSTITUTION = 3,
+		STAT_ENDURANCE = 3,
+		STAT_INTELLIGENCE = -9,
+	)
+
 /datum/outfit/npc/orc/tribal/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 13
-	H.base_speed = 13
-	H.base_constitution = 13
-	H.base_endurance = 13
-	H.recalculate_stats(FALSE)
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/tribal)
 	var/loadout = rand(1,5)
 	switch(loadout)
-		if(1) //Dual Axe Warrior
+		if(1)
 			r_hand = /obj/item/weapon/axe/stone
 			l_hand = /obj/item/weapon/axe/stone
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
-		if(2) //Long Club Caveman
+		if(2)
 			r_hand = /obj/item/weapon/polearm/woodstaff
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
-		if(3) //Club Caveman
+		if(3)
 			r_hand = /obj/item/weapon/mace/woodclub
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
-		if(4) //dagger fighter
+		if(4)
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			r_hand = /obj/item/weapon/knife/stone
 			l_hand = /obj/item/weapon/knife/stone
-		if(5) //Spear hunter
+		if(5)
 			r_hand = /obj/item/weapon/polearm/spear/stone
 			armor = /obj/item/clothing/armor/leather/hide/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
-
-
-//////////////////////////////////////////////////////////
 
 /mob/living/carbon/human/species/orc/warrior
 	name = "Warrior Orc"
@@ -412,40 +404,45 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/orc_npc/warrior
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_SPEED = 3,
+		STAT_CONSTITUTION = 4,
+		STAT_ENDURANCE = 4,
+		STAT_INTELLIGENCE = -9,
+	)
+
 /datum/outfit/npc/orc/warrior/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 13
-	H.base_speed = 13
-	H.base_constitution = 14
-	H.base_endurance = 14
-	H.recalculate_stats(FALSE)
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/warrior)
 	var/loadout = rand(1,5)
 	switch(loadout)
-		if(1) //Marauder with Sword and Shield
+		if(1)
 			r_hand = /obj/item/weapon/sword/iron
 			l_hand = /obj/item/weapon/shield/wood
 			armor = /obj/item/clothing/armor/chainmail/iron/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/leather
-		if(2) //Marauder with Axe and Shield
+		if(2)
 			r_hand = /obj/item/weapon/axe/iron
 			l_hand = /obj/item/weapon/shield/wood
 			armor = /obj/item/clothing/armor/chainmail/iron/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/leather
-		if(3) //Club Caveman
+		if(3)
 			r_hand = /obj/item/weapon/flail
 			l_hand = /obj/item/weapon/sword/scimitar/messer
 			armor = /obj/item/clothing/armor/chainmail/iron/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/leather
-		if(4) //dagger fighter
+		if(4)
 			armor = /obj/item/clothing/armor/chainmail/iron/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			r_hand = /obj/item/weapon/sword/iron
 			l_hand = /obj/item/weapon/sword/short/iron
 			head = /obj/item/clothing/head/helmet/leather
-		if(5) //Marauder Ironblade
+		if(5)
 			if(prob(50))
 				r_hand = /obj/item/weapon/mace/spiked
 				l_hand = /obj/item/weapon/shield/wood
@@ -462,11 +459,6 @@
 				armor = /obj/item/clothing/armor/plate/orc
 				head = /obj/item/clothing/head/helmet/orc
 				cloak = /obj/item/clothing/cloak/raincloak/colored/brown
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////
 
 /mob/living/carbon/human/species/orc/marauder
 	name = "Marauder Orc"
@@ -485,45 +477,48 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/orc_npc/marauder_mob
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = 2,
+		STAT_CONSTITUTION = 3,
+		STAT_ENDURANCE = 3,
+		STAT_INTELLIGENCE = -9,
+	)
+
 /datum/outfit/npc/orc/marauder/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 12
-	H.base_speed = 12
-	H.base_constitution = 13
-	H.base_endurance = 13
-	H.recalculate_stats(FALSE)
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/marauder_mob)
 	var/loadout = rand(1,5)
 	switch(loadout)
-		if(1) //Marauder with Sword and Shield
+		if(1)
 			r_hand = /obj/item/weapon/sword/iron
 			l_hand = /obj/item/weapon/axe/iron
 			armor = /obj/item/clothing/armor/plate/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/orc
-		if(2) //Marauder with Axe and Shield
+		if(2)
 			r_hand = /obj/item/weapon/axe/battle
 			armor = /obj/item/clothing/armor/plate/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/orc
-		if(3) //Warhammer Caveman
+		if(3)
 			r_hand = /obj/item/weapon/mace/goden/steel/warhammer
 			armor = /obj/item/clothing/armor/plate/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/orc
-		if(4) //dagger fighter
+		if(4)
 			armor = /obj/item/clothing/armor/plate/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			r_hand = /obj/item/weapon/mace/steel
 			l_hand = /obj/item/weapon/shield/tower
 			head = /obj/item/clothing/head/helmet/orc
-		if(5) //Marauder Ironblade
+		if(5)
 			r_hand = /obj/item/weapon/polearm/halberd/bardiche
 			armor = /obj/item/clothing/armor/plate/orc
 			cloak = /obj/item/clothing/cloak/raincloak/colored/brown
 			head = /obj/item/clothing/head/helmet/orc
 
-
-///////////////////////////////////////////////////////////////////////////////////////
 /mob/living/carbon/human/species/orc/warlord
 	name = "Warlord Orc"
 	ai_controller = /datum/ai_controller/human_npc
@@ -541,39 +536,44 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/orc_npc/warlord_mob
+	raw_attribute_list = list(
+		STAT_STRENGTH = 4,
+		STAT_SPEED = 4,
+		STAT_CONSTITUTION = 4,
+		STAT_ENDURANCE = 4,
+		STAT_INTELLIGENCE = -9,
+	)
+
 /datum/outfit/npc/orc/warlord/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 14
-	H.base_speed = 14
-	H.base_constitution = 14
-	H.base_endurance = 14
-	H.recalculate_stats(FALSE)
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/warlord_mob)
 	var/loadout = rand(1,5)
 	switch(loadout)
-		if(1) //Halberd Warlord
+		if(1)
 			r_hand = /obj/item/weapon/polearm/halberd
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
-		if(2) //Greatsword Warlord
+		if(2)
 			r_hand = /obj/item/weapon/sword/long/greatsword
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
-		if(3) // WE DON'T WANNA GO TO WAR TODAY BUT THE LORD OF THE LASH SAYS "NAY NAY NAY!!" WE'RE GONNA MARCH ALL DAE, ALL DAE, ALL DAE! WHERE THERE'S A WHIP THERE'S A WAY!!
+		if(3)
 			r_hand = /obj/item/weapon/whip/antique
 			l_hand = /obj/item/weapon/sword/short/iron
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
-		if(4) // Big Sword and Big Shield
+		if(4)
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			r_hand = /obj/item/weapon/sword/scimitar/falchion
 			l_hand = /obj/item/weapon/shield/tower
 			head = /obj/item/clothing/head/helmet/orc/warlord
-		if(5) //Anti Knight STR Build
+		if(5)
 			r_hand = /obj/item/weapon/flail/sflail
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
 
-/mob/living/carbon/human/species/orc/warlord/skilled/after_creation() //these ones dont parry, but still get good weapon skills
+/mob/living/carbon/human/species/orc/warlord/skilled/after_creation()
 	..()
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)

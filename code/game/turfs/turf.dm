@@ -286,7 +286,7 @@
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
 		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
-			var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
+			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
 			if(dex_save >= 5)
 				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
 					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")

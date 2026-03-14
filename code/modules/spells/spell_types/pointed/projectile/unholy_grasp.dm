@@ -7,7 +7,7 @@
 
 	spell_type = SPELL_MIRACLE //it does count as one, funnily enough.
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 
 	attunements = list(
 		/datum/attunement/blood = 0.5,

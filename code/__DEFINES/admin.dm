@@ -174,3 +174,6 @@ GLOBAL_LIST_INIT(admin_categories, build_admin_categories())
 			final_build[clean_cat] += ckey(rank)
 
 	return final_build
+
+GLOBAL_VAR(join_motd)
+GLOBAL_VAR(current_tms)

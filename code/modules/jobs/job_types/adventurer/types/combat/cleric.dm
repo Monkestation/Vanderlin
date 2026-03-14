@@ -1,3 +1,45 @@
+/datum/attribute_holder/sheet/job/cleric
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/magic/holy = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
+/datum/attribute_holder/sheet/job/cleric/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/magic/holy = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
 /datum/job/advclass/combat/cleric
 	title = "Cleric"
 	tutorial = "Clerics are wandering warriors of the Gods, \
@@ -11,28 +53,8 @@
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/magic/holy = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/mathematics = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/cleric
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/cleric/old
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -45,7 +67,6 @@
 /datum/job/advclass/combat/cleric/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 		ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 	spawned.virginity = TRUE
@@ -66,14 +87,14 @@
 				ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			if(/datum/patron/divine/ravox)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
-				spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10)
 			if(/datum/patron/divine/noc)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			if(/datum/patron/divine/pestra)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			if(/datum/patron/divine/abyssor)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
-				spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 20)
 			if(/datum/patron/divine/malum)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			if(/datum/patron/divine/xylix)
@@ -107,16 +128,16 @@
 
 	switch(weaponchoice)
 		if("Sword")
-			weapon_skill_path = /datum/skill/combat/swords
+			weapon_skill_path = /datum/attribute/skill/combat/swords
 		if("Axe", "Mace", "Goedendag", "Great axe")
-			weapon_skill_path = /datum/skill/combat/axesmaces
+			weapon_skill_path = /datum/attribute/skill/combat/axesmaces
 		if("Spear")
-			weapon_skill_path = /datum/skill/combat/polearms
+			weapon_skill_path = /datum/attribute/skill/combat/polearms
 		if("Flail", "Great flail")
-			weapon_skill_path = /datum/skill/combat/whipsflails
+			weapon_skill_path = /datum/attribute/skill/combat/whipsflails
 
 	if(weapon_skill_path)
-		spawned.adjust_skillrank(weapon_skill_path, 3, TRUE)
+		spawned.adjust_skill_level(weapon_skill_path, 30)
 
 	switch(weaponchoice)
 		if("Great flail", "Goedendag", "Great axe")

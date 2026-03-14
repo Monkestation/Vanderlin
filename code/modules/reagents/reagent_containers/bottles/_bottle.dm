@@ -251,3 +251,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	icon_state = "blackbottle"
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	name = "pot of cheese soup"
+	list_reagents = list(/datum/reagent/consumable/soup/cheese = 75)

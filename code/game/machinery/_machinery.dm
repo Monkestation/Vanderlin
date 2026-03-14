@@ -288,7 +288,7 @@
 	var/adjusted_climb_time = climb_time
 	if(HAS_TRAIT(user, TRAIT_HANDS_BLOCKED)) //climbing takes twice as long when restrained.
 		adjusted_climb_time *= 2
-	adjusted_climb_time -= user.STASPD * 2
+	adjusted_climb_time -= GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2
 	adjusted_climb_time = max(adjusted_climb_time, 0)
 
 	structureclimber = user

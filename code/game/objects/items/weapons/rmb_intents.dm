@@ -214,16 +214,16 @@
 	var/skill_factor = 0
 
 	if(attacker_item?.associated_skill)
-		ourskill = user.get_skill_level(attacker_item.associated_skill)
+		ourskill = GET_MOB_SKILL_VALUE_OLD(user, attacker_item.associated_skill)
 
 	var/obj/item/defender_item = defender.get_active_held_item()
 	if(defender_item?.associated_skill)
-		theirskill = defender.get_skill_level(defender_item.associated_skill)
+		theirskill = GET_MOB_SKILL_VALUE_OLD(defender, defender_item.associated_skill)
 
 	perc += (ourskill - theirskill) * 12 //skill is of the essence
-	perc += (user.STAINT - defender.STAINT) * 8 //but it's also mostly a mindgame
-	perc += (user.STASPD - defender.STASPD) * 3 //yet a speedy feint is hard to counter
-	perc += (user.STAPER - defender.STAPER) * 3 //a good eye helps
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_INTELLIGENCE)) * 8 //but it's also mostly a mindgame
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_SPEED)) * 3 //yet a speedy feint is hard to counter
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_PERCEPTION)) * 3 //a good eye helps
 
 	skill_factor = (ourskill - theirskill) / 2
 

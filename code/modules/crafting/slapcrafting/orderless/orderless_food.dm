@@ -9,7 +9,7 @@
 	var/highest_quality = 0
 
 /datum/orderless_slapcraft/food/get_action_time(obj/item/attacking_item, mob/user)
-	return (action_time - ((user?.get_skill_level(related_skill, TRUE)) * 5))
+	return (action_time - ((GET_MOB_SKILL_VALUE_OLD(user, related_skill)) * 5))
 
 /datum/orderless_slapcraft/food/before_process_item(obj/item/attacking_item, mob/user)
 	track_ingredient_quality(attacking_item)
@@ -24,7 +24,7 @@
 		// Calculate average freshness
 		var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 		// Get the user's cooking skill
-		var/cooking_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus()
+		var/cooking_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) + user.get_inspirational_bonus()
 		// Apply freshness to the new food item
 		new_item.warming = min(5 MINUTES, average_freshness)
 

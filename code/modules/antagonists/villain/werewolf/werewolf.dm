@@ -225,7 +225,7 @@
 	force = 15
 	block_chance = 0
 	wdefense = AVERAGE_PARRY
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE
 	w_class = WEIGHT_CLASS_BULKY

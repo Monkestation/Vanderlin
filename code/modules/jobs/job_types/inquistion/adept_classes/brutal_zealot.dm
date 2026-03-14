@@ -1,3 +1,23 @@
+/datum/attribute_holder/sheet/job/bzealot
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_INTELLIGENCE = -2,
+		STAT_PERCEPTION = -2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/combat/firearms = 10,
+		/datum/attribute/skill/misc/medicine = 10
+	)
+
 // Brutal Zealot, a class balanced to town guard, with noticeably more strength but less intelligence and perception. Axe/Mace and shield focus.
 /datum/job/advclass/adept/bzealot
 	title = "Brutal Zealot"
@@ -6,13 +26,7 @@
 	category_tags = list(CTAG_ADEPT)
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_INT = -2,
-		STATKEY_PER = -2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/bzealot
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -23,19 +37,6 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-	skills = list(
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/shields = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/firearms = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE
-	)
 
 /datum/job/advclass/adept/bzealot/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

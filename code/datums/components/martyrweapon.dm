@@ -277,10 +277,10 @@
 		return
 
 	// We dying
-	user.adjust_skillrank(/datum/skill/misc/athletics, 6, FALSE)
-	user.adjust_skillrank(/datum/skill/combat/swords, 1, FALSE)
-	user.adjust_skillrank(/datum/skill/combat/axesmaces, 1, FALSE)
-	user.adjust_skillrank(/datum/skill/combat/polearms, 1, FALSE)
+	user.adjust_skill_level(/datum/attribute/skill/misc/athletics, 60)
+	user.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+	user.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+	user.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
 
 /datum/component/martyr_weapon/proc/duration_ended(mob/living/user)
 	if(QDELETED(parent))
@@ -431,26 +431,26 @@
 	switch(current_state)
 		if(STATE_MARTYR)
 			stat_mods = list(
-				STATKEY_STR = stat_bonus_martyr,
-				STATKEY_CON = stat_bonus_martyr,
-				STATKEY_END = stat_bonus_martyr,
-				STATKEY_INT = stat_bonus_martyr,
-				STATKEY_PER = stat_bonus_martyr,
-				STATKEY_LCK = stat_bonus_martyr,
+				STAT_STRENGTH = stat_bonus_martyr,
+				STAT_CONSTITUTION = stat_bonus_martyr,
+				STAT_ENDURANCE = stat_bonus_martyr,
+				STAT_INTELLIGENCE = stat_bonus_martyr,
+				STAT_PERCEPTION = stat_bonus_martyr,
+				STAT_FORTUNE = stat_bonus_martyr,
 			)
 			holder.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg' // Gets their normal music until pizza finishes his Great Work
 		if(STATE_MARTYR_ULT)
 			stat_mods = list(
-				STATKEY_STR = 20,
-				STATKEY_CON = 20,
-				STATKEY_END = 20,
-				STATKEY_PER = 20,
+				STAT_STRENGTH = 20,
+				STAT_CONSTITUTION = 20,
+				STAT_ENDURANCE = 20,
+				STAT_PERCEPTION = 20,
 			)
 			holder.cmode_music = 'sound/music/cmode/church/CombatMartyrUlt.ogg'
 			ADD_TRAIT(holder, TRAIT_NOSTAMINA, MARTYR_TRAIT)
 
 	if(length(stat_mods))
-		holder.set_stat_modifier_list(MARTYR_TRAIT, stat_mods)
+		holder.set_stat_modifier(MARTYR_TRAIT, stat_mods)
 
 	if(!holder.cmode)
 		holder.toggle_cmode()
