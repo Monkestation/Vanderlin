@@ -132,8 +132,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 		lighting_object = old_lighting_object
 
-		affecting_lights = old_affecting_lights
-		corners = old_corners
 		directional_opacity = old_directional_opacity
 		recalculate_directional_opacity()
 
