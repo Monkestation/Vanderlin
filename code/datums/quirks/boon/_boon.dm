@@ -246,8 +246,8 @@
 		L = new(T)
 		tent = new(T)
 		var/obj/structure/handcart/cart = new(T)
-		cart.put_in(null, L)
-		cart.put_in(null, tent)
+		cart.put_in(null, L, TRUE)
+		cart.put_in(null, tent, TRUE)
 
 	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
 
