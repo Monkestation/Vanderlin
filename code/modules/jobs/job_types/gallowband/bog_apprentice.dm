@@ -19,7 +19,7 @@
 	tutorial = "You were dragged out of the mud by the Bog Witch on one of their expeditions- shivering, hungry, and alone. They taught you the ways of the Great Hunt, and in the eclectic methods of the their practice. You work yourself to the bone to tend the crops, stir the cauldrons, and run messages between the Witch and the Gallowband. When the Witch dies, you alone will carry the tradition forward."
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	display_order = JDO_BOGWITCH
+	display_order = JDO_BOGWITCH_APP
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
