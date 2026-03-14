@@ -4,6 +4,7 @@
 	weight = 6
 	always_votable = TRUE
 	follower_modifier = LOWER_FOLLOWER_MODIFIER
+	roundstart_prob = 65
 	color_theme = "#FFD700"
 
 	tag_multipliers = list(
@@ -37,6 +38,7 @@
 	welcome_text = "The veil between realms shimmers in your presence."
 	weight = 4
 	always_votable = TRUE
+	roundstart_prob = 40
 	follower_modifier = LOWER_FOLLOWER_MODIFIER
 	color_theme = "#F0F0F0"
 
@@ -72,6 +74,7 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#228822"
+	roundstart_prob = 90
 
 	tag_multipliers = list(
 		TAG_RAVOX = 3,
@@ -150,6 +153,7 @@
 	color_theme = "#AA8888"
 	event_repetition_multiplier = 0
 	forced = TRUE
+	roundstart_prob = 50
 
 	tag_multipliers = list(
 		TAG_XYLIX = 3,
@@ -163,7 +167,7 @@
 		EVENT_TRACK_PERSONAL = 1.5,
 		EVENT_TRACK_MODERATE = 1,
 		EVENT_TRACK_INTERVENTION = 1.75,
-		EVENT_TRACK_CHARACTER_INJECTION = 0,
+		EVENT_TRACK_CHARACTER_INJECTION = 1,
 		EVENT_TRACK_OMENS = 1,
 		EVENT_TRACK_RAIDS = 1,
 	)
@@ -194,6 +198,7 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#888888"
+	roundstart_prob = 70
 
 	tag_multipliers = list(
 		TAG_NECRA = 3,
@@ -308,6 +313,7 @@
 	desc = "Eora hates death and promotes love. Raids will never naturally progress, only death will bring them."
 	welcome_text = "Life shall flourish under my watchful gaze."
 	color_theme = "#9966CC"
+	roundstart_prob = 35
 
 	tag_multipliers = list(
 		TAG_EORA = 3,
@@ -398,6 +404,7 @@
 	always_votable = TRUE
 	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#CC4444"
+	roundstart_prob = 100
 
 	tag_multipliers = list(
 		TAG_ZIZO = 3,
@@ -491,6 +498,7 @@
 	always_votable = TRUE
 	follower_modifier = STANDARD_INHUMEN_MODIFIER
 	color_theme = "#8B3A3A"
+	roundstart_prob = 100
 
 	tag_multipliers = list(
 		TAG_GRAGGAR = 3,
@@ -518,7 +526,7 @@
 			STATS_BLOOD_SPILT = list("name" = "Blood spilt:", "points" = 0.03, "capacity" = 90),
 		),
 		"Set 3" = list(
-			STATS_ORGANS_EATEN = list("name" = "Organs eaten:", "points" = 4.75, "capacity" = 70),
+			STATS_ORGANS_EATEN = list("name" = "Organs eaten:", "points" = 2.75, "capacity" = 70),
 		),
 		"Set 4" = list(
 			STATS_LIMBS_BITTEN = list("name" = "Limbs bitten:", "points" = 1.25, "capacity" = 70),
@@ -539,6 +547,7 @@
 	always_votable = TRUE
 	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#8B4513"
+	roundstart_prob = 90
 
 	tag_multipliers = list(
 		TAG_MATTHIOS = 3,

@@ -3,7 +3,7 @@
 /// Lower follower modifier for special storytellers such as Astrata, who is a default patron
 #define LOWER_FOLLOWER_MODIFIER STANDARD_FOLLOWER_MODIFIER - 3
 /// Standard follower modifier for inhumen storytellers, ie. how many points they get for each follower
-#define STANDARD_INHUMEN_MODIFIER 22
+#define STANDARD_INHUMEN_MODIFIER 20
 /// Lower follower modifier for special inhumen storytellers such as Zizo, who gets extra undead followers
 #define LOWER_INHUMEN_FOLLOWER_MODIFIER STANDARD_INHUMEN_MODIFIER - 3
 
@@ -49,7 +49,7 @@
 	var/roundstart_points_variance = 15
 
 	/// Whether the storyteller guaranteed a roleset roll (antag) on roundstart. (Still needs to pass pop check)
-	var/guarantees_roundstart_roleset = TRUE
+	var/guarantees_roundstart_roleset = FALSE
 
 	/// Whether the storyteller has the distributions disabled. Important for ghost storytellers
 	var/disable_distribution = FALSE
@@ -65,7 +65,7 @@
 	///have we done roundstart checks?
 	var/roundstart_checks = FALSE
 	///prob of roundstart antag
-	var/roundstart_prob = 90
+	var/roundstart_prob = 80
 	///do we ignore ran_roundstart
 	var/ignores_roundstart = FALSE
 	///is a storyteller always able to be voted for(also does not count for the amount of storytellers to pick from)

@@ -2,8 +2,8 @@
 	name = "Crazed Adventurer"
 	wave_type = /datum/migrant_wave/maniac
 
-	weight = 8
 	min_players = LOWPOP_THRESHOLD
+	weight = 8
 	earliest_start = 20 MINUTES
 
 	tags = list(
