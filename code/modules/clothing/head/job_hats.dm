@@ -114,7 +114,10 @@
 /obj/item/clothing/head/wizhat/bogwitch
 	name = "bog witch hat"
 	desc = "A hat of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
-	icon_state = "witchhat"//"bogwitchhat"
+	icon_state = "bogwitch"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 48
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/wizhat/gen
