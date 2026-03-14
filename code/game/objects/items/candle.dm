@@ -114,6 +114,7 @@
 	icon_state = "skullcandle"
 	base_icon_state = "skullcandle"
 	infinite = TRUE
+	light_power = 3
 	light_color = "#670086"
 
 /obj/item/candle/skull/lit
@@ -156,6 +157,7 @@
 	light_range =  4
 
 /obj/item/candle/yellow/lit/infinite/strong/skull
+	base_icon_state = "skullcandle"
 	icon_state = "skullcandle_lit"
 
 /obj/item/candle/scandelabra

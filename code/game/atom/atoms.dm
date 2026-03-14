@@ -168,13 +168,12 @@
 	/// Intensity of the light. The stronger, the less shadows you will see on the lit area.
 	var/light_power = 1
 	/// Falloff factor for the light, must be above 1. Higher the value more aggressive the falloff into darkness is
+	/// Works best on lights with large ranges
 	var/light_falloff = 1
 	/// Hexadecimal RGB string representing the colour of the light. White by default.
 	var/light_color = COLOR_WHITE
 	/// Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
 	var/light_on = TRUE
-	/// Adjusts curve for falloff gradient
-	var/light_falloff_curve = LIGHTING_DEFAULT_FALLOFF_CURVE
 	/// How many tiles "up" this light is. 1 is typical, should only really change this if it's a floor light
 	var/light_height = 1
 
