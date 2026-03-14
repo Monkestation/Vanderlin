@@ -1,6 +1,6 @@
 /datum/language/newpsydonic
 	name = "Psydonic"
-	icon_state = "psydon-new"
+	icon_state = "psydon_new"
 	spans = list(SPAN_PSYDON)
 	desc = "The common language of Grenzelhoft, evolved from Old Psydonic over centuries."
 	speech_verb = "states"
