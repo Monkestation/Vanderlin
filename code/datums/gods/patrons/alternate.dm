@@ -21,7 +21,8 @@
 	allowed_races = list(SPEC_ID_DWARF_SUBTERRAN)
 
 /datum/patron/alternate/great_hunt
-	name = "The Great Hunt (Unproven)"
+	name = "The Great Hunt"
+	display_name = "The Great Hunt (Unproven)"
 	desc = "In the cold reaches of Ossland, they worship the four aspects of the Great Hunt: \
 	Graggar as The Hunter, revered for the relation between predator and prey; \
 	Necra as The Skull, revered for the death that awaits every living being; \
@@ -51,7 +52,7 @@
 	return FALSE
 
 /datum/patron/alternate/great_hunt/proven
-	name = "The Great Hunt (Proven)"
+	display_name = "The Great Hunt (Proven)"
 	added_traits = list(TRAIT_MANEATER_IMMUNITY, TRAIT_ENTANGLER_IMMUNITY)
 	boons = "You are left untouched by the flesh eating plants."
 
