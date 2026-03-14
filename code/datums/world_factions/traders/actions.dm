@@ -57,7 +57,9 @@
 		return
 
 	var/obj/sign = sign_ref?.resolve()
-	if(QDELETED(sign) && sign_type)
+	if(!QDELETED(sign))
+		do_teleport(sign, sign_turf)
+	else if(sign_type)
 		var/obj/new_sign = new sign_type(sign_turf)
 		sign_ref = WEAKREF(sign)
 		do_sparks(3, FALSE, new_sign)
