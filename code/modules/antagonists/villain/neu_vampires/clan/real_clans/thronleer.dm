@@ -3,7 +3,8 @@
 	lord_spells = list(
 		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
-		/datum/action/cooldown/spell/undirected/shapeshift/mist
+		/datum/action/cooldown/spell/undirected/shapeshift/mist,
+		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/demand_submission,
@@ -16,7 +17,8 @@
 	name = "House Thronleer"
 	desc = "TBA"
 	curse = "Weakness of the soul."
-	blood_preference = BLOOD_PREFERENCE_FANCY
+	blood_preference = BLOOD_PREFERENCE_FANCY | BLOOD_PREFERENCE_EUPHORIC | BLOOD_PREFERENCE_HOLY
+	blood_disgust = BLOOD_PREFERENCE_RATS
 	clan_covens = list(
 		/datum/coven/obfuscate,
 		/datum/coven/presence,
@@ -25,7 +27,7 @@
 	leader = /datum/clan_leader/thronleer
 
 /datum/clan/thronleer/get_blood_preference_string()
-	return "prepared blood"
+	return "aristocrats, silver-blessed, and the holy"
 
 /datum/clan/thronleer/get_downside_string()
 	return "weak in fights"

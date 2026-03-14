@@ -7,6 +7,7 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	gender = PLURAL
 	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
 //	block2add = FOV_BEHIND
 
@@ -32,6 +33,7 @@
 	name = "silver monocle"
 	icon_state = "monocle"
 	max_integrity = 35
+	gender = NEUTER
 
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)

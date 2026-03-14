@@ -1290,7 +1290,7 @@
 		if(!ishuman(M))
 			return
 
-		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patron_list)
+		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patrons_by_type)
 		if(!patron_to_change_to)
 			return
 

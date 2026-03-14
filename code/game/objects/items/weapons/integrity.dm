@@ -3,6 +3,8 @@
 	var/blade_int = 0
 	/// Blade integrity at which dismemberment reaches 100% effectiveness
 	var/dismember_blade_int = 0
+	/// randomize the blade integrity on creation?
+	var/randomize_blade_int = TRUE
 	/// Maximum blade integrity
 	var/max_blade_int = 0
 	/// Sharpness loss multiplier
@@ -11,14 +13,14 @@
 /obj/item/proc/remove_bintegrity(amt as num, mob/user)
 	if(sharpness_mod != 1)
 		amt *= sharpness_mod
-	if(user && HAS_TRAIT(user, TRAIT_SHARPER_BLADES))
-		amt = amt * 0.7
 	var/mob/living/L
 	if(loc && loc == user)
 		L = user
 	else
 		if(loc && ishuman(loc))
 			L = loc
+	if(L && HAS_TRAIT(L, TRAIT_SHARPER_BLADES))
+		amt = amt * 0.67
 	if(L && max_blade_int)
 		var/ratio = blade_int / max_blade_int
 		var/newratio = (blade_int - amt) / max_blade_int

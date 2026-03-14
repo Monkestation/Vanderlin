@@ -45,15 +45,13 @@
 		/datum/skill/misc/music = 1,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/riding = 1,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/sneaking = 3,
 		/datum/skill/misc/stealing = 3
 	)
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
-	)
-	traits = list(
+		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_ROYALSERVANT
 	)
 

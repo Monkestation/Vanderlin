@@ -23,6 +23,7 @@
 	grid_height = 64
 	grid_width = 32
 
+	weapon_special = /datum/special_intent/axe_swing
 
 //................ Stone Axe ............... //
 /obj/item/weapon/axe/stone
@@ -393,6 +394,8 @@
 	grid_height = 96
 	grid_width = 64
 
+	weapon_special = /datum/special_intent/axe_swing
+
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -407,7 +410,7 @@
 
 /obj/item/weapon/greataxe/psy
 	name = "psydonic poleaxe"
-	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
+	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.

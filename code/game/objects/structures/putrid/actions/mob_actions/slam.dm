@@ -169,7 +169,7 @@
 		return FALSE
 
 	var/mob/living/target = owner
-	target.add_movespeed_modifier("ground_slam_slow", 1.5)
+	target.add_movespeed_modifier(MOVESPEED_ID_GROUND_SLAM, multiplicative_slowdown = 1.5)
 	return TRUE
 
 /datum/status_effect/ground_slam_slow/on_remove()
@@ -177,7 +177,7 @@
 		return
 
 	var/mob/living/target = owner
-	target.remove_movespeed_modifier("ground_slam_slow")
+	target.remove_movespeed_modifier(MOVESPEED_ID_GROUND_SLAM)
 	return ..()
 
 /atom/movable/screen/alert/status_effect/ground_slam_slow

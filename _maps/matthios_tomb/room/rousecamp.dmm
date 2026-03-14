@@ -119,7 +119,7 @@
 /area/under/tomb/indoors)
 "nJ" = (
 /obj/structure/table/church/m,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/churchmarble,
 /area/under/tomb/cave/lava)
 "nR" = (

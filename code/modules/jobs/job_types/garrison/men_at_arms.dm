@@ -15,7 +15,7 @@
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/watchman
@@ -85,9 +85,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_MEDIUMARMOR
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/pikeman
 	name = "Pikeman Men-At-Arms"
@@ -136,8 +136,8 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/axeman
 	name = "Axeman Men-At-Arms"
@@ -181,9 +181,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_DODGEEXPERT
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
@@ -238,9 +238,9 @@
 	)
 
 	traits = list(
-		TRAIT_KNOWBANDITS,
 		TRAIT_MEDIUMARMOR
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/swordsman
 	name = "Swordsman Men-At-Arms"

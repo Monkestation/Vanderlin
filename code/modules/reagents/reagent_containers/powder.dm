@@ -10,6 +10,7 @@
 	sellprice = 10
 	grid_height = 32
 	grid_width = 32
+	flags_ai_inventory = AI_ITEM_POWDER
 
 /obj/item/reagent_containers/powder/canconsume(mob/eater, mob/user, silent)
 	. = ..()

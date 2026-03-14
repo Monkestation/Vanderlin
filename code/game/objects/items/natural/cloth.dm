@@ -15,6 +15,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
+	flags_ai_inventory = AI_ITEM_BANDAGE
 
 	var/datum/component/cleaner/cleaner_component = null
 	var/clean_speed = 0.4 SECONDS

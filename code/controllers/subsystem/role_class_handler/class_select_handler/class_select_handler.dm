@@ -218,9 +218,6 @@
 		<div id='class_select_box_div'>
 	"}
 
-	var/mob/living/carbon/human/H = linked_client.mob
-	if(!H.job)
-		return
 
 	if(!showing_combat_classes)
 		for(var/datum/job/advclass/datums in rolled_classes)

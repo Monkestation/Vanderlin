@@ -67,8 +67,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	if(flags & CHANGETURF_SKIP)
 		return new path(src)
 
-	var/old_opacity = opacity
-
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_lighting_object = lighting_object
 	var/old_lighting_corner_NE = lighting_corner_NE
@@ -77,6 +75,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	var/old_lighting_corner_NW = lighting_corner_NW
 
 	var/old_outdoor_effect = outdoor_effect
+
+	var/old_directional_opacity = directional_opacity
 
 	var/old_exl = explosion_level
 	var/old_exi = explosion_id
@@ -130,11 +130,12 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 			outdoor_effect = old_outdoor_effect
 			update_sky_and_weather_states()
 
-		recalc_atom_opacity()
 		lighting_object = old_lighting_object
 
-		if (old_opacity != opacity || dynamic_lighting != old_dynamic_lighting)
-			reconsider_lights()
+		affecting_lights = old_affecting_lights
+		corners = old_corners
+		directional_opacity = old_directional_opacity
+		recalculate_directional_opacity()
 
 		if (dynamic_lighting != old_dynamic_lighting)
 			if (IS_DYNAMIC_LIGHTING(src))

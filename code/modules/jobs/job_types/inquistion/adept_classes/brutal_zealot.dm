@@ -17,11 +17,11 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS,
 		TRAIT_INQUISITION,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	skills = list(
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,

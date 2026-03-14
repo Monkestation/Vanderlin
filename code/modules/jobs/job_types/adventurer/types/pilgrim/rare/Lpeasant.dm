@@ -25,7 +25,7 @@
 		/datum/skill/combat/polearms = 2,
 		/datum/skill/combat/whipsflails = 1,
 		/datum/skill/craft/crafting = 3,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/labor/farming = 6,
 		/datum/skill/craft/cooking = 2,

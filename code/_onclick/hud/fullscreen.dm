@@ -155,7 +155,7 @@
 //	layer = 20.09
 	layer = 20.512
 	plane = ABOVE_HUD_PLANE
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	no_over_text = FALSE
 
 /atom/movable/screen/fullscreen/crit/dying/Click()

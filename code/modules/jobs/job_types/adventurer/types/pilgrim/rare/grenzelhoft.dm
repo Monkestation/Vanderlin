@@ -7,6 +7,8 @@
 	total_positions = 1
 	is_recognized = TRUE
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
+	honorary = "Count"
+	honorary_f = "Countess"
 
 	jobstats = list(
 		STATKEY_INT = 1,
@@ -31,7 +33,8 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_FOREIGNER
 	)
 
@@ -44,14 +47,6 @@
 
 /datum/job/advclass/pilgrim/rare/grenzelhoft/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Count"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Countess"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 
 	if(spawned.dna?.species.id == SPEC_ID_HUMEN)
 		spawned.dna.species.native_language = "Old Psydonic"
@@ -61,7 +56,7 @@
 	name = "Grenzelhoft Count (Pilgrim)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/brigandine
 	belt = /obj/item/storage/belt/leather/plaquesilver

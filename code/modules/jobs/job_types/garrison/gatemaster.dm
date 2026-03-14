@@ -12,7 +12,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/gatemaster
 	advclass_cat_rolls = list(CTAG_GATEMASTER = 20)
@@ -27,11 +27,12 @@
 		EXP_TYPE_LIVING = 300,
 		EXP_TYPE_GARRISON = 300
 	)
+	honorary = "Gatemaster"
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 
 /datum/job/gatemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)

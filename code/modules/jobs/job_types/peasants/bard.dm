@@ -10,6 +10,7 @@
 	faction = FACTION_TOWN
 	total_positions = 4
 	spawn_positions = 4
+	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard
@@ -34,7 +35,7 @@
 		/datum/skill/misc/swimming = 2,
 		/datum/skill/misc/climbing = 2,
 		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 3,
 		/datum/skill/craft/cooking = 1,
 		/datum/skill/misc/sneaking = 3,

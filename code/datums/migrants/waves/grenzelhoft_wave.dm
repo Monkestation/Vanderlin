@@ -10,6 +10,8 @@
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
+	honorary = "Count"
+	honorary_f = "Countess"
 
 	jobstats = list(
 		STATKEY_INT = 1,
@@ -36,18 +38,12 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
+	traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
 	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
 /datum/job/migrant/grenzelhoft_count/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Count"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	if(!spawned.dna?.species)
 		return
 	var/datum/species/species = spawned.dna.species
@@ -58,7 +54,7 @@
 	name = "Grenzelhoft Count (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/brigandine
 	belt = /obj/item/storage/belt/leather/plaquesilver
@@ -83,6 +79,9 @@
 	allowed_sexes = list(FEMALE)
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
+	honorary = "Count"
+	honorary_f = "Countess"
+
 
 	jobstats = list(
 		STATKEY_INT = 1,
@@ -108,18 +107,12 @@
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
 	)
 
-	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE)
+	traits = list(TRAIT_MEDIUMARMOR, TRAIT_NOBLE_BLOOD, TRAIT_NOBLE_POWER)
 	languages = list(/datum/language/newpsydonic)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/job/migrant/grenzelhoft_countess/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Countess"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	if(!spawned.dna?.species)
 		return
 	var/datum/species/species = spawned.dna.species
@@ -130,7 +123,7 @@
 	name = "Grenzelhoft Countess (Migrant Wave)"
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	wrists = /obj/item/clothing/neck/psycross/g
+	wrists = /obj/item/clothing/neck/psycross/gold
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	armor = /obj/item/clothing/armor/gambeson/heavy/dress/alt
 	belt = /obj/item/storage/belt/leather/plaquesilver
@@ -152,7 +145,6 @@
 	title = "Grenzelhoft Knight"
 	tutorial = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	outfit = /datum/outfit/grenzelhoft_knight
-	allowed_sexes = list(MALE)
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
@@ -162,6 +154,8 @@
 		STATKEY_CON = 2,
 		STATKEY_SPD = -1,
 	)
+	honorary = "Ritter"
+	honorary_f = "Ritterin"
 
 	skills = list(
 		/datum/skill/combat/wrestling = 3,
@@ -178,14 +172,6 @@
 
 /datum/job/migrant/grenzelhoft_knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Ritter"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Ritterin"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	if(!spawned.dna?.species)
 		return
 	var/datum/species/species = spawned.dna.species

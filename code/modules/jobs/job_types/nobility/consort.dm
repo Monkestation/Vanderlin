@@ -20,6 +20,8 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	noble_income = 22
 
+	honorary = "Consort"
+
 	job_bitflag = BITFLAG_ROYALTY
 
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_NOBLE)
@@ -33,10 +35,17 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_POWER,
 		TRAIT_NUTCRACKER
 	)
 
+/datum/job/consort/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = "[SSmapping.config.monarch_title] Consort"
+		honorary_f = "[SSmapping.config.monarch_title] Consort" //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = "[SSmapping.config.monarch_title_f] Consort"
 
 /datum/job/consort/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -90,12 +99,13 @@
 		/datum/skill/misc/reading = 3,
 		/datum/skill/misc/sneaking = 1,
 		/datum/skill/misc/riding = 1,
-		/datum/skill/misc/sewing = 2,
+		/datum/skill/craft/sewing = 2,
 		/datum/skill/combat/unarmed = 1,
 		/datum/skill/labor/mathematics = 3
 	)
 
 	traits = list(
+		TRAIT_NOBLE_BLOOD,
 		TRAIT_SEEPRICES
 	)
 
@@ -188,7 +198,7 @@
 		/datum/skill/combat/wrestling = 2,
 		/datum/skill/combat/unarmed = 3,
 		/datum/skill/combat/polearms = 2,
-		/datum/skill/misc/sewing = 3,
+		/datum/skill/craft/sewing = 3,
 		/datum/skill/misc/climbing = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/labor/farming = 3,

@@ -26,6 +26,7 @@
 		EXP_TYPE_CHURCH = 900,
 		EXP_TYPE_COMBAT = 900
 	)
+	honorary = "Grandmaster"
 
 	jobstats = list(
 		STATKEY_STR = 2,
@@ -45,14 +46,14 @@
 		/datum/skill/misc/reading = 2,
 		/datum/skill/magic/holy = 2,
 		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/sewing = 2
+		/datum/skill/craft/sewing = 2
 	)
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS
 	)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 	languages = list(/datum/language/celestial)
 
@@ -62,12 +63,12 @@
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
-		devotion.make_templar()
+		devotion.make_gmtemplar()
 		devotion.grant_to(spawned)
 
 	var/static/list/selectableweapon = list(
 		"Longsword" = /obj/item/weapon/sword/long/grandmaster,
-		"Spear" = /obj/item/weapon/polearm/spear/grandmaster,
+		"Trident" = /obj/item/weapon/polearm/spear/grandmaster,
 		"Axe" = /obj/item/weapon/greataxe/steel/grandmaster,
 		"Mace" = /obj/item/weapon/mace/goden/steel/grandmaster,
 	)
@@ -101,7 +102,7 @@
 	belt = /obj/item/storage/belt/leather/black
 	ring = /obj/item/clothing/ring/silver/rontz
 	gloves = /obj/item/clothing/gloves/plate/silver
-	wrists = /obj/item/clothing/neck/psycross/silver/ravox
+	wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 
 
 

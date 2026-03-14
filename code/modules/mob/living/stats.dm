@@ -41,7 +41,7 @@
 	var/has_rolled_for_stats = FALSE
 
 /mob/living/proc/init_faith()
-	patron = GLOB.patron_list[/datum/patron/godless/godless]
+	patron = GLOB.patrons_by_type[/datum/patron/godless/godless]
 
 /mob/living/proc/set_patron(datum/patron/new_patron, check_antag = FALSE)
 	if(!new_patron)
@@ -49,15 +49,45 @@
 	if(check_antag && mind?.special_role)
 		return FALSE
 	if(ispath(new_patron))
-		new_patron = GLOB.patron_list[new_patron]
+		new_patron = GLOB.patrons_by_type[new_patron]
 	if(!istype(new_patron))
 		return FALSE
 	if(patron && !ispath(patron))
 		patron.on_remove(src)
 		mana_pool?.remove_attunements(patron)
+
+	var/mob/living/carbon/human/devout
+	var/stored_cleric_class
+	if(ishuman(src))
+		devout = src
+		if(devout.cleric)
+			stored_cleric_class = devout.cleric.devotion_class
+			qdel(devout.cleric)
+
 	patron = new_patron
 	patron.on_gain(src)
 	mana_pool?.set_attunements(patron)
+	if(devout && stored_cleric_class)
+		var/holder = devout.patron?.devotion_holder
+		if(holder)
+			var/datum/devotion/devotion = new holder()
+			switch(stored_cleric_class)
+				if(DEVOTION_CLASS_PRIEST)
+					devotion.make_priest()
+				if(DEVOTION_CLASS_GRANDMASTER)
+					devotion.make_gmtemplar()
+				if(DEVOTION_CLASS_TEMPLAR)
+					devotion.make_templar()
+				if(DEVOTION_CLASS_ACOLYTE)
+					devotion.make_acolyte()
+				if(DEVOTION_CLASS_ABSOLVER)
+					devotion.make_absolver()
+				if(DEVOTION_CLASS_CLERIC)
+					devotion.make_cleric()
+				if(DEVOTION_CLASS_CHURCHLING)
+					devotion.make_churchling()
+			devotion.grant_to(devout)
+
 	return TRUE
 
 ///Rolls random stats base 10, +-1, for SPECIAL, and applies species stats and age stats.
@@ -88,6 +118,7 @@
 				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
 				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
+				H.virginity = TRUE
 			// nothing for adults/immortals,
 			if(AGE_MIDDLEAGED)
 				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
@@ -109,7 +140,7 @@
 			change_stat(STATKEY_INT, -3)
 			change_stat(STATKEY_LCK, -3)
 			H.voice_color = "c71d76"
-			set_eye_color(H, "#c71d76", "#c71d76")
+			H.set_eye_color("#c71d76", updates_dna = TRUE) //majenta
 
 	has_rolled_for_stats = TRUE
 	return TRUE

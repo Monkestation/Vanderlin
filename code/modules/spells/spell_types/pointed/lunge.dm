@@ -69,7 +69,7 @@
 		var/y_offset = base_y + rand(-3, 3)
 		animate(pixel_x = x_offset, pixel_y = y_offset, time = 1)
 
-	if(!do_after(owner, 2 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, TYPE_PROC_REF(/datum/action/cooldown/spell/lunge, CheckCanTarget), target_atom), hidden = TRUE))
+	if(!do_after(owner, 1.5 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, TYPE_PROC_REF(/datum/action/cooldown/spell/lunge, CheckCanTarget), target_atom), hidden = TRUE))
 		end_target_lunge(base_x, base_y)
 
 		return FALSE

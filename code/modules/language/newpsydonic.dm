@@ -12,7 +12,7 @@
 	additional_syllable_low = 1
 	additional_syllable_high = 2
 	default_priority = 80
-	icon_state = "psydon"
+	icon_state = "psydon-new"
 	spans = list(SPAN_OLDPSYDONIC)
 	syllables = list(
 "ja",

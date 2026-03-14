@@ -13,7 +13,7 @@
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_NORMAL)
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
 		M.heal_wounds(3) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
@@ -36,7 +36,7 @@
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = min(M.blood_volume+80, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+80, BLOOD_VOLUME_NORMAL)
 	else
 		//can overfill you with blood, but at a slower rate
 		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
@@ -485,6 +485,10 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustToxLoss(3)
 	else
 		M.adjustToxLoss(6)
+	if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
+		M.adjustOxyLoss(1)
+	else
+		M.adjustOxyLoss(2)
 	return ..()
 
 /datum/reagent/killersice

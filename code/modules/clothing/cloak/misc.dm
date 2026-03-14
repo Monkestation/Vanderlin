@@ -1,7 +1,7 @@
 
 /obj/item/clothing/cloak/chasuble
 	name = "chasuble"
-	desc = "Pristine white liturgical vestments with a golden psycross adornment."
+	desc = "Pristine white liturgical vestments with a golden Astratan cross adornment."
 	icon_state = "chasuble"
 	body_parts_covered = CHEST|GROIN|ARMS
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -11,6 +11,17 @@
 	allowed_race = SPECIES_BASE_BODY
 	nodismemsleeves = TRUE
 
+/obj/item/clothing/cloak/chasuble/psydon
+	name = "chasuble"
+	desc = "Pristine white liturgical vestments with a golden psycross adornment."
+	icon_state = "chasuble_psydon"
+	body_parts_covered = CHEST|GROIN|ARMS
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleevetype = "shirt"
+	slot_flags = ITEM_SLOT_CLOAK
+	allowed_sex = list(MALE)
+	allowed_race = SPECIES_BASE_BODY
+	nodismemsleeves = TRUE
 
 /obj/item/clothing/cloak/stole
 	name = "stole"

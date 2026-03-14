@@ -41,7 +41,8 @@
 	if(ispath(weapon_special))
 		weapon_special = new weapon_special()
 
-	update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
+	if(randomize_blade_int)
+		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
 	if(weapon_special)
@@ -61,9 +62,6 @@
 		H.cursed_freak_out()
 		H.Paralyze(4 SECONDS)
 		return
-
-/obj/item/weapon/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
 
 /obj/item/weapon/examine(mob/user)
 	. = ..()

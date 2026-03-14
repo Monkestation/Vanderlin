@@ -9,7 +9,7 @@
 /// Immediately recalc adjacent atmos turfs instead of queuing.
 #define CHANGETURF_RECALC_ADJACENT (1 << 5)
 
-#define IS_OPAQUE_TURF(turf) (turf.opacity) //https://github.com/tgstation/tgstation/pull/52881
+#define IS_OPAQUE_TURF(turf) (turf.directional_opacity == ALL_CARDINALS)
 
 //supposedly the fastest way to do this according to https://gist.github.com/Giacom/be635398926bb463b42a
 ///Returns a list of turf in a square

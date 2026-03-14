@@ -35,7 +35,7 @@
 		/datum/skill/craft/carpentry = 5,
 		/datum/skill/misc/swimming = 1,
 		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/sewing = 1,
+		/datum/skill/craft/sewing = 1,
 		/datum/skill/misc/reading = 1,
 		/datum/skill/misc/athletics = 3,
 		/datum/skill/labor/lumberjacking = 3,
@@ -49,7 +49,7 @@
 
 	if(prob(5))
 		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+		spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
 		spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE)
 		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 

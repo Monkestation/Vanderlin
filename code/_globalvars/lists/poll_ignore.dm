@@ -21,6 +21,7 @@
 #define POLL_IGNORE_ACADEMY_WIZARD "academy_wizard"
 #define POLL_IGNORE_NECROMANCER_SKELETON "necromancer_skeleton"
 #define POLL_IGNORE_MAGE_SUMMON "mage_summon"
+#define POLL_IGNORE_STORYTELLERINJECTION "storyteller_injection"
 
 
 GLOBAL_LIST_INIT(poll_ignore_desc, list(
