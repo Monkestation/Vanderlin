@@ -9,7 +9,7 @@
 
 	cost = 0.8
 	weight = 12
-	earliest_start = 25 MINUTES
+	earliest_start = 15 MINUTES
 
 /datum/migrant_wave/wretch
 	name = "Wretched Adventurer"

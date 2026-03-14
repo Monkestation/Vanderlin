@@ -3,7 +3,7 @@
 	wave_type = /datum/migrant_wave/lich
 
 	weight = 6
-
+	min_players = HIGHPOP_THRESHOLD
 	earliest_start = 25 MINUTES
 
 	tags = list(

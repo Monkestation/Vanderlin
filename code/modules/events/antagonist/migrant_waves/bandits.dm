@@ -2,8 +2,8 @@
 	name = "Bandit Migration"
 	wave_type = /datum/migrant_wave/bandit
 
+	min_players = LOWPOP_THRESHOLD
 	weight = 8
-
 	earliest_start = 20 MINUTES
 
 	tags = list(

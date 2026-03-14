@@ -1,32 +1,4 @@
-/datum/job/wretch
-	title = "Wretch"
-	department_flag = OUTSIDERS
-	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS)
-	display_order = JDO_WRETCH
-	total_positions = 0
-	spawn_positions = 0
-
-	advclass_cat_rolls = list(CTAG_WRETCH = 20)
-	blacklisted_species = list(SPEC_ID_HALFLING)
-
-	is_foreigner = TRUE
-	job_reopens_slots_on_death = FALSE
-	same_job_respawn_delay = 30 MINUTES
-
-
-	exp_type = list(EXP_TYPE_LIVING)
-	exp_types_granted = list(EXP_TYPE_COMBAT)
-	exp_requirements = list(
-		EXP_TYPE_LIVING = 1200
-	)
-
-
-/datum/job/wretch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	..()
-	if(!spawned.mind)
-		return
-	to_chat(spawned, span_boldwarning("You are not an antagonist in the sense you kill everyone you're near, it is up to you to pave your own story. It is your choice if you want to take the roll of a highwayman or robber, or to follow a path of redemption, as your role exists to add flavor the round."))
-	to_chat(spawned, span_boldwarning("In the same manner, you are NOT an adventurer."))
+/// Wretches don't HAVE a root class, just subclasses!
 
 /datum/job/advclass/wretch
 	abstract_type = /datum/job/advclass/wretch

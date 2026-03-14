@@ -3,7 +3,7 @@
 	wave_type = /datum/migrant_wave/maniac
 
 	weight = 8
-
+	min_players = LOWPOP_THRESHOLD
 	earliest_start = 20 MINUTES
 
 	tags = list(

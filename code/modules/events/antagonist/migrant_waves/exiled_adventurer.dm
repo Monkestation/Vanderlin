@@ -3,7 +3,7 @@
 	wave_type = /datum/migrant_wave/werewolf
 
 	weight = 4
-
+	min_players = LOWPOP_THRESHOLD
 	earliest_start = 25 MINUTES
 
 	tags = list(
@@ -20,7 +20,7 @@
 
 	weight = 4
 	max_occurrences = 2
-
+	min_players = LOWPOP_THRESHOLD
 	earliest_start = 20 MINUTES
 
 	tags = list(
