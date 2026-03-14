@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/bogwitch
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/sewing = 20
+	)
+
+
 /datum/job/bogwitch
 	title = JOB_BOGWITCH
 	tutorial = "Your ancestor came with the Gallowband as a healer. Eventually, they drifted apart to the fetid cauldron of life that is the Bog, drawn by the strange herbs and magics present in the mud. Even as you venerate the Great Hunt, you work in harmony with the land. Mender, potionmaker, miracle-worker, doomed to seclusion- but maybe your apprentice will carry on the old ways."
@@ -27,25 +46,7 @@
 		EXP_TYPE_MEDICAL = 300
 	)
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
-		STATKEY_CON = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/labor/farming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/magic/holy = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/bogwitch
 
 	spells = list(/datum/action/cooldown/spell/diagnose)
 

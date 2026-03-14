@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/bogapprentice
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/craft/alchemy = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10
+	)
+
+
 /datum/job/bog_apprentice
 	title = JOB_BOGWITCH_APP
 	tutorial = "You were dragged out of the mud by the Bog Witch on one of their expeditions- shivering, hungry, and alone. They taught you the ways of the Great Hunt, and in the eclectic methods of the their practice. You work yourself to the bone to tend the crops, stir the cauldrons, and run messages between the Witch and the Gallowband. When the Witch dies, you alone will carry the tradition forward."
@@ -26,22 +42,7 @@
 		EXP_TYPE_MEDICAL = 300
 	)
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_NOVICE,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/labor/farming = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/bogapprentice
 
 	traits = list(
 		TRAIT_FORAGER,
