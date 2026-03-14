@@ -154,38 +154,40 @@
 /obj/item/restraints/legcuffs/beartrap/Crossed(AM as mob|obj)
 	if(armed && isturf(loc))
 		if(isliving(AM))
-			var/mob/living/L = AM
+			var/mob/living/cross_mob = AM
 			var/snap = TRUE
-			if(L.throwing)
+			if(cross_mob.throwing)
 				return ..()
 
-			if(L.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+			if(cross_mob.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+				return ..()
+			if(HAS_TRAIT(cross_mob, TRAIT_LIGHT_STEP))
 				return ..()
 
 			var/def_zone = BODY_ZONE_CHEST
-			if(snap && iscarbon(L))
-				var/mob/living/carbon/C = L
-				if(C.body_position == STANDING_UP)
+			if(snap && iscarbon(cross_mob))
+				var/mob/living/carbon/carbon_mob = cross_mob
+				if(carbon_mob.body_position == STANDING_UP)
 					def_zone = pick(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
-					var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
+					var/obj/item/bodypart/BP = carbon_mob.get_bodypart(def_zone)
 					if(BP)
-						add_mob_blood(C)
+						add_mob_blood(carbon_mob)
 						if(!BP.is_object_embedded(src))
 							BP.add_embedded_object(src)
-						C.emote("agony")
+						carbon_mob.emote("agony")
 				//BP.set_disabled(BODYPART_DISABLED_WOUND)
 				// BP.add_wound(/datum/wound/fracture)
-			else if(snap && isanimal(L))
-				var/mob/living/simple_animal/SA = L
+			else if(snap && isanimal(cross_mob))
+				var/mob/living/simple_animal/SA = cross_mob
 				if(SA.mob_size <= MOB_SIZE_TINY) //don't close the trap if they're as small as a mouse.
 					snap = FALSE
 			if(snap)
-				close_trap(L)
-				L.visible_message(span_danger("[L] triggers \the [src]."), \
+				close_trap(cross_mob)
+				cross_mob.visible_message(span_danger("[cross_mob] triggers \the [src]."), \
 						span_danger("I trigger \the [src]!"))
-				if(L.apply_damage(trap_damage, BRUTE, def_zone, L.run_armor_check(def_zone, "stab", damage = trap_damage)))
-					L.Stun(80)
-				L.consider_ambush()
+				if(cross_mob.apply_damage(trap_damage, BRUTE, def_zone, cross_mob.run_armor_check(def_zone, "stab", damage = trap_damage)))
+					cross_mob.Stun(80)
+				cross_mob.consider_ambush()
 	..()
 
 // When craftable beartraps get added, make these the ones crafted.
