@@ -20,6 +20,10 @@
 	name = "raspberry pie"
 	scent = "raspberry pie"
 
+/datum/pollutant/food/pompkaun_pie
+	name = "pompkaun pie"
+	scent = "pompkaun pie"
+
 /datum/pollutant/food/pear_pie
 	name = "pear pie"
 	scent = "pear pie"
@@ -59,6 +63,14 @@
 /datum/pollutant/food/pie_base
 	name = "fresh baked pie crust"
 	scent = "fresh baked pie crust"
+
+/datum/pollutant/food/sunreed_dough
+	name = "fresh baked sunreed"
+	scent = "fresh baked sunreed"
+
+/datum/pollutant/food/tamtoplate
+	name = "fresh baked tamtoplate"
+	scent = "fresh baked tamtoplate"
 
 /datum/pollutant/food/toast
 	name = "cooked toast"
@@ -100,6 +112,10 @@
 	name = "fresh baked crimson pine cake"
 	scent = "fresh baked crimson pine cake"
 
+/datum/pollutant/food/tamto_cake
+	name = "fresh baked tamto silk cake"
+	scent = "fresh baked tamto silk caake"
+
 /datum/pollutant/food/scone
 	name = "fresh baked scones"
 	scent = "fresh baked scones"
@@ -111,6 +127,15 @@
 /datum/pollutant/food/baked_potato
 	name = "baked potatos"
 	scent = "baked potatos"
+
+/datum/pollutant/food/baked_pompkaun
+	name = "baked pompkaun"
+	scent = "baked pompkaun"
+
+
+/datum/pollutant/food/sunreed_grilled
+	name = "grilled sunreed"
+	scent = "grilled sunreed"
 
 /datum/pollutant/food/baked_carp
 	name = "cooked carp"
@@ -139,6 +164,10 @@
 /datum/pollutant/food/truffles
 	name = "cooked truffles"
 	scent = "cooked truffles"
+
+/datum/pollutant/food/baked_meat
+	name = "baked meat"
+	scent = "baked meat"
 
 /datum/pollutant/food/bacon
 	name = "fried bacon"
@@ -212,6 +241,10 @@
 	name = "egg soup"
 	scent = "egg soup"
 
+/datum/pollutant/food/tamto_soup
+	name = "tamto soup"
+	scent = "tamto soup"
+
 /datum/pollutant/food/truffle_stew
 	name = "truffle stew"
 	scent = "truffle stew"
@@ -223,6 +256,10 @@
 /datum/pollutant/food/cheese_soup
 	name = "cheese soup"
 	scent = "cheese soup"
+
+/datum/pollutant/food/sweet_sunreed
+	name = "sweet sunreed"
+	scent = "sweet sunreed"
 
 /datum/pollutant/food/sugar
 	name = "saccharine sweetness"

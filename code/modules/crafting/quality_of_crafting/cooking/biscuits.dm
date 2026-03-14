@@ -103,3 +103,54 @@
 	craft_time = 6 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/grenzelbun_cocaumole
+	category = "Tiefling Cuisine"
+	name = "Grenzel Bun With Cocaumole"
+	subtypes_allowed = TRUE
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/grenzelbun = 1,
+		/obj/item/reagent_containers/food/snacks/cocaumole = 1,
+	)
+	attacked_atom = /obj/item/reagent_containers/food/snacks/grenzelbun
+	starting_atom = /obj/item/reagent_containers/food/snacks/cocaumole
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
+	craft_time = 6 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	crafting_message = "spread cocaumole on the sausage"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/grenzelbun_cocaumole_alt
+	name = "Grenzel Bun With Cocaumole"
+	hides_from_books = TRUE
+	subtypes_allowed = TRUE
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cooked/sausage_cocaumole = 1,
+		/obj/item/reagent_containers/food/snacks/bun = 1,
+	)
+	attacked_atom = /obj/item/reagent_containers/food/snacks/bun
+	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/sausage_cocaumole
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
+	craft_time = 6 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/xylixbun
+	name = "Xylixbun"
+	hides_from_books = TRUE //The forbidden bun.
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane = 1,
+		/obj/item/reagent_containers/food/snacks/dough_slice = 1,
+	)
+	attacked_atom = /obj/item/reagent_containers/food/snacks/dough_slice
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/foodbase/xylixbun_raw
+	craft_time = 6 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	extra_chance = 100

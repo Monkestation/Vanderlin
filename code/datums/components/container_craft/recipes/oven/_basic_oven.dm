@@ -38,6 +38,7 @@
 	return FALSE
 
 /datum/container_craft/oven/apple_fritter
+	category = "Vanderlin Cuisine"
 	name = "Apple Fritter"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/fritter_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/fritter
@@ -68,11 +69,32 @@
 		after_craft(created_output, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
 		SEND_SIGNAL(crafter, COMSIG_CONTAINER_CRAFT_COMPLETE, created_output)
 
+/datum/container_craft/oven/huskbun
+	category = "Tiefling Cuisine"
+	name = "Baked Huskbun"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/huskbunraw = 1)
+	output = /obj/item/reagent_containers/food/snacks/huskbun
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/huskbun/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
+	var/create_type = output
+	for(var/j = 1 to output_amount)
+		var/atom/created_output = new create_type(get_turf(crafter))
+		SEND_SIGNAL(crafter, COMSIG_TRY_STORAGE_INSERT, created_output, null, null, TRUE, TRUE)
+		after_craft(created_output, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
+		SEND_SIGNAL(crafter, COMSIG_CONTAINER_CRAFT_COMPLETE, created_output)
+
 /datum/container_craft/oven/roastbird
 	name = "Roast Bird"
 	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/roastchicken
 	cooked_smell = /datum/pollutant/food/fried_chicken
+
+/datum/container_craft/oven/ribrack
+	name = "Roast Ribrack"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/ribs = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/ribrack
+	cooked_smell = /datum/pollutant/food/baked_meat
 
 /datum/container_craft/oven/pastry
 	name = "Pastry"
@@ -130,6 +152,13 @@
 	output = /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry
 	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry
 	cooked_smell = /datum/pollutant/food/raspberry_pie
+
+/datum/container_craft/oven/pie/pompkaun
+	name = "Pompkaun Pie"
+	requirements = list(/obj/item/reagent_containers/food/snacks/raw_pie/pompkaun = 1)
+	output = /obj/item/reagent_containers/food/snacks/pie/cooked/pompkaun
+	good_path = /obj/item/reagent_containers/food/snacks/pie/cooked/pompkaun
+	cooked_smell = /datum/pollutant/food/pompkaun_pie
 
 /datum/container_craft/oven/pie/apple
 	name = "Apple Pie"
@@ -231,6 +260,13 @@
 	output = /obj/item/reagent_containers/food/snacks/bun
 	cooked_smell = /datum/pollutant/food/bun
 
+/datum/container_craft/oven/xylixbun
+	name = "Xylix Bun"
+	hides_from_books = TRUE //Secret bun ooooooo
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/xylixbun_raw = 1)
+	output = /obj/item/reagent_containers/food/snacks/xylixbun
+	cooked_smell = /datum/pollutant/food/bun
+
 /datum/container_craft/oven/hardtack
 	name = "Hardtack"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw = 1)
@@ -247,6 +283,12 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/produce/vegetable/potato = 1)
 	output = /obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked
 	cooked_smell = /datum/pollutant/food/baked_potato
+
+/datum/container_craft/oven/baked_pompkaun
+	name = "Baked Pompkaun"
+	requirements = list(/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo = 1)
+	output = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo/cooked
+	cooked_smell = /datum/pollutant/food/baked_pompkaun
 
 /datum/container_craft/oven/plum_scone
 	name = "Baked Plum Scone"
@@ -300,6 +342,34 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/zybcake_ready= 1)
 	output = /obj/item/reagent_containers/food/snacks/zybcake_cooked
 	cooked_smell = /datum/pollutant/food/honey_cake
+
+/datum/container_craft/oven/tamto_cake
+	category = "Cakes"
+	name = "Baked Tamto Silk Cake"
+	requirements = list(/obj/item/reagent_containers/food/snacks/tamtocake_ready= 1)
+	output = /obj/item/reagent_containers/food/snacks/tamtocake_cooked
+	cooked_smell = /datum/pollutant/food/tamto_cake
+
+/datum/container_craft/oven/eighthscake
+	category = "Tiefling Cuisine"
+	name = "Baked Eighthscake"
+	requirements = list(/obj/item/reagent_containers/food/snacks/eighthscake_unbaked = 1)
+	output = /obj/item/reagent_containers/food/snacks/eighthscake
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/eighthscake_lemon
+	category = "Tiefling Cuisine"
+	name = "Baked Lemon Eighthscake"
+	requirements = list(/obj/item/reagent_containers/food/snacks/eighthscake_unbaked/lemon = 1)
+	output = /obj/item/reagent_containers/food/snacks/eighthscake/lemon
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/eighthscake_lime
+	category = "Tiefling Cuisine"
+	name = "Baked Lime Eighthscake"
+	requirements = list(/obj/item/reagent_containers/food/snacks/eighthscake_unbaked/lime = 1)
+	output = /obj/item/reagent_containers/food/snacks/eighthscake/lime
+	cooked_smell = /datum/pollutant/food/sunreed_dough
 
 /datum/container_craft/oven/prezzel
 	name = "Baked Prezzel"
@@ -392,3 +462,121 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit = 1)
 	output = /obj/item/reagent_containers/food/snacks/tart/cooked/dragonfruit
 	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/sunreed_bread
+	category = "Tiefling Cuisine"
+	name = "Sunbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/masa = 1)
+	output = /obj/item/reagent_containers/food/snacks/sunreed_bread
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/honey_sunreed_bread
+	category = "Tiefling Cuisine"
+	name = "Honeyed Sunbread"
+	requirements = list(/obj/item/reagent_containers/food/snacks/masa_honey = 1)
+	output = /obj/item/reagent_containers/food/snacks/sunreed_bread/honey
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/estrella
+	category = "Tiefling Cuisine"
+	name = "Estrella"
+	requirements = list(/obj/item/reagent_containers/food/snacks/masa_slice = 1)
+	output = /obj/item/reagent_containers/food/snacks/estrella
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/oven/comelette
+	category = "Tiefling Cuisine"
+	name = "Caravaneer's Omelette"
+	requirements = list(/obj/item/reagent_containers/food/snacks/comelette_uncooked = 1)
+	output = /obj/item/reagent_containers/food/snacks/cooked/comelette
+	cooked_smell = /datum/pollutant/food/fried_eggs
+
+/datum/container_craft/oven/comelette_veggie
+	category = "Tiefling Cuisine"
+	name = "Veggie Caravaneer's Omelette"
+	requirements = list(/obj/item/reagent_containers/food/snacks/comelette_uncooked/veggie = 1)
+	output = /obj/item/reagent_containers/food/snacks/cooked/comelette/veggie
+	cooked_smell = /datum/pollutant/food/fried_eggs
+
+/datum/container_craft/oven/comelette_meat
+	category = "Tiefling Cuisine"
+	name = "Meat Caravaneer's Omelette"
+	requirements = list(/obj/item/reagent_containers/food/snacks/comelette_uncooked/meat = 1)
+	output = /obj/item/reagent_containers/food/snacks/cooked/comelette/meat
+	cooked_smell = /datum/pollutant/food/fried_eggs
+
+/datum/container_craft/oven/dottart_strawberry
+	name = "Baked Strawberry Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/strawberry = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_strawberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_tangerine
+	name = "Baked Tangerine Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/tangerine = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_tangerine
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_plum
+	name = "Baked Plum Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/plum = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_plum
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_blackberry
+	name = "Baked Blackberry Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/blackberry = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_blackberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_raspberry
+	name = "Baked Raspberry Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/raspberry = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_raspberry
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_lemon
+	name = "Baked Lemon Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/lemon = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_lemon
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_lime
+	name = "Baked Lime Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/lime = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_lime
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/dottart_pear
+	name = "Baked Pear Dot Tart"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/dottart_base/pear = 1)
+	output = /obj/item/reagent_containers/food/snacks/dottart_pear
+	cooked_smell = /datum/pollutant/food/pastry
+
+/datum/container_craft/oven/tamtoplate_cheese
+	category = "Vanderlin Cuisine"
+	name = "Cheese Tamtoplate"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished = 1)
+	output = /obj/item/reagent_containers/food/snacks/tamtoplate
+	cooked_smell = /datum/pollutant/food/tamtoplate
+
+/datum/container_craft/oven/tamtoplate_meat
+	category = "Vanderlin Cuisine"
+	name = "Sausage Tamtoplate"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_meat = 1)
+	output = /obj/item/reagent_containers/food/snacks/tamtoplate/meat
+	cooked_smell = /datum/pollutant/food/tamtoplate
+
+/datum/container_craft/oven/tamtoplate_fish
+	category = "Vanderlin Cuisine"
+	name = "Fish Tamtoplate"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_fish = 1)
+	output = /obj/item/reagent_containers/food/snacks/tamtoplate/fish
+	cooked_smell = /datum/pollutant/food/tamtoplate
+
+/datum/container_craft/oven/tamtoplate_onion
+	category = "Vanderlin Cuisine"
+	name = "Onion Tamtoplate"
+	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_onion = 1)
+	output = /obj/item/reagent_containers/food/snacks/tamtoplate/onion
+	cooked_smell = /datum/pollutant/food/tamtoplate

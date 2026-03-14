@@ -62,10 +62,10 @@
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
 
-/datum/plant_def/maize
+/datum/plant_def/sunreed
 	name = "sunreed reeds"
 	icon_state = "maize"
-	produce_type = /obj/item/natural/chaff/maize
+	produce_type = /obj/item/natural/chaff/sunreed
 	produce_amount_min = 2
 	produce_amount_max = 4
 	uproot_loot = list(/obj/item/natural/fibers, /obj/item/natural/fibers)

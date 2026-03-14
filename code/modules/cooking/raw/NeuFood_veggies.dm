@@ -73,7 +73,7 @@
 	if(user.mind)
 		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
 	if(istype(I, /obj/item/kitchen/spoon))
-		playsound(user, 'sound/foley/rollingpin.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/items/wood_sharpen.ogg', 100, TRUE, -1)
 		to_chat(user, span_notice("Scooping out the [src]..."))
 		if(do_after(user, short_cooktime, src))
 			new /obj/item/reagent_containers/glass/cup/cocaudo_husk(loc)

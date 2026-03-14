@@ -125,6 +125,7 @@
 							/obj/item/reagent_containers/food/snacks/fat = 2,
 							/obj/item/natural/hide = 2)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 5,
+							/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 							/obj/item/reagent_containers/food/snacks/fat = 3,
 							/obj/item/natural/hide = 3)
 

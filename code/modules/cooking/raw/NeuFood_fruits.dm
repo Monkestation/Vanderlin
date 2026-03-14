@@ -52,7 +52,7 @@
 /*	..................   Tamto   ................... */
 /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
 	name = "sliced tamto"
-	icon_state = "mato_slice"
+	icon_state = "mato_split"
 	bitesize = 1
 	dropshrink = 0.7
 	nutrition = FRUIT_NUTRITION

@@ -52,6 +52,15 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	slice_bclass = BCLASS_CHOP
 
+/*	.............   Ribs   ................ */
+/obj/item/reagent_containers/food/snacks/meat/ribs //This should be given to large vertebrates, usually on the perfect butcher result, unless they're especially meaty.
+	ingredient_size = 2
+	name = "raw ribs"
+	icon_state = "raw_ribs"
+	slices_num = 1
+	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+	slice_bclass = BCLASS_CHOP
+
 /*	.............   Pigflesh, strange meat, birdmeat   ................ */
 /obj/item/reagent_containers/food/snacks/meat/fatty
 	name = "raw pigflesh"

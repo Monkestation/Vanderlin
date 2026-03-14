@@ -107,8 +107,8 @@
 	plant_def_type = /datum/plant_def/oat
 	color = "#a3eca3"
 
-/obj/item/neuFarm/seed/maize
-	plant_def_type = /datum/plant_def/maize
+/obj/item/neuFarm/seed/sunreed
+	plant_def_type = /datum/plant_def/sunreed
 
 /obj/item/neuFarm/seed/manabloom
 	plant_def_type = /datum/plant_def/manabloom

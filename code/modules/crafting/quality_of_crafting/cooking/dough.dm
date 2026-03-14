@@ -45,12 +45,13 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/masa
+	category = "Tiefling Cuisine"
 	name = "Sunreed Dough"
 	requirements = list(
-		/obj/item/reagent_containers/powder/maize_flour = 1,
+		/obj/item/reagent_containers/powder/sunreed_flour = 1,
 		/obj/item/reagent_containers/food/snacks/masa_base = 1,
 	)
-	attacked_atom = /obj/item/reagent_containers/powder/maize_flour
+	attacked_atom = /obj/item/reagent_containers/powder/sunreed_flour
 	starting_atom = /obj/item/reagent_containers/food/snacks/masa_base
 	output = /obj/item/reagent_containers/food/snacks/masa
 	required_table = TRUE
@@ -63,10 +64,10 @@
 	hides_from_books = TRUE
 	name = "Sunreed Dough"
 	requirements = list(
-		/obj/item/reagent_containers/powder/maize_flour = 1,
+		/obj/item/reagent_containers/powder/sunreed_flour = 1,
 		/obj/item/reagent_containers/food/snacks/masa_base = 1,
 	)
-	starting_atom = /obj/item/reagent_containers/powder/maize_flour
+	starting_atom = /obj/item/reagent_containers/powder/sunreed_flour
 	attacked_atom = /obj/item/reagent_containers/food/snacks/masa_base
 	output = /obj/item/reagent_containers/food/snacks/masa
 	required_table = TRUE
@@ -76,6 +77,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/raspberry_butter_dough
+	name = "Holiday Food"
 	name = "Raspberry Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -92,6 +94,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/raisin_butter_dough
+	name = "Holiday Food"
 	name = "Raisin Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -125,6 +128,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/blackberry_butter_dough
+	name = "Holiday Food"
 	name = "Blackberry Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -141,6 +145,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/pear_butter_dough
+	name = "Holiday Food"
 	name = "Pear Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -157,6 +162,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/pear_butter_dough
+	name = "Holiday Food"
 	name = "Pear Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -173,6 +179,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/tangerine_butter_dough
+	name = "Holiday Food"
 	name = "Tangerine Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -189,6 +196,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/plum_butter_dough
+	name = "Holiday Food"
 	name = "Plum Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -205,6 +213,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/lemon_butter_dough
+	name = "Holiday Food"
 	name = "Lemon Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -221,6 +230,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/chocolate_butter_dough
+	name = "Holiday Food"
 	name = "Chocolate Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -260,6 +270,22 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/dough_slice
 	attacked_atom = /obj/item/reagent_containers/food/snacks/dough_slice
 	output = /obj/item/reagent_containers/food/snacks/dough
+	required_table = TRUE
+	craftdiff = 0
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading.ogg'
+	crafting_message = "combine dough slices"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/reform_masa
+	hides_from_books = TRUE
+	name = "Reform Sunreed Dough"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/masa_slice = 2,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/masa_slice
+	attacked_atom = /obj/item/reagent_containers/food/snacks/masa_slice
+	output = /obj/item/reagent_containers/food/snacks/masa
 	required_table = TRUE
 	craftdiff = 0
 	craft_time = 5 SECONDS

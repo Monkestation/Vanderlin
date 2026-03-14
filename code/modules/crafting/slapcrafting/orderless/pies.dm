@@ -72,6 +72,14 @@
 	overlay_state = "fill_raspberry"
 	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/raspberry
 
+/datum/orderless_slapcraft/food/pie/pompkaun
+	name = "Unbaked Pompkaun Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo = 3
+	)
+	overlay_state = "fill_pompkaun"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/pompkaun
+
 /datum/orderless_slapcraft/food/pie/apple
 	name = "Unbaked Apple Pie"
 	requirements = list(

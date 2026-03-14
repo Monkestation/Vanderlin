@@ -212,6 +212,7 @@
 	name = "cocaudo husk"
 	desc = "A hollowed out half of a cocaudo. It holds liquid."
 	icon_state = "cocaudo_empty"
+	dropshrink = 1
 	fill_icon_state = "cocaudo_empty"
 	grid_height = 32
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'

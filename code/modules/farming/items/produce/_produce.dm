@@ -111,8 +111,8 @@
 	if(farminglvl >= 0)
 		. += "I can easily tell that these are oat groats."
 
-/obj/item/reagent_containers/food/snacks/produce/grain/maize
-	seed = /obj/item/neuFarm/seed/maize
+/obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+	seed = /obj/item/neuFarm/seed/sunreed
 	name = "sunreed kernels"
 	desc = "Kernels so hard you could chip a tooth. Only the most desperate would use this in any sort of food."
 	icon_state = "maize"
@@ -120,7 +120,7 @@
 	gender = PLURAL
 	filling_color = "#b9a917"
 	bitesize_mod = 2
-	tastes = list("maize" = 1)
+	tastes = list("chipping a tooth" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
 	mill_result = /obj/item/reagent_containers/powder/flour
@@ -547,9 +547,15 @@
 	bitesize = 2
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	slices_num = 1
 	chopping_sound = TRUE
 	tastes = list("sweet tamto" = 1)
 	rotprocess = SHELFLIFE_SHORT
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing) //funny
+	new /obj/effect/decal/cleanable/food/tomato_smudge(get_turf(src))
+	..()
+	qdel(src)
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun
 	name = "pompkaun"
@@ -557,7 +563,7 @@
 	desc = "This fruit is equal parts Dendorite and Pestran, carved in offering to the former, and collected by followers of the latter after the offerings rot."
 	icon_state = "pompkaun"
 	bitesize = 3
-	slices_num = 3
+	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
 	tastes = list("pompkaun" = 1)
 	rotprocess = SHELFLIFE_DECENT

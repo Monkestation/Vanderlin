@@ -85,6 +85,12 @@
 	overlay_state = "fill_raspberry"
 	nutrition = FRUITPIE_NUTRITION
 
+/obj/item/reagent_containers/food/snacks/raw_pie/pompkaun
+	name = "uncooked pompkaun pie"
+	filling_color = "#7e420a"
+	overlay_state = "fill_pompkaun"
+	nutrition = FRUITPIE_NUTRITION
+
 /obj/item/reagent_containers/food/snacks/raw_pie/meat
 	name = "uncooked meat pie"
 	icon_state = "meatpie_raw"
@@ -176,6 +182,9 @@
 /obj/item/reagent_containers/food/snacks/pieslice/raspberry
 	icon_state = "raspberrypie_slice"
 
+/obj/item/reagent_containers/food/snacks/pieslice/pompkaun
+	icon_state = "pompkaunpie_slice"
+
 // ------ GOOD PIE SLICES -----
 /obj/item/reagent_containers/food/snacks/pieslice/good
 	eat_effect = /datum/status_effect/buff/foodbuff
@@ -205,6 +214,10 @@
 
 /obj/item/reagent_containers/food/snacks/pieslice/good/raspberry
 	icon_state = "raspberrypie_slice"
+	nutrition = FRUITPIE_NUTRITION * COOK_MOD * SLICED_MOD
+
+/obj/item/reagent_containers/food/snacks/pieslice/good/pompkaun
+	icon_state = "pompkaunpie_slice"
 	nutrition = FRUITPIE_NUTRITION * COOK_MOD * SLICED_MOD
 
 /obj/item/reagent_containers/food/snacks/pieslice/good/apple
@@ -317,7 +330,7 @@
 // -------------- RASPBERRY PIE -----------------
 /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry
 	name = "raspberry pie"
-	icon_state = "raspberrypie"
+	icon_state = "pompkaunpie"
 	desc = "A sweet pie made from raspberries. A classic Vanderlinian treat, nearly lost to time."
 	nutrition = FRUITPIE_NUTRITION * COOK_MOD
 	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/raspberry
@@ -329,6 +342,24 @@
 	tastes = list("gooey raspberries and crispy butterdough" = 1)
 
 /obj/item/reagent_containers/food/snacks/pie/cooked/raspberry/good/Initialize(mapload)
+	. = ..()
+	good_quality_descriptors()
+
+// -------------- POMPKAUN PIE -----------------
+/obj/item/reagent_containers/food/snacks/pie/cooked/pompkaun
+	name = "pompkaun pie"
+	icon_state = "pompkaunpie"
+	desc = "Usually eaten in the second to last month of fall, when the pompkauns have been carved for Dendor but have not yet rotted."
+	nutrition = FRUITPIE_NUTRITION * COOK_MOD
+	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/pompkaun
+	tastes = list("pompkaun and butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/pompkaun/good
+	eat_effect = /datum/status_effect/buff/foodbuff
+	slice_path = /obj/item/reagent_containers/food/snacks/pieslice/good/pompkaun
+	tastes = list("warm pompkaun glop and crispy butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/pie/cooked/pompkaun/good/Initialize(mapload)
 	. = ..()
 	good_quality_descriptors()
 

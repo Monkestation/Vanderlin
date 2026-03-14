@@ -172,6 +172,7 @@
 	fillsounds = list('sound/items/fillcup.ogg')
 	metalizer_result = /obj/item/reagent_containers/glass/bowl/iron
 	smeltresult = /obj/item/fertilizer/ash
+	var/salad
 	var/max_usages = 5
 	var/usages = 0
 	var/dirty = FALSE
@@ -239,6 +240,21 @@
 		else
 			to_chat(user, span_notice("This platter is already clean."))
 			return
+	if(istype(I, /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced))
+		to_chat(user, span_warning("Tossing up a salad..."))
+		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
+		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+		if(do_after(user, short_cooktime, src))
+			var/obj/item/reagent_containers/food/snacks/salad/salad = new /obj/item/reagent_containers/food/snacks/salad(get_turf(src))
+			salad.set_quality(recipe_quality)
+			salad.icon_state = src.icon_state
+			salad.trash = src.type
+			salad.drop_sound = src.drop_sound
+			salad.add_overlay("salad_base")
+			user.nobles_seen_servant_work()
+			qdel(I)
+			qdel(src)
+		return
 	if(reagents.total_volume > 0 && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		to_chat(user, span_warning("You can't clean the [src] while it has something inside of it!"))
 		return
@@ -415,6 +431,11 @@
 	taste_mult = 3
 	hydration = 2
 
+/datum/reagent/consumable/soup/oatmeal/sunreed
+	name = "sweet-reed"
+	color = "#aa9539"
+	taste_description = "sweet and soft sunreed kernels"
+
 /datum/reagent/consumable/soup/veggie
 	name = "vegetable soup"
 	description = ""
@@ -438,6 +459,11 @@
 /datum/reagent/consumable/soup/veggie/turnip
 	color = "#becf9d"
 	taste_description = "boiled turnip"
+
+/datum/reagent/consumable/soup/tamto
+	name = "tamto soup"
+	color = "#e2461f"
+	taste_description = "tamto soup"
 
 /datum/reagent/consumable/soup/egg
 	name = "egg soup"
@@ -611,7 +637,7 @@
 		..()
 
 // -------------- Sunreed Powder -----------------
-/obj/item/reagent_containers/powder/maize_flour
+/obj/item/reagent_containers/powder/sunreed_flour
 	name = "sunreed powder"
 	desc = "Desperation breeds innovation."
 	gender = PLURAL
@@ -621,12 +647,12 @@
 	sellprice = 0
 	var/water_added
 
-/obj/item/reagent_containers/powder/maize_flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
+/obj/item/reagent_containers/powder/sunreed_flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/flour(get_turf(src))
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/powder/maize_flour/attackby(obj/item/I, mob/living/user, list/modifiers)
+/obj/item/reagent_containers/powder/sunreed_flour/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
@@ -647,7 +673,7 @@
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
 
-/obj/item/reagent_containers/powder/maize_flour/attack_hand(mob/living/user)
+/obj/item/reagent_containers/powder/sunreed_flour/attack_hand(mob/living/user)
 	if(water_added)
 		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)

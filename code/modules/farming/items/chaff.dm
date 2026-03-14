@@ -76,11 +76,11 @@
 	icon_state = "oatchaff"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/oat
 
-/obj/item/natural/chaff/maize
+/obj/item/natural/chaff/sunreed
 	name = "ear of sunreed"
-	desc = "Despite their native origin of Valeria, locals very rarely farm or even eat this crop due to it's rock-hard kernels."
+	desc = "Despite its native origin of Valeria, locals very rarely farm or even eat this crop due to it's rock-hard kernels."
 	icon_state = "maizechaff"
-	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/maize
+	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/sunreed
 
 /*
 /obj/item/natural/chaff/rice

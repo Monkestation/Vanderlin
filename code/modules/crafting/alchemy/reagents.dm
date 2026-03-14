@@ -521,9 +521,13 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		if(istiefling(M))
 			M.adjustBruteLoss(-1*REM)
 			M.adjustFireLoss(-1*REM)
-		if(isdarkelf(M))
+			if(volume >= 25)
+				M.remove_reagent(/datum/reagent/drowsbane, 5) //Incase you eat like, five drowsbane clusters to get infinite healing.
+			if(prob(10))
+				to_chat(M, span_notice("Something inside me burns, it's rejuvenating!"))
+		if(isdarkelf(M) || ishalfdrow(M))
 			M.adjustToxLoss(tox)
-			M.adjustOxyLoss(oxy)
+			M.adjustOxyLoss(oxy) //For dark elves this should be lethal if you take 5u or more. Don't eat spicy food. Relatively harmless in lower amounts because it heals itself.
 			if(prob(10))
 				M.adjust_eye_blur(4 SECONDS)
 				to_chat(M, span_warning("My eyes water..."))
@@ -532,7 +536,19 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 				M.emote("gasp")
 				to_chat(M, span_warning("My throat feels like it's on fire!"))
 		else
-			M.adjustOxyLoss(oxy/2)
+			M.adjustOxyLoss(oxy/2) //This should mean 10u puts you right on the edge of crit
+			if(prob(10))
+				to_chat(M, span_warning("My tongue feels like its on fire!"))
+			if(volume > 5)
+				if(prob(10))
+					M.adjust_eye_blur(4 SECONDS)
+					to_chat(M, span_warning("My eyes water..."))
+					M.emote("cough")
+				if(prob(10))
+					M.emote("gasp")
+					to_chat(M, span_warning("My throat feels like it's on fire!"))
+			if(prob(10))
+				to_chat(M, span_warning("My tongue feels like its on fire!"))
 	return ..()
 
 /*----------\
