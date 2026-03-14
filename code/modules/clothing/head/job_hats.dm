@@ -114,7 +114,7 @@
 /obj/item/clothing/head/wizhat/bogwitch
 	name = "bog witch hat"
 	desc = "A hat of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
-	icon_state = "bogwitchhat"
+	icon_state = "witchhat"//"bogwitchhat"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/wizhat/gen

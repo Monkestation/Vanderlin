@@ -389,7 +389,7 @@
 /obj/item/clothing/shirt/robe/bogwitch
 	name = "bog witch robe"
 	desc = "A robe of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
-	icon_state = "bogwitchrobe"
+	icon_state = "monkvestments"//"bogwitchrobe"
 	color = null
 	sleeved = null
 	sleevetype = null
