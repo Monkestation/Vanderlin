@@ -1561,6 +1561,7 @@
 #include "code\game\area\the_town.dm"
 #include "code\game\area\tomb.dm"
 #include "code\game\area\vanderlinareas.dm"
+#include "code\game\area\vanderlinbog.dm"
 #include "code\game\area\wilderness.dm"
 #include "code\game\atom\atom_defense.dm"
 #include "code\game\atom\atom_orbit.dm"
