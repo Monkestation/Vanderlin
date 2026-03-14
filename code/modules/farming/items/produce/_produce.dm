@@ -564,6 +564,7 @@
 	icon_state = "pompkaun"
 	bitesize = 3
 	slices_num = 2
+	chopping_sound = TRUE
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
 	tastes = list("pompkaun" = 1)
 	rotprocess = SHELFLIFE_DECENT
@@ -764,7 +765,7 @@
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
 	name = "drowsbane"
-	desc = "Creates a burning sensation in the mouth of anyone who eats it, this lichen is particularly adept at warding off its consumption by any underdark denizens. However, in a cruel twist of fate, Tieflings find it particularly delectable."
+	desc = "Creates a burning sensation in the mouth of anyone who eats it, this lichen is particularly adept at warding off its consumption by any Subterra denizens. However, in a cruel twist of fate, Tieflings find it particularly delectable."
 	icon_state = "drowsbane"
 	seed = /obj/item/neuFarm/seed/spore/drowsbane
 	throwforce = 0
@@ -775,6 +776,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 	list_reagents = list(/datum/reagent/drowsbane = 5)
+	grind_results = list(/datum/reagent/drowsbane = 5)
 
 /* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later
 	name = "chanterelle"

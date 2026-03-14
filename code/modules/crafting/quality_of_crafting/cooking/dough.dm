@@ -77,7 +77,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/raspberry_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Raspberry Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -94,7 +94,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/raisin_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Raisin Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -128,7 +128,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/blackberry_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Blackberry Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -145,7 +145,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/pear_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Pear Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -162,7 +162,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/pear_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Pear Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -179,7 +179,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/tangerine_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Tangerine Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -196,7 +196,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/plum_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Plum Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -213,7 +213,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/lemon_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Lemon Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
@@ -230,7 +230,7 @@
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/chocolate_butter_dough
-	name = "Holiday Food"
+	category = "Holiday Food"
 	name = "Chocolate Butterdough"
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,

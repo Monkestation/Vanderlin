@@ -448,6 +448,10 @@
 	color = "#869256"
 	taste_description = "potato broth"
 
+/datum/reagent/consumable/soup/veggie/pompkaun
+	color = "#df7d0e"
+	taste_description = "pompkaun soup"
+
 /datum/reagent/consumable/soup/veggie/onion
 	color = "#a6b457"
 	taste_description = "boiled onions"
@@ -460,7 +464,8 @@
 	color = "#becf9d"
 	taste_description = "boiled turnip"
 
-/datum/reagent/consumable/soup/tamto
+
+/datum/reagent/consumable/soup/veggie/tamto
 	name = "tamto soup"
 	color = "#e2461f"
 	taste_description = "tamto soup"

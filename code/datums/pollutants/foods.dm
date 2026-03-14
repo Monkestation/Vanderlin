@@ -245,6 +245,10 @@
 	name = "tamto soup"
 	scent = "tamto soup"
 
+/datum/pollutant/food/pompkaun_soup
+	name = "pompkaun soup"
+	scent = "pompkaun soup"
+
 /datum/pollutant/food/truffle_stew
 	name = "truffle stew"
 	scent = "truffle stew"

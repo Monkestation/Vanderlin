@@ -195,60 +195,70 @@
 	cooked_smell = /datum/pollutant/food/bread
 
 /datum/container_craft/oven/bookbread
+	category = "Holiday Food"
 	name = "Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/butterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/raspberrybookbread
+	category = "Holiday Food"
 	name = "Raspberry Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/raspberrybutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/raspberry
 	cooked_smell = /datum/pollutant/food/pastry
 
-/datum/container_craft/oven/jacksberrybookbread
+/datum/container_craft/oven/
+	category = "Holiday Food"
 	name = "Raisin Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/jacksberrybutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/poisonjacksberrybookbread
+	hides_from_books = TRUE
 	name = "Raisin Bookbread (Poison)"
 	requirements = list(/obj/item/reagent_containers/food/snacks/jacksberrybutterdough/poison = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry/poison
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/blackberrybookbread
+	category = "Holiday Food"
 	name = "Blackberry Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/blackberrybutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/blackberry
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/pearbookbread
+	category = "Holiday Food"
 	name = "Pear Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/pearbutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/pear
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/tangerinebookbread
+	category = "Holiday Food"
 	name = "Tangerine Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/tangerinebutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/tangerine
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/plumbookbread
+	category = "Holiday Food"
 	name = "Plum Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/plumbutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/plum
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/lemonbookbread
+	category = "Holiday Food"
 	name = "Lemon Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/lemonbutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/lemon
 	cooked_smell = /datum/pollutant/food/pastry
 
 /datum/container_craft/oven/chocolatebookbread
+	category = "Holiday Food"
 	name = "Chocolate Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/chocolatebutterdough = 1)
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/chocolate

@@ -547,7 +547,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 				if(prob(10))
 					M.emote("gasp")
 					to_chat(M, span_warning("My throat feels like it's on fire!"))
-			if(prob(10))
+			if(prob(5))
 				to_chat(M, span_warning("My tongue feels like its on fire!"))
 	return ..()
 
