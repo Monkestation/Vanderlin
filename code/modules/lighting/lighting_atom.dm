@@ -126,25 +126,6 @@
 		return
 	recalculate_directional_opacity()
 
-/atom/vv_edit_var(var_name, var_value)
-	switch (var_name)
-		if ("light_range")
-			set_light(l_range=var_value)
-			datum_flags |= DF_VAR_EDITED
-			return TRUE
-
-		if ("light_power")
-			set_light(l_power=var_value)
-			datum_flags |= DF_VAR_EDITED
-			return TRUE
-
-		if ("light_color")
-			set_light(l_color=var_value)
-			datum_flags |= DF_VAR_EDITED
-			return TRUE
-
-	return ..()
-
 /atom/movable/Moved(atom/OldLoc, Dir)
 	. = ..()
 	for (var/datum/light_source/light as anything in light_sources) // Cycle through the light sources on this atom and tell them to update.
