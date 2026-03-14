@@ -11679,6 +11679,10 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"kig" = (
+/obj/effect/landmark/start/bogwitchlate,
+/turf/open/floor/grass,
+/area/outdoors/bog/north)
 "kiy" = (
 /obj/structure/table/wood/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -46400,7 +46404,7 @@ vbN
 (107,1,1) = {"
 tju
 oPC
-hLt
+kig
 ktr
 epW
 ktr

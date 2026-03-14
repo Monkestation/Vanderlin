@@ -428,6 +428,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_BOGWITCH_APP
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/bogwitchlate
+	name = "Bogwitch Late"
+	icon_state = "arrow_blue"
+	jobspawn_override = list(JOB_BOGWITCH, JOB_BOGWITCH_APP)
+	delete_after_roundstart = FALSE
+
 //Antagonist spawns
 
 /obj/effect/landmark/start/bandit
