@@ -19,6 +19,16 @@
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel)
 
+/datum/attribute_holder/sheet/job/species/automaton
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = 10,
+		STAT_ENDURANCE = 10,
+		STAT_SPEED = -9,
+		STAT_FORTUNE = -3
+	)
+
 /datum/species/automaton
 	name = "Automaton"
 	id = SPEC_ID_AUTOMATON
@@ -73,24 +83,7 @@
 		TRAIT_FEARLESS
 	)
 
-	specstats_m = list(
-		STATKEY_STR = 5,
-		STATKEY_PER = 0,
-		STATKEY_INT = -9,
-		STATKEY_CON = 10,
-		STATKEY_END = 10,
-		STATKEY_SPD = -9,
-		STATKEY_LCK = -3
-	)
-	specstats_f = list(
-		STATKEY_STR = 5,
-		STATKEY_PER = 0,
-		STATKEY_INT = -9,
-		STATKEY_CON = 10,
-		STATKEY_END = 10,
-		STATKEY_SPD = -9,
-		STATKEY_LCK = -3
-	)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/automaton
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 

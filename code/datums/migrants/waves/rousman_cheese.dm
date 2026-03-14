@@ -8,27 +8,29 @@
 	allowed_races = RACES_PLAYER_ALL
 	spawn_type = /mob/living/carbon/human/species/rousman/random_name
 
+
+/datum/attribute_holder/sheet/job/rousman/overseer
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 3,
+		STAT_INTELLIGENCE = 3,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
 /datum/job/migrant/rousman_cheese/overseer
 	title = "Rousman Overseer"
 	tutorial = "You are an overseer of a rousman clan. A somewhat more intelligent group of rousmen, lead your fellows to make and sell their cheese products."
 	outfit = /datum/outfit/rousman_cheese/overseer
-	jobstats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/rousman/overseer
 
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/whipsflails = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/labor/mathematics = 2,
-	)
 	languages = list(/datum/language/common)
 	honorary = "Overseer"
 
@@ -64,26 +66,27 @@
 	greet_text = "You are a cheesemaker of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemaker
 
+/datum/attribute_holder/sheet/job/rousman/cheesemaker
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/migrant/rousman_cheese/cheesemaker
 	title = "Rousman Cheesemaker"
 	tutorial = "You are a cheesemaker of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemaker
 
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/rousman/cheesemaker
 
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/reading = 1,
-	)
 	languages = list(/datum/language/common)
 
 /datum/outfit/rousman_cheese/cheesemaker
@@ -106,26 +109,27 @@
 	greet_text = "You are a cheesemonger of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	migrant_job = /datum/job/migrant/rousman_cheese/cheesemonger
 
+/datum/attribute_holder/sheet/job/rousman/cheesemonger
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/migrant/rousman_cheese/cheesemonger
 	title = "Rousman Cheesemonger"
 	tutorial = "You are a cheesemonger of a rousman clan, listen to your overseer as you work to sell your wares to the locals."
 	outfit = /datum/outfit/rousman_cheese/cheesemonger
 
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/rousman/cheesemonger
 
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/misc/reading = 1,
-	)
 	languages = list(/datum/language/common)
 
 /datum/outfit/rousman_cheese/cheesemonger

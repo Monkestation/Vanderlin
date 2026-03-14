@@ -165,8 +165,8 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 			special_effects |= FISHING_MINIGAME_RULE_KILL
 
 	//Finish the minigame faster at higher skill. The value modifiers for fishing are negative values btw.
-	completion_loss += user.get_skill_speed_modifier(/datum/skill/labor/fishing)
-	completion_gain -= user.get_skill_speed_modifier(/datum/skill/labor/fishing)
+	completion_loss += GET_MOB_SKILL_SPEED_MOD(user, /datum/attribute/skill/labor/fishing)
+	completion_gain -= GET_MOB_SKILL_SPEED_MOD(user, /datum/attribute/skill/labor/fishing)
 
 	reeling_velocity *= rod.bait_speed_mult
 	completion_gain *= rod.completion_speed_mult
@@ -354,13 +354,13 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 
 	if(!QDELETED(user) && user.mind && start_time && !(special_effects & FISHING_MINIGAME_RULE_NO_EXP))
 		var/seconds_spent = (world.time - start_time) * 0.1
-		var/extra_exp_malus = user.get_skill_level(/datum/skill/labor/fishing, TRUE) - difficulty * 0.1
+		var/extra_exp_malus = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/fishing) - difficulty * 0.1
 		if(extra_exp_malus > 0)
 			experience_multiplier /= (1 + extra_exp_malus * EXPERIENCE_MALUS_MULT)
 		if(auto_handling)
 			experience_multiplier *= 0.5
 		experience_multiplier *= used_rod.experience_multiplier
-		user.mind.add_sleep_experience(/datum/skill/labor/fishing, round(seconds_spent * (2500 / 15 MINUTES * 0.1) * experience_multiplier))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/fishing, round(seconds_spent * (2500 / 15 MINUTES * 0.1) * experience_multiplier))
 
 	if(!win)
 		SEND_SIGNAL(user, COMSIG_MOB_COMPLETE_FISHING, src, FALSE)

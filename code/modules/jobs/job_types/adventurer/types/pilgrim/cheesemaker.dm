@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/pilgrim/cheesemaker
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/taming = 30,
+		/datum/attribute/skill/craft/cooking = 40,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+	)
+
 /datum/job/advclass/pilgrim/cheesemaker
 	title = "Cheesemaker"
 	tutorial = "Some say Dendor brings bountiful harvests - this much is true, but rot brings forth life. \
@@ -9,23 +25,7 @@
 	apprentice_name = "Cheesemaker Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_CON = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/taming = 3,
-		/datum/skill/craft/cooking = 4,
-		/datum/skill/labor/farming = 2,
-		/datum/skill/misc/climbing = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/cheesemaker
 
 /datum/job/advclass/pilgrim/cheesemaker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

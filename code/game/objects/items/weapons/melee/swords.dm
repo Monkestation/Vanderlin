@@ -23,7 +23,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
 	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/swords
+	associated_skill = /datum/attribute/skill/combat/swords
 	pickup_sound = "unsheathe_sword"
 	equip_sound = 'sound/foley/dropsound/holster_sword.ogg'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -1638,15 +1638,15 @@
 			else
 				I = M.get_inactive_held_item()
 		if(user.mind)
-			skill_diff += (user.get_skill_level(/datum/skill/combat/swords, TRUE))	//You check your sword skill
+			skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords))	//You check your sword skill
 		if(M.mind)
-			skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))	//They check their wrestling skill to stop the weapon from being pulled.
+			skill_diff -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/combat/wrestling))	//They check their wrestling skill to stop the weapon from being pulled.
 		user.adjust_stamina(-rand(3,8))
-		var/probby = clamp((((3 + (((user.STASTR - M.STASTR)/4) + skill_diff)) * 10)), 5, 95)
+		var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_STRENGTH))/4) + skill_diff)) * 10)), 5, 95)
 		if(I)
 			if(M.mind)
 				if(I.associated_skill)
-					probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
+					probby -= GET_MOB_SKILL_VALUE_OLD(M, I.associated_skill) * 5
 			var/obj/item/mainhand = user.get_active_held_item()
 			var/obj/item/offhand = user.get_inactive_held_item()
 			if(HAS_TRAIT(src, TRAIT_DUALWIELDER) && istype(offhand, mainhand))

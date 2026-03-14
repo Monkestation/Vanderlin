@@ -1,3 +1,40 @@
+/datum/attribute_holder/sheet/job/priest
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/magic/holy = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/priest/old
+	raw_attribute_list = list(
+		 STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/magic/holy = 50,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
 #define PRIEST_ADD_PENANCE "Assign Penance"
 #define PRIEST_REMOVE_PENANCE "Absolve Penance"
 #define PRIEST_EXCOMMUNICATE "Excommunicate"
@@ -40,36 +77,14 @@
 		EXP_TYPE_CHURCH = 900,
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 5,
-		/datum/skill/magic/holy = 4,
-		/datum/skill/combat/unarmed = 3, //Ook's muscle priest
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/priest
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/priest/old
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-
 	spawned.give_priest_verbs()
 
 	spawned.virginity = TRUE

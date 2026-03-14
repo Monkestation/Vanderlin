@@ -119,6 +119,11 @@
 	var/list/status_effects //a list of all status effects the mob has
 	var/druggy = 0
 
+	var/parrying_penalty = 0
+	var/parrying_penalty_timer = null
+	var/dodging_penalty = 0
+	var/dodging_penalty_timer = null
+
 	//Speech
 	var/stuttering = 0
 	var/slurring = 0

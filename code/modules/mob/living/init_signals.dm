@@ -145,20 +145,38 @@
 
 /* ROGUE */
 
+/datum/attribute_holder/sheet/job/leper_vice
+	raw_attribute_list = list(
+		STAT_STRENGTH = -3,
+		STAT_ENDURANCE = -3,
+		STAT_CONSTITUTION = -3,
+		STAT_PERCEPTION = -3,
+		STAT_SPEED = -3,
+		STAT_INTELLIGENCE = -3,
+		STAT_FORTUNE = -3
+	)
 ///Called when TRAIT_LEPROSY is added to the mob.
 /mob/living/proc/on_leprosy_trait_gain(datum/source)
 	SIGNAL_HANDLER
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_STR, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_END, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_CON, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_PER, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_SPD, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_INT, -3)
-	set_stat_modifier(TRAIT_LEPROSY, STATKEY_LCK, -3)
+	if(has_quirk(/datum/quirk/vice/leprosy))
+		attributes?.add_sheet(/datum/attribute_holder/sheet/job/leper_vice)
+
+	else
+		adjust_stat_modifier(TRAIT_LEPROSY, list(
+			STAT_STRENGTH = -3,
+			STAT_ENDURANCE = -3,
+			STAT_CONSTITUTION = -3,
+			STAT_PERCEPTION = -3,
+			STAT_SPEED = -3,
+			STAT_INTELLIGENCE = -3,
+			STAT_FORTUNE = -3
+		))
 
 ///Called when TRAIT_LEPROSY is removed from the mob.
 /mob/living/proc/on_leprosy_trait_loss(datum/source)
 	SIGNAL_HANDLER
+	if(has_quirk(/datum/quirk/vice/leprosy))
+		attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/leper_vice)
 	remove_stat_modifier(TRAIT_LEPROSY)
 
 ///Called when TRAIT_CRATEMOVER is added to the mob.

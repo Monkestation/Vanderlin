@@ -57,7 +57,7 @@
 	. = ..()
 	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
 	if(!can_tell)
-		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
 	if(can_tell)
 		if(poisonous)
 			. += span_warning("This truffle looks suspicious. I sense it might be poisoned.")

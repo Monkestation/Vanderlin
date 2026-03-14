@@ -9,7 +9,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
-	skillcraft = /datum/skill/craft/sewing
+	skillcraft = /datum/attribute/skill/misc/sewing
 	craftdiff = 0
 	subtypes_allowed = TRUE // so you can use any subtype of fur
 	category = "Shirt"
@@ -1748,7 +1748,7 @@
 		/obj/item/natural/fibers = 2
 	)
 	craftdiff = 2.5
-	skillcraft = /datum/skill/misc/medicine
+	skillcraft = /datum/attribute/skill/misc/medicine
 	blacklisted_paths = list(/obj/item/natural/cloth/bandage)
 
 /datum/repeatable_crafting_recipe/sewing/barding

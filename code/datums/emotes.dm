@@ -125,10 +125,10 @@
 	var/pitch_modifier = 0
 	if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 		return final_pitch
-	if(STASTR > 10)
-		pitch_modifier -= (STASTR - 10) * 0.03
-	else if(STASTR < 10)
-		pitch_modifier += (10 - STASTR) * 0.03
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 10)
+		pitch_modifier -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - 10) * 0.03
+	else if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 10)
+		pitch_modifier += (10 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * 0.03
 	return clamp(final_pitch + pitch_modifier, 0.5, 2)
 
 

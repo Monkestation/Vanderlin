@@ -1,3 +1,59 @@
+/datum/attribute_holder/sheet/job/pilgrim/blacksmith
+	attribute_variance = list(
+		/datum/attribute/skill/misc/swimming = list(0, 10),
+		/datum/attribute/skill/craft/crafting = list(10, 20),
+		/datum/attribute/skill/craft/masonry = list(10, 20),
+		/datum/attribute/skill/craft/carpentry = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/craft/engineering = 30,
+		/datum/attribute/skill/craft/traps = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/blacksmithing = 30,
+		/datum/attribute/skill/craft/armorsmithing = 30,
+		/datum/attribute/skill/craft/weaponsmithing = 30,
+		/datum/attribute/skill/craft/smelting = 30,
+	)
+
+/datum/attribute_holder/sheet/job/pilgrim/blacksmith/old
+	attribute_variance = list(
+		/datum/attribute/skill/misc/swimming = list(0, 10),
+		/datum/attribute/skill/craft/crafting = list(10, 20),
+		/datum/attribute/skill/craft/masonry = list(10, 20),
+		/datum/attribute/skill/craft/carpentry = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/craft/engineering = 30,
+		/datum/attribute/skill/craft/traps = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/blacksmithing = 40,
+		/datum/attribute/skill/craft/armorsmithing = 30,
+		/datum/attribute/skill/craft/weaponsmithing = 30,
+		/datum/attribute/skill/craft/smelting = 30,
+	)
+
 /datum/job/advclass/pilgrim/blacksmith
 	title = "Blacksmith"
 	tutorial = "Hardy worksmen that are at home in the forge, dedicating their lives \
@@ -8,29 +64,8 @@
 	apprentice_name = "Blacksmith Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/craft/engineering = 3,
-		/datum/skill/craft/traps = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/blacksmithing = 3,
-		/datum/skill/craft/armorsmithing = 3,
-		/datum/skill/craft/weaponsmithing = 3,
-		/datum/skill/craft/smelting = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/blacksmith
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/blacksmith/old
 
 	traits = list(
 		TRAIT_MALUMFIRE
@@ -38,22 +73,6 @@
 
 /datum/job/advclass/pilgrim/blacksmith/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/swimming, pick(0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/crafting, pick(1,2,2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/masonry, pick(1,1,2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/carpentry, pick(1,1,2), TRUE)
-
-	if(prob(50))
-		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-
-	if(spawned.age == AGE_OLD)
-		for(var/i in 1 to rand(1, 3))
-			var/datum/skill/craft/skillpicked = pick(
-				/datum/skill/craft/weaponsmithing,
-				/datum/skill/craft/armorsmithing,
-				/datum/skill/craft/blacksmithing,
-			)
-			spawned.adjust_skillrank(skillpicked, 1, TRUE)
 
 	if(spawned.dna?.species.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'

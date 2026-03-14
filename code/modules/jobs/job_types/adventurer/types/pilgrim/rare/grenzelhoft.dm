@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/pilgrim/grenzelhoft
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/advclass/pilgrim/rare/grenzelhoft
 	title = "Grenzelhoft Count"
 	tutorial = "A Count hailing from the Grenzelhoft Imperiate, here on an official visit to Vanderlin."
@@ -10,26 +29,7 @@
 	honorary = "Count"
 	honorary_f = "Countess"
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/grenzelhoft
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

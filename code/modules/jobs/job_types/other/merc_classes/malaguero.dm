@@ -1,27 +1,29 @@
+/datum/attribute_holder/sheet/job/malaguero
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/combat/axesmaces = 30,
+	)
+
 /datum/job/advclass/mercenary/malaguero
 	title = "Malaguero Deserter"
 	tutorial = "A former soldier fighting against the forces of Zizo, something drove you to flee your post. Now, you fight for coin, rather than for the authority and command of generals you would never meet."
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/mercenary/malaguero
-	jobstats = list(
-		STATKEY_CON = 2,
-		STATKEY_STR = 2,
-		STATKEY_END = 1
-		)
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/combat/axesmaces = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/malaguero
+
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
 	category_tags = list(CTAG_MERCENARY)

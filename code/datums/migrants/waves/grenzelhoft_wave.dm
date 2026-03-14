@@ -3,6 +3,25 @@
 	greet_text = "A Count hailing from the Grenzelhoft Imperiate, here on an official visit to the Peninsula of Vanderlin alongside his beloved convoy and spouse."
 	migrant_job = /datum/job/migrant/grenzelhoft_count
 
+/datum/attribute_holder/sheet/job/migrant/grenzelhoft_count
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/grenzelhoft_count
 	title = "Grenzelhoft Count"
 	tutorial = "A Count hailing from the Grenzelhoft Imperiate, here on an official visit to the Peninsula of Vanderlin alongside his beloved convoy and spouse."
@@ -13,26 +32,7 @@
 	honorary = "Count"
 	honorary_f = "Countess"
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/grenzelhoft_count
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
@@ -72,6 +72,24 @@
 	greet_text = "A Countess hailing from the Grenzelhoft Imperiate, here on an official visit to Vanderlin alongside her beloved convoy and husband."
 	migrant_job = /datum/job/migrant/grenzelhoft_countess
 
+/datum/attribute_holder/sheet/job/migrant/grenzelhoft_countess
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+	)
+
 /datum/job/migrant/grenzelhoft_countess
 	title = "Grenzelhoft Countess"
 	tutorial = "A Countess hailing from the Grenzelhoft Imperiate, here on an official visit to Vanderlin alongside her beloved convoy and husband."
@@ -83,25 +101,7 @@
 	honorary_f = "Countess"
 
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/grenzelhoft_countess
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/grenzel
@@ -141,6 +141,20 @@
 	greet_text = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
 	migrant_job = /datum/job/migrant/grenzelhoft_knight
 
+/datum/attribute_holder/sheet/job/migrant/grenzelhoft_knight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
 /datum/job/migrant/grenzelhoft_knight
 	title = "Grenzelhoft Knight"
 	tutorial = "Your liege, the count and the countess have both took the duty given by the council to voyage to Vanderlin, ensure their survival and obey their orders."
@@ -148,23 +162,11 @@
 	allowed_races = RACES_PLAYER_GRENZ
 	is_recognized = TRUE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-	)
+
 	honorary = "Ritter"
 	honorary_f = "Ritterin"
 
-	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/grenzelhoft_knight
 
 	traits = list(TRAIT_HEAVYARMOR)
 	languages = list(/datum/language/newpsydonic)
@@ -198,29 +200,35 @@
 	greet_text = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	migrant_job = /datum/job/migrant/grenzelhoft_man_at_arms
 
+/datum/attribute_holder/sheet/job/migrant/grenzelhoft_man_at_arms
+	attribute_variance = list(
+		/datum/attribute/skill/combat/whipsflails = list(10, 20),
+		/datum/attribute/skill/combat/axesmaces = list(20, 30),
+		/datum/attribute/skill/combat/shields = list(0, 10),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
 /datum/job/migrant/grenzelhoft_man_at_arms
 	title = "Grenzelhoft Man-at-Arms"
 	tutorial = "You and your fellows are men at arms from Grenzelhoft, following your count with pride. Obey the count and make sure the nobles you arrived with survive."
 	outfit = /datum/outfit/grenzelhoft_man_at_arms
 	allowed_races = RACES_PLAYER_GRENZ
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 2,
-	)
 
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/grenzelhoft_man_at_arms
 
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
@@ -228,9 +236,6 @@
 
 /datum/job/migrant/grenzelhoft_man_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1, 1, 2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2, 3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0, 0, 1), TRUE)
 
 	if(!spawned.dna?.species)
 		return

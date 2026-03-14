@@ -357,14 +357,19 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 /////////////////////
 /////////////////////
 
+/datum/attribute_holder/sheet/job/rousman
+	attribute_variance = list(
+		STAT_STRENGTH = list(-4, 0),
+		STAT_PERCEPTION = list(-4, 0),
+		STAT_INTELLIGENCE = list(-8, -5),
+		STAT_CONSTITUTION = list(-6, -2),
+		STAT_ENDURANCE = list(-3, 0),
+		STAT_SPEED = list(0, 5),
+	)
+
 /datum/outfit/npc/rousman/ambush/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = rand(6, 10)
-	H.base_perception = rand(6, 10)
-	H.base_intelligence = rand(2, 5)
-	H.base_constitution = rand(4, 8)
-	H.base_endurance = rand(7, 10)
-	H.base_speed = rand(10, 15)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman)
 	H.recalculate_stats(FALSE)
 
 	var/loadout = rand(1,4)
@@ -520,16 +525,26 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	flee_in_pain = TRUE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/rousman/assassin
+	attribute_variance = list(
+		STAT_STRENGTH = list(-4, 0),
+		STAT_PERCEPTION = list(-4, 0),
+		STAT_INTELLIGENCE = list(-8, -5),
+		STAT_CONSTITUTION = list(-6, -2),
+		STAT_ENDURANCE = list(-3, 0),
+		STAT_SPEED = list(5, 10),
+	)
+
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/athletics = 50,
+		/datum/attribute/skill/misc/sneaking = 50,
+	)
+
 /datum/outfit/npc/rousman/assassin/pre_equip(mob/living/carbon/human/H)
 	..()
 
-	H.base_strength = rand(6, 10)
-	H.base_perception = rand(6, 10)
-	H.base_intelligence = rand(2, 5)
-	H.base_constitution = rand(4, 8)
-	H.base_endurance = rand(7, 10)
-	H.base_speed = rand(15, 20)
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/assassin)
 
 	armor = /obj/item/clothing/armor/leather/advanced/rousman
 	head = /obj/item/clothing/head/roguehood/rousman
@@ -539,9 +554,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
 
-	H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
 
 /mob/living/carbon/human/species/rousman/seer/with_ai
 	ai_controller = /datum/ai_controller/human_npc
@@ -573,15 +585,25 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	flee_in_pain = TRUE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/rousman/seer
+	attribute_variance = list(
+		STAT_STRENGTH = list(-6, -2),
+		STAT_PERCEPTION = list(-4, 0),
+		STAT_INTELLIGENCE = list(0, 6),
+		STAT_CONSTITUTION = list(-6, -2),
+		STAT_ENDURANCE = list(-3, 0),
+		STAT_SPEED = list(0, 5),
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/magic/blood = 20,
+	)
+
+
 /datum/outfit/npc/rousman/seer/pre_equip(mob/living/carbon/human/seer)
 	..()
-	seer.base_strength = rand(4, 8)
-	seer.base_perception = rand(6, 10)
-	seer.base_intelligence = rand(10, 16)
-	seer.base_constitution = rand(4, 8)
-	seer.base_endurance = rand(7, 10)
-	seer.base_speed = rand(10, 15)
-	seer.recalculate_stats(FALSE)
+	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer)
 
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
@@ -597,9 +619,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	seer.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	seer.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 	seer.adjust_spell_points(17)
 	seer.generate_random_attunements(rand(4,6))
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
@@ -607,15 +626,24 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	for(var/spell in spells)
 		seer.add_spell(spell)
 
+/datum/attribute_holder/sheet/job/rousman/seer/strong
+	attribute_variance = list(
+		STAT_STRENGTH = list(-6, -2),
+		STAT_PERCEPTION = list(-2, 2),
+		STAT_INTELLIGENCE = list(2, 8),
+		STAT_CONSTITUTION = list(-4, 0),
+		STAT_ENDURANCE = list(-2, 1),
+		STAT_SPEED = list(1, 6),
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/magic/blood = 20,
+	)
+
 /datum/outfit/npc/rousman/seer_stronger/pre_equip(mob/living/carbon/human/seer)
 	..()
-	seer.base_strength = rand(4, 8)
-	seer.base_perception = rand(8, 12)
-	seer.base_intelligence = rand(12, 18)
-	seer.base_constitution = rand(6, 10)
-	seer.base_endurance = rand(8, 11)
-	seer.base_speed = rand(11, 16)
-	seer.recalculate_stats(FALSE)
+	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer/strong)
 
 	seer.grant_language(/datum/language/common)
 
@@ -637,9 +665,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	seer.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	seer.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 	seer.adjust_spell_points(17)
 	seer.generate_random_attunements(rand(4,6))
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
