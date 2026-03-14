@@ -53,9 +53,9 @@
 /datum/job/bog_apprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_ADULT)
-		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1)
-		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1)
+		spawned.adjust_skillrank(/datum/attribute/skill/misc/athletics, 1)
+		spawned.adjust_skillrank(/datum/attribute/skill/combat/unarmed, 1)
+		spawned.adjust_skillrank(/datum/attribute/skill/combat/wrestling, 1)
 
 /datum/job/bog_apprentice/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron

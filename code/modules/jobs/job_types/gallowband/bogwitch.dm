@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/craft/sewing = 20
+		/datum/attribute/skill/misc/sewing = 20
 	)
 
 
@@ -81,17 +81,17 @@
 //	var/chosen_path = tgui_input_list(spawned, "Choose a specialist path", "Specialist Path", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
 	switch(chosen_path)
 		if("Path of Bone")//Plus to Surgery
-			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
 		if("Path of Nature")//Plus to Alchemy
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/magic/holy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/medicine, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
 		if("Path of The Hunt")//Plus to Miracles
-			spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/medicine, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
 
 /datum/job/bogwitch/adjust_patron(mob/living/carbon/human/spawned)
 	var/datum/patron/old_patron = spawned.patron
