@@ -29,3 +29,10 @@
 /datum/antagonist/wretch/on_removal()
 	. = ..()
 	owner?.special_role = null
+
+/datum/antagonist/wretch/move_to_spawnpoint()
+	var/spawn_point = get_spawn_turf_for_job("Adventurer")
+	if(spawn_point)
+		new_character.forceMove(spawn_point)
+	else
+		SSjob.SendToLateJoin(new_character) // better run if this somehow happens
