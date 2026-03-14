@@ -645,7 +645,7 @@
 
 /obj/item/weapon/mace/elvenclub/silver
 	name = "regal elven war club"
-	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree. It's commonly wielded by groups of shamanist exorcists."
+	desc = "A fashionable silver war club of elvish design, beautifully decorated with golden filigree."
 	icon_state = "regalelvenclub"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
@@ -684,7 +684,7 @@
 /obj/item/weapon/mace/gada
 	name = "regal gada"
 	icon_state = "gada"
-	desc = "A luxurious silver mace of Savannah Elf origin that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
+	desc = "A luxurious silver mace that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
 	force = DAMAGE_MACE + 2
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 0.8

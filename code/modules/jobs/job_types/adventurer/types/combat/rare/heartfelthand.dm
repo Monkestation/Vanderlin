@@ -1,7 +1,9 @@
 /datum/job/advclass/combat/heartfelthand
 	title = "Hand of Heartfelt"
-	tutorial = "You serve your lord as hand, taking care of diplomatic actions within your realm, \
-	but why have you come to Vanderlin?"
+	tutorial = "You served your lord as hand, taking care of diplomatic actions within your realm, \
+	yet your kingdom lies in ruins ever since it's mechanical servants rose up. \
+	You have since fled to the kingdom of Vanderlin, \
+	the exact reason of your stay here are up to you."
 	allowed_sexes = list(MALE)
 	allowed_races = list(SPEC_ID_HUMEN)
 	outfit = /datum/outfit/adventurer/heartfelthand
@@ -43,7 +45,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 	gloves = /obj/item/clothing/gloves/leather/black
 	beltl = /obj/item/weapon/sword/decorated
-	backr = /obj/item/storage/backpack/satchel/heartfelt
+	backr = /obj/item/storage/backpack/satchel
 	mask = /obj/item/clothing/face/spectacles/golden
 	neck = /obj/item/clothing/neck/chaincoif
 	backpack_contents = list(/obj/item/scomstone = 1)
