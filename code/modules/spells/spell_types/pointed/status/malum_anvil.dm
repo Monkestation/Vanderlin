@@ -29,7 +29,6 @@
 		)
 		return
 	if(isliving(owner))
-		var/mob/living/L = owner
 		cast_on.visible_message( //TODO messages
 			"<font color='yellow'>Vibrant flames swirl around [cast_on] as a dance of energy flows from [owner].</font>",
 			"<font color='yellow'>A dance of energy flows from [owner], fueling vibrant flames that energize your mind and muscles.</font>"
