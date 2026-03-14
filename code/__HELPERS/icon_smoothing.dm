@@ -98,7 +98,7 @@ DEFINE_BITFIELD(smoothing_junction, list(
 							continue; \
 						}; \
 						var/thing_smoothing_groups = thing.smoothing_groups; \
-						if(!thing_smoothing_groups) { \
+						if(!length(thing_smoothing_groups)) { \
 							continue; \
 						}; \
 						for(var/target in smoothing_list) { \
@@ -109,14 +109,14 @@ DEFINE_BITFIELD(smoothing_junction, list(
 						}; \
 					}; \
 				}; \
-				if(!smoothing_list) { \
+				if(!length(smoothing_list)) { \
 					if(type == neighbor.type) { \
 						new_junction |= direction_flag; \
 					}; \
 					break set_adj_in_dir; \
 				}; \
 				var/neighbor_smoothing_groups = neighbor.smoothing_groups; \
-				if(neighbor_smoothing_groups) { \
+				if(length(neighbor_smoothing_groups)) { \
 					for(var/target as anything in smoothing_list) { \
 						if(smoothing_list[target] & neighbor_smoothing_groups[target]) { \
 							new_junction |= direction_flag; \
