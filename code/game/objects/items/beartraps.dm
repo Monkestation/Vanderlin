@@ -156,7 +156,7 @@
 		if(isliving(AM))
 			var/mob/living/cross_mob = AM
 			var/snap = TRUE
-			if(cross_mob)
+			if(cross_mob.throwing)
 				return ..()
 
 			if(cross_mob.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
