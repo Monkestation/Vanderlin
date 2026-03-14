@@ -414,7 +414,7 @@
 	slice_batch = FALSE
 	bitesize = 6
 	slice_sound = TRUE
-	tastes = list("raw unsalted butter" = 1)
+	tastes = list("butter" = 1)
 	faretype = FARE_IMPOVERISHED
 
 /obj/item/reagent_containers/food/snacks/butter/update_icon_state()
