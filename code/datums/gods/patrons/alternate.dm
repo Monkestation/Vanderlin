@@ -27,7 +27,7 @@
 	Necra as The Skull, revered for the death that awaits every living being; \
 	Dendor as The Woods, revered for the wilds they live in and the beasts they hunt; \
 	Abyssor as The Traveler, revered for the safe passage of travelers and the unflinching weather that scours the north."
-	boons = "None. You have not proven worthy yet."
+	boons = "None. You have not proven worthy, yet."
 	domain = "The Hunt, Travelers, Nature"
 	flaws = "Intense, Morbid"
 	worshippers = "Hunters, the Northmen"
