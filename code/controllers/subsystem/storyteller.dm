@@ -743,6 +743,8 @@ SUBSYSTEM_DEF(gamemode)
 			continue
 		active_players++
 		var/datum/job/assigned = player_mob.mind?.assigned_role
+		if(assigned?.parent_job)
+			assigned = assigned.parent_job
 		if(assigned)
 			if(assigned.job_bitflag & BITFLAG_ROYALTY)
 				royalty++

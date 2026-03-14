@@ -18,6 +18,7 @@
 	)
 	increase_votepwr = FALSE
 	var/datum/team/prebels/rev_team
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/prebel/head))

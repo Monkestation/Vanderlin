@@ -15,6 +15,7 @@
 	var/ascended = FALSE
 	// thralls to set the clan of on creation
 	var/list/starting_thralls = list()
+	antag_flags = NONE
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current

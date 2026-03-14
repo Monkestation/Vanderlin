@@ -20,6 +20,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
