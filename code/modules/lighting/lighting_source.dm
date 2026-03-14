@@ -339,7 +339,7 @@
 					INSERT_CORNERS(corners, below)
 					// ANNND then we add the one below it
 					previous = below
-					below = GET_TURF_BELOW(T)
+					below = GET_TURF_BELOW(below)
 
 				var/turf/above = GET_TURF_ABOVE(T)
 				while(above)
