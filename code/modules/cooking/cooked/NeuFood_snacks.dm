@@ -612,12 +612,12 @@
 		/obj/item/reagent_containers/food/snacks/butterslice)))
 		return ..()
 	var/obj/item/reagent_containers/food/snacks/S = I
-	var/cooking = 5 SECONDS - (user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
-	if(!do_after(user, cooking, src, display_over_user=TRUE))
+	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
 		return FALSE
 	modified = TRUE
-	user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition)
@@ -724,12 +724,12 @@
 		/obj/item/reagent_containers/food/snacks/fruit/tamto_slice)))
 		return ..()
 	var/obj/item/reagent_containers/food/snacks/S = I
-	var/cooking = 5 SECONDS - (user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	playsound(user, 'sound/foley/chopping_block.ogg', 40, TRUE, -1)
-	if(!do_after(user, cooking, src, display_over_user=TRUE))
+	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
 		return FALSE
 	modified = TRUE
-	user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition)
