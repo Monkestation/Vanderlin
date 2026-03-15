@@ -96,7 +96,7 @@
 				return FALSE
 		user.visible_message(span_warning("<[user] starts to wash \the [target]'s mouth out with [src]..."), span_notice("I start to wash \the [target]'s mouth out with [src]...")) //washes mouth out with soap sounds better than 'the soap' here
 		// how this looks vvv https://www.desmos.com/calculator/55fpadxol5
-		if(do_after(user, (20 / user.STASPD + 2) SECONDS, target))
+		if(do_after(user, (20 / GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) + 2) SECONDS, target))
 			user.visible_message(span_warning("[user] washes \the [target]'s mouth out with [src]!"), span_notice("I wash \the [target]'s mouth out with [src]!")) //washes mouth out with soap sounds better than 'the soap' here
 			target.emote("drown")
 			target.adjustOxyLoss(20)

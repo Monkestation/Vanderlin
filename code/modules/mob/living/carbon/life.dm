@@ -71,11 +71,11 @@
 
 	// Pain tolerance system - builds up to prevent infinite stunning
 	// High endurance characters build tolerance faster and lose it slower
-	var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
-	var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
+	var/tolerance_gain_rate = 1 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25) // More endurance = faster adaptation
+	var/tolerance_decay_rate = max(1, 3 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.1)) // More endurance = slower decay
 
 	if(world.time - last_major_pain_time < 30 SECONDS)
-		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
+		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // Higher max tolerance with endurance
 	else
 		pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
 
@@ -84,12 +84,12 @@
 		var/effective_pain = get_pain_percent() * 100
 
 		// Endurance-based pain threshold - higher endurance means higher pain threshold
-		var/pain_threshold = 55 + (STAEND * 1) // 1% higher threshold per endurance point
+		var/pain_threshold = 55 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1) // 1% higher threshold per endurance point
 		if(world.time > mob_timers[MT_PAINSTUN])
 			mob_timers[MT_PAINSTUN] = world.time + 10 SECONDS
 
 			// Base stun probability - endurance makes you much more resistant
-			var/probby = max(5, 50 - (STAEND * 1)) // 1% reduction per endurance point, minimum 5%
+			var/probby = max(5, 50 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // 1% reduction per endurance point, minimum 5%
 
 			// Reduce stun probability based on shock stage and pain tolerance
 			if(current_shock >= 160)
@@ -120,25 +120,25 @@
 
 						// Endurance affects stun duration - tougher people recover faster
 						var/base_stun = 6 SECONDS
-						var/endurance_stun_reduction = STAEND * 1 // 2 deciseconds per endurance point
+						var/endurance_stun_reduction = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1 // 2 deciseconds per endurance point
 						var/stun_duration = max(30, base_stun - endurance_stun_reduction)
 
 						var/base_immobilize = 1 SECONDS
-						var/immobilize_duration = max(2, base_immobilize - (STAEND * 0.05))
+						var/immobilize_duration = max(2, base_immobilize - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.05))
 
 						Immobilize(immobilize_duration)
 						emote("painscream")
-						stuttering += max(1, 5 - STAEND) // Less stuttering with high endurance
+						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) // Less stuttering with high endurance
 						addtimer(CALLBACK(src, PROC_REF(Stun), stun_duration), immobilize_duration)
 						addtimer(CALLBACK(src, PROC_REF(Knockdown), stun_duration), immobilize_duration)
 
-						mob_timers[MT_PAINSTUN] = world.time + (10 SECONDS + (STAEND * 0.25))
+						mob_timers[MT_PAINSTUN] = world.time + (10 SECONDS + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25))
 					else
 						emote("painmoan")
-						stuttering += max(1, 5 - STAEND)
+						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE))
 				else
 					// Lower threshold for minor pain with high endurance
-					var/minor_pain_threshold = 35 + (STAEND * 1)
+					var/minor_pain_threshold = 35 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)
 					if(effective_pain >= minor_pain_threshold)
 						if(prob(probby * 0.5)) // Reduced chance for minor pain reactions
 							emote("painmoan")
@@ -147,7 +147,7 @@
 		if(effective_pain >= pain_threshold)
 			if(current_shock < 160) // Only add stress if not in shock-induced numbness
 				// High endurance characters are less stressed by pain
-				if(prob(max(20, 100 - (STAEND * 2)))) // 2% less likely per endurance point (40% at 20 )
+				if(prob(max(20, 100 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)))) // 2% less likely per endurance point (40% at 20 )
 					add_stress(/datum/stress_event/painmax)
 
 /// Returns the pain percent between 0 and 1.
@@ -165,7 +165,7 @@
 		raw_pain *= (1.0 - shock_reduction)
 
 	// Max pain scales on endurance
-	var/painpercent = (raw_pain / (STAEND * 13)) * 100
+	var/painpercent = (raw_pain / max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 13, 1)) * 100
 
 	// Apply pain tolerance to reduce effective pain
 	painpercent *= (1 - (pain_tolerance * 0.01))

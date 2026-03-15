@@ -1,3 +1,33 @@
+/datum/attribute_holder/sheet/job/mage
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/alchemy = 20,
+	)
+
+/datum/attribute_holder/sheet/job/mage/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 4,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/magic/arcane = 40,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/alchemy = 20,
+	)
+
 /datum/job/advclass/combat/mage
 	title = "Mage"
 	tutorial = "A wandering graduate of the many colleges of magick across Psydonia, you search for a job to put your degree to use. And they say school was hard..."
@@ -15,22 +45,8 @@
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
 
-	skills = list(
-		/datum/skill/misc/reading = 4,
-		/datum/skill/magic/arcane = 3,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/alchemy = 2,
-	)
-
-	jobstats = list(
-		STATKEY_STR = -2,
-		STATKEY_INT = 3,
-		STATKEY_CON = -1,
-		STATKEY_END = -1,
-		STATKEY_SPD = -2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/mage
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/mage/old
 
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -38,11 +54,6 @@
 	if(spawned.patron?.type == /datum/patron/inhumen/zizo)
 		if(!spawned.has_language(/datum/language/undead))
 			spawned.grant_language(/datum/language/undead)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-
 
 /datum/outfit/adventurer/mage
 	name = "Mage (Adventurer)"

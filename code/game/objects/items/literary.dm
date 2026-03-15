@@ -27,11 +27,11 @@
 	var/skilltoteach
 	var/skill_name = "nobody"
 	var/static/list/teachable_skills = list(
-		"Reading" = /datum/skill/misc/reading,
-		"Mathematics" = /datum/skill/labor/mathematics,
-		"Engineering" = /datum/skill/craft/engineering,
-		"Alchemy" = /datum/skill/craft/alchemy,
-		"Medicine" = /datum/skill/misc/medicine,
+		"Reading" = /datum/attribute/skill/misc/reading,
+		"Mathematics" = /datum/attribute/skill/labor/mathematics,
+		"Engineering" = /datum/attribute/skill/craft/engineering,
+		"Alchemy" = /datum/attribute/skill/craft/alchemy,
+		"Medicine" = /datum/attribute/skill/misc/medicine,
 		)
 
 /obj/item/textbook/Initialize()
@@ -43,30 +43,30 @@
 	. = ..()
 	var/title = "nothing"
 	switch(skilltoteach)
-		if(/datum/skill/misc/reading)
+		if(/datum/attribute/skill/misc/reading)
 			title = "literature"
-		if(/datum/skill/labor/mathematics)
+		if(/datum/attribute/skill/labor/mathematics)
 			title = "mathematics"
-		if(/datum/skill/craft/engineering)
+		if(/datum/attribute/skill/craft/engineering)
 			title = "engineering"
-		if(/datum/skill/craft/alchemy)
+		if(/datum/attribute/skill/craft/alchemy)
 			title = "alchemy"
-		if(/datum/skill/misc/medicine)
+		if(/datum/attribute/skill/misc/medicine)
 			title = "medicine"
 	name = "[skill_name]'s guide to [title]"
 
 /obj/item/textbook/update_desc()
 	. = ..()
 	switch(skilltoteach)
-		if(/datum/skill/misc/reading)
+		if(/datum/attribute/skill/misc/reading)
 			desc = "A textbook that teaches the alphabet, sentences of varying complexity, and common symbols, allowing readers to train their reading skills."
-		if(/datum/skill/labor/mathematics)
+		if(/datum/attribute/skill/labor/mathematics)
 			desc = "A textbook focused on teaching mathematic notation and the applications for arithmetic, calculus, and other areas of math."
-		if(/datum/skill/craft/engineering)
+		if(/datum/attribute/skill/craft/engineering)
 			desc = "A textbook focused on teaching about engineering, the physical laws that govern our mortal world, and their application."
-		if(/datum/skill/craft/alchemy)
+		if(/datum/attribute/skill/craft/alchemy)
 			desc = "A textbook that teaches all about alchemy. Ranging from simple differences between mentha and paris, to complex potion brewing."
-		if(/datum/skill/misc/medicine)
+		if(/datum/attribute/skill/misc/medicine)
 			desc = "A textbook that teaches medicine. The book is rich in illustrations and notes on how the body functions and how to treat various illnesses and wounds."
 	desc += " The higher the complexity, the more skilled the reader must be to study it."
 
@@ -77,7 +77,7 @@
 		var/skill = input(user, "What kind of textbook will you write", "NOC") as null|anything in teachable_skills
 		if(!skill)
 			return
-		var/userskill = user.get_skill_level(teachable_skills[skill])
+		var/userskill = GET_MOB_SKILL_VALUE_OLD(user, teachable_skills[skill])
 		if(userskill <= 1)
 			to_chat(user, span_warning("You aren't skilled enough to write a textbook about [lowertext(skill)]!"))
 			return
@@ -121,8 +121,8 @@
 		return
 	if(user.mind && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/userskill = H.get_skill_level(skilltoteach)
-		var/intbonus = H.STAINT / 2
+		var/userskill = GET_MOB_SKILL_VALUE_OLD(H, skilltoteach)
+		var/intbonus = GET_MOB_ATTRIBUTE_VALUE(H, STAT_INTELLIGENCE) / 2
 		var/true_experience = exppercycle + intbonus
 		if(true_experience <= INTneeded)
 			to_chat(user, span_warning("I can't understand anything from this theory! Practice should do me better."))
@@ -148,7 +148,7 @@
 	minskill = SKILL_LEVEL_NONE
 	maxskill = SKILL_LEVEL_NOVICE
 	exppercycle = 5
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "novice"
 	INTneeded = 2
 
@@ -157,7 +157,7 @@
 	minskill = SKILL_LEVEL_NOVICE
 	maxskill = SKILL_LEVEL_APPRENTICE
 	exppercycle = 10
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "apprentice"
 	INTneeded = 5
 
@@ -166,7 +166,7 @@
 	minskill = SKILL_LEVEL_APPRENTICE
 	maxskill = SKILL_LEVEL_JOURNEYMAN
 	exppercycle = 25
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "journeyman"
 	INTneeded = 10
 
@@ -175,7 +175,7 @@
 	minskill = SKILL_LEVEL_JOURNEYMAN
 	maxskill = SKILL_LEVEL_EXPERT
 	exppercycle = 40
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "expert"
 	INTneeded = 13
 
@@ -184,7 +184,7 @@
 	minskill = SKILL_LEVEL_EXPERT
 	maxskill = SKILL_LEVEL_MASTER
 	exppercycle = 55
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "master"
 	INTneeded = 15
 
@@ -193,86 +193,86 @@
 	minskill = SKILL_LEVEL_MASTER
 	maxskill = SKILL_LEVEL_LEGENDARY
 	exppercycle = 70
-	skilltoteach = /datum/skill/misc/reading
+	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "legend"
 	INTneeded = 18
 
 /*.............. MATHEMATICS ..............*/
 
 /obj/item/textbook/novice/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /obj/item/textbook/apprentice/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /obj/item/textbook/journeyman/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /obj/item/textbook/expert/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /obj/item/textbook/master/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /obj/item/textbook/legendary/mathematics
-	skilltoteach = /datum/skill/labor/mathematics
+	skilltoteach = /datum/attribute/skill/labor/mathematics
 
 /*.............. ENGINEERING ..............*/
 
 /obj/item/textbook/novice/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /obj/item/textbook/apprentice/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /obj/item/textbook/journeyman/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /obj/item/textbook/expert/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /obj/item/textbook/master/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /obj/item/textbook/legendary/engineering
-	skilltoteach = /datum/skill/craft/engineering
+	skilltoteach = /datum/attribute/skill/craft/engineering
 
 /*.............. ALCHEMY ..............*/
 
 /obj/item/textbook/novice/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /obj/item/textbook/apprentice/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /obj/item/textbook/journeyman/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /obj/item/textbook/expert/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /obj/item/textbook/master/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /obj/item/textbook/legendary/alchemy
-	skilltoteach = /datum/skill/craft/alchemy
+	skilltoteach = /datum/attribute/skill/craft/alchemy
 
 /*.............. MEDICINE ..............*/
 
 /obj/item/textbook/novice/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine
 
 /obj/item/textbook/apprentice/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine
 
 /obj/item/textbook/journeyman/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine
 
 /obj/item/textbook/expert/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine
 
 /obj/item/textbook/master/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine
 
 /obj/item/textbook/legendary/medicine
-	skilltoteach = /datum/skill/misc/medicine
+	skilltoteach = /datum/attribute/skill/misc/medicine

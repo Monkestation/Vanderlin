@@ -11,7 +11,7 @@
 	body_parts_covered = HANDS
 	blade_dulling = DULLING_BASH
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 

@@ -30,21 +30,21 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
 	if(user.mind)
-		long_cooktime = (90 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*15))
+		long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*15))
 	if(isturf(loc)&& (found_table))
 		if(!istype(R))
 			return ..()
 		if(!R.reagents.has_reagent(/datum/reagent/consumable/sugar, 30))
 			to_chat(user, span_notice("Needs more sugar to work it."))
 			return TRUE
-		if(user.get_skill_level(/datum/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
+		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
 			to_chat(user, span_warning("Gelatine is much too strange for you."))
 			return
 		to_chat(user, span_notice("Congealing the sugar..."))
 		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
 		if(do_after(user, long_cooktime, src))
 			new /obj/item/reagent_containers/food/snacks/jellycake_base(loc)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			qdel(src)
 			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 30)
 			user.nobles_seen_servant_work()
@@ -381,7 +381,7 @@
 /*	............   Churning butter   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (200 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*22))
+		long_cooktime = (200 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*22))
 	if(istype(I, /obj/item/kitchen/spoon))
 		if(!reagents.has_reagent(/datum/reagent/consumable/milk/salted, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 			to_chat(user, span_warning(">Not enough salted milk."))
@@ -396,7 +396,7 @@
 			if(reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 				reagents.remove_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
 			new /obj/item/reagent_containers/food/snacks/butter(drop_location())
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 			user.nobles_seen_servant_work()
 		return
 	..()
@@ -469,7 +469,7 @@
 /*	............   Making fresh cheese   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (100 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*12))
+		long_cooktime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*12))
 	if(istype(I, /obj/item/natural/cloth) && (user.used_intent.type == INTENT_USE || user.used_intent.type == INTENT_SOAK))
 		var/milk = null
 		var/cheese = null
@@ -488,7 +488,7 @@
 				if(do_after(user, long_cooktime, src))
 					reagents.remove_reagent(milk, 5)
 					new cheese(drop_location())
-					user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+					user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 				user.nobles_seen_servant_work()
 			return
 	..()
@@ -502,7 +502,7 @@
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
 			if(do_after(user,3 SECONDS, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start(loc)
-				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				qdel(I)
 				qdel(src)
 				user.nobles_seen_servant_work()
@@ -522,7 +522,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -546,7 +546,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -570,11 +570,11 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese) && icon_state != "cheesewheel_end")
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			if(do_after(user, short_cooktime, src))
 				qdel(I)
 				name = "maturing cheese wheel"

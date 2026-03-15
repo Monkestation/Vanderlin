@@ -1,3 +1,21 @@
+/datum/attribute_holder/sheet/job/skeleton/knight
+	attribute_variance = list()
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = 3,
+		STAT_PERCEPTION = 2,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+	)
+
 /datum/job/skeleton/knight
 	title = "Death Knight"
 
@@ -5,24 +23,7 @@
 	cmode_music = 'sound/music/cmode/combat_weird.ogg'
 	antag_role = /datum/antagonist/skeleton/knight
 
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_CON = 2,
-		STATKEY_END = 2,
-		STATKEY_INT = 3,
-		STATKEY_PER = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/athletics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton/knight
 
 /datum/job/skeleton/knight/New()
 	. = ..()

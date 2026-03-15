@@ -228,7 +228,7 @@
 			if(isliving(mob) && mob_puller.cmode) // COND 2: and they are hostile,
 				// END 2: we roll to try to move.
 				var/mob/living/living_mob = mob
-				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STAT_STRENGTH, STAT_CONSTITUTION)*10), 5, 95)))
 					COOLDOWN_START(src, move_delay, 1 SECONDS)
 					to_chat(src, span_warning("I'm restrained! I can't move!"))
 					return TRUE
@@ -236,7 +236,7 @@
 		else
 			var/mob/living/living_mob = mob
 			if(mob_puller.grab_state == GRAB_PASSIVE && mob_puller.cmode)
-				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STAT_STRENGTH, STAT_CONSTITUTION)*10), 5, 95)))
 					COOLDOWN_START(src, move_delay, 1 SECONDS)
 					to_chat(src, span_warning("I'm restrained! I can't move!"))
 					return TRUE
@@ -249,7 +249,7 @@
 		// If passive grab and trying to pull someone who doesn't want to be pulled
 		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !L.incapacitated(IGNORE_GRAB))
 			// Reuse shove check probability
-			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10), 5, 95)))
+			if(!prob(clamp(30 + (M.stat_compare(L, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))
 				COOLDOWN_START(src, move_delay, 1 SECONDS)
 				to_chat(src, span_warning("[L]'s footing is too sturdy!"))
 				return TRUE

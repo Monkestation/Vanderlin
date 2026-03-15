@@ -64,9 +64,9 @@
 
 /obj/structure/wild_plant/proc/user_harvests(mob/living/user)
 	apply_farming_fatigue(user, 4)
-	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
+	add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming, TRUE)
+	var/farming_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	var/feedback = "I harvest the produce."
 	var/modifier = 0
 	var/chance_to_ruin_single = 75 - (farming_skill * 25)

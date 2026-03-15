@@ -1,3 +1,53 @@
+/datum/attribute_holder/sheet/job/roguemage
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = -1,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/magic/arcane = 30,
+
+	)
+
+/datum/attribute_holder/sheet/job/roguemage/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -1,
+		STAT_INTELLIGENCE = 4,
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		STAT_ENDURANCE = -1,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/magic/arcane = 40,
+
+	)
+
 /datum/job/advclass/bandit/roguemage //mage class - like the adventurer mage, but more evil.
 	title = "Rogue Mage"
 	tutorial = "Those fools at the academy laughed at you and cast you from the ivory tower of higher learning and magickal practice. \
@@ -12,30 +62,8 @@
 	languages = list(/datum/language/undead)
 	spell_points = 1
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 3,
-		STATKEY_CON = 1,
-		STATKEY_END = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/magic/arcane = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/roguemage
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/roguemage/old
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
@@ -45,10 +73,6 @@
 /datum/job/advclass/bandit/roguemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
 		spawned.adjust_spell_points(1)
 
 	if(prob(1))

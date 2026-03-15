@@ -19,7 +19,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	melt_amount = 75 //For the ones it paths to
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	dropshrink = 0.8
@@ -333,7 +333,7 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces //It's ultimately a massive axe
+	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
 	dropshrink = 0.95
 	axe_cut = 15
 	melting_material = /datum/material/iron
@@ -369,7 +369,7 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	dropshrink = 0.95
 	axe_cut = 15
 	melting_material = /datum/material/iron
@@ -567,7 +567,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.75
 	melting_material = /datum/material/iron

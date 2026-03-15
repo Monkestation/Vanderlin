@@ -327,7 +327,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!doctor || QDELETED(src))
 		return FALSE
 
-	var/healing_power = (doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 12.5
+	var/healing_power = (GET_MOB_SKILL_VALUE_OLD(doctor, /datum/attribute/skill/misc/medicine) + 1) * 12.5
 	var/was_completed = FALSE
 
 	var/mob/living/patient = owner
@@ -340,8 +340,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		was_completed = TRUE
 
 	var/modifier = was_completed ? 1.5 : 0.3
-	var/amt2raise = doctor.STAINT * modifier
-	doctor.adjust_experience(/datum/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/skill/misc/medicine))
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * modifier
+	doctor.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine))
 
 	var/extra_text
 
@@ -637,7 +637,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	// BUT only effects value reduction not sewing progress
 	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
 	// Reduces the upgrade values by this percentage, can never fully deplete the said values
-	var/healing_power = 0.03 * healing_multiplier * ((doctor.get_skill_level(/datum/skill/misc/medicine, TRUE) + 1) * 1.4) // Vibe numbers...
+	var/healing_power = 0.03 * healing_multiplier * ((GET_MOB_SKILL_VALUE_OLD(doctor, /datum/attribute/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
 
 	downgrade(healing_power)
 

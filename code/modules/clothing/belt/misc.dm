@@ -290,6 +290,14 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth
 
+/obj/item/storage/backpack/satchel/cloth/big
+	name = "cloth rucksack"
+	desc = "A large but rudimentary cloth sack strapped to the back for storing a medium number of items."
+	icon_state = "rucksack"
+	item_state = "rucksack"
+	salvage_result = /obj/item/natural/cloth
+	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
+
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
@@ -525,7 +533,7 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	component_type = /datum/component/storage/concrete/grid/headhook
 
@@ -541,7 +549,7 @@
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/bronze
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
 
@@ -568,6 +576,6 @@
 	equip_sound = 'sound/blank.ogg'
 	sellprice = 160
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze

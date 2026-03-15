@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/lich
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 5,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/craft/alchemy = 60,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
 /datum/antagonist/lich
 	name = "Lich"
 	roundend_category = "Lich"
@@ -65,7 +89,7 @@
 	move_to_spawnpoint()
 	remove_job()
 	lich.delete_equipment()
-	owner.current?.remove_stat_modifier(STATMOD_AGE)
+	lich.update_age_stats(lich.age, TRUE)
 	skele_look()
 	equip_lich()
 
@@ -126,26 +150,8 @@
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
 
-	H.set_skillrank(/datum/skill/misc/reading, 6, TRUE)
-	H.set_skillrank(/datum/skill/craft/alchemy, 5, TRUE)
-	H.set_skillrank(/datum/skill/magic/arcane, 5, TRUE)
-	H.set_skillrank(/datum/skill/misc/riding, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.set_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.set_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.set_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.set_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.set_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.set_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.change_stat(STATKEY_STR, -1)
-	H.change_stat(STATKEY_INT, 5)
-	H.change_stat(STATKEY_CON, 5)
-	H.change_stat(STATKEY_END, -1)
-	H.change_stat(STATKEY_SPD, -1)
 	H.adjust_spell_points(17) //Same as CM - Until they receive their spellbook.
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)

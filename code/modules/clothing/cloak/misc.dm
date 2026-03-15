@@ -319,6 +319,9 @@
 	boobed = FALSE
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 
+/obj/item/clothing/cloak/poncho/yellow
+	color = CLOTHING_MUSTARD_YELLOW
+
 /obj/item/clothing/cloak/pantheon
 	name = "pantheon cloak"
 	desc = "A divine blue cloak with shimmering gold sewn in, it represents the ten in their whole. Typically worn by High Templars of the Ten"

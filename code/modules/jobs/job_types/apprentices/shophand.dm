@@ -1,3 +1,34 @@
+/datum/attribute_holder/sheet/job/shophand
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/misc/stealing = 40,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/shophand/choice_three
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+	)
+
+/datum/attribute_holder/sheet/job/shophand/choice_two
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/bows = 10,
+	)
+
+/datum/attribute_holder/sheet/job/shophand/choice_one
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/crossbows = 10,
+	)
+
 /datum/job/shophand
 	title = "Shophand"
 	tutorial = "You work under the greedy eyes of the Merchant who has shackled you to the drudgery of employment. \
@@ -28,21 +59,7 @@
 
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 
-	jobstats = list(
-		STATKEY_SPD = 1,
-		STATKEY_INT = 1,
-		STATKEY_LCK = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/stealing = 4,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/shophand
 
 	traits = list(
 		TRAIT_SEEPRICES
@@ -53,13 +70,11 @@
 	var/random_roll = rand(1, 3)
 	switch(random_roll)
 		if(1)
-			spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/shophand/choice_one)
 		if(2)
-			spawned.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/shophand/choice_two)
 		if(3)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/shophand/choice_three)
 
 /datum/outfit/shophand
 	name = "Shophand Base"

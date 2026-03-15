@@ -17,7 +17,7 @@
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/whipsflails
+	associated_skill = /datum/attribute/skill/combat/whipsflails
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -163,7 +163,7 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
-	anvilrepair = /datum/skill/craft/carpentry
+	anvilrepair = /datum/attribute/skill/craft/carpentry
 	dropshrink = 0.9
 	resistance_flags = FLAMMABLE
 
@@ -187,7 +187,7 @@
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

@@ -42,7 +42,8 @@
 		qdel(src)
 
 /obj/item/neuFarm/seed/get_over_text_content(mob/user)
-	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
+	var/farming_value = user?.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : 6
+	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || farming_value >= 2)
 		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
 		if(plant_def_instance)
 			return plant_def_instance.seed_identity
@@ -56,8 +57,8 @@
 		var/datum/plant_genetics/seed_genetics_instance = seed_genetics
 		if(seed_genetics_instance.seed_identity_modifier)
 			examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
-		. += span_notice("I can tell these are [examine_name].")
-		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || user.get_skill_level(/datum/skill/labor/farming) >= 2)
+		. += span_info("I can tell these are [examine_name].")
+		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 2)
 			. += plant_def_instance.get_examine_details()
 
 /obj/item/neuFarm/seed/attack_atom(atom/attacked_atom, mob/living/user)
@@ -74,7 +75,7 @@
 		if(located)
 			to_chat(user, span_notice("[located] is in the way!"))
 			return
-		if(!(user.get_skill_level(/datum/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
+		if(!(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
 			to_chat(user, span_notice("I don't know enough to make a mound without tools."))
 			return
 		to_chat(user, span_notice("I begin making a mound for the seeds..."))

@@ -1,5 +1,5 @@
 /datum/anvil_recipe/armor
-	appro_skill = /datum/skill/craft/armorsmithing
+	appro_skill = /datum/attribute/skill/craft/armorsmithing
 	i_type = "Armor"
 	craftdiff = 1
 	abstract_type = /datum/anvil_recipe/armor
