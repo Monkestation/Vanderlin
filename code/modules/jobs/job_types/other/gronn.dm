@@ -7,19 +7,22 @@
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
-	raw_attributes_list = list(
-		//Universal skills
-		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
-		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
-		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gronn
 
 	pack_title = "Available archetypes"
 	pack_message = "Choose your archetypes"
 	job_packs = list(
 		/datum/job_pack/gronn/grunt,
 		/datum/job_pack/gronn/ravager,
+	)
+
+/datum/attribute_holder/sheet/job/gronn
+	raw_attribute_list = list(
+		//Universal skills
+		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
 	)
 
 /datum/job_pack/gronn/grunt
@@ -144,6 +147,9 @@
 	traits = list(TRAIT_HEAVYARMOR)
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gronnheavy
+
+/datum/attribute_holder/sheet/job/gronnheavy
 	raw_attribute_list = list(
 		STAT_STRENGTH = 4,
 		STAT_INTELLIGENCE = 2,
