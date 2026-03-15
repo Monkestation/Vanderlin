@@ -5380,6 +5380,7 @@
 /area/under/cavewet)
 "dNL" = (
 /obj/structure/fluff/railing/wood,
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/dirt,
 /area/indoors/shelter/bog/witch)
 "dOd" = (
@@ -9009,6 +9010,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
+/obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog/witch)
 "hxR" = (
@@ -9248,14 +9250,12 @@
 /turf/open/floor/carpet/royalblack,
 /area/under/cavewet)
 "hKM" = (
-/obj/structure/chair/wood/alt{
-	dir = 8
+/obj/structure/table/wood/folding{
+	pixel_x = -1;
+	pixel_y = 12
 	},
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog/witch)
+/turf/open/openspace,
+/area/outdoors/bog/central)
 "hKS" = (
 /obj/structure/table/wood/large/corner{
 	dir = 6
@@ -16598,7 +16598,6 @@
 	},
 /area/indoors/wilderness/magic)
 "pGO" = (
-/obj/structure/rack/shelf/big,
 /obj/item/paper,
 /obj/item/paper,
 /obj/item/paper,
@@ -16609,6 +16608,7 @@
 /obj/item/paper,
 /obj/item/paper,
 /obj/item/natural/feather,
+/obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "pHf" = (
@@ -20641,6 +20641,12 @@
 	dir = 8;
 	pixel_y = -1
 	},
+/obj/structure/chair/wood/alt{
+	dir = 1
+	},
+/obj/effect/landmark/start/bogwitch_apprentice{
+	dir = 1
+	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/witch)
 "tYv" = (
@@ -21176,12 +21182,12 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/east)
 "uxe" = (
-/obj/structure/fluff/railing/wood,
-/obj/machinery/light/fueled/wallfire/candle/skull{
-	pixel_y = -32
+/obj/structure/table/wood/folding{
+	pixel_x = -1;
+	pixel_y = 12
 	},
-/turf/open/floor/dirt,
-/area/indoors/shelter/bog/witch)
+/turf/open/openspace,
+/area/outdoors/bog/witch)
 "uxs" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
@@ -21318,6 +21324,10 @@
 "uDU" = (
 /turf/closed/mineral/random/med,
 /area/outdoors/bog/lich)
+"uEn" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/shelter/bog/witch)
 "uEE" = (
 /obj/item/natural/stone,
 /turf/open/floor/abyss_tile,
@@ -22065,15 +22075,8 @@
 	},
 /area/outdoors/bog/south/west)
 "vsH" = (
-/obj/structure/table/wood/folding{
-	pixel_x = -1;
-	pixel_y = 12
-	},
-/obj/item/candle/floorcandle0/lit{
-	pixel_x = -2;
-	pixel_y = 8
-	},
-/obj/machinery/light/fueled/wallfire/candle/skull,
+/obj/structure/bed/wool,
+/obj/item/bedsheet/pelt,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "vsS" = (
@@ -82617,7 +82620,7 @@ wGV
 wGV
 wGV
 wGV
-wGV
+hKM
 wGV
 wGV
 wGV
@@ -84432,7 +84435,7 @@ xSl
 xSl
 hxF
 cgB
-hKM
+cgB
 cgB
 uXC
 hJP
@@ -84632,13 +84635,13 @@ xSl
 xSl
 xSl
 jDN
-vsH
-scN
-cgB
-cgB
-cgB
-scN
-uxe
+jDN
+mIn
+jDN
+job
+jDN
+mIn
+jDN
 jDN
 xSl
 xSl
@@ -84834,13 +84837,13 @@ xSl
 xSl
 xSl
 jDN
-jDN
-mIn
-jDN
-job
-jDN
-mIn
-jDN
+vsH
+scN
+scN
+scN
+scN
+scN
+uEn
 jDN
 xSl
 xSl
@@ -86862,7 +86865,7 @@ xSl
 xSl
 xSl
 xSl
-xSl
+uxe
 xSl
 xSl
 xSl
