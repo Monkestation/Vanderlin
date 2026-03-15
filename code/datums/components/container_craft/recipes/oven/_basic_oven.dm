@@ -208,7 +208,7 @@
 	output = /obj/item/reagent_containers/food/snacks/bread/bookbread/raspberry
 	cooked_smell = /datum/pollutant/food/pastry
 
-/datum/container_craft/oven/
+/datum/container_craft/oven/jacksberrybookbread
 	category = "Holiday Food"
 	name = "Raisin Bookbread"
 	requirements = list(/obj/item/reagent_containers/food/snacks/jacksberrybutterdough = 1)
