@@ -204,7 +204,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/shaman
 
 /datum/attribute_holder/sheet/job/shaman
-	raw_attribute_list =  = list(
+	raw_attribute_list  = list(
 		STATKEY_STR = 3,
 		STATKEY_CON = 2,
 		STATKEY_SPD = 1,
