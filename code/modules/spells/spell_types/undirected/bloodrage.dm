@@ -11,7 +11,7 @@
 	invocation = "GRAGGAR!! GRAGGAR!! GRAGGAR!!"
 	invocation_type = INVOCATION_SHOUT
 	charge_required = FALSE
-	cooldown_time = 5 MINUTES
+	cooldown_time = 1.5 MINUTES
 	spell_cost = 80
 	var/static/list/purged_effects = list(
 		/datum/status_effect/incapacitating/immobilized,
@@ -42,5 +42,6 @@
 	for(var/effect in purged_effects)
 		cast_on.remove_status_effect(effect)
 	cast_on.apply_status_effect(/datum/status_effect/buff/bloodrage)
+
 	cast_on.visible_message(span_danger("[cast_on] rises upward, boiling with immense rage!"))
 

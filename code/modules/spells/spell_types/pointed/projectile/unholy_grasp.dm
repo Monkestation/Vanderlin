@@ -3,7 +3,7 @@
 	desc = "Toss forth an unholy snare of blood and guts a short distance, summoned from your leftover trophies sacrificed to Graggar. Like a net, may it snare your target! You will need some guts to use this."
 	button_icon_state = "unholy_grasp"
 	sound = 'sound/misc/stings/generic.ogg'
-	charge_sound = 'sound/combat/flail_swing.ogg'
+	charge_sound = 'sound/combat/wooshes/flail_swing.ogg'
 
 	spell_type = SPELL_MIRACLE //it does count as one, funnily enough.
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
