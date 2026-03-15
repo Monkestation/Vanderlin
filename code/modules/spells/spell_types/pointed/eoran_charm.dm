@@ -30,7 +30,7 @@
 	name = "Eoran Charm"
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
 
 	invocation = "Experiamur vim amoris!"
@@ -61,7 +61,7 @@
 
 	spell_type = SPELL_BLOOD
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 
 /datum/action/cooldown/spell/charm/vampire/do_charm(mob/living/cast_on)
 	var/list/charms_public = list("<b style='color:pink'>[owner]'s eyes glow as they look towards the person.</b>", "<b style='color:pink'>[cast_on] stares mesmerized at [owner] and does not move.</b>")

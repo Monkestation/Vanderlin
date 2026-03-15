@@ -669,6 +669,7 @@ em {
 
 .elf {
   font-family: Dauphin, Pterra;
+  font-size: 1.1em;
 }
 
 .dwarf {
@@ -680,29 +681,39 @@ em {
 }
 
 .hellspeak {
-  font-family: Xaphan, Pterra;
-  font-size: 110%
+  font-family: Yataghan, Pterra;
+  font-size: 0.85em;
 }
 
 .beast,
 .orc {
   font-family: "Thief by The Riddler", Pterra;
+  font-size: 1.1em;
 }
 
 .deepspeak {
   font-family: "Underwater Love", Pterra;
+  font-size: 0.8em;
 }
 
 .zalad {
   font-family: Byzantine, Pterra;
+  font-size: 0.95em;
 }
 
 .undead {
   font-family: Nosfer, Pterra;
+  font-size: 1.12em;
 }
 
-.oldpsydonic {
+.psydonic {
   font-family: "Breitkopf Fraktur", Pterra;
+  font-size: 1.22em;
+}
+
+.psydonic_old {
+  font-family: "Wernicke Schwabacher", Pterra;
+  font-size: 1.23em;
 }
 
 .torture {

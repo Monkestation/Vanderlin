@@ -5,7 +5,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/xylix)
 
 	charge_required = FALSE
@@ -22,15 +22,23 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/wheel
 
 /datum/status_effect/wheel/on_creation(mob/living/new_owner, duration_override, ...)
-	var/list/mob_stats = MOBSTATS
+	var/list/mob_stats = list(
+		STAT_STRENGTH,
+		STAT_ENDURANCE,
+		STAT_INTELLIGENCE,
+		STAT_PERCEPTION,
+		STAT_CONSTITUTION,
+		STAT_FORTUNE,
+		STAT_SPEED,
+	)
 	mob_stats = mob_stats.Copy() //why do i have to do this
 	effectedstats[pick_n_take(mob_stats)] = rand(1, 5)
 	effectedstats[pick_n_take(mob_stats)] = -rand(1, 5)
 	if(prob(25)) // Nope!
-		if(effectedstats[STATKEY_LCK])
-			effectedstats[STATKEY_LCK] += 2
+		if(effectedstats[STAT_FORTUNE])
+			effectedstats[STAT_FORTUNE] += 2
 		else
-			effectedstats[STATKEY_LCK] = 2
+			effectedstats[STAT_FORTUNE] = 2
 	return ..()
 
 /atom/movable/screen/alert/status_effect/buff/wheel

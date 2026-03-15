@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/forestwarden
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/lumberjacking = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/tanning = 20
+	)
+
+
 /datum/job/forestwarden
 	title = "Forest Warden"
 	tutorial = "You were born in the forest. Alone, you've always felt home in the woods. \
@@ -32,32 +58,7 @@
 	job_bitflag = BITFLAG_GARRISON
 	honorary = "Warden"
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 1,
-		STATKEY_INT = 1,
-		STATKEY_END = 3,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/lumberjacking = 1,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/tanning = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestwarden
 
 	traits = list(
 		TRAIT_HEAVYARMOR,

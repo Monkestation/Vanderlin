@@ -1,3 +1,33 @@
+/datum/attribute_holder/sheet/job/cook
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 40,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/butchering = 30,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/labor/farming = 10
+	)
+
+/datum/attribute_holder/sheet/job/cook/old
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 50,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/butchering = 30,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/labor/farming = 10
+	)
+
 /datum/job/cook
 	title = "Cook"
 	tutorial = "Slice, chop, and into the pot... \
@@ -19,27 +49,9 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/cook
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/cook/old
 
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 4,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/butchering = 3,
-		/datum/skill/labor/taming = 1,
-		/datum/skill/labor/farming = 1
-	)
-
-/datum/job/cook/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 
 /datum/outfit/cook
 	name = "Cook"

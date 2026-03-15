@@ -5,7 +5,7 @@
 		return FALSE
 	if(body_position == LYING_DOWN)
 		return FALSE
-	if(user.stat_roll(STATKEY_LCK,4,10,TRUE))
+	if(user.stat_roll(STAT_FORTUNE,4,10,TRUE))
 		var/list/usedp = list("Critical miss!", "Damn! Critical miss!", "No! Critical miss!", "It can't be! Critical miss!", "Betrayed by lady luck! Critical miss!", "Bad luck! Critical miss!", "Curse creation! Critical miss!", "What?! Critical miss!")
 		to_chat(user, "<span class='boldwarning'>[pick(usedp)]</span>")
 		flash_fullscreen("blackflash2")
@@ -59,7 +59,7 @@
 		chance2hit += 10
 
 	if(user.mind)
-		chance2hit += (user.get_skill_level(associated_skill, TRUE) * 5)
+		chance2hit += (GET_MOB_SKILL_VALUE_OLD(user, associated_skill) * 5)
 
 	if(used_intent)
 		chance2hit += used_intent?.acc_bonus || 0
@@ -67,10 +67,10 @@
 	if(I && I.wlength == WLENGTH_SHORT)
 		chance2hit += 10
 
-	if(user.STAPER > 10)
-		chance2hit += ((user.STAPER - 10) * 3)
-	else if(user.STAPER < 10)
-		chance2hit -= ((10 - user.STAPER) * 3)
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 10)
+		chance2hit += ((GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 10) * 3)
+	else if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) < 10)
+		chance2hit -= ((10 - GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)) * 3)
 
 	if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 		chance2hit += 20

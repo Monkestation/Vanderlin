@@ -1,3 +1,24 @@
+/datum/attribute_holder/sheet/job/gloryhound
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 20, //for bashing people with a cudgel
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30
+	)
+
 /datum/job/advclass/mercenary/gloryhound
 	title = "Gloryhound"
 	tutorial = "Once nothing but a unskilled adventurer, you found yourself in the spotlight after saving a noble from a ambush with nothing but your sword and shield. You yearn for this fame again."
@@ -7,28 +28,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	total_positions = 5
 
-	jobstats = list(
-		STATKEY_CON = 1,
-		STATKEY_END = 2,
-		STATKEY_STR = 2, 
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/axesmaces = 2, //for bashing people with a cudgel
-		/datum/skill/misc/riding = 2, 
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gloryhound
 
 	traits = list(
 		TRAIT_MEDIUMARMOR

@@ -5,6 +5,24 @@
 	coin, the nobility sought it grand to give you a royal title - Ratcatcher. Please, for the love of Necra, just LET IT END!"
 	migrant_job = /datum/job/migrant/ratcatcher
 
+/datum/attribute_holder/sheet/job/migrant/ratcatcher
+	raw_attribute_list = list(
+		STAT_SPEED = -2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_INTELLIGENCE = -3,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+	)
+
 /datum/job/migrant/ratcatcher
 	title = "Ratcatcher"
 	tutorial = "You've been on the street for as long as you can remember. Still are, and you still will be so long as \
@@ -13,25 +31,7 @@
 	outfit = /datum/outfit/ratcatcher
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_SPD = -2,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_INT = -3,
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/ratcatcher
 
 	traits = list(TRAIT_STEELHEARTED)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
