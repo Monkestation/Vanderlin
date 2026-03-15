@@ -1,4 +1,4 @@
-/datum/scrying_component
+/datum/component/scrying
 	var/name = "scrying component"
 
 	var/text_cooldown_fail = "I look into NAME_HERE but only see inky smoke. Maybe I should wait."
@@ -15,19 +15,13 @@
 	var/mob/living/carbon/held_user
 	COOLDOWN_DECLARE(scry_cooldown)
 
-/datum/scrying_component/New(obj/item/scrying/parent)
+/datum/component/scrying/Initialize(obj/item/scrying/parent)
 	. = ..()
 	text_cooldown_fail = replacetext(text_cooldown_fail, "NAME_HERE", "\the [name]")
 	if(!parent)
 		return
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(handle_parent_del), parent)
 
-/datum/scrying_component/proc/handle_parent_del(var/obj/item/scrying/parent)
-	SIGNAL_HANDLER
-	parent?.scry_comp = null
-	qdel(src)
-
-/datum/scrying_component/proc/activate(mob/living/user)
+/datum/component/scrying/proc/activate(mob/living/user)
 	if(!pass_extra_checks())
 		return FALSE
 
@@ -35,7 +29,7 @@
 		to_chat(user, span_warning(text_cooldown_fail))
 		return FALSE
 
-	var/search_name = stripped_input(user, "Who are you looking for?", name)
+	var/search_name = tgui_input_text(user, "Who are you looking for?", name)
 	if(!search_name)
 		return FALSE
 
@@ -49,8 +43,8 @@
 		return FALSE
 
 	var/mob/living/carbon/human/found_target
-	for(var/mob/living/carbon/human/human_target in GLOB.human_list)
-		if(human_target.real_name == search_name)
+	for(var/mob/living/carbon/human/human_target as anything in GLOB.human_list)
+		if(lowertext(human_target.real_name) == lowertext(search_name))
 			var/turf/target_turf = get_turf(human_target)
 			if(!target_turf)
 				continue
@@ -80,7 +74,7 @@
 	COOLDOWN_START(src, scry_cooldown, real_cooldown)
 	user.visible_message(span_danger("[user] stares into \the [name], [user.p_their()] eyes rolling back into [user.p_their()] head."), span_warning("My eyes roll into the back of my head as I'm lost in the depths of the orb."))
 	scrying_eye.orbit(found_target)
-	if(found_target.STAPER >= 15)
+	if(GET_MOB_ATTRIBUTE_VALUE(found_target, STAT_PERCEPTION) >= 15)
 		if(found_target.mind)
 			if(found_target.mind.do_i_know(name = user.real_name))
 				to_chat(found_target, span_warning("I can clearly see the face of [user.real_name] staring at me!"))
@@ -88,11 +82,11 @@
 				return TRUE
 		to_chat(found_target, span_warning("I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!"))
 		return TRUE
-	if(found_target.STAPER >= 11)
+	if(GET_MOB_ATTRIBUTE_VALUE(found_target, STAT_PERCEPTION) >= 11)
 		to_chat(found_target, span_warning("I feel a pair of unknown eyes on me."))
 	return TRUE
 
-/datum/scrying_component/proc/create_eye()
+/datum/component/scrying/proc/create_eye()
 	if(!held_user)
 		return FALSE
 	scrying_eye = new
@@ -102,7 +96,7 @@
 	held_user.overlay_fullscreen("scrying", /atom/movable/screen/backhudl/obs)
 	addtimer(CALLBACK(src, PROC_REF(remove_eye)), vision_duration)
 
-/datum/scrying_component/proc/remove_eye(early = FALSE)
+/datum/component/scrying/proc/remove_eye(early = FALSE)
 	if(!held_user)
 		return FALSE
 	held_user.reset_perspective(held_user)
@@ -113,35 +107,33 @@
 	held_user = null
 
 
-/datum/scrying_component/proc/pass_extra_checks(mob/living/user)
+/datum/component/scrying/proc/pass_extra_checks(mob/living/user)
 	return TRUE
 
-/datum/scrying_component/orb
+/datum/component/scrying/orb
 	name = "Scrying Orb"
 
-/datum/scrying_component/eye
+/datum/component/scrying/eye
 	name = "Accursed Eye"
 	cooldown_duration = 5 MINUTES
 
-/datum/scrying_component/vampire
+/datum/component/scrying/vampire
 	name = "Night's Eye"
 	needs_to_know = FALSE
 	needs_to_live = FALSE
 
-/datum/scrying_component/telescope
+/datum/component/scrying/telescope
 	name = "NOC Device"
 	text_cooldown_fail = "I peer into the sky but cannot focus the lens on the face of Noc. Maybe I should wait."
 
-/datum/scrying_component/telescope/pass_extra_checks(mob/living/user)
+/datum/component/scrying/telescope/pass_extra_checks(mob/living/user)
 	var/mob/living/carbon/human/human_user = user
 	if(!ishuman(human_user) || !human_user.virginity)
 		to_chat(human_user, span_notice("Noc looks angry with me..."))
-		message_admins("SCRY DEBUG: NOC EXTRA CHECKS FAIL")
 		return FALSE
-	message_admins("SCRY DEBUG: NOC EXTRA CHECKS PASS")
 	return TRUE
 
-/datum/scrying_component/mirror
+/datum/component/scrying/mirror
 	name = "Black Mirror"
 	vision_duration = 4 SECONDS
 	needs_to_know = FALSE
@@ -149,14 +141,14 @@
 	var/obj/item/inqarticles/bmirror/parent_mirror
 	var/mob/stored_target
 
-/datum/scrying_component/mirror/New(obj/item/scrying/parent)
+/datum/component/scrying/mirror/Initialize(obj/item/scrying/parent)
 	. = ..()
 	parent_mirror = parent
 	if(!istype(parent_mirror))
 		UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
 		qdel(src)
 
-/datum/scrying_component/mirror/activate(mob/living/user)
+/datum/component/scrying/mirror/activate(mob/living/user)
 	if(!pass_extra_checks())
 		message_admins("SCRY DEBUG: EXTRA CHECKS FAIL")
 		return FALSE
@@ -206,7 +198,7 @@
 	apply_black_eye()
 	return TRUE
 
-/datum/scrying_component/mirror/create_eye()
+/datum/component/scrying/mirror/create_eye()
 	if(!held_user)
 		return FALSE
 	scrying_eye = new
@@ -217,7 +209,7 @@
 	playsound(held_user, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	addtimer(CALLBACK(src, PROC_REF(remove_eye)), vision_duration)
 
-/datum/scrying_component/mirror/remove_eye(early = FALSE)
+/datum/component/scrying/mirror/remove_eye(early = FALSE)
 	if(!held_user)
 		return FALSE
 	held_user.reset_perspective(held_user)
@@ -233,7 +225,7 @@
 		stored_target = null
 	parent_mirror.donefixating()
 
-/datum/scrying_component/mirror/proc/apply_black_eye()
+/datum/component/scrying/mirror/proc/apply_black_eye()
 	scrying_eye.orbit(stored_target)
 	parent_mirror.effect = stored_target.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
 	playsound(stored_target, 'sound/items/blackeye_warn.ogg', 100, FALSE)
@@ -258,12 +250,11 @@
 	grid_height = 32
 	grid_width = 32
 
-	var/datum/scrying_component/scry_comp
-	var/scry_comp_path = /datum/scrying_component/orb
+	var/scry_comp_path = /datum/component/scrying/orb
 
 /obj/item/scrying/Initialize(mapload)
 	. = ..()
-	scry_comp = new scry_comp_path(src)
+	AddComponent(scry_comp_path)
 
 /obj/item/scrying/eye
 	name = "accursed eye"
@@ -271,14 +262,8 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
 
-	scry_comp_path = /datum/scrying_component/eye
+	scry_comp_path = /datum/component/scrying/eye
 
-/obj/item/scrying/attack_self(mob/user, list/modifiers)
-	. = ..()
-	scry_comp.activate(user)
-
-//23.08.2025
-//nocdevice depreciated?
 
 /*	..................   NOC Device (Fixed scrying ball)   ................... */
 /obj/structure/nocdevice
@@ -288,15 +273,10 @@
 	icon_state = "nocdevice"
 	plane = -1
 	layer = 4.2
-	var/datum/scrying_component/telescope/scry_comp
 
 /obj/structure/nocdevice/Initialize()
 	. = ..()
-	scry_comp = new(src)
-
-/obj/structure/nocdevice/attack_hand(mob/user)
-	. = ..()
-	scry_comp.activate(user)
+	AddComponent(/datum/component/scrying/telescope)
 
 /*	..................   THE EYE   ................... */
 /mob/scry_eye
@@ -305,7 +285,7 @@
 	hud_type = /datum/hud/obs
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_LIVING
-	var/datum/scrying_component/component
+	var/datum/component/scrying/component
 	var/moving_eye = FALSE
 
 /mob/scry_eye/blackmirror
@@ -394,17 +374,17 @@
 
 /mob/scry_eye/eye_of_night/Crossed(mob/living/L)
 	if(istype(L, /mob/living/carbon/human))
-		var/mob/living/carbon/human/V = L
-		var/holyskill = V.get_skill_level(/datum/skill/magic/holy)
-		var/magicskill = V.get_skill_level(/datum/skill/magic/arcane)
+		var/mob/living/carbon/human/cross_human = L
+		var/holyskill = GET_MOB_SKILL_VALUE_OLD(cross_human, /datum/attribute/skill/magic/holy)
+		var/magicskill = GET_MOB_SKILL_VALUE_OLD(cross_human, /datum/attribute/skill/magic/arcane)
 		if(magicskill >= 2)
-			to_chat(V, "<font color='red'>An ancient and unusual magic looms in the air around you.</font>")
+			to_chat(cross_human, "<font color='red'>An ancient and unusual magic looms in the air around you.</font>")
 			return
 		if(holyskill >= 2)
-			to_chat(V, "<font color='red'>An ancient and unholy magic looms in the air around you.</font>")
+			to_chat(cross_human, "<font color='red'>An ancient and unholy magic looms in the air around you.</font>")
 			return
 		if(prob(20))
-			to_chat(V, "<font color='red'>You feel like someone is watching you, or something.</font>")
+			to_chat(cross_human, "<font color='red'>You feel like someone is watching you, or something.</font>")
 			return
 
 /mob/scry_eye/eye_of_night/proc/vampire_telepathy()

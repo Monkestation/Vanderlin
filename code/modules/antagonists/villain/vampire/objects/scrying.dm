@@ -1,7 +1,7 @@
 /obj/structure/vampire/scryingorb // Method of spying on the town
 	name = "Eye of Night"
 	icon_state = "scrying"
-	var/datum/scrying_component/vampire/scry_comp //Temporary alternative
+	var/datum/component/scrying/vampire/scry_comp //Temporary alternative
 
 /obj/structure/vampire/scryingorb/Initialize()
 	. = ..()

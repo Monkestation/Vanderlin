@@ -1130,7 +1130,7 @@
 	var/broken = FALSE
 	var/atom/movable/screen/alert/blackmirror/effect
 	var/datum/looping_sound/blackmirror/soundloop
-	var/datum/scrying_component/mirror/scry_comp
+	var/datum/component/scrying/mirror/scry_comp
 
 /obj/item/inqarticles/bmirror/Initialize()
 	. = ..()
