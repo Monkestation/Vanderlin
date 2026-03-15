@@ -326,28 +326,6 @@
 		overlays.Insert(1, emissive_block)
 	return overlays
 
-// /atom/movable/proc/can_safely_descend(turf/target)
-// 	return TRUE
-
-// /atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
-// 	if(!direction)
-// 		direction = DOWN
-// 	if(!source)
-// 		source = get_turf(src)
-// 		if(!source)
-// 			return FALSE
-// 	if(!target)
-// 		target = get_step_multiz(source, direction)
-// 		if(!target)
-// 			return FALSE
-
-// 	if((movement_type & FLYING) && HAS_TRAIT(src, TRAIT_HOLLOWBONES))
-// 		var/turf/below = GET_TURF_BELOW(source)
-// 		if(isopenspace(below))
-// 			return TRUE
-
-// 	return !(movement_type & FLYING) && !throwing
-
 /**
  * When the falling atom stops moving and impacts the turf.
  * To reach here from /turf/proc/zImpact, intercept_zImpact() flags must not have included FALL_INTERCEPTED.

@@ -321,3 +321,7 @@
 	for(var/obj/structure/stairs/partner in newtarg)
 		if(partner.dir == dir) // partner matches our dir
 			return newtarg
+
+#undef STAIR_TERMINATOR_AUTOMATIC
+#undef STAIR_TERMINATOR_NO
+#undef STAIR_TERMINATOR_YES
