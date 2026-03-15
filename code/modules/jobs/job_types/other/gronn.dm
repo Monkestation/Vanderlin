@@ -7,8 +7,8 @@
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
-	skills = list(
-	//Universal skills
+	raw_attributes_list = list(
+		//Universal skills
 		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
 		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
 		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
@@ -144,22 +144,16 @@
 	traits = list(TRAIT_HEAVYARMOR)
 	cmode_music = 'sound/music/combat_vagarian.ogg'
 	languages = list(/datum/language/gronnic)
-	jobstats = list(
-		STATKEY_STR = 3, //TO WIELD THE MAUL. THEY CAN'T USE ANY OTHER WEAPON TYPE BUT MACES ANYWAY.
-		STATKEY_INT = 2,
-		STATKEY_CON = 3,
-		STATKEY_PER = -1, //CAN'T SEE SHIT OUTTA THIS THING!!
-		STATKEY_SPD = -3 //SLOW AND UNWIELDY
-	)
-	skills = list(
-		/datum/attribute/skill/misc/reading = SKILL_LEVEL_NONE,
+	raw_attribute_list = list(
+		STAT_STRENGTH = 4,
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 3,
+		STAT_PERCEPTION = -1,
+		STAT_SPEED = -3,
 		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/attribute/skill/craft/crafting = SKILL_LEVEL_NONE,
 		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
 		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
-		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
-		/datum/attribute/skill/misc/sewing = SKILL_LEVEL_NONE,
-		/datum/attribute/skill/craft/cooking = SKILL_LEVEL_NONE,
+		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
 		/datum/attribute/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN,
 		/datum/attribute/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
 		/datum/attribute/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
