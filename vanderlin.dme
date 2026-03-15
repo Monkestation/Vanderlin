@@ -3837,6 +3837,7 @@
 #include "interface\fonts\datums\byzantine.dm"
 #include "interface\fonts\datums\dauphin.dm"
 #include "interface\fonts\datums\frisky.dm"
+#include "interface\fonts\datums\gronn.dm"
 #include "interface\fonts\datums\mason.dm"
 #include "interface\fonts\datums\nosfer.dm"
 #include "interface\fonts\datums\pixelify_sans.dm"
