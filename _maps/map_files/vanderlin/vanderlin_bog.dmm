@@ -9049,6 +9049,10 @@
 	},
 /turf/open/floor/metal/barograte/open,
 /area/indoors/shelter/bog/lich)
+"hza" = (
+/obj/effect/landmark/start/bogwitch_apprenticelate,
+/turf/open/floor/dirt,
+/area/outdoors/bog/north)
 "hzI" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/water/blood,
@@ -47210,7 +47214,7 @@ vbN
 (111,1,1) = {"
 tju
 oPC
-ktr
+hza
 eHj
 ktr
 ktr
