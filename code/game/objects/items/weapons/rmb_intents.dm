@@ -51,7 +51,7 @@
 	name = "aimed"
 	desc = "Your attacks are more precise but have a longer recovery time. Higher chance for certain critical hits. Reduced dodge bonus."
 	icon_state = "rmbaimed"
-	def_bonus = -20
+	def_bonus = -10
 
 /datum/rmb_intent/aimed/special_attack(mob/living/user, atom/target)
 	. = ..()
@@ -130,7 +130,7 @@
 	name = "strong"
 	desc = "Your attacks have increased strength and have increased force but use more stamina. Higher chance for certain critical hits. Intentionally fails surgery steps. Reduced dodge bonus."
 	icon_state = "rmbstrong"
-	def_bonus = -20
+	def_bonus = -10
 	target_turf = TRUE
 	check_range = FALSE // specials have their own range checks
 
