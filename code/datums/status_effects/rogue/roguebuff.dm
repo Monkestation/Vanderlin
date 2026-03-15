@@ -469,7 +469,7 @@
 /atom/movable/screen/alert/status_effect/buff/call_to_hunt
 	name = "Call to Hunt"
 	desc = span_bloody("FOR THE HUNT!")
-	icon_state = "call_to_slaughter"
+	icon_state = "call_to_hunt"
 
 /*-----------------\
 |   Inhumen Miracles |
