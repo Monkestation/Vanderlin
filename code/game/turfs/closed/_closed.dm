@@ -188,7 +188,7 @@
 	if(myskill < climbdiff)
 		to_chat(user, span_warning("I'm not capable of climbing this."))
 		return
-	var/used_time = max(70 - (myskill * 10) - (user.STASPD * 3), 30)
+	var/used_time = max(70 - (myskill * 10) - (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 3), 30)
 	if(user.m_intent != MOVE_INTENT_SNEAK)
 		playsound(user, climbsound, 100, TRUE)
 	user.visible_message(span_warning("[user] starts to climb [src]."), span_warning("I start to climb [src]..."))
@@ -196,7 +196,7 @@
 		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
 		if(user.m_intent != MOVE_INTENT_SNEAK)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-		user.adjust_experience(/datum/skill/misc/climbing, floor(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/skill/misc/climbing)), FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/climbing, floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/attribute/skill/misc/climbing), FALSE)
 
 /turf/closed/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

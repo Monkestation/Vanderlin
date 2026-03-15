@@ -67,7 +67,7 @@
 		myskill += 1
 	if(locate(/obj/structure/chair) in user.loc)
 		myskill += 1
-	var/used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (user.STASPD * 3), 3 SECONDS)
+	var/used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 3), 3 SECONDS)
 	if(user.m_intent != MOVE_INTENT_SNEAK)
 		playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 	user.visible_message(span_warning("[user] starts to climb [src]."), span_warning("I start to climb [src]..."))
@@ -75,8 +75,8 @@
 		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
 		if(user.m_intent != MOVE_INTENT_SNEAK)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-		var/exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * L.get_learning_boon(/datum/attribute/skill/misc/climbing)
-		user.adjust_experience(/datum/skill/misc/climbing, exp_to_gain, FALSE)
+		var/exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/attribute/skill/misc/climbing)
+		user.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
 		var/turf/pitfall = user.loc
 		pitfall?.zFall(user)
 

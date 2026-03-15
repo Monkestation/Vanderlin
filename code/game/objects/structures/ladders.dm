@@ -134,7 +134,7 @@
 	show_initial_fluff_message(user, going_up)
 
 	// Our climbers athletics ability
-	var/fitness_level = user.get_skill_level(/datum/skill/misc/athletics)
+	var/fitness_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/athletics)
 
 	var/final_travel_time = (travel_time - fitness_level)
 
@@ -164,8 +164,8 @@
 		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
 
 	if(grant_exp)
-		var/fitness_level = user.get_skill_level(/datum/skill/misc/athletics)
-		user.adjust_experience(/datum/skill/misc/athletics, round(5/(fitness_level || 1), 1)) //get a little experience for our trouble
+		var/fitness_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/athletics)
+		user.adjust_experience(/datum/attribute/skill/misc/athletics, round(5/(fitness_level || 1), 1)) //get a little experience for our trouble
 
 	if(!is_ghost)
 		show_final_fluff_message(user, ladder, going_up)
