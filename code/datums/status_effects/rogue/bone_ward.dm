@@ -19,6 +19,8 @@
 	SIGNAL_HANDLER
 	if(!attacker || !attacked)
 		return FALSE
+	if(attacked == attacker)
+		return FALSE
 	if(!ishuman(attacker) || !attacker.client)
 		return FALSE
 	if(HAS_TRAIT(attacker, TRAIT_ASSASSIN))
