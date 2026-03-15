@@ -201,14 +201,15 @@
 	languages = list(/datum/language/gronnic)
 	cmode_music = 'sound/music/combat_shaman2.ogg'
 	traits = list(TRAIT_STRONGBITE, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_NOPAINSTUN)
-	jobstats = list(
+	attribute_sheet = /datum/attribute_holder/sheet/job/shaman
+
+/datum/attribute_holder/sheet/job/shaman
+	raw_attribute_list =  = list(
 		STATKEY_STR = 3,
 		STATKEY_CON = 2,
 		STATKEY_SPD = 1,
 		STATKEY_INT = -1,
 		STATKEY_PER = -1
-	)
-	skills = list(
 		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_NOVICE,
 		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_NOVICE,
 		/datum/attribute/skill/misc/sneaking = SKILL_LEVEL_NOVICE,
