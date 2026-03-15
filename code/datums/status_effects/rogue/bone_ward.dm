@@ -1,6 +1,5 @@
 /datum/status_effect/buff/bone_ward
 	id = "bone_ward"
-	icon_state = "bone_ward"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/bone_ward
 	duration = -1
 
@@ -34,7 +33,7 @@
 /atom/movable/screen/alert/status_effect/buff/bone_ward
 	name = "Bone Ward"
 	desc = span_nicegreen("I am watched over.")
-	icon_state = "buff"
+	icon_state = "bone_ward"
 
 // ##########################################################################################
 // ##########################################################################################
@@ -42,7 +41,6 @@
 
 /datum/status_effect/debuff/bone_ward
 	id = "bone_ward_r"
-	icon_state = "bone_ward_bad"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bone_ward
 	duration = 60 SECONDS
 	var/mob/living/source_mob
@@ -78,5 +76,5 @@
 /atom/movable/screen/alert/status_effect/debuff/bone_ward
 	name = "Bone Ward"
 	desc = span_red("I have recently brought harm upon someone protected by a Bone Ward.")
-	icon_state = "debuff"
+	icon_state = "bone_ward_bad"
 	alert_group = ALERT_DEBUFF
