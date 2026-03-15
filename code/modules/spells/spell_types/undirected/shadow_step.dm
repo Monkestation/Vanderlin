@@ -2,7 +2,7 @@
 	name = "Shadow Step"
 	desc = "Step into the shadows, becoming invisible for a duration."
 	sound = 'sound/misc/stings/generic.ogg'
-	associated_skill = /datum/skill/misc/sneaking
+	associated_skill = /datum/attribute/skill/misc/sneaking
 	has_visual_effects = FALSE
 
 	charge_time = 1 SECONDS

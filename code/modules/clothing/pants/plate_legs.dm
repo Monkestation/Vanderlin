@@ -15,7 +15,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	r_sleeve_status = SLEEVE_NOMOD
@@ -73,7 +73,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD

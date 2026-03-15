@@ -91,13 +91,13 @@
 /atom/movable/screen/skills/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		if(ishuman(usr))
 			var/mob/living/L = usr
 			var/datum/language_holder/H = L.get_language_holder()
 			H.open_language_menu(usr)
 			return
-
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/ht
 		var/mob/living/L = usr
@@ -125,9 +125,13 @@
 		to_chat(L, "*----*")
 		return
 
+	if(!LAZYACCESS(modifiers, CTRL_CLICKED))
+		usr.attributes?.ui_interact(usr)
+		return
+
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		H.print_levels(H)
+		H.print_skill_levels(H)
 
 /atom/movable/screen/craft
 	name = "crafting menu"
@@ -1785,7 +1789,7 @@
 
 /atom/movable/screen/heatstamover
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "heatstamover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = stamina_loc
@@ -1793,7 +1797,7 @@
 
 /atom/movable/screen/mana_over
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "manaover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
@@ -1804,7 +1808,7 @@
 	icon_state = "crt"
 	name = ""
 	screen_loc = ui_backhudl
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
 	plane = HUD_PLANE
 	blend_mode = BLEND_MULTIPLY

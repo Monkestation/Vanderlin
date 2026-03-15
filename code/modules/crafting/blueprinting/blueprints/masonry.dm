@@ -1,6 +1,6 @@
 /datum/blueprint_recipe/masonry
 	abstract_type = /datum/blueprint_recipe/masonry
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	category = "Masonry"
 	construct_tool = /obj/item/weapon/hammer
 	craftsound = 'sound/foley/Building-01.ogg'

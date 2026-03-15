@@ -30,14 +30,14 @@
 	grid_height = 64
 
 /obj/item/restraints/legcuffs/beartrap/attack_hand(mob/user)
-	var/boon = user?.get_learning_boon(/datum/skill/craft/traps)
+	var/boon = user?.get_learning_boon(/datum/attribute/skill/craft/traps)
 	if(iscarbon(user) && armed && isturf(loc))
 		var/mob/living/carbon/C = user
 		var/def_zone = "[(C.active_hand_index == 2) ? "r" : "l" ]_arm"
 		var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
 		if(!BP)
 			return FALSE
-		if(C.stat_roll(STATKEY_LCK,5,10,TRUE))
+		if(C.stat_roll(STAT_FORTUNE,5,10,TRUE))
 			add_mob_blood(C)
 			if(!BP.is_object_embedded(src))
 				BP.add_embedded_object(src)
@@ -55,7 +55,7 @@
 			return FALSE
 		else
 			if(C.mind)
-				used_time -= max((C.get_skill_level(/datum/skill/craft/traps, TRUE) * 2 SECONDS), 2 SECONDS)
+				used_time -= max((GET_MOB_SKILL_VALUE_OLD(C, /datum/attribute/skill/craft/traps) * 2 SECONDS), 2 SECONDS)
 			if(do_after(user, used_time, src))
 				armed = FALSE
 				anchored = FALSE
@@ -63,7 +63,7 @@
 				src.alpha = 255
 				C.visible_message("<span class='notice'>[C] disarms \the [src].</span>", \
 						"<span class='notice'>I disarm \the [src].</span>")
-				C.adjust_experience(/datum/skill/craft/traps, C.STAINT * boon, FALSE)
+				C.adjust_experience(/datum/attribute/skill/craft/traps, GET_MOB_ATTRIBUTE_VALUE(C, STAT_INTELLIGENCE) * boon, FALSE)
 				return FALSE
 			else
 				add_mob_blood(C)
@@ -120,18 +120,18 @@
 	. = ..()
 	if(!ishuman(user) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 		return
-	var/boon = user?.get_learning_boon(/datum/skill/craft/traps)
+	var/boon = user?.get_learning_boon(/datum/attribute/skill/craft/traps)
 	if(ishuman(user) && !user.stat && !HAS_TRAIT(src, TRAIT_RESTRAINED))
 		var/mob/living/L = user
-		if(do_after(user, (5 SECONDS) - (L.STASTR*2), user))
-			if(prob(50 - makeshift_prob + (L.get_skill_level(/datum/skill/craft/traps, TRUE) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
+		if(do_after(user, (5 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH)*2), user))
+			if(prob(50 - makeshift_prob + (GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/craft/traps) * 10))) // 100% chance to set traps properly at Master trapping, assuming the trap isn't makeshift
 				armed = TRUE // Impossible to use in hand if it's armed
 				L.log_message("has armed the [src]!", LOG_ATTACK)
 				L.dropItemToGround(src) // We drop it instantly on the floor beneath us
 				anchored = TRUE // And anchor it so that it can't be carried inside chests (prevents exploit)
 				update_appearance(UPDATE_ICON_STATE)
 				src.alpha = 80 // Set lower visibility for everyone
-				L.adjust_experience(/datum/skill/craft/traps, L.STAINT * boon, FALSE) // We learn how to set them better, little by little.
+				L.adjust_experience(/datum/attribute/skill/craft/traps, GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) * boon, FALSE) // We learn how to set them better, little by little.
 				to_chat(user, span_notice("I arm \the [src]."))
 			else
 				if(old)
@@ -154,38 +154,40 @@
 /obj/item/restraints/legcuffs/beartrap/Crossed(AM as mob|obj)
 	if(armed && isturf(loc))
 		if(isliving(AM))
-			var/mob/living/L = AM
+			var/mob/living/cross_mob = AM
 			var/snap = TRUE
-			if(L.throwing)
+			if(cross_mob.throwing)
 				return ..()
 
-			if(L.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+			if(cross_mob.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+				return ..()
+			if(HAS_TRAIT(cross_mob, TRAIT_LIGHT_STEP))
 				return ..()
 
 			var/def_zone = BODY_ZONE_CHEST
-			if(snap && iscarbon(L))
-				var/mob/living/carbon/C = L
-				if(C.body_position == STANDING_UP)
+			if(snap && iscarbon(cross_mob))
+				var/mob/living/carbon/carbon_mob = cross_mob
+				if(carbon_mob.body_position == STANDING_UP)
 					def_zone = pick(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
-					var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
+					var/obj/item/bodypart/BP = carbon_mob.get_bodypart(def_zone)
 					if(BP)
-						add_mob_blood(C)
+						add_mob_blood(carbon_mob)
 						if(!BP.is_object_embedded(src))
 							BP.add_embedded_object(src)
-						C.emote("agony")
+						carbon_mob.emote("agony")
 				//BP.set_disabled(BODYPART_DISABLED_WOUND)
 				// BP.add_wound(/datum/wound/fracture)
-			else if(snap && isanimal(L))
-				var/mob/living/simple_animal/SA = L
+			else if(snap && isanimal(cross_mob))
+				var/mob/living/simple_animal/SA = cross_mob
 				if(SA.mob_size <= MOB_SIZE_TINY) //don't close the trap if they're as small as a mouse.
 					snap = FALSE
 			if(snap)
-				close_trap(L)
-				L.visible_message(span_danger("[L] triggers \the [src]."), \
+				close_trap(cross_mob)
+				cross_mob.visible_message(span_danger("[cross_mob] triggers \the [src]."), \
 						span_danger("I trigger \the [src]!"))
-				if(L.apply_damage(trap_damage, BRUTE, def_zone, L.run_armor_check(def_zone, "stab", damage = trap_damage)))
-					L.Stun(80)
-				L.consider_ambush()
+				if(cross_mob.apply_damage(trap_damage, BRUTE, def_zone, cross_mob.run_armor_check(def_zone, "stab", damage = trap_damage)))
+					cross_mob.Stun(80)
+				cross_mob.consider_ambush()
 	..()
 
 // When craftable beartraps get added, make these the ones crafted.

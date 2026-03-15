@@ -6,7 +6,7 @@
 	var/material_quality = 0 // Quality of the bar(s) used. Accumulated per added ingot.
 	var/num_of_materials = 1 // Total number of materials used. Quality divided among them.
 	var/skill_quality = 0 // Accumulated per hit based on calculations, will decide final result.
-	var/appro_skill = /datum/skill/craft/blacksmithing // The skill that will be taken into account when crafting.
+	var/appro_skill = /datum/attribute/skill/craft/blacksmithing // The skill that will be taken into account when crafting.
 	var/atom/req_bar // The material of the ingot we need to craft.
 	var/atom/created_item // The item created when the recipe is fulfilled. Takes an object path as argument, NEVER USE A LIST.
 	var/createditem_extra = 0 // How many EXTRA units this recipe will create. At 1, this creates 2 copies.
@@ -35,7 +35,7 @@
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE, quality_score = 0)
 	var/moveup = 1
 	var/proab = 0 // Probability to not spoil the bar
-	var/skill_level = user.get_skill_level(appro_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, appro_skill)
 
 	if(progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
@@ -103,7 +103,7 @@
 	else
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
-			var/amt2raise = L.STAINT // It would be impossible to level up otherwise
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
 			var/boon = user.get_learning_boon(appro_skill)
 			if(amt2raise > 0)
 				if(!HAS_TRAIT(user, TRAIT_MALUMFIRE))

@@ -358,7 +358,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.sprite { position: absolute; background-repeat: no-repeat; cursor: pointer; }
 
 		.header-bg   { top: 5px;   left: 6px;   width: 260px; height: 52px; background-image: url('0_header_bg.png'); }
-		.preview-bg  { top: 50px;  left: 8px;   width: 99px;  height: 83px; background-image: url('charpreview_bg.png'); }
 		.body-bg     { top: 58px;  left: 110px; width: 118px; height: 75px; background-image: url('0_body_bg.png'); }
 		.voice-bg    { top: 137px; left: 2px;   width: 107px; height: 41px; background-image: url('0_voice_bg.png'); }
 		.family-bg   { top: 137px; left: 114px; width: 86px;  height: 74px; background-image: url('0_family_bg.png'); }
@@ -1704,18 +1703,37 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("loadout_item")
 					var/list/loadouts_available = list("None" = null)
 					for(var/datum/loadout_item/item as anything in GLOB.loadout_items)
-						loadouts_available[item.name] += item
-
+						var/datum/loadout_item/singleton = GLOB.loadout_items[item]
+						if(singleton.is_unlocked_for(user.client))
+							loadouts_available[item.name] = item
+						else
+							// Show it but greyed out with a hint, so players know it exists
+							var/datum/award/A = SSachievements.awards[item.required_award]
+							var/locked_name = "\[Locked\] [item.name]"
+							if(A?.name)
+								locked_name += " (Requires: [A.name]"
+								// Show progress for progress-type awards
+								if(istype(A, /datum/award/achievement/progress))
+									locked_name += " - [user.client.player_details.achievements.get_progress_string(item.required_award)]"
+								locked_name += ")"
+							loadouts_available[locked_name] = null // Maps to null so set_loadout gets nothing if somehow selected
 					var/loadout_input = browser_input_list(
 						user,
 						"Choose your character's loadout item. RMB a tree, statue or clock to collect.",
 						"Loadout",
 						loadouts_available,
-						)
-
+					)
 					var/loadout_number = href_list["loadout_number"]
-
-					set_loadout(user, loadout_number, loadouts_available[loadout_input])
+					// Re-validate on submission in case of href manipulation
+					var/datum/loadout_item/chosen = loadouts_available[loadout_input]
+					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[chosen]
+					if(!chosen || !chosen_singleton)
+						to_chat(user, span_warning("Error selecting [loadout_input] for loadout."))
+						return
+					if(!chosen_singleton.is_unlocked_for(user.client))
+						to_chat(user, span_warning("You haven't unlocked that loadout item yet."))
+						return
+					set_loadout(user, loadout_number, chosen)
 
 				if("species")
 					selected_accent = ACCENT_DEFAULT
@@ -2181,6 +2199,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					return
 
 				if("save")
+					to_chat(user, span_info("Preferences Saved."))
 					save_preferences()
 					save_character()
 					if(isnewplayer(user))
@@ -2277,6 +2296,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.skin_tone = skin_tone
 	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
+	character.underwear_color = underwear_color
 	character.undershirt = undershirt
 	character.detail = detail
 	character.socks = socks
@@ -2503,7 +2523,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (user.client.prefs.pref_species.id in job.blacklisted_species)
+	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
 	if(job.required_playtime_remaining(user.client))
 		var/list/lines = list()
 		for(var/t in job.exp_requirements)

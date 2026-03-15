@@ -87,6 +87,9 @@
 	var/list/ambush_times
 
 	var/converted_type
+
+	var/threat_region = "" // Key used to look up threat region this area belongs to
+
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
 

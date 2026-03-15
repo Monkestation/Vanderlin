@@ -422,6 +422,11 @@ em {
   color: hsl(15.5, 64.8%, 44.5%);
 }
 
+.tinywarning {
+  color: hsl(15.5, 64.8%, 44.5%);
+  font-size: 85%;
+}
+
 .alertwarning {
   color: hsl(15.5, 64.8%, 44.5%);
   font-weight: bold;
@@ -552,16 +557,6 @@ em {
   color: hsl(132.8, 93.4%, 29.6%);
 }
 
-.boldnicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-weight: bold;
-}
-
-.tinynicegreen {
-  color: hsl(132.8, 93.4%, 29.6%);
-  font-size: 85%;
-}
-
 .cult {
   color: hsl(2, 43.8%, 41.2%);
 }
@@ -674,6 +669,7 @@ em {
 
 .elf {
   font-family: Dauphin, Pterra;
+  font-size: 1.1em;
 }
 
 .dwarf {
@@ -685,29 +681,39 @@ em {
 }
 
 .hellspeak {
-  font-family: Xaphan, Pterra;
-  font-size: 110%
+  font-family: Yataghan, Pterra;
+  font-size: 0.85em;
 }
 
 .beast,
 .orc {
   font-family: "Thief by The Riddler", Pterra;
+  font-size: 1.1em;
 }
 
 .deepspeak {
   font-family: "Underwater Love", Pterra;
+  font-size: 0.8em;
 }
 
 .zalad {
   font-family: Byzantine, Pterra;
+  font-size: 0.95em;
 }
 
 .undead {
   font-family: Nosfer, Pterra;
+  font-size: 1.12em;
 }
 
-.oldpsydonic {
+.psydonic {
   font-family: "Breitkopf Fraktur", Pterra;
+  font-size: 1.22em;
+}
+
+.psydonic_old {
+  font-family: "Wernicke Schwabacher", Pterra;
+  font-size: 1.23em;
 }
 
 .gronnic {
@@ -718,28 +724,36 @@ em {
   color: hsl(111, 100%, 56%);
 }
 
-.small {
-  font-size: 90%;
-}
-
 .smaller {
   font-size: 60%;
 }
 
-.slightly_larger {
+.tiny {
+  font-size: 85%;
+}
+
+.small {
+  font-size: 90%;
+}
+
+.slightlylarger {
   font-size: 115%;
 }
 
 .big {
-  font-size: 185%;
+  font-size: 125%;
 }
 
 .reallybig {
-  font-size: 245%;
+  font-size: 135%;
+}
+
+.larger {
+  font-size: 140%;
 }
 
 .extremelybig {
-  font-size: 310%;
+  font-size: 150%;
 }
 
 .greentext {

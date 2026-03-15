@@ -171,7 +171,7 @@
 
 	var/skill_level = 0
 	if(user)
-		skill_level = user.get_skill_level(recipe.appro_skill)
+		skill_level = GET_MOB_SKILL_VALUE_OLD(user, recipe.appro_skill)
 
 	recipe.handle_creation(I, quality_score, skill_level)
 	SEND_SIGNAL(user, COMSIG_ITEM_FORGED)

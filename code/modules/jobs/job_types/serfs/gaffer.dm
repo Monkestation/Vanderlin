@@ -1,3 +1,50 @@
+/datum/attribute_holder/sheet/job/gaffer
+	attribute_variance = list(
+		/datum/attribute/skill/combat/swords = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_SPEED = 2,
+		STAT_PERCEPTION = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/bows = 50,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/traps = 10,
+		/datum/attribute/skill/labor/butchering = 50,
+		/datum/attribute/skill/labor/mathematics = 50,
+	)
+
+/datum/attribute_holder/sheet/job/gaffer/old
+	raw_attribute_list = list(
+		STAT_SPEED = 2,
+		STAT_PERCEPTION = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/crossbows = 50,
+		/datum/attribute/skill/combat/bows = 60,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/traps = 10,
+		/datum/attribute/skill/labor/butchering = 50,
+		/datum/attribute/skill/labor/mathematics = 50,
+	)
+
 /datum/job/gaffer
 	title = "Gaffer"
 	department_flag = SERFS
@@ -27,6 +74,9 @@
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/mercenary)
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/gaffer
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/gaffer/old
+
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_RANGER, EXP_TYPE_MERCENARY)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_RANGER, EXP_TYPE_MERCENARY, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
@@ -35,31 +85,6 @@
 		EXP_TYPE_RANGER = 300,
 		EXP_TYPE_MERCENARY = 120
 	)
-
-	jobstats = list(
-		STATKEY_SPD = 2,
-		STATKEY_PER = 1,
-		STATKEY_STR = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/bows = 5,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/reading = 5,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/traps = 1,
-		/datum/skill/labor/butchering = 5,
-		/datum/skill/labor/mathematics = 5,
-	)
-
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_BURDEN,
@@ -70,19 +95,6 @@
 /datum/job/gaffer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
-	spawned.adjust_skillrank(/datum/skill/combat/swords, pick(0,1), TRUE)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-
 
 /datum/outfit/gaffer
 	name = "Gaffer"

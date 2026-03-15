@@ -57,7 +57,7 @@
 	. = ..()
 	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
 	if(!can_tell)
-		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
 	if(can_tell)
 		if(poisonous)
 			. += span_warning("This truffle looks suspicious. I sense it might be poisoned.")
@@ -172,6 +172,7 @@
 		)
 
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
 	var/hangry_meter = 0
 	var/random_gender = TRUE
 	var/can_breed = TRUE
@@ -189,9 +190,6 @@
 			list(/mob/living/simple_animal/hostile/retaliate/trufflepig/piglet = 90, /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/boy = 10),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/get_sound(input)
@@ -305,6 +303,7 @@
 	name = "truffle piglet"
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	can_breed = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/Initialize()
 	. = ..()

@@ -1,6 +1,8 @@
 /datum/language/deepspeak
 	name = "Deep Speak"
 	desc = ""
+	icon_state = "fish"
+	spans = list(SPAN_DEEPSPEAK)
 	speech_verb = "blubs"
 	ask_verb = "glubs"
 	exclaim_verb = "gurgles"
@@ -13,8 +15,7 @@
 	additional_syllable_high = 1
 	default_priority = 80
 	default_priority = 80
-	icon_state = "fish"
-	spans = list(SPAN_DEEPSPEAK)
+
 	syllables = list(
 		"AA",
 		"AE",
@@ -67,4 +68,5 @@
 		"SSV",
 		"TY",
 		"ÖR",
-		"ÖSS")
+		"ÖSS",
+	)

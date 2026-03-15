@@ -1,5 +1,18 @@
 GLOBAL_LIST_EMPTY_TYPED(vampire_clans, /datum/clan)	//>:3
 
+/datum/attribute_holder/sheet/job/clan
+	attribute_variance = list(
+		STAT_STRENGTH = list(1, 2)
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/misc/athletics = list(50, 50),
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		/datum/attribute/skill/magic/blood = 20
+	)
+
 /*
 This datum stores a declarative description of clans, in order to make an instance of the clan component from this implementation in runtime
 And it also helps for the character set panel
@@ -91,6 +104,7 @@ And it also helps for the character set panel
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
 	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
+	RegisterSignal(H, COMSIG_MOB_EXAMINATE_CARBON, PROC_REF(examine_target))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -255,7 +269,7 @@ And it also helps for the character set panel
  */
 /datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -348,6 +362,15 @@ And it also helps for the character set panel
 /datum/clan/proc/on_vampire_life(mob/living/carbon/human/H)
 	H.process_vampire_life()
 
+/datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
+	if(user != examined) // no need to beat yourself up over it buddy
+		var/mob/living/carbon/human/H = examined
+		if(istype(H) && H.virginity && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
+			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_boldred("[P[THEYRE]] a virgin!"))
+	var/clan_examine = examined.get_clan_hierarchy_examine(user)
+	if(clan_examine)
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, clan_examine)
+
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
@@ -356,12 +379,8 @@ And it also helps for the character set panel
 
 	H.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 
-	H.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 5, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
-	H.change_stat(STATKEY_STR, pick(1,2))
-	H.change_stat(STATKEY_SPD, 1)
-	H.remove_stat_modifier(STATMOD_AGE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/clan)
+	H.update_age_stats(H.age, TRUE)
 	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
 	transfix.Grant(H)
 

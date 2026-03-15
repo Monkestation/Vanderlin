@@ -1,5 +1,5 @@
 /datum/artificer_recipe
-	appro_skill = /datum/skill/craft/engineering
+	appro_skill = /datum/attribute/skill/craft/engineering
 
 // --------- GENERAL -----------
 

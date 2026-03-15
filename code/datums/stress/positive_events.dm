@@ -154,12 +154,12 @@
 
 /datum/stress_event/self_fishface
 	timer = 2 MINUTES
-	stress_change = -1
+	stress_change = 0
 	desc = span_green("I don't know what others are on about, I look perfectly fine if I do say so myself.")
 
 /datum/stress_event/fellow_fishface
 	timer = 2 MINUTES
-	stress_change = -2
+	stress_change = 0
 	desc = span_green("A fellow Triton, looking good!")
 
 /datum/stress_event/eora

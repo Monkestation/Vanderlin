@@ -1314,7 +1314,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
 	..()
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
@@ -1324,7 +1324,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				new /obj/item/reagent_containers/food/snacks/chocolate_carp(loc)
 				qdel(I)
 				qdel(src)
-				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp
 	name = "le carp au chocolat"

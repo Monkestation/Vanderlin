@@ -3,6 +3,7 @@
 	level = 1
 	hover_color = "#607d65"
 	uses_integrity = TRUE
+	luminosity = 1
 
 	var/intact = 1
 
@@ -49,6 +50,21 @@
 
 	///The typepath we use for lazy fishing on turfs, to save on world init time.
 	var/fish_source
+
+	var/dynamic_lighting = TRUE
+
+	var/tmp/lighting_corners_initialised = FALSE
+
+	///List of light sources affecting this turf.
+	var/tmp/list/datum/light_source/affecting_lights
+	///Our lighting object.
+	var/tmp/atom/movable/lighting_object/lighting_object
+	var/tmp/list/datum/lighting_corner/corners
+
+	///Which directions does this turf block the vision of, taking into account both the turf's opacity and the movable opacity_sources.
+	var/directional_opacity = NONE
+	///Lazylist of movable atoms providing opacity sources.
+	var/list/atom/movable/opacity_sources
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
@@ -102,7 +118,7 @@
 		reassess_stack()
 
 	if (opacity)
-		has_opaque_atom = TRUE
+		directional_opacity = ALL_CARDINALS
 
 	if(shine)
 		make_shiny(shine)
@@ -160,7 +176,7 @@
 	. = ..()
 	if(.)
 		return
-	user.Move_Pulled(src)
+	// user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
 	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)
@@ -270,7 +286,7 @@
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
 		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
-			var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
+			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
 			if(dex_save >= 5)
 				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
 					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")
@@ -377,11 +393,6 @@
 
 	if(explosion_level && AM.ex_check(explosion_id))
 		AM.ex_act(explosion_level)
-
-	// If an opaque movable atom moves around we need to potentially update visibility.
-	if (AM.opacity)
-		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
-		reconsider_lights()
 
 /turf/open/Entered(atom/movable/AM)
 	..()

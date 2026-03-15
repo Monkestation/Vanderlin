@@ -11,6 +11,7 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
+	bypass_lastclass = TRUE
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/militia)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
@@ -51,38 +52,64 @@
 	inherit_parent_title = TRUE
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 
+/datum/attribute_holder/sheet/job/veteran/battlemaster
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/axesmaces = 50,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30
+	)
+
+/datum/attribute_holder/sheet/job/veteran/battlemaster/old
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 60,
+		/datum/attribute/skill/combat/axesmaces = 60,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30
+	)
+
 /datum/job/advclass/veteran/battlemaster
 	title = "Veteran Battlemaster"
 	tutorial = "You have served under a hundred masters, some good, some bad. You were a general once. A marshal, a captain. To some a hero, others a monster. Something of the sorts. You made strategies, tactics, new innovations of war. A thousand new ways for one man to kill another. It still keeps you up at night."
 	outfit = /datum/outfit/vet/battlemaster
 	category_tags = list(CTAG_VETERAN)
 
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 5,
-		/datum/skill/combat/axesmaces = 5,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/veteran/battlemaster
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/veteran/battlemaster/old
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -91,14 +118,6 @@
 	)
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
-
-/datum/job/advclass/veteran/battlemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
 
 /datum/outfit/vet/battlemaster
 	name = "Veteran Battlemaster"
@@ -115,52 +134,68 @@
 	belt = /obj/item/storage/belt/leather/black
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel/special = 1)
 
+/datum/attribute_holder/sheet/job/veteran/footman
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 50,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
+/datum/attribute_holder/sheet/job/veteran/footman/old
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/axesmaces = 50,
+		/datum/attribute/skill/combat/shields = 60,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 60,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
 /datum/job/advclass/veteran/footman
 	title = "Retired Footman"
 	tutorial = "You served on the fields of battle as no heroic knight steadfast in shining armor, but a mere mortal clad in whatever cheap armor coin could buy. You fought in formation as a member of a unit, and through discipline, have won numerous battles. Maybe one day you even served as the captain of your unit. You specialize in polearms and bows."
 	outfit = /datum/outfit/vet/footman
 	category_tags = list(CTAG_VETERAN)
 
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 2,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/polearms = 5,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/whipsflails = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/veteran/footman
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/veteran/footman/old
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED
 	)
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
-
-/datum/job/advclass/veteran/footman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 
 /datum/outfit/vet/footman
 	name = "Retired Footman (Veteran)"
@@ -184,40 +219,68 @@
 		/obj/item/rope/chain = 1
 	)
 
+/datum/attribute_holder/sheet/job/veteran/calvaryman
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/veteran/calvaryman/old
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/polearms = 50,
+		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 50,
+		/datum/attribute/skill/combat/whipsflails = 50,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/advclass/veteran/calvaryman
 	title = "Tarnished Knight"
 	tutorial = "You were once a member of a knightly calvary regiment, a prestigious title. You were ontop of the world, the townspeople rejoiced when you rode through their streets. Now, all you can hear is the screams of your brothers-in-arms as they fell. You specialize in mounted warfare."
 	outfit = /datum/outfit/vet/calvaryman
 	category_tags = list(CTAG_VETERAN)
 
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/veteran/calvaryman
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/veteran/calvaryman/old
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -230,13 +293,6 @@
 
 /datum/job/advclass/veteran/calvaryman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 
 	var/weapons = list("Sword + Short Bow", "Axe + Crossbow", "Spear + Shield")
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP ARMS", weapons)
@@ -270,6 +326,67 @@
 	cloak = /obj/item/clothing/cloak/half/vet
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel/special = 1)
 
+/datum/attribute_holder/sheet/job/veteran/merc
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 3,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30
+	)
+
+/datum/attribute_holder/sheet/job/veteran/merc/old
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 3,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/axesmaces = 50,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/polearms = 50,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 30
+	)
+
+/datum/attribute_holder/sheet/job/veteran/merc/zweihander
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/polearms = 10
+	)
+
+/datum/attribute_holder/sheet/job/veteran/merc/halberd
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/polearms = 10
+	)
+
 /datum/job/advclass/veteran/merc
 	title = "Retired Mercenary"
 	tutorial = "You were a sell-sword, a warrior of coin. Your pockets were never light, you always had a warm place to stay and food in your belly, but you knew that every battle could be your last. You're the last of your unit, and you can't help but regret it. You specialize in swords and polearms, or axes and polearms."
@@ -277,31 +394,8 @@
 	allowed_races = RACES_PLAYER_GRENZ
 	category_tags = list(CTAG_VETERAN)
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 3,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1,
-		STATKEY_STR = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/veteran/merc
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/veteran/merc/old
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -314,12 +408,6 @@
 
 /datum/job/advclass/veteran/merc/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-
 	var/static/list/weapons = list( \
 		"Zweihander" = /obj/item/weapon/sword/long/greatsword/zwei, \
 		"Halberd" = /obj/item/weapon/polearm/halberd \
@@ -327,13 +415,10 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title  = "TAKE UP ARMS")
 	switch(weapon_choice)
 		if("Zweihander")
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/veteran/merc/zweihander)
 		if("Halberd")
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd(get_turf(spawned)), TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/veteran/merc/halberd)
 	if(spawned.dna?.species.id == SPEC_ID_HUMEN)
 		spawned.dna.species.native_language = "Psydonic"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
@@ -355,28 +440,45 @@
 	cloak = /obj/item/clothing/cloak/half/vet
 	backpack_contents = list(/obj/item/weapon/knife/dagger/steel/special = 1)
 
+/datum/attribute_holder/sheet/job/veteran/fist
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/swimming = 30
+	)
+
+/datum/attribute_holder/sheet/job/veteran/fist/old
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/wrestling = 60,
+		/datum/attribute/skill/combat/unarmed = 60,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/swimming = 30
+	)
+
 /datum/job/advclass/veteran/fist
 	title = "Faded Brawler (Veteran)"
 	tutorial = "You needed no sword, no spear, no bow to slay your foes, your fists were enough. \
 	Enemy after enemy, beast after beast, all fell to your unrelenting might. The tales once called you a walking tempest, the one who could shatter stone and silence monsters. \
 	But time, the cruelest opponent, has weathered your body. The hands that once broke boulders now tremble to lift themselves. Still, deep within those aching bones, the old fire stirs... waiting for one last fight."
 	category_tags = list(CTAG_VETERAN)
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-		STATKEY_STR = 2,
-	)
 
-	skills = list(
-		/datum/skill/combat/wrestling = 5,
-		/datum/skill/combat/unarmed = 5,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/misc/swimming = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/veteran/fist
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/veteran/fist/old
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -403,10 +505,6 @@
 
 /datum/job/advclass/veteran/fist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-
 	spawned.select_equippable(player_client, list( \
 		"Knuckles" = /obj/item/weapon/knuckles, \
 		"Katar" = /obj/item/weapon/katar, \

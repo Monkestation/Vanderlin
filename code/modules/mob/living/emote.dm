@@ -54,6 +54,10 @@
 
 /proc/send_prayer(mob/living/follower, prayer, patron_name)
 	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
+	var/bigger = FALSE
+	if((follower.job == "Priest") || (follower.job == "Priestess"))
+		ident_string += "[SPAN_GOD_ASTRATA("(PRIEST)")]"
+		bigger = TRUE
 	if(follower.has_quirk(/datum/quirk/vice/godfearing))
 		ident_string += "[SPAN_GOD_GENERIC("(GODFEARING)")]"
 	/// Usually I hate not using spans properly, but in this case it's going to make my life easier.
@@ -61,6 +65,8 @@
 	if(patron_name in COLORFUL_PATRONS)
 		lowercase_god = ckey(patron_name)//Getting the game to correctly pull this has been the biggest pain in the butt.
 	var/message = SPAN_PRAYER_WRAPPER(span_admin("[span_prefix("PRAYER: ")][ident_string] [ADMIN_SM(follower)] [ADMIN_NRT(follower)] [ADMIN_FLW(follower)] prays: <span class='god_[lowercase_god]'>[html_encode(prayer)]</span>"))
+	if(bigger)
+		message = span_slightlylarger(message)
 	for(var/client/admin_client in GLOB.admins)
 		if(check_rights_for(admin_client, R_ADMIN))
 			to_chat(admin_client, message)
@@ -382,7 +388,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/L = user
-		if(L.get_complex_pain() > (L.STAEND * 9))
+		if(L.get_complex_pain() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
 			L.setDir(2)
 			L.SetUnconscious(200)
 		else
@@ -782,13 +788,6 @@
 		var/msg = input("Say your meditation:", "Voices in your head") as text|null
 		if(msg)
 			user.schizohelp(msg)
-
-/datum/emote/living/moan
-	key = "moan"
-	key_third_person = "moans"
-	message = "moans."
-	message_mime = "appears to moan!"
-	emote_type = EMOTE_AUDIBLE
 
 // ............... N ..................
 /datum/emote/living/nod
@@ -1257,6 +1256,7 @@
 	key_third_person = "moans"
 	message = "moans."
 	emote_type = EMOTE_AUDIBLE
+
 /datum/emote/living/zombiemoan/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(user.gender == MALE)

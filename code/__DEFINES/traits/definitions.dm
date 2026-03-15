@@ -70,6 +70,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEATHCOMA	"deathcoma"
 /// ??? should be a signal?
 #define TRAIT_SANGUINE "sanguine"
+#define TRAIT_FRESHSPAWN "freshspawn"
 /// The mob has the stasis effect.
 /// Does nothing on its own, applied via status effect.
 #define TRAIT_STASIS "in_stasis"
@@ -226,6 +227,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLUEPRINT_VISION "blueprint_vision"
 /// Used to limit healing to putrid flesh mobs
 #define TRAIT_PUTRID "Putrid"
+#define TRAIT_STUCKITEMS "stuck_items" // Prevents removing items except for hand slots
+#define TRAIT_HIGHVALUE_STUCK "highvalue_stuck" //Prevents removing items except for hand slots if it is consdiered to strong
 /// Confessed under torture, to force sign
 #define TRAIT_HAS_CONFESSED "has_confessed"
 /// Confessed for specific type of antag
@@ -246,8 +249,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IMPERCEPTIBLE "imperceptible"
 /// Reduced turf slowdown
 #define TRAIT_LONGSTRIDER "longstrider"
-/// Increased parry ability
-#define TRAIT_GUIDANCE "guidance"
 /// Dendor Path Traits
 #define TRAIT_DENDOR_GROWING "trait_dendor_growing"
 #define TRAIT_DENDOR_STINGING "trait_dendor_stinging"
@@ -328,6 +329,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEADNOSE "Dead Nose"
 #define TRAIT_STINKY "Natural Stench"
 #define TRAIT_ZJUMP "High Jumping"
+#define TRAIT_FLIP_JUMP "Flip Jumping"
 #define TRAIT_JESTERPHOBIA "Jesterphobic"
 #define TRAIT_XENOPHOBIC "Xenophobic"
 #define TRAIT_TOLERANT "Tolerant"
@@ -531,3 +533,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
+
+// genetic traits
+#define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
+#define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"

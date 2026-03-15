@@ -2,6 +2,9 @@
 	name = "roguetown"
 	icon_state = "rogue"
 
+/area/oob
+	name = "Out-Of-Bounds"
+
 /area/indoors
 	name = "indoors rt"
 	icon_state = "indoors"
@@ -67,9 +70,16 @@
 	ambush_types = list(
 				/turf/open/floor/dirt)
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/troll = 30,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 30,
-				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 60)
+				new /datum/ambush_config/pair_of_direbear = 10,
+				new /datum/ambush_config/trio_of_highwaymen = 10,
+				new /datum/ambush_config/singular_minotaur = 10,
+				new /datum/ambush_config/duo_minotaur = 5,
+				new /datum/ambush_config/solo_treasure_hunter = 15,
+				new /datum/ambush_config/duo_treasure_hunter = 2,
+				new /datum/ambush_config/medium_skeleton_party = 10,
+				new /datum/ambush_config/heavy_skeleton_party = 5,
+				)
+	threat_region = THREAT_REGION_MOUNT_DECAP
 
 /area/outdoors/mountains/decap
 	name = "mt decapitation"
@@ -77,9 +87,15 @@
 	ambush_types = list(
 				/turf/open/floor/dirt)
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/troll = 30,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 90,
-				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 20)
+				new /datum/ambush_config/pair_of_direbear = 10,
+				new /datum/ambush_config/trio_of_highwaymen = 10,
+				new /datum/ambush_config/singular_minotaur = 10,
+				new /datum/ambush_config/duo_minotaur = 5,
+				new /datum/ambush_config/solo_treasure_hunter = 15,
+				new /datum/ambush_config/duo_treasure_hunter = 2,
+				new /datum/ambush_config/medium_skeleton_party = 10,
+				new /datum/ambush_config/heavy_skeleton_party = 5,
+				)
 	background_track = 'sound/music/area/decap.ogg'
 	background_track_dusk = null
 	background_track_night = null
@@ -88,11 +104,14 @@
 	ambush_times = list("night","dawn","dusk","day")
 
 	converted_type = /area/indoors/shelter/mountains/decap
+	threat_region = THREAT_REGION_MOUNT_DECAP
+
 /area/indoors/shelter/mountains/decap
 	icon_state = "decap"
 	background_track = 'sound/music/area/decap.ogg'
 	background_track_dusk = null
 	background_track_night = null
+	threat_region = THREAT_REGION_MOUNT_DECAP
 
 /area/outdoors/basin
 	name = "town basin"
@@ -110,6 +129,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
 	converted_type = /area/indoors/shelter/basin
+	threat_region = THREAT_REGION_MOUNT_DECAP
 
 /area/outdoors/basin/Initialize()
 	. = ..()
@@ -124,6 +144,7 @@
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
+	threat_region = THREAT_REGION_MOUNT_DECAP
 
 /area/indoors/shelter/woods
 	icon_state = "woods"
@@ -156,36 +177,6 @@
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	converted_type = /area/indoors/shelter/woods
 
-/area/outdoors/bog
-	name = "the bog"
-	icon_state = "bog"
-	droning_index = DRONING_BOG_DAY
-	droning_index_night = DRONING_BOG_NIGHT
-	ambient_index = AMBIENCE_FROG
-	ambient_index_night = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/bog.ogg'
-	background_track_dusk = null
-	background_track_night = null
-	ambush_times = list("night","dawn","dusk","day")
-	ambush_types = list(
-				/turf/open/floor/dirt,
-				/turf/open/water)
-	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/bigrat = 20,
-				/mob/living/simple_animal/hostile/retaliate/spider = 80,
-				/mob/living/carbon/human/species/goblin/npc/ambush/sea = 50,
-				/mob/living/simple_animal/hostile/retaliate/troll/bog = 35)
-
-	first_time_text = "THE TERRORBOG"
-	custom_area_sound = 'sound/misc/stings/BogSting.ogg'
-	converted_type = /area/indoors/shelter/bog
-
-/area/indoors/shelter/bog
-	icon_state = "bog"
-	background_track = 'sound/music/area/bog.ogg'
-	background_track_dusk = null
-	background_track_night = null
-
 /area/outdoors/beach
 	name = "sophia's cry"
 	icon_state = "beach"
@@ -193,6 +184,14 @@
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
+
+	ambush_mobs = list(
+		/mob/living/carbon/human/species/goblin/npc/ambush/sea = 20,
+		new /datum/ambush_config/triple_deepone = 30,
+		new /datum/ambush_config/deepone_party = 20,
+	)
+
+	threat_region = THREAT_REGION_COAST
 
 /area/outdoors/eora
 	name = "eoran grove"
@@ -437,6 +436,10 @@
 	name = "lair (Inhumen)"
 	background_track = 'sound/music/area/decap.ogg'
 	first_time_text = "THE DEEP BOG"
+
+/area/indoors/shelter/bog/inhumen_camp
+	name = "lair (Inhumen) (Indoors)"
+	background_track = 'sound/music/area/decap.ogg'
 
 /area/indoors/lich
 	name = "lair (Lich)"

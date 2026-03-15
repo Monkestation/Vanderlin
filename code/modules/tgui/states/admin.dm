@@ -10,7 +10,7 @@
  * Checks if the user has specific admin permissions.
  */
 
-GLOBAL_DATUM_INIT(admin_states, /alist, alist())
+GLOBAL_ALIST_EMPTY(admin_states)
 GLOBAL_PROTECT(admin_states)
 
 /datum/ui_state/admin_state

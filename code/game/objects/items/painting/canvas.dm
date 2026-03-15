@@ -153,6 +153,7 @@
 	icon = 'icons/paint_supplies/canvas/canvas_32x32.dmi'
 	icon_state = "canvas"
 	screen_loc = "6,6"
+	mouse_drag_pointer = MOUSE_INACTIVE_POINTER
 
 	var/obj/item/canvas/host
 	var/list/modified_areas = list()
@@ -163,6 +164,9 @@
 	var/list/overlay_to_index = list()
 	var/current_overlays = 0
 
+	var/is_drawing = FALSE
+	var/last_drag_x = 0
+	var/last_drag_y = 0
 
 /atom/movable/screen/canvas/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -179,6 +183,41 @@
 	. = ..()
 	if(host.item_flags & IN_STORAGE)
 		return
+	paint_at(params, right_click = !!(LAZYACCESS(params2list(params), RIGHT_CLICK)))
+	last_drag_x = 0
+	last_drag_y = 0
+
+/atom/movable/screen/canvas/MouseMove(location, control, params)
+	. = ..()
+
+/atom/movable/screen/canvas/MouseDrag(over_object, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	if(over_object != src)
+		return
+	if(host.item_flags & IN_STORAGE)
+		return
+	paint_at(params, is_dragging =TRUE)
+
+/atom/movable/screen/canvas/proc/paint_at(params, right_click = FALSE, is_dragging = FALSE)
+	var/list/modifiers = params2list(params)
+	var/x = text2num(LAZYACCESS(modifiers, ICON_X))
+	var/y = text2num(LAZYACCESS(modifiers, ICON_Y))
+
+	if(isnull(x) || isnull(y))
+		return
+
+	y = FLOOR(y / host.canvas_divider_y, 1)
+	x = FLOOR(x / host.canvas_divider_x, 1)
+
+	if(x < 0 || y < 0 || x >= host.canvas_size_x || y >= host.canvas_size_y)
+		return
+
+	if(x == last_drag_x && y == last_drag_y)
+		return
+	if(is_dragging)
+		last_drag_x = x
+		last_drag_y = y
+
 	var/obj/item/paint_brush/brush = usr.get_active_held_item()
 	if(!istype(brush))
 		return
@@ -186,21 +225,13 @@
 	if(!current_color)
 		return
 
-	var/list/modifiers = params2list(params)
-	var/x = text2num(LAZYACCESS(modifiers, ICON_X))
-	var/y = text2num(LAZYACCESS(modifiers, ICON_Y))
-
-	y = min(FLOOR(y / host.canvas_divider_y, 1), host.canvas_size_y-1)
-	x = min(FLOOR(x / host.canvas_divider_x, 1), host.canvas_size_x-1)
-
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(right_click)
 		var/original_color = base_icon.GetPixel(x, y)
 		current_color = original_color
 		modified_areas -= "[x][y]"
 		if("[x][y]" in overlay_to_index)
 			cut_overlay(overlay_to_index["[x][y]"])
 	else
-
 		if("[x][y]" in modified_areas)
 			var/pre_merge = draw.GetPixel(x+1, y+1)
 			if(pre_merge != current_color)
@@ -213,7 +244,7 @@
 	MA.color = current_color
 	MA.pixel_x = (x) * host.canvas_divider_y
 	MA.pixel_y = (y) * host.canvas_divider_x
-	MA.layer = layer +1
+	MA.layer = layer + 1
 	MA.plane = plane
 	add_overlay(MA)
 	current_overlays++

@@ -9,6 +9,7 @@
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 
+	min_players = LOWPOP_THRESHOLD
 	weight = 10
 
 	denominator = 25

@@ -8,6 +8,28 @@
 	your mind. 'I'm not going back.'"
 	migrant_job = /datum/job/migrant/escprisoner
 
+/datum/attribute_holder/sheet/job/migrant/escprisoner
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = -1,
+		STAT_PERCEPTION = 2,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/labor/taming = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/tanning = 30,
+	)
+
 /datum/job/migrant/escprisoner
 	title = "Escaped Prisoner"
 	tutorial = "You've been rotting for years in your rotted garbs, your atrophied body wasted on the cold, moist floors of \
@@ -19,29 +41,7 @@
 	outfit = /datum/outfit/escprisoner
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
-	jobstats = list(
-		STATKEY_CON = -2,
-		STATKEY_END = -1,
-		STATKEY_PER = 2,
-		STATKEY_STR = 2,
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/labor/taming = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/tanning = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/escprisoner
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,

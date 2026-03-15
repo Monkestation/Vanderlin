@@ -40,6 +40,7 @@
 	FACTION_RATS, \
 	FACTION_ORCS, \
 	FACTION_BUMS, \
+	FACTION_VIKINGS, \
 	FACTION_MATTHIOS \
 )
 
@@ -57,6 +58,7 @@
 #define FACTION_ORCS		"Orcs"
 #define FACTION_BUMS		"Bums"
 #define FACTION_MATTHIOS	"Matthios"
+#define FACTION_VIKINGS     "Vikings"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)

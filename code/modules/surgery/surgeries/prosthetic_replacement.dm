@@ -95,7 +95,7 @@
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_R_LEG,
 	)
-	skill_used = /datum/skill/craft/engineering
+	skill_used = /datum/attribute/skill/craft/engineering
 	bodypart_status = BODYPART_ROBOTIC
 
 

@@ -10,19 +10,23 @@
 			return handcuffed
 		if(ITEM_SLOT_LEGCUFFED)
 			return legcuffed
-	return null
+		if(ITEM_SLOT_MOUTH)
+			return mouth
+		if(ITEM_SLOT_GLOVES)
+			return gloves
+		if(ITEM_SLOT_SHOES)
+			return shoes
+		if(ITEM_SLOT_BACK_R)
+			return backr
+		if(ITEM_SLOT_BACK_L)
+			return backl
+	return ..()
 
 /mob/living/carbon/get_slot_by_item(obj/item/looking_for)
 	if(looking_for == backr)
 		return ITEM_SLOT_BACK_R
 
 	if(looking_for == backl)
-		return ITEM_SLOT_BACK_L
-
-	if(backr && (looking_for in backr))
-		return ITEM_SLOT_BACK_R
-
-	if(backl && (looking_for in backl))
 		return ITEM_SLOT_BACK_L
 
 	if(looking_for == wear_mask)
@@ -102,6 +106,31 @@
 		if(ITEM_SLOT_HANDS)
 			put_in_hands(equipping)
 			update_inv_hands()
+		if(ITEM_SLOT_GLOVES)
+			if(gloves)
+				return
+			gloves = equipping
+			update_inv_gloves()
+		if(ITEM_SLOT_SHOES)
+			if(shoes)
+				return
+			shoes = equipping
+			update_inv_shoes()
+		if(ITEM_SLOT_MOUTH)
+			if(mouth)
+				return
+			mouth = equipping
+			update_inv_mouth()
+		if(ITEM_SLOT_BACK_R)
+			if(backr)
+				return
+			backr = equipping
+			update_inv_back()
+		if(ITEM_SLOT_BACK_L)
+			if(backl)
+				return
+			backl = equipping
+			update_inv_back()
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
 			if(backr)
@@ -110,7 +139,6 @@
 			if(backl && not_handled)
 				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE, !initial)) // If inital is true, item is from job datum and should be silent
 					not_handled = FALSE
-
 		else
 			not_handled = TRUE
 
