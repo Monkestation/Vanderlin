@@ -38,7 +38,7 @@
 
 /datum/outfit/mercenary/gloryhound
 	name = "Gloryhound (Mercenary)"
-	shoes = /obj/item/clothing/shoes/boots/furlinedboots
+	shoes = /obj/item/clothing/shoes/shortboots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	head = /obj/item/clothing/head/helmet/visored/sallet
 	wrists = /obj/item/clothing/wrists/bracers/leather
