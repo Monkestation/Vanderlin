@@ -9,10 +9,10 @@
 	pack_message = "This subclass has 2 loadouts with various stats, skills & equipment."
 	skills = list(
 	//Universal skills
-		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
-		/datum/skill/labor/fishing = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
+		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
 	)
 
 	pack_title = "Available archetypes"
@@ -24,21 +24,7 @@
 
 /datum/job_pack/gronn/grunt
 	name = "Leðurháls - Grunt"
-	pack_skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 1,
-	)
-	pack_stats = list(
-		STAT_KEY_STR = 2,
-		STAT_KEY_PER = 2,
-		STAT_KEY_CON = 2,
-		STAT_KEY_INT = -1,
-	)
+	pack_sheets = list(/datum/attribute_holder/sheet/job/pack/gronn/grunt)
 	pack_contents = list(
 		/obj/item/storage/backpack/satchel/black = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather = ITEM_SLOT_BELT,
@@ -60,6 +46,21 @@
 		/obj/item/weapon/scabbard/knife = 1,
 	)
 
+/datum/attribute_holder/sheet/job/pack/gronn/grunt
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 3,
+		/datum/attribute/skill/combat/shields = 2,
+		/datum/attribute/skill/combat/axesmaces = 1,
+		/datum/attribute/skill/combat/knives = 2,
+		/datum/attribute/skill/misc/athletics = 2,
+		/datum/attribute/skill/combat/wrestling = 2,
+		/datum/attribute/skill/combat/unarmed = 1,
+		/datum/attribute/stat/strength = 2,
+		/datum/attribute/stat/perception = 2,
+		/datum/attribute/stat/constitution = 2,
+		/datum/attribute/stat/intelligence = -1,
+	)
+
 /datum/job_pack/gronn/grunt/pick_pack(mob/living/carbon/human/picker)
 	. = ..()
 	picker.merctype = 1
@@ -71,20 +72,7 @@
 
 /datum/job_pack/gronn/ravager
 	name = "Skemmdarvargur - Ravager"
-	pack_skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/traps = 3,
-	)
-	pack_stats = list(
-		STAT_KEY_CON = 2,
-		STAT_KEY_SPD = 2,
-	)
+	pack_sheets = list(/datum/attribute_holder/sheet/job/pack/gronn/ravager)
 	pack_contents = list(
 		/obj/item/storage/backpack/satchel/black = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather = ITEM_SLOT_BELT,
@@ -102,6 +90,20 @@
 		/obj/item/key/mercenary = 1,
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/weapon/scabbard/knife = 1,
+	)
+
+/datum/attribute_holder/sheet/job/pack/gronn/ravager
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/axesmaces = 2,
+		/datum/attribute/skill/combat/whipsflails = 3,
+		/datum/attribute/skill/combat/shields = 3,
+		/datum/attribute/skill/combat/knives = 2,
+		/datum/attribute/skill/misc/athletics = 4,
+		/datum/attribute/skill/combat/wrestling = 3,
+		/datum/attribute/skill/combat/unarmed = 2,
+		/datum/attribute/skill/craft/traps = 3,
+		/datum/attribute/stat/constitution = 2,
+		/datum/attribute/stat/speed = 2,
 	)
 
 /datum/job_pack/gronn/ravager/pick_pack(mob/living/carbon/human/picker)
@@ -122,10 +124,9 @@
 
 	switch(choice)
 		if("Handclaws")
-			picker.clamped_adjust_skillrank(/datum/skill/combat/unarmed, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, TRUE)
-
+			picker.adjust_skill_level(/datum/attribute/skill/combat/unarmed, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, TRUE)
 		if("Dual Handaxes")
-			picker.clamped_adjust_skillrank(/datum/skill/combat/axesmaces, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, TRUE)
+			picker.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			ADD_TRAIT(picker, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 
 			//and another
@@ -151,19 +152,19 @@
 		STATKEY_SPD = -3 //SLOW AND UNWIELDY
 	)
 	skills = list(
-		/datum/skill/misc/reading = SKILL_LEVEL_NONE,
-		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_NONE,
-		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
-		/datum/skill/labor/fishing = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
-		/datum/skill/craft/sewing = SKILL_LEVEL_NONE,
-		/datum/skill/craft/cooking = SKILL_LEVEL_NONE,
-		/datum/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/attribute/skill/misc/reading = SKILL_LEVEL_NONE,
+		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/craft/crafting = SKILL_LEVEL_NONE,
+		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/labor/fishing = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN, //All of you can suck my dick they're SEAMEN
+		/datum/attribute/skill/misc/sewing = SKILL_LEVEL_NONE,
+		/datum/attribute/skill/craft/cooking = SKILL_LEVEL_NONE,
+		/datum/attribute/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN,
+		/datum/attribute/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 	)
 
 /datum/outfit/job/mercenary/gronnheavy/pre_equip(mob/living/carbon/human/H)
@@ -208,15 +209,15 @@
 		STATKEY_PER = -1
 	)
 	skills = list(
-		/datum/skill/misc/swimming = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/climbing = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
-		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
+		/datum/attribute/skill/misc/swimming = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/climbing = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/sneaking = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
+		/datum/attribute/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
+		/datum/attribute/skill/misc/reading = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
+		/datum/attribute/skill/craft/tanning = SKILL_LEVEL_NOVICE,
+		/datum/attribute/skill/magic/holy = SKILL_LEVEL_APPRENTICE,
 	)
 
 /datum/job/advclass/mercenary/shaman/after_spawn(mob/living/carbon/human/spawned, client/player_client)

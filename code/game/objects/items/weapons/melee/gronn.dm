@@ -39,10 +39,10 @@
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	melting_material = /datum/material/iron
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	grid_height = 96
 	grid_width = 32
 
