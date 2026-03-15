@@ -1,9 +1,9 @@
 /datum/action/cooldown/spell/projectile/blood_net
 	name = "Unholy Grasp"
-	desc = "Toss forth an unholy snare of blood and guts a short distance, summoned from your leftover trophies sacrificed to Graggar. Like a net, may it snare your target! You will need Viscera to use this."
+	desc = "Toss forth an unholy snare of blood and guts a short distance, summoned from your leftover trophies sacrificed to Graggar. Like a net, may it snare your target! You will need some guts to use this."
 	button_icon_state = "unholy_grasp"
 	sound = 'sound/misc/stings/generic.ogg'
-	charge_sound = 'sound/magic/charging_lightning.ogg'
+	charge_sound = 'sound/combat/flail_swing.ogg'
 
 	spell_type = SPELL_MIRACLE //it does count as one, funnily enough.
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
@@ -28,15 +28,15 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 	var/obj/item/held_item = owner.get_active_held_item()
-	if(istype(held_item, /obj/item/alch/viscera))
+	if(istype(held_item, /obj/item/organ/guts))
 		qdel(held_item)
 	else
-		to_chat(owner, "I'm missing viscera to cast this..")
+		to_chat(owner, "I'm missing some guts to cast this..")
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
 /obj/projectile/magic/unholy_grasp
-	name = "viceral organ net"
+	name = "visceral lasso"
 	icon_state = "tentacle_end"
 	nodamage = TRUE
 	range = 3 //Net, So Low range.
@@ -51,11 +51,13 @@
 
 /obj/projectile/magic/unholy_grasp/proc/ensnare(mob/living/carbon/C)		//Same code as net but with le flavor.
 	if(!C.legcuffed && C.num_legs >= 2)
-		visible_message("<span class='danger'>\The [src] ensnares [C] in vicera!</span>")
-		C.legcuffed = src
-		forceMove(C)
-		C.update_inv_legcuffed()
-		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
+		visible_message("<span class='danger'>\The [src] ensnares [C] using some guts!</span>")
+		//This now ONLY gives the debuff, the unholy grasp leg cuff was bugged and couldn't be taken off
+
+		//C.legcuffed = src
+		//forceMove(C)
+		//C.update_inv_legcuffed()
+		//SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		to_chat(C, "<span class='danger'>\The [src] ensnares you!</span>")
 		//C.Knockdown(knockdown) //We don't seems to use the knockdown, good enough tbh.
 		C.apply_status_effect(/datum/status_effect/debuff/netted)
