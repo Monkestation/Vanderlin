@@ -4884,15 +4884,6 @@
 /area/under/cavewet)
 "dpf" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/head/wizhat/witch,
-/obj/item/clothing/shirt/dress/gown/wintergown{
-	detail_color = "#231709"
-	},
-/obj/item/clothing/gloves/leather/apothecary,
-/obj/item/clothing/gloves/leather/feld,
-/obj/item/clothing/shoes/apothboots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/cloak/black_cloak,
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
@@ -14576,6 +14567,10 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"ntK" = (
+/obj/item/weapon/shovel,
+/turf/open/floor/dirt,
+/area/outdoors/bog/witch)
 "ntV" = (
 /obj/structure/flora/rock/water,
 /turf/open/water/ocean,
@@ -44648,7 +44643,7 @@ haE
 mIn
 efQ
 efQ
-rFu
+ntK
 nBT
 rFu
 eSe
