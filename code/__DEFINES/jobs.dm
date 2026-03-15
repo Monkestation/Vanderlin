@@ -183,4 +183,4 @@
 #define BITFLAG_GARRISON (1<<3)
 
 #define JOB_BOGWITCH "Bog Witch"
-#define JOB_BOGWITCH_APP "Bog Witch\'s Apprentice"
+#define JOB_BOGWITCH_APP "Bog Witch Apprentice"
