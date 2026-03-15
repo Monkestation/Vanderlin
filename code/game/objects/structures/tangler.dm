@@ -91,7 +91,7 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		var/time2mount = CLAMP((L.STASTR * 2), 1, 99)
+		var/time2mount = CLAMP((GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 2), 1, 99)
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(user != M)
 			if(prob(time2mount))

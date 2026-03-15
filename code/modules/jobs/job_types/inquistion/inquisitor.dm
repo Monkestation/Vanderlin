@@ -93,7 +93,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.get_complex_pain() / (H.STAEND * 12)) * 100
+	var/painpercent = (H.get_complex_pain() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
 	if(painpercent < 100)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
@@ -148,7 +148,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.get_complex_pain() / (H.STAEND * 12)) * 100
+	var/painpercent = (H.get_complex_pain() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
 	if(painpercent < 100)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
@@ -211,7 +211,7 @@
 
 	if(resist)
 		to_chat(src, span_boldwarning("I attempt to resist the torture!"))
-		resist_chance = (STAINT + STAEND) + 10
+		resist_chance = (GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) + 10
 		if(istype(buckled, /obj/structure/fluff/walldeco/chains))
 			resist_chance -= 15
 		if(confession_type == "antag")
@@ -231,7 +231,7 @@
 
 	// Calculate false confession chance for innocents under torture
 	if(is_innocent && !resist)
-		false_confession_chance = 100 - (STAINT + STAEND) // Low willpower = higher chance to falsely confess
+		false_confession_chance = 100 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) // Low willpower = higher chance to falsely confess
 		false_confession_chance = CLAMP(false_confession_chance, 20, 80) // Between 20-80%
 
 	if(HAS_TRAIT(src, TRAIT_TORTURED))

@@ -152,7 +152,7 @@
 			do_crit = FALSE
 
 	if(user)
-		if(user.stat_roll(STATKEY_LCK, 2, 10))
+		if(user.stat_roll(STAT_FORTUNE, 2, 10))
 			dam += 10
 		if(ispath(user.rmb_intent?.type, /datum/rmb_intent/weak))
 			do_crit = FALSE
@@ -217,7 +217,7 @@
 	if(!crit_classes)
 		return FALSE
 
-	if(user?.stat_roll(STATKEY_LCK, 2, 10))
+	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
 		dam += 10
 
 	var/used
@@ -304,7 +304,7 @@
 	if(!crit_classes)
 		return FALSE
 
-	if(user?.stat_roll(STATKEY_LCK,2,10))
+	if(user?.stat_roll(STAT_FORTUNE,2,10))
 		dam += 10
 
 	var/used
@@ -396,7 +396,7 @@
 	if(!crit_classes)
 		return FALSE
 
-	if(user?.stat_roll(STATKEY_LCK, 2, 10))
+	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
 		dam += 10
 
 	var/from_behind = FALSE

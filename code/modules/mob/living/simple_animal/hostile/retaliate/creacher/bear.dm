@@ -9,7 +9,7 @@
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
-	effectedstats = list(STATKEY_PER = -2, STATKEY_SPD = -2, STATKEY_CON = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = 10 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/staggered

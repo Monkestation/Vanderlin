@@ -112,14 +112,14 @@
 	/// Voicepack to grant to females
 	var/datum/voicepack/voicepack_f
 
-	/// Stats given to the job in the form of list(STA_X = value)
-	var/list/jobstats
+	/// Stats given to the job in the form of list(STA_X = value) DEPRECIATED DO NOT USE
+	VAR_FINAL/list/jobstats
 
 	/// Skill levels granted at roundstart.
 	/// Possibly modified by species.
-	/// Basic format is list(/datum/skill/foo = value).
-	/// Supports (/datum/skill/bar = list(value, clamp)).
-	var/list/skills
+	/// Basic format is list(/datum/attribute/skill/foo = value).
+	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
+	VAR_FINAL/list/skills
 
 	/// Associative list of skill - base multiplier to set for skill_holder
 	var/list/skill_multipliers = list()
@@ -215,6 +215,11 @@
 	var/pack_title = "JOB PACKS"
 	var/pack_message = "Choose a job pack"
 
+	var/attribute_sheet
+	var/attribute_sheet_old
+	var/attribute_sheet_child
+	var/attribute_sheet_adult
+
 /datum/job/New()
 	. = ..()
 	if(give_bank_account)
@@ -263,6 +268,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
+	if(spawned.attributes)
+		assign_attributes(spawned, player_client)
 	if(!ishuman(spawned))
 		return
 
@@ -298,12 +305,12 @@
 	if(clear_job_stats) // Reset for most non-advclasses
 		spawned.remove_stat_modifier(STATMOD_JOB)
 
-	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
+	spawned.adjust_stat_modifier(STATMOD_JOB, jobstats)
 
-	for(var/datum/skill/skill as anything in skills)
+	for(var/datum/attribute/skill/skill as anything in skills)
 		var/amount_or_list = skills[skill]
 		if(islist(amount_or_list))
-			spawned.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
+			spawned.clamped_adjust_skill_level(skill, amount_or_list[1], amount_or_list[2], TRUE)
 		else
 			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
@@ -418,6 +425,19 @@
 //Used for a special check of whether to allow a client to latejoin as this job.
 /datum/job/proc/special_check_latejoin(client/C)
 	return TRUE
+
+/datum/job/proc/assign_attributes(mob/living/spawned, client/player_client)
+	if(!ishuman(spawned))
+		return
+	var/mob/living/carbon/human/spawned_human = spawned
+	if(attribute_sheet_old && spawned_human.age == AGE_OLD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_old)
+	else if(attribute_sheet_child && spawned_human.age == AGE_CHILD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_child)
+	else if(attribute_sheet_adult && spawned_human.age == AGE_ADULT)
+		spawned_human.attributes?.add_sheet(attribute_sheet_adult)
+	else if(attribute_sheet)
+		spawned_human.attributes?.add_sheet(attribute_sheet)
 
 /datum/job/proc/GetAntagRep()
 	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]

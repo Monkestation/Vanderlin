@@ -6,20 +6,20 @@
 
 /datum/slapcraft_step/use_item/sewing
 	abstract_type = /datum/slapcraft_step/use_item/sewing
-	skill_type = /datum/skill/craft/sewing
+	skill_type = /datum/attribute/skill/misc/sewing
 
 
 /datum/slapcraft_step/use_item/carpentry
 	abstract_type = /datum/slapcraft_step/use_item/carpentry
-	skill_type = /datum/skill/craft/carpentry
+	skill_type = /datum/attribute/skill/craft/carpentry
 
 /datum/slapcraft_step/use_item/masonry
 	abstract_type = /datum/slapcraft_step/use_item/masonry
-	skill_type = /datum/skill/craft/masonry
+	skill_type = /datum/attribute/skill/craft/masonry
 
 /datum/slapcraft_step/use_item/engineering
 	abstract_type = /datum/slapcraft_step/use_item/engineering
-	skill_type = /datum/skill/craft/masonry
+	skill_type = /datum/attribute/skill/craft/masonry
 
 /datum/slapcraft_step/item
 	abstract_type = /datum/slapcraft_step/item

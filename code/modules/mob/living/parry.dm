@@ -1,3 +1,27 @@
+
+/mob/living/proc/update_parrying_penalty(incoming = PARRYING_PENALTY, duration = PARRYING_PENALTY_COOLDOWN_DURATION)
+	if(!incoming || !duration)
+		return
+	if(parrying_penalty_timer)
+		deltimer(parrying_penalty_timer)
+		parrying_penalty_timer = null
+	parrying_penalty += incoming  // Stacks additively
+	parrying_penalty_timer = addtimer(CALLBACK(src, PROC_REF(remove_parrying_penalty)), duration, TIMER_STOPPABLE)
+
+/mob/living/proc/remove_parrying_penalty()
+	parrying_penalty = 0
+	if(parrying_penalty_timer)
+		deltimer(parrying_penalty_timer)
+	parrying_penalty_timer = null
+
+/mob/living/proc/get_parrying_score(skill_used = /datum/attribute/skill/combat/unarmed, modifier = 0)
+	var/stun_penalty = 0
+	if(incapacitated())
+		stun_penalty = 4
+	if(cmode && (d_intent == INTENT_PARRY))
+		modifier += 2
+	return floor(max(0, 3 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty - parrying_penalty))
+
 /**
  * Attempt to parry an attack
  * @param datum/intent/intenty The intent used for the attack
@@ -8,22 +32,16 @@
 /mob/living/proc/attempt_parry(datum/intent/intenty, mob/living/user, prob2defend)
 	if(HAS_TRAIT(src, TRAIT_CHUNKYFINGERS))
 		return FALSE
-
 	if(intenty && !intenty.canparry)
 		return FALSE
-
 	if(incapacitated())
 		return FALSE
-
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
 		return FALSE
-
 	if(has_status_effect(/datum/status_effect/debuff/vulnerable))
 		return FALSE
-
 	if(world.time < last_parry + setparrytime && !istype(rmb_intent, /datum/rmb_intent/riposte))
 		return FALSE
-
 	last_parry = world.time
 
 	var/drained = user.defdrain
@@ -35,84 +53,98 @@
 	var/parry_data = calculate_parry_values(mainhand, offhand)
 	used_weapon = parry_data["used_weapon"]
 	weapon_parry = parry_data["weapon_parry"]
-	prob2defend += parry_data["defense_bonus"]
+	var/weapon_modifier = parry_data["defense_bonus"] // already on skill scale, no division needed
 
-	// Calculate skill modifiers
 	var/skill_data = calculate_parry_skills(user, intenty, used_weapon, weapon_parry)
 	var/defender_skill = skill_data["defender_skill"]
 	var/attacker_skill = skill_data["attacker_skill"]
-	prob2defend += skill_data["skill_modifier"]
 
-	// Apply trait and position modifiers
-	if(HAS_TRAIT(src, TRAIT_GUIDANCE))
-		prob2defend += 10
-	if(HAS_TRAIT(user, TRAIT_GUIDANCE))
-		prob2defend -= 10
+	var/skill_type = weapon_parry ? used_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
+	// weapon_modifier is already a raw skill-scale delta, divide by 6 to fit diceroll modifier range
+	// 60 max skill delta / 6 = 10 max modifier.
+	var/parry_modifier = floor(weapon_modifier / 6)
+	parry_modifier += floor(parry_data["weapon_defense_flat"] / 2) // this lets us scale stuff cleaner
+
+	if(user.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
+		parry_modifier -= 2
+
+	if(user.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/fervor))
+		parry_modifier -= 1
+
+	// Situational penalties
 	if(body_position == LYING_DOWN)
-		prob2defend *= 0.8
+		parry_modifier -= 2
 
-	// Clamp and roll
-	prob2defend = clamp(prob2defend, 5, 95)
+	var/attacker_opposition = floor(attacker_skill / 4)
+
+	// Speed penalty for fast weapons still applies
+	if(user.mind)
+		var/obj/item/master = intenty.get_master_item()
+		if(master?.wbalance > 0 && GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) > GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED))
+			var/speed_delta = GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
+			parry_modifier -= floor(speed_delta / 2)
+
+	var/parry_score = get_parrying_score(skill_type, parry_modifier - attacker_opposition)
 
 	var/attacker_dualwielding = user.dual_wielding_check()
 	var/defender_dualwielding = dual_wielding_check()
 
-	// rolls for defender
+	// Show roll info to defender
 	if(client?.prefs.showrolls)
-		var/text = "Roll to parry... [prob2defend]%"
+		var/text = "Roll to parry... (score: [parry_score])"
 		if(attacker_dualwielding)
 			if(defender_dualwielding)
-				text += " Our dual wielding cancels out!"
-			else	//If we're defending against or as a dual wielder, we roll disadv. But if we're both dual wielding it cancels out.
-				text += " Twice! Disadvantage!"
+				text += " Dual wield cancels out."
+			else
+				text += " Disadvantage! (score: [max(0, parry_score - 2)])"
 		to_chat(src, span_info("[text]"))
 
-	// Check if parry is successful
-	var/parry_status = TRUE
-	if(!prob(prob2defend))
-		parry_status = FALSE
-	if(attacker_dualwielding && !defender_dualwielding) // 2 times if dualwielding
-		if(!prob(prob2defend))
-			parry_status = FALSE
+	//disadvantage from attacker dual wielding lowers score by 2 if unmatched
+	var/effective_score = parry_score
+	if(attacker_dualwielding && !defender_dualwielding)
+		effective_score = max(0, parry_score - 2)
 
-	if(!parry_status)
-		to_chat(src, span_warning("The enemy defeated my parry!"))
-		return FALSE
+	var/roll_result = diceroll(effective_score, context = DICE_CONTEXT_PHYSICAL)
 
-	var/attacker_feedback
+	// Show attacker feedback
 	if(user.client?.prefs.showrolls && attacker_dualwielding)
-		attacker_feedback = "Attacking with advantage."
-	if((defender_dualwielding && attacker_dualwielding) || (!defender_dualwielding && !attacker_dualwielding)) //They cancel each other out
-		if(attacker_feedback)
+		var/attacker_feedback = "Attacking with advantage."
+		if(defender_dualwielding)
 			attacker_feedback += " Cancelled out!"
-	if(attacker_feedback)
 		to_chat(user, span_info("[attacker_feedback]"))
 
-	// Calculate additional drain for heavy weapons
-	var/obj/item/master = intenty.get_master_item()
-	if(master?.wbalance < 0 && user.STASTR > src.STASTR)
-		drained = drained + (master.wbalance * ((user.STASTR - src.STASTR) * -5))
+	if(roll_result == DICE_FAILURE || roll_result == DICE_CRIT_FAILURE)
+		if(roll_result == DICE_CRIT_FAILURE)
+			to_chat(src, span_warning("I completely fumbled my parry!"))
+		else
+			to_chat(src, span_warning("The enemy defeated my parry!"))
+		return FALSE
 
+	update_parrying_penalty()
+
+	//heavy weapon strength differential still applies
+	var/obj/item/master = intenty.get_master_item()
+	if(master?.wbalance < 0 && GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) > GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH))
+		drained = drained + (master.wbalance * ((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * -5))
 	drained = max(drained, 5)
 
-	// Execute the parry based on type
+	//reduce drain on exceptional parry
+	if(roll_result == DICE_CRIT_SUCCESS)
+		drained = floor(drained * 0.5)
+		to_chat(src, span_notice("A perfect parry!"))
+
 	if(weapon_parry)
 		if(do_parry(used_weapon, drained, user))
-			// Process skill experience and weapon damage
 			process_parry_aftermath(user, used_weapon, defender_skill, attacker_skill, intenty)
 			return TRUE
-
 		return FALSE
 	else
 		if(do_unarmed_parry(drained, user))
-			// Handle unarmed experience gain
 			if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
-				adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
-
+				adjust_experience(/datum/attribute/skill/combat/unarmed, max(round(GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)/2), 0), FALSE)
 			flash_fullscreen("blackflash2")
 			return TRUE
-
 		return FALSE
 
 /mob/living/proc/get_shield_block_chance()
@@ -122,7 +154,7 @@
 	if(!istype(shield))
 		return 0
 
-	var/shield_skill = max(1, get_skill_level(/datum/skill/combat/shields, TRUE))
+	var/shield_skill = max(1, GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/shields))
 
 	return shield.wdefense * shield_skill * 2
 /**
@@ -140,12 +172,13 @@
 	var/weapon_parry = FALSE
 
 	if(mainhand && mainhand.can_parry)
-		mainhand_defense += (mind ? (get_skill_level(mainhand.associated_skill, TRUE) * 20) : 20)
-		mainhand_defense += (mainhand.wdefense * 10)
+		mainhand_defense += nulltozero(GET_MOB_SKILL_VALUE(src, mainhand.associated_skill))
+		if(istype(mainhand, /obj/item/weapon/shield))
+			force_shield = TRUE
+			used_weapon = mainhand
 
 	if(offhand && offhand.can_parry)
-		offhand_defense += (mind ? (get_skill_level(offhand.associated_skill, TRUE) * 20) : 20)
-		offhand_defense += (offhand.wdefense * 10)
+		offhand_defense += nulltozero(GET_MOB_SKILL_VALUE(src, offhand.associated_skill))
 		if(istype(offhand, /obj/item/weapon/shield))
 			force_shield = TRUE
 
@@ -155,13 +188,11 @@
 		else
 			used_weapon = offhand
 			highest_defense += offhand_defense
-
 	else
 		used_weapon = offhand
 		highest_defense += offhand_defense
 
-	var/unarmed_defense = mind ? (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20) : 20
-	if(highest_defense <= unarmed_defense)
+	if(!used_weapon)
 		weapon_parry = FALSE
 	else
 		weapon_parry = TRUE
@@ -169,7 +200,8 @@
 	return list(
 		"used_weapon" = used_weapon,
 		"weapon_parry" = weapon_parry,
-		"defense_bonus" = weapon_parry ? highest_defense : (get_skill_level(/datum/skill/combat/unarmed, TRUE) * 20)
+		"defense_bonus" = weapon_parry ? highest_defense : 0,
+		"weapon_defense_flat" = weapon_parry ? used_weapon.wdefense : 0
 	)
 
 /**
@@ -183,31 +215,22 @@
 /mob/living/proc/calculate_parry_skills(mob/living/user, datum/intent/intenty, obj/item/used_weapon, weapon_parry)
 	var/defender_skill = 0
 	var/attacker_skill = 0
-	var/skill_modifier = 0
 
 	if(weapon_parry)
-		defender_skill = get_skill_level(used_weapon.associated_skill, TRUE)
+		defender_skill = GET_MOB_SKILL_VALUE(src, used_weapon.associated_skill)
 	else
-		defender_skill = get_skill_level(/datum/skill/combat/unarmed, TRUE)
+		defender_skill = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/combat/unarmed)
 
 	if(user.mind)
 		var/obj/item/master = intenty.get_master_item()
 		if(master)
-			attacker_skill = user.get_skill_level(master.associated_skill, TRUE)
-			skill_modifier -= (attacker_skill * 20)
-
-			if(master.wbalance > 0 && user.STASPD > src.STASPD)
-				skill_modifier -= ((user.STASPD - src.STASPD) * 10)
+			attacker_skill = GET_MOB_SKILL_VALUE(user, master.associated_skill)
 		else
-			attacker_skill = user.get_skill_level(/datum/skill/combat/unarmed, TRUE)
-			skill_modifier -= (attacker_skill * 20)
-
-
+			attacker_skill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/unarmed)
 
 	return list(
 		"defender_skill" = defender_skill,
-		"attacker_skill" = attacker_skill,
-		"skill_modifier" = skill_modifier
+		"attacker_skill" = attacker_skill
 	)
 
 /**
@@ -230,17 +253,17 @@
 	if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
 		if(used_weapon == get_inactive_held_item() && istype(used_weapon, /obj/item/weapon/shield))
 			var/boon = H.get_learning_boon(/obj/item/weapon/shield)
-			H.adjust_experience(/datum/skill/combat/shields, max(round(H.STAINT * boon), 0), FALSE)
+			H.adjust_experience(/datum/attribute/skill/combat/shields, max(round(GET_MOB_ATTRIBUTE_VALUE(H, STAT_INTELLIGENCE) * boon), 0), FALSE)
 		else
-			H.adjust_experience(used_weapon.associated_skill, max(round(H.STAINT/2), 0), FALSE)
+			H.adjust_experience(used_weapon.associated_skill, max(round(GET_MOB_ATTRIBUTE_VALUE(H, STAT_INTELLIGENCE)/2), 0), FALSE)
 
 	// Attacker skill gain
 	var/obj/item/AB = intenty.get_master_item()
 	if((U.body_position != LYING_DOWN) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
 		if(AB)
-			U.adjust_experience(AB.associated_skill, max(round(U.STAINT/2), 0), FALSE)
+			U.adjust_experience(AB.associated_skill, max(round(GET_MOB_ATTRIBUTE_VALUE(U, STAT_INTELLIGENCE)/2), 0), FALSE)
 		else
-			U.adjust_experience(/datum/skill/combat/unarmed, max(round(U.STAINT/2), 0), FALSE)
+			U.adjust_experience(/datum/attribute/skill/combat/unarmed, max(round(GET_MOB_ATTRIBUTE_VALUE(U, STAT_INTELLIGENCE)/2), 0), FALSE)
 
 	var/obj/effect/temp_visual/dir_setting/block/blk = new(get_turf(src), get_dir(H, U))
 	blk.icon_state = "p[U.used_intent.animname]"

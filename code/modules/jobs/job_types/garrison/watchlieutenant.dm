@@ -1,3 +1,44 @@
+/datum/attribute_holder/sheet/job/lieutenant
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
+/datum/attribute_holder/sheet/job/lieutenant/flail
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(20, 30)
+	)
+
+/datum/attribute_holder/sheet/job/lieutenant/polearm
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(20, 30)
+	)
+
+/datum/attribute_holder/sheet/job/lieutenant/sword
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 30)
+	)
+
 /datum/job/lieutenant
 	/*
 	From wikipedia:
@@ -27,30 +68,7 @@
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
 	honorary = "Lieutenant"
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/lieutenant
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -72,14 +90,14 @@
 	switch(choice)
 		if("Flail")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/wood(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 3, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/flail)
 		if("Spear")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 3, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BACK_L, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
 
 /datum/outfit/lieutenant
 	name = "City Watch Lieutenant"

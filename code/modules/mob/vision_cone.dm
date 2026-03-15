@@ -249,7 +249,7 @@
 		if(H.wear_mask)
 			if(H.wear_mask.block2add)
 				fovangle |= H.wear_mask.block2add
-		if(H.STAPER < 5)
+		if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_PERCEPTION) < 5)
 			fovangle |= FOV_LEFT
 			fovangle |= FOV_RIGHT
 		else

@@ -539,15 +539,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 
 /datum/status_effect/buff/murkwine
-	id = "murkwine"
+	id = "Murk-Knowledge"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/drunkmurk
-	effectedstats = list(STATKEY_INT = 5)
+	effectedstats = list(STAT_INTELLIGENCE = 5)
 	duration = 2 MINUTES
 
 /datum/status_effect/buff/nocshine
-	id = "nocshine"
+	id = "Noc-Shine Strength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/drunknoc
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 1)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 1)
 	duration = 2 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/drunkmurk

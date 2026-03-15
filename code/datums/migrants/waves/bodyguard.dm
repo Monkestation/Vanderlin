@@ -6,6 +6,22 @@
 	avoid working with any guilds."
 	migrant_job = /datum/job/migrant/bodyguard
 
+/datum/attribute_holder/sheet/job/migrant/bodyguard
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+	)
+
+
 /datum/job/migrant/bodyguard
 	title = "Bodyguard"
 	tutorial = "Many adventurers decide to strike it rich by raiding tombs, others band together to form mercenary companies. \
@@ -16,22 +32,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 3,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/bodyguard
 
 	traits = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'

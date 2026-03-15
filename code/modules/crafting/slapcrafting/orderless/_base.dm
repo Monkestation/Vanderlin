@@ -13,7 +13,7 @@
 	///Keep null if you don't want the hosted_source to be deleted at the end of the recipe
 	var/obj/item/output_item
 	var/obj/item/hosted_source
-	var/datum/skill/related_skill
+	var/datum/attribute/skill/related_skill
 	var/skill_xp_gained
 	var/action_time = 3 SECONDS
 	var/process_sound = 'sound/foley/dropsound/food_drop.ogg'
@@ -124,7 +124,7 @@
 
 /datum/orderless_slapcraft/proc/try_finish(mob/user)
 	user.adjust_experience(related_skill, skill_xp_gained)
-	if(related_skill == /datum/skill/craft/cooking)
+	if(related_skill == /datum/attribute/skill/craft/cooking)
 		user.nobles_seen_servant_work()
 	var/turf/source_turf = get_turf(hosted_source)
 	if(output_item)

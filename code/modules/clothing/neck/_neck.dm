@@ -23,7 +23,7 @@
 	item_weight = 0.5
 
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
 	abstract_type = /obj/item/clothing/neck
 	wetable = FALSE

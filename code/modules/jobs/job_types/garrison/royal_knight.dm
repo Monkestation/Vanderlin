@@ -1,3 +1,28 @@
+/datum/attribute_holder/sheet/job/royalknight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/royalknight
 	title = "Royal Knight"
 	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
@@ -29,35 +54,9 @@
 		EXP_TYPE_COMBAT = 1200
 	)
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight
 	honorary = "Sir"
 	honorary_f = "Dame"
-
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_INT = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/mathematics = 3
-	)
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -71,6 +70,34 @@
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+/datum/attribute_holder/sheet/job/royalknight/flail
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/sabre
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/polearms
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(20, 40)
+	)
+
+/datum/attribute_holder/sheet/job/royalknight/longsword
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 40)
+	)
 
 /datum/job/advclass/royalknight
 	inherit_parent_title = TRUE
@@ -94,18 +121,17 @@
 
 	switch(choice)
 		if("Flail")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/flail)
 		if("Halberd")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/polearms)
 			grant_shield = FALSE
 		if("Longsword")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/longsword)
 			grant_shield = FALSE
 		if("Sabre")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/royalknight/sabre)
 
 	if(grant_shield)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
 		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
@@ -155,6 +181,20 @@
 	if(!helmetchoice)
 		return
 
+/datum/attribute_holder/sheet/job/royalknight/steam
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = -10,
+		/datum/attribute/skill/combat/unarmed = -10,
+		/datum/attribute/skill/combat/shields = -10,
+		/datum/attribute/skill/combat/wrestling = -10,
+		/datum/attribute/skill/combat/polearms = -10,
+		/datum/attribute/skill/combat/whipsflails = -10,
+		/datum/attribute/skill/combat/axesmaces = -10,
+		/datum/attribute/skill/combat/bows = -10,
+		/datum/attribute/skill/combat/crossbows = -10,
+		/datum/attribute/skill/craft/engineering = 30
+	)
+
 /datum/job/advclass/royalknight/steam
 	title = "Steam Knight"
 	tutorial = "The pinnacle of Vanderlin's steam technology. \
@@ -163,20 +203,8 @@
 	learning how to use it has cost you precious time \
 	you could have spent learning to use other weapons."
 	outfit = /datum/outfit/royalknight/steam
+	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight/steam
 	category_tags = list(CTAG_ROYALKNIGHT)
-
-/datum/job/advclass/royalknight/steam/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/swords, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/shields, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/polearms, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/whipsflails, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/axesmaces, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/bows, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/crossbows, -1, TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE)
 
 /datum/outfit/royalknight/steam
 	name = "Steam Knight"

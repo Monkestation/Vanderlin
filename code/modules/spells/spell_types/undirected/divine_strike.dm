@@ -6,7 +6,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/ravox)
 
 	invocation = "Ravox deems your persistence worthy!"
@@ -82,14 +82,14 @@
 /datum/status_effect/debuff/ravox_burden
 	id = "ravox_burden"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/ravox_burden
-	effectedstats = list(STATKEY_SPD = -2, STATKEY_END = -3)
+	effectedstats = list(STAT_SPEED = -2, STAT_ENDURANCE = -3)
 	duration = 12 SECONDS
 
 /datum/status_effect/debuff/ravox_burden/on_creation(mob/living/new_owner, ...)
 	. = ..()
 	if(owner.mob_biotypes & MOB_UNDEAD)
-		effectedstats[STATKEY_SPD] -= 1
-		effectedstats[STATKEY_END] -= 1
+		effectedstats[STAT_SPEED] -= 1
+		effectedstats[STAT_ENDURANCE] -= 1
 
 /atom/movable/screen/alert/status_effect/debuff/ravox_burden
 	name = "Ravox's Burden"
