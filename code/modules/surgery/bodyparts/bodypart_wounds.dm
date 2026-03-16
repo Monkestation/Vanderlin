@@ -137,16 +137,14 @@
 	return bleed_rate
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
-/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
+/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return FALSE
 
 	if(dam < 5)
 		return
 
-	var/crit_modifier = modifiers[CRIT_MOD_CHANCE]
-
-	var/do_crit = (crit_modifier <= -100) ? FALSE : TRUE
+	var/do_crit = (modifiers[CRIT_MOD_CHANCE] <= -100) ? FALSE : TRUE
 
 	if(do_crit && ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
@@ -160,7 +158,7 @@
 			do_crit = FALSE
 
 	if(do_crit)
-		var/crit_attempt = try_crit(bclass, dam, user, zone_precise, silent, crit_message, crit_modifier)
+		var/crit_attempt = try_crit(bclass, dam, user, zone_precise, silent, crit_message, modifiers)
 		if(crit_attempt)
 			return crit_attempt
 
@@ -199,7 +197,7 @@
 	return changed_wound
 
 /// Behemoth of a proc used to apply a wound after a bodypart is damaged in an attack
-/obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
+/obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	if(!bclass || !dam || (owner.status_flags & GODMODE))
 		return FALSE
 
@@ -286,7 +284,7 @@
 
 	return FALSE
 
-/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
+/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	if(!bclass || !dam || (owner.status_flags & GODMODE))
 		return FALSE
 
@@ -377,7 +375,7 @@
 
 	return FALSE
 
-/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
+/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 	var/static/list/tonguestab_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/static/list/nosestab_zones = list(BODY_ZONE_PRECISE_NOSE)

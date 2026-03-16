@@ -1894,7 +1894,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			I.take_damage(1, BRUTE, I.damage_type)
 		return TRUE
 
-	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = alist(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier))
+	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier))
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
 	if(bodypart_wound?.should_embed(I))
