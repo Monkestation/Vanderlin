@@ -1,22 +1,51 @@
+/datum/attribute_holder/sheet/job/grenzelhoft
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/shields = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
+/datum/attribute_holder/sheet/job/grenzelhoft/zwei
+	attribute_variance = list(
+		/datum/attribute/skill/combat/axesmaces = list(20, 30)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/swords = 10,
+	)
+
+/datum/attribute_holder/sheet/job/grenzelhoft/halberd
+	attribute_variance = list(
+		/datum/attribute/skill/combat/axesmaces = list(20, 30)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/polearms = 30,
+	)
+
+/datum/attribute_holder/sheet/job/grenzelhoft/musket
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/firearms = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+	)
+
 /datum/job/advclass/mercenary/grenzelhoft
 	title = "Grenzelhoft Mercenary"
 	tutorial = "A mercenary from the Grenzelhoft Empire's Mercenary Guild. Their only care is coin, and the procurement of coin."
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_AASIMAR)
 	outfit = /datum/outfit/mercenary/grenzelhoft
-	jobstats = list(STATKEY_CON = 2)
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/combat/shields = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 1,
-	)
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/grenzelhoft
+
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
 	category_tags = list(CTAG_MERCENARY)
@@ -56,23 +85,16 @@
 			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel, ITEM_SLOT_BACK_L, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/storage/belt/pouch/coins/poor, ITEM_SLOT_BELT_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
-			H.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // They need this to roll at least min STR for the Zwei.
-			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3), TRUE) // Equal chance between skilled and average, can use a cudgel to beat less dangerous targets into submission
-			H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/grenzelhoft/zwei)
 		if("Musket")
 			H.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket, ITEM_SLOT_BACK_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/ammo_holder/bullet/bullets, ITEM_SLOT_BELT_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel/musketeer, ITEM_SLOT_BACK_L, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/weapon/sword/sabre/dec, ITEM_SLOT_BELT_L, TRUE)
-			H.adjust_skillrank(/datum/skill/combat/firearms, 3, TRUE)
-			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-			if(H.age == AGE_OLD)
-				H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/grenzelhoft/musket)
 		if("Halberd")
 			H.equip_to_slot_or_del(new /obj/item/weapon/polearm/halberd, ITEM_SLOT_BACK_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel, ITEM_SLOT_BACK_L, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/storage/belt/pouch/coins/poor, ITEM_SLOT_BELT_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
-			H.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // same as zwei
-			H.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3), TRUE) // same as zwei
-			H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+			H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/grenzelhoft/halberd)

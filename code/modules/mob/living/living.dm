@@ -113,7 +113,7 @@
 		to_chat(src, span_info("You glide down to a more manageable height."))
 		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
 		return
-	var/dex_save = src.get_skill_level(/datum/skill/misc/climbing)
+	var/dex_save = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
 			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
@@ -248,8 +248,8 @@
 
 			var/mob/living/L = M
 
-			var/self_points = FLOOR((STACON + STASTR + get_skill_level(/datum/skill/misc/athletics))/2, 1)
-			var/target_points = FLOOR((L.STAEND + L.STASTR + L.get_skill_level(/datum/skill/misc/athletics))/2, 1)
+			var/self_points = FLOOR((GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) + GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics))/2, 1)
+			var/target_points = FLOOR((GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) + GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) + GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/athletics))/2, 1)
 
 			switch(sprint_distance)
 				// Point blank
@@ -310,11 +310,11 @@
 		if(!(world.time % 5))
 			var/statchance = 50
 
-			if(STASTR > L.STASTR)
-				statchance = 50 + (STASTR - L.STASTR * 10)
+			if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
+				statchance = 50 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
 
-			else if(STASTR < L.STASTR)
-				statchance = 50 - (L.STASTR - STASTR * 10)
+			else if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
+				statchance = 50 - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) * 10)
 			if(statchance < 10)
 				statchance = 10
 			if(prob(statchance))
@@ -645,7 +645,7 @@
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
 	if(pulling_broke_free && ismob(pulling))
-		var/wrestling_cooldown_reduction = 0.1 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		var/wrestling_cooldown_reduction = 0.1 SECONDS * GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
 		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
@@ -1112,8 +1112,8 @@
 
 	if(m_intent == MOVE_INTENT_RUN)
 		sprinted_tiles++
-		var/boon = get_learning_boon(/datum/skill/misc/athletics)
-		adjust_experience(/datum/skill/misc/athletics, (STAEND*0.05) * boon)
+		var/boon = get_learning_boon(/datum/attribute/skill/misc/athletics)
+		adjust_experience(/datum/attribute/skill/misc/athletics, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)*0.05) * boon)
 
 	if(wallpressed)
 		update_wallpress(T, newloc, direct)
@@ -1333,13 +1333,13 @@
 	var/my_wrestling = 0
 	var/their_wrestling = 0
 	if(mind)
-		my_wrestling = get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		my_wrestling = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
 	if(pulledby.mind)
-		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		their_wrestling = GET_MOB_SKILL_VALUE_OLD(pulledby, /datum/attribute/skill/combat/wrestling)
 
 	var/break_chance = 15 // Base chance
 	break_chance += (my_wrestling - their_wrestling)
-	break_chance += (STASTR - pulledby.STASTR) * 0.4
+	break_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(pulledby, STAT_STRENGTH)) * 0.4
 
 	// Both parties get a chance to break free
 	if(prob(break_chance))
@@ -1386,12 +1386,12 @@
 
 	var/counter_chance = 20 // Base chance
 
-	counter_chance += get_skill_level(/datum/skill/combat/wrestling, TRUE) * 4
-	counter_chance += get_skill_level(/datum/skill/combat/unarmed, TRUE) * 4
+	counter_chance += GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling) * 4
+	counter_chance += GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/unarmed) * 4
 
 	// Stat differences
-	counter_chance += (STASTR - attacker.STASTR) * 2
-	counter_chance += (STASPD - attacker.STASPD) * 1.5
+	counter_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_STRENGTH)) * 2
+	counter_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_SPEED)) * 1.5
 
 	// Positioning bonuses
 	// if(attacker.body_position == LYING_DOWN && body_position != LYING_DOWN)
@@ -1422,7 +1422,7 @@
 		apply_status_effect(/datum/status_effect/grab_counter_cd)
 
 		var/counter_type
-		if(get_skill_level(/datum/skill/combat/unarmed) >= 4)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/unarmed) >= 4)
 			counter_type = pickweight(list("knee" = 30, "elbow" = 70))
 		else
 			counter_type = pickweight(list("knee" = 60, "elbow" = 40))
@@ -1554,8 +1554,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling, TRUE))
-	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling, TRUE))
+	wrestling_diff += (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
+	wrestling_diff -= (GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -1598,7 +1598,7 @@
 		if(G.chokehold)
 			combat_modifier -= 0.1 // BUFF: Reduced chokehold penalty (was 0.15)
 
-	resist_chance += ((((STASTR - L.STASTR)/3) + wrestling_diff) * 5)
+	resist_chance += ((((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))/3) + wrestling_diff) * 5)
 	resist_chance *= combat_modifier * stamina_factor * (1/positioning_modifier)
 	resist_chance = clamp(resist_chance, 5, 95)
 
@@ -2244,39 +2244,6 @@
 		else
 			clear_fullscreen("remote_view", 0)
 
-/mob/living/vv_get_dropdown()
-	. = ..()
-	VV_DROPDOWN_OPTION("", "---------")
-	VV_DROPDOWN_OPTION(VV_HK_MODIFY_STATS, "Modify Stats")
-
-/mob/living/vv_do_topic(list/href_list)
-	. = ..()
-	if(href_list[VV_HK_MODIFY_STATS])
-		if(!check_rights(R_ADMIN))
-			return
-
-		switch(browser_alert(usr, "Add or remove?", "MODIFY STATS", list("ADD", "REMOVE")))
-			if("REMOVE")
-				if(!LAZYLEN(stat_modifiers))
-					return
-
-				var/source = browser_input_list(usr, "Source to Remove", "MODIFY STATS", stat_modifiers)
-				if(!source)
-					return
-
-				remove_stat_modifier(source)
-			if("ADD")
-				var/stat_key = browser_input_list(usr, "Stat to Add", "MODIFY STATS", MOBSTATS)
-				if(!stat_key)
-					return
-
-				var/amount = input(usr, "Stat amount", "MODIFY_STATS") as num|null
-				if(!amount)
-					return
-
-				set_stat_modifier(ADMIN_TRAIT, stat_key, amount)
-		return
-
 /mob/living/vv_edit_var(var_name, var_value)
 	switch(var_name)
 		if ("maxHealth")
@@ -2506,7 +2473,7 @@
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks around."), span_info("I look around."))
-	var/looktime = 5 SECONDS - (STAPER * 2)
+	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
 	if(do_after(src, looktime))
@@ -2517,9 +2484,9 @@
 				continue
 			if(HAS_TRAIT(M, TRAIT_IMPERCEPTIBLE)) // Check if the mob is affected by the invisibility spell
 				continue
-			var/probby = 3 * STAPER
+			var/probby = 3 * GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)
 			if(M.mind)
-				probby -= (M.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 10)
+				probby -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/sneaking) * 10)
 			probby = (max(probby, 5))
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")
@@ -2555,7 +2522,7 @@
 					accessor_trait = door.accessor_trait
 					hidden_dc = door.hidden_dc
 				var/bonuses = (HAS_TRAIT(src, TRAIT_THIEVESGUILD) || HAS_TRAIT(src, TRAIT_ASSASSIN)) ? 2 : 0
-				if(STAPER + bonuses >= hidden_dc || (accessor_trait && HAS_MIND_TRAIT(src, accessor_trait)))
+				if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) + bonuses >= hidden_dc || (accessor_trait && HAS_MIND_TRAIT(src, accessor_trait)))
 					found_ping(get_turf(O), client, "hidden")
 		for(var/obj/effect/skill_tracker/potential_track in orange(7, src)) //Can't use view because they're invisible by default.
 			if(!can_see(src, potential_track, 10))
@@ -2602,8 +2569,8 @@
 		return
 
 	var/ttime = 1 SECONDS
-	if(STAPER > 5)
-		ttime -= (STAPER - 5)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(ttime < 0)
 			ttime = 0
 
@@ -2649,8 +2616,8 @@
 		return
 	hide_cone()
 	var/ttime = 10
-	if(STAPER > 5)
-		ttime = 10 - (STAPER - 5)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		ttime = 10 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(ttime < 0)
 			ttime = 0
 	if(m_intent != MOVE_INTENT_SNEAK)
@@ -2680,8 +2647,8 @@
 	if(!OS)
 		return
 	var/ttime = 1 SECONDS
-	if(STAPER > 5)
-		ttime -= (STAPER - 5)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(ttime < 0)
 			ttime = 0
 
@@ -2786,7 +2753,7 @@
 	return TRUE
 
 /mob/living/proc/get_carry_capacity()
-	return max(45, max(STAEND, STACON) * 12)
+	return max(45, max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE), GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)) * 12)
 
 ///this is returned as decimal value between 0 and 1
 /mob/living/proc/get_encumbrance()
@@ -2794,9 +2761,6 @@
 
 /mob/living/proc/get_total_weight()
 	return 0
-
-/mob/living/proc/encumbrance_to_dodge()
-	return 1
 
 /mob/living/proc/encumbrance_to_speed()
 
@@ -2925,7 +2889,9 @@
  * * points - amount of points to grant or reduce
  * * used_points - ajust used points
 */
-/mob/living/proc/adjust_spell_points(points, used_points = FALSE)
+/mob/proc/adjust_spell_points(points, used_points = FALSE)
+
+/mob/living/adjust_spell_points(points, used_points = FALSE)
 	if(QDELETED(src))
 		return
 

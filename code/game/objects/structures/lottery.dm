@@ -101,7 +101,7 @@
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 	playsound(src, 'sound/misc/letsgogambling.ogg', 100, FALSE, -1)
 
-	gamblingprob += (user.STALUC - probpenalty)
+	gamblingprob += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - probpenalty)
 	stopgambling = 1
 	checkchatter -= 1
 

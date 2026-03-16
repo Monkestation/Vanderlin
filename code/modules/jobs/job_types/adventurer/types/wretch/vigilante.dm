@@ -1,3 +1,24 @@
+/datum/attribute_holder/sheet/job/vigilante
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 3,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = 2,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/sewing = 40,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/magic/holy = 10,
+	)
+
 /datum/job/advclass/wretch/vigilante
 	title = "Renegade"
 	tutorial = "A renegade, deserter and a gunslinger, Favoured by Matthios, You've turned your back on the black empire and Psydon alike, Now? you wander around Faience, wielding black powder, grit, and a gambler's instinct."
@@ -9,28 +30,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
 	allowed_patrons = list(/datum/patron/inhumen/matthios)
 
-	jobstats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_LCK = 2
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/sewing = 4,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/combat/firearms = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/magic/holy = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/vigilante
 
 	traits = list(
 		TRAIT_DECEIVING_MEEKNESS,

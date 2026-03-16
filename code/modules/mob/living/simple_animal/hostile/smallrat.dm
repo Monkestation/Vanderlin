@@ -96,7 +96,7 @@
 		if(!isturf(loc))
 			if(isliving(user))
 				var/mob/living/L = user
-				if(prob(L.STASPD * 1.5))
+				if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 1.5))
 					..()
 				else
 					if(item_flags & IN_STORAGE)
@@ -149,7 +149,7 @@
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user
-			if(prob(L.STASPD * 2))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 				..()
 			else
 				if(isturf(loc))

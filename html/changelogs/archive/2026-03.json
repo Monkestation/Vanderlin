@@ -354,5 +354,104 @@
                 "bugfix": "Changed references to a lot of non-canonical locations and events in item descriptions."
             }
         ]
+    },
+    "2026-03-14": {
+        "realforest2001": [
+            {
+                "bugfix": "Hopefully fixes TMs not being displayed on join."
+            },
+            {
+                "rscadd": "New Psydonic has its own language icon now."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "bugfix": "Stopped NPCs from salting in deadchat."
+            },
+            {
+                "bugfix": "Commoner prisoners no longer have noble blood again."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes the Nefarious Tan Blood"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Adds a selectable variant of the Great Hunt patron."
+            }
+        ]
+    },
+    "2026-03-15": {
+        "realforest2001": [
+            {
+                "rscadd": "Added admin only (has to be activated) Rousman migration wave."
+            },
+            {
+                "balance": "Rous no longer have lux (was meant to do this in a prior PR)."
+            },
+            {
+                "rscadd": "Added a larger cloth bag for double resources. Only 3 extra slots."
+            },
+            {
+                "rscadd": "Added a prefab cheese soup bottle."
+            },
+            {
+                "rscadd": "Added a prefab, uncraftable, yellow poncho."
+            },
+            {
+                "bugfix": "Fixed cart spawn not putting contents into the cart."
+            },
+            {
+                "rscadd": "Changed Rousmen default diety to naivety because they're dumb."
+            },
+            {
+                "map": "Split the bog area into distinct zones."
+            },
+            {
+                "bugfix": "Fixed getting patrons you shouldn't."
+            },
+            {
+                "bugfix": "Fixed light step not preventing mantraps breaking legs."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "bugfix": "Wieners can now be used in most Sausage recipes."
+            },
+            {
+                "bugfix": "Custom underwear color can be kept between rounds."
+            }
+        ],
+        "MissyNym": [
+            {
+                "map": "Added makeshift bridges leading to the eastern side of the Terrorbog"
+            },
+            {
+                "map": "Added a quick way up to the Eastern Highroad through the meeting hall in the camp, as well as a special title for getting to it."
+            },
+            {
+                "map": "Added braziers along the plank road to help indicate the northern travel point to give just a bit more hope to poor souls without a light source."
+            },
+            {
+                "rscadd": "Added areas for the eastern highroad, eastern highroad camp, and western highroad."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "code_imp": "Adjusted language spans and fonts"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscdel": "Removes Housecarl"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Exiled Warrior can choose between arming sword and duel axes"
+            }
+        ]
     }
 }

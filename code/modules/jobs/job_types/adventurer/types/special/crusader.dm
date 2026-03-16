@@ -1,3 +1,23 @@
+/datum/attribute_holder/sheet/job/crusader
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/cooking = 10
+	)
+
 /datum/job/advclass/pilgrim/rare/crusader
 	title = "Totod Order Emissary"
 	tutorial = "The Crusaders are knights who have pledged their wealth and lands to the church, \
@@ -12,27 +32,7 @@
 	roll_chance = 30
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/cooking = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/crusader
 
 	traits = list(
 		TRAIT_STEELHEARTED,
@@ -52,11 +52,11 @@
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
 	if(spawned.gender == FEMALE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 10)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 10)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/shields, 10)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()

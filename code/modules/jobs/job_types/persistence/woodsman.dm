@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/persistant/woodsman
+	attribute_variance = list(
+		STAT_STRENGTH = list(0, 1),
+		STAT_CONSTITUTION = list(0, 1),
+		STAT_ENDURANCE = list(0, 1),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/labor/lumberjacking = 40,
+		/datum/attribute/skill/craft/carpentry = 20
+	)
+
 /datum/job/persistence/woodsman
 	title = "Lumberjack"
 	tutorial = "You're a lumberjack, ensure the settlement has wood."
@@ -9,28 +31,12 @@
 	outfit = /datum/outfit/woodsman_p
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/labor/lumberjacking = 4,
-		/datum/skill/craft/carpentry = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/persistant/woodsman
 
 /datum/job/persistence/woodsman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(prob(50))
 		spawned.cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
-
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, pick(0,1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, pick(1,2))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, pick(1,2))
-
 
 /datum/outfit/woodsman_p
 	name = "Woodsman"

@@ -94,6 +94,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom =/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_cabbage
 	crafting_message = "combine some sausage and cabbage"
@@ -104,6 +105,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/cabbage_fried = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/cabbage_fried
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_cabbage
 	crafting_message = "combine some sausage and cooked cabbage"
@@ -114,6 +116,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/produce/vegetable/potato = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/vegetable/potato
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_potato
 	crafting_message = "combine some sausage and potato"
@@ -128,6 +131,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/onion_fried = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom =/obj/item/reagent_containers/food/snacks/onion_fried
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_onion
 	crafting_message = "combine some sausage and onion"

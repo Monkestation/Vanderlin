@@ -156,7 +156,7 @@
 	var/obj/item/bodypart/affecting
 	var/selzone = user.zone_selected
 	if(cmode && !accurate)
-		selzone = accuracy_check(user.zone_selected, user, src, /datum/skill/combat/wrestling, user.used_intent)
+		selzone = accuracy_check(user.zone_selected, user, src, /datum/attribute/skill/combat/wrestling, user.used_intent)
 	affecting = get_bodypart(check_zone(selzone))
 	if(selzone && affecting)
 		if(selzone in affecting.grabtargets)

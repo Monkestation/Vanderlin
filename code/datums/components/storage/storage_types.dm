@@ -74,7 +74,7 @@
 		var/atom/boots = parent
 		if(istype(attacking_item, /obj/item/weapon/knife) && ishuman(boots?.loc))
 			var/mob/living/carbon/human/unlucky = boots.loc
-			if(unlucky.shoes == parent && prob(40 - max((unlucky.STALUC * 4), 0)))
+			if(unlucky.shoes == parent && prob(40 - max((GET_MOB_ATTRIBUTE_VALUE(unlucky, STAT_FORTUNE) * 4), 0)))
 				var/cached_aim = user.zone_selected
 				user.zone_selected = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 				unlucky.attackby(attacking_item, user, modifiers)

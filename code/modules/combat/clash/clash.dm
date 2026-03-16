@@ -46,23 +46,23 @@
 	var/instantwin = FALSE
 
 	//Stat checks. Basic comparison.
-	var/strdiff = STASTR - user.STASTR
-	var/perdiff = STAPER - user.STAPER
-	var/spddiff = STASPD - user.STASPD
-	var/fordiff = STALUC - user.STALUC
-	var/intdiff = STAINT - user.STAINT
+	var/strdiff = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)
+	var/perdiff = GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
+	var/spddiff = GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED)
+	var/fordiff = GET_MOB_ATTRIBUTE_VALUE(src, STAT_FORTUNE) - GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE)
+	var/intdiff = GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE) - GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
 
 	var/list/statdiffs = list(strdiff, perdiff, spddiff, fordiff, intdiff)
 
 	//Skill check, very simple. If you're more skilled with your weapon than the opponent is with theirs -> +10% to disarm or vice-versa.
 	var/skilldiff
 	if(our_item.associated_skill)
-		skilldiff = get_skill_level(our_item.associated_skill)
+		skilldiff = GET_MOB_SKILL_VALUE_OLD(src, our_item.associated_skill)
 	else
 		instantloss = TRUE	//We are Guarding with a book or something -- no chance for us.
 
 	if(their_item.associated_skill)
-		skilldiff = skilldiff - user.get_skill_level(their_item.associated_skill)
+		skilldiff = skilldiff - GET_MOB_SKILL_VALUE_OLD(user, their_item.associated_skill)
 	else
 		instantwin = TRUE	//THEY are Guarding with a book or something -- no chance for them.
 
