@@ -53,6 +53,13 @@
 		/obj/item/weapon/knife/villager = 1
 	)
 
+/datum/outfit/mercenary/gloryhound/pre_equip(mob/living/carbon/human/H)
+	. = ..()
+	if(H.gender == FEMALE)
+		H.underwear = "Femleotard"
+		H.underwear_color = CLOTHING_SOOT_BLACK
+		H.update_body()
+
 /datum/job/advclass/mercenary/gloryhound/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/weapons = list("Sword", "Polehammer", "Mace")
