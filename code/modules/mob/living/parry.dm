@@ -1,4 +1,4 @@
-
+/*
 /mob/living/proc/update_parrying_penalty(incoming = PARRYING_PENALTY, duration = PARRYING_PENALTY_COOLDOWN_DURATION)
 	if(!incoming || !duration)
 		return
@@ -13,6 +13,7 @@
 	if(parrying_penalty_timer)
 		deltimer(parrying_penalty_timer)
 	parrying_penalty_timer = null
+*/
 
 /mob/living/proc/get_parrying_score(skill_used = /datum/attribute/skill/combat/unarmed, modifier = 0)
 	var/stun_penalty = 0
@@ -20,7 +21,7 @@
 		stun_penalty = 4
 	if(cmode && (d_intent == INTENT_PARRY))
 		modifier += 2
-	return floor(max(0, 3 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty - parrying_penalty))
+	return floor(max(0, 3 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty))
 
 /**
  * Attempt to parry an attack
