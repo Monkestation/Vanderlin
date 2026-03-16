@@ -336,9 +336,6 @@
 	SIGNAL_HANDLER
 
 	var/new_color = source.light_color
-	if(new_color == old_color)
-		return
-
 	visible_mask.color = new_color
 
 ///Toggles the light on and off.
