@@ -114,11 +114,11 @@
 			if(AC_MEDIUM)
 				dodge_speed = floor(dodge_speed * 0.5)
 				drained += 7
-				attacker_opposition += 2  // armor makes you easier to hit
+				attacker_opposition += 4  // armor makes you easier to hit
 			if(AC_HEAVY)
 				dodge_speed = floor(dodge_speed * 0.25)
 				drained += 12
-				attacker_opposition += 4  // heavy armor tanks dodge chance
+				attacker_opposition += 8  // heavy armor tanks dodge chance
 
 		var/time_since_last = world.time - last_dodge
 		if(time_since_last < 2 SECONDS)
