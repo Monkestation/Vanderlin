@@ -17,18 +17,18 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/labor/mathematics = 2,
+		/datum/skill/combat/axesmaces = 20,
+		/datum/skill/combat/shields = 20,
+		/datum/skill/combat/wrestling = 20,
+		/datum/skill/combat/unarmed = 20,
+		/datum/skill/misc/climbing = 20,
+		/datum/skill/misc/swimming = 10,
+		/datum/skill/misc/athletics = 20,
+		/datum/skill/misc/reading = 30,
+		/datum/skill/craft/cooking = 10,
+		/datum/skill/craft/sewing = 20,
+		/datum/skill/misc/medicine = 30,
+		/datum/skill/labor/mathematics = 20,
 	)
 
 	traits = list(
