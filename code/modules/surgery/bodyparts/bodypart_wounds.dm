@@ -146,7 +146,7 @@
 
 	var/do_crit = (reduce_crit >= 100) ? FALSE : TRUE
 
-	if(ishuman(owner))
+	if(do_crit && ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		if(human_owner.check_crit_armor(zone_precise, bclass))
 			do_crit = FALSE

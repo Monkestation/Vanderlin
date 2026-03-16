@@ -436,8 +436,10 @@
 	var/dullfactor = 1
 	if(!I?.force)
 		return 0
+
 	// newforce starts here and is the default amount of damage the item does.
 	var/newforce = I.force
+
 	// If this weapon has no user and is somehow attacking you just return default.
 	if(!istype(user))
 		return newforce
@@ -445,33 +447,31 @@
 	var/dullness_ratio
 	if(I.max_blade_int && I.sharpness != IS_BLUNT)
 		dullness_ratio = I.blade_int / I.max_blade_int
-	var/cont = FALSE
+
 	var/used_str = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		/*
-		* If you have a dominant hand which is assigned at
-		* character creation. You suffer a -1 Str if your
-		* no using the item in your dominant hand.
-		* Check living/carbon/carbon.dm for more info.
-		*/
 		if(C.domhand)
 			used_str = C.get_str_arms(C.used_hand)
-	//STR is +1 from STRONG stance and -1 from SWIFT stance
+
+	// Apply rmb intent modifiers
 	if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 		used_str++
-	if(istype(user.rmb_intent, /datum/rmb_intent/swift))
+	else if(istype(user.rmb_intent, /datum/rmb_intent/swift))
 		used_str--
-	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+	else if(istype(user.rmb_intent, /datum/rmb_intent/weak))
 		used_str /= 2
+
 	//Your max STR is 20.
-	used_str = CLAMP(used_str, 1, 20)
+	used_str = clamp(used_str, 1, 20)
+
 	//Vampire checks for Potence
 	if(ishuman(user))
 		var/mob/living/carbon/human/user_human = user
 		if(user_human.clan)
 			used_str += floor(0.5 * user_human.potence_weapon_buff)
 			// For each level of potence user gains 0.5 STR, at 5 Potence their STR buff is 2.5
+
 	if(used_str >= 11)
 		newforce = newforce + (newforce * ((used_str - 10) * 0.1))
 		if(dullness_ratio && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
@@ -488,8 +488,8 @@
 		if(HAS_TRAIT(I, TRAIT_WIELDED))
 			effective *= 0.75
 		//Strength influence is reduced to 30%
-		if(effective > GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH))
-			newforce = max(newforce*0.3, 1)
+		if(effective > used_str)
+			newforce = max(newforce * 0.3, 1)
 
 	//Blade Dulling Starts here.
 	switch(blade_dulling)
@@ -503,7 +503,6 @@
 					else
 						dullfactor = 0.45 + (lumberskill * 0.15)
 						lumberjacker.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(lumberjacker, STAT_INTELLIGENCE)*0.2))
-					cont = TRUE
 				if(BCLASS_CHOP)
 					//Additional damage for axes against trees.
 					if(istype(I, /obj/item/weapon))
@@ -515,51 +514,42 @@
 						dullfactor = 0.2
 					else
 						dullfactor = 1.5
-					cont = TRUE
-			if(!cont)
-				return 0
+				else
+					return 0
 		if(DULLING_BASH) //stone/metal, can't be attacked by cutting
 			switch(user.used_intent.blade_class)
 				if(BCLASS_BLUNT)
-					cont = TRUE
+					EMPTY_BLOCK_GUARD
 				if(BCLASS_SMASH)
 					dullfactor = 1.5
-					cont = TRUE
 				if(BCLASS_DRILL)
 					dullfactor = 10
-					cont = TRUE
 				if(BCLASS_PICK)
 					dullfactor = 1.5
-					cont = TRUE
-			if(!cont)
-				return 0
+				else
+					return 0
 		if(DULLING_BASHCHOP) //structures that can be attacked by clubs also (doors fences etc)
 			switch(user.used_intent.blade_class)
 				if(BCLASS_CUT)
 					if(!I.remove_bintegrity(1, user))
 						dullfactor = 0.8
-					cont = TRUE
 				if(BCLASS_CHOP)
 					if(!I.remove_bintegrity(1, user))
 						dullfactor = 0.8
 					else
 						dullfactor = 1.5
-					cont = TRUE
 				if(BCLASS_SMASH)
 					dullfactor = 1.5
-					cont = TRUE
 				if(BCLASS_DRILL)
 					dullfactor = 10
-					cont = TRUE
 				if(BCLASS_BLUNT)
-					cont = TRUE
+					EMPTY_BLOCK_GUARD
 				if(BCLASS_PICK)
 					var/mob/living/miner = user
 					var/mineskill = GET_MOB_SKILL_VALUE_OLD(miner, /datum/attribute/skill/labor/mining)
 					dullfactor = 1.6 - (mineskill * 0.1)
-					cont = TRUE
-			if(!cont)
-				return 0
+				else
+					return 0
 		if(DULLING_PICK) //cannot deal damage if not a pick item. aka rock walls
 			if(user.body_position == LYING_DOWN)
 				to_chat(user, span_warning("I need to stand up to get a proper swing."))
@@ -595,23 +585,25 @@
 			var/damflerp = (dullness_ratio - SHARPNESS_TIER2_THRESHOLD) / (SHARPNESS_TIER1_THRESHOLD - SHARPNESS_TIER2_THRESHOLD)
 			newforce *= damflerp
 			newforce = round(newforce)
+
 	if(user.used_intent.get_chargetime() && user.client?.chargedprog < 100)
 		newforce = newforce * round(user.client?.chargedprog / 100, 0.1)
-	// newforce = round(newforce, 1)
+
 	if(user.body_position == LYING_DOWN)
 		newforce *= 0.5
+
 	if(user.has_status_effect(/datum/status_effect/divine_strike))
 		newforce += 5
-	// newforce is rounded upto the nearest intiger.
-	newforce = round(newforce,1)
-	//This is returning the maximum of the arguments meaning this is to prevent negative values.
-	newforce = max(newforce, 1)
+
 	if(dullness_ratio)
 		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
 			var/lerpratio = LERP(0, SHARPNESS_TIER2_THRESHOLD, (dullness_ratio / SHARPNESS_TIER2_THRESHOLD))
 			if(prob(33))
 				to_chat(user, span_info("The blade is dull..."))
 			newforce *= (lerpratio * 2)
+
+	newforce = max(1, round(newforce, DAMAGE_PRECISION))
+
 	return newforce
 
 /mob/living/proc/simple_limb_hit(zone)
@@ -637,7 +629,7 @@
 			return "foreleg"
 	return zone
 
-/obj/item/proc/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
+/obj/item/proc/funny_attack_effects(mob/living/target, mob/living/user)
 	return
 
 /mob/living/attacked_by(obj/item/I, mob/living/user)
