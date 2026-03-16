@@ -9,7 +9,7 @@
 	category_tags= list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
-/datum/attribute_holder/sheet/job/barbarian
+/datum/attribute_holder/sheet/job/chirurgeon
 	raw_attribute_list = list(
 		STATKEY_INT = 3,
 		STATKEY_SPD = 1,
