@@ -1,3 +1,24 @@
+/datum/attribute_holder/sheet/job/hospitalier
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
 /datum/job/advclass/combat/hospitalier
 	title = "Hospitalier"
 	tutorial = "Hospitaliers are selfless individuals who take it upon \
@@ -7,27 +28,6 @@
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
-
-/datum/attribute_holder/sheet/job/hospitalier
-	raw_attribute_list = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_SPD = -1,
-		/datum/skill/combat/axesmaces = 20,
-		/datum/skill/combat/shields = 20,
-		/datum/skill/combat/wrestling = 20,
-		/datum/skill/combat/unarmed = 20,
-		/datum/skill/misc/climbing = 20,
-		/datum/skill/misc/swimming = 10,
-		/datum/skill/misc/athletics = 20,
-		/datum/skill/misc/reading = 30,
-		/datum/skill/craft/cooking = 10,
-		/datum/skill/craft/sewing = 20,
-		/datum/skill/misc/medicine = 30,
-		/datum/skill/labor/mathematics = 20,
-	)
 
 	traits = list(
 		TRAIT_DEADNOSE,
