@@ -247,6 +247,7 @@
 
 	if(!(overlay_lighting_flags & LIGHTING_ON))
 		return
+
 	make_luminosity_update()
 
 ///Called when parent changes loc.
@@ -277,6 +278,7 @@
 	check_holder()
 	if(!(overlay_lighting_flags & LIGHTING_ON) || !current_holder)
 		return
+
 	make_luminosity_update()
 
 ///Changes the range which the light reaches. 0 means no light, 9 is the maximum value.
@@ -310,48 +312,63 @@
 		make_luminosity_update()
 
 ///Changes the intensity/brightness of the light by altering the visual object's alpha.
-/datum/component/overlay_lighting/proc/set_power(atom/source, new_power)
+/datum/component/overlay_lighting/proc/set_power(atom/source, old_power)
 	SIGNAL_HANDLER
+
+	var/new_power = source.light_power
+	if(new_power == old_power)
+		return
 
 	set_lum_power(new_power >= 0 ? 0.5 : -0.5)
 	//set_alpha = min(230, (abs(new_power) * 120) + 30)
 	visible_mask.alpha = 255
 
-/datum/component/overlay_lighting/proc/set_falloff(atom/source, new_falloff)
+/datum/component/overlay_lighting/proc/set_falloff(atom/source, old_falloff)
 	SIGNAL_HANDLER
 
-	if(falloff_mod == new_falloff)
+	var/new_falloff = source.light_falloff
+	if(new_falloff == old_falloff)
 		return
 
 	falloff_mod = max(new_falloff, 1)
+
 	update_range(range)
 
 ///Changes the light's color, pretty straightforward.
-/datum/component/overlay_lighting/proc/set_color(atom/source, new_color)
+/datum/component/overlay_lighting/proc/set_color(atom/source, old_color)
 	SIGNAL_HANDLER
+
+	var/new_color = source.light_color
+	if(new_color == old_color)
+		return
 
 	visible_mask.color = new_color
 
 ///Toggles the light on and off.
-/datum/component/overlay_lighting/proc/on_toggle(atom/source, new_value)
+/datum/component/overlay_lighting/proc/on_toggle(atom/source, old_value)
 	SIGNAL_HANDLER
 
+	var/new_value = source.light_on
 	if(new_value) //Truthy value input, turn on.
 		turn_on()
 		return
+
 	turn_off() //Falsey value, turn off.
 
 ///Triggered right before the parent light flags change.
-/datum/component/overlay_lighting/proc/on_light_flags_change(atom/source, new_value)
+/datum/component/overlay_lighting/proc/on_light_flags_change(atom/source, old_flags)
 	SIGNAL_HANDLER
 
+	var/new_flags = source.light_flags
 	var/atom/movable/movable_parent = parent
-	if(new_value & LIGHT_ATTACHED)
-		if(!(movable_parent.light_flags & LIGHT_ATTACHED)) //Gained the LIGHT_ATTACHED property.
-			overlay_lighting_flags |= LIGHTING_ATTACHED
-			if(ismovable(movable_parent.loc))
-				set_parent_attached_to(movable_parent.loc)
-	else if(movable_parent.light_flags & LIGHT_ATTACHED) //Lost the LIGHT_ATTACHED property.
+	if(!((new_flags ^ old_flags) & LIGHT_ATTACHED))
+		return
+
+	if(new_flags & LIGHT_ATTACHED)
+		overlay_lighting_flags |= LIGHTING_ATTACHED
+		if(ismovable(movable_parent.loc))
+			set_parent_attached_to(movable_parent.loc)
+	else
 		overlay_lighting_flags &= ~LIGHTING_ATTACHED
 		set_parent_attached_to(null)
 
@@ -377,6 +394,7 @@
 /datum/component/overlay_lighting/proc/set_lum_power(new_lum_power)
 	if(lum_power == new_lum_power)
 		return
+
 	. = lum_power
 	lum_power = new_lum_power
 	var/difference = . - lum_power
