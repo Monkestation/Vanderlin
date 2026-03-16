@@ -8,7 +8,7 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
-/datum/attribute_holder/sheet/job/chirurgeon
+/datum/attribute_holder/sheet/job/hospitalier
 	raw_attribute_list = list(
 		STATKEY_STR = 1,
 		STATKEY_INT = 2,
