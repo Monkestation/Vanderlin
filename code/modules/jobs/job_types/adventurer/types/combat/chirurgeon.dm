@@ -9,13 +9,11 @@
 	category_tags= list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
-	jobstats = list(
+/datum/attribute_holder/sheet/job/barbarian
+	raw_attribute_list = list(
 		STATKEY_INT = 3,
 		STATKEY_SPD = 1,
 		STATKEY_STR = -2,
-	)
-
-	skills = list(
 		/datum/skill/combat/knives = 30,
 		/datum/skill/combat/wrestling = 20,
 		/datum/skill/combat/unarmed = 20,
