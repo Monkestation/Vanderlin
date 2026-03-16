@@ -642,8 +642,8 @@
 
 	apply_damage(newforce, I.damtype, def_zone = hitlim)
 
-	if(!cmode && !stat && user.rogue_sneaking && (dir == REVERSE_DIR(get_dir(src, user))))
-		var/blunt = (I.sharpness == IS_BLUNT)
+	if(!cmode && !stat && user.m_intent == MOVE_INTENT_SNEAK && (dir == REVERSE_DIR(get_dir(src, user))))
+		var/blunt = (user.used_intent.blade_class == BCLASS_BLUNT)
 		if(blunt || I.wbalance >= HARD_TO_DODGE)
 			next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
