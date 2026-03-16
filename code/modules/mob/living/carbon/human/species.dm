@@ -1870,9 +1870,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	var/crit_modifier = 0
 	if(!H.cmode && user.rogue_sneaking && H.dir == REVERSE_DIR(get_dir(H, user)))
-		var/blunt = I.sharpness == IS_BLUNT
+		var/blunt = (I.sharpness == IS_BLUNT)
 		if(blunt || I.wbalance >= HARD_TO_DODGE)
-			H.next_attack_msg += " [span_danger("SNEAK ATTACK!")]"
+			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
 			// Get extra damage as a percent of 50% extra based on skill
 			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
@@ -1894,9 +1894,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			I.take_damage(1, BRUTE, I.damage_type)
 		return TRUE
 
+	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, crit_modifier = crit_modifier)
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
-	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, crit_modifier = crit_modifier)
 	if(bodypart_wound?.should_embed(I))
 		var/can_impale = TRUE
 		if(!affecting)

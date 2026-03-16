@@ -635,37 +635,48 @@
 /mob/living/attacked_by(obj/item/I, mob/living/user)
 	var/hitlim = simple_limb_hit(user.zone_selected)
 	I.funny_attack_effects(src, user)
-	if(I.force)
-		var/newforce = get_complex_damage(I, user)
-		apply_damage(newforce, I.damtype, def_zone = hitlim)
-		if(I.damtype == BRUTE)
-			next_attack_msg.Cut()
-			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(crit_wound?.should_embed(I))
-					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
-					src.grabbedby(user, 1, item_override = I)
-			var/haha = user.used_intent.blade_class
-			if(newforce > 5)
-				if(haha != BCLASS_BLUNT)
-					I.add_mob_blood(src)
-					var/turf/location = get_turf(src)
-					add_splatter_floor(location)
-					if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
-						user.add_mob_blood(src)
-						user.adjust_hygiene(-10)
-			if(newforce > 15)
-				if(haha == BCLASS_BLUNT)
-					I.add_mob_blood(src)
-					var/turf/location = get_turf(src)
-					add_splatter_floor(location)
-					if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
-						user.add_mob_blood(src)
-						user.adjust_hygiene(-10)
+	if(!I.force)
+		return FALSE
+
+	var/newforce = get_complex_damage(I, user)
+
+	apply_damage(newforce, I.damtype, def_zone = hitlim)
+
+	if(!cmode && user.rogue_sneaking && dir == REVERSE_DIR(get_dir(src, user)))
+		var/blunt = (I.sharpness == IS_BLUNT)
+		if(blunt || I.wbalance >= HARD_TO_DODGE)
+			next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
+			var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
+			// Get extra damage as a percent of 50% extra based on skill
+			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
+			newforce += (newforce * 0.5) * percentage
+
+	if(I.damtype == BRUTE)
+		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+			var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
+			if(crit_wound?.should_embed(I))
+				// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
+				simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
+				grabbedby(user, 1, item_override = I)
+		if(newforce > 5)
+			if(user.used_intent.blade_class != BCLASS_BLUNT)
+				I.add_mob_blood(src)
+				var/turf/location = get_turf(src)
+				add_splatter_floor(location)
+				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
+					user.add_mob_blood(src)
+					user.adjust_hygiene(-10)
+		else if(newforce > 15)
+			if(user.used_intent.blade_class == BCLASS_BLUNT)
+				I.add_mob_blood(src)
+				var/turf/location = get_turf(src)
+				add_splatter_floor(location)
+				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
+					user.add_mob_blood(src)
+					user.adjust_hygiene(-10)
+
 	send_item_attack_message(I, user, hitlim)
-	if(I.force)
-		return TRUE
+	return TRUE
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
 	var/hitlim = simple_limb_hit(user.zone_selected)

@@ -220,8 +220,7 @@
 	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
 		dam += 10
 
-	var/used
-	used += crit_modifier
+	var/used = crit_modifier
 	var/damage_dividend = (get_damage() / max_damage)
 	var/list/attempted_wounds
 	switch(pick(crit_classes))
@@ -230,7 +229,7 @@
 				return
 			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -245,7 +244,7 @@
 				dam += 10
 			if(HAS_TRAIT(src, TRAIT_BRITTLE))
 				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -259,7 +258,7 @@
 					dam += 10
 				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -282,6 +281,7 @@
 			if(user?.client)
 				record_round_statistic(STATS_CRITS_MADE)
 			return applied
+
 	return FALSE
 
 /obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
@@ -307,8 +307,7 @@
 	if(user?.stat_roll(STAT_FORTUNE,2,10))
 		dam += 10
 
-	var/used
-	used += crit_modifier
+	var/used = crit_modifier
 	var/damage_dividend = (get_damage() / max_damage)
 	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	var/list/attempted_wounds
@@ -331,7 +330,7 @@
 					dam += 10
 				if(HAS_TRAIT(src, TRAIT_BRITTLE))
 					dam += 10
-				used = round(damage_dividend * 20 + (dam / 6), 1)
+				used += round(damage_dividend * 20 + (dam / 6), 1)
 				if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 					used -= 10
 				var/fracture_type = /datum/wound/fracture/chest
@@ -345,7 +344,7 @@
 				dam += 10
 			else if(user && istype(user.rmb_intent, /datum/rmb_intent/aimed))
 				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -358,7 +357,7 @@
 		if("scarring")
 			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -373,6 +372,7 @@
 			if(user?.client)
 				record_round_statistic(STATS_CRITS_MADE)
 			return applied
+
 	return FALSE
 
 /obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
@@ -404,15 +404,14 @@
 		if((owner.dir == REVERSE_DIR(get_dir(owner, user))))
 			from_behind = TRUE
 
-	var/used
-	used += crit_modifier
+	var/used = crit_modifier
 	var/damage_dividend = (get_damage() / max_damage)
 	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	var/list/attempted_wounds
 	switch(pick(crit_classes))
 		if("dislocation")
 			if(damage_dividend >= 1)
-				used = round(damage_dividend * 20 + (dam / 6), 1)
+				used += round(damage_dividend * 20 + (dam / 6), 1)
 				if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 					used -= 10
 				if(prob(used))
@@ -425,7 +424,7 @@
 				dam += 20
 			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(!owner.stat && (zone_precise in knockout_zones) && !(bclass in GLOB.no_knockout_bclasses) && prob(used))
@@ -468,7 +467,7 @@
 				else
 					if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 						dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
+			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
 			if(prob(used))
@@ -515,6 +514,7 @@
 			if(user?.client)
 				record_round_statistic(STATS_CRITS_MADE)
 			return applied
+
 	return FALSE
 
 /// Embeds an object in this bodypart
