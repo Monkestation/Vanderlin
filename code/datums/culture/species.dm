@@ -27,14 +27,17 @@
 	name = "Sea Tribes"
 	description = "Known by humens to be cruel, relentless slavers. \
 	They say the basalt sands of their home island are stained with blood. Never ask their opinions on any of the Coastal Tribes."
+	pre_append = "the "
 
 /datum/culture/species/elven/desert
 	name = "Desert Tribes"
 	description = "Known by humens to be rebellious and unruly. Assumed to be involved with the Xylixian freemen of Zaladin."
+	pre_append = "the "
 
 /datum/culture/species/elven/crimson
 	name = "Crimson Tribes"
 	description = "Known by humens to be naive and weak. How they manage to survive the harsh steppe with roaming orc bands is anyone's guess."
+	pre_append = "the "
 
 /datum/culture/species/elven/obsidian
 	name = "Obsidian Tribes"
@@ -44,6 +47,7 @@
 		SPEC_ID_ELF,
 		SPEC_ID_AASIMAR,
 	)
+	pre_append = "the "
 
 /datum/culture/species/halfling
 	name = "Hearthhill"
@@ -91,6 +95,7 @@
 	species = list(
 		SPEC_ID_RAKSHARI,
 	)
+	pre_append = "the "
 
 /datum/culture/species/rakshari/city
 	name = "City Tribes"
@@ -125,6 +130,7 @@
 	species = list(
 		SPEC_ID_KOBOLD
 	)
+	pre_append = "the "
 
 /datum/culture/species/kobold/emberhide
 	name = "Emberhide tribes"
@@ -157,14 +163,30 @@
 	species = list(
 		SPEC_ID_MEDICATOR
 	)
+	pre_append = "the "
 
 /datum/culture/species/triton
 	abstract_type = /datum/culture/species/triton
 	species = list(
 		SPEC_ID_TRITON
 	)
+	pre_append = "the "
 
-//put some triton stuff here bug - shallow/reef tribes? deep tribes? abyssal tribes?
+/datum/culture/species/triton/reef
+	name = "Reef colonies"
+	description = "Known to humens to be fond of bright colours, these triton often collect shells and other trinkets to adorn themselves and impress their allies. They perform the most ritualistic traditions of the known triton cultures."
+
+/datum/culture/species/triton/depths
+	name = "Deepwater colonies"
+	description = "Barely known to humens, these triton tend to be solitary hunters. Those who come to the surface are often paranoid, with light-sensitive eyes. This caution makes them excellent guards."
+
+/datum/culture/species/triton/abyssal
+	name = "Abyssal colonies"
+	description = "Nearly entirely unknown to humens. Those deepest in the darkest depths hear Abyssor's demands for worship, and another voice whispering beneath."
+
+/datum/culture/species/triton/shallows
+	name = "Shallow colonies"
+	description = "Known to humens as the most sociable of triton cultures, they tend to be much more open to trade, and often join ships on their journeys across the seas, saving the lives of many a sailor fallen overboard."
 
 /datum/culture/species/tiefling
 	abstract_type = /datum/culture/species/tiefling
@@ -180,18 +202,56 @@
 		SPEC_ID_AASIMAR
 	)
 
-//might change this to be just one for celestial aasimar?
+/datum/culture/species/aasimar/celestial
+	name = "Celestial origin"
+	description = "Known to humens to have appeared one dae, cast down from the heavens by the Ten. These aasimar are the most melancholy, often trying to redeem themselves in the eyes of their creator."
+
+/datum/culture/species/aasimar/grounded
+	name = "Grounded origin"
+	description = "Known to humens to be the most level-headed of aasimar, these were placed on Psydonia to serve a purpose there, and may vary in whether they have accomplished it at all, or been discarded."
+
+/datum/culture/species/aasimar/seer
+	name = "Great Tree"
+	description = "Known by humens to originate from Kingsfield, falling from the crystal leaf buds of the great petrified tree. These aasimar have no memory of what they were doing within the tree, waking within craters from their fall."
+	pre_append = "the "
 
 /datum/culture/species/dwarf
 	abstract_type = /datum/culture/species/dwarf
 	species = list(
 		SPEC_ID_DWARF
 	)
+	pre_append = "the "
 
-//TODO: Dwarf Culture
-// /datum/culture/species/dwarf/federation
+/datum/culture/species/dwarf/federation
+	name = "Dwarven Federation"
+	description = "Known to humens to be from the great dwarven clans that span the entire continent of Faience."
 
-// /datum/culture/species/dwarf/brass
+/datum/culture/species/dwarf/brass
+	name = "Brass clan"
+	description = "Known to humens to be clever inventors, these dwarves are mostly seen around the Isle of Enigma, Vanderlin, and the newly-discovered Hearthhill."
 
+/datum/culture/species/dwarf/iron
+	name = "Iron clan"
+	description = "Known to humens to be capable of incredibly skilled blacksmithing, these dwarves are mostly in the mountains of the Federation, but often travel to sell their wares and prove their skill."
+
+/datum/culture/species/dwarf/blackpowder
+	name = "Blackpowder clan"
+	description = "Known to humens as inventors of the modern firearm and explosive. They have strong ties with Grenzelhoft, especially after the rise of Zizo's hordes."
+
+/datum/culture/species/dwarf/malachite
+	name = "Malachite clan"
+	description = "Known to humens as the premier jewelers of Psydonia, these dwarves are both the primary source of dwarven wedding gems, and the makers of crowns and royal rings."
+
+/datum/culture/species/dwarf/cerargyrite
+	name = "Cerargyrite clan"
+	description = "Known to humens for their unmatched skill in enchanting, these dwarves are among the most common to see outside the Federation."
+
+/datum/culture/species/dwarf/aurum
+	name = "Aurum clan"
+	description = "Known to humens for their faith in Malum and their endless toil in brewing alcohol. Prone to bar fights. Their beers are the best in the land."
+
+/datum/culture/species/dwarf/platinum
+	name = "Platinum clan"
+	description = "Known to humens for their peerless talent as clothiers. Many monarchs strive to adorn themselves in the textiles of the Platinum dwarves."
 
 //dark elf here

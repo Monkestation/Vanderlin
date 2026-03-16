@@ -231,5 +231,53 @@
                 "rscdel": "Removed Tiefling from normal Grenzelhoft merc."
             }
         ]
+    },
+    "2026-03-08": {
+        "TerraGS": [
+            {
+                "rscadd": "Adds pre-loaded toilets"
+            },
+            {
+                "bugfix": "reagent container underlays properly update when emptied"
+            },
+            {
+                "map": "replaces many toilets with the new subtype"
+            },
+            {
+                "code_imp": "Toilets now use a storage component. Removed cistern code."
+            }
+        ],
+        "HelennaC": [
+            {
+                "map": "modified the farming area of keep"
+            },
+            {
+                "map": "modified church's door to locked"
+            },
+            {
+                "map": "removed outside candle on the third floor of the inn"
+            },
+            {
+                "map": "removed flying roof at the keep"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed issues with the martyr weapons"
+            },
+            {
+                "balance": "No super sword on 30 seconds for martyr weapons because of code restraints"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Bog is not mountains now"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added more culture selection options for individual species."
+            }
+        ]
     }
 }

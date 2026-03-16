@@ -240,13 +240,13 @@
 	name = ""
 	desc = ""
 	icon_state = "walldec1"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/structure/fluff/walldeco/church/line
 	name = ""
 	desc = ""
 	icon_state = "churchslate"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = TURF_DECAL_LAYER
 
 /obj/structure/fluff/walldeco/stone/Initialize()
@@ -257,7 +257,7 @@
 	name = "stone sigil"
 	desc = ""
 	icon_state = "maidensigil"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	dir = SOUTH
 	SET_BASE_PIXEL(0, 32)
 
@@ -455,7 +455,7 @@
 	desc = ""
 	icon = 'icons/roguetown/misc/decoration.dmi'
 	icon_state = "shadow_floor"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/shadow_floor/corner
 	icon_state = "shad_floorcorn"

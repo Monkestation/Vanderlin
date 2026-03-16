@@ -1,6 +1,8 @@
 /datum/job/advclass/combat/hospitalier
 	title = "Hospitalier"
-	tutorial = "Across all species, there are those who seek to help others.  Whether you were a goblins wars veteran, a weary traveller, a failed cleric, or an adventurous noble, you decided that saving lives was your calling in life.  Go forth, noble hero, and minister to these desperate lands."
+	tutorial = "Hospitaliers are selfless individuals who take it upon \
+	themselves to aid those in need.  With only your mace, shield and wits \
+	to keep you safe, you have set out on a journey to aid others."
 	outfit = /datum/outfit/adventurer/hospitalier
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	category_tags = list(CTAG_ADVENTURER)
@@ -15,18 +17,18 @@
 	)
 
 	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/labor/mathematics = 2,
+		/datum/skill/combat/axesmaces = 20,
+		/datum/skill/combat/shields = 20,
+		/datum/skill/combat/wrestling = 20,
+		/datum/skill/combat/unarmed = 20,
+		/datum/skill/misc/climbing = 20,
+		/datum/skill/misc/swimming = 10,
+		/datum/skill/misc/athletics = 20,
+		/datum/skill/misc/reading = 30,
+		/datum/skill/craft/cooking = 10,
+		/datum/skill/craft/sewing = 20,
+		/datum/skill/misc/medicine = 30,
+		/datum/skill/labor/mathematics = 20,
 	)
 
 	traits = list(

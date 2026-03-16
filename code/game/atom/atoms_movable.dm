@@ -112,6 +112,69 @@
 		else
 			managed_overlays = flat
 
+	if(opacity)
+		AddElement(/datum/element/light_blocking)
+
+/atom/movable/Destroy(force)
+	QDEL_NULL(language_holder)
+	QDEL_NULL(em_block)
+
+	if(mana_pool)
+		QDEL_NULL(mana_pool)
+
+	unbuckle_all_mobs(force = TRUE)
+
+	if(loc)
+		//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
+		if(((CanAtmosPass == ATMOS_PASS_DENSITY && density) || CanAtmosPass == ATMOS_PASS_NO) && isturf(loc))
+			CanAtmosPass = ATMOS_PASS_YES
+			air_update_turf(TRUE)
+
+	invisibility = INVISIBILITY_ABSTRACT
+
+	if(loc)
+		loc.handle_atom_del(src)
+
+	if(opacity)
+		RemoveElement(/datum/element/light_blocking)
+
+	if(pulledby)
+		pulledby.stop_pulling()
+
+	if(pulling)
+		stop_pulling()
+
+	if(orbiting)
+		orbiting.end_orbit(src)
+		orbiting = null
+
+	if(move_packet)
+		if(!QDELETED(move_packet))
+			qdel(move_packet)
+		move_packet = null
+
+	if(spatial_grid_key)
+		SSspatial_grid.force_remove_from_grid(src)
+
+	LAZYNULL(client_mobs_in_contents)
+
+	. = ..()
+
+	for(var/movable_content in contents)
+		qdel(movable_content)
+
+	moveToNullspace()
+
+	//This absolutely must be after moveToNullspace()
+	//We rely on Entered and Exited to manage this list, and the copy of this list that is on any /atom/movable "Containers"
+	//If we clear this before the nullspace move, a ref to this object will be hung in any of its movable containers
+	LAZYNULL(important_recursive_contents)
+
+	vis_locs = null
+
+	if(length(vis_contents))
+		vis_contents.Cut()
+
 /atom/movable/Exited(atom/movable/gone, direction)
 	. = ..()
 
@@ -460,6 +523,7 @@
 	glide_size = target
 	for(var/atom/movable/AM in buckled_mobs)
 		AM.set_glide_size(target)
+
 ////////////////////////////////////////
 // Here's where we rewrite how byond handles movement except slightly different
 // To be removed on step_ conversion
@@ -702,70 +766,6 @@
 		L.source_atom?.update_light()
 
 	return TRUE
-
-/atom/movable/Destroy(force)
-	QDEL_NULL(language_holder)
-	QDEL_NULL(em_block)
-
-	if(mana_pool)
-		QDEL_NULL(mana_pool)
-
-	unbuckle_all_mobs(force = TRUE)
-
-	if(loc)
-		//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
-		if(((CanAtmosPass == ATMOS_PASS_DENSITY && density) || CanAtmosPass == ATMOS_PASS_NO) && isturf(loc))
-			CanAtmosPass = ATMOS_PASS_YES
-			air_update_turf(TRUE)
-
-	invisibility = INVISIBILITY_ABSTRACT
-
-	if(loc)
-		loc.handle_atom_del(src)
-
-	var/turf/T = loc
-	if(opacity && istype(T))
-		var/old_has_opaque_atom = T.has_opaque_atom
-		T.recalc_atom_opacity()
-		if(old_has_opaque_atom != T.has_opaque_atom)
-			T.reconsider_lights()
-
-	if(pulledby)
-		pulledby.stop_pulling()
-
-	if(pulling)
-		stop_pulling()
-
-	if(orbiting)
-		orbiting.end_orbit(src)
-		orbiting = null
-
-	if(move_packet)
-		if(!QDELETED(move_packet))
-			qdel(move_packet)
-		move_packet = null
-
-	if(spatial_grid_key)
-		SSspatial_grid.force_remove_from_grid(src)
-
-	LAZYNULL(client_mobs_in_contents)
-
-	. = ..()
-
-	for(var/movable_content in contents)
-		qdel(movable_content)
-
-	moveToNullspace()
-
-	//This absolutely must be after moveToNullspace()
-	//We rely on Entered and Exited to manage this list, and the copy of this list that is on any /atom/movable "Containers"
-	//If we clear this before the nullspace move, a ref to this object will be hung in any of its movable containers
-	LAZYNULL(important_recursive_contents)
-
-	vis_locs = null
-
-	if(length(vis_contents))
-		vis_contents.Cut()
 
 // Make sure you know what you're doing if you call this, this is intended to only be called by byond directly.
 // You probably want CanPass()
