@@ -137,12 +137,14 @@
 	return bleed_rate
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
-/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
+/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return FALSE
 
 	if(dam < 5)
 		return
+
+	var/crit_modifier = modifiers[CRIT_MOD_CHANCE]
 
 	var/do_crit = (crit_modifier <= -100) ? FALSE : TRUE
 
@@ -197,7 +199,7 @@
 	return changed_wound
 
 /// Behemoth of a proc used to apply a wound after a bodypart is damaged in an attack
-/obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
+/obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
 	if(!bclass || !dam || (owner.status_flags & GODMODE))
 		return FALSE
 
@@ -220,7 +222,7 @@
 	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
 		dam += 10
 
-	var/used = crit_modifier
+	var/used = modifiers[CRIT_MOD_CHANCE]
 	var/damage_dividend = (get_damage() / max_damage)
 	var/list/attempted_wounds
 	switch(pick(crit_classes))
@@ -284,7 +286,7 @@
 
 	return FALSE
 
-/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
+/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
 	if(!bclass || !dam || (owner.status_flags & GODMODE))
 		return FALSE
 
@@ -307,7 +309,7 @@
 	if(user?.stat_roll(STAT_FORTUNE,2,10))
 		dam += 10
 
-	var/used = crit_modifier
+	var/used = modifiers[CRIT_MOD_CHANCE]
 	var/damage_dividend = (get_damage() / max_damage)
 	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	var/list/attempted_wounds
@@ -375,7 +377,7 @@
 
 	return FALSE
 
-/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, crit_modifier = 0)
+/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, alist/modifiers = alist())
 	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 	var/static/list/tonguestab_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/static/list/nosestab_zones = list(BODY_ZONE_PRECISE_NOSE)
@@ -404,7 +406,7 @@
 		if((owner.dir == REVERSE_DIR(get_dir(owner, user))))
 			from_behind = TRUE
 
-	var/used = crit_modifier
+	var/used = modifiers[CRIT_MOD_CHANCE]
 	var/damage_dividend = (get_damage() / max_damage)
 	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	var/list/attempted_wounds
@@ -427,14 +429,16 @@
 			used += round(damage_dividend * 20 + (dam / 6), 1)
 			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
 				used -= 10
-			if(!owner.stat && (zone_precise in knockout_zones) && !(bclass in GLOB.no_knockout_bclasses) && prob(used))
-				owner.next_attack_msg += " [span_crit("<b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!")]"
-				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(15 SECONDS + (from_behind * 15 SECONDS))
-				if(owner.client)
-					winset(owner.client, "outputwindow.output", "max-lines=1")
-					winset(owner.client, "outputwindow.output", "max-lines=100")
-				return
+			if(!owner.stat && (zone_precise in knockout_zones) && !(bclass in GLOB.no_knockout_bclasses))
+				var/knockout_chance = used + modifiers[CRIT_MOD_KNOCKOUT_CHANCE]
+				if(prob(knockout_chance))
+					owner.next_attack_msg += " [span_crit("<b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!")]"
+					owner.flash_fullscreen("whiteflash3")
+					owner.Unconscious(15 SECONDS + (from_behind * 15 SECONDS))
+					if(owner.client)
+						winset(owner.client, "outputwindow.output", "max-lines=1")
+						winset(owner.client, "outputwindow.output", "max-lines=100")
+					return
 			var/dislocation_type
 			var/fracture_type = /datum/wound/fracture/head
 			var/necessary_damage = 0.95

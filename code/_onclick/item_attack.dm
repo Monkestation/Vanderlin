@@ -642,7 +642,7 @@
 
 	apply_damage(newforce, I.damtype, def_zone = hitlim)
 
-	if(!cmode && user.rogue_sneaking && dir == REVERSE_DIR(get_dir(src, user)))
+	if(!cmode && !stat && user.rogue_sneaking && (dir == REVERSE_DIR(get_dir(src, user))))
 		var/blunt = (I.sharpness == IS_BLUNT)
 		if(blunt || I.wbalance >= HARD_TO_DODGE)
 			next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
