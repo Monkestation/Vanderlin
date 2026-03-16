@@ -317,8 +317,8 @@
 
 	var/new_power = source.light_power
 	set_lum_power(new_power >= 0 ? 0.5 : -0.5)
-	//set_alpha = min(230, (abs(new_power) * 120) + 30)
-	visible_mask.alpha = 255
+
+	visible_mask.alpha = min(230, (abs(new_power) * 120) + 30)
 
 /datum/component/overlay_lighting/proc/set_falloff(atom/source, old_falloff)
 	SIGNAL_HANDLER
