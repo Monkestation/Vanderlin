@@ -1888,7 +1888,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
 
 	if(!actual_damage)
-		H.next_attack_msg += " [span_userdanger("Armor stops the damage!")]"
+		H.next_attack_msg += " [span_danger(span_big("Armor stops the damage!"))]"
 		H.send_item_attack_message(I, user, parse_zone(selzone))
 		if(!QDELETED(I))
 			I.take_damage(1, BRUTE, I.damage_type)
