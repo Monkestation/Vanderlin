@@ -316,9 +316,6 @@
 	SIGNAL_HANDLER
 
 	var/new_power = source.light_power
-	if(new_power == old_power)
-		return
-
 	set_lum_power(new_power >= 0 ? 0.5 : -0.5)
 	//set_alpha = min(230, (abs(new_power) * 120) + 30)
 	visible_mask.alpha = 255
