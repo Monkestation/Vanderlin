@@ -85,6 +85,7 @@
 	alpha = 173
 
 /datum/reagent/medicine/gender_potion/on_mob_life(mob/living/carbon/M)
+	var/old_gender
 	if(!istype(M) || M.stat == DEAD)
 		to_chat(M, span_warning("The potion can only be used on living things!"))
 		return
@@ -92,11 +93,14 @@
 		to_chat(M, span_warning("The potion can only be used on gendered things!"))
 		return
 	if(M.gender == MALE)
+		old_gender = MALE
 		M.gender = FEMALE
 		M.visible_message(span_boldnotice("[M] suddenly looks more feminine!"), span_boldwarning("You suddenly feel more feminine!"))
 	else
+		old_gender = FEMALE
 		M.gender = MALE
 		M.visible_message(span_boldnotice("[M] suddenly looks more masculine!"), span_boldwarning("You suddenly feel more masculine!"))
+	M.dna?.species?.on_gender_update(M, old_gender)
 	M.regenerate_icons()
 	..()
 
@@ -206,7 +210,7 @@
 	taste_description = "raw meat"
 	scent_description = "sour vomit"
 
-/datum/reagent/buff/strength/on_mob_add(mob/living/carbon/M)
+/datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/strength, 4))
@@ -373,7 +377,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
 		return ..()
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
-		M.add_nausea(10 * (1 - M.STACON / 20))
+		M.add_nausea(10 * (1 - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) / 20))
 		M.adjustToxLoss(0.5)
 	if(ishuman(M) && !ishalforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
@@ -485,6 +489,10 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustToxLoss(3)
 	else
 		M.adjustToxLoss(6)
+	if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
+		M.adjustOxyLoss(1)
+	else
+		M.adjustOxyLoss(2)
 	return ..()
 
 /datum/reagent/killersice

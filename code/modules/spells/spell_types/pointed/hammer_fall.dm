@@ -7,7 +7,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/malum)
 
 	invocation = "Let the weight of Malum's hammer fall!"
@@ -68,7 +68,7 @@
 		if(shaken == owner)
 			continue
 		var/diceroll = 0
-		diceroll = roll(2,20) + shaken.STAPER + shaken.STASPD
+		diceroll = roll(2,20) + GET_MOB_ATTRIBUTE_VALUE(shaken, STAT_PERCEPTION) + GET_MOB_ATTRIBUTE_VALUE(shaken, STAT_SPEED)
 		if (diceroll > dc)
 			shaken.Immobilize(1 SECONDS)
 			to_chat(shaken, span_notice("The ground quakes but I manage to keep my footing."))

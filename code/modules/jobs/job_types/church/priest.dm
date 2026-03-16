@@ -1,3 +1,47 @@
+/datum/attribute_holder/sheet/job/priest
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/magic/holy = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/priest/old
+	raw_attribute_list = list(
+		 STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/magic/holy = 50,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+#define PRIEST_ADD_PENANCE "Assign Penance"
+#define PRIEST_REMOVE_PENANCE "Absolve Penance"
+#define PRIEST_EXCOMMUNICATE "Excommunicate"
+#define PRIEST_CORONATE "Coronate"
+#define PRIEST_ANNOUNCE "Announcement"
+#define PRIEST_CURSE "Curse"
+
 /datum/job/priest
 	title = "Priest"
 	f_title = "Priestess"
@@ -33,36 +77,14 @@
 		EXP_TYPE_CHURCH = 900,
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 5,
-		/datum/skill/magic/holy = 4,
-		/datum/skill/combat/unarmed = 3, //Ook's muscle priest
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/priest
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/priest/old
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-
 	spawned.give_priest_verbs()
 
 	spawned.virginity = TRUE
@@ -151,6 +173,7 @@
 
 	var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 	coronated.mind.set_assigned_role(/datum/job/lord)
+	lord_job?.assign_honorary_titles(coronated)
 	lord_job?.get_informed_title(coronated, TRUE, new_title)
 	coronated.job = "Monarch"
 	lord_job?.add_spells(coronated)
@@ -165,11 +188,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, span_warning("I need to do this from the prayer hall."))
+		return FALSE
 	var/inputty = input("Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, span_warning("I need to do this from the chapel."))
-			return FALSE
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. The Ten hear their prayers once more!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -196,11 +219,11 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Curse someone as a heretic. (curse them again to remove it)", "Sinner Name") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		if(inputty in GLOB.heretical_players)
 			GLOB.heretical_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
@@ -226,28 +249,65 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
+		return FALSE
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/indoors/town/church/chapel))
-			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
-			return FALSE
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")
 
 /// Helper for giving priest verbs, and whether that should include coronation or penance verbs.
 /mob/living/carbon/human/proc/give_priest_verbs(coronate = TRUE, penance = TRUE)
-	add_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
-	add_verb(src, /mob/living/carbon/human/proc/churchcurse)
-	add_verb(src, /mob/living/carbon/human/proc/churchannouncement)
+	var/datum/action/priestly_powers/action = new(src)
+
 	if(coronate)
-		add_verb(src, /mob/living/carbon/human/proc/coronate_lord)
+		action.authorized_powers += PRIEST_CORONATE
 	if(penance)
-		add_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+		action.authorized_powers += PRIEST_ADD_PENANCE
+		action.authorized_powers += PRIEST_REMOVE_PENANCE
+	action.Grant(src)
 
 /// Helper for removing priest verbs
 /mob/living/carbon/human/proc/remove_priest_verbs()
-	remove_verb(src, /mob/living/carbon/human/proc/churchexcommunicate)
-	remove_verb(src, /mob/living/carbon/human/proc/churchcurse)
-	remove_verb(src, /mob/living/carbon/human/proc/churchannouncement)
-	remove_verb(src, /mob/living/carbon/human/proc/coronate_lord)
-	remove_verb(src, list(/mob/living/carbon/human/proc/absolve_penance_verb, /mob/living/carbon/human/proc/assign_penance_verb))
+	for(var/datum/action/priestly_powers/priest_action in actions)
+		priest_action.Remove(src)
+
+/datum/action/priestly_powers
+	name = "Invoke Divine Authority"
+	desc = "Invoke your divine authority."
+	button_icon_state = "recruit_acolyte"
+	check_flags = AB_CHECK_CONSCIOUS
+	var/list/authorized_powers = list(PRIEST_ANNOUNCE, PRIEST_CURSE, PRIEST_EXCOMMUNICATE)
+
+/datum/action/priestly_powers/Trigger(trigger_flags)
+	. = ..()
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/priest = owner
+
+	var/choice = tgui_input_list(priest, "What right do you wish to invoke?", "Choice", authorized_powers)
+	if(!choice)
+		return
+
+	switch(choice)
+		if(PRIEST_ANNOUNCE)
+			priest.churchannouncement()
+		if(PRIEST_CURSE)
+			priest.churchcurse()
+		if(PRIEST_EXCOMMUNICATE)
+			priest.churchexcommunicate()
+		if(PRIEST_ADD_PENANCE)
+			priest.assign_penance_verb()
+		if(PRIEST_REMOVE_PENANCE)
+			priest.absolve_penance_verb()
+		if(PRIEST_CORONATE)
+			priest.coronate_lord()
+
+#undef PRIEST_ANNOUNCE
+#undef PRIEST_CURSE
+#undef PRIEST_EXCOMMUNICATE
+#undef PRIEST_ADD_PENANCE
+#undef PRIEST_REMOVE_PENANCE
+#undef PRIEST_CORONATE

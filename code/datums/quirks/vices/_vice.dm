@@ -110,7 +110,7 @@
 	debuff = /datum/status_effect/debuff/addiction/pyromaniac
 	needsate_text = "I need to see something turn to ash, or be on fire. Anything!"
 
-/datum/quirk/junkie/on_examined(mob/user, list/P, list/examine_contents)
+/datum/quirk/vice/pyromaniac/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pyro!"))
 

@@ -1,3 +1,45 @@
+/datum/attribute_holder/sheet/job/servant
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/craft/crafting = list(0,10),
+		/datum/attribute/skill/misc/music = list(0,10)
+	)
+
+/datum/attribute_holder/sheet/job/servant/old
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/craft/cooking = 40,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30
+	)
+
 /datum/job/servant
 	title = "Servant"
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
@@ -19,37 +61,12 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/servant
-
-	jobstats = list(
-		STATKEY_SPD = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/labor/butchering = 1,
-		/datum/skill/labor/farming = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/servant
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/servant/old
 
 	mind_traits = list(
 		TRAIT_ROYALSERVANT
 	)
-
-/datum/job/servant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/craft/crafting, pick(0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 
 /datum/outfit/servant
 	name = "Servant"
@@ -78,6 +95,27 @@
 		cloak = /obj/item/clothing/cloak/apron/maid
 		head = /obj/item/clothing/head/maidband
 
+/datum/attribute_holder/sheet/job/tapster
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/misc/music = list(0,10)
+	)
+
 /datum/job/tapster
 	title = "Tapster"
 	f_title = "Alemaid"
@@ -102,31 +140,11 @@
 
 	outfit = /datum/outfit/tapster
 
-	jobstats = list(
-		STATKEY_SPD = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/labor/butchering = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/farming = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/tapster
 
 	traits = list(
 		TRAIT_BOOZE_SLIDER
 	)
-
-/datum/job/tapster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
 
 /datum/outfit/tapster
 	name = "Tapster Base"
@@ -146,6 +164,27 @@
 	else
 		cloak = /obj/item/clothing/cloak/apron
 
+/datum/attribute_holder/sheet/job/matron_assistant
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/misc/music = list(0,10)
+	)
+
 /datum/job/matron_assistant
 	title = "Orphanage Assistant"
 	tutorial = "I once was an orphan, the matron took me in and now I am forever in her debt. \
@@ -164,27 +203,7 @@
 
 	outfit = /datum/outfit/matron_assistant
 
-	jobstats = list(
-		STATKEY_SPD = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/labor/butchering = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/farming = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3,
-	)
-
-/datum/job/matron_assistant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/matron_assistant
 
 /datum/outfit/matron_assistant
 	name = "Orphanage Assistant Base"
@@ -203,6 +222,28 @@
 		armor = /obj/item/clothing/armor/leather/vest/colored/black
 	else
 		cloak = /obj/item/clothing/cloak/apron
+
+/datum/attribute_holder/sheet/job/gaffer_assistant
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30,
+		/datum/attribute/skill/labor/mathematics = 10
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/misc/music = list(0,10)
+	)
 
 /datum/job/gaffer_assistant
 	title = "Ring Servant"
@@ -223,28 +264,7 @@
 	outfit = /datum/outfit/gaffer_assistant
 	exp_types_granted = list(EXP_TYPE_MERCENARY)
 
-	jobstats = list(
-		STATKEY_SPD = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/labor/butchering = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/farming = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3,
-		/datum/skill/labor/mathematics = 1,
-	)
-
-/datum/job/gaffer_assistant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(0,1,1), TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gaffer_assistant
 
 /datum/outfit/gaffer_assistant
 	name = "Ring Servant"

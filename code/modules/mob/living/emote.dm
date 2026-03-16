@@ -388,7 +388,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/L = user
-		if(L.get_complex_pain() > (L.STAEND * 9))
+		if(L.get_complex_pain() > (GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) * 9))
 			L.setDir(2)
 			L.SetUnconscious(200)
 		else
@@ -788,13 +788,6 @@
 		var/msg = input("Say your meditation:", "Voices in your head") as text|null
 		if(msg)
 			user.schizohelp(msg)
-
-/datum/emote/living/moan
-	key = "moan"
-	key_third_person = "moans"
-	message = "moans."
-	message_mime = "appears to moan!"
-	emote_type = EMOTE_AUDIBLE
 
 // ............... N ..................
 /datum/emote/living/nod
@@ -1263,6 +1256,7 @@
 	key_third_person = "moans"
 	message = "moans."
 	emote_type = EMOTE_AUDIBLE
+
 /datum/emote/living/zombiemoan/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	. = ..()
 	if(user.gender == MALE)

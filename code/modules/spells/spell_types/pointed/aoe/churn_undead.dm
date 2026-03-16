@@ -7,7 +7,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
 
 	invocation = "The Undermaiden rebukes!"
@@ -38,7 +38,7 @@
 				owner.throw_at(get_ranged_target_turf(owner, get_dir(owner, victim), 7), 7, 1, victim, spin = FALSE)
 				return
 	if((victim.mob_biotypes & MOB_UNDEAD))
-		var/prob2explode = 20 * owner.get_skill_level(associated_skill)
+		var/prob2explode = 20 * GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 		if(prob(prob2explode))
 			victim.visible_message(span_warning("[victim] HAS BEEN CHURNED BY NECRA'S GRIP!"), span_userdanger("I'VE BEEN CHURNED BY NECRA'S GRIP!"))
 			explosion(get_turf(victim), light_impact_range = 1, flash_range = 1, smoke = FALSE)

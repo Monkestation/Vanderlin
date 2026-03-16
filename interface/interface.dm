@@ -185,10 +185,8 @@
 	set desc = "See active Test Merges"
 	set category = "OOC.Links"
 
-	var/testmerge_text = GLOB.revdata.GetTestMergeInfo()
-
-	if(length(testmerge_text)) // is there even any text here? gotta check.
-		to_chat(src, span_notice(testmerge_text))
+	if(length(GLOB.current_tms)) // is there even any text here? gotta check.
+		to_chat(src, span_notice(GLOB.current_tms))
 		return
 
 	to_chat(src, span_notice("No Test Merges active!"))

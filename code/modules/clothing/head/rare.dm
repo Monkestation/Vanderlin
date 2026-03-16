@@ -9,7 +9,7 @@
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
 	resistance_flags = FIRE_PROOF // These are all metallic DELETE AFTER REPATH
-	anvilrepair = /datum/skill/craft/armorsmithing	//DELETE AFTER REPATH
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing	//DELETE AFTER REPATH
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_SMALL

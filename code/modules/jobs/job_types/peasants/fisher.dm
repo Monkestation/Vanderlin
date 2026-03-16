@@ -1,3 +1,37 @@
+/datum/attribute_holder/sheet/job/fisher
+	attribute_variance = list(
+		/datum/attribute/skill/misc/sewing = list(0, 10),
+		/datum/attribute/skill/misc/athletics = list(0, 10),
+	)
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 2,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/fishing = 40,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
+/datum/attribute_holder/sheet/job/fisher/old
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/fishing = 50,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/fisher
 	title = "Fisher"
 	tutorial = "Abyssor is angry. Neglected and shunned, his boons yet shy from your hook. \
@@ -9,6 +43,7 @@
 	faction = FACTION_TOWN
 	total_positions = 5
 	spawn_positions = 5
+	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
@@ -17,33 +52,8 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
-
-	jobstats = list(
-		STATKEY_CON = 2,
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/fishing = 4,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1
-	)
-
-/datum/job/fisher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-
-	spawned.adjust_skillrank(/datum/skill/craft/sewing, pick(0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/fisher
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/fisher/old
 
 /datum/outfit/fisher
 	name = "Fisher"

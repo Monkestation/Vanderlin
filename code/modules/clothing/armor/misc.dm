@@ -20,7 +20,7 @@
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
 	name = "amazonian armor"
-	desc = "Fur skirt and maille chest holder, typically worn by warrior women of the isle of Issa."
+	desc = "Fur skirt and maille chest holder, it doesn't cover very much."
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
@@ -46,7 +46,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -89,7 +89,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE

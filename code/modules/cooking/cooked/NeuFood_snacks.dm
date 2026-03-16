@@ -59,7 +59,7 @@
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(modified)
 		return TRUE
 	if(bitecount >0)
@@ -87,7 +87,7 @@
 			tastes = list("spicy red meat" = 2)
 			meal_properties()
 			bitesize = initial(bitesize)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()
 
@@ -428,7 +428,7 @@
 /obj/item/reagent_containers/food/snacks/cooked/roastchicken/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/obj/item/reagent_containers/peppermill/mill = I
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(modified)
 		return TRUE
 	if(bitecount >0)
@@ -454,6 +454,6 @@
 			overlays += spice
 			tastes = list("spicy birdmeat" = 2)
 			modified = TRUE
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()

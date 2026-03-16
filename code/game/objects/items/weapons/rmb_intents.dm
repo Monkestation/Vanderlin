@@ -2,6 +2,7 @@
 	var/name = "intent"
 	var/desc = ""
 	var/icon_state = ""
+	/// Bonus/Malus to parry and dodge
 	var/def_bonus = 0
 	/// Whether the rclick will try to get turfs as target.
 	var/target_turf = FALSE
@@ -26,6 +27,14 @@
 /datum/rmb_intent/proc/special_attack(mob/living/user, atom/target)
 	if(!user || !target)
 		return FALSE
+
+	if(target.loc == user)
+		return FALSE
+
+	if(isitem(target))
+		var/obj/item/item_target = target
+		if(item_target.item_flags & IN_STORAGE)
+			return FALSE
 
 	if(check_range)
 		var/obj/item/attacker_item = user.get_active_held_item()
@@ -67,10 +76,10 @@
 	if(baited && !COOLDOWN_FINISHED(baited, bait_cooldown))
 		return FALSE
 
-	// if(defender.is_blind() || !defender.can_see_cone(user))
-	// 	to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
-	// 	user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
-	// 	return TRUE
+	if(defender.is_blind() || !defender.can_see_cone(user))
+		to_chat(user, span_notice("[defender.p_they()] didn't see me! Nothing happened!"))
+		user.apply_status_effect(/datum/status_effect/debuff/baitcd, 5 SECONDS)
+		return TRUE
 
 	user.visible_message(
 		span_danger("[user] baits an attack from [defender]."),
@@ -205,16 +214,16 @@
 	var/skill_factor = 0
 
 	if(attacker_item?.associated_skill)
-		ourskill = user.get_skill_level(attacker_item.associated_skill)
+		ourskill = GET_MOB_SKILL_VALUE_OLD(user, attacker_item.associated_skill)
 
 	var/obj/item/defender_item = defender.get_active_held_item()
 	if(defender_item?.associated_skill)
-		theirskill = defender.get_skill_level(defender_item.associated_skill)
+		theirskill = GET_MOB_SKILL_VALUE_OLD(defender, defender_item.associated_skill)
 
 	perc += (ourskill - theirskill) * 12 //skill is of the essence
-	perc += (user.STAINT - defender.STAINT) * 8 //but it's also mostly a mindgame
-	perc += (user.STASPD - defender.STASPD) * 3 //yet a speedy feint is hard to counter
-	perc += (user.STAPER - defender.STAPER) * 3 //a good eye helps
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_INTELLIGENCE)) * 8 //but it's also mostly a mindgame
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_SPEED)) * 3 //yet a speedy feint is hard to counter
+	perc += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - GET_MOB_ATTRIBUTE_VALUE(defender, STAT_PERCEPTION)) * 3 //a good eye helps
 
 	skill_factor = (ourskill - theirskill) / 2
 

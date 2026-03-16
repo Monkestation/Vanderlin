@@ -6757,6 +6757,11 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/town/basement)
+"fFX" = (
+/obj/item/instrument/guitar,
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/tavern)
 "fGh" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -13862,6 +13867,10 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
+"lWT" = (
+/obj/structure/fake_machine/contractledger,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/tavern)
 "lXl" = (
 /obj/machinery/anvil,
 /obj/item/weapon/hammer/iron,
@@ -19775,11 +19784,6 @@
 	dir = 1
 	},
 /area/indoors/town)
-"rjI" = (
-/obj/structure/chair/stool,
-/obj/item/instrument/guitar,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/tavern)
 "rkg" = (
 /obj/item/key/apartments/apartment1,
 /obj/item/key/apartments/apartment1{
@@ -128518,7 +128522,7 @@ tpZ
 jXg
 ueR
 bNv
-bNv
+fFX
 brB
 tvB
 qqt
@@ -128719,8 +128723,8 @@ iHi
 tpZ
 jXg
 ueR
+lWT
 bNv
-rjI
 bNv
 hOo
 cMW

@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 			. += span_purple("There's a hidden door here...")
 		else
 			var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-			if(L.STAPER + bonuses >= hidden_dc)
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses >= hidden_dc)
 				. += span_purple("Something isn't right about this wall...")
 
 /obj/structure/door/secret/Open(silent = FALSE)

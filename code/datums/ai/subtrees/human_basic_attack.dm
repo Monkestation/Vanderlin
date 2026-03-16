@@ -122,7 +122,7 @@
 	var/skill_level = SKILL_LEVEL_NONE
 	var/obj/item/held = pawn.get_active_held_item()
 	if(held?.associated_skill)
-		skill_level = pawn.get_skill_level(held.associated_skill)
+		skill_level = GET_MOB_SKILL_VALUE_OLD(pawn, held.associated_skill)
 
 	var/list/weighted = list(
 		/datum/rmb_intent/strong = 45,
@@ -233,7 +233,7 @@
 				skill_type = held.associated_skill
 				break
 
-	var/skill_level = skill_type ? pawn.get_skill_level(skill_type) : SKILL_LEVEL_NONE
+	var/skill_level = skill_type ? GET_MOB_SKILL_VALUE_OLD(pawn, skill_type) : SKILL_LEVEL_NONE
 	var/armor_rating = bclass ? bclass_to_armor_rating(bclass) : "blunt"
 
 	var/list/wounded  = list()
@@ -245,7 +245,7 @@
 			continue
 
 		//requires trained eye AND good perception
-		if(skill_level >= SKILL_LEVEL_JOURNEYMAN && pawn.STAPER >= 10)
+		if(skill_level >= SKILL_LEVEL_JOURNEYMAN && GET_MOB_ATTRIBUTE_VALUE(pawn, STAT_PERCEPTION) >= 10)
 			if(part.brute_dam > 20 || part.burn_dam > 20)
 				wounded += part.body_zone
 
@@ -347,8 +347,8 @@
 		return FALSE
 
 	var/juke_chance = HUMAN_NPC_BASE_JUKE_CHANCE
-	if(pawn.STASPD > HUMAN_NPC_JUKE_MIN_SPD)
-		juke_chance += (pawn.STASPD - HUMAN_NPC_JUKE_MIN_SPD) * HUMAN_NPC_JUKE_PER_OVERSPD
+	if(GET_MOB_ATTRIBUTE_VALUE(pawn, STAT_SPEED) > HUMAN_NPC_JUKE_MIN_SPD)
+		juke_chance += (GET_MOB_ATTRIBUTE_VALUE(pawn, STAT_SPEED) - HUMAN_NPC_JUKE_MIN_SPD) * HUMAN_NPC_JUKE_PER_OVERSPD
 
 	if(!prob(juke_chance))
 		return FALSE

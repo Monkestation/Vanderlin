@@ -28,7 +28,7 @@
 
 /obj/item/clothing/pants/platelegs/holysee
 	name = "holy silver chausses"
-	desc = "Plate leggings of silver forged for the Holy See's forces. A sea of silver to descend upon evil."
+	desc = "Plate leggings of silver forged for the grandmaster. A sea of silver to descend upon evil."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/martyr.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_pants.dmi'
@@ -42,7 +42,7 @@
 
 /obj/item/clothing/head/helmet/heavy/holysee
 	name = "holy silver bascinet"
-	desc = "Branded by the Holy See, these helms are worn by its chosen warriors. A bastion of hope in the dark nite."
+	desc = "Branded by the faithful of the Ten, these helms are worn by its chosen warriors. A bastion of hope in the dark nite."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/martyrbascinet.dmi'
 	bloody_icon = 'icons/effects/blood64x64.dmi'
@@ -61,7 +61,7 @@
 
 /obj/item/clothing/cloak/holysee
 	name = "holy silver vestments"
-	desc = "A set of vestments worn by the Holy See's forces, silver embroidery and seals of light ordain it as a bastion against evil."
+	desc = "A set of vestments worn by the grandmaster, silver embroidery and seals of light ordain it as a bastion against evil."
 	icon = 'icons/roguetown/clothing/special/martyr.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/martyr.dmi'
 	icon_state = "silvertabard"
@@ -107,7 +107,7 @@
 /datum/status_effect/debuff/lost_naledi_mask
 	id = "naledimask"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/naledimask
-	effectedstats = list(STATKEY_END = -3, STATKEY_LCK = -3)
+	effectedstats = list(STAT_ENDURANCE = -3, STAT_FORTUNE = -3)
 
 /atom/movable/screen/alert/status_effect/debuff/naledimask
 	name = "Lost Mask"

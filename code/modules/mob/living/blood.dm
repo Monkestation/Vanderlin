@@ -178,7 +178,7 @@
 	// For each CON above 10, we bleed slower.
 	// Consequently, for each CON under 10 we bleed faster.
 	var/con_modifier = 1
-	var/our_con = STACON
+	var/our_con = GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)
 	if(our_con != 10)
 		con_modifier = our_con - 10
 

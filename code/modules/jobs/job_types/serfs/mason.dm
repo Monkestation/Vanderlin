@@ -1,4 +1,24 @@
 
+/datum/attribute_holder/sheet/job/mason
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/labor/mining = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/masonry = 40,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/mason
 	title = "Mason"
 	tutorial = "This city's walls have a memory, and you are their confidant. You work pavement, polish marble, and carve statues for the vainglory of your overlord. \
@@ -19,37 +39,12 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-			STATKEY_STR = 1,
-			STATKEY_INT = 1,
-			STATKEY_END = 1,
-			STATKEY_CON = 1,
-			STATKEY_SPD = -1,
-	)
-
-	skills = list(
-	/datum/skill/combat/axesmaces = 2,
-	/datum/skill/labor/mining = 3,
-	/datum/skill/combat/wrestling = 1,
-	/datum/skill/combat/unarmed = 1,
-	/datum/skill/craft/crafting = 3,
-	/datum/skill/craft/masonry = 4,
-	/datum/skill/craft/engineering = 1,
-	/datum/skill/misc/swimming = 2,
-	/datum/skill/misc/climbing = 3,
-	/datum/skill/misc/athletics = 3,
-	/datum/skill/misc/reading = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/mason
 
 /datum/job/mason/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.dna.species.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
-	if(prob(5))
-		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
-		spawned.adjust_skillrank(/datum/skill/labor/mining, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
 
 /datum/outfit/mason
 	name = "Mason"

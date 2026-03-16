@@ -2,6 +2,9 @@
 	name = "roguetown"
 	icon_state = "rogue"
 
+/area/oob
+	name = "Out-Of-Bounds"
+
 /area/indoors
 	name = "indoors rt"
 	icon_state = "indoors"
@@ -173,43 +176,6 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	converted_type = /area/indoors/shelter/woods
-
-/area/outdoors/bog
-	name = "the bog"
-	icon_state = "bog"
-	droning_index = DRONING_BOG_DAY
-	droning_index_night = DRONING_BOG_NIGHT
-	ambient_index = AMBIENCE_FROG
-	ambient_index_night = AMBIENCE_GENERIC
-	background_track = 'sound/music/area/bog.ogg'
-	background_track_dusk = null
-	background_track_night = null
-	ambush_times = list("night","dawn","dusk","day")
-	ambush_types = list(
-				/turf/open/floor/dirt,
-				/turf/open/water)
-	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/bigrat = 20,
-				/mob/living/simple_animal/hostile/retaliate/spider = 80,
-				/mob/living/carbon/human/species/goblin/npc/ambush/sea = 50,
-				/mob/living/simple_animal/hostile/retaliate/troll/bog = 35,
-				new /datum/ambush_config/bog_guard_deserters = 50,
-				new /datum/ambush_config/bog_guard_deserters/hard = 25,
-				new /datum/ambush_config/mirespiders_ambush = 110,
-				new /datum/ambush_config/mirespiders_crawlers = 25,
-				new /datum/ambush_config/mirespiders_aragn = 10,
-				new /datum/ambush_config/mirespiders_unfair = 5)
-
-	first_time_text = "THE TERRORBOG"
-	custom_area_sound = 'sound/misc/stings/BogSting.ogg'
-	converted_type = /area/indoors/shelter/bog
-	threat_region = THREAT_REGION_TERRORBOG
-
-/area/indoors/shelter/bog
-	icon_state = "bog"
-	background_track = 'sound/music/area/bog.ogg'
-	background_track_dusk = null
-	background_track_night = null
 
 /area/outdoors/beach
 	name = "sophia's cry"
@@ -470,6 +436,10 @@
 	name = "lair (Inhumen)"
 	background_track = 'sound/music/area/decap.ogg'
 	first_time_text = "THE DEEP BOG"
+
+/area/indoors/shelter/bog/inhumen_camp
+	name = "lair (Inhumen) (Indoors)"
+	background_track = 'sound/music/area/decap.ogg'
 
 /area/indoors/lich
 	name = "lair (Lich)"

@@ -9,7 +9,7 @@
 /datum/container_craft/oven/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 0.2)
+		real_cooking_time /= 1 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 0.2)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -59,7 +59,7 @@
 
 /datum/container_craft/oven/handpie/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	var/create_type = output
-	if(initiator.get_skill_level(/datum/skill/craft/cooking) >= 2)
+	if(GET_MOB_SKILL_VALUE_OLD(initiator, /datum/attribute/skill/craft/cooking) >= 2)
 		create_type = /obj/item/reagent_containers/food/snacks/handpie/good
 
 	for(var/j = 1 to output_amount)
@@ -87,7 +87,7 @@
 
 /datum/container_craft/oven/pie/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	var/create_path = output
-	if((initiator.get_skill_level(/datum/skill/craft/cooking) >= 2 )&& good_path)
+	if((GET_MOB_SKILL_VALUE_OLD(initiator, /datum/attribute/skill/craft/cooking) >= 2 )&& good_path)
 		create_path = good_path
 
 	for(var/j = 1 to output_amount)
