@@ -49,7 +49,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.adjust_stat_modifier(STATMOD_QUIRK, list(STAT_INTELLIGENCE = rand(-2, -5)))
+	H.adjust_stat_modifier(STATMOD_WITLESS_PIXIE, list(STAT_INTELLIGENCE = rand(-2, -5)))
 
 	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	REMOVE_TRAIT(H, TRAIT_UGLY, QUIRK_TRAIT)
@@ -66,7 +66,7 @@
 	var/mob/living/carbon/human/H = owner
 	// Remove stat penalty (inverse of what was applied)
 	// This is approximate since we randomized on spawn
-	H.adjust_stat_modifier(STATMOD_QUIRK, list(STAT_INTELLIGENCE = 3))
+	H.remove_stat_modifier(STATMOD_WITLESS_PIXIE)
 
 /datum/quirk/peculiarity/ugly
 	name = "Ugly"
