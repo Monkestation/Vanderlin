@@ -69,6 +69,6 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Polehammer")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak/lucerne, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather, ITEM_SLOT_PANTS)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
