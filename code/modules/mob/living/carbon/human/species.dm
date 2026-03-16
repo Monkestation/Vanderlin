@@ -1969,7 +1969,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 						H.wear_pants.add_mob_blood(H)
 						H.update_inv_pants()
 
-		if(actual_damage> 10 || actual_damage >= 5 && prob(actual_damage))
+		if(actual_damage > 10 || actual_damage >= 5 && prob(actual_damage))
 			H.forcesay(GLOB.hit_appends)	//forcesay checks stat already.
 
 	return TRUE
