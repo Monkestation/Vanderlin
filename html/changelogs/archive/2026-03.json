@@ -453,5 +453,12 @@
                 "rscadd": "Exiled Warrior can choose between arming sword and duel axes"
             }
         ]
+    },
+    "2026-03-16": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes monk stats and skills."
+            }
+        ]
     }
 }
