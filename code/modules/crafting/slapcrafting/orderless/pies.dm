@@ -5,7 +5,7 @@
 
 	finishing_item = /obj/item/reagent_containers/food/snacks/piedough
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/piebottom
-	related_skill = /datum/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 
@@ -82,11 +82,6 @@
 	overlay_state = "fill_berry"
 	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/berry
 
-/datum/orderless_slapcraft/food/pie/berry/step_process(mob/user, obj/item/attacking_item)
-	. = ..()
-	if(istype(attacking_item, /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison))
-		output_item = /obj/item/reagent_containers/food/snacks/raw_pie/berry/poison
-
 /datum/orderless_slapcraft/food/pie/meat
 	name = "Unbaked Meat Pie"
 	requirements = list(
@@ -103,7 +98,7 @@
 	category = "Tarts"
 	finishing_item = /obj/item/reagent_containers/food/snacks/sugar
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/tartcrust
-	related_skill = /datum/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 	var/overlay_state = ""

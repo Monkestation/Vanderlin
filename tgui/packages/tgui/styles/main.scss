@@ -22,6 +22,7 @@
 @include meta.load-css('./interfaces/HotKeysHelp.scss');
 @include meta.load-css('./interfaces/ListInput.scss');
 @include meta.load-css('./interfaces/Orbit.scss');
+@include meta.load-css('./interfaces/PreferencesMenu.scss');
 
 // Layouts
 @include meta.load-css('./layouts/Layout.scss');
@@ -29,6 +30,8 @@
 @include meta.load-css('./layouts/NtosWindow.scss');
 @include meta.load-css('./layouts/TitleBar.scss');
 @include meta.load-css('./layouts/Window.scss');
+
+@include meta.load-css('~highlight.js/scss/a11y-dark.scss');
 
 // Themes
 @include meta.load-css('./themes/grim.scss');

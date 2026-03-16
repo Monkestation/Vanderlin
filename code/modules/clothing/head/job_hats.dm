@@ -111,6 +111,15 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/wizhat/bogwitch
+	name = "bog witch hat"
+	desc = "A hat of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 48
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/head/wizhat/gen
 	icon_state = "wizardhatgen"
 
@@ -170,7 +179,7 @@
 	AddComponent(
 		/datum/component/equipment_stress/job_specific, \
 		/datum/stress_event/maidband, \
-		list(TRAIT_VILLAIN = null, TRAIT_NOBLE = /datum/stress_event/maidband/noble), \
+		list(TRAIT_VILLAIN = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
 		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
 		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \

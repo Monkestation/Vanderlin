@@ -1,7 +1,7 @@
 #define AFFECTED_VLORD 1
 #define AFFECTED 2
 #define SILVER_BANE_MAX_STACKS 6
-#define SILVER_BANE_COOLDOWN (5 SECONDS)
+#define SILVER_BANE_COOLDOWN (2.5 SECONDS)
 
 /datum/enchantment/silver
 	enchantment_name = "Nightlurkers Bane"
@@ -87,12 +87,22 @@
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
+/datum/enchantment/silver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
+	var/affected = affected_by_bane(user)
+	if(!affected)
+		return FALSE
+	to_chat(user, span_userdanger("They wear my BANE!"))
+	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
+	if(affected != AFFECTED_VLORD)
+		user.Paralyze(1 SECONDS)
+	return TRUE
+
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane
-	duration = 30 SECONDS
+	duration = 15 SECONDS
 	tick_interval = -1 // No ticking needed
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
+	effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
 	var/stacks = 0
 	var/max_stacks = SILVER_BANE_MAX_STACKS
 	var/affected_type = AFFECTED // Will be set on application
@@ -115,6 +125,7 @@
 	return TRUE
 
 /datum/status_effect/debuff/silver_bane/on_remove()
+	to_chat(owner, span_notice("The silver's overwhelming curse fades..."))
 	REMOVE_TRAIT(owner, TRAIT_COVEN_BANE, VAMPIRE_TRAIT)
 	. = ..()
 
@@ -147,7 +158,7 @@
 	if(affected_type == AFFECTED_VLORD)
 		// Vampire lords get lighter punishment
 		owner.Knockdown(30)
-		owner.Paralyze(15)
+		owner.Stun(15)
 	else
 		// Normal creatures get full punishment
 		owner.Immobilize(45)
@@ -155,15 +166,7 @@
 
 	update_alert()
 
-	addtimer(CALLBACK(src, PROC_REF(end_stun)), 8 SECONDS)
-
-/datum/status_effect/debuff/silver_bane/proc/end_stun()
-	if(!owner)
-		qdel(src)
-		return
-
-	to_chat(owner, span_notice("The silver's overwhelming curse fades..."))
-	qdel(src)
+	QDEL_IN(src, 8 SECONDS)
 
 /datum/status_effect/debuff/silver_bane/proc/update_alert()
 	if(!owner)

@@ -7,6 +7,7 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	gender = PLURAL
 	clothing_traits = list(TRAIT_NEARSIGHTED_CORRECTED)
 //	block2add = FOV_BEHIND
 
@@ -32,6 +33,7 @@
 	name = "silver monocle"
 	icon_state = "monocle"
 	max_integrity = 35
+	gender = NEUTER
 
 
 /obj/item/clothing/face/spectacles/Crossed(mob/crosser)
@@ -59,7 +61,7 @@
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HEAD
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	var/lensmoved = TRUE // starts with the lenses out of the way, night vision being off.
 
 /obj/item/clothing/face/spectacles/inq/examine(mob/user) // informs inquisition members of the night vision functionality.
@@ -79,7 +81,7 @@
 			ADD_TRAIT(user, TRAIT_NOCSHADES, "redlens")
 			return
 
-/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, params)
+/obj/item/clothing/face/spectacles/inq/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))
@@ -171,7 +173,7 @@
 		worn = FALSE
 
 
-/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(istype(I, /obj/item/clothing/face/spectacles/inq))
 		user.visible_message(span_warning("[user] starts to insert [I]'s lenses into [src]."))
@@ -207,7 +209,7 @@
 			user.update_sight()
 			return
 
-/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, params)
+/obj/item/clothing/face/facemask/steel/confessor/lensed/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!lensmoved)
 		to_chat(user, span_info("You discreetly slide the inner lenses out of the way."))

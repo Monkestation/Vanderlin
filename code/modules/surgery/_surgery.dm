@@ -101,7 +101,7 @@
 		html += "<div class='step-info'><b>Accepts any item</b></div>"
 
 	if(step.skill_used && step.skill_min)
-		var/datum/skill/used_skill = step.skill_used
+		var/datum/attribute/skill/used_skill = step.skill_used
 		var/skill_name = initial(used_skill.name)
 		html += "<div class='step-info'><b>Minimum Experience:</b> [SSskills.level_names[step.skill_min]] [skill_name]</div>"
 		html += "<div class='step-info'><b>Optimal Experience:</b> [SSskills.level_names[step.skill_median]] [skill_name]</div>"

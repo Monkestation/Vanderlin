@@ -118,8 +118,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Do we use a blood type seperate from default? (Yes, yes we do)
 	var/datum/blood_type/exotic_bloodtype
 
-	/// What meat do we get from butchering this species?
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak
+	/// What meat do we get from butchering this species? These are weighted odds.
+	var/list/meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1)
 	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
 	/// Food we (SHOULD) get a mood debuff from
@@ -163,7 +163,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Generic traits tied to having the species and being female
 	var/list/inherent_traits_f
 	/// Associative list of skills to adjustments
-	var/list/inherent_skills = list()
+	var/datum/attribute_holder/sheet/job/inherent_sheet
 	/// Species-only traits used for drawing, can be found in DNA.dm
 	var/list/species_traits = list()
 	/// Components to add when spawning
@@ -240,11 +240,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// List all of body markings that the player can choose from in customization. Body markings from sets get added to here
 	var/list/body_markings
 
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
-
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
+	var/datum/attribute_holder/sheet/statsheet_male
+	var/datum/attribute_holder/sheet/statsheet_female
 
 	/// Can we be a youngling?
 	var/can_be_youngling = TRUE
@@ -277,6 +274,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/amtfail = 0
 
 	var/punch_damage = 0
+	var/kick_damage = 0
 
 	/// Native language for accents
 	var/native_language = "Imperial"
@@ -290,34 +288,38 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 ///////////
 
 /datum/species/proc/get_accent(language, variant = 0)
-	if(language == "Old Psydonic")
-		return strings("accents/grenz_replacement.json", "grenz")
-	if(language == "Zalad")
-		return strings("accents/zalad_replacement.json", "arabic")
-	if(language == "Imperial")
-		return
-	if(language == "Elfish" && variant == 1)
-		return strings("accents/russian_replacement.json", "russian")
-	if(language == "Elfish" && variant == 2)
-		return strings("accents/french_replacement.json", "french")
-	if(language == "Dwarfish")
-		return strings("accents/dwarf_replacement.json", "dwarf")
-	if(language == "Infernal")
-		return strings("accents/spanish_replacement.json", "spanish")
-	if(language == "Celestial")
-		return
-	if(language == "Orcish")
-		return strings("accents/halforc_replacement.json", "halforc")
-	if(language == "Halfling")
-		return strings("accents/halfling_replacement.json", "halfling")
-	if(language == "Gutter")
-		return strings("accents/kobold_replacement.json", "kobold")
-	if(language == "Deepspeak")
-		return strings("accents/triton_replacement.json", "triton")
-	if(language == "Pirate")
-		return strings("accents/pirate_replacement.json", "pirate")
-	if(language == "Zizo Chant")
-		return
+	switch(language)
+		if("Old Psydonic", "Psydonic")
+			return strings("accents/grenz_replacement.json", "grenz")
+		if("Zalad")
+			return strings("accents/zalad_replacement.json", "arabic")
+		if("Imperial")
+			return
+		if("Elfish")
+			if(variant == 1)
+				return strings("accents/russian_replacement.json", "russian")
+			else
+				return strings("accents/french_replacement.json", "french")
+		if("Dwarfish")
+			return strings("accents/dwarf_replacement.json", "dwarf")
+		if("Infernal")
+			return strings("accents/spanish_replacement.json", "spanish")
+		if("Celestial")
+			return
+		if("Orcish")
+			return strings("accents/halforc_replacement.json", "halforc")
+		if("Halfling")
+			return strings("accents/halfling_replacement.json", "halfling")
+		if("Gutter")
+			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
+		if("Deepspeak")
+			return strings("accents/triton_replacement.json", "triton")
+		if("Pirate")
+			return strings("accents/pirate_replacement.json", "pirate")
+		if("Zizo Chant")
+			return
 	return
 
 /datum/species/proc/handle_speech(datum/source, list/speech_args)
@@ -381,7 +383,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
 				ACCENT_HALFLING,
-				ACCENT_KOBOLD
+				ACCENT_KOBOLD,
+				ACCENT_ROUSMAN
 			)
 
 			///This will only trigger for donators
@@ -407,12 +410,18 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				/datum/language/zalad = "Zalad",
 				/datum/language/deepspeak = "Deepspeak",
 				/datum/language/oldpsydonic = "Old Psydonic",
+				/datum/language/newpsydonic = "Psydonic",
 				/datum/language/undead = "Zizo Chant"
 			)
 
 			if (language in language_map)
 				language_check = language_map[language]
-			if(nativelang != language_check || special_accent)
+			var/unaccented = FALSE
+			if(((language_check == "Psydonic") && (nativelang == "Old Psydonic")) || ((language_check == "Old Psydonic") && (nativelang == "Psydonic")))
+				unaccented = TRUE
+			else if(nativelang == language_check)
+				unaccented = TRUE
+			if(!unaccented || special_accent)
 				if(species_accent)
 					for(var/key in species_accent)
 						var/value = species_accent[key]
@@ -452,8 +461,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
-	var/static/list/male_names = world.file2list('strings/names/first_male.txt')
-	var/static/list/female_names = world.file2list('strings/names/first_female.txt')
+	var/static/list/male_names = file2list('strings/names/first_male.txt')
+	var/static/list/female_names = file2list('strings/names/first_female.txt')
 
 	return (gender == FEMALE) ? female_names : male_names
 
@@ -468,7 +477,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			break
 
 /datum/species/proc/get_possible_surnames(gender = MALE) as /list
-	var/static/list/last_names = world.file2list('strings/names/last.txt')
+	var/static/list/last_names = file2list('strings/names/last.txt')
 
 	return last_names
 
@@ -537,104 +546,87 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/qualifies_for_rank(rank, list/features)
 	return 1
 
-/**
- * Corrects organs in a carbon, removing ones it doesn't need and adding ones it does.
- *
- * Takes all organ slots, removes organs a species should not have, adds organs a species should have.
- * can use replace_current to refresh all organs, creating an entirely new set.
- *
- * Arguments:
- * * organ_holder - carbon, the owner of the species datum AKA whoever we're regenerating organs in
- * * old_species - datum, used when regenerate organs is called in a switching species to remove old mutant organs.
- * * replace_current - boolean, forces all old organs to get deleted whether or not they pass the species' ability to keep that organ
- * * excluded_zones - list, add zone defines to block organs inside of the zones from getting handled. see headless mutation for an example
- * * visual_only - boolean, only load organs that change how the species looks. Do not use for normal gameplay stuff
- * * replace_missing - Whether or not to replace missing organs
- * * pref_lod - pref organ dna (why the fuck do we need this)
- */
-/datum/species/proc/regenerate_organs(
-	mob/living/carbon/organ_holder,
-	datum/species/old_species,
-	replace_current = TRUE,
-	list/excluded_zones,
-	visual_only = FALSE,
-	replace_missing = TRUE,
-	datum/preferences/pref_load
-)
+//Will regenerate missing organs
+/datum/species/proc/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones, datum/preferences/pref_load)
 	/// Add DNA and create organs from prefs
 	if(pref_load)
 		/// Clear the dna
-		organ_holder.dna.organ_dna = list()
+		C.dna.organ_dna = list()
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
-			organ_holder.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
 
-	for(var/slot in GLOB.all_organ_slots)
-		var/obj/item/organ/existing_organ = organ_holder.getorganslot(slot)
-		var/obj/item/organ/new_organ = organs[slot]
-		var/old_organ_type = old_species?.organs[slot]
+	//what should be put in if there is no mutantorgan (brains handled seperately)
+	var/list/slot_mutantorgans = organs
 
-		// if we have an extra organ that before changing that the species didnt have, remove it
-		if(!new_organ)
-			if(existing_organ && (old_organ_type == existing_organ.type || replace_current))
-				existing_organ.Remove(organ_holder)
-				qdel(existing_organ)
+	var/list/slots_to_iterate = list()
+	for(var/slot in C.dna.organ_dna)
+		slots_to_iterate |= slot
+	for(var/slot in slot_mutantorgans)
+		if(!is_organ_slot_allowed(C, slot))
 			continue
+		slots_to_iterate |= slot
 
-		if(existing_organ)
-			// we dont want to remove organs that were not from the old species (such as from freak surgery or prosthetics)
-			if(existing_organ.type != old_organ_type && !replace_current)
-				continue
-
-			if(existing_organ.type == new_organ)
-				var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
-				organ_dna?.imprint_organ(existing_organ)
-				pref_load?.customize_organ(existing_organ)
-				continue // we don't want to remove organs that are the same as the new one
-
-		if(visual_only && (!initial(new_organ.accessory_type) && !initial(new_organ.visible_organ)))
+	// Remove the organs from the slots they should have nothing in
+	for(var/obj/item/organ/organ in C.internal_organs)
+		if(organ.slot in slots_to_iterate)
 			continue
+		organ.Remove(C, TRUE)
+		QDEL_NULL(organ)
+	var/list/source_key_list = color_key_source_list_from_carbon(C)
+	for(var/slot in slots_to_iterate)
+		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
+		var/obj/item/organ/neworgan
+
+		if(C.dna.organ_dna[slot])
+			var/datum/organ_dna/organ_dna = C.dna.organ_dna[slot]
+			if(organ_dna.can_create_organ())
+				neworgan = organ_dna.create_organ(species = src)
+				if(slot_mutantorgans[slot])
+					if(!istype(neworgan, slot_mutantorgans[slot]))
+						var/new_type = slot_mutantorgans[slot]
+						neworgan = new new_type()
+						organ_dna.imprint_organ(neworgan)
+				if(pref_load)
+					pref_load.customize_organ(neworgan)
+		else
+			var/new_type = slot_mutantorgans[slot]
+			if(new_type)
+				neworgan = new new_type()
+				neworgan.build_colors_for_accessory(source_key_list)
 
 		var/used_neworgan = FALSE
+		var/should_have
+		if(neworgan)
+			should_have = neworgan.get_availability(src)
+		else
+			should_have = TRUE
 
-		var/used_dna = FALSE
-		var/datum/organ_dna/organ_dna = organ_holder.dna.organ_dna[slot]
-		if(organ_dna?.can_create_organ())
-			new_organ = organ_dna.create_organ(species = src)
-			pref_load?.customize_organ(new_organ)
-			used_dna = TRUE
-
-		if(!used_dna)
-			new_organ = new new_organ()
-			new_organ.build_colors_for_accessory(color_key_source_list_from_carbon(organ_holder))
-
-		var/should_have = new_organ.get_availability(src, organ_holder)
-
-		// Check for an existing organ, and if there is one check to see if we should remove it
-		var/health_pct = 1
-		var/remove_existing = !isnull(existing_organ) && !(existing_organ.zone in excluded_zones)
-		if(remove_existing)
-			health_pct = (existing_organ.maxHealth - existing_organ.damage) / existing_organ.maxHealth
+		if(oldorgan && (!should_have || replace_current) && !(oldorgan.zone in excluded_zones))
 			if(slot == ORGAN_SLOT_BRAIN)
-				var/obj/item/organ/brain/existing_brain = existing_organ
-				existing_brain.before_organ_replacement(new_organ)
-				existing_brain.Remove(organ_holder, special = TRUE, no_id_transfer = TRUE)
+				var/obj/item/organ/brain/brain = oldorgan
+				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
+					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
+					QDEL_NULL(brain)
+					oldorgan = null //now deleted
 			else
-				existing_organ.before_organ_replacement(new_organ)
-				existing_organ.Remove(organ_holder, special = TRUE)
+				oldorgan.Remove(C,TRUE)
+				QDEL_NULL(oldorgan) //we cannot just tab this out because we need to skip the deleting if it is a decoy brain.
 
-			QDEL_NULL(existing_organ)
 
-		if(isnull(existing_organ) && should_have && !(new_organ.zone in excluded_zones) && organ_holder.get_bodypart(deprecise_zone(new_organ.zone)) && (replace_missing || remove_existing))
+		if(oldorgan)
+			oldorgan.setOrganDamage(0)
+		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
-			new_organ.setOrganDamage(new_organ.maxHealth * (1 - health_pct))
-			new_organ.Insert(organ_holder, special = TRUE)
+			if(neworgan)
+				neworgan.Insert(C, TRUE, FALSE)
 
 		if(!used_neworgan)
-			QDEL_NULL(new_organ)
-		else if(!organ_holder.dna.organ_dna[slot])
-			var/datum/organ_dna/new_dna = new_organ.create_organ_dna()
-			organ_holder.dna.organ_dna[slot] = new_dna
+			if(neworgan)
+				qdel(neworgan)
+		else if (!C.dna.organ_dna[slot] && neworgan)
+			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
+			C.dna.organ_dna[slot] = new_dna
 
 /datum/species/proc/is_organ_slot_allowed(mob/living/carbon/human/human, organ_slot)
 	return TRUE
@@ -782,8 +774,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		for(var/trait as anything in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.add_sheet(inherent_sheet)
 
 	for(var/component in components_to_add)
 		C.AddComponent(component)
@@ -814,8 +806,22 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	else
 		apply_customizers_to_character(C)
 
+	on_gender_update(C)
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
+/datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
+	if(old_gender)
+		if(statsheet_male || statsheet_female)
+			if(old_gender == MALE || !statsheet_female)
+				C.attributes?.subtract_sheet(statsheet_male)
+			else if(old_gender == FEMALE)
+				C.attributes?.subtract_sheet(statsheet_female)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.add_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.add_sheet(statsheet_female)
 
 /datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
@@ -823,8 +829,14 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, -inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.subtract_sheet(inherent_sheet)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.subtract_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
@@ -1182,7 +1194,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(HAS_TRAIT(H, TRAIT_CHUNKYFINGERS))
 		return do_after(H, 5 MINUTES)
 	var/doafter_flags = I.edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-	return do_after(H, min((I.equip_delay_self - H.STASPD), 1), timed_action_flags = doafter_flags)
+	return do_after(H, min((I.equip_delay_self - GET_MOB_ATTRIBUTE_VALUE(H, STAT_SPEED)), 1), timed_action_flags = doafter_flags)
 
 /// Equips the necessary species-relevant gear before putting on the rest of the uniform.
 /datum/species/proc/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
@@ -1424,7 +1436,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		var/damage = user.get_punch_dmg()
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 
@@ -1518,6 +1530,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(user.loc == target.loc)
 		return FALSE
 	else
+		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(target, ATTACK_EFFECT_DISARM, used_item = FALSE, atom_bounce = TRUE)
 		playsound(target, 'sound/combat/shove.ogg', 100, TRUE, -1)
 
@@ -1533,8 +1546,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 //		var/obj/machinery/disposal/bin/target_disposal_bin
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
-		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10),0,100)))//check if we actually shove them
+		if(prob(clamp(30 + (user.stat_compare(target, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))//check if we actually shove them
 			//Thank you based whoneedsspace
+			target.stop_pulling(TRUE)
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 			if(target_collateral_mob)
 				shove_blocked = TRUE
@@ -1545,7 +1559,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	//				target_disposal_bin = locate(/obj/machinery/disposal/bin) in target_shove_turf.contents
 					if(target_table)
 						shove_blocked = TRUE
-			qdel(user.check_arm_grabbed(user.active_hand_index))
 
 /*		if(target.IsKnockdown() && !target.IsParalyzed())
 			target.Paralyze(SHOVE_CHAIN_PARALYZE)
@@ -1649,7 +1662,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			target.lastattacker_weakref = WEAKREF(user)
 			if(target.mind)
 				target.mind.attackedme[user.real_name] = world.time
-			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 			var/damage = user.get_kick_damage(2.5)
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
@@ -1691,7 +1704,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 
 		if(target.pulling && target.grab_state < GRAB_AGGRESSIVE)
-			target.stop_pulling()
+			target.stop_pulling(TRUE)
 
 		var/turf/target_oldturf = target.loc
 		var/shove_dir = get_dir(user.loc, target_oldturf)
@@ -1753,7 +1766,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			to_chat(user, "<span class='danger'>I kick [target.name]!</span>")
 			log_combat(user, target, "kicked")
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
@@ -1768,6 +1781,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -1831,8 +1846,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	if(!selzone)
 		selzone = user.zone_selected
+
 	if(!accurate)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
+		if(selzone != user.zone_selected)
+			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+
 	affecting = H.get_bodypart(check_zone(selzone))
 
 	if(!affecting)
@@ -1914,7 +1933,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				bloody = 1
 				var/turf/location = H.loc
 				var/splatter_dir = get_dir(H, user)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
@@ -1974,11 +1993,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
-						if(damage_amount > ((H.STACON*10) / 3))
+						if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3))
 							H.emote("painscream")
 						else
 							H.emote("pain")
-				if(damage_amount > ((H.STACON*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
+				if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
 					H.Immobilize(4)
 					shake_camera(H, 2, 2)
 					H.stuttering += 5
@@ -2301,7 +2320,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/clear_temperature_debuffs(mob/living/carbon/human/H)
 	if(H.temp_debuff_level)
-		H.remove_movespeed_modifier("heat_stress")
+		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 		H.temp_debuff_level = null
 	H.remove_stress(list(
 		/datum/stress_event/cold_mild,
@@ -2452,7 +2471,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/knockback(obj/item/I, mob/living/target, mob/living/user, nodmg, actual_damage)
 	if(!istype(I))
 		if(!target.resting)
-			var/chungus_str = target.STASTR
+			var/chungus_str = GET_MOB_ATTRIBUTE_VALUE(target, STAT_STRENGTH)
 			var/knockback_tiles = 0
 			var/damage = actual_damage
 			if(chungus_str >= 3)
@@ -2472,9 +2491,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	else
 		if(!I.force)
 			return
-		if(!I.sharpness)
+		if(user.used_intent.knockback)
 			if(!target.resting)
-				var/endurance = target.STAEND
+				var/endurance = GET_MOB_ATTRIBUTE_VALUE(target, STAT_ENDURANCE)
 				var/knockback_tiles = 0
 				var/newforce = actual_damage
 				if(endurance >= 3)
@@ -2497,7 +2516,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/skill_modifier = 10
 	if(istype(starting_turf) && !QDELETED(starting_turf))
 		distance = get_dist(starting_turf, src)
-	skill_modifier *= get_skill_level(/datum/skill/misc/athletics, TRUE)
+	skill_modifier *= GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
 	var/modifier = -distance
-	if(!prob(STAEND+skill_modifier+modifier))
+	if(!prob(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)+skill_modifier+modifier))
 		Knockdown(8)

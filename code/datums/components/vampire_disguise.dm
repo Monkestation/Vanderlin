@@ -24,8 +24,16 @@
 	var/mob/living/carbon/human/H = parent
 	cache_original_appearance(H)
 
+/datum/component/vampire_disguise/RegisterWithParent()
+	. = ..()
 	RegisterSignal(parent, COMSIG_HUMAN_LIFE, PROC_REF(handle_disguise_upkeep))
 	RegisterSignal(parent, COMSIG_DISGUISE_STATUS, PROC_REF(disguise_status))
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+
+/datum/component/vampire_disguise/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_PARENT_EXAMINE))
+
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
@@ -95,7 +103,9 @@
 		var/datum/clan/vclan = H.clan
 		vclan.apply_vampire_look(H)
 
-	to_chat(H, span_warning("My true nature is revealed!"))
+	if(!disguise_status())
+		H.visible_message(H, span_bloody("[H]'s true nature is revealed!"), span_warning("My true nature is revealed!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		H.vampire_detected(length(H.CheckEyewitness(H))-1) // -1 so it needs 2 people to qualify for detection
 	return TRUE
 
 /datum/component/vampire_disguise/proc/force_undisguise(mob/living/carbon/human/H)
@@ -107,4 +117,16 @@
 	return TRUE
 
 /datum/component/vampire_disguise/proc/disguise_status()
-	return disguised
+	return disguised || !is_human_part_visible(parent, HIDEFACE)
+
+/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list, list/P)
+	if(!istype(user) || disguise_status())
+		return
+	if(user == vampire)
+		return
+	if(!user.affects_masquerade(FALSE))
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
+		return
+	user.add_stress(/datum/stress_event/vampire_seen)
+	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
+	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))

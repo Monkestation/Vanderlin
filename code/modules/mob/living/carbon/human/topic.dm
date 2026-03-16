@@ -94,7 +94,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(!I)
 			return
 
-		var/time_to_unbandage = 5 SECONDS * (1 - (usr.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
+		var/time_to_unbandage = 5 SECONDS * (1 - (GET_MOB_SKILL_VALUE_OLD(usr, /datum/attribute/skill/misc/medicine) * 0.15))
 		if(usr == src)
 			usr.visible_message(span_warning("[usr] starts unbandaging [usr.p_their()] [L.name]."),span_warning("I start unbandaging [L.name]..."))
 		else
@@ -147,10 +147,10 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 	var/list/message = list()
 	if(stat >= DEAD)
 		if(suiciding)
-			message += span_deadsay("[p_they(TRUE)] commited suicide... Nothing can be done...")
+			message += span_suicide("[p_they(TRUE)] commited suicide... Nothing can be done...")
 		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
 			if(!key && !get_ghost(TRUE))
-				message += span_deadsay("[p_their(TRUE)] soul has departed for the Underworld.")
+				message += span_suicide("[p_their(TRUE)] soul has departed for the Underworld.")
 			else
-				message += span_deadsay("[p_they(TRUE)] [p_are()] still earthbound.")
+				message += span_suicide("[p_they(TRUE)] [p_are()] still earthbound.")
 	return message

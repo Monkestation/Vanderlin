@@ -49,7 +49,7 @@
 
 /datum/repeatable_crafting_recipe/cooking/apple_fritter_raw/create_outputs(list/to_delete, mob/user)
 	var/output_path = output
-	if(user.get_skill_level(/datum/skill/craft/cooking) >= 2)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) >= 2)
 		output_path =  /obj/item/reagent_containers/food/snacks/foodbase/fritter_raw/good
 	var/list/outputs = list()
 
@@ -103,7 +103,7 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/meat/mince
 	starting_atom = /obj/item/reagent_containers/food/snacks/fat
 	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/meat/sausage
+	output = /obj/item/reagent_containers/food/snacks/meat/sausage/wiener
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "stuff a wiener"
@@ -183,23 +183,6 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/truffle
 	allow_inverse_start = TRUE
 	output = /obj/item/reagent_containers/food/snacks/cooked/royal_truffle
-	craft_time = 2 SECONDS
-	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
-	extra_chance = 100
-
-/datum/repeatable_crafting_recipe/cooking/royal_truffle_toxic
-	hides_from_books = TRUE
-	name = "Royal Truffles"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/cooked/ham = 1,
-		/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic = 1,
-	)
-	required_table = TRUE
-	attacked_atom = /obj/item/reagent_containers/food/snacks/cooked/ham
-	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/cooked/royal_truffle/toxin
 	craft_time = 2 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	extra_chance = 100

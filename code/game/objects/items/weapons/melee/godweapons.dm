@@ -181,13 +181,13 @@
 	PJ.original = target
 	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
-	if(user.STAPER > 8)
-		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
-		PJ.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
+		PJ.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
-	if(user.STAINT > 10) // Every point over 10 INT adds 10% damage
-		PJ.damage = PJ.damage * (user.STAINT / 10)
-		PJ.accuracy += (user.STAINT - 10) * 3
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) > 10) // Every point over 10 INT adds 10% damage
+		PJ.damage = PJ.damage * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 10)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - 10) * 3
 
 	new /obj/effect/temp_visual/dir_setting/firing_effect/neant(get_step(user, user.dir), user.dir)
 	PJ.preparePixelProjectile(target, user)
@@ -427,3 +427,123 @@
 	hitsound = null
 	noaa = TRUE
 	reach = 3
+
+//┌─────────────── TENNITE PANTHEON WEAPONS BELOW ───────────────┐
+
+/obj/item/weapon/sword/long/grandmaster
+	name = "divine longsword"
+	desc = "The Blade of Saint Altierre. A holy sword forged of silver, said to represent her will to fight for us all, and the Justice she stood for."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrsword"
+
+/datum/intent/sword/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/sword/thrust/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
+
+/datum/intent/sword/strike/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/datum/intent/sword/chop/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+
+/obj/item/weapon/sword/long/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr, /datum/intent/sword/chop/martyr)
+	var/safe_damage = 25
+	var/safe_damage_wielded = 30
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/greataxe/steel/grandmaster
+	name = "divine greataxe"
+	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyraxe"
+
+/datum/intent/axe/cut/battle/greataxe/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/axe/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/axe/chop/battle/greataxe/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
+
+/datum/intent/axe/chop/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
+
+/datum/intent/axe/bash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/greataxe/steel/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/axe/cut/martyr, /datum/intent/axe/chop/martyr, /datum/intent/axe/bash/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/axe/cut/battle/greataxe/martyr, /datum/intent/axe/chop/battle/greataxe/martyr, /datum/intent/axe/bash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/datum/intent/polearm/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/polearm/thrust/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
+
+/datum/intent/polearm/bash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/polearm/spear/grandmaster
+	name = "divine trident"
+	desc = "The Trident of Saint Altierre. A holy spear forged of silver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrtrident"
+
+/obj/item/weapon/polearm/spear/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/polearm/cut/martyr, /datum/intent/polearm/bash/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/polearm/cut/martyr, /datum/intent/polearm/thrust/martyr, /datum/intent/polearm/bash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/datum/intent/mace/strike/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_BLUNT
+
+/datum/intent/mace/smash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/mace/goden/steel/grandmaster
+	name = "divine grandmace"
+	desc = "The Mace of Saint Altierre. A holy mace forged of silver, said to represent her unyielding Might that turned upon Graggar before his ascension."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrmace"
+
+/obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/mace/strike/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/mace/strike/martyr, /datum/intent/mace/smash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)

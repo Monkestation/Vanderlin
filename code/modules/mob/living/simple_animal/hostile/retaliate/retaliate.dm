@@ -157,6 +157,8 @@
 						var/old_hunger_percentage = old_hunger.current_hunger / old_hunger.max_hunger
 						hunger.current_hunger = hunger.max_hunger * old_hunger_percentage
 
+					if(istype(genetics))
+						genetics?.copy_to(A)
 					qdel(src)
 					return
 

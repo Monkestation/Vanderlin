@@ -19,14 +19,13 @@
 	wlength = WLENGTH_SHORT
 	resistance_flags = FLAMMABLE
 	can_parry = TRUE
-	associated_skill = /datum/skill/combat/shields
+	associated_skill = /datum/attribute/skill/combat/shields
 	destroy_sound = 'sound/foley/shielddestroy.ogg'
 	var/coverage = 90
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	blade_dulling = DULLING_BASHCHOP
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	COOLDOWN_DECLARE(shield_bang)
@@ -196,7 +195,6 @@
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
-	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/bronze
 	sellprice = 150 // A noble collector would love to get their hands on one of these
 
@@ -222,7 +220,6 @@
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_STRONGEST
-	blade_dulling = DULLING_BASH
 	sellprice = 30
 	melting_material = /datum/material/steel
 	melt_amount = 90
@@ -288,11 +285,11 @@
 	desc = "A small sized iron shield, popular among mercenaries due to its light weight and ease of mobility."
 	icon_state = "ironbuckler"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	force = DAMAGE_SHIELD
-	wdefense = GREAT_PARRY
+	force = DAMAGE_SHIELD * 1.5
+	wdefense = ULTMATE_PARRY
 	wbalance = HARD_TO_DODGE // small, tiny shield
-	coverage = 45
-	max_integrity = INTEGRITY_STRONG - 50
+	coverage = 10
+	max_integrity = INTEGRITY_STANDARD
 	dropshrink = 0.75
 
 	resistance_flags = FIRE_PROOF
@@ -309,6 +306,15 @@
 				return list("shrink" = 0.6,"sx" = 1,"sy" = 4,"nx" = 1,"ny" = 2,"wx" = 3,"wy" = 3,"ex" = 0,"ey" = 2,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/shield/tower/buckleriron/captain
+	name = "Order"
+	desc = "A buckler decorated with gold made specifically for the Captain alongside their armor. To bring order to the lands with every blow deflected."
+	icon_state = "capbuckler"
+	sellprice = 60
+	max_integrity = INTEGRITY_STRONG
+	melting_material = /datum/material/steel
+	wdefense = 7
 
 /obj/item/weapon/shield/heater
 	name = "heater shield"

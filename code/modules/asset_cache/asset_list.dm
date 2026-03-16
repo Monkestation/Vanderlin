@@ -79,6 +79,11 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	fdel(asset_path) // just in case, sadly we can't use rust_g stuff here.
 	fcopy(file_location, asset_path)
 
+/// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
+/proc/sanitize_css_class_name(name)
+	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
+	return replacetext(name, regex, "")
+
 /// If you don't need anything complicated.
 /datum/asset/simple
 	abstract_type = /datum/asset/simple
@@ -115,6 +120,10 @@ GLOBAL_LIST_EMPTY(asset_datums)
 /datum/asset/simple/unregister()
 	for (var/asset_name in assets)
 		SSassets.transport.unregister_asset(asset_name)
+
+// If you use a file(...) object, instead of caching the asset it will be loaded from disk every time it's requested.
+// This is useful for development, but not recommended for production.
+// And if TGS is defined, we're being run in a production environment.
 
 // For registering or sending multiple others at once
 /datum/asset/group

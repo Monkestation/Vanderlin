@@ -74,6 +74,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * Intialize the movespeed of the mob
  */
 /mob/Initialize()
+	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_CREATED, src)
 	GLOB.mob_list += src
 	GLOB.mob_directory[tag] = src
@@ -92,10 +93,31 @@ GLOBAL_VAR_INIT(mobids, 1)
 		AA.onNewMob(src)
 	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
 	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
+	attribute_initialize()
 	. = ..()
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
+
+/// Attributes
+/mob/proc/attribute_initialize()
+	// If we have an attribute holder, lets get that W
+	if(!ispath(attributes))
+		return
+	attributes = new attributes(src)
+
+	// Seed raw stat values from the subtype's base_* vars.
+	// These are var/final so we read via initial() to get the
+	// compile-time value for this specific subtype.
+	attributes.raw_attribute_list[STAT_STRENGTH]     = initial(base_strength)
+	attributes.raw_attribute_list[STAT_PERCEPTION]   = initial(base_perception)
+	attributes.raw_attribute_list[STAT_ENDURANCE]    = initial(base_endurance)
+	attributes.raw_attribute_list[STAT_CONSTITUTION] = initial(base_constitution)
+	attributes.raw_attribute_list[STAT_INTELLIGENCE] = initial(base_intelligence)
+	attributes.raw_attribute_list[STAT_SPEED]        = initial(base_speed)
+	attributes.raw_attribute_list[STAT_FORTUNE]      = initial(base_fortune)
+	attributes.update_attributes()
+
 
 /**
  * Generate the tag for this mob
@@ -436,8 +458,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
 
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
-
 // Check if we notice an observer
 /mob/living/proc/peek_examine_check(mob/living/observer)
 	if(!istype(observer))
@@ -446,7 +466,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(is_blind() || stat < CONSCIOUS)
 		return FALSE
 
-	var/observer_skill = observer.get_skill_level(/datum/skill/misc/sneaking)
+	var/observer_skill = GET_MOB_SKILL_VALUE_OLD(observer, /datum/attribute/skill/misc/sneaking)
 	if(observer_skill <= 0)
 		observer_skill = 1
 	if(observer.rogue_sneaking)
@@ -454,7 +474,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 	var/multiplier = 5
 
-	var/our_per = STAPER
+	var/our_per = GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)
 	if(our_per < 5)
 		multiplier = 4
 	else if(our_per >= 5 && our_per < 10)
@@ -1082,7 +1102,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * Args:
  *  light_amount (optional) - A decimal amount between 1.0 through 0.0 (default is 0.2)
 **/
-/mob/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
+/atom/proc/has_light_nearby(light_amount = LIGHTING_TILE_IS_DARK)
 	var/turf/mob_location = get_turf(src)
 	var/area/mob_area = get_area(src)
 
@@ -1308,7 +1328,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))
@@ -1321,3 +1341,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	. = list("") //we want to offset unique stuff from standard stuff
 	SEND_SIGNAL(src, COMSIG_MOB_GET_STATUS_TAB_ITEMS, .)
 	return .
+
+/mob/get_examine_name(mob/user, use_article=FALSE)
+	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
+

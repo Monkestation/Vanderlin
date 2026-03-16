@@ -29,14 +29,6 @@
 		usr.client.prefs.current_tab = 1
 		usr.client.prefs.show_choices(usr, 4)
 
-/client/verb/toggle_fullscreen()
-	set name = "ToggleFullscreen"
-	set category = "Preferences.Options"
-	set desc = ""
-	if(prefs)
-		prefs.toggles ^= TOGGLE_FULLSCREEN
-		toggle_fullscreeny(prefs.toggles & TOGGLE_FULLSCREEN)
-
 /client/verb/stop_sounds_rogue()
 	set name = "StopSounds"
 	set category = "Preferences.Sound"

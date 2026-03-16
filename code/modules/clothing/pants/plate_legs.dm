@@ -15,7 +15,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	r_sleeve_status = SLEEVE_NOMOD
@@ -28,16 +28,11 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 9 * STEEL_MULTIPLIER
 
+	material_category = ARMOR_MAT_PLATE
+
 /obj/item/clothing/pants/platelegs/Initialize()
 	. = ..()
 	AddComponent(/datum/component/item_equipped_movement_rustle, custom_sounds = SFX_PLATE_STEP)
-
-/obj/item/clothing/pants/platelegs/ancient
-	name = "ancient chausses"
-	desc = "Cuisses made of plated steel, offering additional protection against blunt force."
-	gender = PLURAL
-	icon_state = "ancientplate_legs"
-	item_state = "ancientplate_legs"
 
 /obj/item/clothing/pants/platelegs/iron
 	name = "iron plated chausses"
@@ -71,15 +66,6 @@
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STANDARD
 
-/obj/item/clothing/pants/platelegs/vampire
-	name = "ancient plate greaves"
-	desc = "Steel chausses from antiquity, though outdated they offer superior protection."
-	icon_state = "vpants"
-	item_state = "vpants"
-	armor = ARMOR_PLATE_GOOD
-	prevent_crits = ALL_CRITICAL_HITS_VAMP // Vampire armors don't protect against lashing, Castlevania reference
-	item_weight = 5.5 * STEEL_MULTIPLIER
-
 /obj/item/clothing/pants/platelegs/blk
 	name = "blacksteel legs"
 	desc = "Leg armor of blacksteel, resilient and surprisingly light."
@@ -87,7 +73,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD

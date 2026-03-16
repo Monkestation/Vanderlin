@@ -155,9 +155,6 @@
  * See: [/obj/item/proc/melee_attack_chain]
  */
 /atom/proc/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	if(user.used_intent.tranged)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
 	var/signal_result = SEND_SIGNAL(src, COMSIG_ATOM_ATTACKBY_SECONDARY, weapon, user, modifiers)
 
 	if(signal_result & COMPONENT_SECONDARY_CANCEL_ATTACK_CHAIN)
@@ -165,6 +162,10 @@
 
 	if(signal_result & COMPONENT_SECONDARY_CONTINUE_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CONTINUE_CHAIN
+
+	if(user.cmode)
+		if(user.rmb_intent?.special_attack(user, src))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -207,11 +208,11 @@
 
 /mob/living/attackby_secondary(obj/item/weapon, mob/living/user, list/modifiers)
 	. = ..()
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(user.cmode)
 		// Normal attackby updates click cooldown, so we have to make up for it
 		var/result = weapon.attack_secondary(src, user, modifiers)
 
@@ -227,7 +228,9 @@
 
 	if(weapon.item_flags & ABSTRACT)
 		return
+
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	if(src == user)
 		if(offered_item_ref)
 			cancel_offering_item()
@@ -438,8 +441,12 @@
 	// If this weapon has no user and is somehow attacking you just return default.
 	if(!istype(user))
 		return newforce
+
+	var/dullness_ratio
+	if(I.max_blade_int && I.sharpness != IS_BLUNT)
+		dullness_ratio = I.blade_int / I.max_blade_int
 	var/cont = FALSE
-	var/used_str = user.STASTR
+	var/used_str = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		/*
@@ -467,6 +474,12 @@
 			// For each level of potence user gains 0.5 STR, at 5 Potence their STR buff is 2.5
 	if(used_str >= 11)
 		newforce = newforce + (newforce * ((used_str - 10) * 0.1))
+		if(dullness_ratio && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+			if(dullness_ratio <= SHARPNESS_TIER2_THRESHOLD)
+				used_str = 0
+			else if(dullness_ratio < SHARPNESS_TIER1_THRESHOLD)
+				var/strlerp = (dullness_ratio - SHARPNESS_TIER2_THRESHOLD) / (SHARPNESS_TIER1_THRESHOLD - SHARPNESS_TIER2_THRESHOLD)
+				used_str *= strlerp
 	else if(used_str <= 9)
 		newforce = newforce - (newforce * ((10 - used_str) * 0.1))
 
@@ -475,7 +488,7 @@
 		if(HAS_TRAIT(I, TRAIT_WIELDED))
 			effective *= 0.75
 		//Strength influence is reduced to 30%
-		if(effective > user.STASTR)
+		if(effective > GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH))
 			newforce = max(newforce*0.3, 1)
 
 	//Blade Dulling Starts here.
@@ -484,12 +497,12 @@
 			switch(user.used_intent.blade_class)
 				if(BCLASS_CUT)
 					var/mob/living/lumberjacker = user
-					var/lumberskill = lumberjacker.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+					var/lumberskill = GET_MOB_SKILL_VALUE_OLD(lumberjacker, /datum/attribute/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1, user))
 						dullfactor = 0.2
 					else
 						dullfactor = 0.45 + (lumberskill * 0.15)
-						lumberjacker.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
+						lumberjacker.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(lumberjacker, STAT_INTELLIGENCE)*0.2))
 					cont = TRUE
 				if(BCLASS_CHOP)
 					//Additional damage for axes against trees.
@@ -542,7 +555,7 @@
 					cont = TRUE
 				if(BCLASS_PICK)
 					var/mob/living/miner = user
-					var/mineskill = miner.get_skill_level(/datum/skill/labor/mining, TRUE)
+					var/mineskill = GET_MOB_SKILL_VALUE_OLD(miner, /datum/attribute/skill/labor/mining)
 					dullfactor = 1.6 - (mineskill * 0.1)
 					cont = TRUE
 			if(!cont)
@@ -555,14 +568,14 @@
 				return 0
 			var/mob/living/miner = user
 			//Mining Skill force multiplier.
-			var/mineskill = miner.get_skill_level(/datum/skill/labor/mining, TRUE)
+			var/mineskill = GET_MOB_SKILL_VALUE_OLD(miner, /datum/attribute/skill/labor/mining)
 			newforce = newforce * (8+(mineskill*1.5))
 			// Pick quality multiplier. Affected by smithing, or material of the pick.
 			if(istype(I, /obj/item/weapon/pick))
 				var/obj/item/weapon/pick/P = I
 				newforce *= P.pickmult
 			shake_camera(user, 1, 0.1)
-			miner.adjust_experience(/datum/skill/labor/mining, (miner.STAINT*0.2))
+			miner.adjust_experience(/datum/attribute/skill/labor/mining, (GET_MOB_ATTRIBUTE_VALUE(miner, STAT_INTELLIGENCE)*0.2))
 	/*
 	* Ill be honest this final thing is extremely confusing.
 	* Newforce after being altered by strength stat is then
@@ -575,6 +588,13 @@
 	* flag. This is alot.
 	*/
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
+	if(user.used_intent.damfactor && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+		if(dullness_ratio <= SHARPNESS_TIER2_THRESHOLD)
+			newforce = 0
+		else if(dullness_ratio <= SHARPNESS_TIER1_THRESHOLD)
+			var/damflerp = (dullness_ratio - SHARPNESS_TIER2_THRESHOLD) / (SHARPNESS_TIER1_THRESHOLD - SHARPNESS_TIER2_THRESHOLD)
+			newforce *= damflerp
+			newforce = round(newforce)
 	if(user.used_intent.get_chargetime() && user.client?.chargedprog < 100)
 		newforce = newforce * round(user.client?.chargedprog / 100, 0.1)
 	// newforce = round(newforce, 1)
@@ -586,6 +606,12 @@
 	newforce = round(newforce,1)
 	//This is returning the maximum of the arguments meaning this is to prevent negative values.
 	newforce = max(newforce, 1)
+	if(dullness_ratio)
+		if(dullness_ratio < SHARPNESS_TIER2_THRESHOLD && (user.used_intent.blade_class in list(BCLASS_CHOP, BCLASS_CUT, BCLASS_STAB)))
+			var/lerpratio = LERP(0, SHARPNESS_TIER2_THRESHOLD, (dullness_ratio / SHARPNESS_TIER2_THRESHOLD))
+			if(prob(33))
+				to_chat(user, span_info("The blade is dull..."))
+			newforce *= (lerpratio * 2)
 	return newforce
 
 /mob/living/proc/simple_limb_hit(zone)
@@ -650,11 +676,78 @@
 		return TRUE
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
-	if(I.force < force_threshold || I.damtype == STAMINA)
-		playsound(src, 'sound/blank.ogg', I.get_clamped_volume(), TRUE, -1)
-	else
-		. = ..()
-		I.do_special_attack_effect(user, null, null, src, null)
+	var/hitlim = simple_limb_hit(user.zone_selected)
+	I.funny_attack_effects(src, user)
+	var/newforce = get_complex_damage(I, user)
+	var/haha = user.used_intent.blade_class
+	var/armor = run_armor_check(null, haha, armor_penetration = I.armor_penetration, damage = newforce)
+	var/nodmg = FALSE
+	next_attack_msg.Cut()
+	if(armor > 0)
+		nodmg = TRUE
+		next_attack_msg += span_warning("Armor stops the damage.")
+	apply_damage(newforce, I.damtype, hitlim, armor)
+	I.remove_bintegrity(1)
+	if(I.damtype == BRUTE && !nodmg)
+		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+			simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
+		if(newforce > 5)
+			if(haha != BCLASS_BLUNT)
+				I.add_mob_blood(src)
+				var/turf/location = get_turf(src)
+				add_splatter_floor(location)
+				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
+					user.add_mob_blood(src)
+		if(newforce > 15)
+			if(haha == BCLASS_BLUNT)
+				I.add_mob_blood(src)
+				var/turf/location = get_turf(src)
+				add_splatter_floor(location)
+				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
+					user.add_mob_blood(src)
+	send_item_attack_message(I, user, hitlim)
+	next_attack_msg.Cut()
+	I.do_special_attack_effect(user, null, null, src, null)
+
+
+/mob/living/simple_animal/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, peeldivisor, intdamfactor = 1, used_weapon)
+	if(!type)
+		return 0
+	var/armorval = 0
+	if(HAS_TRAIT(src, TRAIT_ANIMAL_NATURAL_ARMOR) && genetics)
+		var/natural = genetics.get_natural_armor_for_type(type)
+		if(natural)
+			armorval += max(0, natural - armor_penetration)
+
+	if(bbarding && !bbarding.obj_broken)
+		armorval = bbarding.armor.getRating(type)
+		var/intdamage = damage
+		if(type != "blunt")
+			if((damage + armor_penetration) > armorval)
+				intdamage = (damage + armor_penetration) - armorval
+
+			if(intdamfactor != 1)
+				intdamage *= intdamfactor
+
+			bbarding.take_damage(intdamage, damage_flag = type, sound_effect = FALSE, armor_penetration = 100)
+		else
+			if(mind)
+				if(armorval > 0)
+					intdamage -= intdamage * ((armorval / 1.66) / 100)	//Reduces it up to 60% (100 dmg -> 40 dmg at Blunt S armor (100))
+			if(intdamfactor != 1)
+				intdamage *= intdamfactor
+
+			bbarding.take_damage(intdamage, damage_flag = type, sound_effect = FALSE, armor_penetration = 100)
+
+	return armorval
+
+/mob/living/simple_animal/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)
+	if(damage_type != BRUTE && damage_type != BURN)
+		return
+	if(!bbarding)
+		return
+	damage_amount *= 0.5 //0.5 multiplier for balance reason, we don't want clothes to be too easily destroyed
+	bbarding.take_damage(damage_amount, damage_type, damage_flag, 0)
 
 /**
  * Last proc in the [/obj/item/proc/melee_attack_chain]

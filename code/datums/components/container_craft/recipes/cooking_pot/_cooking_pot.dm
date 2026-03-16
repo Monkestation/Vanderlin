@@ -31,7 +31,7 @@
 /datum/container_craft/cooking/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 0.5)
+		real_cooking_time /= 1 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 0.5)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -105,7 +105,7 @@
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
 	// Get the initiator's cooking skill
-	var/cooking_skill = initiator.get_skill_level(/datum/skill/craft/cooking) + initiator.get_inspirational_bonus()
+	var/cooking_skill = GET_MOB_SKILL_VALUE_OLD(initiator, /datum/attribute/skill/craft/cooking) + initiator.get_inspirational_bonus()
 
 	// Use the quality calculator to determine final quality
 	var/datum/quality_calculator/cooking/cook_calc = new(

@@ -11,7 +11,7 @@
 \---------------*/
 
 /obj/item/reagent_containers/food/snacks/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_VPOOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	do_random_pixel_offset = FALSE // disables the random placement on creation for this object
 
@@ -45,6 +45,7 @@
 	desc = "A vile decaying morsel, its last hope is to become food for the soil."
 	color = "#6c6897"
 	eat_effect = /datum/status_effect/debuff/rotfood
+	list_reagents = list(/datum/reagent/yuck = 5)
 
 /obj/item/reagent_containers/food/snacks/rotten/Initialize()
 	var/mutable_appearance/rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
@@ -57,7 +58,7 @@
 	icon_state = "meat"
 
 /obj/item/reagent_containers/food/snacks/rotten/bacon
-	name = "rotten pigflesh"
+	name = "rotten flesh"
 	icon_state = "pigflesh"
 
 /obj/item/reagent_containers/food/snacks/rotten/sausage
@@ -526,7 +527,7 @@
 /datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M)
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER ))
 		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_MAXIMUM)
+			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_NORMAL)
 		M.adjustBruteLoss(-0.2, 0)
 		M.adjustFireLoss(-0.2, 0)
 		M.adjust_energy(5)
@@ -598,12 +599,12 @@
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)
-		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
+		short_cooktime = (40 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			var/obj/item/reagent_containers/food/snacks/dough_base/base = new /obj/item/reagent_containers/food/snacks/dough_base(get_turf(src))
 			base.set_quality(recipe_quality)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 			qdel(src)
 	else

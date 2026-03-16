@@ -1,3 +1,28 @@
+/datum/attribute_holder/sheet/job/monk
+	attribute_variance = list(
+		/datum/attribute/skill/combat/polearms = list(10, 20),
+		/datum/attribute/skill/misc/athletics = list(20, 30)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/climbing = 40,
+	)
+
+/datum/attribute_holder/sheet/job/monk/kobold
+	attribute_variance = list()
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = -1,
+	)
 /datum/job/advclass/combat/monk
 	title = "Monk"
 	allowed_races = RACES_PLAYER_NONHERETICAL
@@ -11,22 +36,7 @@
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 	allowed_patrons = ALL_TEMPLE_PATRONS  // randomize patron if not in ten
 
-	skills = list(
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/sewing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/climbing = 4,
-	)
-
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_END = 2,
-		STATKEY_PER = -1,
-		STATKEY_SPD = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/monk
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -34,13 +44,8 @@
 
 /datum/job/advclass/combat/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	spawned.adjust_skillrank(/datum/skill/combat/polearms, pick(1,1,2), TRUE) // Wood staff
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(2,2,3), TRUE)
-
 	if(spawned.dna?.species.id == "kobold")
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 2) // Go, my child. Destroy their ankles.
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_SPD, -1)
+		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/kobold)
 
 /datum/outfit/adventurer/monk
 	name = "Monk (Adventurer)"
@@ -62,22 +67,22 @@
 
 	switch(H.patron?.type)
 		if(/datum/patron/divine/astrata)
-			neck = /obj/item/clothing/neck/psycross/silver/astrata
+			neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/necra) // Necra acolytes are now gravetenders
-			neck = /obj/item/clothing/neck/psycross/silver/necra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 		if(/datum/patron/divine/eora)
-			neck = /obj/item/clothing/neck/psycross/silver/eora
+			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
 		if(/datum/patron/divine/noc)
-			neck = /obj/item/clothing/neck/psycross/silver/noc
+			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/pestra)
-			neck = /obj/item/clothing/neck/psycross/silver/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 		if(/datum/patron/divine/dendor)
-			neck = /obj/item/clothing/neck/psycross/silver/dendor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)
-			neck = /obj/item/clothing/neck/psycross/silver/abyssor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 		if(/datum/patron/divine/ravox)
-			neck = /obj/item/clothing/neck/psycross/silver/ravox
+			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 		if(/datum/patron/divine/xylix)
-			neck = /obj/item/clothing/neck/psycross/silver/xylix
+			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/malum)
-			neck = /obj/item/clothing/neck/psycross/silver/malum
+			neck = /obj/item/clothing/neck/psycross/silver/divine/malum

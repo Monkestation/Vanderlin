@@ -27,12 +27,16 @@
 		EXP_TYPE_LIVING = 300
 	)
 
+	honorary = "Lord"
+	honorary_f = "Lady"
+
 	languages = list(
 		/datum/language/elvish,
 		/datum/language/dwarvish,
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
+		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
 		/datum/language/deepspeak
@@ -42,13 +46,42 @@
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER
 	)
 
 /datum/job/archivist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 	spawned.virginity = TRUE
+
+/datum/attribute_holder/sheet/job/chronicler
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 8,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/labor/mathematics = 60
+	)
+
+/datum/attribute_holder/sheet/job/chronicler/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 8,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/labor/mathematics = 60
+	)
 
 /datum/job/advclass/archivist/chronicler
 	title = "Chronicler"
@@ -63,35 +96,17 @@
 		/datum/action/cooldown/spell/undirected/conjure_item/summon_parchment/scroll,
 	)
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 8,
-		STATKEY_CON = -1,
-		STATKEY_END = -1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 6,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/magic/arcane = 3,
-		/datum/skill/labor/mathematics = 6
-	)
-
-/datum/job/advclass/archivist/chronicler/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/arcane, 2, TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/chronicler
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/chronicler/old
 
 /datum/outfit/archivist/chronicler
 	name = "Chronicler (Archivist)"
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/storage/keyring/archivist
-	beltr = /obj/item/book/granter/spellbook/apprentice
+	beltr = /obj/item/book/granter/spellbook/expert
 	backl = /obj/item/storage/backpack/satchel
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backpack_contents = list(
 		/obj/item/textbook = 1,
 		/obj/item/natural/feather = 1
@@ -111,27 +126,43 @@
 			armor = /obj/item/clothing/shirt/robe/archivist
 			pants = /obj/item/clothing/pants/tights/colored/black
 
+/datum/attribute_holder/sheet/job/dreamwatcher
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 4, //Nocblessed status bonus already grants +3 int and +2 perception
+		STAT_PERCEPTION = 1,
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
+/datum/attribute_holder/sheet/job/dreamwatcher/old
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 5, //Nocblessed status bonus already grants +3 int and +2 perception
+		STAT_ENDURANCE = 1,
+		STAT_PERCEPTION = 1,
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/labor/mathematics = 40
+	)
+
 /datum/job/advclass/archivist/dreamwatcher //Not a Magician nor an Acolyte, but something more, blessed by Noc since they were born, being capable of Visions and Feelings through dreams, they can feel the highest god influence or and get a hint about any of the active antags.
 	title = "Dreamwatcher"
 	tutorial = "Your dreams have always been vivid, filled with colors, voices, and shadows that seemed to watch. As a child, you feared them. As an adult, you began to listen. The Church speaks of Noc as the keeper of magic, but to you, he is something deeper: a silent guide whose truths are not written in scripture, but in sleep. Over time, you learned to echo those truths in your own way, through murmured lullabies, whispered verses, and songs shaped from silence."
 	outfit = /datum/outfit/archivist/dreamwatcher
 	category_tags = list(CTAG_ARCHIVIST)
 
-	jobstats = list(
-		STATKEY_INT = 4, //Nocblessed status bonus already grants +3 int and +2 perception
-		STATKEY_PER = 1,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 6,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/labor/mathematics = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/dreamwatcher
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/dreamwatcher/old
 
 	traits = list(
 		TRAIT_DREAM_WATCHER,
@@ -140,13 +171,7 @@
 
 /datum/job/advclass/archivist/dreamwatcher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
 
 /datum/outfit/archivist/dreamwatcher
 	name = "Dreamwatcher (Archivist)"
@@ -155,7 +180,7 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/storage/keyring/archivist
 	wrists = /obj/item/clothing/wrists/nocwrappings
-	neck = /obj/item/clothing/neck/psycross/silver/noc
+	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,

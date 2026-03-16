@@ -42,18 +42,13 @@
 
 	if (!isliving(target))
 		return
-
+	var/mob/living/L = target
 	//viewers are able to detect if a person's words aren't their own
 	var/base_difficulty = 10
 	var/difficulty_malus = 0
-	var/masked = FALSE
-	if (ishuman(target)) //apply a malus and different text if victim's mouth isn't visible, and a malus if they're already typing
-		var/mob/living/carbon/human/victim = target
-		if ((victim.wear_mask?.flags_inv & HIDEFACE) && (victim.head?.flags_inv & HIDEFACE))
-			masked = TRUE
-			base_difficulty += 4
-		if (victim.typing_indicator) //ugly way to check for if the victim is currently typing
-			base_difficulty += 4
+	var/masked = !is_human_part_visible(L, HIDEFACE)
+	if (masked || L.typing_indicator)
+		base_difficulty += 4
 
 	for (var/mob/living/hearer in (oviewers(7, target) - owner))
 		if (!hearer.client)
@@ -61,7 +56,7 @@
 		difficulty_malus = 0
 		if (get_dist(hearer, target) > 3)
 			difficulty_malus += 2
-		if (hearer.stat_roll(STATKEY_PER, 20 -( base_difficulty + difficulty_malus)))
+		if (hearer.stat_roll(STAT_PERCEPTION, 20 -( base_difficulty + difficulty_malus)))
 			if (masked)
 				to_chat(hearer, span_warning("[target]'s jaw isn't moving to match [target.p_their()] words."))
 			else
@@ -111,6 +106,7 @@
 	cooldown_length = 5 SECONDS
 	duration_length = 2 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/madrigal/activate()
 	. = ..()
@@ -192,6 +188,7 @@
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/sirens_beckoning/activate()
 	. = ..()
@@ -220,6 +217,7 @@
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
 	duration_override = TRUE
+	violates_masquerade = TRUE
 
 /datum/coven_power/siren/shattering_crescendo/activate()
 	. = ..()

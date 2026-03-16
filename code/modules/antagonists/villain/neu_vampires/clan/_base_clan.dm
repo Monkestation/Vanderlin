@@ -1,11 +1,24 @@
 GLOBAL_LIST_EMPTY_TYPED(vampire_clans, /datum/clan)	//>:3
 
+/datum/attribute_holder/sheet/job/clan
+	attribute_variance = list(
+		STAT_STRENGTH = list(1, 2)
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/misc/athletics = list(50, 50),
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		/datum/attribute/skill/magic/blood = 20
+	)
+
 /*
 This datum stores a declarative description of clans, in order to make an instance of the clan component from this implementation in runtime
 And it also helps for the character set panel
 */
 /datum/clan
-	var/name = "Caitiff"
+	var/name = "Base Clan"
 	var/desc = "The clanless. The rabble. Of no importance."
 
 	var/list/clan_covens = list() //coven datums
@@ -14,12 +27,12 @@ And it also helps for the character set panel
 
 	/// List of traits that are applied to members of this Clan
 	var/list/clane_traits = list(
+		TRAIT_BLOODDRINKER,
 		TRAIT_STRONGBITE,
 		TRAIT_NOENERGY,
 		TRAIT_NOHUNGER,
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
-		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOSLEEP,
 		TRAIT_VAMPMANSION,
@@ -29,7 +42,8 @@ And it also helps for the character set panel
 		TRAIT_LIMBATTACHMENT,
 	)
 
-	var/blood_preference = BLOOD_PREFERENCE_ALL
+	var/blood_preference = null
+	var/blood_disgust = BLOOD_PREFERENCE_RATS
 
 	var/list/disliked_clans = list()
 	var/list/liked_clans = list()
@@ -65,6 +79,7 @@ And it also helps for the character set panel
 	var/datum/clan_leader/leader = /datum/clan_leader/lord
 	var/force_VL_if_clan_is_empty = TRUE
 	var/selectable_by_vampires = TRUE // Set to FALSE for clans that shouldn't be selectable
+	var/intro_music = 'sound/music/vampintro.ogg'
 
 /datum/clan/proc/get_downside_string()
 	return "burn in sunlight"
@@ -72,20 +87,24 @@ And it also helps for the character set panel
 /datum/clan/proc/get_blood_preference_string()
 	return "any blood"
 
-/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types)
-	var/unwanted_blood = (blood_types & ~blood_preference)
+/datum/clan/proc/handle_bloodsuck(mob/living/carbon/human/drinker, blood_types, vitae)
+	var/wanted_blood = (blood_types & blood_preference)
+	var/unwanted_blood = (blood_types & blood_disgust)
 
-	if(blood_types & BLOOD_PREFERENCE_EUPHORIC)
-		drinker.apply_status_effect(/datum/status_effect/debuff/blood_euphoria)
-
-	if(!unwanted_blood)
-		return
-	drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
-	to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	if(wanted_blood && !unwanted_blood)
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_preference)
+		vitae *= 1.5
+	if(unwanted_blood && !wanted_blood)
+		vitae *= 0.5
+		drinker.apply_status_effect(/datum/status_effect/debuff/blood_disgust)
+		to_chat(drinker, span_warning("This blood tastes revolting to you!"))
+	return vitae
 
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
+	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
+	RegisterSignal(H, COMSIG_MOB_EXAMINATE_CARBON, PROC_REF(examine_target))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
 	menu_action.Grant(H)
@@ -103,7 +122,8 @@ And it also helps for the character set panel
 		// Apply vampire-specific changes
 		H.has_reflection = FALSE
 		H.cut_overlay(H.reflective_icon)
-		H.mob_biotypes = MOB_UNDEAD
+		H.mob_biotypes |= MOB_UNDEAD
+		H.physiology?.bleed_mod /= 2
 
 		if(alt_sprite)
 			if (!alt_sprite_greyscale)
@@ -116,9 +136,10 @@ And it also helps for the character set panel
 		apply_vampire_look(H)
 
 		var/datum/component/vampire_disguise/disguise_comp = H.GetComponent(/datum/component/vampire_disguise)
-		disguise_comp.apply_disguise(H)
+		disguise_comp?.apply_disguise(H)
 
-		H.playsound_local(get_turf(H), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
+		if(intro_music)
+			H.playsound_local(H, intro_music, 80, FALSE, pressure_affected = FALSE)
 		for(var/datum/coven/coven as anything in clan_covens)
 			H.give_coven(coven)
 	else
@@ -142,13 +163,9 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/apply_non_vampire_look(mob/living/carbon/human/H)
-	// Subtle changes for non-vampires - they look more human but with slight clan influence
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 
-	if(eyes && prob(50)) // Only sometimes change eye color
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#AA0000" // Darker red than vampires
-
+	if(prob(50)) // Only sometimes change eye color
+		H.set_eye_color("#AA0000", updates_dna = TRUE)
 	H.update_body()
 	H.update_body_parts(redraw = TRUE)
 
@@ -252,8 +269,7 @@ And it also helps for the character set panel
  */
 /datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-
-	UnregisterSignal(vampire, COMSIG_HUMAN_LIFE)
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -273,6 +289,8 @@ And it also helps for the character set panel
 	vampire.has_reflection = TRUE
 	vampire.create_reflection()
 	vampire.update_reflection()
+	vampire.physiology?.bleed_mod *= 2
+	vampire.mob_biotypes &= ~MOB_UNDEAD
 
 	clan_members -= vampire
 
@@ -344,34 +362,36 @@ And it also helps for the character set panel
 /datum/clan/proc/on_vampire_life(mob/living/carbon/human/H)
 	H.process_vampire_life()
 
+/datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
+	if(user != examined) // no need to beat yourself up over it buddy
+		var/mob/living/carbon/human/H = examined
+		if(istype(H) && H.virginity && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
+			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_boldred("[P[THEYRE]] a virgin!"))
+	var/clan_examine = examined.get_clan_hierarchy_examine(user)
+	if(clan_examine)
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, clan_examine)
+
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
 	add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
+	add_verb(H, /mob/living/carbon/human/proc/sire_spawn)
 
 
 	H.cmode_music = 'sound/music/cmode/antag/CombatThrall.ogg'
 
-	H.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 5, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
-	H.change_stat(STATKEY_STR, pick(1,2))
-	H.change_stat(STATKEY_SPD, 1)
-	H.remove_stat_modifier(STATMOD_AGE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/clan)
+	H.update_age_stats(H.age, TRUE)
 	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
 	transfix.Grant(H)
 
 
 /datum/clan/proc/apply_vampire_look(mob/living/carbon/human/H)
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-
 	// Apply vampire appearance
 	H.skin_tone = "c9d3de"
 	H.set_hair_color("#181a1d", FALSE)
 	H.set_facial_hair_color("#181a1d", FALSE)
 
-	if(eyes)
-		eyes.heterochromia = FALSE
-		eyes.eye_color = "#FF0000"
+	H.set_eye_color("#FF0000", null, FALSE, FALSE)
 
 	H.update_organ_colors()
 	H.update_body()
@@ -526,28 +546,28 @@ And it also helps for the character set panel
 	timer = 10 MINUTES
 
 
-/datum/status_effect/debuff/blood_euphoria
-	id = "blood_euphoria"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/datum/status_effect/debuff/blood_preference
+	id = "blood_preference"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_preference
 	duration = 30 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 
-/atom/movable/screen/alert/status_effect/buff/blood_euphoria
+/atom/movable/screen/alert/status_effect/buff/blood_preference
 	name = "Sanguine Euphoria"
 	desc = span_good("This type of blood goes down incredibly well.")
 	icon_state = "hunger2"
 
-/datum/status_effect/buff/blood_euphoria/on_apply()
+/datum/status_effect/buff/blood_preference/on_apply()
 	. = ..()
 	if(.)
 		owner.add_stress(/datum/stress_event/good_blood)
 		owner.adjustBruteLoss(-5)
 
-/datum/status_effect/buff/blood_euphoria/tick()
+/datum/status_effect/buff/blood_preference/tick()
 	. = ..()
 	owner.adjustBruteLoss(-2)
 
-/datum/status_effect/buff/blood_euphoria/on_remove()
+/datum/status_effect/buff/blood_preference/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/good_blood)
 

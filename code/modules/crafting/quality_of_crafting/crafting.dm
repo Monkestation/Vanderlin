@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/crafting
 	abstract_type = /datum/repeatable_crafting_recipe/crafting
-	skillcraft = /datum/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/crafting
 	category = "Misc Crafting"
 	allow_inverse_start = TRUE
 	subtypes_allowed = TRUE
@@ -56,11 +56,11 @@
 /datum/repeatable_crafting_recipe/crafting/wickercloak
 	name = "wicker cloak"
 	requirements = list(
-		/obj/item/natural/dirtclod = 2,
+		/obj/item/natural/clod/dirt = 2,
 		/obj/item/grown/log/tree/stick= 4,
 		/obj/item/natural/fibers = 3,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/cloak/wickercloak
 	craftdiff = 0
@@ -68,11 +68,11 @@
 /datum/repeatable_crafting_recipe/crafting/bog_cowl
 	name = "bog cowl"
 	requirements = list(
-		/obj/item/natural/dirtclod= 1,
+		/obj/item/natural/clod/dirt= 1,
 		/obj/item/grown/log/tree/stick= 3,
 		/obj/item/natural/fibers = 2,
 	)
-	attacked_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
 	starting_atom = /obj/item/grown/log/tree/stick
 	output = /obj/item/clothing/neck/bogcowl
 	craftdiff = 0
@@ -317,7 +317,7 @@
 	starting_atom  = /obj/item/ingot/iron
 	allow_inverse_start = FALSE
 	output = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/steel_quarterstaff
@@ -330,7 +330,7 @@
 	starting_atom  = /obj/item/ingot/steel
 	allow_inverse_start = FALSE
 	output = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/crafting/caningstick
@@ -527,6 +527,20 @@
 	output = /obj/item/clothing/neck/psycross
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/crafting/bone_amulet
+	name = "bone amulet"
+	requirements = list(
+		/obj/item/alch/bone = 2,
+		/obj/item/alch/sinew = 3,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/alch/bone
+	starting_atom = /obj/item/alch/sinew
+	output = /obj/item/clothing/neck/psycross/great_hunt
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/bottle_kit
 	name = "bottle kit"
 	requirements = list(
@@ -597,7 +611,7 @@
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
 /datum/repeatable_crafting_recipe/crafting/bigflail
-	name = "great militia flail"
+	name = "great studded flail"
 	requirements = list(
 		/obj/item/weapon/thresher= 1,
 		/obj/item/rope/chain = 1,
@@ -656,7 +670,7 @@
 	allow_inverse_start = FALSE
 	output = /obj/item/gear/wood/basic
 	craftdiff = 3
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 
 /datum/repeatable_crafting_recipe/crafting/wheatlbait
 	name = "bait (wheat)"

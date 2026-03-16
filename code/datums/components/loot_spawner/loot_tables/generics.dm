@@ -33,7 +33,12 @@
 			/obj/item/clothing/armor/gambeson = 10,
 			/obj/item/clothing/gloves/chain/iron = 3,
 			/obj/item/clothing/neck/gorget = 3,
-			/obj/item/statue/gold/loot = 1
+			/obj/item/statue/gold/loot = 1,
+			/obj/item/carvedgem/rose/fish = 1,
+			/obj/item/carvedgem/shell/comb = 1,
+			/obj/item/statue/silver/figurine = 1,
+			/obj/item/carvedgem/onyxa/cutgem = 1,
+			/obj/item/carvedgem/shell/cutgem = 1
 		)
 	)
 
@@ -43,16 +48,37 @@
 		list(
 			/obj/item/coin/gold/pile = 15,
 			/obj/item/weapon/knife/dagger/silver = 5,
-			/obj/item/weapon/sword/long/greatsword = 3,
+			/obj/item/weapon/sword/long/greatsword = 2,
 			/obj/item/weapon/axe/iron = 10,
 			/obj/item/ingot/gold = 5,
+			/obj/item/ingot/silver = 5,
 			/obj/item/clothing/head/crown/circlet = 2,
+			/obj/item/clothing/head/crown/circlet/golddiadem = 2,
+			/obj/item/clothing/head/crown/circlet/silverdiadem = 3,
+			/obj/item/clothing/head/crown/circlet/silverheaddress = 2,
+			/obj/item/clothing/head/crown/circlet/goldheaddress = 1,
+			/obj/item/clothing/face/facemask/goldnosechain = 1,
+			/obj/item/clothing/face/facemask/silverveil = 1,
 			/obj/item/clothing/armor/medium/scale = 8,
 			/obj/item/clothing/armor/plate = 8,
 			/obj/item/clothing/gloves/chain = 3,
 			/obj/item/clothing/neck/bevor = 3,
 			/obj/item/clothing/pants/chainlegs = 5,
-			/obj/item/clothing/pants/chainlegs/kilt = 5
+			/obj/item/clothing/pants/chainlegs/kilt = 5,
+			/obj/item/carvedgem/jade/wyrm = 1,
+			/obj/item/carvedgem/amber/beaver = 1,
+			/obj/item/carvedgem/turq/ka = 1,
+			/obj/item/carvedgem/onyxa/spider = 1,
+			/obj/item/carvedgem/shell/turtle = 1,
+			/obj/item/reagent_containers/glass/carafe/teapot/gold = 2,
+			/obj/item/statue/gold/bust = 1,
+			/obj/item/statue/gold/vasefancy = 1,
+			/obj/item/statue/silver/vase = 3,
+			/obj/item/statue/silver/figurine = 3,
+			/obj/item/weapon/sword/rapier/nimcha = 2,
+			/obj/item/weapon/mace/gada = 2,
+			/obj/item/weapon/whip/urumi/silver = 1,
+			/obj/item/weapon/sword/silver = 3
 		)
 	)
 
@@ -69,7 +95,7 @@
 			/obj/item/clothing/head/crown/circlet/sleepless = 3,
 			/obj/item/clothing/head/crown/circlet/stink = 5,
 			/obj/item/clothing/neck/talkstone = 10,
-			/obj/item/clothing/ring/dragon_ring = 1,
+			/obj/item/clothing/ring/dragon_ring = 1
 		)
 	)
 
@@ -137,7 +163,18 @@
 			/obj/item/weapon/polearm/halberd/bardiche = 10,
 			/obj/item/weapon/sword/rapier/ironestoc = 10,
 			/obj/item/weapon/polearm/eaglebeak/lucerne = 10,
+			/obj/item/weapon/polearm/spear/billhook/ji/iron = 5,
 			/obj/item/weapon/mace = 10,
+			/obj/item/weapon/mace/bludgeon = 10,
+			/obj/item/weapon/mace/spiked = 8,
+			/obj/item/weapon/mace/rungu = 4,
+			/obj/item/weapon/mace/elvenclub = 6,
+			/obj/item/weapon/sword/kaskara/iron = 4,
+			/obj/item/weapon/sword/long/shotel/iron = 2,
+			/obj/item/weapon/sword/sabre/dadao/iron = 4,
+			/obj/item/weapon/whip/urumi/iron = 3,
+			/obj/item/weapon/knife/hunting/kukri/iron = 3,
+			/obj/item/weapon/sword/scimitar/wodao/iron = 4,
 			/obj/item/weapon/sword/scimitar/messer = 10,
 			/obj/item/weapon/mace/elvenclub = 7,
 			/obj/item/weapon/sword/sabre/dadao/bronze = 5,
@@ -157,12 +194,19 @@
 			/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long = 5,
 			/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow = 5,
 			/obj/item/weapon/axe/steel = 5,
-			/obj/item/weapon/sword/long/greatsword = 5,
+			/obj/item/weapon/axe/steel/nsapo = 2,
+			/obj/item/weapon/sword/long/greatsword = 2,
+			/obj/item/weapon/sword/sabre/dadao = 2,
+			/obj/item/weapon/sword/kaskara = 2,
+			/obj/item/weapon/sword/scimitar/wodao = 2,
 			/obj/item/weapon/sword/rapier = 5,
 			/obj/item/weapon/sword/sabre = 5,
-			/obj/item/weapon/mace/goden/steel = 5,
+			/obj/item/weapon/mace/goden/steel = 2,
 			/obj/item/weapon/mace/steel = 5,
-			/obj/item/weapon/hammer/sledgehammer/war = 5
+			/obj/item/weapon/mace/steel/rungu = 2,
+			/obj/item/weapon/mace/steel/shishpar = 2,
+			/obj/item/weapon/hammer/sledgehammer/war = 2,
+			/obj/item/weapon/whip/urumi = 1,
 		)
 	)
 
@@ -178,14 +222,20 @@
 			/obj/item/clothing/pants/chainlegs/kilt/iron = 10,
 			/obj/item/clothing/armor/chainmail/iron = 10,
 			/obj/item/clothing/armor/plate/iron = 10,
-			/obj/item/clothing/head/helmet/heavy/ironplate = 10,
+			/obj/item/clothing/armor/cuirass/iron = 10,
+			/obj/item/clothing/head/helmet/heavy/ironplate = 8,
 			/obj/item/clothing/armor/leather/splint = 10,
 			/obj/item/clothing/armor/brigandine = 5,
+			/obj/item/clothing/head/helmet/horned = 10,
+			/obj/item/clothing/head/helmet/skullcap = 10,
 			/obj/item/clothing/head/helmet/heavy/frog = 5,
 			/obj/item/clothing/head/helmet/visored/hounskull = 5,
 			/obj/item/clothing/face/facemask/steel = 5,
 			/obj/item/clothing/armor/plate/full = 5,
-			/obj/item/clothing/neck/chaincoif = 5
+			/obj/item/clothing/neck/chaincoif = 5,
+			/obj/item/clothing/neck/bevor/iron = 5,
+			/obj/item/clothing/neck/highcollier/iron = 5,
+			/obj/item/clothing/armor/cuirass = 1
 		)
 	)
 

@@ -33,10 +33,14 @@ SUBSYSTEM_DEF(statpanels)
 		if(cached)
 			global_data += "Next Map: [cached.map_name]"
 
+
+		var/true_round_time = "[ROUND_TIME()]"
+		if(SSticker.HasRoundStarted())
+			true_round_time = "[DisplayTimeText(world.time - SSticker.round_start_time, 1)]"
 		global_data += list(
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
-			"Round Time: [ROUND_TIME()]",
+			"Round Time: [true_round_time]",
 			"In-Character Time: [station_time_timestamp()]",
 			"Time of Day: [GLOB.tod]",
 			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
@@ -72,8 +76,6 @@ SUBSYSTEM_DEF(statpanels)
 		if(!target.holder)
 			target.stat_panel.send_message("remove_admin_tabs")
 		else
-			//target.stat_panel.send_message("update_split_admin_tabs", !!(target.prefs.toggles & SPLIT_ADMIN_TABS))
-
 			if(!("MC" in target.panel_tabs) || !("Tickets" in target.panel_tabs))
 				target.stat_panel.send_message("add_admin_tabs", target.holder.href_token)
 
@@ -210,4 +212,8 @@ SUBSYSTEM_DEF(statpanels)
 		set_SDQL2_tab(target)
 
 /// Stat panel window declaration
-/client/var/datum/tgui_window/stat_panel
+/client/var/datum/tgui_window/stat/stat_panel
+
+/datum/tgui_window/stat/initialize(strict_mode, fancy, assets, inline_html, inline_js, inline_css)
+	. = ..()
+	send_message("build_topbar") // This is the best way of doing it... don't @ me
