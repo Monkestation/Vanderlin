@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/gallowglass
 	name = "gallowglass helmet"
-	desc = "Worn by proud fighters of the clans of Kaledon."
+	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/fertilizer/ash
@@ -192,7 +192,7 @@
 	sellprice = 50
 	flags_inv = null
 	armor = ARMOR_SCALE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 5.5 * IRON_MULTIPLIER
@@ -592,7 +592,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	block2add = FOV_RIGHT|FOV_LEFT
 	max_integrity = 425
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 6 * BLACKSTEEL_MULTIPLIER
 
@@ -605,7 +605,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	sewrepair = FALSE
 	icon = 'icons/roguetown/clothing/wrists.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'

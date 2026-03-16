@@ -6,7 +6,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	point_cost = 1
-	associated_skill = /datum/skill/magic/druidic
+	associated_skill = /datum/attribute/skill/magic/druidic
 	attunements = list(
 		/datum/attunement/dark = 0.3,
 		/datum/attunement/death = 0.3,
@@ -26,7 +26,7 @@
 	id = "infestation"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/infestation
 	duration = 10 SECONDS
-	effectedstats = list(STATKEY_CON = -2)
+	effectedstats = list(STAT_CONSTITUTION = -2)
 	var/static/mutable_appearance/rotten = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
 
 /datum/status_effect/debuff/infestation/on_apply()

@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/gmtemplar
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 4,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/swords = 40, // Its easier just to give them all three, it'd be a pain to try and manage this in the ult component
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/magic/holy = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/sewing = 20
+	)
+
 /datum/job/gmtemplar
 	title = "Grandmaster Templar"
 	tutorial = "At the upper echelon of the Templaric order sit the Grandmasters, five who sit in the Head in Kingsfield, and one appointed to each sanctified Tennite Church across the realm.\
@@ -28,26 +47,7 @@
 	)
 	honorary = "Grandmaster"
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 4,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4, // Its easier just to give them all three, it'd be a pain to try and manage this in the ult component
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/magic/holy = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/sewing = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gmtemplar
 
 	traits = list(
 		TRAIT_HEAVYARMOR,

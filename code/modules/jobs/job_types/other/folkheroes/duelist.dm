@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/duelist
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+		STAT_PERCEPTION = 2,
+		STAT_STRENGTH = -1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 30
+	)
+
 /datum/job/advclass/mercenary/duelist
 	title = "Duelist"
 	tutorial = "A swordsman from Valoria, wielding a rapier with deadly precision and driven by honor and a thirst for coin, they duel with unmatched precision, seeking glory and wealth."
@@ -15,26 +34,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
 	total_positions = 2
 
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_SPD = 2,
-		STATKEY_PER = 2,
-		STATKEY_STR = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/cooking = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/duelist
 
 	traits = list(
 		TRAIT_DODGEEXPERT

@@ -249,8 +249,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IMPERCEPTIBLE "imperceptible"
 /// Reduced turf slowdown
 #define TRAIT_LONGSTRIDER "longstrider"
-/// Increased parry ability
-#define TRAIT_GUIDANCE "guidance"
 /// Dendor Path Traits
 #define TRAIT_DENDOR_GROWING "trait_dendor_growing"
 #define TRAIT_DENDOR_STINGING "trait_dendor_stinging"
@@ -331,6 +329,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEADNOSE "Dead Nose"
 #define TRAIT_STINKY "Natural Stench"
 #define TRAIT_ZJUMP "High Jumping"
+#define TRAIT_FLIP_JUMP "Flip Jumping"
 #define TRAIT_JESTERPHOBIA "Jesterphobic"
 #define TRAIT_XENOPHOBIC "Xenophobic"
 #define TRAIT_TOLERANT "Tolerant"

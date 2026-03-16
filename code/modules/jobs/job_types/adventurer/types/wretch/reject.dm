@@ -1,3 +1,31 @@
+/datum/attribute_holder/sheet/job/reject
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 2,
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/misc/stealing = 40,
+		/datum/attribute/skill/misc/lockpicking = 40,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/advclass/wretch/reject
 	title = "Rejected Royal"
 	tutorial = "You were once a member of the royal family, but due to your actions, or the circumstances of your birth, you have been cast out to roam the wilds. \
@@ -17,35 +45,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	outfit = /datum/outfit/wretch/reject
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 2,
-		STATKEY_LCK = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/knives = 4,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 5,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/sneaking = 4,
-		/datum/skill/misc/stealing = 4,
-		/datum/skill/misc/lockpicking = 4,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/reject
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS

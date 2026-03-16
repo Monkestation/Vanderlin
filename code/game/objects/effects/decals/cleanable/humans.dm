@@ -1,3 +1,5 @@
+GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
+
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = ""
@@ -68,7 +70,7 @@
 		return
 	qdel(reagents)
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	bloodiness = 0
 
 /obj/effect/decal/cleanable/blood/lazy_init_reagents()
@@ -163,7 +165,7 @@
 	if(QDELETED(src))
 		return
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	alpha = 100
 	bloodiness = 0
 
@@ -395,7 +397,7 @@
 	. = ..()
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STAINT < 12)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) < 12)
 			return
 	if(shoe_types.len)
 		. += "You recognise the footprints as belonging to:\n"

@@ -128,12 +128,12 @@
 	if(held_item)
 		var/path_to_check = ispath(held_item) ? held_item : held_item.type
 		if(ispath(path_to_check, /obj/item/weapon/knife))
-			var/butchering_skill = user.get_skill_level(/datum/skill/labor/butchering, TRUE)
+			var/butchering_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering)
 			var/used_time = 8
 			used_time = (used_time - 0.5 * butchering_skill) SECONDS
 			visible_message("[user] begins to butcher \the [src].")
 			playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-			var/amt2raise = user.STAINT/4
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/4
 			if(do_after(user, used_time, src))
 				var/obj/item/I = new meat_to_give(get_turf(src))
 				if(rotten && istype(I,/obj/item/reagent_containers/food/snacks))
@@ -141,7 +141,7 @@
 					F.become_rotten()
 
 				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-				user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
+				user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
 				qdel(src)
 	..()
 
@@ -286,7 +286,7 @@
 	. = ..()
 	if(.)
 		return
-	var/damage = user.STASTR*0.5
+	var/damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)*0.5
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE)
@@ -309,7 +309,7 @@
 	else
 		visible_message(span_danger("[user] bites [src]!"))
 	if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
-		var/poison = user.STACON/2
+		var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
 		src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
 		src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
 		to_chat(user, span_warning("Your fangs inject venom into [src]!"))

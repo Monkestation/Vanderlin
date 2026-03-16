@@ -199,12 +199,12 @@
 
 /obj/item/clothing/face/facemask/yoruku_oni
 	name = "oni mask"
-	desc = "A wood mask carved in the visage of demons said to stalk the mountains of Kazengun."
+	desc = "A wood mask carved in the visage of demons said to stalk distant mountains."
 	icon_state = "oni"
 
 /obj/item/clothing/face/facemask/yoruku_kitsune
 	name = "kitsune mask"
-	desc = "A wood mask carved in the visage of the fox spirits said to ply their tricks in the forests of Kazengun."
+	desc = "A wood mask carved in the visage of the fox spirits said to ply their tricks in far off forests."
 	icon_state = "kitsune"
 
 
@@ -241,7 +241,7 @@
 
 /obj/item/clothing/pants/trou/leather/eastpants2
 	name = "strange ripped pants"
-	desc = "Weird pants typically worn by the destitute in Kazengun. Or, those looking to make a fashion statement."
+	desc = "Weird pants typically worn by the destitute, or those looking to make a fashion statement."
 	icon_state = "eastpants2"
 	allowed_race = RACES_PLAYER_ALL
 

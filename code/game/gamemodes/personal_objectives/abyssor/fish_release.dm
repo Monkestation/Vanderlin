@@ -47,7 +47,7 @@
 
 /datum/objective/personal/release_fish/reward_owner()
 	. = ..()
-	owner.current.adjust_skillrank(/datum/skill/labor/fishing, 1)
+	owner.current.adjust_skill_level(/datum/attribute/skill/labor/fishing, 10)
 
 /datum/objective/personal/release_fish/update_explanation_text()
 	explanation_text = "Release an alive [target_fish_name] back to the water to honor Abyssor."

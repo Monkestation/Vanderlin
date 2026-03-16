@@ -12,7 +12,7 @@
 	cast_range = 1
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
 
 	invocation = "Undermaiden avert your gaze!"
@@ -63,7 +63,7 @@
 
 	ADD_TRAIT(cast_on, TRAIT_NODEATH, "avert_spell")
 
-	var/tickspeed = 3 SECONDS + (5 * owner.get_skill_level(associated_skill))
+	var/tickspeed = 3 SECONDS + (5 * GET_MOB_SKILL_VALUE_OLD(owner, associated_skill))
 
 	while(do_after(owner, tickspeed, cast_on))
 		cast_on.adjustOxyLoss(-10)

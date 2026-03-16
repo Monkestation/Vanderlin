@@ -102,7 +102,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	duration = 15 SECONDS
 	tick_interval = -1 // No ticking needed
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
+	effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
 	var/stacks = 0
 	var/max_stacks = SILVER_BANE_MAX_STACKS
 	var/affected_type = AFFECTED // Will be set on application
