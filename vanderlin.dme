@@ -1297,6 +1297,7 @@
 #include "code\datums\migrants\waves\zalad_wave.dm"
 #include "code\datums\migrants\waves\advclass\advclass.dm"
 #include "code\datums\migrants\waves\antagonist\basic_antag.dm"
+#include "code\datums\migrants\waves\antagonist\zizo_cultist.dm"
 #include "code\datums\mob_affix\_base.dm"
 #include "code\datums\mob_affix\armored.dm"
 #include "code\datums\mob_affix\berserker.dm"
