@@ -2575,6 +2575,19 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
 		)
+	if(length(job.banned_patrons) && (user.client.prefs.selected_patron.type in job.banned_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.banned_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
+
+		return make_lock_row(
+			used_name,
+			"\[PATRON BAN\]",
+			"<b>Patrons Banned:</b><br>[patron_text]"
+		)
 	// No lock
 	return FALSE
 

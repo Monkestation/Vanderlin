@@ -1590,6 +1590,36 @@ $border-width-px: $border-width * 1px;
 }
 /* ##### END ##### */
 
+/* ##### THE GREAT HUNT ##### */
+.god_thegreathunt {
+  color: hsl(85, 20%, 44%);
+  font-weight: bold;
+  animation: greathunt_flicker 1s infinite;
+}
+
+@keyframes greathunt_flicker {
+	20% {
+		color: hsl(85, 20%, 44%);
+	}
+
+	40% {
+		color: hsl(243, 74%, 59%);
+	}
+
+	60% {
+		color: hsl(84, 24%, 35%);
+	}
+
+  80% {
+		color: hsl(352, 50%, 50%);
+	}
+
+	100% {
+		color: hsl(84, 13%, 48%);
+	}
+}
+/* ##### END ##### */
+
 .highlight-bounce {
   animation: bounce 2s infinite;
   display: inline-block;

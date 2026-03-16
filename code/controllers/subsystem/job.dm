@@ -144,6 +144,10 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
+		if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
+			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
+			continue
+
 		if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
@@ -219,6 +223,10 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 
 	if(length(job.allowed_patrons) && !(player_prefs.selected_patron.type in job.allowed_patrons))
+		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 

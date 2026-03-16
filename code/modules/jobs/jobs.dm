@@ -125,6 +125,8 @@ GLOBAL_LIST_INIT(company_positions, list(
 GLOBAL_PROTECT(company_positions)
 
 GLOBAL_LIST_INIT(allmig_positions, list(
+	/datum/job/bogwitch::title,
+	/datum/job/bog_apprentice::title,
 	/datum/job/pilgrim::title,
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,
