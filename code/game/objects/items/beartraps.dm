@@ -202,3 +202,14 @@
 	trap_damage = 80 //10 less damage than the actual metal beartrap
 	name = "makeshift mantrap"
 	melting_material = null
+
+/obj/item/restraints/legcuffs/beartrap/hunting_snare
+	name = "hunting snare"
+	trap_damage = 0
+	armed = TRUE
+	anchored = TRUE
+	melting_material = null
+	makeshift_prob = 50 // Precaution, no manually setting it up
+
+/obj/item/restraints/legcuffs/beartrap/hunting_snare/suicide_act(mob/user)
+	return

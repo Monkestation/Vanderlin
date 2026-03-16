@@ -49,6 +49,9 @@
 	if(length(allowed_patrons) && !(to_check.patron.type in allowed_patrons))
 		return FALSE
 
+	if(length(banned_patrons) && (to_check.patron.type in banned_patrons))
+		return FALSE
+
 	if(!antags_can_pick && to_check.mind?.special_role)
 		return FALSE
 

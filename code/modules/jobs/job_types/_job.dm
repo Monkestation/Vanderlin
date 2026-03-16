@@ -104,6 +104,9 @@
 	// Change values
 	/// Patrons allowed for this job, sets to a random one in this list if list has values
 	var/list/allowed_patrons
+	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
+	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
 
@@ -548,10 +551,23 @@
 	if(!.)
 		log_world("Couldn't find a round start spawn point for [title]")
 
+/datum/job/proc/get_job_special_late_point()
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
+		if(spawn_point.name != "[title]_late")
+			continue
+		. = spawn_point
+		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
+			continue
+		spawn_point.used = TRUE
+		break
+
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
 	if(length(GLOB.jobspawn_overrides[title]))
 		return pick(GLOB.jobspawn_overrides[title])
+	var/obj/effect/landmark/start/spawn_point = get_job_special_late_point()
+	if(spawn_point)
+		return spawn_point
 	if(length(SSjob.latejoin_trackers))
 		return pick(SSjob.latejoin_trackers)
 	return SSjob.get_last_resort_spawn_points()

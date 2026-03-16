@@ -45,6 +45,7 @@
 		CLERIC_T1 = /datum/action/cooldown/spell/undirected/bless_crops,
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/beast_sense,
 		CLERIC_T3 = /datum/action/cooldown/spell/beast_tame,
+
 	)
 	viable_tasks = list(
 		/datum/devotion_task/dendor_tend,
@@ -211,3 +212,13 @@
 	viable_tasks = list(
 		/datum/devotion_task/baotha_indulge,
 	)
+
+// Alternate faiths
+
+/datum/devotion/alternate/great_hunt
+	miracles = list(
+		CLERIC_T0 = /datum/action/cooldown/spell/healing/hunt,
+		CLERIC_T1 = list(/datum/action/cooldown/spell/conjure/hunters_trick, /datum/action/cooldown/spell/undirected/hunters_grace),
+		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/conjure/will_of_woods)
+	)
+	traits = list(TRAIT_BRUSHWALK)

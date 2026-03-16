@@ -151,7 +151,7 @@
 /obj/structure/fluff/railing/tall
 	name = "wooden fence"
 	desc = "A sturdy fence of wooden planks."
-	icon = 'icons/roguetown/misc/tallwoodenrailing.dmi'
+	icon = 'icons/roguetown/misc/tallrailing.dmi'
 	icon_state = "tallwoodenrailing"
 	max_integrity = 500
 	pass_crawl = FALSE
@@ -166,6 +166,11 @@
 	opacity = TRUE
 	climb_offset = 6
 	pass_projectile = FALSE
+
+/obj/structure/fluff/railing/tall/stone
+	name = "stone railing"
+	desc = "A sturdy railing made of stone."
+	icon_state = "tallstonerailing"
 
 /obj/structure/bars
 	name = "bars"
@@ -737,6 +742,26 @@
 /obj/structure/fluff/statue/pillar
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "pillar"
+
+/obj/structure/fluff/statue/topiary
+	name = "topiary"
+	icon = 'icons/roguetown/misc/decoration.dmi'
+	icon_state = "topiary_saiga"
+
+/obj/structure/fluff/statue/topiary/saiga
+	icon_state = "topiary_saiga"
+
+/obj/structure/fluff/statue/topiary/sphere
+	icon_state = "topiary_sphere"
+
+/obj/structure/fluff/statue/topiary/spiral
+	icon_state = "topiary_spiral"
+
+/obj/structure/fluff/statue/topiary/stack
+	icon_state = "topiary_stack"
+
+/obj/structure/fluff/statue/topiary/spear
+	icon_state = "topiary_spear"
 
 /obj/structure/fluff/statue/femalestatue
 	icon = 'icons/roguetown/misc/ay.dmi'
