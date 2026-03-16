@@ -37,12 +37,12 @@
 	cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 	banned_patrons = list()
 
-	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_CHURCH, EXP_TYPE_MEDICAL)
-	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_CHURCH, EXP_TYPE_MEDICAL)
+	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_ADVENTURER, EXP_TYPE_CLERIC, EXP_TYPE_MEDICAL)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_CLERIC, EXP_TYPE_MEDICAL)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_ADVENTURER = 300,
-		EXP_TYPE_CHURCH = 300,
+		EXP_TYPE_CLERIC = 300,
 		EXP_TYPE_MEDICAL = 300
 	)
 
