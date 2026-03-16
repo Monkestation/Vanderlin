@@ -1,4 +1,4 @@
-/datum/attribute_holder/sheet/job/monk
+/datum/attribute_holder/sheet/job/acolyte
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
 		STAT_ENDURANCE = 2,
@@ -15,7 +15,7 @@
 		/datum/attribute/skill/craft/cooking = 20
 	)
 
-/datum/attribute_holder/sheet/job/monk/old
+/datum/attribute_holder/sheet/job/acolyte/old
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
 		STAT_ENDURANCE = 2,
@@ -32,35 +32,35 @@
 		/datum/attribute/skill/craft/cooking = 20
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/eora
+/datum/attribute_holder/sheet/job/acolyte/patron/eora
 	raw_attribute_list = list(
 		/datum/attribute/skill/misc/music = 20
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/noc
+/datum/attribute_holder/sheet/job/acolyte/patron/noc
 	raw_attribute_list = list(
 		/datum/attribute/skill/labor/mathematics = 20
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/pestra
+/datum/attribute_holder/sheet/job/acolyte/patron/pestra
 	raw_attribute_list = list(
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/alchemy = 10
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/dendor
+/datum/attribute_holder/sheet/job/acolyte/patron/dendor
 	raw_attribute_list = list(
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/labor/taming = 10
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/abyssor
+/datum/attribute_holder/sheet/job/acolyte/patron/abyssor
 	raw_attribute_list = list(
 		/datum/attribute/skill/labor/fishing = 20,
 		/datum/attribute/skill/misc/swimming = 20
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/ravox
+/datum/attribute_holder/sheet/job/acolyte/patron/ravox
 	raw_attribute_list = list(
 		/datum/attribute/skill/combat/polearms = 10
 	)
@@ -70,13 +70,13 @@
 		/datum/attribute/skill/combat/axesmaces = list(0, 10)
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/xylix
+/datum/attribute_holder/sheet/job/acolyte/patron/xylix
 	raw_attribute_list = list(
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/music = 30
 	)
 
-/datum/attribute_holder/sheet/job/monk/patron/malum
+/datum/attribute_holder/sheet/job/acolyte/patron/malum
 	raw_attribute_list = list(
 		/datum/attribute/skill/craft/blacksmithing = 20,
 		/datum/attribute/skill/craft/smelting = 20,
@@ -111,8 +111,8 @@
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/monk
-	attribute_sheet_old = /datum/attribute_holder/sheet/job/monk/old
+	attribute_sheet = /datum/attribute_holder/sheet/job/acolyte
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/acolyte/old
 
 	languages = list(/datum/language/celestial)
 
@@ -131,10 +131,10 @@
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
 			spawned.virginity = FALSE
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/eora)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/noc)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/noc)
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -164,23 +164,23 @@
 					)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/pestra)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/pestra)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/pestra)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/dendor)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/dendor)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/abyssor)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/abyssor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/ravox)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/ravox)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/xylix)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/xylix)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/monk/patron/malum)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/malum)
 			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 
