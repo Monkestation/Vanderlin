@@ -1868,29 +1868,27 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(user.used_intent?.penfactor)
 		pen = I.armor_penetration + user.used_intent.penfactor
 
-	var/alist/extra_info = alist(
-		ATTACKED_SNEAKING = user.rogue_sneaking,
-		ATTACKED_BEHIND = (H.dir == REVERSE_DIR(get_dir(H, user))),
-	)
-
-	if(!H.cmode && extra_info[ATTACKED_SNEAKING] && extra_info[ATTACKED_BEHIND])
+	var/crit_modifier = 0
+	if(!H.cmode && user.rogue_sneaking && H.dir == REVERSE_DIR(get_dir(H, user)))
 		var/blunt = I.sharpness == IS_BLUNT
 		if(blunt || I.wbalance >= HARD_TO_DODGE)
+			H.next_attack_msg += " [span_danger("SNEAK ATTACK!")]"
 			var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
 			// Get extra damage as a percent of 50% extra based on skill
 			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
-			item_force = (item_force * 0.5) * percentage
+			if(blunt)
+				crit_modifier = FLOOR(15 * percentage, 1)
+			item_force += (item_force * 0.5) * percentage
 			pen = 100
 
 	var/def_zone = affecting.body_zone
 
 	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
 	var/weakness = H.check_weakness(I, user)
-	var/test_damage = (item_force * weakness) * ((100-(armor_block))/100)
 	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
 
 	if(!actual_damage)
-		H.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
+		H.next_attack_msg += " [span_userdanger("Armor stops the damage!")]"
 		H.send_item_attack_message(I, user, parse_zone(selzone))
 		if(!QDELETED(I))
 			I.take_damage(1, BRUTE, I.damage_type)
@@ -1898,7 +1896,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
-	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE)
+	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, crit_modifier = crit_modifier)
 	if(bodypart_wound?.should_embed(I))
 		var/can_impale = TRUE
 		if(!affecting)
@@ -2027,6 +2025,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					H.update_damage_overlays()
 			else//no bodypart, we deal damage with a more general method.
 				H.adjustBruteLoss(damage_amount)
+
 		if(BURN)
 			H.damageoverlaytemp = 20
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.burn_mod
@@ -2047,12 +2046,15 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(TOX)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.tox_mod
 			H.adjustToxLoss(damage_amount)
+
 		if(OXY)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.oxy_mod
 			H.adjustOxyLoss(damage_amount)
+
 		if(CLONE)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.clone_mod
 			H.adjustCloneLoss(damage_amount)
+
 		if(BRAIN)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
 			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)

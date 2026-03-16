@@ -467,9 +467,3 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define DODGING_PENALTY 1
 /// A define so the cooldown on the baited status and the duration of the baitcd status are the same
 #define BAIT_COOLDOWN_TIME 15 SECONDS
-
-// Extra information for spec_attacked_by to pass along for modifications to bodypart attack and crits
-/// Attacker was invisible with sneak on
-#define ATTACKED_SNEAKING 0
-/// Attacker was directly behind
-#define ATTACKED_BEHIND 1
