@@ -8,15 +8,13 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
-	jobstats = list(
+/datum/attribute_holder/sheet/job/chirurgeon
+	raw_attribute_list = list(
 		STATKEY_STR = 1,
 		STATKEY_INT = 2,
 		STATKEY_CON = 1,
 		STATKEY_END = 1,
 		STATKEY_SPD = -1,
-	)
-
-	skills = list(
 		/datum/skill/combat/axesmaces = 20,
 		/datum/skill/combat/shields = 20,
 		/datum/skill/combat/wrestling = 20,
