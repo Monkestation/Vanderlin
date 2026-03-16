@@ -25,6 +25,7 @@
 	outfit=/datum/outfit/chirurgeon
 	category_tags= list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	attribute_sheet = /datum/attribute_holder/sheet/job/chirurgeon
 
 
 	traits = list(

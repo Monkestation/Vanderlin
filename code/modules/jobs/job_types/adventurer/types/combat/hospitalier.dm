@@ -28,6 +28,7 @@
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
+	attribute_sheet = /datum/attribute_holder/sheet/job/hospitalier
 
 	traits = list(
 		TRAIT_DEADNOSE,
