@@ -287,7 +287,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
-	nutrition = FRUIT_NUTRITION*DRIED_MOD
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- TANGERINE -----------------
 
@@ -300,7 +300,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
-	nutrition = FRUIT_NUTRITION*DRIED_MOD
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- PLUM -----------------
 
@@ -313,7 +313,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
-	nutrition = FRUIT_NUTRITION*DRIED_MOD
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- APPLE -----------------
 
@@ -326,7 +326,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
-	nutrition = FRUIT_NUTRITION*DRIED_MOD
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- PEAR -----------------
 
@@ -339,7 +339,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
-	nutrition = FRUIT_NUTRITION*DRIED_MOD
+	nutrition = DRIEDFRUIT_NUTRITION
 
 /***************** Mushrooms *****************/
 
@@ -414,7 +414,7 @@
 	slice_batch = FALSE
 	bitesize = 6
 	slice_sound = TRUE
-	tastes = list("raw unsalted butter" = 1)
+	tastes = list("butter" = 1)
 	faretype = FARE_IMPOVERISHED
 
 /obj/item/reagent_containers/food/snacks/butter/update_icon_state()
@@ -445,7 +445,7 @@
 	foodtype = DAIRY
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	nutrition = BUTTER_NUTRITION * SLICED_MOD
-	tastes = list("raw unsalted butter" = 1)
+	tastes = list("butter" = 1)
 	bitesize = 1
 	faretype = FARE_IMPOVERISHED
 

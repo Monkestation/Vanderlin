@@ -24,7 +24,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start
 	name = "start"
 	icon = 'icons/mob/landmarks.dmi'
-	icon_state = "x"
+	icon_state = "arrow"
 	anchored = TRUE
 	layer = MOB_LAYER
 	var/list/jobspawn_override = list()
@@ -420,6 +420,24 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	alpha = 20
 	delete_after_roundstart = FALSE
 
+/obj/effect/landmark/start/bogwitch
+	name = JOB_BOGWITCH
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bogwitch_apprentice
+	name = JOB_BOGWITCH_APP
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bogwitchlate
+	name = JOB_BOGWITCH + "_late"
+	icon_state = "arrow_blue"
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/bogwitch_apprenticelate
+	name = JOB_BOGWITCH_APP + "_late"
+	icon_state = "arrow_blue"
+	delete_after_roundstart = FALSE
+
 //Antagonist spawns
 
 /obj/effect/landmark/start/bandit
@@ -477,6 +495,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/start/new_player
 	name = "New Player"
+	icon_state = "x"
 
 /obj/effect/landmark/start/new_player/Initialize()
 	. = ..()

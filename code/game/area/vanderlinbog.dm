@@ -29,6 +29,7 @@
 	custom_area_sound = 'sound/misc/stings/BogSting.ogg'
 	converted_type = /area/indoors/shelter/bog
 	threat_region = THREAT_REGION_TERRORBOG
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | BOGGY_AREA
 
 /area/indoors/shelter/bog
 	name = "bog dwelling"
@@ -37,6 +38,7 @@
 	background_track = 'sound/music/area/bog.ogg'
 	background_track_dusk = null
 	background_track_night = null
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | BOGGY_AREA
 
 // ###############
 /area/outdoors/bog/e_highroad
