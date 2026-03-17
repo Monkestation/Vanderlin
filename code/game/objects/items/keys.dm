@@ -257,6 +257,12 @@
 	icon_state = "rustkey"
 	lockids = list(ACCESS_WAREHOUSE)
 
+/obj/item/key/bogwitch
+	name = "bogwitch key"
+	desc = "This key opens the Bog Witch's hut."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_BOGWITCH)
+
 ////// MANOR
 
 /obj/item/key/manor

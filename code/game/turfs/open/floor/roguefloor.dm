@@ -834,6 +834,10 @@
 	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "borderfall"
 
+/obj/effect/decal/woodpath
+	icon = 'icons/turf/constructed/wood.dmi'
+	icon_state = "wooden_path"
+
 /*	..................   Miscellany   ................... */
 /turf/open/floor/tile
 	icon = 'icons/turf/constructed/tile.dmi'

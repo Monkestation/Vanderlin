@@ -456,6 +456,20 @@
 	desc = span_notice("I am inspired to create!")
 	icon_state = "malum_buff"
 
+/*-----------------\
+|   Hunt Miracles |
+\-----------------*/
+
+/datum/status_effect/buff/call_to_hunt
+	id = "call_to_hunt"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/call_to_hunt
+	duration = 2.5 MINUTES
+	effectedstats = list(STATKEY_END = 1, STATKEY_CON = 1)
+
+/atom/movable/screen/alert/status_effect/buff/call_to_hunt
+	name = "Call to Hunt"
+	desc = span_bloody("FOR THE HUNT!")
+	icon_state = "call_to_hunt"
 
 /*-----------------\
 |   Inhumen Miracles |

@@ -8,6 +8,13 @@
 	sellprice = 10
 	experimental_onhip = TRUE
 
+// Hunt
+/obj/item/clothing/neck/psycross/great_hunt
+	name = "bone amulet"
+	icon_state = "bone_amulet"
+	desc = "An amulet made of parched bones and animal sinews, a common representation of faith used in Ossland."
+	sellprice = 30
+
 // INHUMEN PSYCROSSES
 
 /obj/item/clothing/neck/psycross/zizo
