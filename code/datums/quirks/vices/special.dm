@@ -131,7 +131,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.adjust_stat_modifier(STATMOD_UNLUCKY, STATKEY_LCK, rand(-5, -9))
+	H.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
 
 /datum/quirk/boon/unlucky/on_remove()
 	if(!ishuman(owner))
@@ -160,11 +160,8 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	for(var/datum/skill/skill in SSskills.all_skills)
-		if(H.get_skill_level(skill) > SKILL_LEVEL_APPRENTICE)
-			H.adjust_skillrank(skill, -3, TRUE)
-		else
-			H.set_skillrank(skill, 0, TRUE)
+	for(var/datum/attribute/skill/skill in SSskills.all_skills)
+		H.adjust_skill_level(skill, -30)
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
