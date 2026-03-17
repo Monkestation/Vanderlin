@@ -1124,9 +1124,9 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
 "aBC" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/wool,
 /obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/double_pelt,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/captain)
 "aBI" = (
@@ -4274,10 +4274,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/soilsons)
-"caL" = (
-/obj/structure/dryclothes,
-/turf/open/floor/woodturned,
-/area/indoors/town/tavern)
 "cbd" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
@@ -5146,12 +5142,6 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/road,
 /area/outdoors/basin/safe)
-"cxS" = (
-/obj/structure/chair/stool{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/tavern)
 "cyp" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -5698,6 +5688,19 @@
 	dir = 1
 	},
 /area/indoors/town/keep/throne)
+"cHW" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = 15;
+	pixel_y = 15
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "cIb" = (
 /obj/structure/rack/shelf{
 	pixel_y = 0;
@@ -6576,6 +6579,14 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
 /area/under/town/sewer)
+"dcT" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/fake_machine/lottery_roguetown,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "dcU" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -7470,14 +7481,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/basin/safe)
-"dyA" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/obj/structure/fake_machine/lottery_roguetown,
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "dyI" = (
 /obj/structure/flora/grass,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8310,12 +8313,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
-"dTg" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "dTk" = (
 /obj/effect/decal/cobblerockedge/alt,
 /turf/open/floor/grass/eora,
@@ -9578,6 +9575,12 @@
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"ezS" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "ezT" = (
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep/halls/e)
@@ -11095,6 +11098,10 @@
 /area/indoors/town/garrison/lieutenant)
 "flF" = (
 /obj/structure/rack/shelf/biggest,
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = 15;
+	pixel_y = 15
+	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/town/tavern)
 "flI" = (
@@ -11586,13 +11593,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
-"fyw" = (
-/obj/structure/chair/stool{
-	dir = 1
-	},
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/carpet/lord/center,
-/area/indoors/town/tavern)
 "fyE" = (
 /obj/structure/door/window{
 	name = "City Watch Garrison"
@@ -15275,6 +15275,12 @@
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/blocks,
 /area/indoors/town)
+"hrw" = (
+/obj/structure/fake_machine/scomm{
+	pixel_y = -32
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "hrE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -15826,6 +15832,10 @@
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = 15;
+	pixel_y = 15
+	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "hDG" = (
@@ -18381,11 +18391,11 @@
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/squire)
 "iLI" = (
-/obj/structure/bookcase/random{
-	pixel_x = -15;
-	density = 0;
-	opacity = 0
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = -11;
+	pixel_x = -32
 	},
+/obj/structure/chair/stool,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
 "iLY" = (
@@ -18943,6 +18953,17 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church/inquisition)
+"iYM" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -14;
+	pixel_y = 15
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -9;
+	pixel_y = 7
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "iYU" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
@@ -21915,6 +21936,13 @@
 /obj/item/kitchen/spoon/iron,
 /obj/item/kitchen/spoon/iron,
 /obj/item/kitchen/spoon/iron,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 20
+	},
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = 15;
+	pixel_y = 20
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "kso" = (
@@ -24542,6 +24570,10 @@
 /obj/structure/flora/grass/water,
 /turf/open/floor/grass/healthy,
 /area/under/town/basement)
+"lHL" = (
+/obj/structure/fake_machine/scomm/r,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "lHP" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -24946,6 +24978,10 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
+"lQF" = (
+/obj/structure/dryclothes,
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "lQO" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
@@ -25710,6 +25746,16 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/tavern)
+"miA" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 8
+	},
+/obj/item/candle/yellow/lit{
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "miX" = (
 /obj/structure/stairs/fancy/c{
 	dir = 1
@@ -26200,6 +26246,16 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
+"mvW" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 4
+	},
+/obj/item/candle/yellow/lit{
+	pixel_x = 10;
+	pixel_y = 7
+	},
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "mvY" = (
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/cobble,
@@ -30240,6 +30296,13 @@
 /obj/structure/rousman_hole,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"oon" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "oox" = (
 /obj/structure/mirror{
 	pixel_x = -32;
@@ -36072,12 +36135,6 @@
 /obj/structure/curtain/bounty/dir,
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/town/tavern)
-"qSe" = (
-/obj/structure/table/wood/reinf_long{
-	dir = 4
-	},
-/turf/open/floor/woodturned,
-/area/indoors/town/tavern)
 "qSj" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/soilsons)
@@ -38809,6 +38866,9 @@
 /obj/item/kitchen/fork,
 /obj/item/kitchen/fork,
 /obj/item/kitchen/fork,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 20
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "sae" = (
@@ -40581,7 +40641,6 @@
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town/roofs)
 "sPW" = (
-/obj/structure/carpet,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
@@ -41716,8 +41775,8 @@
 	},
 /area/indoors/soilsons)
 "trC" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/fabric,
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/fabric_double,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/heir/heir2)
 "trR" = (
@@ -42450,10 +42509,10 @@
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "tKU" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/wool,
 /obj/effect/landmark/start/courtphys,
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/item/bedsheet/double_pelt,
+/obj/structure/bed/inn/double,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/phys)
 "tKX" = (
@@ -42646,6 +42705,12 @@
 "tOs" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/keep/servant)
+"tOA" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "tOJ" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -44538,6 +44603,12 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/shop)
+"uIi" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 4
+	},
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "uIt" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -48712,11 +48783,11 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "wtJ" = (
-/obj/structure/bookcase/random{
-	pixel_x = 15;
-	density = 0;
-	opacity = 0
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = -11;
+	pixel_x = 32
 	},
+/obj/structure/chair/stool,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
 "wuc" = (
@@ -48822,8 +48893,8 @@
 /turf/open/floor/naturalstone,
 /area/under/town/basement)
 "wvA" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/fabric,
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/fabric_double,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/heir/heir1)
 "wvJ" = (
@@ -115173,7 +115244,7 @@ dBZ
 rCT
 sSi
 dBZ
-oho
+fep
 fep
 fep
 fep
@@ -117040,7 +117111,7 @@ cUs
 cUs
 wkY
 iLI
-iLI
+mvW
 fUV
 oNa
 oNa
@@ -117242,7 +117313,7 @@ cUs
 cUs
 cUs
 cUs
-sAG
+bPq
 fUV
 mFi
 wDX
@@ -118039,7 +118110,7 @@ lrb
 gXZ
 bqr
 vaf
-cxS
+tOA
 cUs
 cUs
 vpE
@@ -118443,7 +118514,7 @@ lrb
 gXZ
 sbv
 bCZ
-cxS
+tOA
 cUs
 cUs
 vpE
@@ -118645,7 +118716,7 @@ gXZ
 gXZ
 sbv
 dVV
-cxS
+tOA
 cUs
 cUs
 vpE
@@ -118654,7 +118725,7 @@ vaM
 vaM
 vaM
 vaM
-qYk
+cHW
 cUs
 cUs
 pny
@@ -119054,7 +119125,7 @@ cUs
 cUs
 cUs
 fVi
-fyw
+oon
 vpE
 vpE
 vpE
@@ -119262,7 +119333,7 @@ cUs
 cUs
 cUs
 cUs
-sAG
+bPq
 fUV
 mFi
 nam
@@ -119464,7 +119535,7 @@ cUs
 cUs
 wci
 wtJ
-wtJ
+miA
 fUV
 kwJ
 wDX
@@ -119857,7 +119928,7 @@ dcU
 aaX
 pdK
 pny
-cUs
+iYM
 cUs
 cUs
 cUs
@@ -120064,7 +120135,7 @@ acn
 sAG
 cUs
 pny
-dyA
+dcT
 sAG
 vqa
 aNJ
@@ -120858,7 +120929,7 @@ qFx
 hZn
 hZn
 hZn
-gqF
+mFi
 pny
 ksl
 mSj
@@ -121060,7 +121131,7 @@ qFx
 hZn
 hZn
 hZn
-mFi
+gqF
 fVi
 pny
 iMJ
@@ -158652,7 +158723,7 @@ vaM
 vaM
 uyu
 sAG
-sAG
+hrw
 pny
 izG
 biy
@@ -159423,7 +159494,7 @@ vLN
 oTt
 kFD
 hUT
-rDX
+sxp
 nIr
 biy
 biy
@@ -159450,7 +159521,7 @@ pny
 fVi
 vYT
 pDQ
-qSe
+uIi
 pKR
 vaM
 vaM
@@ -159458,7 +159529,7 @@ vaM
 vaM
 vaM
 rxT
-qSe
+uIi
 pDQ
 pDQ
 pny
@@ -159648,18 +159719,18 @@ eng
 bYP
 sgW
 pny
-caL
-caL
+lQF
+lQF
 iYU
 iYU
 iYU
-qSe
+uIi
 nho
 hWe
 hWe
 hWe
 dBS
-qSe
+uIi
 iYU
 iYU
 mrO
@@ -160456,7 +160527,7 @@ dkc
 uii
 sgW
 pny
-caL
+lQF
 fVi
 cFd
 cFd
@@ -200455,8 +200526,8 @@ gPz
 pny
 cUs
 cUs
-dTg
-dTg
+ezS
+ezS
 cUs
 cUs
 cUs
@@ -201467,7 +201538,7 @@ cUs
 cUs
 wci
 cUs
-cUs
+lHL
 cUs
 cvt
 sAG
@@ -241875,7 +241946,7 @@ vaM
 vaM
 jlf
 sAG
-sAG
+voD
 oLy
 lod
 nRI
