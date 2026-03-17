@@ -23,7 +23,20 @@
 		/obj/item/key/tower = 1,
 	)
 
-/obj/effect/spawner/guaranteed_map_spawner/listed/inn_keys
+/obj/effect/spawner/guaranteed_map_spawner/listed/inn_keys // This is for Vanderlin
+	spawned = list(
+		/obj/item/key/medroomi = 1,
+		/obj/item/key/medroomii = 1,
+		/obj/item/key/medroomiii = 1,
+		/obj/item/key/medroomiv = 1,
+		/obj/item/key/luxroomi = 1,
+		/obj/item/key/luxroomii = 1,
+		/obj/item/key/luxroomiii = 1,
+		/obj/item/key/luxroomiv = 1,
+		/obj/item/key/roomhunt = 1,
+	)
+
+/obj/effect/spawner/guaranteed_map_spawner/listed/inn_keys/full // This all of the keys
 	spawned = list(
 		/obj/item/key/roomi = 1,
 		/obj/item/key/roomii = 1,
