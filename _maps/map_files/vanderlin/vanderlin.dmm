@@ -9186,9 +9186,6 @@
 /obj/structure/mirror,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/shop)
-"enC" = (
-/turf/closed/wall/mineral/stone/window,
-/area/indoors/town/merc_guild)
 "eoc" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -9359,6 +9356,9 @@
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /turf/open/floor/churchrough,
 /area/under/town/sewer)
+"erq" = (
+/turf/closed/wall/mineral/stone,
+/area/under/cavewet)
 "erw" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_x = -32
@@ -31840,6 +31840,10 @@
 /obj/item/clothing/head/crown/circlet/silverdiadem,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
+"oUa" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/stone,
+/area/under/cavewet)
 "oUd" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/chair/wood/alt{
@@ -39163,6 +39167,13 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/greenstone,
 /area/under/town/basement)
+"sfb" = (
+/obj/structure/winch{
+	redstone_id = "tomb_gate"
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/merc_guild)
 "sfp" = (
 /obj/machinery/essence/research_matrix,
 /obj/effect/decal/carpet/kover_darkred,
@@ -40664,12 +40675,6 @@
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/blue)
-"sOE" = (
-/obj/structure/winch{
-	redstone_id = "tomb_gate"
-	},
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/town/merc_guild)
 "sOF" = (
 /obj/structure/table/vtable/v2,
 /turf/open/floor/dirt/road,
@@ -47491,10 +47496,6 @@
 "vMO" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/carpet/green,
-/area/indoors/town/merc_guild)
-"vNh" = (
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
 "vNk" = (
 /obj/structure/nocdevice,
@@ -80209,10 +80210,10 @@ unl
 unl
 unl
 unl
-unl
-fgR
-enC
-enC
+oUa
+fdT
+qaw
+qaw
 fgR
 uOx
 iZQ
@@ -80411,9 +80412,9 @@ unl
 unl
 unl
 unl
-unl
-fgR
-sOE
+erq
+sfb
+aiQ
 qkL
 fgR
 uOx
@@ -80613,9 +80614,9 @@ unl
 unl
 unl
 unl
-unl
-fdT
-vNh
+oUa
+fgR
+aiQ
 qkL
 fgR
 qaw
