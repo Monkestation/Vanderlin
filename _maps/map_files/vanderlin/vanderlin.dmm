@@ -2579,7 +2579,7 @@
 /obj/effect/landmark/start/adventurer{
 	dir = 1
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "bnb" = (
 /obj/structure/fluff/railing/wood{
@@ -2771,7 +2771,7 @@
 /area/indoors/dungeon)
 "bqr" = (
 /obj/effect/landmark/start/innkeep,
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "bqE" = (
 /obj/structure/water_pipe,
@@ -3274,7 +3274,11 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
-/turf/open/floor/carpet/lord/center,
+/obj/effect/decal/carpet/square{
+	pixel_x = 5;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "bDt" = (
 /obj/machinery/light/fueled/wallfire/candle{
@@ -3792,7 +3796,7 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "bQg" = (
 /obj/structure/flora/grass/water,
@@ -4270,6 +4274,10 @@
 	},
 /turf/open/openspace,
 /area/indoors/soilsons)
+"caL" = (
+/obj/structure/dryclothes,
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "cbd" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
@@ -5138,6 +5146,12 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/road,
 /area/outdoors/basin/safe)
+"cxS" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town/tavern)
 "cyp" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -7456,6 +7470,14 @@
 	},
 /turf/open/openspace,
 /area/outdoors/basin/safe)
+"dyA" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/fake_machine/lottery_roguetown,
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "dyI" = (
 /obj/structure/flora/grass,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8288,6 +8310,12 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"dTg" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/tavern)
 "dTk" = (
 /obj/effect/decal/cobblerockedge/alt,
 /turf/open/floor/grass/eora,
@@ -8409,7 +8437,7 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "dVW" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -11558,6 +11586,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
+"fyw" = (
+/obj/structure/chair/stool{
+	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/lord/center,
+/area/indoors/town/tavern)
 "fyE" = (
 /obj/structure/door/window{
 	name = "City Watch Garrison"
@@ -15929,7 +15964,7 @@
 /obj/effect/landmark/start/woodsman{
 	dir = 1
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "hGE" = (
 /obj/structure/table/wood{
@@ -18684,7 +18719,7 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "iTD" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -19100,7 +19135,6 @@
 	icon_state = "largetable"
 	},
 /obj/item/dice,
-/obj/structure/fake_machine/lottery_roguetown,
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "jdg" = (
@@ -23775,7 +23809,7 @@
 	pixel_y = 0;
 	pixel_x = -32
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "loc" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -32954,7 +32988,7 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "bar_shutter"
 	},
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "pyI" = (
 /turf/closed/wall/mineral/wooddark/end{
@@ -36037,6 +36071,12 @@
 "qRO" = (
 /obj/structure/curtain/bounty/dir,
 /turf/closed/wall/mineral/wooddark/window,
+/area/indoors/town/tavern)
+"qSe" = (
+/obj/structure/table/wood/reinf_long{
+	dir = 4
+	},
+/turf/open/floor/woodturned,
 /area/indoors/town/tavern)
 "qSj" = (
 /turf/closed/wall/mineral/wooddark,
@@ -45383,7 +45423,11 @@
 	redstone_id = "bar_shutter"
 	},
 /obj/item/alch/herb/rosa,
-/turf/open/floor/carpet/lord/center,
+/obj/effect/decal/carpet/square{
+	pixel_x = -5;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "van" = (
 /obj/structure/table/wood{
@@ -117591,7 +117635,7 @@ tuD
 tuD
 fVi
 juZ
-sAG
+sbv
 cUs
 cUs
 uQa
@@ -117995,7 +118039,7 @@ lrb
 gXZ
 bqr
 vaf
-vpE
+cxS
 cUs
 cUs
 vpE
@@ -118195,7 +118239,7 @@ iEo
 gXZ
 lrb
 gXZ
-sAG
+sbv
 bPL
 hGA
 cUs
@@ -118397,9 +118441,9 @@ sMM
 gXZ
 lrb
 gXZ
-sAG
+sbv
 bCZ
-vpE
+cxS
 cUs
 cUs
 vpE
@@ -118599,9 +118643,9 @@ jxV
 gXZ
 gXZ
 gXZ
-sAG
+sbv
 dVV
-vpE
+cxS
 cUs
 cUs
 vpE
@@ -118801,9 +118845,9 @@ flF
 gXZ
 rLn
 gXZ
-sAG
+sbv
 pyp
-sAG
+sbv
 fOK
 cUs
 reQ
@@ -119008,9 +119052,9 @@ fVi
 hCU
 cUs
 cUs
-djE
+cUs
 fVi
-vpE
+fyw
 vpE
 vpE
 vpE
@@ -119403,9 +119447,9 @@ hZn
 naq
 phO
 sMY
+aUP
 qSJ
 hUO
-aUP
 aUP
 sMY
 wXD
@@ -119605,10 +119649,10 @@ hZn
 pny
 vzm
 bsk
+aUP
 euJ
 dcU
 vlw
-aUP
 aaf
 pny
 fVi
@@ -119807,10 +119851,10 @@ hZn
 naq
 fPv
 sMY
+aUP
 skr
 dcU
 aaX
-aUP
 pdK
 pny
 cUs
@@ -120009,9 +120053,9 @@ czz
 pny
 xmd
 sMY
+aUP
 mQB
 eoi
-aUP
 aUP
 byK
 oLy
@@ -120020,7 +120064,7 @@ acn
 sAG
 cUs
 pny
-wci
+dyA
 sAG
 vqa
 aNJ
@@ -157393,7 +157437,7 @@ qsL
 qsL
 qsL
 uyu
-cck
+qVx
 cUs
 cUs
 cUs
@@ -157596,7 +157640,7 @@ vaM
 vaM
 vaM
 tyF
-cck
+qVx
 uXs
 uXs
 pny
@@ -159406,7 +159450,7 @@ pny
 fVi
 vYT
 pDQ
-ruH
+qSe
 pKR
 vaM
 vaM
@@ -159414,7 +159458,7 @@ vaM
 vaM
 vaM
 rxT
-ruH
+qSe
 pDQ
 pDQ
 pny
@@ -159604,18 +159648,18 @@ eng
 bYP
 sgW
 pny
-ruH
+caL
+caL
 iYU
 iYU
 iYU
-iYU
-ruH
+qSe
 nho
 hWe
 hWe
 hWe
 dBS
-ruH
+qSe
 iYU
 iYU
 mrO
@@ -160412,7 +160456,7 @@ dkc
 uii
 sgW
 pny
-ruH
+caL
 fVi
 cFd
 cFd
@@ -197588,7 +197632,7 @@ eeA
 aOi
 cUs
 cUs
-cck
+qVx
 tBJ
 qsL
 vaM
@@ -197789,7 +197833,7 @@ cUs
 cUs
 cUs
 cUs
-cck
+qVx
 tBJ
 vaM
 vaM
@@ -199805,8 +199849,8 @@ iYU
 pny
 wmN
 wmN
-mbH
-uyu
+pKR
+rxT
 wmN
 wmN
 jIT
@@ -200007,11 +200051,11 @@ iYU
 xFN
 cUs
 cUs
-mbH
-uyu
 cUs
 cUs
-cck
+cUs
+cUs
+eeA
 pKR
 vaM
 vaM
@@ -200209,12 +200253,12 @@ gpf
 pny
 wDT
 cUs
-mbH
-uyu
 cUs
 cUs
 cUs
-cck
+cUs
+cUs
+eeA
 pKR
 hWe
 vaM
@@ -200411,8 +200455,8 @@ gPz
 pny
 cUs
 cUs
-mbH
-uyu
+dTg
+dTg
 cUs
 cUs
 cUs
@@ -237989,7 +238033,7 @@ sAG
 sAG
 sAG
 cUs
-ueu
+qVx
 lIj
 qsL
 qsL
@@ -238190,7 +238234,7 @@ vNP
 kRc
 sAG
 sAG
-ueu
+qVx
 lIj
 vaM
 vaM
@@ -240412,7 +240456,7 @@ vSu
 qsF
 sAG
 sAG
-ueu
+eeA
 pKR
 vaM
 cGM
@@ -240615,7 +240659,7 @@ sAG
 sAG
 sAG
 sAG
-ueu
+eeA
 nho
 hWe
 hWe
