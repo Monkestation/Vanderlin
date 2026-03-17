@@ -180,6 +180,7 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 3,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 1,
 						/obj/item/natural/hide = 5,
 						/obj/item/alch/sinew = 2,

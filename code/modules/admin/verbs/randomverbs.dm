@@ -473,13 +473,50 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	admin_delete(A)
 
 /client/proc/cmd_admin_list_open_jobs()
-	set category = "Admin.Admin"
+	set category = "Admin.Jobs"
 	set name = "Manage Job Slots"
 
 	if(!check_rights(R_DEBUG))
 		return
 	holder.manage_free_slots()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Manage Job Slots") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/add_job_key_whitelist()
+	set category = "Admin.Jobs"
+	set name = "Whitelist a Job"
+
+	if(!check_rights(R_FUN))
+		return FALSE
+
+	var/list/job_list = list()
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
+		if(IS_ABSTRACT(job) || (job.title == "NOPE")) // Safety first.
+			continue
+		job_list += job.title
+
+	var/job_name = tgui_input_list(usr, "Which job do you wish to add a key whitelist to?", "Select Job", job_list)
+
+	var/datum/job/job_datum = SSjob.name_occupations[job_name]
+	var/new_key = ckey(tgui_input_text(usr, "What ckey do you want to add to the whitelist?", "New Key"))
+	if(!new_key)
+		return FALSE
+
+	if(new_key in job_datum.whitelisted_ckeys)
+		if(tgui_alert(usr, "[new_key] is already in the job whitelist, do you wish to remove them?", "Remove Key?", list("Yes", "No")) == "Yes")
+			job_datum.whitelisted_ckeys -= new_key
+			var/log_message = "[key_name(usr)] removed '[new_key]' from the Key Whitelist for '[job_datum.title]' job."
+			message_admins(log_message)
+			log_admin(log_message)
+			SSblackbox.record_feedback("tally", "admin_verb", 1, "Whitelist Job")
+			return TRUE
+
+	job_datum.whitelisted_ckeys += new_key
+	var/log_message = "[key_name(usr)] added '[new_key]' to the Key Whitelist for '[job_datum.title]' job."
+	message_admins(log_message)
+	log_admin(log_message)
+
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Whitelist Job") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	return TRUE
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in world)
 	set category = "GameMaster.Fun"
