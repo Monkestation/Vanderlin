@@ -188,6 +188,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	return list(
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
+	/client/proc/add_job_key_whitelist,
 	/client/proc/Debug2,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
@@ -276,6 +277,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
+	/client/proc/add_job_key_whitelist,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,
 	/client/proc/Debug2,

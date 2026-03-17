@@ -213,6 +213,9 @@
 		/datum/job/pilgrim,
 	)
 
+	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
+	var/list/whitelisted_ckeys = list()
+
 	///list of job packs we select from during job setup
 	var/list/job_packs
 	var/pack_title = "JOB PACKS"
@@ -253,6 +256,11 @@
 		for(var/X in GLOB.inquisition_positions)
 			peopleiknow += X
 			peopleknowme += X
+
+/datum/job/vv_edit_var(var_name, var_value)
+	if(var_name == "whitelisted_ckeys")
+		return FALSE
+	return ..()
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
