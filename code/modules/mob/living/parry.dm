@@ -119,7 +119,7 @@
 			to_chat(src, span_warning("The enemy defeated my parry!"))
 		return FALSE
 
-	update_parrying_penalty()
+	/*update_parrying_penalty()*/
 
 	//heavy weapon strength differential still applies
 	var/obj/item/master = intenty.get_master_item()
