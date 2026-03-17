@@ -48,11 +48,11 @@
 	wrists = /obj/item/clothing/wrists/bracers/jackchain
 	cloak = /obj/item/clothing/cloak/apron
 	backpack_contents = list(
-		/obj/item/weapon/surgery/scalpel = 1,
-		/obj/item/weapon/surgery/cautery/= 1,
-		/obj/item/weapon/surgery/hammer = 1,
-		/obj/item/folding_table_stored = 1,
-		/obj/item/reagent_containers/glass/bottle/water = 1,
-		/obj/item/needle = 1
+			/obj/item/weapon/surgery/scalpel = 1,
+			/obj/item/weapon/surgery/cautery/= 1,
+			/obj/item/weapon/surgery/hammer = 1,
+			/obj/item/folding_table_stored = 1,
+			/obj/item/reagent_containers/glass/bottle/water = 1,
+			/obj/item/needle = 1,
 	)
 
