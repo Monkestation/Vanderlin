@@ -43,7 +43,7 @@
 		to_chat(user, span_warning("It's locked. Of course."))
 		return
 	if(I.sellprice <= 0)
-		to_chat(user, span_warning("[src] isn't worth selling."))
+		to_chat(user, span_warning("[I] isn't worth selling."))
 		return
 
 	visible_message(span_notice("[src] consumes [I], spitting out a reward!"), vision_distance = COMBAT_MESSAGE_RANGE)
