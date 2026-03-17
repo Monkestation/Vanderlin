@@ -877,12 +877,12 @@
 		data += "</div>"
 
 	// Psydon Section
-	var/psydonite_user = FALSE
+	var/psydonite_extremist_user = FALSE
 	if(mob)
 		if(isliving(mob))
 			var/mob/living/living_user_mob = mob
-			if(istype(living_user_mob.patron, /datum/patron/psydon))
-				psydonite_user = TRUE
+			if(istype(living_user_mob.patron, /datum/patron/psydon/extremist))
+				psydonite_extremist_user = TRUE
 
 	var/psydon_followers = GLOB.patron_follower_counts[/datum/patron/psydon::name] || 0
 	var/largest_religion = (psydon_followers > 0)
@@ -895,7 +895,7 @@
 				break
 	var/apostasy_followers = GLOB.patron_follower_counts[/datum/patron/godless/godless::name] + GLOB.patron_follower_counts[/datum/patron/godless/autotheist::name] + GLOB.patron_follower_counts[/datum/patron/godless/defiant::name] + GLOB.patron_follower_counts[/datum/patron/godless/dystheist::name] + GLOB.patron_follower_counts[/datum/patron/godless/naivety::name]|| 0
 	var/psydonite_monarch = GLOB.vanderlin_round_stats[STATS_MONARCH_PATRON] == /datum/patron/psydon::name ? TRUE : FALSE
-	var/psydon_influence = (psydon_followers * 20) + (GLOB.confessors.len * 20) + (GLOB.vanderlin_round_stats[STATS_HUMEN_DEATHS] * -10) + (GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS] * -20) + (psydonite_monarch ? (psydonite_monarch * 500) : -250) + (largest_religion? (largest_religion * 500) : -250) + (GLOB.vanderlin_round_stats[STATS_PSYCROSS_USERS] * 10) + (apostasy_followers * -20) + (GLOB.vanderlin_round_stats[STATS_LUX_HARVESTED] * -50) + (psydonite_user ? 10000 : -10000)
+	var/psydon_influence = (psydon_followers * 20) + (GLOB.confessors.len * 20) + (GLOB.vanderlin_round_stats[STATS_HUMEN_DEATHS] * -10) + (GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS] * -20) + (psydonite_monarch ? (psydonite_monarch * 500) : -250) + (largest_religion? (largest_religion * 500) : -250) + (GLOB.vanderlin_round_stats[STATS_PSYCROSS_USERS] * 10) + (apostasy_followers * -20) + (GLOB.vanderlin_round_stats[STATS_LUX_HARVESTED] * -50) + (psydonite_extremist_user ? 10000 : -10000)
 
 	data += "<div style='width: 42.5%; margin: 0 auto 30px; border: 2px solid #99b2b1; background: #47636d; color: #d0d0d0; max-height: 420px;'>"
 	data += "<div style='text-align: center; font-size: 1.3em; padding: 12px;'><b>PSYDON</b></div>"
@@ -916,7 +916,7 @@
 	data += "Humen deaths: [GLOB.vanderlin_round_stats[STATS_HUMEN_DEATHS]] ([get_colored_influence_value(GLOB.vanderlin_round_stats[STATS_HUMEN_DEATHS] * -10)])<br>"
 	data += "Lux harvested: [GLOB.vanderlin_round_stats[STATS_LUX_HARVESTED]] ([get_colored_influence_value(GLOB.vanderlin_round_stats[STATS_LUX_HARVESTED] * -50)])<br>"
 	data += "Number of demonspawns: [GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS]] ([get_colored_influence_value(GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS] * -20)])<br>"
-	data += "God's status: [psydonite_user ? "ALIVE" : "DEAD"] ([get_colored_influence_value(psydonite_user ? 10000 : -10000)])<br>"
+	data += "God's status: [psydonite_extremist_user ? "ALIVE" : "DEAD"] ([get_colored_influence_value(psydonite_extremist_user ? 10000 : -10000)])<br>"
 	data += "</div>"
 
 	data += "</div>"
