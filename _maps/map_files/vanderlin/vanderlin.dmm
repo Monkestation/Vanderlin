@@ -9356,9 +9356,6 @@
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /turf/open/floor/churchrough,
 /area/under/town/sewer)
-"erq" = (
-/turf/closed/wall/mineral/stone,
-/area/under/cavewet)
 "erw" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_x = -32
@@ -16054,6 +16051,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
+"hGk" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/merc_guild)
 "hGr" = (
 /obj/structure/handcart,
 /turf/open/floor/metal/alt,
@@ -31840,10 +31841,6 @@
 /obj/item/clothing/head/crown/circlet/silverdiadem,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"oUa" = (
-/obj/structure/fluff/walldeco/vinez,
-/turf/closed/wall/mineral/stone,
-/area/under/cavewet)
 "oUd" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/chair/wood/alt{
@@ -39171,7 +39168,6 @@
 /obj/structure/winch{
 	redstone_id = "tomb_gate"
 	},
-/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
 "sfp" = (
@@ -80210,7 +80206,7 @@ unl
 unl
 unl
 unl
-oUa
+fdT
 fdT
 qaw
 qaw
@@ -80412,7 +80408,7 @@ unl
 unl
 unl
 unl
-erq
+fgR
 sfb
 aiQ
 qkL
@@ -80614,9 +80610,9 @@ unl
 unl
 unl
 unl
-oUa
-fgR
-aiQ
+fdT
+fdT
+hGk
 qkL
 fgR
 qaw
