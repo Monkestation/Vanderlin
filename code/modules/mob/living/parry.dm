@@ -21,7 +21,7 @@
 		stun_penalty = 4
 	if(cmode && (d_intent == INTENT_PARRY))
 		modifier += 2
-	return floor(max(0, 3 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty))
+	return floor(max(0, 1 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty))
 
 /**
  * Attempt to parry an attack
