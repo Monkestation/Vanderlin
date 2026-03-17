@@ -41,7 +41,6 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	head = /obj/item/clothing/head/helmet/visored/sallet
-	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	belt = /obj/item/storage/belt/leather/mercenary
 	armor = /obj/item/clothing/armor/cuirass
@@ -69,13 +68,16 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword, ITEM_SLOT_BELT_L, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
 		if("Mace")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/steel, ITEM_SLOT_BELT_L, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
 		if("Polehammer")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/polearm/eaglebeak/lucerne, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather, ITEM_SLOT_PANTS)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/ironjackchain, ITEM_SLOT_WRISTS, TRUE)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
