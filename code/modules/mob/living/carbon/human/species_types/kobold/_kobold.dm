@@ -6,7 +6,7 @@
 
 ///mmmm yumymumyumuymuymym
 #define DIET_KOBOLD list(\
-	/obj/item/natural/dirtclod,\
+	/obj/item/natural/clod,\
 	/obj/item/natural/stone,\
 	/obj/item/coin,\
 	/obj/item/gem,\
@@ -22,6 +22,16 @@
 
 /mob/living/carbon/human/species/kobold
 	race = /datum/species/kobold
+
+/datum/attribute_holder/sheet/job/species/kobold
+	raw_attribute_list = list(
+		STAT_STRENGTH = -4,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = -4,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+	)
 
 /datum/species/kobold
 	name = "Kobold"
@@ -41,8 +51,7 @@
 	species_traits = list(NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_TINY, TRAIT_DARKVISION)
 
-	specstats_m = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/kobold
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 
@@ -62,6 +71,7 @@
 	soundpack_f = /datum/voicepack/male/kobold
 
 	exotic_bloodtype = /datum/blood_type/human/kobold
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/fatty/kobold = 1)
 
 	custom_id = "dwarf"
 	custom_clothes = TRUE
@@ -127,7 +137,7 @@
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	if(hungry_hungry_kobold)
-		var/datum/component/abberant_eater = GetComponent(/datum/component/abberant_eater)
+		var/datum/component/abberant_eater = C.GetComponent(/datum/component/abberant_eater)
 		if(abberant_eater)
 			abberant_eater.RemoveComponent()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
@@ -163,12 +173,12 @@
 	))
 
 /datum/species/kobold/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/dwarf/dwarmm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/dwarf/dwarmf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/dwarf/dwarmm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/dwarf/dwarmf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/kobold/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/dwarf/dwarmlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/dwarf/dwarmlast.txt')
 	return last_names
 
 #undef DIET_TURF_KOBOLD

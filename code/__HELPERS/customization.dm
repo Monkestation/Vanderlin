@@ -10,10 +10,12 @@
 		return "FFFFFF"
 	return feature.hair_color
 
-/mob/living/carbon/human/proc/get_eye_color()
+/mob/living/carbon/human/proc/get_eye_color(primary=TRUE)
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
 	if(!eyes)
-		return "FFFFFF"
+		return "#FFFFFF"
+	if(eyes.heterochromia && !primary)
+		return eyes.second_color
 	return eyes.eye_color
 
 /mob/living/carbon/human/proc/get_chest_color()
@@ -53,15 +55,25 @@
 	if(updates_body)
 		update_body_parts()
 
-/mob/living/carbon/human/proc/set_eye_color(new_color, new_secondary_color, updates_body = TRUE)
+/mob/living/carbon/proc/set_eye_color(new_color, new_secondary_color, updates_body = TRUE, updates_dna = FALSE)
 	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	if(!eyes)
-		return
-	eyes.eye_color = new_color
-	if(new_secondary_color)
-		eyes.second_color = new_secondary_color
-	if(updates_body)
-		update_body_parts()
+	if(eyes)
+		if(new_color)
+			eyes.eye_color = new_color
+		eyes.second_color = new_secondary_color || new_color || "#FFFFFF" // more as a catch case, you gotta be really weird to use this proc to do this
+		eyes.heterochromia = new_secondary_color && new_secondary_color != new_color
+		if(updates_body)
+			update_body_parts(TRUE)
+		eyes.update_accessory_colors()
+
+	if(updates_dna)
+		var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+		if(istype(eye_dna))
+			if(new_color)
+				eye_dna.eye_color = new_color
+			eye_dna.second_color = new_secondary_color || new_color || "#FFFFFF"
+			eye_dna.heterochromia = new_secondary_color && new_secondary_color != new_color
+
 
 /mob/living/carbon/human/proc/set_hair_style(datum/sprite_accessory/hair/head/style, updates_body = TRUE)
 	if(!ispath(style) && !istype(style))

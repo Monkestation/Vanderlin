@@ -7,7 +7,7 @@
 
 	cooldown_time = 1 MINUTES
 	invocation_type = INVOCATION_NONE
-	associated_skill = /datum/skill/misc/lockpicking
+	associated_skill = /datum/attribute/skill/misc/lockpicking
 	item_type = /obj/item/lockpick
 	item_duration = 1 MINUTES
 	item_outline ="#1e202cff"

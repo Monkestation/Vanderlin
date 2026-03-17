@@ -28,6 +28,7 @@
 	. = ..()
 	if(QDELETED(fly))
 		return
+	fly.stop_flying()
 	fly.Remove(M)
 
 /obj/item/organ/wings/flight/harpy

@@ -52,8 +52,8 @@
 		LoadEntries("dev_overrides.txt")
 	loadmaplist(CONFIG_MAPS_FILE)
 	LoadMOTD()
+	LoadTMInfo()
 	LoadPolicy()
-	LoadChatFilter()
 	LoadRelays()
 
 	if(Master)
@@ -110,7 +110,7 @@
 	stack = stack + filename_to_test
 
 	log_config("Loading config file [filename]...")
-	var/list/lines = world.file2list("[directory]/[filename]")
+	var/list/lines = file2list("[directory]/[filename]")
 	var/list/_entries = entries
 	for(var/L in lines)
 		L = trim(L)
@@ -215,9 +215,12 @@
 
 /datum/controller/configuration/proc/LoadMOTD()
 	motd = file2text("[directory]/motd.txt")
+	GLOB.join_motd = motd
+
+/datum/controller/configuration/proc/LoadTMInfo()
 	var/tm_info = GLOB.revdata.GetTestMergeInfo()
-	if(motd || tm_info)
-		motd = motd ? "[motd]<br>[tm_info]" : tm_info
+	GLOB.current_tms = tm_info
+
 /*
 Policy file should be a json file with a single object.
 Value is raw html.
@@ -251,7 +254,7 @@ Example config:
 /datum/controller/configuration/proc/loadmaplist(filename)
 	log_config("Loading config file [filename]...")
 	filename = "[directory]/[filename]"
-	var/list/Lines = world.file2list(filename)
+	var/list/Lines = file2list(filename)
 
 	var/datum/map_config/currentmap = null
 	for(var/t in Lines)
@@ -306,25 +309,6 @@ Example config:
 				currentmap = null
 			else
 				log_config("Unknown command in map vote config: '[command]'")
-
-/datum/controller/configuration/proc/LoadChatFilter()
-	var/list/in_character_filter = list()
-
-	if(!fexists("[directory]/in_character_filter.txt"))
-		return
-
-	log_config("Loading config file in_character_filter.txt...")
-
-	for(var/line in world.file2list("[directory]/in_character_filter.txt"))
-		if(!line)
-			continue
-		if(findtextEx(line,"#",1,2))
-			continue
-		in_character_filter += REGEX_QUOTE(line)
-
-	ic_filter_regex = in_character_filter.len ? regex("\\b([jointext(in_character_filter, "|")])\\b", "i") : null
-
-	syncChatRegexes()
 
 //Message admins when you can.
 /datum/controller/configuration/proc/DelayedMessageAdmins(text)

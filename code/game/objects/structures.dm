@@ -123,7 +123,7 @@
 		adjusted_climb_time *= 2
 	if(!ishuman(user))
 		adjusted_climb_time = 0 //simple mobs instantly climb
-	adjusted_climb_time -= user.STASPD * 2
+	adjusted_climb_time -= GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 2
 	adjusted_climb_time = max(adjusted_climb_time, 0)
 	structureclimber = user
 	if(do_after(user, adjusted_climb_time))

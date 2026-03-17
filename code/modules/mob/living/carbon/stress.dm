@@ -30,6 +30,7 @@
 
 /mob/living/carbon
 	var/stress = 0
+	var/stress_level = 0
 	var/oldstress = 0
 	var/stressbuffer = 0
 	/// List of stressor instances
@@ -91,12 +92,12 @@
 		var/datum/stress_event/last_event = (length(stressors) ? stressors[length(stressors)] : null)
 		var/event_type = last_event?.type
 
-		if(last_event?.desc)
-			var/desc = last_event.get_desc()
+		var/desc = last_event?.get_desc(src)
+		if(desc && last_event.can_show(src))
 			event = islist(desc) ? jointext(desc, " ") : desc
 
 		if(stress > oldstress)
-			if(event && last_event.stress_change > 0)
+			if(event && last_event.get_stress(src) > 0)
 				if(last_announced_event_type != event_type)
 					to_chat(src, "[event] [span_red(" I gain STRESS.")]")
 					last_announced_event_type = event_type
@@ -105,7 +106,7 @@
 				INVOKE_ASYNC(src, PROC_REF(play_stress_indicator))
 
 		else
-			if(event && last_event.stress_change <= 0)
+			if(event && last_event.get_stress(src) <= 0)
 				if(last_announced_event_type != event_type)
 					to_chat(src, "[event] [span_green(" I gain PEACE.")]")
 					last_announced_event_type = event_type
@@ -116,6 +117,22 @@
 		if(hud_used?.stressies)
 			hud_used.stressies.update_appearance(UPDATE_OVERLAYS)
 	oldstress = stress
+	if(attributes)
+		var/new_stress_level
+		switch(stress)
+			if(-INFINITY to STRESS_VGOOD)
+				new_stress_level = 2
+			if(STRESS_VGOOD+1 to STRESS_BAD-1)
+				new_stress_level = 0
+			if(STRESS_BAD to STRESS_VBAD-1)
+				new_stress_level = -1
+			if(STRESS_VBAD to STRESS_INSANE-1)
+				new_stress_level = -2
+			if(STRESS_INSANE to INFINITY)
+				new_stress_level = -3
+		if(new_stress_level != stress_level)
+			stress_level = new_stress_level
+			attributes.add_or_update_variable_diceroll_modifier(/datum/diceroll_modifier/stress, stress_level)
 
 	if(stress >= STRESS_INSANE && prob(5))
 		var/text = pick_list("stress_messages.json", "insanity")
@@ -187,6 +204,7 @@
 	for(var/stress_type in events_to_remove)
 		var/datum/stress_event/stress_event = has_stress_type(stress_type)
 		if(stress_event)
+			stress_event.on_remove(src)
 			adjust_stress(-1 * stress_event.get_stress())
 			stressors -= stress_event
 			qdel(stress_event)

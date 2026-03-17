@@ -34,13 +34,13 @@
 	var/no_glasses
 	var/damaged	= FALSE	//damaged indicates that our eyes are undergoing some level of negative effect
 
-	var/old_eye_color = "fff" //cache owners original eye color before inserting new eyes
+	var/old_eye_color = "#FFFFFF" //cache owners original eye color before inserting new eyes
 	/// Current eye color
 	var/eye_color = null
 	/// Whether eyes are different colors
 	var/heterochromia = FALSE
 	/// Second color for heterochromia
-	var/second_color = "FFFFFF"
+	var/second_color = "#FFFFFF"
 
 	/// Glows with emissive in the dark
 	var/glows = FALSE
@@ -48,10 +48,10 @@
 /obj/item/organ/eyes/Initialize()
 	. = ..()
 	if(!owner && !eye_color)
-		eye_color = random_eye_color()
+		eye_color = random_eye_color(TRUE)
 		if(prob(5))
 			heterochromia = TRUE
-			second_color = random_eye_color()
+			second_color = random_eye_color(TRUE)
 
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -60,9 +60,9 @@
 	if(eye_color)
 		var/mutable_appearance/iris_overlay = mutable_appearance(icon, "[icon_state]-iris")
 
-		var/used_color = "#[eye_color]"
+		var/used_color = eye_color
 		if(heterochromia && prob(50))
-			used_color = "#[second_color]"
+			used_color = second_color
 
 		iris_overlay.color = used_color
 		. += iris_overlay
@@ -99,6 +99,9 @@
 	owner.update_sight()
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M) //updates eye icon
+	if(M.hud_used) // hud icon
+		var/atom/movable/screen/eye_intent/eyet = locate() in M.hud_used.static_inventory
+		eyet?.update_appearance(UPDATE_OVERLAYS)
 
 
 
@@ -169,7 +172,7 @@
 /obj/item/organ/eyes/night_vision/zombie
 	name = "undead eyes"
 	desc = ""
-	eye_color = "FFFFFF"
+	eye_color = "#FFFFFF"
 
 /obj/item/organ/eyes/night_vision/werewolf
 	name = "moonlight eyes"
@@ -179,6 +182,7 @@
 	name = "burning red eyes"
 	desc = ""
 	eye_color = BLOODCULT_EYE
+	glows = TRUE
 
 /obj/item/organ/eyes/night_vision/mushroom
 	name = "fung-eye"
@@ -212,15 +216,3 @@
 
 /obj/item/organ/eyes/no_render
 	accessory_type = null
-
-/proc/set_eye_color(mob/living/carbon/mob, color_one, color_two)
-	var/obj/item/organ/eyes/eyes = mob.getorganslot(ORGAN_SLOT_EYES)
-	if(!eyes)
-		return
-	if(color_one)
-		eyes.eye_color = color_one
-	if(color_two)
-		eyes.second_color = color_two
-	eyes.update_accessory_colors()
-	if(eyes.owner)
-		eyes.owner.update_body_parts(TRUE)

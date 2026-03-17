@@ -1,3 +1,24 @@
+/datum/attribute_holder/sheet/job/vigilante
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 3,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = 2,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/sewing = 40,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/magic/holy = 10,
+	)
+
 /datum/job/advclass/wretch/vigilante
 	title = "Renegade"
 	tutorial = "A renegade, deserter and a gunslinger, Favoured by Matthios, You've turned your back on the black empire and Psydon alike, Now? you wander around Faience, wielding black powder, grit, and a gambler's instinct."
@@ -9,28 +30,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
 	allowed_patrons = list(/datum/patron/inhumen/matthios)
 
-	jobstats = list(
-		STATKEY_PER = 3,
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_LCK = 2
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/sewing = 4,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/combat/firearms = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/magic/holy = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/vigilante
 
 	traits = list(
 		TRAIT_DECEIVING_MEEKNESS,
@@ -43,17 +43,46 @@
 		/datum/action/cooldown/spell/undirected/conjure_item/puffer
 	)
 
+	honoraries = list(
+ 		"Big Iron" = HONORARY_PREFIX,
+ 		"Dead or Alive" = HONORARY_PREFIX,
+ 		"Guns Blazing" = HONORARY_PREFIX,
+ 		"Heaven's Smile" = HONORARY_PREFIX,
+ 		"High Noon" = HONORARY_PREFIX,
+ 		"Last Sight" = HONORARY_PREFIX,
+ 		"Lethal Shot" = HONORARY_PREFIX,
+ 		"Mammon Shot" = HONORARY_PREFIX,
+ 		"Mattarella" = HONORARY_PREFIX,
+ 		"Freyja's-Dae Nite" = HONORARY_PREFIX,
+ 		"Number One" = HONORARY_PREFIX,
+ 		"Flintlock Chirurgeon" = HONORARY_PREFIX,
+ 		"Bodystacker" = HONORARY_SUFFIX,
+ 		"Corpsestacker" = HONORARY_SUFFIX,
+ 		"of No Paradise" = HONORARY_SUFFIX,
+ 		"of the Gallows" = HONORARY_SUFFIX,
+ 		"Subterra-Walker" = HONORARY_SUFFIX,
+ 		"the Cleaner" = HONORARY_SUFFIX,
+ 		"the Courier" = HONORARY_SUFFIX,
+ 		"the Desperado" = HONORARY_SUFFIX,
+ 		"the Equalizer" = HONORARY_SUFFIX,
+ 		"the First Murderer" = HONORARY_SUFFIX,
+ 		"the Gunslinger" = HONORARY_SUFFIX,
+ 		"the Hanged Man" = HONORARY_SUFFIX,
+ 		"the Hitman" = HONORARY_SUFFIX,
+ 		"the Killer Seven" = HONORARY_SUFFIX,
+ 		"the Lifestealer" = HONORARY_SUFFIX,
+ 		"the Mammon-Taker" = HONORARY_SUFFIX,
+ 		"the One Who Sold Creation" = HONORARY_SUFFIX,
+ 		"the Opposition" = HONORARY_SUFFIX,
+ 		"the Power-Monger" = HONORARY_SUFFIX,
+ 		"the Renegade" = HONORARY_SUFFIX,
+		"the Showoff" = HONORARY_SUFFIX,
+ 		"the Son of a Bitch" = HONORARY_SUFFIX,
+ 		"the Wanted Man" = HONORARY_SUFFIX,
+	)
+
 /datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
-		var/prev_real_name = spawned.real_name
-		var/prev_name = spawned.name
-		var/title
-		var/list/titles = list("The Showoff", "The Gunslinger", "Mammon Shot", "The Desperado", "Last Sight", "The Courier", "Lethal Shot", "Guns Blazing", "Punished Shade", "The One Who Sold Creation", "V1", "V2", "The Opposition", "Mattarella", "High Noon", "Subterra-Walker", "Big Iron", "The Hanged Man", "The Equalizer", "Bodystacker", "Schotgonne Surgeon", "Of The Gallows", "The Renegade", "The Wanted Man", "Dead or Alive", "The Killer Seven", "The Cleaner", "The Son of a Bitch", "Mister Fridae Nite", "Heaven's Smile", "Of No Paradise", "Number One", "The Hitman", "Corpsestacker", "The First Murderer", "The Mammon-Taker", "The Lifestealer", "The Power-Monger")
-		title = pick(titles)
-		spawned.real_name = "[prev_real_name], [title]"
-		spawned.name = "[prev_name], [title]"
-
 	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/vigilante

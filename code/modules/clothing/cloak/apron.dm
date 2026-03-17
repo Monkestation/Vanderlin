@@ -59,7 +59,7 @@
 	AddComponent(
 		/datum/component/equipment_stress/job_specific, \
 		/datum/stress_event/maidapron, \
-		list(TRAIT_VILLAIN = null, TRAIT_NOBLE = /datum/stress_event/maidapron/noble), \
+		list(TRAIT_VILLAIN = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidapron/noble), \
 		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
 		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \

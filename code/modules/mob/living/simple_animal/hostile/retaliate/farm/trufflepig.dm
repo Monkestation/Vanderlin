@@ -35,7 +35,7 @@
 			if(user.used_intent.type == /datum/intent/shovelscoop)
 				playsound(src,'sound/items/dig_shovel.ogg', 70, TRUE)
 				if(do_after(user, 3 SECONDS, src))
-					new /obj/item/reagent_containers/food/snacks/toxicshrooms(get_turf(src))
+					new /obj/item/reagent_containers/food/snacks/truffles/toxic(get_turf(src))
 					hidden_toxicshrooms = FALSE
 				return TRUE
 	return ..()
@@ -46,12 +46,28 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
+	nutrition = VEGGIE_NUTRITION
 	color = "#ab7d6f"
 	tastes = list("mushroom" = 1)
 	sellprice = 30
 	rotprocess = null
-	biting = TRUE
+	var/poisonous = FALSE
+
+/obj/item/reagent_containers/food/snacks/truffles/examine(mob/user)
+	. = ..()
+	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
+	if(!can_tell)
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
+	if(can_tell)
+		if(poisonous)
+			. += span_warning("This truffle looks suspicious. I sense it might be poisoned.")
+		else
+			. += span_notice("This truffle looks safe to eat.")
+
+/obj/item/reagent_containers/food/snacks/truffles/toxic
+	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
+	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
+	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle
 	name = "cooked truffles"
@@ -59,30 +75,11 @@
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
 	eat_effect = /datum/status_effect/buff/foodbuff
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = COOKED_VEGGIE_NUTRITION+1
 	color = "#835b4f"
 	tastes = list("delicious truffles" = 2)
 	biting = TRUE
 
-/obj/item/reagent_containers/food/snacks/toxicshrooms
-	name = "truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 5)
-	color = "#ab7d6f"
-	tastes = list("mushroom" = 1)
-	biting = TRUE
-
-/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	name = "cooked truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 6)
-	color = "#835b4f"
-	tastes = list("off-putting" = 2)
-	biting = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	gender = FEMALE
@@ -128,6 +125,7 @@
 							/obj/item/reagent_containers/food/snacks/fat = 2,
 							/obj/item/natural/hide = 2)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 5,
+							/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 							/obj/item/reagent_containers/food/snacks/fat = 3,
 							/obj/item/natural/hide = 3)
 
@@ -175,6 +173,7 @@
 		)
 
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
 	var/hangry_meter = 0
 	var/random_gender = TRUE
 	var/can_breed = TRUE
@@ -192,9 +191,6 @@
 			list(/mob/living/simple_animal/hostile/retaliate/trufflepig/piglet = 90, /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/boy = 10),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/get_sound(input)
@@ -267,7 +263,7 @@
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)
 
-	if(istype(O, /obj/item/reagent_containers/food/snacks/toxicshrooms))
+	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles/toxic))
 		visible_message("<span class='notice'>The pig munches the truffles reluctantly.</span>")
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)
@@ -308,6 +304,7 @@
 	name = "truffle piglet"
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	can_breed = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/Initialize()
 	. = ..()

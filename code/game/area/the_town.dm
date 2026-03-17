@@ -106,6 +106,7 @@
 	background_track_night = 'sound/music/area/churchnight.ogg'
 
 /area/indoors/town/church/chapel
+	name = "prayer hall"
 	icon_state = "chapel"
 	first_time_text = "THE HOUSE OF THE TEN"
 
@@ -136,15 +137,18 @@
 	return FALSE
 
 /area/indoors/town/clocktower
+	name = "Clocktower"
 	first_time_text = "Clocktower"
 	icon_state = "clocktower"
 	background_track = 'sound/music/area/clocktower_ambience.ogg'
 
 /area/indoors/town/orphanage
+	name = "Orphanage"
 	first_time_text = "The Orphanage"
 	icon_state = "orphanage"
 
 /area/indoors/town/clinic_large
+	name = "The Clinic"
 	first_time_text = "The Clinic"
 	icon_state = "clinic_large"
 
@@ -157,15 +161,18 @@
 	icon_state = "clinic_feld"
 
 /area/indoors/town/thieves_guild
+	name = "Theives' Guild"
 	first_time_text = "Thieves' Guild"
 	icon_state = "thieves_guild"
 
 /area/indoors/town/merc_guild
+	name = "Mercenary Guild"
 	first_time_text = "Mercenary Guild"
 	icon_state = "merc_guild"
 
 /area/indoors/town/steward
-	first_time_text = "Stewards Office"
+	name = "Steward's Office"
+	first_time_text = "Steward's Office"
 	icon_state = "steward"
 
 /area/indoors/town/smithy
@@ -178,7 +185,7 @@
 	converted_type = /area/outdoors/exposed/dwarf
 
 /area/indoors/town/dwarfin
-	name = "makers quarter"
+	name = "Makers Quarter"
 	icon_state = "dwarfin"
 	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
@@ -194,7 +201,7 @@
 
 
 /area/indoors/town/theatre
-	name = "theatre"
+	name = "Theatre"
 	icon_state = "manor"
 	background_track = null
 	background_track_dusk = null
@@ -202,7 +209,7 @@
 	converted_type = /area/outdoors/exposed/theatre
 
 /area/outdoors/exposed/theatre
-	name = "theatre"
+	name = "Theatre"
 	icon_state = "manor"
 	background_track = null
 	background_track_dusk = null

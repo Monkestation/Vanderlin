@@ -31,6 +31,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/inhand_x_dimension = 64
 	var/inhand_y_dimension = 64
 
+	var/flags_ai_inventory = NONE
+
 	var/no_effect = FALSE
 
 	max_integrity = 200
@@ -289,6 +291,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
+	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
+	var/toggle_state
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -356,8 +360,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		max_blade_int = 0
 		blade_int = 0
 
-	if(max_blade_int && !blade_int) //set blade integrity to randomized 60% to 100% if not already set
-		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
+	//Randomizes blade sharpness on initialize to between 60-100%
+	if(max_blade_int && !blade_int)
+		blade_int = max_blade_int
+		if(randomize_blade_int)
+			blade_int += rand(-(max_blade_int * 0.4), 0)
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)
@@ -478,6 +485,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					B.remove()
 					B.generate_appearance()
 					B.apply()
+			if(toggle_state)
+				icon_state = "[toggle_state]1" // Stupid thing needed for Grandmaster/Martyr weapons, if theres a better way to accomplish this tell me. I'm stupid.
 			if(gripspriteonmob)
 				item_state = "[initial(icon_state)]_wield"
 				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
@@ -487,7 +496,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					B.apply()
 			return
 		if(gripsprite)
-			icon_state = initial(icon_state)
+			if(toggle_state) // See above comment
+				icon_state ="[toggle_state]"
+			else
+				icon_state = initial(icon_state)
 			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
 			if(B)
 				B.remove()
@@ -750,7 +762,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				C.visible_message(span_smallnotice("[C] starts taking off [src]..."), span_smallnotice("I start taking off [src]..."))
 
 			var/doafter_flags = edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-			return do_after(C, minone(unequip_delay_self-C.STASPD), timed_action_flags = doafter_flags)
+			return do_after(C, minone(unequip_delay_self-GET_MOB_ATTRIBUTE_VALUE(C, STAT_SPEED)), timed_action_flags = doafter_flags)
 
 	return TRUE
 
@@ -810,6 +822,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			animate(src, pixel_y = oldy, time = 0.5)
 	item_flags &= ~IN_INVENTORY
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED,user)
+	SEND_SIGNAL(user, COMSIG_MOB_DROPITEM,src)
 	if(!silent)
 		playsound(src, drop_sound, DROP_SOUND_VOLUME, TRUE, ignore_walls = FALSE)
 	toggle_altgrip(user, FALSE)
@@ -1230,7 +1243,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(tool_behaviour == TOOL_MINING && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		skill_modifier = H.get_skill_speed_modifier(/datum/skill/labor/mining)
+		skill_modifier = GET_MOB_SKILL_SPEED_MOD(H, /datum/attribute/skill/labor/mining)
 
 	delay *= toolspeed * skill_modifier
 
@@ -1325,6 +1338,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return TRUE
 
 /obj/item/proc/canStrip(mob/stripper, mob/owner)
+	if(HAS_TRAIT(loc, TRAIT_STUCKITEMS))
+		return FALSE
+	if(HAS_TRAIT(loc, TRAIT_HIGHVALUE_STUCK))
+		if(melting_material == /datum/material/steel)
+			return FALSE
+		if(item_flags & HIGH_VALUE)
+			return FALSE
+
 	return !HAS_TRAIT(src, TRAIT_NODROP)
 
 /obj/item/proc/doStrip(mob/stripper, mob/owner)
@@ -1340,7 +1361,11 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/on_unwield(obj/item/source, mob/living/carbon/user)
 	wdefense -= 1
-	user.update_a_intents()
+	user?.update_a_intents()
+
+/obj/item/proc/is_wielded()
+	var/datum/component/two_handed/two_handed = GetComponent(/datum/component/two_handed)
+	return two_handed?.wielded
 
 /obj/item/proc/toggle_altgrip(mob/user, override_state)
 	if(!alt_intents)
@@ -1413,7 +1438,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(!istype(loc, /turf))
 			return
 		source = loc
-	var/image/pickup_animation = image(icon = src, layer = layer + 0.1)
+	var/mutable_appearance/pickup_animation = mutable_appearance(icon, icon_state, layer = layer + 0.1)
 	pickup_animation.plane = GAME_PLANE
 	pickup_animation.transform.Scale(0.75)
 	pickup_animation.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
@@ -1494,7 +1519,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(!get_precursor_data(src))
 		return
-	var/alch_skill = user.get_skill_level(/datum/skill/craft/alchemy)
+	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/alchemy) : 6
 	var/datum/natural_precursor/precursor = get_precursor_data(src)
 	if(precursor)
 		for(var/datum/thaumaturgical_essence/essence as anything in precursor.essence_yields)
@@ -1523,3 +1548,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
 		if(particle_spewer)
 			particle_spewer.RemoveComponent()
+
+/obj/item/atom_break(damage_flag, silent)
+	. = ..()
+
+	if(!ismob(loc))
+		return
+
+	if(!silent)
+		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))

@@ -1,12 +1,24 @@
 /mob/living/carbon/human/species/medicator
 	race = /datum/species/medicator
 
+/datum/attribute_holder/sheet/job/species/medicator
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/medicine = 10
+	)
+
+/datum/attribute_holder/sheet/job/species/medicator/stats
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = -1,
+		STAT_CONSTITUTION = -1
+	)
 /datum/species/medicator
 	name = "Medicator"
 	id = "medicator"
 	changesource_flags = WABBAJACK
 
-	meat = /obj/item/reagent_containers/food/snacks/meat/strange
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
 
 	desc = "Medicators originate from the fetid swamps and murk within the Isle of Enigma. Their species has historically been localized around the area, \
 	although the Brass Cataclysm of Heartfelt's fall has resulted in droves of their kind seeking refuge elsewhere. They are a newer form of sentience, with records dating back only after Zizo's ascension. \
@@ -32,12 +44,9 @@
 
 	species_traits = list(NO_UNDERWEAR, HAIR, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_NASTY_EATER)
-	inherent_skills = list(
-		/datum/skill/misc/medicine = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/medicator
 
-	specstats_m = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
-	specstats_f = list(STATKEY_PER = 1, STATKEY_INT = 2, STATKEY_SPD = -1, STATKEY_CON = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/medicator/stats
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/medicator.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/medicator.dmi'
@@ -154,7 +163,7 @@
 	)
 
 /datum/species/medicator/get_possible_names(gender)
-	return world.file2list('strings/rt/names/other/medicator.txt')
+	return file2list('strings/rt/names/other/medicator.txt')
 
 /datum/species/medicator/get_possible_surnames(gender)
 	return null

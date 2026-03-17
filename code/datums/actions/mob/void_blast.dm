@@ -49,7 +49,7 @@
 	var/turf/origin_turf = get_turf(owner)
 	var/list/affected_turfs = get_line(origin_turf, target_turf) - origin_turf
 	for(var/turf/affected_turf in affected_turfs)
-		if(affected_turf.opacity)
+		if(IS_OPAQUE_TURF(affected_turf))
 			break
 		var/blocked = FALSE
 		for(var/obj/potential_block in affected_turf.contents)

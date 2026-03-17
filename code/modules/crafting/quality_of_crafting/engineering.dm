@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/engineering
 	abstract_type = /datum/repeatable_crafting_recipe/engineering
-	skillcraft = /datum/skill/craft/engineering
+	skillcraft = /datum/attribute/skill/craft/engineering
 	category = "Artificing"
 	subtypes_allowed = TRUE
 

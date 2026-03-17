@@ -144,6 +144,10 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
 
+		if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
+			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
+			continue
+
 		if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Species: [player_prefs.pref_species.name]")
 			continue
@@ -222,6 +226,10 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
+	if(length(job.banned_patrons) && (player_prefs.selected_patron.type in job.banned_patrons))
+		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
+		return FALSE
+
 	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
 		JobDebug("Eligibility failed: lastclass, Player: [player], Job: [job.title]")
 		return FALSE
@@ -253,6 +261,10 @@ SUBSYSTEM_DEF(job)
 
 	if(!job.enabled)
 		JobDebug("Eligibility failed: disabled, Player: [player], Job: [job.title]")
+		return FALSE
+
+	if(length(job.whitelisted_ckeys) && !(player.ckey in job.whitelisted_ckeys))
+		JobDebug("Eligibility failed: event whitelist, Player: [player], Job: [job.title]")
 		return FALSE
 
 	// Activate triumph if we passed with it
@@ -373,6 +385,9 @@ SUBSYSTEM_DEF(job)
 
 					var/list/char_data = player.multi_ready_characters[char_idx]
 					var/list/char_job_prefs = char_data["job_preferences"]
+
+					if(!length(char_job_prefs))
+						continue
 
 					// Apply this character temporarily for eligibility checks
 					player.apply_multi_ready_character(char_idx)
@@ -699,6 +714,21 @@ SUBSYSTEM_DEF(job)
 	var/mob/living/carbon/human/equipping_human = equipping
 	for(var/datum/quirk/quirk in equipping_human.quirks)
 		quirk.after_job_spawn(job)
+	// Ready up bonus
+	if(!equipping.islatejoin && player_client)
+		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
+		equipping.hydration = 800 // Set higher hydration
+		equipping.nutrition = 800
+		var/triumphs = 1
+		if(is_lord_job(job)) //monarch bonus
+			to_chat(player_client, span_notice("Heavy is the weight of the crown. But you have the resolve to wear it high. In this, you TRIUMPH."))
+			triumphs++
+			if(length(GLOB.clients) < LOWPOP_THRESHOLD) // every 5 players below lowpop racks the monarch another triumph
+				triumphs += ceil((LOWPOP_THRESHOLD - length(GLOB.clients)) / 5)
+		else
+			to_chat(player_client, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
+		player_client.adjust_triumphs(triumphs)
+
 
 /datum/job/proc/greet(mob/player)
 	//! TODO: Refactor this out... Look at how TG handles job greetings or implement our own method
@@ -820,7 +850,7 @@ SUBSYSTEM_DEF(job)
 		destination.JoinPlayerHere(M, FALSE)
 		return
 
-	if(!length(latejoin_trackers))
+	if(length(latejoin_trackers))
 		destination = pick(latejoin_trackers)
 		destination.JoinPlayerHere(M, buckle)
 		return

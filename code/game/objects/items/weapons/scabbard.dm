@@ -6,31 +6,14 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
-	blade_dulling = DULLING_BASHCHOP
 	wdefense = BAD_PARRY
 	max_integrity = INTEGRITY_WORST
 	possible_item_intents = list(SHIELD_BASH)
+	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-
-/obj/item/weapon/scabbard/update_icon_state()
-	icon_state = initial(icon_state)
-	item_state = initial(item_state)
-
-	if(length(contents))
-		var/obj/item/sheathed_weapon = contents[1]
-		var/icon/possible_sheaths = icon(icon) //hehe
-		var/list/extensions = list()
-		for(var/s in possible_sheaths.IconStates(1))
-			extensions[s] = TRUE
-		qdel(possible_sheaths)
-		if(extensions[icon_state+"_[sheathed_weapon.icon_state]"])
-			icon_state += "_[sheathed_weapon.icon_state]"
-		else
-			icon_state += "-sheathed"
-	return ..()
 
 /*
 	GENERIC SCABBARDS
@@ -46,7 +29,7 @@
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK|ITEM_SLOT_WRISTS|ITEM_SLOT_NECK
-	associated_skill = /datum/skill/combat/knives
+	associated_skill = /datum/attribute/skill/combat/knives
 	sewrepair = TRUE
 	sellprice = 10
 	experimental_onback = FALSE
@@ -93,8 +76,8 @@
 	wdefense = GREAT_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
-	anvilrepair = /datum/skill/craft/carpentry
-	associated_skill = /datum/skill/combat/swords
+	anvilrepair = /datum/attribute/skill/craft/carpentry
+	associated_skill = /datum/attribute/skill/combat/swords
 	sellprice = 10
 
 /obj/item/weapon/scabbard/sword/apply_components()
@@ -137,18 +120,24 @@
 
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_BULKY
-	anvilrepair = /datum/skill/craft/carpentry
-	associated_skill = /datum/skill/combat/swords
+	anvilrepair = /datum/attribute/skill/craft/carpentry
+	associated_skill = /datum/attribute/skill/combat/swords
 
 /obj/item/weapon/scabbard/cane/courtphysician
 	name = "fancy cane"
 	desc = "A decorated cane bearing the visage of a vulture."
 	icon_state = "doccanesheath"
 
+/obj/item/weapon/scabbard/cane/hand
+	name = "fancy cane"
+	desc = "A decorated silver cane bearing a rontz at the top."
+	icon_state = "staffsheath"
+
 /obj/item/weapon/scabbard/cane/apply_components()
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/sword)
+	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()
@@ -217,8 +206,8 @@
 	wdefense = GREAT_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
-	anvilrepair = /datum/skill/craft/carpentry
-	associated_skill = /datum/skill/combat/shields
+	anvilrepair = /datum/attribute/skill/craft/carpentry
+	associated_skill = /datum/attribute/skill/combat/shields
 	max_integrity = INTEGRITY_STANDARD
 	sellprice = 10
 
@@ -235,7 +224,7 @@
 	max_integrity = INTEGRITY_STRONG
 
 /obj/item/weapon/scabbard/kazengun/gold
-	name = "gold-stained Xinyi scabbard"
+	name = "gold-stained scabbard"
 	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"

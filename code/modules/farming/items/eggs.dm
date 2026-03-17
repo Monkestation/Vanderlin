@@ -31,8 +31,10 @@
 		visible_message("<span class='warning'>[H] crushes [src] underfoot.</span>")
 		qdel(src)
 
-/obj/item/reagent_containers/food/snacks/egg/proc/hatch(mob/living/simple_animal/hostile/retaliate/chicken/parent)
+/obj/item/reagent_containers/food/snacks/egg/proc/hatch(mob/living/simple_animal/hostile/retaliate/chicken/parent, mob/living/simple_animal/hostile/retaliate/chicken/father)
 	record_round_statistic(STATS_ANIMALS_BRED)
 	var/mob/living/simple_animal/hostile/retaliate/chicken/chick/new_chick = new /mob/living/simple_animal/hostile/retaliate/chicken/chick(get_turf(parent))
 	SEND_SIGNAL(parent, COMSIG_FRIENDSHIP_PASS_FRIENDSHIP, new_chick)
 	SEND_SIGNAL(parent, COMSIG_HAPPINESS_PASS_HAPPINESS, new_chick)
+	if(parent.genetics && !ispath(parent.genetics))
+		parent.genetics.inherit_to(new_chick, father)

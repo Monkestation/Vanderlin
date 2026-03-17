@@ -6,7 +6,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	invocation_type = INVOCATION_NONE
 
 	charge_required = TRUE
@@ -78,7 +78,7 @@
 	)
 
 	if(!length(get_unskeletonized_bodyparts(cast_on)))
-		cast_on.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
+		cast_on.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 30))
 		cast_on.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
 		cast_on.adjust_spell_points(18)
 		cast_on.visible_message(

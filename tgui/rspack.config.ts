@@ -28,7 +28,6 @@ export default defineConfig({
   entry: {
     tgui: './packages/tgui',
     'tgui-panel': './packages/tgui-panel',
-    'tgui-say': './packages/tgui-say',
   },
   mode: 'production',
   module: {
@@ -131,10 +130,8 @@ export default defineConfig({
     alias: {
       tgui: path.resolve(dirname, './packages/tgui'),
       'tgui-panel': path.resolve(dirname, './packages/tgui-panel'),
-      'tgui-say': path.resolve(dirname, './packages/tgui-say'),
       'tgui-dev-server': path.resolve(dirname, './packages/tgui-dev-server'),
-      'fonts/languages': path.resolve(dirname, "../interface/fonts/languages"),
-      'fonts': path.resolve(dirname, "../interface/fonts"),
+      'tgui-say': path.resolve(dirname, './packages/tgui-say'),
     },
   },
   stats: createStats(true),

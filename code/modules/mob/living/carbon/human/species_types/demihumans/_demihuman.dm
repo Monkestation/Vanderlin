@@ -9,6 +9,16 @@
 /mob/living/carbon/human/species/demihuman
 	race = /datum/species/demihuman
 
+/datum/attribute_holder/sheet/job/species/demihuman
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/demihuman
 	name = "Hollow-Kin"
 	id = SPEC_ID_HOLLOWKIN
@@ -49,6 +59,14 @@
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
+		/obj/item/natural/fur/gote = 0.1,
+		/obj/item/natural/fur/volf = 0.1,
+		/obj/item/natural/fur/rous = 0.1,
+		/obj/item/natural/fur/cabbit = 0.1,
+		/obj/item/natural/fur/fox = 0.1,
+		/obj/item/natural/fur/bobcat = 0.1,
+	)
 	exotic_bloodtype = /datum/blood_type/human/demihuman
 
 	offset_features_m = list(
@@ -89,8 +107,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/demihuman
 
 	enflamed_icon = "widefire"
 

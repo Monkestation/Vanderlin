@@ -48,20 +48,21 @@
 			loaded_projectile.embedchance = 100
 			loaded_projectile.accuracy += 15 //fully aiming blow makes your accuracy better.
 
-		if(user.STAPER > 8)
-			loaded_projectile.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			loaded_projectile.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		if(user.STAEND > 10) // Every point over 10 END adds 10% damage
-			loaded_projectile.damage = loaded_projectile.damage * (user.STAEND / 10)
+		var/perception = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
+		if(perception > 8)
+			loaded_projectile.accuracy += (perception - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			loaded_projectile.bonus_accuracy += (perception - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		if(perception > 10) // Every point over 10 END adds 10% damage
+			loaded_projectile.damage *= (perception / 10)
 		loaded_projectile.damage *= damfactor // Apply blow's inherent damage multiplier regardless of PER
-		loaded_projectile.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+		loaded_projectile.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 	. = ..()
 	if(.)
 		if(istype(user) && user.mind)
 			var/modifier = 1.25/(spread+1)
-			var/boon = user.get_learning_boon(/datum/skill/combat/bows)
-			var/amt2raise = user.STAINT/2
-			user.adjust_experience(/datum/skill/combat/bows, amt2raise * boon * modifier, FALSE)
+			var/boon = user.get_learning_boon(/datum/attribute/skill/combat/bows)
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2
+			user.adjust_experience(/datum/attribute/skill/combat/bows, amt2raise * boon * modifier, FALSE)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun/update_overlays()
 	. = ..()
@@ -100,7 +101,7 @@
 	if(master && chargetime)
 		var/newtime = 0
 		newtime = newtime + 3 SECONDS
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (5))- (master.STAEND * 0.5)
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (5))- (GET_MOB_ATTRIBUTE_VALUE(master, STAT_ENDURANCE) * 0.5)
 		if(newtime > 0)
 			return newtime
 		else
@@ -130,13 +131,13 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (10/6))
 		//end block //rtd replace 10 with drawdiff on bows that are hard and scale end more (10/20 = 0.5)
 		newtime = newtime + 10
-		newtime = newtime - (master.STAEND * (10/20))
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_ENDURANCE) * (10/20))
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER * 1) //20/20 is 1
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION) * 1) //20/20 is 1
 		if(newtime > 0)
 			return newtime
 		else

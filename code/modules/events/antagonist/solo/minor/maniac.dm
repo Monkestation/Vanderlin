@@ -25,7 +25,10 @@
 		/datum/job/adept,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
+		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 	denominator = 30

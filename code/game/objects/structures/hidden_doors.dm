@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 			. += span_purple("There's a hidden door here...")
 		else
 			var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-			if(L.STAPER + bonuses >= hidden_dc)
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses >= hidden_dc)
 				. += span_purple("Something isn't right about this wall...")
 
 /obj/structure/door/secret/Open(silent = FALSE)
@@ -419,3 +419,16 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 	memory_name = "thieves' guild's"
 	vips = list(/datum/job/matron)
+
+
+/obj/effect/mapping_helpers/secret_door_creator/rous
+	name = "Rous Secret Door Creator"
+	color = "#dcec4b"
+	override_floor = FALSE
+	hidden_dc = 16
+	use_phrases = TRUE
+	lang = list(/datum/language/rousman)
+	manager_id = "rousdoors"
+	accessor_trait = TRAIT_KNOW_ROUS_DOORS
+	memory_name = "Rous'"
+	vips = list(/datum/job/rousman)

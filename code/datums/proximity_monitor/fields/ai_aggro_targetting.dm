@@ -38,10 +38,9 @@
 /datum/proximity_monitor/advanced/ai_aggro_tracking/Destroy()
 	. = ..()
 	if(!QDELETED(controller) && owning_behavior)
-		controller.modify_cooldown(owning_behavior, owning_behavior.get_cooldown(controller))
+		controller.modify_cooldown(owning_behavior, world.time + owning_behavior.get_cooldown(controller))
 	owning_behavior = null
 	controller = null
-	target_key = null
 	targeting_strategy_key = null
 	hiding_location_key = null
 	filter = null
@@ -54,7 +53,13 @@
 	. = ..()
 	if(first_build)
 		return
-	owning_behavior.new_turf_found(target, controller, filter)
+	var/list/present = list()
+	for(var/atom/movable/AM in target)
+		present += AM
+	if(length(present))
+		owning_behavior.new_atoms_found(present, controller, target_key, filter, hiding_location_key)
+	else
+		owning_behavior.new_turf_found(target, controller, filter)
 
 /datum/proximity_monitor/advanced/ai_aggro_tracking/field_turf_crossed(atom/movable/movable, turf/location, turf/old_location)
 	if(!owning_behavior.atom_allowed(movable, filter, controller.pawn))

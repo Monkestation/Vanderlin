@@ -9,6 +9,17 @@
 /mob/living/carbon/human/species/human/space
 	race = /datum/species/human/space
 
+/datum/attribute_holder/sheet/job/species/space
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 4,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/human/space
 	name = "Human"
 	id = SPEC_ID_HUMAN_SPACE
@@ -82,8 +93,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 1, STATKEY_PER = 1, STATKEY_INT = 4, STATKEY_CON = 1, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = 1, STATKEY_PER = 1, STATKEY_INT = 4, STATKEY_CON = 1, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/space
 
 	enflamed_icon = "widefire"
 
@@ -102,10 +112,10 @@
 	return FALSE
 
 /datum/species/human/space/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/human/humnorm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/human/humnorf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/human/humnorm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/human/humnorf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/human/space/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/human/humnorlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/human/humnorlast.txt')
 	return last_names

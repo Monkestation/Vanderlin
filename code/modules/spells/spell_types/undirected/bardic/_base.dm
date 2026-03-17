@@ -3,7 +3,7 @@
 	button_icon = 'icons/mob/actions/bardsongs.dmi'
 	background_icon = 'icons/mob/actions/bardsongs.dmi'
 	has_visual_effects = FALSE
-	associated_skill = /datum/skill/misc/music
+	associated_skill = /datum/attribute/skill/misc/music
 	experience_modifier = 0.1
 
 	charge_required = FALSE

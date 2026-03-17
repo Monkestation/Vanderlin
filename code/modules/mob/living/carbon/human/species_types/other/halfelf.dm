@@ -7,6 +7,13 @@
 /mob/living/carbon/human/species/human/halfelf
 	race = /datum/species/human/halfelf
 
+/datum/attribute_holder/sheet/job/species/halfelf
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+	)
+
 /datum/species/human/halfelf
 	name = "Half-Elf"
 	id = SPEC_ID_HALF_ELF
@@ -80,8 +87,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/halfelf
 
 	enflamed_icon = "widefire"
 
@@ -147,8 +153,8 @@
 	))
 
 /datum/species/human/halfelf/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/elf/elfwm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/elf/elfwf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/elf/elfwm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/elf/elfwf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/human/halfelf/get_possible_surnames(gender = MALE)

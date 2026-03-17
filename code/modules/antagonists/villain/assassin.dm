@@ -28,12 +28,8 @@
 	ass.cmode_music = 'sound/music/cmode/antag/CombatAssassin.ogg'
 	add_verb(ass, /mob/living/carbon/human/proc/who_targets) // wtf
 	ass.set_patron(/datum/patron/inhumen/graggar, TRUE)
-	var/old_knife_skill = ass.get_skill_level(/datum/skill/combat/knives, TRUE)
-	var/old_sneak_skill = ass.get_skill_level(/datum/skill/misc/sneaking, TRUE)
-	if(old_knife_skill < 4) // If the assassined player has less than 4 knife skill, get them to 4.
-		ass.adjust_skillrank(/datum/skill/combat/knives, 4 - old_knife_skill, TRUE)
-	if(old_sneak_skill < 5) // If the assassined player has less than 5 sneak skill, get them to 5.
-		ass.adjust_skillrank(/datum/skill/misc/sneaking, 5 - old_sneak_skill, TRUE)
+	ass.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+	ass.clamped_adjust_skill_level(/datum/attribute/skill/misc/sneaking, 50, 50)
 	var/yea = /obj/item/weapon/knife/dagger/steel/profane
 	var/wah = /obj/item/inqarticles/garrote/razor
 	var/gah = /obj/item/lockpick
@@ -53,6 +49,7 @@
 /datum/antagonist/assassin/on_removal()
 	if(!silent && owner.current)
 		to_chat(owner.current,"<span class='danger'>The red fog in my mind is fading. I am no longer an [name]!</span>")
+	remove_verb(owner.current, /mob/living/carbon/human/proc/who_targets)
 	return ..()
 
 /datum/antagonist/assassin/roundend_report()
@@ -75,3 +72,13 @@
 		to_chat(world, "<span class='redtext'>The [name] [owner.name] has FAILED!</span>")
 		if(owner?.current)
 			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/fail.ogg', 100, FALSE, pressure_affected = FALSE)
+
+/datum/antagonist/assassin/examine_target(mob/living/carbon/examiner, mob/living/examined, list/P, list/examine_contents)
+	. = ..()
+	if(!istype(examiner) || !istype(examined))
+		return
+	if(examined.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))
+		for(var/obj/item/I in examiner.get_all_gear())
+			if(istype(I, /obj/item/weapon/knife/dagger/steel/profane))
+				LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, "profane dagger whispers, [span_danger("\"That's [examined.real_name]! Strike their heart!\"")]")
+				break

@@ -7,6 +7,15 @@
 /mob/living/carbon/human/species/tieberian
 	race = /datum/species/tieberian
 
+/datum/attribute_holder/sheet/job/species/tieberian
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/tieberian
 	name = "Tiefling"
 	id = SPEC_ID_TIEFLING
@@ -86,8 +95,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/tieberian
 
 	enflamed_icon = "widefire"
 
@@ -134,6 +142,7 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
+	C.AddComponent(/datum/component/malaguero, 2, 1, 30 SECONDS)
 
 /datum/species/tieberian/after_creation(mob/living/carbon/C)
 	. = ..()
@@ -143,6 +152,9 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
+	var/datum/component/bad_luck = C.GetComponent(/datum/component/malaguero)
+	if(bad_luck)
+		bad_luck.RemoveComponent()
 
 /datum/species/tieberian/qualifies_for_rank(rank, list/features)
 	return TRUE
@@ -190,11 +202,11 @@
 	return hair_colors
 
 /datum/species/tieberian/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/tiefm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/tiefm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/tiefm.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/tieberian/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/other/tieflast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/other/tieflast.txt')
 	return last_names
 

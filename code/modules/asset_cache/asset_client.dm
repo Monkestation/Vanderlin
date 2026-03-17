@@ -1,10 +1,3 @@
-/client
-	var/list/sent_assets = list() // List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
-	var/list/completed_asset_jobs = list() /// List of all completed blocking send jobs awaiting acknowledgement by send_asset
-
-	var/last_asset_job = 0 /// Last asset send job id.
-	var/last_completed_asset_job = 0
-
 /// Process asset cache client topic calls for "asset_cache_confirm_arrival=[INT]"
 /client/proc/asset_cache_confirm_arrival(job_id)
 	var/asset_cache_job = round(text2num(job_id))
@@ -42,10 +35,8 @@
 	var/job = ++last_asset_job
 	var/t = 0
 	var/timeout_time = timeout
-	if(byond_version < 516)
-		src << browse({"<script>window.location.href="byond://?asset_cache_confirm_arrival=[job]"</script>"}, "window=asset_cache_browser&file=asset_cache_send_verify.htm")
-	else
-		src << browse({"<script>var xhr = new XMLHttpRequest(); xhr.open('GET', 'byond://?asset_cache_confirm_arrival=[job]', true); xhr.send(null);</script>"}, "window=asset_cache_browser&file=asset_cache_send_verify.htm")
+
+	src << browse({"<script>var xhr = new XMLHttpRequest(); xhr.open('GET', 'byond://?asset_cache_confirm_arrival=[job]', true); xhr.send(null);</script>"}, "window=asset_cache_browser&file=asset_cache_send_verify.htm")
 
 	while(!completed_asset_jobs["[job]"] && t < timeout_time) // Reception is handled in Topic()
 		stoplag(1) // Lock up the requester until this is received.

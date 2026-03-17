@@ -9,6 +9,22 @@
 /mob/living/carbon/human/species/dwarf/mountain
 	race = /datum/species/dwarf/mountain
 
+/datum/attribute_holder/sheet/job/species/mountain_dwarf
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/mining = 10,
+	)
+
+/datum/attribute_holder/sheet/job/species/mountain_dwarf/stats
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = 0,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		STAT_FORTUNE = 0
+	)
+
 /datum/species/dwarf/mountain
 	name = "Dwarf"
 	id = SPEC_ID_DWARF
@@ -31,9 +47,7 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, YOUNGBEARD, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_POISON_RESILIENCE)
-	inherent_skills = list(
-		/datum/skill/labor/mining = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/mountain_dwarf
 
 	possible_ages = NORMAL_AGES_LIST
 	use_skintones = TRUE
@@ -88,8 +102,7 @@
 		OFFSET_UNDIES = list(0,0)\
 	)
 
-	specstats_m = list(STATKEY_STR = 1, STATKEY_PER = -2, STATKEY_INT = 0, STATKEY_CON = 2, STATKEY_END = 2, STATKEY_SPD = -1, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 1, STATKEY_PER = -2, STATKEY_INT = 0, STATKEY_CON = 2, STATKEY_END = 2, STATKEY_SPD = -1, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/mountain_dwarf/stats
 
 	enflamed_icon = "widefire"
 
@@ -155,10 +168,10 @@
 	))
 
 /datum/species/dwarf/mountain/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/dwarf/dwarmm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/dwarf/dwarmf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/dwarf/dwarmm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/dwarf/dwarmf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/dwarf/mountain/get_possible_surnames(gender = MALE)
-	var/static/list/last_names = world.file2list('strings/rt/names/dwarf/dwarmlast.txt')
+	var/static/list/last_names = file2list('strings/rt/names/dwarf/dwarmlast.txt')
 	return last_names

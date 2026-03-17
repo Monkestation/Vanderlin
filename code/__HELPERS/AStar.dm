@@ -86,10 +86,9 @@ Actual Adjacent procs :
 	var/list/openc = new()  // turf -> node mapping for nodes in open list
 	var/list/closed = new()  // turf -> bitmask of blocked directions
 	var/list/path = null
-	var/const/ALL_DIRS = NORTH|SOUTH|EAST|WEST
 
 	// Create initial node
-	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_DIRS)
+	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_CARDINALS)
 	var/list/insert_item = list(cur)
 	BINARY_INSERT_DEFINE_REVERSE(insert_item, open, SORT_VAR_NO_TYPE, cur, SORT_TOTAL_COST_F, COMPARE_KEY)
 	openc[start] = cur
@@ -101,7 +100,7 @@ Actual Adjacent procs :
 
 		var/turf/cur_turf = cur[ATURF]
 		openc -= cur_turf
-		closed[cur_turf] = ALL_DIRS
+		closed[cur_turf] = ALL_CARDINALS
 
 		// Destination check - must be exact match or valid closeenough on same Z-level
 		var/is_destination = (cur_turf == end)
@@ -164,7 +163,7 @@ Actual Adjacent procs :
 					BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
 			else
 				// Not in open list, create new node
-				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_DIRS^reverse)
+				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_CARDINALS^reverse)
 				var/list/new_item = list(CN)
 				BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
 				openc[T] = CN

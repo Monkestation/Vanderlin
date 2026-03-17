@@ -49,7 +49,7 @@
 
 /datum/repeatable_crafting_recipe/cooking/apple_fritter_raw/create_outputs(list/to_delete, mob/user)
 	var/output_path = output
-	if(user.get_skill_level(/datum/skill/craft/cooking) >= 2)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) >= 2)
 		output_path =  /obj/item/reagent_containers/food/snacks/foodbase/fritter_raw/good
 	var/list/outputs = list()
 
@@ -91,6 +91,24 @@
 	crafting_message = "knead onions into the mince"
 	extra_chance = 100
 
+/datum/repeatable_crafting_recipe/cooking/salsa
+	category = "Tiefling Cuisine"
+	name = "Drowsbane Jam"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/fruit/tamto_slice = 1,
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
+	starting_atom = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/drowsbanejam
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading_alt.ogg'
+	crafting_message = "mixing the drowsbane and tamto"
+	extra_chance = 100
+
 /datum/repeatable_crafting_recipe/cooking/raw_sausage
 	name = "Fatty Raw Sausage"
 
@@ -103,7 +121,7 @@
 	attacked_atom = /obj/item/reagent_containers/food/snacks/meat/mince
 	starting_atom = /obj/item/reagent_containers/food/snacks/fat
 	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/meat/sausage
+	output = /obj/item/reagent_containers/food/snacks/meat/sausage/wiener
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "stuff a wiener"
@@ -171,6 +189,72 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	extra_chance = 100
 
+/datum/repeatable_crafting_recipe/cooking/comelette_base
+	category = "Tiefling Cuisine"
+	name = "Caravaneer's Omelette Base"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/egg = 2,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/egg
+	starting_atom = /obj/item/reagent_containers/food/snacks/egg
+	output = /obj/item/reagent_containers/food/snacks/comelette_base
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/eggbreak.ogg'
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/comelette
+	category = "Tiefling Cuisine"
+	name = "Uncooked Caravaneer's Omelette"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/comelette_base = 1,
+		/obj/item/reagent_containers/food/snacks/veg/potato_sliced = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/comelette_base
+	starting_atom = /obj/item/reagent_containers/food/snacks/veg/potato_sliced
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/comelette_uncooked
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/comelette_veggie
+	category = "Tiefling Cuisine"
+	name = "Uncooked Veggie Caravaneer's Omelette"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/comelette_uncooked = 1,
+		/obj/item/reagent_containers/food/snacks/veg/onion_sliced = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/comelette_uncooked
+	starting_atom = /obj/item/reagent_containers/food/snacks/veg/onion_sliced
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/comelette_uncooked/veggie
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/comelette_meat
+	category = "Tiefling Cuisine"
+	name = "Uncooked Meat Caravaneer's Omelette"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/comelette_uncooked = 1,
+		/obj/item/reagent_containers/food/snacks/meat/mince/beef = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/comelette_uncooked
+	starting_atom = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/comelette_uncooked/meat
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	extra_chance = 100
+
 /datum/repeatable_crafting_recipe/cooking/royal_truffle
 	name = "Royal Truffles"
 
@@ -183,23 +267,6 @@
 	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/truffle
 	allow_inverse_start = TRUE
 	output = /obj/item/reagent_containers/food/snacks/cooked/royal_truffle
-	craft_time = 2 SECONDS
-	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
-	extra_chance = 100
-
-/datum/repeatable_crafting_recipe/cooking/royal_truffle_toxic
-	hides_from_books = TRUE
-	name = "Royal Truffles"
-
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/cooked/ham = 1,
-		/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic = 1,
-	)
-	required_table = TRUE
-	attacked_atom = /obj/item/reagent_containers/food/snacks/cooked/ham
-	starting_atom = /obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	allow_inverse_start = TRUE
-	output = /obj/item/reagent_containers/food/snacks/cooked/royal_truffle/toxin
 	craft_time = 2 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	extra_chance = 100
@@ -233,6 +300,23 @@
 	craft_time = 8 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "mix the salt and seeds"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/ribrack_honey
+	name = "Glazed Rib Rack"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/spiderhoney = 1,
+		/obj/item/reagent_containers/food/snacks/bread/ribrack = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/bread/ribrack
+	starting_atom = /obj/item/reagent_containers/food/snacks/spiderhoney
+	allow_inverse_start = TRUE
+	output = /obj/item/reagent_containers/food/snacks/bread/ribrack/honey
+	craft_time = 2 SECONDS
+	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
+	crafting_message = "adding glaze to the rib rack"
 	extra_chance = 100
 
 // Redtallow can be crafted using visceras (rendered from animal sinew)

@@ -29,10 +29,10 @@
 	gripsprite = TRUE
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/fertilizer/ash
-	associated_skill = /datum/skill/combat/whipsflails
+	associated_skill = /datum/attribute/skill/combat/whipsflails
 
 /obj/item/weapon/thresher/military
-	name = "military flail"
+	name = "studded flail"
 	desc = "Crushes skulls, or grain."
 	icon_state = "military"
 	force = DAMAGE_WEAK_FLAIL - 5
@@ -148,7 +148,7 @@
 	max_blade_int = 50
 	melting_material = /datum/material/iron
 	melt_amount = 50
-	associated_skill = /datum/skill/combat/knives
+	associated_skill = /datum/attribute/skill/combat/knives
 	grid_height = 64
 	grid_width = 64
 
@@ -198,7 +198,7 @@
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 
 	wlength = 66
 	var/time_multiplier = 1
@@ -322,10 +322,11 @@
 	force = DAMAGE_STAFF
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	throwforce = DAMAGE_SPEAR
-	wdefense = MEDIOCRE_PARRY
+	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH)
 	gripped_intents = list(DUMP_INTENT,POLEARM_BASH,POLEARM_THRUST)
+	max_blade_int = 100
 
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
 	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
@@ -336,12 +337,11 @@
 	gripspriteonmob = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	blade_dulling = DULLING_BASHCHOP
 	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
 	max_integrity = INTEGRITY_POOR
 

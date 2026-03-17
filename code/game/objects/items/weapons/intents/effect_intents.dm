@@ -18,10 +18,10 @@
 	animname = "strike"
 	blade_class = BCLASS_BLUNT
 	hitsound = list('sound/combat/hits/blunt/daze_hit.ogg')
-	chargetime = 0
-	penfactor = 50
+	penfactor = 45
 	swingdelay = 6
 	damfactor = 0.5
+	acc_bonus = 15
 	item_damage_type = "blunt"
 	intent_effect = /datum/status_effect/debuff/dazed
 	target_parts = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_SKULL)
@@ -29,7 +29,7 @@
 /datum/status_effect/debuff/dazed
 	id = "dazed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/dazed
-	effectedstats = list(STATKEY_PER = -2, STATKEY_INT = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2)
 	duration = 15 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 
