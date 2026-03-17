@@ -915,15 +915,18 @@
 	},
 /obj/item/carvedgem/turq/spoon{
 	pixel_x = -4;
-	pixel_y = 0
+	pixel_y = 0;
+	sellprice = 1
 	},
 /obj/item/plate/turq{
 	pixel_x = -16;
-	pixel_y = 0
+	pixel_y = 0;
+	sellprice = 1
 	},
 /obj/item/carvedgem/turq/fork{
 	pixel_x = 2;
-	pixel_y = 0
+	pixel_y = 0;
+	sellprice = 1
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/blue)
@@ -992,11 +995,13 @@
 /obj/structure/rack/shelf,
 /obj/item/carvedgem/turq/duck{
 	pixel_x = -3;
-	pixel_y = 35
+	pixel_y = 35;
+	sellprice = 1
 	},
 /obj/item/carvedgem/turq/cutgem{
 	pixel_x = 7;
-	pixel_y = 39
+	pixel_y = 39;
+	sellprice = 1
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/blue)
@@ -19698,7 +19703,9 @@
 /area/outdoors/eora)
 "jrc" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/clothing/ring/gold/rontz,
+/obj/item/clothing/ring/gold/rontz{
+	sellprice = 1
+	},
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/red)
 "jrh" = (
@@ -19965,8 +19972,12 @@
 /area/under/town/basement)
 "jwy" = (
 /obj/structure/rack,
-/obj/item/clothing/head/crown/circlet/coral,
-/obj/item/clothing/neck/coralamulet,
+/obj/item/clothing/head/crown/circlet/coral{
+	sellprice = 1
+	},
+/obj/item/clothing/neck/coralamulet{
+	sellprice = 1
+	},
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "jwT" = (
@@ -22032,7 +22043,8 @@
 /obj/structure/rack/shelf,
 /obj/item/carvedgem/turq/figurine{
 	pixel_x = 16;
-	pixel_y = 41
+	pixel_y = 41;
+	sellprice = 1
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/blue)
@@ -24649,7 +24661,9 @@
 /obj/structure/table/map{
 	dir = 10
 	},
-/obj/item/plate/coral,
+/obj/item/plate/coral{
+	sellprice = 1
+	},
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
 "lLn" = (
@@ -28028,8 +28042,12 @@
 	pixel_x = 6;
 	pixel_y = 17
 	},
-/obj/item/clothing/head/crown/circlet/turq,
-/obj/item/clothing/neck/turqamulet,
+/obj/item/clothing/head/crown/circlet/turq{
+	sellprice = 1
+	},
+/obj/item/clothing/neck/turqamulet{
+	sellprice = 1
+	},
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/blue)
 "nkE" = (
@@ -34950,7 +34968,8 @@
 	},
 /obj/item/candle/scandle/lit{
 	pixel_x = -10;
-	pixel_y = -3
+	pixel_y = -3;
+	sellprice = 1
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
@@ -36263,7 +36282,9 @@
 /area/indoors/town)
 "qXy" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/gem_device,
+/obj/item/gem/red{
+	sellprice = 1
+	},
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/red)
 "qXA" = (
@@ -38862,11 +38883,13 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/item/carvedgem/coral/fancyvase{
 	pixel_x = 10;
-	pixel_y = 44
+	pixel_y = 44;
+	sellprice = 1
 	},
 /obj/item/carvedgem/coral/vase{
 	pixel_x = -5;
-	pixel_y = 41
+	pixel_y = 41;
+	sellprice = 1
 	},
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
@@ -39937,7 +39960,9 @@
 /area/outdoors/town/noble_manor/blue)
 "sEk" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/clothing/ring/gold/saffira,
+/obj/item/clothing/ring/gold/saffira{
+	sellprice = 1
+	},
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/blue)
 "sEp" = (
@@ -40171,7 +40196,9 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/heir/heir1)
 "sJG" = (
-/obj/item/carvedgem/coral/duck,
+/obj/item/carvedgem/coral/duck{
+	sellprice = 1
+	},
 /turf/open/water/bath,
 /area/indoors/town/noble_manor/red)
 "sJZ" = (
@@ -41156,7 +41183,9 @@
 /area/under/cavelava)
 "tgb" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/gem/violet,
+/obj/item/gem/violet{
+	sellprice = 1
+	},
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/blue)
 "tgk" = (
@@ -43800,7 +43829,8 @@
 	},
 /obj/item/carvedgem/coral/fork{
 	pixel_x = -21;
-	pixel_y = 4
+	pixel_y = 4;
+	sellprice = 1
 	},
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/red)
@@ -49198,7 +49228,8 @@
 /obj/structure/rack/shelf,
 /obj/item/carvedgem/coral/fish{
 	pixel_x = 0;
-	pixel_y = 37
+	pixel_y = 37;
+	sellprice = 1
 	},
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
