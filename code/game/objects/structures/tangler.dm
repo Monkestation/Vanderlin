@@ -114,7 +114,7 @@
 		return
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
-		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNE))
+		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNITY))
 			return
 		if(FACTION_PLANTS in L.faction)
 			return

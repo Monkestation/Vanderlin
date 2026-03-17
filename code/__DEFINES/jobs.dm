@@ -166,6 +166,8 @@
 #define JDO_WRETCH 34.4
 
 #define JDO_MERCENARY 35
+#define JDO_BOGWITCH 35.1
+#define JDO_BOGWITCH_APP 35.2
 
 #define JDO_VAGRANT 36
 #define JDO_ORPHAN 37
@@ -180,3 +182,5 @@
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
 
+#define JOB_BOGWITCH "Bog Witch"
+#define JOB_BOGWITCH_APP "Bog Witch Apprentice"

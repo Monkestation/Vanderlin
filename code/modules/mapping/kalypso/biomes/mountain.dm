@@ -127,6 +127,7 @@
 		available_crops += /obj/structure/wild_plant/nospread/cabbage
 		available_crops += /obj/structure/wild_plant/nospread/onion
 		available_crops += /obj/structure/wild_plant/nospread/wheat
+		available_crops += /obj/structure/wild_plant/nospread/sunreed
 		available_crops += /obj/structure/wild_plant/nospread/strawberry
 
 	// Mountain meadow flowers
