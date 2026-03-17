@@ -118,7 +118,24 @@
 	output = /obj/item/reagent_containers/food/snacks/strawbycake
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
-	crafting_message = "add some tangy tangerine filling"
+	crafting_message = "add some sweet strawberry filling"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/cake_tamto
+	category = "Cakes"
+	name = "Tomato Silk Cake Base"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/fruit/tamto_slice = 1,
+		/obj/item/reagent_containers/food/snacks/cake = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/cake
+	starting_atom = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	output = /obj/item/reagent_containers/food/snacks/tamtocake
+	craft_time = 9 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	crafting_message = "add some juicy tamto filling"
 	extra_chance = 100
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_cheesecake
@@ -204,4 +221,21 @@
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread sugar frosting on the cake"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/unbaked_tamtocake
+	category = "Cakes"
+	name = "Unbaked Tomato Silk Cake"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cheese = 1,
+		/obj/item/reagent_containers/food/snacks/tamtocake = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/tamtocake
+	starting_atom = /obj/item/reagent_containers/food/snacks/cheese
+	output = /obj/item/reagent_containers/food/snacks/tamtocake_ready
+	craft_time = 9 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	crafting_message = "spread fresh cheese on the cake"
 	extra_chance = 100
