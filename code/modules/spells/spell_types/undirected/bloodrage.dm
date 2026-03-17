@@ -11,7 +11,7 @@
 	invocation = "GRAGGAR!! GRAGGAR!! GRAGGAR!!"
 	invocation_type = INVOCATION_SHOUT
 	charge_required = FALSE
-	cooldown_time = 1.5 MINUTES
+	cooldown_time = 2 MINUTES
 	spell_cost = 80
 	var/static/list/purged_effects = list(
 		/datum/status_effect/incapacitating/immobilized,
