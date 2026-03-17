@@ -22,18 +22,15 @@
 	there is one truth - your hands are indeed as steady as you claim them to be. Ensure you find an employer that won't stab \
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
-	outfit=/datum/outfit/chirurgeon
-	category_tags= list(CTAG_ADVENTURER)
+	outfit = /datum/outfit/chirurgeon
+	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/chirurgeon
-
 
 	traits = list(
 		TRAIT_EMPATH,
 		TRAIT_DEADNOSE,
 	)
-
-
 
 /datum/outfit/chirurgeon
 	name = "Chirurgeon (Migrant Wave)"
