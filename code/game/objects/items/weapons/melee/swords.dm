@@ -32,6 +32,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 30
+	grid_height = 96
+	grid_width = 64
 
 /obj/item/weapon/sword/getonmobprop(tag)
 	. = ..()

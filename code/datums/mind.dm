@@ -140,6 +140,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/Destroy()
 	SSticker.minds -= src
 	QDEL_NULL(sleep_adv)
+	remove_all_uis()
+	QDEL_LIST(active_uis)
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
 	return ..()
