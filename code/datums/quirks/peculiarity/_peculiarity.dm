@@ -192,13 +192,17 @@
 	name = "locked box"
 	desc = "A mysterious locked box."
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon_state = "mimic_trinket"
+	icon_state = "mysterybox"
+	detail_tag = "_detail"
 	var/datum/quirk/peculiarity/mystery_box/linked_quirk
 	var/listening = TRUE
+	dropshrink = 0.8
 
 /obj/item/mystery/Initialize()
 	. = ..()
 	become_hearing_sensitive()
+	detail_color = pick_assoc(COLOR_MAP)
+	update_appearance()
 
 /obj/item/mystery/Destroy()
 	lose_hearing_sensitivity()
