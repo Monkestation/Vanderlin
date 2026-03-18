@@ -308,7 +308,6 @@
 	if(is_local_foreigner)
 		ADD_TRAIT(spawned, TRAIT_LOCAL_FOREIGNER, TRAIT_GENERIC)
 
-
 	if(can_have_apprentices)
 		spawned.set_apprentice_training_skills(trainable_skills.Copy())
 		spawned.set_max_apprentices(max_apprentices)
