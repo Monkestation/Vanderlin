@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/alchemist_adventurer
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/craft/bombs = 30,
+		/datum/attribute/skill/craft/engineering = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/sewing = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+	)
+
 /datum/job/advclass/combat/alchemist
 	title = "Alchemist"
 	tutorial = "No longer working for a clinic or laboratory, these former apothecaries \
@@ -6,32 +28,9 @@
 				poisons, and explosives alike."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/combat/alchemist
+	attribute_sheet = /datum/attribute_holder/sheet/job/alchemist_adventurer
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
-
-	jobstats = list(
-    	STATKEY_PER = 1,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-  		/datum/skill/combat/knives = 3,
-    	/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-    	/datum/skill/labor/butchering = 1,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/craft/bombs = 3,
-		/datum/skill/craft/engineering = 2,
-  		/datum/skill/craft/crafting = 2,
-  		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 1
-	)
 
 	traits = list(
     	TRAIT_FORAGER,
