@@ -371,11 +371,6 @@
 /obj/structure/bed/shit,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"abu" = (
-/obj/structure/gate,
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/floor/carpet/lord/left,
-/area/indoors/mountains/anvil/upperkeep)
 "abv" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -1348,7 +1343,6 @@
 "afA" = (
 /obj/structure/table/optable,
 /obj/item/weapon/surgery/hemostat/improv,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "afC" = (
@@ -3826,10 +3820,6 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aqR" = (
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aqT" = (
 /obj/structure/table/wood/crafted,
 /obj/item/bin/water/gross,
@@ -4026,7 +4016,6 @@
 	dir = 8
 	},
 /obj/item/reagent_containers/glass/cup/clay_mug,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
 "arM" = (
@@ -4659,13 +4648,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"auw" = (
-/obj/structure/chair/bench/church/mid{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/church/rust,
-/area/indoors/mountains/anvil/keep)
 "aux" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
@@ -5194,7 +5176,6 @@
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
 "awI" = (
-/obj/effect/mapping_helpers/dead_body_placer,
 /obj/structure/table/wood/crafted,
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
@@ -5835,11 +5816,6 @@
 /obj/structure/table/wood/nice/decorated_alt,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"azj" = (
-/obj/structure/bed/shit,
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "azk" = (
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/church/line{
@@ -6713,11 +6689,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
 /area/outdoors/mountains/anvil/snowyforest)
-"aCI" = (
-/obj/structure/bed,
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/church/rust,
-/area/indoors/mountains/anvil/keep)
 "aCJ" = (
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
 /turf/open/floor/volcanic,
@@ -7323,12 +7294,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet/lord/corner,
 /area/indoors/mountains/anvil/upperkeep)
-"aFt" = (
-/obj/structure/winch{
-	redstone_id = "dwarvengate"
-	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aFu" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/tile/masonic,
@@ -8809,11 +8774,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
-"aLX" = (
-/obj/structure/chair/bench/church,
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/church/rust,
-/area/indoors/mountains/anvil/keep)
 "aLY" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/church/rust,
@@ -9150,13 +9110,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
-"aNH" = (
-/obj/structure/gate{
-	redstone_id = "dwarvengate"
-	},
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aNJ" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/herringbone,
@@ -9454,10 +9407,6 @@
 /obj/item/clothing/neck/psycross/zizo,
 /turf/open/floor/tile/masonic/single,
 /area/indoors/mountains/anvil/upperkeep)
-"aPg" = (
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/sand,
-/area/indoors/mountains/anvil/keep)
 "aPh" = (
 /obj/structure/table/wood/counter/end{
 	dir = 10
@@ -10031,11 +9980,6 @@
 /mob/living/carbon/human/species/skeleton/npc/hard,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aRH" = (
-/obj/structure/chair/stool,
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aRJ" = (
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/church/rust,
@@ -10259,10 +10203,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobblerock,
-/area/indoors/mountains/anvil/upperkeep)
-"aSx" = (
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/closed/wall/window/stained/red,
 /area/indoors/mountains/anvil/upperkeep)
 "aSy" = (
 /obj/structure/minecart_rail{
@@ -10957,7 +10897,6 @@
 /area/indoors/town/clocktower)
 "aVL" = (
 /obj/structure/table/optable,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "aVQ" = (
@@ -12520,13 +12459,6 @@
 /obj/structure/water_pipe,
 /turf/open/floor/metal,
 /area/under/mountains/anvil/upper)
-"gmk" = (
-/obj/structure/astratanshard,
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/floor/plasteel/maniac{
-	dir = 5
-	},
-/area/indoors/mountains/anvil/upperkeep)
 "gmv" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/table/wood/reinforced,
@@ -40915,7 +40847,7 @@ aen
 aRv
 anJ
 aAI
-azj
+abt
 aen
 aRv
 anJ
@@ -40925,7 +40857,7 @@ aen
 aRv
 ape
 aAI
-azj
+abt
 aOq
 aNQ
 aNQ
@@ -67965,7 +67897,7 @@ aKr
 aKr
 azW
 azW
-aPg
+aTg
 alc
 aPc
 aTg
@@ -68975,7 +68907,7 @@ aKr
 azW
 azW
 aTg
-aPg
+aTg
 aBa
 azh
 akr
@@ -80260,7 +80192,7 @@ aKX
 aKX
 aYD
 aKX
-aqR
+aKX
 aKX
 aKX
 azW
@@ -80457,7 +80389,7 @@ alU
 alU
 azW
 aKX
-aqR
+aKX
 aKX
 aKX
 aKX
@@ -81910,7 +81842,7 @@ aKX
 aKX
 aKX
 azi
-aRH
+aHP
 aiY
 aOv
 azi
@@ -82277,7 +82209,7 @@ alU
 alU
 alU
 azW
-aFt
+aKX
 aKX
 amF
 aKX
@@ -82289,7 +82221,7 @@ aKX
 aKX
 aKX
 aKX
-aNH
+aKX
 aKX
 aHS
 ack
@@ -83898,7 +83830,7 @@ aNo
 aWG
 aNV
 aLY
-aLX
+aLY
 aai
 aJG
 aLY
@@ -84112,7 +84044,7 @@ aJP
 azW
 aAK
 azl
-aCI
+amY
 azW
 aAK
 aAK
@@ -84308,7 +84240,7 @@ akk
 amh
 aJP
 aIY
-auw
+aIY
 aHz
 aJP
 azW
@@ -84532,7 +84464,7 @@ alM
 aio
 aKX
 acK
-aRH
+aHP
 aFW
 adU
 aZO
@@ -84706,12 +84638,12 @@ aet
 aLw
 aJP
 aLY
-aLX
+aLY
 aJP
 aJG
 aLY
 aJP
-auw
+aIY
 aIY
 aHz
 aJP
@@ -104937,7 +104869,7 @@ alm
 alm
 alm
 aks
-aSx
+aks
 aks
 alm
 alm
@@ -105143,7 +105075,7 @@ aRt
 aQB
 aeQ
 alm
-aSx
+aks
 aks
 alm
 aqx
@@ -105552,8 +105484,8 @@ aRt
 aQB
 aRt
 aRt
-aSx
-aSx
+aks
+aks
 aqx
 aqx
 aqx
@@ -107176,7 +107108,7 @@ aRt
 aNq
 aYh
 ajP
-aSx
+aks
 aqx
 aqx
 aqx
@@ -108798,7 +108730,7 @@ aVv
 aQB
 aRt
 aRt
-aSx
+aks
 aqx
 aqx
 aqx
@@ -109000,7 +108932,7 @@ aGL
 aRt
 aHV
 aHV
-aSx
+aks
 aqx
 aqx
 aqx
@@ -113656,7 +113588,7 @@ aej
 aHU
 aOh
 aCF
-aSx
+aks
 aqx
 aqx
 aqx
@@ -114464,7 +114396,7 @@ aCr
 aHU
 aHU
 aHU
-aSx
+aks
 aqx
 aqx
 aqx
@@ -115192,7 +115124,7 @@ ajP
 nAa
 aCr
 aRt
-gmk
+kXR
 kXR
 nQf
 shA
@@ -118504,7 +118436,7 @@ aCr
 ads
 aTR
 air
-aSx
+aks
 aqx
 aqx
 aqx
@@ -118706,7 +118638,7 @@ asD
 aHU
 aHU
 aaF
-aSx
+aks
 aqx
 aqx
 aqx
@@ -123513,7 +123445,7 @@ api
 aRt
 aNg
 aGR
-abu
+aGR
 aUm
 arK
 arY
