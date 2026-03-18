@@ -40,15 +40,6 @@
 		/datum/attribute/skill/misc/reading = 20,
 		/datum/attribute/skill/labor/mathematics = 10
 	)
-/datum/attribute_holder/sheet/job/orphan/bbratplus
-	raw_attribute_list = list(
-		STAT_INTELLIGENCE = 2,
-		STAT_ENDURANCE = 1,
-		/datum/attribute/skill/combat/bows = 10,
-		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 10
-	)
 
 /datum/job/orphan/bbrat
 	title = "Bookish Brat"
@@ -57,17 +48,22 @@
 	category_tags = list(CTAG_ORPHAN)
 	allowed_ages = list(AGE_CHILD)
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/bbrat
+
 /datum/job/orphan/bbrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
-	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
+	//if(has_world_trait(/datum/world_trait/orphanage_renovated))
+	//	orphanage_renovated = TRUE
 	if(!orphanage_renovated)
-		attribute_sheet = /datum/attribute_holder/sheet/job/orphan/bbratplus
-		to_chat(spawned, "tried to give plus stats")
+		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
+			STAT_INTELLIGENCE = 10,
+		))
 	else
-		attribute_sheet = /datum/attribute_holder/sheet/job/orphan/bbrat
-		to_chat(spawned, "gave normal stats")
+		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
+			STAT_INTELLIGENCE = 20,
+			STAT_ENDURANCE = 1,
+		))
 
 
 /datum/outfit/orphan/bbrat/pre_equip(mob/living/carbon/human/equipped_human)
