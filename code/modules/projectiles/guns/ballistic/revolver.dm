@@ -12,18 +12,28 @@
 	internal_magazine = TRUE
 	bolt_type = BOLT_TYPE_NO_BOLT
 	tac_reloads = FALSE
-	var/spin_delay = 10
-	var/recent_spin = 0
 
-/obj/item/gun/ballistic/revolver/chamber_round(spin_cylinder = TRUE)
+/obj/item/gun/ballistic/revolver/chamber_round(spin_cylinder = TRUE, replace_new_round)
+	if(!magazine) //if it mag was qdel'd somehow.
+		CRASH("revolver tried to chamber a round without a magazine!")
+
+	if(chambered)
+		UnregisterSignal(chambered, COMSIG_MOVABLE_MOVED)
+
 	if(spin_cylinder)
-		chambered = magazine.get_round(TRUE)
+		chambered = magazine.get_round()
 	else
 		chambered = magazine.stored_ammo[1]
+		if(ispath(chambered))
+			chambered = new chambered(src)
+			magazine.stored_ammo[1] = chambered
+
+	if(chambered)
+		RegisterSignal(chambered, COMSIG_MOVABLE_MOVED, PROC_REF(clear_chambered))
 
 /obj/item/gun/ballistic/revolver/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	..()
-	chamber_round(TRUE)
+	chamber_round()
 
 /obj/item/gun/ballistic/revolver/get_ammo(countchambered = FALSE, countempties = TRUE)
 	var/boolets = 0 //mature var names for mature people

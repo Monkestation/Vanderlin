@@ -1,7 +1,7 @@
 /obj/item/ammo_casing
 	name = "bullet casing"
 	desc = "A bullet casing."
-	icon = 'icons/roguetown/ammo.dmi'
+	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "s-casing"
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_HIP

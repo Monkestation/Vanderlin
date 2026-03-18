@@ -1,4 +1,3 @@
-
 #define DUALWIELD_PENALTY_EXTRA_MULTIPLIER 1.4
 
 /obj/item/gun
@@ -30,7 +29,7 @@
 	light_color = LIGHT_COLOR_ORANGE
 	light_power = 0.5
 	// If we can do the muzzle flash
-	var/can_muzzle_flash = TRUE
+	var/can_muzzle_flash = FALSE
 	/// Muzzle Flash Duration
 	var/light_time = 0.1 SECONDS
 
@@ -197,7 +196,6 @@
 
 /obj/item/gun/proc/recharge_newshot()
 	return
-
 
 /obj/item/gun/proc/process_burst(mob/living/user, atom/target, message = TRUE, list/modifiers, zone_override, random_spread = 0, burst_spread_mult = 0, iteration = 0)
 	if(!user || !firing_burst)

@@ -1,6 +1,6 @@
 /obj/item/ammo_casing/proc/fire_casing(atom/target, mob/living/user, modifiers, distro, quiet, zone_override, spread, atom/fired_from)
 	distro += variance
-	for (var/i = max(1, pellets), i > 0, i--)
+	for(var/i = max(1, pellets), i > 0, i--)
 		var/targloc = get_turf(target)
 		ready_proj(target, user, quiet, zone_override, fired_from)
 		if(distro) //We have to spread a pixel-precision bullet. throw_proj was called before so angles should exist by now...
@@ -8,48 +8,63 @@
 				spread = round((rand() - 0.5) * distro)
 			else //Smart spread
 				spread = round((i / pellets - 0.5) * distro)
-		if(!throw_proj(target, targloc, user, modifiers, spread))
-			return 0
+		var/obj/projectile/thrown_proj = throw_proj(target, targloc, user, modifiers, spread, fired_from)
+		if(isnull(thrown_proj))
+			return FALSE
 		if(i > 1)
 			newshot()
+
 	if(click_cooldown_override)
 		user?.changeNext_move(click_cooldown_override)
 	else
 		user?.changeNext_move(CLICK_CD_RANGE)
+
 	update_appearance()
+
 	return TRUE
 
 /obj/item/ammo_casing/proc/ready_proj(atom/target, mob/living/user, quiet, zone_override = "", atom/fired_from)
-	if (!loaded_projectile)
+	if(!loaded_projectile)
 		return
+
 	loaded_projectile.original = target
 	loaded_projectile.firer = user
+	loaded_projectile.fired_from = fired_from
 	loaded_projectile.arcshot = user?.used_intent?.arc_check()
+
 	if(loaded_projectile.arcshot)
 		loaded_projectile.range = get_dist_euclidian(target, user)
-	loaded_projectile.fired_from = fired_from
-	if (zone_override)
+
+	if(zone_override)
 		loaded_projectile.def_zone = zone_override
 	else
-		loaded_projectile.def_zone = user?.zone_selected
+		loaded_projectile.def_zone = user.zone_selected
+
+	if(isgun(fired_from))
+		var/obj/item/gun/gun = fired_from
+
+		var/integrity_mult = 0.5 + gun.get_integrity_percentage() * 0.5
+		if(integrity_mult >= 0.95) //Guns that are only mildly smudged don't debuff projectiles.
+			integrity_mult = 1
+
+		loaded_projectile.damage *= gun.projectile_damage_multiplier * integrity_mult
+		loaded_projectile.speed *= gun.projectile_speed_multiplier * integrity_mult
+
 	loaded_projectile.suppressed = quiet
 
 	if(reagents && loaded_projectile.reagents)
 		reagents.trans_to(loaded_projectile, reagents.total_volume, transfered_by = user) //For chemical darts/bullets
 		qdel(reagents)
 
-/obj/item/ammo_casing/proc/throw_proj(atom/target, turf/targloc, mob/living/user, list/modifiers, spread)
-	var/turf/curloc
-	if(user)
-		curloc = get_turf(user)
-	else
-		curloc = get_turf(src)
+/obj/item/ammo_casing/proc/throw_proj(atom/target, turf/targloc, mob/living/user, list/modifiers, spread, atom/fired_from)
+	var/turf/curloc = get_turf(fired_from)
 	if (!istype(targloc) || !istype(curloc) || !loaded_projectile)
-		return FALSE
+		return null
 
 	var/firing_dir
 	if(loaded_projectile.firer)
 		firing_dir = loaded_projectile.firer.dir
+
 	if(!loaded_projectile.suppressed && firing_effect_type)
 		new firing_effect_type(get_turf(src), firing_dir)
 
@@ -57,10 +72,13 @@
 	if(targloc == curloc)
 		if(target) //if the target is right on our location we'll skip the travelling code in the proj's fire()
 			direct_target = target
+
 	if(!direct_target)
 		loaded_projectile.preparePixelProjectile(target, isnull(user) ? src : user, modifiers, spread)
+
 	loaded_projectile.fire(null, direct_target)
 	loaded_projectile = null
+
 	return TRUE
 
 /obj/item/ammo_casing/proc/spread(turf/target, turf/current, distro)
