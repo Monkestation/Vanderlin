@@ -400,11 +400,6 @@
 	dir = 4
 	},
 /area/indoors/mountains/anvil/keep)
-"abA" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/area/indoors/town/clocktower)
 "abB" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /turf/open/floor/herringbone,
@@ -1423,6 +1418,7 @@
 	pixel_x = 2;
 	pixel_y = 27
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "afP" = (
 /obj/structure/table/wood/nice/decorated_alt,
@@ -2873,13 +2869,6 @@
 /mob/living/carbon/human/species/zizombie/npc/warrior,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"amO" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "amP" = (
 /turf/open/floor/tile/masonic{
 	dir = 1
@@ -5164,6 +5153,7 @@
 	pixel_y = 0;
 	pixel_x = -17
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aww" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
@@ -6170,8 +6160,6 @@
 "aAv" = (
 /turf/open/floor/metal/alt,
 /area/under/mountains/anvil/lower)
-"aAw" = (
-/area/under/cavelava)
 "aAx" = (
 /obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/debris/stone,
@@ -6593,8 +6581,6 @@
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"aCb" = (
-/area/under/mountains/anvil/upper)
 "aCe" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/pelt,
@@ -8479,6 +8465,7 @@
 	dir = 1
 	},
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aKu" = (
 /obj/structure/closet/crate/drawer,
@@ -11116,6 +11103,7 @@
 	pixel_y = 0;
 	pixel_x = -17
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aWr" = (
 /obj/structure/fluff/railing/border{
@@ -108034,7 +108022,7 @@ aCM
 aDl
 aDl
 aYn
-amO
+jDH
 jDH
 amp
 aqx
@@ -108640,7 +108628,7 @@ ahS
 aum
 alf
 aqk
-abA
+jDH
 aPO
 amp
 aqx
@@ -109495,7 +109483,7 @@ aqA
 aqA
 aUa
 aUa
-aAw
+aUY
 aqA
 aqA
 aqA
@@ -109697,8 +109685,8 @@ aUa
 aUa
 aUa
 aHj
-aAw
-aAw
+aUY
+aUY
 aBB
 aqA
 aqA
@@ -109898,10 +109886,10 @@ ahg
 aHj
 aUa
 aSd
-aAw
-aAw
-aAw
-aAw
+aUY
+aUY
+aUY
+aUY
 aqA
 aqA
 aqA
@@ -110100,10 +110088,10 @@ ahg
 avw
 aHj
 aSd
-aAw
-aAw
-aAw
-aAw
+aUY
+aUY
+aUY
+aUY
 aqA
 aqA
 aqA
@@ -110302,11 +110290,11 @@ aWH
 alI
 aWH
 aSd
-aAw
-aAw
-aAw
-aAw
-aAw
+aUY
+aUY
+aUY
+aUY
+aUY
 aqA
 aqA
 azL
@@ -110505,9 +110493,9 @@ alI
 ahg
 ahg
 aUa
-aAw
-aAw
-aAw
+aUY
+aUY
+aUY
 aqA
 aqA
 aqA
@@ -110706,9 +110694,9 @@ aqA
 aWH
 ahg
 aUa
-aAw
-aAw
-aAw
+aUY
+aUY
+aUY
 aqA
 aqA
 aqA
@@ -126353,7 +126341,7 @@ aPs
 aPs
 alm
 alm
-aGO
+alm
 aqx
 aqx
 aqx
@@ -129961,7 +129949,7 @@ apE
 apE
 awe
 aMW
-aCb
+ykn
 jEO
 xrk
 nuf
@@ -130163,7 +130151,7 @@ awe
 awe
 awe
 aMW
-aCb
+ykn
 jEO
 oME
 vXx
