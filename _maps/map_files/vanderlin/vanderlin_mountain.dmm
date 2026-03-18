@@ -318,6 +318,7 @@
 /obj/structure/pressurizer{
 	dir = 4
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "abi" = (
 /turf/open/floor/herringbone,
@@ -1407,6 +1408,7 @@
 /area/indoors/town/church/inquisition)
 "afM" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "afN" = (
 /obj/structure/gearbox,
@@ -1637,6 +1639,7 @@
 /area/indoors/town/church/inquisition)
 "agV" = (
 /obj/structure/rotation_piece/cog/large,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "agW" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -2179,6 +2182,7 @@
 "ajB" = (
 /obj/structure/water_pipe,
 /obj/structure/rotation_piece,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "ajC" = (
 /obj/structure/closet/crate/chest/wicker,
@@ -2874,6 +2878,7 @@
 	dir = 1
 	},
 /obj/effect/decal/cleanable/blood,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "amP" = (
 /turf/open/floor/tile/masonic{
@@ -3795,6 +3800,7 @@
 	pixel_x = 12;
 	pixel_y = 33
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aqH" = (
 /obj/structure/barricade/wooden,
@@ -4303,6 +4309,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 10
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "asY" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -4348,8 +4355,6 @@
 /obj/structure/bars/pipe/left,
 /turf/open/floor/plasteel/maniac,
 /area/indoors/mountains/anvil/keep)
-"atj" = (
-/area/outdoors/mountains/anvil/snowyforest)
 "atk" = (
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/cobblerock/alt,
@@ -4499,6 +4504,7 @@
 	pixel_x = -16
 	},
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "atS" = (
 /obj/structure/table/wood/large/corner_new{
@@ -4588,6 +4594,7 @@
 	pixel_x = -16
 	},
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aug" = (
 /obj/structure/table/wood/large/corner_new{
@@ -4862,6 +4869,7 @@
 "avq" = (
 /obj/structure/water_pipe,
 /obj/structure/rotation_piece/cog,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "avr" = (
 /obj/structure/fluff/railing/wood{
@@ -4944,6 +4952,7 @@
 /area/indoors/town/church/inquisition)
 "avE" = (
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "avF" = (
 /obj/structure/bars,
@@ -5159,6 +5168,7 @@
 "aww" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/vertical_gearbox,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "awx" = (
 /obj/structure/table/wood,
@@ -6737,6 +6747,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aCM" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aCO" = (
 /obj/structure/carpet/blue,
@@ -6804,6 +6815,7 @@
 /turf/open/floor/dirt,
 /area/under/cavelava)
 "aDl" = (
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aDm" = (
 /obj/structure/fermentation_keg/water,
@@ -6884,6 +6896,7 @@
 	pixel_y = 0;
 	layer = 3.0
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aDA" = (
 /obj/structure/table/wood/large/corner_new{
@@ -7619,6 +7632,7 @@
 	pixel_x = -16
 	},
 /obj/structure/water_vent,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aGJ" = (
 /obj/structure/chair/bench,
@@ -7761,6 +7775,7 @@
 /obj/structure/rotation_piece{
 	dir = 8
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aHm" = (
 /obj/structure/spider/cocoon,
@@ -8350,6 +8365,7 @@
 	layer = 3.0
 	},
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aJY" = (
 /obj/structure/stairs/stone{
@@ -8589,6 +8605,7 @@
 	pixel_x = -1;
 	pixel_y = 0
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aLc" = (
 /obj/structure/roguerock,
@@ -8899,6 +8916,7 @@
 /area/indoors/mountains/anvil/keep)
 "aMw" = (
 /obj/structure/vertical_gearbox,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aMx" = (
 /obj/structure/fluff/walldeco/painting{
@@ -9822,6 +9840,7 @@
 	pixel_x = -16
 	},
 /obj/structure/water_pipe,
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aQQ" = (
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
@@ -10410,6 +10429,7 @@
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 5
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aTi" = (
 /obj/structure/table/wood/large/corner_new{
@@ -10565,9 +10585,6 @@
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
-"aTT" = (
-/turf/closed/basic,
-/area/indoors/mountains/anvil/keep)
 "aTU" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -10601,6 +10618,7 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
+/turf/open/openspace,
 /area/indoors/town/clocktower)
 "aUd" = (
 /obj/structure/fluff/railing/tall/stone{
@@ -11665,8 +11683,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/mountains/anvil/upperkeep)
-"aYU" = (
-/area/under/mountains/anvil/lower)
 "aYW" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -12857,6 +12873,12 @@
 /obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"jDH" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "jEx" = (
 /obj/structure/carpet/cyan,
 /obj/structure/chair/stool/bar,
@@ -14561,6 +14583,9 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/indoors/mountains/anvil/upperkeep)
+"ykn" = (
+/turf/open/openspace,
+/area/under/mountains/anvil/upper)
 
 (1,1,1) = {"
 aOq
@@ -57855,8 +57880,8 @@ aoU
 aFi
 aFi
 aFi
-aYU
-aYU
+alU
+alU
 amU
 aJv
 ako
@@ -58057,8 +58082,8 @@ aoU
 aoU
 aFi
 aFi
-aYU
-aYU
+alU
+alU
 amU
 aJv
 ako
@@ -64920,18 +64945,18 @@ aOq
 aOq
 aOq
 aOq
-aYU
-aYU
-aYU
-aYU
-aYU
+aNQ
+aNQ
+aNQ
+aNQ
+aNQ
 azW
 azW
 azW
 azW
 azW
 azW
-aYU
+aNQ
 aNQ
 aOq
 aOq
@@ -65318,9 +65343,9 @@ aOq
 aOq
 aOq
 aOq
-aYU
-aYU
-aYU
+aNQ
+aNQ
+aNQ
 azW
 aTb
 aTb
@@ -67759,14 +67784,14 @@ azW
 aKr
 aKr
 azW
-aTT
-azW
-aTT
 azW
 azW
-aTT
 azW
-aTT
+azW
+azW
+azW
+azW
+azW
 azW
 aOq
 aOq
@@ -69375,14 +69400,14 @@ azW
 aKr
 aKr
 azW
-aTT
-azW
-aTT
 azW
 azW
-aTT
 azW
-aTT
+azW
+azW
+azW
+azW
+azW
 azW
 aKX
 aKX
@@ -70186,7 +70211,7 @@ aOq
 aOq
 aOq
 aOq
-aTT
+azW
 aKX
 acQ
 aKX
@@ -74690,7 +74715,7 @@ aqx
 aqx
 aZK
 axq
-atj
+auy
 auy
 aFz
 aNQ
@@ -98260,8 +98285,8 @@ aaf
 aaf
 aaf
 aBv
-aCb
-aCb
+ykn
+ykn
 azd
 aaU
 aWk
@@ -98462,8 +98487,8 @@ aaf
 aaf
 aaf
 aaf
-aCb
-aCb
+ykn
+ykn
 azd
 aWk
 aaU
@@ -108010,7 +108035,7 @@ aDl
 aDl
 aYn
 amO
-abA
+jDH
 amp
 aqx
 aqx
