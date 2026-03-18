@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/undirected/call_to_slaughter
 	name = "Call to Slaughter"
-	desc = "Grants you and all allies nearby a buff to their strength, endurance, and constitution."
+	desc = "Grants you and all inhumen followers nearby a buff to their strength, endurance, and constitution. Tennites receive punishment they deserve."
 	button_icon_state = "call_to_slaughter"
 	sound = 'sound/magic/timestop.ogg'
 
