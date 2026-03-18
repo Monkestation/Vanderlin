@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/projectile/revel_in_slaughter
 	name = "Revel in Slaughter"
-	desc = "The blood of your enemy shall boil, their skin feeling as if it's being ripped apart! Graggar demands their blood must FLOW!!!"
+	desc = "Stagger your enemy through throwing a blood orb into their eyes, blurring their view and exposing them to your attacks. Finish them off for GRAGGAR!!"
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/antimagic.ogg'
 
@@ -14,7 +14,7 @@
 	charge_time = 1 SECONDS
 	charge_drain = 1
 	cooldown_time = 20 SECONDS
-	spell_cost = 50
+	spell_cost = 40
 
 
 /obj/projectile/magic/revel_in_slaughter
@@ -36,8 +36,8 @@
 	to_chat(C, "<span class='danger'>\The [src] staggers you!</span>")
 	C.spawn_gibs()
 	C.apply_status_effect(/datum/status_effect/debuff/exposed)
-	C.apply_status_effect(/datum/status_effect/eye_blur, 4)
-	C.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 1)
+	C.apply_status_effect(/datum/status_effect/eye_blur, 20)
+	C.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 3)
 
 	playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 

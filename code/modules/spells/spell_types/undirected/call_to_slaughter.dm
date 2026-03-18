@@ -16,7 +16,7 @@
 
 /datum/action/cooldown/spell/undirected/call_to_slaughter/cast(atom/cast_on)
 	. = ..()
-	for(var/mob/living/carbon/target in viewers(3, get_turf(owner)))
+	for(var/mob/living/carbon/target in viewers(4, get_turf(owner)))
 		if(istype(target.patron, /datum/patron/inhumen))
 			target.apply_status_effect(/datum/status_effect/buff/call_to_slaughter)	//Buffs inhumens
 			return

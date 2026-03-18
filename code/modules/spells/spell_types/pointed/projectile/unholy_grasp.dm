@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/projectile/blood_net
 	name = "Unholy Grasp"
-	desc = "Toss forth an unholy snare of blood and guts a short distance, summoned from your leftover trophies sacrificed to Graggar. Like a net, may it snare your target! You will need some guts to use this."
+	desc = "Use organs from your victims to weaken your future ones. Guts will ensare your target, a tongue will silence their cries."
 	button_icon_state = "unholy_grasp"
 	sound = 'sound/misc/stings/generic.ogg'
 	charge_sound = 'sound/magic/charging_lightning.ogg'
@@ -37,7 +37,7 @@
 	// 	projectile_type = /obj/projectile/magic/cannibalistic_vomit
 	// 	qdel(held_item)
 	else
-		to_chat(owner, "I'm missing some guts to cast this..")
+		to_chat(owner, "I'm missing needed organs to cast this..")
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
@@ -69,10 +69,8 @@
 		//C.legcuffed = src
 		//forceMove(C)
 		//C.update_inv_legcuffed()
-		//SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		to_chat(C, "<span class='danger'>\The [src] ensnares you!</span>")
-		//C.Knockdown(knockdown) //We don't seems to use the knockdown, good enough tbh.
-		C.apply_status_effect(/datum/status_effect/debuff/netted)
+		C.apply_status_effect(/datum/status_effect/debuff/netted, 10)
 		playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 
 //------------------------
@@ -98,12 +96,14 @@
 	C.emote("gasp")
 	visible_message("<span class='danger'>\The [src] starts twisting [C] tongue!</span>")
 	to_chat(C, "<span class='danger'>\The [src] twits your tongue!</span>")
-	C.apply_status_effect(/datum/status_effect/silenced)
+	C.apply_status_effect(/datum/status_effect/silenced, 15)
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 //------------------------
 //Force vomit with purging chemicals
 //------------------------
+
+//Doesn't work, if you have any ideas you can try to reuse it or something
 
 // /obj/projectile/magic/cannibalistic_vomit
 // 	name = "cannibalistic vomit"
