@@ -21,7 +21,7 @@
 	title = "Malaguero Deserter"
 	tutorial = "A former soldier fighting against the forces of Zizo, something drove you to flee your post. Now, you fight for coin, rather than for the authority and command of generals you would never meet."
 	allowed_races = list(SPEC_ID_TIEFLING)
-	outfit = /datum/outfit/adventurer/malaguero
+	outfit = /datum/outfit/malaguero
 	attribute_sheet = /datum/attribute_holder/sheet/job/malaguero
 
 	traits = list(TRAIT_MEDIUMARMOR)
