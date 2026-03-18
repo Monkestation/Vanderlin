@@ -1,15 +1,3 @@
-/datum/attribute_holder/sheet/job/orphan
-	attribute_variance = list(
-		/datum/attribute/skill/misc/music = list(20, 40)
-	)
-	raw_attribute_list = list(
-		STAT_CONSTITUTION = -1,
-		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/misc/sneaking = 20,
-		/datum/attribute/skill/misc/stealing = 40,
-		/datum/attribute/skill/misc/climbing = 40
-	)
-
 /datum/job/orphan
 	title = "Orphan"
 	tutorial = "Before you could even form words, you were abandoned, or perhaps lost. \
@@ -19,27 +7,23 @@
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORPHAN
 	faction = FACTION_TOWN
+	allowed_ages = list(AGE_CHILD)
+
 	total_positions = 12
 	spawn_positions = 12
 	bypass_lastclass = TRUE
-
-	allowed_races = RACES_PLAYER_ALL
-	allowed_ages = list(AGE_CHILD)
-
-	outfit = /datum/outfit/orphan
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/orphan
+	advclass_cat_rolls = list(CTAG_ORPHAN = 5)
+	outfit = /datum/outfit/orphan
 
 	traits = list(
-		TRAIT_ORPHAN
+		TRAIT_ORPHAN,
 	)
 
 /datum/job/orphan/New()
 	. = ..()
 	peopleknowme = list()
-
 
 /datum/job/orphan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -102,3 +86,91 @@
 			/obj/item/instrument/hurdygurdy,
 			/obj/item/instrument/viola,
 		)
+
+
+
+
+
+/datum/attribute_holder/sheet/job/orphan/bbrat
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 10
+	)
+
+/datum/job/advclass/bbrat
+	title = "Bookish Brat"
+	tutorial = "placeholder text for brat"
+	//outfit = /datum/outfit/orphan/bbrat
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/bbrat
+	allowed_ages = list(AGE_CHILD)
+
+
+/datum/attribute_holder/sheet/job/orphan/rrascal
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/shields = 10,
+	)
+
+/datum/job/advclass/rrascal
+	title= "Rambunctious Rascal"
+	tutorial = "placeholder text for rascal"
+	//outfit = /datum/outfit/orphan/rrascal
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/rrascal
+	allowed_ages = list(AGE_CHILD)
+
+
+/datum/attribute_holder/sheet/job/orphan/sstray
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/shields = 10,
+	)
+
+/datum/job/advclass/sstray
+	title= "Skilled Stray"
+	tutorial = "placeholder text for stray"
+	//outfit = /datum/outfit/orphan/sstray
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/sstray
+	allowed_ages = list(AGE_CHILD)
+
+/datum/attribute_holder/sheet/job/orphan/uurchin
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/shields = 10,
+	)
+
+/datum/job/advclass/uurchin
+	title= "Unlawful Urchin"
+	tutorial = "placeholder text for urchin"
+	//outfit = /datum/outfit/orphan/uurchin
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/uurchin
+	allowed_ages = list(AGE_CHILD)
+
+/datum/attribute_holder/sheet/job/orphan/wwastrel
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/shields = 10,
+	)
+
+/datum/job/advclass/wwastrel
+	title= "Weary Wastrel"
+	tutorial = "placeholder text for wastrel"
+	//outfit = /datum/outfit/orphan/wwastrel
+	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/wwastrel
+	allowed_ages = list(AGE_CHILD)
+
+
+
+
