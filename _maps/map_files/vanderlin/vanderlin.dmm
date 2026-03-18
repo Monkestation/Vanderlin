@@ -10670,6 +10670,14 @@
 "eZo" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/item/neuFarm/seed/tamto,
+/obj/item/neuFarm/seed/tamto,
+/obj/item/neuFarm/seed/sunreed,
+/obj/item/neuFarm/seed/sunreed,
+/obj/item/neuFarm/seed/pompkaun,
+/obj/item/neuFarm/seed/pompkaun,
+/obj/item/neuFarm/seed/cocaudo,
+/obj/item/neuFarm/seed/cocaudo,
 /turf/open/floor/twig,
 /area/indoors/soilsons)
 "eZt" = (
@@ -13793,9 +13801,14 @@
 /area/indoors/town/church/chapel)
 "gzQ" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/carvedgem/opal/vase,
-/obj/item/alch/herb/rosa,
-/obj/item/alch/herb/rosa,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/town/basement)
 "gAe" = (
@@ -18534,6 +18547,8 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
+/obj/item/neuFarm/seed/spore/drowsbane,
+/obj/item/neuFarm/seed/spore/drowsbane,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "iMG" = (
@@ -20260,6 +20275,9 @@
 /obj/item/paper,
 /obj/item/paper,
 /obj/item/paper,
+/obj/item/alch/herb/rosa,
+/obj/item/alch/herb/rosa,
+/obj/item/carvedgem/opal/vase,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/town/basement)
 "jzL" = (
@@ -40781,6 +40799,19 @@
 /obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/egg,
 /obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun,
+/obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun,
+/obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun,
+/obj/item/natural/cocaudo,
+/obj/item/natural/cocaudo,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
+/obj/item/natural/chaff/sunreed,
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/kitchen/cellar)
 "sQo" = (
@@ -49798,6 +49829,8 @@
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
+/obj/item/reagent_containers/food/snacks/meat/ribs,
+/obj/item/reagent_containers/food/snacks/meat/ribs,
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/kitchen/cellar)
 "wKA" = (
