@@ -2874,6 +2874,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\combat\monk.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\ranger.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rogue.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\trapper.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\vikingr.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\warrior.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\assassin.dm"
