@@ -53,15 +53,15 @@
 /datum/job/orphan/bbrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
-	//if(has_world_trait(/datum/world_trait/orphanage_renovated))
-	//	orphanage_renovated = TRUE
+	if(has_world_trait(/datum/world_trait/orphanage_renovated))
+		orphanage_renovated = TRUE
 	if(!orphanage_renovated)
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
-			STAT_INTELLIGENCE = 10,
+			STAT_INTELLIGENCE = 1,
 		))
 	else
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
-			STAT_INTELLIGENCE = 20,
+			STAT_INTELLIGENCE = 2,
 			STAT_ENDURANCE = 1,
 		))
 
