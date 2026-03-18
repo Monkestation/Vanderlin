@@ -108,6 +108,9 @@
 	plant_def_type = /datum/plant_def/oat
 	color = "#a3eca3"
 
+/obj/item/neuFarm/seed/sunreed
+	plant_def_type = /datum/plant_def/sunreed
+
 /obj/item/neuFarm/seed/manabloom
 	plant_def_type = /datum/plant_def/manabloom
 	color = "#a3cbec"
@@ -126,6 +129,12 @@
 
 /obj/item/neuFarm/seed/poison_berries
 	plant_def_type = /datum/plant_def/jacksberry_poison
+
+/obj/item/neuFarm/seed/tamto
+	plant_def_type = /datum/plant_def/tamto
+
+/obj/item/neuFarm/seed/pompkaun
+	plant_def_type = /datum/plant_def/pompkaun
 
 /obj/item/neuFarm/seed/cabbage
 	plant_def_type = /datum/plant_def/cabbage
@@ -190,6 +199,10 @@
 
 /obj/item/neuFarm/seed/pineapple
 	plant_def_type = /datum/plant_def/pineapple
+
+/obj/item/neuFarm/seed/cocaudo
+	plant_def_type = /datum/plant_def/cocaudo
+	icon_state = "cocaudo_seeds"
 
 //alchemical
 /obj/item/neuFarm/seed/atropa
@@ -273,6 +286,9 @@
 
 /obj/item/neuFarm/seed/spore/borowiki
 	plant_def_type = /datum/plant_def/mushroom/borowiki
+
+/obj/item/neuFarm/seed/spore/drowsbane
+	plant_def_type = /datum/plant_def/mushroom/drowsbane
 
 /* /obj/item/neuFarm/seed/spore/chanterelle // Removing for now to expand upon later
 	plant_def_type = /datum/plant_def/mushroom/chanterelle */

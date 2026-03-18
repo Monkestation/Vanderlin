@@ -48,3 +48,21 @@
 	dropshrink = 0.7
 	nutrition = FRUIT_NUTRITION/2
 	foodtype = FRUIT | PINEAPPLE
+
+/*	..................   Tamto   ................... */
+/obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	name = "sliced tamto"
+	icon_state = "mato_split"
+	bitesize = 1
+	dropshrink = 0.7
+	nutrition = FRUIT_NUTRITION
+	foodtype = FRUIT
+
+/*	..................   Pompkaun   ................... */
+/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
+	name = "pompkaun goo"
+	icon_state = "pompkaun_goo"
+	bitesize = 1
+	dropshrink = 0.7
+	nutrition = FRUIT_NUTRITION
+	foodtype = FRUIT
