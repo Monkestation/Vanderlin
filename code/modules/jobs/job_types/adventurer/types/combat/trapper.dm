@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sewing = 10,
-    /datum/attribute/skill/craft/crafting = 20, // for making traps
+		/datum/attribute/skill/craft/crafting = 20, // for making traps
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/lockpicking = 20, // they can lock pick basic doors to set traps in funny spots
 		/datum/attribute/skill/craft/traps = 50, // the TRAPPER 
@@ -41,9 +41,9 @@
 	gloves = /obj/item/clothing/gloves/fingerless
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots
-  cloak = /obj/item/clothing/cloak/raincloak
+	cloak = /obj/item/clothing/cloak/raincloak
 	backl = /obj/item/storage/backpack/satchel
-  backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/sword/short/iron
