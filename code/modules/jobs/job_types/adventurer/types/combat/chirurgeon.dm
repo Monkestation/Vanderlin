@@ -1,13 +1,4 @@
-/datum/migrant_role/chirurgeon
-	name = "Chirurgeon"
-	greet_text = "You've no acclaim to the tenures you say you have, and the history you recount is shoddy at best, and false at \
-	worst. In a trade that is rife with charlatans, you are arguably a hand-picked example amongst them; but amongst the lies \
-	there is one truth - your hands are indeed as steady as you claim them to be. Ensure you find an employer that won't stab \
-	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
-	your competition, lest you find yourself dead and floating downstream."
-	migrant_job = /datum/job/migrant/chirurgeon
-
-/datum/attribute_holder/sheet/job/migrant/chirurgeon
+/datum/attribute_holder/sheet/job/chirurgeon
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = 1,
@@ -24,7 +15,7 @@
 		/datum/attribute/skill/craft/alchemy = 10,
 	)
 
-/datum/job/migrant/chirurgeon
+/datum/job/advclass/combat/chirurgeon
 	title = "Chirurgeon"
 	tutorial = "You've no acclaim to the tenures you say you have, and the history you recount is shoddy at best, and false at \
 	worst. In a trade that is rife with charlatans, you are arguably a hand-picked example amongst them; but amongst the lies \
@@ -32,16 +23,14 @@
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
 	outfit = /datum/outfit/chirurgeon
-	blacklisted_species = list(SPEC_ID_HALFLING)
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/chirurgeon
+	category_tags = list(CTAG_ADVENTURER)
+	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	attribute_sheet = /datum/attribute_holder/sheet/job/chirurgeon
 
 	traits = list(
 		TRAIT_EMPATH,
 		TRAIT_DEADNOSE,
 	)
-
-	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 
 /datum/outfit/chirurgeon
 	name = "Chirurgeon (Migrant Wave)"
@@ -59,13 +48,3 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/knife/cleaver
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-
-/datum/migrant_wave/chirurgeon
-	name = "Chirurgeon"
-	max_spawns = 1
-	shared_wave_type = /datum/migrant_wave/chirurgeon
-	weight = 10
-	roles = list(
-		/datum/migrant_role/chirurgeon = 1,
-	)
-	greet_text = "A man who smells of death enters, crashing down on the stool and slumping forwards. There's nothing behind his eyes."

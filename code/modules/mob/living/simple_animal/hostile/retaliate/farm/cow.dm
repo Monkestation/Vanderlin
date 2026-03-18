@@ -20,10 +20,12 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 8,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3,
 						/obj/item/natural/hide = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
@@ -145,10 +147,12 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 7,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 9,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3,
 						/obj/item/natural/hide = 4,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)

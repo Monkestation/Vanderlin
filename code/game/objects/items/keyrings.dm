@@ -293,3 +293,6 @@
 
 /obj/item/storage/keyring/gaffer_assistant
 	keys = list(/obj/item/key/gaffer, /obj/item/key/mercenary)
+
+/obj/item/storage/keyring/bogwitch
+	keys = list(/obj/item/key/bogwitch)

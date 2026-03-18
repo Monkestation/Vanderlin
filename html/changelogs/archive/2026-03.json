@@ -453,5 +453,57 @@
                 "rscadd": "Exiled Warrior can choose between arming sword and duel axes"
             }
         ]
+    },
+    "2026-03-16": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes monk stats and skills."
+            }
+        ]
+    },
+    "2026-03-17": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes sword grid size"
+            }
+        ],
+        "realforest2001": [
+            {
+                "admin": "Staff can now lock roles to specific ckeys for event purposes."
+            },
+            {
+                "rscadd": "Adds the Bog Witch and Bog Witch Apprentice jobs."
+            },
+            {
+                "rscadd": "Added Bone Ward mechanic."
+            },
+            {
+                "rscadd": "Adds miracles and boon to Great Hunt (Proven)."
+            },
+            {
+                "rscadd": "Adds amulet for the Great Hunt."
+            },
+            {
+                "rscadd": "Adds mechanics for banning a patron from a job."
+            }
+        ],
+        "lmenvs": [
+            {
+                "rscadd": "Adds new furniture, topiaries, stone railing for mapping"
+            }
+        ]
+    },
+    "2026-03-18": {
+        "The-Awful": [
+            {
+                "rscadd": "Added lots of new food items, mostly tiefling cuisine"
+            },
+            {
+                "rscadd": "Added five new crops"
+            },
+            {
+                "rscadd": "Changed around some descriptions to fit lore"
+            }
+        ]
     }
 }

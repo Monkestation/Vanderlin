@@ -285,7 +285,7 @@
 /datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
 	set name = "Trigger Subclass Menu"
 	set desc = "Triggers the subclass menu of a mob."
-	set category = "Admin.Admin"
+	set category = "Admin.Jobs"
 
 	if(!check_rights())
 		return

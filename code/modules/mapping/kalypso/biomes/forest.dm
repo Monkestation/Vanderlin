@@ -139,12 +139,14 @@
 		available_crops += /obj/structure/wild_plant/nospread/wheat
 		available_crops += /obj/structure/wild_plant/nospread/oat
 		available_crops += /obj/structure/wild_plant/nospread/sunflower
+		available_crops += /obj/structure/wild_plant/nospread/sunreed
 
 	// Moist forest floors
 	if(moisture > 0.4)
 		available_crops += /obj/structure/wild_plant/nospread/turnip
 		available_crops += /obj/structure/wild_plant/nospread/cabbage
 		available_crops += /obj/structure/wild_plant/nospread/onion
+		available_crops += /obj/structure/wild_plant/nospread/pompkaun
 
 	// Rare poison berries
 	if(prob(10))

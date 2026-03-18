@@ -205,3 +205,11 @@
 
 /obj/effect/mapping_helpers/access/keyset/thatchwood/smith
 	accesses = list("oldsmith")
+
+
+/obj/effect/mapping_helpers/access/keyset/other
+	color = "#3eed64"
+
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch
+	accesses = list(ACCESS_BOGWITCH)
+	difficulty = 2

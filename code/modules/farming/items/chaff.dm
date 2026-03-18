@@ -75,6 +75,13 @@
 	name = "oat stalks"
 	icon_state = "oatchaff"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/oat
+
+/obj/item/natural/chaff/sunreed
+	name = "ear of sunreed"
+	desc = "Despite its native origin of Valeria, locals very rarely farm or even eat this crop due to it's rock-hard kernels."
+	icon_state = "maizechaff"
+	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+
 /*
 /obj/item/natural/chaff/rice
 	name = "rice stalks"

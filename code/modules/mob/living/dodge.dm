@@ -19,7 +19,7 @@
 		stun_penalty = 4
 	if(cmode && (d_intent == INTENT_DODGE))
 		modifier += 2
-	return floor(max(0, 3 + basic_speed + modifier - encumbrance_penalty - stun_penalty - dodging_penalty))
+	return floor(max(0, 1 + basic_speed + modifier - encumbrance_penalty - stun_penalty - dodging_penalty))
 
 /mob/living/proc/update_dodging_penalty(incoming = 0, duration = DODGING_PENALTY_COOLDOWN_DURATION)
 	//use remove_dodging_penalty() you idiot
@@ -114,11 +114,11 @@
 			if(AC_MEDIUM)
 				dodge_speed = floor(dodge_speed * 0.5)
 				drained += 7
-				attacker_opposition += 2  // armor makes you easier to hit
+				attacker_opposition += 4  // armor makes you easier to hit
 			if(AC_HEAVY)
 				dodge_speed = floor(dodge_speed * 0.25)
 				drained += 12
-				attacker_opposition += 4  // heavy armor tanks dodge chance
+				attacker_opposition += 8  // heavy armor tanks dodge chance
 
 		var/time_since_last = world.time - last_dodge
 		if(time_since_last < 2 SECONDS)
@@ -242,6 +242,9 @@
 		dodge_modifier -= 2
 	if(user.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/fervor))
 		dodge_modifier -= 1
+
+	if(HAS_TRAIT(src, TRAIT_DODGEEXPERT))
+		dodge_modifier += 3
 
 	//knowing how an attack works helps dodge it
 	if(attacking_item)

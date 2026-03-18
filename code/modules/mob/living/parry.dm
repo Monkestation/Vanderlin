@@ -1,4 +1,4 @@
-
+/*
 /mob/living/proc/update_parrying_penalty(incoming = PARRYING_PENALTY, duration = PARRYING_PENALTY_COOLDOWN_DURATION)
 	if(!incoming || !duration)
 		return
@@ -13,6 +13,7 @@
 	if(parrying_penalty_timer)
 		deltimer(parrying_penalty_timer)
 	parrying_penalty_timer = null
+*/
 
 /mob/living/proc/get_parrying_score(skill_used = /datum/attribute/skill/combat/unarmed, modifier = 0)
 	var/stun_penalty = 0
@@ -20,7 +21,7 @@
 		stun_penalty = 4
 	if(cmode && (d_intent == INTENT_PARRY))
 		modifier += 2
-	return floor(max(0, 3 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty - parrying_penalty))
+	return floor(max(0, 1 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty))
 
 /**
  * Attempt to parry an attack
@@ -53,7 +54,6 @@
 	var/parry_data = calculate_parry_values(mainhand, offhand)
 	used_weapon = parry_data["used_weapon"]
 	weapon_parry = parry_data["weapon_parry"]
-	var/weapon_modifier = parry_data["defense_bonus"] // already on skill scale, no division needed
 
 	var/skill_data = calculate_parry_skills(user, intenty, used_weapon, weapon_parry)
 	var/defender_skill = skill_data["defender_skill"]
@@ -61,10 +61,8 @@
 
 	var/skill_type = weapon_parry ? used_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
-	// weapon_modifier is already a raw skill-scale delta, divide by 6 to fit diceroll modifier range
-	// 60 max skill delta / 6 = 10 max modifier.
-	var/parry_modifier = floor(weapon_modifier / 6)
-	parry_modifier += floor(parry_data["weapon_defense_flat"] / 2) // this lets us scale stuff cleaner
+	var/parry_modifier = parry_data["weapon_defense_flat"] * 2
+	parry_modifier += floor(rmb_intent?.def_bonus / 10)
 
 	if(user.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
 		parry_modifier -= 2
@@ -76,14 +74,14 @@
 	if(body_position == LYING_DOWN)
 		parry_modifier -= 2
 
-	var/attacker_opposition = floor(attacker_skill / 4)
+	var/attacker_opposition = floor(attacker_skill / 2)
 
 	// Speed penalty for fast weapons still applies
 	if(user.mind)
 		var/obj/item/master = intenty.get_master_item()
 		if(master?.wbalance > 0 && GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) > GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED))
 			var/speed_delta = GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
-			parry_modifier -= floor(speed_delta / 2)
+			parry_modifier -= speed_delta * 2
 
 	var/parry_score = get_parrying_score(skill_type, parry_modifier - attacker_opposition)
 
@@ -121,7 +119,7 @@
 			to_chat(src, span_warning("The enemy defeated my parry!"))
 		return FALSE
 
-	update_parrying_penalty()
+	/*update_parrying_penalty()*/
 
 	//heavy weapon strength differential still applies
 	var/obj/item/master = intenty.get_master_item()
@@ -161,7 +159,7 @@
  * Calculate defense values for parrying
  * @param obj/item/mainhand The item in main hand
  * @param obj/item/offhand The item in off hand
- * @return List with used_weapon, weapon_parry, and defense_bonus
+ * @return List with used_weapon, weapon_parry, and weapon_defense_flat
  */
 /mob/living/proc/calculate_parry_values(obj/item/mainhand, obj/item/offhand)
 	var/offhand_defense = 0
@@ -200,7 +198,6 @@
 	return list(
 		"used_weapon" = used_weapon,
 		"weapon_parry" = weapon_parry,
-		"defense_bonus" = weapon_parry ? highest_defense : 0,
 		"weapon_defense_flat" = weapon_parry ? used_weapon.wdefense : 0
 	)
 
