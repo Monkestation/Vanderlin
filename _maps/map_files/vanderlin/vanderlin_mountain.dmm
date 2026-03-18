@@ -1701,7 +1701,7 @@
 "ahl" = (
 /obj/effect/landmark/mapGenerator/anvil,
 /turf/closed/mineral/bedrock/cold,
-/area)
+/area/oob)
 "ahm" = (
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/church/purple,
@@ -10963,7 +10963,7 @@
 /area/under/mountains/anvil/lower)
 "aVB" = (
 /turf/closed/mineral/bedrock/cold,
-/area)
+/area/oob)
 "aVC" = (
 /obj/effect/landmark/start/adventurerlate{
 	dir = 1
