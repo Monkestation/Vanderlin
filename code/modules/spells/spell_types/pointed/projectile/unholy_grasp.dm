@@ -70,7 +70,7 @@
 		//forceMove(C)
 		//C.update_inv_legcuffed()
 		to_chat(C, "<span class='danger'>\The [src] ensnares you!</span>")
-		C.apply_status_effect(/datum/status_effect/debuff/netted, 10)
+		C.apply_status_effect(/datum/status_effect/debuff/netted, 10 SECONDS)
 		playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 
 //------------------------
@@ -96,7 +96,7 @@
 	C.emote("gasp")
 	visible_message("<span class='danger'>\The [src] starts twisting [C] tongue!</span>")
 	to_chat(C, "<span class='danger'>\The [src] twits your tongue!</span>")
-	C.apply_status_effect(/datum/status_effect/silenced, 15)
+	C.apply_status_effect(/datum/status_effect/silenced, 15 SECONDS)
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 //------------------------

@@ -36,8 +36,8 @@
 	to_chat(C, "<span class='danger'>\The [src] staggers you!</span>")
 	C.spawn_gibs()
 	C.apply_status_effect(/datum/status_effect/debuff/exposed)
-	C.apply_status_effect(/datum/status_effect/eye_blur, 20)
-	C.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 3)
+	C.apply_status_effect(/datum/status_effect/eye_blur, 5 SECONDS)
+	C.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 2 SECONDS)
 
 	playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 
