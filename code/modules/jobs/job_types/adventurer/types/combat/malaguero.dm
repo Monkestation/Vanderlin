@@ -17,7 +17,7 @@
 		/datum/attribute/skill/combat/axesmaces = 30,
 	)
 
-/datum/job/advclass/adventurer/malaguero
+/datum/job/advclass/combat/malaguero
 	title = "Malaguero Deserter"
 	tutorial = "A former soldier fighting against the forces of Zizo, something drove you to flee your post. Now, you fight for coin, rather than for the authority and command of generals you would never meet."
 	allowed_races = list(SPEC_ID_TIEFLING)
