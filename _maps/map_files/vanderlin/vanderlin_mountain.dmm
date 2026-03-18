@@ -11370,10 +11370,6 @@
 /mob/living/simple_animal/hostile/retaliate/bobcat,
 /turf/open/floor/snow/patchy,
 /area/under/mountains/anvil/upper)
-"aXF" = (
-/obj/structure/door/fancy,
-/turf/closed/basic,
-/area/indoors/mountains/anvil/upperkeep)
 "aXH" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock/snow,
@@ -119872,7 +119868,7 @@ asw
 aCr
 aRt
 aRt
-aXF
+qxV
 aCr
 aCr
 aZr
