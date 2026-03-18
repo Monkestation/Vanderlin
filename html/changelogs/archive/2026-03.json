@@ -492,5 +492,18 @@
                 "rscadd": "Adds new furniture, topiaries, stone railing for mapping"
             }
         ]
+    },
+    "2026-03-18": {
+        "The-Awful": [
+            {
+                "rscadd": "Added lots of new food items, mostly tiefling cuisine"
+            },
+            {
+                "rscadd": "Added five new crops"
+            },
+            {
+                "rscadd": "Changed around some descriptions to fit lore"
+            }
+        ]
     }
 }
