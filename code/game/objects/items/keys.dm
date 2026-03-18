@@ -610,115 +610,115 @@
 	name = "room I key"
 	desc = "The key to the first room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomi")
+	lockids = list("roomi")
 
 /obj/item/key/roomii
 	name = "room II key"
 	desc = "The key to the second room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomii")
+	lockids = list("roomii")
 
 /obj/item/key/roomiii
 	name = "room III key"
 	desc = "The key to the third room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomiii")
+	lockids = list("roomiii")
 
 /obj/item/key/roomiv
 	name = "room IV key"
 	desc = "The key to the fourth room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomiv")
+	lockids = list("roomiv")
 
 /obj/item/key/roomv
 	name = "room V key"
 	desc = "The key to the fifth room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomv")
+	lockids = list("roomv")
 
 /obj/item/key/roomvi
 	name = "room VI key"
 	desc = "The key to the sixth room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomvi")
+	lockids = list("roomvi")
 
 /obj/item/key/medroomi
 	name = "medium room I key"
 	desc = "The key to the first medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomi")
+	lockids = list("medroomi")
 
 /obj/item/key/medroomii
 	name = "medium room II key"
 	desc = "The key to the second medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomii")
+	lockids = list("medroomii")
 
 /obj/item/key/medroomiii
 	name = "medium room III key"
 	desc = "The key to the third medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomiii")
+	lockids = list("medroomiii")
 
 /obj/item/key/medroomiv
 	name = "medium room IV key"
 	desc = "The key to the fourth medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomiv")
+	lockids = list("medroomiv")
 
 /obj/item/key/medroomv
 	name = "medium room V key"
 	desc = "The key to the fifth medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomv")
+	lockids = list("medroomv")
 
 /obj/item/key/medroomvi
 	name = "medium room VI key"
 	desc = "The key to the sixth medium room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "medroomvi")
+	lockids = list("medroomvi")
 
 /obj/item/key/luxroomi
 	name = "luxury room I key"
 	desc = "The key to the first luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomi")
+	lockids = list("luxroomi")
 
 /obj/item/key/luxroomii
 	name = "luxury room II key"
 	desc = "The key to the second luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomii")
+	lockids = list("luxroomii")
 
 /obj/item/key/luxroomiii
 	name = "luxury room III key"
 	desc = "The key to the third luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomiii")
+	lockids = list("luxroomiii")
 
 /obj/item/key/luxroomiv
 	name = "luxury room IV key"
 	desc = "The key to the fourth luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomiv")
+	lockids = list("luxroomiv")
 
 /obj/item/key/luxroomv
 	name = "luxury room V key"
 	desc = "The key to the fifth luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomv")
+	lockids = list("luxroomv")
 
 /obj/item/key/luxroomvi
 	name = "luxury room VI key"
 	desc = "The key to the sixth luxury room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "luxroomvi")
+	lockids = list("luxroomvi")
 
 /obj/item/key/roomhunt
 	name = "room HUNT key"
 	desc = "The key to the most luxurious Inn room."
 	icon_state = "brownkey"
-	lockids = list(ACCESS_INN, "roomhunt")
+	lockids = list("roomhunt")
 
 /obj/item/key/thatchwood
 	name = "ABSTRACT THATCHWOOD KEY CALL CODERS"

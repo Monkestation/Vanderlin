@@ -153,7 +153,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/uncolored
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backl = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel/cloth
 	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 	neck = /obj/item/key/tavern
 

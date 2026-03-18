@@ -105,6 +105,10 @@
 	/// The amount of blood this can restore when used with Hunter's Will
 	var/blood_value = 0
 
+/obj/item/natural/head/Initialize()
+	. = ..()
+	randomize_price() //headeater
+
 //quality from butchering, 0 is bad, 1 is normal, 2 is good, -1 means its rotten and useless
 /obj/item/natural/head/proc/ButcheringResults(butchering_quality)
 	switch(butchering_quality)
@@ -163,7 +167,7 @@
 	grid_height = 96
 	grid_width = 96
 	w_class = WEIGHT_CLASS_BULKY
-	sellprice = 25
+	sellprice = 20
 	blood_value = BLOOD_VOLUME_OKAY
 
 /obj/item/natural/head/troll/apply_components()
@@ -173,7 +177,7 @@
 	name = "troll head"
 	desc = "The severed head of a once mighty warrior troll."
 	icon_state = "trollhead_axe"
-	sellprice = 35
+	sellprice = 30
 
 /obj/item/natural/head/troll/cave
 	name = "cave troll head"
@@ -201,7 +205,7 @@
 	icon_state = "foxhead"
 	layer = 3.1
 	grid_height = 32
-	sellprice = 10 // fur trade
+	sellprice = 12 // fur trade
 	blood_value = BLOOD_VOLUME_SURVIVE
 
 /obj/item/natural/head/spider
@@ -234,7 +238,7 @@
 	name = "gote head"
 	desc = "The severed head of a fiery gote."
 	icon_state = "gotehead"
-	sellprice = 2
+	sellprice = 3
 	blood_value = BLOOD_VOLUME_SURVIVE / 2
 
 //RTD make this a storage item and make clickign on animals with things put it in storage

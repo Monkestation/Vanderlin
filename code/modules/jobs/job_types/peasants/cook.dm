@@ -63,6 +63,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	cloak = /obj/item/clothing/cloak/apron/cook
+	backl = /obj/item/storage/backpack/satchel/cloth
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1

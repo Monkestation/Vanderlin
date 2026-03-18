@@ -2153,12 +2153,6 @@
 	dir = 1
 	},
 /area/indoors/town)
-"bao" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1
-	},
-/turf/open/floor/dirt,
-/area/outdoors/town/keep)
 "bap" = (
 /obj/structure/floordoor/gatehatch/inner{
 	redstone_id = "keepgatekybraxor"
@@ -5259,10 +5253,6 @@
 /obj/structure/fluff/walldeco/gear{
 	pixel_x = 15;
 	pixel_y = 15
-	},
-/obj/item/candle/floorcandle0/lit{
-	pixel_x = 0;
-	pixel_y = -5
 	},
 /turf/open/floor/cobble/mossy,
 /area/under/town/basement)
@@ -8805,6 +8795,12 @@
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/tile,
 /area/indoors/town/keep/feast)
+"eek" = (
+/obj/machinery/light/fueledstreet/orange{
+	pixel_x = -16
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town/keep)
 "eem" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/blocks,
@@ -9436,6 +9432,10 @@
 /area/indoors/town/keep)
 "etF" = (
 /obj/structure/flora/grass,
+/obj/item/candle/floorcandle0/lit{
+	pixel_x = 0;
+	pixel_y = -5
+	},
 /turf/open/floor/dirt/road,
 /area/under/town/basement)
 "etJ" = (
@@ -12795,13 +12795,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/ruinedwood,
 /area/outdoors/town/roofs)
-"fZy" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = -2
-	},
-/obj/structure/flora/grass,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep)
 "fZF" = (
 /obj/structure/bars,
 /turf/open/floor/tile,
@@ -15035,12 +15028,6 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass/red,
 /area/outdoors/town/noble_manor/red)
-"hiO" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = -2
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town/keep)
 "hiR" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/table/wood/counter/end{
@@ -16208,10 +16195,12 @@
 /area/indoors/town/noble_manor/red)
 "hJY" = (
 /obj/structure/door{
-	lockid = "luxroomiii";
 	name = "LUXURY ROOM III"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "luxroomiii"
+	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "hKq" = (
@@ -22705,6 +22694,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
+"kLf" = (
+/obj/structure/winch{
+	redstone_id = "tomb_gate"
+	},
+/turf/open/floor/blocks/newstone,
+/area/indoors/town/merc_guild)
 "kLj" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/steel{
@@ -23038,8 +23033,10 @@
 "kUn" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door{
-	lockid = "luxroomiv";
 	name = "LUXURY ROOM IV"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "luxroomiv"
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
@@ -24177,10 +24174,12 @@
 /area/indoors/town)
 "luu" = (
 /obj/structure/door{
-	lockid = "medroomi";
 	name = "MEDIUM ROOM I"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "medroomi"
+	},
 /turf/open/floor/ruinedwood/turned/alt{
 	dir = 1
 	},
@@ -25527,10 +25526,12 @@
 /area/indoors/town/merc_guild)
 "mae" = (
 /obj/structure/door{
-	lockid = "medroomiii";
-	name = "MEDIUM ROOM III"
+	name = "MEDIUM ROOM IV"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "medroomiv"
+	},
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
 "mah" = (
@@ -26867,6 +26868,13 @@
 /obj/structure/fluff/walldeco/painting/castle,
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/noble_manor/yellow)
+"mHi" = (
+/obj/machinery/light/fueledstreet/orange{
+	dir = 1;
+	pixel_x = 16
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town/keep)
 "mHn" = (
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
@@ -29114,6 +29122,13 @@
 "nIO" = (
 /turf/open/openspace,
 /area/indoors/town/church/inquisition)
+"nIP" = (
+/obj/machinery/light/fueledstreet/orange{
+	dir = 1;
+	pixel_x = 16
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/town/keep)
 "nIU" = (
 /obj/structure/carpet/blue,
 /turf/open/floor/herringbone,
@@ -31440,12 +31455,6 @@
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/yellow)
-"oIn" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1
-	},
-/turf/open/floor/cobble,
-/area/outdoors/town/keep)
 "oIx" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/flora/grass,
@@ -31863,10 +31872,12 @@
 /area/indoors/town)
 "oUq" = (
 /obj/structure/door{
-	lockid = "roomhunt";
 	name = "HUNT ROOM"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "roomhunt"
+	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
 "oUC" = (
@@ -39164,12 +39175,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/greenstone,
 /area/under/town/basement)
-"sfb" = (
-/obj/structure/winch{
-	redstone_id = "tomb_gate"
-	},
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/town/merc_guild)
 "sfp" = (
 /obj/machinery/essence/research_matrix,
 /obj/effect/decal/carpet/kover_darkred,
@@ -39998,6 +40003,15 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/archivist)
+"syP" = (
+/obj/structure/door/viewport{
+	name = "Mercenary Hideaway";
+	dir = 8
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tomb,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/metal/barograte,
+/area/indoors/town/merc_guild)
 "syS" = (
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
@@ -40986,10 +41000,12 @@
 /area/indoors/town/merc_guild)
 "sUG" = (
 /obj/structure/door{
-	lockid = "medroomii";
 	name = "MEDIUM ROOM II"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "medroomii"
+	},
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
 "sUH" = (
@@ -41154,6 +41170,10 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"sZE" = (
+/obj/structure/door/iron/bars,
+/turf/open/floor/cobble/mossy,
+/area/outdoors/town/keep)
 "sZM" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/cleanshallow,
@@ -45475,10 +45495,12 @@
 /area/indoors/town/keep/heir/heir1)
 "uXI" = (
 /obj/structure/door{
-	lockid = "luxroomi";
 	name = "LUXURY ROOM I"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "luxroomi"
+	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "uYn" = (
@@ -49082,6 +49104,10 @@
 /obj/effect/lily_petal/two,
 /turf/open/water/cleanshallow,
 /area/indoors/town/keep/halls)
+"wxr" = (
+/obj/machinery/light/fueledstreet/orange/wall,
+/turf/open/floor/cobblerock,
+/area/outdoors/town/keep)
 "wxs" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "This is the painters room here"
@@ -51123,6 +51149,16 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
 /area/outdoors/basin)
+"xmz" = (
+/obj/structure/door{
+	name = "MEDIUM ROOM III"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "medroomiii"
+	},
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "xmA" = (
 /obj/structure/stairs{
 	dir = 4
@@ -51940,10 +51976,12 @@
 /area/indoors/town/noble_manor/blue)
 "xFN" = (
 /obj/structure/door{
-	lockid = "luxroomii";
 	name = "LUXURY ROOM II"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/town/inn_room{
+	room_id = "luxroomii"
+	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "xFO" = (
@@ -79802,7 +79840,7 @@ wZM
 jQb
 jQb
 jQb
-jQb
+kkL
 czm
 ryr
 ryr
@@ -80004,8 +80042,8 @@ jQb
 jQb
 cZN
 jQb
-jQb
-jQb
+kkL
+iZQ
 ryr
 ryr
 qoQ
@@ -80207,7 +80245,7 @@ unl
 unl
 unl
 fdT
-fdT
+syP
 qaw
 qaw
 fgR
@@ -80409,7 +80447,7 @@ unl
 unl
 unl
 fgR
-sfb
+aiQ
 aiQ
 qkL
 fgR
@@ -80611,8 +80649,8 @@ unl
 unl
 unl
 fdT
-fdT
 hGk
+aiQ
 qkL
 fgR
 qaw
@@ -80813,7 +80851,7 @@ bfG
 vbN
 vbN
 fgR
-fdT
+kLf
 qkL
 qkL
 ohR
@@ -115721,11 +115759,11 @@ cbK
 dgv
 dBZ
 oho
-fZy
+dBZ
 dBZ
 oho
 sSi
-hiO
+fep
 fep
 fep
 aNf
@@ -115922,10 +115960,10 @@ kNd
 qPo
 fep
 fep
+eek
 aNf
 aNf
-aNf
-aNf
+eek
 fep
 fep
 fep
@@ -116122,7 +116160,7 @@ uLv
 uLv
 iyX
 muH
-fep
+wxr
 fep
 fep
 aNf
@@ -116326,10 +116364,10 @@ dXT
 qPo
 aNf
 aNf
-aNf
+mHi
 aNf
 fep
-fep
+nIP
 fep
 aNf
 aNf
@@ -116529,11 +116567,11 @@ cbK
 vvC
 dBZ
 oho
-bao
+oho
 dBZ
 sSi
 eqL
-oIn
+aNf
 fep
 aNf
 aNf
@@ -117341,7 +117379,7 @@ xTl
 xTl
 xTl
 sSi
-rCT
+kso
 fep
 fep
 aNf
@@ -117543,7 +117581,7 @@ xTl
 xTl
 xTl
 nHm
-nHm
+sZE
 fep
 fep
 aNf
@@ -117745,7 +117783,7 @@ xTl
 xTl
 xTl
 nHm
-nHm
+sZE
 xTl
 fep
 fep
@@ -117947,7 +117985,7 @@ xTl
 xTl
 xTl
 oho
-rCT
+kso
 oho
 xTl
 fep
@@ -159191,7 +159229,7 @@ ceF
 bHV
 bHV
 bHV
-mae
+xmz
 sAG
 sAG
 mbH
