@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 1,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = 2, // +4 statline similar to thief, but no strength malus due to less focus on stealing
+		STAT_SPEED = 1, // +3 statline 
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/knives = 10,
@@ -11,11 +11,10 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
-		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/craft/crafting = 20, // for making traps
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/lockpicking = 20, // they can lock pick basic doors to set traps in funny spots
-		/datum/attribute/skill/craft/traps = 50, // the TRAPPER 
+		/datum/attribute/skill/craft/traps = 40, // rogue gets 3 master skills but this cant even have master in a non-combat skill? smh
 		/datum/attribute/skill/misc/reading = 10,
 	)
 
@@ -48,8 +47,7 @@
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/sword/short/iron
 	backpack_contents = list(
-		/obj/item/lockpick = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-    /obj/item/weapon/knife/dagger = 1,
-    /obj/item/restraints/legcuffs/beartrap/crafted = 1
+    	/obj/item/weapon/knife/dagger = 1,
+   		/obj/item/restraints/legcuffs/beartrap/crafted = 1
 	)
