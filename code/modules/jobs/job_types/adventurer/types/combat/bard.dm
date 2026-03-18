@@ -34,7 +34,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_BARD)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/bard
+	attribute_sheet = /datum/attribute_holder/sheet/job/bard
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
