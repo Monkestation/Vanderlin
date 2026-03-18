@@ -26,36 +26,36 @@
 				set_hair_style(/datum/sprite_accessory/hair/head/bald)
 				update_body()
 
-		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
-			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
-				if(has_stubble)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] stubble with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s stubble with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						has_stubble = FALSE
-						update_body()
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
-				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] facehairs with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s facehairs with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
-						update_body()
-						record_round_statistic(STATS_BEARDS_SHAVED)
-						if(dna?.species)
-							if(dna.species.id == SPEC_ID_DWARF)
-								var/mob/living/carbon/V = src
-								V.add_stress(/datum/stress_event/dwarfshaved)
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
+			if(has_stubble)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] stubble with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s stubble with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					has_stubble = FALSE
+					update_body()
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
+			else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] facehairs with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s facehairs with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
+					update_body()
+					record_round_statistic(STATS_BEARDS_SHAVED)
+					if(dna?.species)
+						if(dna.species.id == SPEC_ID_DWARF)
+							var/mob/living/carbon/V = src
+							V.add_stress(/datum/stress_event/dwarfshaved)
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
 		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
 			var/obj/item/clothing/shoes/shoes_check
 			var/mob/living/carbon/target
