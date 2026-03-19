@@ -42,7 +42,11 @@
 
 /datum/job/advclass/bbrat
 	title = "Bookish Brat"
-	tutorial = "placeholder text for brat"
+	tutorial = "While the rest of the kids were off getting dirty, \
+	you were reading the dusty and often-ignored books the matron had \
+	spent years collecting.  With one too many hero stories under your belt, \
+	your friends rely on you to solve riddles, answer their obvious questions, \
+	and talk your way out of the guards bad graces.  Where would they be without you?"
 	outfit = /datum/outfit/advclass/bbrat
 	allowed_ages = list(AGE_CHILD)
 	category_tags = list(CTAG_ORPHAN)
@@ -123,7 +127,11 @@
 
 /datum/job/advclass/rrascal
 	title= "Rambunctious Rascal"
-	tutorial = "placeholder text for rascal"
+	tutorial = "Without you to lead them, your friends \
+	would spend all day holed up in workshops, the archives, or \
+	the coinpurses of noble fops.  They'd be lost without you, \
+	so round them up, get out there, and prove to this city \
+	that you're the hero you already know you are."
 	outfit = /datum/outfit/orphan/rrascal
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/rrascal
@@ -183,7 +191,12 @@
 
 /datum/job/advclass/sscamp
 	title= "Skilled Scamp"
-	tutorial = "placeholder text for stray"
+	tutorial = "The matron has always told you you were her smartest scone, \
+	and you prove her right each day with your diligent, industrious ways.  The \
+	other children may be stronger, and more well-read, but you have a knack for \
+	getting tasks done that you know they envy.  With your trusty knife and your \
+	freshly-washed tunic, you are ready to go out and start learning a trade that will \
+	really impress everyone."
 	outfit = /datum/outfit/orphan/sscamp
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/sscamp
@@ -236,7 +249,12 @@
 
 /datum/job/advclass/uurchin
 	title= "Unlawful Urchin"
-	tutorial = "placeholder text for urchin"
+	tutorial = "Of all the children in the orphanage, you know \
+	you are the matron's favorite.  You move with the same silent, careful \
+	steps, you keep an eye open, and are always on the lookout for an easy mark.  \
+	Whether it's an easily-opened window, a loose coinpurse, or a few coins left on a \
+	bar for too long, you have a sharp eye for profit and feet quick enough to carry you \
+	to safety.  The matron is going to be very proud of you."
 	outfit = /datum/outfit/orphan/uurchin
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/uurchin
@@ -288,7 +306,11 @@
 
 /datum/job/advclass/wwastrel
 	title= "Weary Wastrel"
-	tutorial = "placeholder text for wastrel"
+	tutorial = "WARNING: THIS CLASS IS EXTREMELY DIFFICULT!  All the other \
+	children may be smart, fast, strong, or useful in some way, but not you.  \
+	You don't have to have a function to be the best.  You know in your heart that \
+	you are destined for greatness, it's just a matter of everyone else catching up \
+	with your vision."
 	outfit = /datum/outfit/orphan/wwastrel
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/wwastrel
