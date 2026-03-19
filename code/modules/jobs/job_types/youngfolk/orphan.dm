@@ -89,15 +89,15 @@
 		else
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/random
 	else
-	belt = /obj/item/storage/belt/leather/rope
-	shoes = /obj/item/clothing/shoes/simpleshoes
-	backr = /obj/item/storage/backpack/satchel/cloth
-	backpack_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper,
-		/obj/item/paper,
-		/obj/item/paper,
-	)
+		belt = /obj/item/storage/belt/leather/rope
+		shoes = /obj/item/clothing/shoes/simpleshoes
+		backr = /obj/item/storage/backpack/satchel/cloth
+		backpack_contents = list(
+			/obj/item/natural/feather,
+			/obj/item/paper,
+			/obj/item/paper,
+			/obj/item/paper,
+		)
 		if(equipped_human.gender == MALE)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/random
 			pants = /obj/item/clothing/pants/tights/colored/random
@@ -214,11 +214,13 @@
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather
 		shoes = /obj/item/clothing/shoes/boots/leather
+		beltl = /obj/item/weapon/knife/villager
 	else
 		armor = /obj/item/clothing/shirt/tunic
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather/rope
 		shoes = /obj/item/clothing/shoes/boots/leather
+		beltl = /obj/item/weapon/knife/stone
 
 // UNLAWFUL URCHIN - THE TROUBLEMAKER
 
