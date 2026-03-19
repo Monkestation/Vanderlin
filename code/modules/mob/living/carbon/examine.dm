@@ -175,7 +175,7 @@
 			user.add_stress(/datum/stress_event/para/foreigner)
 		// Local Foreigner
 		if(HAS_TRAIT(src, TRAIT_LOCAL_FOREIGNER) && !HAS_TRAIT(user, TRAIT_LOCAL_FOREIGNER))
-			. += span_tinywarning("A foreigner. They've been living here for a while, though.")
+			. += span_tinywarning("A foreigner, they've been living here for a while, though.")
 		// Thuild
 		if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
 			. += span_smallgreen("A member of the Thieves' Guild.")
