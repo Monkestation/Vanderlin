@@ -297,7 +297,10 @@
 				if(job in GLOB.automaton_order_jobs)
 					. += span_blue("They are an authenticated Artificer.")
 
-			var/inquisition_text =get_inquisition_text(user)
+			if((real_name in GLOB.marked_players) && HAS_TRAIT(user, TRAIT_INQUISITION))
+				. += span_userdanger("SUSPECTED HERETIC!")
+
+			var/inquisition_text = get_inquisition_text(user)
 			if(inquisition_text)
 				. +=span_notice(inquisition_text)
 

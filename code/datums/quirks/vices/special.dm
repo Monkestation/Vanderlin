@@ -441,3 +441,30 @@
 	else // Outlaw
 		GLOB.outlawed_players |= H.real_name
 		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
+
+/datum/quirk/vice/suspicion
+	name = "Inquisitorial Suspicion"
+	desc = "The inquisition suspects me of heresy, whether truthfully or not..."
+	point_value = 1
+	customization_type = QUIRK_TEXT
+	customization_label = "Why do they suspect me?"
+	customization_placeholder = "Insulting Tennite clergy."
+
+
+/datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
+	var/reason = prefs?.quirk_customizations[type]
+	if(!reason)
+		reason = customization_value
+	if(reason && reason != "")
+		return "[desc]<br><br><b>Reason:</b> [reason]"
+	return "[desc]<br><br><b>Reason:</b> General anti-Tennite/Psydonic conduct."
+
+/datum/quirk/vice/suspicion/on_spawn()
+	if(!owner || !ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/H = owner
+
+	GLOB.marked_players += H.real_name
+	to_chat(H, span_boldwarning("I am suspected of heresy by outside parties for reasons either legitimate or not!"))
+
