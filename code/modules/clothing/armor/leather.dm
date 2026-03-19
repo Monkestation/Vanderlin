@@ -365,7 +365,7 @@
 	sellprice = 20
 
 // gronnic subtype
-/obj/item/clothing/armor/leather/heavy/gronn
+/obj/item/clothing/armor/leather/gronn
 	name = "osslandic ravager mantle"
 	desc = "A carefully created mantle of bone and hardened leather. It offers superior protection against the threats of the wild while remaining light, \
 			A popular design in Ossland is to adorn a shoulder with a wolf pelt, a symbol of the Great Hunt."
