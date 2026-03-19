@@ -102,7 +102,6 @@
 	var/dodge_speed = floor(GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) / 2)
 
 	// fast attackers raise the threshold (mirror of parry system)
-	// STAT_SPEED on 0-~30 range; divide by 5 for ~0-6 opposition impact
 	var/attacker_opposition = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) / 4)
 
 	if(istype(src, /mob/living/carbon/human))
