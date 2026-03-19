@@ -220,13 +220,13 @@
 
 /datum/status_effect/abyssal_chill/on_apply()
 	. = ..()
-	owner.add_movespeed_modifier("abyssal_chill", 1.5)
+	owner.add_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id), multiplicative_slowdown = 1.5)
 	owner.color = "#AADDFF"
 	return TRUE
 
 /datum/status_effect/abyssal_chill/on_remove()
 	. = ..()
-	owner.remove_movespeed_modifier("abyssal_chill")
+	owner.remove_movespeed_modifier(MOVESPEED_ID_STATUS_EFFECT(id))
 	owner.color = initial(owner.color)
 
 /obj/effect/temp_visual/guardian/phase

@@ -1,9 +1,10 @@
 /datum/job/rousman
 	title = "Rousman"
+	job_flags = JOB_EQUIP_RANK
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
-	allowed_races = list(SPEC_ID_ROUSMAN)
+	allowed_races = RACES_PLAYER_ALL
 	spawn_type = /mob/living/carbon/human/species/rousman
 	outfit = /datum/outfit/rousman
 	give_bank_account = FALSE
@@ -14,13 +15,12 @@
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.name = "Rousman"
-	spawned.real_name = "Rousman"
 
 	if(length(spawned.quirks))
 		spawned.clear_quirks()
 
 	spawned.remove_all_languages()
+	spawned.grant_language(/datum/language/rousman)
 	spawned.grant_language(/datum/language/common)
 
 /datum/outfit/rousman

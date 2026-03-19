@@ -49,7 +49,7 @@
 					return
 
 	if(istype(I, /obj/item/weapon/mace/woodclub))//reused some commented out code
-		var/statboost = user.STASTR*3 + (user?.get_skill_level(/datum/skill/labor/farming, TRUE)*5) //a person with no skill and 10 strength will thresh about a third of the stalks on average
+		var/statboost = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)*3 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)*5) //a person with no skill and 10 strength will thresh about a third of the stalks on average
 		var/threshchance = clamp(statboost, 20, 100)
 		for(var/obj/item/natural/chaff/C in get_turf(src))
 			if(C == src)//so it doesnt delete itself and stop the loop
@@ -75,6 +75,13 @@
 	name = "oat stalks"
 	icon_state = "oatchaff"
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/oat
+
+/obj/item/natural/chaff/sunreed
+	name = "ear of sunreed"
+	desc = "Despite its native origin of Valeria, locals very rarely farm or even eat this crop due to it's rock-hard kernels."
+	icon_state = "maizechaff"
+	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+
 /*
 /obj/item/natural/chaff/rice
 	name = "rice stalks"

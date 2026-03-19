@@ -3,6 +3,7 @@
 // (
 
 #define NUM_E 2.71828183
+#define nulltozero(num) (isnull(num) ? 0 : num)
 
 #define PI						3.1416
 #define INFINITY				1e31	//closer then enough

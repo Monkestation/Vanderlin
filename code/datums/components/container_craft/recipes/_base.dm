@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 	var/hides_from_books = FALSE
 	///our completed message
 	var/complete_message = "Something smells good!"
-	var/datum/skill/used_skill = /datum/skill/craft/cooking
+	var/datum/attribute/skill/used_skill = /datum/attribute/skill/craft/cooking
 	var/quality_modifier = 1.0  // Default modifier, recipes can override this
 	///Path of looping_sound to use while cooking
 	var/datum/looping_sound/cooking_sound
@@ -340,7 +340,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 
 		create_item(crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, items_to_delete)
 
-		initiator.mind?.add_sleep_experience(used_skill, initiator.STAINT * 0.5)
+		initiator.mind?.add_sleep_experience(used_skill, GET_MOB_ATTRIBUTE_VALUE(initiator, STAT_INTELLIGENCE) * 0.5)
 		// Remove all tracked items
 		for(var/obj/item/item_to_delete in items_to_delete)
 			qdel(item_to_delete)
@@ -378,11 +378,11 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
 	// Get the initiator's cooking skill
-	var/cooking_skill = initiator.get_skill_level(used_skill) + initiator.get_inspirational_bonus()
+	var/cooking_skill = GET_MOB_SKILL_VALUE_OLD(initiator, used_skill) + initiator.get_inspirational_bonus()
 
 	if(HAS_TRAIT(initiator, TRAIT_LUCKY_COOK))
 		// Every level above 9 increases the chance by 4%
-		if(initiator.stat_roll(STATKEY_LCK, 4, 9))
+		if(initiator.stat_roll(STAT_FORTUNE, 4, 9))
 			output_amount++
 
 	// Create the output items

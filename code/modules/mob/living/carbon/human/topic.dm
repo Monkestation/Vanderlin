@@ -77,14 +77,17 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(do_after(usr, time_taken, src))
 			if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
 				return
-			L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-			usr.put_in_hands(I)
+			var/damage = 10 || (I?.embedding?.embedded_unsafe_removal_pain_multiplier * I?.w_class)
+			L.receive_damage(damage)//It hurts to rip it out, get surgery you dingus.
+			if(!QDELETED(I))
+				usr.put_in_hands(I)
 			emote("pain", TRUE)
 			playsound(src, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+			var/subject = QDELETED(I) ? "something" : I
 			if(usr == src)
-				usr.visible_message(span_notice("[usr] rips [I] out of [usr.p_their()] [L.name]!"), span_notice("I successfully remove [I] from my [L.name]."))
+				usr.visible_message(span_notice("[usr] rips [subject] out of [usr.p_their()] [L.name]!"), span_notice("I successfully remove [subject] from my [L.name]."))
 			else
-				usr.visible_message(span_notice("[usr] rips [I] out of [src]'s [L.name]!"), span_notice("I successfully remove [I] from [src]'s [L.name]."))
+				usr.visible_message(span_notice("[usr] rips [subject] out of [src]'s [L.name]!"), span_notice("I successfully remove [subject] from [src]'s [L.name]."))
 
 	if(href_list["bandage"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		var/obj/item/bodypart/L = locate(href_list["bandaged_limb"]) in bodyparts
@@ -94,7 +97,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(!I)
 			return
 
-		var/time_to_unbandage = 5 SECONDS * (1 - (usr.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
+		var/time_to_unbandage = 5 SECONDS * (1 - (GET_MOB_SKILL_VALUE_OLD(usr, /datum/attribute/skill/misc/medicine) * 0.15))
 		if(usr == src)
 			usr.visible_message(span_warning("[usr] starts unbandaging [usr.p_their()] [L.name]."),span_warning("I start unbandaging [L.name]..."))
 		else

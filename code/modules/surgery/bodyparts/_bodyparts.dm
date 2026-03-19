@@ -200,21 +200,20 @@
 		return
 	else if(held_item?.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 		var/used_time = 21 SECONDS
-		if(user.skills)
-			used_time -= (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 3 SECONDS)
+		used_time -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 3 SECONDS)
 		visible_message("[user] begins to butcher \the [src].")
 		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 		if(!do_after(user, used_time, src))
 			return
-		var/drops = 1 + round(lerp(0, 3, user.get_skill_level(/datum/skill/labor/butchering, TRUE) / SKILL_LEVEL_LEGENDARY))
-		var/amt2raise = user.STAINT/3
+		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_LEVEL_LEGENDARY))
+		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
 		for(var/i in 1 to drops)
 			var/choose_type = pickweight(food_type)
 			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
 			if(rotted)
 				food.become_rotten()
 		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
-		user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
+		user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
 		qdel(src)
 		return
 	..()
@@ -286,6 +285,8 @@
 
 /obj/item/bodypart/head/skeletonize(lethal = TRUE)
 	. = ..()
+
+	sellprice = round((sellprice || 0) * 0.2)
 	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
@@ -293,7 +294,7 @@
 	if(!is_organic_limb() || !owner)
 		return
 	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * (owner.STACON / 10)
+	var/new_max_damage = initial(max_damage) * (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10)
 	if(new_max_damage != old_max_damage)
 		max_damage = new_max_damage
 

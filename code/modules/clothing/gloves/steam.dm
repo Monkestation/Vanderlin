@@ -9,7 +9,7 @@
 	sleeved =  'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
 	sleevetype = "steamknight_gloves"
 
-	anvilrepair = /datum/skill/craft/engineering
+	anvilrepair = /datum/attribute/skill/craft/engineering
 	smeltresult = /obj/item/ingot/bronze
 	item_weight = 7 * BRONZE_MULTIPLIER
 

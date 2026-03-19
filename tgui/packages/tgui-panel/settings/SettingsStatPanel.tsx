@@ -13,7 +13,7 @@ import { useSettings } from './use-settings';
 const tabViews = ['default', 'classic', 'scrollable'];
 
 function LinkedToChat() {
-  return <NoticeBox color="red">Unlink Stat Panel from chat!</NoticeBox>;
+  return <NoticeBox color="bad">Unlink Stat Panel from chat!</NoticeBox>;
 }
 
 export function SettingsStatPanel(props) {

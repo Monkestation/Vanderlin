@@ -166,11 +166,11 @@
 
 /datum/curse/xylix/on_gain(mob/living/carbon/human/owner)
 	. = ..()
-	owner.STALUC -= 10
+	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) -= 10
 
 /datum/curse/xylix/on_loss(mob/living/carbon/human/owner)
 	. = ..()
-	owner.STALUC += 10
+	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) += 10
 
 //////////////////////
 ///    ON LIFE     ///

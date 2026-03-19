@@ -358,7 +358,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		.sprite { position: absolute; background-repeat: no-repeat; cursor: pointer; }
 
 		.header-bg   { top: 5px;   left: 6px;   width: 260px; height: 52px; background-image: url('0_header_bg.png'); }
-		.preview-bg  { top: 50px;  left: 8px;   width: 99px;  height: 83px; background-image: url('charpreview_bg.png'); }
 		.body-bg     { top: 58px;  left: 110px; width: 118px; height: 75px; background-image: url('0_body_bg.png'); }
 		.voice-bg    { top: 137px; left: 2px;   width: 107px; height: 41px; background-image: url('0_voice_bg.png'); }
 		.family-bg   { top: 137px; left: 114px; width: 86px;  height: 74px; background-image: url('0_family_bg.png'); }
@@ -1727,8 +1726,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					var/loadout_number = href_list["loadout_number"]
 					// Re-validate on submission in case of href manipulation
 					var/datum/loadout_item/chosen = loadouts_available[loadout_input]
-					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[loadout_input]
-					if(chosen && !chosen_singleton.is_unlocked_for(user.client))
+					var/datum/loadout_item/chosen_singleton = GLOB.loadout_items[chosen]
+					if(!chosen || !chosen_singleton)
+						to_chat(user, span_warning("Error selecting [loadout_input] for loadout."))
+						return
+					if(!chosen_singleton.is_unlocked_for(user.client))
 						to_chat(user, span_warning("You haven't unlocked that loadout item yet."))
 						return
 					set_loadout(user, loadout_number, chosen)
@@ -2197,6 +2199,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					return
 
 				if("save")
+					to_chat(user, span_info("Preferences Saved."))
 					save_preferences()
 					save_character()
 					if(isnewplayer(user))
@@ -2293,6 +2296,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	character.skin_tone = skin_tone
 	character.culture = GLOB.culture_singletons[culture]
 	character.underwear = underwear
+	character.underwear_color = underwear_color
 	character.undershirt = undershirt
 	character.detail = detail
 	character.socks = socks
@@ -2519,7 +2523,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 /datum/preferences/proc/get_job_lock_html(datum/job/job, mob/user, used_name)
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (user.client.prefs.pref_species.id in job.blacklisted_species)
+	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+
+	if(length(job.whitelisted_ckeys) && !(user.ckey in job.whitelisted_ckeys))
+		return make_lock_row(
+			used_name,
+			"\[EVENT WHITELISTED\]",
+			"<b>This role has been whitelisted by staff for event purposes.</b>"
+		)
+
 	if(job.required_playtime_remaining(user.client))
 		var/list/lines = list()
 		for(var/t in job.exp_requirements)
@@ -2533,6 +2545,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[TIME LOCK\]",
 			"<b>Requirements:</b><br>[text]"
 		)
+
 	if(fails_allowed || fails_blacklist)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			var/list/allowed_races = job.allowed_races.Copy()
@@ -2544,6 +2557,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				"\[SPECIES LOCK\]",
 				"<b>Species Needed:</b><br>[races_text]"
 			)
+
 	if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
 		var/ages_text = jointext(job.allowed_ages, ", ")
 		return make_lock_row(
@@ -2551,6 +2565,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[AGE LOCK\]",
 			"<b>Ages Needed:</b><br>[ages_text]"
 		)
+
 	if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
 		var/sexes_text = jointext(job.allowed_sexes, ", ")
 		return make_lock_row(
@@ -2558,6 +2573,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[SEX LOCK\]",
 			"<b>Sexes Needed:</b><br>[sexes_text]"
 		)
+
 	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/mult_patron in job.allowed_patrons)
@@ -2570,6 +2586,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			used_name,
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
+		)
+
+	if(length(job.banned_patrons) && (user.client.prefs.selected_patron.type in job.banned_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.banned_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
+
+		return make_lock_row(
+			used_name,
+			"\[PATRON BAN\]",
+			"<b>Patrons Banned:</b><br>[patron_text]"
 		)
 	// No lock
 	return FALSE

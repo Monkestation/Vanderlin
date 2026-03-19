@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/miner
+	attribute_variance = list(
+		/datum/attribute/skill/labor/mining = list(0, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = -2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/labor/mining = 40,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/traps = 10,
+		/datum/attribute/skill/craft/engineering = 20,
+		/datum/attribute/skill/craft/blacksmithing = 10,
+		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/miner
 	title = "Miner"
 	tutorial = "The depths of the hills, the ends of the lands - deeper and deeper below, you seek salt, ores, rocks - \
@@ -15,37 +41,11 @@
 	outfit = /datum/outfit/miner
 	give_bank_account = 6
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = -2,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_LCK = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/labor/mining = 4,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/traps = 1,
-		/datum/skill/craft/engineering = 2,
-		/datum/skill/craft/blacksmithing = 1,
-		/datum/skill/craft/smelting = 2,
-		/datum/skill/misc/reading = 1
-	)
-
-/datum/job/miner/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/craft/smelting, pick(0,1,1,2), TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/miner
 
 /datum/outfit/miner
 	name = "Miner"

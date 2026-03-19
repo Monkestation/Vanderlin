@@ -10,7 +10,7 @@
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 100, "fire" = 0, "acid" = 0)
@@ -60,8 +60,8 @@
 	allowed_race = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	allowed_sex = list(MALE)
 	desc = "The sabatons that march to the tune of a glorious nation. It is said that the boots \
-			are gilded with the tears of once native elves of the Grenzeholft lands, \
-			eradicated via humen conquest."
+			are gilded with the tears of elves within Grenzelhoft lands, \
+			as their great tree was reduced to shards."
 	body_parts_covered = FEET|LEGS
 	icon_state = "human_swordshoes"
 	item_state = "human_swordshoes"

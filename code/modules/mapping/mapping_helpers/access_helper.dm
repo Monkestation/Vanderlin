@@ -32,7 +32,18 @@
 
 /obj/effect/mapping_helpers/access/keyset/town/inn
 	accesses = list(ACCESS_INN)
-	difficulty = 5
+	difficulty = 3
+
+/obj/effect/mapping_helpers/access/keyset/town/inn_room
+	color = "#1f4a60"
+	accesses = list(ACCESS_INN)
+	difficulty = 2
+	var/room_id
+
+/obj/effect/mapping_helpers/access/keyset/town/inn_room/LateInitialize()
+	if(room_id)
+		accesses += room_id
+	return ..()
 
 /obj/effect/mapping_helpers/access/keyset/town/artificer
 	accesses = list(ACCESS_ARTIFICER)
@@ -68,14 +79,14 @@
 /obj/effect/mapping_helpers/access/keyset/town/mercenary
 	accesses = list(ACCESS_MERC)
 
+/obj/effect/mapping_helpers/access/keyset/town/tomb
+	accesses = list(ACCESS_TOMB)
+
 /obj/effect/mapping_helpers/access/keyset/town/elder
 	accesses = list(ACCESS_ELDER)
 
-/obj/effect/mapping_helpers/access/keyset/town/veteran
-	accesses = list(ACCESS_VETERAN)
-
-/obj/effect/mapping_helpers/access/keyset/town/gaffer
-	accesses = list(ACCESS_GAFFER)
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden
+	accesses = list(ACCESS_TOMBWARDEN)
 	difficulty = 3
 
 /obj/effect/mapping_helpers/access/keyset/town/tower
@@ -205,3 +216,11 @@
 
 /obj/effect/mapping_helpers/access/keyset/thatchwood/smith
 	accesses = list("oldsmith")
+
+
+/obj/effect/mapping_helpers/access/keyset/other
+	color = "#3eed64"
+
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch
+	accesses = list(ACCESS_BOGWITCH)
+	difficulty = 2

@@ -7,7 +7,7 @@
 	charge_required = FALSE
 	cooldown_time = 90 SECONDS
 	spell_cost = 0
-	associated_skill = /datum/skill/misc/stealing // Nothing really fits here, might as well slap it onto a skill that's legendary.
+	associated_skill = /datum/attribute/skill/misc/stealing // Nothing really fits here, might as well slap it onto a skill that's legendary.
 
 /datum/action/cooldown/spell/undirected/secondsight/cast(atom/cast_on)
 	. = ..()

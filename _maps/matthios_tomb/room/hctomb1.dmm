@@ -506,7 +506,6 @@
 /area/under/tomb/cave)
 "Co" = (
 /obj/structure/winch{
-	gid = "hctomb01";
 	redstone_id = "hctomb01"
 	},
 /turf/open/floor/metal/barograte,
@@ -925,7 +924,6 @@
 /area/under/tomb/indoors)
 "YA" = (
 /obj/structure/gate/bars{
-	gid = "hctomb01";
 	redstone_id = "hctomb01"
 	},
 /turf/open/floor/naturalstone,

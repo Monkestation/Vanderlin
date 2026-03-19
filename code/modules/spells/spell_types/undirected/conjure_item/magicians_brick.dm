@@ -26,7 +26,7 @@
 	if(!isliving(owner))
 		return
 	var/mob/living/L = owner
-	var/INT = L.STAINT
+	var/INT = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)
 	if(INT <= 10)
 		return
 	var/obj/item/brick = .
@@ -53,5 +53,5 @@
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY
 	possible_item_intents = list(MACE_STRIKE) // Not giving it smash so it don't become competetive with conjure weapon (as a melee weapon)
-	associated_skill = /datum/skill/combat/axesmaces // If it was tied to Arcane it'd be too strong
+	associated_skill = /datum/attribute/skill/combat/axesmaces // If it was tied to Arcane it'd be too strong
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')

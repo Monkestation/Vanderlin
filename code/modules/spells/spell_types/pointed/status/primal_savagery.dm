@@ -5,7 +5,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	point_cost = 1
-	associated_skill = /datum/skill/magic/druidic
+	associated_skill = /datum/attribute/skill/magic/druidic
 	attunements = list(
 		/datum/attunement/earth = 0.3,
 	)

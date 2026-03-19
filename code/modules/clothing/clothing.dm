@@ -206,7 +206,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(user.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -233,7 +233,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(user.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))

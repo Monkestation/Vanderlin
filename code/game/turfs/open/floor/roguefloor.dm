@@ -809,7 +809,7 @@
 	desc = ""
 	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblestone_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobbleedge/alt
 	icon_state = "cobblestonealt_edges"
@@ -825,7 +825,7 @@
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "cobble_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobblerockedge/alt
 	icon_state = "cobblealt_edges"
@@ -833,6 +833,10 @@
 /obj/effect/decal/borderfall
 	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "borderfall"
+
+/obj/effect/decal/woodpath
+	icon = 'icons/turf/constructed/wood.dmi'
+	icon_state = "wooden_path"
 
 /*	..................   Miscellany   ................... */
 /turf/open/floor/tile
