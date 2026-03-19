@@ -53,6 +53,8 @@
 	belt = /obj/item/storage/belt/leather/adventurer // new belt
 	r_hand = /obj/item/flashlight/flare/torch/prelit // they get back their missing torches
 	shirt = /obj/item/clothing/armor/gambeson
+	wrists = /obj/item/clothing/wrists/bracers/leather
+	pants = /obj/item/clothing/pants/trou/leather
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 	)
@@ -67,7 +69,6 @@
 	pants = pick(/obj/item/clothing/pants/tights/colored/black, /obj/item/clothing/pants/trou/leather)
 	backl = pick(/obj/item/storage/backpack/satchel, /obj/item/storage/backpack/satchel/cloth)
 	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron, /obj/item/clothing/armor/brigandine/light)
-	wrists = pick(/obj/item/clothing/wrists/bracers/leather, /obj/item/clothing/wrists/bracers/ironjackchain)
 	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)
 	head = pick(/obj/item/clothing/head/helmet/skullcap, /obj/item/clothing/head/helmet/sallet/iron, /obj/item/clothing/head/helmet/leather/headscarf)
 
