@@ -222,7 +222,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// is this guy a foreigner?
 #define TRAIT_FOREIGNER "Foreigner"
 /// is this guy a foreigner who's lived in vanderlin for a while?
-#define TRAIT_LOCAL_FOREIGNER "Local Foreigner"
+#define TRAIT_LOCAL_FOREIGNER
 /// mob cannot be ambushed for any reason
 #define TRAIT_NOAMBUSH "no_ambush"
 /// Can see build blueprints

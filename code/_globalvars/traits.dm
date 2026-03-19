@@ -171,7 +171,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Blood Drinker" = TRAIT_BLOODDRINKER,
 		"Tiny" = TRAIT_TINY,
 		"Foreigner" = TRAIT_FOREIGNER,
-		"Local Foreigner" = TRAIT_LOCAL_FOREIGNER,
+		"Local Foreigner" = TRAIT_LOCAL_FOREIGNER
 		"Beautiful" = TRAIT_BEAUTIFUL,
 		"Bad Mood" = TRAIT_BAD_MOOD,
 		"Night Owl" = TRAIT_NIGHT_OWL,
