@@ -30,9 +30,9 @@
 	force = DAMAGE_KATAR + 5
 	throwforce = DAMAGE_KATAR - 3
 	wbalance = DODGE_CHANCE_NORMAL
-	wdefense = ULTMATE_PARRY
+	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(/datum/intent/claw/cut/iron, /datum/intent/claw/lunge, /datum/intent/claw/rend)
+	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge, /datum/intent/claw/rend)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STANDARD
 
@@ -86,15 +86,12 @@
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	swingdelay = 10
+	swingdelay = 3
 	penfactor = 20
 	misscost = 4
 
 /datum/intent/claw/lunge/steel
 	damfactor = 1.1
-	swingdelay = 12
-	clickcd = CLICK_CD_RESIST
-	penfactor = 35
 
 /datum/intent/claw/lunge/gronn
 	clickcd = 10
@@ -108,26 +105,11 @@
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
 	item_damage_type = "slash"
 	misscost = 4
-	penfactor = 10
+	penfactor = AP_AXE_CHOP
 	swingdelay = 3
 
-/datum/intent/claw/cut/iron
-	penfactor = 20
-	swingdelay = 8
-	damfactor = 1.4
-	clickcd = CLICK_CD_RESIST
-
 /datum/intent/claw/cut/steel
-	penfactor = 10
-	swingdelay = 4
-	damfactor = 1.3
-	clickcd = CLICK_CD_RESIST
-
-/datum/intent/claw/cut/gronn
-	penfactor = 30
-	swingdelay = 0
 	damfactor = 1.1
-	clickcd = CLICK_CD_MELEE
 
 /datum/intent/claw/rend
 	name = "rend"
@@ -144,7 +126,6 @@
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
 	misscost = 8
-	damfactor = 0.05
 
 /datum/intent/claw/rend/steel
 	damfactor = 1.2

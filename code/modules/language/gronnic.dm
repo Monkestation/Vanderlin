@@ -18,3 +18,6 @@
 		"pri", "tor", "est", "oto", "enn", "ova", "oro", "kak", "plu", "cha", "fö", "är",
 		"ha", "ti", "va", "ör", "för", "int", "til", "ans", "der", "ara", "han", "var", "det",
 		"och", "ing", "sam", "onne", "gen", "eska", "ig", "ende", "lig", "nin")
+	mutual_understanding = list(
+		/datum/language/common = 15,
+	)
