@@ -2685,6 +2685,7 @@
 #include "code\modules\events\antagonist\migrant_waves\exiled_adventurer.dm"
 #include "code\modules\events\antagonist\migrant_waves\lich.dm"
 #include "code\modules\events\antagonist\migrant_waves\wretch.dm"
+#include "code\modules\events\antagonist\migrant_waves\zizo_cult.dm"
 #include "code\modules\events\antagonist\solo\_base.dm"
 #include "code\modules\events\antagonist\solo\lich.dm"
 #include "code\modules\events\antagonist\solo\rebels.dm"
