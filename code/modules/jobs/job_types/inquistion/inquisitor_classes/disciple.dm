@@ -62,7 +62,7 @@
 		"Discipline - Unarmed" = null,
 		"Katar" = /obj/item/weapon/katar/psydon,
 		"Knuckledusters" = /obj/item/weapon/knuckles/psydon,
-		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff,
+		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
 	var/obj/item/clothing/gloves/gloves_to_wear = /obj/item/clothing/gloves/bandages/weighted
