@@ -111,7 +111,7 @@
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom  = /obj/item/natural/fibers
 	allow_inverse_start = FALSE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	output = /obj/item/gun/ballistic/bow/short
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/crafting/bow
@@ -124,7 +124,7 @@
 	starting_atom = /obj/item/natural/fibers
 	attacked_atom = /obj/item/natural/wood/plank
 	allow_inverse_start = FALSE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	output = /obj/item/gun/ballistic/bow
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/long_bow
@@ -137,7 +137,7 @@
 	attacked_atom = /obj/item/natural/wood/plank
 	starting_atom  = /obj/item/natural/fibers
 	allow_inverse_start = FALSE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	output = /obj/item/gun/ballistic/bow/long
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/crafting/wsword

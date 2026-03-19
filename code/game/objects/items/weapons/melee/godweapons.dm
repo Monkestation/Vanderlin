@@ -233,12 +233,12 @@
 
 //┌─────────────── TURBULENTA ───────────────┐//
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta
+/obj/item/gun/ballistic/bow/turbulenta
 	name = "turbulenta"
 	desc = "Rarely does she even care about combat, but when she does... Baotha was quite the markswoman."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "turbulenta"
-	base_icon = "turbulenta"
+	base_icon_state = "turbulenta"
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-16, -16)
 	bigboy = TRUE
@@ -246,14 +246,15 @@
 	fire_sound = 'sound/combat/Ranged/turbulentafire.ogg'
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12
-	damfactor = 1.1
+	projectile_damage_multiplier = 1.1
+
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
+/obj/item/gun/ballistic/bow/turbulenta/Initialize(mapload, ...)
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/baotha, PUNISHMENT_STRESS, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/getonmobprop(tag)
+/obj/item/gun/ballistic/bow/turbulenta/getonmobprop(tag)
 	if(tag)
 		switch(tag)
 			if("gen")
@@ -305,30 +306,30 @@
 					"westabove" = FALSE,
 				)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
+/obj/item/gun/ballistic/bow/turbulenta/Initialize(mapload, ...)
 	. = ..()
 	FUCK = new(src)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Destroy(force)
+/obj/item/gun/ballistic/bow/turbulenta/Destroy(force)
 	QDEL_NULL(FUCK)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
 	if(chambered || !HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return ..()
 	FUCK.attack_self(user, modifiers)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/dropped(mob/user, silent)
+/obj/item/gun/ballistic/bow/turbulenta/dropped(mob/user, silent)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/before_firing(atom/target, mob/user)
+/obj/item/gun/ballistic/bow/turbulenta/before_firing(atom/target, mob/user)
 	if(!HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return
 	var/obj/projectile/arrow = chambered?.loaded_projectile

@@ -181,7 +181,7 @@
 
 // Orc archer
 /datum/outfit/job/orc/npc/archer_test/pre_equip(mob/living/carbon/human/H)
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/ammo_holder/quiver/arrows
 	l_hand = /obj/item/weapon/sword/short/iron
 	armor = /obj/item/clothing/armor/leather/hide

@@ -139,7 +139,7 @@
 	head = /obj/item/clothing/head/helmet/townbarbute
 	neck = /obj/item/clothing/neck/chaincoif
 	armor = /obj/item/clothing/armor/gambeson/heavy
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/cudgel

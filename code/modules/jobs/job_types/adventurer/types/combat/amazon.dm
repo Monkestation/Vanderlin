@@ -45,7 +45,7 @@
 	name = "Amazon (Adventurer)"
 	neck = /obj/item/ammo_holder/dartpouch/poisondarts
 	backl = /obj/item/weapon/polearm/spear
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/bow/short
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
 	beltr = /obj/item/ammo_holder/quiver/arrows

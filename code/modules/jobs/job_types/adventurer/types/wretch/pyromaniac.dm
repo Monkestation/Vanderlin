@@ -38,7 +38,7 @@
 /datum/job/advclass/wretch/pyromaniac/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectableweapon = list(
-		"Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
+		"Bow" = /obj/item/gun/ballistic/bow/short,
 		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
 	)
 	var/weaponschoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")

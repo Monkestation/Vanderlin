@@ -52,7 +52,7 @@
 	var/empty_alarm_vary = TRUE
 
 	/// What type (includes subtypes) of magazine will this gun accept being put into it
-	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/xbow
+	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/internal/xbow
 	///Whether the gun will spawn loaded with a magazine
 	var/spawn_with_magazine = TRUE
 	/// Change this if the gun should spawn with a different magazine type to what accepted_magazine_type defines. Will create errors if not a type or subtype of accepted magazine.
@@ -296,40 +296,44 @@
 		to_chat(user, "<span class='notice'>I pull the [magazine_wording] out of \the [src].</span>")
 	update_appearance(UPDATE_ICON)
 
-/obj/item/gun/ballistic/can_shoot()
+/obj/item/gun/ballistic/can_shoot(mob/living/user)
 	return chambered
 
 /obj/item/gun/ballistic/attackby(obj/item/A, mob/user, list/modifiers)
 	. = ..()
-	if (.)
+	if(.)
 		return
-	if (!internal_magazine && istype(A, /obj/item/ammo_box/magazine))
-		var/obj/item/ammo_box/magazine/AM = A
-		if (!magazine)
-			insert_magazine(user, AM)
-		else
-			if (tac_reloads)
-				eject_magazine(user, FALSE, AM)
-			else
-				to_chat(user, "<span class='notice'>There's already \a [magazine_wording] in \the [src].</span>")
+	if(!internal_magazine && istype(A, /obj/item/ammo_box/magazine))
+		if(!magazine)
+			insert_magazine(user, A)
+			return
+
+		if(tac_reloads)
+			eject_magazine(user, FALSE, A)
+			return
+
+		to_chat(user, span_notice("There's already \a [magazine_wording] in \the [src]."))
 		return
-	if (istype(A, /obj/item/ammo_casing) || istype(A, /obj/item/ammo_box))
-		if (bolt_type == BOLT_TYPE_NO_BOLT || internal_magazine)
-			if (chambered && !chambered.loaded_projectile)
+
+	if(isammocasing(A) || istype(A, /obj/item/ammo_box))
+		if(bolt_type == BOLT_TYPE_NO_BOLT || internal_magazine)
+			if(chambered && !chambered.loaded_projectile)
 				chambered.forceMove(drop_location())
+				if(length(magazine?.stored_ammo) && chambered != magazine.stored_ammo[1])
+					magazine.stored_ammo -= chambered
 				chambered = null
-			var/num_loaded = magazine.attackby(A, user, modifiers, TRUE)
-			if (num_loaded)
-				to_chat(user, "<span class='notice'>I [verbage] \a [cartridge_wording]\s on \the [src].</span>")
+			var/num_loaded = magazine.try_load(user, A, silent = TRUE)
+			if(num_loaded)
+				to_chat(user, span_notice("I [verbage] \a [cartridge_wording]\s on \the [src]."))
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
 				if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 					chamber_round()
 				A.update_appearance()
-				update_appearance(UPDATE_ICON)
+				update_appearance()
 			return
+
 	user.update_inv_hands()
 	return FALSE
-
 
 /obj/item/gun/ballistic/AltClick(mob/user, list/modifiers)
 	if (unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
@@ -382,7 +386,7 @@
 			if(T && is_station_level(T.z))
 				SSblackbox.record_feedback("tally", "station_mess_created", 1, CB.name)
 		if (num_unloaded)
-			to_chat(user, "<span class='notice'>I remove [(num_unloaded == 1) ? "the" : "[num_unloaded]"] [cartridge_wording]\s from [src].</span>")
+			balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
 			playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 			update_appearance(UPDATE_ICON)
 		else

@@ -202,7 +202,7 @@
 	var/weapontypec = pickweight(list("Bow" = 6, "Crossbow" = 4))
 	switch(weapontypec)
 		if("Bow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backl = /obj/item/gun/ballistic/bow/long
 			backr = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow

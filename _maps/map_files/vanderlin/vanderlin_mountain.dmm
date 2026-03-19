@@ -2204,7 +2204,7 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/outdoors/mountains/anvil/snowyforest)
 "Ik" = (
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/dirt,
 /area/under/mountains/anvil/lower/building)
 "Is" = (

@@ -8119,7 +8119,7 @@
 /area/outdoors/basin)
 "gRq" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_casing/caseless/arrow,
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,
@@ -27347,7 +27347,7 @@
 /area/indoors/town/church/inquisition)
 "ycF" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_casing/caseless/arrow,
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,

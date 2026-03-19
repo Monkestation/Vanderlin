@@ -26,7 +26,7 @@
 	dropshrink = 0.7
 	associated_skill = /datum/attribute/skill/combat/firearms
 	possible_item_intents = list(/datum/intent/shoot/puffer, /datum/intent/shoot/puffer/arc, INTENT_GENERIC)
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/musk
 	gripped_intents = null
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
@@ -217,13 +217,13 @@
 
 	return ..()
 
-/obj/item/ammo_box/magazine/internal/shot/musk
+/obj/item/ammo_box/magazine/internal/musk
 	ammo_type = /obj/item/ammo_casing/caseless/bullet
 	caliber = "musketball"
 	max_ammo = 1
 	start_empty = TRUE
 
-/obj/item/ammo_box/magazine/internal/shot/musk/loaded
+/obj/item/ammo_box/magazine/internal/musk/loaded
 	ammo_type = /obj/item/ammo_casing/caseless/bullet
 	caliber = "musketball"
 	max_ammo = 1
@@ -243,7 +243,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured
 	sellprice = 0 //Yeah, Let's not sell this.
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk/loaded
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/musk/loaded
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/Initialize()
 	. = ..()

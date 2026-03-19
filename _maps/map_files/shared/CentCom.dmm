@@ -1788,7 +1788,7 @@
 "io" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "ip" = (

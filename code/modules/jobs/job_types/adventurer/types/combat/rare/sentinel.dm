@@ -41,7 +41,7 @@
 
 /datum/outfit/adventurer/sentinel
 	name = "Sentinel (Adventurer)"
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	backr = /obj/item/gun/ballistic/bow/long
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	shoes = /obj/item/clothing/shoes/ridingboots
 	gloves = /obj/item/clothing/gloves/angle

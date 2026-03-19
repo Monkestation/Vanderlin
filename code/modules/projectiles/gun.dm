@@ -105,7 +105,7 @@
 
 //check if there's enough ammo/energy/whatever to shoot one time
 //i.e if clicking would make it shoot
-/obj/item/gun/proc/can_shoot()
+/obj/item/gun/proc/can_shoot(mob/living/user)
 	return TRUE
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
@@ -135,15 +135,15 @@
 		if(user == pbtarget)
 			user.visible_message(
 				span_danger("[user] fires [src] point blank at [user.p_them()]self!"),
-				span_userdanger("You fire [src] point blank at yourself!"),
-				span_hear("You hear a gunshot!"),
+				span_userdanger("I fire [src] point blank at myself!"),
+				span_hear("I hear a gunshot!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 			)
 		else
 			user.visible_message(
 				span_danger("[user] fires [src] point blank at [pbtarget]!"),
-				span_danger("You fire [src] point blank at [pbtarget]!"),
-				span_hear("You hear a gunshot!"),
+				span_danger("I fire [src] point blank at [pbtarget]!"),
+				span_hear("I hear a gunshot!"),
 				vision_distance = COMBAT_MESSAGE_RANGE,
 				ignored_mobs = pbtarget,
 			)
@@ -151,8 +151,8 @@
 	else
 		user.visible_message(
 			span_danger("[user] fires [src]!"),
-			span_danger("You fire [src]!"),
-			span_hear("You hear a gunshot!"),
+			span_danger("I fire [src]!"),
+			span_hear("I hear a gunshot!"),
 			vision_distance = COMBAT_MESSAGE_RANGE,
 		)
 
@@ -188,7 +188,7 @@
 		if(!can_trigger_gun(L))
 			return
 
-	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
+	if(!can_shoot(user)) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)
 		return
 
@@ -271,6 +271,11 @@
 	if(total_recoil > 0)
 		user.recoil_camera(total_recoil + 1, (total_recoil * recoil_backtime_multiplier) + 1, total_recoil, actual_angle)
 
+/// Get the base spread, probably based off the user's skills
+/obj/item/gun/proc/get_spread(mob/living/user)
+	if(!user)
+		return 0
+
 /obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(fire_cd)
 		return FALSE
@@ -282,9 +287,11 @@
 
 	add_fingerprint(user)
 
+	var/real_spread = get_spread(user) + spread
 	var/randomized_bonus_spread = rand(0, bonus_spread)
-	var/randomized_gun_spread = spread ? rand(0, spread) : 0
+	var/randomized_gun_spread = real_spread ? rand(0, real_spread) : 0
 	var/total_random_spread = max(0, randomized_bonus_spread + randomized_gun_spread)
+
 	var/burst_spread_mult = rand()
 
 	if(burst_size > 1)
@@ -331,7 +338,21 @@
 	fire_cd = FALSE
 
 //Happens before the actual projectile creation
-/obj/item/gun/proc/before_firing(atom/target,mob/user)
+/obj/item/gun/proc/before_firing(atom/target, mob/user)
 	return
+
+/// Modify the projectile before it's fired off
+/obj/item/gun/proc/modify_projectile(mob/living/user, atom/target, obj/projectile/modified)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(!modified)
+		return
+
+	var/integrity_mult = 0.5 + get_integrity_percentage() * 0.5
+	if(integrity_mult >= 0.95) //Guns that are only mildly smudged don't debuff projectiles.
+		integrity_mult = 1
+
+	modified.damage *= projectile_damage_multiplier * integrity_mult
+	modified.speed *= projectile_speed_multiplier * integrity_mult
 
 #undef DUALWIELD_PENALTY_EXTRA_MULTIPLIER

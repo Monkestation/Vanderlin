@@ -14763,7 +14763,7 @@
 /area/indoors/town)
 "hek" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/tile/checker_green,
 /area/indoors/villagegarrison)
 "het" = (
@@ -21746,10 +21746,10 @@
 /area/indoors/town/garrison)
 "kBC" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
 "kBO" = (
@@ -22928,10 +22928,10 @@
 /area/indoors/town)
 "lch" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -6
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = 6
 	},
 /turf/open/floor/hexstone,

@@ -2313,7 +2313,7 @@
 /area/outdoors/mountains)
 "yN" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/reagent_containers/glass/bottle/redwine,
 /obj/machinery/light/fueled/wallfire/candle,

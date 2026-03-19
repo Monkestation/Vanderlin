@@ -5,7 +5,7 @@
 	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "blowgun"
 	possible_item_intents = list(/datum/intent/shoot/blowgun, /datum/intent/arc/blowgun, INTENT_GENERIC)
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/blowgun
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/blowgun
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
 	randomspread = 0
@@ -72,7 +72,7 @@
 		I.pixel_y = I.base_pixel_y
 		. += new /mutable_appearance(I)
 
-/obj/item/ammo_box/magazine/internal/shot/blowgun
+/obj/item/ammo_box/magazine/internal/blowgun
 	ammo_type = /obj/item/ammo_casing/caseless/dart
 	caliber = "dart"
 	max_ammo = 1

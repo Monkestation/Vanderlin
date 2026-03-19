@@ -4991,7 +4991,7 @@
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
 "duH" = (
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
 /area/outdoors/bog/e_highroad)
@@ -5126,10 +5126,10 @@
 /area/outdoors/bog/west)
 "dCA" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = 3
 	},
 /turf/open/floor/concrete,
@@ -11153,7 +11153,7 @@
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
+/obj/item/gun/ballistic/bow,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
@@ -19286,7 +19286,7 @@
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},

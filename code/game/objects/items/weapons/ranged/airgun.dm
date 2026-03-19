@@ -11,7 +11,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_SMASH)
 	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/airgun
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/airgun
 
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_HUGE
@@ -37,7 +37,7 @@
 	AddComponent(/datum/component/steam_storage, 800, 0, "airgun")
 	AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = force_wielded, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)))
 
-/obj/item/ammo_box/magazine/internal/shot/airgun
+/obj/item/ammo_box/magazine/internal/airgun
 	ammo_type = /obj/item/ammo_casing/caseless/bullet
 	caliber = "musketball"
 	max_ammo = 1

@@ -42,13 +42,7 @@
 
 	if(isgun(fired_from))
 		var/obj/item/gun/gun = fired_from
-
-		var/integrity_mult = 0.5 + gun.get_integrity_percentage() * 0.5
-		if(integrity_mult >= 0.95) //Guns that are only mildly smudged don't debuff projectiles.
-			integrity_mult = 1
-
-		loaded_projectile.damage *= gun.projectile_damage_multiplier * integrity_mult
-		loaded_projectile.speed *= gun.projectile_speed_multiplier * integrity_mult
+		gun.modify_projectile(user, target, loaded_projectile)
 
 	loaded_projectile.suppressed = quiet
 

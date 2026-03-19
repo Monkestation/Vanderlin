@@ -301,7 +301,7 @@
 		if("Sword + Short Bow")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_L, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/short, ITEM_SLOT_BACK_L, TRUE)
 		if("Axe + Crossbow")
 			spawned.put_in_hands(new /obj/item/weapon/axe/steel(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, ITEM_SLOT_BACK_L, TRUE)

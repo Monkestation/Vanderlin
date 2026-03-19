@@ -29,7 +29,7 @@
 		/obj/item/weapon/polearm/woodstaff/naledi = list(1, PRICE_BOSS_ARTIFACT, 1),
 		/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast = list(1, PRICE_GOD_ARTIFACT, 1),
 		/obj/item/weapon/polearm/neant = list(1, PRICE_GOD_ARTIFACT, 1),
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta = list(1, PRICE_GOD_ARTIFACT, 1),
+		/obj/item/gun/ballistic/bow/turbulenta = list(1, PRICE_GOD_ARTIFACT, 1),
 		/obj/item/weapon/sword/long/pleonexia = list(1, PRICE_GOD_ARTIFACT, 1),
 		/obj/item/flashlight/flare/torch/lantern/psycenser = list(1, PRICE_ARTIFACT, 1),
 	)

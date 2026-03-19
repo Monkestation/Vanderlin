@@ -45,7 +45,7 @@
 			return
 	if(istype(A, /obj/item/gun/ballistic/revolver/grenadelauncher))
 		var/obj/item/gun/ballistic/revolver/grenadelauncher/B = A
-		var/obj/item/ammo_box/gun_magazine = B.mag_type
+		var/obj/item/ammo_box/gun_magazine = B.accepted_magazine_type
 		var/obj/item/ammo_casing/caseless/gun_ammo = initial(gun_magazine?.ammo_type)
 		if(ammo_list.len && gun_ammo && !B.chambered)
 			for(var/AR in reverseList(ammo_list))

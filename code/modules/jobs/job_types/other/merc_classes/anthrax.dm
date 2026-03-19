@@ -105,7 +105,7 @@
 		gloves = /obj/item/clothing/gloves/fingerless/shadowgloves
 		mask = /obj/item/clothing/face/shepherd/shadowmask
 		neck = /obj/item/clothing/neck/chaincoif/iron
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+		backr = /obj/item/gun/ballistic/bow/short
 		beltr = /obj/item/ammo_holder/quiver/arrows
 		beltl = /obj/item/weapon/sword/sabre/stalker
 		scabbards = list(/obj/item/weapon/scabbard/sword)

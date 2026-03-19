@@ -6056,12 +6056,12 @@
 /area/outdoors/basin/safe)
 "fPQ" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long{
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow{
 	pixel_x = -3;
 	pixel_y = 5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long{
+/obj/item/gun/ballistic/bow{
 	pixel_x = 7;
 	pixel_y = 3
 	},
@@ -7242,10 +7242,10 @@
 	pixel_x = 6;
 	pixel_y = -5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long{
+/obj/item/gun/ballistic/bow{
 	pixel_y = 2
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -4;
 	pixel_y = -5
 	},
@@ -15812,8 +15812,8 @@
 	pixel_y = 28
 	},
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "oDN" = (
@@ -23728,9 +23728,9 @@
 	pixel_y = 28
 	},
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "vSA" = (

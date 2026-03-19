@@ -306,17 +306,17 @@
 /datum/supply_pack/weapons/ranged/bow
 	name = "Hunting Bow"
 	cost = 20
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	contains = /obj/item/gun/ballistic/bow
 
 /datum/supply_pack/weapons/ranged/longbow
 	name = "Longbow"
 	cost = 30
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	contains = /obj/item/gun/ballistic/bow/long
 
 /datum/supply_pack/weapons/ranged/shortbow
 	name = "Imported Short Bow"
 	cost = 40
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	contains = /obj/item/gun/ballistic/bow/short
 
 /datum/supply_pack/weapons/ranged/tossbladeiron
 	name = "Iron Tossblade Belt"

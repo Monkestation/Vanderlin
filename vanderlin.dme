@@ -1858,7 +1858,6 @@
 #include "code\game\objects\items\weapons\ranged\airgun.dm"
 #include "code\game\objects\items\weapons\ranged\ammo.dm"
 #include "code\game\objects\items\weapons\ranged\blowgun.dm"
-#include "code\game\objects\items\weapons\ranged\bows.dm"
 #include "code\game\objects\items\weapons\ranged\crossbows.dm"
 #include "code\game\objects\items\weapons\ranged\flintlock.dm"
 #include "code\game\objects\lighting\_base_light.dm"

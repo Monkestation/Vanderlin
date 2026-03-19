@@ -12502,8 +12502,8 @@
 /area/under/cave)
 "gax" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -34616,7 +34616,7 @@
 /area/indoors/town)
 "qMF" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
 "qML" = (
@@ -36266,15 +36266,15 @@
 /area/under/town/sewer)
 "rCo" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -8
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -1
 	},
@@ -49616,7 +49616,7 @@
 /area/indoors/town/keep/magician)
 "xDx" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/reagent_containers/glass/bottle/redwine,
 /turf/open/floor/carpet/royalblack,

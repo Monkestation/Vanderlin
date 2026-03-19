@@ -93,7 +93,7 @@
 		/obj/item/alch/bone,
 		/obj/item/alch/bone,
 		/obj/item/skull,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+		/obj/item/gun/ballistic/bow,
 		/obj/item/ammo_casing/caseless/arrow,
 		/obj/item/ammo_casing/caseless/arrow,
 		/obj/item/ammo_casing/caseless/arrow
