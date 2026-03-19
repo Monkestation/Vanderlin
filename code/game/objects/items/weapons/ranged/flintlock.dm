@@ -240,6 +240,8 @@
 	icon_state = "aflask"
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured
+	name = "puffer"
+	desc = "A magically conjured copy of a eastern styled flintlock. It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
 	sellprice = 0 //Yeah, Let's not sell this.
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk/loaded
 
@@ -249,15 +251,44 @@
 	rammed = TRUE
 	powdered = TRUE
 	wound = TRUE
+	rod = null
+	ramrod_inserted = FALSE
+	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
+/obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
+	if(!cocked)
+		return
+	if(!rammed)
+		return
+	if(!powdered)
+		return
+	if(wheellock && !wound)
+		return
+	if(user.client)
+		if(user.client.chargedprog >= 100)
+			spread = 0
+		else
+			spread = 150 - (150 * (user.client.chargedprog / 100))
+	else
+		spread = 0
+	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
+		var/obj/projectile/BB = CB.BB
+		if(user.client)
+			if(user.client.chargedprog >= 100)
+				BB.accuracy += 15 //better accuracy for fully aiming
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+			BB.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			BB.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
+		BB.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
+	playsound(src, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	atom_integrity = 0
 	atom_break()
 
 	QDEL_IN(src, rand(2 SECONDS, 5 SECONDS)) //Apparently, a puffer being broken can still be shot, because that make sense. so we're qdel'ing it right after.
+	playsound(src, 'sound/foley/breaksound.ogg', 100, TRUE)
 	visible_message(span_warning("The puffer begins to crumble, the enchantment falls!"))
-
+	..()
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket
 	name = "musket"
 	icon = 'icons/roguetown/weapons/64/guns.dmi'
