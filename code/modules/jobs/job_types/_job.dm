@@ -176,8 +176,6 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/is_local_foreigner = FALSE //For foreigners who are recognized, and have lived in vanderlin for an extended period of time.
-
 	var/datum/quirk/forced_flaw
 
 	var/shows_in_list = TRUE
@@ -304,10 +302,6 @@
 
 	if(is_recognized)
 		ADD_TRAIT(spawned, TRAIT_RECOGNIZED, TRAIT_GENERIC)
-
-	if(is_local_foreigner)
-		ADD_TRAIT(spawned, TRAIT_LOCAL_FOREIGNER, TRAIT_GENERIC)
-
 
 	if(can_have_apprentices)
 		spawned.set_apprentice_training_skills(trainable_skills.Copy())
@@ -709,7 +703,6 @@
 	data["job_reopens_slots_on_death"] = job_reopens_slots_on_death
 	data["is_foreigner"] = is_foreigner
 	data["is_recognized"] = is_recognized
-	data["is_local_foreigner"] = is_local_foreigner
 	data["shows_in_list"] = shows_in_list
 	data["can_have_apprentices"] = can_have_apprentices
 	data["max_apprentices"] = max_apprentices
@@ -791,7 +784,6 @@
 	job_reopens_slots_on_death = data["job_reopens_slots_on_death"]
 	is_foreigner = data["is_foreigner"]
 	is_recognized = data["is_recognized"]
-	is_local_foreigner = data["is_local_foreigner"]
 	shows_in_list = data["shows_in_list"]
 	can_have_apprentices = data["can_have_apprentices"]
 	max_apprentices = data["max_apprentices"]
