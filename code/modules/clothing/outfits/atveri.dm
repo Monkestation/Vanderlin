@@ -6,11 +6,14 @@
 	item_state = "atgervi_raider_mail"
 	max_integrity = 400
 
-/obj/item/clothing/armor/leather/heavy/atgervi
+/obj/item/clothing/armor/leather/atgervi
 	name = "shaman's coat"
 	desc = "A furred protective coat, often made by hand from a beast killed in the bearer's hunt."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
+	armor = ARMOR_LEATHER_GOOD
+	prevent_crits = ALL_EXCEPT_STAB
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"

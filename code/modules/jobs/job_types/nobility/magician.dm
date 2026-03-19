@@ -64,6 +64,8 @@
 	attunements_max = 6
 	attunements_min = 4
 	job_bitflag = BITFLAG_ROYALTY
+	max_apprentices = 2
+	honorary = "Archmage"
 
 	spells = list(
 		/datum/action/cooldown/spell/aoe/knock,

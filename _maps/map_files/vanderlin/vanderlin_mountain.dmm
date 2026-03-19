@@ -45,9 +45,7 @@
 /turf/closed/mineral/random/med,
 /area/under/mountains/anvil/lower)
 "aO" = (
-/obj/structure/gate/bars{
-	gid = "dwarfkeepgate"
-	},
+/obj/structure/gate/bars,
 /turf/open/floor/blocks,
 /area/under/mountains/anvil/lower/building)
 "aW" = (

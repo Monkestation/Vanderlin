@@ -153,7 +153,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/uncolored
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backl = /obj/item/storage/backpack/satchel
+	backl = /obj/item/storage/backpack/satchel/cloth
 	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 	neck = /obj/item/key/tavern
 
@@ -217,67 +217,6 @@
 	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
 
 /datum/outfit/matron_assistant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	if(equipped_human.gender == MALE)
-		armor = /obj/item/clothing/armor/leather/vest/colored/black
-	else
-		cloak = /obj/item/clothing/cloak/apron
-
-/datum/attribute_holder/sheet/job/gaffer_assistant
-	raw_attribute_list = list(
-		STAT_SPEED = 1,
-		STAT_ENDURANCE = 1,
-
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/craft/cooking = 30,
-		/datum/attribute/skill/labor/butchering = 10,
-		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/labor/farming = 10,
-		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/sneaking = 20,
-		/datum/attribute/skill/misc/stealing = 30,
-		/datum/attribute/skill/labor/mathematics = 10
-	)
-
-	attribute_variance = list(
-		/datum/attribute/skill/misc/music = list(0,10)
-	)
-
-/datum/job/gaffer_assistant
-	title = "Ring Servant"
-	tutorial = "I never had what it took to be a mercenary, but I offered my service to the Guild regardless. \
-	My vow is to serve whomever holds the ring of Burden while avoiding its curse from befalling me."
-	department_flag = APPRENTICES
-	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	display_order = JDO_SERVANT
-	faction = FACTION_TOWN
-	total_positions = 1
-	spawn_positions = 1
-	bypass_lastclass = TRUE
-	give_bank_account = TRUE
-	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
-
-	allowed_races = RACES_PLAYER_ALL
-
-	outfit = /datum/outfit/gaffer_assistant
-	exp_types_granted = list(EXP_TYPE_MERCENARY)
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/gaffer_assistant
-
-/datum/outfit/gaffer_assistant
-	name = "Ring Servant"
-	shoes = /obj/item/clothing/shoes/simpleshoes
-	pants = /obj/item/clothing/pants/tights/colored/uncolored
-	shirt = /obj/item/clothing/shirt/undershirt/colored/uncolored
-	belt = /obj/item/storage/belt/leather/rope
-	beltl = /obj/item/storage/belt/pouch/coins/poor
-	beltr = /obj/item/storage/keyring/gaffer_assistant
-	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/recipe_book/cooking = 1)
-
-/datum/outfit/gaffer_assistant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.gender == MALE)
 		armor = /obj/item/clothing/armor/leather/vest/colored/black

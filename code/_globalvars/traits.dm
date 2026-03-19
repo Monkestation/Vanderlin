@@ -299,7 +299,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WATER_BREATHING = span_info("I can breathe underwater, I have no fear of drowning."),
 	TRAIT_TINY = "I am small, it's hard to look people in the eyes.",
 	TRAIT_FOREIGNER = span_notice("I'm not from around here."),
-	TRAIT_BURDEN = "I carry the Burden of HEAD EATER's hunger...",
 	TRAIT_OLDPARTY = "In years long passed, me and a group of fellow adventurers saved this city!",
 	TRAIT_DREAM_WATCHER = span_notice("I'm blessed by Noc, my dreams tell more than the average person.."),
 	TRAIT_AMAZING_BACK = span_notice("I'm able to carry far more on my back!"),

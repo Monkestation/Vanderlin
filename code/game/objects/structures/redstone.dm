@@ -77,6 +77,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 3000
+	// reduced by 1 second for each strength point
+	var/pulltime = 10 SECONDS
 	redstone_structure = TRUE
 	var/toggled = FALSE
 
@@ -84,7 +86,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = 10 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
+		var/used_time = pulltime - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		if(do_after(user, used_time))
@@ -402,11 +404,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/togg = FALSE
 	var/base_state = "floorhatch"
 	resistance_flags = INDESTRUCTIBLE
-/*
+
 /obj/structure/floordoor/Initialize()
-	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40)
+	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
-*/
+
 /obj/structure/floordoor/atom_break(damage_flag)
 	. = ..()
 	obj_flags = null

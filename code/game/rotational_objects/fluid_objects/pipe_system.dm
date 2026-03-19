@@ -24,6 +24,7 @@
 
 /obj/structure/water_pipe/Initialize()
 	. = ..()
+	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	for(var/direction in GLOB.cardinals_multiz)
 		var/turf/cardinal_turf = get_step_multiz(src, direction)
 		for(var/obj/structure/water_pipe/pipe in cardinal_turf)
@@ -167,16 +168,20 @@
 			new_overlay += i
 	remove_all_steam_creaks()
 	icon_state = "[new_overlay]"
-	if(!new_overlay)
-		icon_state = "base"
+	var/vertical
 	for(var/i in connected)
 		if(!connected[i])
 			continue
 		var/num = text2num(i)
 		if(num & UP)
 			. += "up"
+			vertical = TRUE
 		else if(num & DOWN)
 			. += "down"
+			vertical = TRUE
+
+	if(!new_overlay) // makes it look like the pipe just goes up/down
+		icon_state = vertical ? "" : "base"
 
 	manipulate_possible_steam_creaks()
 
