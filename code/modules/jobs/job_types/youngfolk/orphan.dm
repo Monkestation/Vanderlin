@@ -68,23 +68,39 @@
 		orphanage_renovated = TRUE
 
 	if(orphanage_renovated)
+		backr = /obj/item/storage/backpack/satchel
+		backpack_contents = list(
+			/obj/item/natural/feather,
+			/obj/item/paper/scroll,
+			/obj/item/paper,
+			/obj/item/paper,
+		)
+		shoes = /obj/item/clothing/shoes/simpleshoes/buckle
+		neck = /obj/item/storage/belt/pouch/coins/poor
+		belt = /obj/item/storage/belt/leather
 		if(equipped_human.gender == MALE)
-			neck = /obj/item/storage/belt/pouch/coins/poor
+			cloak = /obj/item/clothing/cloak/half
+			head = pick(
+				/obj/item/clothing/head/courtierhat,
+				/obj/item/clothing/head/fancyhat,
+			)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/random
 			pants = /obj/item/clothing/pants/tights/colored/random
-			belt = /obj/item/storage/belt/leather/rope
-			shoes = /obj/item/clothing/shoes/simpleshoes/buckle
 		else
-			neck = /obj/item/storage/belt/pouch/coins/poor
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-			belt = /obj/item/storage/belt/leather/rope
-			shoes = /obj/item/clothing/shoes/simpleshoes/buckle
 	else
+	belt = /obj/item/storage/belt/leather/rope
+	shoes = /obj/item/clothing/shoes/simpleshoes
+	backr = /obj/item/storage/backpack/satchel/cloth
+	backpack_contents = list(
+		/obj/item/natural/feather,
+		/obj/item/paper,
+		/obj/item/paper,
+		/obj/item/paper,
+	)
 		if(equipped_human.gender == MALE)
 			shirt = /obj/item/clothing/shirt/undershirt/colored/random
 			pants = /obj/item/clothing/pants/tights/colored/random
-			belt = /obj/item/storage/belt/leather/rope
-			shoes = /obj/item/clothing/shoes/simpleshoes
 		else
 			shirt = /obj/item/clothing/shirt/dress/gen/colored/random
 			pants = /obj/item/clothing/pants/tights/colored/random
@@ -131,7 +147,6 @@
 		orphanage_renovated = TRUE
 
 	if(orphanage_renovated)
-		//PUT GOOD CLOTHES HERE
 		head = pick(
 			/obj/item/clothing/head/helmet/kettle/iron,
 			/obj/item/clothing/head/helmet/ironpot,
@@ -144,7 +159,6 @@
 		shoes = /obj/item/clothing/shoes/boots/leather
 		beltr = /obj/item/weapon/mace/woodclub
 	else
-		//PUT BAD CLOTHES HERE
 		head = pick(
 			/obj/item/clothing/head/helmet/kettle/iron,
 			/obj/item/clothing/head/helmet/ironpot,
@@ -193,15 +207,14 @@
 		orphanage_renovated = TRUE
 
 	if(orphanage_renovated)
-		//PUT GOOD CLOTHES HERE
 		neck = /obj/item/storage/belt/pouch/coins/poor
+		head = /obj/item/clothing/head/helmet/leather/headscarf
 		armor = /obj/item/clothing/shirt/tunic
 		shirt = /obj/item/clothing/shirt/undershirt/colored/random
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather
 		shoes = /obj/item/clothing/shoes/boots/leather
 	else
-		//PUT BAD CLOTHES HERE
 		armor = /obj/item/clothing/shirt/tunic
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather/rope
