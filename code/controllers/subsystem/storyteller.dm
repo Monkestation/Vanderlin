@@ -487,7 +487,7 @@ SUBSYSTEM_DEF(gamemode)
 				current_roundstart_event.preferred_events[new e_control] = preferred_copy[e_control]
 			preferred_copy = current_roundstart_event.preferred_events.Copy()
 			selected_event = null
-		else if(!selected_event.canSpawnEvent(player_count))
+		else if(!selected_event?.canSpawnEvent(player_count))
 			preferred_copy -= selected_event
 			selected_event = null
 
