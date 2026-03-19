@@ -49,7 +49,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, rand(-2, -5))
+	H.adjust_stat_modifier(STATMOD_QUIRK, list(STAT_INTELLIGENCE = rand(-2, -5)))
 
 	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	REMOVE_TRAIT(H, TRAIT_UGLY, QUIRK_TRAIT)
@@ -66,7 +66,7 @@
 	var/mob/living/carbon/human/H = owner
 	// Remove stat penalty (inverse of what was applied)
 	// This is approximate since we randomized on spawn
-	H.adjust_stat_modifier(STATMOD_QUIRK, STATKEY_INT, 3)
+	H.adjust_stat_modifier(STATMOD_QUIRK, list(STAT_INTELLIGENCE = 3))
 
 /datum/quirk/peculiarity/ugly
 	name = "Ugly"
@@ -96,13 +96,13 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
+	H.virginity = TRUE
 
 /datum/quirk/peculiarity/virgin/after_job_spawn()
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	H.virginity = FALSE
+	H.virginity = TRUE
 
 
 /datum/quirk/peculiarity/mystery_box
@@ -134,24 +134,24 @@
 	find_keeper()
 
 /datum/quirk/peculiarity/mystery_box/proc/find_keeper()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/human/box_owner = owner
 
 	// Find a random player to be the keeper
 	var/list/possible_keepers = list()
-	for(var/mob/living/carbon/human/P in GLOB.player_list)
-		if(P != H && P.mind && P.stat != DEAD)
-			possible_keepers += P
+	for(var/mob/living/carbon/human/possible_keeper in GLOB.player_list)
+		if(possible_keeper != box_owner && possible_keeper.mind && possible_keeper.stat != DEAD && !isautomaton(possible_keeper))
+			possible_keepers += possible_keeper
 
 	if(length(possible_keepers))
 		keeper = pick(possible_keepers)
 
 		// Give keeper the knowledge with flavor
 		to_chat(keeper, span_notice("A memory surfaces... you know the passcode to a mysterious box: \"[passcode]\""))
-		keeper.mind.store_memory("Passcode to [H.real_name]'s box: \"[passcode]\"")
+		keeper.mind.store_memory("Passcode to [box_owner.real_name]'s box: \"[passcode]\"")
 
-		to_chat(H, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
+		to_chat(box_owner, span_notice("You remember that [keeper.real_name] knows how to open this box..."))
 	else
-		to_chat(H, span_warning("You can't remember who knows the passcode..."))
+		to_chat(box_owner, span_warning("You can't remember who knows the passcode..."))
 
 	RegisterSignal(mystery_box, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine), TRUE)
 
@@ -192,13 +192,17 @@
 	name = "locked box"
 	desc = "A mysterious locked box."
 	icon = 'icons/roguetown/items/misc.dmi'
-	icon_state = "mimic_trinket"
+	icon_state = "mysterybox"
+	detail_tag = "_detail"
 	var/datum/quirk/peculiarity/mystery_box/linked_quirk
 	var/listening = TRUE
+	dropshrink = 0.8
 
 /obj/item/mystery/Initialize()
 	. = ..()
 	become_hearing_sensitive()
+	detail_color = pick_assoc(COLOR_MAP)
+	update_appearance()
 
 /obj/item/mystery/Destroy()
 	lose_hearing_sensitivity()

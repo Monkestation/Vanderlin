@@ -1,6 +1,24 @@
 /mob/living/carbon/human/species/halforc
 	race = /datum/species/halforc
 
+/datum/attribute_holder/sheet/job/species/halforc
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+	)
+
+/datum/attribute_holder/sheet/job/species/halforc/female
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -1,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+	)
+
 /datum/species/halforc
 	name = "Half-Orc"
 	id = SPEC_ID_HALF_ORC
@@ -21,8 +39,6 @@
 	Many are nigh-indistinguishable visually from full orcs, save for their remaining grasp on self-control.\
 	\n\n\
 	THIS IS AN <I>EXTREMELY</I> DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
-
-	skin_tone_wording = "Clan"
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_DEADNOSE, TRAIT_STINKY)
@@ -67,13 +83,13 @@
 
 	offset_features_f = list()
 
-	specstats_m = list(STATKEY_STR = 2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = 2, STATKEY_END = 1, STATKEY_SPD = 0, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 2, STATKEY_PER = -2, STATKEY_INT = -1, STATKEY_CON = 1, STATKEY_END = 1, STATKEY_SPD = 0, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/halforc
+	statsheet_female = /datum/attribute_holder/sheet/job/species/halforc/female
 
 	enflamed_icon = "widefire"
 
 	exotic_bloodtype = /datum/blood_type/human/horc
-	meat = /obj/item/reagent_containers/food/snacks/meat/strange
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/strange = 0.5)
 
 	customizers = list(
 		/datum/customizer/organ/ears/halforc,
@@ -156,8 +172,8 @@
 	))
 
 /datum/species/halforc/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/other/halforcm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/other/halforcf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/other/halforcm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/other/halforcf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/halforc/get_possible_surnames(gender = MALE)

@@ -11,7 +11,7 @@
 \---------------*/
 
 /obj/item/reagent_containers/food/snacks/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_VPOOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	do_random_pixel_offset = FALSE // disables the random placement on creation for this object
 
@@ -45,6 +45,7 @@
 	desc = "A vile decaying morsel, its last hope is to become food for the soil."
 	color = "#6c6897"
 	eat_effect = /datum/status_effect/debuff/rotfood
+	list_reagents = list(/datum/reagent/yuck = 5)
 
 /obj/item/reagent_containers/food/snacks/rotten/Initialize()
 	var/mutable_appearance/rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
@@ -57,7 +58,7 @@
 	icon_state = "meat"
 
 /obj/item/reagent_containers/food/snacks/rotten/bacon
-	name = "rotten pigflesh"
+	name = "rotten flesh"
 	icon_state = "pigflesh"
 
 /obj/item/reagent_containers/food/snacks/rotten/sausage
@@ -171,6 +172,7 @@
 	fillsounds = list('sound/items/fillcup.ogg')
 	metalizer_result = /obj/item/reagent_containers/glass/bowl/iron
 	smeltresult = /obj/item/fertilizer/ash
+	var/salad
 	var/max_usages = 5
 	var/usages = 0
 	var/dirty = FALSE
@@ -238,6 +240,22 @@
 		else
 			to_chat(user, span_notice("This platter is already clean."))
 			return
+	if(istype(I, /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced))
+		to_chat(user, span_warning("Tossing up a salad..."))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+		if(do_after(user, short_cooktime, src))
+			var/obj/item/reagent_containers/food/snacks/salad/salad = new /obj/item/reagent_containers/food/snacks/salad(get_turf(src))
+			salad.set_quality(recipe_quality)
+			salad.icon_state = src.icon_state
+			salad.trash = src.type
+			salad.drop_sound = src.drop_sound
+			salad.add_overlay("salad_base")
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(I)
+			qdel(src)
+		return
 	if(reagents.total_volume > 0 && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		to_chat(user, span_warning("You can't clean the [src] while it has something inside of it!"))
 		return
@@ -414,6 +432,11 @@
 	taste_mult = 3
 	hydration = 2
 
+/datum/reagent/consumable/soup/oatmeal/sunreed
+	name = "sweet-reed"
+	color = "#aa9539"
+	taste_description = "sweet and soft sunreed kernels"
+
 /datum/reagent/consumable/soup/veggie
 	name = "vegetable soup"
 	description = ""
@@ -426,6 +449,10 @@
 	color = "#869256"
 	taste_description = "potato broth"
 
+/datum/reagent/consumable/soup/veggie/pompkaun
+	color = "#df7d0e"
+	taste_description = "pompkaun soup"
+
 /datum/reagent/consumable/soup/veggie/onion
 	color = "#a6b457"
 	taste_description = "boiled onions"
@@ -437,6 +464,12 @@
 /datum/reagent/consumable/soup/veggie/turnip
 	color = "#becf9d"
 	taste_description = "boiled turnip"
+
+
+/datum/reagent/consumable/soup/veggie/tamto
+	name = "tamto soup"
+	color = "#e2461f"
+	taste_description = "tamto soup"
 
 /datum/reagent/consumable/soup/egg
 	name = "egg soup"
@@ -526,7 +559,7 @@
 /datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M)
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER ))
 		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_MAXIMUM)
+			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_NORMAL)
 		M.adjustBruteLoss(-0.2, 0)
 		M.adjustFireLoss(-0.2, 0)
 		M.adjust_energy(5)
@@ -598,18 +631,66 @@
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)
-		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*5))
+		short_cooktime = (40 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			var/obj/item/reagent_containers/food/snacks/dough_base/base = new /obj/item/reagent_containers/food/snacks/dough_base(get_turf(src))
 			base.set_quality(recipe_quality)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 			qdel(src)
 	else
 		..()
 
+// -------------- Sunreed Powder -----------------
+/obj/item/reagent_containers/powder/sunreed_flour
+	name = "sunreed powder"
+	desc = "Desperation breeds innovation."
+	gender = PLURAL
+	icon_state = "maize_flour"
+	list_reagents = list(/datum/reagent/flour = 1)
+	volume = 1
+	sellprice = 0
+	var/water_added
 
+/obj/item/reagent_containers/powder/sunreed_flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
+	new /obj/effect/decal/cleanable/food/flour(get_turf(src))
+	..()
+	qdel(src)
+
+/obj/item/reagent_containers/powder/sunreed_flour/attackby(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	var/found_table = locate(/obj/structure/table) in (loc)
+	var/obj/item/reagent_containers/glass/R = I
+	if(isturf(loc)&& (found_table))
+		if(!istype(R) || (water_added))
+			return ..()
+		if(!R.reagents.has_reagent(/datum/reagent/water, 10))
+			to_chat(user, span_notice("Needs more water to work it."))
+			return TRUE
+		to_chat(user, span_notice("Adding water, now it's time to knead it..."))
+		playsound(get_turf(user), 'sound/foley/splishy.ogg', 100, TRUE, -1)
+		if(do_after(user, 1.5 SECONDS, src))
+			name = "wet sunreed powder"
+			desc = "All that's left is to invent."
+			R.reagents.remove_reagent(/datum/reagent/water, 10)
+			water_added = TRUE
+			icon_state = "maize_flour_wet"
+	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+/obj/item/reagent_containers/powder/sunreed_flour/attack_hand(mob/living/user)
+	if(water_added)
+		short_cooktime = (40 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
+		if(do_after(user, short_cooktime, src))
+			var/obj/item/reagent_containers/food/snacks/masa_base/base = new /obj/item/reagent_containers/food/snacks/masa_base(get_turf(src))
+			base.set_quality(recipe_quality)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(src)
+	else
+		..()
 
 // -------------- SALT -----------------
 /obj/item/reagent_containers/powder/salt

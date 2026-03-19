@@ -78,6 +78,7 @@
 	// owner.current should now be the original human mob, if not something is terribly wrong
 	if(!silent && owner.current)
 		to_chat(owner.current,span_danger("I am no longer a [special_role]!"))
+	REMOVE_TRAIT(owner, TRAIT_NO_TRANSFORM, REF(src))
 	owner.special_role = null
 	owner.current.remove_spell(/datum/action/cooldown/spell/undirected/werewolf_form)
 	owner.current.remove_language(/datum/language/beast)
@@ -122,6 +123,8 @@
 
 /mob/living/carbon/human/proc/can_werewolf()
 	if(!mind)
+		return FALSE
+	if(is_antag_banned(ckey, ROLE_WEREWOLF))
 		return FALSE
 	if(mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE
@@ -222,7 +225,7 @@
 	force = 15
 	block_chance = 0
 	wdefense = AVERAGE_PARRY
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE
 	w_class = WEIGHT_CLASS_BULKY

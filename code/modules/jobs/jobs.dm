@@ -29,7 +29,6 @@ GLOBAL_PROTECT(noble_positions)
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/royalknight::title,
-	/datum/job/veteran::title,
 	/datum/job/guardsman::title,
 	/datum/job/lieutenant::title,
 	/datum/job/men_at_arms::title,
@@ -45,6 +44,7 @@ GLOBAL_PROTECT(garrison_positions)
 
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
+	/datum/job/gmtemplar::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
@@ -63,8 +63,7 @@ GLOBAL_PROTECT(inquisition_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
-	/datum/job/armorsmith::title,
-	/datum/job/weaponsmith::title,
+	/datum/job/blacksmith::title,
 	/datum/job/tailor::title,
 	/datum/job/alchemist::title,
 	/datum/job/artificer::title,
@@ -72,7 +71,7 @@ GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/feldsher::title,
 	/datum/job/apothecary::title,
 	/datum/job/scribe::title,
-	/datum/job/gaffer::title,
+	/datum/job/tomb_warden::title,
 	/datum/job/butler::title,
 	/datum/job/persistence/carpenter::title,
 	/datum/job/persistence/stonemason::title,
@@ -104,7 +103,6 @@ GLOBAL_LIST_INIT(apprentices_positions, list(
 	/datum/job/mageapprentice::title,
 	/datum/job/servant::title,
 	/datum/job/tapster::title,
-	/datum/job/gaffer_assistant::title,
 	/datum/job/clinicapprentice::title,
 	))
 GLOBAL_PROTECT(apprentices_positions)
@@ -125,6 +123,8 @@ GLOBAL_LIST_INIT(company_positions, list(
 GLOBAL_PROTECT(company_positions)
 
 GLOBAL_LIST_INIT(allmig_positions, list(
+	/datum/job/bogwitch::title,
+	/datum/job/bog_apprentice::title,
 	/datum/job/pilgrim::title,
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,

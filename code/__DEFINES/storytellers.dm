@@ -114,6 +114,9 @@
 #define GAMEMODE_PANEL_MAIN "Main"
 #define GAMEMODE_PANEL_VARIABLES "Variables"
 
+/// The concrete number for what is considered "lowpop" on Vanderlin
+#define LOWPOP_THRESHOLD 35
+
 #define MUNDANE_POINT_THRESHOLD 20
 #define MODERATE_POINT_THRESHOLD 35
 #define MAJOR_POINT_THRESHOLD 70
@@ -209,9 +212,19 @@
 #define MALUM "Malum"
 #define EORA "Eora"
 #define DENDOR "Dendor"
+#define DIVINE_CENTRIST "Enlightened Centrism"
 
 // Inhumen pantheon
 #define ZIZO "Zizo"
 #define BAOTHA "Baotha"
 #define GRAGGAR "Graggar"
 #define MATTHIOS "Matthios"
+
+// Devotion Classes
+#define DEVOTION_CLASS_PRIEST "Priest"
+#define DEVOTION_CLASS_GRANDMASTER "Grandmaster"
+#define DEVOTION_CLASS_TEMPLAR "Templar"
+#define DEVOTION_CLASS_ACOLYTE "Acolyte"
+#define DEVOTION_CLASS_ABSOLVER "Absolver"
+#define DEVOTION_CLASS_CLERIC "Cleric"
+#define DEVOTION_CLASS_CHURCHLING "Churchling"

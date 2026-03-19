@@ -28,53 +28,63 @@
 	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
 	if(proximity && istype(G) && G.Touch(A,1))
 		return TRUE
+
 	//This signal is needed to prevent gloves of the north star + hulk.
 	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
+
 	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
+
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
 		rmb_stam_penalty = 1.5	//Uses a modifer instead of a flat addition, less than weapons no matter what rn. 50% extra stam cost basically.
+
 	if(isliving(A))
 		var/mob/living/L = A
 		if(!used_intent.noaa)
 			playsound(src, pick(GLOB.unarmed_swingmiss), 100, FALSE)
-//			src.emote("attackgrunt")
+
 		var/intent_drain = used_intent.get_releasedrain()
 		adjust_stamina(ceil(intent_drain * rmb_stam_penalty))
+
 		if(L.checkmiss(src))
 			return TRUE
+
 		if(!L.checkdefense(used_intent, src))
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
 			L.attack_hand(src, modifiers)
+
 		return TRUE
+
 	var/item_skip = FALSE
 	if(isitem(A))
 		var/obj/item/I = A
 		if(I.w_class < WEIGHT_CLASS_GIGANTIC)
 			item_skip = TRUE
-	if(!item_skip)
-		if(used_intent.type == INTENT_GRAB)
-			var/obj/AM = A
-			if(istype(AM) && !AM.anchored)
-				start_pulling(A) //add params to grab bodyparts based on loc
+
+	if(!item_skip && ismovable(A))
+		var/atom/movable/thing = A
+		if(istype(used_intent, INTENT_GRAB))
+			if(!thing.anchored)
+				start_pulling(thing) //add params to grab bodyparts based on loc
 				return TRUE
-		if(used_intent.type == INTENT_DISARM)
-			var/obj/AM = A
-			if(istype(AM) && !AM.anchored)
-				var/jadded = max(100-(STASTR*10),5)
-				if(adjust_stamina(jadded))
-					visible_message(span_info("[src] pushes [AM]."))
-					PushAM(AM, MOVE_FORCE_STRONG)
-				else
-					visible_message(span_warning("[src] pushes [AM]."))
+
+		if(istype(used_intent, INTENT_DISARM))
+			if(!thing.anchored)
+				var/stam_loss = max(100 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) * 10), 5)
+				visible_message(span_info("[src] pushes [thing]."), span_info("I push [thing]."))
+				if(adjust_stamina(stam_loss))
+					PushAM(thing, MOVE_FORCE_STRONG)
+
 				changeNext_move(CLICK_CD_MELEE)
 				return TRUE
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(A.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 			return TRUE
+
 	A.attack_hand(src, modifiers)
 
 /mob/living/attack_hand_secondary(mob/user, list/modifiers)
@@ -84,12 +94,6 @@
 
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		// Throw hands
-
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -98,23 +102,22 @@
 	if(user.cmode)
 		return
 
-	if(ishuman(src) && ishuman(user))
-		var/mob/living/carbon/human/target = src
-		var/datum/job/job = SSjob.GetJob(target.job)
+	if(ishuman(user))
+		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		if(length(user.return_apprentices()) >= user.return_max_apprentices())
 			return
-		if((target.age == AGE_CHILD || job?.type == /datum/job/vagrant) && target.mind && !target.is_apprentice())
-			to_chat(user, span_notice("You offer apprenticeship to [target]."))
-			user.make_apprentice(target)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-/turf/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	user.changeNext_move(CLICK_CD_MELEE)
-	user.face_atom(src)
-	if(user.cmode)
-		if(user.rmb_intent)
-			user.rmb_intent.special_attack(user, src)
+		if(is_apprentice())
+			return
+		var/datum/job/my_job = mind?.assigned_role
+		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
+			return
+		var/choice = browser_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+		if(choice != CHOICE_CONFIRM)
+			return
+		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+			return
+		to_chat(user, span_notice("You offer apprenticeship to [src]."))
+		user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -165,7 +168,7 @@
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE, used_item = FALSE, atom_bounce = TRUE)
 	next_attack_msg.Cut()
 
-	var/dmg = user.STASTR*0.5
+	var/dmg = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)*0.5
 	dmg *= HAS_TRAIT(user, TRAIT_STRONGBITE) ? 2 : \
 		affecting.has_wound(/datum/wound/bite) ? 1 : 0
 	if(dmg)
@@ -174,7 +177,7 @@
 			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE)
 			playsound(src, "smallslash", 100, TRUE, -1)
 			if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
-				var/poison = user.STACON/2
+				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
 				src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
 				src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
 				to_chat(user, span_warning("Your fangs inject venom into [src]!"))
@@ -227,93 +230,94 @@
 
 
 /mob/living/MiddleClickOn(atom/A, list/modifiers)
-	..()
+	. = ..()
 	if(!mmb_intent)
 		if(!A.Adjacent(src))
 			return
 		A.MiddleClick(src, modifiers)
-	else
-		switch(mmb_intent.type)
-			if(INTENT_KICK)
-				if(src.usable_legs < 2)
+		return
+
+	SEND_SIGNAL(src, COMSIG_MOB_PRE_SPECIAL_MIDDLE, A)
+
+	switch(mmb_intent.type)
+		if(INTENT_KICK)
+			if(src.usable_legs < 2)
+				return
+			if(!A.Adjacent(src))
+				return
+			if(A == src)
+				var/list/mobs_here = list()
+				for(var/mob/M in get_turf(src))
+					if(M.invisibility || M == src)
+						continue
+					mobs_here += M
+				if(mobs_here.len)
+					A = pick(mobs_here)
+				if(A == src) //auto aim couldn't select another target
 					return
-				if(!A.Adjacent(src))
-					return
-				if(A == src)
-					var/list/mobs_here = list()
-					for(var/mob/M in get_turf(src))
-						if(M.invisibility || M == src)
-							continue
-						mobs_here += M
-					if(mobs_here.len)
-						A = pick(mobs_here)
-					if(A == src) //auto aim couldn't select another target
+			if(IsOffBalanced())
+				to_chat(src, span_warning("I haven't regained my balance yet."))
+				return
+			changeNext_move(mmb_intent.clickcd)
+			face_atom(A)
+
+			if(ismob(A))
+				var/mob/living/M = A
+				if(src.used_intent)
+
+					do_attack_animation(M, visual_effect_icon = ATTACK_EFFECT_KICK, used_item = FALSE, atom_bounce = TRUE)
+					playsound(src, pick(PUNCHWOOSH), 100, FALSE, -1)
+
+					sleep(src.used_intent.swingdelay)
+					if(QDELETED(src) || QDELETED(M))
 						return
-				if(IsOffBalanced())
-					to_chat(src, span_warning("I haven't regained my balance yet."))
-					return
-				changeNext_move(mmb_intent.clickcd)
-				face_atom(A)
-
-				if(ismob(A))
-					var/mob/living/M = A
-					if(src.used_intent)
-
-						do_attack_animation(M, visual_effect_icon = ATTACK_EFFECT_KICK, used_item = FALSE, atom_bounce = TRUE)
-						playsound(src, pick(PUNCHWOOSH), 100, FALSE, -1)
-
-						sleep(src.used_intent.swingdelay)
-						if(QDELETED(src) || QDELETED(M))
-							return
-						if(!M.Adjacent(src))
-							return
-						if(src.incapacitated(IGNORE_GRAB))
-							return
-						if(M.checkmiss(src))
-							return
-						if(M.checkdefense(src.used_intent, src))
-							return
+					if(!M.Adjacent(src))
+						return
+					if(src.incapacitated(IGNORE_GRAB))
+						return
 					if(M.checkmiss(src))
 						return
-					if(!M.checkdefense(mmb_intent, src))
-						if(ishuman(M))
-							var/mob/living/carbon/human/H = M
-							H.dna.species.kicked(src, H)
-						else
-							M.onkick(src)
-							OffBalance(15) // Off balance for human enemies moved to dna.species.onkick
-				else
-					A.onkick(src)
-					OffBalance(10)
-				return
-			if(INTENT_JUMP)
-				jump_action(A)
-			if(INTENT_BITE)
-				if(!A.Adjacent(src))
-					return
-				if(A == src)
-					return
-				if(src.incapacitated(IGNORE_GRAB))
-					return
-				if(stat != CONSCIOUS)
-					return
-				if(is_mouth_covered())
-					to_chat(src, span_warning("My mouth is blocked."))
-					return
-				if(HAS_TRAIT(src, TRAIT_NO_BITE))
-					to_chat(src, span_warning("I can't bite."))
-					return
-				if(iscarbon(src))
-					var/mob/living/carbon/C = src
-					if(C.mouth)
-						to_chat(src, span_warning("My mouth has something in it."))
+					if(M.checkdefense(src.used_intent, src))
 						return
-				changeNext_move(mmb_intent.clickcd)
-				face_atom(A)
-				bite(A)
+				if(M.checkmiss(src))
+					return
+				if(!M.checkdefense(mmb_intent, src))
+					if(ishuman(M))
+						var/mob/living/carbon/human/H = M
+						H.dna.species.kicked(src, H)
+					else
+						M.onkick(src)
+						OffBalance(15) // Off balance for human enemies moved to dna.species.onkick
+			else
+				A.onkick(src)
+				OffBalance(10)
+		if(INTENT_JUMP)
+			jump_action(A)
+		if(INTENT_BITE)
+			if(!A.Adjacent(src))
 				return
-			if(INTENT_STEAL)
-				steal_action(A)
+			if(A == src)
+				return
+			if(src.incapacitated(IGNORE_GRAB))
+				return
+			if(stat != CONSCIOUS)
+				return
+			if(is_mouth_covered())
+				to_chat(src, span_warning("My mouth is blocked."))
+				return
+			if(HAS_TRAIT(src, TRAIT_NO_BITE))
+				to_chat(src, span_warning("I can't bite."))
+				return
+			if(iscarbon(src))
+				var/mob/living/carbon/C = src
+				if(C.mouth)
+					to_chat(src, span_warning("My mouth has something in it."))
+					return
+			changeNext_move(mmb_intent.clickcd)
+			face_atom(A)
+			bite(A)
+		if(INTENT_STEAL)
+			steal_action(A)
 
 //Return TRUE to cancel other attack hand effects that respect it.
 /atom/proc/attack_hand(mob/user, list/modifiers)
@@ -330,6 +334,11 @@
 /atom/proc/attack_hand_secondary(mob/user, list/modifiers)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(user.cmode)
+		if(user.rmb_intent?.special_attack(user, src))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 //Return a non FALSE value to cancel whatever called this from propagating, if it respects it.
@@ -402,16 +411,16 @@
 	if(ishuman(A))
 		var/mob/living/carbon/human/thief = src
 		var/mob/living/carbon/human/victim = A
-		var/thiefskill = thief.get_skill_level(/datum/skill/misc/stealing) + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
-		var/thief_skill_base = thief.get_skill_level(/datum/skill/misc/stealing)
+		var/thiefskill = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing) + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
+		var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
 		if(thiefskill <= 0)
 			thiefskill = 1
 		if(thief.rogue_sneaking)
 			thiefskill += 1
-		var/stealroll = roll("[thiefskill]d6")
-		var/target_perception = victim.STAPER
-		var/target_skill = victim.get_skill_level(/datum/skill/misc/stealing)
-		var/exp_to_gain = thief.STAINT * 1.5
+		var/stealroll = roll("[floor(thiefskill)]d6")
+		var/target_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
+		var/target_skill = GET_MOB_SKILL_VALUE_OLD(victim, /datum/attribute/skill/misc/stealing)
+		var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
 		var/list/stealablezones = list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
 		var/list/stealpos = list()
 		if(client?.prefs.showrolls)
@@ -465,7 +474,7 @@
 					put_in_active_hand(picked)
 					to_chat(thief, span_green("I stole [picked]!"))
 					log_combat(thief, victim, "stole [picked] from ")
-					exp_to_gain += thief.get_learning_boon(thiefskill) * 5
+					exp_to_gain += thief.get_learning_boon(/datum/attribute/skill/misc/stealing) * 5
 					if(victim.client && victim.stat != DEAD)
 						SEND_SIGNAL(thief, COMSIG_ITEM_STOLEN, victim)
 						record_featured_stat(FEATURED_STATS_THIEVES, thief)
@@ -488,7 +497,7 @@
 		if(stealroll < target_perception)
 			exp_to_gain /= 2
 			to_chat(thief, span_danger("I failed to pick the pocket!"))
-		thief.adjust_experience(/datum/skill/misc/stealing, exp_to_gain, FALSE)
+		thief.adjust_experience(/datum/attribute/skill/misc/stealing, exp_to_gain, FALSE)
 		changeNext_move(mmb_intent.clickcd)
 
 /mob/living/proc/jump_action(atom/A)
@@ -522,6 +531,10 @@
 		if(!HAS_TRAIT(src, TRAIT_ZJUMP))
 			to_chat(src, span_warning("That's too high for me..."))
 			return
+
+	if(has_status_effect(/datum/status_effect/debuff/exposed))
+		to_chat(src, span_warning("I'm exposed and lost my footing! I can't jump!"))
+		return FALSE
 
 	changeNext_move(mmb_intent?.clickcd ? mmb_intent.clickcd : CLICK_CD_MELEE)
 
@@ -561,7 +574,7 @@
 	var/flip_direction = FLIP_DIRECTION_CLOCKWISE
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
-	if(get_skill_level(/datum/skill/misc/athletics) > 4)
+	if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4 || HAS_TRAIT(src, TRAIT_FLIP_JUMP))
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
@@ -614,7 +627,7 @@
 		if(used_intent.type == INTENT_DISARM)
 			var/obj/structure/AM = A
 			if(istype(AM) && !AM.anchored)
-				var/jadded = max(100-(STASTR*10),5)
+				var/jadded = max(100-(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)*10),5)
 				if(adjust_stamina(jadded))
 					visible_message(span_info("[src] pushes [AM]."))
 					PushAM(AM, MOVE_FORCE_STRONG)

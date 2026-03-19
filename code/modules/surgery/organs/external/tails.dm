@@ -17,6 +17,9 @@
 /obj/item/organ/tail/cat
 	name = "cat tail"
 
+/obj/item/organ/tail/demihuman
+	name = "hollowkin tail"
+
 /obj/item/organ/tail/harpy
 	name = "harpy plumage"
 	accessory_type = /datum/sprite_accessory/tail/hawk

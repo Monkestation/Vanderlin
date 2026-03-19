@@ -14,13 +14,13 @@
 	name = "corset"
 	desc = "A leather binding to constrict one's figure... and lungs."
 	icon_state = "corset"
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
 
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
 	name = "amazonian armor"
-	desc = "Fur skirt and maille chest holder, typically worn by warrior women of the isle of Issa."
+	desc = "Fur skirt and maille chest holder, it doesn't cover very much."
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
@@ -36,6 +36,8 @@
 	item_weight = 7 * IRON_MULTIPLIER
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
 
+	material_category = ARMOR_MAT_CHAINMAIL
+
 //................ Brigandine ............... //
 /obj/item/clothing/armor/brigandine
 	name = "brigandine"
@@ -44,7 +46,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -87,7 +89,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE

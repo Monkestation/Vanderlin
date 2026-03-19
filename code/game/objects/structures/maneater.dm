@@ -102,22 +102,24 @@
 
 /obj/structure/flora/grass/maneater/real/user_unbuckle_mob(mob/living/M, mob/user)
 	if(obj_broken)
-		..()
+		return ..()
+	if(!isliving(user))
 		return
-	if(isliving(user))
-		var/mob/living/L = user
-		var/time2mount = CLAMP((L.STASTR), 1, 99)
-		user.changeNext_move(CLICK_CD_RAPID)
-		if(user != M)
-			if(prob(time2mount))
-				..()
-			else
-				user.visible_message("<span class='warning'>[user] tries to pull [M] free of [src]!</span>")
-			return
-		if(prob(time2mount))
-			..()
-		else
-			user.visible_message("<span class='warning'>[user] tries to break free of [src]!</span>")
+	var/mob/living/L = user
+	var/wrestling = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling)
+	var/resist_chance = PERCENT((1 + 0.5 * wrestling) / (21 - GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE)))
+	resist_chance *= GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) / 10 // so 10 luck == 1, 11 == 1.1, 9 == 0.9
+	user.changeNext_move(CLICK_CD_RAPID)
+	if(prob(resist_chance))
+		playsound(M, 'sound/combat/grabbreak.ogg', 100)
+		return ..()
+	if(user != M)
+		user.visible_message(span_danger("[user] tries to pull [M] free of [src]!"), span_danger("I try to pull [M] free of [src]!"))
+	else
+		user.visible_message(span_danger("[user] tries to break free of [src]!"), span_danger("I try to break free of [src]!"))
+	if(prob(10))
+		playsound(M, 'sound/combat/grabstruggle.ogg', 75)
+
 
 /obj/structure/flora/grass/maneater/real/user_buckle_mob(mob/living/M, mob/living/user) //Don't want them getting put on the rack other than by spiking
 	return
@@ -132,12 +134,16 @@
 		return
 	if(isliving(AM))
 		var/mob/living/L = AM
+		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY))
+			return
 		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		if(L.status_flags & GODMODE)
 			return
 		if(L.buckling)
 			return // Something else is buckling them, maybe another maneater even
+		if(!L.client)
+			return
 		buckle_mob(L, TRUE, check_loc = FALSE)
 		START_PROCESSING(SSobj, src)
 		if(!HAS_TRAIT(L, TRAIT_NOPAIN))

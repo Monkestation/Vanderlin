@@ -3,8 +3,8 @@
 	desc = "A pesky bird, beloved by Necrites. They cluster around graveyards and are said to carry the souls of the dead on their wings."
 	icon_state = "crow"
 	icon = 'icons/roguetown/mob/monster/crow.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	obj_flags = CAN_BE_HIT
@@ -21,8 +21,9 @@
 	desc = "A pesky, fried bird. The Grenzelhoftians say one 'eats zad' if they are mistaken or outdone."
 	icon_state = "fcrow"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
+	foodtype = MEAT
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null
 	rotprocess = SHELFLIFE_SHORT
@@ -57,7 +58,7 @@
 	else
 		if(isliving(user))
 			var/mob/living/L = user
-			if(prob(L.STASPD * 2))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 				..()
 			else
 				if(isturf(loc))
@@ -96,7 +97,7 @@
 	if(!dead)
 		if(isliving(user) && isturf(loc))
 			var/mob/living/L = user
-			if(prob(L.STASPD * 2))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 				..()
 			else
 				to_chat(user, "<span class='warning'>[src] gets away!</span>")

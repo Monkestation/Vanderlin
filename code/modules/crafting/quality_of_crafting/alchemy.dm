@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/alchemy
 	abstract_type = /datum/repeatable_crafting_recipe/alchemy
-	skillcraft = /datum/skill/craft/alchemy
+	skillcraft = /datum/attribute/skill/craft/alchemy
 	craftdiff = 0
 	category = "Alchemy"
 

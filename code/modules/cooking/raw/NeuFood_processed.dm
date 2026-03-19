@@ -10,9 +10,9 @@
 	name = "fat"
 	desc = ""
 	icon_state = "fat"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
+	nutrition = FAT_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/food)
@@ -30,23 +30,23 @@
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
 	if(user.mind)
-		long_cooktime = (90 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*15))
+		long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*15))
 	if(isturf(loc)&& (found_table))
 		if(!istype(R))
 			return ..()
-		if(!R.reagents.has_reagent(/datum/reagent/consumable/sugar, 33))
+		if(!R.reagents.has_reagent(/datum/reagent/consumable/sugar, 30))
 			to_chat(user, span_notice("Needs more sugar to work it."))
 			return TRUE
-		if(user.get_skill_level(/datum/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
+		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
 			to_chat(user, span_warning("Gelatine is much too strange for you."))
 			return
 		to_chat(user, span_notice("Congealing the sugar..."))
 		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
 		if(do_after(user, long_cooktime, src))
 			new /obj/item/reagent_containers/food/snacks/jellycake_base(loc)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			qdel(src)
-			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 33)
+			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 30)
 			user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("You need to put [src] on a table to work on it."))
@@ -59,7 +59,7 @@
 	icon_state = "tallow"
 	tastes = list("grease" = 1, "oil" = 1, "regret" =1)
 	obj_flags = CAN_BE_HIT
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = FAT_NUTRITION
 	bitesize = 1
 	dropshrink = 0.75
 
@@ -90,8 +90,9 @@
 	name = "spider honey"
 	icon_state = "spiderhoney"
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = HONEY_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
+	foodtype = SUGAR | RAW
 	tastes = list("sweetness and spiderwebs" = 1)
 	faretype = FARE_FINE
 
@@ -102,6 +103,8 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "tsugar"
 	tastes = list("sweet" = 1)
+	nutrition = SUGAR_NUTRITION
+	foodtype = SUGAR | RAW
 	list_reagents = list(/datum/reagent/blood/tiefling = 11)
 
 
@@ -111,12 +114,13 @@
 	desc = "Unbelievably fancy chocolate, imported all the way from distant Grenzelhoft"
 	icon_state = "chocolate"
 	bitesize = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = CHOCCY_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("rich sweetness" = 1)
 	faretype = FARE_FINE
 	rotprocess = null
 	eat_effect = /datum/status_effect/buff/foodbuff
+	foodtype = SUGAR | JUNKFOOD
 
 // -------------- SALUMOI (dwarven smoked sausage) -----------------
 /obj/item/reagent_containers/food/snacks/meat/salami
@@ -127,12 +131,13 @@
 	slices_num = 4
 	bitesize = 5
 	slice_batch = FALSE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SAUSAGE_NUTRITION)
+	nutrition = RAWMEAT_NUTRITION*DRIED_MOD
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/salami/slice
 	tastes = list("salted meat" = 1)
 	rotprocess = null
 	slice_sound = TRUE
 	faretype = FARE_POOR
+	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/meat/salami/update_icon_state()
 	if(slices_num)
@@ -159,10 +164,11 @@
 	slices_num = 0
 	name = "salumoi"
 	icon_state = "salumoi_slice"
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = (RAWMEAT_NUTRITION*DRIED_MOD) / 5
 	bitesize = 1
 	tastes = list("salted meat" = 1)
 	faretype = FARE_NEUTRAL
+	foodtype = MEAT
 
 // -------------- COPPIETTE (dried meat) -----------------
 /obj/item/reagent_containers/food/snacks/cooked/coppiette
@@ -174,8 +180,9 @@
 	bitesize = 5
 	tastes = list("salted meat" = 1)
 	rotprocess = null
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = RAWMEAT_NUTRITION*DRIED_MOD
 	faretype = FARE_POOR
+	foodtype = MEAT
 
 
 // -------------- SALTFISH -----------------
@@ -189,9 +196,10 @@
 	slice_path = null
 	tastes = list("salted meat" = 1)
 	rotprocess = null
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_NUTRITIOUS)
+	nutrition = RAWMEAT_NUTRITION*DRIED_MOD
 	dropshrink = 0.6
 	faretype = FARE_POOR
+	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/saltfish/CheckParts(list/parts_list)
 	for(var/obj/item/reagent_containers/food/snacks/M in parts_list)
@@ -202,14 +210,15 @@
 /obj/item/reagent_containers/food/snacks/fat/salo
 	name = "salo"
 	icon_state = "salo4"
-	list_reagents = list(/datum/reagent/consumable/nutriment = COOKED_FAT_NUTRITION+COOKED_FAT_NUTRITION)
 	bitesize = 4
+	nutrition = FAT_NUTRITION*2*DRIED_MOD
 	slice_path = /obj/item/reagent_containers/food/snacks/fat/salo/slice
 	slices_num = 4
 	slice_batch = FALSE
 	slice_sound = TRUE
 	eat_effect = null
 	faretype = FARE_POOR
+	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/fat/salo/update_icon_state()
 	if(slices_num)
@@ -234,7 +243,8 @@
 	bitesize = 2
 	slices_num = FALSE
 	slice_path = FALSE
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = (FAT_NUTRITION*2*DRIED_MOD) * 0.25
+	foodtype = MEAT
 
 /*------------\
 | Dried Fruit |
@@ -248,10 +258,10 @@
 	base_icon_state = "raisins"
 	biting = TRUE
 	bitesize = 5
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = RAISIN_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
-	foodtype = GRAIN
+	foodtype = FRUIT
 	faretype = FARE_POOR
 
 /obj/item/reagent_containers/food/snacks/raisins/CheckParts(list/parts_list)
@@ -264,8 +274,7 @@
 		qdel(M)
 
 /obj/item/reagent_containers/food/snacks/raisins/poison
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR, /datum/reagent/berrypoison = 4)
-	tastes = list("bitter dried fruit" = 1)
+	list_reagents = list(/datum/reagent/berrypoison = 5)
 
 // -------------- STRAWBERRY -----------------
 
@@ -274,11 +283,11 @@
 	icon_state = "driedstrawberry"
 	dropshrink = 0.8
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- TANGERINE -----------------
 
@@ -287,11 +296,11 @@
 	icon_state = "driedtangerine"
 	dropshrink = 0.8
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- PLUM -----------------
 
@@ -300,11 +309,11 @@
 	icon_state = "driedplum"
 	dropshrink = 0.8
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- APPLE -----------------
 
@@ -313,11 +322,11 @@
 	icon_state = "driedapple"
 	dropshrink = 0.8
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
+	nutrition = DRIEDFRUIT_NUTRITION
 
 // -------------- PEAR -----------------
 
@@ -326,11 +335,11 @@
 	icon_state = "driedpear"
 	dropshrink = 0.8
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
+	nutrition = DRIEDFRUIT_NUTRITION
 
 /***************** Mushrooms *****************/
 
@@ -340,12 +349,12 @@
 	icon_state = "driedwaddle"
 	dropshrink = 1
 	bitesize = 3
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("woody" = 1,"bitter" = 1)
 	foodtype = MUSHROOM
 	faretype = FARE_POOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = VEGGIE_NUTRITION*DRIED_MOD
 
 /*------------\
 | Salted milk |
@@ -372,7 +381,7 @@
 /*	............   Churning butter   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (200 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*22))
+		long_cooktime = (200 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*22))
 	if(istype(I, /obj/item/kitchen/spoon))
 		if(!reagents.has_reagent(/datum/reagent/consumable/milk/salted, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 			to_chat(user, span_warning(">Not enough salted milk."))
@@ -387,7 +396,7 @@
 			if(reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 				reagents.remove_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
 			new /obj/item/reagent_containers/food/snacks/butter(drop_location())
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 			user.nobles_seen_servant_work()
 		return
 	..()
@@ -397,7 +406,7 @@
 	name = "stick of butter"
 	desc = ""
 	icon_state = "butter6"
-	list_reagents = list(/datum/reagent/consumable/nutriment = BUTTER_NUTRITION * 2)
+	nutrition = BUTTER_NUTRITION
 	foodtype = DAIRY
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	slice_path = /obj/item/reagent_containers/food/snacks/butterslice
@@ -405,7 +414,7 @@
 	slice_batch = FALSE
 	bitesize = 6
 	slice_sound = TRUE
-	tastes = list("raw unsalted butter" = 1)
+	tastes = list("butter" = 1)
 	faretype = FARE_IMPOVERISHED
 
 /obj/item/reagent_containers/food/snacks/butter/update_icon_state()
@@ -435,8 +444,8 @@
 	name = "butter"
 	foodtype = DAIRY
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
-	tastes = list("raw unsalted butter" = 1)
+	nutrition = BUTTER_NUTRITION * SLICED_MOD
+	tastes = list("butter" = 1)
 	bitesize = 1
 	faretype = FARE_IMPOVERISHED
 
@@ -446,7 +455,7 @@
 	name = "pestran stick"
 	desc = "An unappetizing snack adored by devout Pestrans, somehow doesn't taste half bad."
 	icon_state = "pestranstick"
-	list_reagents = list(/datum/reagent/consumable/nutriment = BUTTER_NUTRITION)
+	nutrition = BUTTER_NUTRITION
 	tastes = list("raw unsalted butter on a stick" = 1)
 	trash = /obj/item/grown/log/tree/stick
 	foodtype = DAIRY
@@ -460,7 +469,7 @@
 /*	............   Making fresh cheese   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
-		long_cooktime = (100 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*12))
+		long_cooktime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*12))
 	if(istype(I, /obj/item/natural/cloth) && (user.used_intent.type == INTENT_USE || user.used_intent.type == INTENT_SOAK))
 		var/milk = null
 		var/cheese = null
@@ -479,7 +488,7 @@
 				if(do_after(user, long_cooktime, src))
 					reagents.remove_reagent(milk, 5)
 					new cheese(drop_location())
-					user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT))
+					user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 				user.nobles_seen_servant_work()
 			return
 	..()
@@ -493,7 +502,7 @@
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
 			if(do_after(user,3 SECONDS, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start(loc)
-				user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				qdel(I)
 				qdel(src)
 				user.nobles_seen_servant_work()
@@ -513,7 +522,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -537,7 +546,7 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese))
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
@@ -561,11 +570,11 @@
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(user.mind)
-		short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese) && icon_state != "cheesewheel_end")
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			if(do_after(user, short_cooktime, src))
 				qdel(I)
 				name = "maturing cheese wheel"
@@ -590,10 +599,10 @@
 	name = "fresh cheese"
 	icon_state = "freshcheese"
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = CHEESE_NUTRITION)
+	nutrition = CHEESE_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("cheese" = 1)
-	foodtype = GRAIN
+	foodtype = DAIRY
 	eat_effect = null
 	rotprocess = SHELFLIFE_DECENT
 	become_rot_type = null
@@ -608,7 +617,7 @@
 	icon_state = "cheesewheel"
 	dropshrink = 0.8
 	bitesize = 6
-	list_reagents = list(/datum/reagent/consumable/nutriment = CHEESE_NUTRITION*4)
+	nutrition = CHEESE_NUTRITION/SLICED_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("cheese" = 1)
 	eat_effect = null
@@ -620,6 +629,7 @@
 	slice_sound = TRUE
 	grid_height = 32
 	grid_width = 96
+	foodtype = DAIRY
 
 /obj/item/reagent_containers/food/snacks/cheddar/aged
 	name = "wheel of aged cheese"
@@ -634,8 +644,9 @@
 	name = "wedge of cheese"
 	icon_state = "cheese_wedge"
 	dropshrink = 0.8
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = CHEESE_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
+	foodtype = DAIRY
 	tastes = list("cheese" = 1)
 	rotprocess = SHELFLIFE_LONG
 	slice_batch = TRUE
@@ -663,7 +674,8 @@
 	icon_state = "cheese_slice"
 	bitesize = 1
 	dropshrink = 0.8
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
+	nutrition = CHEESE_NUTRITION
+	foodtype = DAIRY
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("cheese" = 1)
 	eat_effect = null
@@ -698,10 +710,10 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_base
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("unflavored gelatine" = 1)
-	foodtype = MEAT | SUGAR
+	foodtype = MEAT | SUGAR | GROSS
 	slice_batch = TRUE
 	slice_sound = TRUE
 	eat_effect = /datum/status_effect/debuff/uncookedfood
@@ -715,13 +727,14 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
 	tastes = list("unflavored gelatine" = 1)
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	w_class = WEIGHT_CLASS_NORMAL
-	foodtype = MEAT | SUGAR
+	foodtype = MEAT | SUGAR | GROSS
 	rotprocess = null
 	faretype = FARE_POOR
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION) * 0.25
+
 
 // -------------- Apple Gelatine -----------------
 
@@ -732,7 +745,7 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_apple
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("sweet gelatine" = 1, "sweet apple"  = 1)
 	foodtype = MEAT | SUGAR | FRUIT
@@ -749,7 +762,7 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD * 0.25
 	tastes = list("sweet gelatine" = 1, "sweet apple" = 1)
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtype = MEAT | SUGAR | FRUIT
@@ -765,7 +778,7 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_tangerine
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("sweet gelatine" = 1, "sweet tangerine" = 1)
 	foodtype = MEAT | SUGAR | FRUIT
@@ -782,12 +795,13 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD * 0.25
 	tastes = list("sweet gelatine" = 1, "sweet tangerine")
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
+
 
 // -------------- Plum Gelatine -----------------
 
@@ -798,7 +812,7 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_plum
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("sweet gelatine" = 1, "sweet plum" = 1)
 	foodtype = MEAT | SUGAR | FRUIT
@@ -815,7 +829,7 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD * 0.25
 	tastes = list("sweet gelatine" = 1, "sweet plum")
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtype = MEAT | SUGAR | FRUIT
@@ -831,7 +845,7 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_lime
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("sweet gelatine" = 1, "sweet lime" = 1)
 	foodtype = MEAT | SUGAR | FRUIT
@@ -848,7 +862,7 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD * 0.25
 	tastes = list("sweet gelatine" = 1, "sweet lime")
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtype = MEAT | SUGAR | FRUIT
@@ -864,7 +878,7 @@
 	dropshrink = 0.8
 	slice_path = /obj/item/reagent_containers/food/snacks/jellyslice_pear
 	slices_num = 4
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT*4)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 	w_class = WEIGHT_CLASS_NORMAL
 	tastes = list("sweet gelatine" = 1, "sweet pear" = 1)
 	foodtype = MEAT | SUGAR | FRUIT
@@ -881,7 +895,7 @@
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION + FRUIT_NUTRITION) * COOK_MOD * 0.25
 	tastes = list("sweet gelatine" = 1, "sweet pear")
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtype = MEAT | SUGAR | FRUIT

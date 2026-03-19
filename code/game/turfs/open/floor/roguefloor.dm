@@ -262,7 +262,7 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		var/obj/item/I = new /obj/item/natural/dirtclod(src)
+		var/obj/item/I = new /obj/item/natural/clod/dirt(src)
 		if(L.put_in_active_hand(I))
 			L.visible_message("<span class='warning'>[L] picks up some dirt.</span>")
 			dirt_amt--
@@ -809,7 +809,7 @@
 	desc = ""
 	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "cobblestone_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobbleedge/alt
 	icon_state = "cobblestonealt_edges"
@@ -825,7 +825,7 @@
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "cobble_edges"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/effect/decal/cobblerockedge/alt
 	icon_state = "cobblealt_edges"
@@ -833,6 +833,10 @@
 /obj/effect/decal/borderfall
 	icon = 'icons/turf/constructed/misc.dmi'
 	icon_state = "borderfall"
+
+/obj/effect/decal/woodpath
+	icon = 'icons/turf/constructed/wood.dmi'
+	icon_state = "wooden_path"
 
 /*	..................   Miscellany   ................... */
 /turf/open/floor/tile
@@ -1103,6 +1107,19 @@
 /turf/open/floor/sand/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
+
+/turf/open/floor/sand/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	if(isliving(user))
+		var/mob/living/L = user
+		var/obj/item/I = new /obj/item/natural/clod/sand(src)
+		if(L.put_in_active_hand(I))
+			L.visible_message("<span class='warning'>[L] picks up some sand.</span>")
+		else
+			qdel(I)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /turf/open/floor/sand/sandstone
 	name = "sandstone gravel"

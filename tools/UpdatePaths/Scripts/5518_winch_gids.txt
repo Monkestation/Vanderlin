@@ -1,0 +1,2 @@
+/obj/structure/winch : /obj/structure/winch{@OLD;gid=@SKIP}
+/obj/structure/gate/@SUBTYPES : /obj/structure/gate/@SUBTYPES{@OLD;gid=@SKIP}

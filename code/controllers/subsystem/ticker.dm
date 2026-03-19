@@ -75,7 +75,9 @@ SUBSYSTEM_DEF(ticker)
 	var/mob/living/carbon/human/rulermob = null
 	/// The appointed regent mob
 	var/mob/living/carbon/human/regent_mob = null
-	var/failedstarts = 0
+	var/vote_started = FALSE
+	var/voting = FALSE
+	var/pre_vote = 0
 	var/list/manualmodes = list()
 
 	var/end_party = FALSE
@@ -156,7 +158,7 @@ SUBSYSTEM_DEF(ticker)
 		music -= S
 
 	if(isemptylist(music))
-		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
+		music = file2list(ROUND_START_MUSIC_LIST, "\n")
 		login_music = pick(music)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
@@ -305,9 +307,14 @@ SUBSYSTEM_DEF(ticker)
 							continue
 					readied_jobs.Add(V)
 
-	if(CONFIG_GET(flag/ruler_required))
+	if(CONFIG_GET(flag/ruler_required) && !vote_started)
+		if(pre_vote > 4 && !voting)
+			voting = TRUE
+			SSvote.initiate_vote("norulervote", "The Gods")
 		if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
 			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
+			if(!voting)
+				pre_vote++
 			return FALSE
 
 	job_change_locked = TRUE
@@ -318,16 +325,16 @@ SUBSYSTEM_DEF(ticker)
 	var/init_start = world.timeofday
 
 	CHECK_TICK
-	//Configure mode and assign player to special mode stuff
-	var/can_continue = 0
+
+	// Vessel assignment happens first, removes those players from the pool
+	assign_vessel_players()
 
 	CHECK_TICK
 
-	can_continue =	SSgamemode.pre_setup()
-
+	var/can_continue = SSgamemode.pre_setup()
 	CHECK_TICK
 
-	can_continue = can_continue && SSjob.DivideOccupations(list()) 				//Distribute jobs
+	can_continue = can_continue && SSjob.DivideOccupations(list())				//Distribute jobs
 	CHECK_TICK
 
 	log_game("GAME SETUP: Divide Occupations success")
@@ -398,6 +405,62 @@ SUBSYSTEM_DEF(ticker)
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE
+
+/datum/controller/subsystem/ticker/proc/assign_vessel_players()
+	var/list/vessel_candidates = list()
+
+	for(var/mob/dead/new_player/player in GLOB.new_player_list)
+		if(!player?.client)
+			continue
+		if(player.ready != PLAYER_READY_TO_PLAY)
+			continue
+		for(var/id in GLOB.vessel_ids)
+			if(!(id in player.client.prefs.be_special))
+				continue
+			if(!player.client.is_whitelisted(id))
+				continue
+			if(player.client.prefs.job_preferences["Monarch"] == JP_HIGH)
+				continue
+			if(!vessel_candidates[id])
+				vessel_candidates[id] = list()
+			vessel_candidates[id] += player
+			break
+
+	for(var/id in vessel_candidates)
+		var/list/vessel_mobs = GLOB.active_ghost_vessels[id]
+		if(!length(vessel_mobs))
+			continue
+
+		// Build weighted list using boost system, respecting vessel_id
+		var/list/weighted_players = list()
+		for(var/mob/dead/new_player/player in vessel_candidates[id])
+			var/player_weight = 1
+			for(var/datum/job_priority_boost/boost in SSjob.get_player_boosts(player))
+				if(boost.can_boost_vessel(id))
+					player_weight += boost.boost_amount
+			weighted_players[player] = player_weight
+
+		while(length(weighted_players) && length(vessel_mobs))
+			var/mob/dead/new_player/player = pickweight(weighted_players)
+			weighted_players -= player
+
+			var/mob/living/carbon/human/vessel_mob = pick(vessel_mobs)
+			var/datum/component/ghost_vessel/gc = vessel_mob.GetComponent(/datum/component/ghost_vessel)
+			if(!gc)
+				vessel_mobs -= vessel_mob
+				continue
+
+			// Consume the first applicable boost, same as DO does
+			for(var/datum/job_priority_boost/boost in SSjob.get_player_boosts(player))
+				if(boost.can_boost_vessel(id))
+					boost.use_boost()
+					break
+
+			player.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+			INVOKE_ASYNC(gc, TYPE_PROC_REF(/datum/component/ghost_vessel, possess_vessel), player)
+			vessel_mobs -= vessel_mob
+			GLOB.new_player_list -= player
+			log_game("Assigned [player.ckey] to vessel '[id]' ([vessel_mob.name])")
 
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
@@ -487,8 +550,8 @@ SUBSYSTEM_DEF(ticker)
 	if(selected_tip)
 		m = selected_tip
 	else
-		var/list/randomtips = world.file2list("strings/tips.txt")
-//		var/list/memetips = world.file2list("strings/sillytips.txt")
+		var/list/randomtips = file2list("strings/tips.txt")
+//		var/list/memetips = file2list("strings/sillytips.txt")
 //		if(randomtips.len && prob(95))
 		m = pick(randomtips)
 //		else if(memetips.len)

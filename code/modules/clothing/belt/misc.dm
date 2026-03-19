@@ -63,8 +63,8 @@
 // Bandit's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
-		/obj/item/natural/cloth,
-		/obj/item/key/mercenary,
+		/obj/item/natural/cloth/bandage,
+		/obj/item/storage/keyring/mercenary,
 	)
 
 /obj/item/storage/belt/leather/mercenary/shalal
@@ -176,6 +176,18 @@
 	grid_height = 64
 	grid_width = 32
 
+/obj/item/storage/belt/pouch/medicine
+	populate_contents = list(
+		/obj/item/needle,
+		/obj/item/natural/bundle/cloth/bandage/full,
+		/obj/item/reagent_containers/glass/bottle/healthpot
+	)
+
+/obj/item/storage/belt/pouch/food
+	populate_contents = list(
+		/obj/item/reagent_containers/food/snacks/hardtack,
+	)
+
 /obj/item/storage/belt/pouch/coins/mid/Initialize()
 	. = ..()
 	var/obj/item/coin/silver/pile/H = new(loc)
@@ -278,11 +290,13 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth
 
-/obj/item/storage/backpack/satchel/heartfelt
-	populate_contents = list(
-		/obj/item/natural/feather,
-		/obj/item/paper/heartfelt,
-	)
+/obj/item/storage/backpack/satchel/cloth/big
+	name = "cloth rucksack"
+	desc = "A large but rudimentary cloth sack strapped to the back for storing a medium number of items."
+	icon_state = "rucksack"
+	item_state = "rucksack"
+	salvage_result = /obj/item/natural/cloth
+	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
 /obj/item/storage/backpack/satchel/otavan
 	name = "grenzelhoftian leather satchel"
@@ -519,7 +533,7 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	component_type = /datum/component/storage/concrete/grid/headhook
 
@@ -535,7 +549,7 @@
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/bronze
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze
 
@@ -562,6 +576,6 @@
 	equip_sound = 'sound/blank.ogg'
 	sellprice = 160
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	component_type = /datum/component/storage/concrete/grid/headhook/bronze

@@ -2,8 +2,8 @@
 #define TRIUMPH_KEY_AMOUNT "triumph_count"
 #define TRIUMPH_KEY_SEASONAL_BUYS "seasonal_triumph_buys"
 
-#define TRIUMPH_SEASON_NUM "current_season_name"
-#define TRIUMPH_SEASON_NAME "current_wipe_season"
+#define TRIUMPH_SEASON_NUM "current_wipe_season"
+#define TRIUMPH_SEASON_NAME "current_season_name"
 
 /*
 	A fun fact is that it is important to note triumph procs all used key, whilas player quality likes to use ckey
@@ -33,7 +33,7 @@ GLOBAL_VAR_INIT(triumph_wipe_season, get_triumph_season())
 	var/current_wipe_season = 1
 
 	if(!fexists(json_file))
-		WRITE_FILE(json_file, json_encode(list(TRIUMPH_SEASON_NAME = current_wipe_season), JSON_PRETTY_PRINT))
+		WRITE_FILE(json_file, json_encode(list(TRIUMPH_SEASON_NUM = current_wipe_season), JSON_PRETTY_PRINT))
 		return current_wipe_season
 
 	var/list/json = json_decode(file2text(json_file))
@@ -520,6 +520,15 @@ SUBSYSTEM_DEF(triumphs)
 
 	write_save(target_file, data)
 
+/datum/controller/subsystem/triumphs/proc/reset_all_data()
+	for(var/client/client as anything in GLOB.clients)
+		var/client_key = client?.ckey
+		if(client_key)
+			reset_or_create_data(client_key)
+
+	for(var/ckey in triumph_amount_cache)
+		reset_or_create_data(ckey)
+
 /datum/controller/subsystem/triumphs/proc/reset_triumphs(target_ckey)
 	if(!target_ckey)
 		return
@@ -536,6 +545,15 @@ SUBSYSTEM_DEF(triumphs)
 	data[TRIUMPH_KEY_AMOUNT] = 0
 
 	write_save(target_file, data)
+
+/datum/controller/subsystem/triumphs/proc/reset_all_triumphs()
+	for(var/client/client as anything in GLOB.clients)
+		var/client_key = client?.ckey
+		if(client_key)
+			wipe_target_triumphs(client_key)
+
+	for(var/ckey in triumph_amount_cache)
+		wipe_target_triumphs(ckey)
 
 /*
 	TRIUMPH LEADERBOARD

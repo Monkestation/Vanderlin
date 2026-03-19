@@ -26,36 +26,36 @@
 				set_hair_style(/datum/sprite_accessory/hair/head/bald)
 				update_body()
 
-		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
-			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
-				if(has_stubble)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] stubble with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s stubble with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						has_stubble = FALSE
-						update_body()
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
-				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] facehairs with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s facehairs with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
-						update_body()
-						record_round_statistic(STATS_BEARDS_SHAVED)
-						if(dna?.species)
-							if(dna.species.id == SPEC_ID_DWARF)
-								var/mob/living/carbon/V = src
-								V.add_stress(/datum/stress_event/dwarfshaved)
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
+			if(has_stubble)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] stubble with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s stubble with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					has_stubble = FALSE
+					update_body()
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
+			else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] facehairs with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s facehairs with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
+					update_body()
+					record_round_statistic(STATS_BEARDS_SHAVED)
+					if(dna?.species)
+						if(dna.species.id == SPEC_ID_DWARF)
+							var/mob/living/carbon/V = src
+							V.add_stress(/datum/stress_event/dwarfshaved)
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
 		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
 			var/obj/item/clothing/shoes/shoes_check
 			var/mob/living/carbon/target
@@ -81,7 +81,7 @@
 						shoes_check.polished = 1
 						shoes_check.AddComponent(/datum/component/particle_spewer/sparkle)
 						addtimer(CALLBACK(shoes_check, TYPE_PROC_REF(/obj/item/clothing/shoes, lose_shine)), 15 MINUTES)
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						target.add_stress(/datum/stress_event/shiny_shoes)
 						to_chat(user, ("You polished the [shoes_check]."))
@@ -94,7 +94,7 @@
 					user.visible_message(span_notice("[user] starts to polish the [shoes_check] of [src]."))
 					if(do_after(user, 2 SECONDS, src))
 						shoes_check.polished = 2
-						if(HAS_TRAIT(user, TRAIT_NOBLE))
+						if(HAS_TRAIT(user, TRAIT_NOBLE_BLOOD))
 							user.add_stress(/datum/stress_event/noble_polishing_shoe)
 						var/datum/component/particle_spewer = shoes_check.GetComponent(/datum/component/particle_spewer/sparkle)
 						if(particle_spewer)
@@ -121,7 +121,7 @@
 	//initialise organs
 	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
-	culture = new()
+	culture = GLOB.culture_singletons[culture]
 
 	. = ..()
 
@@ -132,7 +132,7 @@
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
-	QDEL_NULL(culture)
+	culture = null
 	GLOB.human_list -= src
 	return ..()
 
@@ -185,7 +185,10 @@
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
 	if(clan)
-		. += "VITAE: [bloodpool]"
+		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+		. += "DETECTIONS: [detections]"
+	if(cleric)
+		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -390,7 +393,7 @@
 		else
 			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
 
-/mob/living/carbon/human/cuff_resist(obj/item/I)
+/mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
 		dropItemToGround(I)
 
@@ -408,17 +411,17 @@
 		addtimer(CALLBACK(src, PROC_REF(end_electrocution_animation), electrocution_skeleton_anim), anim_duration)
 
 	else //or just do a generic animation
-		flick_overlay_view(image(icon,src,"electrocuted_generic",ABOVE_MOB_LAYER), src, anim_duration)
+		flick_overlay_view(mutable_appearance(icon, "electrocuted_generic", ABOVE_MOB_LAYER), anim_duration)
 
 /mob/living/carbon/human/proc/end_electrocution_animation(mutable_appearance/MA)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, "#000000")
 	cut_overlay(MA)
 
-/mob/living/carbon/human/resist_restraints()
+/mob/living/carbon/human/resist_restraints(instant = FALSE)
 	if(wear_armor && wear_armor.breakouttime)
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
-		cuff_resist(wear_armor)
+		cuff_resist(wear_armor, instant = instant)
 	else
 		..()
 
@@ -445,7 +448,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (get_complex_pain() / (STAEND * 12)) * 100
+			var/painpercent = (get_complex_pain() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
 
 
 			var/usedloss = 0
@@ -574,7 +577,7 @@
 
 /mob/living/carbon/human/is_literate()
 	if(mind)
-		if(get_skill_level(/datum/skill/misc/reading) > 0)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/reading) > 0)
 			return TRUE
 		else
 			return FALSE
@@ -638,13 +641,16 @@
 			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "Monarch")
 				HL.job = "Ex-Monarch"
+				HL.honorary = null
 				lord_job?.remove_spells(HL)
 			if(HL.job == "Consort")
 				HL.job = "Ex-Consort"
+				HL.honorary = null
 				consort_job?.remove_spells(HL)
 
 		var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 		coronated.mind.set_assigned_role(/datum/job/lord)
+		lord_job?.assign_honorary_titles(coronated)
 		lord_job?.get_informed_title(coronated, FALSE, TRUE, new_title)
 		coronated.job = "Monarch" //Monarch is used when checking if the ruler is alive, not "King" or "Queen". Can also pass it on and have the title change properly later.
 		lord_job?.add_spells(coronated)
@@ -857,6 +863,8 @@
 	has_stubble = target.has_stubble
 	headshot_link = target.headshot_link
 	flavortext = target.flavortext
+	honorary = target.honorary
+	honorary = target.honorary_suffix
 	set_bloodpool(target.bloodpool)
 
 	var/obj/item/bodypart/head/target_head = target.get_bodypart(BODY_ZONE_HEAD)
@@ -934,11 +942,15 @@
 
 /mob/living/carbon/human/species
 	var/race = null
+	var/attribute_sheet
+	var/headprice
 
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
 	if(race)
 		set_species(race)
+	if(attribute_sheet)
+		attributes?.add_sheet(attribute_sheet)
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/species/LateInitialize()
@@ -954,6 +966,14 @@
 		if(SSterrain_generation.get_island_at_location(turf))
 			faction |= "islander"
 			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
+
+/mob/living/carbon/human/species/after_creation()
+	. = ..()
+	if(headprice)
+		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
+		head?.sellprice = headprice
+		head?.randomize_price()
+
 
 /**
  * Called when this human should be washed
@@ -1020,7 +1040,7 @@
 	for(var/mob/living/carbon/human/target as anything in viewers(6, src))
 		if(!target.mind || target.stat != CONSCIOUS)
 			continue
-		if(!HAS_TRAIT(target, TRAIT_NOBLE))
+		if(!HAS_TRAIT(target, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(target, TRAIT_NOBLE_POWER))
 			continue
 		nobles += target
 	if(length(nobles))

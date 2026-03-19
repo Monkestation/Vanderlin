@@ -1,6 +1,52 @@
 GLOBAL_VAR(lordsurname)
 GLOBAL_LIST_EMPTY(lord_titles)
 
+/datum/attribute_holder/sheet/job/lord
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 5,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+/datum/attribute_holder/sheet/job/lord/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 5,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 50,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/lord
 	title = "Monarch"
 	var/ruler_title = "Monarch"
@@ -35,42 +81,33 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		EXP_TYPE_LEADERSHIP = 300
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_END = 3,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/lord
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/lord/old
 
-	skills = list(
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/labor/mathematics = 3
-	)
+	//These change on map load
+	honorary = "Lord"
+	honorary_f = "Lady"
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS
 	)
 	traits = list(
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
 	)
 
 	voicepack_m = /datum/voicepack/male/evil
+
+/datum/job/lord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = SSmapping.config.monarch_title
+		honorary_f = SSmapping.config.monarch_title //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = SSmapping.config.monarch_title_f
 
 /datum/job/lord/get_informed_title(mob/mob, ignore_pronouns, change_title = FALSE, new_title)
 	if(change_title)
@@ -97,9 +134,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 	to_chat(world, "<b>[span_notice(span_big("[spawned.real_name] is [ruler_title] of [SSmapping.config.map_name]."))]</b>")
 	to_chat(world, "<br>")
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
@@ -157,16 +191,14 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_LORD
+	honorary = "Former Lord"
+	honorary_f = "Former Lady"
 
-/proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)
-	if(!GLOB.lordsurname)
-		return
-	if(preserve_original)
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-		return family_guy.real_name
-	var/list/chopped_name = splittext(family_guy.real_name, " ")
-	if(length(chopped_name) > 1)
-		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
-	else
-		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
-	return family_guy.real_name
+/datum/job/exlord/New()
+	. = ..()
+	if(SSmapping.config?.monarch_title)
+		honorary = "Former [SSmapping.config.monarch_title]"
+		honorary_f = "Former [SSmapping.config.monarch_title]" //in case we dont have a female title and they share
+	if(SSmapping.config?.monarch_title_f)
+		honorary_f = "Former [SSmapping.config.monarch_title_f]"
+

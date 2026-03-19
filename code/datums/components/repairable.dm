@@ -45,10 +45,10 @@
 /datum/component/repairable/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
 
-/datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, params)
+/datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
-	if(repair_skill && user.get_skill_level(repair_skill) < repair_skill_level)
+	if(repair_skill && GET_MOB_SKILL_VALUE_OLD(user, repair_skill) < repair_skill_level)
 		return
 
 	var/atom/atom_parent = parent
@@ -57,7 +57,7 @@
 			return
 
 		. = COMPONENT_NO_AFTERATTACK
-		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, params)
+		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers)
 	else
 		var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
 
@@ -73,16 +73,16 @@
 			return
 
 		. = COMPONENT_NO_AFTERATTACK
-		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, params, repair_value)
+		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers, repair_value)
 
-/datum/component/repairable/proc/async_start(datum/source, obj/item/attacking_item, mob/user, params, repair_threshold_value)
+/datum/component/repairable/proc/async_start(datum/source, obj/item/attacking_item, mob/user, list/modifiers, repair_threshold_value)
 	var/atom/atom_parent = parent
 	if(repair_sound)
 		playsound(parent, repair_sound, 100, TRUE)
 	user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
 	var/repair_time = 10 SECONDS
 	if(repair_skill)
-		repair_time = 30 SECONDS / max(user.get_skill_level(repair_skill, TRUE), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
+		repair_time = 30 SECONDS / max(GET_MOB_SKILL_VALUE_OLD(user, repair_skill), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
 	interrupt_repair = FALSE
 	if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
 		interrupt_repair = FALSE

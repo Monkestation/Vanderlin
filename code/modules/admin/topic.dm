@@ -36,6 +36,26 @@
 	else if(href_list["ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowseTickets(text2num(href_list["ahelp_tickets"]))
 
+	else if(href_list["attributes"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		if(!SSticker.HasRoundStarted())
+			tgui_alert(usr,"The game hasn't started yet!")
+			return
+
+		var/target = locate(href_list["attributes"])
+		var/datum/attribute_holder/attribute_holder
+		if(ismob(target))
+			var/mob/target_mob = target
+			attribute_holder = target_mob.attributes
+		else if(istype(target, /datum/attribute_holder))
+			attribute_holder = target
+		else
+			to_chat(usr, "This can only be used on instances of type /mob and /datum/attribute_holder")
+			return
+		usr.client?.open_attribute_editor(attribute_holder)
+
 	else if(href_list["getplaytimewindow"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -833,20 +853,6 @@
 		var/mob/M = locate(href_list["getmob"])
 		usr.client.Getmob(M)
 
-	else if(href_list["increase_skill"])
-		var/mob/M = locate(href_list["increase_skill"])
-		var/datum/skill/skill = href_list["skill"]
-		M.adjust_skillrank(text2path(skill), 1)
-		log_admin("[key_name_admin(usr)] increased [key_name_admin(M)]'s [initial(skill.name)] skill.")
-		show_player_panel_next(M, "skills")
-
-	else if(href_list["decrease_skill"])
-		var/mob/M = locate(href_list["decrease_skill"])
-		var/datum/skill/skill = href_list["skill"]
-		M.adjust_skillrank(text2path(skill), -1)
-		log_admin("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [initial(skill.name)] skill.")
-		show_player_panel_next(M, "skills")
-
 	else if(href_list["add_language"])
 		var/mob/M = locate(href_list["add_language"])
 		var/datum/language/lang = text2path(href_list["language"])
@@ -1290,7 +1296,7 @@
 		if(!ishuman(M))
 			return
 
-		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patron_list)
+		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patrons_by_type)
 		if(!patron_to_change_to)
 			return
 
@@ -1328,6 +1334,18 @@
 		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s job from [mind_of_mob.assigned_role ? mind_of_mob.assigned_role.title : "NA"] to [new_job.title]")
 
 		mind_of_mob.set_assigned_role(new_job)
+
+	else if(href_list["open_whitelist_panel"])
+		var/mob/M = locate(href_list["open_whitelist_panel"])
+		if(!M?.ckey)
+			return
+		WP.show_ui(usr, ckey(M.ckey))
+
+	if(href_list["open_boost_panel"])
+		var/mob/M = locate(href_list["open_boost_panel"])
+		if(!M?.ckey)
+			return
+		BP.show_ui(usr, ckey(M.ckey))
 
 	else if(href_list["roleban"])
 		if(!check_rights(R_ADMIN))
@@ -1581,3 +1599,9 @@
 	dat += {"<A href='byond://?src=[REF(src)];[HrefToken()];f_secret2=secret'>Random (default)</A><br>"}
 	dat += {"Now: [GLOB.secret_force_mode]"}
 	usr << browse(dat, "window=f_secret")
+
+/client/proc/open_attribute_editor(datum/attribute_holder/attributes)
+	if(!holder)
+		return
+	var/datum/attribute_editor/attribute_editor = new /datum/attribute_editor(attributes)
+	attribute_editor.ui_interact(mob)

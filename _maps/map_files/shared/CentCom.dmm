@@ -586,7 +586,6 @@
 /area/indoors/vampire_manor)
 "bS" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/weapon/sword/long/vlord,
 /obj/structure/fluff/walldeco/mona{
 	pixel_x = -14
 	},
@@ -940,7 +939,6 @@
 /area/indoors/bandit_lair)
 "db" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -1672,7 +1670,6 @@
 /area/outdoors/bog/inhumen_camp)
 "hJ" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,
@@ -1756,6 +1753,12 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
+"ie" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 32
+	},
+/turf/open/floor/naturalstone,
+/area/under/cavelava/acid)
 "ij" = (
 /obj/item/clothing/shirt/dress/gen/colored/maid,
 /obj/item/clothing/shoes/shortboots,
@@ -1765,7 +1768,6 @@
 /area)
 "ik" = (
 /obj/structure/winch{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -1808,9 +1810,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "iw" = (
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
@@ -1901,6 +1902,12 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobble,
 /area/indoors/lich)
+"je" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "jf" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -2293,9 +2300,8 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
@@ -2305,9 +2311,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3037,9 +3042,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/water/swamp/deep,
@@ -3092,9 +3096,8 @@
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
 	},
-/obj/effect/decal/cobbleedge{
-	dir = 1;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 1
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
@@ -3122,13 +3125,13 @@
 "rf" = (
 /obj/item/clothing/neck/mercator,
 /obj/item/clothing/neck/shalal,
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/dendor,
-/obj/item/clothing/neck/psycross/silver/eora,
-/obj/item/clothing/neck/psycross/g,
-/obj/item/clothing/neck/psycross/silver/necra,
-/obj/item/clothing/neck/psycross/silver/noc,
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/dendor,
+/obj/item/clothing/neck/psycross/silver/divine/eora,
+/obj/item/clothing/neck/psycross/gold,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/wood,
 /area/indoors)
 "ri" = (
@@ -3834,10 +3837,11 @@
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
 /obj/item/reagent_containers/powder/salt,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
-/obj/item/reagent_containers/food/snacks/meat,
 /obj/item/weapon/knife/copper,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
 /turf/open/floor/twig,
 /area/under/cavelava/acid)
 "vH" = (
@@ -3934,7 +3938,6 @@
 /area/indoors/lich)
 "wb" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -3981,9 +3984,8 @@
 /turf/open/floor/wood,
 /area/indoors)
 "wl" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -5353,7 +5355,6 @@
 /area/indoors/vampire_manor)
 "GC" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -5407,10 +5408,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"GS" = (
-/obj/structure/fluff/clodpile,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "GV" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/herringbone,
@@ -6225,7 +6222,7 @@
 /obj/item/clothing/pants/grenzelpants,
 /obj/item/clothing/shirt/grenzelhoft,
 /obj/item/clothing/shoes/rare/grenzelhoft,
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "Mm" = (
@@ -6521,6 +6518,10 @@
 /obj/effect/decal/cobblerockedge,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Ok" = (
+/obj/structure/fluff/clodpile/dirt,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "On" = (
 /obj/structure/rack,
 /obj/item/cooking/pan,
@@ -7545,6 +7546,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
+"UH" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 8
+	},
+/turf/open/floor/volcanic,
+/area/under/cavelava/acid)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -7668,7 +7675,6 @@
 /area/indoors/vampire_manor)
 "Vv" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,
@@ -9649,7 +9655,7 @@ jW
 QZ
 jW
 Sq
-GS
+Ok
 Ek
 UX
 xt
@@ -17565,7 +17571,7 @@ ag
 NW
 NW
 NW
-vK
+UH
 vK
 NW
 NW
@@ -18351,7 +18357,7 @@ XB
 vK
 vK
 vK
-vK
+je
 NW
 NW
 NW
@@ -18859,7 +18865,7 @@ ag
 ag
 NW
 NW
-fJ
+ie
 fJ
 vK
 VZ
@@ -19258,7 +19264,7 @@ XB
 XB
 XB
 vK
-vK
+UH
 vK
 NW
 NW
@@ -20165,7 +20171,7 @@ NW
 NW
 fJ
 vK
-vK
+UH
 NW
 vK
 NW

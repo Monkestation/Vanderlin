@@ -230,7 +230,7 @@ SUBSYSTEM_DEF(treasury)
 	treasury_value += amt
 
 	if(character in bank_accounts)
-		if(HAS_TRAIT(character, TRAIT_NOBLE))
+		if(HAS_TRAIT(character, TRAIT_NOBLE_BLOOD))
 			bank_accounts[character] += amt
 		else
 			if(!untaxed_deposits[character])

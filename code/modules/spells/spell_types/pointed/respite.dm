@@ -8,7 +8,7 @@
 	sound = null
 	invocation = ". . ."
 	invocation_type = "none"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time  = 60 SECONDS
 
 /datum/action/cooldown/spell/undirected/psydonrespite/cast(mob/living/user) // It's a very tame self-heal. Nothing too special.
@@ -32,7 +32,7 @@
 					psicross_bonus = -5
 				if(/obj/item/clothing/neck/psycross/silver)
 					psicross_bonus = -7
-				if(/obj/item/clothing/neck/psycross/g) // PURITY AFLOAT.
+				if(/obj/item/clothing/neck/psycross/gold) // PURITY AFLOAT.
 					psicross_bonus = -7
 	if(brute > 100)
 		sit_bonus1 = -2

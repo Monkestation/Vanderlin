@@ -449,7 +449,7 @@
 		if(signee)
 			to_chat(user, span_warning("This token has already been signed."))
 			return
-		if(!is_gaffer_job(user.mind.assigned_role) && !is_merchant_job(user.mind.assigned_role))
+		if(!is_tomb_warden_job(user.mind.assigned_role) && !is_merchant_job(user.mind.assigned_role))
 			if(is_mercenary_job(user.mind.assigned_role))
 				to_chat(user, span_warning("I can not sign my own commendation."))
 			else
@@ -489,7 +489,7 @@
 	. = ..()
 	if(!user.mind)
 		return
-	if(!HAS_TRAIT(user, TRAIT_NOBLE))
+	if(!HAS_TRAIT(user, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(user, TRAIT_NOBLE_POWER))
 		return
 	if(length(fingers) >= names)
 		to_chat(user, span_notice("[src] is full"))
@@ -564,6 +564,16 @@
 	ADD_TRAIT(user.mind, TRAIT_KNOW_KEEP_DOORS, "[type]")
 	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
+/obj/item/paper/scroll/rous_plans
+	name = "rous tunnel drawings"
+	desc = "Paper etched with the a winding mess of tunnels."
+
+/obj/item/paper/scroll/rous_plans/read(mob/user)
+	if(!user.mind)
+		return
+	to_chat(user, span_purple("<b>These look like secret passages...</b>"))
+	ADD_TRAIT(user.mind, TRAIT_KNOW_ROUS_DOORS, "[type]")
+	user.playsound_local(user, 'sound/misc/notice (2).ogg', 100, FALSE)
 
 /obj/item/paper/scroll/sold_manifest
 	name = "shipping manifest"
@@ -600,7 +610,7 @@
 	sell_prices = prices
 	if(!length(sell_prices))
 		sell_prices = generated_test_data()
-	writers_name = pick( world.file2list("strings/rt/names/human/humnorm.txt") )
+	writers_name = pick( file2list("strings/rt/names/human/humnorm.txt") )
 	rebuild_info()
 
 /obj/item/paper/scroll/sell_price_changes/update_icon_state()

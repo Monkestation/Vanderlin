@@ -1,3 +1,18 @@
+/datum/attribute_holder/sheet/job/vampire_lord
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/magic/blood = 10,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/misc/climbing = 50,
+	)
+
 /datum/antagonist/vampire/lord
 	name = "Vampire Lord"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
@@ -7,58 +22,37 @@
 		"I AM THE LAND!",
 		"FIRSTBORNE CHILD OF KAIN!",
 	)
+	var/chooses_name = TRUE
+	var/outfit = /datum/outfit/vamplord
+	var/patron = /datum/patron/godless/autotheist
 
 	var/ascended = FALSE
+	// thralls to set the clan of on creation
+	var/list/starting_thralls = list()
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current
-	if(SSmapping.config.map_name != "Voyage")
-		remove_job()
-		vampire.delete_equipment()
-		vampire.reset_and_reroll_stats()
-		vampire.purge_combat_knowledge()
-		vampire.remove_all_traits()
-	. = ..()
-	if(SSmapping.config.map_name != "Voyage")
-		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
+	remove_job()
+	vampire.delete_equipment()
+	vampire.reset_and_reroll_stats()
+	vampire.purge_combat_knowledge()
+	vampire.remove_all_traits()
 	vampire.grant_undead_eyes()
+	. = ..()
+	if(!forced)
+		if(clan_selected)
+			vampire.set_clan(default_clan)
+		else
+			show_clan_selection(vampire)
+	for(var/datum/antagonist/vampire/thrall_datum in starting_thralls)
+		var/mob/living/carbon/human/thrall = thrall_datum.owner?.current
+		if(!istype(thrall))
+			continue
+		thrall.set_clan_direct(vampire.clan)
+	starting_thralls = null
+	if(chooses_name)
+		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "[name]"), 5 SECONDS)
 
-/datum/antagonist/vampire/proc/get_thralls()
-	if(!clan_selected)
-		addtimer(CALLBACK(src, PROC_REF(get_thralls)), 2 SECONDS)
-		return
-
-	var/list/restricted_roles = typecacheof(list(
-		/datum/job/lord,
-		/datum/job/consort,
-		/datum/job/priest,
-		/datum/job/hand,
-		/datum/job/captain,
-		/datum/job/prince,
-		/datum/job/inquisitor,
-		/datum/job/absolver,
-		/datum/job/orthodoxist,
-		/datum/job/adept,
-		/datum/job/forestwarden,
-		/datum/job/royalknight,
-		/datum/job/templar,
-		/datum/job/monk,
-		/datum/job/churchling,
-	))
-
-	var/list/candidates = SSgamemode.get_candidates(ROLE_NBEAST, ROLE_NBEAST, living_players = TRUE, no_antags = TRUE, restricted_roles = restricted_roles)
-	var/thralls = rand(2, 3)
-
-	candidates -= owner.current
-
-	if(!length(candidates))
-		return
-
-	for(var/i = 1 to thralls)
-		var/mob/living/carbon/human/human = pick_n_take(candidates)
-		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire(owner.current.clan, TRUE)
-		human?.mind.add_antag_datum(new_antag)
-		human.adjust_bloodpool(500)
 
 /datum/antagonist/vampire/lord/greet()
 	to_chat(owner.current, span_userdanger("I am ancient. I am the Land. And I am now awoken to trespassers upon my domain."))
@@ -74,8 +68,8 @@
 		owner.share_identities(found_mind)
 
 	var/mob/living/carbon/human/source_mob = owner.current
-	source_mob.equipOutfit(/datum/outfit/vamplord)
-	source_mob.set_patron(/datum/patron/godless/autotheist)
+	source_mob.equipOutfit(outfit)
+	source_mob.set_patron(patron)
 
 	return TRUE
 
@@ -85,15 +79,7 @@
 
 /datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.adjust_skillrank(/datum/skill/magic/blood, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/vampire_lord)
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shirt = /obj/item/clothing/shirt/vampire
 	belt = /obj/item/storage/belt/leather/plaquegold

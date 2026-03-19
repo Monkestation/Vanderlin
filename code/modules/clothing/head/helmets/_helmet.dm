@@ -5,7 +5,7 @@
 	pickup_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	sewrepair = FALSE
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ITEM
@@ -19,3 +19,5 @@
 	grid_height = 64
 	grid_width = 64
 	abstract_type = /obj/item/clothing/head/helmet
+
+	material_category = ARMOR_MAT_PLATE

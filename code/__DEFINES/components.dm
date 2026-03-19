@@ -92,6 +92,11 @@
 #define COMSIG_MOB_BREAK_SNEAK "mob_break_sneak"
 #define COMSIG_MOB_DEATH "mob_death"							//from base of mob/death(): (gibbed)
 
+#define COMSIG_MOB_TRY_BARK "try_bark"
+#define COMSIG_MOB_TRY_EMOTE "try_emote"
+#define COMSIG_MOB_MODIFY_AGGRO_LINES "comsig_mob_modify_aggro_lines"
+#define COMSIG_MOB_MODIFY_DEATH_LINES "comsig_mob_modify_death_lines"
+
 #define COMSIG_MOB_CREATED_CALLOUT "mob_created_callout"
 
 #define COMSIG_MOB_CLICKON "mob_clickon"						//from base of mob/clickon(): (atom/A, params)
@@ -112,6 +117,7 @@
 #define COMSIG_MOB_POSTATTACK_RANGED "mob_postattack_ranged"
 #define COMSIG_MOB_THROW "mob_throw"							//from base of /mob/throw_item(): (atom/target)
 #define COMSIG_MOB_EXAMINATE "mob_examinate"					//from base of /mob/verb/examinate(): (atom/target)
+#define COMSIG_MOB_EXAMINATE_CARBON "mob_examinte_carbon"		//from base of mob/living/carbon/examine(): (mob/user, mob/target, list/pronouns, list/examine_strings)
 #define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"				//from base of /mob/update_sight(): ()
 #define COMSIG_MOB_SAY "mob_say" // from /mob/living/say(): ()
 	#define COMPONENT_UPPERCASE_SPEECH 1
@@ -125,6 +131,9 @@
 
 	#define SPEECH_IGNORE_SPAM 6
 	#define SPEECH_FORCED 7 */
+/// Called from the base of '/obj/item/bodypart/proc/drop_limb(special)' ()
+#define COMSIG_MOB_DISMEMBER "mob_drop_limb"
+	#define COMPONENT_CANCEL_DISMEMBER (1<<0) //cancel the drop limb
 #define COMSIG_MOB_DEADSAY "mob_deadsay" // from /mob/say_dead(): (mob/speaker, message)
 	#define MOB_DEADSAY_SIGNAL_INTERCEPT 1
 ///from base of /mob/verb/pointed: (atom/A)
@@ -164,7 +173,7 @@
 #define COMSIG_MACHINERY_POWER_LOST "machinery_power_lost"			//from base power_change() when power is lost
 #define COMSIG_MACHINERY_POWER_RESTORED "machinery_power_restored"	//from base power_change() when power is restored
 
-
+#define COMSIG_MOB_DROPITEM "mob_dropitem"
 /// A mob has just equipped an item. Called on [/mob] from base of [/obj/item/equipped()]: (/obj/item/equipped_item, slot)
 #define COMSIG_MOB_EQUIPPED_ITEM "mob_equipped_item"
 /// A mob has just unequipped an item.
@@ -359,3 +368,6 @@
 
 #define COMPONENT_AUGMENT_SUCCESS (1<<0)
 #define COMPONENT_AUGMENT_FAILED (1<<1)
+
+#define COMSIG_SHARE_APPRENTICE_XP "comsig_share_xp"
+#define COMSIG_SKILL_LEVEL_CHANGE "comsig_level_changed"

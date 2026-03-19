@@ -60,6 +60,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define iscarbon(A) (istype(A, /mob/living/carbon))
 #define isroguespirit(A) (istype(A, /mob/living/carbon/spirit)) //underworld spirit
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
+#define isautomaton(A) (istype(A, /mob/living/carbon/human/species/automaton))
 
 //Human sub-species
 #define ishumanspecies(A) (is_species(A, /datum/species/human))
@@ -86,7 +87,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define istriton(A) (is_species(A, /datum/species/triton))
 #define ishalfling(A) (is_species(A, /datum/species/halfling))
 
-
+#define isgoblin(A) (is_species(A, /datum/species/goblin))
+#define isorc(A) (is_species(A, /datum/species/orc))
 //more carbon mobs
 #define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
 
@@ -187,7 +189,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	#define is_inquisitor_job(job_type) (istype(job_type, /datum/job/inquisitor))
 	#define is_adept_job(job_type) (istype(job_type, /datum/job/adept))
 // Serfs
-	#define is_gaffer_job(job_type) (istype(job_type, /datum/job/gaffer))
+	#define is_tomb_warden_job(job_type) (istype(job_type, /datum/job/tomb_warden))
 	#define is_apothecary_job(job_type) (istype(job_type, /datum/job/apothecary))
 // Peasantry
 	#define is_jester_job(job_type) (istype(job_type, /datum/job/jester))
@@ -196,8 +198,6 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	#define is_pilgrim_job(job_type) (istype(job_type, /datum/job/advclass/pilgrim))
 	#define is_vagrant_job(job_type) (istype(job_type, /datum/job/vagrant))
 	#define is_servant_job(job_type) (istype(job_type, /datum/job/servant))
-//  Apprentices
-	#define is_gaffer_assistant_job(job_type) (istype(job_type, /datum/job/gaffer_assistant))
 // Villains
 	#define is_skeleton_job(job_type) (istype(job_type, /datum/job/skeleton))
 		#define is_skeleton_knight_job(job_type) (istype(job_type, /datum/job/skeleton/knight))
