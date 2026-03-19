@@ -21569,6 +21569,10 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
+"kgP" = (
+/obj/structure/fake_machine/atm,
+/turf/open/floor/ruinedwood/chevron,
+/area/indoors/town/steward)
 "kgQ" = (
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest1)
@@ -32748,6 +32752,7 @@
 /obj/structure/stairs{
 	dir = 4
 	},
+/obj/structure/fake_machine/mail,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/steward)
 "pkR" = (
@@ -118334,7 +118339,7 @@ evg
 evg
 wTH
 mGE
-lLn
+kgP
 kSJ
 vqg
 mGt
