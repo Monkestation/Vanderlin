@@ -67,8 +67,8 @@
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 
-/datum/outfit/combat/bard
-	name = "Bard (Combat)"
+/datum/outfit/adventurer/bard
+	name = "Bard (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random
