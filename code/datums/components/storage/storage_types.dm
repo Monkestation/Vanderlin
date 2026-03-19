@@ -185,3 +185,20 @@
 		to_chat(M, span_warning("\the [I] is stuck to your hand, you can't put it in \the [host]!"))
 		return FALSE
 	return TRUE
+
+
+/datum/component/storage/concrete/keyrack
+	screen_max_rows = 2
+	screen_max_columns = 10
+	display_numerical_stacking = TRUE
+	max_items = 20
+	max_w_class = WEIGHT_CLASS_SMALL
+	collection_mode = COLLECT_ONE
+	insert_verb = "slide"
+	insert_preposition = "on"
+	rustle_sound = 'sound/items/gems (1).ogg'
+	silent = TRUE
+
+/datum/component/storage/concrete/keyrack/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/key, /obj/item/storage/keyring, /obj/item/lockpick, /obj/item/lockpickring))

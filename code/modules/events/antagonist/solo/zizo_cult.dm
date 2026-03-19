@@ -40,6 +40,9 @@
 		/datum/job/templar,
 		/datum/job/archivist,
 		/datum/job/magician
+		/datum/job/tomb_warden,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event/antagonist/solo/zizo_cultist

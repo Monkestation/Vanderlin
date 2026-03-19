@@ -20,7 +20,7 @@
 		/datum/job/advclass/consort,
 		/datum/job/priest,
 		/datum/job/captain,//Rest of these roles cannot cryo, as they must ahelp first before leaving the round.
-		/datum/job/gaffer //opening up the slot will break the gaffer ring code
+		/datum/job/gmtemplar
 	)
 
 /obj/structure/train/MouseDrop_T(atom/dropping, mob/user)

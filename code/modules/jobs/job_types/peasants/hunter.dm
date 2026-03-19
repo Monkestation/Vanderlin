@@ -62,6 +62,7 @@
 	give_bank_account = 15
 	apprentice_name = "Hunter"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

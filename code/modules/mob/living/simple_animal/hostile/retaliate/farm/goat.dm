@@ -17,12 +17,14 @@
 						/obj/item/natural/hide = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 4,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 1,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 2,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 2,
@@ -146,12 +148,14 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 4,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/reagent_containers/food/snacks/fat = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 1,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 2,
 						/obj/item/reagent_containers/food/snacks/fat = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/gote = 2,

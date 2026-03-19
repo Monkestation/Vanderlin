@@ -12,6 +12,7 @@
 	px_x = 0
 	px_y = -8
 	dismember_wound = /datum/wound/dismemberment/head
+	sellprice = 8
 
 	grid_width = 64
 	grid_height = 64
@@ -36,6 +37,11 @@
 	//grabtargets for grabs
 	grabtargets = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	resistance_flags = FLAMMABLE
+
+/obj/item/bodypart/head/Initialize()
+	. = ..()
+	randomize_price()
+
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
@@ -109,6 +115,7 @@
 	eyes = null
 	ears = null
 	tongue = null
+	sellprice = 0
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
 	var/mob/living/carbon/C
