@@ -32,7 +32,7 @@
 	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as it's not disabled."
 	allowed_races = ALL_RACES_LIST
 	total_positions = 0
-	var/static/list/invalid_ctags = list(
+	var/list/invalid_ctags = list(
 		CTAG_WRETCH,
 		CTAG_INQUISITION,
 		CTAG_PURITAN,
@@ -52,7 +52,7 @@
 	for(var/datum/job/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(!length(CHECKS.category_tags))
 			continue
-		if(invalid_ctags & CHECKS.category_tags)
+		if(length(invalid_ctags & CHECKS.category_tags))
 			continue
 		possible_classes += CHECKS
 
