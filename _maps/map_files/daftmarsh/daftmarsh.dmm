@@ -418,7 +418,6 @@
 /area)
 "auW" = (
 /obj/structure/winch{
-	gid = "keepgatenorth";
 	redstone_id = "keepgatenorth";
 	name = "winch (north)"
 	},
@@ -1711,7 +1710,6 @@
 /area/indoors/butchershop)
 "brm" = (
 /obj/structure/gate{
-	gid = "gatemanor3";
 	redstone_id = "gatemanor3";
 	name = "Throne Room Gate"
 	},
@@ -2857,6 +2855,13 @@
 /obj/structure/fluff/walldeco/bigpainting/lake,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/sewer)
+"cqh" = (
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/double_pelt,
+/obj/effect/landmark/start/tombwarden,
+/obj/structure/trophy/deer,
+/turf/open/floor/carpet/red,
+/area/indoors/town/merc_guild)
 "cqk" = (
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
@@ -4210,6 +4215,10 @@
 /obj/item/bedsheet/cloth,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/servanthead)
+"duJ" = (
+/obj/structure/fake_machine/contractledger,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/tavern)
 "duS" = (
 /obj/structure/bars/pipe,
 /obj/structure/water_pipe,
@@ -6568,12 +6577,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town)
-"fuR" = (
-/obj/effect/landmark/start/veteran{
-	dir = 1
-	},
-/turf/open/floor/carpet/green,
-/area/indoors/town)
 "fuY" = (
 /obj/structure/table/wood/counter/end,
 /obj/machinery/light/fueled/oven/south,
@@ -6757,11 +6760,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/town/basement)
-"fFX" = (
-/obj/item/instrument/guitar,
-/obj/structure/chair/stool,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/tavern)
 "fGh" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -8738,8 +8736,7 @@
 /area/indoors/town/smithy)
 "hwS" = (
 /obj/structure/gate/bars{
-	redstone_id = "keepgatenorth";
-	gid = "keepgatenorth"
+	redstone_id = "keepgatenorth"
 	},
 /turf/open/floor/metal/alt,
 /area/outdoors/town)
@@ -9244,7 +9241,6 @@
 /area/indoors/town/keep/squire)
 "hSR" = (
 /obj/structure/winch{
-	gid = "keepgatesouth";
 	redstone_id = "keepgatesouth";
 	name = "winch (south)"
 	},
@@ -10088,14 +10084,6 @@
 	dir = 8
 	},
 /area/indoors/town/keep/lord_appt)
-"iHe" = (
-/obj/structure/door{
-	name = "Veteran's House"
-	},
-/obj/effect/mapping_helpers/access/keyset/town/veteran,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town)
 "iHi" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
@@ -10966,7 +10954,6 @@
 /area/indoors/town/bath)
 "jtd" = (
 /obj/structure/gate{
-	gid = "gatemanorout";
 	redstone_id = "gatemanorout";
 	name = "Throne Room Gate"
 	},
@@ -11473,12 +11460,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
-"jPV" = (
-/obj/structure/door/green,
-/obj/effect/mapping_helpers/access/keyset/town/gaffer,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/town/merc_guild)
 "jPW" = (
 /obj/effect/landmark/start/gravedigger{
 	dir = 1
@@ -13867,10 +13848,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
-"lWT" = (
-/obj/structure/fake_machine/contractledger,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/tavern)
 "lXl" = (
 /obj/machinery/anvil,
 /obj/item/weapon/hammer/iron,
@@ -14408,7 +14385,6 @@
 /area/outdoors/town)
 "mqy" = (
 /obj/structure/gate/bars/preopen{
-	gid = "keepgatesouth";
 	redstone_id = "keepgatesouth"
 	},
 /obj/structure/fluff/railing/border{
@@ -15586,6 +15562,11 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"ntn" = (
+/obj/item/instrument/guitar,
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/tavern)
 "ntt" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/pelt,
@@ -16377,7 +16358,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/winch{
 	dir = 4;
-	gid = "smelting";
 	redstone_id = "smelting";
 	pixel_x = -6
 	},
@@ -18219,6 +18199,14 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
+"pRv" = (
+/obj/structure/door{
+	name = "Veteran's House"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town)
 "pRE" = (
 /turf/open/floor/greenstone/glyph3,
 /area/under/town/sewer)
@@ -19050,7 +19038,6 @@
 "qCW" = (
 /obj/structure/winch{
 	dir = 4;
-	gid = "gatemanor3";
 	redstone_id = "gatemanor3";
 	pixel_x = -6
 	},
@@ -22924,13 +22911,6 @@
 "ueG" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/butchershop)
-"ueN" = (
-/obj/structure/bed/inn/double,
-/obj/item/bedsheet/double_pelt,
-/obj/effect/landmark/start/gaffer,
-/obj/structure/trophy/deer,
-/turf/open/floor/carpet/red,
-/area/indoors/town/merc_guild)
 "ueR" = (
 /obj/structure/window/openclose,
 /turf/open/floor/woodturned/nosmooth,
@@ -25093,7 +25073,6 @@
 /area/indoors/town/keep/servanthead)
 "whw" = (
 /obj/structure/gate{
-	gid = "smelting";
 	redstone_id = "smelting";
 	name = "Throne Room Gate"
 	},
@@ -26276,6 +26255,12 @@
 /obj/item/bedsheet/wool,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep)
+"xem" = (
+/obj/structure/door/green,
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/merc_guild)
 "xep" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
@@ -26963,7 +26948,6 @@
 "xLp" = (
 /obj/structure/winch{
 	dir = 4;
-	gid = "gatemanorout";
 	redstone_id = "gatemanorout";
 	pixel_x = -6
 	},
@@ -115767,7 +115751,7 @@ jXg
 mlk
 xhU
 xhU
-iHe
+pRv
 xhU
 mlk
 jXg
@@ -128522,7 +128506,7 @@ tpZ
 jXg
 ueR
 bNv
-fFX
+ntn
 brB
 tvB
 qqt
@@ -128723,7 +128707,7 @@ iHi
 tpZ
 jXg
 ueR
-lWT
+duJ
 bNv
 bNv
 hOo
@@ -155566,7 +155550,7 @@ wwq
 nzb
 wZZ
 vsU
-fuR
+vsU
 rhj
 qGL
 vFt
@@ -165488,7 +165472,7 @@ vFt
 vFt
 vFt
 vNS
-ueN
+cqh
 vho
 nnG
 lfe
@@ -165694,7 +165678,7 @@ csQ
 vho
 vho
 lfe
-jPV
+xem
 iXR
 iXR
 iXR

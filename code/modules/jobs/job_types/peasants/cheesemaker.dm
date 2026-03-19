@@ -28,6 +28,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/cheesemaker
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

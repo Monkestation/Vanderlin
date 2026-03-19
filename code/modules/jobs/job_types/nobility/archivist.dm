@@ -26,6 +26,7 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
+	max_apprentices = 3
 
 	honorary = "Lord"
 	honorary_f = "Lady"

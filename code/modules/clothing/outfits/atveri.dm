@@ -6,11 +6,14 @@
 	item_state = "atgervi_raider_mail"
 	max_integrity = 400
 
-/obj/item/clothing/armor/leather/heavy/atgervi
+/obj/item/clothing/armor/leather/atgervi
 	name = "shamanic coat"
 	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
+	armor = ARMOR_LEATHER_GOOD
+	prevent_crits = ALL_EXCEPT_STAB
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"

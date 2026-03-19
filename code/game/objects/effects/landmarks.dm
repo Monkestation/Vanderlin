@@ -149,7 +149,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Royal Knight"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/veteran
+/obj/effect/landmark/start/tombwarden
 	name = "Veteran"
 	icon_state = "arrow"
 
@@ -364,10 +364,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Feldsher"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/gaffer
-	name = "Gaffer"
+/obj/effect/landmark/start/tombwarden
+	name = "Tomb Warden"
 	icon_state = "arrow"
-//yrf
 
 /obj/effect/landmark/start/squire
 	name = "Squire"
@@ -389,9 +388,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Matron Assistant"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/gaffer_assistant
-	name = "Ring Servant"
-	icon_state = "arrow"
 
 /obj/effect/landmark/start/churchling
 	name = "Churchling"
