@@ -338,6 +338,11 @@
 	smeltresult = /obj/item/ingot/bronze
 	var/togg = FALSE
 
+/obj/structure/bars/pipe/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
+
+
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"
 	desc = ""
@@ -1440,74 +1445,10 @@
 	blade_dulling = DULLING_BASH
 	max_integrity = 300
 
-//..................................................................................................................................
-/*------------------------------------------------------------------------------------------------------------------------------------\
-|  Gaffer shit, yes I'm making my own place here just for that and maaan its cozy, in this gated community for myself and no one else |
-\------------------------------------------------------------------------------------------------------------------------------------*/
-
 /obj/structure/fluff/statue/gaffer
 	name = "Subdued Statue"
+	desc = "It sleeps eternally."
 	icon_state = "subduedstatue"
-	anchored = TRUE
-	density = FALSE
-	opacity = FALSE
-	blade_dulling = DULLING_BASHCHOP
-	max_integrity = 999999
-	deconstructible = FALSE
-	var/ring_destroyed = FALSE
-
-/obj/structure/fluff/statue/gaffer/Initialize()
-	. = ..()
-	RegisterSignal(SSdcs, COMSIG_GAFFER_RING_DESTROYED, PROC_REF(ringdied))
-
-/obj/structure/fluff/statue/gaffer/proc/ringdied(datum/source)
-	SIGNAL_HANDLER
-	if(ring_destroyed == FALSE)
-		ring_destroyed = TRUE
-		update_appearance(UPDATE_ICON_STATE)
-
-/obj/structure/fluff/statue/gaffer/update_icon_state()
-	. = ..()
-	if(ring_destroyed == TRUE)
-		icon_state = "subduedstatue_hasring"
-	if(ring_destroyed == FALSE)
-		icon_state = "subduedstatue"
-
-/obj/structure/fluff/statue/gaffer/examine(mob/user)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BURDEN))
-		. += "slumped and tortured, broken body pertrified and in pain, its chest rose and fell in synch with mine banishing any doubt left, it is me! my own visage glares back at me!"
-		user.add_stress(/datum/stress_event/ring_madness)
-		return
-	if(ring_destroyed == TRUE)
-		. += "a statue depicting a decapitated man writhing in chains on the ground, it holds its hands out, pleading, in its palms is a glowing ring..."
-		return
-	. += "a statue depicting a decapitated man writhing in chains on the ground, it holds its hands out, pleading"
-
-/obj/structure/fluff/statue/gaffer/attack_hand(mob/living/user)
-	. = ..()
-	if(!user.mind)
-		return
-	if(!ring_destroyed)
-		return
-	if(is_gaffer_assistant_job(user.mind?.assigned_role))
-		to_chat(user, span_danger("It is not mine to have..."))
-		return
-	to_chat(user, span_danger("As you extend your hand over to the glowing ring, you feel a shiver go up your spine, as if unseen eyes turned to glare at you..."))
-	var/gaffed = alert(user, "Will you bear the burden? (Be the next Gaffer)", "YOUR DESTINY", "Yes", "No")
-
-	if(gaffed == "No" && ring_destroyed == TRUE)
-		to_chat(user, span_danger("yes...best to leave it alone."))
-		return
-
-	if((gaffed == "Yes") && Adjacent(user) && ring_destroyed == TRUE)
-		var/obj/item/ring = new /obj/item/clothing/ring/gold/burden(loc)
-		ADD_TRAIT(user, TRAIT_BURDEN, type)
-		user.put_in_hands(ring)
-		user.equip_to_slot_if_possible(ring, ITEM_SLOT_RING, FALSE, FALSE, TRUE, TRUE)
-		to_chat(user, span_danger("Once your hand is close enough to the ring, it jumps upwards and burrows itself onto your palm"))
-		ring_destroyed = FALSE
-		update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/fluff/statue/knight/interior/gen/update_icon_state()
 	if(dir == EAST)

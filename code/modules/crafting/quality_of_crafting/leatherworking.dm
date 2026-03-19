@@ -470,6 +470,33 @@
 	output = /obj/item/clothing/armor/leather/hide/steppe
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/leather/jerkin
+	name = "leather jerkin"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers = 1
+	)
+	output = /obj/item/clothing/armor/leather/jerkin
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/jerkin_belted
+	name = "belted leather jerkin"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/clothing/armor/leather/jerkin/belted
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/jerkin_long
+	name = "leather jerkin coat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/clothing/armor/leather/jerkin/belted/long
+	craftdiff = 5
+
 /datum/repeatable_crafting_recipe/leather/whip
 	name = "leather whip"
 	requirements = list(
@@ -970,7 +997,7 @@
 
 /datum/repeatable_crafting_recipe/leather/atgervi_coat
 	name = "shamanic coat"
-	output = /obj/item/clothing/armor/leather/heavy/atgervi
+	output = /obj/item/clothing/armor/leather/atgervi
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fur = 2

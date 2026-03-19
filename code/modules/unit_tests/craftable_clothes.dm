@@ -21,7 +21,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/priesthat, // unattainable
 		/obj/item/clothing/head/leather/inqhat/vigilante, //Renegade Bullshit
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
-		/obj/item/clothing/ring/gold/burden, // uncraftable
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
 		/obj/item/clothing/head/maniac,
@@ -40,7 +39,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/cloak/psydontabard, ///they'd kill you for this
 		/obj/item/clothing/cloak/psydontabard/alt, ///same here
 		/obj/item/clothing/face/spectacles/inq, //these are powerful
-		/obj/item/clothing/armor/leather/heavy, ///abstract type
 		/obj/item/clothing/head/helmet/heavy/psydonbarbute, //buyable
 		/obj/item/clothing/head/helmet/heavy/psysallet, //buyable
 		/obj/item/clothing/head/helmet/heavy/psybucket, //buyable
@@ -67,13 +65,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/cloak/templar, //base type
 		/obj/item/clothing/face/antiq, //implied to be a weird heartfelt technoitem. good luck replicating this. unique to antiquarian
 		/obj/item/clothing/wrists/bracers/naledi, //Inqstuff
-		/obj/item/clothing/armor/chainmail/hauberk/ancient,// ancient is currently for vampire death knight
-		/obj/item/clothing/armor/plate/ancient,
-		/obj/item/clothing/gloves/plate/ancient,
-		/obj/item/clothing/head/helmet/heavy/ancient,
-		/obj/item/clothing/neck/gorget/ancient,
-		/obj/item/clothing/pants/platelegs/ancient,
-		/obj/item/clothing/wrists/bracers/ancient,
 		/obj/item/clothing/head/menacing/mad_touched_treasure_hunter, //cursed
 		/obj/item/clothing/face/facemask/steel/mad_touched, //cursed
 		/obj/item/clothing/cloak/poncho/yellow,//No free colouring

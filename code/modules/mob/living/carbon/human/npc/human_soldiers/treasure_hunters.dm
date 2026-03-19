@@ -9,6 +9,7 @@
 	ambushable = FALSE
 	dodgetime = 15
 	flee_in_pain = FALSE
+	headprice = 12
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/ambush
 	wander = TRUE
@@ -35,8 +36,6 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 40
 
 /datum/attribute_holder/sheet/job/npc/mad_touched_treasure_hunter
 	raw_attribute_list = list(
@@ -60,7 +59,7 @@
 /datum/outfit/job/human/species/human/northern/mad_touched_treasure_hunter/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/bracers
 	mask = /obj/item/clothing/face/facemask/steel/mad_touched
-	armor = /obj/item/clothing/armor/leather/heavy
+	armor = /obj/item/clothing/armor/leather/jerkin
 	shirt = /obj/item/clothing/armor/gambeson
 	if(prob(20))
 		shirt = /obj/item/clothing/armor/gambeson/light

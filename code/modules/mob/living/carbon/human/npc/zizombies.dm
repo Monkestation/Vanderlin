@@ -50,6 +50,8 @@
 	dismemberable = 1
 /obj/item/bodypart/l_leg/zizombie
 	dismemberable = 1
+/obj/item/bodypart/head/zizombie
+	sellprice = 5
 
 /obj/item/bodypart/head/zizombie/update_icon_dropped()
 	return
@@ -60,8 +62,6 @@
 /obj/item/bodypart/head/zizombie/skeletonize()
 	. = ..()
 	icon_state = "zizombie_head_s"
-	headprice = 2
-	sellprice = 2
 
 /mob/living/carbon/human/species/zizombie/update_body()
 	remove_overlay(BODY_LAYER)
@@ -123,8 +123,6 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(15,40)
-			headdy.sellprice = rand(15,40)
 	src.grant_language(/datum/language/common)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)

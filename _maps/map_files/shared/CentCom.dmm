@@ -939,7 +939,6 @@
 /area/indoors/bandit_lair)
 "db" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -1671,7 +1670,6 @@
 /area/outdoors/bog/inhumen_camp)
 "hJ" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,
@@ -1770,7 +1768,6 @@
 /area)
 "ik" = (
 /obj/structure/winch{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -3941,7 +3938,6 @@
 /area/indoors/lich)
 "wb" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -5359,7 +5355,6 @@
 /area/indoors/vampire_manor)
 "GC" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -7680,7 +7675,6 @@
 /area/indoors/vampire_manor)
 "Vv" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,

@@ -189,6 +189,11 @@
 		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
 			C.Knockdown(knockdown)
 
+/obj/item/rope/net/dropped(mob/living/carbon/user, silent)
+	. = ..()
+	if(istype(user) && user.legcuffed == src)
+		user.remove_status_effect(/datum/status_effect/debuff/netted)
+
 // Failsafe in case the item somehow ends up being destroyed
 /obj/item/rope/net/Destroy()
 	if(iscarbon(loc))

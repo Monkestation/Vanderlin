@@ -7,6 +7,7 @@
 	m_intent = MOVE_INTENT_SNEAK
 	d_intent = INTENT_DODGE
 	ai_controller = /datum/ai_controller/human_npc
+	headprice = 10
 
 /mob/living/carbon/human/species/human/northern/thief/Initialize()
 	. = ..()
@@ -72,7 +73,6 @@
 	else
 		real_name = pick(file2list("strings/names/first_male.txt"))
 	update_body()
-	head.sellprice = 30
 
 /datum/attribute_holder/sheet/job/npc/thief
 	raw_attribute_list = list(

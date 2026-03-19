@@ -759,14 +759,14 @@
 			if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 				return
 		if((A.loc == src))
-			if(!istype(get_step(src, dir), /turf/open/water))
+			if(!isopenturf(get_step(src, dir)))
 				var/list/viable_cardinals = list()
 				var/inverse = REVERSE_DIR(dir)
 				for(var/direction in GLOB.cardinals)
 					if(direction == inverse)
 						continue
 					var/turf/open/water/water = get_step(src, direction)
-					if(!istype(water))
+					if(!isopenturf(water))
 						continue
 					viable_cardinals |= direction
 				if(length(viable_cardinals))

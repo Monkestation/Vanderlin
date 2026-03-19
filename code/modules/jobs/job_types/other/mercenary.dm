@@ -13,6 +13,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
+	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_DWARF_SUBTERRAN)

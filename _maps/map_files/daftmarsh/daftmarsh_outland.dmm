@@ -796,14 +796,6 @@
 	pixel_x = -3;
 	pixel_y = -5
 	},
-/obj/item/painting/lorehead{
-	pixel_x = 10;
-	pixel_y = 6
-	},
-/obj/item/painting/lorehead/one{
-	pixel_x = -7;
-	pixel_y = 9
-	},
 /turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "hO" = (

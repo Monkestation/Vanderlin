@@ -64,7 +64,7 @@
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,
-		/obj/item/key/mercenary,
+		/obj/item/storage/keyring/mercenary,
 	)
 
 /obj/item/storage/belt/leather/mercenary/shalal
