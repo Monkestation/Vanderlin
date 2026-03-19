@@ -338,7 +338,3 @@
 	else
 		pants = /obj/item/clothing/pants/tights/colored/vagrant
 		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
-
-
-
-
