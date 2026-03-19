@@ -45,7 +45,7 @@
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 		/datum/job/magician,
-		/datum/job/archivist
+		/datum/job/archivist,
 	)
 
 /datum/round_event_control/antagonist/solo/werewolf/valid_for_map()

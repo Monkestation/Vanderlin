@@ -164,7 +164,6 @@
 	name = "Folkheroes"
 	max_spawns = 1
 	downgrade_wave = /datum/migrant_wave/folkheroes_down_one
-	triumph_threshold = 50
 	weight = 4
 	roles = list(
 		/datum/migrant_role/advclass/folkhero = 3,
