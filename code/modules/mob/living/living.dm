@@ -1031,7 +1031,7 @@
 			if(heal_flags & ADMIN_HEAL_ALL)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp, null, TRUE, forced = TRUE)
+				wound.heal_wound(wound.whp, null, TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL

@@ -179,7 +179,7 @@
 		attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/leper_vice)
 	remove_stat_modifier(TRAIT_LEPROSY)
 
-///Called when TRAIT_BLACK_BRIAR is added to the mob.
+///Called when TRAIT_BRIAR_HOST is added to the mob.
 /mob/living/proc/on_black_briar_trait_gain(datum/source)
 	SIGNAL_HANDLER
 	if(!iscarbon(src))

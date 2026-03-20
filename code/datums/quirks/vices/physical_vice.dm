@@ -164,7 +164,7 @@
 	if(chest && !chest.has_wound(/datum/wound/black_briar_curse/chest))
 		var/datum/wound/black_briar_curse/chest/master_wound = LAZYACCESS(GLOB.primordial_wounds, /datum/wound/black_briar_curse/chest)
 		if(master_wound?.can_apply_to_bodypart(chest))
-			ADD_TRAIT(owner, TRAIT_BLACK_BRIAR, "[type]")
+			ADD_TRAIT(owner, TRAIT_BRIAR_HOST, "[type]")
 			return
 	//H.get_random_flaw()
 

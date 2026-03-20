@@ -101,7 +101,7 @@
 		return FALSE
 	. = ..()
 	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
-	infection = clamp(infection + (rand(20, 25) - owner.STAEND) * (SSmobs.wait * 0.1) , 0, max_infection)
+	infection = clamp(infection + (rand(20, 25) - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE)) * (SSmobs.wait * 0.1) , 0, max_infection)
 	if(length(root_network) < 2) // we can't get worse without a limb being infected
 		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
 	infection_percent = min(infection / max_infection, 1)
@@ -118,7 +118,7 @@
 		can_examine = TRUE // Once it's been identified, we'll always know if we have it if it goes back below hidden
 	update_appearance()
 
-/datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE)
+/datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE, forced = FALSE)
 	if(full_heal)
 		return ..()
 	if(infection_percent >= 1)
@@ -181,9 +181,9 @@
 
 /// somehow you've triggered your immunity to get lost, like getting more stacks added to you
 /datum/wound/black_briar_curse/proc/remove_immunity(mob/living/affected)
-	var/list/was_immune = GET_TRAIT_SOURCES(affected, TRAIT_BLACK_BRIAR)
+	var/list/was_immune = GET_TRAIT_SOURCES(affected, TRAIT_BRIAR_HOST)
 	if(was_immune)
-		REMOVE_TRAIT(affected, TRAIT_BLACK_BRIAR, was_immune)
+		REMOVE_TRAIT(affected, TRAIT_BRIAR_HOST, was_immune)
 
 /datum/wound/black_briar_curse/proc/update_appearance()
 	if(infection_percent >= BBC_STAGE_LATE)
@@ -226,7 +226,7 @@
 	. = ..()
 	if(!.)
 		return
-	owner.adjust_energy((owner.STAEND - 20) * (SSmobs.wait * 0.1) * infection_percent)
+	owner.adjust_energy(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE - 20) * (SSmobs.wait * 0.1) * infection_percent)
 	if(infection_percent >= 1)
 		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
@@ -242,7 +242,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
-		if(!HAS_TRAIT(owner, TRAIT_BLACK_BRIAR) && world.time > next_limb_infection && prob(4))
+		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST) && world.time > next_limb_infection && prob(4))
 			var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 			uninfected_bodyparts -= root_network
 			var/mob/living/carbon/C = owner
