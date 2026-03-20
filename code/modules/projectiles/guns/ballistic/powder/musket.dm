@@ -26,6 +26,7 @@
 	projectile_damage_multiplier = 3.5
 
 	ramrod_type = /obj/item/ramrod/musket
+	powder_required = 10
 	/// The bayonet if affixed
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet = null
 

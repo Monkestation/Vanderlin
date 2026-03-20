@@ -32,4 +32,4 @@
 
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/blastpowder, 5)
+	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)

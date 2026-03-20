@@ -147,6 +147,10 @@
 		balloon_alert(user, "nothing to ram!")
 		return
 
+	if(!reagents.get_reagent_amount(/datum/reagents/blastpowder))
+		balloon_alert(user, "no powder!")
+		return
+
 	if(bullet_rammed)
 		return
 
@@ -248,6 +252,8 @@
 		modified.accuracy += (perception - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
 		modified.bonus_accuracy += (perception - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
+	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
+
 	var/powder = reagents.get_reagent_amount(/datum/reagent/blastpowder)
 	var/filled_percent = powder / powder_required
 	if(filled_percent > 1) // Over
@@ -257,8 +263,6 @@
 	else if(filled_percent < 1) // Under
 		modified.damage /= max(0.3, filled_percent)
 		modified.speed *= max(0.5, filled_percent)
-
-	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
 
 /obj/item/gun/ballistic/powder/shoot_live_shot(mob/living/user, pointblank, mob/pbtarget, message)
 	. = ..()
