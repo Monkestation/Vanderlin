@@ -645,7 +645,7 @@
 	if(!cmode && !stat && user.m_intent == MOVE_INTENT_SNEAK && (dir == REVERSE_DIR(get_dir(src, user))))
 		var/blunt = (user.used_intent.blade_class == BCLASS_BLUNT)
 		var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
-		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking > 10)
+		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking >= 10)
 			next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
 			// Get extra damage as a percent of 50% extra based on skill
 			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
