@@ -184,18 +184,12 @@
 	SIGNAL_HANDLER
 	if(!iscarbon(src))
 		return
-	//delete all previous copies except the one we need if they had it already
-	var/datum/wound/black_briar_curse/chest/root
-	for(var/datum/wound/black_briar_curse/tumor in get_wounds())
-		if(!istype(tumor, /datum/wound/black_briar_curse/chest))
-			tumor.can_rebuild = FALSE
-			qdel(tumor)
-		else
-			root = tumor
-	root?.rebuild_root_network(src)
-	if(!root)
-		var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
-		root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	var/datum/wound/black_briar_curse/chest/root = has_wound(/datum/wound/black_briar_curse/chest)
+	if(root) // we already had a root, so remove the traits that even gave us this
+		root.remove_immunity()
+		return
+	var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
+	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
 	root?.infection = root.max_infection * BBC_STAGE_LATE
 	root?.infection_percent = BBC_STAGE_LATE
 

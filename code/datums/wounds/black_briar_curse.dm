@@ -128,7 +128,7 @@
 	//the pain should roughly start just a little bit after the infection is no longer hidden
 	//because we really don't wanna overshoot somehow and get an undefined number we're gonna give a .001 bump
 	woundpain = max(0, (1 - BBC_STAGE_DETECTABLE) / (1.001 + woundpain_inverse - infection_percent) - 1)
-	to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
+	//to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
 	if(infection_percent >= BBC_STAGE_DETECTABLE)
 		can_examine = TRUE // Once it's been identified, we'll always know if we have it if it goes back below hidden
 	try_sprout()
@@ -264,6 +264,8 @@
 		return
 	if(infection_percent >= BBC_STAGE_LATE)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar2)
+		if(!istype(owner.patron, /datum/patron/alternate/black_briar))
+			owner.set_patron(/datum/patron/alternate/black_briar)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_MID)

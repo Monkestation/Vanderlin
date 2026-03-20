@@ -1624,6 +1624,36 @@ $border-width-px: $border-width * 1px;
 }
 /* ##### END ##### */
 
+/* ##### THE BLACK BRIAR ##### */
+.god_theblackbriar {
+  color: hsl(340, 30%, 32%);
+  font-weight: bold;
+  animation: blackbriar_flicker 1s infinite;
+}
+
+@keyframes blackbriar_flicker {
+	20% {
+		color: hsl(340, 30%, 32%);
+	}
+
+	40% {
+		color: hsl(0, 41%, 23%);
+	}
+
+	60% {
+		color: hsl(340, 30%, 32%);
+	}
+
+  80% {
+		color: hsl(349, 54%, 21%);
+	}
+
+	100% {
+		color: hsl(345, 36%, 37%);
+	}
+}
+/* ##### END ##### */
+
 .highlight-bounce {
   animation: bounce 2s infinite;
   display: inline-block;

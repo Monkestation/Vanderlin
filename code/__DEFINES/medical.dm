@@ -103,7 +103,7 @@
 #define BLOODLETTING_MULT 5
 
 /// Black Briar
-#define BBC_TIME_MAX (5 MINUTES)
+#define BBC_TIME_MAX (90 MINUTES)
 #define BBC_TIME_MAX_LIMB BBC_TIME_MAX * 0.5
 
 /// Black Briar time ratios
