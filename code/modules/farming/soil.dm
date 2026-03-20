@@ -14,11 +14,11 @@
 #define WEED_RESISTANCE_DECAY_RATE 20 / (1 MINUTES)
 
 // These get multiplied by 0.0 to 1.0 depending on amount of weeds
-#define WEED_WATER_CONSUMPTION_RATE 5 / (1 MINUTES)
+#define WEED_WATER_CONSUMPTION_RATE 4 / (1 MINUTES)
 #define WEED_NUTRITION_CONSUMPTION_RATE 2 / (1 MINUTES)
 
-#define PLANT_REGENERATION_RATE 10 / (1 MINUTES)
-#define PLANT_DECAY_RATE 10 / (1 MINUTES)
+#define PLANT_REGENERATION_RATE 5 / (1 MINUTES)
+#define PLANT_DECAY_RATE 5 / (1 MINUTES)
 #define PLANT_BLESS_HEAL_RATE 20 / (1 MINUTES)
 #define PLANT_WEEDS_HARM_RATE 10 / (1 MINUTES)
 
@@ -92,10 +92,10 @@
 	if(!produce_ready)
 		return
 	apply_farming_fatigue(user, 4)
-	add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 2)
+	add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 
 	return_nutrients_to_soil()
-	var/farming_skill = user.get_skill_level(/datum/skill/labor/farming)
+	var/farming_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	var/chance_to_ruin = 50 - (farming_skill * 25)
 	if(prob(chance_to_ruin))
 		ruin_produce()
@@ -124,7 +124,7 @@
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
 
-/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
 		if(!plant || !produce_ready)
 			to_chat(user, span_warning("There is nothing to harvest!"))
@@ -134,7 +134,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_seed_planting(obj/item/attacking_item, mob/user)
 	var/obj/item/old_item
 	if(istype(attacking_item, /obj/item/storage/sack))
 		var/list/seeds = list()
@@ -154,7 +154,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_uprooting(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/shovel))
 		var/obj/item/weapon/shovel/shovel = attacking_item
 		to_chat(user, span_notice("I begin to uproot the crop..."))
@@ -166,7 +166,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_tilling(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		var/obj/item/weapon/hoe/hoe = attacking_item
 		to_chat(user, span_notice("I begin to till the soil..."))
@@ -178,7 +178,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_watering(obj/item/attacking_item, mob/user)
 	var/water_amount = 0
 	if(istype(attacking_item, /obj/item/reagent_containers))
 		if(water >= MAX_PLANT_WATER * 0.8)
@@ -202,7 +202,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_fertilizing(obj/item/attacking_item, mob/user)
 	var/fertilize_success = FALSE
 
 	if(istype(attacking_item, /obj/item/fertilizer))
@@ -237,7 +237,7 @@
 	adjust_potassium(fert.potassium_content)
 	return TRUE
 
-/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user, params)
+/obj/structure/soil/proc/try_handle_deweed(obj/item/attacking_item, mob/living/user)
 	if(weeds < MAX_PLANT_WEEDS * 0.3)
 		return FALSE
 	if(attacking_item == null)
@@ -246,19 +246,19 @@
 			apply_farming_fatigue(user, 20)
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
-			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
-		add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+		add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
 
-/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/proc/try_handle_flatten(obj/item/attacking_item, mob/user)
 	if(plant)
 		return FALSE
 	if(istype(attacking_item, /obj/item/weapon/shovel))
@@ -291,11 +291,11 @@
 			to_chat(user, span_notice("I remove the crop."))
 			playsound(src,'sound/items/seed.ogg', 100, FALSE)
 			uproot()
-			add_sleep_experience(user, /datum/skill/labor/farming, user.STAINT * 0.2)
+			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		return
 	. = ..()
 
-/obj/structure/soil/attack_hand_secondary(mob/user, params)
+/obj/structure/soil/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -303,7 +303,7 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -313,22 +313,22 @@
 	if(try_handle_flatten(weapon, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_seed_planting(attacking_item, user, params))
+	if(try_handle_seed_planting(attacking_item, user))
 		return
-	if(try_handle_uprooting(attacking_item, user, params))
+	if(try_handle_uprooting(attacking_item, user))
 		return
-	if(try_handle_tilling(attacking_item, user, params))
+	if(try_handle_tilling(attacking_item, user))
 		return
-	if(try_handle_watering(attacking_item, user, params))
+	if(try_handle_watering(attacking_item, user))
 		return
-	if(try_handle_harvest(attacking_item, user, params))
+	if(try_handle_harvest(attacking_item, user))
 		return
-	if(try_handle_fertilizing(attacking_item, user, params))
+	if(try_handle_fertilizing(attacking_item, user))
 		return
 	for(var/obj/item/bagged_item in attacking_item.contents)
-		if(try_handle_fertilizing(bagged_item, user, params))
+		if(try_handle_fertilizing(bagged_item, user))
 			return
 	return ..()
 
@@ -340,9 +340,9 @@
 	if(stepper.m_intent == MOVE_INTENT_SNEAK)
 		return
 	if(stepper.m_intent == MOVE_INTENT_WALK)
-		adjust_plant_health(-2.5)
+		adjust_plant_health(-1)
 	else if(stepper.m_intent == MOVE_INTENT_RUN)
-		adjust_plant_health(-5)
+		adjust_plant_health(-2)
 	playsound(src, "plantcross", 90, FALSE)
 
 /obj/structure/soil/proc/deweed()
@@ -435,14 +435,14 @@
 		return
 	water = min(MAX_PLANT_WATER, water + min(5, severity / 4))
 
-/obj/structure/soil/process()
-	var/dt = 10
+/obj/structure/soil/process(delta_time)
+	delta_time = delta_time SECONDS
 	var/force_update = FALSE
-	process_weeds(dt)
-	force_update = process_plant(dt)
+	process_weeds(delta_time)
+	force_update = process_plant(delta_time)
 	if(world.time < accellerated_growth)
-		force_update = process_plant(dt)
-	process_soil(dt)
+		force_update = process_plant(delta_time)
+	process_soil(delta_time)
 	if(soil_decay_time <= 0)
 		decay_soil(TRUE)
 		return
@@ -582,7 +582,7 @@
 	adjust_potassium(-dt * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
 
 	if((get_total_npk() > 0) && plant_genetics)
-		var/genetic_value = (100 - plant_genetics.disease_resistance) * 0.03
+		var/genetic_value = (TRAIT_GRADE_AVERAGE / max(plant_genetics.disease_resistance, TRAIT_GRADE_POOR))
 		adjust_weeds(dt * WEED_GROWTH_RATE * genetic_value)
 
 /obj/structure/soil/proc/process_plant(dt)
@@ -795,13 +795,13 @@
 		var/efficiency_modifier = (plant_genetics.water_efficiency - TRAIT_GRADE_AVERAGE) / 100
 		drain_rate *= (1 - efficiency_modifier * 0.4) // Up to 20% less water consumption
 
-	var/weed_damage_multiplier = 1.0
-	if(plant_genetics)
-		var/hardiness_modifier = (plant_genetics.cold_resistance - TRAIT_GRADE_AVERAGE) / 100
-		weed_damage_multiplier = (1 - hardiness_modifier * 0.5) // Up to 25% less weed damage
-
 	// Lots of weeds harm the plant
 	if(weeds >= MAX_PLANT_WEEDS * 0.6)
+		var/weed_damage_multiplier = 1.0
+		if(plant_genetics)
+			var/hardiness_modifier = (plant_genetics.disease_resistance - TRAIT_GRADE_AVERAGE) / 100
+			weed_damage_multiplier = (1 - hardiness_modifier * 0.5) // Up to 25% less weed damage
+		weed_damage_multiplier *= (weeds / MAX_PLANT_WEEDS)
 		should_update |= adjust_plant_health(-dt * PLANT_WEEDS_HARM_RATE * weed_damage_multiplier)
 
 	// Regenerate plant health if we dont drain water, or we have the water
@@ -997,6 +997,13 @@
 		actual_growth_time *= 0.95
 	if(potassium_needed && potassium_factor < 0.1)
 		actual_growth_time *= 0.95
+
+	var/drain_rate = plant.water_drain_rate * dt
+	if(plant_genetics)
+		var/efficiency_modifier = (plant_genetics.water_efficiency - TRAIT_GRADE_AVERAGE) / 100
+		drain_rate *= (1 - efficiency_modifier * 0.4) // Up to 20% less water consumption
+	if(water < drain_rate) // If no water, eat a massive growth rate penalty
+		actual_growth_time *= 0.5
 
 	// Nutrient deficiency affects plant health only if nutrients are required but unavailable
 	var/any_nutrients_needed = (nitrogen_needed > 0 || phosphorus_needed > 0 || potassium_needed > 0)

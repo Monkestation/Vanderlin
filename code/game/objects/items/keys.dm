@@ -55,7 +55,7 @@
 	if(access2add)
 		. += span_info("It has been marked with [access2add[1]], but has not been finished.")
 
-/obj/item/key/custom/attackby(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!istype(I, /obj/item/weapon/hammer))
 		return ..()
 	if(lockids)
@@ -72,7 +72,7 @@
 	to_chat(user, span_notice("You set the key ID to [input]."))
 	access2add = list("[input]")
 
-/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -188,11 +188,6 @@
 	icon_state = "rustkey"
 	lockids = list(ACCESS_ELDER)
 
-/obj/item/key/veteran
-	name = "veteran's key"
-	icon_state = "rustkey"
-	lockids = list(ACCESS_VETERAN)
-
 /obj/item/key/feldsher
 	name = "feldsher's key"
 	desc = "The key to the Feldsher's own clinic."
@@ -237,7 +232,12 @@
 	icon_state = "cheesekey"
 	lockids = list(ACCESS_CAPTAIN)
 
-// Other
+/// Mercs
+
+/obj/item/key/tombwarden
+	name = "warden's key"
+	icon_state = "rustkey"
+	lockids = list(ACCESS_TOMBWARDEN)
 
 /obj/item/key/mercenary
 	name = "mercenary key"
@@ -245,11 +245,11 @@
 	icon_state = "greenkey"
 	lockids = list(ACCESS_MERC)
 
-/obj/item/key/gaffer
-	name = "Mercenary guild master's key"
-	desc = "\"Humble\" would be a kinder word to use for its current state..."
-	icon_state = "rustkey"
-	lockids = list(ACCESS_GAFFER)
+/obj/item/key/tomb
+	name = "delver's key"
+	desc = span_red("Down we go...")
+	icon_state = "tombkey"
+	lockids = list(ACCESS_TOMB)
 
 /obj/item/key/warehouse
 	name = "Warehouse key"
@@ -257,11 +257,17 @@
 	icon_state = "rustkey"
 	lockids = list(ACCESS_WAREHOUSE)
 
+/obj/item/key/bogwitch
+	name = "bogwitch key"
+	desc = "This key opens the Bog Witch's hut."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_BOGWITCH)
+
 ////// MANOR
 
 /obj/item/key/manor
-	name = "manor key"
-	desc = "This key will open most Manor doors."
+	name = "keep key"
+	desc = "This key will open most Keep doors."
 	icon_state = "mazekey"
 	lockids = list(ACCESS_MANOR)
 
@@ -296,8 +302,8 @@
 	lockids = list(ACCESS_LORD)
 
 /obj/item/key/walls
-	name = "manor gatehouse key"
-	desc = "This is a rusty key for the Manor gatehouse."
+	name = "keep gatehouse key"
+	desc = "This is a rusty key for the Keep Gatehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_MANOR_GATE)
 
@@ -765,20 +771,20 @@
 
 
 ////// MINOR NOBLES
-/obj/item/key/mnoble1
+/obj/item/key/mnoble1_blue
 	name = "Key of the noble house 1"
 	desc = "A very detailed steel key, has gold details and a purple gemstone on it... is for the noble house number one."
 	icon_state = "noble1"
-	lockids = list("nobles1")
+	lockids = list(ACCESS_NOBLE1)
 
-/obj/item/key/mnoble2
+/obj/item/key/mnoble2_yellow
 	name = "Key of the noble house 2"
 	desc = "A very detailed steel key, has gold details and a yellow gemstone on it... is for the noble house number two."
 	icon_state = "noble2"
-	lockids = list("nobles2")
+	lockids = list(ACCESS_NOBLE2)
 
-/obj/item/key/mnoble3
+/obj/item/key/mnoble3_red
 	name = "Key of the noble house 3"
 	desc = "A very detailed steel key, has gold details and a red gemstone on it... is for the noble house number three?"
 	icon_state = "noble3"
-	lockids = list("nobles3")
+	lockids = list(ACCESS_NOBLE3)

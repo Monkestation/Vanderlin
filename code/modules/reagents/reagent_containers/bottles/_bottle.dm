@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
+GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/paper/scroll))
 		if(reagents?.total_volume)
 			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
@@ -79,16 +79,17 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(closed)
 		. += "[icon_state]cork"
 
-/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	toggle_cork(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user)
+/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user, modify_nextmove = TRUE)
 	closed = !closed
-	user.changeNext_move(CLICK_CD_RAPID)
+	if(modify_nextmove)
+		user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
@@ -174,7 +175,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	contained = pp
 	pp.info = pick(GLOB.wisdoms)
 
-/obj/item/bottlemessage/attack_self_secondary(mob/user, params)
+/obj/item/bottlemessage/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -220,7 +221,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_vial1"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
@@ -250,3 +251,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	icon_state = "blackbottle"
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	name = "pot of cheese soup"
+	list_reagents = list(/datum/reagent/consumable/soup/cheese = 75)

@@ -1,6 +1,6 @@
 // This code handles different species in the game.
-GLOBAL_LIST_EMPTY(roundstart_races)
-GLOBAL_LIST_EMPTY(donator_races)
+GLOBAL_LIST_EMPTY(roundstart_species)
+
 /datum/species
 	/// The name used for examine text and so on
 	var/name
@@ -8,6 +8,9 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/desc
 	/// Internal ID of this species used for job checks, etc.
 	var/id
+	// Since an unique ID is required, but subspecies probably should have the same restrictions
+	/// Override for things that use species id to use instead
+	var/id_override
 	/// Override for limbs to use a different species' limbs
 	var/limbs_id
 	/// Limb icon to use to build appearance for males
@@ -115,8 +118,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 	/// Do we use a blood type seperate from default? (Yes, yes we do)
 	var/datum/blood_type/exotic_bloodtype
 
-	/// What meat do we get from butchering this species?
-	var/meat = /obj/item/reagent_containers/food/snacks/meat/steak
+	/// What meat do we get from butchering this species? These are weighted odds.
+	var/list/meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1)
 	/// Food we (SHOULD) get a mood buff from
 	var/liked_food = NONE
 	/// Food we (SHOULD) get a mood debuff from
@@ -160,7 +163,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	/// Generic traits tied to having the species and being female
 	var/list/inherent_traits_f
 	/// Associative list of skills to adjustments
-	var/list/inherent_skills = list()
+	var/datum/attribute_holder/sheet/job/inherent_sheet
 	/// Species-only traits used for drawing, can be found in DNA.dm
 	var/list/species_traits = list()
 	/// Components to add when spawning
@@ -188,7 +191,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/use_skintones = FALSE
 
 	/// Wording for skin tone on examine and on character setup
-	var/skin_tone_wording = "Skin Tone"
+	var/skin_tone_wording = "Ancestry"
 
 	/// List of bodypart features of this species
 	var/list/bodypart_features
@@ -237,11 +240,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 	/// List all of body markings that the player can choose from in customization. Body markings from sets get added to here
 	var/list/body_markings
 
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
-
-	///Statkey = bonus stat, - for malice.
-	var/list/specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_END = 0,STATKEY_CON = 0, STATKEY_INT = 0, STATKEY_SPD = 0, STATKEY_LCK = 0)
+	var/datum/attribute_holder/sheet/statsheet_male
+	var/datum/attribute_holder/sheet/statsheet_female
 
 	/// Can we be a youngling?
 	var/can_be_youngling = TRUE
@@ -274,6 +274,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/amtfail = 0
 
 	var/punch_damage = 0
+	var/kick_damage = 0
 
 	/// Native language for accents
 	var/native_language = "Imperial"
@@ -287,34 +288,38 @@ GLOBAL_LIST_EMPTY(donator_races)
 ///////////
 
 /datum/species/proc/get_accent(language, variant = 0)
-	if(language == "Old Psydonic")
-		return strings("accents/grenz_replacement.json", "grenz")
-	if(language == "Zalad")
-		return strings("accents/zalad_replacement.json", "arabic")
-	if(language == "Imperial")
-		return
-	if(language == "Elfish" && variant == 1)
-		return strings("accents/russian_replacement.json", "russian")
-	if(language == "Elfish" && variant == 2)
-		return strings("accents/french_replacement.json", "french")
-	if(language == "Dwarfish")
-		return strings("accents/dwarf_replacement.json", "dwarf")
-	if(language == "Infernal")
-		return strings("accents/spanish_replacement.json", "spanish")
-	if(language == "Celestial")
-		return
-	if(language == "Orcish")
-		return strings("accents/halforc_replacement.json", "halforc")
-	if(language == "Halfling")
-		return strings("accents/halfling_replacement.json", "halfling")
-	if(language == "Gutter")
-		return strings("accents/kobold_replacement.json", "kobold")
-	if(language == "Deepspeak")
-		return strings("accents/triton_replacement.json", "triton")
-	if(language == "Pirate")
-		return strings("accents/pirate_replacement.json", "pirate")
-	if(language == "Zizo Chant")
-		return
+	switch(language)
+		if("Old Psydonic", "Psydonic")
+			return strings("accents/grenz_replacement.json", "grenz")
+		if("Zalad")
+			return strings("accents/zalad_replacement.json", "arabic")
+		if("Imperial")
+			return
+		if("Elfish")
+			if(variant == 1)
+				return strings("accents/russian_replacement.json", "russian")
+			else
+				return strings("accents/french_replacement.json", "french")
+		if("Dwarfish")
+			return strings("accents/dwarf_replacement.json", "dwarf")
+		if("Infernal")
+			return strings("accents/spanish_replacement.json", "spanish")
+		if("Celestial")
+			return
+		if("Orcish")
+			return strings("accents/halforc_replacement.json", "halforc")
+		if("Halfling")
+			return strings("accents/halfling_replacement.json", "halfling")
+		if("Gutter")
+			return strings("accents/kobold_replacement.json", "kobold")
+		if("Rous")
+			return strings("accents/rousman_replacement.json", "rous")
+		if("Deepspeak")
+			return strings("accents/triton_replacement.json", "triton")
+		if("Pirate")
+			return strings("accents/pirate_replacement.json", "pirate")
+		if("Zizo Chant")
+			return
 	return
 
 /datum/species/proc/handle_speech(datum/source, list/speech_args)
@@ -378,7 +383,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 				ACCENT_MIDDLE_SPEAK,
 				ACCENT_ZALAD,
 				ACCENT_HALFLING,
-				ACCENT_KOBOLD
+				ACCENT_KOBOLD,
+				ACCENT_ROUSMAN
 			)
 
 			///This will only trigger for donators
@@ -404,12 +410,18 @@ GLOBAL_LIST_EMPTY(donator_races)
 				/datum/language/zalad = "Zalad",
 				/datum/language/deepspeak = "Deepspeak",
 				/datum/language/oldpsydonic = "Old Psydonic",
+				/datum/language/newpsydonic = "Psydonic",
 				/datum/language/undead = "Zizo Chant"
 			)
 
 			if (language in language_map)
 				language_check = language_map[language]
-			if(nativelang != language_check || special_accent)
+			var/unaccented = FALSE
+			if(((language_check == "Psydonic") && (nativelang == "Old Psydonic")) || ((language_check == "Old Psydonic") && (nativelang == "Psydonic")))
+				unaccented = TRUE
+			else if(nativelang == language_check)
+				unaccented = TRUE
+			if(!unaccented || special_accent)
 				if(species_accent)
 					for(var/key in species_accent)
 						var/value = species_accent[key]
@@ -440,37 +452,17 @@ GLOBAL_LIST_EMPTY(donator_races)
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	return TRUE
 
-/proc/generate_selectable_species()
-	for(var/I as anything in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		if(!S.check_roundstart_eligible())
-			continue
-		GLOB.roundstart_races += S.name
-		if(S.donator_req)
-			GLOB.donator_races += S.name
-		qdel(S)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		GLOB.roundstart_races += "Humen" // GLOB.species_list uses name and should probably be refactored
-	sortTim(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
-
-/proc/get_selectable_species(donator = TRUE)
-	if(!LAZYLEN(GLOB.roundstart_races))
-		generate_selectable_species()
-	var/list/species = GLOB.roundstart_races.Copy()
-	if(!donator)
-		species -= GLOB.donator_races
-	return species
-
 /datum/species/proc/check_roundstart_eligible()
 	return FALSE
-//	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
-//		return TRUE
-//	return FALSE
+
+// Remove when preference datums
+/datum/species/proc/preference_accessible(datum/preferences/prefs)
+	return TRUE
 
 /datum/species/proc/get_possible_names(gender = MALE) as /list
 	SHOULD_CALL_PARENT(FALSE)
-	var/static/list/male_names = world.file2list('strings/names/first_male.txt')
-	var/static/list/female_names = world.file2list('strings/names/first_female.txt')
+	var/static/list/male_names = file2list('strings/names/first_male.txt')
+	var/static/list/female_names = file2list('strings/names/first_female.txt')
 
 	return (gender == FEMALE) ? female_names : male_names
 
@@ -485,7 +477,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 			break
 
 /datum/species/proc/get_possible_surnames(gender = MALE) as /list
-	var/static/list/last_names = world.file2list('strings/names/last.txt')
+	var/static/list/last_names = file2list('strings/names/last.txt')
 
 	return last_names
 
@@ -496,23 +488,24 @@ GLOBAL_LIST_EMPTY(donator_races)
 /datum/species/proc/get_spec_undies_list(gender)
 	if(!GLOB.underwear_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+
+	var/list/used_list = GLOB.underwear_list
+	if(gender == MALE)
+		used_list = GLOB.underwear_m
+	else if(gender == FEMALE)
+		used_list = GLOB.underwear_f
+
+	var/used_species_id = id_override ? id_override : id
+
 	var/list/spec_undies = list()
-	var/datum/sprite_accessory/X
-	switch(gender)
-		if(MALE)
-			for(var/O in GLOB.underwear_m)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
-		if(FEMALE)
-			for(var/O in GLOB.underwear_f)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if(id in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
+	for(var/name in used_list)
+		var/datum/sprite_accessory/accessory = used_list[name]
+		if(!accessory.roundstart)
+			continue
+		if(!(used_species_id in accessory.specuse))
+			continue
+		spec_undies += accessory
+
 	return spec_undies
 
 /datum/species/proc/random_underwear(gender)
@@ -746,12 +739,12 @@ GLOBAL_LIST_EMPTY(donator_races)
 	if(C.hud_used)
 		C.hud_used.update_locked_slots()
 
-	if(ishuman(C))
+	if(ishuman(C) && !pref_load)
 		random_character(C)
+	else
+		regenerate_organs(C, old_species, pref_load = pref_load)
 
 	C.mob_biotypes = inherent_biotypes
-
-	regenerate_organs(C,old_species, pref_load=pref_load)
 
 	if(exotic_bloodtype && C.dna.human_blood_type != exotic_bloodtype)
 		C.dna.human_blood_type = exotic_bloodtype
@@ -781,8 +774,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 		for(var/trait as anything in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.add_sheet(inherent_sheet)
 
 	for(var/component in components_to_add)
 		C.AddComponent(component)
@@ -813,8 +806,22 @@ GLOBAL_LIST_EMPTY(donator_races)
 	else
 		apply_customizers_to_character(C)
 
+	on_gender_update(C)
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
+/datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
+	if(old_gender)
+		if(statsheet_male || statsheet_female)
+			if(old_gender == MALE || !statsheet_female)
+				C.attributes?.subtract_sheet(statsheet_male)
+			else if(old_gender == FEMALE)
+				C.attributes?.subtract_sheet(statsheet_female)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.add_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.add_sheet(statsheet_female)
 
 /datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
@@ -822,14 +829,18 @@ GLOBAL_LIST_EMPTY(donator_races)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
 
-	for(var/skill as anything in inherent_skills)
-		C.adjust_skillrank(skill, -inherent_skills[skill], TRUE)
+	if(inherent_sheet)
+		C.attributes?.subtract_sheet(inherent_sheet)
+
+	if(statsheet_male || statsheet_female)
+		if(C.gender == MALE || !statsheet_female)
+			C.attributes?.subtract_sheet(statsheet_male)
+		else if(C.gender == FEMALE)
+			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
 		for(var/i in inherent_factions)
 			C.faction -= i
-
-	C.remove_movespeed_modifier(MOVESPEED_ID_SPECIES)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
@@ -870,7 +881,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 				limb_icon = species.limbs_icon_m
 			else
 				limb_icon = species.limbs_icon_f
-			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -BODY_LAYER)
+			var/mutable_appearance/bodyhair_overlay = mutable_appearance(limb_icon, "[species?.hairyness]", -FRONT_MUTATIONS_LAYER)
 			bodyhair_overlay.color = H.get_hair_color()
 			standing += bodyhair_overlay
 
@@ -1183,7 +1194,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	if(HAS_TRAIT(H, TRAIT_CHUNKYFINGERS))
 		return do_after(H, 5 MINUTES)
 	var/doafter_flags = I.edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-	return do_after(H, min((I.equip_delay_self - H.STASPD), 1), timed_action_flags = doafter_flags)
+	return do_after(H, min((I.equip_delay_self - GET_MOB_ATTRIBUTE_VALUE(H, STAT_SPEED)), 1), timed_action_flags = doafter_flags)
 
 /// Equips the necessary species-relevant gear before putting on the rest of the uniform.
 /datum/species/proc/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
@@ -1425,7 +1436,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 		var/damage = user.get_punch_dmg()
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 
@@ -1519,6 +1530,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	if(user.loc == target.loc)
 		return FALSE
 	else
+		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(target, ATTACK_EFFECT_DISARM, used_item = FALSE, atom_bounce = TRUE)
 		playsound(target, 'sound/combat/shove.ogg', 100, TRUE, -1)
 
@@ -1534,8 +1546,9 @@ GLOBAL_LIST_EMPTY(donator_races)
 //		var/obj/machinery/disposal/bin/target_disposal_bin
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
-		if(prob(clamp(30 + (user.stat_compare(target, STATKEY_STR, STATKEY_CON)*10),0,100)))//check if we actually shove them
+		if(prob(clamp(30 + (user.stat_compare(target, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))//check if we actually shove them
 			//Thank you based whoneedsspace
+			target.stop_pulling(TRUE)
 			target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
 			if(target_collateral_mob)
 				shove_blocked = TRUE
@@ -1546,7 +1559,6 @@ GLOBAL_LIST_EMPTY(donator_races)
 	//				target_disposal_bin = locate(/obj/machinery/disposal/bin) in target_shove_turf.contents
 					if(target_table)
 						shove_blocked = TRUE
-			qdel(user.check_arm_grabbed(user.active_hand_index))
 
 /*		if(target.IsKnockdown() && !target.IsParalyzed())
 			target.Paralyze(SHOVE_CHAIN_PARALYZE)
@@ -1650,7 +1662,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 			target.lastattacker_weakref = WEAKREF(user)
 			if(target.mind)
 				target.mind.attackedme[user.real_name] = world.time
-			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 			var/damage = user.get_kick_damage(2.5)
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
@@ -1692,7 +1704,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 
 		if(target.pulling && target.grab_state < GRAB_AGGRESSIVE)
-			target.stop_pulling()
+			target.stop_pulling(TRUE)
 
 		var/turf/target_oldturf = target.loc
 		var/shove_dir = get_dir(user.loc, target_oldturf)
@@ -1754,7 +1766,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 			to_chat(user, "<span class='danger'>I kick [target.name]!</span>")
 			log_combat(user, target, "kicked")
 
-		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
+		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
@@ -1769,6 +1781,8 @@ GLOBAL_LIST_EMPTY(donator_races)
 			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 
 		SEND_SIGNAL(user, COMSIG_MOB_KICK, target, selzone, damage_blocked)
+		SEND_SIGNAL(target, COMSIG_MOB_KICKED, user, selzone, damage_blocked)
+
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -1832,8 +1846,12 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 	if(!selzone)
 		selzone = user.zone_selected
+
 	if(!accurate)
 		selzone = accuracy_check(selzone, user, H, I.associated_skill, user.used_intent, I)
+		if(selzone != user.zone_selected)
+			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
+
 	affecting = H.get_bodypart(check_zone(selzone))
 
 	if(!affecting)
@@ -1915,7 +1933,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 				bloody = 1
 				var/turf/location = H.loc
 				var/splatter_dir = get_dir(H, user)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
 				if(istype(location))
 					H.add_splatter_floor(location)
 				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
@@ -1975,11 +1993,11 @@ GLOBAL_LIST_EMPTY(donator_races)
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
-						if(damage_amount > ((H.STACON*10) / 3))
+						if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3))
 							H.emote("painscream")
 						else
 							H.emote("pain")
-				if(damage_amount > ((H.STACON*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
+				if(damage_amount > ((GET_MOB_ATTRIBUTE_VALUE(H, STAT_CONSTITUTION)*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
 					H.Immobilize(4)
 					shake_camera(H, 2, 2)
 					H.stuttering += 5
@@ -2302,7 +2320,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 
 /datum/species/proc/clear_temperature_debuffs(mob/living/carbon/human/H)
 	if(H.temp_debuff_level)
-		H.remove_movespeed_modifier("heat_stress")
+		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 		H.temp_debuff_level = null
 	H.remove_stress(list(
 		/datum/stress_event/cold_mild,
@@ -2453,7 +2471,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 /datum/species/proc/knockback(obj/item/I, mob/living/target, mob/living/user, nodmg, actual_damage)
 	if(!istype(I))
 		if(!target.resting)
-			var/chungus_str = target.STASTR
+			var/chungus_str = GET_MOB_ATTRIBUTE_VALUE(target, STAT_STRENGTH)
 			var/knockback_tiles = 0
 			var/damage = actual_damage
 			if(chungus_str >= 3)
@@ -2473,9 +2491,9 @@ GLOBAL_LIST_EMPTY(donator_races)
 	else
 		if(!I.force)
 			return
-		if(!I.sharpness)
+		if(user.used_intent.knockback)
 			if(!target.resting)
-				var/endurance = target.STAEND
+				var/endurance = GET_MOB_ATTRIBUTE_VALUE(target, STAT_ENDURANCE)
 				var/knockback_tiles = 0
 				var/newforce = actual_damage
 				if(endurance >= 3)
@@ -2498,7 +2516,7 @@ GLOBAL_LIST_EMPTY(donator_races)
 	var/skill_modifier = 10
 	if(istype(starting_turf) && !QDELETED(starting_turf))
 		distance = get_dist(starting_turf, src)
-	skill_modifier *= get_skill_level(/datum/skill/misc/athletics)
+	skill_modifier *= GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
 	var/modifier = -distance
-	if(!prob(STAEND+skill_modifier+modifier))
+	if(!prob(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)+skill_modifier+modifier))
 		Knockdown(8)

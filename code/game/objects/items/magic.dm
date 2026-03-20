@@ -28,7 +28,7 @@
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
 
-/obj/item/scrying/attack_self(mob/user, params)
+/obj/item/scrying/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(world.time < last_scry + cooldown)
 		to_chat(user, span_warning("I look into [src] but only see inky smoke. Maybe I should wait."))
@@ -64,7 +64,7 @@
 			user.visible_message(span_danger("[user] stares into [src], [p_their()] eyes rolling back into [p_their()] head."))
 			addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 8 SECONDS)
 			if(!HL.stat)
-				if(HL.STAPER >= 15)
+				if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 15)
 					if(HL.mind)
 						if(HL.mind.do_i_know(name=user.real_name))
 							to_chat(HL, span_warning("I can clearly see the face of [user.real_name] staring at me!"))
@@ -72,7 +72,7 @@
 							return
 					to_chat(HL, span_warning("I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!"))
 					return
-				if(HL.STAPER >= 11)
+				if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 11)
 					to_chat(HL, span_warning("I feel a pair of unknown eyes on me."))
 			REMOVE_TRAIT(user, TRAIT_NOSSDINDICATOR, "scryingorb")
 			return
@@ -84,7 +84,7 @@
 
 /////////////////////////////////////////Crystal ball ghsot vision///////////////////
 
-/obj/item/crystalball/attack_self(mob/user, params)
+/obj/item/crystalball/attack_self(mob/user, list/modifiers)
 	user.visible_message("<span class='danger'>[user] stares into [src], their eyes rolling back into their head.</span>")
 	user.ghostize(1)
 
@@ -129,14 +129,14 @@
 				user.visible_message("<span class='danger'>[user] stares into [src], [p_their()] squinting and concentrating...</span>")
 				addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 8 SECONDS)
 				if(!HL.stat)
-					if(HL.STAPER >= 15)
+					if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 15)
 						if(HL.mind)
 							if(HL.mind.do_i_know(name=user.real_name))
 								to_chat(HL, "<span class='warning'>I can clearly see the face of [user.real_name] staring at me!.</span>")
 								return
 						to_chat(HL, "<span class='warning'>I can clearly see the face of an unknown [user.gender == FEMALE ? "woman" : "man"] staring at me!</span>")
 						return
-					if(HL.STAPER >= 11)
+					if(GET_MOB_ATTRIBUTE_VALUE(HL, STAT_PERCEPTION) >= 11)
 						to_chat(HL, "<span class='warning'>I feel a pair of unknown eyes on me.</span>")
 				return
 		to_chat(user, "<span class='warning'>I peer into the viewpiece, but Noc does not reveal where [input] is.</span>")

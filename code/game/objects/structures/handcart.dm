@@ -79,7 +79,7 @@
 		playsound(src, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 	return TRUE
 
-/obj/structure/handcart/attackby(obj/item/I, mob/user, params)
+/obj/structure/handcart/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/gear/wood))
 		var/obj/item/gear/wood/cog = I
 		if(cog.cart_capacity <= maximum_capacity)
@@ -182,7 +182,7 @@
 	return item_sieve(user, user_turf, list(/obj/item/grown/log/tree, /obj/item/natural/bundle/stick))
 
 
-/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM)
+/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM, forced)
 	if(!insertion_allowed(AM))
 		return
 	var/weight = NONE
@@ -195,7 +195,7 @@
 		if((current_capacity + arbitrary_living_creature_weight) > maximum_capacity)
 			return FALSE
 		weight = arbitrary_living_creature_weight
-	if(isitem(AM) && !user?.transferItemToLoc(AM, src))
+	if(!forced && (isitem(AM) && !user?.transferItemToLoc(AM, src)))
 		return FALSE
 	else
 		AM.forceMove(src)
@@ -228,7 +228,7 @@
 	if(M)
 		. += M
 
-/obj/structure/handcart/attack_hand_secondary(mob/user, params)
+/obj/structure/handcart/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

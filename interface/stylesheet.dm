@@ -42,18 +42,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .binarysay a			{color: #00ff00;}
 .binarysay a:active, .binarysay a:visited {color: #88ff88;}
 .radio					{color: #1ecc43;}
-.sciradio				{color: #c68cfa;}
-.comradio				{color: #5177ff;}
-.secradio				{color: #dd3535;}
-.medradio				{color: #57b8f0;}
-.engradio				{color: #f37746;}
-.suppradio				{color: #b88646;}
-.servradio				{color: #6ca729;}
-.syndradio				{color: #8f4a4b;}
-.centcomradio			{color: #2681a5;}
-.aiprivradio			{color: #d65d95;}
-.redteamradio			{color: #ff4444;}
-.blueteamradio			{color: #3434fd;}
 
 
 .yell					{font-weight: bold;}
@@ -80,7 +68,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .boldnotice				{color: #f1d669;	font-weight: bold;}
 .hear					{color: #6685f5;	font-style: italic;}
 .adminnotice			{color: #6685f5;}
-.adminhelp				{color: #ff0000;	font-weight: bold;}
+.adminhelp				{color: #ff0000;	font-weight: bold;	font-size: 120%}
 .unconscious			{color: #c9c1ba;	font-weight: bold;}
 .suicide				{color: #ff5050;	font-style: italic;}
 .green					{color: #80b077;}
@@ -94,38 +82,23 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .lightpurple			{color: #967aaf;}
 .nicegreen				{color: #9bccd0;}
 .cult					{color: #960000;}
-.cultlarge				{color: #960000;	font-weight: bold;	font-size: 3;}
 .narsie					{color: #960000;	font-weight: bold;	font-size: 12;}
 .narsiesmall			{color: #960000;	font-weight: bold;	font-size: 6;}
 .colossus				{color: #7F282A;	font-size: 5;}
 .hierophant				{color: #660099;	font-weight: bold;	font-style: italic;}
 .hierophant_warning		{color: #660099;	font-style: italic;}
 .purple					{color: #5e2d79;}
-.holoparasite			{color: #35333a;}
-
-.revennotice			{color: #1d2953;}
-.revenboldnotice		{color: #1d2953;	font-weight: bold;}
-.revenbignotice			{color: #1d2953;	font-weight: bold;	font-size: 3;}
-.revenminor				{color: #823abb}
-.revenwarning			{color: #760fbb;	font-style: italic;}
-.revendanger			{color: #760fbb;	font-weight: bold;	font-size: 3;}
-
-.deconversion_message	{color: #5000A0;	font-size: 3;	font-style: italic;}
 
 .ghostalert				{color: #5c00e6;	font-style: italic;	font-weight: bold;}
 
 .alien					{color: #543354;}
 .noticealien			{color: #00c000;}
 .alertalien				{color: #00c000;	font-weight: bold;}
-.changeling				{color: #800080;	font-style: italic;}
-
-.spider					{color: #4d004d;}
 
 .interface				{color: #DA00DA;}
 
 .sans					{font-family: "Comic Sans MS", cursive, sans-serif;}
 .papyrus				{font-family: "Papyrus", cursive, sans-serif;}
-.robot					{font-family: "Courier New", cursive, sans-serif;}
 
 .human					{font-family: "Honoka Mincho", Pterra;}
 .elf					{font-family: "Dauphin", cursive, Pterra;}
@@ -137,7 +110,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .hellspeak				{font-family: "Nosfer", Pterra;}
 .undead					{font-family: "FriskyVampire", Pterra;}
 .orc					{font-family: "Thief by The Riddler", Pterra;}
-.otavan					{font-family: "Notredame", Pterra; font-size: 200%;}
 .beast					{font-family: "Thief by The Riddler", Pterra;}
 .deepspeak				{font-family: "Underwater Love", Pterra;}
 
@@ -164,14 +136,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .memoedit				{text-align: center;	font-size: 2;}
 .abductor				{color: #800080;	font-style: italic;}
 .mind_control			{color: #A00D6F;	font-size: 3;	font-weight: bold;	font-style: italic;}
-.slime					{color: #00CED1;}
 .drone					{color: #848482;}
-.monkey					{color: #975032;}
-.swarmer				{color: #2C75FF;}
-.resonate				{color: #298F85;}
-
-.monkeyhive				{color: #774704;}
-.monkeylead				{color: #774704;	font-size: 2;}
 
 .dead					{color: #b280df;}
 .bloody					{color: #cc0f0f;}
@@ -181,4 +146,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .bone					{color: #e3dac9;}
 
 .silver					{color: #c0c0c0;}
+
+.prayer 				{color: #f1d55b; font-weight: bold;}
+
 </style>"}

@@ -1,6 +1,21 @@
 /mob/living/carbon/human/species/halfling
 	race = /datum/species/halfling
 
+/datum/attribute_holder/sheet/job/species/halfling
+	raw_attribute_list = list(
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sneaking = 10,
+	)
+
+/datum/attribute_holder/sheet/job/species/halfling/stats
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 2,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = 1
+	)
+
 /datum/species/halfling
 	name = "Halfling"
 	id = SPEC_ID_HALFLING
@@ -10,16 +25,14 @@
 	\n\
 	Curly hair of warm and earthy coloration, with coarse tufts atop the bridge of their proportionally large feet rather than a propensity to wear any sort of shoe to protect their already leathery soles. \
 	No magick is present among these people, blessed not with the grand wizardry of Noc but that simpler everyday magicks of the world, for a halfling goes unseen as easily as the wind blows. Truly, they are a hearth in this age."
-	skin_tone_wording = "Ancestry"
 
 	default_color = "FFFFFF"
 	native_language = "Halfling"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_LIGHT_STEP, TRAIT_COIN_ILLITERATE, TRAIT_LUCKY_COOK)
-	inherent_skills = list(
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sneaking = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/halfling
+
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/pieslice/good/apple = 0.05)
 
 	use_skintones = TRUE
 
@@ -74,8 +87,7 @@
 
 	// Gets 2 SPD if they aren't wearing shoes
 	// Gets 0 / 1 END if they eat enough
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 1)
-	specstats_f = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_CON = -1, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/halfling/stats
 
 	enflamed_icon = "widefire"
 
@@ -101,48 +113,6 @@
 	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 	C.grant_language(/datum/language/halfling)
 	to_chat(C, span_info("I can speak Halfspeak with ,p before my speech."))
-
-/datum/species/halfling/get_skin_list()
-	return sortList(list(
-		"Ice Cap" = SKIN_COLOR_ICECAP, // - (Pale)
-		"Arctic" = SKIN_COLOR_ARCTIC, // - (White 1)
-		"Tundra" = SKIN_COLOR_TUNDRA, // - (White 2)
-		"Continental" = SKIN_COLOR_CONTINENTAL, // - (White 3)
-		"Temperate" = SKIN_COLOR_TEMPERATE, // - (White 4)
-		"Coastal" = SKIN_COLOR_COASTAL, // - (Latin)
-		"Subtropical" = SKIN_COLOR_SUBTROPICAL, // - (Mediterranean)
-		"Tropical Dry" = SKIN_COLOR_TROPICALDRY, // - (Mediterranean 2)
-		"Tropical Wet" = SKIN_COLOR_TROPICALWET, // - (Latin 2)
-		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east)
-		"Crimson Lands" = SKIN_COLOR_CRIMSONLANDS, // - (Black)
-	))
-
-/datum/species/halfling/get_hairc_list()
-	return sortList(list(
-		"blond - pale" = "9d8d6e",
-		"blond - dirty" = "88754f",
-		"blond - drywheat" = "d5ba7b",
-		"blond - strawberry" = "c69b71",
-
-		"brown - mud" = "362e25",
-		"brown - oats" = "584a3b",
-		"brown - grain" = "58433b",
-		"brown - soil" = "48322a",
-		"brown - bark" = "2d1300",
-
-		"black - oil" = "181a1d",
-		"black - cave" = "201616",
-		"black - rogue" = "2b201b",
-		"black - midnight" = "1d1b2b",
-
-		"red - berry" = "b23434",
-		"red - wine" = "82534c",
-		"red - sunset" = "82462b",
-		"red - blood" = "822b2b",
-		"red - maroon" = "612929",
-
-		"orange - rust" = "bc5e35"
-	))
 
 /datum/species/halfling/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()

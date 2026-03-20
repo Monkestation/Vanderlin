@@ -11,3 +11,4 @@
 	fueluse = -1
 	SET_BASE_PIXEL(-16, 0)
 	climb_offset = 4
+	crossfire = FALSE

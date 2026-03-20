@@ -53,7 +53,7 @@
 		if(essence_transferred)
 			continue
 
-/obj/machinery/essence/splitter/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/splitter/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_connector))
 		return
 
@@ -142,7 +142,7 @@
 	to_chat(user, span_info("You place [I] into the essence splitter. ([current_items.len]/[max_items] slots used)"))
 	return TRUE
 
-/obj/machinery/essence/splitter/attack_hand(mob/user, params)
+/obj/machinery/essence/splitter/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(processing)
 		to_chat(user, span_warning("The splitter is currently processing."))
@@ -150,7 +150,7 @@
 
 	begin_bulk_splitting(user)
 
-/obj/machinery/essence/splitter/attack_hand_secondary(mob/user, params)
+/obj/machinery/essence/splitter/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -196,7 +196,7 @@
 	addtimer(CALLBACK(src, PROC_REF(finish_bulk_splitting), all_precursors, user), process_time)
 
 /obj/machinery/essence/splitter/proc/finish_bulk_splitting(list/precursors, mob/living/user)
-	flick_overlay_view(image(icon, src, "split", ABOVE_MOB_LAYER), 1.2 SECONDS)
+	flick_overlay_view(mutable_appearance(icon, "split", ABOVE_MOB_LAYER), 1.2 SECONDS)
 
 	var/efficiency_bonus = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/splitter_efficiency)
 	var/list/total_produced = list()
@@ -216,9 +216,9 @@
 
 	user.visible_message(span_info("The essence splitter sparks."))
 
-	var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
-	var/amt2raise = (user.STAINT * precursors.len) / 2
-	user.adjust_experience(/datum/skill/craft/alchemy, amt2raise * boon, FALSE)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+	var/amt2raise = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * precursors.len) / 2
+	user.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
 
 /obj/machinery/essence/splitter/examine(mob/user)
 	. = ..()

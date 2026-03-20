@@ -38,6 +38,8 @@
 			footstep_sounds = GLOB.heavyfootstep
 		if(FOOTSTEP_MOB_SHOE)
 			footstep_sounds = GLOB.footstep
+		if(FOOTSTEP_MOB_METAL)
+			footstep_sounds = GLOB.metalfootstep
 		if(FOOTSTEP_MOB_SLIME)
 			footstep_sounds = 'sound/blank.ogg'
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(play_simplestep))
@@ -77,7 +79,7 @@
 	if(steps % 2)
 		return
 
-	. = list(FOOTSTEP_MOB_SHOE = turf.footstep, FOOTSTEP_MOB_BAREFOOT = turf.barefootstep, FOOTSTEP_MOB_HEAVY = turf.heavyfootstep, FOOTSTEP_MOB_CLAW = turf.clawfootstep, STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY)
+	. = list(FOOTSTEP_MOB_SHOE = turf.footstep, FOOTSTEP_MOB_BAREFOOT = turf.barefootstep, FOOTSTEP_MOB_HEAVY = turf.heavyfootstep, FOOTSTEP_MOB_METAL = turf.heavyfootstep, FOOTSTEP_MOB_CLAW = turf.clawfootstep, STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY)
 	SEND_SIGNAL(source, COMSIG_MOB_PREPARE_STEP_SOUND, .) // Used to override shoe material before turf
 	SEND_SIGNAL(turf, COMSIG_TURF_PREPARE_STEP_SOUND, .)
 	return .

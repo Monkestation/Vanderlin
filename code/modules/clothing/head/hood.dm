@@ -10,7 +10,7 @@
 	connectedc = null
 	return ..()
 
-/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -175,6 +175,5 @@
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
-	flags_inv = HIDEFACE
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT

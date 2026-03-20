@@ -106,7 +106,7 @@
 
 	var/do_crit = TRUE
 	if(user)
-		if(user.stat_roll(STATKEY_LCK,2,10))
+		if(user.stat_roll(STAT_FORTUNE,2,10))
 			dam += 10
 		if(istype(user.rmb_intent, /datum/rmb_intent/weak))
 			do_crit = FALSE
@@ -174,7 +174,7 @@
 		return FALSE
 	var/used
 	if(user)
-		if(user.stat_roll(STATKEY_LCK,2,10))
+		if(user.stat_roll(STAT_FORTUNE,2,10))
 			dam += 10
 
 	var/list/crit_classes

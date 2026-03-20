@@ -62,25 +62,21 @@
 	return TRUE
 
 /mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	if(!skipcatch)	//ugly, but easy
-		if(can_catch_item())
-			if(istype(AM, /obj/item))
-				if(!istype(AM, /obj/item/net))
-					var/obj/item/I = AM
-					if(isturf(I.loc))
-						I.attack_hand(src)
-						if(get_active_held_item() == I) //if our attack_hand() picks up the item...
-							visible_message("<span class='warning'>[src] catches [I]!</span>", \
-											"<span class='danger'>I catch [I] in mid-air!</span>")
-							throw_mode_off()
-							return 1
-				else
-					var/obj/item/net/N
-					visible_message("<span class='warning'>[src] tries to catch \the [N] but gets snared by it!</span>", \
-									"<span class='danger'>Why did I even try to do this...?</span>") // Hahaha dumbass!!!
-					throw_mode_off()
-					N.ensnare(src)
-					return
+	if(!skipcatch && can_catch_item() && isitem(AM) && isturf(AM.loc))	//ugly, but easy
+		if(istype(AM, /obj/item/rope/net))
+			var/obj/item/rope/net/N = AM
+			visible_message(span_warning("[src] tries to catch [N] but gets snared by it!"), \
+							span_danger("Why did I try to catch it??")) // Hahaha dumbass!!!
+			throw_mode_off()
+			N.ensnare(src)
+			return
+		var/obj/item/I = AM
+		I.attack_hand(src)
+		if(get_active_held_item() == I) //if our attack_hand() picks up the item...
+			visible_message(span_warning("[src] catches [I]!"), \
+							span_danger("I catch [I] in mid-air!"))
+			throw_mode_off()
+			return 1
 	..()
 
 
@@ -160,7 +156,7 @@
 	var/obj/item/bodypart/affecting
 	var/selzone = user.zone_selected
 	if(cmode && !accurate)
-		selzone = accuracy_check(user.zone_selected, user, src, /datum/skill/combat/wrestling, user.used_intent)
+		selzone = accuracy_check(user.zone_selected, user, src, /datum/attribute/skill/combat/wrestling, user.used_intent)
 	affecting = get_bodypart(check_zone(selzone))
 	if(selzone && affecting)
 		if(selzone in affecting.grabtargets)
@@ -233,7 +229,7 @@
 				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(src)
 				var/splatter_dir = get_dir(user, src)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir, get_blood_type())
 				if(affecting.body_zone == BODY_ZONE_HEAD)
 					if(wear_mask)
 						wear_mask.add_mob_blood(src)
@@ -256,10 +252,10 @@
 			I.add_mob_blood(src)
 		return TRUE //successful attack
 
-//ATTACK HAND IGNORING PARENT RETURN VALUE
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		. = TRUE
+	. = ..()
+	if(.)
+		return TRUE
 
 	if(!lying_attack_check(user))
 		return FALSE

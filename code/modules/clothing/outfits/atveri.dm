@@ -6,11 +6,14 @@
 	item_state = "atgervi_raider_mail"
 	max_integrity = 400
 
-/obj/item/clothing/armor/leather/heavy/atgervi
+/obj/item/clothing/armor/leather/atgervi
 	name = "shamanic coat"
 	desc = "A furred protective coat, Often made by hand it embodies the second trial of the Iskarn Shamans. To honor the leopard is to desire for more."
 	icon_state = "atgervi_shaman_coat"
 	item_state = "atgervi_shaman_coat"
+	armor = ARMOR_LEATHER_GOOD
+	prevent_crits = ALL_EXCEPT_STAB
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"
@@ -70,8 +73,8 @@
 	item_state = "atgervi_shield"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
-	force = 15
-	throwforce = 10
+	force = DAMAGE_SHIELD + 5
+	throwforce = DAMAGE_SHIELD
 	dropshrink = 0.8
 	coverage = 80
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')

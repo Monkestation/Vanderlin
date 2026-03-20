@@ -1,3 +1,36 @@
+/datum/attribute_holder/sheet/job/zizocultist
+	raw_attribute_list = list(
+		STAT_STRENGTH = 4,
+		STAT_ENDURANCE = 3,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = 4,
+		STAT_INTELLIGENCE = 5
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(40, 40),
+		/datum/attribute/skill/combat/swords = list(40, 40),
+		/datum/attribute/skill/combat/wrestling = list(40, 40),
+		/datum/attribute/skill/misc/athletics = list(40, 40),
+	)
+
+/datum/attribute_holder/sheet/job/zizocultist/lesser
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -2,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(20, 30),
+		/datum/attribute/skill/combat/swords = list(20, 30),
+		/datum/attribute/skill/combat/polearms = list(20, 30),
+	)
+
+/datum/attribute_holder/sheet/job/zizocultist/change
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/misc/reading = list(30, 30),
+	)
+
 /datum/antagonist/zizocultist
 	name = "Zizoid Lackey"
 	roundend_category = "Zizoid Cultists"
@@ -37,6 +70,13 @@
 		TRAIT_CABAL,
 	)
 
+/datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
+	var/mob/living/carbon/human/H = examined
+	if(istype(H) && H.virginity)
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
+	. = ..()
+
+
 /datum/antagonist/zizocultist/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/zizocultist/leader))
 		return span_boldnotice("OUR LEADER!")
@@ -54,38 +94,24 @@
 	owner.special_role = "Zizoid Lackey"
 	H.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	H.playsound_local(get_turf(H), 'sound/music/maniac.ogg', 80, FALSE, pressure_affected = FALSE)
-	H.verbs |= /mob/living/carbon/human/proc/communicate
+	add_verb(H, /mob/living/carbon/human/proc/communicate)
 
 	if(change_stats)
-		H.change_stat(STATKEY_STR, 2)
-		H.clamped_adjust_skillrank(/datum/skill/misc/reading, 3, 3, TRUE)
-
+		H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist/change)
 	if(islesser)
 		add_objective(/datum/objective/zizoserve)
 		if(!change_stats)
 			return
-		H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 3, TRUE)
-		H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
-		H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 3, TRUE)
-		H.change_stat(STATKEY_INT, -2)
+		H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist/lesser)
 		H.grant_language(/datum/language/undead)
 		return
 
 	add_objective(/datum/objective/zizo)
 	owner.special_role = ROLE_ZIZOIDCULTIST
-	H.verbs |= /mob/living/carbon/human/proc/release_minion
+	add_verb(H, /mob/living/carbon/human/proc/release_minion)
 	if(!change_stats)
 		return
-	H.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 5, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 4, 4, TRUE)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_END, 3)
-	H.change_stat(STATKEY_CON, 3)
-	H.change_stat(STATKEY_SPD, 4)
-	H.change_stat(STATKEY_INT, 5)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist)
 	H.grant_language(/datum/language/undead)
 
 /datum/antagonist/zizocultist/greet()
@@ -185,7 +211,7 @@
 
 /mob/living/carbon/human/proc/praise()
 	set name = "Praise the Dark Lady!"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -196,7 +222,7 @@
 
 /mob/living/carbon/human/proc/communicate()
 	set name = "Communicate with Cult"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -280,7 +306,7 @@
 		return
 	var/list/rituals = list()
 	for(var/datum/ritual/ritual as anything in rituals_pre)
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		if(initial(ritual.is_cultist_ritual) && !(is_zizocultist(user.mind) || is_zizolackey(user.mind))) // some rituals are cultist exclusive
 			continue
@@ -426,7 +452,7 @@
 
 /mob/living/carbon/human/proc/draw_sigil()
 	set name = "Draw Sigil"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		return
 
@@ -446,7 +472,7 @@
 
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"
-	set category = "ZIZO"
+	set category = "RoleUnique.Zizo"
 
 	var/list/mob/living/carbon/human/possible = list()
 	for(var/datum/mind/V in SSmapping.retainer.cultists)

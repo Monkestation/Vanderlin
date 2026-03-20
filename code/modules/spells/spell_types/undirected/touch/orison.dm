@@ -31,7 +31,7 @@
 	can_cast_on_self = TRUE
 
 	spell_type = SPELL_MIRACLE
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	school = SCHOOL_TRANSMUTATION
 
 	cooldown_time = 3 MINUTES
@@ -88,7 +88,7 @@
 			span_notice("I utter forth a plea to [user.patron.name] for succour, and hold my hand out above [victim]...")
 		)
 
-		var/holy_skill = user.get_skill_level(associated_skill)
+		var/holy_skill = GET_MOB_SKILL_VALUE_OLD(user, associated_skill)
 		var/drip_speed = 5.6 SECONDS - (holy_skill * 8)
 		var/fatigue_spent = 0
 		var/fatigue_used = max(3, holy_skill)
@@ -116,7 +116,7 @@
 		return TRUE
 
 /datum/action/cooldown/spell/undirected/touch/orison/proc/thaumaturgy(atom/victim, mob/living/carbon/human/user)
-	var/holy_skill = user.get_skill_level(associated_skill)
+	var/holy_skill = GET_MOB_SKILL_VALUE_OLD(user, associated_skill)
 
 	if(victim == user)
 		if(user.has_status_effect(/datum/status_effect/thaumaturgy))
@@ -155,7 +155,7 @@
 /datum/action/cooldown/spell/undirected/touch/orison/proc/cast_light(atom/victim, mob/living/carbon/human/user)
 	if(isliving(victim))
 		var/mob/living/blessed_mob = victim
-		var/holy_skill = user.get_skill_level(associated_skill)
+		var/holy_skill = GET_MOB_SKILL_VALUE_OLD(user, associated_skill)
 		var/cast_time = 35 - (holy_skill * 3)
 
 		if (victim != user)
@@ -179,7 +179,7 @@
 
 /datum/action/cooldown/spell/undirected/touch/orison/proc/handle_xp(mob/living/carbon/human/user, base_xp)
 	if(user && associated_skill)
-		var/skill_level = user.get_skill_level(associated_skill)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, associated_skill)
 		if(skill_level <= SKILL_LEVEL_EXPERT)
 			adjust_experience(user, associated_skill, base_xp)
 

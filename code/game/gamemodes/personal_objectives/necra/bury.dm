@@ -38,7 +38,7 @@
 
 /datum/objective/personal/proper_burial/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_DEADNOSE, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_DEADNOSE, OBJECTIVE_TRAIT)
 
 /datum/objective/personal/proper_burial/update_explanation_text()
 	explanation_text = "Consecrate [required_burials] grave\s by building a grave marker or using funeral rites to earn Necra's approval."

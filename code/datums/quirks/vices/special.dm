@@ -17,6 +17,10 @@
 		return "[desc]<br><br><b>Reason:</b> [reason]"
 	return "[desc]<br><br><b>Reason:</b> Unknown - a mystery from your past."
 
+/datum/quirk/vice/hunted/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Graggar's Prey..."))
+
 /datum/quirk/vice/hunted/on_life(mob/living/user)
 	if(!ishuman(user))
 		return
@@ -38,6 +42,10 @@
 		/datum/species/goblin,
 		/datum/species/orc,
 	)
+
+/datum/quirk/vice/luxless/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Luxless..."))
 
 /datum/quirk/vice/luxless/on_spawn()
 	if(!ishuman(owner))
@@ -61,6 +69,10 @@
 		return
 
 	ADD_TRAIT(owner, TRAIT_PACIFISM, "[type]")
+
+/datum/quirk/vice/pacifist/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Pacifist..."))
 
 /datum/quirk/vice/pacifist/on_remove()
 	if(owner)
@@ -120,9 +132,8 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	for(var/datum/skill/skill in SSskills.all_skills)
-		if(H.get_skill_level(skill) > SKILL_LEVEL_NONE)
-			H.adjust_skillrank(skill, -1, TRUE)
+	for(var/datum/attribute/skill/skill in SSskills.all_skills)
+		H.adjust_skill_level(skill, -10)
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
@@ -152,16 +163,23 @@
 		/datum/species/halfling,
 		/datum/species/demihuman,
 		/datum/species/dwarf,
-		/datum/species/elf,
+		/datum/species/elf/snow,
+		/datum/species/elf/dark,
 		/datum/species/triton,
 		/datum/species/rakshari,
+		/datum/species/medicator,
 		/datum/species/kobold,
+		/datum/species/automaton,
 		/datum/oratorium,
 		"Nobles",
 	)
 
 	var/fear_type
 	var/next_scream_time = 0
+
+/datum/quirk/vice/traumatized/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Traumatized..."))
 
 /datum/quirk/vice/traumatized/on_spawn()
 	if(!ishuman(owner))
@@ -197,7 +215,7 @@
 				to_chat(H, span_userdanger("You see [human] and freeze in terror!"))
 				next_scream_time = world.time + 25 SECONDS
 				return
-	else
+	else if(fear_type == /datum/oratorium)
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
 				continue
@@ -220,6 +238,10 @@
 	name = "Tortured"
 	desc = "You were once tortured by bandits, Drow raiders, or your own kingdom. You fear it happening again and always answer truthfully when tortured."
 	point_value = 2
+
+/datum/quirk/vice/tortured/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Tortured..."))
 
 /datum/quirk/vice/tortured/on_spawn()
 	if(!ishuman(owner))
@@ -288,14 +310,13 @@
 	to_chat(new_rat, span_userdanger("You have been reincarnated as a rat. Your adventure ends here."))
 
 	// Make the rat unable to do much
-	ADD_TRAIT(new_rat, TRAIT_PACIFISM, TRAIT_GENERIC)
-	ADD_TRAIT(new_rat, TRAIT_MUTE, TRAIT_GENERIC)
+	ADD_TRAIT(new_rat, TRAIT_PACIFISM, QUIRK_TRAIT)
+	ADD_TRAIT(new_rat, TRAIT_MUTE, QUIRK_TRAIT)
 	new_rat.melee_damage_lower = 0
 	new_rat.melee_damage_upper = 0
 	new_rat.obj_damage = 0
 	new_rat.status_flags |= GODMODE
-	ADD_TRAIT(new_rat, TRAIT_NOFIRE, TRAIT_GENERIC)
-
+	ADD_TRAIT(new_rat, TRAIT_NOFIRE, QUIRK_TRAIT)
 
 /datum/quirk/vice/weak_heart
 	name = "Weak Heart"
@@ -304,6 +325,10 @@
 	incompatible_quirks = list(
 		/datum/quirk/boon/iron_will
 	)
+
+/datum/quirk/vice/weak_heart/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Weak-Hearted..."))
 
 /datum/quirk/vice/weak_heart/on_spawn()
 	if(!ishuman(owner))
@@ -326,15 +351,7 @@
 /datum/quirk/vice/tremors/on_spawn()
 	if(!owner)
 		return
-	var/mob/living/carbon/human/H = owner
-	ADD_TRAIT(H, TRAIT_TREMORS, "[type]")
 	schedule_next_tremor()
-
-/datum/quirk/vice/tremors/on_remove()
-	if(!owner)
-		return
-	var/mob/living/carbon/human/H = owner
-	REMOVE_TRAIT(H, TRAIT_TREMORS, "[type]")
 
 /datum/quirk/vice/tremors/on_life()
 	if(!owner)
@@ -380,8 +397,9 @@
 	H.apply_status_effect(/datum/status_effect/tremor_grip_loss)
 
 	// Shake the screen slightly for immersion
-	animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
-	addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
+	if(H.client)
+		animate(H.client, pixel_x = rand(-2, 2), pixel_y = rand(-2, 2), time = 2)
+		addtimer(CALLBACK(src, PROC_REF(reset_screen_shake), H), 2)
 
 /datum/quirk/vice/tremors/proc/reset_screen_shake(mob/living/carbon/human/H)
 	if(H?.client)

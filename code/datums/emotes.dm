@@ -61,9 +61,12 @@
 	if(targetted)
 		var/list/mobsadjacent = list()
 		var/mob/chosenmob
-		for(var/mob/living/M in range(user, 2))
-			if(M != user)
-				mobsadjacent += M
+		for(var/mob/living/target_mob in view(user, 2))
+			if(target_mob == user)
+				continue
+			if(target_mob.rogue_sneaking) // No detecting sneaky people.
+				continue
+			mobsadjacent += target_mob
 		if(length(mobsadjacent))
 			chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
 		if(istype(chosenmob))
@@ -122,10 +125,10 @@
 	var/pitch_modifier = 0
 	if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 		return final_pitch
-	if(STASTR > 10)
-		pitch_modifier -= (STASTR - 10) * 0.03
-	else if(STASTR < 10)
-		pitch_modifier += (10 - STASTR) * 0.03
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 10)
+		pitch_modifier -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - 10) * 0.03
+	else if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 10)
+		pitch_modifier += (10 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * 0.03
 	return clamp(final_pitch + pitch_modifier, 0.5, 2)
 
 
@@ -165,9 +168,9 @@
 				possible_sounds = H.dna.species.soundpack_m.get_sound(key,modifier)
 			if(H.voice_type)
 				switch (H.voice_type)
-					if (VOICE_TYPE_MASC)
+					if (VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
 						possible_sounds = H.dna.species.soundpack_m.get_sound(key, modifier)
-					if (VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
+					if (VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
 						if (H.dna.species.soundpack_f)
 							possible_sounds = H.dna.species.soundpack_f.get_sound(key, modifier)
 						else

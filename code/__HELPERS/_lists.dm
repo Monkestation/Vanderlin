@@ -236,6 +236,15 @@ if (length(L) < I) { \
 			return TRUE
 	return FALSE
 
+/proc/is_path_in_list(path_to_check, list/L)
+	if(!path_to_check || !length(L))
+		return FALSE
+	for(var/type in L)
+		if(ispath(path_to_check, type))
+			return TRUE
+	return FALSE
+
+
 //Checks for specific types in specifically structured (Assoc "type" = TRUE) lists ('typecaches')
 #define is_type_in_typecache(A, L) (A && length(L) && L[(ispath(A) ? A : A:type)])
 
@@ -716,7 +725,7 @@ if (length(L) < I) { \
 	for(var/key in key_list)
 		. |= key_list[key]
 
-/proc/make_associative(list/flat_list)
+/proc/make_associative(list/flat_list, fill_with=TRUE)
 	. = list()
 	for(var/thing in flat_list)
 		.[thing] = TRUE

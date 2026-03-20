@@ -452,9 +452,8 @@
 		var/bounty_multiplier = bounty_items[sell_type]
 		return FLOOR(base_price * bounty_multiplier * sell_modifier, 1)
 
-	// Otherwise use normal sellprice with modifiers
-	var/obj/item/temp = sell_type
-	base_price = initial(temp.sellprice)
+	// Otherwise use baseprice + sell modifers
+	base_price = SSmerchant.get_item_base_value(sell_type)
 
 	if(!base_price || base_price <= 0)
 		return 0
@@ -798,7 +797,7 @@
 
 /client/proc/spawn_faction_trader()
 	set name = "Spawn Faction Trader"
-	set category = "Debug"
+	set category = "Debug.Spawn"
 
 	if(!check_rights(R_ADMIN))
 		return

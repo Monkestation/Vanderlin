@@ -54,7 +54,7 @@
 	if(!istype(user, /mob/living))
 		return
 	var/mob/living/player = user
-	var/skill = player.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(player, /datum/attribute/skill/craft/engineering)
 	if(current_charge)
 		. += span_warning("The contraption has [current_charge] charges left.")
 	if(!current_charge)
@@ -78,7 +78,7 @@
 	return
 
 /obj/item/contraption/proc/misfire(atom/A, mob/living/user)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT * 5))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 5))
 	to_chat(user, span_info("Oh fuck."))
 	playsound(src, 'sound/misc/bell.ogg', 100)
 	addtimer(CALLBACK(src, PROC_REF(misfire_result), A, user), rand(5, 30))
@@ -93,7 +93,7 @@
 	if(!current_charge)
 		addtimer(CALLBACK(src, PROC_REF(battery_collapse), A, user), 5)
 
-/obj/item/contraption/attackby(obj/item/I, mob/user, params)
+/obj/item/contraption/attackby(obj/item/I, mob/user, list/modifiers)
 	var/datum/effect_system/spark_spread/S = new()
 	var/turf/front = get_turf(src)
 	if(istype(I, /obj/item/gear/wood) && special_cog)
@@ -155,7 +155,7 @@
 /obj/item/contraption/proc/play_clock_sound()
 	playsound(src, 'sound/misc/clockloop.ogg', 25, TRUE)
 
-/obj/item/contraption/pre_attack(atom/A, mob/living/user, params)
+/obj/item/contraption/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!current_charge)
 		flick(off_icon, src)
 		to_chat(user, span_info("The contraption beeps! It requires \a [initial(accepted_power_source.name)]!"))
@@ -197,7 +197,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		return
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	if(istype(O, /obj/structure/door)) //This is to ensure the new door will retain its lock
 		var/obj/structure/door/door = O
 		var/obj/structure/door/new_door = new door.metalizer_result(get_turf(door))
@@ -216,8 +216,8 @@
 	charge_deduction(O, user, 1)
 	shake_camera(user, 1, 1)
 	playsound(src, 'sound/magic/swap.ogg', 100, TRUE)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 2))
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2))
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2,10) - skill)))
 		misfire(O, user)
 	return
 
@@ -289,7 +289,7 @@
 		S.set_up(1, 1, front)
 		S.start()
 		return
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 3))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 3))
 	charge_deduction(O, user, 1)
 	flick(on_icon, src)
 	playsound(src, 'sound/misc/machinevomit.ogg', 50, TRUE)
@@ -297,11 +297,11 @@
 	return
 
 /obj/item/contraption/smelter/proc/smelt_part2(obj/O, mob/living/user)
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	var/turf/turf = get_turf(O)
 	playsound(O, pick('sound/combat/hits/burn (1).ogg','sound/combat/hits/burn (2).ogg'), 100)
 	O.moveToNullspace()
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2,10) - skill)))
 		misfire(O, user)
 	addtimer(CALLBACK(O, PROC_REF(popcorn_smelt_result), turf), 20)
 	return
@@ -320,7 +320,7 @@
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
 
-/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user)
+/obj/item/contraption/shears/attack(mob/living/amputee, mob/living/user, list/modifiers)
 	if(!current_charge)
 		return
 
@@ -354,7 +354,7 @@
 	if(patient.stat != DEAD && (patient.has_status_effect(/datum/status_effect/jitter) || patient.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
-	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering) / 6)
+	var/skill_modifier = 1.5 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 6)
 	if(do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
 		playsound(patient, 'sound/misc/guillotine.ogg', 20, TRUE)
 		limb_snip_candidate.drop_limb()
@@ -385,14 +385,14 @@
 
 /obj/item/contraption/linker/examine(mob/user)
 	. = ..()
-	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		. += span_notice("Its buffer [buffer ? "contains [buffer]." : "is empty."]")
 	else
 		. += span_notice("All you can make out is a bunch of gibberish.")
 
-/obj/item/contraption/linker/attack_self(mob/user, params)
+/obj/item/contraption/linker/attack_self(mob/user, list/modifiers)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		to_chat(user, "You wipe [src] of its stored buffer.")
 		remove_buffer(src)
 	else
@@ -460,7 +460,7 @@
 	. = ..()
 	. += span_blue("Right-Click to fold the table.")
 
-/obj/structure/table/wood/folding/attack_hand_secondary(mob/user, params)
+/obj/structure/table/wood/folding/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	user.visible_message(span_notice("[user] folds [src]."), span_notice("You fold [src]."))
 	new /obj/item/folding_table_stored(drop_location())
@@ -482,7 +482,7 @@
 	on = FALSE
 	crossfire = FALSE
 
-/obj/machinery/light/fueled/hearth/mobilestove/MiddleClick(mob/user, params)
+/obj/machinery/light/fueled/hearth/mobilestove/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -524,7 +524,7 @@
 	grid_width = 32
 	grid_height = 64
 
-/obj/item/mobilestove/attack_self(mob/user, params)
+/obj/item/mobilestove/attack_self(mob/user, list/modifiers)
 	..()
 	var/turf/T = get_turf(loc)
 	if(!isfloorturf(T))

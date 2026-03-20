@@ -169,6 +169,7 @@
 	if(custom_value)
 		quirk_customizations[quirk_type] = custom_value
 	save_character()
+	update_preview_icon() // should fix issues with visual quirks not affecting our character
 	return TRUE
 
 /datum/preferences/proc/remove_quirk(quirk_type)
@@ -190,6 +191,7 @@
 				break
 
 		save_character()
+		update_preview_icon() // should fix issues with visual quirks not affecting our character
 		return TRUE
 	return FALSE
 
@@ -197,6 +199,7 @@
 	quirks = list()
 	quirk_customizations = list()
 	save_character()
+	update_preview_icon() // should fix issues with visual quirks not affecting our character
 
 /datum/preferences/proc/apply_quirks_to_character(mob/living/carbon/human/H)
 	if(!H)
@@ -257,7 +260,7 @@
 	popup.add_script("quirk_menu", 'html/browser/quirk_menu.js')
 
 	popup.set_content(get_quirk_menu_content())
-	popup.open()
+	popup.open(use_onclose = FALSE) // without use_onclose = false it acts as if we've closed the prefs menu and clears our preview
 
 /datum/preferences/proc/get_quirk_menu_content()
 	var/balance = calculate_quirk_balance()

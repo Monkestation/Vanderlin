@@ -6,7 +6,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "LAMBS TO THE SLAUGHTER!"
 	invocation_type = INVOCATION_SHOUT
 

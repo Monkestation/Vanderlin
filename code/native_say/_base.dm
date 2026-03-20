@@ -1,8 +1,5 @@
 /client/var/datum/native_say/native_say
 
-/client/New()
-	. = ..()
-	native_say = new /datum/native_say(src)
 
 /datum/native_say
 	var/client/client
@@ -54,8 +51,6 @@
 	var/scale = 1
 	if(client?.window_scaling)
 		scale = client?.window_scaling
-	if(client.prefs?.chat_scale)
-		scale *= client.prefs.chat_scale
 
 	client << browse(get_html(), "window=native_say;size=[window_width * scale]x[window_height * scale];pos=848,500;can_close=0;can_minimize=0;can_resize=0;titlebar=0")
 	winset(client, "native_say", "is-visible=0")
@@ -77,11 +72,9 @@
 	return styles
 /datum/native_say/proc/get_html()
 	var/zoom = 100
-	if(client.prefs?.chat_scale)
-		zoom *= client.prefs.chat_scale
 	var/scale = 1
-	if(client.prefs?.chat_scale)
-		scale *= client.prefs.chat_scale
+	if(client?.window_scaling)
+		scale = client?.window_scaling
 	var/list/js_channels = list()
 	var/list/js_quiet = list()
 
@@ -1026,8 +1019,6 @@
 		var/scale = 1
 		if(client?.window_scaling)
 			scale = client?.window_scaling
-		if(client.prefs?.chat_scale)
-			scale *= client.prefs.chat_scale
 		winset(client, "native_say", "size=[window_width * scale]x[window_sizes["small"] * scale];is-visible=1;focus=true")
 		client << output(null, "native_say.browser:openSayWindow('[channel.name]')")
 

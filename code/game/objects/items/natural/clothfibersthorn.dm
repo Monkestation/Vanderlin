@@ -60,7 +60,7 @@
 	embedding = list("embedded_unsafe_removal_time" = 20, "embedded_pain_chance" = 10, "embedded_pain_multiplier" = 1, "embed_chance" = 35, "embedded_fall_chance" = 0)
 	resistance_flags = FLAMMABLE
 	max_integrity = 20
-/obj/item/natural/thorn/attack_self(mob/living/user, params)
+/obj/item/natural/thorn/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
 	qdel(src)
@@ -143,6 +143,7 @@
 	icon1step = 5
 	icon2 = "clothroll2"
 	icon2step = 10
+	flags_ai_inventory = AI_ITEM_BANDAGE
 
 /obj/item/natural/bundle/cloth/full/Initialize()
 	. = ..()

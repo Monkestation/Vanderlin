@@ -90,8 +90,8 @@
 	desc = "A small bird, used by nobles to send messages beyond the borders of this city. It has a small pouch on its leg for carrying notes."
 	icon_state = "messenger"
 	icon = 'icons/roguetown/mob/monster/messenger.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	obj_flags = CAN_BE_HIT
@@ -109,7 +109,7 @@
 	desc = "A fried messenger bird. Poor thing."
 	icon_state = "fcrow"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null
@@ -169,12 +169,12 @@
 		qdel(src)
 
 
-/obj/item/reagent_containers/food/snacks/messenger_bird/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/messenger_bird/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user
 			var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
-			if(prob(L.STASPD * 2) || spell.owner == user)
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2) || spell.owner == user)
 				if(istype(I, /obj/item/paper) && spell.owner == user)
 					var/obj/item/paper/P = I
 					if(length(P.info) > 0)

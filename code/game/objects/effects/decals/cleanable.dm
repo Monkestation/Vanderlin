@@ -42,7 +42,7 @@
 	if(mergeable_decal)
 		return TRUE
 
-/obj/effect/decal/cleanable/attackby(obj/item/W, mob/user, params)
+/obj/effect/decal/cleanable/attackby(obj/item/W, mob/user, list/modifiers)
 	lazy_init_reagents()
 	if(!reagents)
 		return ..()

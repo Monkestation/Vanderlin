@@ -62,11 +62,11 @@
 
 /datum/status_effect/throat_soothed/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_SOOTHED_THROAT, "[STATUS_EFFECT_TRAIT]_[id]")
+	ADD_TRAIT(owner, TRAIT_SOOTHED_THROAT, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/throat_soothed/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_SOOTHED_THROAT, "[STATUS_EFFECT_TRAIT]_[id]")
+	REMOVE_TRAIT(owner, TRAIT_SOOTHED_THROAT, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/bounty
 	id = "bounty"
@@ -112,6 +112,11 @@
 	. = ..()
 	if (.)
 		RegisterSignal(new_owner, COMSIG_MOVABLE_HEAR, PROC_REF(handle_hearing))
+
+/datum/status_effect/bugged/get_examine_text(mob/user, list/P)
+	if(HAS_TRAIT(user, TRAIT_INQUISITION))
+		var/str = span_warning("[P[THEYVE]] [device.get_examine_name()] implanted.")
+		return "<A href='?src=[REF(owner)];item=[device]'>][str]</A>"
 
 
 /datum/status_effect/bugged/on_remove()

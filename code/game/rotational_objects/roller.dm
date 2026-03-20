@@ -272,7 +272,7 @@
 	sort_direction = text2dir(user_choice)
 	visible_message("[src] clicks, updating its sorting direction!")
 
-/obj/structure/roller_sorter/AltClick(mob/user)
+/obj/structure/roller_sorter/AltClick(mob/user, list/modifiers)
 	. = ..()
 	visible_message("[src] beeps, resetting its sorting list!")
 	sorting_list = list()
@@ -303,7 +303,7 @@
 	build_roller_chain()
 	return TRUE
 
-/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/roller_sorter_lister))
 		var/obj/structure/roller_sorter/new_sorter = new(get_turf(src))
 		new_sorter.parent_roller = src
@@ -347,7 +347,7 @@
 	. += span_notice("Attack items to add them to the sorting list.")
 	. += span_notice("Alt-Click to reset the sorting list.")
 
-/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(target == src || !proximity_flag)
 		return ..()
 
@@ -365,7 +365,7 @@
 	current_sort += target.type
 	to_chat(user, span_notice("[target] has been added to the sorting list."))
 
-/obj/item/roller_sorter_lister/AltClick(mob/user)
+/obj/item/roller_sorter_lister/AltClick(mob/user, list/modifiers)
 	. = ..()
 	visible_message("The sorting list has been reset!")
 	current_sort = list()

@@ -1,7 +1,7 @@
 
 /obj/item/clothing/cloak/chasuble
 	name = "chasuble"
-	desc = "Pristine white liturgical vestments with a golden psycross adornment."
+	desc = "Pristine white liturgical vestments with a golden Astratan cross adornment."
 	icon_state = "chasuble"
 	body_parts_covered = CHEST|GROIN|ARMS
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -11,6 +11,17 @@
 	allowed_race = SPECIES_BASE_BODY
 	nodismemsleeves = TRUE
 
+/obj/item/clothing/cloak/chasuble/psydon
+	name = "chasuble"
+	desc = "Pristine white liturgical vestments with a golden psycross adornment."
+	icon_state = "chasuble_psydon"
+	body_parts_covered = CHEST|GROIN|ARMS
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleevetype = "shirt"
+	slot_flags = ITEM_SLOT_CLOAK
+	allowed_sex = list(MALE)
+	allowed_race = SPECIES_BASE_BODY
+	nodismemsleeves = TRUE
 
 /obj/item/clothing/cloak/stole
 	name = "stole"
@@ -292,8 +303,8 @@
 	allowed_race = SPECIES_BASE_BODY
 
 /obj/item/clothing/cloak/pegasusknight
-	name = "pegasus knight tabard"
-	desc = "A quilted tabard worn by Lakkarian pegasus knights."
+	name = "checkered tabard"
+	desc = "A quilted checkered tabard."
 	icon_state = "lakkaritabard"
 	item_state = "lakkaritabard"
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -305,5 +316,16 @@
 	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin."
 	icon_state = "poncho"
 	item_state = "poncho"
+	boobed = FALSE
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/poncho/yellow
+	color = CLOTHING_MUSTARD_YELLOW
+
+/obj/item/clothing/cloak/pantheon
+	name = "pantheon cloak"
+	desc = "A divine blue cloak with shimmering gold sewn in, it represents the ten in their whole. Typically worn by High Templars of the Ten"
+	icon_state = "seecloak"
+	item_state = "seecloak"
 	boobed = FALSE
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'

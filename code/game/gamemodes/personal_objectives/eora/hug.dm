@@ -31,7 +31,7 @@
 
 /datum/objective/personal/hug_beggar/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_EMPATH, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, TRAIT_EMPATH, OBJECTIVE_TRAIT)
 
 /datum/objective/personal/hug_beggar/update_explanation_text()
 	explanation_text = "Everyone deserves love! Hug a beggar to please Eora!"

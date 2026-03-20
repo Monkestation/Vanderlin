@@ -27,7 +27,7 @@
 	SSroguemachine.scomm_machines -= src
 	return ..()
 
-/obj/item/speakerinq/attack_self(mob/user, params)
+/obj/item/speakerinq/attack_self(mob/user, list/modifiers)
 	. = ..()
 	user.changeNext_move(6)
 	playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
@@ -130,7 +130,7 @@
 	inqdesc = "An ever-attentive ear... [span_notice("This ear's been bent. It's labelled as [label].")]"
 	desc = inqdesc
 
-/obj/item/listeningdevice/attack_hand_secondary(mob/user, params)
+/obj/item/listeningdevice/attack_hand_secondary(mob/user, list/modifiers)
 	if(!hidden)
 		alpha = 30
 		name = "thing"
@@ -144,7 +144,7 @@
 	return TRUE
 
 /* - REVISIT IN A FUTURE PR. ATTACHABLE LISTENERS.
-/obj/item/listeningdevice/attack(mob/living/M, mob/living/user)
+/obj/item/listeningdevice/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!active)
 		to_chat(user, span_warning("[src] is inactive.."))
 		return FALSE
@@ -155,7 +155,7 @@
 	forceMove(M)
 	M.contents.Add(src)
 
-	if(M.STAPER > user.STASPD)
+	if(GET_MOB_ATTRIBUTE_VALUE(M, STAT_PERCEPTION) > GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED))
 		to_chat(M, span_hidden("I feel something brush against mine own self. It stings."))
 
 	..()

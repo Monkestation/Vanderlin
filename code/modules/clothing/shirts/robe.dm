@@ -105,7 +105,7 @@
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
 	if((user.job != "Priest") && (user.job != "Priestess"))
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
-		playsound(user, 'sound/misc/gods/astrata_scream.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		spawn(30)
 			if(loc == user)
 				user.adjust_divine_fire_stacks(5)
@@ -271,7 +271,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/magehood/adept
 
 
-/obj/item/clothing/shirt/robe/newmage/adept/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/adept/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return
@@ -308,7 +308,7 @@
 	item_state = "sorcerer-red"
 	hoodtype = /obj/item/clothing/head/hooded/magehood/sorcerer
 
-/obj/item/clothing/shirt/robe/newmage/sorcerer/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/sorcerer/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return
@@ -346,7 +346,7 @@
 	sleevetype = "shirt"
 	hoodtype = null
 
-/obj/item/clothing/shirt/robe/newmage/warlock/MiddleClick(mob/user, params)
+/obj/item/clothing/shirt/robe/newmage/warlock/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(!do_after(user, 20, target = user))
 		return
@@ -378,10 +378,19 @@
 
 /obj/item/clothing/shirt/robe/kimono
 	name = "kimono"
-	desc = "Worn by merchants of Zhongese."
+	desc = "A flowing garment worn by faraway merchants."
 	color = null
 	icon_state = "kimono"
 	item_state = "kimono"
 	sleeved = null
 	sleevetype = null
 	item_flags = ABSTRACT
+
+/obj/item/clothing/shirt/robe/bogwitch
+	name = "bog witch robe"
+	desc = "A robe of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	color = null
+	sleeved = null
+	sleevetype = null
+	misc_flags = CRAFTING_TEST_EXCLUDE

@@ -79,6 +79,9 @@
 	var/proper_drying = FALSE
 	COOLDOWN_DECLARE(wet_stress_cd)
 
+	/// Defines for damage sounds, see [_DEFINES/clothing] and [pick_damage_sound]
+	var/material_category = ARMOR_MAT_FABRIC
+
 /obj/item/clothing/Initialize()
 	. = ..()
 	if(ispath(pocket_storage_component_path))
@@ -159,18 +162,13 @@
 
 
 
-/obj/item/clothing/MiddleClick(mob/user, params)
+/obj/item/clothing/MiddleClick(mob/living/user, list/modifiers)
 	..()
-	var/mob/living/L = user
-	var/altheld //Is the user pressing alt?
-	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, ALT_CLICKED))
-		altheld = TRUE
-	if(!isliving(user))
+	if(!istype(user))
 		return
 	if(nodismemsleeves)
 		return
-	if(altheld)
+	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		if(user.zone_selected == l_sleeve_zone)
 			if(l_sleeve_status == SLEEVE_ROLLED)
 				l_sleeve_status = SLEEVE_NORMAL
@@ -208,7 +206,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -235,7 +233,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(L.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -254,27 +252,37 @@
 			else
 				user.visible_message(span_warning("[user] tries to tear [src]."))
 				return
-	if(loc == L)
-		L.regenerate_clothes()
+	if(loc == user)
+		user.regenerate_clothes()
 
-
-/obj/item/clothing/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
+/obj/item/clothing/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
-	if(slot_flags & slot)
-		if(M.gender in allowed_sex)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-				if(H.dna)
-					if(!(H.age in allowed_ages))
-						return FALSE
-					if(H.dna.species.id in allowed_race)
-						return TRUE
-					else
-						return FALSE
-			return TRUE
-		else
-			return FALSE
+
+	if(!(slot_flags & slot))
+		return FALSE
+
+	if(!(M.gender in allowed_sex))
+		return FALSE
+
+	if(!ishuman(M))
+		return FALSE
+
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	var/datum/species/species = H.dna?.species
+	if(!species)
+		return FALSE
+
+	var/used_species_id = species.id_override ? species.id_override : species.id
+
+	if(!(used_species_id in allowed_race))
+		return FALSE
+
+	return TRUE
 
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
@@ -307,7 +315,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/clothing/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/clothing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(M.on_fire)
 		if(user == M)
 			return
@@ -449,17 +457,16 @@ BLIND     // can't see anything
 		dismembered = fcopy_rsc(dismembered)
 		GLOB.dismembered_clothing_icons[index] = dismembered
 
-/obj/item/clothing/pants/AltClick(mob/user)
+/obj/item/clothing/pants/AltClick(mob/user, list/modifiers)
 	if(..())
 		return 1
 
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
+	else if(attached_accessory)
+		remove_accessory(user)
 	else
-		if(attached_accessory)
-			remove_accessory(user)
-		else
-			rolldown()
+		rolldown()
 
 /obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag in list("acid", "fire"))
@@ -480,7 +487,7 @@ BLIND     // can't see anything
 		W.connectedc = src
 		hood = W
 
-/obj/item/clothing/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/attack_hand_secondary(mob/user, list/modifiers)
 	if(hoodtype && (loc == user))
 		ToggleHood()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -571,7 +578,7 @@ BLIND     // can't see anything
 			particle_spewer.RemoveComponent()
 
 	if(wet.use_water(0.7))
-		if(HAS_TRAIT(C, TRAIT_NOBLE) && wet.water_stacks == 0)
+		if(HAS_TRAIT(C, TRAIT_NOBLE_BLOOD) && wet.water_stacks == 0)
 			C.add_stress(/datum/stress_event/noble_tarnished_cloth)
 
 		if(C.mind?.assigned_role == /datum/job/farmer || C.mind?.assigned_role == /datum/job/soilchild || HAS_TRAIT(C, TRAIT_LEECHIMMUNE) || istriton(C))
@@ -581,3 +588,63 @@ BLIND     // can't see anything
 		if(COOLDOWN_FINISHED(src, wet_stress_cd))
 			COOLDOWN_START(src, wet_stress_cd, 60 SECONDS)
 			C.add_stress(/datum/stress_event/wet_cloth)
+
+/obj/item/clothing/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armor_penetration)
+	. = ..()
+	if(!. || !ismob(loc))
+		return
+
+	var/damage_dealt = .
+
+	var/max_int = max_integrity - (max_integrity * integrity_failure)
+	var/cur_int = max(atom_integrity - (max_integrity * integrity_failure), 0)
+	var/old_int = min(damage_dealt + cur_int, max_integrity)
+
+	var/ratio = cur_int / max_int
+	var/ratio_old = old_int / max_int
+
+	var/text
+	var/sound
+
+	if(ratio <= 0.75 && ratio_old > 0.75)
+		text = "Armor <br><font color = '#8aaa4d'>marred</font>"
+		sound = pick_damage_sound(1)
+	if(ratio <= 0.5 && ratio_old > 0.5)
+		text = "Armor <br><font color = '#d4d36c'>damaged</font>"
+		sound = pick_damage_sound(2)
+	if(ratio <= 0.25 && ratio_old > 0.25)
+		text = "Armor <br><font color = '#a8705a'>sundered</font>"
+		sound = pick_damage_sound(3)
+
+	if(sound)
+		playsound(src, sound, 100, TRUE)
+
+	if(text)
+		balloon_alert_to_viewers(text, balloon_flag = DISABLE_BALLOON_COMBAT)
+
+/obj/item/clothing/proc/pick_damage_sound(tier)
+	switch(material_category)
+		if(ARMOR_MAT_PLATE)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_plate1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_plate2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_plate3.ogg'
+		if(ARMOR_MAT_CHAINMAIL)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_chain1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_chain2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_chain3.ogg'
+		if(ARMOR_MAT_FABRIC)
+			switch(tier)
+				if(1)
+					return 'sound/combat/armor_degrade_leather1.ogg'
+				if(2)
+					return 'sound/combat/armor_degrade_leather2.ogg'
+				if(3)
+					return 'sound/combat/armor_degrade_leather3.ogg'

@@ -248,7 +248,7 @@
 
 /obj/item/gem/turq
 	name = "raw ceruleabaster"
-	desc = "A beautiful teal gem that is easily carved. It is prized by the Elves of Lakkari and is heavily associated with Necra. Ceruleabaster carvings often decorate Lakkarian tombs."
+	desc = "A beautiful teal gem that is easily carved."
 	icon = 'icons/roguetown/gems/gem_turq.dmi'
 	icon_state = "raw_turq"
 	sellprice = 75

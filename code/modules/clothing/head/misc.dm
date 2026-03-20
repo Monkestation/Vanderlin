@@ -220,7 +220,7 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
-/obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user)
+/obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
 		return
@@ -333,15 +333,15 @@
 	item_flags = ABSTRACT
 
 /obj/item/clothing/head/helmet/pegasusknight
-	name = "pegasus knight helm"
-	desc = "A helmet typically worn by Lakkarian pegasus knights. Many find the design of this helmet unusual, but it protects the neck well and is easy to see out of."
+	name = "coifed helmet"
+	desc = "Many find the design of this helmet unusual, but it protects the neck well and is easy to see out of."
 	icon_state = "lakkarihelm"
 	armor = ARMOR_PLATE
 	flags_inv = HIDEEARS|HIDEHAIR
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
 	block2add = FOV_BEHIND
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	sewrepair = FALSE
 
 /obj/item/clothing/head/roguehood/psydon

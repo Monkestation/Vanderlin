@@ -14,19 +14,19 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/keycontrol = "puritan"
 	var/cat_current = "1"
 	var/list/all_category = list(
-		"✤ RELIQUARY ✤",
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"RELIQUARY",
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
 	var/list/category = list(
-		"✤ SUPPLIES ✤",
-		"✤ ARTICLES ✤",
-		"✤ EQUIPMENT ✤",
-		"✤ WARDROBE ✤"
+		"SUPPLIES",
+		"ARTICLES",
+		"EQUIPMENT",
+		"WARDROBE"
 	)
-	var/list/inq_category = list("✤ RELIQUARY ✤")
+	var/list/inq_category = list("RELIQUARY")
 	var/ournum
 	var/mailtag
 	var/obfuscated = FALSE
@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		. += span_info("You can send arrival slips, accusation slips, fully loaded INDEXERs or confessions here.")
 		. += span_info("Properly sign them. Include an INDEXER where needed. Stamp them for two additional Marques.")
 
-/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, params)
+/obj/structure/fake_machine/mail/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -162,8 +162,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		coin_loaded = FALSE
 		update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, params)
-	// Mercenary Token Handling
+/obj/structure/fake_machine/mail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/merctoken))
 		return handle_merctoken(P, user)
 
@@ -207,7 +206,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/mob/living/carbon/human/H = user
 
 	// Check job restrictions
-	if(is_merchant_job(H.mind.assigned_role) || is_gaffer_job(H.mind.assigned_role))
+	if(is_merchant_job(H.mind.assigned_role) || is_tomb_warden_job(H.mind.assigned_role))
 		to_chat(H, span_warning("This is of no use to me - I may give this to a mercenary so they may send it themselves."))
 		return
 
@@ -367,6 +366,11 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			marque_value += 2
 		if(is_accused)
 			marque_value -= 4
+		if(confession.signee?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+			to_chat(user, SPAN_GOD_PSYDON("Wunderbar. This was no small task to undertake.\
+			\nThe House of Thronleer wishes you to speak. Finish your duties and return immediately.\
+			\nCongratulations."))
+			marque_value += 50
 
 		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
 		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
@@ -498,7 +502,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
-			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lesser)
+			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn, /datum/antagonist/vampire/lord/daewalker)
 				is_correct = TRUE
 				break
 
@@ -555,7 +559,9 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		var/marque_value = accusation.marquevalue
 		if(!is_indexed)
 			marque_value += 2
-
+		if(subject?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+			to_chat(user, SPAN_GOD_PSYDON("The Daewalker is among you?! Get their confession immediately, my child. You will be well rewarded for your efforts."))
+			marque_value += 6
 		budget2change(marque_value, user, "MARQUE")
 		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
 		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
@@ -756,7 +762,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	SSroguemachine.hermailermaster = src
 	update_appearance()
 
-/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, params)
+/obj/item/fake_machine/mastermail/attackby(obj/item/P, mob/user, list/modifiers)
 	if(istype(P, /obj/item/paper))
 		var/obj/item/paper/PA = P
 		if(!PA.mailer && !PA.mailedto && PA.cached_mailer && PA.cached_mailedto)
@@ -793,20 +799,20 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 /obj/structure/fake_machine/mail/proc/decreaseremaining(datum/inqports/PA)
 	PA.remaining -= 1
-	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - ᛉ [PA.marquescost] ᛉ"
+	PA.name = "[initial(PA.name)] ([PA.remaining]/[PA.maximum]) - [PA.marquescost]"
 	if(!PA.remaining)
-		PA.name = "[initial(PA.name)] (OUT OF STOCK) - ᛉ [PA.marquescost] ᛉ"
+		PA.name = "[initial(PA.name)] (OUT OF STOCK) - [PA.marquescost]"
 	return
 
 /obj/structure/fake_machine/mail/proc/display_marquette(mob/user)
 	var/contents
-	contents = "<center>✤ ── THE ORATORIUM'S RELIQUARY ── ✤<BR>"
+	contents = "<center>  THE ORATORIUM'S RELIQUARY  <BR>"
 	contents += "ERADICATE HERESY, SO THAT PSYDONIA MAY ENDURE <BR>"
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
-		contents += "✤ ── <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a> ── ✤<BR>"
+		contents += "  <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
 	else
-		contents += "✤ ── PURITAN'S LOCK: [inqonly ? "YES":"NO"] ── ✤<BR>"
-	contents += "ᛉ <a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a>ᛉ<BR>"
+		contents += "  PURITAN'S LOCK: [inqonly ? "YES":"NO"]  <BR>"
+	contents += "<a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
 
 	if(cat_current == "1")
 		contents += "<BR> <table style='width: 100%' line-height: 40px;'>"

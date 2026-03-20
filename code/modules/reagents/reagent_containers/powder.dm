@@ -10,6 +10,7 @@
 	sellprice = 10
 	grid_height = 32
 	grid_width = 32
+	flags_ai_inventory = AI_ITEM_POWDER
 
 /obj/item/reagent_containers/powder/canconsume(mob/eater, mob/user, silent)
 	. = ..()
@@ -40,7 +41,7 @@
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 	if(M == user)

@@ -1,23 +1,24 @@
 /obj/item/weapon/lordscepter
-	force = 20
-	force_wielded = 20
-	possible_item_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
-	gripped_intents = list(/datum/intent/lordbash)
 	name = "master's rod"
 	desc = "Bend the knee."
 	icon_state = "scepter"
 	icon = 'icons/roguetown/weapons/32/special.dmi'
+	force = DAMAGE_MACE
+	force_wielded = DAMAGE_MACE
+	wlength = WLENGTH_NORMAL
+	possible_item_intents = list(/datum/intent/lordbash, /datum/intent/lord_electrocute, /datum/intent/lord_silence)
+	gripped_intents = list(/datum/intent/lordbash)
+	minstr = 5
+
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
-	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = FIRE_PROOF|LAVA_PROOF|ACID_PROOF // Nigh indestructible due to how important it is
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	smeltresult = null // No
 	melting_material = null
 	swingsound = BLUNTWOOSH_MED
-	minstr = 5
 	blade_dulling = DULLING_BASHCHOP
 	var/static/list/rod_jobs = null
 	COOLDOWN_DECLARE(scepter)
@@ -68,13 +69,13 @@
 		var/mob/living/carbon/human/HU = user
 
 		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, "<span class='danger'>The rod doesn't obey me.</span>")
+			to_chat(user, span_danger("The rod doesn't obey me."))
 			return
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 
-			user.visible_message("<span class='warning'>[user] points [src] at [target].</span>")
+			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
 
 			if(H == HU)
 				return
@@ -116,19 +117,107 @@
 				COOLDOWN_START(src, scepter, 10 SECONDS)
 				return
 
+//................ Staff of the Testimonium ............... //
+/obj/item/weapon/polearm/woodstaff/aries
+	name = "staff of the testimonium"
+	desc = "A symbolic staff, granted to enlightened acolytes who have achieved and bear witnessed to the miracles of the Gods."
+	icon_state = "aries"
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	resistance_flags = FIRE_PROOF // Leniency for unique items
+	dropshrink = 0.6
+	sellprice = 100
+	possible_item_intents = list(POLEARM_BASH, /datum/intent/priest_smite, /datum/intent/priest_silence)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
+	var/static/list/rod_jobs_priest = null
+	COOLDOWN_DECLARE(staff)
+
+/datum/intent/priest_smite
+	name = "smite"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/datum/intent/priest_silence
+	name = "silence"
+	blade_class = null
+	icon_state = "inuse"
+	tranged = TRUE
+	noaa = TRUE
+
+/obj/item/weapon/polearm/woodstaff/aries/afterattack(atom/target, mob/user, flag)
+	. = ..()
+	if(get_dist(user, target) > 7)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+
+
+	if(!ishuman(user))
+		return
+
+	var/mob/living/carbon/human/HU = user
+
+	if(!is_priest_job(HU.mind?.assigned_role))
+		to_chat(user, span_danger("The staff doesn't obey me."))
+		return
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+
+		user.visible_message(span_warning("[user] points [src] at [target]."))
+
+		if(H == HU)
+			return
+
+		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+			return
+
+		if(!rod_jobs_priest)
+			rod_jobs_priest = GLOB.church_positions | list(
+			/datum/job/monk::title,
+			/datum/job/templar::title,
+			/datum/job/churchling::title,
+			/datum/job/undertaker::title,
+			/datum/job/gmtemplar,
+			)
+
+		if(!((H.mind?.assigned_role.title in rod_jobs_priest)))
+			return
+
+		if(!COOLDOWN_FINISHED(src, staff))
+			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_smite))
+			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+			H.electrocute_act(5, src)
+			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm smitten by the staff!"))
+			COOLDOWN_START(src, staff, 20 SECONDS)
+			return
+
+		if(istype(user.used_intent, /datum/intent/priest_silence))
+			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+			H.set_silence(20 SECONDS)
+			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+			to_chat(H, span_danger("I'm silenced by the staff!"))
+			COOLDOWN_START(src, staff, 10 SECONDS)
+
 /obj/item/weapon/mace/stunmace
-	force = 15
-	force_wielded = 15
 	name = "stunmace"
 	icon = 'icons/roguetown/weapons/32/special.dmi'
 	icon_state = "stunmace0"
 	desc = "A dwarven invention, a mace that bears tiny soul-gems that imbue the crown of the mace with lightning mana."
-	gripped_intents = null
-	w_class = WEIGHT_CLASS_NORMAL
+	force = DAMAGE_CLUB
+	force_wielded = DAMAGE_CLUB
+	wdefense = BAD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
-	wbalance = 0
+	gripped_intents = null
 	minstr = 5
-	wdefense = 0
+	w_class = WEIGHT_CLASS_NORMAL
 	var/charge = 100
 	var/on = FALSE
 
@@ -176,7 +265,7 @@
 	. = ..()
 	icon_state = "stunmace[on]"
 
-/obj/item/weapon/mace/stunmace/attack_self(mob/user, params)
+/obj/item/weapon/mace/stunmace/attack_self(mob/user, list/modifiers)
 	if(on)
 		on = FALSE
 	else
@@ -229,10 +318,11 @@
 	animname = "cut"
 	blade_class = BCLASS_CUT
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
-	penfactor = 0
-	chargetime = 0
-	swingdelay = 0
+	penfactor = 5
+	damfactor = 1.1
 	clickcd = 10
+	misscost = 4
+	acc_bonus = 10
 	item_damage_type = "slash"
 
 /datum/intent/katar/thrust
@@ -243,31 +333,32 @@
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 30
-	chargetime = 0
-	clickcd = 14
+	misscost = 3
+	clickcd = 10
+	acc_bonus = 20
 	item_damage_type = "stab"
 
 /obj/item/weapon/katar
-	slot_flags = ITEM_SLOT_HIP
-	force = 15
-	possible_item_intents = list(/datum/intent/katar/cut, /datum/intent/katar/thrust)
 	name = "katar"
 	desc = "A blade that sits above the users fist. Commonly used by those proficient at unarmed fighting"
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "katar"
-	gripsprite = FALSE
+	force = DAMAGE_KATAR
+	throwforce = DAMAGE_KATAR - 3
+	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_SHORT
+	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
+
+	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
+	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
-	max_blade_int = 150
-	max_integrity = 80
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	throwforce = 12
-	wdefense = 2
 	thrown_bclass = BCLASS_CUT
-	anvilrepair = /datum/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
 	melt_amount = 75
 
@@ -286,19 +377,15 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
-	max_integrity = 250
 
 /datum/intent/knuckles/strike
 	name = "punch"
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("punches", "clocks")
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
-	chargetime = 0
-	penfactor = -100
-	clickcd = 8
-	damfactor = 1.1
-	swingdelay = 0
+	penfactor = AP_CLUB_STRIKE
 	icon_state = "inpunch"
+	misscost = 5
 	item_damage_type = "blunt"
 
 /datum/intent/knuckles/smash
@@ -306,12 +393,12 @@
 	blade_class = BCLASS_SMASH
 	attack_verb = list("smashes")
 	hitsound = list('sound/combat/hits/punch/punch_hard (1).ogg', 'sound/combat/hits/punch/punch_hard (2).ogg', 'sound/combat/hits/punch/punch_hard (3).ogg')
-	penfactor = -100
 	damfactor = 1.1
-	clickcd = CLICK_CD_MELEE
-	swingdelay = 8
-	//intent_intdamage_factor = 1.35
+	penfactor = AP_CLUB_STRIKE
+	clickcd = 14
+	swingdelay = 2
 	icon_state = "insmash"
+	misscost = 8
 	item_damage_type = "blunt"
 
 /obj/item/weapon/knuckles
@@ -319,24 +406,27 @@
 	desc = "A mean looking pair of steel knuckles."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "steelknuckle"
-	force = 22
-	possible_item_intents = list(/datum/intent/knuckles/strike,/datum/intent/knuckles/smash)
-	gripsprite = FALSE
+	force = DAMAGE_KNUCKLES
+	throwforce = DAMAGE_KNUCKLES - 10
+	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
+	possible_item_intents = list(KNUCKLE_STRIKE, KNUCKLE_SMASH)
+	max_integrity = INTEGRITY_STRONG
+
+	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/pugilism/unarmparry (1).ogg','sound/combat/parry/pugilism/unarmparry (2).ogg','sound/combat/parry/pugilism/unarmparry (3).ogg')
 	sharpness = IS_BLUNT
-	max_integrity = 300
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
-	throwforce = 12
-	wdefense = MEDIOCRE_PARRY
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
+
+	weapon_special = /datum/special_intent/upper_cut
 
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()
@@ -362,4 +452,4 @@
 	desc = "Some times call for a more intimate approach."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
-	force = 24
+	force = DAMAGE_KNUCKLES + 2

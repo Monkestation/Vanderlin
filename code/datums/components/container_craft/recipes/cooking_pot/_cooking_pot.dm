@@ -31,7 +31,7 @@
 /datum/container_craft/cooking/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking) * 0.5)
+		real_cooking_time /= 1 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 0.5)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -105,7 +105,7 @@
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
 	// Get the initiator's cooking skill
-	var/cooking_skill = initiator.get_skill_level(/datum/skill/craft/cooking) + initiator.get_inspirational_bonus()
+	var/cooking_skill = GET_MOB_SKILL_VALUE_OLD(initiator, /datum/attribute/skill/craft/cooking) + initiator.get_inspirational_bonus()
 
 	// Use the quality calculator to determine final quality
 	var/datum/quality_calculator/cooking/cook_calc = new(
@@ -134,6 +134,7 @@
 	// Update reagent name with optional ingredients
 	if(length(found_optional_wildcards))
 		var/extra_string = " with [wording_choice] "
+		var/extra_taste = "with hints of "
 		var/first_ingredient = TRUE
 		var/list/all_used_ingredients = list()
 		for(var/wildcard_type in found_optional_wildcards)
@@ -143,10 +144,15 @@
 		for(var/obj/item/ingredient in all_used_ingredients)
 			if(first_ingredient)
 				extra_string += ingredient.name
+				extra_taste += ingredient.name
 				first_ingredient = FALSE
 			else
 				extra_string += " and [ingredient.name]"
+				extra_taste += " and [ingredient.name]"
 		found_product.name += extra_string
+		found_product.taste_description += extra_taste
+		found_product.add_data("custom_name", found_product.name)
+		found_product.add_data("custom_tastes", found_product.taste_description)
 
 	// Optionally modify reagent properties based on quality
 	apply_quality_effects_to_reagent(found_product)

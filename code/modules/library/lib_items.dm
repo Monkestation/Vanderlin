@@ -18,7 +18,7 @@
 	desc = ""
 	anchored = FALSE
 	density = TRUE
-	opacity = 1
+	opacity = TRUE
 	resistance_flags = FLAMMABLE
 	max_integrity = 200
 	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 0)
@@ -83,7 +83,7 @@
 		icon_state = "bookcase"
 	return ..()
 
-/obj/structure/bookcase/attackby(obj/item/I, mob/user, params)
+/obj/structure/bookcase/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!is_type_in_list(I, allowed_books))
 		return

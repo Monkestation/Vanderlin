@@ -26,8 +26,9 @@
 		COMSIG_ATOM_BULLET_ACT,
 		COMSIG_ATOM_HITBY,
 	))
+	REMOVE_TRAIT(source, TRAIT_RELAYING_ATTACKER, REF(src))
 
-/datum/element/relay_attackers/proc/on_attackby(atom/target, obj/item/weapon, mob/attacker)
+/datum/element/relay_attackers/proc/on_attackby(atom/target, obj/item/weapon, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER
 	if(weapon.force)
 		relay_attacker(target, attacker, weapon.force)

@@ -1,5 +1,5 @@
 /datum/anvil_recipe/valuables
-	appro_skill = /datum/skill/craft/blacksmithing
+	appro_skill = /datum/attribute/skill/craft/blacksmithing
 	i_type = "Valuables"
 	abstract_type = /datum/anvil_recipe/valuables
 	category = "Valuables"
@@ -363,12 +363,6 @@
 	name = "Zenarii Headdress"
 	recipe_name = "a Zenarii Headdress"
 	created_item = /obj/item/clothing/head/crown/circlet/goldheaddress
-
-/datum/anvil_recipe/valuables/gold/hemhem
-	name = "Hemhem Crown (+ Cloth )"
-	recipe_name = "a Hemhem Crown"
-	additional_items = list (/obj/item/natural/cloth)
-	created_item = /obj/item/clothing/head/crown/hemhem
 
 /datum/anvil_recipe/valuables/gold/dorpel
 	name = "Golden Dorpel Ring"

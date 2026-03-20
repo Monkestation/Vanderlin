@@ -6,7 +6,7 @@
 /area
 	level = null
 	name = "unknown"
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
 	//Keeping this on the default plane, GAME_PLANE, will make area overlays fail to render on FLOOR_PLANE.
@@ -87,6 +87,9 @@
 	var/list/ambush_times
 
 	var/converted_type
+
+	var/threat_region = "" // Key used to look up threat region this area belongs to
+
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
 

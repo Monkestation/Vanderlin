@@ -12,7 +12,7 @@
 	base_antags = 1
 	maximum_antags = 4
 
-	min_players = 35
+	min_players = LOWPOP_THRESHOLD
 	weight = 6
 
 	earliest_start = 0 SECONDS
@@ -33,7 +33,11 @@
 		/datum/job/adept,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
+		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/tomb_warden,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event/antagonist/solo/zizo_cultist

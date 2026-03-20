@@ -90,6 +90,11 @@
 	/// How many ticks this mob has been over reating
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
+	/// Skill holder
+	var/datum/attribute_holder/attributes = /datum/attribute_holder
+	/// Extra effort that can be spent on efforts
+	var/extra_effort = 0
+
 	/// The current intent of the mob
 	var/uses_intents = TRUE
 	var/datum/intent/a_intent = INTENT_HELP//Living
@@ -151,6 +156,7 @@
 
 	/// What job does this mob have
 	var/job = null//Living
+	var/datum/job/job_type
 
 	/// A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
 	var/list/faction = list(FACTION_NEUTRAL)
@@ -249,7 +255,8 @@
 
 	var/mobid = 0 //incremented on spawn
 
-	var/cmode = 0
+	/// Combat Mode
+	var/cmode = FALSE
 	var/d_intent = INTENT_DODGE
 	var/islatejoin = FALSE
 
@@ -269,5 +276,24 @@
 
 	/// A ref of the area we're taking our ambient loop from.
 	var/area/ambience_tracked_area
+
+	var/obj/effect/spell_rune/spell_rune
+	var/datum/intent/curplaying
+	var/accent = ACCENT_DEFAULT
+	var/cmode_timer
+	var/monitor_key
+
+	var/last_aimhchange = 0
+	var/aimheight = 11
+	var/cmode_music = 'sound/music/cmode/combat.ogg'
+
 	/// new title given by an admin.
 	var/admin_title = null
+
+	VAR_PROTECTED/base_strength = 10
+	VAR_PROTECTED/base_perception = 10
+	VAR_PROTECTED/base_endurance = 10
+	VAR_PROTECTED/base_constitution = 10
+	VAR_PROTECTED/base_intelligence = 10
+	VAR_PROTECTED/base_speed = 10
+	VAR_PROTECTED/base_fortune = 10

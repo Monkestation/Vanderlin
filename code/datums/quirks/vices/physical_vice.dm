@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list(STATKEY_PER = -10, STATKEY_SPD = -2, STATKEY_LCK = -5)
+	effectedstats = list(STAT_PERCEPTION = -10, STAT_SPEED = -2, STAT_FORTUNE = -5)
 	duration = 5 SECONDS
 
 /datum/quirk/vice/bad_sight
@@ -13,7 +13,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	owner.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
 
 	if(H.wear_mask)
 		var/type = H.wear_mask.type
@@ -38,9 +38,6 @@
 	name = "Cyclops (R)"
 	desc = "I lost my right eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_right/on_spawn()
 	if(!ishuman(owner))
@@ -59,9 +56,6 @@
 	name = "Cyclops (L)"
 	desc = "I lost my left eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_left/on_spawn()
 	if(!ishuman(owner))
@@ -131,8 +125,8 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	ADD_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	ADD_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 	// Equip iron mask - remove existing mask if present
 	if(H.wear_mask)
@@ -149,8 +143,8 @@
 	var/mob/living/carbon/human/H = owner
 
 	// Remove traits when quirk is removed
-	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 /datum/quirk/vice/black_briar
 	name = "Host of the Black Briar"
@@ -285,6 +279,7 @@
 		/datum/quirk/vice/lost_keys,
 		/datum/quirk/boon/always_prepared,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/rough_start/on_spawn()
 	if(!owner || !ishuman(owner))
@@ -332,6 +327,7 @@
 	incompatible_quirks = list(
 		/datum/quirk/vice/rough_start,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/lost_keys/on_spawn()
 	if(!owner || !ishuman(owner))
@@ -376,10 +372,14 @@
 			K.forceMove(key_location)
 
 /datum/quirk/vice/nightmares
-	name = "Nightmares"
-	desc = "You suffer from terrible nightmares. You scream in your sleep and take longer to rest."
+	name = "Nitemares"
+	desc = "You suffer from terrible nitemares. You scream in your sleep and take longer to rest."
 	point_value = 1
 	var/next_scream = 0
+
+/datum/quirk/vice/nightmares/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Nitemares..."))
 
 /datum/quirk/vice/nightmares/on_spawn()
 	if(!owner)
@@ -409,6 +409,10 @@
 	point_value = 3
 	var/in_darkness = FALSE
 	var/next_panic = 0
+
+/datum/quirk/vice/fear_darkness/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Scared of the Dark..."))
 
 /datum/quirk/vice/fear_darkness/on_life(mob/living/user)
 	if(!owner)

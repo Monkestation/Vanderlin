@@ -17,6 +17,7 @@ GLOBAL_LIST_EMPTY(start_landmarks_list)			//list of all spawn points created
 GLOBAL_LIST_EMPTY(department_security_spawns)	//list of all department security spawns
 GLOBAL_LIST_EMPTY(generic_event_spawns)			//handles clockwork portal+eminence teleport destinations
 GLOBAL_LIST_EMPTY(jobspawn_overrides)			//These will take precedence over normal spawnpoints if created.
+GLOBAL_LIST_EMPTY(quest_landmarks_list)
 
 GLOBAL_LIST_EMPTY(lich_starts)
 GLOBAL_LIST_EMPTY(bandit_starts)
@@ -25,6 +26,7 @@ GLOBAL_LIST_EMPTY(vlord_starts)
 GLOBAL_LIST_EMPTY(vspawn_starts)
 GLOBAL_LIST_EMPTY(dknight_starts)
 GLOBAL_LIST_EMPTY(delf_starts)
+GLOBAL_LIST_EMPTY(jarosite_starts) // ewww
 GLOBAL_LIST_EMPTY(newplayer_start)
 GLOBAL_LIST_EMPTY(prisonwarp)	//admin prisoners go to these
 GLOBAL_LIST_EMPTY(prisonwarped)	//list of players already warped

@@ -15,7 +15,7 @@
 	base_antags = 1
 	maximum_antags = 2
 
-	min_players = 25
+	min_players = LOWPOP_THRESHOLD
 	weight = 12
 
 	earliest_start = 0 SECONDS
@@ -27,6 +27,21 @@
 		/datum/job/lord,
 		/datum/job/consort,
 		/datum/job/priest,
+		/datum/job/hand,
+		/datum/job/captain,
+		/datum/job/prince,
+		/datum/job/inquisitor,
+		/datum/job/absolver,
+		/datum/job/orthodoxist,
+		/datum/job/adept,
+		/datum/job/forestwarden,
+		/datum/job/royalknight,
+		/datum/job/templar,
+		/datum/job/gmtemplar,
+		/datum/job/advclass/combat/assassin,
+		/datum/job/tomb_warden,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 

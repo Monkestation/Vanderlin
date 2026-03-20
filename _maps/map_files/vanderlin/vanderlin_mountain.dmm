@@ -45,9 +45,7 @@
 /turf/closed/mineral/random/med,
 /area/under/mountains/anvil/lower)
 "aO" = (
-/obj/structure/gate/bars{
-	gid = "dwarfkeepgate"
-	},
+/obj/structure/gate/bars,
 /turf/open/floor/blocks,
 /area/under/mountains/anvil/lower/building)
 "aW" = (
@@ -2859,7 +2857,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/lavaexposed)
 "Rw" = (
-/obj/item/clothing/neck/psycross/silver/malum,
+/obj/item/clothing/neck/psycross/silver/divine/malum,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "RB" = (

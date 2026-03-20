@@ -10,6 +10,16 @@
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 
+/datum/attribute_holder/sheet/job/species/werewolf
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_PERCEPTION = 5,
+		STAT_INTELLIGENCE = -3,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = 5,
+		STAT_SPEED = 3,
+	)
+
 /datum/species/werewolf
 	name = "werewolf"
 	id = "werewolf"
@@ -36,7 +46,8 @@
 		TRAIT_HARDDISMEMBER,
 		TRAIT_UNDODGING,
 		TRAIT_UNPARRYING,
-		TRAIT_LONGSTRIDER
+		TRAIT_LONGSTRIDER,
+		TRAIT_BLOODDRINKER,
 	)
 
 	inherent_biotypes = MOB_HUMANOID
@@ -49,8 +60,7 @@
 	soundpack_m = /datum/voicepack/werewolf
 	soundpack_f = /datum/voicepack/werewolf
 
-	specstats_m = list(STATKEY_STR = 5, STATKEY_PER = 5, STATKEY_INT = -3, STATKEY_CON = 5, STATKEY_END = 5, STATKEY_SPD = 3, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 5, STATKEY_PER = 5, STATKEY_INT = -3, STATKEY_CON = 5, STATKEY_END = 5, STATKEY_SPD = 3, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/werewolf
 
 	enflamed_icon = "widefire"
 
@@ -66,6 +76,8 @@
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
+
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak/human = 1, /obj/item/reagent_containers/food/snacks/meat/steak = 3)
 
 	changesource_flags = WABBAJACK
 	bleed_mod = 0.6

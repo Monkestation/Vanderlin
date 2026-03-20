@@ -24,7 +24,7 @@
 	var/outline_colour ="#F0E68C"
 	id = "haste"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/song/accelakathist
-	effectedstats = list(STATKEY_SPD = 2)
+	effectedstats = list(STAT_SPEED = 2)
 	duration = 30 SECONDS
 
 /datum/status_effect/inspiration/accelakathist/on_apply()
@@ -120,7 +120,7 @@
 /datum/action/cooldown/spell/undirected/song/rejuvenation_song
 	name = "Healing Hymn"
 	desc = "Recuperate your audience bodies with a melody! Refills health slowly over time."
-	invocation = "%All ye weary and burdened, rest in the healing divine..."
+	invocation = "%All ye weary and burdened, may the divine bless..."
 	button_icon_state = "melody_t3_base"
 	background_icon_state = "melody_t3_base"
 	spell_cost = 60
@@ -141,7 +141,7 @@
 
 /datum/status_effect/buff/healing/rejuvenationsong/on_apply()
 	. = ..()
-	healing_on_tick += owner.get_skill_level(/datum/skill/misc/music) * 0.2
+	healing_on_tick += GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/music) * 0.2
 	return ..()
 
 /atom/movable/screen/alert/status_effect/buff/song/rejuvsong

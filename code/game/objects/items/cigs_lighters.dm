@@ -74,14 +74,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	matchburnout()
 	. = ..()
 
-/obj/item/match/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/match/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
 	if(lit && !burnt)
 		A.spark_act()
 
-/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/match/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!isliving(M))
 		return
 //	if(lit && M.IgniteMob())
@@ -160,6 +160,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	create_reagents(chem_volume, INJECTABLE | NO_REACT)
 	if(list_reagents)
 		reagents.add_reagent_list(list_reagents)
+		for(var/datum/reagent/reagent_type as anything in list_reagents)
+			if(ispath(reagent_type, /datum/reagent/medicine))
+				flags_ai_inventory |= AI_ITEM_HEALING_DRINK
+
 	if(starts_lit)
 		light()
 	AddComponent(/datum/component/knockoff, 90, list(BODY_ZONE_PRECISE_MOUTH) ,list(ITEM_SLOT_MOUTH))//90% to knock off when wearing a mask
@@ -168,7 +172,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attackby(obj/item/W, mob/user, params)
+/obj/item/clothing/face/cigarette/attackby(obj/item/W, mob/user, list/modifiers)
 	if(!lit && smoketime > 0)
 		var/lighting_text = W.ignition_effect(src, user)
 		if(lighting_text)
@@ -279,7 +283,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			M.equip_to_slot_if_possible(butt, qdel_on_fail = FALSE, disable_warning = TRUE)
 	qdel(src)
 
-/obj/item/clothing/face/cigarette/attack_self(mob/user, params)
+/obj/item/clothing/face/cigarette/attack_self(mob/user, list/modifiers)
 	if(lit)
 		user.visible_message(span_notice("[user] calmly drops and treads on \the [src], putting it out instantly."))
 		new type_butt(user.loc)
@@ -287,7 +291,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		qdel(src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/clothing/face/cigarette/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(!istype(M))
 		return ..()
 	if(M.on_fire && !lit)
@@ -415,7 +419,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	packeditem = FALSE
 	extinguish()
 
-/obj/item/clothing/face/cigarette/pipe/attackby(obj/item/attacking_item, mob/user, params)
+/obj/item/clothing/face/cigarette/pipe/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(!istype(attacking_item, /obj/item/reagent_containers/food/snacks/produce) && !istype(attacking_item, /obj/item/reagent_containers/powder))
 		var/lighting_text = attacking_item.ignition_effect(src, user)
 		if(!lighting_text)
@@ -453,7 +457,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	qdel(attacking_item)
 
-/obj/item/clothing/face/cigarette/pipe/attack_self(mob/user, params)
+/obj/item/clothing/face/cigarette/pipe/attack_self(mob/user, list/modifiers)
 	if(lit)
 		user.visible_message(span_notice("[user] puts out [src]."), span_notice("I put out [src]."))
 		extinguish()
@@ -538,7 +542,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/lighter/extinguish()
 	set_lit(FALSE)
 
-/obj/item/lighter/attack_self(mob/living/user, params)
+/obj/item/lighter/attack_self(mob/living/user, list/modifiers)
 	if(user.is_holding(src))
 		if(!lit)
 			set_lit(TRUE)
@@ -572,7 +576,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		. = ..()
 
-/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user)
+/obj/item/lighter/attack(mob/living/carbon/M, mob/living/carbon/user, list/modifiers)
 	if(lit && M.IgniteMob())
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
 		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")

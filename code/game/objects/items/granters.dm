@@ -41,7 +41,7 @@
 	. = ..()
 	reading = FALSE
 
-/obj/item/book/granter/attack_self(mob/user, params)
+/obj/item/book/granter/attack_self(mob/user, list/modifiers)
 	if(user.mind?.has_studied == TRUE)
 		to_chat(user, span_notice("I struggle to study my arcane notes more. Perhaps a good rest would help."))
 		return FALSE
@@ -206,7 +206,7 @@
 	pickup_sound =  'sound/blank.ogg'
 
 /obj/item/book/granter/spell_points/on_reading_finished(mob/living/user)
-	var/arcaneskill = user.get_skill_level(/datum/skill/magic/arcane)
+	var/arcaneskill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)
 	if(arcaneskill >= SKILL_LEVEL_NOVICE) //Required arcane skill of NOVICE or higher to use the granter
 		to_chat(user, span_notice("I absorb the insights on the scroll, and feel more adept at spellcraft!"))
 		user.adjust_spell_points(1)

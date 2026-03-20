@@ -70,45 +70,33 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	var/isinhell
 	var/last_helld = 0
 
+	/// Grants this observer mob all languages
+	var/grant_all_languages = TRUE
+	/// If grant all is not true, the languages we grant
+	var/list/languages_to_grant = list(/datum/language/common)
+
 /mob/dead/observer/rogue
-//	see_invisible = SEE_INVISIBLE_LIVING
+	icon_state = "ghost1"
+	verb_say = "moans"
 	sight = 0
 	see_in_dark = 2
-	var/next_gmove
-	var/misting = 0
 	draw_icon = TRUE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
-	icon_state = "ghost1"
+
+	grant_all_languages = TRUE
+
+/mob/dead/observer/rogue/Initialize(mapload)
+	. = ..()
+	add_movespeed_modifier(MOVESPEED_ID_GHOST, multiplicative_slowdown = 0.3)
 
 /mob/dead/observer/rogue/nodraw
-	draw_icon = FALSE
 	icon = 'icons/roguetown/mob/misc.dmi'
 	icon_state = "ghost"
+	draw_icon = FALSE
 	alpha = 100
 
-/mob/dead/observer/rogue/Move(n, direct)
-	if(world.time < next_gmove)
-		return
-	next_gmove = world.time + 2
-	var/turf/T = n
-
-	setDir(direct)
-
-	if(!loc.Exit(src, T))
-		return
-
-	if(istype(T))
-		if(T.density)
-			return
-		for(var/obj/item/reagent_containers/powder/salt/S in T)
-//			go2hell()
-//			next_gmove = world.time + 30
-			return
-	. = ..()
-
 /mob/dead/observer/screye
-//	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
 	see_in_dark = 0
 	hud_type = /datum/hud/obs
@@ -137,8 +125,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /mob/dead/observer/Initialize()
 	set_invisibility(GLOB.observer_default_invisibility)
 
-	verbs += list(
-		/mob/dead/observer/proc/tray_view)
+	add_verb(src, /mob/dead/observer/proc/tray_view)
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "")
@@ -200,8 +187,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	real_name = name
 
 	if(!fun_verbs)
-		verbs -= /mob/dead/observer/verb/boo
-		verbs -= /mob/dead/observer/verb/possess
+		add_verb(src, /mob/dead/observer/verb/boo)
+		add_verb(src, /mob/dead/observer/verb/possess)
 
 	GLOB.dead_mob_list += src
 
@@ -215,19 +202,15 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 
 	if(!istype(src, /mob/dead/observer/rogue/arcaneeye))
 		if(!istype(src, /mob/dead/observer/screye))
-			client?.verbs += GLOB.ghost_verbs
+			add_verb(src, GLOB.ghost_verbs)
 			to_chat(src, span_danger("Click the <b>SKULL</b> on the left of your HUD to respawn."))
 
-	grant_all_languages()
-
-//	show_data_huds()
-//	data_huds_on = 1
-
-/mob/dead/observer/narsie_act()
-	var/old_color = color
-	color = "#960000"
-	animate(src, color = old_color, time = 10, flags = ANIMATION_PARALLEL)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 10)
+	if(grant_all_languages)
+		grant_all_languages()
+	else
+		remove_all_languages()
+		for(var/datum/language/lang as anything in languages_to_grant)
+			grant_language(lang)
 
 /mob/dead/observer/Destroy()
 	mind?.current_ghost = null
@@ -408,19 +391,24 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(istype(src, /mob/dead/observer/profane))
 		to_chat(src, "<span class='warning'>My spirit has been snatched away by Graggar!</span>")
 		return
+	if(is_antag_banned(ckey, ROLE_ZOMBIE))
+		var/datum/antagonist/zombie/is_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
+		if(is_zombie?.revived)
+			to_chat(src, span_warning("I am banned from playing deadites."))
+			return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
 
 	remove_client_colour(/datum/client_colour/monochrome)
-	client.view_size.setDefault(getScreenSize())
+	client.view_size.setDefault(client.view_size.getScreenSize())
 	mind.current_ghost = null
 	mind.current.ckey = ckey(key)
 	return TRUE
 
 /mob/dead/observer/returntolobby(modifier as num)
 	set name = "{RETURN TO LOBBY}"
-	set category = "Options"
+	set category = "Preferences.Options"
 	set hidden = 1
 	if (CONFIG_GET(flag/norespawn))
 		return
@@ -458,11 +446,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		qdel(M)
 		return
 
-	client?.verbs -= /client/proc/descend
 	M.key = key
 //	M.Login()	//wat
-	return
-
 
 /mob/dead/observer/verb/stay_dead()
 	set category = "Spirit"
@@ -507,22 +492,50 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/verb/follow()
 	set category = "Spirit"
-	set name = "Orbit" // "Haunt"
+	set name = "Orbit"
 	set desc = ""
 	set hidden = 1
-	var/list/mobs
-	if(client.holder)
-		if(check_rights(R_WATCH,0))
-			mobs = getpois(mobs_only=1,skip_mindless=1)
-		else
-			mobs = gethaunt()
-	else
-		mobs = gethaunt()
 
-	var/input = input("Who?!", "Haunt", null, null) as null|anything in mobs
+	var/list/mobs = getpois(mobs_only = TRUE, skip_mindless = TRUE)
+
+	if(!length(mobs))
+		to_chat(src, span_dead("No souls to orbit."))
+		return
+
+	var/input = browser_input_list(src, "Who?!", "Orbit", mobs)
+	if(!input || QDELETED(src))
+		return
+
 	var/mob/target = mobs[input]
+	if(!target)
+		return
+
 	ManualFollow(target)
 
+/mob/dead/observer/proc/dead_tele()
+	set category = "Ghost"
+	set name = "Teleport"
+	set desc= "Teleport to a location"
+	set hidden = 1
+
+	if(!isobserver(src))
+		to_chat(src, span_warning("Not when you're not dead!"))
+		return
+
+	var/area/thearea  = browser_input_list(src, "Area to jump to", "Where?", GLOB.areas)
+
+	if(!thearea || QDELETED(src))
+		return
+
+	var/list/L = list()
+	for(var/turf/T in get_area_turfs(thearea.type))
+		L += T
+
+	if(!length(L))
+		to_chat(src, span_warning("No location available!"))
+		return
+
+	forceMove(pick(L))
 
 #define HAUNTTIME (10 MINUTES)
 
@@ -792,6 +805,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Possess!"
 	set desc= "Take over the body of a mindless creature!"
 
+	if(!check_rights(R_ADMIN))
+		return FALSE
 	var/list/possessible = list()
 	for(var/mob/living/L in GLOB.alive_mob_list)
 		if(istype(L,/mob/living/carbon/human/dummy) || !get_turf(L)) //Haha no.
@@ -954,11 +969,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			ghostimage_simple.icon_state = icon_state
 		if("fun_verbs")
 			if(fun_verbs)
-				verbs += /mob/dead/observer/verb/boo
-				verbs += /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 			else
-				verbs -= /mob/dead/observer/verb/boo
-				verbs -= /mob/dead/observer/verb/possess
+				add_verb(src, /mob/dead/observer/verb/boo)
+				add_verb(src, /mob/dead/observer/verb/possess)
 
 /mob/dead/observer/reset_perspective(atom/A)
 	if(client)

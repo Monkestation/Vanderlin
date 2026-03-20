@@ -3,39 +3,51 @@
 \---------*/
 
 /obj/item/weapon/shovel
-	force = DAMAGE_STAFF - 5
-	force_wielded = DAMAGE_STAFF_WIELD - 3
-	possible_item_intents = list(/datum/intent/mace/strike/shovel)
-	gripped_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel, /datum/intent/axe/chop)
 	name = "shovel"
 	desc = ""
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
+	force = DAMAGE_CLUB - 5
+	force_wielded = DAMAGE_CLUB_WIELD - 2
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_LONG
+	possible_item_intents = list(SHOVEL_STRIKE)
+	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, AXE_CHOP)
+
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	max_integrity = INTEGRITY_STRONG
 	sharpness = IS_BLUNT
-	wdefense = MEDIOCRE_PARRY
-	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/dirtclod/heldclod
-	smeltresult = /obj/item/ingot/iron
-	associated_skill = /datum/skill/combat/polearms
-	max_blade_int = 50
+	var/obj/item/natural/clod/heldclod
+	melting_material = /datum/material/iron
+	melt_amount = 75
+	associated_skill = /datum/attribute/skill/combat/polearms
+	max_blade_int = 100
 	grid_width = 32
 	grid_height = 96
 	var/time_multiplier = 1 //multipler to do_after times
 
-/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(user.used_intent.type != /datum/intent/shovelscoop)
 		return
 	if(!istype(A, /obj/structure/snow))
-		return
+		var/obj/item/storage/sack/S = A
+		if(!istype(S))
+			return
+		if(!heldclod)
+			return
+		if(!SEND_SIGNAL(S, COMSIG_TRY_STORAGE_INSERT, src.heldclod, user, FALSE, FALSE))
+			return
+		heldclod = null
+		playsound(S,'sound/items/empty_shovel.ogg', 100, TRUE)
+		update_appearance(UPDATE_ICON_STATE)
+		return TRUE
 	var/turf/target_turf = get_turf(A)
 	playsound(A,'sound/items/dig_shovel.ogg', 100, TRUE)
 	qdel(A)
@@ -60,19 +72,7 @@
 
 /obj/item/weapon/shovel/update_icon_state()
 	. = ..()
-	icon_state = "[heldclod ? "dirt" : ""][initial(icon_state)]"
-
-/datum/intent/mace/strike/shovel
-	name = "strike"
-	blade_class = BCLASS_BLUNT
-	attack_verb = list("strikes", "hits")
-	hitsound = list('sound/combat/hits/blunt/shovel_hit.ogg', 'sound/combat/hits/blunt/shovel_hit2.ogg', 'sound/combat/hits/blunt/shovel_hit3.ogg')
-	chargetime = 0
-	penfactor = 10
-	swingdelay = 0
-	icon_state = "instrike"
-	misscost = 5
-	item_damage_type = "blunt"
+	icon_state = "[heldclod ? "[heldclod.clod_type]" : ""][initial(icon_state)]"
 
 /datum/intent/shovelscoop
 	name = "scoop"
@@ -95,7 +95,7 @@
 	item_damage_type = "blunt"
 
 
-/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/shovel/attack(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
 	if(. && heldclod && get_turf(M))
 		heldclod.forceMove(get_turf(M))
@@ -123,9 +123,9 @@
 
 	else if(user.used_intent.type == /datum/intent/shovelscoop)
 		. = TRUE
-		if(istype(T, /turf/open/floor/dirt))
+		if(istype(T, /turf/open/floor/dirt) || istype(T, /turf/open/floor/sand))
 			var/obj/structure/closet/dirthole/holie = locate() in T
-			if(heldclod)
+			if(heldclod && heldclod.clod_type == "dirt")
 				if(holie && holie.stage < 4)
 					holie.attackby(src, user)
 				else
@@ -138,18 +138,25 @@
 					playsound(T,'sound/items/empty_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
 					return
-			else
-				if(holie)
-					holie.attackby(src, user)
-				else
-					if(istype(T, /turf/open/floor/dirt/road))
-						new /obj/structure/closet/dirthole(T)
+			else if(!heldclod)
+				if(istype(T, /turf/open/floor/dirt/road) || istype(T, /turf/open/floor/dirt))
+					if(holie)
+						holie.attackby(src, user)
+						return
 					else
-						T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
-					heldclod = new(src)
+						if(istype(T, /turf/open/floor/dirt/road))
+							new /obj/structure/closet/dirthole(T)
+						else
+							T.ChangeTurf(/turf/open/floor/dirt/road, flags = CHANGETURF_INHERIT_AIR)
+						heldclod = new /obj/item/natural/clod/dirt(src)
+						playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
+						update_appearance(UPDATE_ICON_STATE)
+						return
+				else
+					heldclod = new /obj/item/natural/clod/sand(src)
 					playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
 					update_appearance(UPDATE_ICON_STATE)
-			return
+					return
 		if(heldclod)
 			if(istype(T, /turf/open/water))
 				qdel(heldclod)
@@ -220,19 +227,20 @@
 // --------- SPADE -----------
 
 /obj/item/weapon/shovel/small
-	force = DAMAGE_STAFF - 8
-	force_wielded = DAMAGE_STAFF_WIELD - 10
-	possible_item_intents = list(/datum/intent/shovelscoop, /datum/intent/irrigate, /datum/intent/mace/strike/shovel)
 	name = "spade"
 	icon_state = "spade"
 	item_state = "spade"
+	force = DAMAGE_STAFF - 8
+	force_wielded = DAMAGE_STAFF_WIELD - 10
+	wdefense = BAD_PARRY
+	wlength = WLENGTH_SHORT
+	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)
+	max_blade_int = 0
+
 	dropshrink = 1
 	gripped_intents = null
-	wlength = WLENGTH_SHORT
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	wdefense = BAD_PARRY
-	max_blade_int = 0
 	grid_height = 64
 	time_multiplier = 2
 	smeltresult = null
@@ -257,10 +265,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/unfoldedbag_path = /obj/structure/closet/burial_shroud
 
-/obj/item/burial_shroud/attack_self(mob/user, params)
+/obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity)
+/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))
@@ -335,10 +343,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
-/obj/item/bodybag/attack_self(mob/user, params)
+/obj/item/bodybag/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity)
+/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(proximity)
 		if(isopenturf(target))

@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /proc/build_zizo_rituals()
 	. = list()
 	for(var/datum/ritual/ritual as anything in subtypesof(/datum/ritual))
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		.[ritual.name] = new ritual
 
@@ -44,6 +44,9 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(is_zizocultist(target.mind) || is_zizolackey(target.mind))
 		return
 	if(!target.client)
+		return
+	if(is_antag_banned(target.ckey, ROLE_ZIZOIDCULTIST))
+		to_chat(span_danger("This one is unworthy of her aiding her ascension."))
 		return
 	if(istype(target.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(target.wear_wrists, /obj/item/clothing/neck/psycross/silver) )
 		to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
@@ -173,11 +176,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	icon_state = "heart-on"
 	w_class =  WEIGHT_CLASS_SMALL
 
-/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, params)
+/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
 	if(istype(target.patron, /datum/patron/inhumen/zizo))
-		target.blood_volume = BLOOD_VOLUME_MAXIMUM
+		target.blood_volume = BLOOD_VOLUME_NORMAL
 		to_chat(target, span_notice("My elixir of life is stagnant once again."))
 		qdel(src)
 		return
@@ -490,7 +493,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!(mage.mana_pool?.intrinsic_recharge_sources & MANA_ALL_LEYLINES))
 		return
 	mage.gib()
-	cultist.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
+
+	cultist.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 40))
 	cultist.adjust_spell_points(18)
 	cultist.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	cultist.generate_random_attunements(rand(6, 8))
@@ -518,19 +522,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(target, span_warning("The curse doesn't take hold!"))
 		return
+	if(target.get_lux_status() != LUX_HAS_LUX)
+		to_chat(target, span_warning("The curse requires lux!"))
+		return
+	if(target.stat == DEAD)
+		return
 	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
 	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
-    if(QDELETED(victim))
-        return
-    if(place != get_turf(victim))
-        return
-    if(!victim.mind)
-        return
-    var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
-    victim.mind.transfer_to(wll)
-    victim.gib()
+	if(QDELETED(victim))
+		return
+	if(place != get_turf(victim))
+		return
+	if(!victim.mind)
+		return
+	if(victim.mob_biotypes & MOB_UNDEAD)
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		return
+	if(victim.get_lux_status() != LUX_HAS_LUX)
+		to_chat(victim, span_warning("The curse requires lux!"))
+		return
+	if(victim.stat == DEAD)
+		return
+
+	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
+	victim.mind.transfer_to(wll)
+	victim.gib()
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
@@ -546,8 +567,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
-	target.change_stat(STATKEY_STR, -2)
-	target.change_stat(STATKEY_CON, -3)
+	target.change_stat(STAT_STRENGTH, -2)
+	target.change_stat(STAT_CONSTITUTION, -3)
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
@@ -576,9 +597,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_STR, -3)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_SPD, -4)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_END, -4)
+	target.adjust_stat_modifier(STATMOD_ABOM, list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	))
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)
@@ -682,7 +705,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/trl = new /mob/living/simple_animal/hostile/retaliate/blood/ascended(center)
 	cultist.mind?.transfer_to(trl)
 	cultist.gib()
-	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_scream.ogg')
+	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_omen.ogg')
 	for(var/mob/living/carbon/human/V in GLOB.human_list)
 		if(V.mind in SSmapping.retainer.cultists)
 			V.add_stress(/datum/stress_event/lovezizo)

@@ -34,7 +34,7 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
-/obj/item/storage/sack/mob_can_equip(mob/M, slot)
+/obj/item/storage/sack/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
 	if(!..())
 		return FALSE
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
@@ -44,7 +44,7 @@
 	else
 		return TRUE
 
-/obj/item/storage/sack/attack_hand_secondary(mob/user, params)
+/obj/item/storage/sack/attack_hand_secondary(mob/user, list/modifiers)
 	if(user.get_active_held_item())
 		return ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
@@ -108,7 +108,7 @@
 	max_integrity = 300
 	component_type = /datum/component/storage/concrete/grid/sack/meat
 
-/obj/item/storage/meatbag/attack_hand_secondary(mob/user, params)
+/obj/item/storage/meatbag/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -186,7 +186,7 @@
 			return
 	. += mutable_appearance(icon, "handbasket_generic")
 
-/obj/item/storage/handbasket/attack_hand_secondary(mob/user, params)
+/obj/item/storage/handbasket/attack_hand_secondary(mob/user, list/modifiers)
 	if(user.get_active_held_item())
 		return ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)

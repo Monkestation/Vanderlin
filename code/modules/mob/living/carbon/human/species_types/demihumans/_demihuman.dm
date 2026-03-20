@@ -9,6 +9,16 @@
 /mob/living/carbon/human/species/demihuman
 	race = /datum/species/demihuman
 
+/datum/attribute_holder/sheet/job/species/demihuman
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = -1
+	)
+
 /datum/species/demihuman
 	name = "Hollow-Kin"
 	id = SPEC_ID_HOLLOWKIN
@@ -36,7 +46,7 @@
 	THIS IS A DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. PLAY AT YOUR OWN RISK."
 
 	allowed_pronouns = PRONOUNS_LIST
-	skin_tone_wording = "Ancestry"
+
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR ,FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	default_features = MANDATORY_FEATURE_LIST
@@ -49,6 +59,14 @@
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mt.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fm.dmi'
 
+	meat = list(/obj/item/reagent_containers/food/snacks/meat/steak = 1,
+		/obj/item/natural/fur/gote = 0.1,
+		/obj/item/natural/fur/volf = 0.1,
+		/obj/item/natural/fur/rous = 0.1,
+		/obj/item/natural/fur/cabbit = 0.1,
+		/obj/item/natural/fur/fox = 0.1,
+		/obj/item/natural/fur/bobcat = 0.1,
+	)
 	exotic_bloodtype = /datum/blood_type/human/demihuman
 
 	offset_features_m = list(
@@ -89,8 +107,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
-	specstats_f = list(STATKEY_STR = -1, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -1, STATKEY_SPD = 1, STATKEY_LCK = -1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/demihuman
 
 	enflamed_icon = "widefire"
 
@@ -135,34 +152,6 @@
 		/datum/descriptor_choice/prominent_four_wild,
 	)
 
-/datum/species/demihuman/get_hairc_list()
-	return sortList(list(
-	"blond - pale" = "9d8d6e",
-	"blond - dirty" = "88754f",
-	"blond - drywheat" = "d5ba7b",
-	"blond - strawberry" = "c69b71",
-
-	"brown - mud" = "362e25",
-	"brown - oats" = "584a3b",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a",
-	"brown - bark" = "2d1300",
-
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
-
-	"red - berry" = "b23434",
-	"red - wine" = "82534c",
-	"red - sunset" = "82462b",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929",
-
-	"orange - flame" = "b24c2e"
-
-	))
-
 /datum/species/demihuman/check_roundstart_eligible()
 	return TRUE
 
@@ -183,18 +172,3 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/beast)
-
-/datum/species/demihuman/get_skin_list()
-	return sortList(list(
-		"Ice Cap" = SKIN_COLOR_ICECAP, // - (Pale)
-		"Arctic" = SKIN_COLOR_ARCTIC, // - (White 1)
-		"Tundra" = SKIN_COLOR_TUNDRA, // - (White 2)
-		"Continental" = SKIN_COLOR_CONTINENTAL, // - (White 3)
-		"Temperate" = SKIN_COLOR_TEMPERATE, // - (White 4)
-		"Coastal" = SKIN_COLOR_COASTAL, // - (Latin)
-		"Subtropical" = SKIN_COLOR_SUBTROPICAL, // - (Mediterranean)
-		"Tropical Dry" = SKIN_COLOR_TROPICALDRY, // - (Mediterranean 2)
-		"Tropical Wet" = SKIN_COLOR_TROPICALWET, // - (Latin 2)
-		"Desert" = SKIN_COLOR_DESERT, //  - (Middle-east)
-		"Crimson Lands" = SKIN_COLOR_CRIMSONLANDS, // - (Black)
-	))

@@ -24,21 +24,16 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	. = ..()
 	src.holder = holder
 	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
-	RegisterSignal(holder, COMSIG_SKILL_RANK_INCREASED, PROC_REF(on_skill_improved))
-	holder.verbs += list(/mob/living/carbon/human/proc/setaudience, \
-		/mob/living/carbon/human/proc/clearaudience, \
-		/mob/living/carbon/human/proc/checkaudience)
+	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
+	add_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience))
 	set_inspiration_tier(bard_tier_override)
 
 /datum/inspiration/Destroy(force)
 	if(ishuman(holder))
 		holder.inspiration = null
-	holder.verbs -= list(/mob/living/carbon/human/proc/setaudience, \
-		/mob/living/carbon/human/proc/clearaudience, \
-		/mob/living/carbon/human/proc/checkaudience, \
-		/mob/living/carbon/human/proc/picksongs)
+	remove_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/picksongs))
 	holder.remove_spells(source = src)
-	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_INCREASED))
+	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_CHANGE))
 	holder = null
 	. = ..()
 
@@ -47,10 +42,10 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	SIGNAL_HANDLER
 	qdel(src)
 
-/datum/inspiration/proc/on_skill_improved(datum/source, datum/skill/skill_ref, new_level, old_level)
+/datum/inspiration/proc/on_skill_change(datum/source, datum/attribute/skill/skill_ref, new_level, old_level)
 	SIGNAL_HANDLER
 
-	if(!istype(skill_ref, /datum/skill/misc/music))
+	if(!ispath(skill_ref, /datum/attribute/skill/misc/music))
 		return
 	if(new_level <= old_level)
 		return
@@ -71,12 +66,12 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	if(tier_override)
 		target_tier = tier_override
 	else
-		switch(holder.get_skill_level(/datum/skill/misc/music))
+		switch(floor(GET_MOB_SKILL_VALUE_OLD(holder, /datum/attribute/skill/misc/music)))
 			if(SKILL_LEVEL_EXPERT)
 				target_tier = 1
 			if(SKILL_LEVEL_MASTER)
 				target_tier = 2
-			if(SKILL_LEVEL_LEGENDARY)
+			if(SKILL_LEVEL_LEGENDARY to INFINITY)
 				target_tier = 3
 
 	LAZYINITLIST(available_song_tiers)
@@ -93,7 +88,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	current_tier = target_tier
 	maxaudience = 2 * current_tier
 	if(length(available_song_tiers))
-		holder.verbs |= /mob/living/carbon/human/proc/picksongs
+		add_verb(holder, /mob/living/carbon/human/proc/picksongs)
 
 /**
  * MOB VERBS FOR INSPIRATION
@@ -101,7 +96,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/setaudience()
 	set name = "Audience Choice"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -124,7 +119,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/clearaudience()
 	set name = "Clear Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 	if(!inspiration)
 		return
 	if(has_status_effect(/datum/status_effect/stacking/playing_inspiration)) // cant clear while playing
@@ -135,7 +130,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/checkaudience()
 	set name = "Check Audience"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -149,7 +144,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 
 /mob/living/carbon/human/proc/picksongs()
 	set name = "Fill Songbook"
-	set category = "Inspiration"
+	set category = "RoleUnique.Bard"
 
 	if(!inspiration)
 		return
@@ -184,4 +179,4 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		verbs -= /mob/living/carbon/human/proc/picksongs
+		add_verb(src, /mob/living/carbon/human/proc/picksongs)

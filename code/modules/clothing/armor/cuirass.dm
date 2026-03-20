@@ -4,7 +4,7 @@
 	desc = "A cuirass of steel. Lightweight and highly durable."
 	icon_state = "cuirass"
 	item_state = "cuirass"
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	boobed = FALSE
@@ -58,7 +58,7 @@
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust
-	name = "rusted curiass"
+	name = "rusted cuirass"
 	desc = "Old but still useful to keep sharp objects from your innards."
 	icon = 'icons/roguetown/clothing/special/rust_armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'

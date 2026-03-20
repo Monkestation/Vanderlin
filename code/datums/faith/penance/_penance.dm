@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 	to_chat(penitent, span_notice("[desc]"))
 	to_chat(penitent, span_notice("Progress: [current_count]/[required_count]"))
 
-	target.verbs += list(/mob/living/carbon/human/proc/check_penance_verb)
+	add_verb(target, list(/mob/living/carbon/human/proc/check_penance_verb))
 
 /datum/penance/Destroy()
 	if(signal_type && penitent)
@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/assign_penance_verb()
 	set name = "Assign Penance"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	var/list/targets = list()
 	for(var/mob/living/carbon/human/H in view(7, src))
@@ -157,7 +157,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/absolve_penance_verb()
 	set name = "Absolve Penance"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	var/list/penitents = list()
 	for(var/mob/living/carbon/human/H in view(7, src))
@@ -181,7 +181,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 
 /mob/living/carbon/human/proc/check_penance_verb()
 	set name = "Check Penance"
-	set category = "Cleric"
+	set category = "RoleUnique.Divine"
 
 	var/datum/penance/P = get_penance(src)
 	if(!P)

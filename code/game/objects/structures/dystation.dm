@@ -56,7 +56,7 @@
 	selectable_colors |= new_pack.selectable_colors
 	qdel(new_pack)
 
-/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user)
+/obj/structure/dye_bin/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/dye_pack))
 		. = TRUE
 		var/obj/item/dye_pack/pack = I
@@ -100,10 +100,7 @@
 	icon_state = "dye_bin_full"
 	updateUsrDialog()
 
-/obj/structure/dye_bin/attack_hand(mob/living/user)
-	ui_interact(user)
-
-/obj/structure/dye_bin/ui_interact(mob/living/user)
+/obj/structure/dye_bin/interact(mob/living/user)
 	var/list/dat = list("<STYLE> * {text-align: center;} </STYLE>")
 	if(!inserted)
 		dat += "No item inserted."
@@ -201,7 +198,7 @@
 		span_warning("I hear a loud bang!") \
 	)
 
-	if(prob(user.STASTR * 8))
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 		deconstruct(FALSE)
 
 /*	.................   Dyes   ................... */

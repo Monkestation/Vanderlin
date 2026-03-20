@@ -3,7 +3,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	abstract_type = /obj/item/clothing/head/crown
 
 /obj/item/clothing/head/crown/circlet
@@ -133,11 +133,12 @@
 	icon_state = "sparrowcrown"
 	sellprice = VALUE_GOLD_ITEM
 
-/obj/item/clothing/head/crown/hemhem
+/*obj/item/clothing/head/crown/hemhem
 	name = "hemhem crown"
 	desc = "A large ceremonial crown heavily associated with the Hemhem desert, located in the Queendom of Lakkari. It looks pretty heavy."
 	icon_state = "hemhem"
 	sellprice = VALUE_GOLD_ITEM
+*/
 
 /obj/item/clothing/head/crown/circlet/vision
 	name = "mystical circlet"

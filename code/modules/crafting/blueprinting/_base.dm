@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 	if(GLOB.blueprint_recipes.len)
 		return
 	for(var/datum/blueprint_recipe/recipe as anything in subtypesof(/datum/blueprint_recipe))
-		if(is_abstract(recipe))
+		if(IS_ABSTRACT(recipe))
 			continue
 		GLOB.blueprint_recipes[initial(recipe.name)] = new recipe
 
@@ -26,7 +26,7 @@ GLOBAL_LIST_EMPTY(blueprint_recipes)
 	///do we take up the whole floor?
 	var/floor_object = FALSE
 
-	var/datum/skill/skillcraft = /datum/skill/craft/crafting // What skill this recipe requires (e.g., /datum/skill/craft/carpentry)
+	var/datum/attribute/skill/skillcraft = /datum/attribute/skill/craft/crafting // What skill this recipe requires (e.g., /datum/attribute/skill/craft/carpentry)
 	var/craftdiff = 0 // Difficulty modifier (0 = easy, higher = harder)
 	var/verbage = "construct" // What the user does (e.g., "build", "assemble")
 	var/verbage_tp = "constructs" // Third person version

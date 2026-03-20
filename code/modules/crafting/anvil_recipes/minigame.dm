@@ -23,7 +23,7 @@
 	src.user = user
 	selected_recipe = end_product_recipe
 
-	var/user_skill = user.get_skill_level(end_product_recipe.appro_skill)
+	var/user_skill = GET_MOB_SKILL_VALUE_OLD(user, end_product_recipe.appro_skill)
 	if(user_skill < end_product_recipe.craftdiff)
 		difficulty_modifier *= 2
 
@@ -104,8 +104,8 @@
 		click_list |= LEFT_CLICK
 	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		click_list |= ALT_CLICKED
-	if(LAZYACCESS(modifiers, CTRL_CLICK))
-		click_list |= CTRL_CLICK
+	if(LAZYACCESS(modifiers, CTRL_CLICKED))
+		click_list |= CTRL_CLICKED
 
 	var/good_hit = TRUE
 	if(!choice.check_click(click_list))
@@ -178,7 +178,7 @@
 	host_anvil.smithing = FALSE
 
 	if(completed)
-		var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
+		var/smithlevel = GET_MOB_SKILL_VALUE_OLD(user, selected_recipe.appro_skill)
 		if(host_anvil.always_perfect)
 			failed_notes = 0
 			off_time = 0
@@ -249,10 +249,10 @@
 			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
 			icon_state = "note-right-alt"
 		if(5)
-			click_requirements = list(LEFT_CLICK, CTRL_CLICK)
+			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
 			icon_state = "note-ctrl"
 		if(6)
-			click_requirements = list(RIGHT_CLICK, CTRL_CLICK)
+			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
 			icon_state = "note-right-ctrl"
 
 /atom/movable/screen/hud_note/proc/check_click(list/click_modifiers)

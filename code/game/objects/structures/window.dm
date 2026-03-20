@@ -24,7 +24,7 @@
 	// See repairable component in repairable.dm for what these variables do
 	var/list/repair_thresholds = list(/obj/item/natural/glass = 1)
 	var/obj/item/broken_repair = /obj/item/grown/log/tree/small
-	var/repair_skill = /datum/skill/craft/masonry
+	var/repair_skill = /datum/attribute/skill/craft/masonry
 
 /obj/structure/window/Initialize()
 	. = ..()
@@ -121,7 +121,7 @@
 		return
 	icon_state = "[icon]"
 
-/obj/structure/window/openclose/attack_hand_secondary(mob/user, params)
+/obj/structure/window/openclose/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -138,7 +138,7 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/window/openclose/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/window/openclose/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/weapon/knife/dagger) && !climbable && !user.cmode)
 		to_chat(user, span_notice("I start trying to pry the window open..."))
 		if(do_after(user, 6 SECONDS, src))
@@ -177,7 +177,7 @@
 		if(isliving(mover))
 			if(iscarbon(mover))
 				var/mob/living/carbon/dude = mover
-				take_damage(20 * (dude.STASTR / 10))
+				take_damage(20 * (GET_MOB_ATTRIBUTE_VALUE(dude, STAT_STRENGTH) / 10))
 			else
 				take_damage(10)
 		else if(isitem(mover) && mover.throwforce > 10)
@@ -186,7 +186,7 @@
 	if(climbable && (mover.throwing || mover.movement_type & (FLYING|FLOATING)))
 		if(ishuman(mover))
 			var/mob/living/carbon/human/dude = mover
-			if(prob(100 - clamp((dude.get_skill_level(/datum/skill/misc/athletics) + dude.get_skill_level(/datum/skill/misc/climbing)) * 10 - (!dude.IsOffBalanced() * 30), 10, 100)))
+			if(prob(100 - clamp((GET_MOB_SKILL_VALUE_OLD(dude, /datum/attribute/skill/misc/athletics) + GET_MOB_SKILL_VALUE_OLD(dude, /datum/attribute/skill/misc/climbing)) * 10 - (!dude.IsOffBalanced() * 30), 10, 100)))
 				var/obj/item/bodypart/head/head = dude.get_bodypart(BODY_ZONE_HEAD)
 				if(head)
 					head.receive_damage(20)
@@ -203,10 +203,9 @@
 /obj/structure/window/proc/force_open()
 	playsound(src, 'sound/foley/doors/windowup.ogg', 100, FALSE)
 	climbable = TRUE
-	opacity = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/window/attackby(obj/item/W, mob/user, params)
+/obj/structure/window/attackby(obj/item/W, mob/user, list/modifiers)
 	return ..()
 
 /obj/structure/window/attack_paw(mob/living/user)

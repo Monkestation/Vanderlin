@@ -7,6 +7,13 @@
 /mob/living/carbon/human/species/human/halfelf
 	race = /datum/species/human/halfelf
 
+/datum/attribute_holder/sheet/job/species/halfelf
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+	)
+
 /datum/species/human/halfelf
 	name = "Half-Elf"
 	id = SPEC_ID_HALF_ELF
@@ -29,8 +36,6 @@
 	Depending on their heritage, Half-Elves tend to gain species traits \
 	depending on how strong their fathers, or mothers, genes were. \
 	Half-Elves typically struggle to find their own identity."
-
-	skin_tone_wording = "Half-Elven Identity"
 
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
@@ -82,8 +87,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 1, STATKEY_INT = 1, STATKEY_CON = 0, STATKEY_END = 0, STATKEY_SPD = 1, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/halfelf
 
 	enflamed_icon = "widefire"
 
@@ -121,55 +125,36 @@
 /datum/species/human/halfelf/check_roundstart_eligible()
 	return TRUE
 
-/datum/species/human/halfelf/get_skin_list()
-	return sortList(list(
-		"Timber-Gronn" = SKIN_COLOR_TIMBER_GRONN, // - (White 1)
-		"Solar-Hue" = SKIN_COLOR_SOLAR_HUE, // - (White 2)
-		"Walnut-Stine" = SKIN_COLOR_WALNUT_STINE, // - (White 3)
-		"Amber-Stained" = SKIN_COLOR_AMBER_STAINED, // - (White 4)
-		"Joshua-Aligned" = SKIN_COLOR_JOSHUA_ALIGNED, // - (Middle-Eastern 1)
-		"Acacia-Crossed" = SKIN_COLOR_ACACIA_CROSSED, // - (Middle Eastern 2)
-		"Arid-Birthed" = SKIN_COLOR_ARID_BIRTHED, // - (Black)
-		"Redwood-Rooted" = SKIN_COLOR_REDWOOD_ROOTED, // - (Mediterranean 1)
-		"Drifted-Wood" = SKIN_COLOR_DRIFTED_WOOD, // - (Mediterranean 2)
-		"Vine-Wrapped" = SKIN_COLOR_VINE_WRAPPED, // - (Latin 2)
-		"Sage-Bloomed" = SKIN_COLOR_SAGE_BLOOMED, // - (Black 2)
-		"Mangrove-Cradled" = SKIN_COLOR_MANGROVE_CRADLED, // - (Native American 1)
-		"Tundra-Kissed" = SKIN_COLOR_TUNDRA_KISSED, // - (Native American 2)
-		"Ocean-Born" = SKIN_COLOR_OCEAN_BORN, // - (Polynesian)
-		"Basalt-Birthed" = SKIN_COLOR_BASALT_BIRTHED, // - (Melanesian)
-	))
-
 /datum/species/human/halfelf/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
-	"black - cave" = "201616",
-	"black - rogue" = "2b201b",
-	"black - midnight" = "1d1b2b",
+		"black - oil" = "181a1d",
+		"black - cave" = "201616",
+		"black - rogue" = "2b201b",
+		"black - midnight" = "1d1b2b",
 
-	"brown - mud" = "362e25",
-	"brown - oats" = "584a3b",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a",
+		"brown - mud" = "362e25",
+		"brown - oats" = "584a3b",
+		"brown - grain" = "58433b",
+		"brown - soil" = "48322a",
 
-	"red - berry" = "b23434",
-	"red - wine" = "82534c",
-	"red - sunset" = "82462b",
-	"red - blood" = "822b2b",
-	"red - maroon" = "612929",
+		"red - berry" = "b23434",
+		"red - wine" = "82534c",
+		"red - sunset" = "82462b",
+		"red - blood" = "822b2b",
+		"red - maroon" = "612929",
 
-	"blond - pale" = "9d8d6e",
-	"blond - dirty" = "88754f",
-	"blond - drywheat" = "d5ba7b",
-	"blond - strawberry" = "c69b71",
+		"blond - pale" = "9d8d6e",
+		"blond - dirty" = "88754f",
+		"blond - drywheat" = "d5ba7b",
+		"blond - strawberry" = "c69b71",
 
-	"green - leaf" = "2f3c2e",
-	"green - moss" = "3b3c2a"
+		"green - leaf" = "2f3c2e",
+		"green - moss" = "3b3c2a"
 	))
 
 /datum/species/human/halfelf/get_possible_names(gender = MALE)
-	var/static/list/male_names = world.file2list('strings/rt/names/elf/elfwm.txt')
-	var/static/list/female_names = world.file2list('strings/rt/names/elf/elfwf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/elf/elfwm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/elf/elfwf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/human/halfelf/get_possible_surnames(gender = MALE)

@@ -27,7 +27,6 @@
 /area/indoors/mountains)
 "ae" = (
 /obj/structure/gate/bars/preopen{
-	gid = "Marshgate";
 	redstone_id = "Marshgate"
 	},
 /turf/open/floor/grass/cold,
@@ -151,7 +150,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
 "aU" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -159,7 +158,7 @@
 	pixel_x = 1;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/pestra,
+/obj/item/clothing/neck/psycross/silver/divine/pestra,
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "aW" = (
@@ -1387,9 +1386,8 @@
 /turf/open/floor/church/purple,
 /area/indoors/lich)
 "hS" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/bog)
@@ -3100,13 +3098,13 @@
 "sO" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/coin/gold/pile,
-/obj/item/clothing/shoes/boots/armor/vampire{
+/obj/item/clothing/shoes/boots/armor/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/gloves/chain/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/pants/platelegs/vampire{
+/obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
 /obj/item/clothing/armor/cuirass/vampire{
@@ -4301,11 +4299,11 @@
 	pixel_x = -9;
 	pixel_y = 0
 	},
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 2;
 	pixel_y = 8
 	},
-/obj/item/clothing/neck/psycross/silver/necra,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
 /obj/effect/decal/remains/human,
 /turf/open/water/blood,
 /area/indoors/lich)
@@ -4387,8 +4385,7 @@
 /area/indoors/lich)
 "zF" = (
 /obj/structure/winch{
-	redstone_id = "Marshgate";
-	gid = "Marshgate"
+	redstone_id = "Marshgate"
 	},
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
@@ -4677,12 +4674,12 @@
 /turf/open/floor/churchrough,
 /area/indoors/cave)
 "Ba" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 2;
 	pixel_y = 7
 	},
-/obj/item/clothing/neck/psycross/silver/astrata,
-/obj/item/clothing/neck/psycross/silver/eora{
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
 	pixel_x = -20;
 	pixel_y = 13
 	},
@@ -5193,7 +5190,7 @@
 /area/indoors/mountains)
 "DN" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked,
+/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "DO" = (
@@ -5247,7 +5244,7 @@
 /turf/open/floor/grass/cold,
 /area/indoors/mountains)
 "Ef" = (
-/obj/item/clothing/neck/psycross/g,
+/obj/item/clothing/neck/psycross/gold,
 /obj/effect/decal/remains/human,
 /turf/open/floor/dirt,
 /area/outdoors/bog)
@@ -5743,9 +5740,8 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
 "GZ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 4;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 4
 	},
 /turf/open/floor/cobble,
 /area/outdoors/bog)
@@ -6683,7 +6679,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/lich)
 "ME" = (
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = 5;
 	pixel_y = 7
 	},
@@ -6691,8 +6687,8 @@
 	pixel_x = -6;
 	pixel_y = 6
 	},
-/obj/item/clothing/neck/psycross/silver/ravox,
-/obj/item/clothing/neck/psycross/silver/noc{
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/noc{
 	pixel_x = 15;
 	pixel_y = -2
 	},
@@ -7493,11 +7489,11 @@
 	pixel_x = 6;
 	pixel_y = 11
 	},
-/obj/item/clothing/neck/psycross/g{
+/obj/item/clothing/neck/psycross/gold{
 	pixel_x = -10;
 	pixel_y = 10
 	},
-/obj/item/clothing/neck/psycross/silver/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
 "Sb" = (
@@ -7992,9 +7988,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
 "UQ" = (
-/obj/effect/decal/cobbleedge{
-	dir = 8;
-	icon_state = "borderfall"
+/obj/effect/decal/borderfall{
+	dir = 8
 	},
 /turf/open/openspace,
 /area/indoors/lich)

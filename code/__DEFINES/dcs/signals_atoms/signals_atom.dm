@@ -18,9 +18,9 @@
 
 #define COMSIG_ATOM_PROXY_WATER_USE "proxy_water_usage"
 
-///from base of atom/attackby(): (/obj/item, /mob/living, params)
+///from base of atom/attackby(): (/obj/item, /mob/living, list/modifiers)
 #define COMSIG_ATOM_ATTACKBY "atom_attackby"
-/// From base of [atom/proc/attacby_secondary()]: (/obj/item/weapon, /mob/user, params)
+/// From base of [atom/proc/attacby_secondary()]: (/obj/item/weapon, /mob/user, list/modifiers)
 #define COMSIG_ATOM_ATTACKBY_SECONDARY "atom_attackby_secondary"
 	/// Return this in response if you don't want afterattack to be called
 	#define COMPONENT_NO_AFTERATTACK 1
@@ -46,7 +46,6 @@
 	///Skips the specific attack step, continuing for the next one to happen.
 	#define COMPONENT_SKIP_ATTACK (1<<1)
 
-
 #define COMSIG_ATOM_GET_RESISTANCE "atom_get_resistance"
 #define COMSIG_ATOM_GET_MAX_RESISTANCE "atom_get_max_resistance"
 #define COMSIG_ATOM_GET_STATUS_MOD "atom_get_status_mod"
@@ -63,3 +62,6 @@
 #define COMSIG_ATOM_TAKE_DAMAGE "atom_take_damage"
 	/// Return bitflags for the above signal which prevents the atom taking any damage.
 	#define COMPONENT_NO_TAKE_DAMAGE (1<<0)
+
+///from base of atom/set_opacity(): (new_opacity)
+#define COMSIG_ATOM_SET_OPACITY "atom_set_opacity"

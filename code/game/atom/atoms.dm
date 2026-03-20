@@ -236,10 +236,6 @@
 	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
 		update_light()
 
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
-
 	SETUP_SMOOTHING()
 
 	if(uses_integrity)
@@ -442,18 +438,24 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-	if(article)
-		. = "[article] <b>[src]</b>"
-		override[EXAMINE_POSITION_ARTICLE] = article
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
+/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+	if(use_article)
+		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
+	return "<b>[name]</b>"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""][get_examine_name(user)]"
+	. = get_examine_name(user)
+	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+		. = override.Join("")
+	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
+
+/atom/proc/get_examine_desc(mob/user)
+	return desc
+
+/atom/proc/get_examine_icon(mob/user)
+	return ma2html(src, user)
 
 /atom/proc/get_inspect_button()
 	return ""
@@ -476,8 +478,9 @@
 	else
 		. = list()
 
-	if(desc)
-		. += "<span class='info'>[desc]</span>"
+	var/examine_desc = get_examine_desc(user)
+	if(examine_desc)
+		. += "<span class='info'>[examine_desc]</span>"
 
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)
@@ -1376,3 +1379,33 @@
 /atom/proc/forget_alert(atom/movable/flick_visual/alert)
 	animate(alert, time = 0.5 SECONDS, alpha = 0)
 	QDEL_IN(alert, 0.5 SECONDS)
+
+///Passes Stat Browser Panel clicks to the game and calls client click on an atom
+/atom/Topic(href, list/href_list)
+	. = ..()
+	if(!usr?.client)
+		return
+	var/client/usr_client = usr.client
+	var/list/paramslist = list()
+
+	if(href_list["statpanel_item_click"])
+		switch(href_list["statpanel_item_click"])
+			if("left")
+				paramslist[LEFT_CLICK] = "1"
+			if("right")
+				paramslist[RIGHT_CLICK] = "1"
+			if("middle")
+				paramslist[MIDDLE_CLICK] = "1"
+			else
+				return
+
+		if(href_list["statpanel_item_shiftclick"])
+			paramslist[SHIFT_CLICKED] = "1"
+		if(href_list["statpanel_item_ctrlclick"])
+			paramslist[CTRL_CLICKED] = "1"
+		if(href_list["statpanel_item_altclick"])
+			paramslist[ALT_CLICKED] = "1"
+
+		var/mouseparams = list2params(paramslist)
+		usr_client.Click(src, loc, null, mouseparams)
+		return TRUE

@@ -24,8 +24,8 @@
 	cooldown_length = 15 SECONDS
 
 /datum/coven_power/presence/awe/pre_activation_checks(mob/living/target)
-	var/mypower = owner.STAINT
-	var/theirpower = owner.STAINT - 5
+	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
+	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
@@ -70,8 +70,8 @@
 	cooldown_length = 15 SECONDS
 
 /datum/coven_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
-	var/mypower = owner.STAINT
-	var/theirpower = owner.STAINT - 5
+	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
+	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
@@ -117,10 +117,11 @@
 
 	multi_activate = TRUE
 	cooldown_length = 120 SECONDS
+	violates_masquerade = TRUE
 
 /datum/coven_power/presence/fall/pre_activation_checks(mob/living/target)
-	var/mypower = owner.STAINT
-	var/theirpower = owner.STAINT - 5
+	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
+	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
@@ -160,10 +161,11 @@
 
 	multi_activate = TRUE
 	cooldown_length = 45 SECONDS
+	violates_masquerade = TRUE
 
 /datum/coven_power/presence/summon/pre_activation_checks(mob/living/target)
-	var/mypower = owner.STAINT
-	var/theirpower = owner.STAINT - 5
+	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
+	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
@@ -221,6 +223,7 @@
 	cooldown_length = 90 SECONDS
 	duration_length = 5 SECONDS
 	var/list/affected_mobs = list() // Track who's affected by majesty
+	violates_masquerade = TRUE
 
 /datum/coven_power/presence/majesty/activate()
 	. = ..()
@@ -314,7 +317,7 @@
 	. = ..()
 	UnregisterSignal(owner, list(COMSIG_ATOM_ATTACKBY))
 
-/datum/status_effect/majesty_active/proc/on_attackby(atom/source, obj/item/attacking_item, mob/living/user, params)
+/datum/status_effect/majesty_active/proc/on_attackby(atom/source, obj/item/attacking_item, mob/living/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(!user || user == source)
@@ -359,7 +362,7 @@
 	if(owner.mind)
 		owner.remove_stress(/datum/stress_event/majesty_compelled)
 
-/datum/status_effect/majesty_compulsion/proc/on_pre_attack(obj/item/source, atom/target, mob/user, params)
+/datum/status_effect/majesty_compulsion/proc/on_pre_attack(obj/item/source, atom/target, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(target != majesty_user || user != owner)
@@ -369,7 +372,7 @@
 		to_chat(user, "<span class='warning'>You cannot bring yourself to attack [majesty_user]! Their presence is too overwhelming!</span>")
 		return COMPONENT_NO_ATTACK
 
-/datum/status_effect/majesty_compulsion/proc/on_pre_attack_secondary(obj/item/source, atom/target, mob/user, params)
+/datum/status_effect/majesty_compulsion/proc/on_pre_attack_secondary(obj/item/source, atom/target, mob/user, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(target != majesty_user || user != owner)

@@ -11,7 +11,7 @@
 	icon_state = "recipe_button"
 
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 	scroll_height = 18
 	maptext_width = 130
@@ -98,7 +98,7 @@
 	var/list/true_recipes = recipe_list[selected_tab]
 	var/length = 1
 	for(var/datum/repeatable_crafting_recipe/recipe as anything in true_recipes)
-		if(is_abstract(recipe))
+		if(IS_ABSTRACT(recipe))
 			for(var/atom/sub_path as anything in subtypesof(recipe))
 				var/obj/abstract/visual_ui_element/hoverable/recipe_button/button = new /obj/abstract/visual_ui_element/hoverable/recipe_button(null, parent)
 				button.name = initial(sub_path.name)

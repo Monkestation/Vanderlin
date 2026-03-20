@@ -11,7 +11,11 @@
 	icon = 'icons/obj/hourglass.dmi'
 	icon_state = "hourglass_idle"
 
-/obj/item/hourglass/attack_self(mob/user, params)
+/obj/item/hourglass/Initialize(mapload)
+	. = ..()
+	countdown = new(src)
+
+/obj/item/hourglass/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(hand_activated)
 		toggle(user)

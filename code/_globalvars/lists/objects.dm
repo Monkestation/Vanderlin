@@ -4,11 +4,7 @@ GLOBAL_LIST_EMPTY(machines)					        //NOTE: this is a list of ALL machines n
 GLOBAL_LIST(chemical_reactions_list)				//list of all /datum/chemical_reaction datums. Used during chemical reactions
 GLOBAL_LIST(chemical_reagents_list)				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
 GLOBAL_LIST_INIT(chemical_reagents_color_list, build_chemical_reagent_color_list())		//list of random colors for reagents, initiated at roundstart or when a reagent is created
-GLOBAL_LIST_EMPTY(crafting_recipes)				//list of all table craft recipes
-GLOBAL_LIST_EMPTY(anvil_recipes)				//list of all anvil crafted recipes
-GLOBAL_LIST_EMPTY(artificer_recipes)			//list of all artificer recipes
-GLOBAL_LIST_EMPTY(alch_grind_recipes)			//list of all alchemy grinding recipes
-GLOBAL_LIST_EMPTY(alch_cauldron_recipes)		//list of all alchemy cauldron recipes
+
 GLOBAL_LIST_EMPTY(poi_list)					//list of points of interest for observe/follow
 GLOBAL_LIST_EMPTY(pinpointer_list)			//list of all pinpointers. Used to change stuff they are pointing to all at once.
 GLOBAL_LIST_EMPTY(zombie_infection_list) 		// A list of all zombie_infection organs, for any mass "animation"
@@ -16,6 +12,11 @@ GLOBAL_LIST_EMPTY(ladders)
 GLOBAL_LIST_EMPTY(trophy_cases)
 
 GLOBAL_LIST_EMPTY(mob_spawners) 		    // All mob_spawn objects
+
+GLOBAL_LIST_INIT(anvil_recipes, init_subtypes(/datum/anvil_recipe, list()))
+GLOBAL_LIST_INIT(artificer_recipes, init_subtypes(/datum/artificer_recipe, list()))
+GLOBAL_LIST_INIT(alch_grind_recipes, init_subtypes(/datum/alch_grind_recipe, list()))
+GLOBAL_LIST_INIT(alch_cauldron_recipes, init_subtypes(/datum/alch_cauldron_recipe, list()))
 
 /* COLORS */
 GLOBAL_LIST_INIT(peasant_dyes, list(

@@ -30,7 +30,7 @@
 	to_grind = null
 	return ..()
 
-/obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, list/modifiers)
 	if(!to_grind)
 		return ..()
 
@@ -42,7 +42,7 @@
 	balloon_alert(user, "I remove \an [to_grind].")
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/mortar/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/item/reagent_containers/glass/mortar/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -70,13 +70,13 @@
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 
-/obj/item/reagent_containers/glass/mortar/AltClick(mob/user)
+/obj/item/reagent_containers/glass/mortar/AltClick(mob/user, list/modifiers)
 	if(to_grind)
 		to_grind.forceMove(drop_location())
 		to_grind = null
 		to_chat(user, span_notice("I eject the item inside."))
 
-/obj/item/reagent_containers/glass/mortar/attackby(obj/item/I, mob/living/carbon/human/user)
+/obj/item/reagent_containers/glass/mortar/attackby(obj/item/I, mob/living/carbon/human/user, list/modifiers)
 	if(istype(I,/obj/item/pestle))
 		if(!to_grind)
 			if(user.try_recipes(src, I, user))
@@ -98,7 +98,7 @@
 				for(var/i in 1 to foundrecipe.valid_outputs[output])
 					new output(get_turf(src))
 			var/bonus_modifier = 1
-			switch(user.get_learning_boon(/datum/skill/craft/alchemy))
+			switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
 				if(SKILL_LEVEL_JOURNEYMAN)
 					bonus_modifier = 1.4
 				if(SKILL_LEVEL_EXPERT)
@@ -120,7 +120,7 @@
 				S.start()
 			QDEL_NULL(to_grind)
 			if(user.mind)
-				user.adjust_experience(/datum/skill/craft/alchemy, user.STAINT * user.get_learning_boon(/datum/skill/craft/alchemy), FALSE)
+				user.adjust_experience(/datum/attribute/skill/craft/alchemy, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * user.get_learning_boon(/datum/attribute/skill/craft/alchemy), FALSE)
 		return
 
 	if(to_grind)

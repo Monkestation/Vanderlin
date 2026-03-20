@@ -34,7 +34,7 @@
 	W.setDir(dir)
 	qdel(src)
 
-/obj/structure/chair/attackby(obj/item/W, mob/user, params)
+/obj/structure/chair/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
 		W.play_tool_sound(src)
 		deconstruct()
@@ -171,7 +171,7 @@
 	W.setDir(dir)
 	qdel(src)
 
-/obj/item/chair/attack_self(mob/user, params)
+/obj/item/chair/attack_self(mob/user, list/modifiers)
 	plant(user)
 
 /obj/item/chair/proc/plant(mob/user)
@@ -196,7 +196,7 @@
 /obj/item/chair/proc/smash(mob/living/user)
 	qdel(src)
 
-/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return
