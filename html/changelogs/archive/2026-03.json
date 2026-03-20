@@ -542,5 +542,25 @@
                 "rscdel": "Removed Chirurgeon Migrant Wave"
             }
         ]
+    },
+    "2026-03-20": {
+        "Spitegremlin": [
+            {
+                "balance": "rebalanced hunter classes"
+            }
+        ],
+        "ercrowther": [
+            {
+                "bugfix": "removed a stray pixel on fancy hat when facing left"
+            },
+            {
+                "image": "modified fancyhat onmob sprite"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Changed Field/Catacombs area themes. Sorry!"
+            }
+        ]
     }
 }
