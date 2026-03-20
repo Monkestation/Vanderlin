@@ -3543,6 +3543,7 @@
 #include "code\modules\projectiles\projectile.dm"
 #include "code\modules\projectiles\ammunition\_ammunition.dm"
 #include "code\modules\projectiles\ammunition\_firing.dm"
+#include "code\modules\projectiles\ammunition\caseless\_caseless.dm"
 #include "code\modules\projectiles\boxes_magazines\_ammo_box.dm"
 #include "code\modules\projectiles\boxes_magazines\internal\_internal.dm"
 #include "code\modules\projectiles\guns\ballistic.dm"

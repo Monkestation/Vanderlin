@@ -136,7 +136,6 @@
 	can_parry = TRUE
 
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/bow
-	casing_ejector = FALSE
 	bolt_type = BOLT_TYPE_NO_BOLT
 	internal_magazine = TRUE
 	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
