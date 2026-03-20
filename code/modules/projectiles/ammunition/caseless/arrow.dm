@@ -40,6 +40,15 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/strongpoison, 2)
 
+/obj/projectile/bullet/reusable/arrow/spiced
+	name = "spiced arrow"
+	desc = "A profane arrow infused with spice."
+	icon_state = "arrowspice_proj"
+
+/obj/projectile/bullet/reusable/arrow/spiced/Initialize(mapload, ...)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/druqks, 20)
+
 /obj/item/ammo_casing/caseless/arrow/pyro
 	name = "pyroclastic arrow"
 	desc = "An arrow with its tip smeared with a flammable tincture."

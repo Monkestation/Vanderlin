@@ -338,21 +338,12 @@
 	if(arrow)
 		old_dam = arrow.damage
 		old_pen = arrow.armor_penetration
+		chambered.loaded_projectile = null
 		qdel(arrow)
 	arrow = new /obj/projectile/bullet/reusable/arrow/spiced
 	arrow.damage = old_dam || arrow.damage
 	arrow.armor_penetration = old_pen || arrow.armor_penetration
 	chambered.loaded_projectile = arrow
-
-/obj/projectile/bullet/reusable/arrow/spiced
-	name = "spiced arrow"
-	desc = "A profane arrow infused with spice."
-	icon_state = "arrowspice_proj"
-	ammo_type = /obj/item/ammo_casing/caseless/arrow
-
-/obj/projectile/bullet/reusable/arrow/spiced/Initialize(mapload, ...)
-	. = ..()
-	reagents.add_reagent(/datum/reagent/druqks, 20)
 
 /datum/intent/shoot/bow/turbulenta
 	chargetime = 1
