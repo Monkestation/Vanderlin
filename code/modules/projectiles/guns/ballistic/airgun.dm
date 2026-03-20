@@ -16,9 +16,6 @@
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
 
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
-	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel/empty
-
 	possible_item_intents = list(MACE_SMASH)
 	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
 	force = DAMAGE_MACE-5
@@ -27,6 +24,11 @@
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_LONG
 
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel/empty
+	bolt_type = BOLT_TYPE_NO_BOLT
+	internal_magazine = TRUE
+	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
 	cartridge_wording = "bullet"
 	fire_sound = 'sound/foley/industrial/pneumaticpop.ogg'
 	load_sound = 'sound/foley/industrial/loadin.ogg'
@@ -59,7 +61,6 @@
 			. += "The pressure gauge arrow is positioned in the middle."
 		if(3)
 			. += "The pressure gauge arrow is positioned to the far right."
-	return ..()
 
 /obj/item/gun/ballistic/airgun/shoot_with_empty_chamber(mob/user)
 	if(!COOLDOWN_FINISHED(src, hiss_cooldown))
@@ -78,15 +79,11 @@
 		if(steam_lever)
 			to_chat(user, span_warning("I almost scald myself with the boiling hot steam!"))
 			return
-	. = ..()
-
-/obj/item/gun/ballistic/airgun/attack_self(mob/living/user, list/modifiers)
-	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		return TRUE
+	return ..()
 
 /obj/item/gun/ballistic/airgun/attack_hand(mob/user)
 	if(!user.is_holding(src))
-		return
+		return ..()
 
 	if(!loading_chamber)
 		to_chat(user, span_warning("The chamber isn't open to unload [src]!"))
