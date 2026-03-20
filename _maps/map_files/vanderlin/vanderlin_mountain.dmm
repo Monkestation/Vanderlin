@@ -3184,10 +3184,8 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "anV" = (
 /obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/spawner/map_spawner/loot/coin/med,
 /obj/machinery/light/fueled/wallfire/candle/r,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "anW" = (
@@ -3454,13 +3452,6 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "apo" = (
 /obj/structure/gob_portal,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
-"app" = (
-/obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "apr" = (
@@ -6462,13 +6453,6 @@
 /obj/structure/trap/wall_projectile{
 	dir = 8
 	},
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
-"aCk" = (
-/obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aCl" = (
@@ -9997,10 +9981,8 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "aSr" = (
 /obj/structure/closet/dirthole/closed/loot,
-/mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/spawner/map_spawner/loot/weapon,
 /obj/machinery/light/fueled/wallfire/candle/r,
-/obj/effect/mapping_helpers/dead_body_placer,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aSu" = (
@@ -11517,16 +11499,6 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"aZa" = (
-/obj/structure/closet/dirthole/closed/loot{
-	dir = 1;
-	pixel_y = 4
-	},
-/mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/machinery/light/fueled/wallfire/candle/r,
-/obj/effect/mapping_helpers/dead_body_placer,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aZc" = (
 /obj/structure/fluff/walldeco/bigpainting/lake,
 /turf/open/openspace,
@@ -81900,9 +81872,9 @@ aCD
 azS
 aPc
 azS
-aCk
+aCD
 azS
-aCk
+aCD
 azS
 azS
 azS
@@ -83104,7 +83076,7 @@ akk
 azS
 azS
 azS
-aZa
+aYy
 azS
 aYy
 azS
@@ -83114,7 +83086,7 @@ anV
 azS
 aJf
 azS
-app
+aJf
 azS
 azS
 aSE
