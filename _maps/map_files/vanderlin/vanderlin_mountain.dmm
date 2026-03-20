@@ -11950,7 +11950,12 @@
 "cKy" = (
 /obj/structure/table/stone_small,
 /obj/item/clothing/armor/plate/blkknight{
-	pixel_y = 12
+	pixel_y = 12;
+	name = "Tribute of Iron";
+	desc = "A chestplate forged from blacksteel with shoulder guards, combining strength and agility. The symbol of the Iron Clan is emblazoned on the center of the chestplate. The metal itself seems lighter and more resilient than most blacksteel pieces...";
+	armor = list("blunt" = 90, "slash" = 90, "stab" = 90, "piercing" = 75, "fire" = 0, "acid" = 0);
+	max_integrity = 750;
+	sellprice = 144
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -12329,7 +12334,9 @@
 "fIA" = (
 /obj/structure/table/stone_small,
 /obj/item/dmusicbox{
-	pixel_y = 10
+	pixel_y = 10;
+	name = "Tribute of Brass";
+	desc = "A personal device heralding the new era of machine and steam. Dwarven artificers both prize and fear this device for its broad musical range, which notably have made it an object of great value to Baothans' newfound 'Star-Song' rituals. This one somehow outshines the rest- the audio quality is just a bit sharper, the sheen brighter. The symbol of the Brass Clan is stamped on the centerpiece."
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -12429,7 +12436,10 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "gCj" = (
-/obj/structure/cannon,
+/obj/structure/cannon{
+	name = "Tribute of Blackpowder";
+	desc = "A brass plate is riveted into the body of the cannon, indicating a year that has been wiped away and the symbol of the Blackpowder Clan. Whenever this cannon was, it far predates most modern examples. A prototype, maybe...?"
+	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "gCv" = (
@@ -12620,20 +12630,31 @@
 /area/indoors/mountains/anvil/upperkeep)
 "hGe" = (
 /obj/item/clothing/shirt/dress/gown/wintergown{
-	pixel_x = -1
+	pixel_x = -1;
+	name = "Tribute of Platinum - Winter";
+	desc = "A warm, elegant gown adorned with soft fur for cold. The fur here seems to be trimmed from several cabbits and meticulously stitched together with fine beespider silks. The symbol of the Platinum Clan is embroidered on the inside."
 	},
 /obj/item/clothing/shirt/dress/gown/summergown{
 	pixel_x = 6;
-	pixel_y = 7
+	pixel_y = 7;
+	name = "Tribute of Platinum - Summer";
+	desc = "A breezy, flowing gown fit for warm weathers. Feels like wearing nothing, and yet stretchy and durable against all the wear-and-tear of summer's stresses. The symbol of the Platinum clan is embroidered on the inside of the waist."
 	},
 /obj/item/clothing/shirt/dress/gown/fallgown{
-	pixel_x = 11
+	pixel_x = 11;
+	name = "Tribute of Platinum - Fall";
+	desc = "A long sleeved, solemn gown signifies the season's nearing end. Despite how it flows, the fabric never impedes its wearer. The symbol of the Platinum Clan is embroidered on both sleeves."
 	},
 /obj/item/clothing/shirt/dress/gown{
 	pixel_x = -5;
-	pixel_y = 6
+	pixel_y = 6;
+	name = "Tribute of Platinum - Spring";
+	desc = "A delicate gown that captures the essence of the season's renewal. Perfect for light chills and the beginning vestiges of warmth. The symbol of the Platinum Clan is embroidered on the inside of the collar."
 	},
-/obj/structure/closet/crate/crafted_closet,
+/obj/structure/closet/crate/crafted_closet{
+	name = "Tributes of the Platinum Clan";
+	desc = "A wardrobe, inscribed with the symbol of the Platinum Clan. Fine clothes lay within."
+	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "hLa" = (
@@ -12935,7 +12956,10 @@
 "jIQ" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bottle/beer/butterhairs,
+/obj/item/reagent_containers/glass/bottle/beer/butterhairs{
+	name = "Candidate of Aurum - Butterhairs";
+	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal. The glass is etched with the symbol of the Aurum clan."
+	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "jKs" = (
@@ -13404,7 +13428,10 @@
 "oyE" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bottle/beer/butterhairs,
+/obj/item/reagent_containers/glass/bottle/beer/butterhairs{
+	name = "Candidate of Aurum - Butterhairs";
+	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal. The glass is etched with the symbol of the Aurum clan."
+	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "oGP" = (
@@ -13549,7 +13576,11 @@
 "pXs" = (
 /obj/structure/table/stone_small,
 /obj/item/clothing/head/crown/nyle{
-	pixel_y = 8
+	pixel_y = 8;
+	name = "Tribute of Malachite";
+	desc = "A fine, gold tiara inset with a gemerald. The weight is light-- one would barely notice if it was plucked off their head. The gemerald is inscribed with the symbol of the Malachite Clan.";
+	sellprice = 122;
+	max_integrity = 200
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -13854,14 +13885,20 @@
 /obj/structure/table/stone_small,
 /obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
 	pixel_x = -8;
-	pixel_y = 4
-	},
-/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
 	pixel_y = 4;
-	pixel_x = 9
+	name = "Candidate of Aurum - Stonebeard's Reserve";
+	desc = "A bottle with the House Stoutenson cork-seal. The glass is etched with the symbol of the Aurum clan. A well-respected rival, yet to come out on top."
 	},
 /obj/item/reagent_containers/glass/bottle/beer/butterhairs{
-	pixel_y = 8
+	pixel_y = 8;
+	name = "Candidate of Aurum - Butterhairs";
+	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal. The glass is etched with the symbol of the Aurum clan."
+	},
+/obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve{
+	pixel_x = 10;
+	pixel_y = 4;
+	name = "Candidate of Aurum - Stonebeard's Reserve";
+	desc = "A bottle with the House Stoutenson cork-seal. The glass is etched with the symbol of the Aurum clan. A well-respected rival, yet to come out on top."
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -14508,7 +14545,10 @@
 "xXt" = (
 /obj/structure/table/stone_small,
 /obj/item/weapon/knife/dagger/silver/arcyne{
-	pixel_y = 7
+	pixel_y = 7;
+	name = "Tribute of Cerargyrite";
+	desc = "This dagger glows a faint purple. Quicksilver runs across its blade. A pure black stone, etched with the symbol of the Cerargyrite Clan, is embedded in the hilt-- the essence of mana itself seems to be drawn into the gemstone...";
+	sellprice = 90
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
