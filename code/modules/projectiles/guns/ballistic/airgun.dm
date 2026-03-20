@@ -81,10 +81,7 @@
 			return
 	return ..()
 
-/obj/item/gun/ballistic/airgun/attack_hand(mob/user)
-	if(!user.is_holding(src))
-		return ..()
-
+/obj/item/gun/ballistic/airgun/attack_self(mob/living/user, list/modifiers)
 	if(!loading_chamber)
 		to_chat(user, span_warning("The chamber isn't open to unload [src]!"))
 		return
@@ -110,7 +107,7 @@
 
 	var/choice = browser_input_list(user, "An incomprehensible mass of knobs and levers", "[src]", list("Increase Pressure", "Decrease Pressure", "Loading Chamber", "Hand Crank", "Steam Lever", "Cancel"), "Cancel")
 	if(!choice || choice == "cancel")
-		return
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	var/use_time = 4 //how much time the player needs to crank a knob, pull a lever, etc. in seconds
 	use_time = use_time - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 2)
