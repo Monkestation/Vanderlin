@@ -21,6 +21,7 @@
 	move_to_spawnpoint()
 	. = ..()
 	W.reset_and_reroll_stats()
+	owner.special_role = ROLE_WRETCH
 	SSrole_class_handler.setup_class_handler(W, list(CTAG_WRETCH = 30))
 
 /datum/antagonist/wretch/greet()

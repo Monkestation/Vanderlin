@@ -94,6 +94,7 @@
 
 	. = ..()
 
+	owner.special_role = "Daewalker"
 	blade.attributes?.add_sheet(/datum/attribute_holder/sheet/job/daewalker)
 
 	blade.maxbloodpool = 5000
