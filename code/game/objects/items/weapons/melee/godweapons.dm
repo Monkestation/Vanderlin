@@ -340,7 +340,7 @@
 		old_pen = arrow.armor_penetration
 		chambered.loaded_projectile = null
 		qdel(arrow)
-	arrow = new /obj/projectile/bullet/reusable/arrow/spiced
+	arrow = new /obj/projectile/bullet/reusable/arrow/spiced(chambered)
 	arrow.damage = old_dam || arrow.damage
 	arrow.armor_penetration = old_pen || arrow.armor_penetration
 	chambered.loaded_projectile = arrow
