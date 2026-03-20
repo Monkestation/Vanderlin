@@ -285,6 +285,8 @@
 
 /obj/item/bodypart/head/skeletonize(lethal = TRUE)
 	. = ..()
+
+	sellprice = round((sellprice || 0) * 0.2)
 	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 

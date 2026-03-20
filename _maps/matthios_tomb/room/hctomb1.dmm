@@ -106,6 +106,12 @@
 /obj/structure/door,
 /turf/open/floor/metal/alt,
 /area/under/tomb/indoors)
+"gf" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
 "gl" = (
 /obj/structure/roguerock,
 /turf/open/floor/naturalstone,
@@ -339,12 +345,6 @@
 	},
 /turf/open/floor/blocks/paving,
 /area/under/tomb/indoors)
-"uC" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "vl" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -504,13 +504,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/under/tomb/cave)
-"Co" = (
-/obj/structure/winch{
-	gid = "hctomb01";
-	redstone_id = "hctomb01"
-	},
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors)
 "Cr" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/naturalstone,
@@ -661,6 +654,12 @@
 "MK" = (
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
+"MR" = (
+/obj/structure/gate/bars{
+	redstone_id = "hctomb01"
+	},
+/turf/open/floor/naturalstone,
+/area/under/tomb)
 "MS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -690,6 +689,12 @@
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
+"Pa" = (
+/obj/structure/winch{
+	redstone_id = "hctomb01"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/tomb/indoors)
 "Pf" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/structure/bars/bent,
@@ -923,13 +928,6 @@
 "Yr" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"YA" = (
-/obj/structure/gate/bars{
-	gid = "hctomb01";
-	redstone_id = "hctomb01"
-	},
-/turf/open/floor/naturalstone,
-/area/under/tomb)
 "YG" = (
 /turf/open/openspace,
 /area/under/tomb/indoors)
@@ -1377,7 +1375,7 @@ pT
 pT
 pT
 pT
-YA
+MR
 gx
 gx
 gx
@@ -1505,7 +1503,7 @@ Gi
 IW
 fQ
 fB
-Co
+Pa
 IW
 Gi
 up
@@ -1701,7 +1699,7 @@ Yr
 tb
 Rz
 qn
-uC
+gf
 xu
 TZ
 "}

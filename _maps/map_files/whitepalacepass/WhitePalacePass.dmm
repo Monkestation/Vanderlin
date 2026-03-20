@@ -306,6 +306,15 @@
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/town/garrison)
+"apu" = (
+/obj/structure/winch{
+	redstone_id = "BFG1"
+	},
+/obj/structure/fluff/walldeco/painting/seraphina{
+	pixel_x = -32
+	},
+/turf/open/floor/tile/masonic/single,
+/area/indoors/town/keep/throne)
 "apK" = (
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town/roofs)
@@ -517,14 +526,6 @@
 "aAV" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/basin/safe)
-"aCl" = (
-/obj/structure/gate/bars/preopen{
-	name = "Grenzelhoft Gate";
-	redstone_id = "GW1";
-	gid = "GW1"
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/villagegarrison)
 "aCu" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/natural/glass/shard,
@@ -865,15 +866,6 @@
 /obj/effect/landmark/start/feldsher,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/clinic_large)
-"aTH" = (
-/obj/structure/chair/wood{
-	dir = 1
-	},
-/obj/effect/landmark/start/gaffer{
-	dir = 1
-	},
-/turf/open/floor/carpet/red,
-/area/indoors/town/merc_guild)
 "aTT" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -1371,14 +1363,6 @@
 	climbdiff = 1
 	},
 /area/outdoors/basin)
-"bna" = (
-/obj/structure/winch{
-	name = "North Gate";
-	redstone_id = "NG1";
-	gid = "NG1"
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/town/keep/gate)
 "bng" = (
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town/keep/servanthead)
@@ -1904,14 +1888,6 @@
 /obj/item/bedsheet/cloth,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
-"bKF" = (
-/obj/structure/winch{
-	gid = "GG2";
-	redstone_id = "GG2";
-	name = "South Grenzelhoft Winch"
-	},
-/turf/open/floor/hexstone,
-/area/indoors/lich)
 "bKX" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -2599,6 +2575,25 @@
 "cxH" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town)
+"cxO" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = -5
+	},
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = 6;
+	pixel_y = -5
+	},
+/obj/item/gun/ballistic/bow{
+	pixel_y = 2
+	},
+/obj/item/gun/ballistic/bow{
+	pixel_x = -4;
+	pixel_y = -5
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks,
+/area/indoors/town/garrison)
 "cxW" = (
 /obj/structure/lever/wall{
 	pixel_y = 29;
@@ -2606,6 +2601,13 @@
 	},
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/bath)
+"cyd" = (
+/obj/structure/winch{
+	redstone_id = "GG2";
+	name = "South Grenzelhoft Winch"
+	},
+/turf/open/floor/hexstone,
+/area/indoors/lich)
 "cyH" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/metal,
@@ -3522,14 +3524,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
-"dwX" = (
-/obj/structure/gate/bars/preopen{
-	name = "South Gate";
-	gid = "NG2";
-	redstone_id = "NG2"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/basin/safe)
 "dxf" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/chevron,
@@ -3653,13 +3647,6 @@
 "dAy" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/merc_guild)
-"dAJ" = (
-/obj/structure/gate{
-	redstone_id = "BFG1";
-	gid = "BFG1"
-	},
-/turf/open/floor/carpet/lord/left,
-/area/indoors/town/keep/throne)
 "dAN" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobblerock,
@@ -4517,14 +4504,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
-"etz" = (
-/obj/structure/gate/bars{
-	name = "North Gate";
-	redstone_id = "NG1";
-	gid = "NG1"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/basin/safe)
 "etB" = (
 /obj/structure/fluff/walldeco/customflag{
 	name = "White Palace Pass flag"
@@ -4716,6 +4695,14 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town)
+"eAL" = (
+/obj/structure/winch{
+	name = "Grenzelhoft Gate Winch";
+	redstone_id = "GW1"
+	},
+/obj/structure/fake_machine/scomm,
+/turf/open/floor/blocks,
+/area/indoors/villagegarrison)
 "eBv" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/smithy)
@@ -5707,6 +5694,14 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt,
 /area/outdoors/basin/safe)
+"fzU" = (
+/obj/structure/door/red{
+	name = "Gaffer's Room"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/merc_guild)
 "fAi" = (
 /obj/item/soap/bath,
 /turf/open/floor/tile/bath,
@@ -5896,11 +5891,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep)
-"fID" = (
-/obj/item/key/gaffer,
-/obj/structure/closet/crate/drawer,
-/turf/open/floor/blocks,
-/area/indoors/town/merc_guild)
 "fJv" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -6054,31 +6044,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
 /area/outdoors/basin/safe)
-"fPQ" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow{
-	pixel_x = -3;
-	pixel_y = 5
-	},
-/obj/item/gun/ballistic/bow{
-	pixel_x = 7;
-	pixel_y = 3
-	},
-/obj/item/ammo_holder/quiver/arrows{
-	pixel_x = -12;
-	pixel_y = -5
-	},
-/obj/item/ammo_holder/quiver/arrows{
-	pixel_x = 5;
-	pixel_y = -8
-	},
-/obj/item/ammo_holder/quiver/arrows{
-	pixel_x = -2;
-	pixel_y = -5
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/keep/gate)
 "fQn" = (
 /turf/open/floor/tile,
 /area/indoors/town/shop)
@@ -6138,6 +6103,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/bath)
+"fTq" = (
+/obj/structure/gate/bars/preopen{
+	name = "White Palace Pass Gate";
+	redstone_id = "RW1"
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/villagegarrison)
 "fTI" = (
 /obj/structure/bookcase/random/apocrypha,
 /turf/open/floor/ruinedwood/chevron,
@@ -6516,6 +6488,16 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/gate)
+"gmX" = (
+/obj/structure/gate{
+	redstone_id = "GG1";
+	name = "North Grenzelhoft Gate"
+	},
+/obj/structure/bars/passage/shutter{
+	redstone_id = "GG3"
+	},
+/turf/open/floor/cobble,
+/area/indoors/lich)
 "gnq" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/naturalstone,
@@ -6685,6 +6667,13 @@
 	},
 /turf/open/openspace,
 /area/outdoors/river)
+"gup" = (
+/obj/structure/gate/bars/preopen{
+	name = "South Gate";
+	redstone_id = "NG2"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/basin/safe)
 "gur" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -6971,14 +6960,6 @@
 /obj/effect/landmark/start/farmer,
 /turf/open/floor/concrete,
 /area/indoors/soilsons)
-"gCl" = (
-/obj/structure/gate{
-	gid = "GG2";
-	redstone_id = "GG2";
-	name = "South Grenzelhoft Gate"
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/lich)
 "gCp" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal/two,
@@ -7233,25 +7214,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/church)
-"gNz" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/arrows{
-	pixel_x = -5
-	},
-/obj/item/ammo_holder/quiver/arrows{
-	pixel_x = 6;
-	pixel_y = -5
-	},
-/obj/item/gun/ballistic/bow{
-	pixel_y = 2
-	},
-/obj/item/gun/ballistic/bow{
-	pixel_x = -4;
-	pixel_y = -5
-	},
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/blocks,
-/area/indoors/town/garrison)
 "gNR" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = -32;
@@ -7742,6 +7704,23 @@
 /obj/effect/falling_leaves,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"heV" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/tombwarden{
+	dir = 1
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/town/tavern)
+"hfg" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 28
+	},
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/cobble,
+/area/indoors/lich)
 "hfl" = (
 /obj/structure/warningbell,
 /turf/open/floor/ruinedwood,
@@ -8946,6 +8925,12 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/basin)
+"ifB" = (
+/obj/structure/gate{
+	redstone_id = "BFG1"
+	},
+/turf/open/floor/carpet/lord/left,
+/area/indoors/town/keep/throne)
 "igw" = (
 /obj/structure/table/wood/crafted,
 /obj/item/natural/cloth,
@@ -9374,6 +9359,10 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/water/bath,
 /area/under/town/basement)
+"iFt" = (
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/blocks,
+/area/indoors/town/merc_guild)
 "iFA" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -10893,6 +10882,14 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
+"kdv" = (
+/obj/structure/door/red{
+	name = "Gaffer's Room"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood,
+/area/indoors/town/merc_guild)
 "kdy" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -10917,6 +10914,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/under/tomb/indoors/church)
+"kgA" = (
+/obj/structure/winch{
+	name = "South Gate";
+	redstone_id = "NG2"
+	},
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/cobble,
+/area/indoors/town/keep/gate)
 "kgR" = (
 /obj/structure/bed/hay,
 /obj/structure/fake_machine/camera/right,
@@ -11557,6 +11562,13 @@
 /obj/structure/closet/crate/chest/neu,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/vault)
+"kHa" = (
+/obj/structure/gate{
+	name = "Gate To Rosewood";
+	redstone_id = "Event1"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/basin/safe)
 "kHd" = (
 /obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
@@ -12097,17 +12109,6 @@
 	},
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/bath)
-"laW" = (
-/obj/structure/gate{
-	redstone_id = "GG1";
-	gid = "GG1";
-	name = "North Grenzelhoft Gate"
-	},
-/obj/structure/bars/passage/shutter{
-	redstone_id = "GG3"
-	},
-/turf/open/floor/cobble,
-/area/indoors/lich)
 "lbN" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/plum,
@@ -12146,24 +12147,10 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/villagegarrison)
-"lcA" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/gaffer_assistant,
-/turf/open/floor/carpet/red,
-/area/indoors/town/merc_guild)
 "ldg" = (
 /obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/church,
 /area/indoors/town/church)
-"ldl" = (
-/obj/structure/winch{
-	name = "South Gate";
-	gid = "NG2";
-	redstone_id = "NG2"
-	},
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/cobble,
-/area/indoors/town/keep/gate)
 "ldQ" = (
 /obj/machinery/light/fueled/smelter,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -13218,6 +13205,13 @@
 /obj/item/recipe_book/art,
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/orphanage)
+"mhq" = (
+/obj/structure/winch{
+	name = "White Palace Pass Gate Winch";
+	redstone_id = "RW1"
+	},
+/turf/open/floor/concrete,
+/area/indoors/villagegarrison)
 "mhB" = (
 /obj/structure/stairs{
 	dir = 8
@@ -13711,6 +13705,13 @@
 /obj/item/bin/water,
 /turf/open/floor/church,
 /area/indoors/town/church)
+"mJM" = (
+/obj/structure/gate/bars{
+	name = "North Gate";
+	redstone_id = "NG1"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/basin/safe)
 "mJW" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/tomb/indoors/church)
@@ -14783,15 +14784,6 @@
 "nJO" = (
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
-"nKr" = (
-/obj/structure/winch{
-	name = "Grenzelhoft Gate Winch";
-	redstone_id = "GW1";
-	gid = "GW1"
-	},
-/obj/structure/fake_machine/scomm,
-/turf/open/floor/blocks,
-/area/indoors/villagegarrison)
 "nLd" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/shirt/grenzelhoft,
@@ -14811,14 +14803,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/phys)
-"nLy" = (
-/obj/structure/gate{
-	name = "Gate To Rosewood";
-	gid = "Event1";
-	redstone_id = "Event1"
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/basin/safe)
 "nLM" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	icon_state = "cobweb2"
@@ -15478,14 +15462,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep)
-"omS" = (
-/obj/structure/door/red{
-	name = "Gaffer's Room"
-	},
-/obj/effect/mapping_helpers/access/keyset/town/gaffer,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood,
-/area/indoors/town/merc_guild)
 "omX" = (
 /obj/structure/fluff/walldeco/vinez/blue{
 	dir = 6
@@ -15545,6 +15521,13 @@
 /obj/machinery/tanningrack,
 /turf/open/floor/cobblerock,
 /area/under/cave)
+"oqQ" = (
+/obj/structure/winch{
+	name = "North Gate";
+	redstone_id = "NG1"
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/town/keep/gate)
 "org" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/table/stone_small,
@@ -15807,15 +15790,6 @@
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
-"oDq" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 28
-	},
-/obj/structure/rack,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/cobble,
-/area/indoors/lich)
 "oDN" = (
 /obj/structure/closet/crate/drawer,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -16025,6 +15999,13 @@
 "oMT" = (
 /turf/open/floor/greenstone/glyph1,
 /area/indoors/town/vault)
+"oNk" = (
+/obj/structure/gate{
+	redstone_id = "GG2";
+	name = "South Grenzelhoft Gate"
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/lich)
 "oNF" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/darker,
@@ -16054,25 +16035,9 @@
 "oPi" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/servanthead)
-"oPm" = (
-/obj/structure/winch{
-	name = "White Palace Pass Gate Winch";
-	redstone_id = "RW1";
-	gid = "RW1"
-	},
-/turf/open/floor/concrete,
-/area/indoors/villagegarrison)
 "oPA" = (
 /turf/open/openspace,
 /area/indoors/town/tavern)
-"oQm" = (
-/obj/structure/winch{
-	name = "EVENT WINCH";
-	redstone_id = "Event1";
-	gid = "Event1"
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/basin/safe)
 "oQG" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -16344,16 +16309,6 @@
 	},
 /turf/open/floor/concrete,
 /area/indoors/town/garrison)
-"pbG" = (
-/obj/structure/winch{
-	redstone_id = "BFG1";
-	gid = "BFG1"
-	},
-/obj/structure/fluff/walldeco/painting/seraphina{
-	pixel_x = -32
-	},
-/turf/open/floor/tile/masonic/single,
-/area/indoors/town/keep/throne)
 "pcz" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Apothecary"
@@ -17883,6 +17838,15 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/chapel)
+"qsJ" = (
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/obj/effect/landmark/start/tombwarden{
+	dir = 1
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/town/merc_guild)
 "qsS" = (
 /obj/machinery/printingpress,
 /turf/open/floor/carpet/purple,
@@ -18516,6 +18480,15 @@
 /obj/effect/landmark/start/farmer,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/soilsons)
+"qZx" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 28
+	},
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/cobble,
+/area/indoors/lich)
 "qZL" = (
 /obj/structure/table/wood{
 	icon_state = "map6"
@@ -19512,14 +19485,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/knight)
-"rVB" = (
-/obj/structure/door/red{
-	name = "Gaffer's Room"
-	},
-/obj/effect/mapping_helpers/access/keyset/town/gaffer,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town/merc_guild)
 "rVE" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/lord/left,
@@ -20403,6 +20368,31 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/shop)
+"sKw" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow{
+	pixel_x = -3;
+	pixel_y = 5
+	},
+/obj/item/gun/ballistic/bow{
+	pixel_x = 7;
+	pixel_y = 3
+	},
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = -12;
+	pixel_y = -5
+	},
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/obj/item/ammo_holder/quiver/arrows{
+	pixel_x = -2;
+	pixel_y = -5
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/keep/gate)
 "sKD" = (
 /obj/machinery/essence/test_tube{
 	pixel_x = -2
@@ -21759,6 +21749,13 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/water/cleanshallow,
 /area/outdoors/town/keep)
+"tZm" = (
+/obj/structure/gate/bars/preopen{
+	name = "Grenzelhoft Gate";
+	redstone_id = "GW1"
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/villagegarrison)
 "tZt" = (
 /obj/structure/bed/inn/double,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -22778,6 +22775,13 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/tomb/indoors/church)
+"vaD" = (
+/obj/structure/winch{
+	name = "EVENT WINCH";
+	redstone_id = "Event1"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/basin/safe)
 "vbd" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchrough,
@@ -23723,16 +23727,6 @@
 	},
 /turf/open/floor/cobble,
 /area/under/tomb/indoors/church)
-"vSf" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 28
-	},
-/obj/structure/rack,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/cobble,
-/area/indoors/lich)
 "vSA" = (
 /obj/structure/table/wood,
 /obj/item/paper,
@@ -24199,6 +24193,13 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/smithy)
+"wjp" = (
+/obj/structure/winch{
+	redstone_id = "GG1";
+	name = "North Grenzelhoft Winch"
+	},
+/turf/open/floor/hexstone,
+/area/indoors/lich)
 "wjH" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood,
@@ -25181,14 +25182,6 @@
 "xhB" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/smithy)
-"xhD" = (
-/obj/structure/gate/bars/preopen{
-	name = "White Palace Pass Gate";
-	redstone_id = "RW1";
-	gid = "RW1"
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/villagegarrison)
 "xhJ" = (
 /obj/machinery/light/fueled/wallfire/candle/weak{
 	pixel_y = -32
@@ -25543,14 +25536,6 @@
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/tile/masonic/single,
 /area/indoors/town/keep/feast)
-"xAP" = (
-/obj/structure/winch{
-	redstone_id = "GG1";
-	gid = "GG1";
-	name = "North Grenzelhoft Winch"
-	},
-/turf/open/floor/hexstone,
-/area/indoors/lich)
 "xBi" = (
 /obj/structure/door/stone{
 	name = "Acolyte Bedrooms"
@@ -26216,13 +26201,6 @@
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/dirt/road,
 /area/indoors/town/smithy)
-"ydE" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/veteran{
-	dir = 1
-	},
-/turf/open/floor/carpet/red,
-/area/indoors/town/tavern)
 "ydM" = (
 /obj/structure/chair/bench/couchablack,
 /turf/open/floor/tile/masonic/single,
@@ -78000,7 +77978,7 @@ eLT
 hQG
 eLT
 eLT
-oQm
+vaD
 hQG
 aKz
 aKz
@@ -78205,7 +78183,7 @@ uvK
 uvK
 bwY
 bwY
-nLy
+kHa
 kkv
 ntv
 bwY
@@ -85429,13 +85407,13 @@ qhM
 vZP
 vZP
 vUa
-laW
+gmX
 vZP
 qhM
 vZP
 qhM
 vZP
-gCl
+oNk
 vZP
 vZP
 qhM
@@ -85752,7 +85730,7 @@ ufk
 hvK
 bwY
 dEz
-oPm
+mhq
 dma
 vFO
 grW
@@ -85954,7 +85932,7 @@ mju
 bwY
 hvK
 dEz
-nKr
+eAL
 sgG
 dma
 btI
@@ -86357,12 +86335,12 @@ fml
 uvK
 uvK
 bwY
-xhD
+fTq
 huj
 huj
 huj
 huj
-aCl
+tZm
 aab
 aab
 ntL
@@ -86440,7 +86418,7 @@ ucR
 ucR
 ucR
 ucR
-xAP
+wjp
 ost
 rmW
 ost
@@ -86642,7 +86620,7 @@ ucR
 ucR
 ucR
 ucR
-bKF
+cyd
 ost
 vzp
 ost
@@ -88536,7 +88514,7 @@ cSl
 cSl
 oEU
 wqs
-ydE
+heV
 vTy
 vTy
 jIv
@@ -89993,7 +89971,7 @@ aKi
 aZv
 upy
 szX
-gNz
+cxO
 ptn
 xWp
 ptn
@@ -92599,7 +92577,7 @@ vBl
 fjA
 ojf
 fjA
-omS
+kdv
 fjA
 miQ
 xUG
@@ -93002,7 +92980,7 @@ iZs
 xMI
 nWg
 tIZ
-lcA
+rDp
 pDI
 mGI
 tcL
@@ -93206,7 +93184,7 @@ fjA
 jft
 rDp
 jAx
-aTH
+qsJ
 mHD
 bwY
 aDg
@@ -93404,7 +93382,7 @@ xMI
 xMI
 xMI
 iZs
-rVB
+fzU
 sBW
 xMI
 mGI
@@ -94216,7 +94194,7 @@ mHD
 xji
 koj
 gYY
-fID
+iFt
 miQ
 bwY
 hvK
@@ -125426,7 +125404,7 @@ lhX
 lhX
 mAq
 ucR
-oDq
+qZx
 qhM
 qhM
 ucR
@@ -126638,7 +126616,7 @@ lhX
 lhX
 mAq
 ucR
-vSf
+hfg
 qhM
 qhM
 ucR
@@ -166672,7 +166650,7 @@ jcY
 tFB
 gKw
 aHu
-pbG
+apu
 gKw
 gKw
 pBJ
@@ -167078,7 +167056,7 @@ gZU
 bEn
 gZU
 gZU
-dAJ
+ifB
 rVE
 rVE
 rVE
@@ -167087,11 +167065,11 @@ hJD
 rZA
 jDW
 qcm
-etz
+mJM
 ybP
 gKS
 mWO
-dwX
+gup
 bwY
 bwY
 bwY
@@ -167896,7 +167874,7 @@ wdW
 tck
 gLm
 bDU
-bna
+oqQ
 hgn
 ils
 qbc
@@ -168098,7 +168076,7 @@ tck
 gLm
 tck
 bDU
-ldl
+kgA
 ils
 ils
 qbc
@@ -169110,7 +169088,7 @@ dNo
 bDU
 cJa
 fEF
-fPQ
+sKw
 gmT
 kEA
 dzI

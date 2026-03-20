@@ -4990,11 +4990,6 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
-"duH" = (
-/obj/item/gun/ballistic/bow,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/twig,
-/area/outdoors/bog/e_highroad)
 "duJ" = (
 /turf/open/floor/grass,
 /area/outdoors/bog/beach)
@@ -5124,16 +5119,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/west)
-"dCA" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/bow{
-	pixel_x = -5
-	},
-/obj/item/gun/ballistic/bow{
-	pixel_x = 3
-	},
-/turf/open/floor/concrete,
-/area/indoors/shelter/bog)
 "dCE" = (
 /obj/item/rope/chain,
 /turf/open/floor/abyss_tile/three{
@@ -8719,17 +8704,6 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
-"hhb" = (
-/obj/structure/gate{
-	color = "#547285";
-	redstone_id = "boggate";
-	gid = "boggate";
-	name = "Jaws of the Coral Palace"
-	},
-/turf/open/floor/abyss_tile/three{
-	color = "#547285"
-	},
-/area/under/cavewet)
 "hhn" = (
 /obj/structure/ladder,
 /turf/open/floor/twig,
@@ -9318,6 +9292,16 @@
 	},
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog)
+"hND" = (
+/obj/structure/rack/underworld{
+	color = "#7D9BAE"
+	},
+/obj/item/gun/ballistic/bow,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/abyss_tile/two{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "hOi" = (
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/east)
@@ -10796,6 +10780,16 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
+"jse" = (
+/obj/structure/gate{
+	color = "#547285";
+	redstone_id = "boggate";
+	name = "Jaws of the Coral Palace"
+	},
+/turf/open/floor/abyss_tile/three{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "jss" = (
 /obj/structure/flora/pillar,
 /obj/structure/fluff/walldeco/church/line{
@@ -11148,16 +11142,6 @@
 	dir = 1
 	},
 /turf/open/water/ocean,
-/area/under/cavewet)
-"jIh" = (
-/obj/structure/rack/underworld{
-	color = "#7D9BAE"
-	},
-/obj/item/gun/ballistic/bow,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/abyss_tile/two{
-	color = "#547285"
-	},
 /area/under/cavewet)
 "jIC" = (
 /obj/structure/flora/tree/burnt,
@@ -11730,6 +11714,16 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"kkR" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow{
+	pixel_x = -5
+	},
+/obj/item/gun/ballistic/bow{
+	pixel_x = 3
+	},
+/turf/open/floor/concrete,
+/area/indoors/shelter/bog)
 "klC" = (
 /turf/open/water/ocean,
 /area/outdoors/bog/beach/west)
@@ -14392,6 +14386,15 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
+"nhs" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/winch{
+	redstone_id = "boggate"
+	},
+/turf/open/floor/abyss_tile{
+	color = "#7D9BAE"
+	},
+/area/under/cavewet)
 "nhF" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE"
@@ -14974,16 +14977,6 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
-"nSd" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/winch{
-	gid = "boggate";
-	redstone_id = "boggate"
-	},
-/turf/open/floor/abyss_tile{
-	color = "#7D9BAE"
-	},
-/area/under/cavewet)
 "nSf" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -19282,15 +19275,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/dirt,
 /area/outdoors/bog/witch)
-"sBX" = (
-/obj/structure/rack/underworld{
-	color = "#7D9BAE"
-	},
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/abyss_tile/two{
-	color = "#547285"
-	},
-/area/under/cavewet)
 "sCA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
@@ -20964,6 +20948,11 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
+"uog" = (
+/obj/item/gun/ballistic/bow,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "uop" = (
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
@@ -24362,6 +24351,15 @@
 /obj/structure/flora/ocean_plants,
 /turf/open/water/ocean,
 /area/under/tomb/indoors/magic)
+"xEZ" = (
+/obj/structure/rack/underworld{
+	color = "#7D9BAE"
+	},
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/abyss_tile/two{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "xFS" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -84364,7 +84362,7 @@ ndt
 ndt
 aqR
 aqR
-jIh
+hND
 aqR
 gmS
 aqR
@@ -85578,7 +85576,7 @@ aqR
 aqR
 sPJ
 aqR
-sBX
+xEZ
 aqR
 aqR
 ndt
@@ -87774,7 +87772,7 @@ sFe
 sFe
 tYJ
 arU
-hhb
+jse
 ihX
 anV
 weL
@@ -90826,7 +90824,7 @@ arU
 aGs
 anV
 aqR
-nSd
+nhs
 arU
 azf
 wdo
@@ -126831,7 +126829,7 @@ qzJ
 xXl
 buS
 ffH
-dCA
+kkR
 oZl
 dvb
 toD
@@ -134740,7 +134738,7 @@ sbd
 vyW
 rMx
 dWL
-duH
+uog
 jxW
 myp
 myp

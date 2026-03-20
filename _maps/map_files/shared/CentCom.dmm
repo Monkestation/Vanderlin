@@ -937,13 +937,6 @@
 /obj/structure/bars,
 /turf/open/floor/blocks,
 /area/indoors/bandit_lair)
-"db" = (
-/obj/structure/gate/bars/preopen{
-	gid = "vamplordmanor";
-	redstone_id = "vamplordmanor"
-	},
-/turf/open/floor/blocks,
-/area/indoors/vampire_manor)
 "dc" = (
 /obj/structure/chair/bench/coucha,
 /turf/open/floor/herringbone,
@@ -1560,6 +1553,12 @@
 "gS" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/lich)
+"gU" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "vamplordthrone"
+	},
+/turf/open/floor/churchbrick,
+/area/overlord_lair)
 "gW" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/needle,
@@ -1669,13 +1668,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"hJ" = (
-/obj/structure/winch{
-	gid = "vamplordthrone";
-	redstone_id = "vamplordthrone"
-	},
-/turf/open/floor/carpet,
-/area/indoors/vampire_manor)
 "hK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /obj/structure/fluff/globe{
@@ -1755,6 +1747,12 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
+"ib" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "vamplordmanor"
+	},
+/turf/open/floor/blocks,
+/area/indoors/vampire_manor)
 "ie" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 32
@@ -1768,13 +1766,6 @@
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
 /area)
-"ik" = (
-/obj/structure/winch{
-	gid = "vamplordmanor";
-	redstone_id = "vamplordmanor"
-	},
-/turf/open/floor/blocks,
-/area/indoors/vampire_manor)
 "il" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/dirt/road,
@@ -1785,12 +1776,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"io" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "ip" = (
 /obj/structure/mannequin/male/female,
 /obj/item/clothing/shoes/nobleboot,
@@ -2508,6 +2493,12 @@
 "np" = (
 /turf/open/floor/tile/checker_green,
 /area/indoors/lich)
+"nq" = (
+/obj/structure/winch{
+	redstone_id = "vamplordthrone"
+	},
+/turf/open/floor/churchbrick,
+/area/overlord_lair)
 "ns" = (
 /obj/effect/landmark/start/bandit{
 	dir = 4
@@ -3939,13 +3930,6 @@
 	},
 /turf/open/floor/church,
 /area/indoors/lich)
-"wb" = (
-/obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
-	redstone_id = "vamplordthrone"
-	},
-/turf/open/floor/churchbrick,
-/area/overlord_lair)
 "wc" = (
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/herringbone,
@@ -3998,6 +3982,12 @@
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"wn" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "vamplordthrone"
+	},
+/turf/open/floor/carpet,
+/area/indoors/vampire_manor)
 "ws" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/dirt,
@@ -5241,6 +5231,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
+"FD" = (
+/obj/structure/winch{
+	redstone_id = "vamplordthrone"
+	},
+/turf/open/floor/carpet,
+/area/indoors/vampire_manor)
 "FP" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -5357,13 +5353,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"GC" = (
-/obj/structure/winch{
-	gid = "vamplordthrone";
-	redstone_id = "vamplordthrone"
-	},
-/turf/open/floor/churchbrick,
-/area/overlord_lair)
 "GE" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/medium/surcoat/heartfelt,
@@ -6844,6 +6833,12 @@
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/lich)
+"QD" = (
+/obj/structure/winch{
+	redstone_id = "vamplordmanor"
+	},
+/turf/open/floor/blocks,
+/area/indoors/vampire_manor)
 "QG" = (
 /obj/structure/rack,
 /obj/item/weapon/hoe/stone,
@@ -7678,13 +7673,6 @@
 /obj/machinery/artificer_table,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
-"Vv" = (
-/obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
-	redstone_id = "vamplordthrone"
-	},
-/turf/open/floor/carpet,
-/area/indoors/vampire_manor)
 "Vw" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -7920,6 +7908,12 @@
 "WZ" = (
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
+"Xd" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "Xe" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
@@ -14469,7 +14463,7 @@ Ba
 MW
 jt
 jZ
-io
+Xd
 yE
 bK
 cT
@@ -15521,7 +15515,7 @@ Ff
 Ba
 Ba
 ct
-ik
+QD
 yE
 dk
 dw
@@ -15623,7 +15617,7 @@ ag
 ag
 Iw
 yE
-hJ
+FD
 bO
 SL
 nl
@@ -15636,7 +15630,7 @@ BD
 bO
 bO
 bO
-Vv
+wn
 bO
 bW
 cg
@@ -15656,7 +15650,7 @@ yE
 dm
 dm
 dm
-db
+ib
 Qy
 dD
 dD
@@ -22575,7 +22569,7 @@ HZ
 (110,1,1) = {"
 JN
 Tw
-GC
+nq
 oB
 gt
 Cz
@@ -22588,7 +22582,7 @@ sx
 oB
 oB
 oB
-wb
+gU
 oB
 oB
 oB

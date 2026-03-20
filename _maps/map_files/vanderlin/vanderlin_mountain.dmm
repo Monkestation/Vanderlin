@@ -44,12 +44,6 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/closed/mineral/random/med,
 /area/under/mountains/anvil/lower)
-"aO" = (
-/obj/structure/gate/bars{
-	gid = "dwarfkeepgate"
-	},
-/turf/open/floor/blocks,
-/area/under/mountains/anvil/lower/building)
 "aW" = (
 /obj/structure/door/iron/bars,
 /obj/structure/barricade/wooden/crude,
@@ -746,6 +740,10 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"ly" = (
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/dirt,
+/area/under/mountains/anvil/lower/building)
 "lH" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
@@ -1360,6 +1358,10 @@
 "us" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower/building)
+"ut" = (
+/obj/structure/gate/bars,
+/turf/open/floor/blocks,
 /area/under/mountains/anvil/lower/building)
 "uu" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
@@ -2203,10 +2205,6 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/outdoors/mountains/anvil/snowyforest)
-"Ik" = (
-/obj/item/gun/ballistic/bow,
-/turf/open/floor/dirt,
-/area/under/mountains/anvil/lower/building)
 "Is" = (
 /obj/item/natural/rock,
 /turf/open/floor/tile/bfloorz,
@@ -46163,7 +46161,7 @@ DR
 DR
 vV
 oR
-Ik
+ly
 vV
 RB
 nD
@@ -52703,7 +52701,7 @@ sJ
 SY
 sJ
 OJ
-aO
+ut
 OJ
 SY
 sJ

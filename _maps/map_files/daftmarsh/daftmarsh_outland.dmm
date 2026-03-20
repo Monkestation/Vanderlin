@@ -789,23 +789,6 @@
 	},
 /turf/open/floor/cobble/alt,
 /area/under/mountains/anvil/lower)
-"hM" = (
-/obj/structure/fluff/walldeco/bigpainting,
-/obj/structure/table/wood/plain,
-/obj/item/painting/queen{
-	pixel_x = -3;
-	pixel_y = -5
-	},
-/obj/item/painting/lorehead{
-	pixel_x = 10;
-	pixel_y = 6
-	},
-/obj/item/painting/lorehead/one{
-	pixel_x = -7;
-	pixel_y = 9
-	},
-/turf/open/floor/twig,
-/area/under/mountains/anvil/lower)
 "hO" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = 5;
@@ -2311,14 +2294,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
-"yN" = (
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/bow,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/reagent_containers/glass/bottle/redwine,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/wood,
-/area/indoors/villagegarrison)
 "yO" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -3128,6 +3103,14 @@
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/grass,
 /area/outdoors/bog)
+"Hm" = (
+/obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/gun/ballistic/bow,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/reagent_containers/glass/bottle/redwine,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "Ht" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood/nosmooth,
@@ -3651,6 +3634,15 @@
 	pixel_x = 8
 	},
 /turf/open/floor/cobble/alt,
+/area/under/mountains/anvil/lower)
+"MN" = (
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/structure/table/wood/plain,
+/obj/item/painting/queen{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "MS" = (
 /obj/structure/fluff/statue/knight/interior/r,
@@ -83623,7 +83615,7 @@ IT
 fk
 IT
 Df
-hM
+MN
 Ka
 nj
 oO
@@ -152815,7 +152807,7 @@ GE
 YG
 YG
 kS
-yN
+Hm
 JI
 PW
 LO

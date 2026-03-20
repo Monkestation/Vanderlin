@@ -156,13 +156,13 @@ SUBSYSTEM_DEF(death_arena)
 
 /datum/controller/subsystem/death_arena/proc/open_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.open()
 
 /datum/controller/subsystem/death_arena/proc/close_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.close()
 

@@ -28,6 +28,7 @@
 
 	outfit = /datum/outfit/orphan
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan
