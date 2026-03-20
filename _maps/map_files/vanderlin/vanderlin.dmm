@@ -22611,7 +22611,6 @@
 /area/under/town/basement)
 "kGM" = (
 /obj/structure/door,
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -23187,10 +23186,6 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
-"kVZ" = (
-/obj/structure/bars/cemetery,
-/turf/open/openspace,
-/area/outdoors/town/roofs)
 "kWb" = (
 /obj/structure/chair/bench/couch/right/lord_secondary{
 	dir = 8
@@ -161967,7 +161962,7 @@ biy
 biy
 biy
 biy
-kVZ
+biy
 biy
 gLs
 bKi
