@@ -77,7 +77,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.full)
-				if(alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", list("Yes", "No")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else

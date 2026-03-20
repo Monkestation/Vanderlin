@@ -745,7 +745,7 @@
 		to_chat(src, "<span class='warning'>I am already sleeping!</span>")
 		return
 	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
+		if(tgui_alert(src, "You sure you want to sleep for a while?", "Sleep", list("Yes", "No")) == "Yes")
 			SetSleeping(400) //Short nap
 
 /mob/proc/get_contents()
@@ -1278,7 +1278,7 @@
 	if(stat)
 		return
 	surrendering = 1
-	if(!alert(src, "Yield in surrender?",,"YES","NO") == "YES")
+	if(!tgui_alert(src, "Yield in surrender?","Yield", list("YES","NO")) == "YES")
 		return
 
 	record_round_statistic(STATS_YIELDS)

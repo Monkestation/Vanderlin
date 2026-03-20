@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 		return
 	var/datum/antagonist/zizocultist/PR = user.mind.has_antag_datum(/datum/antagonist/zizocultist)
-	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
+	var/alert = tgui_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
 	target.Immobilize(3 SECONDS)
 	if(alert == "Yield")
 		to_chat(target, span_notice("I see the truth now! It all makes so much sense! They aren't HERETICS! They want the BEST FOR US!"))

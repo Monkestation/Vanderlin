@@ -22,7 +22,7 @@
 
 	spawned.grant_undead_eyes()
 
-	if(alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
+	if(tgui_alert(usr, "Do you wish for a random title? You will not receive one if you click No.", "Random Title", list("Yes", "No")) == "Yes")
 		var/prev_real_name = spawned.real_name
 		var/prev_name = spawned.name
 		var/title

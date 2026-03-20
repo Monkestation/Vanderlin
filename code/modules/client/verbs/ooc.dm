@@ -250,7 +250,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 	set name = "KillSelf"
 	set category = "DEBUGTEST"
 
-	var/confirm = alert(src, "Should I really kill myself?", "Feed the crows", "Yes", "No")
+	var/confirm = tgui_alert(src, "Should I really kill myself?", "Feed the crows", list("Yes", "No"))
 	if(confirm == "Yes")
 		log_admin("[key_name(usr)] used killself.")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] used killself.</span>")

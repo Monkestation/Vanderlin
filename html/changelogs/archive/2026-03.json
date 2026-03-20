@@ -505,5 +505,62 @@
                 "rscadd": "Changed around some descriptions to fit lore"
             }
         ]
+    },
+    "2026-03-19": {
+        "Rockslp": [
+            {
+                "balance": "Rebalances dodging a bit, and parrying by quite a bit."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "image": "added unique sprites for the Mystery Box"
+            },
+            {
+                "bugfix": "Beard Shaving"
+            },
+            {
+                "rscdel": "Removed the unfinished playable Thronleer clan"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "2 new weapon options for gloryhound"
+            },
+            {
+                "balance": "changed some of gloryhound's gear"
+            }
+        ],
+        "Telvayne": [
+            {
+                "rscadd": "Adds Hospitalier adventurer"
+            },
+            {
+                "rscadd": "Adds Chirurgeon adventurer"
+            },
+            {
+                "rscdel": "Removed Chirurgeon Migrant Wave"
+            }
+        ]
+    },
+    "2026-03-20": {
+        "Spitegremlin": [
+            {
+                "balance": "rebalanced hunter classes"
+            }
+        ],
+        "ercrowther": [
+            {
+                "bugfix": "removed a stray pixel on fancy hat when facing left"
+            },
+            {
+                "image": "modified fancyhat onmob sprite"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Changed Field/Catacombs area themes. Sorry!"
+            }
+        ]
     }
 }
