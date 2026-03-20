@@ -289,7 +289,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	antag_memory = new_memo
 
 /datum/antagonist/proc/switch_prefs(mob/user)
-	var/choice_start = browser_alert(user, "This role allows you to use a different character slot. Would you like to do so?", "YOU", DEFAULT_INPUT_CONFIRMATIONS, 30 SECONDS)
+	var/choice_start = tgui_alert(user, "This role allows you to use a different character slot. Would you like to do so?", "YOU", DEFAULT_INPUT_CONFIRMATIONS, 30 SECONDS)
 	if(choice_start != CHOICE_CONFIRM)
 		return
 	var/datum/preferences/prefs = user.client?.prefs
