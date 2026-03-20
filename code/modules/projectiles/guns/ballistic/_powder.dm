@@ -9,10 +9,10 @@
  * Operation
  *
  * Flint-lock
- * Uncock -> Powder -> Ball -> Ramrod -> Cock -> Fire
+ * Powder -> Ball -> Ramrod -> Cock -> Fire
  *
  * Wheel-lock
- * Uncock -> Wind -> Powder -> Ball -> Ramrod -> Cock (hopefully) -> Fire
+ * Uncock -> Wind -> Powder -> Ball -> Ramrod -> Cock -> Fire
  */
 
 /// A powder, muzzle loaded firearm that requires cocking and ramming. Essentially a flintlock in operation.
@@ -147,7 +147,7 @@
 		balloon_alert(user, "nothing to ram!")
 		return
 
-	if(!reagents.get_reagent_amount(/datum/reagents/blastpowder))
+	if(!reagents.get_reagent_amount(/datum/reagent/blastpowder))
 		balloon_alert(user, "no powder!")
 		return
 
