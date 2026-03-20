@@ -213,7 +213,7 @@
 	chambered = null
 
 ///updates a bunch of racking related stuff and also handles the sound effects and the like
-/obj/item/gun/ballistic/proc/rack(mob/user = null)
+/obj/item/gun/ballistic/proc/rack(mob/living/user)
 	if(bolt_type == BOLT_TYPE_NO_BOLT) //If there's no bolt, nothing to rack
 		return
 
@@ -294,7 +294,7 @@
 	old_mag.update_appearance()
 	if (display_message)
 		to_chat(user, "<span class='notice'>I pull the [magazine_wording] out of \the [src].</span>")
-	update_appearance(UPDATE_ICON)
+	update_appearance()
 
 /obj/item/gun/ballistic/can_shoot(mob/living/user)
 	return chambered
@@ -346,24 +346,23 @@
 		if (bolt_type == BOLT_TYPE_OPEN && !bolt_locked)
 			bolt_locked = TRUE
 			playsound(src, bolt_drop_sound, bolt_drop_sound_volume)
-			update_appearance(UPDATE_ICON)
+			update_appearance()
 
 ///postfire empty checks for bolt locking and sound alarms
 /obj/item/gun/ballistic/proc/postfire_empty_checks(last_shot_succeeded)
 	if (!chambered && !get_ammo())
 		if (empty_alarm && last_shot_succeeded)
 			playsound(src, empty_alarm_sound, empty_alarm_volume, empty_alarm_vary)
-			update_appearance(UPDATE_ICON)
+			update_appearance()
 		if (last_shot_succeeded && bolt_type == BOLT_TYPE_LOCKING)
 			bolt_locked = TRUE
-			update_appearance(UPDATE_ICON)
+			update_appearance()
 
 /obj/item/gun/ballistic/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	prefire_empty_checks()
 	. = ..() //The gun actually firing
 	postfire_empty_checks(.)
 
-//ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/gun/ballistic/attack_hand(mob/user)
 	if(!internal_magazine && loc == user && user.is_holding(src) && magazine)
 		eject_magazine(user)
@@ -375,6 +374,7 @@
 		if(!magazine.ammo_count())
 			eject_magazine(user)
 			return
+
 	if(bolt_type == BOLT_TYPE_NO_BOLT)
 		chambered = null
 		var/num_unloaded = 0
@@ -388,15 +388,18 @@
 		if (num_unloaded)
 			balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
 			playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
-			update_appearance(UPDATE_ICON)
+			update_appearance()
 		else
 			to_chat(user, "<span class='warning'>[src] is empty!</span>")
 		return
+
 	if(bolt_type == BOLT_TYPE_LOCKING && bolt_locked)
 		drop_bolt(user)
 		return
-	if (recent_rack > world.time)
+
+	if(recent_rack > world.time)
 		return
+
 	recent_rack = world.time + rack_delay
 	rack(user)
 

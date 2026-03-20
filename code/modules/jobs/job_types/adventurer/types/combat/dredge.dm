@@ -983,7 +983,7 @@
 			if("Fist")
 				wrists = /obj/item/clothing/wrists/bracers/leather
 			if("Gun")
-				beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+				beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 				beltr = /obj/item/storage/belt/pouch/bullets
 				r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 				backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 2)

@@ -7,7 +7,7 @@
 	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 2 MINUTES
 	invocation_type = INVOCATION_NONE
-	item_type = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured
+	item_type = /obj/item/gun/ballistic/powder/wheellock/puffer/conjured
 	item_duration = null
 	item_outline ="#ababab"
 	spell_type = SPELL_STAMINA //It is a way to balance it out since you are not a real miracle user.

@@ -281,12 +281,12 @@
 /datum/supply_pack/weapons/ranged/puffer
 	name = "Smuggled Püffer"
 	cost = 500
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+	contains = /obj/item/gun/ballistic/powder/wheellock/puffer
 
 /datum/supply_pack/weapons/ranged/musket
 	name = "Smuggled Musket"
 	cost = 750 //needs balancing
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket
+	contains = /obj/item/gun/ballistic/powder/musket
 
 /datum/supply_pack/weapons/ranged/cannon
 	name = "Cannon"

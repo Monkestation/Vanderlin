@@ -56,7 +56,7 @@
 			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/misc/lockpicking, 60, 60)
 
 		if(CHOICE_GUN)
-			owner.special_items["Puffer"] = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+			owner.special_items["Puffer"] = /obj/item/gun/ballistic/powder/wheellock/puffer
 			owner.special_items["Puffer Bullets"] = /obj/item/storage/belt/pouch/bullets
 			owner.special_items["Puffet Gunpowder"] = /obj/item/reagent_containers/glass/bottle/aflask
 			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/firearms, 60, 60)

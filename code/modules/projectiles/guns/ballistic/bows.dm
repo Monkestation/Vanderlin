@@ -1,11 +1,4 @@
 
-/obj/item/ammo_box/magazine/internal/bow
-	name = "bowstring"
-	ammo_type = /obj/item/ammo_casing/caseless/arrow
-	max_ammo = 1
-	start_empty = TRUE
-	caliber = "arrow"
-
 /datum/intent/shoot/bow
 	chargetime = 0.5
 	chargedrain = 1
@@ -134,6 +127,7 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_BULKY
 	can_parry = TRUE
+	associated_skill = /datum/attribute/skill/combat/bows
 
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/bow
 	bolt_type = BOLT_TYPE_NO_BOLT

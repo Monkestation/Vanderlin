@@ -18,6 +18,10 @@
 	force = 5
 	item_flags = NEEDS_PERMIT
 	attack_verb = list("struck", "hit", "bashed")
+	istrainable = TRUE // For the moment I'll allow these to be traineable until a proper way to level up bows and crossbows is coded. - Foxtrot
+	flags_ai_inventory = AI_ITEM_GUN
+
+	associated_skill = /datum/attribute/skill/combat/firearms
 
 	/// Trigger guard on the weapon, hulks can't fire them with their big meaty fingers
 	trigger_guard = TRIGGER_GUARD_NORMAL
@@ -53,7 +57,8 @@
 	var/burst_delay = 2
 	/// Delay between bursts (if burst-firing) or individual shots (if weapon is single-fire).
 	var/fire_delay = 0 SECONDS
-	var/firing_burst = 0 //Prevent the weapon from firing again while already firing
+	/// Prevent the weapon from firing again while already firing
+	var/firing_burst = 0
 	/// Firing cooldown, true if this gun shouldn't be allowed to manually fire
 	var/fire_cd = 0
 
@@ -197,49 +202,6 @@
 /obj/item/gun/proc/recharge_newshot()
 	return
 
-/obj/item/gun/proc/process_burst(mob/living/user, atom/target, message = TRUE, list/modifiers, zone_override, random_spread = 0, burst_spread_mult = 0, iteration = 0)
-	if(!user || !firing_burst)
-		firing_burst = FALSE
-		return FALSE
-
-	if(iteration > 1 && !(user.is_holding(src))) //for burst firing
-		firing_burst = FALSE
-		return FALSE
-
-	if(chambered?.loaded_projectile)
-		if(HAS_TRAIT(user, TRAIT_PACIFISM)) // If the user has the pacifist trait, then they won't be able to fire [src] if the round chambered inside of [src] is lethal.
-			if(chambered.harmful) // Is the bullet chambered harmful?
-				to_chat(user, span_warning("[src] is lethally chambered! You don't want to risk harming anyone..."))
-				firing_burst = FALSE
-				return FALSE
-		var/sprd
-		if(randomspread)
-			sprd = round((rand(0, 1) - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (random_spread))
-		else //Smart spread
-			sprd = round((((burst_spread_mult/burst_size) * iteration) - (0.5 + (burst_spread_mult * 0.25))) * (random_spread))
-
-		before_firing(target,user)
-
-		if(!chambered.fire_casing(target, user, modifiers, 0, FALSE, zone_override, sprd, src))
-			shoot_with_empty_chamber(user)
-			firing_burst = FALSE
-			return FALSE
-		else
-			if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
-				shoot_live_shot(user, TRUE, target, message)
-			else
-				shoot_live_shot(user, FALSE, target, message)
-			if(iteration >= burst_size)
-				firing_burst = FALSE
-	else
-		shoot_with_empty_chamber(user)
-		firing_burst = FALSE
-		return FALSE
-
-	process_chamber()
-	update_appearance()
-	return TRUE
-
 /**
  * Calculates the final recoil value applied when firing a gun.
  *
@@ -334,6 +296,51 @@
 
 	return TRUE
 
+/obj/item/gun/proc/process_burst(mob/living/user, atom/target, message = TRUE, list/modifiers, zone_override, random_spread = 0, burst_spread_mult = 0, iteration = 0)
+	if(!user || !firing_burst)
+		firing_burst = FALSE
+		return FALSE
+
+	if(iteration > 1 && !(user.is_holding(src))) //for burst firing
+		firing_burst = FALSE
+		return FALSE
+
+	if(!chambered?.loaded_projectile)
+		shoot_with_empty_chamber(user)
+		firing_burst = FALSE
+		return FALSE
+
+	if(HAS_TRAIT(user, TRAIT_PACIFISM)) // If the user has the pacifist trait, then they won't be able to fire [src] if the round chambered inside of [src] is lethal.
+		if(chambered.harmful) // Is the bullet chambered harmful?
+			to_chat(user, span_warning("[src] is lethally chambered! You don't want to risk harming anyone..."))
+			firing_burst = FALSE
+			return FALSE
+
+	var/sprd
+	if(randomspread)
+		sprd = round((rand(0, 1) - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (random_spread))
+	else //Smart spread
+		sprd = round((((burst_spread_mult/burst_size) * iteration) - (0.5 + (burst_spread_mult * 0.25))) * (random_spread))
+
+	before_firing(target,user)
+
+	if(!chambered.fire_casing(target, user, modifiers, 0, FALSE, zone_override, sprd, src))
+		shoot_with_empty_chamber(user)
+		firing_burst = FALSE
+		return FALSE
+	else
+		if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
+			shoot_live_shot(user, TRUE, target, message)
+		else
+			shoot_live_shot(user, FALSE, target, message)
+		if(iteration >= burst_size)
+			firing_burst = FALSE
+
+	process_chamber()
+	update_appearance()
+
+	return TRUE
+
 /obj/item/gun/proc/reset_fire_cd()
 	fire_cd = FALSE
 
@@ -353,6 +360,6 @@
 		integrity_mult = 1
 
 	modified.damage *= projectile_damage_multiplier * integrity_mult
-	modified.speed *= projectile_speed_multiplier * integrity_mult
+	modified.speed /= projectile_speed_multiplier * integrity_mult
 
 #undef DUALWIELD_PENALTY_EXTRA_MULTIPLIER
