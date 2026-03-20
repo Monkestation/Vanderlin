@@ -11953,7 +11953,6 @@
 	pixel_y = 12;
 	name = "Tribute of Iron";
 	desc = "A chestplate forged from blacksteel with shoulder guards, combining strength and agility. The symbol of the Iron Clan is emblazoned on the center of the chestplate. The metal itself seems lighter and more resilient than most blacksteel pieces...";
-	armor = list("blunt" = 90, "slash" = 90, "stab" = 90, "piercing" = 75, "fire" = 0, "acid" = 0);
 	max_integrity = 750;
 	sellprice = 144
 	},

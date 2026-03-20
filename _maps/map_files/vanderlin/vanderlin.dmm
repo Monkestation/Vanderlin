@@ -4691,9 +4691,6 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/effect/landmark/start/orthodoxist{
-	dir = 1
-	},
 /obj/structure/chair/bench/church/r{
 	dir = 1
 	},
@@ -7447,9 +7444,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
-	},
-/obj/effect/landmark/start/orthodoxist{
-	dir = 1
 	},
 /obj/structure/chair/bench/church/r{
 	dir = 1
@@ -13950,9 +13944,6 @@
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
 	},
-/obj/effect/landmark/start/absolver{
-	dir = 8
-	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
@@ -20102,9 +20093,6 @@
 	},
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
-	},
-/obj/effect/landmark/start/adept{
-	dir = 4
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
@@ -31595,7 +31583,6 @@
 /area/indoors/town/vault)
 "oIH" = (
 /obj/structure/chair/bench/throne,
-/obj/effect/landmark/start/puritan,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "oJp" = (
@@ -33813,9 +33800,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
-	},
-/obj/effect/landmark/start/orthodoxist{
-	dir = 1
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
@@ -41099,9 +41083,6 @@
 	dir = 4
 	},
 /obj/structure/chair/wood/alt/chair3{
-	dir = 4
-	},
-/obj/effect/landmark/start/adept{
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -49809,9 +49790,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
-	},
-/obj/effect/landmark/start/orthodoxist{
-	dir = 1
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
