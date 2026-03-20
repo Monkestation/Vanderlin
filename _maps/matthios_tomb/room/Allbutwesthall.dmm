@@ -168,7 +168,7 @@
 /area/under/tomb)
 "HZ" = (
 /obj/structure/closet/crate/chest/crafted,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/effect/decal/cleanable/dirt/cobweb{

@@ -541,7 +541,7 @@
 /area/under/tomb)
 "SC" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)

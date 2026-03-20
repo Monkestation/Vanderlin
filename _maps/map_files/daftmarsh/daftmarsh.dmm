@@ -13234,7 +13234,7 @@
 /area/under/town/sewer)
 "ltd" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_casing/caseless/arrow,
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,
@@ -26456,7 +26456,7 @@
 /area/indoors/town/keep/halls/w)
 "xmZ" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /obj/item/ammo_casing/caseless/arrow,
 /obj/item/paper/scroll,
 /obj/item/paper/scroll,

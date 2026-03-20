@@ -8517,15 +8517,15 @@
 /area/under/cave)
 "dQC" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -8
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -1
 	},
@@ -15323,7 +15323,7 @@
 /area/indoors/town/keep/kitchen/cellar)
 "hdr" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/reagent_containers/glass/bottle/redwine,
 /turf/open/floor/carpet/royalblack,
@@ -17410,8 +17410,8 @@
 /area/indoors/town/church/inquisition)
 "ibq" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -46338,7 +46338,7 @@
 /area/indoors/villagegarrison)
 "viA" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
 "viN" = (

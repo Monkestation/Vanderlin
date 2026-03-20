@@ -109,7 +109,7 @@
 "gf" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "gl" = (

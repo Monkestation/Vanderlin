@@ -32274,10 +32274,10 @@
 /area/outdoors/mountains)
 "pDb" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
 "pDc" = (
@@ -33852,7 +33852,7 @@
 /area/indoors/town/church/chapel)
 "qwS" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /turf/open/floor/tile/checker_green,
 /area/indoors/villagegarrison)
 "qwT" = (
@@ -45834,10 +45834,10 @@
 /area/under/town/sewer)
 "wpY" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -6
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = 6
 	},
 /turf/open/floor/hexstone,
