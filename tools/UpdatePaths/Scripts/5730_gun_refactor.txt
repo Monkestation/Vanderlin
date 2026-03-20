@@ -1,0 +1,1 @@
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/@SUBTYPES : /obj/item/gun/ballistic/bow/@SUBTYPES{@OLD}
