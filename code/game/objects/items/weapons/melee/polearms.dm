@@ -340,6 +340,8 @@
 	melt_amount = 75
 	sellprice = 20
 
+	weapon_special = /datum/special_intent/axe_swing
+
 /obj/item/weapon/woodchopper/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -486,6 +488,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
+
+	weapon_special = /datum/special_intent/ground_smash
 
 /obj/item/weapon/polearm/eaglebeak/getonmobprop(tag)
 	. = ..()
