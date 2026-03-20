@@ -298,7 +298,7 @@
 					. += span_blue("They are an authenticated Artificer.")
 
 			if((real_name in GLOB.marked_players) && HAS_TRAIT(user, TRAIT_INQUISITION))
-				. += span_userdanger("SUSPECTED HERETIC!")
+				. += span_userdanger("SUSPECTED OF HERESY...")
 
 			var/inquisition_text = get_inquisition_text(user)
 			if(inquisition_text)
