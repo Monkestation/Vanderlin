@@ -741,7 +741,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "ly" = (
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /turf/open/floor/dirt,
 /area/under/mountains/anvil/lower/building)
 "lH" = (

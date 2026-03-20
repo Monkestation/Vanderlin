@@ -9296,7 +9296,7 @@
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
 	},
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
@@ -11716,10 +11716,10 @@
 /area/under/cavewet)
 "kkR" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/bow{
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
 	pixel_x = -5
 	},
-/obj/item/gun/ballistic/bow{
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
 	pixel_x = 3
 	},
 /turf/open/floor/concrete,
@@ -20949,7 +20949,7 @@
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
 "uog" = (
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/twig,
 /area/outdoors/bog/e_highroad)
@@ -24355,7 +24355,7 @@
 /obj/structure/rack/underworld{
 	color = "#7D9BAE"
 	},
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
 /turf/open/floor/abyss_tile/two{
 	color = "#547285"
 	},

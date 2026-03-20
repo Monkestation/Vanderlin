@@ -7911,7 +7911,7 @@
 "Xd" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "Xe" = (

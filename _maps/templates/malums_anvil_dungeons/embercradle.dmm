@@ -3465,13 +3465,13 @@
 /area/under/mountains/anvil/dungeon)
 "Uq" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
-/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "Ur" = (
