@@ -11,8 +11,7 @@ combat_assassin2.ogg: Fear & Hunger 2: Termina - Monologue With The Moon
 combat_noble.ogg: Aram Khachaturian - Masquerade Suite - Waltz
 combatskeleton.ogg: Storkrieg - Genocide Of The Fittest
 combat_evilwizard.ogg: Burialgoods - Low Income Barony
-credits2.ogg: Burialgoods - Staring Down the Coming Storm
-credits3.ogg: Burialgoods - Nocturnal Trespass
+credits2.ogg: Burialgoods - Nocturnal Trespass
 title4.ogg: Burialgoods - Undertones No.1
 title5.ogg: Burialgoods - Exit
 

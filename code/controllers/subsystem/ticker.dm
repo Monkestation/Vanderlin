@@ -161,7 +161,7 @@ SUBSYSTEM_DEF(ticker)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
 
-	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg',/*'sound/music/title3.ogg',*/ 'sound/music/title4.ogg', 'sound/music/title5.ogg')
+	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg', 'sound/music/title3.ogg','sound/music/title4.ogg', 'sound/music/title5.ogg')
 
 	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
 	if(CONFIG_GET(flag/randomize_shift_time))
