@@ -967,14 +967,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"adN" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/gate/bars,
-/turf/open/floor/cobble,
-/area/outdoors/mountains/anvil/snowyforest)
 "adP" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
@@ -63879,7 +63871,7 @@ aqx
 aOh
 akd
 aOh
-adN
+auy
 ajy
 ajy
 ajy
