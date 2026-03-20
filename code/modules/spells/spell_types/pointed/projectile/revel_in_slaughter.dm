@@ -23,7 +23,7 @@
 	nodamage = TRUE
 	range = 2 //Low range, used only in combat
 
-/obj/projectile/magic/revel_in_slaughter/on_hit(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/projectile/magic/revel_in_slaughter/on_hit(atom/hit_atom)
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return

@@ -53,7 +53,7 @@
 	range = 3 //Net, So Low range.
 
 
-/obj/projectile/magic/unholy_grasp/on_hit(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/projectile/magic/unholy_grasp/on_hit(atom/hit_atom)
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
@@ -70,7 +70,7 @@
 		//forceMove(C)
 		//C.update_inv_legcuffed()
 		to_chat(C, "<span class='danger'>\The [src] ensnares you!</span>")
-		C.apply_status_effect(/datum/status_effect/debuff/netted, 10 SECONDS)
+		C.apply_status_effect(/datum/status_effect/debuff/netted, 20 SECONDS)
 		playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 
 //------------------------
@@ -83,7 +83,7 @@
 	nodamage = TRUE
 	range = 7 //Screen wide
 
-/obj/projectile/magic/unholy_muzzle/on_hit(atom/hit_atom, datum/thrownthing/throwingdatum)
+/obj/projectile/magic/unholy_muzzle/on_hit(atom/hit_atom)
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
