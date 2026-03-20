@@ -5,6 +5,7 @@
 		TAG_VILLAIN,
 		TAG_COMBAT,
 		TAG_UNEXPECTED,
+		TAG_CORRUPTION
 	)
 
 	cost = 0.8

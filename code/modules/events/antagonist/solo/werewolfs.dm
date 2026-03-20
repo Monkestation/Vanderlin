@@ -4,7 +4,6 @@
 		TAG_DENDOR,
 		TAG_GRAGGAR,
 		TAG_COMBAT,
-		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)
 	roundstart = TRUE
@@ -17,10 +16,10 @@
 	maximum_antags = 2
 
 	weight = 12
-	cost = 0.8
+	cost = 1
 
 	earliest_start = 0 SECONDS
-	min_players = LOWPOP_THRESHOLD
+	min_players = LOWPOP_THRESHOLD+10
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf

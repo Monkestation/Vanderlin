@@ -5,12 +5,11 @@
 	weight = 4
 	min_players = LOWPOP_THRESHOLD
 	earliest_start = 25 MINUTES
-	shared_occurence_type = SHARED_MINOR_THREAT
+	shared_occurence_type = SHARED_HIGH_THREAT
 
 	tags = list(
 		TAG_DENDOR,
 		TAG_GRAGGAR,
-		TAG_HAUNTED,
 		TAG_VILLAIN,
 		TAG_COMBAT,
 	)
@@ -28,5 +27,6 @@
 	tags = list(
 		TAG_HAUNTED,
 		TAG_COMBAT,
+		TAG_BLOOD,
 		TAG_VILLAIN,
 	)

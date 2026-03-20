@@ -3,7 +3,8 @@
 	tags = list(
 		TAG_DENDOR,
 		TAG_GRAGGAR,
-		TAG_COMBAT,
+		TAG_BLOOD,
+		TAG_WAR,
 		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)

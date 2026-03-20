@@ -4,6 +4,7 @@
 		TAG_VILLAIN,
 		TAG_COMBAT,
 		TAG_UNEXPECTED,
+		TAG_CORRUPTION
 	)
 	antag_datum = /datum/antagonist/wretch
 	roundstart = TRUE

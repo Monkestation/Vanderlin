@@ -79,11 +79,8 @@
 /// Tag representing unexpected outcomes or randomness, tied to Zizo and Xylix
 #define TAG_UNEXPECTED "Unexpected"
 
-/// Tag representing insanity-related mechanics, used by Baotha
+/// Tag representing insanity-related mechanics, used by Baotha and Dendor
 #define TAG_INSANITY "Insanity"
-
-/// Tag for magic-related influence or systems, belonging to Baotha
-#define TAG_MAGIC "Magic"
 
 /// Tag denoting disaster-related events or effects, tied to Baotha
 #define TAG_DISASTER "Disaster"

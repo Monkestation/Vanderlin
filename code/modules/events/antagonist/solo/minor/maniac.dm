@@ -1,8 +1,8 @@
 /datum/round_event_control/antagonist/solo/maniac
 	name = "Maniacs"
 	tags = list(
-		TAG_ZIZO,
-		TAG_GRAGGAR,
+		TAG_INSANITY,
+		TAG_MEDICAL,
 		TAG_VILLAIN,
 		TAG_COMBAT,
 	)

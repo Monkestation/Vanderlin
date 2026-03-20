@@ -363,6 +363,7 @@
 	tag_multipliers = list(
 		TAG_DENDOR = 3,
 		TAG_NATURE = 1.75,
+		TAG_INSANITY = 1.5
 	)
 
 	point_gains_multipliers = list(

@@ -3,6 +3,7 @@
 	tags = list(
 		TAG_COMBAT,
 		TAG_BLOOD,
+		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)
 	roundstart = TRUE

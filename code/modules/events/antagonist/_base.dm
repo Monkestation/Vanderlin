@@ -63,7 +63,7 @@
 
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
 
-	if(players_amt < LOWPOP_THRESHOLD)
+	if(players_amt <= LOWPOP_THRESHOLD)
 		return
 
 	if(!prob(secondary_prob))
