@@ -14196,6 +14196,10 @@
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"uJG" = (
+/obj/structure/fluff/traveltile/inquisition,
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "uLe" = (
 /obj/structure/chair/bench/church/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -87888,7 +87892,7 @@ aJu
 ako
 ako
 ako
-ako
+uJG
 adF
 adF
 adF

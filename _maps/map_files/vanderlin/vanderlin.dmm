@@ -1855,6 +1855,10 @@
 /obj/effect/landmark/events/haunts,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church)
+"aRz" = (
+/obj/structure/fluff/traveltile/exit_inquisition,
+/turf/open/floor/naturalstone,
+/area/under/cavelava)
 "aRF" = (
 /obj/structure/minecart_rail,
 /turf/open/floor/woodturned/nosmooth,
@@ -131985,7 +131989,7 @@ qFx
 qFx
 qFx
 qFx
-qLp
+aRz
 qLp
 vKI
 vKI
