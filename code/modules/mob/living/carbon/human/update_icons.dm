@@ -165,20 +165,23 @@ GLOBAL_PROTECT(no_child_icons)
 					armdam_overlay.color = BP.bandage.color
 					armdam_overlays += armdam_overlay
 			wound_overlays = list()
-			for(var/datum/wound/wound as anything in BP.wounds)
-				if(!wound.mob_overlay)
-					continue
+		for(var/datum/wound/wound as anything in BP.wounds)
+			if(!wound.mob_overlay)
+				continue
+			if(!BP.skeletonized || wound.overlay_on_skeleton)
 				wound_overlays |= wound.mob_overlay
 			for(var/wound_overlay in wound_overlays)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", -DAMAGE_LAYER)
-				damage_overlay.color = bloodcolor
+				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", isnum(wound.layer_override) ? -wound.layer_override : -DAMAGE_LAYER)
 				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[wound_overlay]", -LEG_DAMAGE_LAYER)
-				legdam_overlay.color = bloodcolor
+				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[wound_overlay]", isnum(wound.legdam_override) ? -wound.legdam_override : -LEG_DAMAGE_LAYER)
 				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[wound_overlay]", -ARM_DAMAGE_LAYER)
-				armdam_overlay.color = bloodcolor
+				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[wound_overlay]", isnum(wound.armdam_override) ? -wound.armdam_override : -ARM_DAMAGE_LAYER)
 				armdam_overlays += armdam_overlay
+				if(wound.use_blood_color)
+					damage_overlay.color = bloodcolor
+					legdam_overlay.color = bloodcolor
+					armdam_overlay.color = bloodcolor
+
 		if(!bleed_checker && BP.bandage)
 			var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
 			damage_overlay.color = BP.bandage.color

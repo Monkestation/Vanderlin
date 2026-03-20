@@ -12,11 +12,13 @@
 	bleed_rate = null
 	whp = null
 	mob_overlay = null
+	overlay_on_skeleton = TRUE
+	use_blood_color = FALSE
 
 	// the body zones this curse type targets
 	var/list/body_zones
 	// all of these instances of this in a body
-	var/list/root_network
+	var/list/datum/weakref/root_network
 
 	var/max_infection = BBC_TIME_MAX_LIMB
 	// this goes up every onlife. once the total reaches 30 MINUTES, you are dead. non-root infection contributes to the root, nasty.
@@ -32,12 +34,29 @@
 	. = ..()
 	LAZYNULL(root_network)
 
+/datum/wound/black_briar_curse/get_visible_name(mob/user)
+	. = ..()
+	if(isobserver(user))
+		return
+	if(!isliving(user))
+		return
+	if(infection_percent >= BBC_STAGE_DETECTABLE)
+		return
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine) < 30)
+		return
+	. = null
+
 /datum/wound/black_briar_curse/has_special_infection()
 	return infection_percent >= BBC_STAGE_MID
 
-/datum/wound/black_briar_curse/get_check_name(mob/user)
+/datum/wound/black_briar_curse/get_check_name(mob/user, advanced)
 	if(can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
 		return ..()
+	if(isobserver(user))
+		return ..()
+	if(advanced || can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
+		return ..()
+
 
 /datum/wound/black_briar_curse/can_apply_to_bodypart(obj/item/bodypart/affected)
 	. = ..()
@@ -100,23 +119,25 @@
 	if(QDELETED(owner) || QDELETED(bodypart_owner) || QDELETED(src))
 		return FALSE
 	. = ..()
-	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
-	infection = clamp(infection + (rand(20, 25) - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE)) * (SSmobs.wait * 0.1) , 0, max_infection)
-	if(length(root_network) < 2) // we can't get worse without a limb being infected
-		infection = min(infection, max_infection * BBC_STAGE_LATE - 1)
-	infection_percent = min(infection / max_infection, 1)
 
+	progress_infection()
 	//basically what we're doing is forcing a multiplicative inverse function to actually land where we want it to on the max pain.
 	//so we take the inverse of the function and run our pain against it, which is the second number, and that is our offset from 1
 	//if someone ends up tweaking it for balance this will be very annoying to actually understand
-	var/woundpain_inverse = (1 - BBC_STAGE_DETECTABLE) / (1 + 60)
+	var/woundpain_inverse = (1 - BBC_STAGE_DETECTABLE) / (1 + 65)
 	//the pain should roughly start just a little bit after the infection is no longer hidden
 	//because we really don't wanna overshoot somehow and get an undefined number we're gonna give a .001 bump
 	woundpain = max(0, (1 - BBC_STAGE_DETECTABLE) / (1.001 + woundpain_inverse - infection_percent) - 1)
 	to_chat(owner, "[bodypart_owner.body_zone] - [round(infection / 10)] sec - [round(infection_percent * 100)]%")
 	if(infection_percent >= BBC_STAGE_DETECTABLE)
 		can_examine = TRUE // Once it's been identified, we'll always know if we have it if it goes back below hidden
-	update_appearance()
+	try_sprout()
+
+/datum/wound/black_briar_curse/proc/progress_infection()
+	// No, this will not correlate to dungeon or island waits. But it's expensive to check, so we're gonna deal with asynced rate.
+	infection = clamp(infection + (rand(20, 25) - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE)) * SSmobs.wait * 0.1, 0, max_infection)
+	infection_percent = min(infection / max_infection, 1)
+
 
 /datum/wound/black_briar_curse/heal_wound(heal_amount, datum/source, full_heal = FALSE, forced = FALSE)
 	if(full_heal)
@@ -185,8 +206,8 @@
 	if(was_immune)
 		REMOVE_TRAIT(affected, TRAIT_BRIAR_HOST, was_immune)
 
-/datum/wound/black_briar_curse/proc/update_appearance()
-	if(infection_percent >= BBC_STAGE_LATE)
+/datum/wound/black_briar_curse/proc/try_sprout()
+	if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST) && infection_percent >= BBC_STAGE_LATE)
 		if(mob_overlay != infection_overlay)
 			mob_overlay = infection_overlay
 			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, 1000)
@@ -206,6 +227,8 @@
 	// when it can try and infect a limb again, world.time + BBC_SPREAD_COOLDOWN
 	var/next_limb_infection = 0
 	var/dying = FALSE
+	layer_override = ARMOR_LAYER-0.1
+	var/atom/movable/screen/fullscreen/briar/overlay
 
 /datum/wound/black_briar_curse/chest/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -221,20 +244,23 @@
 			qdel(tumor)
 	affected.remove_status_effect(/datum/status_effect/debuff/black_briar1)
 	affected.remove_status_effect(/datum/status_effect/debuff/black_briar2)
+	if(overlay)
+		affected.clear_fullscreen("briar")
+		overlay = null
 
 /datum/wound/black_briar_curse/chest/on_life()
 	. = ..()
 	if(!.)
 		return
-	owner.adjust_energy(GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE - 20) * (SSmobs.wait * 0.1) * infection_percent)
+	owner.adjust_energy(max(0, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 20)) * (SSmobs.wait * 0.1) * infection_percent)
 	if(infection_percent >= 1)
 		if(!HAS_TRAIT(owner, TRAIT_NOPAIN))
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
 			if(prob(80))
-				owner.emote(pick("agony", "firescream"))
+				owner.emote(pick("agony", "painscream", "firescream", "laugh"))
+		owner.Paralyze(3 SECONDS, TRUE)
 		if(prob(10))
 			owner.death()
-		owner.Paralyze(3 SECONDS, TRUE)
 		return
 	if(infection_percent >= BBC_STAGE_LATE)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar2)
@@ -242,20 +268,47 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
-		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST) && world.time > next_limb_infection && prob(4))
-			var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-			uninfected_bodyparts -= root_network
-			var/mob/living/carbon/C = owner
-			var/obj/item/bodypart/BP = C.get_bodypart_complex(uninfected_bodyparts)
-			var/wound_type = get_black_briar_wound_type(BP?.body_zone)
-			if(wound_type)
-				BP.add_wound(wound_type, TRUE)
-			next_limb_infection = world.time + max_infection * BBC_STAGE_DETECTABLE
+		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST))
+			overlay = owner.overlay_fullscreen("briar", /atom/movable/screen/fullscreen/briar, round(lerp(0, 9, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID))))
+			if(world.time > next_limb_infection && prob(4))
+				var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
+				uninfected_bodyparts -= root_network
+				var/mob/living/carbon/C = owner
+				var/obj/item/bodypart/BP = C.get_bodypart_complex(uninfected_bodyparts)
+				var/wound_type = get_black_briar_wound_type(BP?.body_zone)
+				if(wound_type)
+					BP.add_wound(wound_type, TRUE)
+				next_limb_infection = world.time + max_infection * BBC_STAGE_DETECTABLE
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar1)
 		var/_emote = pick("yawn", "cough", "clearthroat")
 		if(prob(0.5))
 			owner.emote(_emote, forced = TRUE)
+		if(overlay)
+			owner.clear_fullscreen("briar")
+			overlay = null
+
+/datum/wound/black_briar_curse/chest/progress_infection()
+	..()
+	if(infection_percent < BBC_STAGE_LATE)
+		return
+	var/mob/living/carbon/C = owner
+	var/organic_bodyparts = 0
+	for(var/obj/item/bodypart/BP in C.bodyparts)
+		if(BP.status == BODYPART_ORGANIC)
+			organic_bodyparts++
+	if(organic_bodyparts > 2)
+		var/required_infection = infection_percent >= 1 ? BBC_STAGE_LATE : BBC_STAGE_MID
+		var/requirements_met = 0
+		for(var/node in root_network)
+			var/datum/wound/black_briar_curse/tumor = root_network[node].resolve()
+			if(!tumor || tumor == src)
+				continue
+			if(tumor.infection_percent >= required_infection)
+				requirements_met++
+		if(requirements_met < 2)
+			infection = min(infection, max_infection * (required_infection == BBC_STAGE_MID ? BBC_STAGE_LATE : 1) - 1)
+			infection_percent = min(infection / max_infection, 1)
 
 /datum/wound/black_briar_curse/chest/on_death(mob/living/affected, gibbed)
 	. = ..()
@@ -263,11 +316,11 @@
 		return
 	if(infection_percent >= BBC_STAGE_MID)
 		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
-		playsound(owner, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
+		playsound(affected, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
 	dying = TRUE
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
-	if(!affected)
+	if(QDELETED(affected))
 		return
 	var/turf/T = get_turf(affected)
 	if(!T)
@@ -286,13 +339,13 @@
 			continue
 		tumor.infection = tumor.max_infection
 		tumor.infection_percent = 1
-		tumor.update_appearance()
+		tumor.try_sprout()
 		if(prob(25))
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
 	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
 	affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 	affected.spawn_gibs(FALSE)
-	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=12, seconds_to_grow=3, delete_after_growing = TRUE)
+	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=13, seconds_to_grow=3, delete_after_growing = TRUE)
 	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
 	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
 	if(istype(root_vine))
@@ -311,20 +364,39 @@
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE
 	body_zones = list(BODY_ZONE_HEAD)
-	var/insane = FALSE
+	layer_override = HEAD_LAYER - 0.1
+	var/datum/brain_trauma/mild/concussion/concussion
+	var/datum/brain_trauma/mild/speech_impediment/impediment
 
 /datum/wound/black_briar_curse/head/on_life()
 	. = ..()
 	if(!.)
 		return
-	if(infection_percent >= BBC_STAGE_LATE ^ insane) // this flips if these dont match up
-		owner.refresh_looping_ambience()
-		insane = !insane
-	if(infection_percent >= BBC_STAGE_DETECTABLE && prob(3 * infection_percent))
-		owner.set_eye_blur_if_lower(rand(3, 6) SECONDS)
-		owner.stuttering = max(owner.stuttering, 10)
+	var/mob/living/carbon/C = owner
+	if(infection_percent >= BBC_STAGE_MID)
+		if(QDELETED(concussion))
+			concussion = C.gain_trauma_type(/datum/brain_trauma/mild/concussion, TRAUMA_RESILIENCE_ABSOLUTE)
+	else if(!QDELETED(concussion))
+		qdel(concussion)
+
+	if(infection_percent >= BBC_STAGE_LATE)
+		if(QDELETED(impediment))
+			impediment = C.gain_trauma_type(/datum/brain_trauma/mild/speech_impediment, TRAUMA_RESILIENCE_ABSOLUTE)
+	else if(!QDELETED(impediment))
+		qdel(impediment)
+
+/datum/wound/black_briar_curse/head/on_mob_loss(mob/living/affected)
+	if(!QDELETED(concussion))
+		qdel(concussion)
+	if(!QDELETED(impediment))
+		qdel(impediment)
+	concussion = null
+	impediment = null
+	. = ..()
 
 /datum/wound/black_briar_curse/arm
+	layer_override = GLOVES_LAYER-0.1
+	armdam_override = GLOVESLEEVE_LAYER-0.1
 	//show_in_book = FALSE
 	body_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 
@@ -339,6 +411,8 @@
 
 
 /datum/wound/black_briar_curse/leg
+	layer_override = SHOES_LAYER-0.1
+	legdam_override = SHOESLEEVE_LAYER-0.1
 	//show_in_book = FALSE
 	body_zones = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	// used for left and rights.
@@ -386,7 +460,7 @@
 			return /datum/wound/black_briar_curse/head
 		if(BODY_ZONE_CHEST)
 			return /datum/wound/black_briar_curse/chest
-		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+		if(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND)
 			return /datum/wound/black_briar_curse/arm
-		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+		if(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT)
 			return /datum/wound/black_briar_curse/leg

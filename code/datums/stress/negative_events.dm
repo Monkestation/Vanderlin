@@ -863,4 +863,8 @@
 /datum/stress_event/black_briar2
 	timer = 999 MINUTES
 	stress_change = 10
-	desc = span_briar("I want to feel the sun shine on my skin... I want to go outside and plant my soles in the dirt... I hear music... I love music...")
+	desc = span_briar("I want to feel the moonlight shine on my skin... I want to go outside... plant my soles in the dirt...I hear music...I love music...it hurts...they hurt...together...")
+
+/datum/stress_event/black_briar2/on_apply(mob/living/user)
+	. = ..()
+	user.refresh_looping_ambience()

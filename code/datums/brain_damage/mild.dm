@@ -147,7 +147,7 @@
 
 /// temporary i think
 /datum/brain_trauma/mild/sick_cough
-	name = "Nervous Cough"
+	name = "Sick Cough"
 	desc = ""
 	scan_desc = ""
 	gain_text = span_warning("My throat itches incessantly...")

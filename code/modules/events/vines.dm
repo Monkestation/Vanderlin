@@ -250,15 +250,12 @@
 	switch(energy)
 		if(0)
 			current_state = "Light[num_state]"
-			density = FALSE
 			set_opacity(0)
 		if(1)
 			current_state = "Med[num_state]"
-			density = FALSE
 			set_opacity(0)
 		else
 			current_state = "Hvy[num_state]"
-			density = TRUE
 			set_opacity(1)
 	icon_state = "[base_icon_state][current_state]"
 
@@ -276,7 +273,8 @@
 
 /obj/structure/vine/Crossed(mob/crosser)
 	. = ..()
-	playsound(src,'sound/items/seedextract.ogg', 80, TRUE, -1)
+	if(crosser.m_intent != MOVE_INTENT_SNEAK)
+		playsound(src,'sound/items/seedextract.ogg', 80, TRUE, -1)
 	if(isliving(crosser))
 		for(var/datum/vine_mutation/SM in mutations)
 			SM.on_cross(src, crosser)
@@ -361,12 +359,11 @@
 		return TRUE
 
 /obj/structure/vine/black_briar
-	name = "black briar"
+	name = "\proper black briar"
 	desc = span_briar("Some victories come at a horrible price.")
 	icon_state = "BriarLight1"
 	base_icon_state = "Briar"
 	max_integrity = 300
-	damage_deflection = 25
 	buckle_prevents_pull = TRUE
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 	buckle_lying = STANDING_UP
@@ -384,6 +381,12 @@
 /obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force)
 	if(!permanent_buckle || force)
 		. = ..()
+
+/obj/structure/vine/black_briar/dieepic()
+	. = ..()
+	var/comp = GetComponent(/datum/component/cursedrosa)
+	if(comp)
+		qdel(comp)
 
 /proc/isvineimmune(atom/A)
 	. = FALSE

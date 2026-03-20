@@ -111,6 +111,11 @@
 	var/list/obj/structure/vine/queue_end = list()
 
 	for(var/obj/structure/vine/grow_vine in growth_queue)
+		if(length(vines) >= vine_cap)
+			if(delete_after_growing)
+				qdel(src)
+				return
+			break
 		if(QDELETED(grow_vine))
 			continue
 		i++
@@ -126,11 +131,6 @@
 		if(i > spread_cap)
 			break
 		spawn_spacevine_piece(grow_vine.find_spread(), grow_vine)
-		if(length(vines) >= vine_cap)
-			if(delete_after_growing)
-				qdel(src)
-				return
-			break
 		if(i > length)
 			break
 	growth_queue += queue_end

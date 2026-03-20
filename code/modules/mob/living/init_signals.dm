@@ -192,7 +192,7 @@
 			qdel(tumor)
 		else
 			root = tumor
-	root?.rebuild_root_network()
+	root?.rebuild_root_network(src)
 	if(!root)
 		var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
 		root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
