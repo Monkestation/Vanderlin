@@ -1,12 +1,12 @@
-/datum/attribute_holder/sheet/job/bard
+/datum/attribute_holder/sheet/job/adventurerbard
 	clamped_adjustment = list(
 		/datum/attribute/skill/misc/music = list(40, 40)
 	)
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2, // no more strength malus since more limited, +3 statline
-    /datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -28,13 +28,13 @@
 	the last ones in a party to die. Their wish is to experience \
 	the greatest adventures of the age and write amazing songs about them."
 	allowed_sexes = list(MALE, FEMALE)
-	outfit = /datum/outfit/combat/bard
-	category_tags = list(CTAG_PILGRIM)
+	outfit = /datum/outfit/adventurer/bard
+	category_tags = list(CTAG_ADVENTURER)
 	apprentice_name = "Aspiring Bard"
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_BARD)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/bard
+	attribute_sheet = /datum/attribute_holder/sheet/job/adventurerbard
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
