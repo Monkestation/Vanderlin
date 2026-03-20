@@ -33,6 +33,7 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ROYALKNIGHT
 	faction = FACTION_TOWN
+	outfit = /datum/outfit/royalknight
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
@@ -146,7 +147,7 @@
 	beltr = /obj/item/weapon/sword/arming
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
-	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
+	beltl = /obj/item/storage/keyring/manorguard
 
 /datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
