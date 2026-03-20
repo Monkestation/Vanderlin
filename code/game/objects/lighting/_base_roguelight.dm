@@ -234,7 +234,7 @@
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "VANDERLIN", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Feed [W] to the fire?", "VANDERLIN", list("Yes", "No")) != "Yes")
 			return
 		if(!(W in user.held_items)|| !user.temporarilyRemoveItemFromInventory(W))
 			return

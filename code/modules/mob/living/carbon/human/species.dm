@@ -1469,7 +1469,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			if(affecting.body_zone == BODY_ZONE_HEAD)
 				SEND_SIGNAL(user, COMSIG_HEAD_PUNCHED, target)
 		log_combat(user, target, "punched")
-		knockback(attacker_style, target, user, nodmg, actual_damage)
+		knockback(attacker_style, target, user, actual_damage)
 
 		if(!nodmg)
 			if(user.limb_destroyer)
@@ -1831,18 +1831,21 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	if(istype(M.used_intent, /datum/intent/unarmed))
 		harm(M, H, attacker_style)
 
+// We need to remove this
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE)
-	// Allows you to put in item-specific reactions based on species
-	if(user != H)
-		if(H.can_see_cone(user))
-			if(H.check_shields(I, I.force, "\the [I]", MELEE_ATTACK, I.armor_penetration))
-				return 0
-	if(H.check_block())
-		H.visible_message("<span class='warning'>[H] blocks [I]!</span>", \
-						"<span class='danger'>I block [I]!</span>")
-		return 0
+	if(!I || !affecting)
+		return FALSE
 
-	var/hit_area
+	if(user != H && H.can_see_cone(user))
+		if(H.check_shields(I, I.force, "\the [I]", MELEE_ATTACK, I.armor_penetration))
+			return FALSE
+
+	if(H.check_block())
+		H.visible_message(
+			"<span class='warning'>[H] blocks [I]!</span>",
+			"<span class='danger'>I block [I]!</span>"
+		)
+		return FALSE
 
 	if(!selzone)
 		selzone = user.zone_selected
@@ -1852,85 +1855,90 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(selzone != user.zone_selected)
 			H.balloon_alert(user, "miss! [selzone]!", DISABLE_BALLOON_COMBAT)
 
-	affecting = H.get_bodypart(check_zone(selzone))
+	var/item_force = get_complex_damage(I, user) //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	if(!affecting)
+	// Only batons (Unused, will be refactored out at some point)
+	I.funny_attack_effects(H, user)
+
+	if(!item_force)
+		SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, 0)
 		return
-
-	hit_area = affecting.name
-	var/def_zone = affecting.body_zone
 
 	var/pen = I.armor_penetration
 	if(user.used_intent?.penfactor)
 		pen = I.armor_penetration + user.used_intent.penfactor
 
-//	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>My armor has protected my [hit_area]!</span>", "<span class='warning'>My armor has softened a hit to my [hit_area]!</span>",pen)
+	var/knockout_modifier = 0
+	if(!H.cmode && !H.stat && H.body_position != LYING_DOWN && user.m_intent == MOVE_INTENT_SNEAK && (H.dir == REVERSE_DIR(get_dir(H, user))))
+		var/blunt = (user.used_intent.blade_class == BCLASS_BLUNT)
+		var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
+		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking >= 10)
+			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
+			// Get extra damage as a percent of 50% extra based on skill
+			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
+			if(blunt)
+				knockout_modifier = FLOOR(15 * percentage, 1)
+			item_force += (item_force * 0.5) * percentage
+			pen = 100
 
-	var/Iforce = get_complex_damage(I, user) //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
-	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "",pen, damage = Iforce, blade_dulling=user.used_intent.blade_class)
+	var/def_zone = affecting.body_zone
 
-	var/nodmg = FALSE
+	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
+	var/weakness = H.check_weakness(I, user)
+	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
 
-	var/actual_damage = Iforce
-	if(Iforce)
+	if(!actual_damage)
+		H.next_attack_msg += " [span_danger(span_big("Armor stops the damage!"))]"
+		H.send_item_attack_message(I, user, parse_zone(selzone))
+		if(!QDELETED(I))
+			I.take_damage(1, BRUTE, I.damage_type)
+		return TRUE
 
-		var/weakness = H.check_weakness(I, user)
-		actual_damage = apply_damage(Iforce * weakness, I.damtype, def_zone, armor_block, H)
-		H.next_attack_msg.Cut()
-		if(!actual_damage)
-			nodmg = TRUE
-			H.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
-			if(!QDELETED(I))
-				I.take_damage(1, BRUTE, I.damage_type)
-		if(!nodmg)
-			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block))/100), user, selzone, crit_message = TRUE)
-			if(crit_wound?.should_embed(I))
-				var/can_impale = TRUE
-				if(!affecting)
-					can_impale = FALSE
-				else if(I.wlength > WLENGTH_SHORT && !(affecting.body_zone in list(BODY_ZONE_CHEST, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)))
-					can_impale = FALSE
-				if(can_impale && user.Adjacent(H))
-					affecting.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
-					H.emote("embed")
-					affecting.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-					user.put_in_hands(I)
-					H.emote("pain", TRUE)
-					playsound(H, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
-			I.do_special_attack_effect(user, affecting, intent, H, selzone)
-			if(istype(user.used_intent, /datum/intent/effect) && selzone)
-				var/datum/intent/effect/effect_intent = user.used_intent
-				if(LAZYLEN(effect_intent.target_parts))
-					if(selzone in effect_intent.target_parts)
-						H.apply_status_effect(effect_intent.intent_effect)
-				else
-					H.apply_status_effect(effect_intent.intent_effect)
-//		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
-//			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))
-//			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
-
-	I.funny_attack_effects(H, user, nodmg)
-	knockback(I, H, user, nodmg, actual_damage)
-
+	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier))
 	H.send_item_attack_message(I, user, parse_zone(selzone))
-	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
-	if(nodmg)
-		return FALSE //dont play a sound
+
+	if(bodypart_wound?.should_embed(I))
+		var/can_impale = TRUE
+		if(!affecting)
+			can_impale = FALSE
+		else if(I.wlength > WLENGTH_SHORT && !(affecting.body_zone in list(BODY_ZONE_CHEST, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)))
+			can_impale = FALSE
+		if(can_impale && user.Adjacent(H))
+			affecting.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
+			H.emote("embed")
+			affecting.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier * I.w_class)//It hurts to rip it out, get surgery you dingus.
+			user.put_in_hands(I)
+			H.emote("pain", TRUE)
+			playsound(H, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+
+	I.do_special_attack_effect(user, affecting, intent, H, selzone)
+
+	if(istype(user.used_intent, /datum/intent/effect) && selzone)
+		var/datum/intent/effect/effect_intent = user.used_intent
+		if(LAZYLEN(effect_intent.target_parts))
+			if(selzone in effect_intent.target_parts)
+				H.apply_status_effect(effect_intent.intent_effect)
+		else
+			H.apply_status_effect(effect_intent.intent_effect)
+
+	knockback(I, H, user, actual_damage)
 
 	//dismemberment
-	var/bloody = 0
+	var/bloody = FALSE
 	var/probability = I.get_dismemberment_chance(affecting, user)
 	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
-		bloody = 1
+		bloody = TRUE
 		I.add_mob_blood(H)
 		user.update_inv_hands()
 
-	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
+	var/hit_area = affecting.name
+
+	if(((I.damtype == BRUTE) && actual_damage && prob(25 + (actual_damage * 2))))
 		if(affecting.status == BODYPART_ORGANIC)
 			I.add_mob_blood(H)	//Make the weapon bloody, not the person.
 			user.update_inv_hands()
-			if(prob(I.force * 2) || bloody)	//blood spatter!
-				bloody = 1
+			if(prob(actual_damage * 2) || bloody)	//blood spatter!
+				bloody = TRUE
 				var/turf/location = H.loc
 				var/splatter_dir = get_dir(H, user)
 				new /obj/effect/temp_visual/dir_setting/bloodsplatter(H.loc, splatter_dir, H.get_blood_type())
@@ -1961,8 +1969,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 						H.wear_pants.add_mob_blood(H)
 						H.update_inv_pants()
 
-		if(Iforce > 10 || Iforce >= 5 && prob(Iforce))
+		if(actual_damage > 10 || actual_damage >= 5 && prob(actual_damage))
 			H.forcesay(GLOB.hit_appends)	//forcesay checks stat already.
+
 	return TRUE
 
 /datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, flashes = TRUE)
@@ -2016,6 +2025,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					H.update_damage_overlays()
 			else//no bodypart, we deal damage with a more general method.
 				H.adjustBruteLoss(damage_amount)
+
 		if(BURN)
 			H.damageoverlaytemp = 20
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.burn_mod
@@ -2036,15 +2046,19 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(TOX)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.tox_mod
 			H.adjustToxLoss(damage_amount)
+
 		if(OXY)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.oxy_mod
 			H.adjustOxyLoss(damage_amount)
+
 		if(CLONE)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.clone_mod
 			H.adjustCloneLoss(damage_amount)
+
 		if(BRAIN)
 			damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
 			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
+
 	return damage_amount
 
 /datum/species/proc/on_hit(obj/projectile/P, mob/living/carbon/human/H)
@@ -2468,48 +2482,58 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	T.wagging = FALSE
 	H.update_body_parts(TRUE)
 
-/datum/species/proc/knockback(obj/item/I, mob/living/target, mob/living/user, nodmg, actual_damage)
-	if(!istype(I))
-		if(!target.resting)
-			var/chungus_str = GET_MOB_ATTRIBUTE_VALUE(target, STAT_STRENGTH)
-			var/knockback_tiles = 0
-			var/damage = actual_damage
-			if(chungus_str >= 3)
-				knockback_tiles = FLOOR(damage/((chungus_str - 2) * 4), 1)
-			else
-				knockback_tiles = FLOOR(damage/2, 1)
-			if(knockback_tiles >= 1)
-				var/turf/edge_target_turf = get_edge_target_turf(target, get_dir(user, target))
-				if(istype(edge_target_turf))
-					target.safe_throw_at(edge_target_turf, \
-										knockback_tiles, \
-										knockback_tiles, \
-										user, \
-										spin = FALSE, \
-										force = target.move_force, \
-										callback = CALLBACK(target, TYPE_PROC_REF(/mob/living, handle_knockback), get_turf(target)))
-	else
-		if(!I.force)
+/datum/species/proc/knockback(obj/item/I, mob/living/target, mob/living/user, actual_damage)
+	if(!actual_damage || target.resting)
+		return
+
+	if(istype(I) && I.force)
+		if(!user.used_intent.knockback)
 			return
-		if(user.used_intent.knockback)
-			if(!target.resting)
-				var/endurance = GET_MOB_ATTRIBUTE_VALUE(target, STAT_ENDURANCE)
-				var/knockback_tiles = 0
-				var/newforce = actual_damage
-				if(endurance >= 3)
-					knockback_tiles = FLOOR(newforce/((endurance - 2) * 4), 1)
-				else
-					knockback_tiles = FLOOR(newforce/2, 1)
-				if(knockback_tiles >= 1)
-					var/turf/edge_target_turf = get_edge_target_turf(target, get_dir(user, target))
-					if(istype(edge_target_turf))
-						target.safe_throw_at(edge_target_turf, \
-											knockback_tiles, \
-											knockback_tiles, \
-											user, \
-											spin = FALSE, \
-											force = target.move_force, \
-											callback = CALLBACK(target, TYPE_PROC_REF(/mob/living, handle_knockback), get_turf(target)))
+		var/endurance = GET_MOB_ATTRIBUTE_VALUE(target, STAT_ENDURANCE)
+		var/knockback_tiles = 0
+		if(endurance >= 3)
+			knockback_tiles = FLOOR(actual_damage / ((endurance - 2) * 4), 1)
+		else
+			knockback_tiles = FLOOR(actual_damage / 2, 1)
+
+		if(knockback_tiles < 1)
+			return
+		var/turf/edge_target_turf = get_edge_target_turf(target, get_dir(user, target))
+		if(!istype(edge_target_turf))
+			return
+		target.safe_throw_at(
+			edge_target_turf,
+			knockback_tiles,
+			knockback_tiles,
+			user,
+			spin = FALSE,
+			force = target.move_force,
+			callback = CALLBACK(target, TYPE_PROC_REF(/mob/living, handle_knockback), get_turf(target)
+		))
+		return
+
+	var/chungus_str = GET_MOB_ATTRIBUTE_VALUE(target, STAT_STRENGTH)
+	var/knockback_tiles = 0
+	if(chungus_str >= 3)
+		knockback_tiles = FLOOR(actual_damage / ((chungus_str - 2) * 4), 1)
+	else
+		knockback_tiles = FLOOR(actual_damage / 2, 1)
+
+	if(knockback_tiles < 1)
+		return
+
+	var/turf/edge_target_turf = get_edge_target_turf(target, get_dir(user, target))
+	if(!istype(edge_target_turf))
+		return
+	target.safe_throw_at(
+		edge_target_turf,
+		knockback_tiles,
+		knockback_tiles,
+		user,
+		spin = FALSE,
+		force = target.move_force,
+		callback = CALLBACK(target, TYPE_PROC_REF(/mob/living, handle_knockback), get_turf(target))
+	)
 
 /mob/living/proc/handle_knockback(turf/starting_turf)
 	var/distance = 0

@@ -478,7 +478,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				if(do_after(user, 3 SECONDS, src))
 					butcher(user)
 	else if (stat != DEAD && istype(ssaddle, /obj/item/natural/saddle) && bbarding && ccaparison)
-		var/pick = browser_alert(user, "What would you like to do?", "[src.name]", list("Adjust caparison", "Look through the saddle bags"))
+		var/pick = tgui_alert(user, "What would you like to do?", "[src.name]", list("Adjust caparison", "Look through the saddle bags"))
 		if(!pick)
 			pick = "Look through the saddle bags"
 		switch(pick)

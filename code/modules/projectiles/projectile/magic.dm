@@ -226,7 +226,7 @@
 	damage_type = BRUTE
 	nodamage = FALSE
 	light_color = "#f8af07"
-	light_outer_range =  2
+	light_range =  2
 
 	//explosion values
 	var/exp_devi = -1
