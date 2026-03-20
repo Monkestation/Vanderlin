@@ -497,6 +497,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	layer = ABOVE_OPEN_TURF_LAYER
 	resistance_flags = INDESTRUCTIBLE
 
+/obj/structure/kybraxor/Initialize()
+	. = ..()
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+
 /obj/structure/kybraxor/redstone_triggered(mob/user)
 	if(changing_state)
 		return
