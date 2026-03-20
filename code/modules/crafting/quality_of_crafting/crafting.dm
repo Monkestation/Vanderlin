@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/crafting
 	abstract_type = /datum/repeatable_crafting_recipe/crafting
-	skillcraft = /datum/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/crafting
 	category = "Misc Crafting"
 	allow_inverse_start = TRUE
 	subtypes_allowed = TRUE
@@ -317,7 +317,7 @@
 	starting_atom  = /obj/item/ingot/iron
 	allow_inverse_start = FALSE
 	output = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/steel_quarterstaff
@@ -330,7 +330,7 @@
 	starting_atom  = /obj/item/ingot/steel
 	allow_inverse_start = FALSE
 	output = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/crafting/caningstick
@@ -527,6 +527,20 @@
 	output = /obj/item/clothing/neck/psycross
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/crafting/bone_amulet
+	name = "bone amulet"
+	requirements = list(
+		/obj/item/alch/bone = 2,
+		/obj/item/alch/sinew = 3,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/alch/bone
+	starting_atom = /obj/item/alch/sinew
+	output = /obj/item/clothing/neck/psycross/great_hunt
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/bottle_kit
 	name = "bottle kit"
 	requirements = list(
@@ -656,7 +670,7 @@
 	allow_inverse_start = FALSE
 	output = /obj/item/gear/wood/basic
 	craftdiff = 3
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 
 /datum/repeatable_crafting_recipe/crafting/wheatlbait
 	name = "bait (wheat)"

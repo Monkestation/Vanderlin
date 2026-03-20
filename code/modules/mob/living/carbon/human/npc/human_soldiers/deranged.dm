@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	var/preset = "matthios"
 	var/forced_preset = "" // If set, force a specific preset instead of randomizing.
+	headprice = 36
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/Initialize()
 	. = ..()
@@ -136,25 +137,27 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	if(!gibbed)
 		dust(FALSE, FALSE, TRUE)
 
+/datum/attribute_holder/sheet/job/npc/quest_miniboss
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_SPEED = 4,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = 4,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
 /datum/outfit/job/quest_miniboss/pre_equip(mob/living/carbon/human/H, visualsOnly)
 	. = ..()
-	H.base_strength = 15
-	H.base_speed = 14
-	H.base_constitution = 15
-	H.base_endurance = 14
-	H.base_perception = 12
-	H.base_intelligence = 12
-	H.base_fortune = 10
-
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/quest_miniboss)
 
 /datum/outfit/job/quest_miniboss/matthios/pre_equip(mob/living/carbon/human/H)
 	. = ..()

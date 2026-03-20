@@ -53,13 +53,14 @@
 /datum/objective/personal/eat_rival_heart/reward_owner()
 	. = ..()
 	owner.current.add_stress(/datum/stress_event/graggar_culling_finished)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_STR, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_END, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_CON, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_PER, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_INT, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_SPD, 3)
-	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, STATKEY_LCK, 3)
+	owner.current.adjust_stat_modifier(STATMOD_GRAGGAR_CULLING, list(
+		STAT_STRENGTH = 3,
+		STAT_CONSTITUTION = 3,
+		STAT_PERCEPTION = 3,
+		STAT_INTELLIGENCE = 3,
+		STAT_SPEED = 3,
+		STAT_FORTUNE = 3
+	))
 	owner.current.playsound_local(owner.current, 'sound/misc/gods/graggar_omen.ogg', 100)
 
 /datum/objective/personal/eat_rival_heart/update_explanation_text()

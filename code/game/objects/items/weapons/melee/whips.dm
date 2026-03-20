@@ -12,14 +12,15 @@
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
+	wdodgebonus = 30 //To counteract the GREAT_LENGTH penalty.
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
 	minstr = 4
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/whipsflails
-	anvilrepair = /datum/skill/craft/tanning
+	associated_skill = /datum/attribute/skill/combat/whipsflails
+	anvilrepair = /datum/attribute/skill/craft/tanning
 	resistance_flags = FLAMMABLE // Fully made of leather
 	swingsound = WHIPWOOSH
 	sellprice = 30
@@ -155,7 +156,7 @@
 
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	melting_material = /datum/material/iron
 	melt_amount = 100
 
@@ -166,7 +167,7 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "xylixwhip"
 	force = DAMAGE_WHIP + 4
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
@@ -190,7 +191,7 @@
 	max_integrity = INTEGRITY_STRONG
 	minstr = 5
 
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	resistance_flags = FIRE_PROOF
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH

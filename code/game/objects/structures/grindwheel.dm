@@ -19,7 +19,7 @@
 		return
 	if(!has_world_trait(/datum/world_trait/delver))
 		if(istype(I, /obj/item/grown/log/tree/small))
-			var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 			var/wood_time = (4 SECONDS - (skill_level * 5))
 			playsound(src, pick('sound/misc/slide_wood (2).ogg', 'sound/misc/slide_wood (1).ogg'), 100, FALSE)
 			if(do_after(user, wood_time, src))
@@ -28,7 +28,7 @@
 					playsound(src,'sound/combat/hits/onwood/destroyfurniture.ogg', 100, FALSE)
 				else
 					new /obj/item/natural/wood/plank(get_turf(src))
-				user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				qdel(I)
 				return
 	. = ..()

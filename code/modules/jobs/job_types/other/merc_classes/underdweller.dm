@@ -1,3 +1,36 @@
+/datum/attribute_holder/sheet/job/underdweller
+	raw_attribute_list = list(
+		STAT_FORTUNE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/labor/mining = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/athletics = 30
+	)
+
+/datum/attribute_holder/sheet/job/underdweller/dwarf
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/craft/bombs = 40,
+	)
+
+/datum/attribute_holder/sheet/job/underdweller/other
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 30,
+	)
+
 /datum/job/advclass/mercenary/underdweller
 	title = "Underdweller"
 	tutorial = "A member of the Underdwellers, you've taken many of the deadliest contracts known to man in literal underground circles. Drow or Dwarf, you've put your differences aside for coin and adventure."
@@ -11,28 +44,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
 
-	jobstats = list(
-		STATKEY_LCK = 1,
-		STATKEY_END = 2,
-		STATKEY_STR = 1,
-		STATKEY_INT = 1
-	)
-
-	skills = list(
-		/datum/skill/labor/mining = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/engineering = 1,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/underdweller
 
 	traits = list(
 		TRAIT_MEDIUMARMOR
@@ -45,14 +57,10 @@
 	// Species-specific adjustments
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
-
-		// Dwarf-specific skill adjustments
-		spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 3)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 2)
-		spawned.adjust_skillrank(/datum/skill/craft/bombs, 4) // Dwarves get to make bombs.
+		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/underdweller/dwarf)
 	else
 		// Non-dwarf skill adjustment
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 3)
+		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/underdweller/other)
 
 /datum/outfit/mercenary/underdweller
 	name = "Underdweller (Mercenary)"

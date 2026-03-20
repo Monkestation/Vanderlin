@@ -5,7 +5,7 @@
 
 	finishing_item = /obj/item/reagent_containers/food/snacks/piedough
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/piebottom
-	related_skill = /datum/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 
@@ -56,6 +56,30 @@
 	overlay_state = "fill_pot"
 	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/pot_pie
 
+/datum/orderless_slapcraft/food/pie/blackberry
+	name = "Unbaked Blackberry Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/blackberry = 3
+	)
+	overlay_state = "fill_blackberry"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/blackberry
+
+/datum/orderless_slapcraft/food/pie/raspberry
+	name = "Unbaked Raspberry Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/fruit/raspberry = 3
+	)
+	overlay_state = "fill_raspberry"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/raspberry
+
+/datum/orderless_slapcraft/food/pie/pompkaun
+	name = "Unbaked Pompkaun Pie"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo = 3
+	)
+	overlay_state = "fill_pompkaun"
+	output_item = /obj/item/reagent_containers/food/snacks/raw_pie/pompkaun
+
 /datum/orderless_slapcraft/food/pie/apple
 	name = "Unbaked Apple Pie"
 	requirements = list(
@@ -98,7 +122,7 @@
 	category = "Tarts"
 	finishing_item = /obj/item/reagent_containers/food/snacks/sugar
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/tartcrust
-	related_skill = /datum/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 	var/overlay_state = ""

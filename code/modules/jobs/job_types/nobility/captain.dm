@@ -1,3 +1,41 @@
+/datum/attribute_holder/sheet/job/captain
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
+/datum/attribute_holder/sheet/job/captain/law
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(20, 50),
+		/datum/attribute/skill/combat/shields = list(20, 40),
+	)
+
+/datum/attribute_holder/sheet/job/captain/justice
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(20, 50),
+	)
+
 /datum/job/captain
 	title = "Captain"
 	tutorial = "Law and Order, your divine reason for existence. \
@@ -32,32 +70,7 @@
 
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/whipsflails = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/captain
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -83,10 +96,9 @@
 		return
 	switch(choice)
 		if("Law and Order")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 5, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/shields, 2, 4, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/captain/law)
 		if("Deliverer of Justice")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 5, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/captain/justice)
 
 /datum/outfit/captain
 	name = "Captain"

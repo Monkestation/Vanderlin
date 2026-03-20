@@ -159,7 +159,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	var/can_saddle = FALSE
 	var/obj/item/ssaddle
-	// A flat percentage bonus to our ability to detect sneaking people only. Use in lieu of giving mobs huge STAPER bonuses if you want them to be observant.
+	// A flat percentage bonus to our ability to detect sneaking people only. Use in lieu of giving mobs huge GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) bonuses if you want them to be observant.
 	var/simple_detect_bonus = 0
 
 	var/static/list/mob_friends = list(
@@ -304,11 +304,11 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/realchance = tame_chance
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
+				realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
 			if(prob(realchance))
 				tamed(user)
-				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
-				user.adjust_experience(/datum/skill/labor/taming, (user.STAINT*10) * boon)
+				var/boon = user.get_learning_boon(/datum/attribute/skill/labor/taming)
+				user.adjust_experience(/datum/attribute/skill/labor/taming, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*10) * boon)
 			else
 				tame_chance += bonus_tame_chance
 		return TRUE
@@ -503,7 +503,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		ssaddle.forceMove(get_turf(src))
 		ssaddle = null
 	var/list/butcher = list()
-	var/butchery_skill_level = user.get_skill_level(/datum/skill/labor/butchering) + user.get_inspirational_bonus()
+	var/butchery_skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) + user.get_inspirational_bonus()
 	var/time_per_cut = max(5, 30 - butchery_skill_level * 5) // 30 seconds for no skill, 5 seconds for master
 	var/botch_chance = 0
 	if(length(botched_butcher_results) && butchery_skill_level < SKILL_LEVEL_JOURNEYMAN)
@@ -581,7 +581,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				var/obj/item/reagent_containers/food/snacks/F = I
 				F.become_rotten()
 		if(user.mind)
-			user.mind.add_sleep_experience(/datum/skill/labor/butchering, user.STAINT * 0.5)
+			user.mind.add_sleep_experience(/datum/attribute/skill/labor/butchering, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5)
 		playsound(src, 'sound/foley/gross.ogg', 70, FALSE)
 	if(isemptylist(butcher_results))
 		if(head_butcher)
@@ -591,9 +591,9 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					head.ButcheringResults(0)
 				if(SKILL_LEVEL_APPRENTICE to SKILL_LEVEL_EXPERT)
 					head.ButcheringResults(1)
-					if(prob(20 - user.STALUC))
+					if(prob(20 - GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE)))
 						head.ButcheringResults(0)
-					else if(prob(user.STALUC))
+					else if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE)))
 						head.ButcheringResults(2)
 				if(SKILL_LEVEL_MASTER to INFINITY)
 					head.ButcheringResults(2)
@@ -850,7 +850,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(user != M)
 		return
 	var/time2mount = 0
-	var/amt = M.get_skill_level(/datum/skill/misc/riding)
+	var/amt = GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/riding)
 	if(M.mind)
 		if(amt)
 			if(amt <= 3)
@@ -870,7 +870,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		else
 			return
 	..()
-	M.adjust_experience(/datum/skill/misc/riding, M.STAINT, FALSE)
+	M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE), FALSE)
 	update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/simple_animal/hostile/user_buckle_mob(mob/living/M, mob/user)
@@ -881,7 +881,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		var/time2mount = 12
 		riding_datum.vehicle_move_delay = move_to_delay
 		if(M.mind)
-			var/amt = M.get_skill_level(/datum/skill/misc/riding)
+			var/amt = GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/riding)
 			if(amt)
 				if(amt <= 3)
 					time2mount = 50 - (amt * 10)
@@ -898,7 +898,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 //			if(A != src && A != M && A.density)
 //				return
 		M.forceMove(get_turf(src))
-		M.adjust_experience(/datum/skill/misc/riding, M.STAINT, FALSE)
+		M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE), FALSE)
 		if(ssaddle)
 			playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
 	..()
@@ -974,7 +974,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					else
 						do_footstep = FALSE
 			if(user.mind)
-				var/amt = user.get_skill_level(/datum/skill/misc/riding)
+				var/amt = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/riding)
 				if(amt)
 					amt = clamp(amt, 0, 4) //higher speed amounts are a little wild. Max amount achieved at expert riding.
 					riding_datum.vehicle_move_delay -= (amt/5 + 1.5)
@@ -984,7 +984,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				if(MD && !MD.ridethrough)
 					if(isliving(user))
 						var/mob/living/L = user
-						var/strong_thighs = L.get_skill_level((/datum/skill/misc/riding))
+						var/strong_thighs = GET_MOB_SKILL_VALUE_OLD(L, (/datum/attribute/skill/misc/riding))
 						if(prob(60 - (strong_thighs * 10))) // Legendary riders do not fall!
 							unbuckle_mob(L)
 							L.Paralyze(50)

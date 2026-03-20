@@ -22,6 +22,7 @@
 		/datum/job/courtphys,
 		/datum/job/archivist,
 		/datum/job/minor_noble,
+		/datum/job/tomb_warden,
 	)
 
 	restricted_roles = list(

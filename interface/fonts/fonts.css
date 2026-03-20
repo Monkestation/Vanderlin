@@ -66,6 +66,11 @@
 }
 
 @font-face {
-  font-family: 'Xaphan';
-  src: url('Xaphan.ttf') format('truetype');
+  font-family: 'Wernicke Schwabacher';
+  src: url('WernickeSchwabacher.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Yataghan';
+  src: url('Yataghan.otf') format('opentype');
 }

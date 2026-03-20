@@ -110,12 +110,12 @@
 		return
 
 	var/damage
-	if(STASTR > 12 || STASTR < 10)
-		damage = STASTR
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 12 || GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 10)
+		damage = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	else
 		damage = 12
 
-	var/used_str = STASTR
+	var/used_str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))
 		return damage * 2
@@ -145,7 +145,7 @@
 		return
 
 	var/damage = 12
-	var/used_str = STASTR
+	var/used_str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	damage += dna?.species?.kick_damage || 0
 
 	if(mind?.has_antag_datum(/datum/antagonist/werewolf))

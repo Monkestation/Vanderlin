@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list(STATKEY_PER = -10, STATKEY_SPD = -2, STATKEY_LCK = -5)
+	effectedstats = list(STAT_PERCEPTION = -10, STAT_SPEED = -2, STAT_FORTUNE = -5)
 	duration = 5 SECONDS
 
 /datum/quirk/vice/bad_sight
@@ -13,7 +13,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	owner.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
 
 	if(H.wear_mask)
 		var/type = H.wear_mask.type

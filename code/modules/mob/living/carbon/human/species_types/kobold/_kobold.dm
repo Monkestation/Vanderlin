@@ -23,6 +23,16 @@
 /mob/living/carbon/human/species/kobold
 	race = /datum/species/kobold
 
+/datum/attribute_holder/sheet/job/species/kobold
+	raw_attribute_list = list(
+		STAT_STRENGTH = -4,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = -4,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+	)
+
 /datum/species/kobold
 	name = "Kobold"
 	id = SPEC_ID_KOBOLD
@@ -41,8 +51,7 @@
 	species_traits = list(NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_TINY, TRAIT_DARKVISION)
 
-	specstats_m = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/kobold
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 

@@ -11,7 +11,7 @@
 
 /obj/item/fertilizer/examine(mob/user)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/labor/farming) >= 3)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 3)
 		if(nitrogen_content)
 			. += span_info("Restores [nitrogen_content] Nitrogen")
 		if(phosphorus_content)

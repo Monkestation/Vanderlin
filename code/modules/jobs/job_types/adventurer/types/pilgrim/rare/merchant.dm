@@ -1,3 +1,17 @@
+/datum/attribute_holder/sheet/job/pilgrim/merchant
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/alchemy = 10,
+		/datum/attribute/skill/labor/mathematics = 50,
+	)
+
 /datum/job/advclass/pilgrim/rare/merchant
 	title = "Travelling Merchant"
 	tutorial = "You are a travelling merchant from far away lands. \
@@ -10,21 +24,7 @@
 	is_recognized = TRUE
 	var/merchant_type
 
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/alchemy = 1,
-		/datum/skill/labor/mathematics = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/merchant
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,//Not sure if they ought to be a noble but I'll leave it as is.
@@ -42,13 +42,13 @@
 	if(merchant_type)
 		switch(merchant_type)
 			if("FOOD")
-				spawned.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/craft/cooking, 20)
 			if("HEAL")
-				spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
 			if("SILK")
-				spawned.adjust_skillrank(/datum/skill/craft/sewing, 2, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/misc/sewing, 20)
 			if("GEMS")
-				spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10)
 	// Randomize it again for the next possible merchant
 	merchant_type = pickweight(list("FOOD" = 4, "HEAL" = 2, "SILK" = 1, "GEMS" = 1))
 

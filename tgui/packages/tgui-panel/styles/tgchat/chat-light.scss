@@ -667,6 +667,7 @@ h2.alert {
 
 .elf {
   font-family: Dauphin, Pterra;
+  font-size: 1.1em;
 }
 
 .dwarf {
@@ -678,29 +679,39 @@ h2.alert {
 }
 
 .hellspeak {
-  font-family: Xaphan, Pterra;
-  font-size: 110%
+  font-family: Yataghan, Pterra;
+  font-size: 0.85em;
 }
 
 .beast,
 .orc {
   font-family: "Thief by The Riddler", Pterra;
+  font-size: 1.1em;
 }
 
 .deepspeak {
   font-family: "Underwater Love", Pterra;
+  font-size: 0.8em;
 }
 
 .zalad {
   font-family: Byzantine, Pterra;
+  font-size: 0.95em;
 }
 
 .undead {
   font-family: Nosfer, Pterra;
+  font-size: 1.12em;
 }
 
-.oldpsydonic {
+.psydonic {
   font-family: "Breitkopf Fraktur", Pterra;
+  font-size: 1.22em;
+}
+
+.psydonic_old {
+  font-family: "Wernicke Schwabacher", Pterra;
+  font-size: 1.23em;
 }
 
 .torture {
@@ -1575,6 +1586,36 @@ $border-width-px: $border-width * 1px;
 
 	100% {
 		color: hsl(189.5, 17.1%, 78.2%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### THE GREAT HUNT ##### */
+.god_thegreathunt {
+  color: hsl(85, 20%, 44%);
+  font-weight: bold;
+  animation: greathunt_flicker 1s infinite;
+}
+
+@keyframes greathunt_flicker {
+	20% {
+		color: hsl(85, 20%, 44%);
+	}
+
+	40% {
+		color: hsl(243, 74%, 59%);
+	}
+
+	60% {
+		color: hsl(84, 24%, 35%);
+	}
+
+  80% {
+		color: hsl(352, 50%, 50%);
+	}
+
+	100% {
+		color: hsl(84, 13%, 48%);
 	}
 }
 /* ##### END ##### */

@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/heartfeltlord
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 5,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
 /datum/job/advclass/combat/heartfeltlord
 	title = "Lord of Heartfelt"
 	tutorial = "You are the lord of Heartfelt, \
@@ -10,29 +32,8 @@
 	total_positions = 1
 	roll_chance = 50
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/craft/cooking = 1,
-	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_END = 3,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 5,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/heartfeltlord
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,

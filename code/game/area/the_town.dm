@@ -169,6 +169,9 @@
 	name = "Mercenary Guild"
 	first_time_text = "Mercenary Guild"
 	icon_state = "merc_guild"
+	background_track = 'sound/music/area/shop.ogg'
+	background_track_dusk = null
+	background_track_night = null
 
 /area/indoors/town/steward
 	name = "Steward's Office"

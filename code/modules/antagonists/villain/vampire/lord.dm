@@ -1,3 +1,18 @@
+/datum/attribute_holder/sheet/job/vampire_lord
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/magic/blood = 10,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/misc/climbing = 50,
+	)
+
 /datum/antagonist/vampire/lord
 	name = "Vampire Lord"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
@@ -64,15 +79,7 @@
 
 /datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.adjust_skillrank(/datum/skill/magic/blood, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/vampire_lord)
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shirt = /obj/item/clothing/shirt/vampire
 	belt = /obj/item/storage/belt/leather/plaquegold

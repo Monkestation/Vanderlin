@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/pilgrim/carpenter
+	attribute_variance = list(
+		/datum/attribute/skill/misc/athletics = list(30, 40)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/craft/carpentry = 50,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/lumberjacking = 30,
+	)
+
 /datum/job/advclass/carpenter
 	title = "Carpenter"
 	tutorial = "As a woodsmen or women, you have dedicated your life to both felling \
@@ -8,32 +32,7 @@
 	apprentice_name = "Carpenter Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/carpentry = 5,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/lumberjacking = 3
-	)
-
-/datum/job/advclass/carpenter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(3, 3, 4), TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/carpenter
 
 /datum/outfit/adventurer/carpenter
 	name = "Carpenter"

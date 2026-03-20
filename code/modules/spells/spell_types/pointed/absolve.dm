@@ -9,7 +9,7 @@
 	sound = 'sound/magic/psyabsolution.ogg'
 	invocation = "BE ABSOLVED!"
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 30 SECONDS // 60 seconds cooldown
 	button_icon_state = "ABSOLVE"
 

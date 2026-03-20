@@ -1,6 +1,6 @@
 /datum/slapcraft_recipe/carpentry
 	abstract_type = /datum/slapcraft_recipe/carpentry
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	category = SLAP_CAT_CARPTENTRY
 
 /datum/slapcraft_recipe/carpentry/structure
@@ -31,7 +31,7 @@
 
 /datum/slapcraft_recipe/masonry
 	abstract_type = /datum/slapcraft_recipe/masonry
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	category = SLAP_CAT_MASONRY
 	assembly_weight_class = WEIGHT_CLASS_HUGE
 
@@ -61,7 +61,7 @@
 
 /datum/slapcraft_recipe/engineering
 	abstract_type = /datum/slapcraft_recipe/engineering
-	skillcraft =/datum/skill/craft/engineering
+	skillcraft =/datum/attribute/skill/craft/engineering
 	category = SLAP_CAT_ENGINEERING
 	assembly_weight_class = WEIGHT_CLASS_HUGE
 

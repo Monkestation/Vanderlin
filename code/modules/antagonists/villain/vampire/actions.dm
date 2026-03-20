@@ -126,9 +126,9 @@
 
 	// Gain experience towards blood magic
 	var/mob/living/carbon/human/licker = usr
-	var/boon = usr.get_learning_boon(/datum/skill/magic/blood)
-	var/amt2raise = licker.STAINT*2
-	usr.adjust_experience(/datum/skill/magic/blood, floor(amt2raise * boon), FALSE)
+	var/boon = usr.get_learning_boon(/datum/attribute/skill/magic/blood)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(licker, STAT_INTELLIGENCE)*2
+	usr.adjust_experience(/datum/attribute/skill/magic/blood, floor(amt2raise * boon), FALSE)
 	adjust_bloodpool(-500)
 	apply_status_effect(/datum/status_effect/buff/bloodstrength)
 	to_chat(src, "<span class='greentext'>! NIGHT MUSCLES !</span>")
@@ -137,7 +137,7 @@
 /datum/status_effect/buff/bloodstrength
 	id = "bloodstrength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/bloodstrength
-	effectedstats = list(STATKEY_STR = 6)
+	effectedstats = list(STAT_STRENGTH = 6)
 	duration = 1 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/bloodstrength
@@ -160,9 +160,9 @@
 
 	// Gain experience towards blood magic
 	var/mob/living/carbon/human/licker = usr
-	var/boon = usr.get_learning_boon(/datum/skill/magic/blood)
-	var/amt2raise = licker.STAINT*2
-	usr.adjust_experience(/datum/skill/magic/blood, floor(amt2raise * boon), FALSE)
+	var/boon = usr.get_learning_boon(/datum/attribute/skill/magic/blood)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(licker, STAT_INTELLIGENCE)*2
+	usr.adjust_experience(/datum/attribute/skill/magic/blood, floor(amt2raise * boon), FALSE)
 	adjust_bloodpool(-500)
 	apply_status_effect(/datum/status_effect/buff/celerity)
 	to_chat(src, "<span class='greentext'>! QUICKENING !</span>")
@@ -184,9 +184,9 @@
 
 	// Gain experience towards blood magic
 	var/mob/living/carbon/human/licker = usr
-	var/boon = usr.get_learning_boon(/datum/skill/magic/blood)
-	var/amt2raise = licker.STAINT*2
-	usr.adjust_experience(/datum/skill/magic/blood, floor(amt2raise * boon), FALSE)
+	var/boon = usr.get_learning_boon(/datum/attribute/skill/magic/blood)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(licker, STAT_INTELLIGENCE)*2
+	usr.adjust_experience(/datum/attribute/skill/magic/blood, floor(amt2raise * boon), FALSE)
 	adjust_bloodpool(-500)
 	apply_status_effect(/datum/status_effect/buff/fortitude)
 	to_chat(src, "<span class='greentext'>! ARMOR OF DARKNESS !</span>")
@@ -196,7 +196,7 @@
 /datum/status_effect/buff/fortitude
 	id = "fortitude"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/fortitude
-	effectedstats = list(STATKEY_END = 20, STATKEY_CON = 20)
+	effectedstats = list(STAT_ENDURANCE = 20, STAT_CONSTITUTION = 20)
 	duration = 30 SECONDS
 
 /atom/movable/screen/alert/status_effect/buff/fortitude

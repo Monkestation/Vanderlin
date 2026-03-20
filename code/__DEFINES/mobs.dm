@@ -1,15 +1,4 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
-
-#define STATKEY_STR "strength"
-#define STATKEY_PER "perception"
-#define STATKEY_INT "intelligence"
-#define STATKEY_CON "constitution"
-#define STATKEY_END "endurance"
-#define STATKEY_SPD "speed"
-#define STATKEY_LCK "fortune"
-
-#define MOBSTATS list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_CON, STATKEY_END, STATKEY_SPD, STATKEY_LCK)
-
 //Misc mob defines
 
 //for vision cone

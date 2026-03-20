@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/heretic
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/sewing = 20
+	)
+
 /datum/job/advclass/wretch/heretic
 	title = "Iconoclast"
 	tutorial = "You are either a heretic or a fanatic, spurned by the church, cast out from society - frowned upon by the tens for your type of faith."
@@ -9,23 +25,7 @@
 	exp_type = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_END = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/sewing = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/heretic
 
 	traits = list(
 		TRAIT_STEELHEARTED,
@@ -39,68 +39,68 @@
 
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
 			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 		if(/datum/patron/divine/necra)
-			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/pestra)
-			spawned.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
+			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			spawned.virginity = FALSE
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 10)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/inhumen/graggar)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 		if(/datum/patron/inhumen/graggar_zizo)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/zizo)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			spawned.grant_language(/datum/language/undead)
 		if(/datum/patron/inhumen/matthios)
-			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha)
-			spawned.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
+			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 			spawned.grant_language(/datum/language/newpsydonic)
 		else
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
 	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS))

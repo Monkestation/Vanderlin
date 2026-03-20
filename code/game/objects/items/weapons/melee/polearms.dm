@@ -19,7 +19,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	melt_amount = 75 //For the ones it paths to
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	dropshrink = 0.8
@@ -244,7 +244,7 @@
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
 /obj/item/weapon/polearm/spear/stone
 	name = "simple spear"
-	desc = "With this weapon, the tribes of humenity became the chosen people of Psydon."
+	desc = "One of the first weapons wielded by humenity, still as versatile now as it was then."
 	icon_state = "stonespear"
 	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
@@ -333,7 +333,7 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces //It's ultimately a massive axe
+	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
 	dropshrink = 0.95
 	axe_cut = 15
 	melting_material = /datum/material/iron
@@ -369,7 +369,7 @@
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	dropshrink = 0.95
 	axe_cut = 15
 	melting_material = /datum/material/iron
@@ -567,7 +567,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	dropshrink = 0.75
 	melting_material = /datum/material/iron
@@ -598,7 +598,7 @@
 	melting_material = null
 
 /obj/item/weapon/polearm/spear/naginata
-	name = "Naginata"
+	name = "naginata"
 	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"

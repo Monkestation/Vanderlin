@@ -39,7 +39,7 @@
 			return
 	if((user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut) && hide)
 		if(anchored)
-			var/skill_level = user.get_skill_level(/datum/skill/craft/tanning, TRUE)
+			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/tanning)
 			var/work_time = (12 SECONDS - (skill_level * 15))
 			var/pieces_to_spawn = rand(1, min(skill_level + 1, 6)) //Random number from 1 to skill level
 			var/sound_played = FALSE
@@ -48,10 +48,10 @@
 				return
 			playsound(src,pick('sound/items/book_open.ogg','sound/items/book_page.ogg'), 100, FALSE)
 			QDEL_NULL(hide)
-			user.mind.add_sleep_experience(/datum/skill/craft/tanning, user.STAINT * 2) //these numbers may need some revision
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/tanning, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) //these numbers may need some revision
 			update_appearance(UPDATE_OVERLAYS)
 			for(var/i = 0; i < pieces_to_spawn; i++)
-				if(prob(skill_level + CLAMP((user.STALUC - 10)*2,0,100)))
+				if(prob(skill_level + CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100)))
 					new /obj/item/natural/cured/essence(get_turf(user))
 					if(!sound_played)
 						sound_played = TRUE

@@ -47,11 +47,11 @@
 		if(!do_after(attacker, 3 SECONDS, parent))
 			return
 		held.play_tool_sound(carbon_parent)
-		var/heal_value = held.force * max(1, (0.5 * attacker.get_skill_level(/datum/skill/craft/engineering)))
+		var/heal_value = held.force * max(1, (0.5 * GET_MOB_SKILL_VALUE_OLD(attacker, /datum/attribute/skill/craft/engineering)))
 		targeted_part.heal_damage(heal_value,heal_value) // repairs brute and burn equal to tool force
 		attacker.visible_message(
 			span_notice("[attacker] taps [carbon_parent]'s [targeted_part.name] with [held], straightening out the damage."),
 			span_notice("You tap [carbon_parent]'s [targeted_part.name] with [held], repairing some damage.")
 		)
 		damaged = carbon_parent.getBruteLoss() + carbon_parent.getFireLoss()
-		attacker.adjust_experience(/datum/skill/craft/engineering, 10)
+		attacker.adjust_experience(/datum/attribute/skill/craft/engineering, 10)
