@@ -207,5 +207,5 @@
 			backr = /obj/item/gun/ballistic/bow/long
 			beltl = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backr = /obj/item/gun/ballistic/bow/cross
 			beltl = /obj/item/ammo_holder/quiver/bolts

@@ -178,7 +178,7 @@
 		head = /obj/item/clothing/head/helmet/heavy/crusader/t
 		cloak = /obj/item/clothing/cloak/stabard/crusader/t
 		backl = /obj/item/storage/backpack/satchel/black
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+		backr = /obj/item/gun/ballistic/bow/cross
 		beltl = /obj/item/weapon/knife/dagger/silver
 		beltr = /obj/item/ammo_holder/quiver/bolts
 

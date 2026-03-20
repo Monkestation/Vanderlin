@@ -1948,7 +1948,7 @@
 "jt" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "jv" = (
@@ -3048,7 +3048,7 @@
 "qP" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/bandit_lair)
 "qQ" = (

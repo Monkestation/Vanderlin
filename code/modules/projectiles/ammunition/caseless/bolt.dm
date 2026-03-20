@@ -5,7 +5,7 @@
 	icon_state = "bolt"
 	projectile_type = /obj/projectile/bullet/reusable/bolt
 	possible_item_intents = list(DAGGER_THRUST)
-	caliber = "regbolt"
+	caliber = "bolt"
 	dropshrink = 0.8
 	max_integrity = 10
 	force = DAMAGE_KNIFE - 2

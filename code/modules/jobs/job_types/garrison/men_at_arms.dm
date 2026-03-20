@@ -205,7 +205,7 @@
 			backl = /obj/item/gun/ballistic/bow/long
 			backr = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backl = /obj/item/gun/ballistic/bow/cross
 			backr = /obj/item/ammo_holder/quiver/bolts
 
 /datum/attribute_holder/sheet/job/menatarms/swordsman

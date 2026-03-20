@@ -3868,8 +3868,8 @@
 /area/outdoors/river)
 "dKs" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
+/obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/blocks,
 /area/indoors/villagegarrison)
 "dKw" = (
@@ -3950,8 +3950,8 @@
 "dOG" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/rack/shelf/biggest,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/cobble,

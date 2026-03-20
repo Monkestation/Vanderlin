@@ -52,7 +52,7 @@
 	var/empty_alarm_vary = TRUE
 
 	/// What type (includes subtypes) of magazine will this gun accept being put into it
-	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/internal/xbow
+	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/internal/crossbow
 	///Whether the gun will spawn loaded with a magazine
 	var/spawn_with_magazine = TRUE
 	/// Change this if the gun should spawn with a different magazine type to what accepted_magazine_type defines. Will create errors if not a type or subtype of accepted magazine.

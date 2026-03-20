@@ -1267,7 +1267,7 @@
 	dir = 10;
 	icon_state = "largetable"
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)

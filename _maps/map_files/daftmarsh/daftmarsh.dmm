@@ -5442,7 +5442,7 @@
 /area/indoors/town/clinic_large)
 "ewp" = (
 /obj/structure/activator,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
@@ -18755,7 +18755,7 @@
 /area/indoors/town/tavern)
 "qqB" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/perfume/rose,
 /obj/item/perfume/random,
@@ -20603,7 +20603,7 @@
 "rXJ" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/sword/rapier/dec,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/keep/hand)
@@ -23754,7 +23754,7 @@
 /area/outdoors/town)
 "uYS" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors/town/roofs)

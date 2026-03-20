@@ -147,7 +147,7 @@
 
 /datum/special_trait/eagle_eyed/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/eagle_eyed)
-	character.mind.special_items["Crossbow"] = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	character.mind.special_items["Crossbow"] = /obj/item/gun/ballistic/bow/cross
 	character.mind.special_items["Bolts"] = /obj/item/ammo_holder/quiver/bolts
 
 /datum/attribute_holder/sheet/job/mule

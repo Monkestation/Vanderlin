@@ -100,10 +100,10 @@
 		return FALSE
 
 	// For crossbows, ensure cocked
-	if(istype(bow, /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow))
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/xbow = bow
-		if(!xbow.cocked)
-			xbow.cocked = TRUE
+	if(istype(bow, /obj/item/gun/ballistic/bow/cross))
+		var/obj/item/gun/ballistic/bow/cross/xbow = bow
+		if(!xbow.string_pulled)
+			xbow.string_pulled = TRUE
 			xbow.update_appearance(UPDATE_ICON_STATE)
 
 	set_movement_target(controller, target)

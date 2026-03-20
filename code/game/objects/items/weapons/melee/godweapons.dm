@@ -214,23 +214,6 @@
 	icon_state = "neantspecial"
 	duration = 4
 
-/datum/intent/shoot/neant
-	name = "shoot"
-	icon_state = "inshoot"
-	warnie = "aimwarn"
-	item_damage_type = "stab"
-	tranged = TRUE
-	chargetime = 2 SECONDS
-	no_early_release = TRUE
-	noaa = TRUE
-	charging_slowdown = 2
-
-/datum/intent/shoot/neant/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] aims [master_item]!</span>")
-
 //┌─────────────── TURBULENTA ───────────────┐//
 
 /obj/item/gun/ballistic/bow/turbulenta
@@ -344,16 +327,6 @@
 	arrow.damage = old_dam || arrow.damage
 	arrow.armor_penetration = old_pen || arrow.armor_penetration
 	chambered.loaded_projectile = arrow
-
-/datum/intent/shoot/bow/turbulenta
-	chargetime = 1
-	chargedrain = 1.5
-	charging_slowdown = 2.5
-
-/datum/intent/arc/bow/turbulenta
-	chargetime = 1
-	chargedrain = 1.5
-	charging_slowdown = 2.5
 
 //┌─────────────── PLEONEXIA ───────────────┐//
 /obj/item/weapon/sword/long/pleonexia

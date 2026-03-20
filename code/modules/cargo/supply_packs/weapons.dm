@@ -296,12 +296,12 @@
 /datum/supply_pack/weapons/ranged/crossbow
 	name = "Crossbow"
 	cost = 50
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	contains = /obj/item/gun/ballistic/bow/cross
 
 /datum/supply_pack/weapons/ranged/slurbow
 	name = "Slurbow"
 	cost = 150
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+	contains = /obj/item/gun/ballistic/bow/cross/slur
 
 /datum/supply_pack/weapons/ranged/bow
 	name = "Hunting Bow"

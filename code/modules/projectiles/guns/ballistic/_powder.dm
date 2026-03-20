@@ -30,6 +30,7 @@
 	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
 	cartridge_wording = "ball"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel/empty
 	empty_indicator = FALSE
 
 	// Muzzle loaders require a ramrod to function

@@ -192,7 +192,7 @@
 			/obj/item/gun/ballistic/bow/short = 10,
 			/obj/item/gun/ballistic/bow = 10,
 			/obj/item/gun/ballistic/bow/long = 5,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow = 5,
+			/obj/item/gun/ballistic/bow/cross = 5,
 			/obj/item/weapon/axe/steel = 5,
 			/obj/item/weapon/axe/steel/nsapo = 2,
 			/obj/item/weapon/sword/long/greatsword = 2,

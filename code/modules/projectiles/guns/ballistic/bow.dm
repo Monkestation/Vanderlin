@@ -1,118 +1,3 @@
-
-/datum/intent/shoot/bow
-	chargetime = 0.5
-	chargedrain = 1
-	charging_slowdown = 1
-
-/datum/intent/shoot/bow/long
-	chargetime = 1
-	chargedrain = 1.25
-	charging_slowdown = 3
-
-/datum/intent/shoot/bow/short
-	chargetime = 0.5
-	chargedrain = 1
-	charging_slowdown = 0.5
-
-/datum/intent/shoot/bow/can_charge()
-	var/mob/living/master = get_master_mob()
-	if(master)
-		if(master.usable_hands < 2)
-			return FALSE
-		if(master.get_inactive_held_item())
-			return FALSE
-	return TRUE
-
-/datum/intent/shoot/bow/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_mob && master_item)
-		master_mob.visible_message("<span class='warning'>[master_mob] draws [master_item]!</span>")
-		playsound(master_mob, pick('sound/combat/Ranged/bow-draw-01.ogg'), 100, FALSE)
-
-/datum/intent/shoot/bow/long/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_mob && master_item)
-		master_mob.visible_message("<span class='warning'>[master_mob] draws [master_item]!</span>")
-		playsound(master_mob, pick('sound/combat/Ranged/bow-draw-04.ogg'), 100, FALSE)
-
-/datum/intent/shoot/bow/get_chargetime()
-	var/mob/living/master = get_master_mob()
-	if(master && chargetime)
-		var/newtime = 0
-		//skill block
-		newtime = newtime + 10
-		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (10/6))
-		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
-		newtime = newtime + 10
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_STRENGTH) * (10/20))
-		//per block
-		newtime = newtime + 20
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION) * 1) //20/20 is 1
-		if(newtime > 0)
-			return newtime
-		else
-			return 0.1
-	return chargetime
-
-/datum/intent/arc/bow
-	chargetime = 0.5
-	chargedrain = 1
-	charging_slowdown = 1
-
-/datum/intent/arc/bow/long
-	chargetime = 1
-	chargedrain = 1.25
-	charging_slowdown = 2.5
-
-/datum/intent/arc/bow/short
-	chargetime = 0.5
-	chargedrain = 1
-	charging_slowdown = 0.5
-
-/datum/intent/arc/bow/can_charge()
-	var/mob/living/master = get_master_mob()
-	if(master)
-		if(master.usable_hands < 2)
-			return FALSE
-		if(master.get_inactive_held_item())
-			return FALSE
-	return TRUE
-
-/datum/intent/arc/bow/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_item && master_mob)
-		master_mob.visible_message("<span class='warning'>[master_mob] draws [master_item]!</span>")
-		playsound(master_mob, pick('sound/combat/Ranged/bow-draw-01.ogg'), 100, FALSE)
-
-/datum/intent/arc/bow/long/prewarning()
-	var/mob/master_mob = get_master_mob()
-	var/obj/item/master_item = get_master_item()
-	if(master_mob && master_item)
-		master_mob.visible_message("<span class='warning'>[master_mob] draws [master_item]!</span>")
-		playsound(master_mob, pick('sound/combat/Ranged/bow-draw-04.ogg'), 100, FALSE)
-
-/datum/intent/arc/bow/get_chargetime()
-	var/mob/living/master = get_master_mob()
-	if(master && chargetime)
-		var/newtime = 0
-		//skill block
-		newtime = newtime + 10
-		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (10/6))
-		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
-		newtime = newtime + 10
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_STRENGTH) * (10/20))
-		//per block
-		newtime = newtime + 20
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION) * 1) //20/20 is 1
-		if(newtime > 0)
-			return newtime
-		else
-			return 1
-	return chargetime
-
 /obj/item/gun/ballistic/bow
 	name = "bow"
 	desc = "The bow is your life; to hold it high and pull the string is to know the path of destiny."
@@ -179,7 +64,7 @@
 /obj/item/gun/ballistic/bow/attack_self(mob/user)
 	. = ..()
 	if(!chambered)
-		balloon_alert(user, "no arrow nocked!")
+		balloon_alert(user, "no [cartridge_wording] nocked!")
 		return
 
 	user.put_in_hands(chambered)
@@ -189,7 +74,7 @@
 /obj/item/gun/ballistic/bow/equipped(mob/user, slot, initial)
 	. = ..()
 	if(slot != ITEM_SLOT_HANDS && chambered)
-		balloon_alert(user, "the arrow falls out!")
+		balloon_alert(user, "the [cartridge_wording] falls out!")
 		drop_arrow()
 
 /obj/item/gun/ballistic/bow/dropped(mob/user, silent)
@@ -254,7 +139,7 @@
 		if(perception > 10) // Every point over 10 PER adds 10% damage
 			modified.damage *= (perception / 10)
 
-	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, associated_skill) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 
 /obj/item/gun/ballistic/bow/process_fire(atom/target, mob/living/user, message, list/modifiers, zone_override, bonus_spread)
 	. = ..()
@@ -262,9 +147,9 @@
 		return
 
 	var/modifier = 1.25 / (spread + 1)
-	var/boon = user.get_learning_boon(/datum/attribute/skill/combat/bows)
+	var/boon = user.get_learning_boon(associated_skill)
 	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2
-	user.adjust_experience(/datum/attribute/skill/combat/bows, amt2raise * boon * modifier, FALSE)
+	user.adjust_experience(associated_skill, amt2raise * boon * modifier, FALSE)
 
 /obj/item/gun/ballistic/bow/postfire_empty_checks(last_shot_succeeded)
 	if(!chambered && !get_ammo())

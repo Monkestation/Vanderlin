@@ -1766,7 +1766,7 @@
 /obj/item/chair,
 /obj/item/ammo_casing/caseless/bolt,
 /obj/effect/decal/cleanable/blood,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/effect/decal/remains/human,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)

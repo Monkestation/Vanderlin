@@ -43,45 +43,6 @@
 	max_ammo = 1
 	start_empty = TRUE
 
-/datum/intent/shoot/airgun
-	chargedrain = 0 //no drain to aim
-
-/datum/intent/shoot/airgun/get_chargetime()
-	var/mob/living/master = get_master_mob()
-	if(master && chargetime)
-		var/newtime = chargetime
-		//skill block
-		newtime = newtime + 18
-		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/craft/engineering) * 3)
-		//per block
-		newtime = newtime + 20
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION))
-		if(newtime > 0)
-			return newtime
-		else
-			return 0.1
-	return chargetime
-
-/datum/intent/arc/airgun
-	chargetime = 1
-	chargedrain = 0 //no drain to aim
-
-/datum/intent/arc/airgun/get_chargetime()
-	var/mob/living/master = get_master_mob()
-	if(master && chargetime)
-		var/newtime = chargetime
-		//skill block
-		newtime = newtime + 18
-		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/craft/engineering) * 3)
-		//per block
-		newtime = newtime + 20
-		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION))
-		if(newtime > 0)
-			return newtime
-		else
-			return 1
-	return chargetime
-
 /obj/item/gun/ballistic/revolver/grenadelauncher/airgun/examine(mob/user)
 	. = ..()
 	desc = initial(desc)

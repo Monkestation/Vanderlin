@@ -374,7 +374,7 @@
 "oh" = (
 /obj/structure/table/stone_small,
 /obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "ou" = (

@@ -39,7 +39,7 @@
 	. = ..()
 	var/static/list/selectableweapon = list(
 		"Bow" = /obj/item/gun/ballistic/bow/short,
-		"Crossbow" = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+		"Crossbow" = /obj/item/gun/ballistic/bow/cross,
 	)
 	var/weaponschoice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon of choice", title = "PYROMANIAC")
 	if(!weaponschoice)

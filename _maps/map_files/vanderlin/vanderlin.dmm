@@ -2113,7 +2113,7 @@
 /area/under/town/basement)
 "aXL" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/perfume/rose,
 /obj/item/perfume/random,
@@ -18901,7 +18901,7 @@
 	pixel_y = -32
 	},
 /obj/structure/activator,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -35852,7 +35852,7 @@
 "qxT" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/sword/rapier/dec,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/clothing/armor/leather/jacket/handjacket,
 /obj/item/clothing/cloak/raincloak/colored/purple,
@@ -47420,7 +47420,7 @@
 /area/indoors/town/keep/squire)
 "vHc" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
