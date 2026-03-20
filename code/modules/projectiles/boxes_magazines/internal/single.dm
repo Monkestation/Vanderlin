@@ -22,3 +22,12 @@
 
 /obj/item/ammo_box/magazine/internal/barrel/empty
 	start_empty = TRUE
+
+/obj/item/ammo_box/magazine/internal/blowgun
+	name = "tube"
+	max_ammo = 1
+	ammo_type = /obj/item/ammo_casing/caseless/dart
+	caliber = "dart"
+
+/obj/item/ammo_box/magazine/internal/blowgun/empty
+	start_empty = TRUE

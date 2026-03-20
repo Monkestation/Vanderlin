@@ -131,10 +131,10 @@
 			var/obj/item/weapon/pick/P = target
 			P.pickmult *= modifier
 
-	// Crossbows - modify damage multiplier
-	else if(istype(target, /obj/item/gun/ballistic/revolver/grenadelauncher))
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/R = target
-		R.damfactor = modifier
+	// Guns - modify damage multiplier
+	else if(isgun(target))
+		var/obj/item/gun/gun = target
+		gun.projectile_damage_multiplier *= modifier
 
 	// Bear traps - modify trap damage
 	else if(istype(target, /obj/item/restraints/legcuffs/beartrap))

@@ -235,8 +235,13 @@
 
 /// Get the base spread, probably based off the user's skills
 /obj/item/gun/proc/get_spread(mob/living/user)
-	if(!user)
+	if(!user?.client)
+		return 20
+
+	if(user.client.chargedprog >= 100)
 		return 0
+
+	return (150 - (150 * (user.client.chargedprog / 100)))
 
 /obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, list/modifiers, zone_override, bonus_spread = 0)
 	if(fire_cd)

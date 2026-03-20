@@ -112,15 +112,6 @@
 	if(user.get_inactive_held_item())
 		return FALSE
 
-/obj/item/gun/ballistic/bow/get_spread(mob/living/user)
-	if(!user?.client)
-		return 20
-
-	if(user.client.chargedprog >= 100)
-		return 0
-
-	return (150 - (150 * (user.client.chargedprog / 100)))
-
 /obj/item/gun/ballistic/bow/modify_projectile(mob/living/user, atom/target, obj/projectile/modified)
 	. = ..()
 

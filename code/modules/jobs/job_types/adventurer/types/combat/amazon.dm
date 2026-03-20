@@ -47,7 +47,7 @@
 	backl = /obj/item/weapon/polearm/spear
 	backr = /obj/item/gun/ballistic/bow/short
 	belt = /obj/item/storage/belt/leather/rope
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	beltl = /obj/item/gun/ballistic/blowgun
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	shoes = /obj/item/clothing/shoes/gladiator
 	wrists = /obj/item/clothing/wrists/bracers/leather

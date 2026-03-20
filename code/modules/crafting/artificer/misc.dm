@@ -158,7 +158,7 @@
 /datum/artificer_recipe/weapons/airgun
 	name = "Airgun (+2 Cured Leather) (+3 Bronze) (+4 Metal Gear)"
 	required_item = /obj/item/ingot/steel
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/airgun
+	created_item = /obj/item/gun/ballistic/airgun
 	additional_items = list(/obj/item/natural/hide/cured = 2, /obj/item/ingot/bronze = 3, /obj/item/gear/metal = 4)
 	hammers_per_item = 10
 	craftdiff = 5

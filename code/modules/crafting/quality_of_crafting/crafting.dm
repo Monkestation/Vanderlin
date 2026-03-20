@@ -211,7 +211,7 @@
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	output = /obj/item/gun/ballistic/blowgun
 
 /datum/repeatable_crafting_recipe/crafting/candle
 	name = "candle"

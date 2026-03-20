@@ -8,6 +8,8 @@
 	experimental_onback = TRUE
 	bigboy = TRUE
 	SET_BASE_PIXEL(-16, -16)
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	max_integrity = 100

@@ -233,15 +233,6 @@
 		playsound(src, 'sound/combat/Ranged/flint_click.ogg', 50)
 		sleep(trigger_delay)
 
-/obj/item/gun/ballistic/powder/get_spread(mob/living/user)
-	if(!user?.client)
-		return 20
-
-	if(user.client.chargedprog >= 100)
-		return 0
-
-	return (150 - (150 * (user.client.chargedprog / 100)))
-
 /obj/item/gun/ballistic/powder/modify_projectile(mob/living/user, atom/target, obj/projectile/modified)
 	. = ..()
 
