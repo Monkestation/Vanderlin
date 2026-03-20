@@ -62,7 +62,6 @@
 	icon_state = "[base_icon_state][chambered ? "_ready" : ""]"
 
 /obj/item/gun/ballistic/bow/attack_self(mob/user)
-	. = ..()
 	if(!chambered)
 		balloon_alert(user, "no [cartridge_wording] nocked!")
 		return

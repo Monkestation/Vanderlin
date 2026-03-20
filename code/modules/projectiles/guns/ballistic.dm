@@ -284,7 +284,7 @@
 	var/obj/item/ammo_box/magazine/old_mag = magazine
 	if (tac_load)
 		if (insert_magazine(user, tac_load, FALSE))
-			to_chat(user, "<span class='notice'>I perform a tactical reload on \the [src].</span>")
+			balloon_alert(user, "[magazine_wording] swapped")
 		else
 			to_chat(user, "<span class='warning'>I dropped the old [magazine_wording], but the new one doesn't fit. How embarrassing.</span>")
 			magazine = null
@@ -293,7 +293,7 @@
 	user.put_in_hands(old_mag)
 	old_mag.update_appearance()
 	if (display_message)
-		to_chat(user, "<span class='notice'>I pull the [magazine_wording] out of \the [src].</span>")
+		balloon_alert(user, "[magazine_wording] unloaded")
 	update_appearance()
 
 /obj/item/gun/ballistic/can_shoot(mob/living/user)
@@ -312,7 +312,7 @@
 			eject_magazine(user, FALSE, A)
 			return
 
-		to_chat(user, span_notice("There's already \a [magazine_wording] in \the [src]."))
+		balloon_alert(user, "already loaded!")
 		return
 
 	if(isammocasing(A) || istype(A, /obj/item/ammo_box))
@@ -324,7 +324,7 @@
 				chambered = null
 			var/num_loaded = magazine.try_load(user, A, silent = TRUE)
 			if(num_loaded)
-				to_chat(user, span_notice("I [verbage] \a [cartridge_wording]\s on \the [src]."))
+				balloon_alert(user, "[num_loaded] [cartridge_wording]\s loaded")
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
 				if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 					chamber_round()
@@ -376,21 +376,7 @@
 			return
 
 	if(bolt_type == BOLT_TYPE_NO_BOLT)
-		chambered = null
-		var/num_unloaded = 0
-		for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
-			CB.forceMove(drop_location())
-			CB.bounce_away(FALSE, NONE)
-			num_unloaded++
-			var/turf/T = get_turf(drop_location())
-			if(T && is_station_level(T.z))
-				SSblackbox.record_feedback("tally", "station_mess_created", 1, CB.name)
-		if (num_unloaded)
-			balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
-			playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
-			update_appearance()
-		else
-			to_chat(user, "<span class='warning'>[src] is empty!</span>")
+		unload_ammo(user)
 		return
 
 	if(bolt_type == BOLT_TYPE_LOCKING && bolt_locked)
@@ -402,6 +388,24 @@
 
 	recent_rack = world.time + rack_delay
 	rack(user)
+
+/obj/item/gun/ballistic/proc/unload_ammo(mob/living/user, forced = FALSE)
+	var/num_unloaded = 0
+	for(var/obj/item/ammo_casing/casing as anything in get_ammo_list(FALSE))
+		casing.forceMove(drop_location())
+		casing.bounce_away(FALSE, NONE)
+		num_unloaded++
+
+	if(!num_unloaded)
+		if(!forced)
+			balloon_alert(user, "it's empty!")
+		return
+
+	if(!forced)
+		balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
+
+	playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
+	update_appearance()
 
 ///Gets the number of bullets in the gun
 /obj/item/gun/ballistic/proc/get_ammo(countchambered = TRUE)

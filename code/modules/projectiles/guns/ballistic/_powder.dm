@@ -225,12 +225,12 @@
 
 /obj/item/gun/ballistic/powder/shoot_with_empty_chamber(mob/living/user)
 	if(cocked)
-		playsound(src, 'sound/combat/Ranged/muskclick.ogg', 50)
+		playsound(src, 'sound/combat/Ranged/flint_click.ogg', 50)
 
 /obj/item/gun/ballistic/powder/before_firing(atom/target, mob/user)
 	. = ..()
 	if(trigger_delay) // Sleeps process_fire which is ehhhh
-		playsound(src, 'sound/combat/Ranged/muskclick.ogg', 60)
+		playsound(src, 'sound/combat/Ranged/flint_click.ogg', 50)
 		sleep(trigger_delay)
 
 /obj/item/gun/ballistic/powder/get_spread(mob/living/user)
@@ -254,6 +254,12 @@
 		modified.bonus_accuracy += (perception - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
 	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
+
+	if(!bullet_rammed)
+		modified.range = 5
+		modified.damage *= 0.3
+		modified.speed *= 2
+		return
 
 	var/powder = reagents.get_reagent_amount(/datum/reagent/blastpowder)
 	var/filled_percent = powder / powder_required
@@ -307,10 +313,9 @@
 	var/wound = FALSE
 
 /obj/item/gun/ballistic/powder/wheellock/examine(mob/user)
-	. = list()
+	. = ..()
 	if(wound)
 		. += span_info("The wheel is wound.")
-	. += ..()
 
 /obj/item/gun/ballistic/powder/wheellock/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -345,10 +350,6 @@
 
 /obj/item/gun/ballistic/powder/wheellock/can_shoot(mob/living/user)
 	return (..() && wound)
-
-/obj/item/gun/ballistic/powder/wheellock/shoot_with_empty_chamber(mob/living/user)
-	if(cocked && wound)
-		playsound(src, 'sound/combat/Ranged/muskclick.ogg', 50)
 
 /obj/item/gun/ballistic/powder/wheellock/postfire_empty_checks(last_shot_succeeded)
 	wound = FALSE

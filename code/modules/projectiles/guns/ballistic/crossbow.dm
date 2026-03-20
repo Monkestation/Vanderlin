@@ -14,7 +14,7 @@
 	fire_sound = 'sound/combat/Ranged/crossbow-small-shot-02.ogg'
 
 	/// If the string is pulled back
-	var/string_pulled = TRUE
+	var/string_pulled = FALSE
 	/// Base time to pull back the string
 	var/pullback_time = 4 SECONDS
 	/// Can move while pulling back the string
@@ -28,6 +28,9 @@
 	base_icon_state = "slurbow"
 	possible_item_intents = list(/datum/intent/shoot/crossbow/slurbow, /datum/intent/arc/crossbow, INTENT_GENERIC)
 	slot_flags = ITEM_SLOT_HIP
+	w_class = WEIGHT_CLASS_NORMAL
+	grid_height = 64
+	grid_width = 64
 
 	projectile_damage_multiplier = 0.6
 
@@ -83,6 +86,10 @@
 		return
 
 	return ..()
+
+/obj/item/gun/ballistic/bow/cross/shoot_with_empty_chamber(mob/living/user)
+	if(string_pulled)
+		playsound(src, 'sound/combat/Ranged/flatbow-shot-02.ogg', 80)
 
 /obj/item/gun/ballistic/bow/cross/postfire_empty_checks(last_shot_succeeded)
 	. = ..()

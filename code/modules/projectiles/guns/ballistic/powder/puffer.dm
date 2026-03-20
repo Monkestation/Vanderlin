@@ -24,9 +24,12 @@
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured
 	sellprice = 0 //Yeah, Let's not sell this.
 
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
+
 	ramrod_type = null
 	cocked = TRUE
 	wound = TRUE
+	bullet_rammed = TRUE
 
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
 	. = ..()
