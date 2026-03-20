@@ -1871,9 +1871,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/knockout_modifier = 0
 	if(!H.cmode && !H.stat && H.body_position != LYING_DOWN && user.m_intent == MOVE_INTENT_SNEAK && (H.dir == REVERSE_DIR(get_dir(H, user))))
 		var/blunt = (user.used_intent.blade_class == BCLASS_BLUNT)
-		if(blunt || I.wbalance >= HARD_TO_DODGE)
+		var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
+		if((blunt || I.wbalance >= HARD_TO_DODGE) && attacker_sneaking > 10)
 			H.next_attack_msg += " [span_userdanger("SNEAK ATTACK!")]"
-			var/attacker_sneaking = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/sneaking)
 			// Get extra damage as a percent of 50% extra based on skill
 			var/percentage = attacker_sneaking / (SKILL_LEVEL_LEGENDARY * 10)
 			if(blunt)
