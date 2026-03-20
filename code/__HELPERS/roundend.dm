@@ -135,7 +135,7 @@
 
 	update_god_rankings()
 
-	var/outro_song = pick('sound/music/credits.ogg', 'sound/music/credits2.ogg')
+	var/outro_song = pick('sound/music/credits.ogg', /*'sound/music/credits2.ogg'*/)
 	for(var/mob/M in GLOB.mob_list)
 		M.do_game_over()
 		M.playsound_local(M, outro_song, 100, FALSE)
