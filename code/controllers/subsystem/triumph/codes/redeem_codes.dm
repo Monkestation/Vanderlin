@@ -13,7 +13,7 @@
 	reload_global_stored_codes()
 
 	if(!(code in GLOB.stored_codes))
-		browser_alert(usr, "Sorry, this code does not exist or has expired.", "Code Redemption", list("Close"))
+		tgui_alert(usr, "Sorry, this code does not exist or has expired.", "Code Redemption", list("Close"))
 		message_admins("[usr.ckey] has attempted to redeem an invalid code.")
 		return
 
@@ -26,12 +26,12 @@
 		// Check if user has already redeemed this code
 		var/list/redeemed_by = metadata["redeemed_by"]
 		if(user_ckey in redeemed_by)
-			browser_alert(usr, "You have already redeemed this code.", "Code Redemption", list("Close"))
+			tgui_alert(usr, "You have already redeemed this code.", "Code Redemption", list("Close"))
 			return
 
 		// Check expiry
 		if(metadata["expiry"] && world.time > metadata["expiry"])
-			browser_alert(usr, "Sorry, this code has expired.", "Code Redemption", list("Close"))
+			tgui_alert(usr, "Sorry, this code has expired.", "Code Redemption", list("Close"))
 			remove_code(code) // Clean up expired code
 			return
 
@@ -39,7 +39,7 @@
 		if(metadata["max_uses"])
 			var/current_uses = metadata["current_uses"] || 0
 			if(current_uses >= metadata["max_uses"])
-				browser_alert(usr, "Sorry, this code has reached its maximum number of redemptions.", "Code Redemption", list("Close"))
+				tgui_alert(usr, "Sorry, this code has reached its maximum number of redemptions.", "Code Redemption", list("Close"))
 				remove_code(code) // Clean up exhausted code
 				return
 
@@ -51,7 +51,7 @@
 	else
 		// Old style code - single use only
 		if(code in GLOB.redeemed_codes)
-			browser_alert(usr, "Sorry the code you've tried to redeem has already been redeemed", "Code Redemption", list("Close"))
+			tgui_alert(usr, "Sorry the code you've tried to redeem has already been redeemed", "Code Redemption", list("Close"))
 			return
 
 	var/triumph_amount = GLOB.stored_codes[code]
@@ -61,7 +61,7 @@
 		adjust_triumphs(usr.ckey, triumph_amount, TRUE, "Redeemed a Giveaway Code", FALSE, TRUE)
 		to_chat(usr, span_boldnotice("You have successfully redeemed a giveaway code for [triumph_amount] triumph\s."))
 	else
-		browser_alert(usr, "Error: Invalid code data. Please contact an administrator.", "Code Redemption", list("Close"))
+		tgui_alert(usr, "Error: Invalid code data. Please contact an administrator.", "Code Redemption", list("Close"))
 		message_admins("ERROR: Code [code] has invalid data: [triumph_amount]")
 		return
 

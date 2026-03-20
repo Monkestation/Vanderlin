@@ -768,7 +768,7 @@
 				doomed.reagents.trans_to(key, doomed.reagents.total_volume)
 				qdel(doomed)
 
-			var/continue_crafting = alert(user, "Crafting failed. Continue attempting to craft [requested_crafts - successful_crafts] more [name]?", "Continue Crafting?", "Yes", "No")
+			var/continue_crafting = tgui_alert(user, "Crafting failed. Continue attempting to craft [requested_crafts - successful_crafts] more [name]?", "Continue Crafting?", list("Yes", "No"))
 			if(continue_crafting != "Yes")
 				break
 

@@ -577,7 +577,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		to_chat(user, span_warning("The machine doesn't respond."))
 		return
 
-	if(alert(user, "Send Mail?",,"YES","NO") != "YES")
+	if(tgui_alert(user, "Send Mail?", "Confirm", list("YES","NO")) != "YES")
 		return
 
 	var/send_to = browser_input_text(user, "Where to? (Person or #number)", "Vanderlin", null)

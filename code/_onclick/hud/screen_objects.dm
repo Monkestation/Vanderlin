@@ -1568,7 +1568,7 @@
 			if(M.get_triumphs() <= 0)
 				to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
 				return
-			if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
+			if(tgui_alert(M, "Do you want to remember a TRIUMPH?", "Remember TRIUMPH", list("Yes", "No")) == "Yes")
 				if(M.add_stress(/datum/stress_event/triumph))
 					M.adjust_triumphs(-1)
 					M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
