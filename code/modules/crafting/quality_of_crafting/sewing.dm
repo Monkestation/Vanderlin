@@ -73,6 +73,15 @@
 	output = /obj/item/clothing/head/papakha
 	craftdiff = 1
 
+/datum/repeatable_crafting_recipe/sewing/hide/gnomecap
+	name = "dwarven tallhat"
+	requirements = list(
+		/obj/item/natural/hide = 1,
+		/obj/item/natural/fur = 2,
+	)
+	output = /obj/item/clothing/head/gnomecap
+	craftdiff = 1
+
 /// Cloth
 /datum/repeatable_crafting_recipe/sewing/rags
 	name = "rags"
