@@ -44160,12 +44160,6 @@
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/wood,
 /area/indoors/town/cell)
-"urU" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "urY" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = 615
@@ -127870,7 +127864,7 @@ wgG
 oSl
 oSl
 oSl
-urU
+ssk
 iKJ
 gEF
 oSl
