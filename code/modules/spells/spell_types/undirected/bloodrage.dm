@@ -33,7 +33,7 @@
 	invocation = "I AM GRAGGAR'S RAGE MADE MANIFEST!!"
 	var/mob/living/carbon/human/C = cast_on
 	if(C.handcuffed || C.legcuffed)
-		invocation = "THESE CHAINS CANNOT BOUND ME!"
+		invocation = "THESE CHAINS CANNOT BIND ME!"
 		C.uncuff()
 		C.visible_message(span_danger("[cast_on]'s chains fall to the ground!"))
 

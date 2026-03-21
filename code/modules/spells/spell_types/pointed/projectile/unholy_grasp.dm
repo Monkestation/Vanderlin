@@ -37,7 +37,7 @@
 	// 	projectile_type = /obj/projectile/magic/cannibalistic_vomit
 	// 	qdel(held_item)
 	else
-		to_chat(owner, "I'm missing needed organs to cast this..")
+		to_chat(owner, span_warning("I'm missing needed organs to cast this.."))
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
@@ -63,13 +63,13 @@
 
 /obj/projectile/magic/unholy_grasp/proc/ensnare(mob/living/carbon/C)		//Same code as net but with le flavor.
 	if(!C.legcuffed && C.num_legs >= 2)
-		visible_message("<span class='danger'>\The [src] ensnares [C] using some guts!</span>")
+		visible_message(span_danger("[src] ensnares [C] using some guts!"))
 		//This now ONLY gives the debuff, the unholy grasp leg cuff was bugged and couldn't be taken off
 
 		//C.legcuffed = src
 		//forceMove(C)
 		//C.update_inv_legcuffed()
-		to_chat(C, "<span class='danger'>\The [src] ensnares you!</span>")
+		to_chat(C, span_danger("The [src] ensnares you!"))
 		C.apply_status_effect(/datum/status_effect/debuff/netted, 20 SECONDS)
 		playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
 
@@ -94,8 +94,8 @@
 
 /obj/projectile/magic/unholy_muzzle/proc/silence(mob/living/carbon/C)
 	C.emote("gasp")
-	visible_message("<span class='danger'>\The [src] starts twisting [C] tongue!</span>")
-	to_chat(C, "<span class='danger'>\The [src] twits your tongue!</span>")
+	visible_message(span_danger("The [src] starts twisting [C] tongue!"))
+	to_chat(C, span_danger("The [src] twits your tongue!"))
 	C.apply_status_effect(/datum/status_effect/silenced, 15 SECONDS)
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
@@ -115,18 +115,17 @@
 // 	. = ..()
 // 	if(. != BULLET_ACT_HIT)
 // 		return
-// 	if(!iscarbon(hit_atom))	//if it gets caught or the target can't be cuffed.
-// 		return
 // 	vomit(hit_atom)
 
 
 // /obj/projectile/magic/cannibalistic_vomit/proc/vomit(mob/living/carbon/C)
-// 	visible_message("<span class='danger'>[C]'s stomach starts aching!</span>")
-// 	to_chat(C, "<span class='danger'>Your stomach hurts a lot!</span>")
+// 	visible_message(span_danger("[C]'s stomach starts aching!"))
+// 	to_chat(C, span_danger("Your stomach hurts a lot!"))
 // 	C.emote("gag")
 // 	var/turf/floor = get_turf(src)
 // 	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-// 	C.reagents.trans_to(spew, 30, transfered_by = src)
+// 	C.reagents.trans_to(CASTER, 30, transfered_by = src)
+// 	C.heal_wounds.toxic();
 // 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 
