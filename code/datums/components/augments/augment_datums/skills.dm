@@ -3,6 +3,7 @@
 
 /datum/augment/skill
 	var/list/skill_changes = list() // List of skill changes: list(/datum/attribute/skill/combat/swords = 1)
+	color = COLOR_ASSEMBLY_LBLUE
 	stability_cost = 0 // Skills are zero-cost by default
 
 /datum/augment/skill/on_install(mob/living/carbon/human/H)

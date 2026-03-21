@@ -60,6 +60,9 @@
 	hammers_per_item = initial(hammers_per_item)
 	hammered = FALSE
 
+/datum/artificer_recipe/proc/item_created(atom/created_item)
+	return
+
 /datum/artificer_recipe/proc/show_menu(mob/user)
 	user << browse(generate_html(user),"window=recipe;size=500x810")
 

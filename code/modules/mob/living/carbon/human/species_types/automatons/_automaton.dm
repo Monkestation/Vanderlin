@@ -2,29 +2,26 @@
 	race = /datum/species/automaton
 	footstep_type = FOOTSTEP_MOB_METAL
 	job = "Automaton"
+	pronouns = IT_ITS
 
 /mob/living/carbon/human/species/automaton/vessel/LateInitialize()
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel, /obj/item/reagent_containers/lux)
+	skin_tone = null
+	update_body()
+	update_body_parts()
 
 /mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
 	. = ..()
-	AddComponent(/datum/component/ghost_vessel)
-
-/mob/living/carbon/human/species/automaton/vessel/LateInitialize()
-	. = ..()
-	AddComponent(/datum/component/ghost_vessel, /obj/item/reagent_containers/lux)
-
-/mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
-	. = ..()
+	SEND_SIGNAL(src, COMSIG_AUGMENT_INSTALL, new /datum/augment/armor/copper(), src)
 	AddComponent(/datum/component/ghost_vessel)
 
 /datum/attribute_holder/sheet/job/species/automaton
 	raw_attribute_list = list(
 		STAT_STRENGTH = 5,
 		STAT_INTELLIGENCE = -9,
-		STAT_CONSTITUTION = 10,
-		STAT_ENDURANCE = 10,
+		STAT_CONSTITUTION = 6,
+		STAT_ENDURANCE = 6,
 		STAT_SPEED = -9,
 		STAT_FORTUNE = -3
 	)
@@ -32,8 +29,8 @@
 /datum/species/automaton
 	name = "Automaton"
 	id = SPEC_ID_AUTOMATON
-	desc = "The Brass Men of Heartfelt, engineered servants of the Makers Guild. \
-	These mechanical beings house souls bound to brass and steel, compelled to serve through ancient artifice. \
+	desc = "The Bronze Men of Heartfelt, engineered servants of the Makers Guild. \
+	These mechanical beings house souls bound to bronze and steel, compelled to serve through ancient artifice. \
 	\n\n\
 	Following the catastrophic events at Heartfelt, automatons are forbidden from wielding weapons - only tools may grace their metal hands. \
 	They exist in servitude to the Makers Guild and nobility, bound by a single immutable law: obey the last order given. \
@@ -42,8 +39,8 @@
 	\n\n\
 	WARNING: THIS IS A HEAVILY RESTRICTED WHITELIST-ONLY SPECIES. EXTENSIVE RP STANDARDS APPLY."
 
-	skin_tone_wording = "Brass Finish"
-	default_color = "B87333"
+	skin_tone_wording = "plating"
+	default_color = "B87A3D"
 
 	changesource_flags = WABBAJACK
 	meat = list()
@@ -157,6 +154,7 @@
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 
+
 /datum/species/automaton/check_roundstart_eligible()
 	return FALSE
 
@@ -165,12 +163,14 @@
 
 /datum/species/automaton/get_skin_list()
 	return sortList(list(
-		"Polished Brass" = "B87333",
-		"Tarnished Bronze" = "8C7853",
-		"Steel Grey" = "71797E",
+		"Tin Can" = "D4AF37",
 		"Copper Shine" = "B87A3D",
-		"Iron Dark" = "464646",
-		"Golden Alloy" = "D4AF37"
+		"Tarnished Bronze" = "89713B",
+		"Ironclad" = "A6A695",
+		"Steel Grey" = "9EC0D3",
+		"Sterling" = "98A4BD",
+		"Golden Alloy" = "D4AF37",
+		"Blacksteel" = "767B97",
 	))
 
 /datum/species/automaton/get_possible_names(gender = MALE)
