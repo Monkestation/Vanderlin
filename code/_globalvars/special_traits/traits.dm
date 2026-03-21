@@ -594,6 +594,7 @@
 
 /datum/special_trait/nimrod/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STAT_INTELLIGENCE, -4)
+	character.set_hair_style(/datum/sprite_accessory/hair/head/nimrod, FALSE)
 
 /datum/special_trait/ugly
 	name = "Ugly"

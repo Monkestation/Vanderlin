@@ -63,6 +63,11 @@
 	var/list/client_mobs_in_contents
 	var/spatial_grid_key
 
+	///Lazylist to keep track on the sources of illumination.
+	var/list/affected_dynamic_lights
+	///Highest-intensity light affecting us, which determines our visibility.
+	var/affecting_dynamic_lumi = 0
+
 /mutable_appearance/emissive_blocker
 
 /mutable_appearance/emissive_blocker/New()
@@ -111,6 +116,13 @@
 				managed_overlays = list(managed_overlays, flat)
 		else
 			managed_overlays = flat
+
+	if(light_system == MOVABLE_LIGHT)
+		AddComponent(/datum/component/overlay_lighting)
+
+	if(has_initial_mana_pool && can_have_mana_pool())
+		mana_pool = initialize_mana_pool()
+		after_manapool_init()
 
 	if(opacity)
 		AddElement(/datum/element/light_blocking)

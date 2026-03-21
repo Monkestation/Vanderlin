@@ -46,6 +46,12 @@
 
 #endif //ifdef REFERENCE_TRACKING
 
+
+// Displays static object lighting updates
+// Also enables some debug vars on sslighting that can be used to modify
+// How extensively we prune lighting corners to update
+#define VISUALIZE_LIGHT_UPDATES
+
 //#define VISUALIZE_ACTIVE_TURFS	//Highlights atmos active turfs in green
 #endif //ifdef TESTING
 
