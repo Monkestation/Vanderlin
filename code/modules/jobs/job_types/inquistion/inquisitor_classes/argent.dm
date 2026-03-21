@@ -21,7 +21,7 @@
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 20,
-		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/sewing = 20
 	)
@@ -132,6 +132,19 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/swords)
 
+	var/helmets = list("Barbute", "Sallet", "Armet", "Bucket Helm")
+	var/helmet_choice = browser_input_list(spawned, "CHOOSE YOUR HELMET.", "TAKE UP PSYDON'S HELMS.", helmets)
+
+	switch(helmet_choice)
+		if("Barbute")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/psydonbarbute, ITEM_SLOT_HEAD, TRUE)
+		if("Sallet")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/psysallet, ITEM_SLOT_HEAD, TRUE)
+		if("Armet")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/psydonhelm, ITEM_SLOT_HEAD, TRUE)
+		if("Bucket Helm")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/psybucket, ITEM_SLOT_HEAD, TRUE)
+
 	// Armor/archetype selection
 	var/armors = list("Cuir-Bouilli Armor", "Psydonian Cuirass")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "TAKE UP PSYDON'S MANTLE.", armors)
@@ -233,16 +246,11 @@
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
-	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	ring = /obj/item/clothing/ring/signet/silver
 	backpack_contents = list(
 		/obj/item/key/inquisition = 1,
-		/obj/item/rope/inqarticles/inquirycord = 1,
 		/obj/item/lockpickring/mundane = 1,
-		/obj/item/clothing/head/inqarticles/blackbag = 1,
-		/obj/item/inqarticles/garrote = 1,
-		/obj/item/grapplinghook = 1,
 		/obj/item/paper/inqslip/arrival/ortho = 1,
 		/obj/item/collar_detonator = 1,
 	)
