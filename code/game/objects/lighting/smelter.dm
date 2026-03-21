@@ -63,7 +63,7 @@
 			return
 
 	if(W.firefuel)
-		if(alert(usr, "Fuel \the [src] with [W]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
+		if(tgui_alert(usr, "Fuel \the [src] with [W]?", "Fuel", list("Fuel", "Smelt")) == "Fuel")
 			return ..()
 
 	if(istype(W, /obj/item/storage/crucible))

@@ -394,7 +394,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
 					bp?.lingering_pain += 10
-					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, reduce_crit = 10)
+					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, modifiers = list(CRIT_MOD_CHANCE = -10))
 					M.do_jitter_animation(100)
 				if(60)
 					M.do_jitter_animation(150)

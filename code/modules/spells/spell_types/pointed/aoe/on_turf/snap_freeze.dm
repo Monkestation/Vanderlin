@@ -41,7 +41,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "blueshatter"
 	light_power = 1
-	light_outer_range = 2
+	light_range = 2
 	light_color = "#4cadee"
 	duration = 0.5 SECONDS
 

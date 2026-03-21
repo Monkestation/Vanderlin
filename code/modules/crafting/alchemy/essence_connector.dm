@@ -244,4 +244,4 @@
 /obj/effect/temp_visual/essence_sparkle/Initialize(mapload, spark_color = "#4A90E2")
 	. = ..()
 	color = spark_color
-	set_light(1, 1, 1,  l_color = spark_color)
+	set_light(1, 1, l_color = spark_color)
