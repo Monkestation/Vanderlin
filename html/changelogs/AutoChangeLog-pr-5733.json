@@ -1,0 +1,1 @@
+{"author":"KevinfromHP","delete-after":true,"changes":[{"sound":"New foley for climbing ladders, walking on metal grilles, rope bridges, pipes, and Kybraxor"},{"code_imp":"Switches some existing usages of the squeak component to footstep override, as its functionality is closer to intended usage with footsteps"}]}

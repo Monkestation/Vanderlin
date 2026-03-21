@@ -562,5 +562,47 @@
                 "sound": "Changed Field/Catacombs area themes. Sorry!"
             }
         ]
+    },
+    "2026-03-21": {
+        "KevinfromHP": [
+            {
+                "balance": "Moved Malaguero Deserter to Adventurer"
+            },
+            {
+                "balance": "Moved Species Examine to Face instead of Body"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added stealth strikes, doing extra damage to unsuspecting targets (Not in combat mode, need to be sneaking behind them). Sneak attacks do up to ~50% extra damage and have up to ~15% extra chance to knockout based on sneak."
+            },
+            {
+                "refactor": "Big lighting refactor, somethings may be too dim or too bright, report issues."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the nimrod haircut"
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Chages alert prompts to use TGUI."
+            },
+            {
+                "code_imp": "Removes browser_alert."
+            }
+        ],
+        "Archeonan": [
+            {
+                "rscadd": "Bard Adventurer Class"
+            },
+            {
+                "rscdel": "Removed Pilgrim Bard"
+            },
+            {
+                "balance": "Gave bard light gambeson, short sword, and average sword skills"
+            }
+        ]
     }
 }
