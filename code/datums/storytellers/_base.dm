@@ -224,7 +224,7 @@
 	message_admins("Storyteller [mode.current_storyteller.name] purchased and triggered [bought_event] event, on [track] track, for [total_cost] cost.")
 	if(bought_event.roundstart)
 		SSgamemode.ran_roundstart = TRUE
-		if(!forced && (!mode.can_run_roundstart || (SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= ROUNDSTART_VALID_TIMEFRAME)))
+		if(!forced && (!mode.can_run_roundstart || (SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= 3 MINUTES)))
 			message_admins(span_boldred(span_big("THIS SHOULD NOT BE POSSIBLE, TELL KEVIN NOW")))
 			stack_trace("THIS SHOULD NOT BE POSSIBLE, TELL KEVIN NOW")
 			return
