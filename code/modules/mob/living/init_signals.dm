@@ -186,7 +186,7 @@
 		return
 	var/datum/wound/black_briar_curse/chest/root = has_wound(/datum/wound/black_briar_curse/chest)
 	if(root) // we already had a root, so remove the traits that even gave us this
-		root.remove_immunity()
+		root.remove_immunity(src)
 		return
 	var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
 	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)

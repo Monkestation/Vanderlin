@@ -109,4 +109,4 @@
 /// Black Briar time ratios
 #define BBC_STAGE_LATE 	0.7
 #define BBC_STAGE_MID	0.3
-#define BBC_STAGE_DETECTABLE	0.1
+#define BBC_STAGE_DETECTABLE	0.15
