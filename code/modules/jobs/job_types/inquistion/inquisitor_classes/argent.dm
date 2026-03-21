@@ -101,6 +101,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/argent
 
 	traits = list(
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 		TRAIT_INQUISITION,
 		TRAIT_SILVER_BLESSED,
@@ -119,34 +120,39 @@
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
 
 	switch(weapon_choice)
-		if("Blessed Psydonic Dagger")
+		if("Psydonic Dagger")
 			spawned.put_in_hands(new /obj/item/weapon/knife/dagger/silver/psydon(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/knife, ITEM_SLOT_BACK_R, TRUE)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/knives)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/knives)
 		if("Psydonic Handmace")
 			spawned.put_in_hands(new /obj/item/weapon/mace/cudgel/psy(get_turf(spawned)), TRUE)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/axes)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/axesmaces)
 		if("Psydonic Shortsword")
 			spawned.put_in_hands(new /obj/item/weapon/sword/short/psy(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BACK_R, TRUE)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/swords)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/swords)
 
 	// Armor/archetype selection
-	var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
-	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARCHETYPE.", "TAKE UP PSYDON'S DUTY.", armors)
+	var/armors = list("Cuir-Bouilli Armor", "Psydonian Cuirass")
+	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "TAKE UP PSYDON'S MANTLE.", armors)
 
 	switch(armor_choice)
-		if("Confessor - Slurbow, Leather Maillecoat")
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/psydon/confessor, ITEM_SLOT_HEAD, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/jacket/leathercoat/confessor, ITEM_SLOT_ARMOR, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/heavy/inq, ITEM_SLOT_SHIRT, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow, ITEM_SLOT_BACK_L, TRUE)
-		if("Arbalist - Crossbow, Lightweight Brigandine")
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/headband, ITEM_SLOT_HEAD, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
+		if("Cuir-Bouilli Armor")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/advanced, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/studded/psyaltrist, ITEM_SLOT_ARMOR, TRUE)
+		if("Psydonian Cuirass")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass/psydon, ITEM_SLOT_ARMOR, TRUE)
+
+	// Crossbow selection
+	var/crossbows = list("Crossbow", "Slurbow")
+	var/crossbow_choice = browser_input_list(spawned, "CHOOSE YOUR CROSSBOW.", "TAKE UP PSYDON'S AIM.", crossbows)
+
+	switch(crossbow_choice)
+		if("Crossbow")
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, ITEM_SLOT_BACK_L, TRUE)
-			REMOVE_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/arbalist)
+		if("Slurbow")
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow, ITEM_SLOT_BACK_L, TRUE)
 
 	// Bolt selection
 	var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
@@ -226,9 +232,9 @@
 	backr = /obj/item/storage/backpack/satchel/otavan
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
+	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
-	mask = /obj/item/clothing/face/facemask/steel/confessor
 	ring = /obj/item/clothing/ring/signet/silver
 	backpack_contents = list(
 		/obj/item/key/inquisition = 1,
