@@ -156,13 +156,13 @@ SUBSYSTEM_DEF(death_arena)
 
 /datum/controller/subsystem/death_arena/proc/open_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.open()
 
 /datum/controller/subsystem/death_arena/proc/close_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.close()
 
@@ -227,4 +227,4 @@ SUBSYSTEM_DEF(death_arena)
 
 /obj/structure/underworld/necra/Initialize()
 	. = ..()
-	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)

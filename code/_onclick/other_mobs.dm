@@ -102,15 +102,22 @@
 	if(user.cmode)
 		return
 
-	if(ishuman(src) && ishuman(user))
-		var/mob/living/carbon/human/target = src
-		var/datum/job/job = SSjob.GetJob(target.job)
+	if(ishuman(user))
+		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		if(length(user.return_apprentices()) >= user.return_max_apprentices())
 			return
-		if((target.age == AGE_CHILD || job?.type == /datum/job/vagrant) && target.mind && !target.is_apprentice())
-			to_chat(user, span_notice("You offer apprenticeship to [target]."))
-			user.make_apprentice(target)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		if(is_apprentice())
+			return
+		var/datum/job/my_job = mind?.assigned_role
+		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
+			return
+		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+		if(choice != CHOICE_CONFIRM)
+			return
+		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+			return
+		to_chat(user, span_notice("You offer apprenticeship to [src]."))
+		user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return

@@ -95,7 +95,7 @@
 	var/remove = browser_input_list(user, "Who will be relinquished of service?","Service Bell", all_servants)
 	if(remove)
 		if(remove == "Relinquish all")
-			var/choice = input(user,"Are you sure you want to clear the servant list?","Service Bell",null) as null|anything in list("Yes", "No")
+			var/choice = tgui_alert(user, "Are you sure you want to clear the servant list?", "Service Bell", list("Yes", "No"))
 			if(choice != "Yes")
 				return
 			for(var/s_name in servants)

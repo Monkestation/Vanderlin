@@ -29,7 +29,7 @@
 	name = "condensed light"
 	desc = "An orb of condensed light."
 	w_class = WEIGHT_CLASS_NORMAL
-	light_outer_range = 10
+	light_range = 10
 	light_color = LIGHT_COLOR_WHITE
 	force = 10
 	icon = 'icons/roguetown/rav/obj/cult.dmi'
@@ -44,7 +44,6 @@
 	slot_flags = ITEM_SLOT_HIP
 	max_integrity = 200
 	fuel = 10 MINUTES
-	light_depth = 0
 	light_height = 0
 
 /obj/item/flashlight/flare/light/getonmobprop(tag)

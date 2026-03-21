@@ -49,7 +49,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
@@ -93,7 +93,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_tag = initial(detail_tag)
 		update_appearance(UPDATE_OVERLAYS)
 		if(ismob(loc))
@@ -254,7 +254,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		detail_tag = initial(detail_tag)
@@ -298,7 +298,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_tag = initial(detail_tag)
 		update_appearance(UPDATE_ICON)
 		if(ismob(loc))

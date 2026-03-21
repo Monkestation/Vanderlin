@@ -61,9 +61,7 @@
 		var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
 		var/mote_power = clamp(4 + (skill_level - 3), 4, 7) // every step above journeyman should get us 1 more tile of brightness
 		mote = new
-		mote.set_light_range(new_outer_range = mote_power)
-		if(mote.light_system == STATIC_LIGHT)
-			mote.update_light()
+		mote.set_light(l_power = mote_power)
 
 		var/list/icon_dimensions = get_icon_dimensions(owner.icon)
 		var/orbitsize = (icon_dimensions["width"] + icon_dimensions["height"]) * 0.5
@@ -190,7 +188,7 @@
 	desc = "A tiny display of arcyne power used to illuminate."
 	icon = 'icons/roguetown/items/lighting.dmi'
 	icon_state = "wisp"
-	light_outer_range =  4
+	light_range =  4
 	light_color = "#3FBAFD"
 	SET_BASE_PIXEL(20, 0)
 

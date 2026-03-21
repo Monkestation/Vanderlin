@@ -488,3 +488,12 @@
 	)
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/keyrack
+	name = "key rack"
+	desc = "A cupboard for securing keys."
+	result_type = /obj/structure/closet/keyrack
+	required_materials = list(
+		/obj/item/natural/wood/plank = 2,
+		/obj/item/ingot/iron = 1
+	)
+	craftdiff = 2

@@ -41,7 +41,7 @@
 	icon_state = "rift"
 	randomdir = FALSE
 	duration = 1 SECONDS
-	light_outer_range = 2
+	light_range = 2
 	plane = GAME_PLANE_UPPER
 
 /obj/effect/temp_visual/mind_spike/warn

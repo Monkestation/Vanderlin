@@ -624,7 +624,7 @@
 		if(is_lord_job(mind.assigned_role))
 			return
 
-		var/appointment_type = browser_alert(usr, "Are you sure you want to coronate [src.real_name] as the new Monarch?", "Confirmation", DEFAULT_INPUT_CHOICES)
+		var/appointment_type = tgui_alert(usr, "Are you sure you want to coronate [src.real_name] as the new Monarch?", "Confirmation", DEFAULT_INPUT_CHOICES)
 		if(appointment_type == CHOICE_NO)
 			return
 
@@ -943,6 +943,7 @@
 /mob/living/carbon/human/species
 	var/race = null
 	var/attribute_sheet
+	var/headprice
 
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
@@ -965,6 +966,14 @@
 		if(SSterrain_generation.get_island_at_location(turf))
 			faction |= "islander"
 			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
+
+/mob/living/carbon/human/species/after_creation()
+	. = ..()
+	if(headprice)
+		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
+		head?.sellprice = headprice
+		head?.randomize_price()
+
 
 /**
  * Called when this human should be washed

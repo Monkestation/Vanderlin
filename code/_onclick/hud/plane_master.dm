@@ -31,6 +31,7 @@
 
 /atom/movable/screen/plane_master/openspace/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
+	add_filter("multiz_lighting_mask", 1, alpha_mask_filter(render_source = LIGHTING_RENDER_TARGET, flags = MASK_INVERSE))
 	add_filter("openspace_blur", 1, gauss_blur_filter(1))
 
 /atom/movable/screen/plane_master/floor

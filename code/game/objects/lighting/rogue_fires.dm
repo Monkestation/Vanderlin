@@ -203,7 +203,7 @@
 
 /obj/machinery/light/fueled/wallfire/candle/weak
 	light_power = 0.9
-	light_outer_range =  6
+	light_range =  6
 
 /obj/machinery/light/fueled/wallfire/candle/weak/l
 	SET_BASE_PIXEL(-32, 0)
@@ -216,9 +216,10 @@
 	name = "candle lamp"
 	icon_state = "candle"
 	base_state = "candle"
+	plane = GAME_PLANE_UPPER
 	layer = WALL_OBJ_LAYER+0.1
 	light_power = 0.9
-	light_outer_range =  6
+	light_range =  6
 
 /obj/machinery/light/fueled/torchholder
 	name = "sconce"

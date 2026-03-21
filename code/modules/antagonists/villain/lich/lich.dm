@@ -250,7 +250,7 @@
 	layer = HIGH_OBJ_LAYER
 	w_class = WEIGHT_CLASS_TINY
 	light_system = MOVABLE_LIGHT
-	light_outer_range = 3
+	light_range = 3
 	light_color = "#003300"
 	var/datum/antagonist/lich/possessor
 
@@ -268,3 +268,17 @@
 	var/offset = prob(50) ? -2 : 2
 	animate(src, pixel_x = offset, time = 0.2 DECISECONDS, loop = -1, flags = ANIMATION_RELATIVE|ANIMATION_PARALLEL) //start shaking
 	visible_message(span_warning("[src] begins to glow and shake violently!"))
+
+/obj/item/broken_phylactery
+	name = "exhausted phylactery"
+	desc = "A memento from a victory long past."
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "purified_soulstone"
+	item_state = "electronic"
+	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	layer = HIGH_OBJ_LAYER
+	w_class = WEIGHT_CLASS_TINY
+	light_system = MOVABLE_LIGHT
+	light_color = "#7f84b4"
+	resistance_flags = INDESTRUCTIBLE

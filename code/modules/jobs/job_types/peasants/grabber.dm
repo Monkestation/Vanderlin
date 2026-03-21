@@ -38,6 +38,7 @@
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
+	can_be_apprentice = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/grabber
 
