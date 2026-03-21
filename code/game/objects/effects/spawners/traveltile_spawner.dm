@@ -150,8 +150,6 @@
 	aportalid = "inq_exit"
 	aportalgoesto = "inq_enter"
 	required_trait = TRAIT_KNOW_INQUISITION_DOORS
-	can_gain_with_sight = FALSE
-	can_gain_by_walking = FALSE
 	check_other_side = TRUE
 
 /obj/structure/fluff/traveltile/exit_inquisition
