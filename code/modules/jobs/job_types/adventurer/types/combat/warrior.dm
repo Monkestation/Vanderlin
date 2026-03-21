@@ -51,7 +51,6 @@
 /datum/outfit/adventurer/sfighter
 	name = "Fighter (Adventurer)"
 	belt = /obj/item/storage/belt/leather/adventurer // new belt
-	r_hand = /obj/item/flashlight/flare/torch/prelit // they get back their missing torches
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 	)
