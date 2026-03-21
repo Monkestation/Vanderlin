@@ -253,7 +253,7 @@
 
 /obj/item/reagent_containers/food/snacks/comelette_slice
 	name = "caravaneer's omelette slice"
-	icon_state = "comlette_slice"
+	icon_state = "comelette_slice"
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 3
@@ -286,7 +286,7 @@
 
 /obj/item/reagent_containers/food/snacks/comelette_slice/veggie
 	name = "caravaneer's omelette slice"
-	icon_state = "veggie_comlette_slice"
+	icon_state = "veggie_comelette_slice"
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 3
