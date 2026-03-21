@@ -18,7 +18,7 @@
 	. = ..()
 	for(var/mob/living/carbon/target in viewers(4, get_turf(owner)))
 		if(istype(target.patron, /datum/patron/inhumen) || istype(target.patron, /datum/patron/alternate/great_hunt))
-			target.apply_status_effect(/datum/status_effect/buff/call_to_slaughter)	//Buffs inhumens and great hunters (Since graggar is part of their patreon)
+			target.apply_status_effect(/datum/status_effect/buff/call_to_slaughter)	//Buffs inhumens and great hunters (Since graggar is part of their pantheon)
 			continue
 		if(istype(target.patron, /datum/patron/psydon))
 			to_chat(target, span_danger("You feel a surge of cold wash over you; leaving your body as quick as it hit.."))	//No effect on Psydonians, Endure.
@@ -27,4 +27,4 @@
 			continue
 		if(target.mob_biotypes & MOB_UNDEAD)
 			continue
-		target.apply_status_effect(/datum/status_effect/debuff/call_to_slaughter)	//Debuffs non-inhumens/psydonians
+		target.apply_status_effect(/datum/status_effect/debuff/call_to_slaughter)	//Debuffs non-inhumens

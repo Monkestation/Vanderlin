@@ -33,9 +33,9 @@
 	else if(istype(held_item, /obj/item/organ/tongue))
 		projectile_type = /obj/projectile/magic/unholy_muzzle
 		qdel(held_item)
-	// else if(istype(held_item, /obj/item/organ/stomach))
-	// 	projectile_type = /obj/projectile/magic/cannibalistic_vomit
-	// 	qdel(held_item)
+	else if(istype(held_item, /obj/item/organ/stomach))
+		projectile_type = /obj/projectile/magic/cannibalistic_vomit
+		qdel(held_item)
 	else
 		to_chat(owner, span_warning("I'm missing needed organs to cast this.."))
 		reset_spell_cooldown()
@@ -105,28 +105,28 @@
 
 //Doesn't work, if you have any ideas you can try to reuse it or something
 
-// /obj/projectile/magic/cannibalistic_vomit
-// 	name = "cannibalistic vomit"
-// 	icon_state = "tentacle_end"
-// 	nodamage = TRUE
-// 	range = 4 //medium range
+/obj/projectile/magic/cannibalistic_vomit
+	name = "cannibalistic vomit"
+	icon_state = "tentacle_end"
+	nodamage = TRUE
+	range = 4 //medium range
 
-// /obj/projectile/magic/cannibalistic_vomit/on_hit(atom/hit_atom, datum/thrownthing/throwingdatum)
-// 	. = ..()
-// 	if(. != BULLET_ACT_HIT)
-// 		return
-// 	vomit(hit_atom)
+/obj/projectile/magic/cannibalistic_vomit/on_hit(atom/hit_atom)
+	. = ..()
+	if(. != BULLET_ACT_HIT)
+		return
+	vomit(hit_atom, )
 
 
-// /obj/projectile/magic/cannibalistic_vomit/proc/vomit(mob/living/carbon/C)
-// 	visible_message(span_danger("[C]'s stomach starts aching!"))
-// 	to_chat(C, span_danger("Your stomach hurts a lot!"))
-// 	C.emote("gag")
-// 	var/turf/floor = get_turf(src)
-// 	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-// 	C.reagents.trans_to(CASTER, 30, transfered_by = src)
-// 	C.heal_wounds.toxic();
-// 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
+/obj/projectile/magic/cannibalistic_vomit/proc/vomit(mob/living/carbon/C)
+	visible_message(span_danger("[C]'s stomach starts aching!"))
+	to_chat(C, span_danger("Your stomach hurts a lot!"))
+	C.emote("gag")
+	C.apply_effect(/datum/status_effect/incapacitating/immobilized, 3 SECONDS)
+	var/turf/floor = get_turf(src)
+	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
+	C.reagents.trans_to(spew, C.reagents.total_volume, transfered_by = src)
+	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 
 

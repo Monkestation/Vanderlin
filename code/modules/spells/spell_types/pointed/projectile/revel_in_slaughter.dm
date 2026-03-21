@@ -32,8 +32,8 @@
 	stagger(hit_atom)
 
 /obj/projectile/magic/revel_in_slaughter/proc/stagger(mob/living/carbon/C)
-	visible_message("<span class='danger'>\The [src] staggers [C] using boiling blood!</span>")
-	to_chat(C, "<span class='danger'>\The [src] staggers you!</span>")
+	visible_message(span_danger("The [src] staggers [C] using boiling blood!"))
+	to_chat(C, span_danger("The [src] staggers you!"))
 	C.spawn_gibs()
 	C.apply_status_effect(/datum/status_effect/debuff/exposed)
 	C.apply_status_effect(/datum/status_effect/eye_blur, 5 SECONDS)
