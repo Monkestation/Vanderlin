@@ -33,12 +33,6 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead/canUseStorage()
 	return FALSE
 
-/mob/dead/dust(just_ash, drop_items, force)	//ghosts can't be vaporised.
-	return
-
-/mob/dead/gib()		//ghosts can't be gibbed.
-	return
-
 /mob/dead/ConveyorMove()	//lol
 	return
 

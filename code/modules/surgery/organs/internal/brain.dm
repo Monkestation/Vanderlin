@@ -224,7 +224,7 @@
 	brainmob.name = L.real_name
 	brainmob.real_name = L.real_name
 	brainmob.timeofhostdeath = L.timeofdeath
-	brainmob.suiciding = suicided
+	brainmob.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(L.has_dna())
 		var/mob/living/carbon/C = L
 		if(!brainmob.stored_dna)

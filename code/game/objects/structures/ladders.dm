@@ -160,8 +160,6 @@
 
 	var/turf/target = get_turf(ladder)
 	user.zMove(target = target, z_move_flags = ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
-	if(user.m_intent != MOVE_INTENT_SNEAK)
-		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
 
 	if(grant_exp)
 		var/fitness_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/athletics)
@@ -169,6 +167,8 @@
 
 	if(!is_ghost)
 		show_final_fluff_message(user, ladder, going_up)
+		if(user.m_intent != MOVE_INTENT_SNEAK)
+			playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
 
 	// to avoid having players hunt for the pixels of a ladder that goes through several stories and is
 	// partially covered by the sprites of their mobs, a radial menu will be displayed over them.

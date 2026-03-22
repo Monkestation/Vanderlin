@@ -32,7 +32,8 @@
 	playsound(owner, 'sound/magic/churn.ogg', 80)
 	ADD_TRAIT(owner, TRAIT_NECRA_CURSE, "necra_ritual")
 	ADD_TRAIT(owner, TRAIT_BURIED_COIN_GIVEN, "necra_ritual")
-	owner.death()
+	var/mob/living/living_owner = owner
+	living_owner.death()
 
 	var/datum/objective/personal/embrace_death/objective = target
 	if(!QDELETED(objective) && !objective.completed)
