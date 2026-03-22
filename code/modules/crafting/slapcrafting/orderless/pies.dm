@@ -178,6 +178,13 @@
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit
 
+/datum/orderless_slapcraft/food/tart/chocolate
+	name = "Unbaked Chocolate Tart"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk = 3
+	)
+	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/chocolate
+
 /datum/orderless_slapcraft/food/pie/borowiki
 	name = "unbaked borowiki pie"
 	requirements = list(/obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki = 3

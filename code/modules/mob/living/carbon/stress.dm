@@ -184,15 +184,15 @@
 		existing_event.timer = initial(existing_event.timer) + world.time // RESET THE TIMER
 		if(existing_event.stacks >= existing_event.max_stacks)
 			return
-		var/pre_stack = existing_event.get_stress()
+		var/pre_stack = existing_event.get_stress(src)
 		existing_event.stacks++
-		var/post_stack = existing_event.get_stress()
+		var/post_stack = existing_event.get_stress(src)
 		adjust_stress(post_stack-pre_stack)
 		existing_event.on_apply(src)
 	else
 		new_event.timer += world.time
 		stressors += new_event
-		adjust_stress(new_event.get_stress())
+		adjust_stress(new_event.get_stress(src))
 		new_event.on_apply(src)
 	SEND_SIGNAL(src, COMSIG_MOB_ADD_STRESS, new_event)
 
@@ -205,7 +205,7 @@
 		var/datum/stress_event/stress_event = has_stress_type(stress_type)
 		if(stress_event)
 			stress_event.on_remove(src)
-			adjust_stress(-1 * stress_event.get_stress())
+			adjust_stress(-1 * stress_event.get_stress(src))
 			stressors -= stress_event
 			qdel(stress_event)
 
