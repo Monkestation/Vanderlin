@@ -166,7 +166,7 @@
 		return FALSE
 	var/mob/living/caster = miracle.owner
 
-	var/heal_percent = round(heal_amount * 0.01 / 2, 0.005)
+	var/heal_percent = round(heal_amount * 0.01 / 3, 0.005)
 	var/old_infection_percent = 0
 	switch(caster.patron?.type)
 		if(/datum/patron/divine/malum)
@@ -243,11 +243,10 @@
 	//show_in_book = FALSE
 	body_zones = list(BODY_ZONE_CHEST)
 	max_infection = BBC_TIME_MAX
-	// when it can try and infect a limb again, world.time + BBC_SPREAD_COOLDOWN
-	var/next_limb_infection = 0
 	layer_override = ARMOR_LAYER-0.1
 	var/atom/movable/screen/fullscreen/briar/overlay
 	COOLDOWN_DECLARE(blossom)
+	COOLDOWN_DECLARE(next_limb_infection)
 
 /datum/wound/black_briar_curse/chest/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -266,6 +265,9 @@
 	if(overlay)
 		affected.clear_fullscreen("briar")
 		overlay = null
+	var/datum/component/comp = affected.GetComponent(/datum/component/cursedrosa)
+	if(!QDELETED(comp))
+		qdel(comp)
 
 /datum/wound/black_briar_curse/chest/on_life()
 	. = ..()
@@ -301,18 +303,20 @@
 				if(prob(25))
 					owner.drop_all_held_items(FALSE)
 
-
 		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST))
 			overlay = owner.overlay_fullscreen("briar", /atom/movable/screen/fullscreen/briar, round(lerp(0, 9, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID))))
-			if(world.time > next_limb_infection && prob(4))
+			if(COOLDOWN_FINISHED(src, next_limb_infection) && prob(3))
 				var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-				uninfected_bodyparts -= root_network
+				uninfected_bodyparts = shuffle(uninfected_bodyparts - root_network)
 				var/mob/living/carbon/C = owner
-				var/obj/item/bodypart/BP = C.get_bodypart_complex(uninfected_bodyparts)
-				var/wound_type = get_black_briar_wound_type(BP?.body_zone)
-				if(wound_type)
-					BP.add_wound(wound_type, TRUE)
-				next_limb_infection = world.time + max_infection * BBC_STAGE_DETECTABLE
+				var/obj/item/bodypart/BP
+				for(var/zone in uninfected_bodyparts)
+					BP = C.get_bodypart(zone)
+					if(BP?.status == BODYPART_ORGANIC)
+						break
+					BP = null
+				BP?.add_wound(get_black_briar_wound_type(BP?.body_zone), TRUE)
+				COOLDOWN_START(src, next_limb_infection, max_infection * BBC_SPREAD_RATE)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar1)
 		var/_emote = pick("yawn", "cough", "clearthroat")
