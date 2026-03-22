@@ -197,3 +197,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	allowed_race = list(SPEC_ID_HALFLING, SPEC_ID_DWARF)  //Something malicious is brewing
 	min_cold_protection_temperature = -20
+
+/obj/item/clothing/head/gnomecap/Initialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)
