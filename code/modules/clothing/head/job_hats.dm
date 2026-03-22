@@ -188,7 +188,7 @@
 
 /obj/item/clothing/head/gnomecap
 	name = "dwarven tallhat"
-	desc = "A warm tall hat, made for colder climates."
+	desc = "A warm, tall hat, made for colder climates."
 	icon_state = "gnomecap"
 	item_state = "gnomecap"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
