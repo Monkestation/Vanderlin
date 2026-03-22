@@ -145,26 +145,6 @@
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 18)
 	..()
 
-/// temporary i think
-/datum/brain_trauma/mild/sick_cough
-	name = "Sick Cough"
-	desc = ""
-	scan_desc = ""
-	gain_text = span_warning("My throat itches incessantly...")
-	lose_text = span_notice("My throat stops itching.")
-
-/datum/brain_trauma/mild/sick_cough/on_life()
-	if(prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
-		owner.emote("sickcough", forced = TRUE)
-		if(prob(12))
-			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
-			owner.Immobilize(20)
-			owner.Stun(20)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "sickcough", null, null, FALSE, TRUE), 6)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "sickcough", null, null, FALSE, TRUE), 12)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "sickcough", null, null, FALSE, TRUE), 18)
-	..()
-
 /datum/brain_trauma/mild/expressive_aphasia
 	name = "Expressive Aphasia"
 	desc = ""

@@ -36,6 +36,21 @@
 
 /datum/wound/black_briar_curse/get_visible_name(mob/user)
 	. = ..()
+	if(IsAdminGhost(user))
+		var/infection_stage
+		switch(infection_percent)
+			if(BBC_STAGE_LATE to INFINITY)
+				infection_stage = "LATE-STAGE"
+			if(BBC_STAGE_MID to BBC_STAGE_LATE)
+				infection_stage = "MID-STAGE"
+			if(BBC_STAGE_DETECTABLE to BBC_STAGE_MID)
+				infection_stage = "DETECTABLE"
+			if(-INFINITY to BBC_STAGE_DETECTABLE)
+				infection_stage = "LATENT"
+		. += " - [span_briar("[PERCENT(infection_percent)]%")]"
+		. += " - [span_briar(infection_stage)]"
+		. += " - [span_adminnotice("<a href='byond://?src=[REF(owner)];remove_briar=[REF(src)]'>Remove</a>")]"
+		return
 	if(isobserver(user))
 		return
 	if(!isliving(user))
@@ -50,11 +65,11 @@
 	return infection_percent >= BBC_STAGE_MID
 
 /datum/wound/black_briar_curse/get_check_name(mob/user, advanced)
-	if(can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
-		return ..()
 	if(isobserver(user))
 		return ..()
-	if(advanced || can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
+	if(can_examine || infection_percent >= BBC_STAGE_DETECTABLE)
+		return ..()
+	if(advanced)
 		return ..()
 
 
@@ -214,11 +229,15 @@
 			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
 			bodypart_owner.lingering_pain += 20
 			owner.update_damage_overlays()
+			bodypart_owner.LoadComponent(/datum/component/cursedrosa)
 	else
 		var/orig = initial(mob_overlay)
 		if(mob_overlay != orig)
 			mob_overlay = orig
 			owner.update_damage_overlays()
+			var/datum/component/comp = bodypart_owner?.GetComponent(/datum/component/cursedrosa)
+			if(!QDELETED(comp))
+				qdel(comp)
 
 /datum/wound/black_briar_curse/chest
 	//show_in_book = FALSE
@@ -270,6 +289,19 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
+		if(prob(6) && !HAS_ANY_OF_TRAITS(owner, list(TRAIT_NOBREATH, TRAIT_SOOTHED_THROAT)))
+			cough()
+			if(prob(12))
+				to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
+				var/fit = 0
+				for(fit = rand(6,8), fit <= 2.1 SECONDS, fit += rand(5,8))
+					addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/wound/black_briar_curse/chest, cough)), fit)
+				owner.Immobilize(fit)
+				owner.Stun(fit)
+				if(prob(25))
+					owner.drop_all_held_items(FALSE)
+
+
 		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST))
 			overlay = owner.overlay_fullscreen("briar", /atom/movable/screen/fullscreen/briar, round(lerp(0, 9, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID))))
 			if(world.time > next_limb_infection && prob(4))
@@ -289,6 +321,12 @@
 		if(overlay)
 			owner.clear_fullscreen("briar")
 			overlay = null
+
+/datum/wound/black_briar_curse/chest/proc/cough()
+	owner.emote("sickcough", forced = TRUE)
+	var/p = round(max(0, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID)) * 20)
+	if(isturf(owner.loc) && prob(p) && owner.add_drip_floor(owner.loc, p))
+		owner.visible_message(span_danger("[src] coughs up blood!"), span_danger("I cough up blood!"))
 
 /datum/wound/black_briar_curse/chest/progress_infection()
 	..()

@@ -513,6 +513,7 @@
 			O.grabbee = src
 			O.limb_grabbed = BP
 			BP.grabbedby += O
+			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
 			if(item_override)
 				O.sublimb_grabbed = item_override
 			else
