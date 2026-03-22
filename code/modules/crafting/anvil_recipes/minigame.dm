@@ -33,7 +33,7 @@
 	total_notes = notes_left
 
 	// If skill level matches recipe difficulty, minigame by default should only contain easy notes
-	difficulty = clamp(ceil(recipe_difficulty - user.get_skill_level(selected_recipe.appro_skill) + EASY_DIFFICULTY_THRESHOLD + difficulty_modifier), 1, 7)
+	difficulty = clamp(ceil(recipe_difficulty - GET_MOB_SKILL_VALUE_OLD(user, selected_recipe.appro_skill) + EASY_DIFFICULTY_THRESHOLD + difficulty_modifier), 1, 7)
 	if(isdwarf(user) && difficulty > 1)
 		difficulty--
 

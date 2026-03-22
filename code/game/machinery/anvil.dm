@@ -118,7 +118,7 @@
 		var/recipe_skill = recipe.appro_skill
 		var/amt2raise = user.STAINT // It would be impossible to level up otherwise
 		var/boon = user.get_learning_boon(recipe_skill)
-		if(user.get_skill_level(recipe_skill) < 3)
+		if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
 			amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
 			user.mind.add_sleep_experience(recipe_skill, amt2raise * boon, FALSE)
 		else if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
@@ -127,7 +127,7 @@
 		// Breakthrough system for RNG success
 		if(quality_score != 100)
 			var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
-			var/total_chance = user.get_skill_level(recipe_skill) * user.STAPER/10
+			var/total_chance = GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) * GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)/10
 			if(istype(hammer))
 				total_chance += (1 / hammer.toolspeed)
 			if(prob((1 + total_chance)))

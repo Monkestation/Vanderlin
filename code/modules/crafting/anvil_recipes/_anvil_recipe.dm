@@ -8,7 +8,7 @@
 	/// Total number of materials (with quality) used. Quality divided among them.
 	var/num_of_materials = 1
 	/// The skill that will be taken into account when crafting.
-	var/appro_skill = /datum/skill/craft/blacksmithing
+	var/appro_skill = /datum/attribute/skill/craft/blacksmithing
 	/// The typepath of the materialwe need to start the recipe.
 	var/atom/required_material
 	/// The item created when the recipe is fulfilled. SHOULD BE A TYPEPATH
@@ -70,7 +70,7 @@
 
 	numberofhits++
 	accumulated_quality += quality_score
-	var/skill_level_to_add = user.get_skill_level(appro_skill)
+	var/skill_level_to_add = GET_MOB_SKILL_VALUE_OLD(user, appro_skill)
 	skill_quality += skill_level_to_add
 
 	var/progress_to_add = 100

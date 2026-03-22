@@ -1,6 +1,6 @@
 /datum/anvil_recipe/tools
 	abstract_type = /datum/anvil_recipe/tools
-	appro_skill = /datum/skill/craft/blacksmithing // already in parent just in here so people know
+	appro_skill = /datum/attribute/skill/craft/blacksmithing // already in parent just in here so people know
 	category = "Tools"
 
 // --------- TIN -----------
@@ -86,7 +86,7 @@
 
 /datum/anvil_recipe/tools/bronze/cogbronze
 	name = "Bronze Cog"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/bronze
 	craftdiff = 1
 	output_amount = 3
@@ -130,7 +130,7 @@
 
 /datum/anvil_recipe/tools/iron/blankeys
 	name = "Blank Custom Keys"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/key/custom
 	output_amount = 3
 	craftdiff = 0
@@ -147,7 +147,7 @@
 
 /datum/anvil_recipe/tools/iron/cogiron
 	name = "Iron Cog"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/iron
 	craftdiff = 1
 	output_amount = 2
@@ -269,7 +269,7 @@
 
 /datum/anvil_recipe/tools/steel/cogstee
 	name = "Steel Cogs"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/steel
 	craftdiff = 1
 	output_amount = 3

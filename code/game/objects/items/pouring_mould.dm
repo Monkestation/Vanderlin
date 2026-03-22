@@ -89,7 +89,7 @@
 		metal_amount = required_metal_amount - fufilled_metal
 
 	var/pour_quality = metal.get_recipe_quality()
-	var/user_skill_level = user.get_skill_level(/datum/skill/craft/blacksmithing, TRUE)
+	var/user_skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/smelting)
 	var/new_metal_ratio = metal_amount / (fufilled_metal + metal_amount)
 	average_quality = LERP(average_quality, pour_quality, new_metal_ratio)
 	average_skill = LERP(average_skill, user_skill_level, new_metal_ratio)
@@ -101,11 +101,11 @@
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
 
-	var/boon = user.get_learning_boon(/datum/skill/craft/blacksmithing)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/blacksmithing)
 	var/amt2raise = user.STAINT * 2 // Smelting is already a timesink, this is justified to accelerate levelling
 	amt2raise *= (metal_amount / required_metal_amount)
 	if(amt2raise > 0)
-		user.adjust_experience(/datum/skill/craft/blacksmithing, amt2raise * boon, FALSE)
+		user.adjust_experience(/datum/attribute/skill/craft/blacksmithing, amt2raise * boon, FALSE)
 
 	fufilled_metal += metal_amount
 	if(fufilled_metal >= required_metal_amount)

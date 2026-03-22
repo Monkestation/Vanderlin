@@ -83,10 +83,10 @@
 	if(.)
 		if(HAS_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED))
 			var/mob/living/living_user = user
-			var/boon = living_user.get_learning_boon(/datum/skill/craft/blacksmithing)
-			var/amt2raise = living_user.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
+			var/boon = living_user.get_learning_boon(/datum/attribute/skill/craft/blacksmithing)
+			var/amt2raise =  GET_MOB_ATTRIBUTE_VALUE(living_user, STAT_INTELLIGENCE)*2 // Smelting is already a timesink, this is justified to accelerate levelling
 			if(amt2raise > 0)
-				living_user.adjust_experience(/datum/skill/craft/blacksmithing, amt2raise * boon, FALSE)
+				living_user.adjust_experience(/datum/attribute/skill/craft/blacksmithing, amt2raise * boon, FALSE)
 				SEND_SIGNAL(living_user, COMSIG_ITEM_SMELTED)
 			REMOVE_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED, TRAIT_GENERIC)
 
@@ -116,7 +116,7 @@
 
 	smelting_item.forceMove(src)
 	contained_items[smelting_item] = SMELTERY_QUALITY_SPOIL
-	var/smelter_exp = user?.get_skill_level(/datum/skill/craft/blacksmithing, TRUE) // 0 to 6
+	var/smelter_exp = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/smelting) // 0 to 6
 	contained_items[smelting_item] = clamp(floor(rand(smelter_exp*15 + 10, max(30, smelter_exp*25))/SMELTING_DENOMINATOR), SMELTERY_QUALITY_SPOIL, SMELTERY_QUALITY_EXCELLENT) // Math explained below
 	/*
 	RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
