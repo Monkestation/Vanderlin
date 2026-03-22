@@ -214,10 +214,10 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
-/datum/stock/stockpile/piyata
+/datum/stock/stockpile/dragonfruit
 	name = "Piyatas"
 	desc = "A spiky fruit with a pink skin and white flesh."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/piyata
+	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 5
@@ -225,10 +225,10 @@
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
-/datum/stock/stockpile/anana
+/datum/stock/stockpile/pineapple
 	name = "Ananas"
 	desc = "A spiky, tangy fruit with golden skin."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/anana
+	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/pineapple
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 5
@@ -327,7 +327,7 @@
 /datum/stock/stockpile/sunflower
 	name = "Sunflowers"
 	desc = "Astratas favoured flower, said to carry some of her warmth and radiance."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/sunflower
+	item_type = /obj/item/reagent_containers/food/snacks/produce/sunflower
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 5
@@ -382,7 +382,7 @@
 /datum/stock/stockpile/cocaudo
 	name = "Cocaudos"
 	desc = "A strange and foreign vegetable that's near impossible to break into."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/vegetable/cocaudo
+	item_type = /obj/item/natural/cocaudo
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 5
