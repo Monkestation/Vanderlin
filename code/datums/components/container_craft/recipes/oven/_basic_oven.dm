@@ -331,7 +331,7 @@
 	cooked_smell = /datum/pollutant/food/scone
 
 /datum/container_craft/oven/choco_scone
-	name = "Baked Chocolate Scone"
+	name = "Chocolate Scone"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/scone_raw_choco = 1)
 	output = /obj/item/reagent_containers/food/snacks/scone_choco
 	cooked_smell = /datum/pollutant/food/scone

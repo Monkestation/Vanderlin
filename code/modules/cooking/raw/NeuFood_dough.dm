@@ -75,8 +75,8 @@
 		else
 			to_chat(user, span_warning("Put [src] on a table before working it!"))
 		return TRUE
-	else
-		to_chat(user, span_warning("Put [src] on a table before working it!"))
+/*	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))*/
 
 /obj/item/reagent_containers/food/snacks/dough_flat
 	name = "flatdough"
