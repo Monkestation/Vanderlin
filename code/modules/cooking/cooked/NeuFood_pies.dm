@@ -567,6 +567,7 @@
 	chopping_sound = TRUE
 	dropshrink = 0.9
 	nutrition = FRUITTART_NUTRITION
+	eat_effect = /datum/status_effect/buff/foodbuff
 
 /obj/item/reagent_containers/food/snacks/tart/cooked/avocado
 	name = "avocado tart"
@@ -621,6 +622,7 @@
 	faretype = FARE_FINE
 	portable = FALSE
 	nutrition = FRUITTART_NUTRITION * 0.25
+	eat_effect = /datum/status_effect/buff/foodbuff
 
 /obj/item/reagent_containers/food/snacks/tartslice/avocado
 	name = "avocado tart slice"
