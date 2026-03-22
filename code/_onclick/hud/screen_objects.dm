@@ -1555,10 +1555,12 @@
 			if(!length(M.stressors))
 				to_chat(M, span_info("I'm not feeling much of anything right now."))
 			for(var/datum/stress_event/stress_event in M.stressors)
-				if(!stress_event.can_show())
+				if(!stress_event.can_show(M))
 					continue
 				var/count = stress_event.stacks
-				var/ddesc = islist(stress_event.desc) ? pick(stress_event.desc) : stress_event.desc
+				var/ddesc = stress_event.get_desc(M)
+				if(islist(ddesc))
+					ddesc = pick(ddesc)
 				if(count > 1)
 					to_chat(M, "• [ddesc] (x[count])")
 				else
