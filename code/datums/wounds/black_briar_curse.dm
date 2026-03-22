@@ -248,6 +248,7 @@
 	var/atom/movable/screen/fullscreen/briar/overlay
 	COOLDOWN_DECLARE(blossom)
 	COOLDOWN_DECLARE(next_limb_infection)
+	var/blossoms = 0
 
 /datum/wound/black_briar_curse/chest/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -359,11 +360,14 @@
 	. = ..()
 	if(gibbed)
 		return
+	if(blossoms > 2)
+		return
 	if(!COOLDOWN_FINISHED(src, blossom))
 		return
 	COOLDOWN_START(src, blossom,  rand(10, 20) MINUTES)
 	if(istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
 		return
+	blossoms++
 	if(infection_percent >= BBC_STAGE_MID)
 		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
 		playsound(affected, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
@@ -393,9 +397,9 @@
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
 	if(!bodypart_owner.skeletonized)
 		playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
-		affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+		affected.visible_message(span_danger("Black Briar blossoms from [affected]'s body!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
 		affected.spawn_gibs(FALSE)
-	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=13, seconds_to_grow=3, delete_after_growing = TRUE)
+	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=15, seconds_to_grow=3, delete_after_growing = TRUE)
 	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected.real_name] [ADMIN_PP(affected)]")
 	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
 	if(istype(root_vine))
