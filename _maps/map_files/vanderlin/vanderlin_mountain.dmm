@@ -4394,7 +4394,9 @@
 "atx" = (
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red{
 	dir = 8;
-	health = 625
+	health = 625;
+	maxHealth = 625;
+	name = "Bloodwing"
 	},
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -5353,7 +5355,9 @@
 "axm" = (
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red{
 	dir = 4;
-	health = 625
+	health = 625;
+	maxHealth = 625;
+	name = "Solarwing"
 	},
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
@@ -7305,7 +7309,9 @@
 /area/indoors/town/church/inquisition)
 "aFX" = (
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red{
-	health = 625
+	health = 625;
+	maxHealth = 625;
+	name = "Ironwing"
 	},
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
