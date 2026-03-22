@@ -547,6 +547,11 @@
 	overlay_state = "fill_tart"
 	glaze_color = "#f0a1c2"
 
+/obj/item/reagent_containers/food/snacks/raw_tart/chocolate
+	name = "uncooked chocolate tart"
+	overlay_state = "fill_tart"
+	glaze_color = "#612D08"
+
 /*	........   Tart Cooked   ................ */
 /obj/item/reagent_containers/food/snacks/tart
 	name = "tart"
@@ -562,6 +567,7 @@
 	chopping_sound = TRUE
 	dropshrink = 0.9
 	nutrition = FRUITTART_NUTRITION
+	eat_effect = /datum/status_effect/buff/foodbuff
 
 /obj/item/reagent_containers/food/snacks/tart/cooked/avocado
 	name = "avocado tart"
@@ -599,6 +605,13 @@
 	tastes = list("piyata and butterdough" = 1)
 	slice_path = /obj/item/reagent_containers/food/snacks/tartslice/dragonfruit
 
+/obj/item/reagent_containers/food/snacks/tart/cooked/chocolate
+	name = "chocolate tart"
+	desc = "A tart filled with rich, sweet chocolate."
+	icon_state = "choctart"
+	tastes = list("chocolate and butterdough" = 1)
+	slice_path = /obj/item/reagent_containers/food/snacks/tartslice/chocolate
+
 /obj/item/reagent_containers/food/snacks/tartslice
 	name = "tart slice"
 	desc = "A small slice of tart."
@@ -609,6 +622,7 @@
 	faretype = FARE_FINE
 	portable = FALSE
 	nutrition = FRUITTART_NUTRITION * 0.25
+	eat_effect = /datum/status_effect/buff/foodbuff
 
 /obj/item/reagent_containers/food/snacks/tartslice/avocado
 	name = "avocado tart slice"
@@ -635,3 +649,8 @@
 	name = "piyata tart slice"
 	icon_state = "dragonfruittart_slice"
 	tastes = list("piyata and butterdough" = 1)
+
+/obj/item/reagent_containers/food/snacks/tartslice/chocolate
+	name = "chocolate tart slice"
+	icon_state = "choctart_slice"
+	tastes = list("chocolate and butterdough" = 1)
