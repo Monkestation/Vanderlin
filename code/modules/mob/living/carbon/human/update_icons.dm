@@ -131,39 +131,40 @@ GLOBAL_PROTECT(no_child_icons)
 			update_body()
 		var/bleed_checker = FALSE
 		var/list/wound_overlays
-		if(BP.brutestate)
-			var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[BP.brutestate]0", -DAMAGE_LAYER)
-			damage_overlay.color = bloodcolor
-			damage_overlays += damage_overlay
-			var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[BP.brutestate]0", -LEG_DAMAGE_LAYER)
-			legdam_overlay.color = bloodcolor
-			legdam_overlays += legdam_overlay
-			var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[BP.brutestate]0", -ARM_DAMAGE_LAYER)
-			armdam_overlay.color = bloodcolor
-			armdam_overlays += armdam_overlay
-		if(BP.burnstate)
-			var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_0[BP.burnstate]", -DAMAGE_LAYER)
-			damage_overlay.color = bloodcolor
-			damage_overlays += damage_overlay
-			var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_0[BP.burnstate]", -LEG_DAMAGE_LAYER)
-			legdam_overlay.color = bloodcolor
-			legdam_overlays += legdam_overlay
-			var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_0[BP.burnstate]", -ARM_DAMAGE_LAYER)
-			armdam_overlay.color = bloodcolor
-			armdam_overlays += armdam_overlay
-		if(BP.get_bleed_rate())
-			bleed_checker = TRUE
-			if(BP.bandage)
-				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
-				damage_overlay.color = BP.bandage.color
+		if(!BP.skeletonized)
+			if(BP.brutestate)
+				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[BP.brutestate]0", -DAMAGE_LAYER)
+				damage_overlay.color = bloodcolor
 				damage_overlays += damage_overlay
-				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_b", -LEG_DAMAGE_LAYER)
-				legdam_overlay.color = BP.bandage.color
+				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_[BP.brutestate]0", -LEG_DAMAGE_LAYER)
+				legdam_overlay.color = bloodcolor
 				legdam_overlays += legdam_overlay
-				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_b", -ARM_DAMAGE_LAYER)
-				armdam_overlay.color = BP.bandage.color
+				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_[BP.brutestate]0", -ARM_DAMAGE_LAYER)
+				armdam_overlay.color = bloodcolor
 				armdam_overlays += armdam_overlay
-		wound_overlays = list()
+			if(BP.burnstate)
+				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_0[BP.burnstate]", -DAMAGE_LAYER)
+				damage_overlay.color = bloodcolor
+				damage_overlays += damage_overlay
+				var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_0[BP.burnstate]", -LEG_DAMAGE_LAYER)
+				legdam_overlay.color = bloodcolor
+				legdam_overlays += legdam_overlay
+				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_0[BP.burnstate]", -ARM_DAMAGE_LAYER)
+				armdam_overlay.color = bloodcolor
+				armdam_overlays += armdam_overlay
+			if(BP.get_bleed_rate())
+				bleed_checker = TRUE
+				if(BP.bandage)
+					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
+					damage_overlay.color = BP.bandage.color
+					damage_overlays += damage_overlay
+					var/mutable_appearance/legdam_overlay = mutable_appearance(limb_icon, "legdam_[BP.body_zone]_b", -LEG_DAMAGE_LAYER)
+					legdam_overlay.color = BP.bandage.color
+					legdam_overlays += legdam_overlay
+					var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_b", -ARM_DAMAGE_LAYER)
+					armdam_overlay.color = BP.bandage.color
+					armdam_overlays += armdam_overlay
+			wound_overlays = list()
 		for(var/datum/wound/wound as anything in BP.wounds)
 			if(!wound.mob_overlay)
 				continue
