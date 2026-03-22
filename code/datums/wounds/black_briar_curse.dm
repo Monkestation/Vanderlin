@@ -245,9 +245,9 @@
 	max_infection = BBC_TIME_MAX
 	// when it can try and infect a limb again, world.time + BBC_SPREAD_COOLDOWN
 	var/next_limb_infection = 0
-	var/dying = FALSE
 	layer_override = ARMOR_LAYER-0.1
 	var/atom/movable/screen/fullscreen/briar/overlay
+	COOLDOWN_DECLARE(blossom)
 
 /datum/wound/black_briar_curse/chest/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -352,12 +352,16 @@
 
 /datum/wound/black_briar_curse/chest/on_death(mob/living/affected, gibbed)
 	. = ..()
-	if(dying || gibbed)
+	if(gibbed)
+		return
+	if(!COOLDOWN_FINISHED(src, blossom))
+		return
+	COOLDOWN_START(src, blossom,  rand(10, 20) MINUTES)
+	if(istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
 		return
 	if(infection_percent >= BBC_STAGE_MID)
 		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
 		playsound(affected, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
-	dying = TRUE
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
 	if(QDELETED(affected))
@@ -382,24 +386,20 @@
 		tumor.try_sprout()
 		if(prob(25))
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
-	playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
-	affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
-	affected.spawn_gibs(FALSE)
+	if(!bodypart_owner.skeletonized)
+		playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
+		affected.visible_message(span_danger("Briars burst from [affected]'s flesh!"), blind_message=span_danger("I hear the sickening churning of flesh!"))
+		affected.spawn_gibs(FALSE)
 	var/datum/component/vine_controller/controller = affected.AddComponent(/datum/component/vine_controller, /obj/structure/vine/black_briar, max_vines=13, seconds_to_grow=3, delete_after_growing = TRUE)
-	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected]'s death [ADMIN_PP(affected)]")
+	message_admins("BLACK BRIAR at [ADMIN_VERBOSEJMP(T)], caused by [affected.real_name] [ADMIN_PP(affected)]")
 	var/obj/structure/vine/black_briar/root_vine = controller.vines[1]
 	if(istype(root_vine))
 		root_vine.permanent_buckle = TRUE
 		root_vine.dir = affected.dir
 		root_vine.buckle_mob(affected, TRUE)
 	var/obj/item/organ/brain/brain = affected.getorgan(/obj/item/organ/brain)
-	var/obj/item/organ/eyes/eyes = affected.getorganslot(ORGAN_SLOT_EYES)
-	var/obj/item/organ/lungs/lungs = affected.getorganslot(ORGAN_SLOT_LUNGS)
 	brain?.brain_death = TRUE
-	if(eyes)
-		qdel(eyes)
-	if(lungs)
-		qdel(lungs)
+	affected.LoadComponent(/datum/component/cursedrosa)
 
 /datum/wound/black_briar_curse/head
 	show_in_book = FALSE

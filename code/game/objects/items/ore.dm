@@ -141,6 +141,11 @@
 		"embedded_fall_chance" = 0,
 	)
 
+	max_integrity = 500
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+
 /obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot & ITEM_SLOT_MOUTH)
