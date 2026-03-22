@@ -100,10 +100,8 @@
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 //------------------------
-//Force vomit with purging chemicals
+//Simulates puking, with removing all reagents from body
 //------------------------
-
-//Doesn't work, if you have any ideas you can try to reuse it or something
 
 /obj/projectile/magic/cannibalistic_vomit
 	name = "cannibalistic vomit"
