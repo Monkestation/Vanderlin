@@ -21,8 +21,9 @@
 	var/list/datum/weakref/root_network
 
 	var/max_infection = BBC_TIME_MAX_LIMB
-	// this goes up every onlife. once the total reaches 30 MINUTES, you are dead. non-root infection contributes to the root, nasty.
+	// this goes up every onlife.
 	var/infection = 0
+	// this is redefined every on-life, it only exists for convenience
 	var/infection_percent = 0
 	// used to skip rebuilds when they're unnecessary
 	var/can_rebuild = TRUE
