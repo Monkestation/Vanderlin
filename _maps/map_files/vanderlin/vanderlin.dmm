@@ -344,6 +344,7 @@
 /area/outdoors/town/noble_manor/blue)
 "akf" = (
 /obj/structure/chair/bench/throne,
+/obj/effect/landmark/start/puritan,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "akk" = (
@@ -9150,6 +9151,9 @@
 	dir = 4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
+/obj/effect/landmark/start/adept{
+	dir = 4
+	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "emu" = (
@@ -13476,6 +13480,9 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
+	},
+/obj/effect/landmark/start/orthodoxist{
+	dir = 1
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
@@ -36548,6 +36555,9 @@
 /obj/structure/chair/bench/church/r{
 	dir = 1
 	},
+/obj/effect/landmark/start/orthodoxist{
+	dir = 1
+	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "qVQ" = (
@@ -39820,6 +39830,9 @@
 	dir = 8
 	},
 /obj/structure/chair/bench/church/r{
+	dir = 1
+	},
+/obj/effect/landmark/start/orthodoxist{
 	dir = 1
 	},
 /turf/open/floor/churchmarble/violet,
@@ -47266,6 +47279,9 @@
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
 	},
+/obj/effect/landmark/start/adept{
+	dir = 4
+	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "vGI" = (
@@ -50879,6 +50895,18 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"xex" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/effect/landmark/start/absolver{
+	dir = 8
+	},
+/turf/open/floor/churchmarble/violet,
+/area/indoors/town/church/inquisition)
 "xeA" = (
 /obj/structure/pillory/church,
 /turf/open/floor/churchrough,
@@ -51299,6 +51327,9 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
+	},
+/obj/effect/landmark/start/orthodoxist{
+	dir = 1
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
@@ -124859,7 +124890,7 @@ qFx
 qgA
 qgA
 wSv
-wNM
+xex
 rqr
 aOv
 aOv
