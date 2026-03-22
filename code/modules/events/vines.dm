@@ -363,16 +363,16 @@
 	desc = span_briar("Some victories come at a horrible price.")
 	icon_state = "BriarLight1"
 	base_icon_state = "Briar"
-	max_integrity = 300
 	buckle_prevents_pull = TRUE
-	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 	buckle_lying = STANDING_UP
 	var/permanent_buckle = FALSE
 	variance = 1
 	max_energy = 1
 
+	max_integrity = 300
 	resistance_flags = FIRE_PROOF
 	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 
 /obj/structure/vine/black_briar/Initialize()
 	. = ..()
