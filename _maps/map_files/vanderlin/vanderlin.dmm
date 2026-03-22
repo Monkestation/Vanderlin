@@ -7130,6 +7130,9 @@
 "doH" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/candle/yellow,
+/obj/machinery/light/fueled/wallfire/candle/lamp{
+	pixel_y = 40
+	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/halls/w)
 "doM" = (
@@ -22608,7 +22611,6 @@
 /area/under/town/basement)
 "kGM" = (
 /obj/structure/door,
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/cobble,
 /area/under/town/basement)
@@ -23184,10 +23186,6 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
-"kVZ" = (
-/obj/structure/bars/cemetery,
-/turf/open/openspace,
-/area/outdoors/town/roofs)
 "kWb" = (
 /obj/structure/chair/bench/couch/right/lord_secondary{
 	dir = 8
@@ -28984,10 +28982,6 @@
 "nBt" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/statue/gargoyle{
-	pixel_y = 8;
-	pixel_x = -1
-	},
-/obj/machinery/light/fueled/torchholder{
 	pixel_y = 8
 	},
 /turf/open/floor/carpet/royalblack,
@@ -44166,12 +44160,6 @@
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/wood,
 /area/indoors/town/cell)
-"urU" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/mob/living/simple_animal/hostile/retaliate/gator,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "urY" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = 615
@@ -45160,13 +45148,6 @@
 	},
 /turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
-"uOj" = (
-/obj/item/rotation_contraption/shaft,
-/obj/structure/rotation_piece/cog/large,
-/turf/open/water/river{
-	dir = 8
-	},
-/area/indoors/town/dwarfin)
 "uOw" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 1
@@ -49890,7 +49871,6 @@
 /obj/structure/lever/hidden/keep{
 	redstone_id = "ClockPathPassage"
 	},
-/obj/structure/water_pipe,
 /turf/closed/wall/mineral/stone,
 /area/under/town/basement)
 "wJW" = (
@@ -74718,7 +74698,7 @@ smk
 uVU
 vnJ
 oEG
-uOj
+pot
 uVU
 smk
 cQu
@@ -113103,10 +113083,10 @@ iOl
 mFi
 hZn
 czz
-xkP
-wrm
-wrm
-vbp
+hZn
+tGt
+tGt
+hZn
 czz
 gwN
 ujA
@@ -113306,8 +113286,8 @@ mFi
 hZn
 hZn
 hZn
-evL
-evL
+hZn
+hZn
 hZn
 hZn
 hZn
@@ -127884,7 +127864,7 @@ wgG
 oSl
 oSl
 oSl
-urU
+ssk
 iKJ
 gEF
 oSl
@@ -161976,7 +161956,7 @@ biy
 biy
 biy
 biy
-kVZ
+biy
 biy
 gLs
 bKi

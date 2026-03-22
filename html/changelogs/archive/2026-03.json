@@ -604,5 +604,40 @@
                 "balance": "Gave bard light gambeson, short sword, and average sword skills"
             }
         ]
+    },
+    "2026-03-22": {
+        "KevinfromHP": [
+            {
+                "sound": "New foley for climbing ladders, walking on metal grilles, rope bridges, pipes, and Kybraxor"
+            },
+            {
+                "code_imp": "Switches some existing usages of the squeak component to footstep override, as its functionality is closer to intended usage with footsteps"
+            },
+            {
+                "rscadd": "Rounds are now 20 minutes longer"
+            },
+            {
+                "balance": "Day is 2 hours longer than it used to be"
+            },
+            {
+                "sound": "Added 4 new songs, 2 to the title screen and 2 to the credits. Songs by burialgoods."
+            }
+        ],
+        "Casperclone1": [
+            {
+                "rscadd": "Bandits can now become rogue mages!"
+            },
+            {
+                "rscdel": "As they are now no longer worshipping Zizo they have lost their ability to speak to the dead"
+            }
+        ],
+        "The-Awful": [
+            {
+                "bugfix": "fixed food sprites"
+            },
+            {
+                "bugfix": "salad no longer craftable on bowls with liquid in them"
+            }
+        ]
     }
 }
