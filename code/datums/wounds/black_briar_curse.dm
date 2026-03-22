@@ -366,7 +366,7 @@
 		return
 	if(infection_percent >= BBC_STAGE_MID)
 		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
-		playsound(affected, 'sound/misc/briarcursewood.ogg', 100, FALSE, 1)
+		playsound(affected, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
 	if(QDELETED(affected))
