@@ -98,6 +98,7 @@
 
 	enflamed_icon = "widefire"
 
+	inherent_biotypes = MOB_ROBOTIC | MOB_HUMANOID
 	exotic_bloodtype = /datum/blood_type/oil
 
 	bleed_mod = 0.2 // 80% less bleed rate from injuries
@@ -163,13 +164,13 @@
 
 /datum/species/automaton/get_skin_list()
 	return sortList(list(
-		"Tin Can" = "D4AF37",
+		"Tin Can" = "ABE8E6",
 		"Copper Shine" = "B87A3D",
-		"Tarnished Bronze" = "89713B",
+		"Tarnished Bronze" = "CCA241",
 		"Ironclad" = "A6A695",
 		"Steel Grey" = "9EC0D3",
-		"Sterling" = "98A4BD",
-		"Golden Alloy" = "D4AF37",
+		"Sterling" = "CBD6D4",
+		"Golden Alloy" = "DBC70C"
 		"Blacksteel" = "767B97",
 	))
 
