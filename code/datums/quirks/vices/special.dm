@@ -473,7 +473,6 @@
 	customization_label = "Why do they suspect me?"
 	customization_placeholder = "Spotted eating organs."
 
-
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
 	var/reason = prefs?.quirk_customizations[type]
 	if(!reason)
