@@ -186,9 +186,9 @@
 	desc = "A golden tropical fruit bursting with sweet, juicy flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/mango
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 9
+	withdraw_price = 23
+	export_price = 18
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -197,9 +197,9 @@
 	desc = "A tropical fruit with a thick purple rind and white segments within."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 9
+	withdraw_price = 23
+	export_price = 18
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -208,9 +208,9 @@
 	desc = "A verdant tropical fruit known for its smooth and creamy flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/avocado
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 6
+	withdraw_price = 15
+	export_price = 12
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -219,9 +219,9 @@
 	desc = "A spiky fruit with a pink skin and white flesh."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 9
+	withdraw_price = 23
+	export_price = 18
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -230,9 +230,9 @@
 	desc = "A spiky, tangy fruit with golden skin."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/pineapple
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 9
+	withdraw_price = 23
+	export_price = 18
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -263,9 +263,9 @@
 	desc = "A variety of sweet berry native to Wintermare."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 4
+	withdraw_price = 10
+	export_price = 8
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -384,9 +384,9 @@
 	desc = "A strange and foreign vegetable that's near impossible to break into."
 	item_type = /obj/item/natural/cocaudo
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 5
-	export_price = 4
+	payout_price = 8
+	withdraw_price = 20
+	export_price = 16
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -417,9 +417,9 @@
 	desc = "A mushroom that grows close to the coastline, known for a briny flavor."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/caveweep
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 6
-	export_price = 4
+	payout_price = 6
+	withdraw_price = 18
+	export_price = 12
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
@@ -428,9 +428,9 @@
 	desc = "A type of lichen known for it's fiery effects on the palate."
 	item_type = /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
 	held_items = 2
-	payout_price = 2
-	withdraw_price = 6
-	export_price = 4
+	payout_price = 6
+	withdraw_price = 18
+	export_price = 12
 	importexport_amt = 20
 	stockpile_id = STOCK_FOOD
 
