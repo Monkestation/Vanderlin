@@ -516,7 +516,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/recall_targets(mob/recipient, window=1, var/type)
 	var/output
 	if(type == "Ordos")
-		output = "<B>Ordo Sanctae Cruoris [SSmapping.config.map_name] Scouting Report</B><br>"
+		output = "<B>Ordo Venatari [SSmapping.config.map_name] Scouting Report</B><br>"
 		for (var/mob/living/carbon in GLOB.mob_living_list)
 			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy)))))
 				output += "<br><b>[carbon.real_name]</b>"
