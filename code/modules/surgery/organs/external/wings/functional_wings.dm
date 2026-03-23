@@ -102,8 +102,8 @@
 	playsound(human, 'sound/mobs/wingflap.ogg', 75, FALSE)
 	to_chat(human, span_notice("I beat my wings and begin to hover..."))
 	if(flight_time)
-		to_chat(owner, span_danger("I can only stay airborne for [flight_time / 10] seconds!"))
-		flight_timer = addtimer(CALLBACK(src, PROC_REF(stop_flying), TRUE), flight_time, TIMER_STOPPABLE)
+		to_chat(owner, span_userdanger("I can only stay airborne for [flight_time / 10] seconds!"))
+		flight_timer = addtimer(CALLBACK(src, PROC_REF(stop_flying), human, TRUE), flight_time, TIMER_STOPPABLE)
 
 	fly?.build_all_button_icons(update_flags = UPDATE_BUTTON_BACKGROUND)
 
@@ -122,13 +122,15 @@
 	QDEL_NULL(shadow)
 
 	if(!drop_flyer)
-		to_chat(human, span_notice("You settle gently back onto the ground..."))
+		to_chat(human, span_notice("I settle gently back onto the ground..."))
 		var/turf/old_turf = get_turf(human)
 		var/levels_fallen = 0 // sanity to prevent infinite while loop
 		while(levels_fallen < length(SSmapping.multiz_levels) && human.zMove(dir = DOWN, z_move_flags = ZMOVE_CHECK_PULLS))
 			levels_fallen++
 		if(old_turf != get_turf(human))
 			flight_animation(human)
+	else
+		to_chat(human, span_notice("My wings give out, and I suddenly stop flying!"))
 
 	// /datum/element/movetype_handler will zFall owner when removing TRAIT_MOVE_FLOATING
 	REMOVE_TRAIT(human, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
