@@ -523,7 +523,7 @@ SUBSYSTEM_DEF(gamemode)
 
 /// Gets the number of antagonists the antagonist injection events will stop rolling after.
 /datum/controller/subsystem/gamemode/proc/get_antag_cap()
-	var/total_number = get_correct_popcount() + (garrison * 2)
+	var/total_number = get_correct_popcount() + garrison + church
 	var/cap = FLOOR((total_number / ANTAG_CAP_DENOMINATOR), 1) + ANTAG_CAP_FLAT
 	return cap
 
@@ -735,7 +735,7 @@ SUBSYSTEM_DEF(gamemode)
 	for(var/mob/player_mob as anything in GLOB.player_list)
 		if(!player_mob.client)
 			continue
-		if(player_mob.stat) //If they're alive
+		if(player_mob.stat == DEAD) //If they're alive
 			continue
 		if(player_mob.client.is_afk()) //If afk
 			continue

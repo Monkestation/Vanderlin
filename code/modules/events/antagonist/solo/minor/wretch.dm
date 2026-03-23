@@ -31,7 +31,7 @@
 
 	denominator = 20
 
-	cost = 0.5
+	cost = 0.3 // super cheap so can usually be thrown in somehow
 
 	base_antags = 1
 	maximum_antags = 3
@@ -40,7 +40,7 @@
 
 	min_players = 10
 
-	weight = 12
+	weight = 15
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/lich,
 		/datum/round_event_control/antagonist/solo/rebel,
@@ -51,7 +51,6 @@
 		/datum/round_event_control/antagonist/solo/werewolf,
 		/datum/round_event_control/antagonist/solo/zizo_cult
 	)
-	secondary_prob = 0
 	typepath = /datum/round_event/antagonist/solo/wretch
 
 

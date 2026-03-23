@@ -10,7 +10,7 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 50
+	denominator = HIGHPOP_THRESHOLD+10
 
 	base_antags = 1
 	maximum_antags = 2

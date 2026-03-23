@@ -17,9 +17,9 @@
 	outfit = null
 	outfit_female = null
 
-
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORTHODOXIST
+	job_bitflag = BITFLAG_CHURCH
 
 	advclass_cat_rolls = list(CTAG_INQUISITION = 20)
 	same_job_respawn_delay = 30 MINUTES
