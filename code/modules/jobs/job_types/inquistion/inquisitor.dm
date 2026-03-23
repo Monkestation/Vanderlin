@@ -45,8 +45,9 @@
 /datum/job/inquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
+	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
 	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
+	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
 	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
 
 	spawned.hud_used?.shutdown_bloodpool()
@@ -181,6 +182,14 @@
 		say(pick(faith_lines), spans = list("torture"))
 		H.emote("painscream")
 		H.confession_time("patron", src)
+
+/// Verb for Inquisitors to recall people with the vice [/datum/quirk/vice/suspicion]
+/mob/living/carbon/human/proc/suspect_heretics()
+	set name = "Remember Suspected Heretics"
+	set category = "RoleUnique.Inquisition"
+	if(!mind)
+		return
+	mind.recall_targets(src, type="Ordos")
 
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag", mob/living/carbon/human/user)
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 10 SECONDS, TIMER_STOPPABLE)
