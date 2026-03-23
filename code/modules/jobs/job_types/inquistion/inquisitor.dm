@@ -185,7 +185,7 @@
 
 /// Verb for Inquisitors to recall people with the vice [/datum/quirk/vice/suspicion]
 /mob/living/carbon/human/proc/suspect_heretics()
-	set name = "Remember Suspected Heretics"
+	set name = "Remember Suspects"
 	set category = "RoleUnique.Inquisition"
 	if(!mind)
 		return
