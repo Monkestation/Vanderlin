@@ -186,7 +186,4 @@
 /obj/item/gun/proc/before_firing(atom/target,mob/user)
 	return
 
-/obj/item/gun/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""]<b>[get_examine_name(user)]</b>"
-
 #undef DUALWIELD_PENALTY_EXTRA_MULTIPLIER

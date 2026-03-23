@@ -170,7 +170,7 @@
 			if(signedname)
 				to_chat(user, span_warning("[signedname]"))
 				return
-			switch(alert("Sign your name?",,"Yes","No"))
+			switch(tgui_alert(usr, "Sign your name?","Sign", list("Yes","No")))
 				if("No")
 					return
 				if("Yes")
@@ -266,14 +266,14 @@
 		if(paired.subject != user)
 			to_chat(M, span_warning("Why am I trying to make them sign this with the wrong [paired] paired with it?"))
 			return
-		else if(forced_signing || (alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO"))
+		else if(forced_signing || (tgui_alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", list("YES", "NO")) != "NO"))
 			signed = TRUE
 			signee = user
 			marquevalue += 2
 			REMOVE_TRAIT(user, TRAIT_HAS_CONFESSED, TRAIT_GENERIC)
 			update_appearance()
 
-	else if(alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+	else if(tgui_alert(user, "SIGN THE CONFESSION?", "CONFIRM OR DENY", list("YES", "NO")) != "NO")
 		signed = TRUE
 		signee = user
 		marquevalue += 2
@@ -296,7 +296,7 @@
 	marquevalue = 6
 
 /obj/item/paper/inqslip/proc/attemptsign(mob/user, mob/living/carbon/human/M)
-	if(alert(user, "SIGN THE SLIP?", "CONFIRM OR DENY", "YES", "NO") != "NO")
+	if(tgui_alert(user, "SIGN THE SLIP?", "CONFIRM OR DENY", list("YES", "NO")) != "NO")
 		signed = TRUE
 		signee = user
 		update_appearance()
@@ -449,7 +449,7 @@
 		if(signee)
 			to_chat(user, span_warning("This token has already been signed."))
 			return
-		if(!is_gaffer_job(user.mind.assigned_role) && !is_merchant_job(user.mind.assigned_role))
+		if(!is_tomb_warden_job(user.mind.assigned_role) && !is_merchant_job(user.mind.assigned_role))
 			if(is_mercenary_job(user.mind.assigned_role))
 				to_chat(user, span_warning("I can not sign my own commendation."))
 			else
@@ -507,7 +507,7 @@
 			to_chat(user, span_warning("I can't turn a member of the royal family into a finger."))
 			return
 
-	var/choice = input(attacked_target,"Do you wish to become one of the Hand's fingers?","Binding Contract",null) as null|anything in list("Yes", "No")
+	var/choice = tgui_alert(attacked_target, "Do you wish to become one of the Hand's fingers?", "Binding Contract", list("Yes", "No"))
 	if(choice != "Yes")
 		return
 

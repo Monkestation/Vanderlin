@@ -6,7 +6,7 @@
 
 	cast_range = 8
 	point_cost = 6
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 	attunements = list(
 		/datum/attunement/electric = 0.3,
 		/datum/attunement/blood = 0.7,
@@ -34,7 +34,7 @@
 	nodamage = FALSE
 	speed = 0.3
 	light_color = "#802121"
-	light_outer_range =  7
+	light_range =  7
 
 /obj/projectile/magic/bloodlightning/on_hit(atom/target, blocked, pierce_hit)
 	. = ..()

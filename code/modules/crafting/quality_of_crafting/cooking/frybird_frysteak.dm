@@ -79,6 +79,20 @@
 	output = /obj/item/reagent_containers/food/snacks/cooked/herbsteak
 	crafting_message = "rub some herbs into frysteak"
 
+/datum/repeatable_crafting_recipe/cooking/frysteak/drowsbane
+	category = "Tiefling Cuisine"
+	subtypes_allowed = TRUE
+	name = "Frysteak and Drowsbane"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cooked/frysteak = 1,
+		/obj/item/reagent_containers/food/snacks/drowsbanejam = 1,
+	)
+	starting_atom = /obj/item/reagent_containers/food/snacks/drowsbanejam
+	output = /obj/item/reagent_containers/food/snacks/cooked/frysteak_salsa
+	crafting_message = "spread drowsbane on frysteak"
+
+
 /datum/repeatable_crafting_recipe/cooking/wiener
 	abstract_type = /datum/repeatable_crafting_recipe/cooking/wiener
 	attacked_atom = /obj/item/reagent_containers/food/snacks/cooked/sausage
@@ -94,6 +108,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom =/obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_cabbage
 	crafting_message = "combine some sausage and cabbage"
@@ -104,6 +119,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/cabbage_fried = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/cabbage_fried
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_cabbage
 	crafting_message = "combine some sausage and cooked cabbage"
@@ -114,6 +130,7 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/produce/vegetable/potato = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/vegetable/potato
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_potato
 	crafting_message = "combine some sausage and potato"
@@ -128,6 +145,19 @@
 		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
 		/obj/item/reagent_containers/food/snacks/onion_fried = 1,
 	)
+	subtypes_allowed = TRUE
 	starting_atom =/obj/item/reagent_containers/food/snacks/onion_fried
 	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_onion
 	crafting_message = "combine some sausage and onion"
+
+/datum/repeatable_crafting_recipe/cooking/wiener/cocaumole
+	category = "Tiefling Cuisine"
+	name = "Wiener with Cocaumole"
+	subtypes_allowed = TRUE
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cooked/sausage = 1,
+		/obj/item/reagent_containers/food/snacks/cocaumole = 1,
+	)
+	starting_atom =/obj/item/reagent_containers/food/snacks/cocaumole
+	output = /obj/item/reagent_containers/food/snacks/cooked/sausage_cocaumole
+	crafting_message = "spread cocaumole on wiener"\

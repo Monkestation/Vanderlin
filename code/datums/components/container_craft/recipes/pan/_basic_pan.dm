@@ -10,7 +10,7 @@
 /datum/container_craft/pan/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
 	if(user.mind)
-		real_cooking_time /= 1 + (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 0.2)
+		real_cooking_time /= 1 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 0.2)
 		real_cooking_time = round(real_cooking_time)
 	return real_cooking_time
 
@@ -214,7 +214,14 @@
 	output = /obj/item/reagent_containers/food/snacks/cooked/frysteak
 	cooked_smell = /datum/pollutant/food/fried_meat
 
+/datum/container_craft/pan/ribrack
+	name = "Grilled Ribrack"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/ribs = 1)
+	output = /obj/item/reagent_containers/food/snacks/bread/ribrack
+	cooked_smell = /datum/pollutant/food/fried_meat
+
 /datum/container_craft/pan/griddle_dog
+	category = "Vanderlin Cuisine"
 	name = "Griddledog"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/griddledog_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/griddledog
@@ -261,3 +268,32 @@
 	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/fat= 1)
 	output = /obj/item/reagent_containers/food/snacks/tallow
 	cooked_smell = /datum/pollutant/food/fried_messenger
+
+/datum/container_craft/pan/sunreed_grilled
+	category = "Tiefling Cuisine"
+	name = "Grilled Sunreed"
+	requirements = list(/obj/item/natural/chaff/sunreed = 1)
+	output = /obj/item/reagent_containers/food/snacks/produce/vegetable/sunreed_cooked
+	cooked_smell = /datum/pollutant/food/sunreed_grilled
+
+/datum/container_craft/pan/plato
+	category = "Tiefling Cuisine"
+	name = "Sunreed Plato"
+	requirements = list(/obj/item/reagent_containers/food/snacks/masa_flat = 1)
+	output = /obj/item/reagent_containers/food/snacks/tostada
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/pan/saigaita
+	category = "Tiefling Cuisine"
+	name = "Fried Saigaita"
+	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/saigaita = 1)
+	output = /obj/item/reagent_containers/food/snacks/saigaita_cooked
+	cooked_smell = /datum/pollutant/food/sunreed_dough
+
+/datum/container_craft/pan/saigaita/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
+	var/create_type = output
+	for(var/j = 1 to output_amount)
+		var/atom/created_output = new create_type(get_turf(crafter))
+		SEND_SIGNAL(crafter, COMSIG_TRY_STORAGE_INSERT, created_output, null, null, TRUE, TRUE)
+		after_craft(created_output, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
+		SEND_SIGNAL(crafter, COMSIG_CONTAINER_CRAFT_COMPLETE, created_output)

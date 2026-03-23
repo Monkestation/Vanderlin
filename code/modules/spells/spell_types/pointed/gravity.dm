@@ -27,7 +27,7 @@
 /datum/action/cooldown/spell/gravity/cast(mob/living/cast_on)
 	. = ..()
 	new /obj/effect/temp_visual/gravity(get_turf(cast_on))
-	if(cast_on.STASTR >= 13)
+	if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= 13)
 		cast_on.OffBalance(3 SECONDS)
 		cast_on.adjustBruteLoss(15)
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))
@@ -44,5 +44,5 @@
 	randomdir = FALSE
 	duration = 3 SECONDS
 	light_power = 1
-	light_outer_range = 2
+	light_range = 2
 	light_color = COLOR_PALE_PURPLE_GRAY

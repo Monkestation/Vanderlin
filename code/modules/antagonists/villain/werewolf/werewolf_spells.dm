@@ -62,27 +62,24 @@
 
 /datum/action/cooldown/spell/undirected/claws/cast(atom/cast_on)
 	. = ..()
-	var/obj/item/weapon/werewolf_claw/left/l
-	var/obj/item/weapon/werewolf_claw/right/r
-
-	l = owner.get_active_held_item()
-	r = owner.get_inactive_held_item()
+	var/obj/item/weapon/werewolf_claw/left/left_claw
+	var/obj/item/weapon/werewolf_claw/right/right_claw
 
 	if(extended)
-		if(istype(owner.get_active_held_item(), /obj/item/weapon/werewolf_claw))
-			owner.dropItemToGround(l, TRUE)
-			owner.dropItemToGround(r, TRUE)
-			qdel(l)
-			qdel(r)
-			//owner.visible_message("Your claws retract.", "You feel your claws retracting.", "You hear a sound of claws retracting.")
-			extended = FALSE
+		for(var/obj/item/weapon/werewolf_claw/claw in owner.held_items)
+			qdel(claw)
+		to_chat(owner, "You feel your claws retracting.")
+		//owner.visible_message("Your claws retract.", "You feel your claws retracting.", "You hear a sound of claws retracting.")
 	else
-		l = new(owner, 1)
-		r = new(owner, 2)
-		owner.put_in_hands(l, TRUE, FALSE, TRUE)
-		owner.put_in_hands(r, TRUE, FALSE, TRUE)
+		left_claw = new()
+		right_claw = new()
+		if(!owner.put_in_l_hand(left_claw))
+			qdel(left_claw)
+		if(!owner.put_in_r_hand(right_claw))
+			qdel(right_claw)
+		to_chat(owner, "You feel your claws extending.")
 		//owner.visible_message("Your claws extend.", "You feel your claws extending.", "You hear a sound of claws extending.")
-		extended = TRUE
+	extended = !extended
 
 /datum/action/cooldown/spell/woundlick
 	name = "Lick the wounds"
@@ -108,8 +105,8 @@
 	if(!istype(cast_on))
 		return
 
-	if(do_after(owner, 7 SECONDS, cast_on))
-		var/ramount = 5
+	if(do_after(owner, 4 SECONDS, cast_on))
+		var/ramount = 5 // fully metabolized just under 9 seconds. DO NOT ALLOW REAGENT STACKING
 		var/rid = /datum/reagent/medicine/healthpot
 		cast_on.reagents.add_reagent(rid, ramount)
 

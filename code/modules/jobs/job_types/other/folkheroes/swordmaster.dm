@@ -1,3 +1,17 @@
+/datum/attribute_holder/sheet/job/swordmaster
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
 /datum/job/advclass/combat/swordmaster
 	title = "Hedge Knight"
 	tutorial = "You spent years serving the eastern Grenzelhoftian lords, and now you spend your days as a travelling hedge knight. Upon this island, you like to increase the fame of your sword skills, as well as your honor."
@@ -7,22 +21,11 @@
 	total_positions = 1
 	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
+	honorary = "Ritter"
+	honorary_f = "Ritterin"
 
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/swordmaster
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-	)
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -32,14 +35,6 @@
 
 /datum/job/advclass/combat/swordmaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/prev_real_name = spawned.real_name
-	var/prev_name = spawned.name
-	var/honorary = "Ritter"
-	if(spawned.pronouns == SHE_HER)
-		honorary = "Ritterin"
-	spawned.real_name = "[honorary] [prev_real_name]"
-	spawned.name = "[honorary] [prev_name]"
-
 	var/datum/species/species = spawned.dna?.species
 	if(species && species.id == SPEC_ID_HUMEN)
 		species.native_language = "Old Psydonic"

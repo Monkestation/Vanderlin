@@ -25,7 +25,7 @@
 
 	var/paine = source.get_complex_pain()
 	if (source.ai_controller.blackboard[BB_BASIC_MOB_FLEEING])
-		if(paine > ((source.STAEND * 10)*0.9))
+		if(paine > ((GET_MOB_ATTRIBUTE_VALUE(source, STAT_ENDURANCE) * 10)*0.9))
 			return
 		source.ai_controller.CancelActions() // Stop fleeing go back to whatever you were doing
 		source.ai_controller.set_blackboard_key(BB_BASIC_MOB_FLEEING, FALSE)
@@ -35,7 +35,7 @@
 		if(source.ai_controller.blackboard[BB_BASIC_MOB_NEXT_FLEEING] > world.time)
 			return
 
-	if(paine <= ((source.STAEND * 10)*0.9))
+	if(paine <= ((GET_MOB_ATTRIBUTE_VALUE(source, STAT_ENDURANCE) * 10)*0.9))
 		return
 	source?.ai_controller.CancelActions()
 	source.ai_controller.set_blackboard_key(BB_BASIC_MOB_FLEEING, TRUE)

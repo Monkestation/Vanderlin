@@ -61,7 +61,7 @@
 	tastes = list("complex sweetness" = 1, "sharp floral tones" = 1)
 	list_reagents = list(/datum/reagent/consumable/honey = 5, /datum/reagent/toxin/manabloom_juice = 2, /datum/reagent/medicine/manapot = 10)
 	light_system = MOVABLE_LIGHT
-	light_outer_range = 2
+	light_range = 2
 	light_power = 1
 	light_color = "#CCFF99"
 

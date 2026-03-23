@@ -19,13 +19,13 @@
 	wlength = WLENGTH_SHORT
 	resistance_flags = FLAMMABLE
 	can_parry = TRUE
-	associated_skill = /datum/skill/combat/shields
+	associated_skill = /datum/attribute/skill/combat/shields
 	destroy_sound = 'sound/foley/shielddestroy.ogg'
 	var/coverage = 90
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	COOLDOWN_DECLARE(shield_bang)
@@ -125,7 +125,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -254,7 +254,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -346,7 +346,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 

@@ -1,43 +1,34 @@
-#define UPDATE_STRENGTH(...) STASTR = clamp(base_strength + modified_strength, 1, 20)
-#define UPDATE_PERCEPTION(...) STAPER = clamp(base_perception + modified_perception, 1, 20)
-#define UPDATE_ENDURANCE(...) STAEND = clamp(base_endurance + modified_endurance, 1, 20)
-#define UPDATE_CONSTITUTION(...) STACON = clamp(base_constitution + modified_constitution, 1, 20)
-#define UPDATE_INTELLIGENCE(...) STAINT = clamp(base_intelligence + modified_intelligence, 1, 20)
-#define UPDATE_SPEED(...) STASPD = clamp(base_speed + modified_speed, 1, 20)
-#define UPDATE_FORTUNE(...) STALUC = clamp(base_fortune + modified_fortune, 1, 20)
+/*
+ * MOB LIVING - STAT SYSTEM (attribute_holder migration)
+ *
+ * WHAT CHANGED:
+ *   Old                          New
+ *   ──────────────────────────   ──────────────────────────────────────────
+ *   base_strength (var)          raw_attribute_list[STAT_STRENGTH]
+ *   modified_strength (var)      handled by attribute_modifier datums
+ *   STASTR (final cached var)    attribute_list[STAT_STRENGTH]
+ *   UPDATE_STRENGTH() macro      update_attributes() on attribute_holder
+ *   stat_modifiers lazy list     attribute_modification lazy list
+ *
+ *   set_stat_modifier()    ->    applies a named attribute_modifier
+ *   adjust_stat_modifier() ->    adjusts an existing named attribute_modifier
+ *   remove_stat_modifier() ->    removes a named attribute_modifier
+ *
+ * READING A STAT:
+ *   Final (with modifiers):   GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+ *   Base (raw, no modifiers): GET_MOB_ATTRIBUTE_VALUE_RAW(src, STAT_STRENGTH)
+ *
+ * NOTE: stat_modifiers, base_*, modified_*, and STA* vars are all gone.
+ *       Do not reference them. Use the macros above everywhere.
+ */
+
+// Variable modifier subtype used for all runtime stat modifiers (species, age, roll, etc.)
+// Must be variable = TRUE so it is never cached - each instance is unique per mob.
+/datum/attribute_modifier/variable
+	variable = TRUE
 
 /mob/living
 	var/datum/patron/patron = null
-
-	/* Base stat values */
-	var/base_strength = 10
-	var/base_perception = 10
-	var/base_endurance = 10
-	var/base_constitution = 10
-	var/base_intelligence = 10
-	var/base_speed = 10
-	var/base_fortune = 10
-
-	/* Cached modifier values, calculated when needed */
-	VAR_PRIVATE/final/modified_strength
-	VAR_PRIVATE/final/modified_perception
-	VAR_PRIVATE/final/modified_endurance
-	VAR_PRIVATE/final/modified_constitution
-	VAR_PRIVATE/final/modified_intelligence
-	VAR_PRIVATE/final/modified_speed
-	VAR_PRIVATE/final/modified_fortune
-	/// Lazy-list of stat modifiers keyed with sources.
-	var/list/stat_modifiers = null
-
-	/* Calculated stat values, these are what you want to use. */
-	var/final/STASTR = 10
-	var/final/STAPER = 10
-	var/final/STAEND = 10
-	var/final/STACON = 10
-	var/final/STAINT = 10
-	var/final/STASPD = 10
-	var/final/STALUC = 10
-
 	var/has_rolled_for_stats = FALSE
 
 /mob/living/proc/init_faith()
@@ -90,399 +81,290 @@
 
 	return TRUE
 
-///Rolls random stats base 10, +-1, for SPECIAL, and applies species stats and age stats.
+/**
+ * Rolls random stats (base 10, +-1) for SPECIAL, applies species and age modifiers.
+ * Stats are written directly into raw_attribute_list via attributes.
+ * Modifiers (species, age, traits) go through set_stat_modifier() as named sources.
+ */
+
+/datum/attribute_holder/sheet/age
+	attribute_default = 0
+	skill_default = null
+
+/datum/attribute_holder/sheet/age/old
+	raw_attribute_list = list(
+		STAT_STRENGTH     = -2,
+		STAT_PERCEPTION   = 2,
+		STAT_ENDURANCE    = -1,
+		STAT_CONSTITUTION = -1,
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED        = -1,
+		STAT_FORTUNE      = 1,
+	)
+
+/datum/attribute_holder/sheet/age/middleaged
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_SPEED     = -1,
+	)
+
+/datum/attribute_holder/sheet/age/child
+	raw_attribute_list = list(
+		STAT_STRENGTH     = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_PERCEPTION   = 1,
+		STAT_ENDURANCE    = 1,
+		STAT_SPEED        = 1
+	)
+
+/datum/attribute_holder/sheet/job/random_stats
+	attribute_variance = list(
+		STAT_STRENGTH = list(-1, 1),
+		STAT_PERCEPTION = list(-1, 1),
+		STAT_ENDURANCE = list(-1, 1),
+		STAT_CONSTITUTION = list(-1, 1),
+		STAT_INTELLIGENCE = list(-1, 1),
+		STAT_SPEED = list(-1, 1),
+		STAT_FORTUNE = list(-1, 1),
+	)
 /mob/living/proc/roll_mob_stats()
 	if(has_rolled_for_stats)
 		return FALSE
 
-	base_strength += (prob(33) && pick(-1, 1))
-	base_perception += (prob(33) && pick(-1, 1))
-	base_endurance += (prob(33) && pick(-1, 1))
-	base_constitution += (prob(33) && pick(-1, 1))
-	base_intelligence += (prob(33) && pick(-1, 1))
-	base_speed += (prob(33) && pick(-1, 1))
-	base_fortune += (prob(33) && pick(-1, 1))
+	attributes?.add_sheet(/datum/attribute_holder/sheet/job/random_stats)
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		if(H.dna?.species)
-			var/datum/species/species = H.dna.species
-			var/list/specstat_list = (gender == FEMALE) ? species.specstats_f : species.specstats_m
-			for(var/stat in specstat_list)
-				set_stat_modifier(STATMOD_SEX, stat, specstat_list[stat])
-
-		switch(H.age)
-			if(AGE_CHILD)
-				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
-				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -2)
-				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, round(rand(1,2)))
-				H.virginity = TRUE
-			// nothing for adults/immortals,
-			if(AGE_MIDDLEAGED)
-				set_stat_modifier(STATMOD_AGE, STATKEY_END, 1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
-			if(AGE_OLD)
-				set_stat_modifier(STATMOD_AGE, STATKEY_STR, -2)
-				set_stat_modifier(STATMOD_AGE, STATKEY_PER, 2)
-				set_stat_modifier(STATMOD_AGE, STATKEY_END, -1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_CON, -1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_INT, 2)
-				set_stat_modifier(STATMOD_AGE, STATKEY_SPD, -1)
-				set_stat_modifier(STATMOD_AGE, STATKEY_LCK, 1)
-
+		H.update_age_stats()
+		// Curse trait
 		if(HAS_TRAIT(src, TRAIT_PUNISHMENT_CURSE))
-			change_stat(STATKEY_STR, -3)
-			change_stat(STATKEY_SPD, -3)
-			change_stat(STATKEY_END, -3)
-			change_stat(STATKEY_CON, -3)
-			change_stat(STATKEY_INT, -3)
-			change_stat(STATKEY_LCK, -3)
+			set_stat_modifier(STATMOD_CURSE, list(
+				STAT_STRENGTH     = -3,
+				STAT_SPEED        = -3,
+				STAT_ENDURANCE    = -3,
+				STAT_CONSTITUTION = -3,
+				STAT_INTELLIGENCE = -3,
+				STAT_FORTUNE      = -3,
+			))
 			H.voice_color = "c71d76"
-			H.set_eye_color("#c71d76", updates_dna = TRUE) //majenta
+			H.set_eye_color("#c71d76", updates_dna = TRUE)
 
 	has_rolled_for_stats = TRUE
 	return TRUE
 
-/mob/living/proc/set_stat_modifier(source, stat_key, amount)
-	if(!source || !(stat_key in MOBSTATS) || !isnum(amount))
+/mob/living/carbon/human/proc/update_age_stats(old_age, only_remove = FALSE)
+	if(has_rolled_for_stats && old_age)
+		switch(old_age)
+			if(AGE_MIDDLEAGED)
+				attributes?.subtract_sheet(/datum/attribute_holder/sheet/age/middleaged)
+			if(AGE_OLD)
+				attributes?.subtract_sheet(/datum/attribute_holder/sheet/age/old)
+			if(AGE_CHILD)
+				attributes?.subtract_sheet(/datum/attribute_holder/sheet/age/child)
+	if(only_remove)
 		return
+	switch(age)
+		if(AGE_MIDDLEAGED)
+			attributes?.add_sheet(/datum/attribute_holder/sheet/age/middleaged)
+		if(AGE_OLD)
+			attributes?.add_sheet(/datum/attribute_holder/sheet/age/old)
+		if(AGE_CHILD)
+			attributes?.add_sheet(/datum/attribute_holder/sheet/age/child)
 
-	var/list/source_list = LAZYACCESS(stat_modifiers, source)
-
-	if(LAZYACCESS(source_list, stat_key) != amount)
-		if(!amount)
-			LAZYREMOVE(source_list, stat_key)
-		else
-			LAZYSET(source_list, stat_key, amount)
-
-		if(!LAZYLEN(source_list))
-			LAZYREMOVE(source_list, stat_key)
-		else
-			LAZYSET(stat_modifiers, source, source_list)
-
-		var/new_total = 0
-		for(var/existing_sources in stat_modifiers)
-			new_total += LAZYACCESS(stat_modifiers[existing_sources], stat_key)
-
-		switch(stat_key) //I am sorry for this
-			if(STATKEY_STR)
-				modified_strength = new_total
-				UPDATE_STRENGTH()
-			if(STATKEY_PER)
-				modified_perception = new_total
-				UPDATE_PERCEPTION()
-			if(STATKEY_END)
-				modified_endurance = new_total
-				UPDATE_ENDURANCE()
-			if(STATKEY_CON)
-				modified_constitution = new_total
-				UPDATE_CONSTITUTION()
-			if(STATKEY_INT)
-				modified_intelligence = new_total
-				UPDATE_INTELLIGENCE()
-			if(STATKEY_SPD)
-				modified_speed = new_total
-				UPDATE_SPEED()
-			if(STATKEY_LCK)
-				modified_fortune = new_total
-				UPDATE_FORTUNE()
-
-/mob/living/proc/set_stat_modifier_list(source, stat_keys_values)
-	if(!source || !length(stat_keys_values))
-		return
-	for(var/stat_key in stat_keys_values)
-		if(!(stat_key in MOBSTATS))
-			continue
-		var/amount = stat_keys_values[stat_key]
-		if(!amount)
-			continue
-		set_stat_modifier(source, stat_key, amount)
 
 /**
- * Set a stat key to value via a modifier at that moment
- * * source - Stringed source key
- * * stat_key - Stat to adjust
- * * value - Value to adjust to
+ * Applies or replaces a named stat modifier block.
+ * Equivalent to the old set_stat_modifier() but takes stat typepaths
+ * instead of STATKEY_* strings, matching attribute_holder's language.
+ *
+ * Arguments:
+ *   source     - string key identifying the source (e.g. STATMOD_AGE)
+ *   stat_list  - associative list of STAT_* typepath = integer amount
+ *                pass null or empty list to remove the source entirely
  */
-/mob/living/proc/modifier_set_stat_to(source, stat_key, value)
-	if(!source || !stat_key || !value)
+/mob/living/proc/set_stat_modifier(source, list/stat_list)
+	if(!source || !attributes)
 		return
-	var/current = get_stat(stat_key)
-	if(!current)
+	// Remove the old modifier for this source if it exists (keyed by source string as ID)
+	attributes.remove_attribute_modifier(source)
+	if(!LAZYLEN(stat_list))
 		return
-	set_stat_modifier(source, stat_key, value - current)
-
-/mob/living/proc/adjust_stat_modifier(source, stat_key, amount)
-	if(!source || !(stat_key in MOBSTATS) || !amount)
-		return
-
-	var/list/source_list = LAZYACCESS(stat_modifiers, source)
-	LAZYADDASSOC(source_list, stat_key, amount)
-	LAZYSET(stat_modifiers, source, source_list)
-
-	var/new_total = 0
-	for(var/existing_sources in stat_modifiers)
-		new_total += LAZYACCESS(stat_modifiers[existing_sources], stat_key)
-
-	switch(stat_key) //I am sorry for this
-		if(STATKEY_STR)
-			modified_strength = new_total
-			UPDATE_STRENGTH()
-		if(STATKEY_PER)
-			modified_perception = new_total
-			UPDATE_PERCEPTION()
-		if(STATKEY_END)
-			modified_endurance = new_total
-			UPDATE_ENDURANCE()
-		if(STATKEY_CON)
-			modified_constitution = new_total
-			UPDATE_CONSTITUTION()
-		if(STATKEY_INT)
-			modified_intelligence = new_total
-			UPDATE_INTELLIGENCE()
-		if(STATKEY_SPD)
-			modified_speed = new_total
-			UPDATE_SPEED()
-		if(STATKEY_LCK)
-			modified_fortune = new_total
-			UPDATE_FORTUNE()
-
-/mob/living/proc/adjust_stat_modifier_list(source, stat_keys_values)
-	if(!source || !length(stat_keys_values))
-		return
-	for(var/stat_key in stat_keys_values)
-		if(!(stat_key in MOBSTATS))
+	// Build a variable modifier so it won't be cached - stat modifiers are always per-instance
+	var/datum/attribute_modifier/variable/mod = new()
+	mod.id = source
+	for(var/stat_type in stat_list)
+		if(!ispath(stat_type, STAT))
 			continue
-		var/amount = stat_keys_values[stat_key]
-		if(!amount)
+		var/amt = stat_list[stat_type]
+		if(!amt)
 			continue
-		adjust_stat_modifier(source, stat_key, amount)
+		LAZYSET(mod.attribute_list, stat_type, amt)
+	attributes.add_attribute_modifier(mod)
 
+/**
+ * Adjusts an existing named stat modifier, adding delta values on top.
+ * If no modifier for this source exists yet, creates one.
+ *
+ * Arguments:
+ *   source    - string ID of the modifier to adjust
+ *   stat_list - associative list of STAT_* typepath = integer delta
+ */
+/mob/living/proc/adjust_stat_modifier(source, list/stat_list)
+	if(!source || !attributes)
+		return
+	if(!LAZYLEN(stat_list))
+		return
+	var/datum/attribute_modifier/existing = LAZYACCESS(attributes.attribute_modification, source)
+	if(!existing)
+		set_stat_modifier(source, stat_list)
+		return
+	for(var/stat_type in stat_list)
+		if(!ispath(stat_type, STAT))
+			continue
+		var/amt = stat_list[stat_type]
+		if(!amt)
+			continue
+		LAZYADDASSOC(existing.attribute_list, stat_type, amt)
+	attributes.update_attributes()
+
+/**
+ * Removes all stat modifiers from a named source.
+ *
+ * Arguments:
+ *   source - string ID to remove (e.g. STATMOD_AGE)
+ */
 /mob/living/proc/remove_stat_modifier(source)
-	if(!source)
+	if(!source || !attributes)
 		return
+	attributes.remove_attribute_modifier(source)
 
-	var/list/old_modifications = LAZYACCESS(stat_modifiers, source)
-	LAZYREMOVE(stat_modifiers, source)
+/**
+ * Sets a stat to a specific total value by back-calculating the modifier needed.
+ * Equivalent to the old modifier_set_stat_to().
+ *
+ * Arguments:
+ *   source - string ID for the modifier source
+ *   stat   - STAT_* typepath
+ *   value  - desired final value (clamped to ATTRIBUTE_MIN/MAX)
+ */
+/mob/living/proc/modifier_set_stat_to(source, stat, value)
+	if(!source || !stat || isnull(value))
+		return
+	var/current_base = nulltozero(GET_MOB_ATTRIBUTE_VALUE_RAW(src, stat))
+	var/needed = clamp(value, ATTRIBUTE_MIN, ATTRIBUTE_MAX) - current_base
+	set_stat_modifier(source, list((stat) = needed))
 
-	for(var/stat_key in old_modifications)
-		var/adjustment = old_modifications[stat_key]
-
-		switch(stat_key) //I am sorry for this
-			if(STATKEY_STR)
-				modified_strength -= adjustment
-				UPDATE_STRENGTH()
-			if(STATKEY_PER)
-				modified_perception -= adjustment
-				UPDATE_PERCEPTION()
-			if(STATKEY_END)
-				modified_endurance -= adjustment
-				UPDATE_ENDURANCE()
-			if(STATKEY_CON)
-				modified_constitution -= adjustment
-				UPDATE_CONSTITUTION()
-			if(STATKEY_INT)
-				modified_intelligence -= adjustment
-				UPDATE_INTELLIGENCE()
-			if(STATKEY_SPD)
-				modified_speed -= adjustment
-				UPDATE_SPEED()
-			if(STATKEY_LCK)
-				modified_fortune -= adjustment
-				UPDATE_FORTUNE()
-
-///Returns the mob's stats in an associated list
-/mob/living/proc/get_all_stats() as /list
+/**
+ * Returns all current stat values as an associative list keyed by STAT_* typepath.
+ * Uses the final (modifier-inclusive) attribute_list values.
+ */
+/mob/living/proc/get_all_stats()
 	RETURN_TYPE(/list)
-
 	return list(
-		(STATKEY_STR) = STASTR,
-		(STATKEY_PER) = STAPER,
-		(STATKEY_END) = STAEND,
-		(STATKEY_CON) = STACON,
-		(STATKEY_INT) = STAINT,
-		(STATKEY_SPD) = STASPD,
-		(STATKEY_LCK) = STALUC,
+		STAT_STRENGTH     = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)),
+		STAT_PERCEPTION   = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)),
+		STAT_ENDURANCE    = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)),
+		STAT_CONSTITUTION = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)),
+		STAT_INTELLIGENCE = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)),
+		STAT_SPEED        = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)),
+		STAT_FORTUNE      = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_FORTUNE)),
 	)
 
-/// Return mob's stat value by stat_key
-/mob/living/proc/get_stat(stat_key)
-	if(!stat_key)
+/**
+ * Returns a single stat's final value by STAT_* typepath.
+ */
+/mob/living/proc/get_stat(stat)
+	if(!stat)
 		return
+	return nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, stat))
 
-	return LAZYACCESS(get_all_stats(), stat_key)
-
-///Returns: the difference in value between the opponents stat key and ours.
-///EG: Our endurace - opp endurance.
-/mob/living/proc/stat_difference_to(mob/living/opponent,stat_key)
-	if(!opponent || !stat_key)
+/**
+ * Returns the difference between our stat and an opponent's stat.
+ * Both sides use the same stat key.
+ * e.g. our endurance - their endurance.
+ */
+/mob/living/proc/stat_difference_to(mob/living/opponent, stat)
+	if(!opponent || !stat)
 		return
-	switch(stat_key)
-		if(STATKEY_STR)
-			return STASTR - opponent.STASTR
-		if(STATKEY_PER)
-			return STAPER - opponent.STAPER
-		if(STATKEY_END)
-			return STAEND - opponent.STAEND
-		if(STATKEY_CON)
-			return STACON - opponent.STACON
-		if(STATKEY_INT)
-			return STAINT - opponent.STAINT
-		if(STATKEY_SPD)
-			return STASPD - opponent.STASPD
-		if(STATKEY_LCK)
-			return STALUC - opponent.STALUC
-	return
-///Returns: Difference betwen our_stat and opponents opp_stat.
-///EG: Our STR - opp CON
-/mob/living/proc/stat_compare(mob/living/opponent, our_stat_key, opp_stat_key)
-	if(!opponent || !opp_stat_key || !our_stat_key)
+	return nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, stat)) - nulltozero(GET_MOB_ATTRIBUTE_VALUE(opponent, stat))
+
+/**
+ * Returns the difference between our stat and an opponent's (possibly different) stat.
+ * e.g. our STR vs their CON.
+ */
+/mob/living/proc/stat_compare(mob/living/opponent, our_stat, opp_stat)
+	if(!opponent || !our_stat || !opp_stat)
 		return
-	var/our_stat = get_stat_level(our_stat_key)
-	var/opponent_stat = opponent.get_stat_level(opp_stat_key)
+	return nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, our_stat)) - nulltozero(GET_MOB_ATTRIBUTE_VALUE(opponent, opp_stat))
 
-	return our_stat - opponent_stat
-
-///Effectively rolls a d20, with each point in the stat being a chance_per_point% chance to succeed per point in the stat. If no stat is provided, just returns 0.
-///dee_cee is a difficulty mod, a positive value makes the check harder, a negative value makes it easier.
-///invert_dc changes it from stat - dc to dc - stat, for inverted checks.
-///EG: A person with 10 luck and a dc of -10 effectively has a 100% chance of success. Or an inverted DC with 10 means 0% chance of success.
-/mob/living/proc/stat_roll(stat_key,chance_per_point = 5, dee_cee = null, invert_dc = FALSE)
-	if(!stat_key)
+/**
+ * Probability roll weighted by a stat value.
+ * chance_per_point: % chance added per point of stat (default 5, so 10 stat = 50% base)
+ * dee_cee: difficulty modifier applied before the roll
+ * invert_dc: if TRUE, uses (dc - stat) instead of (stat - dc)
+ */
+/mob/living/proc/stat_roll(stat, chance_per_point = 5, dee_cee = null, invert_dc = FALSE)
+	if(!stat)
 		return FALSE
-	var/tocheck
-	switch(stat_key)
-		if(STATKEY_STR)
-			tocheck = STASTR
-		if(STATKEY_PER)
-			tocheck = STAPER
-		if(STATKEY_END)
-			tocheck = STAEND
-		if(STATKEY_CON)
-			tocheck = STACON
-		if(STATKEY_INT)
-			tocheck = STAINT
-		if(STATKEY_SPD)
-			tocheck = STASPD
-		if(STATKEY_LCK)
-			tocheck = STALUC
+	var/tocheck = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, stat))
 	if(invert_dc)
-		return isnull(dee_cee) ? prob(tocheck * chance_per_point) : prob(clamp((dee_cee - tocheck) * chance_per_point,0,100))
-	else
-		return isnull(dee_cee) ? prob(tocheck * chance_per_point) : prob(clamp((tocheck - dee_cee) * chance_per_point,0,100))
+		return isnull(dee_cee) ? prob(tocheck * chance_per_point) : prob(clamp((dee_cee - tocheck) * chance_per_point, 0, 100))
+	return isnull(dee_cee) ? prob(tocheck * chance_per_point) : prob(clamp((tocheck - dee_cee) * chance_per_point, 0, 100))
 
-/mob/living/proc/get_stat_level(stat_key)
-	switch(stat_key)
-		if(STATKEY_STR)
-			return STASTR
-		if(STATKEY_PER)
-			return STAPER
-		if(STATKEY_END)
-			return STAEND
-		if(STATKEY_CON)
-			return STACON
-		if(STATKEY_INT)
-			return STAINT
-		if(STATKEY_SPD)
-			return STASPD
-		if(STATKEY_LCK)
-			return STALUC
+/**
+ * Returns the final value of a stat by STAT_* typepath.
+ * Identical to get_stat() - kept for call-site compatibility.
+ */
+/mob/living/proc/get_stat_level(stat)
+	return get_stat(stat)
 
+/**
+ * Returns TRUE (probabilistically) if the mob is unlucky.
+ * Chance scales with how far fortune is below 10.
+ */
 /mob/living/proc/badluck(multi = 3)
-	if(STALUC < 10)
-		return prob((10 - STALUC) * multi)
+	var/fortune = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_FORTUNE))
+	if(fortune < 10)
+		return prob((10 - fortune) * multi)
 
+/**
+ * Returns TRUE (probabilistically) if the mob is lucky.
+ * Chance scales with how far fortune is above 10.
+ */
 /mob/living/proc/goodluck(multi = 3)
-	if(STALUC > 10)
-		return prob((STALUC - 10) * multi)
+	var/fortune = nulltozero(GET_MOB_ATTRIBUTE_VALUE(src, STAT_FORTUNE))
+	if(fortune > 10)
+		return prob((fortune - 10) * multi)
 
-#define LEGACY_SOURCE "do not fucking edit or remove this admins i swear to god"
-
-/// ~~Adjusts stat values of mobs. set_stat == true to set directly.~~
-/mob/living/proc/change_stat(stat_key, adjust_amount)
-	//! DEPRECATED PROC
-	if(!stat_key || !adjust_amount)
+/**
+ * DEPRECATED: Legacy wrapper. Use adjust_stat_modifier() directly.
+ * Kept so existing call sites don't crash before they're updated.
+ */
+/mob/living/proc/change_stat(stat, adjust_amount)
+	if(!stat || !adjust_amount)
 		return
+	adjust_stat_modifier("legacy_change_stat", list((stat) = adjust_amount))
 
-	adjust_stat_modifier(LEGACY_SOURCE, stat_key, adjust_amount)
+/**
+ * Recomputes all final stat values from raw_attribute_list + attribute_modification.
+ * Equivalent to the old recalculate_stats(). Thin wrapper around update_attributes().
+ */
+/mob/living/proc/recalculate_stats()
+	attributes?.update_attributes()
 
-#undef LEGACY_SOURCE
-
-/// Recalculates all of a mob's stats and stat modifiers. Don't use this more than you **need** to.
-/mob/living/proc/recalculate_stats(including_modifiers = TRUE)
-	if(including_modifiers)
-		// we discard all of our mods and compile them again
-		modified_strength = 0
-		modified_perception = 0
-		modified_endurance = 0
-		modified_constitution = 0
-		modified_intelligence = 0
-		modified_speed = 0
-		modified_fortune = 0
-
-		for(var/source in stat_modifiers)
-			var/sourced_modifiers = LAZYACCESS(stat_modifiers, source)
-			for(var/stat_key in sourced_modifiers)
-				var/adjustment = LAZYACCESS(sourced_modifiers, stat_key)
-				switch(stat_key) //I am sorry for this
-					if(STATKEY_STR)
-						modified_strength += adjustment
-					if(STATKEY_PER)
-						modified_perception += adjustment
-					if(STATKEY_END)
-						modified_endurance += adjustment
-					if(STATKEY_CON)
-						modified_constitution += adjustment
-					if(STATKEY_INT)
-						modified_intelligence += adjustment
-					if(STATKEY_SPD)
-						modified_speed += adjustment
-					if(STATKEY_LCK)
-						modified_fortune += adjustment
-
-	UPDATE_STRENGTH()
-	UPDATE_PERCEPTION()
-	UPDATE_ENDURANCE()
-	UPDATE_CONSTITUTION()
-	UPDATE_INTELLIGENCE()
-	UPDATE_SPEED()
-	UPDATE_FORTUNE()
-
+/**
+ * Resets all stats to default (10), clears all modifiers, then re-rolls.
+ */
 /mob/living/proc/reset_and_reroll_stats()
-	//Reset base stats to defaults
-	base_strength = 10
-	base_perception = 10
-	base_endurance = 10
-	base_constitution = 10
-	base_intelligence = 10
-	base_speed = 10
-	base_fortune = 10
-
-	//Clear all cached modifiers
-	modified_strength = 0
-	modified_perception = 0
-	modified_endurance = 0
-	modified_constitution = 0
-	modified_intelligence = 0
-	modified_speed = 0
-	modified_fortune = 0
-	stat_modifiers = list()
-
-	//Reset stat roll var so roll_mob_stats() will work
+	if(!attributes)
+		return
+	// Raw stat values are always 10 - variance, species, age etc. are all modifiers.
+	// Snapshot the keys first - remove_attribute_modifier modifies the list in place
+	// so iterating it directly while removing would skip entries.
+	var/list/to_remove = LAZYCOPY(attributes.attribute_modification)
+	for(var/mod_id in to_remove)
+		attributes.remove_attribute_modifier(mod_id, FALSE)
+	attributes.update_attributes()
+	// Re-roll
 	has_rolled_for_stats = FALSE
-
-	//Reroll mob stats
 	roll_mob_stats()
-
-	//recalc all modifiers to ensure final stats are up to date
-	recalculate_stats()
-
-#undef UPDATE_STRENGTH
-#undef UPDATE_PERCEPTION
-#undef UPDATE_ENDURANCE
-#undef UPDATE_CONSTITUTION
-#undef UPDATE_INTELLIGENCE
-#undef UPDATE_SPEED
-#undef UPDATE_FORTUNE

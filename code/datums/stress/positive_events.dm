@@ -154,12 +154,12 @@
 
 /datum/stress_event/self_fishface
 	timer = 2 MINUTES
-	stress_change = -1
+	stress_change = 0
 	desc = span_green("I don't know what others are on about, I look perfectly fine if I do say so myself.")
 
 /datum/stress_event/fellow_fishface
 	timer = 2 MINUTES
-	stress_change = -2
+	stress_change = 0
 	desc = span_green("A fellow Triton, looking good!")
 
 /datum/stress_event/eora
@@ -419,3 +419,8 @@
 	stress_change = -1
 	desc = span_green("Someone gave me a good pie-ing.")
 	timer = 3 MINUTES
+
+/datum/stress_event/black_briar_noc
+	timer = 5 MINUTES
+	stress_change = -5
+	desc = span_briar("I stare at Noc, and He stares back...")

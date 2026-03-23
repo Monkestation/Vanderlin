@@ -85,9 +85,6 @@
 /obj/structure/flora/tree/evil/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(controller)
-		controller.endvines()
-		controller = null
 	return ..()
 
 /obj/structure/flora/tree/wise
@@ -674,8 +671,8 @@
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
-	user.visible_message(span_noticesmall("[user] searches through [src]."))
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
+	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))
 
@@ -813,10 +810,10 @@
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
-	prob2findgoodie = prob2findgoodie + ( user.STALUC * 2 ) + ( user.STAPER * 2 )
-	luckydouble = ( user.STALUC * 2 )
-	user.visible_message(span_noticesmall("[user] searches through [src]."))
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
+	prob2findgoodie = prob2findgoodie + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 ) + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 2 )
+	luckydouble = ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 )
+	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))
 
@@ -856,7 +853,7 @@
 					return
 
 		else
-			to_chat(user, span_noticesmall("Didn't find anything."))
+			to_chat(user, span_smallnotice("Didn't find anything."))
 	prob2findstuff = 18
 	prob2findgoodie = 15
 	luckydouble	= 3

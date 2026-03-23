@@ -5,6 +5,24 @@
 	deserve the headache you give her."
 	migrant_job = /datum/job/migrant/urchinbrain
 
+/datum/attribute_holder/sheet/job/migrant/urchinbrain
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = -1,
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -1,
+		STAT_INTELLIGENCE = 3,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/mathematics = 40,
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/misc/stealing = 50,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+	)
+
 /datum/job/migrant/urchinbrain
 	title = "Urchin Leader"
 	tutorial = "Without you, your friends would be dead in a ditch. You're the boss, that's why you've got a nice hat. \
@@ -14,31 +32,10 @@
 	allowed_ages = list(AGE_CHILD)
 	is_foreigner = FALSE
 
-	jobstats = list(
-		STATKEY_CON = -2,
-		STATKEY_END = -1,
-		STATKEY_STR = -1,
-		STATKEY_SPD = -1,
-		STATKEY_INT = 3,
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/mathematics = 4,
-		/datum/skill/misc/sneaking = 4,
-		/datum/skill/misc/stealing = 5,
-		/datum/skill/misc/climbing = 4,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/urchinbrain
 
 	traits = list(TRAIT_ORPHAN)
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
-
-/datum/job/migrant/urchinbrain/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, rand(3), TRUE)
 
 /datum/outfit/urchinbrain
 	name = "Urchin Leader (Migrant Wave)"
@@ -59,6 +56,23 @@
 	deserves... Don't overdo it, though - lest the Matron put an end to this scheme you lot have going."
 	migrant_job = /datum/job/migrant/urchinbrawn
 
+/datum/attribute_holder/sheet/job/migrant/urchinbrawn
+	attribute_variance = list(
+		/datum/attribute/skill/combat/unarmed = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_INTELLIGENCE = -2,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 40,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
 /datum/job/migrant/urchinbrawn
 	title = "Urchin"
 	tutorial = "Life in the orphanage is detestable, nobody ever brought you into a family. A child denied love will burn \
@@ -66,28 +80,10 @@
 	deserves... Don't overdo it, though - lest the Matron put an end to this scheme you lot have going."
 	outfit = /datum/outfit/urchinbrawn
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = -1,
-		STATKEY_END = -1,
-		STATKEY_INT = -2,
-		STATKEY_SPD = -2,
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 4,
-		/datum/skill/misc/climbing = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/urchinbrawn
 
 	traits = list(TRAIT_ORPHAN)
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
-
-/datum/job/migrant/urchinbrawn/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1, 2), TRUE)
 
 /datum/outfit/urchinbrawn
 	name = "Urchin (Migrant Wave)"

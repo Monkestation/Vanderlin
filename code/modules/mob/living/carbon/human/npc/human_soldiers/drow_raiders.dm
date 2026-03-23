@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	flee_in_pain = TRUE
 	d_intent = INTENT_DODGE
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 15
 
 /mob/living/carbon/human/species/elf/dark/drowraider/ambush
 	wander = TRUE
@@ -61,7 +62,6 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	set_hair_color("#DDDDDD")
 
 	head.add_bodypart_feature(new_hair)
-	head.sellprice = 40
 
 	dna.update_ui_block(DNA_HAIR_COLOR_BLOCK)
 	dna.species.handle_body(src)
@@ -84,6 +84,22 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 
 	update_body()
 
+/datum/attribute_holder/sheet/job/npc/drowraider
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = 3,
+		STAT_CONSTITUTION = 4,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
 /datum/outfit/job/human/species/elf/dark/drowraider/pre_equip(mob/living/carbon/human/H)
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced
 	pants = /obj/item/clothing/pants/trou/shadowpants
@@ -101,17 +117,4 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 		r_hand = /obj/item/weapon/knife/dagger/steel/dirk
 		l_hand = /obj/item/weapon/knife/dagger/steel/dirk
 
-	H.base_strength = 12 // 6 Points
-	H.base_speed = 13 // 3 points
-	H.base_constitution = 14 // 4 points
-	H.base_endurance = 12 // 2 points - 14 points spread. Equal to 1 more than a KC accounting for Statpack.
-	H.base_perception = 10
-	H.base_intelligence = 10
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/drowraider)

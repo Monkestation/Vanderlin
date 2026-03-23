@@ -101,6 +101,7 @@
 	desc = "Take to the skies or return to the ground."
 	button_icon_state = "flight"
 	var/active_background_icon_state = "spell1"
+	check_flags = AB_CHECK_IMMOBILE | AB_CHECK_CONSCIOUS
 
 	/// If currently flying, for feedback
 	var/flying = FALSE

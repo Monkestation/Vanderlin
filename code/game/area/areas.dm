@@ -14,6 +14,7 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
+	luminosity = TRUE
 
 	/// List of all turfs currently inside this area as nested lists indexed by zlevel.
 	/// Acts as a filtered bersion of area.contents For faster lookup
@@ -92,6 +93,13 @@
 
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
+
+	var/dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
+
+// Represents our version of a "space" turf, an area that should only have closed/basic turfs
+/area/empty_space
+	icon_state = "unknown"
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 
 /**
  * A list of teleport locations
@@ -188,22 +196,22 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	if (zlevel_to_clean <= length(turfs_by_zlevel) && zlevel_to_clean <= length(turfs_to_uncontain_by_zlevel))
 		turfs_by_zlevel[zlevel_to_clean] -= turfs_to_uncontain_by_zlevel[zlevel_to_clean]
 
-	if (_autoclean) // Removes empty lists from the end of this list
-		var/new_length = length(turfs_to_uncontain_by_zlevel)
-		// Walk backwards thru the list
-		for (var/i in length(turfs_to_uncontain_by_zlevel) to 0 step -1)
-			if (i && length(turfs_to_uncontain_by_zlevel[i]))
-				break // Stop the moment we find a useful list
-			new_length = i
-
-		if (new_length < length(turfs_to_uncontain_by_zlevel))
-			turfs_to_uncontain_by_zlevel.len = new_length
-
-		if (new_length >= zlevel_to_clean)
-			turfs_to_uncontain_by_zlevel[zlevel_to_clean] = list()
-	else
+	if (!_autoclean) // Removes empty lists from the end of this list
 		turfs_to_uncontain_by_zlevel[zlevel_to_clean] = list()
+		return
 
+	var/new_length = length(turfs_to_uncontain_by_zlevel)
+	// Walk backwards thru the list
+	for (var/i in length(turfs_to_uncontain_by_zlevel) to 0 step -1)
+		if (i && length(turfs_to_uncontain_by_zlevel[i]))
+			break // Stop the moment we find a useful list
+		new_length = i
+
+	if (new_length < length(turfs_to_uncontain_by_zlevel))
+		turfs_to_uncontain_by_zlevel.len = new_length
+
+	if (new_length >= zlevel_to_clean)
+		turfs_to_uncontain_by_zlevel[zlevel_to_clean] = list()
 
 /// Ensures that the contained_turfs list properly represents the turfs actually inside us
 /area/proc/cannonize_contained_turfs()
@@ -211,7 +219,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		cannonize_contained_turfs_by_zlevel(area_zlevel, _autoclean = FALSE)
 
 	turfs_to_uncontain_by_zlevel = list()
-
 
 /// Returns TRUE if we have contained turfs, FALSE otherwise
 /area/proc/has_contained_turfs()
@@ -241,13 +248,10 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		icon_state = ""
 	first_time_text = uppertext(first_time_text) // Standardization
 
-	if(dynamic_lighting == DYNAMIC_LIGHTING_FORCED)
-		dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
+	if(dynamic_lighting)
 		luminosity = 0
-	else if(dynamic_lighting != DYNAMIC_LIGHTING_IFSTARLIGHT)
-		dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
-	if(dynamic_lighting == DYNAMIC_LIGHTING_IFSTARLIGHT)
-		dynamic_lighting = CONFIG_GET(flag/starlight) ? DYNAMIC_LIGHTING_ENABLED : DYNAMIC_LIGHTING_DISABLED
+	else
+		luminosity = 1
 
 	. = ..()
 
@@ -488,3 +492,30 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	. = ..()
 	if(istype(boarder) && boarder.client)
 		boarder.refresh_looping_ambience()
+
+/area/proc/set_dynamic_lighting(new_dynamic_lighting = DYNAMIC_LIGHTING_ENABLED)
+	if (new_dynamic_lighting == dynamic_lighting)
+		return FALSE
+
+	dynamic_lighting = new_dynamic_lighting
+
+	if (IS_DYNAMIC_LIGHTING(src))
+		cut_overlay(/obj/effect/fullbright)
+		for (var/turf/T in src)
+			if (IS_DYNAMIC_LIGHTING(T))
+				T.lighting_build_overlay()
+
+	else
+		add_overlay(/obj/effect/fullbright)
+		for (var/turf/T in src)
+			if (T.lighting_object)
+				T.lighting_clear_overlay()
+
+	return TRUE
+
+/area/vv_edit_var(var_name, var_value)
+	switch(var_name)
+		if("dynamic_lighting")
+			set_dynamic_lighting(var_value)
+			return TRUE
+	return ..()

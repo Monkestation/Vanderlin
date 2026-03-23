@@ -84,7 +84,7 @@
 	base_intents = list(/datum/intent/simple/bite)
 
 /mob/living/simple_animal/hostile/retaliate/spider/Initialize()
-	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands // due to signal overridings from pet commands
+	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands
 	. = ..()
 	gender = MALE
 	if(prob(33))
@@ -127,11 +127,11 @@
 			realchance += 15
 		if(realchance)
 			if(user.mind)
-				realchance += (user.get_skill_level(/datum/skill/labor/taming, TRUE) * 20)
+				realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
 			if(prob(realchance))
 				tamed(user)
-				var/boon = user.get_learning_boon(/datum/skill/labor/taming)
-				user.adjust_experience(/datum/skill/labor/taming, (user.STAINT*10) * boon)
+				var/boon = user.get_learning_boon(/datum/attribute/skill/labor/taming)
+				user.adjust_experience(/datum/attribute/skill/labor/taming, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*10) * boon)
 			else
 				tame_chance += bonus_tame_chance
 		return TRUE

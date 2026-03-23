@@ -66,7 +66,7 @@
 
 	var/obj/structure/flora/tree/wise/new_wise_tree = new(T)
 	new_wise_tree.activated = TRUE
-	new_wise_tree.set_light(2, 2, 2, l_color = "#66FF99")
+	new_wise_tree.set_light(2, 2, l_color = "#66FF99")
 
 	qdel(target)
 

@@ -48,6 +48,24 @@
 	ai_controller = /datum/ai_controller/raccoon
 	tame_chance = 25
 
+	var/static/list/pet_commands = list(
+		/datum/pet_command/fish,
+		/datum/pet_command/idle,
+		/datum/pet_command/free,
+		/datum/pet_command/good_boy,
+		/datum/pet_command/follow,
+		/datum/pet_command/attack,
+		/datum/pet_command/fetch,
+		/datum/pet_command/play_dead,
+		/datum/pet_command/protect_owner,
+		/datum/pet_command/aggressive,
+		/datum/pet_command/calm,
+	)
+
+/mob/living/simple_animal/hostile/retaliate/raccoon/Initialize()
+	. = ..()
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
 /obj/effect/decal/remains/raccoon
 	desc = "Whether through unlucky circumstance or other means, this raccoon has passed."
 	icon = 'icons/roguetown/mob/monster/raccoon.dmi'

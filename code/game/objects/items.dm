@@ -768,7 +768,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				C.visible_message(span_smallnotice("[C] starts taking off [src]..."), span_smallnotice("I start taking off [src]..."))
 
 			var/doafter_flags = edelay_type ? (IGNORE_USER_LOC_CHANGE) : (NONE)
-			return do_after(C, minone(unequip_delay_self-C.STASPD), timed_action_flags = doafter_flags)
+			return do_after(C, minone(unequip_delay_self-GET_MOB_ATTRIBUTE_VALUE(C, STAT_SPEED)), timed_action_flags = doafter_flags)
 
 	return TRUE
 
@@ -1249,7 +1249,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(tool_behaviour == TOOL_MINING && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		skill_modifier = H.get_skill_speed_modifier(/datum/skill/labor/mining)
+		skill_modifier = GET_MOB_SKILL_SPEED_MOD(H, /datum/attribute/skill/labor/mining)
 
 	delay *= toolspeed * skill_modifier
 
@@ -1367,7 +1367,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/on_unwield(obj/item/source, mob/living/carbon/user)
 	wdefense -= 1
-	user.update_a_intents()
+	user?.update_a_intents()
 
 /obj/item/proc/is_wielded()
 	var/datum/component/two_handed/two_handed = GetComponent(/datum/component/two_handed)
@@ -1525,7 +1525,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(!get_precursor_data(src))
 		return
-	var/alch_skill = user.get_skill_level(/datum/skill/craft/alchemy)
+	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/alchemy) : 6
 	var/datum/natural_precursor/precursor = get_precursor_data(src)
 	if(precursor)
 		for(var/datum/thaumaturgical_essence/essence as anything in precursor.essence_yields)

@@ -5,7 +5,7 @@
 	sound = 'sound/items/dig_shovel.ogg'
 
 	spell_type = SPELL_MIRACLE
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	attunements = list(
 		/datum/attunement/earth = 0.5,
@@ -21,7 +21,7 @@
 	if(!.)
 		return
 	// Permanent for now
-	ADD_TRAIT(cast_on, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+	ADD_TRAIT(cast_on, TRAIT_ENTANGLER_IMMUNITY, MAGIC_TRAIT)
 
 /datum/action/cooldown/spell/undirected/touch/entangler/cast_on_hand_hit(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster, list/modifiers)
 	. = ..()
@@ -41,7 +41,7 @@
 	return TRUE
 
 /datum/action/cooldown/spell/undirected/touch/entangler/proc/try_mark(mob/living/victim)
-	var/has_trait = HAS_TRAIT_FROM(victim, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+	var/has_trait = HAS_TRAIT_FROM(victim, TRAIT_ENTANGLER_IMMUNITY, MAGIC_TRAIT)
 	var/action = has_trait ? "removing" : "adding"
 	owner.visible_message("[owner] presses their thumb on [victim]'s forehead and begins [action] Dendor's mark.")
 	if(!do_after(owner, 5 SECONDS, victim))
@@ -53,7 +53,7 @@
 			span_warning("I remove the mark from [victim]'s forehead."),
 		)
 		to_chat(victim, span_userdanger("The vines have forsaken you."))
-		REMOVE_TRAIT(victim, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+		REMOVE_TRAIT(victim, TRAIT_ENTANGLER_IMMUNITY, MAGIC_TRAIT)
 		return
 	playsound(owner, 'sound/magic/ahh2.ogg', 55, TRUE)
 	owner.visible_message(
@@ -61,4 +61,4 @@
 		span_nicegreen("I mark [victim]'s forehead."),
 	)
 	to_chat(victim, span_nicegreen("You are a child of the vines."))
-	ADD_TRAIT(victim, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+	ADD_TRAIT(victim, TRAIT_ENTANGLER_IMMUNITY, MAGIC_TRAIT)

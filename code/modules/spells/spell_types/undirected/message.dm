@@ -64,7 +64,7 @@
 	if(!message)
 		reset_cooldown()
 		return . | SPELL_CANCEL_CAST
-	var/answer = browser_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
+	var/answer = tgui_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(answer == CHOICE_CONFIRM)
@@ -78,7 +78,7 @@
 		return
 	if(!recipient.mind)
 		return
-	if(anonymous && (recipient.STAPER >= 15))
+	if(anonymous && (GET_MOB_ATTRIBUTE_VALUE(recipient, STAT_PERCEPTION) >= 15))
 		if(recipient.mind?.do_i_know(name = owner.real_name))
 			to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into [owner]'s voice: <font color=#7246ff>[message]</font>")
 			return

@@ -12,7 +12,8 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/minotaur_unarmed)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 10,
-						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2)
+						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3)
 	faction = list("caves")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 1500
@@ -153,7 +154,7 @@
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire_small"
 	layer = BELOW_MOB_LAYER
-	light_outer_range = 2
+	light_range = 2
 	light_color = LIGHT_COLOR_FIRE
 	duration = 4 SECONDS
 	var/damage_per_tick = 5
@@ -211,7 +212,7 @@
 	name = "raging inferno"
 	desc = "A violent eruption of magical flames!"
 	icon_state = "fire"
-	light_outer_range = 3
+	light_range = 3
 	light_color = "#FF3300"
 	duration = 5 SECONDS
 	damage_per_tick = 8
