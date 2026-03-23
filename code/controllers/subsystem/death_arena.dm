@@ -156,13 +156,13 @@ SUBSYSTEM_DEF(death_arena)
 
 /datum/controller/subsystem/death_arena/proc/open_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.open()
 
 /datum/controller/subsystem/death_arena/proc/close_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.close()
 
@@ -177,8 +177,8 @@ SUBSYSTEM_DEF(death_arena)
 /datum/outfit/arena_skeleton/pre_equip(mob/living/carbon/human/H, visuals_only)
 	..()
 
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	H.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, TRUE)
+	H.adjust_skill_level(/datum/attribute/skill/combat/swords, 20, TRUE)
 
 	r_hand = /obj/item/weapon/mace/steel
 	l_hand = /obj/item/weapon/shield/wood
@@ -227,4 +227,4 @@ SUBSYSTEM_DEF(death_arena)
 
 /obj/structure/underworld/necra/Initialize()
 	. = ..()
-	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)

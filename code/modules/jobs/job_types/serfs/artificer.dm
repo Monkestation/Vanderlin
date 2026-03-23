@@ -1,3 +1,49 @@
+/datum/attribute_holder/sheet/job/artificer
+	attribute_variance = list(
+		/datum/attribute/skill/labor/lumberjacking = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/craft/masonry = 30,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/craft/engineering = 40,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/labor/mining = 20,
+		/datum/attribute/skill/craft/smelting = 40,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/craft/bombs = 30,
+	)
+
+/datum/attribute_holder/sheet/job/artificer/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/craft/masonry = 30,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/craft/engineering = 50,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/labor/mining = 20,
+		/datum/attribute/skill/craft/smelting = 40,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/craft/bombs = 30,
+	)
+
+
 /datum/job/artificer
 	title = "Artificer"
 	tutorial = "You are one of the greatest minds of Heartfelt- an artificer, an engineer. \
@@ -23,34 +69,8 @@
 		EXP_TYPE_LIVING = 600
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/craft/masonry = 3,
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/craft/engineering = 4,
-		/datum/skill/misc/lockpicking = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/labor/mining = 2,
-		/datum/skill/craft/smelting = 4,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/labor/mathematics = 2,
-		/datum/skill/craft/bombs = 3,
-	)
-
-/datum/job/artificer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/labor/lumberjacking, pick(1,2), TRUE)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/artificer
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/artificer/old
 
 /datum/outfit/artificer
 	name = "Artificer"

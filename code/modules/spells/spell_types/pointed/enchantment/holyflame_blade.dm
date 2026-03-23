@@ -12,7 +12,7 @@
 	spell_cost = 30
 	enchantment = DIVINE_FIRE_ENCHANT
 	spell_type = SPELL_MIRACLE
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
 
 /datum/action/cooldown/spell/enchantment/holy_flame/is_valid_target(atom/cast_on)
@@ -29,7 +29,7 @@
 		to_chat(owner, span_warning("There is nothing to enchant!"))
 		return FALSE
 
-	if(enchant_item.GetComponent(/datum/component/martyrweapon))
+	if(enchant_item.GetComponent(/datum/component/martyr_weapon))
 		to_chat(owner, span_warning("You cannot imbue such a powerful weapon with any more divine power!"))
 		return FALSE
 

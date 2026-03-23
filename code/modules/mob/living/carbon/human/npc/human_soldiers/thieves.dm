@@ -7,6 +7,7 @@
 	m_intent = MOVE_INTENT_SNEAK
 	d_intent = INTENT_DODGE
 	ai_controller = /datum/ai_controller/human_npc
+	headprice = 10
 
 /mob/living/carbon/human/species/human/northern/thief/Initialize()
 	. = ..()
@@ -72,7 +73,21 @@
 	else
 		real_name = pick(file2list("strings/names/first_male.txt"))
 	update_body()
-	head.sellprice = 30
+
+/datum/attribute_holder/sheet/job/npc/thief
+	raw_attribute_list = list(
+		STAT_SPEED = 6,
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
 
 /datum/outfit/job/human/species/human/northern/thief/pre_equip(mob/living/carbon/human/H)
 	cloak = /obj/item/clothing/cloak/raincloak/colored/mortus
@@ -94,15 +109,4 @@
 	l_hand = /obj/item/weapon/knife/dagger
 	if(prob(50))
 		l_hand = /obj/item/weapon/knife/copper
-	H.base_strength = 11
-	H.base_speed = 16
-	H.base_constitution = 11
-	H.base_endurance = 11
-	H.base_perception = 11
-	H.base_intelligence = 1
-	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/thief)

@@ -117,6 +117,7 @@
 #define COMSIG_MOB_POSTATTACK_RANGED "mob_postattack_ranged"
 #define COMSIG_MOB_THROW "mob_throw"							//from base of /mob/throw_item(): (atom/target)
 #define COMSIG_MOB_EXAMINATE "mob_examinate"					//from base of /mob/verb/examinate(): (atom/target)
+#define COMSIG_MOB_EXAMINATE_CARBON "mob_examinte_carbon"		//from base of mob/living/carbon/examine(): (mob/user, mob/target, list/pronouns, list/examine_strings)
 #define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"				//from base of /mob/update_sight(): ()
 #define COMSIG_MOB_SAY "mob_say" // from /mob/living/say(): ()
 	#define COMPONENT_UPPERCASE_SPEECH 1
@@ -367,3 +368,6 @@
 
 #define COMPONENT_AUGMENT_SUCCESS (1<<0)
 #define COMPONENT_AUGMENT_FAILED (1<<1)
+
+#define COMSIG_SHARE_APPRENTICE_XP "comsig_share_xp"
+#define COMSIG_SKILL_LEVEL_CHANGE "comsig_level_changed"

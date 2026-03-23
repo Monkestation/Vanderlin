@@ -256,9 +256,9 @@
 	. = ..()
 	//The hardier you are, the more likely you are to recover from grievous wounds.
 	var/stat_bonus = 0
-	stat_bonus += ((owner.STACON - 10 ) * 0.05)
-	stat_bonus += ((owner.STASTR - 10 ) * 0.05)
-	stat_bonus += ((owner.STAEND - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_STRENGTH) - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 10 ) * 0.05)
 	if(stat_bonus > 0)
 		healing_on_tick += stat_bonus
 		blood_healing_on_tick += (stat_bonus * 10)

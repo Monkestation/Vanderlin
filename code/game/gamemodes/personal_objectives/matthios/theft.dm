@@ -28,6 +28,11 @@
 	else
 		to_chat(owner.current, span_notice("Item stolen! Steal [required_count - stolen_count] more to complete Matthios' objective."))
 
+/datum/attribute_modifier/steal_items
+	attribute_list = list(
+		/datum/attribute/skill/misc/stealing = 10
+	)
+
 /datum/objective/personal/steal_items/complete_objective()
 	. = ..()
 	to_chat(owner.current, span_greentext("You have stolen enough items to complete Matthios' objective!"))
@@ -36,8 +41,8 @@
 
 /datum/objective/personal/steal_items/reward_owner()
 	. = ..()
-	owner.current.adjust_skillrank(/datum/skill/misc/stealing, 1)
-	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, STATKEY_SPD, 1)
+	owner.current.attributes?.add_attribute_modifier(/datum/attribute_modifier/steal_items)
+	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, list(STAT_SPEED = 1))
 
 /datum/objective/personal/steal_items/update_explanation_text()
 	explanation_text = "Steal [required_count] item\s from others to prove your cunning to Matthios!"

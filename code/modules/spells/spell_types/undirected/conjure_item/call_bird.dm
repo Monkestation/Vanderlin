@@ -174,7 +174,7 @@
 		if(isliving(user))
 			var/mob/living/L = user
 			var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
-			if(prob(L.STASPD * 2) || spell.owner == user)
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2) || spell.owner == user)
 				if(istype(I, /obj/item/paper) && spell.owner == user)
 					var/obj/item/paper/P = I
 					if(length(P.info) > 0)

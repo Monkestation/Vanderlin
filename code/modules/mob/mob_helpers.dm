@@ -45,6 +45,19 @@
 
 	return zone
 
+///Returns a TRUE / FALSE if the zone is a FACE coverage subzone. Used mainly by accuracy_check & bait.
+/proc/check_face_subzone(zone)
+	if(!zone)
+		return FALSE
+	var/list/zones = list(
+		BODY_ZONE_PRECISE_R_EYE,
+		BODY_ZONE_PRECISE_L_EYE,
+		BODY_ZONE_PRECISE_MOUTH,
+		BODY_ZONE_PRECISE_NOSE,
+		BODY_ZONE_PRECISE_EARS,
+	)
+	return (zone in zones)
+
 /**
  * Return the zone or randomly, another valid zone
  *
@@ -960,21 +973,6 @@
 /mob/proc/can_hear()
 	. = TRUE
 
-/**
- * Examine text for traits shared by multiple types.
- *
- * I wish examine was less copypasted. (oranges say, be the change you want to see buddy)
- */
-/mob/proc/common_trait_examine()
-	if(HAS_TRAIT(src, TRAIT_DISSECTED))
-		var/dissectionmsg = ""
-		if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Extraterrestrial Dissection"))
-			dissectionmsg = " via Extraterrestrial Dissection. It is no longer worth experimenting on"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Experimental Dissection"))
-			dissectionmsg = " via Experimental Dissection"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Thorough Dissection"))
-			dissectionmsg = " via Thorough Dissection"
-		. += "<span class='notice'>This body has been dissected and analyzed[dissectionmsg].</span><br>"
 
 /**
  * Get the list of keywords for policy config
@@ -1001,13 +999,9 @@
 		used_title = return_our_apprentice_name()
 	else if(job)
 		var/datum/job/job_datum = SSjob.GetJob(job)
-		if(!job_datum)
+		if(QDELETED(job_datum))
 			return job
-		var/datum/job/used_job = job_datum?.parent_job ? job_datum.parent_job : job_datum
-		if(!used_job)
-			return job
-		if(steward_check && (used_job.department_flag == OUTSIDERS))
+		if(steward_check && (job_datum.department_flag & OUTSIDERS))
 			return "Visitor"
-		used_title = used_job.get_informed_title(src, ignore_pronouns)
-
+		used_title = job_datum.get_informed_title(src, ignore_pronouns)
 	return used_title

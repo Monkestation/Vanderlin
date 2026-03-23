@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	. = ..()
 	START_PROCESSING(SSfastprocess, src)
 	Particle = new(src, /particles/papameat)
-	set_light(3, 3, 1, l_color = "#ff6533")
+	set_light(3, 1, l_color = "#ff6533")
 
 /obj/structure/meatvine/papameat/Destroy()
 	if(master)

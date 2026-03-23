@@ -21,6 +21,7 @@
 
 	is_foreigner = TRUE
 	can_have_apprentices = TRUE
+	can_be_apprentice = TRUE
 
 	selection_color = "#a33096"
 

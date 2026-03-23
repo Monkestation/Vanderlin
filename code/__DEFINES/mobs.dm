@@ -1,15 +1,4 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
-
-#define STATKEY_STR "strength"
-#define STATKEY_PER "perception"
-#define STATKEY_INT "intelligence"
-#define STATKEY_CON "constitution"
-#define STATKEY_END "endurance"
-#define STATKEY_SPD "speed"
-#define STATKEY_LCK "fortune"
-
-#define MOBSTATS list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_CON, STATKEY_END, STATKEY_SPD, STATKEY_LCK)
-
 //Misc mob defines
 
 //for vision cone
@@ -333,8 +322,8 @@
 
 #define HUMAN_FIRE_STACK_ICON_NUM	5
 
-#define GRAB_PIXEL_SHIFT_PASSIVE 6
-#define GRAB_PIXEL_SHIFT_AGGRESSIVE 12
+#define GRAB_PIXEL_SHIFT_PASSIVE 5
+#define GRAB_PIXEL_SHIFT_AGGRESSIVE 10
 
 #define PULL_PRONE_SLOWDOWN 2
 #define HUMAN_CARRY_SLOWDOWN 0

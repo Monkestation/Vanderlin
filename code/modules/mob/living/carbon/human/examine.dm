@@ -1,264 +1,106 @@
-/mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user, self_inspect = FALSE)
-	if(!istype(user))
+/mob/living/carbon/human/get_examine_string(mob/user, thats = FALSE)
+	. = ..()
+	var/used_title = get_role_title(src)
+	if(!used_title)
 		return
+	if(!IsAdminGhost(user))
+		if(!get_face_name("")) // face covered?
+			return
+		var/is_family_member = FALSE
+		if(ishuman(user))
+			var/mob/living/carbon/human/H = user
+			is_family_member = H.family_datum && H.family_datum != family_datum
+		if(!is_family_member)
+			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_ANY_OF_TRAITS(src, list(TRAIT_RECRUITED, TRAIT_RECOGNIZED)))
+				return
+			if(!user.mind?.do_i_know(mind, real_name))
+				return
+	. += ", the [used_title]"
 
-	// Intolerant
-	if(!self_inspect && !HAS_TRAIT(user, TRAIT_TOLERANT))
-		if(!isdarkelf(user) && isdarkelf(src))
-			user.add_stress(/datum/stress_event/delf)
+/mob/living/carbon/human/get_examine_list(mob/user, list/P)
+	. = ..()
+	// quirks
+	for(var/datum/quirk/Q in quirks)
+		Q.on_examined(user, P, .)
 
-		if(!istiefling(user) && istiefling(src))
-			user.add_stress(/datum/stress_event/tieb)
 
-		if(!ishalforc(user) && ishalforc(src))
-			user.add_stress(/datum/stress_event/horc)
+/mob/living/carbon/human/get_examine_face(mob/user, list/P, list/examine_list)
+	var/self_inspect = user == src
+	//var/pl = self_inspect ? "" : p_s()
+	var/mob/dead/observer/O = isobserver(user) ? user : null
+	//var/mob/living/L = isliving(user) ? user : null
+	//var/mob/living/carbon/C = iscarbon(user) ? user : null
+	var/mob/living/carbon/human/H = ishuman(user) ? user : null
 
-		if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-			if(user.has_quirk(/datum/quirk/vice/paranoid))
-				user.add_stress(/datum/stress_event/paraforeigner)
-			else
-				user.add_stress(/datum/stress_event/foreigner)
+	var/do_i_know = user.mind?.do_i_know(src.mind, real_name)
 
-		if(HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
-			user.add_stress(/datum/stress_event/fishface)
-
-	if(HAS_TRAIT(src, TRAIT_FISHFACE))
-		var/observer_fish = HAS_TRAIT(user, TRAIT_FISHFACE)
-		if(!self_inspect)
-			if(observer_fish)
-				user.add_stress(/datum/stress_event/fellow_fishface)
-			else if(user.age == AGE_CHILD)
-				user.add_stress(/datum/stress_event/fish_monster)
-		else if(observer_fish)
-			user.add_stress(/datum/stress_event/self_fishface)
-
-	if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
-		if(self_inspect)
-			user.add_stress(/datum/stress_event/beautiful_self)
-		else
-			user.add_stress(/datum/stress_event/beautiful)
-
-	if(HAS_TRAIT(src, TRAIT_UGLY))
-		if(self_inspect)
-			user.add_stress(/datum/stress_event/ugly_self)
-		else
-			user.add_stress(/datum/stress_event/ugly)
-
-	if(!self_inspect)
-		if(user.has_quirk(/datum/quirk/vice/paranoid) && (STASTR - user.STASTR) > 1)
-			user.add_stress(/datum/stress_event/parastr)
-
-		if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
-			user.add_stress(/datum/stress_event/saw_old_party)
-
-/mob/living/carbon/human/examine(mob/user)
-	var/self_inspect = (user == src)
-	var/is_observer = isobserver(user)
-
-	var/is_family_member = FALSE
-	if(ishuman(user))
-		var/mob/living/carbon/human/stranger = user
-		if(family_datum && family_datum == stranger.family_datum)
-			is_family_member = TRUE
-
-	var/temp_gender = null
-	var/obscure_name = FALSE
-	var/person_known = (self_inspect || is_observer)
-	if(!self_inspect && !is_observer)
-		if(name in list("Unknown", "Unknown Man", "Unknown Woman"))
-			obscure_name = TRUE
-			temp_gender = PLURAL
-		else if(is_family_member || user.mind?.do_i_know(name = real_name)) // If you don't know someone use their bodytype
-			person_known = TRUE
-
-	if(!obscure_name && src == SSticker.rulermob)
-		person_known = TRUE // Monarch is known to everyone
-
-	var/race_name = dna?.species.name
-	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(!self_inspect && maniac)
-		race_name = "disgusting pig"
-
-	var/ignore_pronouns = (obscure_name || !person_known)
-	var/t_He = p_they(TRUE, temp_gender, ignore_pronouns)
-	var/t_his = p_their(FALSE, temp_gender, ignore_pronouns)
-	var/t_has = p_have(temp_gender, ignore_pronouns)
-	var/t_is  = p_are(temp_gender, ignore_pronouns)
-	var/m1
-	var/m2
-	var/m3
-
-	if(!self_inspect)
-		m1 = "[t_He] [t_is]"
-		m2 = "[t_his]"
-		m3 = "[t_He] [t_has]"
-	else
-		m1 = "I am"
-		m2 = "my"
-		m3 = "I have"
+	// Skin tone procs on face but shows up with species
+	var/datum/species/species = dna?.species
+	if(species?.use_skintones)
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, \
+			"[capitalize(P[THEIR])] [lowertext(species.skin_tone_wording || "skin tone")] \
+			is [find_key_by_value(species.get_skin_list(), skin_tone) || "incomprehensible"].")
 
 	. = list()
 
-	/// header
-	. += span_info("ø ------------ ø")
-	/// name, title, etc. of the person
-	var/statement_of_identity = "This is "
-	if(obscure_name)
-		statement_of_identity += ("<EM>Unknown</EM>.")
-		. += statement_of_identity
-	else
-		on_examine_face(user, self_inspect)
+	// Culture
+	if(culture)
+		// do we know them, are we an observer, or do we share a culture
+		if((do_i_know || O || istype(culture, H?.culture?.type)) && !istype(culture, /datum/culture/universal/ambiguous))
+			var/culture_msg = self_inspect ? P[THEYRE] : "I believe [lowertext(P[THEYRE])]"
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[culture_msg] from [culture.examined_string(src, user)].")
+		// are they from anywhere
+		else if(!self_inspect)
+			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, "[P[THEY]] could be from anywhere.")
 
-		var/used_name = name
-		if(is_observer)
-			used_name = real_name
-
-		var/used_title = get_role_title(person_known)
-
-		// building the examine identity
-		if(article)
-			statement_of_identity += "<EM>[article] [used_name]</EM>"
-		else
-			statement_of_identity += "<EM>\a [used_name]</EM>"
-
-		var/appendage_to_name
-		if(race_name) // race name
-			appendage_to_name += " [race_name]"
-
-		// job name, don't show job of foreigners.
-		if(used_title && !HAS_TRAIT(src, TRAIT_FACELESS) && (!HAS_TRAIT(src, TRAIT_FOREIGNER) || HAS_TRAIT(src, TRAIT_RECRUITED) || HAS_TRAIT(src, TRAIT_RECOGNIZED)))
-			appendage_to_name += ", [used_title]"
-
-		if(appendage_to_name) // if we got any of those paramaters add it to their name
-			statement_of_identity += " the [appendage_to_name]"
-
-		statement_of_identity += "." // comma at the end
-		// full name with all paramaters would be: "John Serf the returning Rakshari, Minnie Bonnickers smithy apprentice.""
-		. += statement_of_identity
-
-		if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
-			. += span_notice("[m3] been granted the title of \"[GLOB.lord_titles[name]]\".")
-
-		if(dna.species.use_skintones)
-			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
-			var/list/skin_tones = dna.species.get_skin_list()
-			var/skin_tone_seen = "incomprehensible"
-			if(skin_tone)
-				//AGGHHHHH this is stupid
-				for(var/tone in skin_tones)
-					if(skin_tone == skin_tones[tone])
-						skin_tone_seen = lowertext(tone)
-						break
-
-			. += span_info("[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].")
-
-		if(culture)
-			if(!person_known || istype(culture, /datum/culture/universal/ambiguous))
-				if(!self_inspect)
-					. += span_info("[capitalize(t_He)] could be from anywhere.")
+	// Pre-Non-Self Inspections
+	if(!self_inspect)
+		//Relation
+		var/is_family = FALSE
+		if(family_datum && family_datum == H?.family_datum)
+			var/family_text = ReturnRelation(user)
+			if(family_text)
+				. += family_text
+			is_family = TRUE
+		// Know check
+		if(!is_family && !O)
+			if(do_i_know)
+				. += span_tinynotice("I know [P[THEM]].")
 			else
-				var/pre_string = "[capitalize(m1)]"
-				if(!self_inspect)
-					pre_string = "I believe [m1]"
+				. += span_tinywarning("I do not know [P[THEM]].")
 
-				. += span_info("[pre_string] from [culture.examined_string(src, user)].")
+	// Normal stuff
+	. += ..()
 
-		if(ishuman(user))
-			var/mob/living/carbon/human/stranger = user
-			var/is_male = FALSE
-			if(t_He == "He")
-				is_male = TRUE
+	// Post-Non-Self Inspections
+	if(!self_inspect)
+		// Schism
+		if(length(GLOB.tennite_schisms))
+			var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
+			var/user_side = (WEAKREF(user) in S.supporters_astrata) ? ASTRATA : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
+			var/mob_side = (WEAKREF(src) in S.supporters_astrata) ? ASTRATA : (WEAKREF(src) in S.supporters_challenger) ? "challenger" : null
 
-			if(!self_inspect && family_datum && family_datum == stranger.family_datum)
-				var/family_text = ReturnRelation(user)
-				if(family_text)
-					. += family_text
+			if(user_side && mob_side)
+				var/datum/patron/their_god = (mob_side == ASTRATA) ? S.astrata_god.resolve() : S.challenger_god.resolve()
+				if(their_god)
+					. += (user_side == mob_side) ? span_notice("Fellow [their_god.name] supporter!") : span_boldannounce("Vile [their_god.name] supporter!")
 
-			if(HAS_TRAIT(src, TRAIT_BEAUTIFUL))
-				//Handsome only if male, beautiful in all other pronouns.
-				. += span_love(span_bold("[self_inspect ? "I am" : "[t_He] is"] [is_male ? "handsome" : "beautiful"]!"))
-
-			if(HAS_TRAIT(src, TRAIT_UGLY))
-				. += span_necrosis(span_bold("[self_inspect ? "I am" : "[t_He] is"] hideous."))
-
-			if(HAS_TRAIT(src, TRAIT_FAT))
-				. += span_boldwarning(span_bold("[self_inspect ? "I am" : "[t_He] is"] very obese!"))
-
-		if(HAS_TRAIT(src, TRAIT_FISHFACE) && HAS_TRAIT(user, TRAIT_FISHFACE))
-			if(self_inspect)
-				. += span_green("I don't look that bad, I just look different to other species.")
-			else
-				. += span_green("A fellow triton.")
-
-		// Things that happen when you can see face and its another person you are examining
-		if(!self_inspect)
-			if(length(GLOB.tennite_schisms))
-				var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
-				var/user_side = (WEAKREF(user) in S.supporters_astrata) ? "astrata" : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
-				var/mob_side = (WEAKREF(src) in S.supporters_astrata) ? "astrata" : (WEAKREF(src) in S.supporters_challenger) ? "challenger" : null
-
-				if(user_side && mob_side)
-					var/datum/patron/their_god = (mob_side == "astrata") ? S.astrata_god.resolve() : S.challenger_god.resolve()
-					if(their_god)
-						. += (user_side == mob_side) ? span_notice("Fellow [their_god.name] supporter!") : span_userdanger("Vile [their_god.name] supporter!")
-
-			if(ishuman(user) && HAS_TRAIT(src, TRAIT_FISHFACE) && !HAS_TRAIT(user, TRAIT_FISHFACE))
-				var/mob/living/carbon/human/H = user
-				if(H.age == AGE_CHILD)
-					. += span_userdanger("IT'S A HORRIBLE MONSTER!!!")
-					user.emote("scream")
+		// Servant Foods
+		if(family_datum == SSfamilytree.ruling_family && length(culinary_preferences) && HAS_MIND_TRAIT(user, TRAIT_ROYALSERVANT))
+			var/obj/item/reagent_containers/food/snacks/fav_food = culinary_preferences[CULINARY_FAVOURITE_FOOD]
+			var/datum/reagent/consumable/fav_drink = culinary_preferences[CULINARY_FAVOURITE_DRINK]
+			if(fav_food)
+				if(fav_drink)
+					. += span_tinynotice("[capitalize(P[THEIR])] favourites are [fav_food.name] and [fav_drink.name].")
 				else
-					. += span_necrosis("That fish is ugly!")
-
-			if(HAS_TRAIT(src, TRAIT_FOREIGNER) && !HAS_TRAIT(user, TRAIT_FOREIGNER))
-				. += span_red("A foreigner...")
-
-			if(has_quirk(/datum/quirk/vice/alcoholic) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
-				. += span_userdanger("ALCOHOLIC!")
-
-			if(has_quirk(/datum/quirk/vice/junkie) && HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
-				. += span_userdanger("JUNKIE!")
-
-			if(HAS_TRAIT(src, TRAIT_OLDPARTY) && HAS_TRAIT(user, TRAIT_OLDPARTY))
-				. += span_green("Ahh... my old friend!")
-
-			if(HAS_TRAIT(src, TRAIT_THIEVESGUILD) && HAS_TRAIT(user, TRAIT_THIEVESGUILD))
-				. += span_green("A member of the Thieves' Guild.")
-
-			if((HAS_TRAIT(src, TRAIT_CABAL) && HAS_TRAIT(user, TRAIT_CABAL)) || (patron?.type == /datum/patron/inhumen/zizo && HAS_TRAIT(user, TRAIT_CABAL)))
-				. += span_purple("A fellow seeker of Her ascension.")
-
-			if(HAS_TRAIT(user, TRAIT_ROYALSERVANT))
-				if(length(culinary_preferences) && family_datum == SSfamilytree.ruling_family)
-					var/obj/item/reagent_containers/food/snacks/fav_food = culinary_preferences[CULINARY_FAVOURITE_FOOD]
-					var/datum/reagent/consumable/fav_drink = culinary_preferences[CULINARY_FAVOURITE_DRINK]
-					if(fav_food)
-						if(fav_drink)
-							. += span_notice("Their favourites are [fav_food.name] and [fav_drink.name].")
-						else
-							. += span_notice("Their favourite is [fav_food.name].")
-					else if(fav_drink)
-						. += span_notice("Their favourite is [fav_drink.name].")
-					var/obj/item/reagent_containers/food/snacks/hated_food = culinary_preferences[CULINARY_HATED_FOOD]
-					var/datum/reagent/consumable/hated_drink = culinary_preferences[CULINARY_HATED_DRINK]
-					if(hated_food)
-						if(hated_drink)
-							. += span_notice("They hate [hated_food.name] and [hated_drink.name].")
-						else
-							. += span_notice("They hate [hated_food.name].")
-					else if(hated_drink)
-						. += span_notice("They hate [hated_drink.name].")
-
-			if(HAS_TRAIT(src, TRAIT_LEPROSY))
-				. += span_necrosis("A LEPER...")
-
-			if(HAS_TRAIT(src, TRAIT_FACELESS))
-				. += span_userdanger("FACELESS?! AN ASSASSIN!")
-
-			var/list/known_frumentarii = user.mind?.cached_frumentarii
-			if(name in known_frumentarii)
-				if(known_frumentarii[name])
-					. += span_greentext("<b>[m1] an agent of the court!</b>")
+					. += span_tinynotice("[capitalize(P[THEIR])] favourite is [fav_food.name].")
+			else if(fav_drink)
+				. += span_tinynotice("[capitalize(P[THEIR])] favourite is [fav_drink.name].")
+			var/obj/item/reagent_containers/food/snacks/hated_food = culinary_preferences[CULINARY_HATED_FOOD]
+			var/datum/reagent/consumable/hated_drink = culinary_preferences[CULINARY_HATED_DRINK]
+			if(hated_food)
+				if(hated_drink)
+					. += span_tinynotice("[P[THEY]] hate [hated_food.name] and [hated_drink.name].")
 				else
 					. += span_redtext("[m1] an ex-agent of the court.")
 
@@ -708,50 +550,24 @@
 				. += "<a href='byond://?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	if(!HAS_TRAIT(src, TRAIT_FACELESS))
-		. += "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>"
+		// Headshots ALWAYS go last.
+		if(client?.is_donator())
+			if(headshot_link)
+				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
+			if(flavortext || headshot_link || ooc_extra_link) // only show flavor text if there is a flavor text and we show headshot
+				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];view_descriptors=1'>Look at Features</a>")
 
-	// Characters with the hunted flaw will freak out if they can't see someone's face.
-	if(!appears_dead)
-		if(!self_inspect && obscure_name && isliving(user))
-			var/mob/living/liver = user
-			if(liver.has_quirk(/datum/quirk/vice/hunted))
-				user.add_stress(/datum/stress_event/hunted)
 
-	if(!obscure_name && (flavortext || ((headshot_link || ooc_extra_link) && client?.is_donator()))) // only show flavor text if there is a flavor text and we show headshot
-		. += "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>"
 
-	var/trait_exam = common_trait_examine()
-	if(!isnull(trait_exam))
-		. += trait_exam
-
-	// The Assassin's profane dagger can sniff out their targets, even masked.
-	if(HAS_TRAIT(user, TRAIT_ASSASSIN) && ((has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))))
-		//TODO: move this to an examinate signal call
-		if ((src != user) && iscarbon(user))
-			var/mob/living/carbon/assassin = user
-			for(var/obj/item/I in assassin.get_all_gear())
-				if(istype(I, /obj/item/weapon/knife/dagger/steel/profane))
-					. += "profane dagger whispers, [span_danger("\"That's [real_name]! Strike their heart!\"")]"
-					break
-
-	if(HAS_TRAIT(user, TRAIT_SEEPRICES) && sellprice)
-		. += "Is worth around [sellprice] mammons."
-
-	if(ishuman(user))
-		var/mob/living/carbon/human/human_user = user
-		var/hierarchy_text = get_clan_hierarchy_examine(human_user)
-		if(hierarchy_text)
-			. += hierarchy_text
-
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
-
-/mob/living/proc/status_effect_examines(pronoun_replacement) //You can include this in any mob's examine() to show the examine texts of status effects!
+//You can include this in any mob's examine() to show the examine texts of status effects!
+/mob/living/proc/status_effect_examines(mob/user, pronoun_replacement, list/P)
 	var/list/examine_list = list()
 	if(!pronoun_replacement)
 		pronoun_replacement = p_they(TRUE)
 
 	for(var/datum/status_effect/effect as anything in status_effects)
-		var/effect_text = effect.get_examine_text()
+		var/effect_text = effect.get_examine_text(user, P)
 		if(!effect_text)
 			continue
 
@@ -763,16 +579,3 @@
 		return
 
 	return examine_list.Join("\n")
-
-/mob/living/proc/get_inquisition_text(mob/examiner)
-	var/inquisition_text
-	if(HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(examiner, TRAIT_INQUISITION))
-		inquisition_text = "A Practical of our Psydonic Inquisitorial Sect."
-	if(HAS_TRAIT(src, TRAIT_PURITAN) && HAS_TRAIT(examiner, TRAIT_INQUISITION))
-		inquisition_text = "The Lorde-Inquisitor of our Psydonic Inquisitorial Sect."
-	if(HAS_TRAIT(src, TRAIT_INQUISITION) && HAS_TRAIT(examiner, TRAIT_PURITAN))
-		inquisition_text = "Subordinate to me in the Psydonic Inquisitorial Sect."
-	if(HAS_TRAIT(src, TRAIT_PURITAN) && HAS_TRAIT(examiner, TRAIT_PURITAN))
-		inquisition_text = "The Lorde-Inquisitor of the Sect sent here. That's me."
-
-	return inquisition_text
