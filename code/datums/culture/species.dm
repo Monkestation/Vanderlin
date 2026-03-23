@@ -63,32 +63,41 @@
 		SPEC_ID_HALF_ORC,
 	)
 
-// /datum/culture/species/half_orc/shellcrest
-// 	name = "Shellcrest"
+/datum/culture/species/half_orc/shellcrest
+ 	name = "Shellcrest"
+//pirate orcs, along the western coast water. famous for inventing the first metal boat and proving it works
 
-// /datum/culture/species/half_orc/blood_axe
-// 	name = "Blood Axe"
+/datum/culture/species/half_orc/blood_axe
+	name = "Blood Axe"
+//crimsonlands one. graggar's chosen?
 
-// /datum/culture/species/half_orc/splitjaw
-// 	name = "Splitjaw"
+/datum/culture/species/half_orc/splitjaw
+ 	name = "Splitjaw"
+//crimsonlands 2
 
-// /datum/culture/species/half_orc/blackhammer
-// 	name = "Blackhammer"
+/datum/culture/species/half_orc/blackhammer
+ 	name = "Blackhammer"
+//barely surviving in the barrows at the borders of grenzelhoft
 
-// /datum/culture/species/half_orc/skullseeker
-// 	name = "Skullseeker"
+/datum/culture/species/half_orc/skullseeker
+ 	name = "Skullseeker"
+//osslandic origin tribe. hunters of osslanders?
 
-// /datum/culture/species/half_orc/crescent_fang
-// 	name = "Crescent Fang"
+/datum/culture/species/half_orc/crescent_fang
+ 	name = "Crescent Fang"
+//jungle orcs, profiteering off the grenzel-zaladin war. hate both sides AND zizo. isolationist orc tribe.
 
-// /datum/culture/species/half_orc/murkwater
-// 	name = "Murkwater"
+/datum/culture/species/half_orc/murkwater
+ 	name = "Murkwater"
+//venice. floating city inside the inland sea beside wintermare and grenzelhoft
 
-// /datum/culture/species/half_orc/shatterhorn
-// 	name = "Shatterhorn"
+/datum/culture/species/half_orc/shatterhorn
+ 	name = "Shatterhorn"
+//tribe in northern vanderlin around the base of a twin peak mountain, the top of it is cracked/destroyed. northeast of daftmarsh, way into the bog. the mountains break storms etc and is a landmark. culturally, a very humble group, struggling with then ature of hteir origin. limited hospitality. "you can stay here a couple days but you have to move on". trappers/fishers/hunters by trade. live communally up north, go through the bog gathering things, then sell it or take it back. simple and humble compared to other orc tribes. they struggle with anger issues which is normal for orcs, which is why they keep guests moving along. also usually guides to help people through swamps/bogs in vanderlin. naturally drawn towards mountains, for some reason.
 
-// /datum/culture/species/half_orc/spiritcrusher
-// 	name = "Spiritcrusher"
+/datum/culture/species/half_orc/spiritcrusher
+ 	name = "Spiritcrusher"
+//subterran orc clan, lives under wintermare. come out from underground, kidnap mages, and before battle they eat a fuckton of lux to get magic temporarily for fighting.
 
 /datum/culture/species/rakshari
 	abstract_type = /datum/culture/species/rakshari
