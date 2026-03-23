@@ -448,7 +448,7 @@
 	point_value = 1
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
-	customization_placeholder = "Secretly insults Tennite clergy"
+	customization_placeholder = "Spotted eating organs."
 
 
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
@@ -457,7 +457,7 @@
 		reason = customization_value
 	if(reason && reason != "")
 		return "[desc]<br><br><b>Reason:</b> [reason]"
-	return "[desc]<br><br><b>Reason:</b> General anti-Tennite/Psydonic conduct."
+	return "[desc]<br><br><b>Reason:</b> General heretical conduct."
 
 /datum/quirk/vice/suspicion/on_spawn()
 	if(!owner || !ishuman(owner))

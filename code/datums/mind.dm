@@ -516,7 +516,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/recall_targets(mob/recipient, window=1, var/type)
 	var/output
 	if(type == "Ordos")
-		output = "<B>Ordo Venatari [SSmapping.config.map_name] Scouting Report</B><br>"
+		output = "<B>[SSmapping.config.map_name] Scouting Report</B><br>"
 		for (var/mob/living/carbon in GLOB.mob_living_list)
 			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy)))))
 				output += "<br><b>[carbon.real_name]</b>"
@@ -528,9 +528,9 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				if(suspicion_quirk && suspicion_quirk.customization_value && suspicion_quirk.customization_value != "")
 					output += "<br><i>Reason for suspicion: [suspicion_quirk.customization_value]</i>"
 				else
-					output += "<br><i>Reason for suspicion: General anti-Tennite/Psydonic conduct.</i>"
+					output += "<br><i>Reason for suspicion: General heretical conduct.</i>"
 
-		output += "<br><br>The Ordos' scouts have marked these people for suspicion. Verify the report and bring them to justice if need be. FOR PSYDON'S WILL."
+		output += "<br><br>Our scouts have marked these people as suspected of heresy. Verify or disprove these reports and administer justice if need be."
 
 	else
 		output = "<B>[recipient.real_name]'s Hitlist:</B><br>"
