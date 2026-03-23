@@ -488,6 +488,6 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	GLOB.marked_players += H.real_name
+	GLOB.inquis_suspect_players += H.real_name
 	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
 
