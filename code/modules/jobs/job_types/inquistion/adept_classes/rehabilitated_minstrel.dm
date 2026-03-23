@@ -15,8 +15,10 @@
 	)
 
 /datum/job/advclass/sacrestant/psyaltrist
-	title = "Psyaltrist"
-	tutorial = "Every inquisitor has their second. You aim to keep spirits and faith high, while handling the needs of the inquisitor. Not a glamorous role, but a vital one. “Maybe his lordship would prefer the lute, today, over the viola?”"
+	title = "Rehabilitated Minstrel"
+	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, mostly because they are the last ones in a party to die. \
+	When word got out that you had abandoned your former party to their demise, it didn't take long before you were cast out, unwelcome. \
+	You may no longer be as free as you once were, but through the generous gift of mercy bestowed upon you by the Inquisitor, perhaps you may once again put your skills to use."
 	category_tags = list(CTAG_INQUISITION)
 	outfit = /datum/outfit/psyaltrist
 
@@ -30,14 +32,12 @@
 	)
 
 	traits = list(	
-    TRAIT_DODGEEXPERT,
+    	TRAIT_DODGEEXPERT,
 		TRAIT_EMPATH,
 		TRAIT_INQUISITION,
-		TRAIT_SILVER_BLESSED,
 		TRAIT_PSYDONIAN_GRIT,
 		TRAIT_PSYDONITE,
-		TRAIT_FOREIGNER,
-		)
+	)
 
 	spells = list(/datum/action/cooldown/spell/vicious_mockery)
 
@@ -67,18 +67,15 @@
 	name = "Psyaltrist (Sacrestants)"
 	armor = /obj/item/clothing/armor/leather/studded/psyaltrist
 	backl = /obj/item/storage/backpack/satchel/otavan
+	neck = /obj/item/clothing/neck/gorget/explosive
 	cloak = /obj/item/clothing/cloak/psyaltrist
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
 	gloves = /obj/item/clothing/gloves/leather/otavan
-	wrists = /obj/item/clothing/neck/psycross/silver
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/weapon/knife/dagger/silver/psydon
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	ring = /obj/item/clothing/ring/signet/silver
 	backpack_contents = list(
-		/obj/item/key/inquisition = 1,
-		/obj/item/paper/inqslip/arrival/ortho = 1,
-		/obj/item/collar_detonator = 1,
+		/obj/item/storage/keyring/adept = 1,
 	)
