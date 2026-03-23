@@ -103,14 +103,13 @@
 	if(!guarantees_roundstart_roleset && prob(roundstart_prob) && !roundstart_checks)
 		roundstart_checks = TRUE
 
-	if(SSgamemode.current_roundstart_event && !SSgamemode.ran_roundstart && (guarantees_roundstart_roleset || roundstart_checks))
-		buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION, TRUE)
-		if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
-			SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null
-			SSgamemode.forced_next_events -= EVENT_TRACK_CHARACTER_INJECTION
-
-		log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
-		SSgamemode.ran_roundstart = TRUE
+	if(SSgamemode.can_run_roundstart && SSgamemode.current_roundstart_event && !SSgamemode.ran_roundstart && (guarantees_roundstart_roleset || roundstart_checks))
+		if(SSgamemode.current_roundstart_event.canSpawnEvent() && try_buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION))
+			if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
+				SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null
+				SSgamemode.forced_next_events -= EVENT_TRACK_CHARACTER_INJECTION
+			log_storyteller("Running SSgamemode.current_roundstart_event\[[SSgamemode.current_roundstart_event]\]")
+			SSgamemode.ran_roundstart = TRUE
 
 	add_points()
 	handle_tracks()
