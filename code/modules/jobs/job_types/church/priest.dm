@@ -150,7 +150,6 @@
 	var/new_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 	coronated.mind.set_assigned_role(/datum/job/lord)
 	lord_job?.get_informed_title(coronated, TRUE, new_title)
-	GLOB.active_monarch_title = lord_job.get_informed_title(coronated)
 	coronated.job = "Monarch"
 	lord_job?.add_spells(coronated)
 	SSticker.rulermob = coronated
