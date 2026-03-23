@@ -100,7 +100,7 @@
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 //------------------------
-//Simulates puking, with removing all reagents from body
+//Gives the target 2 units of organ poison, that bring a person closer into becoming a half-orc
 //------------------------
 
 /obj/projectile/magic/cannibalistic_vomit
@@ -120,10 +120,10 @@
 	visible_message(span_danger("[C]'s stomach starts aching!"))
 	to_chat(C, span_danger("Your stomach hurts a lot!"))
 	C.emote("gag")
-	C.apply_effect(/datum/status_effect/incapacitating/immobilized, 3 SECONDS)
-	var/turf/floor = get_turf(src)
-	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-	C.reagents.trans_to(spew, C.reagents.total_volume, transfered_by = src)
+	C.reagents.add_reagent(/datum/reagent/organpoison, 2);
+	// var/turf/floor = get_turf(src)
+	// var/obj/effect/decal/cleanable/vomit/spew = new(floor)
+	// C.reagents.trans_to(spew, C.reagents.total_volume, transfered_by = src)
 	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
 
 
