@@ -456,7 +456,7 @@
 	var/admin_ip = usr.client.address
 	var/admin_cid = usr.client.computer_id
 	duration = text2num(duration)
-	if (!(interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR")))
+	if (!(interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR")))
 		interval = "MINUTE"
 	var/time_message = "[duration] [lowertext(interval)]" //no DisplayTimeText because our duration is of variable interval type
 	if(duration > 1) //pluralize the interval if necessary
@@ -790,7 +790,7 @@
 				return
 		qdel(query_check_adminban_count)
 
-	if (!(interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR")))
+	if (!(interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR")))
 		interval = "MINUTE"
 
 	var/list/changes_text = list()

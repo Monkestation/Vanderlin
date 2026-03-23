@@ -3,7 +3,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(human_user.stat == DEAD) return
 	if(human_user.advsetup) return
-	if(GLOB.tod == "night")
+	if(GLOB.tod == NIGHT)
 		var/turf/user_loc = human_user.loc
 		if(isturf(user_loc))
 			if(user_loc.can_see_sky())

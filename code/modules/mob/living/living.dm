@@ -2593,7 +2593,7 @@
 			if("fog")
 				to_chat(src, span_warning("I can't see anything, the fog has set in."))
 				return
-		if(GLOB.tod == "night")
+		if(GLOB.tod == NIGHT)
 			var/briar_notice = FALSE
 			for(var/datum/wound/black_briar_curse/briar in get_wounds())
 				briar.infection += (briar.max_infection * 0.01) // 1% added for looking at the moon
