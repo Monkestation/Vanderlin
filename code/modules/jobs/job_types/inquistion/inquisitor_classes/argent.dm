@@ -92,7 +92,7 @@
 
 /datum/job/advclass/sacrestant/argent
 	title = "Argent"
-	tutorial = "Psydonite hunters, unmatched in the fields of subterfuge and investigation. There is no suspect too powerful to investigate, no room too guarded to infiltrate, and no weakness too hidden to exploit. The Ordo Venatari trained you, and this, your final hunt as a student, will prove the wisdom of their teachings."
+	tutorial = "A trained member of the Ordo Venatari, you have passed every test, prepared for every circumstance, and devoted your body and being alike to Psydon and his righteous cause. Enhanced with powers from the very monsters you are driven to vanquish, you are ready to face, and surpass, all those who would seek to hide in the nite."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/argent
@@ -116,7 +116,7 @@
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Argent")
 
-	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
+	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword", "Psydonic Handaxe", "Psydonic Whip", "Psydonic Flail", "Psydonic Spear")
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
 
 	switch(weapon_choice)
@@ -131,6 +131,18 @@
 			spawned.put_in_hands(new /obj/item/weapon/sword/short/psy(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/swords)
+		if("Psydonic Handaxe")
+			spawned.put_in_hands(new /obj/item/weapon/axe/psydon(get_turf(spawned)), TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/axesmaces)
+		if("Psydonic Whip")
+			spawned.put_in_hands(new /obj/item/weapon/whip/psydon(get_turf(spawned)), TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/whipsflails)
+		if("Psydonic Flail")
+			spawned.put_in_hands(new /obj/item/weapon/flail/psydon(get_turf(spawned)), TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/whipsflails)
+		if("Psydonic Spear")
+			spawned.put_in_hands(new /obj/item/weapon/polearm/spear/psydon(get_turf(spawned)), TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/polearms)
 
 	var/helmets = list("Barbute", "Sallet", "Armet", "Bucket Helm")
 	var/helmet_choice = browser_input_list(spawned, "CHOOSE YOUR HELMET.", "TAKE UP PSYDON'S HELMS.", helmets)
