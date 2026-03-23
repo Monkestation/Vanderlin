@@ -71,7 +71,7 @@
 	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
-	contents += "<center>[GLOB.active_monarch_title]'s DECREES<BR>"
+	contents += "<center>[capitalize_like_old_man(GLOB.active_monarch_title)]'s DECREES<BR>"
 
 	contents += "-----------<BR><BR></center>"
 	for(var/i = GLOB.lord_decrees.len to 1 step -1)
