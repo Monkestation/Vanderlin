@@ -444,7 +444,7 @@
 
 /datum/quirk/vice/suspicion
 	name = "Inquisitorial Suspicion"
-	desc = "The inquisition suspects me of heresy, whether truthfully or not..."
+	desc = "The inquisition suspects me of heresy, whether truthfully or not... Expect a harder experience, as some only require a suspicion to administer Psydon's Justice."
 	point_value = 1
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
@@ -466,5 +466,5 @@
 	var/mob/living/carbon/human/H = owner
 
 	GLOB.marked_players += H.real_name
-	to_chat(H, span_boldwarning("I am suspected of heresy by outside parties for reasons either legitimate or not!"))
+	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
 
