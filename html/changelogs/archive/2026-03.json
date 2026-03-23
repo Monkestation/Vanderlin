@@ -639,5 +639,30 @@
                 "bugfix": "salad no longer craftable on bowls with liquid in them"
             }
         ]
+    },
+    "2026-03-23": {
+        "Rockslp": [
+            {
+                "rscadd": "More kobold slurs"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Makes lightweight brigandines craftable"
+            },
+            {
+                "bugfix": "adjust fighters and clerics"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added various chocolate pastries."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed Malaguero + other stress events"
+            }
+        ]
     }
 }
