@@ -55,6 +55,7 @@
 	icon_state = "lakkarikilt"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
+	alternate_worn_layer = SKIRT_LAYER
 	sewrepair = TRUE
 	max_integrity = 175
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)

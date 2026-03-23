@@ -50,6 +50,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/pants_metal.dmi'
 	icon_state = "chainkilt"
 	item_state = "chainkilt"
+	alternate_worn_layer = SKIRT_LAYER
 
 /obj/item/clothing/pants/chainlegs/kilt/iron
 	name = "iron chain kilt"
