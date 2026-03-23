@@ -364,8 +364,8 @@
 		return
 	if(!COOLDOWN_FINISHED(src, blossom))
 		return
-	COOLDOWN_START(src, blossom,  rand(10, 20) MINUTES)
-	if(istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
+	COOLDOWN_START(src, blossom,  rand(5, 10) MINUTES)
+	if(!QDELETED(affected.buckled) && istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
 		return
 	blossoms++
 	if(infection_percent >= BBC_STAGE_MID)
