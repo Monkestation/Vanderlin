@@ -530,7 +530,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 				else
 					output += "<br><i>Reason for suspicion: General anti-Tennite/Psydonic conduct.</i>"
 
-		output += "<br><br>The Ordos' scouts have marked these people for suspicion. Verify the report and bring them to justice if need be. PSYDON PERSISTS."
+		output += "<br><br>The Ordos' scouts have marked these people for suspicion. Verify the report and bring them to justice if need be. FOR PSYDON'S WILL."
 
 	else
 		output = "<B>[recipient.real_name]'s Hitlist:</B><br>"

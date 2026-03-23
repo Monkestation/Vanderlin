@@ -448,7 +448,7 @@
 	point_value = 1
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
-	customization_placeholder = "Insulting Tennite clergy."
+	customization_placeholder = "Secretly insults Tennite clergy"
 
 
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
