@@ -1,8 +1,8 @@
 /datum/attribute_holder/sheet/job/inspector
 	raw_attribute_list = list(
-		STAT_PERCEPTION = 4,
-		STAT_SPEED = 4,
-		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 3,
+		STAT_SPEED = 3,
+		STAT_INTELLIGENCE = 1,
 		STAT_STRENGTH = 1,
 		/datum/attribute/skill/misc/lockpicking = 50,
 		/datum/attribute/skill/misc/sneaking = 50,
@@ -88,6 +88,65 @@
 		if("Remembrance (Long Sword)")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
+
+	// Enhancement selection
+	var/enhancements = list(
+		"Auxiliary Adrenal Glands - Pain Resist",
+		"Controlled Atrophy - Rapid Movement",
+		"Formikrag Liver - Reversed Toxin Damage",
+		"Goblin Eyes - Nightvision",
+		"Greenskin Hands - Strong Grip",
+		"Inhumen Stomach - Enhanced Endurance",
+		"Leviathanian Membrane - No Terrain Slowdown",
+		"Nerve Staple - No Mood",
+		"Nightmare Ward - No Sleep and Fast Learning",
+		"Obfuscating Dermis - Beautiful and Face-changing",
+		"Serpentine Glands - Thermal Vision and Venom",
+		"Volf Ligaments - Z-Jump",)
+	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
+
+	switch(enhancement_choice)
+		if("Auxiliary Adrenal Glands - Pain Resist")
+			ADD_TRAIT(spawned, TRAIT_NODAMAGESLOWDOWN, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/adrenal)
+		if("Controlled Atrophy - Rapid Movement")
+			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
+		if("Formikrag Liver - Reversed Toxin Damage")
+			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+		if("Goblin Eyes - Nightvision")
+			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
+			if(eyes)
+				eyes.Remove(src,1)
+				QDEL_NULL(eyes)
+			eyes = new /obj/item/organ/eyes/night_vision/nightmare
+			eyes.Insert(src)
+		if("Greenskin Hands - Strong Grip")
+			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
+		if("Inhumen Stomach - Enhanced Endurance")
+			ADD_TRAIT(spawned, TRAIT_NASTYEATER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/stomach)
+		if("Leviathanian Membrane - No Terrain Slowdown")
+			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_GOOD_SWIM, TRAIT_GENERIC)
+		if("Nerve Staple - No Mood")
+			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
+		if("Nightmare Ward - No Sleep and Fast Learning")
+			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
+		if("Obfuscating Dermis - Beautiful and Face-changing")
+			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+			spawned.add_spell(/datum/action/cooldown/spell/enhanced_mimicry, silent = TRUE)
+		if("Serpentine Glands - Thermal Vision and Venom")
+			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
+		if("Volf Ligaments - Z-Jump")
+			ADD_TRAIT(spawned, TRAIT_ZJUMP, TRAIT_GENERIC)
 
 
 /datum/outfit/inquisitor/inspector
