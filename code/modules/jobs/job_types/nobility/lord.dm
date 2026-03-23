@@ -1,4 +1,5 @@
 GLOBAL_VAR(lordsurname)
+GLOBAL_VAR(active_monarch_title)
 GLOBAL_LIST_EMPTY(lord_titles)
 
 /datum/job/lord
@@ -90,6 +91,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		ruler_title = "[SSmapping.config.monarch_title]"
 	else
 		ruler_title = "[SSmapping.config.monarch_title_f]"
+	// Hopefully only one lord is ever spawned, if a new lord is adminbussed they override this
+	GLOB.active_monarch_title = ruler_title
 
 	if(spawned.gender == MALE)
 		SSfamilytree.AddRoyal(spawned, FAMILY_FATHER)

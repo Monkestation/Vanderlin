@@ -8,6 +8,7 @@
 	blade_dulling = DULLING_BASH
 	SET_BASE_PIXEL(0, 32)
 	anchored = TRUE
+	/// Time until when SCOMs will announce a decree
 	var/next_decree = 0
 	var/listening = TRUE
 	var/speaking = TRUE
@@ -46,7 +47,7 @@
 	if(world.time > next_decree)
 		next_decree = world.time + rand(3 MINUTES, 8 MINUTES)
 		if(GLOB.lord_decrees.len)
-			say("The King Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
+			say("The [GLOB.active_monarch_title] Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
 
 /obj/structure/fake_machine/scomm/attack_hand(mob/living/user)
 	. = ..()
