@@ -198,6 +198,7 @@
 		B.grabbee = user
 		B.limb_grabbed = BP
 		B.sublimb_grabbed = used_limb
+		SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, user) // black briar uses this for triggering infection on grabbers
 
 		lastattacker = user.real_name
 		lastattackerckey = user.ckey
