@@ -36,7 +36,7 @@
 #define DAMAGE_LAYER			38		//damage indicators (cuts and burns)
 #define PANTS_LAYER				37
 #define SHOES_LAYER				36
-#define SKIRT_LAYER				35.5	// better fashion sense lol.
+#define SKIRT_LAYER				35.5	// better fashion sense lol, you don't tuck your skirt into your shoes.
 #define LEG_PART_LAYER			35
 #define LEG_DAMAGE_LAYER		34
 #define LEGSLEEVE_LAYER			33
