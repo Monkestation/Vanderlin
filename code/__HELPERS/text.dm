@@ -277,6 +277,23 @@
 /proc/capitalize(t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
 
+
+//Like capitalize, but you capitalize EVERYTHING
+/proc/capitalize_like_old_man(t)
+	. = t
+	if(!length(t))
+		return
+	var/list/binguslist = splittext(t, " ")
+	for(var/bingus in binguslist)
+		binguslist -= bingus
+		if(!length(bingus))
+			binguslist += bingus
+			continue
+		var/chonker = uppertext(bingus[1])
+		bingus = chonker + copytext(bingus, 1 + length(chonker))
+		binguslist += bingus
+	return jointext(binguslist, " ")
+
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
 	var/new_message = message
@@ -936,3 +953,33 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/endswith(input_text, ending)
 	var/input_length = LAZYLEN(ending)
 	return !!findtext(input_text, ending, -input_length)
+
+// normalizes keycodes into a standard format
+/proc/normalize_keys(input_text)
+	var/new_text = ""
+	for(var/i in 1 to length_char(input_text))
+		var/i_char = copytext_char(input_text, i, i + 1)
+		switch(i_char)
+			if("!") i_char = "1"
+			if("@") i_char = "2"
+			if("#") i_char = "3"
+			if("$") i_char = "4"
+			if("%") i_char = "5"
+			if("^") i_char = "6"
+			if("&") i_char = "7"
+			if("*") i_char = "8"
+			if("(") i_char = "9"
+			if(")") i_char = "0"
+			if("_") i_char = "-"
+			if("+") i_char = "="
+			if(@"{") i_char = @"["
+			if(@"}") i_char = @"]"
+			if("|") i_char = "\\"
+			if(":") i_char = ";"
+			if("\"") i_char = "'"
+			if("<") i_char = ","
+			if(">") i_char = "."
+			if("?") i_char = "/"
+			if("~") i_char = "`"
+		new_text += i_char
+	return new_text

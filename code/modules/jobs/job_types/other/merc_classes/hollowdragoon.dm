@@ -1,3 +1,23 @@
+/datum/attribute_holder/sheet/job/hollowdragoon
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/labor/taming = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30
+	)
+
 /datum/job/advclass/mercenary/hollowdragoon
 	title = "Hollow Dragoon"
 	tutorial = "You rode out from Amber Hollow on your loyal steed, seeking coin from the wider reaches of Psydonia. \
@@ -11,27 +31,7 @@
 	total_positions = 5
 	cmode_music = 'sound/music/cmode/Combat_Dwarf.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/misc/riding = 4,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/labor/taming = 3,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/tanning = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/hollowdragoon
 
 	traits = list(
 		TRAIT_HEAVYARMOR,

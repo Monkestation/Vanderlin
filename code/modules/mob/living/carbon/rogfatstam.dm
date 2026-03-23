@@ -1,8 +1,7 @@
 /mob/living/proc/update_stamina() //update hud and regen after last_fatigued delay on taking
 	var/athletics_skill = 0
-	if(mind)
-		athletics_skill = get_skill_level(/datum/skill/misc/athletics, TRUE)
-	maximum_stamina = (STAEND + athletics_skill) * 10 //This here is the calculation for max STAMINA / GREEN
+	athletics_skill = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
+	maximum_stamina = max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) + athletics_skill) * 10, 10) //This here is the calculation for max STAMINA / GREEN
 
 	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == TOD_DAWN || GLOB.tod == TOD_DAY)) ? 11 : 20
 	if(world.time > last_fatigued + delay) //regen fatigue
@@ -25,8 +24,8 @@
 	/// since energy is both a magical and physical system
 	var/athletics_skill = 0
 	if(mind)
-		athletics_skill = get_skill_level(/datum/skill/misc/athletics, TRUE)
-	max_energy = (STAEND + athletics_skill) * 100 // ENERGY / BLUE (Average of 1000)
+		athletics_skill = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
+	max_energy = max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) + athletics_skill) * 100, 100) // ENERGY / BLUE (Average of 1000)
 	if(cmode)
 		if(!HAS_TRAIT(src, TRAIT_BREADY))
 			adjust_energy(-2)
@@ -92,9 +91,9 @@
 		if(m_intent == MOVE_INTENT_RUN) //can't sprint at full fatigue
 			toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 		if(!emote_override)
-			emote("fatigue", forced = force_emote)
+			INVOKE_ASYNC(src, PROC_REF(emote), "fatigue", forced = force_emote)
 		else
-			emote(emote_override, forced = force_emote)
+			INVOKE_ASYNC(src, PROC_REF(emote), emote_override, forced = force_emote)
 		set_eye_blur_if_lower(4 SECONDS)
 		last_fatigued = world.time + 30 //extra time before fatigue regen sets in
 		stop_attack()
@@ -137,7 +136,7 @@
 	if(!heart_attacking)
 		var/mob/living/carbon/C = src
 		C.visible_message(C, "<span class='danger'>[C] clutches at [C.p_their()] chest!</span>") // Other people know something is wrong.
-		emote("breathgasp", forced = TRUE)
+		INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp", forced = TRUE)
 		shake_camera(src, 1, 3)
 		set_eye_blur_if_lower(80 SECONDS)
 		var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
@@ -168,7 +167,7 @@
 		heart_attack()
 	else
 		emote("fatigue", forced = TRUE)
-		if(stress > 15)
+		if(stress > 10)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob, do_freakout_scream)), rand(30,50))
 	if(hud_used)
 		var/matrix/skew = matrix()

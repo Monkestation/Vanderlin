@@ -13,6 +13,7 @@
 
 	advclass_cat_rolls = list(CTAG_TOWNER = 20)
 	allowed_races = RACES_PLAYER_ALL
+	can_be_apprentice = TRUE
 
 	outfit = null
 	outfit_female = null

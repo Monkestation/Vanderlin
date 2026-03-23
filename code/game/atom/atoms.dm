@@ -159,6 +159,30 @@
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
 
+	/// Light systems, both shouldn't be active at the same time.
+	var/light_system = STATIC_LIGHT
+	/// Bitflags to determine lighting-related atom properties.
+	var/light_flags = NONE
+	/// Range of the maximum brightness of light in tiles. Zero means no light.
+	var/light_range = 0
+	/// Intensity of the light. The stronger, the less shadows you will see on the lit area.
+	var/light_power = 1
+	/// Falloff factor for the light, must be above 1. Higher the value more aggressive the falloff into darkness is
+	/// Works best on lights with large ranges
+	var/light_falloff = 1
+	/// Hexadecimal RGB string representing the colour of the light. White by default.
+	var/light_color = COLOR_WHITE
+	/// Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
+	var/light_on = TRUE
+	/// How many tiles "up" this light is. 1 is typical, should only really change this if it's a floor light
+	var/light_height = 1
+
+	///Our light source. Don't fuck with this directly unless you have a good reason!
+	var/tmp/datum/light_source/light
+	///Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
+	var/tmp/list/light_sources
+
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -233,12 +257,8 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
+	if(light_system == STATIC_LIGHT && light_power && light_range)
 		update_light()
-
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
 
 	SETUP_SMOOTHING()
 
@@ -442,18 +462,24 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-	if(article)
-		. = "[article] <b>[src]</b>"
-		override[EXAMINE_POSITION_ARTICLE] = article
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
+/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+	if(use_article)
+		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
+	return "<b>[name]</b>"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""][get_examine_name(user)]"
+	. = get_examine_name(user)
+	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+		. = override.Join("")
+	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
+
+/atom/proc/get_examine_desc(mob/user)
+	return desc
+
+/atom/proc/get_examine_icon(mob/user)
+	return ma2html(src, user)
 
 /atom/proc/get_inspect_button()
 	return ""
@@ -476,8 +502,9 @@
 	else
 		. = list()
 
-	if(desc)
-		. += "<span class='info'>[desc]</span>"
+	var/examine_desc = get_examine_desc(user)
+	if(examine_desc)
+		. += "<span class='info'>[examine_desc]</span>"
 
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)
@@ -914,7 +941,42 @@
 		flags_1 |= ADMIN_SPAWNED_1
 	. = ..()
 	switch(var_name)
-		if("color")
+		if(NAMEOF(src, light_range))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_range = var_value)
+			else
+				set_light_range(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_power))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_power = var_value)
+			else
+				set_light_power(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_falloff))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_falloff = var_value)
+			else
+				set_light_falloff(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_color))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_color = var_value)
+			else
+				set_light_color(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, light_on))
+			if(light_system == STATIC_LIGHT)
+				set_light(l_on = var_value)
+			else
+				set_light_on(var_value)
+			. = TRUE
+
+		if(NAMEOF(src, color))
 			add_atom_colour(color, ADMIN_COLOUR_PRIORITY)
 
 /**
@@ -944,7 +1006,7 @@
 
 		if(reagents)
 			var/chosen_id
-			switch(alert(usr, "Choose a method.", "Add Reagents", "Search", "Choose from a list", "I'm feeling lucky"))
+			switch(tgui_alert(usr, "Choose a method.", "Add Reagents", list("Search", "Choose from a list", "I'm feeling lucky")))
 				if("Search")
 					var/valid_id
 					while(!valid_id)

@@ -29,6 +29,8 @@
 	var/hostile = FALSE
 	/// If use of this power creates a visible Masquerade breach.
 	var/violates_masquerade = FALSE
+	/// If this violates the masquerade every refresh, assuming it does at all
+	var/refresh_violations = FALSE
 
 	/* HOW AND WHEN IT'S ACTIVATED AND DEACTIVATED */
 	/// If this Discipline doesn't automatically expire, but rather periodically drains blood.
@@ -560,8 +562,11 @@
 /datum/coven_power/proc/do_masquerade_violation(atom/target)
 	if(!violates_masquerade)
 		return
-	if(length(owner.CheckEyewitness(target ? target : owner, 7)))
-		owner.vampire_detected(1)
+	var/atom/focus = target || owner
+	var/witnesses = length(owner.CheckEyewitness(focus))
+	if(focus == owner)
+		witnesses-- // if you're the target, you need two people to see it for it to count
+	owner.vampire_detected(witnesses)
 
 /**
  * Overridable proc handling the spending of resources (vitae/blood)
@@ -762,8 +767,8 @@
 	last_action_context = null
 	last_target = null
 
-	discipline.coven_action.active = FALSE
-	discipline.coven_action.build_all_button_icons()
+	discipline?.coven_action?.active = FALSE
+	discipline?.coven_action?.build_all_button_icons()
 
 
 /**
@@ -830,6 +835,8 @@
  * * target - what the targeted Discipline (null otherwise) is being used on.
  */
 /datum/coven_power/proc/on_refresh(atom/target)
+	if(refresh_violations)
+		do_masquerade_violation(target)
 	return
 
 /**

@@ -75,7 +75,7 @@
 					C.visible_message(span_warning("[user] ties [C]' arms with [src.name]."), \
 										span_danger("[user] ties my arms up with [src.name]."))
 					SSblackbox.record_feedback("tally", "handcuffs", 1, type)
-					user.adjust_experience(/datum/skill/craft/traps, C.STAINT, FALSE)
+					user.adjust_experience(/datum/attribute/skill/craft/traps, GET_MOB_ATTRIBUTE_VALUE(C, STAT_INTELLIGENCE), FALSE)
 					log_combat(user, C, "handcuffed")
 				else
 					to_chat(user, span_warning("I fail to tie up [C]'s arms!</span>"))
@@ -91,7 +91,7 @@
 					C.visible_message(span_warning("[user] ties [C]' legs with [src.name]."), \
 										span_danger("[user] ties my legs up with [src.name]."))
 					SSblackbox.record_feedback("tally", "legcuffs", 1, type)
-					user.adjust_experience(/datum/skill/craft/traps, C.STAINT, FALSE)
+					user.adjust_experience(/datum/attribute/skill/craft/traps, GET_MOB_ATTRIBUTE_VALUE(C, STAT_INTELLIGENCE), FALSE)
 					log_combat(user, C, "legcuffed")
 				else
 					to_chat(user, span_warning("I fail to tie up [C]'s legs!</span>"))
@@ -145,7 +145,7 @@
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = WHIPWOOSH
 	w_class = WEIGHT_CLASS_SMALL
-	associated_skill = /datum/skill/combat/whipsflails
+	associated_skill = /datum/attribute/skill/combat/whipsflails
 	throw_speed = 1
 	throw_range = 3
 	breakouttime = 30 SECONDS
@@ -177,7 +177,7 @@
 /obj/item/rope/net/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(..() || !iscarbon(hit_atom))//if it gets caught or the target can't be cuffed,
 		return//abort
-	if(prob(100 * (throwingdatum?.thrower?.get_skill_level(/datum/skill/craft/traps, TRUE) || 1) / 3))
+	if(prob(100 * (throwingdatum?.GET_MOB_SKILL_VALUE_OLD(thrower, /datum/attribute/skill/craft/traps) || 1) / 3))
 		ensnare(hit_atom)
 
 /obj/item/rope/net/proc/ensnare(mob/living/carbon/C)
@@ -188,6 +188,11 @@
 		playsound(src, 'sound/combat/hits/nodmg (2).ogg', 100, TRUE)
 		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
 			C.Knockdown(knockdown)
+
+/obj/item/rope/net/dropped(mob/living/carbon/user, silent)
+	. = ..()
+	if(istype(user) && user.legcuffed == src)
+		user.remove_status_effect(/datum/status_effect/debuff/netted)
 
 // Failsafe in case the item somehow ends up being destroyed
 /obj/item/rope/net/Destroy()

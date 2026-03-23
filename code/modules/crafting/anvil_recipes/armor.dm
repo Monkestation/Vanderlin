@@ -1,5 +1,5 @@
 /datum/anvil_recipe/armor
-	appro_skill = /datum/skill/craft/armorsmithing
+	appro_skill = /datum/attribute/skill/craft/armorsmithing
 	i_type = "Armor"
 	craftdiff = 1
 	abstract_type = /datum/anvil_recipe/armor
@@ -455,6 +455,12 @@
 	created_item = /obj/item/clothing/armor/leather/splint
 	createditem_extra = 1
 
+/datum/anvil_recipe/armor/iron/brigandine/light
+	name = "Lightweight Brigandine (+cloth)"
+	recipe_name = "a lightweight brigandine"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/armor/brigandine/light
+
 ///////////////////////////////////////////////
 // --------- STEEL -----------
 /datum/anvil_recipe/armor/steel
@@ -755,6 +761,18 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = (/obj/item/clothing/head/helmet/visored/hounskull)
 	craftdiff = 4
+
+/datum/anvil_recipe/armor/steel/barding
+	name = "Saiga Barding, Chainmail (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/chain
+
+/datum/anvil_recipe/armor/steel/barding/honse
+	name = "Honse Barding, Chainmail (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/honse/chain
 
 /*
 /datum/anvil_recipe/armor/steel/warden_helm

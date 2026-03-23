@@ -31,10 +31,10 @@
 
 	. = say_dead(message)
 
-/mob/dead/observer/rogue/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+/mob/dead/observer/rogue/arcaneeye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	return
 
-/mob/dead/observer/rogue/say_dead(message)
+/mob/dead/observer/rogue/arcaneeye/say_dead(message)
 	return
 
 /mob/dead/observer/screye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
@@ -47,7 +47,7 @@
 	if (!message)
 		return
 
-	if (src.client)
+	if (client)
 		if(client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='boldwarning'>I cannot send IC messages (muted).</span>")
 			return
@@ -63,7 +63,6 @@
 	. = ..()
 	var/atom/movable/to_follow = speaker
 	var/link = FOLLOW_LINK(src, to_follow)
-	// Create map text prior to modifying message for goonchat
 	if(client?.prefs)
 		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)

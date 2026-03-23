@@ -12,7 +12,7 @@
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	sewrepair = FALSE
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 
@@ -25,10 +25,7 @@
 	grid_height = 32
 	item_weight = 7 * IRON_MULTIPLIER
 
-/obj/item/clothing/gloves/plate/ancient
-	name = "ancient gauntlets"
-	desc = "Ancient plated gauntlets made out of steel."
-	icon_state = "agauntlets"
+	material_category = ARMOR_MAT_PLATE
 
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
@@ -58,7 +55,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD

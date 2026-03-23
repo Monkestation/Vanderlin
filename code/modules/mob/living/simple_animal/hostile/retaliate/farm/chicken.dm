@@ -48,6 +48,8 @@
 	pooptype = /obj/item/natural/poo/horse
 	happy_funtime_mob = TRUE
 
+	generate_genetics = TRUE
+
 	var/eggsFertile = TRUE
 	var/body_color
 	var/icon_prefix = "chicken"
@@ -131,13 +133,22 @@
 /mob/living/simple_animal/hostile/retaliate/chicken/Life()
 	..()
 	if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
-		production = min(production + 1, 100)
+		var/productive = 1
+		if(HAS_TRAIT(src, TRAIT_ANIMAL_PRODUCTIVE))
+			productive *= 3
+		production = min(production + productive, 100)
 
 /mob/living/simple_animal/hostile/retaliate/chicken/proc/hatch_eggs()
 	for(var/obj/item/reagent_containers/food/snacks/egg/egg in loc)
 		if(!egg.fertile)
 			continue
-		egg.hatch(src)
+		var/mob/living/simple_animal/hostile/retaliate/chicken/suprise_father
+		for(var/mob/living/simple_animal/hostile/retaliate/chicken/potential_father in range(5, src))
+			if(potential_father.gender == MALE)
+				suprise_father = potential_father
+				break
+
+		egg.hatch(src, suprise_father)
 		qdel(egg)
 
 
@@ -179,6 +190,7 @@
 
 	ai_controller = /datum/ai_controller/basic_controller/chicken/baby
 	chicken_init = FALSE
+	generate_genetics = FALSE
 
 /obj/structure/fluff/nest
 	name = "nest"

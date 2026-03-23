@@ -17,15 +17,15 @@
 		UnregisterSignal(owner.current, COMSIG_SKILL_RANK_CHANGE)
 	return ..()
 
-/datum/objective/personal/improve_craft/proc/on_skill_change(datum/source, datum/skill/skill_ref, new_level, old_level)
+/datum/objective/personal/improve_craft/proc/on_skill_change(datum/source, datum/attribute/skill/skill_ref, new_level, old_level)
 	SIGNAL_HANDLER
 	if(completed)
 		return
 
-	if(!istype(skill_ref, /datum/skill/craft))
+	if(!ispath(skill_ref, /datum/attribute/skill/craft))
 		return
 
-	var/real_old = (old_level == SKILL_LEVEL_NONE && !owner.current?.has_skill(skill_ref)) ? SKILL_LEVEL_NONE : old_level
+	var/real_old = (old_level == SKILL_LEVEL_NONE && !GET_MOB_SKILL_VALUE(owner.current, skill_ref)) ? SKILL_LEVEL_NONE : old_level
 
 	if(new_level <= real_old)
 		return
@@ -47,7 +47,7 @@
 
 /datum/objective/personal/improve_craft/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_MALUM_BLESSING, STATKEY_INT, 1)
+	owner.current.adjust_stat_modifier(STATMOD_MALUM_BLESSING, list(STAT_INTELLIGENCE = 1))
 
 /datum/objective/personal/improve_craft/update_explanation_text()
 	explanation_text = "Improve your craft skills by gaining [required_levels] new skill levels through practice or dreams. For Malum!"

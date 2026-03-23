@@ -11,6 +11,10 @@
 	var/datum/job/parent_job
 	/// When joining the round, this text will be shown to the player.
 	var/tutorial = null
+	/// Whether this job is intended to give quests
+	var/is_quest_giver = FALSE
+	/// How many quests this job can take at once
+	var/max_active_quests = 3
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -100,6 +104,9 @@
 	// Change values
 	/// Patrons allowed for this job, sets to a random one in this list if list has values
 	var/list/allowed_patrons
+	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
+	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
 
@@ -108,14 +115,14 @@
 	/// Voicepack to grant to females
 	var/datum/voicepack/voicepack_f
 
-	/// Stats given to the job in the form of list(STA_X = value)
-	var/list/jobstats
+	/// Stats given to the job in the form of list(STA_X = value) DEPRECIATED DO NOT USE
+	VAR_FINAL/list/jobstats
 
 	/// Skill levels granted at roundstart.
 	/// Possibly modified by species.
-	/// Basic format is list(/datum/skill/foo = value).
-	/// Supports (/datum/skill/bar = list(value, clamp)).
-	var/list/skills
+	/// Basic format is list(/datum/attribute/skill/foo = value).
+	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
+	VAR_FINAL/list/skills
 
 	/// Associative list of skill - base multiplier to set for skill_holder
 	var/list/skill_multipliers = list()
@@ -169,7 +176,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/quirk/forced_flaw
+	var/list/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -181,10 +188,19 @@
 	var/max_apprentices = 1
 	/// if this is set its the name bestowed to the new apprentice otherwise its just name the [job_name] apprentice.
 	var/apprentice_name
+	/// Can we be an apprentice to someone?
+	var/can_be_apprentice = FALSE
 	/// do we magic?
 	var/magic_user = FALSE
 	/// Do we get passive income every day from our noble estates?
 	var/noble_income = FALSE
+
+	/// Honorary titles appended to names. Based off pronouns
+	var/honorary
+	var/honorary_f
+	/// Same as above, but for suffixes. See Khan
+	var/honorary_suffix
+	var/honorary_suffix_f
 
 	/// Antagonist role to grant with this job
 	var/datum/antagonist/antag_role
@@ -199,10 +215,18 @@
 		/datum/job/pilgrim,
 	)
 
+	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
+	var/list/whitelisted_ckeys = list()
+
 	///list of job packs we select from during job setup
 	var/list/job_packs
 	var/pack_title = "JOB PACKS"
 	var/pack_message = "Choose a job pack"
+
+	var/attribute_sheet
+	var/attribute_sheet_old
+	var/attribute_sheet_child
+	var/attribute_sheet_adult
 
 /datum/job/New()
 	. = ..()
@@ -235,6 +259,11 @@
 			peopleiknow += X
 			peopleknowme += X
 
+/datum/job/vv_edit_var(var_name, var_value)
+	if(var_name == "whitelisted_ckeys")
+		return FALSE
+	return ..()
+
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
 
@@ -252,6 +281,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
+	if(spawned.attributes)
+		assign_attributes(spawned, player_client)
 	if(!ishuman(spawned))
 		return
 
@@ -287,12 +318,12 @@
 	if(clear_job_stats) // Reset for most non-advclasses
 		spawned.remove_stat_modifier(STATMOD_JOB)
 
-	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
+	spawned.adjust_stat_modifier(STATMOD_JOB, jobstats)
 
-	for(var/datum/skill/skill as anything in skills)
+	for(var/datum/attribute/skill/skill as anything in skills)
 		var/amount_or_list = skills[skill]
 		if(islist(amount_or_list))
-			spawned.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
+			spawned.clamped_adjust_skill_level(skill, amount_or_list[1], amount_or_list[2], TRUE)
 		else
 			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
@@ -333,7 +364,11 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.add_quirk(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.add_quirk(flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -344,6 +379,7 @@
 	if(voicepack_f)
 		spawned.dna?.species.soundpack_f = new voicepack_f()
 
+	assign_honorary_titles(spawned)
 	/// WHY WAS THIS ON OUTFIT??? It shouldn't be HERE either
 	if(spawned.familytree_pref != FAMILY_NONE && !spawned.family_datum)
 		SSfamilytree.AddLocal(spawned, spawned.familytree_pref)
@@ -385,11 +421,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patron_list)
+	for(var/god in GLOB.patrons_by_type)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patron_list[god]
+		var/datum/patron/P = GLOB.patrons_by_type[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -406,6 +442,19 @@
 //Used for a special check of whether to allow a client to latejoin as this job.
 /datum/job/proc/special_check_latejoin(client/C)
 	return TRUE
+
+/datum/job/proc/assign_attributes(mob/living/spawned, client/player_client)
+	if(!ishuman(spawned))
+		return
+	var/mob/living/carbon/human/spawned_human = spawned
+	if(attribute_sheet_old && spawned_human.age == AGE_OLD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_old)
+	else if(attribute_sheet_child && spawned_human.age == AGE_CHILD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_child)
+	else if(attribute_sheet_adult && spawned_human.age == AGE_ADULT)
+		spawned_human.attributes?.add_sheet(attribute_sheet_adult)
+	else if(attribute_sheet)
+		spawned_human.attributes?.add_sheet(attribute_sheet)
 
 /datum/job/proc/GetAntagRep()
 	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
@@ -516,10 +565,23 @@
 	if(!.)
 		log_world("Couldn't find a round start spawn point for [title]")
 
+/datum/job/proc/get_job_special_late_point()
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
+		if(spawn_point.name != "[title]_late")
+			continue
+		. = spawn_point
+		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
+			continue
+		spawn_point.used = TRUE
+		break
+
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
 	if(length(GLOB.jobspawn_overrides[title]))
 		return pick(GLOB.jobspawn_overrides[title])
+	var/obj/effect/landmark/start/spawn_point = get_job_special_late_point()
+	if(spawn_point)
+		return spawn_point
 	if(length(SSjob.latejoin_trackers))
 		return pick(SSjob.latejoin_trackers)
 	return SSjob.get_last_resort_spawn_points()
@@ -600,6 +662,16 @@
 			return f_title
 
 	return title
+
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(honorary)
+		grantee.honorary = honorary
+	if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions

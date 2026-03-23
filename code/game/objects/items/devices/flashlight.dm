@@ -10,7 +10,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	flags_1 = null
 	light_system = MOVABLE_LIGHT
-	light_outer_range = 4
+	light_range = 4
 	light_power = 1
 	slot_flags = ITEM_SLOT_HIP
 	possible_item_intents = list(INTENT_GENERIC)
@@ -52,7 +52,7 @@
 	name = "flare"
 	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
-	light_outer_range = 7 // Pretty bright.
+	light_range = 7 // Pretty bright.
 	icon_state = "flare"
 	item_state = "flare"
 	actions_types = list()
@@ -122,7 +122,7 @@
 	name = "torch"
 	desc = ""
 	w_class = WEIGHT_CLASS_NORMAL
-	light_outer_range = 5
+	light_range = 5
 	force = 1
 	icon = 'icons/roguetown/items/lighting.dmi'
 	icon_state = "torch"
@@ -138,7 +138,6 @@
 	var/max_uses = 12
 	max_integrity = 40
 	fuel = 30 MINUTES
-	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
 
@@ -248,7 +247,7 @@
 	name = "torch"
 	force = 1
 	icon_state = "mtorch"
-	light_outer_range = 6
+	light_range = 6
 	fuel = 120 MINUTES
 	should_self_destruct = TRUE
 	max_uses = 60
@@ -264,7 +263,7 @@
 	name = "iron lamptern"
 	icon_state = "lamp"
 	desc = "A light to guide the way."
-	light_outer_range = 7
+	light_range = 7
 	on = FALSE
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_HIP
@@ -308,7 +307,7 @@
 	icon_state = "bronzelamp"
 	item_state = "bronzelamp"
 	desc = "A marvel of engineering that emits a strange green glow."
-	light_outer_range = 9
+	light_range = 9
 	light_power = 2
 	light_color ="#3fff8f"
 	on = FALSE
@@ -320,7 +319,7 @@
 	name = "copper lamptern"
 	icon_state = "clamp"
 	desc = "A simple and cheap lamptern."
-	light_outer_range = 7
+	light_range = 7
 	on = FALSE
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_HIP

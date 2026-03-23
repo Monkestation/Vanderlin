@@ -3,6 +3,20 @@
 /mob/living/carbon/human/species/harpy
 	race = /datum/species/harpy
 
+/datum/attribute_holder/sheet/job/species/harpy
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/music = 10
+	)
+
+/datum/attribute_holder/sheet/job/species/harpy/stats
+	raw_attribute_list = list(
+		STAT_STRENGTH = -4,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = -4,
+		STAT_SPEED = 3,
+	)
+
 /datum/species/harpy
 	name = "Harpy"
 	id = SPEC_ID_HARPY
@@ -23,9 +37,7 @@
 
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
-	inherent_skills = list(
-		/datum/skill/misc/music = 1,
-	)
+	inherent_sheet = /datum/attribute_holder/sheet/job/species/harpy
 
 	use_skintones = TRUE
 	possible_ages = NORMAL_AGES_LIST_CHILD
@@ -80,8 +92,7 @@
 
 	inherent_traits = list(TRAIT_HOLLOWBONES, TRAIT_AMAZING_BACK, TRAIT_DODGEEXPERT)
 
-	specstats_m = list(STATKEY_STR = -4, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -4, STATKEY_END = 0, STATKEY_SPD = 3, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -4, STATKEY_PER = 2, STATKEY_INT = 1, STATKEY_CON = -4, STATKEY_END = 0, STATKEY_SPD = 3, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/harpy/stats
 
 	enflamed_icon = "widefire"
 

@@ -12,7 +12,7 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
@@ -55,17 +55,17 @@
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
 			return
 
-		if(user.get_skill_level(attacked_prosthetic.anvilrepair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair) <= 0)
 			if(prob(30))
 				repair_percent = 0.01
 			else
 				repair_percent = 0
 		else
-			repair_percent *= user.get_skill_level(attacked_prosthetic.anvilrepair, TRUE)
+			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair)
 
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
 		if(repair_percent)
-			var/amt2raise = floor(user.STAINT * 0.25)
+			var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
 			attacked_prosthetic.repair_damage(attacked_prosthetic.max_integrity * repair_percent)
 			attacked_prosthetic.brute_dam = max(attacked_prosthetic.brute_dam - 10, 0)
 			attacked_prosthetic.burn_dam = max(attacked_prosthetic.burn_dam - 10, 0)
@@ -88,17 +88,17 @@
 			to_chat(user, span_warning("[attacked_item] cannot be repaired any further."))
 			return
 
-		if(user.get_skill_level(attacked_item.anvilrepair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_item.anvilrepair) <= 0)
 			if(prob(30))
 				repair_percent = 0.01
 			else
 				repair_percent = 0
 		else
-			repair_percent *= user.get_skill_level(attacked_item.anvilrepair, TRUE)
+			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_item.anvilrepair)
 
 		playsound(src,'sound/items/bsmithfail.ogg', 40, FALSE)
 		if(repair_percent)
-			var/amt2raise = floor(user.STAINT * 0.25)
+			var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
 			attacked_item.repair_damage( attacked_item.max_integrity * repair_percent)
 			if(repair_percent == 0.01) // If an inexperienced repair attempt has been successful
 				to_chat(user, span_warning("You fumble your way into slightly repairing [attacked_item]."))
@@ -116,11 +116,11 @@
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
 			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
 			return
-		if(user.get_skill_level(attacked_structure.hammer_repair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair) <= 0)
 			to_chat(user, span_warning("I don't know how to repair this.."))
 			return
-		var/amt2raise = floor(user.STAINT * 0.25)
-		repair_percent *= user.get_skill_level(attacked_structure.hammer_repair, TRUE)
+		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+		repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair)
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)

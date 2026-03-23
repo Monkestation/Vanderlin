@@ -164,7 +164,7 @@ class StorageProxy implements StorageBackend {
                   const hub = new HubStorageBackend();
 
                   // Migrate these existing settings from byondstorage to the IFrame
-                  for (const setting of ['panel-settings', 'chat-state', 'chat-messages']) {
+                  for (const setting of ['rogue-panel-settings', 'chat-state', 'chat-messages']) {
                     hub
                       .get(setting)
                       .then((settings) => iframe.set(setting, settings));

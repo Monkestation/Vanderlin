@@ -74,7 +74,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set desc = ""
 
 	if(M.ckey)
-		if(alert("This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.",,"Yes","No") != "Yes")
+		if(tgui_alert(usr, "This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.", "Confirm", list("Yes","No")) != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
@@ -93,7 +93,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set desc = ""
 
 	if(M.ckey)
-		if(alert("This mob is being controlled by [key_name(M)]. Are you sure you wish to give [key_name(player)] control of it? [key_name(M)] will be made a ghost.",,"Yes","No") != "Yes")
+		if(tgui_alert(usr, "This mob is being controlled by [key_name(M)]. Are you sure you wish to give [key_name(player)] control of it? [key_name(M)] will be made a ghost.", "Confirm", list("Yes","No")) != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
@@ -236,7 +236,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(!(ishuman(M) || isobserver(M)))
 		return
 
-	var/answer = browser_alert(src, "Apply an outfit or a full job? (Does not consume slots or change job)", "Admin Dress", list("Outfit", "Job", "Cancel"))
+	var/answer = tgui_alert(src, "Apply an outfit or a full job? (Does not consume slots or change job)", "Admin Dress", list("Outfit", "Job", "Cancel"))
 	if(!answer || QDELETED(src))
 		return
 	switch(answer)
@@ -461,16 +461,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/toggle_medal_disable()
 	set category = "Debug"
 	set name = "Toggle Medal Disable"
-	set desc = ""
+	set desc = "Toggles the safety lock on trying to contact the medal hub."
 
 	if(!check_rights(R_DEBUG))
 		return
 
-	SSachievements.hub_enabled = !SSachievements.hub_enabled
+	SSachievements.achievements_enabled = !SSachievements.achievements_enabled
 
-	message_admins("<span class='adminnotice'>[key_name_admin(src)] [SSachievements.hub_enabled ? "disabled" : "enabled"] the medal hub lockout.</span>")
+	message_admins(span_adminnotice("[key_name_admin(src)] [SSachievements.achievements_enabled ? "disabled" : "enabled"] the medal hub lockout."))
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Toggle Medal Disable") // If...
-	log_admin("[key_name(src)] [SSachievements.hub_enabled ? "disabled" : "enabled"] the medal hub lockout.")
+	log_admin("[key_name(src)] [SSachievements.achievements_enabled ? "disabled" : "enabled"] the medal hub lockout.")
 
 /client/proc/view_runtimes()
 	set category = "Debug.Core"
@@ -539,7 +539,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set desc = ""
 	if(!check_rights(R_DEBUG))
 		return
-	if(alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", "No", "Yes") == "Yes")
+	if(tgui_alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", list("No", "Yes")) == "Yes")
 		config.admin_reload()
 
 /// A debug verb to check the sources of currently running timers

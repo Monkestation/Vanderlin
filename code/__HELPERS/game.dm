@@ -184,13 +184,6 @@
 /area/flick_overlay_view(mutable_appearance/display, duration)
 	return
 
-/proc/flick_overlay_view(image/I, atom/target, duration) //wrapper for the above, flicks to everyone who can see the target atom
-	var/list/viewing = list()
-	for(var/mob/M as anything in viewers(target))
-		if(M.client)
-			viewing += M.client
-	flick_overlay(I, viewing, duration)
-
 /proc/get_active_player_count(alive_check = 0, afk_check = 0, human_check = 0)
 	// Get active players who are playing in the round
 	var/active_players = 0
@@ -219,7 +212,7 @@
 	if(flashwindow)
 		window_flash(M.client)
 	var/options = ignore_category ? list(CHOICE_YES, CHOICE_NO, CHOICE_NEVER) : DEFAULT_INPUT_CHOICES
-	switch(browser_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
+	switch(tgui_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
 		if(CHOICE_YES)
 			to_chat(M, "<span class='notice'>Choice registered: Yes.</span>")
 			if(time_passed + poll_time <= world.time)
@@ -277,6 +270,8 @@
 	var/list/result = list()
 	for(var/mob/M as anything in group)
 		if(!M.key || !M.client || (ignore_category && GLOB.poll_ignore[ignore_category] && (M.ckey in GLOB.poll_ignore[ignore_category])))
+			continue
+		if(jobbanType && is_banned_from(M.ckey, list(jobbanType)))
 			continue
 		if(be_special_flag)
 			if(!(M.client.prefs) || !(be_special_flag in M.client.prefs.be_special))

@@ -3,8 +3,8 @@
 	desc = "Draw upon the secrets of the hidden firmament to converse with the mooncursed."
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/dendor)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	has_visual_effects = TRUE
 
 	use_language = TRUE

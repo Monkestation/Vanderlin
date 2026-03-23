@@ -178,7 +178,7 @@
 	// For each CON above 10, we bleed slower.
 	// Consequently, for each CON under 10 we bleed faster.
 	var/con_modifier = 1
-	var/our_con = STACON
+	var/our_con = GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)
 	if(our_con != 10)
 		con_modifier = our_con - 10
 
@@ -331,7 +331,7 @@
 			W.water_volume = 10
 
 		return
-	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T)
+	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T, blood.color)
 
 	splatter.transfer_mob_blood_dna(src)
 	splatter.update_appearance(UPDATE_ICON_STATE)
@@ -376,7 +376,7 @@
 				D.transfer_mob_blood_dna(src)
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T)
+				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T, blood.color)
 				splatter.transfer_mob_blood_dna(src)
 				splatter.update_appearance(UPDATE_ICON_STATE)
 

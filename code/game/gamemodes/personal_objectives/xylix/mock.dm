@@ -67,7 +67,7 @@
 
 /datum/objective/personal/mock/noble/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_XYLIX_BLESSING, list(STAT_FORTUNE = 1))
 
 /datum/objective/personal/mock/noble/update_explanation_text()
 	. = ..()

@@ -23,7 +23,7 @@
 	src.user = user
 	selected_recipe = end_product_recipe
 
-	var/user_skill = user.get_skill_level(end_product_recipe.appro_skill)
+	var/user_skill = GET_MOB_SKILL_VALUE_OLD(user, end_product_recipe.appro_skill)
 	if(user_skill < end_product_recipe.craftdiff)
 		difficulty_modifier *= 2
 
@@ -178,7 +178,7 @@
 	host_anvil.smithing = FALSE
 
 	if(completed)
-		var/smithlevel = user.get_skill_level(selected_recipe.appro_skill)
+		var/smithlevel = GET_MOB_SKILL_VALUE_OLD(user, selected_recipe.appro_skill)
 		if(host_anvil.always_perfect)
 			failed_notes = 0
 			off_time = 0

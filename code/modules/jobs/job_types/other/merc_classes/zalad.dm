@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/zalad
+	attribute_variance = list(
+		/datum/attribute/skill/combat/shields = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/lockpicking = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30
+	)
+
 /datum/job/advclass/mercenary/zalad
 	title = "Red Sands"
 	tutorial = "A cutthroat from Zalad lands, you've headed into foreign lands to make even greater coin than you had prior."
@@ -18,27 +41,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Forgive me, Combat_DesertRider, I'm sorry, I'll miss you.
 	languages = list(/datum/language/zalad)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/zalad
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -49,7 +52,6 @@
 /datum/job/advclass/mercenary/zalad/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 1
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1))
 
 	// Set native language for specific species
 	if(spawned.dna?.species)

@@ -91,13 +91,13 @@
 /atom/movable/screen/skills/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		if(ishuman(usr))
 			var/mob/living/L = usr
 			var/datum/language_holder/H = L.get_language_holder()
 			H.open_language_menu(usr)
 			return
-
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/ht
 		var/mob/living/L = usr
@@ -125,9 +125,13 @@
 		to_chat(L, "*----*")
 		return
 
+	if(!LAZYACCESS(modifiers, CTRL_CLICKED))
+		usr.attributes?.ui_interact(usr)
+		return
+
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		H.print_levels(H)
+		H.print_skill_levels(H)
 
 /atom/movable/screen/craft
 	name = "crafting menu"
@@ -762,7 +766,7 @@
 			iris.icon_state = "oeye_fixed"
 		else
 			iris.icon_state = "oeye"
-	iris.color = "#[human.get_eye_color()]"
+	iris.color = human.get_eye_color()
 	. += iris
 
 /atom/movable/screen/eye_intent/proc/toggle(mob/user)
@@ -1551,10 +1555,12 @@
 			if(!length(M.stressors))
 				to_chat(M, span_info("I'm not feeling much of anything right now."))
 			for(var/datum/stress_event/stress_event in M.stressors)
-				if(!stress_event.can_show())
+				if(!stress_event.can_show(M))
 					continue
 				var/count = stress_event.stacks
-				var/ddesc = islist(stress_event.desc) ? pick(stress_event.desc) : stress_event.desc
+				var/ddesc = stress_event.get_desc(M)
+				if(islist(ddesc))
+					ddesc = pick(ddesc)
 				if(count > 1)
 					to_chat(M, "• [ddesc] (x[count])")
 				else
@@ -1564,7 +1570,7 @@
 			if(M.get_triumphs() <= 0)
 				to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
 				return
-			if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
+			if(tgui_alert(M, "Do you want to remember a TRIUMPH?", "Remember TRIUMPH", list("Yes", "No")) == "Yes")
 				if(M.add_stress(/datum/stress_event/triumph))
 					M.adjust_triumphs(-1)
 					M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
@@ -1695,18 +1701,20 @@
 				hud_used.rmb_intent.collapse_intents()
 
 /// Cycles through right-mouse-button intents. Loops.
-/mob/living/proc/cycle_rmb_intent()
+/mob/living/proc/cycle_rmb_intent(forward=TRUE)
 	if(!length(possible_rmb_intents))
 		return
+	var/cyc_dir = forward > 0 ? 1 : -1
 
 	// Find the index of the current intent
-	var/index = possible_rmb_intents.Find(rmb_intent.type)
+	var/index = possible_rmb_intents.Find(rmb_intent.type) + cyc_dir
 	var/A
 
-	if(index == -1)
+	if(index < 1)
+		A = possible_rmb_intents[length(possible_rmb_intents)]
+	else if(index > length(possible_rmb_intents))
 		A = possible_rmb_intents[1]
 	else
-		index = (index % length(possible_rmb_intents)) + 1
 		A = possible_rmb_intents[index]
 	rmb_intent = new A()
 
@@ -1783,7 +1791,7 @@
 
 /atom/movable/screen/heatstamover
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "heatstamover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = stamina_loc
@@ -1791,7 +1799,7 @@
 
 /atom/movable/screen/mana_over
 	name = ""
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "manaover"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
@@ -1802,7 +1810,7 @@
 	icon_state = "crt"
 	name = ""
 	screen_loc = ui_backhudl
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
 	plane = HUD_PLANE
 	blend_mode = BLEND_MULTIPLY

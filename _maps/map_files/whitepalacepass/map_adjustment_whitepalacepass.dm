@@ -13,7 +13,6 @@
 		/datum/job/dungeoneer,
 		/datum/job/prisoner,
 		/datum/job/jailor,
-		/datum/job/gaffer_assistant //Never filled, prefer to just ditch it.
 	)
 	// Limited positions to ensure core roles are filled.
 	slot_adjust = list(

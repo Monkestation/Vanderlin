@@ -11,49 +11,22 @@
 		to_chat(user, span_warning("I don't have the power to use this!"))
 
 /mob/dead/observer/rogue/arcaneeye
+	name = "Arcane Eye"
+	icon_state = "arcaneeye"
 	sight = 0
 	see_in_dark = 2
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
 
-	misting = 0
-	var/mob/living/carbon/human/vampirelord = null
-	icon_state = "arcaneeye"
 	draw_icon = FALSE
 	hud_type = /datum/hud/eye
 
-/mob/dead/observer/rogue/arcaneeye/proc/scry_tele()
-	set category = "RoleUnique.Arcane Eye"
-	set name = "Teleport"
-	set desc= "Teleport to a location"
-	set hidden = 0
+	var/mob/living/carbon/human/vampirelord = null
 
-	if(!isobserver(usr))
-		to_chat(usr, span_warning("You're not an Eye!"))
-		return
-	var/list/filtered = list()
-	for(var/area/A as anything in get_sorted_areas())
-		if(A.area_flags & (HIDDEN_AREA|NO_TELEPORT))
-			continue
-		filtered += A
-	var/area/thearea  = input("Area to jump to", "VANDERLIN") as null|anything in filtered
-
-	if(!thearea)
-		return
-
-	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea.type))
-		L+=T
-
-	if(!L || !L.len)
-		to_chat(usr, span_warning("No area available."))
-		return
-
-	usr.forceMove(pick(L))
-
-/mob/dead/observer/rogue/arcaneeye/Initialize()
+/mob/dead/observer/rogue/arcaneeye/Initialize(mapload)
 	. = ..()
 	set_invisibility(GLOB.observer_default_invisibility)
+	add_movespeed_modifier(MOVESPEED_ID_GHOST, override = TRUE, multiplicative_slowdown = 3)
 	var/list/verbs = list(
 		/mob/dead/observer/rogue/arcaneeye/proc/scry_tele,
 		/mob/dead/observer/rogue/arcaneeye/proc/cancel_scry,
@@ -62,8 +35,25 @@
 		/mob/dead/observer/rogue/arcaneeye/proc/vampire_telepathy
 	)
 	add_verb(src, verbs)
-	name = "Arcane Eye"
-	grant_all_languages()
+
+/mob/dead/observer/rogue/arcaneeye/Destroy()
+	vampirelord = null
+	return ..()
+
+/mob/dead/observer/rogue/arcaneeye/Crossed(mob/living/L)
+	if(istype(L, /mob/living/carbon/human))
+		var/mob/living/carbon/human/V = L
+		var/holyskill = GET_MOB_SKILL_VALUE_OLD(V, /datum/attribute/skill/magic/holy)
+		var/magicskill = GET_MOB_SKILL_VALUE_OLD(V, /datum/attribute/skill/magic/arcane)
+		if(magicskill >= 2)
+			to_chat(V, "<font color='red'>An ancient and unusual magic looms in the air around you.</font>")
+			return
+		if(holyskill >= 2)
+			to_chat(V, "<font color='red'>An ancient and unholy magic looms in the air around you.</font>")
+			return
+		if(prob(20))
+			to_chat(V, "<font color='red'>You feel like someone is watching you, or something.</font>")
+			return
 
 /mob/dead/observer/rogue/arcaneeye/proc/cancel_scry()
 	set category = "RoleUnique.Arcane Eye"
@@ -75,21 +65,6 @@
 		qdel(src)
 	else
 		to_chat(src, "My body has been destroyed! I'm trapped!")
-
-/mob/dead/observer/rogue/arcaneeye/Crossed(mob/living/L)
-	if(istype(L, /mob/living/carbon/human))
-		var/mob/living/carbon/human/V = L
-		var/holyskill = V.get_skill_level(/datum/skill/magic/holy)
-		var/magicskill = V.get_skill_level(/datum/skill/magic/arcane)
-		if(magicskill >= 2)
-			to_chat(V, "<font color='red'>An ancient and unusual magic looms in the air around you.</font>")
-			return
-		if(holyskill >= 2)
-			to_chat(V, "<font color='red'>An ancient and unholy magic looms in the air around you.</font>")
-			return
-		if(prob(20))
-			to_chat(V, "<font color='red'>You feel like someone is watching you, or something.</font>")
-			return
 
 /mob/dead/observer/rogue/arcaneeye/proc/vampire_telepathy()
 	set name = "Telepathy"
@@ -119,32 +94,35 @@
 	if(zMove(DOWN, TRUE))
 		to_chat(src, span_notice("I move down."))
 
-/mob/dead/observer/rogue/arcaneeye/Move(NewLoc, direct)
-	if(world.time < next_gmove)
+/mob/dead/observer/rogue/arcaneeye/proc/scry_tele()
+	set category = "RoleUnique.Arcane Eye"
+	set name = "Teleport"
+	set desc= "Teleport to a location"
+
+	if(!isobserver(src))
+		to_chat(src, span_warning("You're not an Eye!"))
 		return
-	next_gmove = world.time + 3
 
-	if(updatedir)
-		setDir(direct)//only update dir if we actually need it, so overlays won't spin on base sprites that don't have directions of their own
-	var/oldloc = loc
+	var/list/filtered = list()
+	for(var/area/A as anything in get_sorted_areas())
+		if(A.area_flags & (HIDDEN_AREA|NO_TELEPORT))
+			continue
+		filtered += A
 
-	if(NewLoc)
-		var/NewLocTurf = get_turf(NewLoc)
-		if(istype(NewLocTurf, /turf/closed/mineral/bedrock)) // prevent going out of bounds.
-			return
-		forceMove(NewLoc)
-	else
-		forceMove(get_turf(src))  //Get out of closets and such as a ghost
-		if((direct & NORTH) && y < world.maxy)
-			y++
-		else if((direct & SOUTH) && y > 1)
-			y--
-		if((direct & EAST) && x < world.maxx)
-			x++
-		else if((direct & WEST) && x > 1)
-			x--
+	var/area/thearea  = browser_input_list(src, "Area to jump to", "VANDERLIN", filtered)
 
-	Moved(oldloc, direct)
+	if(!thearea)
+		return
+
+	var/list/L = list()
+	for(var/turf/T as anything in get_area_turfs(thearea.type))
+		L += T
+
+	if(!length(L))
+		to_chat(src, span_warning("No area available."))
+		return
+
+	forceMove(pick(L))
 
 /mob/proc/scry(can_reenter_corpse = 1, force_respawn = FALSE, drawskip)
 	stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
@@ -154,4 +132,6 @@
 	eye.vampirelord = src
 	eye.ghostize_time = world.time
 	eye.key = key
+	qdel(eye.language_holder)
+	eye.language_holder = language_holder.copy(eye)
 	return eye

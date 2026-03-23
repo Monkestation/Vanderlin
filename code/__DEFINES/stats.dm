@@ -1,16 +1,29 @@
 // Stat modifier keys
 
 // Innate
-#define STATMOD_SEX "innate_sex"
-#define STATMOD_AGE "innate_age"
+#define STATMOD_CURSE "Curse"
+#define STATMOD_GOBLIN_RACE "Goblin"
+
+// specials
+#define STATMOD_ATROPHY "Atrophy"
+#define STATMOD_LAZY "Lazy"
+#define STATMOD_LITTLE "Little"
+#define STATMOD_GIANT "Giant"
+#define STATMOD_BLESSEDONE "Blessed One"
+#define STATMOD_LUCKY "Lucky"
+#define STATMOD_CORNFED "Cornfed"
+#define STATMOD_THICKSKIN "Thickskin"
 
 // Combined basic mods
-#define STATMOD_JOB "job"
-#define STATMOD_PACK "pack"
-#define STATMOD_QUIRK "quirk"
+#define STATMOD_JOB "Job"
+#define STATMOD_PACK "Pack"
+#define STATMOD_QUIRK "Quirk"
+#define STATMOD_ORPHANAGE "Orphanage"
 
 // For misc things.
-#define STATMOD_ABOM "zizo_cult_abomination"
+#define STATMOD_ABOM "Abomination"
+#define STATMOD_SIGIL "Arcane Sigal"
+#define STATMOD_RITUAL "Ritual"
 
 // Patrons
 #define STATMOD_ASTRATA_BLESSING "astrata_blessing"
@@ -35,4 +48,4 @@
 #define STATMOD_EORA_MARRIAGE "eora_marriage"
 
 // Spells
-#define STATMOD_EQUALIZE "equalize_spell"
+#define STATMOD_EQUALIZE "Equalized"

@@ -111,12 +111,12 @@
 		STOP_PROCESSING(SSmachines, src)
 		return
 	L.blood_drained++
+	var/datum/blood_type/bloodtype = L.get_blood_type()
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		var/datum/blood_type/type = L.get_blood_type()
-		container.reagents.add_reagent(initial(type.reagent_type), 5, data = type.get_blood_data(L))
+		container.reagents.add_reagent(initial(bloodtype.reagent_type), 5, data = bloodtype.get_blood_data(L))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in get_turf(src)
 		if(P)
@@ -129,7 +129,7 @@
 				D.drips++
 				D.update_appearance(UPDATE_ICON_STATE)
 			else
-				new /obj/effect/decal/cleanable/blood/drip(get_turf(src))
+				new /obj/effect/decal/cleanable/blood/drip(get_turf(src), bloodtype.color)
 
 /obj/structure/meathook/proc/release_mob(mob/living/M)
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
@@ -155,8 +155,8 @@
 /obj/structure/meathook/proc/butchery(mob/living/user, mob/living/simple_animal/butchery_target)
 	var/list/butcher = list()
 	if(butchery_target.butcher_results)
-		if(prob(50 + (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 25))) // need level 2 to get consistent result
-			if(prob((user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 25) - 50)) // level 3 to 6 get better result
+		if(prob(50 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 25))) // need level 2 to get consistent result
+			if(prob((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 25) - 50)) // level 3 to 6 get better result
 				butcher = butchery_target.perfect_butcher_results
 			else
 				butcher = butchery_target.butcher_results
@@ -169,7 +169,7 @@
 	if(!draining_blood && butchery_target.blood_drained < 60)
 		if(!(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
 			return
-		var/cut_time = 4 SECONDS - (0.5 SECONDS * user.get_skill_level(/datum/skill/labor/butchering, TRUE))
+		var/cut_time = 4 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I prepare to drain [butchery_target]'s blood by cutting the skin..."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))
 			butchery_target.blood_drained++
@@ -178,7 +178,7 @@
 		return
 
 	if(!butchery_target.skinned && (user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
-		var/cut_time = 6 SECONDS - (0.5 SECONDS * user.get_skill_level(/datum/skill/labor/butchering, TRUE))
+		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to skin [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))
 			var/first_fail = TRUE
@@ -189,9 +189,9 @@
 					var/final_amount = base_amount
 
 					// Apply skill-based bonuses
-					if(prob(40 + (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 10) - (60 - butchery_target.blood_drained)))
+					if(prob(40 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 10) - (60 - butchery_target.blood_drained)))
 						final_amount += round(base_amount * 0.5)
-					if(prob(10 + (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 5)) - (60 - butchery_target.blood_drained))
+					if(prob(10 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 5)) - (60 - butchery_target.blood_drained))
 						final_amount += round(base_amount * 0.5)
 					if(prob((60 - butchery_target.blood_drained)))
 						if(first_fail)
@@ -228,9 +228,9 @@
 				if(happiness_message)
 					to_chat(user, span_notice("[happiness_message] (+[total_bonus_items] bonus hide/fur)"))
 
-			var/boon = user.get_learning_boon(/datum/skill/labor/butchering)
-			var/amt2raise = user.STAINT
-			user.mind.add_sleep_experience(/datum/skill/labor/butchering, amt2raise * boon, FALSE)
+			var/boon = user.get_learning_boon(/datum/attribute/skill/labor/butchering)
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+			user.mind.add_sleep_experience(/datum/attribute/skill/labor/butchering, amt2raise * boon, FALSE)
 			butchery_target.skinned = TRUE
 		return
 
@@ -238,7 +238,7 @@
 		return
 
 	if(user.used_intent.type == /datum/intent/dagger/chop/cleaver)
-		var/cut_time = 6 SECONDS - (0.5 SECONDS * user.get_skill_level(/datum/skill/labor/butchering, TRUE))
+		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to butcher [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))
 			var/first_fail = TRUE
@@ -251,9 +251,9 @@
 					var/final_amount = base_amount
 
 					// Apply skill-based bonuses
-					if(prob(40 + (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 10) - (60 - butchery_target.blood_drained)))
+					if(prob(40 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 10) - (60 - butchery_target.blood_drained)))
 						final_amount += round(base_amount * 0.5)
-					if(prob(10 + (user.get_skill_level(/datum/skill/labor/butchering, TRUE) * 5)) - (60 - butchery_target.blood_drained))
+					if(prob(10 + (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 5)) - (60 - butchery_target.blood_drained))
 						final_amount += round(base_amount * 0.5)
 					if(prob((60 - butchery_target.blood_drained)))
 						if(first_fail)
@@ -327,6 +327,6 @@
 					to_chat(user, span_notice("[happiness_message] (+[total_bonus_items] bonus items)"))
 
 			butchery_target.gib()
-			var/boon = user.get_learning_boon(/datum/skill/labor/butchering)
-			var/amt2raise = user.STAINT
-			user.mind.add_sleep_experience(/datum/skill/labor/butchering, amt2raise * boon, FALSE)
+			var/boon = user.get_learning_boon(/datum/attribute/skill/labor/butchering)
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+			user.mind.add_sleep_experience(/datum/attribute/skill/labor/butchering, amt2raise * boon, FALSE)

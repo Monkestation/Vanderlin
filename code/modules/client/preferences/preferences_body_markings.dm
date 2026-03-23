@@ -8,7 +8,7 @@
 /datum/preferences/proc/handle_body_markings_topic(mob/user, href_list)
 	switch(href_list["preference"])
 		if("use_preset")
-			var/action = alert(usr, "Are you sure you want to use a preset (This will clear your existing markings)?", "Markings Preset", "Yes", "No")
+			var/action = tgui_alert(usr, "Are you sure you want to use a preset (This will clear your existing markings)?", "Markings Preset", list("Yes", "No"))
 			if(action && action == "Yes")
 				var/list/candidates = marking_sets_for_species(pref_species)
 				if(length(candidates) == 0)
@@ -190,7 +190,7 @@
 	dat += print_body_markings_page()
 	var/datum/browser/popup = new(user, "markings_cusotmization", "<div align='center'>Markings customization</div>", 650, 710)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/reset_body_marking_colors()
 	for(var/zone in body_markings)

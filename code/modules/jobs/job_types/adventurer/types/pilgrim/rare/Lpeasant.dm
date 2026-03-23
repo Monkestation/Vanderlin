@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/pilgrim/farmermaster
+	attribute_variance = list(
+		/datum/attribute/skill/misc/swimming = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/labor/farming = 60,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/labor/taming = 20,
+	)
+
 /datum/job/advclass/pilgrim/rare/farmermaster
 	title = "Master Farmer"
 	tutorial = "A veteran among the serfs that tend to cattle and fields of produce, \
@@ -11,39 +37,12 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 1,
-		STATKEY_END = 2,
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/labor/farming = 6,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/labor/taming = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/farmermaster
 
 	traits = list(
 		TRAIT_DEADNOSE,
 		TRAIT_SEEDKNOW
 	)
-
-/datum/job/advclass/pilgrim/rare/farmermaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/swimming, pick(0, 1, 1), TRUE)
 
 /datum/outfit/pilgrim/farmermaster
 	name = "Master Farmer (Pilgrim)"

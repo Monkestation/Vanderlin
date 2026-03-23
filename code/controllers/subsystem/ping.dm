@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(ping)
 	var/list/currentrun = list()
 
 /datum/controller/subsystem/ping/stat_entry()
-	..("P:[GLOB.clients.len]")
+	..("P:[length(GLOB.clients)]")
 
 
 /datum/controller/subsystem/ping/fire(resumed = 0)
@@ -18,16 +18,14 @@ SUBSYSTEM_DEF(ping)
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while (currentrun.len)
-		var/client/C = currentrun[currentrun.len]
+	while(length(currentrun))
+		var/client/client = currentrun[length(currentrun)]
 		currentrun.len--
 
-		if (!C || !C.chatOutput || !C.chatOutput.loaded)
-			if (MC_TICK_CHECK)
-				return
-			continue
+		if(client?.tgui_panel?.is_ready())
+			client.tgui_panel.window.send_message("ping/soft", list(
+				"afk" = client.is_afk(3.5 SECONDS)
+			))
 
-		// softPang isn't handled anywhere but it'll always reset the opts.lastPang.
-		C.chatOutput.ehjax_send(data = C.is_afk(29) ? "softPang" : "pang")
-		if (MC_TICK_CHECK)
+		if(MC_TICK_CHECK)
 			return
