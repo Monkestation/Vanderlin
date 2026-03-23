@@ -154,7 +154,7 @@
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire_small"
 	layer = BELOW_MOB_LAYER
-	light_outer_range = 2
+	light_range = 2
 	light_color = LIGHT_COLOR_FIRE
 	duration = 4 SECONDS
 	var/damage_per_tick = 5
@@ -212,7 +212,7 @@
 	name = "raging inferno"
 	desc = "A violent eruption of magical flames!"
 	icon_state = "fire"
-	light_outer_range = 3
+	light_range = 3
 	light_color = "#FF3300"
 	duration = 5 SECONDS
 	damage_per_tick = 8

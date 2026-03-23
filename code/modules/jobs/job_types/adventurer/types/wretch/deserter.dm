@@ -45,7 +45,7 @@
 
 /datum/job/advclass/wretch/disgraced/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
+	if(tgui_alert(spawned, "Do you wish to be recognized as a non-foreigner?", "Foreigner", list("Yes", "No")) == "Yes")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)

@@ -455,6 +455,12 @@
 /datum/repeatable_crafting_recipe/sewing/flowercrown/rosa/create_blacklisted_paths()
 	blacklisted_paths = subtypesof(/obj/item/rope)
 
+/datum/repeatable_crafting_recipe/sewing/flowercrown/cursedrosa
+	name = "black briar rosa crown"
+	requirements = list(/obj/item/natural/fibers = 1,\
+					/obj/item/ore/cursedrosa = 2)
+	output = /obj/item/clothing/head/flowercrown/cursedrosa
+
 /datum/repeatable_crafting_recipe/sewing/flowercrown/salvia
 	name = "salvia crown"
 	requirements = list(/obj/item/natural/fibers = 1,\

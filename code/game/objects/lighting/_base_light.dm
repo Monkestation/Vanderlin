@@ -141,14 +141,14 @@
 					CO = bulb_colour
 					if(color)
 						CO = color
-		var/matching = light && BR == light.light_outer_range && PO == light.light_power && CO == light.light_color
+		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
 		if(!matching)
 			switchcount++
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
 					explode()
 			else
-				set_light(BR, light_inner_range, PO, l_color = CO)
+				set_light(BR, PO, l_color = CO)
 	else
 		emergency_mode = TRUE
 		START_PROCESSING(SSmachines, src)
@@ -278,15 +278,15 @@
 		return
 	if(on)
 		if(!istype(fog_parter_effect))
-			fog_parter_effect = new fog_parter_effect(get_turf(src), light_outer_range)
+			fog_parter_effect = new fog_parter_effect(get_turf(src), light_range)
 	else
 		if(istype(fog_parter_effect)) // to check if its initialized instead of a path
 			qdel(fog_parter_effect)
 		fog_parter_effect = initial(fog_parter_effect)
 
-/obj/machinery/light/set_light_range(new_inner_range, new_outer_range)
+/obj/machinery/light/set_light_range(new_range)
 	. = ..()
 	if(isnull(.))
 		return
 	if(istype(fog_parter_effect))
-		fog_parter_effect.set_range(light_outer_range)
+		fog_parter_effect.set_range(light_range)

@@ -29,14 +29,14 @@
 		return
 	..()
 
-/datum/buildmode_mode/mapgen/handle_selected_area(client/c, list/modifiers)
+/datum/buildmode_mode/mapgen/handle_selected_area(client/user_client, list/modifiers)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 
 	if(left_click)
 		var/datum/mapGenerator/G = new generator_path
 		G.defineRegion(cornerA, cornerB, 1)
 		highlight_region(G.map)
-		var/confirm = alert("Are you sure you want to run the map generator?", "Run generator", "Yes", "No")
+		var/confirm = tgui_alert(user_client, "Are you sure you want to run the map generator?", "Run generator", list("Yes", "No"))
 		if(confirm == "Yes")
 			G.generate()
-		log_admin("Build Mode: [key_name(c)] ran the map generator '[G.buildmode_name]' in the region from [AREACOORD(cornerA)] to [AREACOORD(cornerB)]")
+		log_admin("Build Mode: [key_name(user_client)] ran the map generator '[G.buildmode_name]' in the region from [AREACOORD(cornerA)] to [AREACOORD(cornerB)]")

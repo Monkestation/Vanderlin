@@ -1,19 +1,19 @@
-/mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+/mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	var/armorval = 0
 	var/organnum = 0
 
 	if(def_zone)
-		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL my bodyparts for protection, and averages out the values
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		armorval += checkarmor(BP, type, damage, armor_penetration)
+		armorval += checkarmor(BP, type, damage, armor_penetration, simulate)
 		organnum++
 	return (armorval/max(organnum, 1))
 
 
-/mob/living/carbon/human/proc/checkarmor(def_zone, d_type, damage, armor_penetration, blade_dulling)
+/mob/living/carbon/human/proc/checkarmor(def_zone, d_type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	if(!d_type)
 		return 0
 	if(isbodypart(def_zone))
@@ -64,13 +64,14 @@
 
 	var/boiler_damage = damage / 5
 
-	if(used)
-		if(used.blocksound)
-			playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
-		used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+	if(!simulate)
+		if(used)
+			if(used.blocksound)
+				playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
+			used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
-	if(steam_boiler && def_zone == BODY_ZONE_CHEST)
-		steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+		if(steam_boiler && def_zone == BODY_ZONE_CHEST)
+			steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 	if(physiology)
 		protection += physiology.armor.getRating(d_type)
@@ -173,22 +174,27 @@
 			var/final_block_chance = I.block_chance - (CLAMP((armor_penetration-I.armor_penetration)/2,0,100)) + block_chance_modifier //So armour piercing blades can still be parried by other blades, for example
 			if(I.hit_reaction(src, AM, attack_text, final_block_chance, damage, attack_type))
 				return TRUE
+
 	if(head)
 		var/final_block_chance = head.block_chance - (CLAMP((armor_penetration-head.armor_penetration)/2,0,100)) + block_chance_modifier
 		if(head.hit_reaction(src, AM, attack_text, final_block_chance, damage, attack_type))
 			return TRUE
+
 	if(wear_armor)
 		var/final_block_chance = wear_armor.block_chance - (CLAMP((armor_penetration-wear_armor.armor_penetration)/2,0,100)) + block_chance_modifier
 		if(wear_armor.hit_reaction(src, AM, attack_text, final_block_chance, damage, attack_type))
 			return TRUE
+
 	if(wear_pants)
 		var/final_block_chance = wear_pants.block_chance - (CLAMP((armor_penetration-wear_pants.armor_penetration)/2,0,100)) + block_chance_modifier
 		if(wear_pants.hit_reaction(src, AM, attack_text, final_block_chance, damage, attack_type))
 			return TRUE
+
 	if(wear_neck)
 		var/final_block_chance = wear_neck.block_chance - (CLAMP((armor_penetration-wear_neck.armor_penetration)/2,0,100)) + block_chance_modifier
 		if(wear_neck.hit_reaction(src, AM, attack_text, final_block_chance, damage, attack_type))
 			return TRUE
+
 	return FALSE
 
 /mob/living/carbon/human/proc/check_block()
@@ -238,19 +244,19 @@
 	if(!I || !user)
 		return 0
 
-	var/obj/item/bodypart/affecting
 	var/useder = user.zone_selected
-	if(!lying_attack_check(user,I))
+	if(!lying_attack_check(user, I))
 		return 0
+
 	var/accurate = FALSE
 	if(user.tempatarget)
 		useder = user.tempatarget
 		user.tempatarget = null
 		accurate = TRUE
-	affecting = get_bodypart(check_zone(useder)) //precise attacks, on yourself or someone you are grabbing
-//	else
-//		affecting = get_bodypart_complex(user.used_intent.height2limb(user.aimheight)) //this proc picks a bodypart at random as long as it's in the height list
-	if(!affecting) //missing limb
+
+	var/obj/item/bodypart/affecting = get_bodypart(check_zone(useder)) //precise attacks, on yourself or someone you are grabbing
+
+	if(!affecting)
 		to_chat(user, "<span class='warning'>Unfortunately, there's nothing there.</span>")
 		return 0
 
@@ -340,8 +346,9 @@
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
 			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone, crit_message = TRUE)
-		visible_message("<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] [src]![next_attack_msg.Join()]</span>", \
-					"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
+		visible_message(
+			"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] [src]![next_attack_msg.Join()]</span>", \
+			"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
 		next_attack_msg.Cut()
 		if(nodmg)
 			return FALSE

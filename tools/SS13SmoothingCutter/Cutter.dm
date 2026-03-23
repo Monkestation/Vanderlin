@@ -19,7 +19,7 @@
 
 	switch(states.len)
 		if(0 to (STATE_COUNT_NORMAL - 1))
-			var/cont = alert(usr, "Too few states: [states.len],  expected [STATE_COUNT_NORMAL] (Non-Diagonal) or [STATE_COUNT_DIAGONAL] (Diagonal), Continue?", "Unexpected Amount of States", "Yes", "No")
+			var/cont = tgui_alert(usr, "Too few states: [states.len],  expected [STATE_COUNT_NORMAL] (Non-Diagonal) or [STATE_COUNT_DIAGONAL] (Diagonal), Continue?", "Unexpected Amount of States", list("Yes", "No"))
 			if(cont == "No")
 				return
 		if(STATE_COUNT_NORMAL)
@@ -27,7 +27,7 @@
 		if(STATE_COUNT_DIAGONAL)
 			world << "5 States, running in Diagonal mode"
 		if((STATE_COUNT_DIAGONAL + 1) to A_BIG_NUMBER)
-			var/cont = alert(usr, "Too many states: [states.len],  expected [STATE_COUNT_NORMAL] (Non-Diagonal) or [STATE_COUNT_DIAGONAL] (Diagonal), Continue?", "Unexpected Amount of States", "Yes", "No")
+			var/cont = tgui_alert(usr, "Too many states: [states.len],  expected [STATE_COUNT_NORMAL] (Non-Diagonal) or [STATE_COUNT_DIAGONAL] (Diagonal), Continue?", "Unexpected Amount of States", list("Yes", "No"))
 			if(cont == "No")
 				return
 

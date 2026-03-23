@@ -11,9 +11,10 @@
 		if (default_map_traits.len > world.maxz)
 			default_map_traits.Cut(world.maxz + 1)
 
-	for (var/I in 1 to default_map_traits.len)
+	for (var/I in 1 to length(default_map_traits))
 		var/list/features = default_map_traits[I]
 		var/datum/space_level/S = new(I, features[DL_NAME], features[DL_TRAITS])
+		build_area_turfs(I)
 		z_list += S
 
 /// Generates a real, honest to god new z level. Will create the actual space, and also generate a datum that holds info about the new plot of land
