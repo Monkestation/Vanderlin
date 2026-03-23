@@ -20,7 +20,7 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 
 /mob/living/proc/consider_ambush(always = FALSE, ignore_cooldown = FALSE, min_dist = 1, max_dist = 7)
 	var/area/AR = get_area(src)
-	if(!AR && !length(AR.ambush_mobs))
+	if(!length(AR?.ambush_mobs))
 		return
 	var/datum/threat_region/TR = SSregionthreat.get_region(AR.threat_region)
 	if(TR && !COOLDOWN_FINISHED(TR, natural_ambush))
