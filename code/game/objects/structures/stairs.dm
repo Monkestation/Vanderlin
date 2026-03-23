@@ -252,56 +252,41 @@
 
 /obj/structure/stairs/d/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
+	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
+	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
+	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+
 	dir = dirin
-	var/turf/partner = get_step_multiz(src, turn(dir, 180)|DOWN)
+	var/turf/partner = get_step(src, turn(dir, 180))
+	if(!isopenturf(partner))
+		return
+	partner = get_step_multiz(src, turn(dir, 180)|DOWN)
 	if(isopenturf(partner))
 		var/obj/structure/stairs/stairs = locate() in partner
 		if(!stairs)
 			stairs = new /obj/structure/stairs(partner)
 		stairs.dir = dir
-	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
-	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
-	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
 	return
 
 /obj/structure/stairs/stone/d/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
+	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
+	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
+	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+
 	dir = dirin
-	var/turf/partner = get_step_multiz(src, turn(dir, 180)|DOWN)
+	var/turf/partner = get_step(src, turn(dir, 180))
+	if(!isopenturf(partner))
+		return
+	partner = get_step_multiz(src, turn(dir, 180)|DOWN)
 	if(isopenturf(partner))
 		var/obj/structure/stairs/stairs = locate() in partner
 		if(!stairs)
 			stairs = new /obj/structure/stairs/stone(partner)
 		stairs.dir = dir
-	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
-	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
-	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
 	return
-
-/// A helper proc to handle chained atoms moving across Z-levels. Currently only handles mobs pulling movables.
-/proc/movable_travel_z_level(atom/movable/AM, turf/newtarg)
-	if(!isliving(AM))
-		AM.forceMove(newtarg)
-		return
-	var/mob/living/L = AM
-	var/atom/movable/pulling = L.pulling
-	var/was_pulled_buckled = FALSE
-	if(pulling)
-		if(pulling in L.buckled_mobs)
-			was_pulled_buckled = TRUE
-	L.forceMove(newtarg)
-	if(pulling)
-		L.stop_pulling()
-		pulling.forceMove(newtarg)
-		L.start_pulling(pulling, suppress_message = TRUE)
-		if(was_pulled_buckled)
-			var/mob/living/M = pulling
-			if(M.body_position != LYING_DOWN)	// piggyback carry
-				L.buckle_mob(pulling, TRUE, TRUE, FALSE, 0, 0)
-			else				// fireman carry
-				L.buckle_mob(pulling, TRUE, TRUE, 90, 0, 0)
 
 /// From a cardinal direction, returns the resulting turf we'll end up at if we're uncrossing the stairs. Used for pathfinding, mostly.
 /obj/structure/stairs/proc/get_transit_destination(dirmove)

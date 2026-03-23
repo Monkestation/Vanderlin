@@ -85,9 +85,11 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 
 /// Flags used in "Move Upwards" and "Move Downwards" verbs.
 #define ZMOVE_FLIGHT_FLAGS (ZMOVE_CAN_FLY_CHECKS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
-/// Used when walking upstairs
+/// Used when walking upstairs.
 #define ZMOVE_STAIRS_FLAGS (ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED)
-/// Used when climbing things in general.
+/// Used when using ladders.
+#define ZMOVE_LADDER_FLAGS (ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
+/// Used when climbing things that requires effort.
 #define Z_MOVE_CLIMBING_FLAGS (ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
 /// Used for falling down open space.
 #define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)

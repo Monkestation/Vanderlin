@@ -846,9 +846,6 @@
 			else
 				check_pulling()
 
-	if(pulledby) // EXPERIMENTAL
-		pulledby.check_pulling(only_pulling = TRUE, z_allowed = TRUE)
-
 	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
 	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
 	if(glide_size_override)
@@ -860,6 +857,9 @@
 
 	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direct, glide_size_override)) //movement failed due to buckled mob(s)
 		. = FALSE
+
+	if(. && pulledby && moving_diagonally != FIRST_DIAG_STEP) // EXPERIMENTAL
+		pulledby.check_pulling(only_pulling = TRUE, z_allowed = TRUE)
 
 	if(currently_z_moving)
 		if(. && loc == newloc)

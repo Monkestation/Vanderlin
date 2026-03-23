@@ -159,7 +159,7 @@
 		return
 
 	var/turf/target = get_turf(ladder)
-	user.zMove(target = target, z_move_flags = ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
+	user.zMove(target = target, z_move_flags = ZMOVE_LADDER_FLAGS)
 
 	if(grant_exp)
 		var/fitness_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/athletics)
