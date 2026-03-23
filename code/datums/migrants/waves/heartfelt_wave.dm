@@ -3,6 +3,29 @@
 	greet_text = "You are the Lord of Heartfelt, ruler of a once-prosperous barony now in ruin. Guided by your Magos, you journey to Vanderlin, seeking aid to restore your domain to its former glory, or perhaps claim a new throne."
 	migrant_job = /datum/job/migrant/heartfelt_lord
 
+/datum/attribute_holder/sheet/job/migrant/heartfelt_lord
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 2,
+		/datum/attribute/skill/craft/engineering = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/heartfelt_lord
 	title = "Lord of Heartfelt"
 	tutorial = "You are the Lord of Heartfelt, ruler of a once-prosperous barony now in ruin. Guided by your Magos, you journey to Vanderlin, seeking aid to restore your domain to its former glory, or perhaps claim a new throne."
@@ -15,30 +38,7 @@
 	honorary_f = "Baroness"
 
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 3,
-		STATKEY_END = 2,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 2,
-	)
-
-	skills = list(
-		/datum/skill/craft/engineering = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/heartfelt_lord
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -72,6 +72,26 @@
 	greet_text = "You are the Lady of Heartfelt, once a respected noblewoman now struggling to survive in a desolate landscape. With your home in ruins, you look to Vanderlin, hoping to find new purpose or refuge amidst the chaos."
 	migrant_job = /datum/job/migrant/heartfelt_lady
 
+/datum/attribute_holder/sheet/job/migrant/heartfelt_lady
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 2,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/misc/stealing = 40,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/heartfelt_lady
 	title = "Lady of Heartfelt"
 	tutorial = "You are the Lady of Heartfelt, once a respected noblewoman now struggling to survive in a desolate landscape. With your home in ruins, you look to Vanderlin, hoping to find new purpose or refuge amidst the chaos."
@@ -83,28 +103,7 @@
 	honorary = "Baron"
 	honorary_f = "Baroness"
 
-
-	jobstats = list(
-		STATKEY_INT = 3,
-		STATKEY_END = 1,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 2,
-		STATKEY_LCK = 2,
-	)
-
-	skills = list(
-		/datum/skill/craft/engineering = 1,
-		/datum/skill/misc/stealing = 4,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/heartfelt_lady
 
 	traits = list(
 		TRAIT_SEEPRICES,
@@ -144,6 +143,25 @@
 	greet_text = "You are the Hand of Heartfelt, burdened by the perception of failure in protecting your Lord's domain. Despite doubts from others, your loyalty remains steadfast as you journey to Vanderlin, determined to fulfill your duties."
 	migrant_job = /datum/job/migrant/heartfelt_hand
 
+/datum/attribute_holder/sheet/job/migrant/heartfelt_hand
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 3,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
+
 /datum/job/migrant/heartfelt_hand
 	title = "Hand of Heartfelt"
 	tutorial = "You are the Hand of Heartfelt, burdened by the perception of failure in protecting your Lord's domain. Despite doubts from others, your loyalty remains steadfast as you journey to Vanderlin, determined to fulfill your duties."
@@ -155,25 +173,7 @@
 	honorary_f = "Lady"
 
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 2,
-		STATKEY_INT = 3,
-	)
-
-	skills = list(
-		/datum/skill/craft/engineering = 1,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/craft/cooking = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/heartfelt_hand
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -202,6 +202,30 @@
 	greet_text = "You are a Knight of Heartfelt, once part of a brotherhood in service to your Lord. Now, alone and committed to safeguarding what remains of your court, you ride to Vanderlin, resolved to ensure their safe arrival."
 	migrant_job = /datum/job/migrant/heartfelt_knight
 
+/datum/attribute_holder/sheet/job/migrant/heartfelt_knight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -1,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/craft/engineering = 30,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/heartfelt_knight
 	title = "Knight of Heartfelt"
 	tutorial = "You are a Knight of Heartfelt, once part of a brotherhood in service to your Lord. Now, alone and committed to safeguarding what remains of your court, you ride to Vanderlin, resolved to ensure their safe arrival."
@@ -210,33 +234,11 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	is_recognized = TRUE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_SPD = -1,
-		STATKEY_INT = 2,
-	)
+
 	honorary = "Sir"
 	honorary_f = "Dame"
 
-	skills = list(
-		/datum/skill/craft/engineering = 3,
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/heartfelt_knight
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -294,6 +296,30 @@
 	greet_text = "You are the Supreme Artificer, the foremost expert on anything brass and steam. Your knowledge helped advance your kingdom, before ultimately leading it to ruin..."
 	migrant_job = /datum/job/migrant/heartfelt_artificer
 
+/datum/attribute_holder/sheet/job/migrant/heartfelt_artificer
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/labor/lumberjacking = 20,
+		/datum/attribute/skill/craft/masonry = 30,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/craft/engineering = 60,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/labor/mining = 20,
+		/datum/attribute/skill/craft/smelting = 40,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/bombs= 40,
+	)
+
 /datum/job/migrant/heartfelt_artificer
 	title = "Supreme Artificer"
 	tutorial = "You are the Supreme Artificer, the foremost expert on anything brass and steam. Your knowledge helped advance your kingdom, before ultimately leading it to ruin..."
@@ -301,31 +327,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/labor/lumberjacking = 2,
-		/datum/skill/craft/masonry = 3,
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/craft/engineering = 6,
-		/datum/skill/misc/lockpicking = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/labor/mining = 2,
-		/datum/skill/craft/smelting = 4,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/bombs= 4,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/heartfelt_artificer
 
 	traits = list(TRAIT_SEEPRICES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg'

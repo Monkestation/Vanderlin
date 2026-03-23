@@ -26,36 +26,36 @@
 				set_hair_style(/datum/sprite_accessory/hair/head/bald)
 				update_body()
 
-		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
-			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-				var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
-				if(has_stubble)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] stubble with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s stubble with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						has_stubble = FALSE
-						update_body()
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
-				else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
-					playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
-					if(user == src)
-						user.visible_message("<span class='danger'>[user] starts to shave [user.p_their()] facehairs with [held_item].</span>")
-					else
-						user.visible_message("<span class='danger'>[user] starts to shave [src]'s facehairs with [held_item].</span>")
-					if(do_after(user, 5 SECONDS, src))
-						set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
-						update_body()
-						record_round_statistic(STATS_BEARDS_SHAVED)
-						if(dna?.species)
-							if(dna.species.id == SPEC_ID_DWARF)
-								var/mob/living/carbon/V = src
-								V.add_stress(/datum/stress_event/dwarfshaved)
-					else
-						held_item.melee_attack_chain(user, src, modifiers)
+	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
+		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+			var/datum/bodypart_feature/hair/facial = get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
+			if(has_stubble)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] stubble with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s stubble with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					has_stubble = FALSE
+					update_body()
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
+			else if(facial?.accessory_type != /datum/sprite_accessory/hair/facial/none)
+				playsound(src, 'sound/foley/shaving.ogg', 100, TRUE, -1)
+				if(user == src)
+					user.visible_message(span_danger("[user] starts to shave [user.p_their()] facehairs with [held_item]."))
+				else
+					user.visible_message(span_danger("[user] starts to shave [src]'s facehairs with [held_item]."))
+				if(do_after(user, 5 SECONDS, src))
+					set_facial_hair_style(/datum/sprite_accessory/hair/facial/none)
+					update_body()
+					record_round_statistic(STATS_BEARDS_SHAVED)
+					if(dna?.species)
+						if(dna.species.id == SPEC_ID_DWARF)
+							var/mob/living/carbon/V = src
+							V.add_stress(/datum/stress_event/dwarfshaved)
+				else
+					held_item.melee_attack_chain(user, src, modifiers)
 		else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_R_FOOT || user.zone_selected == BODY_ZONE_PRECISE_L_FOOT))
 			var/obj/item/clothing/shoes/shoes_check
 			var/mob/living/carbon/target
@@ -448,7 +448,7 @@
 
 			var/toxloss = getToxLoss()
 			var/oxyloss = getOxyLoss()
-			var/painpercent = (get_complex_pain() / (STAEND * 12)) * 100
+			var/painpercent = (get_complex_pain() / max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 12), 1)) * 100
 
 
 			var/usedloss = 0
@@ -577,7 +577,7 @@
 
 /mob/living/carbon/human/is_literate()
 	if(mind)
-		if(get_skill_level(/datum/skill/misc/reading) > 0)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/reading) > 0)
 			return TRUE
 		else
 			return FALSE
@@ -624,7 +624,7 @@
 		if(is_lord_job(mind.assigned_role))
 			return
 
-		var/appointment_type = browser_alert(usr, "Are you sure you want to coronate [src.real_name] as the new Monarch?", "Confirmation", DEFAULT_INPUT_CHOICES)
+		var/appointment_type = tgui_alert(usr, "Are you sure you want to coronate [src.real_name] as the new Monarch?", "Confirmation", DEFAULT_INPUT_CHOICES)
 		if(appointment_type == CHOICE_NO)
 			return
 
@@ -942,11 +942,15 @@
 
 /mob/living/carbon/human/species
 	var/race = null
+	var/attribute_sheet
+	var/headprice
 
 /mob/living/carbon/human/species/Initialize()
 	. = ..()
 	if(race)
 		set_species(race)
+	if(attribute_sheet)
+		attributes?.add_sheet(attribute_sheet)
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/species/LateInitialize()
@@ -962,6 +966,14 @@
 		if(SSterrain_generation.get_island_at_location(turf))
 			faction |= "islander"
 			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
+
+/mob/living/carbon/human/species/after_creation()
+	. = ..()
+	if(headprice)
+		var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
+		head?.sellprice = headprice
+		head?.randomize_price()
+
 
 /**
  * Called when this human should be washed

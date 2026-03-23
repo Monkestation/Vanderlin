@@ -23,7 +23,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
 	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/swords
+	associated_skill = /datum/attribute/skill/combat/swords
 	pickup_sound = "unsheathe_sword"
 	equip_sound = 'sound/foley/dropsound/holster_sword.ogg'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -32,6 +32,8 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 30
+	grid_height = 96
+	grid_width = 64
 
 /obj/item/weapon/sword/getonmobprop(tag)
 	. = ..()
@@ -1462,39 +1464,6 @@
 	melting_material = /datum/material/bronze
 	dropshrink = 0.80
 
-//................ Gaffer's vanity sword ............... //
-
-/obj/item/weapon/sword/long/replica
-	name = "guild master's longsword"
-	desc = ""
-	force = DAMAGE_SWORD - 18
-	force_wielded = DAMAGE_SWORD_WIELD - 20
-	throwforce = DAMAGE_SWORD - 18
-	max_integrity = INTEGRITY_STANDARD * 1.2
-	sellprice = 1
-	melting_material = /datum/material/tin
-
-/obj/item/weapon/sword/long/replica/death
-	color = CLOTHING_SOOT_BLACK
-
-/obj/item/weapon/sword/long/replica/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen") return list("shrink" = 0.5,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -13,"sturn" = 110,"wturn" = -60,"eturn" = -30,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
-			if("gen") return list("shrink" = 0.5,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 167,"sturn" = 290,"wturn" = 120,"eturn" = 150,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
-			if("onback") return list("shrink" = 0.5,"sx" = -1,"sy" = 2,"nx" = 0,"ny" = 2,"wx" = 2,"wy" = 1,"ex" = 0,"ey" = 1,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
-			if("wielded") return list("shrink" = 0.6,"sx" = 6,"sy" = -2,"nx" = -4,"ny" = 2,"wx" = -8,"wy" = -1,"ex" = 8,"ey" = 3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 15,"sturn" = -200,"wturn" = -160,"eturn" = -25,"nflip" = 8,"sflip" = 8,"wflip" = 0,"eflip" = 0)
-			if("onbelt") return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
-/obj/item/weapon/sword/long/replica/examine(mob/user)
-	. = ..()
-	if(is_gaffer_job(user.mind.assigned_role))
-		. += span_info("A useless vanity piece I commissioned after retiring my bow. Unusable in battle, but light enough to forget its on your back.")
-	else
-		. += "A hollow replica of the usual longsword design presumebly made for showsake, useless in real battle"
-
-
 //A weapon meant to be used with two hands.
 /obj/item/weapon/sword/katana
 	name = "katana"
@@ -1638,15 +1607,15 @@
 			else
 				I = M.get_inactive_held_item()
 		if(user.mind)
-			skill_diff += (user.get_skill_level(/datum/skill/combat/swords, TRUE))	//You check your sword skill
+			skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords))	//You check your sword skill
 		if(M.mind)
-			skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))	//They check their wrestling skill to stop the weapon from being pulled.
+			skill_diff -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/combat/wrestling))	//They check their wrestling skill to stop the weapon from being pulled.
 		user.adjust_stamina(-rand(3,8))
-		var/probby = clamp((((3 + (((user.STASTR - M.STASTR)/4) + skill_diff)) * 10)), 5, 95)
+		var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_STRENGTH))/4) + skill_diff)) * 10)), 5, 95)
 		if(I)
 			if(M.mind)
 				if(I.associated_skill)
-					probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
+					probby -= GET_MOB_SKILL_VALUE_OLD(M, I.associated_skill) * 5
 			var/obj/item/mainhand = user.get_active_held_item()
 			var/obj/item/offhand = user.get_inactive_held_item()
 			if(HAS_TRAIT(src, TRAIT_DUALWIELDER) && istype(offhand, mainhand))

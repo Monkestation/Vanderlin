@@ -212,7 +212,7 @@
 	if(flashwindow)
 		window_flash(M.client)
 	var/options = ignore_category ? list(CHOICE_YES, CHOICE_NO, CHOICE_NEVER) : DEFAULT_INPUT_CHOICES
-	switch(browser_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
+	switch(tgui_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
 		if(CHOICE_YES)
 			to_chat(M, "<span class='notice'>Choice registered: Yes.</span>")
 			if(time_passed + poll_time <= world.time)

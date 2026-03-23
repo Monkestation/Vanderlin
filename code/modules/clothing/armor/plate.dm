@@ -2,7 +2,7 @@
 	name = "steel half-plate"
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
@@ -84,7 +84,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 12 * BLACKSTEEL_MULTIPLIER
 	sellprice = VALUE_SILVER_ITEM * 6
@@ -187,7 +187,7 @@
 /datum/status_effect/buff/psydonic_endurance
 	id = "psydonic_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
-	effectedstats = list(STATKEY_CON = 1,STATKEY_END = 1)
+	effectedstats = list(STAT_CONSTITUTION = 1,STAT_ENDURANCE = 1)
 
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()

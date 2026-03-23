@@ -273,7 +273,6 @@
 /area/underworld)
 "Vp" = (
 /obj/structure/gate/bars{
-	gid = "death";
 	max_integrity = 5000000
 	},
 /turf/open/floor/churchrough,

@@ -26,7 +26,7 @@
 	/// Whether we insert the item into the resulting item's contents
 	var/insert_item_into_result = FALSE
 	///the required skill type needed for this
-	var/datum/skill/skill_type
+	var/datum/attribute/skill/skill_type
 	/// How long does it take to perform the step.
 	var/perform_time = 2 SECONDS
 	/// Whether we should check the types of the item, if FALSE then make sure `can_perform()` checks conditions.
@@ -183,7 +183,7 @@
 /// Proc to perform handling a do_after, return FALSE if it failed, TRUE if succeeded.
 /datum/slapcraft_step/proc/perform_do_after(mob/living/user, obj/item/item, obj/item/slapcraft_assembly/assembly, time_to_do)
 	if(skill_type)
-		time_to_do *=  (2 / max(1, user.get_skill_level(skill_type, TRUE)))
+		time_to_do *=  (2 / max(1, GET_MOB_SKILL_VALUE_OLD(user, skill_type)))
 
 	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
 		time_to_do *= 0.9

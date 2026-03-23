@@ -1,3 +1,23 @@
+/datum/attribute_holder/sheet/job/hollowranger
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_SPEED = 2, // Speedy out of necessity! Get the hell outta there
+		/datum/attribute/skill/combat/knives = 30, // Knives are gonna be a rough backup, but should be one anyway
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 50, // Same climbing as Thieves, but without lockpicking
+		/datum/attribute/skill/misc/stealing = 40, // Worse than a Thief, but still very possible to pickpocket
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/craft/tanning = 20, // Dendor asks us to use every part of the beast
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/craft/carpentry = 10, // Can upgrade to Longbow if they desire to
+		/datum/attribute/skill/craft/traps = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+	)
+
 /datum/job/advclass/combat/hollowranger
 	title = "Hollow Ranger"
 	tutorial = "While Rangers are seen often amongst Humen and Elves, Amber Hollow's Rangers are hardly seen at all. \
@@ -14,27 +34,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_RANGER)
 
-	skills = list(
-		/datum/skill/combat/knives = 3, // Knives are gonna be a rough backup, but should be one anyway
-		/datum/skill/misc/sneaking = 4,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 5, // Same climbing as Thieves, but without lockpicking
-		/datum/skill/misc/stealing = 4, // Worse than a Thief, but still very possible to pickpocket
-		/datum/skill/combat/bows = 3,
-		/datum/skill/craft/tanning = 2, // Dendor asks us to use every part of the beast
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/carpentry = 1, // Can upgrade to Longbow if they desire to
-		/datum/skill/craft/traps = 3,
-		/datum/skill/misc/athletics = 2,
-	)
-
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_SPD = 2, // Speedy out of necessity! Get the hell outta there
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/hollowranger
 
 	traits = list(
 		TRAIT_BESTIALSENSE, // Dendor influence in nature blesses them with the Eyes of the Zad

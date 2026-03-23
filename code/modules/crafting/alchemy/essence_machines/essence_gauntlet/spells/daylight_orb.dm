@@ -10,7 +10,7 @@
 	. = ..()
 	owner.visible_message(span_notice("[owner] creates a brilliant daylight orb."))
 	var/obj/effect/temp_visual/daylight_orb/orb = new(get_turf(cast_on))
-	orb.set_light(5, 5, 2, l_color = "#FFFFAA")
+	orb.set_light(5, 2, l_color = "#FFFFAA")
 
 /obj/effect/temp_visual/daylight_orb
 	name = "daylight orb"

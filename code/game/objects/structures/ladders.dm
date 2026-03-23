@@ -72,14 +72,15 @@
 	if(is_ghost)
 		return
 
-	if(!is_ghost)
-		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
-		if(!do_after(user, 3 SECONDS, src))
-			return
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.m_intent != MOVE_INTENT_SNEAK)
+			playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
+	if(!do_after(user, 3 SECONDS, src))
+		return
 
-	if(!is_ghost)
-		show_fluff_message(going_up, user)
-		ladder.add_fingerprint(user)
+	show_fluff_message(going_up, user)
+	ladder.add_fingerprint(user)
 	var/turf/T = get_turf(ladder)
 	if(isliving(user))
 		movable_travel_z_level(user, T)
@@ -94,7 +95,7 @@
 		return
 
 	if (up && down)
-		var/result = alert("Go up or down [src]?", "Ladder", "Up", "Down", "Cancel")
+		var/result = tgui_alert(user, "Go up or down [src]?", "Ladder", list("Up", "Down", "Cancel"))
 		if (!in_range(src, user))
 			return  // nice try
 		switch(result)

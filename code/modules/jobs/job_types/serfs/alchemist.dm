@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/alchemist
+	attribute_variance = list(
+		/datum/attribute/skill/craft/alchemy = list(0, 20)
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
+/datum/attribute_holder/sheet/job/alchemist/old
+	attribute_variance = list(
+		/datum/attribute/skill/craft/alchemy = list(40, 60)
+	)
+
 /datum/job/alchemist
 	title = "Alchemist"
 	tutorial = "You came to Vanderlin either to seek knowledge or riches."
@@ -14,23 +30,9 @@
 	outfit = /datum/outfit/alchemist
 	give_bank_account = 12
 
-	jobstats = list(
-		STATKEY_INT = 3,
-		STATKEY_SPD = -1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/alchemist
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/alchemist/old
 
-	skills = list(
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/alchemy = 2,
-		/datum/skill/misc/reading = 2
-	)
-
-
-/datum/job/alchemist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(0,3), TRUE)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/alchemy, rand(4,6), TRUE)
 
 /datum/outfit/alchemist
 	name = "Alchemist"

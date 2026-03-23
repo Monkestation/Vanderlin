@@ -111,6 +111,15 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/wizhat/bogwitch
+	name = "bog witch hat"
+	desc = "A hat of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 48
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/head/wizhat/gen
 	icon_state = "wizardhatgen"
 
@@ -176,3 +185,19 @@
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
 		inverse = TRUE, \
 	)
+
+/obj/item/clothing/head/gnomecap
+	name = "dwarven tallhat"
+	desc = "A warm, tall hat, made for colder climates."
+	icon_state = "gnomecap"
+	item_state = "gnomecap"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 32
+	max_integrity = INTEGRITY_STANDARD
+	allowed_race = list(SPEC_ID_HALFLING, SPEC_ID_DWARF)  //Something malicious is brewing
+	min_cold_protection_temperature = -20
+
+/obj/item/clothing/head/gnomecap/Initialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)

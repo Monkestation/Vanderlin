@@ -89,7 +89,7 @@
 	mill_result = /obj/item/reagent_containers/powder/flour
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	. += ..()
 	if(farminglvl >= 0)
 		. += "I can easily tell that these are wheat grains."
@@ -97,7 +97,7 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/oat
 	seed = /obj/item/neuFarm/seed/oat
 	name = "oat grain"
-	desc = "A staple grain. Used to create oatmeal, and to feed saigas and horses."
+	desc = "A staple grain. Used to create oatmeal, and to feed saigas."
 	icon_state = "oat"
 	gender = PLURAL
 	filling_color = "#b1d179"
@@ -106,10 +106,24 @@
 	grind_results = list(/datum/reagent/flour = 10)
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	. += ..()
 	if(farminglvl >= 0)
 		. += "I can easily tell that these are oat groats."
+
+/obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+	seed = /obj/item/neuFarm/seed/sunreed
+	name = "sunreed kernels"
+	desc = "Kernels so hard you could chip a tooth. Only the most desperate would use this in any sort of food."
+	icon_state = "maize"
+	faretype = FARE_IMPOVERISHED
+	gender = PLURAL
+	filling_color = "#b9a917"
+	bitesize_mod = 2
+	tastes = list("chipping a tooth" = 1)
+	grind_results = list(/datum/reagent/flour = 10)
+	dropshrink = 0.9
+	mill_result = /obj/item/reagent_containers/powder/flour
 
 // ^ PSA: next time you want to do this, make and run an updatepaths migration in tools/UpdatePaths
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple
@@ -164,7 +178,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	seed = /obj/item/neuFarm/seed/strawberry
 	name = "strawberry"
-	desc = "A delectable strawberry."
+	desc = "Known to grow only in the wilds of Wintermere, a delicious cold weather treat."
 	icon_state = "strawberry"
 	tastes = list("strawberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -177,7 +191,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/raspberry
 	seed = /obj/item/neuFarm/seed/raspberry
 	name = "raspberry"
-	desc = "A delectable raspberry."
+	desc = "Delectable, though almost entirely extinct in the wild due to the invasive jacksberry."
 	icon_state = "raspberry"
 	tastes = list("raspberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -191,7 +205,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/blackberry
 	seed = /obj/item/neuFarm/seed/blackberry
 	name = "blackberry"
-	desc = "A delectable blackberry."
+	desc = "Delectable, though almost entirely extinct in the wild due to the invasive jacksberry."
 	icon_state = "blackberry"
 	tastes = list("blackberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -262,7 +276,7 @@
 	. = ..()
 	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
 	if(!can_tell)
-		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
 	if(can_tell)
 		if(poisonous)
 			. += span_warning("This berry looks suspicious. I sense it might be poisoned.")
@@ -371,6 +385,32 @@
 		return TRUE
 	qdel(S)
 
+/*	..................   Cocaudo   ................... */
+
+/obj/item/natural/cocaudo //This doesn't use the produce subtype because it isn't edible. But it is still produce, so it goes here.
+	name = "cocaudo"
+	desc = "A strange and foreign vegetable that's near impossible to break into."
+	icon = 'icons/roguetown/items/produce.dmi'
+	icon_state = "cocaudo"
+	dropshrink = 0
+	throwforce = 25
+	throw_range = 2
+	force = 15
+	resistance_flags = FIRE_PROOF
+	obj_flags = CAN_BE_HIT
+	gripped_intents = list(INTENT_GENERIC)
+	w_class = WEIGHT_CLASS_NORMAL
+	blade_dulling = DULLING_BASH
+	max_integrity = 50
+	destroy_sound = 'sound/foley/smash_rock.ogg'
+	attacked_sound = 'sound/foley/hit_rock.ogg'
+
+
+/obj/item/natural/cocaudo/deconstruct(disassembled = FALSE)
+	if(!disassembled)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
+	qdel(src)
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato
@@ -499,6 +539,37 @@
 	tastes = list("ananas" = 1)
 	rotprocess = SHELFLIFE_DECENT
 
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto
+	name = "tamto"
+	seed = /obj/item/neuFarm/seed/tamto
+	desc = "A deliciously sweet berry that grows abundantly in the bogs of Daftmarsh."
+	icon_state = "mato"
+	bitesize = 2
+	dropshrink = 0.8
+	slice_path = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	slices_num = 1
+	chopping_sound = TRUE
+	tastes = list("sweet tamto" = 1)
+	rotprocess = SHELFLIFE_SHORT
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing) //funny
+	new /obj/effect/decal/cleanable/food/tomato_smudge(get_turf(src))
+	..()
+	qdel(src)
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun
+	name = "pompkaun"
+	seed = /obj/item/neuFarm/seed/pompkaun
+	desc = "This fruit is equal parts Dendorite and Pestran, carved in offering to the former, and collected by followers of the latter after the offerings rot."
+	icon_state = "pompkaun"
+	bitesize = 3
+	slices_num = 2
+	chopping_sound = TRUE
+	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
+	tastes = list("pompkaun" = 1)
+	rotprocess = SHELFLIFE_DECENT
+
+
 /*	..................   Turnip   ................... */ // only for veggie soup
 /obj/item/reagent_containers/food/snacks/produce/vegetable/turnip
 	name = "turnip"
@@ -581,7 +652,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.cursedblood)
-				if(alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", list("YES", "NO")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else
@@ -691,6 +762,21 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+
+/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
+	name = "drowsbane"
+	desc = "Creates a burning sensation in the mouth of anyone who eats it, this lichen is particularly adept at warding off its consumption by any Subterra denizens. However, in a cruel twist of fate, Tieflings find it particularly delectable."
+	icon_state = "drowsbane"
+	seed = /obj/item/neuFarm/seed/spore/drowsbane
+	throwforce = 0
+	tastes = list("burning" = 1)
+	w_class = WEIGHT_CLASS_TINY
+	throw_speed = 1
+	throw_range = 3
+	dropshrink = 0.8
+	rotprocess = SHELFLIFE_DECENT
+	list_reagents = list(/datum/reagent/drowsbane = 5)
+	grind_results = list(/datum/reagent/drowsbane = 5)
 
 /* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later
 	name = "chanterelle"

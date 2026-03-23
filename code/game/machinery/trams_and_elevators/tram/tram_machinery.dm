@@ -11,7 +11,7 @@ GLOBAL_LIST_EMPTY(tram_doors)
 	flags_1 = NODECONSTRUCT_1
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	light_color = COLOR_BLUE_LIGHT
-	light_outer_range = 0 //we dont want to spam SSlighting with source updates every movement
+	light_range = 0 //we dont want to spam SSlighting with source updates every movement
 
 	///Weakref to the tram piece we control
 	var/datum/weakref/tram_ref

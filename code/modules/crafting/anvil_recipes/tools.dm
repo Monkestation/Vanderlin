@@ -1,7 +1,7 @@
 /datum/anvil_recipe/tools
 	i_type = "Utilities"
 	abstract_type = /datum/anvil_recipe/tools
-	appro_skill = /datum/skill/craft/blacksmithing // already in parent just in here so people know
+	appro_skill = /datum/attribute/skill/craft/blacksmithing // already in parent just in here so people know
 	category = "Tools"
 
 // --------- TIN -----------
@@ -95,7 +95,7 @@
 /datum/anvil_recipe/tools/bronze/cogbronze
 	name = "3x Bronze Cog"
 	recipe_name = "three Cogs"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/bronze
 	craftdiff = 1
 	createditem_extra = 2
@@ -123,7 +123,7 @@
 /datum/anvil_recipe/tools/iron/locks
 	name = "3x Custom Locks"
 	recipe_name = "three Locks"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/customlock
 	createditem_extra = 2
 	craftdiff = 0
@@ -145,7 +145,7 @@
 /datum/anvil_recipe/tools/iron/blankeys
 	name = "3x Blank Custom Keys"
 	recipe_name = "three Blank Keys"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/key/custom
 	createditem_extra = 2
 	craftdiff = 0
@@ -165,7 +165,7 @@
 /datum/anvil_recipe/tools/iron/cogiron
 	name = "2x Iron Cog"
 	recipe_name = "two Cogs"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/iron
 	craftdiff = 1
 	createditem_extra = 1
@@ -305,7 +305,7 @@
 /datum/anvil_recipe/tools/steel/cogstee
 	name = "3x Steel Cogs"
 	recipe_name = "three Cogs"
-	appro_skill = /datum/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
 	created_item = /obj/item/gear/metal/steel
 	craftdiff = 1
 	createditem_extra = 2

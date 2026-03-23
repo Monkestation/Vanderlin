@@ -3,7 +3,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	abstract_type = /obj/item/clothing/head/crown
 
 /obj/item/clothing/head/crown/circlet

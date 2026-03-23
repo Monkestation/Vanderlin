@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/pilgrim/peasant
+	attribute_variance = list(
+		/datum/attribute/skill/craft/crafting = list(20, 30)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/farming = 40,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
 /datum/job/advclass/pilgrim/peasant
 	title = "Peasant"
 	tutorial = "A serf with no particular proficiency of their own, born poor \
@@ -8,36 +31,12 @@
 	apprentice_name = "Handyman"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/whipsflails = 2,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/farming = 4,
-		/datum/skill/labor/taming = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/misc/climbing = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/peasant
 
 	traits = list(
 		TRAIT_DEADNOSE,
 		TRAIT_SEEDKNOW
 	)
-
-/datum/job/advclass/pilgrim/peasant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/craft/crafting, rand(2, 3), TRUE)
 
 /datum/outfit/pilgrim/peasant
 	name = "Peasant (Pilgrim)"

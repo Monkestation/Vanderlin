@@ -38,7 +38,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	clothing_flags = CANT_SLEEP_IN
 	smeltresult = null
 	melting_material = /datum/material/iron
@@ -59,7 +59,7 @@
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 
@@ -76,7 +76,7 @@
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 
@@ -97,7 +97,7 @@
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 
@@ -114,7 +114,7 @@
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 
@@ -473,7 +473,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
 	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/copper
 
 //................ Druids Mask ............... //

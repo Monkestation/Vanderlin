@@ -21,7 +21,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	associated_skill = /datum/skill/combat/knives
+	associated_skill = /datum/attribute/skill/combat/knives
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	equip_sound = 'sound/foley/dropsound/holster_sword.ogg'
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -116,7 +116,7 @@
 		var/obj/item/item = A
 		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
 			. = TRUE
-			var/skill_level = user.get_skill_level(/datum/skill/craft/sewing, TRUE)
+			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing)
 			var/salvage_time = (7 SECONDS - (skill_level * 10))
 			if(!do_after(user, salvage_time, A))
 				return
@@ -130,7 +130,7 @@
 				to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
 				playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
 				qdel(item)
-				user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT)) //Getting exp for failing
+				user.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //Getting exp for failing
 				return //We are returning early if the skill check fails!
 			item.salvage_amount -= item.torn_sleeve_number
 			for(var/i = 1; i <= item.salvage_amount; i++) // We are spawning salvage result for the salvage amount minus the torn sleves!
@@ -139,7 +139,7 @@
 			user.visible_message(span_notice("[user] salvages [item] into usable materials."))
 			playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
 			qdel(item)
-			user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT)) //We're getting experience for salvaging!
+			user.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //We're getting experience for salvaging!
 			return
 	return ..()
 

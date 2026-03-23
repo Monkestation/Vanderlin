@@ -226,9 +226,9 @@
 						var/mob/living/L = lastuser.resolve()
 						record_featured_stat(FEATURED_STATS_ALCHEMISTS, L)
 						record_round_statistic(STATS_POTIONS_BREWED, batch_count)
-						var/boon = L.get_learning_boon(/datum/skill/craft/alchemy)
-						var/amt2raise = L.STAINT * 2 * batch_count // More XP for multiple batches
-						L.adjust_experience(/datum/skill/craft/alchemy, amt2raise * boon, FALSE)
+						var/boon = L.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+						var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) * 2 * batch_count // More XP for multiple batches
+						L.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
 
 					playsound(src, "bubbles", 100, TRUE)
 					playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)

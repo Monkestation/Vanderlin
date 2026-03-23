@@ -44,7 +44,7 @@
 	body += "html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden;}"
 	body += "#container { display: flex; flex-direction: row; align-items: flex-start; width: 100%; overflow-x: hidden; flex-wrap: nowrap;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#left { flex: 2; padding-right: 10px; min-width: 0; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]}"
-	body += "#skills-section, #quirks-section, #languages-section, #stats-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
+	body += "#quirks-section, #languages-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
 	body += "#right { flex: 1; border-left: 2px solid black; padding-left: 10px; max-height: 500px; overflow-y: auto; width: 250px; min-width: 250px; box-sizing: border-box; position: relative;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#right-header { display: flex; justify-content: space-around; padding: 5px; background: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-bottom: 2px solid black; position: sticky; top: 0; z-index: 10; }"
 	body += "#right-header button { flex: 1; margin: 2px; padding: 5px; cursor: pointer; font-weight: bold; border: none; background-color: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-radius: 5px; }"
@@ -55,9 +55,7 @@
 	body += "<script>"
 	body += "function toggleSection(section) {"
 	body += "    localStorage.setItem('activeSection', section);"
-	body += "    document.getElementById('skills-section').style.display = (section === 'skills') ? 'block' : 'none';"
 	body += "    document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
-	body += "	 document.getElementById('stats-section').style.display = (section === 'stats') ? 'block' : 'none';"
 	body += "	 document.getElementById('quirks-section').style.display = (section === 'quirks') ? 'block' : 'none';"
 	body += "}"
 
@@ -116,6 +114,8 @@
 		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
 		body += "<a href='?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
 		body += "<a href='?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
+		if(M.attributes)
+			body += "<a href='byond://?_src_=holder;[HrefToken()];attributes=[REF(M)]'>\[GURPS\]</a> "
 
 		var/patron = ""
 		if(isliving(M))
@@ -190,25 +190,9 @@
 
 	body += "<div id='right'>"
 	body += "<div id='right-header'>"
-	body += "<button onclick=\"toggleSection('skills')\">Skills</button>"
 	body += "<button onclick=\"toggleSection('languages')\">Languages</button>"
-	body += "<button onclick=\"toggleSection('stats')\">Stats</button>"
 	body += "<button onclick=\"toggleSection('quirks')\">Quirks</button>"
 	body += "</div>"
-
-
-	body += "<div id='skills-section'>"
-	body += "<h3>Skills</h3><ul>"
-	if(M.mind)
-		for(var/skill_type in SSskills.all_skills)
-			var/datum/skill/skill = GetSkillRef(skill_type)
-			if(skill_type in M.skills?.known_skills)
-				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill_type]] "
-			else
-				body += "<li>[initial(skill.name)]: 0"
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];decrease_skill=[REF(M)];skill=[skill.type]'>-</a></li>"
-	body += "</ul></div>"
 
 	body += "<div id='languages-section'>"
 	body += "<h3>Languages</h3><ul>"
@@ -218,47 +202,6 @@
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];remove_language=[REF(M)];language=[ld]'>Remove</a></li>"
 		else
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_language=[REF(M)];language=[ld]'>Grant</a></li>"
-	body += "</ul></div>"
-
-	body += "<div id='stats-section'>"
-	body += "<h3>Stats</h3><ul>"
-	if(isliving(M))
-		var/mob/living/living = M
-		body += "<li>Strength: [living.STASTR] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_STR]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_STR]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_STR]'> Bulk Change</a></li>"
-
-		body += "<li>Perception: [living.STAPER] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_PER]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_PER]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_PER]'> Bulk Change</a></li>"
-
-		body += "<li>Endurance: [living.STAEND] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_END]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_END]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_END]'> Bulk Change</a></li>"
-
-		body += "<li>Constitution: [living.STACON] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_CON]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_CON]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_CON]'> Bulk Change</a></li>"
-
-		body += "<li>Intelligence: [living.STAINT] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_INT]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_INT]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_INT]'> Bulk Change</a></li>"
-
-		body += "<li>Speed: [living.STASPD] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_SPD]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_SPD]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_SPD]'> Bulk Change</a></li>"
-
-		body += "<li>Luck: [living.STALUC] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_LCK]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_LCK]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_LCK]'> Bulk Change</a></li>"
-
 	body += "</ul></div>"
 
 	body += "<div id='quirks-section'>"
@@ -342,7 +285,7 @@
 /datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
 	set name = "Trigger Subclass Menu"
 	set desc = "Triggers the subclass menu of a mob."
-	set category = "Admin.Admin"
+	set category = "Admin.Jobs"
 
 	if(!check_rights())
 		return
@@ -550,7 +493,7 @@
 		return
 
 	if(SSticker.admin_delay_notice)
-		if(alert(usr, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes")
 			return FALSE
 
 	var/list/options = list(REGULAR_RESTART, REGULAR_RESTART_DELAYED, HARD_RESTART, HARDEST_RESTART)
@@ -602,7 +545,7 @@
 
 	if (!usr.client.holder)
 		return
-	var/confirm = alert("End the round and restart the game world?", "End Round", "Yes", "Cancel")
+	var/confirm = tgui_alert(usr, "End the round and restart the game world?", "End Round", list("Yes", "Cancel"))
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
@@ -976,7 +919,7 @@
 		question = "This mob already has a user ([tomob.key]) in control of it! "
 	question += "Are you sure you want to place [frommob.name]([frommob.key]) in control of [tomob.name]?"
 
-	var/ask = alert(question, "Place ghost in control of mob?", "Yes", "No")
+	var/ask = tgui_alert(usr, question, "Place ghost in control of mob?", list("Yes", "No"))
 	if (ask != "Yes")
 		return 1
 
@@ -1100,7 +1043,7 @@
 		return
 	if(is_priest_job(M.mind.assigned_role))
 		return
-	var/appointment_type = browser_alert(usr, "Are you sure you want to anoint [M.real_name] as the new Priest?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	var/appointment_type = tgui_alert(usr, "Are you sure you want to anoint [M.real_name] as the new Priest?", "Confirmation", DEFAULT_INPUT_CHOICES)
 	if(appointment_type == CHOICE_NO)
 		return
 
@@ -1163,7 +1106,7 @@
 	var/mob/user = usr
 	if(!user.client.holder)
 		return
-	var/answer = input(user, "ARE YOU ABSOLUTELY SURE? THIS WILL GIVE TRIUMPHS TO EVERYONE CONNECTED.", "TRIUMPHS") as anything in list("Yes", "No")
+	var/answer = tgui_alert(user, "ARE YOU ABSOLUTELY SURE? THIS WILL GIVE TRIUMPHS TO EVERYONE CONNECTED.", "TRIUMPHS", list("Yes", "No"))
 	if(answer != "Yes")
 		return
 	var/amount = input(user, "Choose the amount of triumphs", "Triumph Giver") as num|null
@@ -1172,7 +1115,7 @@
 	if(amount < 0)
 		return
 
-	var/reason = input(user, "Choose a reason", "Triumph Giver") as text|null
+	var/reason = tgui_input_text(user, "Choose a reason", "Triumph Giver")
 
 	for(var/client/client as anything in GLOB.clients)
 		client.mob.adjust_triumphs(amount, reason = reason, override_bonus = TRUE)
@@ -1184,17 +1127,17 @@
 
 	var/list/options = list("Adjust Experience Modifier", "Sleep Experience Modifier", "Both")
 
-	var/type = browser_input_list(usr, "Change which modifier? \n The current value of adjust_experience_modifier is [GLOB.adjust_experience_modifier] \n The current value of sleep_experience_modifier is [GLOB.sleep_experience_modifier].", "Change Skill Experience Gain", options, "Both")
+	var/type = browser_input_list(usr, "Change which modifier? \n The current value of adjust_experience_modifier is [GLOB.skill_xp_modifier] \n The current value of sleep_experience_modifier is [GLOB.sleep_experience_modifier].", "Change Skill Experience Gain", options, "Both")
 	var/modifier = input(usr, "Enter what the modifier should be, default is 1", "Change Skill Experience Gain", 1) as num
 	switch(type)
 		if("Adjust Experience Modifier")
-			GLOB.adjust_experience_modifier = modifier
+			GLOB.skill_xp_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of adjust_experience_modifier to [modifier].")
 		if("Sleep Experience Modifier")
 			GLOB.sleep_experience_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of sleep_experience_modifier to [modifier].")
 		if("Both")
-			GLOB.adjust_experience_modifier = modifier
+			GLOB.skill_xp_modifier = modifier
 			GLOB.sleep_experience_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of both adjust_experience_modifier and sleep_experience_modifier to [modifier].")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Change Skill Experience Gain")

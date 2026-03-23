@@ -32,7 +32,7 @@
 
 	var/prev_title = GLOB.lord_titles[cast_on.real_name]
 	if(prev_title)
-		var/answer = browser_alert(owner, "[cast_on] already has a title, strip it?", "[name]", DEFAULT_INPUT_CONFIRMATIONS)
+		var/answer = tgui_alert(owner, "[cast_on] already has a title, strip it?", "[name]", DEFAULT_INPUT_CONFIRMATIONS)
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return . | SPELL_CANCEL_CAST
 		if(answer == CHOICE_CONFIRM)

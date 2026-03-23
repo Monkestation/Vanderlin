@@ -293,100 +293,6 @@
 	UnregisterSignal(wearer, COMSIG_MOB_UNEQUIPPED_ITEM)
 	wearer.remove_status_effect(/datum/status_effect/buff/noc)
 
-
-// ................... Ring of Burden ....................... (Gaffer's ring, there should only be one of these at one time)
-
-/obj/item/clothing/ring/gold/burden
-	name = "ring of burden"
-	icon_state = "ring_protection" //N/A change this to a real sprite after its made
-	sellprice = 0
-
-/obj/item/clothing/ring/gold/burden/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, type)
-
-/obj/item/clothing/ring/gold/burden/examine(mob/user)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BURDEN))
-		. += "An ancient ring made of pyrite amalgam, an engraved quote is hidden in the inner bridge; \"Heavy is the head that bows\""
-		user.add_stress(/datum/stress_event/ring_madness)
-	else
-		. += "A very old golden ring appointing its wearer as the Mercenary guild master, its strangely missing the crown for the centre stone"
-
-/obj/item/clothing/ring/gold/burden/attack_hand(mob/user)
-	if(is_gaffer_assistant_job(user.mind?.assigned_role))
-		to_chat(user, span_danger("It is not mine to have..."))
-		return
-	. = ..()
-	if(!user.mind)
-		return
-
-	if(HAS_TRAIT(user, TRAIT_BURDEN))
-		return TRUE
-
-	var/gaffed = alert(user, "Will you bear the burden? (Be the next Gaffer)", "YOUR DESTINY", "Yes", "No")
-	var/gaffed_time = world.time
-
-	if((gaffed == "No" || world.time > gaffed_time + 5 SECONDS) && user.is_holding(src))
-		user.dropItemToGround(src, force = TRUE)
-		to_chat(user, span_danger("With great effort, the ring slides off your palm to the floor below"))
-		return
-
-	if((gaffed == "Yes") && user.is_holding(src))
-		ADD_TRAIT(user, TRAIT_BURDEN, type)
-		user.equip_to_slot_if_possible(src, ITEM_SLOT_RING, FALSE, FALSE, TRUE, TRUE)
-		to_chat(user, span_danger("A constricting weight grows around your neck as you adorn the ring"))
-		return TRUE
-
-	else
-		return
-
-/obj/item/clothing/ring/gold/burden/on_mob_death(mob/living/user)
-	. = ..()
-	if(user.ckey)
-		addtimer(CALLBACK(src, PROC_REF(on_mob_death),user), 5 MINUTES)
-		return
-	user.dropItemToGround(src, force = TRUE)
-
-/obj/item/clothing/ring/gold/burden/dropped(mob/user, slot)
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(on_ring_drop),user), 5 MINUTES)
-	REMOVE_TRAIT (user, TRAIT_BURDEN, type)
-	addtimer(CALLBACK(src, PROC_REF(psstt)), rand(10,20) SECONDS)
-
-/obj/item/clothing/ring/gold/burden/proc/psstt()
-	if(!ismob(loc))
-		playsound(src, 'sound/vo/psst.ogg', 50)
-		addtimer(CALLBACK(src, PROC_REF(psstt)), rand(10,20) SECONDS)
-
-/obj/item/clothing/ring/gold/burden/proc/on_ring_drop(mob/user, slot)
-	if(ismob(loc))
-		return
-	visible_message(span_warning("[src] begins to twitch and shake violently, before crumbling into ash"))
-	new /obj/item/fertilizer/ash(loc)
-	qdel(src)
-
-/obj/item/clothing/ring/gold/burden/equipped(mob/user, slot)
-	. = ..()
-	if((slot & ITEM_SLOT_RING) && istype(user)) //this will hopefully be a natural HEADEATER tutorial when HEADEATER is a proper thing
-		//say("good choice") as much as I love the aesthetic of the ring speech bubble being in the inventory screen, cant make it whisper like this
-		var/message = pick("New...bearer...",
-			"The...Guild...",
-			"Feed...it...",
-			"I...see...you...",
-			"Serve...me...")
-		message = span_danger(message)
-		to_chat(user, "The ring whispers, [message]")
-		return
-
-	to_chat(user, span_danger("The moment the [src] is in your grasp, it fuses with the skin of your palm, you can't let it go without choosing your destiny first."))
-
-/obj/item/clothing/ring/gold/burden/Destroy()
-	SEND_GLOBAL_SIGNAL(COMSIG_GAFFER_RING_DESTROYED, src)
-	. = ..()
-
-
-
 /obj/item/clothing/ring/dragon_ring
 	name = "dragon ring"
 	icon_state = "ring_g" // supposed to have it's own sprite but I'm lazy asf
@@ -401,18 +307,18 @@
 	else if(slot & ITEM_SLOT_RING)
 		active_item = TRUE
 		to_chat(user, span_notice("Here be dragons."))
-		user.change_stat(STATKEY_STR, 2)
-		user.change_stat(STATKEY_CON, 2)
-		user.change_stat(STATKEY_END, 2)
+		user.change_stat(STAT_STRENGTH, 2)
+		user.change_stat(STAT_CONSTITUTION, 2)
+		user.change_stat(STAT_ENDURANCE, 2)
 	return
 
 /obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
 	..()
 	if(active_item)
 		to_chat(user, span_notice("Gone is thy hoard."))
-		user.change_stat(STATKEY_STR, -2)
-		user.change_stat(STATKEY_CON, -2)
-		user.change_stat(STATKEY_END, -2)
+		user.change_stat(STAT_STRENGTH, -2)
+		user.change_stat(STAT_CONSTITUTION, -2)
+		user.change_stat(STAT_ENDURANCE, -2)
 		active_item = FALSE
 	return
 
@@ -440,7 +346,7 @@
 /obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(tallowed)
-		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
+		if(tgui_alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", list("Yes", "No")) != "NO")
 			tallowed = FALSE
 			update_appearance(UPDATE_ICON_STATE)
 

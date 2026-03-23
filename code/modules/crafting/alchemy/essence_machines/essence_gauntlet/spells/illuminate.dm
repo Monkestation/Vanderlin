@@ -14,7 +14,7 @@
 
 	// Create temporary light
 	var/obj/effect/temp_visual/light_orb/orb = new(get_turf(owner))
-	orb.set_light(3, 3, 1, l_color = "#FFFFFF")
+	orb.set_light(3, 1, l_color = "#FFFFFF")
 
 /obj/effect/temp_visual/light_orb
 	name = "light orb"

@@ -14,7 +14,7 @@
 	owner.visible_message(span_notice("[owner] creates a precise jet of flame."))
 
 	var/obj/effect/temp_visual/flame_jet/jet = new(target_turf)
-	jet.set_light(5, 5, 2, l_color = "#f8c92e")
+	jet.set_light(5, 2, l_color = "#f8c92e")
 
 /obj/effect/temp_visual/flame_jet
 	name = "flame jet"

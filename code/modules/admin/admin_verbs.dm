@@ -9,6 +9,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/spawn_pollution,
 	/client/proc/adjust_personal_see_leylines,
 	/client/proc/spawn_liquid,
+	/client/proc/borbop_oopsie,
 	/client/proc/spawn_faction_trader,
 	/client/proc/crop_nutrient_debug,
 	/client/proc/remove_liquid,
@@ -187,6 +188,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	return list(
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
+	/client/proc/add_job_key_whitelist,
 	/client/proc/Debug2,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
@@ -275,6 +277,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
+	/client/proc/add_job_key_whitelist,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,
 	/client/proc/Debug2,
@@ -607,7 +610,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			if(flash_range == null)
 				return
 			if(devastation_range > GLOB.MAX_EX_DEVESTATION_RANGE || heavy_impact_range > GLOB.MAX_EX_HEAVY_RANGE || light_impact_range > GLOB.MAX_EX_LIGHT_RANGE || flash_range > GLOB.MAX_EX_FLASH_RANGE)
-				if(alert("Bomb is bigger than the maxcap. Continue?",,"Yes","No") != "Yes")
+				if(tgui_alert(usr, "Bomb is bigger than the maxcap. Continue?","Confirm", list("Yes","No")) != "Yes")
 					return
 			epicenter = mob.loc //We need to reupdate as they may have moved again
 			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, TRUE, TRUE)
@@ -667,7 +670,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
 
-	var/which = browser_alert(usr, "Chose by name or by type path?", "Chose option", list("Name", "Typepath"))
+	var/which = tgui_alert(usr, "Chose by name or by type path?", "Chose option", list("Name", "Typepath"))
 	if(!which)
 		return
 	if(QDELETED(spell_recipient))

@@ -143,7 +143,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
@@ -1139,7 +1139,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -1161,7 +1161,7 @@
 /datum/status_effect/buff/blessed
 	id = "blessed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blessed
-	effectedstats = list(STATKEY_LCK = 1)
+	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/blessed
@@ -1493,7 +1493,7 @@
 		return
 	if(!user.can_read(src))
 		to_chat(user, span_warning("I study [src], but this verba still eludes me..."))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE) //?
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE) //?
 		return
 	if(!in_range(user, src) && !isobserver(user))
 		to_chat(user, span_warning("I am too far away to read [src]."))
@@ -1543,7 +1543,7 @@
 			select_icon = newicon
 			icon_state = "paperwrite"
 			to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
-			var/complete = browser_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
+			var/complete = tgui_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
 			SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
 			if(complete == CHOICE_YES && compiled_pages)
 				written = TRUE
@@ -1696,7 +1696,7 @@ ____________End of Example*/
 /datum/status_effect/buff/blessed
 	id = "blessed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blessed
-	effectedstats = list(STATKEY_LCK = 1)
+	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/blessed

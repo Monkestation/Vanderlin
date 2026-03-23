@@ -1,6 +1,6 @@
 /datum/slapcraft_recipe/alchemy
 	abstract_type = /datum/slapcraft_recipe/alchemy
-	skillcraft = /datum/skill/craft/alchemy
+	skillcraft = /datum/attribute/skill/craft/alchemy
 	category = SLAP_CAT_CARPTENTRY
 
 /datum/slapcraft_recipe/alchemy/structure

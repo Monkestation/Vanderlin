@@ -102,6 +102,12 @@
 
 	. = list()
 
+	// Species, just below the name
+	var/datum/species/species = dna?.species
+	if(species)
+		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
+
 	// Lord's title
 	if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
 		. += span_notice("[P[THEYVE]] been granted the title of \"[GLOB.lord_titles[real_name]]\".")
@@ -310,12 +316,6 @@
 
 	. = list()
 
-	// Species, just below the name
-	var/datum/species/species = dna?.species
-	if(species)
-		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
-
 	// Maniac, higher up than others
 	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_big(span_phobia("THE WORLD TWISTS! MANIAC!")))
@@ -344,9 +344,9 @@
 
 	/// Stat comparing
 	if(!self_inspect && L && user.cmode)
-		var/final_str = STASTR
-		var/final_con = STACON
-		var/final_spd = STASPD
+		var/final_str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+		var/final_con = GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)
+		var/final_spd = GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
 		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 			final_con = 10
@@ -354,7 +354,7 @@
 
 		var/list/comp_msg = list()
 		var/str_msg
-		switch(final_str - L.STASTR)
+		switch(final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
 			if(5 to INFINITY)
 				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
 				user.add_stress(/datum/stress_event/para/str)
@@ -370,9 +370,9 @@
 		if(str_msg)
 			comp_msg += str_msg
 
-		if(L.STAPER >= 12)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION)>= 12)
 			var/con_msg
-			switch(final_con - L.STACON)
+			switch(final_con - GET_MOB_ATTRIBUTE_VALUE(L, STAT_CONSTITUTION))
 				if(5 to INFINITY)
 					con_msg = span_bold("[P[THEY]] look[pl] much more bulky than me.")
 				if(1 to 5)
@@ -387,7 +387,7 @@
 				comp_msg += con_msg
 
 			var/spd_msg
-			switch(final_spd - L.STASPD)
+			switch(final_spd - GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED))
 				if(5 to INFINITY)
 					spd_msg = span_bold("[P[THEY]] look[pl] much quicker than me.")
 				if(1 to 5)

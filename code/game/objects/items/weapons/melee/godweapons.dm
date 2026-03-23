@@ -181,13 +181,13 @@
 	PJ.original = target
 	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
-	if(user.STAPER > 8)
-		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
-		PJ.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
+		PJ.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
-	if(user.STAINT > 10) // Every point over 10 INT adds 10% damage
-		PJ.damage = PJ.damage * (user.STAINT / 10)
-		PJ.accuracy += (user.STAINT - 10) * 3
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) > 10) // Every point over 10 INT adds 10% damage
+		PJ.damage = PJ.damage * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 10)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - 10) * 3
 
 	new /obj/effect/temp_visual/dir_setting/firing_effect/neant(get_step(user, user.dir), user.dir)
 	PJ.preparePixelProjectile(target, user)
