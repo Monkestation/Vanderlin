@@ -29,6 +29,8 @@
 	outfit = /datum/outfit/adventurer/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
 	total_positions = 1
+	roll_chance = 15
+	category_tags = list(CTAG_ADVENTURER)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vaquero
 
