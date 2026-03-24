@@ -20,8 +20,8 @@
 
 	return armor
 
-
-/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+//simulate will cause no damage and play no sound
+/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	return 0
 
 //this returns the mob's protection against eye damage (number between -1 and 2) from bright lights
@@ -186,9 +186,9 @@
 	var/skill_diff = 0
 	var/combat_modifier = 1
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE)) //NPCs don't use this
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling)) //NPCs don't use this
 	if(mind)
-		skill_diff -= (get_skill_level(/datum/skill/combat/wrestling, TRUE))
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
 
 	if(user == src)
 		instant = TRUE
@@ -216,7 +216,7 @@
 		if(G.chokehold)
 			combat_modifier += 0.15
 
-	var/probby = clamp((((8 + (((user.STASTR - STASTR)/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
+	var/probby = clamp((((8 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH))/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message

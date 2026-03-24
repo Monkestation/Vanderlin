@@ -101,9 +101,9 @@
 	var/list/required_items
 
 	/// Skill associated with spell enhancements.
-	var/associated_skill = /datum/skill/magic/arcane
+	var/associated_skill = /datum/attribute/skill/magic/arcane
 	/// Stat associated with spell enchancements.
-	var/associated_stat = STATKEY_INT
+	var/associated_stat = STAT_INTELLIGENCE
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
@@ -383,7 +383,7 @@
 	var/mob/living/living_owner = owner
 	var/new_time = charge_time
 
-	new_time -= charge_time * living_owner.get_skill_level(associated_skill, TRUE) * 0.05
+	new_time -= charge_time * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.05
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
@@ -403,7 +403,7 @@
 	if(cost_override)
 		new_cost = cost_override
 
-	new_cost -= spell_cost * living_owner.get_skill_level(associated_skill) * 0.03
+	new_cost -= spell_cost * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.03
 
 	var/owner_stat = living_owner.get_stat(associated_stat)
 	if(owner_stat > 10)
@@ -1020,9 +1020,9 @@
 		return
 
 	if(!experience_max_skill)
-		experience_max_skill = SKILL_LEVEL_LEGENDARY
+		experience_max_skill = SKILL_LEVEL_LEGENDARY * 10
 
-	var/skill_level = owner.get_skill_level(associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_RAW_OLD(owner, associated_skill)
 	if(skill_level >= experience_max_skill)
 		return
 
@@ -1031,9 +1031,7 @@
 
 	var/datum/mind/owner_mind = owner.mind
 	if(owner_mind && experience_sleep || (experience_sleep_threshold && (skill_level >= experience_sleep_threshold)))
-		// Check to make sure that experience max is adhered to even when using sleep exp
-		if(!owner_mind.sleep_adv.enough_sleep_xp_to_advance(associated_skill, experience_max_skill - skill_level))
-			owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
+		owner_mind.add_sleep_experience(associated_skill, exp_to_gain)
 		return
 	owner.adjust_experience(associated_skill, exp_to_gain)
 
@@ -1117,3 +1115,35 @@
 	SIGNAL_HANDLER
 
 	cancel_casting()
+
+
+/**
+*Used to calculate bonuses to Great Hunt miracles/spells.
+*
+*Arguments:
+* * radial_source - Where we're starting the radial search for bonus ingredients. Defaults to spell owner.
+* * radius - The actual radius of the search. Default to 5.
+* * consume_chance - How likely it is the spell will consume the bonus ingredient. Default to 50.
+* * bonus_value - The number to return per bonus item. Defaults to zero as can be wildly different if needed for time bonuses.
+*/
+/datum/action/cooldown/spell/proc/check_hunt_bonuses(atom/radial_source, radius = 5, consume_chance = 50, bonus_value = 0)
+	var/static/list/alch_bodyparts = typecacheof(list(/obj/item/alch/bone, /obj/item/alch/sinew, /obj/item/alch/horn))
+	var/used_source = radial_source
+	var/bonus_total = 0
+	if(!used_source)
+		used_source = owner
+
+	for(var/obj/possible_bonus in oview(radius, used_source))
+		if(is_type_in_typecache(possible_bonus, alch_bodyparts))
+			bonus_total += bonus_value
+			if(prob(consume_chance))
+				consume_hunt_bonus(possible_bonus)
+
+	return bonus_total
+
+/datum/action/cooldown/spell/proc/consume_hunt_bonus(obj/target)
+	if(!target)
+		return FALSE
+	target.visible_message(span_warning("[target] disintegrates into a red mist."))
+	qdel(target)
+	return TRUE

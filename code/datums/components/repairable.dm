@@ -52,8 +52,8 @@
 	if(user.cmode)
 		return NONE
 
-	if(repair_skill && user.get_skill_level(repair_skill) < repair_skill_level)
-		return NONE
+	if(repair_skill && GET_MOB_SKILL_VALUE_OLD(user, repair_skill) < repair_skill_level)
+		return
 
 	var/atom/atom_parent = parent
 	if(broken_parent)
@@ -88,8 +88,7 @@
 	user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
 	var/repair_time = 10 SECONDS
 	if(repair_skill)
-		repair_time = 30 SECONDS / max(user.get_skill_level(repair_skill, TRUE), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
-
+		repair_time = 30 SECONDS / max(GET_MOB_SKILL_VALUE_OLD(user, repair_skill), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
 	interrupt_repair = FALSE
 	if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
 		interrupt_repair = FALSE

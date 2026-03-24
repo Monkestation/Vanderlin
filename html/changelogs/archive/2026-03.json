@@ -231,5 +231,438 @@
                 "rscdel": "Removed Tiefling from normal Grenzelhoft merc."
             }
         ]
+    },
+    "2026-03-08": {
+        "TerraGS": [
+            {
+                "rscadd": "Adds pre-loaded toilets"
+            },
+            {
+                "bugfix": "reagent container underlays properly update when emptied"
+            },
+            {
+                "map": "replaces many toilets with the new subtype"
+            },
+            {
+                "code_imp": "Toilets now use a storage component. Removed cistern code."
+            }
+        ],
+        "HelennaC": [
+            {
+                "map": "modified the farming area of keep"
+            },
+            {
+                "map": "modified church's door to locked"
+            },
+            {
+                "map": "removed outside candle on the third floor of the inn"
+            },
+            {
+                "map": "removed flying roof at the keep"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed issues with the martyr weapons"
+            },
+            {
+                "balance": "No super sword on 30 seconds for martyr weapons because of code restraints"
+            }
+        ],
+        "realforest2001": [
+            {
+                "bugfix": "Bog is not mountains now"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added more culture selection options for individual species."
+            }
+        ]
+    },
+    "2026-03-09": {
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixed Headshots / Features not loading in the examine window"
+            }
+        ],
+        "Rockslp": [
+            {
+                "bugfix": "Fixes the ravox god boon"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Added a Foppish/Twinky masculine voicepack."
+            },
+            {
+                "rscadd": "Added Dainty and Haughty feminine voicepacks. Note: These voicepacks only change a few sounds each."
+            },
+            {
+                "rscadd": "All three voicepacks are appropriate for humans and are unlikely to fit other races, save elves."
+            },
+            {
+                "rscadd": "Added a preference to override species voicepack. Above voicepacks won't activate without this preference active."
+            },
+            {
+                "admin": "Added search mob directory verb."
+            },
+            {
+                "bugfix": "Fixed virgin quirk."
+            }
+        ],
+        "Teoti4001": [
+            {
+                "balance": "Herbal teas are now slightly worse than basic potions, most herbals have been given REM"
+            }
+        ],
+        "Mitchs98": [
+            {
+                "rscadd": "Dungeoneer, Noble, Veteran, Matron, Court Physician, Bard, and Fisher can now all be played two(or more) rounds in a row without spending triumphs."
+            }
+        ]
+    },
+    "2026-03-10": {
+        "Draggeru": [
+            {
+                "map": "adds the bog witch hut"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "bugfix": "Fixed psydonian language font"
+            },
+            {
+                "bugfix": "Fixed self feinting when interacting with inventory"
+            }
+        ],
+        "realforest2001": [
+            {
+                "rscadd": "Priest verbs are now controlled from an action button."
+            },
+            {
+                "code_imp": "The cancel checks (needing to be in the prayer hall) now happen before you try and do something, not after."
+            }
+        ]
+    },
+    "2026-03-11": {
+        "ModDownloading": [
+            {
+                "rscdel": "Removed the paper from the Heartfelt Lord migrant and Heartfelt Hand pilgrim saying they could be here for diplomatic or trade purposes. They had to come to grips with their ruined homeland eventually."
+            },
+            {
+                "bugfix": "Changed references to a lot of non-canonical locations and events in item descriptions."
+            }
+        ]
+    },
+    "2026-03-14": {
+        "realforest2001": [
+            {
+                "bugfix": "Hopefully fixes TMs not being displayed on join."
+            },
+            {
+                "rscadd": "New Psydonic has its own language icon now."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "bugfix": "Stopped NPCs from salting in deadchat."
+            },
+            {
+                "bugfix": "Commoner prisoners no longer have noble blood again."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "Fixes the Nefarious Tan Blood"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Adds a selectable variant of the Great Hunt patron."
+            }
+        ]
+    },
+    "2026-03-15": {
+        "realforest2001": [
+            {
+                "rscadd": "Added admin only (has to be activated) Rousman migration wave."
+            },
+            {
+                "balance": "Rous no longer have lux (was meant to do this in a prior PR)."
+            },
+            {
+                "rscadd": "Added a larger cloth bag for double resources. Only 3 extra slots."
+            },
+            {
+                "rscadd": "Added a prefab cheese soup bottle."
+            },
+            {
+                "rscadd": "Added a prefab, uncraftable, yellow poncho."
+            },
+            {
+                "bugfix": "Fixed cart spawn not putting contents into the cart."
+            },
+            {
+                "rscadd": "Changed Rousmen default diety to naivety because they're dumb."
+            },
+            {
+                "map": "Split the bog area into distinct zones."
+            },
+            {
+                "bugfix": "Fixed getting patrons you shouldn't."
+            },
+            {
+                "bugfix": "Fixed light step not preventing mantraps breaking legs."
+            }
+        ],
+        "ModDownloading": [
+            {
+                "bugfix": "Wieners can now be used in most Sausage recipes."
+            },
+            {
+                "bugfix": "Custom underwear color can be kept between rounds."
+            }
+        ],
+        "MissyNym": [
+            {
+                "map": "Added makeshift bridges leading to the eastern side of the Terrorbog"
+            },
+            {
+                "map": "Added a quick way up to the Eastern Highroad through the meeting hall in the camp, as well as a special title for getting to it."
+            },
+            {
+                "map": "Added braziers along the plank road to help indicate the northern travel point to give just a bit more hope to poor souls without a light source."
+            },
+            {
+                "rscadd": "Added areas for the eastern highroad, eastern highroad camp, and western highroad."
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "code_imp": "Adjusted language spans and fonts"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscdel": "Removes Housecarl"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "Exiled Warrior can choose between arming sword and duel axes"
+            }
+        ]
+    },
+    "2026-03-16": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes monk stats and skills."
+            }
+        ]
+    },
+    "2026-03-17": {
+        "Rockslp": [
+            {
+                "bugfix": "Fixes sword grid size"
+            }
+        ],
+        "realforest2001": [
+            {
+                "admin": "Staff can now lock roles to specific ckeys for event purposes."
+            },
+            {
+                "rscadd": "Adds the Bog Witch and Bog Witch Apprentice jobs."
+            },
+            {
+                "rscadd": "Added Bone Ward mechanic."
+            },
+            {
+                "rscadd": "Adds miracles and boon to Great Hunt (Proven)."
+            },
+            {
+                "rscadd": "Adds amulet for the Great Hunt."
+            },
+            {
+                "rscadd": "Adds mechanics for banning a patron from a job."
+            }
+        ],
+        "lmenvs": [
+            {
+                "rscadd": "Adds new furniture, topiaries, stone railing for mapping"
+            }
+        ]
+    },
+    "2026-03-18": {
+        "The-Awful": [
+            {
+                "rscadd": "Added lots of new food items, mostly tiefling cuisine"
+            },
+            {
+                "rscadd": "Added five new crops"
+            },
+            {
+                "rscadd": "Changed around some descriptions to fit lore"
+            }
+        ]
+    },
+    "2026-03-19": {
+        "Rockslp": [
+            {
+                "balance": "Rebalances dodging a bit, and parrying by quite a bit."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "image": "added unique sprites for the Mystery Box"
+            },
+            {
+                "bugfix": "Beard Shaving"
+            },
+            {
+                "rscdel": "Removed the unfinished playable Thronleer clan"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "2 new weapon options for gloryhound"
+            },
+            {
+                "balance": "changed some of gloryhound's gear"
+            }
+        ],
+        "Telvayne": [
+            {
+                "rscadd": "Adds Hospitalier adventurer"
+            },
+            {
+                "rscadd": "Adds Chirurgeon adventurer"
+            },
+            {
+                "rscdel": "Removed Chirurgeon Migrant Wave"
+            }
+        ]
+    },
+    "2026-03-20": {
+        "Spitegremlin": [
+            {
+                "balance": "rebalanced hunter classes"
+            }
+        ],
+        "ercrowther": [
+            {
+                "bugfix": "removed a stray pixel on fancy hat when facing left"
+            },
+            {
+                "image": "modified fancyhat onmob sprite"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Changed Field/Catacombs area themes. Sorry!"
+            }
+        ]
+    },
+    "2026-03-21": {
+        "KevinfromHP": [
+            {
+                "balance": "Moved Malaguero Deserter to Adventurer"
+            },
+            {
+                "balance": "Moved Species Examine to Face instead of Body"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added stealth strikes, doing extra damage to unsuspecting targets (Not in combat mode, need to be sneaking behind them). Sneak attacks do up to ~50% extra damage and have up to ~15% extra chance to knockout based on sneak."
+            },
+            {
+                "refactor": "Big lighting refactor, somethings may be too dim or too bright, report issues."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the nimrod haircut"
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Chages alert prompts to use TGUI."
+            },
+            {
+                "code_imp": "Removes browser_alert."
+            }
+        ],
+        "Archeonan": [
+            {
+                "rscadd": "Bard Adventurer Class"
+            },
+            {
+                "rscdel": "Removed Pilgrim Bard"
+            },
+            {
+                "balance": "Gave bard light gambeson, short sword, and average sword skills"
+            }
+        ]
+    },
+    "2026-03-22": {
+        "KevinfromHP": [
+            {
+                "sound": "New foley for climbing ladders, walking on metal grilles, rope bridges, pipes, and Kybraxor"
+            },
+            {
+                "code_imp": "Switches some existing usages of the squeak component to footstep override, as its functionality is closer to intended usage with footsteps"
+            },
+            {
+                "rscadd": "Rounds are now 20 minutes longer"
+            },
+            {
+                "balance": "Day is 2 hours longer than it used to be"
+            },
+            {
+                "sound": "Added 4 new songs, 2 to the title screen and 2 to the credits. Songs by burialgoods."
+            }
+        ],
+        "Casperclone1": [
+            {
+                "rscadd": "Bandits can now become rogue mages!"
+            },
+            {
+                "rscdel": "As they are now no longer worshipping Zizo they have lost their ability to speak to the dead"
+            }
+        ],
+        "The-Awful": [
+            {
+                "bugfix": "fixed food sprites"
+            },
+            {
+                "bugfix": "salad no longer craftable on bowls with liquid in them"
+            }
+        ]
+    },
+    "2026-03-23": {
+        "Rockslp": [
+            {
+                "rscadd": "More kobold slurs"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Makes lightweight brigandines craftable"
+            },
+            {
+                "bugfix": "adjust fighters and clerics"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added various chocolate pastries."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed Malaguero + other stress events"
+            }
+        ]
     }
 }

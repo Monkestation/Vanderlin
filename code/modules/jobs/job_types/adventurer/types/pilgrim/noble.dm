@@ -1,3 +1,20 @@
+/datum/attribute_holder/sheet/job/pilgrim/noble
+	attribute_variance = list(
+		/datum/attribute/skill/misc/music = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/bows = 20,
+	)
+
 /datum/job/advclass/pilgrim/noble
 	title = "Noble"
 	tutorial = "The blood of a noble family runs through your veins. Perhaps you are visiting from some place far away, \
@@ -15,21 +32,7 @@
 	honorary = "Lord"
 	honorary_f = "Lady"
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1,
-		STATKEY_CON = 1,
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/bows = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/noble
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -38,7 +41,6 @@
 
 /datum/job/advclass/pilgrim/noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1, 2), TRUE)
 
 	var/static/list/selectable = list( \
 		"Dagger" = /obj/item/weapon/knife/dagger/silver, \
@@ -50,17 +52,17 @@
 		return
 	switch(choice)
 		if("Dagger")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/knife/noble()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
 		if("Rapier")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/sword/noble()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
 		if("Cane Blade")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/cane()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)

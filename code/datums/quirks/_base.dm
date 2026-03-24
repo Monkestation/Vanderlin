@@ -162,9 +162,9 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 		return FALSE
 
 	// Check species restrictions
-	if(length(allowed_species) && !(prefs.pref_species.type in allowed_species))
+	if(length(allowed_species) && !is_type_in_list(prefs.pref_species, allowed_species))
 		return FALSE
-	if(prefs.pref_species.type in blocked_species)
+	if(is_type_in_list(prefs.pref_species, blocked_species))
 		return FALSE
 
 	return TRUE
@@ -195,7 +195,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 			return TRUE
 	return FALSE
 
-/mob/living/proc/has_quirk(quirk_type)
+/mob/proc/has_quirk(quirk_type)
 	return
 
 /mob/living/carbon/human/has_quirk(quirk_type)

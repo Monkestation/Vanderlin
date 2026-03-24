@@ -1322,7 +1322,7 @@
 /turf/open/floor/churchrough/purple,
 /area/indoors/town/church/inquisition)
 "ij" = (
-/obj/effect/landmark/start/veteran,
+/obj/effect/landmark/start/tombwarden,
 /obj/structure/chair/stool/bar,
 /turf/open/floor/herringbone,
 /area/ship/middeck)
@@ -6318,7 +6318,7 @@
 /turf/open/floor/wood,
 /area/ship/middeck)
 "Qx" = (
-/obj/effect/landmark/start/veteran,
+/obj/effect/landmark/start/tombwarden,
 /turf/open/floor/hay,
 /area/ship/topdeck)
 "QA" = (

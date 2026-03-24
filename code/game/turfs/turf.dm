@@ -51,18 +51,28 @@
 	///The typepath we use for lazy fishing on turfs, to save on world init time.
 	var/fish_source
 
+	///Lumcount added by sources other than lighting datum objects, such as the overlay lighting component.
+	var/dynamic_lumcount = 0
+
 	var/dynamic_lighting = TRUE
 
 	var/tmp/lighting_corners_initialised = FALSE
 
+	/// Our lighting object.
+	var/tmp/atom/movable/lighting_object/lighting_object
+
+	///Lighting Corner datums.
+	var/tmp/datum/lighting_corner/lighting_corner_NE
+	var/tmp/datum/lighting_corner/lighting_corner_SE
+	var/tmp/datum/lighting_corner/lighting_corner_SW
+	var/tmp/datum/lighting_corner/lighting_corner_NW
+
 	///List of light sources affecting this turf.
 	var/tmp/list/datum/light_source/affecting_lights
-	///Our lighting object.
-	var/tmp/atom/movable/lighting_object/lighting_object
-	var/tmp/list/datum/lighting_corner/corners
 
 	///Which directions does this turf block the vision of, taking into account both the turf's opacity and the movable opacity_sources.
 	var/directional_opacity = NONE
+
 	///Lazylist of movable atoms providing opacity sources.
 	var/list/atom/movable/opacity_sources
 
@@ -101,7 +111,7 @@
 	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
 		add_overlay(/obj/effect/fullbright)
 
-	if (light_power && (light_outer_range || light_inner_range))
+	if (light_power && light_range)
 		update_light()
 
 	if(uses_integrity)
@@ -286,7 +296,7 @@
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
 		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
-			var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
+			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
 			if(dex_save >= 5)
 				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
 					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")

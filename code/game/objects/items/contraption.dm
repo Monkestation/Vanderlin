@@ -54,7 +54,7 @@
 	if(!istype(user, /mob/living))
 		return
 	var/mob/living/player = user
-	var/skill = player.get_skill_level(/datum/skill/craft/engineering)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(player, /datum/attribute/skill/craft/engineering)
 	if(current_charge)
 		. += span_warning("The contraption has [current_charge] charges left.")
 	if(!current_charge)
@@ -78,7 +78,7 @@
 	return
 
 /obj/item/contraption/proc/misfire(atom/A, mob/living/user)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT * 5))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 5))
 	to_chat(user, span_info("Oh fuck."))
 	playsound(src, 'sound/misc/bell.ogg', 100)
 	addtimer(CALLBACK(src, PROC_REF(misfire_result), A, user), rand(5, 30))
@@ -203,11 +203,12 @@
 	charge_deduction(O, user, 1)
 	shake_camera(user, 1, 1)
 	playsound(src, 'sound/magic/swap.ogg', 100, TRUE)
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2))
 
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2 , 10) - skill)))
 		misfire(O, user)
+		return
 
 	if(istype(O, /obj/structure/door)) //This is to ensure the new door will retain its lock
 		var/obj/structure/door/door = O
@@ -296,7 +297,8 @@
 		S.start()
 		return ITEM_INTERACT_BLOCKING
 
-	user.mind.add_sleep_experience(/datum/skill/craft/engineering, (user.STAINT / 3))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/engineering, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 3))
+
 	charge_deduction(O, user, 1)
 	flick(on_icon, src)
 	playsound(src, 'sound/misc/machinevomit.ogg', 50, TRUE)
@@ -305,11 +307,11 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/contraption/smelter/proc/smelt_part2(obj/O, mob/living/user)
-	var/skill = user.get_skill_level(/datum/skill/craft/engineering, TRUE)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	var/turf/turf = get_turf(O)
 	playsound(O, pick('sound/combat/hits/burn (1).ogg','sound/combat/hits/burn (2).ogg'), 100)
 	O.moveToNullspace()
-	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STATKEY_LCK,2,10) - skill)))
+	if(misfire_chance && prob(max(0, misfire_chance - user.stat_roll(STAT_FORTUNE,2,10) - skill)))
 		misfire(O, user)
 	addtimer(CALLBACK(O, PROC_REF(popcorn_smelt_result), turf), 20)
 
@@ -363,8 +365,8 @@
 	if(amputee.stat != DEAD && (amputee.has_status_effect(/datum/status_effect/jitter) || amputee.body_position != LYING_DOWN)) //jittering will make it harder to secure the shears, even if you can't otherwise move
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
-	var/skill_modifier = 1.5 - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 6)
-	if(!do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = amputee))
+	var/skill_modifier = 1.5 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 6)
+	if(!do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
 		return ITEM_INTERACT_BLOCKING
 
 	playsound(amputee, 'sound/misc/guillotine.ogg', 20, TRUE)
@@ -398,14 +400,14 @@
 
 /obj/item/contraption/linker/examine(mob/user)
 	. = ..()
-	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		. += span_notice("Its buffer [buffer ? "contains [buffer]." : "is empty."]")
 	else
 		. += span_notice("All you can make out is a bunch of gibberish.")
 
 /obj/item/contraption/linker/attack_self(mob/user, list/modifiers)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/craft/engineering) >= 1)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) >= 1)
 		to_chat(user, "You wipe [src] of its stored buffer.")
 		remove_buffer(src)
 	else

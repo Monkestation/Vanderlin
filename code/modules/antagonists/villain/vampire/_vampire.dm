@@ -40,8 +40,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		var/list/BD = BT.get_blood_data(src)
-		vitae = round(examined.blood_volume * BD["vitae"])
+		vitae = round(examined.blood_volume * BT.vitae)
 	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast

@@ -20,7 +20,7 @@
 	icon_state = "sparks"
 	anchored = TRUE
 	light_power = 1.3
-	light_outer_range =  MINIMUM_USEFUL_LIGHT_RANGE
+	light_range =  MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = LIGHT_COLOR_FIRE
 	SET_BASE_PIXEL(-16, -16)
 	plane = ABOVE_LIGHTING_PLANE

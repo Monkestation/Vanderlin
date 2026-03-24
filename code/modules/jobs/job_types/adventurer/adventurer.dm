@@ -27,6 +27,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	is_foreigner = TRUE
 	can_have_apprentices = FALSE
 	scales = TRUE
+	can_be_apprentice = TRUE
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 

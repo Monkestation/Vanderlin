@@ -58,7 +58,7 @@
 	else
 		if(isliving(user))
 			var/mob/living/L = user
-			if(prob(L.STASPD * 2))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 				..()
 			else
 				if(isturf(loc))
@@ -101,7 +101,7 @@
 		return
 
 	var/mob/living/L = user
-	if(prob(L.STASPD * 2))
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 		return ..()
 
 	if(isturf(loc))

@@ -125,14 +125,14 @@
 						break
 				if(foundstab)
 					var/prob2spoil = 33
-					if(user.get_skill_level(/datum/skill/craft/cooking))
+					if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))
 						prob2spoil = 1
 
 					// Check for container craft recipes first
 					var/list/possible_recipes = list()
 					for(var/recipe_type in subtypesof(/datum/container_craft/pan))
 						var/datum/container_craft/recipe = new recipe_type
-						if(recipe.used_skill != /datum/skill/craft/cooking)
+						if(recipe.used_skill != /datum/attribute/skill/craft/cooking)
 							continue // Only want cooking recipes
 
 						// Check if our food item matches any recipe requirement
@@ -186,7 +186,7 @@
 								// if(istype(result, /obj/item/reagent_containers/food/snacks))
 								// 	var/obj/item/reagent_containers/food/snacks/food_result = result
 								// 	var/skill_modifier = 1.0
-								// 	var/skill_level = user.get_skill_level(chosen_recipe.used_skill)
+								// 	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, chosen_recipe.used_skill)
 
 								// 	if(skill_level)
 								// 		skill_modifier += (skill_level * 0.2) // Increase quality by 20% per skill level
@@ -234,7 +234,7 @@
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "VANDERLIN", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Feed [W] to the fire?", "VANDERLIN", list("Yes", "No")) != "Yes")
 			return
 		if(!(W in user.held_items)|| !user.temporarilyRemoveItemFromInventory(W))
 			return

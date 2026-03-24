@@ -42,7 +42,7 @@
 
 // most of this is copied from the Cure Rot spell
 /datum/surgery_step/burn_rot/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	var/burndam = 20 - (user.get_skill_level(/datum/skill/misc/medicine, TRUE) * 3)
+	var/burndam = 20 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) * 3)
 
 	var/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
 	var/has_rot = FALSE

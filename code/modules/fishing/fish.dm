@@ -1295,7 +1295,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	eat_effect = list(/datum/status_effect/buff/foodbuff, /datum/status_effect/buff/blessed)
 
 /*	.................   Chocolate Fish   ................... */
-
 /obj/item/reagent_containers/food/snacks/fryfish/carp/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/reagent_containers/food/snacks/chocolate))
 		return ..()
@@ -1303,7 +1302,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(!isturf(loc) || !locate(/obj/structure/table) in loc)
 		return ITEM_INTERACT_BLOCKING
 
-	short_cooktime = (50 - ((user.get_skill_level(/datum/skill/craft/cooking, TRUE)) * 8))
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
 	to_chat(user, span_notice("Creating an insult against cooking..."))
@@ -1314,7 +1313,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	qdel(tool)
 	qdel(src)
-	user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT * 0.5))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp

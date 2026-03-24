@@ -97,7 +97,7 @@
 	var/healing_multiplier = 1
 
 	if(surgery)
-		switch(user.get_skill_level(surgery.skill_used))
+		switch(GET_MOB_SKILL_VALUE_OLD(user, skill_used))
 			if(SKILL_LEVEL_JOURNEYMAN)
 				healing_multiplier = 1.1
 			if(SKILL_LEVEL_EXPERT)

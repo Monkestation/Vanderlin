@@ -56,16 +56,16 @@
 	var/mob/living/luser = user
 	if(user.mind && (user.mind in immune_minds))
 		return
-	if(get_dist(user, src) <= FLOOR((luser.STAPER-4)/4,1))
+	if(get_dist(user, src) <= FLOOR((GET_MOB_ATTRIBUTE_VALUE(luser, STAT_PERCEPTION)-4)/4,1))
 		to_chat(user,span_notice("I reveal and temporarily disarm \the [src]"))
 		flare()
 
 /obj/structure/trap/proc/on_active_perception(datum/controller/subsystem/processing/dcs/unused,mob/living/percepter)
 	SIGNAL_HANDLER
-	if(!(percepter in view(FLOOR(percepter.STAPER/3,1),src)))
+	if(!(percepter in view(FLOOR(GET_MOB_ATTRIBUTE_VALUE(percepter, STAT_PERCEPTION)/3,1),src)))
 		return
 	//10% chance to see over DC
-	if(percepter.stat_roll(STATKEY_PER,10,perception_dc))
+	if(percepter.stat_roll(STAT_PERCEPTION,10,perception_dc))
 		alpha = 200
 		found_ping(get_turf(src),percepter.client,"trap")
 		animate(src, alpha = initial(alpha), time = 4.5 SECONDS)

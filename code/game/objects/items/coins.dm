@@ -117,7 +117,7 @@
 			. += span_info("[quantity_to_words(quantity)] coins.")
 		return
 
-	var/intelligence = user.mind?.current.STAINT
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
 		return
@@ -189,10 +189,10 @@
 	. = ..()
 
 /obj/item/coin/proc/coin_skill(mob/user, intended)		// Coin counting and splitting
-	var/intelligence = user.mind?.current.STAINT
-	var/perception = user.mind?.current.STAPER
-	var/speed = user.mind?.current.STASPD
-	var/mathematics_skill = user.get_skill_level(/datum/skill/labor/mathematics) || 0
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
+	var/perception = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_PERCEPTION)
+	var/speed = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_SPEED)
+	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers
@@ -276,7 +276,7 @@
 	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
-	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")
+	var/outcome = tgui_alert(user, "What will you rig the next coin flip to?","XYLIX", list("Heads","Tails","Play fair"))
 	if(QDELETED(src) || !user.is_holding(src))
 		return
 	switch(outcome)

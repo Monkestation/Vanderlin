@@ -86,6 +86,7 @@
 
 	if(!chem_check(target))
 		user.balloon_alert(user, "missing [LOWER_TEXT(get_chem_list())]!")
+
 		return FALSE
 
 	var/preop_result = preop(user, target, target_zone, tool, surgery)
@@ -247,8 +248,7 @@
 	var/datum/skill/skill_used = surgery.skill_used
 	if(!skill_used)
 		return 1
-
-	var/skill_level = user.get_skill_level(skill_used)
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, skill_used)
 
 	var/difference = surgery.skill_median - skill_level
 

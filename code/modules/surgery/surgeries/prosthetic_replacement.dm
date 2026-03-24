@@ -84,7 +84,7 @@
 		BODY_ZONE_R_LEG,
 	)
 
-	skill_used = /datum/skill/craft/engineering
+	skill_used = /datum/attribute/skill/craft/engineering
 
 /datum/surgery_step/add_prosthetic/prosthetic
 	name = "Implant prosthetic"

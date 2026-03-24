@@ -79,8 +79,9 @@
 	for(var/output in foundrecipe.valid_outputs)
 		for(var/i in 1 to foundrecipe.valid_outputs[output])
 			new output(get_turf(src))
+
 	var/bonus_modifier = 1
-	switch(user.get_learning_boon(/datum/skill/craft/alchemy))
+	switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
 		if(SKILL_LEVEL_JOURNEYMAN)
 			bonus_modifier = 1.4
 		if(SKILL_LEVEL_EXPERT)
@@ -89,11 +90,13 @@
 			bonus_modifier = 1.8
 		if(SKILL_LEVEL_LEGENDARY)
 			bonus_modifier = 2
+
 	if(foundrecipe.bonus_chance_outputs.len > 0)
 		for(var/i in 1 to foundrecipe.bonus_chance_outputs.len)
 			if((foundrecipe.bonus_chance_outputs[foundrecipe.bonus_chance_outputs[i]] * bonus_modifier) >= roll(1,100))
 				var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
 				new bonusduck(get_turf(src))
+
 	if(istype(to_grind,/obj/item/ore) || istype(to_grind,/obj/item/ingot))
 		user.flash_fullscreen("whiteflash")
 		var/datum/effect_system/spark_spread/S = new()
@@ -103,7 +106,7 @@
 
 	QDEL_NULL(to_grind)
 
-	user.adjust_experience(/datum/skill/craft/alchemy, user.STAINT * user.get_learning_boon(/datum/skill/craft/alchemy), FALSE)
+	user.adjust_experience(/datum/attribute/skill/craft/alchemy, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * user.get_learning_boon(/datum/attribute/skill/craft/alchemy), FALSE)
 
 	return ITEM_INTERACT_SUCCESS
 

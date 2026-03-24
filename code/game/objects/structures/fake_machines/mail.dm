@@ -206,7 +206,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/mob/living/carbon/human/H = user
 
 	// Check job restrictions
-	if(is_merchant_job(H.mind.assigned_role) || is_gaffer_job(H.mind.assigned_role))
+	if(is_merchant_job(H.mind.assigned_role) || is_tomb_warden_job(H.mind.assigned_role))
 		to_chat(H, span_warning("This is of no use to me - I may give this to a mercenary so they may send it themselves."))
 		return
 
@@ -577,7 +577,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		to_chat(user, span_warning("The machine doesn't respond."))
 		return
 
-	if(alert(user, "Send Mail?",,"YES","NO") != "YES")
+	if(tgui_alert(user, "Send Mail?", "Confirm", list("YES","NO")) != "YES")
 		return
 
 	var/send_to = browser_input_text(user, "Where to? (Person or #number)", "Vanderlin", null)

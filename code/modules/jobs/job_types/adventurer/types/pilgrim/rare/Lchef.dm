@@ -1,3 +1,35 @@
+/datum/attribute_holder/sheet/job/pilgrim/masterchef
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/labor/butchering = 40,
+		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/craft/cooking = 60
+	)
+
+/datum/attribute_holder/sheet/job/pilgrim/masterchef/old
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/labor/butchering = 50,
+		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/craft/cooking = 60
+	)
+
 /datum/job/advclass/pilgrim/rare/masterchef
 	title = "Master Chef"
 	tutorial = "A master chef is one of the best cooks to ever live. \
@@ -12,28 +44,8 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_INT = 3,
-		STATKEY_CON = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/farming = 3,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/labor/butchering = 4,
-		/datum/skill/labor/taming = 2,
-		/datum/skill/craft/cooking = 6
-	)
-
-/datum/job/advclass/pilgrim/rare/masterchef/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/labor/butchering, 1, TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/masterchef
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/masterchef
 
 /datum/outfit/pilgrim/masterchef
 	name = "Master Chef (Pilgrim)"

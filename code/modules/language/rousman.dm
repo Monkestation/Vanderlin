@@ -1,6 +1,8 @@
 /datum/language/rousman
 	name = "Rousman"
 	desc = "The tongue of the rousmen, child sized rat savages."
+	icon_state = "rous"
+	spans = list(SPAN_DWARF)
 	speech_verb = "squeaks"
 	ask_verb = "chirps"
 	exclaim_verb = "hisses"
@@ -12,12 +14,13 @@
 	additional_syllable_low = -1
 	additional_syllable_high = 1
 	default_priority = 100
-	icon_state = "rous"
-	spans = list(SPAN_DWARF)
-	syllables = list("GRRrrrr",
-"GGGrrr",
-"RRRRrr",
-"GRrr",
-"Rr",
-"Rrrr",
-"Rrrrr")
+
+	syllables = list(
+		"GRRrrrr",
+		"GGGrrr",
+		"RRRRrr",
+		"GRrr",
+		"Rr",
+		"Rrrr",
+		"Rrrrr",
+	)

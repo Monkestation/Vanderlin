@@ -228,9 +228,9 @@
 	var/combat_modifier = positioning_mod // Start with positioning
 
 	if(user.mind)
-		skill_diff += (user.get_skill_level(/datum/skill/combat/wrestling, TRUE))
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling))
 	if(M.mind)
-		skill_diff -= (M.get_skill_level(/datum/skill/combat/wrestling, TRUE))
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/combat/wrestling))
 
 	if(M.surrendering)
 		combat_modifier *= 2
@@ -287,7 +287,7 @@
 					if(!throat_protected)
 						if(prob(23))
 							C.emote("choke")
-						var/choke_damage = user.STASTR * 0.75 // this is too busted
+						var/choke_damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 0.75 // this is too busted
 						if(chokehold)
 							choke_damage *= 1.2
 						if(C.pulling == user && C.grab_state >= GRAB_AGGRESSIVE)
@@ -352,13 +352,13 @@
 						return
 				M.visible_message(span_danger("[user] pins [M] to the ground!"), \
 								span_userdanger("[user] pins me to the ground!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
-				M.Stun(max(20 + (skill_diff * 10) + (user.STASTR * 5) - (M.STACON * 5) * combat_modifier, 1))
+				M.Stun(max(20 + (skill_diff * 10) + (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 5) - (GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) * 5) * combat_modifier, 1))
 				user.Immobilize(max(20 - skill_diff, 1))
 				user.changeNext_move(max(20 - skill_diff, CLICK_CD_GRABBING))
 				user.adjust_stamina(rand(3,6) * spam_penalty)
 			else
 				user.adjust_stamina(rand(5,10) * spam_penalty)
-				if(prob(clamp((((4 + ((user.STASTR - (M.STACON+2))/2) + skill_diff) * 10 + rand(-5, 5)) * combat_modifier), 5, 95)))
+				if(prob(clamp((((4 + ((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - (GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION)+2))/2) + skill_diff) * 10 + rand(-5, 5)) * combat_modifier), 5, 95)))
 					var/tackle_time = max(10 + (skill_diff * 2), 1)
 					M.Knockdown(tackle_time)
 					playsound(src,"genblunt",100,TRUE)
@@ -384,11 +384,11 @@
 				else
 					I = M.get_inactive_held_item()
 			user.adjust_stamina(rand(3,6) * spam_penalty)
-			var/probby = clamp((((3 + (((user.STASTR - M.STACON)/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
+			var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION))/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
 			if(I)
 				if(M.mind)
 					if(I.associated_skill)
-						probby -= M.get_skill_level(I.associated_skill, TRUE) * 5
+						probby -= GET_MOB_SKILL_VALUE_OLD(M, I.associated_skill) * 5
 				if(HAS_TRAIT(I, TRAIT_WIELDED))
 					probby -= 20
 				if(prob(probby))
@@ -422,7 +422,7 @@
 			else
 				I = M.get_item_for_held_index(2)
 			user.adjust_stamina(rand(3,6) * spam_penalty)
-			var/probby = clamp((((3 + (((user.STASTR - M.STACON)/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
+			var/probby = clamp((((3 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION))/4) + skill_diff)) * 10) * combat_modifier), 5, 95)
 			if(I)
 				if(prob(probby))
 					M.dropItemToGround(I, force = FALSE, silent = FALSE)
@@ -763,7 +763,7 @@
 							return
 		if(HAS_TRAIT(user, TRAIT_POISONBITE))
 			if(C.reagents)
-				var/poison = user.STACON/2 //more peak species level, more poison
+				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2 //more peak species level, more poison
 				C.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
 				C.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
 				to_chat(user, span_warning("Your fangs inject venom into [C]!"))
