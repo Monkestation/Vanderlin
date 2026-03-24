@@ -20,19 +20,12 @@
 		/datum/attribute/skill/labor/mathematics = 30,
 	)
 
-/datum/attribute_holder/sheet/job/paladin/extremist
-	raw_attribute_list = list(
-		STAT_CONSTITUTION = 1,
-		STAT_PERCEPTION = 1,
-		/datum/attribute/skill/combat/swords = 10,
-	)
-
 /datum/job/advclass/combat/paladin
 	title = "Paladin"
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/adventurer/paladin
-	allowed_patrons = ALL_PALADIN_PATRONS
+	allowed_patrons = ALL_TEMPLE_PATRONS
 	total_positions = 1
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
@@ -50,11 +43,6 @@
 	spawned.virginity = TRUE
 
 	switch(spawned.patron?.type)
-		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
-			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/paladin/extremist)
-			spawned.grant_language(/datum/language/newpsydonic)
-			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, JOB_TRAIT)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
@@ -81,7 +69,7 @@
 		else
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
-	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS))
+	if(!spawned.has_language(/datum/language/celestial))
 		spawned.grant_language(/datum/language/celestial)
 		to_chat(spawned, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
 
@@ -115,9 +103,6 @@
 	. = ..()
 
 	switch(H.patron?.type)
-		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
-			head = /obj/item/clothing/head/helmet/heavy/bucket/gold
-			wrists = /obj/item/clothing/neck/psycross/gold
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/helmet/heavy/necked/astrata
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
