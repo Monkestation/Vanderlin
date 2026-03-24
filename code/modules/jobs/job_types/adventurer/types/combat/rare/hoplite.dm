@@ -28,6 +28,8 @@
 	allowed_races = list(SPEC_ID_AASIMAR)
 	outfit = /datum/outfit/adventurer/hoplite
 	total_positions = 1
+	roll_chance = 15
+	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hoplite
