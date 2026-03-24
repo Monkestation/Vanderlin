@@ -30,7 +30,6 @@
 		SPEC_ID_HALF_ORC,\
 	) //Yes, Horcs get to be Duelists, Not Drows though.
 	outfit = /datum/outfit/mercenary/duelist
-	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
 	total_positions = 2
 
