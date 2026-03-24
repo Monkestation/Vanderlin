@@ -237,6 +237,10 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 	name = "Nun Habit"
 	item_path = /obj/item/clothing/shirt/robe/nun
 
+/datum/loadout_item/corset
+	name = "Corset"
+	item_path = /obj/item/clothing/armor/corset
+
 //PANTS
 /datum/loadout_item/tights
 	name = "Cloth Tights"
