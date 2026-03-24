@@ -601,8 +601,8 @@
 	body_parts_covered = FULL_HEAD
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	icon_state = "bkhelm"
-	item_state = "bkhelm"
+	icon_state = "bkhelm_visor"
+	item_state = "bkhelm_visor"
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80,  "piercing" = 100, "fire" = 0, "acid" = 0)
