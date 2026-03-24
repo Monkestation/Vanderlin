@@ -652,7 +652,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.cursedblood)
-				if(alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", list("YES", "NO")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else

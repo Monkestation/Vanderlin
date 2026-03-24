@@ -1,12 +1,12 @@
-/datum/attribute_holder/sheet/job/pilgrim/bard
+/datum/attribute_holder/sheet/job/adventurerbard
 	clamped_adjustment = list(
 		/datum/attribute/skill/misc/music = list(40, 40)
 	)
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 1,
-		STAT_SPEED = 2,
-		STAT_STRENGTH = -1,
+		STAT_SPEED = 2, // no more strength malus since more limited, +3 statline
 		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -21,20 +21,20 @@
 		/datum/attribute/skill/misc/athletics = 30,
 	)
 
-/datum/job/advclass/pilgrim/bard
+/datum/job/advclass/combat/bard
 	title = "Bard"
 	tutorial = "Bards make up one of the largest populations of \
 	registered adventurers in Vanderlin, mostly because they are \
 	the last ones in a party to die. Their wish is to experience \
 	the greatest adventures of the age and write amazing songs about them."
 	allowed_sexes = list(MALE, FEMALE)
-	outfit = /datum/outfit/pilgrim/bard
-	category_tags = list(CTAG_PILGRIM)
+	outfit = /datum/outfit/adventurer/bard
+	category_tags = list(CTAG_ADVENTURER)
 	apprentice_name = "Aspiring Bard"
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_BARD)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/bard
+	attribute_sheet = /datum/attribute_holder/sheet/job/adventurerbard
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -47,7 +47,7 @@
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
-/datum/job/advclass/pilgrim/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/combat/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.select_equippable(player_client, list(
 		"Harp" = /obj/item/instrument/harp,
@@ -67,20 +67,20 @@
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 
-/datum/outfit/pilgrim/bard
-	name = "Bard (Pilgrim)"
+/datum/outfit/adventurer/bard
+	name = "Bard (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random
-	shirt = /obj/item/clothing/shirt/tunic/noblecoat
+	shirt = /obj/item/clothing/armor/gambeson/light // very, very shitty armor
 	belt = /obj/item/storage/belt/leather
-	armor = /obj/item/clothing/armor/leather/vest
+	armor = /obj/item/clothing/shirt/tunic/noblecoat
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/weapon/knife/dagger/steel/special
-	beltl = /obj/item/storage/belt/pouch/coins/poor
-	backpack_contents = list(/obj/item/flint = 1)
+	beltl = /obj/item/weapon/sword/short/iron
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/storage/belt/pouch/coins/poor = 1)
 
-/datum/outfit/pilgrim/bard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/combat/bard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(prob(30))
 		gloves = /obj/item/clothing/gloves/fingerless

@@ -140,9 +140,10 @@
 	icon_state = "light_brigandine"
 	blocksound = SOFTHIT
 	body_parts_covered = COVERAGE_TORSO
-	armor = ARMOR_LEATHER_STUDDED
+	armor = ARMOR_BRIGANDINE
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
 	smeltresult = /obj/item/ingot/iron
 	equip_delay_self = 40
 	armor_class = AC_LIGHT//steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
+	prevent_crits = ALL_EXCEPT_STAB

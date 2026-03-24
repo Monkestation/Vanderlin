@@ -10,7 +10,7 @@
 //0 test
 //12 minutes norma
 //#define ROUNDTIMERBOAT (300 MINUTES)
-#define INITIAL_ROUND_TIMER (99 MINUTES)
+#define INITIAL_ROUND_TIMER (120 MINUTES)
 #define ROUND_EXTENSION_TIME (30 MINUTES)
 #define ROUND_END_TIME (15 MINUTES)
 #define ROUND_END_TIME_VERBAL "15 minutes"
@@ -45,6 +45,12 @@
 #endif //ifdef GC_FAILURE_HARD_LOOKUP
 
 #endif //ifdef REFERENCE_TRACKING
+
+
+// Displays static object lighting updates
+// Also enables some debug vars on sslighting that can be used to modify
+// How extensively we prune lighting corners to update
+#define VISUALIZE_LIGHT_UPDATES
 
 //#define VISUALIZE_ACTIVE_TURFS	//Highlights atmos active turfs in green
 #endif //ifdef TESTING

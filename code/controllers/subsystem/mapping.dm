@@ -103,6 +103,7 @@ SUBSYSTEM_DEF(mapping)
 	if(map_adjustment)
 		map_adjustment.on_mapping_init()
 		log_world("Applied '[map_adjustment.map_file_name]' map adjustment: on_mapping_init()")
+
 	loadWorld()
 	require_area_resort()
 	process_teleport_locs()			//Sets up the wizard teleport locations
@@ -112,6 +113,7 @@ SUBSYSTEM_DEF(mapping)
 	require_area_resort()
 	initialize_reserved_level(transit.z_value)
 	generate_z_level_linkages()
+
 	return ..()
 
 /datum/controller/subsystem/mapping/proc/generate_z_level_linkages()
@@ -132,7 +134,6 @@ SUBSYSTEM_DEF(mapping)
 	multiz_levels[z_level] = new /list(LARGEST_Z_LEVEL_INDEX)
 	multiz_levels[z_level][Z_LEVEL_UP] = !!z_above
 	multiz_levels[z_level][Z_LEVEL_DOWN] = !!z_below
-
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
@@ -191,9 +192,8 @@ SUBSYSTEM_DEF(mapping)
 		++i
 
 	// load the maps
-	for (var/P in parsed_maps)
-		var/datum/parsed_map/pm = P
-		if (!pm.load(1, 1, start_z + parsed_maps[P], no_changeturf = TRUE, new_z = TRUE))
+	for(var/datum/parsed_map/pm as anything in parsed_maps)
+		if(!pm.load(1, 1, start_z + parsed_maps[pm], no_changeturf = TRUE, new_z = TRUE))
 			errorList |= pm.original_path
 
 	log_game("Loaded [name] in [(REALTIMEOFDAY - start_time)/10]s!")

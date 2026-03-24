@@ -12,4 +12,5 @@
 	z_value = new_z
 	name = new_name
 	traits = new_traits
+
 	set_linkage(new_traits[ZTRAIT_LINKAGE])

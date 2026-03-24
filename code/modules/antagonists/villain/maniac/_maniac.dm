@@ -395,7 +395,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	plane = GAME_PLANE_UPPER
 	layer = ABOVE_MOB_LAYER
-	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = COLOR_CYAN
 	density = TRUE
 
