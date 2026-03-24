@@ -58,8 +58,9 @@
 	)
 
 /datum/culture/species/halfling/jaded
-	name = "Worldly Halfling"
+	name = "worldly halflings"
 	description = "Known to humens as halflings who have been outside of Hearthhill for longer, identifiable by the lack of shock in their eyes when someone is wounded in front of them. They understand humens can die like animals, though they are still averse to violence."
+	pre_append = "the "
 
 /datum/culture/species/half_orc
 	abstract_type = /datum/culture/species/half_orc
