@@ -27,6 +27,8 @@
 	outfit = /datum/outfit/adventurer/paladin
 	allowed_patrons = ALL_TEMPLE_PATRONS
 	total_positions = 1
+	roll_chance = 15
+	category_tags = list(CTAG_ADVENTURER)
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
