@@ -21,14 +21,16 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Wounds get sorted from highest severity to lowest severity
 	var/severity = WOUND_SEVERITY_LIGHT
 
+	//these are all turned off for now due to overlay issues
 	var/overlay_on_skeleton = FALSE
-	/// Overlay to use when this wound is applied to a carbon mob
-	var/mob_overlay = "w1"
-	/// an alternative layer to render this on for things above clothing
 	var/layer_override
 	var/armdam_override
 	var/legdam_override
 	var/use_blood_color = TRUE
+
+
+	/// Overlay to use when this wound is applied to a carbon mob
+	var/mob_overlay = "w1"
 	/// Overlay to use when this wound is sewn, and is on a carbon mob
 	var/sewn_overlay = ""
 
