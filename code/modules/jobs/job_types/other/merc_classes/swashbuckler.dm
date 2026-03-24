@@ -20,7 +20,7 @@
 		/datum/attribute/skill/craft/traps = 20,
 	)
 
-/datum/job/advclass/combat/swashbuckler
+/datum/job/advclass/mercenary/swashbuckler
 	title = "Swashbuckler"
 	tutorial = "Woe the Sea King! You awake, dazed from a true festivity of revelry and feasting. The last thing you remember? Your mateys dumping you over the side of the boat as a joke. Now on some Gods-forsaken rock, Abyssor will present you with booty and fun, no doubt."
 	allowed_races = list(\
@@ -34,9 +34,8 @@
 		SPEC_ID_TRITON,\
 	)
 	allowed_patrons = list(/datum/patron/divine/abyssor)
-	outfit = /datum/outfit/folkhero/swashbuckler
+	outfit = /datum/outfit/mercenary/swashbuckler
 	total_positions = 1
-	category_tags = list(CTAG_FOLKHEROES)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/swashbuckler
 
@@ -44,8 +43,8 @@
 		TRAIT_DODGEEXPERT,
 	)
 
-/datum/outfit/folkhero/swashbuckler
-	name = "Swashbuckler (Folkhero)"
+/datum/outfit/mercenary/swashbuckler
+	name = "Swashbuckler (Mercenary)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather
@@ -61,6 +60,6 @@
 	shoes = /obj/item/clothing/shoes/boots
 	neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 
-/datum/outfit/folkhero/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/mercenary/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/sailor, /obj/item/clothing/shirt/undershirt/sailor/red)
