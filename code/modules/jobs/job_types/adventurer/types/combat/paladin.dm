@@ -31,10 +31,9 @@
 	title = "Paladin"
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	outfit = /datum/outfit/folkhero/paladin
+	outfit = /datum/outfit/adventurer/paladin
 	allowed_patrons = ALL_PALADIN_PATRONS
 	total_positions = 1
-	category_tags = list(CTAG_FOLKHEROES)
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
@@ -95,8 +94,8 @@
 		devotion.make_templar()
 		devotion.grant_to(spawned)
 
-/datum/outfit/folkhero/paladin
-	name = "Paladin (Folkhero)"
+/datum/outfit/adventurer/paladin
+	name = "Paladin (Adventurer)"
 
 	armor = /obj/item/clothing/armor/plate
 	shirt = /obj/item/clothing/armor/chainmail
@@ -112,7 +111,7 @@
 	head = /obj/item/clothing/head/helmet/heavy/bucket
 	wrists = /obj/item/clothing/neck/psycross/silver
 
-/datum/outfit/folkhero/paladin/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/adventurer/paladin/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 
 	switch(H.patron?.type)
