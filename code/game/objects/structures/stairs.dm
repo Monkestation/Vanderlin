@@ -15,6 +15,7 @@
 	move_resist = INFINITY
 	plane = FLOOR_PLANE
 	layer = ABOVE_OPEN_TURF_LAYER
+	obj_flags = CAN_BE_HIT | IGNORE_SINK | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 
 	/// If TRUE replaces the turf above this stair obj with /turf/open/openspace
 	var/force_open_above = FALSE

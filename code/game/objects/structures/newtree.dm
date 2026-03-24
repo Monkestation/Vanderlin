@@ -183,31 +183,33 @@
 /obj/structure/flora/newtree/proc/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
+		if(locate(/obj/structure/stairs) in get_step_multiz(NT, DOWN))
+			continue
 		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
 			if(istype(NB, /turf/open/openspace) && prob(50))//make an ending branch
 				if(prob(50))
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB) && !(locate(/obj/structure/stairs) in get_step_multiz(NB, DOWN)))
 						var/obj/structure/flora/newbranch/T = new(NB)
 						T.dir = D
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/connector/TC = new(NT)
 						TC.dir = D
 				else
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB))
 						new /obj/structure/flora/newleaf(NB)
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/TC = new(NT)
 						TC.dir = D
 			else
-				if(!locate(/obj/structure) in NT)
+				if(!(locate(/obj/structure) in NT))
 					var/obj/structure/flora/newbranch/TC = new(NT)
 					TC.dir = D
 		else
 			if(prob(70))
 				if(isopenturf(NT))
 					if(!istype(loc, /turf/open/openspace)) //must be lowest
-						if(!locate(/obj/structure) in NT)
+						if(!(locate(/obj/structure) in NT))
 							var/obj/structure/flora/newbranch/leafless/T = new(NT)
 							T.dir = D
 
@@ -240,22 +242,24 @@
 /obj/structure/flora/newtree/snow/build_branches()
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
+		if(locate(/obj/structure/stairs) in get_step_multiz(NT, DOWN))
+			continue
 		if(istype(NT, /turf/open/openspace))
 			var/turf/NB = get_step(NT, D)
 			if(istype(NB, /turf/open/openspace) && prob(50))
 				if(prob(50))
-					if(!locate(/obj/structure) in NB)
+					if(!(locate(/obj/structure) in NB) && !(locate(/obj/structure/stairs) in get_step_multiz(NB, DOWN)))
 						var/obj/structure/flora/newbranch/snow/T = new(NB)
 						T.dir = D
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/connector/snow/TC = new(NT)
 						TC.dir = D
 				else
-					if(!locate(/obj/structure) in NT)
+					if(!(locate(/obj/structure) in NT))
 						var/obj/structure/flora/newbranch/snow/TC = new(NT)
 						TC.dir = D
 			else
-				if(!locate(/obj/structure) in NT)
+				if(!(locate(/obj/structure) in NT))
 					var/obj/structure/flora/newbranch/snow/TC = new(NT)
 					TC.dir = D
 
