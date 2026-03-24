@@ -24,7 +24,7 @@
 	tutorial = "Monster Hunters dedicate their lives to the eradication of the varied evils infesting Psydonia. They know the vile sorcery of the necromancer, the insidious nature of the cultist and monstrousness of vampires and werevolfs. They also know how best to end them."
 	allowed_races = RACES_PLAYER_NONEXOTIC
 	outfit = /datum/outfit/adventurer/puritan
-	total_positions = 2
+	total_positions = 1
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	is_recognized = TRUE
 
