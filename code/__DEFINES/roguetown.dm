@@ -130,7 +130,6 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_WRETCH "CAT_WRETCH"
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
-#define CTAG_FOLKHEROES "CAT_FOLKHEROES" //For the migrant wave
 
 // .............. SELLPRICE/VALUE DEFINES ..................... //
 // Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it
