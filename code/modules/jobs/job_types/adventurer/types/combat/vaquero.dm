@@ -26,9 +26,8 @@
 	title = "Vaquero"
 	tutorial = "You have been taming beasts of burden all your life, and riding since you were old enough to walk. Perhaps these lands will have use for your skills?"
 	allowed_races = list(SPEC_ID_TIEFLING)
-	outfit = /datum/outfit/folkhero/vaquero
+	outfit = /datum/outfit/adventurer/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
-	category_tags = list(CTAG_FOLKHEROES)
 	total_positions = 1
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vaquero
@@ -41,8 +40,8 @@
 	. = ..()
 	new /mob/living/simple_animal/hostile/retaliate/saiga/tame/saddled(get_turf(spawned))
 
-/datum/outfit/folkhero/vaquero
-	name = "Vaquero (Folkhero)"
+/datum/outfit/adventurer/vaquero
+	name = "Vaquero (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random
