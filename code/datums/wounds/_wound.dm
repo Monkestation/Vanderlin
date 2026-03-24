@@ -21,8 +21,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Wounds get sorted from highest severity to lowest severity
 	var/severity = WOUND_SEVERITY_LIGHT
 
+	var/overlay_on_skeleton = FALSE
 	/// Overlay to use when this wound is applied to a carbon mob
 	var/mob_overlay = "w1"
+	/// an alternative layer to render this on for things above clothing
+	var/layer_override
+	var/armdam_override
+	var/legdam_override
+	var/use_blood_color = TRUE
 	/// Overlay to use when this wound is sewn, and is on a carbon mob
 	var/sewn_overlay = ""
 
@@ -121,7 +127,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return visible_name
 
 /// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
-/datum/wound/proc/get_check_name(mob/user)
+/datum/wound/proc/get_check_name(mob/user, advanced)
 	return check_name
 
 /// Crit message that should be appended when this wound is applied in combat
@@ -281,10 +287,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/on_death()
 	return
 
-/// Heals this wound by the given amount, and deletes it if it's healed completely
-/datum/wound/proc/heal_wound(heal_amount, forced = FALSE)
+/// Heals this wound by the given amount, and deletes it if it's healed completely. Extra args passed to subtypes for checks
+/datum/wound/proc/heal_wound(heal_amount, datum/source, forced = FALSE)
 	// Wound cannot be healed normally, whp is null
-	if(isnull(whp) || !heal_amount)
+	if(isnull(whp) || (!heal_amount))
 		return FALSE
 	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
@@ -296,7 +302,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 				remove_from_mob(src)
 			else
 				qdel(src)
-
 	return amount_healed
 
 // Kinda icky
@@ -610,7 +615,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Multiplier that wound pain is increased by
 	var/upgrade_pain = 0
 
-/datum/wound/dynamic/heal_wound(heal_amount, forced)
+/datum/wound/dynamic/heal_wound(heal_amount, datum/source, forced)
 	. = ..()
 	if(!. || QDELETED(src))
 		return

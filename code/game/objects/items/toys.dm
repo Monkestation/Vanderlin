@@ -176,7 +176,7 @@
 /obj/item/toy/cards/deck/attack_self(mob/user, list/modifiers)
 	if(cooldown < world.time - 50)
 		if(HAS_TRAIT(user, TRAIT_BLACKLEG))
-			var/outcome = alert(user, "How do you want to shuffle the deck?","XYLIX","False Shuffle","Force Top Card","Play fair")
+			var/outcome = tgui_alert(user, "How do you want to shuffle the deck?","XYLIX", list("False Shuffle","Force Top Card","Play fair"))
 			switch(outcome)
 				if("False Shuffle")
 					record_featured_stat(FEATURED_STATS_CRIMINALS, user)

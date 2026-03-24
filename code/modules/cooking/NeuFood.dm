@@ -240,7 +240,7 @@
 		else
 			to_chat(user, span_notice("This platter is already clean."))
 			return
-	if(istype(I, /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced))
+	if(reagents.total_volume == 0 && istype(I, /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced))
 		to_chat(user, span_warning("Tossing up a salad..."))
 		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
 		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)

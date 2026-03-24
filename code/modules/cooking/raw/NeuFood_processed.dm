@@ -77,7 +77,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.full)
-				if(alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", list("Yes", "No")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else
@@ -114,13 +114,27 @@
 	desc = "Unbelievably fancy chocolate, imported all the way from distant Grenzelhoft"
 	icon_state = "chocolate"
 	bitesize = 4
+	slices_num = 3
 	nutrition = CHOCCY_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("rich sweetness" = 1)
 	faretype = FARE_FINE
 	rotprocess = null
+	slice_path = /obj/item/reagent_containers/food/snacks/chocolate/chunk
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = SUGAR | JUNKFOOD
+
+/obj/item/reagent_containers/food/snacks/chocolate/chunk
+	eat_effect = null
+	slices_num = 0
+	name = "chocolate chunk"
+	icon_state = "chocolatechopped"
+	nutrition = (CHOCCY_NUTRITION) / 3
+	bitesize = 1
+	tastes = list("chocolate" = 1)
+	faretype = FARE_NEUTRAL
+	foodtype = SUGAR | JUNKFOOD
+
 
 // -------------- SALUMOI (dwarven smoked sausage) -----------------
 /obj/item/reagent_containers/food/snacks/meat/salami

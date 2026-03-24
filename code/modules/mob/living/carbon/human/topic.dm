@@ -114,6 +114,13 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
 			return
 
+	if(href_list["remove_briar"])
+		var/datum/wound/black_briar_curse/wound = locate(href_list["remove_briar"]) in get_wounds()
+		var/remove = tgui_alert(usr, "Remove this briar?", "BLACK BRIAR", DEFAULT_INPUT_CONFIRMATIONS)
+		if(remove == CHOICE_CONFIRM && !QDELETED(wound) && istype(wound))
+			qdel(wound)
+			return
+
 	if(href_list["undiesthing"]) //canUseTopic check for this is handled by mob/Topic()
 		if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))

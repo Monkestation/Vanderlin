@@ -29,7 +29,7 @@
 		return
 
 	if(HAS_TRAIT(cast_on, TRAIT_NOBLE_POWER))
-		var/answer = browser_alert(owner, "[cast_on] already has nobility, strip it?", "[name]", DEFAULT_INPUT_CONFIRMATIONS)
+		var/answer = tgui_alert(owner, "[cast_on] already has nobility, strip it?", "[name]", DEFAULT_INPUT_CONFIRMATIONS)
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return . | SPELL_CANCEL_CAST
 		if(answer == CHOICE_CONFIRM)
