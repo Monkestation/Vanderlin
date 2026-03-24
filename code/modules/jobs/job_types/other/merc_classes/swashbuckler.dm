@@ -36,6 +36,7 @@
 	allowed_patrons = list(/datum/patron/divine/abyssor)
 	outfit = /datum/outfit/mercenary/swashbuckler
 	total_positions = 1
+	category_tags = list(CTAG_MERCENARY)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/swashbuckler
 
