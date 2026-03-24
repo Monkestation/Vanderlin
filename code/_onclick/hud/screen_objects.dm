@@ -1725,7 +1725,7 @@
 /atom/movable/screen/time
 	name = "Astrata"
 	icon = 'icons/time.dmi'
-	icon_state = DAY
+	icon_state = "day"
 
 /atom/movable/screen/time/update_icon_state()
 	icon_state = GLOB.tod
