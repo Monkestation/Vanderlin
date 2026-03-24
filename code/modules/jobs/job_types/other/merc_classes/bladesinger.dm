@@ -20,6 +20,7 @@
 	tutorial = "Your vigil over the elven cities has long since ended. Though dutiful, the inevitable happened and now you hope these lands have use for your talents."
 	allowed_races = list(SPEC_ID_ELF)
 	total_positions = 1
+	category_tags = list(CTAG_MERCENARY)
 	outfit = /datum/outfit/mercenary/bladesinger
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 
