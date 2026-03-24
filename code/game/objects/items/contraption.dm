@@ -366,12 +366,15 @@
 		amputation_speed_mod *= 1.5 //15*0.5*1.5=11.25
 
 	var/skill_modifier = 1.5 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 6)
-	if(!do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = patient))
+	if(!do_after(user, 15 SECONDS * amputation_speed_mod * skill_modifier, target = amputee))
 		return ITEM_INTERACT_BLOCKING
 
 	playsound(amputee, 'sound/misc/guillotine.ogg', 20, TRUE)
 	limb_snip_candidate.drop_limb()
-	user.visible_message(span_danger("[src] violently slams shut, amputating [amputee]'s [limb_snip_candidate.name]."), span_notice("You amputate [amputee]'s [limb_snip_candidate.name] with [src]."))
+	user.visible_message(
+		span_danger("[src] violently slams shut, amputating [amputee]'s [limb_snip_candidate.name]."),
+		span_notice("You amputate [amputee]'s [limb_snip_candidate.name] with [src].")
+	)
 	charge_deduction(amputee, user, 1)
 
 	return ITEM_INTERACT_SUCCESS
