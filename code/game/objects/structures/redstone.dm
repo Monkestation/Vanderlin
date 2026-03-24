@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/item/contraption/linker/multitool = I
-	if(!multitool.current_charge)D
+	if(!multitool.current_charge)
 		return ITEM_INTERACT_BLOCKING
 
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) < 1)

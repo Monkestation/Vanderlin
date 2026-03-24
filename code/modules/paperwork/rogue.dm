@@ -523,7 +523,7 @@
 			balloon_alert(user, "can't turn royalty!")
 			return ITEM_INTERACT_BLOCKING
 
-	var/choice = tgui_alert(attacked_target, "Do you wish to become one of the Hand's fingers?", "Binding Contract", DEFAULT_INPUT_CHOICES)
+	var/choice = tgui_alert(M, "Do you wish to become one of the Hand's fingers?", "Binding Contract", DEFAULT_INPUT_CHOICES)
 	if(choice != CHOICE_YES)
 		return
 

@@ -26,7 +26,7 @@
 	var/list/possible_intents
 
 	/// Skill used to perform this surgery
-	var/datum/skill/skill_used = /datum/skill/misc/medicine
+	var/datum/attribute/skill/skill_used = /datum/attribute/skill/misc/medicine
 	/// Necessary skill MINIMUM to perform this surgery, of skill_used
 	var/skill_min = SKILL_LEVEL_NOVICE
 	/// Skill median used to apply success and speed bonuses
@@ -180,7 +180,7 @@
 	var/try_to_fail = FALSE
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		try_to_fail = TRUE
-	else if(!target.stat == DEAD && user.get_skill_level(skill_used) < skill_min)
+	else if(!target.stat == DEAD && GET_MOB_SKILL_VALUE_OLD(user, skill_used) < skill_min)
 		try_to_fail = TRUE // If you don't have the skill it will fail always
 
 	var/obj/item/tool = user.get_active_held_item()
@@ -211,7 +211,7 @@
 
 /datum/surgery/proc/complete(mob/living/surgeon)
 	SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
-	var/exp = (surgeon.STAINT * 0.75) * (0.15 * length(steps))
+	var/exp = (GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE) * 0.75) * (0.15 * length(steps))
 	surgeon.mind?.add_sleep_experience(skill_used, exp)
 	qdel(src)
 
@@ -261,8 +261,7 @@
 		html += "</div>"
 
 	if(skill_used && skill_min)
-		var/datum/skill/used_skill = skill_used
-		var/skill_name = initial(used_skill.name)
+		var/skill_name = initial(skill_used.name)
 		html += "<div class='step-info'><b>Minimum Experience:</b> [SSskills.level_names[skill_min]] [skill_name]</div>"
 		html += "<div class='step-info'><b>Optimal Experience:</b> [SSskills.level_names[skill_median]] [skill_name]</div>"
 

@@ -71,7 +71,7 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(tool.firefuel)
-		if(browser_alert(user, "Fuel \the [src] with [tool]?", "VANDERLIN", list("Fuel", "Smelt")) == "Fuel")
+		if(tgui_alert(user, "Fuel \the [src] with [tool]?", "VANDERLIN", list("Fuel", "Smelt")) == "Fuel")
 			return NONE
 
 	if(tool.smeltresult)
