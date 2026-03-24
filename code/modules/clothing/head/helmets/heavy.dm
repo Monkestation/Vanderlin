@@ -100,19 +100,6 @@
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 9 * IRON_MULTIPLIER
 
-//............... Black Knight Helmet ............... //
-/obj/item/clothing/head/helmet/heavy/blkknight
-	name = "blacksteel helmet"
-	desc = "A helmet black as nite. Instills fear upon those that gaze upon it."
-	icon_state = "bkhelm"
-	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
-	prevent_crits = ALL_CRITICAL_HITS
-	item_weight = 9 * BLACKSTEEL_MULTIPLIER
-	sellprice = VALUE_SILVER_ITEM * 2
-
 //............... Zizo Frog Helmet ............... //
 
 /obj/item/clothing/head/helmet/heavy/zizo

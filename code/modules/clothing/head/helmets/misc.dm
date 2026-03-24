@@ -367,6 +367,23 @@
 		to_chat(user, "<span class='warning'>Wear the helmet on your head to open and close the visor.</span>")
 		return
 
+/obj/item/clothing/head/helmet/visored/examine(mob/user)
+	. = ..()
+	. += span_notice("This helmet has a visor that can be raised and lowered. Interact with it while wearing it to adjust the visor, offering better protection at the cost of visibility.")
+
+//............... Black Knight Helmet ............... //
+
+/obj/item/clothing/head/helmet/visored/blkknight
+	name = "blacksteel helmet"
+	desc = "A helmet black as nite. Instills fear upon those that gaze upon it."
+	icon_state = "bkhelm_visor"
+	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	armor_class = AC_MEDIUM
+	armor = ARMOR_PLATE_GOOD
+	item_weight = 9 * BLACKSTEEL_MULTIPLIER
+	sellprice = VALUE_SILVER_ITEM * 2
+
 //............... Visored Sallet ............... //
 /obj/item/clothing/head/helmet/visored/sallet
 	name = "visored sallet"
