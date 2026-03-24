@@ -57,6 +57,10 @@
 		SPEC_ID_HALFLING
 	)
 
+/datum/culture/species/halfling/jaded
+	name = "Worldly Halfling"
+	description = "Known to humens as halflings who have been outside of Hearthhill for longer, identifiable by the lack of shock in their eyes when someone is wounded in front of them. They understand humens can die like animals, though they are still averse to violence."
+
 /datum/culture/species/half_orc
 	abstract_type = /datum/culture/species/half_orc
 	species = list(
@@ -85,7 +89,7 @@
 
 /datum/culture/species/half_orc/crescent_fang
  	name = "Crescent Fang"
-//jungle orcs, profiteering off the grenzel-zaladin war. hate both sides AND zizo. isolationist orc tribe.
+	description = "Known to humens to live in the jungle between Grenzelhoft and Zaladin, hating both sides. They are isolationist and rarely engage in trade, preferring instead to take bounties from one of the warring nations to kill members of the other, or take payment to guide travelers across the jungle. They can also be found picking off undead that managed to get stranded in the jungle after Zizo's ascension."
 
 /datum/culture/species/half_orc/murkwater
  	name = "Murkwater"
@@ -203,7 +207,17 @@
 		SPEC_ID_TIEFLING
 	)
 
-//put some tiefling stuff here bug
+/datum/culture/species/tiefling/surprise
+	name = "humen-born origin"
+	description = "Known to humens to have been a cursed child from two non-tiefling parents. These tieflings grow up often rejected by their peers and family as bad omens. Noble families have been cast into shame for having the bad luck to birth a tiefling child."
+
+/datum/culture/species/tiefling/expected
+	name = "tiefling-born origin"
+	description = "Known to humens to have been born of tiefling parents. The resulting child is always a tiefling. They grow up often loved by their tiefling families and communities, and tend to be more well-adjusted emotionally as a result."
+
+/datum/culture/species/tiefling/misfortune
+	name = "the Host of Misfortune"
+	description = "Known to humens as deserters from the war with Zizo in Grenzelhoft. These tieflings may be former soldiers or tieflings from other nations who fled to the lands occupied by the Host. Grenzelhoftians sneer as they pass. Others may look up to them as people who took their futures into their own hands."
 
 /datum/culture/species/aasimar
 	abstract_type = /datum/culture/species/aasimar
