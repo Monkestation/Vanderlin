@@ -32,8 +32,7 @@
 	tutorial = "A cleric belonging to the Order of the Southern Sun. After years of martial training and rigorous theological study, your abbess has deemed you worthy of a grand task. You will root out the corruption spread by The Four across Faience, and deliver the gospel of the glorious Sun Queen."
 	allowed_races = RACES_PLAYER_ELF
 	allowed_patrons = list(/datum/patron/divine/astrata)
-	outfit = /datum/outfit/folkhero/lakkariancleric
-	category_tags = list(CTAG_FOLKHEROES)
+	outfit = /datum/outfit/adventurer/lakkariancleric
 	total_positions = 0 //Lakkari disabled
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
@@ -72,8 +71,8 @@
 		devotion.make_cleric()
 		devotion.grant_to(spawned)
 
-/datum/outfit/folkhero/lakkariancleric
-	name = "Lakkarian Cleric (Folkhero)"
+/datum/outfit/adventurer/lakkariancleric
+	name = "Lakkarian Cleric (Adventurer)"
 	head = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	armor = /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
