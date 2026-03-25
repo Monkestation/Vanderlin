@@ -35,6 +35,7 @@
 				cast_on.icon_state = "gravedoubleconsecrated"
 				owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				grave.is_consecrated += 1 // this is how we define a grave as "doubly consecrated"
+				grave.adjust_grave_necra_devotion(DOUBLE_CONSECRATED_GAIN)
 				owner.adjust_triumphs(1, reason = "Pleased the Undermaiden")
 			else
 				owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
@@ -42,6 +43,7 @@
 			if(istype(cast_on, /obj/structure/closet/dirthole)) // if it's a grave, increase it's level of consecration.
 				var/obj/structure/closet/dirthole/grave = cast_on
 				grave.is_consecrated += 1
+				grave.adjust_grave_necra_devotion(CONSECRATED_GAIN)
 				if(grave.is_consecrated < 1) // don't count graves as being consecrated multiple time for Necra
 					SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 					record_round_statistic(STATS_GRAVES_CONSECRATED)

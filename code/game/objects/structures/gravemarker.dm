@@ -23,5 +23,6 @@
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, hole)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 				hole.is_consecrated += 1 // reinforce the level of consecration
+				hole.adjust_grave_necra_devotion(NOT_CONSECRATED_GAIN) // This is a grave with just a marker, no rites
 
 	return ..()

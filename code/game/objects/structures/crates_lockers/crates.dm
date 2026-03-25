@@ -65,6 +65,12 @@
 		else if (sealed)
 			. += span_warning("It is sealed, but has no body.")
 
+/obj/structure/closet/crate/coffin/Destroy()
+	if(consecrated)
+		consecrated = FALSE
+		adjust_grave_necra_devotion() //remove devotion gain
+	. = ..()
+
 /obj/structure/closet/crate/coffin/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/inqarticles/tallowpot)) // consecrating and sealing a coffin with tallow.
 		var/obj/item/inqarticles/tallowpot/pot = I
@@ -89,6 +95,7 @@
 			SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 			record_round_statistic(STATS_GRAVES_CONSECRATED)
 			consecrated = TRUE
+			adjust_grave_necra_devotion()
 		else
 			to_chat(user, span_warning("The consecration failed, but you did seal the coffin."))
 		sealed = TRUE
@@ -115,7 +122,9 @@
 						L.apply_status_effect(/datum/status_effect/debuff/cursed)
 				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 				sealed = FALSE
-				consecrated = FALSE
+				if(consecrated == TRUE)
+					consecrated = FALSE
+					adjust_grave_necra_devotion()
 				icon_state = "casket"
 				return
 		. = ..()
