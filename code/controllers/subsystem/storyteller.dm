@@ -498,7 +498,8 @@ SUBSYSTEM_DEF(gamemode)
 				if(!selected_event.canSpawnEvent(player_count))
 					preferred_copy -= selected_event
 					selected_event = null
-			current_storyteller?.try_buy_event(selected_event)
+			if(selected_event)
+				current_storyteller?.try_buy_event(selected_event)
 
 	///Handle scheduled events
 	for(var/datum/scheduled_event/sch_event in scheduled_events)

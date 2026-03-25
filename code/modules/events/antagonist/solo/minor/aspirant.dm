@@ -40,7 +40,7 @@
 	secondary_prob = 40
 
 	preferred_events = list(
-		/datum/round_event_control/antagonist/solo/wretch,
+		/datum/round_event_control/antagonist/solo/wretch = 1,
 	)
 
 	min_players = 25

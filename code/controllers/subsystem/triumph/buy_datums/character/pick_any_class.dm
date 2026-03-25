@@ -52,7 +52,9 @@
 	for(var/datum/job/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(!length(CHECKS.category_tags))
 			continue
-		if(length(invalid_ctags & CHECKS.category_tags))
+		if(length(invalid_ctags & CHECKS.category_tags) && !length(parent_job?.advclass_cat_rolls & CHECKS.category_tags))
+			continue
+		if(!CHECKS.check_requirements(spawned))
 			continue
 		possible_classes += CHECKS
 
