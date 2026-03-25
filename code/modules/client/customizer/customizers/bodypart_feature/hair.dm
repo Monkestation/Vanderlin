@@ -350,7 +350,9 @@
 		/datum/sprite_accessory/hair/head/nimrod,
 		/datum/sprite_accessory/hair/head/curlylocs,
 		/datum/sprite_accessory/hair/head/farmday,
-		/datum/sprite_accessory/hair/head/curlybob
+		/datum/sprite_accessory/hair/head/curlybob,
+		/datum/sprite_accessory/hair/head/snowdriftbangs,
+		/datum/sprite_accessory/hair/head/poofypoms
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
