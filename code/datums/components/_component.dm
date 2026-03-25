@@ -69,9 +69,9 @@
 /datum/component/proc/_JoinParent()
 	var/datum/P = parent
 	//lazy init the parent's dc list
-	var/list/dc = P.datum_components
+	var/list/dc = P._datum_components
 	if(!dc)
-		P.datum_components = dc = list()
+		P._datum_components = dc = list()
 
 	//set up the typecache
 	var/our_type = type
@@ -106,7 +106,7 @@
  */
 /datum/component/proc/_RemoveFromParent()
 	var/datum/P = parent
-	var/list/dc = P.datum_components
+	var/list/dc = P._datum_components
 	for(var/I in _GetInverseTypeList())
 		var/list/components_of_type = dc[I]
 		if(length(components_of_type))	//
@@ -118,7 +118,7 @@
 		else	//just us
 			dc -= I
 	if(!dc.len)
-		P.datum_components = null
+		P._datum_components = null
 
 	UnregisterFromParent()
 
@@ -150,41 +150,47 @@
  *
  * Arguments:
  * * datum/target The target to listen for signals from
- * * sig_type_or_types Either a string signal name, or a list of signal names (strings)
+ * * signal_type A signal name
  * * proctype The proc to call back when the signal is emitted
  * * override If a previous registration exists you must explicitly set this
  */
-/datum/proc/RegisterSignal(datum/target, sig_type_or_types, proctype, override = FALSE)
+/datum/proc/RegisterSignal(datum/target, signal_type, proctype, override = FALSE)
 	if(QDELETED(src) || QDELETED(target))
 		return
 
-	var/list/procs = signal_procs
-	if(!procs)
-		signal_procs = procs = list()
-	if(!procs[target])
-		procs[target] = list()
-	var/list/lookup = target.comp_lookup
-	if(!lookup)
-		target.comp_lookup = lookup = list()
+	if (islist(signal_type))
+		var/static/list/known_failures = list()
+		var/list/signal_type_list = signal_type
+		var/message = "([target.type]) is registering [signal_type_list.Join(", ")] as a list, the older method. Change it to RegisterSignals."
 
-	var/list/sig_types = islist(sig_type_or_types) ? sig_type_or_types : list(sig_type_or_types)
-	for(var/sig_type in sig_types)
-		if(!override && procs[target][sig_type])
-			stack_trace("[sig_type] overridden. Use override = TRUE to suppress this warning")
+		if (!(message in known_failures))
+			known_failures[message] = TRUE
+			stack_trace("[target] [message]")
 
-		procs[target][sig_type] = proctype
+		RegisterSignals(target, signal_type, proctype, override)
+		return
 
-		if(!lookup[sig_type]) // Nothing has registered here yet
-			lookup[sig_type] = src
-		else if(lookup[sig_type] == src) // We already registered here
-			continue
-		else if(!length(lookup[sig_type])) // One other thing registered here
-			lookup[sig_type] = list(lookup[sig_type]=TRUE)
-			lookup[sig_type][src] = TRUE
-		else // Many other things have registered here
-			lookup[sig_type][src] = TRUE
+	var/list/procs = (_signal_procs ||= list())
+	var/list/target_procs = (procs[target] ||= list())
+	var/list/lookup = (target._listen_lookup ||= list())
 
-	signal_enabled = TRUE
+	var/exists = target_procs[signal_type]
+	target_procs[signal_type] = proctype
+
+	if(exists)
+		if(!override)
+			var/override_message = "[signal_type] overridden. Use override = TRUE to suppress this warning.\nTarget: [target] ([target.type]) Existing Proc: [exists] New Proc: [proctype]"
+			stack_trace(override_message)
+		return
+
+	var/list/looked_up = lookup[signal_type]
+
+	if(isnull(looked_up)) // Nothing has registered here yet
+		lookup[signal_type] = src
+	else if(!islist(looked_up)) // One other thing registered here
+		lookup[signal_type] = list(looked_up, src)
+	else // Many other things have registered here
+		looked_up += src
 
 
 /// Registers multiple signals to the same proc.
@@ -204,13 +210,13 @@
  * * sig_typeor_types Signal string key or list of signal keys to stop listening to specifically
  */
 /datum/proc/UnregisterSignal(datum/target, sig_type_or_types)
-	var/list/lookup = target?.comp_lookup
-	if(!signal_procs || !signal_procs[target] || !lookup)
+	var/list/lookup = target?._listen_lookup
+	if(!_signal_procs || !_signal_procs[target] || !lookup)
 		return
 	if(!islist(sig_type_or_types))
 		sig_type_or_types = list(sig_type_or_types)
 	for(var/sig in sig_type_or_types)
-		if(!signal_procs[target][sig])
+		if(!_signal_procs[target][sig])
 			if(!istext(sig))
 				stack_trace("We're unregistering with something that isn't a valid signal \[[sig]\], you fucked up")
 			continue
@@ -218,25 +224,25 @@
 			if(2)
 				lookup[sig] = (lookup[sig]-src)[1]
 			if(1)
-				stack_trace("[target] ([target.type]) somehow has single length list inside comp_lookup")
+				stack_trace("[target] ([target.type]) somehow has single length list inside _listen_lookup")
 				if(src in lookup[sig])
 					lookup -= sig
 					if(!length(lookup))
-						target.comp_lookup = null
+						target._listen_lookup = null
 						break
 			if(0)
 				if(lookup[sig] != src)
 					continue
 				lookup -= sig
 				if(!length(lookup))
-					target.comp_lookup = null
+					target._listen_lookup = null
 					break
 			else
 				lookup[sig] -= src
 
-	signal_procs[target] -= sig_type_or_types
-	if(!signal_procs[target].len)
-		signal_procs -= target
+	_signal_procs[target] -= sig_type_or_types
+	if(!_signal_procs[target].len)
+		_signal_procs -= target
 
 /**
  * Called on a component when a component of the same type was added to the same parent
@@ -283,20 +289,21 @@
  * Use the `SEND_SIGNAL` define instead
  */
 /datum/proc/_SendSignal(sigtype, list/arguments)
-	var/target = comp_lookup[sigtype]
+	var/target = _listen_lookup[sigtype]
 	if(!length(target))
-		var/datum/C = target
-		if(!C.signal_enabled)
-			return NONE
-		var/proctype = C.signal_procs[src][sigtype]
-		return NONE | CallAsync(C, proctype, arguments)
+		var/datum/listening_datum = target
+		return NONE | call(listening_datum, listening_datum._signal_procs[src][sigtype])(arglist(arguments))
 	. = NONE
-	for(var/datum/C as anything in target)
-		if(!C.signal_enabled)
-			continue
-		var/proctype = C.signal_procs[src][sigtype]
-		arguments |= sigtype
-		. |= CallAsync(C, proctype, arguments)
+	// This exists so that even if one of the signal receivers unregisters the signal,
+	// all the objects that are receiving the signal get the signal this final time.
+	// AKA: No you can't cancel the signal reception of another object by doing an unregister in the same signal.
+	var/list/queued_calls = list()
+	// This should be faster than doing `var/datum/listening_datum as anything in target` as it does not implicitly copy the list
+	for(var/i in 1 to length(target))
+		var/datum/listening_datum = target[i]
+		queued_calls.Add(listening_datum, listening_datum._signal_procs[src][sigtype])
+	for(var/i in 1 to length(queued_calls) step 2)
+		. |= call(queued_calls[i], queued_calls[i + 1])(arglist(arguments))
 
 // The type arg is casted so initial works, you shouldn't be passing a real instance into this
 /**
@@ -310,7 +317,7 @@
 	RETURN_TYPE(c_type)
 	if(initial(c_type.dupe_mode) == COMPONENT_DUPE_ALLOWED)
 		stack_trace("GetComponent was called to get a component of which multiple copies could be on an object. This can easily break and should be changed. Type: \[[c_type]\]")
-	var/list/dc = datum_components
+	var/list/dc = _datum_components
 	if(!dc)
 		return null
 	. = dc[c_type]
@@ -329,7 +336,7 @@
 	RETURN_TYPE(c_type)
 	if(initial(c_type.dupe_mode) == COMPONENT_DUPE_ALLOWED)
 		stack_trace("GetComponent was called to get a component of which multiple copies could be on an object. This can easily break and should be changed. Type: \[[c_type]\]")
-	var/list/dc = datum_components
+	var/list/dc = _datum_components
 	if(!dc)
 		return null
 	var/datum/component/C = dc[c_type]
@@ -348,7 +355,7 @@
  * * c_type The component type path
  */
 /datum/proc/GetComponents(c_type)
-	var/list/dc = datum_components
+	var/list/dc = _datum_components
 	if(!dc)
 		return null
 	. = dc[c_type]
@@ -475,7 +482,7 @@
  * * /datum/target the target to move the components to
  */
 /datum/proc/TransferComponents(datum/target)
-	var/list/dc = datum_components
+	var/list/dc = _datum_components
 	if(!dc)
 		return
 	var/comps = dc[/datum/component]

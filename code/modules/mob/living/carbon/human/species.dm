@@ -1889,6 +1889,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
 	var/weakness = H.check_weakness(I, user)
 	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
+	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
 
 	if(!actual_damage)
 		H.next_attack_msg += " [span_danger(span_big("Armor stops the damage!"))]"
