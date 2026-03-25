@@ -25,7 +25,7 @@
 	parent = P
 	. = ..()
 
-/datum/anvil_recipe/Destroy(force, ...)
+/datum/anvil_recipe/Destroy(force)
 	additional_items.Cut()
 	parent = null
 	req_bar = null

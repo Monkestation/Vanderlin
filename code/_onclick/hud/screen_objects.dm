@@ -1732,13 +1732,13 @@
 
 /atom/movable/screen/time/update_name()
 	switch(GLOB.tod)
-		if("day")
+		if(DAY)
 			name = "Astrata"
-		if("dusk")
+		if(DUSK)
 			name = "Astrata - Dusk"
-		if("night")
+		if(NIGHT)
 			name = "Noc"
-		if("dawn")
+		if(DAWN)
 			name = "Astrata - Dawn"
 	return ..()
 

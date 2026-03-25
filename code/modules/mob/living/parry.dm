@@ -35,6 +35,8 @@
 		return FALSE
 	if(intenty && !intenty.canparry)
 		return FALSE
+	if(pulling && grab_state >= GRAB_AGGRESSIVE)
+		return FALSE
 	if(incapacitated())
 		return FALSE
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
