@@ -19,10 +19,7 @@
 	for(var/obj/structure/closet/dirthole/hole in loc)
 		if(pacify_coffin(hole, user))
 			user.visible_message(span_rose("[user] consecrates [hole]."), span_rose("I consecrate [hole]."))
-			if(hole.is_consecrated < 1) // You cannot double-consecrate a grave with just a marker.
-				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, hole)
-				record_round_statistic(STATS_GRAVES_CONSECRATED)
-				hole.is_consecrated += 1 // reinforce the level of consecration
+			if(hole.is_consecrated < 1) // Grant small devotion increase
 				hole.adjust_grave_necra_devotion(NOT_CONSECRATED_GAIN) // This is a grave with just a marker, no rites
 
 	return ..()

@@ -277,8 +277,13 @@
 	else if(istype(src, /obj/structure/closet/dirthole))
 		var/obj/structure/closet/dirthole/grave = src
 
-		// Change is difference between current gain and new value
-		change = amount - grave.necra_devotion_gain
+		// Change is difference between current gain and new value, if double consecrated, we need to reduce the amount by what is already counted by the coffin
+		if(amount == DOUBLE_CONSECRATED_GAIN)
+			change = amount - grave.necra_devotion_gain - CONSECRATED_GAIN
+			message_admins("[change] = [amount] - [grave.necra_devotion_gain] - [CONSECRATED_GAIN]")
+		else
+			change = amount - grave.necra_devotion_gain
+			message_admins("[change] = [amount] - [grave.necra_devotion_gain]")
 		grave.necra_devotion_gain = amount
 
 	if(change == 0) // Nothing to adjust
@@ -295,8 +300,9 @@
 				// Do quick maths to ensure change is not going to go over max
 				if(current_passive_gain == GRAVE_DEVOTION_MAX && change >= 0) // At max and we are not reducing it, skip
 					continue
-				else if(current_passive_gain += change >= GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
+				else if((current_passive_gain += change) >= GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
 					change = GRAVE_DEVOTION_MAX - current_passive_gain
+					message_admins("MAX - [current_passive_gain]. Change is now [change].")
 
 				message_admins("change of necra devotion = [change]")
 				devotion.update_passive_devotion(change)
