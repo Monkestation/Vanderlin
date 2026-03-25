@@ -15,6 +15,23 @@
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/fibers
 
+/obj/item/natural/animalfibers
+	name = "sinew fiber"
+	desc = "Sinew fiber. Made from butchered animals sinew, commonly used by hunters for leatherworking and bowcrafting."
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	color = "#EEEADE"
+	firefuel = 2 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	bundletype = /obj/item/natural/bundle/animalfibers
+
 /obj/item/natural/silk
 	name = "silk"
 	icon_state = "fibers"
@@ -105,6 +122,26 @@
 	amount = maxamount
 	update_bundle()
 
+/obj/item/natural/bundle/animalfibers
+	name = "sinew fiber bundle"
+	icon_state = "fibersroll1"
+	desc = "Sinewy fibers, tightly bound together."
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	maxamount = 9
+	color = "#EEEADE"
+	firemod =  2 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	stacktype = /obj/item/natural/animalfibers
+	icon1step = 3
+	icon2step = 6
+
 /obj/item/natural/bundle/silk
 	name = "silken weave"
 	icon_state = "fibersroll1"
@@ -171,13 +208,13 @@
 	icon3 = "stickbundle3"
 
 /obj/item/natural/bowstring
-	name = "fibre bowstring"
+	name = "bowstring"
 	desc = "A simple cord of bowstring."
 	icon_state = "fibers"
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	color = COLOR_BEIGE
+	color = "#EEEADE"
 	firefuel = 5 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH

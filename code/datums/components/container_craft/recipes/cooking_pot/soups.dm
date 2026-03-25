@@ -44,3 +44,17 @@
 
 /datum/container_craft/cooking/cheese_soup/wedge
 	requirements = list(/obj/item/reagent_containers/food/snacks/cheese_wedge = 1)
+
+/datum/container_craft/cooking/bone_broth
+	name = "Bone Broth"
+	created_reagent = /datum/reagent/consumable/soup/bone
+	requirements = list(/obj/item/alch/sinew = 1)
+	max_optionals = 2
+	optional_wildcard_requirements = list(
+		/obj/item/alch/bone = 2
+	)
+	finished_smell = /datum/pollutant/food/bone_broth
+	crafting_time = 40 SECONDS
+
+/datum/container_craft/cooking/bone_broth/real_bone
+    requirements = list(/obj/item/alch/bone = 1)

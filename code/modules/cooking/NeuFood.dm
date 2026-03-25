@@ -477,6 +477,13 @@
 	taste_description = "egg soup"
 	nutriment_factor = 12
 
+/datum/reagent/consumable/soup/bone
+	name = "bone broth"
+	color = "#978e0d"
+	taste_description = "Savory, and deeply rich."
+	nutriment_factor = 12
+	taste_mult = 4
+
 /datum/reagent/consumable/soup/cheese // A thicker soup, almost on the level of old oatmeal. But less hydration than other soups
 	name = "cheese soup"
 	description = "A thick cheese soup. Creamy and comforting."
@@ -493,6 +500,16 @@
 	reagent_state = LIQUID
 	nutriment_factor = 11
 	taste_mult = 4
+
+/datum/reagent/consumable/soup/stew/sinew
+	color = "#6e6116"
+	taste_description = "bone broth"
+
+
+/datum/reagent/consumable/soup/stew/bone
+	color = "#8a770c"
+	taste_description = "bone broth"
+
 
 /datum/reagent/consumable/soup/stew/chicken
 	color = "#baa21c"

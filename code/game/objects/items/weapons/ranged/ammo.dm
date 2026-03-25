@@ -326,7 +326,6 @@
 //................ Stone Arrow ............... //
 /obj/item/ammo_casing/caseless/arrow/stone
 	name = "stone arrow"
-	desc = "A fletched projectile with a stone tip."
 	icon_state = "stonearrow"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/stone //weaker projectile
 	max_integrity = 5
@@ -336,6 +335,21 @@
 	embedchance = 80
 	armor_penetration = 0
 	damage = ARROW_DAMAGE-2
+	woundclass = BCLASS_STAB
+
+//................ Bone Arrow ............... //
+/obj/item/ammo_casing/caseless/arrow/bone
+	name = "bone arrow"
+	desc = "A fletched projectile with a bone tip."
+	icon_state = "bonearrow"
+	projectile_type = /obj/projectile/bullet/reusable/arrow/bone //weaker projectile
+	max_integrity = 15
+
+/obj/projectile/bullet/reusable/arrow/bone
+	ammo_type = /obj/item/ammo_casing/caseless/arrow/bone
+	embedchance = 95
+	armor_penetration = 15
+	damage = ARROW_DAMAGE
 	woundclass = BCLASS_STAB
 
 //................ Poison Arrow ............... //
