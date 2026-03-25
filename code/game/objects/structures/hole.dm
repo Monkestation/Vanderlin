@@ -224,7 +224,7 @@
 				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
 					if(ishuman(user))
 						var/mob/living/carbon/human/L = user
-						var/robbery_location = get_area_name(src)
+						var/robbery_location = get_area_name(user) // we do user location because src breaks
 						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
 							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 							record_round_statistic(STATS_GRAVES_ROBBED)
@@ -234,7 +234,7 @@
 								if (player.stat == DEAD || isbrain(player))
 									continue
 								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
-								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
 									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
 						else
 							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
