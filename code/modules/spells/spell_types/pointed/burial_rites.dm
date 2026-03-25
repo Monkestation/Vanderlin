@@ -35,6 +35,7 @@
 				cast_on.icon_state = "gravedoubleconsecrated"
 				owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				grave.is_consecrated += 1 // this is how we define a grave as "doubly consecrated"
+				owner.adjust_triumphs(1, reason = "Pleased the Undermaiden")
 			else
 				owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
 			cast_on.add_overlay("graveconsecrated")
