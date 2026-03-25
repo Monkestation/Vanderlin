@@ -103,8 +103,9 @@
 	if(!guarantees_roundstart_roleset && prob(roundstart_prob) && !roundstart_checks)
 		roundstart_checks = TRUE
 
-	if(SSgamemode.can_run_roundstart && SSgamemode.current_roundstart_event && !SSgamemode.ran_roundstart && (guarantees_roundstart_roleset || roundstart_checks))
-		if(SSgamemode.current_roundstart_event.canSpawnEvent() && try_buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION))
+	if(roundstart_checks && SSgamemode.can_run_roundstart && !SSgamemode.ran_roundstart && SSgamemode.current_roundstart_event)
+		if(SSgamemode.current_roundstart_event.canSpawnEvent())
+			buy_event(SSgamemode.current_roundstart_event, EVENT_TRACK_CHARACTER_INJECTION)
 			if(EVENT_TRACK_CHARACTER_INJECTION in SSgamemode.forced_next_events)
 				SSgamemode.forced_next_events[EVENT_TRACK_CHARACTER_INJECTION] = null
 				SSgamemode.forced_next_events -= EVENT_TRACK_CHARACTER_INJECTION
@@ -223,10 +224,6 @@
 	message_admins("Storyteller [mode.current_storyteller.name] purchased and triggered [bought_event] event, on [track] track, for [total_cost] cost.")
 	if(bought_event.roundstart)
 		SSgamemode.ran_roundstart = TRUE
-		if(!forced && (!mode.can_run_roundstart || (SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= 3 MINUTES)))
-			message_admins(span_boldred(span_big("THIS SHOULD NOT BE POSSIBLE, TELL KEVIN NOW")))
-			stack_trace("THIS SHOULD NOT BE POSSIBLE, TELL KEVIN NOW")
-			return
 		SSgamemode.current_roundstart_event = bought_event
 		mode.TriggerEvent(bought_event, forced)
 	else
