@@ -605,6 +605,7 @@
 #include "code\datums\ruins.dm"
 #include "code\datums\saymode.dm"
 #include "code\datums\scheduled_event.dm"
+#include "code\datums\signals.dm"
 #include "code\datums\sleep_advancement.dm"
 #include "code\datums\soullink.dm"
 #include "code\datums\tgs_handler.dm"
