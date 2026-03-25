@@ -868,3 +868,8 @@
 /datum/stress_event/black_briar2/on_apply(mob/living/user)
 	. = ..()
 	user.refresh_looping_ambience()
+
+/datum/stress_event/squeamish
+	timer = 5 MINUTES
+	stress_change = 3
+	desc = span_red("That can't feel good!")
