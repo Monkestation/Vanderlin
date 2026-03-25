@@ -503,7 +503,7 @@
 /datum/status_effect/buff/bloodrage/on_creation(mob/living/carbon/new_owner, duration_override, ...)
 	var/holyskill = GET_MOB_SKILL_VALUE_OLD(new_owner, /datum/attribute/skill/magic/holy)
 	duration = ((15 SECONDS) * holyskill)
-	if(holyskill >= SKILL_LEVEL_APPRENTICE)
+	if(holyskill >= SKILL_RANK_APPRENTICE)
 		effectedstats = list(STAT_STRENGTH = 2)
 	else
 		effectedstats = list(STAT_STRENGTH = 1)

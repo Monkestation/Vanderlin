@@ -123,7 +123,7 @@
 /datum/anvil_recipe/tools/iron/locks
 	name = "3x Custom Locks"
 	recipe_name = "three Locks"
-	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/customlock
 	createditem_extra = 2
 	craftdiff = 0
@@ -131,6 +131,7 @@
 /datum/anvil_recipe/tools/iron/lockpicks
 	name = "3x Lockpicks"
 	recipe_name = "three Lockpicks"
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/lockpick
 	createditem_extra = 2
 	craftdiff = 1
@@ -138,6 +139,7 @@
 /datum/anvil_recipe/tools/iron/lockpickring
 	name = "3x Lockpickrings"
 	recipe_name = "three Lockpickrings"
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/lockpickring
 	createditem_extra = 2
 	craftdiff = 0
@@ -145,7 +147,7 @@
 /datum/anvil_recipe/tools/iron/blankeys
 	name = "3x Blank Custom Keys"
 	recipe_name = "three Blank Keys"
-	appro_skill = /datum/attribute/skill/craft/engineering // To train engineering
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/key/custom
 	createditem_extra = 2
 	craftdiff = 0

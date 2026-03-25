@@ -16,8 +16,8 @@
 	time = 3.2 SECONDS
 	accept_hand = TRUE
 	surgery_flags = SURGERY_INCISED
-	skill_min = SKILL_LEVEL_NOVICE
-	skill_median = SKILL_LEVEL_NOVICE
+	skill_min = SKILL_RANK_NOVICE
+	skill_median = SKILL_RANK_NOVICE
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 

@@ -158,6 +158,9 @@
 	icon_state = "exoticsilkmask"
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/silk
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 	toggle_icon_state = FALSE

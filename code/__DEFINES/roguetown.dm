@@ -581,7 +581,9 @@ BCLASS_TWIST)
 #define SKULLMET_ICONS list(\
 		"volf"="skullmet_volf",\
 		"bear"="skullmet_bear",\
-		"gote"="skullmet_goat")
+		"gote"="skullmet_goat",\
+		"rous"="skullmet_ruffian",\
+		"bobcat"="skullmet_bobcat")
 
 #define DENDOR_TAME_PROB_NONE 0
 #define DENDOR_TAME_PROB_LOW 25
