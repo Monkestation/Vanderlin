@@ -14,7 +14,7 @@
 /// Standard grave with rites preformed
 #define CONSECRATED_GAIN 0.5
 /// Double consecrated grave
-#define DOUBLE_CONSECRATED_GAIN 1
+#define DOUBLE_CONSECRATED_GAIN 2
 /// Max passive devotion gravetenders are permitted to have from graves
 #define GRAVE_DEVOTION_MAX 1
 

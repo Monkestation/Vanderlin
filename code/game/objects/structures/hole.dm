@@ -300,7 +300,7 @@
 				// Do quick maths to ensure change is not going to go over max
 				if(current_passive_gain == GRAVE_DEVOTION_MAX && change >= 0) // At max and we are not reducing it, skip
 					continue
-				else if((current_passive_gain += change) >= GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
+				else if((current_passive_gain += change) > GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
 					change = GRAVE_DEVOTION_MAX - current_passive_gain
 					message_admins("MAX - [current_passive_gain]. Change is now [change].")
 

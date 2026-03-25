@@ -42,8 +42,9 @@
 			cast_on.add_overlay("graveconsecrated")
 			if(istype(cast_on, /obj/structure/closet/dirthole)) // if it's a grave, increase it's level of consecration.
 				var/obj/structure/closet/dirthole/grave = cast_on
+				if(grave.is_consecrated == 0) // We do it this way so we dont actidently undo the double consecrated gain
+					grave.adjust_grave_necra_devotion(CONSECRATED_GAIN)
 				grave.is_consecrated += 1
-				grave.adjust_grave_necra_devotion(CONSECRATED_GAIN)
 				if(grave.is_consecrated < 1) // don't count graves as being consecrated multiple time for Necra
 					SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 					record_round_statistic(STATS_GRAVES_CONSECRATED)
