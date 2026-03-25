@@ -75,6 +75,7 @@
 #include "lootpanel.dm"
 #include "map_landmarks.dm"
 #include "mapping.dm"
+#include "movement_order_sanity.dm"
 #include "mindbound_actions.dm"
 #include "projectiles.dm"
 #include "reagent_id_typos.dm"
