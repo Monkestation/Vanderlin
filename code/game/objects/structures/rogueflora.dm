@@ -407,7 +407,14 @@
 	dir = pick(GLOB.cardinals)
 
 /datum/component/grass/Initialize()
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	if(!ismovableatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
+
+/datum/component/grass/Destroy(force)
+	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
+	return ..()
 
 /datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
