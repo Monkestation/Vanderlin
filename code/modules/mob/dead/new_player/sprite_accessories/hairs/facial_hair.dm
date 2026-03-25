@@ -129,6 +129,51 @@
 	gender = MALE
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
+/datum/sprite_accessory/hair/facial/bushyburns
+	name = "Bushy Sideburns"
+	icon_state = "facial_bushyburns"
+	gender = MALE
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF,  SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/facial/gnomish
+	name = "Gnomish"
+	icon_state = "facial_gnomish"
+	gender = MALE
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/newlywed
+	name = "Newlywed (Feminine)"
+	icon_state = "facial_newlywed"
+	gender = FEMALE
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/anniversary
+	name = "Anniversary (Feminine)"
+	icon_state = "facial_anniversary"
+	gender = FEMALE
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/longbraid
+	name = "Longbraid"
+	icon_state = "facial_longbraid"
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/pinnacle
+	name = "Pinnacle (Masculine)"
+	icon_state = "facial_pinnacle"
+	gender = MALE
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/enchanter
+	name = "Enchanter"
+	icon_state = "facial_enchanter"
+	specuse = list(SPEC_ID_DWARF)
+
+/datum/sprite_accessory/hair/facial/curlypom
+	name = "Curlypom"
+	icon_state = "facial_curlypom"
+	specuse = list(SPEC_ID_DWARF)
+
 /datum/sprite_accessory/hair/facial/rakshari/kesh
 	name = "Kesh"
 	icon_state = "kesh"
