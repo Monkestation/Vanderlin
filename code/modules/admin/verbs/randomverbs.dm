@@ -763,6 +763,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		ADMIN_PUNISHMENT_GODHAND,
 		ADMIN_PUNISHMENT_FORCECOLLAR,
 		ADMIN_PUNISHMENT_PSYDON,
+		ADMIN_PUNISHMENT_BLACK_BRIAR,
 	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -870,6 +871,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			ADD_TRAIT(created_collar, TRAIT_NODROP, "adminabuse")
 			to_chat(target, span_userdanger("A ring of darkness restrains my neck, and a collar is made manifest!"))
 			H.add_stress(/datum/stress_event/collarcurse)
+		if(ADMIN_PUNISHMENT_BLACK_BRIAR)
+			var/obj/item/bodypart/chest/chest = target.get_bodypart()
+			var/datum/wound/black_briar_curse/chest/wound = chest?.add_wound(/datum/wound/black_briar_curse/chest)
+			if(!istype(wound))
+				to_chat(usr, span_warning("Invalid target!"))
+				return
+			wound.infection = BBC_TIME_MAX
+			target.death()
 
 	punish_log(target, punishment)
 

@@ -5,7 +5,7 @@
 	gender = PLURAL
 	icon_state = "plate_legs"
 	item_state = "plate_legs"
-	sewrepair = FALSE
+	sewrepair = null
 	blocksound = PLATEHIT
 	equip_delay_self = 30
 	unequip_delay_self = 30
@@ -15,7 +15,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	r_sleeve_status = SLEEVE_NOMOD

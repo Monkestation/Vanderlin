@@ -87,7 +87,7 @@
 			tastes = list("spicy red meat" = 2)
 			meal_properties()
 			bitesize = initial(bitesize)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/fine_cuisine, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()
 
@@ -804,6 +804,6 @@
 			overlays += spice
 			tastes = list("spicy birdmeat" = 2)
 			modified = TRUE
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/fine_cuisine, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()

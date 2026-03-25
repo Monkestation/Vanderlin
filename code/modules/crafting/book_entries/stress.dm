@@ -12,7 +12,6 @@
 
 		<div>
 		<h2> How to generate Stress </h2>
-		[icon2html(new /obj/structure/waterwheel, user)]<br>
 		The most common way of this is the waterwheel, it generates a moderate amount of stress at low speed.<br>
 		</div>
 		<br>
@@ -29,7 +28,6 @@
 		<div>
 		<h2> How to find out how close you are to overstressing </h2>
 		If you overstress the network everything comes to a halt. <br>
-		[icon2html(new /obj/item/clothing/face/goggles, user)] <br>
 		To avoid this you want to get some engineers goggles,<br>
 		this lets you see the overall stress usage and RPM of the network at any given structure.
 		</div>

@@ -15,6 +15,7 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "add sugar to the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_scone_tangerine
 	name = "Unbaked Tangerine Scone"
@@ -31,6 +32,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add tangerine to the scone"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_scone_plum
 	name = "Unbaked Plum Scone"
@@ -47,6 +49,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add plum to the scone"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_scone_choco
 	name = "Unbaked Chocolate Scone"
@@ -63,3 +66,4 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add chocolate to the scone"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking

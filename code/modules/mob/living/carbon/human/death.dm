@@ -131,6 +131,9 @@
 		return
 	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
 		return
+	var/obj/item/bodypart/chest/c = get_bodypart()
+	if(c?.has_wound(/datum/wound/black_briar_curse/chest))
+		return
 	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)

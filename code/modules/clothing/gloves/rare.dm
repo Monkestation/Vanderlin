@@ -10,8 +10,8 @@
 	blocksound = PLATEHIT
 	body_parts_covered = HANDS
 	blade_dulling = DULLING_BASH
-	sewrepair = FALSE
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 

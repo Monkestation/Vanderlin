@@ -73,6 +73,8 @@
 				used = list('sound/vo/female/gen/scream (1).ogg','sound/vo/female/gen/scream (2).ogg','sound/vo/female/gen/scream (3).ogg','sound/vo/female/gen/scream (4).ogg')
 			if("shh")
 				used = list('sound/vo/female/gen/shh.ogg','sound/vo/female/gen/shh (2).ogg')
+			if("sickcough")
+				used = list('sound/vo/female/gen/sickcough (1).ogg', 'sound/vo/female/gen/sickcough (2).ogg', 'sound/vo/female/gen/sickcough (3).ogg', 'sound/vo/female/gen/sickcough (4).ogg', 'sound/vo/female/gen/sickcough (5).ogg')
 			if("sigh")
 				used = list('sound/vo/female/gen/sigh (1).ogg','sound/vo/female/gen/sigh (2).ogg','sound/vo/female/gen/sigh (3).ogg')
 			if("snore")
