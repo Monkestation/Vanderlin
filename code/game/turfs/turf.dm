@@ -396,23 +396,23 @@
 		if(QDELETED(mover))
 			return FALSE		//We were deleted.
 
-/turf/Entered(atom/movable/AM)
+/turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	..()
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, AM)
-	SEND_SIGNAL(AM, COMSIG_MOVABLE_TURF_ENTERED, src)
+	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
-	if(explosion_level && AM.ex_check(explosion_id))
-		AM.ex_act(explosion_level)
+	if(explosion_level && arrived.ex_check(explosion_id))
+		arrived.ex_act(explosion_level)
 
-/turf/open/Entered(atom/movable/AM)
+/turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	..()
 	//melting
-	if(isobj(AM) && temperature > 273.15)
-		var/obj/O = AM
+	if(isobj(arrived) && temperature > 273.15)
+		var/obj/O = arrived
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()
-	if(!(AM.atom_flags & Z_FALLING))
-		zFall(AM)
+	if(!(arrived.atom_flags & Z_FALLING))
+		zFall(arrived)
 
 /turf/proc/is_plasteel_floor()
 	return FALSE

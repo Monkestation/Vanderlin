@@ -189,7 +189,7 @@
 	if(length(vis_contents))
 		vis_contents.Cut()
 
-/atom/movable/Exited(atom/movable/gone, direction)
+/atom/movable/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 
 	if(!LAZYLEN(gone.important_recursive_contents))
@@ -600,12 +600,12 @@
 
 	if(old_locs) // This condition will only be true if it is a multi-tile object.
 		for(var/atom/exited_loc as anything in (old_locs - new_locs))
-			exited_loc.Exited(src, direction)
+			exited_loc.Exited(src, newloc)
 	else // Else there's just one loc to be exited.
-		oldloc.Exited(src, direction)
+		oldloc.Exited(src, newloc)
 
 	if(oldarea != newarea)
-		oldarea.Exited(src, direction)
+		oldarea.Exited(src, newloc)
 
 	if(new_locs) // Same here, only if multi-tile.
 		for(var/atom/entered_loc as anything in (new_locs - old_locs))

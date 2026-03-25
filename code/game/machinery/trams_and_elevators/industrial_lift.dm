@@ -114,12 +114,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		UnregisterSignal(turf_loc, registrations)
 
 
-/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, direction)
+/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
 
-/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, direction)
+/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
