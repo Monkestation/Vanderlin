@@ -70,15 +70,15 @@
 
 /datum/culture/species/half_orc/shellcrest
  	name = "Shellcrest"
-//pirate orcs, along the western coast water. famous for inventing the first metal boat and proving it works
+	description = "Known to humens as vicious pirates, the Shellcrest tribe lives off the western coast of Vanderlin and the Isle of Enigma. They're famous for proving that a metal boat can float as well as a wooden one, through complete and utter blind enthusiasm."
 
 /datum/culture/species/half_orc/blood_axe
 	name = "Blood Axe"
-//crimsonlands one. graggar's chosen?
+	description = "Known to humens as violent and brutal warriors in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Splitjaw tribe."
 
 /datum/culture/species/half_orc/splitjaw
  	name = "Splitjaw"
-//crimsonlands 2
+	description = "Known to humens as brutal and violent fighters in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Blood Axe tribe."
 
 /datum/culture/species/half_orc/blackhammer
  	name = "Blackhammer"
@@ -89,7 +89,7 @@
 //osslandic origin tribe. hunters of osslanders?
 
 /datum/culture/species/half_orc/crescent_fang
- 	name = "Crescent Fang"
+	name = "Crescent Fang"
 	description = "Known to humens to live in the jungle between Grenzelhoft and Zaladin, hating both sides. They are isolationist and rarely engage in trade, preferring instead to take bounties from one of the warring nations to kill members of the other, or take payment to guide travelers across the jungle. They can also be found picking off undead that managed to get stranded in the jungle after Zizo's ascension."
 
 /datum/culture/species/half_orc/murkwater
