@@ -4,7 +4,7 @@
 	Ever since, you have lived in the Orphanage under the Matron's care. \
 	Will you make something of yourself, or will you die in the streets as a nobody?"
 	department_flag = YOUNGFOLK
-	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
+	job_flags = (JOB_ANNOUNCE_ARRIVAL|JOB_SHOW_IN_CREDITS|JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORPHAN
 	faction = FACTION_TOWN
 	allowed_ages = list(AGE_CHILD)
@@ -41,7 +41,7 @@
 
 	)
 
-/datum/job/advclass/bbrat
+/datum/job/advclass/orphan/bbrat
 	title = "Bookish Brat"
 	tutorial = "While the rest of the kids were off getting dirty, \
 	you were reading the dusty and often-ignored books the matron had \
@@ -51,6 +51,8 @@
 	outfit = /datum/outfit/advclass/bbrat
 	allowed_ages = list(AGE_CHILD)
 	category_tags = list(CTAG_ORPHAN)
+	inherit_parent_title = TRUE
+
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/advclass/bbrat
 
@@ -126,7 +128,7 @@
 		/datum/attribute/skill/combat/unarmed = 10
 	)
 
-/datum/job/advclass/rrascal
+/datum/job/advclass/orphan/rrascal
 	title= "Rambunctious Rascal"
 	tutorial = "Without you to lead them, your friends \
 	would spend all day holed up in workshops, the archives, or \
@@ -137,6 +139,8 @@
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/rrascal
 	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+
 
 /datum/job/orphan/rrascal/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -190,7 +194,7 @@
 		/datum/attribute/skill/misc/reading = 10,
 	)
 
-/datum/job/advclass/sscamp
+/datum/job/advclass/orphan/sscamp
 	title= "Skilled Scamp"
 	tutorial = "The matron has always told you you were her smartest scone, \
 	and you prove her right each day with your diligent, industrious ways.  The \
@@ -202,6 +206,8 @@
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/sscamp
 	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+
 
 /datum/job/orphan/scamp/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -248,7 +254,7 @@
 		/datum/attribute/skill/misc/stealing = 30,
 	)
 
-/datum/job/advclass/uurchin
+/datum/job/advclass/orphan/uurchin
 	title= "Unlawful Urchin"
 	tutorial = "Of all the children in the orphanage, you know \
 	you are the matron's favorite.  You move with the same silent, careful \
@@ -260,6 +266,8 @@
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/uurchin
 	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+
 
 /datum/job/orphan/uurchin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -305,7 +313,7 @@
 		/datum/attribute/skill/misc/athletics = 10,
 	)
 
-/datum/job/advclass/wwastrel
+/datum/job/advclass/orphan/wwastrel
 	title= "Weary Wastrel"
 	tutorial = "WARNING: THIS CLASS IS EXTREMELY DIFFICULT!  All the other \
 	children may be smart, fast, strong, or useful in some way, but not you.  \
@@ -316,6 +324,8 @@
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/wwastrel
 	allowed_ages = list(AGE_CHILD)
+	inherit_parent_title = TRUE
+
 
 /datum/job/orphan/wwastrel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
