@@ -117,7 +117,7 @@
 	name = "town basin"
 	icon_state = "basin"
 	soundenv = 19
-	ambush_times = list(NIGHT,DUSK)
+	ambush_times = list(DAWN,NIGHT,DUSK)
 	ambush_types = list(
 				/turf/open/floor/grass)
 	ambush_mobs = list(
