@@ -1,3 +1,25 @@
+/datum/attribute_holder/sheet/job/plaguebearer
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_PERCEPTION = 3,
+		STAT_CONSTITUTION = 3,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/carpentry = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/medicine = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/craft/alchemy = 50,
+		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/bombs = 30
+	)
+
 /datum/job/advclass/wretch/plaguebearer
 	title = "Plaguebearer"
 	tutorial = "A disgraced physician forced into exile and years of hardship, you have turned to a private practice surrounding the only things you've ever known - poisons and plague. Revel in the spreading of blight, and unleash craven pestilence."
@@ -6,29 +28,7 @@
 	outfit = /datum/outfit/wretch/plaguebearer
 	total_positions = 2
 
-	jobstats = list(
-		STATKEY_INT = 3,
-		STATKEY_PER = 3,
-		STATKEY_CON = 3
-	)
-
-	skills = list(
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/knives = 4,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/carpentry = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/medicine = 4,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/craft/alchemy = 5,
-		/datum/skill/labor/farming = 3,
-		/datum/skill/craft/bombs = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/plaguebearer
 
 	traits = list(
 		TRAIT_LEGENDARY_ALCHEMIST,

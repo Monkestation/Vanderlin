@@ -8,7 +8,7 @@
 	max_integrity = 200
 	var/datum/antagonist/overlord/linked_overlord
 	light_system = MOVABLE_LIGHT
-	light_outer_range = 2
+	light_range = 2
 	light_color = "#c92828"
 
 /obj/structure/overlord_phylactery/Destroy()

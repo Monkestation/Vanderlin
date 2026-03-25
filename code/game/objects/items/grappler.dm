@@ -88,15 +88,15 @@ Reel teleports the attached atom to the grabbed turf.
 
 /obj/item/grapplinghook/attack_self(mob/living/user)
 	if(!is_loaded && !in_use && user.used_intent != /datum/intent/reel)
-		var/stat = max(user.STASPD, user.STAPER)	//We check the PER / SPD stats first
+		var/stat = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED), GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION))	//We check the PER / SPD stats first
 		stat = stat - 10
 		if(stat > 0)
 			stat = stat * 3
-			if(user.STASTR > 11)	//Then we add their strength if they had any of the previous
-				stat += (user.STASTR - 10) * 2
+			if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) > 11)	//Then we add their strength if they had any of the previous
+				stat += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - 10) * 2
 		else
 			stat = 0
-		stat += (user.get_skill_level(/datum/skill/craft/engineering, TRUE)) * 5	//And finally their Engineering level.
+		stat += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)) * 5	//And finally their Engineering level.
 		stat = clamp(stat, 10, 70)	//Clamp to a very loud second just in case you're a superhuman engineer
 		if(!isloading)
 			user.visible_message(span_info("[user] begins cranking the [src]..."))

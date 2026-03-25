@@ -50,6 +50,8 @@
 	dismemberable = 1
 /obj/item/bodypart/l_leg/zizombie
 	dismemberable = 1
+/obj/item/bodypart/head/zizombie
+	sellprice = 5
 
 /obj/item/bodypart/head/zizombie/update_icon_dropped()
 	return
@@ -60,8 +62,6 @@
 /obj/item/bodypart/head/zizombie/skeletonize()
 	. = ..()
 	icon_state = "zizombie_head_s"
-	headprice = 2
-	sellprice = 2
 
 /mob/living/carbon/human/species/zizombie/update_body()
 	remove_overlay(BODY_LAYER)
@@ -98,16 +98,21 @@
 	. = ..()
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 
+/datum/attribute_holder/sheet/job/zizombie
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+	)
+
 /mob/living/carbon/human/species/zizombie/proc/configure_mind()
 	if(!mind)
 		mind = new /datum/mind(src)
+	attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie)
 
-	adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 
 /mob/living/carbon/human/species/zizombie/after_creation()
 	..()
@@ -118,8 +123,6 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/zizombie.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(15,40)
-			headdy.sellprice = rand(15,40)
 	src.grant_language(/datum/language/common)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -232,12 +235,16 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/zizombie/peasant
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 6
+	)
+
 /datum/outfit/species/zizombie/npc/peasant/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 9
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zombies shouldn't get tired after all
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/peasant)
 	H.recalculate_stats(FALSE)
 
 	shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
@@ -313,13 +320,15 @@
 	flee_in_pain = FALSE
 	wander = TRUE
 
+/datum/attribute_holder/sheet/job/zizombie/warrior
+	raw_attribute_list = list(
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 6
+	)
+
 /datum/outfit/species/zizombie/npc/warrior/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 10
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/warrior)
 
 	var/loadout = rand(1,6)
 	switch(loadout)
@@ -401,11 +410,7 @@
 
 /datum/outfit/species/zizombie/npc/militiamen/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 10
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 16//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/warrior)
 	var/loadout = rand(1,5)
 	switch(loadout)
 		if(1) //zizombie Warrior
@@ -479,14 +484,16 @@
 
 
 
+/datum/attribute_holder/sheet/job/zizombie/grenzel
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = -3,
+		STAT_ENDURANCE = 10
+	)
 
 /datum/outfit/species/zizombie/npc/GRENZEL/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 12
-	H.base_speed = 7
-	H.base_constitution = 10
-	H.base_endurance = 20//the zizombies shouldn't get tired after all
-	H.recalculate_stats(FALSE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizombie/grenzel)
 	var/loadout = rand(1,5)
 	switch(loadout)
 		if(1) //zizombie Warrior

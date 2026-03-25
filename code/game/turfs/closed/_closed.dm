@@ -180,9 +180,9 @@
 			var/amt2raise = 0
 			var/boon = 0
 			if(L.mind)
-				var/myskill = L.get_skill_level(/datum/skill/misc/climbing, TRUE)
-				amt2raise = floor(L.STAINT/2)
-				boon = L.get_learning_boon(/datum/skill/misc/climbing)
+				var/myskill = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/climbing)
+				amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2)
+				boon = L.get_learning_boon(/datum/attribute/skill/misc/climbing)
 				var/obj/structure/table/TA = locate() in L.loc
 				if(TA)
 					myskill += 1
@@ -199,7 +199,7 @@
 				if(myskill < climbdiff)
 					to_chat(user, "<span class='warning'>I'm not capable of climbing this.</span>")
 					return
-				used_time = max(70 - (myskill * 10) - (L.STASPD * 3), 30)
+				used_time = max(70 - (myskill * 10) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 3), 30)
 			if(user.m_intent != MOVE_INTENT_SNEAK)
 				playsound(user, climbsound, 100, TRUE)
 			user.visible_message("<span class='warning'>[user] starts to climb [src].</span>", "<span class='warning'>I start to climb [src]...</span>")
@@ -212,7 +212,7 @@
 				if(user.m_intent != MOVE_INTENT_SNEAK)
 					playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 				if(L.mind)
-					L.adjust_experience(/datum/skill/misc/climbing, floor(amt2raise * boon), FALSE)
+					L.adjust_experience(/datum/attribute/skill/misc/climbing, floor(amt2raise * boon), FALSE)
 	else
 		..()
 

@@ -150,7 +150,7 @@
 	var/datum/team/prebels/RT = mind_datum.rev_team
 	var/shittime = world.time
 	playsound_local(src, 'sound/misc/rebel.ogg', 100, FALSE)
-	var/garbaggio = alert(src, "[offer]","Rebellion", "Yes", "No")
+	var/garbaggio = tgui_alert(src, "[offer]","Rebellion", list("Yes", "No"))
 	if(world.time > shittime + 35 SECONDS)
 		to_chat(src,"<span class='danger'>Too late.</span>")
 		return

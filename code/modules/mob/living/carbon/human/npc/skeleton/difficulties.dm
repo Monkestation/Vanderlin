@@ -1,15 +1,116 @@
-// Ultra easy tier skeleton with no armor and just a single weapon.
+/datum/attribute_holder/sheet/job/skeleton_npc/supereasy
+	raw_attribute_list = list(
+		STAT_STRENGTH = 0,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = -6,
+		STAT_ENDURANCE = 0,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/shields = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
+/datum/attribute_holder/sheet/job/skeleton_npc/easy
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = -6,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
+/datum/attribute_holder/sheet/job/skeleton_npc/pirate
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = -6,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
+
+/datum/attribute_holder/sheet/job/skeleton_npc/medium
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = -4,
+		STAT_ENDURANCE = 0,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+	)
+
+/datum/attribute_holder/sheet/job/skeleton_npc/hard/khopesh
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = 2,
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+	)
+
+/datum/attribute_holder/sheet/job/skeleton_npc/hard/dreadknight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/swimming = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+	)
+
 /mob/living/carbon/human/species/skeleton/npc/supereasy
 	skel_outfit = /datum/outfit/job/skeleton/npc/supereasy
 
-
 /datum/outfit/job/skeleton/npc/supereasy/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 10
-	H.base_speed = 8
-	H.base_constitution = 4
-	H.base_endurance = 10
-	H.base_intelligence = 1
 	name = "Skeleton"
 	if(prob(50))
 		shirt = /obj/item/clothing/shirt/rags
@@ -29,30 +130,13 @@
 			r_hand = /obj/item/weapon/polearm/spear/bonespear
 		if(4)
 			r_hand = /obj/item/weapon/mace
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/supereasy)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-
-// Easy tier skeleton, with only incomplete chainmail and kilt
-// Ambushes people in "safe" route. A replacement for old skeletons that were effectively naked.
 /mob/living/carbon/human/species/skeleton/npc/easy
 	skel_outfit = /datum/outfit/job/skeleton/npc/easy
 
-
 /datum/outfit/job/skeleton/npc/easy/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 9
-	H.base_speed = 8
-	H.base_constitution = 4 // Same statblock as before easily killed
-	H.base_endurance = 12
-	H.base_intelligence = 1
 	name = "Skeleton Footsoldier"
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/chainlegs/kilt
@@ -67,30 +151,15 @@
 			r_hand = /obj/item/weapon/polearm/spear/bonespear
 		if(4)
 			r_hand = /obj/item/weapon/mace
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/easy)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-
-// Also an "easy" tier skeleton, pirate themed, with a free hand to grab you
 /mob/living/carbon/human/species/skeleton/npc/pirate
 	skel_outfit = /datum/outfit/job/skeleton/npc/pirate
 
 /datum/outfit/job/skeleton/npc/pirate/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 9
-	H.base_speed = 8
-	H.base_constitution = 4 // Same statblock as before easily killed
-	H.base_endurance = 12
-	H.base_intelligence = 1
 	name = "Skeleton Pirate"
-	head =  /obj/item/clothing/head/helmet/leather/tricorn
+	head = /obj/item/clothing/head/helmet/leather/tricorn
 	wrists = /obj/item/clothing/wrists/bracers/ancient
 	shirt = /obj/item/clothing/armor/chainmail/iron
 	pants = /obj/item/clothing/pants/tights/sailor
@@ -99,31 +168,15 @@
 		r_hand = /obj/item/weapon/knife/dagger
 	else
 		r_hand = /obj/item/weapon/knuckles
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/pirate)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-
-// Medium tier skeleton, 3 skills.
 /mob/living/carbon/human/species/skeleton/npc/medium
 	skel_outfit = /datum/outfit/job/skeleton/npc/medium
 
-
 /datum/outfit/job/skeleton/npc/medium/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 11
-	H.base_speed = 8
-	H.base_constitution = 6 // Slightly tougher now!
-	H.base_endurance = 10
-	H.base_intelligence = 1
 	name = "Skeleton Soldier"
-	cloak = /obj/item/clothing/cloak/heartfelt // Ooo Spooky Old Dead MAA
+	cloak = /obj/item/clothing/cloak/heartfelt
 	head = /obj/item/clothing/head/helmet/heavy/ancient
 	armor = /obj/item/clothing/armor/cuirass/copperchest
 	shirt = /obj/item/clothing/armor/chainmail/iron
@@ -133,7 +186,7 @@
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	gloves = /obj/item/clothing/gloves/chain
 	belt = /obj/item/storage/belt/leather/rope
-	if(prob(33)) // 33% chance of shield, so ranged don't get screwed over entirely
+	if(prob(33))
 		l_hand = /obj/item/weapon/shield/tower/metal/ancient
 	if(prob(33))
 		r_hand = /obj/item/weapon/polearm/spear/bonespear
@@ -141,32 +194,16 @@
 		r_hand = /obj/item/weapon/sword/gladius
 	else
 		r_hand = /obj/item/weapon/flail
+	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/medium)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-
-// High tier skeleton, 4 skills. Heavy Armor.
 /mob/living/carbon/human/species/skeleton/npc/hard
 	skel_outfit = /datum/outfit/job/skeleton/npc/hard
 
 /datum/outfit/job/skeleton/npc/hard/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.base_strength = 12
-	H.base_constitution = 8 // Woe, actual limb health.
-	H.base_endurance = 12
-	H.base_intelligence = 1
 	name = "Skeleton Dreadnought"
-	// This combines the khopesh  and withered dreadknight
 	var/skeletonclass = rand(1, 2)
-	if(skeletonclass == 1) // Khopesh Knight
-		H.base_speed = 12 // Hue
+	if(skeletonclass == 1)
 		cloak = /obj/item/clothing/cloak/heartfelt
 		mask = /obj/item/clothing/face/facemask/copper
 		armor = /obj/item/clothing/armor/cuirass/copperchest
@@ -178,8 +215,8 @@
 		gloves = /obj/item/clothing/gloves/chain/iron
 		r_hand = /obj/item/weapon/sword/sabre/cutlass
 		l_hand = /obj/item/weapon/sword/sabre/cutlass
-	else // Withered Dreadknight
-		H.base_speed = 8
+		H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/hard/khopesh)
+	else
 		cloak = /obj/item/clothing/cloak/tabard/blkknight
 		head = /obj/item/clothing/head/helmet/heavy/ironplate
 		armor = /obj/item/clothing/armor/plate/ancient
@@ -194,18 +231,8 @@
 			r_hand = /obj/item/weapon/sword/long/greatsword
 		else
 			r_hand = /obj/item/weapon/mace/goden
+		H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/hard/dreadknight)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-
-// For Duke Manor & Zizo Manor - Ground based spread, so no pirate in pool!
 /mob/living/carbon/human/species/skeleton/npc/mediumspread/Initialize()
 	var/outfit = rand(1, 4)
 	switch(outfit)
@@ -220,7 +247,7 @@
 	. = ..()
 
 /mob/living/carbon/human/species/skeleton/npc/hardspread/Initialize()
-	var/outfit = rand(1,4)
+	var/outfit = rand(1, 4)
 	switch(outfit)
 		if(1)
 			skel_outfit = /datum/outfit/job/skeleton/npc/hard

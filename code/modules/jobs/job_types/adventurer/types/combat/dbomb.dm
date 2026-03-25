@@ -1,3 +1,21 @@
+/datum/attribute_holder/sheet/job/dbomb
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/labor/mining = 10,
+		/datum/attribute/skill/craft/engineering = 50,
+		/datum/attribute/skill/craft/bombs = 40,
+		/datum/attribute/skill/craft/smelting = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
 /datum/job/advclass/combat/dbomb
 	title = "Dwarven Bombardier"
 	tutorial = "Tinkering Dwarves that like to blow things up."
@@ -5,25 +23,7 @@
 	outfit = /datum/outfit/adventurer/dbomb
 	category_tags = list(CTAG_ADVENTURER)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/labor/mining = 1,
-		/datum/skill/craft/engineering = 5,
-		/datum/skill/craft/bombs = 4,
-		/datum/skill/craft/smelting = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/misc/reading = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/dbomb
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

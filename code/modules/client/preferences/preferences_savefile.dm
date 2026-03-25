@@ -345,6 +345,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["skin_tone"] >> skin_tone
 	S["culture"] >> culture
 	S["underwear"] >> underwear
+	S["underwear_color"] >> underwear_color
 	S["accessory"] >> accessory
 	S["detail"] >> detail
 	S["randomise"] >> randomise

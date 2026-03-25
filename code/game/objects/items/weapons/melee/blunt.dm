@@ -23,7 +23,7 @@
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	parrysound = list('sound/combat/parry/parrygen.ogg')
@@ -386,7 +386,7 @@
 	wdefense = ULTMATE_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STANDARD
-	associated_skill = /datum/skill/combat/swords
+	associated_skill = /datum/attribute/skill/combat/swords
 	metalizer_result = /obj/item/weapon/sword/iron
 
 /obj/item/weapon/mace/woodclub/train_sword/getonmobprop(tag)

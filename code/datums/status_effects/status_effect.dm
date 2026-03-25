@@ -103,8 +103,7 @@
 /datum/status_effect/proc/on_apply()
 	SHOULD_CALL_PARENT(TRUE)
 
-	for(var/stat in effectedstats)
-		owner.set_stat_modifier("[id]", stat, effectedstats[stat])
+	owner.set_stat_modifier("[id]",effectedstats)
 
 	if(mob_overlay_icon && mob_overlay_icon_state)
 		mob_visual = build_mob_icon()
@@ -196,10 +195,12 @@
 
 	for(var/S in attached_effect?.effectedstats)
 		if(attached_effect.effectedstats[S] > 0)
-			inspec += "<br><span class='purple'>[S]</span> \Roman [attached_effect.effectedstats[S]]"
+			var/datum/attribute/attribute = GET_ATTRIBUTE_DATUM(S)
+			inspec += "<br><span class='purple'>[attribute?.name]</span> \Roman [attached_effect.effectedstats[S]]"
 		if(attached_effect.effectedstats[S] < 0)
 			var/newnum = attached_effect.effectedstats[S] * -1
-			inspec += "<br><span class='danger'>[S]</span> \Roman [newnum]"
+			var/datum/attribute/attribute = GET_ATTRIBUTE_DATUM(S)
+			inspec += "<br><span class='danger'>[attribute?.name]</span> \Roman [newnum]"
 
 	inspec += "<br>----------------------"
 	to_chat(user, "[inspec.Join()]")

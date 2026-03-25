@@ -7,7 +7,7 @@
 	has_initial_mana_pool = TRUE
 	plane = GAME_PLANE_UPPER
 	layer = ABOVE_MOB_LAYER
-	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = COLOR_CYAN
 	density = TRUE
 
@@ -29,7 +29,7 @@
 /obj/structure/mana_pylon/Initialize(mapload, ...)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
-	set_light(1.4, 1.4, 0.75, l_color = COLOR_CYAN)
+	set_light(1.4, 0.75, l_color = COLOR_CYAN)
 
 /obj/structure/mana_pylon/Destroy()
 	if(linked_pylon)

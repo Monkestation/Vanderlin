@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/basic,
-/area)
+/area/empty_space)
 "c" = (
 /obj/structure/stockpile_storage/metal,
 /turf/open/floor/cobblerock,

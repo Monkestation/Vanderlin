@@ -5,7 +5,7 @@
 	icon_state = "lottery"
 	density = FALSE
 	pixel_y = 32
-	light_outer_range = 5
+	light_range = 5
 	light_color = "#1b7bf1"
 
 	// Gambling variables
@@ -101,7 +101,7 @@
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 	playsound(src, 'sound/misc/letsgogambling.ogg', 100, FALSE, -1)
 
-	gamblingprob += (user.STALUC - probpenalty)
+	gamblingprob += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - probpenalty)
 	stopgambling = 1
 	checkchatter -= 1
 

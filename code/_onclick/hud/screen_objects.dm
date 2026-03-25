@@ -91,13 +91,13 @@
 /atom/movable/screen/skills/Click(location, control, params)
 	var/list/modifiers = params2list(params)
 
+
 	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 		if(ishuman(usr))
 			var/mob/living/L = usr
 			var/datum/language_holder/H = L.get_language_holder()
 			H.open_language_menu(usr)
 			return
-
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/ht
 		var/mob/living/L = usr
@@ -125,9 +125,13 @@
 		to_chat(L, "*----*")
 		return
 
+	if(!LAZYACCESS(modifiers, CTRL_CLICKED))
+		usr.attributes?.ui_interact(usr)
+		return
+
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		H.print_levels(H)
+		H.print_skill_levels(H)
 
 /atom/movable/screen/craft
 	name = "crafting menu"
@@ -144,8 +148,7 @@
 		var/mob/M = usr
 		for(var/datum/recipe as anything in M.mind?.learned_recipes)
 			book.types |= recipe.type
-		book.generate_categories()
-		usr << browse(book.generate_html(usr),"window=recipe;size=800x810")
+		book.ui_interact(usr)
 		return
 	if(world.time < lastclick + 3 SECONDS)
 		return
@@ -1551,10 +1554,12 @@
 			if(!length(M.stressors))
 				to_chat(M, span_info("I'm not feeling much of anything right now."))
 			for(var/datum/stress_event/stress_event in M.stressors)
-				if(!stress_event.can_show())
+				if(!stress_event.can_show(M))
 					continue
 				var/count = stress_event.stacks
-				var/ddesc = islist(stress_event.desc) ? pick(stress_event.desc) : stress_event.desc
+				var/ddesc = stress_event.get_desc(M)
+				if(islist(ddesc))
+					ddesc = pick(ddesc)
 				if(count > 1)
 					to_chat(M, "• [ddesc] (x[count])")
 				else
@@ -1564,7 +1569,7 @@
 			if(M.get_triumphs() <= 0)
 				to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
 				return
-			if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
+			if(tgui_alert(M, "Do you want to remember a TRIUMPH?", "Remember TRIUMPH", list("Yes", "No")) == "Yes")
 				if(M.add_stress(/datum/stress_event/triumph))
 					M.adjust_triumphs(-1)
 					M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
@@ -1727,13 +1732,13 @@
 
 /atom/movable/screen/time/update_name()
 	switch(GLOB.tod)
-		if("day")
+		if(DAY)
 			name = "Astrata"
-		if("dusk")
+		if(DUSK)
 			name = "Astrata - Dusk"
-		if("night")
+		if(NIGHT)
 			name = "Noc"
-		if("dawn")
+		if(DAWN)
 			name = "Astrata - Dawn"
 	return ..()
 

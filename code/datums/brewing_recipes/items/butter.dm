@@ -9,6 +9,7 @@
 	start_verb = "churning"
 	brewed_item_count = 2
 	pre_reqs = /datum/reagent/consumable/milk/salted
+	brewing_skill = /datum/attribute/skill/craft/cooking/cheesemaking
 
 /datum/brewing_recipe/butter/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
 	if(brewed_item)
@@ -23,7 +24,7 @@
 	user.visible_message(span_info("[user] churns butter..."))
 	playsound(src, 'sound/foley/butterchurn.ogg', 100, TRUE, -1)
 
-	if(!do_after(user, (10 SECONDS - (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 9)), source))
+	if(!do_after(user, (10 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 9)), source))
 		return FALSE
 	user.adjust_stamina(25)
 	user.nobles_seen_servant_work()

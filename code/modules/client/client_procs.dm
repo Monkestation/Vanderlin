@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/title = href_list["id"]
 		if(!title)
 			return
-		if(alert("Are you sure you want to delete the painting '[title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
+		if(tgui_alert(src, "Are you sure you want to delete the painting '[title]'?", "Confirm Deletion", list("Yes", "No")) == "Yes")
 			if(SSpaintings.del_player_painting(title))
 				message_admins("[key_name_admin(src)] has deleted player made painting called: '[title]'")
 				SSpaintings.update_paintings()
@@ -217,7 +217,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(!title)
 			return
 		var/real_title = url_decode(title)
-		if(alert("Are you sure you want to delete the book '[real_title]'?", "Confirm Deletion", "Yes", "No") == "Yes")
+		if(tgui_alert(src, "Are you sure you want to delete the book '[real_title]'?", "Confirm Deletion", list("Yes", "No")) == "Yes")
 			if(SSlibrarian.del_player_book(title, author))
 				message_admins("[key_name_admin(src)] has deleted player made book called: '[real_title]' by [author]")
 				manage_books()
@@ -311,7 +311,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(commendedsomeone)
 		return
 	if(!intentional)
-		if(browser_alert(src, "DOES ANY SOUL DESERVE COMMENDATION?", "THE CURTAINS CLOSE", reverseRange(DEFAULT_INPUT_CHOICES), 20 SECONDS) != CHOICE_YES)
+		if(tgui_alert(src, "DOES ANY SOUL DESERVE COMMENDATION?", "THE CURTAINS CLOSE", reverseRange(DEFAULT_INPUT_CHOICES), 20 SECONDS) != CHOICE_YES)
 			return
 	var/list/selections = GLOB.character_ckey_list.Copy()
 	if(!selections.len)
@@ -331,7 +331,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			selection_w_title["[real_name], [H.get_role_title()]"] = ckey
 	if(!selection_w_title)
 		ASYNC {
-			browser_alert(src, "this dude really playing VANDERLIN all by themself lmfaoooo")
+			tgui_alert(src, "this dude really playing VANDERLIN all by themself lmfaoooo")
 		}
 	var/selection = browser_input_list(src, "WHO RECIEVES YOUR COMMENDATION?", null, shuffle(selection_w_title), pick(selection_w_title))
 	if(!selection)
@@ -341,7 +341,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	var/theykey = selection_w_title[selection]
 	if(theykey == ckey)
 		ASYNC {
-			browser_alert(src,"YOU MAY NOT COMMEND YOURSELF", "THE EGO")
+			tgui_alert(src,"YOU MAY NOT COMMEND YOURSELF", "THE EGO")
 		}
 		return
 	if(theykey)

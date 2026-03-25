@@ -74,7 +74,7 @@
 		var/atom/boots = parent
 		if(istype(attacking_item, /obj/item/weapon/knife) && ishuman(boots?.loc))
 			var/mob/living/carbon/human/unlucky = boots.loc
-			if(unlucky.shoes == parent && prob(40 - max((unlucky.STALUC * 4), 0)))
+			if(unlucky.shoes == parent && prob(40 - max((GET_MOB_ATTRIBUTE_VALUE(unlucky, STAT_FORTUNE) * 4), 0)))
 				var/cached_aim = user.zone_selected
 				user.zone_selected = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 				unlucky.attackby(attacking_item, user, modifiers)
@@ -185,3 +185,20 @@
 		to_chat(M, span_warning("\the [I] is stuck to your hand, you can't put it in \the [host]!"))
 		return FALSE
 	return TRUE
+
+
+/datum/component/storage/concrete/keyrack
+	screen_max_rows = 2
+	screen_max_columns = 10
+	display_numerical_stacking = TRUE
+	max_items = 20
+	max_w_class = WEIGHT_CLASS_SMALL
+	collection_mode = COLLECT_ONE
+	insert_verb = "slide"
+	insert_preposition = "on"
+	rustle_sound = 'sound/items/gems (1).ogg'
+	silent = TRUE
+
+/datum/component/storage/concrete/keyrack/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/key, /obj/item/storage/keyring, /obj/item/lockpick, /obj/item/lockpickring))

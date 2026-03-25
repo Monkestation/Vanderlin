@@ -9,7 +9,7 @@
 	cast_range = 5
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	attunements = list(
 		/datum/attunement/earth = 1,
@@ -71,7 +71,7 @@
 	cast_on.tamed(owner)
 
 	if(HAS_TRAIT(owner, TRAIT_DENDOR_GROWING))
-		ADD_TRAIT(cast_on, TRAIT_ENTANGLER_IMMUNE, MAGIC_TRAIT)
+		ADD_TRAIT(cast_on, TRAIT_ENTANGLER_IMMUNITY, MAGIC_TRAIT)
 	if(HAS_TRAIT(owner, TRAIT_DENDOR_STINGING))
 		ADD_TRAIT(cast_on, TRAIT_KNEESTINGER_IMMUNITY, MAGIC_TRAIT)
 	if(HAS_TRAIT(owner, TRAIT_DENDOR_DEVOURING))

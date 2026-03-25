@@ -188,11 +188,6 @@
 	icon_state = "rustkey"
 	lockids = list(ACCESS_ELDER)
 
-/obj/item/key/veteran
-	name = "veteran's key"
-	icon_state = "rustkey"
-	lockids = list(ACCESS_VETERAN)
-
 /obj/item/key/feldsher
 	name = "feldsher's key"
 	desc = "The key to the Feldsher's own clinic."
@@ -237,7 +232,12 @@
 	icon_state = "cheesekey"
 	lockids = list(ACCESS_CAPTAIN)
 
-// Other
+/// Mercs
+
+/obj/item/key/tombwarden
+	name = "warden's key"
+	icon_state = "rustkey"
+	lockids = list(ACCESS_TOMBWARDEN)
 
 /obj/item/key/mercenary
 	name = "mercenary key"
@@ -245,17 +245,23 @@
 	icon_state = "greenkey"
 	lockids = list(ACCESS_MERC)
 
-/obj/item/key/gaffer
-	name = "Mercenary guild master's key"
-	desc = "\"Humble\" would be a kinder word to use for its current state..."
-	icon_state = "rustkey"
-	lockids = list(ACCESS_GAFFER)
+/obj/item/key/tomb
+	name = "delver's key"
+	desc = span_red("Down we go...")
+	icon_state = "tombkey"
+	lockids = list(ACCESS_TOMB)
 
 /obj/item/key/warehouse
 	name = "Warehouse key"
 	desc = "This key opens the Steward's warehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_WAREHOUSE)
+
+/obj/item/key/bogwitch
+	name = "bogwitch key"
+	desc = "This key opens the Bog Witch's hut."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_BOGWITCH)
 
 ////// MANOR
 

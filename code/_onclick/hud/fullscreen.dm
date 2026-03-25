@@ -133,6 +133,16 @@
 	. = ..()
 	animate(src, alpha = 255, time = 30)
 
+/atom/movable/screen/fullscreen/briar
+	icon_state = "briarhud"
+	layer = 20.509
+	plane = FULLSCREEN_PLANE
+	alpha = 0
+
+/atom/movable/screen/fullscreen/briar/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	animate(src, alpha = 255, time = 30)
+
 /atom/movable/screen/fullscreen/crit
 	icon_state = "passage"
 	layer = 20.51
@@ -162,7 +172,7 @@
 	if(isliving(usr))
 		var/mob/living/L = usr
 		if(L.stat != DEAD)
-			if(alert("Are you done living?", "", "Yes", "No") == "Yes")
+			if(tgui_alert(L, "Are you done living?", "", list("Yes", "No")) == "Yes")
 				L.succumb(reaper = TRUE)
 
 /atom/movable/screen/fullscreen/crit/death
@@ -296,8 +306,8 @@
 	//color = SSoutdoor_effects.last_color
 
 /atom/movable/screen/fullscreen/lighting_backdrop/sunlight/Destroy()
-	. = ..()
 	SSoutdoor_effects.sunlighting_planes -= src
+	return ..()
 
 /atom/movable/screen/fullscreen/astral_border
 	icon = 'icons/mob/screens/vampire.dmi'

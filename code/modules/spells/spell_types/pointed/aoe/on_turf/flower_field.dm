@@ -371,7 +371,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/calendula_sedation
 	duration = -1
 	tick_interval = 10
-	effectedstats = list(STATKEY_SPD = -2, STATKEY_STR = -1, STATKEY_END = 1)
+	effectedstats = list(STAT_SPEED = -2, STAT_STRENGTH = -1, STAT_ENDURANCE = 1)
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "calendula_overlay"
 	field_path = /obj/structure/flora/field/calendula
@@ -448,7 +448,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/matricaria_remedy
 	duration = -1
 	tick_interval = 10
-	effectedstats = list(STATKEY_SPD = -3)
+	effectedstats = list(STAT_SPEED = -3)
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "matricaria_overlay"
 	field_path = /obj/structure/flora/field/matricaria
@@ -477,7 +477,7 @@
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "poppy_overlay"
 	field_path = /obj/structure/flora/field/poppy
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = -2, STATKEY_PER = -2, STATKEY_INT = -2)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2)
 
 /datum/status_effect/debuff/poppy_arena/on_apply()
 	. = ..()

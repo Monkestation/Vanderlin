@@ -85,6 +85,7 @@
 	alpha = 173
 
 /datum/reagent/medicine/gender_potion/on_mob_life(mob/living/carbon/M)
+	var/old_gender
 	if(!istype(M) || M.stat == DEAD)
 		to_chat(M, span_warning("The potion can only be used on living things!"))
 		return
@@ -92,11 +93,14 @@
 		to_chat(M, span_warning("The potion can only be used on gendered things!"))
 		return
 	if(M.gender == MALE)
+		old_gender = MALE
 		M.gender = FEMALE
 		M.visible_message(span_boldnotice("[M] suddenly looks more feminine!"), span_boldwarning("You suddenly feel more feminine!"))
 	else
+		old_gender = FEMALE
 		M.gender = MALE
 		M.visible_message(span_boldnotice("[M] suddenly looks more masculine!"), span_boldwarning("You suddenly feel more masculine!"))
+	M.dna?.species?.on_gender_update(M, old_gender)
 	M.regenerate_icons()
 	..()
 
@@ -206,7 +210,7 @@
 	taste_description = "raw meat"
 	scent_description = "sour vomit"
 
-/datum/reagent/buff/strength/on_mob_add(mob/living/carbon/M)
+/datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
 	if(M.has_reagent(/datum/reagent/buff/strength, 4))
@@ -373,7 +377,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
 		return ..()
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
-		M.add_nausea(10 * (1 - M.STACON / 20))
+		M.add_nausea(10 * (1 - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) / 20))
 		M.adjustToxLoss(0.5)
 	if(ishuman(M) && !ishalforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
@@ -390,7 +394,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
 					bp?.lingering_pain += 10
-					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, reduce_crit = 10)
+					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12, null, BODY_ZONE_CHEST, crit_message = FALSE, modifiers = list(CRIT_MOD_CHANCE = -10))
 					M.do_jitter_animation(100)
 				if(60)
 					M.do_jitter_animation(150)
@@ -503,6 +507,52 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 /datum/reagent/killersice/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.adjustToxLoss(5)
+	return ..()
+
+/datum/reagent/drowsbane
+	name = "Drowsbane"
+	description = ""
+	reagent_state = LIQUID
+	color = "#810e0e"
+	taste_description = "each tastebud individually burning to a crisp"
+	scent_description = "brimstone"
+	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	var/tox = 1
+	var/oxy = 5
+
+/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M)
+	if(volume > 0.09)
+		if(istiefling(M))
+			M.adjustBruteLoss(-1*REM)
+			M.adjustFireLoss(-1*REM)
+			if(volume >= 25)
+				M.remove_reagent(/datum/reagent/drowsbane, 5) //Incase you eat like, five drowsbane clusters to get infinite healing.
+			if(prob(10))
+				to_chat(M, span_notice("Something inside me burns, it's rejuvenating!"))
+		if(isdarkelf(M) || ishalfdrow(M))
+			M.adjustToxLoss(tox)
+			M.adjustOxyLoss(oxy) //For dark elves this should be lethal if you take 5u or more. Don't eat spicy food. Relatively harmless in lower amounts because it heals itself.
+			if(prob(10))
+				M.adjust_eye_blur(4 SECONDS)
+				to_chat(M, span_warning("My eyes water..."))
+				M.emote("cough")
+			if(prob(10))
+				M.emote("gasp")
+				to_chat(M, span_warning("My throat feels like it's on fire!"))
+		else
+			M.adjustOxyLoss(oxy/2) //This should mean 10u puts you right on the edge of crit
+			if(prob(10))
+				to_chat(M, span_warning("My tongue feels like its on fire!"))
+			if(volume > 5)
+				if(prob(10))
+					M.adjust_eye_blur(4 SECONDS)
+					to_chat(M, span_warning("My eyes water..."))
+					M.emote("cough")
+				if(prob(10))
+					M.emote("gasp")
+					to_chat(M, span_warning("My throat feels like it's on fire!"))
+			if(prob(5))
+				to_chat(M, span_warning("My tongue feels like its on fire!"))
 	return ..()
 
 /*----------\

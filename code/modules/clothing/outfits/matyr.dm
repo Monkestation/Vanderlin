@@ -107,7 +107,7 @@
 /datum/status_effect/debuff/lost_naledi_mask
 	id = "naledimask"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/naledimask
-	effectedstats = list(STATKEY_END = -3, STATKEY_LCK = -3)
+	effectedstats = list(STAT_ENDURANCE = -3, STAT_FORTUNE = -3)
 
 /atom/movable/screen/alert/status_effect/debuff/naledimask
 	name = "Lost Mask"
@@ -158,6 +158,9 @@
 	icon_state = "exoticsilkmask"
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/silk
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 	toggle_icon_state = FALSE

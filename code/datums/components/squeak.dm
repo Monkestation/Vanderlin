@@ -83,6 +83,8 @@
 		var/mob/living/living_arrived = AM
 		if(living_arrived.mob_size < MOB_SIZE_HUMAN)
 			return
+		if(living_arrived.m_intent == MOVE_INTENT_SNEAK)
+			return
 	var/atom/current_parent = parent
 	if(isturf(current_parent.loc))
 		play_squeak()

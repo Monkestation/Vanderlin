@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 		return
 	var/datum/antagonist/zizocultist/PR = user.mind.has_antag_datum(/datum/antagonist/zizocultist)
-	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
+	var/alert = tgui_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
 	target.Immobilize(3 SECONDS)
 	if(alert == "Yield")
 		to_chat(target, span_notice("I see the truth now! It all makes so much sense! They aren't HERETICS! They want the BEST FOR US!"))
@@ -493,7 +493,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!(mage.mana_pool?.intrinsic_recharge_sources & MANA_ALL_LEYLINES))
 		return
 	mage.gib()
-	cultist.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
+
+	cultist.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 40))
 	cultist.adjust_spell_points(18)
 	cultist.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	cultist.generate_random_attunements(rand(6, 8))
@@ -566,8 +567,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
-	target.change_stat(STATKEY_STR, -2)
-	target.change_stat(STATKEY_CON, -3)
+	target.change_stat(STAT_STRENGTH, -2)
+	target.change_stat(STAT_CONSTITUTION, -3)
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
@@ -596,9 +597,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_STR, -3)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_SPD, -4)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_END, -4)
+	target.adjust_stat_modifier(STATMOD_ABOM, list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	))
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)

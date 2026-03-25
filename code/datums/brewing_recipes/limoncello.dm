@@ -8,3 +8,4 @@
 	brew_time = 3 MINUTES
 	sell_value = 66
 	heat_required = 360
+	brewing_skill = /datum/attribute/skill/craft/cooking/distilling

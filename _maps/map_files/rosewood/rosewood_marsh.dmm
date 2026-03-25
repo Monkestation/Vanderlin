@@ -25,13 +25,6 @@
 	},
 /turf/closed/wall/mineral/tent,
 /area/indoors/mountains)
-"ae" = (
-/obj/structure/gate/bars/preopen{
-	gid = "Marshgate";
-	redstone_id = "Marshgate"
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/bog)
 "af" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/naturalstone,
@@ -1386,6 +1379,12 @@
 	},
 /turf/open/floor/church/purple,
 /area/indoors/lich)
+"hS" = (
+/obj/effect/decal/borderfall{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/bog)
 "hU" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood/darker,
@@ -1677,9 +1676,6 @@
 /obj/structure/forcefield/strong,
 /turf/closed,
 /area/indoors/lich)
-"jA" = (
-/turf/open/water/clean,
-/area/indoors/cave)
 "jB" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -2219,6 +2215,16 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile,
 /area/indoors/lich)
+"nl" = (
+/obj/structure/winch{
+	redstone_id = "Marshgate"
+	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32;
+	pixel_x = 0
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/bog)
 "nm" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -2469,6 +2475,12 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobble,
 /area/indoors/lich)
+"oy" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "Marshgate"
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/bog)
 "oz" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/ruinedwood,
@@ -2795,12 +2807,6 @@
 /obj/structure/hotspring/border/two,
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/bog)
-"qT" = (
-/obj/effect/decal/borderfall{
-	dir = 8
-	},
-/turf/open/openspace,
-/area/indoors/lich)
 "qU" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood,
@@ -3098,6 +3104,36 @@
 "sL" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock/alt,
+/area/indoors/lich)
+"sO" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/coin/gold/pile,
+/obj/item/clothing/shoes/boots/armor/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/gloves/chain/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/gloves/chain/ancient{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/armor/cuirass/vampire{
+	name = "Zizo's Chosen Armor"
+	},
+/obj/item/clothing/head/vampire{
+	name = "Crown of Murder";
+	desc = "A crown made of pure void, the red gems imbedded into the strange metal looks like eyes..."
+	},
+/obj/item/weapon/sword/sabre/stalker{
+	name = "Murder"
+	},
+/obj/item/coin/silver/pile,
+/obj/item/ingot/silver,
+/obj/item/ingot/silver,
+/obj/item/clothing/ring/gold/dorpel,
+/obj/item/gem/green,
+/obj/item/clothing/ring/silver,
+/turf/open/floor/church/purple,
 /area/indoors/lich)
 "sS" = (
 /obj/structure/fluff/railing/border{
@@ -4143,36 +4179,6 @@
 /obj/item/chair/stool,
 /turf/open/floor/grass/cold,
 /area/outdoors/bog)
-"yk" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/coin/gold/pile,
-/obj/item/clothing/shoes/boots/armor/ancient{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/gloves/chain/ancient{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/gloves/chain/ancient{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/armor/cuirass/vampire{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/head/vampire{
-	name = "Crown of Murder";
-	desc = "A crown made of pure void, the red gems imbedded into the strange metal looks like eyes..."
-	},
-/obj/item/weapon/sword/sabre/stalker{
-	name = "Murder"
-	},
-/obj/item/coin/silver/pile,
-/obj/item/ingot/silver,
-/obj/item/ingot/silver,
-/obj/item/clothing/ring/gold/dorpel,
-/obj/item/gem/green,
-/obj/item/clothing/ring/silver,
-/turf/open/floor/church/purple,
-/area/indoors/lich)
 "yn" = (
 /obj/structure/hotspring/border/thirteen,
 /turf/open/floor/cobblerock/alt,
@@ -4384,17 +4390,6 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
-"zF" = (
-/obj/structure/winch{
-	redstone_id = "Marshgate";
-	gid = "Marshgate"
-	},
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32;
-	pixel_x = 0
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/bog)
 "zG" = (
 /obj/structure/closet/crate/chest/crafted,
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener,
@@ -5741,6 +5736,12 @@
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/tile/kitchen,
 /area/indoors/lich)
+"GZ" = (
+/obj/effect/decal/borderfall{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/outdoors/bog)
 "Hb" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/zizo,
@@ -7239,12 +7240,6 @@
 /obj/structure/window,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
-"Qe" = (
-/obj/effect/decal/borderfall{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/bog)
 "Qg" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/cobblerock,
@@ -7336,12 +7331,6 @@
 	dir = 4
 	},
 /turf/open/floor/churchmarble,
-/area/outdoors/bog)
-"QR" = (
-/obj/effect/decal/borderfall{
-	dir = 4
-	},
-/turf/open/floor/cobble,
 /area/outdoors/bog)
 "QS" = (
 /obj/structure/bookcase,
@@ -7995,6 +7984,12 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
+"UQ" = (
+/obj/effect/decal/borderfall{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/indoors/lich)
 "US" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
@@ -8764,6 +8759,9 @@
 /obj/structure/bars/cemetery,
 /turf/open/water/swamp,
 /area/outdoors/bog)
+"ZR" = (
+/turf/open/water/clean,
+/area/indoors/cave)
 "ZV" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -78810,8 +78808,8 @@ JF
 JF
 JF
 JF
-jA
-jA
+ZR
+ZR
 JF
 JF
 JF
@@ -79011,10 +79009,10 @@ JF
 JF
 JF
 JF
-jA
-jA
-jA
-jA
+ZR
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -79212,11 +79210,11 @@ JF
 JF
 JF
 JF
-jA
-jA
+ZR
+ZR
 XD
-jA
-jA
+ZR
+ZR
 JF
 JF
 JF
@@ -79412,14 +79410,14 @@ WT
 WT
 JF
 JF
-jA
-jA
-jA
-jA
+ZR
+ZR
+ZR
+ZR
 XD
 XD
-jA
-jA
+ZR
+ZR
 JF
 JF
 JF
@@ -79613,8 +79611,8 @@ WT
 WT
 WT
 JF
-jA
-jA
+ZR
+ZR
 JF
 JF
 XD
@@ -79622,9 +79620,9 @@ Vs
 XD
 XD
 JF
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -79816,16 +79814,16 @@ WT
 WT
 JF
 JF
-jA
-jA
-jA
+ZR
+ZR
+ZR
 XD
 XD
 YZ
 XD
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -80019,17 +80017,17 @@ WT
 JF
 JF
 JF
-jA
-jA
-jA
-jA
+ZR
+ZR
+ZR
+ZR
 XD
 JK
 XD
 XD
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -80220,20 +80218,20 @@ WT
 WT
 JF
 JF
-jA
-jA
+ZR
+ZR
 JF
 JF
-jA
-jA
+ZR
+ZR
 XD
 XD
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
-jA
-jA
+ZR
+ZR
 JF
 JF
 JF
@@ -80427,14 +80425,14 @@ JF
 JF
 JF
 JF
-jA
+ZR
 XD
-jA
-jA
-jA
-jA
-jA
-jA
+ZR
+ZR
+ZR
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -80627,13 +80625,13 @@ JF
 JF
 JF
 JF
-jA
-jA
-jA
-jA
-jA
-jA
-jA
+ZR
+ZR
+ZR
+ZR
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -80830,11 +80828,11 @@ JF
 JF
 JF
 JF
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
-jA
+ZR
 JF
 JF
 JF
@@ -81034,9 +81032,9 @@ JF
 JF
 JF
 JF
-jA
-jA
-jA
+ZR
+ZR
+ZR
 JF
 JF
 JF
@@ -114937,10 +114935,10 @@ uw
 uw
 dE
 dE
-qT
-qT
-qT
-qT
+UQ
+UQ
+UQ
+UQ
 dE
 dE
 uw
@@ -118662,8 +118660,8 @@ GS
 ex
 ex
 vJ
-QR
-QR
+GZ
+GZ
 IC
 IC
 IC
@@ -119627,7 +119625,7 @@ bD
 bD
 Av
 Av
-ae
+oy
 bD
 Av
 bD
@@ -119672,7 +119670,7 @@ ex
 ex
 GS
 vJ
-Qe
+hS
 IC
 IC
 IC
@@ -120232,7 +120230,7 @@ bD
 Av
 Av
 bD
-zF
+nl
 ye
 od
 od
@@ -123410,7 +123408,7 @@ mY
 uY
 jz
 jz
-yk
+sO
 Kb
 PY
 Bv

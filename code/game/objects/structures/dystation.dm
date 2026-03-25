@@ -70,7 +70,7 @@
 		return
 
 
-	if(!(I.sewrepair || I.dyeable)) // ????
+	if(!(I.dyeable)) // ????
 		if(I.force < 8) // ?????????
 			to_chat(user, span_warning("I do not think \the [I] can be dyed this way."))
 		return ..()
@@ -198,7 +198,7 @@
 		span_warning("I hear a loud bang!") \
 	)
 
-	if(prob(user.STASTR * 8))
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 		deconstruct(FALSE)
 
 /*	.................   Dyes   ................... */

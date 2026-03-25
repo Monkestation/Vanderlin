@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/longbeard
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2, // Same stat spread as lancer/swordmaster, but no -1 speed at the cost of 1 point of endurance. A very powerful dwarf indeed
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/armorsmithing = 20,
+		/datum/attribute/skill/craft/weaponsmithing = 20,
+		/datum/attribute/skill/misc/reading = 20,
+	)
+
 /datum/job/advclass/combat/longbeard
 	title = "Longbeard"
 	tutorial = "You've earned your place as one of the old grumblers, a pinnacle of tradition, justice, and willpower. You've come to establish order in these lands, and with your hammer of grudges you'll see it through."
@@ -8,26 +27,7 @@
 	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
-	skills = list(
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/blacksmithing = 2,
-		/datum/skill/craft/armorsmithing = 2,
-		/datum/skill/craft/weaponsmithing = 2,
-		/datum/skill/misc/reading = 2,
-	)
-
-	jobstats = list(
-		STATKEY_STR = 2, // Same stat spread as lancer/swordmaster, but no -1 speed at the cost of 1 point of endurance. A very powerful dwarf indeed
-		STATKEY_CON = 2,
-		STATKEY_END = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/longbeard
 
 	traits = list(
 		TRAIT_HEAVYARMOR,

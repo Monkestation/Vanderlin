@@ -46,10 +46,10 @@
 					choice = /obj/item/weapon/whip/psydon/relic
 				if("Sanctum - Silver Halberd")
 					choice = /obj/item/weapon/polearm/halberd/psydon/relic
-					user.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)	//We make sure the weapon is usable by the Inquisitor.
+					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)	//We make sure the weapon is usable by the Inquisitor.
 				if("Crusade - Silver Greatsword")
 					choice = /obj/item/weapon/sword/long/greatsword/psydon
-					user.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)		//Ditto.
+					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)		//Ditto.
 				if("Censer of Penitence")
 					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
 			to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
@@ -202,7 +202,7 @@
 	id = "censer"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/censerbuff
 	duration = 15 MINUTES
-	effectedstats = list(STATKEY_END = 1, STATKEY_CON = 1)
+	effectedstats = list(STAT_ENDURANCE = 1, STAT_CONSTITUTION = 1)
 
 /datum/stress_event/syoncalamity
 	stress_change = 15
@@ -240,7 +240,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psycenser"
 	item_state = "psycenser"
-	light_outer_range = 8
+	light_range = 8
 	light_color ="#70d1e2"
 	possible_item_intents = list(/datum/intent/flail/strike/smash/golgotha)
 	fuel = 999 MINUTES
@@ -538,7 +538,7 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(!full)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(browser_alert(user, "EMPTY THE INDEXER?", "INDEXING...", "YES", "NO") != "NO")
+	if(tgui_alert(user, "EMPTY THE INDEXER?", "INDEXING...", list("YES", "NO")) != "NO")
 		playsound(src, 'sound/items/indexer_empty.ogg', 75, FALSE, 3)
 		visible_message(span_warning("[src] boils its contents away!"))
 		fullreset(user)
@@ -1214,7 +1214,7 @@
 		return
 
 	if(!active)
-		var/input = browser_alert(user, "WHAT DO YOU SEEK?", "THE PRICE IS PAID", list("BLOOD", "FIXATION"))
+		var/input = tgui_alert(user, "WHAT DO YOU SEEK?", "THE PRICE IS PAID", list("BLOOD", "FIXATION"))
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
 
@@ -1385,7 +1385,7 @@
 		return
 
 	var/datum/weakref/lookat = null
-	if(alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", "BLOOD", "MIRROR") != "BLOOD")
+	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
 		lookat = source
 	else
 		lookat = source.feeder

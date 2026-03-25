@@ -118,8 +118,8 @@
 	smeltresult = /obj/item/ingot/copper
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/skill/craft/armorsmithing
-	sewrepair = FALSE
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
 
 //Queensleeves
 /obj/item/clothing/wrists/royalsleeves

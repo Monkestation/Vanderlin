@@ -19,8 +19,8 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 8 SECONDS
 	surgery_flags = SURGERY_INCISED
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_APPRENTICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 	preop_sound = 'sound/surgery/cautery1.ogg'
 	success_sound = 'sound/surgery/cautery2.ogg'
 
@@ -34,7 +34,7 @@
 /datum/surgery_step/burn_rot/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/burndam = 20
 	if(user.mind)
-		burndam -= (user.get_skill_level(/datum/skill/misc/medicine, TRUE) * 3)
+		burndam -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) * 3)
 	var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
 	var/has_rot = was_zombie
 	if(!has_rot && iscarbon(target))

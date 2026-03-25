@@ -3,7 +3,7 @@
 	desc = "Draw upon the secrets of the hidden firmament to converse with the mooncursed."
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	has_visual_effects = TRUE
 
@@ -15,7 +15,7 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 	// only usable at night
-	if (!GLOB.tod == "night")
+	if (!GLOB.tod == NIGHT)
 		to_chat(owner, span_warning("I must wait for the hidden moon to rise before I may call upon it."))
 		return . | SPELL_CANCEL_CAST
 

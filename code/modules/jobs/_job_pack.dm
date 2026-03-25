@@ -12,10 +12,8 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 	abstract_type = /datum/job_pack
 	/// Name for identification
 	var/name = "Generic"
-	/// Associative list of statkey to stat value
-	var/list/pack_stats = list()
-	/// Associative list of skill to skill value
-	var/list/pack_skills = list()
+	/// list of sheets to apply when picking this (should realistically only be 1)
+	var/list/pack_sheets = list()
 	/// List of Traits
 	var/list/pack_traits = list()
 	/// List of spells
@@ -29,15 +27,8 @@ GLOBAL_LIST_INIT(job_pack_singletons, init_jobpacks())
 	return TRUE
 
 /datum/job_pack/proc/pick_pack(mob/living/carbon/human/picker)
-	picker.remove_stat_modifier(STATMOD_PACK) // Reset so no inf stat
-	picker.adjust_stat_modifier_list(STATMOD_PACK, pack_stats)
-
-	for(var/datum/skill/skill as anything in pack_skills)
-		var/amount_or_list = pack_skills[skill]
-		if(islist(amount_or_list))
-			picker.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
-		else
-			picker.adjust_skillrank(skill, amount_or_list, TRUE)
+	for(var/datum/attribute_holder/sheet/job/pack_sheet as anything in pack_sheets)
+		picker.attributes?.add_sheet(pack_sheet)
 
 	for(var/trait in pack_traits)
 		ADD_TRAIT(picker, trait, JOB_TRAIT)

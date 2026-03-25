@@ -194,7 +194,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
-	sewrepair = FALSE
+	sewrepair = null
 	max_integrity = INTEGRITY_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS
@@ -225,7 +225,7 @@
 	force = 15
 	block_chance = 0
 	wdefense = AVERAGE_PARRY
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = EASY_TO_DODGE
 	w_class = WEIGHT_CLASS_BULKY
