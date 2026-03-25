@@ -132,7 +132,7 @@
 					var/list/possible_recipes = list()
 					for(var/recipe_type in subtypesof(/datum/container_craft/pan))
 						var/datum/container_craft/recipe = new recipe_type
-						if(recipe.used_skill != /datum/attribute/skill/craft/cooking)
+						if(!ispath(recipe.used_skill, /datum/attribute/skill/craft/cooking))
 							continue // Only want cooking recipes
 
 						// Check if our food item matches any recipe requirement
@@ -234,7 +234,7 @@
 		else
 			if(!on)
 				return
-		if (alert(usr, "Feed [W] to the fire?", "VANDERLIN", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Feed [W] to the fire?", "VANDERLIN", list("Yes", "No")) != "Yes")
 			return
 		if(!(W in user.held_items)|| !user.temporarilyRemoveItemFromInventory(W))
 			return

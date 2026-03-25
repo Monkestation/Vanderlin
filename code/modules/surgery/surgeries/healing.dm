@@ -23,8 +23,8 @@
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED
-	skill_min = SKILL_LEVEL_NOVICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_NOVICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'
 	/// How much brute damage we heal per completion

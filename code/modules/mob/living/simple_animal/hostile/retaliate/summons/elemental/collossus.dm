@@ -82,7 +82,7 @@
 /obj/effect/temp_visual/stomp
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "phaseout"
-	light_outer_range = 2
+	light_range = 2
 	duration = 5
 	layer = ABOVE_ALL_MOB_LAYER //this doesnt render above mobs? it really should
 

@@ -12,6 +12,31 @@
 	grid_width = 32
 	flags_ai_inventory = AI_ITEM_POWDER
 
+/obj/item/reagent_containers/powder/return_recipe_data()
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	if(!length(milled_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"]         = "snack_processing"
+	data["name"]         = name
+	data["category"]     = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"]  = name
+	data["output_icon"]  = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	var/list/milled_from = list()
+	for(var/atom/src_path as anything in milled_from_paths)
+		milled_from += list(list(
+			"name"       = initial(src_path.name),
+			"icon"       = "[initial(src_path.icon)]",
+			"icon_state" = "[initial(src_path.icon_state)]",
+			"_path"      = "[src_path]",
+		))
+	data["milled_from"] = milled_from
+	return data
+
 /obj/item/reagent_containers/powder/canconsume(mob/eater, mob/user, silent)
 	. = ..()
 	if(!.)
