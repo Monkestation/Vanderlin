@@ -22,6 +22,7 @@
 						/obj/item/natural/fur/rous = 1, /obj/item/alch/bone = 4)
 	head_butcher = /obj/item/natural/head/rous
 
+	indexed = TRUE
 	health = ROUS_HEALTH
 	maxHealth = ROUS_HEALTH
 	food_type = list(/obj/item/reagent_containers/food/snacks,

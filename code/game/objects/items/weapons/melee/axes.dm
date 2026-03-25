@@ -385,7 +385,7 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron

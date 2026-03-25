@@ -40,8 +40,8 @@
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_EXPERT
+	skill_min = SKILL_RANK_APPRENTICE
+	skill_median = SKILL_RANK_EXPERT
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 	/// Implements used to extract an organ - This really should be split into two different steps...

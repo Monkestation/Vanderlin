@@ -3,6 +3,7 @@
 	brewed_amount = 4
 	brew_time = 3.33 MINUTES
 	sell_value = 50
+	brewing_skill = /datum/attribute/skill/craft/cooking/winemaking
 
 /datum/brewing_recipe/wine/jack_wine
 	name = "Jacksberry Wine"

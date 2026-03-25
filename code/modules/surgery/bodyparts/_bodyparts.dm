@@ -205,7 +205,7 @@
 		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 		if(!do_after(user, used_time, src))
 			return
-		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_LEVEL_LEGENDARY))
+		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_RANK_LEGENDARY))
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
 		for(var/i in 1 to drops)
 			var/choose_type = pickweight(food_type)
@@ -294,7 +294,7 @@
 	if(!is_organic_limb() || !owner)
 		return
 	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10)
+	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
 	if(new_max_damage != old_max_damage)
 		max_damage = new_max_damage
 
@@ -770,7 +770,7 @@
 				. += organ_appearance
 
 	// Feature overlays
-	if(!skeletonized && draw_bodypart_features)
+	if(draw_bodypart_features)
 		for(var/datum/bodypart_feature/feature as anything in bodypart_features)
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)

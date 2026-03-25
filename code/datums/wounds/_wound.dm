@@ -21,8 +21,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Wounds get sorted from highest severity to lowest severity
 	var/severity = WOUND_SEVERITY_LIGHT
 
+	var/overlay_on_skeleton = FALSE
 	/// Overlay to use when this wound is applied to a carbon mob
 	var/mob_overlay = "w1"
+	/// an alternative layer to render this on for things above clothing
+	var/layer_override
+	var/armdam_override
+	var/legdam_override
+	var/use_blood_color = TRUE
 	/// Overlay to use when this wound is sewn, and is on a carbon mob
 	var/sewn_overlay = ""
 
@@ -121,7 +127,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return visible_name
 
 /// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
-/datum/wound/proc/get_check_name(mob/user)
+/datum/wound/proc/get_check_name(mob/user, advanced)
 	return check_name
 
 /// Crit message that should be appended when this wound is applied in combat
@@ -281,10 +287,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/on_death()
 	return
 
-/// Heals this wound by the given amount, and deletes it if it's healed completely
-/datum/wound/proc/heal_wound(heal_amount, forced = FALSE)
+/// Heals this wound by the given amount, and deletes it if it's healed completely. Extra args passed to subtypes for checks
+/datum/wound/proc/heal_wound(heal_amount, datum/source, forced = FALSE)
 	// Wound cannot be healed normally, whp is null
-	if(isnull(whp) || !heal_amount)
+	if(isnull(whp) || (!heal_amount))
 		return FALSE
 	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
@@ -296,7 +302,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 				remove_from_mob(src)
 			else
 				qdel(src)
-
 	return amount_healed
 
 // Kinda icky
@@ -454,133 +459,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return FALSE
 	return prob(embed_chance)
 
-/datum/wound/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-
-	var/html = {"
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<link rel="stylesheet" type="text/css" href="slop_menustyle2.css">
-		</head>
-		<body>
-			<div class='book'>
-				<div class='page'>
-					<h1>[name]</h1>
-					<div class='info'>
-	"}
-	if(desc)
-		html += "<p class='step-desc'>[desc]</p>"
-
-	var/severity_text = "Unknown"
-	var/severity_color = "white"
-	switch(severity)
-		if(WOUND_SEVERITY_LIGHT)
-			severity_text = "Light"
-			severity_color = "green"
-		if(WOUND_SEVERITY_MODERATE)
-			severity_text = "Moderate"
-			severity_color = "yellow"
-		if(WOUND_SEVERITY_SEVERE)
-			severity_text = "Severe"
-			severity_color = "orange"
-		if(WOUND_SEVERITY_CRITICAL)
-			severity_text = "Critical"
-			severity_color = "red"
-		if(WOUND_SEVERITY_BIOHAZARD)
-			severity_text = "BIOHAZARD"
-			severity_color = "purple"
-
-	html += "<div class='brew-time' style='color: [severity_color];'><b>Severity: [severity_text]</b></div>"
-
-	if(critical)
-		html += "<div style='color: red;'><b>CRITICAL WOUND</b></div>"
-	if(mortal)
-		html += "<div style='color: darkred;'><b>MORTAL WOUND</b></div>"
-	if(disabling)
-		html += "<div style='color: orange;'><b>DISABLING WOUND</b></div>"
-
-	html += "<div class='section'><h2>Treatment Options</h2>"
-	var/list/treatments = list()
-	if(can_sew)
-		treatments += "Can be sewn shut ([sew_threshold] sewing progress required)"
-	if(can_cauterize)
-		treatments += "Can be cauterized (heals 40 WHP, stops bleeding to threshold)"
-	if(!length(treatments))
-		treatments += "No special treatments available"
-	for(var/treatment in treatments)
-		html += "• [treatment]<br>"
-	html += "</div>"
-
-	html += "<h2>Wound Information</h2>"
-
-	html += "<div class='section'>"
-	html += "<b>Wound Health Points:</b> [whp]<br>"
-	if(can_sew)
-		html += "<b>Health After Sewing:</b> [sewn_whp]<br>"
-	if(passive_healing)
-		html += "<b>Passive Healing:</b> [passive_healing] per heartbeat<br>"
-	if(sleep_healing)
-		html += "<b>Sleep Healing:</b> [sleep_healing] per heartbeat<br>"
-	html += "</div>"
-
-	if(!isnull(bleed_rate))
-		html += "<div class='section'><h2>Bleeding</h2>"
-		html += "<b>Bleed Rate:</b> [bleed_rate]<br>"
-		if(can_sew)
-			html += "<b>Bleed Rate (Sewn):</b> [sewn_bleed_rate]<br>"
-		if(clotting_rate)
-			html += "<b>Clotting Rate:</b> [clotting_rate] per heartbeat<br>"
-			if(!isnull(clotting_threshold))
-				html += "<b>Clots Down To:</b> [clotting_threshold]<br>"
-		if(can_sew && sewn_clotting_rate)
-			html += "<b>Clotting Rate (Sewn):</b> [sewn_clotting_rate] per heartbeat<br>"
-			if(!isnull(sewn_clotting_threshold))
-				html += "<b>Clots Down To (Sewn):</b> [sewn_clotting_threshold]<br>"
-		html += "</div>"
-
-	if(woundpain)
-		html += "<div class='section'><h2>Pain</h2>"
-		html += "<b>Pain Level:</b> [woundpain]<br>"
-		if(can_sew && sewn_woundpain != woundpain)
-			html += "<b>Pain Level (Sewn):</b> [sewn_woundpain]<br>"
-		html += "</div>"
-
-	var/list/special_props = list()
-	if(embed_chance)
-		special_props += "Can embed weapons ([embed_chance]% chance)"
-	if(werewolf_infection_probability)
-		special_props += "Can cause werewolf infection ([werewolf_infection_probability]% chance)"
-	if(qdel_on_droplimb)
-		special_props += "Removed when limb is severed"
-
-	if(length(special_props))
-		html += "<div class='section'><h2>Special Properties</h2>"
-		for(var/prop in special_props)
-			html += "[prop]<br>"
-		html += "</div>"
-
-	if(check_name)
-		html += "<div class='section'><h2>When checked with medical tools</h2>"
-		html += "\"[check_name]\"<br>"
-		html += "</div>"
-
-	html += {"
-				</div>
-			</div>
-		</body>
-		</html>
-	"}
-
-	return html
-
-/datum/wound/proc/show_menu(mob/user)
-	user << browse(generate_html(user), "window=wound;size=600x900")
-
 /// Basis for dynamic wounds that increase in severity with damage
 /datum/wound/dynamic
 	abstract_type = /datum/wound/dynamic
@@ -610,7 +488,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Multiplier that wound pain is increased by
 	var/upgrade_pain = 0
 
-/datum/wound/dynamic/heal_wound(heal_amount, forced)
+/datum/wound/dynamic/heal_wound(heal_amount, datum/source, forced)
 	. = ..()
 	if(!. || QDELETED(src))
 		return
