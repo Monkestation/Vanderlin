@@ -563,9 +563,9 @@
 	if(is_multi_tile_object && isturf(loc))
 		old_locs = locs // locs is a special list, this is effectively the same as .Copy() but with less steps
 		for(var/atom/exiting_loc as anything in old_locs)
-			if(!exiting_loc.Exit(src, direction))
+			if(!exiting_loc.Exit(src, newloc))
 				return
-	else if(!loc.Exit(src, direction))
+	else if(!loc.Exit(src, newloc))
 		return
 
 	var/list/new_locs
@@ -636,10 +636,6 @@
 
 	var/atom/oldloc = loc
 	var/direction_to_move = direction
-
-	//Early override for some cases like diagonal movement
-	if(glide_size_override)
-		set_glide_size(glide_size_override)
 
 	if(loc != newloc)
 		if (!(direction & (direction - 1))) //Cardinal move
