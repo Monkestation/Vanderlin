@@ -4,7 +4,7 @@
 	Ever since, you have lived in the Orphanage under the Matron's care. \
 	Will you make something of yourself, or will you die in the streets as a nobody?"
 	department_flag = YOUNGFOLK
-	job_flags = (JOB_ANNOUNCE_ARRIVAL|JOB_SHOW_IN_CREDITS|JOB_NEW_PLAYER_JOINABLE)
+	job_flags = (JOB_SHOW_IN_CREDITS|JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORPHAN
 	faction = FACTION_TOWN
 	allowed_ages = list(AGE_CHILD)
@@ -27,10 +27,12 @@
 
 /datum/outfit/orphan
 	name = "Orphan"
+	pants = /obj/item/clothing/pants/tights/colored/vagrant
+	shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 
 // BOOKISH BRAT - THE COURTLY CHILD
 
-/datum/attribute_holder/sheet/job/advclass/bbrat
+/datum/attribute_holder/sheet/job/advclass/orphanadv/bbrat
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
 		/datum/attribute/skill/misc/climbing = 10,
@@ -49,12 +51,11 @@
 	your friends rely on you to solve riddles, answer their obvious questions, \
 	and talk your way out of the guards bad graces.  Where would they be without you?"
 	outfit = /datum/outfit/advclass/bbrat
-	allowed_ages = list(AGE_CHILD)
 	category_tags = list(CTAG_ORPHAN)
 	inherit_parent_title = TRUE
 
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/advclass/bbrat
+	attribute_sheet = /datum/attribute_holder/sheet/job/advclass/orphanadv/bbrat
 
 /datum/job/advclass/bbrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -116,7 +117,7 @@
 
 // RAMBUNCTIOUS RASCAL - THE COMBAT KID
 
-/datum/attribute_holder/sheet/job/orphan/rrascal
+/datum/attribute_holder/sheet/job/orphanadv/rrascal
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -128,21 +129,19 @@
 		/datum/attribute/skill/combat/unarmed = 10
 	)
 
-/datum/job/advclass/orphan/rrascal
+/datum/job/advclass/orphanadv/rrascal
 	title= "Rambunctious Rascal"
 	tutorial = "Without you to lead them, your friends \
 	would spend all day holed up in workshops, the archives, or \
 	the coinpurses of noble fops.  They'd be lost without you, \
 	so round them up, get out there, and prove to this city \
 	that you're the hero you already know you are."
-	outfit = /datum/outfit/orphan/rrascal
+	outfit = /datum/outfit/orphanadv/rrascal
 	category_tags = list(CTAG_ORPHAN)
-	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/rrascal
-	allowed_ages = list(AGE_CHILD)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/rrascal
 	inherit_parent_title = TRUE
 
-
-/datum/job/orphan/rrascal/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/orphanadv/rrascal/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -153,7 +152,7 @@
 			STAT_ENDURANCE = 1,
 		))
 
-/datum/outfit/orphan/rrascal/pre_equip(mob/living/carbon/human/equipped_human)
+/datum/outfit/orphanadv/rrascal/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -185,7 +184,7 @@
 
 // SKILLED STRAY - THE RESPONSIBLE CHILD
 
-/datum/attribute_holder/sheet/job/orphan/sscamp
+/datum/attribute_holder/sheet/job/orphanadv/sscamp
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -194,7 +193,7 @@
 		/datum/attribute/skill/misc/reading = 10,
 	)
 
-/datum/job/advclass/orphan/sscamp
+/datum/job/advclass/orphanadv/sscamp
 	title= "Skilled Scamp"
 	tutorial = "The matron has always told you you were her smartest scone, \
 	and you prove her right each day with your diligent, industrious ways.  The \
@@ -202,14 +201,14 @@
 	getting tasks done that you know they envy.  With your trusty knife and your \
 	freshly-washed tunic, you are ready to go out and start learning a trade that will \
 	really impress everyone."
-	outfit = /datum/outfit/orphan/sscamp
+
+	outfit = /datum/outfit/orphanadv/sscamp
 	category_tags = list(CTAG_ORPHAN)
-	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/sscamp
-	allowed_ages = list(AGE_CHILD)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/sscamp
 	inherit_parent_title = TRUE
 
 
-/datum/job/orphan/scamp/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/orphanadv/scamp/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -220,7 +219,7 @@
 			STAT_SPEED = 1,
 		))
 
-/datum/outfit/orphan/sscamp/pre_equip(mob/living/carbon/human/equipped_human)
+/datum/outfit/orphanadv/sscamp/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -244,7 +243,7 @@
 
 // UNLAWFUL URCHIN - THE TROUBLEMAKER
 
-/datum/attribute_holder/sheet/job/orphan/uurchin
+/datum/attribute_holder/sheet/job/orphanadv/uurchin
 	raw_attribute_list = list(
 		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -254,7 +253,7 @@
 		/datum/attribute/skill/misc/stealing = 30,
 	)
 
-/datum/job/advclass/orphan/uurchin
+/datum/job/advclass/orphanadv/uurchin
 	title= "Unlawful Urchin"
 	tutorial = "Of all the children in the orphanage, you know \
 	you are the matron's favorite.  You move with the same silent, careful \
@@ -262,14 +261,13 @@
 	Whether it's an easily-opened window, a loose coinpurse, or a few coins left on a \
 	bar for too long, you have a sharp eye for profit and feet quick enough to carry you \
 	to safety.  The matron is going to be very proud of you."
-	outfit = /datum/outfit/orphan/uurchin
+	outfit = /datum/outfit/orphanadv/uurchin
 	category_tags = list(CTAG_ORPHAN)
-	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/uurchin
-	allowed_ages = list(AGE_CHILD)
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/uurchin
 	inherit_parent_title = TRUE
 
 
-/datum/job/orphan/uurchin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/orphanadv/uurchin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -280,7 +278,7 @@
 			STAT_ENDURANCE = 1,
 		))
 
-/datum/outfit/orphan/uurchin/pre_equip(mob/living/carbon/human/equipped_human)
+/datum/outfit/orphanadv/uurchin/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -305,7 +303,7 @@
 
 // WEARY WASTREL - THE USELESS ONE
 
-/datum/attribute_holder/sheet/job/orphan/wwastrel
+/datum/attribute_holder/sheet/job/orphanadv/wwastrel
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -313,21 +311,20 @@
 		/datum/attribute/skill/misc/athletics = 10,
 	)
 
-/datum/job/advclass/orphan/wwastrel
+/datum/job/advclass/orphanadv/wwastrel
 	title= "Weary Wastrel"
 	tutorial = "WARNING: THIS CLASS IS EXTREMELY DIFFICULT!  All the other \
 	children may be smart, fast, strong, or useful in some way, but not you.  \
 	You don't have to have a function to be the best.  You know in your heart that \
 	you are destined for greatness, it's just a matter of everyone else catching up \
 	with your vision."
-	outfit = /datum/outfit/orphan/wwastrel
+	outfit = /datum/outfit/orphanadv/wwastrel
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/wwastrel
-	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
 
-/datum/job/orphan/wwastrel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/orphanadv/wwastrel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -337,7 +334,7 @@
 			STAT_INTELLIGENCE = 1,
 		))
 
-/datum/outfit/orphan/wwastrel/pre_equip(mob/living/carbon/human/equipped_human)
+/datum/outfit/orphanadv/wwastrel/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
