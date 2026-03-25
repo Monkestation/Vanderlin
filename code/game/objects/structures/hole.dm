@@ -252,11 +252,12 @@
 								L.apply_status_effect(/datum/status_effect/debuff/cursed)
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
-		stage_update()
+			adjust_grave_necra_devotion(0) // set devotion income to 0
+			is_consecrated = NOT_CONSECRATED // remove consecration levels
+			update_appearance(UPDATE_OVERLAYS)
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		is_consecrated = NOT_CONSECRATED // remove consecration levels
-		adjust_grave_necra_devotion(0) // set devotion income to 0
+		stage_update()
 
 /// Global proc (to handle coffin consecration) that will adjust every necran's devotion passive gain
 /// When called by a coffin, `amount` is not needed
@@ -401,12 +402,16 @@
 			icon_state = "grave"
 		if(4)
 			icon_state = "gravecovered"
+	if(is_consecrated == DOUBLY_CONSECRATED)
+		icon_state = "gravedoubleconsecrated"
 
 /obj/structure/closet/dirthole/update_overlays()
 	. = ..()
-	if(!has_buckled_mobs() || stage != 3)
+	if(stage != 3)
 		return
 	var/mutable_appearance/abovemob = mutable_appearance('icons/turf/floors.dmi', "grave_above", ABOVE_MOB_LAYER)
+	if(is_consecrated >= CONSECRATED)
+		add_overlay("graveconsecrated")
 	. += abovemob
 
 /obj/structure/closet/dirthole/update_name(updates)
