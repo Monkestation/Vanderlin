@@ -25,7 +25,7 @@
 	if(!ispath(skill_ref, /datum/attribute/skill/combat))
 		return
 
-	var/real_old = (old_level == SKILL_LEVEL_NONE && !GET_MOB_SKILL_VALUE(owner.current, skill_ref)) ? SKILL_LEVEL_NONE : old_level
+	var/real_old = (old_level == SKILL_RANK_NONE && !GET_MOB_SKILL_VALUE(owner.current, skill_ref)) ? SKILL_RANK_NONE : old_level
 
 	if(new_level <= real_old)
 		return

@@ -30,7 +30,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK|ITEM_SLOT_WRISTS|ITEM_SLOT_NECK
 	associated_skill = /datum/attribute/skill/combat/knives
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	sellprice = 10
 	experimental_onback = FALSE
 	experimental_onhip = FALSE
