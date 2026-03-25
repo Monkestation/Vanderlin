@@ -768,7 +768,7 @@
 				doomed.reagents.trans_to(key, doomed.reagents.total_volume)
 				qdel(doomed)
 
-			var/continue_crafting = alert(user, "Crafting failed. Continue attempting to craft [requested_crafts - successful_crafts] more [name]?", "Continue Crafting?", "Yes", "No")
+			var/continue_crafting = tgui_alert(user, "Crafting failed. Continue attempting to craft [requested_crafts - successful_crafts] more [name]?", "Continue Crafting?", list("Yes", "No"))
 			if(continue_crafting != "Yes")
 				break
 
@@ -1003,129 +1003,6 @@
 			LAZYADD(items_to_put, item)
 		if(LAZYLEN(items_to_put))
 			user.put_in_hands(pick(items_to_put))
-
-/datum/repeatable_crafting_recipe/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-	var/html = {"
-		<!DOCTYPE html>
-		<html lang="en">
-		<meta charset='UTF-8'>
-		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
-			body {
-				font-family: "Charm", cursive;
-				font-size: 1.2em;
-				text-align: center;
-				margin: 20px;
-				background-color: #f4efe6;
-				color: #3e2723;
-				background-color: rgb(31, 20, 24);
-				background:
-					url('[SSassets.transport.get_asset_url("try4_border.png")]'),
-					url('book.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: 100% 100%;
-
-			}
-			h1 {
-				text-align: center;
-				font-size: 2em;
-				border-bottom: 2px solid #3e2723;
-				padding-bottom: 10px;
-				margin-bottom: 10px;
-			}
-			.icon {
-				width: 64px;
-				height: 64px;
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-		</style>
-		<body>
-		  <div>
-		    <h1>[icon2html(new output, user)] [name][output_amount > 1 ? " x[output_amount]" : ""]</h1>
-		    <div>
-		      <h2>Requirements</h2>
-		"}
-	for(var/atom/path as anything in requirements)
-		var/count = requirements[path]
-		if(subtypes_allowed)
-			html += "[icon2html(new path, user)] [count] of any [initial(path.name)]<br>"
-		else
-			html += "[icon2html(new path, user)] [count] [initial(path.name)]<br>"
-
-	html += {"
-		</div>
-		<div>
-		"}
-
-	if(length(tool_usage))
-		html += {"
-		<br>
-		<div>
-		    <strong>Required Tools</strong>
-			<br>
-			  "}
-		for(var/atom/path as anything in tool_usage)
-			if(subtypes_allowed)
-				html += "[icon2html(new path, user)] any [initial(path.name)]<br>"
-			else
-				html += "[icon2html(new path, user)] [initial(path.name)]<br>"
-		html += {"
-			</div>
-		<div>
-		"}
-
-	if(length(reagent_requirements))
-		html += {"
-		<br>
-		<div>
-		    <strong>Required Liquids:</strong>
-			<br>
-			  "}
-		for(var/atom/path as anything in reagent_requirements)
-			var/count = reagent_requirements[path]
-			html += "[UNIT_FORM_STRING(count)] of [initial(path.name)]<br>"
-		html += {"
-			</div>
-		<div>
-		"}
-
-	if(minimum_skill_level)
-		html += "<br><strong class=class='scroll'>[SSskills.level_names[min(craftdiff, length(SSskills.level_names))]] [skillcraft.name] skill REQUIRED</strong><br>"
-	else if(craftdiff)
-		html += "<br><strong class=class='scroll'>[SSskills.level_names[min(craftdiff, length(SSskills.level_names))]] [skillcraft.name] skill recommended</strong><br>"
-	else
-		html += "<br><strong class=class='scroll'>No [skillcraft.name] skill needed</strong><br>"
-
-	html += "<h1>Steps</h1><br>"
-	if(subtypes_allowed)
-		html += " [icon2html(new starting_atom, user)] <strong class=class='scroll'>start the process by using any [initial(starting_atom.name)] </strong><br>"
-	else
-		html += "[icon2html(new starting_atom, user)] <strong class=class='scroll'>start the process by using [initial(starting_atom.name)] </strong><br>"
-
-	html += "[icon2html(new attacked_atom, user)] <strong class=class='scroll'>on [initial(attacked_atom.name)]</strong><br>"
-	if(allow_inverse_start)
-		html += "<strong class=class='scroll'>or vice versa</strong><br>"
-
-	html += {"
-		</div>
-		</div>
-	</body>
-	</html>
-	"}
-	return html
-
-/datum/repeatable_crafting_recipe/proc/show_menu(mob/user)
-	user << browse(generate_html(user),"window=recipe;size=500x810")
 
 #undef SUCCESSFUL_CRAFT
 #undef FAIL_CONTINUE_CRAFT

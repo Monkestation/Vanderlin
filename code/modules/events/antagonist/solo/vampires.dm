@@ -40,6 +40,7 @@
 		/datum/job/advclass/combat/assassin,
 		/datum/job/magician,
 		/datum/job/archivist,
+		/datum/job/tomb_warden,,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 	)

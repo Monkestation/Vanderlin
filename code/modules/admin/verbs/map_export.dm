@@ -17,7 +17,7 @@
 	end_y = clamp(end_y, 1, world.maxy)
 	var/date = time2text(world.timeofday, "YYYY-MM-DD_hh-mm-ss")
 	var/file_name = sanitize_mapfile(browser_input_text(usr, "Filename?", "Map Exporter", "exported_map_[date]"))
-	var/confirm = browser_alert(usr, "Are you sure you want to do this? This will cause extreme lag!", "Map Exporter", list("Yes", "No"))
+	var/confirm = tgui_alert(usr, "Are you sure you want to do this? This will cause extreme lag!", "Map Exporter", list("Yes", "No"))
 
 	if(confirm != "Yes" || !check_rights(R_DEBUG))
 		return

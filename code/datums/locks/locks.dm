@@ -54,6 +54,11 @@
 /datum/lock/key/nerve
 	lockid_list = list(ACCESS_STEWARD)
 	locked = TRUE
+	difficulty = 5
+
+/datum/lock/key/hailer
+	lockid_list = list(ACCESS_TOMBWARDEN)
+	locked = TRUE
 	difficulty = 1
 
 ///// Multiple key locks

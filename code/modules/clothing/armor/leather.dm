@@ -9,7 +9,8 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	smeltresult = /obj/item/fertilizer/ash
 	sellprice = VALUE_LEATHER_ARMOR
 
@@ -87,7 +88,8 @@
 	color = CLOTHING_BARK_BROWN
 	blade_dulling = DULLING_BASHCHOP
 	blocksound = SOFTHIT
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	sleevetype = null
 	sleeved = null
 
@@ -343,13 +345,26 @@
 	icon_state = "cuirbouilli"
 	item_state = "cuirbouilli"
 
-/obj/item/clothing/armor/leather/heavy
-	name = "hardened leather armor"
+/obj/item/clothing/armor/leather/jerkin
+	name = "leather jerkin"
 	desc = "A heavy steerhide jerkin with enough body to stand on its own. It forms a stiff, protective mantle \
 	for its wearer, shielding from blows and weather alike."
+	icon_state = "roguearmor"
+	item_state = "roguearmor"
+	armor = ARMOR_LEATHER
+	prevent_crits = ALL_EXCEPT_STAB
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	sellprice = VALUE_LEATHER_ARMOR_PLUS
+
+/obj/item/clothing/armor/leather/jerkin/belted
+	desc = "A heavy steerhide jerkin with enough body to stand on its own. It forms a stiff, protective mantle \
+	for its wearer, shielding from blows and weather alike. Utility pouches have been sewn into the front of it."
 	icon_state = "roguearmor_belt"
 	item_state = "roguearmor_belt"
-	armor = ARMOR_LEATHER_GOOD
-	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
-	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
-	sellprice = 20
+	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+
+/obj/item/clothing/armor/leather/jerkin/belted/long
+	icon_state = "roguearmor_coat"
+	item_state = "roguearmor_coat"
+	body_parts_covered = COVERAGE_ALL_BUT_ARMS
+	sellprice = VALUE_LEATHER_ARMOR_LORD

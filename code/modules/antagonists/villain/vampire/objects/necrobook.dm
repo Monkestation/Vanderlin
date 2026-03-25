@@ -18,7 +18,7 @@
 	switch(browser_input_list(user, "What to do?", null, useoptions))
 //TO DO: move this to zizo cult or something
 /* 		if("Create Death Knight")
-			if(browser_alert(user, "Create a Death Knight?<BR>Cost:[DEATH_KNIGHT_COST]",null,DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+			if(tgui_alert(user, "Create a Death Knight?<BR>Cost:[DEATH_KNIGHT_COST]",null,DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 				return
 			if(length(SSmapping.retainer.death_knights) >= 3)
 				to_chat(user, span_warning("I cannot summon any more death knights."))
@@ -39,7 +39,7 @@
 		if("Steal the Sun")
 			if(!can_steal_sun(user))
 				return
-			if(browser_alert(user, "Force Vanderlin into Night?<BR>Cost:[SUN_STEAL_COST]","",DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+			if(tgui_alert(user, "Force Vanderlin into Night?<BR>Cost:[SUN_STEAL_COST]","",DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 				return
 			if(!do_after(user, 10 SECONDS, src))
 				return

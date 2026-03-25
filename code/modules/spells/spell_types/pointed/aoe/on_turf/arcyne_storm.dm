@@ -35,5 +35,5 @@
 	icon_state = "hierophant_squares"
 	layer = BELOW_MOB_LAYER
 	duration = 3
-	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	randomdir = FALSE

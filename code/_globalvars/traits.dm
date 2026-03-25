@@ -192,6 +192,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Recognized" = TRAIT_RECOGNIZED,
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
+		"Host of the Black Briar" = TRAIT_BRIAR_HOST,
 		"Graceless" = TRAIT_UNPARRYING,
 	),
 	/obj/item/bodypart = list(
@@ -280,6 +281,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	TRAIT_THIEVESGUILD = "I am a member of the thieves' guild!",
 	TRAIT_LEPROSY = span_necrosis("I'm a disgusting leper..."),
+	TRAIT_BRIAR_HOST = span_briar("The bramble writhes beneath my skin."),
 	TRAIT_LIGHT_STEP = span_info("I will never trip a trap plate."),
 	TRAIT_NOFIRE = span_info("I am immune to most scorching flames."),
 	TRAIT_ENGINEERING_GOGGLES = span_info("I can find out more information from mechanical devices."),
@@ -299,7 +301,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WATER_BREATHING = span_info("I can breathe underwater, I have no fear of drowning."),
 	TRAIT_TINY = "I am small, it's hard to look people in the eyes.",
 	TRAIT_FOREIGNER = span_notice("I'm not from around here."),
-	TRAIT_BURDEN = "I carry the Burden of HEAD EATER's hunger...",
 	TRAIT_OLDPARTY = "In years long passed, me and a group of fellow adventurers saved this city!",
 	TRAIT_DREAM_WATCHER = span_notice("I'm blessed by Noc, my dreams tell more than the average person.."),
 	TRAIT_AMAZING_BACK = span_notice("I'm able to carry far more on my back!"),

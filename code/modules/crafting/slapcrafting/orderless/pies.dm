@@ -5,7 +5,7 @@
 
 	finishing_item = /obj/item/reagent_containers/food/snacks/piedough
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/piebottom
-	related_skill = /datum/attribute/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking/baking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 
@@ -122,7 +122,7 @@
 	category = "Tarts"
 	finishing_item = /obj/item/reagent_containers/food/snacks/sugar
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/tartcrust
-	related_skill = /datum/attribute/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking/baking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 	var/overlay_state = ""
@@ -177,6 +177,13 @@
 		/obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit
+
+/datum/orderless_slapcraft/food/tart/chocolate
+	name = "Unbaked Chocolate Tart"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk = 3
+	)
+	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/chocolate
 
 /datum/orderless_slapcraft/food/pie/borowiki
 	name = "unbaked borowiki pie"

@@ -505,5 +505,181 @@
                 "rscadd": "Changed around some descriptions to fit lore"
             }
         ]
+    },
+    "2026-03-19": {
+        "Rockslp": [
+            {
+                "balance": "Rebalances dodging a bit, and parrying by quite a bit."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "image": "added unique sprites for the Mystery Box"
+            },
+            {
+                "bugfix": "Beard Shaving"
+            },
+            {
+                "rscdel": "Removed the unfinished playable Thronleer clan"
+            }
+        ],
+        "ApolloVector": [
+            {
+                "rscadd": "2 new weapon options for gloryhound"
+            },
+            {
+                "balance": "changed some of gloryhound's gear"
+            }
+        ],
+        "Telvayne": [
+            {
+                "rscadd": "Adds Hospitalier adventurer"
+            },
+            {
+                "rscadd": "Adds Chirurgeon adventurer"
+            },
+            {
+                "rscdel": "Removed Chirurgeon Migrant Wave"
+            }
+        ]
+    },
+    "2026-03-20": {
+        "Spitegremlin": [
+            {
+                "balance": "rebalanced hunter classes"
+            }
+        ],
+        "ercrowther": [
+            {
+                "bugfix": "removed a stray pixel on fancy hat when facing left"
+            },
+            {
+                "image": "modified fancyhat onmob sprite"
+            }
+        ],
+        "SmokingCrackForChrist": [
+            {
+                "sound": "Changed Field/Catacombs area themes. Sorry!"
+            }
+        ]
+    },
+    "2026-03-21": {
+        "KevinfromHP": [
+            {
+                "balance": "Moved Malaguero Deserter to Adventurer"
+            },
+            {
+                "balance": "Moved Species Examine to Face instead of Body"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added stealth strikes, doing extra damage to unsuspecting targets (Not in combat mode, need to be sneaking behind them). Sneak attacks do up to ~50% extra damage and have up to ~15% extra chance to knockout based on sneak."
+            },
+            {
+                "refactor": "Big lighting refactor, somethings may be too dim or too bright, report issues."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the nimrod haircut"
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Chages alert prompts to use TGUI."
+            },
+            {
+                "code_imp": "Removes browser_alert."
+            }
+        ],
+        "Archeonan": [
+            {
+                "rscadd": "Bard Adventurer Class"
+            },
+            {
+                "rscdel": "Removed Pilgrim Bard"
+            },
+            {
+                "balance": "Gave bard light gambeson, short sword, and average sword skills"
+            }
+        ]
+    },
+    "2026-03-22": {
+        "KevinfromHP": [
+            {
+                "sound": "New foley for climbing ladders, walking on metal grilles, rope bridges, pipes, and Kybraxor"
+            },
+            {
+                "code_imp": "Switches some existing usages of the squeak component to footstep override, as its functionality is closer to intended usage with footsteps"
+            },
+            {
+                "rscadd": "Rounds are now 20 minutes longer"
+            },
+            {
+                "balance": "Day is 2 hours longer than it used to be"
+            },
+            {
+                "sound": "Added 4 new songs, 2 to the title screen and 2 to the credits. Songs by burialgoods."
+            }
+        ],
+        "Casperclone1": [
+            {
+                "rscadd": "Bandits can now become rogue mages!"
+            },
+            {
+                "rscdel": "As they are now no longer worshipping Zizo they have lost their ability to speak to the dead"
+            }
+        ],
+        "The-Awful": [
+            {
+                "bugfix": "fixed food sprites"
+            },
+            {
+                "bugfix": "salad no longer craftable on bowls with liquid in them"
+            }
+        ]
+    },
+    "2026-03-23": {
+        "Rockslp": [
+            {
+                "rscadd": "More kobold slurs"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Makes lightweight brigandines craftable"
+            },
+            {
+                "bugfix": "adjust fighters and clerics"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added various chocolate pastries."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed Malaguero + other stress events"
+            }
+        ]
+    },
+    "2026-03-24": {
+        "KevinfromHP": [
+            {
+                "rscadd": "BLACK BRIAR"
+            }
+        ],
+        "Aberra": [
+            {
+                "bugfix": "Round-end species stats grammar for aasimar and rakshari."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the dwarven tallhat and gives it a craftable recipe."
+            }
+        ]
     }
 }

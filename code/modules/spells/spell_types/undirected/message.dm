@@ -64,7 +64,7 @@
 	if(!message)
 		reset_cooldown()
 		return . | SPELL_CANCEL_CAST
-	var/answer = browser_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
+	var/answer = tgui_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(answer == CHOICE_CONFIRM)

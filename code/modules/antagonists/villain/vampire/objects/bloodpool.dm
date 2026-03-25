@@ -20,7 +20,7 @@
 
 /obj/structure/vampire/bloodpool/Initialize()
 	. = ..()
-	set_light(3, 3, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
+	set_light(3, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
 
 /obj/structure/vampire/bloodpool/examine(mob/user)
 	. = ..()
@@ -143,7 +143,7 @@
 		if("View Details")
 			project.show_details(user)
 		if("Cancel Project")
-			if(browser_alert(user, "Cancel [project.display_name]?<BR>All invested vitae will be refunded.", "CANCELLATION", list("Yes", "No")) == "Yes")
+			if(tgui_alert(user, "Cancel [project.display_name]?<BR>All invested vitae will be refunded.", "CANCELLATION", list("Yes", "No")) == "Yes")
 				cancel_project(project_type)
 
 /obj/structure/vampire/bloodpool/proc/complete_project(project_type)
@@ -196,7 +196,7 @@
 	return TRUE
 
 /datum/vampire_project/proc/confirm_start(mob/living/user)
-	return browser_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
+	return tgui_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
 
 /datum/vampire_project/proc/on_start(mob/living/user)
 	return

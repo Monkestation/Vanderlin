@@ -46,7 +46,7 @@
 	var/obj/effect/blood_rune/R = spell_holder
 	R.one_pulse()
 
-	rejoin = alert(activator, "Will you pull them toward you, or pull yourself toward them?", "Blood Magnetism", "Summon Cultist", "Rejoin Cultist") == "Rejoin Cultist"
+	rejoin = tgui_alert(activator, "Will you pull them toward you, or pull yourself toward them?", "Blood Magnetism", list("Summon Cultist", "Rejoin Cultist")) == "Rejoin Cultist"
 
 	var/list/possible_targets = list()
 	var/list/prisoners = list()
