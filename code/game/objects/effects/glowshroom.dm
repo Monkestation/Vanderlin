@@ -3,9 +3,6 @@
 /obj/structure/kneestingers
 	name = "kneestingers"
 	desc = "They're said to glow with Dendor's wrath."
-	anchored = TRUE
-	opacity = FALSE
-	density = FALSE
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "glowshroom1" //replaced in New
 	layer = ABOVE_NORMAL_TURF_LAYER
@@ -13,15 +10,33 @@
 	blade_dulling = DULLING_CUT
 	resistance_flags = FLAMMABLE
 
-/obj/structure/kneestingers/Initialize()
+/obj/structure/kneestingers/Initialize(mapload)
 	. = ..()
+
+	var/static/list/glowie = list(
+		"#69e03e",
+		"#45dc45",
+		"#357735",
+		"#34b834",
+	)
+
+	set_light(2, 2, l_color = pick(glowie))
+
+	if(icon_state == "glowshroom1")
+		icon_state = "glowshroom[rand(1,3)]"
+		pixel_x = base_pixel_x + rand(-4, 4)
+		pixel_y = base_pixel_y + rand(0,5)
+	else
+		pixel_x = base_pixel_x + rand(-2, 2)
+		pixel_y = base_pixel_y + rand(0,2)
+
 	var/turf/turf = get_turf(src)
 	turf.path_weight += 50
 
 /obj/structure/kneestingers/Destroy()
 	var/turf/turf = get_turf(src)
 	turf.path_weight -= 50
-	. = ..()
+	return ..()
 
 /obj/structure/kneestingers/fire_act(added, maxstacks)
 	visible_message(span_warning("[src] catches fire!"))
@@ -53,19 +68,6 @@
 					L.throwing.finalize(FALSE)
 				return FALSE
 	..()
-
-/obj/structure/kneestingers/Initialize(mapload, obj/item/neuFarm/seed/newseed, mutate_stats)
-	. = ..()
-
-	set_light(1.5, 1.5, 1.5, l_color ="#d4fcac")
-
-	if(icon_state == "glowshroom1" )
-		icon_state = "glowshroom[rand(1,3)]"
-		pixel_x = base_pixel_x + rand(-4, 4)
-		pixel_y = base_pixel_y + rand(0,5)
-	else
-		pixel_x = base_pixel_x + rand(-2, 2)
-		pixel_y = base_pixel_y + rand(0,2)
 
 /obj/structure/kneestingers/temperature_expose(exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300)

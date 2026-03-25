@@ -155,6 +155,10 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/obj/effect/temp_visual/target/meteor,
 		/obj/structure/meatvine/papameat,
 		/obj/effect/meatvine_controller,
+		// Abstract type, controlled by turfs
+		// Literally errors on creation/deletion
+		/atom/movable/lighting_object,
+		/atom/movable/outdoor_effect,
 	)
 	///this does some wonky things that we don't want in a test area
 	ignore += typesof(/obj/structure/stockpile_storage,)

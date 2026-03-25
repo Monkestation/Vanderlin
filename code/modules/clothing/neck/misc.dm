@@ -122,7 +122,10 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE // Made of leather
 	smeltresult = /obj/item/fertilizer/ash
@@ -190,7 +193,10 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
@@ -208,7 +214,10 @@
 	pickup_sound = SFX_JINGLE_BELLS
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = SFX_JINGLE_BELLS
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash

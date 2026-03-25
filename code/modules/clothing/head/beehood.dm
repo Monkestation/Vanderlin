@@ -16,4 +16,5 @@
 	adjustable = CANT_CADJUST
 	toggle_icon_state = FALSE
 	max_integrity = 100
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE

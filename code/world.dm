@@ -13,7 +13,7 @@
 /world
 	mob = /mob/dead/new_player
 	turf = /turf/closed/basic
-	area = /area
+	area = /area/empty_space
 	view = "15x15"
 	hub = "Exadv1.spacestation13"
 	hub_password = "zX1svaLpIhl70uii"

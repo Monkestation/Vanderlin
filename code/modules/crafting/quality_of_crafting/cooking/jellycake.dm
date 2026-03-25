@@ -6,6 +6,7 @@
 	crafting_sound = 'sound/foley/kneading_alt.ogg'
 	extra_chance = 100
 	attacked_atom = /obj/item/reagent_containers/food/snacks/jellycake_base
+	skillcraft = /datum/attribute/skill/craft/cooking/confectionery
 
 /datum/repeatable_crafting_recipe/cooking/jellycake/apple
 	name = "Apple Jellycake"
