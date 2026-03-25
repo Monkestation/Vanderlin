@@ -21,7 +21,7 @@
 	/// Weakref to granted spell, for the dream ending
 	var/datum/weakref/granted_spell
 
-/datum/action/cooldown/spell/undirected/rituos/Destroy(force, ...)
+/datum/action/cooldown/spell/undirected/rituos/Destroy(force)
 	granted_spell = null // Deleted with us
 	return ..()
 

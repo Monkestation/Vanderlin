@@ -6,7 +6,7 @@
 	earliest_start = 15 MINUTES
 	max_occurrences = 1
 	min_players = 25
-	todreq = list("dusk", "dawn", "day")
+	todreq = list(DUSK, DAWN, DAY)
 	dedicated_storytellers = list(/datum/storyteller/astrata)
 	allowed_storytellers = DIVINE_STORYTELLERS
 
