@@ -22,8 +22,6 @@
 	outfit_female = null
 	give_bank_account = 3
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
-	is_foreigner = TRUE
-	is_recognized = TRUE
 
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT)

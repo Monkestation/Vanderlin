@@ -17,13 +17,13 @@
 		to_chat(usr, "<span class='warning'>DB is not connected yet.</span>")
 		return
 
-	var/lookup_choice = alert(usr, "Do you wish to lookup account by ID or ckey?", "Lookup Type", "ID", "Ckey", "Cancel")
+	var/lookup_choice = tgui_alert(usr, "Do you wish to lookup account by ID or ckey?", "Lookup Type", list("ID", "Ckey", "Cancel"))
 	switch(lookup_choice)
 		if("ID")
 			var/lookup_id = input(usr,"Enter Discord ID to lookup ckey") as text|null
 			var/returned_ckey = SSdiscord.lookup_id(lookup_id)
 			if(returned_ckey)
-				var/unlink_choice = alert(usr, "Discord ID [lookup_id] is linked to Ckey [returned_ckey]. Do you wish to unlink or cancel?", "Account Found", "Unlink", "Cancel")
+				var/unlink_choice = tgui_alert(usr, "Discord ID [lookup_id] is linked to Ckey [returned_ckey]. Do you wish to unlink or cancel?", "Account Found", list("Unlink", "Cancel"))
 				if(unlink_choice == "Unlink")
 					SSdiscord.unlink_account(returned_ckey)
 			else

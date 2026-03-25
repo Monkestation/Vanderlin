@@ -9,6 +9,8 @@
 	var/accessory_colors
 	/// Slot of the bodypart feature
 	var/feature_slot
+	/// Render on skeletonization?
+	var/draw_on_skeleton = FALSE
 
 /// Proc to customize the base icon of the organ.
 /datum/bodypart_feature/proc/bodypart_icon(mutable_appearance/standing)
@@ -20,6 +22,8 @@
 
 /datum/bodypart_feature/proc/get_bodypart_overlay(obj/item/bodypart/bodypart)
 	if(!accessory_type)
+		return
+	if(bodypart.skeletonized && !draw_on_skeleton)
 		return
 
 	var/datum/sprite_accessory/accessory = SPRITE_ACCESSORY(accessory_type)

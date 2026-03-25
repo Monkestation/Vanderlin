@@ -125,7 +125,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -254,7 +254,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -346,7 +346,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 

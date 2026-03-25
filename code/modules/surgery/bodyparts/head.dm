@@ -42,7 +42,6 @@
 	. = ..()
 	randomize_price()
 
-
 /obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
 	switch(used_limb)
