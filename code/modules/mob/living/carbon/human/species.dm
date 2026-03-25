@@ -1287,13 +1287,16 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
 
-/datum/species/proc/go_bald(mob/living/carbon/human/H)
+/datum/species/proc/go_bald(mob/living/carbon/human/H, facial = FALSE)
 	if(QDELETED(H))	//may be called from a timer
 		return
-	if(H.gender == MALE)
-		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/shaved, FALSE)
-	if(H.gender == FEMALE)
-		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/none, FALSE)
+	if(facial)
+		if(H.gender == MALE)
+			H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/shaved, FALSE)
+		if(H.gender == FEMALE)
+			H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/none, FALSE)
+	else
+		H.set_facial_hair_color("6a6a6a") // decay color
 	H.set_hair_style(/datum/sprite_accessory/hair/head/bald)
 
 

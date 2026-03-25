@@ -24,7 +24,7 @@
 	name = "Marauder Unit"
 	desc = "One of the assemblies that sealed Heartfelt's fate. Allows for simultaneous attacks with dual weaponry."
 	stability_cost = -25
-	engineering_difficulty = SKILL_LEVEL_MASTER
+	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 25 SECONDS
 
 /datum/augment/special/dualwield/on_install(mob/living/carbon/human/H)
@@ -87,7 +87,7 @@
 	name = "\improper CHRONOS unit"
 	desc = "One of the assemblies that sealed Heartfelt's fate. Activates a localized chrono-distortion field, slowing time for everything around you while you move at normal speed."
 	stability_cost = -30
-	engineering_difficulty = SKILL_LEVEL_LEGENDARY
+	engineering_difficulty = SKILL_RANK_LEGENDARY
 	installation_time = 30 SECONDS
 	granted_actions = list(/datum/action/augment/sandevistan)
 

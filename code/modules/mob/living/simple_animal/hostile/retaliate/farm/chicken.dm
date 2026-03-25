@@ -61,6 +61,7 @@
 	base_strength = 1
 	base_speed = 5
 	tame = TRUE
+	indexed = TRUE
 
 	var/production = 0
 

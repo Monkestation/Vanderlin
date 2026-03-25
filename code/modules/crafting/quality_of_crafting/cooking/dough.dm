@@ -12,6 +12,7 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "knead in more flour"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/dough_alt
 	hides_from_books = TRUE
@@ -28,6 +29,7 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "knead in more flour"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/butter_dough
 	name = "Butter Dough"
@@ -43,6 +45,7 @@
 	crafting_sound = 'sound/foley/kneading_alt.ogg'
 	crafting_message = "knead butter into the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/masa
 	category = "Tiefling Cuisine"
@@ -236,10 +239,57 @@
 		/obj/item/reagent_containers/food/snacks/butterdough = 1,
 		/obj/item/reagent_containers/food/snacks/chocolate = 1,
 	)
-	subtypes_allowed = TRUE
 	starting_atom = /obj/item/reagent_containers/food/snacks/chocolate
 	attacked_atom = /obj/item/reagent_containers/food/snacks/butterdough
 	output = /obj/item/reagent_containers/food/snacks/chocolatebutterdough
+	required_table = TRUE
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading.ogg'
+	crafting_message = "knead the dough and adding chocolate bits"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/choccy_chip_dough
+	name = "Chocolate Chip Cookie Dough"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/butterdough = 1,
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk = 1,
+	)
+	subtypes_allowed = TRUE
+	starting_atom = /obj/item/reagent_containers/food/snacks/chocolate/chunk
+	attacked_atom = /obj/item/reagent_containers/food/snacks/butterdough
+	output = /obj/item/reagent_containers/food/snacks/choccy_chip_dough
+	required_table = TRUE
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading.ogg'
+	crafting_message = "knead the dough and adding chocolate bits"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/chocolate_bun
+	name = "Unbaked Chocolate Bun"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/dough_slice = 1,
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk = 1,
+	)
+	subtypes_allowed = TRUE
+	starting_atom = /obj/item/reagent_containers/food/snacks/chocolate/chunk
+	attacked_atom = /obj/item/reagent_containers/food/snacks/dough_slice
+	output = /obj/item/reagent_containers/food/snacks/choco_bun_raw
+	required_table = TRUE
+	craft_time = 5 SECONDS
+	crafting_sound = 'sound/foley/kneading.ogg'
+	crafting_message = "knead the dough and adding chocolate bits"
+	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/chocolate_pastry
+	name = "Unbaked Chocolate Pastry"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/butterdough_slice = 1,
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk = 1,
+	)
+	subtypes_allowed = TRUE
+	starting_atom = /obj/item/reagent_containers/food/snacks/chocolate/chunk
+	attacked_atom = /obj/item/reagent_containers/food/snacks/butterdough_slice
+	output = /obj/item/reagent_containers/food/snacks/choco_butterdough_slice
 	required_table = TRUE
 	craft_time = 5 SECONDS
 	crafting_sound = 'sound/foley/kneading.ogg'
@@ -261,6 +311,7 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "knead the dough and adding raisins"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/reform_dough
 	name = "Reform Dough"
@@ -276,6 +327,7 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "combine dough slices"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/reform_masa
 	hides_from_books = TRUE
@@ -292,3 +344,4 @@
 	crafting_sound = 'sound/foley/kneading.ogg'
 	crafting_message = "combine dough slices"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking

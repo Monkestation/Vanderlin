@@ -1,19 +1,19 @@
-/mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+/mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	var/armorval = 0
 	var/organnum = 0
 
 	if(def_zone)
-		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL my bodyparts for protection, and averages out the values
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		armorval += checkarmor(BP, type, damage, armor_penetration)
+		armorval += checkarmor(BP, type, damage, armor_penetration, simulate)
 		organnum++
 	return (armorval/max(organnum, 1))
 
 
-/mob/living/carbon/human/proc/checkarmor(def_zone, d_type, damage, armor_penetration, blade_dulling)
+/mob/living/carbon/human/proc/checkarmor(def_zone, d_type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	if(!d_type)
 		return 0
 	if(isbodypart(def_zone))
@@ -64,13 +64,14 @@
 
 	var/boiler_damage = damage / 5
 
-	if(used)
-		if(used.blocksound)
-			playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
-		used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+	if(!simulate)
+		if(used)
+			if(used.blocksound)
+				playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
+			used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
-	if(steam_boiler && def_zone == BODY_ZONE_CHEST)
-		steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+		if(steam_boiler && def_zone == BODY_ZONE_CHEST)
+			steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 	if(physiology)
 		protection += physiology.armor.getRating(d_type)

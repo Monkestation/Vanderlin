@@ -75,8 +75,8 @@
 		else
 			to_chat(user, span_warning("Put [src] on a table before working it!"))
 		return TRUE
-	else
-		to_chat(user, span_warning("Put [src] on a table before working it!"))
+/*	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))*/
 
 /obj/item/reagent_containers/food/snacks/dough_flat
 	name = "flatdough"
@@ -104,7 +104,7 @@
 			to_chat(user, span_notice("Scoring lines into [src]..."))
 			if(do_after(user,long_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/hardtack_raw(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 				qdel(src)
 		else
@@ -166,7 +166,7 @@
 			to_chat(user, span_notice("Flattening [src]..."))
 			if(do_after(user, short_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/piedough(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 				qdel(src)
 		if(istype(I, /obj/item/kitchen/spoon))
@@ -186,7 +186,7 @@
 				else
 					new /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw(loc)
 				qdel(src)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 	else
 		to_chat(user, span_warning("Put [src] on a table before working it!"))
@@ -304,7 +304,7 @@
 	if(!do_after(user, cooking, src, display_over_user=TRUE))
 		return FALSE
 	modified = TRUE
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition)
@@ -741,6 +741,93 @@
 	foodtype = GRAIN | RAW | DAIRY | SUGAR
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
 
+/obj/item/reagent_containers/food/snacks/choccy_chip_dough
+	name = "chocolate chip cookie dough"
+	icon_state = "butterdough"
+	bitesize = 3
+	w_class = WEIGHT_CLASS_NORMAL
+	slice_path = /obj/item/reagent_containers/food/snacks/choccy_cookie_raw
+	slice_batch = TRUE
+	slices_num = 4
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGH_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_POOR
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | SUGAR
+	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/choccy_cookie_raw
+	name = "unbaked chocolate chip cookie"
+	icon_state = "uncookedcookie"
+	slices_num = 0
+	w_class = WEIGHT_CLASS_TINY
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY | SUGAR
+	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/choccy_cookie
+	name = "chocolate chip cookie"
+	desc = "Salty cookie and sweet chocolate meet in this treat."
+	icon_state = "cookie"
+
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | SUGAR
+	tastes = list("chewy butterdough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/choco_butterdough_slice
+	name = "unbaked chocolate pastry"
+	icon_state = "butterdoughslicechoc"
+	slices_num = 0
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY
+	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/choco_bun_raw
+	name = "unbaked chocolate bun"
+	icon_state = "butterdoughslicechoc"
+	slices_num = 0
+	w_class = WEIGHT_CLASS_NORMAL
+
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_IMPOVERISHED
+	rotprocess = SHELFLIFE_DECENT
+	foodtype = GRAIN | RAW | DAIRY
+	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+
+/obj/item/reagent_containers/food/snacks/choco_bun
+	name = "chocolate bun"
+	desc = "A rich chocolate bun, buttery and sweet."
+	icon_state = "bunchoc"
+	base_icon_state = "bunchoc"
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_LAVISH
+	foodtype = GRAIN | DAIRY | SUGAR
+	tastes = list("chewy butterdough" = 1, "rich chocolate" = 1)
+	biting = TRUE
+
+/obj/item/reagent_containers/food/snacks/choco_pastry
+	name = "chocolate pastry"
+	desc = "A flaky pastry filled with rich chocolate."
+	icon_state = "pastrychoc"
+	base_icon_state = "pastrychoc"
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + CHOCCY_NUTRITION
+	faretype = FARE_LAVISH
+	foodtype = GRAIN | DAIRY | SUGAR
+	tastes = list("buttery pastry" = 1, "rich chocolate" = 1)
+	biting = TRUE
+
 /obj/item/reagent_containers/food/snacks/bread/bookbread/chocolate
 	name = "chocolate bookbread"
 	desc = "Nocsmas is not only a holiday for children and commoners, for Noccians are found most concentrated in the upper echelons of society. For these academics, it provies a much needed opportunity to share their secrets."
@@ -818,7 +905,7 @@
 	if(.)
 		return
 	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking/baking))*8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(istype(I, /obj/item/kitchen/rollingpin))
 		if(isturf(loc)&& (found_table))
@@ -826,7 +913,7 @@
 			to_chat(user, span_notice("Flattening [src]..."))
 			if(do_after(user,long_cooktime, src))
 				new /obj/item/reagent_containers/food/snacks/masa_flat(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				user.nobles_seen_servant_work()
 				qdel(src)
 		else
@@ -938,7 +1025,7 @@
 /obj/item/reagent_containers/food/snacks/estrella/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
 		/obj/item/reagent_containers/food/snacks/sugar,
-		/obj/item/reagent_containers/food/snacks/chocolate)))
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk)))
 		return ..()
 	var/obj/item/reagent_containers/food/snacks/S = I
 	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
@@ -958,7 +1045,7 @@
 		name = "sugar powdered [name]"
 		desc = "[desc] Its form holds the sugar excellently."
 		icon_state = "sugar_estrella"
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
+	else if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate/chunk))
 		name = "chocolate dipped [name]"
 		desc = "[desc] It's form holds the chocolate drizzle excelently."
 		icon_state = "chocolate_estrella"
@@ -2095,6 +2182,27 @@
 	foodtype = GRAIN | DAIRY | SUGAR | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
 
+/*	.................   Chocolate Scone   ................... */
+
+/obj/item/reagent_containers/food/snacks/foodbase/scone_raw_choco
+	name = "unbaked chocolate scone"
+	icon_state = "uncookedchocscone"
+	eat_effect = /datum/status_effect/debuff/uncookedfood
+	rotprocess = SHELFLIFE_DECENT
+	faretype = FARE_IMPOVERISHED
+	foodtype = GRAIN | DAIRY | RAW | SUGAR
+	nutrition = BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + CHOCCY_NUTRITION
+
+/obj/item/reagent_containers/food/snacks/scone_choco
+	name = "chocolate scone"
+	desc = "A luxurious treat made with exotic chocolate."
+	icon_state = "cookedsconechoc"
+	tastes = list("crumbly butterdough" = 1, "sweet" = 1, "rich chocolate" = 1)
+	eat_effect = /datum/status_effect/buff/foodbuff
+	faretype = FARE_FINE
+	foodtype = GRAIN | DAIRY | SUGAR
+	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + CHOCCY_NUTRITION) * COOK_MOD
+
 /*-------------\
 | Griddlecakes |
 \-------------*/
@@ -2199,7 +2307,7 @@
 	if(modified || !is_type_in_list(I, list(
 		/obj/item/reagent_containers/food/snacks/butterslice,
 		/obj/item/reagent_containers/food/snacks/spiderhoney,
-		/obj/item/reagent_containers/food/snacks/chocolate)))
+		/obj/item/reagent_containers/food/snacks/chocolate/chunk)))
 		return ..()
 	var/obj/item/reagent_containers/food/snacks/S = I
 	var/cooking = 5 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8
@@ -2208,7 +2316,7 @@
 		return FALSE
 	modified = TRUE
 	faretype++
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
 	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition)
