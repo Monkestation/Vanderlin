@@ -2318,7 +2318,7 @@
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "bcY" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/indoors/town/merc_guild)
 "bdj" = (
 /obj/structure/door/iron/bars,
@@ -16596,7 +16596,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "hET" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/town)
 "hEV" = (
 /obj/structure/rack/shelf/biggest,
@@ -20180,7 +20180,7 @@
 /area/indoors/soilsons)
 "jkb" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/indoors/town/merc_guild)
 "jkx" = (
 /obj/structure/closet/crate/drawer,
@@ -43190,7 +43190,7 @@
 /obj/item/natural/worms/leech{
 	name = "Filith"
 	},
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/indoors/town/merc_guild)
 "tNs" = (
 /obj/structure/bookcase/random/legends,
@@ -51822,7 +51822,7 @@
 /area/indoors/town)
 "xzv" = (
 /obj/structure/flora/grass,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/outdoors/town)
 "xzC" = (
 /obj/structure/closet/crate/drawer,
