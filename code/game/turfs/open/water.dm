@@ -368,7 +368,7 @@
 					user.RemoveElement(/datum/element/submerged)
 			else
 				user.RemoveElement(/datum/element/submerged)
-			user.adjust_experience(/datum/skill/misc/swimming, (user.STAINT * 0.3))
+			user.adjust_experience(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming), (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.3))
 		if(water_overlay)
 			if((get_dir(src, newloc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
