@@ -27,8 +27,6 @@
 
 /datum/outfit/orphan
 	name = "Orphan"
-	pants = /obj/item/clothing/pants/tights/colored/vagrant
-	shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 
 // BOOKISH BRAT - THE COURTLY CHILD
 
@@ -52,6 +50,7 @@
 	and talk your way out of the guards bad graces.  Where would they be without you?"
 	outfit = /datum/outfit/advclass/bbrat
 	category_tags = list(CTAG_ORPHAN)
+	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
 
@@ -139,6 +138,7 @@
 	outfit = /datum/outfit/orphanadv/rrascal
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/rrascal
+	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
 /datum/job/orphanadv/rrascal/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -205,6 +205,7 @@
 	outfit = /datum/outfit/orphanadv/sscamp
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/sscamp
+	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
 
@@ -264,7 +265,9 @@
 	outfit = /datum/outfit/orphanadv/uurchin
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/uurchin
+	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
+
 
 
 /datum/job/orphanadv/uurchin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -320,7 +323,8 @@
 	with your vision."
 	outfit = /datum/outfit/orphanadv/wwastrel
 	category_tags = list(CTAG_ORPHAN)
-	attribute_sheet = /datum/attribute_holder/sheet/job/orphan/wwastrel
+	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/wwastrel
+	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
 
