@@ -148,109 +148,27 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	var/matrix/base_transform
 
-/obj/item/reagent_containers/food/snacks/fish/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
+/obj/item/reagent_containers/food/snacks/fish/return_recipe_data()
+	var/list/data = list()
+	data["type"]       = "fish"
+	data["name"]       = name
+	data["category"]   = "Fish"
+	data["desc"]       = desc
+	data["avg_size"]   = average_size
+	data["avg_weight"] = average_weight
+	data["fluid_type"] = required_fluid_type
+	data["temp_min"]   = required_temperature_min
+	data["temp_max"]   = required_temperature_max
 
-	var/html = {"
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<link rel="stylesheet" type="text/css" href="slop_menustyle2.css">
-			<style>
-				.fish-entry {
-					border: 2px solid #4a90e2;
-					margin: 10px 0;
-					padding: 10px;
-					background-color: #1a1a2e;
-				}
-				.fish-stat {
-					margin: 5px 0;
-					padding-left: 10px;
-				}
-				.stat-label {
-					color: #4a90e2;
-					font-weight: bold;
-				}
-				.difficulty-easy { color: #5cb85c; }
-				.difficulty-medium { color: #f0ad4e; }
-				.difficulty-hard { color: #d9534f; }
-				.trait-item {
-					padding: 5px;
-					margin: 3px 0;
-					border-left: 3px solid #e94560;
-				}
-				.lure-item {
-					padding: 5px;
-					margin: 3px 0;
-					border-left: 3px solid #4a90e2;
-				}
-			</style>
-		</head>
-		<body>
-			<div class='book'>
-				<div class='page'>
-					<h1>[name]</h1>
-					<div class='info'>
-						<img src='\ref[icon]?state=[icon_state]&dir=2' style='display: block; margin: 0 auto; transform: scale(3);' />
-						<p class='desc'>[desc]</p>
-					</div>
-	"}
+	var/list/tips    = build_fishing_tips()
+	data["spots"]        = tips["spots"]
+	data["difficulty"]   = tips["difficulty"]
+	data["fav_bait"]     = tips["favorite_bait"]
+	data["dislike_bait"] = tips["disliked_bait"]
+	data["lures"]        = tips["lures"]
+	data["traits"]       = tips["traits"]
 
-	html += "<div class='section'><h2>Physical Properties</h2>"
-	html += "<div class='fish-stat'><span class='stat-label'>Average Size:</span> [average_size] cm</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Average Size:</span> [average_weight] g</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Beauty Score:</span> [SSfishing.fish_properties[type][FISH_PROPERTIES_BEAUTY_SCORE]]</div>"
-	html += "</div>"
-
-	html += "<div class='section'><h2>Environmental Requirements</h2>"
-	html += "<div class='fish-stat'><span class='stat-label'>Required Fluid:</span> [required_fluid_type]</div>"
-	html += "<div class='fish-stat'><span class='stat-label'>Temperature Range:</span> [required_temperature_min]°C - [required_temperature_max]°C</div>"
-	html += "</div>"
-
-	html += "<div class='section'><h2>Feeding</h2>"
-	var/datum/reagent/food_type = food
-	if(food_type != /datum/reagent/consumable/nutriment)
-		html += "<div class='fish-stat'><span class='stat-label'>Preferred Food:</span> [initial(food_type.name)]</div>"
-	else
-		html += "<div class='fish-stat'><span class='stat-label'>Preferred Food:</span> Fish Feed</div>"
-	html += "</div>"
-
-	var/list/fishing_tips = build_fishing_tips()
-	html += "<div class='section'><h2>Fishing Information</h2>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Found at:</span> [fishing_tips["spots"]]</div>"
-
-	var/difficulty_class = "difficulty-[lowertext(fishing_tips["difficulty"])]"
-	html += "<div class='fish-stat'><span class='stat-label'>Difficulty:</span> <span class='[difficulty_class]'>[fishing_tips["difficulty"]]</span></div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Favorite Bait:</span> [fishing_tips["favorite_bait"]]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Disliked Bait:</span> [fishing_tips["disliked_bait"]]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Compatible Lures & Bait:</span></div>"
-	for(var/lure_name in fishing_tips["lures"])
-		html += "<div class='lure-item'>• [lure_name]</div>"
-
-	html += "<div class='fish-stat'><span class='stat-label'>Behavior:</span></div>"
-	for(var/trait_desc in fishing_tips["traits"])
-		html += "<div class='trait-item'>• [trait_desc]</div>"
-
-	html += "</div>"
-
-	html += {"
-				</div>
-			</div>
-		</body>
-		</html>
-	"}
-	return html
-
-/obj/item/reagent_containers/food/snacks/fish/proc/show_menu(mob/user)
-	user << browse(generate_html(user), "window=fish_catalog;size=600x900")
+	return data
 
 /obj/item/reagent_containers/food/snacks/fish/proc/bait_description(bait)
 	if(ispath(bait))
@@ -282,6 +200,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	.["spots"] = english_list(spot_descriptions, nothing_text = "Unknown")
 
 	var/list/fish_list_properties = SSfishing.fish_properties
+	if(!(type in fish_list_properties))
+		return
 	var/list/fav_bait = fish_list_properties[type][FISH_PROPERTIES_FAV_BAIT]
 	var/list/disliked_bait = fish_list_properties[type][FISH_PROPERTIES_BAD_BAIT]
 	var/list/bait_list = list()
@@ -1324,7 +1244,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				new /obj/item/reagent_containers/food/snacks/chocolate_carp(loc)
 				qdel(I)
 				qdel(src)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp
 	name = "le carp au chocolat"

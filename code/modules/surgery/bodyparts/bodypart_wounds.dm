@@ -59,14 +59,14 @@
 	return returned_wounds
 
 /// Heals wounds on this bodypart by the specified amount
-/obj/item/bodypart/proc/heal_wounds(heal_amount)
+/obj/item/bodypart/proc/heal_wounds(heal_amount, datum/source, forced = FALSE)
 	if(!length(wounds))
 		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in wounds)
 		if(heal_amount <= 0)
 			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
+		var/amount_healed = wound.heal_wound(heal_amount, source, forced)
 		heal_amount -= amount_healed
 		healed_any = TRUE
 	return healed_any
