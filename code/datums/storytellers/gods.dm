@@ -4,8 +4,7 @@
 	weight = 6
 	always_votable = TRUE
 	follower_modifier = LOWER_FOLLOWER_MODIFIER
-	roundstart_prob = 65
-	color_theme = "#FFD700"
+	color_theme = "#fefbea"
 
 	tag_multipliers = list(
 		TAG_ASTRATA = 3,
@@ -38,8 +37,8 @@
 	welcome_text = "The veil between realms shimmers in your presence."
 	weight = 4
 	always_votable = TRUE
-	roundstart_prob = 40
-	follower_modifier = LOWER_FOLLOWER_MODIFIER
+	roundstart_prob = 75
+	follower_modifier = STANDARD_FOLLOWER_MODIFIER
 	color_theme = "#F0F0F0"
 
 	tag_multipliers = list(
@@ -74,7 +73,7 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#228822"
-	roundstart_prob = 90
+	guarantees_roundstart_roleset = TRUE
 
 	tag_multipliers = list(
 		TAG_RAVOX = 3,
@@ -153,7 +152,7 @@
 	color_theme = "#AA8888"
 	event_repetition_multiplier = 0
 	forced = TRUE
-	roundstart_prob = 50
+	roundstart_prob = 80
 
 	tag_multipliers = list(
 		TAG_XYLIX = 3,
@@ -198,7 +197,7 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#888888"
-	roundstart_prob = 70
+	roundstart_prob = 80
 
 	tag_multipliers = list(
 		TAG_NECRA = 3,
@@ -313,7 +312,7 @@
 	desc = "Eora hates death and promotes love. Raids will never naturally progress, only death will bring them."
 	welcome_text = "Life shall flourish under my watchful gaze."
 	color_theme = "#9966CC"
-	roundstart_prob = 35
+	roundstart_prob = 50
 
 	tag_multipliers = list(
 		TAG_EORA = 3,
@@ -405,7 +404,7 @@
 	always_votable = TRUE
 	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#CC4444"
-	roundstart_prob = 100
+	guarantees_roundstart_roleset = TRUE
 
 	tag_multipliers = list(
 		TAG_ZIZO = 3,
@@ -453,6 +452,7 @@
 	always_votable = TRUE
 	follower_modifier = STANDARD_INHUMEN_MODIFIER
 	color_theme = "#9933FF"
+	roundstart_prob = 90
 
 	tag_multipliers = list(
 		TAG_BAOTHA = 3,
@@ -499,7 +499,7 @@
 	always_votable = TRUE
 	follower_modifier = STANDARD_INHUMEN_MODIFIER
 	color_theme = "#8B3A3A"
-	roundstart_prob = 100
+	guarantees_roundstart_roleset = TRUE
 
 	tag_multipliers = list(
 		TAG_GRAGGAR = 3,
@@ -548,7 +548,7 @@
 	always_votable = TRUE
 	follower_modifier = LOWER_INHUMEN_FOLLOWER_MODIFIER
 	color_theme = "#8B4513"
-	roundstart_prob = 90
+	guarantees_roundstart_roleset = TRUE
 
 	tag_multipliers = list(
 		TAG_MATTHIOS = 3,
@@ -586,5 +586,3 @@
 			STATS_GRAVES_ROBBED = list("name" = "Graves robbed:", "points" = 6, "capacity" = 60),
 		)
 	)
-
-	cost_variance = 15  // Keeps a balance between predictability and randomness
