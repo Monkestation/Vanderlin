@@ -41,10 +41,8 @@ SUBSYSTEM_DEF(ticker)
 	var/timeLeft						//pregame timer
 	var/start_at
 	var/timeDelayAdd = 120
-	//576000 dusk
-	//376000 day
-	var/gametime_offset = 288001		//Deciseconds to add to world.time for station time.
-	var/station_time_rate_multiplier = 40		//factor of station time progressal vs real time.
+	var/gametime_offset = 6 HOURS + 1		//Deciseconds to add to world.time for station time.
+	var/station_time_rate_multiplier = 45	//factor of station time progressal vs real time.
 
 	var/totalPlayers = 0					//used for pregame stats on statpanel
 	var/totalPlayersReady = 0				//used for pregame stats on statpanel
@@ -163,7 +161,7 @@ SUBSYSTEM_DEF(ticker)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
 
-	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg','sound/music/title3.ogg')
+	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg', 'sound/music/title3.ogg','sound/music/title4.ogg', 'sound/music/title5.ogg')
 
 	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
 	if(CONFIG_GET(flag/randomize_shift_time))

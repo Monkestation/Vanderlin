@@ -173,7 +173,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	if(get_spell(item , TRUE))
 		to_chat(src, span_warning("You already know this song!"))
 		return
-	if(alert(src, "[item.desc]", "[item.name]", "Learn", "Cancel") == "Cancel") //gives a preview of the spell's description to let people know what a spell does
+	if(tgui_alert(src, "[item.desc]", "[item.name]", list("Learn", "Cancel")) == "Cancel") //gives a preview of the spell's description to let people know what a spell does
 		return
 
 	add_spell(item, source = inspiration)

@@ -346,7 +346,7 @@
 /obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(tallowed)
-		if(alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", "YES", "NO") != "NO")
+		if(tgui_alert(user, "SCRAPE THE TALLOW OFF?", "SIGNET RING", list("Yes", "No")) != "NO")
 			tallowed = FALSE
 			update_appearance(UPDATE_ICON_STATE)
 
