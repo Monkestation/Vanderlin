@@ -241,7 +241,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured
 	name = "puffer"
-	desc = "A magically conjured copy of a eastern styled flintlock. It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
+	desc = "A magically conjured copy of a eastern styled wheellock. It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
 	sellprice = 0 //Yeah, Let's not sell this.
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk/loaded
 
