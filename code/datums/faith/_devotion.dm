@@ -1,10 +1,15 @@
 // Cleric Holder Datums
 /datum/devotion
+	/// The mob that this devotion datum is attached to
 	var/mob/living/carbon/human/holder_mob = null
 
+	/// How much devotion the `holder_mob` can use
 	var/devotion = 0
+	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
+	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
 	var/max_progression = CLERIC_REQ_3
 
 	/// How much devotion is gained per process call
