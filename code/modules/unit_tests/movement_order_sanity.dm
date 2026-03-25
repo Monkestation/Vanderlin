@@ -30,7 +30,7 @@
 	movement_order += "Abstractly Moving from ([loc.x], [loc.y]) to [destination ? "([destination.x], [destination.y])" : "NULL"]"
 	return ..()
 
-/obj/movement_tester/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+/obj/movement_tester/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	movement_order += "Moved from ([old_loc.x], [old_loc.y]) to [loc ? "([loc.x], [loc.y])" : "NULL"]"
 	return ..()
 
