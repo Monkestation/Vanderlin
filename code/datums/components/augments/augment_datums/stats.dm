@@ -61,12 +61,12 @@
 /datum/augment/stats/pressure_tank/on_install(mob/living/carbon/human/H)
 	. = ..()
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
-	sl?.max_steam_charge += 40
+	sl?.max_steam_charge += 50
 
 /datum/augment/stats/pressure_tank/on_remove(mob/living/carbon/human/H)
 	. = ..()
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
-	sl?.max_steam_charge -= 40
+	sl?.max_steam_charge -= 50
 
 /datum/augment/stats/mobility_actuator
 	name = "high-efficiency actuators"

@@ -102,6 +102,8 @@
 	exotic_bloodtype = /datum/blood_type/oil
 
 	bleed_mod = 0.2 // 80% less bleed rate from injuries
+	punch_damage = 5
+	kick_damage = 5
 
 	custom_id = "automaton"
 	custom_clothes = FALSE
@@ -170,7 +172,7 @@
 		"Ironclad" = "A6A695",
 		"Steel Grey" = "9EC0D3",
 		"Sterling" = "CBD6D4",
-		"Golden Alloy" = "DBC70C"
+		"Golden Alloy" = "DBC70C",
 		"Blacksteel" = "767B97",
 	))
 
