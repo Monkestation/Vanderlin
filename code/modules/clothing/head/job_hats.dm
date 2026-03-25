@@ -131,7 +131,9 @@
 	desc = "A wide-brimmed leather hat, adorned with a crimson-dyed feather. Death has come to your little town."
 	icon_state = "inqhat"
 	item_state = "inqhat"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 
 /obj/item/clothing/head/leather/inqhat/vigilante
 	name = "fancy hat"
@@ -185,3 +187,19 @@
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
 		inverse = TRUE, \
 	)
+
+/obj/item/clothing/head/gnomecap
+	name = "dwarven tallhat"
+	desc = "A warm, tall hat, made for colder climates."
+	icon_state = "gnomecap"
+	item_state = "gnomecap"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 32
+	max_integrity = INTEGRITY_STANDARD
+	allowed_race = list(SPEC_ID_HALFLING, SPEC_ID_DWARF)  //Something malicious is brewing
+	min_cold_protection_temperature = -20
+
+/obj/item/clothing/head/gnomecap/Initialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)

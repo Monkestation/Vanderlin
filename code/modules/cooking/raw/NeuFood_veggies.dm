@@ -14,21 +14,25 @@
 	name = "sliced onion"
 	icon_state = "onion_sliced"
 	slices_num = 0
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
 	name = "shredded cabbage"
 	icon_state = "cabbage_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/veg/potato_sliced
 	name = "potato cuts"
 	icon_state = "potato_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 
 /*	..................   Turnip   ................... */
 /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
 	name = "cleaned turnip"
 	icon_state = "turnip_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 
 
 /*	..................		Roasted seeds		................... */

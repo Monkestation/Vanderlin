@@ -53,9 +53,9 @@
 	/// Skill used to perform this surgery step
 	var/datum/attribute/skill/skill_used = /datum/attribute/skill/misc/medicine
 	/// Necessary skill MINIMUM to perform this surgery step, of skill_used
-	var/skill_min = SKILL_LEVEL_NOVICE
+	var/skill_min = SKILL_RANK_NOVICE
 	/// Skill median used to apply success and speed bonuses
-	var/skill_median = SKILL_LEVEL_JOURNEYMAN
+	var/skill_median = SKILL_RANK_JOURNEYMAN
 	/// Modifiers to success chance when you're above the median
 	var/list/skill_bonuses = list(
 		0.2,
