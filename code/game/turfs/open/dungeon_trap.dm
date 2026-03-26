@@ -5,15 +5,12 @@
 	icon_state = "grey"
 	color = "#3d3d3d"
 
-	var/can_cover_up = TRUE
-	var/can_build_on = TRUE
 	turf_flags = NONE
 	path_weight = 500
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_FLOOR_OPEN_SPACE
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
-
 
 /turf/open/dungeon_trap/can_traverse_safely(atom/movable/traveler)
 	//cheating this by checking if they can fall onto the same tile
@@ -69,6 +66,57 @@
 	var/turf/open/chosen_turf
 	while(!chosen_turf && length(dungeon_turfs))
 		var/turf/T = pick_n_take(dungeon_turfs)
+		if(isopenturf(T))
+			chosen_turf = T
+		// no chosen_turf this step so don't bother with the parts after this
+		if(isclosedturf(chosen_turf) || isopenspace(chosen_turf)) // don't put us in walls or falls
+			continue
+		// check if our chosen_turf actually works
+		for(var/obj/structure/struct in chosen_turf)
+			if(struct.density && !struct.climbable) // keeps you from landing inside bars or something
+				chosen_turf = null // ineligible
+				break
+	return chosen_turf
+
+
+/turf/open/dungeon_trap/australia
+	name = "deep abyss"
+	desc = "It's a long way up..."
+	icon_state = "undervoid2"
+	color = null
+	smoothing_flags = NONE
+	smoothing_groups = NONE
+	smoothing_list = null
+	neighborlay_self = null
+	dynamic_lighting = FALSE
+
+
+/turf/open/dungeon_trap/australia/can_zFall(atom/movable/A, levels = 1, turf/target)
+	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
+
+/turf/open/dungeon_trap/australia/zFall(atom/movable/A, levels = 1, force = FALSE)
+	if(!isobj(A) && !ismob(A))
+		return FALSE
+	var/turf/target = get_australia_tile()
+	if(!target)
+		return FALSE
+	levels += 5
+	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
+		return FALSE
+	A.atom_flags |= Z_FALLING
+	A.forceMove(target)
+	A.atom_flags &= ~Z_FALLING
+	target.zImpact(A, levels, src)
+	return TRUE
+
+/proc/get_australia_tile()
+	var/list/levels = SSmapping.levels_by_trait(ZTRAIT_TOWN)
+	if(!length(levels))
+		return
+	var/list/australia_turfs = Z_TURFS(levels[length(levels)])
+	var/turf/open/chosen_turf
+	while(!chosen_turf && length(australia_turfs))
+		var/turf/T = pick_n_take(australia_turfs)
 		if(isopenturf(T))
 			chosen_turf = T
 		// no chosen_turf this step so don't bother with the parts after this

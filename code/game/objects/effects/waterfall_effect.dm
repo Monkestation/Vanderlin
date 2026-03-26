@@ -20,3 +20,6 @@
 
 /obj/effect/waterfall/acid
 	water_reagent = /datum/reagent/rogueacid
+
+/obj/effect/waterfall/sewage
+	water_reagent = /datum/reagent/water/gross/sewer

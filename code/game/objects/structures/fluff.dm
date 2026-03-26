@@ -189,12 +189,13 @@
 	plane = GAME_PLANE_UPPER
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+	var/run_wclass_check = TRUE
 
 /obj/structure/bars/CanAllowThrough(atom/movable/mover, turf/target)
 	if(isobserver(mover))
 		return TRUE
 	. = ..()
-	if(. && density && mover.throwing && isitem(mover))
+	if(run_wclass_check && . && density && mover.throwing && isitem(mover))
 		var/obj/item/I = mover
 		var/chance = 100 - (I.w_class-1) * 30
 		if(isliving(I.throwing.thrower))
@@ -204,6 +205,7 @@
 
 /obj/structure/bars/bent
 	icon_state = "barsbent"
+	run_wclass_check = FALSE
 
 /obj/structure/bars/chainlink
 	icon_state = "chainlink"
