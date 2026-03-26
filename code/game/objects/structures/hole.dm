@@ -232,7 +232,7 @@
 				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
 					if(ishuman(user))
 						var/mob/living/carbon/human/L = user
-						var/robbery_location = get_area_name(user) // we do user location because src breaks
+						var/robbery_location = get_area_name(get_turf(src))
 						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
 							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 							record_round_statistic(STATS_GRAVES_ROBBED)
