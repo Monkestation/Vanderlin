@@ -620,7 +620,7 @@
 	if(!direction)
 		direction = get_dir(src, newloc)
 
-	if(dir != direction && !throwing && update_dir && !face_mouse)
+	if(!face_mouse && !throwing && dir != direction && update_dir)
 		setDir(direction)
 
 	var/is_multi_tile_object = is_multi_tile_object(src)
@@ -876,7 +876,7 @@
 	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direction_to_move, glide_size_override)) //movement failed due to buckled mob(s)
 		. = FALSE
 
-	if(. && pulledby && moving_diagonally != FIRST_DIAG_STEP) // EXPERIMENTAL
+	if(. && pulledby && moving_diagonally != FIRST_DIAG_STEP) // EXPERIMENTAL: Fix grabs not breaking when pulling is moved by something else
 		pulledby.check_pulling(only_pulling = TRUE, z_allowed = TRUE)
 
 	if(currently_z_moving)

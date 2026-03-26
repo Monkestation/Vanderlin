@@ -351,16 +351,6 @@
 		return CHECK_BITFIELD(mover.movement_type, PHASING)
 	return TRUE
 
-/turf/Exit(atom/movable/mover, atom/newloc)
-	. = ..()
-	if(!. || QDELETED(mover))
-		return FALSE
-	for(var/i in contents)
-		if(i == mover)
-			continue
-		if(QDELETED(mover))
-			return FALSE		//We were deleted.
-
 /turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
