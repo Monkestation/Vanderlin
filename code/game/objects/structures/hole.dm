@@ -263,13 +263,24 @@
 /// Should only be called on graves where `check_double_consecration()` returned true
 /obj/structure/closet/dirthole/proc/unique_body_double_consecrate()
 	var/unique_bodies
-
 	// Go inside coffin
+	for (var/obj/structure/closet/crate/coffin/coffin in src)
+		for(var/obj/thing in coffin)
+			if(ishuman(thing))
+				var/mob/living/carbon/human = thing
+				if(!(human.dna in GLOB.unique_double_consecrate))
+					unique_bodies++
+					GLOB.unique_double_consecrate += human.dna
 
-	// For each unique body, increment unique_bodies and set their been_double_consecrated to TRUE
+			else if(istype(thing, /obj/item/bodypart/head))
+				var/obj/item/bodypart/head/head = thing
+				if(!head.owner.dna)
+					continue
+				if(!(head.owner.dna in GLOB.unique_double_consecrate))
+					unique_bodies++
+					GLOB.unique_double_consecrate += head.owner.dna
 
-	// Handle edge cases such as if body is in parts (to avoid counting head and body twice for example)
-
+	return unique_bodies
 
 /// Global proc (to handle coffin consecration) that will adjust every necran's devotion passive gain
 /// When called by a coffin, `amount` is not needed
@@ -313,7 +324,7 @@
 				// Do quick maths to ensure change is not going to go over max
 				if(current_passive_gain == GRAVE_DEVOTION_MAX && change >= 0) // At max and we are not reducing it, skip
 					continue
-				else if((current_passive_gain += change) > GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
+				else if((current_passive_gain + change) > GRAVE_DEVOTION_MAX) // Have change modified to make the passive_gain reach max
 					change = GRAVE_DEVOTION_MAX - current_passive_gain
 					message_admins("MAX - [current_passive_gain]. Change is now [change].")
 

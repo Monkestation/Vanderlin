@@ -102,8 +102,6 @@
 	var/buried = FALSE
 	/// Whether the body is buried or not.
 	var/funeral = FALSE
-	/// You only get rewarded for the FIRST double consecration
-	var/been_double_consecrated = FALSE
 
 	var/datum/devotion/cleric = null // Used for cleric_holder for priests
 	var/datum/inspiration/inspiration = null
