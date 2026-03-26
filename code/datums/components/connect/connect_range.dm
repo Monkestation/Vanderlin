@@ -114,6 +114,4 @@
 
 /datum/component/connect_range/proc/on_moved(atom/movable/movable, atom/old_loc)
 	SIGNAL_HANDLER
-	if(QDELETED(src)) // EXPERIMENTAL: REMOVE WHEN CANONICAL MOVEMENT IS PORTED
-		return
 	update_signals(movable, old_loc)
