@@ -539,7 +539,7 @@ SUBSYSTEM_DEF(housing)
 		to_chat(user, span_warning("No slot assigned to this property!"))
 		return
 
-	var/confirm = alert(user, "Save the current state to design slot [slot]?", "Save Property", "Yes", "No")
+	var/confirm = tgui_alert(user, "Save the current state to design slot [slot]?", "Save Property", list("Yes", "No"))
 	if(confirm != "Yes")
 		return
 
@@ -605,7 +605,7 @@ SUBSYSTEM_DEF(housing)
 
 	var/selected_slot = options[choice]
 
-	var/confirm = alert(user, "Purchase this property for [linked_property.rent_cost] credits using slot [selected_slot]?\n\nRent will be deducted each round.", "Property Purchase", "Yes", "No")
+	var/confirm = tgui_alert(user, "Purchase this property for [linked_property.rent_cost] credits using slot [selected_slot]?\n\nRent will be deducted each round.", "Property Purchase", list("Yes", "No"))
 	if(confirm != "Yes")
 		return
 

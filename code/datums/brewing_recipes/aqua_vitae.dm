@@ -7,6 +7,7 @@
 	reagent_to_brew = /datum/reagent/consumable/ethanol/aqua_vitae
 	pre_reqs = /datum/reagent/consumable/ethanol/brandy
 	heat_required = 360
+	brewing_skill = /datum/attribute/skill/craft/cooking/preservation
 
 /datum/brewing_recipe/aqua_vitae/pear
 	name = "Aqua Vitae - Plum"

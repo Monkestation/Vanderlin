@@ -18,7 +18,8 @@
 	for(var/i in reserved_turfs)
 		reserved_turfs -= i
 		SSmapping.used_turfs -= i
-	SSmapping.reserve_turfs(v)
+	// Makes the linter happy, even tho we don't await this
+	INVOKE_ASYNC(SSmapping, TYPE_PROC_REF(/datum/controller/subsystem/mapping, reserve_turfs), v)
 
 /datum/turf_reservation/proc/Reserve(width, height, zlevel)
 	if(width > world.maxx || height > world.maxy || width < 1 || height < 1)

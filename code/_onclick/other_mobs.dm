@@ -102,7 +102,7 @@
 	if(user.cmode)
 		return
 
-	if(ishuman(user))
+	if(ishuman(user) && user != src)
 		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		if(length(user.return_apprentices()) >= user.return_max_apprentices())
 			return
@@ -111,7 +111,7 @@
 		var/datum/job/my_job = mind?.assigned_role
 		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
 			return
-		var/choice = browser_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
 		if(choice != CHOICE_CONFIRM)
 			return
 		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
@@ -198,6 +198,7 @@
 		B.grabbee = user
 		B.limb_grabbed = BP
 		B.sublimb_grabbed = used_limb
+		SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, user) // black briar uses this for triggering infection on grabbers
 
 		lastattacker = user.real_name
 		lastattackerckey = user.ckey

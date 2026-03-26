@@ -6,7 +6,7 @@
 	max_occurrences = 1
 	min_players = 3
 	req_omen = TRUE
-	todreq = list("dusk", "night", "dawn", "day")
+	todreq = list(DUSK, NIGHT, DAWN, DAY)
 
 	tags = list(
 		TAG_NATURE,

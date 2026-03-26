@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 	var/datum/beam/current_beam
 
-/datum/mana_pool/leyline/Destroy(force, ...)
+/datum/mana_pool/leyline/Destroy(force)
 	QDEL_NULL(intensity)
 	QDEL_LIST(themes)
 	if(current_beam)

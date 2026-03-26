@@ -562,5 +562,179 @@
                 "sound": "Changed Field/Catacombs area themes. Sorry!"
             }
         ]
+    },
+    "2026-03-21": {
+        "KevinfromHP": [
+            {
+                "balance": "Moved Malaguero Deserter to Adventurer"
+            },
+            {
+                "balance": "Moved Species Examine to Face instead of Body"
+            }
+        ],
+        "CheffieGithub": [
+            {
+                "rscadd": "Added stealth strikes, doing extra damage to unsuspecting targets (Not in combat mode, need to be sneaking behind them). Sneak attacks do up to ~50% extra damage and have up to ~15% extra chance to knockout based on sneak."
+            },
+            {
+                "refactor": "Big lighting refactor, somethings may be too dim or too bright, report issues."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the nimrod haircut"
+            }
+        ],
+        "realforest2001": [
+            {
+                "code_imp": "Chages alert prompts to use TGUI."
+            },
+            {
+                "code_imp": "Removes browser_alert."
+            }
+        ],
+        "Archeonan": [
+            {
+                "rscadd": "Bard Adventurer Class"
+            },
+            {
+                "rscdel": "Removed Pilgrim Bard"
+            },
+            {
+                "balance": "Gave bard light gambeson, short sword, and average sword skills"
+            }
+        ]
+    },
+    "2026-03-22": {
+        "KevinfromHP": [
+            {
+                "sound": "New foley for climbing ladders, walking on metal grilles, rope bridges, pipes, and Kybraxor"
+            },
+            {
+                "code_imp": "Switches some existing usages of the squeak component to footstep override, as its functionality is closer to intended usage with footsteps"
+            },
+            {
+                "rscadd": "Rounds are now 20 minutes longer"
+            },
+            {
+                "balance": "Day is 2 hours longer than it used to be"
+            },
+            {
+                "sound": "Added 4 new songs, 2 to the title screen and 2 to the credits. Songs by burialgoods."
+            }
+        ],
+        "Casperclone1": [
+            {
+                "rscadd": "Bandits can now become rogue mages!"
+            },
+            {
+                "rscdel": "As they are now no longer worshipping Zizo they have lost their ability to speak to the dead"
+            }
+        ],
+        "The-Awful": [
+            {
+                "bugfix": "fixed food sprites"
+            },
+            {
+                "bugfix": "salad no longer craftable on bowls with liquid in them"
+            }
+        ]
+    },
+    "2026-03-23": {
+        "Rockslp": [
+            {
+                "rscadd": "More kobold slurs"
+            }
+        ],
+        "Snack-Max": [
+            {
+                "rscadd": "Makes lightweight brigandines craftable"
+            },
+            {
+                "bugfix": "adjust fighters and clerics"
+            }
+        ],
+        "tired-wired": [
+            {
+                "rscadd": "Added various chocolate pastries."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed Malaguero + other stress events"
+            }
+        ]
+    },
+    "2026-03-24": {
+        "KevinfromHP": [
+            {
+                "rscadd": "BLACK BRIAR"
+            }
+        ],
+        "Aberra": [
+            {
+                "bugfix": "Round-end species stats grammar for aasimar and rakshari."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the dwarven tallhat and gives it a craftable recipe."
+            }
+        ]
+    },
+    "2026-03-26": {
+        "walrusfromspace": [
+            {
+                "bugfix": "You can now sell brewer's bottles at the merchant ship again"
+            }
+        ],
+        "Kevin": [
+            {
+                "bugfix": "ambush sounds procing in areas where there are no ambushes"
+            },
+            {
+                "code_imp": "Standardized defines for DAY, DAWN, NIGHT, and DUSK"
+            },
+            {
+                "balance": "Rebalanced ambushes around the map"
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "Many more produce items are now accepted by the stockpile."
+            },
+            {
+                "rscadd": "Curtains are now craftable from one stick and two cloth."
+            },
+            {
+                "rscadd": "A new Adventurer subclass, the Alchemist"
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Added the training sword, an unbound servant bell and the dwarven tallhat to loadout selection."
+            },
+            {
+                "balance": "Slight rebalance of dodge opposition"
+            },
+            {
+                "bugfix": "Fixes aggro grab parry back to the old state. (The removal was never mentioned? Not sure if intended.)"
+            }
+        ],
+        "Blumengama": [
+            {
+                "rscadd": "Added some new hairstyles"
+            }
+        ],
+        "Ben10083": [
+            {
+                "rscadd": "Extremist Psydonites are reminded that Psydon is, in fact, still alive."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed offering yourself apprenticeship"
+            }
+        ]
     }
 }
