@@ -148,8 +148,7 @@
 		var/mob/M = usr
 		for(var/datum/recipe as anything in M.mind?.learned_recipes)
 			book.types |= recipe.type
-		book.generate_categories()
-		usr << browse(book.generate_html(usr),"window=recipe;size=800x810")
+		book.ui_interact(usr)
 		return
 	if(world.time < lastclick + 3 SECONDS)
 		return
@@ -1733,13 +1732,13 @@
 
 /atom/movable/screen/time/update_name()
 	switch(GLOB.tod)
-		if("day")
+		if(DAY)
 			name = "Astrata"
-		if("dusk")
+		if(DUSK)
 			name = "Astrata - Dusk"
-		if("night")
+		if(NIGHT)
 			name = "Noc"
-		if("dawn")
+		if(DAWN)
 			name = "Astrata - Dawn"
 	return ..()
 

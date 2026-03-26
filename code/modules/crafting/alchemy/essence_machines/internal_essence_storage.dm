@@ -9,7 +9,7 @@
 	if(parent)
 		parent_atom = parent
 
-/datum/essence_storage/Destroy(force, ...)
+/datum/essence_storage/Destroy(force)
 	parent_atom = null
 	return ..()
 

@@ -5,6 +5,7 @@
 	brewed_amount = 5
 	brew_time = 2 MINUTES
 	sell_value = 25
+	brewing_skill = /datum/attribute/skill/craft/cooking/confectionery
 
 /datum/brewing_recipe/rum
 	name = "Rum"
@@ -15,3 +16,4 @@
 	brew_time = 3 MINUTES
 	sell_value = 75
 	heat_required = 380
+	brewing_skill = /datum/attribute/skill/craft/cooking/distilling

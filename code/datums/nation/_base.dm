@@ -62,7 +62,7 @@
 	setup_possible_cache()
 	setup_agreements(rand(3, length(possible_trade_requests) * 0.25))
 
-/datum/nation/Destroy(force, ...)
+/datum/nation/Destroy(force)
 	. = ..()
 	QDEL_LIST(nodes)
 	lazyman = null

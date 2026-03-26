@@ -25,7 +25,7 @@
 
 	user.browser_modals.Add(src)
 
-/datum/browser/modal/Destroy(force, ...)
+/datum/browser/modal/Destroy(force)
 	if(!user)
 		stack_trace("modal had no user when it was deleted, which isn't weird necessarily but is a sign for something going bad")
 	else

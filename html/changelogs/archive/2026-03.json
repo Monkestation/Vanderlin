@@ -664,5 +664,22 @@
                 "bugfix": "fixed Malaguero + other stress events"
             }
         ]
+    },
+    "2026-03-24": {
+        "KevinfromHP": [
+            {
+                "rscadd": "BLACK BRIAR"
+            }
+        ],
+        "Aberra": [
+            {
+                "bugfix": "Round-end species stats grammar for aasimar and rakshari."
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Adds the dwarven tallhat and gives it a craftable recipe."
+            }
+        ]
     }
 }

@@ -28,15 +28,12 @@
 
 	/// Components attached to this datum
 	/// Lazy associated list in the structure of `type:component/list of components`
-	var/list/datum_components
+	var/list/_datum_components
 	/// Any datum registered to receive signals from this datum is in this list
 	/// Lazy associated list in the structure of `signal:registree/list of registrees`
-	var/list/comp_lookup
+	var/list/_listen_lookup
 	/// Lazy associated list in the structure of `signals:proctype` that are run when the datum receives that signal
-	var/list/list/datum/callback/signal_procs
-	/// Is this datum capable of sending signals?
-	/// Set to true when a signal has been registered
-	var/signal_enabled = FALSE
+	var/list/list/datum/callback/_signal_procs
 
 	/// Datum level flags
 	var/datum_flags = NONE
@@ -99,8 +96,9 @@
  *
  * Returns QDEL_HINT_QUEUE
  */
-/datum/proc/Destroy(force=FALSE, ...)
+/datum/proc/Destroy(force = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 	tag = null
 	datum_flags &= ~DF_USE_TAG //In case something tries to REF us
 	weak_reference = null	//ensure prompt GCing of weakref.
@@ -119,28 +117,27 @@
 	#endif
 
 	//BEGIN: ECS SHIT
-	signal_enabled = FALSE
-
-	var/list/dc = datum_components
+	var/list/dc = _datum_components
 	if(dc)
-		var/all_components = dc[/datum/component]
-		if(length(all_components))
-			for(var/datum/component/component as anything in all_components)
-				qdel(component)
-		else
-			var/datum/component/C = all_components
-			qdel(C, FALSE)
+		for(var/component_key in dc)
+			var/component_or_list = dc[component_key]
+			if(islist(component_or_list))
+				for(var/datum/component/component as anything in component_or_list)
+					qdel(component, FALSE)
+			else
+				var/datum/component/C = component_or_list
+				qdel(C, FALSE)
 		dc.Cut()
 
-	clear_signal_refs()
+	_clear_signal_refs()
 	//END: ECS SHIT
 
 	return QDEL_HINT_QUEUE
 
 ///Only override this if you know what you're doing. You do not know what you're doing
 ///This is a threat
-/datum/proc/clear_signal_refs()
-	var/list/lookup = comp_lookup
+/datum/proc/_clear_signal_refs()
+	var/list/lookup = _listen_lookup
 	if(lookup)
 		for(var/sig in lookup)
 			var/list/comps = lookup[sig]
@@ -150,10 +147,10 @@
 			else
 				var/datum/component/comp = comps
 				comp.UnregisterSignal(src, sig)
-		comp_lookup = lookup = null
+		_listen_lookup = lookup = null
 
-	for(var/target in signal_procs)
-		UnregisterSignal(target, signal_procs[target])
+	for(var/target in _signal_procs)
+		UnregisterSignal(target, _signal_procs[target])
 
 #ifdef DATUMVAR_DEBUGGING_MODE
 /datum/proc/save_vars()

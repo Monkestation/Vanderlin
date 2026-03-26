@@ -14,6 +14,14 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/fibers
+	item_flags = OBTAINED_DATA
+	obtained_from = list(
+		list("From foraging in bushes.", /obj/structure/flora/grass/bush_meagre),
+		list("From cutting grass.", /obj/structure/flora/grass),
+		list("From cutting leafy mushrooms.", /obj/structure/flora/grass/mushroom),
+		list("From cutting herbal flowers.", /obj/structure/flora/grass/herb/atropa),
+		list("From Threshing Chaff.", /obj/item/natural/chaff/wheat)
+	)
 
 /obj/item/natural/silk
 	name = "silk"

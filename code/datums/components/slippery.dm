@@ -13,7 +13,7 @@
 	lube_flags = _lube_flags
 	callback = _callback
 	slip_probability = _slip_probability
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Slip))
+	RegisterSignals(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Slip))
 	RegisterSignal(parent, COMSIG_ITEM_WEARERCROSSED, PROC_REF(Slip_on_wearer))
 
 /datum/component/slippery/UnregisterFromParent()

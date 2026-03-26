@@ -933,12 +933,12 @@
 						user.visible_message("<span class='info'>[user] trains on [src]!</span>")
 						var/boon = user.get_learning_boon(W.associated_skill)
 						var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2
-						if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 15)
+						if(GET_MOB_SKILL_VALUE_RAW(user, W.associated_skill) >= 15)
 							if(!HAS_TRAIT(user, TRAIT_INTRAINING))
 								to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 								amt2raise = 0
 							else
-								if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 20)
+								if(GET_MOB_SKILL_VALUE_RAW(user, W.associated_skill) >= 20)
 									to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 									amt2raise = 0
 						if(amt2raise > 0)
