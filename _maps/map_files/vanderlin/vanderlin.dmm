@@ -2862,6 +2862,10 @@
 	dir = 4
 	},
 /area/indoors/soilsons)
+"btN" = (
+/obj/structure/bridge,
+/turf/open/water/cleanshallow,
+/area/outdoors/exposed/under/sewer)
 "btR" = (
 /obj/structure/bars/pipe{
 	dir = 10
@@ -2882,6 +2886,12 @@
 	},
 /turf/open/floor/metal/alt,
 /area/indoors/town/dwarfin)
+"buf" = (
+/obj/effect/landmark/start/vagrantlate{
+	dir = 4
+	},
+/turf/open/floor/greenstone,
+/area/outdoors/exposed/under/sewer)
 "bug" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town/keep)
@@ -5726,13 +5736,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
-"cHn" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
-/area/outdoors/exposed/under/sewer)
 "cHs" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -6492,12 +6495,6 @@
 /area/indoors/town/keep/servanthead)
 "cWT" = (
 /turf/open/water/swamp/deep,
-/area/outdoors/exposed/under/sewer)
-"cWU" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/floor/woodturned,
 /area/outdoors/exposed/under/sewer)
 "cWZ" = (
 /obj/structure/fermentation_keg/random/water,
@@ -21357,12 +21354,6 @@
 /obj/structure/kneestingers,
 /turf/open/floor/blocks/paving,
 /area/outdoors/exposed/under/sewer)
-"jXU" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/floor/naturalstone,
-/area/outdoors/exposed/under/sewer)
 "jYd" = (
 /turf/open/floor/tile,
 /area/indoors/town/keep/halls/e)
@@ -21735,12 +21726,6 @@
 "khW" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/farm)
-"kie" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/water/cleanshallow,
-/area/outdoors/exposed/under/sewer)
 "kin" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -26230,6 +26215,18 @@
 /obj/item/textbook/novice,
 /turf/open/floor/hexstone,
 /area/indoors/town/orphanage)
+"mjR" = (
+/obj/structure/minecart_rail{
+	dir = 4
+	},
+/turf/closed/mineral/bedrock,
+/area/outdoors/exposed/town)
+"mjZ" = (
+/obj/structure/bridge_stakes{
+	dir = 4
+	},
+/turf/open/floor/greenstone,
+/area/outdoors/exposed/under/sewer)
 "mkp" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	floor_turf = /turf/open/floor/ruinedwood/spiral;
@@ -35284,6 +35281,12 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
+"qks" = (
+/obj/structure/bridge_stakes{
+	dir = 8
+	},
+/turf/open/floor/greenstone,
+/area/outdoors/exposed/under/sewer)
 "qkD" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/alch/sinew,
@@ -38723,9 +38726,6 @@
 /turf/open/floor/grass,
 /area/outdoors/farm)
 "rHu" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1
 	},
@@ -42970,6 +42970,10 @@
 /obj/machinery/light/fueled/lanternpost/fixed,
 /turf/open/floor/greenstone,
 /area/outdoors/exposed/under/sewer)
+"tFa" = (
+/obj/structure/bridge_stakes,
+/turf/open/floor/dirt/road,
+/area/outdoors/exposed/under/sewer)
 "tFf" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -43841,6 +43845,12 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/eora)
+"uaL" = (
+/obj/structure/bridge{
+	dir = 4
+	},
+/turf/open/water/sewer,
+/area/outdoors/exposed/under/sewer)
 "uaW" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -49668,7 +49678,10 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "wyQ" = (
-/turf/open/floor/woodturned,
+/obj/structure/bridge_stakes{
+	dir = 1
+	},
+/turf/open/floor/naturalstone,
 /area/outdoors/exposed/under/sewer)
 "wyZ" = (
 /obj/effect/waterfall,
@@ -53151,6 +53164,12 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/knight)
+"xYi" = (
+/obj/effect/landmark/start/vagrantlate{
+	dir = 1
+	},
+/turf/open/floor/greenstone,
+/area/outdoors/exposed/under/sewer)
 "xYs" = (
 /obj/structure/table/wood/plain,
 /obj/item/kitchen/fork/iron{
@@ -69605,8 +69624,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+nFN
+nFN
 qFx
 qFx
 qFx
@@ -69794,21 +69813,21 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
 qQh
 qQh
 qQh
@@ -69996,21 +70015,21 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
+nFN
 qQh
 oEP
 oEP
@@ -118295,7 +118314,7 @@ tZe
 tZe
 tZe
 tZe
-izG
+ewd
 xtg
 xtg
 xtg
@@ -124739,13 +124758,13 @@ biy
 biy
 biy
 biy
-fcd
-fcd
-fcd
-fcd
-fcd
-fcd
-fcd
+biy
+biy
+biy
+biy
+biy
+biy
+biy
 biy
 biy
 biy
@@ -126549,10 +126568,10 @@ nRI
 nRI
 nRI
 nRI
-lsd
-oEP
-oEP
-lod
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -158696,7 +158715,7 @@ qFx
 qFx
 qFx
 biy
-biy
+stS
 biy
 biy
 biy
@@ -158898,7 +158917,7 @@ qFx
 qFx
 qFx
 qFx
-biy
+stS
 biy
 biy
 biy
@@ -159935,7 +159954,7 @@ tZe
 tZe
 izG
 biy
-biy
+xnl
 nNY
 fPr
 qFx
@@ -160137,7 +160156,7 @@ qXw
 fLB
 izG
 biy
-biy
+xnl
 qFx
 qFx
 qFx
@@ -160339,7 +160358,7 @@ qXw
 qXw
 izG
 biy
-biy
+xnl
 nNY
 fPr
 qFx
@@ -199852,11 +199871,11 @@ iKA
 lLn
 uaz
 iVQ
-rea
-rea
-rea
-rea
-rea
+sUH
+sUH
+sUH
+sUH
+sUH
 gWZ
 czz
 czz
@@ -200054,11 +200073,11 @@ kjp
 rnN
 nIr
 mGE
-sUH
-sUH
-sUH
-sUH
-sUH
+luJ
+luJ
+luJ
+luJ
+luJ
 gwN
 czz
 czz
@@ -236084,10 +236103,10 @@ pbY
 eMz
 eMz
 eMz
+buf
 eMz
 eMz
-eMz
-eMz
+buf
 eMz
 eMz
 eMz
@@ -236286,10 +236305,10 @@ pbY
 eMz
 eMz
 eMz
+sTk
 eMz
 eMz
-eMz
-eMz
+sTk
 eMz
 eMz
 eMz
@@ -236488,10 +236507,10 @@ pbY
 pbY
 pbY
 pbY
+sTk
 pbY
 pbY
-pbY
-pbY
+sTk
 pbY
 pbY
 pbY
@@ -239711,9 +239730,9 @@ dMK
 wZc
 sTk
 sTk
-oub
-qXC
-jyR
+sTk
+mjZ
+sTk
 tEY
 sTk
 sTk
@@ -239913,9 +239932,9 @@ dMK
 dMK
 dMK
 dMK
-uJJ
-qXC
-jyR
+dMK
+uaL
+dMK
 dMK
 dMK
 dMK
@@ -240115,9 +240134,9 @@ wZc
 dMK
 dMK
 dMK
-uJJ
-qXC
-jyR
+dMK
+uaL
+dMK
 dMK
 dMK
 dMK
@@ -240317,9 +240336,9 @@ sTk
 dMK
 dMK
 dMK
-uJJ
-qXC
-jyR
+dMK
+uaL
+dMK
 dMK
 dMK
 dMK
@@ -240519,9 +240538,9 @@ sTk
 sTk
 sTk
 sTk
-oub
-qXC
-jyR
+sTk
+qks
+sTk
 sTk
 sTk
 sTk
@@ -241115,13 +241134,13 @@ qJY
 tjo
 xtV
 hyI
-jXU
-kie
-cHn
-kie
-kie
-kie
-kie
+xtV
+erL
+lrM
+erL
+erL
+erL
+erL
 rHu
 xtV
 vPk
@@ -241316,15 +241335,15 @@ jEQ
 jEQ
 tjo
 hyI
+tFa
+btN
+btN
+btN
+btN
+btN
+btN
+wyQ
 hyI
-wyQ
-wyQ
-wyQ
-wyQ
-wyQ
-wyQ
-wyQ
-wyQ
 hyI
 hyI
 hyI
@@ -241519,14 +241538,14 @@ jEQ
 bbN
 xtV
 xtV
-cWU
-cWU
-cWU
-cWU
-cWU
-cWU
-cWU
-cWU
+erL
+erL
+erL
+erL
+erL
+erL
+hyI
+hyI
 hyI
 hyI
 hyI
@@ -242956,9 +242975,9 @@ dMK
 dMK
 dMK
 sTk
-pbY
-eMz
-eMz
+sTk
+sTk
+xYi
 eMz
 eMz
 pbY
@@ -243562,9 +243581,9 @@ dMK
 dMK
 qso
 sTk
-pvJ
-eMz
-eMz
+sTk
+sTk
+xYi
 eMz
 eMz
 pvJ
@@ -245797,9 +245816,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -245999,9 +246018,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -246201,9 +246220,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -246403,9 +246422,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -246605,9 +246624,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -246807,9 +246826,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -247009,9 +247028,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 qFx
@@ -247211,9 +247230,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 sVI
@@ -247413,9 +247432,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 nIO
@@ -247615,9 +247634,9 @@ qFx
 qFx
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 nIO
@@ -247817,9 +247836,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 sVI
@@ -248019,9 +248038,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 jRT
@@ -248221,9 +248240,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 aOY
@@ -248423,9 +248442,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 wAh
@@ -248625,9 +248644,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 dmy
@@ -248827,9 +248846,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 nFb
@@ -249029,9 +249048,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 ehW
@@ -249231,9 +249250,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 sVI
@@ -249433,9 +249452,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -249635,9 +249654,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -249837,9 +249856,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -250039,9 +250058,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -250241,9 +250260,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -250443,9 +250462,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -250645,9 +250664,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -250847,9 +250866,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -251049,9 +251068,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -251251,9 +251270,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -251453,9 +251472,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -251655,9 +251674,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -251857,9 +251876,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -252059,9 +252078,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -252261,9 +252280,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -252463,9 +252482,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -252665,9 +252684,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -252867,9 +252886,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -253069,9 +253088,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -253271,9 +253290,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -253473,9 +253492,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -253675,9 +253694,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -253877,9 +253896,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -254079,9 +254098,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -254281,9 +254300,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -254483,9 +254502,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -254685,9 +254704,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -254887,9 +254906,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -255089,9 +255108,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -255291,9 +255310,9 @@ qFx
 qFx
 dID
 sJx
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 sJx
 dID
 qFx
@@ -255493,9 +255512,9 @@ dID
 dID
 dID
 vDd
-qLi
-qKv
-qLi
+vDd
+mjR
+vDd
 vDd
 dID
 dID
