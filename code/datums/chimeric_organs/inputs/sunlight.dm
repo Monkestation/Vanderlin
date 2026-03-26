@@ -18,7 +18,7 @@
 
 /datum/chimeric_node/input/sunlight/proc/on_heartbeat(datum/source)
 	SIGNAL_HANDLER
-	if(GLOB.tod != "day")
+	if(GLOB.tod != DAY)
 		return
 
 	if(isturf(hosted_carbon.loc))

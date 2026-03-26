@@ -4,6 +4,7 @@
 	craft_time = 6 SECONDS
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/handpie/mushroom
 	name = "Raw Mushroom Handpie"

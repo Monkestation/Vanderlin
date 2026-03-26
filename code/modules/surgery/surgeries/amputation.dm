@@ -35,8 +35,8 @@
 	time = 6.4 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_BROKEN
 	requires_bodypart_type = NONE
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_APPRENTICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/organ2.ogg'
 

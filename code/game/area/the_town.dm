@@ -229,6 +229,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/deliverer.ogg'
 	converted_type = /area/indoors/shelter/town
+	threat_region = THREAT_REGION_TOWN
 
 /area/outdoors/town/Initialize()
 	. = ..()

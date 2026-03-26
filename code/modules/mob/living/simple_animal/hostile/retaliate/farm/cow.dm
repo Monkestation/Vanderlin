@@ -7,6 +7,7 @@
 	icon_living = "cow"
 	icon_dead = "cow_dead"
 	icon_gib = "cow_gib"
+	indexed = TRUE
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/bull
 	faction = list("cows")

@@ -34,7 +34,7 @@
 		COMSIG_PARENT_QDELETING,
 	))
 
-/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target)
+/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target, atom/new_loc)
 	SIGNAL_HANDLER
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))

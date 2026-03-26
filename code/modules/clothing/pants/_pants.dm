@@ -32,7 +32,8 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	anvilrepair = null
 
 	var/fitted = NO_FEMALE_UNIFORM // For use in alternate clothing styles for women
