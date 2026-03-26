@@ -616,6 +616,11 @@
 	if(oldarea != newarea)
 		newarea.Entered(src, oldarea)
 
+	for(var/atom/movable/thing as anything in newloc)
+		if(thing == src)
+			continue
+		thing.Crossed(src)
+
 	RESOLVE_ACTIVE_MOVEMENT
 
 ////////////////////////////////////////
