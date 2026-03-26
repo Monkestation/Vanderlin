@@ -18528,12 +18528,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
-"iKt" = (
-/obj/structure/stairs{
-	dir = 8
-	},
-/turf/open/openspace,
-/area/indoors/town/dwarfin)
 "iKy" = (
 /turf/open/floor/cobble/mossy,
 /area/outdoors/basin)
@@ -196031,7 +196025,7 @@ lls
 hJG
 tDn
 smk
-iKt
+bfX
 dJK
 oAS
 qJD
