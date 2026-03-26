@@ -19,7 +19,7 @@
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, mostly because they are the last ones in a party to die. \
 	When word got out that you had abandoned your former party to their demise, it didn't take long before you were cast out, unwelcome. \
 	You may no longer be as free as you once were, but through the generous gift of mercy bestowed upon you by the Inquisitor, perhaps you may once again put your skills to use."
-	category_tags = list(CTAG_INQUISITION)
+	category_tags = list(CTAG_ADEPT)
 	outfit = /datum/outfit/psyaltrist
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/psyaltrist
