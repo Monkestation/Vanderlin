@@ -266,6 +266,8 @@
 	// Go inside coffin
 	for (var/obj/structure/closet/crate/coffin/coffin in src)
 		for(var/mob/living/carbon/human/human in coffin)
+			if(!human.dna)
+				continue
 			if(!(human.dna in GLOB.unique_double_consecrated))
 				unique_bodies++
 				GLOB.unique_double_consecrated += human.dna
@@ -273,6 +275,9 @@
 		for(var/obj/item/bodypart/head/head in coffin)
 			if(!head.original_owner)
 				continue
+			else if(!head.original_owner.dna) // Zombies remove their DNA, so we have to check
+				continue
+
 			if(!(head.original_owner.dna in GLOB.unique_double_consecrated))
 				unique_bodies++
 				GLOB.unique_double_consecrated += head.owner.dna
