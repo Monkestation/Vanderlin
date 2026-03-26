@@ -5,7 +5,7 @@
 	speech_verb = "remarks"
 	ask_verb = "inquires"
 	exclaim_verb = "asserts"
-	key = "n"
+	key = "s"
 	space_chance = 45
 	default_priority = 90
 	icon_state = "zalad"
