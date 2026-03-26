@@ -268,17 +268,17 @@
 		for(var/obj/thing in coffin)
 			if(ishuman(thing))
 				var/mob/living/carbon/human = thing
-				if(!(human.dna in GLOB.unique_double_consecrate))
+				if(!(human.dna in GLOB.unique_double_consecrated))
 					unique_bodies++
-					GLOB.unique_double_consecrate += human.dna
+					GLOB.unique_double_consecrated += human.dna
 
 			else if(istype(thing, /obj/item/bodypart/head))
 				var/obj/item/bodypart/head/head = thing
 				if(!head.owner.dna)
 					continue
-				if(!(head.owner.dna in GLOB.unique_double_consecrate))
+				if(!(head.owner.dna in GLOB.unique_double_consecrated))
 					unique_bodies++
-					GLOB.unique_double_consecrate += head.owner.dna
+					GLOB.unique_double_consecrated += head.owner.dna
 
 	return unique_bodies
 

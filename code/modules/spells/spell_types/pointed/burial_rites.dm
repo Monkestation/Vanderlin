@@ -36,8 +36,7 @@
 				grave.is_consecrated += 2 // this is how we define a grave as "doubly consecrated"
 				grave.adjust_grave_necra_devotion(DOUBLE_CONSECRATED_GAIN)
 				// If there was a body that was not double consecrated yet, reward TRIUMPH
-				//var/triumphs = grave.unique_body_double_consecrate()
-				var/triumphs = 1
+				var/triumphs = grave.unique_body_double_consecrate()
 				if(triumphs)
 					owner.adjust_triumphs(triumphs, reason = "Pleased the Undermaiden")
 			else
