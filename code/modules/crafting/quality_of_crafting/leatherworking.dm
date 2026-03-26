@@ -818,7 +818,7 @@
 	name = "inquisitorial shoes"
 	output = /obj/item/clothing/shoes/otavan/inqboots
 	requirements = list(/obj/item/natural/hide/cured = 3,
-				/obj/item/natural/animalfibers = 1)
+				/obj/item/natural/fibers = 1)
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/leather_duelcoat

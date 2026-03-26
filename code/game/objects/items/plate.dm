@@ -179,11 +179,6 @@
 	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	qdel(src)
 
-/obj/item/plate/bone
-	name = "bone platter"
-	desc = "A old, dirty thing. Perhaps you should reconsider eating of this."
-	icon_state = "platter_bone"
-	max_fork_usages = 7
 
 /obj/item/plate/copper
 	name = "copper platter"

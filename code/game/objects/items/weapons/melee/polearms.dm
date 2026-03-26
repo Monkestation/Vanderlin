@@ -261,6 +261,7 @@
 
 	gripsprite = FALSE
 	melting_material = /datum/material/steel
+embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/polearm/spear/stone/copper
 	name = "javelin"

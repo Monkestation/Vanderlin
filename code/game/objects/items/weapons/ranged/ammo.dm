@@ -326,6 +326,7 @@
 //................ Stone Arrow ............... //
 /obj/item/ammo_casing/caseless/arrow/stone
 	name = "stone arrow"
+	desc = "A fletched projectile with a stone tip."
 	icon_state = "stonearrow"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/stone //weaker projectile
 	max_integrity = 5
