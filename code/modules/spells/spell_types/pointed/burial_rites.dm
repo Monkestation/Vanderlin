@@ -34,7 +34,8 @@
 				var/obj/structure/closet/dirthole/grave = cast_on // This should only ever get called on graves anyways.
 				owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				grave.is_consecrated += 2 // this is how we define a grave as "doubly consecrated"
-				grave.adjust_grave_necra_devotion(DOUBLE_CONSECRATED_GAIN)
+				if(grave.necra_devotion_gain != DOUBLE_CONSECRATED_GAIN)
+					grave.adjust_grave_necra_devotion(DOUBLE_CONSECRATED_GAIN)
 				// If there was a body that was not double consecrated yet, reward TRIUMPH
 				var/triumphs = grave.unique_body_double_consecrate()
 				if(triumphs)

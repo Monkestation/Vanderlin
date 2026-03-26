@@ -265,20 +265,17 @@
 	var/unique_bodies
 	// Go inside coffin
 	for (var/obj/structure/closet/crate/coffin/coffin in src)
-		for(var/obj/thing in coffin)
-			if(ishuman(thing))
-				var/mob/living/carbon/human = thing
-				if(!(human.dna in GLOB.unique_double_consecrated))
-					unique_bodies++
-					GLOB.unique_double_consecrated += human.dna
+		for(var/mob/living/carbon/human/human in coffin)
+			if(!(human.dna in GLOB.unique_double_consecrated))
+				unique_bodies++
+				GLOB.unique_double_consecrated += human.dna
 
-			else if(istype(thing, /obj/item/bodypart/head))
-				var/obj/item/bodypart/head/head = thing
-				if(!head.owner.dna)
-					continue
-				if(!(head.owner.dna in GLOB.unique_double_consecrated))
-					unique_bodies++
-					GLOB.unique_double_consecrated += head.owner.dna
+		for(var/obj/item/bodypart/head/head in coffin)
+			if(!head.original_owner)
+				continue
+			if(!(head.original_owner.dna in GLOB.unique_double_consecrated))
+				unique_bodies++
+				GLOB.unique_double_consecrated += head.owner.dna
 
 	return unique_bodies
 
@@ -425,7 +422,7 @@
 			icon_state = "grave"
 		if(4)
 			icon_state = "gravecovered"
-	if(is_consecrated == DOUBLY_CONSECRATED)
+	if(is_consecrated >= DOUBLY_CONSECRATED)
 		icon_state = "gravedoubleconsecrated"
 
 /obj/structure/closet/dirthole/update_overlays()
