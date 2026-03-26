@@ -259,6 +259,18 @@
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		stage_update()
 
+/// Checks inside grave and checks how many unique bodies are inside that were not double consecrated before.
+/// Should only be called on graves where `check_double_consecration()` returned true
+/obj/structure/closet/dirthole/proc/unique_body_double_consecrate()
+	var/unique_bodies
+
+	// Go inside coffin
+
+	// For each unique body, increment unique_bodies and set their been_double_consecrated to TRUE
+
+	// Handle edge cases such as if body is in parts (to avoid counting head and body twice for example)
+
+
 /// Global proc (to handle coffin consecration) that will adjust every necran's devotion passive gain
 /// When called by a coffin, `amount` is not needed
 /// When called by a dirthole grave, `amount` will be what the new gain will be. Set to 0 to remove any devotion generated

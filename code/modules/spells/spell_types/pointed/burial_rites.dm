@@ -35,9 +35,10 @@
 				owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				grave.is_consecrated += 2 // this is how we define a grave as "doubly consecrated"
 				grave.adjust_grave_necra_devotion(DOUBLE_CONSECRATED_GAIN)
-				// For each unique body given double consecration, grant TRIUMPH!
-
-				owner.adjust_triumphs(1, reason = "Pleased the Undermaiden")
+				// If there was a body that was not double consecrated yet, reward TRIUMPH
+				var/triumphs = grave.unique_body_double_consecrate
+				if(triumphs)
+					owner.adjust_triumphs(triumphs, reason = "Pleased the Undermaiden")
 			else
 				owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
 			if(istype(cast_on, /obj/structure/closet/dirthole)) // if it's a grave, increase it's level of consecration.
