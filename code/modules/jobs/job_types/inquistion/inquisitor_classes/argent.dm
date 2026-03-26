@@ -22,8 +22,8 @@
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,
-		/datum/attribute/skill/craft/cooking = 20,
-		/datum/attribute/skill/craft/sewing = 20
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/cooking = 20
 	)
 
 /datum/attribute_holder/sheet/job/argent/knives
