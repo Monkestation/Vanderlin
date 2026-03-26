@@ -614,13 +614,24 @@
 	if(!newloc || newloc == loc)
 		return
 
+	// A mid-movement... movement... occured, resolve that first.
+	RESOLVE_ACTIVE_MOVEMENT
+
 	if(!direction)
 		direction = get_dir(src, newloc)
 
 	if(dir != direction && !throwing && update_dir && !face_mouse)
 		setDir(direction)
 
-	if(!loc.Exit(src, direction))
+	var/is_multi_tile_object = is_multi_tile_object(src)
+
+	var/list/old_locs
+	if(is_multi_tile_object && isturf(loc))
+		old_locs = locs // locs is a special list, this is effectively the same as .Copy() but with less steps
+		for(var/atom/exiting_loc as anything in old_locs)
+			if(!exiting_loc.Exit(src, direction))
+				return
+	else if(!loc.Exit(src, direction))
 		return
 
 	var/list/new_locs
@@ -688,8 +699,10 @@
 /atom/movable/Move(atom/newloc, direction, glide_size_override = 0, update_dir = TRUE)
 	var/atom/movable/pullee = pulling
 	var/turf/current_turf = loc
+
 	if(!moving_from_pull)
 		check_pulling(z_allowed = TRUE)
+
 	if(!loc || !newloc)
 		return FALSE
 
@@ -836,7 +849,12 @@
 					target_turf = get_step(pulling, get_dir(pulling, current_turf))
 
 				if(target_turf != current_turf || (moving_diagonally != SECOND_DIAG_STEP && ISDIAGONALDIR(pull_dir)) || get_dist(src, pulling) > 1)
-					pulling.move_from_pull(src, target_turf, glide_size)
+					var/pulling_update_dir = TRUE
+					for(var/obj/item/grabbing/G in pulling.grabbedby) // only chokeholds prevent turning
+						if(G.chokehold)
+							pulling_update_dir = FALSE
+							break
+					pulling.move_from_pull(src, target_turf, glide_size, pulling_update_dir)
 			if (pulledby)
 				if (pulledby.currently_z_moving)
 					check_pulling(z_allowed = TRUE)
@@ -851,11 +869,11 @@
 	if(glide_size_override)
 		set_glide_size(glide_size_override)
 
-	last_move = direct
-	if(!face_mouse && !throwing && update_dir)
-		setDir(direction_to_move)
+	last_move = direction_to_move
 
-	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direct, glide_size_override)) //movement failed due to buckled mob(s)
+	if(!face_mouse && !throwing && dir != direction_to_move && update_dir)
+		setDir(direction_to_move)
+	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direction_to_move, glide_size_override)) //movement failed due to buckled mob(s)
 		. = FALSE
 
 	if(. && pulledby && moving_diagonally != FIRST_DIAG_STEP) // EXPERIMENTAL
@@ -869,9 +887,9 @@
 			set_currently_z_moving(FALSE, TRUE)
 
 /// Called when src is being moved to a target turf because another movable (puller) is moving around.
-/atom/movable/proc/move_from_pull(atom/movable/puller, turf/target_turf, glide_size_override)
+/atom/movable/proc/move_from_pull(atom/movable/puller, turf/target_turf, glide_size_override, pulling_update_dir = TRUE)
 	moving_from_pull = puller
-	Move(target_turf, get_dir(src, target_turf), glide_size_override)
+	Move(target_turf, get_dir(src, target_turf), glide_size_override, pulling_update_dir)
 	moving_from_pull = null
 
 /**
@@ -1165,8 +1183,8 @@
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direction, glide_size_override)
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)
-		if(!buckled_mob.Move(newloc, direct, glide_size_override)) //If a mob buckled to us can't make the same move as us
-			Move(buckled_mob.loc, direct) //Move back to its location
+		if(!buckled_mob.Move(newloc, direction, glide_size_override)) //If a mob buckled to us can't make the same move as us
+			Move(buckled_mob.loc, direction) //Move back to its location
 			last_move = buckled_mob.last_move
 			inertia_dir = last_move
 			buckled_mob.inertia_dir = last_move

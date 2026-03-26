@@ -362,10 +362,6 @@
 			return FALSE		//We were deleted.
 
 /turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	..()
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
-	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
-/turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
 	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
@@ -373,7 +369,7 @@
 	if(explosion_level && arrived.ex_check(explosion_id))
 		arrived.ex_act(explosion_level)
 
-/turf/open/Entered(atom/movable/AM)
+/turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	//melting
 	if(isobj(arrived) && temperature > 273.15)
