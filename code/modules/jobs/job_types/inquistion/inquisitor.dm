@@ -34,6 +34,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/inquisitor
 	)
+	job_bitflag = BITFLAG_CHURCH
 
 	exp_type = list(EXP_TYPE_INQUISITION)
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)

@@ -73,12 +73,14 @@
 /datum/status_effect/buff/healing
 	id = "healing"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
+	var/visual_type = /obj/effect/temp_visual/heal_rogue
 	duration = 10 SECONDS
 	var/healing_on_tick = 1
 	var/outline_colour = "#c42424"
+	var/outline_alpha = 60
 	var/effect_color = "#FF0000"
 
-/datum/status_effect/buff/healing/on_creation(mob/living/new_owner, new_healing_on_tick)
+/datum/status_effect/buff/healing/on_creation(mob/living/new_owner, duration_override, new_healing_on_tick)
 	healing_on_tick = new_healing_on_tick
 	return ..()
 
@@ -88,7 +90,7 @@
 	. = ..()
 	var/filter = owner.get_filter(MIRACLE_HEALING_FILTER)
 	if (!filter)
-		owner.add_filter(MIRACLE_HEALING_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = 60, "size" = 1))
+		owner.add_filter(MIRACLE_HEALING_FILTER, 2, list("type" = "outline", "color" = outline_colour, "alpha" = outline_alpha, "size" = 1))
 	return TRUE
 
 /datum/status_effect/buff/healing/on_remove()
@@ -99,11 +101,11 @@
 	return "SUBJECTPRONOUN is bathed in a restorative aura!"
 
 /datum/status_effect/buff/healing/tick()
-	var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))
+	var/obj/effect/temp_visual/H = new visual_type(get_turf(owner))
 	H.color = effect_color
 	var/list/wCount = owner.get_wounds()
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
-		owner.blood_volume = min(owner.blood_volume+healing_on_tick, BLOOD_VOLUME_NORMAL)
+		owner.blood_volume = min(owner.blood_volume+healing_on_tick*3, BLOOD_VOLUME_NORMAL)
 	if(wCount.len > 0)
 		// owner.heal_wounds(healing_on_tick, list(/datum/wound/slash, /datum/wound/puncture, /datum/wound/bite, /datum/wound/bruise))
 		owner.heal_wounds(healing_on_tick)

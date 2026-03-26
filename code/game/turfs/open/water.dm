@@ -303,15 +303,15 @@
 		QDEL_NULL(overlays[key])
 		LAZYREMOVE(overlays, key)
 
-/turf/open/water/Exited(atom/movable/AM, atom/newloc)
+/turf/open/water/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	for(var/obj/structure/S in src)
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/user = AM
+	if(isliving(gone) && !gone.throwing)
+		var/mob/living/user = gone
 		if(water_overlay)
-			if((get_dir(src, newloc) == SOUTH))
+			if((get_dir(src, new_loc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
 				water_overlay.plane = GAME_PLANE
 			else
@@ -320,11 +320,11 @@
 						water_overlay.layer = BELOW_MOB_LAYER
 						water_overlay.plane = GAME_PLANE
 		for(var/D in GLOB.cardinals) //adjacent to a floor to hold onto
-			if(istype(get_step(newloc, D), /turf/open/floor))
+			if(istype(get_step(new_loc, D), /turf/open/floor))
 				return
-		if(swim_skill && !HAS_TRAIT(AM, TRAIT_GOOD_SWIM))
-			if(swimdir && newloc) //we're being pushed by water or swimming with the current, easy
-				if(get_dir(src, newloc) == dir)
+		if(swim_skill && !HAS_TRAIT(gone, TRAIT_GOOD_SWIM))
+			if(swimdir && new_loc) //we're being pushed by water or swimming with the current, easy
+				if(get_dir(src, new_loc) == dir)
 					return
 			if(user.mind && !user.buckled)
 				var/drained = max(15 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming) * 5), 1)
@@ -338,30 +338,35 @@
 	..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
-/turf/open/water/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	for(var/obj/structure/S in src)
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
+
 	if(water_volume < 10)
 		return
+
 	var/dirty_water_turf = FALSE
 	if(cleanliness_factor < 0)
 		dirty_water_turf = TRUE
-	if(istype(AM, /obj/item/reagent_containers/food/snacks/fish))
-		var/obj/item/reagent_containers/food/snacks/fish/F = AM
+
+	if(istype(arrived, /obj/item/reagent_containers/food/snacks/fish))
+		var/obj/item/reagent_containers/food/snacks/fish/F = arrived
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
 		if(!F.status != FISH_DEAD)
 			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
 		else
 			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
 		qdel(F)
-	if(istype(AM, /obj/item/clothing))
-		var/obj/item/clothing/cloth = AM
+
+	if(istype(arrived, /obj/item/clothing))
+		var/obj/item/clothing/cloth = arrived
 		if(cloth.wetable)
 			cloth.wet.add_water(20, dirty_water_turf)
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/L = AM
+
+	if(isliving(arrived) && !arrived.throwing)
+		var/mob/living/L = arrived
 		if(L.body_position == LYING_DOWN || water_level == 3)
 			L.SoakMob(FULL_BODY, dirty_water_turf)
 		else if(water_level == 2)
@@ -369,16 +374,16 @@
 		else if(water_level == 1)
 			L.SoakMob(FEET, dirty_water_turf)
 		if(water_overlay)
-			if(water_level > 1 && !istype(oldLoc, type))
-				playsound(AM, 'sound/foley/waterenter.ogg', 100, FALSE)
+			if(water_level > 1 && !istype(old_loc, type))
+				playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
 			else
-				playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
-			if(istype(oldLoc, type) && (get_dir(src, oldLoc) != SOUTH))
+				playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
+			if(istype(old_loc, type) && (get_dir(src, old_loc) != SOUTH))
 				water_overlay.layer = ABOVE_MOB_LAYER
 				water_overlay.plane = GAME_PLANE_UPPER
 			else
 				spawn(6)
-					if(AM.loc == src)
+					if(arrived.loc == src)
 						water_overlay.layer = ABOVE_MOB_LAYER
 						water_overlay.plane = GAME_PLANE_UPPER
 
@@ -537,10 +542,10 @@
 	cleanliness_factor = -5
 	fishing_datum = /datum/fish_source/sewer
 
-/turf/open/water/sewer/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/sewer/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
+	if(isliving(arrived) && !arrived.throwing)
+		var/mob/living/living = arrived
 		var/chance = 3
 		if(living.m_intent == MOVE_INTENT_RUN)
 			chance *= 2
@@ -548,8 +553,8 @@
 			chance /= 2
 		if(!prob(chance))
 			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
+		if(iscarbon(arrived))
+			var/mob/living/carbon/C = arrived
 			if(C.blood_volume <= 0)
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
@@ -585,10 +590,10 @@
 	dir = pick(GLOB.cardinals)
 	. = ..()
 
-/turf/open/water/swamp/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/swamp/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
+	if(isliving(arrived) && !arrived.throwing)
+		var/mob/living/living = arrived
 		var/chance = 3
 		if(living.m_intent == MOVE_INTENT_RUN)
 			chance *= 2
@@ -596,8 +601,8 @@
 			chance /= 2
 		if(!prob(chance))
 			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
+		if(iscarbon(arrived))
+			var/mob/living/carbon/C = arrived
 			if(C.blood_volume <= 0)
 				return
 			var/list/zonee = list(BODY_ZONE_R_LEG,BODY_ZONE_L_LEG)
@@ -620,10 +625,10 @@
 	swim_skill = TRUE
 	fishing_datum = /datum/fish_source/swamp/deep
 
-/turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/swamp/deep/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(isliving(AM) && !AM.throwing)
-		var/mob/living/living = AM
+	if(isliving(arrived) && !arrived.throwing)
+		var/mob/living/living = arrived
 		var/chance = 8
 		if(living.m_intent == MOVE_INTENT_RUN)
 			chance *= 2
@@ -631,8 +636,8 @@
 			chance /= 2
 		if(!prob(chance))
 			return
-		if(iscarbon(AM))
-			var/mob/living/carbon/C = AM
+		if(iscarbon(arrived))
+			var/mob/living/carbon/C = arrived
 			if(C.blood_volume <= 0)
 				return
 			var/list/zonee = list(BODY_ZONE_CHEST,BODY_ZONE_R_LEG,BODY_ZONE_L_LEG,BODY_ZONE_R_ARM,BODY_ZONE_L_ARM)
@@ -740,13 +745,13 @@
 		return
 	water.try_set_parent(src)
 
-/turf/open/water/river/Entered(atom/movable/AM, atom/oldLoc)
+/turf/open/water/river/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	if(!river_processes)
 		return
 	if(locate(/obj/structure/stairs) in src)
 		return
-	if(isliving(AM) || isitem(AM))
+	if(isliving(arrived) || isitem(arrived))
 		if(!river_processing)
 			river_processing = addtimer(CALLBACK(src, PROC_REF(process_river)), 5, TIMER_STOPPABLE)
 

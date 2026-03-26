@@ -1,1 +1,0 @@
-{"author":"Kevin","delete-after":true,"changes":[{"bugfix":"ambush sounds procing in areas where there are no ambushes"},{"code_imp":"Standardized defines for DAY, DAWN, NIGHT, and DUSK"},{"balance":"Rebalanced ambushes around the map"}]}

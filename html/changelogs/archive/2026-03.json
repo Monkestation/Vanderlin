@@ -681,5 +681,60 @@
                 "rscadd": "Adds the dwarven tallhat and gives it a craftable recipe."
             }
         ]
+    },
+    "2026-03-26": {
+        "walrusfromspace": [
+            {
+                "bugfix": "You can now sell brewer's bottles at the merchant ship again"
+            }
+        ],
+        "Kevin": [
+            {
+                "bugfix": "ambush sounds procing in areas where there are no ambushes"
+            },
+            {
+                "code_imp": "Standardized defines for DAY, DAWN, NIGHT, and DUSK"
+            },
+            {
+                "balance": "Rebalanced ambushes around the map"
+            }
+        ],
+        "ModDownloading": [
+            {
+                "rscadd": "Many more produce items are now accepted by the stockpile."
+            },
+            {
+                "rscadd": "Curtains are now craftable from one stick and two cloth."
+            },
+            {
+                "rscadd": "A new Adventurer subclass, the Alchemist"
+            }
+        ],
+        "Rockslp": [
+            {
+                "rscadd": "Added the training sword, an unbound servant bell and the dwarven tallhat to loadout selection."
+            },
+            {
+                "balance": "Slight rebalance of dodge opposition"
+            },
+            {
+                "bugfix": "Fixes aggro grab parry back to the old state. (The removal was never mentioned? Not sure if intended.)"
+            }
+        ],
+        "Blumengama": [
+            {
+                "rscadd": "Added some new hairstyles"
+            }
+        ],
+        "Ben10083": [
+            {
+                "rscadd": "Extremist Psydonites are reminded that Psydon is, in fact, still alive."
+            }
+        ],
+        "KevinfromHP": [
+            {
+                "bugfix": "fixed offering yourself apprenticeship"
+            }
+        ]
     }
 }

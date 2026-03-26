@@ -26,7 +26,6 @@
 
 /obj/structure/fake_machine/vendor/Initialize()
 	. = ..()
-	set_light(1, 1, l_color = lighting_color)
 	update_appearance(UPDATE_ICON_STATE)
 	START_PROCESSING(SSroguemachine, src)
 
@@ -72,11 +71,9 @@
 /obj/structure/fake_machine/vendor/update_overlays()
 	. = ..()
 	if(!length(held_items) || !locked() || obj_broken)
-		set_light(l_on = FALSE)
+		set_light(0)
 		return
-
-	set_light(l_on = TRUE)
-
+	set_light(1, 1, 1, l_color = lighting_color)
 	. += mutable_appearance(icon, filled_overlay)
 
 /obj/structure/fake_machine/vendor/attackby(obj/item/I, mob/user, list/modifiers)

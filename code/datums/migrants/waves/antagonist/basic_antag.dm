@@ -39,7 +39,7 @@
 
 /datum/migrant_role/advclass/adventurer/vampire
 	name = "Adventurer"
-	antag_datum = /datum/antagonist/vampire
+	antag_datum = /datum/antagonist/vampire/outcast
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 15)
 
 /datum/migrant_wave/vampire
