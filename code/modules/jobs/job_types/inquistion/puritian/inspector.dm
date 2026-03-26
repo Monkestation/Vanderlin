@@ -107,7 +107,7 @@
 
 	switch(enhancement_choice)
 		if("Auxiliary Adrenal Glands - Pain Resist")
-			ADD_TRAIT(spawned, TRAIT_NODAMAGESLOWDOWN, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/adrenal)
 		if("Controlled Atrophy - Rapid Movement")
 			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
@@ -125,7 +125,7 @@
 			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
 		if("Inhumen Stomach - Enhanced Endurance")
-			ADD_TRAIT(spawned, TRAIT_NASTYEATER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NASTY_EATER, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/stomach)
 		if("Leviathanian Membrane - No Terrain Slowdown")
 			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
