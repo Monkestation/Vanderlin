@@ -38,10 +38,11 @@
 		TRAIT_NOBLE_POWER
 	)
 
-/*/datum/outfit/hand
+/datum/outfit/hand
 	name = "Hand"
-	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
-	belt = /obj/item/storage/belt/leather/steel*/
+	belt = /obj/item/storage/belt/leather/black
+	beltr = /obj/item/storage/keyring/hand
+
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -108,13 +109,12 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
 	armor = /obj/item/clothing/armor/leather/jacket/handjacket
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather/steel
-	beltr = /obj/item/weapon/sword/rapier/dec
+	beltl = /obj/item/weapon/sword/rapier/dec
 	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
 	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
 
@@ -167,14 +167,12 @@
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
-	belt = /obj/item/storage/belt/leather/black
-	beltl =  /obj/item/weapon/knife/dagger/steel/hand
-	beltr = /obj/item/weapon/knife/dagger/steel/hand/parry
+	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
 	shoes = /obj/item/clothing/shoes/boots
 	backpack_contents = list(
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/lockpickring/mundane = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1
+		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/weapon/knife/dagger/steel/hand = 1,
 	)
 
 /datum/outfit/hand/spymaster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -246,13 +244,11 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/boots
-	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	scabbards = list(/obj/item/weapon/scabbard/cane/hand)

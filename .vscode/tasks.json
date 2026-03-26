@@ -85,6 +85,30 @@
         {
             "type": "process",
             "command": "tools/build/build.sh",
+            "args": ["-DNO_DUNGEON"],
+            "windows": {
+                "command": ".\\tools\\build\\build.bat",
+                "args": ["-DNO_DUNGEON"]
+            },
+            "options": {
+                "env": {
+                    "DM_EXE": "${config:dreammaker.byondPath}"
+                }
+            },
+            "problemMatcher": [
+                "$dreammaker",
+                "$tsc",
+                "$eslint-stylish"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "dependsOn": "dm: reparse",
+            "label": "Build All (no dungeons)"
+        },
+        {
+            "type": "process",
+            "command": "tools/build/build.sh",
             "args": ["-DLOWMEMORYMODE", "-DNO_DUNGEON", "-DABSOLUTE_MINIMUM_MODE"],
             "windows": {
                 "command": ".\\tools\\build\\build.bat",

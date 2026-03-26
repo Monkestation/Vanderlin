@@ -110,7 +110,7 @@
 /obj/structure/window/openclose/update_icon_state()
 	. = ..()
 	var/icon
-	if(GLOB.tod == "night")
+	if(GLOB.tod == NIGHT)
 		icon += "w-"
 	icon += initial(icon_state)
 	if(obj_broken)

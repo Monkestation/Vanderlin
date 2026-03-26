@@ -1287,13 +1287,16 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
 
-/datum/species/proc/go_bald(mob/living/carbon/human/H)
+/datum/species/proc/go_bald(mob/living/carbon/human/H, facial = FALSE)
 	if(QDELETED(H))	//may be called from a timer
 		return
-	if(H.gender == MALE)
-		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/shaved, FALSE)
-	if(H.gender == FEMALE)
-		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/none, FALSE)
+	if(facial)
+		if(H.gender == MALE)
+			H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/shaved, FALSE)
+		if(H.gender == FEMALE)
+			H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/none, FALSE)
+	else
+		H.set_facial_hair_color("6a6a6a") // decay color
 	H.set_hair_style(/datum/sprite_accessory/hair/head/bald)
 
 
@@ -1886,6 +1889,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
 	var/weakness = H.check_weakness(I, user)
 	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
+	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
 
 	if(!actual_damage)
 		H.next_attack_msg += " [span_danger(span_big("Armor stops the damage!"))]"

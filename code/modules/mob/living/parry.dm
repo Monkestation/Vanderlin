@@ -35,6 +35,8 @@
 		return FALSE
 	if(intenty && !intenty.canparry)
 		return FALSE
+	if(pulling && grab_state >= GRAB_AGGRESSIVE)
+		return FALSE
 	if(incapacitated())
 		return FALSE
 	if(has_status_effect(/datum/status_effect/debuff/exposed))
@@ -139,7 +141,7 @@
 		return FALSE
 	else
 		if(do_unarmed_parry(drained, user))
-			if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
+			if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_RANK_NOVICE))
 				adjust_experience(/datum/attribute/skill/combat/unarmed, max(round(GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)/2), 0), FALSE)
 			flash_fullscreen("blackflash2")
 			return TRUE
@@ -247,7 +249,7 @@
 	var/mob/living/carbon/human/U = user
 
 	// Defender skill gain
-	if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
+	if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_RANK_NOVICE))
 		if(used_weapon == get_inactive_held_item() && istype(used_weapon, /obj/item/weapon/shield))
 			var/boon = H.get_learning_boon(/obj/item/weapon/shield)
 			H.adjust_experience(/datum/attribute/skill/combat/shields, max(round(GET_MOB_ATTRIBUTE_VALUE(H, STAT_INTELLIGENCE) * boon), 0), FALSE)
@@ -256,7 +258,7 @@
 
 	// Attacker skill gain
 	var/obj/item/AB = intenty.get_master_item()
-	if((U.body_position != LYING_DOWN) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
+	if((U.body_position != LYING_DOWN) && defender_skill && (attacker_skill < defender_skill - SKILL_RANK_NOVICE))
 		if(AB)
 			U.adjust_experience(AB.associated_skill, max(round(GET_MOB_ATTRIBUTE_VALUE(U, STAT_INTELLIGENCE)/2), 0), FALSE)
 		else
