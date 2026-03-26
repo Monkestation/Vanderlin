@@ -191,7 +191,7 @@
 
 		// The disgusing inquistion section
 		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
-			. += span_userdanger("SUSPECTED HERETIC!")
+			. += span_userdanger("SUSPECTED OF HERESY...")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
