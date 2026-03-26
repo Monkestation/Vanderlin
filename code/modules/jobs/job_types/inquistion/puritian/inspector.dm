@@ -117,10 +117,10 @@
 		if("Goblin Eyes - Nightvision")
 			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
 			if(eyes)
-				eyes.Remove(src,1)
+				eyes.Remove(spawned,1)
 				QDEL_NULL(eyes)
 			eyes = new /obj/item/organ/eyes/night_vision/nightmare
-			eyes.Insert(src)
+			eyes.Insert(spawned)
 		if("Greenskin Hands - Strong Grip")
 			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
