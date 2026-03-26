@@ -41,22 +41,20 @@
 
 	)
 
-/datum/job/advclass/orphan/bbrat
+/datum/job/advclass/orphanadv/bbrat
 	title = "Bookish Brat"
 	tutorial = "While the rest of the kids were off getting dirty, \
 	you were reading the dusty and often-ignored books the matron had \
 	spent years collecting.  With one too many hero stories under your belt, \
 	your friends rely on you to solve riddles, answer their obvious questions, \
 	and talk your way out of the guards bad graces.  Where would they be without you?"
-	outfit = /datum/outfit/advclass/bbrat
+	outfit = /datum/outfit/advclass/orphanadv/bbrat
 	category_tags = list(CTAG_ORPHAN)
+	attribute_sheet = /datum/attribute_holder/sheet/job/advclass/orphanadv/bbrat
 	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/advclass/orphanadv/bbrat
-
-/datum/job/advclass/bbrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/orphanadv/bbrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -67,8 +65,7 @@
 			STAT_ENDURANCE = 1,
 		))
 
-
-/datum/outfit/advclass/bbrat/pre_equip(mob/living/carbon/human/equipped_human)
+/datum/outfit/advclass/orphanadv/bbrat/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
 	var/orphanage_renovated = FALSE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
@@ -201,13 +198,11 @@
 	getting tasks done that you know they envy.  With your trusty knife and your \
 	freshly-washed tunic, you are ready to go out and start learning a trade that will \
 	really impress everyone."
-
 	outfit = /datum/outfit/orphanadv/sscamp
 	category_tags = list(CTAG_ORPHAN)
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/sscamp
 	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
-
 
 /datum/job/orphanadv/scamp/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -268,8 +263,6 @@
 	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
 
-
-
 /datum/job/orphanadv/uurchin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/orphanage_renovated = FALSE
@@ -326,7 +319,6 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/orphanadv/wwastrel
 	allowed_ages = list(AGE_CHILD)
 	inherit_parent_title = TRUE
-
 
 /datum/job/orphanadv/wwastrel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
