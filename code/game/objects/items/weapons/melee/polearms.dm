@@ -261,9 +261,7 @@
 
 	gripsprite = FALSE
 	melting_material = /datum/material/steel
-embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
-/obj/item/weapon/polearm/spear/stone/copper
 	name = "javelin"
 	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
 	icon_state = "cspear"
@@ -277,7 +275,7 @@ embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_
 	sellprice = 15
 	throw_speed = 3
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
-
+d
 /obj/item/weapon/polearm/spear/stone/copper/getonmobprop(tag)
 	. = ..()
 	if(tag)
