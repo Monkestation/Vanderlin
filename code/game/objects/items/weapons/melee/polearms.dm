@@ -262,6 +262,7 @@
 	gripsprite = FALSE
 	melting_material = /datum/material/steel
 
+/obj/item/weapon/polearm/spear/stone/copper
 	name = "javelin"
 	desc = "Made for throwing, long out of favor and using inferior metals, it still can kill when the aim is true."
 	icon_state = "cspear"
