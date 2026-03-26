@@ -5,7 +5,7 @@
 
 	finishing_item = /obj/item/reagent_containers/food/snacks/piedough
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/piebottom
-	related_skill = /datum/attribute/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking/baking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 
@@ -122,7 +122,7 @@
 	category = "Tarts"
 	finishing_item = /obj/item/reagent_containers/food/snacks/sugar
 	starting_item = /obj/item/reagent_containers/food/snacks/foodbase/tartcrust
-	related_skill = /datum/attribute/skill/craft/cooking
+	related_skill = /datum/attribute/skill/craft/cooking/baking
 	skill_xp_gained = 20
 	action_time = 5 SECONDS
 	var/overlay_state = ""

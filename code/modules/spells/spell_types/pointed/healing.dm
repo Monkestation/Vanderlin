@@ -95,13 +95,13 @@
 			if(/datum/patron/divine/astrata)
 				cast_on.visible_message(span_info("A wreath of gentle light passes over [cast_on]!"), span_notice("I'm bathed in holy light!"))
 				// during the day, heal 10 more (basic as fuck)
-				if(GLOB.tod == "day")
+				if(GLOB.tod == DAY)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/noc)
 				cast_on.visible_message(span_info("A shroud of soft moonlight falls upon [cast_on]!"), span_notice("I'm shrouded in gentle moonlight!"))
 				// during the night, heal 10 more (i wish this was more interesting but they're twins so whatever)
-				if(GLOB.tod == "night")
+				if(GLOB.tod == NIGHT)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/dendor)

@@ -15,7 +15,9 @@
 	grid_width = 64
 	grid_height = 32
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	anvilrepair = null
 
 	var/modifies_speech = FALSE

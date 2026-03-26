@@ -82,7 +82,7 @@
 	matrix = M
 	user = U
 
-/datum/spell_interface/Destroy(force, ...)
+/datum/spell_interface/Destroy(force)
 	matrix = null
 	user = null
 	window.close()

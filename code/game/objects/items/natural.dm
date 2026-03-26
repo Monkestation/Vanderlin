@@ -382,6 +382,9 @@
 		/datum/attunement/life = 0.05,
 		/datum/attunement/death = -0.05,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+
 
 /obj/item/natural/iridescentscale	//T2 mage summon loot
 	name = "iridescent scales"
@@ -398,6 +401,9 @@
 		/datum/attunement/life = 0.1,
 		/datum/attunement/death = -0.1,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+
 
 /obj/item/natural/heartwoodcore	//T3 mage summon loot
 	name = "heartwood core"
@@ -413,6 +419,8 @@
 		/datum/attunement/life = 0.1,
 		/datum/attunement/death = -0.1,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
 
 /obj/item/natural/sylvanessence	//T4 mage summon loot
 	name = "sylvan essence"
@@ -428,6 +436,8 @@
 		/datum/attunement/life = 0.15,
 		/datum/attunement/death = -0.15,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
 
 //ELEMENTAL
 /obj/item/natural/elementalmote
