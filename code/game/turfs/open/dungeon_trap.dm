@@ -5,6 +5,7 @@
 	icon_state = "grey"
 	color = "#3d3d3d"
 
+	dynamic_lighting = 1
 	turf_flags = NONE
 	path_weight = 500
 	smoothing_flags = SMOOTH_EDGE

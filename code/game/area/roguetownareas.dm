@@ -358,17 +358,17 @@
 	background_track_night = null
 	first_time_text = "The Forest of Repentence"
 
-/area/underworld/Entered(atom/movable/movable, oldloc)
+/area/underworld/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(!iscarbon(movable))
+	if(!iscarbon(arrived))
 		return
-	RegisterSignal(movable, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
+	RegisterSignal(arrived, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
 
-/area/underworld/Exited(atom/movable/movable)
+/area/underworld/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
-	if(!iscarbon(movable))
+	if(!iscarbon(gone))
 		return
-	UnregisterSignal(movable, COMSIG_CARBON_PRAY)
+	UnregisterSignal(gone, COMSIG_CARBON_PRAY)
 
 /area/underworld/proc/on_underworld_prayer(mob/living/carbon/damned, message)
 	// Who do the underworld spirits pray to? Good question
