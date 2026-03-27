@@ -301,8 +301,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Incapable of losing control and entering frenzy
 #define TRAIT_IMMUNE_TO_FRENZY "immune_to_frenzy"
 #define TRAIT_COVEN_RESISTANT "coven_resistance"
-/// Target can't be grabbed by tanglers
-#define TRAIT_ENTANGLER_IMMUNE "tangler_immune"
 /// This mob is antimagic, and immune to spells / cannot cast spells
 #define TRAIT_ANTIMAGIC "anti_magic"
 /// This allows a person who has antimagic to cast spells without getting blocked
@@ -423,6 +421,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_ZIZOID_HUNTED "zizoidhunted" // Used to signal character has been marked by death by the Zizoid cult
 #define TRAIT_LEPROSY "Leprosy"
+#define TRAIT_BRIAR_HOST "Host of the Black Briar"
 #define TRAIT_NUDE_SLEEPER "Nude Sleeper"
 #define TRAIT_BEAUTIFUL "Beautiful"
 #define TRAIT_UGLY "Ugly"
@@ -451,7 +450,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BETTER_SLEEP "Better Sleep" //Recover more energy (blue bar) when sleeping
 #define TRAIT_EXTEROCEPTION	"Exteroception" //See others' hunger and thirst
 #define TRAIT_TUTELAGE "Tutelage" //Slightly more sleep xp to you and xp to apprentices
-#define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during "day"
+#define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during DAY
 #define TRAIT_BLACKLEG "Blackleg" //Rig coin, dice, cards in your favor
 #define TRAIT_INQUISITION "Member of the Oratorium Throni Vacui"
 #define TRAIT_PURITAN "Puritan"
@@ -465,6 +464,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CRACKHEAD	"Blessing of Baotha" //No overdose on drugs.
 #define TRAIT_CABAL "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
+
+// Other Patron Trait Bonuses
+#define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.
+/// Target can't be grabbed by tanglers
+#define TRAIT_ENTANGLER_IMMUNITY "Vinewalker"
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -491,7 +495,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // JOB RELATED TRAITS
 #define TRAIT_MALUMFIRE "Professional Smith"
 #define TRAIT_CRATEMOVER "Crate Mover"
-#define TRAIT_BURDEN "Burdened" //Gaffer stuff
 #define TRAIT_OLDPARTY "Old Party"
 #define TRAIT_EARGRAB "Ear Grab"
 #define TRAIT_FACELESS "Faceless One"

@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	flee_in_pain = TRUE
 	d_intent = INTENT_PARRY
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 12
 
 
 /mob/living/carbon/human/species/human/northern/highwayman/ambush
@@ -36,8 +37,6 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 30 // 50% More than goblin
 
 
 /datum/attribute_holder/sheet/job/npc/highwayman

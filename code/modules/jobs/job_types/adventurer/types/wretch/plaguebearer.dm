@@ -43,10 +43,6 @@
 	)
 
 
-/datum/job/advclass/wretch/plaguebearer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/plaguebearer
 	name = "Plaguebearer (Wretch)"
 	mask = /obj/item/clothing/face/phys/plaguebearer

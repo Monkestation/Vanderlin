@@ -46,6 +46,7 @@
 	banned_leprosy = FALSE
 	can_have_apprentices = FALSE
 	magic_user = TRUE
+	can_be_apprentice = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)

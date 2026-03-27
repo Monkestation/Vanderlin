@@ -247,7 +247,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
+/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user)
 	. = ..()
 	if(on)
 		target.electrocute_act(5, src)
@@ -420,7 +420,7 @@
 	sharpness = IS_BLUNT
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
 	associated_skill = /datum/attribute/skill/combat/unarmed
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	grid_width = 64

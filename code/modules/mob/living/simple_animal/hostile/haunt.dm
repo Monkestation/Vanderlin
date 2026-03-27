@@ -192,10 +192,6 @@
 		slavepile = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/haunt/death(gibbed)
-	emote("death")
-	..()
-
 /mob/living/simple_animal/hostile/haunt/Life()
 	. = ..()
 	if(slavepile)

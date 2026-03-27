@@ -520,8 +520,7 @@
 "aCl" = (
 /obj/structure/gate/bars/preopen{
 	name = "Grenzelhoft Gate";
-	redstone_id = "GW1";
-	gid = "GW1"
+	redstone_id = "GW1"
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/villagegarrison)
@@ -869,7 +868,7 @@
 /obj/structure/chair/wood{
 	dir = 1
 	},
-/obj/effect/landmark/start/gaffer{
+/obj/effect/landmark/start/tombwarden{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
@@ -1374,8 +1373,7 @@
 "bna" = (
 /obj/structure/winch{
 	name = "North Gate";
-	redstone_id = "NG1";
-	gid = "NG1"
+	redstone_id = "NG1"
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/gate)
@@ -1906,7 +1904,6 @@
 /area/indoors/town/church)
 "bKF" = (
 /obj/structure/winch{
-	gid = "GG2";
 	redstone_id = "GG2";
 	name = "South Grenzelhoft Winch"
 	},
@@ -3525,7 +3522,6 @@
 "dwX" = (
 /obj/structure/gate/bars/preopen{
 	name = "South Gate";
-	gid = "NG2";
 	redstone_id = "NG2"
 	},
 /turf/open/floor/cobble,
@@ -3655,8 +3651,7 @@
 /area/indoors/town/merc_guild)
 "dAJ" = (
 /obj/structure/gate{
-	redstone_id = "BFG1";
-	gid = "BFG1"
+	redstone_id = "BFG1"
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/throne)
@@ -4520,8 +4515,7 @@
 "etz" = (
 /obj/structure/gate/bars{
 	name = "North Gate";
-	redstone_id = "NG1";
-	gid = "NG1"
+	redstone_id = "NG1"
 	},
 /turf/open/floor/cobble,
 /area/outdoors/basin/safe)
@@ -5897,7 +5891,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/keep)
 "fID" = (
-/obj/item/key/gaffer,
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/blocks,
 /area/indoors/town/merc_guild)
@@ -6973,7 +6966,6 @@
 /area/indoors/soilsons)
 "gCl" = (
 /obj/structure/gate{
-	gid = "GG2";
 	redstone_id = "GG2";
 	name = "South Grenzelhoft Gate"
 	},
@@ -12100,7 +12092,6 @@
 "laW" = (
 /obj/structure/gate{
 	redstone_id = "GG1";
-	gid = "GG1";
 	name = "North Grenzelhoft Gate"
 	},
 /obj/structure/bars/passage/shutter{
@@ -12146,11 +12137,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/villagegarrison)
-"lcA" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/gaffer_assistant,
-/turf/open/floor/carpet/red,
-/area/indoors/town/merc_guild)
 "ldg" = (
 /obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/church,
@@ -12158,7 +12144,6 @@
 "ldl" = (
 /obj/structure/winch{
 	name = "South Gate";
-	gid = "NG2";
 	redstone_id = "NG2"
 	},
 /obj/machinery/light/fueled/wallfire/candle,
@@ -14786,8 +14771,7 @@
 "nKr" = (
 /obj/structure/winch{
 	name = "Grenzelhoft Gate Winch";
-	redstone_id = "GW1";
-	gid = "GW1"
+	redstone_id = "GW1"
 	},
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/blocks,
@@ -14814,7 +14798,6 @@
 "nLy" = (
 /obj/structure/gate{
 	name = "Gate To Rosewood";
-	gid = "Event1";
 	redstone_id = "Event1"
 	},
 /turf/open/floor/cobblerock,
@@ -15482,7 +15465,7 @@
 /obj/structure/door/red{
 	name = "Gaffer's Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/town/gaffer,
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
@@ -16057,8 +16040,7 @@
 "oPm" = (
 /obj/structure/winch{
 	name = "White Palace Pass Gate Winch";
-	redstone_id = "RW1";
-	gid = "RW1"
+	redstone_id = "RW1"
 	},
 /turf/open/floor/concrete,
 /area/indoors/villagegarrison)
@@ -16068,8 +16050,7 @@
 "oQm" = (
 /obj/structure/winch{
 	name = "EVENT WINCH";
-	redstone_id = "Event1";
-	gid = "Event1"
+	redstone_id = "Event1"
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/basin/safe)
@@ -16346,8 +16327,7 @@
 /area/indoors/town/garrison)
 "pbG" = (
 /obj/structure/winch{
-	redstone_id = "BFG1";
-	gid = "BFG1"
+	redstone_id = "BFG1"
 	},
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_x = -32
@@ -19516,7 +19496,7 @@
 /obj/structure/door/red{
 	name = "Gaffer's Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/town/gaffer,
+/obj/effect/mapping_helpers/access/keyset/town/tombwarden,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
@@ -25184,8 +25164,7 @@
 "xhD" = (
 /obj/structure/gate/bars/preopen{
 	name = "White Palace Pass Gate";
-	redstone_id = "RW1";
-	gid = "RW1"
+	redstone_id = "RW1"
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/villagegarrison)
@@ -25546,7 +25525,6 @@
 "xAP" = (
 /obj/structure/winch{
 	redstone_id = "GG1";
-	gid = "GG1";
 	name = "North Grenzelhoft Winch"
 	},
 /turf/open/floor/hexstone,
@@ -26218,7 +26196,7 @@
 /area/indoors/town/smithy)
 "ydE" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/veteran{
+/obj/effect/landmark/start/tombwarden{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
@@ -93002,7 +92980,7 @@ iZs
 xMI
 nWg
 tIZ
-lcA
+rDp
 pDI
 mGI
 tcL

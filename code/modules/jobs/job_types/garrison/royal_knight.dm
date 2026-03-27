@@ -1,28 +1,3 @@
-/datum/attribute_holder/sheet/job/royalknight
-	raw_attribute_list = list(
-		STAT_STRENGTH = 3,
-		STAT_PERCEPTION = 2,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 2,
-		STAT_INTELLIGENCE = 1,
-		/datum/attribute/skill/combat/swords = 40,
-		/datum/attribute/skill/combat/wrestling = 40,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/whipsflails = 30,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 40,
-		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 30
-	)
-
 /datum/job/royalknight
 	title = "Royal Knight"
 	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
@@ -33,6 +8,7 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ROYALKNIGHT
 	faction = FACTION_TOWN
+	outfit = /datum/outfit/royalknight
 	total_positions = 2
 	spawn_positions = 2
 	bypass_lastclass = TRUE
@@ -54,7 +30,6 @@
 		EXP_TYPE_COMBAT = 1200
 	)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight
 	honorary = "Sir"
 	honorary_f = "Dame"
 
@@ -142,21 +117,47 @@
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	shirt = /obj/item/clothing/armor/gambeson/arming
+	wrists = /obj/item/storage/keyring/manorguard
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/sword/arming
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
-	backpack_contents = list(/obj/item/storage/keyring/manorguard = 1)
 
 /datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
 	if(H.cloak && !findtext(H.cloak.name, "([H.real_name])"))
 		H.cloak.name = "[H.cloak.name] ([H.real_name])"
 
+/datum/attribute_holder/sheet/job/royalknight/knight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+)
+
 /datum/job/advclass/royalknight/knight
 	title = "Royal Knight"
 	tutorial = "The classic Knight in shining armor. Slightly more skilled then their Steam counterpart but has worse armor."
 	outfit = /datum/outfit/royalknight/knight
+	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight/knight
 	category_tags = list(CTAG_ROYALKNIGHT)
 
 /datum/outfit/royalknight/knight
@@ -183,16 +184,28 @@
 
 /datum/attribute_holder/sheet/job/royalknight/steam
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/swords = -10,
-		/datum/attribute/skill/combat/unarmed = -10,
-		/datum/attribute/skill/combat/shields = -10,
-		/datum/attribute/skill/combat/wrestling = -10,
-		/datum/attribute/skill/combat/polearms = -10,
-		/datum/attribute/skill/combat/whipsflails = -10,
-		/datum/attribute/skill/combat/axesmaces = -10,
-		/datum/attribute/skill/combat/bows = -10,
-		/datum/attribute/skill/combat/crossbows = -10,
-		/datum/attribute/skill/craft/engineering = 30
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/craft/engineering = 30,
 	)
 
 /datum/job/advclass/royalknight/steam

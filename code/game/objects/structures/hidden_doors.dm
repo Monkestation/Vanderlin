@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	open_phrase = _open_phrase || "[open_word()] [magic_word()]"
 	GLOB.secret_door_managers[id] = src
 
-/datum/secret_door_manager/Destroy(force, ...)
+/datum/secret_door_manager/Destroy(force)
 	UnregisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN)
 	for(var/obj/structure/door/secret/door in doors)
 		UnregisterSignal(door, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_HEAR))

@@ -17,36 +17,36 @@
 		/datum/attribute/skill/combat/axesmaces = 30,
 	)
 
-/datum/job/advclass/mercenary/malaguero
+/datum/job/advclass/combat/malaguero
 	title = "Malaguero Deserter"
 	tutorial = "A former soldier fighting against the forces of Zizo, something drove you to flee your post. Now, you fight for coin, rather than for the authority and command of generals you would never meet."
 	allowed_races = list(SPEC_ID_TIEFLING)
-	outfit = /datum/outfit/mercenary/malaguero
+	outfit = /datum/outfit/malaguero
 	attribute_sheet = /datum/attribute_holder/sheet/job/malaguero
 
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
-	category_tags = list(CTAG_MERCENARY)
+	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 2
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 
-/datum/outfit/mercenary/malaguero
+/datum/outfit/malaguero
 	name = "Malaguero (Mercenary)"
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/coif
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	belt = /obj/item/storage/belt/leather/mercenary
-	shirt = /obj/item/clothing/armor/gambeson/heavy
+	belt = /obj/item/storage/belt/leather
+	shirt = /obj/item/clothing/armor/gambeson
 	head = /obj/item/clothing/head/helmet/visored/sallet/iron
-	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
-	beltr = /obj/item/weapon/mace/steel
+	armor = /obj/item/clothing/armor/cuirass/iron
+	beltr = /obj/item/weapon/mace/spiked
 	backl = /obj/item/weapon/shield/tower/buckleriron
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1)
+	beltl = /obj/item/storage/belt/pouch/coins/poor
 
-/datum/outfit/mercenary/malaguero/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/malaguero/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	if(H.gender == FEMALE)
 		H.underwear = "Femleotard"

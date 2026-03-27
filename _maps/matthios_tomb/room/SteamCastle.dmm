@@ -864,7 +864,6 @@
 /area/under/tomb/indoors/royal)
 "jK" = (
 /obj/structure/winch{
-	gid = "FireGate3";
 	redstone_id = "FireGate3"
 	},
 /turf/open/floor/cobblerock,
@@ -1933,7 +1932,6 @@
 /area/under/tomb/indoors)
 "wI" = (
 /obj/structure/gate{
-	gid = "FireGate3";
 	redstone_id = "FireGate3"
 	},
 /turf/open/floor/cobble,
@@ -2397,8 +2395,7 @@
 "AQ" = (
 /obj/structure/winch{
 	name = "Hell Gate";
-	redstone_id = "FireGate1";
-	gid = "FireGate1"
+	redstone_id = "FireGate1"
 	},
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/darker,
@@ -2721,7 +2718,6 @@
 /area/under/tomb/indoors)
 "DY" = (
 /obj/structure/gate{
-	gid = "FireGate1";
 	redstone_id = "FireGate1";
 	name = "Hell Gate"
 	},
@@ -3068,7 +3064,6 @@
 "Hp" = (
 /obj/structure/winch{
 	name = "Hearth Gate";
-	gid = "FireGate2";
 	redstone_id = "FireGate2"
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -4738,7 +4733,6 @@
 "Zx" = (
 /obj/structure/gate{
 	redstone_id = "FireGate2";
-	gid = "FireGate2";
 	name = "Hearth Gate"
 	},
 /turf/open/floor/cobble,

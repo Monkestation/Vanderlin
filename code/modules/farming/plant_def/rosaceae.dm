@@ -106,6 +106,51 @@
 /datum/plant_def/raspberry/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
 
+/datum/plant_def/tamto
+	name = "tamto vine"
+	icon_state = "mato"
+	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/tamto
+	uproot_loot = list(/obj/item/grown/log/tree/stick)
+	perennial = TRUE
+	produce_amount_min = 2
+	produce_amount_max = 3
+	maturation_time = FAST_GROWING
+	produce_time = SLOW_PRODUCE_TIME
+	plant_family = FAMILY_ROSACEAE
+	nitrogen_requirement = 0
+	phosphorus_requirement = 0
+	potassium_requirement = 30
+	nitrogen_production = 0
+	phosphorus_production = 20
+	potassium_production = 0
+	seed_identity = "tamto seeds"
+
+/datum/plant_def/tamto/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+	base_genetics.water_efficiency = TRAIT_GRADE_POOR //These grow submerged in water, so they drink a LOT.
+	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
+
+/datum/plant_def/plum
+	see_through = TRUE
+	name = "plum tree"
+	icon_state = "plumtree"
+	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/plum
+	uproot_loot = list(/obj/item/grown/log/tree/small)
+	perennial = TRUE
+	produce_amount_min = 2
+	produce_amount_max = 3
+	produce_time = SLOW_PRODUCE_TIME
+	plant_family = FAMILY_ROSACEAE
+	nitrogen_requirement = 35
+	phosphorus_requirement = 0
+	potassium_requirement = 0
+	nitrogen_production = 0
+	phosphorus_production = 32
+	potassium_production = 0
+	seed_identity = "plum seeds"
+
+/datum/plant_def/plum/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+	base_genetics.disease_resistance = TRAIT_GRADE_GOOD
+
 /datum/plant_def/apple
 	see_through = TRUE
 	name = "apple tree"
@@ -152,24 +197,21 @@
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD
 
-/datum/plant_def/plum
-	see_through = TRUE
-	name = "plum tree"
-	icon_state = "plumtree"
-	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/plum
-	uproot_loot = list(/obj/item/grown/log/tree/small)
-	perennial = TRUE
+/datum/plant_def/pompkaun
+	name = "pompkaun vine"
+	icon_state = "pompkaun"
+	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun
 	produce_amount_min = 2
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_ROSACEAE
-	nitrogen_requirement = 35
+	nitrogen_requirement = 0
 	phosphorus_requirement = 0
-	potassium_requirement = 0
+	potassium_requirement = 35
 	nitrogen_production = 0
-	phosphorus_production = 32
+	phosphorus_production = 20
 	potassium_production = 0
-	seed_identity = "plum seeds"
+	seed_identity = "pompkaun seeds"
 
-/datum/plant_def/plum/set_genetic_tendencies(datum/plant_genetics/base_genetics)
-	base_genetics.disease_resistance = TRAIT_GRADE_GOOD
+/datum/plant_def/pompkaun/set_genetic_tendencies(datum/plant_genetics/base_genetics)
+	base_genetics.cold_resistance = TRAIT_GRADE_GOOD

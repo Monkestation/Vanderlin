@@ -20,6 +20,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
@@ -40,14 +41,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		var/list/BD = BT.get_blood_data(src)
-		vitae = round(examined.blood_volume * BD["vitae"])
+		vitae = round(examined.blood_volume * BT.vitae)
 	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "vamplesser"
+
+	clan_selected = TRUE
+	default_clan = /datum/clan/caitiff
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
