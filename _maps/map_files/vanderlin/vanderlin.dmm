@@ -3610,12 +3610,6 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
 /area/outdoors/town)
-"bKr" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "bKB" = (
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/keep/halls/s)
@@ -27144,12 +27138,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/bfloorz,
 /area/indoors/town/garrison)
-"mDU" = (
-/obj/structure/fluff/railing/wood{
-	pixel_y = -4
-	},
-/turf/closed/wall/mineral/wooddark,
-/area/indoors/town/tavern)
 "mEd" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
@@ -32692,12 +32680,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/blocks,
 /area/under/town/basement)
-"paX" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/closed/wall/mineral/wooddark,
-/area/indoors/town/tavern)
 "paZ" = (
 /obj/structure/fluff/walldeco/stone{
 	pixel_y = -32
@@ -69855,9 +69837,9 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
 qFx
 qFx
 qFx
@@ -70057,9 +70039,9 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
 qFx
 qFx
 qFx
@@ -72958,8 +72940,8 @@ epC
 epC
 epC
 nFN
-nFN
-nFN
+qFx
+qFx
 xAw
 xAw
 xAw
@@ -73160,8 +73142,8 @@ epC
 epC
 epC
 nFN
-nFN
-nFN
+qFx
+qFx
 xAw
 izG
 izG
@@ -85546,8 +85528,8 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
+nFN
+nFN
 qQh
 qQh
 qQh
@@ -85747,9 +85729,9 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
 qQh
 qQh
 qQh
@@ -85942,16 +85924,16 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
 nFN
 nFN
 nFN
 nFN
 nFN
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
+nFN
 qQh
 qQh
 qQh
@@ -86144,16 +86126,16 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
 nFN
 nFN
 nFN
 nFN
 nFN
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
+nFN
 qQh
 qQh
 qQh
@@ -86345,9 +86327,9 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
 nFN
 nFN
 nFN
@@ -86546,10 +86528,10 @@ qQh
 qQh
 qQh
 qQh
-qFx
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
 nFN
 nFN
 nFN
@@ -86748,10 +86730,10 @@ qQh
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+nFN
+nFN
+nFN
+nFN
 nFN
 nFN
 nFN
@@ -120298,8 +120280,8 @@ gPz
 pny
 cUs
 cUs
-bKr
-bKr
+cUs
+cUs
 cUs
 cUs
 cUs
@@ -120500,8 +120482,8 @@ pny
 fVi
 jle
 cUs
-paX
-mDU
+fVi
+fVi
 cUs
 cUs
 cUs
@@ -120702,8 +120684,8 @@ gPz
 pny
 cUs
 cUs
-paX
-mDU
+fVi
+fVi
 cUs
 cUs
 cck
@@ -151873,7 +151855,7 @@ pWA
 pDm
 gAL
 qFx
-nNY
+qFx
 qFx
 qFx
 qFx
@@ -152074,8 +152056,8 @@ gAL
 gAL
 gAL
 gAL
-nNY
-fPr
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -152276,7 +152258,7 @@ xct
 xct
 xct
 xct
-nNY
+qFx
 qFx
 qFx
 qFx
@@ -152479,9 +152461,9 @@ xct
 xct
 xct
 xct
-nNY
-nNY
-fPr
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
