@@ -194,7 +194,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
-	sewrepair = FALSE
+	sewrepair = null
 	max_integrity = INTEGRITY_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS

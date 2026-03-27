@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(attunement_colors, list(
 
 	var/list/alignments = list() // no alignments by default
 
-/datum/attunement/Destroy(force, ...)
+/datum/attunement/Destroy(force)
 	stack_trace("Destroy called on [src], [src.type], a singleton attunement instance!")
 	if (!force)
 		return QDEL_HINT_LETMELIVE //should not be deleted, ever
