@@ -178,7 +178,7 @@
 		H.emote("painscream")
 		H.confession_time("patron", src)
 
-/// Verb for Inquisitors to recall people with the vice [/datum/quirk/vice/suspicion]
+/// Verb for Inquisitors to recall people with the vice `/datum/quirk/vice/suspicion`
 /mob/living/carbon/human/proc/suspect_heretics()
 	set name = "Remember Suspects"
 	set category = "RoleUnique.Inquisition"
