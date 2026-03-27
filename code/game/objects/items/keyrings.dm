@@ -17,6 +17,13 @@
 	component_type = /datum/component/storage/concrete/grid/keyring
 	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
 	var/list/combined_access
+	slot_equipment_priority = list(
+		ITEM_SLOT_NECK,
+		ITEM_SLOT_WRISTS,
+		ITEM_SLOT_HIP,
+		ITEM_SLOT_MOUTH,
+	)
+
 
 /obj/item/storage/keyring/Initialize()
 	. = ..()

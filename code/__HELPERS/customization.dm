@@ -65,6 +65,10 @@
 		if(updates_body)
 			update_body_parts(TRUE)
 		eyes.update_accessory_colors()
+		if(hud_used) // hud icon
+			var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
+			eyet?.update_appearance(UPDATE_OVERLAYS)
+
 
 	if(updates_dna)
 		var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]

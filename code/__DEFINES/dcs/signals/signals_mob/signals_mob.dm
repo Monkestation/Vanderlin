@@ -32,3 +32,6 @@
 	#define COMPONENT_BLOCK_MOB_CHANGE (1<<0)
 /// from /mob/proc/change_mob_type_unchecked() : ()
 #define COMSIG_MOB_CHANGED_TYPE "mob_changed_type"
+
+/// from /mob/toggle_cmode(): (mob/user, new_state)
+#define COMSIG_MOB_TOGGLE_CMODE "mob_toggle_cmode"

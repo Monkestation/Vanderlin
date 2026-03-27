@@ -10,6 +10,13 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK|ITEM_SLOT_RING
 	grid_height = 64
 	grid_width = 32
+	slot_equipment_priority = list(
+		ITEM_SLOT_NECK,
+		ITEM_SLOT_HIP,
+		ITEM_SLOT_RING,
+		ITEM_SLOT_MOUTH,
+	)
+
 
 /obj/item/lockpick
 	name = "lockpick"

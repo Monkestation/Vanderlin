@@ -78,7 +78,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 /datum/component/ghost_vessel/proc/possess_vessel(mob/dead/observer/ghost)
 	if(!ghost?.client)
 		return
-
+	ghost.client.stop_sounds_rogue()
 	being_offered = FALSE
 	REMOVE_TRAIT(owner, TRAIT_STASIS, REF(src))
 	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, SOULSTONE_TRAIT)

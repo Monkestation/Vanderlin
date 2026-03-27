@@ -6,8 +6,10 @@
 
 /mob/living/carbon/proc/handle_tongueless_speech(mob/living/carbon/speaker, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
-	var/datum/language/lang = speech_args[SPEECH_LANGUAGE]
+	if(!speaker.dna?.species?.organs[ORGAN_SLOT_TONGUE]) // we dont need a tongue to speak
+		return
 
+	var/datum/language/lang = speech_args[SPEECH_LANGUAGE]
 	if(lang && (lang.flags & SIGNLANG))
 		return
 

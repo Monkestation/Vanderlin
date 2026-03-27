@@ -131,7 +131,8 @@
 	if(has_rolled_for_stats)
 		return FALSE
 
-	attributes?.add_sheet(/datum/attribute_holder/sheet/job/random_stats)
+	if(uses_random_stats)
+		attributes?.add_sheet(/datum/attribute_holder/sheet/job/random_stats)
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src

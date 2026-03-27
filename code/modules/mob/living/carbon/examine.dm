@@ -490,12 +490,10 @@
 
 	// missing limbs
 	var/appears_dead = FALSE
-	var/is_clearly_dead = FALSE
 	for(var/t in get_missing_limbs())
 		var/limb_msg = "[capitalize(P[THEIR])] [parse_zone(t)] is gone."
 		if(t==BODY_ZONE_HEAD)
 			limb_msg = span_boldred(limb_msg)
-			is_clearly_dead = TRUE
 		else
 			limb_msg = span_boldwarning(limb_msg)
 		. += limb_msg
@@ -508,7 +506,7 @@
 		if(hellbound)
 			. += span_red("[P[THEIR]] soul seems to have been ripped out of [P[THEIR]] body. Revival is impossible.")
 
-	if(is_clearly_dead || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
+	if(!getorganslot(ORGAN_SLOT_BRAIN) || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
 		. += span_boldred("[P[THEYRE]] dead.")
 	else if(appears_dead || stat >= UNCONSCIOUS)
 		. += span_boldwarning("[P[THEYRE]] unconscious.")

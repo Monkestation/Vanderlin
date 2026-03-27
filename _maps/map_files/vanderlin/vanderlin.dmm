@@ -8690,6 +8690,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass,
 /area/outdoors/town/keep)
+"dZt" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/craftstone,
+/area/under/town/basement)
 "dZu" = (
 /obj/structure/fluff/railing/tall{
 	dir = 1
@@ -11068,6 +11072,7 @@
 "fip" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /obj/structure/fluff/steamvent,
+/obj/machinery/artificer_table,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
 "fiF" = (
@@ -11610,7 +11615,10 @@
 /turf/open/floor/metal/barograte/open,
 /area/indoors/town/clocktower)
 "fws" = (
-/obj/structure/steam_recharger,
+/obj/structure/fluff/steamvent,
+/obj/machinery/light/fueled/wallfire/candle/lamp{
+	pixel_y = -32
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
 "fwB" = (
@@ -17817,10 +17825,6 @@
 "iwe" = (
 /turf/open/floor/naturalstone,
 /area/under/town/basement)
-"iwh" = (
-/obj/structure/water_pipe,
-/turf/open/floor/blocks/stonered/tiny,
-/area/under/town/basement)
 "iww" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/bowl,
@@ -21497,10 +21501,6 @@
 "kem" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
-"keE" = (
-/obj/structure/boiler,
-/turf/open/floor/metal/alt,
-/area/under/town/basement)
 "keP" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/stone,
@@ -22248,6 +22248,10 @@
 	},
 /turf/open/floor/tile/bath/pool,
 /area/indoors/town/tavern)
+"kwg" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/pipe,
+/area/under/town/basement)
 "kwp" = (
 /obj/effect/mapping_helpers/access/keyset/garrison/general,
 /obj/effect/mapping_helpers/access/locker,
@@ -22612,6 +22616,7 @@
 "kGM" = (
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "kHj" = (
@@ -30756,6 +30761,7 @@
 	name = "Royal Guard's Storage"
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "osA" = (
@@ -35377,6 +35383,18 @@
 /area/indoors/town)
 "qxj" = (
 /obj/structure/rack/shelf/biggest,
+/obj/item/weapon/hammer/iron{
+	pixel_x = -2;
+	pixel_y = 2
+	},
+/obj/item/weapon/hammer/iron{
+	pixel_x = 5;
+	pixel_y = -3
+	},
+/obj/item/clothing/face/goggles{
+	pixel_x = 2;
+	pixel_y = 1
+	},
 /turf/open/floor/metal/alt,
 /area/under/town/basement)
 "qxt" = (
@@ -36408,14 +36426,6 @@
 /obj/structure/chair/stool,
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/metal/barograte,
-/area/under/town/basement)
-"qSY" = (
-/obj/machinery/light/fueled/wallfire/candle/lamp{
-	pixel_y = -32
-	},
-/obj/structure/steam_recharger,
-/obj/structure/fluff/steamvent,
-/turf/open/floor/metal/alt,
 /area/under/town/basement)
 "qTc" = (
 /obj/structure/rack/shelf/biggest,
@@ -37969,6 +37979,11 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
+"rBv" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/augment_kit,
+/turf/open/floor/metal/alt,
+/area/under/town/basement)
 "rBx" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/tailor,
@@ -41218,6 +41233,9 @@
 "sXo" = (
 /obj/structure/fluff/steamvent,
 /obj/structure/water_pipe,
+/obj/machinery/light/fueled/wallfire/candle/lamp{
+	pixel_y = -32
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
 "sXp" = (
@@ -46368,11 +46386,10 @@
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "vmr" = (
-/obj/structure/water_pipe,
-/obj/machinery/light/fueled/wallfire/candle/lamp{
-	pixel_y = -32
+/obj/structure/boiler{
+	dir = 4
 	},
-/turf/open/floor/metal/alt,
+/turf/closed/wall/mineral/pipe,
 /area/under/town/basement)
 "vmR" = (
 /obj/structure/bed/shit,
@@ -46508,7 +46525,7 @@
 /turf/open/water/cleanshallow,
 /area/indoors/town/keep/halls)
 "vpQ" = (
-/obj/structure/water_pipe,
+/obj/structure/steam_recharger,
 /turf/open/floor/metal/alt,
 /area/under/town/basement)
 "vqa" = (
@@ -52763,7 +52780,9 @@
 "xWu" = (
 /obj/structure/fluff/steamvent,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/automaton/prefilled_vessel,
+/obj/item/storage/keyring/manorguard,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
 "xXe" = (
@@ -73057,7 +73076,7 @@ cRb
 ggb
 gxO
 jEQ
-nRc
+qFx
 qFx
 qFx
 qFx
@@ -73258,7 +73277,7 @@ dIz
 dIz
 dIz
 fws
-qSY
+dHC
 dHC
 qFx
 qFx
@@ -73459,9 +73478,9 @@ dIz
 jTO
 oqo
 jTO
-iwh
+dIz
 vpQ
-dHC
+kwg
 qFx
 qFx
 qFx
@@ -73656,14 +73675,14 @@ qFx
 qFx
 qFx
 dHC
-qxj
+rBv
 dIz
 jTO
 oqo
 jTO
 dIz
-keE
-fYq
+vpQ
+dZt
 qFx
 qFx
 qFx
@@ -73865,7 +73884,7 @@ czw
 czw
 sXo
 vmr
-fYq
+dZt
 qFx
 qFx
 qFx

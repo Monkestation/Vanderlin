@@ -131,6 +131,11 @@
 	created_augment = /datum/augment/skill/bow_stabilizer
 	additional_items = list(/obj/item/ingot/silver)
 
+/datum/artificer_recipe/augments/cooking_guide
+	name = "Culinary Guide"
+	created_augment = /datum/augment/skill/cooking_guide
+	additional_items = list(/obj/item/ingot/bronze)
+
 /datum/artificer_recipe/augments/smithing_optimizer
 	name = "Smithing Precision Optimizer"
 	created_augment = /datum/augment/skill/smithing_optimizer
@@ -208,6 +213,11 @@
 	additional_items = list(/obj/item/ingot/bronze)
 
 /* 	.....SPECIAL..... */
+
+/datum/artificer_recipe/augments/loyalty_binder
+	name = "Shackle"
+	created_augment = /datum/augment/special/loyalty_binder
+	additional_items = list(/obj/item/ingot/tin)
 
 /datum/artificer_recipe/augments/sandevistan
 	name = "CHRONOS Unit"

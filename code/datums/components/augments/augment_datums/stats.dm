@@ -21,7 +21,7 @@
 /datum/augment/stats/strength_servo
 	name = "hydraulic strength servo"
 	desc = "Enhances physical power through pressurized hydraulics, at the cost of core stability."
-	stability_cost = -15
+	stability_cost = -12
 	stat_changes = list(STAT_STRENGTH = 2)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
@@ -37,7 +37,7 @@
 /datum/augment/stats/processing_core
 	name = "overclocked logic engine"
 	desc = "Increases processing speed and analytical capability, straining the core matrix."
-	stability_cost = -20
+	stability_cost = -12
 	stat_changes = list(STAT_INTELLIGENCE = 3)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
@@ -45,7 +45,7 @@
 /datum/augment/stats/suspension_rig
 	name = "suspension rig"
 	desc = "Strengthens the automaton's frame against damage."
-	stability_cost = -15
+	stability_cost = -12
 	stat_changes = list(STAT_CONSTITUTION = 2)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS

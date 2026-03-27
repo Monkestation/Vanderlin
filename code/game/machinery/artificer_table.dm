@@ -140,7 +140,7 @@
 
 /obj/machinery/artificer_table/attack_hand(mob/user, list/modifiers)
 	if(!material)
-		return
+		return ..()
 	var/obj/item/I = material
 	material = null
 	I.loc = user.loc

@@ -81,6 +81,29 @@
 	if(data["blood_DNA"])
 		B.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
 
+/datum/reagent/blood/fuel
+	name = "Oil"
+	color = "#1C1C1C"
+	taste_description = "gross metal"
+	glass_desc = ""
+	toxicity = 3
+
+/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
+	if((method & TOUCH) || (method & VAPOR))
+		M.adjust_fire_stacks(reac_volume / 10)
+		return
+	..()
+
+/datum/reagent/blood/fuel/add_to_member(obj/effect/abstract/liquid_turf/adder)
+	. = ..()
+	if(!adder.GetComponent(/datum/component/slippery))
+		adder.AddComponent(/datum/component/slippery, 50)
+
+/datum/reagent/blood/fuel/remove_from_member(obj/effect/abstract/liquid_turf/remover)
+	. = ..()
+	var/datum/component/slipComp = remover.GetComponent(/datum/component/slippery)
+	slipComp?.Destroy()
+
 
 /datum/reagent/water
 	name = "Water"
@@ -247,26 +270,6 @@
 		return ..()
 	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 : 5)
 	return ..()
-
-/datum/reagent/fuel
-	name = "Lighter fuel"
-	description = "Lighter fluids."
-	color = "#660000" // rgb: 102, 0, 0
-	taste_description = "gross metal"
-	glass_icon_state = "dr_gibb_glass"
-	glass_name = "glass of lighter fuel"
-	glass_desc = ""
-
-/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 10)
-		return
-	..()
-
-/datum/reagent/fuel/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(1, 0)
-	..()
-	return TRUE
 
 /datum/reagent/ash
 	name = "Ash"

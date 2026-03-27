@@ -90,6 +90,7 @@
 	/// How many ticks this mob has been over reating
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
+	var/uses_random_stats = TRUE
 	/// Skill holder
 	var/datum/attribute_holder/attributes = /datum/attribute_holder
 	/// Extra effort that can be spent on efforts

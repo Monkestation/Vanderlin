@@ -681,6 +681,7 @@
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
 		deltimer(cmode_timer)
 
+	SEND_SIGNAL(src, COMSIG_MOB_TOGGLE_CMODE, cmode)
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
 

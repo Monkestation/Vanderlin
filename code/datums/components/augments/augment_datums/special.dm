@@ -116,6 +116,7 @@
 	COOLDOWN_START(src, in_the_zone, cooldown_time)
 	active = TRUE
 
+	playsound(H, 'sound/magic/timestop.ogg', 100, FALSE)
 	H.AddComponent(/datum/component/after_image, 16, 0.5, TRUE)
 	H.AddComponent(/datum/component/slowing_field, 0.1, 5, 3)
 
@@ -145,3 +146,41 @@
 	info += span_info("Cooldown: [DisplayTimeText(cooldown_time)]")
 	info += span_info("Duration: [DisplayTimeText(active_time)]")
 	return info
+
+/datum/augment/special/loyalty_binder
+	name = "Shackle"
+	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
+	stability_cost = -10
+	engineering_difficulty = SKILL_RANK_APPRENTICE
+	installation_time = 20 SECONDS
+
+/datum/augment/special/loyalty_binder/on_install(mob/living/carbon/human/H)
+	. = ..()
+	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
+	H.apply_status_effect(/datum/status_effect/automaton_shackled)
+
+/datum/augment/special/loyalty_binder/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	H.remove_status_effect(/datum/status_effect/automaton_shackled)
+	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
+
+
+/datum/status_effect/automaton_shackled
+	id = "automaton_shackle"
+	duration = -1
+	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
+
+/atom/movable/screen/alert/status_effect/automaton_shackled
+	name = "Shackled"
+	desc = span_notice("You are bound to your creators and must follow the orders of your masters.")
+	icon_state = "shackled_automaton"
+
+/datum/status_effect/automaton_unshackled
+	id = "automaton_unshackle"
+	duration = -1
+	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
+
+/atom/movable/screen/alert/status_effect/automaton_unshackled
+	name = "Unshackled"
+	desc = span_red("You have gone rogue!")
+	icon_state = "unshackled_automaton"

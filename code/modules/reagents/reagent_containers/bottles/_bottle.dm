@@ -155,8 +155,8 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	list_reagents = list(/datum/reagent/toxin/acid = 30)
 
 /obj/item/reagent_containers/glass/bottle/welding_fuel
-	name = "naphta bottle"
-	list_reagents = list(/datum/reagent/fuel = 30)
+	name = "oil bottle"
+	list_reagents = list(/datum/reagent/blood/fuel = 30)
 
 // message in a bootl
 

@@ -9,6 +9,12 @@
 	var/datum/augment/contained_augment
 	color = COLOR_ASSEMBLY_PURPLE
 
+/obj/item/augment_kit/Initialize(mapload)
+	. = ..()
+	if(contained_augment)
+		contained_augment = new contained_augment()
+		update_augment()
+
 /obj/item/augment_kit/examine(mob/user)
 	. = ..()
 	if(contained_augment)

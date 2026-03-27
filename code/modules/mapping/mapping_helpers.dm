@@ -167,6 +167,11 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	for(var/obj/item/clothing/clothing in get_turf(src))
 		located.equip_to_appropriate_slot(clothing)
 
+	for(var/obj/item/storage/keyring/K in get_turf(src))
+		located.equip_to_appropriate_slot(K)
+	for(var/obj/item/key/K in get_turf(src))
+		located.equip_to_appropriate_slot(K)
+
 	for(var/obj/item/weapon/weapon in get_turf(src))
 		located.put_in_hands(weapon)
 	qdel(src)

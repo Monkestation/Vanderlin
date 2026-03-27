@@ -2,10 +2,12 @@
 /datum/augment/armor
 	abstract_type = /datum/augment/armor
 	incompatible_installations = list(/datum/augment/armor)
+	color = COLOR_ASSEMBLY_YELLOW
 	var/list/armor_values
 	var/finish
 	var/melee_damage = 0
-	color = COLOR_ASSEMBLY_YELLOW
+	var/shutdown_bonus = 0
+
 
 /datum/augment/armor/on_install(mob/living/carbon/human/H)
 	H.physiology?.armor = H.physiology.armor.attachArmor(getArmor(arglist(armor_values)))
@@ -15,6 +17,10 @@
 	H.dna.species.punch_damage += melee_damage
 	H.dna.species.kick_damage += melee_damage
 	H.potence_weapon_buff += melee_damage
+	var/datum/component/damage_shutdown/sd = H.GetComponent(/datum/component/damage_shutdown)
+	sd?.shutdown_threshold += shutdown_bonus
+	H.updatehealth()
+
 
 /datum/augment/armor/on_remove(mob/living/carbon/human/H)
 	H.physiology?.armor = H.physiology.armor.detachArmor(getArmor(arglist(armor_values)))
@@ -24,6 +30,10 @@
 	H.dna.species.punch_damage -= melee_damage
 	H.dna.species.kick_damage -= melee_damage
 	H.potence_weapon_buff -= melee_damage
+	var/datum/component/damage_shutdown/sd = H.GetComponent(/datum/component/damage_shutdown)
+	sd?.shutdown_threshold -= shutdown_bonus
+	H.updatehealth()
+
 
 /datum/augment/armor/tin
 	name = "tin plating"
@@ -31,8 +41,9 @@
 	engineering_difficulty = SKILL_RANK_NONE
 	armor_values = ARMOR_MAILLE_IRON
 	finish = "D4AF37"
-	stability_cost = 10
+	stability_cost = 15
 	engineering_difficulty = 0
+	shutdown_bonus = -25
 
 /datum/augment/armor/copper
 	name = "copper plating"
@@ -43,6 +54,7 @@
 	stability_cost = 10
 	engineering_difficulty = 1
 	melee_damage = 1
+	shutdown_bonus = -10
 
 /datum/augment/armor/bronze
 	name = "bronze plating"
@@ -51,6 +63,7 @@
 	armor_values = ARMOR_MAILLE
 	finish = "89713B"
 	melee_damage = 2
+	shutdown_bonus = 10
 
 /datum/augment/armor/iron
 	name = "iron plating"
@@ -60,6 +73,7 @@
 	finish = "A6A695"
 	stability_cost = -5
 	melee_damage = 3
+	shutdown_bonus = 25
 
 /datum/augment/armor/steel
 	name = "steel plating"
@@ -69,6 +83,7 @@
 	finish = "9EC0D3"
 	stability_cost = -10
 	melee_damage = 5
+	shutdown_bonus = 50
 
 /datum/augment/armor/gold
 	name = "gold plating"
@@ -78,6 +93,7 @@
 	finish = "D4AF37"
 	stability_cost = -15
 	melee_damage = 7
+	shutdown_bonus = 50
 
 /datum/augment/armor/silver
 	name = "silver plating"
@@ -87,6 +103,7 @@
 	finish = "98A4BD"
 	stability_cost = -20
 	melee_damage = 7
+	shutdown_bonus = 50
 
 /datum/augment/armor/blacksteel
 	name = "blacksteel plating"
@@ -96,3 +113,4 @@
 	finish = "767B97"
 	stability_cost = -30
 	melee_damage = 10
+	shutdown_bonus = 75
