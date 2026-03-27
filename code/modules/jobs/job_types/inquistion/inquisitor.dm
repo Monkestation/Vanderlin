@@ -311,17 +311,18 @@
 					else if(istype(victim_patron, /datum/patron/psydon))
 						interrogator.add_stress(/datum/stress_event/torture_large_penalty)
 
-		// If person was a suspected heretic with `vice/suspicion`, reward TRIUMPH and remove them as suspect
-		if(was_suspect)
-			GLOB.inquis_suspect_players -= real_name
-			to_chat(interrogator, span_notice("You were able to investigate someone who your compatriots suspected of heresy, and settled the matter beyond any doubt. A true TRIUMPH!"))
-			interrogator.adjust_triumphs(1)
-
 		if(length(confessions))
 			if(torture)
 				say(pick(confessions), spans = list("torture"), forced = TRUE)
 			else
 				say(pick(confessions), forced = TRUE)
+
+			// If person was a suspected heretic with `vice/suspicion`, reward TRIUMPH and remove them as suspect
+			if(was_suspect)
+				GLOB.inquis_suspect_players -= real_name
+				playsound(interrogator, 'sound/misc/otavasent.ogg', 100, FALSE, -1)
+				to_chat(interrogator, span_notice("You were able to investigate someone who your compatriots suspected of heresy, and settled the matter beyond any doubt. A true TRIUMPH!"))
+				interrogator.adjust_triumphs(1)
 
 			var/obj/item/paper/inqslip/confession/held_confession
 			if(istype(confession_paper))
