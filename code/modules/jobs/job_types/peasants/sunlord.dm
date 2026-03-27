@@ -42,7 +42,7 @@
 		EXP_TYPE_LEADERSHIP = 300
 	)
 
-	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
+	cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sunlord
 
@@ -83,7 +83,9 @@
 	. = ..()
 	cloak = /obj/item/clothing/cloak/heartfelt/shit
 	ring = /obj/item/clothing/ring/dragon_ring
+	neck = /obj/item/clothing/neck/amberamulet
 	head = /obj/item/clothing/head/priesthat/sunlord
+	armor = /obj/item/clothing/armor/regenerating/skin/disciple/sunlord
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/weapon/sword/stone
 	beltr = /obj/item/weapon/sword/stone
