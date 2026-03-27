@@ -316,7 +316,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Beggar"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/vagrant/lord
+/obj/effect/landmark/start/sunlord
 	name = "Sunlord"
 	icon_state = "arrow"
 
