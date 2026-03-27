@@ -1656,14 +1656,15 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "aNz" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 1
-	},
 /obj/structure/fluff/railing/tall{
 	dir = 1;
 	max_integrity = 1000
 	},
-/turf/open/floor/ruinedwood/darker,
+/obj/structure/fluff/railing/tall{
+	dir = 8;
+	max_integrity = 1000
+	},
+/turf/open/floor/metal/alt,
 /area/outdoors/town)
 "aNB" = (
 /obj/structure/stairs/stone,
@@ -4201,15 +4202,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/outdoors/exposed/town)
-"bXr" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 1
-	},
-/obj/structure/fluff/railing/tall{
-	dir = 4
-	},
-/turf/open/openspace,
-/area/outdoors/town)
 "bXv" = (
 /obj/structure/table/map{
 	dir = 9
@@ -5296,7 +5288,7 @@
 /obj/structure/fluff/railing/tall{
 	dir = 4
 	},
-/turf/open/floor/ruinedwood/turned/darker,
+/turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
 "czo" = (
 /obj/structure/door{
@@ -6662,16 +6654,16 @@
 /turf/open/floor/cobble/alt,
 /area/outdoors/exposed/under/sewer)
 "dcQ" = (
-/obj/structure/fluff/railing/tall{
-	dir = 4
-	},
+/obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/iron/bars{
 	name = "staff only";
 	max_integrity = 5000
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/gate,
-/turf/open/floor/ruinedwood/turned/darker,
+/obj/structure/fluff/railing/tall{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
 "dcU" = (
 /obj/structure/table/wood{
@@ -9562,9 +9554,11 @@
 /turf/open/floor/metal/barograte,
 /area/outdoors/mountains)
 "evB" = (
-/obj/structure/fluff/sellsign{
-	name = "Line Starts Here"
+/obj/structure/fluff/railing/tall{
+	dir = 8;
+	max_integrity = 1000
 	},
+/obj/structure/bars/cemetery,
 /turf/open/floor/blocks,
 /area/outdoors/town)
 "evE" = (
@@ -10767,13 +10761,6 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/halls/w)
-"faO" = (
-/obj/structure/fluff/railing/tall{
-	dir = 4;
-	max_integrity = 1000
-	},
-/turf/open/openspace,
-/area/outdoors/town)
 "faP" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = 615
@@ -14914,10 +14901,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town)
-"hdL" = (
-/obj/structure/fake_machine/hailerboard,
-/turf/open/floor/blocks,
-/area/outdoors/town)
 "hdO" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -16190,10 +16173,7 @@
 	dir = 8;
 	max_integrity = 1000
 	},
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000
-	},
-/turf/open/openspace,
+/turf/open/floor/metal/alt,
 /area/outdoors/town)
 "hJi" = (
 /obj/structure/flora/grass/bush_meagre,
@@ -16808,10 +16788,6 @@
 "hWI" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/cave)
-"hWR" = (
-/obj/structure/fluff/walldeco/customflag,
-/turf/closed/wall/mineral/stone,
-/area/outdoors/town)
 "hWW" = (
 /obj/structure/kneestingers{
 	pixel_x = 1;
@@ -17331,16 +17307,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
-"ilS" = (
-/obj/structure/fluff/railing/tall{
-	dir = 4;
-	max_integrity = 1000
-	},
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000
-	},
-/turf/open/openspace,
-/area/outdoors/town)
 "ilT" = (
 /obj/structure/bed/bear,
 /obj/effect/landmark/start/villager,
@@ -17683,12 +17649,18 @@
 /turf/open/floor/dirt,
 /area/outdoors/town)
 "isQ" = (
-/obj/machinery/light/fueledstreet,
 /obj/structure/fake_machine/submission{
 	pixel_x = -32;
 	pixel_y = 0
 	},
-/turf/open/floor/blocks,
+/obj/structure/fluff/sellsign{
+	name = "Line Starts Here"
+	},
+/obj/structure/fluff/railing/tall{
+	dir = 1;
+	max_integrity = 1000
+	},
+/turf/open/floor/cobble,
 /area/outdoors/town)
 "isS" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -18487,6 +18459,19 @@
 "iJy" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/blocks,
+/area/outdoors/town)
+"iJB" = (
+/obj/structure/door/iron/bars{
+	name = "fast pass";
+	max_integrity = 5000
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/fluff/railing/tall{
+	dir = 8;
+	max_integrity = 1000
+	},
+/obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
 "iJM" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -20442,6 +20427,14 @@
 /obj/structure/fluff/celebration/flags,
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"jBO" = (
+/obj/structure/fluff/sellsign{
+	desc = "Confess your admiration for Zizo in the court!";
+	pixel_y = 12;
+	name = "Looking to Kill Yourself?"
+	},
+/turf/open/floor/plank/h,
+/area/outdoors/town)
 "jCd" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -20982,7 +20975,7 @@
 /obj/structure/fluff/railing/tall{
 	max_integrity = 1000
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
 "jOy" = (
 /obj/structure/water_pipe,
@@ -21761,17 +21754,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/greenstone,
 /area/outdoors/exposed/under/sewer)
-"kjm" = (
-/obj/structure/fluff/railing/tall{
-	dir = 8;
-	max_integrity = 1000
-	},
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000;
-	dir = 1
-	},
-/turf/open/openspace,
-/area/outdoors/town)
 "kjn" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
@@ -22692,14 +22674,14 @@
 /area/indoors/villagegarrison)
 "kFi" = (
 /obj/structure/fluff/railing/tall{
-	dir = 4;
-	max_integrity = 1000
-	},
-/obj/structure/fluff/railing/tall{
 	max_integrity = 1000;
 	dir = 1
 	},
-/turf/open/openspace,
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = 10;
+	pixel_y = 4
+	},
+/turf/open/floor/metal/alt,
 /area/outdoors/town)
 "kFt" = (
 /obj/structure/door/fancy{
@@ -26337,21 +26319,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
-"mmM" = (
-/obj/structure/fluff/railing/tall{
-	dir = 1;
-	max_integrity = 1000
-	},
-/obj/structure/fluff/sellsign{
-	name = "Vanderlin Fun Fact!";
-	desc = "Did you know Vanderlin is renowned for their drinking water? Try it from a fountain during your stay!"
-	},
-/obj/structure/fluff/railing/tall{
-	dir = 8;
-	max_integrity = 1000
-	},
-/turf/open/floor/metal/alt,
-/area/outdoors/town)
 "mmX" = (
 /turf/open/floor/twig{
 	dir = 4
@@ -27561,17 +27528,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
-"mON" = (
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000
-	},
-/obj/structure/fluff/sellsign{
-	desc = "Available at the Drunk Saiga";
-	pixel_y = 24;
-	name = "Try our Pestran Sticks!"
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/outdoors/town)
 "mOU" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/water/bath,
@@ -29438,13 +29394,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
-"nFY" = (
-/obj/structure/fluff/railing/tall{
-	dir = 8;
-	max_integrity = 1000
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/outdoors/town)
 "nFZ" = (
 /turf/closed/mineral/random/high_valuable,
 /area/under/cave)
@@ -29688,6 +29637,14 @@
 /obj/structure/chair/bench/coucha/r,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/smithy)
+"nLG" = (
+/obj/structure/fluff/sellsign{
+	name = "Vanderlin Fun Fact!";
+	desc = "Did you know Vanderlin is renowned for their drinking water? Try it from a fountain during your stay!";
+	pixel_y = 12
+	},
+/turf/open/floor/plank/h,
+/area/outdoors/town)
 "nLR" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/book/manners,
@@ -31230,13 +31187,6 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/town)
-"ovl" = (
-/obj/structure/fluff/railing/tall{
-	dir = 1;
-	max_integrity = 1000
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/outdoors/town)
 "ovm" = (
 /obj/structure/door/weak/bolt{
 	name = "Toilet";
@@ -32388,6 +32338,13 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"oTA" = (
+/obj/structure/fluff/railing/tall{
+	dir = 1;
+	max_integrity = 1000
+	},
+/turf/open/floor/ruinedwood/turned/alt,
+/area/outdoors/town)
 "oTG" = (
 /obj/machinery/light/fueledstreet,
 /turf/open/floor/dirt,
@@ -34375,14 +34332,6 @@
 "pMR" = (
 /turf/open/floor/churchbrick,
 /area/outdoors/exposed/under/sewer)
-"pMX" = (
-/obj/structure/fluff/sellsign{
-	desc = "Confess your admiration for Zizo in the court!";
-	pixel_y = 24;
-	name = "Looking to Kill Yourself?"
-	},
-/turf/open/floor/metal/alt,
-/area/outdoors/town)
 "pNa" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/town/inn,
@@ -36305,7 +36254,7 @@
 /obj/structure/fluff/railing/tall{
 	max_integrity = 1000
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
 "qGw" = (
 /turf/open/floor/woodturned,
@@ -42095,6 +42044,14 @@
 /obj/structure/fluff/walldeco/wantedposter,
 /turf/open/floor/blocks,
 /area/outdoors/town)
+"thm" = (
+/obj/structure/fluff/sellsign{
+	desc = "Kybraxor has recently had offspring! Speak to the Gatemaster about feeding them with your family!";
+	pixel_y = 12;
+	name = "Feed the Local Fauna!"
+	},
+/turf/open/floor/plank/h,
+/area/outdoors/town)
 "thv" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/lord_appt)
@@ -43428,17 +43385,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
-"tOQ" = (
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000
-	},
-/obj/structure/fluff/sellsign{
-	name = "Seeing the Royal Family?";
-	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
-	pixel_y = 24
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/outdoors/town)
 "tOT" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/ocean/deep,
@@ -44799,6 +44745,18 @@
 /obj/structure/table/wood,
 /turf/open/floor/dirt/road,
 /area/outdoors/farm)
+"uwn" = (
+/obj/structure/fluff/railing/tall{
+	dir = 8;
+	max_integrity = 1000
+	},
+/obj/structure/fluff/sellsign{
+	name = "Seeing the Royal Family?";
+	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
+	pixel_y = 12
+	},
+/turf/open/floor/plank/h,
+/area/outdoors/town)
 "uwo" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
@@ -48142,6 +48100,13 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
+"vQx" = (
+/obj/structure/fluff/railing/tall{
+	dir = 8;
+	max_integrity = 1000
+	},
+/turf/open/floor/ruinedwood/turned/alt,
+/area/outdoors/town)
 "vQH" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/key/apartments/apartment19,
@@ -49492,7 +49457,7 @@
 	dir = 1;
 	max_integrity = 1000
 	},
-/turf/open/floor/ruinedwood/turned/darker,
+/turf/open/floor/metal/alt,
 /area/outdoors/town)
 "wvJ" = (
 /obj/structure/door/weak/bolt,
@@ -49822,17 +49787,6 @@
 /obj/structure/bookcase/random,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
-"wBg" = (
-/obj/structure/fluff/railing/tall{
-	max_integrity = 1000
-	},
-/obj/structure/fluff/sellsign{
-	desc = "Kybraxor has recently had offspring! Speak to the Gatemaster about feeding them with your family!";
-	pixel_y = 24;
-	name = "Feed the Local Fauna!"
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/outdoors/town)
 "wBo" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/wine,
@@ -156651,7 +156605,7 @@ biy
 biy
 biy
 biy
-kfq
+biy
 biy
 biy
 biy
@@ -156853,7 +156807,7 @@ biy
 biy
 biy
 biy
-ref
+biy
 biy
 biy
 biy
@@ -157257,7 +157211,7 @@ biy
 biy
 biy
 biy
-tqN
+biy
 biy
 biy
 biy
@@ -157459,12 +157413,12 @@ biy
 biy
 biy
 biy
-kfq
 biy
 biy
 biy
-kfq
-gkc
+biy
+biy
+biy
 biy
 biy
 biy
@@ -196850,7 +196804,7 @@ luJ
 luJ
 luJ
 luJ
-luJ
+lfi
 luJ
 eZg
 eZg
@@ -197051,11 +197005,11 @@ dpb
 kbe
 kbe
 kbe
-bXr
-hWR
-iJy
-iJy
-iJy
+kbe
+wrm
+wrm
+wrm
+wrm
 eZg
 eAt
 jve
@@ -197253,11 +197207,11 @@ rea
 czj
 czj
 dcQ
-vAe
+rjA
 kFi
-faO
-faO
-ilS
+wrm
+wrm
+wrm
 isQ
 hZn
 czz
@@ -197456,11 +197410,11 @@ wrm
 wrm
 wrm
 dfR
-vAe
-vAe
-vAe
-vAe
-rea
+vQx
+vQx
+vQx
+vQx
+vQx
 lhA
 vkG
 hZn
@@ -197653,14 +197607,14 @@ jCO
 olT
 cRx
 rea
-jOr
-wrm
-wrm
-wrm
-ovl
-kjm
-tzv
-tzv
+rea
+vQx
+vQx
+iJB
+rjA
+vQx
+vQx
+vQx
 hIx
 evB
 xvY
@@ -197856,16 +197810,16 @@ clj
 mfh
 oNV
 qGt
-wrm
-wrm
-wrm
+tzv
+uwn
+tzv
 aNz
-hWR
+vQx
+vQx
+vQx
+rjA
 iJy
-iJy
-iJy
-ykl
-hdL
+czz
 hZn
 mFi
 mFi
@@ -198057,15 +198011,15 @@ vgh
 fep
 fep
 nuA
-tOQ
+jOr
 wrm
+thm
 wrm
-wrm
-dfR
-vAe
-vAe
-vAe
-rea
+oTA
+vQx
+vQx
+vQx
+hIx
 iJy
 grF
 czz
@@ -198259,15 +198213,15 @@ aNf
 fep
 fep
 nuA
-wBg
+jOr
 wrm
-wrm
+nLG
 wrm
 wvF
-nFY
-nFY
-nFY
-vAe
+vQx
+vQx
+vQx
+rjA
 iJy
 czz
 czz
@@ -198461,15 +198415,15 @@ qse
 aNf
 aNf
 nuA
-mON
+jOr
 wrm
+jBO
 wrm
-mmM
-vAe
-nFY
-nFY
-nFY
-nFY
+oTA
+vQx
+vQx
+vQx
+hIx
 iJy
 czz
 czz
@@ -198663,15 +198617,15 @@ mGE
 mGE
 mGE
 mGE
-pMX
-nFY
-nFY
-nFY
-nFY
-nFY
-nFY
-nFY
 rea
+vQx
+vQx
+vQx
+hIx
+vQx
+vQx
+vQx
+rjA
 iJy
 czz
 czz
