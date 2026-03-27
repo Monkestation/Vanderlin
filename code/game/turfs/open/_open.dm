@@ -12,7 +12,7 @@
 	var/footstepstealth = FALSE
 	baseturfs = /turf/open/openspace
 
-	smoothing_groups = SMOOTH_GROUP_OPEN
+	smoothing_groups = SMOOTH_GROUP_TURF_OPEN
 
 	var/obj/effect/hotspot/active_hotspot
 
