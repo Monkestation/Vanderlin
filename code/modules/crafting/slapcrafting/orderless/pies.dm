@@ -145,21 +145,21 @@
 /datum/orderless_slapcraft/food/tart/avocado
 	name = "Unbaked Avocado Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/avocado_half = 3
+		/obj/item/reagent_containers/food/snacks/fruit/avocado_half = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/avocado
 
 /datum/orderless_slapcraft/food/tart/mango
 	name = "Unbaked Mangga Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/mango_half = 3
+		/obj/item/reagent_containers/food/snacks/fruit/mango_half= 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/mango
 
 /datum/orderless_slapcraft/food/tart/mangosteen
 	name = "Unbaked Mangosteen Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen_opened = 3
+		/obj/item/reagent_containers/food/snacks/fruit/mangosteen_opened = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/mangosteen
 
@@ -173,7 +173,7 @@
 /datum/orderless_slapcraft/food/tart/dragonfruit
 	name = "Unbaked Piyata Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit_half = 3
+		/obj/item/reagent_containers/food/snacks/fruit/dragonfruit_half = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit
 
