@@ -520,7 +520,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	if(type == "Ordos")
 		output = "<B>[SSmapping.config.map_name] Scouting Report</B><br>"
 		for (var/mob/living/carbon in GLOB.mob_living_list)
-			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy)))))
+			if ((carbon.real_name != recipient.real_name) && ((carbon.has_quirk(/datum/quirk/vice/suspicion) && (!istype(carbon, /mob/living/carbon/human/dummy))) && (carbon.real_name in GLOB.inquis_suspect_players)))
 				output += "<br><b>[carbon.real_name]</b>"
 				if (carbon.job)
 					output += " - [carbon.job]"

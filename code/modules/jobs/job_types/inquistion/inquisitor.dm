@@ -314,7 +314,7 @@
 		// If person was a suspected heretic with `vice/suspicion`, reward TRIUMPH and remove them as suspect
 		if(was_suspect)
 			GLOB.inquis_suspect_players -= real_name
-			to_chat(interrogator, span_notice("You were able to investigate someone who your compatriots suspected of heresy, and was able to settle the matter beyond any doubt. A true TRIUMPH!"))
+			to_chat(interrogator, span_notice("You were able to investigate someone who your compatriots suspected of heresy, and settled the matter beyond any doubt. A true TRIUMPH!"))
 			interrogator.adjust_triumphs(1)
 
 		if(length(confessions))
