@@ -12,10 +12,10 @@
 	var/dusk_prob = 33
 
 	var/list/temp_ranges = list(
-		"dawn" = list(),
-		"day" = list(),
-		"dusk" = list(),
-		"night" = list(),
+		DAWN = list(),
+		DAY = list(),
+		DUSK = list(),
+		NIGHT = list(),
 	)
 
 	var/current_ambient_temperature = 0
@@ -23,19 +23,19 @@
 
 /datum/forecast/proc/pick_weather(time_of_day)
 	switch(time_of_day)
-		if("dusk")
+		if(DUSK)
 			if(!prob(dusk_prob))
 				return
 			return pickweight(dusk_weather)
-		if("night")
+		if(NIGHT)
 			if(!prob(night_prob))
 				return
 			return pickweight(night_weather)
-		if("dawn")
+		if(DAWN)
 			if(!prob(dawn_prob))
 				return
 			return pickweight(dawn_weather)
-		if("day")
+		if(DAY)
 			if(!prob(day_prob))
 				return
 			return pickweight(day_weather)

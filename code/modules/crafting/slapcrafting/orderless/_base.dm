@@ -27,7 +27,7 @@
 	hosted_source = _source
 	RegisterSignal(hosted_source, COMSIG_PARENT_QDELETING, PROC_REF(early_end))
 
-/datum/orderless_slapcraft/Destroy(force, ...)
+/datum/orderless_slapcraft/Destroy(force)
 	. = ..()
 	UnregisterSignal(hosted_source, COMSIG_PARENT_QDELETING)
 	hosted_source?.in_progress_slapcraft = null

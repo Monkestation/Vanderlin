@@ -806,7 +806,7 @@
 
 /obj/structure/fluff/statue/zizo/Initialize()
 	. = ..()
-	set_light(1, 1, l_color = COLOR_PURPLE)
+	set_light(1, 1, 1, l_color = COLOR_PURPLE)
 
 /obj/structure/fluff/statue/musician/OnCrafted(dirin, mob/user)
 	. = ..()

@@ -357,7 +357,7 @@ SUBSYSTEM_DEF(garbage)
 /// Should be treated as a replacement for the 'del' keyword.
 ///
 /// Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
-/proc/qdel(datum/to_delete, force = FALSE, ...)
+/proc/qdel(datum/to_delete, force = FALSE)
 	if(!istype(to_delete))
 		if(isnull(to_delete))
 			return
@@ -385,7 +385,7 @@ SUBSYSTEM_DEF(garbage)
 	var/start_time = world.time
 	var/start_tick = world.tick_usage
 	SEND_SIGNAL(to_delete, COMSIG_PARENT_QDELETING, force) // Let the (remaining) components know about the result of Destroy
-	var/hint = to_delete.Destroy(arglist(args.Copy(2))) // Let our friend know they're about to get fucked up.
+	var/hint = to_delete.Destroy(force) // Let our friend know they're about to get fucked up.
 
 	if(world.time != start_time)
 		trash.slept_destroy++

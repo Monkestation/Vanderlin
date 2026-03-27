@@ -20,7 +20,7 @@
 
 /obj/structure/vampire/bloodpool/Initialize()
 	. = ..()
-	set_light(3, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
+	set_light(3, 3, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
 
 /obj/structure/vampire/bloodpool/examine(mob/user)
 	. = ..()

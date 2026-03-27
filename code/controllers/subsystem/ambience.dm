@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(ambience)
 	if(override_sound)
 		new_sound = override_sound
 	else if(spooky_sounds)
-		if(ambientnight && GLOB.tod == "night")
+		if(ambientnight && GLOB.tod == NIGHT)
 			spooky_sounds = ambientnight
 		new_sound = pick(spooky_sounds)
 
@@ -95,13 +95,13 @@ SUBSYSTEM_DEF(ambience)
 	var/time = GLOB.tod
 	var/used = background_track
 	if(is_lit)
-		if(time == "night" && background_track_night)
+		if(time == NIGHT && background_track_night)
 			used = background_track_night
-		else if (time == "dusk" && background_track_dusk)
+		else if (time == DUSK && background_track_dusk)
 			used = background_track_dusk
 	else if(uses_alt_droning)
 		used = safepick(alternative_droning)
-		if(time == "night" && length(alternative_droning_night))
+		if(time == NIGHT && length(alternative_droning_night))
 			used = pick(alternative_droning_night)
 
 	return used

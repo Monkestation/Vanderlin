@@ -9,7 +9,7 @@
 	background_track = 'sound/music/area/bog.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/dirt,
 				/turf/open/water)

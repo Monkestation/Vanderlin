@@ -48,7 +48,7 @@
 
 			user.adjust_bloodpool(-SUN_STEAL_COST)
 
-			GLOB.todoverride = "night"
+			GLOB.todoverride = NIGHT
 			sunstolen = TRUE
 			settod()
 			spawn(10 MINUTES)
@@ -66,7 +66,7 @@
 	if(sunstolen)
 		to_chat(user, span_warning("The Sun is already stolen."))
 		return
-	if(GLOB.tod == "night")
+	if(GLOB.tod == NIGHT)
 		to_chat(user, span_warning("The Moon is watching. I must wait for Her to return."))
 		return
 	if(!user.has_bloodpool_cost(SUN_STEAL_COST))

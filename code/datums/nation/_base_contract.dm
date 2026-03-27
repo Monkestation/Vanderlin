@@ -39,7 +39,7 @@
 	expand_possible_items()
 	select_items()
 
-/datum/trade_agreement/Destroy(force, ...)
+/datum/trade_agreement/Destroy(force)
 	. = ..()
 	location.active_agreements -= src
 	location.finished_agreements++

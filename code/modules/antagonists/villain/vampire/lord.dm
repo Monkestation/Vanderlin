@@ -22,6 +22,7 @@
 		"I AM THE LAND!",
 		"FIRSTBORNE CHILD OF KAIN!",
 	)
+	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
 	var/patron = /datum/patron/godless/autotheist
@@ -29,6 +30,7 @@
 	var/ascended = FALSE
 	// thralls to set the clan of on creation
 	var/list/starting_thralls = list()
+	antag_flags = NONE
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current

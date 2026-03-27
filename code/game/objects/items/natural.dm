@@ -242,9 +242,9 @@
 				return
 	return ..()
 
-/obj/item/natural/clod/Moved(oldLoc, dir)
+/obj/item/natural/clod/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	..()
-	if((!throwing || throwing.target_turf == loc) && isturf(loc) && oldLoc != loc)
+	if((!throwing || throwing.target_turf == loc) && isturf(loc) && old_loc != loc)
 		var/turf/T = loc
 		for(var/obj/structure/fluff/clodpile/C in T)
 			if(C == pile)

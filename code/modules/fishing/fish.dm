@@ -653,7 +653,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 		var/datum/fish_trait/trait = GLOB.fish_traits[fish_trait_type]
 		trait.apply_to_fish(src)
 
-/obj/item/reagent_containers/food/snacks/fish/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+/obj/item/reagent_containers/food/snacks/fish/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	check_flopping()
 
