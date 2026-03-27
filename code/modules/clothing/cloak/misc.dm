@@ -79,6 +79,10 @@
 	sellprice = 50
 	nodismemsleeves = TRUE
 
+/obj/item/clothing/cloak/heartfelt/shit
+	name = "shitstained cloak"
+	desc = "You are the lord of this shithouse."
+
 /obj/item/clothing/cloak/half
 	name = "half cloak"
 	desc = "A cloak that covers only half of the body."

@@ -1,22 +1,19 @@
 /datum/attribute_holder/sheet/job/vagrant
 	attribute_variance = list(
-		STAT_FORTUNE = list(-9, 9),
 		/datum/attribute/skill/misc/sneaking = list(10, 40),
 		/datum/attribute/skill/misc/stealing = list(10, 40),
 		/datum/attribute/skill/misc/lockpicking = list(10, 40),
-		/datum/attribute/skill/misc/climbing = list(10, 30),
-		/datum/attribute/skill/combat/wrestling = list(-10, 10),
+		/datum/attribute/skill/combat/wrestling = list(10, 20),
 		/datum/attribute/skill/combat/unarmed = list(10, 20),
 		/datum/attribute/skill/craft/alchemy = list(10, 20),
 	)
 	raw_attribute_list = list(
-		STAT_INTELLIGENCE = -3,
-		STAT_CONSTITUTION = -2,
-		STAT_ENDURANCE = -2
+		STAT_FORTUNE = 5, //You live a blessed existence
+		/datum/attribute/skill/misc/climbing = 50
 	)
 
 /datum/job/vagrant
-	title = "Beggar"
+	title = "Sundweller"
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, \
 	the glances of disgust and loathing others give you is just a friendly greeting; \
 	the only reason you've not been killed already is because volfs are known to be repelled by decaying flesh. \
@@ -25,8 +22,8 @@
 	display_order = JDO_VAGRANT
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
-	total_positions = 15
-	spawn_positions = 15
+	total_positions = 10
+	spawn_positions = 10
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 
@@ -41,6 +38,13 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vagrant
 
+	traits = list(
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_DEADNOSE,
+		TRAIT_STINKY,
+		TRAIT_ROT_EATER
+	)
+
 /datum/job/vagrant/New()
 	. = ..()
 	peopleknowme = list()
@@ -53,9 +57,8 @@
 	else
 		spawned.set_hygiene(HYGIENE_LEVEL_DIRTY)
 
-
 /datum/outfit/vagrant
-	name = "Beggar"
+	name = "Sundweller"
 
 /datum/outfit/vagrant/pre_equip(mob/living/carbon/human/H)
 	. = ..()

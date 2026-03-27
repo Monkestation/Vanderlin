@@ -263,6 +263,10 @@
 
 	prevent_crits = MINOR_CRITICALS
 
+/obj/item/clothing/head/priesthat/sunlord
+	name = "piss-soaked hat"
+	desc = "The sacred headpiece of the Sunlord."
+
 /obj/item/clothing/head/headdress // egyptian
 	name = "foreign headdress"
 	desc = ""
