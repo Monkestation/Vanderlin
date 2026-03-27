@@ -254,6 +254,7 @@
 						qdel(G)
 			adjust_grave_necra_devotion(0) // set devotion income to 0
 			is_consecrated = NOT_CONSECRATED // remove consecration levels
+			cut_overlays()
 			update_appearance(UPDATE_OVERLAYS)
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
