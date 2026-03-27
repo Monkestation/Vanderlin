@@ -162,7 +162,8 @@
 			/obj/item/clothing/head/helmet/winged,
 			/obj/item/clothing/head/helmet/horned,
 		)
-		armor = /obj/item/clothing/armor/gambeson/light/striped
+		armor = /obj/item/clothing/shirt/rags
+		shirt = /obj/item/clothing/armor/gambeson
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather/rope
 		shoes = /obj/item/clothing/shoes/boots/leather
@@ -174,7 +175,8 @@
 			/obj/item/clothing/head/helmet/winged,
 			/obj/item/clothing/head/helmet/horned,
 		)
-		armor = /obj/item/clothing/armor/gambeson/light/striped
+		armor = /obj/item/clothing/shirt/rags
+		shirt = /obj/item/clothing/armor/gambeson/light
 		pants = /obj/item/clothing/pants/tights/colored/random
 		belt = /obj/item/storage/belt/leather/rope
 		beltr = /obj/item/weapon/mace/woodclub
