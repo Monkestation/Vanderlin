@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 		return
 
 	playsound(H, voice_data["file"], 70, FALSE)
-	H.say(voice_data["text"], forced = TRUE)
+	H.say(voice_data["text"], forced = TRUE, spans = list(SPAN_ROBOT))
 
 /datum/action/manage_voice_actions
 	name = "Manage Voice Lines"

@@ -182,7 +182,7 @@
 	return COMPONENT_SPEECH_CANCEL
 
 /datum/species/automaton/proc/cmode_changed(mob/living/carbon/source, cmode)
-	source.set_eye_color(!cmode ? "#ff0000" : "#ff7b00")
+	source.set_eye_color(cmode ? "#ff0000" : "#ff7b00")
 
 /datum/species/automaton/get_skin_list()
 	return sortList(list(
