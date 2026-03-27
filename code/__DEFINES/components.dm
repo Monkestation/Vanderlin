@@ -41,8 +41,9 @@
 #define COMSIG_ATOM_ENTERED "atom_entered"
 /// Sent from the atom that just Entered src. From base of atom/Entered(): (/atom/destination, atom/old_loc, list/atom/old_locs)
 #define COMSIG_ATOM_ENTERING "atom_entering"
-#define COMSIG_ATOM_EXIT "atom_exit"							//from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
-	#define COMPONENT_ATOM_BLOCK_EXIT 1
+///from base of atom/Exit(): (/atom/movable/leaving, direction)
+#define COMSIG_ATOM_EXIT "atom_exit"
+	#define COMPONENT_ATOM_BLOCK_EXIT (1<<0)
 #define COMSIG_ATOM_EXITED "atom_exited"						//from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
 #define COMSIG_ATOM_BUMPED "atom_bumped"						//from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_EX_ACT "atom_ex_act"						//from base of atom/ex_act(): (severity, target)
