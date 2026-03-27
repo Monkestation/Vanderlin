@@ -111,3 +111,14 @@
 	desc = "A painting of a kingly crown resting on a book."
 	icon_state = "crownpainting_deployed"
 	stolen_painting = /obj/item/painting/crown
+
+/obj/item/painting/the_bob
+	icon_state = "spongebob"
+	desc = "The servant of the month for the past 30 consecutive months. It is a priceless work of art."
+	sellprice = 808 //BOB
+	deployed_structure = /obj/structure/fluff/walldeco/painting/the_bob
+
+/obj/structure/fluff/walldeco/painting/the_bob
+	desc = "The servant of the month for the past 30 consecutive months. It is a priceless work of art."
+	icon_state = "spongebob_deployed"
+	stolen_painting = /obj/item/painting/the_bob

@@ -5116,9 +5116,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/soilsons)
-"cuL" = (
-/turf/closed/wall/mineral/stonebrick,
-/area/outdoors/river)
 "cuP" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -23662,10 +23659,10 @@
 /obj/item/paper,
 /obj/item/paper,
 /obj/item/natural/feather,
-/obj/structure/fluff/walldeco/painting/queen{
+/obj/item/book/law,
+/obj/structure/fluff/walldeco/painting/the_bob{
 	pixel_y = 32
 	},
-/obj/item/book/law,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/throne)
 "lbW" = (
@@ -24298,7 +24295,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/structure/fluff/clock,
 /turf/open/floor/tile,
 /area/indoors/town/keep/throne)
 "lqo" = (
@@ -25036,6 +25032,11 @@
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/under/sewer)
+"lJe" = (
+/obj/effect/decal/borderfall,
+/obj/structure/fluff/clock,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/keep/throne)
 "lJk" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/cloth,
@@ -41591,12 +41592,6 @@
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
-"sUH" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/openspace,
-/area/outdoors/river)
 "sUW" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/ruinedwood/turned,
@@ -41667,7 +41662,6 @@
 /obj/structure/stairs/fancy/r{
 	dir = 1
 	},
-/obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
 /area/indoors/town/keep/halls/e)
 "sXz" = (
@@ -49746,13 +49740,6 @@
 /obj/item/lipstick/jade,
 /turf/open/floor/tile/bfloorz,
 /area/indoors/town/keep/lord_appt)
-"wAd" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/indoors/town/keep/halls/e)
 "wAh" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/book/bibble/psy,
@@ -196394,7 +196381,7 @@ mLz
 cpu
 snt
 mcp
-lRf
+lJe
 lqm
 bik
 dAo
@@ -199629,7 +199616,7 @@ rln
 rln
 rln
 rln
-jYd
+dTL
 uee
 hyg
 hyg
@@ -199828,7 +199815,7 @@ vrc
 iUy
 wzM
 uLF
-wAd
+cpm
 cpm
 dAu
 jYd
@@ -199871,11 +199858,11 @@ iKA
 lLn
 uaz
 iVQ
-sUH
-sUH
-sUH
-sUH
-sUH
+woR
+woR
+woR
+woR
+woR
 gWZ
 czz
 czz
@@ -200073,11 +200060,11 @@ kjp
 rnN
 nIr
 mGE
-luJ
-luJ
-luJ
-luJ
-luJ
+wrm
+wrm
+wrm
+wrm
+wrm
 gwN
 czz
 czz
@@ -200274,12 +200261,12 @@ nIr
 nIr
 nIr
 nIr
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
 iJy
 czz
 hZn
@@ -200473,15 +200460,15 @@ mGE
 mGE
 mGE
 nIr
-cuL
-cuL
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
+ykl
+ykl
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
 eIh
 pTm
 pYB
@@ -200675,15 +200662,15 @@ jEQ
 jEQ
 ido
 ido
-cuL
-cuL
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
+ykl
+ykl
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
 eIh
 pTm
 glV
@@ -200877,15 +200864,15 @@ jEQ
 jEQ
 jEQ
 ido
-cuL
-cuL
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
-luJ
+ykl
+ykl
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
+wrm
 qFx
 pTm
 pTm
