@@ -8736,6 +8736,15 @@
 /obj/structure/bed/shit,
 /turf/open/floor/dirt/road,
 /area/indoors/town/cell)
+"eaH" = (
+/obj/structure/carpet,
+/obj/structure/fluff/sellsign{
+	name = "Preparing to see the royal family?";
+	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
+	pixel_y = 24
+	},
+/turf/open/floor/tile,
+/area/indoors/town/steward)
 "eaP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fermentation_keg,
@@ -49803,7 +49812,7 @@
 /area/indoors/town/keep/magician)
 "wBg" = (
 /obj/structure/fluff/sellsign{
-	name = "Preparing to see the royal family?";
+	name = "Seeing the Royal Family?";
 	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
 	pixel_y = 24
 	},
@@ -160070,8 +160079,8 @@ biy
 biy
 gwN
 hkB
-tpr
-tpr
+hkB
+hkB
 hkB
 gwN
 biy
@@ -163507,7 +163516,7 @@ eYe
 hZn
 jBN
 hEx
-tpr
+hkB
 wrm
 wrm
 wrm
@@ -163709,7 +163718,7 @@ hZn
 mFi
 edo
 hEx
-tpr
+hkB
 wrm
 wrm
 wrm
@@ -165526,7 +165535,7 @@ hZn
 mFi
 mFi
 otz
-tpr
+hkB
 wrm
 wrm
 wrm
@@ -165728,7 +165737,7 @@ eYe
 hZn
 mFi
 otz
-tpr
+hkB
 wrm
 wrm
 wrm
@@ -165930,7 +165939,7 @@ eYe
 hZn
 hZn
 pNG
-tpr
+hkB
 wrm
 wrm
 wrm
@@ -199245,7 +199254,7 @@ fep
 eCh
 dQg
 evg
-evg
+eaH
 evg
 qut
 lLn
