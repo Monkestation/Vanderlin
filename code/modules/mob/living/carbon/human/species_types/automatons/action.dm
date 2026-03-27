@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	if(!istype(H.dna?.species, /datum/species/automaton))
 		return
 
-	if(H.stat >= UNCONSCIOUS || H.can_speak_vocal())
+	if(H.stat >= UNCONSCIOUS || !H.can_speak_vocal())
 		to_chat(H, span_warning("SYSTEMS OFFLINE - UNABLE TO VOCALIZE"))
 		return
 
