@@ -358,6 +358,7 @@
 /obj/item/organ/eyes/automaton
 	name = "optical sensors"
 	desc = "Glowing lenses that allow the automaton to perceive the world."
+	accessory_type = /datum/sprite_accessory/eyes/humanoid/automaton
 	resistance_flags = FIRE_PROOF
 	status = ORGAN_ROBOTIC
 	organ_flags = ORGAN_SYNTHETIC
