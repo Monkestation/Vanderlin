@@ -27561,6 +27561,17 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
+"mON" = (
+/obj/structure/fluff/railing/tall{
+	max_integrity = 1000
+	},
+/obj/structure/fluff/sellsign{
+	desc = "Available at the Drunk Saiga";
+	pixel_y = 24;
+	name = "Try our Pestran Sticks!"
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/town)
 "mOU" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/water/bath,
@@ -34364,6 +34375,14 @@
 "pMR" = (
 /turf/open/floor/churchbrick,
 /area/outdoors/exposed/under/sewer)
+"pMX" = (
+/obj/structure/fluff/sellsign{
+	desc = "Confess your admiration for Zizo in the court!";
+	pixel_y = 24;
+	name = "Looking to Kill Yourself?"
+	},
+/turf/open/floor/metal/alt,
+/area/outdoors/town)
 "pNa" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/town/inn,
@@ -43409,6 +43428,17 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchmarble,
 /area/indoors/town/keep/phys)
+"tOQ" = (
+/obj/structure/fluff/railing/tall{
+	max_integrity = 1000
+	},
+/obj/structure/fluff/sellsign{
+	name = "Seeing the Royal Family?";
+	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
+	pixel_y = 24
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/town)
 "tOT" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/ocean/deep,
@@ -49793,13 +49823,13 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
 "wBg" = (
-/obj/structure/fluff/sellsign{
-	name = "Seeing the Royal Family?";
-	desc = "Please ensure your clothes are not piss-laden! Consider a gift to leave a lasting impression!";
-	pixel_y = 24
-	},
 /obj/structure/fluff/railing/tall{
 	max_integrity = 1000
+	},
+/obj/structure/fluff/sellsign{
+	desc = "Kybraxor has recently had offspring! Speak to the Gatemaster about feeding them with your family!";
+	pixel_y = 24;
+	name = "Feed the Local Fauna!"
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
@@ -161711,7 +161741,7 @@ fwi
 rSh
 qFx
 qFx
-qFx
+nFN
 qFx
 qFx
 qFx
@@ -198027,7 +198057,7 @@ vgh
 fep
 fep
 nuA
-jOr
+tOQ
 wrm
 wrm
 wrm
@@ -198431,7 +198461,7 @@ qse
 aNf
 aNf
 nuA
-jOr
+mON
 wrm
 wrm
 mmM
@@ -198633,7 +198663,7 @@ mGE
 mGE
 mGE
 mGE
-rea
+pMX
 nFY
 nFY
 nFY
