@@ -316,6 +316,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Beggar"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/sunlord
+	name = "Sunlord"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/consort
 	name = "Consort"
 	icon_state = "arrow"

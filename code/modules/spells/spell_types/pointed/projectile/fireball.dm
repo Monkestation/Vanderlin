@@ -60,6 +60,14 @@
 
 	projectile_type = /obj/projectile/magic/aoe/fireball/rogue/great
 
+/datum/action/cooldown/spell/projectile/fireball/greater/sunlord
+	name = "Sunlord's Fireball"
+	desc = "Shoot out an immense ball of fire that explodes on impact."
+	invocation = "LIGHTNING BOLT!!!"
+	spell_cost = 0
+
+	associated_skill = null
+
 /obj/projectile/magic/aoe/fireball/rogue
 	name = "fireball"
 	exp_heavy = 0
