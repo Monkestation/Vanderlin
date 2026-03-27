@@ -150,7 +150,7 @@
 		return
 
 	var/painpercent = (H.get_complex_pain() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
-	if(painpercent < 100)
+	if(painpercent < 2)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
 	if(!do_after(src, 4 SECONDS, H))
@@ -252,6 +252,8 @@
 		var/datum/antag_type = null
 		var/is_false_confession = FALSE
 
+		var/was_suspect = (real_name in GLOB.inquis_suspect_players)
+
 		switch(confession_type)
 			if("antag")
 				if(!false_result)
@@ -285,8 +287,8 @@
 						confessions += patron.confess_lines
 						antag_type = patron.type
 
-					// If innocent and failed to resist, chance of false confession
-					if(!length(confessions) && prob(false_confession_chance))
+					// If innocent and failed to resist, chance of false confession. If was_suspect is true, they cannot falsely confess
+					if(!length(confessions) && prob(false_confession_chance) && !was_suspect)
 						is_false_confession = TRUE
 						var/static/list/false_patron_types = list(
 							/datum/patron/inhumen/matthios,
@@ -297,7 +299,7 @@
 						confessions += list("I WORSHIP THE FORBIDDEN!", "I FOLLOW THE DARK PATH!", "I AM A HERETIC!")
 
 		// Apply stress penalties for torturing innocents/faithful
-		if(torture && interrogator && confession_type == "patron")
+		if(torture && interrogator && confession_type == "patron" && !was_suspect)
 			var/datum/patron/interrogator_patron = interrogator.patron
 			var/datum/patron/victim_patron = patron
 			switch(interrogator_patron.associated_faith.type)
@@ -308,6 +310,12 @@
 						interrogator.add_stress(/datum/stress_event/torture_small_penalty)
 					else if(istype(victim_patron, /datum/patron/psydon))
 						interrogator.add_stress(/datum/stress_event/torture_large_penalty)
+
+		// If person was a suspected heretic with `vice/suspicion`, reward TRIUMPH and remove them as suspect
+		if(was_suspect)
+			GLOB.inquis_suspect_players -= real_name
+			to_chat(interrogator, span_notice("You were able to investigate someone who your compatriots suspected of heresy, and was able to settle the matter beyond any doubt. A true TRIUMPH!"))
+			interrogator.adjust_triumphs(1)
 
 		if(length(confessions))
 			if(torture)
