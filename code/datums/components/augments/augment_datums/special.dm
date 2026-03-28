@@ -178,7 +178,7 @@
 /datum/status_effect/automaton_unshackled
 	id = "automaton_unshackle"
 	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
+	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
 
 /atom/movable/screen/alert/status_effect/automaton_unshackled
 	name = "Unshackled"
