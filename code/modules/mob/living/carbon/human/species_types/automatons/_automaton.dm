@@ -1,6 +1,6 @@
 /mob/living/carbon/human/species/automaton
 	icon = 'icons/roguetown/mob/bodies/m/automaton.dmi'
-	icon_state = "at"
+	icon_state = MAP_SWITCH("human_basic", "at")
 	race = /datum/species/automaton
 	footstep_type = FOOTSTEP_MOB_METAL
 	job = "Automaton"
@@ -90,7 +90,6 @@
 		TRAIT_NOMOOD,
 		TRAIT_NOMETABOLISM,
 		TRAIT_NOHUNGER,
-		TRAIT_EASYLIMBDISABLE,
 		TRAIT_NOSTAMINA,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_LIMBATTACHMENT,
@@ -126,7 +125,7 @@
 	inherent_biotypes = MOB_ROBOTIC | MOB_HUMANOID
 	exotic_bloodtype = /datum/blood_type/oil
 
-	bleed_mod = 0.2 // 80% less bleed rate from injuries
+	bleed_mod = 0.7
 	punch_damage = 5
 	kick_damage = 5
 

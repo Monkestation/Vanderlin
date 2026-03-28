@@ -444,7 +444,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/New()
 
 	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
-		limbs_id = name
+		limbs_id = id
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)

@@ -684,33 +684,20 @@
 
 	var/skel = skeletonized ? "_s" : ""
 
-	if(is_organic_limb() || (is_species(owner, /datum/species/automaton) && species_icon))//fuck this stupid rendering system
+	if(is_organic_limb() || (species_id == SPEC_ID_AUTOMATON && species_icon))//fuck this stupid rendering system
 		if(should_draw_greyscale)
 			limb.icon = species_icon
-			if(should_draw_gender)
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
-			else
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
+			limb.icon_state = "[body_zone][skel]"
+			if(wound_icon_state || acid_damage_intensity)
+				var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
+				skeleton.icon = species_icon
+				skeleton.icon_state = "[body_zone]_s"
+				if(wound_icon_state)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
+				if(acid_damage_intensity)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
+				skeleton.dir = image_dir
+				. += skeleton
 		else
 			limb.icon = 'icons/mob/human_parts.dmi'
 			if(should_draw_gender)
