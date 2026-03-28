@@ -48,6 +48,9 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
 
+/obj/item/clothing/head/roguehood/sundweller
+	color = CLOTHING_MUSTARD_YELLOW
+
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
