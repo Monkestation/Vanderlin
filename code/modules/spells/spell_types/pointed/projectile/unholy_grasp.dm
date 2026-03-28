@@ -109,12 +109,12 @@
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
-	 if(!isliving(hit_atom))
-        return
-    var/mob/living/target = hit_atom
-    to_chat(target, span_danger("My stomach hurts a lot!"))
-    target.emote("gag")
-    target.reagents?.add_reagent(/datum/reagent/organpoison, 2)
-    playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
+	if(!isliving(hit_atom))	//if it gets caught or the target can't be cuffed.
+		return
+	var/mob/living/target = hit_atom
+	to_chat(target, span_danger("My stomach hurts a lot!"))
+	target.emote("gag")
+	target.reagents?.add_reagent(/datum/reagent/organpoison, 2)
+	playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
 
 
