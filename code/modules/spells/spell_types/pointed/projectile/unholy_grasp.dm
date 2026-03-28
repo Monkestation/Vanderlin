@@ -87,17 +87,13 @@
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
-	if(!iscarbon(hit_atom))	//if it gets caught or the target can't be cuffed.
+	if(!isliving(hit_atom))	//if it gets caught or the target can't be cuffed.
 		return
-	silence(hit_atom)
-
-
-/obj/projectile/magic/unholy_muzzle/proc/silence(mob/living/carbon/C)
-	C.emote("gasp")
-	visible_message(span_danger("The [src] starts twisting [C] tongue!"))
-	to_chat(C, span_danger("The [src] twits your tongue!"))
-	C.apply_status_effect(/datum/status_effect/silenced, 15 SECONDS)
-	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
+	var/mob/living/target = hit_atom
+	target.emote("gasp")
+	to_chat(target, span_userdanger("My tongue is being twisted!"))
+	target.apply_status_effect(/datum/status_effect/silenced, 15 SECONDS)
+	playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
 
 //------------------------
 //Gives the target 2 units of organ poison, that bring a person closer into becoming a half-orc
@@ -113,18 +109,12 @@
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
-	vomit(hit_atom, )
-
-
-/obj/projectile/magic/cannibalistic_vomit/proc/vomit(mob/living/carbon/C)
-	visible_message(span_danger("[C]'s stomach starts aching!"))
-	to_chat(C, span_danger("Your stomach hurts a lot!"))
-	C.emote("gag")
-	C.reagents.add_reagent(/datum/reagent/organpoison, 2);
-	// var/turf/floor = get_turf(src)
-	// var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-	// C.reagents.trans_to(spew, C.reagents.total_volume, transfered_by = src)
-	playsound(src, 'sound/magic/marked.ogg', 50, TRUE)
-
+	 if(!isliving(hit_atom))
+        return
+    var/mob/living/target = hit_atom
+    to_chat(target, span_danger("My stomach hurts a lot!"))
+    target.emote("gag")
+    target.reagents?.add_reagent(/datum/reagent/organpoison, 2)
+    playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
 
 

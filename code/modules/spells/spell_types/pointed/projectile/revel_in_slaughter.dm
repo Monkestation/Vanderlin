@@ -21,23 +21,23 @@
 	name = "blood orb"
 	icon_state = "tentacle_end"
 	nodamage = TRUE
-	range = 2 //Low range, used only in combat
+	range = 3 //Low range, used only in combat
 
 /obj/projectile/magic/revel_in_slaughter/on_hit(atom/hit_atom)
 	. = ..()
 	if(. != BULLET_ACT_HIT)
 		return
-	if(!iscarbon(hit_atom))
+	if(!isliving(hit_atom))
 		return
-	stagger(hit_atom)
+	var/mob/living/target = hit_atom
+	target.visible_message(
+		span_danger("[target] is struck by boiling blood!"),
+		span_userdanger("I'm struck by boiling blood!"),
+	)
+	target.spawn_gibs()
+	target.apply_status_effect(/datum/status_effect/debuff/exposed, 8 SECONDS)
+	target.apply_status_effect(/datum/status_effect/eye_blur, 5 SECONDS)
+	target.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 2 SECONDS)
 
-/obj/projectile/magic/revel_in_slaughter/proc/stagger(mob/living/carbon/C)
-	visible_message(span_danger("The [src] staggers [C] using boiling blood!"))
-	to_chat(C, span_danger("The [src] staggers you!"))
-	C.spawn_gibs()
-	C.apply_status_effect(/datum/status_effect/debuff/exposed)
-	C.apply_status_effect(/datum/status_effect/eye_blur, 5 SECONDS)
-	C.apply_status_effect(/datum/status_effect/incapacitating/immobilized, 2 SECONDS)
-
-	playsound(src, 'sound/combat/caught.ogg', 50, TRUE)
+	playsound(target, 'sound/combat/caught.ogg', 50, TRUE)
 
