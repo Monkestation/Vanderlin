@@ -128,16 +128,10 @@
 	point_value = 5
 
 /datum/quirk/boon/unlucky/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
+	owner.adjust_stat_modifier(STATMOD_UNLUCKY, STAT_FORTUNE, rand(-5, -9))
 
 /datum/quirk/boon/unlucky/on_remove()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.remove_stat_modifier(STATMOD_UNLUCKY)
+	owner?.remove_stat_modifier(STATMOD_UNLUCKY)
 
 /datum/quirk/vice/skill_issue
 	name = "Skill Issue"
