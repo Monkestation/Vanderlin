@@ -278,7 +278,6 @@
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_IMMOBILE|AB_CHECK_INCAPACITATED|AB_CHECK_LYING
 	button_icon_state = "flight"
 	var/active_background_icon_state = "spell1"
-	check_flags = AB_CHECK_IMMOBILE | AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/organ_action/use/flight/do_effect(trigger_flags)
 	var/mob/living/carbon/carbon_owner = owner
