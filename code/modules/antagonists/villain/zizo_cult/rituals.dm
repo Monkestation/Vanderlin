@@ -431,18 +431,48 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(target, TRAIT_ZJUMP, TRAIT_GENERIC)
 	to_chat(target, span_notice("I feel like my legs have become stronger."))
 
+
 /datum/ritual/fleshcrafting/fleshmend
 	name = "Fleshmend"
 	center_requirement = /mob/living/carbon/human
+	var/heal_tick = 3
 	n_req =  /obj/item/reagent_containers/food/snacks/meat
+	s_req = /obj/item/reagent_containers/food/snacks/meat
+
+/datum/ritual/fleshcrafting/fleshmend/greater
+	name = "Greater Fleshmend"
+	is_cultist_ritual = TRUE
+	heal_tick = 10
+	e_req =  /obj/item/reagent_containers/food/snacks/meat
+	w_req = /obj/item/reagent_containers/food/snacks/meat
 
 /datum/ritual/fleshcrafting/fleshmend/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
 	target.playsound_local(target, 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
-	target.fully_heal()
-	to_chat(target, span_notice("ZIZO EMPOWERS ME!"))
+	target.apply_status_effect(/datum/status_effect/buff/healing/fleshmend, null, heal_tick)
+	to_chat(target, span_red("Zizo empowers me."))
+
+/datum/status_effect/buff/healing/fleshmend
+	id = "fleshmend"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/fleshmend
+	visual_type = /obj/effect/temp_visual/heal_rogue/fleshmend
+	outline_alpha = 160
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_REPLACE
+
+/datum/status_effect/buff/healing/fleshmend/get_examine_text(mob/user, list/P)
+	return span_danger("[P[THEYRE]] bathed in an ominous aura.")
+
+/atom/movable/screen/alert/status_effect/buff/fleshmend
+	name = "Fleshmend"
+	desc = "Forbidden magick restores my ailments."
+	icon_state = "bloodheal"
+
+/obj/effect/temp_visual/heal_rogue/fleshmend
+	icon_state = "heal_psycross_invert"
+
 
 /datum/ritual/fleshcrafting/darkeyes
 	name = "Darkened Eyes"

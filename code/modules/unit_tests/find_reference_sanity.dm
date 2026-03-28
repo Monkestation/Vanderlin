@@ -7,7 +7,7 @@
 	var/list/test_list = list()
 	var/list/test_assoc_list = list()
 
-/atom/movable/ref_holder/Destroy(force, ...)
+/atom/movable/ref_holder/Destroy(force)
 	test = null
 	static_test = null
 	test_list.Cut()
@@ -19,7 +19,7 @@
 	references_to_clear = INFINITY
 	var/atom/movable/ref_test/self_ref
 
-/atom/movable/ref_test/Destroy(force, ...)
+/atom/movable/ref_test/Destroy(force)
 	self_ref = null
 	return ..()
 

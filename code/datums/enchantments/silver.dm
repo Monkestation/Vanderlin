@@ -1,7 +1,7 @@
 #define AFFECTED_VLORD 1
 #define AFFECTED 2
 #define SILVER_BANE_MAX_STACKS 6
-#define SILVER_BANE_COOLDOWN (2.5 SECONDS)
+#define SILVER_BANE_COOLDOWN (3 SECONDS)
 
 /datum/enchantment/silver
 	enchantment_name = "Nightlurkers Bane"

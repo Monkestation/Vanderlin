@@ -1,10 +1,10 @@
 /datum/round_event_control/antagonist/solo/aspirant
 	name = "Aspirant"
 	tags = list(
-		TAG_ZIZO,
+		TAG_ASTRATA,
 		TAG_BAOTHA,
 		TAG_VILLAIN,
-		TAG_COMBAT,
+		TAG_CORRUPTION,
 	)
 	antag_datum = /datum/antagonist/aspirant
 	roundstart = TRUE
@@ -34,16 +34,18 @@
 
 	earliest_start = 0 SECONDS
 	secondary_events = list(
-		/datum/round_event_control/antagonist/solo/lich,
-		/datum/round_event_control/antagonist/solo/rebel,
-		/datum/round_event_control/antagonist/solo/vampires_and_werewolves,
-		/datum/round_event_control/antagonist/solo/vampires,
-		/datum/round_event_control/antagonist/solo/werewolf,
-		/datum/round_event_control/antagonist/solo/zizo_cult
+		/datum/round_event_control/antagonist/solo/rebel = 2, // paint the town red baby
+		/datum/round_event_control/antagonist/solo/wretch = 1,
 	)
-	secondary_prob = 75
+	secondary_prob = 40
+
+	preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1,
+	)
+
 	min_players = 25
 	weight = 8
+	cost = 0.8
 
 	typepath = /datum/round_event/antagonist/solo/aspirant
 

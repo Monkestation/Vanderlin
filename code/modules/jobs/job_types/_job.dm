@@ -567,7 +567,7 @@
 
 /datum/job/proc/get_job_special_late_point()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != "[title]_late")
+		if(spawn_point.name != "[title]late")
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong

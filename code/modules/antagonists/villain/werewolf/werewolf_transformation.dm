@@ -3,7 +3,7 @@
 	var/mob/living/carbon/human/human_user = user
 	if(human_user.stat == DEAD) return
 	if(human_user.advsetup) return
-	if(GLOB.tod == "night")
+	if(GLOB.tod == NIGHT)
 		var/turf/user_loc = human_user.loc
 		if(isturf(user_loc))
 			if(user_loc.can_see_sky())
@@ -115,9 +115,9 @@
 	new_werewolf.name = wolfname
 	new_werewolf.skin_armor = new /obj/item/clothing/armor/regenerating/skin/werewolf_skin(new_werewolf)
 
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 50, TRUE)
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 50, TRUE)
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/misc/climbing, 60, TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 50, silent = TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 50, silent = TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/misc/climbing, 60, silent = TRUE)
 
 	for(var/datum/action/werewolf_power as anything in werewolf_form_powers)
 		new_werewolf.add_spell(werewolf_power)
