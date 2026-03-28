@@ -171,8 +171,17 @@
 	if(!magazine.ammo_count())
 		. += "[used_state]_mag_empty"
 
-/obj/item/gun/ballistic/process_chamber(empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
-	if(!semi_auto && from_firing)
+/obj/item/gun/ballistic/after_firing(atom/target, mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
+	// Experience gain
+	if(!from_firing)
+		return
+
+	var/boon = user.get_learning_boon(associated_skill)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2
+	user.adjust_experience(associated_skill, amt2raise * boon, FALSE)
+
+	// Rechambering cycle
+	if(!semi_auto)
 		return
 
 	var/obj/item/ammo_casing/casing = chambered //Find chambered round
@@ -227,7 +236,8 @@
 	if(user)
 		balloon_alert(user, "[bolt_wording] racked")
 
-	process_chamber(!chambered, FALSE)
+	// bad code
+	after_firing(user = user, empty_chamber = !chambered, from_firing = FALSE)
 	if(bolt_type == BOLT_TYPE_LOCKING && !chambered)
 		bolt_locked = TRUE
 		playsound(src, lock_back_sound, lock_back_sound_volume, lock_back_sound_vary)

@@ -62,6 +62,9 @@
 	/// Firing cooldown, true if this gun shouldn't be allowed to manually fire
 	var/fire_cd = 0
 
+	/// Weapon weight, affecting how it must be held to fire
+	var/weapon_weight = WEAPON_LIGHT
+
 	/// Just 'slightly' snowflakey way to modify projectile damage for projectiles fired from this gun.
 	var/projectile_damage_multiplier = 1
 	/// Even snowflakier way to modify projectile wounding bonus/potential for projectiles fired from this gun.
@@ -105,7 +108,7 @@
 		update_appearance()
 
 //called after the gun has successfully fired its chambered ammo.
-/obj/item/gun/proc/process_chamber()
+/obj/item/gun/proc/after_firing(atom/target, mob/living/user)
 	return FALSE
 
 //check if there's enough ammo/energy/whatever to shoot one time
@@ -187,6 +190,12 @@
 			return
 		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
 			return
+
+	// This is essentially a workaround for no wielding, thank you TG
+	var/obj/item/bodypart/other_hand = user.has_hand_for_held_index(user.get_inactive_hand_index()) //returns non-disabled inactive hands
+	if(weapon_weight == WEAPON_HEAVY && (user.get_inactive_held_item() || !other_hand))
+		balloon_alert(user, "use both hands!")
+		return
 
 	if(istype(user))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
 		var/mob/living/L = user
@@ -288,7 +297,7 @@
 		else
 			shoot_live_shot(user, FALSE, target, message)
 
-		process_chamber()
+		after_firing(target, user)
 		update_appearance()
 
 		fire_cd = TRUE
@@ -341,7 +350,7 @@
 		if(iteration >= burst_size)
 			firing_burst = FALSE
 
-	process_chamber()
+	after_firing(target, user)
 	update_appearance()
 
 	return TRUE

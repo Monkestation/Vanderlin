@@ -15,13 +15,13 @@
 	max_integrity = 100
 	sellprice = 400
 
-	possible_item_intents = list(INTENT_GENERIC)
-	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/shoot/musket, /datum/intent/shoot/musket/arc)
 	force = 10
 	can_parry = TRUE
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 
+	weapon_weight = WEAPON_HEAVY
 	recoil = 10
 	randomspread = 2
 	spread = 2
@@ -35,7 +35,6 @@
 /obj/item/gun/ballistic/powder/musket/Initialize(mapload)
 	. = ..()
 	bayonet = new(src)
-	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
 
 /obj/item/gun/ballistic/powder/musket/Destroy(force)
 	if(!QDELETED(bayonet))
@@ -120,7 +119,7 @@
 				)
 
 /obj/item/gun/ballistic/powder/musket/pre_attack(atom/target, mob/living/user, list/modifiers)
-	if(bayonet) // Bayonet acts as a proxy attacker if present
+	if(bayonet && user.cmode) // Bayonet acts as a proxy attacker if present
 		INVOKE_ASYNC(bayonet, TYPE_PROC_REF(/obj/item, melee_attack_chain), user, target, modifiers - RIGHT_CLICK)
 		return TRUE
 

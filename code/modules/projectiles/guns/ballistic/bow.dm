@@ -131,16 +131,6 @@
 
 	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, associated_skill) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 
-/obj/item/gun/ballistic/bow/process_fire(atom/target, mob/living/user, message, list/modifiers, zone_override, bonus_spread)
-	. = ..()
-	if(!.)
-		return
-
-	var/modifier = 1.25 / (spread + 1)
-	var/boon = user.get_learning_boon(associated_skill)
-	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2
-	user.adjust_experience(associated_skill, amt2raise * boon * modifier, FALSE)
-
 /obj/item/gun/ballistic/bow/postfire_empty_checks(last_shot_succeeded)
 	if(!chambered && !get_ammo())
 		update_appearance()

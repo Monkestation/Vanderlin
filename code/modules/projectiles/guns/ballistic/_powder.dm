@@ -181,7 +181,7 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/gun/ballistic/powder/attack_self(mob/living/user, list/modifiers)
-	if(bullet_rammed) // If you rammed it down you have to misfire
+	if(bullet_rammed) // If you rammed it down you have to fire
 		balloon_alert(user, "it's stuck!")
 		return
 

@@ -16,8 +16,7 @@
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
 
-	possible_item_intents = list(MACE_SMASH)
-	gripped_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun)
+	possible_item_intents = list(MACE_SMASH, /datum/intent/shoot/airgun, /datum/intent/arc/airgun)
 	force = DAMAGE_MACE-5
 	can_parry = TRUE
 	wdefense = BAD_PARRY
@@ -26,6 +25,7 @@
 
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel/empty
+	weapon_weight = WEAPON_HEAVY
 	bolt_type = BOLT_TYPE_NO_BOLT
 	internal_magazine = TRUE
 	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
@@ -47,7 +47,6 @@
 
 /obj/item/gun/ballistic/airgun/apply_components()
 	AddComponent(/datum/component/steam_storage, 800, 0, "airgun")
-	AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = force_wielded, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)))
 
 /obj/item/gun/ballistic/airgun/examine(mob/user)
 	. = ..()
@@ -198,16 +197,9 @@
 	modified.damage *= ((1 + pressure_to_use) / 3) //2/3rds damage at pressure 1, normal at pressure 2, 4/3rds at pressure 3
 	modified.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) * 4)
 
-/obj/item/gun/ballistic/airgun/process_fire(atom/target, mob/living/user, message, list/modifiers, zone_override, bonus_spread)
+/obj/item/gun/ballistic/airgun/after_firing(atom/target, mob/living/user, empty_chamber, from_firing, chamber_next_round)
 	. = ..()
-	if(!.)
-		return
-
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, pressure_to_use * 100, "airgun")
-	var/modifier = 1.25 / (spread + 1)
-	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/engineering)
-	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2
-	user.adjust_experience(/datum/attribute/skill/craft/engineering, amt2raise * boon * modifier, FALSE)
 
 /obj/item/gun/ballistic/airgun/postfire_empty_checks(last_shot_succeeded)
 	. = ..()
