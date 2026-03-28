@@ -108,9 +108,9 @@
 /datum/augment/armor/blacksteel
 	name = "blacksteel plating"
 	desc = "You better be able to control this thing when it's loaded."
-	engineering_difficulty = SKILL_RANK_LEGENDARY
+	engineering_difficulty = SKILL_RANK_MASTER
 	armor_values = ARMOR_PLATE_BSTEEL
 	finish = "767B97"
-	stability_cost = -30
+	stability_cost = -25
 	melee_damage = 10
 	shutdown_bonus = 75
