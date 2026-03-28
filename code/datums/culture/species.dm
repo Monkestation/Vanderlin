@@ -69,7 +69,7 @@
 	)
 
 /datum/culture/species/half_orc/shellcrest
- 	name = "Shellcrest"
+	name = "Shellcrest"
 	description = "Known to humens as vicious pirates, the Shellcrest tribe lives off the western coast of Vanderlin and the Isle of Enigma. They're famous for proving that a metal boat can float as well as a wooden one, through complete and utter blind enthusiasm."
 
 /datum/culture/species/half_orc/blood_axe
@@ -77,15 +77,16 @@
 	description = "Known to humens as violent and brutal warriors in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Splitjaw tribe."
 
 /datum/culture/species/half_orc/splitjaw
- 	name = "Splitjaw"
+	name = "Splitjaw"
 	description = "Known to humens as brutal and violent fighters in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Blood Axe tribe."
 
 /datum/culture/species/half_orc/blackhammer
- 	name = "Blackhammer"
-//barely surviving in the barrows at the borders of grenzelhoft
+	name = "Blackhammer"
+	description = "Known to humens to be mostly around the borders of Grenzelhoft towards the east. These orcs are both a hazard to Grenzelhoftian troops and a helpful nuisance, smashing apart undead on other fronts. Half-orcs from this tribe exist in an uneasy stalemate with Grenzelhoft."
+
 
 /datum/culture/species/half_orc/skullseeker
- 	name = "Skullseeker"
+	name = "Skullseeker"
 //osslandic origin tribe. hunters of osslanders?
 
 /datum/culture/species/half_orc/crescent_fang
