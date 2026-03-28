@@ -269,4 +269,4 @@
 /datum/artificer_recipe/augments/armor_blacksteel
 	name = "Blacksteel Plating"
 	created_augment = /datum/augment/armor/blacksteel
-	additional_items = list(/obj/item/ingot/blacksteel = 4)
+	additional_items = list(/obj/item/ingot/blacksteel = 6)
