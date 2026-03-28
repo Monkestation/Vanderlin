@@ -134,5 +134,12 @@
 
 	qdel(quality_calc)
 
-/datum/anvil_recipe/proc/get_display_name()
-	return recipe_name || name
+/datum/anvil_recipe/proc/is_recipe_available(mob/user)
+	if(has_world_trait(/datum/world_trait/delver))
+		if(!has_recipe_unlocked(user.key, type))
+			return FALSE
+
+	if(!always_available && !(type in user?.mind?.learned_recipes))
+		return FALSE
+
+	return TRUE

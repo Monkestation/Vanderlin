@@ -74,9 +74,13 @@
 
 	if(isitem(attacked_atom))
 		. = TRUE
-		var/obj/item/attacked_item = O
+		var/obj/item/attacked_item = attacked_atom
 		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
 			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
+			return
+
+		if(!attacked_item.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
+			to_chat(user, span_warning("I should put [attacked_item] on a table or an anvil first."))
 			return
 
 		var/skill_value = GET_MOB_SKILL_VALUE(user, attacked_item.anvilrepair) // 0-60 range typically
@@ -97,9 +101,6 @@
 					user.visible_message(span_warning("[user] damages [attacked_item] further!"))
 		else
 			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_item.anvilrepair)
-
-		if(locate(/obj/machinery/anvil) in O.loc)
-			repair_percent *= 2
 
 		// If the armor was fully broken, penalize max_integrity based on skill
 		// At skill 60 (master): ~5% max_integrity loss

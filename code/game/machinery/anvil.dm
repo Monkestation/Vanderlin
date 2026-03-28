@@ -116,7 +116,7 @@
 
 	if(quality_score >= 15) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
-		var/amt2raise = user.STAINT // It would be impossible to level up otherwise
+		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
 		var/boon = user.get_learning_boon(recipe_skill)
 		if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
 			amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure

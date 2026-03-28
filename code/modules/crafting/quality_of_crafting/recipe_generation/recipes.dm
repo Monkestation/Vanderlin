@@ -260,16 +260,16 @@
 	data["name"] = name
 	data["category"] = category
 
-	data["bar_name"] = initial(req_bar.name)
-	data["bar_icon"] = "[initial(req_bar.icon)]"
-	data["bar_state"] = "[initial(req_bar.icon_state)]"
-	data["_bar_path"] = "[req_bar]"
+	data["bar_name"] = initial(required_material.name)
+	data["bar_icon"] = "[initial(required_material.icon)]"
+	data["bar_state"] = "[initial(required_material.icon_state)]"
+	data["_bar_path"] = "[required_material]"
 	data["extras"] = items_list(additional_items)
 
 	data["output_name"] = initial(created_item.name)
 	data["output_icon"] = "[initial(created_item.icon)]"
 	data["output_state"] = "[initial(created_item.icon_state)]"
-	data["output_count"] = createditem_extra + 1
+	data["output_count"] = output_amount
 	data["_output_path"] = "[created_item]"
 
 	return data
