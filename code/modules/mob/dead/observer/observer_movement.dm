@@ -1,5 +1,5 @@
 /mob/dead/observer/down()
-	set name = "Move Down"
+	set name = "Move Downwards"
 	set category = "IC"
 
 	if(zMove(DOWN, z_move_flags = ZMOVE_FEEDBACK))

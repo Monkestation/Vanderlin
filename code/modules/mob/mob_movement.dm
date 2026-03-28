@@ -676,7 +676,7 @@
 
 ///Moves a mob down a z level
 /mob/verb/down()
-	set name = "Move Down"
+	set name = "Move Downwards"
 	set category = "IC"
 
 	if(remote_control)
@@ -699,5 +699,5 @@
 	if(!do_after(src, 1 SECONDS, hidden = TRUE))
 		return
 	if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK))
-		to_chat(src, span_notice("You move down."))
+		to_chat(src, span_notice("You move downwards."))
 	return FALSE
