@@ -148,7 +148,7 @@
 	return info
 
 /datum/augment/special/loyalty_binder
-	name = "Shackle"
+	name = "shackle"
 	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
 	stability_cost = -10
 	engineering_difficulty = SKILL_RANK_APPRENTICE
