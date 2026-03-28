@@ -31,8 +31,3 @@
 	name = "Rakshari Eyes"
 	icon_state = "rakshari"
 	use_static = TRUE
-
-/datum/sprite_accessory/eyes/humanoid/automaton
-	name = "Automaton Eyes"
-	icon_state = "human_glow"
-	glows = TRUE
