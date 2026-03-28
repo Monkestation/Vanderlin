@@ -255,8 +255,6 @@
 						qdel(G)
 			adjust_grave_necra_devotion(0) // set devotion income to 0
 			is_consecrated = NOT_CONSECRATED // remove consecration levels
-			cut_overlays()
-			update_appearance(UPDATE_OVERLAYS)
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		stage_update()
@@ -427,6 +425,7 @@
 			can_buckle = FALSE
 		if(3)
 			can_buckle = TRUE
+	cut_overlays()
 	update_appearance(UPDATE_ICON | UPDATE_NAME)
 
 /obj/structure/closet/dirthole/update_icon_state()
@@ -445,12 +444,14 @@
 
 /obj/structure/closet/dirthole/update_overlays()
 	. = ..()
-	if(stage != 3)
+	if(stage < 3)
 		return
-	var/mutable_appearance/abovemob = mutable_appearance('icons/turf/floors.dmi', "grave_above", ABOVE_MOB_LAYER)
+	else if(stage == 3)
+		. += mutable_appearance(icon, "grave_above", ABOVE_MOB_LAYER)
+
 	if(is_consecrated >= CONSECRATED)
-		add_overlay("graveconsecrated")
-	. += abovemob
+		. += mutable_appearance(icon, "graveconsecrated")
+
 
 /obj/structure/closet/dirthole/update_name(updates)
 	. = ..()

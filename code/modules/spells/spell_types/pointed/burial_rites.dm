@@ -50,6 +50,6 @@
 				if(grave.is_consecrated < 1) // don't count graves as being consecrated multiple time for Necra
 					SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 					record_round_statistic(STATS_GRAVES_CONSECRATED)
-				cast_on.update_appearance(UPDATE_ICON | UPDATE_OVERLAYS)
+				grave.update_appearance()
 			return
 		to_chat(owner, span_warning("I failed to perform the rites."))
