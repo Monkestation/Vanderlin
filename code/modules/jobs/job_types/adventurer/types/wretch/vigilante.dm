@@ -34,7 +34,6 @@
 
 	traits = list(
 		TRAIT_DECEIVING_MEEKNESS,
-		TRAIT_INHUMENCAMP,
 		TRAIT_STEELHEARTED,
 		TRAIT_DODGEEXPERT
 	)
@@ -80,10 +79,6 @@
  		"the Son of a Bitch" = HONORARY_SUFFIX,
  		"the Wanted Man" = HONORARY_SUFFIX,
 	)
-
-/datum/job/advclass/wretch/vigilante/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/vigilante
 	name = "Renegade (Wretch)"

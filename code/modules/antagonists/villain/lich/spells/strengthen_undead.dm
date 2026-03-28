@@ -29,7 +29,7 @@
 		if(affecting)
 			if(affecting.heal_damage(50, 50))
 				cast_on.update_damage_overlays()
-			if(affecting.heal_wounds(50))
+			if(affecting.heal_wounds(50, src))
 				cast_on.update_damage_overlays()
 		cast_on.visible_message(span_danger("[cast_on] reforms under the vile energy!"), span_notice("I'm remade by dark magic!"))
 	else

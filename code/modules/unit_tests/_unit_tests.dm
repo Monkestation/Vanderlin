@@ -76,6 +76,7 @@
 #include "map_landmarks.dm"
 #include "mapping.dm"
 #include "mindbound_actions.dm"
+#include "movement_order_sanity.dm"
 #include "projectiles.dm"
 #include "reagent_id_typos.dm"
 #include "reagent_names.dm"

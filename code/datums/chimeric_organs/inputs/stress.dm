@@ -14,10 +14,10 @@
 /datum/chimeric_node/input/stress/proc/on_stress_add(datum/source, datum/stress_event/event)
 	SIGNAL_HANDLER
 	if(stress_needed > 0)
-		if(stress_needed > event.get_stress())
+		if(stress_needed > event.get_stress(src))
 			return FALSE
 	else
-		if(stress_needed < event.get_stress())
+		if(stress_needed < event.get_stress(src))
 			return FALSE
 	var/potency = node_purity / 100
 	trigger_output(potency)

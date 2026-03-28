@@ -63,7 +63,7 @@
 	/// At that point we know that there are target turfs
 	var/immobilize_user = FALSE
 
-/datum/special_intent/Destroy(force, ...)
+/datum/special_intent/Destroy(force)
 	starting_loc = null
 	return ..()
 
@@ -293,7 +293,7 @@
 		var/obj/item/bodypart/affecting = human_victim.get_bodypart(damage_zone)
 		var/armor_block = human_victim.run_armor_check(damage_zone, damage_type, damage = damage)
 		if(human_victim.apply_damage(damage, damage_type, affecting, armor_block))
-			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE, reduce_crit = 100)
+			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = -100))
 			message += "<b> It pierces through to their flesh!</b>"
 			playsound(human_victim, weapon.hitsound, 80, TRUE)
 

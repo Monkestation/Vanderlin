@@ -44,7 +44,7 @@
 		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
 		if(do_after(user, long_cooktime, src))
 			new /obj/item/reagent_containers/food/snacks/jellycake_base(loc)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			qdel(src)
 			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 30)
 			user.nobles_seen_servant_work()
@@ -77,7 +77,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.full)
-				if(alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "SOAK THE TALLOW?", "IT'S JUST BLOOD", list("Yes", "No")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else
@@ -114,13 +114,27 @@
 	desc = "Unbelievably fancy chocolate, imported all the way from distant Grenzelhoft"
 	icon_state = "chocolate"
 	bitesize = 4
+	slices_num = 3
 	nutrition = CHOCCY_NUTRITION
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("rich sweetness" = 1)
 	faretype = FARE_FINE
 	rotprocess = null
+	slice_path = /obj/item/reagent_containers/food/snacks/chocolate/chunk
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = SUGAR | JUNKFOOD
+
+/obj/item/reagent_containers/food/snacks/chocolate/chunk
+	eat_effect = null
+	slices_num = 0
+	name = "chocolate chunk"
+	icon_state = "chocolatechopped"
+	nutrition = (CHOCCY_NUTRITION) / 3
+	bitesize = 1
+	tastes = list("chocolate" = 1)
+	faretype = FARE_NEUTRAL
+	foodtype = SUGAR | JUNKFOOD
+
 
 // -------------- SALUMOI (dwarven smoked sausage) -----------------
 /obj/item/reagent_containers/food/snacks/meat/salami
@@ -396,7 +410,7 @@
 			if(reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 				reagents.remove_reagent(/datum/reagent/consumable/milk/salted_gote, 15)
 			new /obj/item/reagent_containers/food/snacks/butter(drop_location())
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/cheesemaking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 			user.nobles_seen_servant_work()
 		return
 	..()
@@ -488,7 +502,7 @@
 				if(do_after(user, long_cooktime, src))
 					reagents.remove_reagent(milk, 5)
 					new cheese(drop_location())
-					user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
+					user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/cheesemaking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)))
 				user.nobles_seen_servant_work()
 			return
 	..()
@@ -502,7 +516,7 @@
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
 			if(do_after(user,3 SECONDS, src))
 				new /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start(loc)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/cheesemaking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 				qdel(I)
 				qdel(src)
 				user.nobles_seen_servant_work()
@@ -574,7 +588,7 @@
 	if(istype(I, /obj/item/reagent_containers/food/snacks/cheese) && icon_state != "cheesewheel_end")
 		if(isturf(loc)&& (found_table))
 			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 30, TRUE, -1)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/cheesemaking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			if(do_after(user, short_cooktime, src))
 				qdel(I)
 				name = "maturing cheese wheel"

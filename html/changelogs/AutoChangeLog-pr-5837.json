@@ -1,0 +1,1 @@
+{"author":"ModDownloading","delete-after":true,"changes":[{"bugfix":"Bog Witch and Bog Witch Apprentice latejoin at the bog entrance instead of the train."},{"code_imp":"Inquisitor classes now have custom latejoin spawn options, currently unused."}]}

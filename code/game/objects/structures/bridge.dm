@@ -14,6 +14,7 @@
 
 /obj/structure/bridge/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
 	AddElement(/datum/element/connect_loc, loc_connections)
 	// Shift sprite down when going east/west so that people properly walk on the bridge

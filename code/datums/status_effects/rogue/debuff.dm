@@ -602,3 +602,34 @@
 	name = "Cursed"
 	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
 	icon_state = "debuff"
+
+/datum/status_effect/debuff/black_briar1
+	id = "blackbriar1"
+	alert_type = null
+	status_type = STATUS_EFFECT_UNIQUE
+	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2)
+	duration = -1
+
+/datum/status_effect/debuff/black_briar1/on_apply()
+	. = ..()
+	owner.add_stress(/datum/stress_event/black_briar1)
+
+/datum/status_effect/debuff/black_briar1/on_remove()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/black_briar1)
+
+//these will both stack with each other
+/datum/status_effect/debuff/black_briar2
+	id = "blackbriar2"
+	alert_type = null
+	status_type = STATUS_EFFECT_UNIQUE
+	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_PER = -2, STATKEY_INT = -2)
+	duration = -1
+
+/datum/status_effect/debuff/black_briar2/on_apply()
+	. = ..()
+	owner.add_stress(/datum/stress_event/black_briar2)
+
+/datum/status_effect/debuff/black_briar2/on_remove()
+	. = ..()
+	owner.remove_stress(/datum/stress_event/black_briar2)

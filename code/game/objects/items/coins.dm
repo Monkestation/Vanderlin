@@ -3,6 +3,7 @@
 #define CTYPE_COPP "c"
 #define CTYPE_INQU "i"
 #define CTYPE_ANCI "a"
+#define CTYPE_WOOD "w"
 #define MAX_COIN_STACK_SIZE 20
 
 /obj/item/coin
@@ -73,6 +74,8 @@
 						spawned_type = /obj/item/coin/inqcoin
 					if(CTYPE_ANCI)
 						spawned_type = /obj/item/coin/copper
+					if(CTYPE_WOOD)
+						spawned_type = /obj/item/coin/wood
 					else
 						return // Don't destroy coins into copper
 
@@ -276,7 +279,7 @@
 	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
-	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")
+	var/outcome = tgui_alert(user, "What will you rig the next coin flip to?","XYLIX", list("Heads","Tails","Play fair"))
 	if(QDELETED(src) || !user.is_holding(src))
 		return
 	switch(outcome)
@@ -473,9 +476,23 @@
 		heads_tails = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/coin/wood
+	name = "chip"
+	icon = 'icons/obj/orphanage.dmi'
+	icon_state = "w1"
+	sellprice = 0
+	base_type = CTYPE_WOOD
+	plural_name = "chips"
+
+/obj/item/coin/wood/pile/Initialize(mapload, coin_amount)
+	. = ..()
+	if(!coin_amount)
+		set_quantity(rand(4,14))
+
 #undef CTYPE_GOLD
 #undef CTYPE_SILV
 #undef CTYPE_COPP
 #undef CTYPE_INQU
 #undef CTYPE_ANCI
+#undef CTYPE_WOOD
 #undef MAX_COIN_STACK_SIZE

@@ -11,7 +11,7 @@
 	drag_slowdown = 6
 	SET_BASE_PIXEL(-12, 0)
 
-/obj/structure/plough/Moved(oldLoc, movement_dir)
+/obj/structure/plough/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if((dir == WEST) || (dir == EAST))
 		if(pulledby)

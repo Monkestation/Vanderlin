@@ -7,6 +7,7 @@
 	brew_time = 2 MINUTES
 	sell_value = 60
 	heat_required = 360
+	brewing_skill = /datum/attribute/skill/craft/cooking/distilling
 
 /datum/brewing_recipe/brandy/pear
 	name = "Pear Brandy"

@@ -87,7 +87,7 @@
 			tastes = list("spicy red meat" = 2)
 			meal_properties()
 			bitesize = initial(bitesize)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/fine_cuisine, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()
 
@@ -253,7 +253,7 @@
 
 /obj/item/reagent_containers/food/snacks/comelette_slice
 	name = "caravaneer's omelette slice"
-	icon_state = "comlette_slice"
+	icon_state = "comelette_slice"
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 3
@@ -286,7 +286,7 @@
 
 /obj/item/reagent_containers/food/snacks/comelette_slice/veggie
 	name = "caravaneer's omelette slice"
-	icon_state = "veggie_comlette_slice"
+	icon_state = "veggie_comelette_slice"
 	dropshrink = 0.8
 	slices_num = 0
 	bitesize = 3
@@ -804,6 +804,6 @@
 			overlays += spice
 			tastes = list("spicy birdmeat" = 2)
 			modified = TRUE
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/fine_cuisine, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 	return ..()
