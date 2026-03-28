@@ -121,7 +121,7 @@
 
 	var/list/appro_recipe = list()
 	for(var/datum/artificer_recipe/R in GLOB.artificer_recipes)
-		if(R.type != R.abstract_type && !R.i_type == i_type_choice && istype(material, R.required_item))
+		if(R.type != R.abstract_type && R.i_type == i_type_choice && istype(material, R.required_item))
 			appro_recipe += R
 
 	for(var/datum/artificer_recipe/R as anything in appro_recipe)
