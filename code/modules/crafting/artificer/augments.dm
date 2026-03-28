@@ -5,7 +5,7 @@
 	created_item = /obj/item/augment_kit
 	required_item = /obj/item/ingot/steel
 	hammers_per_item = 10
-	craftdiff = 10
+	craftdiff = 1
 
 /datum/artificer_recipe/augments
 	abstract_type = /datum/artificer_recipe/augments
