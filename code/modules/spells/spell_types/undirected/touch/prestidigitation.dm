@@ -144,7 +144,7 @@
 
 	owner.adjust_stamina(fatigue_used + extra_fatigue)
 
-	var/skill_level = GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE(owner, associated_skill)
 	if (skill_level >= SKILL_LEVEL_EXPERT)
 		fatigue_used = 0 // we do this after we've actually changed fatigue because we're hard-capping the raises this gives to Expert
 

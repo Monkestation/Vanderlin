@@ -1215,7 +1215,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	if(browser_alert(user, "Use 2 TRIUMPHS to play as this class again?", "OUROBOROS", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
+	if(tgui_alert(user, "Use 2 TRIUMPHS to play as this class again?", "OUROBOROS", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
 		return
 	if(user.client?.prefs)
 		if(user.client.prefs.lastclass)
@@ -1482,7 +1482,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				set_keybinds(user)
 
 			if("keybindings_reset")
-				var/choice = browser_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
+				var/choice = tgui_alert(user, "Do you really want to reset your keybindings?", "Setup keybindings", DEFAULT_INPUT_CONFIRMATIONS)
 				if(choice != CHOICE_CONFIRM)
 					return
 				hotkeys = TRUE
@@ -1976,7 +1976,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						if(user.get_triumphs() < 1)
 							to_chat(user, span_bignotice("YOU DON'T HAVE ENOUGH TRIUMPHS."))
 							return
-					var/result = alert(user, "You'll receive a unique trait for one round\n You cannot back out from or reroll this.\nDo you really wish to [donator ? "" : "spend 1 triumph and " ]proceed?", "Be Special", "Yes", "No")
+					var/result = tgui_alert(user, "You'll receive a unique trait for one round\n You cannot back out from or reroll this.\nDo you really wish to [donator ? "" : "spend 1 triumph and " ]proceed?", "Be Special", list("Yes", "No"))
 					if(result != "Yes")
 						return
 					if(!donator)
@@ -2524,6 +2524,14 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
 	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+
+	if(length(job.whitelisted_ckeys) && !(user.ckey in job.whitelisted_ckeys))
+		return make_lock_row(
+			used_name,
+			"\[EVENT WHITELISTED\]",
+			"<b>This role has been whitelisted by staff for event purposes.</b>"
+		)
+
 	if(job.required_playtime_remaining(user.client))
 		var/list/lines = list()
 		for(var/t in job.exp_requirements)
@@ -2537,6 +2545,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[TIME LOCK\]",
 			"<b>Requirements:</b><br>[text]"
 		)
+
 	if(fails_allowed || fails_blacklist)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_RACE_ALL))
 			var/list/allowed_races = job.allowed_races.Copy()
@@ -2548,6 +2557,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				"\[SPECIES LOCK\]",
 				"<b>Species Needed:</b><br>[races_text]"
 			)
+
 	if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
 		var/ages_text = jointext(job.allowed_ages, ", ")
 		return make_lock_row(
@@ -2555,6 +2565,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[AGE LOCK\]",
 			"<b>Ages Needed:</b><br>[ages_text]"
 		)
+
 	if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
 		var/sexes_text = jointext(job.allowed_sexes, ", ")
 		return make_lock_row(
@@ -2562,6 +2573,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			"\[SEX LOCK\]",
 			"<b>Sexes Needed:</b><br>[sexes_text]"
 		)
+
 	if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/mult_patron in job.allowed_patrons)
@@ -2574,6 +2586,20 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			used_name,
 			"\[PATRON LOCK\]",
 			"<b>Patron Needed:</b><br>[patron_text]"
+		)
+
+	if(length(job.banned_patrons) && (user.client.prefs.selected_patron.type in job.banned_patrons))
+		var/list/patron_list = list()
+		for(var/mult_patron in job.banned_patrons)
+			var/datum/patron/P = new mult_patron
+			patron_list += (P.display_name ? P.display_name : P.name)
+			qdel(P)
+		var/patron_text = jointext(patron_list, ", ")
+
+		return make_lock_row(
+			used_name,
+			"\[PATRON BAN\]",
+			"<b>Patrons Banned:</b><br>[patron_text]"
 		)
 	// No lock
 	return FALSE

@@ -122,6 +122,9 @@
 /obj/item/bodypart/l_leg/goblin
 	dismemberable = 0
 
+/obj/item/bodypart/head/goblin
+	sellprice = 5
+
 /obj/item/bodypart/head/goblin/update_icon_dropped()
 	return
 
@@ -131,13 +134,6 @@
 /obj/item/bodypart/head/goblin/skeletonize()
 	. = ..()
 	icon_state = "goblin_skel_head"
-	sellprice = 2
-	if(headprice)
-		headprice = 2
-
-/obj/item/bodypart/head/goblin/drop_organs(mob/user, violent_removal)
-	. = ..()
-	sellprice = 0
 
 /datum/species/goblin
 	name = "goblin"
@@ -243,8 +239,6 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/goblins.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(7,20)
-			headdy.sellprice = rand(7,20)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(src,1)
@@ -464,7 +458,7 @@
 		return
 	spawning = FALSE
 	if(moon_goblins == 0)
-		if(GLOB.tod == "night")
+		if(GLOB.tod == NIGHT)
 			if(prob(30))
 				moon_goblins = 1
 			else

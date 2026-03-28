@@ -527,6 +527,20 @@
 	output = /obj/item/clothing/neck/psycross
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/crafting/bone_amulet
+	name = "bone amulet"
+	requirements = list(
+		/obj/item/alch/bone = 2,
+		/obj/item/alch/sinew = 3,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/alch/bone
+	starting_atom = /obj/item/alch/sinew
+	output = /obj/item/clothing/neck/psycross/great_hunt
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/crafting/bottle_kit
 	name = "bottle kit"
 	requirements = list(

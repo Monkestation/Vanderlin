@@ -66,7 +66,7 @@
 	antag_flags = FLAG_FAKE_ANTAG
 	clan_selected = TRUE
 	default_clan = /datum/clan/daewalker
-
+	allow_preference_switching = FALSE
 
 /datum/antagonist/vampire/lord/daewalker/on_gain()
 	var/mob/living/carbon/human/blade = owner.current
@@ -94,6 +94,7 @@
 
 	. = ..()
 
+	owner.special_role = "Daewalker"
 	blade.attributes?.add_sheet(/datum/attribute_holder/sheet/job/daewalker)
 
 	blade.maxbloodpool = 5000

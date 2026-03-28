@@ -190,7 +190,7 @@
 	for(var/i = 1; i <= GLOB.player_list.len; i++)
 		var/mob/M = GLOB.player_list[i]
 		if(M && M.client)
-			if(alive_check && M.stat)
+			if(alive_check && M.stat == DEAD)
 				continue
 			else if(afk_check && M.client.is_afk())
 				continue
@@ -212,7 +212,7 @@
 	if(flashwindow)
 		window_flash(M.client)
 	var/options = ignore_category ? list(CHOICE_YES, CHOICE_NO, CHOICE_NEVER) : DEFAULT_INPUT_CHOICES
-	switch(browser_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
+	switch(tgui_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
 		if(CHOICE_YES)
 			to_chat(M, "<span class='notice'>Choice registered: Yes.</span>")
 			if(time_passed + poll_time <= world.time)

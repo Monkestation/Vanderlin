@@ -899,19 +899,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			if(istype(listed_atom, /obj/item/coin))
 				continue
-			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom.type))
+			if(!listed_atom.sellprice && !SSmerchant.get_item_base_value(listed_atom))
 				continue
 
-			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/old_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price <= 0)
 				continue
 
 			total_coin_value += old_price
 			sold_count[initial(listed_atom.name)] += 1
 			sold_items[initial(listed_atom.name)] += old_price
-			SSmerchant.handle_selling(listed_atom.type)
+			SSmerchant.handle_selling(listed_atom)
 
-			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom.type, sell_modifer)
+			var/new_price = SSmerchant.active_faction.get_actual_sell_price(listed_atom, sell_modifer)
 			if(old_price != new_price)
 				SSmerchant.changed_sell_prices(listed_atom.type, old_price, new_price)
 
@@ -924,19 +924,19 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 					continue
 				if(istype(inside, /obj/item/coin))
 					continue
-				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside.type))
+				if(!inside.sellprice && !SSmerchant.get_item_base_value(inside))
 					continue
 
-				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/old_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price <= 0)
 					continue
 
 				total_coin_value += old_inside_price
 				sold_count[initial(inside.name)] += 1
 				sold_items[initial(inside.name)] += old_inside_price
-				SSmerchant.handle_selling(inside.type)
+				SSmerchant.handle_selling(inside)
 
-				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside.type, sell_modifer)
+				var/new_inside_price = SSmerchant.active_faction.get_actual_sell_price(inside, sell_modifer)
 				if(old_inside_price != new_inside_price)
 					SSmerchant.changed_sell_prices(inside.type, old_inside_price, new_inside_price)
 				qdel(inside)

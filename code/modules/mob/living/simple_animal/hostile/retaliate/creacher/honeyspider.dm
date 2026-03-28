@@ -21,6 +21,7 @@
 							/obj/item/natural/silk = 3)
 	head_butcher = /obj/item/natural/head/spider
 
+	indexed = TRUE
 	health = SPIDER_HEALTH
 	maxHealth = SPIDER_HEALTH
 	food_type = list(/obj/item/bodypart,
@@ -84,7 +85,7 @@
 	base_intents = list(/datum/intent/simple/bite)
 
 /mob/living/simple_animal/hostile/retaliate/spider/Initialize()
-	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands // due to signal overridings from pet commands
+	AddComponent(/datum/component/obeys_commands, pet_commands) // here due to signal overridings from pet commands
 	. = ..()
 	gender = MALE
 	if(prob(33))

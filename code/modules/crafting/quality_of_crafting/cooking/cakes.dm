@@ -16,6 +16,7 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "add some juicy fruit filling"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/chescake_raisan
 	category = "Cakes"
@@ -33,6 +34,7 @@
 	crafting_sound = 'sound/foley/dropsound/food_drop.ogg'
 	crafting_message = "add some juicy fruit filling"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cake_base
 	category = "Cakes"
@@ -51,6 +53,7 @@
 	crafting_message = "work egg into the dough, shaping it into a cake"
 	minimum_skill_level = 2
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 
 /datum/repeatable_crafting_recipe/cooking/cake_pear
@@ -69,6 +72,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add mouth-watering pear filling"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cake_plum
 	category = "Cakes"
@@ -86,6 +90,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add some fine plum filling"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cake_tangerine
 	category = "Cakes"
@@ -103,6 +108,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add some tangy tangerine filling"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/cake_strawberry
 	category = "Cakes"
@@ -118,8 +124,26 @@
 	output = /obj/item/reagent_containers/food/snacks/strawbycake
 	craft_time = 9 SECONDS
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
-	crafting_message = "add some tangy tangerine filling"
+	crafting_message = "add some sweet strawberry filling"
 	extra_chance = 100
+
+/datum/repeatable_crafting_recipe/cooking/cake_tamto
+	category = "Cakes"
+	name = "Tomato Silk Cake Base"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/fruit/tamto_slice = 1,
+		/obj/item/reagent_containers/food/snacks/cake = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/cake
+	starting_atom = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	output = /obj/item/reagent_containers/food/snacks/tamtocake
+	craft_time = 9 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	crafting_message = "add some juicy tamto filling"
+	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_cheesecake
 	category = "Cakes"
@@ -137,6 +161,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread fresh cheese on the cake"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_zybcake
 	category = "Cakes"
@@ -154,6 +179,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread spider-honey on the cake"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_strawberrycake
 	category = "Cakes"
@@ -171,6 +197,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread sugar frosting on the cake"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_crimsoncake
 	category = "Cakes"
@@ -188,6 +215,7 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "add chocolate to the dough"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
 
 /datum/repeatable_crafting_recipe/cooking/unbaked_tangerinecake
 	category = "Cakes"
@@ -205,3 +233,22 @@
 	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	crafting_message = "spread sugar frosting on the cake"
 	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking
+
+/datum/repeatable_crafting_recipe/cooking/unbaked_tamtocake
+	category = "Cakes"
+	name = "Unbaked Tomato Silk Cake"
+
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/cheese = 1,
+		/obj/item/reagent_containers/food/snacks/tamtocake = 1,
+	)
+	required_table = TRUE
+	attacked_atom = /obj/item/reagent_containers/food/snacks/tamtocake
+	starting_atom = /obj/item/reagent_containers/food/snacks/cheese
+	output = /obj/item/reagent_containers/food/snacks/tamtocake_ready
+	craft_time = 9 SECONDS
+	crafting_sound = 'sound/foley/dropsound/gen_drop.ogg'
+	crafting_message = "spread fresh cheese on the cake"
+	extra_chance = 100
+	skillcraft = /datum/attribute/skill/craft/cooking/baking

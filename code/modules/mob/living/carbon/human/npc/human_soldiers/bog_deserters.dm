@@ -94,6 +94,7 @@
 	d_intent = INTENT_PARRY
 	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK)
 
+	headprice = 16
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 
 
@@ -122,8 +123,6 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 50 // Big sellprice for these guys since they're deserters
 
 /datum/attribute_holder/sheet/job/npc/bog_deserters
 	attribute_variance = list(
@@ -189,6 +188,7 @@
 	a_intent = INTENT_HELP
 	d_intent = INTENT_PARRY
 	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK)
+	headprice = 20
 
 /mob/living/carbon/human/species/human/northern/bog_deserters/better_gear/ambush
 	wander = TRUE
@@ -206,8 +206,6 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 50 // Big sellprice for these guys since they're deserters
 
 /datum/outfit/job/human/northern/bog_deserters/better_gear/pre_equip(mob/living/carbon/human/H)
 	//Body Stuff

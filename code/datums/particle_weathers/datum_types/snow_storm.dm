@@ -373,8 +373,8 @@
 #undef CORNER_CLOCKWISE
 
 
-/turf/Exited(atom/movable/gone, direction)
+/turf/Exited(atom/movable/gone, atom/new_loc)
 	if(!istype(gone))
 		return
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
+	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, new_loc)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, new_loc)

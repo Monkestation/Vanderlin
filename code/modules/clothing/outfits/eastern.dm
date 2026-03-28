@@ -49,7 +49,8 @@
 	armor = ARMOR_LEATHER_GOOD
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	flags_inv = HIDEEARS
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -86,7 +87,8 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	nodismemsleeves = TRUE
 	sellprice = 20
 	armor_class = AC_LIGHT
@@ -134,7 +136,8 @@
 	desc = "A gold adorned belt with the softest of silks barely concealing one's bits."
 	icon_state = "exoticsilkbelt"
 	var/max_storage = 5
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 
 /obj/item/clothing/shoes/anklets
 	name = "golden anklets"
@@ -143,7 +146,8 @@
 	icon_state = "anklets"
 	item_state = "anklets"
 	is_barefoot = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	armor = ARMOR_BOOTS_BAD
 
 /obj/item/clothing/shoes/rumaclan
@@ -167,7 +171,8 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 
 /obj/item/clothing/gloves/eastgloves2
 	name = "stylish gloves"
@@ -182,7 +187,8 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 
 /obj/item/clothing/head/mentorhat
 	name = "worn bamboo hat"
@@ -192,7 +198,8 @@
 	armor = ARMOR_PADDED_GOOD
 	max_integrity = ARMOR_INT_HELMET_LEATHER
 	blocksound = SOFTHIT
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	flags_inv = HIDEEARS
 	body_parts_covered = HEAD|HAIR|EARS|NOSE|EYES
 	resistance_flags = FIRE_PROOF
@@ -267,7 +274,8 @@
 	item_state = "exoticsilkbra"
 	body_parts_covered = CHEST
 	boobed = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	flags_inv = null
 	slot_flags = ITEM_SLOT_SHIRT
 

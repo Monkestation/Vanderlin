@@ -63,6 +63,7 @@
 	outfit = /datum/outfit/prisoner
 
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
+	can_be_apprentice = TRUE
 	can_have_apprentices = FALSE
 	antag_role = /datum/antagonist/prisoner
 
