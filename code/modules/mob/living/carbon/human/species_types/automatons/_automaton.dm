@@ -9,6 +9,7 @@
 					/obj/item/bodypart/r_arm/automaton, /obj/item/bodypart/r_leg/automaton, /obj/item/bodypart/l_leg/automaton)
 	uses_random_stats = FALSE
 	culture = /datum/culture/universal/heartfelt
+	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 
 /mob/living/carbon/human/species/automaton/LateInitialize()
 	. = ..()
