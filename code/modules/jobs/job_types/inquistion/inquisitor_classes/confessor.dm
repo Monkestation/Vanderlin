@@ -112,60 +112,6 @@
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
 			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), ITEM_SLOT_BELT_L)
 
-	// Enhancement selection
-	var/enhancements = list(
-		"Auxiliary Adrenal Glands - Pain Resist",
-		"Controlled Atrophy - Rapid Movement",
-		"Formikrag Liver - Reversed Toxin Damage",
-		"Goblin Eyes - Nightvision",
-		"Greenskin Hands - Strong Grip",
-		"Inhumen Stomach - Enhanced Endurance",
-		"Leviathanian Membrane - No Terrain Slowdown",
-		"Nerve Staple - No Mood",
-		"Nightmare Ward - No Sleep and Fast Learning",
-		"Obfuscating Dermis - Beautiful and Face-changing",
-		"Serpentine Glands - Thermal Vision and Venom",
-		"Volf Ligaments - Z-Jump",)
-	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
-
-	switch(enhancement_choice)
-		if("Auxiliary Adrenal Glands - Pain Resist")
-			ADD_TRAIT(spawned, TRAIT_NODAMAGESLOWDOWN, TRAIT_GENERIC)
-			//statpack for CON
-		if("Controlled Atrophy - Rapid Movement")
-			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
-			//statpack for SPD but reduced CON
-		if("Formikrag Liver - Reversed Toxin Damage")
-			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
-		if("Goblin Eyes - Nightvision")
-			//change eyes to goblin eyes
-		if("Greenskin Hands - Strong Grip")
-			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
-			//statpack for STR but reduced END
-		if("Inhumen Stomach - Enhanced Endurance")
-			ADD_TRAIT(spawned, TRAIT_NASTYEATER, TRAIT_GENERIC)
-			//statpack for END
-		if("Leviathanian Membrane - No Terrain Slowdown")
-			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_GOOD_SWIM, TRAIT_GENERIC)
-		if("Nerve Staple - No Mood")
-			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
-			//statpack for END but reduced FOR
-		if("Nightmare Ward - No Sleep and Fast Learning")
-			ADD_TRAIT(spawned, TRAIT_NOSLEEP, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
-			//statpack for INT and PER
-		if("Obfuscating Dermis - Beautiful and Face-changing")
-			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
-			//add harlequinn spell
-		if("Serpentine Glands - Thermal Vision and Venom")
-			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
-		if("Volf Ligaments - Z-Jump")
-			ADD_TRAIT(spawned, TRAIT_ZJUMP, TRAIT_GENERIC)
-
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
