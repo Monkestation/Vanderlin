@@ -63,6 +63,8 @@ GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
 	GLOB.weather_act_upon_list += src
 	if(override_color)
 		color = override_color
+		add_atom_colour(color, COLOUR_PRIORITY_AMOUNT)
+	update_appearance(UPDATE_ICON)
 
 
 /obj/effect/decal/cleanable/blood/proc/become_dry()

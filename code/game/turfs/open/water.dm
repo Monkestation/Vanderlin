@@ -564,6 +564,8 @@
 					continue
 				if(BP.skeletonized)
 					continue
+				if(!BP.is_organic_limb())
+					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
@@ -612,6 +614,8 @@
 					continue
 				if(BP.skeletonized)
 					continue
+				if(!BP.is_organic_limb())
+					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
@@ -646,6 +650,8 @@
 				if(!BP)
 					continue
 				if(BP.skeletonized)
+					continue
+				if(!BP.is_organic_limb())
 					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
