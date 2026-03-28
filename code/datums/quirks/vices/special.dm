@@ -151,11 +151,8 @@
 	point_value = 10
 
 /datum/quirk/vice/skill_bereft/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
 	for(var/datum/attribute/skill/skill in SSskills.all_skills)
-		H.adjust_skill_level(skill, -30)
+		owner.adjust_skill_level(skill, -30)
 
 /datum/quirk/vice/deaf
 	name = "Hard of Hearing"
