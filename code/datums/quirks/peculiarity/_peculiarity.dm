@@ -46,7 +46,7 @@
 	desc = "By some cruel twist of fate, you have been born a dainty-minded, dim-witted klutz. Yours is a life of constant misdirection, confusion and general incompetence. It is no small blessing your dazzling looks make up for this, sometimes."
 
 /datum/quirk/peculiarity/witless_pixie/on_spawn()
-	if(!ishuman(owner))
+	if(!owner)
 		return
 	var/mob/living/carbon/human/H = owner
 	H.adjust_stat_modifier(STATMOD_WITLESS_PIXIE, list(STAT_INTELLIGENCE = rand(-2, -5)))
