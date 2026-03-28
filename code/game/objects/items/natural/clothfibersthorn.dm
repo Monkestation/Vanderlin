@@ -132,8 +132,8 @@
 
 /obj/item/natural/bundle/animalfibers
 	name = "sinew fiber bundle"
-	icon_state = "fibersroll1"
 	desc = "Sinewy fibers, tightly bound together."
+	icon_state = "fibersroll1"
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
