@@ -10,11 +10,11 @@
 
 // These defines determine how much passive devotion a Necra worshipper will get for the grave
 /// Grave has a marker, not not given rites
-#define NOT_CONSECRATED_GAIN 0.25
+#define NOT_CONSECRATED_GAIN 0.025
 /// Standard grave with rites preformed
-#define CONSECRATED_GAIN 0.5
+#define CONSECRATED_GAIN 0.05
 /// Double consecrated grave
-#define DOUBLE_CONSECRATED_GAIN 2
+#define DOUBLE_CONSECRATED_GAIN 0.1
 /// Max passive devotion gravetenders are permitted to have from graves
 #define GRAVE_DEVOTION_MAX 1
 
