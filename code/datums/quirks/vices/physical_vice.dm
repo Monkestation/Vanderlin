@@ -95,7 +95,7 @@
 		return
 	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
 
-/datum/quirk/vice/ugly/on_remove()
+/datum/quirk/vice/mute/on_remove()
 	if(!owner)
 		return
 	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
