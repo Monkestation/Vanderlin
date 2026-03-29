@@ -6,6 +6,7 @@
 
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS // I cry
+		#include "map_files/austranderlin/austranderlin.dmm"
 		#include "map_files/debug/roguetest.dmm"
 		#include "map_files/daftmarsh/daftmarsh_outland.dmm"
 		#include "map_files/daftmarsh/daftmarsh.dmm"
