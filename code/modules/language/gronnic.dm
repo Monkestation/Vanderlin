@@ -8,7 +8,7 @@
 	key = "s"
 	space_chance = 45
 	default_priority = 90
-	icon_state = "zalad"
+	icon_state = "gronnic"
 	spans = list(SPAN_GRONNIC)
 	syllables = list(
 		"to", "ost", "no", "na", "ni", "ko", "ne", "en", "po", "ra", "li",
