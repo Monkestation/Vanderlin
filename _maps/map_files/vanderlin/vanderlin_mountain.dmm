@@ -44,10 +44,6 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/closed/mineral/random/med,
 /area/under/mountains/anvil/lower)
-"aO" = (
-/obj/structure/gate/bars,
-/turf/open/floor/blocks,
-/area/under/mountains/anvil/lower/building)
 "aW" = (
 /obj/structure/door/iron/bars,
 /obj/structure/barricade/wooden/crude,
@@ -529,9 +525,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks,
 /area/under/mountains/anvil/lower/building)
-"ik" = (
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/lower/building)
 "il" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood/nosmooth/saiga,
@@ -622,10 +615,6 @@
 /obj/structure/bed/shit,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/lower)
-"jL" = (
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/lower/building)
 "jQ" = (
 /obj/item/gear/metal/bronze,
 /turf/open/floor/volcanic,
@@ -760,10 +749,6 @@
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt,
 /area/under/mountains/anvil/lower/building)
-"md" = (
-/obj/item/weapon/sword,
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/lower)
 "mf" = (
 /obj/structure/table/wood{
 	dir = 8;
@@ -896,6 +881,9 @@
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/lower/building)
+"nA" = (
+/turf/open/water/clean,
+/area/under/mountains/anvil/lower/building)
 "nC" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /obj/effect/decal/cleanable/blood,
@@ -936,6 +924,10 @@
 "od" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/twig,
+/area/under/mountains/anvil/lower/building)
+"oh" = (
+/mob/living/carbon/human/species/orc/tribal,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower/building)
 "oi" = (
 /obj/structure/fluff/railing/wood,
@@ -1048,9 +1040,6 @@
 "pC" = (
 /turf/closed/mineral/gemeralds,
 /area/under/mountains/anvil/lower/building)
-"pF" = (
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/lower)
 "pH" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -1448,6 +1437,10 @@
 /obj/item/gear/metal/bronze,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/snowyforest)
+"vH" = (
+/obj/item/weapon/sword,
+/turf/open/water/clean,
+/area/under/mountains/anvil/lower)
 "vK" = (
 /obj/structure/table/wood/nice/decorated_alt,
 /obj/item/clothing/ring/gold/gemerald,
@@ -1619,6 +1612,9 @@
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/wood/nosmooth/saiga,
 /area/outdoors/mountains/anvil/snowyforest)
+"yp" = (
+/turf/open/water/clean,
+/area/under/mountains/anvil/lower)
 "yu" = (
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/effect/decal/cleanable/food/mess/soup,
@@ -1729,10 +1725,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
 /area/under/mountains/anvil/lower)
-"AW" = (
-/mob/living/carbon/human/species/orc/tribal,
-/turf/open/water/cleanshallow,
-/area/under/mountains/anvil/lower/building)
 "AZ" = (
 /obj/effect/decal/cleanable/blood,
 /obj/structure/closet/crate/chest/gold,
@@ -2235,6 +2227,10 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"IJ" = (
+/obj/structure/gate/bars,
+/turf/open/floor/blocks,
+/area/under/mountains/anvil/lower/building)
 "IK" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/dirt/road,
@@ -2611,6 +2607,10 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "Ob" = (
 /turf/closed/mineral/tin,
+/area/under/mountains/anvil/lower/building)
+"Og" = (
+/obj/effect/spawner/map_spawner/loot/medium,
+/turf/open/water/clean,
 /area/under/mountains/anvil/lower/building)
 "Om" = (
 /obj/machinery/light/fueled/torchholder{
@@ -8324,7 +8324,7 @@ Jv
 up
 up
 vf
-pF
+yp
 up
 Jv
 DR
@@ -8524,9 +8524,9 @@ Jv
 Jv
 nr
 nr
-pF
-pF
-pF
+yp
+yp
+yp
 nr
 Jv
 DR
@@ -8725,10 +8725,10 @@ DR
 Jv
 Iu
 yV
-pF
-pF
-pF
-pF
+yp
+yp
+yp
+yp
 yV
 wi
 DR
@@ -8926,11 +8926,11 @@ DR
 DR
 Jv
 yV
-pF
-pF
-md
-pF
-pF
+yp
+yp
+vH
+yp
+yp
 vf
 Jv
 nP
@@ -9128,11 +9128,11 @@ DR
 DR
 Jv
 yV
-pF
-pF
-pF
-pF
-pF
+yp
+yp
+yp
+yp
+yp
 yV
 Jv
 nP
@@ -9331,10 +9331,10 @@ DR
 Jv
 vf
 up
-pF
-pF
-pF
-pF
+yp
+yp
+yp
+yp
 yV
 Jv
 DR
@@ -9534,7 +9534,7 @@ Jv
 Jv
 up
 yV
-pF
+yp
 up
 yV
 vf
@@ -50571,7 +50571,7 @@ vf
 Xi
 ko
 ko
-pF
+yp
 DW
 DW
 DR
@@ -50772,8 +50772,8 @@ vf
 ko
 To
 Pd
-pF
-pF
+yp
+yp
 DW
 DR
 DW
@@ -50968,13 +50968,13 @@ DW
 DW
 DR
 DR
-pF
-pF
-pF
+yp
+yp
+yp
 ko
 vf
-pF
-pF
+yp
+yp
 DR
 DW
 DR
@@ -51171,11 +51171,11 @@ DW
 DR
 DR
 DR
-pF
-pF
-pF
-pF
-pF
+yp
+yp
+yp
+yp
+yp
 DR
 DR
 DW
@@ -51375,9 +51375,9 @@ DR
 DR
 DR
 DR
-pF
-pF
-pF
+yp
+yp
+yp
 DR
 DW
 DW
@@ -52701,7 +52701,7 @@ sJ
 SY
 sJ
 OJ
-aO
+IJ
 OJ
 SY
 sJ
@@ -67134,9 +67134,9 @@ Gv
 Gv
 Gv
 Nj
-AW
-jL
-AW
+oh
+Og
+oh
 Nj
 Nj
 Nj
@@ -67334,12 +67334,12 @@ Nj
 Nj
 Nj
 Nj
-ik
-ik
-ik
-ik
-ik
-ik
+nA
+nA
+nA
+nA
+nA
+nA
 Ly
 Ly
 Ly

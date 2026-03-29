@@ -1168,6 +1168,7 @@
 #include "code\datums\elements\relay_attackers.dm"
 #include "code\datums\elements\retaliate.dm"
 #include "code\datums\elements\snail_crawl.dm"
+#include "code\datums\elements\submerged.dm"
 #include "code\datums\elements\tipped_item.dm"
 #include "code\datums\elements\turf_transparency.dm"
 #include "code\datums\elements\walking_stick.dm"

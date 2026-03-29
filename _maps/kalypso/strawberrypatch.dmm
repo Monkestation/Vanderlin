@@ -20,7 +20,7 @@
 /turf/open/floor/grass/yel,
 /area/template_noop)
 "q" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "z" = (
 /obj/structure/soil,
