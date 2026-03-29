@@ -306,10 +306,8 @@
 		// Change is difference between current gain and new value, if double consecrated, we need to reduce the amount by what is already counted by the coffin
 		if(amount == DOUBLE_CONSECRATED_GAIN)
 			change = amount - grave.necra_devotion_gain - CONSECRATED_GAIN
-			message_admins("[change] = [amount] - [grave.necra_devotion_gain] - [CONSECRATED_GAIN]")
 		else
 			change = amount - grave.necra_devotion_gain
-			message_admins("[change] = [amount] - [grave.necra_devotion_gain]")
 		grave.necra_devotion_gain = amount
 
 	if(change == 0) // Nothing to adjust
@@ -317,32 +315,29 @@
 
 	// Update potential devotion gain
 	GLOB.potential_grave_devotion_gain += change
-	message_admins("Potential gain is now [GLOB.potential_grave_devotion_gain], modified by [change].")
 
 	// Adjust devotion gain for each gravetender, up to a max
 	for (var/mob/living/carbon/human/player in GLOB.player_list)
-		if (player.stat == DEAD || isbrain(player))
+		if (player.stat == DEAD || isbrain(player) || !player.cleric)
 			continue
-		if(istype(player.mind.assigned_role, /datum/job/undertaker))
+		if(player.patron?.type == /datum/patron/divine/necra) // Person must be able to use miracles and worship Necra
 			// Grab their devotion
-			if(player.cleric)
-				var/datum/devotion/devotion = player.cleric
-				var/current_passive_gain = devotion.passive_devotion_gain
-				var/devotion_change = change
+			var/datum/devotion/devotion = player.cleric
+			var/current_passive_gain = devotion.passive_devotion_gain
+			var/devotion_change = change
 
-				if(current_passive_gain == GRAVE_DEVOTION_MAX && GLOB.potential_grave_devotion_gain < GRAVE_DEVOTION_MAX) // At max and we are not reducing it, skip
-					continue
+			if(current_passive_gain == GRAVE_DEVOTION_MAX && GLOB.potential_grave_devotion_gain < GRAVE_DEVOTION_MAX) // At max and we are not reducing it, skip
+				continue
 
-				// We grab the potential_grave_devotion_gain and have each gravetender update to reach it (or stopped by max)
-				// potential_grave_devotion_gain is less than max
-				if(GLOB.potential_grave_devotion_gain <= GRAVE_DEVOTION_MAX)
-					devotion_change = GLOB.potential_grave_devotion_gain - current_passive_gain // Have their devotion generation match potential_grave_devotion_gain by calculating the difference and adding/decreasing
+			// We grab the potential_grave_devotion_gain and have each gravetender update to reach it (or stopped by max)
+			// potential_grave_devotion_gain is less than max
+			if(GLOB.potential_grave_devotion_gain <= GRAVE_DEVOTION_MAX)
+				devotion_change = GLOB.potential_grave_devotion_gain - current_passive_gain // Have their devotion generation match potential_grave_devotion_gain by calculating the difference and adding/decreasing
 
-				else // potential_grave_devotion_gain is over MAX, have devotion set to max
-					devotion_change = GRAVE_DEVOTION_MAX - current_passive_gain
+			else // potential_grave_devotion_gain is over MAX, have devotion set to max
+				devotion_change = GRAVE_DEVOTION_MAX - current_passive_gain
 
-				message_admins("change of necra devotion = [devotion_change]")
-				devotion.update_passive_devotion(devotion_change)
+			devotion.update_passive_devotion(devotion_change)
 	return
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)

@@ -139,14 +139,12 @@
 		else // must be an increase, start processing
 			passive_devotion_gain += amount
 			START_PROCESSING(SSprocessing, src)
-			message_admins("[holder_mob.name] passive_devotion_gain is now = [passive_devotion_gain] and is processing")
 			return
 	else
 		passive_devotion_gain += amount
 		if(passive_devotion_gain < 0) //if we are now below 0, set it back to 0
 			passive_devotion_gain = 0
 
-		message_admins("[holder_mob.real_name] passive_devotion_gain is now = [passive_devotion_gain]")
 		return
 
 /// Updates `passive_progression_gain` for mob, if it gets to 0 and `passive_devotion_gain` is also 0, it will stop processing on next `process()`
