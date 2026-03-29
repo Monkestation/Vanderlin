@@ -219,7 +219,7 @@ export class Changelog extends Component {
           No
         </p>
         <p>
-          Traditional Games Space Station 13 is thankful to the GoonStation 13
+          Vanderlin is thankful to the GoonStation 13
           Development Team for its work on the game up to the
           {' r4407 release. The changelog for changes up to r4407 can be seen '}
           <a href="https://wiki.ss13.co/Pre-2016_Changelog#April_2010">here</a>.
@@ -285,8 +285,9 @@ export class Changelog extends Component {
               'c28b351807bad950d2b323ada048190844bbda32'
             }
           >
-            TG station commit c28b351807bad950d2b323ada048190844bbda32 on 2019/17/11
+            TG station commit c28b351807bad950d2b323ada048190844bbda32
           </a>
+          {' on 2019/17/11.'}
         </p>
         <p>
           {'All assets including icons and sound are under a '}
