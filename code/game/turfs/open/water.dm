@@ -918,10 +918,10 @@
 	desc = "Murky water, flowing swiftly along the river."
 	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
 	base_icon_state = "dirt"
-	water_reagent = /datum/reagent/water
+	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
 	slowdown = 5
-	water_level = 2
+	//water_level = 2
 	slowdown = 1
 	flow_speed = 1 SECONDS
 
@@ -932,8 +932,9 @@
 	water_reagent = /datum/reagent/water/gross/sewer
 	cleanliness_factor = -5
 	slowdown = 5
-	water_level = 2
-	slowdown = 1
+	water_height = WATER_HEIGHT_ANKLE
+	//water_level = 2
+	slowdown = 20
 	flow_speed = 1 SECONDS
 
 /turf/open/water/river/sewer/roofflow
