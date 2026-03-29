@@ -59,6 +59,7 @@
 		TRAIT_DUALWIELDER,
 		TRAIT_LEECHIMMUNE,
 		TRAIT_NASTY_EATER,
+		TRAIT_NOSEGRAB,
 		TRAIT_ZJUMP
 	)
 
@@ -105,7 +106,7 @@
 
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(istype(get_area(src), /area/indoors/town/tavern)) //Change this later
+		if(!istype(get_area(src), /area/outdoors/exposed/under/basement))
 			to_chat(src, "<span class='warning'>I need to do this from the surface.</span>")
 			return FALSE
 		priority_announce("[inputty]", title = "[src.real_name], The Sunlord Speaks", sound = 'sound/misc/foghorn.ogg')
