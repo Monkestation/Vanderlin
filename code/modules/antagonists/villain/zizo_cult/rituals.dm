@@ -102,8 +102,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!P)
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
-	var/paper_name = strip_html_full(P.info, MAX_NAME_LEN)
-
+	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
 	if(!user.mind?.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
@@ -114,7 +113,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 			continue
 		if(HL.mind?.assigned_role.title in GLOB.church_positions)
 			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
-			to_chat(user, span_danger("They are protected..."))
+			to_chat(user, span_danger("That accursed cross protects them..."))
 			continue
 		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
 			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
@@ -203,7 +202,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!P)
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
-	var/paper_name = strip_html_full(P.info, MAX_NAME_LEN)
+	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
 	if(!user.mind || !user.mind.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
@@ -316,7 +315,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/obj/item/paper/P = locate() in center.contents
 	if(!P)
 		return
-	var/info = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
+	var/info = strip_html_full(P.info, MAX_NAME_LEN)
 	var/input = browser_input_text(user, "To whom do we send this message?", "ZIZO")
 	if(!input)
 		return
