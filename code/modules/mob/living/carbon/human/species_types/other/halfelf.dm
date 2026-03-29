@@ -20,6 +20,7 @@
 	multiple_accents = list(
 		"Humen Accent" = "Imperial",
 		"Elf Accent" = "Elfish"
+		"Wintermare Accent" = ACCENT_WINTERMARE,
 	)
 	desc = "The child of an Elf and a Humen. \
 	\n\n\
