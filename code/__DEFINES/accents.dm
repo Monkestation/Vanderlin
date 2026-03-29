@@ -13,6 +13,7 @@
 #define ACCENT_HALFLING "No Swearing!"
 #define ACCENT_KOBOLD "Scale-thing!"
 #define ACCENT_ROUSMAN "Ratty Accent"
+#define ACCENT_WWINTERMARE "Wintermare Accent"
 
 GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_NONE = list(),
@@ -30,4 +31,5 @@ GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_HALFLING = strings("accents/halfling_replacement.json", "halfling"),
 	ACCENT_KOBOLD = strings("accents/kobold_replacement.json", "kobold"),
 	ACCENT_ROUSMAN = strings("accents/rousman_replacement.json", "rous"),
+	ACCENT_WWINTERMARE = strings("accents/wintermare_replacement.json", "wintermare"),
 ))
