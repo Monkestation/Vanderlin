@@ -6,6 +6,7 @@
 	multiple_accents = list(
 		"Elf Accent" = ACCENT_ELF,
 		"Wintermare Accent" = ACCENT_WINTERMARE,
+		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	id = SPEC_ID_ELF
 	changesource_flags = WABBAJACK

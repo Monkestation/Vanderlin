@@ -1,5 +1,10 @@
 /datum/species/human
 	name = "Humanb"
+	multiple_accents = list(
+    "No Accent" = ACCENT_NONE,
+    "Ossland Accent" = ACCENT_OSSLAND,
+	"Grenzelhoft Accent" = ACCENT_GRENZ,
+)
 	id = SPEC_ID_HUMEN
 	changesource_flags = WABBAJACK
 	bodypart_features = list(

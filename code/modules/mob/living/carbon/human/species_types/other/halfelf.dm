@@ -21,6 +21,7 @@
 		"Humen Accent" = "Imperial",
 		"Elf Accent" = "Elfish",
 		"Wintermare Accent" = ACCENT_WINTERMARE,
+		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	desc = "The child of an Elf and a Humen. \
 	\n\n\

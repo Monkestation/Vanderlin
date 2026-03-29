@@ -3,6 +3,10 @@
 
 /datum/species/dwarf
 	name = "Dwarfb"
+	multiple_accents = list(
+    "Dwarf Accent" = ACCENT_DWARF,
+    "Ossland Accent" = ACCENT_OSSLAND,
+)
 	id = SPEC_ID_DWARF
 	changesource_flags = WABBAJACK
 	native_language = "Dwarfish"
