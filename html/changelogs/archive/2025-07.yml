@@ -1,0 +1,6 @@
+2025-07-31:
+  CheffieGithub:
+  - rscadd: Added back the changelog. View it in the OOC tab.
+  - bugfix: Essence spells no longer grant exp or have adjusted charge times or costs.
+  Wrench-1:
+  - qol: added updated recipe book to the Master Chef's backpack
