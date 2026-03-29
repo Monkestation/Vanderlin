@@ -1,0 +1,381 @@
+2026-02-01:
+  Rockslp:
+  - balance: Fixes daggers actually now the correct damage value.
+  - bugfix: Fixes some weapon bugs.
+  - code_imp: Cleans up the weapon code a bit.
+  Somniworld:
+  - balance: 'Lowered the prices of all inquisition clothing in their HERMES reliquary.\nqol
+      : Lifeblood and Mana potions are now clearly called exactly that in the inquisitorial
+      reliquary.'
+  realforest2001:
+  - bugfix: Fixed Silver not affecting vampires.
+  - bugfix: Fixed Xylix worshippers needing an amulet of Ravox to pray.
+  - bugfix: Fixed Repair Undead ignoring antimagic.
+  - bugfix: FIxed iconstate name for lord rapier sheathe icons.
+  - bugfix: Fixed Knave Bandit not spawning with Quiver.
+2026-02-02:
+  MrTCo1:
+  - rscadd: New Court Physician Drip
+  - rscadd: New Court Physician Canesword
+2026-02-03:
+  realforest2001:
+  - qol: Improved flight interactions. You cannot take off with a roof over your head.
+  - qol: Stopping-Flying whilst stood directly on a turf will now be instant.
+  - sound: Added a wingflap to taking off and landing.
+  - rscadd: 'add: Made the vampire progeny tip change depending on if you can or can''t
+      rise more.'
+  - rscadd: Vampires can now tell the difference between Vampire Spawn, Vampires and
+      Wretch Vampires on examine.
+  - code_imp: Fixed a variable typo for clan covens.
+  - code_imp: Removed a duplicate proc entry.
+  - image: Added Vampire Spawn icon.
+  - bugfix: Fixed Vampire Spawn not having their own icon as they expected.
+  - bugfix: Fixed being able to spawn as a vampire when playing churchling.
+  snowyseshi:
+  - rscadd: hollow curse ritual checks if the target is dead, hollow ritual checks
+      if target has lux
+2026-02-04:
+  CheffieGithub:
+  - refactor: refactored click code to pass param lists directly, report any click
+      issues
+2026-02-05:
+  PotatoTomahto:
+  - refactor: skill levels can now be decimals
+  realforest2001:
+  - bugfix: Blowing a kiss no longer reveals sneaking people.
+2026-02-06:
+  Rockslp:
+  - rscdel: Removed Lakkari and Kaledon
+  - code_imp: Changed some item descriptions to remove mentions of Lakkari and Kaledon
+  Skorvy:
+  - rscadd: hollow-kin to guard list
+2026-02-07:
+  realforest2001:
+  - rscadd: Outsiders making a meister account no longer reveal their role to the
+      steward.
+2026-02-08:
+  CheffieGithub:
+  - bugfix: Dodge no longer always succeeds if show_rolls is disabled
+2026-02-09:
+  snowyseshi:
+  - balance: rebalanced steppesman mercenary
+2026-02-10:
+  ApolloVector:
+  - rscadd: Gloryhound Mercenary class
+  Bloo4420:
+  - map: Modified Vanderlin apothecary door access
+  Casperclone1:
+  - bugfix: Fixed explosives not being extinguished in water
+  - bugfix: Crafting explosives should no longer explode when making them, such as
+      deathshells
+  - balance: deathshells have a 25% to not explode when ignited as the original PR
+      wanted them to have a drawback for being cheaply produced
+  PotatoTomahto:
+  - rscdel: You can see see types without the trait, trait gives crop information
+  realforest2001:
+  - server: TGS DMAPI updated to 7.4.0 / 5.11.0
+  - bugfix: Fixed Blood Rites being selectable when they don't function.
+  - bugfix: Fixed Vampire Lord, VL and Werewolf, and Werewolf triggering on Voyage.
+  - bugfix: Fixes Marques turning into zennies.
+  - bugfix: Fixes the duplicate description of the leather coat.
+  - bugfix: Fixed Wretch Bloodsuckers not getting the right antag datum.
+  - bugfix: Fixed church roles not being able to unlock/lock the pillory they have.
+  - bugfix: Fixed the Inquisition black bag eating head gear.
+  - admin: Hearing Speech, Whispers and seeing Emotes as aghost are now independent
+      buttons and save through rounds.
+  - admin: Making an announcement from the gods can now be \"tested\" without sending
+      to the whole server.
+  - admin: Astrata, Xylix, Zizo, Graggar, Matthios and Baotha omen sounds can now
+      be used in announcements.
+  - admin: Moved some verbs around to be easier to find and work out what they are.
+  - admin: LOOC will now be distinct if relayed via admin powers vs local hearing.
+      (R) LOOC.
+  - admin: Ahelps are now in red for the chat window, this was prior intended for
+      part of the message but wasn't being applied.
+  - admin: Added an audio cue and distinct chat format for prayers.
+  - admin: Rebuilt Subtle Message to allow for easy messages from the gods.
+  - admin: Added thematic pre-messages for the main 14 gods, courtesy of Vispectra.
+  - admin: Added logging for pickpocketing.
+  - admin: Added logging for vampire transfix.
+  - admin: Added a feedback message for toggling the context menu.
+2026-02-11:
+  CheffieGithub:
+  - bugfix: Fixed lack of PER on the stat panel.
+  - bugfix: Alt click turf menu allows allow interaction
+  - bugfix: Fix assassin verb spam
+  - bugfix: Re-enable language menu
+  - rscadd: Round end timer to stat panel.
+  Ordosian:
+  - image: Updated Volf sprites and color variants.
+  PatapoIIIa:
+  - refactor: unified grass and bush foraging logic into a shared search loop
+  - code_imp: removed recursive do_after usage from bush interactions
+  - bugfix: prevented repeated loot duplication during bush replenishment
+  - qol: standardized loot generation across bush, swampweed, and pyroclastic flowers
+  Siro:
+  - rscadd: 'Adds hair: Bedhead v4, Blunt Bangs and its alternate, Cornrows, Cornrows
+      2, Cornrow Braid, Cornrow Bun, Cornrow Tail, Hornet, and Viper.'
+  flleeppyy:
+  - rscadd: Added relay chooser (Named \"Internet Routing Relays\" at the top of the
+      window) ported from IrisStation
+  realforest2001:
+  - bugfix: People no longer have buttons they shouldn't.
+  - admin: Admins can now force the subclass menu to trigger for players.
+2026-02-12:
+  CheffieGithub:
+  - rscadd: Language menu TGUI
+  - rscadd: Added culture customisation, seperated it from skin colours where applicable.
+  ModDownloading:
+  - rscadd: The Packmule quirk, costs 8 points and lets you start with a Backpack.
+  - rscadd: The Ugly quirk, costs nothing and makes you ugly.
+  - rscdel: The Night Vision quirk, as it did nothing due to how the lighting system
+      works.
+  Teoti4001:
+  - rscadd: Polymorph attunement can be suplimented with Chaos essence in the essence
+      gauntlet
+  TerraGS:
+  - qol: Using a wood or copper hammer on an artificer table won't generate sparks.
+  realforest2001:
+  - bugfix: Fixes missing time references on the statpanel.
+  - admin: Moved Manage Paintings to GameMaster tab.
+  - bugfix: Fixed a missing reference in returning to lobby.
+2026-02-13:
+  Casperclone1:
+  - bugfix: Fixed Kobold not having a accent
+  Cheffie, Absolucy, jlsnow301, Bisar, MTandi:
+  - rscadd: Added a loot window for alt-clicking tiles.
+  - rscdel: Removed the item browser from the stat panel.
+  CheffieGithub:
+  - bugfix: Fixed tgui-byond passthrough
+  - rscadd: Seasonal triumph buys, which last for exactly how long a season lasts,
+      they will stay on your account until the time you bought it + the wipe time.
+      I.e. 3 months exactly if a season was 3 months.
+  - rscadd: Added subterran dwarf triumph buy.
+  - rscadd: Added formikrag kobold triumph buy.
+  - rscadd: These Triumph buys will be disabled until the next season.
+  Wrench-1:
+  - rscadd: Remembrance, a Psydonian Longsword Relic for Ordinator and Inspector
+  - rscdel: Removed the Forgotten Blade from being able to be selected by Ordinator
+      and Inspector
+  realforest2001:
+  - rscadd: Added the ability to make people your acquaintance, adding them to your
+      list of known people.
+  - rscadd: You now automatically know people who are in your family.
+  - code_imp: Cleaned up the who-knows-who code.
+  - rscadd: Middle click on the health heart is now used when next to someone to share
+      identities. Right click is still used to check who you know.
+  - rscadd: Added the Stiletto dagger.
+  - rscadd: Added the decorated dagger to Monarch.
+  snowyseshi:
+  - image: added astratan cross and golden astratan cross
+  - code_imp: moved psycross and astratan cross to structure.dm and make them use
+      crafting instead of carpentry
+2026-02-14:
+  CheffieGithub:
+  - rscadd: Enabled triumph subspecies triumph buys. Get grinding.
+2026-02-15:
+  KevinfromHP:
+  - rscadd: Monarchs receive bonus triumphs roundstart with lowpop.
+  - refactor: Reworked the Advclass triumph buy because the special queue was actually
+      nonsense. Why the hell was it used
+  - balance: Rebalanced advanced class restriction triumph buy
+  - balance: Nerfed Remembering a Triumph
+  - rscdel: Disabled Species Triumph Buy
+  MrTCo1:
+  - rscadd: Grandmaster Templar
+  - rscadd: Grandmaster Weapons
+  - rscadd: Templaric Order lore blurb in the Primer (Aberra Approved)
+  Ordosian:
+  - bugfix: fixed Trident sprite.
+  tired-wired:
+  - rscadd: Added new psydonic, a grenzel language
+  - rscdel: Removed old psydonic from most non-inquisition roles
+2026-02-16:
+  Rockslp:
+  - rscadd: Blacksmith
+  - rscdel: Removed weapon & armorsmith.
+  - balance: Blacksmiths have a chance at legendary skills, 5%
+  - map: Armorsmith+weaponsmith spawns replaced with blacksmith spawns.
+  - code_imp: Armorsmith & Weaponsmith code changed.
+2026-02-17:
+  7erracotta:
+  - rscadd: Added new hairstyles
+  ApolloVector:
+  - rscadd: Grenzel mercs can spawn with a halberd
+  MrTCo1:
+  - rscadd: Fervor and Apathy daggers to Spymaster Hand
+  - rscadd: Noble Undercoat to Spymaster and Advisor Hand
+  - rscadd: Wrist bracer knife sheath
+  Ordosian:
+  - bugfix: Fixed Lantern offsets
+2026-02-18:
+  CheffieGithub:
+  - bugfix: Fixed packmule quirk
+  KevinfromHP:
+  - rscadd: Invisible Tiefling misfortune aura
+  - bugfix: RemoveComponent not working for kobold aberrant eaters.
+  - code_imp: Refactored nutrition tracking completely for food
+  - rscadd: Cannibalism. Proper.
+  - balance: eating gross food isn't as bad for your health.
+  - balance: some nutrition values for food got thrown around
+2026-02-19:
+  CheffieGithub:
+  - bugfix: Fixed no difference between right and middle mouse on the loot panel
+  - bugfix: Fixed the loot panel not allowing middle clicks
+  KevinfromHP:
+  - rscdel: Reverted changes made to existing triumph buys
+  - bugfix: Fixed some things regarding when stress tries to display
+  - bugfix: fish was bit 0 times!!! 0!!!
+  Rockslp:
+  - balance: Exiled Warrior now gets eastern tattoo defenses.
+  - rscdel: Removes some largely unused intents.
+  - qol: Makes combat easier for laggy players by changing charge to clickcd on many
+      melee weapons.
+  - balance: Rebalances weapons & intents.
+  - bugfix: Fixes various weapon issues.
+  - code_imp: Some weapon define changes on values and intents, along with slight
+      armor protection value changes.
+  - rscdel: You can no longer de-skeletonize people by cauterizing them.
+  - balance: You can no longer use a wooden psycross to cauterize people, it is wood.
+      Silver still works.
+  - bugfix: Makes it so the cautery actually gets the cauterization bonus.
+  SmokingCrackForChrist:
+  - sound: Adds a new theme for the Forest Garrison, with the previous theme being
+      relegated to the Dendorite theme.
+  realforest2001:
+  - bugfix: Automaton no longer lags everyone to death.
+2026-02-20:
+  KevinfromHP:
+  - qol: Tweaked Tend Wound Surgeries so clinic apprentices can do then
+  Rockslp:
+  - bugfix: Fixes a bug causing blunt intent to be affected by sharpness if the weapon
+      had sharpness.
+2026-02-21:
+  CheffieGithub:
+  - rscadd: Added more feedback to feinting
+  MrTCo1:
+  - rscdel: Wretch Vampire
+  TerraGS:
+  - rscadd: Adds sand. Dig it up with a shovel or your hand. Melt it into glass. Just
+      keep it out of your eyes.
+  - qol: Shovels can drop their load into sacks.
+  - image: Adds icons for sand item and sand pile along with associated shovel icons.
+  - refactor: Moved generic behavior out of dirtclod into new parent objects for clod
+      and clodpile.
+  realforest2001:
+  - code_imp: Changed file2list from a world proc into global proc.
+  - admin: Changed prefix during messages and asay depending on rank title.
+  - code_imp: Added backend support for the above.
+  - admin: Added a config setting to allow prefixes to use direct rank names.
+  - bugfix: Fixed Templar Grandmaster being selected for major antags.
+2026-02-22:
+  Ordosian:
+  - bugfix: Guard command on Automaton is now 5 tiles instead of 3.
+  - bugfix: Follow command removed. Use Custom command instead.
+  - admin: Automatons show up correctly in player panel
+  - bugfix: Automatons no longer feel pain, sleep or be poisoned.
+  - bugfix: Automatons no longer make human sounds
+  Rockslp:
+  - bugfix: Fixed the pitchfork's sharpness so it didn't deal absolute minimum like
+      1 force damage
+  Snack-Max:
+  - rscadd: Allow Royal Knight Advclass to choose their helmets
+  TerraGS:
+  - bugfix: using a shovel full of sand on dirt no longer replaces the sand with dirt
+  realforest2001:
+  - rscadd: Added cooldown for automaton sounds.
+  - rscdel: Removed access to the sillier automaton sounds, subject to change.
+2026-02-23:
+  realforest2001:
+  - bugfix: Fixed an oversight from RK helmet PR
+  - admin: Custom Map insert spawner now works better.
+2026-02-24:
+  KevinfromHP:
+  - rscadd: The captain can promote a serjeant now
+  - rscadd: new blood drinking mechanics and the ability to consume blood
+  Ordosian:
+  - rscadd: Automatons can now be picked in traumatized vice.
+  - code_imp: Inquisition traumatized check
+2026-02-25:
+  ApolloVector:
+  - rscadd: Tiefling can be grenzel mercs
+  Bloo4420:
+  - map: Small Daftmarsh fixes
+  Cheffie, FreeStylaLT:
+  - rscadd: Added active parrying to guard intent. See PR for more details.
+  - rscadd: Rebalanced feint intent.
+  Tasteofdeath386:
+  - rscadd: Added Grenzel accent to the human mercenary veteran
+  - rscadd: Added Mail Training to the necromancer class
+  - spellcheck: fixed typo in rusted cuirass name
+  realforest2001:
+  - rscadd: Town Roles are now accessible to all races.
+  - rscadd: Town Watch, Lieutenant and MAA are also.
+  - rscadd: Feldsher can only be accessed by 'non heretical' species, due to handling
+      of lux.
+  - bugfix: Fixed Automatons being affected by Xylix Vicious Mimicry.
+  - bugfix: Fixed Automatons becoming antags.
+  - bugfix: Fixed Automatons knowing mystery box phrases.
+  - code_imp: Made sewing a craft skill.
+  - bugfix: Fixed Lich taking Inquisition roles on spawn, and stopped it spawning
+      on lowpop (<35).
+  - bugfix: Fixed black bag not working if the target isn't wearing anything on their
+      head.
+  - bugfix: Fixed GMT becoming Zizo Cult, Maniac or Rebel.
+  - rscadd: Automatons can now sense who is a noble and who is a verified artificer,
+      regardless of masking.
+  - bugfix: Automatons no longer get selected for mystery box phrases.
+  - bugfix: Automatons can no longer wear armour.
+  - rscdel: Kobolds can no longer be MAA, Watch LT or Matron.
+  snowyseshi:
+  - rscadd: Added Astratan chasuble and its crafting recipe.
+  - image: Added Astratan chasuble
+  - rscadd: 'Traumatized: split elves in 2 and added medicators'
+2026-02-26:
+  MrTCo1:
+  - rscadd: Added Law and Order to the Captain
+  - rscadd: Added Deliverance to the Captain
+  realforest2001:
+  - rscadd: Added rousman language and accent. Accent applies for them with all languages,
+      similar to kobolds.
+  - bugfix: Fixed some offsets for things equipped on rousmen.
+  - rscadd: Tweaked skills for rousman seer to match up with their starting spells.
+  - rscadd: Added a slightly buffed version of the rousman seer.
+  - rscadd: Added Enlightened Centrism as a Patron option for the Divine Pantheon.
+  - rscadd: Centrist worshippers do not get healed by the Astratan greater healing
+      miracle, but can still be resurrected.
+  - bugfix: Known/branded Heretics no longer get healed by healing miracles, to match
+      excommunicated people.
+  - rscadd: Centrist worshippers can devote themselves to a sole patron through right-click
+      interaction at a pantheon cross.
+  - code_imp: Changed the backend for set_patron to account for existing clerical
+      powers.
+  - rscadd: Added Holy Fire enchantment and accompanying miracle.
+  - rscadd: Added Divine Shield miracle.
+  - code_imp: Repathed holy amulets.
+  - code_imp: Added helper procs for adding and removing verbs for the priest.
+  - bugfix: Fixed some misplaced parameters for weapon enchantments.
+  - bugfix: Priest can no longer recruit roles with existing cleric powers into church
+      roles.
+  - bugfix: Fixed message spam when equipping/moving grandmaster weapons in hands.
+2026-02-27:
+  CheffieGithub:
+  - rscadd: Added public balloon alert feedback to armour breaking and at certain
+      damage thresholds. (FreeStylaLT)
+  - rscadd: Added balloon alerts to missing swings on your targeted zone.
+  KevinfromHP:
+  - map: Added more adventurer spawns to the murderwoods
+  ModDownloading:
+  - rscadd: Prisoners can now choose to not be nobility, giving them a few crime and
+      labor skills instead of courtly ones.
+  - rscadd: Tieflings, Hollowkin, and Medicators can now be Prisoners, but only the
+      Commoner version, not Noble.
+  Rockslp:
+  - bugfix: Fixes double sharpness loss on parry.
+  - rscadd: Added guaranteed point blank crits to firearms
+  - balance: Removed the decreased crit chance from lead bullets
+  realforest2001:
+  - rscadd: Kobolds playing forest guard are limited to Forest Rat (Ruffian)
+2026-02-28:
+  KevinfromHP:
+  - qol: keybind fixes

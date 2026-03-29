@@ -595,6 +595,11 @@
 	if(oldarea != newarea)
 		oldarea.Exited(src, newloc)
 
+	for(var/atom/movable/thing as anything in oldloc)
+		if(thing == src)
+			continue
+		thing.Uncrossed(src)
+
 	if(new_locs) // Same here, only if multi-tile.
 		for(var/atom/entered_loc as anything in (new_locs - old_locs))
 			entered_loc.Entered(src, oldloc, old_locs)
