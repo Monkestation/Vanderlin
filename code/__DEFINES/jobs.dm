@@ -172,6 +172,8 @@
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
 #define JDO_SUNLORD 39
+#define JDO_SUNDWELLER 40
+
 
 #define JDO_PURITAN 40
 #define JDO_ORTHODOXIST	40.1

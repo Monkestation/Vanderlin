@@ -17,10 +17,10 @@
 	tutorial = "The morning sun shines upon you as you wake, \
 	glorious subjects await your orders, those blessed to live with you in the basking sunlight. \
 	The cave-dwellers from below envy your paradise, drool over the thoughts of using your precious sunlight for their own means. \
-	Rule with pride and power, you are not someone to be triffled with."
+	Rule with pride and power, you are not someone to be trifled with."
 	department_flag = PEASANTS
 	display_order = JDO_SUNLORD
-	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
+	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
@@ -34,12 +34,13 @@
 	outfit = /datum/outfit/sunlord
 	can_random = FALSE
 	can_have_apprentices = TRUE
+	apprentice_name = "Sunpeasant"
 
 	exp_type = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_LIVING)
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 1200,
-		EXP_TYPE_LEADERSHIP = 300
+		EXP_TYPE_LEADERSHIP = 600
 	)
 
 	cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
@@ -53,7 +54,6 @@
 		)
 
 	traits = list(
-		TRAIT_NOBLE_BLOOD,
 		TRAIT_DEADNOSE,
 		TRAIT_STINKY,
 		TRAIT_DUALWIELDER,
@@ -79,9 +79,6 @@
 
 /datum/outfit/sunlord
 	name = "Sunlord"
-
-/datum/outfit/sunlord/pre_equip(mob/living/carbon/human/H)
-	. = ..()
 	cloak = /obj/item/clothing/cloak/heartfelt/shit
 	ring = /obj/item/clothing/ring/dragon_ring
 	neck = /obj/item/clothing/neck/amberamulet
@@ -113,3 +110,12 @@
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Sunlord announcement")
 
 		last_announcement_time = world.time
+
+
+/datum/action/cooldown/spell/projectile/fireball/greater/sunlord
+	name = "Sunlord's Fireball"
+	desc = "Shoot out an immense ball of fire that explodes on impact."
+	invocation = "LIGHTNING BOLT!!!"
+	spell_cost = 0
+
+	associated_skill = null
