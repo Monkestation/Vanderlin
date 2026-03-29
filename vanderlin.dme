@@ -2787,6 +2787,7 @@
 #include "code\modules\crafting\quality_of_crafting\projectile.dm"
 #include "code\modules\crafting\quality_of_crafting\reading.dm"
 #include "code\modules\crafting\quality_of_crafting\sewing.dm"
+#include "code\modules\crafting\quality_of_crafting\toys.dm"
 #include "code\modules\crafting\quality_of_crafting\weaving.dm"
 #include "code\modules\crafting\quality_of_crafting\cooking\biscuits.dm"
 #include "code\modules\crafting\quality_of_crafting\cooking\cakes.dm"
