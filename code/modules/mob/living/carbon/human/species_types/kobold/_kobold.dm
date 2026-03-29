@@ -17,6 +17,7 @@
 	/turf/closed/wall/mineral/stone,\
 	/turf/closed/wall/mineral/craftstone,\
 	/turf/closed/wall/mineral/decostone,\
+	/turf/closed/wall/mineral/decorstone,\
 	/turf/closed/wall/mineral/desert_sandstone,\
 )
 
