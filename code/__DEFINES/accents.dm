@@ -13,7 +13,7 @@
 #define ACCENT_HALFLING "No Swearing!"
 #define ACCENT_KOBOLD "Scale-thing!"
 #define ACCENT_ROUSMAN "Ratty Accent"
-#define ACCENT_WWINTERMARE "Wintermare Accent"
+#define ACCENT_WINTERMARE "Wintermare Accent"
 
 GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_NONE = list(),
