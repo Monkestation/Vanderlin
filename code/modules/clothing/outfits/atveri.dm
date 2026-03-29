@@ -118,7 +118,7 @@
 	adjustable = CAN_CADJUST
 	light_color = LIGHT_COLOR_ORANGE
 	light_system = MOVABLE_LIGHT
-	light_range = 3
+	light_inner_range = 3
 	light_power = 1
 	toggle_icon_state = TRUE
 
