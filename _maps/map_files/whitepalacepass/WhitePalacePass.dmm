@@ -3249,6 +3249,12 @@
 /obj/structure/meathook,
 /turf/open/floor/blocks,
 /area/indoors/soilsons)
+"cds" = (
+/obj/effect/landmark/start/orthodoxistlate{
+	dir = 1
+	},
+/turf/open/floor/grass/yel,
+/area/outdoors/basin)
 "cdU" = (
 /obj/structure/table/wood/large/corner_alt{
 	dir = 8
@@ -29740,6 +29746,12 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile/masonic/single,
 /area/indoors/town/keep/feast)
+"tAJ" = (
+/obj/effect/landmark/start/puritanlate{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/basin)
 "tBk" = (
 /obj/structure/fake_machine/mail{
 	mailtag = "Inn"
@@ -95318,7 +95330,7 @@ rGJ
 uMr
 uMr
 uMr
-gvO
+cds
 ucR
 ntL
 ntL
@@ -96126,7 +96138,7 @@ uMr
 uMr
 gvO
 gvO
-rGJ
+tAJ
 ucR
 ntL
 ntL

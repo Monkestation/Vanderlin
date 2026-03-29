@@ -340,3 +340,21 @@
   - rscadd: Trapper Adventurer Class
   tired-wired:
   - bugfix: Tarts now want SLICED fruit.
+2026-03-29:
+  tired-wired:
+  - rscadd: Added new beard sprites by Blumengama.
+  ModDownloading:
+  - bugfix: Bog Witch and Bog Witch Apprentice latejoin at the bog entrance instead of the train.
+  - code_imp: Inquisitor classes now have custom latejoin spawn options, currently unused.
+  Severus840:
+  - map: Re-worked White Palace Pass map. See PR Changelog for Details.
+  - map: Added bog witch hut and Ledger quest markers on Rosewood Bog map.
+  - map: Added Inquisition Latejoin spawnpoints infront of Grenzel fort on WPP.
+  Telvayne:
+  - rscadd: Added 4 new kinds of orphans, while preserving the original experience.
+  - balance: Reduce orphans absurd +8 stats on orphanage remodel to +3.
+  realforest2001:
+  - rscadd: Added wooden orphan toys.
+  Gatsby229:
+  - bugfix: Hollowkin ritual patron fix.
+  - qol: Made hollowkin ritual use all fur types.
