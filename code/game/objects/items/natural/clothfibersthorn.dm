@@ -30,7 +30,7 @@
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	color = "#EEEADE"
+	color = "#b7a87c"
 	firefuel = 2 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH
@@ -138,7 +138,7 @@
 	force = 0
 	throwforce = 0
 	maxamount = 9
-	color = "#EEEADE"
+	color = "#b7a87c"
 	firemod =  2 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH
@@ -222,7 +222,7 @@
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	color = "#EEEADE"
+	color = "#e9dfc2"
 	firefuel = 5 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH
