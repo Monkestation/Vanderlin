@@ -443,7 +443,7 @@
 		else if(water_height == WATER_HEIGHT_ANKLE)
 			L.SoakMob(FEET, dirty_water_turf)
 		if(water_overlay)
-			if(water_height > WATER_HEIGHT_ANKLE && !istype(oldLoc, type))
+			if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
 				playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
 			else
 				playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
