@@ -1,0 +1,5 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - rscadd: "Adds new vice: Inquisitorial Suspicion. The Inquisitor who is able to verify your faith gets rewarded a TRIUMPH."
+  - rscadd: "New verb for Inquisition roles to get list of Suspected heretics"
