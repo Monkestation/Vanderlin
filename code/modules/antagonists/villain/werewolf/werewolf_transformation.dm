@@ -115,9 +115,9 @@
 	new_werewolf.name = wolfname
 	new_werewolf.skin_armor = new /obj/item/clothing/armor/regenerating/skin/werewolf_skin(new_werewolf)
 
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 50, TRUE)
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 50, TRUE)
-	new_werewolf.adjust_skill_level(/datum/attribute/skill/misc/climbing, 60, TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 50, silent = TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 50, silent = TRUE)
+	new_werewolf.adjust_skill_level(/datum/attribute/skill/misc/climbing, 60, silent = TRUE)
 
 	for(var/datum/action/werewolf_power as anything in werewolf_form_powers)
 		new_werewolf.add_spell(werewolf_power)

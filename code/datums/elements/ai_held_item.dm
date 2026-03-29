@@ -16,7 +16,7 @@
 	RegisterSignal(target, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_click), TRUE)
 	RegisterSignal(target, COMSIG_ATOM_EXITED, PROC_REF(atom_exited), TRUE)
 	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(on_examined), TRUE)
-	RegisterSignal(target, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(on_death), TRUE)
+	RegisterSignals(target, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(on_death), TRUE)
 
 /datum/element/ai_held_item/Detach(mob/living/target)
 	. = ..()

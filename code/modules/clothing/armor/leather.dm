@@ -282,6 +282,11 @@
 	uses_lord_coloring = LORD_PRIMARY
 	alternate_worn_layer = 19
 
+/obj/item/clothing/armor/leather/jacket/courtphysician/drifter
+	uses_lord_coloring = FALSE
+	detail_color = CLOTHING_SCARLET
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/armor/leather/jacket/leathercoat
 	name = "leather coat"
 	desc = "A tan and purple leather coat."

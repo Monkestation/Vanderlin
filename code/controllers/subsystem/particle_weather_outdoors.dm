@@ -33,16 +33,15 @@
 	color = list("#100a18", "#0c0412", "#0f0012")
 	start = 16 HOURS //4:00:00 PM
 
+GLOBAL_LIST_EMPTY(SUNLIGHT_QUEUE_WORK)   /* turfs to be stateChecked */
+GLOBAL_LIST_EMPTY(SUNLIGHT_QUEUE_UPDATE) /* turfs to have their colors updated via corners (filter out the unroofed dudes) */
+GLOBAL_LIST_EMPTY(SUNLIGHT_QUEUE_CORNER) /* turfs to have their color/lights/etc updated */
+
 SUBSYSTEM_DEF(outdoor_effects)
 	name = "Outdoor Weather Calc"
 	wait = LIGHTING_INTERVAL
 	flags = SS_TICKER
 	init_order = INIT_ORDER_OUTDOOR_EFFECTS
-
-	var/static/list/queue_work = list()
-	var/static/list/queue_update = list()
-	var/static/list/queue_corner = list()
-
 	var/list/atom/movable/screen/plane_master/weather_effect/weather_planes_need_vis = list()
 
 	var/list/atom/movable/screen/fullscreen/lighting_backdrop/sunlight/sunlighting_planes = list()
@@ -80,22 +79,18 @@ SUBSYSTEM_DEF(outdoor_effects)
 	..()
 
 /datum/controller/subsystem/outdoor_effects/stat_entry(msg)
-	msg = "W:[length(queue_work)]|U:[length(queue_update)]|C:[length(queue_corner)]"
+	msg = "W:[length(GLOB.SUNLIGHT_QUEUE_WORK)]|U:[length(GLOB.SUNLIGHT_QUEUE_UPDATE)]|C:[length(GLOB.SUNLIGHT_QUEUE_CORNER)]"
 	return ..()
 
 /datum/controller/subsystem/outdoor_effects/proc/InitializeTurfs(list/targets)
-	for(var/z in (SSmapping.levels_by_trait(ZTRAIT_STATION) + SSmapping.levels_by_trait(ZTRAIT_CENTCOM)))
+	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
 		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
 			continue
-		queue_work += Z_TURFS(z)
-
-/datum/controller/subsystem/outdoor_effects/proc/queue_turf_corners(turf/queued)
-	if(queued.turf_flags & TURF_SUNLIGHT_QUEUED)
-		return
-
-	queued.turf_flags |= TURF_SUNLIGHT_QUEUED
-
-	queue_corner |= queued
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
+	for(var/z in SSmapping.levels_by_trait(ZTRAIT_CENTCOM))
+		if(SSmapping.level_trait(z, ZTRAIT_IGNORE_WEATHER_TRAIT))
+			continue
+		GLOB.SUNLIGHT_QUEUE_WORK += Z_TURFS(z)
 
 /datum/controller/subsystem/outdoor_effects/proc/check_cycle()
 	if(!next_step_datum)
@@ -164,8 +159,8 @@ SUBSYSTEM_DEF(outdoor_effects)
 			weather_planes_need_vis.Cut(1, i+1)
 			i = 0
 
-	for(i in 1 to length(queue_work))
-		var/turf/T = queue_work[i]
+	for(i in 1 to length(GLOB.SUNLIGHT_QUEUE_WORK))
+		var/turf/T = GLOB.SUNLIGHT_QUEUE_WORK[i]
 		if(T)
 			T.update_sky_and_weather_states()
 			if(T.outdoor_effect)
@@ -173,21 +168,21 @@ SUBSYSTEM_DEF(outdoor_effects)
 				// but that doesn't seem to cause much of a performance impact in my testing
 				// if that changes, use |= instead of +=, and if that's still too slow
 				// then add a flag on outdoor_effect to prevent duplicate queueing
-				queue_update += T.outdoor_effect
+				GLOB.SUNLIGHT_QUEUE_UPDATE += T.outdoor_effect
 
 		if(init_tick_checks)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
 			break
 	if(i)
-		queue_work.Cut(1, i+1)
+		GLOB.SUNLIGHT_QUEUE_WORK.Cut(1, i+1)
 		i = 0
 
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 
-	for (i in 1 to length(queue_update))
-		var/atom/movable/outdoor_effect/U = queue_update[i]
+	for (i in 1 to length(GLOB.SUNLIGHT_QUEUE_UPDATE))
+		var/atom/movable/outdoor_effect/U = GLOB.SUNLIGHT_QUEUE_UPDATE[i]
 		if(U)
 			U.process_state()
 			update_outdoor_effect_overlays(U)
@@ -197,7 +192,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 		else if (MC_TICK_CHECK)
 			break
 	if (i)
-		queue_update.Cut(1, i+1)
+		GLOB.SUNLIGHT_QUEUE_UPDATE.Cut(1, i+1)
 		i = 0
 
 
@@ -205,8 +200,8 @@ SUBSYSTEM_DEF(outdoor_effects)
 		MC_SPLIT_TICK
 
 	// this list can get REALLY LONG so we do this to avoid list copies
-	for (i in 1 to length(queue_corner))
-		var/turf/T = queue_corner[i]
+	for (i in 1 to length(GLOB.SUNLIGHT_QUEUE_CORNER))
+		var/turf/T = GLOB.SUNLIGHT_QUEUE_CORNER[i]
 		T.turf_flags &= ~TURF_SUNLIGHT_QUEUED
 		var/atom/movable/outdoor_effect/U = T.outdoor_effect
 
@@ -218,7 +213,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 
 			/* in case we aren't indoor somehow, wack us into the proc queue, we will be skipped on next indoor check */
 			if(U.state != SKY_BLOCKED)
-				queue_update += U // no need for |= because we just made U
+				GLOB.SUNLIGHT_QUEUE_UPDATE += U // no need for |= because we just made U
 
 		if(U.state != SKY_BLOCKED)
 			continue
@@ -232,7 +227,7 @@ SUBSYSTEM_DEF(outdoor_effects)
 			break
 
 	if (i)
-		queue_corner.Cut(1, i+1)
+		GLOB.SUNLIGHT_QUEUE_CORNER.Cut(1, i+1)
 		i = 0
 
 	if(check_cycle())
@@ -256,17 +251,19 @@ SUBSYSTEM_DEF(outdoor_effects)
 		/* check if we are globally affected or not */
 		var/static/datum/lighting_corner/dummy/dummy_lighting_corner = new
 
-		var/turf/affected_turf = OE.source_turf
+		var/list/corners = OE.source_turf.corners
+		if(!length(corners))
+			OE.source_turf.generate_missing_corners()
+			corners = OE.source_turf.corners
+		var/datum/lighting_corner/cr = corners[3] || dummy_lighting_corner
+		var/datum/lighting_corner/cg = corners[2] || dummy_lighting_corner
+		var/datum/lighting_corner/cb = corners[4] || dummy_lighting_corner
+		var/datum/lighting_corner/ca = corners[1] || dummy_lighting_corner
 
-		var/datum/lighting_corner/red_corner = affected_turf.lighting_corner_SW || dummy_lighting_corner
-		var/datum/lighting_corner/green_corner = affected_turf.lighting_corner_SE || dummy_lighting_corner
-		var/datum/lighting_corner/blue_corner = affected_turf.lighting_corner_NW || dummy_lighting_corner
-		var/datum/lighting_corner/alpha_corner = affected_turf.lighting_corner_NE || dummy_lighting_corner
-
-		var/fr = red_corner.sunFalloff
-		var/fg = green_corner.sunFalloff
-		var/fb = blue_corner.sunFalloff
-		var/fa = alpha_corner.sunFalloff
+		var/fr = cr.sunFalloff
+		var/fg = cg.sunFalloff
+		var/fb = cb.sunFalloff
+		var/fa = ca.sunFalloff
 
 		MA = get_sunlight_overlay(fr, fg, fb, fa)
 

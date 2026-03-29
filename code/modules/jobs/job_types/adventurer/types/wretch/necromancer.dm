@@ -32,7 +32,6 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
-		TRAIT_INHUMENCAMP,
 		TRAIT_GRAVEROBBER,
 		TRAIT_DEADNOSE
 	)
@@ -54,8 +53,6 @@
 	spawned.mana_pool?.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_SOULS)
 	spawned.mana_pool?.ethereal_recharge_rate += 0.1
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/necromancer
 	name = "Necromancer (Wretch)"

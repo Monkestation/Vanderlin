@@ -1,22 +1,18 @@
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 1
+	wait = 0
+
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
 	priority = FIRE_PRIORITY_DEFAULT
-	processing_flag = PROCESSING_LIGHTING
-
 	var/static/list/sources_queue = list() // List of lighting sources queued for update.
 	var/static/list/corners_queue = list() // List of lighting corners queued for update.
 	var/static/list/objects_queue = list() // List of lighting objects queued for update.
-
-#ifdef VISUALIZE_LIGHT_UPDATES
-	var/allow_duped_values = FALSE
-	var/allow_duped_corners = FALSE
-#endif
+	processing_flag = PROCESSING_LIGHTING
 
 /datum/controller/subsystem/lighting/stat_entry()
 	..("L:[length(sources_queue)]|C:[length(corners_queue)]|O:[length(objects_queue)]")
+
 
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	#ifdef ABSOLUTE_MINIMUM_MODE
@@ -58,9 +54,8 @@ SUBSYSTEM_DEF(lighting)
 	for (i in 1 to length(queue))
 		var/datum/lighting_corner/C = queue[i]
 
-		C.needs_update = FALSE
 		C.update_objects()
-
+		C.needs_update = FALSE
 		if(init_tick_checks)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
@@ -95,11 +90,11 @@ SUBSYSTEM_DEF(lighting)
 	..()
 
 /datum/controller/subsystem/lighting/proc/create_all_lighting_objects()
-	for(var/area/dynamic_area as anything in GLOB.areas)
+	for(var/area/dynamic_area in GLOB.areas)
 		if(!IS_DYNAMIC_LIGHTING(dynamic_area))
 			continue
-		for(var/list/zlevel_turfs as anything in dynamic_area.get_zlevel_turf_lists())
-			for(var/turf/area_turf as anything in zlevel_turfs)
-				new /atom/movable/lighting_object(area_turf)
+		for(var/turf/contained_turf in dynamic_area.get_turfs_from_all_zlevels())
+			if(!IS_DYNAMIC_LIGHTING(contained_turf))
+				continue
+			new/atom/movable/lighting_object(contained_turf)
 			CHECK_TICK
-		CHECK_TICK

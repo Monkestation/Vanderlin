@@ -15,7 +15,7 @@
 	set_movement_target(turf_to_break)
 	RegisterSignal(turf_to_break, COMSIG_CANCEL_TURF_BREAK, PROC_REF(stop_work))
 
-/datum/work_order/break_turf/Destroy(force, ...)
+/datum/work_order/break_turf/Destroy(force)
 	. = ..()
 	if(breaking_turf)
 		UnregisterSignal(breaking_turf, COMSIG_CANCEL_TURF_BREAK)

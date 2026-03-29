@@ -47,7 +47,6 @@
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_INHUMENCAMP
 	)
 
 	spells = list(
@@ -58,7 +57,6 @@
 	. = ..()
 	if(prob(1))
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"

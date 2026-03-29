@@ -42,7 +42,7 @@
 	hearing_contents = dummy_list
 	client_contents = dummy_list
 
-/datum/spatial_grid_cell/Destroy(force, ...)
+/datum/spatial_grid_cell/Destroy(force)
 	if(force)//the response to someone trying to qdel this is a right proper fuck you
 		stack_trace("dont try to destroy spatial grid cells without a good reason. if you need to do it use force")
 		return
