@@ -2036,6 +2036,10 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
+"aiT" = (
+/obj/item/natural/rock/gemerald,
+/turf/open/water/clean,
+/area/under/mountains/anvil/lower)
 "aiV" = (
 /obj/structure/fake_machine/scomm/r,
 /obj/structure/fluff/walldeco/church/line,
@@ -4805,6 +4809,7 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "avl" = (
+/turf/open/water/clean/dirt,
 /area/indoors/town/church/inquisition)
 "avm" = (
 /obj/structure/winch{
@@ -6605,6 +6610,7 @@
 /area/indoors/town/church/inquisition)
 "aCU" = (
 /obj/structure/kneestingers,
+/turf/open/water/clean/dirt,
 /area/indoors/town/church/inquisition)
 "aCX" = (
 /obj/structure/table/wood/large/corner_new{
@@ -55782,8 +55788,8 @@ ali
 ali
 aKK
 aKK
-fLc
-fLc
+apF
+apF
 aKK
 aKK
 aKK
@@ -55984,13 +55990,13 @@ ali
 aKK
 aKK
 aKK
-fLc
-aGU
-fLc
-fLc
+apF
+aiT
+apF
+apF
 aKK
-fLc
-fLc
+apF
+apF
 aKK
 aKK
 ali
@@ -56156,7 +56162,7 @@ aKK
 ali
 aKK
 aZk
-fLc
+apF
 aKK
 aKK
 aZk
@@ -56188,11 +56194,11 @@ aKK
 aKK
 aKK
 aZk
-fLc
-fLc
-fLc
-fLc
-fLc
+apF
+apF
+apF
+apF
+apF
 aKK
 aKK
 ali
@@ -56358,10 +56364,10 @@ aKK
 ali
 aKK
 aKK
-fLc
-aGU
-fLc
-fLc
+apF
+aiT
+apF
+apF
 aKK
 aKK
 aKK
@@ -56391,9 +56397,9 @@ aKK
 aKK
 aKK
 aKK
-fLc
-aGU
-fLc
+apF
+aiT
+apF
 aKK
 aKK
 aKK
@@ -56562,12 +56568,12 @@ ali
 aKK
 aKK
 aKK
-fLc
-fLc
-fLc
+apF
+apF
+apF
 aKK
 aKK
-fLc
+apF
 aKK
 aKK
 aKK
@@ -56764,12 +56770,12 @@ ali
 ali
 aKK
 aKK
-fLc
-fLc
-fLc
+apF
+apF
+apF
 aKK
-fLc
-aGU
+apF
+aiT
 aKK
 aKK
 ali
@@ -56967,10 +56973,10 @@ ali
 aKK
 aKK
 aKK
-fLc
-fLc
-fLc
-fLc
+apF
+apF
+apF
+apF
 aKK
 aKK
 aKK
@@ -57170,8 +57176,8 @@ aNm
 aKK
 aKK
 aKK
-fLc
-fLc
+apF
+apF
 aKK
 aKK
 aKK
@@ -57372,7 +57378,7 @@ ako
 aKK
 aKK
 aKK
-aGU
+aiT
 aKK
 aKK
 aKK
@@ -57574,7 +57580,7 @@ aJv
 ali
 aKK
 aKK
-fLc
+apF
 aKK
 aKK
 ali
@@ -57749,7 +57755,7 @@ ali
 ali
 aKK
 aKK
-fLc
+apF
 aKK
 aKK
 ali
@@ -57951,7 +57957,7 @@ ali
 aKK
 aKK
 aKK
-fLc
+apF
 aKK
 aKK
 ali
@@ -58153,7 +58159,7 @@ ali
 aKK
 aKK
 aKK
-fLc
+apF
 aZk
 aKK
 aKK
@@ -58353,11 +58359,11 @@ aZR
 ali
 aKK
 aKK
-fLc
-fLc
-fLc
-fLc
-aGU
+apF
+apF
+apF
+apF
+aiT
 aKK
 aKK
 aKK
@@ -58556,11 +58562,11 @@ ali
 aKK
 aKK
 aZk
-aGU
-fLc
-fLc
-fLc
-fLc
+aiT
+apF
+apF
+apF
+apF
 aKK
 aKK
 ali
@@ -58760,9 +58766,9 @@ aKK
 aKK
 aKK
 aKK
-fLc
-fLc
-fLc
+apF
+apF
+apF
 aZk
 aKK
 ali
@@ -58963,9 +58969,9 @@ aKK
 aKK
 aKK
 aKK
-fLc
-fLc
-fLc
+apF
+apF
+apF
 aKK
 aKK
 ali
@@ -59165,9 +59171,9 @@ ali
 ali
 aKK
 aZk
-fLc
-fLc
-fLc
+apF
+apF
+apF
 aKK
 aKK
 ali
@@ -59367,9 +59373,9 @@ ali
 ali
 aKK
 aKK
-fLc
-aGU
-fLc
+apF
+aiT
+apF
 aKK
 aKK
 ali
@@ -59570,8 +59576,8 @@ ali
 ali
 aKK
 aKK
-fLc
-fLc
+apF
+apF
 aKK
 aKK
 ali
