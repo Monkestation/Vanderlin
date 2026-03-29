@@ -653,6 +653,18 @@
 	created_item = (/obj/item/clothing/head/helmet/visored/hounskull)
 	craftdiff = 4
 
+/datum/anvil_recipe/armor/steel/barding
+	name = "Saiga Barding, Chainmail (+1 Steel)"
+	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/chain
+
+/datum/anvil_recipe/armor/steel/barding/honse
+	name = "Honse Barding, Chainmail (+1 Steel)"
+	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/honse/chain
+
 /*
 /datum/anvil_recipe/armor/steel/warden_helm
 	name = "Warden Helmet (+Bar)"
