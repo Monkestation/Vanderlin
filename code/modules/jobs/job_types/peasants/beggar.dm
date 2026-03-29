@@ -5,15 +5,11 @@
 		/datum/attribute/skill/misc/lockpicking = list(10, 40),
 		/datum/attribute/skill/combat/wrestling = list(10, 20),
 		/datum/attribute/skill/combat/unarmed = list(10, 20),
-		/datum/attribute/skill/combat/swords = list(10, 20),
-		/datum/attribute/skill/combat/axesmaces = list(10, 20),
 		/datum/attribute/skill/craft/alchemy = list(10, 20),
 	)
 	raw_attribute_list = list(
-		STAT_FORTUNE = 3, //You live a blessed existence
-		/datum/attribute/skill/misc/climbing = 50,
-		/datum/attribute/skill/labor/farming = 20,
-		/datum/attribute/skill/craft/cooking = 10,
+		STAT_FORTUNE = 5, //You live a blessed existence
+		/datum/attribute/skill/misc/climbing = 50
 	)
 
 /datum/job/vagrant
@@ -26,8 +22,8 @@
 	display_order = JDO_VAGRANT
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 10
+	spawn_positions = 10
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 
@@ -36,9 +32,9 @@
 	outfit = /datum/outfit/vagrant
 	can_random = FALSE
 	can_have_apprentices = FALSE
-	can_be_apprentice = FALSE
+	can_be_apprentice = TRUE
 
-	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/vagrant
 
@@ -66,7 +62,23 @@
 
 /datum/outfit/vagrant/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	head = /obj/item/clothing/head/roguehood/sundweller
-	armor = /obj/item/clothing/shirt/robe/colored/sundweller
-	belt = /obj/item/storage/belt/leather/rope
-	shoes = /obj/item/clothing/shoes/sandals
+	if(prob(20))
+		head = /obj/item/clothing/head/knitcap
+	if(prob(5))
+		beltr = /obj/item/reagent_containers/powder/moondust
+	if(prob(10))
+		beltl = /obj/item/clothing/face/cigarette/rollie/cannabis
+	if(prob(10))
+		cloak = /obj/item/clothing/cloak/raincloak/colored/brown
+	if(prob(10))
+		gloves = /obj/item/clothing/gloves/fingerless
+	if(prob(5))
+		r_hand = /obj/item/weapon/mace/woodclub
+
+	if(H.gender == FEMALE)
+		armor = /obj/item/clothing/shirt/rags
+	else
+		pants = /obj/item/clothing/pants/tights/colored/vagrant
+		shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
+
+	neck = /obj/item/storage/belt/pouch
