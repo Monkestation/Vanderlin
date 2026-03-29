@@ -384,7 +384,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				ACCENT_ZALAD,
 				ACCENT_HALFLING,
 				ACCENT_KOBOLD,
-				ACCENT_ROUSMAN
+				ACCENT_ROUSMAN,
+				ACCENT_WINTERMARE,
+				ACCENT_OSSLAND,
 			)
 
 			///This will only trigger for donators
