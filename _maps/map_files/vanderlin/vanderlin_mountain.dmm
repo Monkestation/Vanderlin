@@ -1556,7 +1556,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "agn" = (
 /obj/effect/decal/borderfall,
-/turf/open/water/sewer,
+/turf/open/water/bath,
 /area/indoors/mountains/anvil/upperkeep)
 "ago" = (
 /obj/structure/closet/crate/drawer,
@@ -8852,7 +8852,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aNe" = (
-/turf/open/water/sewer,
+/turf/open/water/bath,
 /area/indoors/mountains/anvil/upperkeep)
 "aNf" = (
 /obj/structure/table/wood/reinforced_alter,
@@ -9130,7 +9130,7 @@
 /obj/effect/decal/borderfall{
 	dir = 8
 	},
-/turf/open/water/sewer,
+/turf/open/water/bath,
 /area/indoors/mountains/anvil/upperkeep)
 "aOH" = (
 /obj/effect/decal/cleanable/sigil/NW,
@@ -11615,7 +11615,7 @@
 /obj/effect/decal/borderfall{
 	dir = 1
 	},
-/turf/open/water/sewer,
+/turf/open/water/bath,
 /area/indoors/mountains/anvil/upperkeep)
 "aZJ" = (
 /obj/item/organ/eyes,
@@ -11718,7 +11718,7 @@
 "bgW" = (
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "bkZ" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11763,7 +11763,7 @@
 "bEc" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "bFr" = (
 /obj/structure/fluff/psycross/zizocross,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -11848,7 +11848,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "cbh" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -11980,7 +11980,7 @@
 "cPl" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "cRN" = (
 /mob/living/simple_animal/hostile/orc/ranged,
 /turf/open/floor/cobblerock,
@@ -12058,7 +12058,7 @@
 	name = "Malum's Vault Key"
 	},
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "dzQ" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -12127,7 +12127,7 @@
 	pixel_x = -15
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "dYb" = (
 /obj/machinery/light/fueled/firebowl/church,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -12192,7 +12192,7 @@
 "etV" = (
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "euN" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/tile/masonic,
@@ -12342,7 +12342,7 @@
 "fGF" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "fIA" = (
 /obj/structure/table/stone_small,
 /obj/item/dmusicbox{
@@ -12402,7 +12402,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "gds" = (
 /obj/structure/chair/bench/throne/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -12439,7 +12439,7 @@
 "gBd" = (
 /obj/item/bin/water,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "gBm" = (
 /obj/structure/fluff/railing/tall/stone,
 /obj/structure/fluff/railing/tall/stone{
@@ -12470,6 +12470,9 @@
 /area/indoors/mountains/anvil/upperkeep)
 "gEY" = (
 /turf/open/floor/grass/cold,
+/area/outdoors/mountains/anvil/peak)
+"gGU" = (
+/turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
 "gJg" = (
 /turf/open/floor/carpet/lord/corrner_inner{
@@ -12530,7 +12533,7 @@
 	dir = 4
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "hjM" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/debris/stone,
@@ -12640,6 +12643,10 @@
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"hFh" = (
+/mob/living/carbon/human/species/zizombie/npc/warrior,
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/peak)
 "hGe" = (
 /obj/item/clothing/shirt/dress/gown/wintergown{
 	pixel_x = -1;
@@ -12681,7 +12688,7 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/cobblerock,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "hPZ" = (
 /obj/structure/table/stone_small,
 /obj/structure/fluff/railing/tall/stone{
@@ -12733,7 +12740,7 @@
 "hUC" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "hYF" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -12778,7 +12785,7 @@
 /obj/item/ore/coal,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "ijP" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10
@@ -12811,12 +12818,12 @@
 /obj/structure/closet/dirthole/grave,
 /obj/structure/gravemarker,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "iqn" = (
 /obj/structure/closet/dirthole/closed/loot,
 /obj/structure/gravemarker,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "irt" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 4
@@ -12858,6 +12865,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"iEg" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/herringbone,
+/area/outdoors/mountains/anvil/peak)
 "iNA" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/mountains/anvil/peak)
@@ -12868,7 +12879,7 @@
 "iTv" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "jaO" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/ore/coal,
@@ -12877,7 +12888,7 @@
 /obj/item/ore/coal,
 /obj/item/ore/coal,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "jdu" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -12894,7 +12905,7 @@
 "jfO" = (
 /obj/structure/chair/bench/church/smallbench/stone,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "jhf" = (
 /obj/item/ingot/steel_slag,
 /turf/open/floor/plasteel/maniac,
@@ -12930,7 +12941,7 @@
 "jtg" = (
 /mob/living/carbon/human/species/zizombie/npc/warrior,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "jtC" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "The Great Workshop. Each of the seven clans' workstations should be represented here."
@@ -13042,7 +13053,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "kso" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/carbon/human/species/skeleton/npc/mediumspread,
@@ -13053,7 +13064,7 @@
 	dir = 6
 	},
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "kwV" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/carpet/lord/right{
@@ -13080,10 +13091,14 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"kJv" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/peak)
 "kJE" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "kKN" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
@@ -13093,6 +13108,11 @@
 	dir = 4
 	},
 /area/under/mountains/anvil/lower)
+"kLv" = (
+/obj/machinery/anvil,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/outdoors/mountains/anvil/peak)
 "kMy" = (
 /obj/structure/table/stone_small,
 /obj/structure/carpet/blue,
@@ -13124,7 +13144,7 @@
 "kWn" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/cobblerock,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "kYp" = (
 /obj/item/chair/stool/bar,
 /obj/structure/carpet/blue,
@@ -13152,7 +13172,7 @@
 "lov" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "lpS" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
@@ -13174,11 +13194,11 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "lzB" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "lSz" = (
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/mountains/anvil/peak)
@@ -13186,7 +13206,7 @@
 /obj/item/weapon/shovel,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "lSE" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -13246,11 +13266,11 @@
 "mBR" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "mCh" = (
 /obj/machinery/anvil,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "mGX" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -13275,7 +13295,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "mOb" = (
 /turf/open/floor/grass/cold,
 /area/indoors/mountains/anvil/upperkeep)
@@ -13312,7 +13332,7 @@
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "ngz" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /turf/open/floor/tile/diamond/blue,
@@ -13322,7 +13342,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "nmq" = (
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/tile/masonic/single,
@@ -13369,6 +13389,9 @@
 	},
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"nLy" = (
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/peak)
 "nPy" = (
 /mob/living/simple_animal/hostile/orc/ranged,
 /turf/open/floor/cobble,
@@ -13447,6 +13470,9 @@
 /obj/item/gear/wood/reliable,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"opw" = (
+/turf/open/openspace,
+/area/outdoors/mountains/anvil/peak)
 "otR" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -13547,7 +13573,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "pur" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10
@@ -13569,7 +13595,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "pyl" = (
 /turf/open/water/cleanshallow/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "pCX" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 8
@@ -13627,13 +13653,17 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"pZk" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/herringbone,
+/area/outdoors/mountains/anvil/peak)
 "qgh" = (
 /obj/structure/rack,
 /obj/item/weapon/tongs,
 /obj/item/weapon/hammer/iron,
 /obj/item/flint,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "qgY" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "Blackpowder workshop specifically. This gets to be huge because they're working on cannon."
@@ -13690,7 +13720,7 @@
 "qyG" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "qzF" = (
 /obj/structure/water_pipe,
 /obj/effect/decal/cleanable/dirt,
@@ -13728,7 +13758,7 @@
 /obj/structure/closet/dirthole/closed/loot,
 /obj/structure/gravemarker,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "qGL" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/locker,
@@ -13741,6 +13771,10 @@
 /obj/machinery/essence/reservoir/filled,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"qKT" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock,
+/area/outdoors/mountains/anvil/peak)
 "qMv" = (
 /turf/closed/mineral/random/cold/med,
 /area/outdoors/mountains/anvil/peak)
@@ -13765,11 +13799,11 @@
 "qVH" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/dirt,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "qWE" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "qZc" = (
 /turf/open/water/river/dirt,
 /area/under/mountains/anvil/lower)
@@ -13793,7 +13827,7 @@
 	dir = 6
 	},
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "rhm" = (
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/openspace,
@@ -13864,6 +13898,10 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/peak)
+"rBQ" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/openspace,
+/area/outdoors/mountains/anvil/peak)
 "rIh" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
@@ -13921,7 +13959,7 @@
 /area/under/mountains/anvil/upper)
 "rXg" = (
 /turf/open/water,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "scy" = (
 /obj/effect/waterfall,
 /turf/open/water/river/dirt,
@@ -13946,7 +13984,7 @@
 /obj/item/weapon/tongs,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "ska" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/cobblerock,
@@ -14153,7 +14191,7 @@
 "tBA" = (
 /obj/item/weapon/shovel,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "tFP" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -14206,7 +14244,7 @@
 	dir = 9
 	},
 /turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "ufX" = (
 /obj/structure/chair/bench/church/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -14257,7 +14295,7 @@
 "use" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "utS" = (
 /obj/structure/chair/bench/throne/stone,
 /obj/effect/decal/cleanable/debris/stone,
@@ -14338,14 +14376,11 @@
 "uTS" = (
 /obj/structure/chair/bench/church/smallbench/stone,
 /turf/open/floor/grass/cold,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "vbC" = (
 /obj/projectile/bullet/glass,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
-"vbK" = (
-/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/upperkeep)
 "vca" = (
 /obj/structure/chair/bench/church/r,
@@ -14406,6 +14441,10 @@
 /obj/structure/lootable_structure/grain_barrel,
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"vGk" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/outdoors/mountains/anvil/peak)
 "vHe" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/cobblerock,
@@ -14439,7 +14478,7 @@
 "vPE" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "vRJ" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/tile/masonic{
@@ -14457,12 +14496,17 @@
 "vYt" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "vYw" = (
 /obj/structure/chair/stool/bar,
 /obj/structure/carpet/blue,
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"wbY" = (
+/turf/open/water/river{
+	dir = 8
+	},
+/area/outdoors/mountains/anvil/peak)
 "wkr" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/cobble,
@@ -14518,6 +14562,10 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"wSr" = (
+/obj/item/bin/water,
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/peak)
 "wTO" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 8
@@ -14550,10 +14598,7 @@
 "xkv" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
-"xlH" = (
-/turf/open/floor/plasteel/maniac/damaged,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "xrP" = (
 /obj/structure/chair/bench/church,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -14599,7 +14644,7 @@
 "xGX" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "xIG" = (
 /obj/structure/water_pipe,
 /obj/effect/decal/cleanable/dirt,
@@ -14647,7 +14692,7 @@
 "yim" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 "yjA" = (
 /obj/structure/chair/bench/church/mid,
 /mob/living/carbon/human/species/skeleton/npc/easy,
@@ -14681,7 +14726,7 @@
 /turf/open/floor/plasteel/maniac{
 	dir = 5
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/outdoors/mountains/anvil/peak)
 
 (1,1,1) = {"
 adF
@@ -20239,10 +20284,10 @@ kLp
 kLp
 kLp
 kLp
-kLp
-kLp
-kLp
-kLp
+vwP
+vwP
+vwP
+vwP
 kLp
 kLp
 kLp
@@ -20441,11 +20486,11 @@ kLp
 kLp
 kLp
 kLp
-kLp
+vwP
 aJv
 aJv
-kLp
-kLp
+vwP
+vwP
 kLp
 kLp
 kLp
@@ -20648,8 +20693,8 @@ aJv
 aJv
 aJv
 aJv
-qZc
-kLp
+vwP
+vwP
 kLp
 kLp
 kLp
@@ -30951,16 +30996,16 @@ kLp
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
-qZc
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -31153,17 +31198,17 @@ kLp
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -31355,17 +31400,17 @@ kLp
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -31557,17 +31602,17 @@ kLp
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -31759,17 +31804,17 @@ kLp
 kLp
 kLp
 kLp
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -31956,24 +32001,24 @@ ajy
 ajy
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -32158,24 +32203,24 @@ ajy
 ajy
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -32360,24 +32405,24 @@ ajy
 ajy
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -32562,24 +32607,24 @@ ajy
 ajy
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 kLp
 kLp
 kLp
@@ -32764,23 +32809,23 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 qZc
 kLp
 kLp
@@ -32966,22 +33011,22 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 qZc
 qZc
 kLp
@@ -33168,19 +33213,19 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
+kLp
 qZc
 qZc
 qZc
@@ -33370,10 +33415,10 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+kLp
+kLp
+kLp
 qZc
 qZc
 qZc
@@ -33572,10 +33617,10 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
+kLp
+vwP
+vwP
+vwP
 qZc
 qZc
 qZc
@@ -37208,16 +37253,16 @@ kLp
 kLp
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+vwP
+vwP
+vwP
+vwP
+vwP
+vwP
+vwP
+vwP
+vwP
+vwP
 kLp
 kLp
 ajy
@@ -37410,10 +37455,10 @@ kLp
 kLp
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+vwP
+vwP
+vwP
 qZc
 qZc
 qZc
@@ -37612,10 +37657,10 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
@@ -37814,16 +37859,16 @@ ajy
 qZc
 qZc
 qZc
+qqV
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
 qZc
 qZc
 qZc
@@ -38016,16 +38061,16 @@ ajy
 qZc
 qZc
 qZc
+qqV
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
@@ -38218,16 +38263,16 @@ ajy
 qZc
 qZc
 qZc
+qqV
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
@@ -38420,16 +38465,16 @@ ajy
 qZc
 qZc
 qZc
+qqV
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
+qqV
 qZc
 qZc
 qZc
@@ -38622,10 +38667,10 @@ ajy
 qZc
 qZc
 qZc
-qZc
-qZc
-qZc
-qZc
+qqV
+qqV
+qqV
+qqV
 ajy
 ajy
 ajy
@@ -39234,7 +39279,7 @@ qqV
 ajy
 aJv
 aJv
-aJv
+ajy
 aJv
 aJv
 qqV
@@ -39433,7 +39478,7 @@ qZc
 qqV
 qqV
 qqV
-qqV
+vwP
 ajy
 aJv
 aJv
@@ -39635,9 +39680,9 @@ qZc
 qqV
 qqV
 qqV
-qqV
-ajy
-ajy
+vwP
+aJv
+aJv
 ajy
 aJv
 aJv
@@ -39837,11 +39882,11 @@ qqV
 qqV
 qqV
 qqV
-qqV
-qqV
-qqV
-qqV
-qqV
+vwP
+vwP
+vwP
+vwP
+vwP
 qqV
 qqV
 qZc
@@ -45476,7 +45521,7 @@ qZc
 qZc
 qZc
 qZc
-qqV
+aJv
 ajy
 ajy
 ajy
@@ -45677,8 +45722,8 @@ qZc
 qZc
 qZc
 qZc
-qZc
-qqV
+aJv
+aJv
 ajy
 ajy
 ajy
@@ -45879,7 +45924,7 @@ qZc
 qZc
 qZc
 qZc
-qqV
+aJv
 ajy
 ajy
 ajy
@@ -46080,7 +46125,7 @@ qZc
 qZc
 qZc
 qZc
-qZc
+aJv
 aJv
 ajy
 ajy
@@ -46282,13 +46327,13 @@ qZc
 qZc
 qZc
 qZc
-qZc
+aJv
 aJv
 ajy
 ajy
 ajy
 ajy
-qqV
+aJv
 qqV
 qqV
 qqV
@@ -46484,13 +46529,13 @@ qZc
 qZc
 qqV
 qqV
-qqV
 aJv
 aJv
 aJv
 aJv
-qqV
-qqV
+aJv
+aJv
+aJv
 qqV
 qqV
 qqV
@@ -46687,11 +46732,11 @@ qqV
 qqV
 qqV
 qqV
-qqV
-qqV
-qqV
-qqV
-qqV
+aJv
+aJv
+aJv
+aJv
+aJv
 qqV
 qqV
 qqV
@@ -112253,13 +112298,13 @@ aHu
 "}
 (84,1,3) = {"
 aHu
-aaj
-igJ
-igJ
+lSz
+wbY
+wbY
 pyl
-vbK
-vbK
-vbK
+bUa
+bUa
+bUa
 aYR
 aYR
 awz
@@ -112455,13 +112500,13 @@ aHu
 "}
 (85,1,3) = {"
 rXg
-aaj
-igJ
+lSz
+wbY
 rXg
 pyl
-vbK
-mOb
-mOb
+bUa
+gEY
+gEY
 mOb
 aYR
 aYR
@@ -112661,10 +112706,10 @@ rXg
 rXg
 rXg
 pyl
-mOb
-mOb
+gEY
+gEY
 bgW
-mOb
+gEY
 qVH
 aYR
 aYR
@@ -112863,13 +112908,13 @@ rXg
 rXg
 rXg
 pyl
-mOb
-mOb
-mOb
-vbK
-vbK
-mOb
-vbK
+gEY
+gEY
+gEY
+bUa
+bUa
+gEY
+bUa
 aYR
 aYR
 awz
@@ -113065,13 +113110,13 @@ rXg
 rXg
 rXg
 pyl
-mOb
+gEY
 lzB
-vbK
+bUa
 qDI
-vbK
-vbK
-mOb
+bUa
+bUa
+gEY
 use
 aYR
 aYR
@@ -113268,15 +113313,15 @@ rXg
 rXg
 pyl
 pyl
-vbK
-vbK
-mOb
-vbK
+bUa
+bUa
+gEY
+bUa
 jfO
 iqn
-vbK
+bUa
 jfO
-vbK
+bUa
 aYR
 aYR
 aYR
@@ -113470,21 +113515,21 @@ rXg
 rXg
 rXg
 pyl
-vbK
-vbK
-mOb
-vbK
-mOb
-mOb
-mOb
-vbK
-vbK
+bUa
+bUa
+gEY
+bUa
+gEY
+gEY
+gEY
+bUa
+bUa
 vYt
-aFt
+nLy
 gBd
 ykO
 yim
-ayj
+gGU
 pub
 gBd
 aYR
@@ -113672,23 +113717,23 @@ rXg
 rXg
 rXg
 pyl
-vbK
-mOb
-mOb
-vbK
+bUa
+gEY
+gEY
+bUa
 uTS
 qWE
-mOb
+gEY
 jfO
-vbK
-aJq
-aFt
-ayj
+bUa
+qKT
+nLy
+gGU
 pub
-ayj
-ayj
+gGU
+gGU
 pub
-ayj
+gGU
 aYR
 aNW
 aYR
@@ -113875,24 +113920,24 @@ rXg
 rXg
 pyl
 pyl
-mOb
+gEY
 inj
-vbK
-mOb
-mOb
-mOb
-vbK
-vbK
-aJq
-are
+bUa
+gEY
+gEY
+gEY
+bUa
+bUa
+qKT
+hFh
 mCh
-xlH
+ciT
 qgh
 qgh
 pub
-aho
-jpr
-aWg
+vGk
+kLv
+iEg
 gBd
 aYR
 awz
@@ -114077,23 +114122,23 @@ rXg
 rXg
 rXg
 pyl
-mOb
-vbK
-vbK
+gEY
+bUa
+bUa
 jfO
 lzB
-mOb
+gEY
 jfO
-mOb
-aJq
-aFt
-aFt
-xlH
+gEY
+qKT
+nLy
+nLy
+ciT
 ihw
-aFt
+nLy
 pub
-aZx
-aho
+kJv
+vGk
 pub
 kpO
 aYR
@@ -114279,22 +114324,22 @@ rXg
 rXg
 rXg
 pyl
-mOb
-mOb
-vbK
-vbK
-mOb
+gEY
+gEY
+bUa
+bUa
+gEY
 etV
-vbK
-mOb
-arv
-arE
-aFt
-xlH
-aZx
-aFt
+bUa
+gEY
+opw
+mUs
+nLy
+ciT
+kJv
+nLy
 pub
-aZx
+kJv
 shK
 pub
 yim
@@ -114481,24 +114526,24 @@ rXg
 rXg
 rXg
 pyl
-vbK
+bUa
 qWE
-vbK
+bUa
 uTS
-mOb
-mOb
+gEY
+gEY
 jfO
-mOb
-arv
-arv
-arv
-xlH
-aZx
-arv
+gEY
+opw
+opw
+opw
+ciT
+kJv
+opw
 pub
-aFt
-aJq
-aJq
+nLy
+qKT
+qKT
 jaO
 aYR
 aYR
@@ -114683,24 +114728,24 @@ rXg
 rXg
 rXg
 pyl
-vbK
-mOb
-vbK
-mOb
-mOb
+bUa
+gEY
+bUa
+gEY
+gEY
 lov
-mOb
-mOb
+gEY
+gEY
 iTv
-aJq
-arv
-xlH
-aZx
-arv
-arv
-arv
-aJq
-aJq
+qKT
+opw
+ciT
+kJv
+opw
+opw
+opw
+qKT
+qKT
 jaO
 kpO
 qgh
@@ -114886,26 +114931,26 @@ rXg
 rXg
 pyl
 vYt
-aFt
-arE
-aFt
-aFt
-arE
-arE
+nLy
+mUs
+nLy
+nLy
+mUs
+mUs
 vYt
-aFt
+nLy
 hMQ
-aFt
+nLy
 pub
-arv
-arv
+opw
+opw
 pub
-arv
-aFt
-xlH
-aFt
+opw
+nLy
+ciT
+nLy
 pub
-ayj
+gGU
 aWg
 aJq
 aJq
@@ -115087,20 +115132,20 @@ rXg
 rXg
 rXg
 pyl
-ayj
-ayj
-aJq
-aho
+gGU
+gGU
+qKT
+vGk
 lSB
-arE
+mUs
 kWn
-ayj
-aFt
-aFt
+gGU
+nLy
+nLy
 xkv
 pub
-arv
-arv
+opw
+opw
 pub
 cPl
 cPl
@@ -115290,16 +115335,16 @@ rXg
 rXg
 pyl
 dWT
-aFt
-aFt
-aFt
-aFt
-aZx
-aho
-aho
+nLy
+nLy
+nLy
+nLy
+kJv
+vGk
+vGk
 dwl
-aFt
-ayj
+nLy
+gGU
 pub
 pub
 lyD
@@ -115309,7 +115354,7 @@ kJE
 kwi
 bWR
 bWR
-aho
+vGk
 afv
 wFu
 aCO
@@ -115491,14 +115536,14 @@ rXg
 rXg
 rXg
 pyl
-ayj
-aZx
-aJq
-arE
-ayj
-aho
-aho
-aho
+gGU
+kJv
+qKT
+mUs
+gGU
+vGk
+vGk
+vGk
 vPE
 vPE
 cPl
@@ -115507,11 +115552,11 @@ vPE
 vPE
 pub
 hja
-ayj
+gGU
 pub
-arv
-arv
-aho
+opw
+opw
+vGk
 hsL
 sQE
 pQi
@@ -115694,12 +115739,12 @@ rXg
 rXg
 pyl
 vYt
-aZx
-aZx
-aFt
-arE
+kJv
+kJv
+nLy
+mUs
 kWn
-aFt
+nLy
 vYt
 iTv
 neX
@@ -115709,11 +115754,11 @@ xGX
 xGX
 xGX
 rgB
-aZx
-arv
-arv
-arv
-ayj
+kJv
+opw
+opw
+opw
+gGU
 ayR
 ayj
 ayj
@@ -115895,25 +115940,25 @@ rXg
 rXg
 rXg
 pyl
-vbK
-mOb
-vbK
-mOb
-vbK
-mOb
-mOb
-vbK
-aFt
-aJq
-aJq
-xlH
-aFt
-aFt
-xlH
-aJq
-aJq
-aJq
-aSF
+bUa
+gEY
+bUa
+gEY
+bUa
+gEY
+gEY
+bUa
+nLy
+qKT
+qKT
+ciT
+nLy
+nLy
+ciT
+qKT
+qKT
+qKT
+wSr
 mBR
 mCh
 aNW
@@ -116097,24 +116142,24 @@ rXg
 rXg
 rXg
 pyl
-vbK
-mOb
-vbK
+bUa
+gEY
+bUa
 uTS
-vbK
-vbK
+bUa
+bUa
 uTS
-vbK
-aFt
-arE
-arE
+bUa
+nLy
+mUs
+mUs
 qyG
-aZx
+kJv
 iTv
 qyG
-arE
-arE
-arE
+mUs
+mUs
+mUs
 jaO
 aYR
 aYR
@@ -116299,22 +116344,22 @@ rXg
 rXg
 rXg
 pyl
-mOb
-mOb
-mOb
-mOb
-vbK
-vbK
-mOb
-vbK
-aFt
-aJq
-aJq
+gEY
+gEY
+gEY
+gEY
+bUa
+bUa
+gEY
+bUa
+nLy
+qKT
+qKT
 qyG
-aZx
-aFt
-xlH
-aFt
+kJv
+nLy
+ciT
+nLy
 qgh
 pub
 yim
@@ -116502,22 +116547,22 @@ rXg
 rXg
 pyl
 lzB
-mOb
-mOb
+gEY
+gEY
 uTS
 qWE
-mOb
+gEY
 uTS
-vbK
+bUa
 tBA
-aZx
-aZx
-xlH
-arv
+kJv
+kJv
+ciT
+opw
 jaO
 pub
-aFt
-ayj
+nLy
+gGU
 pub
 kpO
 aYR
@@ -116703,24 +116748,24 @@ rXg
 rXg
 pyl
 pyl
-vbK
-vbK
-mOb
-mOb
-mOb
-mOb
-vbK
-vbK
-aFt
-aZx
+bUa
+bUa
+gEY
+gEY
+gEY
+gEY
+bUa
+bUa
+nLy
+kJv
 mCh
-arv
-arv
+opw
+opw
 qgh
 pub
 mCh
 mCh
-ayR
+pZk
 gBd
 aYR
 awz
@@ -116904,23 +116949,23 @@ rXg
 rXg
 rXg
 pyl
-vbK
-vbK
+bUa
+bUa
 fGF
-mOb
+gEY
 uTS
-mOb
+gEY
 lzB
 jfO
-vbK
-aFt
-aZx
-arv
-arv
-arv
-ayj
+bUa
+nLy
+kJv
+opw
+opw
+opw
+gGU
 pub
-ayj
+gGU
 aYR
 aNW
 aYR
@@ -117106,20 +117151,20 @@ rXg
 rXg
 rXg
 pyl
-vbK
-mOb
-mOb
-vbK
-mOb
-vbK
-vbK
-vbK
-vbK
+bUa
+gEY
+gEY
+bUa
+gEY
+bUa
+bUa
+bUa
+bUa
 vYt
-aFt
+nLy
 gBd
-avH
-ayj
+rBQ
+gGU
 yim
 gcw
 gBd
@@ -117308,13 +117353,13 @@ rXg
 rXg
 pyl
 pyl
-vbK
-mOb
-mOb
-vbK
+bUa
+gEY
+gEY
+bUa
 uTS
-vbK
-mOb
+bUa
+gEY
 jfO
 bEc
 aYR
@@ -117509,16 +117554,16 @@ rXg
 rXg
 rXg
 pyl
-vbK
-vbK
+bUa
+bUa
 qDI
-mOb
-mOb
-mOb
-vbK
-mOb
-vbK
-vbK
+gEY
+gEY
+gEY
+bUa
+gEY
+bUa
+bUa
 aYR
 awz
 awz
@@ -117711,15 +117756,15 @@ rXg
 rXg
 rXg
 pyl
-mOb
-vbK
-mOb
-mOb
-mOb
+gEY
+bUa
+gEY
+gEY
+gEY
 qDI
-vbK
-mOb
-vbK
+bUa
+gEY
+bUa
 aYR
 aYR
 awz
@@ -117913,13 +117958,13 @@ rXg
 rXg
 pyl
 pyl
-mOb
-vbK
-mOb
-vbK
-mOb
-mOb
-vbK
+gEY
+bUa
+gEY
+bUa
+gEY
+gEY
+bUa
 qVH
 aYR
 aYR
@@ -118114,14 +118159,14 @@ rXg
 rXg
 pyl
 pyl
-vbK
-mOb
-vbK
+bUa
+gEY
+bUa
 jtg
-vbK
-vbK
-vbK
-vbK
+bUa
+bUa
+bUa
+bUa
 aYR
 aYR
 awz
@@ -118315,14 +118360,14 @@ aHu
 rXg
 pyl
 pyl
-vbK
-vbK
-mOb
-mOb
-vbK
-vbK
-vbK
-vbK
+bUa
+bUa
+gEY
+gEY
+bUa
+bUa
+bUa
+bUa
 aYR
 aYR
 awz
@@ -118516,13 +118561,13 @@ aqx
 (115,1,3) = {"
 rXg
 pyl
-vbK
-mOb
-mOb
-mOb
+bUa
+gEY
+gEY
+gEY
 etV
-vbK
-vbK
+bUa
+bUa
 qVH
 aYR
 aYR
@@ -118718,12 +118763,12 @@ aqx
 (116,1,3) = {"
 rXg
 aaj
-vbK
-mOb
-mOb
-vbK
-mOb
-vbK
+bUa
+gEY
+gEY
+bUa
+gEY
+bUa
 aYR
 aYR
 aYR
