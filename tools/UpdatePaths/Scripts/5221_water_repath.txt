@@ -2,4 +2,4 @@
 /turf/open/water/cleanshallow/dirt : /turf/open/water/clean/dirt
 /turf/open/water/swamp/high : /turf/open/water/swamp/deep
 /turf/open/water/marsh/high : /turf/open/water/marsh/deep
-/turf/open/water/ocean/fakedeep : /turf/open/water/ocean/abyss
+/turf/open/water/ocean/deep : /turf/open/water/ocean/abyss
