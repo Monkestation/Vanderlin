@@ -23,7 +23,7 @@
 		list("From Threshing Chaff.", /obj/item/natural/chaff/wheat)
 	)
 
-/obj/item/natural/animalfibers
+/obj/item/natural/fibers/sinew
 	name = "sinew fiber"
 	desc = "Sinew fiber. Made from butchered animals sinew, commonly used by hunters for leatherworking and bowcrafting."
 	icon_state = "fibers"
@@ -38,7 +38,7 @@
 	muteinmouth = TRUE
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
-	bundletype = /obj/item/natural/bundle/animalfibers
+	bundletype = /obj/item/natural/bundle/fibers/sinew
 
 /obj/item/natural/silk
 	name = "silk"
@@ -130,7 +130,7 @@
 	amount = maxamount
 	update_bundle()
 
-/obj/item/natural/bundle/animalfibers
+/obj/item/natural/bundle/fibers/sinew
 	name = "sinew fiber bundle"
 	icon_state = "fibersroll1"
 	desc = "Sinewy fibers, tightly bound together."
@@ -146,7 +146,7 @@
 	muteinmouth = TRUE
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
-	stacktype = /obj/item/natural/animalfibers
+	stacktype = /obj/item/natural/fibers/sinew
 	icon1step = 3
 	icon2step = 6
 

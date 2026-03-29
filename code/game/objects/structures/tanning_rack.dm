@@ -58,7 +58,7 @@
 				if(istype(stored_item, /obj/item/natural/hide))
 					new /obj/item/natural/hide/cured(get_turf(user))
 				else if (istype(stored_item, /obj/item/alch/sinew))
-					new /obj/item/natural/animalfibers(get_turf(user))
+					new /obj/item/natural/fibers/sinew(get_turf(user))
 			QDEL_NULL(stored_item)
 			update_appearance(UPDATE_OVERLAYS)
 			return

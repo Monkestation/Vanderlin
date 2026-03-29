@@ -305,10 +305,10 @@
 	requirements = list(
 		/obj/item/weapon/polearm/woodstaff = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/animalfibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/weapon/polearm/woodstaff
-	starting_atom = /obj/item/natural/animalfibers
+	starting_atom = /obj/item/natural/fibers/sinew
 	output = /obj/item/weapon/polearm/spear/bonespear
 	craftdiff = 2
 
@@ -317,10 +317,10 @@
 	requirements = list(
 		/obj/item/weapon/polearm/spear/bonespear = 1,
 		/obj/item/alch/horn = 1,
-		/obj/item/natural/animalfibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/weapon/polearm/spear/bonespear
-	starting_atom = /obj/item/natural/animalfibers
+	starting_atom = /obj/item/natural/fibers/sinew
 	output = /obj/item/weapon/polearm/spear/trollbonespear
 	craftdiff = 2
 
@@ -329,10 +329,10 @@
 	requirements = list(
 		/obj/item/grown/log/tree/small = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/animalfibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
-	starting_atom= /obj/item/natural/animalfibers
+	starting_atom= /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/axe/boneaxe
 	craftdiff = 2
@@ -342,10 +342,10 @@
 	requirements = list(
 		/obj/item/weapon/axe/boneaxe = 1,
 		/obj/item/alch/horn = 1,
-		/obj/item/natural/animalfibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/weapon/axe/boneaxe
-	starting_atom= /obj/item/natural/animalfibers
+	starting_atom= /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/axe/trollboneaxe
 	craftdiff = 2
@@ -355,7 +355,7 @@
 	requirements = list(
 		/obj/item/alch/bone = 1,
 		/obj/item/grown/log/tree/small = 1,
-		/obj/item/natural/animalfibers =1,
+		/obj/item/natural/fibers/sinew =1,
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/alch/bone
@@ -369,10 +369,10 @@
 	requirements = list(
 		/obj/item/weapon/polearm/spear/bone = 1,
 		/obj/item/alch/horn = 1,
-		/obj/item/natural/animalfibers =1,
+		/obj/item/natural/fibers/sinew =1,
 	)
 	attacked_atom = /obj/item/weapon/polearm/spear/bone
-	starting_atom = /obj/item/natural/animalfibers
+	starting_atom = /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/polearm/spear/trollbone
 	output_amount = 2

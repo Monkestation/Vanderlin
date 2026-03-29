@@ -143,10 +143,10 @@
 /datum/repeatable_crafting_recipe/crafting/bowstring
 	name = "bowstring"
 	requirements = list(
-		/obj/item/natural/animalfibers = 4,
+		/obj/item/natural/fibers/sinew = 4,
 	)
-	attacked_atom = /obj/item/natural/animalfibers
-	starting_atom = /obj/item/natural/animalfibers
+	attacked_atom = /obj/item/natural/fibers/sinew
+	starting_atom = /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/natural/bowstring
 	craftdiff = 2
