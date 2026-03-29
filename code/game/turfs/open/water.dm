@@ -363,8 +363,8 @@
 	if(isliving(gone) && !gone.throwing)
 		var/mob/living/living = gone
 		if(HAS_TRAIT(living, TRAIT_SUBMERGED))
-			if(istype(newloc, /turf/open/water))
-				var/turf/open/water/nextwater = newloc
+			if(istype(new_loc, /turf/open/water))
+				var/turf/open/water/nextwater = new_loc
 				if(nextwater.water_height < WATER_HEIGHT_DEEP)
 					living.RemoveElement(/datum/element/submerged)
 			else
@@ -386,13 +386,13 @@
 			if(swimdir && new_loc) //we're being pushed by water or swimming with the current, easy
 				if(get_dir(src, new_loc) == dir)
 					return
-			if(user.mind && !user.buckled)
-				var/drained = max(15 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming) * 5), 1)
+			if(!living.buckled)
+				var/drained = max(15 - (GET_MOB_SKILL_VALUE_OLD(living, /datum/attribute/skill/misc/swimming) * 5), 1)
 //				drained += (user.checkwornweight()*2)
-				drained += user.get_encumbrance() * 50
-				if(!(water_height == WATER_HEIGHT_FULL ? user.adjust_stamina(drained, "drown") : user.adjust_stamina(drained)))
-					user.Immobilize(30)
-					addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
+				drained += living.get_encumbrance() * 50
+				if(!(water_height == WATER_HEIGHT_FULL ? living.adjust_stamina(drained, "drown") : living.adjust_stamina(drained)))
+					living.Immobilize(30)
+					addtimer(CALLBACK(living, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
 
 /turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
 	..()
