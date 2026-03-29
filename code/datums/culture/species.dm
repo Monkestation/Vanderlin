@@ -82,28 +82,27 @@
 
 /datum/culture/species/half_orc/blackhammer
 	name = "Blackhammer"
-	description = "Known to humens to be mostly around the borders of Grenzelhoft towards the east. These orcs are both a hazard to Grenzelhoftian troops and a helpful nuisance, smashing apart undead on other fronts. Half-orcs from this tribe exist in an uneasy stalemate with Grenzelhoft."
-
+	description = "Known to humens to be mostly around the borders of Grenzelhoft towards the east. These orcs are both a hazard to Grenzelhoftian troops and a helpful nuisance, smashing apart undead on other fronts. Half-orcs from this tribe exist in an uneasy stalemate with Grenzelhoft, and with the Host of Misfortune."
 
 /datum/culture/species/half_orc/skullseeker
 	name = "Skullseeker"
-//osslandic origin tribe. hunters of osslanders?
+	description = "Known to humens as one of the wilder half-orc tribes, originating from Ossland. Many of them follow the Great Hunt common in that land. The most valued trophy is a sapient being's head, ensuring reincarnation into a more powerful form."
 
 /datum/culture/species/half_orc/crescent_fang
 	name = "Crescent Fang"
-	description = "Known to humens to live in the jungle between Grenzelhoft and Zaladin, hating both sides. They are isolationist and rarely engage in trade, preferring instead to take bounties from one of the warring nations to kill members of the other, or take payment to guide travelers across the jungle. They can also be found picking off undead that managed to get stranded in the jungle after Zizo's ascension."
+	description = "Known to humens to live in the jungle between Grenzelhoft and Zaladin, hating both sides. They are isolationist and rarely engage in trade, preferring instead to take bounties from one of the warring nations to kill members of the other, or take payment to guide travelers across the jungle. They can also be found picking off undead that managed to get stranded in the jungle after Zizo's ascension. Don't ask their opinion on the quicksand rakshari."
 
 /datum/culture/species/half_orc/murkwater
- 	name = "Murkwater"
-//venice. floating city inside the inland sea beside wintermare and grenzelhoft
+	name = "Murkwater"
+	description = "Known to humens as an annoyance to both Wintermare and Grenzelhoft, these half-orcs have managed to build a floating city in the waters east of those nations. They have developed a culture of guiding small boats through shallow water using long wooden poles. Rumour has it they take bribes to ferry soldiers behind enemy lines."
 
 /datum/culture/species/half_orc/shatterhorn
- 	name = "Shatterhorn"
-//tribe in northern vanderlin around the base of a twin peak mountain, the top of it is cracked/destroyed. northeast of daftmarsh, way into the bog. the mountains break storms etc and is a landmark. culturally, a very humble group, struggling with then ature of hteir origin. limited hospitality. "you can stay here a couple days but you have to move on". trappers/fishers/hunters by trade. live communally up north, go through the bog gathering things, then sell it or take it back. simple and humble compared to other orc tribes. they struggle with anger issues which is normal for orcs, which is why they keep guests moving along. also usually guides to help people through swamps/bogs in vanderlin. naturally drawn towards mountains, for some reason.
+	name = "Shatterhorn"
+	description = "Known to humens as one of the more civilised half-orc tribes, the Shatterhorn live in northern Vanderlin, at the foot of a twin peak mountain. The top of the mountain is cracked, but it still shelters the half-orcs from storms. Oddly enough, Shatterhorn half-orcs gravitate to mountains. They tend to be humble and act as guides to people traveling through the boggy outlands of the region."
 
 /datum/culture/species/half_orc/spiritcrusher
- 	name = "Spiritcrusher"
-//subterran orc clan, lives under wintermare. come out from underground, kidnap mages, and before battle they eat a fuckton of lux to get magic temporarily for fighting.
+	name = "Spiritcrusher"
+	description = "Known to humens (and elves) as a danger in the darkness throughout Wintermare. These half-orcs live below ground in Subterra, raiding settlements at night and capturing mages, extracting and devouring their lux before battle to temporarily gain their magics. Many a Wintermarian household tells cautionary tales to keep young students indoors with the doors latched, lest the half-orcs come steal their lux."
 
 /datum/culture/species/rakshari
 	abstract_type = /datum/culture/species/rakshari
@@ -138,7 +137,7 @@
 
 /datum/culture/species/rakshari/quicksand
 	name = "Quicksand Tribes"
-	description = "Known to humens to be stern and quick to aggression. Quicksand rakshari are near the jungle at the edge of Zaladin. As inhospitable as the desert is, the jungle is just as dangerous, and these rakshari train all of their people in defending against it, as well as against any foreign soldiers, mostly from Grenzelhoft, who manage to navigate the jungle intact. They have a stronger warrior culture than the other rakshari tribes, valuing strength and discipline. They may be standoffish to foreigners, but a bit friendlier to Zaladin citizens. In either case, they come off as harsh at first."
+	description = "Known to humens to be stern and quick to aggression. Quicksand rakshari are near the jungle at the edge of Zaladin. As inhospitable as the desert is, the jungle is just as dangerous, and these rakshari train all of their people in defending against it, as well as against any foreign soldiers, mostly from Grenzelhoft, who manage to navigate the jungle intact. They have a stronger warrior culture than the other rakshari tribes, valuing strength and discipline. They may be standoffish to foreigners, but a bit friendlier to Zaladin citizens. In either case, they come off as harsh at first. Don't ask their opinion of the Crescent Fang half-orcs."
 
 /datum/culture/species/kobold
 	abstract_type = /datum/culture/species/kobold
