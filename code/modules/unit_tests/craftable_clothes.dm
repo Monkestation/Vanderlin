@@ -113,6 +113,7 @@ abstract types are automatically excluded.
 		"royalknight",
 		"warden",
 		"sinistar",
+		"gronn", //pending further lore review.
 	)
 
 /datum/unit_test/craftable_clothes/Run()

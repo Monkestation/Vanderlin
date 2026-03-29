@@ -139,7 +139,7 @@
 	dir = 5
 	},
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "ht" = (
 /obj/effect/decal/cleanable/blood/drip,
@@ -157,7 +157,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb)
 "hP" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "ii" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -202,7 +202,7 @@
 /area/under/tomb/indoors)
 "kk" = (
 /obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "kB" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -991,7 +991,7 @@
 /area/under/tomb/indoors)
 "QN" = (
 /obj/structure/rotation_piece/cog/large,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "QU" = (
 /turf/open/floor/metal,
@@ -1010,7 +1010,7 @@
 /area/under/tomb/indoors)
 "Tn" = (
 /obj/structure/fluid_drain,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "TC" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1113,7 +1113,7 @@
 /area/under/tomb/indoors)
 "Zy" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/under/tomb)
 "ZI" = (
 /obj/effect/spawner/map_spawner/loot/rare,
