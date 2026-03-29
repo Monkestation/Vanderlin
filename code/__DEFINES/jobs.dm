@@ -171,7 +171,7 @@
 #define JDO_VAGRANT 36
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
-#define JDO_SUNLORD 39
+#define JDO_SUNLORD 0.1
 #define JDO_SUNDWELLER 40
 
 

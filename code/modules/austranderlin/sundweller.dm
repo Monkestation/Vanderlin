@@ -1,3 +1,7 @@
+/obj/effect/landmark/start/sundweller
+	name = "Sundweller"
+	icon_state = "arrow"
+
 /datum/attribute_holder/sheet/job/sundweller
 	attribute_variance = list(
 		/datum/attribute/skill/misc/sneaking = list(10, 40),

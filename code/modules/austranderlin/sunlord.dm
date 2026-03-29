@@ -1,3 +1,7 @@
+/obj/effect/landmark/start/sunlord
+	name = "Sunlord"
+	icon_state = "arrow"
+
 
 /datum/attribute_holder/sheet/job/sunlord
 	raw_attribute_list = list(
@@ -18,7 +22,7 @@
 	glorious subjects await your orders, those blessed to live with you in the basking sunlight. \
 	The cave-dwellers from below envy your paradise, drool over the thoughts of using your precious sunlight for their own means. \
 	Rule with pride and power, you are not someone to be trifled with."
-	department_flag = PEASANTS
+	department_flag = OUTSIDERS
 	display_order = JDO_SUNLORD
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
 	faction = FACTION_TOWN
@@ -40,6 +44,7 @@
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 1200,
+		EXP_TYPE_LEADERSHIP = 600,
 		EXP_TYPE_LEADERSHIP = 600
 	)
 
@@ -60,7 +65,9 @@
 		TRAIT_LEECHIMMUNE,
 		TRAIT_NASTY_EATER,
 		TRAIT_NOSEGRAB,
-		TRAIT_ZJUMP
+		TRAIT_ZJUMP,
+		TRAIT_NOMOOD,
+		TRAIT_CRITICAL_RESISTANCE
 	)
 
 /datum/job/sunlord/New()
@@ -69,6 +76,7 @@
 
 /datum/job/sunlord/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.LoadComponent(/datum/component/theme_music)
 	spawned.set_hygiene(HYGIENE_LEVEL_DISGUSTING)
 
 	if(!(spawned.patron == /datum/patron/godless/autotheist))
@@ -98,13 +106,13 @@
 
 	if(world.time < last_announcement_time + 30 SECONDS)
 		var/time_left = round((last_announcement_time + 30 SECONDS - world.time) / 10)
-		to_chat(src, "<span class='warning'>You must wait [time_left] more seconds before making another announcement.</span>")
+		to_chat(src, span_warning("You must wait [time_left] more seconds before making another announcement."))
 		return
 
 	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/outdoors/exposed/under/basement))
-			to_chat(src, "<span class='warning'>I need to do this from the surface.</span>")
+		if(!is_type_in_list(get_area(src), list(/area/outdoors/exposed/under/basement, /area/outdoors/exposed/under/sewer)))
+			to_chat(src, span_warning("I must speak DOWN upon them."))
 			return FALSE
 		priority_announce("[inputty]", title = "[src.real_name], The Sunlord Speaks", sound = 'sound/misc/foghorn.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Sunlord announcement")

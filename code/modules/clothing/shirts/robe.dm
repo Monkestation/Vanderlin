@@ -21,9 +21,6 @@
 /obj/item/clothing/shirt/robe/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/shirt/robe/colored/sundweller
-	color = CLOTHING_MUSTARD_YELLOW
-
 /obj/item/clothing/shirt/robe/colored/linen
 	color = CLOTHING_LINEN
 

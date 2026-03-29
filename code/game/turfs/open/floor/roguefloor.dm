@@ -1028,6 +1028,7 @@
 	icon_state = "abysstile-3"
 
 /turf/open/floor/sandstone
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "sandstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT

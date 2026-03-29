@@ -2313,6 +2313,7 @@
 #include "code\modules\asset_cache\transport\asset_transport.dm"
 #include "code\modules\asset_cache\transport\webroot.dm"
 #include "code\modules\atmospherics\environmental\LINDA_fire.dm"
+#include "code\modules\austranderlin\misc.dm"
 #include "code\modules\austranderlin\sundweller.dm"
 #include "code\modules\austranderlin\sunlord.dm"
 #include "code\modules\awaymissions\corpse.dm"
