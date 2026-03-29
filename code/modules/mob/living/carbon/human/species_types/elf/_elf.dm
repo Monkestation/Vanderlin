@@ -3,6 +3,10 @@
 
 /datum/species/elf
 	name = "Elfb"
+	multiple_accents = list(
+		"Elf Accent" = ACCENT_ELF,
+		"Wintermare Accent" = ACCENT_WINTERMARE,
+	)
 	id = SPEC_ID_ELF
 	changesource_flags = WABBAJACK
 	native_language = "Elfish"
@@ -10,6 +14,7 @@
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
 		/datum/bodypart_feature/hair/facial,
+
 	)
 
 /datum/species/elf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
