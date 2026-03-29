@@ -23,9 +23,9 @@
 	name = "Half-Orc"
 	id = SPEC_ID_HALF_ORC
 	multiple_accents = list(
-    "Half-Orc Accent" = ACCENT_HORC,
-    "Ossland Accent" = ACCENT_OSSLAND,
-)
+		"Half-Orc Accent" = ACCENT_HORC,
+		"Ossland Accent" = ACCENT_OSSLAND,
+	)
 	native_language = "Orcish"
 	desc = "The bastards of Graggar. \
 	\n\n\
