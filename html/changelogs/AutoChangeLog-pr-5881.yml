@@ -1,0 +1,5 @@
+author: "KevinfromHP"
+delete-after: True
+changes:
+  - bugfix: "Fixes Wretches losing all languages on creation. Will have unintended side effects but they're better than this"
+  - bugfix: "Unarmed Discipline not receiving their benefits."
