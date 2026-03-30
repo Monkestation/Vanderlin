@@ -536,8 +536,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
     w_req = /obj/item/alch/sinew
     e_req = /obj/item/alch/sinew
-    n_req = /obj/item/natural/fur/volf
-    s_req = /obj/item/natural/fur/volf
+    n_req = /obj/item/natural/fur
+    s_req = /obj/item/natural/fur
 
 /datum/ritual/fleshcrafting/curse/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
@@ -557,7 +557,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	if(target.stat == DEAD)
 		return
-	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
+	to_chat(target, span_warning("You can feel part of your soul burn away, as you are reshaped painfully into an abomination! You have no recollection of who you once were and what you did, but still have innate skills and personality."))
 	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
@@ -568,20 +568,23 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!victim.mind)
 		return
 	if(victim.mob_biotypes & MOB_UNDEAD)
-		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		to_chat(victim, span_warning("The curse doesn't take hold, for they are blessed by Zizo!"))
 		return
 	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
-		to_chat(victim, span_warning("The curse doesn't take hold!"))
+		to_chat(victim, span_warning("The curse doesn't take hold, for they already are damned!"))
 		return
 	if(victim.get_lux_status() != LUX_HAS_LUX)
-		to_chat(victim, span_warning("The curse requires lux!"))
+		to_chat(victim, span_warning("The curse fails, due to a lack of lux to burn!"))
 		return
 	if(victim.stat == DEAD)
 		return
-
+	victim.Knockdown(5 SECONDS)
+	victim.emote("agony", forced = TRUE)
 	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
 	victim.mind.transfer_to(wll)
+	wll.set_patron(/datum/patron/godless/naivety)
 	victim.gib()
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "NEW FACE NEW LIFE"), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"

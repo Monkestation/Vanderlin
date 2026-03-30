@@ -855,6 +855,11 @@
 		return 0
 	return ..()
 
+/datum/stress_event/shamanhoodlost
+	stress_change = 3
+	desc = span_boldred("I have lost my hood! My failure to protect it leaves open the defilement my future reincarnations!")
+	timer = 999 MINUTES
+
 /datum/stress_event/black_briar1
 	timer = 999 MINUTES
 	stress_change = 5

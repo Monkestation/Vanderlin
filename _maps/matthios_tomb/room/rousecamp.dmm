@@ -117,11 +117,6 @@
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
-"nJ" = (
-/obj/structure/table/church/m,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/turf/open/floor/churchmarble,
-/area/under/tomb/cave/lava)
 "nR" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -194,6 +189,9 @@
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/lava)
+"wN" = (
+/turf/open/water/clean,
+/area/under/tomb/cave/lava)
 "yp" = (
 /turf/open/openspace,
 /area/under/tomb/cave/lava)
@@ -263,9 +261,6 @@
 /obj/item/clothing/shoes/boots,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
-"Ib" = (
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/lava)
 "Ie" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/naturalstone,
@@ -351,6 +346,11 @@
 "UW" = (
 /obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/cobble,
+/area/under/tomb/cave/lava)
+"Vc" = (
+/obj/structure/table/church/m,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/turf/open/floor/churchmarble,
 /area/under/tomb/cave/lava)
 "VO" = (
 /obj/machinery/light/fueled/firebowl/stump,
@@ -1406,8 +1406,8 @@ yp
 yp
 yp
 jO
-Ib
-Ib
+wN
+wN
 Ce
 Ce
 "}
@@ -1439,8 +1439,8 @@ yp
 yp
 yp
 jO
-Ib
-Ib
+wN
+wN
 Ce
 "}
 (4,1,2) = {"
@@ -2174,7 +2174,7 @@ yp
 jO
 TI
 zW
-nJ
+Vc
 pO
 TI
 Ce

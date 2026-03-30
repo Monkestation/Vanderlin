@@ -57,38 +57,52 @@
 		SPEC_ID_HALFLING
 	)
 
+/datum/culture/species/halfling/jaded
+	name = "worldly halflings"
+	description = "Known to humens as halflings who have been outside of Hearthhill for longer, identifiable by the lack of shock in their eyes when someone is wounded in front of them. They understand humens can die like animals, though they are still averse to violence."
+	pre_append = "the "
+
 /datum/culture/species/half_orc
 	abstract_type = /datum/culture/species/half_orc
 	species = list(
 		SPEC_ID_HALF_ORC,
 	)
 
-// /datum/culture/species/half_orc/shellcrest
-// 	name = "Shellcrest"
+/datum/culture/species/half_orc/shellcrest
+	name = "Shellcrest"
+	description = "Known to humens as vicious pirates, the Shellcrest tribe lives off the western coast of Vanderlin and the Isle of Enigma. They're famous for proving that a metal boat can float as well as a wooden one, through complete and utter blind enthusiasm."
 
-// /datum/culture/species/half_orc/blood_axe
-// 	name = "Blood Axe"
+/datum/culture/species/half_orc/blood_axe
+	name = "Blood Axe"
+	description = "Known to humens as violent and brutal warriors in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Splitjaw tribe."
 
-// /datum/culture/species/half_orc/splitjaw
-// 	name = "Splitjaw"
+/datum/culture/species/half_orc/splitjaw
+	name = "Splitjaw"
+	description = "Known to humens as brutal and violent fighters in the Crimsonlands. They believe themselves to be Graggar's chosen. Humen steppesmen avoid their path. Never ask their opinion of the Blood Axe tribe."
 
-// /datum/culture/species/half_orc/blackhammer
-// 	name = "Blackhammer"
+/datum/culture/species/half_orc/blackhammer
+	name = "Blackhammer"
+	description = "Known to humens to be mostly around the borders of Grenzelhoft towards the east. These orcs are both a hazard to Grenzelhoftian troops and a helpful nuisance, smashing apart undead on other fronts. Half-orcs from this tribe exist in an uneasy stalemate with Grenzelhoft, and with the Host of Misfortune."
 
-// /datum/culture/species/half_orc/skullseeker
-// 	name = "Skullseeker"
+/datum/culture/species/half_orc/skullseeker
+	name = "Skullseeker"
+	description = "Known to humens as one of the wilder half-orc tribes, originating from Ossland. Many of them follow the Great Hunt common in that land. The most valued trophy is a sapient being's head, ensuring reincarnation into a more powerful form."
 
-// /datum/culture/species/half_orc/crescent_fang
-// 	name = "Crescent Fang"
+/datum/culture/species/half_orc/crescent_fang
+	name = "Crescent Fang"
+	description = "Known to humens to live in the jungle between Grenzelhoft and Zaladin, hating both sides. They are isolationist and rarely engage in trade, preferring instead to take bounties from one of the warring nations to kill members of the other, or take payment to guide travelers across the jungle. They can also be found picking off undead that managed to get stranded in the jungle after Zizo's ascension. Don't ask their opinion on the quicksand rakshari."
 
-// /datum/culture/species/half_orc/murkwater
-// 	name = "Murkwater"
+/datum/culture/species/half_orc/murkwater
+	name = "Murkwater"
+	description = "Known to humens as an annoyance to both Wintermare and Grenzelhoft, these half-orcs have managed to build a floating city in the waters east of those nations. They have developed a culture of guiding small boats through shallow water using long wooden poles. Rumour has it they take bribes to ferry soldiers behind enemy lines."
 
-// /datum/culture/species/half_orc/shatterhorn
-// 	name = "Shatterhorn"
+/datum/culture/species/half_orc/shatterhorn
+	name = "Shatterhorn"
+	description = "Known to humens as one of the more civilised half-orc tribes, the Shatterhorn live in northern Vanderlin, at the foot of a twin peak mountain. The top of the mountain is cracked, but it still shelters the half-orcs from storms. Oddly enough, Shatterhorn half-orcs gravitate to mountains. They tend to be humble and act as guides to people traveling through the boggy outlands of the region."
 
-// /datum/culture/species/half_orc/spiritcrusher
-// 	name = "Spiritcrusher"
+/datum/culture/species/half_orc/spiritcrusher
+	name = "Spiritcrusher"
+	description = "Known to humens (and elves) as a danger in the darkness throughout Wintermare. These half-orcs live below ground in Subterra, raiding settlements at night and capturing mages, extracting and devouring their lux before battle to temporarily gain their magics. Many a Wintermarian household tells cautionary tales to keep young students indoors with the doors latched, lest the half-orcs come steal their lux."
 
 /datum/culture/species/rakshari
 	abstract_type = /datum/culture/species/rakshari
@@ -123,7 +137,7 @@
 
 /datum/culture/species/rakshari/quicksand
 	name = "Quicksand Tribes"
-	description = "Known to humens to be stern and quick to aggression. Quicksand rakshari are near the jungle at the edge of Zaladin. As inhospitable as the desert is, the jungle is just as dangerous, and these rakshari train all of their people in defending against it, as well as against any foreign soldiers, mostly from Grenzelhoft, who manage to navigate the jungle intact. They have a stronger warrior culture than the other rakshari tribes, valuing strength and discipline. They may be standoffish to foreigners, but a bit friendlier to Zaladin citizens. In either case, they come off as harsh at first."
+	description = "Known to humens to be stern and quick to aggression. Quicksand rakshari are near the jungle at the edge of Zaladin. As inhospitable as the desert is, the jungle is just as dangerous, and these rakshari train all of their people in defending against it, as well as against any foreign soldiers, mostly from Grenzelhoft, who manage to navigate the jungle intact. They have a stronger warrior culture than the other rakshari tribes, valuing strength and discipline. They may be standoffish to foreigners, but a bit friendlier to Zaladin citizens. In either case, they come off as harsh at first. Don't ask their opinion of the Crescent Fang half-orcs."
 
 /datum/culture/species/kobold
 	abstract_type = /datum/culture/species/kobold
@@ -194,7 +208,17 @@
 		SPEC_ID_TIEFLING
 	)
 
-//put some tiefling stuff here bug
+/datum/culture/species/tiefling/surprise
+	name = "humen-born origin"
+	description = "Known to humens to have been a cursed child from two non-tiefling parents. These tieflings grow up often rejected by their peers and family as bad omens. Noble families have been cast into shame for having the bad luck to birth a tiefling child."
+
+/datum/culture/species/tiefling/expected
+	name = "tiefling-born origin"
+	description = "Known to humens to have been born of tiefling parents. The resulting child is always a tiefling. They grow up often loved by their tiefling families and communities, and tend to be more well-adjusted emotionally as a result."
+
+/datum/culture/species/tiefling/misfortune
+	name = "the Host of Misfortune"
+	description = "Known to humens as deserters from the war with Zizo in Grenzelhoft. These tieflings may be former soldiers or tieflings from other nations who fled to the lands occupied by the Host. Grenzelhoftians sneer as they pass. Others may look up to them as people who took their futures into their own hands."
 
 /datum/culture/species/aasimar
 	abstract_type = /datum/culture/species/aasimar

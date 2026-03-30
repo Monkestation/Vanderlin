@@ -411,7 +411,7 @@
 	var/datum/species/species = return_species(prefs)
 	if(prefs.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
 		return FALSE
-	return (prefs.gender == MALE) || istype(species, /datum/species/dwarf) || istype(species, /datum/species/triton)
+	return (prefs.gender == MALE) || (istype(species, /datum/species/dwarf) && prefs.gender == FEMALE) || istype(species, /datum/species/triton)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)
@@ -442,7 +442,15 @@
 		/datum/sprite_accessory/hair/facial/ranger,
 		/datum/sprite_accessory/hair/facial/vandyke,
 		/datum/sprite_accessory/hair/facial/burns,
+		/datum/sprite_accessory/hair/facial/bushyburns,
 		/datum/sprite_accessory/hair/facial/hermit,
+		/datum/sprite_accessory/hair/facial/gnomish,
+		/datum/sprite_accessory/hair/facial/newlywed,
+		/datum/sprite_accessory/hair/facial/anniversary,
+		/datum/sprite_accessory/hair/facial/longbraid,
+		/datum/sprite_accessory/hair/facial/pinnacle,
+		/datum/sprite_accessory/hair/facial/enchanter,
+		/datum/sprite_accessory/hair/facial/curlypom,
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari

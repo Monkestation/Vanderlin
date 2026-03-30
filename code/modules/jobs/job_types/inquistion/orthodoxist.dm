@@ -39,6 +39,7 @@
 /datum/job/orthodoxist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
+	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
 	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
 	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)

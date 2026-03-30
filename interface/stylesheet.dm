@@ -110,6 +110,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .hellspeak				{font-family: "Nosfer", Pterra;}
 .undead					{font-family: "FriskyVampire", Pterra;}
 .orc					{font-family: "Thief by The Riddler", Pterra;}
+.gronnic				{font-family: "Jorvik Informal", Pterra;}
 .beast					{font-family: "Thief by The Riddler", Pterra;}
 .deepspeak				{font-family: "Underwater Love", Pterra;}
 

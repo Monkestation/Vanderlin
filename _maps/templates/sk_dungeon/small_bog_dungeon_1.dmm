@@ -8,10 +8,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/herringbone,
 /area/outdoors/bog)
-"bA" = (
-/obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
-/area/outdoors/bog)
 "cB" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
@@ -55,9 +51,6 @@
 	},
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/blocks,
-/area/outdoors/bog)
-"hB" = (
-/turf/open/water/cleanshallow,
 /area/outdoors/bog)
 "ld" = (
 /obj/structure/bars/cemetery,
@@ -138,15 +131,16 @@
 /obj/item/clothing/head/padded/deathshroud,
 /turf/open/floor/blocks,
 /area/outdoors/bog)
+"vU" = (
+/obj/structure/closet/crate/coffin,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/turf/open/floor/blocks/paving,
+/area/outdoors/bog)
 "wa" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/ruinedwood/turned/alt{
 	dir = 1
 	},
-/area/outdoors/bog)
-"wi" = (
-/obj/item/coin/copper,
-/turf/open/water/cleanshallow,
 /area/outdoors/bog)
 "wK" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -190,6 +184,10 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/herringbone,
 /area/outdoors/bog)
+"Bp" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/clean,
+/area/outdoors/bog)
 "BI" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -225,6 +223,9 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/blocks,
 /area/outdoors/bog)
+"EV" = (
+/turf/open/water/clean,
+/area/outdoors/bog)
 "Gs" = (
 /obj/structure/door/weak/bolt,
 /obj/effect/mapping_helpers/access/locker,
@@ -255,6 +256,11 @@
 /obj/structure/door/violet,
 /turf/open/floor/hexstone,
 /area/outdoors/bog)
+"Lr" = (
+/obj/structure/closet/crate/coffin,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/turf/open/floor/blocks/paving,
+/area/outdoors/bog)
 "MK" = (
 /obj/structure/table/wood/plain,
 /obj/item/natural/cloth,
@@ -277,11 +283,6 @@
 "OM" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/chevron,
-/area/outdoors/bog)
-"ON" = (
-/obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/divine/necra,
-/turf/open/floor/blocks,
 /area/outdoors/bog)
 "OQ" = (
 /obj/structure/chair/bench/church/smallbench,
@@ -338,14 +339,18 @@
 	dir = 1
 	},
 /area/outdoors/bog)
+"VQ" = (
+/obj/item/coin/copper,
+/turf/open/water/clean,
+/area/outdoors/bog)
+"VV" = (
+/obj/structure/closet/crate/coffin,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/turf/open/floor/blocks,
+/area/outdoors/bog)
 "Wk" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/cobble/mossy,
-/area/outdoors/bog)
-"Wo" = (
-/obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
-/turf/open/floor/blocks/paving,
 /area/outdoors/bog)
 "WF" = (
 /obj/structure/bars/cemetery,
@@ -354,11 +359,6 @@
 "WP" = (
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/dirt/road,
-/area/outdoors/bog)
-"YA" = (
-/obj/structure/closet/crate/coffin,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
-/turf/open/floor/blocks/paving,
 /area/outdoors/bog)
 
 (1,1,1) = {"
@@ -641,13 +641,13 @@ fE
 Rk
 fE
 gz
-wi
-hB
-hB
-hB
-bA
-hB
-hB
+VQ
+EV
+EV
+EV
+Bp
+EV
+EV
 fE
 Rk
 wK
@@ -681,15 +681,15 @@ Rk
 Rk
 cP
 fE
-hB
-hB
-hB
-wi
+EV
+EV
+EV
+VQ
 fE
 Rk
-hB
-hB
-wi
+EV
+EV
+VQ
 gz
 Rk
 wK
@@ -723,16 +723,16 @@ fE
 Rk
 Rk
 Rk
-hB
-bA
+EV
+Bp
 Rk
 Al
 BQ
 fE
-wi
-hB
-hB
-hB
+VQ
+EV
+EV
+EV
 Rk
 wK
 lL
@@ -764,17 +764,17 @@ Ci
 fE
 sA
 Rk
-hB
-wi
-hB
+EV
+VQ
+EV
 Rk
 BQ
 Dp
 BQ
 gz
 Al
-hB
-wi
+EV
+VQ
 cB
 wK
 lL
@@ -806,8 +806,8 @@ Ci
 fE
 Rk
 cB
-hB
-hB
+EV
+EV
 Al
 gz
 BQ
@@ -815,8 +815,8 @@ BQ
 BQ
 Al
 Rk
-hB
-bA
+EV
+Bp
 Rk
 wK
 lL
@@ -849,15 +849,15 @@ fE
 fE
 Rk
 Rk
-hB
-hB
+EV
+EV
 Al
-hB
+EV
 BQ
-hB
+EV
 Rk
-hB
-hB
+EV
+EV
 Rk
 Rk
 wK
@@ -891,15 +891,15 @@ Rk
 rC
 Rk
 fE
-bA
-hB
-hB
-hB
-hB
-hB
-hB
-wi
-hB
+Bp
+EV
+EV
+EV
+EV
+EV
+EV
+VQ
+EV
 Rk
 sA
 CZ
@@ -935,11 +935,11 @@ Rk
 fE
 gz
 fE
-hB
-wi
-hB
-hB
-hB
+EV
+VQ
+EV
+EV
+EV
 gz
 fE
 Rk
@@ -1476,7 +1476,7 @@ uZ
 Id
 uZ
 uZ
-Wo
+Lr
 Ci
 Rk
 Rk
@@ -1596,7 +1596,7 @@ lL
 lL
 Tp
 Ci
-ON
+VV
 Aa
 uZ
 uZ
@@ -1641,7 +1641,7 @@ Ci
 df
 Qk
 uZ
-YA
+vU
 uZ
 uZ
 uZ
