@@ -234,6 +234,39 @@
 				var/mob/living/carbon/V = src
 				V.add_stress(/datum/stress_event/bathwater)
 
+/mob/living/proc/handle_inpuddle()
+	if(body_position == LYING_DOWN)
+		SoakMob(FULL_BODY)
+	else
+		SoakMob(BELOW_CHEST)
+
+/mob/living/carbon/handle_inpuddle()
+	. = ..()
+	if(stat == DEAD)
+		return
+	var/react_volume = 2
+	var/react_type = TOUCH
+	var/is_laying = (body_position == LYING_DOWN)
+	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
+		var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
+		adjustOxyLoss(drown_damage)
+		if(stat == DEAD && client)
+			record_round_statistic(STATS_PEOPLE_DROWNED)
+			return
+		emote("drown")
+		react_volume = 5
+		react_type = INGEST
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(/datum/reagent/water, react_volume)
+	reagents.reaction(src, react_type, 1)
+
+/mob/living/carbon/human/handle_inpuddle()
+	. = ..()
+	if(body_position != LYING_DOWN)
+		if(!wear_armor && !wear_shirt && !wear_pants)
+			var/mob/living/carbon/V = src
+			V.add_stress(/datum/stress_event/bathwater)
+
 /mob/living/carbon/proc/get_complex_pain()
 	var/total_pain = 0
 

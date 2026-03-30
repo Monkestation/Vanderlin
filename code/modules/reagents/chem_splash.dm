@@ -19,7 +19,7 @@
 		return
 
 	//water turf eats reagents
-	if(istype(epicenter, /turf/open/water))
+	if(istype(epicenter, /turf/open/water) || (locate(/obj/structure/hotspring) in (epicenter)))
 		for(var/datum/reagents/R in reactants)
 			R.clear_reagents()
 		return

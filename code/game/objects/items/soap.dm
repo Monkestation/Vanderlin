@@ -113,14 +113,15 @@
 	if(!ishuman(target))
 		to_chat(user, span_warning("They don't want to be soaped..."))
 		return FALSE
-
+	var/found_hotspring = locate(/obj/structure/hotspring) in (target.loc)
 	var/turf/T = get_turf(target)
 	if(!istype(T, /turf/open/water))
-		if(istype(T, /turf/open/lava) && user == target) //shits and giggles
-			to_chat(user, span_warning("Why am I doing this..."))
-		else
-			to_chat(user, span_warning("They must be in water!"))
-		return FALSE
+		if(!found_hotspring)
+			if(istype(T, /turf/open/lava) && user == target) //shits and giggles
+				to_chat(user, span_warning("Why am I doing this..."))
+			else
+				to_chat(user, span_warning("They must be in water!"))
+			return FALSE
 	else
 		var/turf/open/water/bathspot = T
 		if(!bathspot.wash_in)

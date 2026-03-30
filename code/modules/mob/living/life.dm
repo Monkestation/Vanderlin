@@ -71,7 +71,8 @@
 
 	if(istype(loc, /turf/open/water))
 		handle_inwater(loc)
-
+	else if(locate(/obj/structure/hotspring) in (loc))
+		handle_inpuddle()
 	if(!client && (world.time - last_island_check) > 20 SECONDS)
 		last_island_check = world.time
 		update_island_cache()
