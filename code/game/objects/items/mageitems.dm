@@ -639,6 +639,8 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dmeld"
 	desc = "A melding of hellhound fang, iridescent scales and elemental shard."
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
 
 /obj/item/natural/melded/t3
 	name = "sorcerous weave"

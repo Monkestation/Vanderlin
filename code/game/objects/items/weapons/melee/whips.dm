@@ -12,6 +12,7 @@
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_GREAT
 	can_parry = FALSE
+	wdodgebonus = 30 //To counteract the GREAT_LENGTH penalty.
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
 	minstr = 4
 
@@ -155,7 +156,7 @@
 
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/iron
 	melt_amount = 100
 
@@ -166,7 +167,7 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "xylixwhip"
 	force = DAMAGE_WHIP + 4
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
@@ -190,7 +191,7 @@
 	max_integrity = INTEGRITY_STRONG
 	minstr = 5
 
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	resistance_flags = FIRE_PROOF
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH

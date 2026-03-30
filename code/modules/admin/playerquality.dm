@@ -86,7 +86,7 @@
 	set name = "CheckPQ"
 	if(!holder)
 		return
-	var/selection = alert(src, "Check VIA...", "Check PQ", "Character List", "Player List", "Player Name")
+	var/selection = tgui_alert(src, "Check VIA...", "Check PQ", list("Character List", "Player List", "Player Name"))
 	if(!selection)
 		return
 	var/list/selections = list()
@@ -156,7 +156,7 @@
 	set name = "AdjustPQ"
 	if(!holder)
 		return
-	var/selection = alert(src, "Adjust VIA...", "MODIFY PQ", "Character List", "Player List", "Player Name")
+	var/selection = tgui_alert(src, "Adjust VIA...", "MODIFY PQ", list("Character List", "Player List", "Player Name"))
 	var/list/selections = list()
 	var/theykey
 	if(selection == "Character List")

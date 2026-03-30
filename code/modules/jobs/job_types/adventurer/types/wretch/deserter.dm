@@ -36,7 +36,6 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_HEAVYARMOR,
 		TRAIT_RECOGNIZED,
-		TRAIT_INHUMENCAMP,
 	)
 
 	spells = list(
@@ -45,7 +44,7 @@
 
 /datum/job/advclass/wretch/disgraced/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(alert("Do you wish to be recognized as a non-foreigner?", "", "Yes", "No") == "Yes")
+	if(tgui_alert(spawned, "Do you wish to be recognized as a non-foreigner?", "Foreigner", list("Yes", "No")) == "Yes")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
@@ -112,8 +111,6 @@
 	switch(helmetchoice)
 		if("None")
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/disgraced
 	name = "Disgraced Knight (Wretch)"

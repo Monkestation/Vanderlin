@@ -1,0 +1,6 @@
+author: "TerraGS"
+delete-after: True
+changes:
+  - rscadd: "Multi Z water and vertical swimming, sinking and drowning. Swimming grants experience in its respective skill."
+  - map: "Adds map tiles for multi z water"
+  - code_imp: "Any water type mapped above an underwater tile of the same reagent will become floorless deep water unless skip_bottom_check is set to TRUE. Examining water will tell its relative depth."

@@ -6,3 +6,4 @@
 	brewed_amount = 3
 	brew_time = 1.5 MINUTES
 	sell_value = 30
+	brewing_skill = /datum/attribute/skill/craft/cooking/brewing

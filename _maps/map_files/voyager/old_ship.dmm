@@ -6,28 +6,6 @@
 	},
 /turf/open/openspace,
 /area)
-"bX" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/effect/landmark/start/shophand{
-	dir = 4
-	},
-/obj/item/painting/queen,
-/obj/item/weapon/polearm/spear,
-/obj/item/weapon/polearm/spear{
-	pixel_x = -20;
-	pixel_y = -14
-	},
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
-/area)
 "dq" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -58,6 +36,28 @@
 	dir = 5
 	},
 /turf/open/floor/ruinedwood/spiral,
+/area)
+"fY" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/effect/landmark/start/shophand{
+	dir = 4
+	},
+/obj/item/painting/queen,
+/obj/item/weapon/polearm/spear,
+/obj/item/weapon/polearm/spear{
+	pixel_x = -20;
+	pixel_y = -14
+	},
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
 /area)
 "gB" = (
 /obj/structure/bed/inn/double,
@@ -152,9 +152,6 @@
 	},
 /turf/open/openspace,
 /area)
-"sl" = (
-/turf/open/water/ocean/deep,
-/area)
 "sr" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -209,6 +206,21 @@
 	pixel_x = 7
 	},
 /turf/open/floor/ruinedwood/spiral,
+/area)
+"uv" = (
+/obj/structure/fluff/railing/border{
+	dir = 1;
+	icon_state = "border"
+	},
+/obj/structure/fluff/railing/border,
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fermentation_keg/beer,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/rooftop/green{
+	dir = 4
+	},
 /area)
 "vY" = (
 /obj/structure/table/wood{
@@ -337,21 +349,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area)
-"Hp" = (
-/obj/structure/fluff/railing/border{
-	dir = 1;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border,
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/structure/fermentation_keg/beer,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/rooftop/green{
-	dir = 4
-	},
-/area)
 "HF" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/spiral,
@@ -436,6 +433,9 @@
 	icon_state = "woodchestalt"
 	},
 /turf/open/floor/ruinedwood/spiral,
+/area)
+"QF" = (
+/turf/open/water/ocean/abyss,
 /area)
 "QG" = (
 /obj/structure/closet/crate/chest/neu_iron,
@@ -522,259 +522,259 @@
 /area)
 
 (1,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 "}
 (2,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 "}
 (3,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
-sl
-sl
-sl
+QF
+QF
+QF
 "}
 (4,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 XS
 XS
-sl
-sl
+QF
+QF
 "}
 (5,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
-Hp
+uv
 XS
-sl
-sl
+QF
+QF
 "}
 (6,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 XS
-bX
+fY
 XS
 XS
-sl
+QF
 "}
 (7,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 Gt
 yR
 DP
 XS
-sl
+QF
 "}
 (8,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 Rx
 lr
 Rx
 XS
-sl
+QF
 "}
 (9,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 XS
 XA
 XS
 XS
-sl
+QF
 "}
 (10,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 Hb
 lr
 IJ
 XS
-sl
+QF
 "}
 (11,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 tv
 lr
 hq
 XS
-sl
+QF
 "}
 (12,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 ob
 Xk
 LE
 XS
-sl
+QF
 "}
 (13,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 XS
 gB
 XS
 XS
-sl
+QF
 "}
 (14,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 XS
 XS
 XS
-sl
-sl
+QF
+QF
 "}
 (15,1,1) = {"
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
-sl
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
+QF
 "}
 
 (1,1,2) = {"

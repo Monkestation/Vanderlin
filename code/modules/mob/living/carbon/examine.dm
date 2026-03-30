@@ -102,6 +102,12 @@
 
 	. = list()
 
+	// Species, just below the name
+	var/datum/species/species = dna?.species
+	if(species)
+		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
+
 	// Lord's title
 	if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
 		. += span_notice("[P[THEYVE]] been granted the title of \"[GLOB.lord_titles[real_name]]\".")
@@ -184,6 +190,9 @@
 			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
+		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
+			. += span_userdanger("SUSPECTED OF HERESY...")
+
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
 		var/im_pur = HAS_TRAIT(src, TRAIT_PURITAN)
@@ -309,12 +318,6 @@
 	//var/mob/living/carbon/human/H = ishuman(user) ? user : null
 
 	. = list()
-
-	// Species, just below the name
-	var/datum/species/species = dna?.species
-	if(species)
-		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
 
 	// Maniac, higher up than others
 	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))

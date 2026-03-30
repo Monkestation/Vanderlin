@@ -176,7 +176,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/quirk/forced_flaw
+	var/list/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -188,6 +188,8 @@
 	var/max_apprentices = 1
 	/// if this is set its the name bestowed to the new apprentice otherwise its just name the [job_name] apprentice.
 	var/apprentice_name
+	/// Can we be an apprentice to someone?
+	var/can_be_apprentice = FALSE
 	/// do we magic?
 	var/magic_user = FALSE
 	/// Do we get passive income every day from our noble estates?
@@ -362,7 +364,11 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.add_quirk(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.add_quirk(flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -561,7 +567,7 @@
 
 /datum/job/proc/get_job_special_late_point()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != "[title]_late")
+		if(spawn_point.name != "[title]late")
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong

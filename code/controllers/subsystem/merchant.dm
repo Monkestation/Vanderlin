@@ -262,12 +262,15 @@ SUBSYSTEM_DEF(merchant)
 	if(item_type in recipe_base_values)
 		return recipe_base_values[item_type]
 
+	// Check that we have a movable type.
+	if(!ismovable (item_type))
+		return 0
+
 	// Otherwise use sellprice directly
 	var/obj/item/temp = item_type
-	var/sellprice = initial(temp.sellprice)
 
-	if(sellprice && sellprice > 0)
-		return sellprice
+	if(temp.sellprice > 0)
+		return temp.sellprice
 
 	return 0
 

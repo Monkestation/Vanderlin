@@ -105,23 +105,21 @@
 	/// The amount of blood this can restore when used with Hunter's Will
 	var/blood_value = 0
 
+/obj/item/natural/head/Initialize()
+	. = ..()
+	randomize_price() //headeater
+
 //quality from butchering, 0 is bad, 1 is normal, 2 is good, -1 means its rotten and useless
 /obj/item/natural/head/proc/ButcheringResults(butchering_quality)
 	switch(butchering_quality)
-		if(0)
-			sellprice = floor(sellprice * 0.75)
-			headpricemin = floor(headpricemin * 0.75)
-			headpricemax = floor(headpricemax * 0.75)
-		if(1)
-			EMPTY_BLOCK_GUARD
 		if(2)
 			sellprice = floor(sellprice * 1.25)
-			headpricemin = floor(headpricemin * 1.25)
-			headpricemax = floor(headpricemax * 1.25)
+		if(1)
+			EMPTY_BLOCK_GUARD
+		if(0)
+			sellprice = floor(sellprice * 0.75)
 		if(-1)
 			sellprice = floor(sellprice * 0.1)
-			headpricemin = floor(headpricemin * 0.1)
-			headpricemax = floor(headpricemax * 0.1)
 			var/initial_name = name
 			name = "rotten [initial_name]"
 			rotten = TRUE
@@ -152,8 +150,6 @@
 	name = "volf head"
 	desc = "The severed head of a fearsome volf."
 	icon_state = "volfhead"
-	headpricemin = 3
-	headpricemax = 7
 	sellprice = 5
 	blood_value = BLOOD_VOLUME_SURVIVE
 
@@ -161,7 +157,6 @@
 	name = "saiga head"
 	desc = "The severed head of a proud saiga."
 	icon_state = "saigahead"
-	headprice = 3
 	sellprice = 3
 	blood_value = BLOOD_VOLUME_BAD
 
@@ -172,9 +167,7 @@
 	grid_height = 96
 	grid_width = 96
 	w_class = WEIGHT_CLASS_BULKY
-	headpricemin = 80
-	headpricemax = 230
-	sellprice = 155
+	sellprice = 20
 	blood_value = BLOOD_VOLUME_OKAY
 
 /obj/item/natural/head/troll/apply_components()
@@ -184,24 +177,18 @@
 	name = "troll head"
 	desc = "The severed head of a once mighty warrior troll."
 	icon_state = "trollhead_axe"
-	headpricemin = 90
-	headpricemax = 250
-	sellprice = 170
+	sellprice = 30
 
 /obj/item/natural/head/troll/cave
 	name = "cave troll head"
 	icon_state = "cavetrollhead"
-	headpricemin = 120
-	headpricemax = 280
-	sellprice = 200
+	sellprice = 45
 
 /obj/item/natural/head/rous
 	name = "rous head"
 	desc = "The severed head of an unusually large rat."
 	icon_state = "roushead"
-	headpricemin = 3
-	headpricemax = 7
-	sellprice = 5
+	sellprice = 2
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 
 /obj/item/natural/head/direbear
@@ -218,24 +205,20 @@
 	icon_state = "foxhead"
 	layer = 3.1
 	grid_height = 32
-	sellprice = 6
+	sellprice = 12 // fur trade
 	blood_value = BLOOD_VOLUME_SURVIVE
 
 /obj/item/natural/head/spider
 	name = "beespider head"
 	desc = "The severed head of a venomous beespider."
 	icon_state = "spiderhead"
-	headpricemin = 4
-	headpricemax = 20
-	sellprice = 12
+	sellprice = 6
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
 
 /obj/item/natural/head/bug
 	name = "bogbug head"
 	desc = "The severed head of a gross bogbug."
 	icon_state = "boghead"
-	headpricemin = 4
-	headpricemax = 15
 	sellprice = 10
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
 
@@ -245,9 +228,7 @@
 	icon_state = "molehead"
 	grid_height = 96
 	grid_width = 96
-	headpricemin = 3
-	headpricemax = 7
-	sellprice = 5
+	sellprice = 8
 	blood_value = BLOOD_VOLUME_SURVIVE
 
 /obj/item/natural/head/mole/apply_components()
@@ -257,8 +238,7 @@
 	name = "gote head"
 	desc = "The severed head of a fiery gote."
 	icon_state = "gotehead"
-	headprice = 2
-	sellprice = 2
+	sellprice = 3
 	blood_value = BLOOD_VOLUME_SURVIVE / 2
 
 //RTD make this a storage item and make clickign on animals with things put it in storage
@@ -272,7 +252,7 @@
 	gripped_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	sellprice = 80
+	sellprice = 30
 
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)

@@ -513,6 +513,7 @@
 			O.grabbee = src
 			O.limb_grabbed = BP
 			BP.grabbedby += O
+			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
 			if(item_override)
 				O.sublimb_grabbed = item_override
 			else
@@ -745,7 +746,7 @@
 		to_chat(src, "<span class='warning'>I am already sleeping!</span>")
 		return
 	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
+		if(tgui_alert(src, "You sure you want to sleep for a while?", "Sleep", list("Yes", "No")) == "Yes")
 			SetSleeping(400) //Short nap
 
 /mob/proc/get_contents()
@@ -1031,7 +1032,7 @@
 			if(heal_flags & ADMIN_HEAL_ALL)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp, forced = TRUE)
+				wound.heal_wound(wound.whp, null, TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
@@ -1278,7 +1279,7 @@
 	if(stat)
 		return
 	surrendering = 1
-	if(!alert(src, "Yield in surrender?",,"YES","NO") == "YES")
+	if(!tgui_alert(src, "Yield in surrender?","Yield", list("YES","NO")) == "YES")
 		return
 
 	record_round_statistic(STATS_YIELDS)
@@ -2592,6 +2593,16 @@
 			if("fog")
 				to_chat(src, span_warning("I can't see anything, the fog has set in."))
 				return
+		if(GLOB.tod == NIGHT)
+			var/briar_notice = FALSE
+			for(var/datum/wound/black_briar_curse/briar in get_wounds())
+				briar.infection += (briar.max_infection * 0.01) // 1% added for looking at the moon
+				if(briar.can_examine)
+					briar_notice = TRUE
+			if(briar_notice)
+				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				add_stress(/datum/stress_event/black_briar_noc)
+				return
 		to_chat(src, span_info("There is nothing special to say about this weather."))
 		do_time_change()
 
@@ -3030,3 +3041,8 @@
 	if(hud_used)
 		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_ICON)
+
+/// For updating swimming movement. Handled in [/datum/element/submerged]
+/mob/living/proc/set_swimming(swimming)
+	if(HAS_TRAIT(src, TRAIT_SUBMERGED))
+		SEND_SIGNAL(src, COMSIG_LIVING_SWIM, swimming)

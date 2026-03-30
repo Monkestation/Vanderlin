@@ -87,6 +87,8 @@
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
 	mill_result = /obj/item/reagent_containers/powder/flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing wheat stalks", /obj/item/natural/chaff/wheat))
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat/examine(mob/user)
 	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -104,6 +106,8 @@
 	bitesize_mod = 2
 	tastes = list("oat" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing oat stalks", /obj/item/natural/chaff/oat))
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat/examine(mob/user)
 	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -123,7 +127,9 @@
 	tastes = list("chipping a tooth" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
-	mill_result = /obj/item/reagent_containers/powder/flour
+	mill_result = /obj/item/reagent_containers/powder/sunreed_flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing ears of sunreed", /obj/item/natural/chaff/sunreed))
 
 // ^ PSA: next time you want to do this, make and run an updatepaths migration in tools/UpdatePaths
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple
@@ -652,7 +658,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.cursedblood)
-				if(alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", list("YES", "NO")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else

@@ -4,7 +4,7 @@
 	var/start = 6 HOURS // 6:00 am
 
 /datum/time_of_day/dawn
-	name = "Dawn"
+	name = DAWN
 	color = list("#394579", "#49385d", "#3a1537")
 	start = 8 HOURS //8:00:00 AM
 
@@ -24,7 +24,7 @@
 	start = 15 HOURS //3:00:00 PM
 
 /datum/time_of_day/dusk
-	name = "Dusk"
+	name = DUSK
 	color = list("#c26f56", "#c05271", "#b84933")
 	start = 15.5 HOURS //3:30:00 PM
 

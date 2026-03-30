@@ -153,7 +153,7 @@
 
 /datum/mapGeneratorModule/rwforestwater
 	clusterCheckFlags = CLUSTER_CHECK_NONE
-	allowed_turfs = list(/turf/open/water/cleanshallow,
+	allowed_turfs = list(/turf/open/water/clean,
 							/turf/open/water/swamp,
 							/turf/open/water/swamp/deep)
 	excluded_turfs = list(/turf/open/water/river)

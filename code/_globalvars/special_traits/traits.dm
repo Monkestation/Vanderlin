@@ -594,6 +594,7 @@
 
 /datum/special_trait/nimrod/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STAT_INTELLIGENCE, -4)
+	character.set_hair_style(/datum/sprite_accessory/hair/head/nimrod, FALSE)
 
 /datum/special_trait/ugly
 	name = "Ugly"
@@ -1011,3 +1012,11 @@
 		devotion.grant_to(character)
 	character.mind.special_items["Baotha's Gift"] = /obj/item/clothing/head/corruptflower
 	character.AddComponent(/datum/component/theme_music)
+
+/datum/special_trait/black_biar
+	name = "Host of the Black Briar"
+	greet_text = span_briar("Bramble writhes beneath my skin... but it should not get worse. I hope.")
+	weight = 35
+
+/datum/special_trait/black_biar/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_BRIAR_HOST, BE_SPECIAL_TRAIT)

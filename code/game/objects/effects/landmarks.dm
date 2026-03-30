@@ -114,7 +114,43 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/combatlate
 	name = "Combatlate"
 	icon_state = "arrow_blue"
-	jobspawn_override = list( "Pilgrim", "Adventurer", "Mercenary")
+	jobspawn_override = list("Pilgrim", "Adventurer", "Mercenary")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/puritanlate
+	name = "Herr Prafektlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Herr Prafekt")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/orthodoxistlate
+	name = "Sacrestantslate"
+	icon_state = "arrow"
+	jobspawn_override = list("Sacrestants")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/absolverlate
+	name = "Absolverlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Absolver")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/adeptlate
+	name = "Adeptlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Adept")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/bogwitchlate
+	name = "Bog Witchlate"
+	icon_state = "arrow_blue"
+	jobspawn_override = list("Bog Witch")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/bogwitch_apprenticelate
+	name = "Bog Witch Apprenticelate"
+	icon_state = "arrow_blue"
+	jobspawn_override = list("Bog Witch Apprentice")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/lord
@@ -149,7 +185,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Royal Knight"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/veteran
+/obj/effect/landmark/start/tombwarden
 	name = "Veteran"
 	icon_state = "arrow"
 
@@ -194,17 +230,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Priest"
 	icon_state = "arrow"
 
-
 /obj/effect/landmark/start/monk
 	name = "Acolyte"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/puritan
-	name = "Inquisitor"
+	name = "Herr Prafekt"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/orthodoxist
-	name = "Orthodoxist"
+	name = "Sacrestants"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/absolver
@@ -364,10 +399,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Feldsher"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/gaffer
-	name = "Gaffer"
+/obj/effect/landmark/start/tombwarden
+	name = "Tomb Warden"
 	icon_state = "arrow"
-//yrf
 
 /obj/effect/landmark/start/squire
 	name = "Squire"
@@ -387,10 +421,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/matron_assistant
 	name = "Matron Assistant"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/gaffer_assistant
-	name = "Ring Servant"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/churchling
@@ -413,29 +443,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Clinic Apprentice"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/bogwitch
+	name = "Bog Witch"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bogwitch_apprentice
+	name = "Bog Witch Apprentice"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/evilskeleton	// Trying to make EVIL SKELTON actually spawn
 	name = "Skeleton"
 	icon = 'icons/mob/actions/roguespells.dmi'
 	icon_state = "raiseskele"
 	alpha = 20
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/bogwitch
-	name = JOB_BOGWITCH
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/bogwitch_apprentice
-	name = JOB_BOGWITCH_APP
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/bogwitchlate
-	name = JOB_BOGWITCH + "_late"
-	icon_state = "arrow_blue"
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/bogwitch_apprenticelate
-	name = JOB_BOGWITCH_APP + "_late"
-	icon_state = "arrow_blue"
 	delete_after_roundstart = FALSE
 
 //Antagonist spawns

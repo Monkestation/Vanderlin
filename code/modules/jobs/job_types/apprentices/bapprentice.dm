@@ -35,6 +35,7 @@
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/bapprentice
+	can_be_apprentice = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bapprentice
 
