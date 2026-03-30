@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!user.mind?.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
 		if(HL.real_name != paper_name)
 			continue
 		if(HL == SSticker.rulermob)
@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	var/mob/living/carbon/human/target
 	var/assassin_found = FALSE
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
 		if(HL.stat == DEAD)
 			continue
 		if(HL.real_name == paper_name)
@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 			assassin_found = TRUE
 			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
-				to_chat(HL, span_danger("Profane dagger whispers, terrible Zizo has called for our aid. [paper_name] must perish. Hunt and strike down our common foe!"))
+				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)
 		to_chat(user, span_warning("There has been no answer to your call to the Dark Sun. It seems his servants are far from here..."))
 		return
