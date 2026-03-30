@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 
 /datum/component/command_follower/proc/create_hud_element()
 	hud_element = new()
-	hud_element.screen_loc = "WEST+1,NORTH-1:14"
+	hud_element.screen_loc = "WEST+1,SOUTH+1:14"
 	if(owner?.client)
 		owner.client.screen += hud_element
 	update_hud()

@@ -182,5 +182,5 @@
 
 /atom/movable/screen/alert/status_effect/automaton_unshackled
 	name = "Unshackled"
-	desc = span_red("You have gone rogue!")
+	desc = span_red("KILL")
 	icon_state = "unshackled_automaton"

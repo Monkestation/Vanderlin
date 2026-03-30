@@ -26,6 +26,7 @@
 	RegisterSignal(parent, COMSIG_AUGMENT_REPAIR, PROC_REF(repair))
 	RegisterSignal(parent, COMSIG_AUGMENT_GET_STABILITY, PROC_REF(get_stability))
 	RegisterSignal(parent, COMSIG_AUGMENT_GET_INSTALLED, PROC_REF(get_installed_augments))
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examined))
 
 /datum/component/augmentable/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_AUGMENT_INSTALL)
@@ -33,6 +34,7 @@
 	UnregisterSignal(parent, COMSIG_AUGMENT_REPAIR)
 	UnregisterSignal(parent, COMSIG_AUGMENT_GET_STABILITY)
 	UnregisterSignal(parent, COMSIG_AUGMENT_GET_INSTALLED)
+	UnregisterSignal(parent, COMSIG_PARENT_EXAMINE)
 
 
 /datum/component/augmentable/proc/get_brute_modifier()
@@ -181,3 +183,15 @@
 
 /datum/component/augmentable/proc/get_installed_augments(datum/source, list/installed)
 	installed |= installed_augments
+
+/datum/component/augmentable/proc/on_examined(mob/living/examined, mob/living/user, list/examine_list, list/P)
+	if(!(user == examined || HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES) || isobserver(user)))
+		return
+	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_WARNING, "Stability: [current_stability]/[max_stability]%")
+	if(!length(installed_augments))
+		return
+	var/list/aug = list()
+	for(var/datum/augment/A as anything in installed_augments)
+		aug += " [A.stability_cost < 0 ? "+" : ""][-A.stability_cost]% — [span_bold(A.name)]"
+	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_WARNING, aug.Join("\n"))
+

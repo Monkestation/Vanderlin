@@ -64,7 +64,7 @@
 
 /obj/item/augment_kit/pre_attack_secondary(mob/living/M, mob/living/user, list/modifiers)
 	. = ..()
-	if(!istype(M.buckled, /obj/machinery/artificer_table))
+	if(istype(M) && !istype(M.buckled, /obj/machinery/artificer_table))
 		to_chat(user, span_warning("[M] must be on an artificer's table!"))
 		return
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -90,7 +90,7 @@
 	if(skill < to_remove.engineering_difficulty)
 		to_chat(user, span_warning("You lack the engineering skill to install this augment!"))
 		return
-	to_chat(user, span_notice("You begin uninstalling [to_remove.name]..."))
+	to_chat(user, span_notice("You begin uninstalling \the [to_remove.name]..."))
 	if(!do_after(user, to_remove.installation_time, target = M))
 		return
 	if(to_remove.parent != M)
