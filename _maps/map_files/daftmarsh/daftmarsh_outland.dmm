@@ -35,6 +35,14 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"aI" = (
+/obj/item/chair,
+/obj/item/ammo_casing/caseless/bolt,
+/obj/effect/decal/cleanable/blood,
+/obj/item/gun/ballistic/bow/cross,
+/obj/effect/decal/remains/human,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "aK" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -788,6 +796,15 @@
 	pixel_y = 3
 	},
 /turf/open/floor/cobble/alt,
+/area/under/mountains/anvil/lower)
+"hM" = (
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/structure/table/wood/plain,
+/obj/item/painting/queen{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "hO" = (
 /obj/item/reagent_containers/food/snacks/sugar{
@@ -1762,14 +1779,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/lower)
-"su" = (
-/obj/item/chair,
-/obj/item/ammo_casing/caseless/bolt,
-/obj/effect/decal/cleanable/blood,
-/obj/item/gun/ballistic/bow/cross,
-/obj/effect/decal/remains/human,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
 "sy" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -2213,6 +2222,14 @@
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"xI" = (
+/obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/reagent_containers/glass/bottle/redwine,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "xK" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/red,
@@ -3103,14 +3120,6 @@
 /obj/structure/flora/grass/herb/atropa,
 /turf/open/floor/grass,
 /area/outdoors/bog)
-"Hm" = (
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/bow/long,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/reagent_containers/glass/bottle/redwine,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/wood,
-/area/indoors/villagegarrison)
 "Ht" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood/nosmooth,
@@ -3634,15 +3643,6 @@
 	pixel_x = 8
 	},
 /turf/open/floor/cobble/alt,
-/area/under/mountains/anvil/lower)
-"MN" = (
-/obj/structure/fluff/walldeco/bigpainting,
-/obj/structure/table/wood/plain,
-/obj/item/painting/queen{
-	pixel_x = -3;
-	pixel_y = -5
-	},
-/turf/open/floor/twig,
 /area/under/mountains/anvil/lower)
 "MS" = (
 /obj/structure/fluff/statue/knight/interior/r,
@@ -39381,7 +39381,7 @@ lD
 lD
 Wn
 SD
-su
+aI
 lD
 lD
 lD
@@ -83615,7 +83615,7 @@ IT
 fk
 IT
 Df
-MN
+hM
 Ka
 nj
 oO
@@ -152807,7 +152807,7 @@ GE
 YG
 YG
 kS
-Hm
+xI
 JI
 PW
 LO

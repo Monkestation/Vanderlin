@@ -75,7 +75,7 @@
 				return
 	if(istype(AM, /obj/effect/dummy/phased_mob)) //don't squeek if they're in a phased/jaunting container.
 		return
-	if(AM.movement_type & (FLYING|FLOATING))
+	if(AM.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND))
 		return
 	if(ismob(AM) && !AM.density) // Prevents 10 overlapping mice from making an unholy sound while moving
 		return

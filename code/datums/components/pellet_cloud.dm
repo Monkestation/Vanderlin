@@ -229,7 +229,7 @@
 	P.suppressed = TRUE // set the projectiles to make no message so we can do our own aggregate message
 	P.preparePixelProjectile(target, parent)
 	RegisterSignal(P, COMSIG_PROJECTILE_SELF_ON_HIT, PROC_REF(pellet_hit))
-	RegisterSignal(P, list(COMSIG_PARENT_QDELETING), PROC_REF(pellet_range))
+	RegisterSignal(P, COMSIG_PARENT_QDELETING, PROC_REF(pellet_range))
 	pellets += P
 	P.fire()
 	if(landmine_victim)

@@ -1,0 +1,500 @@
+2025-08-03:
+  PotatoTomahto:
+  - rscadd: scabbards
+  - qol: inventory click behavior closer to tg
+  - balance: fire spread tweaks
+2025-08-04:
+  Arkatos:
+  - bugfix: Fixed an issue where you could duplicate the monarch's crown when summoning
+      it.
+  CheffieGithub:
+  - bugfix: Learning a spell from the spell tree will override that spell if it is
+      present to assure it stays.
+  - bugfix: Rituos will have it spells removed correctly and will not remove arcyne
+      eye or prestidigitation.
+  - bugfix: The learn spell... spell should get properly removed when appropiate.
+  - bugfix: Removing all spells no longer will give a message for every single spell.
+2025-08-05:
+  CheffieGithub:
+  - bugfix: Unfix learn spell removal to fix spell tree visual bug.
+  - code_imp: Issue reports are now uploaded to github via bot and do not require
+      users to use github directly, it is still preferable to use github if possible.
+  SarmentiCampbell:
+  - rscadd: Zizo's Cleric/Paladin will be able to create cursed water rather than
+      blessed water, healing the undead rather than living being.
+  - bugfix: Transact won't use kobolds as currency.
+  - bugfix: Bloodrage will now properly apply the status effect.
+2025-08-06:
+  Arkatos:
+  - bugfix: Fixed an issue where actors menu was not opening
+  - rscadd: Added ascendant effects for gods' interventions, which makes them stronger
+      and more impactful when the relevant god is ascendant.
+  Eagletanker:
+  - balance: Monarch now has Medium Armor
+  PineappleMan929:
+  - balance: Butler/Housekeep and Servants have mathematics skills
+  PotatoTomahto:
+  - balance: fire, silver, ocean's embrace, plant health n growth
+2025-08-07:
+  Arkatos:
+  - bugfix: Fixed an issue where the game failed to start properly.
+2025-08-08:
+  ApolloVector:
+  - balance: Female Antharax now has expert whips
+  Arkatos:
+  - rscadd: Added a new triumph buy option to buy an extra influence for any storyteller.
+  - rscadd: Triumph buys that already took effect cannot be refunded.
+  - qol: You can no longer cancel triumph buys of others.
+  - qol: Triumph buys now refund 100% of their cost.
+  - qol: Failed triumph buys will now automatically refund. Roll with no fear!
+  - bugfix: Fixed an issue where printing press could not find all books or printed
+      random books.
+  PotatoTomahto:
+  - balance: death to gaffer. long live merchant
+2025-08-09:
+  Arkatos:
+  - rscadd: Influences balancing, added number of medicators as a possible influence
+      for Pestra.
+  - bugfix: Influence modifier is now correctly applied to negative influences.
+  CheffieGithub:
+  - bugfix: Shield heraldry works again.
+  PotatoTomahto:
+  - balance: ruin ingots less and smithing craft diff
+  SarmentiCampbell:
+  - rscadd: Added Inhumen Paladin/Cleric
+  - bugfix: Added allowed patron requirement for subclasses so allowed patron actually
+      does something.
+  - balance: Buffed Maniac, specifically, halved their blood loss, gave them critical
+      resistance and they are now unable to lose energy
+  - balance: Deceiving meekness now falsifie the pitchness of your choice.(originally,
+      High STR lowered your pitch.)
+  - balance: lessened the chance of a jumpscare popping up.
+  - rscadd: added midround antag, maniac.
+  - bugfix: Fixed VagrantBum, problably
+  Viviridia:
+  - rscadd: Fertilizing to gnome tend crops command
+  - rscadd: Alchemical vial & bottle crafting recipes
+  - rscadd: Added infusions seed randomizer and ore --> iron infusion
+  - qol: made the essence connector equipable in the hip
+  - qol: gnome no longer damages plants by walking on them
+2025-08-10:
+  wgtjunior743:
+  - bugfix: Fix Vampire Lord undisguised unique warning not appearing
+2025-08-11:
+  Arkatos:
+  - rscadd: Added a new triumph buy - Psydon's Favourite.
+  - rscadd: Added a new triumph buy - Psydon's Retirement Fund.
+  - rscadd: Storyteller bonus influence triumph buys are now limited to 2 per round
+      and their price has decreased from 5 to 3.
+  - rscadd: All personal god objectives now award 1 extra triumph upon completion.
+  - qol: Improved Triumph Leaderboard menu.
+  - qol: Improved Triumph Shop menu formatting, layout, pagination and texts.
+  - admin: Triumph changes are now logged.
+  Eagletanker:
+  - balance: Corsair no longer has it's perception malus.
+  PineappleMan929:
+  - balance: Thieflings can be barbarians
+  PotatoTomahto:
+  - bugfix: altgrip onmob sprite
+  SarmentiCampbell:
+  - balance: Added min-pop to roll vampire/werewolf event at roundstart
+  - rscadd: Added new hallucination for maniac/zizo curse/wonder
+  - balance: lessened the chance of receiving a mob's jumpscare
+  Wrench-1:
+  - rscadd: Psydonian Whip and Psydonian Flail
+  wgtjunior743:
+  - bugfix: Only silver rapier got the silver enchantment now
+2025-08-12:
+  Arkatos:
+  - rscadd: Added a new triumph buy - Adoption Ability.
+  - rscadd: Added a new triumph buy - Orphanage Renovation.
+  CheffieGithub:
+  - bugfix: Fixed seek orphan
+  - bugfix: Fix species clothing restrictions for species that use the base body proportions
+      (Not dwarves)
+  SarmentiCampbell:
+  - bugfix: fixed maniac not stopping their music as soon as they die.
+  - bugfix: stamina regen is no longer affected by the energy bar if you have the
+      boundless energy trait.
+  Sulaboy:
+  - spellcheck: Simplified Triton accent, now it is just some fish/fishing terms.
+  - balance: Torches can be used slightly more
+  - bugfix: Metal torches last longer
+  Wrench-1:
+  - image: xylixian surcoat for Templars and Clerics
+  wgtjunior743:
+  - rscadd: Foreigner Trait Title first letter now is in uppercase.
+  - bugfix: Fix armor datums appearing on the armor recipe.
+  - bugfix: Steel Templar helmets lacking info about additional bar/items.
+2025-08-13:
+  Wabberpace:
+  - bugfix: Fixed swampweed zigs from constantly overdosing by changing the reagent
+      dosage from 60 > 30.
+  Wabberspace:
+  - rscadd: Added Beastish to hollow-kin/demihumens.
+  Wrench-1:
+  - image: modified the Adept's Cowl icon and onmob sprites.
+  grungussuss:
+  - bugfix: lich can now return to his mansion
+  - qol: slapcrafting and dye-ing now have a better UI
+  - bugfix: fixed sacks being uncraftable
+  wgtjunior743:
+  - balance: ' Malum Masterwork stat gives more influence'
+2025-08-14:
+  ApolloVector:
+  - balance: buffed anthraxi knife skill to skilled
+  - balance: buffed redsands sword skill to expert
+  - balance: buffed black oak guardian's main weapon skill to expert
+  Arkatos:
+  - rscadd: Added new a new triumph buy - Fart Ability.
+  - rscadd: Added new a new triumph buy - Leprosy.
+  CheffieGithub:
+  - bugfix: Changelog entries are sorted descending.
+  Sulaboy:
+  - balance: fiber bundles can hold 12 fibers now.
+  wgtjunior743:
+  - rscadd: A new preference option for newlywed and Parent, called \"Preferred Gender\".
+2025-08-15:
+  DrSirKnight:
+  - qol: Lore Primer can now be checked at any time, not just in lobby.
+  wgtjunior743:
+  - balance: Pilgrims can have apprentices.
+  - bugfix: Foreigners who got their Job changed by \"Change Position\" now got their
+      title.
+2025-08-16:
+  Arkatos:
+  - rscadd: Added a new communal triumph buy - Longer Week.
+  PotatoTomahto:
+  - bugfix: better cooking qol
+  SarmentiCampbell:
+  - balance: Nerf Lich by lowering their dagger skill from 5 to 2, in exchange buff
+      their polearm skill from 2 to 4 and grant them 17 spellpoints, equivalent to
+      CM.
+  - balance: Nerf greater skeletons by removing their infinite stamina, swift intent
+      and lowering their wrestling skill gain by 1.
+  Wouju:
+  - rscadd: Added new clothes for the courtphysician
+  - image: courtphysician clothes are in their own seperate dmi file I despise merge
+      conflicts
+  grungussuss:
+  - bugfix: robes are no longer shit colored
+  - sound: lock unlock door sounds are back
+2025-08-17:
+  Arkatos:
+  - rscadd: Xylix as a storyteller now respects round start events requirements. (But
+      then true silliness begins)
+  PotatoTomahto:
+  - balance: royal knights no longer get master skill
+  - balance: swift intent does less damage
+  - balance: greatswords and halberds do less damage
+  SarmentiCampbell:
+  - balance: Replace Vampire lord's thralls's infinite stamina with infinite energy,
+      Vampire lord will retain their infinite stamina.
+  grungussuss:
+  - qol: pointing at items in your inventory displays them above you
+  - admin: orphans are once again a 0 pq role
+  - bugfix: fixed lag when changing areas caused by loading music files
+  - bugfix: fixed vicious mockery being an untargeted spell
+  - bugfix: fixed admin liquid spawn cancel button not working
+  - bugfix: fixed infinite bronze and steel gear smelt oversight
+  - bugfix: fixed freshly smithed items being damaged
+  wgtjunior743:
+  - rscdel: Remove Artificer Keys from pilgrims.
+2025-08-18:
+  CheffieGithub:
+  - bugfix: Potentially fix lesser miracle damage nukes.
+  - balance: Stone arrows no longer bypass heart crit requirements.
+  - balance: Arrows and similar projectiles now are crit blocked by stab protection.
+2025-08-19:
+  Arkatos:
+  - bugfix: Fixed a rare issue where a roundstart event failed to trigger due to wrong
+      timing.
+  PotatoTomahto:
+  - bugfix: infernal watcher fixed
+  - bugfix: flight runtimes
+  - balance: changes math calculation so pain matter again
+  grungussuss:
+  - qol: the item offer effect is now bigger
+  - bugfix: fixed clamped adjust skillrank not working correctly
+2025-08-20:
+  F-e-r-n:
+  - balance: Decompose now requires your opponent to be dead before turning them into
+      a deadite.
+  SarmentiCampbell:
+  - bugfix: fixed special antag's patron getting removed while using Subclasses, (Barbarian,
+      Mage, etc)
+  - balance: Remove the ability for bandits to be maniac.
+  Sulaboy:
+  - bugfix: necra robe sleeves
+  grungussuss:
+  - qol: admin announcements are easier to notice
+  - rscadd: added new scabbards
+  - balance: scabbards cannot be pickpocketed
+  wgtjunior743:
+  - balance: Change Dark/Itinerant Knight squires plate armor to light armor.
+  - rscadd: Add titles for the Dark and Itinerant Knights
+  - rscdel: Remove Medium Armor Training from the Dark/Itinerant Knights
+2025-08-21:
+  Wouju:
+  - code_imp: removed job flags
+  grungussuss:
+  - qol: '{FIX-CHAT} verb renamed to Fix-Chat'
+2025-08-22:
+  Diegoflores31:
+  - rscadd: Adds new shipments for the goldface
+  - rscadd: Adds new categories for the goldface
+  - refactor: Goldface UI changed size and format . its now 2 rows instead of one
+      and will automatically acomodate new categories.
+  HijackSpaghetti:
+  - rscadd: New chalk rune and ritual for leyline attunement a.k.a. mana baptism.
+  SarmentiCampbell:
+  - rscadd: Add a new special trait - Devout Knight
+  - rscadd: Major/minor antag now have a chance to spawn a minor antag
+  - balance: bandits are now actually considered soft antags
+  Wouju:
+  - rscadd: You can craft faeu dust, raw essentia, pure essentia, transis dust and
+      thaumic iron dust
+  - rscadd: the essence splitter now accepts manabloom powder, standard quartz mana
+      crystals, small quartz mana crystals and thaumic iron (dust)
+  - rscadd: cinnabar can be made in an infuser
+  - rscadd: gender change potion to pot making aka herbal remedies
+  - rscadd: the composter accepts sinew and viscera as compost
+  - bugfix: essence vials update their sprite when pouring essence into a cauldron
+  - bugfix: gnome test tube now properly displays how much essence it needs
+  - balance: essence infuser is faster now, splitter has greater capacity
+  - balance: disease cure now requires 1 part earth essence
+  - refactor: made it so herbal salves now require 21 units and not 20, herbal remedies
+      need 27 instead of 25, rounds up better when divided by 3.
+  grungussuss:
+  - qol: throne will now glow when it is in a mode
+  - admin: scrying no longer messages admins
+  wgtjunior743:
+  - rscadd: A new migrant wave called \" Magic School Expedition\"
+  - rscadd: A new trait called \"Recognized\"
+  - balance: Some Foreigners now got the trait \"Recognized\" and their title are
+      shown.
+  - bugfix: Vampire subordinate creation UI now works on small resolutions
+  - balance: Buff Churn Undead
+2025-08-23:
+  CheffieGithub:
+  - bugfix: Fix cleric and templar miracle progression.
+  - balance: You cannot excommunicate followers of the inhumen.
+  PotatoTomahto:
+  - bugfix: fixes advclass rolls
+  - rscadd: onscreen blurbs when insane
+  SarmentiCampbell:
+  - rscadd: Re-add the maniac's disgusting pig examine.
+  - balance: increase the weight and chance for it to proc of the midround maniac
+      proccing(it still hasn't rolled yet in ages.)
+  - rscadd: Give Maniac strong-grabber trait
+  - balance: lower maniac's role restrictions(mostly youngling roles since they do
+      get debuffed)
+  Wouju:
+  - code_imp: woodcutter and footman war axe can now be found in the polearms file
+  dwasint:
+  - rscadd: apiaries are now craftable
+  - rscadd: seed merchants can now rarely bring queen bees with them
+  grungussuss:
+  - bugfix: fixed lord color being wonky
+  - admin: admins are notified when a monarch or priest disconnects
+  - rscadd: amount lost from dying on a psycross decreased from 2 to 0
+  - rscadd: amount lost from dying in a cell decreased from 2 to 0
+  - rscadd: amount lost from dying reduced from 1 to 0
+  - bugfix: copy outfit works again
+  - admin: added better logging for spell usage
+  - rscadd: you can now make paper from logs on a tanning rack
+  - rscadd: Added meow
+2025-08-24:
+  Arkatos:
+  - rscadd: Added a new triumph buy - Secret Officiant.
+  - rscadd: Added a new triumph buy - Random Curse.
+  CheffieGithub:
+  - bugfix: fix abyssorites and acolytes miracles
+  Diegoflores31:
+  - bugfix: fixes goldface
+  PotatoTomahto:
+  - rscadd: briar troll shrine that can be made with two troll heads
+  - code_imp: transformation status effect, refactors transformation code
+  - balance: werewolves have slightly higher bleed mod. werewolves damage clothing
+      upon transformation.
+  Wouju:
+  - bugfix: raw essentia crafting
+2025-08-25:
+  Arkatos:
+  - bugfix: Fixed an issue where printing press was not printing correct books
+  CheffieGithub:
+  - rscadd: You can label bottles with parchment and a feather again. Middle-click
+      to remove the label.
+  Wouju:
+  - rscadd: Master of Nerves logs and text display has been improved
+  - rscadd: Clerics, both Ten and Inhumen, had their loadouts overhauled
+  - rscadd: Made the Forgefiend a hammer, you can craft and smith with it now
+  - rscadd: Wooden mallet can now be used to smith with
+  - code_imp: hammers use defines for their force and integrity, set some maces integrity
+      to use their defines
+  flleeppyy:
+  - rscadd: Proper Discord verification via 'OOC > Verify Discord Account' verb.
+  grungussuss:
+  - bugfix: fixed seeing no name in the disconnected important role admin message
+  wgtjunior743:
+  - balance: Potence now gets a minor STR buff for weapon attacks
+  - qol: Death Knight and Steal the sun commands now tells the user the amount of
+      vitae needed for these actions if they lack enough.
+  - bugfix: Ritual of Ascension now works.
+  - bugfix: Vampire Lord can ascend at their last Ritual of Ascension
+  - bugfix: Vampire Lord can acess their Tome Souls after their first ascension
+  - code_imp: Ritual of Ascension was renamed together with their stages and descriptions.
+  - rscadd: Add a Like, Dislike and Ask Again Feature to Mentor
+  - rscadd: Voices got an unique name in the meditates that is consistent like the
+      Meditates
+  - rscadd: Medidates names can't be repeated anymore
+  - rscadd: Mentor Statistics at the Admin Tab
+  - rscadd: Mentors can gain 1 Triumph from every 7 likes (it has a limit of 5 Triumphs
+      per round)
+2025-08-26:
+  PotatoTomahto:
+  - balance: fire servant requires objects to burn to ash
+  - balance: closed turfs can burn
+  Somniworld:
+  - rscadd: The town elder role is now accessible to Medicators, Tritons, and Harpies,
+      these species do not have access to the Mayor subclass, however, as it is reserved
+      for nobles.
+  Wabberspace:
+  - rscadd: A new forest garrison role, Ruffian, a youngling role primarily built
+      around being an aide to the Forest Garrison, with a mixture of Orphan and Ranger
+      skills.
+  - rscadd: A unique orphan halt used only by Ruffians.
+  - balance: Renames Forest Infantry to Forest Ravager, and replaces their Axe skills
+      with Whips & Flails, and gives them a heater shield and military flail, as well
+      as rearranging their stats to be far slower, and far more durable/enduring,
+      and gives them the critical resistance perk.
+  - rscadd: A new belt type used by the Forest Garrison that includes their key and
+      a needle.
+  - balance: Allows forrester armour to be sew-repaired.
+  - balance: Gives Forest Reaver a +1 speed statline, bringing them to parity with
+      adults.
+  - bugfix: Allows Aasimar to be Wardens.
+  - balance: Replaces the Forest Guard's steel coifs with iron bevors.
+  - balance: Prevents the Forest Guard from taking on apprentices.
+  - balance: Raises Forest Guard slots to 4 to coincide with Ruffian influxes.
+  Wouju:
+  - bugfix: Tavern Brawler special works properly now
+  - code_imp: Special traits now use stat defines properly
+  - rscadd: biggest shelves aka racks are now climbable and are dense
+  - balance: Cleaning people with normal soap applies the clean mood effect, which
+      will remove the stink of horcs. Cleaning yourself with herbal soap applies a
+      greater effect, and being cleaned by someone with herbal soap will apply the
+      clean buff
+  - balance: Soaps now lose a bit of use when dilluted in a bucket of water, it is
+      still way better than using it to clean floors directly
+2025-08-27:
+  Arkatos:
+  - rscadd: Expanded Economy section in the Chronicle.
+  - rscadd: Added Gods Events in the Chronicle.
+  PotatoTomahto:
+  - rscadd: sacks pull a random item out when right clicked
+  SarmentiCampbell:
+  - balance: lowered chance for secondary antag to spawn, Maniac and Aspirant will
+      now roll for a major antag with a increased chance.
+  - balance: added minimum player requirement for secondary antags to spawn.
+  Siro:
+  - rscadd: Harpies can eat worms and silk worms
+  - qol: Flying ability button now shows when it is active.
+  - code_imp: Added the ability to restrict types to abberant_eater
+  grungussuss:
+  - qol: added animations for lying down, standing up and being grabbed
+  - qol: lock unlock now has a nice animation
+  islaughterfunny:
+  - balance: Made the Blessed Needle capable of repairing clothes.
+2025-08-28:
+  CheffieGithub:
+  - bugfix: Fixed chill touch and spell cooldown visuals.
+  - config: Enabled AFK kick config flag with 25 minute timeout and 20 minute warning.
+      Admins are immune.
+  - bugfix: Fixed random flaw badness, works like you selected the flaw (eye loss,
+      etc).
+  - bugfix: Fixed random flaw (50%) acting like random flaw (3 TRI).
+  - bugfix: Inhumen Monk and Churchlings get their T1 spell.
+  Just-Sim:
+  - code_imp: Removed a hard-coded key buffer.
+  Wouju:
+  - rscadd: Added new food items, herbsteak and herbird
+  - rscadd: A new powder was added, used in crafting the herbsteak and herbird
+  - code_imp: tweaked cooking repeatable crafting code. Now it checks if the item
+      is a food snack item before attempting to apply freshness and food quality
+2025-08-29:
+  HijackSpaghetti:
+  - balance: halves cost of mana related utility tree in spellbook, give Mana Well
+      slight mana regeneration, taken from Meditation, shifted 25 max mana to Expanded
+      Reserves.
+  - bugfix: fixed missing magical brick and flower field descriptions in spellbook
+  Just-Sim:
+  - rscadd: Emote Markdown
+  Wouju:
+  - rscadd: ZIZO sigils are now cleanable with a damp rag
+  - rscadd: ZIZO soap is now bright crimson bloody red. It also has more uses than
+      base soap.
+  - refactor: Made various ZIZO and scrying orb chat messages use span_XYZs properly.
+      Yell at me if they dont work
+  - balance: various minor skill changes
+  - rscadd: Lead balls are now crafted with tin at the artificier table
+  - rscadd: Lead balls can be crafted with tin by blacksmiths
+  - bugfix: Fixed essence harvester menu. You also need to use the jar to now remove
+      nodes from it.
+  wgtjunior743:
+  - balance: Psydon Paladin now has expert swordsman, lost their ability to speak
+      celestial but can speak old psydonic.
+  - bugfix: Progressives psydonites can roll Paladin and Church can't recruit progressive
+      psydonites anymore.
+2025-08-30:
+  CheffieGithub:
+  - bugfix: fixed an issue with doubled flaw effects.
+  F-e-r-n:
+  - balance: Makes fullplate and encumbered people get up slower
+  - balance: Removes strength check from encumbrance and makes carryweight scale on
+      either STR or CON depending on whats higher.
+  - balance: 50% encumbrance now disables sprinting from 70%
+  Just-Sim:
+  - rscadd: Door bumping with keys unlocks doors.
+  Siro:
+  - rscadd: Noble boot variants can store small knives, coins, or key. Only one storage
+      space.
+  - rscadd: Storing anything but a knife in your boots will add a stress.
+  - rscadd: Maximum 40% chance to cut yourself storing a knife in your boots at less
+      than 10 luck.
+  wgtjunior743:
+  - rscadd: Golden Psycross unique description
+  - bugfix: Good Swim Trait name is not ugly anymore
+2025-08-31:
+  Arkatos:
+  - rscadd: Added culinary preferences, which allows you to pick your favourite/hated
+      foods and drinks. Consuming your favourites gives you a mood boost that is proportional
+      to their quality. Consuming hated ones lowers your mood slightly for a while.
+  Just-Sim:
+  - rscadd: A multi-paragraph emote bound to your comma key
+  PotatoTomahto:
+  - code_imp: repairable component to refactor repairing structures
+  - balance: weeds now eat npk
+  Wouju:
+  - rscadd: court physician's cane is now a walking stick
+  - code_imp: made weapons use defines as they should
+  snowyseshi:
+  - balance: More FOV for savoyard and neck protection.
+  - rscadd: Added Zizo Speak
+  - rscadd: Gave Zizo Speak to deadites, lich, cultists and skeletons
+  - image: "added reverse psycross for language icon\\n<!-- Both :cl:'s are required\
+      \ for the changelog to work! You can put your name to the right of the first\
+      \ :cl: if you want to overwrite your GitHub username as author ingame. -->\\\
+      n<!-- You can use multiple of the same prefix (they're only used for the icon\
+      \ ingame) and delete the unneeded ones. Despite some of the tags, changelogs\
+      \ should generally represent how a player might be affected by the changes rather\
+      \ than a summary of the PR's contents. -->\\n## Pre-Merge Checklist\\n<!-- Don't\
+      \ bother filling these in while creating your Pull Request, just click the checkboxes\
+      \ after the Pull Request is opened and you are redirected to the page. -->\\\
+      n- [ ] You tested this on a local server.\\n- [ ] This code did not runtime\
+      \ during testing.\\n- [ ] You documented all of your changes.\\n<!-- Neither\
+      \ the compiler nor workflow checks are perfect at detecting runtimes and errors.\
+      \ It is important to test your code/feature/fix locally. -->\\n<img width=\\\
+      \"1015\\\" height=\\\"732\\\" alt=\\\"Capture d'\xE9cran 2025-08-29 200334\\\
+      \" src=\\\"https://github.com/user-attachments/assets/0c181031-15e2-4411-926a-a0cebc1a05a5\\\
+      \" />"

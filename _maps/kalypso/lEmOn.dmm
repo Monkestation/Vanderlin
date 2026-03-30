@@ -31,7 +31,7 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "H" = (
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
 /area/template_noop)
 "I" = (
 /obj/structure/flora/hotspring_rocks,
