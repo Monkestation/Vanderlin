@@ -51,7 +51,6 @@
 /datum/outfit/adventurer/sfighter
 	name = "Fighter (Adventurer)"
 	belt = /obj/item/storage/belt/leather/adventurer // new belt
-	r_hand = /obj/item/flashlight/flare/torch/prelit // they get back their missing torches
 	shirt = /obj/item/clothing/armor/gambeson
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	pants = /obj/item/clothing/pants/trou/leather

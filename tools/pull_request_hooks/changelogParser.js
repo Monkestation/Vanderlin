@@ -17,8 +17,7 @@ for (const [types, entry] of changelogConfig.CHANGELOG_ENTRIES) {
 function parseChangelogBody(lines, openTag) {
 	const [changelogOpening] = lines.splice(0, 1);
 
-	const author =
-		changelogOpening.substring(openTag.length).trim() || undefined;
+	const author = changelogOpening.substring(openTag.length).trim() || undefined;
 
 	const changelog = {
 		author,
@@ -40,9 +39,9 @@ function parseChangelogBody(lines, openTag) {
 		if (match) {
 			const [_, type, description] = match;
 
-			const entry = CHANGELOG_KEYS_TO_ENTRY[type];
+			const entry = CHANGELOG_KEYS_TO_ENTRY[type.toLowerCase()];
 
-			if (entry.placeholders.includes(description)) {
+			if (!entry || entry.placeholders.includes(description)) {
 				continue;
 			}
 
@@ -64,6 +63,9 @@ function parseChangelogBody(lines, openTag) {
 }
 
 export function parseChangelog(text) {
+	if (text == null) {
+		return undefined;
+	}
 	const lines = text.split("\n").map((line) => line.trim());
 
 	for (let index = 0; index < lines.length; index++) {

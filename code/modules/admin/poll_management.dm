@@ -141,7 +141,7 @@
 					<option value='SECOND'[poll?.interval == "SECOND" ? " selected" : ""]>Seconds</option>
 					<option value='MINUTE'[poll?.interval == "MINUTE" ? " selected" : ""]>Minutes</option>
 					<option value='HOUR'[poll?.interval == "HOUR" ? " selected" : ""]>Hours</option>
-					<option value='DAY'[(!poll?.interval || poll?.interval == "DAY") ? " selected" : ""]>Days</option>
+					<option value='DAY'[(!poll?.interval || poll?.interval == DAY) ? " selected" : ""]>Days</option>
 					<option value='WEEK'[poll?.interval == "WEEK" ? " selected" : ""]>Weeks</option>
 					<option value='MONTH'[poll?.interval == "MONTH" ? " selected" : ""]>Months</option>
 					<option value='YEAR'[poll?.interval == "YEAR" ? " selected" : ""]>Years</option>
@@ -388,7 +388,7 @@
 	var/admin_ip = usr.client.address
 
 	var/end_datetime_sql
-	if (interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR"))
+	if (interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR"))
 		end_datetime_sql = "NOW() + INTERVAL :duration [interval]"
 	else
 		end_datetime_sql = ":duration"

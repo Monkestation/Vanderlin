@@ -25,7 +25,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	armor_class = AC_HEAVY
 	clothing_flags = CANT_SLEEP_IN
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	resistance_flags = FIRE_PROOF
 	pickup_sound = "rustle"
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
@@ -142,7 +142,8 @@
 	gender = PLURAL
 	icon_state = "furlinedboots"
 	item_state = "furlinedboots"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/fur
 	salvage_amount = 1
@@ -156,7 +157,8 @@
 	gender = PLURAL
 	icon_state = "furlinedanklets"
 	item_state = "furlinedanklets"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	is_barefoot = TRUE
 	salvage_amount = 1
@@ -170,7 +172,8 @@
 	icon_state = "clothlinedanklets"
 	item_state = "furlinedanklets"
 	is_barefoot = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	armor = list("blunt" = 5, "slash" = 5, "stab" = 5,  "piercing" = 0, "fire" = 0, "acid" = 0) //Thinks its fair for a piece of cloth and fiber.
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
@@ -220,3 +223,15 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+//.............. Gronn Boots .................//
+
+/obj/item/clothing/shoes/boots/armor/gronn
+	name = "osslandic iron boots"
+	desc = "Thick iron boots, tied with a leather cord; protective and sturdy. \
+			Osslandic legend tells of a great warrior who fought for aeons until a hero speared him through the foot. \
+			The Northmen have since followed through by protecting their feet heavily."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplateboots"
+	item_state = "gronnplateboots"

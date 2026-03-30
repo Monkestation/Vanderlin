@@ -5,7 +5,8 @@
 	gender = PLURAL
 	icon_state = "trou"
 	item_state = "trou"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	r_sleeve_status = SLEEVE_NORMAL
@@ -55,7 +56,9 @@
 	icon_state = "lakkarikilt"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	max_integrity = 175
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor = list("blunt" = 65, "slash" = 50, "stab" = 25, "piercing" = 25,"fire" = 0, "acid" = 0)
@@ -159,3 +162,23 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
 	uses_lord_coloring = LORD_PRIMARY
+
+//gronn trou
+/obj/item/clothing/pants/trou/leather/splint/gronn
+	name = "osslandic chain chausses"
+	desc = "A pair of chain-wrapped pants with a leather subligar, ensuring both protection and comfort."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnchainpants"
+	item_state = "gronnchainpants"
+
+/obj/item/clothing/pants/trou/leather/gronn
+	name = "osslandic fur pants"
+	desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
+			Those of Ossland adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
+	icon_state = "gronnleatherpants"
+	item_state = "gronnleatherpants"
+	armor = ARMOR_GRONN_LIGHT
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'

@@ -85,9 +85,6 @@
 /obj/structure/flora/tree/evil/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(controller)
-		controller.endvines()
-		controller = null
 	return ..()
 
 /obj/structure/flora/tree/wise
@@ -410,7 +407,14 @@
 	dir = pick(GLOB.cardinals)
 
 /datum/component/grass/Initialize()
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	if(!ismovableatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
+
+/datum/component/grass/Destroy(force)
+	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
+	return ..()
 
 /datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent

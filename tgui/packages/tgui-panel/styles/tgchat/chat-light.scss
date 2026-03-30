@@ -714,6 +714,10 @@ h2.alert {
   font-size: 1.23em;
 }
 
+.gronnic {
+  font-family: "Jorvik Informal", Pterra;
+}
+
 .torture {
   color: hsl(111, 100%, 56%);
 }
@@ -834,6 +838,10 @@ h2.alert {
 
 .silver{
   color: hsl(0, 7%, 26%);
+}
+
+.briar{
+  color: #6b3a4a;
 }
 
 .icon {
@@ -1616,6 +1624,36 @@ $border-width-px: $border-width * 1px;
 
 	100% {
 		color: hsl(84, 13%, 48%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### THE BLACK BRIAR ##### */
+.god_theblackbriar {
+  color: hsl(340, 30%, 32%);
+  font-weight: bold;
+  animation: blackbriar_flicker 1s infinite;
+}
+
+@keyframes blackbriar_flicker {
+	20% {
+		color: hsl(340, 30%, 32%);
+	}
+
+	40% {
+		color: hsl(0, 41%, 23%);
+	}
+
+	60% {
+		color: hsl(340, 30%, 32%);
+	}
+
+  80% {
+		color: hsl(349, 54%, 21%);
+	}
+
+	100% {
+		color: hsl(345, 36%, 37%);
 	}
 }
 /* ##### END ##### */

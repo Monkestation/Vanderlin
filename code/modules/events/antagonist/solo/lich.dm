@@ -10,13 +10,13 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 65
+	denominator = HIGHPOP_THRESHOLD+10
 
 	base_antags = 1
 	maximum_antags = 2
 
-	min_players = LOWPOP_THRESHOLD
-	weight = 12
+	min_players = LOWPOP_THRESHOLD + 10
+	weight = 10
 
 	earliest_start = 0 SECONDS
 

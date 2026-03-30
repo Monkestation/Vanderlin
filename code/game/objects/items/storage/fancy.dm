@@ -51,12 +51,12 @@
 	is_open = !is_open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Exited()
+/obj/item/storage/fancy/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Entered()
+/obj/item/storage/fancy/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)

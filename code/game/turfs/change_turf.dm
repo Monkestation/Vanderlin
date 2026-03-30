@@ -5,7 +5,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 /turf/proc/empty(turf_type=/turf/open/floor/naturalstone, baseturf_type, list/ignore_typecache, flags)
 	// Remove all atoms except observers, landmarks, docking ports
-	var/static/list/ignored_atoms = typecacheof(list(/mob/dead, /obj/effect/landmark, /atom/movable/lighting_object, /atom/movable/outdoor_effect))
+	var/static/list/ignored_atoms = typecacheof(list(/mob/dead, /obj/effect/landmark, /atom/movable/lighting_object))
 	var/list/allowed_contents = typecache_filter_list_reverse(GetAllContentsIgnoring(ignore_typecache), ignored_atoms)
 	allowed_contents -= src
 	for(var/i in 1 to allowed_contents.len)
@@ -68,14 +68,10 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		return new path(src)
 
 	var/old_dynamic_lighting = dynamic_lighting
+	var/old_affecting_lights = affecting_lights
 	var/old_lighting_object = lighting_object
-	var/old_lighting_corner_NE = lighting_corner_NE
-	var/old_lighting_corner_SE = lighting_corner_SE
-	var/old_lighting_corner_SW = lighting_corner_SW
-	var/old_lighting_corner_NW = lighting_corner_NW
-
 	var/old_outdoor_effect = outdoor_effect
-
+	var/old_corners = corners
 	var/old_directional_opacity = directional_opacity
 
 	var/old_exl = explosion_level
@@ -91,39 +87,36 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	changing_turf = TRUE
 	qdel(src)	//Just get the side effects and call Destroy
 	//We do this here so anything that doesn't want to persist can clear itself
-	var/list/old_comp_lookup = comp_lookup?.Copy()
-	var/list/old_signal_procs = signal_procs?.Copy()
-	var/turf/W = new path(src)
+	var/list/old_listen_lookup = _listen_lookup?.Copy()
+	var/list/old_signal_procs = _signal_procs?.Copy()
+	var/carryover_turf_flags = (RESERVATION_TURF | UNUSED_RESERVATION_TURF) & turf_flags
+	var/turf/new_turf = new path(src)
+	new_turf.turf_flags |= carryover_turf_flags
 
 	// WARNING WARNING
 	// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
 	// It's possible because turfs are fucked, and if you have one in a list and it's replaced with another one, the list ref points to the new turf
-	if(old_comp_lookup)
-		LAZYOR(W.comp_lookup, old_comp_lookup)
+	if(old_listen_lookup)
+		LAZYOR(new_turf._listen_lookup, old_listen_lookup)
 	if(old_signal_procs)
-		LAZYOR(W.signal_procs, old_signal_procs)
+		LAZYOR(new_turf._signal_procs, old_signal_procs)
 
 	for(var/datum/callback/callback as anything in post_change_callbacks)
-		callback.InvokeAsync(W)
+		callback.InvokeAsync(new_turf)
 
 	if(new_baseturfs)
-		W.baseturfs = baseturfs_string_list(new_baseturfs, W)
+		new_turf.baseturfs = baseturfs_string_list(new_baseturfs, new_turf)
 	else
-		W.baseturfs = baseturfs_string_list(old_baseturfs, W) //Just to be safe
+		new_turf.baseturfs = baseturfs_string_list(old_baseturfs, new_turf) //Just to be safe
 
 
-	W.explosion_id = old_exi
-	W.explosion_level = old_exl
+	new_turf.explosion_id = old_exi
+	new_turf.explosion_level = old_exl
 
 	if(!(flags & CHANGETURF_DEFER_CHANGE))
-		W.AfterChange(flags)
+		new_turf.AfterChange(flags)
 
-	W.blueprint_data = old_bp
-
-	lighting_corner_NE = old_lighting_corner_NE
-	lighting_corner_SE = old_lighting_corner_SE
-	lighting_corner_SW = old_lighting_corner_SW
-	lighting_corner_NW = old_lighting_corner_NW
+	new_turf.blueprint_data = old_bp
 
 	if(SSlighting.initialized)
 		if(SSoutdoor_effects.initialized)
@@ -131,7 +124,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 			update_sky_and_weather_states()
 
 		lighting_object = old_lighting_object
-
+		affecting_lights = old_affecting_lights
+		corners = old_corners
 		directional_opacity = old_directional_opacity
 		recalculate_directional_opacity()
 
@@ -146,7 +140,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		QUEUE_SMOOTH_NEIGHBORS(src)
 		QUEUE_SMOOTH(src)
 
-	return W
+	return new_turf
 
 /turf/open/ChangeTurf(path, list/new_baseturfs, flags) //Resist the temptation to make this default to keeping air.
 	if ((flags & CHANGETURF_INHERIT_AIR) && ispath(path, /turf/open))

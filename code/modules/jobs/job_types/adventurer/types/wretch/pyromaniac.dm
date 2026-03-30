@@ -55,8 +55,6 @@
 			spawned.equip_to_appropriate_slot(P)
 			to_chat(spawned, span_info("You are able to make more crossbow ammunitions with iron, blast powder and some planks."))
 
-	wretch_select_bounty(spawned)
-
 /datum/outfit/wretch/pyromaniac
 	name = "Pyromaniac (Wretch)"
 	head = /obj/item/clothing/head/roguehood/colored/red

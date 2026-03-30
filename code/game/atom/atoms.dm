@@ -159,30 +159,6 @@
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
 
-	/// Light systems, both shouldn't be active at the same time.
-	var/light_system = STATIC_LIGHT
-	/// Bitflags to determine lighting-related atom properties.
-	var/light_flags = NONE
-	/// Range of the maximum brightness of light in tiles. Zero means no light.
-	var/light_range = 0
-	/// Intensity of the light. The stronger, the less shadows you will see on the lit area.
-	var/light_power = 1
-	/// Falloff factor for the light, must be above 1. Higher the value more aggressive the falloff into darkness is
-	/// Works best on lights with large ranges
-	var/light_falloff = 1
-	/// Hexadecimal RGB string representing the colour of the light. White by default.
-	var/light_color = COLOR_WHITE
-	/// Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
-	var/light_on = TRUE
-	/// How many tiles "up" this light is. 1 is typical, should only really change this if it's a floor light
-	var/light_height = 1
-
-	///Our light source. Don't fuck with this directly unless you have a good reason!
-	var/tmp/datum/light_source/light
-	///Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
-	var/tmp/list/light_sources
-
-
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -257,7 +233,7 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if(light_system == STATIC_LIGHT && light_power && light_range)
+	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
 		update_light()
 
 	SETUP_SMOOTHING()
@@ -941,42 +917,7 @@
 		flags_1 |= ADMIN_SPAWNED_1
 	. = ..()
 	switch(var_name)
-		if(NAMEOF(src, light_range))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_range = var_value)
-			else
-				set_light_range(var_value)
-			. = TRUE
-
-		if(NAMEOF(src, light_power))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_power = var_value)
-			else
-				set_light_power(var_value)
-			. = TRUE
-
-		if(NAMEOF(src, light_falloff))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_falloff = var_value)
-			else
-				set_light_falloff(var_value)
-			. = TRUE
-
-		if(NAMEOF(src, light_color))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_color = var_value)
-			else
-				set_light_color(var_value)
-			. = TRUE
-
-		if(NAMEOF(src, light_on))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_on = var_value)
-			else
-				set_light_on(var_value)
-			. = TRUE
-
-		if(NAMEOF(src, color))
+		if("color")
 			add_atom_colour(color, ADMIN_COLOUR_PRIORITY)
 
 /**
@@ -1084,10 +1025,10 @@
 /**
  * An atom has entered this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_ENTERED
+ * Default behaviour is to send the [COMSIG_ATOM_ENTERED]
  */
-/atom/Entered(atom/movable/AM, atom/oldLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, AM, oldLoc)
+/atom/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, arrived, old_loc, old_locs)
 
 /**
  * An atom is attempting to exit this atom's contents
@@ -1108,8 +1049,8 @@
  *
  * Default behaviour is to send the COMSIG_ATOM_EXITED
  */
-/atom/Exited(atom/movable/AM, atom/newLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, newLoc)
+/atom/Exited(atom/movable/gone, atom/new_loc)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, new_loc)
 
 /**
  *Tool behavior procedure. Redirects to tool-specific procs by default.

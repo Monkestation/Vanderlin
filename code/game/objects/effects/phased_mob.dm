@@ -54,7 +54,7 @@
 		jaunter.forceMove(eject_spot)
 	qdel(src)
 
-/obj/effect/dummy/phased_mob/Exited(atom/movable/gone, direction)
+/obj/effect/dummy/phased_mob/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	if(gone == jaunter)
 		UnregisterSignal(jaunter, COMSIG_MOB_STATCHANGE)
