@@ -299,6 +299,7 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "abg" = (
+/turf/open/water/clean/dirt,
 /area/outdoors/mountains/anvil/snowyforest)
 "abi" = (
 /obj/structure/fluff/walldeco/masonflag,
@@ -831,6 +832,7 @@
 /obj/structure/fluff/railing/tall{
 	dir = 8
 	},
+/turf/open/water/clean,
 /area/outdoors/mountains/anvil/snowyforest)
 "adv" = (
 /obj/structure/fluff/railing/border{
@@ -6527,6 +6529,7 @@
 	pixel_y = 28
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/water/clean,
 /area/outdoors/mountains/anvil/snowyforest)
 "aCA" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -10951,6 +10954,7 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
+/turf/open/water/clean,
 /area/outdoors/mountains/anvil/snowyforest)
 "aWy" = (
 /turf/open/floor/naturalstone,
@@ -126010,9 +126014,9 @@ aMK
 aer
 aIS
 aCy
-abg
-abg
-abg
+hkw
+hkw
+hkw
 atV
 aqx
 aqx
@@ -126212,7 +126216,7 @@ atX
 axi
 aIS
 ana
-abg
+hkw
 aWx
 aIf
 azx
@@ -127756,7 +127760,7 @@ abg
 abg
 abg
 abg
-abg
+hkw
 abg
 abg
 aPv
