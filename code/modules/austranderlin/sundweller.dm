@@ -18,6 +18,13 @@
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/labor/fishing = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/medicine = 15,
+		/datum/attribute/skill/craft/crafting = 10,
 	)
 
 /datum/job/sundweller
@@ -29,7 +36,7 @@
 	department_flag = OUTSIDERS
 	display_order = JDO_SUNDWELLER
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
-	faction = FACTION_BUMS
+	faction = FACTION_RATS
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
@@ -58,6 +65,7 @@
 
 /datum/job/sundweller/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+	spawned.set_patron(/datum/patron/godless/sunlord)
 	// Hygiene roll
 	if(prob(25))
 		spawned.set_hygiene(HYGIENE_LEVEL_DISGUSTING)

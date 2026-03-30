@@ -73,7 +73,7 @@
 	slowdown = 5
 	water_height = WATER_HEIGHT_ANKLE
 	//water_level = 2
-	slowdown = 20
+	slowdown = 5
 	flow_speed = 1 SECONDS
 
 /turf/open/water/river/sewer/roofflow

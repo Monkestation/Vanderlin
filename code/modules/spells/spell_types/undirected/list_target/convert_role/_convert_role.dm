@@ -1,13 +1,13 @@
 /datum/action/cooldown/spell/undirected/list_target/convert_role
-	name = "Recruit Sundweller"
+	name = "Recruit Beggar"
 	desc = "Recruit someone to your cause."
 	button_icon_state = "recruit_bog"
 	/// Role given if recruitment is accepted
-	var/new_role = "Sundweller"
+	var/new_role = "Beggar"
 	/// Faction shown to the user in the recruitment prompt
-	var/recruitment_faction = "Sundwellers"
+	var/recruitment_faction = "Beggars"
 	/// Message the recruiter gives
-	var/recruitment_message = "Serve the Sunlord, %RECRUIT!"
+	var/recruitment_message = "Join the Beggars, %RECRUIT!"
 	/// Even offer them a choice to become this?
 	var/give_choice = TRUE
 	/// Say message when the recruit accepts
