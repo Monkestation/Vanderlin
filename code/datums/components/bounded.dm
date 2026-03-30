@@ -44,6 +44,8 @@
 
 	RegisterSignal(master, COMSIG_MOVABLE_MOVED, PROC_REF(check_bounds))
 	RegisterSignal(master, COMSIG_PARENT_QDELETING, PROC_REF(on_master_destroyed))
+	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_destroyed))
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(check_bounds))
 	RegisterSignal(parent, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_try_move))
 
 	if(tips)
