@@ -9,7 +9,7 @@
 
 /datum/component/augmentable/Initialize()
 	. = ..()
-	if(!isliving(parent))
+	if(!ishuman(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	START_PROCESSING(SSobj, src)
@@ -136,6 +136,7 @@
 		return COMPONENT_AUGMENT_FAILED
 	for(var/datum/augment/IA in installed_augments)
 		if(is_type_in_list(A, IA.incompatible_installations) || is_type_in_list(IA, A.incompatible_installations))
+			to_chat(user, span_warning("This augment conflicts with \the [IA.name]."))
 			return COMPONENT_AUGMENT_CONFLICT
 
 	modify_max_stability(A.stability_cost)
