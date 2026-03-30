@@ -4051,7 +4051,7 @@
 /area/indoors/town/keep/magician)
 "bUa" = (
 /obj/structure/flora/grass/water/reeds,
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "bUb" = (
 /obj/structure/door/fancy{
@@ -5981,6 +5981,10 @@
 "cKr" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/knight)
+"cKD" = (
+/obj/structure/bars,
+/turf/open/water/river/sewer,
+/area/outdoors/exposed/under/sewer)
 "cKJ" = (
 /turf/open/floor/concrete,
 /area/outdoors/town)
@@ -6243,6 +6247,13 @@
 	},
 /obj/item/clothing/head/sack,
 /obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/paper{
+	pixel_x = 10
+	},
+/obj/item/natural/feather{
+	pixel_x = 17;
+	pixel_y = 4
+	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/dungeoneer)
 "cQu" = (
@@ -14037,6 +14048,13 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
+"gBH" = (
+/obj/item/natural/clod/sand{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/turf/open/floor/sand/desert,
+/area/outdoors/exposed/under/basement)
 "gBI" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/gate)
@@ -24119,13 +24137,6 @@
 	dir = 1;
 	icon_state = "longtable_mid"
 	},
-/obj/item/paper{
-	pixel_x = 10
-	},
-/obj/item/natural/feather{
-	pixel_x = 17;
-	pixel_y = 4
-	},
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/dungeoneer)
@@ -29920,9 +29931,6 @@
 "nFK" = (
 /turf/closed/wall/mineral/decostone/moss/red/cand,
 /area/indoors/town/church)
-"nFN" = (
-/turf/open/dungeon_trap/australia,
-/area/under/cave)
 "nFP" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -32589,6 +32597,13 @@
 /obj/item/paper/sunlord,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/halls)
+"oMo" = (
+/obj/item/natural/clod/sand{
+	pixel_x = 5;
+	pixel_y = -4
+	},
+/turf/open/floor/sand/desert,
+/area/outdoors/exposed/under/basement)
 "oMu" = (
 /turf/closed/mineral/random,
 /area/under/cave)
@@ -32917,7 +32932,7 @@
 /obj/structure/well/fountain{
 	pixel_x = -32
 	},
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "oUd" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -38526,6 +38541,13 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
+"rpF" = (
+/obj/item/natural/clod/sand{
+	pixel_x = 1;
+	pixel_y = 6
+	},
+/turf/open/floor/sand/sandstone,
+/area/outdoors/exposed/under/basement)
 "rpQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -39339,7 +39361,7 @@
 /turf/open/floor/grass,
 /area/outdoors/farm)
 "rHu" = (
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "rHz" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -44732,7 +44754,7 @@
 /area/indoors/town/keep/halls/e)
 "uek" = (
 /obj/structure/flora/grass/water,
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "uem" = (
 /obj/structure/closet/keyrack{
@@ -46181,7 +46203,7 @@
 /area/outdoors/woods_safe)
 "uMA" = (
 /obj/structure/fluff/walldeco/chains{
-	name = "scarecrow shackles";
+	name = "punishment post";
 	icon = 'icons/roguetown/items/natural.dmi';
 	icon_state = "headstake"
 	},
@@ -47093,8 +47115,11 @@
 /turf/open/floor/tile,
 /area/indoors/town/shop)
 "vbJ" = (
-/obj/item/natural/clod/sand,
-/turf/open/floor/sand/sandstone,
+/obj/item/natural/clod/sand{
+	pixel_x = -1;
+	pixel_y = -4
+	},
+/turf/open/floor/sand/desert,
 /area/outdoors/exposed/under/basement)
 "vbN" = (
 /turf/closed/wall/mineral/wooddark,
@@ -49142,7 +49167,7 @@
 /area/indoors/town/dwarfin)
 "vTZ" = (
 /obj/structure/kneestingers,
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "vUb" = (
 /obj/structure/flora/grass,
@@ -50548,7 +50573,7 @@
 /area/indoors/town/church)
 "wyQ" = (
 /obj/structure/bridge,
-/turf/open/water/clean,
+/turf/open/water/clean/dirt,
 /area/outdoors/exposed/under/basement)
 "wyZ" = (
 /obj/effect/waterfall,
@@ -162638,7 +162663,7 @@ fwi
 rSh
 qFx
 qFx
-nFN
+qFx
 qFx
 qFx
 qFx
@@ -241437,7 +241462,7 @@ aVg
 mfI
 eew
 tus
-tus
+rpF
 nqb
 bQq
 bQq
@@ -241637,11 +241662,11 @@ iZR
 kQp
 sIU
 tus
-tus
-flI
+wsL
+gBH
+oMo
 wsL
 wsL
-nqb
 sXP
 sIU
 nKd
@@ -246683,8 +246708,8 @@ dMK
 dMK
 dMK
 aMs
-dMK
-aMs
+xqY
+cKD
 xqY
 xqY
 xqY
@@ -246886,7 +246911,7 @@ dMK
 dMK
 mZW
 dMK
-aMs
+cKD
 xqY
 xqY
 xqY
