@@ -587,12 +587,13 @@
 		O.extinguish()
 
 /turf/open/water/get_slowdown(mob/user)
+	. = ..()
+	if(. <= 0)
+		return 0
 	if(water_volume < 10 || HAS_TRAIT(user, TRAIT_GOOD_SWIM))
 		return 0
-	var/returned = slowdown
-	if(user.mind && swim_skill)
-		returned = returned - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming))
-	return returned
+	if(swim_skill)
+		return max(0, . - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming)))
 
 /turf/open/water/zPassIn(atom/movable/A, direction, turf/source)
 	if(direction == DOWN)

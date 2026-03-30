@@ -34,7 +34,7 @@
 	var/total_slowdown = slowdown
 	for(var/obj/obj in contents)
 		if(obj.obj_flags & BLOCK_Z_OUT_DOWN)
-			return slowdown
+			return obj.object_slowdown
 		total_slowdown += obj.object_slowdown
 	return total_slowdown
 
