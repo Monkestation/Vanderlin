@@ -2762,6 +2762,7 @@
 /turf/open/openspace,
 /area/indoors/town/clocktower)
 "alP" = (
+/turf/open/water/clean,
 /area/under/cavewet)
 "alQ" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -7424,9 +7425,6 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aGU" = (
-/obj/item/natural/rock/gemerald,
-/area/under/mountains/anvil/lower)
 "aGV" = (
 /obj/structure/fluff/statue/gargoyle/moss/candles{
 	pixel_y = 22
@@ -11681,6 +11679,7 @@
 /area/under/mountains/anvil/upper)
 "aZO" = (
 /obj/effect/waterfall,
+/turf/open/water/clean,
 /area/under/cavewet)
 "aZP" = (
 /obj/structure/table/wood/large/corner_new{
@@ -12369,8 +12368,6 @@
 /obj/structure/chair/bench/throne/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"fLc" = (
-/area/under/mountains/anvil/lower)
 "fLO" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/gem/diamond,
@@ -61473,7 +61470,7 @@ ali
 aKK
 aKK
 aZk
-fLc
+apF
 aKK
 aKK
 aKK
@@ -61675,8 +61672,8 @@ ali
 aKK
 aKK
 aKK
-fLc
-fLc
+apF
+apF
 aKK
 aKK
 ali
@@ -61876,9 +61873,9 @@ ali
 aKK
 aKK
 aKK
-fLc
-fLc
-aGU
+apF
+apF
+aiT
 aKK
 aKK
 aKK
@@ -62077,11 +62074,11 @@ ali
 ali
 aKK
 aKK
-fLc
-fLc
-fLc
-fLc
-fLc
+apF
+apF
+apF
+apF
+apF
 aKK
 aKK
 ali
@@ -62280,9 +62277,9 @@ ali
 aKK
 aKK
 aZk
-fLc
-aGU
-fLc
+apF
+aiT
+apF
 aKK
 aKK
 aKK
@@ -62482,8 +62479,8 @@ ali
 ali
 aKK
 aKK
-aGU
-fLc
+aiT
+apF
 aKK
 aKK
 aKK
@@ -62684,7 +62681,7 @@ ali
 ali
 aKK
 aKK
-fLc
+apF
 aKK
 aKK
 aKK
@@ -67262,7 +67259,7 @@ aZR
 aZR
 aWI
 aWI
-aQZ
+uhq
 uhq
 uhq
 aWI
@@ -75662,7 +75659,7 @@ apy
 apy
 auy
 apy
-abg
+hkw
 asr
 asr
 asr
@@ -75864,7 +75861,7 @@ alr
 aOs
 aOs
 aOs
-abg
+hkw
 alP
 aZO
 alP
@@ -76065,8 +76062,8 @@ aOs
 aOs
 acM
 auy
-abg
-abg
+hkw
+hkw
 alP
 aZO
 alP
@@ -76267,8 +76264,8 @@ awB
 apy
 auy
 acM
-abg
-abg
+hkw
+hkw
 alP
 aZO
 alP
@@ -76469,7 +76466,7 @@ aqx
 aOs
 aOs
 apy
-abg
+hkw
 adi
 asr
 alP
