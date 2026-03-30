@@ -147,7 +147,7 @@
 			H.dropItemToGround(parent)
 			return
 
-		if((H.real_name in GLOB.excommunicated_players))
+		if(H.real_name in GLOB.excommunicated_players)
 			// Check if person's patron is a tennite, if so, the weapon will not work!
 			if(ispath(H.patron.type, /datum/patron/divine) && !HAS_TRAIT(H, TRAIT_FANATICAL))
 				to_chat(H, span_warning("It slips from my grasp. I can't get a hold."))
