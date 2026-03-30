@@ -1063,7 +1063,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 
