@@ -124,7 +124,7 @@
 	)
 	favored_species = list(SPEC_ID_DWARF)
 	favored_miracles = list(
-		CLERIC_T2 = /datum/action/cooldown/spell/status/malum_anvil
+		CLERIC_T0 = /datum/action/cooldown/spell/status/malum_anvil
 	)
 	viable_tasks = list(
 		/datum/devotion_task/malum_craft,
