@@ -258,7 +258,6 @@
 /turf/open/water/LateInitialize()
 	. = ..()
 	if(open_bottom)
-		vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
 		icon_state = "openspace"
 		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
 	if(set_relationships_on_init)

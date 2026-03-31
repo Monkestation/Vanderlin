@@ -153,6 +153,7 @@
 			TRUE,
 			bare_footstep_sounds[barefoot_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
 
-	if(heard_clients)
+	if(!length(heard_clients))
 		return
-	// 	play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)
+	if(!source.rogue_sneaking && !HAS_TRAIT(source, TRAIT_LIGHT_STEP))
+		play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)

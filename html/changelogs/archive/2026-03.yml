@@ -341,11 +341,14 @@
   tired-wired:
   - bugfix: Tarts now want SLICED fruit.
 2026-03-29:
-  tired-wired:
-  - rscadd: Added new beard sprites by Blumengama.
+  Gatsby229:
+  - bugfix: Hollowkin ritual patron fix.
+  - qol: Made hollowkin ritual use all fur types.
   ModDownloading:
-  - bugfix: Bog Witch and Bog Witch Apprentice latejoin at the bog entrance instead of the train.
-  - code_imp: Inquisitor classes now have custom latejoin spawn options, currently unused.
+  - bugfix: Bog Witch and Bog Witch Apprentice latejoin at the bog entrance instead
+      of the train.
+  - code_imp: Inquisitor classes now have custom latejoin spawn options, currently
+      unused.
   Severus840:
   - map: Re-worked White Palace Pass map. See PR Changelog for Details.
   - map: Added bog witch hut and Ledger quest markers on Rosewood Bog map.
@@ -355,6 +358,42 @@
   - balance: Reduce orphans absurd +8 stats on orphanage remodel to +3.
   realforest2001:
   - rscadd: Added wooden orphan toys.
-  Gatsby229:
-  - bugfix: Hollowkin ritual patron fix.
-  - qol: Made hollowkin ritual use all fur types.
+  tired-wired:
+  - rscadd: Added new beard sprites by Blumengama.
+2026-03-31:
+  Archeonan:
+  - rscadd: add special attacks to polehammers, woodcutters axe, swords, and shortswords
+  Ben10083:
+  - rscadd: 'Adds new vice: Inquisitorial Suspicion. The Inquisitor who is able to
+      verify your faith gets rewarded a TRIUMPH.'
+  - rscadd: New verb for Inquisition roles to get list of Suspected heretics
+  - rscadd: Tennite holy weapons, such as the GMT's, now respects excommunication,
+      and will not be equippable.
+  Draggeru:
+  - rscadd: Adds the Wintermare Accent
+  KevinfromHP:
+  - bugfix: Fixes Wretches losing all languages on creation. Will have unintended
+      side effects but they're better than this
+  - bugfix: Unarmed Discipline not receiving their benefits.
+  Singul0, Rockslp, Beelzebug:
+  - rscadd: Adds gear for an upcoming people of the north.
+  TerraGS:
+  - rscadd: Multi Z water and vertical swimming, sinking and drowning. Swimming grants
+      experience in its respective skill.
+  - map: Adds map tiles for multi z water
+  - code_imp: Any water type mapped above an underwater tile of the same reagent will
+      become floorless deep water unless skip_bottom_check is set to TRUE. Examining
+      water will tell its relative depth.
+  WlarusFromDaSpace:
+  - bugfix: Fixed the inquisition's black mirror
+  dwasint:
+  - refactor: FoV now supports a permance layer for things like footsteps, or alerts
+  - rscadd: concussions and stumble effects, concussions apply a motion filter to
+      your view, stumbling makes you stumble into stuff
+  - balance: fishing xp calculations have been redone to reward it based on fish difficulty
+      more then time since before it was ideal to prolong a fish encounter for maximum
+      xp
+  realforest2001:
+  - rscadd: Added Gronnic to Bog Witch and Apprentice.
+  tired-wired:
+  - rscadd: Added subcultures for half orcs, tieflings, and another halfling option.

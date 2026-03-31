@@ -229,7 +229,9 @@
 		if(isnull(to_add.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_add.skill_xp_multipliers))
@@ -267,7 +269,9 @@
 		if(isnull(to_remove.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_remove.skill_xp_multipliers))
