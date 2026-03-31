@@ -42,6 +42,15 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	))
 GLOBAL_PROTECT(garrison_positions)
 
+GLOBAL_LIST_INIT(garrison_no_rebellion, list(
+	/datum/job/royalknight::title,
+	/datum/job/men_at_arms::title,
+	/datum/job/lieutenant::title,
+	/datum/job/gatemaster::title,
+	/datum/job/forestwarden::title,
+))
+GLOBAL_PROTECT(garrison_no_rebellion)
+
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
 	/datum/job/gmtemplar::title,
@@ -129,7 +138,6 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,
 	/datum/job/bandit::title,
-	/datum/job/wretch::title,
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(

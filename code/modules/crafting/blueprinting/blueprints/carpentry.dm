@@ -33,6 +33,18 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/fish_mount
+	name = "Fish Mount"
+	desc = "Wooden mount to showoff your fish."
+	result_type = /obj/structure/fish_mount
+	required_materials = list(/obj/item/grown/log/tree/small = 2)
+	category = "Wall Fixtures"
+	floor_object = FALSE
+	check_adjacent_wall = TRUE
+	supports_directions = TRUE
+	place_on_wall = TRUE
+
+
 /datum/blueprint_recipe/carpentry/deadbolt_door
 	name = "wooden door (deadbolt)"
 	desc = "A reinforced wooden door with a deadbolt."

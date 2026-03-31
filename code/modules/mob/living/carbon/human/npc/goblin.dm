@@ -458,7 +458,7 @@
 		return
 	spawning = FALSE
 	if(moon_goblins == 0)
-		if(GLOB.tod == "night")
+		if(GLOB.tod == NIGHT)
 			if(prob(30))
 				moon_goblins = 1
 			else

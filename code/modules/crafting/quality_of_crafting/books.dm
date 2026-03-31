@@ -1,3 +1,47 @@
+/// Global cache of typepath -> return_recipe_data() results.
+/// null values are cached too so we never re-check a path.
+/// Key is "[typepath]", value is the list() or null.
+GLOBAL_LIST_EMPTY(recipe_data_cache)
+
+/// Reverse mill index: mill_result path -> list of source snack paths.
+/// Built once on first recipe book open, before any cache lookups.
+GLOBAL_LIST_INIT(snack_mill_reverse, ensure_snack_mill_reverse())
+GLOBAL_LIST_INIT(snack_slice_reverse, ensure_snack_slice_reverse())
+
+/proc/ensure_snack_slice_reverse()
+	var/list/list = list()
+	for(var/obj/item/reagent_containers/food/snacks/snack_type as anything in subtypesof(/obj/item/reagent_containers/food/snacks))
+		if(IS_ABSTRACT(snack_type)) continue
+		var/atom/slice = initial(snack_type.slice_path)
+		if(!slice) continue
+		if(!list[slice])
+			list[slice] = list()
+		list[slice] += snack_type
+	return list
+
+/proc/ensure_snack_mill_reverse()
+	var/list/list = list()
+	for(var/obj/item/reagent_containers/food/snacks/snack_type as anything in subtypesof(/obj/item/reagent_containers/food/snacks))
+		if(IS_ABSTRACT(snack_type)) continue
+		var/atom/mill = initial(snack_type.mill_result)
+		if(!mill) continue
+		if(!list[mill])
+			list[mill] = list()
+		list[mill] += snack_type
+	return list
+
+// Per-book recipe list cache (sidebar entries)
+GLOBAL_LIST_EMPTY(book_recipe_cache)
+// Per-book linked recipe cache (passes 2-4)
+GLOBAL_LIST_EMPTY(linked_recipe_cache)
+
+// recipe_info_path, set this on any /atom to redirect hyperlink
+// lookups to a different typepath's return_recipe_data().
+// Example: /obj/item/ore/iron { recipe_info_path = /datum/ore_source/iron }
+// Example: /obj/item/hammer   { recipe_info_path = /obj/item/recipe_book/blacksmithing }
+// When null the atom's own return_recipe_data() is called directly.
+/atom/var/recipe_info_path
+
 /obj/item/recipe_book
 
 	icon = 'icons/roguetown/items/books.dmi'
@@ -8,671 +52,246 @@
 	var/list/types = list()
 	var/open
 	var/can_spawn = TRUE
-	var/list/categories = list("All") // Default categories
 	var/current_category = "All"      // Default selected category
 	var/current_recipe = null         // Currently viewed recipe
 	var/search_query = ""             // Current search query
 
-/obj/item/recipe_book/Initialize(mapload)
-	. = ..()
-	// Populate categories from types with custom categories
-	generate_categories()
-
-/obj/item/recipe_book/proc/generate_categories()
-	categories = list("All") // Reset and add default
-
-	// Gather categories from recipes themselves
-	for(var/atom/path as anything in types)
-		if(IS_ABSTRACT(path))
-			// Handle abstract types
-			for(var/atom/sub_path as anything in subtypesof(path))
-				if(IS_ABSTRACT(sub_path))
-					continue
-
-				var/category = get_recipe_category(sub_path)
-				if(category && !(category in categories))
-					categories += category
-		else
-			// Handle non-abstract types directly
-			var/category = get_recipe_category(path)
-			if(category && !(category in categories))
-				categories += category
-
-/obj/item/recipe_book/proc/get_recipe_category(path)
-	// Extract category from the recipe
-	var/category = null
-
-	// Try to create a temporary instance to get category
-	if(ispath(path))
-		var/datum/temp_recipe
-
-		// Handle different recipe types
-		if(ispath(path, /datum/repeatable_crafting_recipe))
-			temp_recipe = new path()
-			var/datum/repeatable_crafting_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/orderless_slapcraft))
-			temp_recipe = new path()
-			var/datum/orderless_slapcraft/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/blueprint_recipe))
-			temp_recipe = new path()
-			var/datum/blueprint_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/blueprint_recipe))
-			temp_recipe = new path()
-			var/datum/blueprint_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/container_craft))
-			temp_recipe = new path()
-			var/datum/container_craft/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/molten_recipe))
-			temp_recipe = new path()
-			var/datum/molten_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/anvil_recipe))
-			temp_recipe = new path()
-			var/datum/anvil_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/artificer_recipe))
-			temp_recipe = new path()
-			var/datum/artificer_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/pottery_recipe))
-			temp_recipe = new path()
-			var/datum/pottery_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/brewing_recipe))
-			temp_recipe = new path()
-			var/datum/brewing_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/runerituals))
-			temp_recipe = new path()
-			var/datum/runerituals/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/book_entry))
-			temp_recipe = new path()
-			var/datum/book_entry/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/alch_cauldron_recipe))
-			temp_recipe = new path()
-			var/datum/alch_cauldron_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/essence_combination))
-			temp_recipe = new path()
-			var/datum/essence_combination/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/natural_precursor))
-			temp_recipe = new path()
-			var/datum/natural_precursor/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/essence_infusion_recipe))
-			temp_recipe = new path()
-			var/datum/essence_infusion_recipe/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/plant_def))
-			temp_recipe = new path()
-			var/datum/plant_def/r = temp_recipe
-			category = r.get_family_name()
-		else if(ispath(path, /datum/surgery))
-			temp_recipe = new path()
-			var/datum/surgery/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/wound))
-			temp_recipe = new path()
-			var/datum/wound/r = temp_recipe
-			category = r.category
-		else if(ispath(path, /datum/chimeric_node))
-			category = "Humors"
-		else if(ispath(path, /datum/chimeric_table))
-			category = "Humor Dossier"
-		else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
-			category = "Fish"
-
-		// Clean up our temporary instance
-		if(temp_recipe)
-			qdel(temp_recipe)
-
-	return category
-
-/obj/item/recipe_book/dropped(mob/user, silent)
-	. = ..()
-	user << browse(null,"window=recipe")
+/obj/item/recipe_book/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new /datum/tgui(user, src, "RecipeBook", name)
+		ui.open()
 
 /obj/item/recipe_book/attack_self(mob/user, list/modifiers)
 	. = ..()
-	user << browse(generate_html(user),"window=recipe;size=800x810")
+	ui_interact(user)
 
-/obj/item/recipe_book/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-
-	var/html = {"
-		<!DOCTYPE html>
-		<html lang="en">
-		<meta charset='UTF-8'>
-		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
-			body {
-				font-family: "Charm", cursive;
-				font-size: 1.2em;
-				text-align: center;
-				margin: 20px;
-				color: #3e2723;
-				background-color: rgb(31, 20, 24);
-				background:
-					url('[SSassets.transport.get_asset_url("try4_border.png")]'),
-					url('book.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: 100% 100%;
-			}
-			h1 {
-				text-align: center;
-				font-size: 2em;
-				border-bottom: 2px solid #3e2723;
-				padding-bottom: 10px;
-				margin-bottom: 20px;
-			}
-			.book-content {
-				display: flex;
-				height: 85%;
-			}
-			.sidebar {
-				width: 30%;
-				padding: 10px;
-				border-right: 2px solid #3e2723;
-				overflow-y: auto;
-				max-height: 600px;
-			}
-			.main-content {
-				width: 70%;
-				padding: 10px;
-				overflow-y: auto;
-				max-height: 600px;
-				text-align: left;
-			}
-			.categories {
-				margin-bottom: 15px;
-			}
-			.category-btn {
-				margin: 2px;
-				padding: 5px;
-				background-color: #d2b48c;
-				border: 1px solid #3e2723;
-				border-radius: 5px;
-				cursor: pointer;
-				font-family: "Charm", cursive;
-			}
-			.category-btn.active {
-				background-color: #8b4513;
-				color: white;
-			}
-			.search-box {
-				width: 90%;
-				padding: 5px;
-				margin-bottom: 15px;
-				border: 1px solid #3e2723;
-				border-radius: 5px;
-				font-family: "Charm", cursive;
-			}
-			.recipe-list {
-				text-align: left;
-			}
-			.recipe-link {
-				display: block;
-				padding: 5px;
-				color: #3e2723;
-				text-decoration: none;
-				border-bottom: 1px dotted #d2b48c;
-			}
-			.recipe-link:hover {
-				background-color: rgba(210, 180, 140, 0.3);
-			}
-			.recipe-content {
-				padding: 10px;
-			}
-			.recipe-title {
-				font-size: 1.5em;
-				margin-bottom: 15px;
-				border-bottom: 1px solid #3e2723;
-				padding-bottom: 5px;
-			}
-			.back-btn {
-				margin-top: 10px;
-				padding: 5px 10px;
-				background-color: #d2b48c;
-				border: 1px solid #3e2723;
-				border-radius: 5px;
-				cursor: pointer;
-				font-family: "Charm", cursive;
-			}
-			.icon {
-				width: 96px;
-				height: 96px;
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-			.result-icon {
-				text-align: center;
-				margin: 15px 0;
-			}
-			.craft-button {
-				display: inline-block;
-				margin: 10px 0;
-				padding: 8px 15px;
-				background-color: #8b4513;
-				color: white;
-				border: 1px solid #3e2723;
-				border-radius: 5px;
-				cursor: pointer;
-				font-family: "Charm", cursive;
-				text-decoration: none;
-			}
-			.no-matches {
-				font-style: italic;
-				color: #8b4513;
-				padding: 10px;
-				text-align: center;
-				display: none;
-			}
-			/* Styles to match the original recipe display */
-			table {
-				margin: 10px auto;
-				border-collapse: collapse;
-			}
-			table, th, td {
-				border: 1px solid #3e2723;
-			}
-			th, td {
-				padding: 8px;
-				text-align: left;
-			}
-			th {
-				background-color: rgba(210, 180, 140, 0.3);
-			}
-			.hidden {
-				display: none;
-			}
-		</style>
-
-		<body>
-			<h1>[capitalize(name)]</h1>
-
-			<div class="book-content">
-				<div class="sidebar">
-					<!-- Search box -->
-					<input type="text" class="search-box" id="searchInput"
-						placeholder="Search recipes..." value="[html_encode(search_query)]">
-
-					<!-- Categories -->
-					<div class="categories">
-	"}
-
-	// Add category buttons with direct links
-	for(var/category in categories)
-		var/active_class = category == current_category ? "active" : ""
-		html += "<button class='category-btn [active_class]' onclick=\"location.href='byond://?src=\ref[src];action=set_category&category=[url_encode(category)]'\">[category]</button>"
-
-	html += {"
-					</div>
-
-					<!-- Recipe List -->
-					<div class="recipe-list" id="recipeList">
-	"}
-
-	// Add recipes based on current category
-	for(var/atom/path as anything in types)
-		if(IS_ABSTRACT(path))
-			for(var/atom/sub_path as anything in subtypesof(path))
-				if(IS_ABSTRACT(sub_path))
-					continue
-				if(ispath(sub_path, /datum/container_craft))
-					var/datum/container_craft/craft = sub_path
-					if(initial(craft.hides_from_books))
-						continue
-				if(ispath(sub_path, /datum/repeatable_crafting_recipe))
-					var/datum/repeatable_crafting_recipe/craft = sub_path
-					if(initial(craft.hides_from_books))
-						continue
-				if(ispath(sub_path, /datum/wound))
-					var/datum/wound/wound = sub_path
-					if(!initial(wound.show_in_book))
-						continue
-
-				var/recipe_name = initial(sub_path.name)
-				if(ispath(sub_path, /datum/alch_cauldron_recipe))
-					var/datum/alch_cauldron_recipe/typed_sub = sub_path
-					recipe_name = typed_sub.recipe_name
-
-				// Check if this recipe belongs to the current category
-				var/should_show = TRUE
-				if(current_category != "All")
-					var/category = get_recipe_category(sub_path)
-					if(category != current_category)
-						should_show = FALSE
-
-				// Default display style - will be changed by JS if searching
-				var/display_style = should_show ? "" : "display: none;"
-
-				var/search_data = ""
-				if(ispath(sub_path, /datum/natural_precursor))
-					var/datum/natural_precursor/temp = new sub_path()
-					for(var/datum/thaumaturgical_essence/essence_type as anything in temp.essence_yields)
-						search_data += "[initial(essence_type.name)],"
-					qdel(temp)
-
-				if(ispath(sub_path, /datum/surgery))
-					var/datum/surgery/temp = new sub_path()
-					for(var/datum/surgery_step/step_type as anything in temp.steps)
-						search_data += "[initial(step_type.name)],"
-					qdel(temp)
-
-				html += "<a class='recipe-link' href='byond://?src=\ref[src];action=view_recipe&recipe=[sub_path]' style='[display_style]' data-search='[search_data]'>[recipe_name]</a>"
-		else
-			var/recipe_name = initial(path.name)
-
-			// Check if this recipe belongs to the current category
-			var/should_show = TRUE
-			if(current_category != "All")
-				var/category = get_recipe_category(path)
-				if(category != current_category)
-					should_show = FALSE
-
-			// Default display style - will be changed by JS if searching
-			var/display_style = should_show ? "" : "display: none;"
-
-			html += "<a class='recipe-link' href='byond://?src=\ref[src];action=view_recipe&recipe=[path]' style='[display_style]'>[recipe_name]</a>"
-
-	html += {"
-						<div id="noMatchesMsg" class="no-matches">No matching recipes found.</div>
-					</div>
-				</div>
-
-				<div class="main-content" id="mainContent">
-	"}
-
-	// If a recipe is selected, show its details
-	if(current_recipe)
-		html += generate_recipe_html(current_recipe, user)
-	else
-		html += "<div class='recipe-content'><p>Select a recipe from the list to view details.</p></div>"
-
-	html += {"
-				</div>
-			</div>
-
-			<script>
-				// Live search functionality with debouncing
-				let searchTimeout;
-				document.getElementById('searchInput').addEventListener('keyup', function(e) {
-					clearTimeout(searchTimeout);
-
-					// Debounce the search to improve performance (only search after typing stops for 300ms)
-					searchTimeout = setTimeout(function() {
-						const query = document.getElementById('searchInput').value.toLowerCase();
-						filterRecipes(query);
-					}, 300);
-				});
-
-				function filterRecipes(query) {
-					const recipeLinks = document.querySelectorAll('.recipe-link');
-					const currentCategory = "[current_category]";
-					let anyVisible = false;
-
-					recipeLinks.forEach(function(link) {
-						const recipeName = link.textContent.toLowerCase();
-						const essences = (link.getAttribute('data-search') || "").toLowerCase();
-
-						// Check if it matches either the recipe name or any of the essences
-						const matchesQuery = query === '' ||
-							recipeName.includes(query) ||
-							essences.includes(query);
-
-						if (matchesQuery) {
-							link.style.display = 'block';
-							anyVisible = true;
-						} else {
-							link.style.display = 'none';
-						}
-					});
-
-					// Show a message if no recipes match
-					const noMatchesMsg = document.getElementById('noMatchesMsg');
-					noMatchesMsg.style.display = anyVisible ? 'none' : 'block';
-
-					// Remember the query
-					window.location.replace(`byond://?src=\\ref[src];action=remember_query&query=${encodeURIComponent(query)}`);
-				}
-			</script>
-		</body>
-		</html>
-	"}
-
-	return html
-
-/obj/item/recipe_book/proc/generate_recipe_html(path, mob/user)
-	if(!ispath(path))
-		return "<div class='recipe-content'><p>Invalid recipe selected.</p></div>"
-
-	var/html = "<div class='recipe-content'>"
-
-	// Get recipe details
-	var/recipe_name = "Unknown Recipe"
-	var/recipe_description = "No description available."
-	var/recipe_html = ""
-
-	// Create a temporary instance to get the actual recipe content that would normally be shown in show_menu
-	var/datum/temp_recipe
-	if(ispath(path, /datum/repeatable_crafting_recipe))
-		temp_recipe = new path()
-		var/datum/repeatable_crafting_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_description = recipe_description
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/orderless_slapcraft))
-		temp_recipe = new path()
-		var/datum/orderless_slapcraft/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/blueprint_recipe))
-		temp_recipe = new path()
-		var/datum/blueprint_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_description = r.desc || recipe_description
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/blueprint_recipe))
-		temp_recipe = new path()
-		var/datum/blueprint_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/container_craft))
-		temp_recipe = new path()
-		var/datum/container_craft/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/molten_recipe))
-		temp_recipe = new path()
-		var/datum/molten_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/anvil_recipe))
-		temp_recipe = new path()
-		var/datum/anvil_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/artificer_recipe))
-		temp_recipe = new path()
-		var/datum/artificer_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/pottery_recipe))
-		temp_recipe = new path()
-		var/datum/pottery_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/brewing_recipe))
-		temp_recipe = new path()
-		var/datum/brewing_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/runerituals))
-		temp_recipe = new path()
-		var/datum/runerituals/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/book_entry))
-		temp_recipe = new path()
-		var/datum/book_entry/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/alch_cauldron_recipe))
-		temp_recipe = new path()
-		var/datum/alch_cauldron_recipe/r = temp_recipe
-		recipe_name = initial(r.recipe_name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/natural_precursor))
-		temp_recipe = new path()
-		var/datum/natural_precursor/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/essence_combination))
-		temp_recipe = new path()
-		var/datum/essence_combination/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/essence_infusion_recipe))
-		temp_recipe = new path()
-		var/datum/essence_infusion_recipe/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/plant_def))
-		temp_recipe = new path()
-		var/datum/plant_def/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/surgery))
-		temp_recipe = new path()
-		var/datum/surgery/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/wound))
-		temp_recipe = new path()
-		var/datum/wound/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/chimeric_node))
-		temp_recipe = new path()
-		var/datum/chimeric_node/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /datum/chimeric_table))
-		temp_recipe = new path()
-		var/datum/chimeric_table/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	else if(ispath(path, /obj/item/reagent_containers/food/snacks/fish))
-		temp_recipe = new path()
-		var/obj/item/reagent_containers/food/snacks/fish/r = temp_recipe
-		recipe_name = initial(r.name)
-		recipe_html = get_recipe_specific_html(r, user)
-	if(temp_recipe)
-		qdel(temp_recipe)
-
-	// If we have recipe-specific HTML, use that
-	if(recipe_html && recipe_html != "")
-		html += recipe_html
-	else
-		// Otherwise use our fallback information display
-		html += "<h2 class='recipe-title'>[recipe_name]</h2>"
-		html += "<p>[recipe_description]</p>"
-
-	// Back button with direct link - kinda really not needed lol
-	html += "<button class='back-btn' onclick=\"location.href='byond://?src=\ref[src];action=clear_recipe'\">Back to Recipe List</button>"
-	html += "</div>"
-
-	return html
-
-/obj/item/recipe_book/proc/get_recipe_specific_html(datum/recipe, mob/user)
-	if(!istype(recipe))
-		return ""
-	var/html = ""
-
-	html = recipe:generate_html(user)
-	return html
-
-/obj/item/recipe_book/Topic(href, href_list)
+/obj/item/recipe_book/ui_static_data(mob/user)
 	. = ..()
-	var/action = href_list["action"]
-	if(!action)
-		return
+	var/list/data = list()
+	data["book_name"] = name
+	data["book_desc"] = desc
+	ensure_snack_mill_reverse()
+	build_obtained_from_reverse()
+	data["recipes"] = get_cached_book_recipes(type, FALSE)
+	data["linked_recipes"] = get_cached_linked_recipes(type)
+	return data
 
-	switch(action)
-		if("set_category")
-			var/category = href_list["category"]
-			if(category)
-				current_category = category
-				usr << browse(generate_html(usr), "window=recipe;size=800x810")
-			return
+/obj/item/recipe_book/proc/get_cached_book_recipes(book_type, creation = TRUE)
+	if(GLOB.book_recipe_cache["[book_type]"])
+		return GLOB.book_recipe_cache["[book_type]"]
 
-		if("search")
-			var/query = href_list["query"]
-			if(query)
-				search_query = query
-				usr << browse(generate_html(usr), "window=recipe;size=800x810")
-			return
+	var/obj/item/recipe_book/new_book = src
+	if(creation)
+		new_book = new book_type()
+	var/list/recipes = list()
+	for(var/atom/path as anything in new_book.types)
+		if(IS_ABSTRACT(path))
+			for(var/atom/sub as anything in subtypesof(path))
+				if(IS_ABSTRACT(sub)) continue
+				if(ispath(sub, /datum/container_craft))
+					var/datum/container_craft/sub2 = sub
+					if(initial(sub2:hides_from_books))
+						continue
+				if(ispath(sub, /datum/repeatable_crafting_recipe))
+					var/datum/repeatable_crafting_recipe/sub2 = sub
+					if(initial(sub2:hides_from_books))
+						continue
+				if(ispath(sub, /datum/wound))
+					var/datum/wound/sub2 = sub
+					if(!initial(sub2:show_in_book))
+						continue
+				var/list/entry = get_cached_recipe_data(sub)
+				if(entry) recipes += list(entry)
+		else
+			var/list/entry = get_cached_recipe_data(path)
+			if(entry) recipes += list(entry)
 
-		if("remember_query")
-			var/query = href_list["query"]
-			if(query)
-				search_query = query
-			return
+	GLOB.book_recipe_cache["[book_type]"] = recipes
+	if(creation)
+		qdel(new_book)
+	return recipes
 
-		if("view_recipe")
-			var/recipe_path = href_list["recipe"]
-			if(recipe_path)
-				var/datum/path = text2path(recipe_path)
-				current_recipe = path
-				usr << browse(generate_html(usr), "window=recipe;size=800x810")
-			return
+/obj/item/recipe_book/proc/get_cached_linked_recipes(book_type)
+	if(GLOB.linked_recipe_cache["[book_type]"])
+		return GLOB.linked_recipe_cache["[book_type]"]
 
-		if("clear_recipe")
-			current_recipe = null
-			usr << browse(generate_html(usr), "window=recipe;size=800x810")
-			return
+	var/list/visited = list()
+	for(var/list/entry as anything in get_cached_book_recipes(book_type))
+		var/p = entry["_output_path"]
+		if(p) visited[p] = TRUE
 
-	if(href_list["set_category"])
-		current_category = href_list["set_category"]
-		usr << browse(generate_html(usr), "window=recipe;size=800x810")
-		return
+	var/list/linked = list()
+	var/list/scan_queue = list()
 
-	if(href_list["search"])
-		search_query = href_list["search"]
-		usr << browse(generate_html(usr), "window=recipe;size=800x810")
-		return
+	for(var/obj/item/recipe_book/other_type as anything in subtypesof(/obj/item/recipe_book))
+		if(other_type == book_type) continue
+		if(!initial(other_type.can_spawn)) continue
+		for(var/list/entry as anything in get_cached_book_recipes(other_type))
+			var/p = entry["_output_path"]
+			if(p && visited[p]) continue
+			if(p) visited[p] = TRUE
+			linked += list(entry)
 
-	if(href_list["view_recipe"])
-		var/datum/path = text2path(href_list["view_recipe"])
-		current_recipe = path
-		usr << browse(generate_html(usr), "window=recipe;size=800x810")
-		return
+	for(var/list/entry as anything in get_cached_book_recipes(book_type) + linked)
+		queue_item_paths_from_entry(entry, scan_queue, visited)
 
-	if(href_list["clear_recipe"])
-		current_recipe = null
-		usr << browse(generate_html(usr), "window=recipe;size=800x810")
-		return
+	while(length(scan_queue))
+		var/atom/item_path = scan_queue[1]
+		scan_queue.Cut(1, 2)
+		var/list/entry = get_cached_recipe_data(item_path)
+		if(!entry) continue
+		linked += list(entry)
+		queue_item_paths_from_entry(entry, scan_queue, visited)
 
-	if(href_list["pick_recipe"])
-		var/datum/path = text2path(href_list["pick_recipe"])
-		current_recipe = path
-		usr << browse(generate_html(usr), "window=recipe;size=800x810")
+	for(var/key in GLOB.mob_source_paths)
+		var/atom/mob_path = text2path(key)
+		if(!mob_path || visited["[mob_path]"]) continue
+		visited["[mob_path]"] = TRUE
+		var/list/entry = get_mob_source_page_data(mob_path)
+		if(!entry) continue
+		linked += list(entry)
+		queue_item_paths_from_entry(entry, scan_queue, visited)
+
+	for(var/key in GLOB.obtained_from_reverse)
+		var/atom/src_path = text2path(key)
+		if(!src_path) continue
+		visited["[src_path]"] = TRUE
+		var/list/entry = get_source_page_data(src_path)
+		if(entry)
+			linked += list(entry)
+			continue
+		var/list/entries = GLOB.obtained_from_reverse[key]
+		var/has_mob_source = FALSE
+		for(var/list/checker as anything in entries)
+			if(GLOB.mob_source_paths[checker["_path"]])
+				has_mob_source = TRUE
+				break
+		if(!has_mob_source)
+			continue
+		var/list/existing = get_cached_recipe_data(src_path)
+		if(existing)
+			continue
+		var/list/sources = list()
+		for(var/list/mob_entry as anything in entries)
+			if(!GLOB.mob_source_paths[mob_entry["_path"]])
+				continue
+			sources += list(list(
+				"label"      = mob_entry["source_label"],
+				"_path"      = mob_entry["_path"],
+				"name"       = mob_entry["name"],
+				"icon"       = mob_entry["icon"],
+				"icon_state" = mob_entry["icon_state"],
+			))
+		if(!length(sources))
+			continue
+		var/list/page = list(
+			"type"         = "obtained_from",
+			"name"         = initial(src_path.name),
+			"category"     = "Sources",
+			"_output_path" = "[src_path]",
+			"output_name"  = initial(src_path.name),
+			"output_icon"  = "[initial(src_path.icon)]",
+			"output_state" = "[initial(src_path.icon_state)]",
+			"sources"      = sources,
+		)
+		GLOB.recipe_data_cache["[src_path]"] = page
+		linked += list(page)
+
+	GLOB.linked_recipe_cache["[book_type]"] = linked
+	return linked
+
+/obj/item/recipe_book/proc/get_source_page_data(atom/src_path)
+	var/list/drops = GLOB.obtained_from_reverse["[src_path]"]
+	if(!length(drops)) return null
+	return list(
+		"type"         = "source_page",
+		"name"         = initial(src_path.name),
+		"category"     = "Sources",
+		"_output_path" = "[src_path]",
+		"output_name"  = initial(src_path.name),
+		"output_icon"  = "[initial(src_path.icon)]",
+		"output_state" = "[initial(src_path.icon_state)]",
+		"drops"        = drops,
+	)
+
+/obj/item/recipe_book/proc/get_mob_source_page_data(atom/mob_path)
+	var/list/drops = list()
+	for(var/key in GLOB.obtained_from_reverse)
+		var/list/entries = GLOB.obtained_from_reverse[key]
+		for(var/list/entry as anything in entries)
+			if(entry["_path"] != "[mob_path]")
+				continue
+			var/atom/drop_path = text2path(key)
+			if(!drop_path)
+				continue
+			drops += list(list(
+				"name"         = initial(drop_path.name),
+				"icon"         = "[initial(drop_path.icon)]",
+				"icon_state"   = "[initial(drop_path.icon_state)]",
+				"_path"        = "[drop_path]",
+				"source_label" = entry["source_label"],
+				"amount"       = entry["amount"],
+			))
+
+	if(!length(drops))
+		return null
+
+	return list(
+		"type"         = "source_page",
+		"name"         = initial(mob_path.name),
+		"category"     = "Sources",
+		"_output_path" = "[mob_path]",
+		"output_name"  = initial(mob_path.name),
+		"output_icon"  = "[initial(mob_path.icon)]",
+		"output_state" = "[initial(mob_path.icon_state)]",
+		"drops"        = drops,
+	)
+
+/// Returns cached recipe data for a typepath, computing and caching it if needed.
+/// Respects recipe_info_path, if the atom declares a redirect, that path is
+/// used instead so e.g. a hammer can point to the blacksmithing book entry. This is useful for abstract types we direct to
+/obj/item/recipe_book/proc/get_cached_recipe_data(atom/path)
+	// Resolve any recipe_info_path redirect first
+	var/atom/redirect = initial(path.recipe_info_path)
+	var/resolved = redirect ? redirect : path
+
+	var/key = "[resolved]"
+	if(key in GLOB.recipe_data_cache)
+		return GLOB.recipe_data_cache[key]
+	var/datum/R = new resolved(locate(1,1,1))//this is incase we create a mob
+	var/list/entry = R.return_recipe_data()
+	qdel(R)
+	GLOB.recipe_data_cache[key] = entry
+	return entry
+
+/// Scans a serialized recipe entry for all embedded "_path" keys and queues
+/// any typepath that hasn't been visited yet.
+/obj/item/recipe_book/proc/queue_item_paths_from_entry(list/entry, list/queue, list/visited)
+	// List fields, each element may be a dict with a "_path" key
+	var/list/list_fields = list("requirements","tools","extras","materials","items","crops","opt_items","steps","output_items","sources")
+	for(var/field in list_fields)
+		var/list/items = entry[field]
+		if(!islist(items)) continue
+		for(var/list/item as anything in items)
+			if(!islist(item)) continue
+			_try_queue_path(item["_path"], queue, visited)
+
+	// Singular path fields
+	var/list/path_fields = list("_output_path","_starting_path","_attacked_path","_bar_path","_base_path","_target_path","_result_path","_container_path","mill_path","slice_path")
+	for(var/field in path_fields)
+		_try_queue_path(entry[field], queue, visited)
+
+/obj/item/recipe_book/proc/_try_queue_path(path_str, list/queue, list/visited)
+	if(!path_str) return
+	var/atom/p = text2path(path_str)
+	if(!p || visited[p]) return
+	// Check if the item itself declares a recipe_info_path redirect
+	var/atom/redirect = initial(p.recipe_info_path)
+	var/atom/target = redirect ? redirect : p
+	if(visited[target]) return
+	visited[target] = TRUE
+	queue += target
 
 /obj/item/recipe_book/getonmobprop(tag)
 	. = ..()
@@ -746,6 +365,7 @@
 	base_icon_state = "book7"
 
 	types = list(
+		/datum/book_entry/sewing_repair,
 		/datum/repeatable_crafting_recipe/sewing,
 		/datum/orderless_slapcraft/bouquet,
 		)
@@ -757,6 +377,7 @@
 	icon_state ="book7_0"
 	base_icon_state = "book7"
 	types = list(
+		/datum/book_entry/sewing_repair,
 		/datum/repeatable_crafting_recipe/sewing,
 		/datum/orderless_slapcraft/bouquet,
 		/datum/repeatable_crafting_recipe/leather,
@@ -883,6 +504,7 @@
 	base_icon_state = "book3"
 
 	types = list(
+		/datum/book_entry/smithing_repair,
 		/datum/molten_recipe,
 		/datum/anvil_recipe,
 	)

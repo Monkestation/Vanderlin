@@ -5,7 +5,7 @@
 	gender = PLURAL
 	icon_state = "plate_legs"
 	item_state = "plate_legs"
-	sewrepair = FALSE
+	sewrepair = null
 	blocksound = PLATEHIT
 	equip_delay_self = 30
 	unequip_delay_self = 30
@@ -15,7 +15,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	r_sleeve_status = SLEEVE_NOMOD
@@ -124,3 +124,13 @@
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//.............. Gronn Platelegs .................//
+
+/obj/item/clothing/pants/platelegs/iron/gronn
+	name = "osslandic iron chausses"
+	desc = "Iron chausses with an added layer of leather for comfort and padding. The knees are adorned with a skull-like shape, reminscent of the hunt."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplatepants"
+	item_state = "gronnplatepants"

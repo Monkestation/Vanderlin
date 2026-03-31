@@ -402,7 +402,7 @@
 
 	var/dark = FALSE
 	if(outside)
-		if(light_amount < 0.15 && GLOB.tod == "night")
+		if(light_amount < 0.15 && GLOB.tod == NIGHT)
 			dark = TRUE
 	else if(light_amount < 0.15)
 		dark = TRUE

@@ -34,5 +34,11 @@ block( \
 #define TURF_NO_LIQUID_SPREAD (1<<3)
 /// Turf is currently in the weathered_turfs list and should not be readded to avoid duplicates
 #define TURF_BEING_WEATHERED (1<<4)
-/// Turf is currently queued in SSoutdoor_effects and should not be re-queued to avoid duplicates
+/// Turf is currently queued in GLOB.SUNLIGHT_QUEUE_CORNER and should not be re-queued to avoid duplicates
 #define TURF_SUNLIGHT_QUEUED (1<<5)
+
+//water_height defines
+#define WATER_HEIGHT_ANKLE 1
+#define WATER_HEIGHT_SHALLOW 2
+#define WATER_HEIGHT_DEEP 3
+#define WATER_HEIGHT_FULL 4

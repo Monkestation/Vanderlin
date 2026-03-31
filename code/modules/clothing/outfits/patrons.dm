@@ -205,7 +205,10 @@
 	toggle_icon_state = TRUE
 	blocksound = SOFTHIT
 	max_integrity = 100
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 
 /obj/item/clothing/head/veiled/update_overlays()

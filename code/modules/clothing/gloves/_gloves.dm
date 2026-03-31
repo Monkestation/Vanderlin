@@ -27,12 +27,14 @@
 	strip_delay = 2 SECONDS
 	equip_delay_other = 4 SECONDS
 
-	sewrepair = TRUE
+	dyeable = TRUE
 	anvilrepair = null
 	smeltresult = /obj/item/fertilizer/ash
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	fiber_salvage = FALSE
 	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
 
 	grid_width = 64
 	grid_height = 32

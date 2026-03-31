@@ -3,7 +3,7 @@
 	athletics_skill = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
 	maximum_stamina = max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) + athletics_skill) * 10, 10) //This here is the calculation for max STAMINA / GREEN
 
-	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == TOD_DAWN || GLOB.tod == TOD_DAY)) ? 11 : 20
+	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == DAWN || GLOB.tod == DAY)) ? 11 : 20
 	if(world.time > last_fatigued + delay) //regen fatigue
 		var/added = energy / max_energy
 		added = round(-10+ (added*-40))

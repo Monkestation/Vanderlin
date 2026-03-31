@@ -1210,7 +1210,7 @@
 	LAZYADDASSOC(vanished, crossed, overlay)
 
 
-/obj/structure/soil/proc/on_exited(turf/source, mob/crossed, direction)
+/obj/structure/soil/proc/on_exited(turf/source, mob/crossed, atom/new_loc)
 	if(!isliving(crossed))
 		return
 	if(get_step(source, crossed.dir) in marked_turfs)

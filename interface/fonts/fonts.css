@@ -74,3 +74,8 @@
   font-family: 'Yataghan';
   src: url('Yataghan.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'Jorvik Informal';
+  src: url('JorvikInformal.ttf') format('truetype');
+}

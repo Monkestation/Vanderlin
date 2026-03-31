@@ -57,6 +57,10 @@
 ///from base of mob/living/Sleeping() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_SLEEP "living_sleeping"
 	#define COMPONENT_NO_STUN 1			//For all of them
+///from base of mob/living/Stumble(): (amount, update, ignore)
+#define COMSIG_LIVING_STATUS_STUMBLE "living_stumble"
+///from base of mob/living/Concussion(): (amount, update, ignore)
+#define COMSIG_LIVING_STATUS_CONCUSSION "living_concussion"
 ///from end of fully_heal(): (heal_flags)
 #define COMSIG_LIVING_POST_FULLY_HEAL "living_post_fully_heal"
 ///from base of /mob/living/can_track(): (mob/user)
@@ -113,6 +117,8 @@
 
 #define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
 #define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
+/// From /mob/living/proc/set_swimming(): (swimming)
+#define COMSIG_LIVING_SWIM	"living_swim"
 
 /// From [mob/living/MiddleClickOn] before a middle mouse intent is performed
 #define COMSIG_MOB_PRE_SPECIAL_MIDDLE "pre_special_middle"

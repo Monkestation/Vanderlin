@@ -1281,6 +1281,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if (isnull(new_size))
 		CRASH("change_view called without argument.")
 
+	var/old_view = view
 	view = new_size
 	apply_clickcatcher()
 	mob?.reload_fullscreen()
@@ -1289,6 +1290,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		M.update_damage_hud()
 	if (prefs.auto_fit_viewport)
 		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS)) //Delayed to avoid wingets from Login calls.
+
+	SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_CHANGE_VIEW, src, getviewsize(old_view), getviewsize(view))
+
 
 /client/proc/generate_clickcatcher()
 	if(!void)

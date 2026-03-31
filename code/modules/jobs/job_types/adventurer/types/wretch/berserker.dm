@@ -36,7 +36,6 @@
 		TRAIT_BLOODDRINKER,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_NOPAINSTUN,
-		TRAIT_INHUMENCAMP
 	)
 
 	spells = list(
@@ -66,8 +65,6 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40, TRUE)
 		if("Sword")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)
-
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/berserker
 	name = "Reaver (Wretch)"

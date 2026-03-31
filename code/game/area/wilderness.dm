@@ -9,7 +9,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/grass)
 

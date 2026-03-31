@@ -240,7 +240,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psycenser"
 	item_state = "psycenser"
-	light_range = 8
+	light_outer_range = 8
 	light_color ="#70d1e2"
 	possible_item_intents = list(/datum/intent/flail/strike/smash/golgotha)
 	fuel = 999 MINUTES
@@ -1228,9 +1228,10 @@
 				if(HL.real_name == name)
 					fixation = WEAKREF(HL)
 					target = HL
-				playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-				to_chat(user, span_warning("[src] makes a grating sound."))
-				return
+					break
+			playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+			to_chat(user, span_warning("[src] makes a grating sound."))
+			return
 		else if(input == "BLOOD")
 			target = feeder?.resolve()
 
@@ -1384,14 +1385,13 @@
 	if(!istype(L))
 		return
 
-	var/datum/weakref/lookat = null
+	var/atom/movable/target = null
 	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
-		lookat = source
+		target = source
 	else
-		lookat = source.feeder
+		target = source.feeder?.resolve()
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
-	var/mob/living/target = lookat?.resolve()
 	if(!target)
 		return
 	var/mob/dead/observer/screye/blackmirror/S = L.scry_ghost()

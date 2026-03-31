@@ -67,6 +67,7 @@
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
 	honorary = "Lieutenant"
+	job_bitflag = BITFLAG_GARRISON
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lieutenant
 

@@ -15,7 +15,8 @@
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 	fiber_salvage = TRUE
@@ -67,9 +68,9 @@
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/ingot/steel
-	sewrepair = FALSE
+	sewrepair = null
 	salvage_result = null
 	salvage_amount = 0
 	fiber_salvage = FALSE
@@ -95,10 +96,10 @@
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melting_material = /datum/material/steel
 	melt_amount = 80
-	sewrepair = FALSE
+	sewrepair = null
 	salvage_result = null
 	salvage_amount = 0
 	fiber_salvage = FALSE

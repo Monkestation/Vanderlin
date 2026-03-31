@@ -145,8 +145,8 @@
 
 /obj/item/textbook/novice
 	icon_state = "book_1"
-	minskill = SKILL_LEVEL_NONE
-	maxskill = SKILL_LEVEL_NOVICE
+	minskill = SKILL_RANK_NONE
+	maxskill = SKILL_RANK_NOVICE
 	exppercycle = 5
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "novice"
@@ -154,8 +154,8 @@
 
 /obj/item/textbook/apprentice
 	icon_state = "book2_1"
-	minskill = SKILL_LEVEL_NOVICE
-	maxskill = SKILL_LEVEL_APPRENTICE
+	minskill = SKILL_RANK_NOVICE
+	maxskill = SKILL_RANK_APPRENTICE
 	exppercycle = 10
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "apprentice"
@@ -163,8 +163,8 @@
 
 /obj/item/textbook/journeyman
 	icon_state = "book3_1"
-	minskill = SKILL_LEVEL_APPRENTICE
-	maxskill = SKILL_LEVEL_JOURNEYMAN
+	minskill = SKILL_RANK_APPRENTICE
+	maxskill = SKILL_RANK_JOURNEYMAN
 	exppercycle = 25
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "journeyman"
@@ -172,8 +172,8 @@
 
 /obj/item/textbook/expert
 	icon_state = "book4_1"
-	minskill = SKILL_LEVEL_JOURNEYMAN
-	maxskill = SKILL_LEVEL_EXPERT
+	minskill = SKILL_RANK_JOURNEYMAN
+	maxskill = SKILL_RANK_EXPERT
 	exppercycle = 40
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "expert"
@@ -181,8 +181,8 @@
 
 /obj/item/textbook/master
 	icon_state = "book5_1"
-	minskill = SKILL_LEVEL_EXPERT
-	maxskill = SKILL_LEVEL_MASTER
+	minskill = SKILL_RANK_EXPERT
+	maxskill = SKILL_RANK_MASTER
 	exppercycle = 55
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "master"
@@ -190,8 +190,8 @@
 
 /obj/item/textbook/legendary //uncraftable
 	icon_state = "book6_1"
-	minskill = SKILL_LEVEL_MASTER
-	maxskill = SKILL_LEVEL_LEGENDARY
+	minskill = SKILL_RANK_MASTER
+	maxskill = SKILL_RANK_LEGENDARY
 	exppercycle = 70
 	skilltoteach = /datum/attribute/skill/misc/reading
 	skill_name = "legend"

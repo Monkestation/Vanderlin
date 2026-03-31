@@ -53,6 +53,8 @@
 	if(!silent)
 		to_chat(key_holder, span_purple("[final_text]"))
 
+	log_game("TRIUMPHS: [ckey] had triumphs adjusted by [abs(amount)][reason ? " for [reason]." : "."]")
+
 /datum/mind/proc/adjust_triumphs(amt, counted = TRUE, reason, silent = FALSE, override_bonus = FALSE)
 	if(!key)
 		return

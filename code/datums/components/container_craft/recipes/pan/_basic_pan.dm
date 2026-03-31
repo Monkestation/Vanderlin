@@ -6,6 +6,7 @@
 
 	var/datum/pollutant/cooked_smell
 	cooking_sound = /datum/looping_sound/frying
+	used_skill = /datum/attribute/skill/craft/cooking/grilling
 
 /datum/container_craft/pan/get_real_time(atom/host, mob/user, estimated_multiplier)
 	var/real_cooking_time = crafting_time * estimated_multiplier
@@ -232,30 +233,35 @@
 	requirements = list(/obj/item/reagent_containers/food/snacks/butterdough_slice = 1)
 	output = /obj/item/reagent_containers/food/snacks/frybread
 	cooked_smell = /datum/pollutant/food/pastry
+	used_skill = /datum/attribute/skill/craft/cooking/baking
 
 /datum/container_craft/pan/griddlecake
 	name = "Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/griddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake
 	cooked_smell = /datum/pollutant/food/griddlecake
+	used_skill = /datum/attribute/skill/craft/cooking/baking
 
 /datum/container_craft/pan/griddlecakelemon
 	name = "Lemon Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/lemongriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/lemon
 	cooked_smell = /datum/pollutant/food/griddlecake
+	used_skill = /datum/attribute/skill/craft/cooking/baking
 
 /datum/container_craft/pan/griddlecakeapple
 	name = "Apple Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/applegriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	cooked_smell = /datum/pollutant/food/griddlecake
+	used_skill = /datum/attribute/skill/craft/cooking/baking
 
 /datum/container_craft/pan/griddlecakeberry
 	name = "Jacksberry Griddlecake"
 	requirements = list(/obj/item/reagent_containers/food/snacks/foodbase/berrygriddlecake_raw = 1)
 	output = /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	cooked_smell = /datum/pollutant/food/griddlecake
+	used_skill = /datum/attribute/skill/craft/cooking/baking
 
 /datum/container_craft/pan/fried_messenger
 	name = "Fried Messenger"

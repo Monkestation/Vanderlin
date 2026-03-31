@@ -151,14 +151,25 @@
  * Sets a mob as our owner
  */
 /datum/attribute_holder/proc/set_parent(mob/new_parent)
-	if(new_parent)
-		parent = new_parent
-		new_parent.attributes = src
-	else
+	if(parent)
+		UnregisterSignal(parent, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_SHARE_APPRENTICE_XP, COMSIG_PARENT_QDELETING))
 		parent.attributes = null
-		parent = null
+
+	parent = new_parent
+	if(parent)
+		parent.attributes = src
+		RegisterSignal(parent, COMSIG_SHARE_APPRENTICE_XP, PROC_REF(onshare_apprentice_xp))
+		RegisterSignal(parent, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(upon_mind_transfer))
+		RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_deleted))
 	update_attributes()
-	RegisterSignal(parent, COMSIG_SHARE_APPRENTICE_XP, PROC_REF(onshare_apprentice_xp))
+
+/datum/attribute_holder/proc/on_owner_deleted()
+	SIGNAL_HANDLER
+	qdel(src)
+
+/datum/attribute_holder/proc/upon_mind_transfer(mob/living/source_old_mob, mob/living/new_mob)
+	SIGNAL_HANDLER
+	set_parent(new_mob)
 
 /**
  * Seeds the XP pool to match the current raw skill level.
@@ -218,7 +229,9 @@
 		if(isnull(to_add.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_add.skill_xp_multipliers))
@@ -256,7 +269,9 @@
 		if(isnull(to_remove.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_remove.skill_xp_multipliers))
@@ -497,7 +512,7 @@
 		if(!old_level)
 			continue
 		LAZYSET(skill_xp, skill_type, 0)
-		apply_skill_level(skill_type, SKILL_LEVEL_NONE, old_level, silent)
+		apply_skill_level(skill_type, SKILL_RANK_NONE, old_level, silent)
 	if(!silent)
 		to_chat(parent, span_boldwarning("I forget all my skills!"))
 
@@ -511,7 +526,7 @@
 	update_attributes()
 
 	SEND_SIGNAL(parent, COMSIG_SKILL_RANK_CHANGE, skill_type, new_level * 0.1, old_level * 0.1)
-	SEND_SIGNAL(parent, COMSIG_SKILL_LEVEL_CHANGE, skill_type, new_level, old_level)
+	SEND_SIGNAL(parent, COMSIG_SKILL_RANK_CHANGE, skill_type, new_level, old_level)
 
 	// Per-skill side-effects
 	on_skill_level_changed(skill_type, new_level, old_level)

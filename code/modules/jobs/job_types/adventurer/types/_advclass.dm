@@ -27,7 +27,7 @@
 		spawned.remove_status_effect(S)
 
 	if(spawn_with_torch)
-		spawned.put_in_hands(new /obj/item/flashlight/flare/torch)
+		spawned.put_in_hands(new /obj/item/flashlight/flare/torch/prelit)
 
 	apply_character_post_equipment(spawned)
 
