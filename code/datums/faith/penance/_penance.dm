@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 		to_chat(src, span_warning("No penitents nearby."))
 		return
 
-	var/mob/living/carbon/human/target = tgui_input_list(src, "Who shall be absolved?", "Penitents", targets)
+	var/mob/living/carbon/human/target = tgui_input_list(src, "Who shall be absolved?", "Penitents", penitents)
 	if(!target)
 		return
 
