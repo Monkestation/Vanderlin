@@ -197,10 +197,10 @@
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. The Ten hear their prayers once more!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
-		for(var/mob/living/carbon/human/H in GLOB.human_list)
-			if(H.real_name == inputty)
-				H.cleric?.recommunicate()
-				return
+			for(var/mob/living/carbon/human/H in GLOB.human_list)
+				if(H.real_name == inputty)
+					H.cleric?.recommunicate()
+			return
 		if(length(GLOB.tennite_schisms))
 			to_chat(src, span_warning("I cannot excommunicate anyone during the schism!"))
 			return FALSE
