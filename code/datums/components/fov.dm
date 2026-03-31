@@ -211,8 +211,7 @@
 	if(shadow_angle)
 		src.shadow_angle = shadow_angle
 	if(QDELETED(fov_holder))
-		fov_holder = new()
-		fov_holder.hud = source.hud_used
+		fov_holder = new(null, source.hud_used)
 		fov_holder.dir = source.dir
 		fov_holder.screen_loc = "1,1"
 		shadow_mask = image('icons/hud/fov_15x15.dmi', fov_holder, "[shadow_angle]")
