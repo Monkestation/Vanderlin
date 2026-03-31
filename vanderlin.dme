@@ -1148,6 +1148,7 @@
 #include "code\datums\dungeon_generator\dungeon_templates\hallways\common.dm"
 #include "code\datums\dungeon_generator\dungeon_templates\rest\common.dm"
 #include "code\datums\dungeon_generator\dungeon_templates\rooms\common.dm"
+#include "code\datums\elements\drinkable.dm"
 #include "code\datums\elements\_element.dm"
 #include "code\datums\elements\ai_flee_when_hurt.dm"
 #include "code\datums\elements\ai_flee_when_in_pain.dm"

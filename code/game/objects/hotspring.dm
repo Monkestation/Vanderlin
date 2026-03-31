@@ -57,6 +57,10 @@
 	plane = FLOOR_PLANE
 	object_slowdown = 5
 
+/obj/structure/hotspring/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/drinkable)
+
 /obj/structure/hotspring/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(user.used_intent.type != /datum/intent/fill)
