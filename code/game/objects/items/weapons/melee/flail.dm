@@ -187,7 +187,7 @@
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

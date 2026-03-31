@@ -6,6 +6,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	move_resist = INFINITY
 	throwforce = 0
+	attributes = null //please don't remove this...
 	/// For instant transfer once the round is set up
 	var/mob/living/new_character
 

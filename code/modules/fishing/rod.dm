@@ -266,7 +266,7 @@
 		return
 
 	playsound(src, SFX_REEL, 50, vary = FALSE)
-	var/time = (0.8 - round(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/fishing) * 0.04, 0.1)) SECONDS * bait_speed_mult
+	var/time = (0.8 - round(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) * 0.004, 0.1)) SECONDS * bait_speed_mult
 	if(!do_after(user, time, currently_hooked, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE, extra_checks = CALLBACK(src, PROC_REF(fishing_line_check))))
 		return
 	// nothing after this point should sleep (fingers crossed)
@@ -337,7 +337,7 @@
 	user = user || loc
 	if (!isliving(user) || !user.mind || !user.is_holding(src))
 		return
-	. += round(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/fishing) * 0.3)
+	. += round(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/fishing) * 0.03)
 	return max(., 1)
 
 /obj/item/fishingrod/dropped(mob/user, silent)

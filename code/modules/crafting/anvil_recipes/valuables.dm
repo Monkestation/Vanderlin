@@ -421,18 +421,18 @@
 /datum/anvil_recipe/valuables/signet
 	name = "Signet Ring"
 	req_bar = /obj/item/ingot/gold
-	craftdiff = SKILL_LEVEL_EXPERT
+	craftdiff = SKILL_RANK_EXPERT
 	created_item = /obj/item/clothing/ring/signet
 
 /datum/anvil_recipe/valuables/signet/silver
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = SKILL_RANK_MASTER
 	req_bar = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/ring/signet/silver
 
 /datum/anvil_recipe/valuables/signet/silver/inq
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = SKILL_RANK_MASTER
 	req_bar = /obj/item/ingot/silverblessed/bullion
 	created_item = /obj/item/clothing/ring/signet/silver
 

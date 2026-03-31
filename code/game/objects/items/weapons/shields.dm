@@ -25,7 +25,7 @@
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	COOLDOWN_DECLARE(shield_bang)

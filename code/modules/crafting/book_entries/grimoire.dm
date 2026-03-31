@@ -11,10 +11,10 @@
 
 		<div>
 		<h2> How to make a Grimoire </h2>
-		[icon2html(new /obj/item/natural/hide, user)] You first need to start with some hide.<br>
-		[icon2html(new /obj/item/paper/scroll, user)] Then you fill the bindings with scrolls until its full.<br>
+		You first need to start with some hide.<br>
+		Then you fill the bindings with scrolls until its full.<br>
 		<br>
-		[icon2html(new /obj/item/gem/violet, user)] Now here is where its most important. The gem you use determines how powerful your book is. <br>
+		 Now here is where its most important. The gem you use determines how powerful your book is. <br>
 		For instance arcyne melds are how you get the higher tiered books. Starting off however you can even use rocks that have magical powers in them. <br>
 		Its recommened to use a low powered stone for your first tome as thats the easist material to get.
 		</div>

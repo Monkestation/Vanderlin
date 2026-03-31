@@ -262,6 +262,9 @@
 /datum/keybinding/living/lookup/down(client/user)
 	. = ..()
 	var/mob/living/L = user.mob
+	if(HAS_TRAIT(L, TRAIT_SUBMERGED))
+		L.zSwim(UP)
+		return FALSE
 	if(!lastrest || world.time > lastrest + 15)
 		L.look_up()
 		lastrest = world.time
@@ -291,3 +294,25 @@
 	full_name = "View Pet Commands"
 	description = "Hold down to see all the commands you can give your pets!"
 	keybind_signal = COMSIG_KB_LIVING_VIEW_PET_COMMANDS
+
+/datum/keybinding/living/swim_up
+	hotkey_keys = list("ShiftR")
+	name = "swim_up"
+	full_name = "Swim Up"
+	description = "Attempt to swim upwards"
+
+/datum/keybinding/living/swim_up/down(client/user)
+	. = ..()
+	var/mob/living/L = user.mob
+	L.zSwim(UP)
+
+/datum/keybinding/living/swim_down
+	hotkey_keys = list("ShiftV")
+	name = "swim_down"
+	full_name = "Swim Down"
+	description = "Attempt to swim downwards"
+
+/datum/keybinding/living/swim_down/down(client/user)
+	. = ..()
+	var/mob/living/L = user.mob
+	L.zSwim(DOWN)

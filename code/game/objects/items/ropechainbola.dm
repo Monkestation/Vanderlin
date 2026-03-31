@@ -186,7 +186,7 @@
 		SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 		C.apply_status_effect(/datum/status_effect/debuff/netted)
 		playsound(src, 'sound/combat/hits/nodmg (2).ogg', 100, TRUE)
-		if(MOVE_INTENT_RUN && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
+		if((C.m_intent = MOVE_INTENT_RUN || HAS_TRAIT(C, TRAIT_STUMBLE)) && C.body_position == STANDING_UP && C.sprinted_tiles > 0)
 			C.Knockdown(knockdown)
 
 /obj/item/rope/net/dropped(mob/living/carbon/user, silent)

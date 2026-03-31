@@ -289,6 +289,8 @@
 
 	/// new title given by an admin.
 	var/admin_title = null
+	///if true we spawn this mob and look for data for guidebooks
+	var/indexed = FALSE
 
 	VAR_PROTECTED/base_strength = 10
 	VAR_PROTECTED/base_perception = 10

@@ -61,6 +61,7 @@
 /datum/artificer_recipe/general/locks
 	name = "5x Custom Locks"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/customlock
 	hammers_per_item = 5
 	craftdiff = 1
@@ -69,6 +70,7 @@
 /datum/artificer_recipe/general/keys
 	name = "5x Blank Custom Keys"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/key/custom
 	hammers_per_item = 5
 	craftdiff = 1
@@ -114,6 +116,7 @@
 	name = "3x Lockpicks"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpick
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	created_amount = 3
 	craftdiff = 2
@@ -122,6 +125,7 @@
 	name = "Lockpick ring"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpickring
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	craftdiff = 2
 

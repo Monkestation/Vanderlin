@@ -47,7 +47,7 @@
 	momentum = 0
 	return FALSE
 
-/obj/structure/closet/crate/miningcar/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+/obj/structure/closet/crate/miningcar/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!on_rails || momentum <= 0)
 		return

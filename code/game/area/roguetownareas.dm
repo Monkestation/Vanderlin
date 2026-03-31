@@ -101,7 +101,7 @@
 	background_track_night = null
 	first_time_text = "MALUMS ANVIL"
 	custom_area_sound = 'sound/misc/stings/MalumSting.ogg'
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 
 	converted_type = /area/indoors/shelter/mountains/decap
 	threat_region = THREAT_REGION_MOUNT_DECAP
@@ -117,7 +117,7 @@
 	name = "town basin"
 	icon_state = "basin"
 	soundenv = 19
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(DAWN,NIGHT,DUSK)
 	ambush_types = list(
 				/turf/open/floor/grass)
 	ambush_mobs = list(
@@ -129,7 +129,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
 	converted_type = /area/indoors/shelter/basin
-	threat_region = THREAT_REGION_MOUNT_DECAP
+	threat_region = THREAT_REGION_BASIN
 
 /area/outdoors/basin/Initialize()
 	. = ..()
@@ -144,7 +144,7 @@
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
-	threat_region = THREAT_REGION_MOUNT_DECAP
+	threat_region = THREAT_REGION_BASIN
 
 /area/indoors/shelter/woods
 	icon_state = "woods"
@@ -228,13 +228,14 @@
 	background_track = 'sound/music/area/caves.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
-				/turf/open/floor/dirt)
+		/turf/open/floor/dirt,
+		/turf/open/water,)
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/bigrat = 30,
-				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 20,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 10)
+		/mob/living/simple_animal/hostile/retaliate/bigrat = 30,
+		/mob/living/carbon/human/species/goblin/npc/ambush/cave = 20,
+		/mob/living/carbon/human/species/skeleton/npc/ambush = 10)
 	converted_type = /area/outdoors/caves
 
 /area/outdoors/caves
@@ -251,7 +252,7 @@
 	background_track = 'sound/music/area/caves.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/dirt)
 	ambush_mobs = list(
@@ -298,7 +299,7 @@
 	first_time_text = "MALUM'S ARTERY"
 	droning_index = DRONING_CAVE_LAVA
 	ambient_index = AMBIENCE_CAVE
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/dirt)
 	ambush_mobs = list(
@@ -357,17 +358,17 @@
 	background_track_night = null
 	first_time_text = "The Forest of Repentence"
 
-/area/underworld/Entered(atom/movable/movable, oldloc)
+/area/underworld/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(!iscarbon(movable))
+	if(!iscarbon(arrived))
 		return
-	RegisterSignal(movable, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
+	RegisterSignal(arrived, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
 
-/area/underworld/Exited(atom/movable/movable)
+/area/underworld/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
-	if(!iscarbon(movable))
+	if(!iscarbon(gone))
 		return
-	UnregisterSignal(movable, COMSIG_CARBON_PRAY)
+	UnregisterSignal(gone, COMSIG_CARBON_PRAY)
 
 /area/underworld/proc/on_underworld_prayer(mob/living/carbon/damned, message)
 	// Who do the underworld spirits pray to? Good question

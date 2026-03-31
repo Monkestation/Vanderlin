@@ -16,6 +16,7 @@
 #define DANGER_LEVEL_DANGEROUS "Dangerous"
 #define DANGER_LEVEL_BLEAK "Bleak"
 
+#define THREAT_REGION_TOWN "Town"
 #define THREAT_REGION_BASIN "Basin"
 #define THREAT_REGION_NORTHERN_GROVE "Northern Grove"
 #define THREAT_REGION_OUTER_GROVE "Outer Grove" // Grove west of the road

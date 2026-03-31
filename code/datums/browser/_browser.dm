@@ -36,7 +36,7 @@
 	src.width = width
 	src.height = height
 
-/datum/browser/Destroy(force, ...)
+/datum/browser/Destroy(force)
 	if(!isnull(user))
 		var/client/user_client = isclient(user) ? user : user.client
 		UnregisterSignal(user_client, COMSIG_MOB_CLIENT_MOVED)

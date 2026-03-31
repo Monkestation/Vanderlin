@@ -343,13 +343,16 @@
 	icon_state = "artibackpack"
 	item_state = "artibackpack"
 	resistance_flags = FIRE_PROOF
-	sewrepair = FALSE
+	sewrepair = null
 	//for those curious, yes the artibackpack preserves organs and food. Check _organ.dm and snacks.dm
 
 /obj/item/storage/backpack/backpack/artibackpack/porter
 	name = "humdrum"
 	desc = "A absurdly oversized backpack with complex bronze pipework coursing through it. It hums and vibrates constantly."
-	sewrepair = TRUE //Kobold thing, trust.
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 2
+	dyeable = TRUE //Kobold thing, trust.
 	component_type = /datum/component/storage/concrete/grid/porter
 
 /obj/item/storage/backpack/satchel/surgbag
@@ -418,7 +421,10 @@
 	item_state = "knife"
 	strip_delay = 20
 	var/max_storage = 8
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	component_type = /datum/component/storage/concrete/grid/belt/knife_belt
 	empty_when_dropped = FALSE
 

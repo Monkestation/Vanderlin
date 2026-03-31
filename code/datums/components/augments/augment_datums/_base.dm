@@ -2,7 +2,7 @@
 	var/name = "base augment"
 	var/desc = "A mechanical augmentation."
 	var/stability_cost = 0 // Negative values add stability, positive values reduce it
-	var/engineering_difficulty = SKILL_LEVEL_NOVICE
+	var/engineering_difficulty = SKILL_RANK_NOVICE
 	var/installation_time = 10 SECONDS
 	var/mob/living/carbon/parent
 

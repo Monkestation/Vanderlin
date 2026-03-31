@@ -67,6 +67,10 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 	name = "Natural Wooden Cane"
 	item_path = /obj/item/weapon/mace/cane/natural
 
+/datum/loadout_item/wooden_sword
+	name = "Training Sword"
+	item_path = /obj/item/weapon/mace/woodclub/train_sword
+
 /datum/loadout_item/keyring
 	name = "Key Ring"
 	item_path = /obj/item/storage/keyring
@@ -74,6 +78,10 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 /datum/loadout_item/soap
 	name = "Bar of Soap"
 	item_path = /obj/item/soap
+
+/datum/loadout_item/servant_bell
+	name = "Unbound Servant Bell"
+	item_path = /obj/item/servant_bell
 
 //HATS
 /datum/loadout_item/zalad
@@ -112,6 +120,9 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 	name = "Fur Hat"
 	item_path = /obj/item/clothing/head/hatfur
 
+/datum/loadout_item/tallhat
+	name = "Tallhat (Dwarf + Halfling only)"
+	item_path = /obj/item/clothing/head/gnomecap
 
 /datum/loadout_item/headband
 	name = "Headband"
@@ -225,6 +236,10 @@ GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
 /datum/loadout_item/nun_habit
 	name = "Nun Habit"
 	item_path = /obj/item/clothing/shirt/robe/nun
+
+/datum/loadout_item/corset
+	name = "Corset"
+	item_path = /obj/item/clothing/armor/corset
 
 //PANTS
 /datum/loadout_item/tights

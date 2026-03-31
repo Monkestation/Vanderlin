@@ -17,13 +17,13 @@
 /area/template_noop)
 "i" = (
 /obj/structure/flora/grass/herb/valeriana,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "k" = (
 /turf/open/floor/grass,
 /area/template_noop)
 "p" = (
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "q" = (
 /obj/structure/flora/grass/herb/random,

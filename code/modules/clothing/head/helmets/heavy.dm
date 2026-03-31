@@ -536,3 +536,19 @@
 	adjustable = CAN_CADJUST
 	block2add = FOV_BEHIND
 	max_integrity = 400
+
+//............... Gronn Heavy Helmet ...............//
+/obj/item/clothing/head/helmet/heavy/ironplate/gronn
+	name = "osslandic horned helmet"
+	desc = "A horned helms of solid iron. \
+		A suitable replacement for the precious skull-helms worn in Ossland. \
+		For of course, to have your skull-helm smashed is the highest of disrespects."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/gronn.dmi'
+	bloody_icon = 'icons/effects/blood64x64.dmi'
+	icon_state = "gronnplatehelm"
+	item_state = "gronnplatehelm"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_BEHIND
+	worn_x_dimension = 64
+	worn_y_dimension = 64

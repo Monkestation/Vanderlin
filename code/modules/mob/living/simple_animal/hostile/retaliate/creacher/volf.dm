@@ -30,6 +30,7 @@
 						/obj/item/alch/bone = 2)
 	head_butcher = /obj/item/natural/head/volf
 
+	indexed = TRUE
 	health = VOLF_HEALTH
 	maxHealth = VOLF_HEALTH
 	food_type = list(/obj/item/reagent_containers/food/snacks/meat,

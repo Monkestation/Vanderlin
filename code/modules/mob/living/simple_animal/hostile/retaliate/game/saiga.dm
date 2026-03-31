@@ -61,6 +61,7 @@
 
 	genetics = /datum/animal_genetics/saiga
 	generate_genetics = TRUE
+	indexed = TRUE
 
 	var/can_breed = TRUE
 
@@ -222,6 +223,7 @@
 
 	genetics = /datum/animal_genetics/saiga
 	generate_genetics = TRUE
+	indexed = TRUE
 
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle,
@@ -365,9 +367,11 @@
 
 /mob/living/simple_animal/hostile/retaliate/saiga/tame
 	tame = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame
 	tame = TRUE
+	indexed = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled/Initialize()
 	. = ..()

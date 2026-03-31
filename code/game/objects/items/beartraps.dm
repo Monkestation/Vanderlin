@@ -159,7 +159,7 @@
 			if(cross_mob.throwing)
 				return ..()
 
-			if(cross_mob.movement_type & (FLYING|FLOATING)) //don't close the trap if they're flying/floating over it.
+			if(cross_mob.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)) //don't close the trap if they're flying/floating over it.
 				return ..()
 			if(HAS_TRAIT(cross_mob, TRAIT_LIGHT_STEP))
 				return ..()

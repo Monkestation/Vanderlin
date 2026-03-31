@@ -102,7 +102,7 @@
 	if(user.cmode)
 		return
 
-	if(ishuman(user))
+	if(ishuman(user) && user != src)
 		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 		if(length(user.return_apprentices()) >= user.return_max_apprentices())
 			return

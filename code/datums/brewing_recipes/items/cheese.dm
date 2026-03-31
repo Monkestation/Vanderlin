@@ -8,6 +8,7 @@
 	helpful_hints = span_info("Needs to be strained with a cloth to finish.")
 	start_verb = "fermenting"
 	brewed_item_count = 2
+	brewing_skill = /datum/attribute/skill/craft/cooking/cheesemaking
 	pre_reqs = /datum/reagent/consumable/milk/salted
 
 /datum/brewing_recipe/cheese/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)

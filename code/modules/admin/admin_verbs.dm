@@ -473,7 +473,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/set_tod_override()
 	set category = "Debug"
 	set name = "SetTODOverride"
-	var/list/TODs = list("dawn","day","dusk","night")
+	var/list/TODs = list(DAWN,DAY,DUSK,NIGHT)
 	var/choice = input(src,"","Set time of day override") as null|anything in TODs
 	if(choice)
 		GLOB.todoverride = choice
