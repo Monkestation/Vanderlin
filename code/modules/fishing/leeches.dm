@@ -100,7 +100,7 @@
 /obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
-	if(bodypart?.skeletonized || bodypart?.is_organic_limb())
+	if(bodypart?.skeletonized || !bodypart?.is_organic_limb())
 		bodypart.remove_embedded_object(src)
 		return TRUE
 
