@@ -146,7 +146,7 @@ GLOBAL_LIST_EMPTY(active_penances) // List of all active penances
 		"Trial by Combat" = /datum/penance/combat,
 	)
 
-	var/choice = input(src, "What penance shall they perform?") as null|anything in penance_types
+	var/choice = tgui_input_list(src, "What penance shall they perform?", "Penance Type", penance_types)
 	if(!choice)
 		return
 
