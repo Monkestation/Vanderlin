@@ -1755,6 +1755,7 @@
 #include "code\game\objects\items\gems.dm"
 #include "code\game\objects\items\granters.dm"
 #include "code\game\objects\items\grappler.dm"
+#include "code\game\objects\items\graveparts.dm"
 #include "code\game\objects\items\harpoon_gun.dm"
 #include "code\game\objects\items\honeycomb.dm"
 #include "code\game\objects\items\hourglass.dm"

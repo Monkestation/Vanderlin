@@ -21,6 +21,9 @@
 	alternative_icon_handling = TRUE
 	var/stage = 1
 	var/faildirt = 0
+	var/headstone
+	var/gravefence
+	var/gravequality = 0
 	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (you get cursed, and the clergy is alerted.)
 
 
@@ -127,6 +130,42 @@
 		qdel(attacking_item)
 		return
 
+	if(istype(attacking_item, /obj/item/headstone))
+		if(headstone)
+			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
+			return
+		if(stage != 4)
+			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
+			return
+
+		var/obj/item/headstone/ourheadstone = attacking_item
+		if(!do_after(user, 10 SECONDS, src))
+			return
+		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', ourheadstone.icon_state, 2.91)
+		add_overlay(headstone_overlay)
+		gravequality += ourheadstone.decorationquality
+		headstone = attacking_item.type
+		qdel(attacking_item)
+		return
+
+	if(istype(attacking_item, /obj/item/gravefence))
+		if(gravefence)
+			to_chat(user, "<span class='warning'>This grave already has a fence.</span>")
+			return
+		if(stage != 4)
+			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
+			return
+
+		var/obj/item/gravefence/ourfence = attacking_item
+		if(!do_after(user, 10 SECONDS, src))
+			return
+		var/mutable_appearance/fence_overlay = mutable_appearance('icons/turf/floors.dmi', ourfence.icon_state, 2.9)
+		add_overlay(fence_overlay)
+		gravequality += ourfence.decorationquality
+		gravefence = attacking_item.type
+		qdel(attacking_item)
+		return
+
 	if(!istype(attacking_item, /obj/item/weapon/shovel))
 		if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
 			attemptwatermake(user, attacking_item)
@@ -145,6 +184,10 @@
 			climb_offset = 10
 			close()
 			var/founds
+			if(/obj/structure/closet/crate/coffin in contents)
+				gravequality += 20
+			else if(/obj/structure/closet/burial_shroud in contents)
+				gravequality += 5
 			for(var/atom/A in contents)
 				founds = TRUE
 				break
@@ -199,11 +242,17 @@
 				return
 			stage = 3
 			climb_offset = 0
+			gravequality = 0
+			cut_overlays()
 			open()
+			if(headstone)
+				new headstone(get_turf(src))
+				headstone = null
+			if(gravefence)
+				new gravefence(get_turf(src))
+				gravefence = null
 			switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
 				if(NOT_CONSECRATED) // not consecrated, proceed
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
 					return
 
 				if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
@@ -218,8 +267,6 @@
 							to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
 							L.apply_status_effect(/datum/status_effect/debuff/cursed)
 					SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
 
 				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
 					if(ishuman(user))
@@ -242,8 +289,6 @@
 							else // Even Necrans get minorly cursed, but it's miles better than losing your lux or your arm
 								to_chat(user, span_warning("I mutter Necra's hallowed rites, and although my devotion is recognized, my trespass remains great, I am cursed!"))
 								L.apply_status_effect(/datum/status_effect/debuff/cursed)
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
 		stage_update()
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
