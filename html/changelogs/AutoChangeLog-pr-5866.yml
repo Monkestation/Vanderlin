@@ -1,0 +1,5 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - bugfix: "The call ritual now works properly"
+  - bugfix: "Dark sun mark ritual also works properly"

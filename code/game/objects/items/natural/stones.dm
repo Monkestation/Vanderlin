@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 
 /obj/item/natural/rock/Crossed(mob/living/L)
 	if(istype(L) && !L.throwing)
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			L.visible_message(span_warning("[L] trips over the rock!"),span_warning("I trip over the rock!"))
 			L.Knockdown(10)
 			L.consider_ambush()

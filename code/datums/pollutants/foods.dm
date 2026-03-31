@@ -257,6 +257,10 @@
 	name = "borowiki stew"
 	scent = "borowiki stew"
 
+/datum/pollutant/food/bone_broth
+	name = "bone broth"
+	scent = "bone broth"
+
 /datum/pollutant/food/cheese_soup
 	name = "cheese soup"
 	scent = "cheese soup"

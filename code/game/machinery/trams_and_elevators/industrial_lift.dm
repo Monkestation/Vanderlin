@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	anchored = TRUE
 	max_integrity = 50
 	layer = LYING_MOB_LAYER //under pipes
-	plane = GAME_PLANE
+	plane = FLOOR_PLANE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER //no TILE_BOUND since we're potentially multitile
 
@@ -134,8 +134,6 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	*/
 
 	lift_load -= potential_rider
-	potential_rider.plane = initial(potential_rider.plane)
-	potential_rider.layer -= 2
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
 	changed_gliders -= potential_rider
 
@@ -158,9 +156,6 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	*/
 
 	lift_load += new_lift_contents
-	if(!iseffect(new_lift_contents))
-		new_lift_contents.plane = 3
-		new_lift_contents.layer += 2
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))
 	RegisterSignal(new_lift_contents, COMSIG_PARENT_QDELETING, PROC_REF(RemoveItemFromLift))
 	RegisterSignal(new_lift_contents, COMSIG_MOVABLE_TURF_EXITED, PROC_REF(UncrossedAtomRemoveItemFromLift))

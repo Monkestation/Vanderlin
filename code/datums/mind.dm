@@ -827,7 +827,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 		return FALSE
 	amt *= GLOB.sleep_experience_modifier
 
-	if(current.has_quirk(/datum/quirk/boon/quick_learner))
+	if(current.has_quirk(/datum/quirk/boon/quick_learner) || current.has_reagent(/datum/reagent/buff/herbal/scholar_focus))
 		amt *= 1.2
 
 	amt *= current.get_skill_exp_multiplier(skill)

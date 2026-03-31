@@ -249,7 +249,7 @@ GLOBAL_LIST_INIT(visual_ui_id_to_type, list())
 	icon = 'icons/visual_ui/32x32.dmi'
 	icon_state = ""
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
-	plane = HUD_PLANE
+	plane = VISUAL_HUD_PLANE
 
 	var/datum/visual_ui/parent = null
 	var/element_flags = 0

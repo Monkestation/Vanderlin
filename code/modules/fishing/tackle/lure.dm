@@ -33,6 +33,8 @@
 	icon = 'icons/obj/fishing.dmi'
 	icon_state = "minnow"
 	w_class = WEIGHT_CLASS_SMALL
+	grid_width = 32
+	grid_height = 32
 	/**
 	 * A list with two keys delimiting the spinning interval in which a mouse click has to be pressed while fishing.
 	 * This is passed down to the fishing rod, and then to the lure during the minigame.
