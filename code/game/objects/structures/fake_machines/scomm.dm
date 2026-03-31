@@ -76,7 +76,7 @@
 	contents += "<center>[uppertext(lord_job.get_informed_title())]'S DECREES<BR>"
 
 	contents += "-----------<BR><BR></center>"
-	for(var/i = 1 to GLOB.lord_decrees.len step 1)a
+	for(var/i = 1 to GLOB.lord_decrees.len step 1)
 		contents += "[i]. <span class='info'>[GLOB.lord_decrees[i]]</span><BR>"
 	if(!canread)
 		contents = stars(contents)
