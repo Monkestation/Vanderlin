@@ -21,12 +21,19 @@
 	randomspread = 2
 	spread = 3
 
+	var/breaking = FALSE
+
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured
+	name = "puffer"
+	desc = "A magically conjured copy of a eastern styled wheellock. \
+		It looks and functions exactly like the original, but seems to be held together by weak magick, it looks like it will crumble at any moment."
+
 	sellprice = 0 //Yeah, Let's not sell this.
 
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/barrel
 
 	ramrod_type = null
+
 	cocked = TRUE
 	wound = TRUE
 	bullet_rammed = TRUE
@@ -34,3 +41,19 @@
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/blastpowder, powder_required)
+
+/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/can_shoot(mob/living/user)
+	. = ..()
+	return (. && !breaking)
+
+/obj/item/gun/ballistic/powder/wheellock/puffer/conjured/after_firing(atom/target, mob/living/user, empty_chamber, from_firing, chamber_next_round)
+	. = ..()
+	if(!from_firing)
+		return
+
+	if(breaking)
+		return
+
+	QDEL_IN(src, rand(2 SECONDS, 5 SECONDS)) //Apparently, a puffer being broken can still be shot, because that make sense. so we're qdel'ing it right after.
+	visible_message(span_warning("The puffer begins to crumble, the enchantment falls!"))
+	breaking = TRUE
