@@ -1,0 +1,1 @@
+/obj/structure/hotspring : /turf/open/water/hotspring

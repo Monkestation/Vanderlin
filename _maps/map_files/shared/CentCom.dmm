@@ -48,7 +48,6 @@
 /turf/open/floor/cobble,
 /area/indoors)
 "ai" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/lily_petal/three{
 	pixel_y = -14;
@@ -58,7 +57,7 @@
 	pixel_y = 13;
 	pixel_x = 11
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "aj" = (
 /obj/structure/hotspring/border/five,
@@ -72,8 +71,7 @@
 /turf/open/floor/woodturned,
 /area/indoors)
 "al" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "am" = (
 /obj/structure/hotspring/border/eight,
@@ -3288,10 +3286,9 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
 "sl" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "sm" = (
 /obj/structure/fluff/railing/border{
@@ -3369,12 +3366,11 @@
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
 "sD" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/structure/flora/sakura{
 	pixel_y = -13
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "sE" = (
 /obj/structure/bookcase/random,
@@ -5372,10 +5368,9 @@
 /turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
 "GP" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "GQ" = (
 /obj/structure/door{
@@ -6156,9 +6151,8 @@
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
 "LE" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "LG" = (
 /obj/structure/flora/grass/herb/random,
@@ -7505,9 +7499,8 @@
 /turf/open/floor/blocks,
 /area/indoors)
 "Uw" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Ux" = (
 /obj/structure/hotspring/border/eleven,
@@ -7563,9 +7556,8 @@
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
 "UR" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "UU" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,

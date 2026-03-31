@@ -6640,9 +6640,8 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/library)
 "epe" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "epk" = (
 /obj/structure/fluff/walldeco/customflag{
@@ -8131,11 +8130,10 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
 "fii" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five{
 	pixel_x = -10
 	},
-/turf/open/floor/grass/mixyel,
+/turf/open/water/hotspring,
 /area/outdoors/basin/safe)
 "fix" = (
 /obj/structure/door/violet{
@@ -9845,10 +9843,9 @@
 /turf/open/floor/cobble,
 /area/outdoors/basin)
 "grY" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "gsC" = (
 /obj/structure/table/wood/large/corner{
@@ -10113,9 +10110,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/church)
 "gCp" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "gCs" = (
 /obj/structure/fluff/wallclock/r,
@@ -10816,9 +10812,8 @@
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "hdb" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "hdx" = (
 /obj/structure/chair/stool,
@@ -10880,9 +10875,8 @@
 	},
 /area/outdoors/basin/safe)
 "hfR" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "hfW" = (
 /obj/structure/chair/bench/couch/right{
@@ -12596,10 +12590,9 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "ifw" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "ifA" = (
 /obj/structure/table/wood{
@@ -12951,11 +12944,10 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/dungeoneer)
 "iso" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "isO" = (
 /obj/structure/bars,
@@ -14582,10 +14574,9 @@
 /turf/open/floor/blocks,
 /area/indoors/soilsons)
 "jAT" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "jBi" = (
 /obj/structure/window/solid,
@@ -16196,10 +16187,9 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep)
 "kCs" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "kCu" = (
 /obj/machinery/light/fueled/wallfire{
@@ -16349,10 +16339,9 @@
 /turf/open/floor/metal/alt,
 /area/indoors/town/clinic_large/apothecary)
 "kHd" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "kHn" = (
 /obj/structure/spider/stickyweb{
@@ -18268,9 +18257,8 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/town/keep/throne)
 "lXj" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/basin/safe)
 "lXk" = (
 /obj/effect/mapping_helpers/secret_door_creator{
@@ -20272,8 +20260,7 @@
 /turf/open/floor/tile/kitchen,
 /area/outdoors/basin)
 "nnP" = (
-/obj/structure/hotspring,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "nnV" = (
 /obj/structure/fluff/railing/border{
@@ -22985,9 +22972,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
 "pnV" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "por" = (
 /obj/structure/fluff/walldeco/painting/castle,
@@ -23759,8 +23745,7 @@
 /turf/open/floor/grass,
 /area/outdoors/basin/safe)
 "pOV" = (
-/obj/structure/hotspring,
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/basin/safe)
 "pOW" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -31346,10 +31331,9 @@
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "uYp" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
 /obj/effect/falling_sakura,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "uYD" = (
 /obj/machinery/light/fueled/firebowl,
@@ -33751,12 +33735,11 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep)
 "wEg" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three{
 	pixel_x = -5;
 	pixel_y = 5
 	},
-/turf/open/floor/grass/cold,
+/turf/open/water/hotspring,
 /area/outdoors/basin/safe)
 "wEh" = (
 /obj/structure/rack/shelf/biggest,
@@ -35233,9 +35216,8 @@
 /turf/open/floor/greenstone,
 /area/indoors/town/vault)
 "xFB" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/basin)
 "xFI" = (
 /obj/structure/ladder,

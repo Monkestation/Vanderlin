@@ -112,8 +112,7 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "aw" = (
-/obj/structure/hotspring,
-/turf/open/floor/cobblerock,
+/turf/open/water/hotspring,
 /area/outdoors/mountains/decap)
 "ax" = (
 /turf/closed/wall/mineral/stone,
@@ -1133,12 +1132,11 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "eD" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/structure/flora/sakura{
 	pixel_y = -13
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "eE" = (
 /obj/structure/stairs/stone/reddish{
@@ -1215,10 +1213,9 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep)
 "gp" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "gr" = (
 /obj/structure/water_pipe,
@@ -1529,7 +1526,6 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
 "mF" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/lily_petal/three{
 	pixel_y = -14;
@@ -1539,7 +1535,7 @@
 	pixel_y = 13;
 	pixel_x = 11
 	},
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "mL" = (
 /obj/structure/flora/grass/bush/wall,
@@ -1819,9 +1815,8 @@
 /turf/closed/mineral/random/med,
 /area/outdoors/mountains/decap)
 "tp" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "tA" = (
 /turf/closed,
@@ -1932,9 +1927,8 @@
 /turf/open/floor/cobblerock,
 /area/outdoors)
 "vB" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "vD" = (
 /turf/open/floor/churchbrick,
@@ -2091,10 +2085,9 @@
 /turf/closed/wall/mineral/tent,
 /area/outdoors/mountains/decap)
 "zm" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "zn" = (
 /obj/structure/hotspring/border/eleven,
@@ -2491,8 +2484,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
 "Dz" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
+/turf/open/water/hotspring,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
 "DA" = (
@@ -2522,8 +2514,7 @@
 /turf/open/floor/wood,
 /area/outdoors)
 "DY" = (
-/obj/structure/hotspring,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Ek" = (
 /obj/structure/redstone/comparator{
@@ -2851,9 +2842,8 @@
 /turf/open/floor/dirt,
 /area/indoors)
 "Kd" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/dirt/road,
+/turf/open/water/hotspring,
 /area/outdoors)
 "Ke" = (
 /obj/structure/flora/ausbushes/brflowers,

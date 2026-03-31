@@ -15,6 +15,37 @@
 	friction = 0.3
 	grow = 0.037
 
+/turf/open/water/hotspring
+	name = "hot spring"
+	icon = 'icons/obj/structures/hotspring.dmi'
+	icon_state = "hotspring"
+	turf_flags = TURF_NO_LIQUID_SPREAD
+	shine = SHINE_MATTE
+	no_over_text = TRUE
+	smoothing_flags = NONE
+	smoothing_groups = NONE
+	smoothing_list = NONE
+
+	uses_water_overlays = FALSE
+	bottle_spawner = FALSE
+
+/turf/open/water/hotspring/Initialize(mapload)
+	. = ..()
+	var/obj/effect/abstract/shared_particle_holder/hotspring_steam = add_shared_particles(/particles/hotspring_steam, "hotspring", pool_size = 4)
+	hotspring_steam.vis_flags &= ~VIS_INHERIT_PLANE
+	AddElement(/datum/element/mob_overlay_effect, 2, -2, 100)
+
+/turf/open/water/hotspring/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	// Blessed be the water code (dogshit)
+	if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
+		playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
+	else
+		playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
+
+/turf/open/water/hotspring/dryup(forced)
+	return // no
+
 ///these were unfortunately requested to not be smoothed. I will likely create a smooth helper version aswell though
 ///the issue is they would need at least a 2x2 to smooth proper.
 /obj/structure/hotspring
@@ -26,110 +57,64 @@
 	plane = FLOOR_PLANE
 	object_slowdown = 5
 
-	var/edge = FALSE
-
-/obj/structure/hotspring/Initialize()
-	. = ..()
-	var/obj/effect/abstract/shared_particle_holder/hotspring_steam = add_shared_particles(/particles/hotspring_steam, "hotspring", pool_size = 4)
-	//render the steam over mobs and objects on the game plane
-	hotspring_steam.vis_flags &= ~VIS_INHERIT_PLANE
-
-	var/turf/turf = get_turf(src)
-	turf.turf_flags |= TURF_NO_LIQUID_SPREAD
-	if(!edge)
-		turf.path_weight += 100
-		AddElement(/datum/element/mob_overlay_effect, 2, -2, 100)
-
-/obj/structure/hotspring/Destroy()
-	var/turf/turf = get_turf(src)
-	turf.turf_flags &= ~TURF_NO_LIQUID_SPREAD
-	if(!edge)
-		turf.path_weight -= 100
-	. = ..()
-
-
-/obj/structure/hotspring/Crossed(atom/movable/AM)
-	. = ..()
-	for(var/obj/structure/S in get_turf(src))
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
-
-	if(!edge)
-		playsound(AM, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 40, FALSE)
-
 /obj/structure/hotspring/border
 	icon_state = "hotspring_border_1"
 	object_slowdown = 0
-	edge = TRUE
 
 /obj/structure/hotspring/border/two
 	icon_state = "hotspring_border_2"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/three
 	icon_state = "hotspring_border_3"
 	object_slowdown = 0
-	edge = TRUE
 
 /obj/structure/hotspring/border/four
 	icon_state = "hotspring_border_4"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/five
 	icon_state = "hotspring_border_5"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/six
 	icon_state = "hotspring_border_6"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/seven
 	icon_state = "hotspring_border_7"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/eight
 	icon_state = "hotspring_border_8"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/nine
 	icon_state = "hotspring_border_9"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/ten
 	icon_state = "hotspring_border_10"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/eleven
 	icon_state = "hotspring_border_11"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/twelve
 	icon_state = "hotspring_border_12"
 	object_slowdown = 5
-	edge = FALSE
 
 /obj/structure/hotspring/border/thirteen
 	icon_state = "hotspring_border_13"
 	object_slowdown = 0
-	edge = TRUE
 
 /obj/structure/hotspring/border/fourteen
 	icon_state = "hotspring_border_14"
 	object_slowdown = 0
-	edge = TRUE
 
 /obj/structure/flora/hotspring_rocks
 	name = "large rock"
-
 	icon = 'icons/obj/structures/hotspring.dmi'
 	icon_state = "bigrock"
 	obj_flags = CAN_BE_HIT | IGNORE_SINK
@@ -141,8 +126,8 @@
 
 /obj/structure/flora/hotspring_rocks/small
 	name = "small rock"
-	density = FALSE
 	icon_state = "stones_1"
+	density = FALSE
 
 /obj/structure/flora/hotspring_rocks/small/two
 	icon_state = "stones_2"

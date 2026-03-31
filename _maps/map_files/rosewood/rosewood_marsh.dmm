@@ -1116,9 +1116,8 @@
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
 "gl" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "gm" = (
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
@@ -1660,9 +1659,8 @@
 /turf/open/floor/churchbrick,
 /area/outdoors/bog)
 "iR" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "iT" = (
 /obj/structure/fluff/railing/wood{
@@ -3608,9 +3606,8 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
 "tP" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "tQ" = (
 /obj/structure/fluff/railing/wood{
@@ -5013,8 +5010,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
 "Az" = (
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "AB" = (
 /obj/structure/table/church,
@@ -5730,16 +5726,14 @@
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
 "Ek" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/four,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "El" = (
-/obj/structure/hotspring,
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/water/hotspring,
 /area/indoors/lich)
 "En" = (
 /obj/structure/bridge{
@@ -5789,11 +5783,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
-"Ez" = (
-/obj/structure/hotspring,
-/obj/structure/flora/hotspring_rocks/small,
-/turf/open/floor/naturalstone,
-/area/outdoors/bog)
 "EA" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -7023,9 +7012,8 @@
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "Ls" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Lv" = (
 /turf/open/floor/grass/cold,
@@ -7150,8 +7138,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/bog)
 "Mg" = (
-/obj/structure/hotspring,
-/turf/open/floor/ruinedwood,
+/turf/open/water/hotspring,
 /area/indoors/lich)
 "Mh" = (
 /obj/structure/spider/stickyweb{
@@ -7350,9 +7337,8 @@
 /turf/open/floor/cobble,
 /area/indoors/lich)
 "Nn" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Np" = (
 /obj/structure/spider/stickyweb,
@@ -7739,9 +7725,8 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/bog)
 "Pt" = (
-/obj/structure/hotspring,
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Px" = (
 /obj/structure/toilet,
@@ -7862,9 +7847,8 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
 "Qb" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small,
-/turf/open/floor/dirt,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Qc" = (
 /obj/structure/window,
@@ -9056,10 +9040,6 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog)
-"WC" = (
-/obj/structure/hotspring,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
 "WF" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -69330,7 +69310,7 @@ dE
 dE
 sL
 El
-WC
+Mg
 QA
 aa
 Fn
@@ -92866,7 +92846,7 @@ IC
 IC
 yn
 ji
-Ez
+Qb
 Az
 bj
 bb

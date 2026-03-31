@@ -2874,8 +2874,7 @@
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "bwB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -4477,8 +4476,7 @@
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors/villagegarrison)
 "chQ" = (
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "cio" = (
 /obj/structure/table/wood/plain,
@@ -5880,8 +5878,7 @@
 /turf/open/openspace,
 /area/outdoors/mountains)
 "cNI" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
+/turf/open/water/hotspring,
 /turf/open/floor/naturalstone,
 /area/outdoors/town)
 "cOE" = (
@@ -6465,13 +6462,12 @@
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
 "cZn" = (
-/obj/structure/hotspring,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = 3;
 	pixel_y = -3
 	},
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "cZE" = (
 /obj/effect/decal/cleanable/ash,
@@ -8465,10 +8461,9 @@
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
 "ebY" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "eck" = (
 /obj/effect/landmark/events/haunts,
@@ -9130,10 +9125,9 @@
 /turf/open/water,
 /area/under/cavewet)
 "etA" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/grassy,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "etC" = (
 /obj/structure/table/wood/plain_alt,
@@ -10212,9 +10206,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/orphanage)
 "eTS" = (
-/obj/structure/hotspring,
 /obj/structure/hotspring/border/twelve,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "eUd" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -11866,9 +11859,8 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/roofs)
 "fLh" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "fLK" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -14504,9 +14496,8 @@
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
 "gZY" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "had" = (
 /obj/structure/chair/bench/couch/lord_secondary,
@@ -14600,14 +14591,13 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
 "hbU" = (
-/obj/structure/hotspring,
 /obj/effect/waterfall{
 	pixel_y = 37;
 	pixel_x = 16
 	},
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "hbY" = (
 /obj/structure/table/wood{
@@ -15071,9 +15061,8 @@
 /turf/open/floor/cobble/alt,
 /area/indoors/town/shop)
 "hmx" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "hmD" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -16168,9 +16157,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/keep/gate)
 "hOf" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "hOg" = (
 /obj/structure/bars/bent,
@@ -17423,10 +17411,9 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/clocktower)
 "ixj" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "ixq" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
@@ -17528,9 +17515,8 @@
 /turf/open/floor/wood,
 /area/indoors/town/cell)
 "iAe" = (
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "iAj" = (
 /obj/structure/table/wood{
@@ -20707,10 +20693,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "kdk" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "kdw" = (
 /obj/structure/door/red,
@@ -21361,9 +21346,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/garrison)
 "ktn" = (
-/obj/structure/hotspring,
 /obj/structure/bridge,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "kto" = (
 /obj/structure/stairs,
@@ -22998,9 +22982,8 @@
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
 "lhE" = (
-/obj/structure/hotspring,
-/obj/structure/hotspring,
 /obj/effect/falling_sakura,
+/turf/open/water/hotspring,
 /turf/open/floor/naturalstone,
 /area/outdoors/town/roofs)
 "lhK" = (
@@ -23155,11 +23138,10 @@
 	},
 /area/under/cavewet)
 "lmi" = (
-/obj/structure/hotspring,
 /obj/structure/bridge{
 	dir = 8
 	},
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "lmy" = (
 /obj/structure/fluff/railing/border{
@@ -25204,9 +25186,8 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/chapel)
 "mox" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "moA" = (
 /obj/structure/fluff/railing/border,
@@ -27651,9 +27632,8 @@
 /turf/closed/wall/mineral/stone/window,
 /area/under/town/basement)
 "nxC" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "nxJ" = (
 /obj/structure/window/stained,
@@ -28570,11 +28550,6 @@
 	dir = 1
 	},
 /area/indoors/shelter/town/roofs)
-"nSP" = (
-/obj/effect/lily_petal/three,
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town)
 "nSX" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/church/grave,
@@ -31195,11 +31170,10 @@
 /area/indoors/town)
 "pdN" = (
 /obj/effect/lily_petal,
-/obj/structure/hotspring,
 /obj/structure/bridge{
 	dir = 8
 	},
-/turf/open/floor/cobblerock/alt,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "pdT" = (
 /obj/structure/flora/grass/bush/tundra,
@@ -32334,11 +32308,10 @@
 /turf/open/floor/twig,
 /area/indoors/soilsons)
 "pFk" = (
-/obj/structure/hotspring,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "pFm" = (
 /obj/structure/bookcase/random_recipes,
@@ -32630,10 +32603,9 @@
 /turf/open/floor/ruinedwood,
 /area/indoors)
 "pMX" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "pNo" = (
 /obj/structure/fake_machine/scomm/r,
@@ -34502,9 +34474,8 @@
 /turf/open/floor/tile,
 /area/indoors/town/keep)
 "qND" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "qNH" = (
 /obj/structure/fluff/railing/border{
@@ -35517,20 +35488,14 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"rmR" = (
-/obj/structure/hotspring,
-/obj/structure/bridge,
-/turf/open/floor/cobblerock/alt,
-/area/outdoors/town)
 "rmZ" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/snow/patchy,
 /area/outdoors/town)
 "rng" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "rnp" = (
 /turf/open/floor/wood,
@@ -36280,9 +36245,8 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/soilsons)
 "rGf" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "rGp" = (
 /obj/effect/decal/shadow_floor{
@@ -37806,8 +37770,7 @@
 /turf/closed/wall/mineral/decowood,
 /area/indoors)
 "ssf" = (
-/obj/structure/hotspring,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "ssr" = (
 /obj/effect/decal/carpet/kover_black{
@@ -40448,11 +40411,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"tCC" = (
-/obj/structure/hotspring,
-/obj/effect/lily_petal/two,
-/turf/open/floor/cobblerock/alt,
-/area/outdoors/town)
 "tCD" = (
 /obj/structure/bed/shit,
 /obj/machinery/light/fueled/torchholder/c,
@@ -40503,10 +40461,9 @@
 /area/indoors/town/keep)
 "tDt" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
 /obj/effect/falling_sakura,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "tDv" = (
 /obj/machinery/light/fueled/firebowl/church,
@@ -41074,9 +41031,8 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
 "tUu" = (
-/obj/structure/hotspring,
 /obj/structure/flora/grass/water/reeds,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "tUC" = (
 /obj/structure/fluff/railing/wood{
@@ -43145,9 +43101,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/garrison)
 "vbE" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks/small/four,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town/roofs)
 "vbK" = (
 /obj/structure/flora/hotspring_rocks/grassy,
@@ -45474,10 +45429,9 @@
 /turf/open/floor/snow/rough,
 /area/outdoors/mountains)
 "weR" = (
-/obj/structure/hotspring,
 /obj/structure/flora/hotspring_rocks,
 /obj/effect/waterfall,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "weY" = (
 /obj/structure/table/wood,
@@ -46032,9 +45986,8 @@
 /turf/open/floor/cobble,
 /area/under/cave)
 "wvE" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three,
-/turf/open/floor/naturalstone,
+/turf/open/water/hotspring,
 /area/outdoors/town)
 "wvH" = (
 /obj/structure/lever/hidden{
@@ -107273,7 +107226,7 @@ leA
 lGv
 tFg
 chQ
-nSP
+wvE
 mPO
 gTj
 fuz
@@ -107685,7 +107638,7 @@ vkE
 ipE
 aBN
 jxf
-rmR
+ktn
 mmh
 cNv
 aBN
@@ -108294,7 +108247,7 @@ vwM
 egX
 tFg
 lmi
-tCC
+qND
 hOf
 cyb
 pwx

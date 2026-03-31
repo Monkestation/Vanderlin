@@ -19,8 +19,6 @@
 	icon_state = "together"
 	baseturfs = /turf/open/water
 	slowdown = 20
-	var/obj/effect/overlay/water/water_overlay
-	var/obj/effect/overlay/water/top/water_top_overlay
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null //needs a splashing sound one day.
 	smoothing_flags = SMOOTH_EDGE
@@ -36,6 +34,13 @@
 	no_over_text = FALSE
 	spread_chance = 0
 	burn_power = 0
+	flags_1 = CONDUCT_1
+
+	/// If water overlays are used or not
+	var/uses_water_overlays = TRUE
+	var/obj/effect/overlay/water/water_overlay
+	var/obj/effect/overlay/water/top/water_top_overlay
+
 	/// if we use water_height to pick the overlay
 	var/uses_height = TRUE
 	/// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
@@ -67,7 +72,40 @@
 
 	/// Fishing element for this specific water tile
 	var/datum/fish_source/fishing_datum = /datum/fish_source/water
-	flags_1 = CONDUCT_1
+
+	/// If the tile can spawn bottles
+	var/bottle_spawner = TRUE
+
+/turf/open/water/Initialize()
+	. = ..()
+
+	if(!skip_bottom_check)
+		var/turf/open/water/below = GET_TURF_BELOW(src)
+		if(istype(below) && below.water_height == WATER_HEIGHT_FULL && below.water_reagent == water_reagent)
+			open_bottom = TRUE
+			water_height = WATER_HEIGHT_DEEP
+			swim_skill = TRUE
+
+	if(!isnull(fishing_datum))
+		add_lazy_fishing(fishing_datum)
+
+	if(mapped && bottle_spawner)
+		if(prob(0.1))
+			new /obj/item/bottlemessage/ancient(src)
+	else
+		START_PROCESSING(SSobj, src)
+
+	handle_water()
+
+	return INITIALIZE_HINT_LATELOAD
+
+/turf/open/water/LateInitialize()
+	. = ..()
+	if(open_bottom)
+		icon_state = "openspace"
+		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
+	if(set_relationships_on_init)
+		check_surrounding_water()
 
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume
@@ -232,37 +270,6 @@
 					playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
 					adjust_originate_watervolume(water_count)
 
-/turf/open/water/Initialize()
-	. = ..()
-
-	if(!skip_bottom_check)
-		var/turf/open/water/below = GET_TURF_BELOW(src)
-		if(istype(below) && below.water_height == WATER_HEIGHT_FULL && below.water_reagent == water_reagent)
-			open_bottom = TRUE
-			water_height = WATER_HEIGHT_DEEP
-			swim_skill = TRUE
-
-	if(!isnull(fishing_datum))
-		add_lazy_fishing(fishing_datum)
-
-	if(mapped)
-		if(prob(0.1))
-			new /obj/item/bottlemessage/ancient(src)
-	else
-		START_PROCESSING(SSobj, src)
-
-	handle_water()
-
-	return INITIALIZE_HINT_LATELOAD
-
-/turf/open/water/LateInitialize()
-	. = ..()
-	if(open_bottom)
-		icon_state = "openspace"
-		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
-	if(set_relationships_on_init)
-		check_surrounding_water()
-
 /turf/open/water/examine(mob/user)
 	. = ..()
 	if(water_volume < 10)
@@ -293,11 +300,13 @@
 	if(!water_volume || water_volume < 10)
 		dryup()
 		return
+	if(!uses_water_overlays)
+		return
 	if(!water_overlay)
 		water_overlay = new(src)
 	if(!water_top_overlay)
 		water_top_overlay = new(src)
-	if(!LAZYLEN(neighborlay_list))
+	if(smoothing_flags && !LAZYLEN(neighborlay_list))
 		smoothing_flags = SMOOTH_EDGE
 		QUEUE_SMOOTH(src)
 
@@ -353,6 +362,58 @@
 		QDEL_NULL(overlays[key])
 		LAZYREMOVE(overlays, key)
 
+/turf/open/water/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	for(var/obj/structure/S in src)
+		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
+			return
+
+	if(water_volume < 10)
+		return
+
+	var/dirty_water_turf = FALSE
+	if(cleanliness_factor < 0)
+		dirty_water_turf = TRUE
+
+	if(istype(arrived, /obj/item/reagent_containers/food/snacks/fish))
+		var/obj/item/reagent_containers/food/snacks/fish/F = arrived
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
+		if(!F.status != FISH_DEAD)
+			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
+		else
+			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
+		qdel(F)
+
+	if(istype(arrived, /obj/item/clothing))
+		var/obj/item/clothing/cloth = arrived
+		if(cloth.wetable)
+			cloth.wet.add_water(20, dirty_water_turf)
+
+	if(isliving(arrived) && !arrived.throwing)
+		var/mob/living/L = arrived
+		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_DEEP)
+			L.SoakMob(FULL_BODY, dirty_water_turf)
+			if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
+				if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
+					L.AddElement(/datum/element/submerged)
+		else if(water_height == WATER_HEIGHT_SHALLOW)
+			L.SoakMob(BELOW_CHEST, dirty_water_turf)
+		else if(water_height == WATER_HEIGHT_ANKLE)
+			L.SoakMob(FEET, dirty_water_turf)
+		if(water_overlay)
+			if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
+				playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
+			else
+				playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
+			if(istype(old_loc, type) && (get_dir(src, old_loc) != SOUTH))
+				water_overlay.layer = ABOVE_MOB_LAYER
+				water_overlay.plane = GAME_PLANE_UPPER
+			else
+				spawn(6)
+					if(arrived.loc == src)
+						water_overlay.layer = ABOVE_MOB_LAYER
+						water_overlay.plane = GAME_PLANE_UPPER
+
 /turf/open/water/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	for(var/obj/structure/S in src)
@@ -403,57 +464,6 @@
     if(!open_bottom)
         return FALSE
     return HAS_TRAIT(A, TRAIT_SINKING)
-
-/turf/open/water/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	. = ..()
-	for(var/obj/structure/S in src)
-		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
-			return
-
-	if(water_volume < 10)
-		return
-
-	var/dirty_water_turf = FALSE
-	if(cleanliness_factor < 0)
-		dirty_water_turf = TRUE
-
-	if(istype(arrived, /obj/item/reagent_containers/food/snacks/fish))
-		var/obj/item/reagent_containers/food/snacks/fish/F = arrived
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
-		if(!F.status != FISH_DEAD)
-			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
-		else
-			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
-		qdel(F)
-
-	if(istype(arrived, /obj/item/clothing))
-		var/obj/item/clothing/cloth = arrived
-		if(cloth.wetable)
-			cloth.wet.add_water(20, dirty_water_turf)
-	if(isliving(arrived) && !arrived.throwing)
-		var/mob/living/L = arrived
-		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_DEEP)
-			L.SoakMob(FULL_BODY, dirty_water_turf)
-			if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
-				if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
-					L.AddElement(/datum/element/submerged)
-		else if(water_height == WATER_HEIGHT_SHALLOW)
-			L.SoakMob(BELOW_CHEST, dirty_water_turf)
-		else if(water_height == WATER_HEIGHT_ANKLE)
-			L.SoakMob(FEET, dirty_water_turf)
-		if(water_overlay)
-			if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
-				playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
-			else
-				playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
-			if(istype(old_loc, type) && (get_dir(src, old_loc) != SOUTH))
-				water_overlay.layer = ABOVE_MOB_LAYER
-				water_overlay.plane = GAME_PLANE_UPPER
-			else
-				spawn(6)
-					if(arrived.loc == src)
-						water_overlay.layer = ABOVE_MOB_LAYER
-						water_overlay.plane = GAME_PLANE_UPPER
 
 /turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/fill)

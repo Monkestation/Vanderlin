@@ -1257,7 +1257,7 @@
 	defender.log_message(message, LOG_ATTACK, color="red")
 	attacker.log_message(reverse_message, LOG_ATTACK, "red", FALSE) // log it in the attacker's personal log too, but not log globally because it was already done.
 
-/atom/movable/proc/add_filter(name, priority, list/params)
+/atom/proc/add_filter(name, priority, list/params)
 	if(!filter_data)
 		filter_data = list()
 	var/list/p = params.Copy()
@@ -1265,7 +1265,7 @@
 	filter_data[name] = p
 	update_filters()
 
-/atom/movable/proc/remove_filter(name_or_names)
+/atom/proc/remove_filter(name_or_names)
 	if(!filter_data)
 		return
 
@@ -1281,7 +1281,7 @@
 		update_filters()
 	return .
 
-/atom/movable/proc/clear_filters()
+/atom/proc/clear_filters()
 	var/atom/atom_cast = src // filters only work with images or atoms.
 	filter_data = null
 	atom_cast.filters = null

@@ -12,7 +12,7 @@
 
 /datum/element/mob_overlay_effect/Attach(datum/target, _y_offset = 0, _mask_y_offset = 0, _effect_alpha = 0)
 	. = ..()
-	if(!ismovable(target))
+	if(!isturf(target) && !isobj(target))
 		return ELEMENT_INCOMPATIBLE
 	y_offset = _y_offset
 	mask_y_offset = _mask_y_offset
@@ -64,9 +64,6 @@
 		var/obj/obj = target
 		if(obj.obj_flags & IGNORE_SINK)
 			return
-
-	if(istype(target, /obj/structure/hotspring))
-		return
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/gator))
 		return

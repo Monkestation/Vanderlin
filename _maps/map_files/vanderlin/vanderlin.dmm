@@ -6706,11 +6706,10 @@
 /turf/open/openspace,
 /area/outdoors/river)
 "dbL" = (
-/obj/structure/hotspring,
 /obj/structure/flora/rock/pile/largejungle,
 /obj/structure/flora/rock/jungle,
 /obj/item/clothing/head/peaceflower,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "dbO" = (
 /turf/open/water/river{
@@ -14011,12 +14010,11 @@
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town/roofs)
 "gua" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal{
 	pixel_x = 18;
 	pixel_y = -2
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "gue" = (
 /obj/structure/bookcase/random,
@@ -17161,8 +17159,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/jester)
 "hSx" = (
-/obj/structure/hotspring,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "hSz" = (
 /obj/structure/table/wood/plain_alt,
@@ -27773,12 +27770,11 @@
 /turf/open/floor/herringbone,
 /area/indoors/town)
 "mMG" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/three{
 	pixel_x = 10;
 	pixel_y = -6
 	},
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "mML" = (
 /turf/open/floor/metal/barograte,
@@ -31173,9 +31169,8 @@
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "orD" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal/two,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "orR" = (
 /obj/structure/flora/newtree,
@@ -38292,9 +38287,8 @@
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/bath)
 "rEu" = (
-/obj/structure/hotspring,
 /obj/effect/lily_petal,
-/turf/open/water,
+/turf/open/water/hotspring,
 /area/outdoors/eora)
 "rEz" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
