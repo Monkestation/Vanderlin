@@ -1229,9 +1229,9 @@
 					fixation = WEAKREF(HL)
 					target = HL
 					break
-				playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-				to_chat(user, span_warning("[src] makes a grating sound."))
-				return
+			playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+			to_chat(user, span_warning("[src] makes a grating sound."))
+			return
 		else if(input == "BLOOD")
 			target = feeder?.resolve()
 
