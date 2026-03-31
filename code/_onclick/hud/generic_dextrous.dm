@@ -41,9 +41,6 @@
 	hsover =  new /atom/movable/screen/heatstamover(null, src)
 	static_inventory += hsover
 
-	fov = new /atom/movable/screen/fov(null, src)
-	static_inventory += fov
-
 	cdleft = new /atom/movable/screen/action_bar/clickdelay/left(null, src)
 	cdleft.screen_loc = "WEST-3:-16,SOUTH+7"
 	static_inventory += cdleft

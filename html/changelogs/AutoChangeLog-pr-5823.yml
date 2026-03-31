@@ -1,0 +1,8 @@
+author: "Spitegremlin"
+delete-after: True
+changes:
+  - rscadd: " Adds new fiber called sinew fiber. adds bone arrows and javelin and new javelin sprite, adds variant bone weapons made with troll horns."
+  - rscadd: "Moved some spears to the javelins at the ok from rock. Made it so the ranning rack takes sinew and hide now."
+  - rscadd: " bone broth, some leather armor now needs sinew fiber.  Bow string replaced fiber for bow and long bow."
+  - balance: "Gave bonemask some crit protection. Makes all bone weapons fixable with crafting skill."
+  - image: "Arrow and javelin sprite."

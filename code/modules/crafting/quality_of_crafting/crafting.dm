@@ -110,7 +110,6 @@
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom  = /obj/item/natural/fibers
-	allow_inverse_start = FALSE
 	output = /obj/item/gun/ballistic/bow/short
 	craftdiff = 1
 
@@ -118,12 +117,11 @@
 	name = "wooden bow"
 	requirements = list(
 		/obj/item/natural/wood/plank = 1,
-		/obj/item/natural/fibers = 5,
+		/obj/item/natural/bowstring = 1,
 	)
 
-	starting_atom = /obj/item/natural/fibers
+	starting_atom = /obj/item/natural/bowstring
 	attacked_atom = /obj/item/natural/wood/plank
-	allow_inverse_start = FALSE
 	output = /obj/item/gun/ballistic/bow
 	craftdiff = 2
 
@@ -131,14 +129,24 @@
 	name = "long bow"
 	requirements = list(
 		/obj/item/natural/wood/plank = 1,
-		/obj/item/natural/fibers = 7,
+		/obj/item/natural/bowstring = 2,
 		/obj/item/reagent_containers/food/snacks/fat = 1,
 	)
 	attacked_atom = /obj/item/natural/wood/plank
-	starting_atom  = /obj/item/natural/fibers
-	allow_inverse_start = FALSE
+	starting_atom  = /obj/item/natural/bowstring
 	output = /obj/item/gun/ballistic/bow/long
 	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/crafting/bowstring
+	name = "bowstring"
+	requirements = list(
+		/obj/item/natural/fibers/sinew = 4,
+	)
+	attacked_atom = /obj/item/natural/fibers/sinew
+	starting_atom = /obj/item/natural/fibers/sinew
+	allow_inverse_start = TRUE
+	output = /obj/item/natural/bowstring
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/wsword
 	name = "wooden sword"

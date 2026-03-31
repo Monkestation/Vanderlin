@@ -410,7 +410,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	temp_size = round(clamp(gaussian(base_size, size_deviation), average_size * 1/MAX_FISH_DEVIATION_COEFF, average_size * MAX_FISH_DEVIATION_COEFF))
 	var/weight_deviation = 0.4 * base_weight
 	temp_weight = round(clamp(gaussian(base_weight, weight_deviation), average_weight * 1/MAX_FISH_DEVIATION_COEFF, average_weight * MAX_FISH_DEVIATION_COEFF))
-	set_max_size_and_weight(temp_size, temp_weight)
+	set_max_size_and_weight(temp_size, temp_weight, force = TRUE)
 	if(update)
 		update_size_and_weight(temp_size, temp_weight)
 
@@ -450,11 +450,12 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 
 	set_quality(fish_quality)
 
-///Set the maximum size and weight a fish can reach from base size and weight args if they have't been set already.
-/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight)
-	if(!maximum_size)
+///Set the maximum size and weight a fish can reach from base size and weight args.
+///Always updates if called from randomize_size_and_weight (force = TRUE), otherwise only sets if uninitialized.
+/obj/item/reagent_containers/food/snacks/fish/proc/set_max_size_and_weight(base_size, base_weight, force = FALSE)
+	if(!maximum_size || force)
 		maximum_size = min(base_size * 2, average_size * MAX_FISH_DEVIATION_COEFF)
-	if(!maximum_weight)
+	if(!maximum_weight || force)
 		maximum_weight = min(base_weight * 2, average_weight * MAX_FISH_DEVIATION_COEFF)
 
 ///Updates weight and size, along with weight class, number of fillets you can get and grind results.
@@ -479,10 +480,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 			w_class = WEIGHT_CLASS_NORMAL
 		if(FISH_SIZE_NORMAL_MAX to FISH_SIZE_BULKY_MAX)
 			w_class = WEIGHT_CLASS_BULKY
-		if(FISH_SIZE_BULKY_MAX to FISH_SIZE_HUGE_MAX)
+		if(FISH_SIZE_BULKY_MAX to INFINITY)
 			w_class = WEIGHT_CLASS_HUGE
-		if(FISH_SIZE_HUGE_MAX to INFINITY)
-			w_class = WEIGHT_CLASS_GIGANTIC
 
 	if(size > FISH_SIZE_TWO_HANDS_REQUIRED || (HAS_TRAIT(src, TRAIT_FISH_SHOULD_TWOHANDED) && w_class >= WEIGHT_CLASS_BULKY))
 		AddComponent(/datum/component/two_handed, require_twohands = TRUE)
@@ -1234,7 +1233,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
 	..()
 	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/cooking))*0.8))
 	var/found_table = locate(/obj/structure/table) in (loc)
 	if(isturf(loc)&& (found_table))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))

@@ -35,6 +35,8 @@
 	grid_height = 96
 	grid_width = 64
 
+	weapon_special = /datum/special_intent/shin_swipe
+
 /obj/item/weapon/sword/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -66,6 +68,8 @@
 	minstr = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
+
+	weapon_special = /datum/special_intent/triple_stab
 
 /obj/item/weapon/sword/short/iron
 	desc = "An iron sword of shortened design and a reduced grip for single hand use."

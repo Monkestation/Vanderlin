@@ -138,6 +138,24 @@
 	plane = INDOOR_PLANE
 	converted_type = /area/outdoors/mountains/anvil/snowy
 
+/area/indoors/mountains/anvil/keep
+	name = "malum's anvil dwarven keep"
+	icon_state = "keepmalum"
+	first_time_text = "THE BROKEN ANVIL"
+	background_track = 'sound/music/area/decap.ogg'
+	background_track_dusk = null
+	background_track_night = null
+	custom_area_sound = 'sound/misc/stings/MalumSting.ogg'
+
+/area/indoors/mountains/anvil/upperkeep
+	name = "malum's anvil upper dwarven keep"
+	icon_state = "upperkeepmalum"
+	first_time_text = "THE RUSTED HAMMER"
+	background_track = 'sound/music/area/decap.ogg'
+	background_track_dusk = null
+	background_track_night = null
+	custom_area_sound = 'sound/misc/stings/RosewoodSting.ogg'
+
 /area/indoors/mountains/anvil/surface
 	name = null
 	icon_state = null

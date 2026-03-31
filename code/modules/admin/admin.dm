@@ -1120,6 +1120,8 @@
 	for(var/client/client as anything in GLOB.clients)
 		client.mob.adjust_triumphs(amount, reason = reason, override_bonus = TRUE)
 
+	log_game("TRIUMPHS: [key_name(user)] gave everyone [amount] triumphs.")
+
 /datum/admins/proc/change_skill_exp_modifier()
 	set name = "Change Skill Experience Gain"
 	set desc = "Changes the experience gain of either the adjust_experience proc, or add_sleep_experience proc."

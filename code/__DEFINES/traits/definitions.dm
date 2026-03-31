@@ -208,6 +208,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOFLASH "noflash"
 /// Immunity to pain
 #define TRAIT_NOPAIN "no_pain"
+/// Stumbling, can smash into things
+#define TRAIT_STUMBLE "stumbling"
 /// Has drunk ambience replacement from spice
 #define TRAIT_DRUQK "druqk"
 /// prevents a human corpse from being used for a corpse multiple times
