@@ -16,5 +16,5 @@
 /// Double consecrated grave
 #define DOUBLE_CONSECRATED_GAIN 0.1
 /// Max passive devotion gravetenders are permitted to have from graves
-#define GRAVE_DEVOTION_MAX 1
+#define GRAVE_DEVOTION_MAX 0.5
 
