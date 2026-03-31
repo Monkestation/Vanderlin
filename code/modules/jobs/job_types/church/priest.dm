@@ -192,7 +192,6 @@
 		to_chat(src, span_warning("I need to do this from the prayer hall."))
 		return FALSE
 	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner's Name")))
-
 	if(inputty)
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
