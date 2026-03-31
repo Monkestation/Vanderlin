@@ -1,4 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - balance: "fishing xp calculations have been redone to reward it based on fish difficulty more then time since before it was ideal to prolong a fish encounter for maximum xp"

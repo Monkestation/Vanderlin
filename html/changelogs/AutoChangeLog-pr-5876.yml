@@ -1,5 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - refactor: "FoV now supports a permance layer for things like footsteps, or alerts"
-  - rscadd: "concussions and stumble effects, concussions apply a motion filter to your view, stumbling makes you stumble into stuff"
