@@ -135,7 +135,7 @@
 	set category = "RoleUnique.Divine"
 	if(!mind)
 		return
-	if(!istype(get_area(src), /area/indoors/town/church/chapel))
+	if(istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, span_warning("I need to do this in my Chapel."))
 		return FALSE
 
@@ -174,7 +174,7 @@
 	var/new_monarch_title = (coronated.gender == MALE) ? SSmapping.config.monarch_title : SSmapping.config.monarch_title_f
 	coronated.mind.set_assigned_role(/datum/job/lord)
 	lord_job?.assign_honorary_titles(coronated)
-	lord_job.get_informed_title(coronated, change_title = TRUE, new_title = new_monarch_title)
+	lord_job?.get_informed_title(coronated, FALSE, TRUE, new_monarch_title)
 	coronated.job = "Monarch"
 	lord_job?.add_spells(coronated)
 	SSticker.rulermob = coronated
