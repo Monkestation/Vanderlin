@@ -21,8 +21,6 @@
 	randomspread = 2
 	spread = 3
 
-	var/breaking = FALSE
-
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured
 	name = "puffer"
 	desc = "A magically conjured copy of a eastern styled wheellock. \
@@ -37,6 +35,8 @@
 	cocked = TRUE
 	wound = TRUE
 	bullet_rammed = TRUE
+
+	var/breaking = FALSE
 
 /obj/item/gun/ballistic/powder/wheellock/puffer/conjured/Initialize(mapload)
 	. = ..()
