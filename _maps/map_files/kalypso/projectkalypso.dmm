@@ -2091,11 +2091,6 @@
 /obj/item/tent_kit,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"ku" = (
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors)
 "kv" = (
 /obj/structure/chair/wood,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8630,11 +8625,6 @@
 /mob/living/simple_animal/hostile/retaliate/troll/bog,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Ta" = (
-/obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors)
 "Tb" = (
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
 /turf/open/floor/cobble,
@@ -8883,10 +8873,6 @@
 	pixel_y = 4
 	},
 /turf/open/floor/grass,
-/area/outdoors)
-"Ut" = (
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
 /area/outdoors)
 "Uu" = (
 /obj/structure/bookcase/random/thesis,
@@ -513326,7 +513312,7 @@ tG
 Df
 Df
 Df
-Ut
+Df
 cQ
 af
 bc
@@ -514927,8 +514913,8 @@ HR
 Fb
 Df
 tG
-Ut
-Ut
+Df
+Df
 yR
 fN
 xr
@@ -516538,12 +516524,12 @@ tG
 Df
 fC
 Df
-Ut
+Df
 wl
 sQ
 Fx
 Df
-Ut
+Df
 Df
 tG
 IY
@@ -516940,12 +516926,12 @@ Df
 Df
 el
 Df
-ku
-Ut
+af
 Df
 Df
 Df
-Ta
+Df
+Fe
 Df
 Df
 IY

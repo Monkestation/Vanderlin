@@ -5877,10 +5877,6 @@
 /obj/structure/industrial_lift/tram,
 /turf/open/openspace,
 /area/outdoors/mountains)
-"cNI" = (
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town)
 "cOE" = (
 /obj/structure/door/weak/bolt{
 	name = "bathroom";
@@ -22981,11 +22977,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
-"lhE" = (
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/turf/open/floor/naturalstone,
-/area/outdoors/town/roofs)
 "lhK" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -107024,7 +107015,7 @@ pro
 jae
 ska
 hbU
-cNI
+chQ
 qne
 crD
 cUC
@@ -229771,7 +229762,7 @@ gYy
 gYy
 pMt
 gkA
-lhE
+iAe
 ebY
 fiT
 xfH

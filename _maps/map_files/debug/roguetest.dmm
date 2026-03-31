@@ -2483,10 +2483,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
-"Dz" = (
-/turf/open/water/hotspring,
-/turf/open/floor/cobblerock,
-/area/outdoors/mountains/decap)
 "DA" = (
 /obj/effect/landmark/latejoin,
 /turf/open/floor/churchbrick,
@@ -9471,7 +9467,7 @@ cV
 cz
 hd
 aw
-Dz
+aw
 aw
 yP
 ac
