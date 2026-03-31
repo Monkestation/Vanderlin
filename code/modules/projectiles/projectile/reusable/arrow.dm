@@ -127,5 +127,10 @@
 	chem_splash(target_loc, 3, list(reagents))
 	return ..()
 
+/obj/projectile/bullet/reusable/arrow/bone
+	ammo_type = /obj/item/ammo_casing/caseless/arrow/bone
+	embedchance = 95
+	armor_penetration = 15
+
 #undef ARROW_DAMAGE
 #undef ARROW_PENETRATION

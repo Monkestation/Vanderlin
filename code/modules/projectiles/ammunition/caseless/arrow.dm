@@ -99,3 +99,10 @@
 /obj/item/ammo_casing/caseless/arrow/water/Initialize(mapload, ...)
 	. = ..()
 	RemoveElement(/datum/element/tipped_item)
+
+/obj/item/ammo_casing/caseless/arrow/bone
+	name = "bone arrow"
+	desc = "A fletched projectile with a bone tip."
+	icon_state = "bonearrow"
+	projectile_type = /obj/projectile/bullet/reusable/arrow/bone //weaker projectile
+	max_integrity = 15
