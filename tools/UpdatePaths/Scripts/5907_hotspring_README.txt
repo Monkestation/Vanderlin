@@ -3,6 +3,6 @@ UpdatePaths won't remove duplicate turfs but the new one will always be above th
 For DMM files:
 Regex find
 /turf/open/water/hotspring,
-/turf/[\w+/]+.
+/turf/[\w+/]+,
 Regex replace
 /turf/open/water/hotspring,
