@@ -135,7 +135,7 @@
 	set category = "RoleUnique.Divine"
 	if(!mind)
 		return
-	if(istype(get_area(src), /area/indoors/town/church/chapel))
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, span_warning("I need to do this in my Chapel."))
 		return FALSE
 
@@ -188,7 +188,7 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
-	if(istype(get_area(src), /area/indoors/town/church/chapel))
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, span_warning("I need to do this from the prayer hall."))
 		return FALSE
 	var/inputty = html_decode(tgui_input_text(src, "Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner's Name"))
@@ -219,7 +219,7 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
-	if(istype(get_area(src), /area/indoors/town/church/chapel))
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
 		return FALSE
 	var/inputty = html_decode(tgui_input_text(src, "Curse someone as a heretic. (curse them again to remove it)", "Sinner's Name"))
@@ -234,7 +234,7 @@
 		if(length(GLOB.tennite_schisms))
 			to_chat(src, span_warning("I cannot curse anyone during the schism!"))
 			return FALSE
-		for(var/mob/living/carbon/human/H in GLOB.player_list)
+		for(var/mob/living/carbon/human/H in GLOB.human_list)
 			if(H.real_name == inputty)
 				if(H.job == "Faceless One")
 					to_chat(src, span_danger("I wasn't able to do that!"))
@@ -249,7 +249,7 @@
 	set category = "RoleUnique.Divine"
 	if(stat)
 		return
-	if(istype(get_area(src), /area/indoors/town/church/chapel))
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
 		return FALSE
 	var/inputty = html_decode(tgui_input_text(src, "Make an announcement to the faithful", "Church Announcement", multiline = TRUE))

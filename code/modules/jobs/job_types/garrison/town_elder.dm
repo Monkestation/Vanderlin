@@ -71,7 +71,7 @@
 
 	var/inputty = html_decode(tgui_input_text(src, "Make an announcement to the townsfolk", "Elder Announcement", multiline = TRUE))
 	if(inputty)
-		if(istype(get_area(src), /area/indoors/town/tavern))
+		if(!istype(get_area(src), /area/indoors/town/tavern))
 			to_chat(src, "<span class='warning'>I need to do this from the tavern.</span>")
 			return FALSE
 		priority_announce("[inputty]", title = "[src.real_name], The Town Elder Speaks", sound = 'sound/misc/bell.ogg')
