@@ -45,7 +45,7 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	invocation = html_decode(message)
+	invocation = SANITIZE_HEAR_MESSAGE(html_decode(message))
 
 /datum/action/cooldown/spell/vicious_mockery/cast(mob/living/cast_on)
 	. = ..()

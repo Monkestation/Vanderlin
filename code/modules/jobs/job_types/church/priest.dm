@@ -191,12 +191,12 @@
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, span_warning("I need to do this from the prayer hall."))
 		return FALSE
-	var/inputty = html_decode(tgui_input_text(src, "Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner's Name"))
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Excommunicate someone, cutting off their connection to the Ten. (excommunicate them again to remove it)", "Sinner's Name")))
 	if(inputty)
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
 			priority_announce("[real_name] has forgiven [inputty]. The Ten hear their prayers once more!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
-			for(var/mob/living/carbon/human/H in GLOB.human_list)
+		for(var/mob/living/carbon/human/H in GLOB.human_list)
 				if(H.real_name == inputty)
 					H.cleric?.recommunicate()
 			return
@@ -222,7 +222,7 @@
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
 		return FALSE
-	var/inputty = html_decode(tgui_input_text(src, "Curse someone as a heretic. (curse them again to remove it)", "Sinner's Name"))
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Curse someone as a heretic. (curse them again to remove it)", "Sinner's Name")))
 	if(inputty)
 		if(inputty in GLOB.heretical_players)
 			GLOB.heretical_players -= inputty
@@ -252,7 +252,7 @@
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
 		return FALSE
-	var/inputty = html_decode(tgui_input_text(src, "Make an announcement to the faithful", "Church Announcement", multiline = TRUE))
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Make an announcement to the faithful", "Church Announcement", multiline = TRUE)))
 	if(inputty)
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")

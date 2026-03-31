@@ -497,7 +497,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		return
 
 	var/sanitized_message = SANITIZE_HEAR_MESSAGE(original_message)
-	raw_message = html_decode(raw_message) //We need to recognize symbols such as ' for commands
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message))
 
 	if(findtext(sanitized_message, "nevermind") || findtext(sanitized_message, "cancel"))
 		reset_mode()
