@@ -274,6 +274,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(!perform_check(user, FALSE))
 		reset_mode()
 		return FALSE
+
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // Announcement has protections
 	priority_announce(user.treat_message(message), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
 	reset_mode()
 	return TRUE
@@ -344,6 +346,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Declares someone an outlaw
 /obj/structure/fake_machine/titan/proc/declare_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		say("That person is already an outlaw!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -370,6 +374,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Pardons an outlaw
 /obj/structure/fake_machine/titan/proc/pardon_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		GLOB.outlawed_players -= message
 		priority_announce("[message] is no longer an outlaw in Vanderlin lands.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
@@ -497,7 +503,6 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		return
 
 	var/sanitized_message = SANITIZE_HEAR_MESSAGE(original_message)
-	message = SANITIZE_HEAR_MESSAGE(html_decode(message))
 
 	if(findtext(sanitized_message, "nevermind") || findtext(sanitized_message, "cancel"))
 		reset_mode()
