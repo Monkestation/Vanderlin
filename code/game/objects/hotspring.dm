@@ -57,6 +57,22 @@
 	plane = FLOOR_PLANE
 	object_slowdown = 5
 
+/obj/structure/hotspring/attackby(obj/item/I, mob/user, list/modifiers)
+	. = ..()
+	if(user.used_intent.type != /datum/intent/fill)
+		return
+	if(!I.reagents)
+		return
+	if(I.reagents.holder_full())
+		to_chat(user, span_warning("[I] is full."))
+		return
+	if(!do_after(user, 8 DECISECONDS, src))
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+	playsound(user, 'sound/foley/drawwater.ogg', 100, FALSE)
+	I.reagents.add_reagent(/datum/reagent/water, 100)
+	to_chat(user, span_notice("I fill [I] from \the [name]."))
+
 /obj/structure/hotspring/border
 	icon_state = "hotspring_border_1"
 	object_slowdown = 0
