@@ -56,22 +56,6 @@
 	subtypes_allowed = TRUE
 	reagent_subtypes_allowed = TRUE
 
-/datum/repeatable_crafting_recipe/bomb/gunpowder
-	name = "blastpowder"
-	requirements = list(
-		/obj/item/reagent_containers/food/snacks/badrecipe = 1,
-		/obj/item/alch/coaldust = 1,
-		/obj/item/alch/firedust = 1,
-	)
-	tool_usage = list(
-		/obj/item/pestle = list(span_notice("starts to grind together"), span_notice("start to grind together"), 'sound/foley/mortarpestle.ogg'),
-	)
-
-	attacked_atom = /obj/item/reagent_containers/glass/mortar
-	starting_atom = /obj/item/pestle
-	output = /obj/item/reagent_containers/powder/blastpowder
-	output_amount = 3
-	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/bomb/breaching_charge
 	name = "breaching charge"
