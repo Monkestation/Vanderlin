@@ -252,7 +252,7 @@
 	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, "<span class='warning'>I need to do this from the prayer hall.</span>")
 		return FALSE
-	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
+	var/inputty = html_decode(tgui_input_text(src, "Make an announcement to the faithful", "Church Announcement", multiline = TRUE))
 	if(inputty)
 		priority_announce("[inputty]", title = "The [get_role_title()] Speaks", sound = 'sound/misc/bell.ogg')
 		src.log_talk("[TIMETOTEXT4LOGS] [inputty]", LOG_SAY, tag="Priest announcement")

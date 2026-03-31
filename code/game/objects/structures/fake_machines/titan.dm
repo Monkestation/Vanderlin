@@ -274,7 +274,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(!perform_check(user, FALSE))
 		reset_mode()
 		return FALSE
-	priority_announce(html_decode(user.treat_message(message)), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
+	priority_announce(user.treat_message(message), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
 	reset_mode()
 	return TRUE
 
@@ -497,6 +497,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		return
 
 	var/sanitized_message = SANITIZE_HEAR_MESSAGE(original_message)
+	raw_message = htlm_decode(raw_message) //We need to recognize symbols such as ' for commands
 
 	if(findtext(sanitized_message, "nevermind") || findtext(sanitized_message, "cancel"))
 		reset_mode()

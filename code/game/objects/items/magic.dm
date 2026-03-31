@@ -33,7 +33,7 @@
 	if(world.time < last_scry + cooldown)
 		to_chat(user, span_warning("I look into [src] but only see inky smoke. Maybe I should wait."))
 		return
-	var/input = stripped_input(user, "Who are you looking for?", "Scrying Orb")
+	var/input = html_decode(stripped_input(user, "Who are you looking for?", "Scrying Orb"))
 	if(!input)
 		return
 	if(!user.key)
