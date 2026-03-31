@@ -46,8 +46,9 @@
 		return
 	if(world.time > next_decree)
 		next_decree = world.time + rand(3 MINUTES, 8 MINUTES)
+		var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 		if(GLOB.lord_decrees.len)
-			say("The [GLOB.active_monarch_title] Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
+			say("\The [lord_job.get_informed_title()] Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
 
 /obj/structure/fake_machine/scomm/attack_hand(mob/living/user)
 	. = ..()
@@ -69,9 +70,10 @@
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
+	var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
-	contents += "<center>[capitalize_like_old_man(GLOB.active_monarch_title)]'s DECREES<BR>"
+	contents += "<center>[capitalize_like_old_man(lord_job.get_informed_title())]'s DECREES<BR>"
 
 	contents += "-----------<BR><BR></center>"
 	for(var/i = GLOB.lord_decrees.len to 1 step -1)
