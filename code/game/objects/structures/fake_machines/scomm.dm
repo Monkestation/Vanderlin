@@ -48,7 +48,7 @@
 		next_decree = world.time + rand(3 MINUTES, 8 MINUTES)
 		var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 		if(GLOB.lord_decrees.len)
-			say("\The [lord_job.get_informed_title()] Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
+			say("The [lord_job.get_informed_title()] Decrees: [pick(GLOB.lord_decrees)]", spans = list("info"))
 
 /obj/structure/fake_machine/scomm/attack_hand(mob/living/user)
 	. = ..()
@@ -73,10 +73,10 @@
 	var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 	var/canread = user.can_read(src, TRUE)
 	var/contents
-	contents += "<center>[capitalize_like_old_man(lord_job.get_informed_title())]'s DECREES<BR>"
+	contents += "<center>[uppertext(lord_job.get_informed_title())]'S DECREES<BR>"
 
 	contents += "-----------<BR><BR></center>"
-	for(var/i = GLOB.lord_decrees.len to 1 step -1)
+	for(var/i = 1 to GLOB.lord_decrees.len step 1)a
 		contents += "[i]. <span class='info'>[GLOB.lord_decrees[i]]</span><BR>"
 	if(!canread)
 		contents = stars(contents)

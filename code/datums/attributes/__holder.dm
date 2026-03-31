@@ -421,8 +421,8 @@
 			else if(isnum(raw_skill))
 				total_style = "class='red'"
 			output += "\n<span class='info'>\
-				• <b>[capitalize_like_old_man(skill.name)] \[[capitalize_like_old_man(skill.difficulty)]\]:</b> \
-				[capitalize_like_old_man(skill.description_from_level(calculated_skill))] \
+				• <b>[uppertext(skill.name)] \[[uppertext(skill.difficulty)]\]:</b> \
+				[uppertext(skill.description_from_level(calculated_skill))] \
 				(<span [total_style]>[total_skill]</span>/[raw_skill]).\
 				</span>"
 	if(!LAZYLEN(skills_by_category))
@@ -449,7 +449,7 @@
 		else if(total_attribute < raw_attribute)
 			total_style = "class='red'"
 		output += "\n<span class='info'>\
-			• <b>[capitalize_like_old_man(stat.name)] ([stat.shorthand]):</b> \
+			• <b>[uppertext(stat.name)] ([stat.shorthand]):</b> \
 			[capitalize(stat.description_from_level(attribute_list[stat.type]))] \
 			(<span [total_style]>[total_attribute]</span>/[raw_attribute]).\
 			</span>"
