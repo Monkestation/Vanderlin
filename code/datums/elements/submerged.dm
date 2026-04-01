@@ -45,5 +45,5 @@
 /datum/element/submerged/proc/handle_sinking(mob/living/target)
 	if(!HAS_TRAIT(target, TRAIT_SINKING))
 		return
-	target.zSwim(DOWN, TRUE)
+	// target.zSwim(DOWN, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(handle_sinking), target), sink_interval)

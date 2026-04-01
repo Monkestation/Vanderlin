@@ -234,6 +234,7 @@
 
 /turf/open/water/Initialize()
 	. = ..()
+	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(on_atom_inited))
 
 	if(!skip_bottom_check)
 		var/turf/open/water/below = GET_TURF_BELOW(src)
@@ -244,6 +245,7 @@
 
 	if(!isnull(fishing_datum))
 		add_lazy_fishing(fishing_datum)
+	ADD_TRAIT(src, TRAIT_CATCH_AND_RELEASE, INNATE_TRAIT)
 
 	if(mapped)
 		if(prob(0.1))
@@ -262,6 +264,22 @@
 		AddElement(/datum/element/turf_z_transparency, is_openspace = TRUE)
 	if(set_relationships_on_init)
 		check_surrounding_water()
+
+///We lazily add the immerse element when something is spawned or crosses this turf and not before.
+/turf/open/water/proc/on_atom_inited(datum/source, atom/movable/movable)
+	SIGNAL_HANDLER
+	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
+	// make_immersed(movable)
+
+// ///Makes this turf immersable, return true if we actually did anything so child procs don't have to repeat our checks
+// /turf/open/water/proc/make_immersed(atom/movable/triggering_atom)
+// 	if(immerse_added || is_type_in_typecache(triggering_atom, GLOB.immerse_ignored_movable))
+// 		return FALSE
+// 	AddElement(/datum/element/immerse, immerse_overlay, immerse_overlay_alpha)
+// 	immerse_added = TRUE
+// 	// if(is_swimming_tile)
+// 	// 	AddElement(/datum/element/swimming_tile, stamina_entry_cost, ticking_stamina_cost, ticking_oxy_damage, exhaust_swimmer_prob)
+// 	return TRUE
 
 /turf/open/water/examine(mob/user)
 	. = ..()
@@ -361,14 +379,14 @@
 
 	if(isliving(gone) && !gone.throwing)
 		var/mob/living/living = gone
-		if(HAS_TRAIT(living, TRAIT_SUBMERGED))
-			if(istype(new_loc, /turf/open/water))
-				var/turf/open/water/nextwater = new_loc
-				if(nextwater.water_height < WATER_HEIGHT_DEEP)
-					living.RemoveElement(/datum/element/submerged)
-			else
-				living.RemoveElement(/datum/element/submerged)
-			living.adjust_experience(GET_MOB_SKILL_VALUE_OLD(living, /datum/attribute/skill/misc/swimming), (GET_MOB_ATTRIBUTE_VALUE(living, STAT_INTELLIGENCE) * 0.3))
+		// if(HAS_TRAIT(living, TRAIT_SUBMERGED))
+		// 	if(istype(new_loc, /turf/open/water))
+		// 		var/turf/open/water/nextwater = new_loc
+		// 		if(nextwater.water_height < WATER_HEIGHT_DEEP)
+		// 			living.RemoveElement(/datum/element/submerged)
+		// 	else
+		// 		living.RemoveElement(/datum/element/submerged)
+		// 	living.adjust_experience(GET_MOB_SKILL_VALUE_OLD(living, /datum/attribute/skill/misc/swimming), (GET_MOB_ATTRIBUTE_VALUE(living, STAT_INTELLIGENCE) * 0.3))
 		if(water_overlay)
 			if((get_dir(src, new_loc) == SOUTH))
 				water_overlay.layer = BELOW_MOB_LAYER
@@ -396,12 +414,12 @@
 	..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
-/turf/open/water/can_zFall(atom/movable/A, levels = 1, turf/target)
-    if(!zPassOut(A, DOWN, target) || !target.zPassIn(A, DOWN, src))
-        return FALSE
-    if(!open_bottom)
-        return FALSE
-    return HAS_TRAIT(A, TRAIT_SINKING)
+// /turf/open/water/can_zFall(atom/movable/A, levels = 1, turf/target)
+//     if(!zPassOut(A, DOWN, target) || !target.zPassIn(A, DOWN, src))
+//         return FALSE
+//     if(!open_bottom)
+//         return FALSE
+//     return HAS_TRAIT(A, TRAIT_SINKING)
 
 /turf/open/water/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
@@ -416,15 +434,6 @@
 	if(cleanliness_factor < 0)
 		dirty_water_turf = TRUE
 
-	if(istype(arrived, /obj/item/reagent_containers/food/snacks/fish))
-		var/obj/item/reagent_containers/food/snacks/fish/F = arrived
-		SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, F)
-		if(!F.status != FISH_DEAD)
-			F.visible_message("<span class='warning'>[F] dives into \the [src] and disappears!</span>")
-		else
-			F.visible_message("<span class='warning'>[F] slowly sinks motionlessly into \the [src] and disappears...</span>")
-		qdel(F)
-
 	if(istype(arrived, /obj/item/clothing))
 		var/obj/item/clothing/cloth = arrived
 		if(cloth.wetable)
@@ -433,9 +442,9 @@
 		var/mob/living/L = arrived
 		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_DEEP)
 			L.SoakMob(FULL_BODY, dirty_water_turf)
-			if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
-				if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
-					L.AddElement(/datum/element/submerged)
+			// if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
+				// if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
+				// 	L.AddElement(/datum/element/submerged)
 		else if(water_height == WATER_HEIGHT_SHALLOW)
 			L.SoakMob(BELOW_CHEST, dirty_water_turf)
 		else if(water_height == WATER_HEIGHT_ANKLE)
@@ -490,15 +499,6 @@
 				to_chat(user, "<span class='notice'>I pour the contents of [C] into [src].</span>")
 			return
 	. = ..()
-
-/turf/open/water/attack_hand(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(get_turf(L) != src)
-			return
-		if(L.stat != CONSCIOUS)
-			return
-		L.zSwim(DOWN)
 
 /turf/open/water/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

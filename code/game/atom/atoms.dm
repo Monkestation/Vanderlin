@@ -67,8 +67,6 @@
 	///Last fingerprints to touch this atom
 	var/fingerprintslast
 
-	var/list/filter_data //For handling persistent filters
-
 	///Economy cost of item
 	var/custom_price
 	///Economy cost of item in premium vendor
@@ -1275,73 +1273,6 @@
 	defender.log_message(message, LOG_ATTACK, color="red")
 	attacker.log_message(reverse_message, LOG_ATTACK, "red", FALSE) // log it in the attacker's personal log too, but not log globally because it was already done.
 
-/atom/movable/proc/add_filter(name, priority, list/params)
-	if(!filter_data)
-		filter_data = list()
-	var/list/p = params.Copy()
-	p["priority"] = priority
-	filter_data[name] = p
-	update_filters()
-
-/atom/movable/proc/remove_filter(name_or_names)
-	if(!filter_data)
-		return
-
-	var/list/names = islist(name_or_names) ? name_or_names : list(name_or_names)
-
-	. = FALSE
-	for(var/name in names)
-		if(filter_data[name])
-			filter_data -= name
-			. = TRUE
-
-	if(.)
-		update_filters()
-	return .
-
-/atom/movable/proc/clear_filters()
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	filter_data = null
-	atom_cast.filters = null
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
-
-/atom/proc/update_filters()
-	filters = null
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	atom_cast.filters = null
-	sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
-	for(var/filter_raw in filter_data)
-		var/list/data = filter_data[filter_raw]
-		var/list/arguments = data.Copy()
-		arguments -= "priority"
-		atom_cast.filters += filter(arglist(arguments))
-	UNSETEMPTY(filter_data)
-
-/obj/item/update_filters()
-	. = ..()
-	update_item_action_buttons()
-
-/atom/proc/get_filter(name)
-	if(filter_data && filter_data[name])
-		return filters[filter_data.Find(name)]
-
-/atom/proc/transition_filter(name, time, list/new_params, easing, loop)
-	var/filter = get_filter(name)
-	if(!filter)
-		return
-
-	var/list/old_filter_data = filter_data[name]
-
-	var/list/params = old_filter_data.Copy()
-	for(var/thing in new_params)
-		params[thing] = new_params[thing]
-
-	animate(filter, new_params, time = time, easing = easing, loop = loop)
-	for(var/param in params)
-		filter_data[name][param] = params[param]
-
 /atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
 	SHOULD_CALL_PARENT(TRUE)
 	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
@@ -1396,11 +1327,6 @@
 	. = base_pixel_y
 	base_pixel_y = new_value
 	pixel_y = pixel_y + base_pixel_y - .
-
-/// Returns the indice in filters of the given filter name.
-/// If it is not found, returns null.
-/atom/proc/get_filter_index(name)
-	return filter_data?.Find(name)
 
 /atom/proc/do_alert_effect()
 	var/mutable_appearance/alert = mutable_appearance('icons/effects/32x48.dmi', "alert_effect")

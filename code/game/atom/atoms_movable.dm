@@ -906,6 +906,13 @@
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(src)
 
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
+
+	if(old_loc)
+		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
+	if(loc)
+		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
+
 	if(HAS_SPATIAL_GRID_CONTENTS(src))
 		if(old_turf && new_turf && (old_turf.z != new_turf.z \
 			|| GET_SPATIAL_INDEX(old_turf.x) != GET_SPATIAL_INDEX(new_turf.x) \
@@ -922,8 +929,6 @@
 
 	for(var/datum/light_source/L in light_sources) // Cycle through the light sources on this atom and tell them to update.
 		L.source_atom?.update_light()
-
-	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
 
 	return TRUE
 

@@ -117,7 +117,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Like flying but when submerged in water
 #define SWIMMING (1<<5)
 
-#define MOVETYPE_NOT_TOUCHING_GROUND (FLOATING | FLYING | SWIMMING)
+#define MOVETYPES_NOT_TOUCHING_GROUND (FLOATING | FLYING)
 
 //Fire and Acid stuff, for resistance_flags
 #define LAVA_PROOF		(1<<0)
