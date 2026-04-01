@@ -35,6 +35,14 @@
 
 		age_timer = addtimer(CALLBACK(src, PROC_REF(age_beer)), adjusted_progress, TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_UNIQUE)
 
+/datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+
+/datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+
 /datum/reagent/consumable/ethanol/proc/age_beer()
 	var/old_volume = volume
 	var/datum/reagents/old_holder = holder
