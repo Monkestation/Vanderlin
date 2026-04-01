@@ -2022,6 +2022,13 @@
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"aWW" = (
+/obj/item/rope{
+	pixel_x = 7;
+	pixel_y = -11
+	},
+/turf/open/floor/sandstone,
+/area/outdoors/exposed/under/basement)
 "aXL" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
@@ -4340,6 +4347,13 @@
 	dir = 4
 	},
 /area/indoors/town/tavern)
+"bYU" = (
+/obj/item/rope{
+	pixel_x = -4;
+	pixel_y = -6
+	},
+/turf/open/floor/cobble,
+/area/outdoors/exposed/under/basement)
 "bZq" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/dirt/road,
@@ -12656,6 +12670,14 @@
 /obj/structure/table/wood/large/corner,
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
+"fRW" = (
+/obj/item/rope,
+/obj/item/rope{
+	pixel_x = -7;
+	pixel_y = 4
+	},
+/turf/open/floor/twig,
+/area/outdoors/exposed/under/basement)
 "fRX" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/grass/yel,
@@ -20295,6 +20317,13 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
+"jsc" = (
+/obj/item/rope{
+	pixel_x = -6;
+	pixel_y = -4
+	},
+/turf/open/floor/twig,
+/area/outdoors/exposed/under/basement)
 "jsh" = (
 /obj/structure/bed/hay,
 /obj/effect/landmark/start/fisher{
@@ -46203,9 +46232,7 @@
 /area/outdoors/woods_safe)
 "uMA" = (
 /obj/structure/fluff/walldeco/chains{
-	name = "punishment post";
-	icon = 'icons/roguetown/items/natural.dmi';
-	icon_state = "headstake"
+	name = "punishment post"
 	},
 /turf/open/floor/dirt,
 /area/outdoors/exposed/under/basement)
@@ -239040,7 +239067,7 @@ huD
 ydz
 rkY
 oHO
-seG
+jsc
 seG
 seG
 qbF
@@ -239243,8 +239270,8 @@ sTk
 oHO
 oHO
 seG
-seG
-iFV
+fRW
+bYU
 oaP
 tus
 tus
@@ -239444,7 +239471,7 @@ huD
 sTk
 qHS
 mZd
-okC
+aWW
 seG
 gLu
 oaP

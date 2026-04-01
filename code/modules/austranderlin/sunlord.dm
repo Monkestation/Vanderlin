@@ -27,8 +27,8 @@
 	display_order = JDO_SUNLORD
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
 	faction = FACTION_RATS
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	honorary = "God-Lord"
@@ -151,7 +151,7 @@
 	domain = "The Surface, the Sun, the Sunlord, whatever the Sunlord wants, the Sunlord's will, the Sunlord's well-being, the S"
 	flaws = "You are a fucking knave"
 	worshippers = "Knaves"
-	sins = "Underdwelling, lying to the Sunlord, failing the Sunlord, being better than the Sunlord at something, doubting the Sunl"
+	sins = "Underdwelling, lying to the Sunlord, failing the Sunlord, being better than the Sunlord at something, doubting the Sunlo"
 
 	confess_lines = list(
 		"I SERVE THE GLORY OF THE SUN!",

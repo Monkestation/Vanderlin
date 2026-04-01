@@ -29,16 +29,16 @@
 
 /datum/job/sundweller
 	title = "Sundweller"
-	tutorial = "The stench of your piss-laden clothes dont bug you anymore, \
-	the glances of disgust and loathing others give you is just a friendly greeting; \
-	the only reason you've not been killed already is because volfs are known to be repelled by decaying flesh. \
-	You're going to be a solemn reminder of what happens when something unwanted is born into this world."
+	tutorial = "Well-fed and never cold, your God has given you everything. \
+				Working in service of divinity has surely granted you a bright future, \
+				as long as the fields are tended, the food is made and God's whims are satisfied. \
+				You'll bask in his light and glory, Oh praise be the Sunlord."
 	department_flag = OUTSIDERS
 	display_order = JDO_SUNDWELLER
 	job_flags = (JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE | JOB_SHOW_IN_CREDITS | JOB_SHOW_IN_ACTOR_LIST)
 	faction = FACTION_RATS
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 0
+	spawn_positions = 0
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 
@@ -52,6 +52,7 @@
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sundweller
+	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
 	traits = list(
 		TRAIT_DEADNOSE,
