@@ -9,6 +9,6 @@
 	slot_adjust = list(
 		/datum/job/bogwitch = 1,
 		/datum/job/bog_apprentice = 1,
+		///datum/job/sunlord = 1,
 		/datum/job/sundweller = 4,
-		/datum/job/sunlord = 1,
 	)
