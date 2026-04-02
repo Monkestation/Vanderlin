@@ -93,7 +93,7 @@
 /datum/quirk/vice/mute/on_spawn()
 	if(!owner)
 		return
-	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
 
 /datum/quirk/vice/mute/on_remove()
 	if(!owner)
