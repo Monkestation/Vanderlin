@@ -103,3 +103,12 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+//............... Gronnic gloves ............... //
+/obj/item/clothing/gloves/plate/iron/gronn
+	name = "osslandic iron gauntlets"
+	desc = "Tough iron gauntlets, simple and protective in design. A single punch is said to leave a dozen bruises."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplategloves"
+	item_state = "gronnplategloves"

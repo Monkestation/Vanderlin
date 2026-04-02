@@ -182,10 +182,10 @@
 
 /datum/devotion/inhumen/graggar
 	miracles = list(
-		CLERIC_T0 = /datum/action/cooldown/spell/undirected/bloodrage,
-		CLERIC_T1 = /datum/action/cooldown/spell/undirected/call_to_slaughter,
-		CLERIC_T2 = /datum/action/cooldown/spell/projectile/blood_net,
-		CLERIC_T3 = /datum/action/cooldown/spell/revel_in_slaughter,
+		CLERIC_T0 = /datum/action/cooldown/spell/undirected/call_to_slaughter,
+		CLERIC_T1 = /datum/action/cooldown/spell/projectile/blood_net,
+		CLERIC_T2 = /datum/action/cooldown/spell/projectile/revel_in_slaughter,
+		CLERIC_T3 = /datum/action/cooldown/spell/undirected/bloodrage.
 	)
 	viable_tasks = list(
 		/datum/devotion_task/graggar_consume,

@@ -505,6 +505,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF
 	armor = list("blunt" = 10, "slash" = 40, "stab" = 40,  "piercing" = 8, "fire" = 0, "acid" = 0)
+	prevent_crits = CUT_AND_MINOR_CRITS
 	prevent_crits = null
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE

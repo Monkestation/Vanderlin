@@ -179,6 +179,7 @@
 	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	qdel(src)
 
+
 /obj/item/plate/copper
 	name = "copper platter"
 	desc = "A platter made from a sheet of copper. Known to impart a metallic taste when eating certain foods."

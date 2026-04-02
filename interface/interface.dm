@@ -293,14 +293,12 @@
 
 /client/verb/changelog()
 	set name = "Changelog"
-	set category = "OOC.Links"
+	set category = "OOC"
 
-	if(!GLOB.changelog_browser)
-		GLOB.changelog_browser = new /datum/changelog()
+	if(!GLOB.changelog_tgui)
+		GLOB.changelog_tgui = new /datum/changelog()
 
-	var/datum/browser/log = new(usr, "changelog", "CHANGES OF THE WORLD", 680, 650)
-	log.set_content(GLOB.changelog_browser.built_html)
-	log.open()
+	GLOB.changelog_tgui.ui_interact(mob)
 
 	if(prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash

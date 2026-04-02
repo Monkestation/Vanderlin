@@ -45,6 +45,7 @@
 		/turf/open/floor/cracked_earth,
 		/turf/open/floor/flesh,
 		/turf/open/dungeon_trap,
+		/turf/open/dungeon_trap/australia,
 		/turf/open/floor/blocks/carved,
 		/turf/open/floor/churchmarble/purple,
 		/turf/open/floor/churchmarble/violet,

@@ -98,6 +98,9 @@
 /obj/effect/spawner/map_spawner/beartrap,
 /turf/open/floor/dirt,
 /area/under/tomb)
+"fG" = (
+/turf/open/water/clean,
+/area/under/tomb/cave)
 "fQ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/metal/barograte,
@@ -171,6 +174,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"iR" = (
+/obj/structure/winch{
+	redstone_id = "hctomb01"
+	},
+/turf/open/floor/metal/barograte,
+/area/under/tomb/indoors)
 "jc" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobble/alt,
@@ -237,6 +246,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/tomb)
+"np" = (
+/obj/item/ore/gold,
+/turf/open/water/clean,
+/area/under/tomb/cave)
 "nL" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -468,6 +481,10 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/under/tomb/cave)
+"AK" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/clean,
+/area/under/tomb/cave)
 "AP" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/concrete,
@@ -491,25 +508,12 @@
 /obj/structure/ladder,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
-"BC" = (
-/obj/item/ore/gold,
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave)
-"Cg" = (
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave)
 "Ck" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/under/tomb/cave)
-"Co" = (
-/obj/structure/winch{
-	redstone_id = "hctomb01"
-	},
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors)
 "Cr" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/naturalstone,
@@ -596,6 +600,10 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors)
+"HJ" = (
+/obj/structure/flora/grass/water,
+/turf/open/water/clean,
+/area/under/tomb/cave)
 "Ii" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/metal,
@@ -785,10 +793,6 @@
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
-"TA" = (
-/obj/structure/flora/grass/water/reeds,
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave)
 "TZ" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb)
@@ -815,6 +819,12 @@
 	dir = 10
 	},
 /turf/open/floor/cobblerock,
+/area/under/tomb)
+"UO" = (
+/obj/structure/gate/bars{
+	redstone_id = "hctomb01"
+	},
+/turf/open/floor/naturalstone,
 /area/under/tomb)
 "UW" = (
 /obj/structure/fluff/railing/wood{
@@ -892,10 +902,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
-"Xe" = (
-/obj/structure/flora/grass/water,
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave)
 "Xt" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -922,12 +928,6 @@
 "Yr" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"YA" = (
-/obj/structure/gate/bars{
-	redstone_id = "hctomb01"
-	},
-/turf/open/floor/naturalstone,
-/area/under/tomb)
 "YG" = (
 /turf/open/openspace,
 /area/under/tomb/indoors)
@@ -1091,7 +1091,7 @@ TZ
 jx
 jx
 lT
-TA
+AK
 TZ
 TZ
 "}
@@ -1121,10 +1121,10 @@ vr
 YK
 YK
 TZ
-Xe
-TA
-Xe
-Cg
+HJ
+AK
+HJ
+fG
 TZ
 "}
 (6,1,1) = {"
@@ -1154,8 +1154,8 @@ rb
 YK
 TZ
 TZ
-Cg
-Cg
+fG
+fG
 TZ
 TZ
 "}
@@ -1186,7 +1186,7 @@ xs
 YK
 TZ
 TZ
-BC
+np
 TZ
 TZ
 TZ
@@ -1375,7 +1375,7 @@ pT
 pT
 pT
 pT
-YA
+UO
 gx
 gx
 gx
@@ -1503,7 +1503,7 @@ Gi
 IW
 fQ
 fB
-Co
+iR
 IW
 Gi
 up

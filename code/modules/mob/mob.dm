@@ -204,6 +204,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 			continue
 		//This entire if/else chain could be in two lines but isn't for readibilties sake.
 		var/msg = message
+		var/signal = SEND_SIGNAL(M, COMSIG_MOB_VISIBLE_MESSAGE, src, message, vision_distance, ignored_mobs)
+		if(signal & COMPONENT_NO_VISIBLE_MESSAGE)
+			msg = null
+		else if(signal & COMPONENT_VISIBLE_MESSAGE_BLIND)
+			msg = blind_message
+		if(!msg)
+			continue
+
 		if(M.see_invisible < invisibility)//if src is invisible to M
 			msg = blind_message
 		if(!msg)
@@ -407,6 +415,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 		else
 			client.eye = client.mob
 			client.perspective = MOB_PERSPECTIVE
+
+	SEND_SIGNAL(src, COMSIG_MOB_RESET_PERSPECTIVE, new_perspective)
 
 /// Show the mob's inventory to another mob
 /mob/proc/show_inv(mob/user)

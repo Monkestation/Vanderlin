@@ -4,6 +4,11 @@
 /datum/species/elf
 	name = "Elfb"
 	id = SPEC_ID_ELF
+	multiple_accents = list(
+		"Elf Accent" = ACCENT_ELF,
+		"Wintermare Accent" = ACCENT_WINTERMARE,
+		"Ossland Accent" = ACCENT_OSSLAND,
+	)
 	changesource_flags = WABBAJACK
 	native_language = "Elfish"
 	exotic_bloodtype = /datum/blood_type/human/elf
