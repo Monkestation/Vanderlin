@@ -33507,8 +33507,7 @@
 /area/under/town/basement)
 "pfJ" = (
 /obj/structure/fluff/statue/topiary/saiga{
-	name = "horsie";
-	desc = "hor<img src="https:/
+	name = "horsie"
 	},
 /turf/open/floor/carpet/lord/corner{
 	dir = 1
