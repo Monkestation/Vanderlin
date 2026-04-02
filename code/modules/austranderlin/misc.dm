@@ -96,3 +96,8 @@
 	name = "sunduck"
 	sellprice = 0
 	desc = "Quack! Quack!"
+
+/obj/item/clothing/cloak/heartfelt/shit
+	name = "shitstained cloak"
+	desc = "You are the lord of this shithouse."
+	misc_flags = CRAFTING_TEST_EXCLUDE
