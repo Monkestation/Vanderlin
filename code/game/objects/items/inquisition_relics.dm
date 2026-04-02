@@ -1214,12 +1214,14 @@
 		return
 
 	if(!active)
-		var/input = tgui_alert(user, "WHAT DO YOU SEEK?", "THE PRICE IS PAID", list("BLOOD", "FIXATION"))
+		var/mob/living/carbon/human/target = fixation?.resolve()
+		var/input
+		if(!target)
+			input = "FIXATION" //skips through the tgui alert if target isn't set
+		else
+			input = tgui_alert(user, "THE MIRROR IS FIXATED ON [uppertext(target.real_name)]. WILL YOU REVEAL YOUR GAZE?", "THE PRICE IS PAID", list("STALK BLOOD", "FIXATION"))
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
-
-		var/mob/living/carbon/human/target
-
 		if(input == "FIXATION")
 			var/name = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
 			if(!name)
@@ -1228,15 +1230,11 @@
 				if(HL.real_name == name)
 					fixation = WEAKREF(HL)
 					target = HL
-				playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-				to_chat(user, span_warning("[src] makes a grating sound."))
-				return
-		else if(input == "BLOOD")
-			target = feeder?.resolve()
-
-		if(!target)
+					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+					to_chat(user, span_warning("[src] makes a grating sound."))
+					return
+			to_chat(user, span_warning("The mirror makes no sound... It could not locate a person of such name."))
 			return
-
 		active = TRUE
 		openstate = "active"
 		update_appearance(UPDATE_ICON_STATE)
@@ -1333,7 +1331,6 @@
 /obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
-
 /obj/item/inqarticles/bmirror/proc/openorshut(mob/user)
 	if(active)
 		to_chat(user, span_warning("I cannot close the mirror while it's active."))
@@ -1383,15 +1380,12 @@
 	var/mob/living/L = usr
 	if(!istype(L))
 		return
-
-	var/datum/weakref/lookat = null
-	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
-		lookat = source
-	else
-		lookat = source.feeder
+	if(tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD")) != "TRACE BLOOD")
+		//Originally it was supposed to be a choice between looking at the mirror or the blood that fueled it. I wanted to add a way to sewer connection but changed my mind.
+		return
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
-	var/mob/living/target = lookat?.resolve()
+	var/mob/living/target = source.feeder?.resolve()
 	if(!target)
 		return
 	var/mob/dead/observer/screye/blackmirror/S = L.scry_ghost()
