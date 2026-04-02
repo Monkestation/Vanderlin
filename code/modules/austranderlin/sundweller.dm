@@ -75,7 +75,7 @@
 
 /datum/outfit/sundweller
 	name = "Sundweller"
-	head = /obj/item/clothing/head/roguehood/sundweller
+	head = /obj/item/clothing/head/roguehood/colored/sundweller
 	armor = /obj/item/clothing/shirt/robe/colored/sundweller
 	belt = /obj/item/storage/belt/leather/rope
 	shoes = /obj/item/clothing/shoes/sandals

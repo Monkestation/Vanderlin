@@ -14423,11 +14423,11 @@
 /area/outdoors/exposed/under/sewer)
 "gLu" = (
 /obj/structure/closet/crate/chest/crafted,
-/obj/item/clothing/head/roguehood/sundweller,
-/obj/item/clothing/head/roguehood/sundweller,
-/obj/item/clothing/head/roguehood/sundweller,
-/obj/item/clothing/head/roguehood/sundweller,
-/obj/item/clothing/head/roguehood/sundweller,
+/obj/item/clothing/head/roguehood/colored/sundweller,
+/obj/item/clothing/head/roguehood/colored/sundweller,
+/obj/item/clothing/head/roguehood/colored/sundweller,
+/obj/item/clothing/head/roguehood/colored/sundweller,
+/obj/item/clothing/head/roguehood/colored/sundweller,
 /turf/open/floor/cobble,
 /area/outdoors/exposed/under/basement)
 "gLF" = (

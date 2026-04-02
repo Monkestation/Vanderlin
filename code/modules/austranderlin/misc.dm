@@ -1,5 +1,5 @@
 
-/// spongebob
+/// spongebob - please for the love of fuck do not use this for any actual mapping purposes
 /obj/item/painting/the_bob
 	icon_state = "spongebob"
 	desc = "The servant of the month for the past 30 consecutive months. It is a priceless work of art."
@@ -89,7 +89,7 @@
 /obj/item/clothing/shirt/robe/colored/sundweller
 	color = CLOTHING_MUSTARD_YELLOW
 
-/obj/item/clothing/head/roguehood/sundweller
+/obj/item/clothing/head/roguehood/colored/sundweller
 	color = CLOTHING_MUSTARD_YELLOW
 
 /obj/item/carvedgem/amber/duck/sunduck
