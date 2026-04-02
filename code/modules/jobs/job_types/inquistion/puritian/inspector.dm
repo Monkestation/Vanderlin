@@ -101,8 +101,7 @@
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Fast Learning",
 		"Obfuscating Dermis - Beautiful and Face-changing",
-		"Serpentine Glands - Thermal Vision and Venom",
-		"Volf Ligaments - Z-Jump",)
+		"Serpentine Glands - Thermal Vision and Venom",)
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
@@ -145,8 +144,6 @@
 		if("Serpentine Glands - Thermal Vision and Venom")
 			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
-		if("Volf Ligaments - Z-Jump")
-			ADD_TRAIT(spawned, TRAIT_ZJUMP, TRAIT_GENERIC)
 
 
 /datum/outfit/inquisitor/inspector
