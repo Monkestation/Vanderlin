@@ -131,10 +131,7 @@
 
 	if(wizardevent != SSevents.wizardmode)
 		return FALSE
-	var/player_requirement = min_players
-	if(roundstart)
-		player_requirement = round(player_requirement * READYUP_AVG)
-	if(players_amt < player_requirement)
+	if(players_amt < min_players)
 		return FALSE
 	if(length(todreq) && !(GLOB.tod in todreq))
 		return FALSE

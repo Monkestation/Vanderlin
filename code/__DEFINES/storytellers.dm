@@ -113,6 +113,8 @@
 
 /// The concrete number for what is considered "lowpop" on Vanderlin
 #define LOWPOP_THRESHOLD 35
+/// The difference between highpop and lowpop
+#define MIDPOP_THRESHOLD (0.5 * (HIGHPOP_THRESHOLD+LOWPOP_THRESHOLD))
 /// What is high pop on Vanderlin?
 #define HIGHPOP_THRESHOLD 70
 

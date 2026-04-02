@@ -29,18 +29,15 @@
 		/datum/job/templar,
 	)
 
-	denominator = 20
-
-	cost = 0.3 // super cheap so can usually be thrown in somehow
-
 	base_antags = 1
 	maximum_antags = 3
+	denominator = (LOWPOP_THRESHOLD*0.6) * READYUP_AVG
+	min_players = 10
+	cost = 0.3 // super cheap so can usually be thrown in somehow
 
 	earliest_start = 0 SECONDS
-
-	min_players = 10
-
 	weight = 12
+
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/lich = 1,
 		/datum/round_event_control/antagonist/solo/rebel = 1,
