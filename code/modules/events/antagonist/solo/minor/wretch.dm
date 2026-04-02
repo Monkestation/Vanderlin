@@ -40,7 +40,7 @@
 
 	min_players = 10
 
-	weight = 15
+	weight = 12
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/lich = 1,
 		/datum/round_event_control/antagonist/solo/rebel = 1,
