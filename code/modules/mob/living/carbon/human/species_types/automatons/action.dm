@@ -52,6 +52,7 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	//"No Women Allowed" = list("text" = "NO WOMEN ALLOWED", "file" = 'sound/vo/automaton/nowomenallowed.ogg'),
 	//"Obnoxiously Long Scream" = list("text" = "AAAAAAAAAAAAAAAAAAHHHHH", "file" = 'sound/vo/automaton/obnoxiouslylongscream.ogg'),
 	//"Oh Shit Soldier Grenade" = list("text" = "OH SHIT SOLDIER GRENADE OORAH", "file" = 'sound/vo/automaton/OHSHITSOLDIERGRENADEOORAH.ogg'),
+	"Open The Door" = list("text" = "DOOR", "file" = list('sound/vo/automaton/door1.ogg', 'sound/vo/automaton/door2.ogg', 'sound/vo/automaton/door3.ogg')),
 	"Organic Presence Detected" = list("text" = "ORGANIC PRESENCE DETECTED", "file" = 'sound/vo/automaton/organicpresencedetected.ogg'),
 	"Pestra Praise" = list("text" = "PESTRA BE PRAISED", "file" = 'sound/vo/automaton/pestrapraise.ogg'),
 	"Psydon Lives" = list("text" = "PSYDON LIVES", "file" = 'sound/vo/automaton/PSYDONLIVES.ogg'),
@@ -104,8 +105,11 @@ GLOBAL_LIST_INIT(automaton_voice_lines, list(
 	var/list/voice_data = GLOB.automaton_voice_lines[voice_line_key]
 	if(!voice_data)
 		return
+	var/voice_line = voice_data["file"]
+	if(islist(voice_line))
+		voice_line = pick(voice_line)
 
-	playsound(H, voice_data["file"], 70, FALSE)
+	playsound(H, voice_line, 70, FALSE)
 	H.say(voice_data["text"], forced = TRUE, spans = list(SPAN_ROBOT))
 
 /datum/action/manage_voice_actions
