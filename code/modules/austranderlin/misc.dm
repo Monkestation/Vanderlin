@@ -92,12 +92,26 @@
 /obj/item/clothing/head/roguehood/colored/sundweller
 	color = CLOTHING_MUSTARD_YELLOW
 
+/obj/item/clothing/cloak/heartfelt/shit
+	name = "shitstained cloak"
+	desc = "You are the lord of this shithouse."
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/priesthat/sunlord
+	name = "piss-soaked hat"
+	desc = "The sacred headpiece of the Sunlord."
+
 /obj/item/carvedgem/amber/duck/sunduck
 	name = "sunduck"
 	sellprice = 0
 	desc = "Quack! Quack!"
 
-/obj/item/clothing/cloak/heartfelt/shit
-	name = "shitstained cloak"
-	desc = "You are the lord of this shithouse."
-	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/structure/kybraxor/smol
+	pixel_x = -32
+	pixel_y = -32
+	vol = 20
+
+/obj/structure/kybraxor/smol/Initialize()
+	. = ..()
+	transform = transform.Scale(1 / 3)

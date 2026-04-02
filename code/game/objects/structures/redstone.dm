@@ -521,12 +521,3 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		sleep(40)
 		icon_state = "kybraxor1"
 		changing_state = FALSE
-
-/obj/structure/kybraxor/smol
-	pixel_x = -32
-	pixel_y = -32
-	vol = 20
-
-/obj/structure/kybraxor/smol/Initialize()
-	. = ..()
-	transform = transform.Scale(1 / 3)
