@@ -98,7 +98,7 @@
 /datum/quirk/vice/mute/on_remove()
 	if(!owner)
 		return
-	REMOVE_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
 
 /datum/quirk/vice/wooden_arm_right
 	name = "Wooden Arm (R)"
