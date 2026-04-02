@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/medicine = 20
 	)
 
-/datum/job/advclass/sacrestant/psyaltrist
+/datum/job/advclass/adept/psyaltrist
 	title = "Rehabilitated Minstrel"
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, mostly because they are the last ones in a party to die. \
 	When word got out that you had abandoned your former party to their demise, it didn't take long before you were cast out, unwelcome. \
@@ -43,7 +43,7 @@
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
-/datum/job/advclass/sacrestant/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/adept/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
 
@@ -64,7 +64,7 @@
 	spawned.select_equippable(player_client, instruments)
 
 /datum/outfit/psyaltrist
-	name = "Psyaltrist (Sacrestants)"
+	name = "Psyaltrist (Adept)"
 	armor = /obj/item/clothing/armor/leather/studded/psyaltrist
 	backl = /obj/item/storage/backpack/satchel/otavan
 	neck = /obj/item/clothing/neck/gorget/explosive
