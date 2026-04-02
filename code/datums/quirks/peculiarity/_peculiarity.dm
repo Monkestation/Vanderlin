@@ -58,7 +58,16 @@
 	if(prob(50))
 		ADD_TRAIT(H, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	else if(prob(30))
-		ADD_TRAIT(H, TRAIT_UGLY, QUIRK_TRAIT)
+	owner.adjust_stat_modifier(STATMOD_WITLESS_PIXIE, list(STAT_INTELLIGENCE = rand(-2, -5)))
+
+	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, NONE)
+	REMOVE_TRAIT(owner, TRAIT_UGLY, NONE)
+	REMOVE_TRAIT(owner, TRAIT_FISHFACE, NONE)
+
+	if(prob(50))
+		ADD_TRAIT(owner, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
+	else if(prob(30))
+		ADD_TRAIT(owner, TRAIT_UGLY, QUIRK_TRAIT)
 
 /datum/quirk/peculiarity/witless_pixie/on_remove()
 	if(!ishuman(owner))
