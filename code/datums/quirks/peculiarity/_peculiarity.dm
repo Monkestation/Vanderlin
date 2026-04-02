@@ -74,7 +74,6 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	// Remove stat penalty (inverse of what was applied)
-	// This is approximate since we randomized on spawn
 	owner?.remove_stat_modifier(STATMOD_WITLESS_PIXIE)
 
 /datum/quirk/peculiarity/ugly
