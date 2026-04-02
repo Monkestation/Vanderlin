@@ -1256,6 +1256,12 @@
 	},
 /turf/open/water,
 /area/under/town/basement)
+"aGz" = (
+/obj/structure/fake_machine/scomm{
+	pixel_y = -32
+	},
+/turf/open/floor/concrete,
+/area/indoors/town/dwarfin)
 "aGF" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
@@ -3181,8 +3187,9 @@
 /area/indoors/dungeon)
 "byZ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/contraption/linker,
-/obj/structure/table/wood/plain_alt,
+/obj/structure/activator,
+/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "bza" = (
@@ -4331,7 +4338,7 @@
 	dir = 9
 	},
 /obj/structure/handcart{
-	dir = 4
+	dir = 1
 	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
@@ -8448,8 +8455,10 @@
 /obj/structure/bars/pipe{
 	dir = 6
 	},
-/obj/structure/rack/shelf/biggest,
-/obj/item/weapon/pick,
+/obj/machinery/artificer_table,
+/obj/item/automaton_frame{
+	pixel_y = 4
+	},
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "dQs" = (
@@ -9982,7 +9991,10 @@
 /obj/item/ingot/copper,
 /obj/item/ingot/copper,
 /obj/item/ingot/copper,
-/obj/item/ingot/iron,
+/obj/item/ingot/iron{
+	pixel_x = 4;
+	pixel_y = -2
+	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "eAP" = (
@@ -11981,7 +11993,15 @@
 	pixel_x = -15;
 	pixel_y = -15
 	},
-/obj/structure/table/wood/plain_alt,
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/pick{
+	pixel_x = -3;
+	pixel_y = 2
+	},
+/obj/item/weapon/pick{
+	pixel_x = 1;
+	pixel_y = -1
+	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "fwp" = (
@@ -17222,14 +17242,6 @@
 "hUF" = (
 /turf/closed/mineral/random/high,
 /area/under/cave)
-"hUK" = (
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/concrete,
-/area/indoors/town/dwarfin)
 "hUS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
@@ -18497,18 +18509,12 @@
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/church)
 "ixv" = (
-/obj/structure/water_pipe,
-/obj/structure/table/wood{
-	dir = 10;
-	icon_state = "tablewood2"
-	},
-/obj/item/weapon/tongs,
-/obj/item/weapon/tongs,
-/obj/item/gear/metal/bronze,
+/obj/structure/table/wood/plain_alt,
 /obj/item/gear/metal/bronze{
 	pixel_x = -8;
 	pixel_y = -3
 	},
+/obj/item/gear/metal/bronze,
 /obj/item/gear/metal/bronze{
 	pixel_x = 6;
 	pixel_y = 7
@@ -18517,7 +18523,7 @@
 	pixel_x = -5;
 	pixel_y = 8
 	},
-/turf/open/floor/greenstone,
+/turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "ixz" = (
 /obj/structure/rack/shelf/biggest,
@@ -19603,12 +19609,15 @@
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
-/obj/structure/activator,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/item/ammo_holder/quiver/bolts,
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
+/obj/structure/rack/shelf/biggest,
+/obj/item/contraption/linker{
+	pixel_x = 4;
+	pixel_y = -2
+	},
+/obj/item/contraption/linker,
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "iXE" = (
@@ -19717,7 +19726,6 @@
 	dir = 8
 	},
 /obj/structure/water_pipe,
-/obj/structure/fermentation_keg/water,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "jao" = (
@@ -28006,13 +28014,8 @@
 /turf/closed/basic,
 /area/under/cave)
 "mQw" = (
-/obj/structure/water_pipe,
-/obj/structure/table/wood{
-	dir = 10;
-	icon_state = "tablewood2"
-	},
-/obj/item/candle/skull/lit,
-/turf/open/floor/greenstone,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "mQD" = (
 /obj/structure/table/wood/reinforced_alter,
@@ -28836,7 +28839,14 @@
 	pixel_y = -32
 	},
 /obj/structure/rack/shelf/biggest,
-/obj/item/weapon/pick,
+/obj/item/augment_kit{
+	pixel_x = -5;
+	pixel_y = 0
+	},
+/obj/item/augment_kit{
+	pixel_x = 6;
+	pixel_y = 5
+	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "njE" = (
@@ -28965,9 +28975,21 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/water_pipe,
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bucket/wooden,
-/obj/item/flint,
-/obj/item/weapon/tongs,
+/obj/item/storage/crucible/random{
+	pixel_x = -3;
+	pixel_y = 13
+	},
+/obj/item/storage/crucible/random{
+	pixel_x = 6;
+	pixel_y = 13
+	},
+/obj/item/mould/ingot{
+	pixel_y = -1;
+	pixel_x = 0
+	},
+/obj/item/mould/ingot{
+	pixel_y = -7
+	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "nnn" = (
@@ -29406,7 +29428,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/basin)
 "nxS" = (
-/obj/structure/fake_machine/scomm,
+/obj/item/bin/water/gross,
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
 "nxU" = (
@@ -30484,11 +30506,6 @@
 	dir = 8
 	},
 /area/outdoors/river)
-"nZr" = (
-/obj/item/contraption/linker,
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/concrete,
-/area/indoors/town/dwarfin)
 "nZP" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -32846,20 +32863,20 @@
 	dir = 9
 	},
 /obj/structure/rack/shelf/biggest,
-/obj/item/mould/ingot{
-	pixel_y = -7
+/obj/item/weapon/hammer/iron,
+/obj/item/weapon/hammer/iron{
+	pixel_x = 7;
+	pixel_y = -3
 	},
-/obj/item/mould/ingot{
-	pixel_y = -1;
-	pixel_x = 0
+/obj/item/weapon/tongs,
+/obj/item/weapon/tongs{
+	pixel_x = -6;
+	pixel_y = 4
 	},
-/obj/item/storage/crucible/random{
-	pixel_x = -3;
-	pixel_y = 13
-	},
-/obj/item/storage/crucible/random{
-	pixel_x = 6;
-	pixel_y = 13
+/obj/item/flint,
+/obj/item/reagent_containers/glass/bucket/wooden{
+	pixel_x = 10;
+	pixel_y = -5
 	},
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
@@ -52223,9 +52240,8 @@
 /turf/open/floor/metal/alt,
 /area/outdoors/town)
 "xJb" = (
-/obj/structure/water_pipe,
 /obj/machinery/artificer_table,
-/turf/open/floor/greenstone,
+/turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "xJc" = (
 /obj/machinery/light/fueled/hearth,
@@ -114324,7 +114340,7 @@ wcF
 bBM
 bBM
 bBM
-hUK
+rEz
 fwo
 ovT
 ghR
@@ -115334,7 +115350,7 @@ seg
 qyl
 bBW
 bBW
-nZr
+bBM
 aug
 ovT
 ovT
@@ -154928,7 +154944,7 @@ bBW
 bBW
 bBW
 bBM
-bBM
+aGz
 ovT
 ovT
 biy
