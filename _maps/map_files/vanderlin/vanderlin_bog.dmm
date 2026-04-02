@@ -1588,6 +1588,10 @@
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/abyss_sand/path,
 /area/under/cavewet)
+"aFd" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/bog/east)
 "aFf" = (
 /obj/structure/flora/shells,
 /turf/open/floor/abyss_sand/path,
@@ -5106,6 +5110,10 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/north/west)
+"dJe" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "dJj" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp/deep,
@@ -7492,7 +7500,7 @@
 /area/outdoors/bog/south)
 "fUH" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/quest_spawner,
+/obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/concrete,
 /area/outdoors/bog/e_highroad)
 "fWB" = (
@@ -8385,6 +8393,10 @@
 	},
 /turf/open/water/ocean,
 /area/under/cavewet)
+"gOU" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/ruinedwood/alt,
+/area/outdoors/bog/north)
 "gPw" = (
 /obj/structure/bridge,
 /turf/open/water/swamp,
@@ -9686,6 +9698,10 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"ilv" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/dirt,
+/area/outdoors/bog/south/east)
 "ilD" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -10402,6 +10418,10 @@
 	},
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
+"iTQ" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/ruinedwood/alt,
+/area/outdoors/bog/east)
 "iUc" = (
 /obj/structure/fluff/railing/border{
 	dir = 5;
@@ -10529,6 +10549,10 @@
 	dir = 8
 	},
 /area/under/cavewet)
+"jbx" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
+/area/outdoors/bog/west)
 "jbE" = (
 /obj/structure/table/wood/fancy/purple,
 /turf/open/floor/carpet/royalblack,
@@ -12524,10 +12548,6 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
 /area/outdoors/bog/north)
-"kTB" = (
-/obj/effect/landmark/quest_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/bog/central)
 "kTC" = (
 /turf/closed/mineral/bedrock/cold,
 /area/under/tomb/indoors/magic)
@@ -12989,6 +13009,10 @@
 	color = "#547285"
 	},
 /area/indoors/wilderness/magic)
+"ltv" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/bog/beach/west)
 "ltz" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 8
@@ -15111,7 +15135,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter/bog)
 "nFE" = (
-/obj/effect/landmark/quest_spawner,
+/obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/concrete,
 /area/outdoors/bog/e_highroad)
 "nGa" = (
@@ -15510,6 +15534,10 @@
 	color = "#7D9BAE"
 	},
 /area/under/cavewet)
+"odY" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt,
+/area/outdoors/bog/north/west)
 "ofx" = (
 /obj/structure/flora/ocean_plants,
 /turf/open/floor/abyss_sand/path,
@@ -16423,6 +16451,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"pit" = (
+/obj/effect/landmark/quest_spawner/easy,
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/north/west)
 "piK" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 1
@@ -16749,6 +16781,10 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/shelter/bog)
+"pEK" = (
+/obj/effect/landmark/quest_spawner/hard,
+/turf/open/floor/grass,
+/area/outdoors/bog/south/east)
 "pEM" = (
 /obj/structure/flora/ocean_plants,
 /turf/open/floor/abyss_sand/path,
@@ -16816,6 +16852,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/shelter/bog/e_highroad_camp)
+"pIJ" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/bog/central)
 "pJE" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/ore/copper,
@@ -18474,7 +18514,7 @@
 /turf/open/floor/wood,
 /area/indoors/ship)
 "rCH" = (
-/obj/effect/landmark/quest_spawner,
+/obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/concrete,
 /area/outdoors/bog/w_highroad)
 "rCK" = (
@@ -20034,7 +20074,7 @@
 /turf/open/floor/ruinedwood,
 /area/under/cavewet)
 "tyS" = (
-/obj/effect/landmark/quest_spawner,
+/obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/ruinedwood/alt,
 /area/outdoors/bog/beach/west)
 "tyT" = (
@@ -21243,6 +21283,10 @@
 /obj/structure/tent_wall,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/shelter/bog)
+"uFl" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/central)
 "uGg" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -22179,6 +22223,10 @@
 	color = "#314C5D"
 	},
 /area/under/tomb/indoors/magic)
+"vyp" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "vyB" = (
 /obj/structure/chair/hotspring_bench/left,
 /turf/open/floor/abyss_tile{
@@ -22799,6 +22847,10 @@
 "wdD" = (
 /turf/open/floor/concrete,
 /area/outdoors/bog/north/west)
+"wdQ" = (
+/obj/effect/landmark/quest_spawner/medium,
+/turf/open/floor/dirt,
+/area/outdoors/bog/north/east)
 "weq" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -27749,7 +27801,7 @@ uHT
 odG
 iVd
 jaX
-jaX
+ltv
 jaX
 kHi
 lVq
@@ -28530,7 +28582,7 @@ iVd
 iVd
 iVd
 iVd
-odG
+heP
 iVd
 iVd
 odG
@@ -30452,7 +30504,7 @@ ajO
 ajO
 wLl
 jMO
-jMO
+odY
 wLl
 wLl
 wLl
@@ -30467,7 +30519,7 @@ jMO
 jMO
 wLl
 jMO
-jMO
+odY
 jMO
 ajO
 wLl
@@ -32478,7 +32530,7 @@ wLl
 jMO
 wLl
 jMO
-jMO
+odY
 jMO
 wLl
 wLl
@@ -35952,7 +36004,7 @@ wLl
 kZB
 omz
 kZB
-omz
+jbx
 omz
 omz
 uZN
@@ -36535,7 +36587,7 @@ jMO
 wLl
 jMO
 jMO
-cNF
+pit
 cNF
 jMO
 jMO
@@ -39596,7 +39648,7 @@ iCl
 gKA
 gKA
 gKA
-hvj
+dJe
 iCl
 gKA
 gKA
@@ -40157,7 +40209,7 @@ mBE
 eVP
 mBE
 nnz
-bhS
+gOU
 mBE
 eVP
 mBE
@@ -43653,7 +43705,7 @@ cTk
 hvj
 hvj
 jKm
-kTB
+pIJ
 hvj
 hvj
 hvj
@@ -44869,7 +44921,7 @@ pDQ
 khM
 iCl
 iCl
-iCl
+pIJ
 iCl
 hvj
 vlh
@@ -48908,7 +48960,7 @@ iCl
 iCl
 iCl
 iCl
-hvj
+vyp
 iCl
 iCl
 gKA
@@ -49689,7 +49741,7 @@ uWo
 gKA
 gKA
 gKA
-gKA
+uFl
 iCl
 hvj
 gKA
@@ -50460,7 +50512,7 @@ mgk
 mBE
 mBE
 mgk
-mBE
+dVG
 mBE
 mBE
 mgk
@@ -52888,7 +52940,7 @@ rAl
 rAl
 rAl
 ptt
-rAl
+wdQ
 rAl
 ptt
 rAl
@@ -53143,7 +53195,7 @@ wBe
 cnT
 wGf
 cUV
-oVc
+iTQ
 yct
 wBe
 wGf
@@ -56760,7 +56812,7 @@ wGf
 wGf
 wGf
 guK
-wBe
+aFd
 wBe
 wBe
 wBe
@@ -56995,7 +57047,7 @@ wGf
 wBe
 wGf
 wBe
-wGf
+xhb
 wBe
 wBe
 wGf
@@ -57625,7 +57677,7 @@ mNe
 vJI
 vJI
 vJI
-mNe
+pEK
 mNe
 vJI
 vJI
@@ -58040,7 +58092,7 @@ vJI
 vJI
 vJI
 mNe
-vJI
+ilv
 vJI
 vJI
 vJI
@@ -61659,7 +61711,7 @@ vJI
 vJI
 vJI
 vJI
-mNe
+pEK
 mNe
 vJI
 vJI
@@ -62017,7 +62069,7 @@ guK
 wGf
 wBe
 wGf
-wGf
+xhb
 wGf
 wGf
 wBe
@@ -63472,7 +63524,7 @@ vJI
 mNe
 mNe
 mNe
-mNe
+pEK
 vJI
 vJI
 mNe
