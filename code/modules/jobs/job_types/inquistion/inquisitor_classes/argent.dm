@@ -169,16 +169,6 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/splint, ITEM_SLOT_PANTS, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass/psydon, ITEM_SLOT_ARMOR, TRUE)
 
-	// Crossbow selection
-	var/crossbows = list("Crossbow", "Slurbow")
-	var/crossbow_choice = browser_input_list(spawned, "CHOOSE YOUR CROSSBOW.", "TAKE UP PSYDON'S AIM.", crossbows)
-
-	switch(crossbow_choice)
-		if("Crossbow")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, ITEM_SLOT_BACK_L, TRUE)
-		if("Slurbow")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow, ITEM_SLOT_BACK_L, TRUE)
-
 	// Bolt selection
 	var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
 	var/boltchoice = browser_input_list(spawned, "CHOOSE YOUR MUNITIONS.", "TAKE UP PSYDON'S MISSILES.", quivers)
@@ -201,8 +191,7 @@
 		"Nerve Staple - No Mood",
 		"Nightmare Ward - No Sleep and Fast Learning",
 		"Obfuscating Dermis - Beautiful and Face-changing",
-		"Serpentine Glands - Thermal Vision and Venom",
-		"Volf Ligaments - Z-Jump",)
+		"Serpentine Glands - Thermal Vision and Venom",)
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
@@ -245,8 +234,6 @@
 		if("Serpentine Glands - Thermal Vision and Venom")
 			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
-		if("Volf Ligaments - Z-Jump")
-			ADD_TRAIT(spawned, TRAIT_ZJUMP, TRAIT_GENERIC)
 
 /datum/outfit/argent
 	name = "Argent (Sacrestants)"
@@ -255,6 +242,7 @@
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	neck = /obj/item/clothing/neck/gorget
 	backr = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
