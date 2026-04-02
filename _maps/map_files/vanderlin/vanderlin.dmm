@@ -1256,12 +1256,6 @@
 	},
 /turf/open/water,
 /area/under/town/basement)
-"aGz" = (
-/obj/structure/fake_machine/scomm{
-	pixel_y = -32
-	},
-/turf/open/floor/concrete,
-/area/indoors/town/dwarfin)
 "aGF" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
@@ -47564,15 +47558,6 @@
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
-"vJc" = (
-/obj/structure/stairs{
-	dir = 1
-	},
-/obj/structure/fluff/walldeco/gear{
-	pixel_y = 32
-	},
-/turf/open/floor/concrete,
-/area/indoors/town/dwarfin)
 "vJf" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -53221,6 +53206,10 @@
 /obj/structure/rack/shelf,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/town/noble_manor/yellow)
+"yhE" = (
+/obj/structure/fake_machine/scomm/r,
+/turf/open/floor/metal/alt,
+/area/indoors/town/dwarfin)
 "yhP" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/tile/checker,
@@ -154944,7 +154933,7 @@ bBW
 bBW
 bBW
 bBM
-aGz
+bBM
 ovT
 ovT
 biy
@@ -155748,7 +155737,7 @@ ovT
 mZu
 ouc
 bBM
-bBW
+yhE
 bBW
 bBW
 pYD
@@ -155951,7 +155940,7 @@ ovT
 nmW
 peE
 mZu
-vJc
+nkA
 bBM
 vlI
 nAx
