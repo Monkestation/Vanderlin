@@ -32,10 +32,6 @@
 		if(HL.job == "Matron" && !(HL in matrons))
 			matrons += HL
 
-	if(!matrons)
-		to_chat(owner, span_red("You recall that the Matron is too far away to hear you..."))
-		return . | SPELL_CANCEL_CAST
-
 /datum/action/cooldown/spell/undirected/call_for_hag/cast(atom/cast_on)
 	. = ..()
 	// if cmode, its a cry for help
