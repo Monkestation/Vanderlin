@@ -20,7 +20,7 @@
 
 /datum/job/advclass/combat/dbomb
 	title = "Dwarven Bombardier"
-	tutorial = "Tinkering Dwarves that like to blow things up."
+	tutorial = "Wandering tinkerers from the Blackpowder clan that specialize in the production of explosives."
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/adventurer/dbomb
 	category_tags = list(CTAG_ADVENTURER)
@@ -30,6 +30,10 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 	)
+
+/datum/job/advclass/combat/dbomb/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	spawned.culture = GLOB.culture_singletons[/datum/culture/species/dwarf/blackpowder]
 
 /datum/outfit/adventurer/dbomb
 	name = "Dwarven Bombardier (Adventurer)"
