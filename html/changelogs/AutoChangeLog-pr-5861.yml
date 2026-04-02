@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - bugfix: "Kobolds can now eat all decorated stone walls, not just some of them."
