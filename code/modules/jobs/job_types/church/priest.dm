@@ -135,7 +135,7 @@
 	set category = "RoleUnique.Divine"
 	if(!mind)
 		return
-	if(istype(get_area(src), /area/indoors/town/church/chapel))
+	if(!istype(get_area(src), /area/indoors/town/church/chapel))
 		to_chat(src, span_warning("I need to do this in my Chapel."))
 		return FALSE
 
