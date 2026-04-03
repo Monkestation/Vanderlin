@@ -16,7 +16,7 @@
 
 	charge_time = 4 SECONDS
 	cooldown_time = 1 MINUTES
-	spell_cost = 60
+	spell_cost = 55
 
 	status_effect = /datum/status_effect/buff/malum_anvil
 
