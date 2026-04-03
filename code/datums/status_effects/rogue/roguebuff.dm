@@ -464,10 +464,12 @@
 
 /datum/status_effect/buff/malum_anvil/on_apply()
 	. = ..()
+	owner.apply_status_effect(/datum/status_effect/light_buff/malum_anvil, src.duration)
 	ADD_TRAIT(owner, TRAIT_MALUM_ANVIL, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/malum_anvil/on_remove()
 	. = ..()
+	owner.remove_status_effect(/datum/status_effect/light_buff/malum_anvil)
 	REMOVE_TRAIT(owner, TRAIT_MALUM_ANVIL, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/malum_anvil

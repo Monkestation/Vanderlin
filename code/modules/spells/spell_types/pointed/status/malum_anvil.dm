@@ -3,8 +3,9 @@
 	desc = ""
 	button_icon_state = "craft_buff"
 	sound = 'sound/items/bsmithfail.ogg'
+	charge_sound = 'sound/magic/holycharging.ogg'
 
-	cast_range = 2
+	cast_range = 0
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy

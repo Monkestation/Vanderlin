@@ -331,6 +331,17 @@
 	owner.remove_filter("blessing_of_light")
 	remove_light(owner)
 
+/// Similar to orison light but called when under the status effect `Malum's Anvil`
+/// Duration is handled by the status_effect that calls this
+/datum/status_effect/light_buff/malum_anvil
+	id = "malum_light_buff"
+	alert_type = null
+
+	outline_colour = "#cf991a"
+
+/datum/status_effect/light_buff/malum_anvil/get_examine_text()
+	return "SUBJECTPRONOUN is surrounded by an aura of gentle light." //TODO CHANGE THIS
+
 #undef ORISON_FILL
 #undef ORISON_TOUCH
 #undef ORISON_LIGHT
