@@ -2083,11 +2083,6 @@
 "aYB" = (
 /turf/closed,
 /area/under/town/basement)
-"aYE" = (
-/obj/structure/fake_machine/scomm/r,
-/obj/structure/fluff/walldeco/church/line,
-/turf/open/floor/church/purple,
-/area/indoors/town/church/inquisition)
 "aYX" = (
 /obj/structure/stairs{
 	dir = 1
@@ -4392,9 +4387,6 @@
 "cel" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	pixel_y = 32
-	},
-/obj/structure/fake_machine/mail/l{
-	mailtag = "Inquisition"
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
@@ -12164,12 +12156,6 @@
 	},
 /turf/closed/wall/mineral/stonebrick,
 /area/under/town/basement)
-"fNc" = (
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
-	},
-/turf/open/floor/dirt,
-/area/under/cave)
 "fNe" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -16656,10 +16642,6 @@
 /obj/structure/chair/hotspring_bench/left,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
-"hZi" = (
-/obj/structure/fake_machine/scomm/l,
-/turf/open/floor/church/purple,
-/area/indoors/town/church/inquisition)
 "hZl" = (
 /mob/living/carbon/human/species/rousman/npc,
 /turf/open/floor/carpet/royalblack,
@@ -19339,10 +19321,6 @@
 "jgm" = (
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/noble_manor/blue)
-"jgw" = (
-/obj/structure/fake_machine/scomm/l,
-/turf/open/floor/tile,
-/area/indoors/town/church/inquisition)
 "jgz" = (
 /turf/closed/wall/mineral/wooddark/end,
 /area/indoors/soilsons)
@@ -23478,14 +23456,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town)
-"leu" = (
-/obj/structure/fake_machine/scomm,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/structure/fluff/walldeco/church/line,
-/turf/open/floor/churchmarble/violet,
-/area/indoors/town/church/inquisition)
 "leJ" = (
 /obj/structure/window/openclose{
 	dir = 8
@@ -33829,14 +33799,6 @@
 	dir = 8
 	},
 /area/outdoors/town/roofs)
-"pLC" = (
-/obj/structure/door/viewport{
-	name = "Old Church"
-	},
-/obj/effect/mapping_helpers/access/keyset/church/inquisition,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/church/purple,
-/area/indoors/town/church/inquisition)
 "pLI" = (
 /obj/structure/closet/crate/chest/wicker/random_soilson,
 /obj/item/neuFarm/seed/avocado,
@@ -36038,12 +36000,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile,
 /area/indoors/town/shop)
-"qNm" = (
-/obj/structure/fake_machine/scomm{
-	pixel_y = -32
-	},
-/turf/closed/mineral/bedrock,
-/area/under/cave)
 "qNn" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -42953,10 +42909,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone,
 /area/under/cave)
-"tPr" = (
-/obj/structure/fake_machine/scomm/l,
-/turf/open/floor/dirt,
-/area/indoors/town/church/inquisition)
 "tPs" = (
 /obj/structure/stairs,
 /turf/open/floor/tile,
@@ -46664,10 +46616,6 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/church,
 /area/indoors/town/church)
-"vvx" = (
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/grass/yel,
-/area/under/cave)
 "vvC" = (
 /obj/structure/fluff/statue/knight/r,
 /turf/open/floor/dirt,
@@ -84761,7 +84709,7 @@ dUS
 tds
 jRT
 vDH
-tPr
+jRT
 vyl
 sVI
 qFx
@@ -123534,7 +123482,7 @@ oTx
 qgA
 upq
 dID
-wmF
+qFx
 qFx
 qFx
 qFx
@@ -123736,7 +123684,7 @@ aOv
 tvR
 mAf
 bSb
-yjU
+qFx
 qFx
 qFx
 qFx
@@ -123938,8 +123886,8 @@ uGx
 jha
 xty
 dID
-yjU
-yjU
+qFx
+qFx
 qFx
 qFx
 wmF
@@ -124140,9 +124088,9 @@ tin
 jha
 qgA
 dID
-wDX
-rZq
-rZq
+qFx
+qFx
+qFx
 wmF
 kTy
 rZq
@@ -124342,9 +124290,9 @@ vFU
 jha
 xty
 dID
-wDX
-wDX
-wDX
+qFx
+qFx
+qFx
 wmF
 nUj
 rZq
@@ -124544,11 +124492,11 @@ aOv
 tvR
 ibm
 kdt
-wDX
-hzx
-fNc
 qFx
-vvx
+qFx
+qFx
+qFx
+yjU
 hzx
 qFx
 wmF
@@ -124746,7 +124694,7 @@ eNE
 qgA
 ibm
 dID
-hzx
+qFx
 qFx
 qFx
 qFx
@@ -125950,7 +125898,7 @@ dID
 qgA
 gIR
 iSp
-aYE
+eTe
 gIR
 nIO
 nIO
@@ -161298,7 +161246,7 @@ dID
 dID
 dbv
 ibm
-jgw
+syS
 mtg
 mtg
 bUv
@@ -164121,7 +164069,7 @@ ckU
 lED
 dID
 qgA
-leu
+sGe
 iMG
 nIO
 nIO
@@ -164337,7 +164285,7 @@ nIO
 eXx
 bUR
 aOv
-hZi
+aOv
 qgA
 gAe
 wNM
@@ -164524,7 +164472,7 @@ gXl
 ckU
 sMC
 dID
-pLC
+qgA
 tin
 jUc
 nIO
@@ -164927,7 +164875,7 @@ uDe
 upR
 ckU
 sMC
-qNm
+dID
 qgA
 rqr
 iMG
