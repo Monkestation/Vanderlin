@@ -475,8 +475,8 @@
 	REMOVE_TRAIT(owner, TRAIT_MALUM_ANVIL, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/malum_anvil
-	name = "TODO ANVIL NAME"
-	desc = span_notice("I LOVE ANVILS!")
+	name = "Malum's Anvil"
+	desc = span_notice("READY for TOIL!")
 	icon_state = "malum_buff"
 
 /*-----------------\
