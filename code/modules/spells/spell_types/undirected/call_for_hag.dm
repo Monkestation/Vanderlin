@@ -28,8 +28,9 @@
 		to_chat(owner, span_red("I am unable to yell out to her!"))
 		return . | SPELL_CANCEL_CAST
 
+	matrons = list() //reset list
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		if(HL.job == "Matron" && !(HL in matrons))
+		if(HL.job == "Matron" && !(HL in matrons) && HL.stat < UNCONSCIOUS) // Is a Matron and not unconscious or dead
 			matrons += HL
 
 /datum/action/cooldown/spell/undirected/call_for_hag/cast(atom/cast_on)
