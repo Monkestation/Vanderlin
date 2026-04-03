@@ -29,7 +29,7 @@
 	first_time_text = "THE MURDERWOOD"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 	converted_type = /area/indoors/shelter/woods
-	threat_region = THREAT_REGION_OUTER_GROVE
+	threat_region = THREAT_REGION_WOODS
 
 /area/outdoors/wilderness/outpost
 	icon_state = "outpost"

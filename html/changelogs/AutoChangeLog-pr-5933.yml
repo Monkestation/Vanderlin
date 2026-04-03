@@ -1,0 +1,4 @@
+author: "Rockslp"
+delete-after: True
+changes:
+  - bugfix: "Fixes bloodsucker skills being a 1/10th of what they should've gotten."
