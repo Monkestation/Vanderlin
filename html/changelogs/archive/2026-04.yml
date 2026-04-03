@@ -31,3 +31,26 @@
 2026-04-02:
   KevinfromHP:
   - bugfix: Fixes a bug where water would not push you down z levels
+2026-04-03:
+  Casperclone1:
+  - rscadd: Luxintenebre as a new brewable wine
+  KevinfromHP:
+  - balance: rebalanced ambush chances and max ambush values
+  Rockslp:
+  - bugfix: Fixes bloodsucker skills being a 1/10th of what they should've gotten.
+  - balance: Buffs the wielded damage on the iron sledgehammer.
+  ta3754859-max:
+  - rscadd: Unholy grasp has an alternative silencing mode when used with tongue in
+      hand
+  - rscadd: Unholy grasp has an alternative mode when used with stomach, hitting your
+      opponent with 2 units of organ poison
+  - rscadd: Changes Revel in Slaughter to be used as an projectile in close combat,
+      that gives your enemy exposed status and blurs his vision
+  - balance: Changes the Graggar spell tree, T0 is now Call to slaughter, T1 Unholy
+      grasp, T2 is Revel in slaughter and T3 bloodrage
+  - balance: Call to slaughter has it's range upped by one tile (to 4)
+  - balance: Unholy grasp now uses guts instead of viscera
+  - balance: Bloodrage now gives full stun immunity
+  - balance: Using bloodrage while cuffed removes them
+  - bugfix: Removed Unholy Grasps' bloodnet giving unremovable leg cuffs, it now purely
+      works on debuffs
