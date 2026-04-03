@@ -145,36 +145,35 @@
 /datum/orderless_slapcraft/food/tart/avocado
 	name = "Unbaked Avocado Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/avocado = 3
+		/obj/item/reagent_containers/food/snacks/fruit/avocado_half = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/avocado
 
 /datum/orderless_slapcraft/food/tart/mango
 	name = "Unbaked Mangga Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/mango = 3
+		/obj/item/reagent_containers/food/snacks/fruit/mango_half= 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/mango
 
 /datum/orderless_slapcraft/food/tart/mangosteen
 	name = "Unbaked Mangosteen Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen = 3
+		/obj/item/reagent_containers/food/snacks/fruit/mangosteen_opened = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/mangosteen
 
 /datum/orderless_slapcraft/food/tart/pineapple
 	name = "Unbaked Ananas Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/pineapple = 1,
-		/obj/item/reagent_containers/food/snacks/fruit/pineapple_slice = 2,
+		/obj/item/reagent_containers/food/snacks/fruit/pineapple_slice = 3,
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/pineapple
 
 /datum/orderless_slapcraft/food/tart/dragonfruit
 	name = "Unbaked Piyata Tart"
 	requirements = list(
-		/obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit = 3
+		/obj/item/reagent_containers/food/snacks/fruit/dragonfruit_half = 3
 	)
 	output_item = /obj/item/reagent_containers/food/snacks/raw_tart/dragonfruit
 

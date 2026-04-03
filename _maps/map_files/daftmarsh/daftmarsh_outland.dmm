@@ -789,15 +789,6 @@
 	},
 /turf/open/floor/cobble/alt,
 /area/under/mountains/anvil/lower)
-"hM" = (
-/obj/structure/fluff/walldeco/bigpainting,
-/obj/structure/table/wood/plain,
-/obj/item/painting/queen{
-	pixel_x = -3;
-	pixel_y = -5
-	},
-/turf/open/floor/twig,
-/area/under/mountains/anvil/lower)
 "hO" = (
 /obj/item/reagent_containers/food/snacks/sugar{
 	pixel_x = 5;
@@ -3438,6 +3429,15 @@
 "KZ" = (
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"Lb" = (
+/obj/structure/fluff/walldeco/bigpainting,
+/obj/structure/table/wood/plain,
+/obj/item/painting/queen{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/turf/open/floor/twig,
+/area/under/mountains/anvil/lower)
 "Lj" = (
 /obj/structure/kneestingers,
 /turf/open/water/river/dirt{
@@ -83615,7 +83615,7 @@ IT
 fk
 IT
 Df
-hM
+Lb
 Ka
 nj
 oO

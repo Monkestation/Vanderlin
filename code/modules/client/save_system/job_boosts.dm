@@ -69,7 +69,7 @@
 /datum/job_priority_boost/proc/use_boost()
 	if(uses_remaining > 0)
 		uses_remaining--
-		// Trigger save when boost is used
+		// Trigger save when boost is used spawn cause file write
 		spawn(1)
 			var/client/C = get_boost_owner()
 			if(C)

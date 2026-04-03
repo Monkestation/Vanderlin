@@ -305,11 +305,23 @@
 	requirements = list(
 		/obj/item/weapon/polearm/woodstaff = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/fibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/weapon/polearm/woodstaff
-	starting_atom = /obj/item/natural/fibers
+	starting_atom = /obj/item/natural/fibers/sinew
 	output = /obj/item/weapon/polearm/spear/bonespear
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/survival/tbone_spear
+	name = "troll-horn bone spear"
+	requirements = list(
+		/obj/item/weapon/polearm/spear/bonespear = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	attacked_atom = /obj/item/weapon/polearm/spear/bonespear
+	starting_atom = /obj/item/natural/fibers/sinew
+	output = /obj/item/weapon/polearm/spear/trollbonespear
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/survival/bone_axe
@@ -317,12 +329,53 @@
 	requirements = list(
 		/obj/item/grown/log/tree/small = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/fibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
-	starting_atom= /obj/item/natural/fibers
+	starting_atom= /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/axe/boneaxe
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/survival/tbone_axe
+	name = "troll-horn bone axe"
+	requirements = list(
+		/obj/item/weapon/axe/boneaxe = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	attacked_atom = /obj/item/weapon/axe/boneaxe
+	starting_atom= /obj/item/natural/fibers/sinew
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/axe/trollboneaxe
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/bspear
+	name = "2x Bone Javelins"
+	requirements = list(
+		/obj/item/alch/bone = 1,
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/natural/fibers/sinew =1,
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/alch/bone
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/polearm/spear/bone
+	output_amount = 2
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/tbspear
+	name = "2x troll-horn Bone Javelins"
+	requirements = list(
+		/obj/item/weapon/polearm/spear/bone = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew =1,
+	)
+	attacked_atom = /obj/item/weapon/polearm/spear/bone
+	starting_atom = /obj/item/natural/fibers/sinew
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/polearm/spear/trollbone
+	output_amount = 2
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/survival/claybrick

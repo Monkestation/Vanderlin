@@ -1,0 +1,56 @@
+2026-04-01:
+  Archeonan:
+  - balance: changed inquisition disciple staff to steel
+  ChristianDenDanske:
+  - bugfix: Wild drowsbane not having a sprite, and renegade gun breaking when striking
+      and firing decocked.
+  KevinfromHP:
+  - bugfix: Fixed a bug where water could force you to move at mach 5 if your swimming
+      was high enough.
+  - sound: Fixed an issue where footstep sounds wouldnt play over certain spaces,
+      such as rope bridge and pipes.
+  MissyNym:
+  - map: Entirely new map for Malum's Anvil!
+  ModDownloading:
+  - bugfix: Kobolds can now eat all decorated stone walls, not just some of them.
+  Spitegremlin:
+  - rscadd: ' Adds new fiber called sinew fiber. adds bone arrows and javelin and
+      new javelin sprite, adds variant bone weapons made with troll horns.'
+  - rscadd: Moved some spears to the javelins at the ok from rock. Made it so the
+      ranning rack takes sinew and hide now.
+  - rscadd: ' bone broth, some leather armor now needs sinew fiber.  Bow string replaced
+      fiber for bow and long bow.'
+  - balance: Gave bonemask some crit protection. Makes all bone weapons fixable with
+      crafting skill.
+  - image: Arrow and javelin sprite.
+  realforest2001:
+  - admin: Added triumph logs.
+  ta3754859-max:
+  - bugfix: The call ritual now works properly
+  - bugfix: Dark sun mark ritual also works properly
+2026-04-02:
+  KevinfromHP:
+  - bugfix: Fixes a bug where water would not push you down z levels
+2026-04-03:
+  Casperclone1:
+  - rscadd: Luxintenebre as a new brewable wine
+  KevinfromHP:
+  - balance: rebalanced ambush chances and max ambush values
+  Rockslp:
+  - bugfix: Fixes bloodsucker skills being a 1/10th of what they should've gotten.
+  - balance: Buffs the wielded damage on the iron sledgehammer.
+  ta3754859-max:
+  - rscadd: Unholy grasp has an alternative silencing mode when used with tongue in
+      hand
+  - rscadd: Unholy grasp has an alternative mode when used with stomach, hitting your
+      opponent with 2 units of organ poison
+  - rscadd: Changes Revel in Slaughter to be used as an projectile in close combat,
+      that gives your enemy exposed status and blurs his vision
+  - balance: Changes the Graggar spell tree, T0 is now Call to slaughter, T1 Unholy
+      grasp, T2 is Revel in slaughter and T3 bloodrage
+  - balance: Call to slaughter has it's range upped by one tile (to 4)
+  - balance: Unholy grasp now uses guts instead of viscera
+  - balance: Bloodrage now gives full stun immunity
+  - balance: Using bloodrage while cuffed removes them
+  - bugfix: Removed Unholy Grasps' bloodnet giving unremovable leg cuffs, it now purely
+      works on debuffs

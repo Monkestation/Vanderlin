@@ -59,16 +59,15 @@
 
 	// I Hate
 	var/static/list/weapons = list(
-		"Discipline - Unarmed" = null,
+		"Discipline - Unarmed" = /obj/item/clothing/gloves/bandages/pugilist,
 		"Katar" = /obj/item/weapon/katar/psydon,
 		"Knuckledusters" = /obj/item/weapon/knuckles/psydon,
-		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff,
+		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
-	var/obj/item/clothing/gloves/gloves_to_wear = /obj/item/clothing/gloves/bandages/weighted
+	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			gloves_to_wear = /obj/item/clothing/gloves/bandages/pugilist
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
@@ -78,7 +77,7 @@
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/disciple/quarterstaff)
-	spawned.equip_to_slot_or_del(new gloves_to_wear, ITEM_SLOT_GLOVES, TRUE)
+
 
 /datum/outfit/disciple
 	name = "Disciple (Sacrestants)"

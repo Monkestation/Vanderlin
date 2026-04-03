@@ -115,7 +115,7 @@
 	if(density)
 		if(ishuman(AM))
 			var/mob/living/carbon/human/H = AM
-			if(H.dir == get_dir(H,src) && H.m_intent == MOVE_INTENT_RUN && H.body_position != LYING_DOWN)
+			if(H.dir == get_dir(H,src) && (H.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(H, TRAIT_STUMBLE)) && H.body_position != LYING_DOWN)
 				H.Immobilize(10)
 				H.apply_damage(15, BRUTE, "head", H.run_armor_check("head", "blunt", damage = 15))
 				H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
