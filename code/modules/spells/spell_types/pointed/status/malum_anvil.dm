@@ -15,7 +15,7 @@
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 4 SECONDS
-	cooldown_time = 2 MINUTES
+	cooldown_time = 1 MINUTES
 	spell_cost = 60
 
 	status_effect = /datum/status_effect/buff/malum_anvil
