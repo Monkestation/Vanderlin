@@ -1,0 +1,10 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - qol: "TGUI for Priest, Elder, and Matron abilities"
+  - bugfix: "Some THROAT command inputs, with exception to making laws or decrees should now work with symbols such as apostrophes"
+  - bugfix: "Scrying Orb input should now work with symbols such as apostrophes"
+  - bugfix: "Certain Matron ability inputs should now work with symbols such as apostrophes"
+  - bugfix: "Certain Priest ability inputs should now work with symbols such as apostrophes"
+  - bugfix: "Vicious mockery input should now work with symbols such as apostrophes"
+  - refactor: "Priest curse ability now checks for all humans, not all active players"

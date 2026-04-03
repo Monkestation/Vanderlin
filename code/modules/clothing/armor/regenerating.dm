@@ -98,3 +98,6 @@
 	max_integrity = 300
 	repair_time = 20 SECONDS
 
+/obj/item/clothing/armor/regenerating/skin/disciple/sunlord
+	name = "The golden tan"
+	desc = "The sun's powerful light has infused my skin with an armor-like denseness."

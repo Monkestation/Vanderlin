@@ -5,8 +5,6 @@
 	icon_state = "grey"
 	color = "#3d3d3d"
 
-	var/can_cover_up = TRUE
-	var/can_build_on = TRUE
 	dynamic_lighting = 1
 	turf_flags = NONE
 	path_weight = 500
@@ -14,7 +12,6 @@
 	smoothing_groups = SMOOTH_GROUP_FLOOR_OPEN_SPACE
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
-
 
 /turf/open/dungeon_trap/can_traverse_safely(atom/movable/traveler)
 	//cheating this by checking if they can fall onto the same tile

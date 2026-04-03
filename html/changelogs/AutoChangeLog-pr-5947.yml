@@ -1,0 +1,7 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - map: "Mostly removed the Old Church from Vanderlin (i.e., encased in bedrock. It will either be properly removed or reworked into a dungeon later.)"
+  - map: "Added latejoin spawn points to the new Inquisition base in the Anvil."
+  - map: "Patched a hole above the church Z4 allowing people to step into it from above."
+  - map: "Removed a hearth from the Red Manor and gave it an oven to bake bread and stuff in instead."

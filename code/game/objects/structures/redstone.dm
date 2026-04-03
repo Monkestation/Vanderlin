@@ -496,6 +496,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/changing_state = FALSE
 	layer = ABOVE_OPEN_TURF_LAYER
 	resistance_flags = INDESTRUCTIBLE
+	var/vol = 100
 
 /obj/structure/kybraxor/Initialize()
 	. = ..()
@@ -509,13 +510,13 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	changing_state = TRUE
 	openn = !openn
 	if(openn)
-		playsound(src, 'sound/misc/kybraxorop.ogg', 100, FALSE)
+		playsound(src, 'sound/misc/kybraxorop.ogg', vol, FALSE)
 		flick("kybraxoropening",src)
 		sleep(40)
 		icon_state = "kybraxor0"
 		changing_state = FALSE
 	else
-		playsound(src, 'sound/misc/kybraxor.ogg', 100, FALSE)
+		playsound(src, 'sound/misc/kybraxor.ogg', vol, FALSE)
 		flick("kybraxorclosing",src)
 		sleep(40)
 		icon_state = "kybraxor1"

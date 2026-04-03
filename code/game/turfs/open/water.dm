@@ -170,7 +170,7 @@
 			else
 				water_top_overlay.icon_state = "top[water_height]"
 		return
-	icon_state = "rock"
+	icon_state = base_icon_state
 
 	if(water_overlay)
 		water_overlay.color = water_reagent.color
@@ -197,7 +197,7 @@
 	if(length(viable_directions) == 4 || length(viable_directions) == 0)
 		return ..()
 	river_processes = TRUE
-	icon_state = "rock"
+	icon_state = base_icon_state
 	var/picked_dir = pick(viable_directions)
 	dir = REVERSE_DIR(picked_dir)
 	handle_water()
@@ -641,6 +641,7 @@
 	desc = "This dark water smells of dead rats."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("paving", "pavingW")
+	base_icon_state = "paving"
 	water_height = WATER_HEIGHT_ANKLE
 	slowdown = 1
 	wash_in = FALSE
@@ -694,6 +695,7 @@
 	desc = "Weeds and algae cover the surface of the water."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("dirt", "dirtW2")
+	base_icon_state = "dirt"
 	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 20
 	wash_in = FALSE
@@ -786,6 +788,7 @@
 	name = "marshwater"
 	desc = "A heavy layer of weeds and algae cover the surface of the deep water."
 	icon_state = MAP_SWITCH("dirt", "dirtW4")
+	base_icon_state = "dirt"
 	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
 	swim_skill = TRUE
@@ -796,6 +799,7 @@
 	desc = "Crystal clear water, what a blessing!"
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("rock", "rockw2")
+	base_icon_state = "rock"
 	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	water_reagent = /datum/reagent/water
@@ -828,6 +832,7 @@
 	desc = "A pool of sanguine liquid."
 	icon = 'icons/turf/natural/liquids.dmi'
 	icon_state = MAP_SWITCH("rock", "rockb")
+	base_icon_state = "rock"
 	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	cleanliness_factor = -5
@@ -841,6 +846,7 @@
 	name = "water"
 	desc = "Crystal clear water! Flowing swiftly along the river."
 	icon_state = MAP_SWITCH("rock", "rivermove-dir")
+	base_icon_state = "rock"
 	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
 	swim_skill = TRUE
@@ -850,6 +856,7 @@
 	fishing_datum = /datum/fish_source/river
 	var/river_processing
 	var/river_processes = TRUE
+	var/flow_speed = 5 DECISECONDS
 
 /turf/open/water/river/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = ..()
@@ -875,7 +882,7 @@
 		return
 	if(isliving(arrived) || isitem(arrived))
 		if(!river_processing)
-			river_processing = addtimer(CALLBACK(src, PROC_REF(process_river)), 5, TIMER_STOPPABLE)
+			river_processing = addtimer(CALLBACK(src, PROC_REF(process_river)), flow_speed, TIMER_STOPPABLE)
 
 /turf/open/water/river/proc/process_river()
 	river_processing = null
@@ -910,8 +917,13 @@
 /turf/open/water/river/dirt
 	desc = "Murky water, flowing swiftly along the river."
 	icon_state = MAP_SWITCH("dirt", "rivermovealt-dir")
+	base_icon_state = "dirt"
 	water_reagent = /datum/reagent/water/gross
 	cleanliness_factor = -5
+	slowdown = 5
+	//water_level = 2
+	slowdown = 1
+	flow_speed = 1 SECONDS
 
 /turf/open/water/river/dirt/under
 	icon_state = MAP_SWITCH("dirt", "rivermovealtF-dir")
@@ -923,6 +935,7 @@
 	name = "blood"
 	desc = "This river flows a viscous red."
 	icon_state = MAP_SWITCH("rock", "rivermovealt2-dir")
+	base_icon_state = "rock"
 	water_reagent = /datum/reagent/blood
 	cleanliness_factor = -5
 
