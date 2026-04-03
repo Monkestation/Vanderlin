@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/status/malum_anvil
-	name = "Malum's Anvil MAKE NAME"
+	name = "Malum's Anvil"
 	desc = ""
 	button_icon_state = "craft_buff"
 	sound = 'sound/items/bsmithfail.ogg'
@@ -11,26 +11,20 @@
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/malum)
 
-	invocation = "Really Cool Invocation Involving Anvils!"
+	invocation = "I am the ANVIL on which the HAMMER of creation STRIKES!!"
 	invocation_type = INVOCATION_SHOUT
 
 	//CHANGES THIS BEFOER LIVE
 	charge_time = 2 SECONDS
 	cooldown_time = 2 SECONDS
-	spell_cost = 5
+	spell_cost = 85
 
 	status_effect = /datum/status_effect/buff/malum_anvil
 
 /datum/action/cooldown/spell/status/malum_anvil/cast(mob/living/cast_on)
 	. = ..()
-	if(cast_on == owner)
-		cast_on.visible_message( //TODO messages
-			"<font color='yellow'>Vibrant flames swirl around [owner].</font>",
-			"<font color='yellow'>Vibrant flames swirl around you, energizing your mind and muscles.</font>"
-		)
-		return
-	if(isliving(owner))
-		cast_on.visible_message( //TODO messages
-			"<font color='yellow'>Vibrant flames swirl around [cast_on] as a dance of energy flows from [owner].</font>",
-			"<font color='yellow'>A dance of energy flows from [owner], fueling vibrant flames that energize your mind and muscles.</font>"
-		)
+	cast_on.visible_message( //TODO messages
+		"<font color='yellow'>[owner] begins to glow brightly as their body hardens!</font>",
+		"<font color='yellow'>You feel your body harden and emit a glow as energy flows through you, preparing you for your TOIL.</font>"
+	)
+	return
