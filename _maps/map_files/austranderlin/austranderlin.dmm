@@ -2031,7 +2031,7 @@
 /area/outdoors/exposed/under/basement)
 "aXL" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/perfume/rose,
 /obj/item/perfume/random,
@@ -13030,8 +13030,8 @@
 /area/under/cave)
 "gax" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -27823,7 +27823,7 @@
 	pixel_y = -32
 	},
 /obj/structure/activator,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -36453,7 +36453,7 @@
 "qxT" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/sword/rapier/dec,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/clothing/armor/leather/jacket/handjacket,
 /obj/item/clothing/cloak/raincloak/colored/purple,
@@ -37209,7 +37209,7 @@
 /area/indoors/town)
 "qMF" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+/obj/item/gun/ballistic/bow,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
 "qML" = (
@@ -39171,15 +39171,15 @@
 /area/outdoors/mountains)
 "rCo" = (
 /obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -8
 	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
+/obj/item/gun/ballistic/bow{
 	pixel_x = -9;
 	pixel_y = -1
 	},
@@ -48486,7 +48486,7 @@
 /area/indoors/town/merc_guild)
 "vHc" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/ammo_holder/quiver/bolts,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
@@ -53317,7 +53317,7 @@
 /area/indoors/town/keep/magician)
 "xDx" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/reagent_containers/glass/bottle/redwine,
 /turf/open/floor/carpet/royalblack,
