@@ -5261,10 +5261,6 @@
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/blue)
-"cAc" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/naturalstone,
-/area/under/cavelava)
 "cAe" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/simple_animal/hostile/retaliate/shade,
@@ -10428,6 +10424,10 @@
 	},
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
+"eUL" = (
+/obj/machinery/light/fueled/firebowl/firebowlb,
+/turf/open/floor/naturalstone,
+/area/under/cavelava)
 "eUR" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/turned,
@@ -16582,7 +16582,7 @@
 /area/under/cave)
 "hWN" = (
 /obj/structure/fluff/traveltile/exit_inquisition,
-/turf/open/floor/naturalstone,
+/turf/open/floor/grass/cold,
 /area/under/cavelava)
 "hWR" = (
 /obj/structure/fluff/walldeco/customflag,
@@ -131570,7 +131570,7 @@ qFx
 qFx
 qFx
 mpu
-cAc
+qLp
 vKI
 vKI
 vKI
@@ -131972,7 +131972,7 @@ qFx
 qFx
 qFx
 qFx
-qLp
+eUL
 esZ
 vKI
 vKI
