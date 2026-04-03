@@ -333,6 +333,14 @@
 	output = /obj/item/clothing/cloak/graggar
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/savage_cloak
+	name = "savage cloak"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	output = /obj/item/clothing/cloak/savage
+	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/cloakfur_black
 	name = "fur lined black cloak"

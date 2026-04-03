@@ -82,6 +82,24 @@
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/tongue/permanent)
 
+/datum/quirk/vice/mute
+	name = "Mute"
+	desc = "I am entirely unable to speak, and must rely on gestures or writing to communicate. (Being mute is not an excuse to forego roleplay. Use of custom emotes is recommended. This quirk may inhibit spellcasting.)"
+	point_value = 6
+	incompatible_quirks = list(
+		/datum/quirk/vice/tongueless
+	)
+
+/datum/quirk/vice/mute/on_spawn()
+	if(!owner)
+		return
+	ADD_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
+/datum/quirk/vice/mute/on_remove()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
 /datum/quirk/vice/wooden_arm_right
 	name = "Wooden Arm (R)"
 	desc = "I lost my right arm long ago, but the wooden arm doesn't bleed as much."
