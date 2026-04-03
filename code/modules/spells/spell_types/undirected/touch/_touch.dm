@@ -122,7 +122,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	RegisterSignal(attached_hand, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hand_hit))
-	RegisterSignal(attached_hand, COMSIG_PARENT_QDELETING, PROC_REF(on_hand_deleted))
+	RegisterSignal(attached_hand, COMSIG_QDELETING, PROC_REF(on_hand_deleted))
 	RegisterSignal(attached_hand, COMSIG_ITEM_DROPPED, PROC_REF(on_hand_dropped))
 
 /// Unregisters all signal procs for the hand.
@@ -131,7 +131,7 @@
 
 	UnregisterSignal(attached_hand, list(
 		COMSIG_ITEM_AFTERATTACK,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_ITEM_DROPPED,
 	))
 
@@ -249,7 +249,7 @@
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /**
- * Signal proc for [COMSIG_PARENT_QDELETING] from our attached hand.
+ * Signal proc for [COMSIG_QDELETING] from our attached hand.
  *
  * If our hand is deleted for a reason unrelated to our spell,
  * unlink it (clear refs) and revert the cooldown

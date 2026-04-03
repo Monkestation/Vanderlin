@@ -564,6 +564,10 @@
  * WHOS PLAYING TRICKS ON ME
  */
 /datum/component/field_of_vision/proc/object_permanence_update()
+	return
+
+/* add this to blindsight or something
+/datum/component/field_of_vision/proc/object_permanence_update()
 	var/mob/parent_mob = parent
 	if(!parent_mob.client || parent_mob.is_blind())
 		return
@@ -587,6 +591,7 @@
 		object_permanence_images[mob_ref] = ghost
 		//Add image to client, if it needs to be hidden it will be
 		parent_mob.client.images += ghost
+*/
 
 /datum/component/field_of_vision/proc/on_examinate(mob/living/source, atom/target)
 	SIGNAL_HANDLER

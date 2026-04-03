@@ -403,7 +403,7 @@
 		remove_buffer(src.buffer)
 	src.buffer = buffer
 	if(!QDELETED(buffer))
-		RegisterSignal(buffer, COMSIG_PARENT_QDELETING, PROC_REF(remove_buffer))
+		RegisterSignal(buffer, COMSIG_QDELETING, PROC_REF(remove_buffer))
 
 /**
  * Called when the buffer's stored object is deleted
@@ -414,7 +414,7 @@
 /obj/item/contraption/linker/proc/remove_buffer(datum/source)
 	SIGNAL_HANDLER
 	SEND_SIGNAL(src, COMSIG_MULTITOOL_REMOVE_BUFFER, source)
-	UnregisterSignal(buffer, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(buffer, COMSIG_QDELETING)
 	buffer = null
 
 /obj/item/folding_table_stored

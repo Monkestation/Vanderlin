@@ -29,7 +29,7 @@
 			RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_item_dropped))
 			RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_item_dropped))
 
-	RegisterSignal(target_quest, COMSIG_PARENT_QDELETING, PROC_REF(on_quest_deleted))
+	RegisterSignal(target_quest, COMSIG_QDELETING, PROC_REF(on_quest_deleted))
 
 /datum/component/quest_object/Destroy()
 	if(QDELETED(parent))

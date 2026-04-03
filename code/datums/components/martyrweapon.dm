@@ -161,12 +161,12 @@
 		return
 
 	if(bound_user)
-		UnregisterSignal(bound_user, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(bound_user, COMSIG_QDELETING)
 		deactivate(bound_user)
 
 	bound_user = bound
 
-	RegisterSignal(bound_user, COMSIG_PARENT_QDELETING, PROC_REF(bound_deleted))
+	RegisterSignal(bound_user, COMSIG_QDELETING, PROC_REF(bound_deleted))
 
 	if(bound_user)
 		to_chat(bound_user, SPAN_GOD_ASTRATA("The weapon binds to you."))
