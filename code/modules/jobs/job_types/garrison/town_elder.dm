@@ -69,7 +69,7 @@
 		to_chat(src, "<span class='warning'>You must wait [time_left] more seconds before making another announcement.</span>")
 		return
 
-	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Make an announcement to the townsfolk", "Elder Announcement", multiline = TRUE)))
 	if(inputty)
 		if(!istype(get_area(src), /area/indoors/town/tavern))
 			to_chat(src, "<span class='warning'>I need to do this from the tavern.</span>")

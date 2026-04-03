@@ -53,7 +53,7 @@
 /obj/item/clothing/gloves/chain/gronn
 	name = "osslandic chain gloves"
 	desc = "A pair of leather gloves with chain to protects the wrists and back of the hand."
+	icon_state = "gronnchaingloves"
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
-	icon_state = "gronnchaingloves"
-	item_state = "gronnchaingloves"
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
