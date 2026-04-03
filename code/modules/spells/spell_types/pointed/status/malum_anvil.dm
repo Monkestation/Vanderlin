@@ -14,16 +14,15 @@
 	invocation = "I am the ANVIL on which the HAMMER of creation STRIKES!!"
 	invocation_type = INVOCATION_SHOUT
 
-	//CHANGES THIS BEFOER LIVE
-	charge_time = 2 SECONDS
-	cooldown_time = 2 SECONDS
+	charge_time = 4 SECONDS
+	cooldown_time = 2 MINUTES
 	spell_cost = 85
 
 	status_effect = /datum/status_effect/buff/malum_anvil
 
 /datum/action/cooldown/spell/status/malum_anvil/cast(mob/living/cast_on)
 	. = ..()
-	cast_on.visible_message( //TODO messages
+	cast_on.visible_message(
 		"<font color='yellow'>[owner] begins to glow brightly as their body hardens!</font>",
 		"<font color='yellow'>You feel your body harden and emit a glow as energy flows through you, preparing you for your TOIL.</font>"
 	)

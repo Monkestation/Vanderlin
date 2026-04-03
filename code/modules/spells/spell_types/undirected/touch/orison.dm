@@ -340,7 +340,7 @@
 	outline_colour = "#cf991a"
 
 /datum/status_effect/light_buff/malum_anvil/get_examine_text()
-	return "SUBJECTPRONOUN is surrounded by an aura of gentle light." //TODO CHANGE THIS
+	return "SUBJECTPRONOUN is surrounded by an aura of warm light similar to heated metal."
 
 #undef ORISON_FILL
 #undef ORISON_TOUCH

@@ -459,7 +459,7 @@
 /datum/status_effect/buff/malum_anvil
 	id = "anvil_buff_malum"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
-	duration = 13 MINUTES //change to seconds
+	duration = 13 SECONDS
 	effectedstats = list(STAT_CONSTITUTION = 2, STAT_SPEED = -2) // Anvils do not move that fast
 
 /datum/status_effect/buff/malum_anvil/on_apply()
