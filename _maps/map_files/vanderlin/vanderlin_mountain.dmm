@@ -5697,6 +5697,7 @@
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 1
 	},
+/obj/effect/landmark/start/puritanlate,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "ayY" = (
@@ -6312,6 +6313,7 @@
 	},
 /obj/structure/chair/stool/bar,
 /obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/landmark/start/absolverlate,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aBB" = (
@@ -6835,6 +6837,9 @@
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
+	},
+/obj/effect/landmark/start/orthodoxistlate{
+	dir = 4
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
@@ -8817,6 +8822,9 @@
 /obj/structure/chair/stool,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
+	},
+/obj/effect/landmark/start/orthodoxistlate{
+	dir = 8
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
@@ -13297,6 +13305,10 @@
 	dir = 5
 	},
 /area/outdoors/mountains/anvil/peak)
+"nix" = (
+/obj/effect/landmark/start/adeptlate,
+/turf/open/floor/dirt,
+/area/indoors/town/church/inquisition)
 "niI" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -48847,7 +48859,7 @@ adi
 adi
 aZR
 aZR
-aFR
+nix
 aLv
 aFR
 aSm
@@ -49655,7 +49667,7 @@ adi
 adi
 adi
 aZR
-aFR
+nix
 aFR
 aqY
 aKJ
