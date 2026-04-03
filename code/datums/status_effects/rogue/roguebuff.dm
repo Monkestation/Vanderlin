@@ -477,7 +477,7 @@
 /atom/movable/screen/alert/status_effect/buff/malum_anvil
 	name = "Malum's Anvil"
 	desc = span_notice("READY for TOIL!")
-	icon_state = "malum_buff"
+	icon_state = "malum_anvil"
 
 /*-----------------\
 |   Hunt Miracles |

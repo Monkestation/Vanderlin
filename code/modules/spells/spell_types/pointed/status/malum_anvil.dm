@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/status/malum_anvil
 	name = "Malum's Anvil"
 	desc = ""
-	button_icon_state = "craft_buff"
+	button_icon_state = "malum_anvil"
 	sound = 'sound/items/bsmithfail.ogg'
 	charge_sound = 'sound/magic/holycharging.ogg'
 
