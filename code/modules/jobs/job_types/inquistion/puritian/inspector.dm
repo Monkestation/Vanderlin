@@ -62,7 +62,11 @@
 
 /datum/job/advclass/puritan/inspector/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.venatari, 100)
+
+/datum/job/advclass/puritan/inspector/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/gear = list(
 		"Retribution (Rapier)",
@@ -88,7 +92,6 @@
 		if("Remembrance (Long Sword)")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
-
 
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
