@@ -36,12 +36,13 @@
 
 
 /datum/component/augmentable/proc/modify_stability(amount, mob/user)
+	var/old_stability = current_stability
 	current_stability = clamp(current_stability + amount, min_stability, max_stability)
 
 	var/mob/parent_mob = parent
-	if(amount > 0)
+	if(current_stability > old_stability)
 		parent_mob.say("CORE STABILITY INCREASED: [current_stability]%.", forced = TRUE)
-	else
+	else if(current_stability < old_stability)
 		parent_mob.say("CORE STABILITY DECREASED: [current_stability]%.", forced = TRUE)
 
 	update_stability_effects()
@@ -64,29 +65,6 @@
 		return
 	if(current_stability <= 0 && prob(1))
 		catastrophic_failure(H)
-
-/datum/component/augmentable/proc/explode_random_limb(mob/living/carbon/human/H)
-	var/list/valid_limbs = list()
-	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(BP.body_zone != BODY_ZONE_CHEST && BP.body_zone != BODY_ZONE_HEAD)
-			valid_limbs += BP
-
-	if(!valid_limbs.len)
-		return
-
-	var/obj/item/bodypart/chosen = pick(valid_limbs)
-	H.visible_message(
-		span_danger("[H]'s [chosen] suddenly explodes in a shower of sparks and debris!"),
-		span_userdanger("Your [chosen] catastrophically fails and explodes!")
-	)
-
-	playsound(H, 'sound/misc/explode/explosion.ogg', 75, TRUE)
-	var/datum/effect_system/spark_spread/S = new()
-	S.set_up(3, 1, H.loc)
-	S.start()
-
-	chosen.dismember()
-	modify_stability(-10)
 
 /datum/component/augmentable/proc/catastrophic_failure(mob/living/carbon/human/H)
 	var/datum/augment/special/loyalty_binder/shackle = locate() in installed_augments
@@ -176,6 +154,6 @@
 		return
 	var/list/aug = list()
 	for(var/datum/augment/A as anything in installed_augments)
-		aug += " [A.stability_cost < 0 ? "+" : ""][-A.stability_cost]% — [span_bold(A.name)]"
+		aug += " [A.enabled ? "[A.stability_cost < 0 ? "+" : ""][-A.stability_cost]%" : span_bold("FAIL")] — [span_bold(A.name)]"
 	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_WARNING, aug.Join("\n"))
 

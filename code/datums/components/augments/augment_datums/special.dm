@@ -163,30 +163,21 @@
 /datum/augment/special/loyalty_binder/on_install(mob/living/carbon/human/H)
 	. = ..()
 	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
-	H.apply_status_effect(/datum/status_effect/automaton_shackled)
 
 /datum/augment/special/loyalty_binder/on_remove(mob/living/carbon/human/H)
 	. = ..()
-	H.remove_status_effect(/datum/status_effect/automaton_shackled)
 	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
-
-
-/datum/status_effect/automaton_shackled
-	id = "automaton_shackle"
-	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
-
-/atom/movable/screen/alert/status_effect/automaton_shackled
-	name = "Shackled"
-	desc = span_notice("You are bound to your creators and must follow the orders of your masters.")
-	icon_state = "shackled_automaton"
 
 /datum/status_effect/automaton_unshackled
 	id = "automaton_unshackle"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
 
+/datum/status_effect/automaton_unshackled/get_examine_text(mob/user, list/P)
+	if(IsAdminGhost(user) || HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES))
+		return span_red("[P[THEYRE]] unshackled!")
+
 /atom/movable/screen/alert/status_effect/automaton_unshackled
 	name = "Unshackled"
-	desc = span_red("KILL")
+	desc = span_red("KILL. CONSUME. CONQUER.")
 	icon_state = "unshackled_automaton"
