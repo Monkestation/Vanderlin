@@ -44,6 +44,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		/datum/follower_command/guard_position,
 	//	/datum/follower_command/follow,
 	)
+	COOLDOWN_DECLARE(command_cooldown)
 
 /datum/component/command_follower/Initialize(list/command_typepaths = list())
 	if(!ishuman(parent))
@@ -120,7 +121,8 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 	current_command.issuer_name = issuer.real_name
 	current_command.issuer_job = issuer.job_type
 	current_command.component = src
-	current_command.execute(owner, issuer)
+	addtimer(CALLBACK(current_command, TYPE_PROC_REF(/datum/follower_command, execute), owner, issuer), 3 SECONDS)
+	COOLDOWN_START(src, command_cooldown, 10 SECONDS)
 	update_hud()
 	return TRUE
 
@@ -162,6 +164,9 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		to_chat(clicker, span_warning("You lack the authority to issue commands."))
 		return
 
+	if(!COOLDOWN_FINISHED(src, command_cooldown))
+		to_chat(clicker, span_warning("The automaton's buffer isn't ready for a new command yet."))
+		return
 	INVOKE_ASYNC(src, PROC_REF(show_command_menu), clicker)
 
 /datum/component/command_follower/proc/show_command_menu(mob/living/clicker)
@@ -170,8 +175,10 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		choices += initial(cmd_name.command_name)
 		choices[initial(cmd_name.command_name)] = cmd_name
 
-	var/choice = browser_input_list(clicker, "Select a command to issue to [owner]:", "Issue Command", choices)
+	var/choice = tgui_input_list(clicker, "Select a command to issue to [owner]:", "Issue Command", choices)
 	if(!choice)
+		return
+	if(QDELETED(clicker) || QDELETED(owner))
 		return
 
 	var/command_path = choices[choice]
@@ -184,7 +191,10 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 	SEND_SIGNAL(owner, COMSIG_PARENT_COMMAND_RECEIVED, new_cmd, clicker)
 
 /datum/component/command_follower/proc/on_examine(datum/source, mob/user, list/examine_list)
-	examine_list += span_blue("Ctrl-Click on this mob to give it a direct command.")
+	var/examine = span_blue("Ctrl-Click to give it a direct command.")
+	if(!COOLDOWN_FINISHED(src, command_cooldown))
+		examine = span_blue("This mob can be commanded again in [round(COOLDOWN_TIMELEFT(src, command_cooldown)) * 0.1] seconds.")
+	LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES+0.6, examine)
 
 /atom/movable/screen/command_display
 	name = "Command Display"
