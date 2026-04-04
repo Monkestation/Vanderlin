@@ -26,4 +26,3 @@
 		"<font color='yellow'>[owner] begins to glow brightly as their body hardens!</font>",
 		"<font color='yellow'>You feel your body harden and emit a glow as energy flows through you, preparing you for your TOIL.</font>"
 	)
-	return
