@@ -29,10 +29,6 @@
 	plant_def_type = pick(GLOB.seeds_exotic)
 	. = ..()
 
-/obj/item/neuFarm/seed/mixed_seed/spores/Initialize()
-	plant_def_type = pick(GLOB.seeds_spores)
-	. = ..()
-
 /obj/item/neuFarm/seed
 	name = "seeds"
 	icon = 'icons/roguetown/items/produce.dmi'
