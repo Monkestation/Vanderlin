@@ -47,7 +47,7 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The draught reeks of death and malice..."
 
-	/datum/container_craft/cooking/herbal_tea/acid
+/datum/container_craft/cooking/herbal_tea/acid
 	name = "Flamekiss liqeur"
 	created_reagent = /datum/reagent/poison/herbal/acid
 	water_conversion = 1
