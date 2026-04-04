@@ -273,15 +273,9 @@
 	name = "Astuce"
 	description = "A strong neurotoxin that puts the patient into a death-like state."
 	silent_toxin = TRUE
-	creation_purity = REAGENT_STANDARD_PURITY
-	purity = REAGENT_STANDARD_PURITY
 	color = "#669900" // rgb: 102, 153, 0
 	toxpwr = 0.5
 	taste_description = "fleeing life"
-	penetrates_skin = NONE
-	ph = 13
-	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 
 /datum/reagent/toxin/zombiepowder/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
