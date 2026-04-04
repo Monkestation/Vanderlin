@@ -10,9 +10,12 @@
 	name = "exotic seeds"
 	desc = "A handfull of colorfull seeds"
 
-/obj/item/neuFarm/seed/mixed_seed/spores
+/obj/item/neuFarm/seed/spore/mixed
 	name = "mixed spores"
-	desc = "A handfull of mushroom spores"
+
+/obj/item/neuFarm/seed/spore/mixed/Initialize()
+	plant_def_type = pick(GLOB.seeds_spores)
+	. = ..()
 
 /obj/item/neuFarm/seed/mixed_seed/Initialize()
 	plant_def_type = pick(GLOB.seeds_common)
@@ -298,13 +301,6 @@
 	if(plant_def_type)
 		var/datum/plant_def/def = GLOB.plant_defs[plant_def_type]
 		color = def.seed_color // make a new spore color list later
-
-/obj/item/neuFarm/seed/spore/mixed
-	name = "mixed spores"
-
-/obj/item/neuFarm/seed/mixed_seed/Initialize()
-	plant_def_type = pick(GLOB.seeds_spores)
-	. = ..()
 
 /obj/item/neuFarm/seed/spore/capillus
 	plant_def_type = /datum/plant_def/mushroom/capillus
