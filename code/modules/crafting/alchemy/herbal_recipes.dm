@@ -526,7 +526,7 @@
 	color = "#664700" // rgb: 102, 71, 0
 	metabolization_rate = 0.1
 	taste_description = "fleeing life"
-	metabolized_traits = list()
+	
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_add(mob/living/L)
 	. = ..()
