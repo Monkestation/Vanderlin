@@ -477,6 +477,8 @@
 	. = ..()
 	M.add_stress(/datum/stress_event/mystical_boost)
 
+//special poisons
+
 /datum/reagent/poison/herbal/tranq
 	name = "Liquid Tranquility"
 	description = "A deeply relaxing herbal draught that promotes restful sleep and calms the mind."

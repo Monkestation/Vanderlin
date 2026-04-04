@@ -42,10 +42,10 @@
 		/obj/item/alch/herb/valeriana = 1,
 		/obj/item/alch/herb/mentha = 1
 	)
-	output_amount = 20 // Small amount of concentrated poison
+	output_amount = 20 // Small amount of sleepy juice
 	crafting_time = 15 SECONDS
 	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The draught reeks of death and malice..."
+	complete_message = "The brew smells of oblivion and bitterness..."
 
 /datum/container_craft/cooking/herbal_tea/acid
 	name = "Flamekiss liqeur"
@@ -57,8 +57,50 @@
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,
 	)
-	output_amount = 20 // Small amount of concentrated poison
+	output_amount = 20 // LARGE amount of OH GOD IT BURNS
 	crafting_time = 15 SECONDS
 	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The draught reeks of death and malice..."
+	complete_message = "The fumes from the pot smell of fire and hate..."
+
+/datum/container_craft/cooking/herbal_tea/weak_paralytic
+	name = "Paralytic preblend"
+	created_reagent = /datum/reagent/toxin/spidervenom_inert
+	water_conversion = 1
+	requirements = list(
+		/obj/item/reagent_containers/spidervenom_inert = 1,
+	)
+	output_amount = 20 // doesnt actually do anything, needed as a pre requisite
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of potential and hatred"
+
+/datum/container_craft/cooking/herbal_tea/weak_paralytic
+	name = "Impuissance paralytic"
+	created_reagent = /datum/reagent/toxin/spidervenom_paralytic
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of helplessness and suffering..."
+
+/datum/container_craft/cooking/herbal_tea/zomb
+	name = "Astuce paralytic"
+	created_reagent = /datum/reagent/toxin/zombiepowder
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herb/calendula = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of rot and stillness..."
 

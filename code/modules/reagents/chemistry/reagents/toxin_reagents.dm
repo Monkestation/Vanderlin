@@ -267,3 +267,69 @@
 	desc = "A squishy pale gland, filled to the brim with venom of the deadly Aragn spider. Feels cold to the touch."
 	icon = 'icons/obj/webbing.dmi'
 	icon_state = "gland"
+
+
+/datum/reagent/toxin/zombiepowder
+	name = "Astuce"
+	description = "A strong neurotoxin that puts the patient into a death-like state."
+	silent_toxin = TRUE
+	creation_purity = REAGENT_STANDARD_PURITY
+	purity = REAGENT_STANDARD_PURITY
+	color = "#669900" // rgb: 102, 153, 0
+	toxpwr = 0.5
+	taste_description = "fleeing life"
+	penetrates_skin = NONE
+	ph = 13
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
+
+/datum/reagent/toxin/zombiepowder/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
+	. = ..()
+	if(!isliving(exposed_mob) || !(methods & (INGEST|INHALE)))
+		return
+
+	LAZYINITLIST(data)
+	data["method"] |= methods
+
+	//the stomach handles INGEST via on_mob_metabolize() we only deal with INHALE
+	//also means vapour works much faster which is realistic
+	if(methods & INHALE)
+		zombify(exposed_mob)
+/**
+ * Does the fake death & oxy loss on the mob
+ *
+ * Arguments
+ * * mob/living/holder_mob - the mob we are zombifying
+*/
+/datum/reagent/toxin/zombiepowder/proc/zombify(mob/living/holder_mob)
+	PRIVATE_PROC(TRUE)
+
+	holder_mob.adjust_oxy_loss(0.25, FALSE, required_biotype = affected_biotype, required_respiration_type = affected_respiration_type)
+	if((data?["method"] & (INGEST|INHALE)) && holder_mob.stat != DEAD)
+		holder_mob.apply_status_effect(/datum/status_effect/reagent_effect/fakedeath, type)
+
+/datum/reagent/toxin/zombiepowder/on_mob_metabolize(mob/living/holder_mob)
+	. = ..()
+	zombify(holder_mob)
+
+/datum/reagent/toxin/zombiepowder/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/reagent_effect/fakedeath)
+
+/datum/reagent/toxin/zombiepowder/on_mob_life(mob/living/affected_mob, seconds_per_tick, metabolization_ratio)
+	. = ..()
+	if(HAS_TRAIT(affected_mob, TRAIT_FAKEDEATH) && HAS_TRAIT(affected_mob, TRAIT_DEATHCOMA))
+		return
+	var/need_mob_update
+	switch(current_cycle)
+		if(2 to 6)
+			affected_mob.adjust_confusion(0.5 SECONDS * metabolization_ratio * seconds_per_tick)
+			affected_mob.adjust_drowsiness(1 SECONDS * metabolization_ratio * seconds_per_tick)
+			affected_mob.adjust_slurring(3 SECONDS * metabolization_ratio * seconds_per_tick)
+		if(6 to 9)
+			need_mob_update = affected_mob.adjust_stamina_loss(20 * metabolization_ratio * seconds_per_tick, updating_stamina = FALSE)
+		if(10 to INFINITY)
+			if(affected_mob.stat != DEAD)
+				affected_mob.fakedeath(type)
+	if(need_mob_update)
+		return UPDATE_MOB_HEALTH
