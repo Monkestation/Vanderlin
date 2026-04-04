@@ -14,6 +14,7 @@
 	potassium_production = 15
 	seed_identity = "swampweed seeds"
 	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/mad
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/swampweed/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
@@ -35,3 +36,4 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "westleach leaf seeds"
+	rarity = PLANT_RARITY_COMMON

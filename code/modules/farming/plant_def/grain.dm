@@ -3,7 +3,7 @@
 	icon_state = "sugarcane"
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/sugarcane
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_GRAIN
@@ -15,6 +15,7 @@
 	potassium_production = 40
 	seed_identity = "sugarcane seeds"
 	see_through = TRUE
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/sugarcane/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_POOR  // Loves water
@@ -36,6 +37,7 @@
 	phosphorus_production = 0
 	potassium_production = 20
 	seed_identity = "wheat seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/wheat/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD
@@ -57,6 +59,7 @@
 	phosphorus_production = 0
 	potassium_production = 15
 	seed_identity = "oat seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/oat/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
@@ -66,8 +69,8 @@
 	name = "sunreed reeds"
 	icon_state = "maize"
 	produce_type = /obj/item/natural/chaff/sunreed
-	produce_amount_min = 2
-	produce_amount_max = 4
+	produce_amount_min = 0
+	produce_amount_max = 3
 	uproot_loot = list(/obj/item/natural/fibers, /obj/item/natural/fibers)
 	maturation_time = FAST_GROWING
 	produce_time = FAST_PRODUCE_TIME
@@ -79,6 +82,7 @@
 	phosphorus_production = 0
 	potassium_production = 10
 	seed_identity = "sunreed seeds"
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/oat/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD

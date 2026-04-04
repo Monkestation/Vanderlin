@@ -14,6 +14,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "turnip seedlings"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/turnip/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
@@ -23,8 +24,8 @@
 	name = "cocaudo patch"
 	icon_state = "cocaudo"
 	produce_type = /obj/item/natural/cocaudo
-	produce_amount_min = 3
-	produce_amount_max = 5
+	produce_amount_min = 0
+	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	water_drain_rate = 1 / (1 MINUTES)
 	plant_family = FAMILY_ROOT
@@ -35,6 +36,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "cocaudo seeds"
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/turnip/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_POOR //Grows in the tropics.

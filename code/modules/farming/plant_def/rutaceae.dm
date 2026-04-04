@@ -4,7 +4,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/tangerine
 	uproot_loot = list(/obj/item/grown/log/tree/small)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 0
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_RUTACEAE  // Citrus family
@@ -16,6 +16,7 @@
 	potassium_production = 32
 	seed_identity = "tangerine seeds"
 	see_through = TRUE
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/tangerine/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_POOR  // Citrus needs lots of water
@@ -27,7 +28,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/lime
 	uproot_loot = list(/obj/item/grown/log/tree/small)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 0
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_RUTACEAE
@@ -39,6 +40,7 @@
 	potassium_production = 32
 	seed_identity = "lime seeds"
 	see_through = TRUE
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/lime/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_POOR  // Tropical citrus
@@ -50,7 +52,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/lemon
 	uproot_loot = list(/obj/item/grown/log/tree/small)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 0
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_RUTACEAE
@@ -62,6 +64,7 @@
 	potassium_production = 0
 	seed_identity = "lemon seeds"
 	see_through = TRUE
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/lemon/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Citric acid repels some pests

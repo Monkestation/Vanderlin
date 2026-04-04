@@ -54,21 +54,23 @@
 
 /obj/item/reagent_containers/food/snacks/produce/attackby(obj/item/weapon, mob/user, list/modifiers)
 	if(weapon && isturf(loc))
+		var/farming_skill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming)
 		var/turf/location = get_turf(src)
 		if(seed && (user.used_intent.blade_class == BCLASS_BLUNT) && (!user.used_intent.noaa))
 			playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
-			if(prob(5))
-				user.visible_message("<span class='info'>[user] fails to extract the seeds.</span>")
-				qdel(src)
-				return
+			if(!HAS_TRAIT(user, TRAIT_SEEDKNOW) || farming_skill < SKILL_LEVEL_NOVICE)
+				if(prob(100/max((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE)),1))) // luck save roll
+					user.visible_message("<span class='info'>[user] fails to extract the seeds.</span>")
+					qdel(src)
+					return
 			user.visible_message("<span class='info'>[user] extracts the seeds.</span>")
 			new seed(location, source_genetics)
-			if(prob(90))
-				new seed(location, source_genetics)
-			if(prob(23))
-				new seed(location, source_genetics)
-			if(prob(6))
-				new seed(location, source_genetics)
+			for(var/cycles = 20, cycles <=60, cycles +=20)
+				if(farming_skill >= cycles)
+					var/chance = 60
+					if(prob(chance))
+						new seed(location, source_genetics)
+						chance -= 30
 			qdel(src)
 			return
 		else
@@ -91,9 +93,9 @@
 	obtained_from = list(list("Threshing wheat stalks", /obj/item/natural/chaff/wheat))
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat/examine(mob/user)
-	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming)
 	. += ..()
-	if(farminglvl >= 0)
+	if(farminglvl >= SKILL_LEVEL_APPRENTICE)
 		. += "I can easily tell that these are wheat grains."
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat
@@ -110,9 +112,9 @@
 	obtained_from = list(list("Threshing oat stalks", /obj/item/natural/chaff/oat))
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat/examine(mob/user)
-	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming)
 	. += ..()
-	if(farminglvl >= 0)
+	if(farminglvl >= SKILL_LEVEL_APPRENTICE)
 		. += "I can easily tell that these are oat groats."
 
 /obj/item/reagent_containers/food/snacks/produce/grain/sunreed

@@ -16,6 +16,7 @@
 	phosphorus_production = 0
 	potassium_production = 25
 	seed_identity = "berry seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/jacksberry_poison
 	name = "jacksberry bush"
@@ -35,6 +36,7 @@
 	phosphorus_production = 25
 	potassium_production = 0
 	seed_identity = "berry seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/jacksberry_poison/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Poisonous = pest resistant
@@ -45,7 +47,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	uproot_loot = list(/obj/item/grown/log/tree/stick)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	produce_time = SLOW_PRODUCE_TIME
@@ -57,6 +59,7 @@
 	phosphorus_production = 0
 	potassium_production = 25
 	seed_identity = "strawberry seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/strawberry/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD
@@ -67,7 +70,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/blackberry
 	uproot_loot = list(/obj/item/grown/log/tree/stick)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	produce_time = SLOW_PRODUCE_TIME
@@ -79,6 +82,7 @@
 	phosphorus_production = 0
 	potassium_production = 25
 	seed_identity = "blackberry seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/blackberry/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Thorny = pest resistant
@@ -90,7 +94,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/raspberry
 	uproot_loot = list(/obj/item/grown/log/tree/stick)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	produce_time = SLOW_PRODUCE_TIME
@@ -102,6 +106,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "raspberry seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/raspberry/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
@@ -112,7 +117,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/tamto
 	uproot_loot = list(/obj/item/grown/log/tree/stick)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	produce_time = SLOW_PRODUCE_TIME
@@ -124,6 +129,7 @@
 	phosphorus_production = 20
 	potassium_production = 0
 	seed_identity = "tamto seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/tamto/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_POOR //These grow submerged in water, so they drink a LOT.
@@ -147,6 +153,7 @@
 	phosphorus_production = 32
 	potassium_production = 0
 	seed_identity = "plum seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/plum/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD
@@ -169,6 +176,7 @@
 	phosphorus_production = 30
 	potassium_production = 0
 	seed_identity = "apple seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/apple/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD
@@ -181,7 +189,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/fruit/pear
 	uproot_loot = list(/obj/item/grown/log/tree/small)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	produce_time = SLOW_PRODUCE_TIME
 	plant_family = FAMILY_ROSACEAE
@@ -192,6 +200,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "pear seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/pear/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD
@@ -212,6 +221,7 @@
 	phosphorus_production = 20
 	potassium_production = 0
 	seed_identity = "pompkaun seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/pompkaun/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.cold_resistance = TRAIT_GRADE_GOOD

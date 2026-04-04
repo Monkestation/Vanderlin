@@ -13,6 +13,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "potato seedlings"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/potato/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD

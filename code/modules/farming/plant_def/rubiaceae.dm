@@ -5,7 +5,7 @@
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/coffee
 	uproot_loot = list(/obj/item/grown/log/tree/stick)
 	perennial = TRUE
-	produce_amount_min = 2
+	produce_amount_min = 0
 	produce_amount_max = 3
 	maturation_time = FAST_GROWING
 	produce_time = SLOW_PRODUCE_TIME
@@ -20,6 +20,7 @@
 	phosphorus_production = 0
 	potassium_production = 25
 	seed_identity = "coffee seeds"
+	rarity = PLANT_RARITY_EXOTIC
 
 /datum/plant_def/coffee/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD  // Coffee is prized for quality

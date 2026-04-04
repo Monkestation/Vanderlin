@@ -51,3 +51,9 @@
 #define FAMILY_THEACEAE  11    // Tea
 #define FAMILY_FRUIT  12       // Tropical Fruits
 #define FAMILY_DIKARYA 13      // Mushrooms
+
+/// How special is this plant
+#define PLANT_RARITY_COMMON 0	// Food for the masses
+#define PLANT_RARITY_RARE 1	// Luxury food
+#define PLANT_RARITY_EXOTIC 2	// Imported goods
+#define PLANT_RARITY_UNIQUE 3	// One of a kind (unused)

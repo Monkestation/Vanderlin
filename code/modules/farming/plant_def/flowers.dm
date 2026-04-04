@@ -2,7 +2,7 @@
 	name = "sunflowers"
 	icon_state = "sunflower"
 	produce_type = /obj/item/reagent_containers/food/snacks/produce/sunflower
-	produce_amount_min = 2
+	produce_amount_min = 1
 	produce_amount_max = 3
 	maturation_time = VERY_FAST_GROWING
 	water_drain_rate = 1 / (2 MINUTES)
@@ -14,6 +14,7 @@
 	nitrogen_production = 0
 	phosphorus_production = 0
 	seed_identity = "sunflower seeds"
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/sunflower/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.growth_speed = TRAIT_GRADE_GOOD
@@ -34,6 +35,7 @@
 	nitrogen_production = 30
 	phosphorus_production = 0
 	seed_identity = "fyritius seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/fyritiusflower/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD
@@ -57,6 +59,7 @@
 	phosphorus_production = 0
 	seed_identity = "manabloom seeds"
 	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/luminescent
+	rarity = PLANT_RARITY_RARE
 
 /datum/plant_def/manabloom/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD
@@ -78,6 +81,7 @@
 	phosphorus_production = 0
 	seed_identity = "poppy seeds"
 	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/poppy
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/poppy/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.quality_trait = TRAIT_GRADE_GOOD

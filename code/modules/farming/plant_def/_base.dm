@@ -51,6 +51,7 @@
 	var/see_through = FALSE
 	///the honey type we build towards
 	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey_type
+	var/rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/New()
 	. = ..()

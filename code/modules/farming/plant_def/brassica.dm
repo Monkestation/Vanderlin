@@ -13,6 +13,7 @@
 	phosphorus_production = 30
 	potassium_production = 0
 	seed_identity = "cabbage seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/cabbage/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.growth_speed = TRAIT_GRADE_GOOD

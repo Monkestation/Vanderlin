@@ -1,8 +1,33 @@
 /obj/item/neuFarm/seed/mixed_seed
 	name = "mixed seeds"
+	desc = "A handfull of various types of seed"
+
+/obj/item/neuFarm/seed/mixed_seed/rare
+	name = "rare seeds"
+	desc = "A handfull of selected seeds"
+
+/obj/item/neuFarm/seed/mixed_seed/exotic
+	name = "exotic seeds"
+	desc = "A handfull of colorfull seeds"
+
+/obj/item/neuFarm/seed/mixed_seed/spores
+	name = "mixed spores"
+	desc = "A handfull of mushroom spores"
 
 /obj/item/neuFarm/seed/mixed_seed/Initialize()
-	plant_def_type = pick(GLOB.plant_defs)
+	plant_def_type = pick(GLOB.seeds_common)
+	. = ..()
+
+/obj/item/neuFarm/seed/mixed_seed/rare/Initialize()
+	plant_def_type = pick(GLOB.seeds_rare)
+	. = ..()
+
+/obj/item/neuFarm/seed/mixed_seed/exotic/Initialize()
+	plant_def_type = pick(GLOB.seeds_exotic)
+	. = ..()
+
+/obj/item/neuFarm/seed/mixed_seed/spores/Initialize()
+	plant_def_type = pick(GLOB.seeds_spores)
 	. = ..()
 
 /obj/item/neuFarm/seed
@@ -53,13 +78,15 @@
 	. = ..()
 	var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
 	if(plant_def_instance)
-		var/examine_name = "[plant_def_instance.seed_identity]"
-		var/datum/plant_genetics/seed_genetics_instance = seed_genetics
-		if(seed_genetics_instance.seed_identity_modifier)
-			examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
-		. += span_info("I can tell these are [examine_name].")
-		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= 2)
+		if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_APPRENTICE)
+			var/examine_name = "[plant_def_instance.seed_identity]"
+			var/datum/plant_genetics/seed_genetics_instance = seed_genetics
+			if(seed_genetics_instance.seed_identity_modifier)
+				examine_name = "[seed_genetics_instance.seed_identity_modifier] " + examine_name
+			. += span_info("I can tell these are [examine_name].")
 			. += plant_def_instance.get_examine_details()
+		else
+			. += span_info("Some kind of seeds...")
 
 /obj/item/neuFarm/seed/attack_atom(atom/attacked_atom, mob/living/user)
 	if(!isturf(attacked_atom))
@@ -271,6 +298,13 @@
 	if(plant_def_type)
 		var/datum/plant_def/def = GLOB.plant_defs[plant_def_type]
 		color = def.seed_color // make a new spore color list later
+
+/obj/item/neuFarm/seed/spore/mixed
+	name = "mixed spores"
+
+/obj/item/neuFarm/seed/mixed_seed/Initialize()
+	plant_def_type = pick(GLOB.seeds_spores)
+	. = ..()
 
 /obj/item/neuFarm/seed/spore/capillus
 	plant_def_type = /datum/plant_def/mushroom/capillus

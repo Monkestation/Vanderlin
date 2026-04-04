@@ -13,6 +13,7 @@
 	phosphorus_production = 0
 	potassium_production = 0
 	seed_identity = "onion seeds"
+	rarity = PLANT_RARITY_COMMON
 
 /datum/plant_def/onion/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Onions repel pests
