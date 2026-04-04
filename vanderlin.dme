@@ -3766,6 +3766,7 @@
 #include "code\modules\spells\spell_types\undirected\blade_ward.dm"
 #include "code\modules\spells\spell_types\undirected\bless_crops.dm"
 #include "code\modules\spells\spell_types\undirected\bloodrage.dm"
+#include "code\modules\spells\spell_types\undirected\call_for_hag.dm"
 #include "code\modules\spells\spell_types\undirected\call_of_the_moon.dm"
 #include "code\modules\spells\spell_types\undirected\call_to_arms.dm"
 #include "code\modules\spells\spell_types\undirected\call_to_hunt.dm"

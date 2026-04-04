@@ -37,7 +37,7 @@
 			else
 				message = pick_list_replacements("bard.json", "default_mockery")
 	else
-		message = browser_input_text(owner, "How will I mock this fool?", "XYLIX")
+		message = tgui_input_text(owner, "How will I mock this fool?", "XYLIX")
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return . | SPELL_CANCEL_CAST
 
@@ -45,7 +45,7 @@
 		reset_spell_cooldown()
 		return . | SPELL_CANCEL_CAST
 
-	invocation = message
+	invocation = SANITIZE_HEAR_MESSAGE(html_decode(message))
 
 /datum/action/cooldown/spell/vicious_mockery/cast(mob/living/cast_on)
 	. = ..()
