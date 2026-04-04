@@ -40,6 +40,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/job/preceptor
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/adept)
 	category_tags = list(CTAG_PURITAN)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/preceptor
