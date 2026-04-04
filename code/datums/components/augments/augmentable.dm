@@ -55,10 +55,6 @@
 	if(!istype(H))
 		return
 
-	if(H.dna?.species)
-		var/modifier = get_brute_modifier()
-		H.physiology.brute_mod = modifier
-
 /datum/component/augmentable/process()
 	check_catastrophic_failure()
 
