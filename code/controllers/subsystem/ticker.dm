@@ -486,7 +486,6 @@ SUBSYSTEM_DEF(ticker)
 		cb.InvokeAsync()
 
 /datum/controller/subsystem/ticker/proc/create_characters()
-
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		if(!player)
 			stack_trace("There is a null in the player list, report it to the developers!")
