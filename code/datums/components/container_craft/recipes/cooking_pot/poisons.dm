@@ -51,9 +51,11 @@
 	name = "Flamekiss liqeur"
 	created_reagent = /datum/reagent/poison/herbal/acid
 	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/drowsbane = 10,
+	)
 	requirements = list(
-		/obj/item/alch/herb/ = ,
-		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3
+		/obj/item/reagent_containers/food/snacks/produce/fyritius = 3,
 	)
 	output_amount = 20 // Small amount of concentrated poison
 	crafting_time = 15 SECONDS

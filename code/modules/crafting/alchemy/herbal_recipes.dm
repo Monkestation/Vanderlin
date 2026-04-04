@@ -485,14 +485,14 @@
 	metabolization_rate = 0.8
 	overdose_threshold = 10
 	taste_description = "exhaustion and bitter herbs"
-	sleep_power = 120 SECONDS
+	var/sleep_power = 120 SECONDS
 
 /datum/reagent/poison/herbal/tranq/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.add_stress(/datum/stress_event/herbal_calm)
 
 /datum/reagent/poison/herbal/tranq/on_mob_life(mob/living/carbon/M)
-	datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
+	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
 	if(istype(drowsiness))
 		if(drowsiness?.duration < sleep_power)
 			M.adjust_drowsiness_up_to(30 SECONDS, 120 SECONDS)
