@@ -268,15 +268,3 @@
 	icon = 'icons/obj/webbing.dmi'
 	icon_state = "gland"
 
-/datum/reagent/toxin/ghoulpowder
-	name = "Astuce"
-	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
-	color = "#664700" // rgb: 102, 71, 0
-	toxpwr = 0.8
-	taste_description = "death"
-	metabolized_traits = list(TRAIT_FAKEDEATH,TRAIT_DEATHCOMA)
-
-/datum/reagent/toxin/ghoulpowder/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
-	. = ..()
-	if(affected_mob.adjustOxyLoss(1 * REM * seconds_per_tick, FALSE, updating_health = FALSE, required_biotype = affected_biotype, required_respiration_type = affected_respiration_type))
-		return UPDATE_MOB_HEALTH
