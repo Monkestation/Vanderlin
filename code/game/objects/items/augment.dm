@@ -84,7 +84,7 @@
 	var/i = 0
 	for(var/datum/augment/A in augments)
 		i++
-		names["1 - [A.name]"] = A
+		names["[i]. [A.name]"] = A
 	var/chosen = tgui_input_list(user, "Collect which augment?", "Artificer", names, timeout = 20 SECONDS)
 	var/datum/augment/to_remove = names[chosen]
 	if(!chosen || QDELETED(to_remove) || QDELETED(M))
