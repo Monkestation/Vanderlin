@@ -1223,11 +1223,11 @@
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
 		if(input == "FIXATION")
-			var/name = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
+			var/name = html_decode(browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID"))
 			if(!name)
 				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(HL.real_name == name)
+				if(lowertext(HL.real_name) == lowertext(name))
 					fixation = WEAKREF(HL)
 					target = HL
 					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
