@@ -530,7 +530,7 @@
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_add(mob/living/L)
 	. = ..()
-	to_chat(L, span_notice("You feel your spine go cold, as you collapse unconcious!"))
+	to_chat(L, span_notice("You feel your spine go cold, your heart slows down in your chest, as you collapse unconcious!"))
 	ADD_TRAIT(L, TRAIT_FAKEDEATH, "[type]")
 	ADD_TRAIT(L, TRAIT_DEATHCOMA, "[type]")
 
