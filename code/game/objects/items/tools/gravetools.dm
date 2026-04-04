@@ -271,7 +271,7 @@
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
 	force = DAMAGE_SPEAR
-	force_wielded = DAMAGE_HALBERD_WIELD
+	force_wielded = DAMAGE_SPEAR_WIELD
 	wdefense = GREAT_PARRY
 	wbalance = EASY_TO_DODGE
 	wlength = WLENGTH_GREAT
