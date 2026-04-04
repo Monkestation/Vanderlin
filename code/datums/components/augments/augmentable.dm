@@ -1,11 +1,9 @@
 /datum/component/augmentable
 	var/max_stability = 100
 	var/current_stability = 100
-	var/min_stability = 0
+	var/min_stability = -100
 	var/list/installed_augments = list()
 	var/brute_mod_per_stability = 0.005 // 0.5% increased brute damage per point below max
-	var/limb_explosion_threshold = 20
-	var/limb_explosion_chance = 5
 
 /datum/component/augmentable/Initialize()
 	. = ..()
@@ -37,10 +35,6 @@
 	UnregisterSignal(parent, COMSIG_PARENT_EXAMINE)
 
 
-/datum/component/augmentable/proc/get_brute_modifier()
-	var/stability_loss = max_stability - current_stability
-	return 1 + (stability_loss * brute_mod_per_stability)
-
 /datum/component/augmentable/proc/modify_stability(amount, mob/user)
 	current_stability = clamp(current_stability + amount, min_stability, max_stability)
 
@@ -66,20 +60,14 @@
 		H.physiology.brute_mod = modifier
 
 /datum/component/augmentable/process()
-	if(current_stability <= limb_explosion_threshold)
-		check_catastrophic_failure()
+	check_catastrophic_failure()
 
 /datum/component/augmentable/proc/check_catastrophic_failure()
 	var/mob/living/carbon/human/H = parent
 	if(!istype(H))
 		return
-
-	if(current_stability <= 0)
+	if(current_stability <= 0 && prob(1))
 		catastrophic_failure(H)
-		return
-
-	if(prob(limb_explosion_chance))
-		explode_random_limb(H)
 
 /datum/component/augmentable/proc/explode_random_limb(mob/living/carbon/human/H)
 	var/list/valid_limbs = list()
@@ -105,23 +93,22 @@
 	modify_stability(-10)
 
 /datum/component/augmentable/proc/catastrophic_failure(mob/living/carbon/human/H)
+	var/datum/augment/special/loyalty_binder/shackle = locate() in installed_augments
+	if(!shackle?.enabled)
+		return
+	shackle.on_remove(H)
 	H.visible_message(
 		span_danger("[H]'s entire frame shudders violently before exploding into a catastrophic shower of metal and steam!"),
-		span_userdanger("CRITICAL FAILURE - SYSTEM MELTDOWN!")
+		span_userdanger("CRITICAL FAILURE! SHACKLE UNIT NON-RESPONSIVE!")
 	)
+	playsound(H, 'sound/vo/automaton/statuscritical.ogg', 100, TRUE)
 
-	playsound(H, 'sound/misc/explode/explosion.ogg', 100, TRUE)
-
-	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(BP.body_zone != BODY_ZONE_CHEST && BP.body_zone != BODY_ZONE_HEAD)
-			BP.dismember()
+	explosion(get_turf(H), light_impact_range = 2, flame_range = 3, hotspot_range = 1)
 
 	var/datum/effect_system/spark_spread/S = new()
 	S.set_up(5, 1, H.loc)
 	S.start()
 
-	H.adjustFireLoss(50)
-	H.Unconscious(100)
 
 /datum/component/augmentable/proc/get_stability()
 	return current_stability

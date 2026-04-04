@@ -7,6 +7,9 @@
 	stability_cost = 0 // Skills are zero-cost by default
 
 /datum/augment/skill/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	var/datum/attribute_modifier/existing_modifier = H.attributes.has_attribute_modifier(/datum/attribute_modifier/augment)
 	var/list/new_values
 	if(existing_modifier)
@@ -17,6 +20,9 @@
 	H.attributes.add_or_update_variable_attribute_modifier(/datum/attribute_modifier/augment, TRUE, new_values)
 
 /datum/augment/skill/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	var/datum/attribute_modifier/existing_modifier = H.attributes.has_attribute_modifier(/datum/attribute_modifier/augment)
 	var/list/new_values
 	if(existing_modifier)

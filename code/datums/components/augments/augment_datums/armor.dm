@@ -8,8 +8,10 @@
 	var/melee_damage = 0
 	var/shutdown_bonus = 0
 
-
 /datum/augment/armor/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	H.physiology?.armor = H.physiology.armor.attachArmor(getArmor(arglist(armor_values)))
 	H.skin_tone = finish
 	H.update_body()
@@ -21,8 +23,10 @@
 	sd?.shutdown_threshold += shutdown_bonus
 	H.updatehealth()
 
-
 /datum/augment/armor/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	H.physiology?.armor = H.physiology.armor.detachArmor(getArmor(arglist(armor_values)))
 	H.skin_tone = null
 	H.update_body()

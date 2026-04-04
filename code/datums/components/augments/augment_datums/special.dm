@@ -3,12 +3,18 @@
 	color = COLOR_ASSEMBLY_RED
 
 /datum/augment/special/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/action_type in granted_actions)
 		var/datum/action/augment/spell = new action_type
 		spell.Grant(H)
 		spell.augment = src
 
 /datum/augment/special/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/action_type in granted_actions)
 		var/datum/action/A = locate(action_type) in H.actions
 		if(A)
