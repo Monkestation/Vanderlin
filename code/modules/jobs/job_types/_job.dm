@@ -411,6 +411,72 @@
 	if(job_flags & JOB_SHOW_IN_CREDITS)
 		START_PROCESSING(SScrediticons, player_client)
 
+
+/// this "mostly" removes the existence of a job from someone.
+/// the unfortunately reality is that even this is still a flawed removal
+/datum/job/proc/remove_job(mob/living/carbon/human/spawned)
+	if(QDELETED(spawned))
+		return
+	if(!ishuman(spawned))
+		return
+	spawned.honorary = null
+	spawned.honorary_suffix = null
+	if(antag_role && spawned.mind)
+		spawned.mind.remove_antag_datum(antag_role)
+
+	if(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.remove_quirk(flaw)
+
+	if(give_bank_account)
+		SStreasury.remove_bank_account(spawned)
+		if(noble_income)
+			SStreasury.noble_incomes -= spawned
+
+	if(cmode_music)
+		spawned.cmode_music = initial(spawned.cmode_music)
+
+	if(spawned.mind)
+		for(var/X in peopleknowme)
+			for(var/datum/mind/found_mind in get_minds(X))
+				spawned.mind.forget_source_identity(found_mind)
+
+		for(var/X in peopleiknow)
+			for(var/datum/mind/found_mind in get_minds(X))
+				found_mind.forget_source_identity(spawned.mind)
+
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, 1)
+
+	for(var/datum/attribute/skill/skill as anything in skills)
+		var/amount_or_list = skills[skill]
+		if(islist(amount_or_list))
+			spawned.clamped_adjust_skill_level(skill, -amount_or_list[1], amount_or_list[2], TRUE)
+		else
+			spawned.adjust_skillrank(skill, -amount_or_list, TRUE)
+
+	spawned.adjust_spell_points(-spell_points)
+	remove_spells(spawned)
+	spawned.remove_stat_modifier(STATMOD_JOB)
+
+	if(is_foreigner)
+		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
+	if(is_recognized)
+		REMOVE_TRAIT(spawned, TRAIT_RECOGNIZED, TRAIT_GENERIC)
+
+	//for(var/datum/language/to_lose as anything in languages)
+	//	if(spawned.has_language(to_lose)) // this is gonna cause issues in certain cases until languages have sources...
+	//		spawned.remove_language(to_lose)
+
+	REMOVE_TRAITS_IN(spawned, JOB_TRAIT)
+	if(spawned.mind)
+		REMOVE_TRAITS_IN(spawned.mind, JOB_TRAIT)
+	if(magic_user)
+		spawned.mana_pool.set_intrinsic_recharge(spawned.mana_pool.intrinsic_recharge_sources & ~MANA_ALL_LEYLINES)
+
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
 		return

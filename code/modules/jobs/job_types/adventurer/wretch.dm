@@ -9,6 +9,7 @@
 	department_flag = OUTSIDERS
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
+	is_foreigner = TRUE
 
 	/// An associative list of honorary titles to choose from.
 	/// The key is the title, the value indicates whether it is a prefix (0) or a suffix (1)
@@ -16,7 +17,7 @@
 
 /datum/job/advclass/wretch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(length(honoraries) && alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
+	if(length(honoraries) && tgui_alert("Do you wish for a random title? You will not receive one if you click No.", "", "Yes", "No") == "Yes")
 		var/honorary = pick(honoraries)
 		if(honoraries[honorary])
 			spawned.honorary_suffix = honorary
@@ -26,7 +27,7 @@
 
 
 /datum/job/advclass/wretch/proc/wretch_select_bounty(mob/living/carbon/human/H)
-	var/bounty_poster = browser_input_list(H, "Who placed a bounty on you?", "Filthy Criminal", list("The Divine Pantheon", "Kingsfield Expanse"))
+	var/bounty_poster = tgui_input_list(H, "Who placed a bounty on you?", "Filthy Criminal", list("The Divine Pantheon", "Kingsfield Expanse"))
 	if(bounty_poster == "Kingsfield Expanse")
 		GLOB.outlawed_players += H.real_name
 	else
