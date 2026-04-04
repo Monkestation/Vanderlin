@@ -427,12 +427,12 @@
 	for(var/obj/atom as anything in last_sell_modification)
 		if(last_sell_modification[atom] > world.time - 15 MINUTES)
 			continue
-		var/current_price = initial(atom.sellprice) * return_sell_modifier(atom)
+		var/current_price = atom.sellprice * return_sell_modifier(atom)
 		sold_count[atom]--
 		adjust_sell_multiplier(atom, rand(0.05, 0.15), 1)
 		if(return_sell_modifier(atom) == 1)
 			last_sell_modification -= atom
-		var/new_price = initial(atom.sellprice) * return_sell_modifier(atom)
+		var/new_price = atom.sellprice * return_sell_modifier(atom)
 		if(new_price != current_price)
 			changed_sell_prices(atom, current_price, new_price)
 
@@ -452,9 +452,8 @@
 		var/bounty_multiplier = bounty_items[sell_type]
 		return FLOOR(base_price * bounty_multiplier * sell_modifier, 1)
 
-	// Otherwise use normal sellprice with modifiers
-	var/obj/item/temp = sell_type
-	base_price = initial(temp.sellprice)
+	// Otherwise use baseprice + sell modifers
+	base_price = SSmerchant.get_item_base_value(sell_type)
 
 	if(!base_price || base_price <= 0)
 		return 0

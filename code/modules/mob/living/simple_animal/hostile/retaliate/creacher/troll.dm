@@ -165,6 +165,23 @@
 	defdrain = 13
 	range = 3
 
+/mob/living/simple_animal/hostile/retaliate/troll/bog/slaved
+	ai_controller = /datum/ai_controller/summon
+
+/mob/living/simple_animal/hostile/retaliate/troll/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+				/datum/pet_command/idle,
+				/datum/pet_command/free,
+				/datum/pet_command/follow,
+				/datum/pet_command/attack,
+				/datum/pet_command/protect_owner,
+				/datum/pet_command/aggressive,
+				/datum/pet_command/calm,
+			)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
+
 /mob/living/simple_animal/hostile/retaliate/troll/cave
 	name = "cave troll"
 	desc = "Dwarven tales of giants and trolls often contain these creatures, for the fear of mining into one runs deep."
@@ -215,6 +232,19 @@
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	loot = list(/obj/item/weapon/axe/iron/troll)
 	deathmessage = "As the creacher tumbles, it falls upon its axe, snapping the handle."
+
+/mob/living/simple_animal/hostile/retaliate/troll/axe/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+				/datum/pet_command/idle,
+				/datum/pet_command/free,
+				/datum/pet_command/follow,
+				/datum/pet_command/attack,
+				/datum/pet_command/protect_owner,
+				/datum/pet_command/aggressive,
+				/datum/pet_command/calm,
+			)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
 
 /datum/intent/simple/troll_axe
 	name = "troll axe"

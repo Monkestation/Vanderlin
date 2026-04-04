@@ -182,7 +182,7 @@
 	return item_sieve(user, user_turf, list(/obj/item/grown/log/tree, /obj/item/natural/bundle/stick))
 
 
-/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM)
+/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM, forced)
 	if(!insertion_allowed(AM))
 		return
 	var/weight = NONE
@@ -195,7 +195,7 @@
 		if((current_capacity + arbitrary_living_creature_weight) > maximum_capacity)
 			return FALSE
 		weight = arbitrary_living_creature_weight
-	if(isitem(AM) && !user?.transferItemToLoc(AM, src))
+	if(!forced && (isitem(AM) && !user?.transferItemToLoc(AM, src)))
 		return FALSE
 	else
 		AM.forceMove(src)

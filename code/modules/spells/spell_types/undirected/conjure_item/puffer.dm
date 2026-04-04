@@ -4,7 +4,7 @@
 	button_icon_state = "acidsplash"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 2 MINUTES
 	invocation_type = INVOCATION_NONE
 	item_type = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/conjured

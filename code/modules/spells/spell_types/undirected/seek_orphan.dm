@@ -24,7 +24,7 @@
 		to_chat(owner, span_red("There aren't any orphans."))
 		return
 
-	var/mob/orphan = browser_input_list(owner, "Which One?", "Seek Orphan", orphans)
+	var/mob/orphan = tgui_input_list(owner, "Which One?", "Seek Orphan", orphans)
 	if(QDELETED(src) || QDELETED(cast_on) || QDELETED(orphan) || !can_cast_spell())
 		return
 

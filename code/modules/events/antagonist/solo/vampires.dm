@@ -3,18 +3,21 @@
 	tags = list(
 		TAG_COMBAT,
 		TAG_BLOOD,
+		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	weight = 10
+	min_players = LOWPOP_THRESHOLD
+	weight = 12
 
-	denominator = 25
+	denominator = 30
 
-	base_antags = 1
+	base_antags = 2
 	maximum_antags = 4
+	cost = 0.9
 
 	earliest_start = 0 SECONDS
 
@@ -38,7 +41,10 @@
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
 		/datum/job/magician,
-		/datum/job/archivist
+		/datum/job/archivist,
+		/datum/job/tomb_warden,,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event_control/antagonist/solo/vampires/valid_for_map()

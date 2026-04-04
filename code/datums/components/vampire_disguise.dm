@@ -29,10 +29,16 @@
 	RegisterSignal(parent, COMSIG_HUMAN_LIFE, PROC_REF(handle_disguise_upkeep))
 	RegisterSignal(parent, COMSIG_DISGUISE_STATUS, PROC_REF(disguise_status))
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	var/mob/living/carbon/human/H = parent
+	if(H.client)
+		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 
 /datum/component/vampire_disguise/UnregisterFromParent()
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_PARENT_EXAMINE))
+	var/mob/living/carbon/human/H = parent
+	if(H.client)
+		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
@@ -119,14 +125,14 @@
 /datum/component/vampire_disguise/proc/disguise_status()
 	return disguised || !is_human_part_visible(parent, HIDEFACE)
 
-/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list)
+/datum/component/vampire_disguise/proc/on_examine(mob/living/vampire, mob/living/user, list/examine_list, list/P)
 	if(!istype(user) || disguise_status())
 		return
 	if(user == vampire)
 		return
 	if(!user.affects_masquerade(FALSE))
-		examine_list += span_warningbig("[vampire.p_theyre(TRUE)] in [vampire.p_their()] true form.")
+		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_warningbig("[P[THEYRE]] in [P[THEIR]] true form."))
 		return
 	user.add_stress(/datum/stress_event/vampire_seen)
-	examine_list += span_danger("NITEBEAST!")
+	LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("MONSTER!"))
 	vampire.vampire_detected(length(vampire.CheckEyewitness(user)))

@@ -60,6 +60,7 @@
 		to_chat(client, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
 
 	var/area/underworld/underworld = get_area(spawn_loc)
+
 	underworld.Entered(live_spirit, null)
 
 /mob/proc/can_enter_underworld()

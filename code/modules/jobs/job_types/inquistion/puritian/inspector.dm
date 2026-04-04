@@ -1,4 +1,42 @@
+/datum/attribute_holder/sheet/job/inspector
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 4,
+		STAT_SPEED = 4,
+		STAT_INTELLIGENCE = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/misc/lockpicking = 50,
+		/datum/attribute/skill/misc/sneaking = 50,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/combat/firearms = 40,
+	)
 
+/datum/attribute_holder/sheet/job/retribution
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/daybreak
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/sanctum
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/retribution
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(40, 40)
+	)
 /datum/job/advclass/puritan/inspector
 	title = "Inquisitor"
 	tutorial = "The head of the Ordo Venatari, your lessons are of a subtle touch and a light step. A silver dagger in the right place at the right time is all that is needed. Preparation is key, and this is something you impart on your students. Be always ready, be always waiting, and always be vigilant."
@@ -20,26 +58,7 @@
 		TRAIT_RECOGNIZED,
 	)
 
-	jobstats = list(
-		STATKEY_PER = 4,
-		STATKEY_SPD = 4,
-		STATKEY_INT = 2,
-	) //10 Statline
-
-	skills = list(
-		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/crossbows = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/sewing = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/combat/firearms = SKILL_LEVEL_EXPERT,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/inspector
 
 /datum/job/advclass/puritan/inspector/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -56,25 +75,19 @@
 		if("Retribution (Rapier)")
 			spawned.put_in_hands(new /obj/item/weapon/sword/rapier/psy/relic(spawned), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
-			if(spawned.age == AGE_OLD)
-				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
+
 		if("Daybreak (Whip)")
 			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/whipsflails, 4, 4)
-			if(spawned.age == AGE_OLD)
-				spawned.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/daybreak)
+
 		if("Sanctum (Halberd)")
 			spawned.put_in_hands(new /obj/item/weapon/polearm/halberd/psydon/relic(spawned), TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 4, 4, TRUE)
-			if(spawned.age == AGE_OLD)
-				spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-				spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, 1) //So they don't have a 33% chance if being unable to wield their weapon.
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/sanctum)
+
 		if("Remembrance (Long Sword)")
 			spawned.put_in_hands(new /obj/item/weapon/sword/long/psydon/relic(spawned), TRUE)
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
-			if(spawned.age == AGE_OLD)
-				spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
 
 
 /datum/outfit/inquisitor/inspector

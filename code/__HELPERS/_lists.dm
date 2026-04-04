@@ -413,7 +413,7 @@ if (length(L) < I) { \
 			L[item] = 1
 		total += L[item]
 
-	total = rand(1, total)
+	total *= rand()
 	for (item in L)
 		total -=L [item]
 		if (total <= 0)
@@ -429,7 +429,7 @@ if (length(L) < I) { \
 			L[item] = 0
 		total += L[item]
 
-	total = rand(0, total)
+	total *= rand()
 	for (item in L)
 		total -=L [item]
 		if (total <= 0 && L[item])
@@ -725,7 +725,7 @@ if (length(L) < I) { \
 	for(var/key in key_list)
 		. |= key_list[key]
 
-/proc/make_associative(list/flat_list)
+/proc/make_associative(list/flat_list, fill_with=TRUE)
 	. = list()
 	for(var/thing in flat_list)
 		.[thing] = TRUE

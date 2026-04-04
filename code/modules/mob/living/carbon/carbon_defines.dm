@@ -31,6 +31,10 @@
 	var/obj/item/clothing/gloves = null //only used by humans
 	var/obj/item/clothing/shoes = null //only used by humans.
 
+	var/name_override //For temporary visible name changes
+	var/honorary // A title prepended to the beginning of the name
+	var/honorary_suffix // A title appended to the end of the name
+
 
 	var/datum/dna/dna = null//Carbon
 	var/datum/mind/last_mind = null //last mind to control this mob, for blood-based cloning

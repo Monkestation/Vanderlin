@@ -175,6 +175,5 @@
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
-	flags_inv = HIDEFACE
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT

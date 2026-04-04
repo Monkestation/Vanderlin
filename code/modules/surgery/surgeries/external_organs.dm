@@ -11,8 +11,8 @@
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_INCISED
-	skill_min = SKILL_LEVEL_NOVICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_NOVICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 
 /datum/surgery_step/remove_external_organs/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/list/initial_organs = target.getorganszone(target_zone, subzones = FALSE)

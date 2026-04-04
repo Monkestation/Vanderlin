@@ -66,7 +66,7 @@
 /datum/orderless_slapcraft/automaton
 	name = "Automaton Assembly"
 	category = "Automatons"
-	related_skill = /datum/skill/craft/engineering
+	related_skill = /datum/attribute/skill/craft/engineering
 	skill_xp_gained = 50
 	action_time = 2 SECONDS
 	process_sound = 'sound/items/bsmith2.ogg'

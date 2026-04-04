@@ -55,7 +55,7 @@
 
 /datum/mapGeneratorModule/roguetownwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
 	allowed_areas = list(/area/outdoors/basin)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,

@@ -4,7 +4,7 @@
 	icon_state = "steamknight_helm"
 	icon = 'icons/roguetown/clothing/steamknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
-	anvilrepair = /datum/skill/craft/engineering
+	anvilrepair = /datum/attribute/skill/craft/engineering
 	item_weight = 9 * BRONZE_MULTIPLIER
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/bronze

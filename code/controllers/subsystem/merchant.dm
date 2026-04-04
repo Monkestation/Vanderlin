@@ -262,12 +262,15 @@ SUBSYSTEM_DEF(merchant)
 	if(item_type in recipe_base_values)
 		return recipe_base_values[item_type]
 
+	// Check that we have a movable type.
+	if(!ismovable (item_type))
+		return 0
+
 	// Otherwise use sellprice directly
 	var/obj/item/temp = item_type
-	var/sellprice = initial(temp.sellprice)
 
-	if(sellprice && sellprice > 0)
-		return sellprice
+	if(temp.sellprice > 0)
+		return temp.sellprice
 
 	return 0
 
@@ -375,6 +378,8 @@ SUBSYSTEM_DEF(merchant)
 		for(var/obj/structure/industrial_lift/lift in cargo_boat.lift_platforms)
 			lift.held_cargo |= crate_to_use
 	for(var/atom/movable/item as anything in sending_stuff)
+		if(QDELETED(item))
+			continue
 		var/turf/boat_turf = pick(boat_spaces)
 		if(ispath(item))
 			new item(boat_turf)

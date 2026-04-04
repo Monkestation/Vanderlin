@@ -11,7 +11,7 @@
 /datum/status_effect/debuff/addiction
 	id = "addiction"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction
-	effectedstats = list(STATKEY_END = -1, STATKEY_LCK = -1)
+	effectedstats = list(STAT_ENDURANCE = -1, STAT_FORTUNE = -1)
 	duration = 100
 
 //these legit just exist sow we get unique instances
@@ -39,6 +39,10 @@
 	var/last_passed_check = 0
 	var/first_tick = FALSE
 	var/extra_increment_value = 0
+
+/datum/quirk/vice/greedy/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Greed..."))
 
 /datum/quirk/vice/greedy/on_spawn()
 	next_mammon_increase = world.time + rand(15 MINUTES, 25 MINUTES)
@@ -125,7 +129,7 @@
 			break
 
 	if(cnt > 2)
-		H.add_stress(/datum/stress_event/paracrowd)
+		H.add_stress(/datum/stress_event/para/crowd)
 
 	cnt = 0
 	for(var/obj/effect/decal/cleanable/blood/B in view(7, user))
@@ -134,7 +138,11 @@
 			break
 
 	if(cnt > 6)
-		H.add_stress(/datum/stress_event/parablood)
+		H.add_stress(/datum/stress_event/para/blood)
+
+/datum/quirk/vice/paranoid/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Paranoid..."))
 
 /datum/quirk/vice/clingy
 	name = "Clingy"
@@ -144,6 +152,10 @@
 		/datum/quirk/vice/isolationist
 	)
 	var/last_check = 0
+
+/datum/quirk/vice/clingy/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Clingy..."))
 
 /datum/quirk/vice/clingy/on_life(mob/living/user)
 	if(world.time < last_check + 10 SECONDS)
@@ -176,6 +188,10 @@
 		/datum/quirk/vice/clingy
 	)
 	var/last_check = 0
+
+/datum/quirk/vice/isolationist/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Introvert..."))
 
 /datum/quirk/vice/isolationist/on_life(mob/living/user)
 	if(world.time < last_check + 10 SECONDS)
@@ -210,6 +226,10 @@
 	var/do_sleep = FALSE
 	var/pain_pity_charges = 3
 	var/drugged_up = FALSE
+
+/datum/quirk/vice/narcoleptic/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Sleepy..."))
 
 /datum/quirk/vice/narcoleptic/on_spawn()
 	ADD_TRAIT(owner, TRAIT_FASTSLEEP, "[type]")
@@ -273,6 +293,10 @@
 	var/next_paincrave = 0
 	var/last_pain_threshold = NONE
 
+/datum/quirk/vice/masochist/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Masochist!"))
+
 /datum/quirk/vice/masochist/on_spawn()
 	next_paincrave = world.time + rand(15 MINUTES, 25 MINUTES)
 
@@ -290,7 +314,7 @@
 
 	var/current_pain = H.get_complex_pain()
 	var/bloodloss_factor = clamp(1.0 - (H.blood_volume / BLOOD_VOLUME_NORMAL), 0.0, 0.5)
-	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (H.STAEND / 10), 0.5, 1.5))
+	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) / 10), 0.5, 1.5))
 
 	if(last_pain_threshold == NONE)
 		to_chat(H, span_boldwarning("I could really use some pain right now..."))

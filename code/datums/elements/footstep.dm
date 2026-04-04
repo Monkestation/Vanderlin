@@ -56,7 +56,7 @@
 	if(!istype(turf))
 		return
 
-	if(!turf.footstep || source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED))
+	if(source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED))
 		return
 
 	if(source.body_position == LYING_DOWN) //play crawling sound if we're lying
@@ -138,14 +138,17 @@
 	var/feetCover = (H.wear_armor && (H.wear_armor.body_parts_covered & FEET)) || (H.wear_pants && (H.wear_pants.body_parts_covered & FEET))
 	if ((humshoes && !humshoes?.is_barefoot) || feetCover)
 		// we are wearing shoes
-
 		var/shoestep_type = prepared_steps[FOOTSTEP_MOB_SHOE]
+		if(!shoestep_type)
+			return
 		heard_clients = playsound(source, pick(footstep_sounds[shoestep_type][1]),
 			footstep_sounds[shoestep_type][2] * volume * volume_multiplier,
 			TRUE,
 			footstep_sounds[shoestep_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
 	else
 		var/barefoot_type = prepared_steps[FOOTSTEP_MOB_BAREFOOT]
+		if(!barefoot_type)
+			return
 
 		var/list/bare_footstep_sounds = GLOB.barefootstep
 		heard_clients = playsound(source, pick(bare_footstep_sounds[barefoot_type][1]),
@@ -153,6 +156,7 @@
 			TRUE,
 			bare_footstep_sounds[barefoot_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
 
-	if(heard_clients)
+	if(!length(heard_clients))
 		return
-	// 	play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)
+	if(!source.rogue_sneaking && !HAS_TRAIT(source, TRAIT_LIGHT_STEP))
+		play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)

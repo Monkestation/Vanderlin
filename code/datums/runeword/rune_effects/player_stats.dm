@@ -1,6 +1,6 @@
 /datum/rune_effect/player_stat
 	var/increase = 3
-	var/stat_key = STATKEY_CON
+	var/stat_key = STAT_CONSTITUTION
 	var/static/number = 1
 	var/my_number = 1
 
@@ -39,4 +39,4 @@
 
 
 /datum/rune_effect/player_stat/intelligence
-	stat_key = STATKEY_INT
+	stat_key = STAT_INTELLIGENCE

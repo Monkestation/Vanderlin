@@ -74,7 +74,7 @@
 			desc_lines += "- [count] [initial(material_path.name)]"
 
 	if(recipe.skillcraft)
-		var/datum/skill/recipe_skill = recipe.skillcraft
+		var/datum/attribute/skill/recipe_skill = recipe.skillcraft
 		var/difficulty_text = ""
 		if(recipe.craftdiff > 0)
 			difficulty_text = " (Difficulty: [recipe.craftdiff])"
@@ -221,18 +221,18 @@
 
 		if(recipe.skillcraft)
 			if(user.mind)
-				prob2craft += (user.get_skill_level(recipe.skillcraft) * 25)
+				prob2craft += (GET_MOB_SKILL_VALUE_OLD(user, recipe.skillcraft) * 25)
 		else
 			prob2craft = 100
 
 		if(isliving(user))
 			var/mob/living/L = user
-			if(L.STALUC > 10)
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) > 10)
 				prob2fail = 0
-			if(L.STALUC < 10)
-				prob2fail += (10 - L.STALUC)
-			if(L.STAINT > 10)
-				prob2craft += ((10 - L.STAINT) * -1) * 2
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) < 10)
+				prob2fail += (10 - GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE))
+			if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) > 10)
+				prob2craft += ((10 - GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)) * -1) * 2
 
 		if(prob2craft < 1)
 			to_chat(user, "<span class='danger'>I lack the skills for this...</span>")
@@ -278,7 +278,7 @@
 		if(user.mind && recipe.skillcraft)
 			if(isliving(user))
 				var/mob/living/L = user
-				var/amt2raise = L.STAINT * 2
+				var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) * 2
 				if(recipe.craftdiff > 0)
 					amt2raise += (recipe.craftdiff * 10)
 				if(amt2raise > 0)

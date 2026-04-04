@@ -37,8 +37,8 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = CANT_SLEEP_IN
 	smeltresult = null
 	melting_material = /datum/material/iron
@@ -49,7 +49,7 @@
 /obj/item/clothing/face/facemask/goldnosechain
 	name = "gold nosechain"
 	icon_state = "nosechain_g"
-	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -58,15 +58,15 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
 	icon_state = "nosechain_s"
-	desc = "A fashionable nose chain with two rings. Its design originated from the Savannah Elf tribes."
+	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
 	armor = FALSE
@@ -75,8 +75,8 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 
@@ -96,8 +96,8 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 
@@ -113,8 +113,8 @@
 	body_parts_covered = FACE
 	block2add = FALSE
 	slot_flags = ITEM_SLOT_MASK
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 
@@ -137,7 +137,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 70
@@ -157,7 +157,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 95
@@ -177,7 +177,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 35
@@ -197,7 +197,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
@@ -217,7 +217,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 80
@@ -237,7 +237,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 70
@@ -257,7 +257,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 50
@@ -277,7 +277,7 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
+	sewrepair = null
 	anvilrepair = FALSE
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 100
@@ -424,7 +424,8 @@
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
 
 /obj/item/clothing/face/phys
@@ -436,7 +437,8 @@
 	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
 
 /obj/item/clothing/face/courtphysician
@@ -448,7 +450,8 @@
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	gas_transfer_coefficient = 0.3
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
@@ -472,8 +475,8 @@
 	block2add = FOV_BEHIND
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	experimental_onhip = TRUE
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/ingot/copper
 
 //................ Druids Mask ............... //
@@ -502,6 +505,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF
 	armor = list("blunt" = 10, "slash" = 40, "stab" = 40,  "piercing" = 8, "fire" = 0, "acid" = 0)
+	prevent_crits = CUT_AND_MINOR_CRITS
 	prevent_crits = null
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE

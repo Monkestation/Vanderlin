@@ -32,6 +32,19 @@
 	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as it's not disabled."
 	allowed_races = ALL_RACES_LIST
 	total_positions = 0
+	var/list/invalid_ctags = list(
+		CTAG_WRETCH,
+		CTAG_INQUISITION,
+		CTAG_PURITAN,
+		CTAG_ARCHIVIST,
+		CTAG_BANDIT,
+		CTAG_HAND,
+		CTAG_HEIR,
+		CTAG_CONSORT,
+		CTAG_TOWN_ELDER,
+		CTAG_FOLKHEROES,
+		CTAG_ROYALKNIGHT,
+	)
 
 /datum/job/advclass/pick_everything/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -39,13 +52,9 @@
 	for(var/datum/job/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(!length(CHECKS.category_tags))
 			continue
-		if(CTAG_WRETCH in CHECKS.category_tags)
+		if(length(invalid_ctags & CHECKS.category_tags) && !length(parent_job?.advclass_cat_rolls & CHECKS.category_tags))
 			continue
-		if(CTAG_INQUISITION in CHECKS.category_tags)
-			continue
-		if(CTAG_PURITAN in CHECKS.category_tags)
-			continue
-		if(CTAG_ARCHIVIST in CHECKS.category_tags)
+		if(!CHECKS.check_requirements(spawned))
 			continue
 		possible_classes += CHECKS
 

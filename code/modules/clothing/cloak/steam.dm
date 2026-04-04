@@ -28,7 +28,7 @@
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	//Engineering skill check
-	var/skill_level = user.get_skill_level(/datum/skill/craft/engineering)
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	if(skill_level <= 2)
 		to_chat(user, span_warning("I don't know how to operate [src]!"))
 		return

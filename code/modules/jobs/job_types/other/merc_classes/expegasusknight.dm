@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/expegasusknight
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_STRENGTH = 1,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/sneaking = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/riding = 30
+	)
+
 /datum/job/advclass/mercenary/expegasusknight
 	title = "Ex-Pegasus Knight"
 	tutorial = "A former pegasus knight hailing from the southern Elven nation of Lakkari. Once a graceful warrior that ruled the skies, now a traveling sellsword that rules the streets, doing Faience's dirtiest work."
@@ -6,26 +25,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 0 //Disabled because Lakkari isn't lore-approved
 
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_STR = 1,
-		STATKEY_SPD = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/sneaking = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/riding = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/expegasusknight
 
 	traits = list(
 		TRAIT_MEDIUMARMOR

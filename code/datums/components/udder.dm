@@ -105,7 +105,10 @@
 	return COMPONENT_NO_AFTERATTACK
 
 /obj/item/udder/proc/handle_consumption(atom/movable/food, mob/user)
-	COOLDOWN_START(src, require_consume_cooldown, require_consume_timer)
+	var/cooldown_time = require_consume_timer
+	if(HAS_TRAIT(udder_mob, TRAIT_ANIMAL_PRODUCTIVE))
+		cooldown_time *= 0.25
+	COOLDOWN_START(src, require_consume_cooldown, cooldown_time)
 
 /obj/item/udder/Destroy()
 	. = ..()

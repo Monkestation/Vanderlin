@@ -8,7 +8,7 @@
 	sleeved =  'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
 	sleevetype = "steamknight_boots"
 
-	anvilrepair = /datum/skill/craft/engineering
+	anvilrepair = /datum/attribute/skill/craft/engineering
 	slowdown = 1.5
 	item_weight = 6 * BRONZE_MULTIPLIER
 

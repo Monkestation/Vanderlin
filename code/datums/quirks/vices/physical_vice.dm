@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list(STATKEY_PER = -10, STATKEY_SPD = -2, STATKEY_LCK = -5)
+	effectedstats = list(STAT_PERCEPTION = -10, STAT_SPEED = -2, STAT_FORTUNE = -5)
 	duration = 5 SECONDS
 
 /datum/quirk/vice/bad_sight
@@ -13,7 +13,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	owner.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
 
 	if(H.wear_mask)
 		var/type = H.wear_mask.type
@@ -81,6 +81,24 @@
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/tongue/permanent)
+
+/datum/quirk/vice/mute
+	name = "Mute"
+	desc = "I am entirely unable to speak, and must rely on gestures or writing to communicate. (Being mute is not an excuse to forego roleplay. Use of custom emotes is recommended. This quirk may inhibit spellcasting.)"
+	point_value = 6
+	incompatible_quirks = list(
+		/datum/quirk/vice/tongueless
+	)
+
+/datum/quirk/vice/mute/on_spawn()
+	if(!owner)
+		return
+	ADD_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
+/datum/quirk/vice/mute/on_remove()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
 
 /datum/quirk/vice/wooden_arm_right
 	name = "Wooden Arm (R)"
@@ -349,10 +367,14 @@
 			K.forceMove(key_location)
 
 /datum/quirk/vice/nightmares
-	name = "Nightmares"
-	desc = "You suffer from terrible nightmares. You scream in your sleep and take longer to rest."
+	name = "Nitemares"
+	desc = "You suffer from terrible nitemares. You scream in your sleep and take longer to rest."
 	point_value = 1
 	var/next_scream = 0
+
+/datum/quirk/vice/nightmares/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Nitemares..."))
 
 /datum/quirk/vice/nightmares/on_spawn()
 	if(!owner)
@@ -383,6 +405,10 @@
 	var/in_darkness = FALSE
 	var/next_panic = 0
 
+/datum/quirk/vice/fear_darkness/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Scared of the Dark..."))
+
 /datum/quirk/vice/fear_darkness/on_life(mob/living/user)
 	if(!owner)
 		return
@@ -394,7 +420,7 @@
 
 	var/dark = FALSE
 	if(outside)
-		if(light_amount < 0.15 && GLOB.tod == "night")
+		if(light_amount < 0.15 && GLOB.tod == NIGHT)
 			dark = TRUE
 	else if(light_amount < 0.15)
 		dark = TRUE

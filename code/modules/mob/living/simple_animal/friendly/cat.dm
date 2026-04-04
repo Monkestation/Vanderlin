@@ -157,9 +157,6 @@
 	matrix.Scale(0.5, 0.5)
 	transform = matrix
 
-/mob/living/simple_animal/pet/cat/proc/after_birth(mob/living/simple_animal/pet/cat/kitten/baby, mob/living/partner)
-	return
-
 /mob/living/simple_animal/pet/cat/proc/wuv(change, mob/M)
 	if(change)
 		if(change > 0)

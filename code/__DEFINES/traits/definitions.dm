@@ -21,6 +21,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_VENTCRAWLING	"move_ventcrawling"
 #define TRAIT_MOVE_FLOATING	"move_floating"
 #define TRAIT_MOVE_PHASING "move_phasing"
+#define TRAIT_MOVE_SWIMMING	"move_swimming"
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
@@ -70,6 +71,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEATHCOMA	"deathcoma"
 /// ??? should be a signal?
 #define TRAIT_SANGUINE "sanguine"
+#define TRAIT_FRESHSPAWN "freshspawn"
 /// The mob has the stasis effect.
 /// Does nothing on its own, applied via status effect.
 #define TRAIT_STASIS "in_stasis"
@@ -206,6 +208,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOFLASH "noflash"
 /// Immunity to pain
 #define TRAIT_NOPAIN "no_pain"
+/// Stumbling, can smash into things
+#define TRAIT_STUMBLE "stumbling"
 /// Has drunk ambience replacement from spice
 #define TRAIT_DRUQK "druqk"
 /// prevents a human corpse from being used for a corpse multiple times
@@ -226,6 +230,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLUEPRINT_VISION "blueprint_vision"
 /// Used to limit healing to putrid flesh mobs
 #define TRAIT_PUTRID "Putrid"
+#define TRAIT_STUCKITEMS "stuck_items" // Prevents removing items except for hand slots
+#define TRAIT_HIGHVALUE_STUCK "highvalue_stuck" //Prevents removing items except for hand slots if it is consdiered to strong
 /// Confessed under torture, to force sign
 #define TRAIT_HAS_CONFESSED "has_confessed"
 /// Confessed for specific type of antag
@@ -240,14 +246,16 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOCKED_DIAGONAL "blocked_diagonals"
 /// Can swim ignoring water flow and slowdown
 #define TRAIT_GOOD_SWIM "Good Swim"
+/// Indicates the mob is in water without a bottom or underwater
+#define TRAIT_SUBMERGED	"submerged"
+/// Prevents floating in water and swimming up. Will move downward if in open water.
+#define TRAIT_SINKING "sinking"
 /// trait determines if this mob can breed given by /datum/component/breeding
 #define TRAIT_MOB_BREEDER "mob_breeder"
 /// can't be perceived in any way, likely due to invisibility
 #define TRAIT_IMPERCEPTIBLE "imperceptible"
 /// Reduced turf slowdown
 #define TRAIT_LONGSTRIDER "longstrider"
-/// Increased parry ability
-#define TRAIT_GUIDANCE "guidance"
 /// Dendor Path Traits
 #define TRAIT_DENDOR_GROWING "trait_dendor_growing"
 #define TRAIT_DENDOR_STINGING "trait_dendor_stinging"
@@ -300,8 +308,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Incapable of losing control and entering frenzy
 #define TRAIT_IMMUNE_TO_FRENZY "immune_to_frenzy"
 #define TRAIT_COVEN_RESISTANT "coven_resistance"
-/// Target can't be grabbed by tanglers
-#define TRAIT_ENTANGLER_IMMUNE "tangler_immune"
 /// This mob is antimagic, and immune to spells / cannot cast spells
 #define TRAIT_ANTIMAGIC "anti_magic"
 /// This allows a person who has antimagic to cast spells without getting blocked
@@ -328,6 +334,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEADNOSE "Dead Nose"
 #define TRAIT_STINKY "Natural Stench"
 #define TRAIT_ZJUMP "High Jumping"
+#define TRAIT_FLIP_JUMP "Flip Jumping"
 #define TRAIT_JESTERPHOBIA "Jesterphobic"
 #define TRAIT_XENOPHOBIC "Xenophobic"
 #define TRAIT_TOLERANT "Tolerant"
@@ -421,6 +428,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_ZIZOID_HUNTED "zizoidhunted" // Used to signal character has been marked by death by the Zizoid cult
 #define TRAIT_LEPROSY "Leprosy"
+#define TRAIT_BRIAR_HOST "Host of the Black Briar"
 #define TRAIT_NUDE_SLEEPER "Nude Sleeper"
 #define TRAIT_BEAUTIFUL "Beautiful"
 #define TRAIT_UGLY "Ugly"
@@ -449,7 +457,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BETTER_SLEEP "Better Sleep" //Recover more energy (blue bar) when sleeping
 #define TRAIT_EXTEROCEPTION	"Exteroception" //See others' hunger and thirst
 #define TRAIT_TUTELAGE "Tutelage" //Slightly more sleep xp to you and xp to apprentices
-#define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during "day"
+#define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during DAY
 #define TRAIT_BLACKLEG "Blackleg" //Rig coin, dice, cards in your favor
 #define TRAIT_INQUISITION "Member of the Oratorium Throni Vacui"
 #define TRAIT_PURITAN "Puritan"
@@ -463,6 +471,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CRACKHEAD	"Blessing of Baotha" //No overdose on drugs.
 #define TRAIT_CABAL "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
+
+// Other Patron Trait Bonuses
+#define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.
+/// Target can't be grabbed by tanglers
+#define TRAIT_ENTANGLER_IMMUNITY "Vinewalker"
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -489,7 +502,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // JOB RELATED TRAITS
 #define TRAIT_MALUMFIRE "Professional Smith"
 #define TRAIT_CRATEMOVER "Crate Mover"
-#define TRAIT_BURDEN "Burdened" //Gaffer stuff
 #define TRAIT_OLDPARTY "Old Party"
 #define TRAIT_EARGRAB "Ear Grab"
 #define TRAIT_FACELESS "Faceless One"
@@ -531,3 +543,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
+
+// genetic traits
+#define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
+#define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"

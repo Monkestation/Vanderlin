@@ -101,3 +101,13 @@
 
 /// Multiplier applied to reagents in blood when factoring in total volume for "purity"
 #define BLOODLETTING_MULT 5
+
+/// Black Briar
+#define BBC_TIME_MAX (90 MINUTES)
+#define BBC_TIME_MAX_LIMB BBC_TIME_MAX * 0.5
+
+/// Black Briar time ratios
+#define BBC_STAGE_LATE 	0.7
+#define BBC_STAGE_MID	0.3
+#define BBC_STAGE_DETECTABLE	0.15
+#define BBC_SPREAD_RATE BBC_STAGE_DETECTABLE * 0.5

@@ -10,6 +10,8 @@
 	spawn_positions = 2
 	department_flag = NOBLEMEN
 
+	job_bitflag = BITFLAG_GARRISON // counts for antag shit
+
 	outfit = null
 	outfit_female = null
 

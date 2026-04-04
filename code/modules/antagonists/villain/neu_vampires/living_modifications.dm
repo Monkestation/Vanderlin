@@ -355,7 +355,7 @@
 		if(last_frenzy_check + 5 MINUTES < world.time)
 			rollfrenzy()
 
-/mob/living/carbon/human/proc/get_clan_hierarchy_examine(mob/living/carbon/human/examiner)
+/mob/living/proc/get_clan_hierarchy_examine(mob/living/examiner)
 	if(!clan || !clan_position || !examiner.clan)
 		return ""
 

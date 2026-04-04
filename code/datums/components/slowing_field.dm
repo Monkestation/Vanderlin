@@ -49,8 +49,10 @@
 
 /datum/component/slowing_field/proc/on_entered_turf(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	SIGNAL_HANDLER
+
 	if(istype(arrived, /obj/effect/temp_visual/decoy/fading))
 		return
+
 	if(arrived == parent)
 		return
 
@@ -62,14 +64,17 @@
 		arrived_proj.speed *= bullet_speed_multiplier
 	else if(isliving(arrived))
 		var/mob/living/arrived_movable = arrived
-		arrived_movable.add_movespeed_modifier("slowing_field", multiplicative_slowdown = atom_speed_multiplier)
+		arrived_movable.add_movespeed_modifier(MOVESPEED_ID_SLOWING_FIELD, multiplicative_slowdown = atom_speed_multiplier)
 
 /datum/component/slowing_field/proc/on_exited_turf(datum/source, atom/movable/gone, direction)
 	SIGNAL_HANDLER
+
 	if(istype(gone, /obj/effect/temp_visual/decoy/fading))
 		return
+
 	if(gone == parent)
 		return
+
 	gone.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	affected -= gone
 
@@ -77,5 +82,5 @@
 		var/obj/projectile/arrived_proj = gone
 		arrived_proj.speed /= bullet_speed_multiplier
 	else if(isliving(gone))
-		var/mob/living/arrived_movable = gone
-		arrived_movable.remove_movespeed_modifier("slowing_field")
+		var/mob/living/arrived_mob = gone
+		arrived_mob.remove_movespeed_modifier(MOVESPEED_ID_SLOWING_FIELD)

@@ -37,8 +37,6 @@ GLOBAL_LIST_EMPTY(last_words)
 	return
 
 /mob/living/dust(just_ash, drop_items, force)
-	death(TRUE)
-
 	spill_embedded_objects()
 
 	if(drop_items)
@@ -47,9 +45,12 @@ GLOBAL_LIST_EMPTY(last_words)
 	if(buckled)
 		buckled.unbuckle_mob(src, force = TRUE)
 
-	dust_animation()
+	death(TRUE)
 	spawn_dust(just_ash)
-	QDEL_IN(src,5) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
+
+	if(!QDELETED(src))
+		invisibility = INVISIBILITY_MAXIMUM
+		QDEL_IN(src, 0.5 SECONDS) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
 
 /mob/living/proc/dust_animation()
 	return

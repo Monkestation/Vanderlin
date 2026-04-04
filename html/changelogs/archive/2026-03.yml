@@ -1,0 +1,399 @@
+2026-03-01:
+  7erracotta:
+  - rscadd: Added new loot pool items
+  - balance: made greatswords spawn less
+  CheffieGithub:
+  - rscadd: Added special intents to various weapons. They are started with Strong
+      intent right clicks in combat mode and have differing effects.
+  KevinfromHP:
+  - bugfix: Stress value fixes
+  Ordosian:
+  - bugfix: Fixed blood not using the right colors.
+  - image: Changed all wounds and blood to whitescale.
+  TerraGS:
+  - bugfix: Devotion meter should now appear round start
+  snowyseshi:
+  - rscadd: Gave staff of testimonium master rod powers
+  - code_imp: Use correct span for master rod job check
+  tired-wired:
+  - rscadd: Added more species-specific subcultures.
+2026-03-02:
+  Bloo4420:
+  - map: Repathed all broken borderfall objects
+  CheffieGithub:
+  - bugfix: Fixed wurm jarosite dwarves being able to ready merc without any classes.
+  - rscadd: Added TGchat, report issues with styling like it having bad contrast or
+      anything.
+  KevinfromHP:
+  - code_imp: Cleanup on the say proc
+  Snack-Max:
+  - rscadd: give housecarls satchels rather then wooden shields.
+  realforest2001:
+  - bugfix: The game no longer trolls you by saying it paid your carriage toll.
+  - rscadd: Archivist Chronicler now has Expert spellbook instead of Apprentice.
+2026-03-04:
+  Spitegremlin:
+  - rscadd: Added new hair
+  dwasint:
+  - rscadd: human npcs are more dynamic in their interaction
+  - rscadd: threat system to areas to scale ambush intensity, decreases as ambushes
+      are spawned so FG can work
+  - rscadd: questing system
+  realforest2001:
+  - bugfix: Fixes serjeant convert button
+  - bugfix: The readied Monarch can no longer be made an automaton.
+  - bugfix: Fixed Hand, Consort and Heir being able to use the train.
+  - bugfix: Fixed flight never ending if wings are removed.
+  - bugfix: Vampires Antag event won't roll below lowpop threshold.
+2026-03-05:
+  KevinfromHP:
+  - balance: Tweaked maneater resisting to factor in wrestling and strength.
+  - bugfix: Fixes an issue where the Daewalker was spawning outside his prerequisites
+  tired-wired:
+  - rscdel: Removed slur. oops.
+2026-03-06:
+  ApolloVector:
+  - rscadd: Bandage crafting recipe
+  - balance: 'Mercenary cloth in belt -> Proper Bandage\n:cl:\n<!-- Both :cl:''s are
+      required for the changelog to work! You can put your name to the right of the
+      first :cl: if you want to overwrite your GitHub username as author ingame. -->\n<!--
+      You can use multiple of the same prefix (they''re only used for the icon ingame)
+      and delete the unneeded ones. Despite some of the tags, changelogs should generally
+      represent how a player might be affected by the changes rather than a summary
+      of the PR''s contents. -->\n## Pre-Merge Checklist\n<!-- Don''t bother filling
+      these in while creating your Pull Request, just click the checkboxes after the
+      Pull Request is opened and you are redirected to the page. -->\n- [x] You tested
+      this on a local server.\n- [x] This code did not runtime during testing.\n-
+      [x] You documented all of your changes.\n<!-- Neither the compiler nor workflow
+      checks are perfect at detecting runtimes and errors. It is important to test
+      your code/feature/fix locally. -->'
+  Cheffie, FreeStylaLT:
+  - rscadd: Added the bait rmb special.
+  realforest2001:
+  - bugfix: Fixed granted titles breaking if your name isn't correct.
+  - bugfix: Fixed rousman siege spawning invisible rousmen.
+  - bugfix: Fixed recognising folkheroes when their faces are hidden.
+  - bugfix: Fixed the really annoying warning left by an unused variable.
+2026-03-07:
+  Ben10083:
+  - bugfix: Resolved runtime causing Dwarves to be unable to select a culture. Praise
+      Malum!
+  CheffieGithub:
+  - rscadd: Made ghosts much better to play.
+  - rscdel: Disabled LOOC for ghosts, moan to your fellow ghosts in deadchat.
+  - bugfix: Fixed various slowdowns being completely broken.
+  Hembrent:
+  - rscadd: Added Malaguero, proper Tiefling Grenzelhoft merc.
+  - rscdel: Removed Tiefling from normal Grenzelhoft merc.
+  KevinfromHP:
+  - rscadd: Honorary Titles
+  MissyNym:
+  - map: Four stilt houses in the northwest, southwest, south, and eastern sides of
+      the bog, to give the second z-level a little love.
+  - map: A busted-up plank road has been established towards the northern entrance
+      of the bog, leading further inward. This might be extended on future runs depending
+      on how well this works.
+  - map: Two broken highroad structures have been added to the northwestern and eastern
+      sides of the bog. These structures represent the Golden Age of Psydon, and tower
+      high over the rest of the bog even as they've crumbled. Still, the people of
+      the bog have made do with what's there.
+  - map: The witch hut has been reworked to add a full apothecary setup, as well as
+      some extra space and tools for farming. Given the new lab, a second floor has
+      been added. This is part of planning for potential future changes.
+  - map: The graveyard to the south of the witch hut has been reworked into a more
+      orderly setup with a small mausoleum. Maybe there's something more to that building?
+  - map: A little secret's been added to the southern inn, as well as some changes
+      to the inn's furniture.
+  - map: Quest locations have been added to various spots in the bog. Adventure awaits!
+  PotatoTomahto:
+  - balance: grab back to make it harder for wrestlers to manipulate your position
+  - balance: werewolf nerfs
+  Rockslp:
+  - balance: Raised musket integrity
+  realforest2001:
+  - rscadd: Added area names to unique areas that were missing one.
+  - rscadd: Changed all references of Manor to Keep (where talking about the keep).
+2026-03-08:
+  CheffieGithub:
+  - bugfix: Fixed issues with the martyr weapons
+  - balance: No super sword on 30 seconds for martyr weapons because of code restraints
+  HelennaC:
+  - map: modified the farming area of keep
+  - map: modified church's door to locked
+  - map: removed outside candle on the third floor of the inn
+  - map: removed flying roof at the keep
+  TerraGS:
+  - rscadd: Adds pre-loaded toilets
+  - bugfix: reagent container underlays properly update when emptied
+  - map: replaces many toilets with the new subtype
+  - code_imp: Toilets now use a storage component. Removed cistern code.
+  realforest2001:
+  - bugfix: Bog is not mountains now
+  tired-wired:
+  - rscadd: Added more culture selection options for individual species.
+2026-03-09:
+  KevinfromHP:
+  - bugfix: Fixed Headshots / Features not loading in the examine window
+  Mitchs98:
+  - rscadd: Dungeoneer, Noble, Veteran, Matron, Court Physician, Bard, and Fisher
+      can now all be played two(or more) rounds in a row without spending triumphs.
+  Rockslp:
+  - bugfix: Fixes the ravox god boon
+  Teoti4001:
+  - balance: Herbal teas are now slightly worse than basic potions, most herbals have
+      been given REM
+  realforest2001:
+  - rscadd: Added a Foppish/Twinky masculine voicepack.
+  - rscadd: 'Added Dainty and Haughty feminine voicepacks. Note: These voicepacks
+      only change a few sounds each.'
+  - rscadd: All three voicepacks are appropriate for humans and are unlikely to fit
+      other races, save elves.
+  - rscadd: Added a preference to override species voicepack. Above voicepacks won't
+      activate without this preference active.
+  - admin: Added search mob directory verb.
+  - bugfix: Fixed virgin quirk.
+2026-03-10:
+  CheffieGithub:
+  - bugfix: Fixed psydonian language font
+  - bugfix: Fixed self feinting when interacting with inventory
+  Draggeru:
+  - map: adds the bog witch hut
+  realforest2001:
+  - rscadd: Priest verbs are now controlled from an action button.
+  - code_imp: The cancel checks (needing to be in the prayer hall) now happen before
+      you try and do something, not after.
+2026-03-11:
+  ModDownloading:
+  - rscdel: Removed the paper from the Heartfelt Lord migrant and Heartfelt Hand pilgrim
+      saying they could be here for diplomatic or trade purposes. They had to come
+      to grips with their ruined homeland eventually.
+  - bugfix: Changed references to a lot of non-canonical locations and events in item
+      descriptions.
+2026-03-14:
+  KevinfromHP:
+  - bugfix: Fixes the Nefarious Tan Blood
+  ModDownloading:
+  - bugfix: Stopped NPCs from salting in deadchat.
+  - bugfix: Commoner prisoners no longer have noble blood again.
+  realforest2001:
+  - bugfix: Hopefully fixes TMs not being displayed on join.
+  - rscadd: New Psydonic has its own language icon now.
+  tired-wired:
+  - rscadd: Adds a selectable variant of the Great Hunt patron.
+2026-03-15:
+  ApolloVector:
+  - rscadd: Exiled Warrior can choose between arming sword and duel axes
+  CheffieGithub:
+  - code_imp: Adjusted language spans and fonts
+  MissyNym:
+  - map: Added makeshift bridges leading to the eastern side of the Terrorbog
+  - map: Added a quick way up to the Eastern Highroad through the meeting hall in
+      the camp, as well as a special title for getting to it.
+  - map: Added braziers along the plank road to help indicate the northern travel
+      point to give just a bit more hope to poor souls without a light source.
+  - rscadd: Added areas for the eastern highroad, eastern highroad camp, and western
+      highroad.
+  ModDownloading:
+  - bugfix: Wieners can now be used in most Sausage recipes.
+  - bugfix: Custom underwear color can be kept between rounds.
+  Snack-Max:
+  - rscdel: Removes Housecarl
+  realforest2001:
+  - rscadd: Added admin only (has to be activated) Rousman migration wave.
+  - balance: Rous no longer have lux (was meant to do this in a prior PR).
+  - rscadd: Added a larger cloth bag for double resources. Only 3 extra slots.
+  - rscadd: Added a prefab cheese soup bottle.
+  - rscadd: Added a prefab, uncraftable, yellow poncho.
+  - bugfix: Fixed cart spawn not putting contents into the cart.
+  - rscadd: Changed Rousmen default diety to naivety because they're dumb.
+  - map: Split the bog area into distinct zones.
+  - bugfix: Fixed getting patrons you shouldn't.
+  - bugfix: Fixed light step not preventing mantraps breaking legs.
+2026-03-16:
+  Rockslp:
+  - bugfix: Fixes monk stats and skills.
+2026-03-17:
+  Rockslp:
+  - bugfix: Fixes sword grid size
+  lmenvs:
+  - rscadd: Adds new furniture, topiaries, stone railing for mapping
+  realforest2001:
+  - admin: Staff can now lock roles to specific ckeys for event purposes.
+  - rscadd: Adds the Bog Witch and Bog Witch Apprentice jobs.
+  - rscadd: Added Bone Ward mechanic.
+  - rscadd: Adds miracles and boon to Great Hunt (Proven).
+  - rscadd: Adds amulet for the Great Hunt.
+  - rscadd: Adds mechanics for banning a patron from a job.
+2026-03-18:
+  The-Awful:
+  - rscadd: Added lots of new food items, mostly tiefling cuisine
+  - rscadd: Added five new crops
+  - rscadd: Changed around some descriptions to fit lore
+2026-03-19:
+  ApolloVector:
+  - rscadd: 2 new weapon options for gloryhound
+  - balance: changed some of gloryhound's gear
+  KevinfromHP:
+  - image: added unique sprites for the Mystery Box
+  - bugfix: Beard Shaving
+  - rscdel: Removed the unfinished playable Thronleer clan
+  Rockslp:
+  - balance: Rebalances dodging a bit, and parrying by quite a bit.
+  Telvayne:
+  - rscadd: Adds Hospitalier adventurer
+  - rscadd: Adds Chirurgeon adventurer
+  - rscdel: Removed Chirurgeon Migrant Wave
+2026-03-20:
+  SmokingCrackForChrist:
+  - sound: Changed Field/Catacombs area themes. Sorry!
+  Spitegremlin:
+  - balance: rebalanced hunter classes
+  ercrowther:
+  - bugfix: removed a stray pixel on fancy hat when facing left
+  - image: modified fancyhat onmob sprite
+2026-03-21:
+  Archeonan:
+  - rscadd: Bard Adventurer Class
+  - rscdel: Removed Pilgrim Bard
+  - balance: Gave bard light gambeson, short sword, and average sword skills
+  CheffieGithub:
+  - rscadd: Added stealth strikes, doing extra damage to unsuspecting targets (Not
+      in combat mode, need to be sneaking behind them). Sneak attacks do up to ~50%
+      extra damage and have up to ~15% extra chance to knockout based on sneak.
+  - refactor: Big lighting refactor, somethings may be too dim or too bright, report
+      issues.
+  KevinfromHP:
+  - balance: Moved Malaguero Deserter to Adventurer
+  - balance: Moved Species Examine to Face instead of Body
+  Rockslp:
+  - rscadd: Adds the nimrod haircut
+  realforest2001:
+  - code_imp: Chages alert prompts to use TGUI.
+  - code_imp: Removes browser_alert.
+2026-03-22:
+  Casperclone1:
+  - rscadd: Bandits can now become rogue mages!
+  - rscdel: As they are now no longer worshipping Zizo they have lost their ability
+      to speak to the dead
+  KevinfromHP:
+  - sound: New foley for climbing ladders, walking on metal grilles, rope bridges,
+      pipes, and Kybraxor
+  - code_imp: Switches some existing usages of the squeak component to footstep override,
+      as its functionality is closer to intended usage with footsteps
+  - rscadd: Rounds are now 20 minutes longer
+  - balance: Day is 2 hours longer than it used to be
+  - sound: Added 4 new songs, 2 to the title screen and 2 to the credits. Songs by
+      burialgoods.
+  The-Awful:
+  - bugfix: fixed food sprites
+  - bugfix: salad no longer craftable on bowls with liquid in them
+2026-03-23:
+  KevinfromHP:
+  - bugfix: fixed Malaguero + other stress events
+  Rockslp:
+  - rscadd: More kobold slurs
+  Snack-Max:
+  - rscadd: Makes lightweight brigandines craftable
+  - bugfix: adjust fighters and clerics
+  tired-wired:
+  - rscadd: Added various chocolate pastries.
+2026-03-24:
+  Aberra:
+  - bugfix: Round-end species stats grammar for aasimar and rakshari.
+  KevinfromHP:
+  - rscadd: BLACK BRIAR
+  Rockslp:
+  - rscadd: Adds the dwarven tallhat and gives it a craftable recipe.
+2026-03-26:
+  Ben10083:
+  - rscadd: Extremist Psydonites are reminded that Psydon is, in fact, still alive.
+  Blumengama:
+  - rscadd: Added some new hairstyles
+  Kevin:
+  - bugfix: ambush sounds procing in areas where there are no ambushes
+  - code_imp: Standardized defines for DAY, DAWN, NIGHT, and DUSK
+  - balance: Rebalanced ambushes around the map
+  KevinfromHP:
+  - bugfix: fixed offering yourself apprenticeship
+  ModDownloading:
+  - rscadd: Many more produce items are now accepted by the stockpile.
+  - rscadd: Curtains are now craftable from one stick and two cloth.
+  - rscadd: A new Adventurer subclass, the Alchemist
+  Rockslp:
+  - rscadd: Added the training sword, an unbound servant bell and the dwarven tallhat
+      to loadout selection.
+  - balance: Slight rebalance of dodge opposition
+  - bugfix: Fixes aggro grab parry back to the old state. (The removal was never mentioned?
+      Not sure if intended.)
+  walrusfromspace:
+  - bugfix: You can now sell brewer's bottles at the merchant ship again
+2026-03-27:
+  KevinfromHP:
+  - rscadd: Wretches have been moved to antags, hopefully to result in more tame rounds
+  - qol: Wretches/Vlords can switch their preferred character after spawn
+  - balance: Storyteller point values for purchasing antags have been varied.
+  - bugfix: Vampire Outcasts now have a clan.
+  - rscdel: Removed Unknightly Journey for now, as it causes issues with antagonistic
+      balance.
+2026-03-28:
+  Archeonan:
+  - rscadd: Trapper Adventurer Class
+  tired-wired:
+  - bugfix: Tarts now want SLICED fruit.
+2026-03-29:
+  Gatsby229:
+  - bugfix: Hollowkin ritual patron fix.
+  - qol: Made hollowkin ritual use all fur types.
+  ModDownloading:
+  - bugfix: Bog Witch and Bog Witch Apprentice latejoin at the bog entrance instead
+      of the train.
+  - code_imp: Inquisitor classes now have custom latejoin spawn options, currently
+      unused.
+  Severus840:
+  - map: Re-worked White Palace Pass map. See PR Changelog for Details.
+  - map: Added bog witch hut and Ledger quest markers on Rosewood Bog map.
+  - map: Added Inquisition Latejoin spawnpoints infront of Grenzel fort on WPP.
+  Telvayne:
+  - rscadd: Added 4 new kinds of orphans, while preserving the original experience.
+  - balance: Reduce orphans absurd +8 stats on orphanage remodel to +3.
+  realforest2001:
+  - rscadd: Added wooden orphan toys.
+  tired-wired:
+  - rscadd: Added new beard sprites by Blumengama.
+2026-03-31:
+  Archeonan:
+  - rscadd: add special attacks to polehammers, woodcutters axe, swords, and shortswords
+  Ben10083:
+  - rscadd: 'Adds new vice: Inquisitorial Suspicion. The Inquisitor who is able to
+      verify your faith gets rewarded a TRIUMPH.'
+  - rscadd: New verb for Inquisition roles to get list of Suspected heretics
+  - rscadd: Tennite holy weapons, such as the GMT's, now respects excommunication,
+      and will not be equippable.
+  Draggeru:
+  - rscadd: Adds the Wintermare Accent
+  KevinfromHP:
+  - bugfix: Fixes Wretches losing all languages on creation. Will have unintended
+      side effects but they're better than this
+  - bugfix: Unarmed Discipline not receiving their benefits.
+  Singul0, Rockslp, Beelzebug:
+  - rscadd: Adds gear for an upcoming people of the north.
+  TerraGS:
+  - rscadd: Multi Z water and vertical swimming, sinking and drowning. Swimming grants
+      experience in its respective skill.
+  - map: Adds map tiles for multi z water
+  - code_imp: Any water type mapped above an underwater tile of the same reagent will
+      become floorless deep water unless skip_bottom_check is set to TRUE. Examining
+      water will tell its relative depth.
+  WlarusFromDaSpace:
+  - bugfix: Fixed the inquisition's black mirror
+  dwasint:
+  - refactor: FoV now supports a permance layer for things like footsteps, or alerts
+  - rscadd: concussions and stumble effects, concussions apply a motion filter to
+      your view, stumbling makes you stumble into stuff
+  - balance: fishing xp calculations have been redone to reward it based on fish difficulty
+      more then time since before it was ideal to prolong a fish encounter for maximum
+      xp
+  realforest2001:
+  - rscadd: Added Gronnic to Bog Witch and Apprentice.
+  tired-wired:
+  - rscadd: Added subcultures for half orcs, tieflings, and another halfling option.

@@ -1,3 +1,39 @@
+/datum/attribute_holder/sheet/job/inhumencleric
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
+/datum/attribute_holder/sheet/job/inhumencleric/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
 /datum/job/advclass/combat/inhumencleric
 	title = "Inhumen Cleric"
 	tutorial = "Clerics are wandering warriors of the Inhumen Gods, zealots whom demonstrated martial talent.\
@@ -10,25 +46,8 @@
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/inhumencleric
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/inhumencleric/old
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -36,35 +55,32 @@
 
 /datum/job/advclass/combat/inhumencleric/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-
 	if(spawned.patron)
 		switch(spawned.patron.type)
 			if(/datum/patron/inhumen/graggar)
-				spawned.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
 				ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			if(/datum/patron/inhumen/graggar_zizo)
-				spawned.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-				spawned.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 20)
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			if(/datum/patron/inhumen/zizo)
-				spawned.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-				spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 30)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/shields, 10)
 				spawned.grant_language(/datum/language/undead)
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			if(/datum/patron/inhumen/matthios)
-				spawned.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-				spawned.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-				spawned.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-				spawned.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 30)
+				spawned.adjust_skill_level(/datum/attribute/skill/misc/stealing, 20)
+				spawned.adjust_skill_level(/datum/attribute/skill/misc/sneaking, 20)
+				spawned.adjust_skill_level(/datum/attribute/skill/misc/lockpicking, 10)
 				spawned.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 			if(/datum/patron/inhumen/baotha)
-				spawned.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-				spawned.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-				spawned.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
-				spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 30)
+				spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 20)
+				spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+				spawned.adjust_skill_level(/datum/attribute/skill/craft/crafting, 10)
 				spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 			else
 				spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'

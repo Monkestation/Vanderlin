@@ -34,7 +34,7 @@
 	credits = null
 
 /atom/movable/screen/credit
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	alpha = 0
 	screen_loc = "1,1"
 	plane = SPLASHSCREEN_PLANE

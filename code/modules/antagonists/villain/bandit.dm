@@ -51,7 +51,7 @@
 	H.set_patron(/datum/patron/inhumen/matthios)
 
 /datum/antagonist/bandit/greet()
-	to_chat(owner.current, span_alertsyndie("I am a BANDIT!"))
+	to_chat(owner.current, span_alert("I am a BANDIT!"))
 	to_chat(owner.current, span_info("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn."))
 	owner.announce_objectives()
 	..()

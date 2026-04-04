@@ -4,7 +4,7 @@
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'
 
-	associated_skill = /datum/skill/magic/arcane
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	invocation = "Innkalle trefork"
 	invocation_type = INVOCATION_SHOUT
@@ -25,7 +25,7 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/abyssor)
 
 	invocation = "Let Abyssor's wrath be known!"
@@ -71,7 +71,7 @@
 	throw_speed = 3
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 5, "embedded_ignore_throwspeed_threshold" = 1)
 
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FIRE_PROOF

@@ -28,7 +28,7 @@
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -39,7 +39,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -51,7 +51,7 @@
 			new /obj/effect/decal/cleanable/debris/wood(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return TRUE
@@ -64,7 +64,7 @@
 		return
 
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber_alt)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -75,7 +75,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -85,7 +85,7 @@
 				new lumber_alt(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

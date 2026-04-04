@@ -277,6 +277,23 @@
 /proc/capitalize(t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
 
+
+//Like capitalize, but you capitalize EVERYTHING
+/proc/capitalize_like_old_man(t)
+	. = t
+	if(!length(t))
+		return
+	var/list/binguslist = splittext(t, " ")
+	for(var/bingus in binguslist)
+		binguslist -= bingus
+		if(!length(bingus))
+			binguslist += bingus
+			continue
+		var/chonker = uppertext(bingus[1])
+		bingus = chonker + copytext(bingus, 1 + length(chonker))
+		binguslist += bingus
+	return jointext(binguslist, " ")
+
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
 	var/new_message = message

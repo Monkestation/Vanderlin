@@ -442,4 +442,4 @@
 	. = ..()
 	if(atom_integrity < 100)
 		damaged = TRUE
-		opacity = FALSE
+		set_opacity(FALSE)

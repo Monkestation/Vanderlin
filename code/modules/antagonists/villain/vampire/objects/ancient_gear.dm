@@ -12,7 +12,7 @@
 	flags_inv = HIDEEARS|HIDEHAIR
 
 	detail_tag = "_detail"
-	detail_color = COLOR_MAROON
+	detail_color = CLOTHING_BLOOD_RED
 
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	block2add = FOV_BEHIND

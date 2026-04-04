@@ -37,7 +37,7 @@ CONFIGURATION:
 	var/list/minimum_skill_list = list()
 	///our growth factor for each skill
 	var/list/growth_factor_list = list(
-		STATKEY_LCK = 0.99
+		STAT_FORTUNE = 0.99
 	)
 
 	///this is at bare minimum spawn at base
@@ -61,7 +61,7 @@ CONFIGURATION:
 	var/mob_stat_level = 0
 
 	if(istype(looter))
-		mob_stat_level = looter.get_stat_level(STATKEY_LCK)
+		mob_stat_level = looter.get_stat_level(STAT_FORTUNE)
 
 	// Apply delve level scaling to spawn counts
 	var/delve_multiplier = delve_level >= min_delve_level ? (delve_quantity_scaling ** (delve_level - 1)) : 1
@@ -106,7 +106,7 @@ CONFIGURATION:
 			var/list/stat_list = return_stat_weight(thing, looter)
 			var/list/scaled_stat_list = apply_delve_and_rarity_scaling(stat_list, delve_level, item_rarity)
 			weighted_list |= scaled_stat_list
-		if(ispath(thing, /datum/skill))
+		if(ispath(thing, /datum/attribute/skill))
 			var/list/skill_list = return_skill_weight(thing, looter)
 			var/list/scaled_skill_list = apply_delve_and_rarity_scaling(skill_list, delve_level, item_rarity)
 			weighted_list |= scaled_skill_list
@@ -170,11 +170,11 @@ CONFIGURATION:
 
 	return weighted_list
 
-/datum/loot_table/proc/return_skill_weight(datum/skill/skill_type, mob/living/looter)
+/datum/loot_table/proc/return_skill_weight(datum/attribute/skill/skill_type, mob/living/looter)
 	var/list/weighted_list = list()
 	var/list/pre_weight_list = loot_table[skill_type]
 
-	var/mob_skill_level = looter.get_skill_level(skill_type)
+	var/mob_skill_level = GET_MOB_SKILL_VALUE_OLD(looter, skill_type)
 	var/minimum_skill_level = 0
 	var/growth_factor = 1.05
 	if(skill_type in growth_factor_list)
@@ -201,7 +201,7 @@ CONFIGURATION:
 	if(!istype(user))
 		return
 
-	var/luck_stat = user.get_stat_level(STATKEY_LCK)
+	var/luck_stat = user.get_stat_level(STAT_FORTUNE)
 
 	// Calculate spawn quantities with delve scaling
 	var/delve_multiplier = delve_level >= min_delve_level ? (delve_quantity_scaling ** (delve_level - 1)) : 1
@@ -402,7 +402,7 @@ CONFIGURATION:
 
 	// Run simulation
 	for(var/i = 1 to times)
-		var/luck_stat = user.get_stat_level(STATKEY_LCK)
+		var/luck_stat = user.get_stat_level(STAT_FORTUNE)
 		var/delve_multiplier = delve_level >= min_delve_level ? (delve_quantity_scaling ** (delve_level - 1)) : 1
 		var/adjusted_min = base_min + round(luck_stat * scaling_factor, 1)
 		var/adjusted_max = base_max + round(luck_stat * scaling_factor, 1)
@@ -565,10 +565,10 @@ CONFIGURATION:
 				return
 
 			// Remove old debug modifier and set new one using proper modifier system
-			var/current_luck = user.get_stat_level(STATKEY_LCK)
+			var/current_luck = user.get_stat_level(STAT_FORTUNE)
 			user.remove_stat_modifier("loot_debug")
 			if(new_luck != current_luck)
-				user.set_stat_modifier("loot_debug", STATKEY_LCK, new_luck - current_luck)
+				user.set_stat_modifier("loot_debug", STAT_FORTUNE, new_luck - current_luck)
 
 			// Refresh the debug window with new parameters
 			debug_loot_table.debug_loot_table(user, delve_level, item_rarity)
@@ -579,14 +579,14 @@ CONFIGURATION:
 			if(!istype(user))
 				return
 
-			var/current_luck = user.get_stat_level(STATKEY_LCK)
+			var/current_luck = user.get_stat_level(STAT_FORTUNE)
 			var/new_luck = input(user, "Enter new luck level (0-100):", "Set Luck Level", current_luck) as num|null
 			if(!isnull(new_luck))
 				new_luck = max(0, min(100, new_luck))
 				// Remove old debug modifier and set new one
 				user.remove_stat_modifier("loot_debug")
 				if(new_luck != current_luck)
-					user.set_stat_modifier("loot_debug", STATKEY_LCK, new_luck - current_luck)
+					user.set_stat_modifier("loot_debug", STAT_FORTUNE, new_luck - current_luck)
 				debug_loot_table.debug_loot_table(user)
 
 		else if(href_list["action"] == "reset_debug")

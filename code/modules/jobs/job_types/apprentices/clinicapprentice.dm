@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/clinicapprentice/child
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/alchemy = 20,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
+/datum/attribute_holder/sheet/job/clinicapprentice
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/alchemy = 20,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
 /datum/job/clinicapprentice
 	title = "Clinic Apprentice"
 	tutorial = "You've been taken under as an apprentice by the Feldsher and Apothecary. \
@@ -24,28 +50,18 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	outfit = /datum/outfit/clinicapprentice
 	job_bitflag = BITFLAG_CONSTRUCTOR
+	can_be_apprentice = TRUE
 
 	exp_types_granted = list(EXP_TYPE_MEDICAL)
-
-	jobstats = list(
-		STATKEY_INT = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/farming = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/alchemy = 2,
-		/datum/skill/misc/medicine = 2
-	)
 
 	traits = list(
 		TRAIT_FORAGER,
 		TRAIT_EMPATH
 	)
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/clinicapprentice
+	attribute_sheet_child = /datum/attribute_holder/sheet/job/clinicapprentice/child
+
 
 	outfit = /datum/outfit/clinicapprentice
 
@@ -53,14 +69,8 @@
 
 	exp_types_granted  = list(EXP_TYPE_MEDICAL)
 
-	skill_multipliers = list(/datum/skill/misc/medicine = 1.25, /datum/skill/craft/alchemy = 1.25)
+	skill_multipliers = list(/datum/attribute/skill/misc/medicine = 1.25, /datum/attribute/skill/craft/alchemy = 1.25)
 
-/datum/job/clinicapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age != AGE_CHILD)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 
 /datum/outfit/clinicapprentice
 	name = "Clinic Apprentice"

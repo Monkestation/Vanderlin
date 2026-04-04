@@ -10,6 +10,14 @@
 /mob/living/carbon/human/species/aasimar
 	race = /datum/species/aasimar
 
+/datum/attribute_holder/sheet/job/species/aasimar
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -1,
+	)
+
 /datum/species/aasimar
 	name = "Aasimar"
 	id = SPEC_ID_AASIMAR
@@ -80,8 +88,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_INT = 2, STATKEY_CON = 1, STATKEY_END = 1, STATKEY_SPD = -1, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_INT = 2, STATKEY_CON = 1, STATKEY_END = 1, STATKEY_SPD = -1, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/aasimar
 
 	enflamed_icon = "widefire"
 

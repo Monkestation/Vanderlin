@@ -9,24 +9,36 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/grass)
+
 	ambush_mobs = list(
-				/mob/living/simple_animal/hostile/retaliate/wolf = 60,
-				/mob/living/simple_animal/hostile/retaliate/troll/axe = 10,
-				/mob/living/carbon/human/species/goblin/npc/ambush = 45,
-				/mob/living/simple_animal/hostile/retaliate/mole = 25)
+		new /datum/ambush_config/wolf_pack = 15,
+		new /datum/ambush_config/lone_troll = 10,
+		new /datum/ambush_config/troll_and_wolves = 8,
+		new /datum/ambush_config/goblin_ambush_party = 15,
+		new /datum/ambush_config/goblin_raid_party = 8,
+		new /datum/ambush_config/raccoon_swarm = 20,
+		new /datum/ambush_config/mole_pack = 15,
+		new /datum/ambush_config/deserter_patrol = 12,
+		new /datum/ambush_config/highwayman_duo = 10,
+		new /datum/ambush_config/highwayman_gang = 6,
+		new /datum/ambush_config/mixed_wildlife = 15,
+	)
 	first_time_text = "THE MURDERWOOD"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 	converted_type = /area/indoors/shelter/woods
+	threat_region = THREAT_REGION_WOODS
 
 /area/outdoors/wilderness/outpost
 	icon_state = "outpost"
+	threat_region = THREAT_REGION_NORTHERN_GROVE
 
 /area/outdoors/wilderness/outpost/vanderlin
 	name = "abandoned outpost"
 	first_time_text = "Thatchwood Outpost"
+	threat_region = THREAT_REGION_NORTHERN_GROVE
 
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"

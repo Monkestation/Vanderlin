@@ -18,6 +18,7 @@
 	)
 	increase_votepwr = FALSE
 	var/datum/team/prebels/rev_team
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/prebel/head))
@@ -51,7 +52,7 @@
 	if(.)
 		if(new_owner.assigned_role.title in GLOB.noble_positions)
 			return FALSE
-		if(new_owner.assigned_role.title in GLOB.garrison_positions)
+		if(new_owner.assigned_role.title in GLOB.garrison_no_rebellion)
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
@@ -107,7 +108,7 @@
 		return FALSE
 	if(candidate.mind.assigned_role.title in GLOB.noble_positions)
 		return FALSE
-	if(candidate.mind.assigned_role.title in GLOB.garrison_positions)
+	if(candidate.mind.assigned_role.title in GLOB.garrison_no_rebellion)
 		return FALSE
 	var/mob/living/carbon/C = candidate //Check to see if the potential rev is implanted
 	if(!istype(C)) //Can't convert simple animals
@@ -150,7 +151,7 @@
 	var/datum/team/prebels/RT = mind_datum.rev_team
 	var/shittime = world.time
 	playsound_local(src, 'sound/misc/rebel.ogg', 100, FALSE)
-	var/garbaggio = alert(src, "[offer]","Rebellion", "Yes", "No")
+	var/garbaggio = tgui_alert(src, "[offer]","Rebellion", list("Yes", "No"))
 	if(world.time > shittime + 35 SECONDS)
 		to_chat(src,"<span class='danger'>Too late.</span>")
 		return

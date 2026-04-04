@@ -21,6 +21,8 @@
 	grid_height = 64
 	grid_width = 32
 
+	flags_ai_inventory = AI_ITEM_GRENADE
+
 	///do we explode on impact?
 	var/impact_explode = FALSE
 	///odds we fail on ignite

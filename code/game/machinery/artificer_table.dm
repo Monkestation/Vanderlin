@@ -49,7 +49,7 @@
 			to_chat(user, span_warning("[buckled] cannot be augmented!"))
 			return
 
-		var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+		var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 		if(skill < kit.contained_augment.engineering_difficulty)
 			to_chat(user, span_warning("You lack the engineering skill to install this augment!"))
 			return
@@ -62,7 +62,7 @@
 		var/result = SEND_SIGNAL(buckled, COMSIG_AUGMENT_INSTALL, kit.contained_augment, user)
 		if(result & COMPONENT_AUGMENT_SUCCESS)
 			qdel(kit)
-			user.mind?.add_sleep_experience(/datum/skill/craft/engineering, user.STAINT * 2)
+			user.mind?.add_sleep_experience(/datum/attribute/skill/craft/engineering, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 			playsound(src, 'sound/effects/sparks1.ogg', 75, TRUE)
 		return
 
@@ -71,14 +71,14 @@
 			. = ..()
 			return
 
-		var/skill = user.get_skill_level(/datum/skill/craft/engineering)
+		var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 		var/repair_amount = 5 + (skill * 3)
 
 		to_chat(user, span_notice("You begin repairing [buckled]..."))
 
 		if(do_after(user, 5 SECONDS, target = buckled))
 			SEND_SIGNAL(buckled, COMSIG_AUGMENT_REPAIR, repair_amount, user)
-			user.mind?.add_sleep_experience(/datum/skill/craft/engineering, user.STAINT)
+			user.mind?.add_sleep_experience(/datum/attribute/skill/craft/engineering, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))
 		return
 
 /obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
@@ -105,14 +105,14 @@
 			var/turf/front = get_turf(src)
 			S.set_up(1, 1, front)
 			S.start()
-		var/skill = user.get_skill_level(material.artrecipe.appro_skill)
+		var/skill = GET_MOB_SKILL_VALUE_OLD(user, material.artrecipe.appro_skill)
 		if(material.artrecipe.progress == 100)
 			for(var/i in 1 to material.artrecipe.created_amount)
 				var/atom/new_atom = new material.artrecipe.created_item(get_turf(src))
 				new_atom.update_integrity(new_atom.max_integrity, update_atom = FALSE)
 			var/obj/item/created_item_instance = material.artrecipe.created_item
 			user.visible_message(span_info("[user] creates \a [created_item_instance.name]."))
-			user.mind.add_sleep_experience(material.artrecipe.appro_skill, (user.STAINT * (material.artrecipe.craftdiff + 1)/2) * user.get_learning_boon(material.artrecipe.appro_skill))
+			user.mind.add_sleep_experience(material.artrecipe.appro_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * (material.artrecipe.craftdiff + 1)/2) * user.get_learning_boon(material.artrecipe.appro_skill))
 			qdel(material)
 			material = null
 			update_appearance(UPDATE_OVERLAYS)
@@ -121,7 +121,7 @@
 			if(prob(max(0, 25 - user.goodluck(2) - (skill * 2))))
 				to_chat(user, span_warning("Ah yes, my incompetence bears fruit."))
 				playsound(src,'sound/combat/hits/onwood/destroyfurniture.ogg', 100, FALSE)
-				user.mind.add_sleep_experience(material.artrecipe.appro_skill, (user.STAINT * material.artrecipe.craftdiff * 0.25))
+				user.mind.add_sleep_experience(material.artrecipe.appro_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * material.artrecipe.craftdiff * 0.25))
 				qdel(material)
 				material = null
 				return

@@ -9,7 +9,7 @@
 	sleeved =  'icons/roguetown/clothing/onmob/steamknight_onmob.dmi'
 	sleevetype = "steamknight_chest"
 
-	anvilrepair = /datum/skill/craft/engineering
+	anvilrepair = /datum/attribute/skill/craft/engineering
 
 	clothing_flags = CANT_SLEEP_IN
 

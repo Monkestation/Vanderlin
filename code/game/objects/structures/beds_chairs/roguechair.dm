@@ -52,6 +52,9 @@
 /obj/structure/chair/bench/church/smallbench
 	icon_state = "benchsmall"
 
+/obj/structure/chair/bench/church/smallbench/stone
+	icon_state = "stonebench"
+
 /obj/structure/chair/bench/coucha
 	icon_state = "redcouch"
 
@@ -76,9 +79,19 @@
 /obj/structure/chair/bench/couchablack/r
 	icon_state = "couchablackaright"
 
+/obj/structure/chair/bench/chaiselounge
+	icon_state = "chaiseloungeleft"
+
+/obj/structure/chair/bench/chaiselounge/r
+	icon_state = "chaiseloungeright"
+
 /obj/structure/chair/bench/throne
 	name = "small throne"
 	icon_state = "thronechair"
+
+/obj/structure/chair/bench/throne/stone
+	name = "stone throne"
+	icon_state = "stonethrone"
 
 // dirtier sofa
 /obj/structure/chair/bench/coucha/redleft
@@ -153,6 +166,13 @@
 	icon_state = "chair_red"
 	origin_type = /obj/structure/chair/wood/alt/chair_noble/red
 
+/obj/structure/chair/wood/alt/chair_noble/fancyplush
+	icon_state = "chair_fancyplush"
+	item_chair = /obj/item/chair/chair_nobles/fancyplush
+
+/obj/item/chair/chair_nobles/fancyplush
+	icon_state = "chair_fancyplush"
+	origin_type = /obj/structure/chair/wood/alt/chair_noble/fancyplush
 
 /obj/structure/chair/wood/alt/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
@@ -243,6 +263,16 @@
 			if("wielded")
 				return list("shrink" = 0.8,"sx" = -20,"sy" = -6,"nx" = 0,"ny" = -7,"wx" = -18,"wy" = -5,"ex" = -4,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -42,"sturn" = 33,"wturn" = 33,"eturn" = -21,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 
+
+/obj/item/chair/stool/bar/fancyplush
+	name = "fancy stool"
+	icon_state = "fancystoolover"
+	origin_type = /obj/structure/chair/stool/bar/fancyplush
+
+/obj/structure/chair/stool/bar/fancyplush
+	icon_state = "fancystool"
+	item_chair = /obj/item/chair/stool/bar/fancyplush
+
 // ------------ GOOD BEDS ----------------------
 /obj/structure/bed/inn
 	icon_state = "inn_bed"
@@ -319,6 +349,12 @@
 	name = "uncomfortable bed"
 	desc = "Slightly better than a patch of grass."
 	icon_state = "shitbed"
+	sleepy = 0.75
+
+/obj/structure/bed/stone
+	name = "stone bed"
+	desc = "A bed made of stone.  The face of it is intricately carved, but it doesn't look very comfortable."
+	icon_state = "stonebed"
 	sleepy = 0.75
 
 /obj/structure/bed/sleepingbag
@@ -414,3 +450,5 @@
 /obj/item/chair/stool/crafted
 	origin_type = /obj/structure/chair/stool/crafted
 	sellprice = 6
+
+

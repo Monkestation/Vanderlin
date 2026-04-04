@@ -4,12 +4,13 @@
 	rage_change_on_life = -0.5
 	/// Base rage gain multiplier from stress
 	var/stress_rage_multiplier = 0.1
-	rage_thresholds = list(
+	rage_thresholds = alist(
 		WW_RAGE_LOW = list(),
 		WW_RAGE_MEDIUM = list(),
 		WW_RAGE_HIGH = list(),
 		WW_RAGE_CRITICAL = list(),
 	)
+	rage_color = "#F0C420"
 
 /datum/rage/werewolf/grant_to_holder(mob/living/carbon/human/holder)
 	. = ..()
@@ -49,9 +50,9 @@
 /datum/rage/werewolf/upon_tier_change(new_rage_tier, old_rage_tier)
 	. = ..()
 	var/active_mob = secondary_mob || holder_mob
-	if(new_rage_tier && rage_thresholds["[new_rage_tier]"])
+	if(new_rage_tier && rage_thresholds[new_rage_tier])
 		// Notify player of tier change
-		switch("[new_rage_tier]")
+		switch(new_rage_tier)
 			if(WW_RAGE_LOW)
 				to_chat(active_mob, span_notice("My rage begins to build..."))
 			if(WW_RAGE_MEDIUM)
@@ -67,7 +68,10 @@
 /datum/rage/werewolf/proc/on_stress_added(datum/source, datum/stress_event/new_stress)
 	SIGNAL_HANDLER
 
-	if(!holder_mob || holder_mob.stat >= DEAD)
+	if(holder_mob.stat >= UNCONSCIOUS)
+		return
+
+	if(holder_mob.has_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform))
 		return
 
 	var/new_stress_amount = new_stress.get_stress(holder_mob)
@@ -82,6 +86,12 @@
 
 /datum/rage/werewolf/proc/upon_attacked(mob/living/attacked, mob/living/carbon/human/attacker, damage)
 	SIGNAL_HANDLER
+
+	if(holder_mob.stat >= UNCONSCIOUS)
+		return
+
+	if(holder_mob.has_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform))
+		return
 
 	var/base_rage = max(1, damage / 2)
 	var/rage_multiplier = max(stress_rage_multiplier, 1)

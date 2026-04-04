@@ -1,0 +1,5 @@
+author: "Singul0"
+delete-after: True
+changes:
+  - rscadd: "Makes blacksteel helmet's visor functional"
+  - qol: "Gives all visored helmets a notice that you can adjust the visor."

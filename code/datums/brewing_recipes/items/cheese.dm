@@ -8,6 +8,7 @@
 	helpful_hints = span_info("Needs to be strained with a cloth to finish.")
 	start_verb = "fermenting"
 	brewed_item_count = 2
+	brewing_skill = /datum/attribute/skill/craft/cooking/cheesemaking
 	pre_reqs = /datum/reagent/consumable/milk/salted
 
 /datum/brewing_recipe/cheese/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
@@ -22,7 +23,7 @@
 	user.visible_message("<span class='info'>[user] strains out fresh cheese...</span>")
 	playsound(src, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
 
-	if(!do_after(user, (90 - (user.get_skill_level(/datum/skill/craft/cooking, TRUE) * 15)), source))
+	if(!do_after(user, (90 - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) * 15)), source))
 		return FALSE
 
 	return TRUE

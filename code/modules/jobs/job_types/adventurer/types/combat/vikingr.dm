@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/vikingr
+	attribute_variance = list(
+		/datum/attribute/skill/combat/knives = list(10, 20)
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+	)
+
 /datum/job/advclass/combat/vikingr
 	title = "Elven Vikingr"
 	tutorial = "A wandering searaider, a Vikingr from the Elven Clans of Kaledon. You are locked in a fierce rivalry with your other kin, those sea elves, those coastal elves, you hate whichever one is not you. You will see them die. Abyssor's bounty is what you seek, and you shall have it."
@@ -6,19 +22,10 @@
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	total_positions = 0 //Kaledon isn't in
+	attribute_sheet = /datum/attribute_holder/sheet/job/vikingr
 
 /datum/outfit/adventurer/vikingr/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.adjust_skillrank(/datum/skill/combat/knives, pick(1,1,2), TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 
 	if(H.gender == FEMALE)
 		H.underwear = "Femleotard"

@@ -2,7 +2,7 @@
 	name = "steel half-plate"
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
@@ -84,7 +84,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 12 * BLACKSTEEL_MULTIPLIER
 	sellprice = VALUE_SILVER_ITEM * 6
@@ -187,7 +187,7 @@
 /datum/status_effect/buff/psydonic_endurance
 	id = "psydonic_endurance"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
-	effectedstats = list(STATKEY_CON = 1,STATKEY_END = 1)
+	effectedstats = list(STAT_CONSTITUTION = 1,STAT_ENDURANCE = 1)
 
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
@@ -202,3 +202,18 @@
 	name = "Psydonic Endurance"
 	desc = "I am protected by blessed Psydonian plate armor."
 	icon_state = "buff"
+
+//.............. Gronn Armor Sets .................//
+/obj/item/clothing/armor/plate/iron/gronn
+	name = "osslandic iron plate"
+	desc = "A suit of solid iron plate, adorned with tassets and roundels. \
+			The hunters of Ossland rarely used plate, but when they did, \
+			it is said that they were after the most dangerous of prey: their enemies."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnplate"
+	item_state = "gronnplate"
+	boobed = FALSE
+	body_parts_covered = COVERAGE_ALL_BUT_LEGS
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
+	smeltresult = /obj/item/ingot/iron

@@ -546,7 +546,7 @@
  * Scan turf we're now in for anything we can/should hit. This is useful for hitting non dense objects the user
  * directly clicks on, as well as for PHASING projectiles to be able to hit things at all as they don't ever Bump().
  */
-/obj/projectile/Moved(atom/OldLoc, Dir)
+/obj/projectile/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!fired)
 		return
@@ -812,7 +812,7 @@
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && modifiers)
+	if(isliving(source) && length(modifiers))
 		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]

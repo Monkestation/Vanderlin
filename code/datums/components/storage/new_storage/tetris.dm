@@ -248,7 +248,8 @@
 	if(locked)
 		if(user && !stop_messages)
 			host.add_fingerprint(user)
-			to_chat(user, span_warning("[host] seems to be locked!"))
+			if(!silent)
+				to_chat(user, span_warning("[host] seems to be locked!"))
 		return FALSE
 	if(worn_check && !worn_check(parent, user))
 		host.add_fingerprint(user)

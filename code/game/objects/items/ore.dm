@@ -124,6 +124,59 @@
 	smeltresult = /obj/item/ore/coal/charcoal
 	sellprice = 1
 
+
+/* ............Black Briar............ */
+
+/obj/item/ore/cursedrosa
+	name = "black briar rosa"
+	icon_state = "cursedrosa"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_MOUTH
+	item_weight = 4 * BLACKSTEEL_MULTIPLIER
+	sellprice = 10
+
+	embedding = list(
+		"embed_chance" = 0.1, // we're cheating to make these embed items so if this happens tough luck
+		"embedded_pain_multiplier" = 0,
+		"embedded_fall_chance" = 0,
+	)
+
+	max_integrity = 500
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+
+/obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot & ITEM_SLOT_MOUTH)
+		icon_state = "cursedrosa_mouth"
+	else
+		icon_state = "cursedrosa"
+
+/obj/item/ore/cursedrosa/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
+
+/obj/item/ore/cursedrosa/examine(mob/user)
+	. = ..()
+	if(GetComponent(/datum/component/cursedrosa))
+		. += span_briar("Its thorns have not been trimmed.")
+	else
+		. += span_info("Its thorns have been trimmed.")
+
+/obj/item/ore/cursedrosa/attackby(obj/item/I, mob/living/user, params)
+	if(!user.cmode && istype(I, /obj/item/weapon/knife))
+		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+		if(QDELETED(thorns))
+			to_chat(user, span_warning("It has no thorns to trim."))
+		else
+			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
+			qdel(thorns)
+		return
+	return ..()
+
+/* ............Ingots............ */
 /obj/item/ingot
 	name = "ingot"
 	desc = "A parent bar of metal. If you see this, report it on github."

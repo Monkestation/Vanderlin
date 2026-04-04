@@ -52,6 +52,12 @@
 	item_state = "rosa_crown"
 	icon_state = "rosa_crown"
 
+/obj/item/clothing/head/flowercrown/cursedrosa
+	name = "black briar rosa crown"
+	desc = ""
+	item_state = "cursedrosa_crown"
+	icon_state = "cursedrosa_crown"
+
 /obj/item/clothing/head/flowercrown/salvia
 	name = "salvia crown"
 	desc = "A crown of salvia, often worn by consorts and princesses of particularly joyful royal courts"

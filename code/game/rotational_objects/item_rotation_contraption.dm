@@ -84,7 +84,7 @@
 		if(!pipe)
 			return
 	visible_message("[user] starts placing down [src].", "You start to place [src].")
-	if(!do_after(user, 1.2 SECONDS - user.get_skill_level(/datum/skill/craft/engineering, TRUE), T))
+	if(!do_after(user, 1.2 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering), T))
 		return
 	var/obj/structure/structure = new placed_type(T)
 	if(place_behavior == PLACE_TOWARDS_USER)

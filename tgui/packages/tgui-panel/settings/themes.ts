@@ -32,8 +32,6 @@ export function setClientTheme(name): void | Promise<void> {
 
   return Byond.winset({
     // Main windows
-    'infobuttons.background-color': themeColor.BG_BASE,
-    'infobuttons.text-color': themeColor.TEXT,
     'infowindow.background-color': themeColor.BG_BASE,
     'infowindow.text-color': themeColor.TEXT,
     'info_and_buttons.background-color': themeColor.BG_BASE,
@@ -43,23 +41,7 @@ export function setClientTheme(name): void | Promise<void> {
     'browseroutput.text-color': themeColor.TEXT,
     'outputwindow.background-color': themeColor.BG_BASE,
     'outputwindow.text-color': themeColor.TEXT,
-    'mainwindow.background-color': themeColor.BG_BASE,
     'split.background-color': themeColor.BG_BASE,
-    // Buttons
-    'changelog.background-color': themeColor.BUTTON,
-    'changelog.text-color': themeColor.TEXT,
-    'rules.background-color': themeColor.BUTTON,
-    'rules.text-color': themeColor.TEXT,
-    'wiki.background-color': themeColor.BUTTON,
-    'wiki.text-color': themeColor.TEXT,
-    'forum.background-color': themeColor.BUTTON,
-    'forum.text-color': themeColor.TEXT,
-    'github.background-color': themeColor.BUTTON,
-    'github.text-color': themeColor.TEXT,
-    'report-issue.background-color': themeColor.BUTTON,
-    'report-issue.text-color': themeColor.TEXT,
-    'fullscreen-toggle.background-color': themeColor.BUTTON,
-    'fullscreen-toggle.text-color': themeColor.TEXT,
     // Status and verb tabs
     'output.background-color': themeColor.BG_BASE,
     'output.text-color': themeColor.TEXT,

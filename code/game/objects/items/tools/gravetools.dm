@@ -26,7 +26,7 @@
 	var/obj/item/natural/clod/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	max_blade_int = 100
 	grid_width = 32
 	grid_height = 96

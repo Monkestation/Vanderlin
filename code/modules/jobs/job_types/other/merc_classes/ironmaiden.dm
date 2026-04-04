@@ -1,3 +1,18 @@
+/datum/attribute_holder/sheet/job/ironmaiden
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/medicine = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/reading = 30, // Using the higher value (3) since there were two entries with different values
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/alchemy = 20,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/advclass/mercenary/ironmaiden
 	title = "Iron Maiden"
 	tutorial = "You're a battlefield medic and have forsaken the blade for the scalpel. \
@@ -10,22 +25,7 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatDream.ogg' // Medicators are from the isle of Enigma, they're loosely related to Heartfelt
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MEDICAL)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_INT = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/medicine = 4,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/reading = 3, // Using the higher value (3) since there were two entries with different values
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/alchemy = 2,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/ironmaiden
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

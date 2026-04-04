@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/gallowglass
 	name = "gallowglass helmet"
-	desc = "Worn by proud fighters of the clans of Kaledon."
+	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/fertilizer/ash
@@ -192,7 +192,7 @@
 	sellprice = 50
 	flags_inv = null
 	armor = ARMOR_SCALE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	body_parts_covered = COVERAGE_HEAD
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 5.5 * IRON_MULTIPLIER
@@ -366,6 +366,23 @@
 	else // Failsafe.
 		to_chat(user, "<span class='warning'>Wear the helmet on your head to open and close the visor.</span>")
 		return
+
+/obj/item/clothing/head/helmet/visored/examine(mob/user)
+	. = ..()
+	. += span_notice("This helmet has a visor that can be raised and lowered. Interact with it while wearing it to adjust the visor, offering better protection at the cost of visibility.")
+
+//............... Black Knight Helmet ............... //
+
+/obj/item/clothing/head/helmet/visored/blkknight
+	name = "blacksteel helmet"
+	desc = "A helmet black as nite. Instills fear upon those that gaze upon it."
+	icon_state = "bkhelm_visor"
+	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	armor_class = AC_MEDIUM
+	armor = ARMOR_PLATE_GOOD
+	item_weight = 9 * BLACKSTEEL_MULTIPLIER
+	sellprice = VALUE_SILVER_ITEM * 2
 
 //............... Visored Sallet ............... //
 /obj/item/clothing/head/helmet/visored/sallet
@@ -584,15 +601,15 @@
 	body_parts_covered = FULL_HEAD
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	icon_state = "bkhelm"
-	item_state = "bkhelm"
+	icon_state = "bkhelm_visor"
+	item_state = "bkhelm_visor"
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80,  "piercing" = 100, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	block2add = FOV_RIGHT|FOV_LEFT
 	max_integrity = 425
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 6 * BLACKSTEEL_MULTIPLIER
 
@@ -605,8 +622,8 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
-	anvilrepair = /datum/skill/craft/armorsmithing
-	sewrepair = FALSE
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
 	icon = 'icons/roguetown/clothing/wrists.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
 	alternate_worn_layer  = 8.9 //On top of helmet

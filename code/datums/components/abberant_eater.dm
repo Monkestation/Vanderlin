@@ -56,7 +56,7 @@
 		return
 	var/count = 0
 	while(do_after(user, rand(2.5, 1.75) SECONDS, T, display_over_user = TRUE, extra_checks = CALLBACK(src, PROC_REF(turf_check), T)) && user.adjust_stamina(7))
-		var/damage = user.STASTR * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 30 : 15) * rand(0.8, 1.2)
+		var/damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 30 : 15) * rand(0.8, 1.2)
 		T.take_damage(damage, BRUTE, "stab", FALSE)
 		playsound(T, 'sound/combat/hits/onstone/stonedeath.ogg', rand(50,75), TRUE)
 		playsound(user, 'sound/misc/eat.ogg', rand(50,75), TRUE)

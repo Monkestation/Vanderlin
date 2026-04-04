@@ -23,23 +23,26 @@
 	do_looc(msg)
 
 /client/proc/do_looc(msg as text)
-
 	if(!GLOB.looc_allowed)
 		to_chat(src, "<span class='danger'>OOC is globally muted.</span>")
 		return
 
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<span class='danger'> Speech is currently admin-disabled.</span>")
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 
 	if(prefs.muted & MUTE_LOOC)
 		to_chat(src, "<span class='danger'>I cannot use LOOC (muted).</span>")
 		return
+
 	if(is_misc_banned(ckey, BAN_MISC_LOOC))
 		to_chat(src, "<span class='danger'>I have been banned from LOOC.</span>")
 		return
 
 	if(!mob)
+		return
+
+	if(isrogueobserver(mob))
 		return
 
 	if(mob.stat && !holder)

@@ -16,7 +16,7 @@
 
 	parrysound = "parrywood"
 	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	axe_cut = 10	// bonus damage to trees
 	melt_amount = 75
@@ -220,7 +220,7 @@
 	minstr = 6
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/steel
 	melt_amount = 175
 	sharpness = IS_SHARP
@@ -342,6 +342,7 @@
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
+	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	minstr = 8
@@ -350,6 +351,33 @@
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 
 /obj/item/weapon/axe/boneaxe/getonmobprop(tag)
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -9,"sy" = -8,"nx" = 9,"ny" = -7,"wx" = -7,"wy" = -8,"ex" = 3,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 3,"sy" = -7,"nx" = -6,"ny" = -3,"wx" = 3,"wy" = -4,"ex" = 4,"ey" = -3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -44,"sturn" = 45,"wturn" = 47,"eturn" = 33,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+	return ..()
+
+/obj/item/weapon/axe/trollboneaxe
+	name = "troll-horn bone axe"
+	desc = "A rough axe made of bones, strengthed with an troll's horn."
+	icon_state = "boneaxe"
+	force = DAMAGE_BAD_AXE
+	force_wielded =	DAMAGE_BAD_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_SHORT
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	max_blade_int = 150
+	max_integrity = INTEGRITY_WORST + 50
+	minstr = 8
+
+	smeltresult = /obj/item/fertilizer/ash
+	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
+
+/obj/item/weapon/axe/trollboneaxe/getonmobprop(tag)
 	if(tag)
 		switch(tag)
 			if("gen")
@@ -385,8 +413,8 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	anvilrepair = /datum/skill/craft/weaponsmithing
-	associated_skill = /datum/skill/combat/axesmaces
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	slot_flags = ITEM_SLOT_BACK
 	melting_material = /datum/material/iron
 	melt_amount = 150
@@ -410,7 +438,7 @@
 
 /obj/item/weapon/greataxe/psy
 	name = "psydonic poleaxe"
-	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders - following the disastrous Massacre of Blastenghyll - have shifted their focus towards arming their paladins with longer-lasting greatweapons."
+	desc = "A poleaxe, fitted with a reinforced shaft and a beaked axe head of alloyed silver. As the fragility of swords've become more apparent, the Psydonic Orders have shifted their focus towards arming their paladins with longer-lasting greatweapons."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverpolearm"
 	possible_item_intents = list(AXE_CUT, AXE_CHOP, MACE_STRIKE) //When possible, add the longsword's 'alternate grip' mechanic to let people flip this around into a Mace-scaling weapon with swapped damage.

@@ -420,8 +420,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "pv" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_y = -8
 	},
@@ -510,8 +509,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_y = -8
 	},
@@ -545,8 +543,7 @@
 /turf/open/floor/twig,
 /area/under/tomb/indoors)
 "tR" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /obj/effect/decal/shadow_floor{
@@ -923,8 +920,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1;
 	pixel_y = -8
 	},
@@ -1067,8 +1063,7 @@
 /turf/open/floor/carpet,
 /area/under/tomb/indoors)
 "QQ" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
+/obj/effect/decal/borderfall{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,

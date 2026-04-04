@@ -141,7 +141,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 
 /datum/tennite_schism/proc/astrata_scorn()
 		priority_announce("You don't deserve my holy light, you ungrateful swines!", "Astrata's Scorn", 'sound/magic/fireball.ogg')
-		GLOB.todoverride = "night"
+		GLOB.todoverride = NIGHT
 		settod()
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(reset_tod_override)), 20 MINUTES)
 

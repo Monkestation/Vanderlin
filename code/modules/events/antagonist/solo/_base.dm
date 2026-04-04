@@ -1,6 +1,6 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
-	max_occurrences = 2
+	max_occurrences = 1
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -17,7 +17,11 @@
 	/// Can either be normal list or a weighted list.
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
-	var/list/preferred_events
+	var/list/preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1.5,
+		/datum/round_event_control/antagonist/solo/aspirant = 1,
+		/datum/round_event_control/antagonist/solo/maniac = 1,
+	)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
@@ -195,11 +199,13 @@
 /datum/round_event/antagonist/solo/ghost/setup()
 	var/datum/round_event_control/antagonist/solo/cast_control = control
 	antag_count = cast_control.get_antag_amount()
+	var/list/candidates = cast_control.get_candidates()
+	message_admins("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
+	log_storyteller("STORYTELLER: [cast_control.name] spawning [antag_count] out of [cast_control.maximum_antags] maximum. (Candidates: [length(candidates)], Population: [SSgamemode.get_correct_popcount()],  Denominator: [cast_control.denominator])")
 	antag_flag = cast_control.antag_flag
 	antag_datum = cast_control.antag_datum
 	restricted_roles = cast_control.restricted_roles
 	prompted_picking = cast_control.prompted_picking
-	var/list/candidates = cast_control.get_candidates()
 
 	if(prompted_picking)
 		candidates = pollCandidates(

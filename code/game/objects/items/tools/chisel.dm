@@ -19,7 +19,7 @@
 	blade_dulling = 0
 	slot_flags = ITEM_SLOT_HIP
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
-	associated_skill = /datum/skill/combat/knives
+	associated_skill = /datum/attribute/skill/combat/knives
 	dropshrink = 0.9
 	grid_height = 64
 	grid_width = 32

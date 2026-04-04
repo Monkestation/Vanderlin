@@ -474,3 +474,21 @@
 	icon = 'icons/roguetown/items/precious_objects.dmi'
 	icon_state = "comb_bronze"
 	sellprice = 15
+
+/obj/item/statue/stone
+	name = "stone statue"
+	icon_state = "svase1"
+	smeltresult = null
+	sellprice = 10
+
+/obj/item/statue/stone/vase
+	name = "stone vase"
+	desc = "A large decorative stone vase."
+	icon = 'icons/roguetown/items/precious_objects.dmi'
+	icon_state = "svase1"
+	sellprice = 15
+
+/obj/item/statue/stone/vase/Initialize()
+	. = ..()
+	icon_state = "svase[pick(1,2)]"
+

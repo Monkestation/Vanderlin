@@ -1,3 +1,39 @@
+/datum/attribute_holder/sheet/job/preceptor
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/combat/firearms = 30,
+	)
+
+/datum/attribute_holder/sheet/job/preceptor/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/combat/firearms = 30,
+	)
+
 /datum/job/advclass/puritan/preceptor
 	title = "Preceptor"
 	tutorial = "The head of the Ordo Benetarus, you stand as a pillar of discipline. With unwavering resolve and a fist of steel, you temper the untested into Psydon's dauntless warriors."
@@ -5,24 +41,9 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/job/preceptor
 	category_tags = list(CTAG_PURITAN)
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = 2,
-	)
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
-		/datum/skill/combat/firearms = SKILL_LEVEL_JOURNEYMAN,
-	)
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/preceptor
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/preceptor/old
 
 	traits = list(
 		TRAIT_INQUISITION,
@@ -38,8 +59,6 @@
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 
 	var/static/list/gear = list(
 		"Knuckleduster and Knuckleduster",

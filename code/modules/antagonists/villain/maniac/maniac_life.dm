@@ -80,7 +80,7 @@
 		speech = pick_list_replacements("maniac.json", "dreamer_object")
 		speech = replacetext(speech, "%OWNER", "[target.real_name]")
 	var/language = target.get_random_understood_language()
-	var/message = target.compose_message(speaker, language, speech)
+	var/message = target.compose_message(speaker, language, speech, face_name=TRUE)
 	target.playsound_local(target, pick(speech_sounds), vol = 60, vary = FALSE)
 	if(!(target.client?.prefs?.toggles_maptext & DISABLE_RUNECHAT))
 		target.create_chat_message(speaker, language, speech, spans = list(target.speech_span))

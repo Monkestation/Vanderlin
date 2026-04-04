@@ -16,6 +16,8 @@ export const settingsSchema = z.object({
   statLinked: z.boolean(),
   statTabsStyle: z.string(),
   theme: z.string(),
+  disableCombine: z.boolean(),
+  zebraHighlight: z.boolean(),
   version: z.number(),
   view: viewSchema,
 });

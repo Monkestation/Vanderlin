@@ -7,6 +7,7 @@
 	icon_living = "cow"
 	icon_dead = "cow_dead"
 	icon_gib = "cow_gib"
+	indexed = TRUE
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/bull
 	faction = list("cows")
@@ -20,10 +21,12 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 8,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3,
 						/obj/item/natural/hide = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
@@ -48,8 +51,7 @@
 	base_strength = 4
 	remains_type = /obj/effect/decal/remains/cow
 	happy_funtime_mob = TRUE
-
-
+	generate_genetics = TRUE
 
 	ai_controller = /datum/ai_controller/basic_controller/cow
 	var/can_breed = TRUE
@@ -97,9 +99,6 @@
 			return pick('sound/vo/mobs/cow/death (1).ogg','sound/vo/mobs/cow/death (2).ogg')
 		if("idle")
 			return pick('sound/vo/mobs/cow/idle (1).ogg','sound/vo/mobs/cow/idle (2).ogg','sound/vo/mobs/cow/idle (3).ogg','sound/vo/mobs/cow/idle (4).ogg','sound/vo/mobs/cow/idle (5).ogg')
-
-/mob/living/simple_animal/hostile/retaliate/cow/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 /mob/living/simple_animal/hostile/retaliate/cow/simple_limb_hit(zone)
 	switch(zone)
@@ -149,10 +148,12 @@
 						/obj/item/alch/sinew = 1,
 						/obj/item/alch/bone = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 7,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 9,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3,
 						/obj/item/natural/hide = 4,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
@@ -177,6 +178,7 @@
 	base_speed = 2
 	remains_type = /obj/effect/decal/remains/cow
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
 	ai_controller = /datum/ai_controller/basic_controller/cow
 
 /mob/living/simple_animal/hostile/retaliate/bull/Initialize()
@@ -241,6 +243,7 @@
 	ai_controller = /datum/ai_controller/basic_controller/cow/baby
 	can_breed = FALSE
 	can_tip = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/cow/cowlet/udder_component()
 	return

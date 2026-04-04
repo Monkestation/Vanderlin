@@ -12,7 +12,7 @@ export function useHighlights() {
 
   function storeHighlights(update: HighlightState): void {
     setHighlights(update);
-    storage.set('panel-settings', {
+    storage.set('rogue-panel-settings', {
       ...settings,
       ...update,
     });

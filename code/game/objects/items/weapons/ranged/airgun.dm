@@ -52,10 +52,10 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/craft/engineering) * 3)
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER)
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION))
 		if(newtime > 0)
 			return newtime
 		else
@@ -72,10 +72,10 @@
 		var/newtime = chargetime
 		//skill block
 		newtime = newtime + 18
-		newtime = newtime - (master.get_skill_level(/datum/skill/craft/engineering, TRUE) * 3)
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/craft/engineering) * 3)
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER)
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION))
 		if(newtime > 0)
 			return newtime
 		else
@@ -146,14 +146,14 @@
 	if(!user.is_holding(src))
 		to_chat(user, span_warning("I need to hold [src] to access the controls!"))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(user.get_skill_level(/datum/skill/craft/engineering) <= 1)//requires average engineering
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) <= 1)//requires average engineering
 		to_chat(user, span_warning("I can't make a sense of all these knobs and levers!"))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/choice = browser_input_list(user, "An incomprehensible mass of knobs and levers", "[src]", list("Increase Pressure", "Decrease Pressure", "Loading Chamber", "Hand Crank", "Steam Lever", "Cancel"), "Cancel")
 	if(!choice || choice == "cancel")
 		return
 	var/use_time = 4 //how much time the player needs to crank a knob, pull a lever, etc. in seconds
-	use_time = use_time - (user.get_skill_level(/datum/skill/craft/engineering, TRUE) / 2)
+	use_time = use_time - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) / 2)
 	switch(choice)
 		if("Increase Pressure")
 			if(pressure_to_use < maximum_pressure)
@@ -234,27 +234,27 @@
 		var/obj/projectile/BB = CB.BB
 		if(user.client.chargedprog >= 100)
 			BB.accuracy += 15 //better accuracy for fully aiming
-		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+			BB.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			BB.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
 		//fixed boost is intended
-		if(user.STAPER > 10)
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 10)
 			BB.damage *= 1.1
 
 		BB.damage *= ((1 + pressure_to_use) / 3) //2/3rds damage at pressure 1, normal at pressure 2, 4/3rds at pressure 3
 
-		if(user.STAPER > 10)
-			BB.accuracy += (user.STAPER - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
-			BB.bonus_accuracy += (user.STAPER - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/craft/engineering, TRUE) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 10)
+			BB.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 10) * 2 //each point of perception above 10 increases standard accuracy by 2.
+			BB.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 10) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		BB.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) * 4) //+4 accuracy per level. Bonus accuracy will not drop-off.
 	SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, pressure_to_use * 100, "airgun")
 	. = ..()
 	cranked = FALSE
 	var/modifier = 1.25/(spread+1)
-	var/boon = user.get_learning_boon(/datum/skill/craft/engineering)
-	var/amt2raise = user.STAINT/2
-	user.adjust_experience(/datum/skill/craft/engineering, amt2raise * boon * modifier, FALSE)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/engineering)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2
+	user.adjust_experience(/datum/attribute/skill/craft/engineering, amt2raise * boon * modifier, FALSE)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/airgun/prefilled/Initialize()
 	. = ..()

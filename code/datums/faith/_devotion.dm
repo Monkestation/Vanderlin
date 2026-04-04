@@ -50,8 +50,10 @@
 		START_PROCESSING(SSprocessing, src)
 	holder_mob = holder
 	holder_mob.cleric = src
-	holder_mob?.hud_used?.initialize_bloodpool()
-	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
 	for(var/trait as anything in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
@@ -59,6 +61,11 @@
 	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
+
+/datum/devotion/proc/initialize_hud()
+	holder_mob?.hud_used?.initialize_bloodpool()
+	holder_mob?.hud_used?.bloodpool.set_fill_color(devotion_color)
+	update_devotion(0) //hack to force meter to reflect the starting devotion
 
 /datum/devotion/proc/initialize_tasks()
 	if(!holder_mob?.patron)
@@ -185,6 +192,12 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_3
 
+/datum/devotion/proc/make_shaman()
+	devotion = 80
+	max_devotion = CLERIC_REQ_1
+	progression = CLERIC_REQ_1
+	max_progression = CLERIC_REQ_1
+
 /datum/devotion/proc/make_churchling()
 	max_devotion = CLERIC_REQ_1
 	progression = CLERIC_REQ_1
@@ -227,7 +240,7 @@
 				break
 			var/devotion_multiplier = 1
 			if(mind)
-				devotion_multiplier += (get_skill_level(/datum/skill/magic/holy) / 4)
+				devotion_multiplier += (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/magic/holy) / 4)
 			var/amount = floor(C.prayer_effectiveness * devotion_multiplier)
 			C.update_devotion(amount)
 			C.update_progression(amount)

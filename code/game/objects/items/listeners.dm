@@ -155,7 +155,7 @@
 	forceMove(M)
 	M.contents.Add(src)
 
-	if(M.STAPER > user.STASPD)
+	if(GET_MOB_ATTRIBUTE_VALUE(M, STAT_PERCEPTION) > GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED))
 		to_chat(M, span_hidden("I feel something brush against mine own self. It stings."))
 
 	..()
