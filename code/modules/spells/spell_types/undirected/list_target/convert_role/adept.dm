@@ -14,7 +14,7 @@
 		return
 	..()
 	if(HAS_TRAIT(cast_on, TRAIT_RECRUITED))
-		cast_on.add_traits(alist(TRAIT_INQUISITION, TRAIT_KNOW_INQUISITION_DOORS))
+		cast_on.add_traits(list(TRAIT_INQUISITION, TRAIT_KNOW_INQUISITION_DOORS))
 		if(cast_on.mind.has_antag_datum(/datum/antagonist/assassin)) //assassins cannot change their faith
 			to_chat(cast_on, span_boldnotice("My creed must not be abandoned. I will use this as an opportunity."))
 			return
