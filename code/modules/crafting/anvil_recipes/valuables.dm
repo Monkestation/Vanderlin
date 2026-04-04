@@ -6,6 +6,14 @@
 
 // --------- IRON -----------
 
+/datum/anvil_recipe/valuables/gold_teeth
+	name = "Golden Teeth"
+	recipe_name = "a quarter set of gold teeth"
+	req_bar = /obj/item/ingot/gold
+	created_item = /obj/item/natural/teeth/gold
+	craftdiff = 2
+	createditem_extra = 7
+
 /datum/anvil_recipe/valuables/gold_mask
 	name = "Golden Half Mask"
 	recipe_name = "a golden half mask"

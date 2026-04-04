@@ -26,6 +26,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
 	var/donator_req = FALSE
 
+	var/default_mob_weight = HUMAN_WEIGHT
+
 	/**
 	 * The list of pronouns this species allows in the character sheet.
 	 * If none are specified, it will default to the PRONOUNS_LIST.
@@ -446,7 +448,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 /datum/species/New()
 
 	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
-		limbs_id = name
+		limbs_id = id
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)

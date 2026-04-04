@@ -12,6 +12,7 @@
 
 	grid_height = 96
 	grid_width = 32
+	item_weight = 350 GRAMS
 
 	///the bait we have on the hook
 	var/obj/item/baited = null

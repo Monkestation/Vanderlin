@@ -14,6 +14,7 @@
 	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/wrists/bracers/naledi
 	name = "sojourner's wrappings"
@@ -31,6 +32,7 @@
 	blocksound = SOFTHIT
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/wrists/bracers/iron
 	name = "iron plate vambraces"
@@ -89,6 +91,7 @@
 	dyeable = TRUE
 	salvage_result = null
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 650 GRAMS
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
 //KEEP THIS IN MIND
@@ -140,6 +143,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	alternate_worn_layer = WRISTS_LAYER
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/clothing/wrists/bracers/psythorns/equipped(mob/user, slot)
 	. = ..()

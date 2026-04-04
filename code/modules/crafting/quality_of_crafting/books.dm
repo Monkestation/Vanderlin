@@ -49,6 +49,7 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	grid_width = 32
 	grid_height = 64
 	slot_flags = ITEM_SLOT_HIP
+	item_weight = 493 GRAMS
 	var/list/types = list()
 	var/open
 	var/can_spawn = TRUE

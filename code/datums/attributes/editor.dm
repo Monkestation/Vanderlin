@@ -95,6 +95,7 @@
 			attributes.raw_attribute_list[attribute_type] = clamp(new_value, min_value, max_value)
 			attributes.on_skill_level_changed(attribute_type, attributes.raw_attribute_list[attribute_type], old_value)
 			attributes.update_attributes()
+			attributes.seed_skill_xp(attribute_type)
 		if("null_var")
 			var/attribute_var_name = params["var_name"]
 			if(attributes.vv_edit_var(attribute_var_name, null) == FALSE)

@@ -97,32 +97,29 @@
 			var/mob/living/buckled_mob = m
 			var/list/offsets = get_offsets(passindex)
 			var/rider_dir = get_rider_dir(passindex)
-			buckled_mob.setDir(rider_dir)
+
+			// Only setDir if it actually changed
+			if(buckled_mob.dir != rider_dir)
+				buckled_mob.setDir(rider_dir)
+
 			dir_loop:
 				for(var/offsetdir in offsets)
 					if(offsetdir == AM_dir)
 						var/list/diroffsets = offsets[offsetdir]
-						var/x2off
-						var/y2off
-						x2off = diroffsets[1]
-						if(diroffsets.len >= 2)
-							y2off = diroffsets[2]
-						if(diroffsets.len == 3)
-							buckled_mob.layer = diroffsets[3]
-						buckled_mob.set_mob_offsets("riding", _x = x2off, _y = y2off)
+						var/x2off = diroffsets[1]
+						var/y2off = (diroffsets.len >= 2) ? diroffsets[2] : null
+						var/new_layer = (diroffsets.len == 3) ? diroffsets[3] : null
+
+						// Only update layer if it changed
+						if(!isnull(new_layer) && buckled_mob.layer != new_layer)
+							buckled_mob.layer = new_layer
+
+						// Only call set_mob_offsets if values actually differ
+						var/list/current_offsets = buckled_mob.mob_offsets["riding"]
+						if(!current_offsets || current_offsets["x"] != x2off || current_offsets["y"] != y2off)
+							buckled_mob.set_mob_offsets("riding", _x = x2off, _y = y2off)
+
 						break dir_loop
-	var/static/list/default_vehicle_pixel_offsets = list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 0), TEXT_EAST = list(0, 0), TEXT_WEST = list(0, 0))
-/*	var/px = default_vehicle_pixel_offsets[AM_dir]
-	var/py = default_vehicle_pixel_offsets[AM_dir]
-	if(directional_vehicle_offsets[AM_dir])
-		if(isnull(directional_vehicle_offsets[AM_dir]))
-			px = AM.pixel_x
-			py = AM.pixel_y
-		else
-			px = directional_vehicle_offsets[AM_dir][1]
-			py = directional_vehicle_offsets[AM_dir][2]
-	AM.pixel_x = px
-	AM.pixel_y = py*/
 
 /datum/component/riding/proc/set_vehicle_dir_offsets(dir, x, y)
 	directional_vehicle_offsets["[dir]"] = list(x, y)

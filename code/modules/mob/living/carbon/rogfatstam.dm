@@ -1,11 +1,7 @@
 /mob/living/proc/update_stamina() //update hud and regen after last_fatigued delay on taking
-	var/athletics_skill = 0
-	athletics_skill = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
-	maximum_stamina = max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) + athletics_skill) * 10, 10) //This here is the calculation for max STAMINA / GREEN
-
 	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == DAWN || GLOB.tod == DAY)) ? 11 : 20
 	if(world.time > last_fatigued + delay) //regen fatigue
-		var/added = energy / max_energy
+		var/added = max(1, energy) / max(max_energy, 1)
 		added = round(-10+ (added*-40))
 		if(HAS_TRAIT(src, TRAIT_MISSING_NOSE))
 			added = round(added * 0.5, 1)
@@ -19,16 +15,105 @@
 
 	update_health_hud(TRUE)
 
-/mob/living/proc/update_energy()
-	///this is kinda weird and not at the same time for energy being tied to this,
-	/// since energy is both a magical and physical system
-	var/athletics_skill = 0
+/mob/living/proc/update_stamina_modifiers()
+	. = base_max_stamina
+
+	var/list/conflict_tracker = list()
+
+	for(var/key in get_stamina_modifiers())
+		var/datum/stamina_modifier/stamina_mod = stamina_modification[key]
+		var/conflict = stamina_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < stamina_mod.priority)
+				conflict_tracker[conflict] = stamina_mod.priority
+			else
+				continue
+
+		. += stamina_mod.stamina_add
+
+	maximum_stamina = .
+	stamina = clamp(stamina, 0, maximum_stamina)
+
+/mob/living/carbon/proc/update_endurance_stamina_modifier()
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+
+	var/athletics = 0
 	if(mind)
-		athletics_skill = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics)
-	max_energy = max((GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) + athletics_skill) * 100, 100) // ENERGY / BLUE (Average of 1000)
-	if(cmode)
-		if(!HAS_TRAIT(src, TRAIT_BREADY))
-			adjust_energy(-2)
+		athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics) / 10
+
+	var/base = endurance * 15
+	var/bonus = athletics * 5
+
+	bonus = min(bonus, 50)
+
+	var/total_stamina = max(base + bonus, 10)
+
+	var/stamina_modification = total_stamina - base_max_stamina
+
+	var/desc = span_info("Stamina.")
+	if(total_stamina > base_max_stamina)
+		desc = span_green("High stamina.")
+	else if(total_stamina < base_max_stamina)
+		desc = span_alert("Low stamina.")
+
+	add_or_update_variable_stamina_modifier(
+		/datum/stamina_modifier/endurance,
+		TRUE,
+		stamina_modification,
+		desc
+	)
+
+/mob/living/proc/update_energy()
+	if(cmode && !HAS_TRAIT(src, TRAIT_BREADY))
+		adjust_energy(-2)
+
+/mob/living/proc/update_energy_modifiers()
+	. = base_max_energy
+
+	var/list/conflict_tracker = list()
+
+	for(var/key in get_fatigue_modifiers())
+		var/datum/fatigue_modifier/fatigue_mod = fatigue_modification[key]
+		var/conflict = fatigue_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < fatigue_mod.priority)
+				conflict_tracker[conflict] = fatigue_mod.priority
+			else
+				continue
+
+		. += fatigue_mod.fatigue_add
+
+	max_energy = .
+	energy = clamp(energy, 0, max_energy)
+
+/mob/living/carbon/proc/update_endurance_fatigue_modifier()
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+	var/athletics = 0
+	if(mind)
+		athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics)
+
+	var/athletics_bonus
+	if(athletics >= 0)
+		athletics_bonus = sqrt(athletics / 60.0) * 300  // +300 max at 60, ~378 at 100
+	else
+		athletics_bonus = -(sqrt(-athletics / 60.0) * 300)  // mirrors negative side
+
+	var/base = endurance * 100
+	var/total_energy = max(base + athletics_bonus, 100)
+	var/fatigue_modification = total_energy - base_max_energy
+	var/desc = span_info("Endurance.")
+	if(total_energy > base_max_energy)
+		desc = span_green("High endurance.")
+	else if(total_energy < base_max_energy)
+		desc = span_alert("Low endurance.")
+	add_or_update_variable_fatigue_modifier(
+		/datum/fatigue_modifier/endurance,
+		TRUE,
+		fatigue_modification,
+		desc
+	)
 
 /mob/proc/adjust_energy(added as num)
 	return

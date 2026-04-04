@@ -6,6 +6,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	dropshrink = 0.75
 	can_unlock = FALSE // :D
+	item_weight = 200 GRAMS
 
 /obj/item/customlock/examine()
 	. = ..()
