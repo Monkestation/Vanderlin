@@ -1227,7 +1227,10 @@
 	var/obj/item/neuFarm/seed/seed_to_grow
 
 /obj/structure/soil/debug_soil/random/Initialize()
-	seed_to_grow = pick(subtypesof(/obj/item/neuFarm/seed) - /obj/item/neuFarm/seed/mixed_seed - /obj/item/neuFarm/seed/spore)
+	var/list/valid_seeds = subtypesof(/obj/item/neuFarm/seed)
+	valid_seeds -= typesof(/obj/item/neuFarm/seed/mixed_seed)
+	valid_seeds -= typesof(/obj/item/neuFarm/seed/spore)
+	seed_to_grow = pick(valid_seeds)
 	. = ..()
 
 /obj/structure/soil/debug_soil/Initialize()
@@ -1277,6 +1280,9 @@
 	add_growth(plant.produce_time)
 
 /obj/structure/soil/mushmound/debug_mushmound/random/Initialize()
+
+	var/list/valid_seeds = subtypesof(/obj/item/neuFarm/seed/spore)
+	valid_seeds -= typesof(/obj/item/neuFarm/seed/spore/mixed)
 	seed_to_grow = pick(subtypesof(/obj/item/neuFarm/seed/spore))
 	. = ..()
 
