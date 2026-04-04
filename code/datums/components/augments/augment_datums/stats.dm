@@ -66,7 +66,6 @@
 
 /datum/augment/stats/pressure_tank/on_install(mob/living/carbon/human/H)
 	. = ..()
-		. = ..()
 	if(!.)
 		return
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
@@ -74,7 +73,6 @@
 
 /datum/augment/stats/pressure_tank/on_remove(mob/living/carbon/human/H)
 	. = ..()
-		. = ..()
 	if(!.)
 		return
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
