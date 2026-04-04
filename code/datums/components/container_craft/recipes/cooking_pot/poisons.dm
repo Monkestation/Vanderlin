@@ -91,7 +91,7 @@
 
 /datum/container_craft/cooking/herbal_tea/zomb
 	name = "Astuce paralytic"
-	created_reagent = /datum/reagent/toxin/zombiepowder
+	created_reagent = /datum/reagent/toxin/ghoulpowder
 	water_conversion = 1
 	reagent_requirements = list(
 	/datum/reagent/toxin/spidervenom_inert = 10,
