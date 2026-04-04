@@ -270,11 +270,11 @@
 
 /datum/reagent/toxin/ghoulpowder
 	name = "Astuce"
-	description = "A strong neurotoxin that slows metabolism to a death-like state, while keeping the patient fully active. Causes toxin buildup if used too long."
+	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
 	color = "#664700" // rgb: 102, 71, 0
 	toxpwr = 0.8
 	taste_description = "death"
-	metabolized_traits = list(TRAIT_FAKEDEATH)
+	metabolized_traits = list(TRAIT_FAKEDEATH,TRAIT_DEATHCOMA)
 
 /datum/reagent/toxin/ghoulpowder/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
