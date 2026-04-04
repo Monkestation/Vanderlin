@@ -6528,7 +6528,7 @@
 	name = "Tsere's Teeth";
 	desc = "Plucked from the maw of the mighty beast herself, these teeth are still just as sharp as before."
 	},
-/obj/item/clothing/head/helmet/heavy/blkknight{
+/obj/item/clothing/head/helmet/visored/blkknight{
 	name = "Drakeleaf Helm";
 	desc = "Drakeleaf armor, made from the scales of Tsere herself. Wearing such a thing is a tribute to the great achievement this one has made."
 	},

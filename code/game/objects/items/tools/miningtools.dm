@@ -15,6 +15,7 @@
 	associated_skill = /datum/attribute/skill/labor/mining
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 1.74 KILOGRAMS
 	var/pickmult = 1 // Multiplier of how much extra picking force we do to rocks.
 
 /obj/item/weapon/pick/getonmobprop(tag)
@@ -37,6 +38,7 @@
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/copper
 	melt_amount = 75
+	item_weight = 1.35 KILOGRAMS
 
 /obj/item/weapon/pick/steel
 	name = "steel pick"
@@ -59,6 +61,7 @@
 	anvilrepair = null
 	melting_material = null
 	pickmult = 0.7 // Worse pick
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/pick/drill
 	name = "clockwork drill"
@@ -77,6 +80,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	pickmult = 1.5
+	item_weight = 3.29 KILOGRAMS
 
 /obj/item/weapon/pick/drill/Initialize()
 	. = ..()

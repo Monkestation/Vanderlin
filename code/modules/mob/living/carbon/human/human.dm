@@ -732,6 +732,7 @@
 					to_chat(target, "<span class='warning'>I can't piggyback ride [src].</span>")
 					return
 				buckle_mob(target, TRUE, TRUE, FALSE, 0, 0)
+				update_carry_weight()
 	else
 		to_chat(target, "<span class='warning'>I can't piggyback ride [src].</span>")
 

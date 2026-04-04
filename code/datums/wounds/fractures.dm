@@ -24,6 +24,8 @@
 	clotting_threshold = 0.6
 	clotting_rate = 0.85
 
+	limb_efficiency_reduction = 30
+
 	var/set_bleed_rate = 0.5
 
 	ignore_bloody = TRUE

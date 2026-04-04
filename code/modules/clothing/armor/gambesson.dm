@@ -25,6 +25,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
 	material_category = ARMOR_MAT_FABRIC
+	item_weight = 4.7 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
@@ -35,6 +36,7 @@
 
 	armor = ARMOR_PADDED_BAD
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 3.1 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light/steppe
 	name = "steppe robes"
@@ -54,6 +56,7 @@
 	sellprice = VALUE_HEAVY_GAMBESSON
 
 	armor = ARMOR_PADDED_GOOD
+	item_weight = 5.6 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

@@ -9,6 +9,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 27 GRAMS
 
 /obj/item/bouquet/rosa
 	name = "rosa bouquet"
@@ -45,6 +46,7 @@
 
 	grid_width = 64
 	grid_height = 32
+	item_weight = 22 GRAMS
 
 /obj/item/clothing/head/flowercrown/rosa
 	name = "rosa crown"

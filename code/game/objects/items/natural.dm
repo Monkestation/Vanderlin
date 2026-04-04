@@ -62,12 +62,16 @@
 	var/icon2 = "fibersroll2"
 	var/icon2step = 6
 	var/icon3 = null
-	var/stacktype = /obj/item/natural/fibers
+	var/obj/item/stacktype = /obj/item/natural/fibers
 	var/stackname = "fibers"
+	var/bundle_verb = "bundle"
 	var/items_per_increase = 5
 
 	var/base_width = 32
 	var/base_height = 32
+
+/obj/item/natural/bundle/get_carry_weight(atom/carrier)
+	. = initial(stacktype.item_weight) * amount
 
 /obj/item/natural/bundle/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(amount <= 0) //how did you manage to do this
@@ -145,7 +149,7 @@
 
 /obj/item/natural/bundle/examine(mob/user)
 	. = ..()
-	. += span_notice("There are [amount] [stackname] in this bundle.")
+	. += span_notice("There are [amount] [stackname] in this [bundle_verb].")
 
 /obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
@@ -320,6 +324,7 @@
 		/datum/attunement/death = 0.05,
 		/datum/attunement/life = -0.05,
 	)
+	item_weight = 30 GRAMS
 
 /obj/item/natural/hellhoundfang//T2 mage summon loot
 	name = "hellhound fang"
@@ -335,6 +340,7 @@
 		/datum/attunement/death = 0.05,
 		/datum/attunement/life = -0.05,
 	)
+	item_weight = 40 GRAMS
 
 /obj/item/natural/moltencore// T3 mage summon loot
 	name = "molten core"
@@ -350,6 +356,7 @@
 		/datum/attunement/death = 0.1,
 		/datum/attunement/life = -0.1,
 	)
+	item_weight = 80 GRAMS
 
 /obj/item/natural/abyssalflame//T4 mage summon loot
 	name = "abyssal flame"
@@ -365,6 +372,7 @@
 		/datum/attunement/death = 0.15,
 		/datum/attunement/life = -0.15,
 	)
+	item_weight = 50 GRAMS
 
 //FAIRY
 /obj/item/natural/fairydust	//T1 mage summon loot
@@ -384,7 +392,7 @@
 	)
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
-
+	item_weight = 10 GRAMS
 
 /obj/item/natural/iridescentscale	//T2 mage summon loot
 	name = "iridescent scales"
@@ -403,7 +411,7 @@
 	)
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
-
+	item_weight = 15 GRAMS
 
 /obj/item/natural/heartwoodcore	//T3 mage summon loot
 	name = "heartwood core"
@@ -421,6 +429,7 @@
 	)
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 60 GRAMS
 
 /obj/item/natural/sylvanessence	//T4 mage summon loot
 	name = "sylvan essence"
@@ -438,6 +447,7 @@
 	)
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 40 GRAMS
 
 //ELEMENTAL
 /obj/item/natural/elementalmote
@@ -456,6 +466,7 @@
 
 		/datum/attunement/earth = -0.1,
 	)
+	item_weight = 20 GRAMS
 
 /obj/item/natural/elementalshard
 	name = "elemental shard"
@@ -473,6 +484,7 @@
 
 		/datum/attunement/earth = -0.2,
 	)
+	item_weight = 30 GRAMS
 
 /obj/item/natural/elementalfragment
 	name = "elemental fragment"
@@ -490,6 +502,7 @@
 
 		/datum/attunement/earth = -0.15,
 	)
+	item_weight = 25 GRAMS
 
 /obj/item/natural/elementalrelic
 	name = "elemental relic"
@@ -507,6 +520,7 @@
 
 		/datum/attunement/earth = -0.1,
 	)
+	item_weight = 35 GRAMS
 
 //Nullmagic
 /obj/item/natural/voidstone
@@ -524,3 +538,4 @@
 		/datum/attunement/dark = 0.2,
 		/datum/attunement/illusion = 0.2,
 	)
+	item_weight = 60 GRAMS

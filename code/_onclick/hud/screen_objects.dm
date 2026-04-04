@@ -1298,7 +1298,21 @@
 	if (ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.check_for_injuries(H)
-		to_chat(H, "I am [H.get_encumbrance() * 100]% encumbered.")
+		to_chat(H, "Encumbrance: [H.encumbrance_text()] (<b>[CEILING(H.carry_weight, 1)]kg[CEILING(H.carry_weight, 1) == 1 ? "" : "s"]</b>)")
+
+/mob/living/carbon/proc/encumbrance_text()
+	switch(encumbrance)
+		if(ENCUMBRANCE_EXTREME)
+			return span_userdanger(span_big("EXTRA-HEAVY!!"))
+		if(ENCUMBRANCE_HEAVY)
+			return span_userdanger("Heavy!")
+		if(ENCUMBRANCE_MEDIUM)
+			return span_boldnotice("Medium.")
+		if(ENCUMBRANCE_LIGHT)
+			return span_notice("Light.")
+		if(ENCUMBRANCE_NONE)
+			return span_tinynotice("None.")
+
 
 /atom/movable/screen/party_member_health
 	name = "party_health"
@@ -1372,7 +1386,7 @@
 		var/mob/living/carbon/human/user_mob = usr
 		if(LAZYACCESS(modifiers, LEFT_CLICK))
 			user_mob.check_for_injuries(user_mob)
-			to_chat(user_mob, "I am [user_mob.get_encumbrance() * 100]% encumbered.")
+			to_chat(user_mob, "Encumbrance: [user_mob.encumbrance_text()] (<b>[CEILING(user_mob.carry_weight, 1)]kg[CEILING(user_mob.carry_weight, 1) == 1 ? "" : "s"]</b>)")
 		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			if(!user_mob.mind)
 				return

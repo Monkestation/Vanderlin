@@ -8,6 +8,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = NONE
 	max_integrity = 300
+	item_weight = 150 GRAMS
 	component_type = /datum/component/storage/concrete/grid/magebag
 
 /obj/item/storage/magebag/examine(mob/user)
@@ -78,6 +79,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grid_height = 32
 	grid_width = 32
+	item_weight = 20 GRAMS
 	var/amount = 8
 
 /obj/item/chalk/natural
@@ -225,6 +227,7 @@
 	sellprice = 18
 	arcyne_potency = 25
 	desc = "A pink crystal, it surges with magical energy, yet its artificial nature means it's worth little."
+	item_weight = 8 GRAMS
 	attuned = /datum/attunement/arcyne
 
 /obj/item/mimictrinket
@@ -233,6 +236,7 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "mimic_trinket"
 	possible_item_intents = list(/datum/intent/use)
+	item_weight = 30 GRAMS
 	var/duration = 10 MINUTES
 	var/oldicon
 	var/oldicon_state
@@ -279,6 +283,7 @@
 	desc = "An arcyne infused hourglass that glows with magick."
 	icon = 'icons/obj/hourglass.dmi'
 	icon_state = "hourglass_idle"
+	item_weight = 300 GRAMS
 	var/turf/target
 	var/mob/living/victim
 
@@ -312,12 +317,14 @@
 	light_color = "#000000"
 	light_power = -3
 	on = FALSE
+	item_weight = 500 GRAMS
 
 /obj/item/clothing/ring/arcanesigil
 	name = "arcyne sigil"
 	desc = "A radiantly shimmering sigil within an amulet, It seems to pulse with intense arcynic flows."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "amulet"
+	item_weight = 30 GRAMS
 	var/cdtime = 30 MINUTES
 	var/ready = TRUE
 
@@ -340,6 +347,7 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "lens"
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 80 GRAMS
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/active = FALSE
 
@@ -390,6 +398,7 @@
 /obj/item/natural/stone/sending
 	name = "sending stone"
 	desc = "One of a pair of sending stones."
+	item_weight = 50 GRAMS
 	var/obj/item/natural/stone/sending/paired_with
 
 /obj/item/natural/stone/sending/attack_self(mob/user, list/modifiers)
@@ -402,6 +411,7 @@
 	bloody_icon_state = "bloodyhands"
 	icon_state = "angle"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 100 GRAMS
 	var/active_item
 
 /obj/item/clothing/gloves/nomagic/Initialize(mapload)
@@ -421,6 +431,7 @@
 /obj/item/rope/chain/bindingshackles
 	name = "planar binding shackles"
 	desc = "arcyne shackles imbued to bind other-planar creatures intelligence to this plane. They will not be under your thrall and a deal will need to be made."
+	item_weight = 400 GRAMS
 	var/mob/living/fam
 	var/tier = 1
 	var/being_used = FALSE
@@ -581,6 +592,7 @@
 	desc = "Volcanic glass cooled from molten lava rapidly."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 80 GRAMS
 
 /obj/item/natural/leyline
 	name = "leyline shards"
@@ -589,6 +601,7 @@
 	desc = "A shard of a fractured leyline, it glows with lost power."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/manabloom
 	name = "mana bloom"
@@ -603,6 +616,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
 	list_reagents = list(/datum/reagent/toxin/manabloom_juice = SNACK_CHUNKY)
 	seed = /obj/item/neuFarm/seed/manabloom
+	item_weight = 20 GRAMS
 
 
 /obj/item/natural/artifact
@@ -611,6 +625,7 @@
 	desc = "An old stone from age long ago, marked with glowing sigils."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 100 GRAMS
 
 /obj/item/natural/voidstone
 	name = "Voidstone"
@@ -618,6 +633,7 @@
 	desc = "A piece of blackstone, it feels off to stare at it for long."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 60 GRAMS
 
 //combined items
 /obj/item/natural/melded
@@ -627,6 +643,7 @@
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
+	item_weight = 40 GRAMS
 
 /obj/item/natural/melded/t1
 	name = "arcanic meld"
@@ -641,24 +658,27 @@
 	desc = "A melding of hellhound fang, iridescent scales and elemental shard."
 	item_flags = OBTAINED_DATA
 	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 50 GRAMS
 
 /obj/item/natural/melded/t3
 	name = "sorcerous weave"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "wessence"
 	desc = "A melding of molten core, heartwood core and elemental fragment."
+	item_weight = 60 GRAMS
 
 /obj/item/natural/melded/t4
 	name = "magical confluence"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "wessence"
 	desc = "A melding of abyssal flame, sylvan essence and elemental relic."
+	item_weight = 70 GRAMS
 
 /obj/item/natural/melded/t5
 	name = "arcanic aberation"
 	icon_state = "wessence"
 	desc = "A melding of arcyne fusion and voidstone. It pulses erratically, power coiled tightly within and dangerous. Many would be afraid of going near this, let alone holding it."
-
+	item_weight = 80 GRAMS
 
 /obj/structure/soul
 	name = "soul"

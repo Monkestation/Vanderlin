@@ -32,7 +32,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	sellprice = 25
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
 
@@ -45,7 +45,7 @@
 	max_integrity = INTEGRITY_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -56,7 +56,7 @@
 	max_integrity = 200 //meant to be weaker than iron plated boots, better options are out there waiting at the smith
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 2.7 KILOGRAMS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
@@ -84,7 +84,7 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 7 * BLACKSTEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 /obj/item/clothing/shoes/boots/leather
@@ -100,7 +100,7 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
-	item_weight = 3
+	item_weight = 1.4 KILOGRAMS
 	max_integrity = INTEGRITY_STANDARD
 	wetable = FALSE
 
@@ -147,7 +147,7 @@
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/fur
 	salvage_amount = 1
-	item_weight = 3
+	item_weight = 0.9 KILOGRAMS
 	min_cold_protection_temperature = -20
 	wetable = FALSE
 
@@ -177,7 +177,7 @@
 	armor = list("blunt" = 5, "slash" = 5, "stab" = 5,  "piercing" = 0, "fire" = 0, "acid" = 0) //Thinks its fair for a piece of cloth and fiber.
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	item_weight = 2
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/shoes/boots/armor/silver
 	name = "silver boots"
@@ -185,7 +185,7 @@
 	icon_state = "silverboots"
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 12 * SILVER_MULTIPLIER
+	item_weight = 3.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
 /obj/item/clothing/shoes/boots/armor/silver/Initialize(mapload)
@@ -231,7 +231,9 @@
 	desc = "Thick iron boots, tied with a leather cord; protective and sturdy. \
 			Osslandic legend tells of a great warrior who fought for aeons until a hero speared him through the foot. \
 			The Northmen have since followed through by protecting their feet heavily."
-	icon = 'icons/roguetown/clothing/special/gronn.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	icon_state = "gronnplateboots"
 	item_state = "gronnplateboots"
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+

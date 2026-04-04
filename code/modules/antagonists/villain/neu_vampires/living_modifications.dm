@@ -24,6 +24,8 @@
 	var/bloodpool = 1500
 	var/maxbloodpool = 3000
 
+	var/extra_mob_weight = 0
+
 	COOLDOWN_DECLARE(detection_cooldown)
 	var/detections = 0
 

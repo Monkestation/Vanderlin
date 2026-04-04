@@ -11,6 +11,8 @@
 	resistance_flags = FLAMMABLE
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	sellprice = 5
+	item_weight = 350 GRAMS
+
 /obj/item/natural/hide/cured
 	name = "cured leather"
 	icon_state = "leather"
@@ -38,6 +40,7 @@
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
+	item_weight = 100 GRAMS
 
 /obj/item/natural/fur // a piece of skin with animal hair on it. Could be called a fur but its untanned and also encompasses rat skins and goat skins so pelt is more suitable at least to my ears.
 	name = "fur"
@@ -50,6 +53,7 @@
 	resistance_flags = FLAMMABLE
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	sellprice = 5
+	item_weight = 300 GRAMS
 
 /obj/item/natural/fur/gote
 	desc = "Pelt from a gote."
@@ -99,6 +103,8 @@
 	grid_height = 64
 	grid_width = 64
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 750 GRAMS
+
 	var/meat_to_give = /obj/item/reagent_containers/food/snacks/meat/steak
 	var/rotten = FALSE
 
@@ -152,6 +158,7 @@
 	icon_state = "volfhead"
 	sellprice = 5
 	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/natural/head/saiga
 	name = "saiga head"
@@ -159,6 +166,7 @@
 	icon_state = "saigahead"
 	sellprice = 3
 	blood_value = BLOOD_VOLUME_BAD
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/natural/head/troll
 	name = "troll head"
@@ -169,6 +177,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	sellprice = 20
 	blood_value = BLOOD_VOLUME_OKAY
+	item_weight = 2.1 KILOGRAMS
 
 /obj/item/natural/head/troll/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -190,6 +199,7 @@
 	icon_state = "roushead"
 	sellprice = 2
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+	item_weight = 500 GRAMS
 
 /obj/item/natural/head/direbear
 	name = "direbear head"
@@ -198,6 +208,7 @@
 	layer = 3.1
 	sellprice = 20
 	blood_value = BLOOD_VOLUME_SAFE
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/natural/head/fox
 	name = "venard head"
@@ -207,6 +218,7 @@
 	grid_height = 32
 	sellprice = 12 // fur trade
 	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 400 GRAMS
 
 /obj/item/natural/head/spider
 	name = "beespider head"
@@ -214,6 +226,7 @@
 	icon_state = "spiderhead"
 	sellprice = 6
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
+	item_weight = 200 GRAMS
 
 /obj/item/natural/head/bug
 	name = "bogbug head"
@@ -221,6 +234,7 @@
 	icon_state = "boghead"
 	sellprice = 10
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
+	item_weight = 400 GRAMS
 
 /obj/item/natural/head/mole
 	name = "mole head"
@@ -230,6 +244,7 @@
 	grid_width = 96
 	sellprice = 8
 	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 765 GRAMS
 
 /obj/item/natural/head/mole/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -240,6 +255,7 @@
 	icon_state = "gotehead"
 	sellprice = 3
 	blood_value = BLOOD_VOLUME_SURVIVE / 2
+	item_weight = 1.1 KILOGRAMS
 
 //RTD make this a storage item and make clickign on animals with things put it in storage
 /obj/item/natural/saddle
@@ -253,6 +269,7 @@
 	force = 0
 	throwforce = 0
 	sellprice = 30
+	item_weight = 7 KILOGRAMS //heavy as shit according to equsitrian wikis (this is for an english saddle)
 
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)

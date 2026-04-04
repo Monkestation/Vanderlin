@@ -1,5 +1,0 @@
-author: "KevinfromHP"
-delete-after: True
-changes:
-  - bugfix: "Fixed a bug where water could force you to move at mach 5 if your swimming was high enough."
-  - sound: "Fixed an issue where footstep sounds wouldnt play over certain spaces, such as rope bridge and pipes."

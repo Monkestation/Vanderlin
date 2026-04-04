@@ -1,5 +1,6 @@
 /obj/item/fishing/hook
 	attachtype = "hook"
+	item_weight = 45 GRAMS
 	/// A bitfield of traits that this fishing hook has, checked by fish traits and the minigame
 	var/fishing_hook_traits
 	/// icon state added to main rod icon when this hook is equipped

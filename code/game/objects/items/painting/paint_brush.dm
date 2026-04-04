@@ -6,6 +6,7 @@
 
 	grid_height = 32
 	grid_width = 64
+	item_weight = 9 GRAMS
 	var/current_color
 
 
