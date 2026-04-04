@@ -1,0 +1,12 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - rscadd: "Unholy grasp has an alternative silencing mode when used with tongue in hand"
+  - rscadd: "Unholy grasp has an alternative mode when used with stomach, hitting your opponent with 2 units of organ poison"
+  - rscadd: "Changes Revel in Slaughter to be used as an projectile in close combat, that gives your enemy exposed status and blurs his vision"
+  - balance: "Changes the Graggar spell tree, T0 is now Call to slaughter, T1 Unholy grasp, T2 is Revel in slaughter and T3 bloodrage"
+  - balance: "Call to slaughter has it's range upped by one tile (to 4)"
+  - balance: "Unholy grasp now uses guts instead of viscera"
+  - balance: "Bloodrage now gives full stun immunity"
+  - balance: "Using bloodrage while cuffed removes them"
+  - bugfix: "Removed Unholy Grasps' bloodnet giving unremovable leg cuffs, it now purely works on debuffs"

@@ -262,6 +262,7 @@
 	bloody_icon_state = "helmetblood_big"
 
 	prevent_crits = MINOR_CRITICALS
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/headdress // egyptian
 	name = "foreign headdress"

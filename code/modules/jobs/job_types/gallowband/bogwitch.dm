@@ -57,14 +57,7 @@
 		TRAIT_STEELHEARTED
 	)
 	selection_color = "#a33096"
-
-/datum/job/bogwitch/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
-	if(length(SSjob.latejoin_trackers))
-		return pick(SSjob.latejoin_trackers)
-	return SSjob.get_last_resort_spawn_points()
-
+	languages = list(/datum/language/gronnic)
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -14,7 +14,7 @@
 	/// A reference to the object in the slot. Grabs or items, generally, but any datum will do.
 	var/datum/weakref/master_ref = null
 	/// A reference to the owner HUD, if any.
-	VAR_PRIVATE/datum/hud/hud = null
+	var/datum/hud/hud = null
 	var/lastclick
 	var/category
 

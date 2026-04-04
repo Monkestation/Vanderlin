@@ -17,7 +17,6 @@
 	var/mob/living/carbon/human/W = owner.current
 	W.delete_equipment()
 	W.purge_combat_knowledge()
-	W.remove_all_languages()
 	owner.forget_and_be_forgotten()
 	move_to_spawnpoint()
 	. = ..()

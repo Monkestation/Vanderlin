@@ -24,7 +24,7 @@
 	var/mob/victim = AM
 	if(!prob(slip_probability))
 		return
-	if(istype(victim) && !(victim.movement_type & (FLOATING|FLYING)) && victim.slip(knockdown_time, parent, lube_flags, paralyze_time, force_drop_items) && callback)
+	if(istype(victim) && !(victim.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)) && victim.slip(knockdown_time, parent, lube_flags, paralyze_time, force_drop_items) && callback)
 		callback.Invoke(victim)
 
 /datum/component/slippery/proc/Slip_on_wearer(datum/source, atom/movable/AM, mob/living/crossed)

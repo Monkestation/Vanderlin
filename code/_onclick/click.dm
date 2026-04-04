@@ -603,7 +603,7 @@
 	icon_state = "catcher"
 	plane = CLICKCATCHER_PLANE
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
-	screen_loc = "CENTER"
+	screen_loc = "1,1"
 	xyoverride = TRUE
 	blockscharging = FALSE
 

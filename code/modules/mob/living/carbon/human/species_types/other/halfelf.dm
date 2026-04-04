@@ -19,7 +19,9 @@
 	id = SPEC_ID_HALF_ELF
 	multiple_accents = list(
 		"Humen Accent" = "Imperial",
-		"Elf Accent" = "Elfish"
+		"Elf Accent" = "Elfish",
+		"Wintermare Accent" = ACCENT_WINTERMARE,
+		"Ossland Accent" = ACCENT_OSSLAND,
 	)
 	desc = "The child of an Elf and a Humen. \
 	\n\n\
