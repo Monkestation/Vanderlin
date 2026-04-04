@@ -226,6 +226,12 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/twig,
 /area/indoors/wilderness/tavern)
+"cl" = (
+/obj/structure/ladder{
+	redstone_id = Northeast
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/villagegarrison)
 "cp" = (
 /obj/structure/roguetent,
 /turf/open/floor/naturalstone,
@@ -239,6 +245,12 @@
 "ct" = (
 /obj/structure/flora/tree/evil,
 /turf/open/water/swamp,
+/area/outdoors/wilderness)
+"cu" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/water/clean/dirt,
 /area/outdoors/wilderness)
 "cx" = (
 /obj/structure/minecart_rail{
@@ -519,6 +531,13 @@
 "eh" = (
 /turf/open/floor/dirt/road,
 /area/under/cave)
+"ej" = (
+/obj/structure/fluff/railing/tall{
+	dir = 4
+	},
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "el" = (
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
@@ -580,6 +599,14 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/villagegarrison)
+"eW" = (
+/obj/structure/fluff/railing/tall{
+	dir = 1
+	},
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "eX" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -708,6 +735,10 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
 /area/indoors/cave/late)
+"fR" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "fS" = (
 /obj/structure/bookcase/random/legends,
 /obj/structure/fluff/walldeco/vinez,
@@ -787,6 +818,10 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"go" = (
+/obj/structure/table/wood/plain,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/villagegarrison)
 "gp" = (
 /obj/structure/window/openclose{
 	dir = 4
@@ -865,6 +900,11 @@
 "gJ" = (
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"gL" = (
+/obj/structure/fluff/railing/tall/palisade,
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "gN" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/dirt/road,
@@ -937,6 +977,12 @@
 "hv" = (
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
+"hx" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness)
 "hy" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/ruinedwood/alt,
@@ -1222,6 +1268,15 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/garrison)
+"jn" = (
+/obj/structure/ladder{
+	redstone_id = Northeast
+	},
+/obj/structure/ladder{
+	redstone_id = Northeast
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/villagegarrison)
 "jo" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -1370,6 +1425,12 @@
 "kw" = (
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"kx" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "kD" = (
 /obj/effect/decal/shadow_floor{
 	pixel_y = 1;
@@ -1601,6 +1662,12 @@
 "mt" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/garrison)
+"mw" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness)
 "mx" = (
 /obj/item/trash/candle{
 	pixel_x = -8;
@@ -1708,6 +1775,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"nC" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "nG" = (
 /obj/effect/decal/remains/cabbit,
 /obj/effect/decal/cleanable/blood/old,
@@ -1760,6 +1834,9 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"od" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/villagegarrison)
 "oe" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/naturalstone,
@@ -1864,6 +1941,13 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/wilderness)
+"oZ" = (
+/obj/structure/fluff/railing/tall/palisade,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "pa" = (
 /obj/item/kitchen/rollingpin{
 	pixel_y = 10
@@ -1933,6 +2017,12 @@
 /obj/structure/door/green,
 /turf/open/floor/twig,
 /area/indoors/wilderness)
+"pB" = (
+/obj/structure/fluff/railing/tall{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "pD" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -1975,6 +2065,13 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"pS" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "pW" = (
 /obj/structure/door/viewport{
 	dir = 1
@@ -2266,6 +2363,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"rT" = (
+/obj/structure/fluff/railing/tall{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "rW" = (
 /turf/open/water/marsh/deep,
 /area/outdoors/wilderness)
@@ -2451,6 +2554,12 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"tH" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/water/marsh,
+/area/outdoors/wilderness)
 "tI" = (
 /turf/open/water/marsh,
 /area/under/cave)
@@ -3255,6 +3364,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"zk" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "zn" = (
 /obj/item/bin/water,
 /turf/open/floor/cobblerock,
@@ -3480,6 +3593,12 @@
 /obj/effect/mapping_helpers/structure/breaker,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
+"Ba" = (
+/obj/structure/fluff/railing/tall{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "Bc" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3504,6 +3623,10 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/outpost/vanderlin)
+"Bj" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Bl" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
@@ -3579,6 +3702,10 @@
 /obj/structure/flora/tree/evil,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"BZ" = (
+/obj/structure/chair/wood/alt/uncomfortable,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "Cc" = (
 /obj/structure/ladder{
 	redstone_id = Northeast
@@ -3619,6 +3746,10 @@
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
+"Cr" = (
+/obj/structure/fluff/railing/tall,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "Ct" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/cheesecake_slice/poison,
@@ -4614,6 +4745,13 @@
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"Jq" = (
+/obj/structure/fluff/railing/tall{
+	dir = 1
+	},
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "Ju" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/railing/wood{
@@ -4701,6 +4839,10 @@
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"Kc" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Kg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4711,6 +4853,13 @@
 "Kj" = (
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
+"Kk" = (
+/obj/structure/fluff/railing/tall{
+	dir = 8
+	},
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "Kp" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/weapon/shield/wood,
@@ -4891,9 +5040,6 @@
 /obj/structure/table/stone_small,
 /turf/open/floor/churchmarble,
 /area/indoors/dungeon)
-"LV" = (
-/turf/open/floor/dirt,
-/area/indoors/villagegarrison)
 "LW" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/shop)
@@ -5137,6 +5283,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/shop)
+"NS" = (
+/obj/structure/door/green,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "NV" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/naturalstone,
@@ -5430,6 +5582,13 @@
 /obj/structure/bridge,
 /turf/open/openspace,
 /area/outdoors/mountains)
+"Qg" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Qi" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -5617,6 +5776,10 @@
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
 	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
+"Rx" = (
+/obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "RA" = (
@@ -17058,7 +17221,7 @@ Sw
 Sw
 ZV
 gr
-gr
+Nh
 ZV
 ZV
 Nf
@@ -17458,10 +17621,10 @@ Fw
 Fw
 Sw
 Sw
-TW
+zd
 ZV
-Nf
-Nf
+zd
+zd
 ZV
 Fw
 ZV
@@ -17663,8 +17826,8 @@ ZV
 ZV
 gr
 gr
-Nf
-tk
+zd
+yV
 Fw
 Fw
 Fw
@@ -17859,14 +18022,14 @@ zC
 Fw
 Sw
 Sw
-tk
-ZV
-Nf
-tk
+yV
+bt
+zd
+yV
 ZV
 ZV
 gr
-tk
+yV
 ZV
 ZV
 Fw
@@ -18061,11 +18224,11 @@ fq
 Fw
 Sw
 gr
-WT
+yV
 ZV
 ZV
-Nf
-tk
+zd
+yV
 ZV
 gr
 ZV
@@ -18262,17 +18425,17 @@ zC
 Fw
 Sw
 Sw
-tk
+Nh
 gr
 ZV
-tk
-tk
-Nf
+yV
+yV
+zd
 gr
 gr
-TW
+zd
 gr
-ZV
+bt
 ZV
 gr
 gr
@@ -18460,17 +18623,17 @@ Fw
 Lx
 Oq
 Oq
-Fw
-Fw
-Sw
+tH
+tH
+mw
+pS
 gr
 gr
-gr
-Nf
-tk
-tk
-Nf
-Nf
+ZV
+yV
+yV
+zd
+zd
 ZV
 ZV
 gr
@@ -18665,15 +18828,15 @@ zC
 Fw
 Sw
 Sw
-tk
-tk
+Kc
+GT
 ZV
-ZV
+bt
 gr
 ZV
 ZV
-tk
-Nf
+yV
+zd
 gr
 ZV
 gr
@@ -18866,16 +19029,16 @@ DJ
 Fw
 Sw
 Sw
-Nf
-Nf
-gr
-ZV
-Nf
 ZV
 ZV
-Cl
+pS
 ZV
-gr
+ZV
+ZV
+ZV
+yV
+ZV
+Nh
 ZV
 ZV
 BX
@@ -19068,21 +19231,21 @@ ow
 mR
 Sw
 ZV
-Nf
-tk
 ZV
+gr
 ZV
+Qg
 ZV
 Fw
 ZV
 ZV
 ZV
 ZV
-tk
+yV
 ZV
 gr
 ZV
-gr
+Nh
 ZV
 gr
 ZV
@@ -19270,15 +19433,15 @@ ow
 UX
 Sw
 gr
-Nf
-Nf
-Nf
 ZV
+ZV
+zd
+zk
 gr
 fq
 gr
-ZV
-Nf
+bt
+zd
 ZV
 ZV
 ZV
@@ -19473,9 +19636,9 @@ UX
 Sw
 gr
 gr
-Nf
 ZV
-Nf
+ZV
+zk
 ZV
 Fw
 Fw
@@ -19674,17 +19837,17 @@ UX
 Sw
 Sw
 ZV
-tk
-Nf
-TW
 gr
+ZV
+ZV
+Kc
 Fw
 Nt
 Fw
 ZV
 gr
 gr
-tk
+yV
 Nf
 Nf
 gr
@@ -19874,19 +20037,19 @@ Ck
 ow
 UX
 Sw
-WT
-ZV
-tk
-ZV
-ZV
+gr
 ZV
 gr
-tk
+ZV
+ZV
+ZV
+pS
+GT
 Fw
 fq
 gr
 gr
-ZV
+bt
 gr
 tk
 Nf
@@ -20081,13 +20244,13 @@ gr
 gr
 ZV
 gr
-Nf
+ZV
 gr
-gr
-TW
+oZ
 ZV
 ZV
-Nf
+ZV
+zd
 ZV
 gr
 tk
@@ -20278,17 +20441,17 @@ ow
 UX
 UX
 Sw
-tk
 gr
-ZV
 gr
-tk
 ZV
 gr
 gr
 ZV
-Nf
-Nf
+gr
+Kc
+ZV
+ZV
+zd
 gr
 ZV
 ZV
@@ -20480,18 +20643,18 @@ ow
 UX
 Sw
 Sw
-tk
-tk
-Nf
 gr
-tk
-tk
+gr
 ZV
-tk
-Nf
-Nf
-Nf
-Nf
+gr
+gr
+gr
+ZV
+Kc
+ZV
+ZV
+zd
+zd
 gr
 gr
 ZV
@@ -20681,20 +20844,20 @@ Ck
 ow
 UX
 Sw
-Nf
-tk
+ZV
+gr
 ZV
 ZV
 gr
 ZV
-tk
-tk
-Nf
-Nf
-Nf
+gr
+yV
+zk
 ZV
 ZV
-Nf
+ZV
+ZV
+zd
 ZV
 Nf
 gr
@@ -20891,10 +21054,10 @@ fq
 gr
 gr
 gr
-tk
-Nf
-Nf
+Kc
 ZV
+ZV
+bt
 gr
 gr
 gr
@@ -21084,7 +21247,7 @@ Ax
 jv
 mR
 Sw
-iI
+Sw
 ZV
 gr
 Hi
@@ -21092,13 +21255,13 @@ Nt
 Fw
 gr
 ZV
-BX
+zd
+zk
 ZV
 ZV
-Nf
 gr
 ZV
-tk
+yV
 ZV
 gr
 gr
@@ -21290,15 +21453,15 @@ ZV
 ZV
 Fw
 Nt
-tj
+Fw
 ZV
 gr
-Nf
+ZV
 gr
-Nf
+zk
+GT
 gr
-gr
-tk
+yV
 ZV
 YS
 gr
@@ -21488,12 +21651,12 @@ ow
 mR
 sq
 Sw
-tk
+gr
 gr
 ZV
 Fw
 ZV
-Nf
+ZV
 ZV
 gr
 Iz
@@ -21692,7 +21855,7 @@ Sw
 Sw
 gr
 gr
-Nf
+ZV
 ZV
 gr
 gr
@@ -21863,7 +22026,7 @@ Iz
 Iz
 Iz
 Iz
-LV
+gr
 KZ
 DC
 tb
@@ -21891,9 +22054,9 @@ Ck
 ia
 sq
 Sw
-tk
-gr
-Nf
+yV
+GT
+ZV
 gr
 Iz
 Iz
@@ -22103,9 +22266,9 @@ Iz
 Iz
 Iz
 gr
-gr
+Kc
+YS
 ZV
-Nf
 gr
 Iz
 Iz
@@ -22303,11 +22466,11 @@ Iz
 Iz
 Iz
 ZV
-tk
+yV
 ZV
+Kc
 gr
-gr
-ZV
+bt
 gr
 ZV
 Iz
@@ -22507,10 +22670,10 @@ gr
 ZV
 ZV
 ZV
-Nf
+zk
 ZV
 gr
-tk
+yV
 gr
 Iz
 Iz
@@ -22700,18 +22863,18 @@ jv
 mR
 Sw
 Sw
-gr
+GT
 ZV
 gr
 gr
 ZV
 gr
-Nf
-Nf
+ZV
+zd
+ZV
+zk
 ZV
 ZV
-Nf
-Nf
 gr
 gr
 Iz
@@ -22720,7 +22883,7 @@ gr
 Fw
 Fw
 ZV
-ZV
+bt
 ZV
 ZV
 ZV
@@ -22902,19 +23065,19 @@ jv
 sq
 sq
 Sw
-tk
-Nf
 gr
-tk
-Nf
-Nf
+ZV
+gr
+gr
 ZV
 ZV
-tk
-tk
 ZV
-Nf
-Cl
+ZV
+yV
+Kc
+ZV
+ZV
+yV
 gr
 Iz
 Iz
@@ -23105,17 +23268,17 @@ ia
 sq
 Sw
 Sw
-TW
-tk
+ZV
+gr
 gr
 ZV
 ZV
 gr
 gr
 gr
-Nf
-tk
-Nf
+zk
+Nh
+ZV
 gr
 Iz
 Iz
@@ -23311,14 +23474,14 @@ gr
 ZV
 gr
 ZV
-tk
-tk
 gr
+Bj
+ZV
 gr
-WT
-Nf
-Nf
-tk
+Kc
+ZV
+ZV
+yV
 Iz
 Iz
 Iz
@@ -23327,7 +23490,7 @@ gr
 Nf
 ZV
 gr
-gr
+Nh
 ZV
 Fw
 Nf
@@ -23510,22 +23673,22 @@ ia
 sq
 Sw
 Sw
-Nf
 ZV
-Nf
-ZV
-ZV
-Fw
+Mv
+od
+NS
+od
+Hj
 gr
+zk
 ZV
 ZV
-Nf
 gr
 Iz
 Iz
 gr
 gr
-gr
+Nh
 gr
 ZV
 ZV
@@ -23712,15 +23875,15 @@ ow
 mR
 mR
 Sw
-Nf
 ZV
-tk
+od
+Rx
+RV
+wo
+od
 ZV
-Nf
-Fw
-ZV
-Nf
-ZV
+zk
+YS
 ZV
 Iz
 Iz
@@ -23914,14 +24077,14 @@ Ck
 ow
 mR
 Sw
-Nf
-Nf
-gr
 ZV
-Fw
-Nt
-Fw
-Fw
+mN
+wo
+RV
+wo
+mN
+gr
+zk
 ZV
 Fw
 Iz
@@ -24116,14 +24279,14 @@ Ck
 ow
 mR
 Sw
-TW
-Nf
-tk
-gr
-Fw
-Fw
-tj
-Fw
+ZV
+Mv
+wo
+cl
+wo
+Mv
+ZV
+zk
 ZV
 Fw
 Iz
@@ -24319,22 +24482,22 @@ jv
 UX
 Sw
 Sw
-Nf
+od
+wo
+RV
+fR
+od
 gr
-WT
-gr
-HH
-Nt
-Fw
-Fw
-Nf
+zk
+bt
+ZV
 Iz
 Iz
 Nf
 gr
 gr
 ZV
-ZV
+bt
 ZV
 gr
 ZV
@@ -24521,15 +24684,15 @@ jv
 mR
 UX
 Sw
-gr
-Nf
-gr
-tk
+mN
+od
+pq
+od
+Hj
 ZV
-ZV
-Fw
+zk
 gr
-tk
+gr
 Iz
 Iz
 ZV
@@ -24724,13 +24887,13 @@ ow
 mR
 Sw
 gr
-tk
-Nf
+gr
+ZV
 gr
 gr
 ZV
-ZV
-tk
+zk
+gr
 gr
 Iz
 Iz
@@ -24927,17 +25090,17 @@ UX
 Sw
 Sw
 gr
-Nf
 ZV
 ZV
-Nf
 ZV
+zd
+zk
 ZV
 Iz
 Iz
 Iz
 ZV
-gr
+Nh
 ZV
 gr
 ZV
@@ -25129,12 +25292,12 @@ UX
 UX
 Sw
 gr
-Nf
-Nf
 ZV
 ZV
 ZV
-gr
+ZV
+zk
+Nh
 Iz
 Iz
 Iz
@@ -25332,11 +25495,11 @@ UX
 Sw
 Sw
 ZV
-Nf
+zd
 ZV
 gr
-Nf
-Nf
+gL
+YS
 Iz
 Iz
 gr
@@ -25537,7 +25700,7 @@ ZV
 ZV
 ZV
 ZV
-Nf
+zk
 gr
 Iz
 Iz
@@ -25733,13 +25896,13 @@ Ck
 Ck
 Ck
 ow
-UX
-Sw
-Nf
-TW
-ZV
-ZV
-ZV
+cu
+hx
+kx
+kx
+kx
+kx
+nC
 Iz
 Iz
 Iz
@@ -25938,9 +26101,9 @@ hH
 UX
 Sw
 Sw
-Nf
+YS
 ZV
-gr
+Nh
 gr
 Iz
 Iz
@@ -26141,8 +26304,8 @@ UX
 mR
 Sw
 gr
-Nf
-BX
+ZV
+ZV
 ZV
 Iz
 Iz
@@ -26343,7 +26506,7 @@ ow
 UX
 Sw
 gr
-tk
+gr
 ZV
 ZV
 Iz
@@ -26544,10 +26707,10 @@ DJ
 UX
 UX
 Sw
-WT
-gr
-Nf
-Nf
+yV
+Nh
+zd
+zd
 cA
 cA
 XE
@@ -63912,11 +64075,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+od
+rT
+rT
+Kk
+od
 Mi
 Mi
 Mi
@@ -64114,11 +64277,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+Jq
+BZ
+go
+wo
+Cr
 Mi
 Mi
 Mi
@@ -64316,11 +64479,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+Ba
+wo
+RV
+wo
+Cr
 Mi
 Mi
 Mi
@@ -64518,11 +64681,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+eW
+wo
+jn
+wo
+Cr
 Mi
 Mi
 Mi
@@ -64720,11 +64883,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+Jq
+wo
+RV
+wo
+Cr
 Mi
 Mi
 Mi
@@ -64922,11 +65085,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+od
+pB
+pB
+ej
+od
 Mi
 Mi
 Mi
