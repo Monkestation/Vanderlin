@@ -156,7 +156,8 @@
 /datum/augment/special/loyalty_binder
 	name = "shackle"
 	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
-	stability_cost = -10
+	incompatible_installations = list(/datum/augment/special/loyalty_binder)
+	stability_cost = 0
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 20 SECONDS
 
