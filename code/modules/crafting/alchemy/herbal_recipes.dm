@@ -477,6 +477,45 @@
 	. = ..()
 	M.add_stress(/datum/stress_event/mystical_boost)
 
+/datum/reagent/poison/herbal/tranq
+	name = "Liquid Tranquility"
+	description = "A deeply relaxing herbal draught that promotes restful sleep and calms the mind."
+	reagent_state = LIQUID
+	color = "#4a3c5f"
+	metabolization_rate = 0.8
+	overdose_threshold = 10
+	taste_description = "exhaustion and bitter herbs"
+	sleep_power = 120 SECONDS
+
+/datum/reagent/poison/herbal/tranq/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.add_stress(/datum/stress_event/herbal_calm)
+
+/datum/reagent/poison/herbal/tranq/on_mob_life(mob/living/carbon/M)
+	datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
+	if(istype(drowsiness))
+		if(drowsiness?.duration < sleep_power)
+			M.adjust_drowsiness_up_to(30 SECONDS, 120 SECONDS)
+	M.adjust_stamina(10)
+	. = ..()
+
+/datum/reagent/poison/herbal/tranq/overdose_process(mob/living/M)
+	M.Unconscious(200)
+	. = ..()
+
+/datum/reagent/poison/herbal/acid
+	name = "Flamekiss Liqeur"
+	description = "Burning liquid which is tailored to dissolve flesh."
+	reagent_state = LIQUID
+	color = "#6b2f2f"
+	metabolization_rate = 0.1
+	taste_description = "burning pain beyond description"
+
+/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
+	M.adjustFireLoss(20)
+	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5)
+	if(prob(15))
+		M.emote("gag")
 
 // Combat Enhancement
 
