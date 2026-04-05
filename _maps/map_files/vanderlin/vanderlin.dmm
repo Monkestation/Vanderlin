@@ -39720,6 +39720,11 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/tile,
 /area/indoors/town/keep/feast)
+"sAy" = (
+/turf/open/floor/rooftop/green{
+	dir = 8
+	},
+/area/under/cave)
 "sAG" = (
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
@@ -125225,8 +125230,8 @@ gIR
 saC
 eTe
 gIR
-nIO
-nIO
+aOv
+aOv
 sVI
 dID
 qFx
@@ -125427,8 +125432,8 @@ gIR
 iSp
 eTe
 gIR
-nIO
-nIO
+aOv
+aOv
 sVI
 dID
 qFx
@@ -163392,7 +163397,7 @@ liC
 upR
 ckU
 ckU
-esq
+dID
 upq
 oRk
 mLJ
@@ -245607,8 +245612,8 @@ nRI
 nRI
 qFx
 qFx
-glV
-glV
+sAy
+sAy
 uZH
 uZH
 uZH
@@ -245809,8 +245814,8 @@ nRI
 nRI
 qFx
 qFx
-glV
-glV
+sAy
+sAy
 uZH
 uZH
 uZH
@@ -246011,8 +246016,8 @@ nRI
 qFx
 qFx
 qFx
-glV
-glV
+sAy
+sAy
 uZH
 uZH
 uZH
@@ -246214,7 +246219,7 @@ qFx
 qFx
 qFx
 qFx
-glV
+sAy
 uZH
 uZH
 uZH
