@@ -106,6 +106,7 @@
 	color = "#8B4513"
 	w_class = WEIGHT_CLASS_TINY
 	bundletype = /obj/item/natural/bundle/carpet_roll
+	item_weight = 650 GRAMS //going off the standard 35oz per square yard so around 650 grams for our usage
 	var/carpet_type = /obj/structure/carpet
 
 /obj/item/natural/carpet_fibers/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)

@@ -82,7 +82,7 @@
 
 	START_PROCESSING(SSmagic, src)
 
-/datum/mana_pool/Destroy(force, ...)
+/datum/mana_pool/Destroy(force)
 	attunements = null
 	attunements_to_generate = null
 	negative_attunements = null

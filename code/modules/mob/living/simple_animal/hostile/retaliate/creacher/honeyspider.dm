@@ -21,6 +21,7 @@
 							/obj/item/natural/silk = 3)
 	head_butcher = /obj/item/natural/head/spider
 
+	indexed = TRUE
 	health = SPIDER_HEALTH
 	maxHealth = SPIDER_HEALTH
 	food_type = list(/obj/item/bodypart,

@@ -7,6 +7,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
 	grid_width = 32
+	item_weight = 1.5 KILOGRAMS
 	var/detonation_time = 0 // When the charge should explode.
 	var/deployed = FALSE // Is the charge placed?
 	var/ignited = FALSE // Is the fuse lit?

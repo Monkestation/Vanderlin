@@ -97,10 +97,11 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	if(!ghost?.client)
 		return
 
-	var/mob/living/living_parent = parent
-
 	being_offered = FALSE
 
+	ghost.client.stop_sounds_rogue()
+
+	var/mob/living/living_parent = parent
 	living_parent.after_creation()
 	living_parent.key = ghost.client.key
 

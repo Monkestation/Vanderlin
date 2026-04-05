@@ -13,6 +13,7 @@
 	dropshrink = 0.7
 	grid_height = 32
 	grid_width = 32
+	item_weight = 245 GRAMS
 
 	/// associative list of the names of servants to a weakref to their brain
 	var/alist/bound_servants = list()

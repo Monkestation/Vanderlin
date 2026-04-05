@@ -101,6 +101,9 @@
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
 	mill_result = /obj/item/reagent_containers/powder/flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing wheat stalks", /obj/item/natural/chaff/wheat))
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat/examine(mob/user)
 	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -118,6 +121,9 @@
 	bitesize_mod = 2
 	tastes = list("oat" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing oat stalks", /obj/item/natural/chaff/oat))
+	item_weight = 25 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat/examine(mob/user)
 	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -137,7 +143,10 @@
 	tastes = list("chipping a tooth" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
-	mill_result = /obj/item/reagent_containers/powder/flour
+	mill_result = /obj/item/reagent_containers/powder/sunreed_flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing ears of sunreed", /obj/item/natural/chaff/sunreed))
+	item_weight = 20 GRAMS
 
 // ^ PSA: next time you want to do this, make and run an updatepaths migration in tools/UpdatePaths
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple
@@ -155,6 +164,7 @@
 	worn_y_dimension = 64
 	rotprocess = SHELFLIFE_DECENT
 	sellprice = 0 // spoil too quickly to export
+	item_weight = 182 GRAMS
 	var/equippedloc = null
 	var/list/bitten_names = list()
 
@@ -200,6 +210,7 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 12 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/raspberry
@@ -214,6 +225,7 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 4 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/blackberry
@@ -228,6 +240,7 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 5 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	name = "jacksberries"
@@ -243,6 +256,7 @@
 	sellprice = 0 // spoil too quickly to export
 	var/poisonous = FALSE
 	nutrition = BERRY_NUTRITION
+	item_weight = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/Initialize()
 	. = ..()
@@ -312,6 +326,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
+	item_weight = 15 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	seed = null
@@ -326,6 +341,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = null
 	sellprice = 2
+	item_weight = 5 GRAMS
 
 
 /*	..................   Westleach leaf   ................... */
@@ -344,6 +360,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
+	item_weight  = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	seed = null
@@ -358,7 +375,7 @@
 	rotprocess = null
 	sellprice = 1
 	nutrition = SNACK_WORST
-
+	item_weight = 5 GRAMS
 
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage
@@ -372,7 +389,9 @@
 	rotprocess = SHELFLIFE_LONG
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	chopping_sound = TRUE
+	item_weight = 900 GRAMS
 
 /*	..................   Onions   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion
@@ -383,11 +402,13 @@
 	dropshrink = 0.9
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/onion_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	tastes = list("onion" = 1)
 	filling_color = "#fdfaca"
 	bitesize = 2
 	chopping_sound = TRUE
 	rotprocess = SHELFLIFE_LONG
+	item_weight = 110 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion/slice(accuracy, obj/item/W, mob/living/user) // ROGTODO watering eyes
 	var/datum/effect_system/smoke_spread/chem/transparent/S = new	//Since the onion is destroyed when it's sliced,
@@ -418,6 +439,7 @@
 	max_integrity = 50
 	destroy_sound = 'sound/foley/smash_rock.ogg'
 	attacked_sound = 'sound/foley/hit_rock.ogg'
+	item_weight = 1 KILOGRAMS
 
 
 /obj/item/natural/cocaudo/deconstruct(disassembled = FALSE)
@@ -436,10 +458,12 @@
 	filling_color = "#d8d8b6"
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/potato_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	eat_effect = null
 	chopping_sound = TRUE
 	bitesize = 2
 	rotprocess = null
+	item_weight = 150 GRAMS
 
 /*	..................  Pear   ................... */ // for cider or eating raw
 /obj/item/reagent_containers/food/snacks/produce/fruit/pear
@@ -450,6 +474,7 @@
 	bitesize = 2
 	tastes = list("pear" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 178 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/lemon
 	name = "lemon"
@@ -459,6 +484,7 @@
 	bitesize = 2
 	tastes = list("lemon" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 84 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/lime
 	name = "lime"
@@ -468,6 +494,7 @@
 	bitesize = 2
 	tastes = list("lime" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 67 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/tangerine
 	name = "tangerine"
@@ -477,6 +504,7 @@
 	bitesize = 2
 	tastes = list("tangerine" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 88 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/plum
 	name = "plum"
@@ -486,6 +514,7 @@
 	bitesize = 2
 	tastes = list("plum" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 66 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/mango
 	name = "mangga"
@@ -499,6 +528,7 @@
 	chopping_sound = TRUE
 	tastes = list("mangga" = 1)
 	rotprocess = SHELFLIFE_SHORT
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen
 	name = "mangosteen"
@@ -512,6 +542,7 @@
 	chopping_sound = TRUE
 	tastes = list("mangosteen" = 1)
 	rotprocess = SHELFLIFE_SHORT
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/avocado
 	name = "avocado"
@@ -525,6 +556,7 @@
 	chopping_sound = TRUE
 	tastes = list("avocado" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit
 	name = "piyata"
@@ -538,6 +570,7 @@
 	chopping_sound = TRUE
 	tastes = list("piyata" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/pineapple
 	name = "ananas"
@@ -552,6 +585,7 @@
 	chopping_sound = TRUE
 	tastes = list("ananas" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 900 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/tamto
 	name = "tamto"
@@ -565,6 +599,7 @@
 	chopping_sound = TRUE
 	tastes = list("sweet tamto" = 1)
 	rotprocess = SHELFLIFE_SHORT
+	item_weight = 90 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/tamto/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing) //funny
 	new /obj/effect/decal/cleanable/food/tomato_smudge(get_turf(src))
@@ -582,6 +617,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
 	tastes = list("pompkaun" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 3 KILOGRAMS
 
 
 /*	..................   Turnip   ................... */ // only for veggie soup
@@ -594,10 +630,12 @@
 	bitesize = 1
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	foodtype = VEGETABLES
 	chopping_sound = TRUE
 	dropshrink = 0.9
 	rotprocess = SHELFLIFE_EXTREME
+	item_weight = 150 GRAMS
 
 /*	..................   Sunflower   ................... */
 /obj/item/reagent_containers/food/snacks/produce/sunflower
@@ -614,6 +652,7 @@
 	nutrition = 0
 	dropshrink = 0.8
 	rotprocess = null
+	item_weight = 50 GRAMS
 
 /*	..................   Sugarcane   ................... */
 /obj/item/reagent_containers/food/snacks/produce/sugarcane
@@ -632,6 +671,7 @@
 	rotprocess = null
 	foodtype = SUGAR
 	mill_result = /obj/item/reagent_containers/food/snacks/sugar
+	item_weight = 270 GRAMS
 
 /obj/item/reagent_containers/food/snacks/sugar
 	name = "sugar"
@@ -642,6 +682,7 @@
 	foodtype = SUGAR
 	list_reagents = list(/datum/reagent/consumable/sugar = 15)
 	nutrition = SUGAR_NUTRITION
+	item_weight = 150 GRAMS
 
 /*	..................   Fyritius Flower   ................... */ // some sort of funni fire flowers. Dunno just moving them here for consistency.
 /obj/item/reagent_containers/food/snacks/produce/fyritius
@@ -658,6 +699,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
+	item_weight = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fyritius/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -707,6 +749,7 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	body_parts_covered = NONE
 	alternate_worn_layer  = 8.9
+	item_weight = 5 GRAMS
 
 /* .......... Mushrooms ........ */
 /obj/item/reagent_containers/food/snacks/produce/mushroom/capillus
@@ -724,6 +767,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_EXTREME
 	eat_effect = /datum/status_effect/debuff/badmeal
+	item_weight = 8 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/waddle
 	name = "waddle"
@@ -737,6 +781,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 20 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/merkel
 	name = "merkel"
@@ -750,6 +795,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 15 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/caveweep
 	name = "caveweep"
@@ -763,6 +809,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 12 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
 	name = "borowiki"
@@ -776,6 +823,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 25 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
 	name = "drowsbane"
@@ -791,6 +839,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	list_reagents = list(/datum/reagent/drowsbane = 5)
 	grind_results = list(/datum/reagent/drowsbane = 5)
+	item_weight = 10 GRAMS
 
 /* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later
 	name = "chanterelle"
@@ -823,11 +872,4 @@
 	grind_results = list(/datum/reagent/toxin/amanitin = 6)
 
 */
-
-/proc/display_shit()
-	var/list/list = subtypesof(/obj/item/alch)
-	var/type_list = ""
-	for(var/i in list)
-		type_list += "[i], "
-	usr << browse(list)
 

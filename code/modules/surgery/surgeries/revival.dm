@@ -40,7 +40,9 @@
 		/obj/item/reagent_containers/lux = 100,
 		/obj/item/reagent_containers/lux_tainted = 50,
 	)
+
 	time = 10 SECONDS
+
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 	var/tainted_lux = FALSE

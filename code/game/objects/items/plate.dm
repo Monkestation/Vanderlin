@@ -6,6 +6,7 @@
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	possible_item_intents = list(/datum/intent/use, /datum/intent/food)
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 300 GRAMS
 	///How many things fit on this plate?
 	var/max_items = 2
 	///The offset from side to side the food items can have on the plate
@@ -157,6 +158,7 @@
 	icon_state = "platter_clay"
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
 	resistance_flags = FIRE_PROOF
+	item_weight = 400 GRAMS
 
 /obj/item/plate/clay/set_material_information()
 	. = ..()
@@ -168,6 +170,7 @@
 	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	qdel(src)
 
+
 /obj/item/plate/copper
 	name = "copper platter"
 	desc = "A platter made from a sheet of copper. Known to impart a metallic taste when eating certain foods."
@@ -175,6 +178,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	item_weight = 600 GRAMS
 
 /obj/item/plate/pewter
 	name = "pewter platter"
@@ -183,6 +187,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	max_fork_usages = 7
+	item_weight = 500 GRAMS
 
 /obj/item/plate/silver
 	name = "silver platter"
@@ -193,6 +198,7 @@
 	sellprice = 12
 	smeltresult = /obj/item/ingot/silver
 	max_fork_usages = 9
+	item_weight = 700 GRAMS
 
 /obj/item/plate/silver/Initialize(mapload)
 	. = ..()
@@ -207,6 +213,7 @@
 	sellprice = 20
 	smeltresult = /obj/item/ingot/gold
 	max_fork_usages = 11
+	item_weight = 900 GRAMS
 
 /obj/item/plate/jade
 	name = "joapstone platter"
@@ -216,6 +223,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
 	max_fork_usages = 11
+	item_weight = 800 GRAMS
 
 /obj/item/plate/onyxa
 	name = "onyxa platter"
@@ -225,6 +233,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 40
 	max_fork_usages = 11
+	item_weight = 600 GRAMS
 
 /obj/item/plate/shell
 	name = "shell platter"
@@ -234,6 +243,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 20
 	max_fork_usages = 11
+	item_weight = 400 GRAMS
 
 /obj/item/plate/rose
 	name = "rosellusk platter"
@@ -243,6 +253,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 25
 	max_fork_usages = 11
+	item_weight = 450 GRAMS
 
 /obj/item/plate/amber
 	name = "petriamber platter"
@@ -252,6 +263,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
 	max_fork_usages = 11
+	item_weight = 350 GRAMS
 
 /obj/item/plate/opal
 	name = "opaloise platter"
@@ -261,6 +273,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 90
 	max_fork_usages = 11
+	item_weight = 700 GRAMS
 
 /obj/item/plate/coral
 	name = "aoetal platter"
@@ -270,6 +283,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 70
 	max_fork_usages = 11
+	item_weight = 750 GRAMS
 
 /obj/item/plate/turq
 	name = "ceruleabaster platter"
@@ -279,6 +293,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 85
 	max_fork_usages = 11
+	item_weight = 850 GRAMS
 
 /obj/item/tray
 	name = "tray"
@@ -290,6 +305,7 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_BULKY
+	item_weight = 500 GRAMS
 
 /obj/item/tray/psy
 	name = "tray"

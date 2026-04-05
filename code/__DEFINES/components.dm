@@ -43,6 +43,8 @@
 #define COMSIG_ATOM_EXITED "atom_exited"						//from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
 #define COMSIG_ATOM_BUMPED "atom_bumped"						//from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"				//from base of atom/setDir(): (old_dir, new_dir)
+///from base of atom/setDir(): (old_dir, new_dir). Called after the direction changes.
+#define COMSIG_ATOM_POST_DIR_CHANGE "atom_post_dir_change"
 #define COMSIG_ATOM_CONTENTS_DEL "atom_contents_del"			//from base of atom/handle_atom_del(): (atom/deleted)
 #define COMSIG_ATOM_CANREACH "atom_can_reach"					//from internal loop in atom/movable/proc/CanReach(): (list/next)
 	#define COMPONENT_BLOCK_REACH 1
@@ -360,9 +362,11 @@
 #define COMSIG_AUGMENT_REMOVE "augment_remove"
 #define COMSIG_AUGMENT_REPAIR "augment_repair"
 #define COMSIG_AUGMENT_GET_STABILITY "augment_get_stability"
+#define COMSIG_AUGMENT_GET_INSTALLED "augment_get_installed"
 
 #define COMPONENT_AUGMENT_SUCCESS (1<<0)
 #define COMPONENT_AUGMENT_FAILED (1<<1)
+#define COMPONENT_AUGMENT_CONFLICT (1<<2)
 
 #define COMSIG_SHARE_APPRENTICE_XP "comsig_share_xp"
 #define COMSIG_SKILL_LEVEL_CHANGE "comsig_level_changed"

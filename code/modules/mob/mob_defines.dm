@@ -90,6 +90,7 @@
 	/// How many ticks this mob has been over reating
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
+	var/uses_random_stats = TRUE
 	/// Skill holder
 	var/datum/attribute_holder/attributes = /datum/attribute_holder
 	/// Extra effort that can be spent on efforts
@@ -289,6 +290,8 @@
 
 	/// new title given by an admin.
 	var/admin_title = null
+	///if true we spawn this mob and look for data for guidebooks
+	var/indexed = FALSE
 
 	VAR_PROTECTED/base_strength = 10
 	VAR_PROTECTED/base_perception = 10

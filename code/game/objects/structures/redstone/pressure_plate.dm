@@ -30,7 +30,7 @@
 		current_occupants[arrived] = TRUE
 		check_activation()
 
-/obj/structure/redstone/pressure_plate/proc/on_exited(datum/source, atom/movable/gone, direction)
+/obj/structure/redstone/pressure_plate/proc/on_exited(datum/source, atom/movable/gone, atom/new_loc)
 	SIGNAL_HANDLER
 	if(gone in current_occupants)
 		current_occupants -= gone

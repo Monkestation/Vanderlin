@@ -75,6 +75,7 @@
 	possible_item_intents = list(/datum/intent/hit)
 	obj_flags = CAN_BE_HIT
 	bigboy = TRUE
+	item_weight = 4 KILOGRAMS
 	var/datum/looping_sound/psydonmusicboxsound/soundloop
 
 /obj/item/psydonmusicbox/examine(mob/user)
@@ -240,11 +241,12 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psycenser"
 	item_state = "psycenser"
-	light_range = 8
+	light_outer_range = 8
 	light_color ="#70d1e2"
 	possible_item_intents = list(/datum/intent/flail/strike/smash/golgotha)
 	fuel = 999 MINUTES
 	force = 30
+	item_weight = 800 GRAMS
 	var/next_smoke
 	var/smoke_interval = 2 SECONDS
 
@@ -432,6 +434,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 0
 	verb_exclaim = "blares"
+	item_weight = 80 GRAMS
 	var/cursedblood
 	var/active
 	var/full
@@ -652,6 +655,7 @@
 	experimental_inhand = TRUE
 	w_class = WEIGHT_CLASS_SMALL
 	embedding = null
+	item_weight = 150 GRAMS
 	var/tallow
 	var/remaining
 	var/heatedup
@@ -738,6 +742,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	embedding = null
 	sellprice = 0
+	item_weight = 100 GRAMS
 
 /obj/item/rope/inqarticles/inquirycord/getonmobprop(tag)
 	. = ..()
@@ -771,6 +776,7 @@
 	can_parry = FALSE
 	break_sound = 'sound/items/garrotebreak.ogg'
 	gripped_intents = list(/datum/intent/garrote/grab, /datum/intent/garrote/choke)
+	item_weight = 150 GRAMS
 	var/datum/weakref/victim
 	var/datum/weakref/lastuser
 	var/obj/item/grabbing/currentgrab
@@ -978,6 +984,7 @@
 	resistance_flags = INDESTRUCTIBLE
 	choke_damage = 16
 	sellprice = 100
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/inqarticles/blackbag
 	name = "black bag"
@@ -1003,6 +1010,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	grid_width = 32
 	grid_height = 64
+	item_weight = 300 GRAMS
 	var/worn = FALSE
 	var/bagging = FALSE
 
@@ -1117,6 +1125,7 @@
 	hitsound = 'sound/blank.ogg'
 	sellprice = 0
 	resistance_flags = FIRE_PROOF
+	item_weight = 400 GRAMS
 	var/opened = FALSE
 	var/fedblood = FALSE
 	var/bloody = FALSE
@@ -1224,9 +1233,10 @@
 				if(HL.real_name == name)
 					fixation = WEAKREF(HL)
 					target = HL
-				playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-				to_chat(user, span_warning("[src] makes a grating sound."))
-				return
+					break
+			playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+			to_chat(user, span_warning("[src] makes a grating sound."))
+			return
 		else if(input == "BLOOD")
 			target = feeder?.resolve()
 
@@ -1386,14 +1396,13 @@
 	if(!istype(L))
 		return
 
-	var/datum/weakref/lookat = null
+	var/atom/movable/target = null
 	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
-		lookat = source
+		target = source
 	else
-		lookat = source.feeder
+		target = source.feeder?.resolve()
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
-	var/mob/living/target = lookat?.resolve()
 	if(!target)
 		return
 	var/mob/dead/observer/screye/blackmirror/S = L.scry_ghost()
@@ -1416,6 +1425,7 @@
 	item_state = "spyglass"
 	grid_height = 32
 	grid_width = 32
+	item_weight = 200 GRAMS
 
 /obj/item/inqarticles/spyglass/attack_self(mob/living/user)
 	. = ..()

@@ -35,6 +35,8 @@
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
+	job_bitflag = BITFLAG_CHURCH
+
 	mind_traits = list(
 		TRAIT_KNOW_INQUISITION_DOORS
 	)

@@ -3,7 +3,8 @@
 	tags = list(
 		TAG_DENDOR,
 		TAG_GRAGGAR,
-		TAG_COMBAT,
+		TAG_BLOOD,
+		TAG_WAR,
 		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)
@@ -12,11 +13,13 @@
 	shared_occurence_type = SHARED_HIGH_THREAT
 	denominator = 40
 
-	base_antags = 2
+	base_antags = 4
 	maximum_antags = 4
 
+	cost = 1.1
+
 	earliest_start = 0 SECONDS
-	min_players = 40
+	min_players = HIGHPOP_THRESHOLD
 	weight = 8
 	secondary_prob = 0
 	typepath = /datum/round_event/antagonist/solo/vampires_and_werewolves

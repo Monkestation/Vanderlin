@@ -70,7 +70,7 @@
 
 /obj/structure/vampire/portal/Initialize()
 	. = ..()
-	set_light(3, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
+	set_light(3, 2, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
 	playsound(src, 'sound/misc/portalopen.ogg', 100, FALSE, pressure_affected = FALSE)
 
 	addtimer(CALLBACK(src, PROC_REF(delete)), 60 SECONDS)

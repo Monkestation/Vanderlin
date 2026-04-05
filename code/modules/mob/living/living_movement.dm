@@ -1,4 +1,4 @@
-/mob/living/Moved()
+/mob/living/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	stop_looking()
 	update_turf_movespeed(loc)
@@ -116,8 +116,44 @@
 /mob/living/can_zFall(turf/T, levels)
 	return ..()
 
-/mob/living/canZMove(dir, turf/target)
-	return can_zTravel(target, dir) && (movement_type & FLYING)
+/mob/living/canZMove(dir, turf/target, swimming = FALSE)
+	if(!swimming)
+		return can_zTravel(target, dir) && (movement_type & FLYING)
+	if(!istype(target, /turf/open/water))
+		return FALSE
+	return can_zTravel(target, dir)
+
+/// Attempts to move the mob across z levels while swimming. Set forced TRUE if something other than the mob causes the move.
+/mob/living/proc/zSwim(dir, forced = FALSE)
+	if(!HAS_TRAIT(src, TRAIT_SUBMERGED))
+		return
+	if(!forced)
+		if(stat == DEAD)
+			return
+		if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+			return
+		if(!COOLDOWN_FINISHED(src, cd_zswim))
+			return
+		if(dir == UP && HAS_TRAIT(src, TRAIT_SINKING))
+			to_chat(src, span_warning("You are sinking and cannot surface!"))
+		else if(zMove(dir, FALSE, TRUE))
+			var/zswim_time = 2 SECONDS - ((1 DECISECONDS * GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming)) + (1 SECONDS * HAS_TRAIT(src, TRAIT_GOOD_SWIM)))
+			COOLDOWN_START(src, cd_zswim, zswim_time)
+			if(dir == UP)
+				to_chat(src, span_notice("You swim upward."))
+			else
+				to_chat(src, span_notice("You swim downward."))
+		else
+			if(dir == UP)
+				to_chat(src, span_warning("You are unable to swim any higher."))
+			else
+				to_chat(src, span_warning("You can't swim any further down."))
+	else
+		if(zMove(dir, FALSE, TRUE) && stat != DEAD)
+			if(dir == UP)
+				to_chat(src, span_warningbig("A strong current pushes you upward!"))
+			else
+				to_chat(src, span_warningbig("You sink beneath the water!"))
 
 /mob/living/can_safely_descend(turf/target)
 	target = GET_TURF_BELOW(target)

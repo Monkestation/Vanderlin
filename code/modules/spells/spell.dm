@@ -259,7 +259,7 @@
 	if(spell_type == SPELL_RAGE)
 		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
-	RegisterSignal(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
+	RegisterSignals(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
 /datum/action/cooldown/spell/Remove(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(
@@ -410,10 +410,6 @@
 		new_cost -= spell_cost * (owner_stat - 10) * 0.02
 	else
 		new_cost += spell_cost * (10 - owner_stat) * 0.02
-
-	var/owner_encumbrance = living_owner.get_encumbrance()
-	if(owner_encumbrance > 0.4)
-		new_cost += spell_cost * owner_encumbrance * 0.5
 
 	return max(new_cost, 0)
 
@@ -1020,9 +1016,9 @@
 		return
 
 	if(!experience_max_skill)
-		experience_max_skill = SKILL_LEVEL_LEGENDARY * 10
+		experience_max_skill = SKILL_LEVEL_LEGENDARY
 
-	var/skill_level = GET_MOB_SKILL_VALUE_RAW_OLD(owner, associated_skill)
+	var/skill_level = GET_MOB_SKILL_VALUE_RAW(owner, associated_skill)
 	if(skill_level >= experience_max_skill)
 		return
 
@@ -1063,7 +1059,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignal(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 

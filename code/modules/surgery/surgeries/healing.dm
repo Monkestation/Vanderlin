@@ -56,7 +56,6 @@
 	)
 
 	time = 4 SECONDS
-	repeatable = TRUE
 
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'

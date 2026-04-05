@@ -7,7 +7,8 @@
 	var/fixed_ambush = FALSE // Some region like Underdark cannot be reduced in danger
 	var/lowpop_tick = 1 // How much ambush to tick up every iteration <= 30 pop
 	var/highpop_tick = 2 // How much ambush to tick up every iteration > 30 pop
-	var/last_natural_ambush_time = 0
+	COOLDOWN_DECLARE(natural_ambush)
+	COOLDOWN_DECLARE(induced_ambush)
 	var/last_induced_ambush_time = 0 // Time between now and the previous ambush triggered by horn
 
 /datum/threat_region/proc/reduce_latent_ambush(amount)

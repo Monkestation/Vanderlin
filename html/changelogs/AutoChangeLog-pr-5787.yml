@@ -1,0 +1,7 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - qol: "SCOM now respects Monarch title when announcing decrees"
+  - qol: "SCOM now displays decrees from first to last when right clicking"
+  - bugfix: "Priest coronation now properly updates monarch ruler_title"
+  - code_imp: "DMdoc for text.dm procs"

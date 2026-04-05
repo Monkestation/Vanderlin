@@ -16,6 +16,7 @@
 	icon_state = "corset"
 	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
+	item_weight = 230 GRAMS
 
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
@@ -24,7 +25,10 @@
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/fur
+	dyeable = TRUE
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	// It looks better without these
@@ -33,7 +37,7 @@
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 3.2 KILOGRAMS
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -46,7 +50,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -57,7 +61,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 3.2 * IRON_MULTIPLIER
+	item_weight = 6.24 KILOGRAMS
 	stand_speed_reduction = 1.15
 
 /obj/item/clothing/armor/brigandine/Initialize()
@@ -89,7 +93,7 @@
 	blocksound = SOFTHIT
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
-	anvilrepair = /datum/attribute/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_BRIGANDINE
@@ -99,7 +103,6 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * STEEL_MULTIPLIER
 	uses_lord_coloring = LORD_PRIMARY
 	stand_speed_reduction = 1.15
 
@@ -121,18 +124,6 @@
 
 	max_integrity = INTEGRITY_STRONG
 
-/obj/item/clothing/shirt/vampire
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
-	name = "regal silks"
-	desc = ""
-	body_parts_covered = CHEST|GROIN|LEGS|VITALS
-	prevent_crits = list(BCLASS_BITE, BCLASS_TWIST)
-	icon_state = "vrobe"
-	item_state = "vrobe"
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-
-
 /obj/item/clothing/armor/brigandine/light
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "lightweight brigandine"
@@ -147,3 +138,4 @@
 	armor_class = AC_LIGHT//steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
+	item_weight = 3.95 KILOGRAMS

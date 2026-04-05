@@ -10,10 +10,11 @@
 	w_class = WEIGHT_CLASS_SMALL
 	flags_1 = null
 	light_system = MOVABLE_LIGHT
-	light_range = 4
+	light_outer_range = 4
 	light_power = 1
 	slot_flags = ITEM_SLOT_HIP
 	possible_item_intents = list(INTENT_GENERIC)
+	item_weight = 125 GRAMS
 	var/on = FALSE
 
 /obj/item/flashlight/Initialize()
@@ -48,7 +49,7 @@
 	name = "flare"
 	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
-	light_range = 7 // Pretty bright.
+	light_outer_range = 7 // Pretty bright.
 	icon_state = "flare"
 	item_state = "flare"
 	actions_types = list()
@@ -118,7 +119,7 @@
 	name = "torch"
 	desc = ""
 	w_class = WEIGHT_CLASS_NORMAL
-	light_range = 5
+	light_outer_range = 5
 	force = 1
 	icon = 'icons/roguetown/items/lighting.dmi'
 	icon_state = "torch"
@@ -134,6 +135,7 @@
 	var/max_uses = 12
 	max_integrity = 40
 	fuel = 30 MINUTES
+	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
 
@@ -243,7 +245,7 @@
 	name = "torch"
 	force = 1
 	icon_state = "mtorch"
-	light_range = 6
+	light_outer_range = 6
 	fuel = 120 MINUTES
 	should_self_destruct = TRUE
 	max_uses = 60
@@ -259,7 +261,7 @@
 	name = "iron lamptern"
 	icon_state = "lamp"
 	desc = "A light to guide the way."
-	light_range = 7
+	light_outer_range = 7
 	on = FALSE
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_HIP
@@ -271,6 +273,7 @@
 	extinguish_prob = 10
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 400 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
@@ -303,19 +306,20 @@
 	icon_state = "bronzelamp"
 	item_state = "bronzelamp"
 	desc = "A marvel of engineering that emits a strange green glow."
-	light_range = 9
+	light_outer_range = 9
 	light_power = 2
 	light_color ="#3fff8f"
 	on = FALSE
 	extinguish_prob = 0
 	melting_material = /datum/material/bronze
 	melt_amount = 75
+	item_weight = 453 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/copper
 	name = "copper lamptern"
 	icon_state = "clamp"
 	desc = "A simple and cheap lamptern."
-	light_range = 7
+	light_outer_range = 7
 	on = FALSE
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_HIP
@@ -326,6 +330,7 @@
 	extinguish_prob = 15
 	melting_material = /datum/material/copper
 	melt_amount = 75
+	item_weight = 375 GRAMS
 
 /obj/item/flashlight/flare/torch/lantern/copper/getonmobprop(tag)
 	. = ..()

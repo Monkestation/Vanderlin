@@ -4,6 +4,7 @@
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "node_jar"
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 1.2 KILOGRAMS
 
 	var/obj/item/essence_node_portable/contained_node
 	var/max_tier = 0

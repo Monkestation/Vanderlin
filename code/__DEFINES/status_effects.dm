@@ -138,6 +138,11 @@
 
 #define STATUS_EFFECT_BOUNTY /datum/status_effect/bounty //rewards the person who added this to the target with refreshed spells and a fair heal
 
+/// The affected is unable to use or pickup items, plus will fall down depending on stats
+#define STATUS_EFFECT_STUMBLE /datum/status_effect/incapacitating/stumble
+/// The affected mob gets a very annoying screen effect
+#define STATUS_EFFECT_CONCUSSION /datum/status_effect/incapacitating/concussion
+
 /////////////
 //  SLIME  //
 /////////////

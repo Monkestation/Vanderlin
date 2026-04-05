@@ -5,6 +5,8 @@
 	icon = 'icons/paint_supplies/canvas_32.dmi'
 	icon_state = "canvas"
 
+	item_weight = 95 GRAMS
+
 	var/easel_offset = 9
 	var/canvas_size_x = 32
 	var/canvas_size_y = 32

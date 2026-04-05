@@ -1,6 +1,3 @@
-
-
-
 /obj/item/lipstick
 	gender = PLURAL
 	name = "red lipstick"
@@ -8,6 +5,7 @@
 	icon = 'icons/roguetown/items/perfume.dmi'
 	icon_state = "lipstick"
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 20 GRAMS
 	var/colour = "#821d2c"
 	var/open = FALSE
 

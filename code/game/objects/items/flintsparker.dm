@@ -15,6 +15,8 @@
 
 	COOLDOWN_DECLARE(flintcd)
 
+	item_weight = 50 GRAMS
+
 /obj/item/flint/attack_self(mob/living/user, list/modifiers)
 	if(!COOLDOWN_FINISHED(src, flintcd))
 		return NONE

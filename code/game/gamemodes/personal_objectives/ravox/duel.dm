@@ -45,7 +45,7 @@
 	addtimer(CALLBACK(src, PROC_REF(end_duel)), 8 MINUTES, TIMER_DELETE_ME)
 	addtimer(CALLBACK(src, PROC_REF(check_duel)), 4 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
 
-/datum/duel/Destroy(force, ...)
+/datum/duel/Destroy(force)
 	challenger = null
 	challenged = null
 	return ..()

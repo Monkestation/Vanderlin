@@ -10,6 +10,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_personal_see_leylines,
 	/client/proc/spawn_liquid,
 	/client/proc/borbop_oopsie,
+	/client/proc/nya,
 	/client/proc/spawn_faction_trader,
 	/client/proc/crop_nutrient_debug,
 	/client/proc/remove_liquid,
@@ -473,7 +474,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/set_tod_override()
 	set category = "Debug"
 	set name = "SetTODOverride"
-	var/list/TODs = list("dawn","day","dusk","night")
+	var/list/TODs = list(DAWN,DAY,DUSK,NIGHT)
 	var/choice = input(src,"","Set time of day override") as null|anything in TODs
 	if(choice)
 		GLOB.todoverride = choice

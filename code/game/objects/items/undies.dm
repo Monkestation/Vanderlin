@@ -10,6 +10,7 @@
 	max_integrity = 200
 	integrity_failure = 0.1
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	item_weight = 21 GRAMS
 	var/gendered = MALE
 	var/race
 	var/cached_undies

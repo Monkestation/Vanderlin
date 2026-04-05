@@ -22,6 +22,7 @@
 	poursounds = list('sound/items/fillbottle.ogg')
 	experimental_onhip = TRUE
 	sellprice = 1
+	item_weight = 34 GRAMS
 
 /obj/item/reagent_containers/glass/alchemical/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(closed)

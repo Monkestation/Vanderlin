@@ -501,8 +501,9 @@
 	duration = 15 SECONDS
 
 /datum/status_effect/buff/bloodrage/on_creation(mob/living/carbon/new_owner, duration_override, ...)
-	var/holyskill = GET_MOB_SKILL_VALUE_OLD(new_owner, /datum/attribute/skill/magic/holy)
-	duration = ((15 SECONDS) * holyskill)
+	var/holyskill = GET_MOB_SKILL_VALUE(new_owner, /datum/attribute/skill/magic/holy)
+	duration = (holyskill SECONDS)
+	new_owner.add_stun_absorption("Graggar's rage", duration, 2, "doesn't even flinch as rage courses through them!", "You shrug off the stun!", " glowing with a blazing red aura!")
 	if(holyskill >= SKILL_LEVEL_APPRENTICE)
 		effectedstats = list(STAT_STRENGTH = 2)
 	else
@@ -518,7 +519,7 @@
 /datum/status_effect/buff/bloodrage/on_remove()
 	. = ..()
 	owner.visible_message(span_warning("[owner] wavers, their rage simmering down."))
-	owner.OffBalance(3 SECONDS)
+	owner.OffBalance(5 SECONDS)
 	owner.remove_filter(BLOODRAGE_FILTER)
 	owner.emote("breathgasp", forced = TRUE)
 	owner.Slowdown(3)

@@ -17,8 +17,8 @@
 		BODY_ZONE_L_LEG,
 	)
 
-	skill_min = SKILL_LEVEL_NONE
-	skill_median = SKILL_LEVEL_NOVICE
+	skill_min = SKILL_RANK_NOVICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 
 /datum/surgery/remove_external_organs/can_start(mob/user, mob/living/patient, obj/item/tool, feedback)
 	. = ..()

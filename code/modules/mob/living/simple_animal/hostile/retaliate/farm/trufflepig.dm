@@ -155,6 +155,7 @@
 	can_saddle = TRUE
 
 	ai_controller = /datum/ai_controller/pig
+	indexed = TRUE
 
 
 

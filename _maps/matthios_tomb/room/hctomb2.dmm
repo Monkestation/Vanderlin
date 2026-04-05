@@ -426,16 +426,6 @@
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave)
-"Hc" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/weapon/shovel,
-/obj/item/clothing/pants/trou/leather/mourning,
-/obj/item/clothing/shirt/robe/necra,
-/obj/item/clothing/head/padded/deathshroud,
-/obj/item/clothing/neck/psycross/silver/divine/necra,
-/turf/open/floor/dirt/road,
-/area/under/tomb)
 "IB" = (
 /obj/item/natural/rock/random,
 /turf/open/floor/naturalstone,
@@ -534,6 +524,16 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment,
 /turf/open/floor/dirt,
+/area/under/tomb)
+"TC" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/weapon/shovel,
+/obj/item/clothing/pants/trou/leather/mourning,
+/obj/item/clothing/shirt/robe/necra,
+/obj/item/clothing/head/padded/deathshroud,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/turf/open/floor/dirt/road,
 /area/under/tomb)
 "Vc" = (
 /obj/structure/flora/grass/bush,
@@ -1065,7 +1065,7 @@ Lz
 CZ
 in
 XK
-Hc
+TC
 XK
 in
 wu

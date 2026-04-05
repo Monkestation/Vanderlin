@@ -23,6 +23,7 @@
 @include meta.load-css('./interfaces/ListInput.scss');
 @include meta.load-css('./interfaces/Orbit.scss');
 @include meta.load-css('./interfaces/PreferencesMenu.scss');
+@include meta.load-css('./interfaces/RecipeBook.scss');
 
 // Layouts
 @include meta.load-css('./layouts/Layout.scss');

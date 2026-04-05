@@ -925,6 +925,27 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
+"mt" = (
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/gloves/plate/rust,
+/obj/item/clothing/head/helmet/heavy/rust,
+/obj/item/clothing/shoes/boots/armor/light/rust,
+/obj/item/clothing/pants/platelegs/rust,
+/obj/item/weapon/polearm/spear/billhook,
+/obj/item/clothing/neck/chaincoif,
+/obj/item/clothing/armor/plate/rust,
+/obj/item/clothing/armor/chainmail,
+/obj/item/clothing/ring/gold/rontz,
+/obj/item/clothing/neck/psycross/gold,
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_speed = 12;
+	base_strength = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	candodge = 0
+	},
+/turf/open/floor/churchbrick,
+/area/under/tomb/indoors/church)
 "mx" = (
 /turf/open/water/sewer,
 /area/under/tomb/indoors)
@@ -1064,6 +1085,19 @@
 /obj/structure/fluff/walldeco/psybanner,
 /turf/closed/wall/mineral/decostone/cand,
 /area/under/tomb/indoors)
+"oN" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	real_name = "Strange Skeleton"
+	},
+/obj/item/clothing/head/peaceflower,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/shoes/boots/leather,
+/obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/ring/gold/blortz,
+/obj/item/clothing/neck/psycross/gold,
+/turf/open/floor/cobblerock,
+/area/under/tomb/wilds)
 "oY" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/church,
@@ -1929,19 +1963,6 @@
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
-"BS" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	real_name = "Strange Skeleton"
-	},
-/obj/item/clothing/head/peaceflower,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/shoes/boots/leather,
-/obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
-/obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/ring/gold/blortz,
-/obj/item/clothing/neck/psycross/gold,
-/turf/open/floor/cobblerock,
-/area/under/tomb/wilds)
 "BV" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	redstone_id = "L13"
@@ -2558,27 +2579,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/church,
 /area/under/tomb/indoors)
-"Kv" = (
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/gloves/plate/rust,
-/obj/item/clothing/head/helmet/heavy/rust,
-/obj/item/clothing/shoes/boots/armor/light/rust,
-/obj/item/clothing/pants/platelegs/rust,
-/obj/item/weapon/polearm/spear/billhook,
-/obj/item/clothing/neck/chaincoif,
-/obj/item/clothing/armor/plate/rust,
-/obj/item/clothing/armor/chainmail,
-/obj/item/clothing/ring/gold/rontz,
-/obj/item/clothing/neck/psycross/gold,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_speed = 12;
-	base_strength = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	candodge = 0
-	},
-/turf/open/floor/churchbrick,
-/area/under/tomb/indoors/church)
 "Ky" = (
 /obj/structure/lever/hidden{
 	redstone_id = "L9"
@@ -6128,7 +6128,7 @@ Qi
 gF
 Ts
 aT
-BS
+oN
 ym
 tU
 aT
@@ -6836,7 +6836,7 @@ NZ
 Kn
 mE
 WZ
-Kv
+mt
 mE
 mE
 mE

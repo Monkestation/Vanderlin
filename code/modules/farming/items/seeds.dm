@@ -12,6 +12,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 	possible_item_intents = list(/datum/intent/use)
+	item_weight = 3 GRAMS
 	var/datum/plant_def/plant_def_type
 
 	var/datum/plant_genetics/seed_genetics
@@ -42,8 +43,8 @@
 		qdel(src)
 
 /obj/item/neuFarm/seed/get_over_text_content(mob/user)
-	var/farming_value = user?.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : 6
-	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || farming_value >= 2)
+	var/farming_value = user?.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) : 60
+	if(HAS_TRAIT(user, TRAIT_SEEDKNOW) || farming_value >= SKILL_LEVEL_APPRENTICE)
 		var/datum/plant_def/plant_def_instance = GLOB.plant_defs[plant_def_type]
 		if(plant_def_instance)
 			return plant_def_instance.seed_identity
@@ -82,7 +83,7 @@
 		balloon_alert(user, "blocked!")
 		return ITEM_INTERACT_BLOCKING
 
-	if(!(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
+	if(!(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/labor/farming) >= SKILL_LEVEL_JOURNEYMAN))
 		balloon_alert(user, "not enough skill!")
 		return ITEM_INTERACT_BLOCKING
 

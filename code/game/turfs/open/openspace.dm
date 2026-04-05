@@ -1,14 +1,3 @@
-GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdrop, new)
-
-/atom/movable/openspace_backdrop
-	name = "openspace_backdrop"
-	icon = 'icons/turf/floors.dmi'
-	icon_state = "grey"
-	anchored = TRUE
-	plane = OPENSPACE_BACKDROP_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	vis_flags = VIS_INHERIT_ID
-
 /turf/open/openspace
 	name = "open space"
 	desc = "My eyes can see far down below."
@@ -18,6 +7,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	CanAtmosPassVertical = ATMOS_PASS_YES
 	var/can_cover_up = TRUE
 	var/can_build_on = TRUE
+	dynamic_lighting = 1
 	path_weight = 500
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_FLOOR_OPEN_SPACE
@@ -26,7 +16,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 
 /turf/open/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
-	vis_contents += GLOB.openspace_backdrop_one_for_all //Special grey square for projecting backdrop darkness filter on it.
 	return INITIALIZE_HINT_LATELOAD
 
 /turf/open/openspace/LateInitialize()

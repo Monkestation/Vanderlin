@@ -40,6 +40,7 @@
 	)
 	time = 3.2 SECONDS
 	accept_hand = TRUE
+
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 

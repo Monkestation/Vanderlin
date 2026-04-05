@@ -6,7 +6,7 @@
 	race = /datum/species/goblin
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
-					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin)
+					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin, /obj/item/bodypart/mouth)
 	rot_type = /datum/component/rot/corpse/goblin
 	var/gob_outfit = /datum/outfit/npc/goblin
 	ambushable = FALSE
@@ -458,7 +458,7 @@
 		return
 	spawning = FALSE
 	if(moon_goblins == 0)
-		if(GLOB.tod == "night")
+		if(GLOB.tod == NIGHT)
 			if(prob(30))
 				moon_goblins = 1
 			else

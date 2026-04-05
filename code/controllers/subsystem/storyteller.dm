@@ -475,32 +475,31 @@ SUBSYSTEM_DEF(gamemode)
 		pick_most_influential()
 		last_devotion_check = world.time + 2 MINUTES
 
-	if(SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= ROUNDSTART_VALID_TIMEFRAME)
-		can_run_roundstart = FALSE
-	else if(current_roundstart_event && length(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
-		var/list/preferred_copy = current_roundstart_event.preferred_events.Copy()
-		var/datum/round_event_control/selected_event = pickweight(preferred_copy)
-		var/player_count = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
-		if(ispath(selected_event)) //get the instances if we dont have them
-			current_roundstart_event.preferred_events = list()
-			for(var/datum/round_event_control/e_control as anything in preferred_copy)
-				current_roundstart_event.preferred_events[new e_control] = preferred_copy[e_control]
-			preferred_copy = current_roundstart_event.preferred_events.Copy()
-			selected_event = null
-		else if(!selected_event.canSpawnEvent(player_count))
-			preferred_copy -= selected_event
-			selected_event = null
-
-		var/sanity = 0
-		while(!selected_event && length(preferred_copy) && sanity < 100)
-			sanity++
-			selected_event = pickweight(preferred_copy)
-			if(!selected_event.canSpawnEvent(player_count))
+	if(can_run_roundstart)
+		can_run_roundstart = SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) < ROUNDSTART_VALID_TIMEFRAME
+		if(current_roundstart_event && length(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
+			var/list/preferred_copy = current_roundstart_event.preferred_events.Copy()
+			var/datum/round_event_control/selected_event = pickweight(preferred_copy)
+			var/player_count = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
+			if(ispath(selected_event)) //get the instances if we dont have them
+				current_roundstart_event.preferred_events = list()
+				for(var/datum/round_event_control/e_control as anything in preferred_copy)
+					current_roundstart_event.preferred_events[new e_control] = preferred_copy[e_control]
+				preferred_copy = current_roundstart_event.preferred_events.Copy()
+				selected_event = null
+			else if(!selected_event?.canSpawnEvent(player_count))
 				preferred_copy -= selected_event
 				selected_event = null
 
-		if(selected_event)
-			current_storyteller.try_buy_event(selected_event)
+			var/sanity = 0
+			while(!selected_event && length(preferred_copy) && sanity < 100)
+				sanity++
+				selected_event = pickweight(preferred_copy)
+				if(!selected_event.canSpawnEvent(player_count))
+					preferred_copy -= selected_event
+					selected_event = null
+			if(selected_event)
+				current_storyteller?.try_buy_event(selected_event)
 
 	///Handle scheduled events
 	for(var/datum/scheduled_event/sch_event in scheduled_events)
@@ -523,7 +522,7 @@ SUBSYSTEM_DEF(gamemode)
 
 /// Gets the number of antagonists the antagonist injection events will stop rolling after.
 /datum/controller/subsystem/gamemode/proc/get_antag_cap()
-	var/total_number = get_correct_popcount() + (garrison * 2)
+	var/total_number = get_correct_popcount() + garrison + church
 	var/cap = FLOOR((total_number / ANTAG_CAP_DENOMINATOR), 1) + ANTAG_CAP_FLAT
 	return cap
 
@@ -735,7 +734,7 @@ SUBSYSTEM_DEF(gamemode)
 	for(var/mob/player_mob as anything in GLOB.player_list)
 		if(!player_mob.client)
 			continue
-		if(player_mob.stat) //If they're alive
+		if(player_mob.stat == DEAD) //If they're alive
 			continue
 		if(player_mob.client.is_afk()) //If afk
 			continue
@@ -743,6 +742,8 @@ SUBSYSTEM_DEF(gamemode)
 			continue
 		active_players++
 		var/datum/job/assigned = player_mob.mind?.assigned_role
+		if(assigned?.parent_job)
+			assigned = assigned.parent_job
 		if(assigned)
 			if(assigned.job_bitflag & BITFLAG_ROYALTY)
 				royalty++

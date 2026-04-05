@@ -12,6 +12,7 @@
 	list_reagents = list(/datum/reagent/consumable/honey = 5)
 	grind_results = list()
 	tastes = list("sweetness" = 1)
+	item_weight = 30 GRAMS
 	var/honey_color
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/Initialize()
@@ -28,6 +29,7 @@
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey
 	name = "honey"
 	icon_state = "honeycomb"
+	item_weight = 50 GRAMS
 	tastes = list("sweetness" = 1)
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey/mad
@@ -61,7 +63,7 @@
 	tastes = list("complex sweetness" = 1, "sharp floral tones" = 1)
 	list_reagents = list(/datum/reagent/consumable/honey = 5, /datum/reagent/toxin/manabloom_juice = 2, /datum/reagent/medicine/manapot = 10)
 	light_system = MOVABLE_LIGHT
-	light_range = 2
+	light_outer_range = 2
 	light_power = 1
 	light_color = "#CCFF99"
 

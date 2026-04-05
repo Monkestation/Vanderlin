@@ -112,7 +112,3 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 
-
-/datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)

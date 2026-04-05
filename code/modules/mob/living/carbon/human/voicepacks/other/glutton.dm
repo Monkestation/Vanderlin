@@ -15,6 +15,6 @@
 		used = parent_datum.get_sound(soundin, modifiers)
 	return used
 
-/datum/voicepack/glutton/Destroy(force, ...)
+/datum/voicepack/glutton/Destroy(force)
 	parent_datum = null
 	. = ..()

@@ -189,12 +189,13 @@
 	plane = GAME_PLANE_UPPER
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
+	var/run_wclass_check = TRUE
 
 /obj/structure/bars/CanAllowThrough(atom/movable/mover, turf/target)
 	if(isobserver(mover))
 		return TRUE
 	. = ..()
-	if(. && density && mover.throwing && isitem(mover))
+	if(run_wclass_check && . && density && mover.throwing && isitem(mover))
 		var/obj/item/I = mover
 		var/chance = 100 - (I.w_class-1) * 30
 		if(isliving(I.throwing.thrower))
@@ -204,6 +205,7 @@
 
 /obj/structure/bars/bent
 	icon_state = "barsbent"
+	run_wclass_check = FALSE
 
 /obj/structure/bars/chainlink
 	icon_state = "chainlink"
@@ -806,7 +808,7 @@
 
 /obj/structure/fluff/statue/zizo/Initialize()
 	. = ..()
-	set_light(1, 1, l_color = COLOR_PURPLE)
+	set_light(1, 1, 1, l_color = COLOR_PURPLE)
 
 /obj/structure/fluff/statue/musician/OnCrafted(dirin, mob/user)
 	. = ..()
@@ -933,12 +935,12 @@
 						user.visible_message("<span class='info'>[user] trains on [src]!</span>")
 						var/boon = user.get_learning_boon(W.associated_skill)
 						var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2
-						if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 15)
+						if(GET_MOB_SKILL_VALUE_RAW(user, W.associated_skill) >= 15)
 							if(!HAS_TRAIT(user, TRAIT_INTRAINING))
 								to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 								amt2raise = 0
 							else
-								if(GET_MOB_SKILL_VALUE(user, W.associated_skill) >= 20)
+								if(GET_MOB_SKILL_VALUE_RAW(user, W.associated_skill) >= 20)
 									to_chat(user, "<span class='warning'>I've learned all I can from doing this, it's time for the real thing.</span>")
 									amt2raise = 0
 						if(amt2raise > 0)

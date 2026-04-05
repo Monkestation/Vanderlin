@@ -1,0 +1,5 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - rscadd: "teeth, they fly out when brute damage is taken to the jaw on the same rarity as fractures (can pull with tongs), less teeth adds a slur"
+  - refactor: "weight has been redone to be a tiered system from the old %. For math that used the % of weight it was moved to either tiers or a sigmoid curve."
