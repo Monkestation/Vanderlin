@@ -35132,7 +35132,6 @@
 /turf/closed/mineral,
 /area/indoors/town/steward)
 "wGX" = (
-/obj/structure/table/wood/fancy/royalblack,
 /obj/item/reagent_containers/glass/carafe/gold/redwine{
 	pixel_x = -5;
 	pixel_y = 12
