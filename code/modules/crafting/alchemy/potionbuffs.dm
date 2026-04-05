@@ -93,5 +93,5 @@
 	effectedstats = list(STATKEY_END = -5)
 
 /atom/movable/screen/alert/status_effect/buff/alch/pain
-	name = "SUFFERING
+	name = "SUFFERING"
 
