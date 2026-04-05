@@ -9,7 +9,6 @@
 	blacklist = list(
 		/datum/job/jailor,
 		/datum/job/adept,
-		/datum/job/absolver,
 		/datum/job/advclass/mercenary/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
