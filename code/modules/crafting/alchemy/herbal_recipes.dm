@@ -619,7 +619,7 @@
 /datum/stress_event/souffrance
 	desc = "YOU FEEL DEEPLY WRONG, EVERYTHING ITCHES!!!"
 	stress_change = 10
-	effectedstats = list(STAT_ENDURANCE = -4)
+	effectedstats = list(STAT_ENDURANCE = -5)
 	timer = 10 MINUTES
 
 /datum/stress_event/herbal_calm
