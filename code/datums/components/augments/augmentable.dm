@@ -67,7 +67,7 @@
 		catastrophic_failure(H)
 
 /datum/component/augmentable/proc/catastrophic_failure(mob/living/carbon/human/H)
-	var/datum/augment/special/loyalty_binder/shackle = locate() in installed_augments
+	var/datum/augment/loyalty_binder/shackle = locate() in installed_augments
 	if(!shackle?.enabled)
 		return
 	shackle.on_remove(H)

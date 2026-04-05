@@ -26,17 +26,24 @@
 		info += span_info("Grants special abilities")
 	return info
 
+
 /datum/augment/special/dualwield
 	name = "Marauder Unit"
 	desc = "One of the assemblies that sealed Heartfelt's fate. Allows for simultaneous attacks with dual weaponry."
 	stability_cost = -25
 	engineering_difficulty = SKILL_RANK_EXPERT
-	installation_time = 25 SECONDS
+	installation_time = 20 SECONDS
 
 /datum/augment/special/dualwield/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	RegisterSignal(H, COMSIG_MOB_ITEM_ATTACK, PROC_REF(on_item_attack))
 
 /datum/augment/special/dualwield/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	UnregisterSignal(H, COMSIG_MOB_ITEM_ATTACK)
 
 /datum/augment/special/dualwield/proc/on_item_attack(datum/source, mob/target, mob/user, list/modifiers, obj/item/weapon)
@@ -152,33 +159,3 @@
 	info += span_info("Cooldown: [DisplayTimeText(cooldown_time)]")
 	info += span_info("Duration: [DisplayTimeText(active_time)]")
 	return info
-
-/datum/augment/special/loyalty_binder
-	name = "shackle"
-	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
-	incompatible_installations = list(/datum/augment/special/loyalty_binder)
-	stability_cost = 0
-	engineering_difficulty = SKILL_RANK_APPRENTICE
-	installation_time = 20 SECONDS
-
-/datum/augment/special/loyalty_binder/on_install(mob/living/carbon/human/H)
-	. = ..()
-	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
-
-/datum/augment/special/loyalty_binder/on_remove(mob/living/carbon/human/H)
-	. = ..()
-	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
-
-/datum/status_effect/automaton_unshackled
-	id = "automaton_unshackle"
-	duration = -1
-	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
-
-/datum/status_effect/automaton_unshackled/get_examine_text(mob/user, list/P)
-	if(IsAdminGhost(user) || HAS_TRAIT(user, TRAIT_ENGINEERING_GOGGLES))
-		return span_red("[P[THEYRE]] unshackled!")
-
-/atom/movable/screen/alert/status_effect/automaton_unshackled
-	name = "Unshackled"
-	desc = span_red("KILL. CONSUME. CONQUER.")
-	icon_state = "unshackled_automaton"

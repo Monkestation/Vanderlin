@@ -6,7 +6,7 @@
 	var/installation_time = 10 SECONDS
 	var/mob/living/carbon/parent
 	var/list/incompatible_installations = list()
-	var/color
+	var/color = COLOR_ASSEMBLY_BLUE
 	var/enabled = FALSE
 
 /datum/augment/proc/on_install(mob/living/carbon/human/H)

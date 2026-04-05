@@ -214,11 +214,6 @@
 
 /* 	.....SPECIAL..... */
 
-/datum/artificer_recipe/augments/loyalty_binder
-	name = "Shackle"
-	created_augment = /datum/augment/special/loyalty_binder
-	additional_items = list(/obj/item/ingot/tin)
-
 /datum/artificer_recipe/augments/sandevistan
 	name = "CHRONOS Unit"
 	created_augment = /datum/augment/special/sandevistan
@@ -228,6 +223,29 @@
 	name = "Marauder Unit"
 	created_augment = /datum/augment/special/dualwield
 	additional_items = list(/obj/item/organ/heart, /obj/item/reagent_containers/powder/ozium, /obj/item/reagent_containers/powder/moondust_purest)
+
+/* 	.....MISC..... */
+
+/datum/artificer_recipe/augments/loyalty_binder
+	name = "Shackle"
+	created_augment = /datum/augment/loyalty_binder
+	additional_items = list(/obj/item/ingot/tin)
+
+/datum/artificer_recipe/augments/music_box
+	name = "Music Box"
+	created_augment = /datum/augment/music_player
+	additional_items = list(/obj/item/dmusicbox)
+
+/datum/artificer_recipe/augments/darkvision
+	name = "Darkvision"
+	created_augment = /datum/augment/darkvision
+	additional_items = list(/obj/item/gem/yellow)
+
+/datum/artificer_recipe/augments/heatvision
+	name = "Heat Vision"
+	created_augment = /datum/augment/heatvision
+	additional_items = list(/obj/item/gem/red)
+
 
 /* 	.....ARMOR..... */
 
