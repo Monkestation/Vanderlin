@@ -41,7 +41,8 @@
 		for(var/datum/antagonist/A in mind.antag_datums)
 			A.on_life(src)
 
-	handle_vamp_dreams()
+	INVOKE_ASYNC(src, PROC_REF(handle_vamp_dreams))
+
 	if(IsSleeping())
 		if(health > 0)
 			remove_status_effect(/datum/status_effect/debuff/trainsleep)
@@ -49,7 +50,7 @@
 			if(has_status_effect(/datum/status_effect/debuff/dreamytime))
 				remove_status_effect(/datum/status_effect/debuff/dreamytime)
 				if(mind)
-					mind.sleep_adv.advance_cycle()
+					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle))
 					if(!mind.antag_datums || !mind.antag_datums.len)
 						allmig_reward++
 						var/static/list/towner_jobs
