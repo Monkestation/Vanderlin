@@ -97,8 +97,7 @@
 	/datum/reagent/toxin/spidervenom_inert = 10,
 	)
 	requirements = list(
-		/obj/item/alch/herbal/salvia = 2,
-		/obj/item/alch/herbal/euphorbia =1
+		/obj/item/alch/herbal/salvia = 3,
 	)
 	output_amount = 20 
 	crafting_time = 15 SECONDS
