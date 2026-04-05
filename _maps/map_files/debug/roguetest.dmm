@@ -1715,7 +1715,7 @@
 "rr" = (
 /obj/structure/door/window,
 /turf/open/floor/tile/bfloorz,
-/area/empty_space)
+/area)
 "rw" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -1734,7 +1734,7 @@
 	name = "GENERIC BLOCKER TESTER"
 	},
 /turf/open/floor/tile/bfloorz,
-/area/empty_space)
+/area)
 "sd" = (
 /obj/structure/flora/grass/herb/symphitum,
 /turf/open/floor/grass/yel,
@@ -2347,7 +2347,7 @@
 	name = "UNIQUE BLOCKER TESTER"
 	},
 /turf/open/floor/tile/bfloorz,
-/area/empty_space)
+/area)
 "At" = (
 /obj/structure/hotspring/border/fourteen,
 /obj/structure/bridge{
@@ -3213,9 +3213,6 @@
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Uq" = (
-/turf/closed,
-/area/empty_space)
 "UX" = (
 /obj/structure/rotation_piece{
 	dir = 1
@@ -19190,8 +19187,8 @@ QN
 EW
 at
 at
-Uq
-Uq
+ac
+ac
 at
 at
 ez
@@ -19446,10 +19443,10 @@ QN
 at
 at
 at
-Uq
-Uq
-Uq
-Uq
+ac
+ac
+ac
+ac
 at
 Yr
 xh
