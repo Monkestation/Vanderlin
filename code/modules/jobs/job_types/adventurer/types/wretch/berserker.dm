@@ -42,7 +42,7 @@
 		/datum/action/cooldown/spell/undirected/barbrage
 	)
 
-/datum/job/advclass/wretch/berserker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/berserker/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectableweapon = list(
 		"MY BARE HANDS!!!" = /obj/item/weapon/knife/dagger/steel,

@@ -657,7 +657,7 @@
 		SSticker.rulermob = coronated
 		GLOB.badomens -= OMEN_NOLORD
 		priority_announce("The Ten have named [coronated.real_name] the inheritor of [SSmapping.config.map_name]!", \
-		title = "Long Live [lord_job.get_informed_title(coronated)] [coronated.real_name]!", sound = 'sound/misc/bell.ogg')
+		title = "Long Live [lord_job.get_informed_title()] [coronated.real_name]!", sound = 'sound/misc/bell.ogg')
 	if(href_list[VV_HK_CHANGE_TITLE])
 		if(!mind?.assigned_role)
 			return

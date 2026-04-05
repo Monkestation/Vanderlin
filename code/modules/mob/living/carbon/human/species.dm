@@ -696,7 +696,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/validate_customizer_entries(mob/living/carbon/human/human)
 	customizer_entries = SANITIZE_LIST(customizer_entries)
-	listclearnulls(customizer_entries)
+	list_clear_nulls(customizer_entries)
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE

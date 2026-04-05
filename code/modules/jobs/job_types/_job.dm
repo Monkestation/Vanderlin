@@ -279,6 +279,8 @@
 /// Client might not be yet in the mob, and is thus a separate variable.
 /datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE) // Don't sleep ticker
+
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
 	if(spawned.attributes)
@@ -411,6 +413,14 @@
 	if(job_flags & JOB_SHOW_IN_CREDITS)
 		START_PROCESSING(SScrediticons, player_client)
 
+/// Callback for anything that sleeps, called after roundstart or async during EquipRank
+/datum/job/proc/on_roundstart(mob/living/spawned, client/player_client)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(ishuman(spawned))
+		var/mob/living/carbon/human/H = spawned
+		H.pick_job_packs(src)
+
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
 		return
@@ -466,7 +476,6 @@
 
 /mob/living/carbon/human/on_job_equipping(datum/job/equipping)
 	dress_up_as_job(equipping)
-	pick_job_packs(equipping)
 
 /mob/living/carbon/human/proc/pick_job_packs(datum/job/equipping)
 	if(!length(equipping.job_packs))
