@@ -18,8 +18,6 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_NOSE)
 			zone = BODY_ZONE_HEAD
-		if(BODY_ZONE_PRECISE_MOUTH)
-			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_SKULL)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_EARS)
@@ -681,6 +679,7 @@
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
 		deltimer(cmode_timer)
 
+	SEND_SIGNAL(src, COMSIG_MOB_TOGGLE_CMODE, cmode)
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
 

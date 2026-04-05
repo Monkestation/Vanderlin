@@ -21,6 +21,7 @@ LINEN BINS
 	grid_height = 64
 	resistance_flags = FLAMMABLE
 	dying_key = DYE_REGISTRY_BEDSHEET
+	item_weight = 540 GRAMS //not weighted blankets but higher end heavy since cold
 
 	var/list/dream_messages = list("white")
 	var/datum/weakref/signal_sleeper //this is our goldylocks

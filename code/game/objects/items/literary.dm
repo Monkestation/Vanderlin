@@ -19,6 +19,7 @@
 	pickup_sound =  'sound/blank.ogg'
 	firefuel = 2 MINUTES
 	obj_flags = CAN_BE_HIT
+	item_weight = 493 GRAMS
 
 	var/exppercycle = 0
 	var/INTneeded = 0

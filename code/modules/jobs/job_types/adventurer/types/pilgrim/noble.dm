@@ -39,17 +39,17 @@
 		TRAIT_NOBLE_POWER
 	)
 
-/datum/job/advclass/pilgrim/noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pilgrim/noble/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/selectable = list( \
-		"Dagger" = /obj/item/weapon/knife/dagger/silver, \
-		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
-		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
-		)
+	var/static/list/selectable = list(
+		"Dagger" = /obj/item/weapon/knife/dagger/silver,
+		"Rapier" = /obj/item/weapon/sword/rapier/dec,
+		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade,
+	)
+
 	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
-	if(!choice)
-		return
+
 	switch(choice)
 		if("Dagger")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 20, 20)

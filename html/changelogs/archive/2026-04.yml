@@ -54,3 +54,47 @@
   - balance: Using bloodrage while cuffed removes them
   - bugfix: Removed Unholy Grasps' bloodnet giving unremovable leg cuffs, it now purely
       works on debuffs
+2026-04-04:
+  Ben10083:
+  - qol: TGUI for Priest, Elder, and Matron abilities
+  - bugfix: Some THROAT command inputs, with exception to making laws or decrees should
+      now work with symbols such as apostrophes
+  - bugfix: Scrying Orb input should now work with symbols such as apostrophes
+  - bugfix: Certain Matron ability inputs should now work with symbols such as apostrophes
+  - bugfix: Certain Priest ability inputs should now work with symbols such as apostrophes
+  - bugfix: Vicious mockery input should now work with symbols such as apostrophes
+  - refactor: Priest curse ability now checks for all humans, not all active players
+  - rscadd: 'Adds new Orphan ability: Call for That Hag. Call out to the Matron, go
+      into combat mode to call for help instead.'
+  MissyNym:
+  - map: Mostly removed the Old Church from Vanderlin (i.e., encased in bedrock. It
+      will either be properly removed or reworked into a dungeon later.)
+  - map: Added latejoin spawn points to the new Inquisition base in the Anvil.
+  - map: Patched a hole above the church Z4 allowing people to step into it from above.
+  - map: Removed a hearth from the Red Manor and gave it an oven to bake bread and
+      stuff in instead.
+  - rscadd: More quest markers in the bog and therefore, more locations for quests!
+  - bugfix: All generic quest markers in the bog have been converted to specific difficulty-based
+      ones. Hopefully this will mean that quests do not only go to the bog now!
+  ModDownloading:
+  - rscadd: The Mute vice, which completely stops speech.
+  TerraGS:
+  - bugfix: Fixed a wound related runtime
+2026-04-05:
+  Ben10083:
+  - qol: SCOM now respects Monarch title when announcing decrees
+  - qol: SCOM now displays decrees from first to last when right clicking
+  - bugfix: Priest coronation now properly updates monarch ruler_title
+  - code_imp: DMdoc for text.dm procs
+  KevinfromHP:
+  - rscadd: Automaton Augmentations and Tweaks
+  Singul0:
+  - rscadd: Makes blacksteel helmet's visor functional
+  - qol: Gives all visored helmets a notice that you can adjust the visor.
+  Telvayne:
+  - rscadd: Added stink-cleaning effect to cleansing flames
+  dwasint:
+  - rscadd: teeth, they fly out when brute damage is taken to the jaw on the same
+      rarity as fractures (can pull with tongs), less teeth adds a slur
+  - refactor: weight has been redone to be a tiered system from the old %. For math
+      that used the % of weight it was moved to either tiers or a sigmoid curve.

@@ -30,6 +30,7 @@
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/fertilizer/ash
 	associated_skill = /datum/attribute/skill/combat/whipsflails
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/thresher/military
 	name = "studded flail"
@@ -43,6 +44,7 @@
 	minstr = 7
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 2.1 KILOGRAMS
 
 /datum/intent/flailthresh
 	name = "thresh"
@@ -151,6 +153,7 @@
 	associated_skill = /datum/attribute/skill/combat/knives
 	grid_height = 64
 	grid_width = 64
+	item_weight = 384 GRAMS
 
 /obj/item/weapon/sickle/Initialize(mapload)
 	. = ..()
@@ -203,6 +206,7 @@
 	wlength = 66
 	var/time_multiplier = 1
 	max_integrity = INTEGRITY_POOR
+	item_weight = 912 GRAMS
 
 /obj/item/weapon/hoe/Initialize()
 	. = ..()
@@ -309,6 +313,7 @@
 	anvilrepair = null
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 2
+	item_weight = 742 GRAMS
 
 /*------------\
 |  Pitchfork  |
@@ -344,6 +349,7 @@
 	associated_skill = /datum/attribute/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
 	max_integrity = INTEGRITY_POOR
+	item_weight = 1.91 KILOGRAMS
 
 	var/list/forked = list()
 

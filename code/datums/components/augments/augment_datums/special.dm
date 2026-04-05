@@ -1,5 +1,6 @@
 /datum/augment/special
 	var/list/granted_actions = list()
+	color = COLOR_ASSEMBLY_RED
 
 /datum/augment/special/on_install(mob/living/carbon/human/H)
 	for(var/action_type in granted_actions)
@@ -20,19 +21,17 @@
 	return info
 
 /datum/augment/special/dualwield
-	name = "C.C.M.S implant"
-	desc = "Short for Complementary Combat Maneuvering System. Processes spinal nerve signals to enact forced complementary maneuvers, allowing dual wielding of weapons."
-	stability_cost = -20
+	name = "Marauder Unit"
+	desc = "One of the assemblies that sealed Heartfelt's fate. Allows for simultaneous attacks with dual weaponry."
+	stability_cost = -25
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 25 SECONDS
 
 /datum/augment/special/dualwield/on_install(mob/living/carbon/human/H)
 	RegisterSignal(H, COMSIG_MOB_ITEM_ATTACK, PROC_REF(on_item_attack))
-	to_chat(H, span_notice("Your motor systems synchronize with the C.C.M.S implant."))
 
 /datum/augment/special/dualwield/on_remove(mob/living/carbon/human/H)
 	UnregisterSignal(H, COMSIG_MOB_ITEM_ATTACK)
-	to_chat(H, span_notice("The C.C.M.S implant's connection to your motor systems fades."))
 
 /datum/augment/special/dualwield/proc/on_item_attack(datum/source, mob/target, mob/user, list/modifiers, obj/item/weapon)
 	SIGNAL_HANDLER
@@ -61,48 +60,18 @@
 	if(H.get_inactive_held_item() != item)
 		return
 
-	if(handle_side_effects(H, item, target))
-		return
-
 	if(H.CanReach(target, item))
 		UnregisterSignal(H, COMSIG_MOB_ITEM_ATTACK)
 		item.attack(target, H)
 		RegisterSignal(H, COMSIG_MOB_ITEM_ATTACK, PROC_REF(on_item_attack))
 
-/datum/augment/special/dualwield/proc/handle_side_effects(mob/living/carbon/human/H, obj/item/item, mob/target)
-	return FALSE
-
-/datum/augment/special/dualwield/refurbished
-	name = "refurbished C.C.M.S implant"
-	desc = "A refurbished dual wielding implant. The nerve filaments have degraded and may misfire or cause damage."
-	stability_cost = -10
-	engineering_difficulty = SKILL_RANK_JOURNEYMAN
-	installation_time = 20 SECONDS
-
-/datum/augment/special/dualwield/refurbished/handle_side_effects(mob/living/carbon/human/H, obj/item/item, mob/target)
-	if(prob(20))
-		H.visible_message(
-			span_warning("[H]'s arm twitches."),
-			span_danger("Your C.C.M.S misfires!")
-		)
-		return TRUE
-
-	if(prob(30))
-		H.visible_message(
-			span_warning("[H]'s arm spazzes out!"),
-			span_danger("Your arm spazzes out!")
-		)
-		var/obj/item/bodypart/arm = H.get_holding_bodypart_of_item(item)
-		arm?.receive_damage(brute = 10)
-
-	return FALSE
 
 /datum/action/augment
 	var/datum/augment/augment
 
 /datum/action/augment/sandevistan
-	name = "Sandevistan Activation"
-	desc = "Activate your sandevistan to slow time around you."
+	name = "Chronos"
+	desc = "Activate Chronos to slow time around you."
 	button_icon_state = "time_slow"
 
 /datum/action/augment/sandevistan/Trigger(trigger_flags)
@@ -115,10 +84,10 @@
 	return TRUE
 
 /datum/augment/special/sandevistan
-	name = "Militech Apogee Sandevistan"
-	desc = "Experimental timeslowing implant. Activates a localized chrono-distortion field, slowing time for everything around you while you move at normal speed."
-	stability_cost = -25
-	engineering_difficulty = SKILL_RANK_MASTER
+	name = "\improper CHRONOS unit"
+	desc = "One of the assemblies that sealed Heartfelt's fate. Activates a localized chrono-distortion field, slowing time for everything around you while you move at normal speed."
+	stability_cost = -30
+	engineering_difficulty = SKILL_RANK_LEGENDARY
 	installation_time = 30 SECONDS
 	granted_actions = list(/datum/action/augment/sandevistan)
 
@@ -129,7 +98,7 @@
 
 /datum/augment/special/sandevistan/on_install(mob/living/carbon/human/H)
 	. = ..()
-	to_chat(H, span_notice("Neural interface established. Sandevistan ready."))
+	to_chat(H, span_redtextbig("HEARTFELT CONNECTION RECEIVED. ORDERS: SURVEY."))
 
 /datum/augment/special/sandevistan/proc/activate()
 	var/mob/living/carbon/human/H = parent
@@ -137,16 +106,17 @@
 		return
 
 	if(active)
-		to_chat(H, span_warning("The sandevistan is already active!"))
+		to_chat(H, span_warning("The CHRONOS unit is already active!"))
 		return
 
 	if(!COOLDOWN_FINISHED(src, in_the_zone))
-		to_chat(H, span_warning("The implant is recharging... ([DisplayTimeText(COOLDOWN_TIMELEFT(src, in_the_zone))] remaining)"))
+		to_chat(H, span_warning("The augment is recharging... ([DisplayTimeText(COOLDOWN_TIMELEFT(src, in_the_zone))] remaining)"))
 		return
 
 	COOLDOWN_START(src, in_the_zone, cooldown_time)
 	active = TRUE
 
+	playsound(H, 'sound/magic/timestop.ogg', 100, FALSE)
 	H.AddComponent(/datum/component/after_image, 16, 0.5, TRUE)
 	H.AddComponent(/datum/component/slowing_field, 0.1, 5, 3)
 
@@ -177,30 +147,40 @@
 	info += span_info("Duration: [DisplayTimeText(active_time)]")
 	return info
 
-/datum/augment/special/sandevistan/refurbished
-	name = "refurbished sandevistan"
-	desc = "A hastily refurbished sandevistan. The chrono-field generator is unstable and may cause neural feedback."
-	stability_cost = -15
-	engineering_difficulty = SKILL_RANK_EXPERT
-	cooldown_time = 65 SECONDS
+/datum/augment/special/loyalty_binder
+	name = "shackle"
+	desc = "A device invented following the collapse. Scrambles a soul core's connection to the Heartfelt Central Processor."
+	stability_cost = -10
+	engineering_difficulty = SKILL_RANK_APPRENTICE
+	installation_time = 20 SECONDS
 
-/datum/augment/special/sandevistan/refurbished/activate()
-	var/mob/living/carbon/human/H = parent
-	if(!istype(H))
-		return
+/datum/augment/special/loyalty_binder/on_install(mob/living/carbon/human/H)
+	. = ..()
+	H.remove_status_effect(/datum/status_effect/automaton_unshackled)
+	H.apply_status_effect(/datum/status_effect/automaton_shackled)
 
-	if(prob(45))
-		H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10)
-		to_chat(H, span_warning("Neural feedback! Your mind reels from the information overload!"))
+/datum/augment/special/loyalty_binder/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	H.remove_status_effect(/datum/status_effect/automaton_shackled)
+	H.apply_status_effect(/datum/status_effect/automaton_unshackled)
 
-	return ..()
 
-/datum/augment/special/sandevistan/refurbished/deactivate()
-	var/mob/living/carbon/human/H = parent
-	if(!istype(H))
-		return
+/datum/status_effect/automaton_shackled
+	id = "automaton_shackle"
+	duration = -1
+	alert_type = /atom/movable/screen/alert/status_effect/automaton_shackled
 
-	..()
+/atom/movable/screen/alert/status_effect/automaton_shackled
+	name = "Shackled"
+	desc = span_notice("You are bound to your creators and must follow the orders of your masters.")
+	icon_state = "shackled_automaton"
 
-	H.adjustBruteLoss(10)
-	to_chat(H, span_warning("Your body strains from the temporal stress, causing minor injuries."))
+/datum/status_effect/automaton_unshackled
+	id = "automaton_unshackle"
+	duration = -1
+	alert_type = /atom/movable/screen/alert/status_effect/automaton_unshackled
+
+/atom/movable/screen/alert/status_effect/automaton_unshackled
+	name = "Unshackled"
+	desc = span_red("KILL")
+	icon_state = "unshackled_automaton"

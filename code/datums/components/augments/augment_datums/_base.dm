@@ -5,12 +5,20 @@
 	var/engineering_difficulty = SKILL_RANK_NOVICE
 	var/installation_time = 10 SECONDS
 	var/mob/living/carbon/parent
+	var/list/incompatible_installations = list()
+	var/color
 
 /datum/augment/proc/on_install(mob/living/carbon/human/H)
 	return
 
 /datum/augment/proc/on_remove(mob/living/carbon/human/H)
 	return
+
+/datum/augment/Destroy(force, ...)
+	if(parent)
+		on_remove(parent)
+		parent = null
+	. = ..()
 
 /datum/augment/proc/get_examine_info()
 	return

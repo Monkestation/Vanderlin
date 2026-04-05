@@ -66,6 +66,8 @@
 	if(istype(spawned.patron, /datum/patron/inhumen/baotha))
 		spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
+/datum/job/minor_noble/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	var/static/list/selectable = list( \
 		"Dagger" = /obj/item/weapon/knife/dagger/silver, \
 		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
@@ -90,7 +92,6 @@
 			var/scabbard = new /obj/item/weapon/scabbard/cane()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
-
 
 /datum/outfit/noble
 	name = "Noble"

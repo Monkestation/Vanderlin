@@ -15,6 +15,7 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	item_weight = 300 GRAMS
 	var/legcuff_multiplicative_slowdown = 3
 
 /obj/item/rope/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
@@ -153,6 +154,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 40
 	firefuel = null
+	item_weight = 1.2 KILOGRAMS
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 
 /obj/item/rope/net
@@ -168,6 +170,7 @@
 	gender = NEUTER
 	var/knockdown = 2 SECONDS
 	legcuff_multiplicative_slowdown = 2
+	item_weight = 500 GRAMS
 
 /obj/item/rope/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
 	. = ..()

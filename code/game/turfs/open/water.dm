@@ -387,8 +387,7 @@
 					return
 			if(!living.buckled)
 				var/drained = max(15 - (GET_MOB_SKILL_VALUE_OLD(living, /datum/attribute/skill/misc/swimming) * 5), 1)
-//				drained += (user.checkwornweight()*2)
-				drained += living.get_encumbrance() * 50
+				drained += ENCUMBRANCE_TO_SIGMOID(living.encumbrance) * 50
 				if(!(water_height == WATER_HEIGHT_FULL ? living.adjust_stamina(drained, "drown") : living.adjust_stamina(drained)))
 					living.Immobilize(30)
 					addtimer(CALLBACK(living, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
@@ -674,6 +673,8 @@
 					continue
 				if(BP.skeletonized)
 					continue
+				if(!BP.is_organic_limb())
+					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
@@ -729,6 +730,8 @@
 					continue
 				if(BP.skeletonized)
 					continue
+				if(!BP.is_organic_limb())
+					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)
 				return .
@@ -763,6 +766,8 @@
 				if(!BP)
 					continue
 				if(BP.skeletonized)
+					continue
+				if(!BP.is_organic_limb())
 					continue
 				var/obj/item/natural/worms/leech/I = new(C)
 				BP.add_embedded_object(I, silent = TRUE)

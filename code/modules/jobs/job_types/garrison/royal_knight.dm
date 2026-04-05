@@ -79,7 +79,7 @@
 	should_reset_stats = FALSE
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
-/datum/job/advclass/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/royalknight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectable = list(
 		"Flail" = /obj/item/weapon/flail/sflail,
@@ -167,7 +167,7 @@
 	shoes = /obj/item/clothing/shoes/boots/armor
 
 // Helmet Selection (Royal Knight Exclusive)
-/datum/job/advclass/royalknight/knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/royalknight/knight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/selectablehelmets = list(
 		"Hounskull" = /obj/item/clothing/head/helmet/visored/hounskull,
@@ -178,9 +178,7 @@
 		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
 	)
 
-	var/helmetchoice = spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
-	if(!helmetchoice)
-		return
+	spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
 
 /datum/attribute_holder/sheet/job/royalknight/steam
 	raw_attribute_list = list(

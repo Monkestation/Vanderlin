@@ -18,7 +18,7 @@
  * Text sanitization
  */
 
-///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
+/// Returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(t, list/repl_chars = null)
 	if(CHAT_FILTER_CHECK(t))
 		alert("You cannot set a name that contains a word prohibited in IC chat!")
@@ -86,8 +86,8 @@
  */
 #define PREVENT_CHARACTER_TRIM_LOSS(integer) (integer + 1) //thank you gummie
 
-// Used to get a properly sanitized input, of max_length
-// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
+/// Used to get a properly sanitized input, of max_length
+/// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
 /proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
 	var/name = input(user, message, title, default) as text|null
 	if(no_trim)
@@ -95,7 +95,7 @@
 	else
 		return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
 
-// Used to get a properly sanitized multiline input, of max_length
+/// Used to get a properly sanitized multiline input, of max_length
 /proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
 	var/name = input(user, message, title, default) as message|null
 	if(no_trim)
@@ -103,7 +103,7 @@
 	else
 		return trim(html_encode(name), max_length)
 
-//Filters out undesirable characters from names
+/// Filters out undesirable characters from names
 /proc/reject_bad_name(t_in, allow_numbers=0, max_length=MAX_NAME_LEN)
 	if(!t_in || length(t_in) > max_length)
 		return //Rejects the input if it is null or if it is longer then the max length allowed
@@ -178,8 +178,7 @@
 
 	return t_out
 
-//html_encode helper proc that returns the smallest non null of two numbers
-//or 0 if they're both null (needed because of findtext returning 0 when a value is not present)
+/// Html_encode helper proc that returns the smallest non null of two numbers or 0 if they're both null (needed because of findtext returning 0 when a value is not present)
 /proc/non_zero_min(a, b)
 	if(!a)
 		return b
@@ -191,75 +190,75 @@
  * Text searches
  */
 
-//Checks the beginning of a string for a specified sub-string
-//Returns the position of the substring or 0 if it was not found
+/// Checks the beginning of a string for a specified sub-string
+/// Returns the position of the substring or 0 if it was not found
 /proc/dd_hasprefix(text, prefix)
 	var/start = 1
 	var/end = length(prefix) + 1
 	return findtext(text, prefix, start, end)
 
-//Checks the beginning of a string for a specified sub-string. This proc is case sensitive
-//Returns the position of the substring or 0 if it was not found
+/// Checks the beginning of a string for a specified sub-string. This proc is case sensitive
+/// Returns the position of the substring or 0 if it was not found
 /proc/dd_hasprefix_case(text, prefix)
 	var/start = 1
 	var/end = length(prefix) + 1
 	return findtextEx(text, prefix, start, end)
 
-//Checks the end of a string for a specified substring.
-//Returns the position of the substring or 0 if it was not found
+/// Checks the end of a string for a specified substring.
+/// Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix(text, suffix)
 	var/start = length(text) - length(suffix)
 	if(start)
 		return findtext(text, suffix, start, null)
 	return
 
-//Checks the end of a string for a specified substring. This proc is case sensitive
-//Returns the position of the substring or 0 if it was not found
+/// Checks the end of a string for a specified substring. This proc is case sensitive
+/// Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix_case(text, suffix)
 	var/start = length(text) - length(suffix)
 	if(start)
 		return findtextEx(text, suffix, start, null)
 
-//Checks if any of a given list of needles is in the haystack
+/// Checks if any of a given list of needles is in the haystack
 /proc/text_in_list(haystack, list/needle_list, start=1, end=0)
 	for(var/needle in needle_list)
 		if(findtext(haystack, needle, start, end))
 			return 1
 	return 0
 
-//Like above, but case sensitive
+/// Like above, but case sensitive
 /proc/text_in_list_case(haystack, list/needle_list, start=1, end=0)
 	for(var/needle in needle_list)
 		if(findtextEx(haystack, needle, start, end))
 			return 1
 	return 0
 
-//Adds 'u' number of zeros ahead of the text 't'
+/// Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
 	while (length(t) < u)
 		t = "0[t]"
 	return t
 
-//Adds 'u' number of spaces ahead of the text 't'
+/// Adds 'u' number of spaces ahead of the text 't'
 /proc/add_lspace(t, u)
 	while(length(t) < u)
 		t = " [t]"
 	return t
 
-//Adds 'u' number of spaces behind the text 't'
+/// Adds 'u' number of spaces behind the text 't'
 /proc/add_tspace(t, u)
 	while(length(t) < u)
 		t = "[t] "
 	return t
 
-//Returns a string with reserved characters and spaces before the first letter removed
+/// Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
 	for (var/i = 1 to length(text))
 		if (text2ascii(text, i) > 32)
 			return copytext(text, i)
 	return ""
 
-//Returns a string with reserved characters and spaces after the last letter removed
+/// Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
 	for (var/i = length(text), i > 0, i--)
 		if (text2ascii(text, i) > 32)
@@ -267,18 +266,17 @@
 
 	return ""
 
-//Returns a string with reserved characters and spaces before the first word and after the last word removed.
+/// Returns a string with reserved characters and spaces before the first word and after the last word removed.
 /proc/trim(text, max_length)
 	if(max_length)
 		text = copytext(text, 1, max_length)
 	return trimtext(text) || ""
 
-//Returns a string with the first element of the string capitalized.
+/// Returns a string with the first element of the string capitalized.
 /proc/capitalize(t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
 
-
-//Like capitalize, but you capitalize EVERYTHING
+/// Like capitalize, but you capitalize every word in a string
 /proc/capitalize_like_old_man(t)
 	. = t
 	if(!length(t))
@@ -294,7 +292,7 @@
 		binguslist += bingus
 	return jointext(binguslist, " ")
 
-//Centers text by adding spaces to either side of the string.
+/// Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
 	var/new_message = message
 	var/size = length(message)
@@ -311,18 +309,16 @@
 	var/spaces = add_lspace("",delta/2-1)
 	return spaces + new_message + spaces
 
-//Limits the length of the text. Note: MAX_MESSAGE_LEN and MAX_NAME_LEN are widely used for this purpose
+/// Limits the length of the text. Note: MAX_MESSAGE_LEN and MAX_NAME_LEN are widely used for this purpose
 /proc/dd_limittext(message, length)
 	var/size = length(message)
 	if(size <= length)
 		return message
 	return copytext(message, 1, length + 1)
 
-
+/// This proc fills in all spaces with the "replace" var (* by default) with whatever is in the other string at the same spot (assuming it is not a replace char).
+/// This is used for fingerprints
 /proc/stringmerge(text,compare,replace = "*")
-//This proc fills in all spaces with the "replace" var (* by default) with whatever
-//is in the other string at the same spot (assuming it is not a replace char).
-//This is used for fingerprints
 	var/newtext = text
 	if(length(text) != length(compare))
 		return 0
@@ -340,9 +336,9 @@
 				return 0
 	return newtext
 
+/// This proc returns the number of chars of the string that is the character
+/// This is used for detective work to determine fingerprint completion.
 /proc/stringpercent(text,character = "*")
-//This proc returns the number of chars of the string that is the character
-//This is used for detective work to determine fingerprint completion.
 	if(!text || !character)
 		return 0
 	var/count = 0
@@ -352,6 +348,7 @@
 			count++
 	return count
 
+/// This proc has the string provided reversed
 /proc/reverse_text(text = "")
 	var/new_text = ""
 	for(var/i = length(text); i > 0; i--)
@@ -387,12 +384,12 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		temp1 = copytext(t,2,u+1)
 	return temp1
 
-//merges non-null characters (3rd argument) from "from" into "into". Returns result
-//e.g. into = "Hello World"
-//     from = "Seeya______"
-//     returns"Seeya World"
-//The returned text is always the same length as into
-//This was coded to handle DNA gene-splicing.
+/// merges non-null characters (3rd argument) from "from" into "into". Returns result
+/// e.g. into = "Hello World"
+///     from = "Seeya______"
+///     returns"Seeya World"
+/// The returned text is always the same length as into
+/// This was coded to handle DNA gene-splicing.
 /proc/merge_text(into, from, null_char="_")
 	. = ""
 	if(!istext(into))
@@ -423,9 +420,8 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	else
 		. += copytext(into, start, end)
 
-//finds the first occurrence of one of the characters from needles argument inside haystack
-//it may appear this can be optimised, but it really can't. findtext() is so much faster than anything you can do in byondcode.
-//stupid byond :(
+/// Finds the first occurrence of one of the characters from needles argument inside haystack
+/// It may appear this can be optimised, but it really can't. findtext() is so much faster than anything you can do in byondcode.
 /proc/findchar(haystack, needles, start=1, end=0)
 	var/temp
 	var/len = length(needles)
@@ -716,7 +712,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	var/list/finalized = list()
 	finalized = accepted.Copy() + oldentries.Copy() //we keep old and unreferenced phrases near the bottom for culling
-	listclearnulls(finalized)
+	list_clear_nulls(finalized)
 	if(!isemptylist(finalized) && length(finalized) > storemax)
 		finalized.Cut(storemax + 1)
 	fdel(log)

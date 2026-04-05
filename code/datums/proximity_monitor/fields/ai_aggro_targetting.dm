@@ -39,6 +39,7 @@
 	. = ..()
 	if(!QDELETED(controller) && owning_behavior)
 		controller.modify_cooldown(owning_behavior, world.time + owning_behavior.get_cooldown(controller))
+		controller.clear_blackboard_key(BB_FIND_TARGETS_FIELD(owning_behavior.type))
 	owning_behavior = null
 	controller = null
 	targeting_strategy_key = null

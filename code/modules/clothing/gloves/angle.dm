@@ -10,7 +10,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
-	item_weight = 4
+	item_weight = 800 GRAMS
 
 /obj/item/clothing/gloves/angle/grenzel
 	name = "grenzelhoft gloves"

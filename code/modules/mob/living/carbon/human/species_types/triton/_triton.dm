@@ -161,6 +161,9 @@
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/deepspeak)
 
+	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	jaw.replace_teeth(/obj/item/natural/bundle/teeth/fang)
+
 /datum/species/triton/after_creation(mob/living/carbon/C)
 	. = ..()
 	C.grant_language(/datum/language/deepspeak)
