@@ -60,11 +60,15 @@
 
 /datum/job/gmtemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
 		devotion.make_gmtemplar()
 		devotion.grant_to(spawned)
+
+/datum/job/gmtemplar/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/selectableweapon = list(
 		"Longsword" = /obj/item/weapon/sword/long/grandmaster,

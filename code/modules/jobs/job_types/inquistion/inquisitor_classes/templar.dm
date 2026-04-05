@@ -42,7 +42,11 @@
 
 /datum/job/advclass/sacrestant/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Templar")
+
+/datum/job/advclass/sacrestant/psydoniantemplar/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/helmets = list(
 		"Barbute" = /obj/item/clothing/head/helmet/heavy/psydonbarbute,
