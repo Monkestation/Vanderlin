@@ -63,6 +63,11 @@
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/wilderness/tavern)
+"aC" = (
+/obj/structure/door/iron/bars,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "aF" = (
 /obj/structure/rack,
 /obj/item/kitchen/fork,
@@ -87,6 +92,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"aK" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "aO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -108,6 +117,11 @@
 /obj/structure/handcart,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"aY" = (
+/turf/closed/wall/mineral/tent{
+	dir = 8
+	},
+/area/outdoors/wilderness)
 "ba" = (
 /turf/closed/wall/mineral/wooddark/end,
 /area/indoors/villagegarrison)
@@ -136,6 +150,11 @@
 /obj/structure/kneestingers,
 /turf/open/water/marsh,
 /area/outdoors/wilderness)
+"bk" = (
+/obj/structure/rack,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "bl" = (
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/wilderness)
@@ -191,6 +210,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/wilderness/outpost/vanderlin)
+"bK" = (
+/obj/structure/closet/crate/chest/wicker/random_soilson,
+/turf/open/floor/twig,
+/area/outdoors/wilderness)
 "bN" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -336,6 +359,11 @@
 /obj/item/natural/wood/plank,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"cN" = (
+/obj/structure/rack,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/twig,
+/area/outdoors/wilderness)
 "cP" = (
 /obj/structure/bookcase,
 /turf/open/floor/sandstone_tile/four,
@@ -617,6 +645,10 @@
 "eK" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/marsh/deep,
+/area/outdoors/wilderness)
+"eM" = (
+/obj/machinery/tanningrack,
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "eN" = (
 /turf/closed/basic,
@@ -943,6 +975,10 @@
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
+/area/outdoors/wilderness)
+"gM" = (
+/obj/structure/fluff/nest,
+/turf/open/floor/hay,
 /area/outdoors/wilderness)
 "gN" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
@@ -1400,6 +1436,7 @@
 /area/outdoors/wilderness)
 "jZ" = (
 /obj/structure/door/fancy,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/villagegarrison)
 "ka" = (
@@ -1637,6 +1674,13 @@
 "lU" = (
 /turf/open/floor/grass,
 /area/indoors/wilderness/tavern)
+"lV" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "lW" = (
 /obj/structure/closet/dirthole/grave,
 /obj/structure/gravemarker,
@@ -1646,6 +1690,13 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"ma" = (
+/obj/structure/rack,
+/obj/item/weapon/sickle,
+/obj/item/weapon/hoe,
+/obj/item/weapon/pitchfork,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "mb" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -1703,6 +1754,9 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"mr" = (
+/turf/open/floor/hay,
+/area/outdoors/wilderness)
 "ms" = (
 /turf/open/floor/dirt,
 /area/indoors/cave/late)
@@ -1746,6 +1800,11 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/garrison)
+"mE" = (
+/obj/structure/fluff/nest,
+/mob/living/simple_animal/hostile/retaliate/chicken,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "mK" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/dirt/road,
@@ -1991,6 +2050,12 @@
 /obj/structure/spider/stickyweb/mirespider,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"oV" = (
+/obj/structure/rack,
+/obj/item/weapon/shovel,
+/obj/item/weapon/thresher,
+/turf/open/floor/twig,
+/area/outdoors/wilderness)
 "oW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -2273,6 +2338,14 @@
 "qS" = (
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/dirt,
+/area/outdoors/wilderness)
+"qT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = 1;
+	pixel_x = -1
+	},
+/turf/open/floor/grass,
 /area/outdoors/wilderness)
 "qU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3081,6 +3154,10 @@
 /obj/item/reagent_containers/food/snacks/rotten/egg,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"wr" = (
+/obj/structure/fluff/nest,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "wu" = (
 /obj/structure/fermentation_keg/random/water,
 /obj/effect/decal/cleanable/dirt,
@@ -3217,6 +3294,9 @@
 	dir = 8
 	},
 /area/outdoors/mountains)
+"xw" = (
+/turf/closed/wall/mineral/wood/window,
+/area/outdoors/wilderness)
 "xz" = (
 /obj/structure/chair/wood/alt/uncomfortable,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -3719,6 +3799,20 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
+/area/outdoors/wilderness)
+"AP" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/wheat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/obj/item/neuFarm/seed/oat,
+/turf/open/floor/twig,
 /area/outdoors/wilderness)
 "AQ" = (
 /obj/effect/decal/cleanable/dirt,
@@ -4431,6 +4525,11 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"FM" = (
+/mob/living/simple_animal/hostile/retaliate/chicken,
+/obj/structure/fluff/nest,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "FP" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/carvedgem/opal/fancyvase,
@@ -4441,6 +4540,10 @@
 /obj/item/clothing/neck/psycross,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
+"FS" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/hay,
+/area/outdoors/wilderness)
 "FU" = (
 /obj/structure/fluff/railing/border{
 	dir = 1;
@@ -4785,6 +4888,13 @@
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
+"Il" = (
+/obj/structure/rack,
+/obj/item/weapon/hammer,
+/obj/item/weapon/tongs,
+/obj/item/flint,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "Ip" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/stairs/stone{
@@ -5053,6 +5163,14 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains)
+"Kh" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = 1;
+	pixel_x = -1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Kj" = (
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
@@ -5092,6 +5210,11 @@
 	dir = 1
 	},
 /area/outdoors/wilderness)
+"Kv" = (
+/obj/structure/table/wood/plain/alt,
+/obj/structure/fluff/millstone,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Kx" = (
 /obj/structure/bridge_stakes{
 	pixel_y = -6
@@ -5127,6 +5250,12 @@
 /obj/structure/chair/bench/church/smallbench,
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
+"KU" = (
+/obj/structure/rack,
+/obj/item/weapon/shovel,
+/obj/item/weapon/thresher,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "KZ" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
@@ -5138,6 +5267,12 @@
 	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/dungeon)
+"Lg" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Lk" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -5238,6 +5373,25 @@
 	dir = 8
 	},
 /area/outdoors/wilderness)
+"LQ" = (
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/structure/closet/crate/chest/crafted,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "LS" = (
 /obj/item/trash/candle{
 	pixel_x = 10;
@@ -5301,7 +5455,8 @@
 /area/indoors/dungeon)
 "Mo" = (
 /obj/structure/winch{
-	redstone_id = "fgfortnorth"
+	redstone_id = "fgfortnorth";
+	name = "North Gate"
 	},
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
@@ -5612,7 +5767,8 @@
 "Or" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/winch{
-	redstone_id = "fgfortsouth"
+	redstone_id = "fgfortsouth";
+	name = "South Gate"
 	},
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
@@ -6420,6 +6576,10 @@
 "Uj" = (
 /turf/closed/mineral/random/med,
 /area/indoors/cave/late)
+"Uk" = (
+/obj/structure/chair/stool,
+/turf/open/floor/cobble,
+/area/indoors/villagegarrison)
 "Ul" = (
 /obj/item/reagent_containers/glass/bottle/beer,
 /turf/open/floor/sand,
@@ -6503,6 +6663,12 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/sand,
 /area/indoors/dungeon)
+"UM" = (
+/obj/structure/handcart{
+	dir = 8
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "UP" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness/tavern)
@@ -6535,6 +6701,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness/tavern)
+"UW" = (
+/obj/machinery/light/fueled/oven/south,
+/turf/open/floor/cobble,
+/area/outdoors/wilderness)
 "UX" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness)
@@ -6708,6 +6878,10 @@
 /obj/structure/spider/stickyweb/mirespider,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Wa" = (
+/obj/structure/meathook,
+/turf/open/floor/twig,
+/area/outdoors/wilderness)
 "Wc" = (
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass,
@@ -6927,6 +7101,13 @@
 "Xt" = (
 /turf/open/floor/dirt,
 /area/outdoors/mountains)
+"Xw" = (
+/obj/structure/rack,
+/obj/item/weapon/sickle,
+/obj/item/weapon/hoe,
+/obj/item/weapon/pitchfork,
+/turf/open/floor/twig,
+/area/outdoors/wilderness)
 "Xx" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/grass,
@@ -7203,6 +7384,13 @@
 /obj/item/carvedgem/amber/sun,
 /turf/open/floor/sandstone_tile,
 /area/indoors/dungeon)
+"ZH" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = 0
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "ZL" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass,
@@ -12656,8 +12844,8 @@ rW
 rW
 Mv
 Mv
-sG
-sG
+LQ
+Il
 sG
 sG
 sG
@@ -13464,9 +13652,9 @@ rW
 rW
 mN
 mN
-sG
-sG
-sG
+ma
+KU
+bk
 sG
 sG
 sG
@@ -15263,7 +15451,7 @@ Iz
 Iz
 Iz
 TP
-ZV
+Kv
 ZV
 Iz
 Iz
@@ -15464,8 +15652,8 @@ AN
 Iz
 Iz
 Iz
-HA
-ga
+hD
+UW
 Ks
 ZV
 ZV
@@ -15668,7 +15856,7 @@ Iz
 Iz
 HA
 nv
-Ks
+ga
 PV
 gr
 gr
@@ -15869,8 +16057,8 @@ Iz
 Iz
 Iz
 TP
-HA
-HA
+aY
+aY
 TP
 gr
 gr
@@ -15880,7 +16068,7 @@ gr
 gr
 ZV
 ZV
-gr
+ZV
 Iz
 Iz
 Iz
@@ -16082,8 +16270,8 @@ gr
 gr
 ZV
 gr
-gr
-gr
+ZV
+ZV
 ZV
 Iz
 Iz
@@ -16275,16 +16463,16 @@ Iz
 ZV
 ZV
 gr
-ZV
 gr
 gr
 gr
-ZV
 gr
-ZV
-ZV
 gr
-ZV
+gr
+gr
+gr
+gr
+gr
 gr
 ZV
 ZV
@@ -16476,24 +16664,24 @@ Iz
 Iz
 ZV
 ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
 gr
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
 gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+lV
+lV
+lV
+lV
+lV
+ZH
 gr
 gr
 Iz
@@ -16678,24 +16866,24 @@ Iz
 Iz
 ZV
 ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-gr
-ZV
-gr
-ZV
 gr
 gr
 gr
 gr
 gr
 gr
+gr
+gr
+gr
+gr
+gr
+gr
+Lg
+mE
 ZV
+mr
+ZV
+aK
 ZV
 ZV
 Iz
@@ -16880,24 +17068,24 @@ Iz
 Iz
 gr
 ZV
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+xw
 ZV
-ZV
-gr
-gr
-ZV
-ZV
-gr
-gr
-ZV
-ZV
-gr
-gr
-ZV
-ZV
-gr
-gr
-gr
-gr
+mr
+mr
+mE
+FS
 ZV
 gr
 Iz
@@ -17086,20 +17274,20 @@ gr
 gr
 gr
 gr
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-gr
-ZV
-ZV
-gr
-ZV
 gr
 gr
+gr
+gr
+gr
+gr
+gr
+gr
+aC
 ZV
+ZV
+ZV
+ZV
+FS
 gr
 Iz
 Iz
@@ -17288,20 +17476,20 @@ gr
 gr
 gr
 gr
-ZV
-ZV
-ZV
-ZV
-ZV
-ZV
 gr
 gr
-ZV
 gr
-ZV
 gr
+gr
+gr
+gr
+gr
+xw
 ZV
-ZV
+wr
+mr
+mr
+aK
 gr
 Iz
 Iz
@@ -17488,22 +17676,22 @@ ZV
 gr
 gr
 gr
-ZV
-ZV
-ZV
-ZV
 gr
 gr
 gr
-ZV
-ZV
 gr
 gr
-ZV
-ZV
 gr
+gr
+gr
+gr
+gr
+Lg
+gM
+mr
+FM
 ZV
-ZV
+aK
 gr
 Iz
 Iz
@@ -17688,24 +17876,24 @@ Iz
 Iz
 ZV
 ZV
-ZV
-ZV
-ZV
-ZV
-gr
-gr
-ZV
 gr
 gr
 gr
 gr
-ZV
 gr
 gr
 gr
-ZV
-ZV
 gr
+gr
+gr
+gr
+gr
+Kh
+Kh
+Kh
+qT
+qT
+Kh
 Iz
 Iz
 Iz
@@ -17890,18 +18078,18 @@ Iz
 Iz
 gr
 ZV
-ZV
-ZV
 gr
 gr
 gr
 gr
-ZV
 gr
 gr
-ZV
-ZV
-ZV
+gr
+gr
+gr
+gr
+gr
+gr
 gr
 gr
 gr
@@ -18093,15 +18281,15 @@ Iz
 gr
 gr
 gr
-ZV
 gr
 gr
 gr
 gr
-ZV
-ZV
-ZV
-ZV
+gr
+gr
+gr
+gr
+gr
 gr
 gr
 ZV
@@ -18294,14 +18482,14 @@ Iz
 Iz
 gr
 ZV
-ZV
-ZV
-ZV
-ZV
 gr
 gr
-ZV
-ZV
+gr
+gr
+gr
+gr
+gr
+gr
 gr
 gr
 gr
@@ -18497,17 +18685,17 @@ Iz
 gr
 ZV
 ZV
-ZV
-ZV
-ZV
-gr
-gr
-ZV
-ZV
 gr
 gr
 gr
-ZV
+gr
+gr
+gr
+gr
+gr
+gr
+gr
+gr
 gr
 ZV
 ZV
@@ -18696,7 +18884,7 @@ ce
 Iz
 Iz
 Iz
-gr
+GT
 ZV
 ZV
 ZV
@@ -18711,7 +18899,7 @@ gr
 gr
 ZV
 gr
-gr
+GT
 gr
 Iz
 Iz
@@ -18909,12 +19097,12 @@ ZV
 gr
 gr
 ZV
-ZV
-ZV
-ZV
-ZV
-ZV
-gr
+TP
+JM
+JM
+JM
+TP
+eM
 Iz
 Iz
 gr
@@ -19111,11 +19299,11 @@ gr
 gr
 gr
 gr
-ZV
-ZV
-ZV
-ZV
-gr
+JM
+JM
+JM
+JM
+Wa
 gr
 Iz
 Iz
@@ -19313,11 +19501,11 @@ gr
 ZV
 gr
 ZV
-gr
-ZV
-gr
-ZV
-gr
+JM
+JM
+JM
+JM
+JM
 Iz
 Iz
 Iz
@@ -19515,11 +19703,11 @@ ZV
 ZV
 ZV
 ZV
-ZV
-ZV
-gr
-ZV
-ZV
+AP
+Xw
+oV
+cN
+bK
 Iz
 Iz
 gr
@@ -19717,11 +19905,11 @@ gr
 gr
 ZV
 gr
-ZV
-gr
-ZV
-ZV
-ZV
+TP
+aY
+aY
+aY
+TP
 Iz
 Iz
 gr
@@ -20926,8 +21114,8 @@ ZV
 ZV
 ZV
 ZV
-gr
-gr
+UM
+UM
 ZV
 Iz
 Iz
@@ -22137,7 +22325,7 @@ KZ
 DC
 Mo
 wm
-wm
+Uk
 Or
 DC
 DC
@@ -55865,7 +56053,7 @@ RA
 Mi
 Mi
 Mi
-EJ
+mU
 EJ
 Mi
 Mi
@@ -59310,11 +59498,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+WV
+WV
+WV
+WV
+WV
 Mi
 Mi
 Mi
@@ -59512,11 +59700,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+WV
+WV
+WV
+WV
+WV
 Mi
 Mi
 Mi
@@ -59714,11 +59902,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+WV
+WV
+WV
+WV
+WV
 Mi
 Mi
 Mi
@@ -59916,11 +60104,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+WV
+WV
+WV
+WV
+WV
 Mi
 Mi
 Mi
@@ -60118,11 +60306,11 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+WV
+WV
+WV
+WV
+WV
 Mi
 Mi
 Mi
