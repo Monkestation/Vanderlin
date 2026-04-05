@@ -86,3 +86,12 @@
 /atom/movable/screen/alert/status_effect/buff/alch/fortunepot
 	name = "Fortune"
 
+
+/datum/status_effect/buff/alch/pain
+	id = "painpot"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/pain
+	effectedstats = list(STATKEY_END = -5)
+
+/atom/movable/screen/alert/status_effect/buff/alch/pain
+	name = "SUFFERING
+

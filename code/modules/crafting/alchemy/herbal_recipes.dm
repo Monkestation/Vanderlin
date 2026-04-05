@@ -551,8 +551,8 @@
 
 /datum/reagent/poison/herbal/battle_stim/on_mob_metabolize(mob/living/M)
 	. = ..()
+	M.apply_status_effect(/datum/status_effect/buff/alch/pain)
 	M.add_stress(/datum/stress_event/souffrance)
-
 // Combat Enhancement
 
 /datum/reagent/buff/herbal/battle_stim
@@ -617,7 +617,7 @@
 // Mood Events for Herbal Effects
 
 /datum/stress_event/souffrance
-	desc = "YOU FEEL DEEPLY WRONG, EVERYTHING ITCHES!!!"
+	desc = "I FEEL DEEPLY WRONG, EVERYTHING ITCHES!!!"
 	stress_change = 10
 	effectedstats = list(STAT_ENDURANCE = -5)
 	timer = 10 MINUTES
