@@ -3431,10 +3431,6 @@
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
-"ceN" = (
-/obj/structure/carpet/purple,
-/turf/open/floor/cobblerock,
-/area/under/cave)
 "ceU" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -5138,7 +5134,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "djW" = (
-/obj/structure/bookcase/random/archive,
+/obj/structure/bookcase/random/myths,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /turf/open/floor/blocks/newstone,
 /area/under/cave)
@@ -6957,10 +6953,9 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
 "epb" = (
-/obj/structure/bookcase/random/myths,
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/floor/blocks/newstone,
-/area/under/cave)
+/obj/structure/fluff/statue/knight/r,
+/turf/open/floor/grass/cold,
+/area/under/town/basement)
 "epe" = (
 /obj/structure/hotspring,
 /obj/effect/lily_petal,
@@ -9586,14 +9581,6 @@
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/knight)
-"fTI" = (
-/obj/structure/easel,
-/obj/machinery/light/fueled/wallfire/candle/lamp{
-	pixel_y = 0;
-	pixel_x = -32
-	},
-/turf/open/floor/cobblerock,
-/area/under/cave)
 "fUm" = (
 /mob/living/simple_animal/hostile/retaliate/leylinelycan{
 	name = "Leyline Ghost";
@@ -10599,8 +10586,10 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/basin)
 "gCs" = (
+/obj/structure/easel,
 /obj/machinery/light/fueled/wallfire/candle/lamp{
-	pixel_y = -32
+	pixel_y = 0;
+	pixel_x = -32
 	},
 /turf/open/floor/cobblerock,
 /area/under/cave)
@@ -10956,7 +10945,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/phys)
 "gOP" = (
-/obj/structure/flora/grass/herb/rosa,
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/cold,
 /area/indoors/town/church/chapel)
@@ -10994,6 +10982,10 @@
 "gQc" = (
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
+"gQl" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/dirt/road,
+/area/outdoors/basin/safe)
 "gRg" = (
 /turf/open/floor/dirt/road,
 /area/indoors/soilsons)
@@ -11054,6 +11046,11 @@
 /obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/indoors/town/merc_guild)
+"gTw" = (
+/obj/structure/bookcase/random/thesis,
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/floor/blocks/newstone,
+/area/under/cave)
 "gTB" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/snow/patchy,
@@ -11881,9 +11878,9 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/church)
 "hsF" = (
-/obj/structure/stairs/stone,
-/turf/open/floor/dirt/road,
-/area/outdoors/basin/safe)
+/obj/structure/carpet/purple,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "hsI" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/tile/masonic/single,
@@ -12502,6 +12499,10 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/hand)
+"hLY" = (
+/obj/structure/carpet/green,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "hMZ" = (
 /obj/structure/chair/hotspring_bench/left,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -15609,6 +15610,11 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town)
+"jPQ" = (
+/obj/structure/bookcase/random/legends,
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/floor/blocks/newstone,
+/area/under/cave)
 "jPT" = (
 /obj/item/reagent_containers/powder/manabloom{
 	pixel_x = 2;
@@ -15625,9 +15631,10 @@
 /turf/open/floor/naturalstone,
 /area/under/town/basement)
 "jQG" = (
-/obj/structure/fluff/statue/knight/r,
-/turf/open/floor/cobblerock,
-/area/under/town/basement)
+/obj/structure/bookcase/random/apocrypha,
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/floor/blocks/newstone,
+/area/under/cave)
 "jQK" = (
 /obj/structure/fluff/walldeco/vinez/blue,
 /turf/closed/wall/mineral/decorstone,
@@ -15946,7 +15953,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town)
 "jYr" = (
-/obj/structure/carpet/cyan,
+/obj/structure/carpet,
 /turf/open/floor/cobblerock,
 /area/under/cave)
 "jYD" = (
@@ -22648,6 +22655,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt/road,
 /area/indoors/town/noble_manor/blue)
+"oya" = (
+/obj/structure/bookcase/random/archive,
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/floor/blocks/newstone,
+/area/under/cave)
 "oyf" = (
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/ruinedwood/darker,
@@ -22670,11 +22682,6 @@
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
-"ozp" = (
-/obj/structure/bookcase/random/apocrypha,
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/floor/blocks/newstone,
-/area/under/cave)
 "ozx" = (
 /obj/structure/flora/grass/pyroclasticflowers,
 /turf/open/floor/grass/cold,
@@ -23586,6 +23593,10 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood,
 /area/indoors/town)
+"pdw" = (
+/obj/structure/carpet/red,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "pdB" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -24075,10 +24086,6 @@
 "pwx" = (
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/naturalstone,
-/area/under/cave)
-"pwE" = (
-/obj/structure/carpet,
-/turf/open/floor/cobblerock,
 /area/under/cave)
 "pwW" = (
 /obj/structure/table/wood/plain_alt,
@@ -24597,6 +24604,11 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors/basin/safe)
+"pKN" = (
+/obj/structure/flora/grass/herb/rosa,
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/open/floor/grass/cold,
+/area/indoors/town/church/chapel)
 "pLe" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 1
@@ -25445,11 +25457,6 @@
 /obj/effect/decal/shadow_floor/corner,
 /turf/closed/wall/mineral/stone,
 /area/under/cave)
-"qnl" = (
-/obj/structure/bookcase/random/legends,
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/floor/blocks/newstone,
-/area/under/cave)
 "qnx" = (
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/knight)
@@ -25538,11 +25545,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/chapel)
-"qsS" = (
-/obj/structure/bookcase/random/thesis,
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/floor/blocks/newstone,
-/area/under/cave)
 "qtB" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
@@ -27306,6 +27308,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/town/church/inquisition)
+"rDi" = (
+/obj/machinery/light/fueled/wallfire/candle/lamp{
+	pixel_y = -32
+	},
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "rDj" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/dirt/road,
@@ -27424,6 +27432,13 @@
 "rGJ" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/basin)
+"rGV" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/open/floor/grass/cold,
+/area/indoors/town/church/chapel)
 "rHD" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -28230,10 +28245,6 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/outdoors/town/keep)
-"skH" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/grass/cold,
-/area/indoors/town/church/chapel)
 "skR" = (
 /obj/structure/bars/pipe,
 /turf/open/floor/metal/barograte,
@@ -28508,14 +28519,6 @@
 /obj/item/storage/belt/leather/plaquesilver,
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
-"suA" = (
-/obj/structure/fluff/walldeco/church/line{
-	dir = 1
-	},
-/obj/structure/flora/grass/herb/rosa,
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/grass/cold,
-/area/indoors/town/church/chapel)
 "suB" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub/train_sword,
@@ -29100,6 +29103,14 @@
 	pixel_y = 0
 	},
 /obj/structure/table/wood/reinforced,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "sNc" = (
@@ -31366,6 +31377,14 @@
 "ulg" = (
 /obj/structure/fake_machine/scomm/r,
 /obj/structure/table/wood/reinforced,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "ulj" = (
@@ -32404,10 +32423,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
-"uQg" = (
-/obj/structure/carpet/red,
-/turf/open/floor/cobblerock,
-/area/under/cave)
 "uQr" = (
 /obj/structure/bed/mediocre,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -32578,6 +32593,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
+/obj/structure/flora/grass/herb/rosa,
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/cold,
 /area/indoors/town/church/chapel)
@@ -33456,6 +33472,10 @@
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
+"vEx" = (
+/obj/structure/carpet/cyan,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "vEJ" = (
 /obj/structure/bars/passage{
 	redstone_id = "tombgate"
@@ -34743,10 +34763,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/vault)
-"wwx" = (
-/obj/structure/carpet/green,
-/turf/open/floor/cobblerock,
-/area/under/cave)
 "wwy" = (
 /obj/effect/mapping_helpers/access/keyset/town/mercenary,
 /obj/effect/mapping_helpers/access/locker,
@@ -97465,7 +97481,7 @@ oII
 oII
 oII
 oII
-fTI
+gCs
 bRL
 oII
 oII
@@ -97664,8 +97680,8 @@ nJJ
 oII
 oII
 oII
-epb
-ceN
+djW
+hsF
 otK
 ksc
 ksc
@@ -97864,10 +97880,10 @@ nJJ
 oII
 oII
 oII
-djW
-wwx
+oya
+hLY
 iTN
-ceN
+hsF
 otK
 otK
 otK
@@ -98065,11 +98081,11 @@ nJJ
 nJJ
 oII
 mbq
-pwE
+jYr
 fpf
-wwx
+hLY
 iTN
-ceN
+hsF
 otK
 otK
 pTg
@@ -98266,13 +98282,13 @@ nPs
 qmy
 oII
 vKJ
-qnl
-pwE
+jPQ
+jYr
 fpf
-wwx
+hLY
 otK
 otK
-gCs
+rDi
 oII
 oII
 oII
@@ -98469,7 +98485,7 @@ qbA
 tZL
 vKJ
 mbq
-pwE
+jYr
 otK
 otK
 gor
@@ -99276,13 +99292,13 @@ sOo
 vrd
 oII
 vKJ
-epb
+djW
 jyn
 uXW
-jYr
+vEx
 otK
 otK
-gCs
+rDi
 oII
 oII
 nJJ
@@ -99481,9 +99497,9 @@ oII
 iTN
 jyn
 uXW
-jYr
+vEx
 pnA
-uQg
+pdw
 otK
 otK
 oII
@@ -99682,10 +99698,10 @@ nJJ
 oII
 oII
 oII
-ozp
-jYr
+jQG
+vEx
 pnA
-uQg
+pdw
 oII
 kOW
 asR
@@ -99886,8 +99902,8 @@ nJJ
 oII
 oII
 oII
-qsS
-uQg
+gTw
+pdw
 oII
 aPh
 pTv
@@ -104995,7 +105011,7 @@ jvF
 jvF
 jvF
 jvF
-hsF
+gQl
 wzY
 nJJ
 nJJ
@@ -122301,12 +122317,12 @@ dps
 wxy
 dps
 xRO
-skH
+gOP
 tzQ
 tzQ
-suA
+uYY
 hdG
-skH
+gOP
 fHb
 uvK
 dnB
@@ -122503,7 +122519,7 @@ wKL
 bqY
 dnj
 dse
-gOP
+pKN
 kik
 kik
 lmG
@@ -122705,7 +122721,7 @@ qRF
 mQJ
 qRF
 kxg
-skH
+gOP
 kik
 kik
 pWl
@@ -123112,8 +123128,8 @@ kik
 kik
 kik
 kik
-uYY
-skH
+rGV
+gOP
 vVs
 nAl
 uvK
@@ -123920,9 +123936,9 @@ kik
 kik
 kik
 kik
-uYY
+rGV
+pKN
 gOP
-skH
 nAl
 uvK
 fda
@@ -124321,7 +124337,7 @@ dps
 wxy
 dps
 hbt
-gOP
+pKN
 kik
 kik
 xJb
@@ -124523,7 +124539,7 @@ wKL
 bqY
 dnj
 uGC
-skH
+gOP
 kik
 kik
 lmG
@@ -124725,12 +124741,12 @@ qRF
 sHN
 qRF
 nMY
-gOP
+pKN
 kik
 kik
 mVR
 nkD
-skH
+gOP
 fHb
 uvK
 dJD
@@ -139874,12 +139890,12 @@ bJI
 dRO
 dRO
 dRO
-jQG
 dRO
 dRO
 dRO
 dRO
-jQG
+dRO
+dRO
 vmV
 jDR
 lPj
@@ -140074,13 +140090,13 @@ tYX
 kra
 bJI
 rwS
+qqq
+epb
+qqq
 mos
-mos
-mos
-mos
-mos
-mos
-mos
+qqq
+epb
+qqq
 mos
 mos
 vmV
@@ -140275,15 +140291,15 @@ bJI
 bJI
 bbn
 bJI
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
-nJJ
+mos
+mos
+mos
+mos
+mos
+mos
+mos
+mos
+mos
 nJJ
 vmV
 kFw
