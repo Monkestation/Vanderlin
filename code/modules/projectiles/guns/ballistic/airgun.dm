@@ -12,6 +12,7 @@
 	inhand_y_dimension = 64
 	sellprice = 250
 	dropshrink = 0.7
+	item_weight = 7 KILOGRAMS
 	equip_sound = 'sound/foley/gun_equip.ogg'
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'

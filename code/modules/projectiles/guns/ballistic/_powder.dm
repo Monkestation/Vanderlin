@@ -292,6 +292,7 @@
 	desc = "A rod designed to ram things down gun barrels."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "ramrod"
+	item_weight = 150 GRAMS
 
 /// A wheel-lock gun that requires winding, cocking and ramming
 /obj/item/gun/ballistic/powder/wheellock

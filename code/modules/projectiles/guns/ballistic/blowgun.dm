@@ -5,8 +5,9 @@
 	icon = 'icons/roguetown/weapons/32/bows.dmi'
 	icon_state = "blowgun"
 	possible_item_intents = list(/datum/intent/shoot/blowgun, /datum/intent/arc/blowgun, INTENT_GENERIC)
-	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/blowgun
+	item_weight = 200 GRAMS
 
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/blowgun
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/blowgun/empty
 	bolt_type = BOLT_TYPE_NO_BOLT
 	internal_magazine = TRUE

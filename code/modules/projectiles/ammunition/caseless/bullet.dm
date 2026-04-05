@@ -8,6 +8,7 @@
 	dropshrink = 0.5
 	possible_item_intents = list(INTENT_USE)
 	force = DAMAGE_KNIFE - 7
+	item_weight = 75 GRAMS
 
 /obj/item/ammo_casing/caseless/cball
 	name = "large cannonball"
@@ -27,6 +28,7 @@
 	w_class = WEIGHT_CLASS_HUGE
 	resistance_flags = EVERYTHING_PROOF | EXPLOSION_MOVE_PROOF
 	throw_range = 1
+	item_weight = 70 KILOGRAMS
 
 /obj/item/ammo_casing/caseless/cball/grapeshot
 	name = "berryshot"

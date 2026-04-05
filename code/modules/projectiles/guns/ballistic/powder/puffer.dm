@@ -12,6 +12,7 @@
 	grid_width = 96
 	dropshrink = 0.7
 	sellprice = 200
+	item_weight = 1.2 KILOGRAMS
 
 	possible_item_intents = list(/datum/intent/shoot/puffer, /datum/intent/shoot/puffer/arc, INTENT_GENERIC)
 	force = 10

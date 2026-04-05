@@ -14,6 +14,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	max_integrity = 100
 	sellprice = 400
+	item_weight = 4.5 KILOGRAMS
 
 	gripped_intents = list(POLEARM_BASH, /datum/intent/shoot/musket, /datum/intent/shoot/musket/arc)
 	force = 10
@@ -130,7 +131,9 @@
 	wlength = WLENGTH_LONG
 	blade_dulling = DULLING_BASHCHOP
 	max_blade_int = 100
+	item_weight = 300 GRAMS
 
 /obj/item/ramrod/musket
 	name = "musket ramrod"
 	icon_state = "ramrod_musket"
+	item_weight = 300 GRAMS

@@ -8,6 +8,8 @@
 	dropshrink = 0.9
 	max_integrity = 10
 	force = DAMAGE_KNIFE / 2
+	item_weight = 15 GRAMS
+
 	firing_effect_type = null
 
 /obj/item/ammo_casing/caseless/dart/Initialize(mapload, ...)

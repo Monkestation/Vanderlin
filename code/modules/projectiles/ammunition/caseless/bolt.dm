@@ -10,6 +10,8 @@
 	max_integrity = 10
 	force = DAMAGE_KNIFE - 2
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
+	item_weight = 35 GRAMS
+
 	firing_effect_type = null
 
 /obj/item/ammo_casing/caseless/bolt/Initialize(mapload, ...)

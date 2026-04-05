@@ -13,6 +13,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	can_parry = TRUE
 	associated_skill = /datum/attribute/skill/combat/bows
+	item_weight = 1 KILOGRAMS
 
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/bow
 	bolt_type = BOLT_TYPE_NO_BOLT
@@ -33,6 +34,7 @@
 	possible_item_intents = list(/datum/intent/shoot/bow/long, /datum/intent/arc/bow/long, INTENT_GENERIC)
 	force = 12 // ????
 	slot_flags = ITEM_SLOT_BACK
+	item_weight = 1.5 KILOGRAMS
 
 	fire_sound = 'sound/combat/Ranged/flatbow-shot-03.ogg'
 	projectile_damage_multiplier = 1.2
@@ -44,6 +46,7 @@
 	base_icon_state = "recurve"
 	possible_item_intents = list(/datum/intent/shoot/bow/short, /datum/intent/arc/bow/short, INTENT_GENERIC)
 	force = 9
+	item_weight = 700 GRAMS
 
 	projectile_damage_multiplier = 0.9
 

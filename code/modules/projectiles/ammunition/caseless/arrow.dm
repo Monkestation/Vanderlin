@@ -8,6 +8,7 @@
 	dropshrink = 0.8
 	max_integrity = 20
 	embedding = list("embedded_pain_multiplier" = 3, "embedded_fall_chance" = 0)
+	item_weight = 26 GRAMS
 
 	projectile_type = /obj/projectile/bullet/reusable/arrow
 	caliber = "arrow"

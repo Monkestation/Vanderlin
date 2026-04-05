@@ -7,6 +7,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	associated_skill = /datum/attribute/skill/combat/crossbows
+	item_weight = 2 KILOGRAMS
 
 	cartridge_wording = "bolt"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/crossbow
@@ -31,6 +32,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
 	grid_width = 64
+	item_weight = 1.5 KILOGRAMS
 
 	projectile_damage_multiplier = 0.6
 
