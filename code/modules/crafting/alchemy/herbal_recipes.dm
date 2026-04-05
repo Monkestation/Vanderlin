@@ -549,10 +549,32 @@
 	overdose_threshold = 45
 	taste_description = "decepting sweetness, followed by burning"
 
-/datum/reagent/poison/herbal/battle_stim/on_mob_metabolize(mob/living/M)
+/datum/reagent/poison/herbal/pain/on_mob_metabolize(mob/living/M)
 	. = ..()
 	M.apply_status_effect(/datum/status_effect/buff/alch/pain)
 	M.add_stress(/datum/stress_event/souffrance)
+
+/datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
+	name = "Dark sun's shine"
+	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
+	color = "#664700" // rgb: 102, 71, 0
+	metabolization_rate = 0.1
+	taste_description = "pure, unrestrained hate and hunger"
+
+/datum/reagent/poison/herbal/rajaijah/on_mob_add(mob/living/L)
+	. = ..()
+	to_chat(L, span_notice("You twitch, you drool, you hunger. You are filled with inescapable rage and hatred for all around you, and must let it out. KILL THEM ALL!"))
+	ADD_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
+	ADD_TRAIT(L, MAGIC_TRAIT, "[type]")
+
+/datum/reagent/poison/herbal/rajaijah/on_mob_delete(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
+	REMOVE_TRAIT(L, MAGIC_TRAIT, "[type]")
+
+/datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
+	. = ..()
+
 // Combat Enhancement
 
 /datum/reagent/buff/herbal/battle_stim
