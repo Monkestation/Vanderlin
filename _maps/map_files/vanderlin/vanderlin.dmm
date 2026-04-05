@@ -17587,6 +17587,14 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks,
 /area/under/town/basement)
+"iua" = (
+/mob/living/carbon/human/species/automaton/prefilled_vessel{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/storage/keyring/artificer,
+/turf/open/floor/greenstone,
+/area/indoors/town/dwarfin)
 "iuv" = (
 /obj/structure/bed/shit,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -18518,7 +18526,6 @@
 /area/indoors/town/shop)
 "iNM" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/augment_kit,
 /turf/open/floor/metal/alt,
 /area/under/town/basement)
 "iNO" = (
@@ -28793,9 +28800,6 @@
 "nAf" = (
 /obj/structure/fluff/steamvent,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/mob/living/carbon/human/species/automaton/prefilled_vessel,
-/obj/item/storage/keyring/manorguard,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/town/basement)
 "nAk" = (
@@ -74530,7 +74534,7 @@ oEG
 pot
 uVU
 smk
-cQu
+iua
 dJK
 jEQ
 nxW
