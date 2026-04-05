@@ -486,7 +486,7 @@
 	color = "#4a3c5f"
 	metabolization_rate = 0.8
 	overdose_threshold = 10
-	taste_description = "exhaustion and bitter herbs"
+	taste_description = "exhaustion and bitter herbs" // inspired by xylazine
 	var/sleep_power = 120 SECONDS
 
 /datum/reagent/poison/herbal/tranq/on_mob_metabolize(mob/living/M)
@@ -515,18 +515,16 @@
 
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(20)
-	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5)
+	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
 	if(prob(15))
 		M.emote("gag")
-
-
+		
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
 	color = "#664700" // rgb: 102, 71, 0
 	metabolization_rate = 0.1
 	taste_description = "fleeing life"
-	
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_add(mob/living/L)
 	. = ..()
@@ -541,6 +539,19 @@
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
 	. = ..()
+
+/datum/reagent/poison/herbal/pain
+	name = "Souffrance"
+	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm."
+	reagent_state = LIQUID
+	color = "#8b0000"
+	metabolization_rate = 0.5
+	overdose_threshold = 45
+	taste_description = "decepting sweetness, followed by burning"
+
+/datum/reagent/poison/herbal/battle_stim/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.add_stress(/datum/stress_event/souffrance)
 
 // Combat Enhancement
 
@@ -604,6 +615,11 @@
 	. = ..()
 
 // Mood Events for Herbal Effects
+
+/datum/stress_event/souffrance
+	desc = "YOU FEEL DEEPLY WRONG, EVERYTHING ITCHES!!!"
+	stress_change = 10
+	timer = 10 MINUTES
 
 /datum/stress_event/herbal_calm
 	desc = "I feel deeply relaxed and at peace."

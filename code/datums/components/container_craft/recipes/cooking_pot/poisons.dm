@@ -89,6 +89,22 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The fumes from the pot smell of helplessness and suffering..."
 
+/datum/container_craft/cooking/herbal_tea/pain
+	name = "Souffrance interrogation agent"
+	created_reagent = /datum/reagent/poison/herbal/pain
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herbal/salvia = 2,
+		/obj/item/alch/herbal/euphorbia =1
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of sweetness and deception..."
+
 /datum/container_craft/cooking/herbal_tea/zomb
 	name = "Astuce paralytic"
 	created_reagent = /datum/reagent/poison/herbal/ghoulpowder
