@@ -10,6 +10,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_personal_see_leylines,
 	/client/proc/spawn_liquid,
 	/client/proc/borbop_oopsie,
+	/client/proc/nya,
 	/client/proc/spawn_faction_trader,
 	/client/proc/crop_nutrient_debug,
 	/client/proc/remove_liquid,

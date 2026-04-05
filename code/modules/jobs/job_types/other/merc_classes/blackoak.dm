@@ -35,20 +35,22 @@
 
 /datum/job/advclass/mercenary/blackoak/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/static/list/selectableweapon = list( \
-		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Regal Elven Club" = /obj/item/weapon/mace/elvenclub/steel \
-		)
+	spawned.merctype = 4
+
+
+/datum/job/advclass/mercenary/blackoak/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectableweapon = list(
+		"Spear" = /obj/item/weapon/polearm/spear,
+		"Regal Elven Club" = /obj/item/weapon/mace/elvenclub/steel,
+	)
 	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Weapon", title = "Black Oak's Guardian")
-	if(!choice)
-		return
 	switch(choice)
 		if("Spear")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 30)
 		if("Regal Elven Club")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
-	spawned.merctype = 4
-
 
 /datum/outfit/mercenary/blackoak
 	name = "Black Oak's Guardian (Mercenary)"

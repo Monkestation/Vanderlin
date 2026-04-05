@@ -47,6 +47,8 @@
 	name = L.name
 	desc = L.desc
 
+	item_weight = L.carry_weight + L.get_mob_weight()
+
 	if(length(L.stored_enchantments))
 		for(var/datum/enchantment/enchant as anything in L.stored_enchantments)
 			enchant(enchant)

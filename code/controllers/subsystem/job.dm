@@ -642,6 +642,8 @@ SUBSYSTEM_DEF(job)
 
 /// Gives the player the stuff they should have with their rank
 /datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client, reset_job_stats = TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
+
 	equipping.job = job.title
 	equipping.job_type = job.type
 	if(job.parent_job)
@@ -669,6 +671,8 @@ SUBSYSTEM_DEF(job)
 			to_chat(player_client, related_policy)
 
 	job.after_spawn(equipping, player_client, reset_job_stats)
+
+	SSticker.OnRoundstart(CALLBACK(job, TYPE_PROC_REF(/datum/job, on_roundstart), equipping, player_client))
 
 	if(length(job.advclass_cat_rolls) || !ishuman(equipping))
 		return

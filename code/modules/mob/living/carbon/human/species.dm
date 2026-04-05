@@ -23,6 +23,8 @@
 	/// Whether this species a requires donator subscription to access, we removed all donator restrictions for species, but it's here if we ever want to reenable them or smth.
 	var/donator_req = FALSE
 
+	var/default_mob_weight = HUMAN_WEIGHT
+
 	/**
 	 * The list of pronouns this species allows in the character sheet.
 	 * If none are specified, it will default to the PRONOUNS_LIST.
@@ -443,7 +445,7 @@
 /datum/species/New()
 
 	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
-		limbs_id = name
+		limbs_id = id
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)
@@ -690,7 +692,7 @@
 
 /datum/species/proc/validate_customizer_entries(mob/living/carbon/human/human)
 	customizer_entries = SANITIZE_LIST(customizer_entries)
-	listclearnulls(customizer_entries)
+	list_clear_nulls(customizer_entries)
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE

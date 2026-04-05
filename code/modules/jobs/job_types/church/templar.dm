@@ -122,6 +122,19 @@
 
 /datum/job/templar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_templar()
+		devotion.grant_to(spawned)
+
+	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
+		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+/datum/job/templar/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/astrata)
@@ -182,15 +195,6 @@
 		if(/datum/patron/divine/xylix)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/xylix)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
-
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_templar()
-		devotion.grant_to(spawned)
-
-	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
-		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
 /datum/outfit/templar
 	name = "Templar"

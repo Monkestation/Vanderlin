@@ -15,8 +15,16 @@
 	dropshrink = 0.7
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	component_type = /datum/component/storage/concrete/grid/keyring
+	item_weight = 50 GRAMS
 	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
 	var/list/combined_access
+	slot_equipment_priority = list(
+		ITEM_SLOT_NECK,
+		ITEM_SLOT_WRISTS,
+		ITEM_SLOT_HIP,
+		ITEM_SLOT_MOUTH,
+	)
+
 
 /obj/item/storage/keyring/Initialize()
 	. = ..()
@@ -117,6 +125,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_MOUTH|ITEM_SLOT_WRISTS
 	experimental_inhand = FALSE
 	dropshrink = 0.7
+	item_weight = 40 GRAMS
 	var/how_many_lockpicks = 9
 
 /obj/item/lockpickring/Initialize()

@@ -12,6 +12,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	resistance_flags = FLAMMABLE
 	possible_item_intents = list(/datum/intent/use)
+	item_weight = 3 GRAMS
 	var/datum/plant_def/plant_def_type
 
 	var/datum/plant_genetics/seed_genetics

@@ -39,7 +39,12 @@
 /datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
-	var/instruments = list(
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
+
+/datum/job/town_elder/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -47,14 +52,10 @@
 		"Flute" = /obj/item/instrument/flute,
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola)
+		"Viola" = /obj/item/instrument/viola
+	)
 
-	var/instrument_choice = input(spawned, "Choose your instrument.", "XYLIX") as anything in instruments
-	var/spawn_instrument = instruments[instrument_choice]
-	if(!spawn_instrument)
-		spawn_instrument = /obj/item/instrument/lute
-	spawned.equip_to_slot_or_del(new spawn_instrument(spawned), ITEM_SLOT_BACK_R, TRUE)
-	spawned.add_quirk(/datum/quirk/boon/folk_hero)
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.", title = "XYLIX")
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Elder Announcement"

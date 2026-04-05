@@ -49,7 +49,15 @@
 
 /datum/job/advclass/combat/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.select_equippable(player_client, list(
+	spawned.inspiration = new /datum/inspiration(spawned)
+
+	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
+		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+
+/datum/job/advclass/combat/bard/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -58,14 +66,9 @@
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
 		"Viola" = /obj/item/instrument/viola
-		),
-		message = "Choose your instrument.",
-		title = "XYLIX"
 	)
-	spawned.inspiration = new /datum/inspiration(spawned)
 
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
-		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.", title = "XYLIX")
 
 /datum/outfit/adventurer/bard
 	name = "Bard (Adventurer)"

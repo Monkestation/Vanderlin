@@ -80,3 +80,21 @@
   - rscadd: The Mute vice, which completely stops speech.
   TerraGS:
   - bugfix: Fixed a wound related runtime
+2026-04-05:
+  Ben10083:
+  - qol: SCOM now respects Monarch title when announcing decrees
+  - qol: SCOM now displays decrees from first to last when right clicking
+  - bugfix: Priest coronation now properly updates monarch ruler_title
+  - code_imp: DMdoc for text.dm procs
+  KevinfromHP:
+  - rscadd: Automaton Augmentations and Tweaks
+  Singul0:
+  - rscadd: Makes blacksteel helmet's visor functional
+  - qol: Gives all visored helmets a notice that you can adjust the visor.
+  Telvayne:
+  - rscadd: Added stink-cleaning effect to cleansing flames
+  dwasint:
+  - rscadd: teeth, they fly out when brute damage is taken to the jaw on the same
+      rarity as fractures (can pull with tongs), less teeth adds a slur
+  - refactor: weight has been redone to be a tiered system from the old %. For math
+      that used the % of weight it was moved to either tiers or a sigmoid curve.

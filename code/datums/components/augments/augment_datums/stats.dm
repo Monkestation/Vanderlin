@@ -1,5 +1,6 @@
 /datum/augment/stats
 	var/list/stat_changes = list() // List of stat changes: list(STAT_STRENGTH = 1, STAT_SPEED = -1)
+	color = COLOR_ASSEMBLY_ORANGE
 
 /datum/augment/stats/on_install(mob/living/carbon/human/H)
 	for(var/stat in stat_changes)
@@ -20,7 +21,7 @@
 /datum/augment/stats/strength_servo
 	name = "hydraulic strength servo"
 	desc = "Enhances physical power through pressurized hydraulics, at the cost of core stability."
-	stability_cost = -15
+	stability_cost = -12
 	stat_changes = list(STAT_STRENGTH = 2)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
@@ -36,26 +37,36 @@
 /datum/augment/stats/processing_core
 	name = "overclocked logic engine"
 	desc = "Increases processing speed and analytical capability, straining the core matrix."
-	stability_cost = -20
+	stability_cost = -12
 	stat_changes = list(STAT_INTELLIGENCE = 3)
 	engineering_difficulty = SKILL_RANK_EXPERT
 	installation_time = 20 SECONDS
 
-/datum/augment/stats/reinforced_frame
-	name = "reinforced skeletal frame"
+/datum/augment/stats/suspension_rig
+	name = "suspension rig"
 	desc = "Strengthens the automaton's frame against damage."
-	stability_cost = -15
+	stability_cost = -12
 	stat_changes = list(STAT_CONSTITUTION = 2)
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
 	installation_time = 15 SECONDS
 
-/datum/augment/stats/endurance_battery
-	name = "extended capacity battery"
+/datum/augment/stats/pressure_tank
+	name = "extended capacity pressure tank"
 	desc = "Allows for longer operational periods without rest."
 	stability_cost = -10
 	stat_changes = list(STAT_ENDURANCE = 2)
 	engineering_difficulty = SKILL_RANK_APPRENTICE
 	installation_time = 12 SECONDS
+
+/datum/augment/stats/pressure_tank/on_install(mob/living/carbon/human/H)
+	. = ..()
+	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
+	sl?.max_steam_charge += 50
+
+/datum/augment/stats/pressure_tank/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
+	sl?.max_steam_charge -= 50
 
 /datum/augment/stats/mobility_actuator
 	name = "high-efficiency actuators"
@@ -80,14 +91,6 @@
 	stat_changes = list(STAT_PERCEPTION = -1)
 	engineering_difficulty = SKILL_RANK_NOVICE
 	installation_time = 8 SECONDS
-
-/datum/augment/stats/logic_limiter
-	name = "simplified logic circuit"
-	desc = "Reduces processing complexity for improved stability."
-	stability_cost = 15
-	stat_changes = list(STAT_INTELLIGENCE = -2)
-	engineering_difficulty = SKILL_RANK_NOVICE
-	installation_time = 10 SECONDS
 
 /datum/augment/stats/lightweight_frame
 	name = "lightweight chassis"
@@ -114,7 +117,7 @@
 	installation_time = 8 SECONDS
 
 /datum/augment/stats/balanced_matrix
-	name = "stabilized enhancement matrix"
+	name = "stabilizing matrix"
 	desc = "A carefully balanced augmentation that improves multiple attributes."
 	stability_cost = -5
 	stat_changes = list(STAT_STRENGTH = 1, STAT_CONSTITUTION = 1)

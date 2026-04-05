@@ -50,27 +50,27 @@
 /datum/job/advclass/combat/lakkariancleric/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_cleric()
+		devotion.grant_to(spawned)
+
 	spawned.virginity = TRUE
+
+/datum/job/advclass/combat/lakkariancleric/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/selectable = list( \
 		"Silver Rungu" = /obj/item/weapon/mace/rungu/silver, \
 		"Silver Sengese" = /obj/item/weapon/sword/scimitar/sengese/silver \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "What is your weapon of choice?")
-	if(!choice)
-		return
-
 	switch(choice)
 		if("Silver Rungu")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lakkariancleric/rungu)
 		if("Silver Sengese")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lakkariancleric/sengese)
-
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_cleric()
-		devotion.grant_to(spawned)
 
 /datum/outfit/folkhero/lakkariancleric
 	name = "Lakkarian Cleric (Folkhero)"

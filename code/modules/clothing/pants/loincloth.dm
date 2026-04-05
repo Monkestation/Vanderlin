@@ -8,6 +8,7 @@
 	l_sleeve_status = SLEEVE_NOMOD
 	fiber_salvage = FALSE
 	salvage_amount = 1
+	item_weight = 65 GRAMS
 
 /obj/item/clothing/pants/loincloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

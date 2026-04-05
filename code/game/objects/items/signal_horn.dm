@@ -25,6 +25,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 32
 	grid_width = 64
+	item_weight = 400 GRAMS
 	COOLDOWN_DECLARE(sound_horn)
 
 /obj/item/signal_horn/examine()

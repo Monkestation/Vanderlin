@@ -46,8 +46,9 @@
 		CTAG_ROYALKNIGHT,
 	)
 
-/datum/job/advclass/pick_everything/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pick_everything/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/list/possible_classes = list()
 	for(var/datum/job/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(!length(CHECKS.category_tags))
