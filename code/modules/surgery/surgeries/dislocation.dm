@@ -1,6 +1,6 @@
 /datum/surgery/relocate_bone
 	name = "Bone relocation"
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(
 		BODY_ZONE_PRECISE_SKULL,
 		BODY_ZONE_HEAD,
@@ -31,7 +31,7 @@
 		TOOL_BONESETTER = 90,
 		TOOL_HAND = 50,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	surgery_flags = SURGERY_DISLOCATED
 	ignore_clothes = TRUE
 	skill_min = SKILL_RANK_APPRENTICE

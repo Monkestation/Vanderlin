@@ -7,7 +7,7 @@
 		/datum/surgery_step/bestow_lux,
 		/datum/surgery_step/cauterize
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_CHEST)
 
 /datum/surgery_step/bestow_lux
@@ -16,7 +16,7 @@
 		/obj/item/reagent_containers/lux = 80,
 		/obj/item/reagent_containers/lux_tainted = 50,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	time = 10 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
 	skill_min = SKILL_RANK_EXPERT

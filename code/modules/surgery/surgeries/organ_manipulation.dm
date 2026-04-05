@@ -1,6 +1,6 @@
 /datum/surgery/organ_manipulation
 	name = "Organ manipulation"
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = list(BODY_ZONE_PRECISE_SKULL, BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,
@@ -38,7 +38,7 @@
 		/obj/item/organ = 80,
 		/obj/item/reagent_containers/food/snacks/meat/organ = 0,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
 	skill_min = SKILL_RANK_APPRENTICE
 	skill_median = SKILL_RANK_EXPERT

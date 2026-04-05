@@ -9,7 +9,7 @@
 		TOOL_IMPROVISED_SAW = 50,
 		TOOL_SHARP = 40,
 	)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 	surgery_flags = SURGERY_INCISED
 	skill_min = SKILL_RANK_NOVICE
 	skill_median = SKILL_RANK_JOURNEYMAN
