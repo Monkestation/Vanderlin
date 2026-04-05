@@ -252,6 +252,7 @@
 	grid_height = 32
 	volume = 15
 	reagent_flags = TRANSPARENT
+	item_weight = 95 GRAMS
 
 /obj/item/reagent_containers/syringe/proc/try_syringe(atom/target, mob/user)
 	if(!target.reagents)

@@ -94,6 +94,9 @@
 	if(surgery_signal & COMPONENT_CANCEL_SURGERY)
 		return FALSE
 
+	if(!surgery_valid(user, patient, tool))
+		return FALSE
+
 	if(IS_IN_INVALID_SURGICAL_POSITION(patient, src))
 		if(feedback)
 			patient.balloon_alert(user, "patient is not lying down!")
@@ -149,6 +152,11 @@
 
 	return TRUE
 
+/// For custom validation checked on every step, failure completely ends the surgery
+/// IE, you don't need to operate on a broken bone if it heals
+/datum/surgery/proc/surgery_valid(mob/living/surgeon, mob/living/patient, obj/item/implement)
+	return TRUE
+
 /datum/surgery/proc/can_next_step(mob/living/user, list/modifiers)
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -187,6 +195,11 @@
 	if(tool)
 		tool = tool.get_proxy_attacker_for(target, user)
 
+	if(!surgery_valid(user, target, tool))
+		target.balloon_alert(user, "surgery [lowertext(name)] not valid.")
+		qdel(src)
+		return
+
 	var/surgery_type = steps[status]
 	var/datum/surgery_step/surgery_step = new surgery_type()
 
@@ -198,7 +211,7 @@
 
 	// Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
 	if((surgery_flags & SURGERY_CHECK_TOOL_BEHAVIOUR) ? tool.tool_behaviour : (tool.item_flags & SURGICAL_TOOL))
-		to_chat(user, span_warning("This step requires a different tool!"))
+		target.balloon_alert(user, "requires a different tool!")
 		return TRUE
 
 	return FALSE

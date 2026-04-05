@@ -1,33 +1,50 @@
-/datum/surgery_step/insert_teeth
-	name = "Fix teeth"
-	implements = list(
-		/obj/item/natural/bundle/teeth = 80,
-		/obj/item/natural/teeth = 70,
-	)
-	time = 3 SECONDS
-	surgery_flags = SURGERY_INCISED
-	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
+/datum/surgery/insert_teeth
+	name = "Insert Teeth"
 	requires_bodypart_type = BODYPART_ORGANIC
 
-/datum/surgery_step/insert_teeth/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/mouth/bodypart, target_zone)
+	steps = list(
+		/datum/surgery_step/incise,
+		/datum/surgery_step/insert_teeth,
+	)
+
+	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
+
+/datum/surgery/insert_teeth/surgery_valid(mob/living/surgeon, mob/living/carbon/patient, obj/item/implement)
 	. = ..()
 	if(!.)
+		return
+
+	var/obj/item/bodypart/mouth/mouth = patient.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(!mouth)
 		return FALSE
-	if(!istype(bodypart))
-		return FALSE
-	return bodypart.get_teeth_amount() < bodypart.max_teeth
+
+	return mouth.get_teeth_amount() < mouth.max_teeth
+
+/datum/surgery_step/insert_teeth
+	name = "Insert Teeth"
+
+	implements = list(
+		/obj/item/natural/teeth = 100,
+		/obj/item/natural/bundle/teeth = 75,
+	)
+
+	time = 3 SECONDS
 
 /datum/surgery_step/insert_teeth/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	display_results(user, target,
-		"<span class='notice'>I begin placing teeth into [target]'s mouth...</span>",
-		"<span class='notice'>[user] begins fixing [target]'s teeth.</span>",
-		"<span class='notice'>[user] begins performing surgery on [target]'s mouth.</span>")
+	display_results(
+		user,
+		target,
+		span_notice("I begin placing teeth into [target]'s mouth..."),
+		span_notice("[user] begins fixing [target]'s teeth."),
+		span_notice("[user] begins performing surgery on [target]'s mouth."),
+	)
 	return TRUE
 
 /datum/surgery_step/insert_teeth/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/obj/item/bodypart/mouth/jaw = target.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	if(!jaw)
 		return FALSE
+
 	var/space = jaw.max_teeth - jaw.get_teeth_amount()
 	if(!space)
 		return FALSE
@@ -60,19 +77,25 @@
 		qdel(single)
 
 	jaw.update_teeth()
-	display_results(user, target,
-		"<span class='notice'>I successfully fix [target]'s teeth.</span>",
-		"<span class='notice'>[user] successfully fixes [target]'s teeth!</span>",
-		"<span class='notice'>[user] completes the surgery on [target]'s mouth.</span>")
+	display_results(
+		user,
+		target,
+		span_notice("I successfully fix [target]'s teeth."),
+		span_notice("[user] successfully fixes [target]'s teeth!"),
+		span_notice("[user] completes the surgery on [target]'s mouth."),
+	)
 	return TRUE
 
 /datum/surgery_step/insert_teeth/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
 	var/obj/item/bodypart/mouth/jaw = target.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
-	if(jaw && jaw.get_teeth_amount())
-		jaw.knock_out_teeth(rand(1, 3))
-		display_results(user, target,
-			"<span class='warning'>I accidentally knock out some of [target]'s teeth!</span>",
-			"<span class='warning'>[user] accidentally knocks out some of [target]'s teeth!</span>",
-			"<span class='warning'>[user] accidentally knocks out some of [target]'s teeth!</span>",
-			TRUE)
+	if(jaw?.get_teeth_amount())
+		jaw.knock_out_teeth(1)
+		display_results(
+			user,
+			target,
+			span_warning("I accidentally knock out one of [target]'s teeth!"),
+			span_warning("[user] accidentally knocks out one of [target]'s teeth!"),
+			span_warning("[user] accidentally knocks out one of [target]'s teeth!"),
+			TRUE,
+		)
 	return TRUE

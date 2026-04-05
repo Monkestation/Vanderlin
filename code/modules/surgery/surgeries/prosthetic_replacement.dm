@@ -113,9 +113,14 @@
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_EXPERT
 
+
+/datum/surgery_step/remove_prosthetic
+	name = "Prosthetic removal"
+
+	time = 20 SECONDS
+
 	preop_sound = 'sound/foley/sewflesh.ogg'
 	success_sound = 'sound/items/wood_sharpen.ogg'
-
 
 /datum/surgery_step/remove_prosthetic/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(

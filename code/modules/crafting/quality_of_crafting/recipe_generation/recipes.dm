@@ -511,68 +511,69 @@
 	return data
 
 /datum/surgery/return_recipe_data()
-	var/list/data = list()
-	data["type"] = "surgery"
-	data["name"] = name
-	data["category"] = category
-	data["desc"] = desc
-	data["heretical"] = heretical
-	data["req_bodypart"] = requires_bodypart
-	data["req_missing_bodypart"] = requires_missing_bodypart
-	data["req_real_bodypart"] = requires_real_bodypart
+	return
+	// var/list/data = list()
+	// data["type"] = "surgery"
+	// data["name"] = name
+	// data["category"] = category
+	// data["desc"] = desc
+	// data["heretical"] = heretical
+	// data["req_bodypart"] = requires_bodypart
+	// data["req_missing_bodypart"] = requires_missing_bodypart
+	// data["req_real_bodypart"] = requires_real_bodypart
 
-	var/list/steps_out = list()
-	for(var/datum/surgery_step/step_type as anything in steps)
-		var/datum/surgery_step/S = new step_type()
+	// var/list/steps_out = list()
+	// for(var/datum/surgery_step/step_type as anything in steps)
+	// 	var/datum/surgery_step/S = new step_type()
 
-		var/list/tools = list()
-		for(var/atom/tool as anything in S.implements)
-			var/tool_name = ispath(tool) ? initial(tool.name) : "any [tool]"
-			tools += list(list("name" = tool_name, "chance" = S.implements[tool]))
+	// 	var/list/tools = list()
+	// 	for(var/atom/tool as anything in S.implements)
+	// 		var/tool_name = ispath(tool) ? initial(tool.name) : "any [tool]"
+	// 		tools += list(list("name" = tool_name, "chance" = S.implements[tool]))
 
-		var/list/step_e = list(
-			"name" = initial(S.name),
-			"desc" = S.desc,
-			"tools" = tools,
-			"accept_hand" = S.accept_hand,
-			"accept_any" = S.accept_any_item,
-			"self_operable" = S.self_operable,
-			"lying_required" = S.lying_required,
-			"repeating" = S.repeating,
-			"ignore_clothes" = S.ignore_clothes,
-		)
+	// 	var/list/step_e = list(
+	// 		"name" = initial(S.name),
+	// 		"desc" = S.desc,
+	// 		"tools" = tools,
+	// 		"accept_hand" = S.accept_hand,
+	// 		"accept_any" = S.accept_any_item,
+	// 		"self_operable" = S.self_operable,
+	// 		"lying_required" = S.lying_required,
+	// 		"repeating" = S.repeating,
+	// 		"ignore_clothes" = S.ignore_clothes,
+	// 	)
 
-		if(S.skill_used && S.skill_min)
-			step_e["skill_name"] = initial(S.skill_used.name)
-			step_e["skill_min"] = SSskills.level_names[S.skill_min]
-			step_e["skill_median"] = SSskills.level_names[S.skill_median]
+	// 	if(S.skill_used && S.skill_min)
+	// 		step_e["skill_name"] = initial(S.skill_used.name)
+	// 		step_e["skill_min"] = SSskills.level_names[S.skill_min]
+	// 		step_e["skill_median"] = SSskills.level_names[S.skill_median]
 
-		if(length(S.chems_needed))
-			step_e["chems"] = S.get_chem_string()
+	// 	if(length(S.chems_needed))
+	// 		step_e["chems"] = S.get_chem_string()
 
-		if(length(S.required_organs))
-			step_e["organs"] = S.required_organs.Copy()
+	// 	if(length(S.required_organs))
+	// 		step_e["organs"] = S.required_organs.Copy()
 
-		var/list/flags = list()
-		if(S.surgery_flags & SURGERY_INCISED)
-			flags += "Requires incision"
-		if(S.surgery_flags & SURGERY_RETRACTED)
-			flags += "Requires retraction"
-		if(S.surgery_flags & SURGERY_CLAMPED)
-			flags += "Requires clamping"
-		if(S.surgery_flags & SURGERY_DISLOCATED)
-			flags += "Requires dislocation"
-		if(S.surgery_flags & SURGERY_BROKEN)
-			flags += "Requires broken bodypart"
-		if(S.surgery_flags & SURGERY_DRILLED)
-			flags += "Requires drilling"
-		step_e["flags"] = flags
+	// 	var/list/flags = list()
+	// 	if(S.surgery_flags & SURGERY_INCISED)
+	// 		flags += "Requires incision"
+	// 	if(S.surgery_flags & SURGERY_RETRACTED)
+	// 		flags += "Requires retraction"
+	// 	if(S.surgery_flags & SURGERY_CLAMPED)
+	// 		flags += "Requires clamping"
+	// 	if(S.surgery_flags & SURGERY_DISLOCATED)
+	// 		flags += "Requires dislocation"
+	// 	if(S.surgery_flags & SURGERY_BROKEN)
+	// 		flags += "Requires broken bodypart"
+	// 	if(S.surgery_flags & SURGERY_DRILLED)
+	// 		flags += "Requires drilling"
+	// 	step_e["flags"] = flags
 
-		steps_out += list(step_e)
-		qdel(S)
+	// 	steps_out += list(step_e)
+	// 	qdel(S)
 
-	data["steps"] = steps_out
-	return data
+	// data["steps"] = steps_out
+	// return data
 
 /datum/wound/return_recipe_data()
 	var/list/data = list()

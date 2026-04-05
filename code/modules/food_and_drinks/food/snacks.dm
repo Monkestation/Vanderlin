@@ -492,65 +492,65 @@ All foods are distributed among various categories. Use common sense.
 
 	on_consume(eater)
 
-	if(M == user)
-		switch(M.nutrition)
+	if(eater == user)
+		switch(eater.nutrition)
 			if(NUTRITION_LEVEL_FAT to INFINITY)
-				user.visible_message("<span class='notice'>[user] forces [M.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
+				user.visible_message("<span class='notice'>[user] forces [eater.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
 			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_FAT)
 				user.visible_message("<span class='notice'>[user] [eatverb]s \the [src].</span>", "<span class='notice'>I [eatverb] \the [src].</span>")
 			if(0 to NUTRITION_LEVEL_STARVING)
 				user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
-				M.changeNext_move(CLICK_CD_MELEE * 0.5)
+				eater.changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
-		if(!isbrain(M))
-			if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
-				M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
+		if(!isbrain(eater))
+			if(eater.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
+				eater.visible_message("<span class='warning'>[user] cannot force any more of [src] down [eater]'s throat!</span>", \
 									"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
 				return FALSE
 			else
-				M.visible_message("<span class='danger'>[user] tries to feed [M] [src].</span>", \
+				eater.visible_message("<span class='danger'>[user] tries to feed [eater] [src].</span>", \
 									"<span class='danger'>[user] tries to feed me [src].</span>")
-			if(iscarbon(M))
-				var/mob/living/carbon/C = M
+			if(iscarbon(eater))
+				var/mob/living/carbon/C = eater
 				var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
 				if(C.cmode)
 					if(!CH.grabbedby)
 						to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
 						return FALSE
-			if(!do_after(user, 3 SECONDS, M))
+			if(!do_after(user, 3 SECONDS, eater))
 				return
-			log_combat(user, M, "fed", reagents.log_list())
+			log_combat(user, eater, "fed", reagents.log_list())
 		else
-			to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
+			to_chat(user, "<span class='warning'>[eater] doesn't seem to have a mouth!</span>")
 			return
 
 	if(reagents)
-		if(M.satiety > -200)
-			M.satiety -= junkiness
-		playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
+		if(eater.satiety > -200)
+			eater.satiety -= junkiness
+		playsound(eater,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		if(reagents.total_volume)
 			var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
-			if(iscarbon(M))
-				var/obj/item/bodypart/jaw = M.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+			if(iscarbon(eater))
+				var/obj/item/bodypart/jaw = eater.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 				if(jaw)
 					jaw_efficiency = jaw.limb_efficiency
 			if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
-				to_chat(user, span_warning("[M == user ? "Your" : "[M]'s"] jaw is far too inefficient to take a bite."))
+				to_chat(user, span_warning("[eater == user ? "Your" : "[eater]'s"] jaw is far too inefficient to take a bite."))
 				return FALSE
 
 			if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
 				var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
-				if(!do_after(M == user ? user : M, chew_time, M))
+				if(!do_after(eater == user ? user : eater, chew_time, eater))
 					return FALSE
 
-			SEND_SIGNAL(src, COMSIG_FOOD_EATEN, M, user)
-			SEND_SIGNAL(M, COMSIG_MOB_FOOD_EAT, src)
+			SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
+			SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
 			var/fraction = min(bitesize / reagents.total_volume, 1)
 			var/amt2take = reagents.total_volume / (bitesize - bitecount)
 			if((bitecount >= bitesize) || (bitesize == 1))
 				amt2take = reagents.total_volume
 
-			reagents.trans_to(M, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
+			reagents.trans_to(eater, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
 
 	user.changeNext_move(CLICK_CD_FAST)
 
