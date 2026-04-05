@@ -4,6 +4,7 @@
 	icon_state = "clod1"
 	pile = /obj/structure/fluff/clodpile/dirt
 	clod_type = "dirt"
+	item_weight = 1.3 KILOGRAMS
 
 /obj/item/natural/clod/dirt/Initialize()
 	. = ..()

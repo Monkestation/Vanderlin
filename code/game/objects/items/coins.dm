@@ -18,6 +18,7 @@
 	sellprice = 0
 	static_price = TRUE
 	simpleton_price = TRUE
+	item_weight = 23 GRAMS
 
 	COOLDOWN_DECLARE(flip_cd)
 	var/heads_tails = TRUE
@@ -27,9 +28,17 @@
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
 
+/obj/item/coin/get_carry_weight(atom/carrier)
+	. = item_weight * quantity
+
 /obj/item/coin/on_consume(mob/living/eater)
 	. = ..()
+	eater.extra_mob_weight += get_carry_weight(eater)
 	eater.sellprice += quantity * sellprice
+
+/obj/item/coin/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
+	eater.sellprice -= quantity * sellprice
 
 /obj/item/coin/Initialize(mapload, coin_amount)
 	. = ..()
@@ -319,6 +328,8 @@
 				spawned_type = /obj/item/coin/silver
 			if(CTYPE_INQU)
 				spawned_type = /obj/item/coin/inqcoin
+			if(CTYPE_WOOD)
+				spawned_type = /obj/item/coin/wood
 			else
 				spawned_type = /obj/item/coin/copper
 	if(spawned_type)
@@ -407,6 +418,7 @@
 	sellprice = 10
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
+	item_weight = 9 GRAMS
 
 
 // SILVER
@@ -417,6 +429,8 @@
 	sellprice = 5
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
+	item_weight = 11 GRAMS
+
 
 // COPPER
 /obj/item/coin/copper
@@ -483,6 +497,7 @@
 	sellprice = 0
 	base_type = CTYPE_WOOD
 	plural_name = "chips"
+	item_weight = 3 GRAMS
 
 /obj/item/coin/wood/pile/Initialize(mapload, coin_amount)
 	. = ..()

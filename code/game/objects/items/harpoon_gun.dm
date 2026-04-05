@@ -35,6 +35,7 @@
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
+	item_weight = 6 KILOGRAMS
 
 	///is the hook retracted
 	var/retracted_hook = TRUE

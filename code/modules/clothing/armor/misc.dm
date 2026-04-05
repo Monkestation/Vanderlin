@@ -16,6 +16,7 @@
 	icon_state = "corset"
 	armor = ARMOR_PADDED_BAD
 	body_parts_covered = COVERAGE_VEST
+	item_weight = 230 GRAMS
 
 //................ Amazon chainkini ............... //
 /obj/item/clothing/armor/amazon_chainkini
@@ -36,7 +37,7 @@
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 3.2 KILOGRAMS
 	min_cold_protection_temperature = 5 //this is like fur but also its a fucking bikini like???
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -60,7 +61,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 3.2 * IRON_MULTIPLIER
+	item_weight = 6.24 KILOGRAMS
 	stand_speed_reduction = 1.15
 
 /obj/item/clothing/armor/brigandine/Initialize()
@@ -102,7 +103,6 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 7 * STEEL_MULTIPLIER
 	uses_lord_coloring = LORD_PRIMARY
 	stand_speed_reduction = 1.15
 
@@ -124,18 +124,6 @@
 
 	max_integrity = INTEGRITY_STRONG
 
-/obj/item/clothing/shirt/vampire
-	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
-	name = "regal silks"
-	desc = ""
-	body_parts_covered = CHEST|GROIN|LEGS|VITALS
-	prevent_crits = list(BCLASS_BITE, BCLASS_TWIST)
-	icon_state = "vrobe"
-	item_state = "vrobe"
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
-
-
 /obj/item/clothing/armor/brigandine/light
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "lightweight brigandine"
@@ -150,3 +138,4 @@
 	armor_class = AC_LIGHT//steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
+	item_weight = 3.95 KILOGRAMS

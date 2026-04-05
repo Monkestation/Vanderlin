@@ -13,6 +13,7 @@
 	var/clean_effectiveness = 50
 	var/clean_strength = CLEAN_SCRUB
 	force_string = "robust... against filth"
+	item_weight = 140 GRAMS
 	var/uses = 100
 	var/slip_chance = 15
 

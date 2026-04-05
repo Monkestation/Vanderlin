@@ -67,3 +67,14 @@
 		/datum/reagent/consumable/ethanol/tiefling/aged = 5 MINUTES,
 		/datum/reagent/consumable/ethanol/tiefling/delectable = 10 MINUTES,
 	)
+
+/datum/brewing_recipe/wine/luxwine
+	name = "Luxintenebre"
+	reagent_to_brew = /datum/reagent/consumable/ethanol/luxwine
+	needed_reagents = list(/datum/reagent/water = 100)
+	needed_items = list(/obj/item/reagent_containers/lux = 1, /obj/item/reagent_containers/food/snacks/sugar = 1)
+	sell_value = 100
+	age_times = list(
+		/datum/reagent/consumable/ethanol/luxwine/aged = 5 MINUTES,
+		/datum/reagent/consumable/ethanol/luxwine/delectable = 10 MINUTES,
+	)

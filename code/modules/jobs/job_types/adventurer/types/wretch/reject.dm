@@ -58,15 +58,18 @@
 
 /datum/job/advclass/wretch/reject/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_PROGENY), 10 SECONDS)
 
 	if(spawned.dna.species.id != SPEC_ID_TIEFLING)
 		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 
+/datum/job/advclass/wretch/reject/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
 	if(tgui_alert(usr, "Do you wish to be recognized as a non-foreigner?", "Foreigner", list("Yes", "No")) == "Yes")
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 		spawned.honorary = spawned.pronouns == SHE_HER ? "Rejected Princess" : "Rejected Prince"
-
 
 /datum/outfit/wretch/reject
 	name = "Rejected Royal (Wretch)"

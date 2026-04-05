@@ -18,4 +18,4 @@
 
 	grid_width = 64
 	grid_height = 64
-	item_weight = 0.75
+	item_weight = 350 GRAMS

@@ -149,4 +149,13 @@
 	color = pick(CLOTHING_LINEN, CLOTHING_BARK_BROWN, CLOTHING_FOREST_GREEN, CLOTHING_BERRY_BLUE, CLOTHING_BLOOD_RED, CLOTHING_PEAR_YELLOW, CLOTHING_ROYAL_TEAL)
 	return ..()
 
-
+/obj/item/clothing/shirt/vampire
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
+	name = "regal silks"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
+	prevent_crits = list(BCLASS_BITE, BCLASS_TWIST)
+	icon_state = "vrobe"
+	item_state = "vrobe"
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
