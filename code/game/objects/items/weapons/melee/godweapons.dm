@@ -38,6 +38,7 @@
 	minstr = 12
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -112,6 +113,7 @@
 	dropshrink = 0.75
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
+	item_weight = 3 KILOGRAMS
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -181,13 +183,13 @@
 	PJ.original = target
 	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
-	if(user.STAPER > 8)
-		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
-		PJ.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
+		PJ.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
-	if(user.STAINT > 10) // Every point over 10 INT adds 10% damage
-		PJ.damage = PJ.damage * (user.STAINT / 10)
-		PJ.accuracy += (user.STAINT - 10) * 3
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) > 10) // Every point over 10 INT adds 10% damage
+		PJ.damage = PJ.damage * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 10)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - 10) * 3
 
 	new /obj/effect/temp_visual/dir_setting/firing_effect/neant(get_step(user, user.dir), user.dir)
 	PJ.preparePixelProjectile(target, user)
@@ -247,6 +249,7 @@
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12
 	damfactor = 1.1
+	item_weight = 2 KILOGRAMS
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
@@ -373,6 +376,7 @@
 	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
 	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
+	item_weight = 1.5 KILOGRAMS
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -435,6 +439,7 @@
 	desc = "The Blade of Saint Altierre. A holy sword forged of silver, said to represent her will to fight for us all, and the Justice she stood for."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
+	item_weight = 1.5 KILOGRAMS
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -466,6 +471,7 @@
 	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
+	item_weight = 4.5 KILOGRAMS
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -515,6 +521,7 @@
 	desc = "The Trident of Saint Altierre. A holy spear forged of silver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -538,6 +545,7 @@
 	desc = "The Mace of Saint Altierre. A holy mace forged of silver, said to represent her unyielding Might that turned upon Graggar before his ascension."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

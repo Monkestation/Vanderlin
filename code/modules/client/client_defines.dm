@@ -40,6 +40,8 @@
 	var/last_turn = 0
 	///Move delay of controlled mob, related to input handling
 	var/move_delay = 0
+	/// Last attribute editor we opened if we happen to be an admin fucking around
+	var/datum/attribute_editor/attribute_editor
 	///The visual delay to use for the current client.Move(), mostly used for making a client based move look like it came from some other slower source
 	var/visual_delay = 0
 	///Current area of the controlled mob
@@ -167,3 +169,11 @@
 
 	/// Loot panel for the client
 	var/datum/lootpanel/loot_panel
+
+	/**
+	 * Assoc list with all the active maps - when a screen obj is added to
+	 * a map, it's put in here as well.
+	 *
+	 * Format: list(<mapname> = list(/atom/movable/screen))
+	 */
+	var/list/screen_maps = list()

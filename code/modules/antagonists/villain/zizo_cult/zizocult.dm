@@ -1,3 +1,36 @@
+/datum/attribute_holder/sheet/job/zizocultist
+	raw_attribute_list = list(
+		STAT_STRENGTH = 4,
+		STAT_ENDURANCE = 3,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = 4,
+		STAT_INTELLIGENCE = 5
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(40, 40),
+		/datum/attribute/skill/combat/swords = list(40, 40),
+		/datum/attribute/skill/combat/wrestling = list(40, 40),
+		/datum/attribute/skill/misc/athletics = list(40, 40),
+	)
+
+/datum/attribute_holder/sheet/job/zizocultist/lesser
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -2,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(20, 30),
+		/datum/attribute/skill/combat/swords = list(20, 30),
+		/datum/attribute/skill/combat/polearms = list(20, 30),
+	)
+
+/datum/attribute_holder/sheet/job/zizocultist/change
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/misc/reading = list(30, 30),
+	)
+
 /datum/antagonist/zizocultist
 	name = "Zizoid Lackey"
 	roundend_category = "Zizoid Cultists"
@@ -19,9 +52,6 @@
 		TRAIT_VILLAIN,
 		TRAIT_CABAL,
 	)
-
-/datum/antagonist/zizocultist/zizo_knight
-	change_stats = FALSE
 
 /datum/antagonist/zizocultist/leader
 	name = "Zizoid Cultist"
@@ -64,17 +94,12 @@
 	add_verb(H, /mob/living/carbon/human/proc/communicate)
 
 	if(change_stats)
-		H.change_stat(STATKEY_STR, 2)
-		H.clamped_adjust_skillrank(/datum/skill/misc/reading, 3, 3, TRUE)
-
+		H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist/change)
 	if(islesser)
 		add_objective(/datum/objective/zizoserve)
 		if(!change_stats)
 			return
-		H.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, 3, TRUE)
-		H.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
-		H.clamped_adjust_skillrank(/datum/skill/combat/polearms, 2, 3, TRUE)
-		H.change_stat(STATKEY_INT, -2)
+		H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist/lesser)
 		H.grant_language(/datum/language/undead)
 		return
 
@@ -83,16 +108,7 @@
 	add_verb(H, /mob/living/carbon/human/proc/release_minion)
 	if(!change_stats)
 		return
-	H.clamped_adjust_skillrank(/datum/skill/combat/knives, 4, 4, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/swords, 4, 4, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/wrestling, 5, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/misc/athletics, 4, 4, TRUE)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_STR, 2)
-	H.change_stat(STATKEY_END, 3)
-	H.change_stat(STATKEY_CON, 3)
-	H.change_stat(STATKEY_SPD, 4)
-	H.change_stat(STATKEY_INT, 5)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/zizocultist)
 	H.grant_language(/datum/language/undead)
 
 /datum/antagonist/zizocultist/greet()
@@ -462,7 +478,7 @@
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you no longer have use for?", "VANDERLIN") as null|anything in possible
 	if(choice)
-		var/alert = alert(src, "Are you sure?", "VANDERLIN", "Yes", "Cancel")
+		var/alert = tgui_alert(src, "Are you sure?", "VANDERLIN", list("Yes", "Cancel"))
 		if(alert == "Yes")
 			visible_message(span_danger("[src] reaches out, ripping up [choice]'s soul!</span>"))
 			to_chat(choice, span_danger("I HAVE FAILED MY LEADER! I HAVE FAILED ZIZO! NOTHING ELSE BUT DEATH REMAINS FOR ME NOW!"))

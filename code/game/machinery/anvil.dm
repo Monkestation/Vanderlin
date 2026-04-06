@@ -53,6 +53,63 @@
 				return
 		else
 			if(T.held_item && istype(T.held_item, /obj/item/ingot))
+				var/obj/item/repair_target
+				for(var/obj/item/I in src.loc)
+					if(I.anvilrepair && I.max_integrity)
+						repair_target = I
+						break
+
+				if(repair_target && T.hott)
+					var/obj/item/ingot/used_ingot = T.held_item
+
+					var/skill_value = GET_MOB_SKILL_VALUE(user, repair_target.anvilrepair)
+					if(skill_value <= 0)
+						to_chat(user, span_warning("You don't know enough about this craft to restore [repair_target]."))
+						return
+
+					var/expected_ingot_type
+					if(repair_target.melting_material)
+						var/datum/material/mat = GET_ATTRIBUTE_DATUM(repair_target.melting_material)
+						expected_ingot_type = mat?.ingot_type
+					else if(repair_target.smeltresult)
+						if(istype(repair_target.smeltresult, /obj/item/ingot))
+							expected_ingot_type = repair_target.smeltresult
+
+					if(!expected_ingot_type || !istype(used_ingot, expected_ingot_type))
+						to_chat(user, span_warning("This isn't the right material to restore [repair_target]."))
+						return
+
+					var/restores_done = repair_target.integrity_restores
+					var/base_restore = (skill_value / SKILL_MASTER) * 0.20
+					var/diminish_factor = max(0.1, 1.0 - (restores_done * 0.30))
+					var/restore_amount = round(repair_target.max_integrity * base_restore * diminish_factor)
+
+					if(restore_amount <= 0)
+						to_chat(user, span_warning("[repair_target] has been restored too many times. The metal no longer accepts new material."))
+						return
+
+					var/restore_cap = repair_target.max_integrity * (0.15 * diminish_factor)
+					restore_amount = min(restore_amount, restore_cap)
+
+					repair_target.max_integrity += restore_amount
+					repair_target.integrity_restores++
+
+					qdel(T.held_item)
+					T.held_item = null
+					T.update_appearance(UPDATE_ICON_STATE)
+
+					var/datum/mind/smith_mind = user.mind
+					var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+					smith_mind.add_sleep_experience(repair_target.anvilrepair, amt2raise)
+
+					playsound(src, 'sound/items/bsmith3.ogg', 100, FALSE)
+					user.visible_message(span_info("[user] works new material into [repair_target], restoring some of its integrity."))
+
+					if(restores_done >= 2)
+						to_chat(user, span_warning("The metal is taking the new material less readily now. Further restorations will be less effective."))
+					return
+
+				// No repair target or tongs not hot, place as hingot normally
 				T.held_item.forceMove(src)
 				hingot = T.held_item
 				T.held_item = null
@@ -88,8 +145,6 @@
 		if(has_world_trait(/datum/world_trait/delver))
 			if(!has_recipe_unlocked(user.key, hingot.currecipe.type))
 				return
-
-		// Start the minigame instead of direct hammering
 		start_minigame(user, hammer)
 		return
 
@@ -171,7 +226,7 @@
 
 	var/skill_level = 0
 	if(user)
-		skill_level = user.get_skill_level(recipe.appro_skill)
+		skill_level = GET_MOB_SKILL_VALUE_OLD(user, recipe.appro_skill)
 
 	recipe.handle_creation(I, quality_score, skill_level)
 	SEND_SIGNAL(user, COMSIG_ITEM_FORGED)

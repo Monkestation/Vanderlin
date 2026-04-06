@@ -53,6 +53,25 @@
 /datum/job/advclass/garrison
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
+/datum/attribute_holder/sheet/job/garrison/footman
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/advclass/garrison/footman
 	title = "City Watch Footman"
 	tutorial = "You are a member of the City Watch. \
@@ -60,26 +79,7 @@
 	outfit = /datum/outfit/guardsman/footman
 	category_tags = list(CTAG_GARRISON)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_CON = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/garrison/footman
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -101,33 +101,33 @@
 		/obj/item/rope/chain = 1
 	)
 
+/datum/attribute_holder/sheet/job/garrison/archer
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/advclass/garrison/archer
 	title = "City Watch Archer"
 	tutorial = "You are a member of the City Watch. Your training with bows makes you a formidable threat when perched atop the walls or rooftops, raining arrows down upon foes with impunity."
 	outfit = /datum/outfit/guardsman/archer
 	category_tags = list(CTAG_GARRISON)
 
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_END = 1,
-		STATKEY_SPD = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/swords = 1,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/garrison/archer
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -151,32 +151,32 @@
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/colored/guard, /obj/item/clothing/shirt/undershirt/colored/guardsecond)
 
+/datum/attribute_holder/sheet/job/garrison/pikeman
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/advclass/garrison/pikeman
 	title = "City Watch Pikeman"
 	tutorial = "You are a pikeman in the City Watch. You are less fleet of foot compared to the rest, but you are burly and well practiced with spears, pikes, billhooks - all the various polearms for striking enemies from a distance."
 	outfit = /datum/outfit/guardsman/pikeman
 	category_tags = list(CTAG_GARRISON)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/garrison/pikeman
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

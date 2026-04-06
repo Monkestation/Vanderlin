@@ -1,3 +1,17 @@
+/datum/attribute_holder/sheet/job/steward
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_INTELLIGENCE = 5,
+		STAT_CONSTITUTION = -2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/lockpicking = 60,
+		/datum/attribute/skill/labor/mathematics = 50
+	)
+
 /datum/job/steward
 	title = "Steward"
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
@@ -24,25 +38,10 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
-
 	honorary = "Lord"
 	honorary_f = "Lady"
 
-	jobstats = list(
-		STATKEY_STR = -2,
-		STATKEY_INT = 5,
-		STATKEY_CON = -2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 6,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/lockpicking = 6,
-		/datum/skill/labor/mathematics = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/steward
 
 	traits = list(
 		TRAIT_SEEPRICES,

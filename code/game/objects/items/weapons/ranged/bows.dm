@@ -23,6 +23,7 @@
 	cartridge_wording = "arrow"
 	load_sound = 'sound/foley/nockarrow.ogg'
 	metalizer_result = /obj/item/restraints/legcuffs/beartrap/armed
+	item_weight = 1 KILOGRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/getonmobprop(tag)
 	if(tag)
@@ -91,20 +92,20 @@
 			BB.embedchance = 100
 			BB.accuracy += 15 //fully aiming bow makes your accuracy better.
 
-		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
-			if(user.STAPER > 10) // Every point over 10 PER adds 10% damage
-				BB.damage = BB.damage * (user.STAPER / 10)
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+			BB.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			BB.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+			if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 10) // Every point over 10 PER adds 10% damage
+				BB.damage = BB.damage * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) / 10)
 		BB.damage *= damfactor // Apply bow's inherent damage multiplier regardless of PER
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/bows, TRUE) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
+		BB.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) * 5) //+5 accuracy per level in bows. Bonus accuracy will not drop-off.
 	. = ..()
 	if(.)
 		if(istype(user) && user.mind)
 			var/modifier = 1.25/(spread+1)
-			var/boon = user.get_learning_boon(/datum/skill/combat/bows)
-			var/amt2raise = user.STAINT/2
-			user.adjust_experience(/datum/skill/combat/bows, amt2raise * boon * modifier, FALSE)
+			var/boon = user.get_learning_boon(/datum/attribute/skill/combat/bows)
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2
+			user.adjust_experience(/datum/attribute/skill/combat/bows, amt2raise * boon * modifier, FALSE)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/update_icon_state()
 	. = ..()
@@ -145,13 +146,13 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
-		newtime = newtime - (master.STASTR * (10/20))
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_STRENGTH) * (10/20))
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER * 1) //20/20 is 1
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION) * 1) //20/20 is 1
 		if(newtime > 0)
 			return newtime
 		else
@@ -185,13 +186,13 @@
 		var/newtime = 0
 		//skill block
 		newtime = newtime + 10
-		newtime = newtime - (master.get_skill_level(/datum/skill/combat/bows, TRUE) * (10/6))
+		newtime = newtime - (GET_MOB_SKILL_VALUE_OLD(master, /datum/attribute/skill/combat/bows) * (10/6))
 		//str block //rtd replace 10 with drawdiff on bows that are hard and scale str more (10/20 = 0.5)
 		newtime = newtime + 10
-		newtime = newtime - (master.STASTR * (10/20))
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_STRENGTH) * (10/20))
 		//per block
 		newtime = newtime + 20
-		newtime = newtime - (master.STAPER * 1) //20/20 is 1
+		newtime = newtime - (GET_MOB_ATTRIBUTE_VALUE(master, STAT_PERCEPTION) * 1) //20/20 is 1
 		if(newtime > 0)
 			return newtime
 		else
@@ -215,6 +216,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	force = 12
 	damfactor = 1.2
+	item_weight = 1.5 KILOGRAMS
 
 /datum/intent/shoot/bow/long/prewarning()
 	var/mob/master_mob = get_master_mob()
@@ -256,6 +258,7 @@
 	spread = 1
 	force = 9
 	damfactor = 0.9
+	item_weight = 700 GRAMS
 
 /datum/intent/shoot/bow/short
 	chargetime = 0.5

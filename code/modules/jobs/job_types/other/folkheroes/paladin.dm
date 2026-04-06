@@ -1,3 +1,32 @@
+/datum/attribute_holder/sheet/job/paladin
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -2,
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
+/datum/attribute_holder/sheet/job/paladin/extremist
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/swords = 10,
+	)
+
 /datum/job/advclass/combat/paladin
 	title = "Paladin"
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
@@ -9,31 +38,7 @@
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 3,
-	)
-
-	honorary = "Paladin"
-
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_SPD = -2,
-		STATKEY_LCK = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/paladin
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -48,9 +53,7 @@
 	switch(spawned.patron?.type)
 		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/paladin/extremist)
 			spawned.grant_language(/datum/language/newpsydonic)
 			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, JOB_TRAIT)
 		if(/datum/patron/divine/astrata)

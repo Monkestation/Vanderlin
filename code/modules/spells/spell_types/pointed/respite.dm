@@ -8,7 +8,7 @@
 	sound = null
 	invocation = ". . ."
 	invocation_type = "none"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time  = 60 SECONDS
 
 /datum/action/cooldown/spell/undirected/psydonrespite/cast(mob/living/user) // It's a very tame self-heal. Nothing too special.

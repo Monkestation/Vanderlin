@@ -378,10 +378,19 @@
 
 /obj/item/clothing/shirt/robe/kimono
 	name = "kimono"
-	desc = "Worn by merchants of Zhongese."
+	desc = "A flowing garment worn by faraway merchants."
 	color = null
 	icon_state = "kimono"
 	item_state = "kimono"
 	sleeved = null
 	sleevetype = null
 	item_flags = ABSTRACT
+
+/obj/item/clothing/shirt/robe/bogwitch
+	name = "bog witch robe"
+	desc = "A robe of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	color = null
+	sleeved = null
+	sleevetype = null
+	misc_flags = CRAFTING_TEST_EXCLUDE

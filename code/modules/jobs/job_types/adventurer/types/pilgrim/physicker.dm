@@ -1,3 +1,15 @@
+/datum/attribute_holder/sheet/job/pilgrim/physicker
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = -1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/alchemy = 10,
+	)
+
 /datum/job/advclass/pilgrim/physicker
 	title = "Physicker"
 	tutorial = "Those who fail their studies, or are exiled from the towns they take \
@@ -12,19 +24,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	exp_types_granted = list(EXP_TYPE_MEDICAL)
 
-	jobstats = list(
-		STATKEY_INT = -1,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/craft/alchemy = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/physicker
 
 	traits = list(
 		TRAIT_EMPATH,

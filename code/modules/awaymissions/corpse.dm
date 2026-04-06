@@ -40,7 +40,7 @@
 		return
 	if(QDELETED(src) || QDELETED(user))
 		return
-	var/ghost_role = alert("Become [mob_name]? (Warning, You can no longer be cloned!)",,"Yes","No")
+	var/ghost_role = tgui_alert(user, "Become [mob_name]? (Warning, You can no longer be cloned!)", "Join Mob", list("Yes","No"))
 	if(ghost_role == "No" || !loc)
 		return
 	log_game("[key_name(user)] became [mob_name]")

@@ -1,6 +1,7 @@
 /datum/round_event_control/antagonist/solo/rebel
 	name = "Rebels"
 	tags = list(
+		TAG_ASTRATA,
 		TAG_MATTHIOS,
 		TAG_COMBAT,
 		TAG_VILLAIN,
@@ -17,7 +18,7 @@
 	typepath = /datum/round_event/antagonist/solo/rebel
 	antag_datum = /datum/antagonist/prebel/head
 
-	min_players = LOWPOP_THRESHOLD
+	min_players = LOWPOP_THRESHOLD + 10
 	weight = 6
 
 	restricted_roles = list(
@@ -31,10 +32,14 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
+		/datum/job/men_at_arms,
+		/datum/job/gatemaster,
 		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 
 /datum/round_event_control/antagonist/solo/rebel/valid_for_map()

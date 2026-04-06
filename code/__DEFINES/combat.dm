@@ -461,5 +461,15 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 /// If a carbon is thrown at a speed faster than normal and impacts something solid, they take extra damage for every extra speed up to this number (see [/mob/living/carbon/proc/throw_impact])
 #define CARBON_MAX_IMPACT_SPEED_BONUS 5
 
+/// Default penalty for parrying dicerolls, normally lasts PARRYING_PENALTY_COOLDOWN_DURATION
+#define PARRYING_PENALTY 2
+/// Default penalty for dodging dicerolls, normally lasts DODGING_PENALTY_COOLDOWN_DURATION
+#define DODGING_PENALTY 1
 /// A define so the cooldown on the baited status and the duration of the baitcd status are the same
 #define BAIT_COOLDOWN_TIME 15 SECONDS
+
+// try_crit keys for modifiers
+/// Chance modifier
+#define CRIT_MOD_CHANCE "crit_mod"
+/// Specifically knockout modifier for head crits
+#define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

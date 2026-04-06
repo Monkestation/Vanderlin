@@ -94,9 +94,6 @@ GLOBAL_LIST_EMPTY(biggates)
 		QDEL_NULL(A)
 	blockers.Cut()
 	turfsy.Cut()
-	if(attached_to)
-		var/obj/structure/winch/W = attached_to
-		W.attached_gate = null
 	return ..()
 
 /obj/structure/gate/update_icon_state()
@@ -108,6 +105,10 @@ GLOBAL_LIST_EMPTY(biggates)
 	if(isSwitchingStates)
 		return
 	. += mutable_appearance(icon, "[base_state][density]_part", ABOVE_MOB_LAYER)
+
+/obj/structure/gate/redstone_triggered(mob/user)
+	if(!isSwitchingStates)
+		toggle()
 
 /obj/structure/gate/proc/toggle()
 	if(density)
@@ -122,7 +123,9 @@ GLOBAL_LIST_EMPTY(biggates)
 	playsound(src, 'sound/misc/gate.ogg', 100, extrarange = 5)
 	flick("[base_state]_opening",src)
 	layer = initial(layer)
-	sleep(15)
+	addtimer(CALLBACK(src, PROC_REF(finish_open)), 1.5 SECONDS)
+
+/obj/structure/gate/proc/finish_open()
 	density = FALSE
 	set_opacity(FALSE)
 	for(var/obj/gblock/B in blockers)
@@ -138,7 +141,9 @@ GLOBAL_LIST_EMPTY(biggates)
 	layer = ABOVE_MOB_LAYER
 	playsound(src, 'sound/misc/gate.ogg', 100, extrarange = 5)
 	flick("[base_state]_closing",src)
-	sleep(10)
+	addtimer(CALLBACK(src, PROC_REF(finish_close)), 1 SECONDS)
+
+/obj/structure/gate/proc/finish_close()
 	for(var/turf/T in turfsy)
 		for(var/mob/living/M in T)
 			M.log_message("has been crushed by the [src]!", LOG_ATTACK)
@@ -175,39 +180,25 @@ GLOBAL_LIST_EMPTY(biggates)
 	density = TRUE
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE
-	var/gid
-	var/obj/structure/gate/attached_gate
-
-/obj/structure/winch/Initialize()
-	. = ..()
-	return INITIALIZE_HINT_LATELOAD
-
-/obj/structure/winch/LateInitialize()
-	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid == gid)
-			GLOB.biggates -= G
-			attached_gate = G
-			G.attached_to = src
-
-/obj/structure/winch/Destroy()
-	if(attached_gate)
-		var/obj/structure/gate/W = attached_gate
-		W.attached_to = null
-	return ..()
+	COOLDOWN_DECLARE(winch_cooldown)
 
 /obj/structure/winch/attack_hand(mob/user)
 	. = ..()
-	if(!attached_gate)
-		to_chat(user, "<span class='warning'>The chain is not attached to anything.</span>")
+	if(!redstone_attached)
+		to_chat(user, span_warning("The chain is not attached to anything."))
 		return
-	if(attached_gate.isSwitchingStates)
+	if(!isliving(user))
 		return
-	if(isliving(user))
-		var/mob/living/L = user
-		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = 10.5 SECONDS - (L.STASTR * 10)
-		user.visible_message("<span class='warning'>[user] cranks the winch.</span>")
-		playsound(src, 'sound/foley/winch.ogg', 100, extrarange = 3)
-		if(do_after(user, used_time))
-			attached_gate.toggle()
-
+	if(!COOLDOWN_FINISHED(src, winch_cooldown))
+		return
+	var/mob/living/L = user
+	L.changeNext_move(CLICK_CD_MELEE)
+	var/used_time = 10.5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
+	if(!do_after(user, used_time))
+		return
+	COOLDOWN_START(src, winch_cooldown, 1.5 SECONDS)
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+	trigger_wire_network(user)
+	user.visible_message(span_warning("[user] cranks [src]."), span_warning("I crank [src]."))
+	playsound(src, 'sound/foley/winch.ogg', 100, extrarange = 3)

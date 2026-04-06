@@ -8,7 +8,7 @@
 	cast_range = 5
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
-	associated_skill = /datum/skill/magic/arcane
+	associated_skill = /datum/attribute/skill/magic/arcane
 	attunements = list(
 		/datum/attunement/death = 1,
 	)

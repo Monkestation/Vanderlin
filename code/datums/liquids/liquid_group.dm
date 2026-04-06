@@ -773,7 +773,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		queued_turf = current_head.my_turf
 		queued_liquids -= current_head
 
-		for(var/turf/adjacent_turf in get_adjacent_open_turfs(queued_turf))
+		for(var/turf/adjacent_turf as anything in get_adjacent_open_turfs(queued_turf))
 			if(QDELETED(adjacent_turf.liquids) || !members[adjacent_turf])
 				continue
 			if(!(adjacent_turf in queued_turf.atmos_adjacent_turfs)) //i hate that this is needed
@@ -808,7 +808,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 		queued_turf = current_head.my_turf
 		queued_liquids -= current_head
 
-		for(var/turf/adjacent_turf in get_adjacent_open_turfs(queued_turf))
+		for(var/turf/adjacent_turf as anything in get_adjacent_open_turfs(queued_turf))
 			if(QDELETED(adjacent_turf.liquids) || !members[adjacent_turf])
 				continue
 
@@ -831,7 +831,7 @@ GLOBAL_VAR_INIT(liquid_debug_colors, FALSE)
 
 	var/generated_key = "[world.time]_activemembers[length(members)]"
 	var/adjacent_liquid_count = -1
-	for(var/turf/adjacent_turf in get_adjacent_open_turfs(head_turf))
+	for(var/turf/adjacent_turf as anything in get_adjacent_open_turfs(head_turf))
 		if(QDELETED(adjacent_turf.liquids) || !members[adjacent_turf]) //empty turf or not our group just skip this
 			continue
 		///the section is a little funky, as if say a cross shaped liquid removal occurs this will leave 3 of them in the same group, not a big deal as this only affects turfs that are like 5 tiles total

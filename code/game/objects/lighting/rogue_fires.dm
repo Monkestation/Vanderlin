@@ -108,7 +108,7 @@
 			user.visible_message("<span class='warning'>[user] kicks [src]!</span>", \
 				"<span class='warning'>I kick [src]!</span>")
 			return
-		if(prob(L.STASTR * 8))
+		if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 8))
 			playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 			user.visible_message("<span class='warning'>[user] kicks over [src]!</span>", \
 				"<span class='warning'>I kick over [src]!</span>")
@@ -216,6 +216,7 @@
 	name = "candle lamp"
 	icon_state = "candle"
 	base_state = "candle"
+	plane = GAME_PLANE_UPPER
 	layer = WALL_OBJ_LAYER+0.1
 	light_power = 0.9
 	light_outer_range =  6

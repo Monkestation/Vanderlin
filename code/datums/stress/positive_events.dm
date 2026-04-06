@@ -419,3 +419,8 @@
 	stress_change = -1
 	desc = span_green("Someone gave me a good pie-ing.")
 	timer = 3 MINUTES
+
+/datum/stress_event/black_briar_noc
+	timer = 5 MINUTES
+	stress_change = -5
+	desc = span_briar("I stare at Noc, and He stares back...")

@@ -53,35 +53,36 @@
 	exp_type = list(EXP_TYPE_NOBLE)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
 
+/datum/attribute_holder/sheet/job/heir/daring
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		STAT_FORTUNE = 1,
+
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
 /datum/job/advclass/heir/daring
 	title = "Daring Twit"
 	tutorial = "You're a somebody, someone important. It only makes sense you want to make a name for yourself, to gain your own glory so people see how great you really are beyond your bloodline. Plus, if you're beloved by the people for your exploits you'll be chosen! Probably. Shame you're as useful and talented as a squire, despite your delusions to the contrary."
 	outfit = /datum/outfit/heir/daring
 	category_tags = list(CTAG_HEIR)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
-		STATKEY_LCK = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/heir/daring
 
 	traits = list(
 		TRAIT_MEDIUMARMOR
@@ -99,32 +100,38 @@
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	backr = /obj/item/storage/backpack/satchel
 
+/datum/attribute_holder/sheet/job/heir/aristocrat
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 2,
+		STAT_FORTUNE = 1,
+		STAT_SPEED = 1,
+
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/mathematics = 30
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/combat/crossbows = list(0, 10),
+		/datum/attribute/skill/misc/athletics = list(0, 10)
+	)
+
 /datum/job/advclass/heir/aristocrat
 	title = "Sheltered Aristocrat"
 	tutorial = "Life has been kind to you; you've an entire keep at your disposal, servants to wait on you, and a whole retinue of guards to guard you. You've nothing to prove; just live the good life and you'll be a lord someday, too. A lack of ambition translates into a lacking skillset beyond schooling, though, and your breaks from boredom consist of being a damsel or court gossip."
 	outfit = /datum/outfit/heir/aristocrat
 	category_tags = list(CTAG_HEIR)
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_STR = -1,
-		STATKEY_INT = 2,
-		STATKEY_LCK = 1,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/mathematics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/heir/aristocrat
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -133,9 +140,6 @@
 
 /datum/job/advclass/heir/aristocrat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1), TRUE)
-
 	if(spawned.gender == FEMALE)
 		spawned.virginity = TRUE
 
@@ -159,31 +163,38 @@
 		shoes = /obj/item/clothing/shoes/shortboots
 		pants = /obj/item/clothing/pants/tights/colored/random
 
+/datum/attribute_holder/sheet/job/heir/inbred
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = -2,
+		STAT_FORTUNE = -2,
+
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 10
+	)
+
+	attribute_variance = list(
+		/datum/attribute/skill/combat/crossbows = list(0, 10),
+		/datum/attribute/skill/misc/climbing = list(0, 10),
+		/datum/attribute/skill/misc/athletics = list(0, 10)
+	)
+
 /datum/job/advclass/heir/inbred
 	title = "Inbred Wastrel"
 	tutorial = "Your bloodline ensures Psydon smiles upon you by divine right, the blessing of nobility... until you were born, anyway. You are a child forsaken, and even though your body boils as you go about your day, your spine creaks, and your drooling form needs to be waited on tirelessly you are still considered more important then the peasant that keeps the town fed and warm. Remind them of that fact when your lungs are particularly pus free."
 	outfit = /datum/outfit/heir/inbred
 	category_tags = list(CTAG_HEIR)
-	jobstats = list(
-		STATKEY_STR = -2,
-		STATKEY_PER = -2,
-		STATKEY_INT = -2,
-		STATKEY_CON = -2,
-		STATKEY_END = -2,
-		STATKEY_LCK = -2
-	)
-
-	skills = list(
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/heir/inbred
 
 	traits = list(
 		TRAIT_CRITICAL_WEAKNESS,
@@ -193,10 +204,6 @@
 
 /datum/job/advclass/heir/inbred/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/climbing,  pick(0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/athletics,  pick(0,1), TRUE)
-
 	if(spawned.gender == FEMALE)
 		spawned.virginity = TRUE
 

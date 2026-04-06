@@ -104,7 +104,7 @@
 		else
 			return
 	else
-		if(lastminer?.stat_roll(STATKEY_LCK,2,10) && mineralType)
+		if(lastminer?.stat_roll(STAT_FORTUNE,2,10) && mineralType)
 	//		to_chat(lastminer, span_notice("Bonus ducks!"))
 			new mineralType(src)
 		gets_drilled(lastminer, give_exp = FALSE)
@@ -128,7 +128,7 @@
 				var/obj/item/natural/rock/bonus_rock = new rockType(src)
 				apply_mining_quality(bonus_rock, user)
 		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, mineralType)
-	else if(user?.stat_roll(STATKEY_LCK,2,10))
+	else if(user?.stat_roll(STAT_FORTUNE,2,10))
 		var/newthing = pickweight(list(/obj/item/natural/rock/salt = 2, /obj/item/natural/rock/iron = 1, /obj/item/natural/rock/coal = 2))
 		var/obj/item/bonus_item = new newthing(src)
 		apply_mining_quality(bonus_item, user)
@@ -143,7 +143,7 @@
 	if(!user || !istype(item, /obj/item/ore))
 		return
 
-	var/mining_skill = user.get_skill_level(/datum/skill/labor/mining, TRUE) + user.get_inspirational_bonus()
+	var/mining_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mining) + user.get_inspirational_bonus()
 
 	// Base quality calculation - mainly chance-based with skill influence
 	var/base_chance = 5 // 5% chance for quality 2
@@ -151,7 +151,7 @@
 	var/luck_bonus = 0
 
 	// Check for luck bonus
-	if(user.stat_roll(STATKEY_LCK, 3, 15))
+	if(user.stat_roll(STAT_FORTUNE, 3, 15))
 		luck_bonus = 10
 
 	var/total_chance = base_chance + skill_bonus + luck_bonus

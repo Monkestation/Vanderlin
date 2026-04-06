@@ -53,6 +53,26 @@
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
+/datum/attribute_holder/sheet/job/menatarms/pikeman
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = -1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/advclass/menatarms/watchman_pikeman
 	title = "Pikeman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
@@ -62,27 +82,7 @@
 	outfit = /datum/outfit/watchman/pikeman
 	category_tags = list(CTAG_MENATARMS)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = -1,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/pikeman
 
 	traits = list(
 		TRAIT_MEDIUMARMOR
@@ -104,6 +104,25 @@
 		/obj/item/weapon/knife/dagger/steel/special = 1
 	)
 
+/datum/attribute_holder/sheet/job/menatarms/axeman
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/labor/lumberjacking = 10
+	)
+
 /datum/job/advclass/menatarms/watchman_axeman
 	title = "Axeman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
@@ -113,26 +132,7 @@
 	outfit = /datum/outfit/watchman/axeman
 	category_tags = list(CTAG_MENATARMS)
 
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_STR = 2,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/labor/lumberjacking = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/axeman
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -152,6 +152,24 @@
 		/obj/item/weapon/knife/dagger/steel/special = 1
 	)
 
+/datum/attribute_holder/sheet/job/menatarms/ranger
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/advclass/menatarms/watchman_ranger
 	title = "Archer Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
@@ -160,25 +178,7 @@
 	outfit = /datum/outfit/watchman/ranger
 	category_tags = list(CTAG_MENATARMS)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/ranger
 
 	traits = list(
 		TRAIT_DODGEEXPERT
@@ -208,6 +208,24 @@
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			backr = /obj/item/ammo_holder/quiver/bolts
 
+/datum/attribute_holder/sheet/job/menatarms/swordsman
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/advclass/menatarms/watchman_swordsman
 	title = "Swordsman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
@@ -217,25 +235,7 @@
 	outfit = /datum/outfit/watchman/swordsman
 	category_tags = list(CTAG_MENATARMS)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/swordsman
 
 	traits = list(
 		TRAIT_MEDIUMARMOR

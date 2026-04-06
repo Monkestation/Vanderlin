@@ -12,12 +12,13 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	melting_material = /datum/material/iron
 	melt_amount = 75
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 1.24 KILOGRAMS
 	var/time_multiplier = 1
 	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
 
@@ -55,17 +56,17 @@
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
 			return
 
-		if(user.get_skill_level(attacked_prosthetic.anvilrepair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair) <= 0)
 			if(prob(30))
 				repair_percent = 0.01
 			else
 				repair_percent = 0
 		else
-			repair_percent *= user.get_skill_level(attacked_prosthetic.anvilrepair, TRUE)
+			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair)
 
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
 		if(repair_percent)
-			var/amt2raise = floor(user.STAINT * 0.25)
+			var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
 			attacked_prosthetic.repair_damage(attacked_prosthetic.max_integrity * repair_percent)
 			attacked_prosthetic.brute_dam = max(attacked_prosthetic.brute_dam - 10, 0)
 			attacked_prosthetic.burn_dam = max(attacked_prosthetic.burn_dam - 10, 0)
@@ -84,30 +85,61 @@
 	if(isitem(O))
 		. = TRUE
 		var/obj/item/attacked_item = O
-		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || attacked_item.obj_broken || (attacked_item.get_integrity() >= attacked_item.max_integrity) || !isturf(attacked_item.loc))
-			to_chat(user, span_warning("[attacked_item] cannot be repaired any further."))
+		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
+			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
 			return
 
-		if(user.get_skill_level(attacked_item.anvilrepair) <= 0)
+		var/skill_value = GET_MOB_SKILL_VALUE(user, attacked_item.anvilrepair) // 0-60 range typically
+		var/was_broken = attacked_item.obj_broken
+
+		if(!was_broken && attacked_item.get_integrity() >= attacked_item.max_integrity)
+			to_chat(user, span_warning("There is nothing to further repair on [attacked_item]."))
+			return
+
+		if(skill_value <= 0)
 			if(prob(30))
 				repair_percent = 0.01
+				to_chat(user, span_warning("You are just barely able to repair this..."))
 			else
 				repair_percent = 0
+				if(!was_broken)
+					attacked_item.take_damage(attacked_item.max_integrity * 0.1, BRUTE, "blunt")
+					user.visible_message(span_warning("[user] damages [attacked_item] further!"))
 		else
-			repair_percent *= user.get_skill_level(attacked_item.anvilrepair, TRUE)
+			repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_item.anvilrepair)
 
-		playsound(src,'sound/items/bsmithfail.ogg', 40, FALSE)
-		if(repair_percent)
-			var/amt2raise = floor(user.STAINT * 0.25)
-			attacked_item.repair_damage( attacked_item.max_integrity * repair_percent)
-			if(repair_percent == 0.01) // If an inexperienced repair attempt has been successful
-				to_chat(user, span_warning("You fumble your way into slightly repairing [attacked_item]."))
-			else
-				user.visible_message(span_info("[user] repairs [attacked_item]!"))
-			blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
+		if(locate(/obj/machinery/anvil) in O.loc)
+			repair_percent *= 2
+
+		// If the armor was fully broken, penalize max_integrity based on skill
+		// At skill 60 (master): ~5% max_integrity loss
+		// At skill 30 (middling): ~35% max_integrity loss
+		// At skill 1 (novice): ~64% max_integrity loss
+		// At skill 0: ~65% max_integrity loss
+		// At skill -20: ~85% max_integrity loss
+		// At skill -60+: ~99% max_integrity loss (clamped)
+		if(was_broken)
+			var/integrity_penalty
+			integrity_penalty = 0.65 - ((skill_value / SKILL_MASTER) * 0.60)
+			integrity_penalty = clamp(integrity_penalty, 0.05, 0.99)
+
+			var/integrity_loss = round(attacked_item.max_integrity * integrity_penalty)
+			attacked_item.max_integrity = max(1, attacked_item.max_integrity - integrity_loss)
+			attacked_item.obj_broken = FALSE
+			attacked_item.repair_damage(max(attacked_item.max_integrity * repair_percent, 10))
+
+			to_chat(user, span_warning("You manage to repair [attacked_item], but the damage has left its mark — it will never be quite as strong as it once was."))
+			if(skill_value < SKILL_MIDDLING) // 30
+				to_chat(user, span_warning("Your inexperience made things worse. The repair is rough."))
 		else
-			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
-			attacked_item.take_damage(attacked_item.max_integrity * 0.1, BRUTE, "blunt")
+			attacked_item.repair_damage(attacked_item.max_integrity * repair_percent)
+			user.visible_message(span_info("[user] repairs [attacked_item]!"))
+
+		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+		if(repair_percent <= 0)
+			amt2raise *= 0.25
+		blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
+		playsound(src, 'sound/items/bsmithfail.ogg', 40, FALSE)
 		return
 
 	if(isstructure(O))
@@ -116,11 +148,11 @@
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity || attacked_structure.obj_broken)
 			to_chat(user, span_warning("[attacked_structure] cannot be repaired any further."))
 			return
-		if(user.get_skill_level(attacked_structure.hammer_repair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair) <= 0)
 			to_chat(user, span_warning("I don't know how to repair this.."))
 			return
-		var/amt2raise = floor(user.STAINT * 0.25)
-		repair_percent *= user.get_skill_level(attacked_structure.hammer_repair, TRUE)
+		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+		repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair)
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
 		blacksmith_mind.add_sleep_experience(attacked_structure.hammer_repair, amt2raise)
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
@@ -167,6 +199,7 @@
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 1.2
 	no_spark = TRUE
+	item_weight = 654 GRAMS
 
 /obj/item/weapon/hammer/wood/getonmobprop(tag)
 	. = ..()
@@ -187,12 +220,14 @@
 	melting_material = /datum/material/copper
 	time_multiplier = 1.1
 	no_spark = TRUE
+	item_weight = 1.12 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"
 	desc = "It's almost asking to be put to work."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "sledgehammer"
+	force_wielded = DAMAGE_HAMMER_WIELD + 5
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
@@ -203,6 +238,7 @@
 	melt_amount = 100
 	grid_width = null
 	grid_height = null
+	item_weight = 7.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/getonmobprop(tag)
 	. = ..()
@@ -225,6 +261,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails
+	item_weight = 8.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/war/malum
 	name = "forgefiend"

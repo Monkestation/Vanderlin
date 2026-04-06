@@ -7,7 +7,7 @@
 	/// Faction shown to the user in the recruitment prompt
 	var/recruitment_faction = "Beggars"
 	/// Message the recruiter gives
-	var/recruitment_message = "Serve the beggars, %RECRUIT!"
+	var/recruitment_message = "Join the Beggars, %RECRUIT!"
 	/// Even offer them a choice to become this?
 	var/give_choice = TRUE
 	/// Say message when the recruit accepts
@@ -46,7 +46,7 @@
 	owner.say(replacetext(recruitment_message, "%RECRUIT", "[cast_on]"), forced = "Convert spell ([src])")
 
 	if(give_choice)
-		var/answer = browser_alert(cast_on, "Do you wish to become a [new_role]?", "[recruitment_faction] recruitment.", DEFAULT_INPUT_CONFIRMATIONS)
+		var/answer = tgui_alert(cast_on, "Do you wish to become a [new_role]?", "[recruitment_faction] recruitment.", DEFAULT_INPUT_CONFIRMATIONS)
 		if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 			return
 		if(answer != CHOICE_CONFIRM)

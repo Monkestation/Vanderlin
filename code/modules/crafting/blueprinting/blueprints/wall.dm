@@ -15,7 +15,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 
 /datum/blueprint_recipe/wall/woodwindow
 	name = "Wood Murder Hole"
@@ -28,7 +28,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 
 
 /datum/blueprint_recipe/wall/dwoodwall
@@ -42,7 +42,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 2
 
 /datum/blueprint_recipe/wall/dwoodwall/horizontal
@@ -76,7 +76,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 2
 
 
@@ -91,7 +91,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 
 /datum/blueprint_recipe/wall/stonewindow
 	name = "Stone Murder Hole"
@@ -104,7 +104,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 
 /datum/blueprint_recipe/wall/stonebrick
 	name = "Stone Brick Wall"
@@ -117,7 +117,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/wall/fancyswall
@@ -131,7 +131,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/wall/craftstone
@@ -145,7 +145,7 @@
 	category = "Walls"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 
@@ -194,7 +194,7 @@
 		/obj/item/natural/glass = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	result_type = /turf/closed/wall/window
 
 /datum/blueprint_recipe/wall/solid_window/alt
@@ -209,7 +209,7 @@
 		/obj/item/natural/glass = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/blacksmithing
+	skillcraft = /datum/attribute/skill/craft/blacksmithing
 	result_type = /turf/closed/wall/window/stained
 
 /datum/blueprint_recipe/wall/silver_window/alt
@@ -224,7 +224,7 @@
 		/obj/item/natural/glass = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/blacksmithing
+	skillcraft = /datum/attribute/skill/craft/blacksmithing
 	result_type = /turf/closed/wall/window/stained/red
 
 /datum/blueprint_recipe/wall/yellow_window
@@ -235,7 +235,7 @@
 		/obj/item/natural/glass = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/blacksmithing
+	skillcraft = /datum/attribute/skill/craft/blacksmithing
 	result_type = /turf/closed/wall/window/stained/yellow
 
 
@@ -247,7 +247,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/stone/window
 
 /datum/blueprint_recipe/wall/stonewindow/moss
@@ -270,7 +270,7 @@
 		/obj/item/natural/fibers = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/stone/moss
 
 /datum/blueprint_recipe/wall/mossstone/blue
@@ -288,7 +288,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decostone
 
 
@@ -299,7 +299,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decorstone
 
 /datum/blueprint_recipe/wall/decorstone_center_alt
@@ -309,7 +309,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decostone/center
 
 /datum/blueprint_recipe/wall/decorstonewindow
@@ -319,7 +319,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decorstone/window
 
 /datum/blueprint_recipe/wall/decorstonealt/moss
@@ -361,7 +361,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decostone/cand
 
 /datum/blueprint_recipe/wall/decorstonecand/moss
@@ -387,7 +387,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decostone/long
 
 /datum/blueprint_recipe/wall/decorstonelong/moss
@@ -413,7 +413,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/decostone/end
 
 /datum/blueprint_recipe/wall/decorstoneend/moss
@@ -439,7 +439,7 @@
 		/obj/item/natural/brick = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/roofwall/center
 	supports_directions = TRUE
 
@@ -462,7 +462,7 @@
 		/obj/item/natural/stoneblock = 4,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/underbrick
 
 /datum/blueprint_recipe/wall/pipe
@@ -473,5 +473,5 @@
 		/obj/item/ingot/bronze = 1,
 	)
 	craftdiff = 4
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/closed/wall/mineral/pipe

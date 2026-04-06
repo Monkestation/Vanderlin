@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/mageapprentice
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/magic/arcane = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/polearms = 20
+	)
+
+/datum/attribute_holder/sheet/job/mageapprentice/adult
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/magic/arcane = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/polearms = 20
+	)
+
 /datum/job/mageapprentice
 	title = "Magician Apprentice"
 	tutorial = "Your family managed to send you to college to learn the Arcyne Arts.\
@@ -20,6 +46,7 @@
 	banned_leprosy = FALSE
 	can_have_apprentices = FALSE
 	magic_user = TRUE
+	can_be_apprentice = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
@@ -35,27 +62,14 @@
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MAGICK)
 	exp_types_granted = list(EXP_TYPE_MAGICK)
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_SPD = -1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/mageapprentice
+	attribute_sheet_adult = /datum/attribute_holder/sheet/job/mageapprentice/adult
 
-	skills = list(
-		/datum/skill/magic/arcane = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 1,
-		/datum/skill/combat/polearms = 2
-	)
-
-	skill_multipliers = list(/datum/skill/magic/arcane = 1.25)
+	skill_multipliers = list(/datum/attribute/skill/magic/arcane = 1.25)
 
 /datum/job/mageapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_ADULT)
-		spawned.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
 		spawned.adjust_spell_points(4)
 
 

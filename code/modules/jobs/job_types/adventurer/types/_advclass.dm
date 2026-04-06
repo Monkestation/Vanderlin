@@ -27,7 +27,7 @@
 		spawned.remove_status_effect(S)
 
 	if(spawn_with_torch)
-		spawned.put_in_hands(new /obj/item/flashlight/flare/torch)
+		spawned.put_in_hands(new /obj/item/flashlight/flare/torch/prelit)
 
 	apply_character_post_equipment(spawned)
 
@@ -47,6 +47,9 @@
 		return FALSE
 
 	if(length(allowed_patrons) && !(to_check.patron.type in allowed_patrons))
+		return FALSE
+
+	if(length(banned_patrons) && (to_check.patron.type in banned_patrons))
 		return FALSE
 
 	if(!antags_can_pick && to_check.mind?.special_role)

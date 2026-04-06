@@ -11,6 +11,8 @@
 	resistance_flags = FLAMMABLE
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	sellprice = 5
+	item_weight = 350 GRAMS
+
 /obj/item/natural/hide/cured
 	name = "cured leather"
 	icon_state = "leather"
@@ -38,6 +40,7 @@
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20
+	item_weight = 100 GRAMS
 
 /obj/item/natural/fur // a piece of skin with animal hair on it. Could be called a fur but its untanned and also encompasses rat skins and goat skins so pelt is more suitable at least to my ears.
 	name = "fur"
@@ -50,6 +53,7 @@
 	resistance_flags = FLAMMABLE
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	sellprice = 5
+	item_weight = 300 GRAMS
 
 /obj/item/natural/fur/gote
 	desc = "Pelt from a gote."
@@ -99,26 +103,29 @@
 	grid_height = 64
 	grid_width = 64
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 750 GRAMS
+
 	var/meat_to_give = /obj/item/reagent_containers/food/snacks/meat/steak
 	var/rotten = FALSE
+
+	/// The amount of blood this can restore when used with Hunter's Will
+	var/blood_value = 0
+
+/obj/item/natural/head/Initialize()
+	. = ..()
+	randomize_price() //headeater
 
 //quality from butchering, 0 is bad, 1 is normal, 2 is good, -1 means its rotten and useless
 /obj/item/natural/head/proc/ButcheringResults(butchering_quality)
 	switch(butchering_quality)
-		if(0)
-			sellprice = floor(sellprice * 0.75)
-			headpricemin = floor(headpricemin * 0.75)
-			headpricemax = floor(headpricemax * 0.75)
-		if(1)
-			EMPTY_BLOCK_GUARD
 		if(2)
 			sellprice = floor(sellprice * 1.25)
-			headpricemin = floor(headpricemin * 1.25)
-			headpricemax = floor(headpricemax * 1.25)
+		if(1)
+			EMPTY_BLOCK_GUARD
+		if(0)
+			sellprice = floor(sellprice * 0.75)
 		if(-1)
 			sellprice = floor(sellprice * 0.1)
-			headpricemin = floor(headpricemin * 0.1)
-			headpricemax = floor(headpricemax * 0.1)
 			var/initial_name = name
 			name = "rotten [initial_name]"
 			rotten = TRUE
@@ -128,12 +135,12 @@
 	if(held_item)
 		var/path_to_check = ispath(held_item) ? held_item : held_item.type
 		if(ispath(path_to_check, /obj/item/weapon/knife))
-			var/butchering_skill = user.get_skill_level(/datum/skill/labor/butchering, TRUE)
+			var/butchering_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering)
 			var/used_time = 8
 			used_time = (used_time - 0.5 * butchering_skill) SECONDS
 			visible_message("[user] begins to butcher \the [src].")
 			playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-			var/amt2raise = user.STAINT/4
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/4
 			if(do_after(user, used_time, src))
 				var/obj/item/I = new meat_to_give(get_turf(src))
 				if(rotten && istype(I,/obj/item/reagent_containers/food/snacks))
@@ -141,7 +148,7 @@
 					F.become_rotten()
 
 				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-				user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
+				user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
 				qdel(src)
 	..()
 
@@ -149,16 +156,17 @@
 	name = "volf head"
 	desc = "The severed head of a fearsome volf."
 	icon_state = "volfhead"
-	headpricemin = 3
-	headpricemax = 7
 	sellprice = 5
+	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/natural/head/saiga
 	name = "saiga head"
 	desc = "The severed head of a proud saiga."
 	icon_state = "saigahead"
-	headprice = 3
 	sellprice = 3
+	blood_value = BLOOD_VOLUME_BAD
+	item_weight = 1.2 KILOGRAMS
 
 /obj/item/natural/head/troll
 	name = "troll head"
@@ -167,9 +175,9 @@
 	grid_height = 96
 	grid_width = 96
 	w_class = WEIGHT_CLASS_BULKY
-	headpricemin = 80
-	headpricemax = 230
-	sellprice = 155
+	sellprice = 20
+	blood_value = BLOOD_VOLUME_OKAY
+	item_weight = 2.1 KILOGRAMS
 
 /obj/item/natural/head/troll/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -178,25 +186,20 @@
 	name = "troll head"
 	desc = "The severed head of a once mighty warrior troll."
 	icon_state = "trollhead_axe"
-	headpricemin = 90
-	headpricemax = 250
-	sellprice = 170
+	sellprice = 30
 
 /obj/item/natural/head/troll/cave
 	name = "cave troll head"
 	icon_state = "cavetrollhead"
-	headpricemin = 120
-	headpricemax = 280
-	sellprice = 200
+	sellprice = 45
 
 /obj/item/natural/head/rous
 	name = "rous head"
 	desc = "The severed head of an unusually large rat."
 	icon_state = "roushead"
-	headpricemin = 3
-	headpricemax = 7
-	sellprice = 5
+	sellprice = 2
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+	item_weight = 500 GRAMS
 
 /obj/item/natural/head/direbear
 	name = "direbear head"
@@ -204,6 +207,8 @@
 	icon_state = "direbearhead"
 	layer = 3.1
 	sellprice = 20
+	blood_value = BLOOD_VOLUME_SAFE
+	item_weight = 1.6 KILOGRAMS
 
 /obj/item/natural/head/fox
 	name = "venard head"
@@ -211,25 +216,25 @@
 	icon_state = "foxhead"
 	layer = 3.1
 	grid_height = 32
-	sellprice = 6
+	sellprice = 12 // fur trade
+	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 400 GRAMS
 
 /obj/item/natural/head/spider
 	name = "beespider head"
 	desc = "The severed head of a venomous beespider."
 	icon_state = "spiderhead"
-	headpricemin = 4
-	headpricemax = 20
-	sellprice = 12
+	sellprice = 6
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
+	item_weight = 200 GRAMS
 
 /obj/item/natural/head/bug
 	name = "bogbug head"
 	desc = "The severed head of a gross bogbug."
 	icon_state = "boghead"
-	headpricemin = 4
-	headpricemax = 15
 	sellprice = 10
 	meat_to_give = /obj/item/reagent_containers/food/snacks/meat/strange
+	item_weight = 400 GRAMS
 
 /obj/item/natural/head/mole
 	name = "mole head"
@@ -237,9 +242,9 @@
 	icon_state = "molehead"
 	grid_height = 96
 	grid_width = 96
-	headpricemin = 3
-	headpricemax = 7
-	sellprice = 5
+	sellprice = 8
+	blood_value = BLOOD_VOLUME_SURVIVE
+	item_weight = 765 GRAMS
 
 /obj/item/natural/head/mole/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -248,8 +253,9 @@
 	name = "gote head"
 	desc = "The severed head of a fiery gote."
 	icon_state = "gotehead"
-	headprice = 2
-	sellprice = 2
+	sellprice = 3
+	blood_value = BLOOD_VOLUME_SURVIVE / 2
+	item_weight = 1.1 KILOGRAMS
 
 //RTD make this a storage item and make clickign on animals with things put it in storage
 /obj/item/natural/saddle
@@ -262,7 +268,8 @@
 	gripped_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	sellprice = 80
+	sellprice = 30
+	item_weight = 7 KILOGRAMS //heavy as shit according to equsitrian wikis (this is for an english saddle)
 
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -286,7 +293,7 @@
 	. = ..()
 	if(.)
 		return
-	var/damage = user.STASTR*0.5
+	var/damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH)*0.5
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(src, ATTACK_EFFECT_BITE)
@@ -309,7 +316,7 @@
 	else
 		visible_message(span_danger("[user] bites [src]!"))
 	if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
-		var/poison = user.STACON/2
+		var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
 		src.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
 		src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
 		to_chat(user, span_warning("Your fangs inject venom into [src]!"))

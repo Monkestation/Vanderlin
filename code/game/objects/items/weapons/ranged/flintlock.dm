@@ -24,7 +24,7 @@
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
 	dropshrink = 0.7
-	associated_skill = /datum/skill/combat/firearms
+	associated_skill = /datum/attribute/skill/combat/firearms
 	possible_item_intents = list(/datum/intent/shoot/puffer, /datum/intent/shoot/puffer/arc, INTENT_GENERIC)
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/musk
 	gripped_intents = null
@@ -33,6 +33,7 @@
 	sellprice = 200 // This kind of equipment is very hard to come by in Rockhill.
 	grid_height = 32
 	grid_width = 96
+	item_weight = 1.2 KILOGRAMS
 	var/wheellock = TRUE
 	var/cocked = FALSE
 	var/ramrod_inserted = TRUE
@@ -91,14 +92,14 @@
 		return
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.get_skill_level(/datum/skill/combat/firearms) <= 0)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) <= 0)
 		to_chat(user, "<span class='warning'>I don't know how to do this!</span>")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(wound)
 		to_chat(user, "<span class='info'>\The [src]'s mechanism is already wound!</span>")
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/windtime = 3.5
-	windtime = windtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
+	windtime = windtime - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) / 2)
 	if(do_after(user, windtime SECONDS, src) && !wound)
 		to_chat(user, "<span class='info'>I wind \the [src]'s mechanism.</span>")
 		playsound(src, 'sound/foley/winding.ogg', 100, FALSE)
@@ -145,11 +146,11 @@
 		if(user.client)
 			if(user.client.chargedprog >= 100)
 				BB.accuracy += 15 //better accuracy for fully aiming
-		if(user.STAPER > 8)
-			BB.accuracy += (user.STAPER - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
-			BB.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+		if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+			BB.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 4 //each point of perception above 8 increases standard accuracy by 4.
+			BB.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 		BB.damage = BB.damage * damage_mult // 80 * 1.5 = 130 of damage.
-		BB.bonus_accuracy += (user.get_skill_level(/datum/skill/combat/firearms, TRUE) * 3) //+3 accuracy per level in firearms
+		BB.bonus_accuracy += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) * 3) //+3 accuracy per level in firearms
 	playsound(src, 'sound/combat/Ranged/muskclick.ogg', 100, FALSE)
 	cocked = FALSE
 	rammed = FALSE
@@ -164,6 +165,7 @@
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "ramrod"
+	item_weight = 150 GRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/Initialize()
 	. = ..()
@@ -172,11 +174,11 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
+	ramtime = ramtime - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) / 2)
 
 	// Check if the item used is a ramrod
 	if(istype(I, /obj/item/ramrod))
-		if(user.get_skill_level(/datum/skill/combat/firearms) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) <= 0)
 			to_chat(user, "<span class='warning'>I don't know how to do this!</span>")
 			return
 		if(!user.is_holding(src))
@@ -194,7 +196,7 @@
 	else
 		// Check if the item used is a reagent container
 		if(istype(I, /obj/item/reagent_containers))
-			if(user.get_skill_level(/datum/skill/combat/firearms) <= 0)
+			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) <= 0)
 				to_chat(user, "<span class='warning'>I don't know how to do this!</span>")
 				return
 			if(powdered)
@@ -274,7 +276,7 @@
 	dropshrink = 0.7
 	possible_item_intents = list(INTENT_GENERIC)
 	gripped_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	slot_flags = ITEM_SLOT_BACK
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
@@ -288,6 +290,7 @@
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet
 	can_parry = TRUE
 	max_integrity = 100
+	item_weight = 4.5 KILOGRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/Initialize()
 	. = ..()
@@ -400,7 +403,7 @@
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/attackby(obj/item/I, mob/user, list/modifiers)
 	var/ramtime = 5.5
-	ramtime = ramtime - (user.get_skill_level(/datum/skill/combat/firearms, TRUE) / 2)
+	ramtime = ramtime - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/firearms) / 2)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(istype(H.get_active_held_item(), /obj/item/weapon/knife/dagger/bayonet))
@@ -429,6 +432,7 @@
 	name = "bayonet"
 	force = 10
 	max_blade_int = 150
+	item_weight = 300 GRAMS
 	var/spread = 2
 
 /obj/item/ramrod/musket
@@ -436,6 +440,7 @@
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "ramrod_musket"
+	item_weight = 300 GRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user) //this is probably shitcode but I'm tired and I'm not repathing the guns to be /weapons, it's better than the musket being a delimbinator 9000
 	if(!get_sharpness() || !affecting.can_dismember(src))

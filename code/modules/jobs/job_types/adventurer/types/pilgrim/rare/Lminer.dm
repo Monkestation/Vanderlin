@@ -1,3 +1,50 @@
+/datum/attribute_holder/sheet/job/pilgrim/minermaster
+	attribute_variance = list(
+		/datum/attribute/skill/misc/athletics = list(30, 40)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/labor/mining = 60,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/craft/masonry = 40,
+		/datum/attribute/skill/craft/traps = 10,
+		/datum/attribute/skill/craft/engineering = 40,
+		/datum/attribute/skill/craft/smelting = 60,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
+/datum/attribute_holder/sheet/job/pilgrim/minermaster/old
+	attribute_variance = list(
+		/datum/attribute/skill/misc/athletics = list(30, 40)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/labor/mining = 60,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/craft/masonry = 40,
+		/datum/attribute/skill/craft/traps = 20,
+		/datum/attribute/skill/craft/engineering = 50,
+		/datum/attribute/skill/craft/smelting = 60,
+		/datum/attribute/skill/misc/reading = 10
+	)
+
 /datum/job/advclass/pilgrim/rare/minermaster
 	title = "Master Miner"
 	tutorial = "Hardy dwarves who dedicated their entire life to a singular purpose: \
@@ -11,37 +58,8 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 1,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/labor/mining = 6,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/craft/masonry = 4,
-		/datum/skill/craft/traps = 1,
-		/datum/skill/craft/engineering = 4,
-		/datum/skill/craft/smelting = 6,
-		/datum/skill/misc/reading = 1
-	)
-
-/datum/job/advclass/pilgrim/rare/minermaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(3, 3, 4), TRUE)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, -1)
-		spawned.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/minermaster
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/pilgrim/minermaster/old
 
 /datum/outfit/pilgrim/minermaster
 	name = "Master Miner (Pilgrim)"

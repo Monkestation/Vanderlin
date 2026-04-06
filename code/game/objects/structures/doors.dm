@@ -49,7 +49,7 @@
 	// See repairable component in repairable.dm for what these variables do
 	var/list/repair_thresholds = list(/obj/item/grown/log/tree/small = 1)
 	var/obj/item/broken_repair = /obj/item/grown/log/tree/small
-	var/repair_skill = /datum/skill/craft/carpentry
+	var/repair_skill = /datum/attribute/skill/craft/carpentry
 	metalizer_result = /obj/structure/door/iron
 	/// Handle bolting on right click
 	var/has_bolt = FALSE
@@ -126,12 +126,12 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STASTR < initial(kickthresh))
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) < initial(kickthresh))
 			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks [src]! It's not effective."), \
 			span_notice("I kick [src]! It's not effective."))
 			return
-		if((prob(L.STASTR * 0.5) || kickthresh-- == 0))
+		if((prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 0.5) || kickthresh-- == 0))
 			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks open [src]!"), \
 				span_notice("I kick open [src]!"))
@@ -486,7 +486,7 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 	repair_thresholds = list(/obj/item/ingot/iron = 1)
 	broken_repair = /obj/item/ingot/iron
-	repair_skill = /datum/skill/craft/blacksmithing
+	repair_skill = /datum/attribute/skill/craft/blacksmithing
 	metalizer_result = null
 
 /obj/structure/door/iron/bars
@@ -512,7 +512,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 
@@ -532,7 +532,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 

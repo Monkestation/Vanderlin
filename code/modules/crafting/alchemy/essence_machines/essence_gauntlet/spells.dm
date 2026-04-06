@@ -378,7 +378,7 @@
 	id = "probability_flux"
 	alert_type = /atom/movable/screen/alert/status_effect/probability_flux
 	duration = 60 SECONDS
-	effectedstats = list(STATKEY_LCK = 2)
+	effectedstats = list(STAT_FORTUNE = 2)
 
 /datum/status_effect/buff/arcane_focus
 	id = "arcane_focus"
@@ -458,25 +458,25 @@
 	if(!owner)
 		return
 	source_key = "balanced_mind_[ref(src)]"
-	owner.set_stat_modifier(source_key, STATKEY_STR, balance_value - owner.STASTR)
-	owner.set_stat_modifier(source_key, STATKEY_PER, balance_value - owner.STAPER)
-	owner.set_stat_modifier(source_key, STATKEY_END, balance_value - owner.STAEND)
-	owner.set_stat_modifier(source_key, STATKEY_CON, balance_value - owner.STACON)
-	owner.set_stat_modifier(source_key, STATKEY_INT, balance_value - owner.STAINT)
-	owner.set_stat_modifier(source_key, STATKEY_SPD, balance_value - owner.STASPD)
-	owner.set_stat_modifier(source_key, STATKEY_LCK, balance_value - owner.STALUC)
+	owner.set_stat_modifier(source_key, STAT_STRENGTH, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_STRENGTH))
+	owner.set_stat_modifier(source_key, STAT_PERCEPTION, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_PERCEPTION))
+	owner.set_stat_modifier(source_key, STAT_ENDURANCE, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE))
+	owner.set_stat_modifier(source_key, STAT_CONSTITUTION, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION))
+	owner.set_stat_modifier(source_key, STAT_INTELLIGENCE, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE))
+	owner.set_stat_modifier(source_key, STAT_SPEED, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_SPEED))
+	owner.set_stat_modifier(source_key, STAT_FORTUNE, balance_value - GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE))
 
 /datum/status_effect/buff/balanced_mind/on_remove()
 	. = ..()
 	if(!owner || !source_key)
 		return
-	owner.set_stat_modifier(source_key, STATKEY_STR, 0)
-	owner.set_stat_modifier(source_key, STATKEY_PER, 0)
-	owner.set_stat_modifier(source_key, STATKEY_END, 0)
-	owner.set_stat_modifier(source_key, STATKEY_CON, 0)
-	owner.set_stat_modifier(source_key, STATKEY_INT, 0)
-	owner.set_stat_modifier(source_key, STATKEY_SPD, 0)
-	owner.set_stat_modifier(source_key, STATKEY_LCK, 0)
+	owner.set_stat_modifier(source_key, STAT_STRENGTH, 0)
+	owner.set_stat_modifier(source_key, STAT_PERCEPTION, 0)
+	owner.set_stat_modifier(source_key, STAT_ENDURANCE, 0)
+	owner.set_stat_modifier(source_key, STAT_CONSTITUTION, 0)
+	owner.set_stat_modifier(source_key, STAT_INTELLIGENCE, 0)
+	owner.set_stat_modifier(source_key, STAT_SPEED, 0)
+	owner.set_stat_modifier(source_key, STAT_FORTUNE, 0)
 
 /atom/movable/screen/alert/status_effect/wind_walking
 	name = "Wind Walking"

@@ -119,6 +119,11 @@
 	var/list/status_effects //a list of all status effects the mob has
 	var/druggy = 0
 
+	var/parrying_penalty = 0
+	var/parrying_penalty_timer = null
+	var/dodging_penalty = 0
+	var/dodging_penalty_timer = null
+
 	//Speech
 	var/stuttering = 0
 	var/slurring = 0
@@ -143,10 +148,31 @@
 	var/list/ownedSoullinks //soullinks we are the owner of
 	var/list/sharedSoullinks //soullinks we are a/the sharer of
 
+	/// List of fatigue modifiers applying to this mob
+	var/list/fatigue_modification //Lazy list, see fatigue_modifier.dm
+	/// List of fatigue modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/fatigue_mod_immunities //Lazy list, see fatigue_modifier.dm
+
+	/// List of stamina modifiers applying to this mob
+	var/list/stamina_modification //Lazy list, see stamina_modifier.dm
+	/// List of stamina modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/stamina_mod_immunities //Lazy list, see stamina_modifier.dm
+
+	// ~WEIGHT SYSTEM
+	/// Maximum weight we can carry, this point and beyond means maximum encumbrance
+	var/maximum_carry_weight = 72
+	/// Weight we are currently carrying
+	var/carry_weight = 0
+	/// State of encumbrance we are in, cheaper to store this than keeping calling update_carry_weight()
+	var/encumbrance = ENCUMBRANCE_NONE
+
 	var/max_energy = 1000
-	var/maximum_stamina = 100
 	var/energy = 1000
+	var/base_max_energy = 1000
+
+	var/maximum_stamina = 100
 	var/stamina = 0
+	var/base_max_stamina = 100
 
 	var/last_fatigued = 0
 	var/last_ps = 0
@@ -162,7 +188,6 @@
 
 	var/defprob = 50 //base chance to defend against this mob's attacks, for simple mob combat
 	var/defdrain = 5
-	var/encumbrance = 0
 
 	/// If the mob's eyes are closed, blinded
 	var/eyesclosed = FALSE
@@ -236,3 +261,5 @@
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+	/// cooldown between vertical swim actions
+	COOLDOWN_DECLARE(cd_zswim)

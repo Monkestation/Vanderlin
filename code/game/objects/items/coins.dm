@@ -3,6 +3,7 @@
 #define CTYPE_COPP "c"
 #define CTYPE_INQU "i"
 #define CTYPE_ANCI "a"
+#define CTYPE_WOOD "w"
 #define MAX_COIN_STACK_SIZE 20
 
 /obj/item/coin
@@ -17,6 +18,7 @@
 	sellprice = 0
 	static_price = TRUE
 	simpleton_price = TRUE
+	item_weight = 23 GRAMS
 
 	COOLDOWN_DECLARE(flip_cd)
 	var/heads_tails = TRUE
@@ -26,9 +28,17 @@
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
 
+/obj/item/coin/get_carry_weight(atom/carrier)
+	. = item_weight * quantity
+
 /obj/item/coin/on_consume(mob/living/eater)
 	. = ..()
+	eater.extra_mob_weight += get_carry_weight(eater)
 	eater.sellprice += quantity * sellprice
+
+/obj/item/coin/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
+	eater.sellprice -= quantity * sellprice
 
 /obj/item/coin/Initialize(mapload, coin_amount)
 	. = ..()
@@ -73,6 +83,8 @@
 						spawned_type = /obj/item/coin/inqcoin
 					if(CTYPE_ANCI)
 						spawned_type = /obj/item/coin/copper
+					if(CTYPE_WOOD)
+						spawned_type = /obj/item/coin/wood
 					else
 						return // Don't destroy coins into copper
 
@@ -117,7 +129,7 @@
 			. += span_info("[quantity_to_words(quantity)] coins.")
 		return
 
-	var/intelligence = user.mind?.current.STAINT
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
 		return
@@ -189,10 +201,10 @@
 	. = ..()
 
 /obj/item/coin/proc/coin_skill(mob/user, intended)		// Coin counting and splitting
-	var/intelligence = user.mind?.current.STAINT
-	var/perception = user.mind?.current.STAPER
-	var/speed = user.mind?.current.STASPD
-	var/mathematics_skill = user.get_skill_level(/datum/skill/labor/mathematics) || 0
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
+	var/perception = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_PERCEPTION)
+	var/speed = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_SPEED)
+	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers
@@ -276,7 +288,7 @@
 	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
-	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")
+	var/outcome = tgui_alert(user, "What will you rig the next coin flip to?","XYLIX", list("Heads","Tails","Play fair"))
 	if(QDELETED(src) || !user.is_holding(src))
 		return
 	switch(outcome)
@@ -316,6 +328,8 @@
 				spawned_type = /obj/item/coin/silver
 			if(CTYPE_INQU)
 				spawned_type = /obj/item/coin/inqcoin
+			if(CTYPE_WOOD)
+				spawned_type = /obj/item/coin/wood
 			else
 				spawned_type = /obj/item/coin/copper
 	if(spawned_type)
@@ -404,6 +418,7 @@
 	sellprice = 10
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
+	item_weight = 9 GRAMS
 
 
 // SILVER
@@ -414,6 +429,8 @@
 	sellprice = 5
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
+	item_weight = 11 GRAMS
+
 
 // COPPER
 /obj/item/coin/copper
@@ -473,9 +490,24 @@
 		heads_tails = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/coin/wood
+	name = "chip"
+	icon = 'icons/obj/orphanage.dmi'
+	icon_state = "w1"
+	sellprice = 0
+	base_type = CTYPE_WOOD
+	plural_name = "chips"
+	item_weight = 3 GRAMS
+
+/obj/item/coin/wood/pile/Initialize(mapload, coin_amount)
+	. = ..()
+	if(!coin_amount)
+		set_quantity(rand(4,14))
+
 #undef CTYPE_GOLD
 #undef CTYPE_SILV
 #undef CTYPE_COPP
 #undef CTYPE_INQU
 #undef CTYPE_ANCI
+#undef CTYPE_WOOD
 #undef MAX_COIN_STACK_SIZE

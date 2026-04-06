@@ -138,7 +138,7 @@
 
 /obj/structure/pillory/user_unbuckle_mob(mob/living/buckled_mob, mob/living/user)
 	if(latched)
-		if(isliving(user) && user.STASTR >= 18)
+		if(isliving(user) && GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) >= 18)
 			if(do_after(user, 2.5 SECONDS))
 				user.visible_message(span_warning("[user] breaks [src] open!"))
 				unlock()

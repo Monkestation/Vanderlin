@@ -21,7 +21,7 @@
 	id = "family_misfortune"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/misfortune
-	effectedstats = list(STATKEY_LCK = -2)
+	effectedstats = list(STAT_FORTUNE = -2)
 
 /atom/movable/screen/alert/status_effect/family_curse/misfortune
 	name = "Family Misfortune"

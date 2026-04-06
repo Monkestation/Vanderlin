@@ -55,7 +55,7 @@
 	owner.blood_volume = max(owner.blood_volume, min(BLOOD_VOLUME_NORMAL, owner.blood_volume + vitae_cost))
 
 	//this is quadratic so expect it to scale like crazy
-	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6)
+	owner.heal_wounds((bashing_lethal_heal + aggravated_heal) * level * 0.6, source=src)
 
 	if(level >= 3)
 		if(prob(20)) // 20% chance per pulse to show visible healing

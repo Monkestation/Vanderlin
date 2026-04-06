@@ -1,32 +1,32 @@
+/datum/attribute_holder/sheet/job/rouschild
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = -3,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/labor/fishing = 20,
+		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/taming = 40,
+	)
+
 /datum/job/advclass/wretch/rouschild
 	title = "Rouschild"
 	tutorial = "A child of the sewers, abandoned at birth, you were taken in by a colony of rous and raised as one of their own."
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/rouschild
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 	total_positions = 2
 	faction = FACTION_RATS
 
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_INT = -3
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/knives = 4,
-		/datum/skill/combat/unarmed = 5,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/farming = 2,
-		/datum/skill/labor/fishing = 2,
-		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/taming = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/rouschild
 
 	traits = list(
 		TRAIT_DARKVISION,
@@ -42,10 +42,6 @@
 		/datum/action/cooldown/spell/conjure/rous
 	)
 
-
-/datum/job/advclass/wretch/rouschild/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)
 
 /datum/outfit/wretch/rouschild
 	name = "Rouschild (Wretch)"

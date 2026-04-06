@@ -10,6 +10,7 @@
 	icon_state = "dungeoneer"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	fiber_salvage = FALSE
+	item_weight = 135 GRAMS
 
 /obj/item/clothing/head/menacing
 	name = "sack hood"
@@ -17,18 +18,21 @@
 	icon_state = "menacing"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	fiber_salvage = FALSE
+	item_weight = 112 GRAMS
 
 /obj/item/clothing/head/knitcap
 	name = "knit cap"
 	desc = "A crude peasant cap worn by about every serf under Astrata's radiance."
 	icon_state = "knitcap"
 	min_cold_protection_temperature = -5
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/turban
 	name = "turban"
 	desc = "A headwrap worn throughout the southern parts of Faience."
 	icon_state = "turban"
 	min_cold_protection_temperature = -5
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/headband
 	name = "headband"
@@ -37,6 +41,7 @@
 	dynamic_hair_suffix = ""
 	fiber_salvage = FALSE
 	salvage_amount = 1
+	item_weight = 45 GRAMS
 
 /obj/item/clothing/head/headband/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -49,7 +54,8 @@
 	desc = "A traditional monk's headband, for those disciples who prefer the sweat out of their eyes."
 	icon_state = "headband"
 	color = "#48443b"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	resistance_flags = FIRE_PROOF
 	armor = ARMOR_HEAD_PSYDON //Higher-tier protection for pugilist-centric classes. Fits the 'glass cannon' style, and prevents instant death through a glancing headshot on the intended archetype.
 	blade_dulling = DULLING_BASHCHOP
@@ -59,17 +65,20 @@
 	blocksound = SOFTHIT
 	//dropshrink = 0.75
 	dynamic_hair_suffix = null
+	item_weight = 45 GRAMS
 
 /obj/item/clothing/head/shawl
 	name = "shawl"
 	desc = "Keeps the hair in check, and looks proper."
 	icon_state = "shawl"
 	flags_inv = HIDEEARS
+	item_weight = 62 GRAMS
 
 /obj/item/clothing/head/brimmed
 	name = "brimmed hat"
 	desc = "A simple brimmed hat that provides some relief from the sun."
 	icon_state = "brimmed"
+	item_weight = 92 GRAMS
 
 //................ Fur Hats ............... //
 /obj/item/clothing/head/hatfur
@@ -77,11 +86,13 @@
 	desc = "A hat made of fur typically worn by guildsmen."
 	icon_state = "hatfur"
 	min_cold_protection_temperature = -20
+	item_weight = 155 GRAMS
 
 /obj/item/clothing/head/hatblu
 	name = "fur hat"
 	icon_state = "hatblu"
 	min_cold_protection_temperature = -20
+	item_weight = 155 GRAMS
 
 /obj/item/clothing/head/papakha
 	name = "papakha"
@@ -90,6 +101,7 @@
 	sellprice = VALUE_FINE_CLOTHING
 	max_integrity = INTEGRITY_POOR
 	min_cold_protection_temperature = -20
+	item_weight = 155 GRAMS
 
 //................ Fancy Hats ............... //
 
@@ -108,11 +120,13 @@
 	armor = list("blunt" = 16, "slash" = 19, "stab" = 15,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_TWIST)
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	blocksound = SOFTHIT
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide
 	min_cold_protection_temperature = -1
+	item_weight = 1.12 KILOGRAMS //antlers weigh like 2kg on their own but I am merciful
 
 /obj/item/clothing/head/helmet/leather/saiga
 	name = "saiga skull"
@@ -134,6 +148,7 @@
 	name = "briar thorns"
 	desc = "The pain it causes perhaps can distract from the whispers of a mad God overpowering your sanity..."
 	icon_state = "briarthorns"
+	item_weight = 95 GRAMS
 
 /obj/item/clothing/head/padded/briarthorns/pickup(mob/living/user)
 	. = ..()
@@ -146,6 +161,7 @@
 	desc = "A fashionable conical hat typically worn by princesses."
 	icon_state = "hennin"
 	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 112 GRAMS
 
 
 //......................................................................................................
@@ -171,7 +187,7 @@
 	body_parts_covered = HEAD|HAIR|EARS
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
-
+	item_weight = 120 GRAMS
 
 
 /*------------------\
@@ -210,6 +226,7 @@
 	item_state = "sacked"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	tint = TINT_BLIND
+	item_weight = 55 GRAMS
 
 /obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -243,6 +260,7 @@
 	icon_state = "adeptscowl"
 	item_state = "adeptscowl"
 	flags_inv = HIDEEARS|HIDEHAIR
+	item_weight = 55 GRAMS
 
 /*----------\
 | Graveyard |	- Not used or ingame in any way except admeme spawning them.
@@ -260,11 +278,14 @@
 	bloody_icon_state = "helmetblood_big"
 
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 121 GRAMS
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/headdress // egyptian
 	name = "foreign headdress"
 	desc = ""
 	icon_state = "headdress"
+	item_weight = 77 GRAMS
 
 /obj/item/clothing/head/headdress/alt
 	icon_state = "headdressalt"
@@ -283,6 +304,7 @@
 	dynamic_hair_suffix = null
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
+	item_weight = 600 GRAMS
 
 //................ Faceless Hood ............... //	- Faceless One
 
@@ -303,6 +325,7 @@
 	body_parts_covered = NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 110 GRAMS
 
 /obj/item/clothing/head/faceless/AdjustClothes(mob/living/carbon/user)
 	if(loc == user)
@@ -331,6 +354,7 @@
 	desc = ""
 	icon_state = "takuhatsugasa"
 	item_flags = ABSTRACT
+	item_weight = 152 GRAMS
 
 /obj/item/clothing/head/helmet/pegasusknight
 	name = "coifed helmet"
@@ -341,8 +365,9 @@
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
 	block2add = FOV_BEHIND
-	anvilrepair = /datum/skill/craft/armorsmithing
-	sewrepair = FALSE
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
+	item_weight = 1.23 KILOGRAMS
 
 /obj/item/clothing/head/roguehood/psydon
 	name = "psydonian hood"
@@ -362,6 +387,7 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	max_integrity = 200
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/psydon/AdjustClothes(mob/living/carbon/user)
 	if(loc == user)
@@ -404,4 +430,4 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	max_integrity = 200
-
+	item_weight = 145 GRAMS

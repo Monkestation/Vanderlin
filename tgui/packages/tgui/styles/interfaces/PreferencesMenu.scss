@@ -1,0 +1,44 @@
+@use 'sass:color';
+@use 'sass:map';
+@use '../colors.scss';
+
+.PreferencesMenu {
+  &__ribbon {
+    width: 0px;
+    background-color: transparent;
+    position: absolute;
+    top: -5px;
+    right: 30px;
+    border: solid 15px #B13A22;
+    border-top: solid 30px #B13A22;
+    border-bottom: solid 15px transparent;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+    transition: border 0.2s;
+  }
+  &__ribbon:hover {
+    border-top: solid 45px #B13A22;
+  }
+  &__ribbon:active {
+      /*
+      ---- Transform stretch: ----
+      (Less pretty)
+
+      transform: translate(0, 20px)
+                 scale(0.8, 1.4);
+
+
+      ---- width/height adjust stretch: ----
+      (More choppy)
+
+      height: 180px;
+      border-left: solid 10px #B13A22;
+      border-right: solid 10px #B13A22;
+      right: 25px;
+      */
+
+      border-color: #A13A22;
+      border-bottom-color: transparent;
+  }
+}

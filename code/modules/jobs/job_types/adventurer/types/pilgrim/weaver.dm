@@ -1,3 +1,19 @@
+/datum/attribute_holder/sheet/job/pilgrim/weaver
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = 1,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/misc/sewing = 40,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/farming = 10,
+		/datum/attribute/skill/craft/tanning = 30,
+		/datum/attribute/skill/craft/carpentry = 10,
+	)
+
 /datum/job/advclass/pilgrim/weaver
 	title = "Weaver"
 	allowed_sexes = list(MALE, FEMALE)
@@ -5,23 +21,7 @@
 	apprentice_name = "Weaver"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 4,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/farming = 1,
-		/datum/skill/craft/tanning = 3,
-		/datum/skill/craft/carpentry = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/weaver
 
 /datum/outfit/pilgrim/seamstress
 	name = "Weaver (Pilgrim)"

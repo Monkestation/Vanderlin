@@ -24,7 +24,7 @@
 			continue
 		if(!H.patron || !istype(H.patron, /datum/patron/inhumen/zizo))
 			continue
-		if(H.get_skill_level(/datum/skill/craft/crafting) < 1)
+		if(GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/craft/crafting) < 1)
 			continue
 		return TRUE
 
@@ -38,7 +38,7 @@
 			continue
 		if(!human_mob.patron || !istype(human_mob.patron, /datum/patron/inhumen/zizo))
 			continue
-		if(human_mob.get_skill_level(/datum/skill/craft/crafting) < 1)
+		if(GET_MOB_SKILL_VALUE_OLD(human_mob, /datum/attribute/skill/craft/crafting) < 1)
 			continue
 		valid_targets += human_mob
 

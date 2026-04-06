@@ -1,3 +1,20 @@
+/datum/attribute_holder/sheet/job/pilgrim/wanderer
+	raw_attribute_list = list(
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/polearms = 30, // have to be at least somewhat competent with one weapon to have traveled alot
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 20,
+	)
+
 /datum/job/advclass/pilgrim/wanderer
 	title = "Wanderer"
 	tutorial = "You are a member of the Merry Band, a humble guild of wanderers who have united under one common desire. Wandering for the sake of experiencing the beauty and diversity of Faience to the fullest extent. As the motto of the Merry Band goes, \"Make every step count and may your journeys be full of wonder\"."
@@ -5,28 +22,11 @@
 	category_tags = list(CTAG_PILGRIM)
 	outfit = /datum/outfit/pilgrim/wanderingpilgrim
 
-	jobstats = list(
-		STATKEY_LCK = 1 //Wanderers are meant to be a blank slate, so they dont really have anything. But i think some bonus luck would be make sense for them.
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/polearms = 3, // have to be at least somewhat competent with one weapon to have traveled alot
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/cooking = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/wanderer
 
 /datum/job/advclass/pilgrim/wanderer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/language/language = pickweight(list(/datum/language/orcish = 1, /datum/language/celestial = 1, /datum/language/hellspeak = 1, /datum/language/dwarvish = 1, /datum/language/elvish = 1, /datum/language/newpsydonic = 1, /datum/language/zalad = 1))
+	var/datum/language/language = pick(list(/datum/language/orcish, /datum/language/celestial, /datum/language/hellspeak, /datum/language/dwarvish, /datum/language/elvish, /datum/language/newpsydonic, /datum/language/zalad))
 	spawned.grant_language(language)
 	to_chat(spawned, span_notice("I learned the tongue of [initial(language.name)] through my travels."))
 

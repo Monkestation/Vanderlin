@@ -9,6 +9,13 @@
 /mob/living/carbon/human/species/human/northern
 	race = /datum/species/human/northern
 
+/datum/attribute_holder/sheet/job/species/northern
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 2,
+		STAT_FORTUNE = 1
+	)
+
 /datum/species/human/northern
 	name = "Humen"
 	id = SPEC_ID_HUMEN
@@ -73,8 +80,7 @@
 		OFFSET_UNDIES = list(0,0),\
 	)
 
-	specstats_m = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_INT = 0, STATKEY_CON = 1, STATKEY_END = 2, STATKEY_SPD = 0, STATKEY_LCK = 1)
-	specstats_f = list(STATKEY_STR = 0, STATKEY_PER = 0, STATKEY_INT = 0, STATKEY_CON = 1, STATKEY_END = 2, STATKEY_SPD = 0, STATKEY_LCK = 1)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/northern
 
 	enflamed_icon = "widefire"
 

@@ -4,14 +4,14 @@
 	button_icon_state = "comedy"
 	sound = 'sound/magic/ahh2.ogg'
 
-	associated_skill = /datum/skill/misc/music
+	associated_skill = /datum/attribute/skill/misc/music
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Let fortune favour the bold!"
 
 	spell_type = NONE
-	associated_skill = /datum/skill/misc/music
-	associated_stat = STATKEY_INT
+	associated_skill = /datum/attribute/skill/misc/music
+	associated_stat = STAT_INTELLIGENCE
 
 	charge_required = FALSE
 	cooldown_time = 1 MINUTES

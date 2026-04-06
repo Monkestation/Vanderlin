@@ -16,6 +16,10 @@
 	QDEL_NULL(dna)
 	GLOB.carbon_list -= src
 
+	if(speech_modifiers)
+		for(var/thing in speech_modifiers)
+			qdel(thing) // Lazylist
+
 /mob/living/carbon/ZImpactDamage(turf/T, levels)
 	var/obj/item/bodypart/affecting
 	if(prob(66))
@@ -209,8 +213,8 @@
 							return
 						thrown_thing = throwable_mob
 						thrown_speed = 1
-						thrown_range = round((STASTR/throwable_mob.STACON)*2)
-						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || STASTR < 15)))
+						thrown_range = round((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)/GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION))*2)
+						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 15)))
 							while(end_T.z > start_T.z)
 								end_T = GET_TURF_BELOW(end_T)
 						if((end_T.z > start_T.z) && throwable_mob.cmode)
@@ -321,7 +325,7 @@
 		if(istype(buckled, /obj/structure))
 			var/obj/structure/S = buckled
 			buckle_cd += S.breakoutextra
-		if(STASTR > 15)
+		if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15)
 			buckle_cd = 3 SECONDS
 		visible_message("<span class='warning'>[src] attempts to struggle free!</span>", \
 					"<span class='notice'>I attempt to struggle free...</span>")
@@ -376,10 +380,10 @@
 		return
 	I.item_flags |= BEING_REMOVED
 	breakouttime = I.slipouttime
-	if(STASTR > 10)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 10)
 		cuff_break = FAST_CUFFBREAK
 		breakouttime = I.breakouttime
-	if(STASTR > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
 		cuff_break = INSTANT_CUFFBREAK
 
 	if(instant)
@@ -495,24 +499,24 @@
 
 /mob/living/carbon/proc/get_str_arms(num)
 	if(!domhand || !num || HAS_TRAIT(src, TRAIT_DUALWIELDER))
-		return STASTR
-	var/used = STASTR
+		return GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+	var/used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	if(num == domhand)
 		return used
 	else
-		used = STASTR - 1
+		used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - 1
 		if(used < 1)
 			used = 1
 		return used
 
 /mob/living/get_status_tab_items()
 	. = ..()
-	. += "STR: \Roman[STASTR]"
-	. += "PER: \Roman[STAPER]"
-	. += "INT: \Roman[STAINT]"
-	. += "CON: \Roman[STACON]"
-	. += "END: \Roman[STAEND]"
-	. += "SPD: \Roman[STASPD]"
+	. += "STR: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)]"
+	. += "PER: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)]"
+	. += "INT: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)]"
+	. += "CON: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)]"
+	. += "END: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)]"
+	. += "SPD: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)]"
 	. += "PATRON: [uppertext(patron.name)]"
 
 /mob/living/carbon/attack_ui(slot)
@@ -890,7 +894,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = ((get_complex_pain() / (STAEND * 10)) * 100) //what percent out of 100 to max pain
+	var/hurtdamage = ((get_complex_pain() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
@@ -1032,7 +1036,10 @@
 	return ..()
 
 /mob/living/carbon/can_be_revived()
-	if(!getorgan(/obj/item/organ/brain) && (!mind))
+	if(!mind)
+		return FALSE
+	var/obj/item/organ/brain/b = getorgan(/obj/item/organ/brain)
+	if(!istype(b) || b.brain_death)
 		return FALSE
 	return ..()
 
@@ -1294,63 +1301,99 @@
 
 	update_body_parts(TRUE)
 
-/mob/living/carbon/get_encumbrance()
-	return round(get_total_weight() / get_carry_capacity(), 0.01)
+/mob/living/carbon/proc/get_basic_lift()
+	if(!istype(attributes))
+		return 10
+	var/str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+	if(str <= 0)
+		return 3
+	return max(CEILING(sqrt(str) * 3, 1), 3)
 
-/mob/living/carbon/human/dummy/get_total_weight()
-	return 0
+/mob/living/carbon/proc/update_maximum_carry_weight()
+	maximum_carry_weight = get_basic_lift() * 10
 
-/mob/living/carbon/get_total_weight()
-	var/held_weight = 0
+	var/list/conflict_tracker = list()
 
+	for(var/key in get_carry_weight_modifiers())
+		var/datum/carry_weight_modifier/carry_weight_mod = carry_weight_modification[key]
+		var/conflict = carry_weight_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < carry_weight_mod.priority)
+				conflict_tracker[conflict] = carry_weight_mod.priority
+			else
+				continue
+
+		maximum_carry_weight += carry_weight_mod.carry_weight_add
+	update_encumbrance()
+
+/mob/living/carbon/proc/update_carry_weight()
+	. = 0
+	//we do need a typecheck here to avoid nulls
 	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
 		if(isnull(worn_item))
 			continue
-		var/modifier = 1
-		if(ishuman(src))
-			var/mob/living/carbon/human/H = src
-			if(H.age == AGE_CHILD)
-				modifier = 5
-		if(HAS_TRAIT(src, TRAIT_HOLLOWBONES))
-			modifier = 4
-		if(isclothing(worn_item))
-			switch(worn_item:armor_class)
-				if(AC_HEAVY)
-					if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
-						held_weight += worn_item.item_weight * 2 * modifier
-					else
-						held_weight += worn_item.item_weight * modifier
-				if(AC_MEDIUM)
-					if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
-						held_weight += worn_item.item_weight * 2 * modifier
-					else
-						held_weight += worn_item.item_weight * modifier
-				if(AC_LIGHT)
-					held_weight += worn_item.item_weight
-				else
-					held_weight += worn_item.item_weight
-		else
-			held_weight += worn_item.item_weight
-		held_weight += worn_item.get_stored_weight(HAS_TRAIT(src, TRAIT_AMAZING_BACK))
+		. += worn_item.get_carry_weight(src)
+	carry_weight = .
+	update_encumbrance()
 
-	return held_weight
+/mob/living/proc/get_mob_weight()
+	return 15
 
-/mob/living/carbon/encumbrance_to_dodge()
-	var/encumbrance = get_encumbrance()
-	if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
-		encumbrance *= 1.5
-	if(encumbrance <= 0.3 && HAS_TRAIT(src, TRAIT_DODGEEXPERT))
-		return 1
-	if(encumbrance >= 1)
-		return 0
-	return 1 - (encumbrance * 1)
+/mob/living/carbon/human/get_mob_weight()
+	var/age_modifier = 1
+	if(age == AGE_CHILD)
+		age_modifier = 0.5
+	return (dna?.species?.default_mob_weight + extra_mob_weight) * age_modifier
 
-/mob/living/carbon/encumbrance_to_speed()
-	var/exponential = (2.71 ** -(get_encumbrance() - 0.6)) * 10
-	var/speed_factor = 1 / (1 + exponential)
-	var/precentage =  CLAMP(speed_factor, 0, 1)
+/mob/living/carbon/human/update_carry_weight()
+	. = 0
+	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
+		if(isnull(worn_item))
+			continue
+		. += worn_item.get_carry_weight()
+	for(var/mob/living/carbon/human/friend in buckled_mobs)
+		//For now, let's assume our friend weighs 60kg
+		. += friend.get_mob_weight()
 
-	add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 5 * precentage)
+	carry_weight = .
+	update_encumbrance()
+	if(buckled && ishuman(buckled))
+		var/mob/living/carbon/human/buckle_human = buckled
+		buckle_human.update_carry_weight()
+
+
+/mob/living/carbon/proc/update_encumbrance()
+	var/basic_lift = maximum_carry_weight/10
+	if(carry_weight >= (basic_lift*10))
+		encumbrance = ENCUMBRANCE_EXTREME
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -400)
+	else if(carry_weight >= (basic_lift*6))
+		encumbrance = ENCUMBRANCE_HEAVY
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -250)
+	else if(carry_weight >= (basic_lift*3))
+		encumbrance = ENCUMBRANCE_MEDIUM
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -100)
+	else if(carry_weight >= (basic_lift*2))
+		encumbrance = ENCUMBRANCE_LIGHT
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, 0)
+	else
+		encumbrance = ENCUMBRANCE_NONE
+	update_encumbrance_movespeed_modifier()
+
+/mob/living/carbon/proc/update_encumbrance_movespeed_modifier()
+	switch(encumbrance)
+		if(ENCUMBRANCE_EXTREME)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 3.5)
+		if(ENCUMBRANCE_HEAVY)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 1.4)
+		if(ENCUMBRANCE_MEDIUM)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0.8)
+		if(ENCUMBRANCE_LIGHT)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0.34)
+		if(ENCUMBRANCE_NONE)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0)
+
 
 /// skeletonize all limbs of a carbon mob, pass TRUE as an argument if it's lethal, FALSE if it's not.
 /mob/living/carbon/proc/skeletonize(lethal = TRUE)

@@ -1,17 +1,18 @@
 // simple is_type and similar inline helpers
 
-
 #define in_range(source, user) (get_dist(source, user) <= 1 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
 
 #define in_range_loose(source, user) (get_dist(source, user) <= 2 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
 
-
 #define ismovableatom(A) ismovable(A)
-
 
 #define isatom(A) (isloc(A))
 
 #define isweakref(D) (istype(D, /datum/weakref))
+
+// The filters list has the same ref type id as a filter, but isnt one and also isnt a list, so we have to check if the thing has Cut() instead
+GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
+#define isfilter(thing) (!hascall(thing, "Cut") && TYPEID(thing) == GLOB.refid_filter)
 
 #define isdatum(D) (istype(D, /datum))
 //Turfs
@@ -189,7 +190,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	#define is_inquisitor_job(job_type) (istype(job_type, /datum/job/inquisitor))
 	#define is_adept_job(job_type) (istype(job_type, /datum/job/adept))
 // Serfs
-	#define is_gaffer_job(job_type) (istype(job_type, /datum/job/gaffer))
+	#define is_tomb_warden_job(job_type) (istype(job_type, /datum/job/tomb_warden))
 	#define is_apothecary_job(job_type) (istype(job_type, /datum/job/apothecary))
 // Peasantry
 	#define is_jester_job(job_type) (istype(job_type, /datum/job/jester))
@@ -197,9 +198,8 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 	#define is_mercenary_job(job_type) (istype(job_type, /datum/job/advclass/mercenary))
 	#define is_pilgrim_job(job_type) (istype(job_type, /datum/job/advclass/pilgrim))
 	#define is_vagrant_job(job_type) (istype(job_type, /datum/job/vagrant))
+	#define is_sunlord_job(job_type) (istype(job_type, /datum/job/sunlord))
 	#define is_servant_job(job_type) (istype(job_type, /datum/job/servant))
-//  Apprentices
-	#define is_gaffer_assistant_job(job_type) (istype(job_type, /datum/job/gaffer_assistant))
 // Villains
 	#define is_skeleton_job(job_type) (istype(job_type, /datum/job/skeleton))
 		#define is_skeleton_knight_job(job_type) (istype(job_type, /datum/job/skeleton/knight))
@@ -218,3 +218,5 @@ GLOBAL_VAR_INIT(magic_appearance_detecting_image, new /image) // appearances are
 #define isappearance_or_image(thing) (isimage(thing) || (!ispath(thing) && istype(GLOB.magic_appearance_detecting_image, thing)))
 
 #define isfish(A) (istype(A, /obj/item/reagent_containers/food/snacks/fish))
+
+#define is_multi_tile_object(atom) (atom.bound_width > ICON_SIZE_X || atom.bound_height > ICON_SIZE_Y)

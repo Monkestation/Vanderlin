@@ -102,7 +102,7 @@
 		if(!D || !istype(D, /datum/stock/stockpile/custom))
 			return
 
-		var/confirm = alert(usr, "Are you sure you want to delete the custom stock for [D.name]?", "Delete Custom Stock", "Yes", "No")
+		var/confirm = tgui_alert(usr, "Are you sure you want to delete the custom stock for [D.name]?", "Delete Custom Stock", list("Yes", "No"))
 		if(confirm != "Yes")
 			return
 

@@ -263,7 +263,7 @@
 
 /datum/pet_command/protect_owner/execute_action(datum/ai_controller/controller)
 	var/mob/living/victim = controller.blackboard[BB_CURRENT_PET_TARGET]
-	if(QDELETED(victim))
+	if(QDELETED(victim) || !istype(victim))
 		return
 	// cancel the action if they're below our given crit stat, OR if we're trying to attack ourselves (this can happen on tamed mobs w/ protect subtree rarely)
 	if(victim.stat > controller.blackboard[BB_TARGET_MINIMUM_STAT] || victim == controller.pawn)

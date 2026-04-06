@@ -169,6 +169,9 @@
 	name = "Mercenary Guild"
 	first_time_text = "Mercenary Guild"
 	icon_state = "merc_guild"
+	background_track = 'sound/music/area/shop.ogg'
+	background_track_dusk = null
+	background_track_night = null
 
 /area/indoors/town/steward
 	name = "Steward's Office"
@@ -226,6 +229,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/deliverer.ogg'
 	converted_type = /area/indoors/shelter/town
+	threat_region = THREAT_REGION_TOWN
 
 /area/outdoors/town/Initialize()
 	. = ..()

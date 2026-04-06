@@ -7,7 +7,7 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_ARMOR
@@ -17,7 +17,7 @@
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 13 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -32,7 +32,7 @@
 	armor = ARMOR_MAILLE_IRON
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 13 KILOGRAMS
 
 //................ Hauberk ............... //
 /obj/item/clothing/armor/chainmail/hauberk
@@ -43,7 +43,7 @@
 	sellprice = VALUE_STEEL_ARMOR_FINE
 
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 11 KILOGRAMS
 
 /obj/item/clothing/armor/chainmail/hauberk/Initialize()
 	. = ..()
@@ -64,5 +64,5 @@
 
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 11 KILOGRAMS
 

@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(!Adjacent(user))
 		return
 	if(!brewing)
-		var/response = alert(user, "What do you wish to empty?", "[src]", "Reagents only", "Everything")
+		var/response = tgui_alert(user, "What do you wish to empty?", "[src]", list("Reagents only", "Everything"))
 		if(!response)
 			return
 		if(!Adjacent(user))

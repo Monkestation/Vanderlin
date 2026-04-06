@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/jailor
+	attribute_variance = list(
+		STAT_ENDURANCE = list(4, 6),
+		STAT_INTELLIGENCE = list(-6, -4),
+		STAT_PERCEPTION = list(-4, -3),
+		/datum/attribute/skill/combat/wrestling = list(0, 10),
+		/datum/attribute/skill/combat/unarmed = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = -4,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/craft/traps = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20
+	)
+
 /datum/job/jailor
 	title = "Jailor"
 	tutorial = "Your eyes have laid bare upon true terror in the Crimson Valley Asylum. \
@@ -28,35 +52,11 @@
 		EXP_TYPE_GARRISON = 300
 	)
 
-	jobstats = list(
-		STATKEY_STR = 5,
-		STATKEY_CON = -2,
-		STATKEY_SPD = -4,
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/whipsflails = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/wrestling = 4,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/craft/traps = 3,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/jailor
 
 /datum/job/jailor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, pick(4,5,6))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, pick(-4,-5,-6))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, pick(-3,-3,-4))
-
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(0,1), TRUE)
 
 /datum/outfit/jailor
 	name = "Jailor"

@@ -8,6 +8,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	flee_in_pain = TRUE
 	d_intent = INTENT_PARRY
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 12
 
 
 /mob/living/carbon/human/species/human/northern/highwayman/ambush
@@ -36,9 +37,25 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 30 // 50% More than goblin
 
+
+/datum/attribute_holder/sheet/job/npc/highwayman
+	attribute_variance = list(
+		STAT_STRENGTH = list(2, 4),
+		STAT_CONSTITUTION = list(0, 2)
+	)
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/combat/unarmed = 20, // Trash mobs, untrained.
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
 
 /datum/outfit/job/human/species/human/northern/highwayman/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -56,12 +73,7 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	if(prob(50))
 		neck = /obj/item/clothing/neck/coif
 	gloves = /obj/item/clothing/gloves/leather
-	H.base_strength = rand(12,14) //GENDER EQUALITY!!
-	H.base_speed = 11
-	H.base_constitution = rand(10,12) //so their limbs no longer pop off like a skeleton
-	H.base_endurance = 13
-	H.base_perception = 10
-	H.base_intelligence = 10
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/highwayman)
 	if(prob(50))
 		r_hand = /obj/item/weapon/sword/short/iron
 	else
@@ -85,11 +97,3 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	else
 		H.set_hair_style(/datum/sprite_accessory/hair/head/messy)
 		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/manly)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE) // Trash mobs, untrained.
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)

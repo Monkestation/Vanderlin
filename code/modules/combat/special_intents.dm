@@ -34,13 +34,13 @@
 	else
 		tile_coordinates = list(list(0, 0), list(1, 0), list(1, -1))
 
-	var/statmod = max(user.STASTR, user.STASPD, user.STAPER)	//It's a versatile weapon, so the scaling is versatile, too
+	var/statmod = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH), GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED), GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION))	//It's a versatile weapon, so the scaling is versatile, too
 	if(parent)
 		damage = parent.force * (statmod / 10)
 
 	target_zone = null
 	if(user.zone_selected != BODY_ZONE_CHEST)
-		if(check_zone(user.zone_selected) != user.zone_selected || user.STAPER < 11)
+		if(check_zone(user.zone_selected) != user.zone_selected || GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) < 11)
 			if(prob(33))
 				target_zone = user.zone_selected
 		else
@@ -78,7 +78,7 @@
 	var/damage
 
 /datum/special_intent/shin_swipe/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	damage = parent.force * max((1 + (((user.STASPD - 10) + (user.STAPER - 10)) / 10)), 0.1)
+	damage = parent.force * max((1 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - 10) + (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 10)) / 10)), 0.1)
 
 /datum/special_intent/shin_swipe/apply_hit(mob/living/user, obj/item/parent, turf/target)
 	for(var/mob/living/victim in target)
@@ -110,7 +110,7 @@
 	var/damage
 
 /datum/special_intent/piercing_lunge/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	damage = parent.force * max((1 + (((user.STASPD - 10) + (user.STAPER - 10)) / 10)), 0.1)
+	damage = parent.force * max((1 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) - 10) + (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 10)) / 10)), 0.1)
 
 /datum/special_intent/piercing_lunge/apply_hit(mob/living/user, obj/item/parent, turf/target)
 	for(var/mob/living/victim in target)
@@ -273,7 +273,7 @@
 	var/damage = 20
 
 /datum/special_intent/axe_swing/pre_creation(mob/living/user, obj/item/parent, turf/target)
-	damage = (parent.force * (user.STASTR / 10)) + 10
+	damage = (parent.force * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) / 10)) + 10
 
 	if(user.used_hand == 1)	//We mirror it if it's the left arm.
 		tile_coordinates += AXE_SWING_GRID_MIRROR

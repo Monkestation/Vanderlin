@@ -156,7 +156,7 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 
 	// Difficulty modifier added by the fisher's skill level
 	if(!(challenge.special_effects & FISHING_MINIGAME_RULE_NO_EXP))
-		var/skill_level = fisherman.get_skill_level(/datum/skill/labor/fishing)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(fisherman, /datum/attribute/skill/labor/fishing)
 
 		switch(skill_level)
 			if(0)

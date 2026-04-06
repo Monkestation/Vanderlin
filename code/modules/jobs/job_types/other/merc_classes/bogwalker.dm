@@ -1,3 +1,32 @@
+/datum/attribute_holder/sheet/job/bogwalker
+	attribute_variance = list(
+		/datum/attribute/skill/misc/reading = list(0, 10),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = -2,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/traps = 30,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/labor/lumberjacking = 30
+	)
+
+
 /datum/job/advclass/mercenary/bogwalker
 	title = "Bogwalker"
 	tutorial = "You've spent your years wandering the bogs of Psydonia, eking out a living a hunter of both men and beast. \
@@ -9,32 +38,7 @@
 	total_positions = 2
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 3,
-		STATKEY_SPD = 1,
-		STATKEY_END = 2,
-		STATKEY_INT = -2
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 4,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/traps = 3,
-		/datum/skill/labor/taming = 1,
-		/datum/skill/labor/lumberjacking = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/bogwalker
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -46,9 +50,6 @@
 /datum/job/advclass/mercenary/bogwalker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 9
-
-	var/reading_skill = pick(0, 1)
-	spawned.adjust_skillrank(/datum/skill/misc/reading, reading_skill)
 
 /datum/outfit/mercenary/bogwalker
 	name = "Bogwalker (Mercenary)"

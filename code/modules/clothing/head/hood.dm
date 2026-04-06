@@ -47,6 +47,7 @@
 	body_parts_covered = NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -175,6 +176,6 @@
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
-	flags_inv = HIDEFACE
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT
+	item_weight = 145 GRAMS

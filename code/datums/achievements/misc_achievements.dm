@@ -40,3 +40,22 @@
 	name = "Getting an upgrade"
 	desc = ""
 	database_id= MEDAL_MATERIALCRAFT
+
+/datum/award/achievement/misc/borbop_made_an_oopsie
+	name = "Borbop Broke Something!"
+	desc = "You were in a round where Borbop tm'd something that broke"
+	icon = "oopsie"
+	database_id = "oopsie_borbop"
+	award_flags = AWARD_FLAG_REWARD
+	triumph_reward = 10
+
+/client/proc/borbop_oopsie()
+	set category = "Debug.Core"
+	set name = "The Borbop Fuck Up Award"
+	set desc = "Gives connected people an award."
+
+	if(key != "Dwasint")
+		return //lol lmao even
+
+	for(var/client/C in GLOB.clients)
+		C.give_award(/datum/award/achievement/misc/borbop_made_an_oopsie, C.mob)

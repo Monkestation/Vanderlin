@@ -11,9 +11,8 @@
 	var/list/stuff_shit = list()
 
 	var/current_capacity = 0
-	var/maximum_capacity = 60 //arbitrary maximum amount of weight allowed in the cart before it says fuck off
+	var/maximum_capacity = 300 KILOGRAMS
 
-	var/arbitrary_living_creature_weight = 10 // The arbitrary weight for any thing of a mob and living variety
 	var/obj/item/gear/wood/upgrade = null
 	facepull = FALSE
 	throw_range = 1
@@ -36,7 +35,7 @@
 		if(AM == user)
 			AM.forceMove(L)
 			stuff_shit -= AM
-			current_capacity = max(current_capacity-arbitrary_living_creature_weight, 0)
+			current_capacity = max(current_capacity - user.get_mob_weight() + user.carry_weight, 0)
 			update_appearance(UPDATE_ICON)
 			break
 
@@ -110,17 +109,17 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 
 		//First, we do ores.
-		var/list/ore_list = sieve_ores_and_gems(user,T)
+		var/list/ore_list = sieve_ores_and_gems(user, T)
 		if(LAZYLEN(ore_list))
 			for(var/obj/item/I as anything in ore_list)
-				if(!interruptable_put(user,I))
+				if(!interruptable_put(user, I))
 					return
 			return
 
 		var/list/wood_list = sieve_wood(user, T)
 		if(LAZYLEN(wood_list))
 			for(var/obj/item/I as anything in wood_list)
-				if(!interruptable_put(user,I))
+				if(!interruptable_put(user, I))
 					return
 			return
 
@@ -182,20 +181,22 @@
 	return item_sieve(user, user_turf, list(/obj/item/grown/log/tree, /obj/item/natural/bundle/stick))
 
 
-/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM)
+/obj/structure/handcart/proc/put_in(mob/user, atom/movable/AM, forced)
 	if(!insertion_allowed(AM))
 		return
 	var/weight = NONE
 	if(isitem(AM))
 		var/obj/item/I = AM
-		if((current_capacity + I.w_class) > maximum_capacity)
+		var/item_weight = I.get_carry_weight(user)
+		if((current_capacity + item_weight) > maximum_capacity)
 			return FALSE
-		weight = I.w_class
+		weight = item_weight
 	if(isliving(AM))
-		if((current_capacity + arbitrary_living_creature_weight) > maximum_capacity)
+		var/mob/living/mob = AM
+		if((current_capacity + mob.get_mob_weight() + mob.carry_weight) > maximum_capacity)
 			return FALSE
-		weight = arbitrary_living_creature_weight
-	if(isitem(AM) && !user?.transferItemToLoc(AM, src))
+		weight = mob.get_mob_weight() + mob.carry_weight
+	if(!forced && (isitem(AM) && !user?.transferItemToLoc(AM, src)))
 		return FALSE
 	else
 		AM.forceMove(src)

@@ -95,7 +95,7 @@
 /datum/supply_pack/armor/light/shamaniccoat
 	name = "Shamanic Coat"
 	cost = 30
-	contains = /obj/item/clothing/armor/leather/heavy/atgervi
+	contains = /obj/item/clothing/armor/leather/atgervi
 
 // SHIRT ARMOR
 

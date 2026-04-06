@@ -101,6 +101,7 @@
 	desc = "Take to the skies or return to the ground."
 	button_icon_state = "flight"
 	var/active_background_icon_state = "spell1"
+	check_flags = AB_CHECK_IMMOBILE | AB_CHECK_CONSCIOUS
 
 	/// If currently flying, for feedback
 	var/flying = FALSE
@@ -156,7 +157,7 @@
 
 	var/mob/living/flier = owner
 
-	if(flier.get_encumbrance() > 0.7)
+	if(flier.encumbrance >= ENCUMBRANCE_HEAVY)
 		owner.balloon_alert(owner, "too heavy!")
 		return FALSE
 
