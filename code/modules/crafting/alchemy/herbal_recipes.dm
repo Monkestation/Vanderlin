@@ -518,8 +518,8 @@
 		if(method in list(TOUCH, VAPOR, PATCH))
 			M.adjustFireLoss(reac_volume / 15)
 		
-			return ..()
-			
+			 ..()
+
 	/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(20)
 	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
