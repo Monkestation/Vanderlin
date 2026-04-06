@@ -509,7 +509,7 @@
 	name = "Flamekiss Liqeur"
 	description = "Burning liquid which is tailored to dissolve flesh."
 	reagent_state = LIQUID
-	color = "#6b2f2f"
+	color = "#790404"
 	metabolization_rate = 0.1
 	taste_description = "burning pain beyond description"
 
@@ -522,7 +522,7 @@
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
-	color = "#664700" // rgb: 102, 71, 0
+	color = "#1b8600" // rgb: 102, 71, 0
 	metabolization_rate = 0.1
 	taste_description = "fleeing life"
 
@@ -557,7 +557,7 @@
 /datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
 	name = "Dark sun's shine"
 	description = "Neurodegenerative brew which makes the user go temporarily insane with a craving for violence and blood."
-	color = "#664700" // rgb: 102, 71, 0
+	color = "#053604" // rgb: 102, 71, 0
 	metabolization_rate = 0.1
 	taste_description = "pure, unrestrained hate and hunger"
 
