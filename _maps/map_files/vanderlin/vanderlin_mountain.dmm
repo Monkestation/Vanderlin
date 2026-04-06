@@ -14934,6 +14934,15 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"xOf" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains/anvil/snowyforest)
 "xOU" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt,
@@ -42434,7 +42443,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -42636,7 +42645,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -42837,7 +42846,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -43038,7 +43047,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 atL
 aGz
@@ -43239,7 +43248,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 atL
 atL
@@ -43644,7 +43653,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 atL
 aGz
@@ -43847,7 +43856,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -44049,8 +44058,8 @@ adi
 adi
 adi
 adi
-atL
-atL
+adi
+adi
 aGz
 aGz
 aGz
@@ -44252,7 +44261,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -44454,7 +44463,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -44656,7 +44665,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -44858,7 +44867,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -46476,8 +46485,8 @@ adi
 adi
 adi
 adi
-atL
-atL
+adi
+adi
 atL
 aGz
 aGz
@@ -46680,7 +46689,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -46883,8 +46892,8 @@ adi
 adi
 adi
 adi
-atL
-atL
+adi
+adi
 aGz
 aGz
 aGz
@@ -47086,7 +47095,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 atL
 aGz
 aGz
@@ -47289,7 +47298,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -47694,7 +47703,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -47896,7 +47905,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -48301,7 +48310,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -48504,7 +48513,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -48706,7 +48715,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -48908,7 +48917,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -49313,7 +49322,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -49515,7 +49524,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -49717,7 +49726,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 aGz
 aGz
@@ -50929,7 +50938,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -51131,7 +51140,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -51333,7 +51342,7 @@ adi
 adi
 adi
 adi
-atL
+adi
 aGz
 aGz
 aGz
@@ -82835,7 +82844,7 @@ adi
 adi
 auy
 apy
-aqx
+apy
 aqx
 aqx
 aqx
@@ -83037,7 +83046,7 @@ adi
 adi
 acM
 auy
-aqx
+apy
 aqx
 aqx
 aqx
@@ -83238,8 +83247,8 @@ adi
 auy
 acM
 azu
-aqx
-aqx
+azu
+xOf
 aqx
 aqx
 aqx
@@ -83439,8 +83448,8 @@ adi
 adi
 apy
 acM
-aqx
-aqx
+apy
+xOf
 aqx
 aqx
 aqx
@@ -83640,7 +83649,7 @@ adi
 adi
 adi
 azu
-aqx
+azu
 aqx
 aqx
 aqx
@@ -83843,7 +83852,7 @@ adi
 adi
 auy
 apy
-aqx
+aSw
 aqx
 aqx
 aqx
@@ -84043,10 +84052,10 @@ adi
 adi
 adi
 adi
-acA
+apy
 auy
-aqx
-aqx
+apy
+aSp
 aqx
 aqx
 aqx
@@ -84248,8 +84257,8 @@ adi
 adi
 acM
 azu
-aqx
-aqx
+apy
+aSp
 aqx
 aqx
 aqx
@@ -84450,8 +84459,8 @@ adi
 adi
 adi
 acM
-aqx
-aqx
+azu
+acM
 aqx
 aqx
 aqx
@@ -84653,7 +84662,7 @@ adi
 adi
 acM
 auy
-aqx
+azu
 aqx
 aqx
 aqx
@@ -84855,7 +84864,7 @@ adi
 adi
 adi
 acM
-aqx
+azu
 aqx
 aqx
 aqx
@@ -85057,7 +85066,7 @@ adi
 adi
 adi
 apy
-aqx
+auy
 aqx
 aqx
 aqx
@@ -85258,8 +85267,8 @@ adi
 adi
 adi
 adi
-auy
-aqx
+azu
+acM
 aqx
 aqx
 aqx
@@ -86270,8 +86279,8 @@ adi
 adi
 aVL
 alr
-auy
-aqx
+byE
+aYy
 aqx
 aqx
 aqx
@@ -86675,8 +86684,8 @@ adi
 azu
 azu
 apy
-aqx
-aqx
+aSp
+aSw
 aqx
 aqx
 aqx
@@ -86877,9 +86886,9 @@ adi
 adi
 apy
 acM
-aqx
-aqx
-aqx
+auy
+acM
+aSp
 aqx
 aqx
 aqx
@@ -87081,8 +87090,8 @@ adi
 azu
 apy
 auy
-aqx
-aqx
+acM
+aYy
 aqx
 aqx
 aqx
@@ -87284,8 +87293,8 @@ adi
 azu
 azu
 auy
-aqx
-aqx
+apy
+apy
 aqx
 aqx
 aqx
@@ -87487,7 +87496,7 @@ adi
 acM
 acM
 azu
-aqx
+azu
 aqx
 aqx
 aqx
@@ -87689,8 +87698,8 @@ adi
 adi
 adi
 azu
-auy
-aqx
+acM
+acM
 aqx
 aqx
 aqx
@@ -87893,7 +87902,7 @@ adi
 apy
 acM
 azu
-aqx
+aSp
 aqx
 aqx
 aqx
@@ -88095,7 +88104,7 @@ adi
 adi
 acM
 acM
-aqx
+azu
 aqx
 aqx
 aqx
@@ -88297,7 +88306,7 @@ adi
 adi
 adi
 acM
-aqx
+azu
 aqx
 aqx
 aqx
@@ -88702,8 +88711,8 @@ adi
 adi
 adi
 auy
-aqx
-aqx
+apy
+aSp
 aqx
 aqx
 aqx
@@ -88904,8 +88913,8 @@ adi
 adi
 adi
 apy
-auy
-aqx
+azu
+jrD
 aqx
 aqx
 aqx
@@ -89107,8 +89116,8 @@ adi
 adi
 auy
 acM
-aqx
-aqx
+auy
+aYy
 aqx
 aqx
 aqx
@@ -89309,8 +89318,8 @@ adi
 adi
 adi
 auy
-aqx
-aqx
+apy
+aYy
 aqx
 aqx
 aqx
@@ -89512,7 +89521,7 @@ adi
 adi
 apy
 auy
-aqx
+aSp
 aqx
 aqx
 aqx
@@ -89714,7 +89723,7 @@ adi
 adi
 acM
 acM
-aqx
+auy
 aqx
 aqx
 aqx
@@ -89916,7 +89925,7 @@ adi
 adi
 adi
 azu
-aqx
+acM
 aqx
 aqx
 aqx
@@ -90118,7 +90127,7 @@ adi
 adi
 adi
 apy
-aqx
+auy
 aqx
 aqx
 aqx
@@ -90723,8 +90732,8 @@ adi
 adi
 adi
 adi
-adi
 apy
+auy
 aqx
 aqx
 aqx
@@ -90925,7 +90934,7 @@ adi
 adi
 adi
 adi
-adi
+apy
 auy
 aqx
 aqx
@@ -91330,8 +91339,8 @@ aFy
 aPZ
 acM
 apy
-aqx
-aqx
+auy
+aYy
 aqx
 aqx
 aqx
@@ -91532,8 +91541,8 @@ aFy
 aDO
 acM
 auy
-aqx
-aqx
+byE
+aYy
 aqx
 aqx
 aqx
@@ -91734,8 +91743,8 @@ aFy
 abf
 auy
 azu
-aqx
-aqx
+auy
+aYy
 aqx
 aqx
 aqx
@@ -131124,7 +131133,7 @@ avR
 avR
 aLm
 aKS
-aLm
+aqx
 aqx
 aqx
 aqx
@@ -131326,7 +131335,7 @@ aLm
 aLm
 aLm
 aLm
-aLm
+aqx
 aqx
 aqx
 aqx
