@@ -696,6 +696,20 @@
 			ring.tallowed = TRUE
 			ring.update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/inqarticles/tallowpot/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+	//casts target to light sources to check whether they are on
+	var/obj/machinery/light/fueled/FO = target
+	var/obj/item/flashlight/flare/torch/FI = target
+
+	if((istype(target, /obj/machinery/light/fueled) && FO.on) || (istype(target, /obj/item/flashlight/flare/torch) && FI.on))
+		heatedup = 28
+		visible_message(span_info("[user] warms [src] using [target]."))
+		update_appearance(UPDATE_ICON_STATE)
+
+
 /obj/item/inqarticles/tallowpot/update_icon_state()
 	. = ..()
 	if(tallow)
