@@ -90,5 +90,5 @@
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/key/forrestgarrison = 1,
-		/obj/item/signal_horn = 1
+		/obj/item/signal_horn/ambush = 1
 	)
