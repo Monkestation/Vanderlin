@@ -13954,7 +13954,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "qKM" = (
 /obj/structure/stairs/stone,
-/turf/closed/mineral/random/cold,
+/turf/open/floor/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "qLO" = (
 /obj/structure/chair/bench/church/mid,
