@@ -4924,7 +4924,7 @@
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
 "avH" = (
-/turf/open/water/river/creatable,
+/turf/open/water,
 /area/under/mountains/anvil/lower)
 "avI" = (
 /obj/structure/door/weak/bolt,
@@ -12826,7 +12826,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "ioM" = (
 /obj/structure/flora/rock,
-/turf/open/water/river/creatable,
+/turf/open/water,
 /area/under/mountains/anvil/lower)
 "iqF" = (
 /obj/effect/decal/cleanable/blood/tracks,
