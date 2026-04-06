@@ -515,7 +515,7 @@
 
 		/datum/reagent/poison/herbal/acid/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with acid HURTS
 			return
-		if(method in list(TOUCH, VAPOR, PATCH))
+	if(method in list(TOUCH, VAPOR, PATCH))
 					M.adjustFireLoss(reac_volume / 15)
 				return ..()
 
