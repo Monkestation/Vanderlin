@@ -528,7 +528,7 @@
 /datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
 	qdel(BODY_ZONE_HEAD)  //admin only if they want to RP  a sniper or something. Insta kills people
 
-	
+/*
 /datum/reagent/poison/herbal/rat
 	name = "Koboldification serum"
 	description = "RATRATRATRATRATRATRATRATRATRATRAT."
@@ -541,7 +541,7 @@
 		var/species = /datum/species/kobold  //admin only EXCEPT for the bog witch, bog witch gets one vial
 		M.dna.copy_dna(species)
 		
-	
+	*/
 	
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
