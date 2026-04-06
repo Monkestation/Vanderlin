@@ -516,9 +516,18 @@
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(20)
 	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
-	if(prob(15))
-		M.emote("gag")
-		
+
+/datum/reagent/poison/herbal/juice
+	name = "Berry Juice"
+	description = "Berry juice. Totally will not make your head explode :)."
+	reagent_state = LIQUID
+	color = "#790404"  // dammit Avalon, youve gotten me again. 
+	metabolization_rate = 0.1
+	taste_description = "berry"
+
+/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
+	qdel(head)
+	
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
