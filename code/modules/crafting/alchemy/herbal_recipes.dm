@@ -527,6 +527,22 @@
 
 /datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
 	qdel(BODY_ZONE_HEAD)  //admin only if they want to RP  a sniper or something. Insta kills people
+
+	
+/datum/reagent/poison/herbal/rat
+	name = "Koboldification serum"
+	description = "RATRATRATRATRATRATRATRATRATRATRAT."
+	reagent_state = LIQUID
+	color = "#790404"  // KOBOLDS FOR LIFE
+	metabolization_rate = 0.1
+	taste_description = "scales...?"
+
+/datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
+	M.unequip_everything()
+		var/datum/dna/dna_cache = new()
+		M.dna.copy_dna(dna_cache)
+		var/species = /datum/species/kobold  //admin only EXCEPT for the bog witch, bog witch gets one vial
+	
 	
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
