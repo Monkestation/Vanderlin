@@ -700,11 +700,10 @@
 	. = ..()
 	if(!proximity_flag)
 		return
-	//casts target to light sources to check whether they are on
-	var/obj/machinery/light/fueled/FO = target
-	var/obj/item/flashlight/flare/torch/FI = target
+	//Both static light sources and torches/lanterns have on bool so this invalid cast... it just works yeah
+	var/obj/machinery/light/fueled/F = target
 
-	if((istype(target, /obj/machinery/light/fueled) && FO.on) || (istype(target, /obj/item/flashlight/flare/torch) && FI.on))
+	if((istype(target, /obj/machinery/light/fueled) || istype(target, /obj/item/flashlight/flare/torch)) && F.on)
 		heatedup = 28
 		visible_message(span_info("[user] warms [src] using [target]."))
 		update_appearance(UPDATE_ICON_STATE)
