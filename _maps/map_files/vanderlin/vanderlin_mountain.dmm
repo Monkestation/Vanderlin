@@ -1097,10 +1097,11 @@
 /turf/open/floor/church/rust,
 /area/indoors/mountains/anvil/keep)
 "aeJ" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 8
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
-/obj/structure/fluff/railing/tall/stone,
+/obj/structure/fluff/railing/wood,
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "aeM" = (
@@ -5002,10 +5003,10 @@
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
 "awf" = (
-/obj/structure/fluff/railing/tall/stone{
+/obj/structure/fluff/railing/wood{
 	dir = 4
 	},
-/obj/structure/fluff/railing/tall/stone,
+/obj/structure/fluff/railing/wood,
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "awg" = (
@@ -5123,7 +5124,7 @@
 /turf/open/floor/dirt,
 /area/under/cavelava)
 "awB" = (
-/obj/structure/fluff/railing/tall/stone,
+/obj/structure/fluff/railing/wood,
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "awC" = (
@@ -10053,15 +10054,6 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"aSp" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/tall/stone{
-	dir = 4
-	},
-/turf/open/openspace,
-/area/outdoors/mountains/anvil/snowyforest)
 "aSr" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobblerock,
@@ -10084,7 +10076,7 @@
 	},
 /area/indoors/mountains/anvil/keep)
 "aSw" = (
-/obj/structure/fluff/railing/tall/stone{
+/obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/openspace,
@@ -10687,8 +10679,9 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "aVf" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 8
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -11462,12 +11455,6 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
-"aYy" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 1
-	},
-/turf/open/openspace,
-/area/outdoors/mountains/anvil/snowyforest)
 "aYz" = (
 /obj/effect/mapping_helpers/structure/breaker,
 /obj/structure/door/iron,
@@ -11770,6 +11757,10 @@
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"biC" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/cobblerock,
+/area/outdoors/mountains/anvil/snowyforest)
 "bkI" = (
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/grass/cold,
@@ -12100,9 +12091,10 @@
 /turf/open/floor/tile/masonic,
 /area/indoors/mountains/anvil/upperkeep)
 "dch" = (
-/obj/structure/fluff/railing/tall/stone,
-/obj/structure/fluff/railing/tall/stone{
-	dir = 8
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -12254,8 +12246,8 @@
 "eai" = (
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
-"eau" = (
-/obj/structure/fluff/railing/tall/stone,
+"edX" = (
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
 "ehU" = (
@@ -12499,10 +12491,11 @@
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
 "gwv" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 8
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
-/obj/machinery/light/fueled/firebowl,
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/snowyforest)
 "gBK" = (
@@ -13256,6 +13249,12 @@
 "lIA" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/peak)
+"lNx" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains/anvil/snowyforest)
 "lOi" = (
 /obj/item/reagent_containers/glass/carafe/gold{
 	pixel_y = 6
@@ -13474,6 +13473,10 @@
 	dir = 5
 	},
 /area/outdoors/mountains/anvil/peak)
+"nhf" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/cobble/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "nix" = (
 /obj/effect/landmark/start/adeptlate,
 /turf/open/floor/dirt,
@@ -13860,6 +13863,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
+"qlt" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/cobble/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "qlR" = (
 /obj/projectile/bullet/glass,
 /obj/effect/decal/cleanable/debris/stone,
@@ -14186,6 +14193,10 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/outdoors/mountains/anvil/peak)
+"sEe" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/cobblerock/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "sFc" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/table/wood/counter{
@@ -14912,6 +14923,13 @@
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"xzI" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/openspace,
+/area/outdoors/mountains/anvil/snowyforest)
 "xDI" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/tile/masonic{
@@ -14938,15 +14956,6 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"xOf" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 1
-	},
-/obj/structure/fluff/railing/tall/stone{
-	dir = 8
-	},
-/turf/open/openspace,
-/area/outdoors/mountains/anvil/snowyforest)
 "xOU" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt,
@@ -57164,7 +57173,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 acM
 adi
@@ -58176,7 +58185,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 auy
 apy
@@ -58379,7 +58388,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 acM
 azu
 adi
@@ -58986,7 +58995,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 acM
 acM
 auy
@@ -59189,7 +59198,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 apy
 acM
 adi
@@ -59594,7 +59603,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 apy
 acM
@@ -59797,7 +59806,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 acM
 acM
 acM
@@ -60202,7 +60211,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 azu
 apy
 azu
@@ -60810,7 +60819,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 azu
 acM
@@ -61013,7 +61022,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 acM
 acM
 apy
@@ -61216,7 +61225,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 acM
 azu
@@ -61419,7 +61428,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 azu
 apy
 azu
@@ -61622,7 +61631,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 apy
 auy
@@ -61825,7 +61834,7 @@ aqx
 aqx
 aqx
 aqx
-aVf
+lNx
 aqx
 azu
 acM
@@ -62233,7 +62242,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 acM
 azu
 auy
@@ -62436,7 +62445,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 apy
 azu
 auy
@@ -62639,7 +62648,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 azu
 auy
 auy
@@ -64664,8 +64673,8 @@ aqx
 aqx
 aqx
 aqx
-aVf
-aeJ
+lNx
+xzI
 auy
 azu
 azu
@@ -64868,7 +64877,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 apy
 azu
@@ -65071,7 +65080,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 acM
 apy
@@ -65274,7 +65283,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 auy
 auy
 apy
@@ -65479,7 +65488,7 @@ aqx
 aqx
 aqx
 aqx
-aVf
+lNx
 auy
 acM
 acM
@@ -65682,16 +65691,16 @@ aqx
 aqx
 aqx
 aqx
-aVf
-aeJ
+lNx
+xzI
 aYH
 apy
 auy
 aqx
 aqx
 aqx
-aVf
-aVf
+lNx
+lNx
 aUp
 aqx
 aqx
@@ -73764,9 +73773,9 @@ awB
 acM
 auy
 auy
-azu
+jrD
 gwv
-aYy
+aqx
 aqx
 aqx
 aqx
@@ -74373,8 +74382,8 @@ apy
 acM
 auy
 acM
-apy
-aSp
+qlt
+aSw
 aSw
 aqx
 aqx
@@ -74576,9 +74585,9 @@ auy
 apy
 auy
 acM
-apy
-aiI
-aYy
+nhf
+sEe
+aqx
 aqx
 aqx
 aqx
@@ -74781,8 +74790,8 @@ auy
 azu
 acM
 apy
-apy
-aSp
+qlt
+aSw
 aqx
 aqx
 aqx
@@ -74984,8 +74993,8 @@ apy
 auy
 azu
 auy
-apy
-aYy
+qlt
+aqx
 aqx
 aqx
 aqx
@@ -75188,8 +75197,8 @@ apy
 azu
 auy
 acM
-acM
-aSp
+sEe
+aSw
 aSw
 aqx
 aqx
@@ -75396,8 +75405,8 @@ apy
 acM
 acM
 azu
-apy
-aSp
+qlt
+aSw
 aSw
 aSw
 awf
@@ -81229,8 +81238,8 @@ auy
 azu
 azu
 auy
-azu
-aSp
+biC
+aSw
 aqx
 aqx
 aqx
@@ -81432,8 +81441,8 @@ azu
 auy
 auy
 apy
-auy
-aYy
+edX
+aqx
 aqx
 aqx
 aqx
@@ -81634,8 +81643,8 @@ apy
 auy
 apy
 acM
-azu
-aSp
+biC
+aSw
 aqx
 aqx
 aqx
@@ -81838,7 +81847,7 @@ adi
 auy
 apy
 auy
-aYy
+aqx
 aqx
 aqx
 aqx
@@ -82039,8 +82048,8 @@ adi
 adi
 adi
 apy
-acM
-aSp
+sEe
+aSw
 aqx
 aqx
 aqx
@@ -83251,8 +83260,8 @@ adi
 auy
 acM
 azu
-azu
-xOf
+biC
+aVf
 aqx
 aqx
 aqx
@@ -83452,8 +83461,8 @@ adi
 adi
 apy
 acM
-apy
-xOf
+qlt
+aVf
 aqx
 aqx
 aqx
@@ -84058,8 +84067,8 @@ adi
 adi
 apy
 auy
-apy
-aSp
+qlt
+aSw
 aqx
 aqx
 aqx
@@ -84261,8 +84270,8 @@ adi
 adi
 acM
 azu
-apy
-aSp
+qlt
+aSw
 aqx
 aqx
 aqx
@@ -85045,7 +85054,7 @@ aqx
 aqx
 aqx
 aqx
-aeJ
+xzI
 azu
 apy
 aFy
@@ -86283,7 +86292,7 @@ adi
 adi
 aVL
 alr
-eau
+edX
 aqx
 aqx
 aqx
@@ -86687,8 +86696,8 @@ adi
 adi
 azu
 azu
-apy
-aSp
+qlt
+aSw
 aSw
 aqx
 aqx
@@ -86892,7 +86901,7 @@ apy
 acM
 auy
 acM
-aSp
+aSw
 aqx
 aqx
 aqx
@@ -87094,8 +87103,8 @@ adi
 azu
 apy
 auy
-acM
-aYy
+sEe
+aqx
 aqx
 aqx
 aqx
@@ -87905,8 +87914,8 @@ adi
 adi
 apy
 acM
-azu
-aSp
+biC
+aSw
 aqx
 aqx
 aqx
@@ -88715,8 +88724,8 @@ adi
 adi
 adi
 auy
-apy
-aSp
+qlt
+aSw
 aqx
 aqx
 aqx
@@ -89120,8 +89129,8 @@ adi
 adi
 auy
 acM
-auy
-aYy
+edX
+aqx
 aqx
 aqx
 aqx
@@ -89322,8 +89331,8 @@ adi
 adi
 adi
 auy
-apy
-aYy
+qlt
+aqx
 aqx
 aqx
 aqx
@@ -89524,8 +89533,8 @@ adi
 adi
 adi
 apy
-auy
-aSp
+edX
+aSw
 aqx
 aqx
 aqx
@@ -91343,8 +91352,8 @@ aFy
 aPZ
 acM
 apy
-auy
-aYy
+edX
+aqx
 aqx
 aqx
 aqx
@@ -91545,8 +91554,8 @@ aFy
 aDO
 acM
 auy
-auy
-aYy
+edX
+aqx
 aqx
 aqx
 aqx
@@ -91747,8 +91756,8 @@ aFy
 abf
 auy
 azu
-auy
-aYy
+edX
+aqx
 aqx
 aqx
 aqx
