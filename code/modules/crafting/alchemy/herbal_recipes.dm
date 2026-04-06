@@ -572,6 +572,23 @@
 	REMOVE_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
 	REMOVE_TRAIT(L, MAGIC_TRAIT, "[type]")
 
+/datum/reagent/poison/herbal/kingsbane
+	name = "Kingsbane"
+	description = "A poison used by cultists of matthios, causing the afflicted to be disgusted by money. Some say this is only the dilute version, with the real, potent one capable of ruining ones mind."
+	color = "#ffb300" 
+	metabolization_rate = 0.1
+	taste_description = "cold gold"
+
+/datum/reagent/poison/herbal/kingsbane/on_mob_add(mob/living/L)
+	. = ..()
+	to_chat(L, span_notice("You suddenly feel sick around mammons..."))
+	ADD_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
+
+/datum/reagent/poison/herbal/kingsbane/on_mob_delete(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
+
+
 /datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
 	. = ..()
 
