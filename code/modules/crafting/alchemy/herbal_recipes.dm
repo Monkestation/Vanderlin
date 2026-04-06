@@ -522,7 +522,7 @@
 		
 	return ..()
 
-	/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
+/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(20)
 	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
 
