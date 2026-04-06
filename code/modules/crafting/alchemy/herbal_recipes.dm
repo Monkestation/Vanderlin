@@ -600,12 +600,12 @@
 	. = ..()
 	to_chat(L, span_notice("You twitch, you drool, you hunger. You are filled with inescapable rage and hatred for all around you, and must let it out. KILL THEM ALL!"))
 	ADD_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
-	ADD_TRAIT(L, MAGIC_TRAIT, "[type]")
+	ADD_TRAIT(L, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/rajaijah/on_mob_delete(mob/living/L)
 	. = ..()
 	REMOVE_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
-	REMOVE_TRAIT(L, MAGIC_TRAIT, "[type]")
+	REMOVE_TRAIT(L, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane
 	name = "Kingsbane"
