@@ -538,10 +538,9 @@
 	taste_description = "scales...?"
 
 /datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
-	M.unequip_everything()
-		var/datum/dna/dna_cache = new()
-		M.dna.copy_dna(dna_cache)
 		var/species = /datum/species/kobold  //admin only EXCEPT for the bog witch, bog witch gets one vial
+		M.dna.copy_dna(species)
+		
 	
 	
 /datum/reagent/poison/herbal/ghoulpowder
