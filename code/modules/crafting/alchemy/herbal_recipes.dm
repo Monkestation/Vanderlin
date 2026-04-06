@@ -525,8 +525,8 @@
 	metabolization_rate = 0.1
 	taste_description = "berry"
 
-/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
-	qdel(head)
+/datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
+	qdel(head)  //admin only if they want to RP  a sniper or something. Insta kills people
 	
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
