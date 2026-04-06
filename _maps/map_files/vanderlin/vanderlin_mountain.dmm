@@ -11802,6 +11802,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"byE" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/snowyforest)
 "bzR" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -12494,6 +12498,7 @@
 /obj/structure/fluff/railing/tall/stone{
 	dir = 8
 	},
+/obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/snowyforest)
 "gBK" = (
@@ -34158,7 +34163,7 @@ adi
 adi
 adi
 adi
-aGz
+adi
 aGz
 ada
 ada
@@ -34361,8 +34366,8 @@ adi
 adi
 adi
 adi
-aGz
-aGz
+adi
+adi
 ada
 ada
 ada
@@ -34564,8 +34569,8 @@ adi
 adi
 adi
 adi
-aGz
-aGz
+adi
+adi
 aGz
 ada
 ada
@@ -34768,8 +34773,8 @@ adi
 adi
 adi
 adi
-aGz
-aGz
+adi
+adi
 aGz
 aGz
 aGz
@@ -34970,12 +34975,12 @@ adi
 adi
 adi
 adi
-aGz
-aGz
-aGz
-aGz
-aGz
-aGz
+adi
+adi
+adi
+adi
+adi
+adi
 adi
 adi
 aGz
@@ -35174,9 +35179,9 @@ adi
 adi
 adi
 adi
-aGz
-aGz
-aGz
+adi
+adi
+adi
 adi
 adi
 adi
@@ -74559,7 +74564,7 @@ apy
 auy
 acM
 apy
-acM
+aiI
 aYy
 aqx
 aqx
@@ -75157,7 +75162,7 @@ aqx
 aqx
 apy
 aig
-auy
+byE
 auy
 acM
 adi
