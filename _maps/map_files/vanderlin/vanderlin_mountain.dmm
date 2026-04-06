@@ -12254,6 +12254,10 @@
 "eai" = (
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
+"eau" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/snowyforest)
 "ehU" = (
 /obj/structure/table/wood/large/corner_new,
 /obj/item/statue/bronze/comb,
@@ -85873,7 +85877,7 @@ adi
 adi
 adi
 adi
-acM
+aiI
 azu
 aqx
 aqx
@@ -86279,8 +86283,8 @@ adi
 adi
 aVL
 alr
-byE
-aYy
+eau
+aqx
 aqx
 aqx
 aqx
@@ -91541,7 +91545,7 @@ aFy
 aDO
 acM
 auy
-byE
+auy
 aYy
 aqx
 aqx
@@ -92955,7 +92959,7 @@ adi
 adi
 adi
 adi
-azu
+jrD
 apy
 apy
 aqx
