@@ -526,6 +526,7 @@
 	taste_description = "berry"
 
 /datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
+var/obj/item/bodypart/head/head = target.get_bodypart(BODY_ZONE_HEAD)
 	qdel(head)  //admin only if they want to RP  a sniper or something. Insta kills people
 	
 /datum/reagent/poison/herbal/ghoulpowder
