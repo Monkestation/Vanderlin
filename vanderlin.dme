@@ -1067,6 +1067,7 @@
 #include "code\datums\components\augments\augmentable.dm"
 #include "code\datums\components\augments\augment_datums\_base.dm"
 #include "code\datums\components\augments\augment_datums\armor.dm"
+#include "code\datums\components\augments\augment_datums\misc.dm"
 #include "code\datums\components\augments\augment_datums\skills.dm"
 #include "code\datums\components\augments\augment_datums\special.dm"
 #include "code\datums\components\augments\augment_datums\stats.dm"
