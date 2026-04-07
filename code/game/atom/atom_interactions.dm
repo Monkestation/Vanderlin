@@ -172,8 +172,8 @@
 	if(src == user)
 		if(offered_item_ref)
 			cancel_offering_item()
-		else
-			to_chat(user, span_warning("I can't offer myself an item!"))
+			return ITEM_INTERACT_SUCCESS
+		to_chat(user, span_warning("I can't offer myself an item!"))
 		return ITEM_INTERACT_BLOCKING
 
 	if(user.offered_item_ref)
@@ -191,12 +191,12 @@
 
 	if(HAS_TRAIT(tool, TRAIT_NODROP))
 		to_chat(user, span_warning("I can't offer this."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	if(user.offer_item(src, tool))
-		return ITEM_INTERACT_SUCCESS
+	if(!user.offer_item(src, tool))
+		return ITEM_INTERACT_BLOCKING
 
-	return ITEM_INTERACT_BLOCKING
+	return ITEM_INTERACT_SUCCESS
 
 /**
  * Called when this atom has an item used on it.
