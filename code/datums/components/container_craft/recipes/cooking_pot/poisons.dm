@@ -105,7 +105,7 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The fumes from the pot smell of sweetness and deception..."
 
-/datum/container_craft/cooking/herbal_tea/zomb
+/datum/container_craft/cooking/herbal_tea/ghoulpowder
 	name = "Astuce paralytic"
 	created_reagent = /datum/reagent/poison/herbal/ghoulpowder
 	water_conversion = 1
