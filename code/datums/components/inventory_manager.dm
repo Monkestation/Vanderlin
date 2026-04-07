@@ -170,12 +170,12 @@
 
 /datum/component/ai_inventory_manager/proc/get_item(category)
 	RETURN_TYPE(/obj/item)
-	var/list/category = inventory_map[category]
+	var/list/items = inventory_map[category]
 
-	if(!length(category))
+	if(!length(items))
 		return null
 
-	return category[1]
+	return items[1]
 
 /datum/component/ai_inventory_manager/proc/get_item_slot(obj/item/item, category)
 	return inventory_map[category]?[item]
