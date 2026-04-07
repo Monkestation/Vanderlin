@@ -119,6 +119,7 @@
 	wetable = FALSE
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
 	dyeable = TRUE
+	item_weight = 3
 
 /obj/item/clothing/shoes/boots/hunter/apply_components()
 	. = ..()
