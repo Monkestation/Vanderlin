@@ -5248,7 +5248,7 @@
 /obj/item/key/houses/house4,
 /obj/item/key/houses/house5,
 /obj/item/key/houses/house6,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -9966,7 +9966,7 @@
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town/clinic_large)
 "gyi" = (
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/key/medroomi,
 /obj/item/key/medroomii,
 /obj/item/key/medroomiii,
@@ -12301,7 +12301,7 @@
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/steward,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -15596,7 +15596,7 @@
 /obj/item/key/atarms,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32
 	},
 /turf/open/floor/wood,
@@ -19082,7 +19082,7 @@
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
@@ -20344,7 +20344,7 @@
 /obj/item/key/vault,
 /obj/effect/mapping_helpers/access/keyset/manor/vault,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},
@@ -25339,7 +25339,7 @@
 /obj/item/servant_bell,
 /obj/item/servant_bell,
 /obj/item/servant_bell,
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/item/servant_bell,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/town/keep/servant)
@@ -27876,7 +27876,7 @@
 /obj/item/key/tomb,
 /obj/item/key/tomb,
 /obj/item/key/tombwarden,
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = -32
 	},

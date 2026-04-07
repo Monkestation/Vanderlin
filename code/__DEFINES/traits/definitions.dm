@@ -348,7 +348,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
-#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -523,6 +522,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // **** item traits
 /// Can't drop
 #define TRAIT_NODROP "nodrop"
+/// cannot be inserted in a storage.
+#define TRAIT_NO_STORAGE_INSERT "no_storage_insert"
 /// Can't be embedded
 #define TRAIT_NOEMBED "noembed"
 /// Can't be teleported
@@ -543,7 +544,17 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
-
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
+
+//important_recursive_contents traits
+/*
+ * Used for movables that need to be updated, via COMSIG_ENTER_AREA and COMSIG_EXIT_AREA, when transitioning areas.
+ * Use [/atom/movable/proc/become_area_sensitive(trait_source)] to properly enable it. How you remove it isn't as important.
+ */
+#define TRAIT_AREA_SENSITIVE "area-sensitive"
+///every hearing sensitive atom has this trait
+#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
+///every object that is currently the active storage of some client mob has this trait
+#define TRAIT_ACTIVE_STORAGE "active_storage"

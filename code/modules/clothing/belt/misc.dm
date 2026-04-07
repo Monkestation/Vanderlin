@@ -185,12 +185,12 @@
 	if(prob(50))
 		new /obj/item/coin/gold/pile(src)
 
-/obj/item/storage/belt/pouch/medicine
+/obj/item/storage/belt/pouch/medicine/populate_contents()
 	new /obj/item/needle(src)
 	new /obj/item/natural/bundle/cloth/bandage/full(src)
 	new /obj/item/reagent_containers/glass/bottle/healthpot(src)
 
-/obj/item/storage/belt/pouch/food
+/obj/item/storage/belt/pouch/food/populate_contents()
 	new /obj/item/reagent_containers/food/snacks/hardtack(src)
 
 /obj/item/storage/belt/pouch/bullets/populate_contents()
@@ -244,7 +244,7 @@
 	desc = "A large but rudimentary cloth sack strapped to the back for storing a medium number of items."
 	icon_state = "rucksack"
 	item_state = "rucksack"
-	component_type = /datum/storage/satchel/cloth/big
+	storage_type = /datum/storage/satchel/cloth/big
 
 /obj/item/storage/backpack/satchel/heartfelt/populate_contents()
 	new /obj/item/natural/feather(src)

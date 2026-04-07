@@ -378,7 +378,7 @@
 	icon_state = "gronnleatherarmor"
 	item_state = "gronnleatherarmor"
 	armor = ARMOR_GRONN_LIGHT
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/component/storage/concrete/grid/cloak
 
 /obj/item/clothing/armor/leather/jerkin/belted/long
 	icon_state = "roguearmor_coat"

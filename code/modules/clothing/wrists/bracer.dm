@@ -125,8 +125,8 @@
 /obj/item/clothing/wrists/bracers/leather/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
-	AddComponent(/datum/component/storage/concrete/scabbard/knife)
+	AddElement(/datum/element/update_icon_updates_onmob, slot_flags | ITEM_SLOT_HANDS)
+	create_storage(/datum/storage/no_interface/scabbard/knife)
 
 /obj/item/clothing/wrists/bracers/psythorns
 	name = "psydonian thorns"

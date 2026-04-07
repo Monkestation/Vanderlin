@@ -906,7 +906,7 @@
 	if(usr.incapacitated(IGNORE_GRAB))
 		return TRUE
 
-	if(active.attempt_insert(to_put, usr, params = params))
+	if(active.attempt_insert(to_put, usr, modifiers = modifiers))
 		active.refresh_views()
 
 	return TRUE
@@ -956,7 +956,7 @@
 	if(!coordinates)
 		return
 
-	if(active_storage.can_insert(held_item, usr, FALSE, params = params))
+	if(active_storage.can_insert(held_item, usr, FALSE, modifiers = modifiers))
 		hovering.color = COLOR_ASSEMBLY_GOLD
 	else
 		hovering.color = COLOR_RED_LIGHT

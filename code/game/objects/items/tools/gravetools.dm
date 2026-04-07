@@ -43,7 +43,7 @@
 			return
 		if(!heldclod)
 			return
-		if(!SEND_SIGNAL(S, COMSIG_TRY_STORAGE_INSERT, src.heldclod, user, FALSE, FALSE))
+		if(!S.atom_storage?.attempt_insert(heldclod))
 			return
 		heldclod = null
 		playsound(S,'sound/items/empty_shovel.ogg', 100, TRUE)

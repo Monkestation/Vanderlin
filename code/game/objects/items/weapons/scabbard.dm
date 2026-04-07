@@ -117,6 +117,10 @@
 	sellprice = 50
 	item_weight = 350 GRAMS
 
+/obj/item/weapon/scabbard/sword/noble/daewalker/Initialize(mapload)
+	. = ..()
+	create_storage(/datum/storage/no_interface/scabbard/daewalker)
+
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
 	desc = "A scabbard designed to hold a sword. This one is lined with golden fittings, fit for a royal."

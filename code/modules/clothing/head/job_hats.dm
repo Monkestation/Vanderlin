@@ -218,4 +218,4 @@
 
 /obj/item/clothing/head/gnomecap/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)
+	create_storage(/datum/storage/coin_pouch)

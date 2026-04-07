@@ -6,6 +6,32 @@
 	quickdraw = TRUE
 	insert_preposition = "in"
 
+// /datum/component/storage/concrete/scabbard/RegisterWithParent()
+// 	. = ..()
+// 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE, PROC_REF(update_icon_state))
+
+// /datum/component/storage/concrete/scabbard/UnregisterFromParent()
+// 	UnregisterSignal(parent, COMSIG_ATOM_UPDATE_ICON_STATE)
+// 	. = ..()
+
+// /datum/component/storage/concrete/scabbard/proc/update_icon_state(obj/item/I)
+// 	if(!istype(I))
+// 		return
+// 	I.icon_state = initial(I.icon_state)
+// 	I.item_state = initial(I.item_state)
+
+// 	if(length(I.contents))
+// 		var/obj/item/sheathed_weapon = I.contents[1]
+// 		var/icon/possible_sheaths = icon(I.icon) //hehe
+// 		var/list/extensions = list()
+// 		for(var/s in possible_sheaths.IconStates(1))
+// 			extensions[s] = TRUE
+// 		qdel(possible_sheaths)
+// 		if(extensions[I.icon_state+"_[sheathed_weapon.icon_state]"])
+// 			I.icon_state += "_[sheathed_weapon.icon_state]"
+// 		else
+// 			I.icon_state += "-sheathed"
+
 /datum/storage/no_interface/scabbard/knife/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/knife))
@@ -13,6 +39,10 @@
 /datum/storage/no_interface/scabbard/sword/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword))
+
+/datum/storage/no_interface/scabbard/daewalker/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(list(/obj/item/weapon/sword/long/daewalker))
 
 /datum/storage/no_interface/scabbard/kazengun/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
@@ -34,21 +64,21 @@
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(equipped_stress), override = TRUE)
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(unequipped_stress), override = TRUE)
 
-/datum/storage/no_interface/boots/item_interact_insert(mob/living/user, obj/item/thing, params)
+/datum/storage/no_interface/boots/item_interact_insert(mob/living/user, obj/item/thing, list/modifiers)
 	if(can_insert(thing, messages = TRUE))
 		var/atom/boots = parent
 		if(istype(thing, /obj/item/weapon/knife) && ishuman(boots?.loc))
 			var/mob/living/carbon/human/unlucky = boots.loc
-			if(unlucky.shoes == parent && prob(40 - max((unlucky.STALUC * 4), 0)))
+			if(unlucky.shoes == parent && prob(40 - max((GET_MOB_ATTRIBUTE_VALUE(unlucky, STAT_FORTUNE) * 4), 0)))
 				var/cached_aim = user.zone_selected
 				user.zone_selected = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-				unlucky.attackby(thing, user, params)
+				unlucky.attackby(thing, user, modifiers)
 				to_chat(unlucky, span_danger("UNLUCKY! I've stabbed myself with [thing]!"))
 				user.zone_selected = cached_aim
 
 	return ..()
 
-/datum/storage/no_interface/boots/attempt_insert(obj/item/to_insert, mob/user, override, force, messages, params)
+/datum/storage/no_interface/boots/attempt_insert(obj/item/to_insert, mob/user, override, force, messages, list/modifiers)
 	. = ..()
 	if(!.)
 		return
@@ -94,3 +124,8 @@
 		return
 
 	user.remove_stress(/datum/stress_event/fullshoe)
+
+/datum/storage/no_interface/toilet
+	max_slots = 5
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = 5

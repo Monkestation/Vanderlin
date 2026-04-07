@@ -37,7 +37,7 @@
 	if(target.atom_storage && is_right_clicking && !user.cmode)
 		var/datum/storage/storage = target.atom_storage
 		if(storage.insert_on_attack)
-			storage.item_interact_insert(user, src, params)
+			storage.item_interact_insert(user, src, modifiers)
 		else if(storage.display_contents && !storage.no_interface)
 			storage.open_storage(user)
 

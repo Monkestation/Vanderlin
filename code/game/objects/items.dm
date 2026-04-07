@@ -864,12 +864,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/get_carry_weight(atom/carrier)
 	. = item_weight
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	if(storage)
-		var/modifier = 1
-		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
-			modifier = 0.5
-		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+	var/datum/storage/storage = atom_storage
+	if(!storage)
+		return
+	var/modifier = 1
+	if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+		modifier = 0.5
+	. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 /obj/item/clothing/get_carry_weight(atom/carrier)
 	switch(armor_class)
@@ -888,12 +889,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			. = item_weight
 
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	if(storage)
-		var/modifier = 1
-		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
-			modifier = 0.5
-		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+	var/datum/storage/storage = atom_storage
+	if(!storage)
+		return
+	var/modifier = 1
+	if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+		modifier = 0.5
+	. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 // called after an item is placed in an equipment slot
 // user is mob that equipped it

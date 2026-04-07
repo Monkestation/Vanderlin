@@ -423,9 +423,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * obj/item/to_insert - the item we're checking
  * * messages - if TRUE, will print out a message if the item is not valid
  * * force - bypass locked storage up to a certain level. See [code/__DEFINES/storage.dm]
- * * params - solely to check for grid storage restrictions
+ * * modifiers - click params, solely to check for grid storage restrictions
  */
-/datum/storage/proc/can_insert(obj/item/to_insert, mob/user, messages = TRUE, force = STORAGE_NOT_LOCKED, params)
+/datum/storage/proc/can_insert(obj/item/to_insert, mob/user, messages = TRUE, force = STORAGE_NOT_LOCKED, list/modifiers)
 	if(QDELETED(to_insert) || !istype(to_insert))
 		return FALSE
 
@@ -504,8 +504,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return TRUE
 
 	var/coordinates
-	if(params)
-		coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(params2list(params), SCREEN_LOC))
+	if(modifiers)
+		coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(modifiers, SCREEN_LOC))
 	else
 		coordinates = get_valid_coordinates(to_insert)
 
@@ -567,6 +567,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		total_weight += thing.w_class
 	return total_weight
 
+/datum/storage/proc/get_carry_weight(atom/carrier)
+	. = 0
+	//we do need a typecheck here
+	for(var/obj/item/stored in return_inv())
+		. += stored.get_carry_weight(carrier)
+
 /// Returns first set of valid coordinates for grid storage or none
 /datum/storage/proc/get_valid_coordinates(obj/item/to_insert)
 	for(var/current_y in 1 to screen_max_rows)
@@ -592,12 +598,12 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * override - skip feedback, only do the animation
  * * force - bypass locked storage up to a certain level. See [code/__DEFINES/storage.dm]
  * * messages - if TRUE, we will create balloon alerts for the user.
- * * params - for grids, screenloc is used to position the item inside storage
+ * * modifiers - for grids, screenloc is used to position the item inside storage
  */
-/datum/storage/proc/attempt_insert(obj/item/to_insert, mob/user, override = FALSE, force = STORAGE_NOT_LOCKED, messages = TRUE, params)
+/datum/storage/proc/attempt_insert(obj/item/to_insert, mob/user, override = FALSE, force = STORAGE_NOT_LOCKED, messages = TRUE, list/modifiers)
 	SHOULD_NOT_SLEEP(TRUE)
 
-	if(!can_insert(to_insert, user, messages = messages, force = force, params = params))
+	if(!can_insert(to_insert, user, messages = messages, force = force, modifiers = modifiers))
 		return FALSE
 
 	if(SEND_SIGNAL(parent, COMSIG_ATOM_PRE_STORED_ITEM, to_insert, user, force, messages) & BLOCK_STORAGE_INSERT)
@@ -608,8 +614,8 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 	if(!no_interface)
 		var/coordinates
-		if(params)
-			coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(params2list(params), SCREEN_LOC))
+		if(modifiers)
+			coordinates = screen_loc_to_grid_coordinates(LAZYACCESS(modifiers, SCREEN_LOC))
 		else
 			coordinates = get_valid_coordinates(to_insert)
 		add_item_to_grid(to_insert, coordinates)
@@ -801,6 +807,9 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	var/obj/item/to_remove = pick(goodies)
+	if(!istype(to_remove))
+		return FALSE
+
 	if(!remove_single(removing, to_remove))
 		return FALSE
 
@@ -1052,7 +1061,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 
 /// Called directly from the attack chain if [insert_on_attack] is TRUE.
 /// Handles inserting an item into the storage when clicked.
-/datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing)
+/datum/storage/proc/item_interact_insert(mob/living/user, obj/item/thing, list/modifiers)
 	if(attempt_insert(thing, user))
 		refresh_views() // WHY DOES IT NEED IT???
 		return TRUE

@@ -5,6 +5,10 @@
 	screen_max_rows = 3
 	screen_max_columns = 2
 
+/datum/storage/satchel/cloth/big
+	screen_max_rows = 3
+	screen_max_columns = 3
+
 /datum/storage/backpack
 	screen_max_rows = 7
 	screen_max_columns = 4
@@ -46,6 +50,29 @@
 /datum/storage/keyring/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
 	. = ..()
 	set_holdable(list(/obj/item/key))
+
+/datum/storage/keyrack
+	screen_max_rows = 2
+	screen_max_columns = 10
+	can_hold_description = "Keys"
+	insert_preposition = "on"
+	rustle_sound = 'sound/items/gems (1).ogg'
+
+/datum/storage/keyrack/New(atom/parent, screen_max_rows, screen_max_columns, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(list(/obj/item/key, /obj/item/storage/keyring, /obj/item/lockpick, /obj/item/lockpickring))
+
+/datum/storage/keyrack/can_insert(obj/item/to_insert, mob/user, messages, force, list/modifiers)
+	. = ..()
+	if(!.)
+		return
+
+	if(istype(parent, /obj/structure/keyrack))
+		var/obj/structure/keyrack/rack = parent
+		if(!rack.opened)
+			if(messages)
+				rack.balloon_alert(user, "not open!")
+			return FALSE
 
 /datum/storage/belt/knife_belt
 	screen_max_rows = 4
@@ -184,7 +211,7 @@
 	screen_max_columns = 3
 	max_specific_storage = WEIGHT_CLASS_HUGE
 
-/datum/storage/crucible/can_insert(obj/item/to_insert, mob/user, messages, force, params)
+/datum/storage/crucible/can_insert(obj/item/to_insert, mob/user, messages, force, list/modifiers)
 	. = ..()
 	if(!.)
 		return
@@ -212,7 +239,7 @@
 				to_show.balloon_alert(to_show, "not open!")
 			return FALSE
 
-/datum/storage/anvil_bin/can_insert(obj/item/to_insert, mob/user, messages, force, params)
+/datum/storage/anvil_bin/can_insert(obj/item/to_insert, mob/user, messages, force, list/modifiers)
 	. = ..()
 	if(!.)
 		return
@@ -363,3 +390,4 @@
 	. = ..()
 
 	set_holdable(list(/obj/item/kitchen, /obj/item/folding_table_stored, /obj/item/cooking, /obj/item/reagent_containers/food/snacks, /obj/item/reagent_containers, /obj/item/mobilestove))
+

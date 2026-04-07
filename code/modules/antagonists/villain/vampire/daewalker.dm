@@ -174,14 +174,9 @@
 	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	backl = /obj/item/storage/backpack/satchel/otavan
-	backr = /obj/item/weapon/scabbard/sword/noble
+	backr = /obj/item/weapon/scabbard/sword/noble/daewalker
 	r_hand = /obj/item/weapon/sword/long/daewalker
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 1, /obj/item/smokebomb = 2, /obj/item/needle/blessed = 1)
-
-/datum/outfit/daewalker/post_equip(mob/living/carbon/human/H)
-	..()
-	var/datum/component/storage/concrete/scabbard/sword/holder = H.backr?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/daewalker), list())
 
 // The Sword
 
@@ -254,7 +249,7 @@
 /obj/item/clothing/armor/medium/scale/inqcoat/armored/daewalker
 	name = "dark armored inquisitorial duster"
 	color = CLOTHING_ROYAL_BLACK
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/storage/cloak
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/armor/gambeson/heavy/inq/daewalker
