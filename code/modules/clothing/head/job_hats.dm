@@ -218,4 +218,4 @@
 
 /obj/item/clothing/head/gnomecap/Initialize()
 	. = ..()
-	create_storage(/datum/storage/coin_pouch)
+	create_storage(type = /datum/storage/coin_pouch)

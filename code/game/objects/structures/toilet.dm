@@ -8,7 +8,7 @@
 
 /obj/structure/toilet/Initialize(mapload)
 	. = ..()
-	create_storage(/datum/storage/no_interface/toilet)
+	create_storage(type = /datum/storage/no_interface/toilet)
 
 /obj/structure/toilet/attack_hand(mob/living/user, list/modifiers)
 	. = ..()

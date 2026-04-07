@@ -119,7 +119,7 @@
 
 /obj/item/weapon/scabbard/sword/noble/daewalker/Initialize(mapload)
 	. = ..()
-	create_storage(/datum/storage/no_interface/scabbard/daewalker)
+	create_storage(type = /datum/storage/no_interface/scabbard/daewalker)
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"

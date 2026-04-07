@@ -24,7 +24,7 @@
 
 /obj/item/reagent_containers/glass/cup/Initialize(mapload, vol)
 	. = ..()
-	create_storage(/datum/storage/cup)
+	create_storage(type = /datum/storage/cup)
 
 /obj/item/reagent_containers/glass/cup/wooden
 	name = "wooden cup"

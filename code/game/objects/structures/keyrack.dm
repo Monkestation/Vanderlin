@@ -14,7 +14,7 @@
 
 /obj/structure/keyrack/Initialize()
 	. = ..()
-	create_storage(/datum/storage/keyrack)
+	create_storage(type = /datum/storage/keyrack)
 	RegisterSignals(src, list(COMSIG_STORAGE_STORED_ITEM, COMSIG_STORAGE_REMOVED_ITEM), PROC_REF(inventory_changed))
 
 /obj/structure/keyrack/proc/inventory_changed()
