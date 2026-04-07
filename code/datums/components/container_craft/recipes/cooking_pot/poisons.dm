@@ -151,4 +151,4 @@
 	output_amount = 20 
 	crafting_time = 15 SECONDS
 	finished_smell = /datum/pollutant/food/bitter
-	complete_message = "The fumes from the pot smell of fresh shed blood and saliva..."
+	complete_message = "The fumes from the pot smell of burnt metal and regret..."
