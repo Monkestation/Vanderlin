@@ -559,7 +559,7 @@
 					return
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L
-					if(H.get_encumbrance() >= 0.5)
+					if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 						to_chat(H, span_info("You are too heavy to run!"))
 						return
 			m_intent = MOVE_INTENT_RUN

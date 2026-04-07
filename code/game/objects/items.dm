@@ -835,9 +835,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		playsound(src, drop_sound, DROP_SOUND_VOLUME, TRUE, ignore_walls = FALSE)
 	toggle_altgrip(user, FALSE)
 	user.update_equipment_speed_mods()
-	if(isliving(user))
-		var/mob/living/living_user = user
-		living_user.encumbrance_to_speed()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -855,15 +852,44 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTER_PICKUP, user)
 
-	if(isliving(user))
-		var/mob/living/L = user
-		L.encumbrance_to_speed()
-
 /obj/item/proc/afterdrop(mob/user)
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
 /obj/item/proc/on_found(mob/finder)
 	return
+
+/obj/item/proc/get_carry_weight(atom/carrier)
+	. = item_weight
+	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
+	if(storage)
+		var/modifier = 1
+		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+			modifier = 0.5
+		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+
+/obj/item/clothing/get_carry_weight(atom/carrier)
+	switch(armor_class)
+		if(AC_HEAVY)
+			if(carrier && !HAS_TRAIT(carrier, TRAIT_HEAVYARMOR))
+				. = item_weight * 2
+			else
+				. = item_weight
+		if(AC_MEDIUM)
+			if(carrier && !HAS_TRAIT(carrier, TRAIT_MEDIUMARMOR))
+				. = item_weight * 2
+			else
+				. = item_weight
+		if(AC_LIGHT)
+			. = item_weight
+		else
+			. = item_weight
+
+	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
+	if(storage)
+		var/modifier = 1
+		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+			modifier = 0.5
+		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 // called after an item is placed in an equipment slot
 // user is mob that equipped it
@@ -1406,6 +1432,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
 
 /obj/item/proc/on_consume(mob/living/eater)
+	return
+
+/obj/item/proc/on_anti_consume(mob/living/eater)
 	return
 
 /obj/item/proc/get_displayed_price(mob/user)

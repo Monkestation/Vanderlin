@@ -47,6 +47,7 @@
 
 /datum/job/advclass/sacrestant/disciple/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Disciple")
 
 	var/datum/species/species = spawned.dna?.species
@@ -54,8 +55,8 @@
 		species.native_language = "Old Psydonic"
 		species.accent_language = species.get_accent(species.native_language)
 
-	if(!spawned.mind)
-		return
+/datum/job/advclass/sacrestant/disciple/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	// I Hate
 	var/static/list/weapons = list(
@@ -77,7 +78,6 @@
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/disciple/quarterstaff)
-
 
 /datum/outfit/disciple
 	name = "Disciple (Sacrestants)"

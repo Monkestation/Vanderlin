@@ -16,7 +16,7 @@
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 3
+	item_weight = 350 GRAMS
 
 /obj/item/clothing/pants/trou/leather
 	name = "leather trousers"
@@ -24,6 +24,7 @@
 	icon_state = "leathertrou"
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_POOR
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY

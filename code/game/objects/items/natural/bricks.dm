@@ -15,6 +15,7 @@
 	experimental_inhand = FALSE
 	hitsound = list('sound/combat/hits/blunt/brick.ogg')
 	bundletype = /obj/item/natural/bundle/brick
+	item_weight = 1.1 KILOGRAMS
 
 /obj/item/natural/brick/attackby(obj/item, mob/living/user, list/modifiers)
 	if(item_flags & IN_STORAGE)

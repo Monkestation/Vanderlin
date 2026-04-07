@@ -12,7 +12,7 @@
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
-	item_weight = 3
+	item_weight = 300 GRAMS
 
 /obj/item/clothing/gloves/leather/black
 	color = CLOTHING_SOOT_BLACK
@@ -89,7 +89,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
-	item_weight = 4
+	item_weight = 500 GRAMS
 
 /obj/item/clothing/gloves/leather/courtphysician
 	name = "sanguine gloves"

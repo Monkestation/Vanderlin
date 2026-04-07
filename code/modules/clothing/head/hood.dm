@@ -47,6 +47,7 @@
 	body_parts_covered = NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -177,6 +178,7 @@
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT
+<<<<<<< MasterworkItems
 
 /obj/item/clothing/head/roguehood/leather/advanced
 	name = "hardened leather hood"
@@ -197,3 +199,6 @@
 /obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+=======
+	item_weight = 145 GRAMS
+>>>>>>> main

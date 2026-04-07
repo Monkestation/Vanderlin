@@ -32,6 +32,7 @@
 
 	grid_height = 64
 	grid_width = 32
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/Initialize()
 	. = ..()
@@ -57,6 +58,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 6
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/dagger/navaja
 	name = "navaja"
@@ -68,6 +70,7 @@
 	var/extended = 0
 	wdefense = TERRIBLE_PARRY
 	sellprice = 30 //shiny :o
+	item_weight = 100 GRAMS
 
 /obj/item/weapon/knife/dagger/navaja/attack_self(mob/user)
 	extended = !extended
@@ -98,6 +101,7 @@
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
 	max_integrity = INTEGRITY_POOR
 	melt_amount = 75
+	item_weight = 250 GRAMS
 
 /datum/intent/snip // The salvaging intent! Used only for the scissors for now!
 	name = "snip"
@@ -150,6 +154,7 @@
 	force = DAMAGE_DAGGER
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
+	item_weight = 280 GRAMS
 
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
@@ -174,6 +179,7 @@
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
 	dropshrink = 0.9
+	item_weight = 350 GRAMS
 
 //................ Hack-Knife ............... //
 /obj/item/weapon/knife/cleaver/combat
@@ -186,6 +192,7 @@
 	melting_material = /datum/material/iron
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
+	item_weight = 250 GRAMS
 
 /obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
 	. = ..()
@@ -205,6 +212,7 @@
 	melting_material = /datum/material/bronze
 	melt_amount = 50
 	sellprice = 10
+	item_weight = 180 GRAMS
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -216,6 +224,7 @@
 	sellprice = 12
 
 	weapon_special = /datum/special_intent/triple_stab
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
@@ -223,6 +232,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
 	dropshrink = 1.0
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri/iron
 	name = "iron kukri"
@@ -232,6 +242,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
+	item_weight = 250 GRAMS
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -241,6 +252,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 12
 	dropshrink = 1.0
+	item_weight = 220 GRAMS
 
 //................ Steel Dagger ............... //
 /obj/item/weapon/knife/dagger/steel
@@ -252,6 +264,7 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/jile
 	name = "steel jile"
@@ -260,6 +273,7 @@
 	icon_state = "jile_steel"
 	sellprice = 20
 	dropshrink = 1.0
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/njora
 	name = "steel seme"
@@ -270,6 +284,7 @@
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 20
 	dropshrink = 1.0
+	item_weight = 240 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/special
 	icon_state = "sdaggeralt"
@@ -279,6 +294,7 @@
 	name = "decorated dagger"
 	icon_state = "gsdagger"
 	desc = "A dagger of refined steel with lavish gold decoration, even in the hands of most nobles it is considered overly decadent."
+	item_weight = 230 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
@@ -286,6 +302,7 @@
 	icon_state = "stiletto"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 	melt_amount = 45
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
@@ -294,6 +311,7 @@
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
+	item_weight = 270 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name ="plaguebringer sickle"
@@ -301,18 +319,21 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand
 	name = "Fervor"
 	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "Apathy"
 	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
+	item_weight = 220 GRAMS
 
 //................ Fanged dagger ............... //
 /obj/item/weapon/knife/dagger/steel/dirk
@@ -320,12 +341,14 @@
 	desc = "A dagger modeled after the fang of an anthrax spider."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderdagger"
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
 	. = ..()
@@ -342,6 +365,7 @@
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
+	item_weight = 210 GRAMS
 
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
 	. = ..()
@@ -354,6 +378,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psydagger"
 	sellprice = 60
+	item_weight = 210 GRAMS
 
 //................ Profane Dagger ............... //
 /obj/item/weapon/knife/dagger/steel/profane
@@ -367,6 +392,7 @@
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
 	sellprice = 250
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()
@@ -555,6 +581,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	sellprice = 5
+	item_weight = 150 GRAMS
 
 /obj/item/weapon/knife/stone/kukri
 	name = "joapstone kukri"
@@ -566,6 +593,7 @@
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 75
+	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/stone/opal
 	name = "opaloise knife"
@@ -577,12 +605,15 @@
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 105
+	item_weight = 180 GRAMS
+
 //................ Villager Knife ............... //
 /obj/item/weapon/knife/villager
 	name = "villager knife"
 	desc = "The loyal companion of simple peasants, able to cut hard bread and carve wood. A versatile kitchen utensil and tool."
 	icon_state = "villagernife"
 	melt_amount = 25
+	item_weight = 120 GRAMS
 
 /obj/item/weapon/knife/copper
 	name = "copper knife"
@@ -594,6 +625,7 @@
 	melting_material = /datum/material/copper
 	melt_amount = 50
 	sellprice = 10
+	item_weight = 180 GRAMS
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
@@ -609,6 +641,7 @@
 	melt_amount = 50
 	sellprice = 3
 	flags_ai_inventory = AI_ITEM_THROWING
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
@@ -621,6 +654,7 @@
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
 	sellprice = 2
+	item_weight = 75 GRAMS
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"
@@ -632,6 +666,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
 	sellprice = 4
+	item_weight = 85 GRAMS
 
 /obj/item/weapon/knife/throwingknife/psydon
 	name = "psydonian tossblade"
@@ -644,6 +679,7 @@
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/psydon/Initialize(mapload)
 	. = ..()
@@ -658,6 +694,7 @@
 	max_integrity = INTEGRITY_POOR
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
 	sellprice = 5
+	item_weight = 80 GRAMS
 
 /obj/item/weapon/knife/throwingknife/throwcard
 	name = "Calling Card"
@@ -667,3 +704,4 @@
 	max_integrity = INTEGRITY_WORST - 50 // It's not about how effective it is, it's about sending a message.
 	embedding = list("embedded_pain_multiplier" = 2, "embed_chance" = 50, "embedded_fall_chance" = 5)
 	sellprice = 2
+	item_weight = 30 GRAMS

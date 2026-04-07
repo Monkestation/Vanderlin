@@ -1267,6 +1267,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 	else
 		add_movespeed_modifier(MOVESPEED_ID_MOB_EQUIPMENT, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=speedies, blacklisted_movetypes=FLOATING)
 
+/mob/living/carbon/update_equipment_speed_mods()
+	. = ..()
+	update_carry_weight()
+
 /// Gets the combined speed modification of all worn items
 /// Except base mob type doesnt really wear items
 /mob/proc/equipped_speed_mods()

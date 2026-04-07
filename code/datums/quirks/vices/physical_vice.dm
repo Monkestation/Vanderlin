@@ -442,3 +442,19 @@
 		if(in_darkness)
 			in_darkness = FALSE
 			to_chat(owner, span_notice("Finally, light! I can breathe again..."))
+
+/datum/quirk/vice/missing_teeth
+	name = "Missing Teeth"
+	desc = "Years of brawling, bad luck, or bad hygiene have cost you several teeth. You lisp noticeably."
+	point_value = 2
+
+/datum/quirk/vice/missing_teeth/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	var/obj/item/bodypart/mouth/jaw = H.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(!jaw)
+		return
+	var/to_remove = rand(6, 8)
+	jaw.remove_teeth(to_remove)
+	to_chat(H, span_warning("You run your tongue across the gaps where your teeth used to be."))

@@ -24,6 +24,7 @@
 	grid_width = 32
 	grid_height = 64
 	can_label_container = FALSE
+	item_weight = 732 GRAMS // I am getting a ton of conflicting information in this tbh
 	fancy = TRUE
 
 /obj/item/reagent_containers/glass/bottle/waterskin/Initialize()
@@ -45,6 +46,7 @@
 	name = "purifying waterskin"
 	desc = "Bronze tubes spiral about from the mouth of this waterskin in complex, dizzying patterns."
 	icon_state = "water-purifier"
+	item_weight = 1.34 KILOGRAMS
 	var/filtered_reagents = list(/datum/reagent/water/gross) // List of liquids it turns into drinkable water
 
 /obj/item/reagent_containers/glass/bottle/waterskin/purifier/Initialize()

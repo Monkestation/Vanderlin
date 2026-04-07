@@ -194,6 +194,7 @@
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine
 	component_type = /datum/component/storage/concrete/grid/zigbox
+	item_weight = 32 GRAMS
 
 /obj/item/storage/fancy/cigarettes/zig/empty
 	spawn_type = null
