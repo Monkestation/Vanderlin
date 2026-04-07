@@ -300,9 +300,7 @@
 /turf/open/floor/twig,
 /area/indoors/wilderness/tavern)
 "cl" = (
-/obj/structure/ladder{
-	redstone_id = Northeast
-	},
+/obj/structure/ladder,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/villagegarrison)
 "cp" = (
@@ -1446,15 +1444,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/garrison)
-"jn" = (
-/obj/structure/ladder{
-	redstone_id = Northeast
-	},
-/obj/structure/ladder{
-	redstone_id = Northeast
-	},
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/villagegarrison)
 "jo" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4369,9 +4358,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "Cc" = (
-/obj/structure/ladder{
-	redstone_id = Northeast
-	},
+/obj/structure/ladder,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "Ce" = (
@@ -65916,7 +65903,7 @@ Mi
 Mi
 eW
 wo
-jn
+cl
 wo
 Cr
 Mi
