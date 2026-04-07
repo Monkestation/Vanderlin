@@ -15,6 +15,25 @@
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
+/obj/item/clothing/armor/leather/atgervi/advanced
+	name = "hardened shaman's coat"
+	desc = "A thick, furred protective coat, often made by hand expertly from a beast killed in the bearer's hunt."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/atgervi/masterwork
+	name = "masterwork shaman's coat"
+	desc = "This coat was masterfully hand crafted with dendors blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/atgervi/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"
 	desc = "Thick fur pants made to endure the coldest winds, offering a share of protection from fang and claw of beast or men alike."
