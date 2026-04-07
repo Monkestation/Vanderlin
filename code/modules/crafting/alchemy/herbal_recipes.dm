@@ -528,15 +528,15 @@
 	M.adjustFireLoss(20)
 	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
 
-/datum/reagent/poison/herbal/juice
+/datum/reagent/poison/herbal/death
 	name = "Berry Juice"
-	description = "Berry juice. Totally will not make your head explode :)."
+	description = "Berry juice. Totally will not make your head explode."
 	reagent_state = LIQUID
 	color = "#790404"  // dammit Avalon, youve gotten me again. 
 	metabolization_rate = 0.1
 	taste_description = "berry"
 
-/datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
+/datum/reagent/poison/herbal/death/on_mob_life(mob/living/carbon/M)
 	qdel(BODY_ZONE_HEAD)  //admin only if they want to RP  a sniper or something. Insta kills people
 
 /*
@@ -582,7 +582,7 @@
 	color = "#8b0000"
 	metabolization_rate = 0.5
 	overdose_threshold = 45
-	taste_description = "decepting sweetness, followed by burning"
+	taste_description = "deceptive sweetness, followed by burning"
 
 /datum/reagent/poison/herbal/pain/on_mob_metabolize(mob/living/M)
 	. = ..()
@@ -624,8 +624,6 @@
 	REMOVE_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
 
 
-/datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
-	. = ..()
 
 // Combat Enhancement
 

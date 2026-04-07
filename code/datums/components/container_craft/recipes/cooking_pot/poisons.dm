@@ -74,7 +74,7 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The fumes from the pot smell of potential and hatred"
 
-/datum/container_craft/cooking/herbal_tea/weak_paralytic
+/datum/container_craft/cooking/herbal_tea/paralytic
 	name = "Impuissance paralytic"
 	created_reagent = /datum/reagent/toxin/spidervenom_paralytic
 	water_conversion = 1
