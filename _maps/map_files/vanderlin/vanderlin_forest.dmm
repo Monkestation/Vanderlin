@@ -691,6 +691,12 @@
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"eI" = (
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = 32
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "eK" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/marsh/deep,
@@ -1095,6 +1101,9 @@
 "hm" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/wilderness)
+"ho" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/wilderness)
 "hp" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/cobble,
@@ -1262,6 +1271,9 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"in" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "io" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/fishingrod,
@@ -1361,6 +1373,7 @@
 /area/outdoors/wilderness)
 "iS" = (
 /obj/structure/chair/wood/alt/fancy,
+/obj/structure/carpet/green,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "iT" = (
@@ -1611,6 +1624,12 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/shop)
+"kH" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness)
 "kJ" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/dirt,
@@ -1713,6 +1732,12 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
 /area/indoors/dungeon)
+"lw" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "lA" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -1885,6 +1910,9 @@
 /mob/living/simple_animal/hostile/retaliate/chicken,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"mJ" = (
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness)
 "mK" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/dirt/road,
@@ -1965,6 +1993,10 @@
 	},
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/dungeon)
+"no" = (
+/obj/structure/carpet/red,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness)
 "nt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -2022,6 +2054,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/wilderness/outpost/vanderlin)
+"nS" = (
+/obj/effect/decal/carpet,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "nT" = (
 /obj/item/candle/infinite{
 	anchored = 1;
@@ -2037,6 +2073,9 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"nW" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness)
 "nX" = (
 /obj/structure/stairs{
 	dir = 8
@@ -2217,6 +2256,10 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors/mountains)
+"po" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "pq" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/villagegarrison)
@@ -2300,12 +2343,22 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/sea,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
+"pQ" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "pS" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
 	},
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
+/area/outdoors/wilderness)
+"pT" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors/wilderness)
 "pW" = (
 /obj/structure/door/viewport{
@@ -2315,6 +2368,11 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
+"pX" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/outdoors/mountains)
 "pY" = (
 /obj/structure/stone_tile/slab/cracked,
 /turf/open/floor/cobblerock,
@@ -2407,6 +2465,11 @@
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"qC" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 2
+	},
+/area/outdoors/mountains)
 "qD" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass,
@@ -2495,6 +2558,12 @@
 "rf" = (
 /turf/closed/wall/mineral/desert_sandstone,
 /area/indoors/dungeon)
+"rg" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "rh" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/remains/human,
@@ -2907,6 +2976,14 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains)
+"tA" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 4
+	},
+/area/outdoors/mountains)
+"tB" = (
+/turf/closed/wall/mineral/wooddark/window,
+/area/outdoors/wilderness)
 "tD" = (
 /obj/structure/kneestingers,
 /turf/open/water/clean/dirt,
@@ -2966,6 +3043,20 @@
 	dir = 8
 	},
 /area/indoors/villagegarrison)
+"tT" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
+"tU" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = 1;
+	pixel_x = -1
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "tV" = (
 /turf/open/water/clean,
 /area/under/cave)
@@ -3076,6 +3167,10 @@
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
+"uD" = (
+/obj/structure/bookcase/random/apocrypha,
+/turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors/wilderness)
 "uE" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -3263,6 +3358,10 @@
 	dir = 1
 	},
 /area/outdoors/wilderness)
+"vQ" = (
+/obj/structure/carpet/red,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "vS" = (
 /obj/effect/waterfall{
 	pixel_y = 0
@@ -3885,6 +3984,9 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"zJ" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/outdoors/mountains)
 "zU" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -3937,6 +4039,14 @@
 "Aj" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
+/area/outdoors/wilderness)
+"Ak" = (
+/obj/structure/table/wood/nice,
+/obj/item/candle/skull{
+	pixel_x = 5;
+	pixel_y = 13
+	},
+/turf/open/floor/ruinedwood/spiralfade,
 /area/outdoors/wilderness)
 "Am" = (
 /obj/effect/landmark/start/adventurerlate,
@@ -4117,6 +4227,13 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"Br" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1;
+	pixel_y = 31
+	},
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/outdoors/wilderness)
 "Bs" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -4166,6 +4283,17 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
+"BL" = (
+/obj/structure/table/wood/plain,
+/obj/item/reagent_containers/glass/bottle/beer/ratkept{
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/obj/item/reagent_containers/glass/cup/shellfancy{
+	pixel_x = -4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "BM" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -4290,6 +4418,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"Cu" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness)
 "Cv" = (
 /obj/structure/inert_bonepile,
 /obj/effect/decal/cleanable/blood/splatter,
@@ -4312,6 +4444,11 @@
 /obj/structure/stone_tile/center,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"CF" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 2
+	},
+/area/outdoors/wilderness)
 "CH" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/flora/grass/bush_meagre,
@@ -4334,6 +4471,10 @@
 "CU" = (
 /turf/open/water/river,
 /area/under/cave)
+"CW" = (
+/obj/structure/carpet/green,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "CX" = (
 /obj/structure/spider/stickyweb,
 /turf/open/openspace,
@@ -4361,6 +4502,7 @@
 /area/indoors/dungeon)
 "De" = (
 /obj/structure/chair/wood/alt/uncomfortable,
+/obj/structure/carpet/red,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "Df" = (
@@ -4395,6 +4537,12 @@
 /obj/structure/trap/spike,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"Dp" = (
+/obj/structure/bearpelt{
+	pixel_x = 17
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "Dq" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -4464,6 +4612,19 @@
 "DF" = (
 /turf/open/floor/sandstone_tile/six,
 /area/under/cave)
+"DH" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/cloak/wardencloak,
+/obj/item/clothing/wrists/bracers/leather,
+/obj/item/clothing/neck/bevor,
+/obj/item/storage/belt/leather,
+/obj/item/clothing/shirt/tunic/colored/green,
+/obj/item/clothing/pants/trou/leather/gronn,
+/obj/item/clothing/gloves/angle/gronnfur,
+/obj/item/clothing/gloves/angle/gronn,
+/obj/item/clothing/gloves/angle/atgervi,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "DI" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -4553,6 +4714,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Ec" = (
+/obj/structure/door/green,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness)
 "Ed" = (
 /obj/structure/door/stone,
 /obj/structure/trap/saw_blades,
@@ -4740,6 +4907,9 @@
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
 /area/outdoors/wilderness)
+"Fm" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/mountains)
 "Fr" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/closed/mineral/random,
@@ -5087,6 +5257,13 @@
 /area/outdoors/wilderness)
 "Hs" = (
 /obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/cloak/savage,
+/obj/item/clothing/shirt/tunic/colored/red,
+/obj/item/clothing/gloves/angle/gronnfur,
+/obj/item/clothing/pants/trou/leather/gronn,
+/obj/item/clothing/shoes/boots/leather/atgervi,
+/obj/item/clothing/pants/trou/leather/atgervi,
+/obj/item/clothing/gloves/angle/atgervi,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "Hu" = (
@@ -5126,6 +5303,15 @@
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
+"HI" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/clothing/pants/trou/leather/gronn,
+/obj/item/clothing/armor/leather/atgervi,
+/obj/item/clothing/gloves/plate/atgervi,
+/obj/item/clothing/neck/psycross/great_hunt,
+/obj/item/clothing/head/helmet/leather/shaman_hood,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "HJ" = (
 /obj/structure/kneestingers,
 /turf/open/water/river/dirt{
@@ -5162,6 +5348,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness)
+"HW" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/mountains)
 "HX" = (
 /obj/structure/stone_tile/center/cracked{
 	pixel_y = -1
@@ -5262,6 +5452,28 @@
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"IK" = (
+/obj/structure/rack,
+/obj/item/rope,
+/obj/item/rope{
+	pixel_x = 4;
+	pixel_y = -3
+	},
+/obj/item/rope{
+	pixel_x = -1;
+	pixel_y = 2
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain{
+	pixel_x = 2;
+	pixel_y = -5
+	},
+/obj/item/rope/chain{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "IL" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -5392,6 +5604,10 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
+"Jr" = (
+/obj/structure/bookcase/random/myths,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/outdoors/wilderness)
 "Ju" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/railing/wood{
@@ -5508,6 +5724,19 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
+"Km" = (
+/obj/structure/rack,
+/obj/item/reagent_containers/glass/bottle/waterskin,
+/obj/item/reagent_containers/glass/bottle/waterskin{
+	pixel_x = -6;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette{
+	pixel_x = 10
+	},
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "Kp" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/weapon/shield/wood,
@@ -5562,6 +5791,11 @@
 /obj/item/painting/queen,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/dungeon)
+"KJ" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 8
+	},
+/area/outdoors/mountains)
 "KL" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
@@ -5569,6 +5803,16 @@
 "KM" = (
 /turf/open/water/blood,
 /area/indoors/cave/late)
+"KN" = (
+/obj/structure/rack,
+/obj/item/natural/bundle/cloth/bandage/full,
+/obj/item/needle/thorn,
+/obj/item/needle/thorn{
+	pixel_x = 4;
+	pixel_y = -3
+	},
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "KP" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -6122,6 +6366,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
+"Os" = (
+/obj/structure/bookcase/random/legends,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/wilderness)
 "Ot" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/herringbone,
@@ -6178,6 +6426,9 @@
 "OP" = (
 /turf/open/lava,
 /area/under/cave)
+"OR" = (
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/outdoors/mountains)
 "OS" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/woodclub{
@@ -6203,6 +6454,12 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Pb" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "Pc" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -6444,6 +6701,12 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"QJ" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/closed/basic,
+/area/outdoors/wilderness)
 "QK" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/naturalstone,
@@ -6597,6 +6860,11 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/grass/mixyel,
 /area/indoors/dungeon)
+"RM" = (
+/obj/structure/rack,
+/obj/item/natural/bundle/cloth/full,
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "RN" = (
 /obj/structure/lever/hidden{
 	redstone_id = "ForestAstrataTemple"
@@ -7180,6 +7448,28 @@
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"Vu" = (
+/obj/structure/rack,
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_y = -2
+	},
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_x = -8;
+	pixel_y = 3
+	},
+/obj/item/flashlight/flare/torch/lantern{
+	pixel_x = 7
+	},
+/obj/item/flint,
+/obj/item/flint{
+	pixel_x = 6
+	},
+/obj/item/flint{
+	pixel_y = -3;
+	pixel_x = -6
+	},
+/turf/open/floor/wood,
+/area/indoors/villagegarrison)
 "Vv" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/decal/cleanable/dirt,
@@ -7627,6 +7917,9 @@
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness/outpost/vanderlin)
+"Yq" = (
+/turf/closed/wall/mineral/wooddark/window,
+/area/outdoors/mountains)
 "Yr" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 1
@@ -7645,12 +7938,22 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"Yv" = (
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "Yx" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"Yy" = (
+/obj/structure/table/wood/plain,
+/obj/item/candle/skull{
+	pixel_y = 9
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "Yz" = (
 /mob/living/carbon/human/species/harpy/base/unskilled/naked,
 /obj/item/clothing/shirt/rags,
@@ -7676,6 +7979,11 @@
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"YF" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/pelt,
+/turf/open/floor/ruinedwood/darker,
+/area/outdoors/mountains)
 "YG" = (
 /obj/structure/stairs{
 	dir = 4
@@ -7692,6 +8000,10 @@
 /obj/structure/well,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/outpost/vanderlin)
+"YL" = (
+/obj/effect/decal/carpet/square,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/villagegarrison)
 "YM" = (
 /turf/closed/mineral/random,
 /area/under/cave)
@@ -13253,9 +13565,9 @@ LQ
 Il
 sG
 GH
-sG
-sG
-sG
+ei
+RM
+KN
 GH
 ku
 Sv
@@ -13664,11 +13976,11 @@ ge
 ge
 ge
 Gt
-ge
+vQ
 ge
 ge
 Gt
-ge
+nS
 ge
 De
 XL
@@ -14061,9 +14373,9 @@ ma
 KU
 bk
 QV
-sG
-sG
-sG
+Km
+Vu
+IK
 QV
 tF
 qv
@@ -19110,7 +19422,7 @@ Iz
 gr
 ZV
 ZV
-dV
+ZV
 ZV
 ZV
 ZV
@@ -19510,12 +19822,12 @@ TP
 gr
 Iz
 Iz
-gr
-ZV
-gr
-ZV
-Tf
-ZV
+ho
+CF
+WO
+WO
+Ku
+ho
 ZV
 gr
 Sw
@@ -19712,12 +20024,12 @@ Wa
 gr
 Iz
 Iz
-ZV
-ZV
-ZV
-gr
-gr
-ZV
+Rr
+uD
+Os
+Jr
+ho
+Rr
 ZV
 Sw
 Sw
@@ -19914,12 +20226,12 @@ JM
 Iz
 Iz
 Iz
-gr
-gr
-gr
-ZV
-dV
-gr
+LP
+nW
+mJ
+mJ
+QJ
+Rr
 Sw
 Sw
 mR
@@ -20116,12 +20428,12 @@ bK
 Iz
 Iz
 gr
-ZV
-gr
-gr
-ZV
-gr
-Sw
+hD
+Cu
+nW
+nW
+nW
+Br
 Sw
 UX
 mR
@@ -20318,12 +20630,12 @@ TP
 Iz
 Iz
 gr
-gr
-ZV
-ZV
-ZV
-ZV
-Sw
+Ec
+no
+nW
+pT
+mJ
+Rr
 UX
 UX
 NJ
@@ -20520,12 +20832,12 @@ ZV
 Iz
 Iz
 gr
-ZV
-ZV
-gr
-gr
-ZV
-Sw
+tB
+mJ
+mJ
+Ak
+kH
+Rr
 UX
 NJ
 NJ
@@ -20722,12 +21034,12 @@ gr
 Iz
 Iz
 Iz
-gr
-gr
-gr
-ZV
-Sw
-Sw
+ho
+CF
+tB
+WO
+Ku
+ho
 UX
 NJ
 Ck
@@ -53666,7 +53978,7 @@ sG
 sG
 sG
 GP
-Hs
+DH
 GH
 mN
 mN
@@ -53865,7 +54177,7 @@ Gx
 GP
 ge
 ge
-ge
+Pb
 ge
 GP
 xQ
@@ -54065,12 +54377,12 @@ BT
 Gx
 Gx
 Gt
+CW
 ge
-ge
-ge
+Yy
 ge
 Gt
-ge
+YL
 ge
 iS
 sU
@@ -54269,7 +54581,7 @@ Gx
 GP
 FW
 ge
-ge
+rg
 ge
 GP
 Sj
@@ -59911,12 +60223,12 @@ WV
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+Fm
+qC
+Yq
+pX
+OR
+Fm
 Mi
 Mi
 Mi
@@ -60113,12 +60425,12 @@ WV
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+zJ
+HI
+Yv
+pQ
+lw
+zJ
 Mi
 Mi
 Mi
@@ -60315,12 +60627,12 @@ WV
 Mi
 Mi
 Mi
+KJ
+in
+Dp
+po
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+zJ
 Mi
 Mi
 Mi
@@ -60517,12 +60829,12 @@ WV
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+mU
+eI
+in
+Yv
+tU
+Fm
 Mi
 Mi
 Mi
@@ -60719,12 +61031,12 @@ WV
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+tA
+in
+Yv
+Yv
+tT
+zJ
 Mi
 Mi
 Mi
@@ -60921,12 +61233,12 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+zJ
+YF
+in
+HW
+BL
+zJ
 Mi
 Mi
 Mi
@@ -61123,12 +61435,12 @@ Mi
 Mi
 Mi
 Mi
-Mi
-Mi
-Mi
-Mi
-Mi
-Mi
+Fm
+qC
+Yq
+pX
+OR
+Fm
 Mi
 Mi
 Mi
