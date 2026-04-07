@@ -62,7 +62,11 @@
 
 /datum/job/advclass/puritan/inspector/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.venatari, 100)
+
+/datum/job/advclass/puritan/inspector/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/gear = list(
 		"Retribution (Rapier)",
