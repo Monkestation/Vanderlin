@@ -751,6 +751,22 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
+	name = "hardened afur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+			/obj/item/natural/fur = 2,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/hunterboots
+	name = "hardened hunter boots"
+	output = /obj/item/clothing/shoes/boots/hunter
+	requirements = list(/obj/item/natural/hide/cured = 3,
+			/obj/item/natural/fur = 1,
+			/obj/item/natural/fibers/sinew = 2)
+	craftdiff = 4
+
 /datum/repeatable_crafting_recipe/leather/standalone/boots/watch
 	name = "watch boots"
 	output = /obj/item/clothing/shoes/boots/leather/advanced/watch
@@ -987,6 +1003,23 @@
 				/obj/item/natural/cured/essence = 1,
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
+	name = "hardened afur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
+			/obj/item/natural/cured/essence = 1,
+			/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/hunterboots
+	name = "masterwork hunter boots"
+	output = /obj/item/clothing/shoes/boots/hunter
+	requirements = list(/obj/item/clothing/shoes/boots/hunter = 1,
+			/obj/item/natural/cured/essence = 1,
+			/obj/item/natural/fibers/sinew = 2)
+	craftdiff = 5
+
 
 /datum/repeatable_crafting_recipe/leather/standalone/gloves/masterwork
 	name = "masterwork leather gloves"

@@ -115,6 +115,10 @@
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	min_cold_protection_temperature = -10
+	wetable = FALSE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 
 /obj/item/clothing/shoes/boots/hunter/apply_components()
 	. = ..()
@@ -176,6 +180,24 @@
 	item_weight = 3
 	min_cold_protection_temperature = -20
 	wetable = FALSE
+
+/obj/item/clothing/shoes/boots/fur/advanced
+	name = "hardened fur lined boots"
+	desc = "Boots lined with fur, and protected with hardened, expertly tanned leather."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/shoes/boots/fur/masterwork
+	name = "masterwork fur lined boots"
+	desc = "Boots lined with thick fur, and protected with hardened, masterfully tanned leather made by only the best."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+
+/obj/item/clothing/shoes/boots/fur/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/shoes/boots/furlinedanklets
 	name = "fur lined anklets"
