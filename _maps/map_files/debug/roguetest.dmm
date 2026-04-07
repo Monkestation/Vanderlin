@@ -2045,6 +2045,10 @@
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/cobble,
 /area/indoors)
+"xG" = (
+/obj/structure/fluff/walldeco/wantedposter/r,
+/turf/open/floor/cobble,
+/area/indoors)
 "xM" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/grass/yel,
@@ -2321,7 +2325,12 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
 "zZ" = (
-/obj/structure/throne,
+/obj/structure/throne{
+	name = "Throne of the Gods"
+	},
+/obj/structure/fake_machine/titan{
+	pixel_y = 32
+	},
 /turf/open/floor/cobble,
 /area/indoors)
 "Ab" = (
@@ -2657,6 +2666,10 @@
 /obj/structure/rotation_piece,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/mountains/decap)
+"Hk" = (
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/cobble,
+/area/indoors)
 "Hl" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/river{
@@ -73220,7 +73233,7 @@ ax
 am
 am
 cM
-am
+Hk
 ax
 bu
 am
@@ -73734,7 +73747,7 @@ ax
 am
 am
 lV
-am
+xG
 ax
 bw
 am
