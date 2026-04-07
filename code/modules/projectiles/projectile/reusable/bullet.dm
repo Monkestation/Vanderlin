@@ -24,23 +24,31 @@
 
 /obj/projectile/bullet/reusable/bullet/on_hit(atom/target)
 	. = ..()
-	var/atom/throw_target = get_edge_target_turf(firer, get_dir(firer, target))
-	if(ismob(target))
-		var/mob/living/carbon/target_mob = target
-		target_mob.safe_throw_at(throw_target, 1, 4)
-		target_mob.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+	if(!ismob(target) || !firer)
+		return
 
-	if(get_dist(get_turf(firer), get_turf(target)) <= 3)
-		var/mob/living/carbon/C = target
-		var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
-		if(BP)
-			var/fracture_type = /datum/wound/fracture
-			switch(BP.body_zone)
-				if(BODY_ZONE_HEAD)
-					fracture_type = /datum/wound/fracture/head
-				if(BODY_ZONE_CHEST)
-					fracture_type = /datum/wound/fracture/chest
-			BP.add_wound(fracture_type)
+	var/mob/living/target_mob = target
+
+	var/atom/throw_target = get_edge_target_turf(firer, get_dir(firer, target_mob))
+	target_mob.safe_throw_at(throw_target, 1, 4)
+	target_mob.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+
+	if(get_dist(firer, target_mob) > 3)
+		return
+
+	if(!iscarbon(target_mob))
+		return
+
+	var/mob/living/carbon/C = target_mob
+	var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
+	if(BP)
+		var/fracture_type = /datum/wound/fracture
+		switch(BP.body_zone)
+			if(BODY_ZONE_HEAD)
+				fracture_type = /datum/wound/fracture/head
+			if(BODY_ZONE_CHEST)
+				fracture_type = /datum/wound/fracture/chest
+		BP.add_wound(fracture_type)
 
 /obj/projectile/bullet/fragment
 	name = "smaller lead ball"

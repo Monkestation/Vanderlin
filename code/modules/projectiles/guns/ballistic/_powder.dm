@@ -264,6 +264,7 @@
 
 /obj/item/gun/ballistic/powder/shoot_live_shot(mob/living/user, pointblank, mob/pbtarget, message)
 	. = ..()
+
 	for(var/mob/living/living in get_hearers_in_range(3, src))
 		living.playsound_local(get_turf(user), 'sound/foley/tinnitus.ogg', 60, FALSE) // muh realism or something
 

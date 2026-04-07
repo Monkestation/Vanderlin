@@ -16,7 +16,7 @@
 	sellprice = 400
 	item_weight = 4.5 KILOGRAMS
 
-	gripped_intents = list(POLEARM_BASH, /datum/intent/shoot/musket, /datum/intent/shoot/musket/arc)
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
 	force = 10
 	can_parry = TRUE
 	wdefense = AVERAGE_PARRY

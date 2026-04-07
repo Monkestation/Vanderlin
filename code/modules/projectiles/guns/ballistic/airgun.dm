@@ -17,7 +17,7 @@
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
 
-	possible_item_intents = list(MACE_SMASH, /datum/intent/shoot/airgun, /datum/intent/arc/airgun)
+	possible_item_intents = list(/datum/intent/shoot/airgun, /datum/intent/arc/airgun, MACE_SMASH)
 	force = DAMAGE_MACE-5
 	can_parry = TRUE
 	wdefense = BAD_PARRY
