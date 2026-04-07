@@ -920,9 +920,18 @@
 /datum/repeatable_crafting_recipe/leather/standalone/heavygloves
 	name = "hardened heavy leather gloves"
 	output = /obj/item/clothing/gloves/angle/advanced
-	requirements = list(/obj/item/clothing/gloves/angle = 1,
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 2,
 				/obj/item/natural/fibers/sinew = 1,
 	)
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves/advanced
+	name = "hardened fur-lined leather gloves"
+	output = /obj/item/clothing/gloves/angle/atgervi/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 2,
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/coat
@@ -993,6 +1002,14 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
+/datum/repeatable_crafting_recipe/leather/atgervi_pants/advanced
+	name = "hardened fur chausses"
+	output = /obj/item/clothing/pants/trou/leather/atgervi/advanced
+	requirements = list(/obj/item/natural/fur = 2,
+				/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers/sinew = 1,)
+	craftdiff = 4
+
 /// MASTERWORK
 
 /datum/repeatable_crafting_recipe/leather/standalone/boots/masterwork
@@ -1037,6 +1054,15 @@
 	output = /obj/item/clothing/gloves/angle/masterwork
 	attacked_atom = /obj/item/clothing/gloves/angle
 	requirements = list(/obj/item/clothing/gloves/angle = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves/masterwork
+	name = "masterwork fur-lined leather gloves"
+	output = /obj/item/clothing/gloves/angle/atgervi/masterwork
+	attacked_atom = /obj/item/clothing/gloves/angle/atgervi
+	requirements = list(/obj/item/clothing/gloves/angle/atgervi = 1,
 				/obj/item/natural/cured/essence = 1,
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
@@ -1125,6 +1151,15 @@
 				/obj/item/natural/cured/essence = 1,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 5
+
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_pants/masterwork
+	name = "masterwork fur chausses"
+	output = /obj/item/clothing/pants/trou/leather/atgervi/masterwork
+	attacked_atom = /obj/item/clothing/pants/trou/leather/atgervi
+	requirements = list(/obj/item/clothing/pants/trou/leather/atgervi = 1,
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1,)
+	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/rumaclan
 	name = "raised sandals"
