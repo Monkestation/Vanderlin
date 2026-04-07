@@ -494,8 +494,8 @@
 /area/indoors/dungeon)
 "dt" = (
 /obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_town-town";
-	aportalid = "vanderlin-forest_town-forest"
+	aportalgoesto = "vanderlin-forest_mountain-mountain";
+	aportalid = "vanderlin-forest_mountain-forest"
 	},
 /turf/open/floor/dirt/road,
 /area/under/cave)
@@ -712,6 +712,16 @@
 "eN" = (
 /turf/closed/basic,
 /area/under/cave)
+"eP" = (
+/obj/structure/flora/rock,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
+"eR" = (
+/obj/structure/fluff/customsign{
+	name = "COAST"
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "eU" = (
 /obj/structure/bars/alt,
 /obj/structure/table/wood/counter/end{
@@ -2124,6 +2134,12 @@
 /obj/structure/stone_tile/block/cracked,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
+"oC" = (
+/obj/structure/fluff/customsign{
+	name = "TERRORBOG"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "oD" = (
 /obj/structure/gravemarker,
 /obj/structure/closet/dirthole/closed/loot,
@@ -2229,7 +2245,10 @@
 /area/outdoors/wilderness/outpost/vanderlin)
 "pj" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/item/skull{
+	pixel_x = 11;
+	pixel_y = -7
+	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "pk" = (
@@ -2421,6 +2440,7 @@
 "qw" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
 "qx" = (
@@ -2813,6 +2833,12 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/wood,
 /area/outdoors/mountains)
+"sB" = (
+/obj/structure/fluff/customsign{
+	name = "PATH CAVED IN"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "sE" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/start/adventurer{
@@ -3437,6 +3463,17 @@
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness/tavern)
+"wv" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/chair/stool,
+/turf/open/floor/cobble,
+/area/indoors/villagegarrison)
+"ww" = (
+/obj/structure/handcart{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness)
 "wx" = (
 /mob/living/carbon/human/species/kobold/base/unskilled/naked,
 /turf/open/floor/naturalstone,
@@ -3834,6 +3871,12 @@
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"yW" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/glass/bottle/beer/fireleaf,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/villagegarrison)
 "yY" = (
 /obj/item/ingot/iron,
 /obj/machinery/light/fueled/wallfire/candle/weak,
@@ -4551,6 +4594,12 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"Du" = (
+/obj/structure/fluff/customsign{
+	name = "MALUM'S ANVIL"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "Dv" = (
 /obj/structure/minecart_rail{
 	dir = 9
@@ -6359,8 +6408,15 @@
 /area/indoors/villagegarrison)
 "Oz" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/item/skull{
+	pixel_x = 11;
+	pixel_y = -7
+	},
 /turf/open/floor/dirt,
+/area/outdoors/wilderness)
+"OB" = (
+/obj/effect/decal/remains/human,
+/turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "OC" = (
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -6883,8 +6939,9 @@
 	},
 /area/indoors/shelter/woods)
 "Sb" = (
-/obj/item/reagent_containers/food/snacks/smallrat,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/cobble,
 /area/indoors/villagegarrison)
 "Sf" = (
@@ -7555,6 +7612,10 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/forest,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
+"Wj" = (
+/obj/item/bodypart/head/goblin,
+/turf/open/floor/dirt,
+/area/indoors/town/cell)
 "Wo" = (
 /obj/structure/window/openclose{
 	dir = 1
@@ -8038,6 +8099,10 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"Zr" = (
+/obj/item/reagent_containers/food/snacks/smallrat,
+/turf/open/floor/cobble,
+/area/indoors/villagegarrison)
 "Zv" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/tile/kitchen,
@@ -18789,10 +18854,10 @@ Fw
 Fw
 Sw
 Sw
-zd
+ZV
 ZV
 zd
-zd
+ZV
 ZV
 Fw
 ZV
@@ -18994,7 +19059,7 @@ ZV
 ZV
 gr
 gr
-zd
+ZV
 yV
 Fw
 Fw
@@ -19190,14 +19255,14 @@ zC
 Fw
 Sw
 Sw
-yV
+gr
 bt
-zd
-yV
+ZV
+gr
 ZV
 ZV
 gr
-yV
+gr
 ZV
 ZV
 Fw
@@ -19392,11 +19457,11 @@ fq
 Fw
 Sw
 gr
-yV
+gr
 ZV
 ZV
-zd
-yV
+ZV
+gr
 ZV
 gr
 ZV
@@ -19596,12 +19661,12 @@ Sw
 Nh
 gr
 ZV
-yV
-yV
-zd
 gr
 gr
-zd
+ZV
+gr
+gr
+ZV
 gr
 bt
 ZV
@@ -19798,10 +19863,10 @@ pS
 gr
 gr
 ZV
-yV
-yV
+gr
+gr
 zd
-zd
+ZV
 ZV
 ZV
 gr
@@ -20003,7 +20068,7 @@ bt
 gr
 ZV
 ZV
-yV
+gr
 zd
 gr
 ZV
@@ -20204,7 +20269,7 @@ ZV
 ZV
 ZV
 ZV
-yV
+gr
 ZV
 Nh
 ZV
@@ -20409,7 +20474,7 @@ ZV
 ZV
 ZV
 ZV
-yV
+gr
 ZV
 gr
 ZV
@@ -20609,7 +20674,7 @@ gr
 fq
 gr
 bt
-zd
+ZV
 ZV
 ZV
 ZV
@@ -20814,7 +20879,7 @@ gr
 ZV
 ZV
 gr
-Nf
+ZV
 tk
 Fw
 ZV
@@ -21016,7 +21081,7 @@ ZV
 gr
 gr
 yV
-Nf
+ZV
 Nf
 gr
 Nf
@@ -21036,10 +21101,10 @@ Iz
 Iz
 Iz
 Iz
-Iz
-Iz
-Iz
-Uc
+eP
+ww
+OB
+Ra
 "}
 (65,1,1) = {"
 eN
@@ -21238,10 +21303,10 @@ Iz
 Iz
 Iz
 Iz
+sB
 Iz
 Iz
-Iz
-Uc
+Ra
 "}
 (66,1,1) = {"
 eN
@@ -21418,7 +21483,7 @@ oZ
 ZV
 ZV
 ZV
-zd
+ZV
 ZV
 gr
 tk
@@ -21439,11 +21504,11 @@ gr
 Iz
 Iz
 Iz
+OB
 Iz
 Iz
-Iz
-Iz
-Uc
+eP
+Ra
 "}
 (67,1,1) = {"
 eN
@@ -21640,7 +21705,7 @@ ZV
 gr
 gr
 RO
-ZV
+eR
 GT
 Ra
 Ra
@@ -21821,8 +21886,8 @@ ZV
 Kc
 ZV
 ZV
-zd
-zd
+ZV
+ZV
 gr
 gr
 ZV
@@ -22019,7 +22084,7 @@ ZV
 gr
 ZV
 gr
-yV
+gr
 zk
 ZV
 ZV
@@ -22186,7 +22251,7 @@ fi
 DC
 DC
 qw
-uX
+wv
 DC
 mM
 wm
@@ -22423,7 +22488,7 @@ Nt
 Fw
 gr
 ZV
-zd
+ZV
 zk
 ZV
 ZV
@@ -23634,7 +23699,7 @@ Iz
 Iz
 Iz
 ZV
-yV
+gr
 ZV
 Kc
 gr
@@ -24038,7 +24103,7 @@ gr
 ZV
 gr
 ZV
-zd
+ZV
 ZV
 zk
 ZV
@@ -24241,7 +24306,7 @@ ZV
 ZV
 ZV
 ZV
-yV
+gr
 Kc
 ZV
 ZV
@@ -24816,7 +24881,7 @@ wm
 wm
 Uf
 kX
-vr
+Wj
 RW
 ty
 iz
@@ -25217,7 +25282,7 @@ DC
 dU
 dU
 Vg
-wm
+Zr
 wm
 kX
 kX
@@ -25651,7 +25716,7 @@ UX
 Sw
 Sw
 od
-wo
+yW
 RV
 fR
 od
@@ -26261,7 +26326,7 @@ gr
 ZV
 ZV
 ZV
-zd
+ZV
 zk
 ZV
 Iz
@@ -26663,7 +26728,7 @@ UX
 Sw
 Sw
 ZV
-zd
+ZV
 ZV
 gr
 gL
@@ -27877,7 +27942,7 @@ UX
 Sw
 yV
 Nh
-zd
+ZV
 zd
 cA
 cA
@@ -36387,7 +36452,7 @@ Iz
 Iz
 Iz
 gr
-gr
+oC
 Ra
 Ra
 Ra
@@ -87832,7 +87897,7 @@ OP
 YM
 YM
 YM
-ID
+Du
 Vd
 eh
 eh

@@ -9264,6 +9264,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
 /area/outdoors/town)
+"eqb" = (
+/obj/structure/flora/rock,
+/turf/open/floor/dirt/road,
+/area/outdoors/basin)
 "eql" = (
 /obj/structure/bars/pipe{
 	pixel_x = -5;
@@ -18297,6 +18301,10 @@
 /obj/structure/carpet/red,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"iJj" = (
+/obj/structure/flora/rock,
+/turf/open/floor/dirt/road,
+/area/under/cavelava)
 "iJo" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
@@ -21473,6 +21481,10 @@
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/clinic_large/apothecary)
+"khi" = (
+/obj/structure/flora/rock,
+/turf/open/floor/naturalstone,
+/area/under/cavelava)
 "khk" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/cobble,
@@ -35697,13 +35709,6 @@
 	},
 /turf/open/floor/blocks,
 /area/outdoors/town)
-"qIE" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-mountain_town-mountain";
-	aportalid = "vanderlin-mountain_town-town"
-	},
-/turf/open/floor/dirt/road,
-/area/under/cavelava)
 "qIQ" = (
 /turf/open/openspace,
 /area/indoors/town/garrison)
@@ -36591,13 +36596,6 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/mixyel,
 /area/indoors/town/church/chapel)
-"rax" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-mountain_town-mountain";
-	aportalid = "vanderlin-mountain_town-town"
-	},
-/turf/open/floor/naturalstone,
-/area/under/cavelava)
 "raH" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/table/wood/plain_alt,
@@ -45288,13 +45286,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
-"uUV" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_town-bog";
-	aportalid = "vanderlin-bog_town-town"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/basin)
 "uVc" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/dirt/road,
@@ -94007,9 +93998,9 @@ xGV
 wRA
 wRA
 xGV
-wdm
-wdm
-wdm
+eqb
+ibK
+xGV
 xGV
 wRA
 wRA
@@ -94209,9 +94200,9 @@ xGV
 wRA
 wRA
 xGV
-ibK
-ibK
-ibK
+xGV
+eqb
+eqb
 xGV
 wRA
 wRA
@@ -94411,9 +94402,9 @@ xGV
 xGV
 xGV
 xGV
-ibK
-ibK
-ibK
+eqb
+eqb
+xGV
 xGV
 xGV
 xGV
@@ -94613,9 +94604,9 @@ jdz
 jdz
 ibK
 jdz
+xGV
 ibK
-ibK
-ibK
+xGV
 ibK
 jdz
 jdz
@@ -133412,7 +133403,7 @@ rbr
 rbr
 rbr
 tfR
-qLp
+khi
 vKI
 vKI
 tfR
@@ -133615,8 +133606,8 @@ rbr
 fUv
 tfR
 qLp
-vKI
-vKI
+iJj
+iJj
 tfR
 fUv
 fUv
@@ -133816,9 +133807,9 @@ rbr
 rbr
 tfR
 tfR
-rax
-qIE
-qIE
+tfR
+tfR
+tfR
 tfR
 tfR
 tfR
@@ -144954,7 +144945,7 @@ ibK
 ibK
 ibK
 ibK
-uUV
+wdm
 rrW
 "}
 (55,1,3) = {"
@@ -145156,7 +145147,7 @@ ibK
 ibK
 ibK
 ibK
-uUV
+wdm
 rrW
 "}
 (56,1,3) = {"
@@ -145358,7 +145349,7 @@ ibK
 ibK
 ibK
 ibK
-uUV
+wdm
 rrW
 "}
 (57,1,3) = {"
