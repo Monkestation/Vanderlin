@@ -28,6 +28,13 @@
 	mind_traits = list(
 		TRAIT_KNOW_INQUISITION_DOORS
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/suspect_heretics,
+		/mob/living/carbon/human/proc/torture_victim,
+		/mob/living/carbon/human/proc/faith_test,
+		/mob/living/carbon/human/proc/view_inquisition,
+	)
+
 	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
@@ -38,12 +45,6 @@
 
 /datum/job/orthodoxist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
-	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
-
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()
 	spawned.hud_used?.bloodpool.set_fill_color("#dcdddb")
@@ -55,6 +56,12 @@
 	if(species)
 		species.native_language = "Old Psydonic"
 		species.accent_language = species.get_accent(species.native_language)
+
+/datum/job/orthodoxist/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.hud_used?.shutdown_bloodpool()
+		spawned.maxbloodpool = initial(spawned.maxbloodpool)
 
 /datum/job/advclass/sacrestant
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)

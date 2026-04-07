@@ -115,6 +115,10 @@
 	outfit = /datum/outfit/skeleton/zizoid
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton/zizo
+	verbs = list(
+		/mob/living/carbon/human/proc/praise,
+		/mob/living/carbon/human/proc/communicate,
+	)
 
 /datum/job/skeleton/zizoid/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -125,9 +129,6 @@
 	if(spawned.dna?.species)
 		spawned.dna.species.native_language = "Zizo Chant"
 		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
-
-	add_verb(spawned, /mob/living/carbon/human/proc/praise)
-	add_verb(spawned, /mob/living/carbon/human/proc/communicate)
 
 
 /* BASIC SKELETON OUTFIT */

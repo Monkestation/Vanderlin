@@ -51,12 +51,11 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 300
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/jailor
-
-/datum/job/jailor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 
 /datum/outfit/jailor
 	name = "Jailor"

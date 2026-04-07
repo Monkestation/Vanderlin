@@ -35,11 +35,9 @@
 		TRAIT_DODGEEXPERT,
 		TRAIT_STEELHEARTED,
 	)
-
-/datum/job/advclass/combat/puritan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 /datum/outfit/folkhero/puritan
 	name = "Monster Hunter (Folkhero)"

@@ -38,11 +38,12 @@
 		TRAIT_NOBLE_POWER
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 /datum/job/royalknight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
-
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 

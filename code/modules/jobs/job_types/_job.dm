@@ -124,6 +124,8 @@
 	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
 	VAR_FINAL/list/skills
 
+	var/list/verbs
+
 	/// Associative list of skill - base multiplier to set for skill_holder
 	var/list/skill_multipliers = list()
 
@@ -301,6 +303,9 @@
 		if(!spawned.has_language(to_learn))
 			spawned.grant_language(to_learn)
 
+	if(length(verbs))
+		add_verb(spawned, verbs)
+
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
@@ -429,6 +434,11 @@
 		return
 	if(!ishuman(spawned))
 		return
+
+	. = TRUE
+
+	if(!QDELETED(spawned.cleric))
+		qdel(spawned.cleric)
 	spawned.honorary = null
 	spawned.honorary_suffix = null
 	if(antag_role && spawned.mind)
@@ -472,6 +482,9 @@
 	remove_spells(spawned)
 	spawned.remove_stat_modifier(STATMOD_JOB)
 
+	if(length(verbs))
+		remove_verb(spawned, verbs)
+
 	if(is_foreigner)
 		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 	if(is_recognized)
@@ -486,6 +499,9 @@
 		REMOVE_TRAITS_IN(spawned.mind, JOB_TRAIT)
 	if(magic_user)
 		spawned.mana_pool.set_intrinsic_recharge(spawned.mana_pool.intrinsic_recharge_sources & ~MANA_ALL_LEYLINES)
+
+	if(parent_job)
+		return parent_job.remove_job(spawned)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
