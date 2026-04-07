@@ -1,15 +1,4 @@
 /*ALL MOB-RELATED DEFINES THAT DON'T BELONG IN ANOTHER FILE GO HERE*/
-
-#define STATKEY_STR "strength"
-#define STATKEY_PER "perception"
-#define STATKEY_INT "intelligence"
-#define STATKEY_CON "constitution"
-#define STATKEY_END "endurance"
-#define STATKEY_SPD "speed"
-#define STATKEY_LCK "fortune"
-
-#define MOBSTATS list(STATKEY_STR, STATKEY_PER, STATKEY_INT, STATKEY_CON, STATKEY_END, STATKEY_SPD, STATKEY_LCK)
-
 //Misc mob defines
 
 //for vision cone
@@ -32,13 +21,12 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
-#define BLOOD_VOLUME_MAXIMUM 2240
-#define BLOOD_VOLUME_SLIME_SPLIT 1120
-#define BLOOD_VOLUME_NORMAL 1120
-#define BLOOD_VOLUME_SAFE 950
-#define BLOOD_VOLUME_OKAY 672
-#define BLOOD_VOLUME_BAD 448
-#define BLOOD_VOLUME_SURVIVE 244
+#define BLOOD_VOLUME_MAXIMUM	BLOOD_VOLUME_NORMAL * 2
+#define BLOOD_VOLUME_NORMAL		1200
+#define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
+#define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
+#define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
+#define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -318,7 +306,7 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.15	//factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.2	//factor at which mob nutrition decreases
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
@@ -334,8 +322,8 @@
 
 #define HUMAN_FIRE_STACK_ICON_NUM	5
 
-#define GRAB_PIXEL_SHIFT_PASSIVE 6
-#define GRAB_PIXEL_SHIFT_AGGRESSIVE 12
+#define GRAB_PIXEL_SHIFT_PASSIVE 5
+#define GRAB_PIXEL_SHIFT_AGGRESSIVE 10
 
 #define PULL_PRONE_SLOWDOWN 2
 #define HUMAN_CARRY_SLOWDOWN 0

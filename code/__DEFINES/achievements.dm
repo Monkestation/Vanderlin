@@ -11,6 +11,11 @@
 #define MEDAL_HELBITALJANKEN	"Hel-bent on Winning"
 #define MEDAL_MATERIALCRAFT 	"Getting an Upgrade"
 
+// ~achievement qualities
+#define ACHIEVEMENT_RARE 2
+#define ACHIEVEMENT_GOOD 1
+#define ACHIEVEMENT_NEUTRAL 0
+#define ACHIEVEMENT_BAD -1
 
 //Boss medals
 
@@ -43,3 +48,6 @@
 #define LEGION_SCORE 	     "Legion Killed"
 #define SWARMER_BEACON_SCORE "Swarmer Beacs Killed"
 #define TENDRIL_CLEAR_SCORE	 "Tendrils Killed"
+
+#define AWARD_FLAG_REWARD (1<<0)
+#define AWARD_FLAG_SEASONAL (1<<1)

@@ -141,6 +141,7 @@
 		if(cavity.cavity_item)
 			cavity.cavity_item.forceMove(drop_location)
 			cavity.cavity_item = null
+	SEND_SIGNAL(affected.owner, COMSIG_LIVING_DISEMBOWELED)
 
 /datum/wound/slash/incision
 	name = "incision"

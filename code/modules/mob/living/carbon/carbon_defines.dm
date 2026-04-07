@@ -18,6 +18,14 @@
 
 	var/disgust = 0
 
+	/// Speech modifiers
+	var/list/datum/speech_modifier/speech_modifiers
+
+	/// List of carry_weight modifiers applying to this mob
+	var/list/carry_weight_modification //Lazy list, see carry_weight_modifier.dm
+	/// List of carry_weight modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/carry_weight_mod_immunities //Lazy list, see carry_weight_modifier.dm
+
 //inventory slots
 	var/obj/item/backr = null
 	var/obj/item/backl = null
@@ -30,6 +38,10 @@
 
 	var/obj/item/clothing/gloves = null //only used by humans
 	var/obj/item/clothing/shoes = null //only used by humans.
+
+	var/name_override //For temporary visible name changes
+	var/honorary // A title prepended to the beginning of the name
+	var/honorary_suffix // A title appended to the end of the name
 
 
 	var/datum/dna/dna = null//Carbon
@@ -47,7 +59,7 @@
 	var/tinttotal = 0	// Total level of visualy impairing items
 
 	var/list/bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
-					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
+					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)
 	//Gets filled up in create_bodyparts()
 
 	var/list/hand_bodyparts = list() //a collection of arms (or actually whatever the fug /bodyparts you monsters use to wreck my systems)

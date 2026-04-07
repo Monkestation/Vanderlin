@@ -17,7 +17,7 @@
 
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/fibers
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/attribute/skill/misc/sewing
 	output = /obj/item/natural/cloth
 
 /datum/repeatable_crafting_recipe/survival/thorn_needle
@@ -42,6 +42,19 @@
 	attacked_atom = /obj/item/natural/fibers
 	output = /obj/item/rope
 	crafting_message = "starts to braid some fibers"
+
+/datum/repeatable_crafting_recipe/survival/net
+	name = "rope net"
+	requirements = list(
+		/obj/item/rope = 2
+	)
+
+	starting_atom = /obj/item/rope
+	attacked_atom = /obj/item/rope
+	output = /obj/item/rope/net
+	crafting_message = "starts to braid some rope"
+	skillcraft = /datum/attribute/skill/craft/traps
+	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/survival/woodenbucket
 	name = "wooden bucket"
@@ -156,6 +169,17 @@
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/knife/stone
 
+/datum/repeatable_crafting_recipe/survival/stone_sword
+	name = "stone sword"
+	requirements = list (
+		/obj/item/natural/rock = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/weapon/knife
+	attacked_atom = /obj/item/natural/rock
+	output = /obj/item/weapon/sword/stone
+
 /datum/repeatable_crafting_recipe/survival/stone_hoe
 	name = "stone hoe"
 	requirements = list(
@@ -212,7 +236,7 @@
 	starting_atom  = /obj/item/ingot/iron
 	allow_inverse_start = TRUE
 	output = /obj/item/flint
-	skillcraft = /datum/skill/craft/engineering
+	skillcraft = /datum/attribute/skill/craft/engineering
 
 /datum/repeatable_crafting_recipe/survival/bag
 	name = "sack"
@@ -226,7 +250,7 @@
 	starting_atom = /obj/item/needle
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/storage/sack
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/attribute/skill/misc/sewing
 
 /datum/repeatable_crafting_recipe/survival/sack_clothing
 	name = "head sack"
@@ -241,19 +265,19 @@
 	attacked_atom = /obj/item/natural/cloth
 	output = /obj/item/clothing/head/sack
 	craftdiff = 1
-	skillcraft = /datum/skill/misc/sewing
+	skillcraft = /datum/attribute/skill/misc/sewing
 	subtypes_allowed = TRUE
 
 /datum/repeatable_crafting_recipe/survival/clay
 	name = "clay lump"
 	requirements = list(
-		/obj/item/natural/dirtclod= 3,
+		/obj/item/natural/clod/dirt= 3,
 	)
 	reagent_requirements = list(
 		/datum/reagent/water = 10
 	)
-	attacked_atom = /obj/item/natural/dirtclod
-	starting_atom = /obj/item/natural/dirtclod
+	attacked_atom = /obj/item/natural/clod/dirt
+	starting_atom = /obj/item/natural/clod/dirt
 	output = /obj/item/natural/clay
 
 /datum/repeatable_crafting_recipe/survival/wicker_basket
@@ -281,11 +305,23 @@
 	requirements = list(
 		/obj/item/weapon/polearm/woodstaff = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/fibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/weapon/polearm/woodstaff
-	starting_atom = /obj/item/natural/fibers
+	starting_atom = /obj/item/natural/fibers/sinew
 	output = /obj/item/weapon/polearm/spear/bonespear
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/survival/tbone_spear
+	name = "troll-horn bone spear"
+	requirements = list(
+		/obj/item/weapon/polearm/spear/bonespear = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	attacked_atom = /obj/item/weapon/polearm/spear/bonespear
+	starting_atom = /obj/item/natural/fibers/sinew
+	output = /obj/item/weapon/polearm/spear/trollbonespear
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/survival/bone_axe
@@ -293,12 +329,53 @@
 	requirements = list(
 		/obj/item/grown/log/tree/small = 1,
 		/obj/item/alch/bone= 2,
-		/obj/item/natural/fibers = 1,
+		/obj/item/natural/fibers/sinew = 1,
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
-	starting_atom= /obj/item/natural/fibers
+	starting_atom= /obj/item/natural/fibers/sinew
 	allow_inverse_start = TRUE
 	output = /obj/item/weapon/axe/boneaxe
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/survival/tbone_axe
+	name = "troll-horn bone axe"
+	requirements = list(
+		/obj/item/weapon/axe/boneaxe = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	attacked_atom = /obj/item/weapon/axe/boneaxe
+	starting_atom= /obj/item/natural/fibers/sinew
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/axe/trollboneaxe
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/bspear
+	name = "2x Bone Javelins"
+	requirements = list(
+		/obj/item/alch/bone = 1,
+		/obj/item/grown/log/tree/small = 1,
+		/obj/item/natural/fibers/sinew =1,
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/alch/bone
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/polearm/spear/bone
+	output_amount = 2
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/tbspear
+	name = "2x troll-horn Bone Javelins"
+	requirements = list(
+		/obj/item/weapon/polearm/spear/bone = 1,
+		/obj/item/alch/horn = 1,
+		/obj/item/natural/fibers/sinew =1,
+	)
+	attacked_atom = /obj/item/weapon/polearm/spear/bone
+	starting_atom = /obj/item/natural/fibers/sinew
+	allow_inverse_start = TRUE
+	output = /obj/item/weapon/polearm/spear/trollbone
+	output_amount = 2
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/survival/claybrick
@@ -312,7 +389,7 @@
 
 	starting_atom = /obj/item/grown/log
 	attacked_atom = /obj/item/natural/clay
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	output = /obj/item/natural/raw_brick
 
 /datum/repeatable_crafting_recipe/survival/mushmound

@@ -12,8 +12,13 @@
 	smeltresult = /obj/item/ingot/iron
 	grid_width = 32
 	grid_height = 96
+	item_weight = 143 GRAMS
 	var/obj/item/held_item = null
 	var/hott = 0
+
+/obj/item/weapon/tongs/Initialize(mapload)
+	. = ..()
+	item_flags |= SURGICAL_TOOL // we lost a real one tbh
 
 /obj/item/weapon/tongs/examine(mob/user)
 	. = ..()
@@ -60,21 +65,21 @@
 	else if(held_item)
 		to_chat(user, "<span class='warning'>Cannot place [held_item] here!</span>")
 
-/obj/item/weapon/tongs/attack_self(mob/user, params)
+/obj/item/weapon/tongs/attack_self(mob/user, list/modifiers)
 	place_item_to_atom(get_turf(user), user)
 
 /obj/item/weapon/tongs/dropped(mob/user)
 	. = ..()
 	place_item_to_atom(get_turf(src), user)
 
-/obj/item/weapon/tongs/pre_attack_secondary(atom/A, mob/living/user, params)
+/obj/item/weapon/tongs/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	place_item_to_atom(get_turf(A), user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, params)
+/obj/item/weapon/tongs/pre_attack(obj/item/A, mob/living/user, list/modifiers)
 	if(held_item?.tong_interaction(A, user))
 		return TRUE
 

@@ -18,8 +18,6 @@
 		#define BUTTON_DRAGGED "drag"
 
 	/* Key Buttons */
-		/// TRUE if ctrl was held during this click action.
-		#define CTRL_CLICK "ctrl"
 		/// Used as `params[CTRL_CLICKED] == TRUE|FALSE`.
 		#define CTRL_CLICKED "ctrl"
 		/// TRUE if shift was held during this click action.
@@ -53,3 +51,6 @@
 		/// If the mouse is over a maptext link, OR if the mouse action is related to clicking a link.
 		/// Used as `params[OVER_LINK] == TRUE|FALSE`
 		#define OVER_LINK "link"
+
+/* Custom Params */
+#define CLICK_CATCHER "catcher"

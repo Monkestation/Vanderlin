@@ -62,25 +62,21 @@
 	return TRUE
 
 /mob/living/carbon/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, damage_type = "blunt")
-	if(!skipcatch)	//ugly, but easy
-		if(can_catch_item())
-			if(istype(AM, /obj/item))
-				if(!istype(AM, /obj/item/net))
-					var/obj/item/I = AM
-					if(isturf(I.loc))
-						I.attack_hand(src)
-						if(get_active_held_item() == I) //if our attack_hand() picks up the item...
-							visible_message("<span class='warning'>[src] catches [I]!</span>", \
-											"<span class='danger'>I catch [I] in mid-air!</span>")
-							throw_mode_off()
-							return 1
-				else
-					var/obj/item/net/N
-					visible_message("<span class='warning'>[src] tries to catch \the [N] but gets snared by it!</span>", \
-									"<span class='danger'>Why did I even try to do this...?</span>") // Hahaha dumbass!!!
-					throw_mode_off()
-					N.ensnare(src)
-					return
+	if(!skipcatch && can_catch_item() && isitem(AM) && isturf(AM.loc))	//ugly, but easy
+		if(istype(AM, /obj/item/rope/net))
+			var/obj/item/rope/net/N = AM
+			visible_message(span_warning("[src] tries to catch [N] but gets snared by it!"), \
+							span_danger("Why did I try to catch it??")) // Hahaha dumbass!!!
+			throw_mode_off()
+			N.ensnare(src)
+			return
+		var/obj/item/I = AM
+		I.attack_hand(src)
+		if(get_active_held_item() == I) //if our attack_hand() picks up the item...
+			visible_message(span_warning("[src] catches [I]!"), \
+							span_danger("I catch [I] in mid-air!"))
+			throw_mode_off()
+			return 1
 	..()
 
 
@@ -88,7 +84,7 @@
 	var/obj/item/bodypart/BP = get_bodypart(check_zone(def_zone))
 	if(BP)
 		var/newdam = P.damage * (100-blocked)/100
-		BP.bodypart_attacked_by(P.woundclass, newdam, zone_precise = def_zone, crit_message = TRUE, reduce_crit = P.reduce_crit_chance)
+		BP.bodypart_attacked_by(P.woundclass, newdam, zone_precise = def_zone, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = -P.reduce_crit_chance))
 		return TRUE
 
 /mob/living/carbon/check_projectile_embed(obj/projectile/P, def_zone, blocked)
@@ -160,7 +156,7 @@
 	var/obj/item/bodypart/affecting
 	var/selzone = user.zone_selected
 	if(cmode && !accurate)
-		selzone = accuracy_check(user.zone_selected, user, src, /datum/skill/combat/wrestling, user.used_intent)
+		selzone = accuracy_check(user.zone_selected, user, src, /datum/attribute/skill/combat/wrestling, user.used_intent)
 	affecting = get_bodypart(check_zone(selzone))
 	if(selzone && affecting)
 		if(selzone in affecting.grabtargets)
@@ -206,60 +202,69 @@
 
 
 /mob/living/carbon/attacked_by(obj/item/I, mob/living/user)
-	var/obj/item/bodypart/affecting
 	var/useder = user.zone_selected
+
 	if(user.tempatarget)
 		useder = user.tempatarget
 		user.tempatarget = null
+
 	if(!lying_attack_check(user, I))
 		return
-	affecting = get_bodypart(check_zone(useder)) //precise attacks, on yourself or someone you are grabbing
+
+	var/obj/item/bodypart/affecting = get_bodypart(check_zone(useder)) //precise attacks, on yourself or someone you are grabbing
 	if(!affecting) //missing limb
 		to_chat(user, span_warning("Unfortunately, there's nothing there."))
 		return FALSE
+
 	SEND_SIGNAL(I, COMSIG_ITEM_ATTACK_ZONE, src, user, affecting)
+
 	I.funny_attack_effects(src, user)
+
 	var/statforce = get_complex_damage(I, user)
-	if(statforce)
-		next_attack_msg.Cut()
-		affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce, crit_message = TRUE)
-		apply_damage(statforce, I.damtype, affecting)
-		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
-			if(prob(statforce))
-				I.add_mob_blood(src)
-				user.update_inv_hands()
-				var/turf/location = get_turf(src)
-				add_splatter_floor(location)
-				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
-					user.add_mob_blood(src)
-				var/splatter_dir = get_dir(user, src)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir)
-				if(affecting.body_zone == BODY_ZONE_HEAD)
-					if(wear_mask)
-						wear_mask.add_mob_blood(src)
-						update_inv_wear_mask()
-					if(wear_neck)
-						wear_neck.add_mob_blood(src)
-						update_inv_neck()
-					if(head)
-						head.add_mob_blood(src)
-						update_inv_head()
 
 	if(user == src || pulledby == user)
 		send_item_attack_message(I, user, precise_attack_check(useder, affecting))
 	else
 		send_item_attack_message(I, user, affecting.name)
 
-	if(statforce)
-		var/probability = I.get_dismemberment_chance(affecting, user)
-		if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
-			I.add_mob_blood(src)
-		return TRUE //successful attack
+	if(!statforce)
+		return TRUE
 
-//ATTACK HAND IGNORING PARENT RETURN VALUE
+	affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce, crit_message = TRUE)
+
+	apply_damage(statforce, I.damtype, affecting)
+
+	if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
+		if(prob(statforce))
+			I.add_mob_blood(src)
+			user.update_inv_hands()
+			var/turf/location = get_turf(src)
+			add_splatter_floor(location)
+			if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
+				user.add_mob_blood(src)
+			var/splatter_dir = get_dir(user, src)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, splatter_dir, get_blood_type())
+			if(affecting.body_zone == BODY_ZONE_HEAD)
+				if(wear_mask)
+					wear_mask.add_mob_blood(src)
+					update_inv_wear_mask()
+				if(wear_neck)
+					wear_neck.add_mob_blood(src)
+					update_inv_neck()
+				if(head)
+					head.add_mob_blood(src)
+					update_inv_head()
+
+	var/probability = I.get_dismemberment_chance(affecting, user)
+	if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
+		I.add_mob_blood(src)
+
+	return TRUE //successful attack
+
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		. = TRUE
+	. = ..()
+	if(.)
+		return TRUE
 
 	if(!lying_attack_check(user))
 		return FALSE

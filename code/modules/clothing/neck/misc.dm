@@ -122,7 +122,10 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE // Made of leather
 	smeltresult = /obj/item/fertilizer/ash
@@ -132,6 +135,7 @@
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	max_integrity = INTEGRITY_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
+	item_weight = 850 GRAMS
 
 
 /obj/item/clothing/neck/coif/AdjustClothes(mob/user)
@@ -174,6 +178,7 @@
 	armor = ARMOR_PADDED
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/neck/coif/cloth/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -190,7 +195,10 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
@@ -198,6 +206,7 @@
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
+	item_weight = 275 GRAMS
 
 /obj/item/clothing/neck/bellcollar
 	name = "bell collar"
@@ -208,7 +217,10 @@
 	pickup_sound = SFX_JINGLE_BELLS
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = SFX_JINGLE_BELLS
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	anvilrepair = null
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
@@ -253,6 +265,9 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
+	item_weight = 2.3 KILOGRAMS
+
+	material_category = ARMOR_MAT_CHAINMAIL
 
 /obj/item/clothing/neck/chaincoif/AdjustClothes(mob/user)
 	if(loc == user)
@@ -333,6 +348,9 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
 
+	material_category = ARMOR_MAT_PLATE
+	item_weight = 1.13 KILOGRAMS
+
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
@@ -369,14 +387,12 @@
 	max_integrity = INTEGRITY_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
 
+	material_category = ARMOR_MAT_PLATE
+	item_weight = 900 GRAMS
+
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-
-/obj/item/clothing/neck/gorget/ancient
-	name = "gorget"
-	icon_state = "ancientgorget"
-	desc = "A very old gorget."
 
 /obj/item/clothing/neck/gorget/explosive
 	name = "collar of servitude"
@@ -488,7 +504,7 @@
 	grid_height = 64
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!iscarbon(target))
 		return
@@ -529,6 +545,9 @@
 	clothing_flags = CANT_SLEEP_IN
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
+
+	material_category = ARMOR_MAT_CHAINMAIL
+	item_weight = 1.12 KILOGRAMS
 
 /obj/item/clothing/neck/highcollier/AdjustClothes(mob/user)
 	if(loc == user)
@@ -601,7 +620,7 @@
 	. = ..()
 	. += span_info("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, params)
+/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
 	. = ..()
 	var/total_sellprice = 0
 	if(isturf(A))

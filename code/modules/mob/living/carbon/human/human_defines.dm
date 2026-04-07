@@ -26,6 +26,7 @@
 	var/detail_color = "000"
 
 	var/skin_tone = "caucasian1"	//Skin tone
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 	var/lip_color = "white"
@@ -64,8 +65,6 @@
 	var/worn_armor_class = ARMOR_CLASS_NONE
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
-
-	var/name_override //For temporary visible name changes
 
 	var/datum/physiology/physiology
 

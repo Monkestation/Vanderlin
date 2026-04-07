@@ -89,9 +89,8 @@
 	if (!isnull(examine_text))
 		examine_list += examine_text
 
-/datum/component/callouts/proc/on_click(mob/user, atom/clicked_atom, params)
+/datum/component/callouts/proc/on_click(mob/user, atom/clicked_atom, list/modifiers)
 	SIGNAL_HANDLER
-	var/list/modifiers = params2list(params)
 
 	if (!LAZYACCESS(modifiers, SHIFT_CLICKED) || !LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return

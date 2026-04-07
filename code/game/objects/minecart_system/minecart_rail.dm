@@ -99,7 +99,7 @@
 	secondary_direction = dir
 	setDir(last_direction)
 
-/obj/structure/minecart_rail/attackby_secondary(obj/item/I, mob/user, params)
+/obj/structure/minecart_rail/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

@@ -3,6 +3,7 @@
 	level = 1
 	hover_color = "#607d65"
 	uses_integrity = TRUE
+	luminosity = 1
 
 	var/intact = 1
 
@@ -49,6 +50,21 @@
 
 	///The typepath we use for lazy fishing on turfs, to save on world init time.
 	var/fish_source
+
+	var/dynamic_lighting = TRUE
+
+	var/tmp/lighting_corners_initialised = FALSE
+
+	///List of light sources affecting this turf.
+	var/tmp/list/datum/light_source/affecting_lights
+	///Our lighting object.
+	var/tmp/atom/movable/lighting_object/lighting_object
+	var/tmp/list/datum/lighting_corner/corners
+
+	///Which directions does this turf block the vision of, taking into account both the turf's opacity and the movable opacity_sources.
+	var/directional_opacity = NONE
+	///Lazylist of movable atoms providing opacity sources.
+	var/list/atom/movable/opacity_sources
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
@@ -102,7 +118,7 @@
 		reassess_stack()
 
 	if (opacity)
-		has_opaque_atom = TRUE
+		directional_opacity = ALL_CARDINALS
 
 	if(shine)
 		make_shiny(shine)
@@ -153,14 +169,14 @@
 /// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
 /// It's possible because turfs are fucked, and if you have one in a list and it's replaced with another one, the list ref points to the new turf
 /// We do it because moving signals over was needlessly expensive, and bloated a very commonly used bit of code
-/turf/clear_signal_refs()
+/turf/_clear_signal_refs()
 	return
 
 /turf/attack_hand(mob/user)
 	. = ..()
 	if(.)
 		return
-	user.Move_Pulled(src)
+	// user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
 	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)
@@ -269,22 +285,23 @@
 		return FALSE
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
-		var/dex_save = falling_mob.get_skill_level(/datum/skill/misc/climbing)
-		if(dex_save >= 5)
-			if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
-				falling_mob.visible_message(span_danger("[falling_mob] gracefully lands on top of [src]!"))
-		else
-			falling_mob.visible_message(span_danger("[falling_mob] crashes into [src]!"))
-			if(falling_mob.fall_damage())
-				for(var/mob/living/crumpled_mob in contents)
-					visible_message(span_danger("\The [falling_mob] falls on \the [crumpled_mob.name]!"))
-					crumpled_mob.Stun(1)
-					crumpled_mob.take_overall_damage(falling_mob.fall_damage()*2)
+		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
+			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
+			if(dex_save >= 5)
+				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
+					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")
+			else
+				falling_mob.visible_message("<span class='danger'>[falling_mob] crashes into [src]!</span>")
+				if(falling_mob.fall_damage())
+					for(var/mob/living/crumpled_mob in contents)
+						visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+						crumpled_mob.Stun(1)
+						crumpled_mob.take_overall_damage(falling_mob.fall_damage(levels)*2)
 	if(falling_atom.fall_damage())
 		for(var/mob/living/crumpled_mob in contents)
-			visible_message(span_danger("\The [falling_atom] falls on \the [crumpled_mob.name]!"))
+			visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
 			crumpled_mob.Stun(1)
-			crumpled_mob.take_overall_damage(falling_atom.fall_damage()*2)
+			crumpled_mob.take_overall_damage(falling_atom.fall_damage(levels)*2)
 	falling_atom.onZImpact(src, levels)
 	if(isobj(falling_atom))
 		var/obj/falling_obj = falling_atom
@@ -293,18 +310,21 @@
 
 	return TRUE
 
-/atom/movable/proc/fall_damage()
+/atom/movable/proc/fall_damage(fall_distance)
 	return 0
 
-/obj/item/fall_damage()
-	if(w_class == WEIGHT_CLASS_TINY)
-		return 0
-	if(w_class == WEIGHT_CLASS_GIGANTIC)
-		return 300
-	var/bsc = 3**(w_class-1)
-	return bsc
+/obj/item/fall_damage(fall_distance)
+	var/mass_kg = get_carry_weight()
+	var/fall_factor = sqrt(max(fall_distance, 1))
+	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
 
-/obj/structure/fall_damage()
+
+/mob/living/fall_damage(fall_distance)
+	var/mass_kg = carry_weight + get_mob_weight()
+	var/fall_factor = sqrt(max(fall_distance, 1))
+	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
+
+/obj/structure/fall_damage(fall_distance)
 	if(w_class == WEIGHT_CLASS_TINY)
 		return 0
 	if(w_class == WEIGHT_CLASS_GIGANTIC)
@@ -369,28 +389,23 @@
 		if(QDELETED(mover))
 			return FALSE		//We were deleted.
 
-/turf/Entered(atom/movable/AM)
+/turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	..()
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, AM)
-	SEND_SIGNAL(AM, COMSIG_MOVABLE_TURF_ENTERED, src)
+	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
-	if(explosion_level && AM.ex_check(explosion_id))
-		AM.ex_act(explosion_level)
+	if(explosion_level && arrived.ex_check(explosion_id))
+		arrived.ex_act(explosion_level)
 
-	// If an opaque movable atom moves around we need to potentially update visibility.
-	if (AM.opacity)
-		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
-		reconsider_lights()
-
-/turf/open/Entered(atom/movable/AM)
+/turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	..()
 	//melting
-	if(isobj(AM) && temperature > 273.15)
-		var/obj/O = AM
+	if(isobj(arrived) && temperature > 273.15)
+		var/obj/O = arrived
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()
-	if(!(AM.atom_flags & Z_FALLING))
-		zFall(AM)
+	if(!(arrived.atom_flags & Z_FALLING))
+		zFall(arrived)
 
 /turf/proc/is_plasteel_floor()
 	return FALSE

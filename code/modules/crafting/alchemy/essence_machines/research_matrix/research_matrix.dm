@@ -24,7 +24,7 @@
 	current_user = null
 	return ..()
 
-/obj/machinery/essence/research_matrix/attack_hand(mob/user, params)
+/obj/machinery/essence/research_matrix/attack_hand(mob/user, list/modifiers)
 	current_user = WEAKREF(user)
 	open_research_interface(user)
 
@@ -49,7 +49,7 @@
 
 	return TRUE
 
-/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/research_matrix/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_connector))
 		return ..()
 
@@ -132,8 +132,8 @@
 	visible_message(span_notice("The engine hums and grumbles with alchemic energy as it's fueled!"))
 
 	if(user)
-		var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
-		user.adjust_experience(/datum/skill/craft/alchemy, selected_research.experience_reward * boon, FALSE)
+		var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+		user.adjust_experience(/datum/attribute/skill/craft/alchemy, selected_research.experience_reward * boon, FALSE)
 
 	selected_research = null
 
@@ -163,7 +163,7 @@
 	matrix = M
 	user = U
 
-/datum/research_interface/Destroy(force, ...)
+/datum/research_interface/Destroy(force)
 	matrix = null
 	user = null
 	window = null

@@ -836,7 +836,7 @@
 	interface.show_interface()
 /client/proc/family_tree_debug_menu()
 	set name = "Family Tree Debug Menu"
-	set category = "Debug"
+	set category = "Debug.Debug"
 
 	var/html = {"
 	<html>

@@ -27,8 +27,6 @@
 			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=fingerprints'>List Fingerprints</A><BR>
 			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=ctfbutton'>Enable/Disable CTF</A><BR><BR>
 			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=tdomereset'>Reset Thunderdome to default state</A><BR>
-			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=set_name'>Rename Station Name</A><BR>
-			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=reset_name'>Reset Station Name</A><BR>
 			<A href='byond://?src=[REF(src)];[HrefToken()];secrets=night_shift_set'>Set Night Shift Mode</A><BR>
 			"}
 
@@ -100,20 +98,10 @@
 					var/datum/admins/D = GLOB.admin_datums[ckey]
 					dat += "[ckey] - [D.rank.name]<br>"
 				usr << browse(dat, "window=showadmins;size=600x500")
-		if("set_name")
-			if(!check_rights(R_ADMIN))
-				return
-			var/new_name = input(usr, "Please input a new name for the station.", "What?", "") as text|null
-			if(!new_name)
-				return
-			set_station_name(new_name)
-			log_admin("[key_name(usr)] renamed the station to \"[new_name]\".")
-			message_admins("<span class='adminnotice'>[key_name_admin(usr)] renamed the station to: [new_name].</span>")
-			priority_announce("[command_name()] has renamed the station to \"[new_name]\".")
 		if("night_shift_set")
 			if(!check_rights(R_ADMIN))
 				return
-			var/val = alert(usr, "What do you want to set night shift to? This will override the automatic system until set to automatic again.", "Night Shift", "On", "Off", "Automatic")
+			var/val = tgui_alert(usr, "What do you want to set night shift to? This will override the automatic system until set to automatic again.", "Night Shift", list("On", "Off", "Automatic"))
 			switch(val)
 				if("Automatic")
 					if(CONFIG_GET(flag/enable_night_shifts))
@@ -127,15 +115,6 @@
 				if("Off")
 					SSnightshift.can_fire = FALSE
 					SSnightshift.update_nightshift(FALSE, TRUE)
-
-		if("reset_name")
-			if(!check_rights(R_ADMIN))
-				return
-			var/new_name = new_station_name()
-			set_station_name(new_name)
-			log_admin("[key_name(usr)] reset the station name.")
-			message_admins("<span class='adminnotice'>[key_name_admin(usr)] reset the station name.</span>")
-			priority_announce("[command_name()] has renamed the station to \"[new_name]\".")
 
 		if("list_bombers")
 			if(!check_rights(R_ADMIN))
@@ -289,7 +268,7 @@
 	if(E)
 		E.processing = FALSE
 		if(E.announceWhen>0)
-			switch(alert(usr, "Would you like to alert the crew?", "Alert", "Yes", "No", "Cancel"))
+			switch(tgui_alert(usr, "Would you like to alert the crew?", "Alert", list("Yes", "No", "Cancel")))
 				if("Yes")
 					E.announceChance = 100
 				if("Cancel")

@@ -1,5 +1,6 @@
 /datum/job/rousman
 	title = "Rousman"
+	job_flags = JOB_EQUIP_RANK
 	faction = FACTION_TOWN
 	total_positions = 0
 	spawn_positions = 0
@@ -14,13 +15,12 @@
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.name = "Rousman"
-	spawned.real_name = "Rousman"
 
 	if(length(spawned.quirks))
 		spawned.clear_quirks()
 
 	spawned.remove_all_languages()
+	spawned.grant_language(/datum/language/rousman)
 	spawned.grant_language(/datum/language/common)
 
 /datum/outfit/rousman

@@ -19,12 +19,13 @@
 	blade_dulling = 0
 	slot_flags = ITEM_SLOT_HIP
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
-	associated_skill = /datum/skill/combat/knives
+	associated_skill = /datum/attribute/skill/combat/knives
 	dropshrink = 0.9
 	grid_height = 64
 	grid_width = 32
 	melt_amount = 50
 	melting_material = /datum/material/steel
+	item_weight = 212 GRAMS
 	var/time_multiplier = 1
 
 /datum/intent/chisel
@@ -47,3 +48,4 @@
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
 	time_multiplier = 1.2
+	item_weight = 245 GRAMS

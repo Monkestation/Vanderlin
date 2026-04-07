@@ -1,7 +1,7 @@
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list(STATKEY_PER = -10, STATKEY_SPD = -2, STATKEY_LCK = -5)
+	effectedstats = list(STAT_PERCEPTION = -10, STAT_SPEED = -2, STAT_FORTUNE = -5)
 	duration = 5 SECONDS
 
 /datum/quirk/vice/bad_sight
@@ -13,7 +13,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	owner.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
 
 	if(H.wear_mask)
 		var/type = H.wear_mask.type
@@ -38,9 +38,6 @@
 	name = "Cyclops (R)"
 	desc = "I lost my right eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_right/on_spawn()
 	if(!ishuman(owner))
@@ -59,9 +56,6 @@
 	name = "Cyclops (L)"
 	desc = "I lost my left eye long ago. But it made me great at noticing things."
 	point_value = 2
-	incompatible_quirks = list(
-		/datum/quirk/boon/night_vision
-	)
 
 /datum/quirk/vice/cyclops_left/on_spawn()
 	if(!ishuman(owner))
@@ -87,6 +81,24 @@
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/tongue/permanent)
+
+/datum/quirk/vice/mute
+	name = "Mute"
+	desc = "I am entirely unable to speak, and must rely on gestures or writing to communicate. (Being mute is not an excuse to forego roleplay. Use of custom emotes is recommended. This quirk may inhibit spellcasting.)"
+	point_value = 6
+	incompatible_quirks = list(
+		/datum/quirk/vice/tongueless
+	)
+
+/datum/quirk/vice/mute/on_spawn()
+	if(!owner)
+		return
+	ADD_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
+/datum/quirk/vice/mute/on_remove()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
 
 /datum/quirk/vice/wooden_arm_right
 	name = "Wooden Arm (R)"
@@ -131,8 +143,8 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	ADD_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	ADD_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 	// Equip iron mask - remove existing mask if present
 	if(H.wear_mask)
@@ -149,8 +161,8 @@
 	var/mob/living/carbon/human/H = owner
 
 	// Remove traits when quirk is removed
-	REMOVE_TRAIT(H, TRAIT_LEPROSY, TRAIT_GENERIC)
-	REMOVE_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
+	REMOVE_TRAIT(H, TRAIT_LEPROSY, QUIRK_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_NOPAIN, QUIRK_TRAIT)
 
 /datum/quirk/vice/crippled_arm
 	name = "Missing Arm"
@@ -262,6 +274,7 @@
 		/datum/quirk/vice/lost_keys,
 		/datum/quirk/boon/always_prepared,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/rough_start/on_spawn()
 	if(!owner || !ishuman(owner))
@@ -309,6 +322,7 @@
 	incompatible_quirks = list(
 		/datum/quirk/vice/rough_start,
 	)
+	preview_render = FALSE
 
 /datum/quirk/vice/lost_keys/on_spawn()
 	if(!owner || !ishuman(owner))
@@ -353,10 +367,14 @@
 			K.forceMove(key_location)
 
 /datum/quirk/vice/nightmares
-	name = "Nightmares"
-	desc = "You suffer from terrible nightmares. You scream in your sleep and take longer to rest."
+	name = "Nitemares"
+	desc = "You suffer from terrible nitemares. You scream in your sleep and take longer to rest."
 	point_value = 1
 	var/next_scream = 0
+
+/datum/quirk/vice/nightmares/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Nitemares..."))
 
 /datum/quirk/vice/nightmares/on_spawn()
 	if(!owner)
@@ -387,6 +405,10 @@
 	var/in_darkness = FALSE
 	var/next_panic = 0
 
+/datum/quirk/vice/fear_darkness/on_examined(mob/user, list/P, list/examine_contents)
+	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
+		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Scared of the Dark..."))
+
 /datum/quirk/vice/fear_darkness/on_life(mob/living/user)
 	if(!owner)
 		return
@@ -398,7 +420,7 @@
 
 	var/dark = FALSE
 	if(outside)
-		if(light_amount < 0.15 && GLOB.tod == "night")
+		if(light_amount < 0.15 && GLOB.tod == NIGHT)
 			dark = TRUE
 	else if(light_amount < 0.15)
 		dark = TRUE
@@ -420,3 +442,19 @@
 		if(in_darkness)
 			in_darkness = FALSE
 			to_chat(owner, span_notice("Finally, light! I can breathe again..."))
+
+/datum/quirk/vice/missing_teeth
+	name = "Missing Teeth"
+	desc = "Years of brawling, bad luck, or bad hygiene have cost you several teeth. You lisp noticeably."
+	point_value = 2
+
+/datum/quirk/vice/missing_teeth/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	var/obj/item/bodypart/mouth/jaw = H.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(!jaw)
+		return
+	var/to_remove = rand(6, 8)
+	jaw.remove_teeth(to_remove)
+	to_chat(H, span_warning("You run your tongue across the gaps where your teeth used to be."))

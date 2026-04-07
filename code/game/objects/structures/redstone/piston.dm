@@ -112,7 +112,7 @@
 		base_state += "_extended"
 	icon_state = base_state
 
-/obj/structure/redstone/piston/AltClick(mob/user)
+/obj/structure/redstone/piston/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user) || extended)
 		return
 	dir = turn(dir, 90)

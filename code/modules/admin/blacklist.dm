@@ -5,7 +5,7 @@ GLOBAL_PROTECT(nameban)
 
 /proc/load_nameban()
 	GLOB.nameban = list()
-	for(var/line in world.file2list(NAMEBANFILE))
+	for(var/line in file2list(NAMEBANFILE))
 		if(!line)
 			continue
 		if(findtextEx(line,"#",1,2))
@@ -29,7 +29,7 @@ GLOBAL_PROTECT(bypassage)
 
 /proc/load_bypassage()
 	GLOB.bypassage = list()
-	for(var/line in world.file2list(BYPASSAGEFILE))
+	for(var/line in file2list(BYPASSAGEFILE))
 		if(!line)
 			continue
 		if(findtextEx(line,"#",1,2))

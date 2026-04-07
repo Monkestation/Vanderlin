@@ -102,9 +102,7 @@
 	L.skele_look()
 
 /datum/antagonist/overlord/proc/equip_overlord()
-	owner.unknow_all_people()
-	for(var/datum/mind/MF in get_minds())
-		owner.become_unknown_to(MF)
+	owner.forget_and_be_forgotten()
 	var/mob/living/carbon/human/L = owner.current
 
 	L.mana_pool.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES

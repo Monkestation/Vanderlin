@@ -79,11 +79,8 @@
 /// Tag representing unexpected outcomes or randomness, tied to Zizo and Xylix
 #define TAG_UNEXPECTED "Unexpected"
 
-/// Tag representing insanity-related mechanics, used by Baotha
+/// Tag representing insanity-related mechanics, used by Baotha and Dendor
 #define TAG_INSANITY "Insanity"
-
-/// Tag for magic-related influence or systems, belonging to Baotha
-#define TAG_MAGIC "Magic"
 
 /// Tag denoting disaster-related events or effects, tied to Baotha
 #define TAG_DISASTER "Disaster"
@@ -114,10 +111,15 @@
 #define GAMEMODE_PANEL_MAIN "Main"
 #define GAMEMODE_PANEL_VARIABLES "Variables"
 
+/// The concrete number for what is considered "lowpop" on Vanderlin
+#define LOWPOP_THRESHOLD 35
+/// What is high pop on Vanderlin?
+#define HIGHPOP_THRESHOLD 70
+
 #define MUNDANE_POINT_THRESHOLD 20
 #define MODERATE_POINT_THRESHOLD 35
 #define MAJOR_POINT_THRESHOLD 70
-#define ROLESET_POINT_THRESHOLD 80
+#define ROLESET_POINT_THRESHOLD 75
 #define OBJECTIVES_POINT_THRESHOLD 80
 
 #define MUNDANE_MIN_POP 5
@@ -164,8 +166,8 @@
 #define ROUNDSTART_MAJOR_BASE 35
 #define ROUNDSTART_MAJOR_GAIN 1.5
 
-#define ROUNDSTART_ROLESET_BASE 40
-#define ROUNDSTART_ROLESET_GAIN 2
+#define ROUNDSTART_ROLESET_BASE 45
+#define ROUNDSTART_ROLESET_GAIN 2.5
 
 #define ROUNDSTART_OBJECTIVES_BASE 40
 #define ROUNDSTART_OBJECTIVES_GAIN 2
@@ -209,9 +211,19 @@
 #define MALUM "Malum"
 #define EORA "Eora"
 #define DENDOR "Dendor"
+#define DIVINE_CENTRIST "Enlightened Centrism"
 
 // Inhumen pantheon
 #define ZIZO "Zizo"
 #define BAOTHA "Baotha"
 #define GRAGGAR "Graggar"
 #define MATTHIOS "Matthios"
+
+// Devotion Classes
+#define DEVOTION_CLASS_PRIEST "Priest"
+#define DEVOTION_CLASS_GRANDMASTER "Grandmaster"
+#define DEVOTION_CLASS_TEMPLAR "Templar"
+#define DEVOTION_CLASS_ACOLYTE "Acolyte"
+#define DEVOTION_CLASS_ABSOLVER "Absolver"
+#define DEVOTION_CLASS_CLERIC "Cleric"
+#define DEVOTION_CLASS_CHURCHLING "Churchling"

@@ -57,7 +57,7 @@
 		pool.transfer_to_atom(null, pickup, container)
 
 
-/obj/structure/redstone/dispenser/AltClick(mob/user)
+/obj/structure/redstone/dispenser/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user))
 		return
 	dir = turn(dir, 90)

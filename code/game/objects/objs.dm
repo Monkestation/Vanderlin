@@ -225,14 +225,14 @@
 			usr.client.object_say(src)
 	if(href_list[VV_HK_MASS_DEL_TYPE])
 		if(check_rights(R_DEBUG|R_SERVER))
-			var/action_type = alert("Strict type ([type]) or type and all subtypes?",,"Strict type","Type and subtypes","Cancel")
+			var/action_type = tgui_alert(usr, "Strict type ([type]) or type and all subtypes?", "Type", list("Strict type","Type and subtypes","Cancel"))
 			if(action_type == "Cancel" || !action_type)
 				return
 
-			if(alert("Are you really sure you want to delete all objects of type [type]?",,"Yes","No") != "Yes")
+			if(tgui_alert(usr, "Are you really sure you want to delete all objects of type [type]?", "Mass Delete", list("Yes","No")) != "Yes")
 				return
 
-			if(alert("Second confirmation required. Delete?",,"Yes","No") != "Yes")
+			if(tgui_alert(usr, "Second confirmation required. Delete?", "Confirm", list("Yes","No")) != "Yes")
 				return
 
 			var/O_type = type
@@ -269,7 +269,7 @@
 	if(unique_reskin && !current_skin)
 		. += "<span class='notice'>Alt-click it to reskin it.</span>"
 
-/obj/AltClick(mob/user)
+/obj/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		reskin_obj(user)

@@ -47,6 +47,8 @@
 	name = L.name
 	desc = L.desc
 
+	item_weight = L.carry_weight + L.get_mob_weight()
+
 	if(length(L.stored_enchantments))
 		for(var/datum/enchantment/enchant as anything in L.stored_enchantments)
 			enchant(enchant)
@@ -57,7 +59,7 @@
 		LAZYADD(held_mob.stored_enchantments, path)
 
 
-/obj/item/mob_holder/attackby(obj/item/I, mob/living/user, params)
+/obj/item/mob_holder/attackby(obj/item/I, mob/living/user, list/modifiers)
 	I.attack(held_mob, user, user.zone_selected)
 
 /obj/item/mob_holder/proc/update_visuals(mob/living/L)

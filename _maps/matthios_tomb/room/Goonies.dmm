@@ -1292,10 +1292,10 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "IM" = (
-/obj/item/clothing/shoes/boots/armor/vampire,
-/obj/item/clothing/pants/platelegs/vampire,
+/obj/item/clothing/shoes/boots/armor/ancient,
+/obj/item/clothing/gloves/chain/ancient,
 /obj/item/clothing/head/vampire,
-/obj/item/clothing/gloves/chain/vampire,
+/obj/item/clothing/gloves/chain/ancient,
 /obj/item/clothing/armor/cuirass/vampire,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/weapon/sword/khopesh,

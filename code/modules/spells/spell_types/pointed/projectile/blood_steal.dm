@@ -4,7 +4,7 @@
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/vlightning.ogg'
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 	attunements = list(
 		/datum/attunement/blood = 0.7,
 	)
@@ -31,7 +31,7 @@
 
 	var/mob/living/carbon/human/H = hit
 	if(H.bloodpool >= 500) // You'll only get vitae IF they have vitae.
-		H.bloodpool -= 500
+		H.adjust_bloodpool(-500)
 		firer.adjust_bloodpool(500)
 
 /obj/projectile/magic/bloodsteal
@@ -61,4 +61,4 @@
 			span_userdanger("Blood erupts from my body!"),
 			span_hear("I hear a fluid spill..."),
 		)
-		new /obj/effect/decal/cleanable/blood/puddle(get_turf(H))
+		new /obj/effect/decal/cleanable/blood/puddle(get_turf(H), H.get_blood_type().color)

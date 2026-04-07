@@ -42,6 +42,28 @@
 			return "mouth"
 	return zone
 
+///Takes a zone and returns its "parent" zone, if it has one.
+/proc/deprecise_zone(precise_zone)
+	switch(precise_zone)
+		if(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH)
+			return BODY_ZONE_CHEST
+		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)
+			return BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_EARS)
+			return BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NECK)
+			return BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_R_HAND)
+			return BODY_ZONE_R_ARM
+		if(BODY_ZONE_PRECISE_L_HAND)
+			return BODY_ZONE_L_ARM
+		if(BODY_ZONE_PRECISE_L_FOOT)
+			return BODY_ZONE_L_LEG
+		if(BODY_ZONE_PRECISE_R_FOOT)
+			return BODY_ZONE_R_LEG
+		else
+			return precise_zone
+
 /proc/parse_organ_slot(slot)
 	switch(slot)
 		if(ORGAN_SLOT_BRAIN)

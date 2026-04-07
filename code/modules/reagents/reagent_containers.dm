@@ -110,6 +110,8 @@
 	if(labelled)
 		. += mutable_appearance(icon, "[icon_state]_label")
 	if(!reagents?.total_volume)
+		if(fill_icon_under_override)
+			underlays.Cut()
 		return
 	if(!fill_icon_thresholds)
 		return
@@ -136,7 +138,7 @@
 	if(master?.glows)
 		. += emissive_appearance(filling.icon, filling.icon_state, alpha = filling.alpha)
 
-/obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(!can_label_container || !(istype(I, /obj/item/paper) && !istype(I, /obj/item/paper/scroll)))
 		return
@@ -166,7 +168,7 @@
 	label_container(user, label_name, label_desc)
 	qdel(I)
 
-/obj/item/reagent_containers/MiddleClick(mob/user, params)
+/obj/item/reagent_containers/MiddleClick(mob/user, list/modifiers)
 	. = ..()
 	if(iscarbon(user))
 		remove_label(user)
@@ -213,7 +215,7 @@
 		reagents.add_reagent_list(list_reagents)
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/AltClick(mob/user)
+/obj/item/reagent_containers/AltClick(mob/user, list/modifiers)
 	if(!user.Adjacent(src) || !has_variable_transfer_amount)
 		return
 	change_transfer_amount(user, FORWARD)

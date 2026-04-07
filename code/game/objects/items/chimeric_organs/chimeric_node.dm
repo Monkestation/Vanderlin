@@ -5,6 +5,7 @@ GLOBAL_LIST_EMPTY(active_chimeric_surgeries)
 	desc = "A preserved piece of flesh containing a humor. It pulses with unnatural life."
 	icon = 'icons/obj/chimeric_nodes.dmi'
 	icon_state = "capillary"
+	item_weight = 125 GRAMS
 	var/datum/chimeric_node/stored_node
 	grid_height = 64
 	grid_width = 32
@@ -77,7 +78,7 @@ GLOBAL_LIST_EMPTY(active_chimeric_surgeries)
 		var/obj/item/organ/new_organ = new organ_type(get_turf(src))
 		new_organ.generate_chimeric_organ(src)
 
-/obj/item/chimeric_node/attackby(obj/item/I, mob/user, params)
+/obj/item/chimeric_node/attackby(obj/item/I, mob/user, list/modifiers)
 	var/datum/chimeric_surgery_state/surgery = GLOB.active_chimeric_surgeries?[src]
 
 	if(istype(I, /obj/item/weapon/surgery/scalpel))

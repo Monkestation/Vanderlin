@@ -65,12 +65,13 @@
 			eyes_entry.second_color = sanitize_hexcolor(new_color, 6, TRUE)
 
 /datum/customizer_entry/organ/eyes
-	var/eye_color = "#111111"
+	var/eye_color = "111111"
 	var/heterochromia = FALSE
-	var/second_color = "#111111"
+	var/second_color = "111111"
 
 /datum/customizer/organ/eyes/humanoid
 	customizer_choices = list(/datum/customizer_choice/organ/eyes/humanoid)
 	default_choice = /datum/customizer_choice/organ/eyes/humanoid
 
 /datum/customizer_choice/organ/eyes/humanoid
+	organ_type = /obj/item/organ/eyes

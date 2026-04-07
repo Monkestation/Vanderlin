@@ -33,6 +33,9 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 
+	/// How efficient this limb is at performing... whatever it performs
+	var/limb_efficiency = 100
+
 	var/cremation_progress = 0 //Gradually increases while burning when at full damage, destroys the limb when at 100
 
 	var/brute_reduction = 0 //Subtracted to brute damage taken
@@ -48,10 +51,12 @@
 	var/mutation_color = ""
 	var/no_update = 0
 	var/species_icon = ""
+	var/should_render = TRUE
 
 	var/animal_origin = 0 //for nonhuman bodypart (e.g. monkey)
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
 	// var/disableable = 1
+	var/food_type = null
 
 	var/px_x = 0
 	var/px_y = 0
@@ -122,6 +127,7 @@
 		qdel(wound)
 	if(bandage)
 		QDEL_NULL(bandage)
+
 	embedded_objects = null
 	original_owner = null
 	return ..()
@@ -177,55 +183,47 @@
 		user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
 		qdel(src)
 
-/obj/item/bodypart/MiddleClick(mob/living/user, params)
+/obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
+	if(status != BODYPART_ORGANIC)
+		return ..()
+	if(skeletonized || !length(food_type))
+		to_chat(user, span_warning("[src] has no meat to eat."))
+		return
+	var/bloodcolor = COLOR_BLOOD
+	if(owner)
+		bloodcolor = owner.get_blood_type().color
+	else if(original_owner)
+		bloodcolor = original_owner.get_blood_type().color
 	var/obj/item/held_item = user.get_active_held_item()
-	var/datum/species/S = original_owner?.dna?.species
-	if(held_item)
-		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-			if(!skeletonized)
-				var/used_time = 21 SECONDS
-				if(user.mind)
-					used_time -= (user.get_skill_level(/datum/skill/labor/butchering) * 3 SECONDS)
-				visible_message("[user] begins to butcher \the [src].")
-				playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-				var/steaks = 1
-				switch(user.get_skill_level(/datum/skill/labor/butchering))
-					if(3)
-						steaks = 2
-					if(4 to 5)
-						steaks = 3
-					if(6)
-						steaks = 4 // the steaks have never been higher
-				var/amt2raise = user.STAINT/3
-				if(do_after(user, used_time, src))
-					var/obj/item/reagent_containers/food/snacks/meat/steak/steak
-					var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak
-					for(steaks, steaks>0, steaks--)
-						steak = new steak_type(get_turf(src))	//Meat depends on species.
-						if(rotted)
-							steak.become_rotten()
-					new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-					user.adjust_experience(/datum/skill/labor/butchering, amt2raise, FALSE)
-					qdel(src)
-			else
-				to_chat(user, span_warning("[src] has no meat to butcher."))
-	else if(isanimal(user))
-		if(!skeletonized)
-			visible_message("[user] begins to eat \the [src].")
-			playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-			if(do_after(user, 3 SECONDS, src))
-				var/obj/item/reagent_containers/food/snacks/meat/steak/steak
-				var/steak_type = S?.meat || /obj/item/reagent_containers/food/snacks/meat/steak
-				steak = new steak_type(get_turf(src))	//Meat depends on species.
-				if(rotted)
-					steak.become_rotten()
-				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-				qdel(src)
-		else
-			to_chat(user, span_warning("[src] has no meat to eat."))
+	if(isanimal(user))
+		visible_message("[user] begins to eat \the [src].")
+		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
+		if(!do_after(user, 5 SECONDS, src))
+			return
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
+		qdel(src)
+		return
+	else if(held_item?.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
+		var/used_time = 21 SECONDS
+		used_time -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 3 SECONDS)
+		visible_message("[user] begins to butcher \the [src].")
+		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
+		if(!do_after(user, used_time, src))
+			return
+		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_RANK_LEGENDARY))
+		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
+		for(var/i in 1 to drops)
+			var/choose_type = pickweight(food_type)
+			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
+			if(rotted)
+				food.become_rotten()
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
+		user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
+		qdel(src)
+		return
 	..()
 
-/obj/item/bodypart/attack(mob/living/carbon/C, mob/user)
+/obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
@@ -241,7 +239,7 @@
 				return
 	return ..()
 
-/obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
 		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
@@ -261,7 +259,12 @@
 	pixel_x = base_pixel_x + rand(-3, 3)
 	pixel_y = base_pixel_y + rand(-3, 3)
 	if(!skeletonized)
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+		var/bloodcolor = COLOR_BLOOD
+		if(owner)
+			bloodcolor = owner.get_blood_type().color
+		else if(original_owner)
+			bloodcolor = original_owner.get_blood_type().color
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
@@ -287,6 +290,8 @@
 
 /obj/item/bodypart/head/skeletonize(lethal = TRUE)
 	. = ..()
+
+	sellprice = round((sellprice || 0) * 0.2)
 	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
@@ -294,7 +299,7 @@
 	if(!is_organic_limb() || !owner)
 		return
 	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * (owner.STACON / 10)
+	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
 	if(new_max_damage != old_max_damage)
 		max_damage = new_max_damage
 
@@ -356,6 +361,23 @@
 			last_severe_injury_time = world.time
 
 	return update_bodypart_damage_state() || .
+
+/obj/item/bodypart/proc/add_pain(amount)
+	if(!amount || !owner)
+		return
+	if(owner.status_flags & GODMODE)
+		return
+	lingering_pain += amount
+	var/current_damage_percent = ((brute_dam + burn_dam) / max_damage) * 100
+	if(current_damage_percent > 60)
+		last_severe_injury_time = world.time
+	if(owner.stat < DEAD)
+		if(amount < 10)
+			owner.flash_fullscreen("redflash1")
+		else if(amount < 20)
+			owner.flash_fullscreen("redflash2")
+		else
+			owner.flash_fullscreen("redflash3")
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
@@ -442,6 +464,8 @@
 		return
 	if(owner?.dna?.unique_identity)
 		fingerprint = md5(owner.dna.unique_identity)
+	if(owner?.dna?.species)
+		food_type = owner.dna.species.meat
 
 ///Proc to change the value of the `owner` variable and react to the event of its change.
 /obj/item/bodypart/proc/set_owner(mob/living/carbon/new_owner)
@@ -501,6 +525,21 @@
 				))
 		set_disabled(FALSE)
 
+//Updates limb efficiency based on tendons, nerves and arteries
+/obj/item/bodypart/proc/update_limb_efficiency()
+	var/divisor = 0
+	limb_efficiency = 0
+	if(divisor)
+		limb_efficiency /= divisor
+	// no tendon, nerve nor artery!
+	else
+		limb_efficiency = 100
+	// wounds decrease limb efficiency
+	for(var/datum/wound/hurty as anything in wounds)
+		limb_efficiency -= hurty.limb_efficiency_reduction
+	limb_efficiency = max(0, CEILING(limb_efficiency, 1))
+
+
 ///Called when TRAIT_PARALYSIS is added to the limb.
 /obj/item/bodypart/proc/on_paralysis_trait_gain(obj/item/bodypart/source)
 	SIGNAL_HANDLER
@@ -558,6 +597,8 @@
 //we inform the bodypart of the changes that happened to the owner, or give it the informations from a source mob.
 /obj/item/bodypart/proc/update_limb(dropping_limb, mob/living/carbon/source)
 	var/mob/living/carbon/C
+	if(!should_render)
+		return
 	if(source)
 		C = source
 		if(!original_owner)
@@ -632,6 +673,8 @@
 
 //Gives you a proper icon appearance for the dismembered limb
 /obj/item/bodypart/proc/get_limb_icon(dropped, hideaux = FALSE)
+	if(!should_render)
+		return
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
@@ -646,7 +689,14 @@
 		image_dir = SOUTH
 		if(dmg_overlay_type)
 			if(brutestate)
-				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
+				var/image/brute_image = image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_[brutestate]0_[icon_gender]", -DAMAGE_LAYER, image_dir)
+				if(owner)
+					owner.get_blood_type().color
+				else if(original_owner)
+					original_owner.get_blood_type().color
+				else
+					brute_image.color = COLOR_BLOOD
+				. += brute_image
 			if(burnstate)
 				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]_[icon_gender]", -DAMAGE_LAYER, image_dir)
 
@@ -675,33 +725,20 @@
 
 	var/skel = skeletonized ? "_s" : ""
 
-	if(is_organic_limb())
+	if(is_organic_limb() || (species_id == SPEC_ID_AUTOMATON && species_icon))//fuck this stupid rendering system
 		if(should_draw_greyscale)
 			limb.icon = species_icon
-			if(should_draw_gender)
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
-			else
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
+			limb.icon_state = "[body_zone][skel]"
+			if(wound_icon_state || acid_damage_intensity)
+				var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
+				skeleton.icon = species_icon
+				skeleton.icon_state = "[body_zone]_s"
+				if(wound_icon_state)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
+				if(acid_damage_intensity)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
+				skeleton.dir = image_dir
+				. += skeleton
 		else
 			limb.icon = 'icons/mob/human_parts.dmi'
 			if(should_draw_gender)
@@ -761,7 +798,7 @@
 				. += organ_appearance
 
 	// Feature overlays
-	if(!skeletonized && draw_bodypart_features)
+	if(draw_bodypart_features)
 		for(var/datum/bodypart_feature/feature as anything in bodypart_features)
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)

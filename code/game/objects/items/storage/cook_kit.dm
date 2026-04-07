@@ -7,6 +7,7 @@
 	icon_state = "messkit"
 	icon = 'icons/roguetown/items/gadgets.dmi'
 	storage_type = /datum/storage/messkit
+	item_weight = 750 GRAMS
 
 /obj/item/storage/messkit/populate_contents()
 	new /obj/item/plate(src)

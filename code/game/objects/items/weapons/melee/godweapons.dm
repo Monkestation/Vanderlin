@@ -38,6 +38,7 @@
 	minstr = 12
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -59,13 +60,13 @@
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/proc/do_message(message)
 	audible_message("Gorefeast speaks, \"[message]\"", hearing_distance = 5)
 
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!HAS_TRAIT(user, TRAIT_ORGAN_EATER))
 		force = 13
 		force_wielded = 23
 	return ..()
 
-/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	if(!ishuman(target))
 		return
 	if(check_zone(user.zone_selected) != BODY_ZONE_CHEST)
@@ -112,6 +113,7 @@
 	dropshrink = 0.75
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
+	item_weight = 3 KILOGRAMS
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -119,12 +121,12 @@
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/zizo, PUNISHMENT_BURN, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user)
+/obj/item/weapon/polearm/neant/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(user.used_intent.tranged)
 		return
 	return ..()
 
-/obj/item/weapon/polearm/neant/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+/obj/item/weapon/polearm/neant/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!HAS_TRAIT(user, TRAIT_CABAL) || !istype(user.patron, /datum/patron/inhumen/zizo))
 		return
@@ -181,13 +183,13 @@
 	PJ.original = target
 	playsound(user,'sound/effects/neantspecial.ogg', 70)
 
-	if(user.STAPER > 8)
-		PJ.accuracy += (user.STAPER - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
-		PJ.bonus_accuracy += (user.STAPER - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) > 8)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) * 2 //each point of perception above 8 increases standard accuracy by 2.
+		PJ.bonus_accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) - 8) //Also, increases bonus accuracy by 1, which cannot fall off due to distance.
 
-	if(user.STAINT > 10) // Every point over 10 INT adds 10% damage
-		PJ.damage = PJ.damage * (user.STAINT / 10)
-		PJ.accuracy += (user.STAINT - 10) * 3
+	if(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) > 10) // Every point over 10 INT adds 10% damage
+		PJ.damage = PJ.damage * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 10)
+		PJ.accuracy += (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) - 10) * 3
 
 	new /obj/effect/temp_visual/dir_setting/firing_effect/neant(get_step(user, user.dir), user.dir)
 	PJ.preparePixelProjectile(target, user)
@@ -247,6 +249,7 @@
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12
 	damfactor = 1.1
+	item_weight = 2 KILOGRAMS
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/Initialize(mapload, ...)
@@ -313,17 +316,17 @@
 	QDEL_NULL(FUCK)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/attack_self(mob/living/user, list/modifiers)
 	if(chambered || !HAS_TRAIT(user, TRAIT_CRACKHEAD))
 		return ..()
-	FUCK.attack_self(user, params)
+	FUCK.attack_self(user, modifiers)
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/dropped(mob/user, silent)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
 
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, params)
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/turbulenta/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(FUCK.playing)
 		FUCK.terminate_playing(user)
 	return ..()
@@ -373,6 +376,7 @@
 	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
 	max_integrity = INTEGRITY_STRONGEST + 220
 	sellprice = 550
+	item_weight = 1.5 KILOGRAMS
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -380,7 +384,7 @@
 	. = ..()
 	AddElement(/datum/element/divine_intervention, /datum/patron/inhumen/matthios, PUNISHMENT_STRESS, /datum/stress_event/divine_punishment, TRUE)
 
-/obj/item/weapon/sword/long/pleonexia/pre_attack(atom/A, mob/living/user, params)
+/obj/item/weapon/sword/long/pleonexia/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.used_intent, /datum/intent/plex_dash) || !HAS_TRAIT(user, TRAIT_MATTHIOS_EYES))
 		return ..()
 	. = TRUE
@@ -427,3 +431,127 @@
 	hitsound = null
 	noaa = TRUE
 	reach = 3
+
+//┌─────────────── TENNITE PANTHEON WEAPONS BELOW ───────────────┐
+
+/obj/item/weapon/sword/long/grandmaster
+	name = "divine longsword"
+	desc = "The Blade of Saint Altierre. A holy sword forged of silver, said to represent her will to fight for us all, and the Justice she stood for."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrsword"
+	item_weight = 1.5 KILOGRAMS
+
+/datum/intent/sword/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/sword/thrust/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
+
+/datum/intent/sword/strike/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/datum/intent/sword/chop/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+
+/obj/item/weapon/sword/long/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/sword/cut/martyr, /datum/intent/sword/thrust/martyr, /datum/intent/sword/strike/martyr, /datum/intent/sword/chop/martyr)
+	var/safe_damage = 25
+	var/safe_damage_wielded = 30
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/greataxe/steel/grandmaster
+	name = "divine greataxe"
+	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyraxe"
+	item_weight = 4.5 KILOGRAMS
+
+/datum/intent/axe/cut/battle/greataxe/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/axe/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/axe/chop/battle/greataxe/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
+
+/datum/intent/axe/chop/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CHOP
+	swingdelay = 5
+
+/datum/intent/axe/bash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/greataxe/steel/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/axe/cut/martyr, /datum/intent/axe/chop/martyr, /datum/intent/axe/bash/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/axe/cut/battle/greataxe/martyr, /datum/intent/axe/chop/battle/greataxe/martyr, /datum/intent/axe/bash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/datum/intent/polearm/cut/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_CUT
+
+/datum/intent/polearm/thrust/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_PICK
+
+/datum/intent/polearm/bash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/polearm/spear/grandmaster
+	name = "divine trident"
+	desc = "The Trident of Saint Altierre. A holy spear forged of silver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrtrident"
+	item_weight = 2.5 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/polearm/cut/martyr, /datum/intent/polearm/bash/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/polearm/cut/martyr, /datum/intent/polearm/thrust/martyr, /datum/intent/polearm/bash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)
+
+/datum/intent/mace/strike/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_BLUNT
+
+/datum/intent/mace/smash/martyr
+	item_damage_type = "fire"
+	blade_class = BCLASS_SMASH
+
+/obj/item/weapon/mace/goden/steel/grandmaster
+	name = "divine grandmace"
+	desc = "The Mace of Saint Altierre. A holy mace forged of silver, said to represent her unyielding Might that turned upon Graggar before his ascension."
+	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
+	icon_state = "martyrmace"
+	item_weight = 3.5 KILOGRAMS
+
+/obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
+	. = ..()
+	var/list/active_intents = list(/datum/intent/mace/strike/martyr)
+	var/list/active_intents_wielded = list(/datum/intent/mace/strike/martyr, /datum/intent/mace/smash/martyr)
+	var/safe_damage = 15
+	var/safe_damage_wielded = 35
+	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
+	enchant(/datum/enchantment/silver)

@@ -85,7 +85,7 @@
 	candodge = FALSE
 	misscost = 0
 
-/obj/item/reagent_containers/glass/attack(mob/living/M, mob/living/user, zone)
+/obj/item/reagent_containers/glass/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!user.used_intent)
 		return
 	if(user.used_intent.type == INTENT_GENERIC)
@@ -226,7 +226,7 @@
 			user.visible_message(span_notice("[user] splashes the contents of [src] onto \the [newT]!"), \
 									span_notice("I splash the contents of [src] onto \the [newT]."))
 
-/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
+/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTERATTACK, target, user)
 	if(user.used_intent.type == INTENT_GENERIC)
 		return ..()
@@ -237,7 +237,7 @@
 	if(!spillable)
 		return
 
-/obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/attackby(obj/item/I, mob/user, list/modifiers)
 	var/hotness = I.get_temperature()
 	if(hotness && reagents)
 		reagents.expose_temperature(hotness)

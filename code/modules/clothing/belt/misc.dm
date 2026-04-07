@@ -49,9 +49,9 @@
 	new /obj/item/weapon/knife/dagger/steel/special(src)
 	new /obj/item/storage/keyring/guard(src)
 
-// Bandit's belt starts with a bandage and a key to their guildhall.
+// mercenary's belt starts with a bandage and a key to their guildhall.
 /obj/item/storage/belt/leather/mercenary/populate_contents()
-	new /obj/item/natural/cloth(src)
+	new /obj/item/natural/cloth/bandage(src)
 	new /obj/item/key/mercenary(src)
 
 /obj/item/storage/belt/leather/mercenary/shalal
@@ -103,7 +103,7 @@
 	salvage_result = /obj/item/rope
 	storage_type = /datum/storage/belt/cloth
 
-/obj/item/storage/belt/leather/rope/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/rope/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -132,7 +132,7 @@
 	salvage_result = /obj/item/natural/cloth
 	storage_type = /datum/storage/belt/cloth
 
-/obj/item/storage/belt/leather/cloth/attack_self(mob/user, params)
+/obj/item/storage/belt/leather/cloth/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("You begin untying [src]."))
 	if(do_after(user, 1.5 SECONDS, src))
@@ -185,6 +185,14 @@
 	if(prob(50))
 		new /obj/item/coin/gold/pile(src)
 
+/obj/item/storage/belt/pouch/medicine
+	new /obj/item/needle(src)
+	new /obj/item/natural/bundle/cloth/bandage/full(src)
+	new /obj/item/reagent_containers/glass/bottle/healthpot(src)
+
+/obj/item/storage/belt/pouch/food
+	new /obj/item/reagent_containers/food/snacks/hardtack(src)
+
 /obj/item/storage/belt/pouch/bullets/populate_contents()
 	for(var/i in 1 to 4)
 		new /obj/item/ammo_casing/caseless/bullet(src)
@@ -216,6 +224,13 @@
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 	storage_type = /datum/storage/satchel
 
+
+/obj/item/storage/backpack/satchel/otavan
+	name = "grenzelhoftian leather satchel"
+	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
+	icon_state = "osatchel"
+	item_state = "osatchel"
+
 /obj/item/storage/backpack/satchel/cloth
 	name = "cloth knapsack"
 	desc = "A rudimentary cloth sack strapped to the back for storing small amounts of items."
@@ -224,15 +239,17 @@
 	salvage_result = /obj/item/natural/cloth
 	storage_type = /datum/storage/satchel/cloth
 
+/obj/item/storage/backpack/satchel/cloth/big
+	name = "cloth rucksack"
+	desc = "A large but rudimentary cloth sack strapped to the back for storing a medium number of items."
+	icon_state = "rucksack"
+	item_state = "rucksack"
+	component_type = /datum/storage/satchel/cloth/big
+
 /obj/item/storage/backpack/satchel/heartfelt/populate_contents()
 	new /obj/item/natural/feather(src)
 	new /obj/item/paper/heartfelt(src)
 
-/obj/item/storage/backpack/satchel/otavan
-	name = "grenzelhoftian leather satchel"
-	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
-	icon_state = "osatchel"
-	item_state = "osatchel"
 
 /obj/item/storage/backpack/satchel/mule/populate_contents()
 	for(var/i in 1 to 3)
@@ -273,13 +290,15 @@
 	icon_state = "artibackpack"
 	item_state = "artibackpack"
 	resistance_flags = FIRE_PROOF
-	sewrepair = FALSE
+	sewrepair = null
 	//for those curious, yes the artibackpack preserves organs and food. Check _organ.dm and snacks.dm
 
 /obj/item/storage/backpack/backpack/artibackpack/porter
 	name = "humdrum"
 	desc = "A absurdly oversized backpack with complex bronze pipework coursing through it. It hums and vibrates constantly."
-	sewrepair = TRUE //Kobold thing, trust.
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 2
 	storage_type = /datum/storage/porter
 
 /obj/item/storage/backpack/satchel/surgbag
@@ -336,6 +355,9 @@
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 	new /obj/item/storage/belt/pouch/coins/poor(src)
 
+/obj/item/storage/belt/leather
+	name = "leather belt"
+
 /obj/item/storage/belt/leather/knifebelt
 	name = "tossblade belt"
 	desc = "A many-slotted belt meant for tossblades. Little room left over."
@@ -343,7 +365,7 @@
 	item_state = "knife"
 	strip_delay = 20
 	var/max_storage = 8
-	sewrepair = TRUE
+
 	storage_type = /datum/storage/belt/knife_belt
 	empty_when_dropped = FALSE
 
@@ -353,17 +375,6 @@
 			to_chat(user, span_notice("I discreetly slip [A] into [src]."))
 		return TRUE
 	. = ..()
-
-/obj/item/storage/belt/leather/knifebelt/attack_hand_secondary(mob/user, params)
-	. = ..()
-	if(length(contents))
-		return
-	var/list/knives = list()
-	atom_storage.remove_type(/obj/item/weapon/knife/throwingknife, get_turf(user), 1, TRUE, user, knives)
-	for(var/knife in knives)
-		if(!user.put_in_active_hand(knife))
-			break
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/storage/belt/leather/knifebelt/examine(mob/user)
 	. = ..()
@@ -416,7 +427,7 @@
 	max_integrity = 300
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 	storage_type = /datum/storage/headhook
 
@@ -432,11 +443,11 @@
 	max_integrity = 400
 	equip_sound = 'sound/blank.ogg'
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/bronze
 	storage_type = /datum/storage/headhook/bronze
 
-/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, params)
+/obj/item/storage/hip/headhook/attackby(obj/item/H, mob/user, list/modifiers)
 	. = ..()
 	user.visible_message("[user] tries to put [H] into [src].", "You try to put [H] into [src].")
 
@@ -458,6 +469,6 @@
 	equip_sound = 'sound/blank.ogg'
 	sellprice = 160
 	bloody_icon_state = "bodyblood"
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/gold
 	storage_type = /datum/storage/headhook/bronze

@@ -724,18 +724,14 @@ SUBSYSTEM_DEF(plexora)
 	message_admins("External message from [sender] to [recipient_name_linked] : [message]")
 	log_admin_private("External PM: [sender] -> [recipient_name] : [message]")
 
-	to_chat(recipient,
-		message = "<font color='red' size='4'><b>-- Administrator private message --</b></font>",
-		)
+	to_chat(recipient, html = "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 
 	recipient.receive_ahelp(
 		"<a href='?priv_msg=[stealthkey]'>[adminname]</a>",
 		message,
 	)
 
-	to_chat(recipient,
-		message = span_adminsay("<i>Click on the administrator's name to reply.</i>"),)
-
+	to_chat(recipient, html = span_adminsay("<i>Click on the administrator's name to reply.</i>"))
 
 	admin_ticket_log(recipient, "<font color='purple'>PM From [adminname]: [message]</font>", player_message = "<font color='purple'>PM From [adminname]: [message]</font>")
 
@@ -827,10 +823,7 @@ SUBSYSTEM_DEF(plexora)
 
 
 /client/proc/receive_ahelp(reply_to, message, span_class = "adminsay")
-	to_chat(
-		src,
-		message = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>",
-	)
+	to_chat(src, html = "<span class='[span_class]'>Admin PM from-<b>[reply_to]</b>: [message]</span>")
 
 /// This should match the interface of /client wherever necessary.
 /datum/client_interface

@@ -112,7 +112,7 @@
 					playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
 					QDEL_NULL(src)
 
-/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
 		if(locate(/obj/structure/gravemarker) in get_turf(src))
 			to_chat(user, "<span class='warning'>This grave is already hallowed.</span>")
@@ -245,7 +245,7 @@
 					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
 						qdel(G)
 		stage_update()
-		attacking_shovel.heldclod = new(attacking_shovel)
+		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		is_consecrated = NOT_CONSECRATED // remove consecration levels
 

@@ -71,23 +71,25 @@
 	// for an effect such as blindness
 	return null
 
-/// Returns the effect if the mob calling the proc owns the given status effect
-/mob/living/has_status_effect(effect)
-	. = FALSE
-	if(status_effects)
-		var/datum/status_effect/S1 = effect
-		for(var/datum/status_effect/S in status_effects)
-			if(initial(S1.id) == S.id)
-				return S
+/mob/living/has_status_effect(datum/status_effect/checked_effect)
+	RETURN_TYPE(/datum/status_effect)
 
-/// Returns a list of effects with matching IDs that the mod owns; use for effects there can be multiple of
-/mob/living/proc/has_status_effect_list(effect)
-	. = list()
-	if(status_effects)
-		var/datum/status_effect/S1 = effect
-		for(var/datum/status_effect/S in status_effects)
-			if(initial(S1.id) == S.id)
-				. += S
+	for(var/datum/status_effect/present_effect as anything in status_effects)
+		if(present_effect.id == initial(checked_effect.id))
+			return present_effect
+
+	return null
+
+///Gets every status effect of an ID and returns all of them in a list, rather than the individual 'has_status_effect'
+/mob/living/proc/get_all_status_effect_of_id(datum/status_effect/checked_effect)
+	RETURN_TYPE(/list/datum/status_effect)
+
+	var/list/all_effects_of_type = list()
+	for(var/datum/status_effect/present_effect as anything in status_effects)
+		if(present_effect.id == initial(checked_effect.id))
+			all_effects_of_type += present_effect
+
+	return all_effects_of_type
 
 /**
  * Checks if this mob has a status effect that shares the passed effect's ID

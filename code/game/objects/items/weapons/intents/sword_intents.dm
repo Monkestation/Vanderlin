@@ -10,14 +10,14 @@
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = AP_SWORD_CHOP
-	damfactor = 1.1
+	clickcd = 14
 	swingdelay = 1
 	misscost = 8
 	item_damage_type = "slash"
 
 /datum/intent/sword/chop/long
 	damfactor = 1.1
-	chargetime = 1.2
+	clickcd = 16
 	swingdelay = 1.5
 	misscost = 12
 	warnie = "mobwarning"
@@ -44,6 +44,7 @@
 	penfactor = AP_SWORD_THRUST
 	misscost = 5
 	item_damage_type = "stab"
+	acc_bonus = 15
 
 /datum/intent/sword/thrust/curved
 	penfactor = AP_SWORD_THRUST-2
@@ -51,18 +52,26 @@
 /datum/intent/sword/thrust/short
 	clickcd = 10
 	penfactor = AP_SWORD_THRUST+2
+	acc_bonus = 20
 
 /datum/intent/sword/thrust/rapier
 	penfactor = AP_SWORD_THRUST+5
+	acc_bonus = 20
+
+/datum/intent/sword/thrust/estoc
+	name = "thrust"
+	penfactor = AP_SWORD_THRUST+10 //30 total
+	acc_bonus = 20
 
 /datum/intent/sword/thrust/zwei
 	name = "thrust"
-	reach = 1
-	chargetime = 1
+	clickcd = 14
 	warnie = "mobwarning"
 	swingdelay = 1
 
 /datum/intent/sword/thrust/long
+	swingdelay = 1
+	clickcd = 14
 	reach = 2
 	misscost = 10
 
@@ -84,7 +93,6 @@
 	animname = "strike"
 	blade_class = BCLASS_BLUNT
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 0
 	penfactor = AP_CLUB_STRIKE
 	swingdelay = 1
 	damfactor = 0.8
@@ -101,11 +109,9 @@
 	attack_verb = list("bashes", "strikes")
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	blade_class = BCLASS_BLUNT
-	chargetime = 1
-	charging_slowdown = 0.8
-	penfactor = AP_CLUB_SMASH
+	clickcd = 14
+	penfactor = AP_CLUB_STRIKE
 	swingdelay = 1
-	damfactor = 1.1
 	item_damage_type = "blunt"
 
 /*-----------\
@@ -120,6 +126,7 @@
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	misscost = 4
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/sword/cut/long
 	reach = 2
@@ -132,7 +139,6 @@
 	item_damage_type = "slash"
 
 /datum/intent/sword/cut/rapier
-	chargetime = 0
 	damfactor = 0.8
 	item_damage_type = "slash"
 
@@ -154,12 +160,10 @@
 	blade_class = BCLASS_CUT
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	damfactor = 1.1
-	misscost = 10
+	misscost = 8
 	swingdelay = 0.5
 
 /datum/intent/katana/cut/one_hand_cut
-	damfactor = 1
 	misscost = 4
 	swingdelay = 0
 
@@ -167,11 +171,6 @@
 /*-----------\
 |   Special  |
 \-----------*/
-/datum/intent/sword/thrust/estoc
-	name = "thrust"
-	penfactor = AP_SWORD_THRUST+10 //30 total
-	recovery = 20
-	clickcd = 10
 
 /datum/intent/sword/lunge
 	name = "lunge"
@@ -181,24 +180,22 @@
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	reach = 2
+	misscost = 10
 	penfactor = AP_SWORD_THRUST+30 //50 total
-	chargetime = 5
-	no_early_release = TRUE
-	recovery = 20
-	clickcd = 10
+	clickcd = 18
+	acc_bonus = 15
 
 /datum/intent/katana/arc
 	name = "arc slash"
 	icon_state = "inarc"
 	attack_verb = list("sweeps", "arcs")
 	animname = "cut"
-	blade_class = BCLASS_CUT
+	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	item_damage_type = "slash"
-	reach = 2
 	swingdelay = 1.5
-	chargetime = 1.2
-	misscost = 20
+	clickcd = 14
+	misscost = 14
 
 /datum/intent/katana/precision_cut
 	name = "precision cut"
@@ -214,7 +211,5 @@
 	swingdelay = 3
 	chargetime = 3
 	chargedrain = 1
-	misscost = 25
-	recovery = 15
+	misscost = 18
 	charging_slowdown = 1
-	clickcd = 15

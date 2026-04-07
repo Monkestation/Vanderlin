@@ -35,6 +35,14 @@
 	/// Assoc list of statkey to value
 	var/list/effectedstats = list()
 
+	/// Variables to create a mob overlay if applicable
+	var/mob_overlay_icon = 'icons/mob/mob_effects.dmi'
+	var/mob_overlay_icon_state
+	var/mob_overlay_layer
+
+	/// The AM for the mob visual
+	var/atom/movable/mob_visual
+
 /datum/status_effect/New(list/arguments)
 	on_creation(arglist(arguments))
 
@@ -95,8 +103,10 @@
 /datum/status_effect/proc/on_apply()
 	SHOULD_CALL_PARENT(TRUE)
 
-	for(var/stat in effectedstats)
-		owner.set_stat_modifier("[id]", stat, effectedstats[stat])
+	owner.set_stat_modifier("[id]",effectedstats)
+
+	if(mob_overlay_icon && mob_overlay_icon_state)
+		mob_visual = build_mob_icon()
 
 	return TRUE
 
@@ -111,15 +121,24 @@
 
 	owner.remove_stat_modifier("[id]")
 
+	if(mob_visual)
+		QDEL_NULL(mob_visual)
+
 /// Called instead of on_remove when a status effect is replaced by itself or when a status effect with on_remove_on_mob_delete = FALSE has its mob deleted
 /datum/status_effect/proc/be_replaced()
 	qdel(src)
 
+/// Build the on mob appearance for the overlay if applicable
+/datum/status_effect/proc/build_mob_icon()
+	var/mutable_appearance/appearance = mutable_appearance(mob_overlay_icon, mob_overlay_icon_state, mob_overlay_layer, ABOVE_LIGHTING_PLANE)
+	return owner.flick_overlay_view(appearance, duration - 1 DECISECONDS)
+
 /// Gets and formats examine text associated with our status effect.
 /// Return 'null' to have no examine text appear (default behavior).
-/// Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves
-/datum/status_effect/proc/get_examine_text()
-	return null
+/// This can be used in two ways. Use "SUBJECTPRONOUN is" to autoreplace with correct pronouns + linking verb in the examines themselves,
+/// or you can use the provided list of pronouns. See examine defines
+/datum/status_effect/proc/get_examine_text(mob/user, list/P)
+	return examine_text
 
 /// Called every tick.
 /datum/status_effect/proc/tick()
@@ -176,10 +195,12 @@
 
 	for(var/S in attached_effect?.effectedstats)
 		if(attached_effect.effectedstats[S] > 0)
-			inspec += "<br><span class='purple'>[S]</span> \Roman [attached_effect.effectedstats[S]]"
+			var/datum/attribute/attribute = GET_ATTRIBUTE_DATUM(S)
+			inspec += "<br><span class='purple'>[attribute?.name]</span> \Roman [attached_effect.effectedstats[S]]"
 		if(attached_effect.effectedstats[S] < 0)
 			var/newnum = attached_effect.effectedstats[S] * -1
-			inspec += "<br><span class='danger'>[S]</span> \Roman [newnum]"
+			var/datum/attribute/attribute = GET_ATTRIBUTE_DATUM(S)
+			inspec += "<br><span class='danger'>[attribute?.name]</span> \Roman [newnum]"
 
 	inspec += "<br>----------------------"
 	to_chat(user, "[inspec.Join()]")

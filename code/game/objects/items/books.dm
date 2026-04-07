@@ -23,6 +23,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 493 GRAMS
 
 	var/random_cover
 	var/category = null
@@ -111,9 +112,9 @@
 		base_icon_state = "book[rand(1,8)]"
 		icon_state = "[base_icon_state]_0"
 
-/obj/item/book/attack_self(mob/user, params)
+/obj/item/book/attack_self(mob/user, list/modifiers)
 	if(!open)
-		attack_hand_secondary(user, params)
+		attack_hand_secondary(user, modifiers)
 		return
 	if(!user.can_read(src))
 		return
@@ -124,11 +125,11 @@
 	read(user)
 	user.update_inv_hands()
 
-/obj/item/book/attack_self_secondary(mob/user, params)
+/obj/item/book/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	attack_hand_secondary(user, params)
+	attack_hand_secondary(user, modifiers)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/book/proc/read(mob/user)
@@ -143,7 +144,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
@@ -196,7 +197,7 @@
 		playsound(src, 'sound/items/book_page.ogg', 100, TRUE, -1)
 		read(usr)
 
-/obj/item/book/attack_hand_secondary(mob/user, params)
+/obj/item/book/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -244,7 +245,7 @@
 		if(!PA.contraband) // You can add a var to control whether to show contraband
 			types += PA
 
-/obj/item/book/secret/ledger/attack_self(mob/user, params)
+/obj/item/book/secret/ledger/attack_self(mob/user, list/modifiers)
 	. = ..()
 	current_reader = user
 	current_reader << browse(generate_html(user),"window=ledger;size=800x810")
@@ -1139,17 +1140,17 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
 		var/m
-		var/list/verses = world.file2list(verses_file)
+		var/list/verses = file2list(verses_file)
 		m = pick(verses)
 		if(m)
 			user.say(m)
 
-/obj/item/book/bibble/attack(mob/living/M, mob/user)
+/obj/item/book/bibble/attack(mob/living/M, mob/user, list/modifiers)
 	if(is_priest_job(user.mind?.assigned_role))
 		if(!user.can_read(src))
 			return
@@ -1161,7 +1162,7 @@
 /datum/status_effect/buff/blessed
 	id = "blessed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blessed
-	effectedstats = list(STATKEY_LCK = 1)
+	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/blessed
@@ -1204,7 +1205,7 @@
 	base_icon_state = "pellbookmimic"
 	bookfile = "xylix.json"
 
-/obj/item/book/xylix/attack_self(mob/user, params)
+/obj/item/book/xylix/attack_self(mob/user, list/modifiers)
 	user.update_inv_hands()
 	to_chat(user, "<span class='notice'>You feel laughter echo in your head.</span>")
 
@@ -1433,7 +1434,7 @@
 	for(var/obj/item/paper/page as anything in pages)
 		compiled_pages += "<p>[page.info]</p>\n"
 
-/obj/item/manuscript/attackby(obj/item/I, mob/living/user)
+/obj/item/manuscript/attackby(obj/item/I, mob/living/user, list/modifiers)
 	// why is a book crafting kit using the craft system, but crafting a book isn't?
 	// Well, *for some reason*, the crafting system is made in such a way
 	// as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
@@ -1482,7 +1483,7 @@
 	if(href_list["read"])
 		read(usr)
 
-/obj/item/manuscript/attack_self(mob/user, params)
+/obj/item/manuscript/attack_self(mob/user, list/modifiers)
 	read(user)
 
 /obj/item/manuscript/proc/read(mob/user)
@@ -1493,7 +1494,7 @@
 		return
 	if(!user.can_read(src))
 		to_chat(user, span_warning("I study [src], but this verba still eludes me..."))
-		user.adjust_experience(/datum/skill/misc/reading, 4, FALSE) //?
+		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE) //?
 		return
 	if(!in_range(user, src) && !isobserver(user))
 		to_chat(user, span_warning("I am too far away to read [src]."))
@@ -1520,7 +1521,7 @@
 	onclose(user, "reading", src)
 
 
-/obj/item/manuscript/attackby_secondary(obj/item/I, mob/user, params)
+/obj/item/manuscript/attackby_secondary(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -1543,7 +1544,7 @@
 			select_icon = newicon
 			icon_state = "paperwrite"
 			to_chat(user, "<span class='notice'>You have successfully authored and titled the manuscript.</span>")
-			var/complete = browser_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
+			var/complete = tgui_alert(user, "Is the manuscript finished?", "WORDS OF NOC", DEFAULT_INPUT_CHOICES)
 			SEND_SIGNAL(user, COMSIG_BOOK_WRITTEN)
 			if(complete == CHOICE_YES && compiled_pages)
 				written = TRUE
@@ -1684,7 +1685,7 @@ ____________End of Example*/
 	dat = "gott.json"
 	verses_file = "strings/psybibble.txt"
 
-/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user)
+/obj/item/book/bibble/psy/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(istype(user) && istype(user.patron, /datum/patron/psydon))
 		if(!user.can_read(src))
 			return
@@ -1696,7 +1697,7 @@ ____________End of Example*/
 /datum/status_effect/buff/blessed
 	id = "blessed"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blessed
-	effectedstats = list(STATKEY_LCK = 1)
+	effectedstats = list(STAT_FORTUNE = 1)
 	duration = 20 MINUTES
 
 /atom/movable/screen/alert/status_effect/buff/blessed

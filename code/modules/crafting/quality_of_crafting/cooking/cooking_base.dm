@@ -65,8 +65,9 @@
 
 /datum/repeatable_crafting_recipe/cooking
 	abstract_type = /datum/repeatable_crafting_recipe/cooking
-	skillcraft = /datum/skill/craft/cooking
+	skillcraft = /datum/attribute/skill/craft/cooking
 	var/quality_modifier = 1.0  // Base modifier for recipe quality
+	var/transfer_reagents = TRUE
 
 /datum/repeatable_crafting_recipe/cooking/create_outputs(list/to_delete, mob/user)
 	var/list/outputs = list()
@@ -89,7 +90,7 @@
 	var/average_freshness = (ingredient_count > 0) ? (total_freshness / ingredient_count) : 0
 
 	// Get the user's cooking skill
-	var/cooking_skill = user.get_skill_level(/datum/skill/craft/cooking) + user.get_inspirational_bonus()
+	var/cooking_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) + user.get_inspirational_bonus()
 
 	// Create output items
 	for(var/spawn_count = 1 to output_amount)
@@ -115,6 +116,8 @@
 		new_item.OnCrafted(user.dir, user)
 
 		outputs += new_item
+	for(var/obj/item/reagent_containers/food/snacks/food_item in to_delete)
+		food_item.initialize_cooked_food(outputs)
 
 	return outputs
 

@@ -153,7 +153,7 @@
 
 	return rgb(r, g, b)
 
-/obj/machinery/essence/infuser/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/infuser/attackby(obj/item/I, mob/user, list/modifiers)
 	if(working)
 		to_chat(user, span_warning("The infuser is currently working!"))
 		return

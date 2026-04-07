@@ -94,8 +94,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester cloak"
@@ -200,7 +198,10 @@
 	toggle_icon_state = TRUE
 	blocksound = SOFTHIT
 	max_integrity = 100
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 
 /obj/item/clothing/head/veiled/update_overlays()

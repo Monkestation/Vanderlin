@@ -9,7 +9,7 @@
 /// Immediately recalc adjacent atmos turfs instead of queuing.
 #define CHANGETURF_RECALC_ADJACENT (1 << 5)
 
-#define IS_OPAQUE_TURF(turf) (turf.opacity) //https://github.com/tgstation/tgstation/pull/52881
+#define IS_OPAQUE_TURF(turf) (turf.directional_opacity == ALL_CARDINALS)
 
 //supposedly the fastest way to do this according to https://gist.github.com/Giacom/be635398926bb463b42a
 ///Returns a list of turf in a square
@@ -36,3 +36,9 @@ block( \
 #define TURF_BEING_WEATHERED (1<<4)
 /// Turf is currently queued in GLOB.SUNLIGHT_QUEUE_CORNER and should not be re-queued to avoid duplicates
 #define TURF_SUNLIGHT_QUEUED (1<<5)
+
+//water_height defines
+#define WATER_HEIGHT_ANKLE 1
+#define WATER_HEIGHT_SHALLOW 2
+#define WATER_HEIGHT_DEEP 3
+#define WATER_HEIGHT_FULL 4

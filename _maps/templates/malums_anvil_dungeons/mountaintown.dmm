@@ -1234,7 +1234,7 @@
 /obj/structure/table/wood/large/corner_blue{
 	dir = 10
 	},
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/churchmarble,
 /area/under/mountains/anvil/dungeon)
 "qN" = (
@@ -1715,7 +1715,7 @@
 "xF" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/candle/yellow,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
 /turf/open/floor/wood/nosmooth,
 /area/under/mountains/anvil/dungeon)
 "xJ" = (
@@ -3602,7 +3602,7 @@
 /area/under/mountains/anvil/dungeon/lower)
 "Zq" = (
 /obj/effect/decal/cleanable/blood/gibs,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/wood/nosmooth,
 /area/under/mountains/anvil/dungeon)

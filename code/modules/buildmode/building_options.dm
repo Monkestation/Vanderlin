@@ -158,7 +158,7 @@
  * @param {mob} user - Who is placing the object
  * @param {string} params - Click parameters
  */
-/datum/buildmode/proc/place_object(turf/location, mob/user, params)
+/datum/buildmode/proc/place_object(turf/location, mob/user, list/modifiers)
 	if(!selected_item || !location)
 		return
 

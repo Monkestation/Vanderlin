@@ -9,7 +9,7 @@
 	sound = 'sound/magic/psydonbleeds.ogg'
 	invocation = "I BLEED, SO THAT YOU MIGHT ENDURE!"
 	invocation_type = "shout"
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	cooldown_time = 1 MINUTES // 60 seconds cooldown
 	button_icon_state = "WEEP"
 

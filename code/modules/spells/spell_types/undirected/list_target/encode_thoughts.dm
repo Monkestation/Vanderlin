@@ -2,7 +2,7 @@
 	name = "Encode Thoughts"
 	desc = "Latch onto the mind of one who is nearby, weaving a particular thought into their mind."
 	button_icon_state = null
-	sound = 'sound/magic/whiteflame.ogg'
+	sound = 'sound/magic/PSY.ogg'
 
 	point_cost = 1
 	attunements = list(
@@ -34,11 +34,11 @@
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 
 	to_chat(owner, "I pluck the strings of [cast_on]'s mind!")
+	cast_on.playsound_local(cast_on, sound, 100, TRUE)
 	to_chat(cast_on, "Your mind thinks to itself: </span><font color=#7246ff>\"[message]...\"</font>")
 
 /datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire
 	name = "Vampiric Manipulation"
-	sound = 'sound/magic/PSY.ogg'
 	point_cost = 0
 	spell_type = SPELL_BLOOD
 	spell_flags = NONE

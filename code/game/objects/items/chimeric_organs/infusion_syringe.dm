@@ -8,6 +8,7 @@
 	grid_width = 64
 	grid_height = 32
 	volume = 15
+	item_weight = 95 GRAMS
 	reagent_flags = TRANSPARENT
 	var/mode = SYRINGE_DRAW
 	var/busy = FALSE		// needed for delayed drawing of blood
@@ -39,10 +40,10 @@
 /obj/item/reagent_containers/syringe/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/item/reagent_containers/syringe/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/syringe/attackby(obj/item/I, mob/user, list/modifiers)
 	return
 
-/obj/item/reagent_containers/syringe/afterattack(atom/target, mob/user , proximity)
+/obj/item/reagent_containers/syringe/afterattack(atom/target, mob/user , proximity, list/modifiers)
 	. = ..()
 	if(busy)
 		return

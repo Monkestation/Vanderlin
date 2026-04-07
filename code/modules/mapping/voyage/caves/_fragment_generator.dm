@@ -196,7 +196,7 @@ GLOBAL_LIST_INIT(island_ascents, list())
 		return
 	use(user)
 
-/obj/structure/island_descent/attackby(obj/item/W, mob/user, params)
+/obj/structure/island_descent/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 /obj/structure/island_descent/attack_ghost(mob/dead/observer/user)
@@ -307,7 +307,7 @@ GLOBAL_LIST_INIT(island_ascents, list())
 		return
 	use(user)
 
-/obj/structure/island_ascent/attackby(obj/item/W, mob/user, params)
+/obj/structure/island_ascent/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 /obj/structure/island_ascent/attack_ghost(mob/dead/observer/user)

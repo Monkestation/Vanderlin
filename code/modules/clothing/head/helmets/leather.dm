@@ -10,7 +10,8 @@
 	resistance_flags = FLAMMABLE // Made of leather
 	smeltresult = /obj/item/fertilizer/ash
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	sellprice = VALUE_LEATHER_HELMET
 
 	armor = ARMOR_LEATHER_BAD
@@ -19,7 +20,9 @@
 	max_integrity = INTEGRITY_STANDARD
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 1.6
+	item_weight = 1.6 KILOGRAMS
+
+	material_category = ARMOR_MAT_FABRIC
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK HELMETS ARE INTENDED
 //KEEP THIS IN MIND
@@ -50,12 +53,12 @@
 	icon_state = "headscarf"
 	color = CLOTHING_BARK_BROWN
 	sellprice = VALUE_LEATHER_HELMET/2
-	armor = ARMOR_PADDED
+	armor = ARMOR_PADDED_BAD
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
 	clothing_flags = NONE
-	item_weight = 0.5
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/helmet/leather/headscarf/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -111,7 +114,7 @@
 
 	armor = ARMOR_PADDED
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_BLUNT)
-	item_weight = 3 * IRON_MULTIPLIER
+	item_weight = 470 GRAMS
 
 	actions_types = list(/datum/action/item_action/toggle_light)
 
@@ -122,7 +125,7 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	return ..()
 
-/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, params)
+/obj/item/clothing/head/helmet/leather/minershelm/attack_self(mob/living/user, list/modifiers)
 	toggle_helmet_light(user)
 
 /obj/item/clothing/head/helmet/leather/minershelm/proc/toggle_helmet_light(mob/living/user)
@@ -149,7 +152,8 @@
 	desc = "A dainty looking feathered hat that is actually quite heavy and thick, Duelists from Valoria are known to value winning fights without dirtying the white feather on top"
 	icon_state = "duelisthat"
 	item_state = "duelisthat"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	prevent_crits =  MINOR_CRITICALS
 	body_parts_covered = HEAD|HAIR
 	dynamic_hair_suffix = ""

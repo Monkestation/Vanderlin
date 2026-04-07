@@ -8,7 +8,7 @@
 /datum/objective/personal/marriage_broker/on_creation()
 	. = ..()
 	if(owner?.current)
-		ADD_TRAIT(owner.current, TRAIT_SECRET_OFFICIANT, TRAIT_GENERIC)
+		ADD_TRAIT(owner.current, TRAIT_SECRET_OFFICIANT, OBJECTIVE_TRAIT)
 		owner.current.add_spell(/datum/action/cooldown/spell/detect_singles)
 	RegisterSignal(SSdcs, COMSIG_GLOBAL_MARRIAGE, PROC_REF(on_global_marriage))
 	update_explanation_text()
@@ -32,7 +32,7 @@
 
 /datum/objective/personal/marriage_broker/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_EORA_BLESSING, STATKEY_LCK, 1)
+	owner.current.adjust_stat_modifier(STATMOD_EORA_BLESSING, list(STAT_FORTUNE =  1))
 
 /datum/objective/personal/marriage_broker/update_explanation_text()
 	explanation_text = "Be a matchmaker! Make any marriage happen to please Eora!"

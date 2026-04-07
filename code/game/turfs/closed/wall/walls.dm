@@ -125,7 +125,6 @@
 	icon = 'icons/turf/smooth/walls/stone_brick.dmi'
 	icon_state = MAP_SWITCH("stone_brick", "stone_brick-0")
 
-	wallclimb = FALSE
 	blade_dulling = DULLING_BASH
 	max_integrity = 1500
 	sheet_type = /obj/item/natural/stone
@@ -347,7 +346,7 @@
 	name = "stone wall"
 	icon = 'icons/turf/walls.dmi'
 	resistance_flags = INDESTRUCTIBLE
-	opacity = 0
+	opacity = FALSE
 	icon_state = "decostone-l"
 
 /turf/closed/wall/mineral/decostone/center

@@ -48,17 +48,17 @@
 		if(!atom_storage.attempt_insert(new spawn_type(), override = TRUE))
 			break
 
-/obj/item/storage/fancy/attack_self(mob/user, params)
+/obj/item/storage/fancy/attack_self(mob/user, list/modifiers)
 	. = ..()
 	is_open = !is_open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Exited()
+/obj/item/storage/fancy/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Entered()
+/obj/item/storage/fancy/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)
@@ -131,7 +131,7 @@
 	. = ..()
 	. += "<span class='notice'>Alt-click to extract contents.</span>"
 
-/obj/item/storage/fancy/cigarettes/AltClick(mob/living/carbon/user)
+/obj/item/storage/fancy/cigarettes/AltClick(mob/living/carbon/user, list/modifiers)
 	if(!istype(user) || !user.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 		return
 	var/obj/item/clothing/face/cigarette/cig = locate() in contents
@@ -169,7 +169,7 @@
 		. += inserted_overlay
 		cig_position++
 
-/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/target, mob/living/carbon/user)
+/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/target, mob/living/carbon/user, list/modifiers)
 	if(!istype(target))
 		return
 
@@ -194,6 +194,7 @@
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine
 	storage_type = /datum/storage/zigbox
+	item_weight = 32 GRAMS
 
 /obj/item/storage/fancy/cigarettes/zig/empty
 	spawn_type = null

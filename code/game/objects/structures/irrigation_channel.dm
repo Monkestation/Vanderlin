@@ -108,7 +108,7 @@
 
 
 
-/obj/structure/irrigation_channel/attackby(obj/item/I, mob/user, params)
+/obj/structure/irrigation_channel/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if(!istype(I, /obj/item/weapon/shovel))
 		return

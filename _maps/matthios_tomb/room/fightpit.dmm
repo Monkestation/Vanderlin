@@ -225,7 +225,7 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/snacks/biscuit_poison,
+/obj/item/reagent_containers/food/snacks/biscuit/poison,
 /obj/item/reagent_containers/food/snacks/biscuit,
 /obj/item/reagent_containers/food/snacks/biscuit{
 	pixel_x = 12

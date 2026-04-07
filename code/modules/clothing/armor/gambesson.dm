@@ -10,7 +10,10 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 //	nodismemsleeves = FALSE gambesson being ripped by hand to bandages makes no sense. OTOH it can go into shirt slot asnd its kinda fun so maybe?
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
@@ -21,6 +24,9 @@
 	body_parts_covered = COVERAGE_FULL
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
+	material_category = ARMOR_MAT_FABRIC
+	item_weight = 4.7 KILOGRAMS
+
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
 	desc = "Thin and the maker skimped on the padding, typically worn by the peasantry to give some protection against cold for the whole body."
@@ -30,6 +36,7 @@
 
 	armor = ARMOR_PADDED_BAD
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 3.1 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light/steppe
 	name = "steppe robes"
@@ -49,6 +56,7 @@
 	sellprice = VALUE_HEAVY_GAMBESSON
 
 	armor = ARMOR_PADDED_GOOD
+	item_weight = 5.6 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -57,13 +65,16 @@
 	color = CLOTHING_DARK_INK
 
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
-	name = "lakkarian jupon"
-	desc = "a thick, quilted jupon with an iron heart protector. A part of the standard traveling uniform for Lakkarian clerics. It's great for the southern desert's heat and northern tundra's cold."
+	name = "robed jupon"
+	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."
 	icon_state = "lakkarijupon"
 	max_integrity = INTEGRITY_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 
 	armor = ARMOR_PADDED_GOOD
 
@@ -81,9 +92,25 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/steward.dmi'
 	icon_state = "stewardtailcoat"
 	item_state = "stewardtailcoat"
-	armor = ARMOR_PADDED_GOOD
+	armor = ARMOR_PADDED
 	icon = 'icons/roguetown/clothing/special/steward.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/steward.dmi'
+
+/obj/item/clothing/armor/gambeson/hand
+	name = "noble undercoat"
+	desc = "A thick undercoat with polished golden buttons."
+	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	icon_state = "handgambeson"
+	item_state = "handgambeson"
+	armor = ARMOR_PADDED_GOOD
+	icon = 'icons/roguetown/clothing/special/hand.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	detail_tag = "_detail"
+	detail_color = CLOTHING_BERRY_BLUE
+
+/obj/item/clothing/armor/gambeson/hand/spy
+	detail_color = CLOTHING_ROYAL_PURPLE
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 //................ Padded Dress ............... //
 /obj/item/clothing/armor/gambeson/heavy/dress

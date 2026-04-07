@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/hoplite
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+	)
+
+/datum/attribute_holder/sheet/job/hoplite/spear
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 40,
+	)
+
+/datum/attribute_holder/sheet/job/hoplite/sword
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 40,
+	)
+
 /datum/job/advclass/combat/hoplite
 	title = "Immortal Bulwark"
 	tutorial = "You have marched and fought in formations since the ancient war that nearly destroyed Psydonia. There are few in the world who can match your expertise in a shield wall, but all you have ever known is battle and obedience..."
@@ -7,21 +31,7 @@
 	category_tags = list(CTAG_FOLKHEROES)
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 
-	skills = list(
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/shields = 4,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 4,
-	)
-
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/hoplite
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -31,9 +41,9 @@
 /datum/job/advclass/combat/hoplite/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(istype(spawned.backr, /obj/item/weapon/polearm/spear))
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hoplite/spear)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hoplite/sword)
 
 /datum/outfit/folkhero/hoplite
 	name = "Immortal Bulwark (Folkhero)"

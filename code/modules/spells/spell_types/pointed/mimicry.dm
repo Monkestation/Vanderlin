@@ -21,6 +21,9 @@
 	var/old_facial_hair
 	var/old_facial_hair_color
 	var/old_gender
+	var/old_honorary
+	var/old_honorary_s
+
 
 	var/transformed = FALSE
 
@@ -43,6 +46,9 @@
 	old_facial_hair_color = user.get_facial_hair_color()
 	old_facial_hair = facial?.accessory_type
 	old_gender = user.gender
+	old_honorary = user.honorary
+	old_honorary_s = user.honorary_suffix
+
 
 /datum/action/cooldown/spell/mimicry/Remove(mob/living/carbon/human/remove_from)
 	. = ..()
@@ -74,6 +80,9 @@
 	user.real_name = cast_on.dna.real_name
 	user.name = cast_on.get_visible_name()
 	user.gender = cast_on.gender
+	user.honorary = cast_on.honorary
+	user.honorary_suffix = cast_on.honorary_suffix
+
 
 	var/datum/bodypart_feature/hair/cast_on_feature = cast_on.get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
 	var/datum/bodypart_feature/hair/cast_on_facial = cast_on.get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
@@ -126,6 +135,9 @@
 		user.real_name = old_dna.real_name
 	user.name = user.get_visible_name()
 	user.gender = old_gender
+	user.honorary = old_honorary
+	user.honorary_suffix = old_honorary_s
+
 	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
 	eyes.eye_color = old_eye_color
 	user.set_facial_hair_color(old_facial_hair_color, FALSE)

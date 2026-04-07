@@ -25,25 +25,27 @@
 	max_integrity = INTEGRITY_STRONGEST
 	armor_class = AC_HEAVY
 	clothing_flags = CANT_SLEEP_IN
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	resistance_flags = FIRE_PROOF
 	pickup_sound = "rustle"
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	sellprice = 25
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
+
+	material_category = ARMOR_MAT_PLATE
 
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
 	icon_state = "soldierboots"
 	item_state = "soldierboots"
 	desc = "Lightly armored boots made from iron offering protection against both melee and ranged attacks."
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 60, "fire" = 0, "acid" = 0)
+	armor = ARMOR_BRIGANDINE
 	max_integrity = INTEGRITY_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -54,7 +56,7 @@
 	max_integrity = 200 //meant to be weaker than iron plated boots, better options are out there waiting at the smith
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
-	item_weight = 6 * IRON_MULTIPLIER
+	item_weight = 2.7 KILOGRAMS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75
@@ -78,11 +80,11 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 7 * BLACKSTEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 /obj/item/clothing/shoes/boots/leather
@@ -98,7 +100,7 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
-	item_weight = 3
+	item_weight = 1.4 KILOGRAMS
 	max_integrity = INTEGRITY_STANDARD
 	wetable = FALSE
 
@@ -116,7 +118,6 @@
 	name = "watch boots"
 	color = "#d5c2aa"
 	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
-	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
 
@@ -141,11 +142,12 @@
 	gender = PLURAL
 	icon_state = "furlinedboots"
 	item_state = "furlinedboots"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/fur
 	salvage_amount = 1
-	item_weight = 3
+	item_weight = 0.9 KILOGRAMS
 	min_cold_protection_temperature = -20
 	wetable = FALSE
 
@@ -155,7 +157,8 @@
 	gender = PLURAL
 	icon_state = "furlinedanklets"
 	item_state = "furlinedanklets"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	is_barefoot = TRUE
 	salvage_amount = 1
@@ -169,20 +172,25 @@
 	icon_state = "clothlinedanklets"
 	item_state = "furlinedanklets"
 	is_barefoot = TRUE
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	armor = list("blunt" = 5, "slash" = 5, "stab" = 5,  "piercing" = 0, "fire" = 0, "acid" = 0) //Thinks its fair for a piece of cloth and fiber.
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
-	item_weight = 2
+	item_weight = 125 GRAMS
 
-/obj/item/clothing/shoes/boots/armor/vampire
-	name = "ancient ceremonial boots"
-	desc = "Antediluvian boots with ceremonial ornaments from ages past."
-	icon_state = "vboots"
-	item_state = "vboots"
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	armor = ARMOR_PLATE_GOOD
-	item_weight = 5 * STEEL_MULTIPLIER
+/obj/item/clothing/shoes/boots/armor/silver
+	name = "silver boots"
+	desc = "Finely forged boots made out of silver."
+	icon_state = "silverboots"
+	armor = ARMOR_PLATE_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 3.4 KILOGRAMS
+	sellprice = VALUE_SILVER_ITEM
+
+/obj/item/clothing/shoes/boots/armor/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 //............... Evil Boots ............... //
 
@@ -215,3 +223,17 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+//.............. Gronn Boots .................//
+
+/obj/item/clothing/shoes/boots/armor/gronn
+	name = "osslandic iron boots"
+	desc = "Thick iron boots, tied with a leather cord; protective and sturdy. \
+			Osslandic legend tells of a great warrior who fought for aeons until a hero speared him through the foot. \
+			The Northmen have since followed through by protecting their feet heavily."
+	icon_state = "gronnplateboots"
+	item_state = "gronnplateboots"
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+

@@ -105,7 +105,7 @@
 	id = "demonic_despair"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_despair
-	effectedstats = list(STATKEY_CON = -1)
+	effectedstats = list(STAT_CONSTITUTION = -1)
 	COOLDOWN_DECLARE(next_despair)
 
 /datum/status_effect/demonic_despair/tick()
@@ -126,7 +126,7 @@
 	id = "demonic_wrath"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_wrath
-	effectedstats = list(STATKEY_STR = 1, STATKEY_INT = -1)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_INTELLIGENCE = -1)
 	COOLDOWN_DECLARE(next_wrath)
 
 /datum/status_effect/demonic_wrath/tick()
@@ -154,7 +154,7 @@
 	id = "demonic_paranoia"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_paranoia
-	effectedstats = list(STATKEY_PER = 1, STATKEY_SPD = -1)
+	effectedstats = list(STAT_PERCEPTION = 1, STAT_SPEED = -1)
 	COOLDOWN_DECLARE(next_paranoia)
 
 /datum/status_effect/demonic_paranoia/tick()
@@ -175,7 +175,7 @@
 	id = "demonic_damnation"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_damnation
-	effectedstats = list(STATKEY_CON = -1)
+	effectedstats = list(STAT_CONSTITUTION = -1)
 
 /datum/status_effect/demonic_damnation/tick()
 	if(prob(2))
@@ -212,7 +212,7 @@
 	id = "demonic_pride"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_pride
-	effectedstats = list(STATKEY_CON = 1)
+	effectedstats = list(STAT_CONSTITUTION = 1)
 	COOLDOWN_DECLARE(next_pride)
 
 /datum/status_effect/demonic_pride/tick()
@@ -232,7 +232,7 @@
 	id = "demonic_isolation"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_isolation
-	effectedstats = list(STATKEY_SPD = -2)
+	effectedstats = list(STAT_SPEED = -2)
 	COOLDOWN_DECLARE(next_isolation)
 
 /datum/status_effect/demonic_isolation/tick()
@@ -263,7 +263,7 @@
 	id = "demonic_madness"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_madness
-	effectedstats = list(STATKEY_INT = -2, STATKEY_PER = 1)
+	effectedstats = list(STAT_INTELLIGENCE = -2, STAT_PERCEPTION = 1)
 	COOLDOWN_DECLARE(next_madness)
 
 /datum/status_effect/demonic_madness/tick()
@@ -283,7 +283,7 @@
 	id = "demonic_decay"
 	duration = -1
 	alert_type = /atom/movable/screen/alert/status_effect/family_curse/demonic_decay
-	effectedstats = list(STATKEY_CON = -2)
+	effectedstats = list(STAT_CONSTITUTION = -2)
 	COOLDOWN_DECLARE(next_decay)
 
 /datum/status_effect/demonic_decay/tick()

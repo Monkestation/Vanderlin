@@ -33,4 +33,4 @@
 	var/mob/living/living_pawn = controller.pawn
 	if(!istype(living_pawn))
 		return
-	living_pawn.ClickOn(living_target, list())
+	living_pawn.ClickOn(living_target)

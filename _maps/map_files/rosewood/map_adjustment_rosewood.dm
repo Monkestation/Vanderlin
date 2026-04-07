@@ -35,7 +35,6 @@
 		/datum/job/advclass/mercenary/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
-		/datum/job/advclass/veteran/merc,
 	)
 
 	migrant_blacklist = list(

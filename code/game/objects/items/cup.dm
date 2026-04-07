@@ -20,6 +20,7 @@
 	drinksounds = list('sound/items/drink_cup (1).ogg','sound/items/drink_cup (2).ogg','sound/items/drink_cup (3).ogg','sound/items/drink_cup (4).ogg','sound/items/drink_cup (5).ogg')
 	fillsounds = list('sound/items/fillcup.ogg')
 	gripped_intents = list(INTENT_POUR)
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/glass/cup/Initialize(mapload, vol)
 	. = ..()
@@ -33,12 +34,14 @@
 	grid_height = 32
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	metalizer_result = /obj/item/reagent_containers/glass/cup
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/glass/cup/steel
 	name = "goblet"
 	desc = "A steel goblet that bears a few dents from previous scuffles."
 	icon_state = "cup_steel"
 	sellprice = 10
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/glass/cup/silver
 	name = "silver goblet"
@@ -47,6 +50,7 @@
 	dropshrink = 0.65
 	sellprice = 30
 	last_used = 0
+	item_weight = 160 GRAMS
 
 /obj/item/reagent_containers/glass/cup/silver/Initialize(mapload, vol)
 	. = ..()
@@ -58,12 +62,14 @@
 	icon_state = "cup_golden"
 	dropshrink = 0.65
 	sellprice = 50
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/glass/cup/skull
 	name = "skull goblet"
 	desc = "The hollow eye sockets tell you of forgotten, dark rituals."
 	icon_state = "cup_skull"
 	dropshrink = 0.8
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/glass/cup/teacup
 	name = "teacup"
@@ -73,6 +79,7 @@
 	dropshrink = 0.7
 	fill_icon_state = "teacup"
 	sellprice = 10
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/glass/cup/teacup/fancy
 	name = "fancy teacup"
@@ -87,6 +94,7 @@
 	icon_state = "cup_jade"
 	fill_icon_state = "fancycup"
 	sellprice = 55
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/glass/cup/turq
 	name = "ceruleabaster cup"
@@ -95,6 +103,7 @@
 	icon_state = "cup_turq"
 	fill_icon_state = "fancycup"
 	sellprice = 80
+	item_weight = 230 GRAMS
 
 /obj/item/reagent_containers/glass/cup/amber
 	name = "petriamber cup"
@@ -103,6 +112,7 @@
 	icon_state = "cup_amber"
 	fill_icon_state = "fancycup"
 	sellprice = 55
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/glass/cup/coral
 	name = "aoetal cup"
@@ -111,6 +121,7 @@
 	icon_state = "cup_coral"
 	fill_icon_state = "fancycup"
 	sellprice = 65
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/glass/cup/onyxa
 	name = "onyxa cup"
@@ -119,6 +130,7 @@
 	icon_state = "cup_onyxa"
 	fill_icon_state = "fancycup"
 	sellprice = 35
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/glass/cup/shell
 	name = "shell cup"
@@ -127,6 +139,7 @@
 	icon_state = "cup_shell"
 	fill_icon_state = "fancycup"
 	sellprice = 15
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/glass/cup/opal
 	name = "opaloise cup"
@@ -135,6 +148,7 @@
 	icon_state = "cup_opal"
 	fill_icon_state = "fancycup"
 	sellprice = 85
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/glass/cup/rose
 	name = "rosellusk cup"
@@ -143,6 +157,7 @@
 	icon_state = "cup_rose"
 	fill_icon_state = "fancycup"
 	sellprice = 20
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/glass/cup/jadefancy
 	name = "fancy joapstone cup"
@@ -151,6 +166,7 @@
 	icon_state = "fancycup_jade"
 	fill_icon_state = "fancycup"
 	sellprice = 65
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/glass/cup/turqfancy
 	name = "fancy ceruleabaster cup"
@@ -159,6 +175,7 @@
 	icon_state = "fancycup_turq"
 	fill_icon_state = "fancycup"
 	sellprice = 90
+	item_weight = 230 GRAMS
 
 /obj/item/reagent_containers/glass/cup/opalfancy
 	name = "fancy opaloise cup"
@@ -167,6 +184,7 @@
 	icon_state = "fancycup_opal"
 	fill_icon_state = "fancycup"
 	sellprice = 95
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/glass/cup/coralfancy
 	name = "fancy aoetal cup"
@@ -175,6 +193,7 @@
 	icon_state = "fancycup_coral"
 	fill_icon_state = "fancycup"
 	sellprice = 75
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/glass/cup/amberfancy
 	name = "fancy petriamber cup"
@@ -183,6 +202,7 @@
 	icon_state = "fancycup_amber"
 	fill_icon_state = "fancycup"
 	sellprice = 65
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/glass/cup/shellfancy
 	name = "fancy shell cup"
@@ -191,6 +211,7 @@
 	icon_state = "fancycup_shell"
 	fill_icon_state = "fancycup"
 	sellprice = 25
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/glass/cup/rosefancy
 	name = "fancy rosellusk cup"
@@ -199,6 +220,7 @@
 	icon_state = "fancycup_rose"
 	fill_icon_state = "fancycup"
 	sellprice = 30
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/glass/cup/onyxafancy
 	name = "fancy onyxa cup"
@@ -207,6 +229,17 @@
 	icon_state = "fancycup_onyxa"
 	fill_icon_state = "fancycup"
 	sellprice = 45
+	item_weight = 150 GRAMS
+
+/obj/item/reagent_containers/glass/cup/cocaudo_husk
+	name = "cocaudo husk"
+	desc = "A hollowed out half of a cocaudo. It holds liquid."
+	icon_state = "cocaudo_empty"
+	dropshrink = 1
+	fill_icon_state = "cocaudo_empty"
+	grid_height = 32
+	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/glass/cup/clay
 	name = "clay cup"
@@ -215,6 +248,7 @@
 	icon_state = "world"
 	dropshrink = 1
 	sellprice = 5
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/glass/cup/clay/set_material_information()
 	. = ..()
@@ -226,6 +260,7 @@
 	icon = 'icons/obj/handmade/cup_fancy.dmi'
 	icon_state = "world"
 	dropshrink = 1
+	item_weight = 130 GRAMS
 
 /obj/item/reagent_containers/glass/cup/fancy_clay/set_material_information()
 	. = ..()
@@ -237,6 +272,7 @@
 	icon = 'icons/obj/handmade/mug.dmi'
 	icon_state = "world"
 	dropshrink = 1
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/glass/cup/clay_mug/set_material_information()
 	. = ..()
@@ -257,6 +293,7 @@
 	fill_icon_thresholds = list(0, 10, 50, 100)
 	grid_width = 32
 	grid_height = 64
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/glass/cup/glassware/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
@@ -284,8 +321,10 @@
 	sellprice = VALUE_COMMON_GOODS * 1.5
 	volume = 5 //You drink 5 units at a time, now its an ACTUAL shot.
 	grid_height = 32
+	item_weight = 40 GRAMS
 
 /obj/item/reagent_containers/glass/cup/glassware/wineglass
 	name = "wine glass"
 	desc = "A fancy wine glass; the few scratches that are upon it tell grand tales of lies and betrayal. It tends to break easily..."
 	icon_state = "clear_wineglass1"
+	item_weight = 60 GRAMS

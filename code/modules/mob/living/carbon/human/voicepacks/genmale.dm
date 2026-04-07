@@ -80,6 +80,8 @@
 					used = 'sound/vo/male/wilhelm_scream.ogg'
 			if("shh")
 				used = 'sound/vo/male/gen/shh.ogg'
+			if("sickcough")
+				used = list('sound/vo/male/gen/sickcough (1).ogg', 'sound/vo/male/gen/sickcough (2).ogg', 'sound/vo/male/gen/sickcough (3).ogg', 'sound/vo/male/gen/sickcough (4).ogg', 'sound/vo/male/gen/sickcough (5).ogg', 'sound/vo/male/gen/sickcough (6).ogg', 'sound/vo/male/gen/sickcough (7).ogg')
 			if("sigh")
 				used = 'sound/vo/male/gen/sigh.ogg'
 			if("snore")
@@ -94,8 +96,6 @@
 				used = 'sound/vo/attn.ogg'
 			if("psst")
 				used = 'sound/vo/psst.ogg'
-			if("moan")
-				used = list('sound/vo/male/gen/moan (1).ogg','sound/vo/male/gen/moan (2).ogg','sound/vo/male/gen/moan (3).ogg')
 			if("clap")
 				used = list('sound/vo/clap (1).ogg', 'sound/vo/clap (2).ogg', 'sound/vo/clap (3).ogg', 'sound/vo/clap (4).ogg')
 

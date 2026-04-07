@@ -1,10 +1,18 @@
 /datum/anvil_recipe/valuables
-	appro_skill = /datum/skill/craft/blacksmithing
+	appro_skill = /datum/attribute/skill/craft/blacksmithing
 	i_type = "Valuables"
 	abstract_type = /datum/anvil_recipe/valuables
 	category = "Valuables"
 
 // --------- IRON -----------
+
+/datum/anvil_recipe/valuables/gold_teeth
+	name = "Golden Teeth"
+	recipe_name = "a quarter set of gold teeth"
+	req_bar = /obj/item/ingot/gold
+	created_item = /obj/item/natural/teeth/gold
+	craftdiff = 2
+	createditem_extra = 7
 
 /datum/anvil_recipe/valuables/gold_mask
 	name = "Golden Half Mask"
@@ -364,12 +372,6 @@
 	recipe_name = "a Zenarii Headdress"
 	created_item = /obj/item/clothing/head/crown/circlet/goldheaddress
 
-/datum/anvil_recipe/valuables/gold/hemhem
-	name = "Hemhem Crown (+ Cloth )"
-	recipe_name = "a Hemhem Crown"
-	additional_items = list (/obj/item/natural/cloth)
-	created_item = /obj/item/clothing/head/crown/hemhem
-
 /datum/anvil_recipe/valuables/gold/dorpel
 	name = "Golden Dorpel Ring"
 	recipe_name = "a Golden Dorpel Ring"
@@ -427,18 +429,18 @@
 /datum/anvil_recipe/valuables/signet
 	name = "Signet Ring"
 	req_bar = /obj/item/ingot/gold
-	craftdiff = SKILL_LEVEL_EXPERT
+	craftdiff = SKILL_RANK_EXPERT
 	created_item = /obj/item/clothing/ring/signet
 
 /datum/anvil_recipe/valuables/signet/silver
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = SKILL_RANK_MASTER
 	req_bar = /obj/item/ingot/silverblessed
 	created_item = /obj/item/clothing/ring/signet/silver
 
 /datum/anvil_recipe/valuables/signet/silver/inq
 	name = "Blessed Silver Signet Ring"
-	craftdiff = SKILL_LEVEL_MASTER
+	craftdiff = SKILL_RANK_MASTER
 	req_bar = /obj/item/ingot/silverblessed/bullion
 	created_item = /obj/item/clothing/ring/signet/silver
 

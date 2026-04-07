@@ -77,7 +77,7 @@
 	id = "frostbite"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/frostbite
 	duration = 10 SECONDS
-	effectedstats = list(STATKEY_SPD = -2)
+	effectedstats = list(STAT_SPEED = -2)
 	var/atom_color = "#88BFFF"
 	var/strength_multiplier = 1
 	var/static/mutable_appearance/frost = mutable_appearance('icons/roguetown/mob/coldbreath.dmi', "breath_m", ABOVE_ALL_MOB_LAYER)
@@ -87,7 +87,7 @@
 	return ..()
 
 /datum/status_effect/debuff/frostbite/on_apply()
-	effectedstats = list(STATKEY_SPD = round(-2 * strength_multiplier))
+	effectedstats = list(STAT_SPEED = round(-2 * strength_multiplier))
 	. = ..()
 	owner.add_overlay(frost)
 	owner.add_atom_colour(atom_color, TEMPORARY_COLOUR_PRIORITY)

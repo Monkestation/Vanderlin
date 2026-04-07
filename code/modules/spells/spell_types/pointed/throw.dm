@@ -58,6 +58,9 @@
 	if(QDELETED(owner.pulling) || !isliving(owner.pulling))
 		return FALSE
 
+	if(owner.grab_state < GRAB_AGGRESSIVE)
+		return FALSE
+
 	return TRUE
 
 /datum/action/cooldown/spell/throw_target/proc/prepare_throw(atom/target_atom)
@@ -69,7 +72,7 @@
 	var/base_y = owner.base_pixel_y
 	animate(owner, pixel_x = base_x - 4, pixel_y = base_y, time = 0.5 SECONDS)
 
-	if(!do_after(owner, 1 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, PROC_REF(CheckCanThrow), target_atom), hidden = TRUE))
+	if(!do_after(owner, 0.8 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, PROC_REF(CheckCanThrow), target_atom), hidden = TRUE))
 		end_throw_prep(base_x, base_y)
 		return FALSE
 

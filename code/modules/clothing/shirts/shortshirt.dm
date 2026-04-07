@@ -16,6 +16,9 @@
 /obj/item/clothing/shirt/shortshirt/colored/uncolored
 	color = CLOTHING_LINEN
 
+/obj/item/clothing/shirt/shortshirt/colored/grey
+	color = CLOTHING_ASH_GREY
+
 /obj/item/clothing/shirt/shortshirt/colored/merc
 	name = "shirt"
 	desc = ""

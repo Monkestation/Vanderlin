@@ -6,6 +6,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/pants.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_pants.dmi'
 	color = CLOTHING_LINEN
+	item_weight = 75 GRAMS
 
 /obj/item/clothing/pants/skirt/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -28,7 +29,7 @@
 
 /obj/item/clothing/pants/skirt/patkilt
 	name = "patterned kilt"
-	desc = "A thick skirt of Kaledonian origin."
+	desc = "A thick padded skirt."
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/pants.dmi'
 	icon_state = "patkilt"
 	item_state = "patkilt"

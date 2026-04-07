@@ -7,6 +7,7 @@
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
+	QDEL_LIST_ASSOC_VAL(chem_effects)
 
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
@@ -14,6 +15,10 @@
 	QDEL_LIST(implants)
 	QDEL_NULL(dna)
 	GLOB.carbon_list -= src
+
+	if(speech_modifiers)
+		for(var/thing in speech_modifiers)
+			qdel(thing) // Lazylist
 
 /mob/living/carbon/ZImpactDamage(turf/T, levels)
 	var/obj/item/bodypart/affecting
@@ -94,7 +99,7 @@
 	else
 		mode() // Activate held item
 
-/mob/living/attackby(obj/item/I, mob/user, params)
+/mob/living/carbon/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!user.cmode && (istype(user.rmb_intent, /datum/rmb_intent/weak) || istype(user.rmb_intent, /datum/rmb_intent/strong)))
 		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
 		var/list/possible_steps = list()
@@ -117,6 +122,7 @@
 		if(I.item_flags & SURGICAL_TOOL)
 			to_chat(user, span_warning("You're unable to perform surgery!"))
 			return TRUE
+
 	return ..()
 
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -171,7 +177,6 @@
 
 /mob/proc/throw_item(atom/target, offhand = FALSE)
 	SEND_SIGNAL(src, COMSIG_MOB_THROW, target)
-	return
 
 /mob/living/carbon/throw_item(atom/target, offhand = FALSE)
 	. = ..()
@@ -208,8 +213,8 @@
 							return
 						thrown_thing = throwable_mob
 						thrown_speed = 1
-						thrown_range = round((STASTR/throwable_mob.STACON)*2)
-						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || STASTR < 15)))
+						thrown_range = round((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)/GET_MOB_ATTRIBUTE_VALUE(throwable_mob, STAT_CONSTITUTION))*2)
+						if(body_position == LYING_DOWN || (!HAS_TRAIT(thrown_thing, TRAIT_TINY) && throwable_mob.cmode && (throwable_mob.body_position != LYING_DOWN || GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < 15)))
 							while(end_T.z > start_T.z)
 								end_T = GET_TURF_BELOW(end_T)
 						if((end_T.z > start_T.z) && throwable_mob.cmode)
@@ -320,7 +325,7 @@
 		if(istype(buckled, /obj/structure))
 			var/obj/structure/S = buckled
 			buckle_cd += S.breakoutextra
-		if(STASTR > 15)
+		if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15)
 			buckle_cd = 3 SECONDS
 		visible_message("<span class='warning'>[src] attempts to struggle free!</span>", \
 					"<span class='notice'>I attempt to struggle free...</span>")
@@ -350,7 +355,7 @@
 		ExtinguishMob(TRUE)
 	return
 
-/mob/living/carbon/resist_restraints()
+/mob/living/carbon/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	var/type = 0
 	if(handcuffed)
@@ -366,20 +371,24 @@
 		if(type == 2)
 			changeNext_move(CLICK_CD_RANGE)
 			last_special = world.time + CLICK_CD_RANGE
-		cuff_resist(I)
+		cuff_resist(I, instant = instant)
 
 
-/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0)
+/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(I.item_flags & BEING_REMOVED)
 		to_chat(src, span_warning("I'm already trying to get out of \the [I]\s!"))
 		return
 	I.item_flags |= BEING_REMOVED
 	breakouttime = I.slipouttime
-	if(STASTR > 10)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 10)
 		cuff_break = FAST_CUFFBREAK
 		breakouttime = I.breakouttime
-	if(STASTR > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > 15 || (mind && mind.has_antag_datum(/datum/antagonist/zombie)) )
 		cuff_break = INSTANT_CUFFBREAK
+
+	if(instant)
+		cuff_break = INSTANT_CUFFBREAK
+
 	if(!cuff_break)
 		to_chat(src, span_notice("I try to get out of \the [I]\s..."))
 		if(do_after(src, breakouttime, timed_action_flags = (IGNORE_HELD_ITEM)))
@@ -437,9 +446,8 @@
 	visible_message(span_danger("[src] manages to [cuff_break ? "break" : "remove"] [I]!"))
 	to_chat(src, span_notice("You successfully [cuff_break ? "break" : "remove"] [I]."))
 
-	if(istype(I, /obj/item/net))
-		if(has_status_effect(/datum/status_effect/debuff/netted))
-			remove_status_effect(/datum/status_effect/debuff/netted)
+	if(istype(I, /obj/item/rope/net))
+		remove_status_effect(/datum/status_effect/debuff/netted)
 
 	if(cuff_break)
 		. = !((I == handcuffed) || (I == legcuffed))
@@ -491,28 +499,25 @@
 
 /mob/living/carbon/proc/get_str_arms(num)
 	if(!domhand || !num || HAS_TRAIT(src, TRAIT_DUALWIELDER))
-		return STASTR
-	var/used = STASTR
+		return GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+	var/used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	if(num == domhand)
 		return used
 	else
-		used = STASTR - 1
+		used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - 1
 		if(used < 1)
 			used = 1
 		return used
 
-/mob/living/Stat()
-	..()
-	if(!client)
-		return
-	if(statpanel("Stats"))
-		stat("STR: \Roman[STASTR]")
-		stat("PER: \Roman[STAPER]")
-		stat("INT: \Roman[STAINT]")
-		stat("CON: \Roman[STACON]")
-		stat("END: \Roman[STAEND]")
-		stat("SPD: \Roman[STASPD]")
-		stat("PATRON: [uppertext(patron)]")
+/mob/living/get_status_tab_items()
+	. = ..()
+	. += "STR: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)]"
+	. += "PER: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)]"
+	. += "INT: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)]"
+	. += "CON: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)]"
+	. += "END: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)]"
+	. += "SPD: \Roman[GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)]"
+	. += "PATRON: [uppertext(patron.name)]"
 
 /mob/living/carbon/attack_ui(slot)
 	if(!has_hand_for_held_index(active_hand_index))
@@ -889,7 +894,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = ((get_complex_pain() / (STAEND * 10)) * 100) //what percent out of 100 to max pain
+	var/hurtdamage = ((get_complex_pain() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
@@ -988,10 +993,10 @@
 /mob/living/carbon/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	if(excess_healing)
 		if(dna && !(NOBLOOD in dna.species.species_traits))
-			blood_volume += (excess_healing * 2) //1 excess = 10 blood
+			blood_volume += (excess_healing * 2) //1 excess = 2 blood
 
 		for(var/obj/item/organ/organ as anything in internal_organs)
-			organ.applyOrganDamage(excess_healing * -1) //1 excess = 5 organ damage healed
+			organ.applyOrganDamage(excess_healing * -1)
 
 	return ..()
 
@@ -1015,8 +1020,7 @@
 		// regenerate_organs(regenerate_existing = (heal_flags & HEAL_REFRESH_ORGANS))
 		regenerate_organs()
 		var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
-		if(B)
-			B.brain_death = FALSE
+		B?.brain_death = FALSE
 
 	if(heal_flags & HEAL_TRAUMAS)
 		cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
@@ -1032,7 +1036,10 @@
 	return ..()
 
 /mob/living/carbon/can_be_revived()
-	if(!getorgan(/obj/item/organ/brain) && (!mind))
+	if(!mind)
+		return FALSE
+	var/obj/item/organ/brain/b = getorgan(/obj/item/organ/brain)
+	if(!istype(b) || b.brain_death)
 		return FALSE
 	return ..()
 
@@ -1294,63 +1301,99 @@
 
 	update_body_parts(TRUE)
 
-/mob/living/carbon/get_encumbrance()
-	return round(get_total_weight() / get_carry_capacity(), 0.01)
+/mob/living/carbon/proc/get_basic_lift()
+	if(!istype(attributes))
+		return 10
+	var/str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+	if(str <= 0)
+		return 3
+	return max(CEILING(sqrt(str) * 3, 1), 3)
 
-/mob/living/carbon/human/dummy/get_total_weight()
-	return 0
+/mob/living/carbon/proc/update_maximum_carry_weight()
+	maximum_carry_weight = get_basic_lift() * 10
 
-/mob/living/carbon/get_total_weight()
-	var/held_weight = 0
+	var/list/conflict_tracker = list()
 
+	for(var/key in get_carry_weight_modifiers())
+		var/datum/carry_weight_modifier/carry_weight_mod = carry_weight_modification[key]
+		var/conflict = carry_weight_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < carry_weight_mod.priority)
+				conflict_tracker[conflict] = carry_weight_mod.priority
+			else
+				continue
+
+		maximum_carry_weight += carry_weight_mod.carry_weight_add
+	update_encumbrance()
+
+/mob/living/carbon/proc/update_carry_weight()
+	. = 0
+	//we do need a typecheck here to avoid nulls
 	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
 		if(isnull(worn_item))
 			continue
-		var/modifier = 1
-		if(ishuman(src))
-			var/mob/living/carbon/human/H = src
-			if(H.age == AGE_CHILD)
-				modifier = 5
-		if(HAS_TRAIT(src, TRAIT_HOLLOWBONES))
-			modifier = 4
-		if(isclothing(worn_item))
-			switch(worn_item:armor_class)
-				if(AC_HEAVY)
-					if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
-						held_weight += worn_item.item_weight * 2 * modifier
-					else
-						held_weight += worn_item.item_weight * modifier
-				if(AC_MEDIUM)
-					if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
-						held_weight += worn_item.item_weight * 2 * modifier
-					else
-						held_weight += worn_item.item_weight * modifier
-				if(AC_LIGHT)
-					held_weight += worn_item.item_weight
-				else
-					held_weight += worn_item.item_weight
-		else
-			held_weight += worn_item.item_weight
-		held_weight += worn_item.get_stored_weight(HAS_TRAIT(src, TRAIT_AMAZING_BACK))
+		. += worn_item.get_carry_weight(src)
+	carry_weight = .
+	update_encumbrance()
 
-	return held_weight
+/mob/living/proc/get_mob_weight()
+	return 15
 
-/mob/living/carbon/encumbrance_to_dodge()
-	var/encumbrance = get_encumbrance()
-	if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
-		encumbrance *= 1.5
-	if(encumbrance <= 0.3 && HAS_TRAIT(src, TRAIT_DODGEEXPERT))
-		return 1
-	if(encumbrance >= 1)
-		return 0
-	return 1 - (encumbrance * 1)
+/mob/living/carbon/human/get_mob_weight()
+	var/age_modifier = 1
+	if(age == AGE_CHILD)
+		age_modifier = 0.5
+	return (dna?.species?.default_mob_weight + extra_mob_weight) * age_modifier
 
-/mob/living/carbon/encumbrance_to_speed()
-	var/exponential = (2.71 ** -(get_encumbrance() - 0.6)) * 10
-	var/speed_factor = 1 / (1 + exponential)
-	var/precentage =  CLAMP(speed_factor, 0, 1)
+/mob/living/carbon/human/update_carry_weight()
+	. = 0
+	for(var/obj/item/worn_item as anything in (get_equipped_items(TRUE) + held_items))
+		if(isnull(worn_item))
+			continue
+		. += worn_item.get_carry_weight()
+	for(var/mob/living/carbon/human/friend in buckled_mobs)
+		//For now, let's assume our friend weighs 60kg
+		. += friend.get_mob_weight()
 
-	add_movespeed_modifier("encumbrance", override = TRUE, multiplicative_slowdown = 5 * precentage)
+	carry_weight = .
+	update_encumbrance()
+	if(buckled && ishuman(buckled))
+		var/mob/living/carbon/human/buckle_human = buckled
+		buckle_human.update_carry_weight()
+
+
+/mob/living/carbon/proc/update_encumbrance()
+	var/basic_lift = maximum_carry_weight/10
+	if(carry_weight >= (basic_lift*10))
+		encumbrance = ENCUMBRANCE_EXTREME
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -400)
+	else if(carry_weight >= (basic_lift*6))
+		encumbrance = ENCUMBRANCE_HEAVY
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -250)
+	else if(carry_weight >= (basic_lift*3))
+		encumbrance = ENCUMBRANCE_MEDIUM
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, -100)
+	else if(carry_weight >= (basic_lift*2))
+		encumbrance = ENCUMBRANCE_LIGHT
+		add_or_update_variable_fatigue_modifier(/datum/fatigue_modifier/weight, TRUE, 0)
+	else
+		encumbrance = ENCUMBRANCE_NONE
+	update_encumbrance_movespeed_modifier()
+
+/mob/living/carbon/proc/update_encumbrance_movespeed_modifier()
+	switch(encumbrance)
+		if(ENCUMBRANCE_EXTREME)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 3.5)
+		if(ENCUMBRANCE_HEAVY)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 1.4)
+		if(ENCUMBRANCE_MEDIUM)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0.8)
+		if(ENCUMBRANCE_LIGHT)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0.34)
+		if(ENCUMBRANCE_NONE)
+			add_movespeed_modifier(MOVESPEED_ID_ENCUMBRANCE, override = TRUE, multiplicative_slowdown = 0)
+
 
 /// skeletonize all limbs of a carbon mob, pass TRUE as an argument if it's lethal, FALSE if it's not.
 /mob/living/carbon/proc/skeletonize(lethal = TRUE)
@@ -1360,17 +1403,12 @@
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
-	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	var/eyecolor = eyes.eye_color
-	var/eyesecond = eyes.second_color
-	if(eyes)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	eyes = new /obj/item/organ/eyes/night_vision/zombie
-	eyes.eye_color = eyecolor
-	eyes.second_color = eyesecond
-	eyes.Insert(src)
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
 
 /mob/living/carbon/wash(clean_types)
 	. = ..()

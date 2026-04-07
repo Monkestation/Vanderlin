@@ -132,12 +132,20 @@
 		/datum/sprite_accessory/hair/head/bald,
 		/datum/sprite_accessory/hair/head/adventurer_human,
 		/datum/sprite_accessory/hair/head/alchemist,
+		/datum/sprite_accessory/hair/head/bedheadv4,
 		/datum/sprite_accessory/hair/head/berserker,
+		/datum/sprite_accessory/hair/head/bluntbangs,
+		/datum/sprite_accessory/hair/head/bluntbangs_alt,
 		/datum/sprite_accessory/hair/head/bog,
 		/datum/sprite_accessory/hair/head/boss_dwarf,
 		/datum/sprite_accessory/hair/head/bowlcut,
 		/datum/sprite_accessory/hair/head/brother,
 		/datum/sprite_accessory/hair/head/cavehead,
+		/datum/sprite_accessory/hair/head/cornrows,
+		/datum/sprite_accessory/hair/head/cornrows2,
+		/datum/sprite_accessory/hair/head/cornrowbraid,
+		/datum/sprite_accessory/hair/head/cornrowbun,
+		/datum/sprite_accessory/hair/head/cornrowtail,
 		/datum/sprite_accessory/hair/head/conscript,
 		/datum/sprite_accessory/hair/head/courtier,
 		/datum/sprite_accessory/hair/head/dark_knight,
@@ -152,6 +160,7 @@
 		/datum/sprite_accessory/hair/head/forged,
 		/datum/sprite_accessory/hair/head/graceful,
 		/datum/sprite_accessory/hair/head/heroic,
+		/datum/sprite_accessory/hair/head/hornet,
 		/datum/sprite_accessory/hair/head/hunter,
 		/datum/sprite_accessory/hair/head/landlord,
 		/datum/sprite_accessory/hair/head/lover_tief,
@@ -204,8 +213,8 @@
 		/datum/sprite_accessory/hair/head/homely,
 		/datum/sprite_accessory/hair/head/junia,
 		/datum/sprite_accessory/hair/head/lady,
-		/datum/sprite_accessory/hair/head/lakkaribun,
-		/datum/sprite_accessory/hair/head/lakkaricut,
+		/datum/sprite_accessory/hair/head/highbun,
+		/datum/sprite_accessory/hair/head/ruffled,
 		/datum/sprite_accessory/hair/head/loosebraid,
 		/datum/sprite_accessory/hair/head/maiden,
 		/datum/sprite_accessory/hair/head/majestic_dwarf_F,
@@ -323,7 +332,27 @@
 		/datum/sprite_accessory/hair/head/kajam,
 		/datum/sprite_accessory/hair/head/mermaid,
 		/datum/sprite_accessory/hair/head/unkemptcurls,
+		/datum/sprite_accessory/hair/head/viper,
 		/datum/sprite_accessory/hair/head/shrinepriestess,
+		/datum/sprite_accessory/hair/head/tangled_curls,
+		/datum/sprite_accessory/hair/head/knots,
+		/datum/sprite_accessory/hair/head/sun,
+		/datum/sprite_accessory/hair/head/mediumlocs,
+		/datum/sprite_accessory/hair/head/longbraids,
+		/datum/sprite_accessory/hair/head/shortlocs,
+		/datum/sprite_accessory/hair/head/poofycurls,
+		/datum/sprite_accessory/hair/head/messylocs,
+		/datum/sprite_accessory/hair/head/dualtwists,
+		/datum/sprite_accessory/hair/head/twistbun,
+		/datum/sprite_accessory/hair/head/longestcurls,
+		/datum/sprite_accessory/hair/head/sidebraid,
+		/datum/sprite_accessory/hair/head/wild_fluff,
+		/datum/sprite_accessory/hair/head/nimrod,
+		/datum/sprite_accessory/hair/head/curlylocs,
+		/datum/sprite_accessory/hair/head/farmday,
+		/datum/sprite_accessory/hair/head/curlybob,
+		/datum/sprite_accessory/hair/head/snowdriftbangs,
+		/datum/sprite_accessory/hair/head/poofypoms
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
@@ -382,7 +411,7 @@
 	var/datum/species/species = return_species(prefs)
 	if(prefs.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
 		return FALSE
-	return (prefs.gender == MALE) || istype(species, /datum/species/dwarf) || istype(species, /datum/species/triton)
+	return (prefs.gender == MALE) || (istype(species, /datum/species/dwarf) && prefs.gender == FEMALE) || istype(species, /datum/species/triton)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)
@@ -413,7 +442,15 @@
 		/datum/sprite_accessory/hair/facial/ranger,
 		/datum/sprite_accessory/hair/facial/vandyke,
 		/datum/sprite_accessory/hair/facial/burns,
+		/datum/sprite_accessory/hair/facial/bushyburns,
 		/datum/sprite_accessory/hair/facial/hermit,
+		/datum/sprite_accessory/hair/facial/gnomish,
+		/datum/sprite_accessory/hair/facial/newlywed,
+		/datum/sprite_accessory/hair/facial/anniversary,
+		/datum/sprite_accessory/hair/facial/longbraid,
+		/datum/sprite_accessory/hair/facial/pinnacle,
+		/datum/sprite_accessory/hair/facial/enchanter,
+		/datum/sprite_accessory/hair/facial/curlypom,
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari

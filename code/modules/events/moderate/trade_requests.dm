@@ -54,7 +54,7 @@
 
 /obj/item/paper/scroll/trade_requests/Initialize()
 	. = ..()
-	writers_name = pick(world.file2list("strings/rt/names/human/humnorm.txt"))
+	writers_name = pick(file2list("strings/rt/names/human/humnorm.txt"))
 	rebuild_info()
 
 /obj/item/paper/scroll/trade_requests/update_icon_state()

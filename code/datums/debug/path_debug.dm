@@ -44,10 +44,8 @@ GLOBAL_DATUM_INIT(pathfind_dude, /obj/pathfind_guy, new())
 	active = FALSE
 	return ..()
 
-/datum/action/innate/path_debug/proc/clicked_something(datum/source, atom/clicked, params)
+/datum/action/innate/path_debug/proc/clicked_something(datum/source, atom/clicked, list/modifiers)
 	SIGNAL_HANDLER
-
-	var/list/modifiers = params2list(params)
 
 	var/turf/clunked = get_turf(clicked)
 	if(!clunked)

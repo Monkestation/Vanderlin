@@ -27,6 +27,8 @@
 /datum/component/steam_life/process()
 	if(!host)
 		return
+	if(HAS_TRAIT(host, TRAIT_STASIS))
+		return
 	steam_charge = max(0, steam_charge - (steam_drain_rate / 60))
 
 	if(steam_charge <= 0)

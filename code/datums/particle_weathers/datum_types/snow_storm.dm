@@ -144,10 +144,6 @@
 	for(var/atom/movable/movable in get_turf(src))
 		if(movable.get_filter("mob_moving_effect_mask"))
 			animate(movable.get_filter("mob_moving_effect_mask"), y = -32, time = 0)
-			if(ismob(movable))
-				movable:update_vision_cone()
-			for(var/mob/living/carbon/human/human in view(movable, 7))
-				human.update_vision_cone()
 
 	STOP_PROCESSING(SSslowobj, src)
 	snowed_turf.snow = null
@@ -373,8 +369,8 @@
 #undef CORNER_CLOCKWISE
 
 
-/turf/Exited(atom/movable/gone, direction)
+/turf/Exited(atom/movable/gone, atom/new_loc)
 	if(!istype(gone))
 		return
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
-	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)
+	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, new_loc)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, new_loc)

@@ -6,9 +6,7 @@
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("strikes", "hits")
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 0
 	penfactor = AP_CLUB_STRIKE
-	swingdelay = 0
 	icon_state = "instrike"
 	misscost = 5
 	item_damage_type = "blunt"
@@ -35,23 +33,20 @@
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	penfactor = AP_CLUB_SMASH
 	damfactor = 1.1
-	chargetime = 3
+	clickcd = 14
 	swingdelay = 3
-	charging_slowdown = 0.8
 	icon_state = "insmash"
 	misscost = 10
 	item_damage_type = "blunt"
+	acc_bonus = 10
 
 /datum/intent/mace/smash/wood
 	hitsound = list('sound/combat/hits/blunt/woodblunt (1).ogg', 'sound/combat/hits/blunt/woodblunt (2).ogg')
 
-/datum/intent/mace/smash/wood/ranged
-	reach = 2
-
 /datum/intent/mace/smash/heavy
 	penfactor = AP_HEAVY_SMASH
 	damfactor = 1.2
-	chargetime = 3
+	clickcd = 16
 	swingdelay = 3
 	misscost = 22
 	warnie = "mobwarning"
@@ -63,13 +58,14 @@
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
-	chargetime = 1
+	clickcd = 16
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 40
 	swingdelay = 1
 	misscost = 15
-	item_damage_type = "blunt"
+	item_damage_type = "stab"
+	acc_bonus = 12
 
 /datum/intent/mace/warhammer/stab
 	name = "thrust"
@@ -80,7 +76,9 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 20
 	damfactor = 0.8
+	misscost = 5
 	item_damage_type = "stab"
+	acc_bonus = 12
 
 /datum/intent/mace/warhammer/impale
 	name = "impale"
@@ -88,14 +86,13 @@
 	blade_class = BCLASS_PICK
 	attack_verb = list("picks", "impales")
 	animname = "stab"
-	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
-	chargetime = 14
-	chargedrain = 1
-	misscost = 1
-	no_early_release = TRUE
+	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
+	clickcd = 20
+	misscost = 8
 	penfactor = 80
 	damfactor = 0.9
 	item_damage_type = "stab"
+	acc_bonus = 12
 
 // FLAIL DERIVING INTENTS //
 
@@ -109,6 +106,7 @@
 	attack_verb = list("strikes", "hits")
 	penfactor = AP_FLAIL_STRIKE
 	item_damage_type = "slash"
+	acc_bonus = 12
 
 /datum/intent/flail/strike/long
 	reach = 2
@@ -122,16 +120,15 @@
 	chargetime = 5
 	chargedloop = /datum/looping_sound/flailswing
 	keep_looping = TRUE
-	recovery = 10
 	misscost = 10
 	attack_verb = list("smashes")
 	damfactor = 1.2
 	penfactor = AP_FLAIL_SMASH
 	item_damage_type = "slash"
+	knockback = TRUE
 
 /datum/intent/flail/strike/smash/long
 	reach = 2
-	recovery = 12
 	misscost = 12
 
 /datum/intent/flail/strike/matthiosflail
