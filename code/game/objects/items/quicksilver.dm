@@ -8,6 +8,7 @@
 	dropshrink = 1
 	drop_sound = 'sound/items/gem.ogg'
 	resistance_flags = FIRE_PROOF
+	item_weight = 50 GRAMS
 	var/miracle_use = 0
 	var/success = 0
 

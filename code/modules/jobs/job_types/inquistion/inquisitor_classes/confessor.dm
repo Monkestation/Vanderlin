@@ -67,9 +67,13 @@
 
 /datum/job/advclass/sacrestant/confessor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Confessor")
 
-	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
+/datum/job/advclass/sacrestant/confessor/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword")
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
 
 	switch(weapon_choice)
@@ -86,7 +90,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/swords)
 
 	// Armor/archetype selection
-	var/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
+	var/static/list/armors = list("Confessor - Slurbow, Leather Maillecoat", "Arbalist - Crossbow, Lightweight Brigandine")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARCHETYPE.", "TAKE UP PSYDON'S DUTY.", armors)
 
 	switch(armor_choice)
@@ -103,7 +107,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/arbalist)
 
 	// Bolt selection
-	var/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
+	var/static/list/quivers = list("Bolts - Steel-Tipped", "Sunderbolts - Silver-Tipped, Halved Damage")
 	var/boltchoice = browser_input_list(spawned, "CHOOSE YOUR MUNITIONS.", "TAKE UP PSYDON'S MISSILES.", quivers)
 
 	switch(boltchoice)

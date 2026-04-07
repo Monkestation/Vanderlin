@@ -22,6 +22,7 @@
 		list("From cutting herbal flowers.", /obj/structure/flora/grass/herb/atropa),
 		list("From Threshing Chaff.", /obj/item/natural/chaff/wheat)
 	)
+	item_weight = 1 GRAMS
 
 /obj/item/natural/fibers/sinew
 	name = "sinew fiber"
@@ -56,6 +57,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/silk
+	item_weight = 1 GRAMS
 
 #ifdef TESTSERVER
 
@@ -85,6 +87,8 @@
 	embedding = list("embedded_unsafe_removal_time" = 20, "embedded_pain_chance" = 10, "embedded_pain_multiplier" = 1, "embed_chance" = 35, "embedded_fall_chance" = 0)
 	resistance_flags = FLAMMABLE
 	max_integrity = 20
+	item_weight = 3 GRAMS
+
 /obj/item/natural/thorn/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)

@@ -59,3 +59,6 @@
 	needed_item = null
 	hammers_per_item = initial(hammers_per_item)
 	hammered = FALSE
+
+/datum/artificer_recipe/proc/item_created(obj/item/created)
+	return

@@ -33,6 +33,7 @@
 	sellprice = 200 // This kind of equipment is very hard to come by in Rockhill.
 	grid_height = 32
 	grid_width = 96
+	item_weight = 1.2 KILOGRAMS
 	var/wheellock = TRUE
 	var/cocked = FALSE
 	var/ramrod_inserted = TRUE
@@ -164,6 +165,7 @@
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "ramrod"
+	item_weight = 150 GRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/Initialize()
 	. = ..()
@@ -288,6 +290,7 @@
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet
 	can_parry = TRUE
 	max_integrity = 100
+	item_weight = 4.5 KILOGRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/Initialize()
 	. = ..()
@@ -429,6 +432,7 @@
 	name = "bayonet"
 	force = 10
 	max_blade_int = 150
+	item_weight = 300 GRAMS
 	var/spread = 2
 
 /obj/item/ramrod/musket
@@ -436,6 +440,7 @@
 	desc = ""
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "ramrod_musket"
+	item_weight = 300 GRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user) //this is probably shitcode but I'm tired and I'm not repathing the guns to be /weapons, it's better than the musket being a delimbinator 9000
 	if(!get_sharpness() || !affecting.can_dismember(src))

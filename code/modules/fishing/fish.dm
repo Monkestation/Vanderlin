@@ -33,6 +33,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2)
+	item_weight = 300 GRAMS //idk about this one chief I'll come back
 
 	/// Flags for fish variables that would otherwise be TRUE/FALSE
 	var/fish_flags = FISH_FLAG_SHOW_IN_CATALOG|FISH_DO_FLOP_ANIM

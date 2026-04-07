@@ -42,9 +42,14 @@
 
 /datum/job/advclass/mercenary/sworddancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
+	spawned.inspiration = new /datum/inspiration(spawned)
 	spawned.merctype = 9
 
-	spawned.select_equippable(player_client, list(
+/datum/job/advclass/mercenary/sworddancer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -53,12 +58,9 @@
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
 		"Viola" = /obj/item/instrument/viola
-		),
-		message = "Choose your instrument.",
-		title = "XYLIX"
 	)
 
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.",title = "XYLIX")
 
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"

@@ -39,6 +39,7 @@
 	"Am I reading? Are these words, symbols or inane scribbles? I cannot be sure, yet with each one my eyes glaze over, I can feel the arcyne pulse within me...",
 	"A mystery is revealed before my very eyes. I do not read it, yet I am aware. Gems are the Root's natural arcyne energy, manifest. Perhaps I can use them to better my conceptualization...")
 	oneuse = FALSE
+	item_weight = 547 GRAMS
 	var/owner = null
 	var/list/allowed_readers = list()
 	var/stored_gem = FALSE

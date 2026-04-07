@@ -81,10 +81,14 @@
 
 /datum/job/captain/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	add_verb(spawned, /mob/proc/haltyell)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+/datum/job/captain/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/selectableweapon = list(
 		"Law and Order" = list(/obj/item/weapon/sword/sabre/captain, /obj/item/weapon/shield/tower/buckleriron/captain),

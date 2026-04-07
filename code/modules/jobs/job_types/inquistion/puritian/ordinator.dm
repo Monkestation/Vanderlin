@@ -72,6 +72,9 @@
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
 
+/datum/job/advclass/puritan/ordinator/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
 	var/static/list/gear = list(
 		"Covenant And Creed (Broadsword + Shield)",
 		"Covenant and Consecratia (Flail + Shield)",

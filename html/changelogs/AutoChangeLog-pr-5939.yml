@@ -1,5 +1,0 @@
-author: "MissyNym"
-delete-after: True
-changes:
-  - rscadd: "More quest markers in the bog and therefore, more locations for quests!"
-  - bugfix: "All generic quest markers in the bog have been converted to specific difficulty-based ones. Hopefully this will mean that quests do not only go to the bog now!"

@@ -11,6 +11,7 @@
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_BACK
 	smeltresult = /obj/item/fertilizer/ash
+	item_weight = 548 GRAMS
 
 /obj/item/broom/apply_components()
 	AddElement(/datum/element/walking_stick)

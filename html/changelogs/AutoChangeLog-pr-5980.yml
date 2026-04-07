@@ -1,0 +1,5 @@
+author: "KevinfromHP"
+delete-after: True
+changes:
+  - rscadd: "Automaton stability now disables their shackle instead of making them explode."
+  - bugfix: "Automatons spamming that they've received orders when they've been told to protect something"

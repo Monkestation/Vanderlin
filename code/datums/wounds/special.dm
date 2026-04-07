@@ -228,6 +228,14 @@
 	critical = TRUE
 	mortal = TRUE
 
+/datum/wound/cbt/can_apply_to_mob(mob/living/affected)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/bodypart/chest/chest = affected.get_bodypart(BODY_ZONE_CHEST)
+	return chest && chest.status == BODYPART_ORGANIC
+
+
 /datum/wound/cbt/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/cbt))
 		return FALSE

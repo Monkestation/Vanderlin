@@ -287,7 +287,7 @@
 		if(!M.key || !M.client)
 			result -= M
 
-	listclearnulls(result)
+	list_clear_nulls(result)
 
 	return result
 

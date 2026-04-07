@@ -140,6 +140,11 @@
 			else
 				.[attribute_path] = clamp(.[attribute_path] + M.attribute_list[attribute_path], nulltozero(attribute_min), nulltozero(attribute_max))
 	attribute_list = .
+	if(iscarbon(parent))
+		var/mob/living/carbon/carbon_parent = parent
+		carbon_parent.update_endurance_fatigue_modifier()
+		carbon_parent.update_endurance_stamina_modifier()
+		carbon_parent.update_maximum_carry_weight()
 
 /// Get the attribute modifiers list of the holder
 /datum/attribute_holder/proc/get_attribute_modification()

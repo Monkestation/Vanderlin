@@ -15,24 +15,28 @@
 	icon_state = "onion_sliced"
 	slices_num = 0
 	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
 	name = "shredded cabbage"
 	icon_state = "cabbage_sliced"
 	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 300 GRAMS
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/veg/potato_sliced
 	name = "potato cuts"
 	icon_state = "potato_sliced"
 	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 /*	..................   Turnip   ................... */
 /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
 	name = "cleaned turnip"
 	icon_state = "turnip_sliced"
 	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 
 /*	..................		Roasted seeds		................... */
@@ -47,6 +51,7 @@
 	foodtype = VEGETABLES
 	rotprocess = null
 	faretype = FARE_POOR
+	item_weight = 5 GRAMS
 
 /*	..................		Salted seeds		................... */
 /obj/item/reagent_containers/food/snacks/saltseeds
@@ -61,6 +66,7 @@
 	rotprocess = null
 	eat_effect = /datum/status_effect/buff/foodbuff
 	faretype = FARE_NEUTRAL
+	item_weight = 5 GRAMS
 
 /*	..................	Cocaudo Half	................... */
 
@@ -69,6 +75,7 @@
 	icon_state = "cocaudo_split"
 	tastes = list("savory goo" = 1)
 	trash = /obj/item/reagent_containers/glass/cup/cocaudo_husk
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/veg/cocaudo_half/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
