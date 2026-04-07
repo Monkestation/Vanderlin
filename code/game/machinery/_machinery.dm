@@ -230,7 +230,7 @@
 /obj/machinery/proc/can_be_overridden()
 	. = 1
 
-/obj/machinery/Exited(atom/movable/gone, atom/new_loc)
+/obj/machinery/Exited(atom/movable/gone, direction)
 	. = ..()
 	if (gone == occupant)
 		occupant = null

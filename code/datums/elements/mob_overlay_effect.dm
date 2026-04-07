@@ -18,7 +18,7 @@
 	mask_y_offset = _mask_y_offset
 	effect_alpha = _effect_alpha
 
-	RegisterSignal(get_turf(target), COMSIG_TURF_EXITED, PROC_REF(on_remove), override = TRUE)
+	RegisterSignal(get_turf(target), COMSIG_ATOM_EXITED, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(get_turf(target), COMSIG_TURF_ENTERED, PROC_REF(on_add), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_REMOVE, PROC_REF(on_remove), override = TRUE)
 	RegisterSignal(target, COMSIG_MOB_OVERLAY_FORCE_UPDATE, PROC_REF(on_add), override = TRUE)
@@ -27,7 +27,7 @@
 /datum/element/mob_overlay_effect/Detach(datum/source)
 	. = ..()
 	UnregisterSignal(get_turf(source), list(
-		COMSIG_TURF_EXITED,
+		COMSIG_ATOM_EXITED,
 		COMSIG_TURF_ENTERED,
 		COMSIG_MOB_OVERLAY_FORCE_REMOVE,
 		COMSIG_MOB_OVERLAY_FORCE_UPDATE,

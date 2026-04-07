@@ -51,7 +51,7 @@
 	is_open = !is_open
 	update_appearance(UPDATE_ICON)
 
-/obj/item/storage/fancy/Exited(atom/movable/gone, atom/new_loc)
+/obj/item/storage/fancy/Exited(atom/movable/gone, direction)
 	. = ..()
 	is_open = TRUE
 	update_appearance(UPDATE_ICON)

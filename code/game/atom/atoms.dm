@@ -1068,8 +1068,8 @@
  *
  * Default behaviour is to send the COMSIG_ATOM_EXITED
  */
-/atom/Exited(atom/movable/gone, atom/new_loc)
-	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, new_loc)
+/atom/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
 /**
  *Tool behavior procedure. Redirects to tool-specific procs by default.

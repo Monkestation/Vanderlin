@@ -6,7 +6,7 @@
 	if(istype(leaving, /mob/camera/strategy_controller))
 		leaving.forceMove(get_turf(GLOB.lair_portal))
 
-/area/overlord_lair/Exited(atom/movable/gone, atom/new_loc)
+/area/overlord_lair/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(istype(gone, /mob/camera/strategy_controller))
 		gone.forceMove(get_turf(GLOB.lair_portal))

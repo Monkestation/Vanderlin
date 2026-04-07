@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 ///set the movement registrations to our current turf(s) so contents moving out of our tile(s) are removed from our movement lists
 /obj/structure/industrial_lift/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
-		RegisterSignal(turf_loc, COMSIG_TURF_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
+		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
 		RegisterSignals(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
