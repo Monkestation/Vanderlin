@@ -98,3 +98,6 @@
       rarity as fractures (can pull with tongs), less teeth adds a slur
   - refactor: weight has been redone to be a tiered system from the old %. For math
       that used the % of weight it was moved to either tiers or a sigmoid curve.
+2026-04-07:
+  Ben10083:
+  - map: Roguetest throne is now functional.

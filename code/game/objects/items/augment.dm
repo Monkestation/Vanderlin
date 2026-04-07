@@ -81,21 +81,21 @@
 		to_chat(user, span_warning("[M] has no augments."))
 		return
 	var/list/names = list()
+	var/i = 0
 	for(var/datum/augment/A in augments)
-		names[A.name] = A
+		i++
+		names["[i]. [A.name]"] = A
 	var/chosen = tgui_input_list(user, "Collect which augment?", "Artificer", names, timeout = 20 SECONDS)
 	var/datum/augment/to_remove = names[chosen]
 	if(!chosen || QDELETED(to_remove) || QDELETED(M))
 		return
 	var/skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering)
 	if(skill < to_remove.engineering_difficulty)
-		to_chat(user, span_warning("You lack the engineering skill to install this augment!"))
+		to_chat(user, span_warning("You lack the engineering skill to uninstall this augment!"))
 		return
-	to_chat(user, span_notice("You begin uninstalling \the [to_remove.name]..."))
+	to_chat(user, span_notice("You begin uninstalling the [to_remove.name]..."))
 	if(!do_after(user, to_remove.installation_time, target = M))
 		return
-	if(to_remove.parent != M)
-		return // you just tried to dupe it you sneak
 	var/result = SEND_SIGNAL(M, COMSIG_AUGMENT_REMOVE, to_remove, user)
 	if(result & COMPONENT_AUGMENT_SUCCESS)
 		contained_augment = to_remove
