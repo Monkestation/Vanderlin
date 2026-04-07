@@ -515,7 +515,7 @@
 	output = /obj/item/weapon/whip
 	craftdiff = 1
 
-/datum/repeatable_crafting_recipe/leather/furlinedboots
+/datum/repeatable_crafting_recipe/leather/furboots
 	name = "fur lined boots"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
@@ -751,20 +751,20 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
-	name = "hardened afur lined boots"
-	output = /obj/item/clothing/shoes/boots/fur/advanced
-	requirements = list(/obj/item/natural/hide/cured = 2,
-			/obj/item/natural/fur = 2,
-			/obj/item/natural/fibers/sinew = 1)
+/datum/repeatable_crafting_recipe/leather/standalone/furboots
+	name = "hardened fur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fur = 2,
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots
 	name = "hardened hunter boots"
 	output = /obj/item/clothing/shoes/boots/hunter
-	requirements = list(/obj/item/natural/hide/cured = 3,
-			/obj/item/natural/fur = 1,
-			/obj/item/natural/fibers/sinew = 2)
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fur = 1,
+				/obj/item/natural/fibers/sinew = 2)
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/boots/watch
@@ -1004,20 +1004,22 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
+/datum/repeatable_crafting_recipe/leather/standalone/furboots/masterwork
 	name = "masterwork fur lined boots"
-	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	output = /obj/item/clothing/shoes/boots/furlinedboots/masterwork
+	attacked_atom = /obj/item/clothing/shoes/boots/furlinedboots
 	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
-			/obj/item/natural/cured/essence = 1,
-			/obj/item/natural/fibers/sinew = 1)
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/hunterboots
+/datum/repeatable_crafting_recipe/leather/standalone/hunterboots/masterwork
 	name = "masterwork hunter boots"
-	output = /obj/item/clothing/shoes/boots/hunter
+	output = /obj/item/clothing/shoes/boots/hunter/masterwork
+	attacked_atom = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/clothing/shoes/boots/hunter = 1,
-			/obj/item/natural/cured/essence = 1,
-			/obj/item/natural/fibers/sinew = 2)
+				/obj/item/natural/cured/essence = 1,
+				/obj/item/natural/fibers/sinew = 2)
 	craftdiff = 5
 
 

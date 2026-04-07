@@ -196,7 +196,7 @@
 	prevent_crits = ALL_EXCEPT_STAB
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
 
-/obj/item/clothing/shoes/boots/fur/masterwork/Initialize()
+/obj/item/clothing/shoes/boots/furlinedboots/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
