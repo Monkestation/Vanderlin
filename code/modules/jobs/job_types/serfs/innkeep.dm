@@ -55,6 +55,7 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat
 	neck = /obj/item/storage/keyring/innkeep
 	cloak = /obj/item/clothing/cloak/apron/waist
+	backl = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking,

@@ -29,11 +29,6 @@ GLOBAL_LIST_INIT(visual_ui_id_to_type, list())
 /datum/mind
 	var/list/active_uis = list()
 
-/datum/mind/Destroy()
-	. = ..()
-	remove_all_uis()
-	QDEL_NULL(active_uis)
-
 /datum/mind/proc/resend_all_uis() // Re-sends all mind uis to client.screen, called on mob/living/Login()
 	for (var/visual_ui in active_uis)
 		var/datum/visual_ui/ui = active_uis[visual_ui]
@@ -254,7 +249,7 @@ GLOBAL_LIST_INIT(visual_ui_id_to_type, list())
 	icon = 'icons/visual_ui/32x32.dmi'
 	icon_state = ""
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
-	plane = HUD_PLANE
+	plane = VISUAL_HUD_PLANE
 
 	var/datum/visual_ui/parent = null
 	var/element_flags = 0

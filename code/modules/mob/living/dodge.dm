@@ -1,25 +1,25 @@
 
 /mob/living/proc/get_dodging_score(modifier = 0)
 	var/basic_speed = GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
-	var/encumberance = get_encumbrance()
 	if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
 		encumbrance *= 1.5
 	var/encumbrance_penalty = 0
-	if(encumberance >= 1.0)
-		encumbrance_penalty = 4
-	else if(encumberance >= 0.75)
-		encumbrance_penalty = 3
-	else if(encumberance >= 0.5)
-		encumbrance_penalty = 2
-	else if(encumberance >= 0.25)
-		encumbrance_penalty = 1
+	switch(encumbrance)
+		if(ENCUMBRANCE_LIGHT)
+			encumbrance_penalty = 1
+		if(ENCUMBRANCE_MEDIUM)
+			encumbrance_penalty = 2
+		if(ENCUMBRANCE_HEAVY)
+			encumbrance_penalty = 3
+		if(ENCUMBRANCE_EXTREME)
+			encumbrance_penalty = 4
 
 	var/stun_penalty = 0
 	if(incapacitated())
 		stun_penalty = 4
 	if(cmode && (d_intent == INTENT_DODGE))
 		modifier += 2
-	return floor(max(0, 3 + basic_speed + modifier - encumbrance_penalty - stun_penalty - dodging_penalty))
+	return floor(max(0, 1 + basic_speed + modifier - encumbrance_penalty - stun_penalty - dodging_penalty))
 
 /mob/living/proc/update_dodging_penalty(incoming = 0, duration = DODGING_PENALTY_COOLDOWN_DURATION)
 	//use remove_dodging_penalty() you idiot
@@ -102,8 +102,7 @@
 	var/dodge_speed = floor(GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) / 2)
 
 	// fast attackers raise the threshold (mirror of parry system)
-	// STAT_SPEED on 0-~30 range; divide by 5 for ~0-6 opposition impact
-	var/attacker_opposition = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) / 5)
+	var/attacker_opposition = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) / 4)
 
 	if(istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src
@@ -114,17 +113,17 @@
 			if(AC_MEDIUM)
 				dodge_speed = floor(dodge_speed * 0.5)
 				drained += 7
-				attacker_opposition += 2  // armor makes you easier to hit
+				attacker_opposition += 4  // armor makes you easier to hit
 			if(AC_HEAVY)
 				dodge_speed = floor(dodge_speed * 0.25)
 				drained += 12
-				attacker_opposition += 4  // heavy armor tanks dodge chance
+				attacker_opposition += 8  // heavy armor tanks dodge chance
 
 		var/time_since_last = world.time - last_dodge
 		if(time_since_last < 2 SECONDS)
 			drained += 5
 
-		if((H.get_encumbrance() > 0.7) || H.legcuffed)
+		if((H.encumbrance >= ENCUMBRANCE_HEAVY) || H.legcuffed)
 			H.Knockdown(1)
 			return FALSE
 
@@ -242,6 +241,9 @@
 		dodge_modifier -= 2
 	if(user.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/fervor))
 		dodge_modifier -= 1
+
+	if(HAS_TRAIT(src, TRAIT_DODGEEXPERT))
+		dodge_modifier += 3
 
 	//knowing how an attack works helps dodge it
 	if(attacking_item)

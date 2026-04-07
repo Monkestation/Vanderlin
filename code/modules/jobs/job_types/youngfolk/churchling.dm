@@ -33,6 +33,7 @@
 	outfit = /datum/outfit/churchling
 	give_bank_account = TRUE
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CHURCH
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)

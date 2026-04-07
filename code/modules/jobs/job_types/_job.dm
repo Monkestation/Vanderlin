@@ -176,7 +176,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/quirk/forced_flaw
+	var/list/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -188,6 +188,8 @@
 	var/max_apprentices = 1
 	/// if this is set its the name bestowed to the new apprentice otherwise its just name the [job_name] apprentice.
 	var/apprentice_name
+	/// Can we be an apprentice to someone?
+	var/can_be_apprentice = FALSE
 	/// do we magic?
 	var/magic_user = FALSE
 	/// Do we get passive income every day from our noble estates?
@@ -277,6 +279,8 @@
 /// Client might not be yet in the mob, and is thus a separate variable.
 /datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE) // Don't sleep ticker
+
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
 	if(spawned.attributes)
@@ -362,7 +366,11 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.add_quirk(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.add_quirk(flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -404,6 +412,14 @@
 
 	if(job_flags & JOB_SHOW_IN_CREDITS)
 		START_PROCESSING(SScrediticons, player_client)
+
+/// Callback for anything that sleeps, called after roundstart or async during EquipRank
+/datum/job/proc/on_roundstart(mob/living/spawned, client/player_client)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(ishuman(spawned))
+		var/mob/living/carbon/human/H = spawned
+		H.pick_job_packs(src)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
@@ -460,7 +476,6 @@
 
 /mob/living/carbon/human/on_job_equipping(datum/job/equipping)
 	dress_up_as_job(equipping)
-	pick_job_packs(equipping)
 
 /mob/living/carbon/human/proc/pick_job_packs(datum/job/equipping)
 	if(!length(equipping.job_packs))
@@ -561,7 +576,7 @@
 
 /datum/job/proc/get_job_special_late_point()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != "[title]_late")
+		if(spawn_point.name != "[title]late")
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong

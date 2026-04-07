@@ -455,6 +455,12 @@
 	created_item = /obj/item/clothing/armor/leather/splint
 	createditem_extra = 1
 
+/datum/anvil_recipe/armor/iron/brigandine/light
+	name = "Lightweight Brigandine (+cloth)"
+	recipe_name = "a lightweight brigandine"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/armor/brigandine/light
+
 ///////////////////////////////////////////////
 // --------- STEEL -----------
 /datum/anvil_recipe/armor/steel

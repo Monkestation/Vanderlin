@@ -179,6 +179,22 @@
 		attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/leper_vice)
 	remove_stat_modifier(TRAIT_LEPROSY)
 
+///Called when TRAIT_BRIAR_HOST is added to the mob.
+/mob/living/proc/on_black_briar_trait_gain(datum/source)
+	SIGNAL_HANDLER
+	if(!iscarbon(src))
+		return
+	var/datum/wound/black_briar_curse/chest/root = has_wound(/datum/wound/black_briar_curse/chest)
+	if(root) // we already had a root, so remove the traits that even gave us this
+		root.remove_immunity(src)
+		return
+	var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
+	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	root?.infection = root.max_infection * BBC_STAGE_LATE
+	root?.infection_percent = BBC_STAGE_LATE
+
+//nothing happens when we remove it so we don't need a remove
+
 ///Called when TRAIT_CRATEMOVER is added to the mob.
 /mob/living/proc/on_cratemover_trait_gain(datum/source)
 	SIGNAL_HANDLER

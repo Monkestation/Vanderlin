@@ -17,7 +17,7 @@
 	if(should_process)
 		START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/Destroy(force, ...)
+/datum/enchantment/Destroy(force)
 	if(enchanted_item)
 		remove_item(enchanted_item)
 	if(should_process)

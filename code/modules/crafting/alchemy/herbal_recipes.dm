@@ -46,11 +46,10 @@
 	scent_description = "nettles"
 
 /datum/reagent/medicine/herbal/urtica_brew/on_mob_life(mob/living/carbon/M)
-	if(volume > 0.99)
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+8, BLOOD_VOLUME_NORMAL)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.75, internal_regen = FALSE)
+	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
+		M.blood_volume = min(M.blood_volume+15, BLOOD_VOLUME_NORMAL)
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.75, internal_regen = FALSE)
 	..()
 
 /datum/reagent/medicine/herbal/calendula_salve
@@ -223,6 +222,10 @@
 		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 			M.adjust_stamina(-0.1, internal_regen = FALSE)
 
+	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
+		return ..()
+	if(volume > 2)
+		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak)
 	..()
 
 // Advanced Herbal Reagents
@@ -373,7 +376,6 @@
 /datum/reagent/buff/herbal/scholar_focus/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/drowsiness))
 		M.adjust_drowsiness(-6 SECONDS)
-	//TODO: Boost learning and skill gain slightly
 	if(prob(5))
 		to_chat(M, span_notice("Your mind feels sharp and focused."))
 	. = ..()

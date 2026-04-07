@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	var/preset = "matthios"
 	var/forced_preset = "" // If set, force a specific preset instead of randomizing.
+	headprice = 36
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/Initialize()
 	. = ..()

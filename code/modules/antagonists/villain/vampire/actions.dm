@@ -44,7 +44,7 @@
 	if(stat == DEAD && (world.time - victim.timeofdeath) > 4 MINUTES)
 		to_chat(src, span_warning("[victim.p_their(TRUE)] body has gone stiff. Too far gone to sire."))
 		return
-	if(browser_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
+	if(tgui_alert(src, "Would you like to sire a new spawn?", "THE CURSE OF KAIN", list("MAKE IT SO", "I RESCIND")) != "MAKE IT SO")
 		to_chat(src, span_warning("I decide [victim] is unworthy."))
 		return
 	INVOKE_ASYNC(victim, TYPE_PROC_REF(/mob/living/carbon/human, vampire_conversion_prompt), src)
@@ -229,7 +229,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
-	sewrepair = TRUE
+	sewrepair = null
 	resistance_flags = INDESTRUCTIBLE
 
 

@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 	dodgetime = 30
 	flee_in_pain = TRUE
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 11
 
 
 /mob/living/carbon/human/species/human/northern/searaider/ambush
@@ -40,7 +41,6 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 	var/beard = pick(list(/datum/sprite_accessory/hair/facial/viking,
 						/datum/sprite_accessory/hair/facial/manly,
 						/datum/sprite_accessory/hair/facial/pick))
-	head.sellprice = 30 // 50% More than gobbo
 
 	var/datum/bodypart_feature/hair/head/new_hair = new()
 	var/datum/bodypart_feature/hair/facial/new_facial = new()

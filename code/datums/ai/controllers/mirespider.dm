@@ -178,7 +178,7 @@
 			var/cocoon = new /obj/structure/spider/cocoon(T)
 			target.forceMove(cocoon)
 			// Very gentle healing effect that restores a lot of bloodloss. Allows the target to break out later.
-			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, 0.25)
+			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, null, 0.25)
 			finish_action(controller, TRUE, target_key)
 
 /datum/ai_behavior/cocoon_target/finish_action(datum/ai_controller/controller, succeeded, target_key)

@@ -5,8 +5,8 @@
 	night_weather =  list(/datum/particle_weather/fog = 8, /* /datum/particle_weather/snow_gentle = 20, /datum/particle_weather/snow_storm = 8 */)
 
 	temp_ranges = list(
-		"dawn" = list(10, 20),      // Cool morning
-		"day" = list(20, 30),       // Warm day
-		"dusk" = list(15, 25),      // Warm evening
-		"night" = list(8, 15),      // Cool night
+		DAWN = list(10, 20),      // Cool morning
+		DAY = list(20, 30),       // Warm day
+		DUSK = list(15, 25),      // Warm evening
+		NIGHT = list(8, 15),      // Cool night
 	)

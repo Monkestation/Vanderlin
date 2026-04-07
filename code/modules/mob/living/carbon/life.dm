@@ -197,9 +197,9 @@
 				T.pollution.smell_act(src)
 
 /mob/living/proc/handle_inwater(turf/open/water/W)
-	if(body_position == LYING_DOWN || W.water_level == 3)
+	if(body_position == LYING_DOWN || W.water_height >= WATER_HEIGHT_DEEP)
 		SoakMob(FULL_BODY)
-	else if(W.water_level == 2)
+	else if(W.water_height == WATER_HEIGHT_SHALLOW)
 		SoakMob(BELOW_CHEST)
 
 /mob/living/carbon/handle_inwater(turf/open/water/W)
@@ -211,10 +211,19 @@
 	var/react_volume = 2
 	var/react_type = TOUCH
 	var/is_laying = (body_position == LYING_DOWN)
-	if(!is_laying && W.water_level < 2)
-		return
+	var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
+	if(!is_laying)
+		if(W.water_height < WATER_HEIGHT_SHALLOW)
+			return
+		else if(W.water_height == WATER_HEIGHT_FULL && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
+			var/swimdrain = max(10 - GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming), 1)
+			if(swimdrain < maximum_stamina - stamina)
+				adjust_stamina(swimdrain, "drown")
+				adjustOxyLoss(2)
+			else
+				adjustOxyLoss(drown_damage)
+				emote("drown")
 	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
-		var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
 		adjustOxyLoss(drown_damage)
 		if(stat == DEAD && client)
 			record_round_statistic(STATS_PEOPLE_DROWNED)

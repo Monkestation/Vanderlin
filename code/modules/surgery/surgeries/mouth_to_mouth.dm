@@ -17,8 +17,8 @@
 	)
 	lying_required = TRUE
 	self_operable = FALSE
-	skill_min = SKILL_LEVEL_NONE
-	skill_median = SKILL_LEVEL_NOVICE
+	skill_min = SKILL_RANK_NONE
+	skill_median = SKILL_RANK_NOVICE
 	surgery_flags = NONE
 	repeating = TRUE
 

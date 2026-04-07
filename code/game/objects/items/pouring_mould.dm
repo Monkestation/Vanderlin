@@ -4,6 +4,7 @@
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
 	icon_state = "flat-mold"
+	item_weight = 500 GRAMS
 	var/filling_icon_state = ""
 
 	var/atom/output_atom
@@ -174,6 +175,7 @@
 
 	grid_width = 64
 	grid_height = 32
+	item_weight = 650 GRAMS
 
 /obj/item/mould/ingot/create_item()
 	var/atom/to_create

@@ -34,12 +34,12 @@
 		if(head && brain && heart)
 			if(!H.mind)
 				return FALSE
-			if(alert(user, "REACH OUT AND PULL?", "THERE'S NO LUX IN THERE", "YES", "NO") != "YES")
+			if(tgui_alert(user, "REACH OUT AND PULL?", "THERE'S NO LUX IN THERE", list("YES", "NO")) != "YES")
 				return FALSE
 			to_chat(user, span_warning("You attempt to revive [H] by ABSOLVING them!"))
 			// Dramatic effect
 			user.visible_message(span_danger("[user] grabs [H] by the wrists, attempting to ABSOLVE them!"))
-			if(alert(H, "They want to ABSOLVE you. Will you let them?", "ABSOLUTION", "I'll allow it", "I refuse") != "I'll allow it")
+			if(tgui_alert(H, "They want to ABSOLVE you. Will you let them?", "ABSOLUTION", list("I'll allow it", "I refuse")) != "I'll allow it")
 				H.visible_message(span_notice("Nothing happens."))
 				return FALSE
 			// Create visual effects

@@ -52,7 +52,9 @@
 				return
 		if(HEALING_DIVINE, HEALING_HUNT)
 			if(cast_on.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-				if(!(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) && vampire_disguise?.disguised)) //vampire disguises are handled later
+				// might seem weird we need to do this but Bloodsucker wretch does not have vampire antag datum
+				var/we_are_vampire = cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) || (cast_on in (cast_on.clan?.clan_members - cast_on.clan?.non_vampire_members))
+				if(!(we_are_vampire && vampire_disguise?.disguised)) //vampire disguises are handled later
 					if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 						cast_on.visible_message(span_warning("[cast_on] overpowers being burned!"), span_greentext("I overpower being burned!"))
 						return
@@ -95,13 +97,13 @@
 			if(/datum/patron/divine/astrata)
 				cast_on.visible_message(span_info("A wreath of gentle light passes over [cast_on]!"), span_notice("I'm bathed in holy light!"))
 				// during the day, heal 10 more (basic as fuck)
-				if(GLOB.tod == "day")
+				if(GLOB.tod == DAY)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/noc)
 				cast_on.visible_message(span_info("A shroud of soft moonlight falls upon [cast_on]!"), span_notice("I'm shrouded in gentle moonlight!"))
 				// during the night, heal 10 more (i wish this was more interesting but they're twins so whatever)
-				if(GLOB.tod == "night")
+				if(GLOB.tod == NIGHT)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/dendor)
@@ -263,7 +265,7 @@
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
 	if(affecting)
 		affecting.heal_damage(amount_healed, amount_healed)
-		affecting.heal_wounds(amount_healed * wound_modifier)
+		affecting.heal_wounds(amount_healed * wound_modifier, src)
 		C.update_damage_overlays()
 
 /datum/action/cooldown/spell/healing/profane

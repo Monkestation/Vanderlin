@@ -2,13 +2,13 @@
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 
 	/// Total combined damage (brute + burn) that triggers shutdown. Default: 60.
-	var/shutdown_threshold = 200
+	var/shutdown_threshold = 300
 	/// Total combined damage at or below which the mob wakes back up. Default: 20.
-	var/recovery_threshold = 40
+	var/recovery_threshold = 100
 	/// Whether the mob is currently shut down by this component.
 	var/is_shut_down = FALSE
 
-/datum/component/damage_shutdown/Initialize(mapload, shutdown_threshold = 200, recovery_threshold = 20)
+/datum/component/damage_shutdown/Initialize(mapload, shutdown_threshold = 300, recovery_threshold = 100)
 	. = ..()
 	if(!isliving(parent))
 		return COMPONENT_INCOMPATIBLE

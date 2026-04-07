@@ -53,9 +53,6 @@
 		TRAIT_CABAL,
 	)
 
-/datum/antagonist/zizocultist/zizo_knight
-	change_stats = FALSE
-
 /datum/antagonist/zizocultist/leader
 	name = "Zizoid Cultist"
 	antag_hud_type = ANTAG_HUD_ZIZOID
@@ -481,7 +478,7 @@
 
 	var/mob/living/carbon/human/choice = input(src, "Whom do you no longer have use for?", "VANDERLIN") as null|anything in possible
 	if(choice)
-		var/alert = alert(src, "Are you sure?", "VANDERLIN", "Yes", "Cancel")
+		var/alert = tgui_alert(src, "Are you sure?", "VANDERLIN", list("Yes", "Cancel"))
 		if(alert == "Yes")
 			visible_message(span_danger("[src] reaches out, ripping up [choice]'s soul!</span>"))
 			to_chat(choice, span_danger("I HAVE FAILED MY LEADER! I HAVE FAILED ZIZO! NOTHING ELSE BUT DEATH REMAINS FOR ME NOW!"))

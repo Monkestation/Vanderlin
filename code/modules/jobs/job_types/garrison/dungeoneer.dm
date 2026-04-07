@@ -33,6 +33,7 @@
 	faction = FACTION_TOWN
 	total_positions = 1
 	spawn_positions = 1
+	can_have_apprentices = TRUE
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONEXOTIC

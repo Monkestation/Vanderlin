@@ -10,7 +10,7 @@
 	icon_state = "unknown"
 	layer = AREA_LAYER
 	//Keeping this on the default plane, GAME_PLANE, will make area overlays fail to render on FLOOR_PLANE.
-	plane = BLACKNESS_PLANE
+	plane = AREA_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
@@ -335,20 +335,20 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  *
  * If the area has ambience, then it plays some ambience music to the ambience channel
  */
-/area/Entered(atom/movable/M, atom/old_loc)
+/area/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	set waitfor = FALSE
-	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, M)
-	SEND_SIGNAL(M, COMSIG_ENTER_AREA, src) //The atom that enters the area
-	if(!isliving(M))
+
+	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_ENTER_AREA, src) //The atom that enters the area
+
+	if(!isliving(arrived))
 		return
 
-	var/mob/living/L = M
+	var/mob/living/L = arrived
 	if(!L.ckey || L.stat == DEAD)
 		return
 
-	if(ismob(M))
-		var/mob/mob = M
-		mob.update_ambience_area(src)
+	L.update_ambience_area(src)
 
 	if(first_time_text)
 		L.intro_area(src)
@@ -424,9 +424,9 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  *
  * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
  */
-/area/Exited(atom/movable/M)
-	SEND_SIGNAL(src, COMSIG_AREA_EXITED, M)
-	SEND_SIGNAL(M, COMSIG_EXIT_AREA, src) //The atom that exits the area
+/area/Exited(atom/movable/gone, atom/new_loc)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, new_loc)
+	SEND_SIGNAL(gone, COMSIG_EXIT_AREA, src, new_loc) //The atom that exits the area
 
 /**
  * Reset the played var to false on the client

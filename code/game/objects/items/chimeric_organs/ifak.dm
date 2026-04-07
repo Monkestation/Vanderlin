@@ -16,6 +16,7 @@
 		/obj/item/candle/yellow,
 		/obj/item/needle,
 	)
+	item_weight = 740 GRAMS
 
 /obj/item/storage/fancy/ifak/update_icon_state()
 	. = ..()

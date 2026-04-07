@@ -35,6 +35,7 @@
 	outfit = /datum/outfit/vagrant
 	can_random = FALSE
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

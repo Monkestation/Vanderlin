@@ -1,9 +1,6 @@
 /mob/living/carbon/human/species/werewolf
 	race = /datum/species/werewolf
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	base_strength = 15
-	base_constitution = 15
-	base_endurance = 15
 
 	cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 	limb_destroyer = TRUE

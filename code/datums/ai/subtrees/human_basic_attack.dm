@@ -119,7 +119,7 @@
 	if(!prob(HUMAN_NPC_INTENT_SWITCH_CHANCE))
 		return
 
-	var/skill_level = SKILL_LEVEL_NONE
+	var/skill_level = SKILL_RANK_NONE
 	var/obj/item/held = pawn.get_active_held_item()
 	if(held?.associated_skill)
 		skill_level = GET_MOB_SKILL_VALUE_OLD(pawn, held.associated_skill)
@@ -137,7 +137,7 @@
 		weighted[/datum/rmb_intent/swift] += 20
 
 	// Skilled fighters use strong more
-	if(skill_level >= SKILL_LEVEL_JOURNEYMAN)
+	if(skill_level >= SKILL_RANK_JOURNEYMAN)
 		weighted[/datum/rmb_intent/strong] += 15
 
 	// Feint more against defenders
@@ -233,7 +233,7 @@
 				skill_type = held.associated_skill
 				break
 
-	var/skill_level = skill_type ? GET_MOB_SKILL_VALUE_OLD(pawn, skill_type) : SKILL_LEVEL_NONE
+	var/skill_level = skill_type ? floor(GET_MOB_SKILL_VALUE_OLD(pawn, skill_type)) : SKILL_RANK_NONE
 	var/armor_rating = bclass ? bclass_to_armor_rating(bclass) : "blunt"
 
 	var/list/wounded  = list()
@@ -245,7 +245,7 @@
 			continue
 
 		//requires trained eye AND good perception
-		if(skill_level >= SKILL_LEVEL_JOURNEYMAN && GET_MOB_ATTRIBUTE_VALUE(pawn, STAT_PERCEPTION) >= 10)
+		if(skill_level >= SKILL_RANK_JOURNEYMAN && GET_MOB_ATTRIBUTE_VALUE(pawn, STAT_PERCEPTION) >= 10)
 			if(part.brute_dam > 20 || part.burn_dam > 20)
 				wounded += part.body_zone
 
@@ -255,7 +255,7 @@
 			continue
 
 		// Basic+ fighters read armor and seek soft coverage for their damage type
-		if(skill_level >= SKILL_LEVEL_NOVICE)
+		if(skill_level >= SKILL_RANK_NOVICE)
 			var/rating = worn.armor.getRating(armor_rating)
 			if(rating < 25)
 				soft += part.body_zone
@@ -271,7 +271,7 @@
 		chosen = pick(exposed)
 	else if(length(soft))
 		chosen = pick(soft)
-	else if(skill_level >= SKILL_LEVEL_EXPERT)
+	else if(skill_level >= SKILL_RANK_EXPERT)
 		// Expert fallback: just pick whatever zone has the lowest resistance for our damage type
 		var/lowest_rating = INFINITY
 		var/lowest_zone = null
@@ -295,19 +295,19 @@
 	// since the fighter isn't scrambling to stay close
 	var/cache_duration = HUMAN_NPC_WEAKPOINT_CACHE_DURATION
 	switch(skill_level)
-		if(SKILL_LEVEL_NONE)
+		if(SKILL_RANK_NONE)
 			cache_duration *= 0.1
-		if(SKILL_LEVEL_NOVICE)
+		if(SKILL_RANK_NOVICE)
 			cache_duration *= 0.5
-		if(SKILL_LEVEL_APPRENTICE)
+		if(SKILL_RANK_APPRENTICE)
 			cache_duration *= 0.75
-		if(SKILL_LEVEL_JOURNEYMAN)
+		if(SKILL_RANK_JOURNEYMAN)
 			cache_duration *= 1.0
-		if(SKILL_LEVEL_EXPERT)
+		if(SKILL_RANK_EXPERT)
 			cache_duration *= 1.5
-		if(SKILL_LEVEL_MASTER)
+		if(SKILL_RANK_MASTER)
 			cache_duration *= 2.0
-		if(SKILL_LEVEL_LEGENDARY)
+		if(SKILL_RANK_LEGENDARY to INFINITY)
 			cache_duration *= 3.0
 
 	// Reach bonus: each point of reach beyond 1 adds 10% duration

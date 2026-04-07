@@ -227,6 +227,22 @@
 	icon_state = "dragonfruit2"
 	plant_type = /datum/plant_def/dragonfruit
 
+/obj/structure/wild_plant/nospread/pompkaun
+	icon_state = "pompkaun2"
+	plant_type = /datum/plant_def/pompkaun
+
+/obj/structure/wild_plant/nospread/sunreed
+	icon_state = "maize2"
+	plant_type = /datum/plant_def/sunreed
+
+/obj/structure/wild_plant/nospread/tamto
+	icon_state = "mato2"
+	plant_type = /datum/plant_def/tamto
+
+/obj/structure/wild_plant/nospread/cocaudo
+	icon_state = "cocaudo2"
+	plant_type = /datum/plant_def/cocaudo
+
 /* Wild Mushrooms */
 /obj/structure/wild_plant/nospread/mushroom
 	icon = 'icons/roguetown/misc/dikaryawild.dmi'
@@ -250,6 +266,10 @@
 /obj/structure/wild_plant/nospread/mushroom/borowiki
 	icon_state = "borowiki2"
 	plant_type = /datum/plant_def/mushroom/borowiki
+
+/obj/structure/wild_plant/nospread/mushroom/drowsbane
+	icon_state = "drowsbane2"
+	plant_type = /datum/plant_def/mushroom/drowsbane
 
 /* /obj/structure/wild_plant/nospread/mushroom/chanterelle // Removing for now to expand upon later
 	icon_state = "chanterelle2"

@@ -1,13 +1,15 @@
 //this is mostly a noticeboard clone, but it works!
 
 /obj/structure/fake_machine/hailer
-	name = "HAILER"
-	desc = "A machine that shares the parchment fed to it to all existing HAILERBOARDs for viewing"
+	name = "\improper HAILER"
+	desc = "A machine that shares the parchment fed to it to all existing HAILERBOARDs for viewing."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "hailer"
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	SET_BASE_PIXEL(0, 32)
+	COOLDOWN_DECLARE(speak_cooldown)
+	lock = /datum/lock/key/hailer
 
 /obj/structure/fake_machine/hailer/r
 	SET_BASE_PIXEL(32, 0)
@@ -23,28 +25,27 @@
 	SSroguemachine.hailer = null
 	return ..()
 
+/obj/structure/fake_machine/hailer/proc/say_cooldown(words)
+	if(!COOLDOWN_FINISHED(src, speak_cooldown))
+		return
+	say(words)
+	COOLDOWN_START(src, speak_cooldown, 5 SECONDS)
+
+
 /obj/structure/fake_machine/hailer/attackby(obj/item/H, mob/user, list/modifiers)
-	if(!HAS_TRAIT(user, TRAIT_BURDEN) && !is_gaffer_assistant_job(user.mind.assigned_role))
-		to_chat(user, span_danger("you can't feed the [src] without carrying his burden"))
-		return
-	if(istype(H, /obj/item/reagent_containers/powder/salt)) //mmmm, salt.
-		to_chat(user, "<span class='notice'>the [src]'s tongue slips between its bronze teeth to lap at the salt in [user]'s hand, finishing with effectionate licks across their palm... gross </span>")
-		say("mmmpphh... grrrrrhh... hhhrrrnnn...")
-		qdel(H)
-		return
-	if(!istype(H, /obj/item/paper))
-		to_chat(user, "<span class='notice'>the [src] only accepts paper</span>")
-		say("GRRRRHHH!!...GRAAAAGH")
-		return
-	if(istype(H, /obj/item/paper) && (HAS_TRAIT(user, TRAIT_BURDEN)))
+	if(!locked() && istype(H, /obj/item/paper))
 		if(!user.transferItemToLoc(H, src))
 			return
-		to_chat(user, "<span class='notice'>I feed the [H] to the [src].</span>")
-		say("Bbbllrrr... fffrrrtt... brrrhh...")
+		user.visible_message(span_notice("[user] feeds [H] to [src]."), span_notice("I feed [H] to [src]."))
+		say_cooldown("Bbbllrrr... fffrrrtt... brrrhh...")
+		return
 	return ..()
 
 /obj/structure/fake_machine/hailer/interact(mob/user)
 	. = ..()
+	if(locked())
+		to_chat(user, span_warning("It's locked. Of course."))
+		return
 	var/auth = TRUE
 	var/dat = "<B>[name]</B><BR>"
 	for(var/obj/item/H in src)
@@ -59,26 +60,27 @@
 	..()
 	usr.set_machine(src)
 	if(href_list["remove"])
-		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))	//For when a player is handcuffed while they have the notice window open
+		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())	//For when a player is handcuffed while they have the notice window open
 			return
 		var/obj/item/I = locate(href_list["remove"]) in contents
 		if(istype(I) && I.loc == src)
 			I.forceMove(usr.loc)
 			usr.put_in_hands(I)
-			say("kchaak... khaa...")
+			say_cooldown("kchaak... khaa...")
 
 
 	if(href_list["write"])
-		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH)) //For when a player is handcuffed while they have the notice window open
+		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked()) //For when a player is handcuffed while they have the notice window open
 			return
 		var/obj/item/P = locate(href_list["write"]) in contents
 		if(istype(P) && P.loc == src)
-			var/obj/item/I = usr.is_holding_item_of_type(/obj/item/natural/feather)
-			if(I)
-				add_fingerprint(usr)
-				P.attackby(I, usr)
-			else
-				to_chat(usr, "<span class='warning'>You'll need something to write with!</span>")
+			var/obj/item/I = usr.is_holding_item_of_type(/obj/item/natural/feather) || usr.is_holding_item_of_type(/obj/item/natural/thorn)
+			if(!I)
+				to_chat(usr, span_warning("You need something to write with!"))
+				return
+			add_fingerprint(usr)
+			P.attackby(I, usr)
+			return
 
 	if(href_list["read"])
 		var/obj/item/paper/I = locate(href_list["read"]) in SSroguemachine.hailer.contents
@@ -98,7 +100,7 @@
 
 /obj/structure/fake_machine/hailerboard
 	name = "HAILER BOARD"
-	desc = "A notice board that shows all the notices the Gaffer has put up"
+	desc = "A notice board that shows all the notices the Adventurer's Guild has put up."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "hailerboard"
 	density = FALSE
@@ -118,16 +120,6 @@
 /obj/structure/fake_machine/hailerboard/Destroy()
 	STOP_PROCESSING(SSslowobj, src)
 	return ..()
-
-/obj/structure/fake_machine/hailerboard/process()//hailer hails? damn
-	. = ..()
-	var/message = pick(
-		"BbbRRRMMMPHHH... GGRRRRNNN!!",
-		"GGGGRRRRR... BLLRRTTT!!",
-		"NNNGGGRRBB... MMPHHH!!",
-		"Hhbbbh...Mhhaamm--maaahrhh...")
-	message = span_danger(message)
-	say(message)
 
 /obj/structure/fake_machine/hailerboard/interact(mob/user)
 	. = ..()

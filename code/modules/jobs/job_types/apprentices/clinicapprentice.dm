@@ -50,6 +50,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	outfit = /datum/outfit/clinicapprentice
 	job_bitflag = BITFLAG_CONSTRUCTOR
+	can_be_apprentice = TRUE
 
 	exp_types_granted = list(EXP_TYPE_MEDICAL)
 

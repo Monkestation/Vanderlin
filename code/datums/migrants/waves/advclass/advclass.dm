@@ -9,6 +9,7 @@
 	roles = list(
 		/datum/migrant_role/advclass/pilgrim = 4,
 	)
+	weight = 20
 	greet_text = "Fleeing from misfortune and hardship, you and a handful of survivors get closer to Vanderlin, looking for refuge and work, finally almost being there, almost..."
 
 /datum/migrant_wave/pilgrim_down_one
@@ -45,6 +46,7 @@
 /datum/migrant_wave/adventurer
 	name = "Adventure Party"
 	downgrade_wave = /datum/migrant_wave/adventurer_down_one
+	weight = 20
 	roles = list(
 		/datum/migrant_role/advclass/adventurer = 4,
 	)

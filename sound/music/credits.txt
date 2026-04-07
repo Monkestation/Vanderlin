@@ -11,6 +11,10 @@ combat_assassin2.ogg: Fear & Hunger 2: Termina - Monologue With The Moon
 combat_noble.ogg: Aram Khachaturian - Masquerade Suite - Waltz
 combatskeleton.ogg: Storkrieg - Genocide Of The Fittest
 combat_evilwizard.ogg: Burialgoods - Low Income Barony
+credits2.ogg: Burialgoods - Nocturnal Trespass
+title4.ogg: Burialgoods - Undertones No.1
+title5.ogg: Burialgoods - Exit
+
 
 roundend.ogg: Fear & Hunger 2: Termina - Dark Outside Extended
 accord (8).ogg: Tchaikovsky - Dance of the Sugar Plum Fairy. Cover by Amy Turk
@@ -29,7 +33,7 @@ CombatBeest.ogg : Last Day As A Man (First Night As A Beast) - Burialgoods - htt
 
 TRACKS MADE FOR VANDERLIN:
 
-    T87-Sulfurhead (https://www.youtube.com/@T87-Sulfurhead)
+T87-Sulfurhead (https://www.youtube.com/@T87-Sulfurhead)
 Slums202 - Title2
 DURANDAL - Royal Knight
 The Reckoning - Bulwark

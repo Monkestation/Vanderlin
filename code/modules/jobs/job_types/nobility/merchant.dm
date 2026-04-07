@@ -36,6 +36,7 @@
 		EXP_TYPE_LIVING = 600,
 		EXP_TYPE_MERCHANT_COMPANY = 300,
 	)
+	max_apprentices = 2
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/merchant
 

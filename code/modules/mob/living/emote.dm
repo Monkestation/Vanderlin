@@ -295,6 +295,30 @@
 	set category = "Emotes.Noises"
 	emote("cough", intentional = TRUE)
 
+/datum/emote/living/sickcough
+	key = "sickcough"
+	key_third_person = "sickcoughs"
+	message = "coughs."
+	message_muffled = "makes a muffled noise."
+	emote_type = EMOTE_AUDIBLE
+
+/datum/emote/living/sickcough/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(!.)
+		return
+	for(var/mob/living/carbon/human/witness in hearers(user)) // yes, you can proc your own cough!
+		if(HAS_ANY_OF_TRAITS(witness, list(TRAIT_NOBREATH, TRAIT_NOMOOD, TRAIT_TOXIMMUNE, TRAIT_DISEASE_RESISTANCE)))
+			continue
+		var/cough_prob = 2
+		if(witness.has_quirk(/datum/quirk/vice/paranoid))
+			cough_prob += 2 // hypochondriac
+		if(witness.has_quirk(/datum/quirk/vice/weak_heart))
+			cough_prob += 2
+		if(!prob(cough_prob))
+			continue
+		var/p_emote = prob(50) ? pick("yawn", "cough", "clearthroat") : "sickcough"
+		addtimer(CALLBACK(witness, TYPE_PROC_REF(/mob, emote), p_emote), rand(12 SECONDS, 2 MINUTES), TIMER_UNIQUE|TIMER_DELETE_ME)
+
 /datum/emote/living/clearthroat
 	key = "clearthroat"
 	key_third_person = "clearsthroat"

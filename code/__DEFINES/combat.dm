@@ -467,3 +467,9 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define DODGING_PENALTY 1
 /// A define so the cooldown on the baited status and the duration of the baitcd status are the same
 #define BAIT_COOLDOWN_TIME 15 SECONDS
+
+// try_crit keys for modifiers
+/// Chance modifier
+#define CRIT_MOD_CHANCE "crit_mod"
+/// Specifically knockout modifier for head crits
+#define CRIT_MOD_KNOCKOUT_CHANCE "knockout_mod"

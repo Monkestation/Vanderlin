@@ -81,7 +81,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 	PossessPawn(new_pawn)
 
-/datum/ai_controller/Destroy(force, ...)
+/datum/ai_controller/Destroy(force)
 	UnpossessPawn(FALSE)
 	our_cells = null
 	inventory_component = null

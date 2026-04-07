@@ -24,7 +24,7 @@
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 1,
 		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/tanning = 30,
 		/datum/attribute/skill/combat/bows = 40,
 		/datum/attribute/skill/combat/crossbows = 20,

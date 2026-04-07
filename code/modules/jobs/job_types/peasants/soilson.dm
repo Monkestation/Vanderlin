@@ -45,6 +45,7 @@
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

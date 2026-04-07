@@ -14,19 +14,15 @@
 /obj/item/weapon/hoe/stone,
 /turf/open/floor/grass,
 /area/template_noop)
-"cp" = (
+"cQ" = (
 /obj/structure/flora/grass,
-/turf/open/water/cleanshallow/dirt,
+/turf/open/water/clean/dirt,
 /area/template_noop)
-"cF" = (
-/turf/open/water/cleanshallow/dirt,
+"hD" = (
+/turf/open/water/clean,
 /area/template_noop)
 "iF" = (
 /turf/closed/mineral,
-/area/template_noop)
-"iO" = (
-/obj/effect/waterfall,
-/turf/open/water/cleanshallow,
 /area/template_noop)
 "mY" = (
 /obj/structure/flora/grass/bush_meagre,
@@ -35,9 +31,6 @@
 "oN" = (
 /turf/closed/mineral/random,
 /area/template_noop)
-"ru" = (
-/turf/open/openspace,
-/area/template_noop)
 "uu" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/naturalstone,
@@ -45,18 +38,21 @@
 "vU" = (
 /turf/open/floor/naturalstone,
 /area/template_noop)
+"vW" = (
+/obj/effect/lily_petal,
+/turf/open/water/clean,
+/area/template_noop)
 "wu" = (
 /turf/template_noop,
+/area/template_noop)
+"xU" = (
+/turf/open/openspace,
 /area/template_noop)
 "yT" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/template_noop,
-/area/template_noop)
-"yV" = (
-/obj/effect/lily_petal/two,
-/turf/open/water/cleanshallow,
 /area/template_noop)
 "zx" = (
 /obj/structure/flora/grass,
@@ -88,15 +84,19 @@
 "Ki" = (
 /turf/open/floor/dirt,
 /area/template_noop)
-"Np" = (
-/turf/open/water/cleanshallow,
-/area/template_noop)
 "NC" = (
 /obj/item/soap,
 /turf/open/floor/naturalstone,
 /area/template_noop)
+"NR" = (
+/obj/effect/lily_petal/two,
+/turf/open/water/clean,
+/area/template_noop)
 "OP" = (
 /turf/open/floor/grass,
+/area/template_noop)
+"PR" = (
+/turf/open/water/clean/dirt,
 /area/template_noop)
 "QH" = (
 /obj/structure/ladder,
@@ -106,15 +106,15 @@
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
 /area/template_noop)
-"Ss" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/dirt,
-/area/template_noop)
-"ST" = (
+"Sq" = (
 /obj/structure/fluff/statue/small{
 	name = "A Lovely Maiden"
 	},
-/turf/open/water/cleanshallow,
+/turf/open/water/clean,
+/area/template_noop)
+"Ss" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/open/floor/dirt,
 /area/template_noop)
 "TD" = (
 /obj/structure/flora/grass,
@@ -124,6 +124,10 @@
 /obj/item/natural/stone,
 /turf/open/floor/grass,
 /area/template_noop)
+"UI" = (
+/obj/effect/waterfall,
+/turf/open/water/clean,
+/area/template_noop)
 "Wl" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass,
@@ -132,10 +136,6 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/dirt,
-/area/template_noop)
-"YY" = (
-/obj/effect/lily_petal,
-/turf/open/water/cleanshallow,
 /area/template_noop)
 "ZR" = (
 /obj/structure/flora/grass/bush_meagre,
@@ -773,11 +773,11 @@ iF
 iF
 oN
 oN
-Np
+hD
 vU
 vU
-Np
-YY
+hD
+vW
 vU
 vU
 vU
@@ -795,13 +795,13 @@ iF
 iF
 oN
 oN
-YY
-Np
+vW
+hD
 vU
-Np
-Np
-Np
-yV
+hD
+hD
+hD
+NR
 vU
 vU
 oN
@@ -818,18 +818,18 @@ iF
 iF
 oN
 oN
-Np
-Np
-Np
-yV
-Np
-Np
-Np
-Np
+hD
+hD
+hD
+NR
+hD
+hD
+hD
+hD
 vU
 vU
 bB
-ru
+xU
 wu
 iF
 iF
@@ -840,19 +840,19 @@ iF
 iF
 iF
 oN
-Np
-Np
-Np
-yV
-Np
-ST
-Np
-Np
-Np
+hD
+hD
+hD
+NR
+hD
+Sq
+hD
+hD
+hD
 vU
 vU
 bB
-ru
+xU
 wu
 wu
 wu
@@ -863,19 +863,19 @@ iF
 iF
 iF
 oN
-iO
-Np
-Np
-Np
-Np
-Np
-yV
-Np
+UI
+hD
+hD
+hD
+hD
+hD
+NR
+hD
 vU
 NC
 vU
 bB
-ru
+xU
 wu
 wu
 wu
@@ -886,19 +886,19 @@ iF
 iF
 iF
 oN
-iO
-Np
-Np
-Np
-YY
-Np
-Np
+UI
+hD
+hD
+hD
+vW
+hD
+hD
 ak
 vU
 vU
 vU
 bB
-ru
+xU
 wu
 iF
 wu
@@ -909,12 +909,12 @@ iF
 iF
 iF
 oN
-iO
-Np
-yV
-Np
-Np
-Np
+UI
+hD
+NR
+hD
+hD
+hD
 vU
 uu
 vU
@@ -932,11 +932,11 @@ iF
 iF
 iF
 oN
-Np
-Np
-Np
-yV
-Np
+hD
+hD
+hD
+NR
+hD
 ak
 vU
 vU
@@ -955,9 +955,9 @@ Ki
 iF
 iF
 oN
-Np
-Np
-Np
+hD
+hD
+hD
 ak
 uu
 vU
@@ -979,7 +979,7 @@ iF
 iF
 oN
 oN
-yV
+NR
 NC
 vU
 vU
@@ -1119,13 +1119,13 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+xU
+xU
+xU
+xU
+xU
+xU
+xU
 wu
 wu
 wu
@@ -1141,16 +1141,16 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+xU
+xU
+xU
 Ki
 Ki
 Ki
 Ki
-ru
-ru
-ru
+xU
+xU
+xU
 wu
 wu
 wu
@@ -1162,9 +1162,9 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+xU
+xU
+xU
 Ki
 Ki
 Ki
@@ -1173,8 +1173,8 @@ OP
 OP
 Ki
 Ki
-ru
-ru
+xU
+xU
 wu
 wu
 wu
@@ -1184,9 +1184,9 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+xU
+xU
+xU
 Ki
 Ki
 Ki
@@ -1198,7 +1198,7 @@ OP
 OP
 OP
 Ki
-ru
+xU
 wu
 wu
 wu
@@ -1207,8 +1207,8 @@ wu
 wu
 wu
 wu
-ru
-ru
+xU
+xU
 Ki
 Sf
 YJ
@@ -1222,15 +1222,15 @@ mY
 Hj
 BL
 Ki
-ru
+xU
 wu
 wu
 "}
 (6,1,3) = {"
 wu
 wu
-ru
-ru
+xU
+xU
 BL
 YJ
 YJ
@@ -1246,13 +1246,13 @@ YJ
 Ss
 TD
 Ki
-ru
+xU
 wu
 "}
 (7,1,3) = {"
 wu
-ru
-ru
+xU
+xU
 Ss
 YJ
 Ss
@@ -1274,7 +1274,7 @@ wu
 "}
 (8,1,3) = {"
 wu
-ru
+xU
 Ki
 Ki
 Hf
@@ -1296,8 +1296,8 @@ Ki
 wu
 "}
 (9,1,3) = {"
-ru
-ru
+xU
+xU
 Ki
 TH
 OP
@@ -1319,14 +1319,14 @@ Gx
 Ki
 "}
 (10,1,3) = {"
-ru
+xU
 Ki
 OP
 OP
 Wl
 Wl
-cF
-cF
+PR
+PR
 OP
 Sf
 Ss
@@ -1342,14 +1342,14 @@ Ki
 Ki
 "}
 (11,1,3) = {"
-ru
+xU
 Ki
 OP
 Wl
 Wl
-cF
-cF
-cp
+PR
+PR
+cQ
 TD
 Wl
 Wl
@@ -1365,13 +1365,13 @@ BL
 Ki
 "}
 (12,1,3) = {"
-ru
+xU
 Ki
 OP
 OP
-cF
-cF
-cF
+PR
+PR
+PR
 YJ
 Wl
 OP
@@ -1388,12 +1388,12 @@ Ki
 Ki
 "}
 (13,1,3) = {"
-ru
+xU
 Ki
 OP
 TD
-cF
-cF
+PR
+PR
 Ss
 Ss
 Ki
@@ -1411,7 +1411,7 @@ Ki
 Ki
 "}
 (14,1,3) = {"
-ru
+xU
 Ki
 BL
 TD
@@ -1434,8 +1434,8 @@ Ki
 Ki
 "}
 (15,1,3) = {"
-ru
-ru
+xU
+xU
 BL
 TD
 Ki
@@ -1453,12 +1453,12 @@ Ki
 OP
 Ki
 Ki
-ru
-ru
+xU
+xU
 "}
 (16,1,3) = {"
 wu
-ru
+xU
 Ki
 BL
 TD
@@ -1475,14 +1475,14 @@ OP
 Ki
 Ki
 Ki
-ru
-ru
-ru
+xU
+xU
+xU
 "}
 (17,1,3) = {"
 wu
-ru
-ru
+xU
+xU
 Ki
 TD
 TD
@@ -1496,16 +1496,16 @@ Wl
 Ss
 Ki
 Ki
-ru
-ru
-ru
-ru
+xU
+xU
+xU
+xU
 wu
 "}
 (18,1,3) = {"
 wu
 wu
-ru
+xU
 Ki
 Ki
 Gx
@@ -1517,10 +1517,10 @@ mY
 mY
 Ki
 Ki
-ru
-ru
-ru
-ru
+xU
+xU
+xU
+xU
 wu
 wu
 wu
@@ -1528,8 +1528,8 @@ wu
 (19,1,3) = {"
 wu
 wu
-ru
-ru
+xU
+xU
 Ki
 Ki
 Ki
@@ -1539,10 +1539,10 @@ Ki
 Ki
 Ki
 Ki
-ru
-ru
-ru
-ru
+xU
+xU
+xU
+xU
 wu
 wu
 wu
@@ -1552,18 +1552,18 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+xU
+xU
+xU
 Ki
 Ki
 Ki
 Ki
 Ki
 Ki
-ru
-ru
-ru
+xU
+xU
+xU
 wu
 wu
 wu
@@ -1577,14 +1577,14 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+xU
+xU
+xU
+xU
+xU
+xU
+xU
+xU
 wu
 wu
 wu

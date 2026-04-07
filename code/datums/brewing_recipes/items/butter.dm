@@ -9,6 +9,7 @@
 	start_verb = "churning"
 	brewed_item_count = 2
 	pre_reqs = /datum/reagent/consumable/milk/salted
+	brewing_skill = /datum/attribute/skill/craft/cooking/cheesemaking
 
 /datum/brewing_recipe/butter/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
 	if(brewed_item)

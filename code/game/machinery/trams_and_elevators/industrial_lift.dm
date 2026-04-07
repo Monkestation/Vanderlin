@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	anchored = TRUE
 	max_integrity = 50
 	layer = LYING_MOB_LAYER //under pipes
-	plane = GAME_PLANE
+	plane = FLOOR_PLANE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER //no TILE_BOUND since we're potentially multitile
 
@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 /obj/structure/industrial_lift/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
 		RegisterSignal(turf_loc, COMSIG_TURF_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
-		RegisterSignal(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
+		RegisterSignals(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
 /obj/structure/industrial_lift/proc/unset_movement_registrations(list/turfs_to_unset)
@@ -114,12 +114,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		UnregisterSignal(turf_loc, registrations)
 
 
-/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, direction)
+/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
 
-/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, direction)
+/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
@@ -134,8 +134,6 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	*/
 
 	lift_load -= potential_rider
-	potential_rider.plane = initial(potential_rider.plane)
-	potential_rider.layer -= 2
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
 	changed_gliders -= potential_rider
 
@@ -158,9 +156,6 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	*/
 
 	lift_load += new_lift_contents
-	if(!iseffect(new_lift_contents))
-		new_lift_contents.plane = 3
-		new_lift_contents.layer += 2
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))
 	RegisterSignal(new_lift_contents, COMSIG_PARENT_QDELETING, PROC_REF(RemoveItemFromLift))
 	RegisterSignal(new_lift_contents, COMSIG_MOVABLE_TURF_EXITED, PROC_REF(UncrossedAtomRemoveItemFromLift))

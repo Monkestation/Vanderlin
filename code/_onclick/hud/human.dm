@@ -90,12 +90,6 @@
 	mana_over =  new /atom/movable/screen/mana_over(null, src)
 	static_inventory += mana_over
 
-	fov = new /atom/movable/screen/fov(null, src)
-	static_inventory += fov
-
-	fov_blocker = new /atom/movable/screen/fov_blocker(null, src)
-	static_inventory += fov_blocker
-
 	cdleft = new /atom/movable/screen/action_bar/clickdelay/left(null, src)
 	cdleft.screen_loc = "WEST-3:-16,SOUTH+7"
 	static_inventory += cdleft

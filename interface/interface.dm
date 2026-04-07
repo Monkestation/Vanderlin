@@ -9,7 +9,7 @@
 		to_chat(src, "<span class='danger'>The wiki URL is not set in the server configuration.</span>")
 		return
 
-	if(browser_alert(src, "This will open the wiki in your browsaer. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(src, "This will open the wiki in your browsaer. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	src << link(wikiurl)
@@ -24,7 +24,7 @@
 		to_chat(src, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 		return
 
-	if(browser_alert(src, "This will open the forum in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(src, "This will open the forum in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	src << link(forumurl)
@@ -39,7 +39,7 @@
 		to_chat(src, "<span class='danger'>The rules URL is not set in the server configuration.</span>")
 		return
 
-	if(browser_alert(src, "This will open the rules in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(src, "This will open the rules in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	src << link(rulesurl)
@@ -54,7 +54,7 @@
 		to_chat(src, "<span class='danger'>The Github URL is not set in the server configuration.</span>")
 		return
 
-	if(browser_alert(src, "This will open the Github repository in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(src, "This will open the Github repository in your browser. Are you sure?", null, DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	src << link(githuburl)
@@ -82,7 +82,7 @@
 		message += "<br>The following experimental changes are active and may be the cause of any new or sudden issues:<br>"
 		message += GLOB.revdata.GetTestMergeInfo(FALSE)
 
-	if(browser_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(src, message, "Report Issue", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		return
 
 	// Keep a static version of the template to avoid reading file
@@ -293,14 +293,12 @@
 
 /client/verb/changelog()
 	set name = "Changelog"
-	set category = "OOC.Links"
+	set category = "OOC"
 
-	if(!GLOB.changelog_browser)
-		GLOB.changelog_browser = new /datum/changelog()
+	if(!GLOB.changelog_tgui)
+		GLOB.changelog_tgui = new /datum/changelog()
 
-	var/datum/browser/log = new(usr, "changelog", "CHANGES OF THE WORLD", 680, 650)
-	log.set_content(GLOB.changelog_browser.built_html)
-	log.open()
+	GLOB.changelog_tgui.ui_interact(mob)
 
 	if(prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash

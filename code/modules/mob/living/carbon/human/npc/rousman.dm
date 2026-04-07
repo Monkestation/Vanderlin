@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
-					/obj/item/bodypart/r_arm/rousman, /obj/item/bodypart/r_leg/rousman, /obj/item/bodypart/l_leg/rousman)
+					/obj/item/bodypart/r_arm/rousman, /obj/item/bodypart/r_leg/rousman, /obj/item/bodypart/l_leg/rousman, /obj/item/bodypart/mouth)
 	rot_type = /datum/component/rot/corpse/rousman
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
@@ -111,6 +111,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	return
 /////////////////////////////////////////////////////////////////////////////
 
+/obj/item/bodypart/head/rousman
+	sellprice = 5
+
 /obj/item/bodypart/head/rousman/update_icon_dropped()
 	return
 
@@ -134,8 +137,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 /obj/item/bodypart/head/rousman/skeletonize()
 	. = ..()
 	icon_state = "rousman_skel_head"
-	headprice = 2
-	sellprice = 2
 
 
 
@@ -291,8 +292,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/rousman.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-			headdy.headprice = rand(7,20)
-			headdy.sellprice = rand(7,20)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(src,1)
