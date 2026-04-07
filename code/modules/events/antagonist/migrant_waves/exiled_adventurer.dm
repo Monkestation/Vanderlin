@@ -3,7 +3,7 @@
 	wave_type = /datum/migrant_wave/werewolf
 
 	weight = 4
-	min_players = LOWPOP_THRESHOLD
+	min_players = MIDPOP_THRESHOLD
 	earliest_start = 25 MINUTES
 	shared_occurence_type = SHARED_HIGH_THREAT
 
@@ -21,7 +21,7 @@
 
 	weight = 4
 	max_occurrences = 2
-	min_players = LOWPOP_THRESHOLD
+	min_players = MIDPOP_THRESHOLD
 	earliest_start = 20 MINUTES
 	shared_occurence_type = SHARED_MINOR_THREAT
 

@@ -16,6 +16,7 @@
 
 	grid_height = 32
 	grid_width = 32
+	item_weight = 400 GRAMS
 
 	var/mob/current_owner
 	var/last_scry
@@ -27,6 +28,7 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
+	item_weight = 200 GRAMS
 
 /obj/item/scrying/attack_self(mob/user, list/modifiers)
 	. = ..()

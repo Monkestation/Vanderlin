@@ -25,6 +25,7 @@
 
 	grid_height = 96
 	grid_width = 32
+	item_weight = 800 GRAMS
 
 /datum/intent/lordbash
 	name = "bash"
@@ -130,6 +131,7 @@
 	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
 	var/static/list/rod_jobs_priest = null
 	COOLDOWN_DECLARE(staff)
+	item_weight = 1.2 KILOGRAMS
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -217,6 +219,7 @@
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
 	gripped_intents = null
 	minstr = 5
+	item_weight = 1.2 KILOGRAMS
 	w_class = WEIGHT_CLASS_NORMAL
 	var/charge = 100
 	var/on = FALSE
@@ -361,12 +364,14 @@
 	thrown_bclass = BCLASS_CUT
 	melting_material = /datum/material/steel
 	melt_amount = 75
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
 	name = "psydonian katar"
 	desc = "An exotic weapon taken from the hands of wandering monks, an esoteric design to the Grenzelhoftian nation. Special care was taken into account towards the user's knuckles: silver-tipped steel from tip to edges, and His holy cross reinforcing the heart of the weapon, with curved shoulders to allow its user to deflect incoming blows - provided they lead it in with the blade."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver
@@ -377,6 +382,7 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
+	item_weight = 350 GRAMS
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -427,6 +433,7 @@
 	grid_height = 32
 
 	weapon_special = /datum/special_intent/upper_cut
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()
@@ -442,6 +449,7 @@
 	desc = "A simple piece of harm molded in a holy mixture of steel and silver, finished with three stumps - Psydon's crown - to crush the heretics' garments and armor into smithereens."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
@@ -453,3 +461,4 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
 	force = DAMAGE_KNUCKLES + 2
+	item_weight = 200 GRAMS

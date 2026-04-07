@@ -25,6 +25,7 @@
 	grid_width = 32
 	melt_amount = 50
 	melting_material = /datum/material/steel
+	item_weight = 212 GRAMS
 	var/time_multiplier = 1
 
 /datum/intent/chisel
@@ -47,3 +48,4 @@
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
 	time_multiplier = 1.2
+	item_weight = 245 GRAMS

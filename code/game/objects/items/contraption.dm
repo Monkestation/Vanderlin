@@ -8,6 +8,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	smeltresult = /obj/item/ingot/bronze
 	slot_flags = ITEM_SLOT_HIP
+	item_weight = 500 GRAMS
 	var/obj/item/accepted_power_source = /obj/item/gear/metal
 	/// This is the amount of charges we get per power source
 	var/charge_per_source = 5
@@ -173,6 +174,7 @@
 	misfire_chance = 15
 	charge_per_source = 5
 	special_cog = TRUE
+	item_weight = 1.5 KILOGRAMS
 
 /obj
 	/// This is the result when the wood metalizer artifact is used on this item
@@ -243,6 +245,7 @@
 	misfire_chance = 10
 	charge_per_source = 6
 	special_cog = TRUE
+	item_weight = 2 KILOGRAMS
 
 /obj/item/contraption/smelter/misfire_result()
 	misfiring = TRUE
@@ -316,6 +319,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/ingot/bronze
 	charge_per_source = 4
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/contraption/shears/hammer_action(obj/item/I, mob/user)
 	return
@@ -374,6 +378,7 @@
 	charge_per_source = 10
 	grid_height = 96
 	grid_width = 96
+	item_weight = 800 GRAMS
 
 /obj/item/contraption/linker/hammer_action(obj/item/I, mob/user)
 	return
@@ -426,6 +431,7 @@
 	resistance_flags = FIRE_PROOF
 	grid_height = 32
 	grid_width = 64
+	item_weight = 3 KILOGRAMS
 
 /obj/item/folding_table_stored/attack_self(mob/user)
 	. = ..()
@@ -523,6 +529,7 @@
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	grid_width = 32
 	grid_height = 64
+	item_weight = 4 KILOGRAMS
 
 /obj/item/mobilestove/attack_self(mob/user, list/modifiers)
 	..()

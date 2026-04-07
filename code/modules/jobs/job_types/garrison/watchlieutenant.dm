@@ -78,7 +78,11 @@
 
 /datum/job/lieutenant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	add_verb(spawned, /mob/proc/haltyell)
+
+/datum/job/lieutenant/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/selectable = list( \
 		"Flail" = /obj/item/weapon/flail, \

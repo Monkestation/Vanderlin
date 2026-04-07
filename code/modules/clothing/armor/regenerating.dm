@@ -78,6 +78,7 @@
 	repairmsg_continue = "My skin mends some of its abuse.."
 	repairmsg_stop = "My skin stops mending from the onslaught!"
 	repairmsg_end = "My skin has become taut with newfound vigor!"
+	item_weight = 0 KILOGRAMS
 
 /obj/item/clothing/armor/regenerating/skin/Initialize(mapload)
 	. = ..()

@@ -411,10 +411,6 @@
 	else
 		new_cost += spell_cost * (10 - owner_stat) * 0.02
 
-	var/owner_encumbrance = living_owner.get_encumbrance()
-	if(owner_encumbrance > 0.4)
-		new_cost += spell_cost * owner_encumbrance * 0.5
-
 	return max(new_cost, 0)
 
 /// Do any attunement handling in here or any time after before_cast

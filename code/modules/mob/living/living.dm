@@ -135,10 +135,11 @@
 	return ..()
 
 /mob/living/proc/ZImpactDamage(turf/T, levels)
-	if(!density) //lets cats and similar avoid death by falling
+	if(!density)
 		visible_message("<span class='notice'>The creature lands unharmed...</span>")
 		return
-	var/encumberance_multiplier = 0.5 * (get_encumbrance() + 1) // half base falling damage. scale up to 100% based on encumberance
+	// Sigmoid maps tiers to ~0.001-0.971, so range is ~0.5 to ~0.986 (was 0.5 to 1.0)
+	var/encumberance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5)
 	adjustBruteLoss(((levels * 10) * encumberance_multiplier) ** 1.5)
 	AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
 	AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
@@ -850,14 +851,12 @@
 
 	if(iscarbon(src))
 		var/mob/living/carbon/getter_upper = src
-		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR) //grabs the item in your armorslot
-
+		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR)
 		var/stand_speed_mult = 1
-		if(got_armor) //sanity checks so mult doesnt runtime
-			stand_speed_mult = (1 + getter_upper.get_encumbrance()) * got_armor.stand_speed_reduction
-
+		if(got_armor)
+			stand_speed_mult = (1 + ENCUMBRANCE_TO_SIGMOID(getter_upper.encumbrance)) * got_armor.stand_speed_reduction
 		var/proto_timer = 2 * stand_speed_mult
-		if(proto_timer >= timer) //sanity check so you can't stand up faster if you somehow get negative encumbrance
+		if(proto_timer >= timer)
 			timer = proto_timer
 
 	if(!instant && !do_after(src, timer SECONDS, src, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE), extra_checks = CALLBACK(src, TYPE_PROC_REF(/mob/living, rest_checks_callback)), interaction_key = DOAFTER_SOURCE_GETTING_UP))
@@ -2762,18 +2761,6 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
 	return TRUE
-
-/mob/living/proc/get_carry_capacity()
-	return max(45, max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE), GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)) * 12)
-
-///this is returned as decimal value between 0 and 1
-/mob/living/proc/get_encumbrance()
-	return 0
-
-/mob/living/proc/get_total_weight()
-	return 0
-
-/mob/living/proc/encumbrance_to_speed()
 
 /// checks if this mob can do a dualwielding attack or defense
 /mob/living/proc/dual_wielding_check()

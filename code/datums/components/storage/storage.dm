@@ -728,6 +728,12 @@
 /obj/item/proc/StorageBlock(obj/item/I, mob/user)
 	return FALSE
 
+/datum/component/storage/proc/get_carry_weight(atom/carrier)
+	. = 0
+	//we do need a typecheck here
+	for(var/obj/item/stored in contents())
+		. += stored.get_carry_weight(carrier)
+
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
 /datum/component/storage/proc/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)

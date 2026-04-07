@@ -178,7 +178,7 @@
 
 /datum/species/harpy/on_species_gain(mob/living/carbon/foreign, datum/species/old_species)
 	..()
-	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE)
+	foreign.AddComponent(/datum/component/abberant_eater, DIET_HARPY, TRUE, _keeps_items = FALSE)
 	foreign.grant_language(/datum/language/common)
 
 /datum/species/harpy/get_skin_list()

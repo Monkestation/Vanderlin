@@ -10,15 +10,13 @@
 	antag_flag = ROLE_LICH
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = HIGHPOP_THRESHOLD+10
-
 	base_antags = 1
 	maximum_antags = 2
-
-	min_players = LOWPOP_THRESHOLD + 10
-	weight = 10
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
+	denominator = (HIGHPOP_THRESHOLD+10) * READYUP_AVG
 
 	earliest_start = 0 SECONDS
+	weight = 10
 
 	typepath = /datum/round_event/antagonist/solo/lich
 	antag_datum = /datum/antagonist/lich

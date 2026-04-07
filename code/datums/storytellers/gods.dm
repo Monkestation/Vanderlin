@@ -37,7 +37,7 @@
 	welcome_text = "The veil between realms shimmers in your presence."
 	weight = 4
 	always_votable = TRUE
-	roundstart_prob = 75
+	roundstart_prob = 70
 	follower_modifier = STANDARD_FOLLOWER_MODIFIER
 	color_theme = "#F0F0F0"
 
@@ -152,7 +152,7 @@
 	color_theme = "#AA8888"
 	event_repetition_multiplier = 0
 	forced = TRUE
-	roundstart_prob = 80
+	roundstart_prob = 75
 
 	tag_multipliers = list(
 		TAG_XYLIX = 3,
@@ -197,7 +197,6 @@
 	weight = 4
 	always_votable = TRUE
 	color_theme = "#888888"
-	roundstart_prob = 80
 
 	tag_multipliers = list(
 		TAG_NECRA = 3,

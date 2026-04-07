@@ -8,6 +8,7 @@
 	grid_width = 64
 	grid_height = 32
 	volume = 15
+	item_weight = 95 GRAMS
 	reagent_flags = TRANSPARENT
 	var/mode = SYRINGE_DRAW
 	var/busy = FALSE		// needed for delayed drawing of blood

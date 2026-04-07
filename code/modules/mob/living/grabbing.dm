@@ -723,7 +723,8 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/mob/living/carbon/C = grabbed
 	var/armor_block = C.run_armor_check(sublimb_grabbed, "stab")
-	var/damage = user.get_punch_dmg()
+	var/obj/item/bodypart/mouth/jaw = iscarbon(user) ? user.get_bodypart(BODY_ZONE_PRECISE_MOUTH) : null
+	var/damage = jaw ? jaw.get_bite_damage(user) : user.get_punch_dmg() * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 2 : 1)
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	user.do_attack_animation(C, ATTACK_EFFECT_BITE, used_item = FALSE)
