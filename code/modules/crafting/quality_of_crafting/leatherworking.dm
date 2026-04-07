@@ -1005,8 +1005,8 @@
 	craftdiff = 5
 
 /datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
-	name = "hardened afur lined boots"
-	output = /obj/item/clothing/shoes/boots/fur/advanced
+	name = "masterwork fur lined boots"
+	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
 	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
 			/obj/item/natural/cured/essence = 1,
 			/obj/item/natural/fibers/sinew = 1)
