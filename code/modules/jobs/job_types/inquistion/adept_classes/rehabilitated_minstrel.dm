@@ -45,10 +45,11 @@
 
 /datum/job/advclass/adept/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
 
 	spawned.inspiration = new /datum/inspiration(spawned)
 
+/datum/job/advclass/adept/psyaltrist/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
