@@ -178,7 +178,7 @@
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT
-<<<<<<< MasterworkItems
+	item_weight = 145 GRAMS
 
 /obj/item/clothing/head/roguehood/leather/advanced
 	name = "hardened leather hood"
@@ -199,6 +199,3 @@
 /obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
-=======
-	item_weight = 145 GRAMS
->>>>>>> main

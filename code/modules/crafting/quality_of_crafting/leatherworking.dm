@@ -753,7 +753,7 @@
 
 /datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
 	name = "hardened afur lined boots"
-	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	output = /obj/item/clothing/shoes/boots/fur/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
 			/obj/item/natural/fur = 2,
 			/obj/item/natural/fibers/sinew = 1)
@@ -1006,7 +1006,7 @@
 
 /datum/repeatable_crafting_recipe/leather/standalone/furlinedboots
 	name = "hardened afur lined boots"
-	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	output = /obj/item/clothing/shoes/boots/fur/advanced
 	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
 			/obj/item/natural/cured/essence = 1,
 			/obj/item/natural/fibers/sinew = 1)
