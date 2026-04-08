@@ -101,3 +101,13 @@
 2026-04-07:
   Ben10083:
   - map: Roguetest throne is now functional.
+2026-04-08:
+  Draggeru:
+  - map: Updates WPP, see PR for full changes
+  KevinfromHP:
+  - rscadd: Automaton stability now disables their shackle instead of making them
+      explode.
+  - bugfix: Automatons spamming that they've received orders when they've been told
+      to protect something
+  - balance: Adjusted Storyteller Antag Pulls to account for readied up player disparity
+      vs immediate latejoiners
