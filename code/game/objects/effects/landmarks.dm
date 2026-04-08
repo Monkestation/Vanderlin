@@ -161,36 +161,36 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_GRANDMASTER_TEMPLAR)
 
 /obj/effect/landmark/start/puritan
-	name = "Herr Prafekt"
-	jobs_to_spawn = list("Herr Prafekt")
+	name = JOB_PRAFEKT
+	jobs_to_spawn = list(JOB_PRAFEKT)
 
 /obj/effect/landmark/start/late/puritan
-	name = "Herr Prafekt"
-	jobs_to_spawn = list("Herr Prafekt")
+	name = JOB_PRAFEKT
+	jobs_to_spawn = list(JOB_PRAFEKT)
 
 /obj/effect/landmark/start/orthodoxist
-	name = "Sacrestants"
-	jobs_to_spawn = list("Sacrestants")
+	name = JOB_SACRESTANTS
+	jobs_to_spawn = list(JOB_SACRESTANTS)
 
 /obj/effect/landmark/start/late/orthodoxist
-	name = "Sacrestants"
-	jobs_to_spawn = list("Sacrestants")
+	name = JOB_SACRESTANTS
+	jobs_to_spawn = list(JOB_SACRESTANTS)
 
 /obj/effect/landmark/start/absolver
-	name = "Absolver"
-	jobs_to_spawn = list("Absolver")
+	name = JOB_ABSOLVER
+	jobs_to_spawn = list(JOB_ABSOLVER)
 
 /obj/effect/landmark/start/late/absolver
-	name = "Absolver"
-	jobs_to_spawn = list("Absolver")
+	name = JOB_ABSOLVER
+	jobs_to_spawn = list(JOB_ABSOLVER)
 
 /obj/effect/landmark/start/adept
-	name = "Adept"
-	jobs_to_spawn = list("Adept")
+	name = JOB_ADEPT
+	jobs_to_spawn = list(JOB_ADEPT)
 
 /obj/effect/landmark/start/late/adept
-	name = "Adept"
-	jobs_to_spawn = list("Adept")
+	name = JOB_ADEPT
+	jobs_to_spawn = list(JOB_ADEPT)
 
 /obj/effect/landmark/start/apothecary
 	name = JOB_APOTHECARY

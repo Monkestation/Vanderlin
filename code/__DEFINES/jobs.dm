@@ -234,6 +234,12 @@
 #define JOB_SHOPHAND "Shophand"
 #define JOB_STEVEDORE "Stevedore"
 
+#define JOB_PRAFEKT "Herr Prafekt"
+#define JOB_SACRESTANTS "Sacrestants"
+#define JOB_ABSOLVER "Absolver"
+#define JOB_ADEPT "Adept"
+
+
 #define JOB_INNKEEP "Innkeep"
 #define JOB_COOK "Cook"
 #define JOB_SOILSON "Soilson"
