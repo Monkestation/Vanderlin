@@ -60,5 +60,10 @@
 	for(var/datum/examine_effect/E in examine_effects)
 		E.trigger(user)
 
-	if(item_weight || get_stored_weight())
-		. += "It weighs around [round(item_weight + get_stored_weight(), 0.1)]KG."
+	var/weight = get_carry_weight()
+	if(!weight)
+		return
+	if(weight < 1)
+		. += "It weighs around [round(weight * 1000, 1)]g."
+		return
+	. += "It weighs around [round(weight, 0.01)]kg."

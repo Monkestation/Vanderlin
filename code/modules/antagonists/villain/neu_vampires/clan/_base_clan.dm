@@ -41,6 +41,7 @@ And it also helps for the character set panel
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
 	)
+	var/silent_join = FALSE
 
 	var/blood_preference = null
 	var/blood_disgust = BLOOD_PREFERENCE_RATS
@@ -55,6 +56,7 @@ And it also helps for the character set panel
 	var/allows_non_vampires = TRUE
 	/// Title for non-vampire members
 	var/non_vampire_title = "Slave"
+	var/has_hierarchy = TRUE
 	var/datum/clan_hierarchy_node/hierarchy_root
 	var/list/datum/clan_hierarchy_node/all_positions = list()
 	var/curse = "None."
@@ -155,7 +157,7 @@ And it also helps for the character set panel
 			H.overlays_standing[accessories_layers[current_accessory]] = acc_overlay
 			H.apply_overlay(accessories_layers[current_accessory])
 
-	if(!hierarchy_root)
+	if(!hierarchy_root && has_hierarchy)
 		initialize_hierarchy()
 
 	handle_member_joining(H, is_vampire)
@@ -183,9 +185,10 @@ And it also helps for the character set panel
 	to_chat(H, "<span class='notice'>You have been inducted into [name] as a [non_vampire_title]!</span>")
 
 	// Announce to clan
-	for(var/mob/living/carbon/human/member in clan_members)
-		if(member != H)
-			to_chat(member, "<span class='notice'>[H.real_name] has joined [name] as a [non_vampire_title].</span>")
+	if(!silent_join)
+		for(var/mob/living/carbon/human/member in clan_members)
+			if(member != H)
+				to_chat(member, "<span class='notice'>[H.real_name] has joined [name] as a [non_vampire_title].</span>")
 
 	return TRUE
 
@@ -219,7 +222,7 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/create_position(position_name, position_desc, datum/clan_hierarchy_node/superior_position, rank_level)
-	if(!superior_position || !superior_position.can_assign_positions)
+	if(!has_hierarchy || !superior_position || !superior_position.can_assign_positions)
 		return null
 
 	var/datum/clan_hierarchy_node/new_position = new /datum/clan_hierarchy_node(position_name, position_desc, rank_level)
@@ -232,7 +235,7 @@ And it also helps for the character set panel
 		return null
 
 /datum/clan/proc/remove_position(datum/clan_hierarchy_node/position)
-	if(!position || position == hierarchy_root)
+	if(!has_hierarchy || !position || position == hierarchy_root)
 		return FALSE // Can't remove root position
 
 	if(position.superior)
@@ -275,9 +278,6 @@ And it also helps for the character set panel
 	for (var/trait in clane_traits)
 		REMOVE_TRAIT(vampire, trait, "clan")
 
-
-	vampire.update_body()
-
 	var/datum/component/sunlight_vulnerability/sun_comp = vampire.GetComponent(/datum/component/sunlight_vulnerability)
 	if(sun_comp)
 		qdel(sun_comp)
@@ -286,6 +286,7 @@ And it also helps for the character set panel
 	if(disguise_comp)
 		qdel(disguise_comp)
 
+	vampire.update_body()
 	vampire.has_reflection = TRUE
 	vampire.create_reflection()
 	vampire.update_reflection()
@@ -309,7 +310,7 @@ And it also helps for the character set panel
 		if(spell_instance)
 			spell_instance.Remove(vampire)
 
-	remove_verb(vampire, /mob/living/carbon/human/proc/disguise_button)
+
 	remove_verb(vampire, /mob/living/carbon/human/proc/vampire_telepathy)
 
 	if(vampire == clan_leader)
@@ -347,9 +348,10 @@ And it also helps for the character set panel
 		to_chat(new_leader, "<span class='notice'>You have been promoted to [leader_title] of [name]!</span>")
 
 		// Announce to clan
-		for(var/mob/living/carbon/human/member in clan_members)
-			if(member != new_leader)
-				to_chat(member, "<span class='notice'>[new_leader.real_name] has become the new [leader_title] of [name].</span>")
+		if(!silent_join)
+			for(var/mob/living/carbon/human/member in clan_members)
+				if(member != new_leader)
+					to_chat(member, "<span class='notice'>[new_leader.real_name] has become the new [leader_title] of [name].</span>")
 
 
 /datum/clan/proc/frenzy_message(mob/living/message)
@@ -372,7 +374,6 @@ And it also helps for the character set panel
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, clan_examine)
 
 /datum/clan/proc/setup_vampire_abilities(mob/living/carbon/human/H)
-	add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 	add_verb(H, /mob/living/carbon/human/proc/vampire_telepathy)
 	add_verb(H, /mob/living/carbon/human/proc/sire_spawn)
 

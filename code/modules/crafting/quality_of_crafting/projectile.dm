@@ -15,6 +15,19 @@
 	output_amount = 2
 	craft_time = 1 SECONDS
 
+/datum/repeatable_crafting_recipe/projectile/arrow
+	name = "bone arrow"
+	requirements = list(
+		/obj/item/grown/log/tree/stick= 1,
+		/obj/item/alch/bone = 1,
+		/obj/item/natural/fibers/sinew = 1,
+	)
+	starting_atom = /obj/item/grown/log/tree/stick
+	attacked_atom = /obj/item/natural/fibers/sinew
+	output = /obj/item/ammo_casing/caseless/arrow/bone
+	output_amount = 3
+	craft_time = 1 SECONDS
+
 /datum/repeatable_crafting_recipe/projectile/pyro_arrow
 	name = "pyroclastic arrow"
 	requirements = list(

@@ -57,14 +57,7 @@
 		TRAIT_STEELHEARTED
 	)
 	selection_color = "#a33096"
-
-/datum/job/bogwitch/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
-	if(length(SSjob.latejoin_trackers))
-		return pick(SSjob.latejoin_trackers)
-	return SSjob.get_last_resort_spawn_points()
-
+	languages = list(/datum/language/gronnic)
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -77,16 +70,10 @@
 		devotion.make_acolyte()
 		devotion.grant_to(spawned)
 
-	// This is hopefully temporary, as I couldn't make a tgui input list trigger, and this proc always triggers before proceeding.
-	var/static/list/selectable = list(
-		"Generalist" = /obj/item/weapon/knife/villager,
-		"Path of Bone" = /obj/item/weapon/knife/villager,
-		"Path of Nature" = /obj/item/weapon/knife/villager,
-		"Path of The Hunt" = /obj/item/weapon/knife/villager,
-	)
-	var/chosen_path = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose a specialist path", title = "Specialist Path")
+/datum/job/bogwitch/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
-//	var/chosen_path = tgui_input_list(spawned, "Choose a specialist path", "Specialist Path", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
+	var/chosen_path = tgui_input_list(player_client, "Choose a specialist path", "SPECIALIST", list("Generalist", "Path of Bone", "Path of Nature", "Path of The Hunt"))
 	switch(chosen_path)
 		if("Path of Bone")//Plus to Surgery
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, 1, TRUE)

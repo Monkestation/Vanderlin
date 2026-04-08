@@ -53,9 +53,6 @@
 		TRAIT_CABAL,
 	)
 
-/datum/antagonist/zizocultist/zizo_knight
-	change_stats = FALSE
-
 /datum/antagonist/zizocultist/leader
 	name = "Zizoid Cultist"
 	antag_hud_type = ANTAG_HUD_ZIZOID

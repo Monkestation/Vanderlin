@@ -1,6 +1,6 @@
 /datum/preferences/proc/validate_customizer_entries()
 	customizer_entries = SANITIZE_LIST(customizer_entries)
-	listclearnulls(customizer_entries)
+	list_clear_nulls(customizer_entries)
 	var/datum/species/species = pref_species
 	var/list/customizers = species.customizers
 	/// Check if we have any customizer entries that don't match.

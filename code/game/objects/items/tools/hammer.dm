@@ -18,6 +18,7 @@
 
 	grid_width = 32
 	grid_height = 64
+	item_weight = 1.24 KILOGRAMS
 	var/time_multiplier = 1
 	var/no_spark = FALSE	//for hammers that shouldn't make sparks on impact
 
@@ -198,6 +199,7 @@
 	max_integrity = INTEGRITY_WORST
 	time_multiplier = 1.2
 	no_spark = TRUE
+	item_weight = 654 GRAMS
 
 /obj/item/weapon/hammer/wood/getonmobprop(tag)
 	. = ..()
@@ -218,12 +220,14 @@
 	melting_material = /datum/material/copper
 	time_multiplier = 1.1
 	no_spark = TRUE
+	item_weight = 1.12 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"
 	desc = "It's almost asking to be put to work."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "sledgehammer"
+	force_wielded = DAMAGE_HAMMER_WIELD + 5
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
@@ -234,6 +238,7 @@
 	melt_amount = 100
 	grid_width = null
 	grid_height = null
+	item_weight = 7.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/getonmobprop(tag)
 	. = ..()
@@ -256,6 +261,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/steel
 	time_multiplier = 1.5 //it's for crushing skulls not nails
+	item_weight = 8.4 KILOGRAMS
 
 /obj/item/weapon/hammer/sledgehammer/war/malum
 	name = "forgefiend"

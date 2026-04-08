@@ -204,6 +204,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 			continue
 		//This entire if/else chain could be in two lines but isn't for readibilties sake.
 		var/msg = message
+		var/signal = SEND_SIGNAL(M, COMSIG_MOB_VISIBLE_MESSAGE, src, message, vision_distance, ignored_mobs)
+		if(signal & COMPONENT_NO_VISIBLE_MESSAGE)
+			msg = null
+		else if(signal & COMPONENT_VISIBLE_MESSAGE_BLIND)
+			msg = blind_message
+		if(!msg)
+			continue
+
 		if(M.see_invisible < invisibility)//if src is invisible to M
 			msg = blind_message
 		if(!msg)
@@ -407,6 +415,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 		else
 			client.eye = client.mob
 			client.perspective = MOB_PERSPECTIVE
+
+	SEND_SIGNAL(src, COMSIG_MOB_RESET_PERSPECTIVE, new_perspective)
 
 /// Show the mob's inventory to another mob
 /mob/proc/show_inv(mob/user)
@@ -1256,6 +1266,10 @@ GLOBAL_VAR_INIT(mobids, 1)
 		remove_movespeed_modifier(MOVESPEED_ID_MOB_EQUIPMENT, update=TRUE)
 	else
 		add_movespeed_modifier(MOVESPEED_ID_MOB_EQUIPMENT, update=TRUE, priority=100, override=TRUE, multiplicative_slowdown=speedies, blacklisted_movetypes=FLOATING)
+
+/mob/living/carbon/update_equipment_speed_mods()
+	. = ..()
+	update_carry_weight()
 
 /// Gets the combined speed modification of all worn items
 /// Except base mob type doesnt really wear items

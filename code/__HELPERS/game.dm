@@ -190,7 +190,7 @@
 	for(var/i = 1; i <= GLOB.player_list.len; i++)
 		var/mob/M = GLOB.player_list[i]
 		if(M && M.client)
-			if(alive_check && M.stat)
+			if(alive_check && M.stat == DEAD)
 				continue
 			else if(afk_check && M.client.is_afk())
 				continue
@@ -287,7 +287,7 @@
 		if(!M.key || !M.client)
 			result -= M
 
-	listclearnulls(result)
+	list_clear_nulls(result)
 
 	return result
 

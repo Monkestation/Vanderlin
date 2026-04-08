@@ -35,6 +35,14 @@
 
 		age_timer = addtimer(CALLBACK(src, PROC_REF(age_beer)), adjusted_progress, TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_UNIQUE)
 
+/datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+
+/datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+
 /datum/reagent/consumable/ethanol/proc/age_beer()
 	var/old_volume = volume
 	var/datum/reagents/old_holder = holder
@@ -602,11 +610,49 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "a green numbness, then a burning vigor in the heart" // heartburn (healing)
 	color = "#86cca3"
 	quality = DRINK_VERYGOOD // good stuff!
+	age_path = /datum/reagent/consumable/ethanol/luxwine/aged
 
 /datum/reagent/consumable/ethanol/luxwine/on_mob_life(mob/living/carbon/M) // stolen healthpot code. i am shameless.
+	M.apply_status_effect(/datum/status_effect/buff/lux_drank)
 	if(volume > 0.99) // i have no clue if this works.
 		M.adjustBruteLoss(-1*REM, 0)
 		M.adjustFireLoss(-1*REM, 0)
+	..()
+
+/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/M)
+	M.remove_status_effect(/datum/status_effect/buff/lux_drank)
+
+/datum/reagent/consumable/ethanol/luxwine/aged
+	name = "Aged Luxintenebre"
+	boozepwr = 80
+	taste_description = "a caressing dullness, then a fiery sensation in the heart"
+	color = "#52c984"
+	quality = DRINK_VERYGOOD
+	age_path = /datum/reagent/consumable/ethanol/luxwine/delectable
+
+/datum/reagent/consumable/ethanol/luxwine/aged/on_mob_life(mob/living/carbon/M)
+	if(volume > 0.99)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.05*REM)
+		M.adjustBruteLoss(-2*REM, 0)
+		M.adjustFireLoss(-2*REM, 0)
+	..()
+
+/datum/reagent/consumable/ethanol/luxwine/delectable
+	name = "Delectable Luxintenebre"
+	boozepwr = 100
+	taste_description = "a comforting warmth, then a searing wound in the heart"
+	color = "#11db65"
+	quality = DRINK_FANTASTIC
+	age_path = null
+
+/datum/reagent/consumable/ethanol/luxwine/delectable/on_mob_life(mob/living/carbon/M)
+	var/list/wCount = M.get_wounds()
+	if(wCount.len > 0)
+		M.heal_wounds(3) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
+	if(volume > 0.99)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM)
+		M.adjustBruteLoss(-5*REM, 0)
+		M.adjustFireLoss(-5*REM, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/whipwine // dont ask

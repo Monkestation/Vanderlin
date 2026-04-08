@@ -17,9 +17,9 @@
 	outfit = null
 	outfit_female = null
 
-
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ORTHODOXIST
+	job_bitflag = BITFLAG_CHURCH
 
 	advclass_cat_rolls = list(CTAG_INQUISITION = 20)
 	same_job_respawn_delay = 30 MINUTES
@@ -39,6 +39,7 @@
 /datum/job/orthodoxist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
+	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
 	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
 	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)

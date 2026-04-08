@@ -20,7 +20,7 @@
 	max_integrity = INTEGRITY_STANDARD
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 1.6
+	item_weight = 1.6 KILOGRAMS
 
 	material_category = ARMOR_MAT_FABRIC
 
@@ -58,7 +58,7 @@
 	prevent_crits =  MINOR_CRITICALS
 	max_integrity = INTEGRITY_POOR
 	clothing_flags = NONE
-	item_weight = 0.5
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/helmet/leather/headscarf/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -114,7 +114,7 @@
 
 	armor = ARMOR_PADDED
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_BLUNT)
-	item_weight = 3 * IRON_MULTIPLIER
+	item_weight = 470 GRAMS
 
 	actions_types = list(/datum/action/item_action/toggle_light)
 

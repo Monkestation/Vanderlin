@@ -296,12 +296,12 @@
 					for(var/mob/living/crumpled_mob in contents)
 						visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
 						crumpled_mob.Stun(1)
-						crumpled_mob.take_overall_damage(falling_mob.fall_damage()*2)
+						crumpled_mob.take_overall_damage(falling_mob.fall_damage(levels)*2)
 	if(falling_atom.fall_damage())
 		for(var/mob/living/crumpled_mob in contents)
 			visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
 			crumpled_mob.Stun(1)
-			crumpled_mob.take_overall_damage(falling_atom.fall_damage()*2)
+			crumpled_mob.take_overall_damage(falling_atom.fall_damage(levels)*2)
 	falling_atom.onZImpact(src, levels)
 	if(isobj(falling_atom))
 		var/obj/falling_obj = falling_atom
@@ -310,18 +310,21 @@
 
 	return TRUE
 
-/atom/movable/proc/fall_damage()
+/atom/movable/proc/fall_damage(fall_distance)
 	return 0
 
-/obj/item/fall_damage()
-	if(w_class == WEIGHT_CLASS_TINY)
-		return 0
-	if(w_class == WEIGHT_CLASS_GIGANTIC)
-		return 300
-	var/bsc = 3**(w_class-1)
-	return bsc
+/obj/item/fall_damage(fall_distance)
+	var/mass_kg = get_carry_weight()
+	var/fall_factor = sqrt(max(fall_distance, 1))
+	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
 
-/obj/structure/fall_damage()
+
+/mob/living/fall_damage(fall_distance)
+	var/mass_kg = carry_weight + get_mob_weight()
+	var/fall_factor = sqrt(max(fall_distance, 1))
+	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
+
+/obj/structure/fall_damage(fall_distance)
 	if(w_class == WEIGHT_CLASS_TINY)
 		return 0
 	if(w_class == WEIGHT_CLASS_GIGANTIC)

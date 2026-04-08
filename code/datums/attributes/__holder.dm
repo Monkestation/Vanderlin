@@ -229,7 +229,9 @@
 		if(isnull(to_add.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] + to_add.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_add.skill_xp_multipliers))
@@ -267,7 +269,9 @@
 		if(isnull(to_remove.raw_attribute_list[thing]))
 			continue
 		if(ispath(thing, SKILL))
+			var/old_value = raw_attribute_list[thing]
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], skill_min, skill_max)
+			on_skill_level_changed(thing, raw_attribute_list[thing], old_value)
 		else
 			raw_attribute_list[thing] = clamp(raw_attribute_list[thing] - to_remove.raw_attribute_list[thing], attribute_min, attribute_max)
 	if(LAZYLEN(to_remove.skill_xp_multipliers))
@@ -328,6 +332,17 @@
  * you should multiply amount of dices and crit according to how many of them you added to the formula.
  *
  * If you don't care about crits, just count them as being the same as normal successes/failures.
+ *
+ * Example:
+ * Single stat (baseline)
+ * diceroll(requirement = 10, crit = 10, dice_num = 3, dice_sides = 6)
+ *
+ * Two stats combined (e.g. STR + DEX)
+ * diceroll(requirement = 10, crit = 20, dice_num = 6, dice_sides = 6)
+ *
+ * Three stats combined
+ * diceroll(requirement = 10, crit = 30, dice_num = 9, dice_sides = 6)
+ *
  */
 /datum/attribute_holder/proc/diceroll(requirement = 0, \
 									crit = 10, \

@@ -24,6 +24,7 @@
 	grid_width = 32
 
 	weapon_special = /datum/special_intent/axe_swing
+	item_weight = 1.5 KILOGRAMS
 
 //................ Stone Axe ............... //
 /obj/item/weapon/axe/stone
@@ -43,6 +44,7 @@
 	smeltresult = /obj/item/fertilizer/ash //is a wooden log and a stone hammered in the top
 	melting_material = null
 	sellprice = 10
+	item_weight = 800 GRAMS
 
 /obj/item/weapon/axe/stone/getonmobprop(tag)
 	if(tag)
@@ -71,6 +73,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/axe/battle/getonmobprop(tag)
 	if(tag)
@@ -100,6 +103,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/getonmobprop(tag)
 	. = ..()
@@ -118,6 +122,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "nsapo_iron"
 	melt_amount = 75
+	item_weight = 2 KILOGRAMS
 
 /obj/item/weapon/axe/iron/nsapo/getonmobprop(tag)
 
@@ -139,6 +144,7 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 150
 	minstr = 10
+	item_weight = 2.2 KILOGRAMS
 
 //................ Bronze ............... //
 /obj/item/weapon/axe/bronze
@@ -156,6 +162,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
 	sellprice = 20
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/weapon/axe/bronze/getonmobprop(tag)
 	. = ..()
@@ -184,6 +191,7 @@
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
+	item_weight = 1.7 KILOGRAMS
 
 /obj/item/weapon/axe/psydon/Initialize(mapload)
 	. = ..()
@@ -231,6 +239,7 @@
 	pickmult = 1.2 // It's a pick...
 	axe_cut = 15 // ...and an Axe!
 	toolspeed = 2
+	item_weight = 2.5 KILOGRAMS
 
 
 //................ Steel Axe ............... //
@@ -247,6 +256,7 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
+	item_weight = 1.9 KILOGRAMS
 
 /obj/item/weapon/axe/steel/getonmobprop(tag)
 	. = ..()
@@ -269,6 +279,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	wlength = WLENGTH_LONG
 	experimental_onhip = TRUE
+	item_weight = 2.2 KILOGRAMS
 
 /obj/item/weapon/axe/steel/atgervi/getonmobprop(tag)
 	. = ..()
@@ -290,6 +301,7 @@
 	minstr = 8
 	melt_amount = 75
 	sellprice = 45
+	item_weight = 1.9 KILOGRAMS
 
 /obj/item/weapon/axe/steel/nsapo/getonmobprop(tag)
 	. = ..()
@@ -321,6 +333,7 @@
 	melt_amount = 150
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	sellprice = 15
+	item_weight = 700 GRAMS
 
 /obj/item/weapon/axe/copper/getonmobprop(tag)
 	. = ..()
@@ -342,14 +355,44 @@
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
+	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 100
 	max_integrity = INTEGRITY_WORST
 	minstr = 8
 
 	smeltresult = /obj/item/fertilizer/ash
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/axe/boneaxe/getonmobprop(tag)
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -9,"sy" = -8,"nx" = 9,"ny" = -7,"wx" = -7,"wy" = -8,"ex" = 3,"ey" = -8,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 3,"sy" = -7,"nx" = -6,"ny" = -3,"wx" = 3,"wy" = -4,"ex" = 4,"ey" = -3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -44,"sturn" = 45,"wturn" = 47,"eturn" = 33,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+	return ..()
+
+/obj/item/weapon/axe/trollboneaxe
+	name = "troll-horn bone axe"
+	desc = "A rough axe made of bones, strengthed with an troll's horn."
+	icon_state = "boneaxe"
+	force = DAMAGE_BAD_AXE
+	force_wielded =	DAMAGE_BAD_AXE_WIELD
+	wdefense = MEDIOCRE_PARRY
+	wlength = WLENGTH_SHORT
+	anvilrepair = /datum/attribute/skill/craft/crafting
+	max_blade_int = 150
+	max_integrity = INTEGRITY_WORST + 50
+	minstr = 8
+
+	smeltresult = /obj/item/fertilizer/ash
+	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
+	item_weight = 900 GRAMS
+
+/obj/item/weapon/axe/trollboneaxe/getonmobprop(tag)
 	if(tag)
 		switch(tag)
 			if("gen")
@@ -395,6 +438,7 @@
 	grid_width = 64
 
 	weapon_special = /datum/special_intent/axe_swing
+	item_weight = 4 KILOGRAMS
 
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()
@@ -419,6 +463,7 @@
 	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 11
 	melting_material = /datum/material/silver
+	item_weight = 3.8 KILOGRAMS
 
 /obj/item/weapon/greataxe/psy/Initialize(mapload)
 	. = ..()
@@ -434,6 +479,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90
+	item_weight = 4.5 KILOGRAMS
 
 /obj/item/weapon/greataxe/steel/doublehead // Trades more damage for being worse to parry with and easier to dodge of.
 	name = "double-headed steel greataxe"
@@ -447,6 +493,7 @@
 
 	melt_amount = 180
 	sellprice = 100
+	item_weight = 5.5 KILOGRAMS
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"
@@ -456,6 +503,7 @@
 	alt_intents = list(AXE_CUT, AXE_CHOP)
 	minstr = 11 // Just there to prevent the occasional hiccup where Graggar Iconoclast rolls under their minimum str for the axe without just outright buffing their str. It's made of blacksteel it can get away with being a little lighter.
 	sellprice = 0 // Graggarite axe, nobody wants this
+	item_weight = 5 KILOGRAMS
 
 /obj/item/weapon/greataxe/dreamscape
 	name = "otherworldly axe"
@@ -469,6 +517,7 @@
 
 	melting_material = /datum/material/gold
 	sellprice = 0
+	item_weight = 5 KILOGRAMS
 
 /obj/item/weapon/greataxe/dreamscape/active
 	// to do, make this burn you if you don't regularly soak it.

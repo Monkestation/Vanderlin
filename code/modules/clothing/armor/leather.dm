@@ -20,7 +20,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 3.2
+	item_weight = 3.2 KILOGRAMS
 
 	material_category = ARMOR_MAT_FABRIC
 
@@ -65,7 +65,7 @@
 	armor = ARMOR_LEATHER_GOOD
 	body_parts_covered = COVERAGE_FULL
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6.7
+	item_weight = 4.5 KILOGRAMS
 
 //................ Splint Mail ............... //
 /obj/item/clothing/armor/leather/splint
@@ -77,7 +77,7 @@
 	armor = ARMOR_LEATHER_GOOD
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 6.7
+	item_weight = 6.7 KILOGRAMS
 
 //................ Leather Vest ............... //	- has no sleeves.  - can be worn in armor OR shirt slot
 /obj/item/clothing/armor/leather/vest
@@ -97,7 +97,7 @@
 	body_parts_covered = COVERAGE_VEST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 2.2
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/clothing/armor/leather/vest/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -111,7 +111,7 @@
 	name = "butchers vest"
 	icon_state = "leathervest"
 	color = "#d69c87" // custom coloring
-	item_weight = 1.8
+	item_weight = 1.4 KILOGRAMS
 
 //................ Other Vests ............... //
 /obj/item/clothing/armor/leather/vest/colored/butler
@@ -143,7 +143,7 @@
 	desc = "A heavy leather jacket with wooden buttons, favored by workers who can afford it."
 
 	body_parts_covered = COVERAGE_SHIRT
-	item_weight = 2.2
+	item_weight = 1.5 KILOGRAMS
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
 /obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
@@ -282,6 +282,11 @@
 	uses_lord_coloring = LORD_PRIMARY
 	alternate_worn_layer = 19
 
+/obj/item/clothing/armor/leather/jacket/courtphysician/drifter
+	uses_lord_coloring = FALSE
+	detail_color = CLOTHING_SCARLET
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/armor/leather/jacket/leathercoat
 	name = "leather coat"
 	desc = "A tan and purple leather coat."
@@ -361,6 +366,21 @@
 	for its wearer, shielding from blows and weather alike. Utility pouches have been sewn into the front of it."
 	icon_state = "roguearmor_belt"
 	item_state = "roguearmor_belt"
+	armor = ARMOR_LEATHER_GOOD
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
+	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
+	sellprice = 20
+
+// gronnic subtype
+/obj/item/clothing/armor/leather/gronn
+	name = "osslandic ravager mantle"
+	desc = "A carefully created mantle of bone and hardened leather. It offers superior protection against the threats of the wild while remaining light, \
+			A popular design in Ossland is to adorn a shoulder with a wolf pelt, a symbol of the Great Hunt."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnleatherarmor"
+	item_state = "gronnleatherarmor"
+	armor = ARMOR_GRONN_LIGHT
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
 /obj/item/clothing/armor/leather/jerkin/belted/long

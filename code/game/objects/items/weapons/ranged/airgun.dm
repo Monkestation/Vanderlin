@@ -27,6 +27,7 @@
 	pickup_sound = 'sound/foley/gun_equip.ogg'
 	drop_sound = 'sound/foley/gun_drop.ogg'
 	dropshrink = 0.7
+	item_weight = 7 KILOGRAMS
 	var/pressure_to_use = 1
 	var/maximum_pressure = 3 //the max pressure we can set the gun to
 	var/cranked = FALSE

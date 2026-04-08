@@ -31,7 +31,7 @@
 		/datum/language/orcish
 	)
 
-	traits = list(	
+	traits = list(
     	TRAIT_DODGEEXPERT,
 		TRAIT_EMPATH,
 		TRAIT_INQUISITION,
@@ -46,6 +46,7 @@
 /datum/job/advclass/adept/psyaltrist/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
+	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
 	spawned.inspiration = new /datum/inspiration(spawned)
 
 /datum/job/advclass/adept/psyaltrist/on_roundstart(mob/living/carbon/human/spawned, client/player_client)

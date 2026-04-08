@@ -599,6 +599,22 @@
 /obj/structure/stairs/stone/church,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
+"vU" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/cloak/stabard/templar/astrata/alt,
+/obj/item/clothing/cloak/stabard/templar/astrata/alt,
+/obj/item/clothing/cloak/stabard/templar/astrata,
+/obj/item/clothing/cloak/stabard/templar/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/obj/item/clothing/shirt/robe/astrata,
+/obj/item/clothing/shirt/robe/astrata,
+/obj/item/clothing/head/helmet/heavy/necked/astrata,
+/obj/item/clothing/head/helmet/heavy/necked/astrata,
+/obj/machinery/light/fueled/torchholder/l,
+/obj/effect/spawner/map_spawner/loot/medium,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/church)
 "wa" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/rotten/mince,
@@ -632,11 +648,6 @@
 /area/under/tomb/indoors/church)
 "xz" = (
 /obj/machinery/light/fueled/oven/south,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/church)
-"xM" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "yc" = (
@@ -837,22 +848,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
-"Hu" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/cloak/stabard/templar/astrata/alt,
-/obj/item/clothing/cloak/stabard/templar/astrata/alt,
-/obj/item/clothing/cloak/stabard/templar/astrata,
-/obj/item/clothing/cloak/stabard/templar/astrata,
-/obj/item/clothing/neck/psycross/silver/divine/astrata,
-/obj/item/clothing/neck/psycross/silver/divine/astrata,
-/obj/item/clothing/shirt/robe/astrata,
-/obj/item/clothing/shirt/robe/astrata,
-/obj/item/clothing/head/helmet/heavy/necked/astrata,
-/obj/item/clothing/head/helmet/heavy/necked/astrata,
-/obj/machinery/light/fueled/torchholder/l,
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/church)
 "Hv" = (
 /turf/closed/wall/mineral/decostone/end{
 	dir = 8
@@ -1044,12 +1039,6 @@
 /obj/structure/fluff/psycross/copper,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/church)
-"OD" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/clothing/neck/psycross/silver/divine/necra,
-/obj/item/clothing/neck/psycross/silver/divine/astrata,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/church)
 "OM" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/churchmarble,
@@ -1120,6 +1109,11 @@
 	pixel_y = 0
 	},
 /obj/item/natural/feather,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/church)
+"QG" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "QO" = (
@@ -1205,6 +1199,12 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass,
 /area/under/tomb)
+"UC" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/clothing/neck/psycross/silver/divine/necra,
+/obj/item/clothing/neck/psycross/silver/divine/astrata,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/church)
 "UM" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/dirt,
@@ -2801,7 +2801,7 @@ qE
 lp
 uT
 cL
-xM
+QG
 VI
 JI
 JI
@@ -2866,7 +2866,7 @@ qE
 Is
 MG
 MG
-OD
+UC
 JI
 JI
 xb
@@ -3022,7 +3022,7 @@ gY
 nm
 PW
 mv
-Hu
+vU
 Hv
 ol
 JI

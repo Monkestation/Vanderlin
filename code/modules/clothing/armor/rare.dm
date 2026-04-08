@@ -35,20 +35,20 @@
 
 	armor_class = AC_MEDIUM // Elven craft, also a cuirass
 	body_parts_covered = COVERAGE_VEST
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 17 KILOGRAMS
 
 /obj/item/clothing/armor/rare/elfplate/welfplate
 	name = "elvish plate"
 	desc = "A suit of steel interwoven, through honed elven technique, with hardened bark plates."
 	icon_state = "welfchest"
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 17 KILOGRAMS
 
 /obj/item/clothing/armor/rare/dwarfplate
 	name = "dwarvish plate"
 	desc = "Plate armor made out of the sturdiest, finest dwarvish metal armor. It's as heavy and durable as it gets."
 	icon_state = "dwarfchest"
 	allowed_race = list(SPEC_ID_DWARF)
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 17 KILOGRAMS
 	stand_speed_reduction = 1.2
 
 /obj/item/clothing/armor/rare/grenzelplate
@@ -57,7 +57,7 @@
 	icon_state = "human_swordchest"
 	allowed_race = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	allowed_sex = list(MALE)
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 12 KILOGRAMS
 	stand_speed_reduction = 1.2
 
 /obj/item/clothing/armor/rare/zaladplate
@@ -67,7 +67,7 @@
 	icon_state = "human_spearchest"
 	allowed_race = list(SPEC_ID_HUMEN)
 	allowed_sex = list(MALE)
-	item_weight = 12 * STEEL_MULTIPLIER
+	item_weight = 9.4 KILOGRAMS
 
 // Aasimar hoplite armor, a very rare armor indeed
 /obj/item/clothing/armor/rare/hoplite
@@ -83,4 +83,4 @@
 	stand_speed_reduction = 1.2
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 12.4 KILOGRAMS

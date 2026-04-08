@@ -52,7 +52,9 @@
 				return
 		if(HEALING_DIVINE, HEALING_HUNT)
 			if(cast_on.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-				if(!(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) && vampire_disguise?.disguised)) //vampire disguises are handled later
+				// might seem weird we need to do this but Bloodsucker wretch does not have vampire antag datum
+				var/we_are_vampire = cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) || (cast_on in (cast_on.clan?.clan_members - cast_on.clan?.non_vampire_members))
+				if(!(we_are_vampire && vampire_disguise?.disguised)) //vampire disguises are handled later
 					if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 						cast_on.visible_message(span_warning("[cast_on] overpowers being burned!"), span_greentext("I overpower being burned!"))
 						return

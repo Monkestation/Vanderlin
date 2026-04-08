@@ -16,7 +16,7 @@
 	prevent_crits = MINOR_CRITICALS
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	item_weight = 3
+	item_weight = 350 GRAMS
 
 /obj/item/clothing/pants/trou/leather
 	name = "leather trousers"
@@ -24,6 +24,7 @@
 	icon_state = "leathertrou"
 	armor = ARMOR_LEATHER
 	max_integrity = INTEGRITY_POOR
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
@@ -162,3 +163,23 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
 	uses_lord_coloring = LORD_PRIMARY
+
+//gronn trou
+/obj/item/clothing/pants/trou/leather/splint/gronn
+	name = "osslandic chain chausses"
+	desc = "A pair of chain-wrapped pants with a leather subligar, ensuring both protection and comfort."
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	icon_state = "gronnchainpants"
+	item_state = "gronnchainpants"
+
+/obj/item/clothing/pants/trou/leather/gronn
+	name = "osslandic fur pants"
+	desc = "A pair of hardened leather pants with bone reinforcements along the legs; \
+			Those of Ossland adopt a design that offers superior protection against the blunted hits and slashing claws of beasts."
+	icon_state = "gronnleatherpants"
+	item_state = "gronnleatherpants"
+	armor = ARMOR_GRONN_LIGHT
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'

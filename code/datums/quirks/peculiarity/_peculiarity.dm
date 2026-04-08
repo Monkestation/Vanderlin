@@ -197,6 +197,7 @@
 	var/datum/quirk/peculiarity/mystery_box/linked_quirk
 	var/listening = TRUE
 	dropshrink = 0.8
+	item_weight = 750 GRAMS
 
 /obj/item/mystery/Initialize()
 	. = ..()

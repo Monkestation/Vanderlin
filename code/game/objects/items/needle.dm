@@ -13,6 +13,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 20
 	tool_behaviour = TOOL_SUTURE
+	item_weight = 5 GRAMS
 
 	grid_width = 32
 	grid_height = 32
@@ -237,9 +238,11 @@
 	maxstring = 8
 	anvilrepair = null
 	melting_material = null
+	item_weight = 3 GRAMS
 
 /obj/item/needle/blessed
 	name = "blessed needle"
 	desc = span_hierophant("A needle blessed by the ordained Pestrans of the Church. A coveted item, for its thread will never end. \n This thread however can only be used to sew wounds.")
 	infinite = TRUE
 	can_repair = FALSE
+	item_weight = 5 GRAMS

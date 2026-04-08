@@ -30,6 +30,7 @@
 	throw_speed = 1
 	throw_range = 7
 	force = 0
+	item_weight = 125 GRAMS
 
 /*
  * Snap pops
