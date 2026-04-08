@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
+GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
 
 /datum/component/command_follower
 	var/datum/follower_command/current_command

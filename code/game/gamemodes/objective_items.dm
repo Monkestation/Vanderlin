@@ -41,7 +41,7 @@
 	name = "a pepper mill."
 	targetitem = /obj/item/reagent_containers/peppermill
 	difficulty = 1
-	excludefromjob = list("Cook")
+	excludefromjob = list(JOB_COOK)
 
 /datum/objective_item/steal/rogue/crown
 	name = "the Lord's crown."

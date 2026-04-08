@@ -195,6 +195,7 @@
 #define JOB_STEWARD "Steward"
 #define JOB_COURT_PHYSICIAN "Court Physician"
 #define JOB_COURT_AGENT "Court Agent"
+#define JOB_ARCHIVIST "Archivist"
 #define JOB_BUTLER "Butler"
 
 #define JOB_MINOR_NOBLE "Noble"
@@ -233,10 +234,20 @@
 #define JOB_SHOPHAND "Shophand"
 #define JOB_STEVEDORE "Stevedore"
 
+#define JOB_INNKEEP "Innkeep"
+#define JOB_COOK "Cook"
+#define JOB_SOILSON "Soilson"
+#define JOB_BUTCHER "Butcher"
+#define JOB_MATRON "Matron"
+#define JOB_ARTIFICER "Artificer"
+#define JOB_TAILOR "Tailor"
+#define JOB_ALCHEMIST "Alchemist"
+#define JOB_BLACKSMITH "Blacksmith"
+
 #define JOB_MAGIC_APP "Magician Apprentice"
 #define JOB_CLINIC_APP "Clinic Apprentice"
 #define JOB_SMITHY_APP "Smithy Apprentice"
-#define JOB_INKEEP_SON "Innkeepers Son"
+#define JOB_INNKEEP_SON "Innkeepers Son"
 #define JOB_SQUIRE "Squire"
 
 #define JOB_ORPHAN "Orphan"

@@ -19,7 +19,7 @@
 /datum/job/advclass/combat/dredge/proc/roll_vars()
 	armortype = pickweight(list("Warrior" = 4, "Splint" = 4, "HeavyG" = 4, "Hide" = 3, "Jacket" = 3, "Sailor" = 3, "Peon" = 3, "Ironplate" = 2, "Freak" = 3, "Psy" = 2, "Destitute" = 2, "Berserker" = 2, "Copper" = 1, "Noble" = 1, "BKnight" = 1)) // Armor / Armortype roll. It varies heavily. The more gimmicky / best stuff is generally the rarest
 	weapontype = pickweight(list("Axe" = 4, "BigAxe" = 3, "Mace" = 4, "Mage" = 1, "Shield" = 2, "BigMace" = 3, "Spear" = 3, "Messer" = 3, "LSword" = 3, "GSword" = 1, "Shovel" = 3, "Scythe" = 2, "Cutlass" = 3, "Falx" = 3, "Rapier" = 2, "Sword" = 4, "Sword2" = 3, "Flail" = 2, "Bow" = 1, "Fist" = 2, "Daggers" = 3, "MFlail" = 3, "Gun" = 1,)) // Weapon roll
-	randomjob = pickweight (list("Farmer" = 3, "Sailor" = 2, "Pickpocket" = 2, "Smith" = 2, JOB_FISHER = 3, "Doctor" = 2, "Steppes" = 2, "Smart" = 1, "Grappler" = 1, "Lumber" = 2, "Guard" = 2, "Bard" = 2, "Paranoiac" = 1, "Alch" = 2, "Torturer" = 1,)) // 'Job' roll, gives small skill benefits
+	randomjob = pickweight (list("Farmer" = 3, "Sailor" = 2, "Pickpocket" = 2, "Smith" = 2, "Fisher" = 3, "Doctor" = 2, "Steppes" = 2, "Smart" = 1, "Grappler" = 1, "Lumber" = 2, "Guard" = 2, "Bard" = 2, "Paranoiac" = 1, "Alch" = 2, "Torturer" = 1,)) // 'Job' roll, gives small skill benefits
 	randomperk = pickweight (list("Fat" = 3, "Normal" = 3, "Smartish" = 3, "Speedy" = 3, "Lucky" = 3, "Abyssor" = 2, "Packrat" = 2, "Strong" = 1, "Zizo" = 2, "Atheist" = 1, "Graggar" = 1, "Stupid" = 1, "Lockpicks" = 2, "Traps" = 2, "Ring" = 2, "Knives" = 2, "Heel" = 1, "Meek" = 2, "Invisible" = 2, "Zigs" = 2, "Ozium" = 2, "Bomb" = 1,)) // A random trait or a couple of items
 	randomtarot = pickweight (list("TFool" = 2, "TMagician" = 2, "THP" = 2, "TEmpress" = 2, "TEmperor" = 2, "THiero" = 2, "TLovers" = 2, "TChariot" = 2, "TStrength" = 2, "THermit" = 2, "JUSTICE" = 2, "THang" = 2, "TDeath" = 2, "TTemperance" = 2, "TDevil" = 2, "TTower" = 2, "TStar" = 2, "TMoon" = 2, "TSun" = 2, "TJudge" = 2, "TWorld" = 2,))
 
@@ -444,7 +444,7 @@
 			to_chat(spawned,span_info("\
 			I'm a natural in the kitchen!")
 			)
-		if(JOB_FISHER)
+		if("Fisher")
 			spawned.adjust_skillrank(/datum/attribute/skill/labor/fishing, 2, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/swimming, 1, TRUE)
 			spawned.change_stat(STAT_PERCEPTION, 2)

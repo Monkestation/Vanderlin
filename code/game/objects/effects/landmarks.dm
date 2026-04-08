@@ -209,44 +209,44 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_SHOPHAND)
 
 /obj/effect/landmark/start/innkeep
-	name = "Innkeep"
-	jobs_to_spawn = list("Innkeep")
+	name = JOB_INNKEEP
+	jobs_to_spawn = list(JOB_INNKEEP)
 
 /obj/effect/landmark/start/archivist
-	name = "Archivist"
-	jobs_to_spawn = list("Archivist")
+	name = JOB_ARCHIVIST
+	jobs_to_spawn = list(JOB_ARCHIVIST)
 
 /obj/effect/landmark/start/blacksmith
-	name = "Blacksmith"
-	jobs_to_spawn = list("Blacksmith")
+	name = JOB_BLACKSMITH
+	jobs_to_spawn = list(JOB_BLACKSMITH)
 
 /obj/effect/landmark/start/tailor
-	name = "Tailor"
-	jobs_to_spawn = list("Tailor")
+	name = JOB_TAILOR
+	jobs_to_spawn = list(JOB_TAILOR)
 
 /obj/effect/landmark/start/alchemist
-	name = "Alchemist"
-	jobs_to_spawn = list("Alchemist")
+	name = JOB_ALCHEMIST
+	jobs_to_spawn = list(JOB_ALCHEMIST)
 
 /obj/effect/landmark/start/artificer
-	name = "Artificer"
-	jobs_to_spawn = list("Artificer")
+	name = JOB_ARTIFICER
+	jobs_to_spawn = list(JOB_ARTIFICER)
 
 /obj/effect/landmark/start/matron
-	name = "Matron"
-	jobs_to_spawn = list("Matron")
+	name = JOB_MATRON
+	jobs_to_spawn = list(JOB_MATRON)
 
 /obj/effect/landmark/start/farmer
-	name = "Soilson"
-	jobs_to_spawn = list("Soilson")
+	name = JOB_SOILSON
+	jobs_to_spawn = list(JOB_SOILSON)
 
 /obj/effect/landmark/start/beastmonger
-	name = "Butcher"
-	jobs_to_spawn = list("Butcher")
+	name = JOB_BUTCHER
+	jobs_to_spawn = list(JOB_BUTCHER)
 
 /obj/effect/landmark/start/cook
-	name = "Cook"
-	jobs_to_spawn = list("Cook")
+	name = JOB_COOK
+	jobs_to_spawn = list(JOB_COOK)
 
 /obj/effect/landmark/start/gravedigger
 	name = JOB_GRAVETENDER
@@ -387,8 +387,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_SMITHY_APP)
 
 /obj/effect/landmark/start/innkeep_son
-	name = JOB_INKEEP_SON
-	jobs_to_spawn = list(JOB_INKEEP_SON)
+	name = JOB_INNKEEP_SON
+	jobs_to_spawn = list(JOB_INNKEEP_SON)
 
 /obj/effect/landmark/start/clinicapprentice
 	name = JOB_CLINIC_APP
