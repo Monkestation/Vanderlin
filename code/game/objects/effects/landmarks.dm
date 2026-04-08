@@ -430,7 +430,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/bandit/Initialize()
 	. = ..()
 	GLOB.bandit_starts += loc
-	GLOB.roundstart_landmarks += loc
+	GLOB.roundstart_landmarks += src
 
 /obj/effect/landmark/start/lich
 	name = "Lich"
