@@ -3159,7 +3159,7 @@
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "cCe" = (
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/bath)
 "cCo" = (

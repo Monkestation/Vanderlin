@@ -163,7 +163,7 @@
 		if(HL.mind)
 			if(is_lord_job(HL.mind.assigned_role) || is_consort_job(HL.mind.assigned_role))
 				HL.mind.set_assigned_role(SSjob.GetJobType(/datum/job/villager))
-		if(HL.job == "Monarch")
+		if(HL.job == JOB_MONARCH)
 			HL.job = "Ex-Monarch"
 			lord_job?.remove_spells(HL)
 			HL.honorary = "Former [lord_job.honorary]"
@@ -175,7 +175,7 @@
 	coronated.mind.set_assigned_role(/datum/job/lord)
 	lord_job?.assign_honorary_titles(coronated)
 	lord_job?.get_informed_title(coronated, FALSE, TRUE, new_monarch_title)
-	coronated.job = "Monarch"
+	coronated.job = JOB_MONARCH
 	lord_job?.add_spells(coronated)
 	SSticker.rulermob = coronated
 	GLOB.badomens -= OMEN_NOLORD

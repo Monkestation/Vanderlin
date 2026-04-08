@@ -89,8 +89,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Towner")
 
 /obj/effect/landmark/start/lord
-	name = "Monarch"
-	jobs_to_spawn = list("Monarch")
+	name = JOB_MONARCH
+	jobs_to_spawn = list(JOB_MONARCH)
 
 /obj/effect/landmark/start/captain
 	name = "Captain"
@@ -105,8 +105,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_COURT_MAGE)
 
 /obj/effect/landmark/start/courtphys
-	name = "Court Physician"
-	jobs_to_spawn = list("Court Physician")
+	name = JOB_COURT_PHYSICIAN
+	jobs_to_spawn = list(JOB_COURT_PHYSICIAN)
 
 /obj/effect/landmark/start/guardsman
 	name = "City Watchmen"
@@ -123,10 +123,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/tombwarden
 	name = "Veteran"
 	jobs_to_spawn = list("Veteran")
-
-/obj/effect/landmark/start/jailor
-	name = "Jailor"
-	jobs_to_spawn = list("Jailor")
 
 /obj/effect/landmark/start/dungeoneer
 	name = "Dungeoneer"
@@ -200,21 +196,21 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Adept"
 	jobs_to_spawn = list("Adept")
 
-/obj/effect/landmark/start/nightman
-	name = "Apothecary"
-	jobs_to_spawn = list("Apothecary")
+/obj/effect/landmark/start/apothecary
+	name = JOB_APOTHECARY
+	jobs_to_spawn = list(JOB_APOTHECARY)
 
 /obj/effect/landmark/start/merchant
-	name = "Merchant"
-	jobs_to_spawn = list("Merchant")
+	name = JOB_MERCHANT
+	jobs_to_spawn = list(JOB_MERCHANT)
 
 /obj/effect/landmark/start/grabber
-	name = "Stevedore"
-	jobs_to_spawn = list("Stevedore")
+	name = JOB_STEVEDORE
+	jobs_to_spawn = list(JOB_STEVEDORE)
 
 /obj/effect/landmark/start/shophand
-	name = "Shophand"
-	jobs_to_spawn = list("Shophand")
+	name = JOB_SHOPHAND
+	jobs_to_spawn = list(JOB_SHOPHAND)
 
 /obj/effect/landmark/start/innkeep
 	name = "Innkeep"

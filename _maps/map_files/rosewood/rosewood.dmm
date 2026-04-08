@@ -5549,7 +5549,7 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/town/basement)
 "cGd" = (
-/obj/effect/landmark/start/nightman{
+/obj/effect/landmark/start/apothecary{
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
@@ -16152,7 +16152,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors)
 "hNW" = (
-/obj/effect/landmark/start/nightman{
+/obj/effect/landmark/start/apothecary{
 	dir = 4
 	},
 /turf/open/floor/dirt,

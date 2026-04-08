@@ -215,7 +215,12 @@
 #define JOB_FISHER "Fisher"
 
 #define JOB_FELDSHER "Feldsher"
+#define JOB_APOTHECARY "Apothecary"
 #define JOB_TOMB_WARDEN "Tomb Warden"
+
+#define JOB_MERCHANT "Merchant"
+#define JOB_SHOPHAND "Shophand"
+#define JOB_STEVEDORE "Stevedore"
 
 #define JOB_MAGIC_APP "Magician Apprentice"
 #define JOB_CLINIC_APP "Clinic Apprentice"

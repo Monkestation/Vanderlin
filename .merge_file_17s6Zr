@@ -52887,7 +52887,7 @@
 "yge" = (
 /obj/item/bedsheet/wool,
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
 "ygh" = (

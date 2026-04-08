@@ -29,13 +29,13 @@
 	name = "the merchant's catatoma."
 	targetitem = /obj/item/book/secret/ledger
 	difficulty = 2
-	excludefromjob = list("Merchant")
+	excludefromjob = list(JOB_MERCHANT)
 
 /datum/objective_item/steal/rogue/mkey
 	name = "the master key."
 	targetitem = /obj/item/key/lord
 	difficulty = 3
-	excludefromjob = list("Monarch", "Knight")
+	excludefromjob = list(JOB_MONARCH, "Knight")
 
 /datum/objective_item/steal/rogue/spices
 	name = "a pepper mill."
@@ -47,4 +47,4 @@
 	name = "the Lord's crown."
 	targetitem = /obj/item/clothing/head/crown/serpcrown
 	difficulty = 3
-	excludefromjob = list("Monarch", "Knight")
+	excludefromjob = list(JOB_MONARCH, "Knight")

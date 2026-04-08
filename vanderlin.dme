@@ -2995,7 +2995,6 @@
 #include "code\modules\jobs\job_types\garrison\forestwarden.dm"
 #include "code\modules\jobs\job_types\garrison\garrisonguard.dm"
 #include "code\modules\jobs\job_types\garrison\gatemaster.dm"
-#include "code\modules\jobs\job_types\garrison\jailor.dm"
 #include "code\modules\jobs\job_types\garrison\men_at_arms.dm"
 #include "code\modules\jobs\job_types\garrison\royal_knight.dm"
 #include "code\modules\jobs\job_types\garrison\town_elder.dm"

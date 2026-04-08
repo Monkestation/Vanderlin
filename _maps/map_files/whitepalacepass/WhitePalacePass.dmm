@@ -34303,7 +34303,7 @@
 "vXn" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clinic_large/apothecary)
 "vXw" = (
