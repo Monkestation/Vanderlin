@@ -36,7 +36,7 @@
 	)
 
 /datum/outfit/longbeard
-	name = "Longbeard (Folkhero)"
+	name = "Longbeard"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/mace/goden/steel/warhammer
 	beltl = /obj/item/storage/belt/pouch/coins/mid

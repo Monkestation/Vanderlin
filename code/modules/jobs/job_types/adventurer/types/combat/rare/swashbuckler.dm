@@ -43,7 +43,7 @@
 	)
 
 /datum/outfit/swashbuckler
-	name = "Swashbuckler (Folkhero)"
+	name = "Swashbuckler"
 	head = /obj/item/clothing/head/helmet/leather/tricorn
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather
@@ -59,6 +59,6 @@
 	shoes = /obj/item/clothing/shoes/boots
 	neck = /obj/item/clothing/neck/psycross/pearl
 
-/datum/outfit/folkhero/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/sailor, /obj/item/clothing/shirt/undershirt/sailor/red)
