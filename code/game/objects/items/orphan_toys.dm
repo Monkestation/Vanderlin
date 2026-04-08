@@ -8,6 +8,7 @@
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	resistance_flags = FLAMMABLE
 	abstract_type = /obj/item/orphan_toy
+	item_weight = 100 GRAMS
 
 /obj/item/orphan_toy/knight
 	name = "toy knight"

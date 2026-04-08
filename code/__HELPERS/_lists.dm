@@ -323,13 +323,12 @@ if (length(L) < I) { \
 		list.len = 0
 	return
 
-//Removes any null entries from the list
-//Returns TRUE if the list had nulls, FALSE otherwise
-/proc/listclearnulls(list/L)
-	var/start_len = L.len
-	var/list/N = new(start_len)
-	L -= N
-	return L.len < start_len
+/**
+ * Removes any null entries from the list
+ * Returns TRUE if the list had nulls, FALSE otherwise
+**/
+/proc/list_clear_nulls(list/list_to_clear)
+	return (list_to_clear.RemoveAll(null) > 0)
 
 /*
  * Returns list containing all the entries from first list that are not present in second.
@@ -505,13 +504,13 @@ if (length(L) < I) { \
 		L.Swap(i,rand(i,L.len))
 
 //Return a list with no duplicate entries
-/proc/uniqueList(list/L)
+/proc/unique_list(list/L)
 	. = list()
 	for(var/i in L)
 		. |= i
 
 //same, but returns nothing and acts on list in place (also handles associated values properly)
-/proc/uniqueList_inplace(list/L)
+/proc/unique_list_inplace(list/L)
 	var/temp = L.Copy()
 	L.len = 0
 	for(var/key in temp)

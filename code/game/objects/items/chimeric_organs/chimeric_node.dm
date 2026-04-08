@@ -5,6 +5,7 @@ GLOBAL_LIST_EMPTY(active_chimeric_surgeries)
 	desc = "A preserved piece of flesh containing a humor. It pulses with unnatural life."
 	icon = 'icons/obj/chimeric_nodes.dmi'
 	icon_state = "capillary"
+	item_weight = 125 GRAMS
 	var/datum/chimeric_node/stored_node
 	grid_height = 64
 	grid_width = 32

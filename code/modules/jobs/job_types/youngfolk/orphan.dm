@@ -17,6 +17,10 @@
 	advclass_cat_rolls = list(CTAG_ORPHAN = 5)
 	outfit = /datum/outfit/orphan
 
+	spells = list(
+		/datum/action/cooldown/spell/undirected/call_for_hag,
+	)
+
 	traits = list(
 		TRAIT_ORPHAN,
 	)

@@ -6,6 +6,7 @@
 	throwforce = 0
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 16 GRAMS
 
 /obj/item/natural/poo/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()

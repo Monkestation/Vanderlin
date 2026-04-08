@@ -5,6 +5,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_hoods.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 450 GRAMS
 
 /obj/item/clothing/head/roguehood/nochood
 	name = "moon hood"
@@ -27,18 +28,21 @@
 
 	armor = ARMOR_WEAK
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/deathshroud
 	name = "death shroud"
 	desc = "Worn by the faithful of Necra, or less savory individuals."
 	icon_state = "necrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/pestra
 	name = "naga hood"
 	desc = "Worn by the faithful of Pestra. Resembling the face of the Naga clothed in rot."
 	icon_state = "pestrahood"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/padded/abyssor
 	name = "sea hood"
@@ -47,6 +51,7 @@
 	icon = 'icons/roguetown/clothing/patron_hoods.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/patron_robes.dmi'
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/eora
 	name = "opera hood"
@@ -142,6 +147,7 @@
 	dynamic_hair_suffix = ""
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	resistance_flags = FIRE_PROOF
+	item_weight = 135 GRAMS
 
 /obj/item/clothing/head/priestmask/pickup(mob/living/user)
 	if((user.job != "Priest") && (user.job != "Priestess"))

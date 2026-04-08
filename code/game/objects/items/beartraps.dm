@@ -11,6 +11,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slowdown = 7
 	breakouttime = 10 SECONDS
+	item_weight = 400 GRAMS
 
 /obj/item/restraints/legcuffs/beartrap
 	icon = 'icons/roguetown/items/misc.dmi'
@@ -28,6 +29,7 @@
 	max_integrity = 100
 	grid_width = 64
 	grid_height = 64
+	item_weight = 3 KILOGRAMS
 
 /obj/item/restraints/legcuffs/beartrap/attack_hand(mob/user)
 	var/boon = user?.get_learning_boon(/datum/attribute/skill/craft/traps)
@@ -202,6 +204,7 @@
 	trap_damage = 80 //10 less damage than the actual metal beartrap
 	name = "makeshift mantrap"
 	melting_material = null
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/restraints/legcuffs/beartrap/hunting_snare
 	name = "hunting snare"
@@ -210,6 +213,7 @@
 	anchored = TRUE
 	melting_material = null
 	makeshift_prob = 50 // Precaution, no manually setting it up
+	item_weight = 300 GRAMS
 
 /obj/item/restraints/legcuffs/beartrap/hunting_snare/suicide_act(mob/user)
 	return

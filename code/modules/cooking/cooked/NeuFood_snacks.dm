@@ -20,6 +20,7 @@
 	nutrition = COOKED_MEAT_NUTRITION
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak_tatos
 	name = "frysteak and potato"
@@ -38,6 +39,7 @@
 	bitesize = 4
 	nutrition = COOKED_MEAT_NUTRITION + COOKED_VEGGIE_NUTRITION + 1
 	foodtype = MEAT | VEGETABLES
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak_onion
 	name = "frysteak and onions"
@@ -56,6 +58,7 @@
 	bitesize = 5
 	nutrition = COOKED_MEAT_NUTRITION + COOKED_VEGGIE_NUTRITION + 1
 	foodtype = MEAT | VEGETABLES
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/frysteak/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(user.mind)
@@ -104,6 +107,7 @@
 	faretype = FARE_NEUTRAL
 	nutrition = COOKED_MEAT_NUTRITION + COOKED_VEGGIE_NUTRITION
 	foodtype = MEAT | VEGETABLES
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/herbsteak/update_overlays()
 	. = ..()
@@ -125,6 +129,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
 	list_reagents = list(/datum/reagent/drowsbane = 10)
+	item_weight = 300 GRAMS
 
 /*	.............   Ribs   ................ */
 
@@ -145,6 +150,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = MEAT
 	tastes = list("supple cooked meat" = 1)
+	item_weight = 500 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/rib
 	name = "rib"
@@ -158,6 +164,7 @@
 	nutrition = COOKED_MEAT_NUTRITION/6
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/ribrack/honey
 	name = "glazed rib rack"
@@ -170,6 +177,7 @@
 	faretype = FARE_FINE
 	foodtype = MEAT | SUGAR
 	tastes = list("supple cooked meat" = 1, "honey glaze" = 1)
+	item_weight = 520 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/rib/honey
 	name = "glazed rib"
@@ -180,6 +188,7 @@
 	nutrition = (COOKED_MEAT_NUTRITION + HONEY_NUTRITION)/6
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_FINE
+	item_weight = 85 GRAMS //I like the idea of putting 5 grams of glaze on a single rib tbh
 
 /*	.............   Fried egg   ................ */
 /obj/item/reagent_containers/food/snacks/cooked/egg
@@ -191,6 +200,7 @@
 	biting = TRUE
 	nutrition = EGG_NUTRITION*COOK_MOD
 	foodtype = EGG
+	item_weight = 50 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/twin_egg
 	tastes = list("fried egg" = 1)
@@ -201,6 +211,7 @@
 	biting = TRUE
 	nutrition = EGG_NUTRITION*2*COOK_MOD
 	foodtype = EGG
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/valorian_omlette
 	name = "valorian omelette"
@@ -216,6 +227,7 @@
 	nutrition = (EGG_NUTRITION*2 + CHEESE_NUTRITION)*COOK_MOD
 	foodtype = EGG | DAIRY
 	eat_effect = /datum/status_effect/buff/foodbuff
+	item_weight = 200 GRAMS
 
 /*	.............   Caravaneer's Omelette   ................ */
 /obj/item/reagent_containers/food/snacks/comelette_base
@@ -225,6 +237,7 @@
 	foodtype = EGG | RAW
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_IMPOVERISHED
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/comelette_uncooked
 	name = "uncooked caravaneer's omelette"
@@ -233,6 +246,7 @@
 	foodtype = EGG | VEGETABLES | RAW
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_IMPOVERISHED
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/comelette
 	name = "caraveneer's omelette"
@@ -250,6 +264,7 @@
 	nutrition = (EGG_NUTRITION*2 + VEGGIE_NUTRITION)*COOK_MOD
 	foodtype = EGG | VEGETABLES
 	eat_effect = /datum/status_effect/buff/foodbuff
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/comelette_slice
 	name = "caravaneer's omelette slice"
@@ -264,6 +279,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	foodtype = EGG | VEGETABLES
+	item_weight = 70 GRAMS
 
 /*	.............   Veggie Caravaneer's Omelette   ................ */
 
@@ -335,6 +351,7 @@
 	biting = TRUE
 	nutrition = COOKED_MEAT_NUTRITION
 	foodtype = MEAT
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/frybird_tatos
 	name = "frybird and tatos"
@@ -349,6 +366,7 @@
 	nutrition = (RAWMEAT_NUTRITION + VEGGIE_NUTRITION + 1)*COOK_MOD
 	foodtype = MEAT|VEGETABLES
 	eat_effect = /datum/status_effect/buff/foodbuff
+	item_weight = 400 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/cooked/herbbird
@@ -366,6 +384,7 @@
 	slices_num = 0
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
+	item_weight = 254 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/herbbird/update_overlays()
 	. = ..()
@@ -386,6 +405,7 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/bacon
 	faretype = FARE_FINE
 	nutrition = COOKED_FATTYMEAT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/royal_truffle
 	name = "royal truffles"
@@ -401,6 +421,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
 	nutrition = COOKED_FATTYMEAT_NUTRITION+COOKED_VEGGIE_NUTRITION
+	item_weight = 500 GRAMS
 
 /*	.............   Frything   ................ */
 /obj/item/reagent_containers/food/snacks/cooked/strange
@@ -411,6 +432,7 @@
 	biting = TRUE
 	faretype = FARE_POOR
 	nutrition = COOKED_MEAT_NUTRITION * 0.5
+	item_weight = 200 GRAMS
 
 /*---------------\
 | Sausage snacks |
@@ -427,6 +449,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	biting = TRUE
 	faretype = FARE_NEUTRAL
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage_cabbage
 	name = "wiener on cabbage"
@@ -440,6 +463,7 @@
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage_potato
 	name = "wiener on tato"
@@ -453,6 +477,7 @@
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage_cocaumole
 	name = "wiener with cocaumole"
@@ -465,6 +490,7 @@
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage_onion
 	name = "wiener and onions"
@@ -478,6 +504,7 @@
 	modified = TRUE
 	rotprocess = SHELFLIFE_DECENT
 	bitesize = 5
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage_sticked
 	name = "sausage on a stick"
@@ -491,10 +518,12 @@
 	modified = TRUE
 	portable = TRUE
 	bitesize = 4
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener // wiener meant to be made from beef or maybe mince + bacon, luxury sausage, not implemented yet
 	name = "wiener"
 	nutrition = COOKED_FATTYMEAT_NUTRITION
+	item_weight = 100 GRAMS
 
 /*	.............   Sausages on sticks   ................ */
 /obj/item/reagent_containers/food/snacks/cooked/sausage_sticked
@@ -507,6 +536,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	faretype = FARE_NEUTRAL
 	foodtype = MEAT
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/griddledog_raw
 	name = "uncooked griddledog"
@@ -518,6 +548,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	faretype = FARE_POOR
 	foodtype = GRAIN | MEAT | RAW
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/griddledog
 	name = "griddledog"
@@ -530,6 +561,7 @@
 	faretype = FARE_FINE
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | MEAT
+	item_weight = 150 GRAMS
 
 /*---------------\
 | Cooked veggies |
@@ -548,6 +580,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_POOR
 	portable = FALSE
+	item_weight = 200 GRAMS
 
 
 /*	.............   Baked potato   ................ */
@@ -563,6 +596,7 @@
 	foodtype = VEGETABLES
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_POOR
+	item_weight = 150 GRAMS
 
 /*	.............   Fried onions   ................ */
 /obj/item/reagent_containers/food/snacks/onion_fried
@@ -577,6 +611,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_POOR
 	portable = FALSE
+	item_weight = 100 GRAMS
 
 /*	.............   Fried potato   ................ */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato/fried
@@ -593,6 +628,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	faretype = FARE_NEUTRAL
 	portable = FALSE
+	item_weight = 150 GRAMS
 
 /*	.............   Grilled Sunreed   ................ */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/sunreed_cooked
@@ -606,6 +642,7 @@
 	tastes = list("softened sunreed" = 1)
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_NEUTRAL
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable/sunreed_cooked/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -645,6 +682,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
 	portable = FALSE
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cocaumole/slice
 	name = "cocaumole slice"
@@ -654,6 +692,7 @@
 	slice_batch = FALSE
 	slice_path = null
 	nutrition = COOKED_VEGGIE_NUTRITION/3
+	item_weight = 100 GRAMS
 
 /*	.............   Drowsbane Jam   ................ */
 
@@ -673,6 +712,7 @@
 	faretype = FARE_NEUTRAL
 	portable = FALSE
 	list_reagents = list(/datum/reagent/drowsbane = 10)
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/drowsbanejam/slice
 	name = "drowsbane jam slice"
@@ -681,6 +721,7 @@
 	slices_num = 0
 	slice_batch = FALSE
 	nutrition = COOKED_VEGGIE_NUTRITION/3
+	item_weight = 70 GRAMS
 
 /*	.............   Baked Pompkaun  ................ */
 /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo/cooked
@@ -695,6 +736,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
 	portable = FALSE
+	item_weight = 200 GRAMS
 
 /*-------\
 | Salads |
@@ -714,6 +756,7 @@
 	rotprocess = null
 	faretype = FARE_NEUTRAL
 	portable = FALSE
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/salad/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -774,6 +817,7 @@
 	faretype = FARE_FINE
 	portable = FALSE
 	foodtype = MEAT
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cooked/roastchicken/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/obj/item/reagent_containers/peppermill/mill = I

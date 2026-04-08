@@ -33,7 +33,7 @@
 
 /datum/element/submerged/proc/check_sinking(mob/living/target)
 	SIGNAL_HANDLER
-	if(target.get_encumbrance() >= (HAS_TRAIT(target, TRAIT_GOOD_SWIM) ? 0.4 : 0.3))
+	if(target.encumbrance >= (HAS_TRAIT(target, TRAIT_GOOD_SWIM) ? ENCUMBRANCE_HEAVY : ENCUMBRANCE_MEDIUM))
 		ADD_TRAIT(target, TRAIT_SINKING, ELEMENT_TRAIT(type))
 		handle_swim(target, FALSE)
 		handle_sinking(target)

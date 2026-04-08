@@ -15,6 +15,7 @@
 	var/cocked = FALSE
 	cartridge_wording = "dart"
 	fire_sound = 'sound/combat/Ranged/blowgun_shot.ogg'
+	item_weight = 200 GRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun/getonmobprop(tag)
 	. = ..()

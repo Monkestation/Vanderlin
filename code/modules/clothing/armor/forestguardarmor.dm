@@ -60,6 +60,7 @@
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	icon_state = "wardenhelm"
+	item_weight = 3.25 KILOGRAMS
 
 /obj/item/clothing/head/helmet/medium
 	abstract_type = /obj/item/clothing/head/helmet/medium
@@ -83,6 +84,7 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_volf"
+	item_weight = 1.45 KILOGRAMS
 
 /obj/item/clothing/head/helmet/medium/decorated/skullmet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -106,3 +108,4 @@
 	icon = 'icons/roguetown/clothing/special/forest_guard.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	icon_state = "skullmet_ruffian"
+	item_weight = 1.45 KILOGRAMS

@@ -23,6 +23,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW
 	tastes = list("dough" = 1)
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dough
 	name = "dough"
@@ -41,6 +42,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW
 	tastes = list("dough" = 1)
+	item_weight = 300 GRAMS
 
 /*	.................   Smalldough   ................... */
 /obj/item/reagent_containers/food/snacks/dough_slice
@@ -55,6 +57,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW
 	tastes = list("dough" = 1)
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -90,6 +93,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW
 	tastes = list("dough" = 1)
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dough_flat/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -135,6 +139,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY
 	tastes = list("buttery dough" = 1)
+	item_weight = 350 GRAMS
 
 
 /*	.................   Butterdough piece   ................... */
@@ -152,6 +157,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY
 	tastes = list("buttery dough" = 1)
+	item_weight = 175 GRAMS
 
 /obj/item/reagent_containers/food/snacks/butterdough_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -204,6 +210,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW
 	tastes = list("dough" = 1)
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/hardtack
 	name = "hardtack"
@@ -218,6 +225,7 @@
 	rotprocess = 0
 	foodtype = GRAIN
 	tastes = list("spelt" = 1)
+	item_weight = 100 GRAMS
 
 /*	.................   Piedough   ................... */
 /obj/item/reagent_containers/food/snacks/piedough
@@ -233,6 +241,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY
 	tastes = list("buttery dough" = 1)
+	item_weight = 175 GRAMS
 
 /*----------------\
 | Sliceable bread |
@@ -260,6 +269,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN
 	tastes = list("bread" = 1)
+	item_weight = 500 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/slice(obj/item/W, mob/user)
 	. = ..()
@@ -288,6 +298,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN
 	tastes = list("bread" = 1)
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/breadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -343,6 +354,7 @@
 	nutrition = BREADSLICE_NUTRITION * COOK_MOD
 	faretype = FARE_NEUTRAL
 	tastes = list("bread" = 1)
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/stale_bread
 	name = "stale bread"
@@ -358,6 +370,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	foodtype = GRAIN
 	tastes = list("stale bread" = 1)
+	item_weight = 500 GRAMS
 
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin
 	icon_state = "raisinbread6"
@@ -382,6 +395,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | FRUIT
 	tastes = list("dough" = 1, "dried fruit" = 1)
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/raisin
 	name = "raisin loaf"
@@ -431,6 +445,7 @@
 	rotprocess = null
 	foodtype = GRAIN | DAIRY
 	tastes = list("chewy butterdough" = 1)
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bookbreadslice
 	name = "sliced bookbread"
@@ -443,6 +458,7 @@
 	rotprocess = null
 	foodtype = GRAIN | DAIRY
 	tastes = list("chewy butterdough" = 1)
+	item_weight = 90 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bookbreadslice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -490,6 +506,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT
 	tastes = list("chewy butterdough" = 1, "dried raspberries" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bookbreadslice/raspberry
 	name = "sliced raspberry bookbread"
@@ -514,6 +531,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "raisins" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry
 	name = "raisin bookbread"
@@ -560,6 +578,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "dried blackberries" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/blackberry
 	name = "blackberry bookbread"
@@ -596,6 +615,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "dried pears" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/pear
 	name = "pear bookbread"
@@ -632,6 +652,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "dried tangerines" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/tangerine
 	name = "tangerine bookbread"
@@ -668,6 +689,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "dried plums" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/plum
 	name = "plum bookbread"
@@ -704,6 +726,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | FRUIT
 	tastes = list("buttery dough" = 1, "dried lemons" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/lemon
 	name = "lemon bookbread"
@@ -740,6 +763,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | SUGAR
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+	item_weight = 380 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choccy_chip_dough
 	name = "chocolate chip cookie dough"
@@ -756,6 +780,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | SUGAR
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choccy_cookie_raw
 	name = "unbaked chocolate chip cookie"
@@ -769,6 +794,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY | SUGAR
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+	item_weight = 40 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choccy_cookie
 	name = "chocolate chip cookie"
@@ -779,6 +805,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | SUGAR
 	tastes = list("chewy butterdough" = 1, "rich chocolate" = 1)
+	item_weight = 40 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choco_butterdough_slice
 	name = "unbaked chocolate pastry"
@@ -792,6 +819,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choco_bun_raw
 	name = "unbaked chocolate bun"
@@ -805,6 +833,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | RAW | DAIRY
 	tastes = list("buttery dough" = 1, "rich chocolate" = 1)
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choco_bun
 	name = "chocolate bun"
@@ -816,6 +845,7 @@
 	foodtype = GRAIN | DAIRY | SUGAR
 	tastes = list("chewy butterdough" = 1, "rich chocolate" = 1)
 	biting = TRUE
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/choco_pastry
 	name = "chocolate pastry"
@@ -827,6 +857,7 @@
 	foodtype = GRAIN | DAIRY | SUGAR
 	tastes = list("buttery pastry" = 1, "rich chocolate" = 1)
 	biting = TRUE
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/chocolate
 	name = "chocolate bookbread"
@@ -867,6 +898,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN | RAW
 	tastes = list("semi-sweet dough" = 1)
+	item_weight = 280 GRAMS
 
 /obj/item/reagent_containers/food/snacks/masa
 	name = "sunreed dough"
@@ -885,6 +917,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN | RAW
 	tastes = list("semi-sweet dough" = 1)
+	item_weight = 280 GRAMS
 
 /obj/item/reagent_containers/food/snacks/masa_slice
 	name = "sunreed dough piece"
@@ -899,6 +932,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN | RAW
 	tastes = list("semi-sweet dough" = 1)
+	item_weight = 140 GRAMS
 
 /obj/item/reagent_containers/food/snacks/masa_slice/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -935,6 +969,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN | RAW
 	tastes = list("semi-sweet dough" = 1)
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/masa_honey
 	name = "honeyed sunreed dough"
@@ -949,6 +984,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN | RAW | SUGAR
 	tastes = list("semi-sweet dough" = 1, "honey" = 1)
+	item_weight = 280 GRAMS
 
 /*	.................   Sunreed Dough   ................... */
 
@@ -969,6 +1005,7 @@
 	rotprocess = null
 	foodtype = GRAIN
 	tastes = list("semi-sweet bread" = 1)
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/sunreed_bread_slice
 	name = "sunbread cube"
@@ -983,6 +1020,7 @@
 	rotprocess = null
 	foodtype = GRAIN
 	tastes = list("semi-sweet bread" = 1)
+	item_weight = 110 GRAMS
 
 /obj/item/reagent_containers/food/snacks/sunreed_bread/honey
 	name = "honeyed sunbread"
@@ -1021,6 +1059,7 @@
 	rotprocess = SHELFLIFE_LONG
 	foodtype = GRAIN
 	tastes = list("semi-sweet bread" = 1)
+	item_weight = 50 GRAMS
 
 /obj/item/reagent_containers/food/snacks/estrella/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -1064,6 +1103,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	faretype = FARE_IMPOVERISHED
 	dropshrink = 0.8
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/huskbunraw
 	name = "raw huskbun"
@@ -1075,6 +1115,7 @@
 	faretype = FARE_IMPOVERISHED
 	dropshrink = 0.8
 	transfers_tastes = TRUE
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/huskbunraw/meat
 	foodtype = GRAIN | MEAT | RAW
@@ -1105,6 +1146,7 @@
 	tastes = list("crumbly sunreed dough" = 1)
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/huskbun/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -1147,6 +1189,7 @@
 	faretype = FARE_POOR
 	dropshrink = 0.8
 	transfers_tastes = TRUE
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/saigaita/meat
 	foodtype = GRAIN | MEAT
@@ -1182,6 +1225,7 @@
 	tastes = list("semi-sweet bread" = 1)
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/saigaita_cooked/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -1226,6 +1270,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | EGG | RAW
 	nutrition = CAKEBASE_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/eighthscake_unbaked/lemon
 	name = "unbaked lemon eighthscake"
@@ -1257,6 +1302,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | JUNKFOOD | EGG
 	nutrition = (CAKEBASE_NUTRITION) * COOK_MOD
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/eighthscake/lemon
 	name = "lemon eighthscake"
@@ -1290,6 +1336,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | JUNKFOOD | EGG
 	nutrition = ((CAKEBASE_NUTRITION) * COOK_MOD)/8
+	item_weight = 50 GRAMS
 
 /obj/item/reagent_containers/food/snacks/eighthscake_slice/lemon
 	name = "lemon eighthscake slice"
@@ -1320,6 +1367,7 @@
 	tastes = list("crunchy sunreed dough" = 1)
 	dropshrink = 0.8
 	faretype = FARE_POOR
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tostada/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
@@ -1349,6 +1397,7 @@
 	tastes = list("crunchy sunreed dough" = 1, "warm steak" = 1)
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tostada_meat/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(modified || !is_type_in_list(I, list(
@@ -1419,6 +1468,7 @@
 	faretype = FARE_POOR
 	var/amount = 5
 	var/stacktype = /obj/item/reagent_containers/food/snacks/chip
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chippile/attack_hand_secondary(mob/user, list/modifiers) //Plundered bundle code shhhh
 	. = ..()
@@ -1489,6 +1539,7 @@
 	tastes = list("crunchy sunreed dough" = 1)
 	dropshrink = 0.8
 	faretype = FARE_POOR
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chip_cocaumole
 	name = "cocaumole dipped sun-cracker"
@@ -1499,6 +1550,7 @@
 	tastes = list("crunchy sunreed dough" = 1, "savory goo" = 1)
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chip_drowsbane
 	name = "drowsbane dipped sun-cracker"
@@ -1510,6 +1562,7 @@
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
 	list_reagents = list(/datum/reagent/drowsbane = 2)
+	item_weight = 30 GRAMS
 
 /*-----------\
 | Bread buns |
@@ -1529,6 +1582,7 @@
 	faretype = FARE_POOR
 	foodtype = GRAIN
 	tastes = list("bread" = 1)
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
@@ -1543,6 +1597,7 @@
 	foodtype = GRAIN | MEAT
 	faretype = FARE_NEUTRAL
 	tastes = list("savory sausage" = 1, "bread" = 1)
+	item_weight = 180 GRAMS
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
 	name = "grenzelbun with cocaumole"
@@ -1556,6 +1611,7 @@
 	foodtype = GRAIN | MEAT | VEGETABLES
 	faretype = FARE_FINE
 	tastes = list("savory sausage" = 1, "bread" = 1, "savory goo" = 1)
+	item_weight = 180 GRAMS
 
 /*	.................   Cheese bun   ................... */
 /obj/item/reagent_containers/food/snacks/foodbase/cheesebun_raw
@@ -1569,6 +1625,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | DAIRY | RAW
 	faretype = FARE_POOR
+	item_weight = 130 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/cheesebun
@@ -1584,6 +1641,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | DAIRY
 	faretype = FARE_FINE
+	item_weight = 130 GRAMS
 
 /*	.................   Xylix Bun   ................... */
 /obj/item/reagent_containers/food/snacks/foodbase/xylixbun_raw
@@ -1598,6 +1656,7 @@
 	foodtype = GRAIN | DAIRY | RAW
 	faretype = FARE_IMPOVERISHED
 	list_reagents = list(/datum/reagent/drowsbane = 5)
+	item_weight = 120 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/xylixbun
@@ -1612,6 +1671,7 @@
 	foodtype = GRAIN | DAIRY
 	faretype = FARE_POOR
 	list_reagents = list(/datum/reagent/drowsbane = 20) //Sublethal levels.
+	item_weight = 120 GRAMS
 
 /*---------\
 | Pastries |
@@ -1629,6 +1689,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	foodtype = GRAIN | DAIRY
 	faretype = FARE_NEUTRAL
+	item_weight = 100 GRAMS
 
 /*	.................   Pastry   ................... */
 /obj/item/reagent_containers/food/snacks/pastry
@@ -1643,6 +1704,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	foodtype = GRAIN | DAIRY
 	faretype = FARE_NEUTRAL
+	item_weight = 80 GRAMS
 
 /*	.................   Raisin Biscuit   ................... */
 /obj/item/reagent_containers/food/snacks/foodbase/biscuit_raw
@@ -1652,6 +1714,7 @@
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + RAISIN_NUTRITION
 	foodtype = GRAIN | DAIRY | FRUIT | RAW
 	faretype = FARE_IMPOVERISHED
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/biscuit_raw/good
 
@@ -1666,6 +1729,7 @@
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + RAISIN_NUTRITION) * COOK_MOD * DRIED_MOD
 	rotprocess = SHELFLIFE_EXTREME
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/biscuit/good
 	eat_effect = /datum/status_effect/buff/foodbuff
@@ -1702,6 +1766,7 @@
 	nutrition = BUTTERDOUGH_NUTRITION * COOK_MOD
 	tastes = list("crispy butterdough" = 1)
 	faretype = FARE_NEUTRAL
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/prezzel/good
 	name = "prezzel"
@@ -1722,6 +1787,7 @@
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION
 	foodtype = GRAIN | DAIRY | RAW | FRUIT
 	faretype = FARE_IMPOVERISHED
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/fritter_raw/good
 
@@ -1734,6 +1800,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | JUNKFOOD
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/fritter/good
 	name = "apple fritter"
@@ -1760,6 +1827,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | EGG | RAW
 	nutrition = CAKEBASE_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chescake
 	name = "cheesecake base"
@@ -1772,6 +1840,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | EGG | RAW
 	nutrition = CAKEBASE_NUTRITION + RAISIN_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/zybcake
 	name = "zaladin cake base"
@@ -1783,6 +1852,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION
+	item_weight = 400 GRAMS
 
 // -------------- SPIDER-HONEY CAKE (Zaladin) -----------------
 /obj/item/reagent_containers/food/snacks/zybcake_ready
@@ -1797,6 +1867,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION + HONEY_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/zybcake_cooked
 	name = "zalad cake"
@@ -1815,6 +1886,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | SUGAR | DAIRY | JUNKFOOD | EGG
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + HONEY_NUTRITION) * COOK_MOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/zybcake_slice
 	name = "zalad cake slice"
@@ -1831,6 +1903,7 @@
 	nutrition = ((CAKEBASE_NUTRITION + FRUIT_NUTRITION + HONEY_NUTRITION) * COOK_MOD) * SLICED_MOD
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_LAVISH
+	item_weight = 100 GRAMS
 
 // -------------- CHEESECAKE -----------------
 /obj/item/reagent_containers/food/snacks/chescake_ready
@@ -1845,6 +1918,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + RAISIN_NUTRITION + CHEESE_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chescake_ready/poison
 	list_reagents = list(/datum/reagent/berrypoison = 6)
@@ -1865,6 +1939,7 @@
 	rotprocess = SHELFLIFE_EXTREME
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison
 	list_reagents = list(/datum/reagent/berrypoison = 10)
@@ -1884,6 +1959,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheesecake_slice/poison
 	list_reagents = list(/datum/reagent/berrypoison = 1.25)
@@ -1901,6 +1977,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/strawbycake_ready
 	name = "unbaked strawberry cake"
@@ -1913,6 +1990,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG | SUGAR
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/strawbycake_cooked
 	name = "strawberry cake"
@@ -1930,6 +2008,7 @@
 	faretype = FARE_LAVISH
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION) * COOK_MOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/strawbycake_slice
 	name = "strawberry cake slice"
@@ -1944,6 +2023,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = ((CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 100 GRAMS
 
 /*	.................   CRIMSON PINE CAKE   ................... */
 
@@ -1958,6 +2038,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/crimsoncake_ready
 	name = "unbaked crimson pine cake"
@@ -1969,6 +2050,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG | SUGAR
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHOCCY_NUTRITION
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/crimsoncake_cooked
 	name = "crimson pine cake"
@@ -1985,6 +2067,7 @@
 	faretype = FARE_LAVISH
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHOCCY_NUTRITION) * COOK_MOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/crimsoncake_slice
 	name = "crimson pine cake slice"
@@ -1999,6 +2082,7 @@
 	faretype = FARE_LAVISH
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHOCCY_NUTRITION) * COOK_MOD * SLICED_MOD
+	item_weight = 100 GRAMS
 
 /*	.................   TANGERINE CAKE   ................... */
 
@@ -2013,6 +2097,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tangerinecake_ready
 	name = "unbaked scarletharp cake"
@@ -2025,6 +2110,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG | SUGAR
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tangerinecake_cooked
 	name = "scarletharp cake"
@@ -2042,6 +2128,7 @@
 	faretype = FARE_LAVISH
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION) * COOK_MOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tangerinecake_slice
 	name = "scarletharp cake slice"
@@ -2056,6 +2143,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | SUGAR | JUNKFOOD
 	nutrition = ((CAKEBASE_NUTRITION + FRUIT_NUTRITION + SUGAR_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 100 GRAMS
 
 /*	.................   TAMTO SILK CAKE   ................... */
 
@@ -2070,6 +2158,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtocake_ready
 	name = "unbaked tamto silk cake"
@@ -2082,6 +2171,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | FRUIT | RAW | EGG
 	nutrition = CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtocake_cooked
 	name = "tamto silk cake"
@@ -2099,6 +2189,7 @@
 	faretype = FARE_LAVISH
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
 	nutrition = (CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION) * COOK_MOD
+	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtocake_slice
 	name = "tamto silk cake slice"
@@ -2113,6 +2204,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | FRUIT | EGG | JUNKFOOD
 	nutrition = ((CAKEBASE_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 100 GRAMS
 
 /*-------\
 | Scones |
@@ -2128,6 +2220,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | SUGAR
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION
+	item_weight = 70 GRAMS
 
 /obj/item/reagent_containers/food/snacks/scone
 	name = "plain scone"
@@ -2138,6 +2231,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | SUGAR
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION) * COOK_MOD
+	item_weight = 70 GRAMS
 
 
 /*	.................   Tangerine Scone   ................... */
@@ -2150,6 +2244,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | SUGAR | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + FRUIT_NUTRITION
+	item_weight = 70 GRAMS
 
 /obj/item/reagent_containers/food/snacks/scone_tangerine
 	name = "tangerine scone"
@@ -2160,6 +2255,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | SUGAR | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 70 GRAMS
 
 /*	.................   Plum Scone   ................... */
 
@@ -2171,6 +2267,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | SUGAR | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + FRUIT_NUTRITION
+	item_weight = 70 GRAMS
 
 /obj/item/reagent_containers/food/snacks/scone_plum
 	name = "plum scone"
@@ -2181,6 +2278,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | SUGAR | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 70 GRAMS
 
 /*	.................   Chocolate Scone   ................... */
 
@@ -2192,6 +2290,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | SUGAR
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + CHOCCY_NUTRITION
+	item_weight = 70 GRAMS
 
 /obj/item/reagent_containers/food/snacks/scone_choco
 	name = "chocolate scone"
@@ -2202,6 +2301,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | DAIRY | SUGAR
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + SUGAR_NUTRITION + CHOCCY_NUTRITION) * COOK_MOD
+	item_weight = 70 GRAMS
 
 /*-------------\
 | Griddlecakes |
@@ -2217,6 +2317,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | EGG
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake
 	name = "griddlecake"
@@ -2228,6 +2329,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | EGG
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION) * COOK_MOD
+	item_weight = 120 GRAMS
 
 /*	.................   Lemon Griddlecake   ................... */
 
@@ -2239,6 +2341,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | EGG | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + FRUIT_NUTRITION
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake/lemon
 	name = "lemon griddlecake"
@@ -2251,6 +2354,7 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | DAIRY | EGG | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 120 GRAMS
 
 /*	.................   Apple Griddlecake   ................... */
 
@@ -2262,6 +2366,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | EGG | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + FRUIT_NUTRITION
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake/apple
 	name = "apple griddlecake"
@@ -2274,6 +2379,7 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | DAIRY | EGG | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 120 GRAMS
 
 /*	.................   Berry Griddlecake   ................... */
 
@@ -2285,6 +2391,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW | EGG | FRUIT
 	nutrition = BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + RAISIN_NUTRITION
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry
 	name = "jacksberry griddlecake"
@@ -2297,6 +2404,7 @@
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = GRAIN | DAIRY | EGG | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + EGG_NUTRITION + RAISIN_NUTRITION) * COOK_MOD
+	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry/poison
 	list_reagents = list(/datum/reagent/berrypoison = 5)
@@ -2347,6 +2455,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | DAIRY | RAW
 	nutrition = BUTTERDOUGHSLICE_NUTRITION
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/dottart_base/strawberry
 	name = "raw strawberry dot tart"
@@ -2408,6 +2517,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_tangerine
 	name = "tangerine dot tart"
@@ -2419,6 +2529,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_plum
 	name = "plum dot tart"
@@ -2430,6 +2541,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_blackberry
 	name = "blackberry dot tart"
@@ -2441,6 +2553,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_raspberry
 	name = "raspberry dot tart"
@@ -2452,6 +2565,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_lemon
 	name = "lemon dot tart"
@@ -2463,6 +2577,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_lime
 	name = "lime dot tart"
@@ -2474,6 +2589,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /obj/item/reagent_containers/food/snacks/dottart_pear
 	name = "pear dot tart"
@@ -2485,6 +2601,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | DAIRY | FRUIT
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION + FRUIT_NUTRITION) * COOK_MOD
+	item_weight = 60 GRAMS
 
 /*---------------------\
 | Tamto Plates (Pizza) |
@@ -2502,6 +2619,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | RAW
 	nutrition = SMALLDOUGH_NUTRITION + FRUIT_NUTRITION
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished
 	name = "unbaked cheese tamto plate"
@@ -2513,6 +2631,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | RAW | DAIRY
 	nutrition = SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_meat
 	name = "unbaked sausage tamto plate"
@@ -2524,6 +2643,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | RAW | DAIRY | MEAT
 	nutrition = SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + RAWMEAT_NUTRITION
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_fish
 	name = "unbaked fish tamto plate"
@@ -2535,6 +2655,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | RAW | DAIRY | MEAT
 	nutrition = SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + MINCE_NUTRITION
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/tamtoplate_unfinished_onion
 	name = "unbaked onion tamto plate"
@@ -2546,6 +2667,7 @@
 	faretype = FARE_IMPOVERISHED
 	foodtype = GRAIN | FRUIT | RAW | DAIRY | VEGETABLES
 	nutrition = SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + VEGGIE_NUTRITION
+	item_weight = 450 GRAMS
 
 /*	.................   Finished Tamto Plates   ................... */
 
@@ -2565,6 +2687,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | FRUIT | DAIRY
 	nutrition = (SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION) * COOK_MOD
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate/meat
 	name = "sausage tamto plate"
@@ -2575,6 +2698,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | MEAT
 	nutrition = (SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + RAWMEAT_NUTRITION) * COOK_MOD
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate/fish
 	name = "sausage tamto plate"
@@ -2585,6 +2709,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | MEAT
 	nutrition = (SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + MINCE_NUTRITION) * COOK_MOD
+	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate/onion
 	name = "onion tamto plate"
@@ -2595,6 +2720,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | VEGETABLES
 	nutrition = (SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + VEGGIE_NUTRITION) * COOK_MOD
+	item_weight = 450 GRAMS
 
 /*	.................  Tamto Plate Slices   ................... */
 
@@ -2610,6 +2736,7 @@
 	faretype = FARE_NEUTRAL
 	foodtype = GRAIN | FRUIT | DAIRY
 	nutrition = ((SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 75 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate_slice/meat
 	name = "sausage tamto plate slice"
@@ -2619,6 +2746,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | MEAT
 	nutrition = ((SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + RAWMEAT_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 75 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate_slice/fish
 	name = "sausage tamto plate"
@@ -2628,6 +2756,7 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | MEAT
 	nutrition = ((SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + MINCE_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 75 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tamtoplate_slice/onion
 	name = "onion tamto plate slice"
@@ -2637,3 +2766,4 @@
 	faretype = FARE_FINE
 	foodtype = GRAIN | FRUIT | DAIRY | VEGETABLES
 	nutrition = ((SMALLDOUGH_NUTRITION + FRUIT_NUTRITION + CHEESE_NUTRITION + VEGGIE_NUTRITION) * COOK_MOD) * SLICED_MOD
+	item_weight = 75 GRAMS

@@ -111,9 +111,6 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"aw" = (
-/turf/open/water/hotspring,
-/area/outdoors/mountains/decap)
 "ax" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors)
@@ -481,6 +478,11 @@
 /obj/structure/bed/hay,
 /turf/open/floor/cobble/mossy,
 /area/outdoors/mountains/decap)
+"bs" = (
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "bt" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -1131,13 +1133,6 @@
 /obj/structure/rotation_piece/cog,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"eD" = (
-/obj/effect/lily_petal/three,
-/obj/structure/flora/sakura{
-	pixel_y = -13
-	},
-/turf/open/water/hotspring,
-/area/outdoors)
 "eE" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
@@ -1212,7 +1207,7 @@
 /obj/structure/carpet,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep)
-"gp" = (
+"gn" = (
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
 /turf/open/water/hotspring,
@@ -1282,6 +1277,10 @@
 	},
 /turf/closed,
 /area/outdoors)
+"hL" = (
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "hN" = (
 /obj/structure/hotspring/border/two,
 /obj/structure/bridge{
@@ -1308,6 +1307,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"iq" = (
+/obj/effect/lily_petal,
+/turf/open/water/hotspring,
+/area/outdoors)
 "iE" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = 15
@@ -1326,6 +1329,13 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
+"iM" = (
+/obj/effect/lily_petal/three,
+/obj/structure/flora/sakura{
+	pixel_y = -13
+	},
+/turf/open/water/hotspring,
+/area/outdoors)
 "iU" = (
 /obj/structure/stairs{
 	dir = 1
@@ -1525,18 +1535,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/mountains/decap)
-"mF" = (
-/obj/effect/lily_petal,
-/obj/effect/lily_petal/three{
-	pixel_y = -14;
-	pixel_x = -2
-	},
-/obj/effect/lily_petal/two{
-	pixel_y = 13;
-	pixel_x = 11
-	},
-/turf/open/water/hotspring,
-/area/outdoors)
 "mL" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/ruinedwood,
@@ -1752,10 +1750,26 @@
 "se" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep)
+"si" = (
+/obj/effect/lily_petal/two,
+/turf/open/water/hotspring,
+/area/outdoors)
 "so" = (
 /obj/structure/carpet,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/keep)
+"sq" = (
+/obj/effect/lily_petal,
+/obj/effect/lily_petal/three{
+	pixel_y = -14;
+	pixel_x = -2
+	},
+/obj/effect/lily_petal/two{
+	pixel_y = 13;
+	pixel_x = 11
+	},
+/turf/open/water/hotspring,
+/area/outdoors)
 "ss" = (
 /turf/open/openspace,
 /area/outdoors)
@@ -1814,10 +1828,6 @@
 	},
 /turf/closed/mineral/random/med,
 /area/outdoors/mountains/decap)
-"tp" = (
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors)
 "tA" = (
 /turf/closed,
 /area/outdoors)
@@ -1926,10 +1936,9 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors)
-"vB" = (
-/obj/effect/lily_petal/two,
+"vt" = (
 /turf/open/water/hotspring,
-/area/outdoors)
+/area/outdoors/mountains/decap)
 "vD" = (
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
@@ -2084,11 +2093,6 @@
 "zk" = (
 /turf/closed/wall/mineral/tent,
 /area/outdoors/mountains/decap)
-"zm" = (
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors)
 "zn" = (
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/cobblerock,
@@ -2313,10 +2317,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep)
-"zZ" = (
-/obj/structure/throne,
-/turf/open/floor/cobble,
-/area/indoors)
 "Ab" = (
 /obj/structure/hotspring/border/thirteen,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -2509,9 +2509,6 @@
 "DW" = (
 /turf/open/floor/wood,
 /area/outdoors)
-"DY" = (
-/turf/open/water/hotspring,
-/area/outdoors)
 "Ek" = (
 /obj/structure/redstone/comparator{
 	dir = 2;
@@ -2549,6 +2546,10 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"Fe" = (
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/cobble,
+/area/indoors)
 "Fj" = (
 /obj/structure/hotspring/border/twelve,
 /obj/effect/lily_petal/three{
@@ -2561,6 +2562,9 @@
 /obj/machinery/anvil,
 /turf/open/floor/cobble,
 /area/indoors)
+"Fu" = (
+/turf/open/water/hotspring,
+/area/outdoors)
 "Fx" = (
 /obj/structure/bridge{
 	layer = 4;
@@ -2837,10 +2841,6 @@
 /obj/effect/landmark/stall,
 /turf/open/floor/dirt,
 /area/indoors)
-"Kd" = (
-/obj/effect/lily_petal,
-/turf/open/water/hotspring,
-/area/outdoors)
 "Ke" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/bridge_stakes{
@@ -2976,6 +2976,15 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Nn" = (
+/obj/structure/throne{
+	name = "Throne of the Gods"
+	},
+/obj/structure/fake_machine/titan{
+	pixel_y = 32
+	},
+/turf/open/floor/cobble,
+/area/indoors)
 "No" = (
 /obj/structure/water_pipe,
 /obj/structure/pressurizer{
@@ -3060,6 +3069,10 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Qu" = (
+/obj/structure/fluff/walldeco/wantedposter/r,
+/turf/open/floor/cobble,
+/area/indoors)
 "QA" = (
 /obj/structure/water_pipe,
 /obj/structure/sprinkler,
@@ -8438,8 +8451,8 @@ yP
 yP
 yP
 yP
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -8695,8 +8708,8 @@ aL
 bv
 QR
 hd
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -8952,8 +8965,8 @@ aL
 aL
 cu
 hd
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -9209,8 +9222,8 @@ ah
 aL
 aL
 hd
-aw
-aw
+vt
+vt
 yP
 yP
 ac
@@ -9466,9 +9479,9 @@ ah
 cV
 cz
 hd
-aw
-aw
-aw
+vt
+vt
+vt
 yP
 ac
 ac
@@ -9724,8 +9737,8 @@ aL
 aL
 An
 zn
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -9981,8 +9994,8 @@ aL
 UY
 cr
 hd
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -10238,8 +10251,8 @@ aL
 bv
 aL
 hd
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -10495,8 +10508,8 @@ cO
 cS
 cz
 hd
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -10752,8 +10765,8 @@ au
 aL
 FX
 YR
-aw
-aw
+vt
+vt
 yP
 ac
 ac
@@ -13300,8 +13313,8 @@ zg
 zg
 at
 qi
-DY
-Kd
+Fu
+iq
 RC
 eq
 jC
@@ -13557,8 +13570,8 @@ vD
 zg
 at
 qi
-DY
-DY
+Fu
+Fu
 SZ
 RF
 Qi
@@ -13814,9 +13827,9 @@ vD
 zg
 at
 qi
-eD
-tp
-tp
+iM
+hL
+hL
 SZ
 RF
 XT
@@ -14071,8 +14084,8 @@ vD
 zg
 at
 qi
-tp
-gp
+hL
+gn
 IW
 SE
 SZ
@@ -14328,8 +14341,8 @@ SK
 zg
 at
 qi
-DY
-zm
+Fu
+bs
 HK
 pD
 Ty
@@ -14337,7 +14350,7 @@ tN
 Ty
 Ty
 zF
-mF
+sq
 cp
 Ty
 Ty
@@ -16403,7 +16416,7 @@ ae
 QN
 ew
 Ko
-vB
+si
 RC
 NF
 NF
@@ -73206,7 +73219,7 @@ ax
 am
 am
 cM
-am
+Fe
 ax
 bu
 am
@@ -73461,7 +73474,7 @@ ac
 ac
 ax
 am
-zZ
+Nn
 am
 am
 am
@@ -73720,7 +73733,7 @@ ax
 am
 am
 lV
-am
+Qu
 ax
 bw
 am

@@ -22,6 +22,7 @@
 	cartridge_wording = "bolt"
 	load_sound = 'sound/foley/nockarrow.ogg'
 	fire_sound = 'sound/combat/Ranged/crossbow-small-shot-02.ogg'
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
 	name = "slurbow"
@@ -35,6 +36,7 @@
 	hasloadedsprite = TRUE
 	movingreload = TRUE
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_HIP
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/getonmobprop(tag)
 	. = ..()

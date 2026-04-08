@@ -94,7 +94,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /datum/ritual/servantry/thecall
 	name = "The Call"
 	center_requirement = /obj/item/bedsheet
-
 	w_req = /obj/item/bodypart/l_leg
 	e_req = /obj/item/bodypart/r_leg
 
@@ -111,14 +110,14 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		if(HL.real_name != paper_name)
 			continue
 		if(HL == SSticker.rulermob)
-			break
+			continue
 		if(HL.mind?.assigned_role.title in GLOB.church_positions)
 			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
-			to_chat(user, span_danger("They are protected..."))
-			break
+			to_chat(user, span_danger("That accursed cross protects them..."))
+			continue
 		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
 			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
-			break
+			continue
 		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
 			to_chat(HL, span_userdanger("I'm so sleepy..."))
 			HL.SetSleeping(5 SECONDS)
@@ -203,34 +202,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!P)
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
-	var/obj/item/weapon/knife/dagger/D = locate() in center.contents
-	if(!D)
-		to_chat(user, span_warning("A dagger is required as a sacrifice."))
-		return
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
 	if(!user.mind || !user.mind.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
 	var/mob/living/carbon/human/target
 	var/assassin_found = FALSE
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		if(HL.stat != DEAD)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
+		if(HL.stat == DEAD)
 			continue
 		if(HL.real_name == paper_name)
 			target = HL
-		else if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
+			continue
+		if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
 			assassin_found = TRUE
 			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
-				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [target.real_name]!\"</span>")
+				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)
 		to_chat(user, span_warning("There has been no answer to your call to the Dark Sun. It seems his servants are far from here..."))
 		return
-	ADD_TRAIT(target, TRAIT_ZIZOID_HUNTED, TRAIT_GENERIC) // Gives the victim a trait to track that they are wanted dead.
-	log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
-	to_chat(target, span_danger("My hair stands on end. Has someone just said my name? I should watch my back."))
-	to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
-	qdel(D)
+	if(!target.get_quirk(/datum/quirk/vice/hunted))
+		target.add_quirk(/datum/quirk/vice/hunted)
+		var/datum/quirk/vice/hunted/quirk = target.get_quirk(/datum/quirk/vice/hunted)
+		quirk.desc = "You have been marked for death. You will be hunted and have assassination attempts made against you without any escalation."
+		quirk.customization_value = "Marked for death by the terrible Zizo."
+		to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
+		to_chat(target, span_warningbig("My hair stands on end. Has someone just said my name? I should watch my back."))
+		log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
+	else
+		to_chat(user, span_warning("Your target is already hunted by the Dark Sun's assassins."))
 	qdel(P)
 	target.playsound_local(target, 'sound/magic/marked.ogg', 100)
 
@@ -314,7 +315,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/obj/item/paper/P = locate() in center.contents
 	if(!P)
 		return
-	var/info = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
+	var/info = strip_html_full(P.info, MAX_NAME_LEN)
 	var/input = browser_input_text(user, "To whom do we send this message?", "ZIZO")
 	if(!input)
 		return

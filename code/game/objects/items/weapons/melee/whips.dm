@@ -28,6 +28,7 @@
 	grid_height = 64
 
 	weapon_special = /datum/special_intent/whip_coil
+	item_weight = 500 GRAMS
 
 /obj/item/weapon/whip/getonmobprop(tag)
 	. = ..()
@@ -50,6 +51,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melt_amount = 75
 	sellprice = 50
+	item_weight = 600 GRAMS
 
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
@@ -63,6 +65,7 @@
 	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
+	item_weight = 550 GRAMS
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
 	. = ..()
@@ -80,6 +83,7 @@
 	max_integrity = INTEGRITY_STRONG * 0.8
 	melt_amount = 100
 	last_used = 0
+	item_weight = 550 GRAMS
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
 	. = ..()
@@ -88,6 +92,7 @@
 /obj/item/weapon/whip/psydon/relic
 	name = "Daybreak"
 	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
+	item_weight = 550 GRAMS
 
 /obj/item/weapon/whip/psydon/relic/Initialize(mapload)
 	. = ..()					// Pre-blessed, +5 force, +100 INT, +2 Def, Silver.
@@ -104,6 +109,7 @@
 	possible_item_intents = list(CANE_LASH)
 	max_integrity = 4 // Striking unarmoured parts doesn't take integrity, four hits to anything with an armor value will break it.
 	sellprice = 0
+	item_weight = 100 GRAMS
 
 /obj/item/weapon/whip/cane/getonmobprop(tag)
 	. = ..()
@@ -144,6 +150,7 @@
 	icon_state = "spiderwhip"
 	force = DAMAGE_WHIP + 3
 	minstr = 6
+	item_weight = 500 GRAMS
 
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
@@ -159,6 +166,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/iron
 	melt_amount = 100
+	item_weight = 1.5 KILOGRAMS
 
 //................ Xylix Whip ............... //
 /obj/item/weapon/whip/xylix
@@ -168,6 +176,7 @@
 	icon_state = "xylixwhip"
 	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
+	item_weight = 500 GRAMS
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
@@ -175,6 +184,7 @@
 	icon_state = "nagaika"
 	force = DAMAGE_WHIP + 5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, SWORD_STRIKE)
+	item_weight = 700 GRAMS
 
 //................ Urumi ............... //
 
@@ -197,6 +207,7 @@
 	blade_dulling = DULLING_BASH
 	melting_material = /datum/material/steel
 	melt_amount = 100
+	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/iron
 	name = "iron urumi"
@@ -205,6 +216,7 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
+	item_weight = 850 GRAMS
 
 /obj/item/weapon/whip/urumi/bronze
 	name = "bronze urumi"
@@ -213,6 +225,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
+	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/silver
 	name = "silver urumi"
@@ -221,6 +234,7 @@
 	max_blade_int = 160
 	max_integrity = INTEGRITY_STRONG * 0.8
 	melting_material = /datum/material/silver
+	item_weight = 750 GRAMS
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()

@@ -108,7 +108,10 @@
 		devotion.make_cleric()
 		devotion.grant_to(spawned)
 
-	var/list/selectableweapon = list(
+/datum/job/advclass/combat/cleric/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectableweapon = list(
 		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
 		"Axe" = /obj/item/weapon/axe/iron,
 		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/warhammer, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
@@ -153,7 +156,6 @@
 		var/obj/item/shield = new shield_path()
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
-
 
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
