@@ -57,9 +57,9 @@
 	falling = TRUE
 	playsound(src, 'sound/blank.ogg', 50, TRUE)
 	Shake(-1, -1, 25)
-	addtimer(CALLBACK(src, PROC_REF(collapse)), 0.5)
+	addtimer(CALLBACK(src, PROC_REF(collapse)), 0.5 SECONDS)
 
-/obj/structure/stone_tile/collapse()
+/obj/structure/stone_tile/proc/collapse()
 	var/break_that_sucker = fall_on_cross == DESTROY_ON_CROSS
 	if(break_that_sucker)
 		playsound(src, 'sound/blank.ogg', 50, TRUE)
