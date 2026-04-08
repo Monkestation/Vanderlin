@@ -24469,7 +24469,6 @@
 /area/under/town/basement)
 "vGT" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/scribe,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/library)
 "vGZ" = (
