@@ -177,7 +177,7 @@
 
 	var/mob/living/carbon/human/new_character = new(create_at)
 	if(!create_at)
-		SSjob.SendToLateJoin(new_character)
+		SSjob.SendToBackupPoint(new_character)
 
 	old_mob.client.prefs.apply_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
@@ -246,7 +246,7 @@
 	if(spawn_point)
 		new_character.forceMove(spawn_point)
 	else
-		SSjob.SendToLateJoin(new_character)
+		SSjob.SendToBackupPoint(new_character)
 
 	if(transfer_prefs)
 		ghost_player.client.prefs.safe_transfer_prefs_to(new_character)

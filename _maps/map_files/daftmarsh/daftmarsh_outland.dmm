@@ -1438,7 +1438,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/mountains)
 "od" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/cobblerock/snow,
@@ -1999,7 +1999,7 @@
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/lower)
 "ut" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
@@ -3331,7 +3331,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/villagegarrison)
 "JK" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
@@ -3697,7 +3697,7 @@
 /turf/closed,
 /area)
 "Nx" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,

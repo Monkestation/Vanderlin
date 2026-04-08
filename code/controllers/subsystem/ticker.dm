@@ -343,7 +343,6 @@ SUBSYSTEM_DEF(ticker)
 		toggle_ooc(FALSE) // Turn it off
 
 	CHECK_TICK
-	GLOB.start_landmarks_list = shuffle(GLOB.start_landmarks_list) //Shuffle the order of spawn points so they dont always predictably spawn bottom-up and right-to-left
 
 	create_characters() //Create player characters
 	log_game("GAME SETUP: create characters success")
@@ -471,11 +470,12 @@ SUBSYSTEM_DEF(ticker)
 	job_change_locked = FALSE
 
 	SStriumphs.fire_on_PostSetup()
-	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
-		if(istype(S))							//we can not runtime here. not in this important of a proc.
-			S.after_round_start()
-		else
-			stack_trace("[S] [S.type] found in start landmarks list, which isn't a start landmark!")
+	for(var/obj/effect/landmark/start/S as anything in GLOB.roundstart_landmarks)
+		if(!istype(S))//we can not runtime here. not in this important of a proc.
+			stack_trace("[S] [S.type] found in roundstart landmarks list, which isn't a start landmark!")
+	for(var/obj/effect/landmark/start/S as anything in GLOB.latejoin_landmarks)
+		if(!istype(S))//we can not runtime here. not in this important of a proc.
+			stack_trace("[S] [S.type] found in latejoin landmarks list, which isn't a latejoin landmark!")
 	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer

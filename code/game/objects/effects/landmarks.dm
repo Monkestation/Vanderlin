@@ -27,32 +27,35 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 	anchored = TRUE
 	layer = MOB_LAYER
-	var/list/jobspawn_override = list()
-	var/delete_after_roundstart = TRUE
 	var/used = FALSE
+	var/list/jobs_to_spawn = list()
+	/// Is this for round start or late join? Should only ever be TRUE or FALSE.
+	var/roundstart = TRUE
+	/// Does this landmark have custom setup for joining?
+	var/custom_handling = FALSE
 
 /obj/effect/landmark/start/Initialize(mapload)
 	. = ..()
-	GLOB.start_landmarks_list += src
 
-	if(length(jobspawn_override))
-		for(var/X in jobspawn_override)
-			if(!GLOB.jobspawn_overrides[X])
-				GLOB.jobspawn_overrides[X] = list()
-			GLOB.jobspawn_overrides[X] += src
+	if(custom_handling)
+		return
+
+	if(roundstart)
+		GLOB.roundstart_landmarks += src
+	else
+		GLOB.latejoin_landmarks += src
 
 	if(name != "start")
 		tag = "start*[name]"
 
 /obj/effect/landmark/start/Destroy(force)
-	GLOB.start_landmarks_list -= src
-	for(var/X in jobspawn_override)
-		GLOB.jobspawn_overrides[X] -= src
+	GLOB.roundstart_landmarks -= src
+	GLOB.latejoin_landmarks -=src
 	return ..()
 
-/obj/effect/landmark/start/proc/after_round_start()
-	if(delete_after_roundstart)
-		qdel(src)
+/obj/effect/landmark/start/late
+	roundstart = FALSE
+	icon_state = "arrow_blue"
 
 /obj/effect/landmark/events/haunts
 	name = "hauntz"
@@ -81,382 +84,339 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 #endif
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/start/adventurerlate
-	name = "Adventurerlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Pilgrim", "Adventurer", "Wretch")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/vagrantlate
-	name = "Beggarlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Beggar")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/orphanlate
-	name = "Orphanlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Orphan")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/mercenarylate
-	name = "Mercenarylate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Mercenary")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/villagerlate
+/obj/effect/landmark/start/late/villager
 	name = "Townerlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Towner")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/combatlate
-	name = "Combatlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Pilgrim", "Adventurer", "Mercenary")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/puritanlate
-	name = "Herr Prafektlate"
-	icon_state = "arrow"
-	jobspawn_override = list("Herr Prafekt")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/orthodoxistlate
-	name = "Sacrestantslate"
-	icon_state = "arrow"
-	jobspawn_override = list("Sacrestants")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/absolverlate
-	name = "Absolverlate"
-	icon_state = "arrow"
-	jobspawn_override = list("Absolver")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/adeptlate
-	name = "Adeptlate"
-	icon_state = "arrow"
-	jobspawn_override = list("Adept")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/bogwitchlate
-	name = "Bog Witchlate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Bog Witch")
-	delete_after_roundstart = FALSE
-
-/obj/effect/landmark/start/bogwitch_apprenticelate
-	name = "Bog Witch Apprenticelate"
-	icon_state = "arrow_blue"
-	jobspawn_override = list("Bog Witch Apprentice")
-	delete_after_roundstart = FALSE
+	jobs_to_spawn = list("Towner")
 
 /obj/effect/landmark/start/lord
 	name = "Monarch"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Monarch")
 
 /obj/effect/landmark/start/captain
 	name = "Captain"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Captain")
 
 /obj/effect/landmark/start/steward
 	name = "Steward"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Steward")
 
 /obj/effect/landmark/start/magician
 	name = "Court Magician"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Court Magician")
 
 /obj/effect/landmark/start/courtphys
 	name = "Court Physician"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Court Physician")
 
 /obj/effect/landmark/start/guardsman
 	name = "City Watchmen"
-	icon_state = "arrow"
+	jobs_to_spawn = list("City Watchmen")
 
 /obj/effect/landmark/start/lieutenant
 	name = "City Watch Lieutenant"
-	icon_state = "arrow"
+	jobs_to_spawn = list("City Watch Lieutenant")
 
 /obj/effect/landmark/start/manorguardsman
 	name = "Royal Knight"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Royal Knight")
 
 /obj/effect/landmark/start/tombwarden
 	name = "Veteran"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Veteran")
 
 /obj/effect/landmark/start/jailor
 	name = "Jailor"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Jailor")
 
 /obj/effect/landmark/start/dungeoneer
 	name = "Dungeoneer"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Dungeoneer")
 
 /obj/effect/landmark/start/watchman
 	name = "Men-at-arms"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Men-at-arms")
 
 /obj/effect/landmark/start/gatemaster
 	name = "Gatemaster"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Gatemaster")
 
 /obj/effect/landmark/start/forestwarden
 	name = "Forest Warden"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Forest Warden")
 
 /obj/effect/landmark/start/forestguard
 	name = "Forest Guard"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/villager
-	name = "Towner"
-	icon_state = "arrow"
-	jobspawn_override = list("Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
-
-/obj/effect/landmark/start/cheesemaker
-	name = "Cheesemaker"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Forest Guard")
 
 /obj/effect/landmark/start/woodsman
 	name = "Town Elder"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Town Elder")
 
 /obj/effect/landmark/start/priest
 	name = "Priest"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Priest")
 
 /obj/effect/landmark/start/monk
 	name = "Acolyte"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Acolyte")
 
 /obj/effect/landmark/start/puritan
 	name = "Herr Prafekt"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Herr Prafekt")
+
+/obj/effect/landmark/start/late/puritan
+	name = "Herr Prafekt"
+	jobs_to_spawn = list("Herr Prafekt")
 
 /obj/effect/landmark/start/orthodoxist
 	name = "Sacrestants"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Sacrestants")
+
+/obj/effect/landmark/start/late/orthodoxist
+	name = "Sacrestants"
+	jobs_to_spawn = list("Sacrestants")
 
 /obj/effect/landmark/start/absolver
 	name = "Absolver"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Absolver")
+
+/obj/effect/landmark/start/late/absolver
+	name = "Absolver"
+	jobs_to_spawn = list("Absolver")
 
 /obj/effect/landmark/start/adept
 	name = "Adept"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Adept")
+
+/obj/effect/landmark/start/late/adept
+	name = "Adept"
+	jobs_to_spawn = list("Adept")
 
 /obj/effect/landmark/start/templar
 	name = "Templar"
-	jobspawn_override = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
-	icon_state = "arrow"
+	jobs_to_spawn = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
 
 /obj/effect/landmark/start/gmtemplar
 	name = "Grandmaster Templar"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Grandmaster Templar")
 
 /obj/effect/landmark/start/nightman
 	name = "Apothecary"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/nightmaiden
-	name = "Nitemaiden"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Apothecary")
 
 /obj/effect/landmark/start/merchant
 	name = "Merchant"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Merchant")
 
 /obj/effect/landmark/start/grabber
 	name = "Stevedore"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Stevedore")
 
 /obj/effect/landmark/start/shophand
 	name = "Shophand"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Shophand")
 
 /obj/effect/landmark/start/innkeep
 	name = "Innkeep"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Innkeep")
 
 /obj/effect/landmark/start/archivist
 	name = "Archivist"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Archivist")
 
 /obj/effect/landmark/start/blacksmith
 	name = "Blacksmith"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Blacksmith")
 
 /obj/effect/landmark/start/tailor
 	name = "Tailor"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Tailor")
 
 /obj/effect/landmark/start/alchemist
 	name = "Alchemist"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Alchemist")
 
 /obj/effect/landmark/start/artificer
 	name = "Artificer"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Artificer")
 
 /obj/effect/landmark/start/scribe
 	name = "Scribe"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Scribe")
 
 /obj/effect/landmark/start/matron
 	name = "Matron"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Matron")
 
 /obj/effect/landmark/start/farmer
 	name = "Soilson"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Soilson")
 
 /obj/effect/landmark/start/beastmonger
 	name = "Butcher"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Butcher")
 
 /obj/effect/landmark/start/cook
 	name = "Cook"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Cook")
 
 /obj/effect/landmark/start/gravedigger
 	name = "Gravetender"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Gravetender")
 
 /obj/effect/landmark/start/mercenary
 	name = "Mercenary"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Mercenary")
+
+/obj/effect/landmark/start/late/mercenary
+	name = "Mercenary"
+	jobs_to_spawn = list("Mercenary")
 
 /obj/effect/landmark/start/minor_noble
 	name = "Noble"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Noble")
 
-/obj/effect/landmark/start/miner
-	name = "Miner"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/carpenter
-	name = "Carpenter"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/bard
-	name = "Bard"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/vagrant
-	name = "Beggar"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/consort
-	name = "Consort"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/prince
-	name = "Prince"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/prisoner
-	name = "Prisoner"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/jester
-	name = "Jester"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/hand
-	name = "Hand"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/courtagent
-	name = "Court Agent"
-	icon_state = "arrow"
+/obj/effect/landmark/start/villager
+	name = "Towner"
+	jobs_to_spawn = list("Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
 
 /obj/effect/landmark/start/hunter
 	name = "Hunter"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/fisher
-	name = "Fisher"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Hunter")
 
 /obj/effect/landmark/start/lumberjack
 	name = "Lumberjack"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Lumberjack")
+
+/obj/effect/landmark/start/miner
+	name = "Miner"
+	jobs_to_spawn = list("Miner")
+
+/obj/effect/landmark/start/bard
+	name = "Bard"
+	jobs_to_spawn = list("Bard")
+
+/obj/effect/landmark/start/carpenter
+	name = "Carpenter"
+	jobs_to_spawn = list("Carpenter")
+
+/obj/effect/landmark/start/cheesemaker
+	name = "Cheesemaker"
+	jobs_to_spawn = list("Cheesemaker")
+
+/obj/effect/landmark/start/vagrant
+	name = "Beggar"
+	jobs_to_spawn = list("Beggar")
+
+/obj/effect/landmark/start/late/vagrant
+	name = "Beggarlate"
+	jobs_to_spawn = list("Beggar")
+
+/obj/effect/landmark/start/consort
+	name = "Consort"
+	jobs_to_spawn = list("Consort")
+
+/obj/effect/landmark/start/prince
+	name = "Prince"
+	jobs_to_spawn = list("Prince")
+
+/obj/effect/landmark/start/prisoner
+	name = "Prisoner"
+	jobs_to_spawn = list("Prisoner")
+
+/obj/effect/landmark/start/jester
+	name = "Jester"
+	jobs_to_spawn = list("Jester")
+
+/obj/effect/landmark/start/hand
+	name = "Hand"
+	jobs_to_spawn = list("Hand")
+
+/obj/effect/landmark/start/courtagent
+	name = "Court Agent"
+	jobs_to_spawn = list("Court Agent")
+
+/obj/effect/landmark/start/fisher
+	name = "Fisher"
+	jobs_to_spawn = list("Fisher")
 
 /obj/effect/landmark/start/butler
 	name = "Butler"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Butler")
 
 /obj/effect/landmark/start/adventurer
 	name = "Adventurer"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Adventurer")
+
+/obj/effect/landmark/start/outsider
+	name = "Outsiders"
+	jobs_to_spawn = list("Pilgrim", "Adventurer", "Wretch")
+	custom_handling = TRUE
+
+/obj/effect/landmark/start/outsider/Initialize(mapload)
+	. = ..()
+	GLOB.roundstart_landmarks += src
+	GLOB.latejoin_landmarks +=src
 
 /obj/effect/landmark/start/feldsher
 	name = "Feldsher"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Feldsher")
 
 /obj/effect/landmark/start/tombwarden
 	name = "Tomb Warden"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Tomb Warden")
 
 /obj/effect/landmark/start/squire
 	name = "Squire"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Squire")
 
 /obj/effect/landmark/start/wapprentice
 	name = "Magician Apprentice"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Magician Apprentice")
 
 /obj/effect/landmark/start/servant
 	name = "Servant"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Servant")
 
 /obj/effect/landmark/start/tapster
 	name = "Tapster"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Tapster")
 
 /obj/effect/landmark/start/matron_assistant
 	name = "Matron Assistant"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Matron Assistant")
 
 /obj/effect/landmark/start/churchling
 	name = "Churchling"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Churchling")
 
 /obj/effect/landmark/start/orphan
 	name = "Orphan"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Orphan")
+
+/obj/effect/landmark/start/late/orphan
+	name = "Orphanlate"
+	jobs_to_spawn = list("Orphan")
 
 /obj/effect/landmark/start/sapprentice
 	name = "Smithy Apprentice"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Smithy Apprentice")
 
 /obj/effect/landmark/start/innkeep_son
 	name = "Innkeepers Son"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Innkeepers Son")
 
 /obj/effect/landmark/start/clinicapprentice
 	name = "Clinic Apprentice"
-	icon_state = "arrow"
+	jobs_to_spawn = list("Clinic Apprentice")
 
 /obj/effect/landmark/start/bogwitch
-	name = "Bog Witch"
-	icon_state = "arrow"
+	name = "Bog Witch and Apprentice"
+	jobs_to_spawn = list(JOB_BOGWITCH, JOB_BOGWITCH_APP)
 
-/obj/effect/landmark/start/bogwitch_apprentice
-	name = "Bog Witch Apprentice"
-	icon_state = "arrow"
-
-/obj/effect/landmark/start/evilskeleton	// Trying to make EVIL SKELTON actually spawn
-	name = "Skeleton"
-	icon = 'icons/mob/actions/roguespells.dmi'
-	icon_state = "raiseskele"
-	alpha = 20
-	delete_after_roundstart = FALSE
+/obj/effect/landmark/start/late/bogwitch
+	name = "Bog Witch and Apprentice"
+	jobs_to_spawn = list(JOB_BOGWITCH, JOB_BOGWITCH_APP)
 
 //Antagonist spawns
 
@@ -464,19 +424,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Bandit"
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
-	jobspawn_override = list("Bandit")
-	delete_after_roundstart = FALSE
+	jobs_to_spawn = list("Bandit")
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/bandit/Initialize()
 	. = ..()
 	GLOB.bandit_starts += loc
+	GLOB.roundstart_landmarks += loc
 
 /obj/effect/landmark/start/lich
 	name = "Lich"
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
-	jobspawn_override = list("Lich")
-	delete_after_roundstart = FALSE
+	jobs_to_spawn = list("Lich")
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/lich/Initialize()
 	. = ..()
@@ -495,6 +456,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "delf"
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/delf/Initialize()
 	. = ..()
@@ -504,6 +466,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "jarosite"
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/jarosite/Initialize()
 	. = ..()
@@ -521,13 +484,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	. = ..()
 	GLOB.newplayer_start += loc
 
-/obj/effect/landmark/latejoin
-	name = "JoinLate"
+/obj/effect/landmark/backup_join
+	name = "Backup Late Spawn"
 	icon_state = "arrow_blue"
 
-/obj/effect/landmark/latejoin/Initialize(mapload)
+/obj/effect/landmark/backup_join/Initialize(mapload)
 	..()
-	SSjob.latejoin_trackers += loc
+	SSjob.backup_join_landmarks += loc
 	return INITIALIZE_HINT_QDEL
 
 //space carps, magicarps, lone ops, slaughter demons, possibly revenants spawn here

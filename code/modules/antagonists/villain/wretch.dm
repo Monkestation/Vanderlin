@@ -36,4 +36,4 @@
 	if(spawn_point)
 		owner.current?.forceMove(spawn_point)
 	else
-		SSjob.SendToLateJoin(owner.current) // better run if this somehow happens
+		SSjob.SendToBackupPoint(owner.current) // better run if this somehow happens
