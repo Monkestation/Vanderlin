@@ -3,10 +3,16 @@
 	color = COLOR_ASSEMBLY_ORANGE
 
 /datum/augment/stats/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/stat in stat_changes)
 		H.change_stat(stat, stat_changes[stat])
 
 /datum/augment/stats/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	for(var/stat in stat_changes)
 		H.change_stat(stat, -stat_changes[stat])
 
@@ -60,11 +66,15 @@
 
 /datum/augment/stats/pressure_tank/on_install(mob/living/carbon/human/H)
 	. = ..()
+	if(!.)
+		return
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
 	sl?.max_steam_charge += 50
 
 /datum/augment/stats/pressure_tank/on_remove(mob/living/carbon/human/H)
 	. = ..()
+	if(!.)
+		return
 	var/datum/component/steam_life/sl = H.GetComponent(/datum/component/steam_life)
 	sl?.max_steam_charge -= 50
 

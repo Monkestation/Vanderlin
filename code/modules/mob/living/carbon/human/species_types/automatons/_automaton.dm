@@ -23,7 +23,7 @@
 
 /mob/living/carbon/human/species/automaton/prefilled_vessel/LateInitialize()
 	. = ..()
-	SEND_SIGNAL(src, COMSIG_AUGMENT_INSTALL, new /datum/augment/special/loyalty_binder(), src)
+	SEND_SIGNAL(src, COMSIG_AUGMENT_INSTALL, new /datum/augment/loyalty_binder(), src)
 	SEND_SIGNAL(src, COMSIG_AUGMENT_INSTALL, new /datum/augment/armor/copper(), src)
 	AddComponent(/datum/component/ghost_vessel)
 

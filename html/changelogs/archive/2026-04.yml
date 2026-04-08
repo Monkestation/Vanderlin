@@ -98,3 +98,16 @@
       rarity as fractures (can pull with tongs), less teeth adds a slur
   - refactor: weight has been redone to be a tiered system from the old %. For math
       that used the % of weight it was moved to either tiers or a sigmoid curve.
+2026-04-07:
+  Ben10083:
+  - map: Roguetest throne is now functional.
+2026-04-08:
+  Draggeru:
+  - map: Updates WPP, see PR for full changes
+  KevinfromHP:
+  - rscadd: Automaton stability now disables their shackle instead of making them
+      explode.
+  - bugfix: Automatons spamming that they've received orders when they've been told
+      to protect something
+  - balance: Adjusted Storyteller Antag Pulls to account for readied up player disparity
+      vs immediate latejoiners

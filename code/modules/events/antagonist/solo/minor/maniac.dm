@@ -32,17 +32,16 @@
 		/datum/job/bog_apprentice,
 	)
 
-	denominator = 30
 
 	base_antags = 1
 	maximum_antags = 2
+	min_players = (LOWPOP_THRESHOLD*0.6) * READYUP_AVG
+	denominator = (LOWPOP_THRESHOLD*0.6) * READYUP_AVG
+	cost = 0.6
 
 	earliest_start = 0 SECONDS
-
-	cost = 0.8
-
-	min_players = 25
 	weight = 8
+
 	secondary_events = list(
 		/datum/round_event_control/antagonist/solo/wretch,
 	)

@@ -15,6 +15,8 @@
 	return TRUE
 
 /datum/follower_command/protect/execute(mob/living/carbon/human/automaton, mob/living/issuer)
+	playsound(automaton, 'sound/vo/automaton/commandreceived.ogg', 70)
+	automaton.say("COMMAND RECEIVED: Protecting target.", forced = TRUE)
 	update_overlays(automaton)
 	update_timer = addtimer(CALLBACK(src, PROC_REF(update_overlays), automaton), 5 SECONDS, TIMER_STOPPABLE | TIMER_LOOP)
 
@@ -48,8 +50,6 @@
 
 		automaton.client.images += overlay
 		target_images += overlay
-		playsound(automaton, 'sound/vo/automaton/commandreceived.ogg', 70)
-		automaton.say("COMMAND RECEIVED: Protecting target.", forced = TRUE)
 
 /datum/follower_command/protect/proc/clear_overlays(mob/living/carbon/human/automaton)
 	if(!automaton?.client)
