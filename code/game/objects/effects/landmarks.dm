@@ -85,8 +85,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/start/late/villager
-	name = "Towner"
-	jobs_to_spawn = list("Towner")
+	name = JOB_TOWNER
+	jobs_to_spawn = list(JOB_TOWNER)
 
 /obj/effect/landmark/start/lord
 	name = JOB_MONARCH
@@ -133,12 +133,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_GATEMASTER)
 
 /obj/effect/landmark/start/forestwarden
-	name = "Forest Warden"
-	jobs_to_spawn = list("Forest Warden")
+	name = JOB_FOREST_WARDEN
+	jobs_to_spawn = list(JOB_FOREST_WARDEN)
 
 /obj/effect/landmark/start/forestguard
-	name = "Forest Guard"
-	jobs_to_spawn = list("Forest Guard")
+	name = JOB_FOREST_GUARD
+	jobs_to_spawn = list(JOB_FOREST_GUARD)
 
 /obj/effect/landmark/start/woodsman
 	name = JOB_TOWN_ELDER
@@ -266,31 +266,31 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/villager
 	name = "Towners"
-	jobs_to_spawn = list("Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
+	jobs_to_spawn = list(JOB_HUNTER,JOB_LUMBERJACK,JOB_MINER,JOB_BARD,JOB_CARPENTER,JOB_CHEESEMAKER,JOB_MASON)
 
 /obj/effect/landmark/start/hunter
-	name = "Hunter"
-	jobs_to_spawn = list("Hunter")
+	name = JOB_HUNTER
+	jobs_to_spawn = list(JOB_HUNTER)
 
 /obj/effect/landmark/start/lumberjack
-	name = "Lumberjack"
-	jobs_to_spawn = list("Lumberjack")
+	name = JOB_LUMBERJACK
+	jobs_to_spawn = list(JOB_LUMBERJACK)
 
 /obj/effect/landmark/start/miner
-	name = "Miner"
-	jobs_to_spawn = list("Miner")
+	name = JOB_MINER
+	jobs_to_spawn = list(JOB_MINER)
 
 /obj/effect/landmark/start/bard
-	name = "Bard"
-	jobs_to_spawn = list("Bard")
+	name = JOB_BARD
+	jobs_to_spawn = list(JOB_BARD)
 
 /obj/effect/landmark/start/carpenter
-	name = "Carpenter"
-	jobs_to_spawn = list("Carpenter")
+	name = JOB_CARPENTER
+	jobs_to_spawn = list(JOB_CARPENTER)
 
 /obj/effect/landmark/start/cheesemaker
-	name = "Cheesemaker"
-	jobs_to_spawn = list("Cheesemaker")
+	name = JOB_CHEESEMAKER
+	jobs_to_spawn = list(JOB_CHEESEMAKER)
 
 /obj/effect/landmark/start/vagrant
 	name = JOB_BEGGAR

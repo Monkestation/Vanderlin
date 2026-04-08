@@ -78,7 +78,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_bard
-	name = "Bard"
+	name = JOB_BARD
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_bard
@@ -197,7 +197,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_hunter
-	name = "Hunter"
+	name = JOB_HUNTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_hunter
@@ -231,7 +231,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_miner
-	name = "Miner"
+	name = JOB_MINER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_miner
@@ -370,7 +370,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_carpenter
-	name = "Carpenter"
+	name = JOB_CARPENTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_carpenter

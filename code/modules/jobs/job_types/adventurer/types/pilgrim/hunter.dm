@@ -43,7 +43,7 @@
 	)
 
 /datum/job/advclass/pilgrim/hunter
-	title = "Hunter"
+	title = JOB_HUNTER
 	f_title = "Huntress"
 	tutorial = "Peasants that thrive on the woods, hunting creechers for pelt and hide, \
 				or the boons of Dendor for their meat to sell, or consume."
