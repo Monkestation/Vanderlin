@@ -78,7 +78,7 @@
 		H.dna.species.native_language = "Old Psydonic"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 
-/datum/job/advclass/mercenary/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/mercenary/grenzelhoft/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list("Zweihander", "Musket", "Halberd")
 	var/weapon_choice = tgui_input_list(player_client,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.", weapons)
