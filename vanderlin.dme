@@ -3101,7 +3101,6 @@
 #include "code\modules\jobs\job_types\serfs\innkeep.dm"
 #include "code\modules\jobs\job_types\serfs\mason.dm"
 #include "code\modules\jobs\job_types\serfs\matron.dm"
-#include "code\modules\jobs\job_types\serfs\scribe.dm"
 #include "code\modules\jobs\job_types\serfs\tailor.dm"
 #include "code\modules\jobs\job_types\serfs\tomb_warden.dm"
 #include "code\modules\jobs\job_types\youngfolk\churchling.dm"

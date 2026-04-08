@@ -167,7 +167,7 @@
 			HL.job = "Ex-Monarch"
 			lord_job?.remove_spells(HL)
 			HL.honorary = "Former [lord_job.honorary]"
-		if(HL.job == "Consort")
+		if(HL.job == JOB_CONSORT)
 			HL.job = "Ex-Consort"
 			consort_job?.remove_spells(HL)
 

@@ -120,7 +120,7 @@
 	)
 
 /datum/migrant_role/advclass/mercenary
-	name = "Mercenary"
+	name = JOB_MERCENARY
 	migrant_job = /datum/job/mercenary
 	advclass_cat_rolls = list(CTAG_MERCENARY = 20)
 

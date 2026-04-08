@@ -119,7 +119,7 @@
 
 
 /datum/job_pack/assassin/assassin_beggar
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 	pack_contents = list(
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -145,7 +145,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_fisher
-	name = "Fisher"
+	name = JOB_FISHER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_fisher
@@ -256,7 +256,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_noble
-	name = "Noble"
+	name = JOB_MINOR_NOBLE
 
 	pack_contents = list(
 		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,

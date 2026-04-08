@@ -184,10 +184,38 @@
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
 
+
+
+#define JOB_MONARCH "Monarch"
+#define JOB_CONSORT "Consort"
+#define JOB_HAND "Hand"
+#define JOB_PRINCE "Prince"
+#define JOB_PRINCE_FEM "Princess"
+#define JOB_COURT_MAGE "Court Magician"
+#define JOB_STEWARD "Steward"
+#define JOB_COURT_PHYSICIAN "Court Physician"
+#define JOB_COURT_AGENT "Court Agent"
+#define JOB_BUTLER "Butler"
+
+#define JOB_MINOR_NOBLE "Noble"
+
+#define JOB_JESTER "Jester"
+#define JOB_PRISONER "Prisoner"
+
 #define JOB_ADVENTURER "Adventurer"
 #define JOB_PILGRIM "Pilgrim"
 #define JOB_MERCENARY "Mercenary"
 
+#define JOB_PRIEST "Priest"
+#define JOB_GRANDMASTER_TEMPLAR "Grandmaster Templar"
+#define JOB_TEMPLAR "Templar"
+#define JOB_ACOLYTE "Acolyte"
+#define JOB_GRAVETENDER "Gravetender"
+
+#define JOB_FISHER "Fisher"
+
+#define JOB_FELDSHER "Feldsher"
+#define JOB_TOMB_WARDEN "Tomb Warden"
 
 #define JOB_MAGIC_APP "Magician Apprentice"
 #define JOB_CLINIC_APP "Clinic Apprentice"
@@ -200,6 +228,8 @@
 
 #define JOB_TAPSTER "Tapster"
 #define JOB_SERVANT "Servant"
+
+#define JOB_BEGGAR "Beggar"
 
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"

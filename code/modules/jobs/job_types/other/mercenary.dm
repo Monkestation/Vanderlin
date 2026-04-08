@@ -1,5 +1,5 @@
 /datum/job/mercenary
-	title = "Mercenary"
+	title = JOB_MERCENARY
 	tutorial = "Blood stained hands, do you even see it when they line your palms with golden treasures?\
 	\n\n\
 	You are a paid killer, redeemable only by fact that your loyalty can be bought,  \

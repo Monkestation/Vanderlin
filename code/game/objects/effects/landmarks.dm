@@ -97,12 +97,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Captain")
 
 /obj/effect/landmark/start/steward
-	name = "Steward"
-	jobs_to_spawn = list("Steward")
+	name = JOB_STEWARD
+	jobs_to_spawn = list(JOB_STEWARD)
 
 /obj/effect/landmark/start/magician
-	name = "Court Magician"
-	jobs_to_spawn = list("Court Magician")
+	name = JOB_COURT_MAGE
+	jobs_to_spawn = list(JOB_COURT_MAGE)
 
 /obj/effect/landmark/start/courtphys
 	name = "Court Physician"
@@ -160,6 +160,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Acolyte"
 	jobs_to_spawn = list("Acolyte")
 
+/obj/effect/landmark/start/templar
+	name = "Templar"
+	jobs_to_spawn = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
+
+/obj/effect/landmark/start/gmtemplar
+	name = "Grandmaster Templar"
+	jobs_to_spawn = list("Grandmaster Templar")
+
 /obj/effect/landmark/start/puritan
 	name = "Herr Prafekt"
 	jobs_to_spawn = list("Herr Prafekt")
@@ -191,14 +199,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/late/adept
 	name = "Adept"
 	jobs_to_spawn = list("Adept")
-
-/obj/effect/landmark/start/templar
-	name = "Templar"
-	jobs_to_spawn = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
-
-/obj/effect/landmark/start/gmtemplar
-	name = "Grandmaster Templar"
-	jobs_to_spawn = list("Grandmaster Templar")
 
 /obj/effect/landmark/start/nightman
 	name = "Apothecary"
@@ -240,10 +240,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Artificer"
 	jobs_to_spawn = list("Artificer")
 
-/obj/effect/landmark/start/scribe
-	name = "Scribe"
-	jobs_to_spawn = list("Scribe")
-
 /obj/effect/landmark/start/matron
 	name = "Matron"
 	jobs_to_spawn = list("Matron")
@@ -261,20 +257,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Cook")
 
 /obj/effect/landmark/start/gravedigger
-	name = "Gravetender"
-	jobs_to_spawn = list("Gravetender")
+	name = JOB_GRAVETENDER
+	jobs_to_spawn = list(JOB_GRAVETENDER)
 
 /obj/effect/landmark/start/mercenary
-	name = "Mercenary"
-	jobs_to_spawn = list("Mercenary")
+	name = JOB_MERCENARY
+	jobs_to_spawn = list(JOB_MERCENARY)
 
 /obj/effect/landmark/start/late/mercenary
-	name = "Mercenary"
-	jobs_to_spawn = list("Mercenary")
+	name = JOB_MERCENARY
+	jobs_to_spawn = list(JOB_MERCENARY)
 
 /obj/effect/landmark/start/minor_noble
-	name = "Noble"
-	jobs_to_spawn = list("Noble")
+	name = JOB_MINOR_NOBLE
+	jobs_to_spawn = list(JOB_MINOR_NOBLE)
 
 /obj/effect/landmark/start/villager
 	name = "Towners"
@@ -305,44 +301,44 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Cheesemaker")
 
 /obj/effect/landmark/start/vagrant
-	name = "Beggar"
-	jobs_to_spawn = list("Beggar")
+	name = JOB_BEGGAR
+	jobs_to_spawn = list(JOB_BEGGAR)
 
 /obj/effect/landmark/start/late/vagrant
-	name = "Beggar"
-	jobs_to_spawn = list("Beggar")
+	name = JOB_BEGGAR
+	jobs_to_spawn = list(JOB_BEGGAR)
 
 /obj/effect/landmark/start/consort
-	name = "Consort"
-	jobs_to_spawn = list("Consort")
+	name = JOB_CONSORT
+	jobs_to_spawn = list(JOB_CONSORT)
 
 /obj/effect/landmark/start/prince
-	name = "Prince"
-	jobs_to_spawn = list("Prince")
+	name = JOB_PRINCE
+	jobs_to_spawn = list(JOB_PRINCE)
 
 /obj/effect/landmark/start/prisoner
-	name = "Prisoner"
-	jobs_to_spawn = list("Prisoner")
+	name = JOB_PRISONER
+	jobs_to_spawn = list(JOB_PRISONER)
 
 /obj/effect/landmark/start/jester
-	name = "Jester"
-	jobs_to_spawn = list("Jester")
+	name = JOB_JESTER
+	jobs_to_spawn = list(JOB_JESTER)
 
 /obj/effect/landmark/start/hand
-	name = "Hand"
-	jobs_to_spawn = list("Hand")
+	name = JOB_HAND
+	jobs_to_spawn = list(JOB_HAND)
 
 /obj/effect/landmark/start/courtagent
-	name = "Court Agent"
-	jobs_to_spawn = list("Court Agent")
+	name = JOB_COURT_AGENT
+	jobs_to_spawn = list(JOB_COURT_AGENT)
 
 /obj/effect/landmark/start/fisher
-	name = "Fisher"
-	jobs_to_spawn = list("Fisher")
+	name = JOB_FISHER
+	jobs_to_spawn = list(JOB_FISHER)
 
 /obj/effect/landmark/start/butler
-	name = "Butler"
-	jobs_to_spawn = list("Butler")
+	name = JOB_BUTLER
+	jobs_to_spawn = list(JOB_BUTLER)
 
 /obj/effect/landmark/start/adventurer
 	name = JOB_ADVENTURER
@@ -359,12 +355,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	GLOB.latejoin_landmarks +=src
 
 /obj/effect/landmark/start/feldsher
-	name = "Feldsher"
-	jobs_to_spawn = list("Feldsher")
+	name = JOB_FELDSHER
+	jobs_to_spawn = list(JOB_FELDSHER)
 
 /obj/effect/landmark/start/tombwarden
-	name = "Tomb Warden"
-	jobs_to_spawn = list("Tomb Warden")
+	name = JOB_TOMB_WARDEN
+	jobs_to_spawn = list(JOB_TOMB_WARDEN)
 
 /obj/effect/landmark/start/squire
 	name = JOB_SQUIRE
