@@ -13,6 +13,10 @@
 	resistance_flags = FLAMMABLE
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
+	slot_equipment_priority = list(
+		ITEM_SLOT_ARMOR,
+		ITEM_SLOT_SHIRT,
+	)
 
 	armor = ARMOR_MINIMAL
 	prevent_crits = list(BCLASS_TWIST)
