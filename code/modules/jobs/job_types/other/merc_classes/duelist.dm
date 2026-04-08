@@ -22,7 +22,6 @@
 	tutorial = "A swordsman from Valoria, wielding a rapier with deadly precision and driven by honor and a thirst for coin, they duel with unmatched precision, seeking glory and wealth."
 	allowed_races = RACES_PLAYER_NO_KOBOLD
 	outfit = /datum/outfit/mercenary/duelist
-	category_tags = list(CTAG_MERCENARY)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
 	total_positions = 2
 
