@@ -242,7 +242,7 @@
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	var/spawn_point = get_spawn_turf_for_job("Adventurer")
+	var/spawn_point = get_spawn_turf_for_job(JOB_ADVENTURER)
 	if(spawn_point)
 		new_character.forceMove(spawn_point)
 	else

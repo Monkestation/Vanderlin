@@ -67,7 +67,7 @@
 	triumph_count = 5
 
 /datum/objective/werewolf/infiltrate/one/check_completion()
-	var/list/churchjobs = list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", "Churchling", "Crusader", "Inquisitor")
+	var/list/churchjobs = list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", JOB_CHURCHLING, "Crusader", "Inquisitor")
 	for(var/datum/mind/V in SSmapping.retainer.werewolves)
 		if(V.current.job in churchjobs)
 			return TRUE

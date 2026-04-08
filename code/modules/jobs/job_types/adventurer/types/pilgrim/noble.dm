@@ -24,7 +24,7 @@
 	outfit = /datum/outfit/pilgrim/noble
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 2
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird = 1,

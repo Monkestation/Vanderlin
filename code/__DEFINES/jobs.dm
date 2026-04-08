@@ -184,5 +184,22 @@
 #define BITFLAG_CONSTRUCTOR (1<<2)
 #define BITFLAG_GARRISON (1<<3)
 
+#define JOB_ADVENTURER "Adventurer"
+#define JOB_PILGRIM "Pilgrim"
+#define JOB_MERCENARY "Mercenary"
+
+
+#define JOB_MAGIC_APP "Magician Apprentice"
+#define JOB_CLINIC_APP "Clinic Apprentice"
+#define JOB_SMITHY_APP "Smithy Apprentice"
+#define JOB_INKEEP_SON "Innkeepers Son"
+#define JOB_SQUIRE "Squire"
+
+#define JOB_ORPHAN "Orphan"
+#define JOB_CHURCHLING "Churchling"
+
+#define JOB_TAPSTER "Tapster"
+#define JOB_SERVANT "Servant"
+
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"

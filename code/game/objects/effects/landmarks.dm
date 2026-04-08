@@ -85,7 +85,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/start/late/villager
-	name = "Townerlate"
+	name = "Towner"
 	jobs_to_spawn = list("Towner")
 
 /obj/effect/landmark/start/lord
@@ -277,7 +277,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Noble")
 
 /obj/effect/landmark/start/villager
-	name = "Towner"
+	name = "Towners"
 	jobs_to_spawn = list("Hunter","Lumberjack","Miner","Bard","Carpenter","Cheesemaker")
 
 /obj/effect/landmark/start/hunter
@@ -309,7 +309,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Beggar")
 
 /obj/effect/landmark/start/late/vagrant
-	name = "Beggarlate"
+	name = "Beggar"
 	jobs_to_spawn = list("Beggar")
 
 /obj/effect/landmark/start/consort
@@ -345,12 +345,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Butler")
 
 /obj/effect/landmark/start/adventurer
-	name = "Adventurer"
-	jobs_to_spawn = list("Adventurer")
+	name = JOB_ADVENTURER
+	jobs_to_spawn = list(JOB_ADVENTURER)
 
 /obj/effect/landmark/start/outsider
 	name = "Outsiders"
-	jobs_to_spawn = list("Pilgrim", "Adventurer", "Wretch")
+	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, "Wretch")
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/outsider/Initialize(mapload)
@@ -367,48 +367,44 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Tomb Warden")
 
 /obj/effect/landmark/start/squire
-	name = "Squire"
-	jobs_to_spawn = list("Squire")
+	name = JOB_SQUIRE
+	jobs_to_spawn = list(JOB_SQUIRE)
 
 /obj/effect/landmark/start/wapprentice
-	name = "Magician Apprentice"
-	jobs_to_spawn = list("Magician Apprentice")
+	name = JOB_MAGIC_APP
+	jobs_to_spawn = list(JOB_MAGIC_APP)
 
 /obj/effect/landmark/start/servant
-	name = "Servant"
-	jobs_to_spawn = list("Servant")
+	name = JOB_SERVANT
+	jobs_to_spawn = list(JOB_SERVANT)
 
 /obj/effect/landmark/start/tapster
-	name = "Tapster"
-	jobs_to_spawn = list("Tapster")
-
-/obj/effect/landmark/start/matron_assistant
-	name = "Matron Assistant"
-	jobs_to_spawn = list("Matron Assistant")
+	name = JOB_TAPSTER
+	jobs_to_spawn = list(JOB_TAPSTER)
 
 /obj/effect/landmark/start/churchling
-	name = "Churchling"
-	jobs_to_spawn = list("Churchling")
+	name = JOB_CHURCHLING
+	jobs_to_spawn = list(JOB_CHURCHLING)
 
 /obj/effect/landmark/start/orphan
-	name = "Orphan"
-	jobs_to_spawn = list("Orphan")
+	name = JOB_ORPHAN
+	jobs_to_spawn = list(JOB_ORPHAN)
 
 /obj/effect/landmark/start/late/orphan
-	name = "Orphanlate"
-	jobs_to_spawn = list("Orphan")
+	name = JOB_ORPHAN
+	jobs_to_spawn = list(JOB_ORPHAN)
 
 /obj/effect/landmark/start/sapprentice
-	name = "Smithy Apprentice"
-	jobs_to_spawn = list("Smithy Apprentice")
+	name = JOB_SMITHY_APP
+	jobs_to_spawn = list(JOB_SMITHY_APP)
 
 /obj/effect/landmark/start/innkeep_son
-	name = "Innkeepers Son"
-	jobs_to_spawn = list("Innkeepers Son")
+	name = JOB_INKEEP_SON
+	jobs_to_spawn = list(JOB_INKEEP_SON)
 
 /obj/effect/landmark/start/clinicapprentice
-	name = "Clinic Apprentice"
-	jobs_to_spawn = list("Clinic Apprentice")
+	name = JOB_CLINIC_APP
+	jobs_to_spawn = list(JOB_CLINIC_APP)
 
 /obj/effect/landmark/start/bogwitch
 	name = "Bog Witch and Apprentice"

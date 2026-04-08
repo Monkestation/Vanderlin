@@ -41,7 +41,7 @@
 	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	give_bank_account = 60
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'

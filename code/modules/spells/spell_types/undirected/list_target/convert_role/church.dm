@@ -75,7 +75,7 @@
 	name = "Recruit Churchling"
 	button_icon_state = "recruit_acolyte"
 
-	new_role = "Churchling"
+	new_role = JOB_CHURCHLING
 	recruitment_faction = "Church"
 	recruitment_message = "Serve the Ten, %RECRUIT!"
 	accept_message = "FOR THE TEN!"

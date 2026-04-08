@@ -215,7 +215,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // LANDMARKS
 /obj/effect/landmark/start/vampirelord
 	name = "Vampire Lord"
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirelord/Initialize()
@@ -224,7 +224,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampirespawn
 	name = "Vampire Spawn"
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirespawn/Initialize()
@@ -233,7 +233,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampireknight
 	name = "Death Knight"
-	icon_state = "arrow"
+	icon_state = "arrow_purple"
 	jobs_to_spawn = list("Death Knight")
 	custom_handling = TRUE
 

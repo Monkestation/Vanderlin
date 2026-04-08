@@ -1,5 +1,5 @@
 /datum/migrant_role/advclass/pilgrim
-	name = "Pilgrim"
+	name = JOB_PILGRIM
 	migrant_job = /datum/job/pilgrim
 	advclass_cat_rolls = list(CTAG_PILGRIM = 10)
 
@@ -39,7 +39,7 @@
 	greet_text = "Fleeing from misfortune and hardship, you and a handful of survivors get closer to Vanderlin, looking for refuge and work, finally almost being there, almost..."
 
 /datum/migrant_role/advclass/adventurer
-	name = "Adventurer"
+	name = JOB_ADVENTURER
 	migrant_job = /datum/job/adventurer
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 5)
 

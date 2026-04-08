@@ -29391,9 +29391,6 @@
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
 	},
-/obj/effect/landmark/start/matron_assistant{
-	dir = 1
-	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/orphanage)
 "okh" = (
@@ -29578,9 +29575,6 @@
 /area/indoors/town)
 "onU" = (
 /obj/structure/chair/wood/alt/chair3{
-	dir = 1
-	},
-/obj/effect/landmark/start/matron_assistant{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -34734,9 +34728,6 @@
 /area/outdoors/town/roofs)
 "qUs" = (
 /obj/structure/chair/wood/alt/chair3{
-	dir = 8
-	},
-/obj/effect/landmark/start/matron_assistant{
 	dir = 8
 	},
 /turf/open/floor/carpet/royalblack,

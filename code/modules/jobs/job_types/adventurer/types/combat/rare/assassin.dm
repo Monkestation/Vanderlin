@@ -484,7 +484,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_servant
-	name = "Servant"
+	name = JOB_SERVANT
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_servant
