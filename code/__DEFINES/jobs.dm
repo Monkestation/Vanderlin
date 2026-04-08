@@ -199,6 +199,16 @@
 
 #define JOB_MINOR_NOBLE "Noble"
 
+#define JOB_GUARD_CAPTAIN "Captain"
+#define JOB_ROYAL_KNIGHT "Royal Knight"
+#define JOB_MAN_AT_ARMS "Man-at-arms"
+#define JOB_CITY_WATCH_LIEUTENANT "City Watch Lieutenant"
+#define JOB_CITY_WATCH "City Watchmen"
+#define JOB_GATEMASTER "Gatemaster"
+#define JOB_DUNGEONEER "Dungeoneer"
+
+#define JOB_TOWN_ELDER "Town Elder"
+
 #define JOB_JESTER "Jester"
 #define JOB_PRISONER "Prisoner"
 
@@ -207,6 +217,7 @@
 #define JOB_MERCENARY "Mercenary"
 
 #define JOB_PRIEST "Priest"
+#define JOB_PRIEST_FEM "Priestess"
 #define JOB_GRANDMASTER_TEMPLAR "Grandmaster Templar"
 #define JOB_TEMPLAR "Templar"
 #define JOB_ACOLYTE "Acolyte"

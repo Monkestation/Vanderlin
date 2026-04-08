@@ -55,7 +55,7 @@
 /proc/send_prayer(mob/living/follower, prayer, patron_name)
 	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
 	var/bigger = FALSE
-	if((follower.job == "Priest") || (follower.job == "Priestess"))
+	if((follower.job == JOB_PRIEST) || (follower.job == JOB_PRIEST_FEM))
 		ident_string += "[SPAN_GOD_ASTRATA("(PRIEST)")]"
 		bigger = TRUE
 	if(follower.has_quirk(/datum/quirk/vice/godfearing))

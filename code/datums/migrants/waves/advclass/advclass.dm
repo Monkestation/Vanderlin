@@ -79,13 +79,13 @@
 	greet_text = "Together with a party of trusted friends we decided to venture out, seeking thrills, glory and treasure, ending up in the misty and damp bog underneath Vanderlin, perhaps getting ourselves into more than what we bargained for."
 
 /datum/migrant_role/advclass/bandit
-	name = "Bandit"
+	name = ROLE_BANDIT
 	migrant_job = /datum/job/bandit
 	advclass_cat_rolls = list(CTAG_BANDIT = 20)
 
 /datum/migrant_wave/bandit
 	name = "Bandit Raid"
-	spawn_landmark = "Bandit"
+	spawn_landmark = ROLE_BANDIT
 	downgrade_wave = /datum/migrant_wave/bandit_down_one
 	weight = 8
 	roles = list(
@@ -95,7 +95,7 @@
 
 /datum/migrant_wave/bandit_down_one
 	name = "Bandit Raid"
-	spawn_landmark = "Bandit"
+	spawn_landmark = ROLE_BANDIT
 	downgrade_wave = /datum/migrant_wave/bandit_down_two
 	can_roll = FALSE
 	roles = list(
@@ -104,7 +104,7 @@
 
 /datum/migrant_wave/bandit_down_two
 	name = "Bandit Raid"
-	spawn_landmark = "Bandit"
+	spawn_landmark = ROLE_BANDIT
 	downgrade_wave = /datum/migrant_wave/bandit_down_three
 	can_roll = FALSE
 	roles = list(
@@ -113,7 +113,7 @@
 
 /datum/migrant_wave/bandit_down_three
 	name = "Bandit Raid"
-	spawn_landmark = "Bandit"
+	spawn_landmark = ROLE_BANDIT
 	can_roll = FALSE
 	roles = list(
 		/datum/migrant_role/advclass/bandit = 1,

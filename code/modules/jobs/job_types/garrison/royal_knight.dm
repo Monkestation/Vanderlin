@@ -1,5 +1,5 @@
 /datum/job/royalknight
-	title = "Royal Knight"
+	title = JOB_ROYAL_KNIGHT
 	tutorial = "You are a knight of the royal family, elevated by your skill and steadfast devotion. \
 	Sworn to protect the royal family, you stand as their shield, upholding their rule with steel and sacrifice. \
 	Yet service is not without its trials, and your loyalty will be tested in ways both seen and unseen. \
@@ -154,14 +154,14 @@
 )
 
 /datum/job/advclass/royalknight/knight
-	title = "Royal Knight"
+	title = JOB_ROYAL_KNIGHT
 	tutorial = "The classic Knight in shining armor. Slightly more skilled then their Steam counterpart but has worse armor."
 	outfit = /datum/outfit/royalknight/knight
 	attribute_sheet = /datum/attribute_holder/sheet/job/royalknight/knight
 	category_tags = list(CTAG_ROYALKNIGHT)
 
 /datum/outfit/royalknight/knight
-	name = "Royal Knight"
+	name = JOB_ROYAL_KNIGHT
 	armor = /obj/item/clothing/armor/plate/full
 	gloves = /obj/item/clothing/gloves/plate
 	shoes = /obj/item/clothing/shoes/boots/armor
@@ -178,7 +178,7 @@
 		"Decorated Golden Helmet" = /obj/item/clothing/head/helmet/heavy/decorated/golden,
 	)
 
-	spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "ROYAL KNIGHT")
+	spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = JOB_ROYAL_KNIGHT)
 
 /datum/attribute_holder/sheet/job/royalknight/steam
 	raw_attribute_list = list(

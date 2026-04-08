@@ -93,8 +93,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_MONARCH)
 
 /obj/effect/landmark/start/captain
-	name = "Captain"
-	jobs_to_spawn = list("Captain")
+	name = JOB_GUARD_CAPTAIN
+	jobs_to_spawn = list(JOB_GUARD_CAPTAIN)
 
 /obj/effect/landmark/start/steward
 	name = JOB_STEWARD
@@ -109,32 +109,28 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list(JOB_COURT_PHYSICIAN)
 
 /obj/effect/landmark/start/guardsman
-	name = "City Watchmen"
-	jobs_to_spawn = list("City Watchmen")
+	name = JOB_CITY_WATCH
+	jobs_to_spawn = list(JOB_CITY_WATCH)
 
 /obj/effect/landmark/start/lieutenant
-	name = "City Watch Lieutenant"
-	jobs_to_spawn = list("City Watch Lieutenant")
+	name = JOB_CITY_WATCH_LIEUTENANT
+	jobs_to_spawn = list(JOB_CITY_WATCH_LIEUTENANT)
 
 /obj/effect/landmark/start/manorguardsman
-	name = "Royal Knight"
-	jobs_to_spawn = list("Royal Knight")
-
-/obj/effect/landmark/start/tombwarden
-	name = "Veteran"
-	jobs_to_spawn = list("Veteran")
+	name = JOB_ROYAL_KNIGHT
+	jobs_to_spawn = list(JOB_ROYAL_KNIGHT)
 
 /obj/effect/landmark/start/dungeoneer
-	name = "Dungeoneer"
-	jobs_to_spawn = list("Dungeoneer")
+	name = JOB_DUNGEONEER
+	jobs_to_spawn = list(JOB_DUNGEONEER)
 
 /obj/effect/landmark/start/watchman
-	name = "Men-at-arms"
-	jobs_to_spawn = list("Men-at-arms")
+	name = JOB_MAN_AT_ARMS
+	jobs_to_spawn = list(JOB_MAN_AT_ARMS)
 
 /obj/effect/landmark/start/gatemaster
-	name = "Gatemaster"
-	jobs_to_spawn = list("Gatemaster")
+	name = JOB_GATEMASTER
+	jobs_to_spawn = list(JOB_GATEMASTER)
 
 /obj/effect/landmark/start/forestwarden
 	name = "Forest Warden"
@@ -145,24 +141,24 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobs_to_spawn = list("Forest Guard")
 
 /obj/effect/landmark/start/woodsman
-	name = "Town Elder"
-	jobs_to_spawn = list("Town Elder")
+	name = JOB_TOWN_ELDER
+	jobs_to_spawn = list(JOB_TOWN_ELDER)
 
 /obj/effect/landmark/start/priest
-	name = "Priest"
-	jobs_to_spawn = list("Priest")
+	name = JOB_PRIEST
+	jobs_to_spawn = list(JOB_PRIEST)
 
 /obj/effect/landmark/start/monk
-	name = "Acolyte"
-	jobs_to_spawn = list("Acolyte")
+	name = JOB_ACOLYTE
+	jobs_to_spawn = list(JOB_ACOLYTE)
 
 /obj/effect/landmark/start/templar
-	name = "Templar"
-	jobs_to_spawn = list("Grandmaster Templar", "Templar") // Temp until I can map in the spawn
+	name = JOB_TEMPLAR
+	jobs_to_spawn = list(JOB_GRANDMASTER_TEMPLAR, JOB_TEMPLAR) // Temp until I can map in the spawn
 
 /obj/effect/landmark/start/gmtemplar
-	name = "Grandmaster Templar"
-	jobs_to_spawn = list("Grandmaster Templar")
+	name = JOB_GRANDMASTER_TEMPLAR
+	jobs_to_spawn = list(JOB_GRANDMASTER_TEMPLAR)
 
 /obj/effect/landmark/start/puritan
 	name = "Herr Prafekt"
@@ -342,7 +338,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/outsider
 	name = "Outsiders"
-	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, "Wretch")
+	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, ROLE_WRETCH)
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/outsider/Initialize(mapload)
@@ -409,10 +405,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 //Antagonist spawns
 
 /obj/effect/landmark/start/bandit
-	name = "Bandit"
+	name = ROLE_BANDIT
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
-	jobs_to_spawn = list("Bandit")
+	jobs_to_spawn = list(ROLE_BANDIT)
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/bandit/Initialize()
@@ -421,10 +417,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	GLOB.roundstart_landmarks += src
 
 /obj/effect/landmark/start/lich
-	name = "Lich"
+	name = ROLE_LICH
 	icon = 'icons/mob/landmarks.dmi'
 	icon_state = "arrow_purple"
-	jobs_to_spawn = list("Lich")
+	jobs_to_spawn = list(ROLE_LICH)
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/lich/Initialize()
@@ -474,7 +470,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/backup_join
 	name = "Backup Late Spawn"
-	icon_state = "arrow_blue"
+	icon = 'icons/mob/landmarks.dmi'
+	icon_state = "x3"
 
 /obj/effect/landmark/backup_join/Initialize(mapload)
 	..()

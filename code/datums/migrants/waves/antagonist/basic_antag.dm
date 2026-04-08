@@ -1,5 +1,5 @@
 /datum/migrant_role/lich
-	name = "Lich"
+	name = ROLE_LICH
 	antag_datum = /datum/antagonist/lich
 
 /datum/migrant_role/harlequinn

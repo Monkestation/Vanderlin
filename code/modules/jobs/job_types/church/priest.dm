@@ -43,8 +43,8 @@
 #define PRIEST_CURSE "Curse"
 
 /datum/job/priest
-	title = "Priest"
-	f_title = "Priestess"
+	title = JOB_PRIEST
+	f_title = JOB_PRIEST_FEM
 	tutorial = "You are a devoted follower of Astrata. \
 	The divine is all that matters in an immoral world. \
 	The Sun Queen and her pantheon rule over all, and you will preach their wisdom to Vanderlin. \
@@ -96,7 +96,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/priest
-	name = "Priest"
+	name = JOB_PRIEST
 	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 	head = /obj/item/clothing/head/priestmask
 	shirt = /obj/item/clothing/shirt/undershirt/priest

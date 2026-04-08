@@ -1,5 +1,5 @@
 /datum/antagonist/wretch
-	name = "Wretch"
+	name = ROLE_WRETCH
 	roundend_category = "Wretches"
 	job_rank = ROLE_WRETCH
 	antagpanel_category = "Wretches"
