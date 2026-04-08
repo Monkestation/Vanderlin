@@ -31,10 +31,11 @@
 	title = "Paladin"
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	outfit = /datum/outfit/folkhero/paladin
-	allowed_patrons = ALL_PALADIN_PATRONS
+	outfit = /datum/outfit/paladin
+	allowed_patrons = ALL_CLERIC_PATRONS
 	total_positions = 1
-	category_tags = list(CTAG_FOLKHEROES)
+	category_tags = list(CTAG_ADVENTURER)
+	roll_chance = 7
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
@@ -42,20 +43,13 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE_BLOOD,
+		TRAIT_STEELHEARTED
 	)
 
 /datum/job/advclass/combat/paladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
 	spawned.virginity = TRUE
-
 	switch(spawned.patron?.type)
-		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
-			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/paladin/extremist)
-			spawned.grant_language(/datum/language/newpsydonic)
-			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, JOB_TRAIT)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
@@ -95,57 +89,57 @@
 		devotion.make_templar()
 		devotion.grant_to(spawned)
 
-/datum/outfit/folkhero/paladin
-	name = "Paladin (Folkhero)"
 
-	armor = /obj/item/clothing/armor/plate
+/datum/outfit/paladin
+	name = "Paladin"
+
+	armor = /obj/item/clothing/armor/cuirass
 	shirt = /obj/item/clothing/armor/chainmail
-	pants = /obj/item/clothing/pants/platelegs
-	shoes = /obj/item/clothing/shoes/boots/armor
-	belt = /obj/item/storage/belt/leather/steel
+	pants = /obj/item/clothing/pants/chainlegs
+	shoes = /obj/item/clothing/shoes/boots
+	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	ring = /obj/item/clothing/ring/silver/toper
-	cloak = /obj/item/clothing/cloak/tabard/crusader
-	neck = /obj/item/clothing/neck/chaincoif
-	gloves = /obj/item/clothing/gloves/plate
-	backl = /obj/item/weapon/sword/long/judgement
+	cloak = /obj/item/clothing/cloak/tabard
+	neck = /obj/item/clothing/neck/psycross/silver
+	gloves = /obj/item/clothing/gloves/leather
+	backr = /obj/item/weapon/sword/long/judgement
+	backl = /obj/item/storage/backpack/satchel
 	head = /obj/item/clothing/head/helmet/heavy/bucket
-	wrists = /obj/item/clothing/neck/psycross/silver
+	wrists = /obj/item/clothing/wrists/bracers/jackchain
 
-/datum/outfit/folkhero/paladin/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/paladin/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 
 	switch(H.patron?.type)
-		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
-			head = /obj/item/clothing/head/helmet/heavy/bucket/gold
-			wrists = /obj/item/clothing/neck/psycross/gold
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/helmet/heavy/necked/astrata
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
+			neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/noc)
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
+			neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/dendor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
+			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 		if(/datum/patron/divine/necra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/heavy/necked/ravox
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
+			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/xylix
+			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
+			neck = /obj/item/clothing/neck/psycross/silver/divine/pestra
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/malum
+			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
 		if(/datum/patron/divine/eora)
+			mask = /obj/item/clothing/head/roguehood/eora
 			head = /obj/item/clothing/head/helmet/sallet/eoran
-			wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
+			neck = /obj/item/clothing/neck/psycross/silver/divine/eora

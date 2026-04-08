@@ -243,6 +243,7 @@
 			beltl = /obj/item/weapon/knife/dagger/steel/pestrasickle
 		if(/datum/patron/divine/eora)
 			head = /obj/item/clothing/head/helmet/sallet/eoran
+			mask = /obj/item/clothing/head/roguehood/eora
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
 			cloak = /obj/item/clothing/cloak/stabard/templar/eora
 		if(/datum/patron/divine/ravox)
