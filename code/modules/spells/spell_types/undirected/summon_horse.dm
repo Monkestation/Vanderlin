@@ -65,7 +65,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 		return COMPONENT_INCOMPATIBLE
 
 	owner = WEAKREF(the_owner)
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(precious_died))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(precious_died))
 
 /datum/component/precious_creature/proc/precious_died()
 	var/mob/living/our_owner = owner.resolve()

@@ -73,11 +73,13 @@
 				if(levels > 2)
 					AdjustUnconscious(levels * 10 SECONDS)
 
-	var/encumberance_multiplier = 0.5 * (get_encumbrance() + 1) // half base falling damage. scale up to 100% based on encumberance
-	AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
-	AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
+	var/encumbrance_multiplier = 0.7 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.3) // 0 encumberance = 30% damage reduction to base falling damage
+	AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
+	AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 
-	var/damage = ((levels * rand(10, 40)) * encumberance_multiplier) ** 1.5
+	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //15% damage reduction per level
+	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
+	damage *= skill_modifier
 	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT)))
 		if(levels > 1)
 			//absurd damage to guarantee a crit

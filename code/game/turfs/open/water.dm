@@ -27,19 +27,19 @@
 	smoothing_groups = SMOOTH_GROUP_FLOOR_LIQUID
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "edge"
-	footstep = null
-	barefootstep = null
-	clawfootstep = null
-	heavyfootstep = null
+
+	footstep = FOOTSTEP_WATER
+	barefootstep = FOOTSTEP_WATER
+	clawfootstep = FOOTSTEP_WATER
+	heavyfootstep = FOOTSTEP_WATER
+	force_footstep_sound = TRUE
+
 	landsound = 'sound/foley/jumpland/waterland.ogg'
 	shine = SHINE_SHINY
 	no_over_text = FALSE
 	spread_chance = 0
 	burn_power = 0
-	/// if we use water_height to pick the overlay
-	var/uses_height = TRUE
-	/// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
-	var/water_height = WATER_HEIGHT_SHALLOW
+
 	var/datum/reagent/water_reagent = /datum/reagent/water
 	/// infinite source of water
 	var/mapped = TRUE
@@ -48,7 +48,6 @@
 	var/water_maximum = 10000 //this is since water is stored in the originate
 	var/wash_in = TRUE
 	var/swim_skill = FALSE
-	var/swimdir = FALSE
 	/// cant pick up with reagent containers
 	var/notake = FALSE
 	var/set_relationships_on_init = TRUE
@@ -68,6 +67,43 @@
 	/// Fishing element for this specific water tile
 	var/datum/fish_source/fishing_datum = /datum/fish_source/water
 	flags_1 = CONDUCT_1
+
+	/// What tile do we draw as an underlay? This will be visible when a water turf dries up
+	var/turf/underlay_tile
+
+	/// If TRUE, forces the water turf above to have an open bottom.
+	var/force_open_above = FALSE
+	/// If TRUE, the turf will not have a open bottom. Overrides force_open_above of the turf below it.
+	var/force_close_bottom = FALSE
+
+	/// Whether
+	var/river_current = FALSE
+	/// Time it takes for the current to move the atom to the next turf
+	var/current_speed
+	var/current_icon_state
+
+	/// Determines depth based behavior and which overlays to apply. Heights in order are ANKLE, SHALLOW, DEEP, FULL.
+	var/water_height = WATER_HEIGHT_SHALLOW
+	///The transparency of the immerse element's overlay
+	var/immerse_overlay_alpha = 180
+	///Icon state to use for the immersion mask. Defaults to "immerse[water_height]"
+	var/immerse_overlay
+	/// Whether the immerse element has been added yet or not
+	var/immerse_added = FALSE
+
+	/**
+	 * Variables used for the swimming tile element. If a value is null, water_height is used to assign variable values.
+	 * - is_swimming_tile: Whether or not we add the element to this tile.
+	 * - stamina_entry_cost: how much stamina it costs to enter the swimming tile, and for each move into a tile
+	 * - ticking_stamina_cost: How much stamina is lost for staying in the water.
+	 * - ticking_oxy_damage: How much oxygen is lost per tick when drowning in water. Also determines how many breathes are lost.
+	 * - exhaust_swimmer_prob: The likelihood that someone suffers stamina damage when entering a swimming tile.
+	 */
+	var/is_swimming_tile = TRUE
+	var/stamina_entry_cost
+	var/ticking_stamina_cost
+	var/ticking_oxy_damage
+	var/exhaust_swimmer_prob = 100
 
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume
@@ -150,10 +186,10 @@
 	if(water_volume < 10)
 		dryup()
 	else if(water_volume)
-		if(!water_overlay)
-			water_overlay = new(src)
-		if(!water_top_overlay)
-			water_top_overlay = new(src)
+		// if(!water_overlay)
+		// 	water_overlay = new(src)
+		// if(!water_top_overlay)
+		// 	water_top_overlay = new(src)
 		if(!LAZYLEN(neighborlay_list))
 			smoothing_flags = SMOOTH_EDGE
 			QUEUE_SMOOTH(src)
@@ -232,7 +268,7 @@
 					playsound(src, 'sound/foley/waterenter.ogg', 100, FALSE)
 					adjust_originate_watervolume(water_count)
 
-/turf/open/water/Initialize()
+/turf/open/water/Initialize(mapload)
 	. = ..()
 	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(on_atom_inited))
 
@@ -243,6 +279,7 @@
 			water_height = WATER_HEIGHT_DEEP
 			swim_skill = TRUE
 
+	AddElement(/datum/element/watery_tile, water_height, cleanliness_factor)
 	if(!isnull(fishing_datum))
 		add_lazy_fishing(fishing_datum)
 	ADD_TRAIT(src, TRAIT_CATCH_AND_RELEASE, INNATE_TRAIT)
@@ -269,17 +306,58 @@
 /turf/open/water/proc/on_atom_inited(datum/source, atom/movable/movable)
 	SIGNAL_HANDLER
 	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
-	// make_immersed(movable)
+	make_immersed(movable)
 
-// ///Makes this turf immersable, return true if we actually did anything so child procs don't have to repeat our checks
-// /turf/open/water/proc/make_immersed(atom/movable/triggering_atom)
-// 	if(immerse_added || is_type_in_typecache(triggering_atom, GLOB.immerse_ignored_movable))
-// 		return FALSE
-// 	AddElement(/datum/element/immerse, immerse_overlay, immerse_overlay_alpha)
-// 	immerse_added = TRUE
-// 	// if(is_swimming_tile)
-// 	// 	AddElement(/datum/element/swimming_tile, stamina_entry_cost, ticking_stamina_cost, ticking_oxy_damage, exhaust_swimmer_prob)
-// 	return TRUE
+/**
+ * turf/Initialize() calls Entered on its contents too, however
+ * we need to wait for movables that still need to be initialized
+ * before we add the immerse element.
+ */
+/turf/open/water/Entered(atom/movable/arrived)
+	. = ..()
+	make_immersed(arrived)
+
+///Makes this turf immersable, return true if we actually did anything so child procs don't have to repeat our checks
+/turf/open/water/proc/make_immersed(atom/movable/triggering_atom)
+	if(immerse_added || is_type_in_typecache(triggering_atom, GLOB.immerse_ignored_movable))
+		return FALSE
+	if(water_height < WATER_HEIGHT_ANKLE)
+		return FALSE
+
+	if(!immerse_overlay)
+		immerse_overlay = "immerse[water_height]"
+	var/swimming_animation = water_height >= WATER_HEIGHT_DEEP
+	AddElement(/datum/element/immerse, immerse_overlay, immerse_overlay_alpha, swimming_animation)
+	immerse_added = TRUE
+
+	if(is_swimming_tile)
+		determine_swimming_properties()
+		AddElement(/datum/element/swimming_tile, stamina_entry_cost, ticking_stamina_cost, ticking_oxy_damage, exhaust_swimmer_prob)
+	return TRUE
+
+/turf/open/water/proc/determine_swimming_properties()
+	switch(water_height)
+		if(WATER_HEIGHT_ANKLE)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 5
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 5
+		if(WATER_HEIGHT_SHALLOW)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 10
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 0
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 5
+		if(WATER_HEIGHT_DEEP)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 15
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 5
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 5
+		if(WATER_HEIGHT_FULL)
+			stamina_entry_cost = isnum(initial(stamina_entry_cost)) ? initial(stamina_entry_cost) : 15
+			ticking_stamina_cost = isnum(initial(ticking_stamina_cost)) ? initial(ticking_stamina_cost) : 10
+			ticking_oxy_damage = isnum(initial(ticking_oxy_damage)) ? initial(ticking_oxy_damage) : 5
+		else
+			stamina_entry_cost = initial(stamina_entry_cost)
+			ticking_stamina_cost = initial(ticking_stamina_cost)
+			ticking_oxy_damage = initial(ticking_oxy_damage)
+			exhaust_swimmer_prob = initial(exhaust_swimmer_prob)
 
 /turf/open/water/examine(mob/user)
 	. = ..()
@@ -311,67 +389,28 @@
 	if(!water_volume || water_volume < 10)
 		dryup()
 		return
-	if(!water_overlay)
-		water_overlay = new(src)
-	if(!water_top_overlay)
-		water_top_overlay = new(src)
-	if(!LAZYLEN(neighborlay_list))
-		smoothing_flags = SMOOTH_EDGE
-		QUEUE_SMOOTH(src)
+	color = sanitize_hexcolor(water_reagent.color)
+	// if(!water_overlay)
+	// 	water_overlay = new(src)
+	// if(!water_top_overlay)
+	// 	water_top_overlay = new(src)
+	// if(!LAZYLEN(neighborlay_list))
+	// 	smoothing_flags = SMOOTH_EDGE
+	// 	QUEUE_SMOOTH(src)
 
-	if(water_overlay)
-		water_overlay.color = water_reagent.color
-		if(uses_height)
-			water_overlay.icon_state = "bottom[water_height]"
-	if(water_top_overlay)
-		water_top_overlay.color = water_reagent.color
-		if(uses_height)
-			if(water_height == WATER_HEIGHT_FULL)
-				water_top_overlay.icon_state = null
-			else
-				water_top_overlay.icon_state = "top[water_height]"
+	// if(water_overlay)
+	// 	water_overlay.color = water_reagent.color
+	// 	if(uses_height)
+	// 		water_overlay.icon_state = "bottom[water_height]"
+	// if(water_top_overlay)
+	// 	water_top_overlay.color = water_reagent.color
+	// 	if(uses_height)
+	// 		if(water_height == WATER_HEIGHT_FULL)
+	// 			water_top_overlay.icon_state = null
+	// 		else
+	// 			water_top_overlay.icon_state = "top[water_height]"
 
-/turf/open/water/add_neighborlay(dir, edgeicon, offset = FALSE)
-	var/add
-	var/y = 0
-	var/x = 0
-	switch(dir)
-		if(NORTH)
-			add = "[edgeicon]-n"
-			y = -32
-		if(SOUTH)
-			add = "[edgeicon]-s"
-			y = 32
-		if(EAST)
-			add = "[edgeicon]-e"
-			x = -32
-		if(WEST)
-			add = "[edgeicon]-w"
-			x = 32
-
-	if(!add)
-		return
-
-	if(water_overlay)
-		var/image/overlay = image(icon, water_overlay, add, ABOVE_MOB_LAYER + 0.01, pixel_x = offset ? x : 0, pixel_y = offset ? y : 0 )
-		overlay.color = water_reagent.color
-		if("[dir]" in water_overlay.neighborlay_list)
-			water_overlay.cut_overlay(water_overlay.neighborlay_list["[dir]"])
-			qdel(water_overlay.neighborlay_list["[dir]"])
-			LAZYREMOVE(water_overlay.neighborlay_list, "[dir]")
-		LAZYADDASSOC(water_overlay.neighborlay_list, "[dir]", overlay)
-		water_overlay.add_overlay(overlay)
-
-/turf/open/water/remove_neighborlays()
-	var/list/overlays = water_overlay?.neighborlay_list
-	if(!LAZYLEN(overlays))
-		return
-	for(var/key as anything in overlays)
-		water_overlay.cut_overlay(overlays[key])
-		QDEL_NULL(overlays[key])
-		LAZYREMOVE(overlays, key)
-
-/turf/open/water/Exited(atom/movable/gone, atom/new_loc)
+/turf/open/water/Exited(atom/movable/gone, direction)
 	. = ..()
 	for(var/obj/structure/S in src)
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
@@ -387,19 +426,22 @@
 		// 	else
 		// 		living.RemoveElement(/datum/element/submerged)
 		// 	living.adjust_experience(GET_MOB_SKILL_VALUE_OLD(living, /datum/attribute/skill/misc/swimming), (GET_MOB_ATTRIBUTE_VALUE(living, STAT_INTELLIGENCE) * 0.3))
-		if(water_overlay)
-			if((get_dir(src, new_loc) == SOUTH))
-				water_overlay.layer = BELOW_MOB_LAYER
-				water_overlay.plane = GAME_PLANE
-			else
-				spawn(6)
-					if(!locate(/mob/living) in src)
-						water_overlay.layer = BELOW_MOB_LAYER
-						water_overlay.plane = GAME_PLANE
+		// if(water_overlay)
+		// 	if((direction == SOUTH))
+		// 		water_overlay.layer = BELOW_MOB_LAYER
+		// 		water_overlay.plane = GAME_PLANE
+		// 	else
+		// 		spawn(6)
+		// 			if(!locate(/mob/living) in src)
+		// 				water_overlay.layer = BELOW_MOB_LAYER
+		// 				water_overlay.plane = GAME_PLANE
+		/*
 		for(var/D in GLOB.cardinals) //adjacent to a floor to hold onto
 			if(istype(get_step(new_loc, D), /turf/open/floor))
 				return
-		if(swim_skill && !HAS_TRAIT(gone, TRAIT_GOOD_SWIM))
+		*/
+		/*
+		if(swim_skill && !HAS_TRAIT(gone, TRAIT_SWIMMER))
 			if(swimdir && new_loc) //we're being pushed by water or swimming with the current, easy
 				if(get_dir(src, new_loc) == dir)
 					return
@@ -409,6 +451,7 @@
 				if(!(water_height == WATER_HEIGHT_FULL ? living.adjust_stamina(drained, "drown") : living.adjust_stamina(drained)))
 					living.Immobilize(30)
 					addtimer(CALLBACK(living, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
+		*/
 
 /turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
 	..()
@@ -438,30 +481,30 @@
 		var/obj/item/clothing/cloth = arrived
 		if(cloth.wetable)
 			cloth.wet.add_water(20, dirty_water_turf)
-	if(isliving(arrived) && !arrived.throwing)
-		var/mob/living/L = arrived
-		if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_DEEP)
-			L.SoakMob(FULL_BODY, dirty_water_turf)
-			// if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
-				// if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
-				// 	L.AddElement(/datum/element/submerged)
-		else if(water_height == WATER_HEIGHT_SHALLOW)
-			L.SoakMob(BELOW_CHEST, dirty_water_turf)
-		else if(water_height == WATER_HEIGHT_ANKLE)
-			L.SoakMob(FEET, dirty_water_turf)
-		if(water_overlay)
-			if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
-				playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
-			else
-				playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
-			if(istype(old_loc, type) && (get_dir(src, old_loc) != SOUTH))
-				water_overlay.layer = ABOVE_MOB_LAYER
-				water_overlay.plane = GAME_PLANE_UPPER
-			else
-				spawn(6)
-					if(arrived.loc == src)
-						water_overlay.layer = ABOVE_MOB_LAYER
-						water_overlay.plane = GAME_PLANE_UPPER
+	// if(isliving(arrived) && !arrived.throwing)
+	// 	var/mob/living/L = arrived
+	// 	if(L.body_position == LYING_DOWN || water_height >= WATER_HEIGHT_DEEP)
+	// 		L.SoakMob(FULL_BODY, dirty_water_turf)
+	// 		// if((water_height == WATER_HEIGHT_FULL) || (open_bottom || fake_bottomless))
+	// 			// if(!HAS_TRAIT(L, TRAIT_SUBMERGED))
+	// 			// 	L.AddElement(/datum/element/submerged)
+	// 	else if(water_height == WATER_HEIGHT_SHALLOW)
+	// 		L.SoakMob(BELOW_CHEST, dirty_water_turf)
+	// 	else if(water_height == WATER_HEIGHT_ANKLE)
+	// 		L.SoakMob(FEET, dirty_water_turf)
+		// if(water_overlay)
+		// 	if(water_height > WATER_HEIGHT_ANKLE && !istype(old_loc, type))
+		// 		playsound(arrived, 'sound/foley/waterenter.ogg', 100, FALSE)
+		// 	else
+		// 		playsound(arrived, pick('sound/foley/watermove (1).ogg','sound/foley/watermove (2).ogg'), 100, FALSE)
+		// 	if(istype(old_loc, type) && (get_dir(src, old_loc) != SOUTH))
+		// 		water_overlay.layer = ABOVE_MOB_LAYER
+		// 		water_overlay.plane = GAME_PLANE_UPPER
+		// 	else
+		// 		spawn(6)
+		// 			if(arrived.loc == src)
+		// 				water_overlay.layer = ABOVE_MOB_LAYER
+		// 				water_overlay.plane = GAME_PLANE_UPPER
 
 /turf/open/water/attackby(obj/item/C, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/fill)
@@ -588,7 +631,7 @@
 	. = ..()
 	if(. <= 0)
 		return 0
-	if(water_volume < 10 || HAS_TRAIT(user, TRAIT_GOOD_SWIM))
+	if(water_volume < 10 || HAS_TRAIT(user, TRAIT_SWIMMER))
 		return 0
 	if(swim_skill)
 		return max(0, . - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/swimming)))
@@ -855,10 +898,9 @@
 	water_height = WATER_HEIGHT_DEEP
 	slowdown = 20
 	swim_skill = TRUE
-	swimdir = TRUE
 	set_relationships_on_init = FALSE
-	uses_height = FALSE
 	fishing_datum = /datum/fish_source/river
+	immerse_overlay = "immerse2"
 	var/river_processing
 	var/river_processes = TRUE
 	var/flow_speed = 5 DECISECONDS
@@ -916,7 +958,7 @@
 /turf/open/water/river/under
 	icon_state = MAP_SWITCH("rock", "rivermoveF-dir")
 	water_height = WATER_HEIGHT_FULL
-	uses_height = TRUE
+	immerse_overlay = null
 	shine = SHINE_MATTE
 
 /turf/open/water/river/dirt
@@ -933,7 +975,7 @@
 /turf/open/water/river/dirt/under
 	icon_state = MAP_SWITCH("dirt", "rivermovealtF-dir")
 	water_height = WATER_HEIGHT_FULL
-	uses_height = TRUE
+	immerse_overlay = null
 	shine = SHINE_MATTE
 
 /turf/open/water/river/blood

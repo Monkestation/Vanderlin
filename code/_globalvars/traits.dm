@@ -184,7 +184,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Hollow Bones" = TRAIT_HOLLOWBONES,
 		"Light Load" = TRAIT_AMAZING_BACK,
 		"Loved By Kittens" = TRAIT_KITTEN_MOM,
-		"Waterbreathing" = TRAIT_WATER_BREATHING,
+		"Waterbreathing" = TRAIT_NODROWN,
 		"Moonwater Elixir" = TRAIT_MOONWATER_ELIXIR,
 		"Endless Slumber" = TRAIT_TORPOR,
 		"Boundless Energy" = TRAIT_NOENERGY,
@@ -210,6 +210,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 	),
 	/turf = list(
 		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
+		"TRAIT_TURF_IGNORE_SLOWDOWN" = TRAIT_TURF_IGNORE_SLOWDOWN,
 	)
 ))
 
@@ -302,8 +303,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CRATEMOVER = "I am able to drag heavy objects without any difficulty.",
 	TRAIT_SEE_LEYLINES = "I can see the lines that make up this world.",
 	TRAIT_MOONWATER_ELIXIR = span_info("My mind is open, I can understand magic runes."),
-	TRAIT_GOOD_SWIM = span_info("I can swim without being slowed and against the flow of rivers."),
-	TRAIT_WATER_BREATHING = span_info("I can breathe underwater, I have no fear of drowning."),
+	TRAIT_SWIMMER = span_info("I can swim without being slowed and against the flow of rivers."),
+	TRAIT_NODROWN = span_info("I can breathe underwater, I have no fear of drowning."),
 	TRAIT_TINY = "I am small, it's hard to look people in the eyes.",
 	TRAIT_FOREIGNER = span_notice("I'm not from around here."),
 	TRAIT_OLDPARTY = "In years long passed, me and a group of fellow adventurers saved this city!",

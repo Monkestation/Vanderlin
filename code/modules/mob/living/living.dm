@@ -14,6 +14,8 @@
 
 /mob/living/Initialize()
 	. = ..()
+	if(initial_size != RESIZE_DEFAULT_SIZE)
+		update_transform(initial_size)
 	register_init_signals()
 	update_a_intents()
 	swap_rmb_intent(num=1)
@@ -119,13 +121,16 @@
 
 	impact_flags |= ZIMPACT_NO_MESSAGE | ZIMPACT_NO_SPIN // living mobs has its own messages
 
+	var/mass_kg = carry_weight + get_mob_weight()
+	var/fall_factor = sqrt(max(levels, 1))
+	var/impact_damage = mass_kg * fall_factor * FALL_DAMAGE_SCALE
 	for(var/mob/living/crumpled_mob in impacted_turf)
 		if(crumpled_mob == src)
 			continue
 		visible_message("[src] falls on top of [crumpled_mob]!")
 		crumpled_mob.Stun(1)
 		crumpled_mob.AdjustKnockdown(levels * 20)
-		crumpled_mob.take_overall_damage(levels * 10 * 3.5)
+		crumpled_mob.take_overall_damage(impact_damage)
 
 	return ..()
 
@@ -147,10 +152,10 @@
 			return . | ZIMPACT_CANCEL_DAMAGE
 	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!iscarbon(src)) // carbons need to do their own damage calculations based on bodyparts
-		var/encumberance_multiplier = 0.5 * (get_encumbrance() + 1) // half base falling damage. scale up to 100% based on encumberance
-		adjustBruteLoss(((levels * 10) * encumberance_multiplier) ** 1.5)
-		AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
-		AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
+		var/encumbrance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5) // half base falling damage. scale up to 100% based on encumbrance
+		adjustBruteLoss(((levels * 10) * encumbrance_multiplier) ** 1.5)
+		AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
+		AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 	return .
 
 /mob/living/proc/OpenCraftingMenu()
@@ -893,7 +898,9 @@
 	density = FALSE // We lose density and stop bumping passable dense things.
 	if(HAS_TRAIT(src, TRAIT_FLOORED) && !(dir & (NORTH|SOUTH)))
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
-	body_position_pixel_y_offset = PIXEL_Y_OFFSET_LYING
+	if(rotate_on_lying)
+		// add_offsets(LYING_DOWN_TRAIT, y_add = PIXEL_Y_OFFSET_LYING)
+		body_position_pixel_y_offset = PIXEL_Y_OFFSET_LYING
 	update_wallpress()
 
 /// Proc to append behavior related to lying down.
@@ -2306,8 +2313,11 @@
 				eyes.setOrganDamage(var_value)
 		if("maxHealth")
 			updatehealth()
-		if("resize")
-			update_transform()
+		if(NAMEOF(src, current_size))
+			if(var_value == 0) //prevents divisions of and by zero.
+				return FALSE
+			update_transform(var_value/current_size)
+			. = TRUE
 		if("lighting_alpha")
 			sync_lighting_plane_alpha()
 

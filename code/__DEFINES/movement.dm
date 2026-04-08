@@ -36,8 +36,22 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define MOVEMENT_LOOP_START_FAST (1<<0)
 ///Do we not use the priority system?
 #define MOVEMENT_LOOP_IGNORE_PRIORITY (1<<1)
+///Should we override the loop's glide?
+#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<3)
+///Should we not update our movables dir on move?
+#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<4)
+///Is the loop moving the movable outside its control, like it's an external force? e.g. footsteps won't play if enabled.
+#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<5)
+///Was this Move() called because of the process() of move_loop? Allows for checking whether a move was made from a movement loop.
+#define MOVEMENT_LOOP_CALLED_MOVE (1<<6)
 
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS
+
+/**
+ * Returns a bitfield containing flags both present in `flags` arg and the `processing_move_loop_flags` move_packet variable.
+ * Has no use outside of procs called within the movement proc chain.
+ */
+#define CHECK_MOVE_LOOP_FLAGS(movable, flags) (movable.move_packet ? (movable.move_packet.processing_move_loop_flags & (flags)) : NONE)
 
 /**
  * currently_z_moving defines. Higher numbers mean higher priority.
@@ -60,6 +74,8 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define FALL_STOP_INTERCEPTING (1<<2)
 /// Used when the grip on a pulled object shouldn't be broken.
 #define FALL_RETAIN_PULL (1<<3)
+/// Stops the movable from calling atom/movable/proc/onZImpact(). FALL_INTERCEPTED also has this behavior.
+#define FALL_NO_ZIMPACT (1<<0)
 
 /// Runs check_pulling() by the end of [/atom/movable/proc/zMove] for every movable that's pulling something. Should be kept enabled unless you know what you are doing.
 #define ZMOVE_CHECK_PULLING (1<<0)
@@ -93,3 +109,8 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define Z_MOVE_CLIMBING_FLAGS (ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
 /// Used for falling down open space.
 #define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)
+
+///Return values for moveloop Move()
+#define MOVELOOP_FAILURE 0
+#define MOVELOOP_SUCCESS 1
+#define MOVELOOP_NOT_READY 2

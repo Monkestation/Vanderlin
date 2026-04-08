@@ -12,6 +12,7 @@
 
 	/// Remember initial sprite
 	var/base_icon
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
 
 /obj/structure/bridge/Initialize(mapload)
 	. = ..()
@@ -25,6 +26,7 @@
 	base_icon = "planks_1"
 	icon_state = base_icon
 	update_appearance(UPDATE_ICON)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/bridge/update_icon_state()
 	if(obj_broken)

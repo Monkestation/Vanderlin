@@ -19,7 +19,11 @@
 	var/segment = 360/segments
 	if(!clockwise)
 		segment = -segment
+	SEND_SIGNAL(src, COMSIG_ATOM_SPIN_ANIMATION, speed, loops, segments, segment)
 	do_spin_animation(speed, loops, segments, segment, parallel)
+
+/// The duration of the animate call in mob/living/update_transform
+#define UPDATE_TRANSFORM_ANIMATION_TIME (0.2 SECONDS)
 
 ///Animates source spinning around itself. For docmentation on the args, check atom/proc/SpinAnimation()
 /atom/proc/do_spin_animation(speed = 1 SECONDS, loops = -1, segments = 3, angle = 120, parallel = TRUE)

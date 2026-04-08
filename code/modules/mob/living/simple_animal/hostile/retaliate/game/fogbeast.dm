@@ -168,15 +168,15 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 /mob/living/simple_animal/hostile/retaliate/honse/post_buckle_mob(mob/living/M)
 	. = ..()
-	RegisterSignal(M, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+	RegisterSignal(M, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 	if(!has_buckled_mobs())
-		RegisterSignal(src, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+		RegisterSignal(src, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 
 /mob/living/simple_animal/hostile/retaliate/honse/post_unbuckle_mob(mob/living/M)
 	. = ..()
-	UnregisterSignal(M, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+	UnregisterSignal(M, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 	if(!has_buckled_mobs())
-		UnregisterSignal(src, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+		UnregisterSignal(src, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 
 /obj/effect/decal/remains/honse
 	name = "remains"

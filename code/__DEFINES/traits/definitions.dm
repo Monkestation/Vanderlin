@@ -27,6 +27,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
+///generic atom traits
+/// If this movable is currently considered to be treading in a turf with the immerse element.
+#define TRAIT_IMMERSED "immersed"
+///The effects of the immerse element will be halted while this trait is present.
+#define TRAIT_IMMERSE_STOPPED "immerse_stopped"
+
 // ************* mob traits
 
 /// Prevents voluntary movement.
@@ -258,7 +264,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Can't move diagonally
 #define TRAIT_BLOCKED_DIAGONAL "blocked_diagonals"
 /// Can swim ignoring water flow and slowdown
-#define TRAIT_GOOD_SWIM "Good Swim"
+#define TRAIT_SWIMMER "Good Swimmer"
 /// Indicates the mob is in water without a bottom or underwater
 #define TRAIT_SUBMERGED	"submerged"
 /// Prevents floating in water and swimming up. Will move downward if in open water.
@@ -370,7 +376,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
-#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -419,7 +424,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HOLLOWBONES "Hollow Bones"
 #define TRAIT_AMAZING_BACK "Light Load"
 #define TRAIT_KITTEN_MOM "Loved By Kittens"
-#define TRAIT_WATER_BREATHING "Waterbreathing"
+#define TRAIT_NODROWN "Waterbreathing"
 #define TRAIT_MOONWATER_ELIXIR "Moonwater Elixir"
 #define TRAIT_FLOWERFIELD_IMMUNITY "Flower Strider"
 #define TRAIT_SECRET_OFFICIANT "Secret Officiant"
@@ -540,6 +545,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BRITTLE "brittle"
 /// The limb has no fingies
 #define TRAIT_FINGERLESS "fingerless"
+
+///Turf slowdown will be ignored when this trait is added to a turf.
+#define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
+
+///every hearing sensitive atom has this trait
+#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
 
 // **** item traits
 /// Can't drop

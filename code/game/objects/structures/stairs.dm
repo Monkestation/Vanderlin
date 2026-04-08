@@ -25,6 +25,7 @@
 	VAR_FINAL/turf/directly_above
 	/// If TRUE, we have left/middle/right sprites.
 	var/has_merged_sprites = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
 
 /obj/structure/stairs/Initialize(mapload)
 	. = ..()
@@ -40,6 +41,7 @@
 	)
 
 	AddElement(/datum/element/connect_loc, exit_connections)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/stairs/Destroy()
 	if(directly_above)

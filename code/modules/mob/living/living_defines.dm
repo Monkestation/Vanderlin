@@ -4,7 +4,11 @@
 	see_in_dark = 8
 	hud_possible = list(ANTAG_HUD)
 
-	var/resize = 1 //Badminnery resize
+	///Tracks the scale of the mob transformation matrix in relation to its identity. Use update_transform(resize) to change it.
+	var/current_size = RESIZE_DEFAULT_SIZE
+	///How the mob transformation matrix is scaled on init.
+	var/initial_size = RESIZE_DEFAULT_SIZE
+
 	var/lastattacker = null
 	var/lastattackerckey = null
 	var/datum/weakref/lastattacker_weakref = null
@@ -45,9 +49,11 @@
 	/// Variable to track the body position of a mob, regardgless of the actual angle of rotation (usually matching it, but not necessarily).
 	var/body_position = STANDING_UP
 	/// Number of degrees of rotation of a mob. 0 means no rotation, up-side facing NORTH. 90 means up-side rotated to face EAST, and so on.
-	var/lying_angle = 0
+	VAR_PROTECTED/lying_angle = 0
 	/// Value of lying lying_angle before last change. TODO: Remove the need for this.
 	var/lying_prev = 0
+	/// Does the mob rotate when lying
+	var/rotate_on_lying = FALSE
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
 	var/timeofdeath = 0
@@ -144,6 +150,9 @@
 	var/losebreath = 0
 
 	var/slowed_by_drag = TRUE //Whether the mob is slowed down when dragging another prone mob
+
+	///The height offset of a mob's maptext due to their current size.
+	var/body_maptext_height_offset = 0
 
 	var/list/ownedSoullinks //soullinks we are the owner of
 	var/list/sharedSoullinks //soullinks we are a/the sharer of

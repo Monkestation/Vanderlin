@@ -338,7 +338,7 @@
 			span_userdanger("You crash into [impacted_turf]!"),
 		)
 	if(!(impact_flags & ZIMPACT_NO_SPIN))
-		INVOKE_ASYNC(src, PROC_REF(SpinAnimation), 0.2 SECONDS, 1)
+		INVOKE_ASYNC(src, PROC_REF(do_spin_animation), 0.2 SECONDS, 1)
 
 	SEND_SIGNAL(src, COMSIG_ATOM_ON_Z_IMPACT, impacted_turf, levels)
 	return TRUE
@@ -1176,7 +1176,7 @@
 			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
-		SpinAnimation(5, 1)
+		do_spin_animation(5, 1)
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, TT, spin)
 	SSthrowing.processing[src] = TT

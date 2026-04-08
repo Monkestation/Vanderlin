@@ -5,11 +5,13 @@
 	var/postdig_icon_change = FALSE
 	var/postdig_icon
 	var/wet
+
 	var/footstep = null
 	var/barefootstep = null
 	var/clawfootstep = null
 	var/heavyfootstep = null
-	var/footstepstealth = FALSE
+	var/force_footstep_sound = FALSE
+
 	baseturfs = /turf/open/openspace
 
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN

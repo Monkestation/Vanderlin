@@ -59,7 +59,7 @@
 		if(feedback)
 			flier.balloon_alert(flier, "can't my spread wings!")
 		return FALSE
-	if(flier.get_encumbrance() > 0.7)
+	if(flier.encumbrance >= ENCUMBRANCE_HEAVY)
 		if(feedback)
 			flier.balloon_alert(flier, "too heavy!")
 		return FALSE
@@ -148,14 +148,14 @@
 	animate(carbon_owner, transform = original, time = 1.2 SECONDS, easing = EASE_IN, flags = ANIMATION_PARALLEL)
 
 /obj/item/organ/wings/flight/proc/init_signals(mob/living/carbon/carbon_owner)
-	RegisterSignal(carbon_owner, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_damage))
+	RegisterSignal(carbon_owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_damage))
 	RegisterSignal(carbon_owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_movement))
 	RegisterSignal(carbon_owner, COMSIG_LIVING_SET_BODY_POSITION, PROC_REF(check_laying))
 	RegisterSignal(carbon_owner, SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED), PROC_REF(fall))
 
 /obj/item/organ/wings/flight/proc/remove_signals(mob/living/carbon/carbon_owner)
 	UnregisterSignal(carbon_owner, list(
-		COMSIG_MOB_APPLY_DAMGE,
+		COMSIG_MOB_APPLY_DAMAGE,
 		COMSIG_MOVABLE_MOVED,
 		COMSIG_LIVING_SET_BODY_POSITION,
 		SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED)

@@ -212,7 +212,7 @@
 	if(!is_laying)
 		if(W.water_height < WATER_HEIGHT_SHALLOW)
 			return
-		else if(W.water_height == WATER_HEIGHT_FULL && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
+		else if(W.water_height == WATER_HEIGHT_FULL && !(HAS_TRAIT(src, TRAIT_NODROWN) || HAS_TRAIT(src, TRAIT_NOBREATH)))
 			var/swimdrain = max(10 - GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming), 1)
 			if(swimdrain < maximum_stamina - stamina)
 				adjust_stamina(swimdrain, "drown")
@@ -220,7 +220,7 @@
 			else
 				adjustOxyLoss(drown_damage)
 				emote("drown")
-	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
+	if(is_laying && !(HAS_TRAIT(src, TRAIT_NODROWN) || HAS_TRAIT(src, TRAIT_NOBREATH)))
 		adjustOxyLoss(drown_damage)
 		if(stat == DEAD && client)
 			record_round_statistic(STATS_PEOPLE_DROWNED)

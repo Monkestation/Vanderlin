@@ -53,7 +53,7 @@
 /mob/living/proc/AmountStun() //How many deciseconds remain in our stun
 	var/datum/status_effect/incapacitating/stun/S = IsStun()
 	if(S)
-		return S.duration - world.time
+		return S.duration
 	return 0
 
 /mob/living/proc/Stun(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -107,7 +107,7 @@
 /mob/living/proc/AmountKnockdown() //How many deciseconds remain in our knockdown
 	var/datum/status_effect/incapacitating/knockdown/K = IsKnockdown()
 	if(K)
-		return K.duration - world.time
+		return K.duration
 	return 0
 
 /mob/living/proc/Knockdown(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -160,7 +160,7 @@
 /mob/living/proc/AmountImmobilized() //How many deciseconds remain in our Immobilized status effect
 	var/datum/status_effect/incapacitating/immobilized/I = IsImmobilized()
 	if(I)
-		return I.duration - world.time
+		return I.duration
 	return 0
 
 /mob/living/proc/Immobilize(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -213,7 +213,7 @@
 /mob/living/proc/AmountParalyzed() //How many deciseconds remain in our Paralyzed status effect
 	var/datum/status_effect/incapacitating/paralyzed/P = IsParalyzed(FALSE)
 	if(P)
-		return P.duration - world.time
+		return P.duration
 	return 0
 
 /mob/living/proc/Paralyze(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -267,7 +267,7 @@
 /mob/living/proc/AmountOffBalanced() //How many deciseconds remain in our knockdown
 	var/datum/status_effect/incapacitating/off_balanced/O = IsOffBalanced()
 	if(O)
-		return O.duration - world.time
+		return O.duration
 	return 0
 
 /mob/living/proc/OffBalance(amount) //Can't go below remaining duration
@@ -308,7 +308,7 @@
 /mob/living/proc/AmountUnconscious() //How many deciseconds remain in our unconsciousness
 	var/datum/status_effect/incapacitating/unconscious/U = IsUnconscious()
 	if(U)
-		return U.duration - world.time
+		return U.duration
 	return 0
 
 /mob/living/proc/Unconscious(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -358,7 +358,7 @@
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
 	var/datum/status_effect/incapacitating/sleeping/S = IsSleeping()
 	if(S)
-		return S.duration - world.time
+		return S.duration
 	return 0
 
 /mob/living/proc/Sleeping(amount, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -403,7 +403,7 @@
 /mob/living/proc/AmountConcussion()
 	var/datum/status_effect/incapacitating/concussion/I = IsConcussion()
 	if(I)
-		return I.duration - world.time
+		return I.duration
 	return 0
 
 /mob/living/proc/Concussion(amount, updating = TRUE, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -459,7 +459,7 @@
 /mob/living/proc/AmountStumble() //How many deciseconds remain in our Dazed status effect
 	var/datum/status_effect/incapacitating/stumble/I = IsStumble()
 	if(I)
-		return I.duration - world.time
+		return I.duration
 	return 0
 
 /mob/living/proc/Stumble(amount, updating = TRUE, ignore_canstun = FALSE) //Can't go below remaining duration
@@ -624,7 +624,7 @@
 		if(isnum(max_duration) && duration > 0)
 			// Check the duration remaining on the existing status effect
 			// If it's greater than / equal to our passed max duration, we don't need to do anything
-			var/remaining_duration = existing.duration - world.time
+			var/remaining_duration = existing.duration
 			if(remaining_duration >= max_duration)
 				return
 
@@ -671,7 +671,7 @@
 		if(only_if_higher)
 			// If the existing status effect has a higher remaining duration
 			// than what we aim to set it to, don't downgrade it - do nothing (return)
-			var/remaining_duration = existing.duration - world.time
+			var/remaining_duration = existing.duration
 			if(remaining_duration >= duration)
 				return
 
@@ -699,4 +699,4 @@
 	if(existing.duration == -1)
 		return INFINITY
 
-	return existing.duration - world.time
+	return existing.duration

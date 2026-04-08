@@ -16,3 +16,6 @@
 #define COMSIG_ATOM_EXITED "atom_exited"
 ///from base of atom/movable/Moved(): (atom/movable/gone, direction)
 #define COMSIG_ATOM_ABSTRACT_EXITED "atom_abstract_exited"
+
+/// Called on [/atom/SpinAnimation()] : (speed, loops, segments, angle)
+#define COMSIG_ATOM_SPIN_ANIMATION "atom_spin_animation"

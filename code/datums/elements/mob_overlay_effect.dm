@@ -4,7 +4,7 @@
 ///mob_overlay_effect component. adds and removes
 /datum/element/mob_overlay_effect
 	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH_ON_HOST_DESTROY
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 
 	var/y_offset = 0
 	var/mask_y_offset = 0
