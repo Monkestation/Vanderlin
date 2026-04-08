@@ -1816,6 +1816,7 @@
 "aiB" = (
 /obj/structure/bars,
 /obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
 "aiC" = (
 /obj/machinery/light/fueled/campfire/longlived,
@@ -3844,9 +3845,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/mountains/anvil/upperkeep)
-"asz" = (
-/obj/structure/bars,
-/area/indoors/mountains/anvil/keep)
 "asA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/masonic{
@@ -68204,7 +68202,7 @@ aET
 uhq
 uhq
 uhq
-asz
+abe
 afn
 afn
 afn
@@ -68608,7 +68606,7 @@ aET
 uhq
 uhq
 uhq
-asz
+abe
 afn
 aWI
 aWI
