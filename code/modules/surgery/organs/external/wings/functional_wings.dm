@@ -142,12 +142,13 @@
 	if(!isliving(owner))
 		return FALSE
 
-	// Only stop flight if there is somewhere to go
-	// This is so you can fly on the top Z level
-	var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
-	if(above_turf && (!isopenspace(above_turf) || !owner.can_zTravel(direction = UP)))
-		owner.balloon_alert(owner, "can't fly up!")
-		return FALSE
+	if(allows_z_rise)
+		// Only stop flight if there is somewhere to go
+		// This is so you can fly on the top Z level
+		var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
+		if(above_turf && (!isopenspace(above_turf) || !owner.can_zTravel(direction = UP)))
+			owner.balloon_alert(owner, "can't fly up!")
+			return FALSE
 
 	return can_fly()
 
