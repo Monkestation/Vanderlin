@@ -9,18 +9,18 @@
 	blacklist = list(
 		/datum/job/jailor,
 		/datum/job/adept,
-		/datum/job/absolver,
 		/datum/job/advclass/mercenary/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/preacher,
 		/datum/job/advclass/combat/swordmaster,
+		/datum/job/advclass/royalknight/steam,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
 	)
 	// Limited positions to ensure core roles are filled.
 	slot_adjust = list(
-		/datum/job/feldsher = 1,
+		/datum/job/feldsher = 2,
 		/datum/job/orthodoxist = 1,
-		/datum/job/bogwitch = 1,
-		/datum/job/bog_apprentice = 1,
 	)
 	ages_adjust = list(
 		/datum/job/forestguard = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)

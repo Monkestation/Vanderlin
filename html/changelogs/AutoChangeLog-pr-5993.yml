@@ -1,0 +1,4 @@
+author: "Draggeru"
+delete-after: True
+changes:
+  - map: "Updates WPP, see PR for full changes"
