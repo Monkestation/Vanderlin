@@ -2448,12 +2448,6 @@
 	},
 /turf/open/floor/ruinedwood/two,
 /area/ship/nobledeck)
-"qB" = (
-/obj/effect/landmark/start/nightmaiden{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/ship/middeck)
 "qE" = (
 /obj/effect/landmark/start/cook{
 	dir = 4
@@ -6517,9 +6511,6 @@
 "RC" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
-	},
-/obj/effect/landmark/start/nightmaiden{
-	dir = 1
 	},
 /turf/open/floor/churchrough,
 /area/ship/middeck)
@@ -13949,7 +13940,7 @@ RC
 tL
 uw
 Kc
-qB
+Kc
 kM
 Ve
 tL
