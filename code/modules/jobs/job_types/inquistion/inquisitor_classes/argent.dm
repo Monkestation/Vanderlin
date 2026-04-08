@@ -114,7 +114,11 @@
 
 /datum/job/advclass/sacrestant/argent/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Argent")
+
+/datum/job/advclass/sacrestant/argent/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/weapons = list("Blessed Psydonic Dagger", "Psydonic Handmace", "Psydonic Shortsword", "Psydonic Handaxe", "Psydonic Whip", "Psydonic Flail", "Psydonic Spear")
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "TAKE UP PSYDON'S ARMS.", weapons)
