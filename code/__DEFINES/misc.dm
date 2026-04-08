@@ -6,11 +6,6 @@
 
 #define CORNERDIRS			list(SOUTHWEST,NORTHWEST,SOUTHEAST,NORTHEAST)
 
-#define TEXT_NORTH			"[NORTH]"
-#define TEXT_SOUTH			"[SOUTH]"
-#define TEXT_EAST			"[EAST]"
-#define TEXT_WEST			"[WEST]"
-
 /// Use male sprites
 #define MALE_SPRITES 	0
 /// Use female sprites only

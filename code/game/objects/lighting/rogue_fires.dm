@@ -582,12 +582,12 @@
 
 /obj/machinery/light/fueled/campfire/pyre/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 10)
+	M.add_offsets(type, x_add = 0, y_add = 10)
 	M.setDir(SOUTH)
 
 /obj/machinery/light/fueled/campfire/pyre/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/machinery/light/fueled/campfire/longlived
 	fueluse = 180 MINUTES

@@ -562,7 +562,8 @@
 			if(!suppress_message)
 				send_pull_message(M)
 		update_pull_movespeed()
-		set_pull_offsets(M, max(state, grab_state))
+		if(M != src)
+			set_pull_offsets(M, max(state, grab_state))
 	else
 		if(!suppress_message)
 			var/sound_to_play = 'sound/combat/shove.ogg'
@@ -599,8 +600,15 @@
 					span_hear("I hear shuffling."), null, src)
 	to_chat(src, span_info("I grab [src != target ? "[target]" : "myself"]."))
 
-/mob/living/proc/set_pull_offsets(mob/living/M, grab_state = GRAB_PASSIVE)
-	if(M.buckled)
+/**
+ * Updates the offsets of the passed mob according to the passed grab state and the direction between them and us
+ *
+ * * M - the mob to update the offsets of
+ * * grab_state - the state of the grab
+ * * animate - whether or not to animate the offsets
+ */
+/mob/living/proc/set_pull_offsets(mob/living/mob_to_set, grab_state = GRAB_PASSIVE, animate = TRUE)
+	if(mob_to_set.buckled)
 		return //don't make them change direction or offset them if they're buckled into something.
 	var/offset = 0
 	switch(grab_state)
@@ -608,49 +616,35 @@
 			offset = GRAB_PIXEL_SHIFT_PASSIVE
 		if(GRAB_AGGRESSIVE)
 			offset = GRAB_PIXEL_SHIFT_AGGRESSIVE
-	var/target_pixel_x = M.base_pixel_x + M.body_position_pixel_x_offset
-	var/target_pixel_y = M.base_pixel_y + M.body_position_pixel_y_offset
-	switch(get_dir(M, src))
+	mob_to_set.setDir(get_dir(mob_to_set, src))
+	var/dir_filter = mob_to_set.dir
+	if(ISDIAGONALDIR(dir_filter))
+		dir_filter = EWCOMPONENT(dir_filter)
+	switch(dir_filter)
 		if(NORTH)
-			animate(M, pixel_x = target_pixel_x, pixel_y = target_pixel_y + offset, 3)
-		if(NORTHEAST)
-			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y + offset, 3)
-		if(EAST)
-			if(M.lying_angle == 270) //update the dragged dude's direction if we've turned
-				M.set_lying_angle(90)
-			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y, 3)
-		if(SOUTHEAST)
-			animate(M, pixel_x = target_pixel_x + offset, pixel_y = target_pixel_y - offset, 3)
+			mob_to_set.add_offsets(GRABBING_TRAIT, x_add = 0, y_add = offset, animate = animate)
 		if(SOUTH)
-			animate(M, pixel_x = target_pixel_x, pixel_y = target_pixel_y - offset, 3)
-		if(SOUTHWEST)
-			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y - offset, 3)
+			mob_to_set.add_offsets(GRABBING_TRAIT, x_add = 0, y_add = -offset, animate = animate)
+		if(EAST)
+			if(mob_to_set.lying_angle == LYING_ANGLE_WEST) //update the dragged dude's direction if we've turned
+				mob_to_set.set_lying_angle(LYING_ANGLE_EAST)
+			mob_to_set.add_offsets(GRABBING_TRAIT, x_add = offset, y_add = 0, animate = animate)
 		if(WEST)
-			if(M.lying_angle == 90)
-				M.set_lying_angle(270)
-			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y, 3)
-		if(NORTHWEST)
-			animate(M, pixel_x = target_pixel_x - offset, pixel_y = target_pixel_y + offset, 3)
+			if(mob_to_set.lying_angle == LYING_ANGLE_EAST)
+				mob_to_set.set_lying_angle(LYING_ANGLE_WEST)
+			mob_to_set.add_offsets(GRABBING_TRAIT, x_add = -offset, y_add = 0, animate = animate)
 
+/**
+ * Removes any offsets from the passed mob that are related to being grabbed
+ *
+ * * M - the mob to remove the offsets from
+ * * override - if TRUE, the offsets will be removed regardless of the mob's buckled state
+ * otherwise we won't remove the offsets if the mob is buckled
+ */
 /mob/living/proc/reset_pull_offsets(mob/living/M, override)
 	if(!override && M.buckled)
 		return
-	var/target_pixel_x = M.base_pixel_x + M.body_position_pixel_x_offset
-	var/target_pixel_y = M.base_pixel_y + M.body_position_pixel_y_offset
-	animate(M, pixel_x = target_pixel_x, pixel_y = target_pixel_y, 1)
-
-/mob/living/proc/set_mob_offsets(index, _x = 0, _y = 0)
-	if(index)
-		if(mob_offsets[index])
-			reset_offsets(index)
-		mob_offsets[index] = list("x" = _x, "y" = _y)
-	update_transform()
-
-/mob/living/proc/reset_offsets(index)
-	if(index)
-		if(mob_offsets[index])
-			mob_offsets[index] = null
-	update_transform()
+	M.remove_offsets(GRABBING_TRAIT)
 
 //mob verbs are a lot faster than object verbs
 //for more info on why this is not atom/pull, see examinate() in mob.dm
@@ -899,8 +893,7 @@
 	if(HAS_TRAIT(src, TRAIT_FLOORED) && !(dir & (NORTH|SOUTH)))
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
 	if(rotate_on_lying)
-		// add_offsets(LYING_DOWN_TRAIT, y_add = PIXEL_Y_OFFSET_LYING)
-		body_position_pixel_y_offset = PIXEL_Y_OFFSET_LYING
+		add_offsets(LYING_DOWN_TRAIT, y_add = PIXEL_Y_OFFSET_LYING)
 	update_wallpress()
 
 /// Proc to append behavior related to lying down.
@@ -908,7 +901,7 @@
 	if(layer == LYING_MOB_LAYER)
 		layer = initial(layer)
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
-	body_position_pixel_y_offset = 0
+	remove_offsets(LYING_DOWN_TRAIT)
 
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
@@ -1095,32 +1088,32 @@
 
 /mob/living/proc/update_wallpress(turf/T, atom/newloc, direct)
 	if(!wallpressed)
-		reset_offsets("wall_press")
+		remove_offsets("wall_press")
 		return FALSE
 	if(buckled || body_position == LYING_DOWN)
 		wallpressed = FALSE
 		update_wallpress_slowdown()
-		reset_offsets("wall_press")
+		remove_offsets("wall_press")
 		return FALSE
 	var/turf/newwall = get_step(newloc, wallpressed)
 	if(!T.Adjacent(newwall))
-		return reset_offsets("wall_press")
+		return remove_offsets("wall_press")
 	if(isclosedturf(newwall) && fixedeye)
 		var/turf/closed/C = newwall
 		if(C.wallpress)
 			return TRUE
 	wallpressed = FALSE
-	reset_offsets("wall_press")
+	remove_offsets("wall_press")
 	update_wallpress_slowdown()
 
 /mob/living/proc/update_pixelshift(turf/T, atom/newloc, direct)
 	if(!pixelshifted)
-		reset_offsets("pixel_shift")
+		remove_offsets("pixel_shift")
 		return FALSE
 	pixelshifted = FALSE
 	pixelshift_x = 0
 	pixelshift_y = 0
-	reset_offsets("pixel_shift")
+	remove_offsets("pixel_shift")
 
 /mob/living/Move(atom/newloc, direct, glide_size_override)
 
@@ -1798,22 +1791,6 @@
 			who.show_inv(src)
 		else
 			src << browse(null,"window=mob[REF(who)]")
-
-/mob/living/proc/get_standard_pixel_x_offset()
-	var/_x = base_pixel_x
-	for(var/o in mob_offsets)
-		if(mob_offsets[o])
-			if(mob_offsets[o]["x"])
-				_x = _x + mob_offsets[o]["x"]
-	return _x + body_position_pixel_x_offset
-
-/mob/living/proc/get_standard_pixel_y_offset()
-	var/_y = base_pixel_y
-	for(var/o in mob_offsets)
-		if(mob_offsets[o])
-			if(mob_offsets[o]["y"])
-				_y = _y + mob_offsets[o]["y"]
-	return _y + body_position_pixel_y_offset
 
 /mob/living/cancel_camera()
 	..()

@@ -286,18 +286,11 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	// This determines if the overlay should cover the entire surface of the object or not
 	/*
 	var/layer_to_check = IS_TOPDOWN_PLANE(movable.plane) ? TOPDOWN_WATER_LEVEL_LAYER : WATER_LEVEL_LAYER
-
 	var/is_below_water = (movable.layer < layer_to_check) ? "underwater-" : ""
 	*/
-
-	var/list/icon_dimensions = get_icon_dimensions(movable.icon)
-	var/width = icon_dimensions["width"] || ICON_SIZE_X
-	var/height = icon_dimensions["height"] || ICON_SIZE_Y
-
 	var/is_below_water = movable.layer < WATER_LEVEL_LAYER ? "underwater-" : ""
-
 	// Tall mobs still only get covered to their feet, unless they're offset down
-	var/mutable_appearance/immerse_mask = generate_immerse_mask(width, max(ICON_SIZE_Y - movable.pixel_z, ICON_SIZE_Y), is_below_water)
+	var/mutable_appearance/immerse_mask = generate_immerse_mask(movable.get_cached_width(), max(ICON_SIZE_Y - movable.pixel_z, ICON_SIZE_Y), is_below_water)
 	if (!immerse_mask)
 		return
 	var/atom/movable/immerse_mask/effect_relay = generated_visual_overlays[movable]
@@ -310,7 +303,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	effect_relay.render_target = "*immerse_[REF(movable)]"
 	SEND_SIGNAL(movable, COMSIG_MOVABLE_EDIT_UNIQUE_IMMERSE_OVERLAY, effect_relay)
 	// Should always render above any other filters that could be adding visuals
-	movable.add_filter("immerse_mask", INFINITY, alpha_mask_filter(y = -floor((height - ICON_SIZE_Y) / 2) - movable.pixel_z, render_source = effect_relay.render_target, flags = MASK_INVERSE))
+	movable.add_filter("immerse_mask", INFINITY, alpha_mask_filter(y = -floor((movable.get_cached_height() - ICON_SIZE_Y) / 2) - movable.pixel_z, render_source = effect_relay.render_target, flags = MASK_INVERSE))
 
 /datum/element/immerse/proc/remove_immerse_overlay(atom/movable/movable, deleting = TRUE)
 	movable.remove_filter("immerse_mask")
@@ -354,13 +347,10 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	if (source.pixel_z == new_z)
 		return
 
-	var/list/icon_dimensions = get_icon_dimensions(source.icon)
-	var/height = icon_dimensions["height"] || ICON_SIZE_Y
-
 	if (animate)
-		source.transition_filter("immerse_mask", list("y" = -floor((height - ICON_SIZE_Y) / 2) - new_z), time = UPDATE_TRANSFORM_ANIMATION_TIME)
+		source.transition_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z), time = UPDATE_TRANSFORM_ANIMATION_TIME)
 	else
-		source.modify_filter("immerse_mask", list("y" = -floor((height - ICON_SIZE_Y) / 2) - new_z))
+		source.modify_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z))
 
 /atom/movable/immerse_mask
 	appearance_flags = RESET_TRANSFORM|RESET_COLOR|RESET_ALPHA|KEEP_APART

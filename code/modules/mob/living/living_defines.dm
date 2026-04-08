@@ -41,11 +41,6 @@
 	var/pixelshift_x = 0
 	var/pixelshift_y = 0
 
-	///The y amount a mob's sprite should be offset due to the current position they're in (e.g. lying down moves your sprite down)Add commentMore actions
-	var/body_position_pixel_x_offset = 0
-	///The x amount a mob's sprite should be offset due to the current position they're in
-	var/body_position_pixel_y_offset = 0
-
 	/// Variable to track the body position of a mob, regardgless of the actual angle of rotation (usually matching it, but not necessarily).
 	var/body_position = STANDING_UP
 	/// Number of degrees of rotation of a mob. 0 means no rotation, up-side facing NORTH. 90 means up-side rotated to face EAST, and so on.
@@ -239,7 +234,10 @@
 
 	var/mutable_appearance/reflective_icon
 
-	var/list/mob_offsets = list()
+	/// Lazylists of pixel offsets this mob is currently using
+	/// Modify this via add_offsets and .remove_offsets(,
+	/// NOT directly (and definitely avoid modifying offsets directly)
+	VAR_PRIVATE/list/offsets
 
 	var/last_deadlife
 

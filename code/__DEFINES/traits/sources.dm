@@ -46,6 +46,8 @@
 #define SUIT_TRAIT "suit"
 /// Trait associated to lying down (having a [lying_angle] of a different value than zero).
 #define LYING_DOWN_TRAIT "lying-down"
+/// A trait gained by leaning against a wall
+#define LEANING_TRAIT "leaning"
 /// trait associated to a stat value or range of
 #define STAT_TRAIT "stat"
 /// trait associated with be special effects
@@ -92,6 +94,9 @@
 #define ADVENTURER_TRAIT "adventurer"
 #define DEVOTION_TRAIT "devotion_trait"
 #define RAGE_TRAIT "rage_trait"
+
+/// From grabbing someone
+#define GRABBING_TRAIT "grabbing"
 /// trait associated to not having locomotion appendages nor the ability to fly or float
 #define LACKING_LOCOMOTION_APPENDAGES_TRAIT "lacking-locomotion-appengades"
 /// trait associated to not having fine manipulation appendages such as hands
@@ -111,6 +116,8 @@
 #define AI_ATTACK_TRAIT "ai_attack_trait"
 /// Trait from mob/living/update_transform()
 #define UPDATE_TRANSFORM_TRAIT "update_transform"
+/// Trait from mob/living/update_offsets()
+#define UPDATE_OFFSET_TRAIT "update_offset"
 /// Trait from [/datum/component/martyr_weapon]
 #define MARTYR_TRAIT "martyr"
 /// Trait from wings

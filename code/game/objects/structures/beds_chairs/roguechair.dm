@@ -289,7 +289,7 @@
 /obj/structure/bed/inn/double/post_buckle_mob(mob/living/target)
 	. = ..()
 	if(length(buckled_mobs) > 1 && !goldilocks) //  Push the second buckled mob a bit higher from the normal lying position
-		target.set_mob_offsets("bed_buckle", _x = 0, _y = 12)
+		target.add_offsets(type, x_add = 0, y_add = 12)
 		goldilocks = target
 
 /obj/structure/bed/inn/double/post_unbuckle_mob(mob/living/target)
@@ -316,7 +316,7 @@
 /obj/structure/bed/wool/double/post_buckle_mob(mob/living/target)
 	. = ..()
 	if(length(buckled_mobs) > 1 && !goldilocks) //  Push the second buckled mob a bit higher from the normal lying position
-		target.set_mob_offsets("bed_buckle", _x = 0, _y = 12)
+		target.add_offsets(type, x_add = 0, y_add = 12)
 		goldilocks = target
 
 /obj/structure/bed/wool/double/post_unbuckle_mob(mob/living/target)
@@ -421,11 +421,11 @@
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0 + src.pixel_x, _y = src.pixel_y)
+	M.add_offsets(type, x_add = 0 + src.pixel_x, y_add = src.pixel_y)
 
 /obj/structure/bed/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/chair/wood/alt/chair3/crafted
 	item_chair = /obj/item/chair/chair3/crafted

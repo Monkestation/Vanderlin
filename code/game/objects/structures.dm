@@ -50,7 +50,7 @@
 	if(isturf(loc))
 		for(var/mob/living/user in loc)
 			if(climb_offset)
-				user.reset_offsets("structure_climb")
+				user.remove_offsets("structure_climb")
 	if(redstone_id)
 		for(var/obj/structure/O in redstone_attached)
 			O.redstone_attached -= src
@@ -77,14 +77,14 @@
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+			user.add_offsets("structure_climb", x_add = 0, y_add = climb_offset)
 
 /obj/structure/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.reset_offsets("structure_climb")
+			user.remove_offsets("structure_climb")
 
 /obj/structure/ui_act(action, params)
 	..()

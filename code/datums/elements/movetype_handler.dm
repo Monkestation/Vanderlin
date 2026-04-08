@@ -1,19 +1,3 @@
-#define DO_FLOATING_ANIM(target) \
-	animate(target, pixel_z = 4, time = 1 SECONDS, loop = -1, flags = ANIMATION_RELATIVE); \
-	animate(pixel_z = -4, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
-
-#define STOP_FLOATING_ANIM(target) \
-	var/__final_pixel_y = 0; \
-	if(ismovable(target)) { \
-		var/atom/movable/__movable_target = target; \
-		__final_pixel_y += __movable_target.base_pixel_y; \
-	}; \
-	if(isliving(target)) { \
-		var/mob/living/__living_target = target; \
-		__final_pixel_y += __living_target.get_standard_pixel_y_offset(); \
-	}; \
-	animate(target, pixel_y = __final_pixel_y, time = 1 SECONDS)
-
 /**
  * An element that enables and disables movetype bitflags whenever the relative traits are added or removed.
  * It also handles the +2/-2 pixel y anim loop typical of mobs possessing the FLYING, FLOATING or SWIMMING movetypes.
