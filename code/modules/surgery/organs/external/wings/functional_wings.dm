@@ -308,29 +308,37 @@
 /datum/action/item_action/organ_action/use/flight/proc/check_movement(datum/source)
 	SIGNAL_HANDLER
 
-	if(owner.movement_type & FLYING)
-		if(!can_fly())
-			stop_flying(owner)
-			return
+	var/flying = (owner.movement_type & FLYING)
+	var/floating = (owner.movement_type & FLOATING)
 
-		if(!owner.adjust_stamina(-3))
-			to_chat(owner, span_warning("You're too exhausted to keep flying!"))
-			stop_flying(owner)
-			return
+	if(!flying && !floating)
+		return
 
-		var/turf/this_turf = get_turf(owner)
-		var/turf/below_turf = GET_TURF_BELOW(this_turf)
-		if(shadow)
-			if(!istransparentturf(this_turf))
-				shadow.alpha= 0
-			else
-				shadow.alpha = 255
+	if(!can_fly())
+		stop_flying(owner)
+		return
 
-			if(below_turf)
-				shadow.forceMove(below_turf)
+	if(!owner.adjust_stamina(-3))
+		to_chat(owner, span_warning("You're too exhausted to keep flying!"))
+		stop_flying(owner)
+		return
+
+	if(!flying)
+		return
+
+	var/turf/this_turf = get_turf(owner)
+	var/turf/below_turf = GET_TURF_BELOW(this_turf)
+	if(shadow)
+		if(!istransparentturf(this_turf))
+			shadow.alpha= 0
 		else
-			if(below_turf && istransparentturf(this_turf))
-				shadow = new /obj/effect/flyer_shadow(below_turf, owner)
+			shadow.alpha = 255
+
+		if(below_turf)
+			shadow.forceMove(below_turf)
+	else
+		if(below_turf && istransparentturf(this_turf))
+			shadow = new /obj/effect/flyer_shadow(below_turf, owner)
 
 /datum/action/item_action/organ_action/use/flight/proc/check_laying(datum/source, new_pos, old_pos)
 	SIGNAL_HANDLER
