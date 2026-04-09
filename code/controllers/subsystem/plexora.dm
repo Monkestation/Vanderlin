@@ -151,23 +151,24 @@ SUBSYSTEM_DEF(plexora)
 			active_requests -= request
 			qdel(request)
 
-/datum/controller/subsystem/plexora/proc/_Shutdown(hard = FALSE, requestedby)
+/datum/controller/subsystem/plexora/proc/notify_shutdown(restart_type_override)
 	var/static/server_restart_sent = FALSE
 
-	if (server_restart_sent)
+	if(server_restart_sent)
 		return
+
 	server_restart_sent = TRUE
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "servershutdown",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
 		"round_timer" = ROUND_TIME(),
 		"map" = SSmapping.config?.map_name,
 		"playercount" = length(GLOB.clients),
-		"restart_type" = restart_type,
+		"restart_type" = isnull(restart_type_override) ? restart_type : restart_type_override,
 		"requestedby" = usr?.ckey,
 		"requestedby_stealthed" = usr?.client?.holder?.fakekey,
-	), mark_active = FALSE)
+	))
 
 /datum/controller/subsystem/plexora/proc/serverstarted()
 	http_basicasync("serverupdates", list(
@@ -340,6 +341,19 @@ SUBSYSTEM_DEF(plexora)
 		"token" = token,
 		"data" = data,
 	))
+
+/datum/controller/subsystem/plexora/proc/http_fireandforget(path, list/body, ignore_enabled = FALSE)
+	if(!enabled && !ignore_enabled)
+		return
+
+	var/datum/http_request/request = new(
+		RUSTG_HTTP_METHOD_POST,
+		"[base_url]/[path]",
+		json_encode(body),
+		default_headers,
+		"tmp/response.json"
+	)
+	request.fire_and_forget()
 
 /datum/controller/subsystem/plexora/proc/http_basicasync(path, list/body, mark_active = TRUE)
 	RETURN_TYPE(/datum/http_request)
