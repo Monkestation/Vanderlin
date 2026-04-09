@@ -31,7 +31,7 @@
 	)
 
 /datum/job/jester
-	title = "Jester"
+	title = JOB_JESTER
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. \
 	You command a position of a fool, envious of the position your superiors have upon you. \
 	Your cheap tricks and illusions of intelligence will only work for so long, \
@@ -76,7 +76,7 @@
 	add_verb(spawned, /mob/living/carbon/human/proc/ear_trick)
 
 /datum/outfit/jester
-	name = "Jester"
+	name = JOB_JESTER
 	shoes = /obj/item/clothing/shoes/jester
 	pants = /obj/item/clothing/pants/tights
 	armor = /obj/item/clothing/shirt/jester

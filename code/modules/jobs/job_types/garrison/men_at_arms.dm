@@ -1,5 +1,5 @@
 /datum/job/men_at_arms
-	title = "Men-at-arms"
+	title = JOB_MAN_AT_ARMS
 	tutorial = "Chosen by the Captain and King, you're not like those shit stinking City Watchmen. \
 	Like a hound on a leash, you stand vigilant for your masters. \
 	You live better than the rest of the taffers in this kingdom-- \

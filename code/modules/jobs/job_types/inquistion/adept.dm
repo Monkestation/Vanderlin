@@ -1,5 +1,5 @@
 /datum/job/adept
-	title = "Adept"
+	title = JOB_ADEPT
 	tutorial = "You were a convicted criminal, the lowest scum of Vanderlin. \
 	Your master, the Inquisitor, saved you from the gallows \
 	and has given you true purpose in service to Psydon. \
@@ -31,7 +31,7 @@
 	languages = list(/datum/language/oldpsydonic)
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts
-	name = "Adept"
+	name = JOB_ADEPT
 	shoes = /obj/item/clothing/shoes/boots
 	mask = /obj/item/clothing/face/facemask/silver
 	beltr = /obj/item/storage/belt/pouch/coins/poor

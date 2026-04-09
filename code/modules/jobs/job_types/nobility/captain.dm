@@ -37,7 +37,7 @@
 	)
 
 /datum/job/captain
-	title = "Captain"
+	title = JOB_GUARD_CAPTAIN
 	tutorial = "Law and Order, your divine reason for existence. \
 	You have been given command over the town and keep garrison to help ensure order and peace within the city, \
 	and defend it against the many dangers of the peninsula."
@@ -48,7 +48,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
-	honorary = "Captain"
+	honorary = JOB_GUARD_CAPTAIN
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
@@ -95,7 +95,7 @@
 		"Deliverer of Justice" = /obj/item/weapon/polearm/halberd/bardiche/captain,
 	)
 
-	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose thy blade", title = "CAPTAIN")
+	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose thy blade", title = JOB_GUARD_CAPTAIN)
 	if(!choice)
 		return
 	switch(choice)
@@ -105,7 +105,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/captain/justice)
 
 /datum/outfit/captain
-	name = "Captain"
+	name = JOB_GUARD_CAPTAIN
 	head = /obj/item/clothing/head/helmet/visored/captain
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs/captain

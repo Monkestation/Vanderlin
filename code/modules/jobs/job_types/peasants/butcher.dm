@@ -16,7 +16,7 @@
 	)
 
 /datum/job/butcher
-	title = "Butcher"
+	title = JOB_BUTCHER
 	tutorial = "Some say youre a strange individual, \
 	some say youre a cheat while some claim you are a savant in the art of sausage making. \
 	Without your skilled hands and knifework most of the livestock around the town would be wasted."
@@ -42,7 +42,7 @@
 	)
 
 /datum/outfit/beastmaster
-	name = "Butcher"
+	name = JOB_BUTCHER
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/meatbag
 	beltl = /obj/item/key/butcher

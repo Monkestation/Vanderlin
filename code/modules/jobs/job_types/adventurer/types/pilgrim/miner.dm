@@ -20,7 +20,7 @@
 	)
 
 /datum/job/advclass/pilgrim/pilgrimminer
-	title = "Miner"
+	title = JOB_MINER
 	tutorial = "Hardy people who ceaselessly toil at the mines for ores and salt, \
 				who will ever know what they'll find beneath?"
 	allowed_sexes = list(MALE, FEMALE)

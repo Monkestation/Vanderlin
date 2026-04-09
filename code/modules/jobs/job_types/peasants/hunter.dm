@@ -44,7 +44,7 @@
 
 
 /datum/job/hunter
-	title = "Hunter"
+	title = JOB_HUNTER
 	f_title = "Huntress"
 	tutorial = "Silent and yet full of life, the forests of Dendor grant you both happiness and misery. \
 	In tales you've heard of small woodland creechers frolicking, now there is only the beastspawn of Graggar and Dendor... \
@@ -61,7 +61,7 @@
 
 	outfit = /datum/outfit/hunter
 	give_bank_account = 15
-	apprentice_name = "Hunter"
+	apprentice_name = JOB_HUNTER
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
 
@@ -75,7 +75,7 @@
 	)
 
 /datum/outfit/hunter
-	name = "Hunter"
+	name = JOB_HUNTER
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/leather

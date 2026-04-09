@@ -24,7 +24,7 @@
 	)
 
 /datum/job/carpenter
-	title = "Carpenter"
+	title = JOB_CARPENTER
 	tutorial = "Others may regard your work as crude and demeaning, but you understand deep in your soul the beauty of woodchopping. \
 	For it is by your axe that the great trees of forests are felled, and it is by your hands from which the shining beacon of civilization is built."
 	department_flag = PEASANTS
@@ -48,7 +48,7 @@
 
 
 /datum/outfit/carpenter
-	name = "Carpenter"
+	name = JOB_CARPENTER
 	neck = /obj/item/clothing/neck/coif
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	pants = /obj/item/clothing/pants/trou

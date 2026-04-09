@@ -3159,7 +3159,7 @@
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "cCe" = (
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/bath)
 "cCo" = (
@@ -15384,7 +15384,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
 "nnz" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
 "nnG" = (
@@ -17860,7 +17860,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
 "pCU" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/cobblerock,
 /area/outdoors/basin/safe)
 "pDm" = (
@@ -20108,7 +20108,7 @@
 /area/indoors/town)
 "rDF" = (
 /obj/machinery/light/fueled/chand,
-/obj/effect/landmark/start/orphanlate,
+/obj/effect/landmark/start/late/orphan,
 /turf/open/openspace,
 /area/indoors/town/orphanage)
 "rDQ" = (
@@ -24469,7 +24469,6 @@
 /area/under/town/basement)
 "vGT" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/scribe,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/library)
 "vGZ" = (
@@ -27246,7 +27245,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/keep/kitchen)
 "yav" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/dirt/road,
 /area/outdoors/basin/safe)
 "yaw" = (

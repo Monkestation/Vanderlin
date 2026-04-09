@@ -5549,7 +5549,7 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/under/town/basement)
 "cGd" = (
-/obj/effect/landmark/start/nightman{
+/obj/effect/landmark/start/apothecary{
 	dir = 4
 	},
 /turf/open/floor/dirt/road,
@@ -7804,7 +7804,7 @@
 /area/indoors/town/church/inquisition)
 "dKD" = (
 /obj/structure/bed/shit,
-/obj/effect/landmark/start/vagrantlate{
+/obj/effect/landmark/start/late/vagrant{
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
@@ -16152,7 +16152,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors)
 "hNW" = (
-/obj/effect/landmark/start/nightman{
+/obj/effect/landmark/start/apothecary{
 	dir = 4
 	},
 /turf/open/floor/dirt,
@@ -19208,7 +19208,7 @@
 /turf/open/floor/wood,
 /area/outdoors/town)
 "jrC" = (
-/obj/effect/landmark/start/vagrantlate{
+/obj/effect/landmark/start/late/vagrant{
 	dir = 1
 	},
 /turf/open/floor/dirt,
@@ -29391,9 +29391,6 @@
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
 	},
-/obj/effect/landmark/start/matron_assistant{
-	dir = 1
-	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/orphanage)
 "okh" = (
@@ -29578,9 +29575,6 @@
 /area/indoors/town)
 "onU" = (
 /obj/structure/chair/wood/alt/chair3{
-	dir = 1
-	},
-/obj/effect/landmark/start/matron_assistant{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -31581,7 +31575,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/herringbone,
 /area/indoors/town)
 "plq" = (
@@ -34736,9 +34730,6 @@
 /obj/structure/chair/wood/alt/chair3{
 	dir = 8
 	},
-/obj/effect/landmark/start/matron_assistant{
-	dir = 8
-	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/orphanage)
 "qUu" = (
@@ -36782,7 +36773,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/herringbone,
 /area/indoors/town)
 "rQB" = (
@@ -45860,7 +45851,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/herringbone,
 /area/indoors/town)
 "wqT" = (
