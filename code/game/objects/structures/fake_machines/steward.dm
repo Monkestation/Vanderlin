@@ -3,8 +3,9 @@
 #define TAB_STOCK 3
 #define TAB_IMPORT 4
 #define TAB_BOUNTIES 5
-#define TAB_LOG 6
-#define TAB_CUSTOM 7
+#define TAB_JOBS 6
+#define TAB_LOG 7
+#define TAB_CUSTOM 8
 
 /datum/stock/stockpile/custom
 	abstract_type = /datum/stock/stockpile/custom
@@ -278,6 +279,43 @@
 				record_round_statistic(STATS_FINES_INCOME, newtax)
 				SStreasury.give_money_account(-newtax, A)
 				break
+	if(href_list["changejob"])
+		var/X = locate(href_list["changejob"])
+		if(!X)
+			return
+		for(var/mob/living/A in SStreasury.bank_accounts)
+			if(A == X)
+				var/list/jobs = list()
+				jobs += GLOB.noble_positions
+				jobs += GLOB.garrison_positions
+				jobs += GLOB.serf_positions
+				jobs += GLOB.company_positions
+				jobs += GLOB.peasant_positions
+				jobs += GLOB.apprentices_positions
+				jobs += GLOB.youngfolk_positions
+				jobs += GLOB.allmig_positions
+				jobs -= list(
+					/datum/job/lord::title,
+					/datum/job/innkeep_son::title,
+					/datum/job/bandit::title,
+				)
+				var/new_pos = input(usr, "Select their new position", src, null) as anything in jobs
+				A.job = new_pos
+				A.mind?.set_assigned_role(new_pos)
+				if(ishuman(A))
+					var/mob/living/carbon/human/human = A
+					if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))
+						ADD_TRAIT(human, TRAIT_RECRUITED, TRAIT_GENERIC)
+
+				if(A.mind?.assigned_role)
+					new_pos = A.mind.assigned_role.get_informed_title(A)
+					A.mind.assigned_role.assign_honorary_titles(A)
+
+				if(!SScommunications.can_announce(usr))
+					return
+
+				priority_announce("Henceforth, the vassal known as [A.real_name] shall have the title of [new_pos].", "[usr.real_name], The [usr.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
+				break
 	if(href_list["payroll"])
 		var/list/L = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.company_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.apprentices_positions) + list(GLOB.inquisition_positions)
 		var/list/jobs = list()
@@ -463,6 +501,18 @@
 				else
 					contents += "Bounty Price: <a href='byond://?src=\ref[src];setbounty=\ref[A]'>[A.payout_price]</a><BR><BR>"
 			contents += "</div>"
+		if(TAB_JOBS)
+			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
+			contents += "<center>Jobs<BR>"
+			contents += "--------------<BR>"
+			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
+				if(ishuman(A))
+					var/mob/living/carbon/human/tmp = A
+					contents += "[tmp.real_name] ([tmp.get_role_title(steward_check = TRUE)]) - [A.job]m<BR>"
+				else
+					contents += "[A.real_name] - [A.job]m<BR>"
+				contents += "<a href='byond://?src=\ref[src];changejob=\ref[A]'>\[Change Job\]</a><BR><BR>"
+			contents += "</div>"
 		if(TAB_LOG)
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
 			contents += "<center>Log<BR>"
@@ -546,5 +596,6 @@
 #undef TAB_STOCK
 #undef TAB_IMPORT
 #undef TAB_BOUNTIES
+#undef TAB_JOBS
 #undef TAB_LOG
 #undef TAB_CUSTOM
