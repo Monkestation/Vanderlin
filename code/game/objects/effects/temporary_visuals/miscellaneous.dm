@@ -7,7 +7,9 @@
 	plane = GAME_PLANE_FOV_HIDDEN
 	var/splatter_type = "splatter"
 
-/obj/effect/temp_visual/dir_setting/bloodsplatter/Initialize(mapload, set_dir)
+/obj/effect/temp_visual/dir_setting/bloodsplatter/Initialize(mapload, set_dir, datum/blood_type/bloodtype)
+	if(bloodtype)
+		color = bloodtype.color
 	if(set_dir in GLOB.diagonals)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
 	else

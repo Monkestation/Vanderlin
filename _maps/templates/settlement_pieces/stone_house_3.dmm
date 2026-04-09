@@ -7,7 +7,7 @@
 /turf/open/floor/ruinedwood/turned,
 /area/indoors/shelter)
 "d" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "e" = (
 /obj/structure/stairs{
@@ -145,7 +145,7 @@
 /area/indoors/shelter)
 "T" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "V" = (
 /obj/structure/fluff/railing/border{

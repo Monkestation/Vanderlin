@@ -1,6 +1,6 @@
 /datum/blueprint_recipe/arcyne
 	abstract_type = /datum/blueprint_recipe/arcyne
-	skillcraft = /datum/skill/magic/arcane
+	skillcraft = /datum/attribute/skill/magic/arcane
 	category = "Arcane"
 	construct_tool = /obj/item/weapon/hammer
 	craftsound = 'sound/foley/Building-01.ogg'

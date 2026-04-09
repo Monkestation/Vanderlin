@@ -27,5 +27,5 @@
 		span_hear("I hear a loud crunch"),
 	)
 	cast_on.adjustBruteLoss(30)
-	cast_on.adjust_temp_blindness(2 SECONDS)
+	cast_on.adjust_temp_blindness(4 SECONDS)
 	cast_on.set_eye_blur_if_lower(20 SECONDS)

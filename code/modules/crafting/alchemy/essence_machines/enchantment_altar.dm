@@ -145,7 +145,7 @@
 
 	return dominant_color
 
-/obj/machinery/essence/enchantment_altar/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/enchantment_altar/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)

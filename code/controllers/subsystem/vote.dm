@@ -190,6 +190,13 @@ SUBSYSTEM_DEF(vote)
 			if("storyteller")
 				SSgamemode.storyteller_vote_result(.)
 
+			if("norulervote")
+				switch(.)
+					if("Start Anyway")
+						SSticker.vote_started = TRUE
+					if("Wait for Ruler")
+						SSticker.vote_started = FALSE
+						SSticker.pre_vote = 0
 	if(restart)
 		var/active_admins = 0
 		for(var/client/C in GLOB.admins)
@@ -280,6 +287,8 @@ SUBSYSTEM_DEF(vote)
 				choices.Add("Continue Playing","End Round")
 			if("storyteller")
 				choices.Add(SSgamemode.storyteller_vote_choices())
+			if("norulervote")
+				choices.Add("Start Anyway", "Wait for Ruler")
 			else
 				return 0
 		mode = vote_type
@@ -304,6 +313,11 @@ SUBSYSTEM_DEF(vote)
 //			generated_actions += V
 		return 1
 	return 0
+
+/datum/controller/subsystem/vote/proc/initiate_norulervote()
+	if(mode) // Already a vote in progress
+		return 0
+	return initiate_vote("norulervote", "The Gods")
 
 /datum/controller/subsystem/vote/proc/interface(client/C)
 	if(!C)

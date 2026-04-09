@@ -407,7 +407,7 @@
 // Admin verb to open the debug menu
 /client/proc/crop_nutrient_debug()
 	set name = "Crop Nutrient Debug"
-	set category = "Debug"
+	set category = "Debug.Debug"
 
 	if(!check_rights(R_ADMIN))
 		return

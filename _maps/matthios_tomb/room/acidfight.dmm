@@ -98,7 +98,7 @@
 "tq" = (
 /obj/structure/fluff/walldeco/chains,
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "uy" = (
 /obj/structure/fluff/wallclock,
@@ -112,7 +112,7 @@
 /turf/open/floor/metal,
 /area/under/tomb/cave/lava)
 "uV" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "wj" = (
 /obj/item/ammo_casing/caseless/bolt{
@@ -146,7 +146,7 @@
 /area/under/tomb/cave/lava)
 "Av" = (
 /obj/structure/fluff/walldeco/chains,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "AC" = (
 /turf/closed/wall/mineral/pipe,
@@ -160,7 +160,7 @@
 /area/under/tomb/indoors)
 "PL" = (
 /obj/structure/bars/pipe,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "Rl" = (
 /obj/item/gear{

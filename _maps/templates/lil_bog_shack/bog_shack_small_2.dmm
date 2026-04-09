@@ -81,7 +81,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/shelter/bog)
 "t" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/outdoors/bog)
 "v" = (
 /turf/open/floor/ruinedwood/turned/alt,

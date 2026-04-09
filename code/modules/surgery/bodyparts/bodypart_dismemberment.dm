@@ -35,6 +35,8 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+	if(SEND_SIGNAL(src, COMSIG_MOB_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
+		return FALSE //signal handled the dropping
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		var/obj/item/clothing/checked_armor = human_owner.check_crit_armor(zone_precise, bclass)
@@ -53,7 +55,8 @@
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")
 	else
 		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "separated", "unsewn")]!</B></span>")
-	C.emote("painscream")
+	if(!HAS_TRAIT(C, TRAIT_NOPAIN))
+		C.emote("painscream")
 	src.add_mob_blood(C)
 	C.add_stress(/datum/stress_event/dismembered)
 	C.add_stress(/datum/stress_event/dismembered)
@@ -122,8 +125,7 @@
 	C.add_splatter_floor(T)
 	playsound(C, 'sound/combat/crit2.ogg', 100, FALSE, 5)
 	C.emote("painscream")
-	for(var/X in C.internal_organs)
-		var/obj/item/organ/O = X
+	for(var/obj/item/organ/O as anything in C.internal_organs)
 		var/org_zone = check_zone(O.zone)
 		if(org_zone != BODY_ZONE_CHEST)
 			continue
@@ -131,7 +133,7 @@
 		O.forceMove(T)
 		O.add_mob_blood(C)
 		organ_spilled = 1
-		. += X
+		. += O
 	if(cavity_item)
 		cavity_item.forceMove(T)
 		. += cavity_item
@@ -411,14 +413,26 @@
 	var/list/limb_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 	if(excluded_zones)
 		limb_list -= excluded_zones
+	var/list/generated_limbs = list()
 	for(var/limb_zone in limb_list)
-		. += regenerate_limb(limb_zone)
+		var/obj/item/bodypart/limb = regenerate_limb(limb_zone)
+		if(limb)
+			generated_limbs += limb
+	return generated_limbs
 
-/mob/living/carbon/proc/regenerate_limb(limb_zone)
+/// Restore a limb. Pass with no args to choose a random missing one.
+/mob/living/carbon/proc/regenerate_limb(limb_zone, silent=TRUE)
+	if(!limb_zone)
+		limb_zone = safepick(get_missing_limbs())
+		if(!limb_zone)
+			return
+
 	var/obj/item/bodypart/limb
 	if(get_bodypart(limb_zone))
-		return FALSE
+		return
 	limb = newBodyPart(limb_zone, 0, 0)
 	if(limb)
 		limb.attach_limb(src, TRUE)
-		return TRUE
+		if(!silent)
+			visible_message(span_green("[src]'s [limb] regenerates!"), span_green("My [limb] regenerates!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		return limb

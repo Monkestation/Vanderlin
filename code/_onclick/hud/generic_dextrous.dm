@@ -41,9 +41,6 @@
 	hsover =  new /atom/movable/screen/heatstamover(null, src)
 	static_inventory += hsover
 
-	fov = new /atom/movable/screen/fov(null, src)
-	static_inventory += fov
-
 	fov_blocker = new /atom/movable/screen/fov_blocker(null, src)
 	static_inventory += fov_blocker
 

@@ -10,6 +10,7 @@
 	max_integrity = 200
 	integrity_failure = 0.1
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	item_weight = 21 GRAMS
 	var/gendered = MALE
 	var/race
 	var/cached_undies
@@ -20,7 +21,7 @@
 	icon_state = "girlundies"
 	gendered = FEMALE
 
-/obj/item/undies/attack(mob/M, mob/user, def_zone)
+/obj/item/undies/attack(mob/M, mob/user, list/modifiers)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.gender != gendered)

@@ -1,11 +1,11 @@
-GLOBAL_LIST_INIT(special_traits, build_special_traits())
-
 #define SPECIAL_TRAIT(trait_type) GLOB.special_traits[trait_type]
+
+GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/type in typesof(/datum/special_trait))
-		if(is_abstract(type))
+	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .
@@ -47,6 +47,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	if(!player)
 		player = character.client
 	apply_prefs_special(character, player)
+	apply_voicepacks(character, player)
 
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -60,6 +61,16 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	apply_special_trait_if_able(character, player, trait_type)
 	player.prefs.next_special_trait = null
+
+/proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
+	switch(player.prefs.voice_type)
+		if(VOICE_TYPE_MASC_FOP)
+			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
+		if(VOICE_TYPE_FEM_DAINTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/dainty()
+		if(VOICE_TYPE_FEM_HAUGHTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
+	return
 
 /proc/apply_loadouts(mob/living/carbon/human/character, client/player)
 	if(!player)

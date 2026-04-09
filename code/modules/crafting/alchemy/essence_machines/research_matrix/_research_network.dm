@@ -11,7 +11,7 @@ GLOBAL_DATUM_INIT(thaumic_research, /datum/thaumic_research_network, new())
 	// Cache all research node types for easy access
 	for(var/node_type in subtypesof(/datum/thaumic_research_node))
 		var/datum/thaumic_research_node/node = new node_type
-		if(is_abstract(node))
+		if(IS_ABSTRACT(node))
 			continue
 		research_nodes[node_type] = node
 
@@ -63,7 +63,7 @@ GLOBAL_DATUM_INIT(thaumic_research, /datum/thaumic_research_network, new())
 /datum/thaumic_research_network/proc/get_available_research()
 	var/list/available = list()
 	for(var/datum/thaumic_research_node/node_type as anything in subtypesof(/datum/thaumic_research_node))
-		if(is_abstract(node_type))
+		if(IS_ABSTRACT(node_type))
 			continue
 		if(node_type in unlocked_research)
 			continue

@@ -10,18 +10,17 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 		QUIRK_PECULIARITY = list()
 	)
 
-	for(var/quirk_type in subtypesof(/datum/quirk))
-		var/datum/quirk/Q = quirk_type
-		if(initial(Q.abstract_type) == quirk_type)
+	for(var/datum/quirk/quirk_type as anything in subtypesof(/datum/quirk))
+		if(IS_ABSTRACT(quirk_type))
 			continue
 
-		var/category = initial(Q.quirk_category)
-		GLOB.quirk_registry[initial(Q.name)] = quirk_type
+		var/category = initial(quirk_type.quirk_category)
+		GLOB.quirk_registry[initial(quirk_type.name)] = quirk_type
 		GLOB.quirk_points_by_type[category] += list(list(
-			"name" = initial(Q.name),
+			"name" = initial(quirk_type.name),
 			"type" = quirk_type,
-			"desc" = initial(Q.desc),
-			"value" = initial(Q.point_value)
+			"desc" = initial(quirk_type.desc),
+			"value" = initial(quirk_type.point_value)
 		))
 		LAZYADDASSOC(GLOB.quirk_singletons, quirk_type, new quirk_type)
 
@@ -131,6 +130,10 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 /datum/quirk/proc/on_remove()
 	return
 
+/// Called when you are examined
+/datum/quirk/proc/on_examined(mob/user, list/P, list/examine_contents)
+	return
+
 /// Called every life tick if implemented
 /datum/quirk/proc/on_life(mob/living/user)
 	return
@@ -159,9 +162,9 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 		return FALSE
 
 	// Check species restrictions
-	if(length(allowed_species) && !(prefs.pref_species.type in allowed_species))
+	if(length(allowed_species) && !is_type_in_list(prefs.pref_species, allowed_species))
 		return FALSE
-	if(prefs.pref_species.type in blocked_species)
+	if(is_type_in_list(prefs.pref_species, blocked_species))
 		return FALSE
 
 	return TRUE
@@ -192,7 +195,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 			return TRUE
 	return FALSE
 
-/mob/living/proc/has_quirk(quirk_type)
+/mob/proc/has_quirk(quirk_type)
 	return
 
 /mob/living/carbon/human/has_quirk(quirk_type)

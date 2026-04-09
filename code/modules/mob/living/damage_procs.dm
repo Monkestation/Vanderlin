@@ -101,7 +101,7 @@
 				stuttering = max(stuttering,(effect * hit_percent))
 		if(EFFECT_JITTER)
 			if((status_flags & CANSTUN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE))
-				set_jitter_if_lower(effect * hit_percent)
+				set_jitter_if_lower(effect * hit_percent SECONDS)
 	return 1
 
 

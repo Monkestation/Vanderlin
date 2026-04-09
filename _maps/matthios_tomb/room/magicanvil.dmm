@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "b" = (
 /turf/closed/wall/mineral/stone,
@@ -11,7 +11,7 @@
 /area/under/tomb/cave/lava)
 "d" = (
 /obj/structure/flora/newtree/scorched,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave/lava)
 "f" = (
 /mob/living/carbon/human/species/goblin/npc/hell,

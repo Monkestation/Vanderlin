@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(descent_level_map, list()) // Maps z-levels to their descent ob
 		return
 	use(user)
 
-/obj/structure/dungeon_descent/attackby(obj/item/W, mob/user, params)
+/obj/structure/dungeon_descent/attackby(obj/item/W, mob/user, list/modifiers)
 	return use(user)
 
 /obj/structure/dungeon_descent/attack_ghost(mob/dead/observer/user)

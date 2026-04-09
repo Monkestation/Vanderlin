@@ -16,6 +16,7 @@
 		/obj/item/candle/yellow,
 		/obj/item/needle,
 	)
+	item_weight = 740 GRAMS
 
 /obj/item/storage/fancy/ifak/update_icon_state()
 	. = ..()
@@ -35,6 +36,6 @@
 		else
 			. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] items left."
 
-/obj/item/storage/fancy/ifak/attack_self(mob/user, params)
+/obj/item/storage/fancy/ifak/attack_self(mob/user, list/modifiers)
 	. = ..()
 	to_chat(user, span_notice("[src] is now [is_open ? "open" : "closed"]."))

@@ -32,7 +32,7 @@
 	playsound(owner, 'sound/magic/icicle.ogg', 100, TRUE)
 	var/mob/living/M = owner
 	if (M)
-		M.adjust_jitter(5)
+		M.adjust_jitter(10 SECONDS)
 	return ..()
 
 /atom/movable/screen/alert/status_effect/frozen_solid

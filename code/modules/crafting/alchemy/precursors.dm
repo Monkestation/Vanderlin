@@ -19,102 +19,6 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 	var/list/essence_yields = list() // essence_type = amount
 	var/list/init_types = list() //list of all types that use this precursor
 
-
-/datum/natural_precursor/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-
-	var/html = {"
-		<!DOCTYPE html>
-		<html lang="en">
-		<meta charset='UTF-8'>
-		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
-			body {
-				font-family: "Charm", cursive;
-				font-size: 1.2em;
-				text-align: center;
-				margin: 20px;
-				background-color: #f4efe6;
-				color: #3e2723;
-				background-color: rgb(31, 20, 24);
-				background:
-					url('[SSassets.transport.get_asset_url("try4_border.png")]'),
-					url('book.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: 100% 100%;
-			}
-			h1 {
-				text-align: center;
-				font-size: 2em;
-				border-bottom: 2px solid #3e2723;
-				padding-bottom: 10px;
-				margin-bottom: 10px;
-			}
-			.icon {
-				width: 64px;
-				height: 64px;
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-			.yields {
-				margin-bottom: 20px;
-			}
-			.category {
-				font-style: italic;
-				color: #8d6e63;
-				margin-bottom: 10px;
-			}
-			.used-in {
-				margin-top: 15px;
-				font-style: italic;
-				color: #5d4037;
-			}
-		</style>
-		<body>
-		  <div>
-			<h1>[name]</h1>
-			<div class="category">[category]</div>
-			<div class="yields">
-			  <h2>Essence Yields</h2>
-	"}
-
-	// Add essence yields
-	if(length(essence_yields))
-		for(var/datum/thaumaturgical_essence/essence_type as anything in essence_yields)
-			var/essence_amount = essence_yields[essence_type]
-			html += "[essence_amount] [essence_type.name]<br>"
-	else
-		html += "No essence yields<br>"
-
-	html += {"
-		</div>
-	"}
-
-	// Add usage information
-	if(length(init_types))
-		html += "<div class='used-in'><h2>Splits from</h2>"
-		for(var/atom/type_path as anything in init_types)
-			html += "[initial(type_path.name)]<br>"
-		html += "</div>"
-
-	html += {"
-		</div>
-	</body>
-	</html>
-	"}
-
-	return html
-
-/datum/natural_precursor/proc/show_menu(mob/user)
-	user << browse(generate_html(user), "window=natural_precursor;size=500x810")
-
 /*
 --------------------PLANTS AND PRODUCE--------------------
 */
@@ -675,7 +579,7 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 		/datum/thaumaturgical_essence/water = 1
 	)
 	init_types = list(
-		/obj/item/natural/dirtclod,
+		/obj/item/natural/clod/dirt,
 		/obj/item/natural/clay
 	)
 
@@ -744,17 +648,22 @@ GLOBAL_LIST_INIT(natural_precursor_registry, list())
 	)
 	init_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/steak,
-		/obj/item/reagent_containers/food/snacks/meat/human,
+		/obj/item/reagent_containers/food/snacks/meat/steak/human,
 		/obj/item/reagent_containers/food/snacks/meat/fatty,
+		/obj/item/reagent_containers/food/snacks/meat/fatty/dwarf,
+		/obj/item/reagent_containers/food/snacks/meat/fatty/kobold,
 		/obj/item/reagent_containers/food/snacks/meat/strange,
 		/obj/item/reagent_containers/food/snacks/meat/poultry,
 		/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet,
+		/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy,
+		/obj/item/reagent_containers/food/snacks/meat/triton,
+		/obj/item/reagent_containers/food/snacks/meat/strange/inhumen,
 		/obj/item/reagent_containers/food/snacks/meat/mince,
 		/obj/item/reagent_containers/food/snacks/meat/mince/beef,
 		/obj/item/reagent_containers/food/snacks/meat/mince/beef/mett,
 		/obj/item/reagent_containers/food/snacks/meat/mince/poultry,
 		/obj/item/reagent_containers/food/snacks/meat/sausage,
-		/obj/item/reagent_containers/food/snacks/meat/wiener,
+		/obj/item/reagent_containers/food/snacks/meat/sausage/wiener,
 		/obj/item/reagent_containers/food/snacks/meat/salami,
 		/obj/item/reagent_containers/food/snacks/meat/mince/fish,
 	)

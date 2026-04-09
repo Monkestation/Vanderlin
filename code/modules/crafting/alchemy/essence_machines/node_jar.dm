@@ -4,6 +4,7 @@
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "node_jar"
 	w_class = WEIGHT_CLASS_NORMAL
+	item_weight = 1.2 KILOGRAMS
 
 	var/obj/item/essence_node_portable/contained_node
 	var/max_tier = 0
@@ -50,7 +51,7 @@
 	)
 	. += emissive_appearance(contained_node.icon, contained_node.icon_state, alpha = contained_node.alpha)
 
-/obj/item/essence_node_jar/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/essence_node_jar/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(!proximity_flag)
 		. = ..()
 		return

@@ -265,7 +265,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb)
 "zq" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "zX" = (
 /obj/effect/decal/remains/human,

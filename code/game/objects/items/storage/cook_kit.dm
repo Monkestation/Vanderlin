@@ -26,3 +26,4 @@
 		/obj/item/folding_table_stored
 	)
 
+	item_weight = 750 GRAMS

@@ -10,7 +10,7 @@
 	connectedc = null
 	return ..()
 
-/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -47,6 +47,7 @@
 	body_parts_covered = NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -167,3 +168,14 @@
 /obj/item/clothing/head/roguehood/faceless
 	icon_state = "facelesshood" //Credit goes to Cre
 	color = CLOTHING_SOOT_BLACK
+
+/obj/item/clothing/head/roguehood/leather
+	name = "leather hood"
+	desc = "A simple if foreboding hood made out of leather. Worn by street thug and honest yeoman both. \
+	Protects from the eventual stabbing, but not much more."
+	icon_state = "leatherhood"
+	item_state = "leatherhood"
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	armor = ARMOR_LEATHER
+	blocksound = SOFTUNDERHIT
+	item_weight = 145 GRAMS

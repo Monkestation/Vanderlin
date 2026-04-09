@@ -1,3 +1,32 @@
+/datum/attribute_holder/sheet/job/paladin
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = -2,
+		STAT_FORTUNE = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
+/datum/attribute_holder/sheet/job/paladin/extremist
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/swords = 10,
+	)
+
 /datum/job/advclass/combat/paladin
 	title = "Paladin"
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
@@ -9,33 +38,11 @@
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/mathematics = 3,
-	)
-
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_PER = 2,
-		STATKEY_INT = 2,
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_SPD = -2,
-		STATKEY_LCK = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/paladin
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_NOBLE,
+		TRAIT_NOBLE_BLOOD,
 	)
 
 /datum/job/advclass/combat/paladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -46,22 +53,20 @@
 	switch(spawned.patron?.type)
 		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
-			spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-			spawned.grant_language(/datum/language/oldpsydonic)
-			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/paladin/extremist)
+			spawned.grant_language(/datum/language/newpsydonic)
+			ADD_TRAIT(spawned, TRAIT_PSYDONIAN_GRIT, JOB_TRAIT)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
+			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 		if(/datum/patron/divine/abyssor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/necra)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, JOB_TRAIT)
 		if(/datum/patron/divine/ravox)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
@@ -73,11 +78,11 @@
 		if(/datum/patron/divine/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 			spawned.virginity = FALSE
-			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, JOB_TRAIT)
 		else
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
-	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS) && spawned.patron?.type != /datum/patron/psydon)
+	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS))
 		spawned.grant_language(/datum/language/celestial)
 		to_chat(spawned, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
 
@@ -113,34 +118,34 @@
 	switch(H.patron?.type)
 		if(/datum/patron/psydon, /datum/patron/psydon/extremist)
 			head = /obj/item/clothing/head/helmet/heavy/bucket/gold
-			wrists = /obj/item/clothing/neck/psycross/g
+			wrists = /obj/item/clothing/neck/psycross/gold
 		if(/datum/patron/divine/astrata)
 			head = /obj/item/clothing/head/helmet/heavy/necked/astrata
-			wrists = /obj/item/clothing/neck/psycross/silver/astrata
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/noc)
 			head = /obj/item/clothing/head/helmet/heavy/necked/noc
-			wrists = /obj/item/clothing/neck/psycross/silver/noc
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/dendor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/dendorhelm
-			wrists = /obj/item/clothing/neck/psycross/silver/dendor
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-			wrists = /obj/item/clothing/neck/psycross/silver/abyssor
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 		if(/datum/patron/divine/necra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/necra
-			wrists = /obj/item/clothing/neck/psycross/silver/necra
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/necra
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/heavy/necked/ravox
-			wrists = /obj/item/clothing/neck/psycross/silver/ravox
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/ravox
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
-			wrists = /obj/item/clothing/neck/psycross/silver/xylix
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/pestra)
 			head = /obj/item/clothing/head/helmet/heavy/necked/pestrahelm
-			wrists = /obj/item/clothing/neck/psycross/silver/pestra
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/pestra
 		if(/datum/patron/divine/malum)
 			head = /obj/item/clothing/head/helmet/heavy/necked/malumhelm
-			wrists = /obj/item/clothing/neck/psycross/silver/malum
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/malum
 		if(/datum/patron/divine/eora)
 			head = /obj/item/clothing/head/helmet/sallet/eoran
-			wrists = /obj/item/clothing/neck/psycross/silver/eora
+			wrists = /obj/item/clothing/neck/psycross/silver/divine/eora

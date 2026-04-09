@@ -627,8 +627,7 @@
 	if(selected_recipe.supports_directions)
 		to_chat(holder.mob, "<span class='info'>This blueprint can be rotated using the direction button.</span>")
 
-/datum/blueprint_system/proc/InterceptClickOn(mob/user, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/blueprint_system/proc/InterceptClickOn(mob/user, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
@@ -644,6 +643,8 @@
 		if(right_click)
 			if(istype(object, /obj/structure/blueprint))
 				var/obj/structure/blueprint/print = object
+				if(!print.creator)
+					return TRUE
 				if(print.creator != user && world.time < print.time_when_placed + 3 MINUTES)
 					return TRUE
 				to_chat(user, span_red("[object.name] removed."))

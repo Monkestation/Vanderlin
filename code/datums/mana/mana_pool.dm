@@ -82,7 +82,7 @@
 
 	START_PROCESSING(SSmagic, src)
 
-/datum/mana_pool/Destroy(force, ...)
+/datum/mana_pool/Destroy(force)
 	attunements = null
 	attunements_to_generate = null
 	negative_attunements = null
@@ -93,6 +93,12 @@
 	transferring_from = null
 
 	STOP_PROCESSING(SSmagic, src)
+
+	if(parent && ismob(parent))
+		var/mob/holder = parent
+		var/datum/hud/human/hud_used = holder.hud_used
+		if(hud_used?.mana)
+			hud_used.mana.icon_state = initial(hud_used.mana.icon_state)
 
 	if (parent.mana_pool != src)
 		stack_trace("[parent].mana_pool was not [src] when src had parent registered!")
@@ -485,7 +491,7 @@
 	if(!istype(L) || !L.mind)
 		return softcap
 
-	var/skill_level = max(1, L.get_skill_level(/datum/skill/magic/arcane))
+	var/skill_level = max(1, GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/magic/arcane))
 	return softcap + (skill_level * 100)
 
 ///this is how a mana pool responds to backlash for most pools this is just taking damage

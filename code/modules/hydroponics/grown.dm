@@ -21,7 +21,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	var/list/pipe_reagents = list()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user, params)
+/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W && isturf(loc))
 		if(seed && (user.used_intent.blade_class == BCLASS_BLUNT) && (!user.used_intent.noaa))
 			playsound(src,'sound/items/seedextract.ogg', 100, FALSE)

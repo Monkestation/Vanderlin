@@ -22,6 +22,12 @@
 /// so don't worry if your abstract status effect doesn't actually set this
 #define STATUS_EFFECT_ID_ABSTRACT "abstract"
 
+///Processing flags - used to define the speed at which the status will work
+///This is fast - 0.2s between ticks (I believe!)
+#define STATUS_EFFECT_FAST_PROCESS 0
+///This is slower and better for more intensive status effects - 1s between ticks
+#define STATUS_EFFECT_NORMAL_PROCESS 1
+
 //Incapacitated status effect flags
 /// If the incapacitated status effect will ignore a mob in restraints (handcuffs)
 #define IGNORE_RESTRAINTS (1<<0)
@@ -131,6 +137,11 @@
 #define STATUS_EFFECT_BUGGED /datum/status_effect/bugged //Lets other mobs listen in on what it hears
 
 #define STATUS_EFFECT_BOUNTY /datum/status_effect/bounty //rewards the person who added this to the target with refreshed spells and a fair heal
+
+/// The affected is unable to use or pickup items, plus will fall down depending on stats
+#define STATUS_EFFECT_STUMBLE /datum/status_effect/incapacitating/stumble
+/// The affected mob gets a very annoying screen effect
+#define STATUS_EFFECT_CONCUSSION /datum/status_effect/incapacitating/concussion
 
 /////////////
 //  SLIME  //

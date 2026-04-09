@@ -9,6 +9,7 @@
 	throw_speed = 1
 	throw_range = 7
 	resistance_flags = FLAMMABLE
+	item_weight = 65 GRAMS
 
 /obj/item/teleportation_scroll/apprentice
 	name = "lesser scroll of teleportation"
@@ -16,7 +17,7 @@
 
 
 
-/obj/item/teleportation_scroll/attack_self(mob/user, params)
+/obj/item/teleportation_scroll/attack_self(mob/user, list/modifiers)
 	user.set_machine(src)
 	var/dat = "<B>Teleportation Scroll:</B><BR>"
 	dat += "Number of uses: [src.uses]<BR>"

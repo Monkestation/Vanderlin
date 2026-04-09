@@ -21,12 +21,15 @@
 
 	is_foreigner = TRUE
 	can_have_apprentices = TRUE
+	can_be_apprentice = TRUE
 
 	selection_color = "#a33096"
 
 /datum/job/advclass/pilgrim
 	abstract_type = /datum/job/advclass/pilgrim
 	category_tags = list(CTAG_PILGRIM)
+	spawn_with_torch = TRUE
+	department_flag = OUTSIDERS
 
 /datum/job/advclass/pilgrim/rare
 	abstract_type = /datum/job/advclass/pilgrim/rare

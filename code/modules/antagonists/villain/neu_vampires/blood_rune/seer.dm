@@ -61,7 +61,7 @@ GLOBAL_LIST_EMPTY(seer_rituals)
 	invisibility = INVISIBILITY_OBSERVER
 	layer = ABOVE_OBJ_LAYER
 	plane = GAME_PLANE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/mob/living/caster = null
 	var/datum/rune_spell/seer/source = null
 	var/list/propension = list()

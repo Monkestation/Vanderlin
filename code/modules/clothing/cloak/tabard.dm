@@ -22,7 +22,7 @@
 		pic.color = get_detail_color()
 	. += pic
 
-/obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -69,7 +69,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		color = initial(color)
 		detail_tag = initial(detail_tag)
 		detail_color = initial(detail_color)
@@ -84,7 +84,7 @@
 	color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
-/obj/item/clothing/cloak/tabard/knight/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/knight/attack_hand_secondary(mob/user, list/modifiers)
 	return
 
 /obj/item/clothing/cloak/tabard/crusader
@@ -94,7 +94,7 @@
 	. = ..()
 	update_appearance(UPDATE_ICON)
 
-/obj/item/clothing/cloak/tabard/crusader/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/crusader/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -122,7 +122,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		update_appearance(UPDATE_ICON)
@@ -132,7 +132,7 @@
 		return
 	picked = TRUE
 
-/obj/item/clothing/cloak/tabard/crusader/tief/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/crusader/tief/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -155,7 +155,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_color = initial(detail_color)
 		color = initial(color)
 		update_appearance(UPDATE_ICON)
@@ -172,7 +172,7 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
-/obj/item/clothing/cloak/tabard/knight/guard/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/knight/guard/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -198,7 +198,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
-	if(alert("Are you pleased with your heraldry?", "Heraldry", "Yes", "No") != "Yes")
+	if(tgui_alert(usr, "Are you pleased with your heraldry?", "Heraldry", list("Yes", "No")) != "Yes")
 		detail_tag = initial(detail_tag)
 		update_appearance(UPDATE_ICON)
 		if(ismob(loc))
@@ -216,5 +216,5 @@
 	. = ..()
 	update_appearance(UPDATE_ICON)
 
-/obj/item/clothing/cloak/tabard/adept/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/cloak/tabard/adept/attack_hand_secondary(mob/user, list/modifiers)
 	return

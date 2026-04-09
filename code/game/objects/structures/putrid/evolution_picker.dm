@@ -80,11 +80,10 @@
 	while(length(current_tier))
 		var/list/next_tier = list()
 
-		for(var/evo_path in current_tier)
-			var/mob/living/simple_animal/hostile/retaliate/meatvine/temp_mob = evo_path
+		for(var/mob/living/simple_animal/hostile/retaliate/meatvine/temp_mob as anything in current_tier)
 			if(!(temp_mob in GLOB.putrid_evolutions))
 				GLOB.putrid_evolutions |= temp_mob
-				var/mob/living/simple_animal/hostile/retaliate/meatvine/real = new evo_path(get_turf(src))
+				var/mob/living/simple_animal/hostile/retaliate/meatvine/real = new temp_mob(get_turf(src))
 				GLOB.putrid_evolutions[temp_mob] = real.possible_evolutions.Copy()
 				qdel(real)
 

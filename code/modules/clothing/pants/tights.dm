@@ -5,6 +5,7 @@
 	icon_state = "tights"
 	item_state = "tights"
 	color = CLOTHING_LINEN
+	item_weight = 65 GRAMS
 
 /obj/item/clothing/pants/tights/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

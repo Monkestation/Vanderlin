@@ -26,6 +26,11 @@
 
 #endif
 
+/datum/sprite_accessory/wings/kobold
+	name = "Kobold"
+	icon_state = "kobold"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
 /datum/sprite_accessory/wings/wide
 	abstract_type = /datum/sprite_accessory/wings/wide
 	icon = 'icons/mob/sprite_accessory/wings/wings_wide.dmi'

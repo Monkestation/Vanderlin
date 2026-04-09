@@ -40,8 +40,7 @@
 
 		QDEL_NULL(brainmob)
 
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
+	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.owner = owner
 		BT.on_gain()
 
@@ -50,8 +49,7 @@
 
 /obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
 	. = ..()
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
+	for(var/datum/brain_trauma/BT as anything in traumas)
 		BT.on_lose(TRUE)
 		BT.owner = null
 
@@ -83,7 +81,7 @@
 		L.mind.transfer_to(brainmob)
 //	to_chat(brainmob, "<span class='notice'>I feel slightly disoriented. That's normal when you're just a brain.</span>")
 
-/obj/item/organ/brain/attackby(obj/item/O, mob/user, params)
+/obj/item/organ/brain/attackby(obj/item/O, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 
 	if((organ_flags & ORGAN_FAILING) && O.is_drainable()) //attempt to heal the brain
@@ -134,7 +132,7 @@
 		else
 			. += "<span class='info'>This one is completely devoid of life.</span>"
 
-/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user)
+/obj/item/organ/brain/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(!istype(C))
 		return ..()
 
@@ -223,15 +221,13 @@
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
 /obj/item/organ/brain/proc/has_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience = TRAUMA_RESILIENCE_ABSOLUTE)
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
+	for(var/datum/brain_trauma/BT as anything in traumas)
 		if(istype(BT, brain_trauma_type) && (BT.resilience <= resilience))
 			return BT
 
 /obj/item/organ/brain/proc/get_traumas_type(brain_trauma_type = /datum/brain_trauma, resilience = TRAUMA_RESILIENCE_ABSOLUTE)
 	. = list()
-	for(var/X in traumas)
-		var/datum/brain_trauma/BT = X
+	for(var/datum/brain_trauma/BT as anything in traumas)
 		if(istype(BT, brain_trauma_type) && (BT.resilience <= resilience))
 			. += BT
 
@@ -306,8 +302,7 @@
 //Add a random trauma of a certain subtype
 /obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience)
 	var/list/datum/brain_trauma/possible_traumas = list()
-	for(var/T in subtypesof(brain_trauma_type))
-		var/datum/brain_trauma/BT = T
+	for(var/datum/brain_trauma/BT as anything in subtypesof(brain_trauma_type))
 		if(can_gain_trauma(BT, resilience) && initial(BT.random_gain))
 			possible_traumas += BT
 
@@ -336,6 +331,17 @@
 		owner.add_stress(/datum/stress_event/brain_damage)
 	else
 		owner.remove_stress(/datum/stress_event/brain_damage)
+
+/obj/item/organ/brain/before_organ_replacement(obj/item/organ/replacement)
+	. = ..()
+	var/obj/item/organ/brain/replacement_brain = replacement
+	if(!istype(replacement_brain))
+		return
+
+	// Transfer over traumas as well
+	for(var/datum/brain_trauma/trauma as anything in traumas)
+		cure_trauma_type(trauma)
+		replacement_brain.gain_trauma_type(trauma)
 
 /obj/item/organ/brain/smooth
 	icon_state = "brain-smooth"

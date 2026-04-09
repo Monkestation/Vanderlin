@@ -31,7 +31,9 @@
 	/// List of Maniac datums that have inscribed on this heart
 	var/maniacs = list()
 
-	food_type = /obj/item/reagent_containers/food/snacks/organ/heart
+	var/graggometer = 0
+
+	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/heart
 
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
@@ -75,7 +77,7 @@
 	if(!owner)
 		Stop()
 
-/obj/item/organ/heart/attack_self(mob/user, params)
+/obj/item/organ/heart/attack_self(mob/user, list/modifiers)
 	..()
 	if(!beating)
 		user.visible_message("<span class='notice'>[user] squeezes [src] to \
@@ -94,7 +96,7 @@
 	return 1
 
 /obj/item/organ/heart/prepare_eat(mob/living/carbon/human/user)
-	var/obj/item/reagent_containers/food/snacks/organ/S = ..()
+	var/obj/item/reagent_containers/food/snacks/meat/organ/S = ..()
 	S.icon_state = "heart-off"
 	var/nothing = FALSE
 	if(!nothing)
@@ -151,7 +153,7 @@
 	var/heal_oxy = 0
 
 
-/obj/item/organ/heart/cursed/attack(mob/living/carbon/human/H, mob/living/carbon/human/user, obj/target)
+/obj/item/organ/heart/cursed/attack(mob/living/carbon/human/H, mob/living/carbon/human/user, list/modifiers)
 	if(H == user && istype(H))
 		playsound(user,'sound/blank.ogg',40,TRUE)
 		user.temporarilyRemoveItemFromInventory(src, TRUE)

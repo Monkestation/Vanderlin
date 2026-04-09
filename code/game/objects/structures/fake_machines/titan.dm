@@ -274,7 +274,9 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(!perform_check(user, FALSE))
 		reset_mode()
 		return FALSE
-	priority_announce(html_decode(user.treat_message(message)), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
+
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // Announcement has protections
+	priority_announce(user.treat_message(message), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
 	reset_mode()
 	return TRUE
 
@@ -344,6 +346,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Declares someone an outlaw
 /obj/structure/fake_machine/titan/proc/declare_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		say("That person is already an outlaw!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -370,6 +374,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Pardons an outlaw
 /obj/structure/fake_machine/titan/proc/pardon_outlaw(mob/living/carbon/human/user, message)
+	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // We only state this if someone's name matches. Should be safer to decode as we have protections with names
+
 	if(message in GLOB.outlawed_players)
 		GLOB.outlawed_players -= message
 		priority_announce("[message] is no longer an outlaw in Vanderlin lands.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
@@ -428,7 +434,11 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	possible_positions += GLOB.apprentices_positions
 	possible_positions += GLOB.youngfolk_positions
 	possible_positions += GLOB.allmig_positions
-	possible_positions -= list("Monarch", "Innkeepers Son")
+	possible_positions -= list(
+		/datum/job/lord::title,
+		/datum/job/innkeep_son::title,
+		/datum/job/bandit::title,
+	)
 	var/new_pos = input(user, "Select their new position", src, null) as anything in possible_positions
 	if(isnull(victim))
 		return
@@ -442,6 +452,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 	if(victim.mind?.assigned_role)
 		new_pos = victim.mind.assigned_role.get_informed_title(victim)
+		victim.mind.assigned_role.assign_honorary_titles(victim)
 
 	if(!SScommunications.can_announce(user))
 		return
@@ -457,6 +468,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 	if(SSticker.regent_mob)
 		var/mob/living/carbon/human/regent = SSticker.regent_mob
 		priority_announce("[regent.real_name] is no longer regent.", "[user.real_name], The [user.get_role_title()] Decrees", 'sound/misc/alert.ogg', "Captain")
+		SSticker.regent_mob = null
 		return TRUE
 	var/list/mob/living/carbon/possible_mobs = orange(2, src)
 	if(!possible_mobs)

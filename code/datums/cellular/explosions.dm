@@ -338,9 +338,9 @@ as having entered the turf.
 
 	if(initial_call) //stuff that is supposed to happen just once, calls explosion on lower and higher level
 		var/above = GET_TURF_ABOVE(epicenter)
-		if(istype(above, /turf/open/transparent/openspace))
+		if(istype(above, /turf/open/openspace))
 			cell_explosion(above, power * 0.8, falloff, falloff_shape, direction, explosion_source, initial_call = FALSE)
-		if(istype(epicenter,/turf/open/transparent/openspace))
+		if(istype(epicenter,/turf/open/openspace))
 			var/below = GET_TURF_BELOW(epicenter)
 			cell_explosion(below, power * 0.8, falloff, falloff_shape, direction, explosion_source, initial_call = FALSE)
 

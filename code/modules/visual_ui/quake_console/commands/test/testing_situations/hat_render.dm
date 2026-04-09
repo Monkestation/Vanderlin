@@ -24,7 +24,7 @@
 	var/y_step = 0
 	var/turf/spawn_turf = start_turf
 	for(var/obj/item/clothing/head/hat as anything in subtypesof(/obj/item/clothing/head))
-		if(is_abstract(hat))
+		if(IS_ABSTRACT(hat))
 			continue
 		step++
 		if(step > 13)

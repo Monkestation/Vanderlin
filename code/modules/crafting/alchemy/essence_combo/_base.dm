@@ -3,8 +3,9 @@ GLOBAL_LIST_INIT(essence_combos, init_essence_combos())
 /proc/init_essence_combos()
 	var/list/combos = list()
 	for(var/datum/essence_combo/combo_type as anything in subtypesof(/datum/essence_combo))
-		var/datum/essence_combo/combo = new combo_type()
-		combos += combo
+		if(IS_ABSTRACT(combo_type))
+			continue
+		combos += new combo_type()
 	return combos
 
 /proc/get_available_essence_combos(list/available_essences, mob/user)
@@ -21,8 +22,6 @@ GLOBAL_LIST_INIT(essence_combos, init_essence_combos())
 	var/required_minimum_essences = 0 // How many of the required essences must be present (default: all)
 
 /datum/essence_combo/New()
-	if(is_abstract(type))
-		return
 	if(!length(required_essences))
 		stack_trace("Essence combo [type] has no required essences!")
 	validate_combo()

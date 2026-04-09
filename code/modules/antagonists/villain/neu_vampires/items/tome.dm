@@ -143,7 +143,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 
 	usr << browse(tome_text(), "window=arcanetome;size=900x600")
 
-/obj/item/tome/attack(mob/living/M, mob/living/user)
+/obj/item/tome/attack(mob/living/M, mob/living/user, list/modifiers)
 	/*
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
@@ -223,7 +223,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 		else
 			to_chat(user, span_warning("You need to get closer to interact with the pages.") )
 
-/obj/item/tome/attackby(obj/item/I, mob/user)
+/obj/item/tome/attackby(obj/item/I, mob/user, list/modifiers)
 	if (..())
 		return
 	if (istype(I, /obj/item/talisman))
@@ -237,7 +237,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 		else
 			to_chat(user, span_warning("This tome cannot contain any more talismans. Use or remove some first.") )
 
-/obj/item/tome/AltClick(mob/user)
+/obj/item/tome/AltClick(mob/user, list/modifiers)
 	var/list/choices=list()
 	var/datum/rune_spell/instance
 	var/list/choice_to_talisman=list()

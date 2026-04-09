@@ -8,7 +8,7 @@
 	max_integrity = 200
 	density = TRUE
 
-/obj/machinery/loom/attackby(obj/item/I, mob/user, params)
+/obj/machinery/loom/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/natural/bundle/fibers))
 		var/obj/item/natural/bundle/fibers/W = I
 		if(src.storedfiber + W.amount > src.maxfiber)
@@ -32,7 +32,7 @@
 			to_chat(user, "You can't add any more fiber.")
 	. = ..()
 
-/obj/machinery/loom/attack_hand_secondary(mob/user, params)
+/obj/machinery/loom/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -48,11 +48,11 @@
 
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/machinery/loom/attack_hand(mob/user, params)
+/obj/machinery/loom/attack_hand(mob/user, list/modifiers)
 	var/mob/living/weaver = user
 	var/weavetime = 2 SECONDS //time to weave a cloth, duh
 	var/skilltimemod = 0.2 SECONDS //how much each level of skill lowers the time to weave
-	var/skill = weaver.get_skill_level(/datum/skill/misc/sewing)
+	var/skill = GET_MOB_SKILL_VALUE_OLD(weaver, /datum/attribute/skill/misc/sewing)
 	if(isliving(user) && weaver.stat == CONSCIOUS)
 		if(src.storedfiber < 2)
 			to_chat(user, "You don't have enough fiber to do this.")
@@ -63,7 +63,7 @@
 					break
 				src.storedfiber -= 2
 				new /obj/item/natural/cloth(get_turf(src))
-				weaver.mind.add_sleep_experience(/datum/skill/misc/sewing, (weaver.STAINT*0.5))//you get less exp from using the loom
+				weaver.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(weaver, STAT_INTELLIGENCE)*0.5))//you get less exp from using the loom
 
 /obj/machinery/loom/examine(mob/user)
 	to_chat(user, span_notice("There are [storedfiber] strands of fiber strung on [src]."))

@@ -1,4 +1,5 @@
 #define FOOTSTEP_WOOD "wood"
+#define FOOTSTEP_OLDWOOD "oldwood"
 #define FOOTSTEP_FLOOR "floor"
 #define FOOTSTEP_PLATING "plating"
 #define FOOTSTEP_CARPET "carpet"
@@ -9,6 +10,7 @@
 #define FOOTSTEP_MUD "mud"
 #define FOOTSTEP_STONE "stone"
 #define FOOTSTEP_SHALLOW "shallow"
+#define FOOTSTEP_CATWALK "catwalk"
 
 //barefoot sounds
 #define FOOTSTEP_WOOD_BAREFOOT "woodbarefoot"
@@ -27,6 +29,7 @@
 #define FOOTSTEP_MOB_SHOE "footstep_shoe"
 #define FOOTSTEP_MOB_HUMAN "footstep_human" //Warning: Only works on /mob/living/carbon/human
 #define FOOTSTEP_MOB_SLIME "footstep_slime"
+#define FOOTSTEP_MOB_METAL "footstep_metal"
 
 //priority defines for the footstep_override element
 #define STEP_SOUND_NO_PRIORITY 0
@@ -57,6 +60,12 @@ GLOBAL_LIST_INIT(footstep, list(
 		'sound/foley/footsteps/FTWOO_A2.ogg',
 		'sound/foley/footsteps/FTWOO_A3.ogg',
 		'sound/foley/footsteps/FTWOO_A4.ogg'), 42, 0),
+	FOOTSTEP_OLDWOOD = list(list(
+		'sound/foley/footsteps/FTOLDWOO_A1.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A2.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A3.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A4.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A5.ogg'), 42, 0),
 	FOOTSTEP_FLOOR = list(list(
 		'sound/foley/footsteps/FTTIL_A1.ogg',
 		'sound/foley/footsteps/FTTIL_A2.ogg',
@@ -106,6 +115,12 @@ GLOBAL_LIST_INIT(footstep, list(
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
 		'sound/foley/footsteps/FTMUD (5).ogg'), 80, 0),
+	FOOTSTEP_CATWALK = list(list(
+		'sound/foley/footsteps/FTCAT_A1.ogg',
+		'sound/foley/footsteps/FTCAT_A2.ogg',
+		'sound/foley/footsteps/FTCAT_A3.ogg',
+		'sound/foley/footsteps/FTCAT_A4.ogg',
+		'sound/foley/footsteps/FTCAT_A5.ogg'), 40, 0),
 ))
 //bare footsteps lists
 GLOBAL_LIST_INIT(barefootstep, list(
@@ -184,5 +199,26 @@ GLOBAL_LIST_INIT(heavyfootstep, list(
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
 		'sound/foley/footsteps/FTMUD (5).ogg'), 100, 0),
+))
+
+GLOBAL_LIST_INIT(metalfootstep, list(
+	FOOTSTEP_GENERIC_HEAVY = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_WATER = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_SHALLOW = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
+	FOOTSTEP_LAVA = list(list(
+		'sound/blank.ogg'), 100, 0),
+	FOOTSTEP_MUD = list(list(
+		'sound/foley/footsteps/armor/powerarmor (1).ogg',
+		'sound/foley/footsteps/armor/powerarmor (2).ogg',
+		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
 ))
 

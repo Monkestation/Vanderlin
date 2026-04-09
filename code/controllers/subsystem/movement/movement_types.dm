@@ -600,7 +600,7 @@
 /datum/move_loop/minecart/Destroy()
 	if(!QDELETED(moving) && istype(moving, /obj/structure/closet/crate/miningcar))
 		var/turf/moving_turf = get_turf(moving)
-		if(istype(moving_turf, /turf/open/transparent/openspace))
+		if(istype(moving_turf, /turf/open/openspace))
 			var/obj/structure/closet/crate/miningcar/minecart = moving
 			minecart.handle_aerial_fall(freefall = TRUE)
 	. = ..()
@@ -610,7 +610,7 @@
 	if(QDELETED(src) || QDELETED(moving))
 		return
 	var/turf/moving_turf = get_turf(moving)
-	if(istype(moving_turf, /turf/open/transparent/openspace))
+	if(istype(moving_turf, /turf/open/openspace))
 		aerial_velocity += (delay / 10) * 9.8
 		aerial_distance += aerial_velocity * (delay / 10)
 		if(aerial_distance >= 1)
@@ -626,7 +626,7 @@
 	var/atom/old_loc = moving.loc
 	var/turf/new_loc = get_step(moving, direction)
 	if(locate(/obj/structure/minecart_rail) in old_loc)
-		if(istype(new_loc, /turf/open/transparent/openspace))
+		if(istype(new_loc, /turf/open/openspace))
 			var/turf/below_turf = GET_TURF_BELOW(new_loc)
 			if(locate(/obj/structure/minecart_rail) in below_turf)
 				new_loc = below_turf

@@ -20,8 +20,8 @@
 
 	return armor
 
-
-/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+//simulate will cause no damage and play no sound
+/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	return armor?.getRating(type) || 0 // mostly used for simple mobs or other things that would have root armor defined
 
 //this returns the mob's protection against eye damage (number between -1 and 2) from bright lights
@@ -190,9 +190,10 @@
 	user.changeNext_move(CLICK_CD_GRABBING)
 	var/skill_diff = 0
 	var/combat_modifier = 1
-
-	skill_diff -= skills ? get_skill_level(/datum/skill/combat/wrestling) : 0 //my wrestling
-	skill_diff += user.skills ? user.get_skill_level(/datum/skill/combat/wrestling) : 0 //their wrestling
+	if(user.mind)
+		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling)) //NPCs don't use this
+	if(mind)
+		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
 
 	if(user == src)
 		instant = TRUE
@@ -220,7 +221,7 @@
 		if(G.chokehold)
 			combat_modifier += 0.15
 
-	var/probby = clamp((((8 + (((user.STASTR - STASTR)/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
+	var/probby = clamp((((8 + (((GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH))/4) + skill_diff)) * 5 + rand(-5, 5)) * combat_modifier), 5, 95)
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message
@@ -230,11 +231,10 @@
 			self_message = span_warning("I struggle with [user]!")
 		visible_message(span_warning("[user] struggles with [src]!"), self_message, span_hear("I hear aggressive shuffling!"))
 		playsound(src, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(1 SECONDS)
-		user.changeNext_move(1 SECONDS)
+		user.Immobilize(0.5 SECONDS)
+		user.changeNext_move(CLICK_CD_GRABBING)
 		user.adjust_stamina(rand(2,6))
-		src.Immobilize(0.5 SECONDS)
-		src.changeNext_move(0.5 SECONDS)
+		src.Immobilize(0.25 SECONDS)
 		return
 
 	if(!instant)
@@ -332,7 +332,7 @@
 		playsound(src, M.a_intent.hitsound, 100, FALSE)
 
 	log_combat(M, src, "attacked")
-
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, M)
 	return TRUE
 
 
@@ -365,33 +365,6 @@
 
 /mob/living/ex_act(severity, target)
 	..()
-
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
-	if(isturf(loc) && istype(loc.loc, /area/start))
-//		to_chat(M, "No attacking people at spawn, you jackass.")
-		return FALSE
-
-	if (M.used_intent.type == INTENT_HARM)
-		if(HAS_TRAIT(M, TRAIT_PACIFISM))
-			to_chat(M, "<span class='info'>I don't want to hurt anyone!</span>")
-			return FALSE
-
-		if(M.is_muzzled() || M.is_mouth_covered(FALSE, TRUE))
-			to_chat(M, "<span class='warning'>I can't bite with my mouth covered!</span>")
-			return FALSE
-		M.do_attack_animation(src, ATTACK_EFFECT_BITE)
-		if (prob(75))
-			log_combat(M, src, "attacked")
-			playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
-			visible_message("<span class='danger'>[M.name] bites [src]!</span>", \
-							"<span class='danger'>[M.name] bites you!</span>", "<span class='hear'>I hear a chomp!</span>", COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, "<span class='danger'>I bite [src]!</span>")
-			return TRUE
-		else
-			visible_message("<span class='danger'>[M.name]'s bite misses [src]!</span>", \
-							"<span class='danger'>I avoid [M.name]'s bite!</span>", "<span class='hear'>I hear the sound of jaws snapping shut!</span>", COMBAT_MESSAGE_RANGE, M)
-			to_chat(M, "<span class='warning'>My bite misses [src]!</span>")
-	return FALSE
 
 /mob/living/acid_act(acidpwr, acid_volume)
 	take_bodypart_damage(acidpwr * min(1, acid_volume * 0.1))

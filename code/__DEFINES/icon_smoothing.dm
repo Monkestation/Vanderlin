@@ -46,7 +46,7 @@ DEFINE_BITFIELD(smooth, list(
 #define SMOOTH_GROUP_OPEN_FLOOR S_TURF(1) //!turf/open/floor
 
 #define SMOOTH_GROUP_FLOOR_LIQUID S_TURF(2) //!turf/open/water, /turf/open/lava
-#define SMOOTH_GROUP_FLOOR_OPEN_SPACE S_TURF(3) //!turf/open/transparent/openspace
+#define SMOOTH_GROUP_FLOOR_OPEN_SPACE S_TURF(3) //!turf/open/openspace
 
 #define SMOOTH_GROUP_FLOOR_CARPET S_TURF(4) //!turf/open/floor/carpet
 #define SMOOTH_GROUP_FLOOR_DIRT S_TURF(5)

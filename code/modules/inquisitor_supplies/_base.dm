@@ -8,29 +8,29 @@ GLOBAL_LIST_EMPTY(inqsupplies)
 	var/marquescost = 0
 	var/maximum = null // If there's no maximum, it's infinite.
 	var/remaining = null // Limited stock items.
-	var/category = null // Category for the HERMES. They are -  "✤ SUPPLIES ✤", "✤ ARTICLES ✤", "✤ EQUIPMENT ✤", "✤ RELIQUARY ✤"
+	var/category = null // Category for the HERMES. They are -  " SUPPLIES ", " ARTICLES ", " EQUIPMENT ", " RELIQUARY "
 
 
 /datum/inqports/New()
 	..()
 	switch(category)
 		if(1)
-			category = "✤ RELIQUARY ✤"
+			category = "RELIQUARY"
 		if(2)
-			category = "✤ SUPPLIES ✤"
+			category = "SUPPLIES"
 		if(3)
-			category = "✤ ARTICLES ✤"
+			category = "ARTICLES"
 		if(4)
-			category = "✤ EQUIPMENT ✤"
+			category = "EQUIPMENT"
 		if(5)
-			category = "✤ WARDROBE ✤"
+			category = "WARDROBE"
 
 
 	if(name)
-		name = "[initial(name)] - ᛉ [marquescost] ᛉ"
+		name = "[initial(name)] - [marquescost]"
 
 
 	if(maximum)
 		remaining = maximum
-		name = "[initial(name)] ([remaining]/[maximum]) - ᛉ [marquescost] ᛉ"
+		name = "[initial(name)] ([remaining]/[maximum]) - [marquescost]"
 	return

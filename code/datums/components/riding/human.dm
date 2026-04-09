@@ -19,7 +19,7 @@
 		if(H.r_grab.grabbed == M)
 			if(H.l_grab.grabbed == M)
 				reqstrength -= 2
-	if(H.STASTR < reqstrength)
+	if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_STRENGTH) < reqstrength)
 		amt2use += 2
 	H.add_movespeed_modifier(MOVESPEED_ID_HUMAN_CARRYING, multiplicative_slowdown = amt2use)
 

@@ -5,7 +5,6 @@
 	seed = /obj/item/neuFarm/seed/coffee
 	tastes = list("hibicus sweetness" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	mill_result = /obj/item/reagent_containers/food/snacks/produce/coffeebeans
 	rotprocess = null
 
@@ -17,7 +16,6 @@
 	tastes = list("unpleasant bitterness" = 1)
 	bitesize = 1
 	seed = /obj/item/neuFarm/seed/coffee
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1)
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY
 
@@ -28,6 +26,5 @@
 	icon_state = "coffeebeans_roasted"
 	tastes = list("rich caramel smoothness" = 1)
 	bitesize = 1
-	list_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY

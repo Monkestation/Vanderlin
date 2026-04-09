@@ -25,7 +25,7 @@
 	layer = FULLSCREEN_LAYER
 	plane = FULLSCREEN_PLANE
 	blend_mode = BLEND_ADD
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 ////////////////////////////////////////////////////////////////////
 //																  //
@@ -73,14 +73,14 @@
 	icon = 'icons/visual_ui/192x192.dmi'
 	icon_state = "1"
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	scroll_height = 32
 
 /obj/abstract/visual_ui_element/hoverable/scroll_two
 	icon = 'icons/visual_ui/192x192.dmi'
 	icon_state = "2"
 	layer = VISUAL_UI_BUTTON
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	scroll_height = 32
 
 //------------------------------------------------------------
@@ -91,7 +91,7 @@
 	offset_x = -80
 	offset_y = -80
 	alpha = 180
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 //------------------------------------------------------------
 /obj/abstract/visual_ui_element/hoverable/test_close
 	icon = 'icons/visual_ui/32x32.dmi'
@@ -99,16 +99,16 @@
 	layer = VISUAL_UI_BUTTON
 	offset_x = 80
 	offset_y = 16
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 /obj/abstract/visual_ui_element/hoverable/test_close/appear()
 	..()
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 	icon_state = "close"
 	flick("close-spawn", src)
 
 /obj/abstract/visual_ui_element/hoverable/test_close/hide()
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	icon_state = "blank"
 	flick("close-click", src)
 	spawn(10)
@@ -123,7 +123,7 @@
 	icon_state = "hello"
 	layer = VISUAL_UI_BUTTON
 	offset_y = -16
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 /obj/abstract/visual_ui_element/hoverable/test_hello/Click()
 	flick("hello-click", src)
@@ -137,6 +137,6 @@
 	layer = VISUAL_UI_BUTTON
 	offset_x = -80
 	offset_y = 16
-	mouse_opacity = 1
+	mouse_opacity = MOUSE_OPACITY_ICON
 
 	move_whole_ui = TRUE

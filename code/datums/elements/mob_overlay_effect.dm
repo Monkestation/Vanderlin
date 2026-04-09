@@ -34,7 +34,7 @@
 		COMSIG_PARENT_QDELETING,
 	))
 
-/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target)
+/datum/element/mob_overlay_effect/proc/on_remove(datum/source, atom/movable/target, atom/new_loc)
 	SIGNAL_HANDLER
 
 	if(istype(target, /mob/living/simple_animal/hostile/retaliate/astral_projection))
@@ -56,6 +56,9 @@
 	for(var/obj/structure/S in get_turf(target))
 		if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 			return
+
+	if(isitem(target))
+		return ///this is ALOT of filters
 
 	if(isobj(target))
 		var/obj/obj = target

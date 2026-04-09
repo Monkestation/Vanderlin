@@ -64,6 +64,32 @@
 	ITEM_SLOT_HANDS,\
 )
 
+/// used to determine what items come first in an examination
+#define SLOT_DISPLAY_PRIORITY list(\
+	ITEM_SLOT_HEAD,\
+	ITEM_SLOT_MASK,\
+	ITEM_SLOT_MOUTH,\
+	ITEM_SLOT_NECK,\
+	\
+	ITEM_SLOT_SHIRT,\
+	ITEM_SLOT_ARMOR,\
+	\
+	ITEM_SLOT_CLOAK,\
+	ITEM_SLOT_BACK_L,\
+	ITEM_SLOT_BACK_R,\
+	\
+	ITEM_SLOT_WRISTS,\
+	ITEM_SLOT_GLOVES,\
+	ITEM_SLOT_RING,\
+	\
+	ITEM_SLOT_BELT,\
+	ITEM_SLOT_BELT_L,\
+	ITEM_SLOT_BELT_R,\
+	\
+	ITEM_SLOT_PANTS,\
+	ITEM_SLOT_SHOES,\
+)
+
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
 //Make sure to update check_obscured_slots() if you add more.
 #define HIDEGLOVES (1<<0)

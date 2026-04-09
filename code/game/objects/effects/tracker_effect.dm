@@ -21,7 +21,7 @@
 	name = "tracker"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "soul2"
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	animate_movement = 0
 	density = 0
 	var/absolute_X = 0

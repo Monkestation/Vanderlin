@@ -76,7 +76,7 @@
 	on_who.click_intercept = null
 
 /// Handles whenever a mob clicks on something
-/datum/action/innate/proc/InterceptClickOn(mob/living/clicker, params, atom/clicked_on)
+/datum/action/innate/proc/InterceptClickOn(mob/living/clicker, list/modifiers, atom/clicked_on)
 	if(!IsAvailable())
 		unset_ranged_ability(clicker)
 		return FALSE
@@ -86,7 +86,7 @@
 	return do_ability(clicker, clicked_on)
 
 /// Actually goes through and does the click ability
-/datum/action/innate/proc/do_ability(mob/living/clicker, params, atom/clicked_on)
+/datum/action/innate/proc/do_ability(mob/living/clicker, list/modifiers, atom/clicked_on)
 	return FALSE
 
 /datum/action/innate/Remove(mob/removed_from)

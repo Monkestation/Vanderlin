@@ -26,10 +26,10 @@
 
 /datum/status_effect/buff/water_breathing/on_apply()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_WATER_BREATHING, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_WATER_BREATHING, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("You can now breathe underwater."))
 
 /datum/status_effect/buff/water_breathing/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_WATER_BREATHING, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_WATER_BREATHING, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("Your ability to breathe underwater fades."))

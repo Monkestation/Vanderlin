@@ -70,7 +70,7 @@
 /area/under/mountains/anvil/dungeon)
 "aQ" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "aV" = (
 /obj/structure/stairs/fancy/c{
@@ -598,7 +598,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/mountains/anvil/dungeon)
 "gy" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "gE" = (
 /obj/structure/table/wood/large/corner{
@@ -942,7 +942,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "mn" = (
 /obj/structure/closet/crate/chest/crate,
@@ -1234,7 +1234,7 @@
 /obj/structure/table/wood/large/corner_blue{
 	dir = 10
 	},
-/obj/item/clothing/neck/psycross/silver/ravox,
+/obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/churchmarble,
 /area/under/mountains/anvil/dungeon)
 "qN" = (
@@ -1715,7 +1715,7 @@
 "xF" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/candle/yellow,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
 /turf/open/floor/wood/nosmooth,
 /area/under/mountains/anvil/dungeon)
 "xJ" = (
@@ -3555,7 +3555,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/mountains/anvil/dungeon)
 "YH" = (
 /obj/structure/chair/bench/throne,
@@ -3602,7 +3602,7 @@
 /area/under/mountains/anvil/dungeon/lower)
 "Zq" = (
 /obj/effect/decal/cleanable/blood/gibs,
-/obj/item/clothing/neck/psycross/silver/malum/steel,
+/obj/item/clothing/neck/psycross/silver/divine/malum/steel,
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/wood/nosmooth,
 /area/under/mountains/anvil/dungeon)

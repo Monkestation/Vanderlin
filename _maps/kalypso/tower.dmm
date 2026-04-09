@@ -44,6 +44,16 @@
 "iO" = (
 /turf/open/floor/hexstone,
 /area/template_noop)
+"lu" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shoes/sandals,
+/obj/item/clothing/pants/skirt/colored/random,
+/obj/item/clothing/armor/corset,
+/obj/item/clothing/shirt/undershirt/lowcut,
+/obj/item/clothing/pants/tights/colored/random,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood,
+/area/template_noop)
 "mY" = (
 /obj/structure/warningbell{
 	pixel_y = -13
@@ -88,9 +98,6 @@
 /obj/item/ammo_casing/caseless/arrow,
 /turf/open/floor/ruinedwood,
 /area/template_noop)
-"ru" = (
-/turf/open/transparent/openspace,
-/area/template_noop)
 "sR" = (
 /obj/structure/table/wood/counter,
 /obj/item/reagent_containers/food/snacks/rotten/bacon,
@@ -116,6 +123,15 @@
 /area/template_noop)
 "vU" = (
 /turf/open/floor/naturalstone,
+/area/template_noop)
+"wa" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shoes/sandals,
+/obj/item/clothing/pants/skirt/colored/random,
+/obj/item/clothing/shirt/undershirt/lowcut,
+/obj/item/clothing/pants/tights/colored/random,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood,
 /area/template_noop)
 "wu" = (
 /turf/template_noop,
@@ -145,6 +161,9 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
+/area/template_noop)
+"Av" = (
+/turf/open/openspace,
 /area/template_noop)
 "Az" = (
 /obj/structure/table/map/enigma{
@@ -188,16 +207,6 @@
 /obj/item/kitchen/fork,
 /turf/open/floor/wood,
 /area/template_noop)
-"IA" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/sandals,
-/obj/item/clothing/pants/skirt/colored/random,
-/obj/item/clothing/armor/corset,
-/obj/item/clothing/shirt/undershirt/lowcut,
-/obj/item/clothing/pants/tights/colored/random,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/ruinedwood,
-/area/template_noop)
 "Jb" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood,
@@ -208,15 +217,6 @@
 /area/template_noop)
 "Ki" = (
 /turf/open/floor/dirt,
-/area/template_noop)
-"LK" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/sandals,
-/obj/item/clothing/pants/skirt/colored/random,
-/obj/item/clothing/shirt/undershirt/lowcut,
-/obj/item/clothing/pants/tights/colored/random,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/ruinedwood,
 /area/template_noop)
 "LO" = (
 /obj/structure/table/map/enigma{
@@ -581,8 +581,8 @@ wu
 BL
 BL
 oN
-IA
-LK
+lu
+wa
 oN
 BL
 BL
@@ -599,7 +599,7 @@ Ed
 Np
 Hf
 Hf
-ru
+Av
 Ul
 BL
 BL
@@ -616,7 +616,7 @@ Gc
 Rt
 Rt
 Hf
-ru
+Av
 YJ
 BL
 BL
@@ -627,13 +627,13 @@ BL
 BL
 Np
 Hf
-ru
+Av
 Np
 YY
 LO
 Hf
 Hf
-ru
+Av
 Hf
 BL
 BL
@@ -649,7 +649,7 @@ uu
 TH
 OD
 Hf
-ru
+Av
 Np
 Hf
 Ss
@@ -659,12 +659,12 @@ Ss
 Am
 Am
 Hf
-ru
+Av
 Hf
 oB
 Az
 Hf
-ru
+Av
 Np
 ZR
 ZR
@@ -672,14 +672,14 @@ Ss
 "}
 (8,1,2) = {"
 Ss
-ru
-ru
-ru
+Av
+Av
+Av
 Hf
 Np
 OD
 Rt
-ru
+Av
 qo
 Hf
 BL
@@ -687,12 +687,12 @@ BL
 BL
 "}
 (9,1,2) = {"
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
 Np
 Np
 Hf
@@ -703,15 +703,15 @@ BL
 BL
 "}
 (10,1,2) = {"
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 Hf
 Hf
 BL
@@ -719,47 +719,47 @@ BL
 BL
 "}
 (11,1,2) = {"
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 BL
 BL
 wu
 "}
 (12,1,2) = {"
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 wu
 wu
 "}
 (13,1,2) = {"
 wu
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 wu
 wu
 wu
@@ -771,9 +771,9 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+Av
+Av
+Av
 wu
 wu
 wu
@@ -821,9 +821,9 @@ wu
 BL
 BL
 Hf
-ru
-ru
-ru
+Av
+Av
+Av
 gf
 Hf
 BL
@@ -838,9 +838,9 @@ BL
 Hf
 Hf
 pA
-ru
-ru
-ru
+Av
+Av
+Av
 Gc
 Hf
 BL
@@ -852,13 +852,13 @@ BL
 BL
 Jz
 Hf
-ru
-ru
+Av
+Av
 Hf
 mY
 Hf
-ru
-ru
+Av
+Av
 Hf
 BL
 BL
@@ -866,33 +866,33 @@ BL
 (6,1,3) = {"
 Ss
 Hf
-ru
-ru
+Av
+Av
 Hf
 Hf
 Hf
 Hf
 Hf
 Hf
-ru
-ru
+Av
+Av
 Hf
 Ss
 "}
 (7,1,3) = {"
 Ss
 Hf
-ru
-ru
-ru
+Av
+Av
+Av
 Hf
 Hf
 Hf
-ru
-ru
+Av
+Av
 Hf
-ru
-ru
+Av
+Av
 Ss
 "}
 (8,1,3) = {"
@@ -900,11 +900,11 @@ Hf
 Hf
 Gc
 Hf
-ru
+Av
 gf
 Hf
 Hf
-ru
+Av
 Hf
 Hf
 ZR
@@ -912,31 +912,31 @@ ZR
 Ss
 "}
 (9,1,3) = {"
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
 Hf
 Hf
 Hf
-ru
+Av
 Hf
 Hf
 Hf
 BL
 "}
 (10,1,3) = {"
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 Hf
 TD
 Hf
@@ -944,47 +944,47 @@ BL
 BL
 "}
 (11,1,3) = {"
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 BL
 BL
 wu
 "}
 (12,1,3) = {"
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 wu
 wu
 "}
 (13,1,3) = {"
 wu
 wu
-ru
-ru
-ru
-ru
-ru
-ru
-ru
+Av
+Av
+Av
+Av
+Av
+Av
+Av
 wu
 wu
 wu
@@ -996,9 +996,9 @@ wu
 wu
 wu
 wu
-ru
-ru
-ru
+Av
+Av
+Av
 wu
 wu
 wu

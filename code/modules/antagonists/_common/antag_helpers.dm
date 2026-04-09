@@ -10,8 +10,7 @@
 //Get all teams [of type team_type]
 /proc/get_all_teams(team_type)
 	. = list()
-	for(var/V in GLOB.antagonists)
-		var/datum/antagonist/A = V
+	for(var/datum/antagonist/A as anything in GLOB.antagonists)
 		if(!A.owner)
 			continue
 		var/datum/team/T = A.get_team()

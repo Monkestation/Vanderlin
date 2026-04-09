@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	. = ..()
 	caster = summoner
 
-/obj/structure/door/arcyne/bolt/caster/attack_hand_secondary(mob/user, params)
+/obj/structure/door/arcyne/bolt/caster/attack_hand_secondary(mob/user, list/modifiers)
 	if(user != caster)
 		to_chat(user, span_warning("A magical force prevents me from interacting with [src]!"))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -112,30 +112,21 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 /obj/structure/well/fountain/mana/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_fountain
 
-/obj/structure/well/fountain/mana/onbite(mob/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
-			return
-		var/list/waterl
-		if(mana_pool.amount > 50)
-			waterl = list(/datum/reagent/medicine/manapot = 2)
-		else
-			to_chat(user, span_warning("[src] is dry."))
-			return FALSE
-		playsound(user, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 100, FALSE)
-		user.visible_message(span_info("[user] starts to drink from [src]."))
-		if(do_after(L, 2.5 SECONDS, target = src))
-			mana_pool.adjust_mana(-50)
-			waterl = list(/datum/reagent/medicine/manapot/weak = 2)
-			var/datum/reagents/reagents = new()
-			reagents.add_reagent_list(waterl)
-			reagents.trans_to(L, reagents.total_volume, transfered_by = user, method = INGEST)
-			playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
-		return
-	..()
+/obj/structure/well/fountain/mana/onbite(mob/living/user)
+	if(mana_pool.amount < 50)
+		to_chat(user, span_warning("[src] is dry."))
+		return TRUE
+	. = ..()
 
-/obj/structure/well/fountain/mana/attackby(obj/item/I, mob/user, params)
+/obj/structure/well/fountain/mana/drink_from(mob/living/user)
+	mana_pool.adjust_mana(-50)
+	var/datum/reagents/reagents = new()
+	reagents.add_reagent(/datum/reagent/medicine/manapot/weak, 2)
+	reagents.trans_to(user, reagents.total_volume, transfered_by = user, method = INGEST)
+	playsound(user,pick('sound/items/drink_gen (1).ogg','sound/items/drink_gen (2).ogg','sound/items/drink_gen (3).ogg'), 100, TRUE)
+
+
+/obj/structure/well/fountain/mana/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		var/obj/item/reagent_containers/glass/W = I
 		if(W.reagents.holder_full())

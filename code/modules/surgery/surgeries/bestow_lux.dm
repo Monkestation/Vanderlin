@@ -19,8 +19,8 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 10 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
-	skill_min = SKILL_LEVEL_EXPERT
-	skill_median = SKILL_LEVEL_MASTER
+	skill_min = SKILL_RANK_EXPERT
+	skill_median = SKILL_RANK_MASTER
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 	var/tainted_lux = FALSE
@@ -67,7 +67,7 @@
 		"[user] works the [tool.name] into [target]'s innards.")
 
 	target.emote("breathgasp")
-	target.adjust_jitter(100)
+	target.adjust_jitter(100 SECONDS)
 	target.update_body()
 	qdel(tool)
 	if(target.get_lux_status() == LUX_NO_LUX)

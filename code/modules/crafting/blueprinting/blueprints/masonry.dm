@@ -1,6 +1,6 @@
 /datum/blueprint_recipe/masonry
 	abstract_type = /datum/blueprint_recipe/masonry
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	category = "Masonry"
 	construct_tool = /obj/item/weapon/hammer
 	craftsound = 'sound/foley/Building-01.ogg'
@@ -161,12 +161,3 @@
 	)
 	supports_directions = TRUE
 	craftdiff = 0
-
-/datum/blueprint_recipe/carpentry/psydon_metal_cross
-	name = "metal psycross"
-	desc = "A metal psycross dedicated to Psydon."
-	required_materials = list(
-		/obj/item/ingot/iron = 3,
-	)
-	result_type = /obj/structure/fluff/psycross/psydon/metal
-	craftdiff = 1

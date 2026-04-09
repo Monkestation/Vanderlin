@@ -47,7 +47,7 @@
 	momentum = 0
 	return FALSE
 
-/obj/structure/closet/crate/miningcar/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+/obj/structure/closet/crate/miningcar/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!on_rails || momentum <= 0)
 		return
@@ -331,7 +331,7 @@
 		return NONE
 
 	// Flying over openspace
-	if((!on_rails || momentum >= 4) && istype(get_step(src, dir), /turf/open/transparent/openspace))
+	if((!on_rails || momentum >= 4) && istype(get_step(src, dir), /turf/open/openspace))
 		update_rail_state(FALSE) // Time to fly
 		return NONE
 

@@ -120,8 +120,7 @@
 			to_chat(user, span_notice("You grab onto [L]."))
 		return
 
-/mob/living/simple_animal/hostile/retaliate/meatvine/UnarmedAttack(atom/A, proximity_flag, params, atom/source)
-
+/mob/living/simple_animal/hostile/retaliate/meatvine/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	if(!istype(A, /obj/structure/meatvine/papameat) && !istype(A, /obj/structure/meatvine/intestine_wormhole))
 		return . = ..()
 

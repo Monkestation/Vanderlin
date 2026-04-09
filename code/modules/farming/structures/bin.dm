@@ -59,7 +59,7 @@
 			user.visible_message("<span class='warning'>[user] kicks [src]!</span>", \
 				"<span class='warning'>I kick [src]!</span>")
 			return
-		if(prob(L.STASTR * 8))
+		if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 8))
 			playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 			user.visible_message("<span class='warning'>[user] kicks over [src]!</span>", \
 				"<span class='warning'>I kick over [src]!</span>")
@@ -77,7 +77,7 @@
 			user.visible_message("<span class='warning'>[user] kicks [src]!</span>", \
 				"<span class='warning'>I kick [src]!</span>")
 
-/obj/item/bin/attack_hand_secondary(mob/user, params)
+/obj/item/bin/attack_hand_secondary(mob/user, list/modifiers)
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(kover)
 		user.visible_message("<span class='notice'>[user] starts to pick up [src]...</span>", \
@@ -92,7 +92,7 @@
 
 	try_wash(user, user)
 
-/obj/item/bin/attackby_secondary(obj/item/weapon, mob/user, params)
+/obj/item/bin/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(user.cmode)
@@ -152,7 +152,7 @@
 			return TRUE
 	return FALSE
 
-/obj/item/bin/attackby(obj/item/I, mob/user, params)
+/obj/item/bin/attackby(obj/item/I, mob/user, list/modifiers)
 	if(kover)
 		return ..()
 
@@ -194,7 +194,7 @@
 /obj/item/bin/trash/StorageBlock(obj/item/I, mob/user)
 	return FALSE
 
-/obj/item/bin/trash/attackby(obj/item/I, mob/user, params)
+/obj/item/bin/trash/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/dye_pack)) //it works... but we can do better, surely?
 		return
 	. = ..()

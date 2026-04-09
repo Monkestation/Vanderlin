@@ -365,6 +365,10 @@
 	icon_state = "kobold_alt"
 	can_wag = TRUE
 
+/datum/sprite_accessory/tail/kobold/round
+	name = "Kobold Round"
+	icon_state = "kobold_round"
+
 /datum/sprite_accessory/tail/medicator
 	name = "Medicator Plumage"
 	icon = 'icons/mob/sprite_accessory/tails/medicator.dmi'

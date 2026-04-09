@@ -104,7 +104,7 @@
 			return TRUE
 	..()
 
-/obj/item/flashlight/flare/light/afterattack(atom/movable/A, mob/user, proximity)
+/obj/item/flashlight/flare/light/afterattack(atom/movable/A, mob/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

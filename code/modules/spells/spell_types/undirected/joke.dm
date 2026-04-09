@@ -9,7 +9,7 @@
 
 	spell_type = NONE
 	associated_skill = null
-	associated_stat = STATKEY_INT
+	associated_stat = STAT_INTELLIGENCE
 
 	charge_required = FALSE
 	sound = null

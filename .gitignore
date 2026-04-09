@@ -2,18 +2,38 @@
 
 # Local overrides--you can use this to change the config for your dev environment (like setting up SQL) without worrying about committing it
 /config/dev_overrides.txt
+/config/dev_preferences.json
+/config/dev_preferences.json.updatebac
 
 #Ignore everything in datafolder and subdirectories
 /data/**/*
 /tmp/**/*
+/cache/**/*
 
 #Ignore byond config folder.
 /cfg/**/*
 
+#Ignore IDE files we don't need in the repo.
+/.vs/**/*
+/tgstation/FileContentIndex/**/*
+/FileContentIndex/**/*
+/v17/**/*
+/v18/**/*
+/v19/**/*
+/v20/**/*
+/v21/**/*
+/v22/**/*
+
+# Ignore compiled linux libs in the root folder, e.g. librust_g.so
+/*.so
+
 #Ignore compiled files and other files generated during compilation.
 *.mdme
+*.mdme.*
 *.dmb
 *.rsc
+*.m.dme
+*.test.dme
 *.lk
 *.int
 *.backup
@@ -52,27 +72,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-#*.so
-
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -80,8 +79,7 @@ var/
 *.spec
 
 # Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+pip-*.txt
 
 # Unit test / coverage reports
 htmlcov/
@@ -91,7 +89,6 @@ htmlcov/
 .cache
 nosetests.xml
 coverage.xml
-*,cover
 .hypothesis/
 
 # Translations
@@ -100,19 +97,12 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
-
-# Flask instance folder
-instance/
 
 # Scrapy stuff:
 .scrapy
 
 # Sphinx documentation
 docs/_build/
-
-# PyBuilder
-target/
 
 # IPython Notebook
 .ipynb_checkpoints
@@ -125,10 +115,6 @@ celerybeat-schedule
 
 # dotenv
 .env
-
-# virtualenv
-venv/
-ENV/
 
 # IntelliJ IDEA / PyCharm (with plugin)
 .idea
@@ -151,12 +137,6 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
-#*.cab
-#*.msi
-#*.msm
-#*.msp
 
 # Windows shortcuts
 *.lnk
@@ -198,10 +178,19 @@ Temporary Items
 
 #Visual studio stuff
 *.vscode/*
-!/.vscode/extensions.json
-tools/MapAtmosFixer/MapAtmosFixer/obj/*
-tools/MapAtmosFixer/MapAtmosFixer/bin/*
-**/.vs/
+/tools/MapAtmosFixer/MapAtmosFixer/obj/*
+/tools/MapAtmosFixer/MapAtmosFixer/bin/*
+/tools/CreditsTool/bin/*
+/tools/CreditsTool/obj/*
+/tools/Tgstation.DiscordDiscussions/.vs/*
+/tools/Tgstation.DiscordDiscussions/bin/*
+/tools/Tgstation.DiscordDiscussions/obj/*
+/tools/Tgstation.DiscordDiscussions/Properties/launchSettings.json
+/tools/Tgstation.PRAnnouncer/.vs/*
+/tools/Tgstation.PRAnnouncer/bin/*
+/tools/Tgstation.PRAnnouncer/obj/*
+/tools/Tgstation.PRAnnouncer/Properties/launchSettings.json
+/tools/Tgstation.PRAnnouncer/appsettings.*.json
 
 #GitHub Atom
 .atom-build.json
@@ -214,6 +203,9 @@ tools/MapAtmosFixer/MapAtmosFixer/bin/*
 /_maps/**/backup/
 /_maps/templates.dm
 
+#dmm palette file. You really should be using StrongDMM instead.
+*.dmm-pal
+
 #dmdoc default folder
 /dmdoc
 
@@ -222,20 +214,45 @@ tools/MapAtmosFixer/MapAtmosFixer/bin/*
 !/config/jukebox_music/sounds/exclude
 /config/title_music/sounds/*
 !/config/title_music/sounds/exclude
-!/config/title_music/sounds/title1.ogg
 /config/title_screens/images/*
 !/config/title_screens/images/exclude
-/data/triumphs.sav
-config/admins.txt
-cfg/admin.txt
-config/admins.txt
 
-# Ignore compile options to default to testing environment
-#/code/_compile_options.dm
+#Linux docker
+/tools/tgs_test/.vs/*
+/tools/tgs_test/bin/*
+/tools/tgs_test/obj/*
 
-/prof.dll
+# Built auxtools libraries and intermediate files
+aux*.dll
+libaux*.so
+*.pdb
 
-# OpenDream-compiled DME
-/stonekeep.json
-code/_compile_options.dm
-*.m.dme
+# byond-tracy, we intentionally do not ship this and do not want to maintain it
+# https://github.com/mafemergency/byond-tracy/
+prof.dll
+libprof.so
+
+# Tracy can read source files when it is in the root folder, even without absolute paths.
+# If you're interested, run this hack:
+# https://gist.github.com/Mothblocks/db5462aa84d7d6b1d1b1276b820f62da
+Tracy.exe
+
+# JavaScript tools
+**/node_modules
+
+# Screenshot tests
+/artifacts
+
+# named byond versions config
+/tools/build/dm_versions.json
+
+# From /tools/define_sanity/check.py - potential output file that we load onto the user's machine that we don't want to have committed.
+define_sanity_output.txt
+
+# ezdb
+/db/
+/config/ezdb.txt
+
+# Running OpenDream locally
+vanderlin.json
+rust_g64.dll

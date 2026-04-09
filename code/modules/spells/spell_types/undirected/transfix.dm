@@ -3,7 +3,7 @@
 	button_icon_state = "transfix"
 	has_visual_effects = FALSE
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 
 	spell_type = SPELL_BLOOD
 
@@ -62,7 +62,7 @@
 			return
 		targets = list(selected)
 
-	var/bloodskill = owner.get_skill_level(/datum/skill/magic/blood)
+	var/bloodskill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/magic/blood)
 	var/bloodroll = roll(bloodskill, blood_dice)
 	owner.say(message, forced = "spell ([name])")
 	if(powerful)
@@ -71,7 +71,7 @@
 	for(var/mob/living/carbon/human/target as anything in targets)
 		if(target.cmode)
 			will_dice++
-		var/willpower = round(target.STAINT / int_divisor, 1)
+		var/willpower = round(GET_MOB_ATTRIBUTE_VALUE(target, STAT_INTELLIGENCE) / int_divisor, 1)
 		var/willroll = roll(willpower, will_dice)
 
 		// If the vampire failed badly
@@ -98,22 +98,25 @@
 					to_chat(target, "You feel like a curtain is coming over your mind.")
 					to_chat(owner, "The mind of [target] gives way slightly.")
 					target.Slowdown(20)
+					log_combat(owner, target, "weakly transfixed")
 				if(101 SECONDS to 180 SECONDS)
 					to_chat(target, "Your eyelids force themselves shut as you feel intense lethargy.")
 					to_chat(owner, "[target] will not be able to resist much more.")
 					target.set_eyes_closed(TRUE)
 					target.Slowdown(50)
+					log_combat(owner, target, "transfixed")
 				if(180 SECONDS to INFINITY)
 					to_chat(target, span_userdanger("You can't take it anymore. Your legs give out as you fall into the dreamworld."))
 					to_chat(owner, "[target] is mine now.")
 					target.set_eyes_closed(TRUE)
 					target.Slowdown(50)
+					log_combat(owner, target, "strongly transfixed")
 					addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, Sleeping), 1 MINUTES), 5 SECONDS)
 			continue
 
 		if(!powerful)
-			var/holypower = target.get_skill_level(/datum/skill/magic/holy)
-			var/magicpower = round(target.get_skill_level(/datum/skill/magic/arcane) * 0.6, 1)
+			var/holypower = GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/holy)
+			var/magicpower = round(GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/arcane) * 0.6, 1)
 			var/roll = roll(1 + holypower + magicpower, 5)
 			if(roll > bloodroll)
 				to_chat(target, "I feel like the unholy magic came from [owner]. I should use my magic or miracles on them.")

@@ -308,7 +308,7 @@ SUBSYSTEM_DEF(migrants)
 
 	/// And back to non copy pasta code
 
-	to_chat(character, span_alertsyndie("I am a [role_instance.name]!"))
+	to_chat(character, span_alert("I am a [role_instance.name]!"))
 	to_chat(character, span_notice(wave.greet_text))
 	to_chat(character, span_notice(role_instance.greet_text))
 
@@ -399,18 +399,24 @@ SUBSYSTEM_DEF(migrants)
 		return FALSE
 	if(migrant_job.banned_lunatic && is_misc_banned(player.ckey, BAN_MISC_LUNATIC))
 		return FALSE
+	if(migrant_job.antag_role)
+		var/antag_type = migrant_job.antag_role::job_rank // ugh
+		if(antag_type && is_antag_banned(player.ckey, antag_type))
+			return FALSE
 
 	var/datum/preferences/prefs = player.prefs
 	if(!player.prefs.allowed_respawn())
 		return FALSE
 
+	var/player_species_id_job = prefs.pref_species.id_override ? prefs.pref_species.id_override : prefs.pref_species.id
+
 	var/can_join = TRUE
-	if(length(migrant_job.allowed_races) && !(prefs.pref_species.id in migrant_job.allowed_races))
+	if(length(migrant_job.allowed_races) && !(player_species_id_job in migrant_job.allowed_races))
 		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			to_chat(player, span_warning("Wrong species. Your prioritized role only allows [migrant_job.allowed_races.Join(", ")]."))
 			can_join = FALSE
 
-	if(length(migrant_job.blacklisted_species) && (prefs.pref_species.id in migrant_job.blacklisted_species))
+	if(length(migrant_job.blacklisted_species) && (player_species_id_job in migrant_job.blacklisted_species))
 		if(!(player.has_triumph_buy(TRIUMPH_BUY_RACE_ALL)))
 			to_chat(player, span_warning("Wrong species. Your prioritized role disallows [migrant_job.blacklisted_species.Join(", ")]."))
 			can_join = FALSE
@@ -655,7 +661,7 @@ SUBSYSTEM_DEF(migrants)
 	return migrants
 
 /client/proc/admin_force_next_migrant_wave()
-	set category = "GameMaster"
+	set category = "GameMaster.Interactions"
 	set name = "Force Migrant Wave"
 	if(!holder)
 		return

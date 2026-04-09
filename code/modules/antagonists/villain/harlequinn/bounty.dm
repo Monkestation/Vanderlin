@@ -12,7 +12,7 @@
 	var/last_harlequin_spawn = 0
 	COOLDOWN_DECLARE(bounty_marker)
 
-/obj/structure/bounty_board/attack_hand_secondary(mob/user, params)
+/obj/structure/bounty_board/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -72,13 +72,7 @@
 		if(50 to INFINITY)
 			return "Legendary"
 
-/obj/structure/bounty_board/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
-	ui_interact(user)
-
-/obj/structure/bounty_board/ui_interact(mob/user)
+/obj/structure/bounty_board/interact(mob/user)
 	var/html = get_bounty_board_html(user)
 	user << browse(html, "window=bounty_board;size=900x700;titlebar=1;can_minimize=1;can_resize=1")
 	onclose(user, "bounty_board")
@@ -1144,7 +1138,7 @@
 	if(selected_target)
 		selected_target.mark_as_used()
 		to_chat(user, span_notice("Target: [selected_target.target_name] has been assigned to this contract."))
-	ui_interact(user)
+	interact(user)
 
 /// This proc should be called when significant actions happen (death, theft, etc.) basically this is the check completion proc
 /obj/structure/bounty_board/proc/check_target_action(mob/actor, mob/target, action_type)
@@ -1255,7 +1249,7 @@
 		spawn_contraband_for_contract(contract, user)
 
 	to_chat(user, span_notice("Contract accepted! Good hunting."))
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/get_required_reputation(contract_type)
 	switch(contract_type)
@@ -1290,7 +1284,7 @@
 	contract.complete_contract(src)
 	modify_reputation(user, 5) // Gain reputation for completing contracts
 	to_chat(user, span_notice("Contract completed!"))
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/request_contract_verification(mob/user, contract_id)
 	var/datum/bounty_contract/contract = find_contract_by_id(contract_id)
@@ -1310,7 +1304,7 @@
 			to_chat(M, span_notice("Contract verification requested for '[contract.target_name]'. Check the bounty board to verify."))
 			break
 
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/verify_contract_completion(mob/user, contract_id, success)
 	var/datum/bounty_contract/contract = find_contract_by_id(contract_id)
@@ -1344,7 +1338,7 @@
 				break
 		to_chat(user, span_notice("Contract marked as failed."))
 
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/find_contract_by_id(contract_id)
 	for(var/datum/bounty_contract/contract in active_contracts)
@@ -1788,7 +1782,7 @@
 	var/list/marked_targets = list()
 	var/max_targets = 5 // Maximum number of targets that can be marked
 
-/obj/item/bounty_marker/attack_self(mob/user, params)
+/obj/item/bounty_marker/attack_self(mob/user, list/modifiers)
 	if(!marked_targets.len)
 		to_chat(user, span_warning("No targets have been marked with this device."))
 		return
@@ -1803,7 +1797,7 @@
 		marked_targets = list()
 		return
 
-/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!proximity_flag && get_dist(user, target) > 7)
 		return

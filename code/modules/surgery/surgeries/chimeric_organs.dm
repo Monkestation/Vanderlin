@@ -62,7 +62,7 @@
 		TOOL_SHARP = 60,
 	)
 	time = 10 SECONDS
-	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_JOURNEYMAN
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED
 
 	var/obj/item/organ/selected_organ
@@ -125,7 +125,7 @@
 		TOOL_SHARP = 60,
 	)
 	time = 8 SECONDS
-	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_JOURNEYMAN
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED
 
 	var/obj/item/organ/selected_organ
@@ -264,7 +264,6 @@
 			""
 		)
 		return FALSE
-
 	node_to_graft.stored_node = null
 	qdel(node_to_graft)
 	node_to_graft = null
@@ -314,7 +313,7 @@
 		TOOL_SHARP = 60,
 	)
 	time = 15 SECONDS
-	skill_min = SKILL_LEVEL_EXPERT
+	skill_min = SKILL_RANK_EXPERT
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED
 
 	var/obj/item/organ/selected_organ

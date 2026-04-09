@@ -181,7 +181,7 @@
 	current.set_edgeturf_color = "#ffaaff"
 	current.recalculate_field(full_recalc = TRUE)
 
-/obj/item/multitool/field_debug/attack_self(mob/user, params)
+/obj/item/multitool/field_debug/attack_self(mob/user, list/modifiers)
 	operating = !operating
 	to_chat(user, span_notice("You turn [src] [operating? "on":"off"]."))
 	if(!istype(current) && operating)

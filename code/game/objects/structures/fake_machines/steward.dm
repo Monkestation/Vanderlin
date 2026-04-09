@@ -55,7 +55,7 @@
 	var/current_tab = TAB_MAIN
 	var/compact = FALSE
 
-/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, params)
+/obj/structure/fake_machine/steward/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		record_round_statistic(STATS_MAMMONS_DEPOSITED, I.get_real_price())
 		SStreasury.give_money_treasury(I.get_real_price(), "NERVE MASTER deposit")
@@ -102,7 +102,7 @@
 		if(!D || !istype(D, /datum/stock/stockpile/custom))
 			return
 
-		var/confirm = alert(usr, "Are you sure you want to delete the custom stock for [D.name]?", "Delete Custom Stock", "Yes", "No")
+		var/confirm = tgui_alert(usr, "Are you sure you want to delete the custom stock for [D.name]?", "Delete Custom Stock", list("Yes", "No"))
 		if(confirm != "Yes")
 			return
 
@@ -386,7 +386,7 @@
 			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
 				if(ishuman(A))
 					var/mob/living/carbon/human/tmp = A
-					contents += "[tmp.real_name] ([tmp.get_role_title()]) - [SStreasury.bank_accounts[A]]m<BR>"
+					contents += "[tmp.real_name] ([tmp.get_role_title(steward_check = TRUE)]) - [SStreasury.bank_accounts[A]]m<BR>"
 				else
 					contents += "[A.real_name] - [SStreasury.bank_accounts[A]]m<BR>"
 				contents += "<a href='byond://?src=\ref[src];givemoney=\ref[A]'>\[Give Money\]</a> <a href='byond://?src=\ref[src];fineaccount=\ref[A]'>\[Fine Account\]</a><BR><BR>"

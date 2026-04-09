@@ -9,7 +9,7 @@
 
 /// Deprecated: Use /datum/asset/spritesheet_batched where possible
 /datum/asset/spritesheet
-	_abstract = /datum/asset/spritesheet
+	abstract_type = /datum/asset/spritesheet
 	cross_round_cachable = TRUE
 	var/name
 	/// List of arguments to pass into queuedInsert
@@ -64,6 +64,8 @@
 		fdel("data/spritesheets/[name]_[size_id].png")
 	sizes = list()
 	to_generate = list()
+	cached_serialized_url_mappings = null
+	cached_serialized_url_mappings_transport_type = null
 	fully_generated = FALSE
 	var/old_load = load_immediately
 	load_immediately = TRUE
@@ -405,7 +407,7 @@
 /// Spritesheet that only uses simple PNGs and CSS keys. See `assets` variable.
 /// Deprecated: Use /datum/asset/spritesheet_batched where possible
 /datum/asset/spritesheet/simple
-	_abstract = /datum/asset/spritesheet/simple
+	abstract_type = /datum/asset/spritesheet/simple
 	/// Associative list of icon keys (CSS class names) -> PNG filepaths (single quote!)
 	/// File paths MUST be PNGs
 	var/list/assets
@@ -413,3 +415,47 @@
 /datum/asset/spritesheet/simple/create_spritesheets()
 	for (var/key in assets)
 		Insert(key, assets[key])
+
+/datum/asset/spritesheet/attributes_big
+	name = "attributes_big"
+
+/datum/asset/spritesheet/attributes_big/create_spritesheets()
+	var/list/to_insert = list()
+
+	for(var/attribute_type in GLOB.all_attributes)
+		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
+		if(attribute_datum.icon && attribute_datum.icon_state)
+			var/icon/attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
+			var/css_name = sanitize_css_class_name(attribute_datum.name)
+			var/size = ""
+			attribute_icon.Scale(128, 128)
+			size = "[attribute_icon.Width()]x[attribute_icon.Height()]"
+			LAZYINITLIST(to_insert[size])
+			to_insert[size][css_name] = attribute_icon
+
+	for(var/size in to_insert)
+		for(var/spritesheet_key in to_insert[size])
+			Insert(spritesheet_key, to_insert[size][spritesheet_key])
+
+/datum/asset/spritesheet/attributes_small
+	name = "attributes_small"
+
+/datum/asset/spritesheet/attributes_small/create_spritesheets()
+	var/list/to_insert = list()
+
+	for(var/attribute_type in GLOB.all_attributes)
+		var/datum/attribute/attribute_datum = GET_ATTRIBUTE_DATUM(attribute_type)
+		if(attribute_datum.icon && attribute_datum.icon_state)
+			var/icon/attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
+			var/css_name = sanitize_css_class_name(attribute_datum.name)
+			var/size = ""
+			attribute_icon = icon(icon = attribute_datum.icon, icon_state = attribute_datum.icon_state)
+			attribute_icon.Scale(16, 16)
+			size = "[attribute_icon.Width()]x[attribute_icon.Height()]"
+			LAZYINITLIST(to_insert[size])
+			to_insert[size][css_name] = attribute_icon
+
+	for(var/size in to_insert)
+		for(var/spritesheet_key in to_insert[size])
+			Insert(spritesheet_key, to_insert[size][spritesheet_key])
+

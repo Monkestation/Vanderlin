@@ -140,7 +140,7 @@
 "ec" = (
 /obj/structure/bars/grille,
 /obj/item/statue/gold,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "ew" = (
 /obj/item/natural/rock,
@@ -202,7 +202,7 @@
 /area/under/tomb/indoors)
 "ga" = (
 /obj/structure/bars/grille,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "gi" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -522,7 +522,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "rh" = (
 /obj/structure/fluff/railing/wood{
@@ -535,7 +535,7 @@
 "rJ" = (
 /obj/structure/bars/grille,
 /obj/item/statue/gold/loot,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "rM" = (
 /obj/item/reagent_containers/food/snacks/friedrat{
@@ -805,7 +805,7 @@
 "Cm" = (
 /obj/structure/bars/grille,
 /mob/living/carbon/human/species/goblin/npc/ambush,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Co" = (
 /obj/effect/decal/remains/human{
@@ -838,7 +838,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "DI" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -942,7 +942,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "HB" = (
 /turf/open/water/swamp,
@@ -1224,7 +1224,7 @@
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors)
 "Up" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "Ux" = (
 /obj/structure/flora/rock/pile,
@@ -1309,7 +1309,7 @@
 	layer = 2
 	},
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "XH" = (
 /obj/item/ore/iron{
@@ -1349,7 +1349,7 @@
 /turf/open/floor/blocks,
 /area/under/tomb)
 "Zn" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Zo" = (
 /obj/structure/door/iron/bars,

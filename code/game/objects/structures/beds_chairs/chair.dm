@@ -34,7 +34,7 @@
 	W.setDir(dir)
 	qdel(src)
 
-/obj/structure/chair/attackby(obj/item/W, mob/user, params)
+/obj/structure/chair/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
 		W.play_tool_sound(src)
 		deconstruct()
@@ -44,8 +44,7 @@
 /obj/structure/chair/proc/handle_rotation(direction)
 	handle_layer()
 	if(has_buckled_mobs())
-		for(var/m in buckled_mobs)
-			var/mob/living/buckled_mob = m
+		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.setDir(direction)
 
 /obj/structure/chair/proc/handle_layer()
@@ -172,7 +171,7 @@
 	W.setDir(dir)
 	qdel(src)
 
-/obj/item/chair/attack_self(mob/user, params)
+/obj/item/chair/attack_self(mob/user, list/modifiers)
 	plant(user)
 
 /obj/item/chair/proc/plant(mob/user)
@@ -197,7 +196,7 @@
 /obj/item/chair/proc/smash(mob/living/user)
 	qdel(src)
 
-/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/chair/afterattack(atom/target, mob/living/carbon/user, proximity, list/modifiers)
 	. = ..()
 	if(!proximity)
 		return

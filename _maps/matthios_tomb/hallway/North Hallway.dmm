@@ -23,7 +23,7 @@
 /area/under/tomb)
 "B" = (
 /obj/machinery/light/fueled/torchholder/r,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "O" = (
 /obj/machinery/light/fueled/torchholder/r,

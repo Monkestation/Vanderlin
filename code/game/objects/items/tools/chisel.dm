@@ -4,27 +4,28 @@
 	desc = "Hold it in one hand with a mallet or stone in the other. Strike with this to stonework."
 	icon_state = "chisel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
+	force = DAMAGE_KNIFE
+	wdefense = BAD_PARRY
+	throwforce = DAMAGE_KNIFE - 8
+	possible_item_intents = list(/datum/intent/chisel, /datum/intent/stab)
+	max_blade_int = 50
+	max_integrity = INTEGRITY_POOR - 10
+	sharpness = IS_SHARP
+
 	experimental_inhand = TRUE
 	experimental_onhip = TRUE
-	force = 10
-	throwforce = 2
-	possible_item_intents = list(/datum/intent/chisel, /datum/intent/stab)
-	sharpness = IS_SHARP
 	dropshrink = 0.9
 	w_class = WEIGHT_CLASS_SMALL
-	wdefense = 0
 	blade_dulling = 0
-	max_integrity = 140
 	slot_flags = ITEM_SLOT_HIP
-	// swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/brick_drop.ogg'
-	associated_skill = /datum/skill/combat/knives
-	max_blade_int = 50
+	associated_skill = /datum/attribute/skill/combat/knives
 	dropshrink = 0.9
 	grid_height = 64
 	grid_width = 32
 	melt_amount = 50
 	melting_material = /datum/material/steel
+	item_weight = 212 GRAMS
 	var/time_multiplier = 1
 
 /datum/intent/chisel
@@ -47,3 +48,4 @@
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
 	time_multiplier = 1.2
+	item_weight = 245 GRAMS

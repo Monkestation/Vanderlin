@@ -29,8 +29,7 @@
 //////////////////////////
 /proc/display_roundstart_logout_report()
 	var/list/msg = list("<span class='boldnotice'>Roundstart logout report\n\n</span>")
-	for(var/i in GLOB.mob_living_list)
-		var/mob/living/L = i
+	for(var/mob/living/L as anything in GLOB.mob_living_list)
 		var/mob/living/carbon/C = L
 		if (istype(C) && !C.last_mind)
 			continue  // never had a client

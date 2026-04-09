@@ -25,15 +25,14 @@
 			return
 	deselect_region()
 
-/datum/buildmode_mode/fill/handle_click(client/c, params, obj/object)
+/datum/buildmode_mode/fill/handle_click(client/c, list/modifiers, obj/object)
 	if(isnull(objholder))
 		to_chat(c, "<span class='warning'>Select an object type first.</span>")
 		deselect_region()
 		return
 	..()
 
-/datum/buildmode_mode/fill/handle_selected_area(client/c, params)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/fill/handle_selected_area(client/c, list/modifiers)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/alt_click = LAZYACCESS(modifiers, ALT_CLICKED)
 

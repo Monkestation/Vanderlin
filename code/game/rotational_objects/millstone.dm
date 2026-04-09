@@ -27,7 +27,7 @@
 		millable_contents -= item
 	return ..()
 
-/obj/structure/fluff/millstone/attackby(obj/item/W, mob/living/user, params)
+/obj/structure/fluff/millstone/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = W
 		if(S.mill_result)
@@ -43,7 +43,7 @@
 			return
 	..()
 
-/obj/structure/fluff/millstone/attack_hand_secondary(mob/living/carbon/human/user, params)
+/obj/structure/fluff/millstone/attack_hand_secondary(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

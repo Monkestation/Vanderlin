@@ -3,6 +3,7 @@
 // (
 
 #define NUM_E 2.71828183
+#define nulltozero(num) (isnull(num) ? 0 : num)
 
 #define PI						3.1416
 #define INFINITY				1e31	//closer then enough
@@ -113,7 +114,8 @@
 #define TORADIANS(degrees) ((degrees) * 0.0174532925)
 
 /// Gets shift x that would be required for the bitflag (1<<x)
-#define TOBITSHIFT(bit) ( log(2, bit) )
+/// We need the round because log has floating-point inaccuracy, and if we undershoot at all on list indexing we'll get the wrong index.
+#define TOBITSHIFT(bit) ( round(log(2, bit), 1) )
 
 // Will filter out extra rotations and negative rotations
 // E.g: 540 becomes 180. -180 becomes 180.

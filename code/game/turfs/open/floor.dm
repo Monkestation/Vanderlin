@@ -5,7 +5,7 @@
 	name = "floor"
 	desc = ""
 	icon = 'icons/turf/floors.dmi'
-	baseturfs = /turf/open/transparent/openspace
+	baseturfs = /turf/open/openspace
 	footstep = FOOTSTEP_FLOOR
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -124,7 +124,7 @@
 	W.setDir(old_dir)
 	return W
 
-/turf/open/floor/attackby(obj/item/C, mob/user, params)
+/turf/open/floor/attackby(obj/item/C, mob/user, list/modifiers)
 	if(!C || !user)
 		return 1
 	if(..())

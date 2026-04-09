@@ -144,7 +144,7 @@
 	log_combat(user, pushed_mob, "head slammed", null, "against [src]")
 	pushed_mob.add_stress(/datum/stress_event/table_headsmash)
 
-/obj/structure/table/attackby(obj/item/I, mob/user, params)
+/obj/structure/table/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!(flags_1 & NODECONSTRUCT_1))
 		if(I.tool_behaviour == TOOL_SCREWDRIVER && deconstruction_ready)
 			to_chat(user, "<span class='notice'>I start disassembling [src]...</span>")
@@ -162,7 +162,6 @@
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
 			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
-				var/list/modifiers = params2list(params)
 				var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 				var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
 				//Center the icon where the user clicked.
@@ -427,7 +426,7 @@
 	if(O.loc != src.loc)
 		step(O, get_dir(O, src))
 
-/obj/structure/rack/attackby(obj/item/I, mob/user, params)
+/obj/structure/rack/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
 	if (I.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1) && user.used_intent.type != INTENT_HELP)
 		I.play_tool_sound(src)
@@ -437,7 +436,6 @@
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
 			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
-				var/list/modifiers = params2list(params)
 				var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 				var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
 				//Center the icon where the user clicked.
@@ -487,11 +485,10 @@
 	SET_BASE_PIXEL(0, 24)
 
 // Necessary to avoid a critical bug with disappearing weapons.
-/obj/structure/rack/attackby(obj/item/I, mob/user, params)
+/obj/structure/rack/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!user.cmode)
 		if(!(I.item_flags & ABSTRACT))
 			if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
-				var/list/modifiers = params2list(params)
 				var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 				var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
 				//Center the icon where the user clicked.

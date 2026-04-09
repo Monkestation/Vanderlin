@@ -95,7 +95,7 @@
 /obj/machinery/essence/harvester/proc/create_harvest_effect()
 	new /obj/effect/temp_visual/harvest_glow(get_turf(src))
 
-/obj/machinery/essence/harvester/attackby(obj/item/I, mob/user)
+/obj/machinery/essence/harvester/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_node_jar))
 		var/obj/item/essence_node_jar/jar = I
 		if(jar.contained_node)
@@ -134,7 +134,7 @@
 		return
 	return ..()
 
-/obj/machinery/essence/harvester/attack_hand(mob/user, params)
+/obj/machinery/essence/harvester/attack_hand(mob/user, list/modifiers)
 	var/choice = input(user, "Harvester Control", "Essence Harvester") in list("Help", "View Node Status", "Cancel")
 
 	switch(choice)

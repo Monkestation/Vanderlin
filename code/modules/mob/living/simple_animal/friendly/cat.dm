@@ -59,7 +59,7 @@
 	if(prob(50))
 		gender = FEMALE
 	AddElement(/datum/element/ai_retaliate)
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 	AddComponent(\
 			/datum/component/breed,\
 			list(/mob/living/simple_animal/pet/cat),\
@@ -156,9 +156,6 @@
 	var/matrix/matrix = matrix()
 	matrix.Scale(0.5, 0.5)
 	transform = matrix
-
-/mob/living/simple_animal/pet/cat/proc/after_birth(mob/living/simple_animal/pet/cat/kitten/baby, mob/living/partner)
-	return
 
 /mob/living/simple_animal/pet/cat/proc/wuv(change, mob/M)
 	if(change)

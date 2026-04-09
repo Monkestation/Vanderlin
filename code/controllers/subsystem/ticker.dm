@@ -2,8 +2,7 @@
 #define SS_TICKER_TRAIT "SS_Ticker"
 
 /proc/low_memory_force_start()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		player.ready = PLAYER_READY_TO_PLAY
 
 	SSticker.start_immediately = TRUE
@@ -42,10 +41,8 @@ SUBSYSTEM_DEF(ticker)
 	var/timeLeft						//pregame timer
 	var/start_at
 	var/timeDelayAdd = 120
-	//576000 dusk
-	//376000 day
-	var/gametime_offset = 288001		//Deciseconds to add to world.time for station time.
-	var/station_time_rate_multiplier = 40		//factor of station time progressal vs real time.
+	var/gametime_offset = 6 HOURS + 1		//Deciseconds to add to world.time for station time.
+	var/station_time_rate_multiplier = 45	//factor of station time progressal vs real time.
 
 	var/totalPlayers = 0					//used for pregame stats on statpanel
 	var/totalPlayersReady = 0				//used for pregame stats on statpanel
@@ -76,7 +73,9 @@ SUBSYSTEM_DEF(ticker)
 	var/mob/living/carbon/human/rulermob = null
 	/// The appointed regent mob
 	var/mob/living/carbon/human/regent_mob = null
-	var/failedstarts = 0
+	var/vote_started = FALSE
+	var/voting = FALSE
+	var/pre_vote = 0
 	var/list/manualmodes = list()
 
 	var/end_party = FALSE
@@ -157,12 +156,12 @@ SUBSYSTEM_DEF(ticker)
 		music -= S
 
 	if(isemptylist(music))
-		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
+		music = file2list(ROUND_START_MUSIC_LIST, "\n")
 		login_music = pick(music)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
 
-	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg','sound/music/title3.ogg')
+	login_music = pick('sound/music/title.ogg','sound/music/title2.ogg', 'sound/music/title3.ogg','sound/music/title4.ogg', 'sound/music/title5.ogg')
 
 	start_at = world.time + (CONFIG_GET(number/lobby_countdown) * 10)
 	if(CONFIG_GET(flag/randomize_shift_time))
@@ -189,8 +188,7 @@ SUBSYSTEM_DEF(ticker)
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = LAZYLEN(GLOB.new_player_list)
 			totalPlayersReady = 0
-			for(var/i in GLOB.new_player_list)
-				var/mob/dead/new_player/player = i
+			for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 				if(player.ready == PLAYER_READY_TO_PLAY)
 					++totalPlayersReady
 
@@ -307,9 +305,14 @@ SUBSYSTEM_DEF(ticker)
 							continue
 					readied_jobs.Add(V)
 
-	if(CONFIG_GET(flag/ruler_required))
+	if(CONFIG_GET(flag/ruler_required) && !vote_started)
+		if(pre_vote > 4 && !voting)
+			voting = TRUE
+			SSvote.initiate_vote("norulervote", "The Gods")
 		if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
 			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
+			if(!voting)
+				pre_vote++
 			return FALSE
 
 	job_change_locked = TRUE
@@ -320,16 +323,16 @@ SUBSYSTEM_DEF(ticker)
 	var/init_start = world.timeofday
 
 	CHECK_TICK
-	//Configure mode and assign player to special mode stuff
-	var/can_continue = 0
+
+	// Vessel assignment happens first, removes those players from the pool
+	assign_vessel_players()
 
 	CHECK_TICK
 
-	can_continue =	SSgamemode.pre_setup()
-
+	var/can_continue = SSgamemode.pre_setup()
 	CHECK_TICK
 
-	can_continue = can_continue && SSjob.DivideOccupations(list()) 				//Distribute jobs
+	can_continue = can_continue && SSjob.DivideOccupations(list())				//Distribute jobs
 	CHECK_TICK
 
 	log_game("GAME SETUP: Divide Occupations success")
@@ -401,6 +404,62 @@ SUBSYSTEM_DEF(ticker)
 
 	return TRUE
 
+/datum/controller/subsystem/ticker/proc/assign_vessel_players()
+	var/list/vessel_candidates = list()
+
+	for(var/mob/dead/new_player/player in GLOB.new_player_list)
+		if(!player?.client)
+			continue
+		if(player.ready != PLAYER_READY_TO_PLAY)
+			continue
+		for(var/id in GLOB.vessel_ids)
+			if(!(id in player.client.prefs.be_special))
+				continue
+			if(!player.client.is_whitelisted(id))
+				continue
+			if(player.client.prefs.job_preferences["Monarch"] == JP_HIGH)
+				continue
+			if(!vessel_candidates[id])
+				vessel_candidates[id] = list()
+			vessel_candidates[id] += player
+			break
+
+	for(var/id in vessel_candidates)
+		var/list/vessel_mobs = GLOB.active_ghost_vessels[id]
+		if(!length(vessel_mobs))
+			continue
+
+		// Build weighted list using boost system, respecting vessel_id
+		var/list/weighted_players = list()
+		for(var/mob/dead/new_player/player in vessel_candidates[id])
+			var/player_weight = 1
+			for(var/datum/job_priority_boost/boost in SSjob.get_player_boosts(player))
+				if(boost.can_boost_vessel(id))
+					player_weight += boost.boost_amount
+			weighted_players[player] = player_weight
+
+		while(length(weighted_players) && length(vessel_mobs))
+			var/mob/dead/new_player/player = pickweight(weighted_players)
+			weighted_players -= player
+
+			var/mob/living/carbon/human/vessel_mob = pick(vessel_mobs)
+			var/datum/component/ghost_vessel/gc = vessel_mob.GetComponent(/datum/component/ghost_vessel)
+			if(!gc)
+				vessel_mobs -= vessel_mob
+				continue
+
+			// Consume the first applicable boost, same as DO does
+			for(var/datum/job_priority_boost/boost in SSjob.get_player_boosts(player))
+				if(boost.can_boost_vessel(id))
+					boost.use_boost()
+					break
+
+			player.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+			INVOKE_ASYNC(gc, TYPE_PROC_REF(/datum/component/ghost_vessel, possess_vessel), player)
+			vessel_mobs -= vessel_mob
+			GLOB.new_player_list -= player
+			log_game("Assigned [player.ckey] to vessel '[id]' ([vessel_mob.name])")
+
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
 
@@ -412,8 +471,7 @@ SUBSYSTEM_DEF(ticker)
 	job_change_locked = FALSE
 
 	SStriumphs.fire_on_PostSetup()
-	for(var/i in GLOB.start_landmarks_list)
-		var/obj/effect/landmark/start/S = i
+	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(istype(S))							//we can not runtime here. not in this important of a proc.
 			S.after_round_start()
 		else
@@ -441,16 +499,12 @@ SUBSYSTEM_DEF(ticker)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
-				player.new_player_panel()
 				continue
 			player.create_character(destination)
-		else
-			player.new_player_panel()
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/P = i
+	for(var/mob/dead/new_player/P as anything in GLOB.new_player_list)
 		if(P.new_character && P.new_character.mind)
 			SSticker.minds += P.new_character.mind
 		CHECK_TICK
@@ -471,8 +525,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/player = i
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		var/mob/living = player.transfer_character()
 		if(living)
 			qdel(player)
@@ -495,8 +548,8 @@ SUBSYSTEM_DEF(ticker)
 	if(selected_tip)
 		m = selected_tip
 	else
-		var/list/randomtips = world.file2list("strings/tips.txt")
-//		var/list/memetips = world.file2list("strings/sillytips.txt")
+		var/list/randomtips = file2list("strings/tips.txt")
+//		var/list/memetips = file2list("strings/sillytips.txt")
 //		if(randomtips.len && prob(95))
 		m = pick(randomtips)
 //		else if(memetips.len)
@@ -509,7 +562,7 @@ SUBSYSTEM_DEF(ticker)
 		return
 	var/hpc = CONFIG_GET(number/hard_popcap)
 	if(!hpc)
-		listclearnulls(queued_players)
+		list_clear_nulls(queued_players)
 		for (var/mob/dead/new_player/NP in queued_players)
 			to_chat(NP, span_danger("The alive players limit has been released!<br><a href='byond://?src=[REF(NP)];late_join=override'>[html_encode(">>Join Game<<")]</a>"))
 			SEND_SOUND(NP, sound('sound/blank.ogg'))
@@ -523,7 +576,7 @@ SUBSYSTEM_DEF(ticker)
 
 	switch(queue_delay)
 		if(5) //every 5 ticks check if there is a slot available
-			listclearnulls(queued_players)
+			list_clear_nulls(queued_players)
 			if(living_player_count() < hpc)
 				if(next_in_line && next_in_line.client)
 					to_chat(next_in_line, "<span class='danger'>A slot has opened! You have approximately 20 seconds to join. <a href='byond://?src=[REF(next_in_line)];late_join=override'>\>\>Join Game\<\<</a></span>")
@@ -644,9 +697,12 @@ SUBSYSTEM_DEF(ticker)
 
 	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
 
-	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("Reboot was cancelled by an admin."))
-		return
+	var/statspage = CONFIG_GET(string/roundstatsurl)
+	var/gamelogloc = CONFIG_GET(string/gamelogurl)
+	if(statspage)
+		to_chat(world, span_info("Round statistics and logs can be viewed <a href=\"[statspage][GLOB.round_id]\">at this website!</a>"))
+	else if(gamelogloc)
+		to_chat(world, span_info("Round logs can be located <a href=\"[gamelogloc]\">at this website!</a>"))
 
 	var/start_wait = world.time
 	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2)) //don't wait forever
@@ -657,13 +713,6 @@ SUBSYSTEM_DEF(ticker)
 		end_state = end_string
 
 	SStriumphs.end_triumph_saving_time()
-
-	var/statspage = CONFIG_GET(string/roundstatsurl)
-	var/gamelogloc = CONFIG_GET(string/gamelogurl)
-	if(statspage)
-		to_chat(world, span_info("Round statistics and logs can be viewed <a href=\"[statspage][GLOB.round_id]\">at this website!</a>"))
-	else if(gamelogloc)
-		to_chat(world, span_info("Round logs can be located <a href=\"[gamelogloc]\">at this website!</a>"))
 
 	log_game(span_boldannounce("Rebooting World. [reason]"))
 

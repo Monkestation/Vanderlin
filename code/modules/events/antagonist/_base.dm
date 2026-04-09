@@ -13,11 +13,13 @@
 	var/list/needed_job
 	var/event_icon_state
 	var/minor_roleset = FALSE
+	///these events are secondary triggers that will only spawn when there are more than 45 players.
 	var/list/secondary_events = list(
-		/datum/round_event_control/antagonist/solo/aspirant,
-		/datum/round_event_control/antagonist/solo/maniac
+		/datum/round_event_control/antagonist/solo/wretch = 1.5,
+		/datum/round_event_control/antagonist/solo/aspirant = 1,
+		/datum/round_event_control/antagonist/solo/maniac = 1,
 	)
-	var/secondary_prob = 25
+	var/secondary_prob = 0
 
 /datum/round_event_control/antagonist/New()
 	. = ..()
@@ -29,6 +31,9 @@
 /datum/round_event_control/antagonist/canSpawnEvent(players_amt, gamemode, fake_check)
 	. = ..()
 	if(!.)
+		return FALSE
+
+	if(!check_enemies())
 		return FALSE
 
 	if(!check_required())
@@ -54,15 +59,17 @@
 	if(!length(secondary_events))
 		return
 
+	secondary_events = fill_with_ones(secondary_events)
+
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
 
-	if(players_amt < 45)
+	if(players_amt <= LOWPOP_THRESHOLD)
 		return
 
 	if(!prob(secondary_prob))
 		return
 
-	var/picked = pick(secondary_events)
+	var/picked = pickweight(secondary_events)
 	if(!picked)
 		return
 
@@ -118,7 +125,7 @@
 		for(var/mob/M in GLOB.mob_living_list)
 			if (M.stat == DEAD)
 				continue // Dead players cannot count as opponents
-			if (M.mind && (M.mind.assigned_role.title in enemy_roles))
+			if (M.mind && (M.mind.assigned_role))
 				job_check++ // Checking for "enemies" (such as sec officers). To be counters, they must either not be candidates to that
 				enemy_players += M
 

@@ -130,10 +130,10 @@
 		return
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return
-	if((getBruteLoss() + getFireLoss()) < (STAEND * 10))
+	if((getBruteLoss() + getFireLoss()) < (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))
 		return
 
-	var/probby = 53 - (STAEND * 2)
+	var/probby = 53 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)
 	if(body_position == LYING_DOWN)
 		probby = probby - 20
 	if(prob(probby))
@@ -196,8 +196,7 @@
 /mob/living/proc/get_fullness()
 	var/fullness = nutrition
 	// we add the nutrition value of what we're currently digesting
-	for(var/bile in reagents.reagent_list)
-		var/datum/reagent/consumable/bits = bile
+	for(var/datum/reagent/consumable/bits in reagents.reagent_list)
 		if(bits)
 			fullness += bits.nutriment_factor * bits.volume / bits.metabolization_rate
 	return fullness

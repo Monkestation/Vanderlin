@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	/datum/job/archivist::title,
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
+	/datum/job/sunlord::title,
 ))
 GLOBAL_PROTECT(noble_positions)
 
@@ -24,12 +25,12 @@ GLOBAL_LIST_INIT(noble_courthand_positions, list(
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
 	/datum/job/adventurer/courtagent::title,
+	/datum/job/sunlord::title,
 ))
 GLOBAL_PROTECT(noble_positions)
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/royalknight::title,
-	/datum/job/veteran::title,
 	/datum/job/guardsman::title,
 	/datum/job/lieutenant::title,
 	/datum/job/men_at_arms::title,
@@ -43,11 +44,22 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	))
 GLOBAL_PROTECT(garrison_positions)
 
+GLOBAL_LIST_INIT(garrison_no_rebellion, list(
+	/datum/job/royalknight::title,
+	/datum/job/men_at_arms::title,
+	/datum/job/lieutenant::title,
+	/datum/job/gatemaster::title,
+	/datum/job/forestwarden::title,
+))
+GLOBAL_PROTECT(garrison_no_rebellion)
+
 GLOBAL_LIST_INIT(church_positions, list(
 	/datum/job/priest::title,
+	/datum/job/gmtemplar::title,
 	/datum/job/monk::title,
 	/datum/job/undertaker::title,
 	/datum/job/templar::title,
+	/datum/job/sundweller::title,
 	))
 GLOBAL_PROTECT(church_positions)
 
@@ -63,8 +75,7 @@ GLOBAL_PROTECT(inquisition_positions)
 
 GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/innkeep::title,
-	/datum/job/armorsmith::title,
-	/datum/job/weaponsmith::title,
+	/datum/job/blacksmith::title,
 	/datum/job/tailor::title,
 	/datum/job/alchemist::title,
 	/datum/job/artificer::title,
@@ -72,7 +83,7 @@ GLOBAL_LIST_INIT(serf_positions, list(
 	/datum/job/feldsher::title,
 	/datum/job/apothecary::title,
 	/datum/job/scribe::title,
-	/datum/job/gaffer::title,
+	/datum/job/tomb_warden::title,
 	/datum/job/butler::title,
 	/datum/job/persistence/carpenter::title,
 	/datum/job/persistence/stonemason::title,
@@ -104,7 +115,6 @@ GLOBAL_LIST_INIT(apprentices_positions, list(
 	/datum/job/mageapprentice::title,
 	/datum/job/servant::title,
 	/datum/job/tapster::title,
-	/datum/job/gaffer_assistant::title,
 	/datum/job/clinicapprentice::title,
 	))
 GLOBAL_PROTECT(apprentices_positions)
@@ -125,11 +135,12 @@ GLOBAL_LIST_INIT(company_positions, list(
 GLOBAL_PROTECT(company_positions)
 
 GLOBAL_LIST_INIT(allmig_positions, list(
+	/datum/job/bogwitch::title,
+	/datum/job/bog_apprentice::title,
 	/datum/job/pilgrim::title,
 	/datum/job/adventurer::title,
 	/datum/job/mercenary::title,
 	/datum/job/bandit::title,
-	/datum/job/wretch::title,
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(

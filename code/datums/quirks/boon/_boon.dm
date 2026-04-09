@@ -10,30 +10,6 @@
 		/datum/quirk/vice/bad_sight
 	)
 
-/datum/quirk/boon/night_vision
-	name = "Night Vision"
-	desc = "You can see better in darkness than most. Perhaps you have elf blood, or maybe you just spent too many nights as a watchman."
-	point_value = -4
-	incompatible_quirks = list(
-		/datum/quirk/vice/bad_sight,
-		/datum/quirk/vice/cyclops_left,
-		/datum/quirk/vice/cyclops_right
-	)
-
-/datum/quirk/boon/night_vision/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
-	H.update_sight()
-
-/datum/quirk/boon/night_vision/on_remove()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.lighting_alpha = initial(H.lighting_alpha)
-	H.update_sight()
-
 /datum/quirk/boon/light_footed
 	name = "Light Footed"
 	desc = "You move with grace and agility. Your steps are quieter then most."
@@ -102,13 +78,15 @@
 		/datum/language/dwarvish,
 		/datum/language/deepspeak,
 		/datum/language/zalad,
-		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
 	if(!customization_value || !ispath(customization_value, /datum/language))
+		return
+	if(!(customization_value in customization_options))
 		return
 
 	if(ishuman(owner))
@@ -192,34 +170,23 @@
 	)
 	preview_render = FALSE
 
-/datum/quirk/boon/folk_hero/on_spawn()
-	if(!ishuman(owner))
+/datum/quirk/boon/folk_hero/on_examined(mob/user, list/P, list/examine_contents)
+	if(user == owner)
 		return
-	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-
-/datum/quirk/boon/folk_hero/on_remove()
-	if(!ishuman(owner))
+	var/mob/living/carbon/source_mob = owner
+	var/mob/living/examiner = user
+	if(!istype(source_mob) || !istype(examiner))
 		return
-	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
-
-/datum/quirk/boon/folk_hero/proc/on_examine(mob/living/source, mob/user, list/examine_list)
-	if(!ishuman(user) || !ishuman(source))
+	if(!examiner.mind || !source_mob.mind)
 		return
-
-	var/mob/living/carbon/human/H = source
-	var/mob/living/carbon/human/examiner = user
-
-	if(!examiner.mind || !H.mind)
+	if(GET_MOB_ATTRIBUTE_VALUE(examiner, STAT_INTELLIGENCE) < 8)
 		return
-
-	// Folk heroes are recognized by others
-	if(prob(80)) // 80% chance people recognize them
-		examine_list += span_notice("You recognize [H.real_name], the folk hero!")
-
-		// Add them to known people if not already known
-		if(!examiner.mind.do_i_know(H.mind))
-			examiner.mind.i_know_person(H.mind)
-			H.mind.i_know_person(examiner.mind)
+	var/mob_name = source_mob.get_visible_name("")
+	if(!mob_name || (mob_name == "Unknown"))
+		return
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_FACE, span_notice("You recognize [P[THEM]]. This is [mob_name], the folk hero!"))
+	if(!examiner.mind.do_i_know(source_mob.mind, source_mob.real_name))
+		examiner.mind.learn_target_identity(source_mob.mind, source_mob.real_name)
 
 /datum/quirk/boon/quick_hands
 	name = "Quick Hands"
@@ -279,8 +246,8 @@
 		L = new(T)
 		tent = new(T)
 		var/obj/structure/handcart/cart = new(T)
-		cart.put_in(null, L)
-		cart.put_in(null, tent)
+		cart.put_in(null, L, TRUE)
+		cart.put_in(null, tent, TRUE)
 
 	to_chat(owner, span_notice("Your equipment is ready. You're well prepared for the journey ahead."))
 
@@ -301,6 +268,17 @@
 						break
 	L = null
 	tent = null
+
+/datum/quirk/boon/packmule
+	name = "Packmule"
+	desc = "There's no such thing as having too much storage! You start with a backpack."
+	point_value = -8
+	preview_render = FALSE
+
+/datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
+	var/obj/item/storage/backpack/backpack/pack = new(get_turf(owner))
+	if(!owner.equip_to_appropriate_slot(pack))
+		owner.put_in_hands(pack)
 
 /datum/quirk/boon/rider
 	name = "Experienced Rider"
@@ -328,7 +306,7 @@
 		return
 
 	var/mob/living/carbon/human/H = owner
-	H.clamped_adjust_skillrank(/datum/skill/misc/riding, 2, 2, TRUE)
+	H.clamped_adjust_skill_level(/datum/attribute/skill/misc/riding, 20, 20, TRUE)
 
 /datum/quirk/boon/beautiful
 	name = "Strikingly Beautiful"

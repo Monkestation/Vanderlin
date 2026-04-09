@@ -184,7 +184,7 @@
 	stored_combs = 0
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/apiary/attackby(obj/item/I, mob/user, params)
+/obj/structure/apiary/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/queen_bee))
 		if(queen_bee)
 			to_chat(user, span_warning("There's already a queen!"))

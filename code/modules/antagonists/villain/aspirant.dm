@@ -41,30 +41,30 @@
 			to_chat(owner, span_notice("I can retrieve my item from a statue, tree or clock by right clicking it."))
 
 		if(CHOICE_SKILL_SWORD)
-			aspirant_mob.set_skillrank(/datum/skill/combat/swords, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 60, 60)
 
 		if(CHOICE_SKILL_KNIFE)
-			aspirant_mob.set_skillrank(/datum/skill/combat/knives, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 60, 60)
 
 		if(CHOICE_SKILL_BOW)
-			aspirant_mob.set_skillrank(/datum/skill/combat/bows, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 60, 60)
 
 		if(CHOICE_SKILL_MACES)
-			aspirant_mob.set_skillrank(/datum/skill/combat/axesmaces, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 60, 60)
 
 		if(CHOICE_SKILL_LOCKPICKING)
-			aspirant_mob.set_skillrank(/datum/skill/misc/lockpicking, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/misc/lockpicking, 60, 60)
 
 		if(CHOICE_GUN)
 			owner.special_items["Puffer"] = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
 			owner.special_items["Puffer Bullets"] = /obj/item/storage/belt/pouch/bullets
 			owner.special_items["Puffet Gunpowder"] = /obj/item/reagent_containers/glass/bottle/aflask
-			aspirant_mob.set_skillrank(/datum/skill/combat/firearms, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/combat/firearms, 60, 60)
 			to_chat(owner, span_notice("I can retrieve my item from a statue, tree or clock by right clicking it."))
 
 		if(CHOICE_BOMB)
 			owner.special_items["Bomb"] = /obj/item/explosive/canister_bomb
-			aspirant_mob.set_skillrank(/datum/skill/craft/bombs, 6)
+			aspirant_mob.clamped_adjust_skill_level(/datum/attribute/skill/craft/bombs, 60, 60)
 			to_chat(owner, span_notice("I can retrieve my item from a statue, tree or clock by right clicking it."))
 
 

@@ -15,9 +15,15 @@
 	sellprice = 1
 	melting_material = /datum/material/iron
 	melt_amount = 25
+	item_weight = 200 GRAMS
 	var/max_dice = 8
 	var/list/dice_list = list()
 	var/list/last_roll = list()
+
+/obj/item/dice_cup/get_carry_weight(atom/carrier)
+	. = item_weight
+	for(var/obj/item/item as anything in dice_list)
+		. += item.item_weight
 
 //done so we can have pre-filled dice cups
 /obj/item/dice_cup/Initialize()
@@ -30,7 +36,7 @@
 			dice_list -= dice
 			add_dice(new dice())
 
-/obj/item/dice_cup/attackby(obj/item/I, mob/living/user, params)
+/obj/item/dice_cup/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(!istype(I, /obj/item/dice))
 		return ..()
 	if(length(dice_list) >= max_dice)
@@ -56,7 +62,7 @@
 	user.put_in_hands(die)
 	return die
 
-/obj/item/dice_cup/attack_hand_secondary(mob/user, params)
+/obj/item/dice_cup/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -70,7 +76,7 @@
 		to_chat(user, span_notice("No dice."))//heh
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/dice_cup/attack_self(mob/user, params)
+/obj/item/dice_cup/attack_self(mob/user, list/modifiers)
 	if(!length(dice_list))
 		to_chat(user, span_warning("There are no dice to roll!"))
 		return
@@ -103,7 +109,7 @@
 	if(which_one)
 		INVOKE_ASYNC(which_one, TYPE_PROC_REF(/obj/item/dice, rig_dice), user)
 
-/obj/item/dice_cup/attack_self_secondary(mob/user, params)
+/obj/item/dice_cup/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -120,6 +126,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	metalizer_result = /obj/item/dice_cup
+	item_weight = 100 GRAMS
 
 //a basic setup for liars dice, each player has 5 dice
 /obj/item/dice_cup/wooden/liars_dice

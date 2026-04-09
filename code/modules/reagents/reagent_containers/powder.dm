@@ -10,6 +10,32 @@
 	sellprice = 10
 	grid_height = 32
 	grid_width = 32
+	flags_ai_inventory = AI_ITEM_POWDER
+
+/obj/item/reagent_containers/powder/return_recipe_data()
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	if(!length(milled_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"]         = "snack_processing"
+	data["name"]         = name
+	data["category"]     = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"]  = name
+	data["output_icon"]  = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	var/list/milled_from = list()
+	for(var/atom/src_path as anything in milled_from_paths)
+		milled_from += list(list(
+			"name"       = initial(src_path.name),
+			"icon"       = "[initial(src_path.icon)]",
+			"icon_state" = "[initial(src_path.icon_state)]",
+			"_path"      = "[src_path]",
+		))
+	data["milled_from"] = milled_from
+	return data
 
 /obj/item/reagent_containers/powder/canconsume(mob/eater, mob/user, silent)
 	. = ..()
@@ -40,7 +66,7 @@
 				reagents.trans_to(C, 1, transfered_by = thrownthing.thrower, method = "swallow")
 				qdel(src)
 
-/obj/item/reagent_containers/powder/attack(mob/M, mob/user, def_zone)
+/obj/item/reagent_containers/powder/attack(mob/M, mob/user, list/modifiers)
 	if(!canconsume(M, user))
 		return FALSE
 	if(M == user)
@@ -97,7 +123,7 @@
 
 /datum/reagent/druqks/on_mob_life(mob/living/carbon/M)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
 	if(prob(5))
 		if(M.gender == FEMALE)
@@ -110,7 +136,7 @@
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/M)
 	M.overlay_fullscreen("druqk", /atom/movable/screen/fullscreen/druqks)
-	M.set_drugginess(30)
+	M.set_drugginess(30 SECONDS)
 	if(M.client)
 		ADD_TRAIT(M, TRAIT_DRUQK, "based")
 		M.refresh_looping_ambience()

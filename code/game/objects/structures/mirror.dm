@@ -153,7 +153,7 @@
 			var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 			var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
 			if(new_eyes)
-				eyes.eye_color = sanitize_hexcolor(new_eyes)
+				eyes.eye_color = sanitize_hexcolor(new_eyes, 6, TRUE, "#FFFFFF")
 				should_update = TRUE
 
 	if(should_update)

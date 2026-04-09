@@ -34,8 +34,8 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_DISLOCATED
 	ignore_clothes = TRUE
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
+	skill_min = SKILL_RANK_APPRENTICE
+	skill_median = SKILL_RANK_JOURNEYMAN
 
 /datum/surgery_step/relocate_bone/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()

@@ -7,8 +7,11 @@
 	bloody_icon_state = "bodyblood"
 	alternate_worn_layer = UNDER_CLOAK_LAYER
 	strip_delay = 20
-	sewrepair = TRUE
-	item_weight = 4
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
+	item_weight = 750 GRAMS
 	/// Max amount of ammo to hold
 	var/max_storage
 	/// Instances of ammo this contains
@@ -29,7 +32,12 @@
 			ammo_list += ammo
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/ammo_holder/attackby(obj/A, loc, params)
+/obj/item/ammo_holder/get_carry_weight(atom/carrier)
+	. = item_weight
+	for(var/obj/item/ammo as anything in ammo_list)
+		. += ammo.get_carry_weight(carrier)
+
+/obj/item/ammo_holder/attackby(obj/A, loc, list/modifiers)
 	for(var/i in ammo_type)
 		if(istype(A, i))
 			if(ammo_list.len < max_storage)
@@ -52,13 +60,13 @@
 				if(istype(AR, gun_ammo))
 					ammo_list -= AR
 					contents -= AR
-					B.attackby(AR, loc, params)
+					B.attackby(AR, loc, modifiers)
 					break
 		update_appearance(UPDATE_ICON_STATE)
 		return
 	..()
 
-/obj/item/ammo_holder/attack_hand_secondary(mob/user, params)
+/obj/item/ammo_holder/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

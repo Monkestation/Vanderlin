@@ -46,11 +46,10 @@
 	scent_description = "nettles"
 
 /datum/reagent/medicine/herbal/urtica_brew/on_mob_life(mob/living/carbon/M)
-	if(volume > 0.99)
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+8, BLOOD_VOLUME_NORMAL)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.75, internal_regen = FALSE)
+	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
+		M.blood_volume = min(M.blood_volume+15, BLOOD_VOLUME_NORMAL)
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.75, internal_regen = FALSE)
 	..()
 
 /datum/reagent/medicine/herbal/calendula_salve
@@ -188,7 +187,7 @@
 	if(volume > 0.99)
 		M.add_nausea(1)
 		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.5) // Very mild stamina drain
+			M.adjust_stamina(0.5) // Very mild stamina drain
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
 		return ..()
 	if(volume > 2)
@@ -223,6 +222,10 @@
 		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 			M.adjust_stamina(-0.1, internal_regen = FALSE)
 
+	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
+		return ..()
+	if(volume > 2)
+		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak)
 	..()
 
 // Advanced Herbal Reagents
@@ -294,8 +297,8 @@
 	taste_description = "bitter numbness"
 
 /datum/reagent/medicine/herbal/paris_poultice/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-1)
-	M.adjustFireLoss(-0.5)
+	M.adjustBruteLoss(-1*REM)
+	M.adjustFireLoss(-0.5*REM)
 
 	for(var/obj/item/bodypart/BP in M.bodyparts)
 		if(BP.status == BODYPART_ROBOTIC)
@@ -327,11 +330,11 @@
 	M.add_stress(/datum/stress_event/herbal_wellness)
 
 /datum/reagent/medicine/herbal/herbalist_panacea/on_mob_life(mob/living/carbon/M)
-	M.adjustBruteLoss(-1.5)
-	M.adjustFireLoss(-1.5)
-	M.adjustToxLoss(-1)
+	M.adjustBruteLoss(-1.5*REM)
+	M.adjustFireLoss(-1.5*REM)
+	M.adjustToxLoss(-1*REM)
 	M.adjustOxyLoss(-1)
-	M.adjust_stamina(2)
+	M.adjust_stamina(2*REM)
 	if(prob(15))
 		M.heal_bodypart_damage(1, 1, 0)
 	. = ..()
@@ -373,7 +376,6 @@
 /datum/reagent/buff/herbal/scholar_focus/on_mob_life(mob/living/carbon/M)
 	if(M.has_status_effect(/datum/status_effect/drowsiness))
 		M.adjust_drowsiness(-6 SECONDS)
-	//TODO: Boost learning and skill gain slightly
 	if(prob(5))
 		to_chat(M, span_notice("Your mind feels sharp and focused."))
 	. = ..()
@@ -494,7 +496,7 @@
 	M.add_stress(/datum/stress_event/battle_stim)
 
 /datum/reagent/buff/herbal/battle_stim/on_mob_life(mob/living/carbon/M)
-	M.adjust_stamina(2)
+	M.adjust_stamina(-2)
 	// Slight combat bonuses
 	if(prob(10))
 		M.heal_bodypart_damage(0.5, 0, 0)
@@ -543,35 +545,35 @@
 
 /datum/stress_event/herbal_calm
 	desc = "I feel deeply relaxed and at peace."
-	stress_change = 3
+	stress_change = -3
 	timer = 10 MINUTES
 
 /datum/stress_event/herbal_vigor
 	desc = "I feel energized and vigorous!"
-	stress_change = 2
+	stress_change = -2
 	timer = 15 MINUTES
 
 /datum/stress_event/herbal_wellness
 	desc = "I feel wonderfully healthy and restored."
-	stress_change = 4
+	stress_change = -4
 	timer = 20 MINUTES
 
 /datum/stress_event/herbal_focus
 	desc = "My mind is sharp and focused."
-	stress_change = 2
+	stress_change = -2
 	timer = 12 MINUTES
 
 /datum/stress_event/pleasant_scent
 	desc = "I smell wonderful!"
-	stress_change = 1
+	stress_change = -1
 	timer = 30 MINUTES
 
 /datum/stress_event/mystical_boost
 	desc = "I feel in tune with mystical forces."
-	stress_change = 3
+	stress_change = -3
 	timer = 15 MINUTES
 
 /datum/stress_event/battle_stim
 	desc = "I feel ready for battle!"
-	stress_change = 2
+	stress_change = -2
 	timer = 10 MINUTES

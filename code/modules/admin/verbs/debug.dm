@@ -1,5 +1,5 @@
 /client/proc/Debug2()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug-Game"
 	if(!check_rights(R_DEBUG))
 		return
@@ -25,7 +25,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 */
 
 /client/proc/cmd_admin_animalize(mob/M in GLOB.mob_list)
-	set category = "Fun"
+	set category = "GameMaster.Equipping"
 	set name = "Make Simple Animal"
 
 	if(!SSticker.HasRoundStarted())
@@ -69,12 +69,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delete All") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_assume_direct_control(mob/M in GLOB.mob_list)
-	set category = "Admin"
+	set category = "Admin.Admin"
 	set name = "Assume direct control"
 	set desc = ""
 
 	if(M.ckey)
-		if(alert("This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.",,"Yes","No") != "Yes")
+		if(tgui_alert(usr, "This mob is being controlled by [M.key]. Are you sure you wish to assume control of it? [M.key] will be made a ghost.", "Confirm", list("Yes","No")) != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
@@ -88,12 +88,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Assume Direct Control") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_give_control_to_player(mob/M in GLOB.mob_list, client/player in GLOB.clients)
-	set category = "Admin"
+	set category = "Admin.Admin"
 	set name = "Give Control To Player"
 	set desc = ""
 
 	if(M.ckey)
-		if(alert("This mob is being controlled by [key_name(M)]. Are you sure you wish to give [key_name(player)] control of it? [key_name(M)] will be made a ghost.",,"Yes","No") != "Yes")
+		if(tgui_alert(usr, "This mob is being controlled by [key_name(M)]. Are you sure you wish to give [key_name(player)] control of it? [key_name(M)] will be made a ghost.", "Confirm", list("Yes","No")) != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
@@ -107,7 +107,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Give Control To Player") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_areatest(on_station)
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas"
 
 	var/list/dat = list()
@@ -220,23 +220,23 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 
 /client/proc/cmd_admin_areatest_station()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas (STATION Z)"
 	cmd_admin_areatest(TRUE)
 
 /client/proc/cmd_admin_areatest_all()
-	set category = "Mapping"
+	set category = "Debug.Mapping"
 	set name = "Test Areas (ALL)"
 	cmd_admin_areatest(FALSE)
 
 /client/proc/cmd_admin_dress(mob/M in GLOB.mob_list)
-	set category = "Fun"
-	set name = "Admin Dress"
+	set category = "GameMaster.Equipping"
+	set name = "Select Equipment"
 
 	if(!(ishuman(M) || isobserver(M)))
 		return
 
-	var/answer = browser_alert(src, "Apply an outfit or a full job? (Does not consume slots or change job)", "Admin Dress", list("Outfit", "Job", "Cancel"))
+	var/answer = tgui_alert(src, "Apply an outfit or a full job? (Does not consume slots or change job)", "Admin Dress", list("Outfit", "Job", "Cancel"))
 	if(!answer || QDELETED(src))
 		return
 	switch(answer)
@@ -275,7 +275,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/list/jobs = subtypesof(/datum/job)
 	var/list/selection = list()
 	for(var/datum/job/job as anything in jobs)
-		if(is_abstract(job))
+		if(IS_ABSTRACT(job))
 			continue
 		selection[job.title] = job
 
@@ -318,7 +318,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/list/paths = subtypesof(/datum/outfit)
 
 	for(var/datum/outfit/O as anything in paths) //not much to initalize here but whatever
-		if(is_abstract(O))
+		if(IS_ABSTRACT(O))
 			continue
 		if(initial(O.can_be_admin_equipped))
 			outfits += O
@@ -345,7 +345,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	return dresscode
 
 /client/proc/cmd_debug_mob_lists()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug Mob Lists"
 	set desc = ""
 
@@ -366,7 +366,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			to_chat(usr, jointext(GLOB.joined_player_list,","))
 
 /client/proc/cmd_display_del_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display del() Log"
 	set desc = ""
 
@@ -404,21 +404,21 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	usr << browse(dellog.Join(), "window=dellog")
 
 /client/proc/cmd_display_overlay_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display overlay Log"
 	set desc = ""
 
 	render_stats(SSoverlays.stats, src)
 
 /client/proc/cmd_display_init_log()
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Display Initialize() Log"
 	set desc = ""
 
 	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
 
 /client/proc/debug_huds(i as num)
-	set category = "Debug"
+	set category = "Debug.Debug"
 	set name = "Debug HUDs"
 	set desc = ""
 
@@ -433,8 +433,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(!holder)
 		return
 	var/list/names = list()
-	for(var/i in GLOB.ruin_landmarks)
-		var/obj/effect/landmark/ruin/ruin_landmark = i
+	for(var/obj/effect/landmark/ruin/ruin_landmark as anything in GLOB.ruin_landmarks)
 		var/datum/map_template/ruin/template = ruin_landmark.ruin_template
 
 		var/count = 1
@@ -462,19 +461,19 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/toggle_medal_disable()
 	set category = "Debug"
 	set name = "Toggle Medal Disable"
-	set desc = ""
+	set desc = "Toggles the safety lock on trying to contact the medal hub."
 
 	if(!check_rights(R_DEBUG))
 		return
 
-	SSachievements.hub_enabled = !SSachievements.hub_enabled
+	SSachievements.achievements_enabled = !SSachievements.achievements_enabled
 
-	message_admins("<span class='adminnotice'>[key_name_admin(src)] [SSachievements.hub_enabled ? "disabled" : "enabled"] the medal hub lockout.</span>")
+	message_admins(span_adminnotice("[key_name_admin(src)] [SSachievements.achievements_enabled ? "disabled" : "enabled"] the medal hub lockout."))
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Toggle Medal Disable") // If...
-	log_admin("[key_name(src)] [SSachievements.hub_enabled ? "disabled" : "enabled"] the medal hub lockout.")
+	log_admin("[key_name(src)] [SSachievements.achievements_enabled ? "disabled" : "enabled"] the medal hub lockout.")
 
 /client/proc/view_runtimes()
-	set category = "Debug"
+	set category = "Debug.Core"
 	set name = "View Runtimes"
 	set desc = ""
 
@@ -497,7 +496,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] pumped a random event.")
 
 /client/proc/start_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Start Line Profiling"
 	set desc = ""
 
@@ -508,7 +507,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] started line by line profiling.")
 
 /client/proc/stop_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Stops Line Profiling"
 	set desc = ""
 
@@ -519,7 +518,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(src)] stopped line by line profiling.")
 
 /client/proc/show_line_profiling()
-	set category = "Profile"
+	set category = "Debug.Profiler"
 	set name = "Show Line Profiling"
 	set desc = ""
 
@@ -540,7 +539,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set desc = ""
 	if(!check_rights(R_DEBUG))
 		return
-	if(alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", "No", "Yes") == "Yes")
+	if(tgui_alert(usr, "Are you absolutely sure you want to reload the configuration from the default path on the disk, wiping any in-round modificatoins?", "Really reset?", list("No", "Yes")) == "Yes")
 		config.admin_reload()
 
 /// A debug verb to check the sources of currently running timers
@@ -615,7 +614,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/datum/asset/A as anything in subtypesof(/datum/asset))
 		if(!initial(A.cross_round_cachable))
 			continue
-		if(A == initial(A._abstract))
+		if(IS_ABSTRACT(A))
 			continue
 		var/datum/asset/asset_datum = GLOB.asset_datums[A]
 		asset_datum.regenerate()
@@ -631,7 +630,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		return
 	var/cleared = 0
 	for(var/datum/asset/spritesheet_batched/A as anything in subtypesof(/datum/asset/spritesheet_batched))
-		if(A == initial(A._abstract))
+		if(IS_ABSTRACT(A))
 			continue
 		fdel("[ASSET_CROSS_ROUND_SMART_CACHE_DIRECTORY]/spritesheet_cache.[initial(A.name)].json")
 		cleared++

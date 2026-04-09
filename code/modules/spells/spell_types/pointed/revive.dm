@@ -8,8 +8,8 @@
 	cast_range = 1
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/astrata)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/astrata)
 
 	charge_time = 5 SECONDS
 	charge_slowdown = 0.7
@@ -90,7 +90,7 @@
 	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	record_round_statistic(STATS_ASTRATA_REVIVALS)
 	cast_on.emote("breathgasp")
-	cast_on.adjust_jitter(100)
+	cast_on.adjust_jitter(100 SECONDS)
 	cast_on.visible_message(span_notice("[cast_on] is revived by holy light!"), span_green("I awake from the void."))
 	cast_on.apply_status_effect(/datum/status_effect/debuff/revive)
 	cast_on.remove_client_colour(/datum/client_colour/monochrome/death)

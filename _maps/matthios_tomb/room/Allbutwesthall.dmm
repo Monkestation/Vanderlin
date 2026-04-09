@@ -72,7 +72,7 @@
 /area/under/tomb/indoors)
 "iB" = (
 /obj/structure/fluff/railing/border,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "nA" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
@@ -85,7 +85,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "qK" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
@@ -115,7 +115,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "uU" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
@@ -133,7 +133,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
 "xF" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "yp" = (
 /obj/structure/closet/crate/drawer/inn,
@@ -164,7 +164,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "HZ" = (
 /obj/structure/closet/crate/chest/crafted,
@@ -223,7 +223,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "XS" = (
 /turf/closed/wall/mineral/wooddark/window,

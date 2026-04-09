@@ -24,17 +24,17 @@
 	id = "vigor"
 	alert_type = /atom/movable/screen/alert/status_effect/vigor
 	duration = 60 SECONDS
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 1)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 1)
 
 /datum/status_effect/buff/vigor/on_apply()
 	. = ..()
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.adjust_stamina(50)
-		ADD_TRAIT(owner, TRAIT_STRONG_GRABBER, MAGIC_TRAIT)
+		ADD_TRAIT(owner, TRAIT_STRONG_GRABBER, TRAIT_STATUS_EFFECT(id))
 		to_chat(owner, span_notice("You feel invigorated with supernatural strength."))
 
 /datum/status_effect/buff/vigor/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_STRONG_GRABBER, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_STRONG_GRABBER, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("The supernatural vigor fades."))

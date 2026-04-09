@@ -47,6 +47,7 @@
 	close_sound = 'sound/blank.ogg'
 	open_sound_volume = 25
 	close_sound_volume = 50
+	dense_when_open = FALSE
 	var/sealed = FALSE // is the casket sealed? If not, we can still open and close it freely.
 	var/consecrated = FALSE // Is the casket consecrated (AKA was there someone inside when we sealed it)?
 

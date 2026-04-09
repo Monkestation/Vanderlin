@@ -40,7 +40,7 @@
 	if(!direction)
 		return
 	var/turf/T = get_step(src, direction)
-	if(istype(T, /turf/open/transparent/openspace))
+	if(istype(T, /turf/open/openspace))
 		return
 	if(world.time < can_move)
 		return

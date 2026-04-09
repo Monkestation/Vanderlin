@@ -32,6 +32,7 @@
 	///this is our failed %
 	var/failed_precent = 0
 	COOLDOWN_DECLARE(last_fail_message)
+	COOLDOWN_DECLARE(last_fail)
 
 /datum/component/chimeric_organ/Initialize(maximum_tier_difference = 1)
 	. = ..()
@@ -123,7 +124,7 @@
 
 	var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
 	if(!blood_stab)
-		trigger_organ_failure("no blood stability component", 100)
+		trigger_organ_failure("no blood stability component", 100, TRUE)
 		return
 
 	// Check if we meet all blood requirements
@@ -147,7 +148,7 @@
 /datum/component/chimeric_organ/proc/force_trigger()
 	var/datum/component/blood_stability/blood_stab = organ_owner.GetComponent(/datum/component/blood_stability)
 	if(!blood_stab)
-		trigger_organ_failure("no blood stability component", 100)
+		trigger_organ_failure("no blood stability component", 100, TRUE)
 		return
 
 	if(!check_blood_requirements(blood_stab))
@@ -189,16 +190,19 @@
 					blood_requirements[blood_type] += cost
 					break
 
-/datum/component/chimeric_organ/proc/trigger_organ_failure(reason, amount)
+/datum/component/chimeric_organ/proc/trigger_organ_failure(reason, amount, bypass)
 	if(failed)
 		return
+	if(!COOLDOWN_FINISHED(src, last_fail) && !bypass)
+		return
+	COOLDOWN_START(src, last_fail, 15 SECONDS)
 	failed_precent += amount
 	if(failed_precent < 100)
 		if(COOLDOWN_FINISHED(src, last_fail_message))
 			to_chat(organ_owner, span_danger("Your [parent] is starting to fail because it [reason]!"))
 			organ_owner.emote("painscream")
 			COOLDOWN_START(src, last_fail_message, 30 SECONDS)
-		organ_owner.adjustToxLoss(5)
+		organ_owner.adjustToxLoss(1)
 		return
 
 	failed = TRUE

@@ -172,7 +172,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 	//We have a baseturf limit of 10, adding more than 10 baseturf helpers will kill CI, so here's a future edge case to fix.
 	ignore += typesof(/obj/effect/baseturf_helper)
 	//Expects a mob to holderize, we have nothing to give
-	ignore += typesof(/obj/item/clothing/head/mob_holder)
+	ignore += typesof(/obj/item/mob_holder)
 	//Needs cards passed into the initilazation args
 	ignore += typesof(/obj/item/toy/cards/cardhand)
 	//needs multiple atoms passed
@@ -193,8 +193,7 @@ GLOBAL_LIST_EMPTY(required_map_items)
 
 	var/list/tests_to_run = subtypesof(/datum/unit_test)
 	var/list/focused_tests = list()
-	for(var/_test_to_run in tests_to_run)
-		var/datum/unit_test/test_to_run = _test_to_run
+	for(var/datum/unit_test/test_to_run as anything in tests_to_run)
 		if (initial(test_to_run.focus))
 			focused_tests += test_to_run
 	if(length(focused_tests))

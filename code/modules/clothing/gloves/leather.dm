@@ -12,7 +12,7 @@
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
-	item_weight = 3
+	item_weight = 300 GRAMS
 
 /obj/item/clothing/gloves/leather/black
 	color = CLOTHING_SOOT_BLACK
@@ -68,7 +68,9 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 
 /obj/item/clothing/gloves/leather/otavan/inqgloves
 	name = "inquisitorial leather gloves"
@@ -87,4 +89,26 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
-	item_weight = 4
+	item_weight = 500 GRAMS
+
+/obj/item/clothing/gloves/leather/courtphysician
+	name = "sanguine gloves"
+	desc = "Carefully sewn leather gloves, unrestricting to your ability to wield surgical tools, and stylish!"
+	icon_state = "docgloves"
+	item_state = "docgloves"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/gloves/leather/courtphysician/female
+	name = "sanguine sleeves"
+	desc = "Carefully sewn leather gloves with silk sleeves covering them, unrestricting to your ability to wield surgical tools, and stylish!"
+	icon_state = "docsleeves"
+	item_state = "docsleeves"
+	icon = 'icons/roguetown/clothing/courtphys.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY

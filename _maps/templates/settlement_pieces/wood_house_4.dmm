@@ -343,7 +343,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/shelter)
 "VR" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/indoors/shelter)
 "XI" = (
 /obj/structure/chair/wood/alt{

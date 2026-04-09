@@ -235,9 +235,8 @@
 		if(ishuman(usr))
 			var/mob/living/carbon/human/H = usr
 			var/list/msg = list("***\n")
-			for(var/X in H.bodyparts)
-				var/obj/item/bodypart/BP = X
-				for(var/obj/item/I in BP.embedded_objects)
+			for(var/obj/item/bodypart/BP as anything in H.bodyparts)
+				for(var/obj/item/I as anything in BP.embedded_objects)
 					msg += "<a href='byond://?src=[REF(H)];embedded_object=[REF(I)];embedded_limb=[REF(BP)]' class='warning'>[I] - [BP.name]</a>\n"
 			msg += "***"
 			to_chat(H, "[msg.Join()]")

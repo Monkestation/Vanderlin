@@ -8,6 +8,7 @@
 	dropshrink = 1
 	drop_sound = 'sound/items/gem.ogg'
 	resistance_flags = FIRE_PROOF
+	item_weight = 50 GRAMS
 	var/miracle_use = 0
 	var/success = 0
 
@@ -25,15 +26,17 @@
 	if(miracle_use)
 		. += span_notice("Through some miraculous happenstance, there is enough for one more use.")
 
-/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	anoint(M, user)
+/obj/item/quicksilver/attack(mob/living/carbon/human/M, mob/living/carbon/human/user, list/modifiers)
+	if(!istype(M) || !istype(user))
+		return ..()
 
-/obj/item/quicksilver/proc/anoint(mob/living/carbon/human/M, mob/living/carbon/human/user) //Time to deconvert some antagonists
 	var/inquisitor = FALSE
 	if(!user.mind)
 		return
+
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
 		inquisitor = TRUE
+
 	if(HAS_TRAIT(user, TRAIT_PACIFISM) && HAS_TRAIT(user, TRAIT_INQUISITION) && HAS_TRAIT(user, TRAIT_SILVER_BLESSED))
 		inquisitor = TRUE
 
@@ -45,7 +48,7 @@
 		to_chat(user, span_warning("Upon closer inspection, [M] is already anointed with quicksilver."))
 		return
 
-	if(!inquisitor && !user.get_skill_level(/datum/skill/magic/holy) >= SKILL_EXP_EXPERT)
+	if(!inquisitor && !GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/holy) >= SKILL_EXP_EXPERT)
 		to_chat(user, span_warning("I do not have the divine knowledge to properly apply [src]."))
 		return
 
@@ -118,7 +121,7 @@
 			I.emote("agony", forced = TRUE)
 			I.Stun(30)
 			I.Knockdown(30)
-			I.adjust_jitter(30)
+			I.adjust_jitter(6 SECONDS)
 			return
 		else
 			M.flash_fullscreen("redflash3")
@@ -128,7 +131,7 @@
 			ADD_TRAIT(M, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 			M.Stun(30)
 			M.Knockdown(30)
-			M.adjust_jitter(30)
+			M.adjust_jitter(6 SECONDS)
 			return
 
 	else if(Vamp) //We're the vampire, we can't be saved.
@@ -136,7 +139,7 @@
 		user.visible_message(span_danger("The silver poultice boils away from [M]'s brow, viscerally rejecting the divine anointment."))
 		M.Stun(30)
 		M.Knockdown(30)
-		return
+
 //A letter to give info on how to make this thing.
 /obj/item/paper/inquisition_poultice_info
 	name = "Inquisitorial Missive"

@@ -62,7 +62,7 @@
 /datum/wound/facial/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Stun(10)
-	affected.adjust_temp_blindness(5 SECONDS)
+	affected.adjust_temp_blindness(10 SECONDS)
 
 /datum/wound/facial/eyes/right
 	name = "right eye evisceration"
@@ -227,6 +227,14 @@
 	disabling = TRUE
 	critical = TRUE
 	mortal = TRUE
+
+/datum/wound/cbt/can_apply_to_mob(mob/living/affected)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/bodypart/chest/chest = affected.get_bodypart(BODY_ZONE_CHEST)
+	return chest && chest.status == BODYPART_ORGANIC
+
 
 /datum/wound/cbt/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/cbt))

@@ -26,7 +26,7 @@
 		var/datum/container_craft/singleton = GLOB.container_craft_to_singleton[recipe]
 		if(!singleton)
 			continue
-		if(is_abstract(singleton))
+		if(IS_ABSTRACT(singleton))
 			continue
 
 		if(singleton.craft_priority)
@@ -56,6 +56,9 @@
 	var/obj/item/host = parent
 	if(!length(host.contents))
 		return
+
+	if(!istype(user))
+		user = get_mob_by_ckey(host.fingerprintslast)
 
 	// Build list of all items in container by type
 	for(var/obj/item/item in host.contents)

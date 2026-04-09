@@ -21,7 +21,7 @@
 		QDEL_NULL(heirloom)
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, params)
+/obj/structure/fireaxecabinet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/sword/long/heirloom) && !heirloom)
 		var/obj/item/weapon/sword/long/heirloom/F = I
 		if(HAS_TRAIT(F, TRAIT_WIELDED))
@@ -85,7 +85,7 @@
 	dir = SOUTH
 	SET_BASE_PIXEL(0, 32)
 
-/obj/structure/fireaxecabinet/unforgotten/attackby(obj/item/I, mob/user, params)
+/obj/structure/fireaxecabinet/unforgotten/attackby(obj/item/I, mob/user, list/modifiers)
 	if(open || obj_broken)
 		if(istype(I, /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/) && !heirloom)
 			var/obj/item/weapon/sword/long/greatsword/psydon/unforgotten/F = I
