@@ -80,10 +80,10 @@
 		return
 	if(recipient.mind?.do_i_know(name = owner.real_name)) // No point being anonymous if the recipient doesnt even know your voice in the first place
 		if(!anonymous)
-			to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into [owner]'s voice: <font color=#7246ff>[message]</font>")
+			to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into <span class='bold'>[owner]</span>'s voice: <font color=#7246ff>[message]</font>")
 			return
 		else if(GET_MOB_ATTRIBUTE_VALUE(recipient, STAT_PERCEPTION) >= 15)
-			to_chat(recipient, "Arcyne whispers fill the back of my head, and although attempts were made to hide it, you can still discern that it is [owner]'s voice... <font color=#7246ff>[message]</font>")
+			to_chat(recipient, "Arcyne whispers fill the back of my head, and <span class='warning'>although attempts were made to hide it, you can still discern that it is </span><span class='bold'>[owner]</span>'s voice... <font color=#7246ff>[message]</font>")
 			return
 	to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into an unknown [owner.gender == FEMALE ? "woman" : "man"]'s voice: <font color=#7246ff>[message]</font>")
 
