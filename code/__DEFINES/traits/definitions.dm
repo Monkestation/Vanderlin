@@ -161,6 +161,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOSOFTCRIT "nosoftcrit"
 /// Shielded from mind altering effects (unused)
 #define TRAIT_MINDSHIELD "mindshield"
+/// Grabbing items are added to my contents instead of my hands.
+#define TRAIT_NOHANDGRABS "nohandgrabs"
 /// Unused
 #define TRAIT_DISSECTED	"dissected"
 /// Can hear dead people

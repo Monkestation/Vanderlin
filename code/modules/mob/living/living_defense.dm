@@ -116,7 +116,7 @@
 	var/obj/item/I
 	if(istype(AM, /obj/item))
 		I = AM
-	var/obj/item/clothing/head/mob_holder/MH = throwingdatum?.thrownthing
+	var/obj/item/mob_holder/MH = throwingdatum?.thrownthing
 	if(istype(MH) && MH.held_mob == AM)
 		I = throwingdatum.thrownthing
 	if(I)
@@ -190,9 +190,9 @@
 	user.changeNext_move(CLICK_CD_GRABBING)
 	var/skill_diff = 0
 	var/combat_modifier = 1
-	if(user.mind)
+	if(user.attributes)
 		skill_diff += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/wrestling)) //NPCs don't use this
-	if(mind)
+	if(attributes)
 		skill_diff -= (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
 
 	if(user == src)

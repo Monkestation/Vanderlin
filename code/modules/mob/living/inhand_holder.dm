@@ -66,7 +66,7 @@
 	appearance = L?.appearance
 	plane = ABOVE_HUD_PLANE
 
-/obj/item/mob_holder/proc/release(del_on_release = TRUE, silent = FALSE)
+/obj/item/mob_holder/proc/release(del_on_release = TRUE)
 	if(!held_mob)
 		if(del_on_release && !destroying)
 			qdel(src)
@@ -102,7 +102,7 @@
 /obj/item/mob_holder/container_resist()
 	release()
 
-/obj/item/clothing/head/mob_holder/embedded(mob/living/embedded_target, obj/item/bodypart/bodypart)
+/obj/item/mob_holder/embedded(mob/living/embedded_target, obj/item/bodypart/bodypart)
 	. = ..()
 	// we're forced to override the forceMove from the bodyparts because they're not actually stored on the map anywhere! That's bad for clients!
 	forceMove(embedded_target)
@@ -110,7 +110,7 @@
 		SEND_SIGNAL(held_mob, COMSIG_MOB_HOLDER_EMBEDDED, src, embedded_target, bodypart)
 
 /// a catch case for if somehow, someone has managed to fuck this up and we can't tell how
-/obj/item/clothing/head/mob_holder/proc/try_fix_broken_embedding()
+/obj/item/mob_holder/proc/try_fix_broken_embedding()
 	if(!is_embedded) // why did you even call this
 		return TRUE
 	var/fixed = FALSE

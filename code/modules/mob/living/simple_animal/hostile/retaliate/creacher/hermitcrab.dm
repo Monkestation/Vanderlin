@@ -159,7 +159,7 @@
 	SEND_SIGNAL(src, COMSIG_MOB_BREAK_SNEAK)
 	. = ..()
 	if(. && target && isturf(loc) && !get_active_held_item()) // if we're already a mob holder (somehow) don't do this
-		var/obj/item/clothing/head/mob_holder/m_holder = new(get_turf(src), src)
+		var/obj/item/mob_holder/m_holder = new(get_turf(src), src)
 		var/mob/living/L = target
 		var/mob/living/carbon/C = target
 		if(istype(C))
@@ -170,7 +170,7 @@
 			m_holder.release(TRUE, TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/hermitcrab/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	var/obj/item/clothing/head/mob_holder/m_holder
+	var/obj/item/mob_holder/m_holder
 	if(throwingdatum && isliving(hit_atom) && isturf(loc))
 		m_holder = new(get_turf(src), src)
 		throwingdatum.thrownthing = m_holder

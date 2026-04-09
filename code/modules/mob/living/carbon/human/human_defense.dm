@@ -212,7 +212,7 @@
 	var/throwpower = 30
 	if(istype(AM, /obj/item))
 		I = AM
-	var/obj/item/clothing/head/mob_holder/MH = throwingdatum?.thrownthing
+	var/obj/item/mob_holder/MH = throwingdatum?.thrownthing
 	if(istype(MH) && MH.held_mob == AM)
 		I = throwingdatum.thrownthing
 	if(I)
