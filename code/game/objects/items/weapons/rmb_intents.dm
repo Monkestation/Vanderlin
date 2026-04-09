@@ -354,22 +354,24 @@
 			to_chat(user, span_warning("They need no blood."))
 			return
 		user.visible_message(span_green("[user] starts feeding blood to [L]."), span_danger("I start feeding blood to [L]."), null, COMBAT_MESSAGE_RANGE)
+	var/datum/reagents/R = new(100000)
 	while(do_after(A, 1 SECONDS, extra_checks=CALLBACK(src, PROC_REF(can_feed), A, L, giving), display_over_user = TRUE, interaction_key = DOAFTER_SOURCE_LEECH_BLOOD))
 		var/hunger = SEND_SIGNAL(user, COMSIG_MOB_RETURN_HUNGER) * A.food_max / 100
 		var/blood = 0
 		if(giving)
 			blood = max(min(BLOOD_VOLUME_NORMAL - L.blood_volume, feed_amount, hunger), 0)
 		else
-			blood = -max(min(A.food_max - hunger, feed_amount, L.blood_volume), 0)
+			blood = -L.transfer_blood_impurities(R, min(A.food_max - hunger, feed_amount, L.blood_volume), BLOODLETTING_MULT, user)
 		L.blood_volume += blood
 		SEND_SIGNAL(user, COMSIG_MOB_ADJUST_HUNGER, -blood)
 		playsound(A, 'sound/misc/drink_blood.ogg', 50, FALSE, -4)
+	qdel(R)
 
 
 /datum/rmb_intent/simple/blood_leech/proc/can_feed(mob/living/user, mob/living/target, giving)
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
-		if(NOBLOOD in C.dna?.species?.species_traits) // if for some god damn reason you weren't earlier but are now... maybe you're a skeleton?
+		if(NOBLOOD in C.dna?.species?.species_traits) // if for some reason you weren't earlier but are now... maybe you're a skeleton?
 			return FALSE
 	var/hunger = SEND_SIGNAL(user, COMSIG_MOB_RETURN_HUNGER)
 	if(hunger == null)
