@@ -108,11 +108,8 @@ GLOBAL_PROTECT(tracy_init_reason)
 #endif
 
 	LoadVerbs(/datum/verbs/menu)
-	load_whitelist()
 
 	load_nameban()
-
-	load_bypassage()
 
 //	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 

@@ -139,8 +139,6 @@
 	/// Lower number of attunemnets to grant
 	var/attunements_min
 
-	var/whitelist_req = FALSE //!
-
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
 
