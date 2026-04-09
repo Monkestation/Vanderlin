@@ -104,7 +104,7 @@
 	UnregisterSignal(src, list(COMSIG_MOB_HOLDER_DEPOSIT, COMSIG_MOB_HOLDER_RELEASE, COMSIG_MOB_HOLDER_EMBEDDED))
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_deposit(me, obj/item/clothing/head/mob_holder/m_holder)
+/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_deposit(me, obj/item/mob_holder/m_holder)
 	if(!istype(m_holder))
 		return
 	m_holder.grid_width = 64
@@ -125,7 +125,7 @@
 	if(istype(ai_controller))
 		ai_controller.set_ai_status(AI_STATUS_OFF)
 
-/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_release(me, obj/item/clothing/head/mob_holder/m_holder)
+/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_release(me, obj/item/mob_holder/m_holder)
 	if(!istype(m_holder))
 		return
 	if(istype(ai_controller))
@@ -133,10 +133,10 @@
 	next_click = max(world.time + melee_attack_cooldown * 2, next_click)
 	OffBalance(melee_attack_cooldown * 2)
 
-/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_embedded(me, obj/item/clothing/head/mob_holder/m_holder, mob/living/victim, obj/item/bodypart/bodypart)
+/mob/living/simple_animal/hostile/retaliate/hermitcrab/proc/mob_holder_embedded(me, obj/item/mob_holder/m_holder, mob/living/victim, obj/item/bodypart/bodypart)
 	if(!istype(m_holder))
 		return
-	if((BODY_ZONE_PRECISE_GROIN in bodypart.subtargets) && prob(25 - victim.STALUC) && bodypart.try_crit(BCLASS_CBT, 250, src, zone_selected, crit_message = TRUE)) // should be about a 50% chance for the average individual on top of the previous chance
+	if((BODY_ZONE_PRECISE_GROIN in bodypart.subtargets) && prob(25 - GET_MOB_ATTRIBUTE_VALUE(victim, STAT_FORTUNE)) && bodypart.try_crit(BCLASS_CBT, 250, src, zone_selected, crit_message = TRUE)) // should be about a 50% chance for the average individual on top of the previous chance
 		if(!HAS_TRAIT(victim, TRAIT_NOPAIN))
 			to_chat(victim, span_userdanger("MY GROIN!"))
 

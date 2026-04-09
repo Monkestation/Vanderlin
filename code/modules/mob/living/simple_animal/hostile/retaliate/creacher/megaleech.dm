@@ -28,7 +28,6 @@
 
 	health = 100
 	maxHealth = 100
-	blood_gulp = 30
 
 	food_max = BLOOD_VOLUME_OKAY // this is absurdly high compared to most mobs but it's used for bloodfeeding
 
@@ -93,7 +92,7 @@
 	. = ..()
 	var/mob/living/L = target
 	if(. && istype(target) && L.blood_volume > 0 && SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) < 100)
-		var/blood_taken = min(L.blood_volume, blood_gulp)
+		var/blood_taken = drinksomeblood(L, L.get_bodypart(zone_selected), 30, FALSE)
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))

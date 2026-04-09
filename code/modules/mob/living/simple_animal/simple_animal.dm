@@ -1013,21 +1013,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/proc/remove_gene(datum/animal_gene/G)
 	G.remove_from(src)
 
-/mob/living/simple_animal/proc/violent_dismount(mob/living/user)
-	if(isliving(user))
-		var/mob/living/L = user
-		unbuckle_mob(L)
-		L.Paralyze(5 SECONDS)
-		L.Stun(5 SECONDS)
-		playsound(L.loc, 'sound/foley/zfall.ogg', 100, FALSE)
-		L.visible_message(span_danger("[L] falls off [src]!"))
-
-/mob/living/simple_animal/proc/apply_gene(datum/animal_gene/G)
-	G.apply_to(src)
-
-/mob/living/simple_animal/proc/remove_gene(datum/animal_gene/G)
-	G.remove_from(src)
-
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)
 	. = ..()
 	LoadComponent(/datum/component/riding)

@@ -74,7 +74,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	move_to_spawnpoint()
 	owner.special_role = name
 	owner.current.adjust_bloodpool()
-	owner.current.blood_gulp = 50
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
@@ -184,7 +183,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	return
 
 /datum/antagonist/vampire/on_removal()
-	owner.current.blood_gulp = initial(owner.current.blood_gulp)
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
 		// Remove the clan when losing antagonist status

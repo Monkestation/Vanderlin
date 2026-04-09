@@ -45,7 +45,6 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	melee_attack_cooldown = 2 SECONDS
-	blood_gulp = 50 // how much blood are we stealing per bite
 	retreat_health = 0.3
 
 	base_constitution = 8
@@ -123,7 +122,7 @@
 	. = ..()
 	var/mob/living/L = target
 	if(. && istype(target) && L.blood_volume > 0 && SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) < 100)
-		var/blood_taken = min(L.blood_volume, blood_gulp)
+		var/blood_taken = drinksomeblood(L, L.get_bodypart(zone_selected), 50, FALSE)
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))

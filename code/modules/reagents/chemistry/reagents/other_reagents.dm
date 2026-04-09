@@ -24,16 +24,10 @@
 	taste_mult = 1.8
 	toxicity = 3
 
-/datum/reagent/blood/mollusc
-	name = "Cerulean Blood"
-	color = COLOR_TEAL
-	taste_description = "copper"
-
 /datum/reagent/blood/on_transfer(atom/A, method=TOUCH, trans_volume)
 	if(!ismob(A))
 		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
 	. = ..()
-
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
 	. = ..()

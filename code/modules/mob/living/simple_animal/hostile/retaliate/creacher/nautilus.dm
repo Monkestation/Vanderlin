@@ -79,13 +79,13 @@
 /mob/living/simple_animal/hostile/retaliate/nautilus/Initialize()
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
-	ADD_TRAIT(src, TRAIT_NOHANDGRABS, ROUNDSTART_TRAIT)
-	ADD_TRAIT(src, TRAIT_STRONG_GRABBER, ROUNDSTART_TRAIT)
-	ADD_TRAIT(src, TRAIT_GOOD_SWIM, ROUNDSTART_TRAIT)
+	ADD_TRAIT(src, TRAIT_NOHANDGRABS, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_STRONG_GRABBER, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_GOOD_SWIM, INNATE_TRAIT)
 	//ai's not gonna use this so it doesnt need controller keys
 	var/datum/action/cooldown/mob_cooldown/nautilus_hide/hide = new()
 	hide.Grant(src)
-	clamped_adjust_skillrank(/datum/skill/combat/wrestling, SKILL_LEVEL_JOURNEYMAN, SKILL_LEVEL_JOURNEYMAN, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 25, 30, TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/nautilus/taunted(mob/user)
 	emote("aggro")
@@ -157,7 +157,7 @@
 		if(!length(grabIntents))
 			continue
 		if(grabIntents.Find(choke) && get_location_accessible(C, BODY_ZONE_PRECISE_NECK))
-			var/choke_damage = STASTR
+			var/choke_damage = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 			C.adjustOxyLoss(choke_damage)
 			C.visible_message(span_danger("[src] [pick("chokes", "strangles")] [C][G.chokehold ? " with a chokehold" : ""]!"), \
 					span_userdanger("[src] [pick("chokes", "strangles")] me[G.chokehold ? " with a chokehold" : ""]!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE, src)

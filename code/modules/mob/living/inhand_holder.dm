@@ -66,7 +66,7 @@
 	appearance = L?.appearance
 	plane = ABOVE_HUD_PLANE
 
-/obj/item/mob_holder/proc/release(del_on_release = TRUE)
+/obj/item/mob_holder/proc/release(del_on_release = TRUE, silent = FALSE)
 	if(!held_mob)
 		if(del_on_release && !destroying)
 			qdel(src)

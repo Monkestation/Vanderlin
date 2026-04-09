@@ -21,7 +21,7 @@
 	crafting_time = 40 SECONDS
 
 /datum/container_craft/cooking/pompkaun_soup
-	name ="Pompkaun Soup"
+	name = "Pompkaun Soup"
 	created_reagent = /datum/reagent/consumable/soup/veggie/pompkaun
 	requirements = list(/obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo = 1)
 	max_optionals = 2
