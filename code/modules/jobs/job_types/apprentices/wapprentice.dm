@@ -25,7 +25,7 @@
 	)
 
 /datum/job/mageapprentice
-	title = "Magician Apprentice"
+	title = JOB_MAGIC_APP
 	tutorial = "Your family managed to send you to college to learn the Arcyne Arts.\
 	It's been stressful, but you'll earn your degree and become a fully fleged Magician one dae.\
 	As long as you can keep your grades up, that is..."
@@ -74,7 +74,7 @@
 
 
 /datum/outfit/mageapprentice
-	name = "Magician Apprentice"
+	name = JOB_MAGIC_APP
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/storage/keyring/mageapprentice
 	beltr = /obj/item/storage/magebag/apprentice

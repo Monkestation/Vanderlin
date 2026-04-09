@@ -537,7 +537,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
 "ach" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/snow,
@@ -2614,7 +2614,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
 "all" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/dirt,
@@ -4985,7 +4985,7 @@
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "avX" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/snowyforest)
 "avY" = (
@@ -5676,7 +5676,7 @@
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
 "ayS" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
@@ -5697,7 +5697,7 @@
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 1
 	},
-/obj/effect/landmark/start/puritanlate,
+/obj/effect/landmark/start/late/puritan,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "ayY" = (
@@ -6313,7 +6313,7 @@
 	},
 /obj/structure/chair/stool/bar,
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/start/absolverlate,
+/obj/effect/landmark/start/late/absolver,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aBB" = (
@@ -6838,7 +6838,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
 	},
-/obj/effect/landmark/start/orthodoxistlate{
+/obj/effect/landmark/start/late/orthodoxist{
 	dir = 4
 	},
 /turf/open/floor/churchbrick,
@@ -7134,7 +7134,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
 "aFq" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "aFr" = (
@@ -7225,7 +7225,7 @@
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
 "aFL" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
@@ -7840,7 +7840,7 @@
 	},
 /area/indoors/mountains/anvil/upperkeep)
 "aIO" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/snow/patchy,
@@ -8121,7 +8121,7 @@
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
 "aKj" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
@@ -8173,7 +8173,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aKt" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/snow/patchy,
@@ -8823,7 +8823,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
-/obj/effect/landmark/start/orthodoxistlate{
+/obj/effect/landmark/start/late/orthodoxist{
 	dir = 8
 	},
 /turf/open/floor/churchbrick,
@@ -9386,7 +9386,7 @@
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aPB" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/snowyforest)
 "aPC" = (
@@ -10845,7 +10845,7 @@
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
 "aVT" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/snow/patchy,
@@ -13306,7 +13306,7 @@
 	},
 /area/outdoors/mountains/anvil/peak)
 "nix" = (
-/obj/effect/landmark/start/adeptlate,
+/obj/effect/landmark/start/late/adept,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
 "niI" = (

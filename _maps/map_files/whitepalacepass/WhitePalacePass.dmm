@@ -4607,7 +4607,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/clinic_large/apothecary)
 "cTQ" = (
-/obj/effect/landmark/start/puritanlate{
+/obj/effect/landmark/start/late/puritan{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
@@ -8155,7 +8155,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town/merc_guild)
 "eWJ" = (
-/obj/effect/landmark/start/vagrantlate,
+/obj/effect/landmark/start/late/vagrant,
 /turf/open/floor/snow/patchy,
 /area/outdoors/town)
 "eXB" = (
@@ -13913,7 +13913,7 @@
 /turf/open/floor/grass/cold,
 /area/indoors/town/orphanage)
 "iBP" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "iBU" = (
@@ -16386,7 +16386,7 @@
 /turf/open/floor/tile/masonic/spiral,
 /area/under/town/basement)
 "kkv" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "kkU" = (
@@ -17678,7 +17678,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/soilsons)
 "lbS" = (
-/obj/effect/landmark/start/absolverlate{
+/obj/effect/landmark/start/late/absolver{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
@@ -28407,7 +28407,7 @@
 /turf/open/floor/concrete,
 /area/indoors/villagegarrison)
 "sha" = (
-/obj/effect/landmark/start/orthodoxistlate{
+/obj/effect/landmark/start/late/orthodoxist{
 	dir = 1
 	},
 /turf/open/floor/grass/yel,
@@ -33401,7 +33401,7 @@
 /turf/open/floor/tile/bath,
 /area/indoors/town/bath)
 "vti" = (
-/obj/effect/landmark/start/vagrantlate,
+/obj/effect/landmark/start/late/vagrant,
 /turf/open/floor/snow,
 /area/outdoors/town)
 "vtY" = (
@@ -34303,7 +34303,7 @@
 "vXn" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/clinic_large/apothecary)
 "vXw" = (

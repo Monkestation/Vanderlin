@@ -258,6 +258,8 @@
 		for(var/mob/dead/new_player/G as anything in GLOB.new_player_list)
 			if(!G.client)
 				continue
+			if(!G.client.is_whitelisted(whitelist_type))
+				continue
 			candidates += G
 
 	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
@@ -319,7 +321,7 @@
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	G_found.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()

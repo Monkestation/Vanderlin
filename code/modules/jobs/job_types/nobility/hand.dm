@@ -1,5 +1,5 @@
 /datum/job/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You owe everything to your liege. \
 	You are the most trusted of the ruler- their sibling, in fact. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, \
@@ -39,7 +39,7 @@
 	)
 
 /datum/outfit/hand
-	name = "Hand"
+	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	beltr = /obj/item/storage/keyring/hand
 
@@ -89,7 +89,7 @@
 	)
 
 /datum/job/advclass/hand/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
