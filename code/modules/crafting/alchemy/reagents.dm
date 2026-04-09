@@ -418,15 +418,18 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					graggar_lover.spawn_gibs(TRUE)
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
-					if(alert(graggar_lover, "Kneel before Graggar?", "BAPTIZE", "YES", "NO") != "NO") {
-						graggar_lover.set_patron(/datum/patron/inhumen/graggar)
-						to_chat(graggar_lover, span_boldnotice("The Beast's teeth close around your heart! Devour! Conquer! Graggar! Graggar! Graggar!"))
-					}
-					else {
-						to_chat(graggar_lover, span_boldnotice("You reject Graggar's offer of power. The Beast recedes, your stomach growls..."))
-					}
+    graggar_baptize(graggar_lover)
 					H.graggometer = 0
 	return ..()
+
+/proc/graggar_baptize(mob/living/carbon/human/graggar_lover)
+	set waitfor = FALSE
+	if(tgui_alert(graggar_lover, "Kneel before Graggar?", "BAPTIZE", DEFAULT_INPUT_CHOICES, 10 SECONDS) == CHOICE_YES)
+		graggar_lover.set_patron(/datum/patron/inhumen/graggar)
+		to_chat(graggar_lover, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar! Graggar! Graggar!"))
+		return
+	if(!QDELETED(graggar_lover))
+		to_chat(graggar_lover, span_bloody("You reject Graggar's offer of power. The Beast recedes, your stomach growls..."))
 
 /datum/reagent/organpoison/human
 	name = "Humen Organ Poison"
