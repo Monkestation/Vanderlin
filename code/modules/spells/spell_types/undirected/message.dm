@@ -1,3 +1,4 @@
+/// Spell that allows the caster to send a message to anyone they know. Can be sent Anonymously, but recipient can bypass it with high enough perceiption
 /datum/action/cooldown/spell/undirected/message
 	name = "Message"
 	desc = "Latch onto the mind of one who is familiar to you, whispering a message into their head."
@@ -8,6 +9,7 @@
 	charge_required = FALSE
 	spell_cost = 30
 	cooldown_time = 1 MINUTES
+	spell_flags = SPELL_RITUOS
 
 	/// Ref to cliented mob we are sending to
 	var/datum/weakref/recipient_ref
@@ -15,7 +17,6 @@
 	var/message
 	/// If we try to hide our identity
 	var/anonymous = FALSE
-	spell_flags = SPELL_RITUOS
 
 /datum/action/cooldown/spell/undirected/message/Destroy(force)
 	recipient_ref = null
