@@ -1175,7 +1175,6 @@
 "hG" = (
 /obj/structure/door/green,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/thatchwood,
 /turf/open/floor/cobble,
 /area/indoors/wilderness/garrison)
 "hH" = (
