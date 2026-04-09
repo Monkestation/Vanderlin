@@ -95,5 +95,7 @@
 
 /obj/item/gun/ballistic/bow/cross/postfire_empty_checks(last_shot_succeeded)
 	. = ..()
+	if(chambered)
+		return
 	string_pulled = FALSE
 	update_appearance(UPDATE_ICON_STATE)

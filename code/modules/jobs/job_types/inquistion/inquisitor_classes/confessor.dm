@@ -112,9 +112,9 @@
 
 	switch(boltchoice)
 		if("Bolts - Steel-Tipped")
-			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), ITEM_SLOT_BELT_L)
+			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolts(get_turf(spawned)), initial = TRUE)
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
-			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), ITEM_SLOT_BELT_L)
+			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), initial = TRUE)
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"

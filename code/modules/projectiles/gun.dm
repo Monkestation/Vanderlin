@@ -171,17 +171,20 @@
 	if(!target)
 		return
 
+	if(target.loc == user)
+		return
+
 	if(!user?.used_intent.tranged) //melee attack
 		return
 
 	if(firing_burst)
-		return NONE
+		return
 
 	if(SEND_SIGNAL(user, COMSIG_MOB_TRYING_TO_FIRE_GUN, src, target, proximity_flag, modifiers) & COMPONENT_CANCEL_GUN_FIRE)
-		return NONE
+		return
 
 	if(SEND_SIGNAL(src, COMSIG_GUN_TRY_FIRE, user, target, proximity_flag, modifiers) & COMPONENT_CANCEL_GUN_FIRE)
-		return NONE
+		return
 
 	if(proximity_flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
