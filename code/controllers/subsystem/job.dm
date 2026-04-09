@@ -820,15 +820,18 @@ SUBSYSTEM_DEF(job)
 	destination = get_last_resort_spawn_points()
 	destination.JoinPlayerHere(M, buckle)
 
-/datum/controller/subsystem/proc/get_last_resort_spawn_points()
+/datum/controller/subsystem/job/proc/get_last_resort_spawn_points()
 	//bad mojo
 
 	stack_trace("Unable to find last resort spawn point.")
 	//fuck you
+	if(length(backup_join_landmarks))
+		return pick(backup_join_landmarks)
+
 	if(length(GLOB.latejoin_landmarks))
 		return pick(GLOB.latejoin_landmarks)
-	else
-		return pick(GLOB.roundstart_landmarks)
+
+	return pick(GLOB.roundstart_landmarks)
 	//return GET_ERROR_ROOM
 
 /datum/controller/subsystem/job/proc/CanPickJob(mob/living/player, datum/job/job)
