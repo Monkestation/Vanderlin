@@ -49,6 +49,11 @@
 	cost = 25
 	contains = /obj/item/reagent_containers/glass/bottle/poison
 
+/datum/supply_pack/narcotics/spider
+	name = "Venom Gland"
+	cost = 50
+	contains = /obj/item/reagent_containers/spidervenom_inert
+
 /datum/supply_pack/narcotics/spoison
 	name = "Stamina Poison"
 	cost = 22
