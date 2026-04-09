@@ -536,12 +536,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
-"ach" = (
-/obj/effect/landmark/start/outsider{
-	dir = 4
-	},
-/turf/open/floor/snow,
-/area/outdoors/mountains/anvil/snowyforest)
 "aci" = (
 /turf/open/floor/volcanic,
 /area/under/cavelava)
@@ -734,10 +728,6 @@
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/naturalstone,
 /area/under/cave/spider)
-"acW" = (
-/obj/machinery/light/fueled/campfire/longlived,
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "acX" = (
 /turf/open/floor/snow,
 /area/under/cave)
@@ -1944,10 +1934,6 @@
 /obj/structure/bars,
 /obj/effect/mapping_helpers/structure/breaker,
 /area/indoors/mountains/anvil/keep)
-"aiC" = (
-/obj/machinery/light/fueled/campfire/longlived,
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/snowyforest)
 "aiD" = (
 /obj/structure/rack,
 /obj/item/cooking/pan,
@@ -2613,12 +2599,6 @@
 /obj/item/mould/ingot,
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
-"all" = (
-/obj/effect/landmark/start/outsider{
-	dir = 8
-	},
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/snowyforest)
 "alm" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/snow,
@@ -4984,10 +4964,6 @@
 /obj/item/weapon/knife/copper,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
-"avX" = (
-/obj/effect/landmark/start/outsider,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "avY" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/clothing/armor/cuirass/iron/rust,
@@ -5233,10 +5209,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"awV" = (
-/obj/machinery/light/fueled/campfire/longlived,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "awW" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobblerock,
@@ -5675,12 +5647,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
-"ayS" = (
-/obj/effect/landmark/start/outsider{
-	dir = 1
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "ayU" = (
 /turf/open/floor/carpet/lord/corner{
 	dir = 8
@@ -7133,10 +7099,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
-"aFq" = (
-/obj/effect/landmark/start/outsider,
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aFr" = (
 /obj/structure/chair/stool,
 /turf/open/floor/hexstone,
@@ -7224,12 +7186,6 @@
 /obj/item/organ/liver,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
-"aFL" = (
-/obj/effect/landmark/start/outsider{
-	dir = 4
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "aFM" = (
 /obj/structure/door/stone,
 /obj/structure/barricade/wooden,
@@ -7839,12 +7795,6 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"aIO" = (
-/obj/effect/landmark/start/outsider{
-	dir = 8
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aIP" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobblerock,
@@ -8120,12 +8070,6 @@
 /obj/item/soap,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
-"aKj" = (
-/obj/effect/landmark/start/outsider{
-	dir = 8
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "aKk" = (
 /obj/structure/table/wood/crafted,
 /obj/item/paper/inquisition_poultice_info,
@@ -8172,12 +8116,6 @@
 /mob/living/carbon/human/species/skeleton/npc/hard,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aKt" = (
-/obj/effect/landmark/start/outsider{
-	dir = 1
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aKu" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/walldeco/gear{
@@ -9385,10 +9323,6 @@
 /obj/effect/mapping_helpers/access/keyset/church/inquisition,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"aPB" = (
-/obj/effect/landmark/start/outsider,
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/snowyforest)
 "aPC" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/snow,
@@ -10844,12 +10778,6 @@
 /obj/structure/door/stone,
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
-"aVT" = (
-/obj/effect/landmark/start/outsider{
-	dir = 4
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aVV" = (
 /obj/structure/door/weak/bolt,
 /obj/effect/mapping_helpers/access/locker,
@@ -121981,7 +121909,7 @@ aPv
 aLm
 avR
 avR
-aFL
+avR
 aqw
 aLm
 aqw
@@ -122383,11 +122311,11 @@ aLm
 aPv
 aqw
 aqw
-avX
 avR
-awV
 avR
-aKt
+avR
+avR
+aLm
 aLm
 aKS
 aKS
@@ -122789,7 +122717,7 @@ aqw
 aJk
 aip
 avR
-aKj
+avR
 aPv
 aPv
 aKS
@@ -123562,7 +123490,7 @@ avR
 aPv
 aLm
 aLm
-aVT
+aLm
 aLm
 aLm
 aoM
@@ -123964,11 +123892,11 @@ avR
 avR
 avR
 aKS
-aFq
 aLm
-aiC
 aLm
-aKt
+aqw
+aLm
+aLm
 aLm
 aoM
 aoM
@@ -124370,7 +124298,7 @@ avR
 avR
 avR
 aLm
-aIO
+aLm
 aqw
 aqw
 aqw
@@ -124538,7 +124466,7 @@ aqw
 aGY
 aGY
 aPv
-ach
+aPv
 aLm
 aKS
 aoM
@@ -124940,11 +124868,11 @@ aKS
 aqw
 aqw
 aqw
-aPB
 aqw
-awV
+aqw
 avR
-ayS
+avR
+avR
 aip
 aGY
 aGY
@@ -125346,7 +125274,7 @@ aLm
 aGY
 aip
 avR
-aKj
+avR
 avR
 avR
 aip
@@ -127378,7 +127306,7 @@ aPv
 aLm
 aLm
 aLm
-aVT
+aLm
 aip
 avR
 aqx
@@ -127780,11 +127708,11 @@ aPv
 avR
 aip
 aKS
-avX
+avR
 aLm
-acW
 aLm
-ayS
+aLm
+avR
 avR
 aip
 aip
@@ -128186,7 +128114,7 @@ aLm
 avR
 avR
 avR
-all
+aqw
 aqw
 aqw
 avR

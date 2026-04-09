@@ -637,6 +637,12 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/outdoors/mountains)
+"eg" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "eh" = (
 /turf/open/floor/dirt/road,
 /area/under/cave)
@@ -4063,10 +4069,8 @@
 /area/indoors/villagegarrison)
 "Am" = (
 /obj/effect/landmark/start/outsider,
-/turf/open/floor/twig{
-	dir = 8
-	},
-/area/indoors/shelter/woods)
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "An" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 6
@@ -4277,12 +4281,10 @@
 /area/indoors/shelter/woods)
 "BB" = (
 /obj/effect/landmark/start/outsider{
-	dir = 1
+	dir = 4
 	},
-/turf/open/floor/twig{
-	dir = 8
-	},
-/area/indoors/shelter/woods)
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "BE" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -4465,6 +4467,12 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
 /area/outdoors/mountains)
+"CO" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "CP" = (
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
@@ -6472,6 +6480,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains)
+"Pd" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Pi" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 8
@@ -6992,6 +7004,10 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/mountains)
+"SB" = (
+/obj/effect/landmark/start/outsider,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "SE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -7613,6 +7629,12 @@
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/garrison)
+"Wr" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "Ws" = (
 /obj/structure/flora/hotspring_rocks/grassy,
 /obj/structure/flora/ausbushes/fullgrass,
@@ -7626,6 +7648,12 @@
 /obj/effect/landmark/mapGenerator/mountain,
 /turf/closed/basic,
 /area/outdoors/mountains)
+"Ww" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Wx" = (
 /obj/structure/door/green,
 /obj/effect/mapping_helpers/access/locker,
@@ -7874,6 +7902,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/mountains)
+"Yb" = (
+/obj/machinery/light/fueled/campfire/longlived,
+/turf/open/floor/dirt,
+/area/outdoors/wilderness)
 "Yd" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood,
@@ -12138,9 +12170,9 @@ Iz
 Iz
 gS
 iU
-Am
 bB
-BB
+bB
+bB
 iU
 Gw
 gr
@@ -12340,9 +12372,9 @@ Iz
 Iz
 gS
 iU
-Am
 bB
-BB
+bB
+bB
 sh
 Gw
 gr
@@ -19452,7 +19484,7 @@ ZV
 ZV
 ZV
 gr
-ZV
+bt
 gr
 ZV
 Nf
@@ -19658,10 +19690,10 @@ gr
 gr
 ZV
 gr
-bt
+ZV
 ZV
 gr
-gr
+tk
 gr
 gr
 gr
@@ -19862,8 +19894,8 @@ ZV
 gr
 gr
 ZV
-ZV
-ZV
+Nf
+Nf
 ZV
 ZV
 ZV
@@ -20064,10 +20096,10 @@ gr
 ZV
 gr
 ZV
-gr
+tk
 ZV
 ZV
-gr
+CO
 gr
 tk
 tk
@@ -20270,7 +20302,7 @@ gr
 ZV
 gr
 gr
-Nf
+ZV
 gr
 Nf
 ZV
@@ -20468,12 +20500,12 @@ gr
 ZV
 gr
 ZV
-Nh
-ZV
 gr
-ZV
-ZV
+Am
 gr
+Pd
+ZV
+eg
 ZV
 ZV
 Cl
@@ -20867,15 +20899,15 @@ Fw
 Fw
 gr
 ZV
-ZV
+bt
 gr
 ZV
 tk
 Fw
 ZV
-Nf
-tk
-Nf
+ZV
+gr
+Wr
 gr
 ZV
 ZV
@@ -21077,7 +21109,7 @@ gr
 Nf
 Nf
 tk
-Nf
+ZV
 gr
 gr
 gr
@@ -33583,7 +33615,7 @@ gr
 gr
 Nf
 gr
-ZV
+BB
 tk
 tk
 Nf
@@ -33985,12 +34017,12 @@ ZV
 ZV
 ZV
 gr
-gr
+SB
 ZV
+Yb
 gr
-gr
-gr
-Nf
+eg
+ZV
 gr
 gr
 Iz
@@ -34193,7 +34225,7 @@ ZV
 gr
 gr
 ZV
-Nf
+ZV
 gr
 Iz
 Iz
@@ -34391,11 +34423,11 @@ gr
 ZV
 ZV
 gr
-gr
+Ww
 tk
 gr
 gr
-Nf
+ZV
 gr
 Iz
 Iz
@@ -44429,7 +44461,7 @@ YM
 YM
 YM
 YM
-oO
+ID
 oO
 oO
 oO
@@ -44632,7 +44664,7 @@ YM
 YM
 YM
 ID
-oO
+ID
 oO
 oO
 oO
@@ -46443,7 +46475,7 @@ YM
 ID
 ID
 ID
-oO
+ID
 oO
 oO
 oO
@@ -46644,7 +46676,7 @@ YM
 YM
 YM
 YM
-oO
+ID
 oO
 oO
 oO
