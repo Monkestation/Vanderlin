@@ -770,7 +770,7 @@
 	. = ..(target, force, check_loc)
 
 /mob/living/carbon/human/proc/is_shove_knockdown_blocked() //If you want to add more things that block shove knockdown, extend this
-	if(HAS_TRAIT(src, TRAIT_MALUM_ANVIL))
+	if(has_status_effect(/datum/status_effect/buff/malum_anvil))
 		return TRUE
 	var/list/body_parts = list(head, wear_mask, wear_armor, wear_pants, backl, backr, gloves, shoes, belt, wear_ring)
 	for(var/bp in body_parts)

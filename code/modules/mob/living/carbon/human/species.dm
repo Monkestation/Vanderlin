@@ -1374,7 +1374,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			to_chat(user, "<span class='warning'>I do not breathe, so you cannot perform CPR!</span>")*/
 
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.check_block())
+	if(target.check_block() || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 		target.visible_message("<span class='warning'>[target] blocks [user]'s grab!</span>", \
 						"<span class='danger'>I block [user]'s grab!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>My grab at [target] was blocked!</span>")
@@ -1523,7 +1523,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	return
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.check_block())
+	if(target.check_block() || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 		target.visible_message("<span class='warning'>[user]'s shove is blocked by [target]!</span>", \
 						"<span class='danger'>I block [user]'s shove!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>My shove at [target] was blocked!</span>")
@@ -1676,10 +1676,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			var/balance = 10
 			target.next_attack_msg.Cut()
 			var/nodmg = FALSE
-			if(HAS_TRAIT(target, TRAIT_MALUM_ANVIL))
-				nodmg = TRUE
-				target.next_attack_msg += " <span class='warning'>But there is no effect.</span>"
-			else if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
+			if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 				nodmg = TRUE
 				target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			else
@@ -1724,7 +1721,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
 		target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
-		if(target_collateral_mob)
+		if(target_collateral_mob || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 			if(stander)
 				shove_blocked = TRUE
 		else
@@ -1784,9 +1781,6 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/damage = user.get_kick_damage(1.4)
 		var/damage_blocked = FALSE
 
-		if(HAS_TRAIT(target, TRAIT_MALUM_ANVIL))
-			damage_blocked = TRUE
-			target.next_attack_msg += " <span class='warning'>But there is no effect.</span>"
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 			damage_blocked = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
