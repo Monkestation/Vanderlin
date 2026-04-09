@@ -1765,8 +1765,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				log_combat(user, target, "kicked", "onto [target_table] (table)")
 			else if(target_collateral_mob)
 				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
-				if(!HAS_TRAIT(target_collateral_mob, TRAIT_MALUM_ANVIL)) // You are up against the wall and I AM THE FUCKING WALL
-					target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
+				target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
 				target.visible_message("<span class='danger'>[user.name] kicks [target.name] into [target_collateral_mob.name]!</span>",
 					"<span class='danger'>I'm kicked into [target_collateral_mob.name] by [user.name]!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>I kick [target.name] into [target_collateral_mob.name]!</span>")
