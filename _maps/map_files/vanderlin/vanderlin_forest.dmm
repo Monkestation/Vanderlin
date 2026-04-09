@@ -4052,8 +4052,18 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/villagegarrison)
+"Al" = (
+/obj/structure/bed/hay,
+/obj/item/bedsheet/cloth,
+/obj/effect/landmark/start/late/gallowband{
+	dir = 1
+	},
+/turf/open/floor/twig{
+	dir = 8
+	},
+/area/indoors/villagegarrison)
 "Am" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/twig{
 	dir = 8
 	},
@@ -4267,7 +4277,7 @@
 /turf/open/floor/cobble,
 /area/indoors/shelter/woods)
 "BB" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/twig{
@@ -17410,7 +17420,7 @@ ZV
 gr
 ui
 bw
-Bw
+Al
 zo
 gr
 ZV
@@ -17814,7 +17824,7 @@ gr
 gr
 ui
 bw
-Bw
+Al
 zo
 ZV
 Sw
