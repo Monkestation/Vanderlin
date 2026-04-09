@@ -411,6 +411,7 @@
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_STOCK]'>\[Stockpile\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_IMPORT]'>\[Import\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_BOUNTIES]'>\[Bounties\]</a><BR>"
+			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_JOBS]'>\[Jobs\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_LOG]'>\[Log\]</a><BR>"
 			contents += "<a href='byond://?src=\ref[src];switchtab=[TAB_CUSTOM]'>\[Custom Stocks\]</a><BR>"
 			contents += "</center>"
