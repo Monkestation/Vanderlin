@@ -1,5 +1,5 @@
 /datum/job/orthodoxist
-	title = "Sacrestants"
+	title = JOB_SACRESTANTS
 	department_flag = INQUISITION
 	faction = "Station"
 	total_positions = 2 // TWO GOONS!!

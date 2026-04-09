@@ -17,7 +17,7 @@
 	)
 
 /datum/job/absolver
-	title = "Absolver"
+	title = JOB_ABSOLVER
 	department_flag = INQUISITION
 	faction = "Station"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -99,7 +99,7 @@
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
 
 /datum/outfit/absolver
-	name = "Absolver"
+	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
 	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser

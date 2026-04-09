@@ -20,7 +20,7 @@
 	)
 
 /datum/job/grabber
-	title = "Stevedore"
+	title = JOB_STEVEDORE
 	tutorial = "A stevedore is the lowest yet essential position in the Merchant's employment, reserved for the strong and loyal. \
 	You are responsible for hauling materials and goods to-and-fro the docks and warehouses, protecting their transportation from conniving thieves. \
 	Keep your eye out for the security of the Merchant, and they will surely treat you like family."
@@ -47,7 +47,7 @@
 	)
 
 /datum/outfit/grabber
-	name = "Stevedore"
+	name = JOB_STEVEDORE
 	backr = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/fingerless

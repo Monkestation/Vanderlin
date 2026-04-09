@@ -1209,7 +1209,7 @@
 		return
 	if(!divine)
 		return
-	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == "Churchling")))
+	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == JOB_CHURCHLING)))
 		return
 	if(user?.patron.type != /datum/patron/divine/centrist)
 		return

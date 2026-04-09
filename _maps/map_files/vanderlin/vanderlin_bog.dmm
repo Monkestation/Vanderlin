@@ -5656,7 +5656,7 @@
 /obj/structure/chair/wood/alt{
 	dir = 1
 	},
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
@@ -7262,10 +7262,6 @@
 /obj/structure/fake_machine/camera/left,
 /turf/open/floor/metal/barograte,
 /area/indoors/shelter/bog/lich)
-"fKK" = (
-/obj/effect/landmark/start/bogwitchlate,
-/turf/open/floor/grass,
-/area/outdoors/bog/north)
 "fKT" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/food/snacks/chescake,
@@ -13516,7 +13512,7 @@
 /turf/closed/wall/mineral/wooddark/window,
 /area/under/cavewet)
 "lWn" = (
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -17445,7 +17441,7 @@
 /area/indoors/shelter/bog/lich)
 "qwv" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
@@ -17595,7 +17591,7 @@
 	pixel_x = 0;
 	pixel_y = -11
 	},
-/obj/effect/landmark/start/bogwitch_apprentice,
+/obj/effect/landmark/start/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "qFL" = (
@@ -18686,8 +18682,8 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
 "rMD" = (
-/obj/effect/landmark/start/bogwitch_apprenticelate,
-/turf/open/floor/dirt,
+/obj/effect/landmark/start/late/bogwitch,
+/turf/open/floor/dirt/road,
 /area/outdoors/bog/north)
 "rMQ" = (
 /obj/item/candle/scandelabra/lit{
@@ -46456,7 +46452,7 @@ thx
 (107,1,1) = {"
 bdA
 xVa
-fKK
+eVP
 mBE
 syJ
 mBE
@@ -46658,7 +46654,7 @@ thx
 (108,1,1) = {"
 bdA
 hPr
-syJ
+rMD
 syJ
 vpX
 vpX
@@ -46860,7 +46856,7 @@ thx
 (109,1,1) = {"
 bdA
 hPr
-syJ
+rMD
 syJ
 rhz
 rhz
@@ -47062,7 +47058,7 @@ thx
 (110,1,1) = {"
 bdA
 hPr
-syJ
+rMD
 jgP
 syJ
 mBE
@@ -47264,7 +47260,7 @@ thx
 (111,1,1) = {"
 bdA
 xVa
-rMD
+mBE
 hyA
 mBE
 mBE

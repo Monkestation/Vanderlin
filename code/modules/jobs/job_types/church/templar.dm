@@ -83,7 +83,7 @@
 	)
 
 /datum/job/templar
-	title = "Templar"
+	title = JOB_TEMPLAR
 	tutorial = "Templars are warriors who have forsaken wealth and station in the service of the church, either from fervent zeal or remorse for past sins.\
 	They are vigilant sentinels, guarding priest and altar, steadfast against heresy and shadow-beasts that creep in darkness. \
 	But in the quiet of troubled sleep, there is a question left. Does the blood they spill sanctify them, or stain them forever? If service ever demanded it, whose blood would be the price?"
@@ -197,7 +197,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 
 /datum/outfit/templar
-	name = "Templar"
+	name = JOB_TEMPLAR
 	head = /obj/item/clothing/head/helmet/heavy/necked
 	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	armor = /obj/item/clothing/armor/brigandine

@@ -12289,7 +12289,7 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/town/noble_manor/blue)
 "fPr" = (
-/obj/effect/landmark/start/vagrantlate{
+/obj/effect/landmark/start/late/vagrant{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
@@ -18826,7 +18826,7 @@
 /area/indoors/soilsons)
 "iUV" = (
 /obj/structure/bed/shit,
-/obj/effect/landmark/start/vagrantlate{
+/obj/effect/landmark/start/late/vagrant{
 	dir = 1
 	},
 /turf/open/floor/dirt,
@@ -34673,7 +34673,7 @@
 "qjG" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/wood,
 /area/outdoors/beach/boat)
 "qjR" = (
@@ -38539,7 +38539,7 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
 "rSo" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /obj/structure/chair/bench/church/r{
 	dir = 1
 	},
@@ -42245,7 +42245,7 @@
 /turf/open/floor/woodturned,
 /area/outdoors/mountains)
 "tBC" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /obj/structure/chair/bench/church{
 	dir = 1
 	},
@@ -42979,7 +42979,7 @@
 /area/indoors/town/church/inquisition)
 "tRs" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/wood,
 /area/outdoors/beach/boat)
 "tRx" = (
@@ -52914,7 +52914,7 @@
 "yge" = (
 /obj/item/bedsheet/wool,
 /obj/structure/bed/wool,
-/obj/effect/landmark/start/nightman,
+/obj/effect/landmark/start/apothecary,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
 "ygh" = (

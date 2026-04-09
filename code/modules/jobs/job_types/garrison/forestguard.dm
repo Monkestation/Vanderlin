@@ -1,5 +1,5 @@
 /datum/job/forestguard
-	title = "Forest Guard"
+	title = JOB_FOREST_GUARD
 	tutorial = "You've been keeping the streets clean of neer-do-wells and taffers for most of your time in the garrison.\
 	You've been through the wringer - alongside soldiers in the short-lived Goblin Wars. \
 	The Wars were rough, the few who survived came back changed. Perhaps you'd agree. \
