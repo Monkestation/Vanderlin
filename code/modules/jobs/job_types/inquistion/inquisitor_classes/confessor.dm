@@ -98,7 +98,7 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/roguehood/psydon/confessor, ITEM_SLOT_HEAD, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/leather/jacket/leathercoat/confessor, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/heavy/inq, ITEM_SLOT_SHIRT, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/slur, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/slur, ITEM_SLOT_BELT_L, TRUE)
 		if("Arbalist - Crossbow, Lightweight Brigandine")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/headband, ITEM_SLOT_HEAD, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
