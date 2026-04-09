@@ -1568,8 +1568,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
-	wrestling_diff -= (GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling))
+	wrestling_diff += GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
+	wrestling_diff -= GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling)
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -1649,7 +1649,7 @@
 		log_combat(pulledby, src, "broke grab")
 		pulledby.stop_pulling()
 
-		var/wrestling_cooldown_reduction = 0.2 SECONDS * their_wrestling
+		var/wrestling_cooldown_reduction = 0.2 SECONDS * (GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling))
 
 		TIMER_COOLDOWN_START(src, "broke_free", max(0, 2 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 		playsound(src.loc, 'sound/combat/grabbreak.ogg', 50, TRUE, -1)
