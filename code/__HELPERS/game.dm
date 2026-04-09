@@ -258,6 +258,8 @@
 		for(var/mob/dead/new_player/G as anything in GLOB.new_player_list)
 			if(!G.client)
 				continue
+			if(!G.client.is_whitelisted(whitelist_type))
+				continue
 			candidates += G
 
 	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
