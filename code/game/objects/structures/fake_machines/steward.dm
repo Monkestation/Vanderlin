@@ -299,7 +299,12 @@
 					/datum/job/innkeep_son::title,
 					/datum/job/bandit::title,
 				)
+				jobs += "Cancel"
 				var/new_pos = input(usr, "Select their new position", src, null) as anything in jobs
+				if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH) || locked())
+					return
+				if(new_pos == "Cancel")
+					return
 				A.job = new_pos
 				A.mind?.set_assigned_role(new_pos)
 				if(ishuman(A))
@@ -314,7 +319,7 @@
 				if(!SScommunications.can_announce(usr))
 					return
 
-				priority_announce("[A.real_name] has been assigned the title of [new_pos].", 'sound/misc/alert.ogg', "Captain")
+				priority_announce("[A.real_name] has been assigned the title of [new_pos].", "Steward's Desk", 'sound/misc/alert.ogg', "Captain")
 				break
 	if(href_list["payroll"])
 		var/list/L = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.company_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.apprentices_positions) + list(GLOB.inquisition_positions)
@@ -508,10 +513,9 @@
 			contents += "--------------<BR>"
 			for(var/mob/living/carbon/human/A in SStreasury.bank_accounts)
 				if(ishuman(A))
-					var/mob/living/carbon/human/tmp = A
-					contents += "[tmp.real_name] ([tmp.get_role_title(steward_check = TRUE)]) - [A.job]m<BR>"
+					contents += "[A.real_name] ([A.get_role_title(steward_check = TRUE)])<BR>"
 				else
-					contents += "[A.real_name] - [A.job]m<BR>"
+					contents += "[A.real_name]<BR>"
 				contents += "<a href='byond://?src=\ref[src];changejob=\ref[A]'>\[Change Job\]</a><BR><BR>"
 			contents += "</div>"
 		if(TAB_LOG)
