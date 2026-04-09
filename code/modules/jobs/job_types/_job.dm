@@ -554,8 +554,6 @@
 
 /// Returns an atom where the mob should spawn in.
 /datum/job/proc/get_roundstart_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
 	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point()
 	if(!spawn_point) //if there isn't a spawnpoint send them to latejoin, if there's no latejoin go yell at your mapper
 		return get_latejoin_spawn_point()
@@ -563,8 +561,8 @@
 
 /// Handles finding and picking a valid roundstart effect landmark spawn point, in case no uncommon different spawning events occur.
 /datum/job/proc/get_default_roundstart_spawn_point()
-	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != title)
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.roundstart_landmarks)
+		if(!(title in spawn_point.jobs_to_spawn))
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
@@ -574,25 +572,15 @@
 	if(!.)
 		log_world("Couldn't find a round start spawn point for [title]")
 
-/datum/job/proc/get_job_special_late_point()
-	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != "[title]late")
-			continue
-		. = spawn_point
-		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
-			continue
-		spawn_point.used = TRUE
-		break
-
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
-	var/obj/effect/landmark/start/spawn_point = get_job_special_late_point()
-	if(spawn_point)
-		return spawn_point
-	if(length(SSjob.latejoin_trackers))
-		return pick(SSjob.latejoin_trackers)
+	var/list/possible_spawns = list()
+	for(var/obj/effect/landmark/start/latepoint as anything in GLOB.latejoin_landmarks)
+		if(title in latepoint.jobs_to_spawn)
+			possible_spawns += latepoint
+	if(length(possible_spawns))
+		return pick(possible_spawns)
+
 	return SSjob.get_last_resort_spawn_points()
 
 

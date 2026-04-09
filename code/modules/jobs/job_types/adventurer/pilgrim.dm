@@ -1,5 +1,5 @@
 /datum/job/pilgrim
-	title = "Pilgrim"
+	title = JOB_PILGRIM
 	tutorial = "As a Pilgrim, you begin far outside the safety of the city and must reach it in order to ply your trade. \
 	Alternatively, you can build your own settlement and enjoy the terrible dangers nature has to offer."
 	department_flag = OUTSIDERS

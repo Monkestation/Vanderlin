@@ -21,7 +21,7 @@
 	)
 
 /datum/job/advclass/combat/alchemist
-	title = "Alchemist"
+	title = JOB_ALCHEMIST
 	tutorial = "No longer working for a clinic or laboratory, these former apothecaries \
 				have taken to finding work and riches on the open road. \
 				Armed with knowledge of alchemical formulae, alchemists utilize potions, \

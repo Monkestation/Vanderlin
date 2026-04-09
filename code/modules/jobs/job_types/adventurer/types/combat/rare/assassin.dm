@@ -78,7 +78,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_bard
-	name = "Bard"
+	name = JOB_BARD
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_bard
@@ -119,7 +119,7 @@
 
 
 /datum/job_pack/assassin/assassin_beggar
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 	pack_contents = list(
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -145,7 +145,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_fisher
-	name = "Fisher"
+	name = JOB_FISHER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_fisher
@@ -197,7 +197,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_hunter
-	name = "Hunter"
+	name = JOB_HUNTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_hunter
@@ -231,7 +231,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_miner
-	name = "Miner"
+	name = JOB_MINER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_miner
@@ -256,7 +256,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_noble
-	name = "Noble"
+	name = JOB_MINOR_NOBLE
 
 	pack_contents = list(
 		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
@@ -370,7 +370,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_carpenter
-	name = "Carpenter"
+	name = JOB_CARPENTER
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_carpenter
@@ -484,7 +484,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_servant
-	name = "Servant"
+	name = JOB_SERVANT
 
 	pack_sheets = list(
 		/datum/attribute_holder/sheet/job/pack/assassin_servant

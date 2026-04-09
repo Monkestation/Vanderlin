@@ -1,5 +1,5 @@
 /datum/job/inquisitor
-	title = "Herr Prafekt"
+	title = JOB_PRAFEKT
 	f_title = "Frau Prafekt"
 	department_flag = INQUISITION
 	faction = "Station"

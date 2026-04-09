@@ -287,10 +287,10 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/checkreqroles()
 	var/list/readied_jobs = list()
-	var/list/required_jobs = list("Monarch")
+	var/list/required_jobs = list(JOB_MONARCH)
 #ifdef TESTING
 	required_jobs = list()
-	readied_jobs = list("Monarch")
+	readied_jobs = list(JOB_MONARCH)
 #endif
 	for(var/V in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
@@ -309,7 +309,7 @@ SUBSYSTEM_DEF(ticker)
 		if(pre_vote > 4 && !voting)
 			voting = TRUE
 			SSvote.initiate_vote("norulervote", "The Gods")
-		if(!(("Monarch" in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
+		if(!((JOB_MONARCH in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
 			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
 			if(!voting)
 				pre_vote++
@@ -343,7 +343,6 @@ SUBSYSTEM_DEF(ticker)
 		toggle_ooc(FALSE) // Turn it off
 
 	CHECK_TICK
-	GLOB.start_landmarks_list = shuffle(GLOB.start_landmarks_list) //Shuffle the order of spawn points so they dont always predictably spawn bottom-up and right-to-left
 
 	create_characters() //Create player characters
 	log_game("GAME SETUP: create characters success")
@@ -417,7 +416,7 @@ SUBSYSTEM_DEF(ticker)
 				continue
 			if(!player.client.is_whitelisted(id))
 				continue
-			if(player.client.prefs.job_preferences["Monarch"] == JP_HIGH)
+			if(player.client.prefs.job_preferences[JOB_MONARCH] == JP_HIGH)
 				continue
 			if(!vessel_candidates[id])
 				vessel_candidates[id] = list()
@@ -471,11 +470,12 @@ SUBSYSTEM_DEF(ticker)
 	job_change_locked = FALSE
 
 	SStriumphs.fire_on_PostSetup()
-	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
-		if(istype(S))							//we can not runtime here. not in this important of a proc.
-			S.after_round_start()
-		else
-			stack_trace("[S] [S.type] found in start landmarks list, which isn't a start landmark!")
+	for(var/obj/effect/landmark/start/S as anything in GLOB.roundstart_landmarks)
+		if(!istype(S))//we can not runtime here. not in this important of a proc.
+			stack_trace("[S] [S.type] found in roundstart landmarks list, which isn't a start landmark!")
+	for(var/obj/effect/landmark/start/S as anything in GLOB.latejoin_landmarks)
+		if(!istype(S))//we can not runtime here. not in this important of a proc.
+			stack_trace("[S] [S.type] found in latejoin landmarks list, which isn't a latejoin landmark!")
 	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer

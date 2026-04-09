@@ -16,7 +16,7 @@
 	)
 
 /datum/job/advclass/pilgrim/noble
-	title = "Noble"
+	title = JOB_MINOR_NOBLE
 	tutorial = "The blood of a noble family runs through your veins. Perhaps you are visiting from some place far away, \
 	looking to enjoy the hospitality of the ruler. You have many mammons to your name, but with wealth comes \
 	danger, so keep your wits and tread lightly..."
@@ -24,7 +24,7 @@
 	outfit = /datum/outfit/pilgrim/noble
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 2
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird = 1,
@@ -48,7 +48,7 @@
 		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade,
 	)
 
-	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
+	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = JOB_MINOR_NOBLE)
 
 	switch(choice)
 		if("Dagger")

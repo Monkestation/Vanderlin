@@ -46,7 +46,7 @@
 	and tenant meaning "holding" as in "holding a position";
 	thus a "lieutenant" is a placeholder for a superior, during their absence.
 	*/
-	title = "City Watch Lieutenant"
+	title = JOB_CITY_WATCH_LIEUTENANT
 	tutorial = "You are a lieutenant of the City Watch. \
 	You have been chosen by the Captain to lead the Watch in his absence; \
 	Failure is not an option."
@@ -105,7 +105,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
 
 /datum/outfit/lieutenant
-	name = "City Watch Lieutenant"
+	name = JOB_CITY_WATCH_LIEUTENANT
 	head = /obj/item/clothing/head/helmet/sargebarbute //veteran who won a nice helmet
 	wrists = /obj/item/clothing/wrists/bracers/jackchain
 	shoes = /obj/item/clothing/shoes/boots/leather

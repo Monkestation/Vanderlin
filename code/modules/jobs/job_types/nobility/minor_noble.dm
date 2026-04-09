@@ -28,7 +28,7 @@
 
 
 /datum/job/minor_noble
-	title = "Noble"
+	title = JOB_MINOR_NOBLE
 	tutorial = "The blood of a noble family runs through your veins. You are the living proof that the minor houses \
 	still exist in spite of the Monarch. You have many mammons to your name, but with wealth comes \
 	danger, so keep your wits and tread lightly..."
@@ -41,7 +41,7 @@
 	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	give_bank_account = 60
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
@@ -73,7 +73,7 @@
 		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
 		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
 		)
-	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
+	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = JOB_MINOR_NOBLE)
 	if(!choice)
 		return
 	switch(choice)

@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(job)
 	var/initial_players_to_assign = 0
 
 	var/list/prioritized_jobs = list()
-	var/list/latejoin_trackers = list()
+	var/list/backup_join_landmarks = list()
 
 	var/list/level_order = list(JP_HIGH,JP_MEDIUM,JP_LOW)
 	/// Map of jobs indexed by the experience type they grant.
@@ -809,15 +809,11 @@ SUBSYSTEM_DEF(job)
 		return
 	..()
 
-/datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
+/datum/controller/subsystem/job/proc/SendToBackupPoint(mob/M, buckle = TRUE)
 	var/atom/destination
-	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
-		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
-		destination.JoinPlayerHere(M, FALSE)
-		return
 
-	if(length(latejoin_trackers))
-		destination = pick(latejoin_trackers)
+	if(length(backup_join_landmarks))
+		destination = pick(backup_join_landmarks)
 		destination.JoinPlayerHere(M, buckle)
 		return
 
@@ -829,7 +825,10 @@ SUBSYSTEM_DEF(job)
 
 	stack_trace("Unable to find last resort spawn point.")
 	//fuck you
-	return pick(world.contents)
+	if(length(GLOB.latejoin_landmarks))
+		return pick(GLOB.latejoin_landmarks)
+	else
+		return pick(GLOB.roundstart_landmarks)
 	//return GET_ERROR_ROOM
 
 /datum/controller/subsystem/job/proc/CanPickJob(mob/living/player, datum/job/job)

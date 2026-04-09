@@ -18,7 +18,7 @@
 	)
 
 /datum/job/undertaker
-	title = "Gravetender"
+	title = JOB_GRAVETENDER
 	tutorial = "As a servant of Necra, you embody the sanctity of her domain, \
 	ensuring the dead rest peacefully within the earth. \
 	You are the bane of grave robbers and necromancers, \
@@ -64,7 +64,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/undertaker
-	name = "Gravetender"
+	name = JOB_GRAVETENDER
 	head = /obj/item/clothing/head/padded/deathshroud
 	neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 	pants = /obj/item/clothing/pants/trou/leather/mourning
