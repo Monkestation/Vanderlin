@@ -70,7 +70,7 @@
 	)
 
 /datum/migrant_role/mig_prisoner
-	name = "Prisoner"
+	name = JOB_PRISONER
 	greet_text = "You fled Vanderlin and took refuge another kingdom, yet the lords over there caught you and thus handed you over to those who sought you before."
 	migrant_job = /datum/job/migrant/mig_prisoner
 

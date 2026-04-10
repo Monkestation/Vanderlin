@@ -385,23 +385,6 @@
 /obj/structure/table/wood/counter/end,
 /turf/open/floor/tile/masonic,
 /area/indoors/mountains/anvil/upperkeep)
-"abA" = (
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -16;
-	pixel_y = 28
-	},
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = 2;
-	pixel_y = 28
-	},
-/obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/turf/open/water/river{
-	dir = 4
-	},
-/area/indoors/town/clocktower)
 "abB" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/sigil/S,
@@ -536,12 +519,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
-"ach" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/snow,
-/area/outdoors/mountains/anvil/snowyforest)
 "aci" = (
 /turf/open/floor/volcanic,
 /area/under/cavelava)
@@ -632,20 +609,6 @@
 "acx" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/mountains/anvil/lower)
-"acz" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 16
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 6;
-	pixel_x = 31;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/metal/alt,
-/area/indoors/town/clocktower)
 "acA" = (
 /turf/closed/mineral/random/cold,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -712,24 +675,6 @@
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"acU" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = 8;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 10;
-	pixel_x = -7;
-	pixel_y = -1
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1;
-	pixel_x = 25;
-	pixel_y = 14
-	},
-/turf/open/floor/metal/alt,
-/area/indoors/town/clocktower)
 "acV" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/naturalstone,
@@ -798,14 +743,6 @@
 /obj/item/chair/stool,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"adm" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 1;
-	pixel_y = 0;
-	layer = 3.0
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "adn" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
@@ -852,15 +789,6 @@
 /obj/item/reagent_containers/food/snacks/rotten/sausage,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
-"adC" = (
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/turf/open/floor/metal,
-/area/indoors/town/clocktower)
 "adD" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/machinery/light/fueled/wallfire/candle/skull{
@@ -1110,14 +1038,6 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
-"aeM" = (
-/obj/structure/table/wood/reinforced,
-/obj/item/clothing/cloak/boiler{
-	pixel_x = 0;
-	pixel_y = 7
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "aeN" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/fluff/walldeco/church/line,
@@ -1243,13 +1163,6 @@
 /obj/item/weapon/polearm/spear/bonespear,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"afv" = (
-/obj/structure/table/wood/counter/end{
-	dir = 8
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/pistol,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
 "afw" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
@@ -1337,24 +1250,6 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
-"afO" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -16
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 10;
-	pixel_x = -31;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 1;
-	pixel_y = 0;
-	layer = 3.0
-	},
-/obj/structure/water_pipe,
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "afP" = (
 /turf/open/water/blood,
 /area/indoors/mountains/anvil/keep)
@@ -1376,17 +1271,6 @@
 	dir = 8
 	},
 /area/under/mountains/anvil/lower)
-"afV" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 9;
-	pixel_x = -1;
-	pixel_y = 0
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "afW" = (
 /obj/effect/decal/carpet/square/black{
 	pixel_x = -15
@@ -1564,22 +1448,6 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"agR" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 5;
-	pixel_x = 1;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -16
-	},
-/obj/structure/water_pipe,
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "agS" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/walldeco/church/line,
@@ -1619,14 +1487,6 @@
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aha" = (
-/obj/structure/table/wood/plain,
-/obj/structure/fluff/millstone{
-	pixel_x = 0;
-	pixel_y = 7
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "ahb" = (
 /obj/structure/table/wood/crafted,
 /obj/item/candle/yellow/lit/infinite/strong/skull{
@@ -1940,10 +1800,6 @@
 /obj/structure/table/wood/large,
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
-"aiB" = (
-/obj/structure/bars,
-/obj/effect/mapping_helpers/structure/breaker,
-/area/indoors/mountains/anvil/keep)
 "aiC" = (
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/dirt,
@@ -2012,32 +1868,6 @@
 /obj/structure/fluff/walldeco/bath/wallpipes,
 /turf/open/floor/plasteel/maniac,
 /area/indoors/mountains/anvil/keep)
-"aiS" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 5;
-	pixel_x = 8;
-	pixel_y = 30
-	},
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = -2;
-	pixel_y = 32
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -18;
-	pixel_y = 24
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = 8;
-	pixel_y = 0
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "aiT" = (
 /obj/item/natural/rock/gemerald,
 /turf/open/water/clean,
@@ -2075,24 +1905,6 @@
 /obj/item/weapon/hammer/iron,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/clocktower)
-"ajf" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -17;
-	pixel_y = 0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "ajg" = (
 /obj/structure/pottery_lathe,
 /turf/open/floor/cobblerock/alt,
@@ -2259,18 +2071,6 @@
 /obj/item/reagent_containers/glass/cup/jadefancy,
 /turf/open/floor/tile/masonic,
 /area/indoors/mountains/anvil/upperkeep)
-"ajK" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = 8;
-	pixel_y = 0
-	},
-/obj/machinery/light/fueled/wallfire/candle/lamp{
-	pixel_x = 32;
-	pixel_y = 0
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "ajM" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock/snow,
@@ -2306,18 +2106,6 @@
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
-"ajY" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = -2;
-	pixel_y = 32
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1;
-	pixel_y = 0;
-	pixel_x = -17
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "ajZ" = (
 /obj/effect/turf_decal/magedecal{
 	pixel_y = -16
@@ -2551,27 +2339,6 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
-"alb" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -3;
-	pixel_y = 28
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -16;
-	pixel_y = 24
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "alc" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -2613,12 +2380,6 @@
 /obj/item/mould/ingot,
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
-"all" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/snowyforest)
 "alm" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/snow,
@@ -2746,22 +2507,6 @@
 /area/under/mountains/anvil/upper)
 "alM" = (
 /turf/open/floor/herringbone,
-/area/indoors/town/clocktower)
-"alN" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = 1;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -16
-	},
-/obj/structure/water_vent,
-/turf/open/openspace,
 /area/indoors/town/clocktower)
 "alP" = (
 /turf/open/water/clean,
@@ -2925,27 +2670,6 @@
 /obj/structure/water_pipe,
 /turf/open/floor/metal,
 /area/indoors/town/clocktower)
-"amD" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -17;
-	pixel_y = 0
-	},
-/turf/open/floor/metal,
-/area/under/mountains/anvil/lower)
 "amE" = (
 /obj/machinery/light/fueled/smelter/great{
 	pixel_x = -7
@@ -3081,17 +2805,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"anm" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = 14;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 5
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "ann" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -3125,14 +2838,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"anv" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/turf/open/floor/metal/alt,
-/area/under/mountains/anvil/lower)
 "anw" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3159,20 +2864,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
-"anE" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie,
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "anG" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/reagent_containers/glass/bucket/pot/copper,
@@ -3493,19 +3184,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"apm" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = -2;
-	pixel_y = 32
-	},
-/obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/turf/open/water/river{
-	dir = 4
-	},
-/area/indoors/town/clocktower)
 "apn" = (
 /obj/item/reagent_containers/food/snacks/meat/strange,
 /turf/open/floor/naturalstone,
@@ -3609,21 +3287,6 @@
 /mob/living/carbon/human/species/skeleton/npc/easy,
 /turf/open/floor/blocks/newstone,
 /area/indoors/mountains/anvil/upperkeep)
-"apL" = (
-/obj/structure/bars/grille,
-/obj/effect/waterfall,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/turf/open/water/bath,
-/area/indoors/town/clocktower)
 "apM" = (
 /obj/structure/table/wood/reinforced_alt,
 /obj/structure/mirror/fancy,
@@ -3932,15 +3595,6 @@
 "art" = (
 /turf/open/floor/cobblerock/snow,
 /area/indoors/mountains/anvil/keep)
-"aru" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "arv" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
@@ -3962,15 +3616,6 @@
 /area/indoors/town/church/inquisition)
 "ary" = (
 /turf/open/dungeon_trap,
-/area/under/mountains/anvil/lower)
-"arz" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 9;
-	pixel_x = 0;
-	pixel_y = -1
-	},
-/turf/open/floor/metal/alt,
 /area/under/mountains/anvil/lower)
 "arA" = (
 /obj/structure/fake_machine/scomm/r,
@@ -4093,19 +3738,6 @@
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
-"asb" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "asc" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/mountains/anvil/keep)
@@ -4189,9 +3821,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/mountains/anvil/upperkeep)
-"asz" = (
-/obj/structure/bars,
-/area/indoors/mountains/anvil/keep)
 "asA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/masonic{
@@ -4695,12 +4324,6 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"auK" = (
-/obj/structure/table/wood/large/corner_new{
-	dir = 2
-	},
-/turf/open/floor/tile/masonic/single,
-/area/indoors/mountains/anvil/upperkeep)
 "auL" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
@@ -4832,14 +4455,6 @@
 /obj/effect/spawner/map_spawner/loot/coin/med,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"avp" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 1;
-	pixel_y = 0;
-	layer = 3.0
-	},
-/turf/open/floor/metal/alt,
-/area/indoors/town/clocktower)
 "avq" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/skeleton/npc/supereasy,
@@ -4984,10 +4599,6 @@
 /obj/item/weapon/knife/copper,
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
-"avX" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "avY" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/clothing/armor/cuirass/iron/rust,
@@ -5675,12 +5286,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
-"ayS" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "ayU" = (
 /turf/open/floor/carpet/lord/corner{
 	dir = 8
@@ -5692,13 +5297,6 @@
 	},
 /obj/structure/table/wood/crafted,
 /turf/open/floor/tile,
-/area/indoors/town/church/inquisition)
-"ayX" = (
-/obj/structure/chair/wood/alt/chair_noble{
-	dir = 1
-	},
-/obj/effect/landmark/start/puritanlate,
-/turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "ayY" = (
 /obj/item/chair/chair_nobles/purple,
@@ -6186,11 +5784,6 @@
 /obj/item/skull,
 /turf/open/floor/sand,
 /area/indoors/mountains/anvil/keep)
-"aBb" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aBc" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/paper,
@@ -6303,19 +5896,6 @@
 "aBy" = (
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/lower)
-"aBA" = (
-/obj/structure/bookcase/random/eoratica{
-	name = "bookcase (Self Torture Manuscripts)";
-	pixel_x = 29;
-	pixel_y = 1;
-	density = 0;
-	opacity = 0
-	},
-/obj/structure/chair/stool/bar,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/start/absolverlate,
-/turf/open/floor/church/purple,
-/area/indoors/town/church/inquisition)
 "aBB" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/effect/decal/cleanable/debris/glass,
@@ -6833,34 +6413,10 @@
 /obj/structure/chair/stool/bar/fancyplush,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aDY" = (
-/obj/structure/chair/stool,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 8
-	},
-/obj/effect/landmark/start/orthodoxistlate{
-	dir = 4
-	},
-/turf/open/floor/churchbrick,
-/area/indoors/town/church/inquisition)
 "aDZ" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/snow/patchy,
 /area/under/mountains/anvil/upper)
-"aEa" = (
-/obj/structure/bars/grille,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/turf/open/water/bath,
-/area/indoors/town/clocktower)
 "aEb" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -6884,14 +6440,6 @@
 /obj/structure/lootable_structure/mining_cache,
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
-"aEe" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "aEf" = (
 /obj/structure/toilet,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -7133,10 +6681,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
-"aFq" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aFr" = (
 /obj/structure/chair/stool,
 /turf/open/floor/hexstone,
@@ -7224,12 +6768,6 @@
 /obj/item/organ/liver,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
-"aFL" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "aFM" = (
 /obj/structure/door/stone,
 /obj/structure/barricade/wooden,
@@ -7308,20 +6846,6 @@
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
-"aGh" = (
-/obj/structure/waterwheel,
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = 0;
-	pixel_y = 29
-	},
-/obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/turf/open/water/river{
-	dir = 4
-	},
-/area/indoors/town/clocktower)
 "aGj" = (
 /obj/structure/table/wood/plain/alto,
 /obj/item/candle/scandelabrasingle{
@@ -7766,13 +7290,6 @@
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church/inquisition)
-"aIr" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = 0;
-	pixel_y = 27
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "aIt" = (
 /mob/living/carbon/human/species/dwarf/mountain/base/unskilled/naked{
 	health = 10
@@ -7839,12 +7356,6 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"aIO" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aIP" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobblerock,
@@ -8039,11 +7550,6 @@
 /mob/living/carbon/human/species/zizombie/npc,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"aJO" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
 "aJP" = (
 /obj/structure/spider/cocoon,
 /obj/item/carvedgem/onyxa/snake,
@@ -8120,12 +7626,6 @@
 /obj/item/soap,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
-"aKj" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/snowyforest)
 "aKk" = (
 /obj/structure/table/wood/crafted,
 /obj/item/paper/inquisition_poultice_info,
@@ -8172,12 +7672,6 @@
 /mob/living/carbon/human/species/skeleton/npc/hard,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aKt" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aKu" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/walldeco/gear{
@@ -8421,24 +7915,6 @@
 	},
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
-"aLw" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5;
-	icon_state = "border"
-	},
-/obj/structure/fluff/steamvent,
-/obj/structure/vertical_gearbox,
-/turf/open/floor/herringbone,
-/area/indoors/town/clocktower)
 "aLx" = (
 /turf/open/floor/carpet/lord/corner{
 	dir = 4
@@ -8600,29 +8076,6 @@
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/snow,
 /area/under/cavelava)
-"aMf" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -17;
-	pixel_y = -1
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "aMg" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 8
@@ -8646,27 +8099,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/town/clocktower)
-"aMm" = (
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 14;
-	pixel_y = 24
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 3;
-	pixel_y = 31
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 10;
-	pixel_x = -22;
-	pixel_y = 15
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "aMn" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/carpet/royalblack,
@@ -8678,20 +8110,6 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red,
 /turf/open/floor/plasteel/maniac,
 /area/indoors/mountains/anvil/keep)
-"aMq" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "aMr" = (
 /obj/item/reagent_containers/food/snacks/meat/strange,
 /obj/item/reagent_containers/food/snacks/rotten/sausage,
@@ -8755,17 +8173,6 @@
 /obj/structure/trap/spike,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aMP" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = 0;
-	pixel_y = 31
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -15;
-	pixel_y = 22
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "aMQ" = (
 /obj/structure/bed/wool,
 /turf/open/floor/herringbone,
@@ -8818,16 +8225,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
-"aNd" = (
-/obj/structure/chair/stool,
-/obj/structure/fluff/walldeco/church/line{
-	dir = 4
-	},
-/obj/effect/landmark/start/orthodoxistlate{
-	dir = 8
-	},
-/turf/open/floor/churchbrick,
-/area/indoors/town/church/inquisition)
 "aNe" = (
 /obj/structure/rack,
 /obj/item/weapon/axe/copper{
@@ -9318,29 +8715,6 @@
 /mob/living/carbon/human/species/orc/npc,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
-"aPm" = (
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -13;
-	pixel_y = 23
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 0;
-	pixel_y = 22
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 13;
-	pixel_y = 28
-	},
-/obj/structure/fluff/walldeco/bath/wallrope{
-	pixel_x = 0;
-	pixel_y = 32
-	},
-/obj/structure/waterwheel,
-/turf/open/water/river{
-	dir = 4
-	},
-/area/indoors/town/clocktower)
 "aPn" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
@@ -9385,10 +8759,6 @@
 /obj/effect/mapping_helpers/access/keyset/church/inquisition,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"aPB" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/snowyforest)
 "aPC" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/open/floor/snow,
@@ -9402,19 +8772,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"aPF" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = -2;
-	pixel_y = 32
-	},
-/obj/structure/water_pipe,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/turf/open/floor/metal,
-/area/indoors/town/clocktower)
 "aPG" = (
 /mob/living/carbon/human/species/dwarf/mountain/base/unskilled/naked,
 /turf/open/floor/hexstone,
@@ -9609,20 +8966,6 @@
 /obj/item/bedsheet/fabric_double,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"aQC" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/machinery/light/fueled/wallfire/candle/lamp,
-/turf/open/floor/metal,
-/area/under/mountains/anvil/lower)
 "aQD" = (
 /obj/structure/stone_tile/surrounding_tile/cracked,
 /obj/structure/table/wood/crafted,
@@ -9829,37 +9172,11 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"aRz" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -14;
-	pixel_y = 44
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 10;
-	pixel_x = -29;
-	pixel_y = 15
-	},
-/turf/open/floor/metal/barograte,
-/area/indoors/town/clocktower)
 "aRA" = (
 /obj/item/clothing/armor/cuirass/iron/goblin,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
-"aRC" = (
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/lower)
 "aRD" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /turf/open/floor/dirt,
@@ -10156,23 +9473,6 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
-"aSO" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5;
-	icon_state = "border"
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/structure/fluff/steamvent,
-/turf/open/floor/herringbone,
-/area/indoors/town/clocktower)
 "aSQ" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/neck/talkstone,
@@ -10427,32 +9727,6 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"aTZ" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = -12;
-	pixel_y = 27
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 5;
-	pixel_y = 26
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 5;
-	pixel_x = 15;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 1;
-	pixel_y = 0;
-	pixel_x = -17
-	},
-/turf/open/openspace,
-/area/indoors/town/clocktower)
 "aUa" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/access/locker,
@@ -10568,11 +9842,6 @@
 "aUD" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/effect/decal/cleanable/blood/gibs,
-/turf/open/floor/cobble,
-/area/indoors/mountains/anvil/keep)
-"aUF" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aUG" = (
@@ -10844,12 +10113,6 @@
 /obj/structure/door/stone,
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
-"aVT" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/snow/patchy,
-/area/outdoors/mountains/anvil/snowyforest)
 "aVV" = (
 /obj/structure/door/weak/bolt,
 /obj/effect/mapping_helpers/access/locker,
@@ -11692,16 +10955,6 @@
 /obj/effect/waterfall,
 /turf/open/water/clean,
 /area/under/cavewet)
-"aZP" = (
-/obj/structure/table/wood/large/corner_new{
-	dir = 2
-	},
-/obj/item/plate/clay,
-/obj/item/reagent_containers/glass/cup/clay{
-	pixel_y = 11
-	},
-/turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
 "aZQ" = (
 /mob/living/simple_animal/hostile/retaliate/direbear,
 /turf/open/floor/snow,
@@ -11947,15 +11200,17 @@
 /obj/machinery/essence/reservoir/filled,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"cBM" = (
-/obj/structure/water_pipe,
+"cAL" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
+	dir = 8;
+	pixel_x = 13
 	},
-/turf/open/floor/metal/alt,
-/area/under/mountains/anvil/upper)
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "cCy" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
@@ -12005,6 +11260,18 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/metal/barograte,
 /area/under/mountains/anvil/upper)
+"cRT" = (
+/obj/structure/bars/grille,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/open/water/bath,
+/area/indoors/town/clocktower)
 "cSk" = (
 /obj/structure/carpet/blue,
 /obj/structure/table/stone_small,
@@ -12048,6 +11315,23 @@
 	dir = 5
 	},
 /area/outdoors/mountains/anvil/peak)
+"cYY" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/fluff/steamvent,
+/obj/structure/vertical_gearbox,
+/turf/open/floor/herringbone,
+/area/indoors/town/clocktower)
 "cZz" = (
 /obj/structure/chair/bench/church,
 /obj/effect/decal/cleanable/debris/stone,
@@ -12065,6 +11349,10 @@
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/tile/masonic,
 /area/indoors/mountains/anvil/upperkeep)
+"dcC" = (
+/obj/effect/landmark/start/late/adept,
+/turf/open/floor/dirt,
+/area/indoors/town/church/inquisition)
 "dhi" = (
 /obj/machinery/light/fueled/smelter/great,
 /turf/open/floor/plasteel/maniac{
@@ -12092,6 +11380,13 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"drX" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 1
+	},
+/obj/effect/landmark/start/late/puritan,
+/turf/open/floor/carpet/royalblack,
+/area/indoors/town/church/inquisition)
 "dtm" = (
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/mountains/anvil/peak)
@@ -12206,6 +11501,13 @@
 	dir = 4
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"dYF" = (
+/obj/structure/table/wood/plain,
+/obj/structure/fluff/millstone{
+	pixel_y = 7
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "dZX" = (
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/craftstone,
@@ -12218,27 +11520,6 @@
 /obj/item/statue/bronze/comb,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
-"eiT" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/mob/living/simple_animal/hostile/retaliate/headless,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 10;
-	pixel_x = -29;
-	pixel_y = 15
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 4;
-	pixel_x = -14;
-	pixel_y = 44
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/upper)
 "ejB" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/item/ingot/steel,
@@ -12268,6 +11549,25 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
+"eso" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_y = 26
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = 17;
+	pixel_y = 21
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/upper)
 "etu" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
@@ -12279,10 +11579,46 @@
 /mob/living/carbon/human/species/zizombie/npc/warrior,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/peak)
+"ezK" = (
+/obj/structure/table/wood/counter/end{
+	dir = 8
+	},
+/obj/item/gun/ballistic/powder/wheellock/puffer,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/upperkeep)
 "eAu" = (
 /obj/structure/table/map/baotha,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"eAv" = (
+/obj/item/gear/metal/bronze,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/upper)
+"eGe" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -3;
+	pixel_y = 28
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -16;
+	pixel_y = 24
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "eIO" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/steamvent,
@@ -12295,17 +11631,34 @@
 /obj/structure/table/wood/counter/end,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"eJO" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/metal/alt,
+/area/under/mountains/anvil/lower)
+"eLj" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/snowyforest)
 "eNR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
-"eVH" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/tile/masonic{
-	dir = 2
+"ePL" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_y = 31
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -15;
+	pixel_y = 22
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "eWe" = (
 /obj/structure/door/weak/bolt{
 	dir = 8
@@ -12334,6 +11687,12 @@
 /obj/item/ingot/gold,
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
+"fsx" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/mountains/anvil/snowyforest)
 "fvT" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/herringbone,
@@ -12426,6 +11785,16 @@
 /obj/structure/chair/bench/church,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"gqD" = (
+/obj/structure/chair/stool,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/effect/landmark/start/late/orthodoxist{
+	dir = 8
+	},
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "gtB" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
@@ -12515,6 +11884,26 @@
 /obj/item/reagent_containers/food/snacks/fish/eel,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/upper)
+"gSS" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -17;
+	pixel_y = -1
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "gWC" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/tile/masonic/inverted,
@@ -12565,10 +11954,37 @@
 "hkw" = (
 /turf/open/water/clean,
 /area/outdoors/mountains/anvil/snowyforest)
+"hkM" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -2;
+	pixel_y = 32
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1;
+	pixel_x = -17
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "hlD" = (
 /mob/living/carbon/human/species/zizombie/npc/warrior,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/peak)
+"hlI" = (
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -16;
+	pixel_y = 28
+	},
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = 2;
+	pixel_y = 28
+	},
+/obj/structure/fluff/walldeco/bath/wallrope{
+	pixel_y = 32
+	},
+/turf/open/water/river{
+	dir = 4
+	},
+/area/indoors/town/clocktower)
 "hop" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/cobblerock,
@@ -12584,6 +12000,24 @@
 	dir = 4
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"huA" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -17
+	},
+/turf/open/floor/metal,
+/area/under/mountains/anvil/lower)
 "hvS" = (
 /obj/structure/chair/bench/church/r,
 /obj/effect/decal/cleanable/debris/stone,
@@ -12605,6 +12039,10 @@
 "hBu" = (
 /turf/closed/mineral/random/cold/high,
 /area/outdoors/mountains/anvil/peak)
+"hCb" = (
+/obj/structure/table/wood/large/corner_new,
+/turf/open/floor/tile/masonic/single,
+/area/indoors/mountains/anvil/upperkeep)
 "hGQ" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -12688,6 +12126,13 @@
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
+"ifu" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "ifN" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
@@ -12756,6 +12201,25 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"iAW" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_x = 1;
+	layer = 3.0
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
+"iBx" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "iFQ" = (
 /obj/item/ingot/steel_slag,
 /turf/open/floor/grass/cold,
@@ -12860,6 +12324,21 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"jrf" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -16
+	},
+/obj/structure/water_vent,
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "jry" = (
 /obj/machinery/anvil/crafted,
 /obj/effect/decal/cleanable/debris/stone,
@@ -12912,6 +12391,22 @@
 /obj/item/weapon/hammer/iron,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"jOI" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -16
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_x = -31
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_x = 1;
+	layer = 3.0
+	},
+/obj/structure/water_pipe,
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "jOK" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
@@ -12964,6 +12459,11 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"krw" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow/short,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/keep)
 "krG" = (
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/carpet/lord/right,
@@ -13035,28 +12535,6 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"kWT" = (
-/obj/structure/fluff/walldeco/gear{
-	pixel_x = 0;
-	pixel_y = 26
-	},
-/obj/structure/fluff/walldeco/gear/small{
-	pixel_x = 17;
-	pixel_y = 21
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/upper)
 "kYw" = (
 /obj/item/statue/bronze/comb,
 /obj/effect/decal/cleanable/debris/stone,
@@ -13109,9 +12587,50 @@
 "lDl" = (
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/peak)
+"lIu" = (
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = 14;
+	pixel_y = 24
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = 3;
+	pixel_y = 31
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_x = -22;
+	pixel_y = 15
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "lIA" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/peak)
+"lII" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -17
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
+"lKB" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "lOi" = (
 /obj/item/reagent_containers/glass/carafe/gold{
 	pixel_y = 6
@@ -13125,6 +12644,22 @@
 /obj/structure/bed/mediocre,
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
+"lRg" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/fluff/steamvent,
+/turf/open/floor/herringbone,
+/area/indoors/town/clocktower)
 "lTD" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/debris/stone,
@@ -13147,6 +12682,18 @@
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/peak)
+"mnE" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie,
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "moy" = (
 /obj/structure/chair/bench/church,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -13248,6 +12795,18 @@
 "mHZ" = (
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"mMM" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/snowyforest)
+"mMU" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_y = 27
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/lower)
 "mMV" = (
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/cobblerock/alt,
@@ -13266,6 +12825,18 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"mOd" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -2;
+	pixel_y = 32
+	},
+/obj/structure/water_pipe,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/metal,
+/area/indoors/town/clocktower)
 "mPt" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -13278,12 +12849,36 @@
 "mPY" = (
 /turf/open/floor/plasteel/maniac,
 /area/outdoors/mountains/anvil/peak)
+"mQe" = (
+/obj/effect/landmark/start/outsider,
+/turf/open/floor/grass/cold,
+/area/outdoors/mountains/anvil/snowyforest)
 "mQh" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/carpet/lord/right{
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"mRc" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/mob/living/simple_animal/hostile/retaliate/headless,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_x = -29;
+	pixel_y = 15
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -14;
+	pixel_y = 44
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/upper)
 "mWy" = (
 /obj/item/reagent_containers/food/snacks/fish/eel,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -13292,6 +12887,14 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/upper)
+"nbQ" = (
+/obj/structure/table/wood/large/corner_new,
+/obj/item/plate/clay,
+/obj/item/reagent_containers/glass/cup/clay{
+	pixel_y = 11
+	},
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/upperkeep)
 "ncs" = (
 /obj/structure/rack,
 /obj/item/weapon/tongs,
@@ -13305,10 +12908,6 @@
 	dir = 5
 	},
 /area/outdoors/mountains/anvil/peak)
-"nix" = (
-/obj/effect/landmark/start/adeptlate,
-/turf/open/floor/dirt,
-/area/indoors/town/church/inquisition)
 "niI" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -13339,6 +12938,13 @@
 	dir = 4
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"nwp" = (
+/obj/structure/table/wood/reinforced,
+/obj/item/clothing/cloak/boiler{
+	pixel_y = 7
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "nxC" = (
 /turf/closed/mineral/random/cold/med,
 /area/outdoors/mountains/anvil/peak)
@@ -13433,6 +13039,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"ogJ" = (
+/obj/effect/landmark/start/outsider,
+/turf/open/floor/dirt,
+/area/outdoors/mountains/anvil/snowyforest)
 "ojO" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -13602,6 +13212,11 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"ptM" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/keep)
 "pxz" = (
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/blocks/newstone,
@@ -13614,6 +13229,18 @@
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/pipe,
 /area/under/mountains/anvil/upper)
+"pHB" = (
+/obj/structure/waterwheel,
+/obj/structure/fluff/walldeco/gear{
+	pixel_y = 29
+	},
+/obj/structure/fluff/walldeco/bath/wallrope{
+	pixel_y = 32
+	},
+/turf/open/water/river{
+	dir = 4
+	},
+/area/indoors/town/clocktower)
 "pIi" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -13676,6 +13303,12 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"qmS" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/mountains/anvil/snowyforest)
 "qqx" = (
 /obj/item/candle/floorcandle1/lit,
 /turf/open/floor/cobblerock/alt,
@@ -13719,22 +13352,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
-"qyj" = (
-/obj/structure/water_pipe,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/turf/open/floor/metal,
-/area/under/mountains/anvil/upper)
 "qzn" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -13749,6 +13366,12 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"qCu" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/mountains/anvil/snowyforest)
 "qHQ" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 9
@@ -13774,6 +13397,19 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
+"qZi" = (
+/obj/structure/bars/grille,
+/obj/effect/waterfall,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/open/water/bath,
+/area/indoors/town/clocktower)
 "rbJ" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/cobble,
@@ -13809,6 +13445,16 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/metal,
 /area/under/mountains/anvil/upper)
+"rne" = (
+/obj/structure/chair/stool,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/effect/landmark/start/late/orthodoxist{
+	dir = 4
+	},
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "rnC" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/fuse/parchment,
@@ -13826,11 +13472,22 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/upper)
+"rAb" = (
+/obj/structure/bars,
+/obj/effect/mapping_helpers/structure/breaker,
+/turf/open/floor/hexstone,
+/area/indoors/mountains/anvil/keep)
 "rAH" = (
 /obj/structure/table/wood/large_new,
 /obj/item/candle/gcandelabra/lit,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/mountains/anvil/upperkeep)
+"rAW" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/dirt,
+/area/outdoors/mountains/anvil/snowyforest)
 "rEq" = (
 /obj/structure/table/stone_small,
 /obj/structure/carpet/blue,
@@ -13877,10 +13534,21 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"rWg" = (
+/obj/effect/landmark/start/outsider,
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/snowyforest)
 "scN" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/outdoors/mountains/anvil/peak)
+"sgT" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_x = 1;
+	layer = 3.0
+	},
+/turf/open/floor/metal/alt,
+/area/indoors/town/clocktower)
 "sha" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
@@ -13919,6 +13587,16 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"syY" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = 14
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 5
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "sAe" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -14030,6 +13708,28 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"sVA" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -12;
+	pixel_y = 27
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = 5;
+	pixel_y = 26
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 5;
+	pixel_x = 15
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1;
+	pixel_x = -17
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "sVW" = (
 /obj/structure/rack,
 /obj/projectile/bullet/reusable/cannonball,
@@ -14084,6 +13784,23 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"tpT" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = 8
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_x = -7;
+	pixel_y = -1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1;
+	pixel_x = 25;
+	pixel_y = 14
+	},
+/turf/open/floor/metal/alt,
+/area/indoors/town/clocktower)
 "tqL" = (
 /obj/machinery/light/fueled/firebowl/standing{
 	pixel_y = 4
@@ -14143,6 +13860,16 @@
 /obj/structure/water_pipe,
 /turf/open/floor/metal/alt,
 /area/under/mountains/anvil/upper)
+"tId" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 9;
+	pixel_x = -1
+	},
+/turf/open/openspace,
+/area/indoors/town/clocktower)
 "tIs" = (
 /obj/structure/lootable_structure/stockpile/mining_cache,
 /turf/open/floor/concrete,
@@ -14156,6 +13883,18 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
+"tTG" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/turf/open/floor/metal,
+/area/under/mountains/anvil/lower)
 "tYn" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/tile/masonic{
@@ -14174,6 +13913,20 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"ucv" = (
+/obj/structure/water_pipe,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
+/turf/open/floor/metal,
+/area/under/mountains/anvil/upper)
 "uek" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 8
@@ -14184,6 +13937,17 @@
 /obj/item/clothing/shoes/shortboots,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"ueC" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = 8
+	},
+/obj/machinery/light/fueled/wallfire/candle/lamp{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "uhq" = (
 /turf/open/water/clean,
 /area/indoors/mountains/anvil/keep)
@@ -14321,25 +14085,18 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"viy" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 9;
+	pixel_y = -1
+	},
+/turf/open/floor/metal/alt,
+/area/under/mountains/anvil/lower)
 "vkj" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
-"vmJ" = (
-/obj/item/gear/wood/unstable,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 21;
-	pixel_y = 0
-	},
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	dir = 8;
-	pixel_x = 13;
-	pixel_y = 0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/upper)
 "vno" = (
 /obj/structure/toilet,
 /turf/open/floor/blocks/newstone/alt,
@@ -14370,6 +14127,12 @@
 "vqN" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/peak)
+"vsi" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/snowyforest)
 "vsV" = (
 /turf/open/floor/plasteel/maniac/damaged,
 /area/outdoors/mountains/anvil/peak)
@@ -14383,6 +14146,19 @@
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
+"vwr" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 16
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 6;
+	pixel_x = 31
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie,
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/metal/alt,
+/area/indoors/town/clocktower)
 "vBi" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -14486,6 +14262,14 @@
 	dir = 5
 	},
 /area/outdoors/mountains/anvil/peak)
+"weU" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "whV" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/gem/green,
@@ -14499,20 +14283,15 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"wjU" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
-	},
-/turf/open/floor/concrete,
-/area/under/mountains/anvil/upper)
 "wnQ" = (
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/blocks/newstone,
 /area/indoors/mountains/anvil/upperkeep)
+"woC" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow/cross/slur,
+/turf/open/floor/cobble,
+/area/indoors/mountains/anvil/keep)
 "woH" = (
 /obj/structure/door/violet,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -14547,10 +14326,50 @@
 "wAI" = (
 /turf/open/water,
 /area/outdoors/mountains/anvil/peak)
+"wBH" = (
+/obj/structure/bookcase/random/eoratica{
+	name = "bookcase (Self Torture Manuscripts)";
+	pixel_x = 29;
+	pixel_y = 1;
+	density = 0;
+	opacity = 0
+	},
+/obj/structure/chair/stool/bar,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/landmark/start/late/absolver,
+/turf/open/floor/church/purple,
+/area/indoors/town/church/inquisition)
 "wEG" = (
 /obj/item/natural/rock/random_ore,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/peak)
+"wFV" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 5;
+	pixel_x = 1
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -16
+	},
+/obj/structure/water_pipe,
+/turf/open/openspace,
+/area/indoors/town/clocktower)
+"wHz" = (
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -2;
+	pixel_y = 32
+	},
+/obj/structure/fluff/walldeco/bath/wallrope{
+	pixel_y = 32
+	},
+/turf/open/water/river{
+	dir = 4
+	},
+/area/indoors/town/clocktower)
 "wLL" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/carpet/lord/center,
@@ -14574,15 +14393,17 @@
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
-"wXu" = (
-/obj/item/gear/metal/bronze,
+"wYv" = (
+/obj/item/gear/wood/unstable,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
-	pixel_x = 0;
-	pixel_y = 15;
-	layer = 3.0
+	dir = 8;
+	pixel_x = 21
 	},
-/obj/effect/decal/cleanable/blood,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 8;
+	pixel_x = 13
+	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/upper)
 "wYG" = (
@@ -14594,16 +14415,86 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"xbo" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = -14;
+	pixel_y = 44
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 10;
+	pixel_x = -29;
+	pixel_y = 15
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "xlu" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 8
 	},
 /turf/open/floor/blocks/newstone,
 /area/indoors/mountains/anvil/upperkeep)
+"xpK" = (
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -13;
+	pixel_y = 23
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_y = 22
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = 13;
+	pixel_y = 28
+	},
+/obj/structure/fluff/walldeco/bath/wallrope{
+	pixel_y = 32
+	},
+/obj/structure/waterwheel,
+/turf/open/water/river{
+	dir = 4
+	},
+/area/indoors/town/clocktower)
+"xsH" = (
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 5;
+	pixel_x = 8;
+	pixel_y = 30
+	},
+/obj/structure/fluff/walldeco/gear{
+	pixel_x = -2;
+	pixel_y = 32
+	},
+/obj/structure/fluff/walldeco/gear/small{
+	pixel_x = -18;
+	pixel_y = 24
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	dir = 4;
+	pixel_x = 8
+	},
+/turf/open/floor/metal/barograte,
+/area/indoors/town/clocktower)
 "xul" = (
 /obj/structure/water_pipe,
 /turf/open/floor/metal/barograte,
 /area/under/mountains/anvil/upper)
+"xwz" = (
+/obj/machinery/light/fueled/wallfire/candle/lamp,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/metal,
+/area/indoors/town/clocktower)
 "xxF" = (
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/cobblerock/alt,
@@ -14637,6 +14528,12 @@
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/peak)
+"xQk" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/snow,
+/area/outdoors/mountains/anvil/snowyforest)
 "xQq" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -14715,6 +14612,15 @@
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"yfK" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/concrete,
+/area/under/mountains/anvil/upper)
 "yhY" = (
 /obj/structure/chair/bench/throne/stone,
 /obj/effect/decal/cleanable/debris/stone,
@@ -14727,6 +14633,14 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"ykQ" = (
+/obj/structure/water_pipe,
+/obj/structure/fluff/walldeco/bath/wallpipes/innie{
+	pixel_y = 15;
+	layer = 3.0
+	},
+/turf/open/floor/metal/alt,
+/area/under/mountains/anvil/upper)
 "ykS" = (
 /obj/structure/chair/stool/bar/fancyplush,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -27171,11 +27085,11 @@ adi
 adi
 adi
 ahx
-aeM
+nwp
 alM
 alk
 adz
-aha
+dYF
 aXZ
 adi
 adi
@@ -48859,7 +48773,7 @@ adi
 adi
 aZR
 aZR
-nix
+dcC
 aLv
 aFR
 aSm
@@ -49667,7 +49581,7 @@ adi
 adi
 adi
 aZR
-nix
+dcC
 aFR
 aqY
 aKJ
@@ -65501,9 +65415,9 @@ apS
 apS
 apS
 aWI
-aJO
+woC
 aKe
-aBb
+ptM
 afn
 aWI
 aKe
@@ -65905,7 +65819,7 @@ apS
 apS
 apS
 aWI
-aBb
+ptM
 aTU
 aUn
 afn
@@ -66967,7 +66881,7 @@ adi
 adi
 adi
 ahx
-aru
+weU
 aFn
 aVu
 aXZ
@@ -67169,7 +67083,7 @@ aXZ
 ahx
 ahx
 ahx
-adC
+xwz
 aGs
 aqA
 ahx
@@ -67371,7 +67285,7 @@ aDt
 aBE
 aoD
 ahx
-aRz
+xbo
 aFn
 aVu
 ahx
@@ -67567,7 +67481,7 @@ adi
 adi
 ahx
 aXZ
-aGh
+pHB
 aRE
 aPI
 akr
@@ -67575,7 +67489,7 @@ aPI
 aXZ
 aRm
 arO
-aLw
+cYY
 aXZ
 aon
 ajk
@@ -67769,7 +67683,7 @@ adi
 adi
 adi
 aXZ
-aPm
+xpK
 atd
 akc
 aTb
@@ -67971,7 +67885,7 @@ adi
 adi
 adi
 aXZ
-apm
+wHz
 atY
 aSi
 akp
@@ -68173,7 +68087,7 @@ azu
 adi
 adi
 aXZ
-abA
+hlI
 aHd
 avJ
 abv
@@ -68288,7 +68202,7 @@ aET
 uhq
 uhq
 uhq
-asz
+abe
 afn
 afn
 afn
@@ -68383,10 +68297,10 @@ aQe
 aXZ
 alf
 arM
-aSO
+lRg
 aXZ
-apL
-aEa
+qZi
+cRT
 aXZ
 aEG
 auy
@@ -68490,7 +68404,7 @@ aET
 uhq
 uhq
 uhq
-aiB
+rAb
 afn
 afn
 afn
@@ -68583,7 +68497,7 @@ aMh
 apW
 abi
 aXZ
-aMm
+lIu
 aFn
 aVu
 aXZ
@@ -68692,7 +68606,7 @@ aET
 uhq
 uhq
 uhq
-asz
+abe
 afn
 aWI
 aWI
@@ -68785,7 +68699,7 @@ ahx
 ahx
 aXZ
 aXZ
-aPF
+mOd
 aOt
 aRh
 aXZ
@@ -68987,9 +68901,9 @@ adi
 adi
 adi
 aXZ
-aiS
-acU
-ajK
+xsH
+tpT
+ueC
 ahx
 adi
 aPv
@@ -74011,7 +73925,7 @@ aWI
 aVI
 aVI
 aWI
-aUF
+krw
 afn
 afn
 aaE
@@ -74415,7 +74329,7 @@ abZ
 aVI
 aVI
 aWI
-aUF
+krw
 aWy
 aWy
 aWy
@@ -88694,12 +88608,12 @@ adi
 aZR
 aiX
 aiN
-arz
-anv
+viy
+eJO
 aZl
 aOu
 acx
-aIr
+mMU
 acx
 acx
 aqx
@@ -88895,13 +88809,13 @@ adi
 adi
 aZR
 aiX
-aQC
-anE
-aMf
-ajf
-amD
+tTG
+mnE
+gSS
+lII
+huA
 acx
-aMP
+ePL
 aiX
 acx
 adi
@@ -89099,11 +89013,11 @@ aZR
 acx
 aHO
 aUQ
-aRC
+ifu
 aVi
 agG
 aiX
-alb
+eGe
 aiX
 acx
 adi
@@ -89301,7 +89215,7 @@ aZR
 acx
 aiN
 att
-anv
+eJO
 aZl
 aOu
 aiX
@@ -89908,10 +89822,10 @@ adi
 adi
 acx
 acx
-asb
-asb
-aMq
-asb
+cAL
+cAL
+iBx
+cAL
 acx
 adi
 adi
@@ -108170,7 +108084,7 @@ aoM
 aoM
 aoM
 aXZ
-ajY
+hkM
 aWR
 aFv
 aoT
@@ -108372,18 +108286,18 @@ aoM
 aoM
 aoM
 ahx
-aTZ
-aEe
+sVA
+lKB
 aXW
 aLz
 akV
 aEq
 amR
 aOv
-afO
+jOI
 amC
-agR
-alN
+wFV
+jrf
 ajP
 aqx
 aqx
@@ -108582,10 +108496,10 @@ abw
 aam
 aJI
 aMk
-adm
+iAW
 aqA
-afV
-anm
+tId
+syY
 ajP
 aqx
 aqx
@@ -108778,13 +108692,13 @@ aoM
 ahx
 ahx
 aHl
-acz
+vwr
 aDA
 anx
 ahx
 aKu
 ama
-avp
+sgT
 aYY
 ava
 aMh
@@ -108986,7 +108900,7 @@ aXZ
 aXZ
 aLG
 aWR
-adm
+iAW
 ahx
 ahx
 ahx
@@ -113381,7 +113295,7 @@ alG
 aAh
 aaA
 aBt
-auK
+hCb
 aBr
 adp
 azn
@@ -114975,7 +114889,7 @@ jOK
 nrn
 aUo
 aSb
-afv
+ezK
 aRk
 aVs
 aQB
@@ -118448,7 +118362,7 @@ aNz
 anW
 arS
 aAj
-aZP
+nbQ
 anW
 aYD
 aRk
@@ -119256,7 +119170,7 @@ alW
 aps
 arS
 aAj
-aZP
+nbQ
 aFu
 aHs
 aRk
@@ -121981,7 +121895,7 @@ aPv
 aLm
 avR
 avR
-aFL
+qCu
 aqw
 aLm
 aqw
@@ -122383,11 +122297,11 @@ aLm
 aPv
 aqw
 aqw
-avX
+mQe
 avR
 awV
 avR
-aKt
+vsi
 aLm
 aKS
 aKS
@@ -122789,7 +122703,7 @@ aqw
 aJk
 aip
 avR
-aKj
+fsx
 aPv
 aPv
 aKS
@@ -123562,7 +123476,7 @@ avR
 aPv
 aLm
 aLm
-aVT
+mMM
 aLm
 aLm
 aoM
@@ -123964,11 +123878,11 @@ avR
 avR
 avR
 aKS
-aFq
+rWg
 aLm
 aiC
 aLm
-aKt
+vsi
 aLm
 aoM
 aoM
@@ -124370,7 +124284,7 @@ avR
 avR
 avR
 aLm
-aIO
+eLj
 aqw
 aqw
 aqw
@@ -124538,7 +124452,7 @@ aqw
 aGY
 aGY
 aPv
-ach
+xQk
 aLm
 aKS
 aoM
@@ -124940,11 +124854,11 @@ aKS
 aqw
 aqw
 aqw
-aPB
+ogJ
 aqw
 awV
 avR
-ayS
+qmS
 aip
 aGY
 aGY
@@ -125346,7 +125260,7 @@ aLm
 aGY
 aip
 avR
-aKj
+fsx
 avR
 avR
 aip
@@ -125664,7 +125578,7 @@ akR
 aRk
 aRk
 asA
-eVH
+aIE
 lAJ
 afh
 ans
@@ -126215,7 +126129,7 @@ aPv
 aip
 avR
 aIS
-aDY
+rne
 aTn
 aVr
 atX
@@ -126619,7 +126533,7 @@ aPv
 aLm
 aLm
 aer
-aNd
+gqD
 aXL
 aVr
 apJ
@@ -127378,7 +127292,7 @@ aPv
 aLm
 aLm
 aLm
-aVT
+mMM
 aip
 avR
 aqx
@@ -127645,7 +127559,7 @@ aMA
 aVr
 aer
 awz
-aBA
+wBH
 aFx
 aCE
 aer
@@ -127780,11 +127694,11 @@ aPv
 avR
 aip
 aKS
-avX
+mQe
 aLm
 acW
 aLm
-ayS
+qmS
 avR
 aip
 aip
@@ -128186,7 +128100,7 @@ aLm
 avR
 avR
 avR
-all
+rAW
 aqw
 aqw
 avR
@@ -129059,7 +128973,7 @@ apJ
 aTv
 aIS
 aKk
-ayX
+drX
 aVr
 aVr
 azv
@@ -129099,7 +129013,7 @@ abD
 pFF
 tDH
 tDH
-cBM
+ykQ
 xul
 axK
 axK
@@ -129301,7 +129215,7 @@ aoM
 axK
 uWp
 mXN
-wXu
+eAv
 eIO
 xul
 axK
@@ -129503,7 +129417,7 @@ abD
 pFF
 tDH
 cRS
-wjU
+yfK
 mXN
 wYG
 tIs
@@ -129705,7 +129619,7 @@ abD
 axK
 isq
 muU
-eiT
+mRc
 bIx
 rmv
 isq
@@ -129907,9 +129821,9 @@ abD
 axK
 pIi
 dZX
-kWT
-vmJ
-qyj
+eso
+wYv
+ucv
 mXN
 axK
 unM

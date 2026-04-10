@@ -101,7 +101,7 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backl = /obj/item/gun/ballistic/bow/cross
 	beltr = /obj/item/ammo_holder/quiver/bolts
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair

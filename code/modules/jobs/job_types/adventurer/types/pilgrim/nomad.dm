@@ -46,7 +46,7 @@
 	head = /obj/item/clothing/head/papakha
 	cloak = /obj/item/clothing/cloak/volfmantle
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag

@@ -24,7 +24,7 @@
 	)
 
 /datum/job/butler
-	title = "Butler"
+	title = JOB_BUTLER
 	f_title = "Head Housekeeper"
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
@@ -59,7 +59,7 @@
 	)
 
 /datum/outfit/butler
-	name = "Butler"
+	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltr = /obj/item/storage/keyring/butler
 	beltl = /obj/item/storage/belt/pouch/coins/mid

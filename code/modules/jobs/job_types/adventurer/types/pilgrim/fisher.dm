@@ -34,7 +34,7 @@
 	)
 
 /datum/job/advclass/pilgrim/fisher
-	title = "Fisher"
+	title = JOB_FISHER
 	tutorial = "Simple folk with an affinity for catching fish out of any body of water, \
 				they are decent cooks and swimmers, living off the gifts of Abyssor."
 	allowed_sexes = list(MALE, FEMALE)

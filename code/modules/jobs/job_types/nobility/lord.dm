@@ -48,7 +48,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 
 /datum/job/lord
-	title = "Monarch"
+	title = JOB_MONARCH
 	var/ruler_title = "Monarch"
 	tutorial = "Elevated to your throne through a web of intrigue, political maneuvering, and divine sanction, you are the \
 	unquestioned authority of these lands. The Church has bestowed upon you the legitimacy of the gods themselves, and now \
@@ -139,7 +139,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
 /datum/outfit/lord
-	name = "Monarch"
+	name = JOB_MONARCH
 	head = /obj/item/clothing/head/crown/serpcrown
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquegold

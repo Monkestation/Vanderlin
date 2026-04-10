@@ -38,7 +38,7 @@
 	name = "Recruit Templar"
 	button_icon_state = "recruit_templar"
 
-	new_role = "Templar"
+	new_role = JOB_TEMPLAR
 	recruitment_faction = "Church"
 	recruitment_message = "Serve the Ten, %RECRUIT!"
 	accept_message = "FOR THE TEN!"
@@ -57,7 +57,7 @@
 	name = "Recruit Acolyte"
 	button_icon_state = "recruit_acolyte"
 
-	new_role = "Acolyte"
+	new_role = JOB_ACOLYTE
 	recruitment_faction = "Church"
 	recruitment_message = "Serve the Ten, %RECRUIT!"
 	accept_message = "FOR THE TEN!"
@@ -75,7 +75,7 @@
 	name = "Recruit Churchling"
 	button_icon_state = "recruit_acolyte"
 
-	new_role = "Churchling"
+	new_role = JOB_CHURCHLING
 	recruitment_faction = "Church"
 	recruitment_message = "Serve the Ten, %RECRUIT!"
 	accept_message = "FOR THE TEN!"
