@@ -3,7 +3,7 @@
 	if(!user)
 		return
 	var/obj/item/held_item = user.get_active_held_item()
-	if(user.cmode)
+	if(user.cmode && !HAS_TRAIT(user, TRAIT_PACIFISM))
 		if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_NECK))
 			if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
 				playsound(src, 'sound/surgery/scalpel1.ogg', 100, TRUE, -1)
