@@ -188,9 +188,9 @@
 	var/turf/turf = get_turf(owner)
 
 	if(!allows_z_rise)
-		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, WING_TRAIT)
 	else
-		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, WING_TRAIT)
 
 		var/turf/above_turf = GET_TURF_ABOVE(turf)
 		if(owner.can_zTravel(direction = UP) && isopenspace(above_turf))
@@ -252,9 +252,9 @@
 
 /datum/action/item_action/organ_action/use/flight/proc/cancel_flight()
 	if(allows_z_rise)
-		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, WING_TRAIT)
 	else
-		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, WING_TRAIT)
 
 	if(flight_timer)
 		deltimer(flight_timer)
