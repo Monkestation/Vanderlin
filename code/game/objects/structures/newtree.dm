@@ -23,6 +23,7 @@
 /obj/structure/flora/newtree/Initialize()
 	. = ..()
 	GenerateTree()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/structure/flora/newtree/Destroy()
 	SStreesetup.initialize_me -= src
@@ -390,6 +391,7 @@
 		100,\
 		extrarange = SHORT_RANGE_SOUND_EXTRARANGE,\
 	)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/flora/newbranch/update_overlays()

@@ -666,6 +666,11 @@
 		current_ladder.use(src, TRUE)
 		return
 
+	if(iswaterturf(current_turf) && HAS_TRAIT(src, TRAIT_MOVE_SWIMMING))
+		var/turf/open/water/water_turf = current_turf
+		water_turf.try_z_swim(src, TRUE)
+		return
+
 	if(!can_z_move(UP, current_turf, null, ZMOVE_CAN_FLY_CHECKS|ZMOVE_FEEDBACK))
 		return
 	balloon_alert(src, "moving up...")
@@ -691,6 +696,11 @@
 	var/obj/structure/ladder/current_ladder = locate() in current_turf
 	if(current_ladder)
 		current_ladder.use(src, FALSE)
+		return
+
+	if(iswaterturf(current_turf) && HAS_TRAIT(src, TRAIT_MOVE_SWIMMING))
+		var/turf/open/water/water_turf = current_turf
+		water_turf.try_z_swim(src, FALSE)
 		return
 
 	if(!can_z_move(DOWN, current_turf, null, ZMOVE_CAN_FLY_CHECKS|ZMOVE_FEEDBACK))

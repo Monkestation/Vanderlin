@@ -9,6 +9,10 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	/atom/movable/lighting_object
 )))
 
+/// If this movable entered a turf with the immerse element.
+/// ONLY FOR LOCAL USE WITH IMMERSE ELEMENT TO PREVENT SIGNAL OVERRIDES. USE TRAIT_IMMERSED FOR CHECKING IF A MOVABLE IS ACTUALLY IMMERSED
+#define TRAIT_ENTERED_IMMERSE "entered_immersed"
+
 /// A visual element that makes movables entering the attached turfs look immersed into that turf.
 /// May the gods forgive me for the bullshit you're about to witness
 /datum/element/immerse
@@ -26,17 +30,17 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	var/mask_icon = "immerse"
 	/// Alpha of the mask, to make the liquid partially transparent
 	var/alpha = 180
-	/// Does immersion add the TRAIT_MOVE_SWIMMING trait to turn on SWIMMING movement flag?
-	var/swimming_animation = FALSE
+	/// The water height of the turf. Used to determine special behaviors behaviors of immersion
+	var/water_height = 0
 
-/datum/element/immerse/Attach(turf/target, mask_icon = "immerse", alpha = 180, swimming_animation = FALSE)
+/datum/element/immerse/Attach(turf/target, mask_icon = "immerse", alpha = 180, water_height = 0)
 	. = ..()
 	if(!isturf(target) || !mask_icon)
 		return ELEMENT_INCOMPATIBLE
 
 	src.mask_icon = mask_icon
 	src.alpha = alpha
-	src.swimming_animation = swimming_animation
+	src.water_height = water_height
 
 	RegisterSignal(target, SIGNAL_ADDTRAIT(TRAIT_IMMERSE_STOPPED), PROC_REF(stop_immersion))
 	RegisterSignal(target, SIGNAL_REMOVETRAIT(TRAIT_IMMERSE_STOPPED), PROC_REF(start_immersion))
@@ -47,7 +51,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 /datum/element/immerse/Detach(turf/source)
 	UnregisterSignal(source, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSE_STOPPED), SIGNAL_REMOVETRAIT(TRAIT_IMMERSE_STOPPED)))
 	if(!HAS_TRAIT(source, TRAIT_IMMERSE_STOPPED))
-		stop_immersion(source)
+		stop_immersion(source, TRUE)
 	return ..()
 
 /// Makes the element start affecting the turf and its contents. Called on Attach() or when TRAIT_IMMERSE_STOPPED is removed.
@@ -62,8 +66,10 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 		on_init_or_entered(source, movable)
 
 /// Stops the element from affecting on the turf and its contents. Called on Detach() or when TRAIT_IMMERSE_STOPPED is added.
-/datum/element/immerse/proc/stop_immersion(turf/source)
+/datum/element/immerse/proc/stop_immersion(turf/source, forced)
 	SIGNAL_HANDLER
+	if(!forced && water_height >= WATER_HEIGHT_FULL)
+		return
 	UnregisterSignal(source, list(COMSIG_ATOM_ABSTRACT_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, COMSIG_ATOM_ABSTRACT_EXITED))
 	for(var/atom/movable/movable as anything in attached_turf_contents[source])
 		remove_from_element(source, movable)
@@ -79,7 +85,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	if(QDELETED(movable))
 		return
 	/*
-	if(HAS_TRAIT(movable, TRAIT_IMMERSED) || HAS_TRAIT(movable, TRAIT_WALLMOUNTED))
+	if(HAS_TRAIT(movable, TRAIT_ENTERED_IMMERSE) || HAS_TRAIT(movable, TRAIT_WALLMOUNTED))
 		return
 	if(!ISINRANGE(PLANE_TO_TRUE(movable.plane), FLOOR_PLANE, GAME_PLANE))
 		return
@@ -89,7 +95,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	if(movable.layer >= layer_to_check)
 		return
 	*/
-	if(HAS_TRAIT(movable, TRAIT_IMMERSED))
+	if(HAS_TRAIT(movable, TRAIT_ENTERED_IMMERSE))
 		return
 	if(!ISINRANGE(movable.plane, GAME_PLANE, GAME_PLANE_UPPER))
 		return
@@ -111,19 +117,11 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	RegisterSignal(movable, COMSIG_PARENT_QDELETING, PROC_REF(on_movable_qdel))
 	try_immerse(movable, buckled)
 	LAZYADD(attached_turf_contents[source], movable)
-	// ADD_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
-	// if(swimming_animation)
-	// 	ADD_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
+	ADD_TRAIT(movable, TRAIT_ENTERED_IMMERSE, ELEMENT_TRAIT(src))
 
 /datum/element/immerse/proc/on_movable_qdel(atom/movable/source)
 	SIGNAL_HANDLER
 	remove_from_element(source.loc, source)
-
-/datum/element/immerse/proc/immerse_atom(atom/movable/movable)
-	add_immerse_overlay(movable)
-	ADD_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
-	if(swimming_animation)
-		ADD_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
 
 /**
  * Called by init_or_entered() and on_set_buckled().
@@ -133,36 +131,38 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 /datum/element/immerse/proc/try_immerse(atom/movable/movable, atom/movable/buckled)
 	var/atom/movable/to_check = buckled || movable
 	if(!(to_check.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && !movable.throwing)
-		// add_immerse_overlay(movable)
-		immerse_atom(movable)
+		add_immerse_overlay(movable)
 	if(buckled)
 		return
 	RegisterSignal(movable, COMSIG_MOVETYPE_FLAG_ENABLED, PROC_REF(on_move_flag_enabled))
 	RegisterSignal(movable, COMSIG_MOVETYPE_FLAG_DISABLED, PROC_REF(on_move_flag_disabled))
 	RegisterSignal(movable, COMSIG_MOVABLE_POST_THROW, PROC_REF(on_throw))
 	RegisterSignal(movable, COMSIG_MOVABLE_THROW_LANDED, PROC_REF(on_throw_landed))
-
-/datum/element/immerse/proc/unimmerse_atom(atom/movable/movable)
-	remove_immerse_overlay(movable)
-	REMOVE_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
-	if(swimming_animation)
-		REMOVE_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
+	RegisterSignal(movable, COMSIG_CAN_Z_MOVE, PROC_REF(on_try_z_move))
 
 /// Called by on_set_buckled() and remove_from_element().
 /// This removes the filter and signals from the movable unless it doesn't have them.
 /datum/element/immerse/proc/try_unimmerse(atom/movable/movable, atom/movable/buckled)
 	var/atom/movable/to_check = buckled || movable
 	if(!(to_check.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && !movable.throwing)
-		// remove_immerse_overlay(movable)
-		unimmerse_atom(movable)
+		remove_immerse_overlay(movable)
 	if(buckled)
 		return
 	UnregisterSignal(movable, list(
 		COMSIG_MOVETYPE_FLAG_ENABLED,
 		COMSIG_MOVETYPE_FLAG_DISABLED,
 		COMSIG_MOVABLE_POST_THROW,
-		COMSIG_MOVABLE_THROW_LANDED
+		COMSIG_MOVABLE_THROW_LANDED,
+		COMSIG_CAN_Z_MOVE
 	))
+
+/datum/element/immerse/proc/on_try_z_move(atom/movable/source, turf/start, turf/destination)
+	SIGNAL_HANDLER
+	// This works because when throwing mobs enter the turf they only get immersed when they stop being thrown.
+	if(iswaterturf(start) && iswaterturf(destination))
+		if(HAS_TRAIT(source, TRAIT_MOVE_SWIMMING))
+			return
+		return COMPONENT_CANT_Z_MOVE
 
 /datum/element/immerse/proc/on_set_buckled(mob/living/source, atom/movable/new_buckled)
 	SIGNAL_HANDLER
@@ -174,44 +174,36 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	SIGNAL_HANDLER
 	if(!(flag & MOVETYPES_NOT_TOUCHING_GROUND) || (old_movement_type & MOVETYPES_NOT_TOUCHING_GROUND) || source.throwing)
 		return
-	// remove_immerse_overlay(source)
-	unimmerse_atom(source)
+	remove_immerse_overlay(source)
 	for(var/mob/living/buckled_mob as anything in source.buckled_mobs)
-		// remove_immerse_overlay(buckled_mob)
-		unimmerse_atom(source)
+		remove_immerse_overlay(buckled_mob)
 
 /// Works just like on_move_flag_enabled, except it only has to check that movable isn't flying
 /datum/element/immerse/proc/on_throw(atom/movable/source)
 	SIGNAL_HANDLER
 	if(source.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return
-	// remove_immerse_overlay(source)
-	unimmerse_atom(source)
+	remove_immerse_overlay(source)
 	for(var/mob/living/buckled_mob as anything in source.buckled_mobs)
-		// remove_immerse_overlay(buckled_mob)
-		unimmerse_atom(source)
+		remove_immerse_overlay(buckled_mob)
 
 /// Readds the overlay to the mob and bucklees if no longer flying.
 /datum/element/immerse/proc/on_move_flag_disabled(atom/movable/source, flag, old_movement_type)
 	SIGNAL_HANDLER
 	if(!(flag & MOVETYPES_NOT_TOUCHING_GROUND) || (source.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) || source.throwing)
 		return
-	// add_immerse_overlay(source)
-	immerse_atom(source)
+	add_immerse_overlay(source)
 	for(var/mob/living/buckled_mob as anything in source.buckled_mobs)
-		// add_immerse_overlay(buckled_mob)
-		immerse_atom(buckled_mob)
+		add_immerse_overlay(buckled_mob)
 
 /// Works just like on_move_flag_disabled, except it only has to check that movable isn't flying
 /datum/element/immerse/proc/on_throw_landed(atom/movable/source)
 	SIGNAL_HANDLER
 	if(source.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return
-	// add_immerse_overlay(source)
-	immerse_atom(source)
+	add_immerse_overlay(source)
 	for(var/mob/living/buckled_mob as anything in source.buckled_mobs)
-		// add_immerse_overlay(buckled_mob)
-		immerse_atom(buckled_mob)
+		add_immerse_overlay(buckled_mob)
 
 /// Called when a movable exits the turf. If its new location is not in the list of turfs with this element,
 /// remove the movable from the element.
@@ -233,9 +225,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	try_unimmerse(movable, buckled)
 	LAZYREMOVE(attached_turf_contents[source], movable)
 	UnregisterSignal(movable, list(COMSIG_LIVING_SET_BUCKLED, COMSIG_PARENT_QDELETING, COMSIG_LIVING_UPDATE_OFFSETS, COMSIG_ATOM_SPIN_ANIMATION, COMSIG_LIVING_POST_UPDATE_TRANSFORM))
-	// REMOVE_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
-	// if(swimming_animation)
-	// 	REMOVE_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
+	REMOVE_TRAIT(movable, TRAIT_ENTERED_IMMERSE, ELEMENT_TRAIT(src))
 
 /// Generate a mask filter mutable to use as render_source for the alpha filter based on provided width, height and immersion state
 /datum/element/immerse/proc/generate_immerse_mask(width, height, is_below_water)
@@ -251,17 +241,17 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 		return target_mask
 
 	if (width == ICON_SIZE_X && height == ICON_SIZE_Y)
-		target_mask = mutable_appearance('icons/turf/newwater.dmi', mask_icon, alpha = alpha)
+		target_mask = mutable_appearance('icons/turf/natural/liquids.dmi', mask_icon, alpha = alpha)
 		immersion_masks[mask_key] = target_mask
 		return target_mask
 
-	var/icon/column_icon = icon('icons/turf/newwater.dmi', mask_icon)
+	var/icon/column_icon = icon('icons/turf/natural/liquids.dmi', mask_icon)
 	var/y_tiles = 1
 	if (height != ICON_SIZE_Y)
 		column_icon.Crop(1, 1, ICON_SIZE_X, ICON_SIZE_Y) // Use base icon and crop it out so animation frames respect dmi's delays
 		y_tiles = ceil((height / ICON_SIZE_Y - 1) / 2) + 1
 		column_icon.Scale(ICON_SIZE_X, y_tiles * ICON_SIZE_Y)
-		var/icon/effect_icon = icon('icons/turf/newwater.dmi', mask_icon)
+		var/icon/effect_icon = icon('icons/turf/natural/liquids.dmi', mask_icon)
 		var/icon/fill_icon = icon('icons/effects/alphacolors.dmi', "white")
 		for (var/y_tile in 1 to y_tiles - 1)
 			column_icon.Blend(fill_icon, ICON_OVERLAY, 1, 1 + (y_tile - 1) * ICON_SIZE_Y)
@@ -271,7 +261,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	if (width == ICON_SIZE_X)
 		immerse_icon = column_icon
 	else
-		immerse_icon = icon('icons/turf/newwater.dmi', mask_icon) // Use base icon and crop it out so animation frames respect dmi's delays
+		immerse_icon = icon('icons/turf/natural/liquids.dmi', mask_icon) // Use base icon and crop it out so animation frames respect dmi's delays
 		immerse_icon.Crop(1, 1, ICON_SIZE_X, ICON_SIZE_Y)
 		immerse_icon.Scale(ceil(width / ICON_SIZE_X) * ICON_SIZE_X, ceil(height / ICON_SIZE_Y) * ICON_SIZE_Y)
 		for (var/x_tile in 1 to ceil(width / ICON_SIZE_X))
@@ -305,6 +295,13 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	// Should always render above any other filters that could be adding visuals
 	movable.add_filter("immerse_mask", INFINITY, alpha_mask_filter(y = -floor((movable.get_cached_height() - ICON_SIZE_Y) / 2) - movable.pixel_z, render_source = effect_relay.render_target, flags = MASK_INVERSE))
 
+	ADD_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
+	if(water_height >= WATER_HEIGHT_DEEP)
+		if(isitem(movable))
+			DO_FLOATING_ANIM(movable)
+		else
+			ADD_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
+
 /datum/element/immerse/proc/remove_immerse_overlay(atom/movable/movable, deleting = TRUE)
 	movable.remove_filter("immerse_mask")
 	if (!deleting)
@@ -313,6 +310,13 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 	movable.vis_contents -= mask
 	generated_visual_overlays -= movable
 	QDEL_NULL(mask)
+
+	REMOVE_TRAIT(movable, TRAIT_IMMERSED, ELEMENT_TRAIT(src))
+	if(water_height >= WATER_HEIGHT_DEEP)
+		if(isitem(movable))
+			STOP_FLOATING_ANIM(movable)
+		else
+			REMOVE_TRAIT(movable, TRAIT_MOVE_SWIMMING, ELEMENT_TRAIT(src))
 
 /// A band-aid to keep the (unique) visual overlay from scaling and rotating along with its owner. I'm sorry.
 /datum/element/immerse/proc/on_update_transform(mob/living/source, resize, new_lying_angle, is_opposite_angle)
@@ -355,3 +359,5 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 /atom/movable/immerse_mask
 	appearance_flags = RESET_TRANSFORM|RESET_COLOR|RESET_ALPHA|KEEP_APART
 	vis_flags = VIS_HIDE
+
+#undef TRAIT_ENTERED_IMMERSE

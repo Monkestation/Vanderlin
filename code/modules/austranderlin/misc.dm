@@ -11,28 +11,6 @@
 	icon_state = "spongebob_deployed"
 	stolen_painting = /obj/item/painting/the_bob
 
-/// Piss
-/turf/open/water/river/sewer
-	desc = "Piss-laden water! Flowing swiftly along the river."
-	icon_state = MAP_SWITCH("paving", "rivermovealt-dir")
-	base_icon_state = "paving"
-	water_reagent = /datum/reagent/water/gross/sewer
-	cleanliness_factor = -5
-	slowdown = 5
-	water_height = WATER_HEIGHT_ANKLE
-	//water_level = 2
-	slowdown = 5
-	flow_speed = 1 SECONDS
-
-/turf/open/water/river/sewer/roofflow
-	icon_state = MAP_SWITCH("roof", "rivermovealt-dir")
-	base_icon_state = "roof"
-
-/turf/open/water/river/sewer/floorflow
-	icon_state = MAP_SWITCH("wooden_floort", "rivermovealt-dir")
-	base_icon_state = "wooden_floort"
-
-
 ///random placed items
 /obj/item/clothing/shirt/robe/colored/sundweller
 	color = CLOTHING_MUSTARD_YELLOW

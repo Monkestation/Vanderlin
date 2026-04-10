@@ -86,14 +86,13 @@
 	if(CHECK_MOVE_LOOP_FLAGS(floater, MOVEMENT_LOOP_CALLED_MOVE))
 		return
 
-	var/swimming_skill = GET_MOB_SKILL_VALUE_OLD(floater, /datum/attribute/skill/misc/swimming) * 2.5
+	var/swimming_skill = (GET_MOB_SKILL_VALUE(floater, /datum/attribute/skill/misc/swimming) / SKILL_LEVEL_LEGENDARY) * stamina_entry_cost
 
 	var/encumbrance_penalty = ENCUMBRANCE_TO_SIGMOID(floater.encumbrance) * stamina_entry_cost
 
 	var/effective_stamina_entry_cost = stamina_entry_cost - swimming_skill + encumbrance_penalty
-	if(effective_stamina_entry_cost > 0)
-		if(!floater.adjust_stamina(effective_stamina_entry_cost, "drown"))
-			addtimer(CALLBACK(floater, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
+	if(effective_stamina_entry_cost > 0 && !floater.adjust_stamina(effective_stamina_entry_cost, "drown"))
+		addtimer(CALLBACK(floater, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
 
 	var/swimming_experience = stamina_entry_cost * GET_MOB_ATTRIBUTE_VALUE(floater, STAT_ENDURANCE) * 0.03
 	floater.adjust_experience(/datum/attribute/skill/misc/swimming, swimming_experience)
@@ -147,9 +146,9 @@
 		var/athletics_skill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/swimming)
 		var/final_stamina_cost = effective_stamina_per_interval - athletics_skill
 
-		if(final_stamina_cost > 0)
-			if(!owner.adjust_stamina(final_stamina_cost, "drown"))
-				COOLDOWN_START(src, ticking_stamina_pity, 5 SECONDS)
+		if(final_stamina_cost > 0 && !owner.adjust_stamina(final_stamina_cost, "drown"))
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
+			COOLDOWN_START(src, ticking_stamina_pity, 6 SECONDS)
 
 	// You might not be swimming but you can breathe
 	if(HAS_TRAIT(owner, TRAIT_NODROWN) || HAS_TRAIT(owner, TRAIT_NOBREATH))

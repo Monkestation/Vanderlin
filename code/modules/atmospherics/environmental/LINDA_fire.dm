@@ -35,6 +35,7 @@
 	var/firelevel = 1 //RTD new firehotspot mechanics
 
 /obj/effect/hotspot/extinguish()
+	. = ..()
 	if(isturf(loc))
 		new /obj/effect/temp_visual/small_smoke(src.loc)
 	qdel(src)

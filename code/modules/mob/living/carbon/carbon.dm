@@ -77,7 +77,7 @@
 	AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
 	AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 
-	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //15% damage reduction per level
+	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
 	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
 	damage *= skill_modifier
 	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT)))

@@ -74,8 +74,6 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define FALL_STOP_INTERCEPTING (1<<2)
 /// Used when the grip on a pulled object shouldn't be broken.
 #define FALL_RETAIN_PULL (1<<3)
-/// Stops the movable from calling atom/movable/proc/onZImpact(). FALL_INTERCEPTED also has this behavior.
-#define FALL_NO_ZIMPACT (1<<0)
 
 /// Runs check_pulling() by the end of [/atom/movable/proc/zMove] for every movable that's pulling something. Should be kept enabled unless you know what you are doing.
 #define ZMOVE_CHECK_PULLING (1<<0)
@@ -86,6 +84,7 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define ZMOVE_CAN_FLY_CHECKS (1<<3)
 #define ZMOVE_INCAPACITATED_CHECKS (1<<4)
 #define ZMOVE_LYING_CHECKS (1<<5)
+#define ZMOVE_WATER_CHECKS (1<<6)
 /// Doesn't call zPassIn() and zPassOut()
 #define ZMOVE_IGNORE_OBSTACLES (1<<6)
 /// Gives players chat feedbacks if they're unable to move through z levels.
@@ -109,6 +108,8 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define Z_MOVE_CLIMBING_FLAGS (ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
 /// Used for falling down open space.
 #define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)
+/// Used when swimming
+#define ZMOVE_SWIM_FLAGS (ZMOVE_WATER_CHECKS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED)
 
 ///Return values for moveloop Move()
 #define MOVELOOP_FAILURE 0

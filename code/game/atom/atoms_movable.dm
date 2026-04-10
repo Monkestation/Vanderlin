@@ -440,6 +440,8 @@
 		return FALSE
 	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & (FLYING|FLOATING))))
 		return FALSE
+	if(z_move_flags & ZMOVE_WATER_CHECKS && !iswaterturf(destination))
+		return FALSE
 	// if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & (FLYING|FLOATING)))
 	if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & FLYING)) // EXPERIMENTAL: Floating doesn't let you fly up and down
 		if(z_move_flags & ZMOVE_FEEDBACK)
@@ -847,12 +849,7 @@
 					target_turf = get_step(pulling, get_dir(pulling, current_turf))
 
 				if(target_turf != current_turf || (moving_diagonally != SECOND_DIAG_STEP && ISDIAGONALDIR(pull_dir)) || get_dist(src, pulling) > 1)
-					var/pulling_update_dir = TRUE
-					for(var/obj/item/grabbing/G in pulling.grabbedby) // only chokeholds prevent turning
-						if(G.chokehold)
-							pulling_update_dir = FALSE
-							break
-					pulling.move_from_pull(src, target_turf, glide_size, pulling_update_dir)
+					pulling.move_from_pull(src, target_turf, glide_size)
 			if (pulledby)
 				if (pulledby.currently_z_moving)
 					check_pulling(z_allowed = TRUE)
@@ -885,9 +882,9 @@
 			set_currently_z_moving(FALSE, TRUE)
 
 /// Called when src is being moved to a target turf because another movable (puller) is moving around.
-/atom/movable/proc/move_from_pull(atom/movable/puller, turf/target_turf, glide_size_override, pulling_update_dir = TRUE)
+/atom/movable/proc/move_from_pull(atom/movable/puller, turf/target_turf, glide_size_override)
 	moving_from_pull = puller
-	Move(target_turf, get_dir(src, target_turf), glide_size_override, pulling_update_dir)
+	Move(target_turf, get_dir(src, target_turf), glide_size_override)
 	moving_from_pull = null
 
 /**
@@ -1622,12 +1619,6 @@
 
 	H.selected_default_language = .
 	. = chosen_langtype
-
-/* End language procs */
-/atom/movable/proc/ConveyorMove(movedir)
-	set waitfor = FALSE
-	if(!anchored)
-		step(src, movedir)
 
 //Returns an atom's power cell, if it has one. Overload for individual items.
 /atom/movable/proc/get_cell()

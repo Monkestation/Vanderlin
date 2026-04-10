@@ -100,8 +100,6 @@
 #define OPENSPACE_PLANE -14 //! Openspace plane below all turfs
 #define OPENSPACE_BACKDROP_PLANE -13 //! Black square just over openspace plane to guaranteed cover all in openspace turf
 
-#define TRANSPARENT_FLOOR_PLANE -12
-
 #define FLOOR_PLANE -11
 #define FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE_RENDER_TARGET"
 #define REFLECTION_PLANE -10

@@ -143,6 +143,12 @@ GLOBAL_LIST_INIT(barefootstep, list(
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
 		'sound/foley/footsteps/FTMUD (5).ogg'), 100, 0),
+	FOOTSTEP_OLDWOOD = list(list(
+		'sound/foley/footsteps/FTOLDWOO_A1.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A2.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A3.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A4.ogg',
+		'sound/foley/footsteps/FTOLDWOO_A5.ogg'), 42, 0),
 ))
 
 //claw footsteps lists

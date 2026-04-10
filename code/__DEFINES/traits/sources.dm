@@ -103,6 +103,8 @@
 #define LACKING_MANIPULATION_APPENDAGES_TRAIT "lacking-manipulation-appengades"
 /// trait associated with being handcuffed
 #define HANDCUFFED_TRAIT "handcuffed"
+///Turf trait for when a turf is transparent
+#define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"
 /// Trait applied by by [/datum/component/soulstoned]
 #define SOULSTONE_TRAIT "soulstone"
 /// Trait applied to brain mobs when they lack external aid for locomotion, such as being inside a mech.

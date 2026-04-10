@@ -206,7 +206,7 @@ SUBSYSTEM_DEF(throwing)
 
 		if(!hit) // EXPERIMENTAL: Make thrown things fall and impact things after hitting openspace
 			var/turf/T = get_turf(thrownthing)
-			if(T?.zFall(thrownthing, flags = isitem(thrownthing) ? FALL_NO_ZIMPACT : NONE)) // throwing has been nulled so this works
+			if(T?.zFall(thrownthing)) // throwing has been nulled so this works
 				var/atom/movable/actual_target = initial_target?.resolve()
 				for(var/atom/movable/obstacle as anything in get_turf(thrownthing))
 					if (obstacle == thrownthing || (obstacle == thrower && !ismob(thrownthing)))

@@ -55,7 +55,12 @@
 
 /datum/element/watery_tile/proc/dip_in(atom/movable/source)
 	SIGNAL_HANDLER
-	// source.extinguish()
+	source.extinguish()
+	if(istype(source, /obj/item/clothing))
+		var/obj/item/clothing/cloth = source
+		if(cloth.wetable)
+			cloth.wet.add_water(20, cleanliness_factor < 0)
+
 	if(!isliving(source))
 		return
 	var/mob/living/our_mob = source

@@ -603,7 +603,7 @@
 /**
  * Updates the offsets of the passed mob according to the passed grab state and the direction between them and us
  *
- * * M - the mob to update the offsets of
+ * * mob_to_set - the mob to update the offsets of
  * * grab_state - the state of the grab
  * * animate - whether or not to animate the offsets
  */
@@ -616,8 +616,7 @@
 			offset = GRAB_PIXEL_SHIFT_PASSIVE
 		if(GRAB_AGGRESSIVE)
 			offset = GRAB_PIXEL_SHIFT_AGGRESSIVE
-	mob_to_set.setDir(get_dir(mob_to_set, src))
-	var/dir_filter = mob_to_set.dir
+	var/dir_filter = get_dir(mob_to_set, src)
 	if(ISDIAGONALDIR(dir_filter))
 		dir_filter = EWCOMPONENT(dir_filter)
 	switch(dir_filter)
@@ -2091,11 +2090,6 @@
 						"[C] topples over [src]!", \
 						"[C] leaps out of [src]'s way!")]</span>")
 	C.Paralyze(40)
-
-/mob/living/ConveyorMove()
-	if((movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && !stat)
-		return
-	return ..()
 
 /mob/living/can_be_pulled()
 	return ..() && !(buckled && buckled.buckle_prevents_pull)

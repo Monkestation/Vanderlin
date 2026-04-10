@@ -5,6 +5,8 @@
 /datum/component/convey
 	var/living_parent = FALSE
 	var/speed
+	var/move_loop_flags = MOVEMENT_LOOP_IGNORE_PRIORITY|MOVEMENT_LOOP_OUTSIDE_CONTROL
+	var/movement_flags_skip = MOVETYPES_FLOATING_ANIMATION
 
 /datum/component/convey/Initialize(direction, speed, start_delay)
 	if(!ismovable(parent))
@@ -12,10 +14,10 @@
 
 	living_parent = isliving(parent)
 	src.speed = speed
-	if(!start_delay)
+	if(!isnum(start_delay))
 		start_delay = speed
 	var/atom/movable/moving_parent = parent
-	var/datum/move_loop/loop = SSmove_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags=MOVEMENT_LOOP_IGNORE_PRIORITY|MOVEMENT_LOOP_OUTSIDE_CONTROL)
+	var/datum/move_loop/loop = SSmove_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags = move_loop_flags)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(should_move))
 	RegisterSignal(loop, COMSIG_PARENT_QDELETING, PROC_REF(loop_ended))
 
@@ -24,7 +26,7 @@
 	source.delay = speed //We use the default delay
 	if(living_parent)
 		var/mob/living/moving_mob = parent
-		if((moving_mob.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && !moving_mob.stat)
+		if((moving_mob.movement_type & movement_flags_skip) && !moving_mob.stat)
 			return MOVELOOP_SKIP_STEP
 	var/atom/movable/moving_parent = parent
 	if(moving_parent.anchored)
@@ -35,3 +37,14 @@
 	if(QDELETED(src))
 		return
 	qdel(src)
+
+/datum/component/convey/current
+	move_loop_flags = MOVEMENT_LOOP_IGNORE_PRIORITY
+	movement_flags_skip = MOVETYPES_NOT_TOUCHING_GROUND
+
+/datum/component/convey/current/should_move(datum/move_loop/source)
+	source.delay = speed //We use the default delay
+	var/atom/movable/moving_parent = parent
+	if(!HAS_TRAIT(moving_parent, TRAIT_IMMERSED))
+		return MOVELOOP_SKIP_STEP
+	return ..()

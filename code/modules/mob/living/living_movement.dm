@@ -113,6 +113,20 @@
 
 	remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
 
+/mob/living/up()
+	if(stat >= UNCONSCIOUS)
+		return
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
+	return ..()
+
+/mob/living/down()
+	if(stat >= UNCONSCIOUS)
+		return
+	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
+		return
+	return ..()
+
 /**
  * We want to relay the zmovement to the buckled atom when possible
  * and only run what we can't have on buckled.zMove() or buckled.can_z_move() here.

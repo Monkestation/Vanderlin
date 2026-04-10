@@ -313,7 +313,7 @@
 	for(var/atom/movable/falling_mov as anything in falling_movables)
 		if(!(flags & FALL_RETAIN_PULL))
 			falling_mov.stop_pulling()
-		if(!(flags & FALL_INTERCEPTED) && !(flags & FALL_NO_ZIMPACT))
+		if(!(flags & FALL_INTERCEPTED))
 			falling_mov.onZImpact(src, levels)
 		if(falling_mov.pulledby && (falling_mov.z != falling_mov.pulledby.z || get_dist(falling_mov, falling_mov.pulledby) > 1))
 			falling_mov.pulledby.stop_pulling()

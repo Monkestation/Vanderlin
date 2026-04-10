@@ -60,6 +60,7 @@
 	source.movement_type &= ~flag
 	if((old_state & (MOVETYPES_FLOATING_ANIMATION)) && !(source.movement_type & (MOVETYPES_FLOATING_ANIMATION)))
 		STOP_FLOATING_ANIM(source)
+	if((old_state & (MOVETYPES_NOT_TOUCHING_GROUND)) && !(source.movement_type & (MOVETYPES_NOT_TOUCHING_GROUND)))
 		var/turf/pitfall = source.loc //Things that don't fly fall in open space.
 		if(istype(pitfall))
 			pitfall.zFall(source)

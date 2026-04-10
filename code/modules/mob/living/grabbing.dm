@@ -154,6 +154,8 @@
 		return
 	grabbee = pulledby
 	RegisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(upon_stop_pulling))
+	if(ismob(grabbed))
+		RegisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE, PROC_REF(on_tried_turn))
 	START_PROCESSING(SSfastprocess, src)
 
 /obj/item/grabbing/proc/upon_stop_pulling(datum/source, atom/movable/old_pulling)
@@ -162,12 +164,28 @@
 	delete_from_stop_pull = TRUE // don't call stop_pulling() again in Destroy()
 	qdel(src)
 
+/obj/item/grabbing/proc/on_tried_turn(mob/source, old_dir, new_dir)
+	SIGNAL_HANDLER
+
+	if(!istype(source) || !source.pulledby || source.pulledby == source)
+		return
+
+	if(grab_state < GRAB_AGGRESSIVE)
+		return
+
+	if(chokehold) // chokeholds prevent any turning
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
+	if(new_dir == source.pulledby.dir) // can never face away from the person grabbing you
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
 /obj/item/grabbing/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
 		I.grabbedby -= src
 	if(ismob(grabbed))
+		UnregisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE)
 		var/mob/M = grabbed
 		M.grabbedby -= src
 		if(iscarbon(M) && sublimb_grabbed)

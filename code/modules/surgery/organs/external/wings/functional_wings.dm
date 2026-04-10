@@ -96,7 +96,7 @@
 	ADD_TRAIT(human, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
 	if(attempt_takeoff)
 		human.stop_pulling()
-		if(human.zMove(dir = UP, z_move_flags = ZMOVE_CHECK_PULLS))
+		if(human.zMove(dir = UP, z_move_flags = ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS))
 			flight_animation(human)
 
 	playsound(human, 'sound/mobs/wingflap.ogg', 75, FALSE)

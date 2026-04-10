@@ -15,38 +15,10 @@
 /turf/open/dungeon_trap/can_cross_safely(atom/movable/traveler)
 	return HAS_TRAIT(traveler, TRAIT_MOVE_FLYING) || !traveler.can_z_move(DOWN, src, z_move_flags = ZMOVE_FALL_FLAGS)
 
-/turf/open/dungeon_trap/zPassIn(direction)
-	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
-		return FALSE
-	if(direction == DOWN)
-		for(var/obj/contained_object in contents)
-			if(contained_object.obj_flags & BLOCK_Z_IN_DOWN)
-				return FALSE
-		return TRUE
-	if(direction == UP)
-		for(var/obj/contained_object in contents)
-			if(contained_object.obj_flags & BLOCK_Z_IN_UP)
-				return FALSE
-		return TRUE
-	return FALSE
-
-/turf/open/dungeon_trap/zPassOut(direction)
-	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
-		return FALSE
-	if(direction == DOWN)
-		for(var/obj/contained_object in contents)
-			if(contained_object.obj_flags & BLOCK_Z_OUT_DOWN)
-				return FALSE
-		return TRUE
-	if(direction == UP)
-		for(var/obj/contained_object in contents)
-			if(contained_object.obj_flags & BLOCK_Z_OUT_UP)
-				return FALSE
-		return TRUE
-	return FALSE
-
 /turf/open/dungeon_trap/zImpact(atom/movable/falling, levels, turf/prev_turf, flags)
 	if(!isobj(falling) && !ismob(falling))
+		return ..()
+	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
 		return ..()
 	. = handle_falling_movement(falling, levels) // I hate this
 	if(!.)

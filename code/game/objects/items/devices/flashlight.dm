@@ -189,6 +189,7 @@
 		turn_off()
 
 /obj/item/flashlight/flare/torch/extinguish()
+	. = ..()
 	if(on && prob(extinguish_prob))
 		turn_off()
 

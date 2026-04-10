@@ -287,15 +287,18 @@
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
 	redstone_structure = TRUE
 	var/togg = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
 
 /obj/structure/bars/grille/atom_break(damage_flag)
 	. = ..()
 	obj_flags = CAN_BE_HIT
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/bars/grille/redstone_triggered(mob/user)
 	if(obj_broken)
@@ -305,6 +308,7 @@
 	if(togg)
 		icon_state = "floorgrilleopen"
 		obj_flags = CAN_BE_HIT
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/mob/living/M in loc)
@@ -312,7 +316,7 @@
 	else
 		icon_state = "floorgrille"
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
-
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/plank
 	name = "plank"
@@ -325,6 +329,10 @@
 	damage_deflection = 5
 	blade_dulling = DULLING_BASHCHOP
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+
+/obj/structure/plank/Initialize()
+	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
@@ -343,7 +351,7 @@
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
-
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"

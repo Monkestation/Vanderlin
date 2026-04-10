@@ -32,6 +32,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IMMERSED "immersed"
 ///The effects of the immerse element will be halted while this trait is present.
 #define TRAIT_IMMERSE_STOPPED "immerse_stopped"
+/// Indicates the movable is in water without a bottom or underwater
+#define TRAIT_SUBMERGED	"submerged"
+/// Prevents floating in water and swimming up. Will move downward if in open water.
+#define TRAIT_SINKING "sinking"
 
 // ************* mob traits
 
@@ -265,10 +269,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOCKED_DIAGONAL "blocked_diagonals"
 /// Can swim ignoring water flow and slowdown
 #define TRAIT_SWIMMER "Good Swimmer"
-/// Indicates the mob is in water without a bottom or underwater
-#define TRAIT_SUBMERGED	"submerged"
-/// Prevents floating in water and swimming up. Will move downward if in open water.
-#define TRAIT_SINKING "sinking"
 /// trait determines if this mob can breed given by /datum/component/breeding
 #define TRAIT_MOB_BREEDER "mob_breeder"
 /// can't be perceived in any way, likely due to invisibility
@@ -566,10 +566,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
 #define TRAIT_HARD_TO_STEAL "hard_to_steal"
-
-// ************* turf traits
-/// Turf trait for when a turf is transparent
-#define TRAIT_Z_TRANSPARENT "turf_z_transparent"
 
 /// Turf is one that ai mobs will generally avoid pathing through
 /// Doesn't need to be applied to any turfs that override can_cross_safely

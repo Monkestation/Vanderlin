@@ -1299,6 +1299,10 @@
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
+"hh" = (
+/obj/item/weapon/sword,
+/turf/open/water/clean,
+/area/outdoors)
 "hi" = (
 /obj/structure/table/wood/treestump/shroomstump,
 /turf/open/floor/dirt,
@@ -1712,11 +1716,6 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"qa" = (
-/obj/structure/flora/grass,
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/grass/yel,
-/area/outdoors)
 "qc" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
@@ -1784,6 +1783,10 @@
 /mob/living/simple_animal/hostile/retaliate/cow,
 /turf/open/floor/cobblerock,
 /area/outdoors)
+"ri" = (
+/obj/machinery/light/fueled/torchholder/hotspring/standing,
+/turf/open/water/clean/under,
+/area/outdoors/mountains/decap)
 "rj" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -2015,6 +2018,10 @@
 	pixel_y = -1
 	},
 /turf/open/floor/cobblerock,
+/area/outdoors)
+"vw" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/clean,
 /area/outdoors)
 "vB" = (
 /obj/structure/hotspring,
@@ -2625,6 +2632,9 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"Fa" = (
+/turf/open/water/clean/under,
+/area/outdoors/mountains/decap)
 "Fc" = (
 /obj/structure/hotspring/border/seven,
 /obj/effect/falling_sakura,
@@ -3385,6 +3395,9 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass/yel,
+/area/outdoors)
+"Vu" = (
+/turf/open/water/clean,
 /area/outdoors)
 "VA" = (
 /obj/structure/flora/grass,
@@ -10635,8 +10648,8 @@ bv
 bp
 co
 co
-co
-co
+Fa
+ri
 co
 cA
 bv
@@ -10892,8 +10905,8 @@ bp
 aU
 co
 co
-qZ
-qZ
+Fa
+Fa
 qZ
 cA
 cV
@@ -11149,7 +11162,7 @@ bR
 bp
 qZ
 cs
-cs
+qZ
 co
 co
 EI
@@ -75400,7 +75413,7 @@ QN
 Qi
 QN
 QN
-QN
+ar
 aT
 ax
 aB
@@ -75658,7 +75671,7 @@ qc
 jC
 Qi
 QN
-ar
+QN
 ax
 aC
 aI
@@ -76171,8 +76184,8 @@ Pn
 QN
 ky
 jC
-QN
-QN
+hh
+Vu
 ax
 aE
 aI
@@ -76428,8 +76441,8 @@ Qi
 QN
 QN
 QN
-qa
-QN
+Vu
+vw
 ax
 ax
 ax
