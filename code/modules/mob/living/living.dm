@@ -1536,7 +1536,6 @@
 	. = TRUE
 
 	if(HAS_TRAIT(pulledby, TRAIT_PACIFISM))
-		to_chat(pulledby, span_warning("I let [src] go as they try to pull away to prevent harming them!"))
 		pulledby.stop_pulling()
 		return FALSE
 
