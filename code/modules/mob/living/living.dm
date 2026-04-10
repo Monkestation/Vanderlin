@@ -1535,6 +1535,11 @@
 /mob/living/resist_grab(moving_resist)
 	. = TRUE
 
+	if(HAS_TRAIT(pulledby, TRAIT_PACIFISM))
+		to_chat(pulledby, span_warning("I let [src] go as they try to pull away to prevent harming them!"))
+		pulledby.stop_pulling()
+		return FALSE
+
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		to_chat(src, span_warning("I'm restrained!"))
 		return
