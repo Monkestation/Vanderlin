@@ -21,7 +21,7 @@
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600,
 		EXP_TYPE_NOBLE = 300,
