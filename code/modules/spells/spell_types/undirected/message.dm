@@ -40,7 +40,7 @@
 	if(!LAZYLEN(owner.mind?.known_people))
 		to_chat(owner, span_warning("I don't know anyone!"))
 		return . | SPELL_CANCEL_CAST
-	var/recipient = browser_input_text(owner, "Who are you trying to contact?", "BEYOND THE VEIL")
+	var/recipient = tgui_input_text(owner, "Who are you trying to contact?", "BEYOND THE VEIL", encode=FALSE)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(!recipient)
@@ -59,7 +59,7 @@
 	if(!recipient_ref)
 		to_chat(owner, span_warning("I seek a mental connection, but can't find [recipient]."))
 		return . | SPELL_CANCEL_CAST
-	message = browser_input_text(owner, "You make a connecton, what are you trying to say?", "BEYOND THE VEIL")
+	message = tgui_input_text(owner, "You make a connecton, what are you trying to say?", "BEYOND THE VEIL", max_length = 150)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(!message)
