@@ -103,6 +103,17 @@
 /datum/status_effect/watery_tile_wetness/tick(seconds_between_ticks)
 	. = ..()
 	// owner.adjust_wet_stacks(1)
+	var/turf/owner_turf = get_turf(owner)
+	if(iswaterturf(owner_turf))
+		var/turf/open/water/water_turf = owner_turf
+		if(water_turf.water_reagent)
+			var/datum/reagent/turf_reagent = new water_turf.water_reagent()
+			turf_reagent.reaction_mob(owner, TOUCH, 2)
+
+			if(ishuman(owner) && istype(water_turf, /turf/open/water/bath))
+				var/mob/living/carbon/human/human_owner = owner
+				if(!human_owner.wear_armor && !human_owner.wear_shirt && !human_owner.wear_pants)
+					human_owner.add_stress(/datum/stress_event/bathwater)
 
 	var/dirty_water_turf = FALSE
 	if(cleanliness_factor < 0)

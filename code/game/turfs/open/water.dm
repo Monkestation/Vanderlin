@@ -334,7 +334,7 @@
 /turf/open/water/proc/conveyable_enter(atom/movable/conveyable)
 	if(conveyable.loc != src) // If we are not on the same turf (order of operations memes) go to hell
 		return
-	if(!river_current || volume_status == WATER_VOLUME_DRY)
+	if(!river_current || HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
 		SSmove_manager.stop_looping(conveyable, SSconveyors)
 		return
 	start_conveying(conveyable)

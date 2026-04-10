@@ -505,13 +505,16 @@
 
 /turf/proc/burn_tile()
 
-/turf/proc/is_shielded()
+/// Checks if this turf is protected from an explosion by something
+/// Return TRUE to stop the explosion from affecting this turf
+/turf/proc/is_explosion_shielded(severity)
+	return FALSE
 
 /turf/contents_explosion(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
 	var/affecting_level
 	if(severity == 1)
 		affecting_level = 1
-	else if(is_shielded())
+	else if(is_explosion_shielded(severity))
 		affecting_level = 3
 	else if(intact)
 		affecting_level = 2

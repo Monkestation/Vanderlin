@@ -1784,7 +1784,8 @@
 /turf/open/floor/cobblerock,
 /area/outdoors)
 "ri" = (
-/obj/machinery/light/fueled/torchholder/hotspring/standing,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/obj/structure/table/wood,
 /turf/open/water/clean/under,
 /area/outdoors/mountains/decap)
 "rj" = (

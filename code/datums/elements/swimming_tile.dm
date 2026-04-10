@@ -168,6 +168,15 @@
 	if(is_drowning)
 		owner.losebreath += floor(oxygen_per_interval / 2)
 
+	var/turf/owner_turf = get_turf(owner)
+	if(iswaterturf(owner_turf))
+		var/turf/open/water/water_turf = owner_turf
+		if(water_turf.water_reagent)
+			var/datum/reagents/reagents = new()
+			var/reagent_volume = min(5, water_turf.water_volume)
+			reagents.add_reagent(water_turf.water_reagent, reagent_volume)
+			reagents.trans_to(owner, reagent_volume, transfered_by = owner, method = INGEST)
+
 /datum/status_effect/swimming/proc/on_stat_change(mob/living/source, new_stat, old_stat)
 	if(!owner.client)
 		return

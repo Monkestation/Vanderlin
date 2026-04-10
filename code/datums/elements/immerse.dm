@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 
 /datum/element/immerse/Detach(turf/source)
 	UnregisterSignal(source, list(SIGNAL_ADDTRAIT(TRAIT_IMMERSE_STOPPED), SIGNAL_REMOVETRAIT(TRAIT_IMMERSE_STOPPED)))
-	if(!HAS_TRAIT(source, TRAIT_IMMERSE_STOPPED))
+	if(!HAS_TRAIT_FROM(source, TRAIT_IMMERSE_STOPPED, INNATE_TRAIT))
 		stop_immersion(source, TRUE)
 	return ..()
 
@@ -68,7 +68,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 /// Stops the element from affecting on the turf and its contents. Called on Detach() or when TRAIT_IMMERSE_STOPPED is added.
 /datum/element/immerse/proc/stop_immersion(turf/source, forced)
 	SIGNAL_HANDLER
-	if(!forced && water_height >= WATER_HEIGHT_FULL)
+	if(water_height >= WATER_HEIGHT_FULL && !forced && !HAS_TRAIT_FROM(source, TRAIT_IMMERSE_STOPPED, INNATE_TRAIT))
 		return
 	UnregisterSignal(source, list(COMSIG_ATOM_ABSTRACT_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, COMSIG_ATOM_ABSTRACT_EXITED))
 	for(var/atom/movable/movable as anything in attached_turf_contents[source])
