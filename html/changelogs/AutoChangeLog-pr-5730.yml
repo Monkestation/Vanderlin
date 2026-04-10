@@ -1,0 +1,9 @@
+author: "CheffieGithub"
+delete-after: True
+changes:
+  - rscadd: "You can now under/overload blackpowder guns. Underloading reduces power, overloading increases it and damages the gun."
+  - rscadd: "Inspecting a gun will now very safely look down the barrel and tell you about the projectile, powder, hammer and wheel status."
+  - rscadd: "Slightly changed puffer operation see PR for full details."
+  - bugfix: "Fixed muskets and puffers having no sound for the striker."
+  - balance: "Powder for the musket increased to 10 from 5."
+  - balance: "Slurbow fits in bags 2x2."

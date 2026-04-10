@@ -187,6 +187,9 @@
 		"Set 5" = list(
 			STATS_SONGS_PLAYED = list("name" = "Songs played:", "points" = 0.775, "capacity" = 70),
 			STATS_MOAT_FALLERS = list("name" = "Moat fallers:", "points" = 5, "capacity" = 50),
+		),
+		"Set 6" = list(
+			STATS_CRUEL_PRANKS = list("name" = "Cruel Pranks:", "points" = 80, "capacity" = 240)
 		)
 	)
 

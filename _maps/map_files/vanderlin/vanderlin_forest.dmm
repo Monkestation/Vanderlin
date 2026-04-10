@@ -95,7 +95,7 @@
 	aportalgoesto = "vanderlin-forest_bog-bog2";
 	aportalid = "vanderlin-forest_bog-forest2"
 	},
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/dirt/road,
@@ -681,7 +681,7 @@
 /area/outdoors/wilderness/outpost/vanderlin)
 "iw" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/grass,
@@ -1237,7 +1237,7 @@
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/indoors/wilderness/tavern)
 "oI" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
@@ -1372,7 +1372,7 @@
 /turf/open/water/swamp,
 /area/outdoors/wilderness)
 "qj" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/cobble,
 /area/outdoors/wilderness)
 "qm" = (
@@ -2074,7 +2074,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
 "xU" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/grass,
@@ -2228,7 +2228,7 @@
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
 "zY" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "zZ" = (
@@ -2444,7 +2444,7 @@
 /area/indoors/dungeon)
 "Cu" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "Cv" = (
@@ -2932,7 +2932,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "Hg" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness)
 "Hh" = (
@@ -2960,7 +2960,7 @@
 /area/indoors/dungeon)
 "Hx" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/grass,
@@ -4056,7 +4056,7 @@
 /turf/open/floor/twig,
 /area/indoors/wilderness/tavern)
 "TH" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/dirt,
@@ -4177,7 +4177,7 @@
 	aportalgoesto = "vanderlin-forest_bog-bog2";
 	aportalid = "vanderlin-forest_bog-forest2"
 	},
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/cobblerock,
@@ -4233,7 +4233,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
 "Vl" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/dirt,

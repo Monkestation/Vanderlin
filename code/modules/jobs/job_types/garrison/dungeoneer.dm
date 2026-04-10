@@ -20,7 +20,7 @@
 	)
 
 /datum/job/dungeoneer
-	title = "Dungeoneer"
+	title = JOB_DUNGEONEER
 	tutorial = "Be you an instrument of sadism for the King or the guarantor of his merciful hospitality, \
 	your duties are a service paid for most handsomely. \
 	Perhaps you were promoted from the garrison down to these cells \
@@ -65,7 +65,7 @@
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 
 /datum/outfit/dungeoneer
-	name = "Dungeoneer"
+	name = JOB_DUNGEONEER
 	head = /obj/item/clothing/head/dungeoneer
 	neck = /obj/item/clothing/neck/coif
 	wrists = /obj/item/clothing/wrists/bracers/leather
