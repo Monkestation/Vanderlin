@@ -246,7 +246,7 @@
 	gloves = /obj/item/clothing/gloves/leather/otavan
 	neck = /obj/item/clothing/neck/gorget
 	backr = /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backl = /obj/item/gun/ballistic/bow/cross
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq
