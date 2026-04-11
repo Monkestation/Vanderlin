@@ -145,7 +145,7 @@
 			spawned.put_in_hands(new /obj/item/weapon/flail/psydon(get_turf(spawned)), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/whipsflails)
 		if("Psydonic Spear")
-			spawned.put_in_hands(new /obj/item/weapon/polearm/spear/psydon(get_turf(spawned)), TRUE)
+			spawned.put_in_hands(new /obj/item/weapon/polearm/spear/psydon/noblessing(get_turf(spawned)), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/argent/polearms)
 
 	var/helmets = list("Barbute", "Sallet", "Armet", "Bucket Helm")
