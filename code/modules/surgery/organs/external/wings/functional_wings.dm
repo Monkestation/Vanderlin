@@ -122,11 +122,8 @@
 	QDEL_NULL(shadow)
 
 	if(!drop_flyer)
-		to_chat(human, span_notice("I settle gently back onto the ground..."))
 		var/turf/old_turf = get_turf(human)
-		var/levels_fallen = 0 // sanity to prevent infinite while loop
-		while(levels_fallen < length(SSmapping.multiz_levels) && human.zMove(dir = DOWN, z_move_flags = ZMOVE_CHECK_PULLS))
-			levels_fallen++
+		old_turf.zFall(human)
 		if(old_turf != get_turf(human))
 			flight_animation(human)
 	else

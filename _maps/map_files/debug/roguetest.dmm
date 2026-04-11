@@ -2822,6 +2822,10 @@
 	},
 /turf/open/water/river/creatable,
 /area/outdoors)
+"Ik" = (
+/obj/structure/waterwheel,
+/turf/open/water/river,
+/area/outdoors)
 "Iq" = (
 /obj/structure/carpet/cyan,
 /turf/open/floor/blocks,
@@ -18609,7 +18613,7 @@ HF
 HF
 at
 bH
-xp
+Ua
 QN
 cJ
 QN
@@ -18866,7 +18870,7 @@ kF
 kF
 Tj
 OS
-Ua
+xp
 Ua
 cJ
 QN
@@ -19638,8 +19642,8 @@ ac
 ac
 at
 Yr
-xh
-Ua
+Ik
+xp
 QN
 ai
 jC
