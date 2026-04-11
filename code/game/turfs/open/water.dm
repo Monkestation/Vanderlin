@@ -351,7 +351,7 @@
 		return
 
 	var/static/list/unconveyables = GLOB.immerse_ignored_movable
-	if(!istype(moving) || is_type_in_typecache(moving, unconveyables) || moving == src)
+	if(!istype(moving) || is_type_in_typecache(moving, unconveyables) || moving == src || isstructure(moving))
 		return
 	moving.AddComponent(/datum/component/convey/current, current_direction, speed)
 
@@ -454,6 +454,10 @@
 			EMPTY_BLOCK_GUARD
 		else
 			return
+
+	if(direction == UP && HAS_TRAIT(swimming_mob, TRAIT_SINKING))
+		to_chat(swimming_mob, span_warningbig("I'm sinking and can't swim upwards!"))
+		return
 
 	if(!swimming_mob.can_z_move(direction, src, null, ZMOVE_SWIM_FLAGS|ZMOVE_FEEDBACK))
 		return

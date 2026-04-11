@@ -84,7 +84,6 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define ZMOVE_CAN_FLY_CHECKS (1<<3)
 #define ZMOVE_INCAPACITATED_CHECKS (1<<4)
 #define ZMOVE_LYING_CHECKS (1<<5)
-#define ZMOVE_WATER_CHECKS (1<<6)
 /// Doesn't call zPassIn() and zPassOut()
 #define ZMOVE_IGNORE_OBSTACLES (1<<6)
 /// Gives players chat feedbacks if they're unable to move through z levels.
@@ -95,6 +94,8 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define ZMOVE_INCLUDE_PULLED (1<<9)
 /// Skips check for whether the moving atom is anchored or not.
 #define ZMOVE_ALLOW_ANCHORED (1<<10)
+/// Checks whether the destination is a water turf
+#define ZMOVE_WATER_CHECKS (1<<11)
 
 #define ZMOVE_CHECK_PULLS (ZMOVE_CHECK_PULLING|ZMOVE_CHECK_PULLEDBY)
 

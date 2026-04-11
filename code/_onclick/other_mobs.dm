@@ -502,7 +502,7 @@
 		changeNext_move(mmb_intent.clickcd)
 
 /mob/living/proc/jump_action(atom/A)
-	if(istype(get_turf(src), /turf/open/water))
+	if(HAS_TRAIT(src, TRAIT_IMMERSED))
 		to_chat(src, span_warning("I can't jump while floating."))
 		return
 
@@ -547,13 +547,13 @@
 
 	if(m_intent == MOVE_INTENT_RUN)
 		emote("leap", forced = TRUE)
-		OffBalance(30)
+		OffBalance(2 SECONDS)
 		jadded = 45
 		jrange = 3
 		jextra = TRUE
 	else
 		emote("jump", forced = TRUE)
-		OffBalance(20)
+		OffBalance(1 SECONDS)
 		jadded = 20
 		jrange = 2
 

@@ -94,7 +94,7 @@
 	if(effective_stamina_entry_cost > 0 && !floater.adjust_stamina(effective_stamina_entry_cost, "drown"))
 		addtimer(CALLBACK(floater, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
 
-	var/swimming_experience = stamina_entry_cost * GET_MOB_ATTRIBUTE_VALUE(floater, STAT_ENDURANCE) * 0.03
+	var/swimming_experience = stamina_entry_cost * GET_MOB_ATTRIBUTE_VALUE(floater, STAT_ENDURANCE) * 0.01
 	floater.adjust_experience(/datum/attribute/skill/misc/swimming, swimming_experience)
 
 	floater.apply_status_effect(/datum/status_effect/swimming, null, ticking_stamina_cost, ticking_oxy_damage, block_breathing) // Apply the status anyway for when they stop riding
@@ -126,11 +126,22 @@
 	// 	owner.add_movespeed_modifier(/datum/movespeed_modifier/swimming_deep)
 	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), PROC_REF(stop_swimming))
 	RegisterSignal(owner, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
+	check_sinking_state(get_turf(owner))
+
+/datum/status_effect/swimming/proc/check_sinking_state(turf/owner_turf)
+	if(iswaterturf(owner_turf))
+		var/turf/open/water/water_turf = owner_turf
+		if(owner.encumbrance >= (HAS_TRAIT(owner, TRAIT_SWIMMER) ? ENCUMBRANCE_EXTREME : ENCUMBRANCE_HEAVY))
+			ADD_TRAIT(owner, TRAIT_SINKING, TRAIT_STATUS_EFFECT(id))
+			water_turf.try_z_swim(owner, FALSE, TRUE)
+			return
+	REMOVE_TRAIT(owner, TRAIT_SINKING, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/swimming/on_remove()
 	. = ..()
 	// owner.remove_movespeed_modifier(/datum/movespeed_modifier/swimming_deep)
 	UnregisterSignal(owner, list(SIGNAL_REMOVETRAIT(TRAIT_IMMERSED), COMSIG_MOB_STATCHANGE))
+	REMOVE_TRAIT(owner, TRAIT_SINKING, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/swimming/tick(seconds_between_ticks)
 	// if (HAS_TRAIT(owner, TRAIT_MOB_ELEVATED))
@@ -150,6 +161,12 @@
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)
 			COOLDOWN_START(src, ticking_stamina_pity, 6 SECONDS)
 
+	var/turf/owner_turf = get_turf(owner)
+	check_sinking_state(owner_turf)
+
+	if(QDELETED(src)) // Sinking can cause swimming status effect to be removed
+		return
+
 	// You might not be swimming but you can breathe
 	if(HAS_TRAIT(owner, TRAIT_NODROWN) || HAS_TRAIT(owner, TRAIT_NOBREATH))
 		return
@@ -168,7 +185,6 @@
 	if(is_drowning)
 		owner.losebreath += floor(oxygen_per_interval / 2)
 
-	var/turf/owner_turf = get_turf(owner)
 	if(iswaterturf(owner_turf))
 		var/turf/open/water/water_turf = owner_turf
 		if(water_turf.water_reagent)
