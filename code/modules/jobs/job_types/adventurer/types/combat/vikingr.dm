@@ -48,7 +48,7 @@
 	switch(weapontype)
 		if("Bow")
 			beltl = /obj/item/ammo_holder/quiver/arrows // womp womp, guess bow users cant have coins
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backr = /obj/item/gun/ballistic/bow/long
 			head = /obj/item/clothing/head/roguehood/colored/black
 			beltr = /obj/item/weapon/sword/iron
 		if("Axe")

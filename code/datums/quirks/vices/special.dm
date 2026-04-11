@@ -296,7 +296,7 @@
 
 	var/turf/T
 	if(!H || QDELETED(H))
-		T = get_turf(pick(SSjob.latejoin_trackers))
+		T = get_turf(pick(SSjob.backup_join_landmarks))
 	else
 		T = get_turf(H)
 	if(!T)

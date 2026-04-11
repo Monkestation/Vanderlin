@@ -814,7 +814,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
 
-/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620)
+/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list(JOB_GUARD_CAPTAIN, JOB_PRIEST, JOB_MERCHANT, JOB_BUTLER, "Village Elder"), widthPerColumn = 400, height = 620)
 	if(!SSjob)
 		return
 

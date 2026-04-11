@@ -1,5 +1,5 @@
 /datum/job/guardsman
-	title = "City Watchmen"
+	title = JOB_CITY_WATCH
 	tutorial = "You are a member of the City Watch. \
 	You've proven yourself worthy to the Captain and now you've got yourself a salary... \
 	as long as you keep the peace that is."
@@ -139,7 +139,7 @@
 	head = /obj/item/clothing/head/helmet/townbarbute
 	neck = /obj/item/clothing/neck/chaincoif
 	armor = /obj/item/clothing/armor/gambeson/heavy
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/mace/cudgel
