@@ -170,7 +170,7 @@
 	if(!istype(source) || !source.pulledby || source.pulledby == source)
 		return
 
-	if(grab_state < GRAB_AGGRESSIVE)
+	if(grab_state < GRAB_AGGRESSIVE || source.pulledby.body_position == LYING_DOWN)
 		return
 
 	if(chokehold) // chokeholds prevent any turning
