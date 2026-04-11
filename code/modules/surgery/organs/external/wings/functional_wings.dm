@@ -55,6 +55,11 @@
 	if(!location)
 		return FALSE
 
+	if(!flier.energy)
+		if(feedback)
+			flier.balloon_alert(flier, "no energy!")
+		return FALSE
+
 	if(flier.stat || flier.body_position == LYING_DOWN || isnull(flier.client))
 		if(feedback)
 			flier.balloon_alert(flier, "can't my spread wings!")
