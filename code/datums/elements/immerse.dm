@@ -156,6 +156,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 		COMSIG_CAN_Z_MOVE
 	))
 
+/// EXPERIMENTAL: Prevent thrown things from falling through water like openspace
 /datum/element/immerse/proc/on_try_z_move(atom/movable/source, turf/start, turf/destination)
 	SIGNAL_HANDLER
 	// This works because when throwing mobs enter the turf they only get immersed when they stop being thrown.

@@ -144,6 +144,11 @@
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels <= 2)
 		return . | ZIMPACT_CANCEL_DAMAGE
 
+	if(HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)) // EXPERIMENTAL: Harpies decend upon moving
+		to_chat(src, span_info("You glide down to a more manageable height."))
+		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
+		return . | ZIMPACT_CANCEL_DAMAGE
+
 	if(can_brace_fall && GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing) >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
 			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
@@ -2140,17 +2145,6 @@
 			registered_z = new_z
 		else
 			registered_z = null
-
-/mob/living/can_zFall(turf/source, levels = 1, turf/target, direction)
-	// Solely such that organ wings only allow you to fly up 1 Z level
-	if(!HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, WING_TRAIT) && !HAS_TRAIT_FROM(src, TRAIT_MOVE_FLYING, WING_TRAIT))
-		return ..()
-
-	var/turf/below = GET_TURF_BELOW(source)
-	if(isopenspace(below))
-		return TRUE
-
-	return ..()
 
 /mob/living/onTransitZ(old_z,new_z)
 	..()
