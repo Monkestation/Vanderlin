@@ -1373,6 +1373,7 @@
 #include "code\datums\quality\cooking.dm"
 #include "code\datums\quality\metallurgy.dm"
 #include "code\datums\quirks\_base.dm"
+#include "code\datums\quirks\misc.dm"
 #include "code\datums\quirks\boon\_boon.dm"
 #include "code\datums\quirks\boon\backstory.dm"
 #include "code\datums\quirks\peculiarity\_peculiarity.dm"
