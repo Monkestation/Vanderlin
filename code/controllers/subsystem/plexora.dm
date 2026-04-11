@@ -769,21 +769,22 @@ SUBSYSTEM_DEF(plexora)
 	require_comms_key = TRUE
 
 /datum/world_topic/plx_givetriumphs/Run(list/input)
-	var/ckey = input["ckey"]
-	var/amount = input["amount"]
-	var/reason = input["reason"]
+	return
+	// var/ckey = input["ckey"]
+	// var/amount = input["amount"]
+	// var/reason = input["reason"]
 
-	if (!ckey)
-		return list("error" = PLEXORA_ERROR_MISSING_CKEY)
+	// if (!ckey)
+	// 	return list("error" = PLEXORA_ERROR_MISSING_CKEY)
 
-	amount = text2num(amount)
+	// amount = text2num(amount)
 
-	if (!amount || amount <= 0)
-		return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "amount", "reason" = "parameter must be a number greater than 0")
+	// if (!amount || amount <= 0)
+	// 	return list("error" = PLEXORA_ERROR_BAD_PARAM, "param" = "amount", "reason" = "parameter must be a number greater than 0")
 
-	adjust_triumphs(ckey, amount, reason, counted = FALSE, silent = FALSE, override_bonus = TRUE)
+	// adjust_triumphs(ckey, amount, reason, counted = FALSE, silent = FALSE, override_bonus = TRUE)
 
-	return "[ckey] awarded [amount] triumphs.  They now have [SStriumphs.get_triumphs(ckey)]."
+	// return "[ckey] awarded [amount] triumphs.  They now have [SStriumphs.get_triumphs(ckey)]."
 
 #undef OLD_PLEXORA_CONFIG
 #undef AUTH_HEADER
