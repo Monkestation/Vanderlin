@@ -2151,17 +2151,15 @@
 			registered_z = null
 
 /mob/living/can_zFall(turf/source, levels = 1, turf/target, direction)
-	. = ..()
-	if(!.)
-		return
-
 	// Solely such that organ wings only allow you to fly up 1 Z level
 	if(!HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, WING_TRAIT) && !HAS_TRAIT_FROM(src, TRAIT_MOVE_FLYING, WING_TRAIT))
-		return
+		return ..()
 
 	var/turf/below = GET_TURF_BELOW(source)
 	if(isopenspace(below))
 		return TRUE
+
+	return ..()
 
 /mob/living/onTransitZ(old_z,new_z)
 	..()

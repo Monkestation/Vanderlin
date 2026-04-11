@@ -302,7 +302,7 @@
 						crumpled_mob.Stun(1)
 						crumpled_mob.take_overall_damage(falling_mob.fall_damage(levels)*2)
 
-	if(falling_atom.fall_damage())
+	else if(falling_atom.fall_damage())
 		for(var/mob/living/crumpled_mob in contents)
 			visible_message("<span class='danger'>\The [falling_atom] falls on \the [crumpled_mob.name]!</span>")
 			crumpled_mob.Stun(1)
