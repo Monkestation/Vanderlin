@@ -27,6 +27,13 @@
 	material_category = ARMOR_MAT_FABRIC
 	item_weight = 4.7 KILOGRAMS
 
+/obj/item/clothing/armor/gambeson/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/armor/gambeson/colored/guard
+	color = CLOTHING_BLOOD_RED
+	uses_lord_coloring = LORD_SECONDARY
+
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
 	desc = "Thin and the maker skimped on the padding, typically worn by the peasantry to give some protection against cold for the whole body."
@@ -63,6 +70,10 @@
 
 /obj/item/clothing/armor/gambeson/heavy/colored/dark
 	color = CLOTHING_DARK_INK
+
+/obj/item/clothing/armor/gambeson/heavy/colored/guard
+	color = CLOTHING_BLOOD_RED
+	uses_lord_coloring = LORD_SECONDARY
 
 /obj/item/clothing/armor/gambeson/heavy/lakkarijupon
 	name = "robed jupon"
