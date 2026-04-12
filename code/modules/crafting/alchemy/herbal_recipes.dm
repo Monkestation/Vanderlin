@@ -624,8 +624,7 @@
 		ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
-	if(M.client)
-		REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
+	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
 // Combat Enhancement
 
