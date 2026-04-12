@@ -432,7 +432,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	 	return
 
 	set_patron(/datum/patron/inhumen/graggar)
-	to_chat(src, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar!)
+	to_chat(src, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar!))
 
 /datum/reagent/organpoison/human
 	name = "Humen Organ Poison"
