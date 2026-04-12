@@ -615,8 +615,7 @@
 	taste_description = "cold gold"
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_metabolize(mob/living/M)
-	if(M.client)
-		ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
+	ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
 	REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
