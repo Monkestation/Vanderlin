@@ -215,6 +215,7 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/skeleton/zizoid,
 	)
 
 	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
