@@ -602,10 +602,8 @@
 	ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/rajaijah/on_mob_end_metabolize(mob/living/M)
-	if(M.client)
-		REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
-		REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
-
+	REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
+	REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/kingsbane
 	name = "Kingsbane"
