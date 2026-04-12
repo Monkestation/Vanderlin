@@ -89,7 +89,7 @@
 
 /datum/status_effect/debuff/alch/pain
 	id = "painpot"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/pain
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/alch/pain
 	effectedstats = list(STATKEY_END = -5)
 
 /atom/movable/screen/alert/status_effect/debuff/alch/pain
