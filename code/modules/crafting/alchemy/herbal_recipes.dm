@@ -500,9 +500,9 @@
 	L.adjust_drowsiness_up_to(30 SECONDS, sleep_power)
 	L.adjust_stamina(10)
 
-/datum/reagent/poison/herbal/tranq/overdose_process(mob/living/M)
-	M.Unconscious(200)
+/datum/reagent/poison/herbal/tranq/overdose_start(mob/living/M)
 	. = ..()
+	M.Unconscious(20 SECONDS)
 
 /datum/reagent/poison/herbal/acid
 	name = "Flamekiss Liqeur"
