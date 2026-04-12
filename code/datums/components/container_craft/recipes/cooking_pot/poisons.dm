@@ -29,7 +29,6 @@
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "Noxious vapors rise from the mixture..."
 
-
 /datum/container_craft/cooking/herbal_tea/tranq
 	name = "Liquid tranquility"
 	created_reagent = /datum/reagent/poison/herbal/tranq
