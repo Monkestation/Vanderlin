@@ -558,19 +558,19 @@
 	name = "Astuce"
 	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
 	color = "#1b8600" // rgb: 102, 71, 0
-	metabolization_rate = 0.1
+	metabolization_rate = 0.05
 	taste_description = "fleeing life"
 
-/datum/reagent/poison/herbal/ghoulpowder/on_mob_add(mob/living/L)
-	. = ..()
-	to_chat(L, span_notice("You feel your spine go cold, your heart slows down in your chest, as you collapse unconcious!"))
-	ADD_TRAIT(L, TRAIT_FAKEDEATH, "[type]")
-	ADD_TRAIT(L, TRAIT_DEATHCOMA, "[type]")
+/datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
+	if(M.client)
+		ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+		ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
-/datum/reagent/poison/herbal/ghoulpowder/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_FAKEDEATH, "[type]")
-	REMOVE_TRAIT(L, TRAIT_DEATHCOMA, "[type]")
+/datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
+	if(M.client)
+		REMOVE_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+		REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
 	. = ..()
@@ -596,22 +596,22 @@
 	metabolization_rate = 0.1
 	taste_description = "pure, unrestrained hate and hunger"
 
-/datum/reagent/poison/herbal/rajaijah/on_mob_add(mob/living/L)
-	. = ..()
-	to_chat(L, span_notice("You twitch, you drool, you hunger. You are filled with inescapable rage and hatred for all around you, and must let it out. KILL THEM ALL!"))
-	ADD_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
-	ADD_TRAIT(L, TRAIT_POISONBITE, "[type]")
+/datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
+	if(M.client)
+		ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
+		ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
-/datum/reagent/poison/herbal/rajaijah/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_IN_FRENZY, "[type]")
-	REMOVE_TRAIT(L, TRAIT_POISONBITE, "[type]")
+/datum/reagent/poison/herbal/rajaijah/on_mob_end_metabolize(mob/living/M)
+	if(M.client)
+		REMOVE_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
+		REMOVE_TRAIT(M, TRAIT_POISONBITE, "[type]")
+
 
 /datum/reagent/poison/herbal/kingsbane
 	name = "Kingsbane"
 	description = "A poison used by cultists of matthios, causing the afflicted to be disgusted by money. Some say this is only the dilute version, with the real, potent one capable of ruining ones mind."
-	color = "#ffb300" 
-	metabolization_rate = 0.1
+	color = "#ffb300"
+	metabolization_rate = 0.01
 	taste_description = "cold gold"
 
 /datum/reagent/poison/herbal/kingsbane/on_mob_metabolize(mob/living/M)
