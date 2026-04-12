@@ -91,53 +91,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_userdanger("I am returned to serve. I will obey, so that I may return to rest."))
 	to_chat(target, span_userdanger("My master is [user]."))
 
-/datum/ritual/servantry/thecall
-	name = "The Call"
-	center_requirement = /obj/item/bedsheet
-	w_req = /obj/item/bodypart/l_leg
-	e_req = /obj/item/bodypart/r_leg
-
-/datum/ritual/servantry/thecall/invoke(mob/living/user, turf/center)
-	var/obj/item/paper/P = locate() in center
-	if(!P)
-		to_chat(user, span_warning("The ritual requires a parchment with a name."))
-		return
-	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
-	if(!user.mind?.do_i_know(name = paper_name))
-		to_chat(user, span_warning("I don't know anyone by that name."))
-		return
-	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
-		if(HL.real_name != paper_name)
-			continue
-		if(HL == SSticker.rulermob)
-			continue
-		if(HL.mind?.assigned_role.title in GLOB.church_positions)
-			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
-			to_chat(user, span_danger("That accursed cross protects them..."))
-			continue
-		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
-			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
-			continue
-		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
-			to_chat(HL, span_userdanger("I'm so sleepy..."))
-			HL.SetSleeping(5 SECONDS)
-		else
-			to_chat(HL, span_userdanger("My eyes close on their own!"))
-			HL.set_eyes_closed(TRUE)
-		addtimer(CALLBACK(src, PROC_REF(kidnap), HL, center), 3 SECONDS)
-		qdel(P)
-		break
-
-/datum/ritual/servantry/thecall/proc/kidnap(mob/living/victim, turf/to_go)
-	if(QDELETED(victim))
-		return
-	if(to_go.is_blocked_turf(TRUE))
-		return
-	victim.SetSleeping(0)
-	to_chat(victim, span_warning("This isn't my bed... Where am I?!"))
-	victim.playsound_local(victim, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg'), 100)
-	victim.forceMove(to_go)
-
 /datum/ritual/servantry/falseappearance
 	name = "Falsified Appearance"
 	center_requirement = /mob/living/carbon/human
