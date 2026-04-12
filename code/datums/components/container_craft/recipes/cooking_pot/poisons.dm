@@ -110,7 +110,7 @@
 	created_reagent = /datum/reagent/poison/herbal/ghoulpowder
 	water_conversion = 1
 	reagent_requirements = list(
-	/datum/reagent/toxin/spidervenom_inert = 10,
+		/datum/reagent/toxin/spidervenom_inert = 10,
 	)
 	requirements = list(
 		/obj/item/alch/herb/calendula = 1,
