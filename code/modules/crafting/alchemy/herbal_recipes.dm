@@ -568,9 +568,8 @@
 	taste_description = "fleeing life"
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
-	if(M.client)
-		ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
-		ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
 	if(M.client)
