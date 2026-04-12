@@ -576,9 +576,6 @@
 	REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
 
-/datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
-	. = ..()
-
 /datum/reagent/poison/herbal/pain
 	name = "Souffrance"
 	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm."
