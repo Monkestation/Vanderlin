@@ -602,9 +602,8 @@
 	taste_description = "pure, unrestrained hate and hunger"
 
 /datum/reagent/poison/herbal/rajaijah/on_mob_metabolize(mob/living/M)
-	if(M.client)
-		ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
-		ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
+	ADD_TRAIT(M, TRAIT_IN_FRENZY, "[type]")
+	ADD_TRAIT(M, TRAIT_POISONBITE, "[type]")
 
 /datum/reagent/poison/herbal/rajaijah/on_mob_end_metabolize(mob/living/M)
 	if(M.client)
