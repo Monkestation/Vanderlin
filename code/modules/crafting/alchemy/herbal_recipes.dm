@@ -487,7 +487,7 @@
 	reagent_state = LIQUID
 	color = "#4a3c5f"
 	metabolization_rate = 0.8
-	overdose_threshold = 10
+	overdose_threshold = 20
 	taste_description = "exhaustion and bitter herbs" // inspired by xylazine
 	var/sleep_power = 120 SECONDS
 
@@ -509,7 +509,7 @@
 	description = "Burning liquid which is tailored to dissolve flesh."
 	reagent_state = LIQUID
 	color = "#790404"
-	metabolization_rate = 0.1
+	metabolization_rate = 0.5
 	taste_description = "burning pain beyond description"
 
 /datum/reagent/poison/herbal/acid/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with acid HURTS
@@ -525,14 +525,15 @@
 	. = ..()
 	L.adjustFireLoss(20)
 	L.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
+	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
 
 /datum/reagent/poison/herbal/death
 	name = "Berry Juice"
-	description = "Berry juice. Totally will not make your head explode."
+	description = "Berry juice. Totally will not make your head explode." 
 	reagent_state = LIQUID
 	color = "#790404"  // dammit Avalon, youve gotten me again. 
 	metabolization_rate = 0.1
-	taste_description = "berry"
+	taste_description = "berry, with a hint of regret"
 
 /datum/reagent/poison/herbal/death/on_mob_life(mob/living/carbon/M)
 /datum/reagent/poison/herbal/death/on_mob_add(mob/living/L)
@@ -545,35 +546,27 @@
 	else if(L.stat != DEAD)
 		L.death()
 
-/*
-/datum/reagent/poison/herbal/rat
-	name = "Koboldification serum"
-	description = "RATRATRATRATRATRATRATRATRATRATRAT."
-	reagent_state = LIQUID
-	color = "#790404"  // KOBOLDS FOR LIFE
-	metabolization_rate = 0.1
-	taste_description = "scales...?"
-
-/datum/reagent/poison/herbal/juice/on_mob_life(mob/living/carbon/M)
-		var/species = /datum/species/kobold  //admin only EXCEPT for the bog witch, bog witch gets one vial
-		M.dna.copy_dna(species)
-		
-	*/
-	
 /datum/reagent/poison/herbal/ghoulpowder
 	name = "Astuce"
-	description = "A strong neurotoxin that slows metabolism to a death-like state. Causes toxin buildup if used too long."
+	description = "A strong neurotoxin that slows metabolism to a death-like state."
 	color = "#1b8600" // rgb: 102, 71, 0
 	metabolization_rate = 0.05
+	overdose_threshold = 10
 	taste_description = "fleeing life"
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
-	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
-	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+	M.adjustToxLoss(0.1)
+	if(prob(20))
+		M.set_eye_blur_if_lower(10 SECONDS)
+		M.set_confusion_if_lower(0.5 SECONDS)
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
 	REMOVE_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
 	REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+
+/datum/reagent/poison/herbal/ghoulpowder/overdose_start(mob/living/M)
+	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
 
 /datum/reagent/poison/herbal/pain
