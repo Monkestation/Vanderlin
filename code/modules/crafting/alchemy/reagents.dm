@@ -422,14 +422,17 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					H.graggometer = 0
 	return ..()
 
-/proc/graggar_baptize(mob/living/carbon/human/graggar_lover)
-    set waitfor = FALSE
-    if(tgui_alert(graggar_lover, "Kneel before Graggar?", "BAPTIZE", DEFAULT_INPUT_CHOICES, 10 SECONDS) == CHOICE_YES)
-        graggar_lover.set_patron(/datum/patron/inhumen/graggar)
-        to_chat(graggar_lover, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar! Graggar! Graggar!"))
-        return
-    if(!QDELETED(graggar_lover))
-        to_chat(graggar_lover, span_bloody("You reject Graggar's offer of power. The Beast recedes, your stomach growls..."))
+/mob/living/carbon/human/proc/graggar_baptize()
+	var/answer = tgui_alert(src, "Kneel before Graggar?", "BAPTIZE", DEFAULT_INPUT_CHOICES, 10 SECONDS)
+	if(!answer || QDELETED(src))
+		return
+		
+	if(answer != CHOICE_YES)
+		to_chat(src, span_bloody("You reject Graggar's offer of power. The Beast recedes, your stomach growls..."))
+	 	return
+	 	
+	set_patron(/datum/patron/inhumen/graggar)
+	to_chat(src, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar! 
 
 /datum/reagent/organpoison/human
 	name = "Humen Organ Poison"
