@@ -29,6 +29,12 @@
 		TRAIT_KNOW_INQUISITION_DOORS
 	)
 	languages = list(/datum/language/oldpsydonic)
+	verbs = list(
+		/mob/living/carbon/human/proc/suspect_heretics,
+		/mob/living/carbon/human/proc/torture_victim,
+		/mob/living/carbon/human/proc/faith_test,
+		/mob/living/carbon/human/proc/view_inquisition,
+	)
 
 /datum/outfit/adept // Base outfit for Adepts, before loadouts
 	name = JOB_ADEPT
@@ -42,12 +48,13 @@
 /datum/job/advclass/adept/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", -10, "Reformed Thief")
-	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
-	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
-
 	spawned.mind?.teach_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
+
+/datum/job/advclass/adept/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned?.inquisition_position?.remove_member()
+		spawned.mind?.forget_crafting_recipe(/datum/repeatable_crafting_recipe/reading/confessional)
 
 /datum/job/advclass/adept
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT)

@@ -19,6 +19,11 @@
 /datum/species/human/northern
 	name = "Humen"
 	id = SPEC_ID_HUMEN
+	multiple_accents = list(
+		"No Accent" = ACCENT_NONE,
+		"Grenzelhoft Accent" = ACCENT_GRENZ,
+		"Ossland Accent" = ACCENT_OSSLAND,
+	)
 	desc = "Humenity, created in Psydon's image. \
 	\n\n\
 	Humens come from a vast swathe of cultures and ethnicities all around Psydonia, most of which \
@@ -32,7 +37,6 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
-
 	use_skintones = TRUE
 
 	possible_ages = NORMAL_AGES_LIST_CHILD

@@ -84,7 +84,7 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backl = /obj/item/gun/ballistic/bow
 
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows

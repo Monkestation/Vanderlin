@@ -75,11 +75,9 @@
 		TRAIT_MEDIUMARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-/datum/job/lieutenant/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 /datum/job/lieutenant/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

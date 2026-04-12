@@ -54,7 +54,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/light/steppe
 	pants = /obj/item/clothing/pants/tights/colored/red
 	neck = /obj/item/storage/belt/pouch/coins/poor
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	backr = /obj/item/storage/backpack/satchel
 	armor = /obj/item/clothing/armor/leather/hide/steppe
 	head = /obj/item/clothing/head/papakha

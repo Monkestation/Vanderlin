@@ -248,7 +248,7 @@
 	name = "Bowman Squire"
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	armor = /obj/item/clothing/armor/chainmail
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backr = /obj/item/storage/backpack/satchel

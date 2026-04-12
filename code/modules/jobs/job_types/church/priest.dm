@@ -95,6 +95,12 @@
 		devotion.make_priest()
 		devotion.grant_to(spawned)
 
+/datum/job/priest/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.remove_priest_verbs()
+
+
 /datum/outfit/priest
 	name = JOB_PRIEST
 	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata

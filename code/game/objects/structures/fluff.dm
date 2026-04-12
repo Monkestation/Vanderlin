@@ -1059,7 +1059,7 @@
 			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
 				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
 			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
-				I = new /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long(user.loc)
+				I = new /obj/item/gun/ballistic/bow/long(user.loc)
 			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
 				I = new /obj/item/weapon/sword/long(user.loc)
 			else

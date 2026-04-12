@@ -44,7 +44,7 @@
 	shirt = /obj/item/clothing/shirt/apothshirt
 	pants = /obj/item/clothing/pants/trou/apothecary
 	gloves = /obj/item/clothing/gloves/leather/apothecary
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/bow/short
 	backl = /obj/item/storage/backpack/backpack
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/knife/hunting

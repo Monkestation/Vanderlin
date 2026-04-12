@@ -1,6 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - code_imp: "Rewrites how job spawn landmarks work, providing proper latespawn capacity."
-  - code_imp: "Removed two unused job files."
-  - map: "Maps in the changes."

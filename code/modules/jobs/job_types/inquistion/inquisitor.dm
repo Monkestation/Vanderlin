@@ -42,17 +42,20 @@
 		EXP_TYPE_INQUISITION = 900
 	)
 
+	verbs = list(
+		/mob/living/carbon/human/proc/suspect_heretics,
+		/mob/living/carbon/human/proc/torture_victim,
+		/mob/living/carbon/human/proc/faith_test,
+		/mob/living/carbon/human/proc/view_inquisition,
+	)
+
+
 /datum/outfit/inquisitor
 	abstract_type = /datum/outfit/inquisitor
 	name = "Inquisitor"
 
 /datum/job/inquisitor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	add_verb(spawned, /mob/living/carbon/human/proc/suspect_heretics)
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-	add_verb(spawned, /mob/living/carbon/human/proc/faith_test)
-	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()
@@ -66,6 +69,13 @@
 		return
 	species.native_language = "Old Psydonic"
 	species.accent_language = species.get_accent(species.native_language)
+
+/datum/job/inquisitor/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+		spawned.hud_used?.shutdown_bloodpool()
+
 
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho.
 

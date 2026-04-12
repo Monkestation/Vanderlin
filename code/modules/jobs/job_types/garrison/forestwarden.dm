@@ -65,10 +65,9 @@
 		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
 	)
-
-/datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/forestwarden
 	name = JOB_FOREST_WARDEN
@@ -90,5 +89,5 @@
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/key/forrestgarrison = 1,
-		/obj/item/signal_horn = 1
+		/obj/item/signal_horn/ambush = 1
 	)

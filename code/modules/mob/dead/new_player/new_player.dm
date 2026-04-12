@@ -379,10 +379,6 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
 
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!client.whitelisted()))
-			return JOB_UNAVAILABLE_GENERIC
-
 	if(is_role_banned(client.ckey, job.title))
 		return JOB_UNAVAILABLE_BANNED
 
