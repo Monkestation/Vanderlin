@@ -418,7 +418,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					graggar_lover.spawn_gibs(TRUE)
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
-					graggar_baptize(graggar_lover)
+					INVOKE_ASYNC(graggar_lover, TYPE_PROC_REF(/mob/living/carbon/human, graggar_baptize))
 					H.graggometer = 0
 	return ..()
 
