@@ -394,7 +394,6 @@
 	. = ..()
 	M.add_stress(/datum/stress_event/pleasant_scent)
 
-
 /datum/reagent/medicine/herbal/mentha_oil
 	name = "Mentha Cooling Oil"
 	description = "A cooling oil that provides relief to sore muscles and joints."
@@ -403,11 +402,18 @@
 	metabolization_rate = 0.3
 	taste_description = "cooling mint"
 
-/datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M)
-	M.adjust_stamina(1.5)
-	M.adjust_bodytemperature(-0.3, BODYTEMP_NORMAL - 2)
+/datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/L)
+	. = ..()
 
-	for(var/obj/item/bodypart/BP in M.bodyparts)
+	L.adjust_stamina(1.5)
+	L.adjust_bodytemperature(-0.3, BODYTEMP_NORMAL - 2)
+
+	if(!iscarbon(L))
+		return
+
+	var/mob/living/carbon/C = L
+
+	for(var/obj/item/bodypart/BP in C.bodyparts)
 		if(BP.status == BODYPART_ROBOTIC)
 			continue
 		if(BP.lingering_pain > 0)

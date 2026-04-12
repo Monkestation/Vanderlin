@@ -103,6 +103,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	on_mob_life(M)
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M)
+	SHOULD_CALL_PARENT(TRUE)
+
 	current_cycle++
 	if(holder)
 		var/adjusted_metabolization_rate = metabolization_rate
