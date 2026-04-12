@@ -78,19 +78,6 @@
 /datum/class_select_handler/proc/assemble_the_CLASSES()
 	var/mob/living/carbon/human/human_mob = linked_client.mob
 
-	//Pick any class override
-	if(SSrole_class_handler.special_session_queue && SSrole_class_handler.special_session_queue[human_mob.ckey])
-		var/list/player_queue = SSrole_class_handler.special_session_queue[human_mob.ckey]
-		if(TRIUMPH_BUY_ANY_CLASS in player_queue)
-			var/datum/job/advclass/pick_everything/picker = player_queue[TRIUMPH_BUY_ANY_CLASS]
-
-			rolled_classes = list(picker = 0)
-			local_total_sorted_class_cache = list(CTAG_ALLCLASS = list(picker))
-			showing_combat_classes = FALSE
-
-			browser_slop()
-			return
-
 	// Time to sort and find our viable classes depending on what conditions we gotta deal w
 	if(length(class_cat_alloc_attempts))
 		for(var/SORT_CAT_KEY in class_cat_alloc_attempts)

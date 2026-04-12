@@ -20,7 +20,7 @@
 	)
 
 /datum/job/bard
-	title = "Bard"
+	title = JOB_BARD
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, \
 	mostly because they are the last ones in a party to die. \
 	Their wish is to experience the greatest adventures of the age and write amazing songs \
@@ -75,7 +75,7 @@
 	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.",title = "XYLIX")
 
 /datum/outfit/bard
-	name = "Bard"
+	name = JOB_BARD
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random

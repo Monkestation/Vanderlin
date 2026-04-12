@@ -1,5 +1,5 @@
 /datum/job/orphan
-	title = "Orphan"
+	title = JOB_ORPHAN
 	tutorial = "Before you could even form words, you were abandoned, or perhaps lost. \
 	Ever since, you have lived in the Orphanage under the Matron's care. \
 	Will you make something of yourself, or will you die in the streets as a nobody?"
@@ -30,7 +30,7 @@
 	peopleknowme = list()
 
 /datum/outfit/orphan
-	name = "Orphan"
+	name = JOB_ORPHAN
 
 // BOOKISH BRAT - THE COURTLY CHILD
 

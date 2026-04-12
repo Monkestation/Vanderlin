@@ -326,6 +326,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 		return
 	if(dude.job)
 		var/datum/job/J = SSjob.GetJob(owner.current.job)
+		J.remove_job(dude)
 		J.adjust_current_positions(-1)
 		owner.current.job = null
 	owner?.set_assigned_role(SSjob.GetJobType(/datum/job/unassigned))

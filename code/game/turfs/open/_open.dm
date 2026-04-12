@@ -86,8 +86,9 @@
 	return TRUE
 
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze_amount, force_drop)
-	if(C.movement_type & FLYING)
+	if(C.movement_type & MOVETYPE_NOT_TOUCHING_GROUND)
 		return 0
+
 	var/obj/buckled_obj
 	if(C.buckled)
 		buckled_obj = C.buckled
@@ -98,7 +99,8 @@
 			return 0
 		if(C.m_intent == MOVE_INTENT_WALK && (lube&NO_SLIP_WHEN_WALKING))
 			return 0
-	if(!(lube&SLIDE_ICE))
+
+	if(!(lube & SLIDE_ICE))
 		to_chat(C, "<span class='notice'>I slipped[ O ? " on the [O.name]" : ""]!</span>")
 		playsound(C, 'sound/blank.ogg', 50, TRUE, -3)
 

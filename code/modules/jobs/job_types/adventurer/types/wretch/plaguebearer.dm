@@ -56,7 +56,7 @@
 	armor = /obj/item/clothing/shirt/robe/phys
 	neck = /obj/item/clothing/neck/phys
 	belt = /obj/item/storage/belt/leather/black
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	beltl = /obj/item/gun/ballistic/blowgun
 	beltr = /obj/item/ammo_holder/dartpouch/poisondarts
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison = 1,

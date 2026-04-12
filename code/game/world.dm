@@ -339,6 +339,9 @@ GLOBAL_PROTECT(tracy_init_reason)
 	'sound/roundend/motherfuckers.ogg',
 	'sound/roundend/poppop.ogg',
 	'sound/roundend/cursedswords.ogg',
+	'sound/roundend/taffers.ogg',
+	'sound/roundend/hereyougo.ogg',
+	'sound/roundend/masterworks.ogg',
 	'sound/roundend/dwarfs.ogg')
 	for(var/client/thing in GLOB.clients)
 		if(!thing)

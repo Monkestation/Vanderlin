@@ -109,13 +109,16 @@
 
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
 		return
+
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
-	if(movement_type & FLYING)
+
+	if(movement_type & (FLYING|FLOATING))
 		to_chat(src, span_info("You glide down to a more manageable height."))
 		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
 		return
+
 	var/dex_save = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
@@ -123,6 +126,7 @@
 			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
+
 	var/points
 	for(var/i in 2 to levels)
 		i++
@@ -132,6 +136,7 @@
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
+
 	return ..()
 
 /mob/living/proc/ZImpactDamage(turf/T, levels)
@@ -2091,9 +2096,9 @@
 	C.Paralyze(40)
 
 /mob/living/ConveyorMove()
-	if((movement_type & FLYING) && !stat)
+	if((movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && !stat)
 		return
-	..()
+	return ..()
 
 /mob/living/can_be_pulled()
 	return ..() && !(buckled && buckled.buckle_prevents_pull)
@@ -2144,6 +2149,17 @@
 			registered_z = new_z
 		else
 			registered_z = null
+
+/mob/living/can_zFall(turf/source, levels = 1, turf/target, direction)
+	// Solely such that organ wings only allow you to fly up 1 Z level
+	if(!HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, WING_TRAIT) && !HAS_TRAIT_FROM(src, TRAIT_MOVE_FLYING, WING_TRAIT))
+		return ..()
+
+	var/turf/below = GET_TURF_BELOW(source)
+	if(isopenspace(below))
+		return TRUE
+
+	return ..()
 
 /mob/living/onTransitZ(old_z,new_z)
 	..()

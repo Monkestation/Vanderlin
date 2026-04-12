@@ -253,7 +253,7 @@
 	maximum = 1
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/puffer/populate_contents()
-	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol(src)
+	new /obj/item/gun/ballistic/powder/wheellock/puffer(src)
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)
 
@@ -267,7 +267,7 @@
 	maximum = 1
 
 /obj/structure/closet/crate/chest/inqcrate/equipment/musket/PopulateContents()
-	new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket(src)
+	new /obj/item/gun/ballistic/powder/musket(src)
 	new /obj/item/weapon/knife/dagger/bayonet(src)
 	new /obj/item/storage/belt/pouch/bullets(src)
 	new /obj/item/reagent_containers/glass/bottle/aflask(src)

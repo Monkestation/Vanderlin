@@ -113,12 +113,9 @@
 
 	remove_movespeed_modifier(MOVESPEED_ID_BULKY_DRAGGING)
 
-/mob/living/can_zFall(turf/T, levels)
-	return ..()
-
 /mob/living/canZMove(dir, turf/target, swimming = FALSE)
 	if(!swimming)
-		return can_zTravel(target, dir) && (movement_type & FLYING)
+		return can_zTravel(target, dir) && (movement_type & (FLYING|FLOATING))
 	if(!istype(target, /turf/open/water))
 		return FALSE
 	return can_zTravel(target, dir)

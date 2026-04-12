@@ -20,5 +20,5 @@
 	can_roll = FALSE
 
 /datum/migrant_role/wretch
-	name = "Wretch"
+	name = ROLE_WRETCH
 	antag_datum = /datum/antagonist/wretch

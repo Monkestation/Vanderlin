@@ -84,7 +84,7 @@
 	beltl = /obj/item/ammo_holder/quiver/bolts
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backl = /obj/item/gun/ballistic/bow/cross
 	pants = /obj/item/clothing/pants/trou/leather/advanced
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/cup/golden = 3,
