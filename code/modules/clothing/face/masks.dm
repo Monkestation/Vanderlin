@@ -425,6 +425,10 @@
 					H.update_inv_wear_mask()
 		user.regenerate_clothes()
 
+/obj/item/clothing/face/shepherd/guard
+	color = CLOTHING_PLUM_PURPLE
+	uses_lord_coloring = LORD_PRIMARY
+
 /obj/item/clothing/face/shepherd/rag
 	icon_state = "ragmask"
 
