@@ -92,6 +92,6 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/alch/pain
 	effectedstats = list(STATKEY_END = -5)
 
-/atom/movable/screen/alert/status_effect/buff/alch/pain
+/atom/movable/screen/alert/status_effect/debuff/alch/pain
 	name = "SUFFERING"
 
