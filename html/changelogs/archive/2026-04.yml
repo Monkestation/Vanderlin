@@ -126,3 +126,75 @@
   - code_imp: Rewrites how job spawn landmarks work, providing proper latespawn capacity.
   - code_imp: Removed two unused job files.
   - map: Maps in the changes.
+2026-04-11:
+  CheffieGithub:
+  - rscadd: You can now under/overload blackpowder guns. Underloading reduces power,
+      overloading increases it and damages the gun.
+  - rscadd: Inspecting a gun will now very safely look down the barrel and tell you
+      about the projectile, powder, hammer and wheel status.
+  - rscadd: Slightly changed puffer operation see PR for full details.
+  - bugfix: Fixed muskets and puffers having no sound for the striker.
+  - balance: Powder for the musket increased to 10 from 5.
+  - balance: Slurbow fits in bags 2x2.
+  - bugfix: Fixed formikrag wings not allowing you to float over gaps
+  Draggeru:
+  - bugfix: finishes some Wintermare and Ossland Accent touch ups
+  - bugfix: fixes some of the longer swear replacements for the halfling accent
+  - bugfix: Fixes some jank with the grenzel accent
+  - rscadd: Replaces the old grenzel accent with a more conlang version.
+  - rscadd: Adds the grenzel accent to the dwarf accent selection pool
+  - rscadd: Adds Grenzel and Ossland accents to the humen accent pool
+  KevinfromHP:
+  - rscadd: Folk Heroes were moved back to rare adventurers.
+  - balance: Rebalanced the Paladin's to lower qualities
+  - balance: Vaquero has received some buffs
+  - balance: Swashbuckler has received some buffs
+  - bugfix: various issues related to Wretches and other antag roles keeping some
+      job things upon transfer to an antag.
+  Monkeke2:
+  - rscadd: Hand gives leadership hours (experience)
+2026-04-12:
+  Archeonan:
+  - balance: 'Replaced psydonian templar fluted cuirass with psydonian cuirass
+
+      :cl:
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  CheffieGithub:
+  - bugfix: Fixed bayonet
+  KevinfromHP:
+  - refactor: Black Briar mechanically operates as a flaw instead of a trait.
+  - rscdel: Removes the Call
+  MissyNym:
+  - map: Fixed the fences in Malum's Anvil and added some additional ones to account
+      for adventurer/pilgrim spawns.
+  - map: Widened the "main path" in Malum's Anvil for travel into town.
+  - map: Added grass and bushes to Malum's Anvil so people can at least scrounge up
+      basic materials.
+  - map: Added a sleeping area for adepts to the Anvil Inquisition base, since they
+      did not previously have one.
+  - map: Further blocked off the Vanderlin Old Church.
+  SmokingCrackForChrist:
+  - sound: Adds three new endround stings.

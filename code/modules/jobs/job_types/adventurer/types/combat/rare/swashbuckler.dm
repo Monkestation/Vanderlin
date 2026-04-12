@@ -1,11 +1,10 @@
 /datum/attribute_holder/sheet/job/swashbuckler
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
 		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE = 3,
-		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/swords = 40,
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/swords = 35,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -16,7 +15,6 @@
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/traps = 20,
 	)
 
@@ -33,34 +31,34 @@
 		SPEC_ID_RAKSHARI,\
 		SPEC_ID_TRITON,\
 	)
-	allowed_patrons = list(/datum/patron/divine/abyssor)
-	outfit = /datum/outfit/folkhero/swashbuckler
+	outfit = /datum/outfit/swashbuckler
 	total_positions = 1
-	category_tags = list(CTAG_FOLKHEROES)
+	category_tags = list(CTAG_ADVENTURER)
+	roll_chance = 7
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/swashbuckler
 
 	traits = list(
-		TRAIT_DODGEEXPERT,
+		TRAIT_DUALWIELDER,
 	)
 
-/datum/outfit/folkhero/swashbuckler
-	name = "Swashbuckler (Folkhero)"
-	head = /obj/item/clothing/head/helmet/leather/headscarf
+/datum/outfit/swashbuckler
+	name = "Swashbuckler"
+	head = /obj/item/clothing/head/helmet/leather/tricorn
 	pants = /obj/item/clothing/pants/tights/sailor
 	belt = /obj/item/storage/belt/leather
 	armor = /obj/item/clothing/armor/leather/jacket/sea
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/natural/worms/leech = 2,
-		/obj/item/storage/belt/pouch/coins/mid = 1
+		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 	backr = /obj/item/fishingrod/fisher
 	beltl = /obj/item/weapon/sword/sabre/cutlass
-	beltr = /obj/item/weapon/knife/dagger
+	beltr = /obj/item/weapon/sword/sabre/cutlass
 	shoes = /obj/item/clothing/shoes/boots
-	neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
+	neck = /obj/item/clothing/neck/psycross/pearl
 
-/datum/outfit/folkhero/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	shirt = pick(/obj/item/clothing/shirt/undershirt/sailor, /obj/item/clothing/shirt/undershirt/sailor/red)

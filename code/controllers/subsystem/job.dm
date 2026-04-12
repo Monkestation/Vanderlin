@@ -160,11 +160,6 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: lunatic, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!player.client.whitelisted()))
-			JobDebug("Eligibility failed: whitelist, Player: [player], Job: [job.title]")
-			return FALSE
-
 	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		JobDebug("Eligibility failed: age, Player: [player], Job: [job.title]")
 		return FALSE
@@ -460,9 +455,6 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(!job.enabled)
 			continue
-		if(CONFIG_GET(flag/usewhitelist))
-			if(job.whitelist_req && (!player.client.whitelisted()))
-				continue
 		if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
 			continue
 
@@ -823,7 +815,6 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/get_last_resort_spawn_points()
 	//bad mojo
 
-	stack_trace("Unable to find last resort spawn point.")
 	//fuck you
 	if(length(backup_join_landmarks))
 		return pick(backup_join_landmarks)
@@ -831,7 +822,9 @@ SUBSYSTEM_DEF(job)
 	if(length(GLOB.latejoin_landmarks))
 		return pick(GLOB.latejoin_landmarks)
 
-	return pick(GLOB.roundstart_landmarks)
+	if(length(GLOB.roundstart_landmarks))
+		return pick(GLOB.roundstart_landmarks)
+	stack_trace("Unable to find last resort spawn point.")
 	//return GET_ERROR_ROOM
 
 /datum/controller/subsystem/job/proc/CanPickJob(mob/living/player, datum/job/job)
@@ -868,10 +861,6 @@ SUBSYSTEM_DEF(job)
 
 	if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
 		return
-
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!player.client.whitelisted()))
-			return
 
 	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		return

@@ -1,0 +1,5 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - balance: "If grabbed by a pacifist, their grab can be broken instantly (like passive grabs when out of combat)"
+  - bugfix: "Pacifists can no longer slit throats, after a study has determined that it is a harmful act"

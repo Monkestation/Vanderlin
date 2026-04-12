@@ -9,6 +9,7 @@
 	department_flag = OUTSIDERS
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
+	is_foreigner = TRUE
 
 	/// An associative list of honorary titles to choose from.
 	/// The key is the title, the value indicates whether it is a prefix (0) or a suffix (1)
@@ -25,7 +26,7 @@
 	wretch_select_bounty(spawned)
 
 /datum/job/advclass/wretch/proc/wretch_select_bounty(mob/living/carbon/human/H)
-	var/bounty_poster = browser_input_list(H, "Who placed a bounty on you?", "Filthy Criminal", list("The Divine Pantheon", "Kingsfield Expanse"))
+	var/bounty_poster = tgui_input_list(H, "Who placed a bounty on you?", "Filthy Criminal", list("The Divine Pantheon", "Kingsfield Expanse"))
 	if(bounty_poster == "Kingsfield Expanse")
 		GLOB.outlawed_players += H.real_name
 	else

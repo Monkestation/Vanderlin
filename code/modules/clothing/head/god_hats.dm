@@ -62,9 +62,18 @@
 	bloody_icon_state = "helmetblood_big"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	resistance_flags = FIRE_PROOF // Made of metal
-	armor = ARMOR_WEAK
-	salvage_result = NUTRITION_LEVEL_HUNGRY
+	armor = ARMOR_MAILLE_IRON
+	blocksound = CHAINHIT
+	prevent_crits = CUT_AND_MINOR_CRITS
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	body_parts_covered = FACE | NECK
+	hooded_body_parts_covered = HEAD_EXCEPT_MOUTH
+
+	max_integrity = INTEGRITY_STANDARD
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/astrata
 	name = "sun hood"

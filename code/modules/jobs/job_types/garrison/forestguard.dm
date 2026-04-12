@@ -34,10 +34,9 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
-
-/datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -268,10 +267,9 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-/datum/job/advclass/forestguard/ruffian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyellorphan)
+	verbs = list(
+		/mob/proc/haltyellorphan
+	)
 
 /datum/attribute_holder/sheet/job/forestguard/rat
 	attribute_variance = list(
@@ -317,11 +315,10 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
-/datum/job/advclass/forestguard/rat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-
-	add_verb(spawned, /mob/proc/haltyellorphan)
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
