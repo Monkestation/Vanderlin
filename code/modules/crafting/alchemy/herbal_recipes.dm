@@ -495,13 +495,10 @@
 	. = ..()
 	M.add_stress(/datum/stress_event/herbal_calm)
 
-/datum/reagent/poison/herbal/tranq/on_mob_life(mob/living/carbon/M)
-	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
-	if(istype(drowsiness))
-		if(drowsiness?.duration < sleep_power)
-			M.adjust_drowsiness_up_to(30 SECONDS, 120 SECONDS)
-	M.adjust_stamina(10)
+/datum/reagent/poison/herbal/tranq/on_mob_life(mob/living/L)
 	. = ..()
+	L.adjust_drowsiness_up_to(30 SECONDS, sleep_power)
+	L.adjust_stamina(10)
 
 /datum/reagent/poison/herbal/tranq/overdose_process(mob/living/M)
 	M.Unconscious(200)
