@@ -483,7 +483,7 @@
 
 /datum/reagent/poison/herbal/tranq
 	name = "Liquid Tranquility"
-	description = "A deeply relaxing herbal draught that promotes restful sleep and calms the mind."
+	description = "A weaponized sleeping draught designed to knock the consumer unconcious."
 	reagent_state = LIQUID
 	color = "#4a3c5f"
 	metabolization_rate = 0.8
