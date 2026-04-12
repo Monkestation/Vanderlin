@@ -171,6 +171,14 @@
 		water_turf.water_height = max(water_turf.water_height, WATER_HEIGHT_DEEP)
 		return
 
+/turf/open/water/proc/toggle_transparency()
+	if(istransparentturf(src))
+		REMOVE_TURF_TRANSPARENCY(src, INNATE_TRAIT)
+		underlays += mutable_appearance(icon, underlay_icon_state)
+	else
+		underlays = list()
+		ADD_TURF_TRANSPARENCY(src, INNATE_TRAIT)
+
 /turf/open/water/proc/set_watervolume(volume)
 	water_volume = volume
 	if(src in children)
