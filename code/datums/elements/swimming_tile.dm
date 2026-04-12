@@ -133,7 +133,8 @@
 		var/turf/open/water/water_turf = owner_turf
 		if(owner.encumbrance >= (HAS_TRAIT(owner, TRAIT_SWIMMER) ? ENCUMBRANCE_EXTREME : ENCUMBRANCE_HEAVY))
 			ADD_TRAIT(owner, TRAIT_SINKING, TRAIT_STATUS_EFFECT(id))
-			water_turf.try_z_swim(owner, FALSE, TRUE)
+			if(istransparentturf(owner_turf))
+				water_turf.try_z_swim(owner, FALSE, TRUE)
 			return
 	REMOVE_TRAIT(owner, TRAIT_SINKING, TRAIT_STATUS_EFFECT(id))
 
