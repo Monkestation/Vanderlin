@@ -121,7 +121,7 @@
 	color = CLOTHING_BLOOD_RED
 	icon_state = "guardcloak"
 	allowed_race = ALL_RACES_LIST
-	uses_lord_coloring = LORD_PRIMARY
+	uses_lord_coloring = LORD_SECONDARY
 
 /obj/item/clothing/cloak/half/shadowcloak
 	name = "stalker cloak"
