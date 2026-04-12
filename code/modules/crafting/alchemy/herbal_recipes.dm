@@ -614,16 +614,13 @@
 	metabolization_rate = 0.1
 	taste_description = "cold gold"
 
-/datum/reagent/poison/herbal/kingsbane/on_mob_add(mob/living/L)
-	. = ..()
-	to_chat(L, span_notice("You suddenly feel sick around mammons..."))
-	ADD_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
+/datum/reagent/poison/herbal/kingsbane/on_mob_metabolize(mob/living/M)
+	if(M.client)
+		ADD_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
-/datum/reagent/poison/herbal/kingsbane/on_mob_delete(mob/living/L)
-	. = ..()
-	REMOVE_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
-
-
+/datum/reagent/poison/herbal/kingsbane/on_mob_end_metabolize(mob/living/M)
+	if(M.client)
+		REMOVE_TRAIT(M, TRAIT_MATTHIOS_CURSE, "[type]")
 
 // Combat Enhancement
 
