@@ -537,7 +537,15 @@
 	taste_description = "berry"
 
 /datum/reagent/poison/herbal/death/on_mob_life(mob/living/carbon/M)
-	qdel(BODY_ZONE_HEAD)  //admin only if they want to RP  a sniper or something. Insta kills people
+/datum/reagent/poison/herbal/death/on_mob_add(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		var/obj/item/bodypart/head/dead_head = C.get_bodypart(BODY_ZONE_HEAD)
+		if(dead_head)
+			qdel(dead_head)
+	else if(L.stat != DEAD)
+		L.death()
 
 /*
 /datum/reagent/poison/herbal/rat
