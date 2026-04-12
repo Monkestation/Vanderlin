@@ -572,9 +572,8 @@
 	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
-	if(M.client)
-		REMOVE_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
-		REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+	REMOVE_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+	REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
 
 
 /datum/reagent/poison/herbal/ghoulpowder/on_mob_metabolize(mob/living/M)
