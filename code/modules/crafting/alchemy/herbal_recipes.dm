@@ -521,9 +521,10 @@
 		
 	return ..()
 
-/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(20)
-	M.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
+/datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
+	. = ..()
+	L.adjustFireLoss(20)
+	L.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
 
 /datum/reagent/poison/herbal/death
 	name = "Berry Juice"
