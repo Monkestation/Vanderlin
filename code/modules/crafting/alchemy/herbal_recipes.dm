@@ -524,7 +524,6 @@
 /datum/reagent/poison/herbal/acid/on_mob_life(mob/living/L)
 	. = ..()
 	L.adjustFireLoss(20)
-	L.adjustOrganLoss(ORGAN_SLOT_TONGUE, 0.5) //will this hurt? Yes. I hope to see people melt
 	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
 
 /datum/reagent/poison/herbal/death
