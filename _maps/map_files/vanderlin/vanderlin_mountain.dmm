@@ -2139,8 +2139,8 @@
 /area/under/mountains/anvil/lower)
 "akk" = (
 /obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-mountain_town-town";
-	aportalid = "vanderlin-mountain_town-mountain"
+	aportalgoesto = "vanderlin-forest_mountain-forest";
+	aportalid = "vanderlin-forest_mountain-mountain"
 	},
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -5894,8 +5894,8 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aBC" = (
 /obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-mountain_town-town";
-	aportalid = "vanderlin-mountain_town-mountain"
+	aportalgoesto = "vanderlin-forest_mountain-forest";
+	aportalid = "vanderlin-forest_mountain-mountain"
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
