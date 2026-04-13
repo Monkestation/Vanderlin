@@ -124,6 +124,8 @@
 	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
 	VAR_FINAL/list/skills
 
+	var/list/verbs
+
 	/// Associative list of skill - base multiplier to set for skill_holder
 	var/list/skill_multipliers = list()
 
@@ -138,8 +140,6 @@
 
 	/// Lower number of attunemnets to grant
 	var/attunements_min
-
-	var/whitelist_req = FALSE //!
 
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
@@ -213,6 +213,7 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/skeleton/zizoid,
 	)
 
 	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
@@ -300,6 +301,9 @@
 	for(var/datum/language/to_learn as anything in languages)
 		if(!spawned.has_language(to_learn))
 			spawned.grant_language(to_learn)
+
+	if(length(verbs))
+		add_verb(spawned, verbs)
 
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
@@ -420,6 +424,83 @@
 	if(ishuman(spawned))
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
+
+
+/// this "mostly" removes the existence of a job from someone.
+/// the unfortunately reality is that even this is still a flawed removal
+/datum/job/proc/remove_job(mob/living/carbon/human/spawned)
+	if(QDELETED(spawned))
+		return
+	if(!ishuman(spawned))
+		return
+
+	. = TRUE
+
+	if(!QDELETED(spawned.cleric))
+		qdel(spawned.cleric)
+	spawned.honorary = null
+	spawned.honorary_suffix = null
+	if(antag_role && spawned.mind)
+		spawned.mind.remove_antag_datum(antag_role)
+
+	if(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.remove_quirk(flaw)
+
+	if(give_bank_account)
+		SStreasury.remove_bank_account(spawned)
+		if(noble_income)
+			SStreasury.noble_incomes -= spawned
+
+	if(cmode_music)
+		spawned.cmode_music = initial(spawned.cmode_music)
+
+	if(spawned.mind)
+		for(var/X in peopleknowme)
+			for(var/datum/mind/found_mind in get_minds(X))
+				spawned.mind.forget_source_identity(found_mind)
+
+		for(var/X in peopleiknow)
+			for(var/datum/mind/found_mind in get_minds(X))
+				found_mind.forget_source_identity(spawned.mind)
+
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, 1)
+
+	for(var/datum/attribute/skill/skill as anything in skills)
+		var/amount_or_list = skills[skill]
+		if(islist(amount_or_list))
+			spawned.clamped_adjust_skill_level(skill, -amount_or_list[1], amount_or_list[2], TRUE)
+		else
+			spawned.adjust_skillrank(skill, -amount_or_list, TRUE)
+
+	spawned.adjust_spell_points(-spell_points)
+	remove_spells(spawned)
+	spawned.remove_stat_modifier(STATMOD_JOB)
+
+	if(length(verbs))
+		remove_verb(spawned, verbs)
+
+	if(is_foreigner)
+		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
+	if(is_recognized)
+		REMOVE_TRAIT(spawned, TRAIT_RECOGNIZED, TRAIT_GENERIC)
+
+	//for(var/datum/language/to_lose as anything in languages)
+	//	if(spawned.has_language(to_lose)) // this is gonna cause issues in certain cases until languages have sources...
+	//		spawned.remove_language(to_lose)
+
+	REMOVE_TRAITS_IN(spawned, JOB_TRAIT)
+	if(spawned.mind)
+		REMOVE_TRAITS_IN(spawned.mind, JOB_TRAIT)
+	if(magic_user)
+		spawned.mana_pool.set_intrinsic_recharge(spawned.mana_pool.intrinsic_recharge_sources & ~MANA_ALL_LEYLINES)
+
+	if(parent_job)
+		return parent_job.remove_job(spawned)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))

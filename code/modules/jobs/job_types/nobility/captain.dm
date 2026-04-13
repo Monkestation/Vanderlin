@@ -78,11 +78,13 @@
 		TRAIT_HEAVYARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyell
+	)
+
 
 /datum/job/captain/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-
-	add_verb(spawned, /mob/proc/haltyell)
 
 	if(spawned.dna?.species?.id == SPEC_ID_HUMEN)
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()

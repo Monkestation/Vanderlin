@@ -20,9 +20,11 @@
 	tutorial = "Your vigil over the elven cities has long since ended. Though dutiful, the inevitable happened and now you hope these lands have use for your talents."
 	allowed_races = list(SPEC_ID_ELF)
 	total_positions = 1
-	outfit = /datum/outfit/folkhero/bladesinger
-	category_tags = list(CTAG_FOLKHEROES)
+	outfit = /datum/outfit/bladesinger
+	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
+	roll_chance = 7
+
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bladesinger
 
@@ -38,8 +40,8 @@
 		spawned.underwear_color = CLOTHING_SOOT_BLACK
 		spawned.update_body()
 
-/datum/outfit/folkhero/bladesinger
-	name = "Bladesinger (Folkhero)"
+/datum/outfit/bladesinger
+	name = "Bladesinger"
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr = /obj/item/weapon/sword/long/greatsword/elfgsword
 	beltl = /obj/item/storage/belt/pouch/coins/mid

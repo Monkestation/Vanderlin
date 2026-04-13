@@ -1,9 +1,0 @@
-author: "Draggeru"
-delete-after: True
-changes:
-  - bugfix: "finishes some Wintermare and Ossland Accent touch ups"
-  - bugfix: "fixes some of the longer swear replacements for the halfling accent"
-  - bugfix: "Fixes some jank with the grenzel accent"
-  - rscadd: "Replaces the old grenzel accent with a more conlang version."
-  - rscadd: "Adds the grenzel accent to the dwarf accent selection pool"
-  - rscadd: "Adds Grenzel and Ossland accents to the humen accent pool"

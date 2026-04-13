@@ -1027,10 +1027,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/available_in_days = job.available_in_days(user.client)
 						category_html += "[used_name]</td><td><font color=red> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
 						continue
-					if(CONFIG_GET(flag/usewhitelist))
-						if(job.whitelist_req && (!user.client.whitelisted()))
-							category_html += "<font color=#6183a5>[used_name]</font></td><td> </td></tr>"
-							continue
 					var/lock_html = get_job_lock_html(job, user, used_name)
 					if(lock_html)
 						category_html += lock_html

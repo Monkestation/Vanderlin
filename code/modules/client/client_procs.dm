@@ -1354,16 +1354,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
 
-/client/proc/whitelisted()
-	if(whitelisted != 2)
-		return whitelisted
-	else
-		if(check_whitelist(ckey))
-			whitelisted = 1
-		else
-			whitelisted = 0
-		return whitelisted
-
 /client/proc/has_triumph_buy(triumph_id, unactivated_check = FALSE)
 	if(!triumph_id)
 		return FALSE
