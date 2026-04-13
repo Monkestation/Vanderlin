@@ -491,14 +491,13 @@
 	desc = "An old helmet of iron, it has the colours of your lord, you fight for him."
 	icon_state = "watchbuta"
 
-	body_parts_covered = COVERAGE_HEAD_NOSE
+	body_parts_covered = COVERAGE_HEAD
 	flags_inv = HIDEEARS|HIDEHAIR
-	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
-	item_weight = 3.7 KILOGRAMS
+	item_weight = 3.2 KILOGRAMS
 	detail_tag = "_detail"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
@@ -509,17 +508,16 @@
 	desc = "An elaborated helmet of steel, it has the colours of your lord and you are a leader in his defense."
 	icon_state = "sargebuta"
 
-	body_parts_covered = COVERAGE_HEAD_NOSE
+	body_parts_covered = COVERAGE_HEAD
 	flags_inv = HIDEEARS|HIDEHAIR
-	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_STRONG//slighly more integrity
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
-	item_weight = 3.7 KILOGRAMS
+	item_weight = 3.2 KILOGRAMS
 	detail_tag = "_detail"
 	detail_color = CLOTHING_PLUM_PURPLE
-	uses_lord_coloring = LORD_PRIMARY
+	uses_lord_coloring = LORD_SECONDARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/helmet/kettle/slit/atarms
