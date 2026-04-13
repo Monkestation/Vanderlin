@@ -633,7 +633,7 @@
 		M.heal_bodypart_damage(0.5, 0, 0)
 	. = ..()
 
-// Knowledge Enhancement
+// Knowledge Enhancement Test
 
 /datum/reagent/buff/herbal/alchemist_insight
 	name = "Alchemist's Insight"
