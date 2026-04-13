@@ -19,16 +19,17 @@
 	var/stage = 1
 	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
 	var/faildirt = 0
+
 	///Type path of the present headstone. If this is empty, there isnt one.
-	var/headstone
+	var/obj/item/gravedecor/headstone
 	///Type path of the present gravefence. If this is empty, there isnt one.
-	var/gravefence
+	var/obj/item/gravedecor/gravefence
 	///From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
 	var/gravequality = 0
-	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
-	var/is_consecrated
 	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
 	var/bonusquality
+	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
+	var/is_consecrated
 
 
 /obj/structure/closet/dirthole/Initialize()
@@ -124,6 +125,55 @@
 	if(HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
 		if(lootroll == 1)
 			. += "<span class='warning'>Better let this one sleep.</span>"
+
+/// Alt clicking allows you to remove grave decorations if the grave has not been consecrated yet
+/obj/structure/closet/dirthole/AltClick(mob/user, list/modifiers)
+	if(!Adjacent(user) || stage != 4)
+		return FALSE
+
+	if(is_consecrated)
+		to_chat(user, span_warning("I cannot modify a grave that has been already consecrated..."))
+		return FALSE
+
+	var/list/GraveDecorations
+	if(headstone)
+		GraveDecorations += headstone
+	if(gravefence)
+		GraveDecorations += gravefence
+
+	// List formed, handle if empty, only one, or both
+	var/obj/item/gravedecor/item_to_remove
+	if(!GraveDecorations)
+		return FALSE
+	else if(length(GraveDecorations) != 1)
+		item_to_remove = tgui_input_list(user, "Which decoration do you want to remove?", "Grave Decor Removal", GraveDecorations)
+	else
+		item_to_remove = GraveDecorations[1] // only one item
+
+	if(!item_to_remove)
+		return FALSE
+
+	// Time to actually remove the item
+	user.visible_message("[user] starts to remove \the [item_to_remove] from \the [src]", "You attempt to remove \the [item_to_remove] from \the [src]")
+	if(!do_after(user, 5 SECONDS, src, progress = TRUE))
+		to_chat(user, span_warning("You fail to remove \the [item_to_remove]!"))
+		return FALSE
+	else
+		user.visible_message("[user] removes \the [item_to_remove] from \the [src]", "You remove \the [item_to_remove] from \the [src]")
+
+		// Remove either headstone or gravestone
+		if(istype(item_to_remove, obj/item/gravedecor/headstone))
+			user.put_in_active_hand(item_to_remove)
+			headstone = null
+			//TODO update_overlays needs refactored
+			//update_overlays()
+			return TRUE
+		else if(istype(item_to_remove, obj/item/gravedecor/gravefence))
+			user.put_in_active_hand(item_to_remove)
+			gravefence = null
+			//TODO update_overlays needs refactored
+			//update_overlays()
+			return TRUE
 
 /obj/structure/closet/dirthole/insertion_allowed(atom/movable/AM)
 	if(istype(AM, /obj/structure/closet/crate/chest) || istype(AM, /obj/structure/closet/burial_shroud) || istype(AM, /obj/structure/closet/crate/coffin))
@@ -433,34 +483,39 @@
 			can_buckle = TRUE
 	update_appearance(UPDATE_ICON | UPDATE_NAME)
 
+/// Proc to update `quality`, should be called when `headstone` or `gravefence` is modified, and other cases where the condition of the grave has changed
 /obj/structure/closet/dirthole/proc/update_quality()
-	var/corpse_patron
-	gravequality = 0
-	if(bonusquality)
-		gravequality += bonusquality
-	if(stage == 4) //If it's an open grave, it should always be quality 0.
-		for(var/mob/living/corpse in contents)
-			corpse_patron = corpse.patron
-		if(headstone)
-			var/obj/item/gravedecor/headstone/I = headstone
-			var/heldquality = I.decorationquality
-			for(var/datum/patron/GravePatron in I.patron)
-   				if(GravePatron == corpse_patron)
-					heldquality += 3
-			gravequality += heldquality
-		if(gravefence)
-			var/obj/item/gravedecor/gravefence/I = gravefence
-			var/heldquality = I.decorationquality
-			for(var/datum/patron/GravePatron in I.patron)
-   				if(GravePatron == corpse_patron)
-					heldquality += 3
-			gravequality += heldquality
-		for(var/obj/structure/closet/crate/coffin/coffin in contents)
-			gravequality += 2
-			if(coffin.consecrated)
-				gravequality += 1
-		for(var/obj/structure/closet/burial_shroud/shroud in contents)
-			gravequality += 1
+    var/corpse_patron
+    gravequality = 0
+    if(stage != 4) // If not a complete grave, no quality
+        return
+    if(bonusquality)
+        gravequality += bonusquality
+
+    for(var/mob/living/corpse in contents)
+        corpse_patron = corpse.patron
+    if(headstone)
+        var/obj/item/gravedecor/headstone/Head = headstone
+        var/heldquality = Head.decorationquality
+        for(var/datum/patron/GravePatron in Head.patron)
+            if(GravePatron == corpse_patron)
+                heldquality += 3
+        gravequality += heldquality
+    if(gravefence)
+        var/obj/item/gravedecor/gravefence/Fence = gravefence
+        var/heldquality = Fence.decorationquality
+        for(var/datum/patron/GravePatron in Fence.patron)
+            if(GravePatron == corpse_patron)
+                heldquality += 3
+        gravequality += heldquality
+    for(var/obj/structure/closet/crate/coffin/coffin in contents)
+        gravequality += 2
+        if(coffin.consecrated)
+            gravequality += 1
+    for(var/obj/structure/closet/burial_shroud/shroud in contents)
+        gravequality += 1
+
+    return max(gravequality, 10)
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()
@@ -474,7 +529,7 @@
 		if(4)
 			icon_state = "gravecovered"
 
-/obj/structure/closet/dirthole/update_overlays()
+/obj/structure/closet/dirthole/update_overlays() // TODO: refactor to have overlays updated for gravedecor items + consecrate
 	. = ..()
 	if(!has_buckled_mobs() || stage != 3)
 		return
