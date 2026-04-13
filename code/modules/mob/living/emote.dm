@@ -36,7 +36,7 @@
 	if(!in_literal_hell && !patron?.can_pray(follower))
 		return
 
-	var/prayer = input("Whisper your prayer:", "Prayer") as text|null
+	var/prayer = tgui_input_text(user, "Whisper your Prayer", "Prayer", multiline = TRUE)
 	if(!prayer)
 		return
 
