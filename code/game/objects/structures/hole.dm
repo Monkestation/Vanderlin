@@ -15,16 +15,16 @@
 	lock = null
 	can_add_lock = FALSE
 	alternative_icon_handling = TRUE
-	///How big the hole is, at 3 you can bury a body, at 4 theres something buried.
+	/// How big the hole is, at 3 you can bury a body, at 4 theres something buried.
 	var/stage = 1
 	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
 	var/faildirt = 0
 
-	///Type path of the present headstone. If this is empty, there isnt one.
+	/// Present headstone. If this is empty, there isnt one.
 	var/obj/item/gravedecor/headstone
-	///Type path of the present gravefence. If this is empty, there isnt one.
+	/// Present gravefence. If this is empty, there isnt one.
 	var/obj/item/gravedecor/gravefence
-	///From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
+	/// From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
 	var/gravequality = 0
 	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
 	var/bonusquality
@@ -53,6 +53,10 @@
 			if(prob(23))
 				new /obj/item/natural/stone(T)
 	return ..()
+
+// TODO: When we implement more systems, such as passive devotion, we ensure it is removed before we delete
+/obj/structure/closet/dirthole/Destroy()
+	. = ..()
 
 /obj/structure/closet/dirthole/examine(mob/user)
 	. = ..()
@@ -135,7 +139,7 @@
 		to_chat(user, span_warning("I cannot modify a grave that has been already consecrated..."))
 		return FALSE
 
-	var/list/GraveDecorations
+	var/list/GraveDecorations = list()
 	if(headstone)
 		GraveDecorations += headstone
 	if(gravefence)
@@ -162,18 +166,16 @@
 		user.visible_message("[user] removes \the [item_to_remove] from \the [src]", "You remove \the [item_to_remove] from \the [src]")
 
 		// Remove either headstone or gravestone
-		if(istype(item_to_remove, obj/item/gravedecor/headstone))
-			user.put_in_active_hand(item_to_remove)
+		if(istype(item_to_remove, /obj/item/gravedecor/headstone))
+			user.put_in_active_hand(new item_to_remove.type())
 			headstone = null
-			//TODO update_overlays needs refactored
-			//update_overlays()
-			return TRUE
-		else if(istype(item_to_remove, obj/item/gravedecor/gravefence))
-			user.put_in_active_hand(item_to_remove)
+		else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
+			user.put_in_active_hand(new item_to_remove.type())
 			gravefence = null
-			//TODO update_overlays needs refactored
-			//update_overlays()
-			return TRUE
+
+		update_quality()
+		update_overlays()
+		return TRUE
 
 /obj/structure/closet/dirthole/insertion_allowed(atom/movable/AM)
 	if(istype(AM, /obj/structure/closet/crate/chest) || istype(AM, /obj/structure/closet/burial_shroud) || istype(AM, /obj/structure/closet/crate/coffin))
@@ -215,15 +217,18 @@
 		if(!do_after(user, 10 SECONDS, src))
 			return
 
+		// TODO this needs refactored so it spawns a subtype of `gravedecor/headstone` that tracks this stick but deletes it (restored if headstone removed)
 		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', "gravemarker1", 2.91)
 		add_overlay(headstone_overlay)
 		headstone = attacking_item.type
-		update_quality()
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
+
+		update_quality()
+		//update_appearance(UPDATE_ICON)
 		qdel(attacking_item)
 		return
 
@@ -235,19 +240,19 @@
 			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
 			return
 
-		var/obj/item/gravedecor/headstone/ourheadstone = attacking_item
 		if(!do_after(user, 5 SECONDS, src))
 			return
-		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', ourheadstone.icon_state, 2.91)
-		add_overlay(headstone_overlay)
-		headstone = attacking_item.type
-		update_quality()
+
+		headstone = attacking_item
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
+
 		qdel(attacking_item)
+		update_quality()
+		update_appearance(UPDATE_ICON)
 		return
 
 	if(istype(attacking_item, /obj/item/gravedecor/gravefence))
@@ -258,14 +263,13 @@
 			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
 			return
 
-		var/obj/item/gravedecor/ourfence = attacking_item
 		if(!do_after(user, 5 SECONDS, src))
 			return
-		var/mutable_appearance/fence_overlay = mutable_appearance('icons/turf/floors.dmi', ourfence.icon_state, 2.9)
-		add_overlay(fence_overlay)
-		gravefence = attacking_item.type
-		update_quality()
+		gravefence = attacking_item
+
 		qdel(attacking_item)
+		update_quality()
+		update_appearance(UPDATE_ICON)
 		return
 
 	if(!istype(attacking_item, /obj/item/weapon/shovel))
@@ -349,15 +353,15 @@
 			cut_overlays()
 			open()
 			if(headstone)
-				new headstone(get_turf(src))
+				new headstone.type(get_turf(src))
 				headstone = null
 			if(gravefence)
-				new gravefence(get_turf(src))
+				new gravefence.type(get_turf(src))
 				gravefence = null
 			if(is_consecrated)	// Curses you if you don't have the graverobber trait, otherwise records you as a criminal and gives a special message.
 				if(ishuman(user))
 					var/mob/living/carbon/human/L = user
-					var/robbery_location = get_area_name(src)
+					var/robbery_location = get_area_name(get_turf(src))
 					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
 						var/robbing = TRUE
 						var/message = "I perform the secret rite of concealment, the Undermaiden won't know of my transgression here."
@@ -387,7 +391,7 @@
 								if (player.stat == DEAD || isbrain(player))
 									continue
 								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
-								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
 									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
 						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 						record_round_statistic(STATS_GRAVES_ROBBED)
@@ -398,8 +402,6 @@
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		update_quality()
 		is_consecrated = null // Unconsecrate.
-
-
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
@@ -529,12 +531,23 @@
 		if(4)
 			icon_state = "gravecovered"
 
-/obj/structure/closet/dirthole/update_overlays() // TODO: refactor to have overlays updated for gravedecor items + consecrate
+/obj/structure/closet/dirthole/update_overlays()
+	cut_overlays()
 	. = ..()
-	if(!has_buckled_mobs() || stage != 3)
+	if(stage < 3)
 		return
-	var/mutable_appearance/abovemob = mutable_appearance('icons/turf/floors.dmi', "grave_above", ABOVE_MOB_LAYER)
-	. += abovemob
+	else if(stage == 3)
+		. += mutable_appearance(icon, "grave_above", ABOVE_MOB_LAYER)
+
+	// handle gravedecor overlays
+	if(headstone)
+		. += mutable_appearance('icons/turf/floors.dmi', headstone.icon_state, 2.91)
+	if(gravefence)
+		. += mutable_appearance('icons/turf/floors.dmi', gravefence.icon_state, 2.9)
+
+	// handle consecrate overlay
+	//if(is_consecrated >= CONSECRATED)
+		//. += mutable_appearance(icon, "graveconsecrated")
 
 /obj/structure/closet/dirthole/update_name(updates)
 	. = ..()
