@@ -466,7 +466,7 @@
 	desc = "An old archaic helmet of a symbol long forgotten."
 	icon_state = "guardhelm"
 
-	body_parts_covered = COVERAGE_HEAD_NOSE
+	body_parts_covered = COVERAGE_HEAD_NOSE|EYES
 	flags_inv = HIDEEARS|HIDEHAIR
 	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_STRONG

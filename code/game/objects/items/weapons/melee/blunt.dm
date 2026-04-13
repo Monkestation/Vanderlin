@@ -272,7 +272,7 @@
 	item_weight = 1.8 KILOGRAMS
 
 
-//................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
+//................ Iron Bludgeon ............... // Less damage than mace, but gets swift balance like a better cudgel
 /obj/item/weapon/mace/bludgeon
 	name = "iron bludgeon"
 	desc = "An iron headed club, useful for beating the dregs back into their gutters."
