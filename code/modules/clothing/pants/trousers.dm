@@ -45,7 +45,7 @@
 	name = "hardened leather chausses"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
 	max_integrity = INTEGRITY_STRONG
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
@@ -80,7 +80,7 @@
 	name = "masterwork leather chausses"
 	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	max_integrity = INTEGRITY_STRONG + 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
+	prevent_crits = ALL_EXCEPT_STAB
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/pants/trou/leather/masterwork/Initialize()
