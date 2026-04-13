@@ -135,14 +135,14 @@
 	lose_text = "<span class='notice'>My throat stops itching.</span>"
 
 /datum/brain_trauma/mild/nervous_cough/on_life()
-	if(prob(12) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
-		if(prob(5))
-			to_chat(owner, "<span notice='warning'>[pick("You have a coughing fit!", "You can't stop coughing!")]</span>")
+	if(prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
+		owner.emote("cough", forced = TRUE)
+		if(prob(12))
+			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
 			owner.Immobilize(20)
-			owner.emote("cough")
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 6)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 12)
-		owner.emote("cough")
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 6)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 12)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 18)
 	..()
 
 /datum/brain_trauma/mild/expressive_aphasia

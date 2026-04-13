@@ -28,12 +28,8 @@
 	ass.cmode_music = 'sound/music/cmode/antag/CombatAssassin.ogg'
 	add_verb(ass, /mob/living/carbon/human/proc/who_targets) // wtf
 	ass.set_patron(/datum/patron/inhumen/graggar, TRUE)
-	var/old_knife_skill = ass.get_skill_level(/datum/skill/combat/knives, TRUE)
-	var/old_sneak_skill = ass.get_skill_level(/datum/skill/misc/sneaking, TRUE)
-	if(old_knife_skill < 4) // If the assassined player has less than 4 knife skill, get them to 4.
-		ass.adjust_skillrank(/datum/skill/combat/knives, 4 - old_knife_skill, TRUE)
-	if(old_sneak_skill < 5) // If the assassined player has less than 5 sneak skill, get them to 5.
-		ass.adjust_skillrank(/datum/skill/misc/sneaking, 5 - old_sneak_skill, TRUE)
+	ass.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+	ass.clamped_adjust_skill_level(/datum/attribute/skill/misc/sneaking, 50, 50)
 	var/yea = /obj/item/weapon/knife/dagger/steel/profane
 	var/wah = /obj/item/inqarticles/garrote/razor
 	var/gah = /obj/item/lockpick

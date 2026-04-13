@@ -11,7 +11,7 @@
 /datum/status_effect/debuff/addiction
 	id = "addiction"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/addiction
-	effectedstats = list(STATKEY_END = -1, STATKEY_LCK = -1)
+	effectedstats = list(STAT_ENDURANCE = -1, STAT_FORTUNE = -1)
 	duration = 100
 
 //these legit just exist sow we get unique instances
@@ -314,7 +314,7 @@
 
 	var/current_pain = H.get_complex_pain()
 	var/bloodloss_factor = clamp(1.0 - (H.blood_volume / BLOOD_VOLUME_NORMAL), 0.0, 0.5)
-	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (H.STAEND / 10), 0.5, 1.5))
+	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) / 10), 0.5, 1.5))
 
 	if(last_pain_threshold == NONE)
 		to_chat(H, span_boldwarning("I could really use some pain right now..."))
@@ -429,12 +429,11 @@
 				break
 
 	if(prob(2))
-		var/encumbrance = H.get_encumbrance()
-		if(encumbrance >= 0.5)
+		if(H.encumbrance >= ENCUMBRANCE_MEDIUM)
 			for(var/obj/item/bodypart/BP in H.bodyparts)
 				if(BP.body_zone == BODY_ZONE_CHEST)
 					var/pain_amount = rand(8, 15)
-					if(encumbrance >= 0.8)
+					if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 						pain_amount = rand(15, 25)
 						to_chat(H, span_warning("Your heavy gear puts severe strain on your already painful back!"))
 					else

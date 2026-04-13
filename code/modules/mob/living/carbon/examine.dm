@@ -45,7 +45,7 @@
 		LISTASSERTLEN(rounded_sections, rounded_index, list())
 		LAZYADDASSOC(rounded_sections, rounded_index, section)
 
-	for(var/i=1, i < length(rounded_sections), i++)
+	for(var/i=1, i <= length(rounded_sections), i++)
 		var/list/section = rounded_sections[i]
 		if(!length(section))
 			continue
@@ -102,6 +102,12 @@
 
 	. = list()
 
+	// Species, just below the name
+	var/datum/species/species = dna?.species
+	if(species)
+		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
+
 	// Lord's title
 	if(GLOB.lord_titles[real_name]) //should be tied to known persons but can't do that until there is a way to recognise new people
 		. += span_notice("[P[THEYVE]] been granted the title of \"[GLOB.lord_titles[real_name]]\".")
@@ -156,7 +162,7 @@
 
 		// Outlaws
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
-			. += span_boldred(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
+			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
 		var/list/known_frumentarii = user.mind?.cached_frumentarii
@@ -184,6 +190,9 @@
 			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
+		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
+			. += span_userdanger("SUSPECTED OF HERESY...")
+
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
 		var/im_pur = HAS_TRAIT(src, TRAIT_PURITAN)
@@ -310,12 +319,6 @@
 
 	. = list()
 
-	// Species, just below the name
-	var/datum/species/species = dna?.species
-	if(species)
-		var/species_name = "\improper [user.mind?.has_antag_datum(/datum/antagonist/maniac) ? "disgusting pig" : species.name]"
-		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_SPECIES, "[P[THEYRE]] \a [species_name].")
-
 	// Maniac, higher up than others
 	if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
 		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_big(span_phobia("THE WORLD TWISTS! MANIAC!")))
@@ -344,9 +347,9 @@
 
 	/// Stat comparing
 	if(!self_inspect && L && user.cmode)
-		var/final_str = STASTR
-		var/final_con = STACON
-		var/final_spd = STASPD
+		var/final_str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+		var/final_con = GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)
+		var/final_spd = GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
 		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 			final_con = 10
@@ -354,7 +357,7 @@
 
 		var/list/comp_msg = list()
 		var/str_msg
-		switch(final_str - L.STASTR)
+		switch(final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
 			if(5 to INFINITY)
 				str_msg = span_bold("[P[THEY]] look[pl] much stronger than me.")
 				user.add_stress(/datum/stress_event/para/str)
@@ -370,9 +373,9 @@
 		if(str_msg)
 			comp_msg += str_msg
 
-		if(L.STAPER >= 12)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION)>= 12)
 			var/con_msg
-			switch(final_con - L.STACON)
+			switch(final_con - GET_MOB_ATTRIBUTE_VALUE(L, STAT_CONSTITUTION))
 				if(5 to INFINITY)
 					con_msg = span_bold("[P[THEY]] look[pl] much more bulky than me.")
 				if(1 to 5)
@@ -387,7 +390,7 @@
 				comp_msg += con_msg
 
 			var/spd_msg
-			switch(final_spd - L.STASPD)
+			switch(final_spd - GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED))
 				if(5 to INFINITY)
 					spd_msg = span_bold("[P[THEY]] look[pl] much quicker than me.")
 				if(1 to 5)
@@ -490,12 +493,10 @@
 
 	// missing limbs
 	var/appears_dead = FALSE
-	var/is_clearly_dead = FALSE
 	for(var/t in get_missing_limbs())
 		var/limb_msg = "[capitalize(P[THEIR])] [parse_zone(t)] is gone."
 		if(t==BODY_ZONE_HEAD)
 			limb_msg = span_boldred(limb_msg)
-			is_clearly_dead = TRUE
 		else
 			limb_msg = span_boldwarning(limb_msg)
 		. += limb_msg
@@ -508,7 +509,7 @@
 		if(hellbound)
 			. += span_red("[P[THEIR]] soul seems to have been ripped out of [P[THEIR]] body. Revival is impossible.")
 
-	if(is_clearly_dead || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
+	if(!getorganslot(ORGAN_SLOT_BRAIN) || (stat == DEAD && (IsAdminGhost(user) || self_inspect)))
 		. += span_boldred("[P[THEYRE]] dead.")
 	else if(appears_dead || stat >= UNCONSCIOUS)
 		. += span_boldwarning("[P[THEYRE]] unconscious.")
@@ -586,6 +587,7 @@
 		if(O)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
+				BODY_ZONE_PRECISE_MOUTH,
 				BODY_ZONE_CHEST,
 				BODY_ZONE_R_ARM,
 				BODY_ZONE_L_ARM,

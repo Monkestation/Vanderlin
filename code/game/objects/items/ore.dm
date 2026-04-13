@@ -33,7 +33,7 @@
 	smeltresult = /obj/item/ingot/gold
 	sellprice = 10
 	melting_material = /datum/material/gold
-	item_weight = 6.2 * GOLD_MULITPLIER
+	item_weight = 10.1 KILOGRAMS
 	mill_result = /obj/item/ore/dust/gold
 
 /obj/item/ore/gold/Initialize(mapload)
@@ -46,7 +46,7 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 8
 	melting_material = /datum/material/silver
-	item_weight = 6.2 * SILVER_MULTIPLIER
+	item_weight = 5.5 KILOGRAMS
 	mill_result = /obj/item/ore/dust/silver
 
 /obj/item/ore/silver/Initialize(mapload)
@@ -60,7 +60,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 5
 	melting_material = /datum/material/iron
-	item_weight = 6.2 * IRON_MULTIPLIER
+	item_weight = 4.15 KILOGRAMS
 	mill_result = /obj/item/ore/dust/iron
 
 /obj/item/ore/iron/Initialize(mapload)
@@ -73,7 +73,7 @@
 	smeltresult = /obj/item/ingot/copper
 	sellprice = 2
 	melting_material = /datum/material/copper
-	item_weight = 6.2 * COPPER_MULTIPLIER
+	item_weight = 4.7 KILOGRAMS
 	mill_result = /obj/item/ore/dust/copper
 
 /obj/item/ore/copper/Initialize(mapload)
@@ -87,7 +87,7 @@
 	smeltresult = /obj/item/ingot/tin
 	sellprice = 4
 	melting_material = /datum/material/tin
-	item_weight = 6.2 * TIN_MULTIPLIER
+	item_weight = 3.8 KILOGRAMS
 	mill_result = /obj/item/ore/dust/tin
 
 /obj/item/ore/tin/Initialize(mapload)
@@ -100,7 +100,7 @@
 	firefuel = 10 MINUTES
 	smeltresult = /obj/item/ore/coal
 	sellprice = 1
-	item_weight = 7
+	item_weight = 1.8 KILOGRAMS
 
 /obj/item/ore/coal/Initialize(mapload)
 	. = ..()
@@ -112,7 +112,7 @@
 	icon_state = "orecinnabar"
 	grind_results = list(/datum/reagent/mercury = 15)
 	sellprice = 5
-	item_weight = 6.2
+	item_weight = 4.2 KILOGRAMS
 
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
@@ -124,6 +124,59 @@
 	smeltresult = /obj/item/ore/coal/charcoal
 	sellprice = 1
 
+
+/* ............Black Briar............ */
+
+/obj/item/ore/cursedrosa
+	name = "black briar rosa"
+	icon_state = "cursedrosa"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head_items.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_MOUTH
+	item_weight = 4.7 KILOGRAMS
+	sellprice = 10
+
+	embedding = list(
+		"embed_chance" = 0.1, // we're cheating to make these embed items so if this happens tough luck
+		"embedded_pain_multiplier" = 0,
+		"embedded_fall_chance" = 0,
+	)
+
+	max_integrity = 500
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+
+/obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot & ITEM_SLOT_MOUTH)
+		icon_state = "cursedrosa_mouth"
+	else
+		icon_state = "cursedrosa"
+
+/obj/item/ore/cursedrosa/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/cursedrosa, FALSE, TRUE)
+
+/obj/item/ore/cursedrosa/examine(mob/user)
+	. = ..()
+	if(GetComponent(/datum/component/cursedrosa))
+		. += span_briar("Its thorns have not been trimmed.")
+	else
+		. += span_info("Its thorns have been trimmed.")
+
+/obj/item/ore/cursedrosa/attackby(obj/item/I, mob/living/user, params)
+	if(!user.cmode && istype(I, /obj/item/weapon/knife))
+		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+		if(QDELETED(thorns))
+			to_chat(user, span_warning("It has no thorns to trim."))
+		else
+			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
+			qdel(thorns)
+		return
+	return ..()
+
+/* ............Ingots............ */
 /obj/item/ingot
 	name = "ingot"
 	desc = "A parent bar of metal. If you see this, report it on github."
@@ -189,7 +242,7 @@
 	smeltresult = /obj/item/ingot/gold
 	sellprice = 100
 	melting_material = /datum/material/gold
-	item_weight = 7.5 * GOLD_MULITPLIER
+	item_weight = 12.25 KILOGRAMS
 
 /obj/item/ingot/iron
 	name = "iron bar"
@@ -198,7 +251,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = 25
 	melting_material = /datum/material/iron
-	item_weight = 7.5 * IRON_MULTIPLIER
+	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/thaumic
 	name = "thaumic iron bar"
@@ -208,7 +261,7 @@
 	smeltresult = /obj/item/ingot/thaumic
 	sellprice = 25
 	melting_material = /datum/material/thaumic_iron
-	item_weight = 7.5 * IRON_MULTIPLIER
+	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/copper
 	name = "copper bar"
@@ -217,7 +270,7 @@
 	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
 	melting_material = /datum/material/copper
-	item_weight = 7.5 * COPPER_MULTIPLIER
+	item_weight = 5.7 KILOGRAMS
 
 /obj/item/ingot/tin
 	name = "tin bar"
@@ -226,7 +279,7 @@
 	smeltresult = /obj/item/ingot/tin
 	sellprice = 15
 	melting_material = /datum/material/tin
-	item_weight = 7.5 * TIN_MULTIPLIER
+	item_weight = 4.6 KILOGRAMS
 
 /obj/item/ingot/bronze
 	name = "bronze bar"
@@ -235,7 +288,7 @@
 	smeltresult = /obj/item/ingot/bronze
 	sellprice = 30
 	melting_material = /datum/material/bronze
-	item_weight = 7.5 * BRONZE_MULTIPLIER
+	item_weight = 5.55 KILOGRAMS
 
 /obj/item/ingot/silver
 	name = "silver bar"
@@ -244,7 +297,7 @@
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
 	melting_material = /datum/material/silver
-	item_weight = 7.5 * SILVER_MULTIPLIER
+	item_weight = 6.65 KILOGRAMS
 
 /obj/item/ingot/silver/Initialize(mapload)
 	. = ..()
@@ -257,21 +310,23 @@
 	smeltresult = /obj/item/ingot/steel
 	sellprice = 40
 	melting_material = /datum/material/steel
-	item_weight = 7.5 * STEEL_MULTIPLIER
+	item_weight = 5 KILOGRAMS
 
-/obj/item/ingot/steelholy/
+/obj/item/ingot/steelholy
 	name = "holy steel bar"
 	desc = "This ingot of steel has been touched by Malum. It radiates heat, even when outside a forge."
 	icon_state = "ingotsteelholy"
 	melting_material = /datum/material/steel //Smelting it removes the blessing
 	sellprice = 20
+	item_weight = 5 KILOGRAMS
 
-/obj/item/ingot/silverblessed/
+/obj/item/ingot/silverblessed
 	name = "blessed silver bar"
 	desc = "This bar radiates a divine purity. Treasured by the realms and commonly found in Psydonic weaponry."
 	icon_state = "ingotsilvblessed"
 	melting_material = /datum/material/silver
 	sellprice = 100
+	item_weight = 6.65 KILOGRAMS
 
 /obj/item/ingot/silverblessed/bullion
 	name = "blessed silver bullion"
@@ -288,7 +343,7 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	sellprice = 90
 	melting_material = /datum/material/blacksteel
-	item_weight = 7.5 * BLACKSTEEL_MULTIPLIER
+	item_weight = 5.2 KILOGRAMS
 
 /obj/item/ingot/steel_slag
 	name = "steel slag"
@@ -297,4 +352,4 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 90
 	melting_material = /datum/material/steel
-	item_weight = 7.5 * STEEL_MULTIPLIER
+	item_weight = 5.5 KILOGRAMS

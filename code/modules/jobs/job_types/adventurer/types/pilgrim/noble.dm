@@ -1,5 +1,22 @@
+/datum/attribute_holder/sheet/job/pilgrim/noble
+	attribute_variance = list(
+		/datum/attribute/skill/misc/music = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/bows = 20,
+	)
+
 /datum/job/advclass/pilgrim/noble
-	title = "Noble"
+	title = JOB_MINOR_NOBLE
 	tutorial = "The blood of a noble family runs through your veins. Perhaps you are visiting from some place far away, \
 	looking to enjoy the hospitality of the ruler. You have many mammons to your name, but with wealth comes \
 	danger, so keep your wits and tread lightly..."
@@ -7,7 +24,7 @@
 	outfit = /datum/outfit/pilgrim/noble
 	category_tags = list(CTAG_PILGRIM)
 	total_positions = 2
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird = 1,
@@ -15,52 +32,37 @@
 	honorary = "Lord"
 	honorary_f = "Lady"
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1,
-		STATKEY_CON = 1,
-	)
-
-	skills = list(
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/bows = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/noble
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
 
-/datum/job/advclass/pilgrim/noble/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pilgrim/noble/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1, 2), TRUE)
 
-	var/static/list/selectable = list( \
-		"Dagger" = /obj/item/weapon/knife/dagger/silver, \
-		"Rapier" = /obj/item/weapon/sword/rapier/dec, \
-		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade, \
-		)
-	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = "NOBLE")
-	if(!choice)
-		return
+	var/static/list/selectable = list(
+		"Dagger" = /obj/item/weapon/knife/dagger/silver,
+		"Rapier" = /obj/item/weapon/sword/rapier/dec,
+		"Cane Blade" = /obj/item/weapon/sword/rapier/caneblade,
+	)
+
+	var/choice = spawned.select_equippable(player_client, selectable, time_limit = 1 MINUTES, message = "Choose your weapon", title = JOB_MINOR_NOBLE)
+
 	switch(choice)
 		if("Dagger")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/knife/noble()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
 		if("Rapier")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/sword/noble()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
 		if("Cane Blade")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 20)
 			var/scabbard = new /obj/item/weapon/scabbard/cane()
 			if(!spawned.equip_to_appropriate_slot(scabbard))
 				qdel(scabbard)
@@ -73,7 +75,7 @@
 	belt = /obj/item/storage/belt/leather
 	ring = /obj/item/clothing/ring/silver
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	head = /obj/item/clothing/head/fancyhat
 

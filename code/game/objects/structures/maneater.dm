@@ -106,9 +106,9 @@
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	var/wrestling = L.skills ? L.get_skill_level(/datum/skill/combat/wrestling, TRUE) : 0
-	var/resist_chance = PERCENT((1 + 0.5 * wrestling) / (21 - L.STASTR))
-	resist_chance *= L.STALUC / 10 // so 10 luck == 1, 11 == 1.1, 9 == 0.9
+	var/wrestling = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling)
+	var/resist_chance = PERCENT((1 + 0.5 * wrestling) / (21 - GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE)))
+	resist_chance *= GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) / 10 // so 10 luck == 1, 11 == 1.1, 9 == 0.9
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(prob(resist_chance))
 		playsound(M, 'sound/combat/grabbreak.ogg', 100)
@@ -134,6 +134,8 @@
 		return
 	if(isliving(AM))
 		var/mob/living/L = AM
+		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY))
+			return
 		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
 			return
 		if(L.status_flags & GODMODE)

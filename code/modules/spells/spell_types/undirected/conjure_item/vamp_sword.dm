@@ -4,7 +4,7 @@
 	button_icon_state = "acidsplash"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 	cooldown_time = 2 MINUTES
 	invocation_type = INVOCATION_NONE
 	item_type = /obj/item/weapon/sword/long/vlord

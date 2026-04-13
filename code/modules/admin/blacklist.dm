@@ -22,26 +22,3 @@ GLOBAL_PROTECT(nameban)
 
 #undef NAMEBANFILE
 
-#define BYPASSAGEFILE "[global.config.directory]/roguetown/bypassage.txt"
-
-GLOBAL_LIST(bypassage)
-GLOBAL_PROTECT(bypassage)
-
-/proc/load_bypassage()
-	GLOB.bypassage = list()
-	for(var/line in file2list(BYPASSAGEFILE))
-		if(!line)
-			continue
-		if(findtextEx(line,"#",1,2))
-			continue
-		GLOB.bypassage += ckey(line)
-
-	if(!GLOB.bypassage.len)
-		GLOB.bypassage = null
-
-/proc/check_bypassage(ckey)
-	if(!GLOB.bypassage)
-		return FALSE
-	. = (ckey in GLOB.bypassage)
-
-#undef BYPASSAGEFILE

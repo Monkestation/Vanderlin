@@ -67,8 +67,8 @@
 		var/used_time = 0
 		var/exp_to_gain = 0
 		if(L.mind)
-			var/myskill = L.get_skill_level(/datum/skill/misc/climbing, TRUE)
-			exp_to_gain = (L.STAINT/2) * L.get_learning_boon(/datum/skill/misc/climbing)
+			var/myskill = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/climbing)
+			exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2) * L.get_learning_boon(/datum/attribute/skill/misc/climbing)
 			var/obj/structure/table/TA = locate() in L.loc
 			if(TA)
 				myskill += 1
@@ -76,7 +76,7 @@
 				var/obj/structure/chair/CH = locate() in L.loc
 				if(CH)
 					myskill += 1
-			used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (L.STASPD * 3), 3 SECONDS)
+			used_time = max(7 SECONDS - (myskill * 1 SECONDS) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 3), 3 SECONDS)
 		playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 		user.visible_message("<span class='warning'>[user] starts to climb [src].</span>", "<span class='warning'>I start to climb [src]...</span>")
 		if(do_after(L, used_time, src))
@@ -87,7 +87,7 @@
 			user.start_pulling(pulling,suppress_message = TRUE)
 			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
 			if(L.mind)
-				L.adjust_experience(/datum/skill/misc/climbing, exp_to_gain, FALSE)
+				L.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
 
 /obj/structure/flora/newtree/attacked_by(obj/item/I, mob/living/user)
 	. = ..()

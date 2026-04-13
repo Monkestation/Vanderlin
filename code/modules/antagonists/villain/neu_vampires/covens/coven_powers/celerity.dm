@@ -90,21 +90,21 @@
 /datum/status_effect/buff/celerity
 	id = "celerity"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/celerity
-	effectedstats = list(STATKEY_SPD = 1, STATKEY_PER = 1)
+	effectedstats = list(STAT_SPEED = 1, STAT_PERCEPTION = 1)
 	duration = 3 SECONDS
 	status_type = STATUS_EFFECT_REPLACE
 
 /datum/status_effect/buff/celerity/two
-	effectedstats = list(STATKEY_SPD = 2, STATKEY_PER = 2)
+	effectedstats = list(STAT_SPEED = 2, STAT_PERCEPTION = 2)
 
 /datum/status_effect/buff/celerity/three
-	effectedstats = list(STATKEY_SPD = 3, STATKEY_PER = 3)
+	effectedstats = list(STAT_SPEED = 3, STAT_PERCEPTION = 3)
 
 /datum/status_effect/buff/celerity/four
-	effectedstats = list(STATKEY_SPD = 4, STATKEY_PER = 4)
+	effectedstats = list(STAT_SPEED = 4, STAT_PERCEPTION = 4)
 
 /datum/status_effect/buff/celerity/five
-	effectedstats = list(STATKEY_SPD = 5, STATKEY_PER = 5)
+	effectedstats = list(STAT_SPEED = 5, STAT_PERCEPTION = 5)
 
 /datum/status_effect/buff/celerity/nextmove_modifier()
 	return 0.60

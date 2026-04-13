@@ -1,5 +1,28 @@
+/datum/attribute_holder/sheet/job/pilgrim/mason
+	attribute_variance = list(
+		/datum/attribute/skill/labor/mining = list(10, 30),
+		/datum/attribute/skill/craft/carpentry = list(10, 20)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/masonry = 40,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/advclass/pilgrim/mason
-	title = "Mason"
+	title = JOB_MASON
 	tutorial = "Despite the lack of a formal guild in Vanderlin, you've traveled there to hone your stonemasonry. \
 	You've known your entire life there are ancient secrets within stone, and now you must prove their value to others."
 	allowed_races = RACES_PLAYER_ALL
@@ -8,32 +31,10 @@
 	apprentice_name = "Mason Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/masonry = 4,
-		/datum/skill/craft/engineering = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/mason
 
 /datum/job/advclass/pilgrim/mason/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/labor/mining, rand(1,3), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/carpentry, pick(1,2), TRUE)
-
 	if(spawned.dna?.species.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 

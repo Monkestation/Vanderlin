@@ -1,3 +1,28 @@
+/datum/attribute_holder/sheet/job/verderer
+	attribute_variance = list(
+		/datum/attribute/skill/combat/shields = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_STRENGTH = 2,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+	)
+
 /datum/job/advclass/mercenary/verderer
 	title = "Hollow Verderer"
 	tutorial = "A halberd expert that has for one reason or another, forsaken Amber Hollow in favor of pursuing coin and glory in wider parts of Psydonia."
@@ -10,29 +35,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
 
-	jobstats = list(
-		STATKEY_CON = 1,
-		STATKEY_END = 1,
-		STATKEY_STR = 2
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/craft/tanning = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/verderer
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -42,8 +45,6 @@
 /datum/job/advclass/mercenary/verderer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 9
-
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,0,1))
 
 /datum/outfit/mercenary/verderer
 	name = "Hollow Verderer (Mercenary)"

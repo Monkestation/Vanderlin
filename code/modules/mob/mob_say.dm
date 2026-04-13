@@ -85,6 +85,9 @@
 
 ///Speak as a dead person (ghost etc)
 /mob/proc/say_dead(message)
+	if(!client)
+		return
+
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(src, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return

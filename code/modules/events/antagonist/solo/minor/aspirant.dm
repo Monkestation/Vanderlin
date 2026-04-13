@@ -1,10 +1,10 @@
 /datum/round_event_control/antagonist/solo/aspirant
 	name = "Aspirant"
 	tags = list(
-		TAG_ZIZO,
+		TAG_ASTRATA,
 		TAG_BAOTHA,
 		TAG_VILLAIN,
-		TAG_COMBAT,
+		TAG_CORRUPTION,
 	)
 	antag_datum = /datum/antagonist/aspirant
 	roundstart = TRUE
@@ -22,6 +22,7 @@
 		/datum/job/courtphys,
 		/datum/job/archivist,
 		/datum/job/minor_noble,
+		/datum/job/tomb_warden,
 	)
 
 	restricted_roles = list(
@@ -30,19 +31,21 @@
 
 	base_antags = 1
 	maximum_antags = 1
+	min_players = (LOWPOP_THRESHOLD*0.8) * READYUP_AVG
+	cost = 0.8
 
 	earliest_start = 0 SECONDS
-	secondary_events = list(
-		/datum/round_event_control/antagonist/solo/lich,
-		/datum/round_event_control/antagonist/solo/rebel,
-		/datum/round_event_control/antagonist/solo/vampires_and_werewolves,
-		/datum/round_event_control/antagonist/solo/vampires,
-		/datum/round_event_control/antagonist/solo/werewolf,
-		/datum/round_event_control/antagonist/solo/zizo_cult
-	)
-	secondary_prob = 75
-	min_players = 25
 	weight = 8
+
+	secondary_events = list(
+		/datum/round_event_control/antagonist/solo/rebel = 2, // paint the town red baby
+		/datum/round_event_control/antagonist/solo/wretch = 1,
+	)
+	secondary_prob = 40
+
+	preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1,
+	)
 
 	typepath = /datum/round_event/antagonist/solo/aspirant
 

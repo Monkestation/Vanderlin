@@ -37,13 +37,13 @@
 	owner.gender = caster_mob.gender
 	owner.regenerate_icons()
 
-	var/datum/skill_holder/temporary_holder
+	var/datum/attribute_holder/temporary_holder
 	if(!keep_skills)
-		temporary_holder = caster_mob.ensure_skills()
-		temporary_holder.set_current(null)
-	caster_mob.mind?.transfer_to(owner)
+		temporary_holder = caster_mob.attributes
+		temporary_holder?.set_parent(null)
+	caster_mob.mind?.transfer_to(owner) // attribute_holder will try to set new parent upon mind transfer
 	if(temporary_holder)
-		temporary_holder.set_current(caster_mob)
+		temporary_holder.set_parent(caster_mob)
 
 	caster_mob.forceMove(owner)
 	ADD_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
@@ -109,7 +109,7 @@
 
 	// We aren't keeping skills, so trash the owner's skills. Don't qdel in case we're caching the owner's skill holder for some reason.
 	if(!keep_skills)
-		owner.ensure_skills().set_current(null)
+		owner.attributes?.set_parent(null)
 
 	owner.mind?.transfer_to(caster_mob)
 

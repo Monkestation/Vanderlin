@@ -1,5 +1,35 @@
+/datum/attribute_holder/sheet/job/cook
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 40,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/butchering = 30,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/labor/farming = 10
+	)
+
+/datum/attribute_holder/sheet/job/cook/old
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 50,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/butchering = 30,
+		/datum/attribute/skill/labor/taming = 10,
+		/datum/attribute/skill/labor/farming = 10
+	)
+
 /datum/job/cook
-	title = "Cook"
+	title = JOB_COOK
 	tutorial = "Slice, chop, and into the pot... \
 	you work closely with the innkeep to prepare meals for all the hungry mouths of Vanderlin. \
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
@@ -16,33 +46,16 @@
 	display_order = JDO_COOK
 	give_bank_account = 8
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/cook
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/cook/old
 
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 4,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/labor/butchering = 3,
-		/datum/skill/labor/taming = 1,
-		/datum/skill/labor/farming = 1
-	)
-
-/datum/job/cook/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 
 /datum/outfit/cook
-	name = "Cook"
+	name = JOB_COOK
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/key/tavern
 	beltr = /obj/item/weapon/knife/villager
@@ -50,6 +63,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	cloak = /obj/item/clothing/cloak/apron/cook
+	backl = /obj/item/storage/backpack/satchel/cloth
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1

@@ -8,12 +8,14 @@
 	max_integrity = 100
 	layer = ABOVE_OPEN_TURF_LAYER
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 
 	/// Remember initial sprite
 	var/base_icon
 
 /obj/structure/bridge/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_OLDWOOD)
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
 	AddElement(/datum/element/connect_loc, loc_connections)
 	// Shift sprite down when going east/west so that people properly walk on the bridge

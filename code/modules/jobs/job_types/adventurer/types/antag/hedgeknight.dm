@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/hedgeknight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/advclass/bandit/hedgeknight //heavy knight class - just like black knight adventurer class. starts with heavy armor training and plate, but less weapon skills than brigand, sellsword and knave
 	title = "Hedge Knight"
 	tutorial = "A noble fallen from grace, your tarnished armor sits upon your shoulders as a heavy reminder of the life you've lost. Take back what is rightfully yours."
@@ -5,30 +28,7 @@
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 1,
-		STATKEY_CON = 2,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/labor/butchering = 1,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/hedgeknight
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,

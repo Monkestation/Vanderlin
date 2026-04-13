@@ -118,21 +118,21 @@
 /datum/status_effect/buff/potence
 	id = "potence"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/potence
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = 1)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = 1)
 	duration = 3 SECONDS
 	status_type = STATUS_EFFECT_REPLACE
 
 /datum/status_effect/buff/potence/two
-	effectedstats = list(STATKEY_STR = 2, STATKEY_END = 2)
+	effectedstats = list(STAT_STRENGTH = 2, STAT_ENDURANCE = 2)
 
 /datum/status_effect/buff/potence/three
-	effectedstats = list(STATKEY_STR = 3, STATKEY_END = 3)
+	effectedstats = list(STAT_STRENGTH = 3, STAT_ENDURANCE = 3)
 
 /datum/status_effect/buff/potence/four
-	effectedstats = list(STATKEY_STR = 4, STATKEY_END = 4)
+	effectedstats = list(STAT_STRENGTH = 4, STAT_ENDURANCE = 4)
 
 /datum/status_effect/buff/potence/five
-	effectedstats = list(STATKEY_STR = 5, STATKEY_END = 5)
+	effectedstats = list(STAT_STRENGTH = 5, STAT_ENDURANCE = 5)
 
 /atom/movable/screen/alert/status_effect/buff/potence
 	name = "Potence"

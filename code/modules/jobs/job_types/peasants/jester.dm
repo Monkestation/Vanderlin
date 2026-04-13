@@ -1,5 +1,37 @@
+/datum/attribute_holder/sheet/job/jester
+	attribute_variance = list(
+		STAT_SPEED = list(-9, 10),
+		STAT_CONSTITUTION = list(-9, 10),
+		STAT_ENDURANCE = list(-9, 10),
+		STAT_PERCEPTION = list(-9, 10),
+		STAT_INTELLIGENCE = list(-9, 10),
+		STAT_STRENGTH = list(-9, 10),
+		STAT_FORTUNE = list(-9, 10),
+		/datum/attribute/skill/combat/knives = list(-20, 50),
+		/datum/attribute/skill/combat/unarmed = list(-20, 50),
+		/datum/attribute/skill/misc/riding = list(-20, 50),
+		/datum/attribute/skill/labor/fishing = list(-20, 50),
+		/datum/attribute/skill/combat/wrestling = list(-20, 20),
+		/datum/attribute/skill/misc/reading = list(-20, 50),
+		/datum/attribute/skill/misc/sneaking = list(-20, 50),
+		/datum/attribute/skill/misc/stealing = list(-20, 50),
+		/datum/attribute/skill/misc/lockpicking = list(-20, 50),
+		/datum/attribute/skill/misc/music = list(-20, 50),
+		/datum/attribute/skill/craft/cooking = list(-20, 50),
+		/datum/attribute/skill/combat/firearms = list(-20, 50),
+		/datum/attribute/skill/craft/bombs = list(-20, 50),
+		/datum/attribute/skill/misc/climbing = list(-10, 10),
+		/datum/attribute/skill/misc/athletics = list(-20, 10),
+	)
+
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 40,
+
+	)
+
 /datum/job/jester
-	title = "Jester"
+	title = JOB_JESTER
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. \
 	You command a position of a fool, envious of the position your superiors have upon you. \
 	Your cheap tricks and illusions of intelligence will only work for so long, \
@@ -23,22 +55,7 @@
 	)
 	give_bank_account = TRUE
 
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/labor/fishing = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sneaking = 1,
-		/datum/skill/misc/stealing = 1,
-		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/combat/firearms = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/jester
 
 	traits = list(
 		TRAIT_EMPATH,
@@ -46,46 +63,22 @@
 		TRAIT_ZJUMP,
 		TRAIT_SHAKY_SPEECH
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/ventriloquate,
+		/mob/living/carbon/human/proc/ear_trick,
+	)
+
 
 /datum/job/jester/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	// Randomize base stats
-	spawned.base_intelligence = rand(1, 20)
-	spawned.base_fortune = rand(1, 20)
-	spawned.base_strength = rand(1, 20)
-	spawned.base_constitution = rand(1, 20)
-	spawned.base_perception = rand(1, 20)
-	spawned.base_speed = rand(1, 20)
-	spawned.base_endurance = rand(1, 20)
-	spawned.recalculate_stats(FALSE)
 
-	// Random bonus skill adjustments
-	spawned.adjust_skillrank(/datum/skill/combat/knives, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/riding, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/bombs, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/labor/fishing, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/reading, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/stealing, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/lockpicking, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/climbing, pick(0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/athletics, pick(0,0,0,0,1), TRUE)
-	spawned.adjust_skillrank(/datum/skill/misc/music, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/craft/cooking, pick(1,2,3,4,5), TRUE)
-	spawned.adjust_skillrank(/datum/skill/combat/firearms, pick(1,2,3,4,5), TRUE)
-
-	if(spawned.base_strength > 16)
+	if(GET_MOB_ATTRIBUTE_VALUE_RAW(spawned, STAT_STRENGTH) > 16)
 		spawned.cmode_music = 'sound/music/cmode/nobility/CombatJesterSTR.ogg'
 	else
 		spawned.cmode_music = pick('sound/music/cmode/nobility/CombatJester1.ogg', 'sound/music/cmode/nobility/CombatJester2.ogg')
 
-	add_verb(spawned, /mob/living/carbon/human/proc/ventriloquate)
-	add_verb(spawned, /mob/living/carbon/human/proc/ear_trick)
-
 /datum/outfit/jester
-	name = "Jester"
+	name = JOB_JESTER
 	shoes = /obj/item/clothing/shoes/jester
 	pants = /obj/item/clothing/pants/tights
 	armor = /obj/item/clothing/shirt/jester

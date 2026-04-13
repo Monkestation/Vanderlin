@@ -4,6 +4,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	grid_width = 32
 	grid_height = 32
+	item_weight = 300 GRAMS
 
 /obj/item/ore/dust/Initialize(mapload)
 	. = ..()
@@ -18,11 +19,13 @@
 	name = "gold dust"
 	desc = "Fine particles of gold ore."
 	melting_material = /datum/material/gold
+	item_weight = 500 GRAMS
 
 /obj/item/ore/dust/silver
 	name = "silver dust"
 	desc = "Fine particles of silver ore."
 	melting_material = /datum/material/silver
+	item_weight = 400 GRAMS
 
 /obj/item/ore/dust/silver/Initialize(mapload)
 	. = ..()
@@ -32,13 +35,16 @@
 	name = "iron dust"
 	desc = "Fine particles of iron ore."
 	melting_material = /datum/material/iron
+	item_weight = 350 GRAMS
 
 /obj/item/ore/dust/copper
 	name = "copper dust"
 	desc = "Fine particles of copper ore."
 	melting_material = /datum/material/copper
+	item_weight = 350 GRAMS
 
 /obj/item/ore/dust/tin
 	name = "tin dust"
 	desc = "Fine particles of tin ore."
 	melting_material = /datum/material/tin
+	item_weight = 300 GRAMS

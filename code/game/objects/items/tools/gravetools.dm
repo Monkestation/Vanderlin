@@ -26,10 +26,11 @@
 	var/obj/item/natural/clod/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	max_blade_int = 100
 	grid_width = 32
 	grid_height = 96
+	item_weight = 1.54 KILOGRAMS
 	var/time_multiplier = 1 //multipler to do_after times
 
 /obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
@@ -244,6 +245,7 @@
 	grid_height = 64
 	time_multiplier = 2
 	smeltresult = null
+	item_weight = 792 GRAMS
 
 /obj/item/weapon/shovel/small/getonmobprop(tag)
 	. = ..()
@@ -263,6 +265,7 @@
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "shroud_folded"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 125 GRAMS
 	var/unfoldedbag_path = /obj/structure/closet/burial_shroud
 
 /obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
@@ -341,6 +344,7 @@
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 184 GRAMS
 	var/unfoldedbag_path = /obj/structure/closet/body_bag
 
 /obj/item/bodybag/attack_self(mob/user, list/modifiers)

@@ -1,5 +1,33 @@
+/datum/attribute_holder/sheet/job/blacksmith
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/craft/blacksmithing = 40,
+		/datum/attribute/skill/craft/armorsmithing = 30,
+		/datum/attribute/skill/craft/weaponsmithing = 30,
+		/datum/attribute/skill/craft/smelting = 30,
+		/datum/attribute/skill/craft/engineering = 30,
+		/datum/attribute/skill/craft/traps = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/labor/mathematics = 20,
+	)
+
+/datum/attribute_holder/sheet/job/blacksmith/old
+	attribute_variance = list(
+		/datum/attribute/skill/craft/blacksmithing = list(10, 20),
+		/datum/attribute/skill/craft/armorsmithing = list(10, 20),
+		/datum/attribute/skill/craft/weaponsmithing = list(10, 20),
+	)
+
 /datum/job/blacksmith
-	title = "Blacksmith"
+	title = JOB_BLACKSMITH
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Blacksmith, \
 	a trade that certainly has seen a boom in revenue in recent times with many a bannerlord \
 	seeing the importance in maintaining a well-equipped army."
@@ -18,29 +46,6 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_SPD = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 3,
-		/datum/skill/craft/blacksmithing = 4,
-		/datum/skill/craft/armorsmithing = 3,
-		/datum/skill/craft/weaponsmithing = 3,
-		/datum/skill/craft/smelting = 3,
-		/datum/skill/craft/engineering = 3,
-		/datum/skill/craft/traps = 2,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/labor/mathematics = 2,
-	)
-
 	traits = list(
 		TRAIT_MALUMFIRE,
 		TRAIT_SEEPRICES,
@@ -49,21 +54,12 @@
 	exp_type = list(EXP_TYPE_LIVING)
 	exp_requirements = list(EXP_TYPE_LIVING = 600)
 
+	attribute_sheet = /datum/attribute_holder/sheet/job/blacksmith
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/blacksmith/old
 
-/datum/job/blacksmith/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(1,2), TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1,2), TRUE)
-
-	if(prob(5))
-		spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 
 /datum/outfit/blacksmith
-	name = "Blacksmith"
+	name = JOB_BLACKSMITH
 	head = /obj/item/clothing/head/hatfur
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	backl = /obj/item/weapon/hammer/sledgehammer

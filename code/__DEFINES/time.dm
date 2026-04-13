@@ -22,10 +22,10 @@
 #define CHRISTMAS				"Christmas"
 #define FESTIVE_SEASON			"Festive Season"
 
-#define TOD_NIGHT	"night"
-#define TOD_DAWN	"dawn"
-#define TOD_DAY		"day"
-#define TOD_DUSK	"dusk"
+#define NIGHT	"night"
+#define DAWN	"dawn"
+#define DAY		"day"
+#define DUSK	"dusk"
 
 /*
 

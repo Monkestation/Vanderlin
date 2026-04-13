@@ -19,15 +19,16 @@
 	wlength = WLENGTH_SHORT
 	resistance_flags = FLAMMABLE
 	can_parry = TRUE
-	associated_skill = /datum/skill/combat/shields
+	associated_skill = /datum/attribute/skill/combat/shields
 	destroy_sound = 'sound/foley/shielddestroy.ogg'
 	var/coverage = 90
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
 	max_integrity = INTEGRITY_WORST
-	anvilrepair = /datum/skill/craft/armorsmithing
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
+	item_weight = 2 KILOGRAMS
 	COOLDOWN_DECLARE(shield_bang)
 	var/design_chosen
 
@@ -104,6 +105,7 @@
 	dropshrink = 0.8
 	coverage = 60
 	max_integrity = INTEGRITY_STANDARD - 25
+	item_weight = 3 KILOGRAMS
 
 /obj/item/weapon/shield/wood/choose_design(proc_value, mob/user)
 	. = proc_value
@@ -125,7 +127,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -166,6 +168,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
 	melt_amount = 75
+	item_weight = 7 KILOGRAMS
 
 /obj/item/weapon/shield/tower/spidershield
 	name = "spider shield"
@@ -197,6 +200,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/bronze
 	sellprice = 150 // A noble collector would love to get their hands on one of these
+	item_weight = 6 KILOGRAMS
 
 /obj/item/weapon/shield/tower/hoplite/getonmobprop(tag)
 	. = ..()
@@ -224,6 +228,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 90
 	design_chosen = FALSE
+	item_weight = 6 KILOGRAMS
 
 /obj/item/weapon/shield/tower/metal/getonmobprop(tag)
 	if(tag)
@@ -254,7 +259,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 
@@ -275,6 +280,7 @@
 	wdefense = ULTMATE_PARRY + 3
 	coverage = 50
 	max_integrity = INTEGRITY_STRONG
+	item_weight = 5 KILOGRAMS
 
 /obj/item/weapon/shield/tower/metal/psy/Initialize(mapload)
 	. = ..()							//+0 force, +100 int, +1 def, make silver
@@ -295,6 +301,7 @@
 	resistance_flags = FIRE_PROOF
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/shield/tower/buckleriron/getonmobprop(tag)
 	. = ..()
@@ -315,6 +322,7 @@
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/steel
 	wdefense = 7
+	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/shield/heater
 	name = "heater shield"
@@ -327,6 +335,7 @@
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = INTEGRITY_STANDARD
+	item_weight = 4 KILOGRAMS
 
 /obj/item/weapon/shield/heater/choose_design(proc_value, mob/user)
 	. = proc_value
@@ -346,7 +355,7 @@
 	add_overlay(MU)
 
 	design_chosen = TRUE
-	if(browser_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
+	if(tgui_alert(user, "Are you pleased with your heraldry?", "Heraldry", DEFAULT_INPUT_CHOICES) != CHOICE_YES)
 		cut_overlays()
 		design_chosen = FALSE
 

@@ -34,6 +34,32 @@ $_gen_map: (
   'bad': var(--color-bad),
   'label': var(--color-label),
 );
+
+$black: #000000 !default;
+$white: #ffffff !default;
+$red: #db2828 !default;
+$orange: #f2711c !default;
+$yellow: #fbd608 !default;
+$olive: #b5cc18 !default;
+$green: #20b142 !default;
+$teal: #00b5ad !default;
+$blue: #2185d0 !default;
+$violet: #6435c9 !default;
+$purple: #a333c8 !default;
+$pink: #e03997 !default;
+$brown: #a5673f !default;
+$grey: #767676 !default;
+$light-grey: #aaa !default;
+$paperplease: rgba(87, 72, 72, 0.6) !default;
+$quake: rgb(65, 175, 115) !default;
+$quake-light: rgb(165, 255, 200) !default;
+
+$primary: #4972a1 !default;
+$good: #5baa27 !default;
+$average: #f08f11 !default;
+$bad: #db2828 !default;
+$label: #7e90a7 !default;
+
 $low-contrast-color-map: ('yellow', 'white');
 
 // Color names for which to generate a color map

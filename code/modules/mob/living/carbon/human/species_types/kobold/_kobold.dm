@@ -17,11 +17,22 @@
 	/turf/closed/wall/mineral/stone,\
 	/turf/closed/wall/mineral/craftstone,\
 	/turf/closed/wall/mineral/decostone,\
+	/turf/closed/wall/mineral/decorstone,\
 	/turf/closed/wall/mineral/desert_sandstone,\
 )
 
 /mob/living/carbon/human/species/kobold
 	race = /datum/species/kobold
+
+/datum/attribute_holder/sheet/job/species/kobold
+	raw_attribute_list = list(
+		STAT_STRENGTH = -4,
+		STAT_PERCEPTION = -2,
+		STAT_INTELLIGENCE = -2,
+		STAT_CONSTITUTION = -4,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+	)
 
 /datum/species/kobold
 	name = "Kobold"
@@ -41,13 +52,14 @@
 	species_traits = list(NO_UNDERWEAR)
 	inherent_traits = list(TRAIT_TINY, TRAIT_DARKVISION)
 
-	specstats_m = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
-	specstats_f = list(STATKEY_STR = -4, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -4, STATKEY_END = 2, STATKEY_SPD = 2, STATKEY_LCK = 0)
+	statsheet_male = /datum/attribute_holder/sheet/job/species/kobold
 
 	allowed_pronouns = PRONOUNS_LIST_IT_ONLY
 
 	possible_ages = NORMAL_AGES_LIST
 	use_skintones = TRUE
+
+	default_mob_weight = HUMAN_WEIGHT * 0.6
 
 	changesource_flags = WABBAJACK
 
@@ -122,7 +134,7 @@
 	. = ..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	if(hungry_hungry_kobold)
-		C.AddComponent(/datum/component/abberant_eater, DIET_KOBOLD, FALSE, DIET_TURF_KOBOLD)
+		C.AddComponent(/datum/component/abberant_eater, DIET_KOBOLD, FALSE, DIET_TURF_KOBOLD, _keeps_items = TRUE)
 	C.grant_language(/datum/language/common)
 
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)

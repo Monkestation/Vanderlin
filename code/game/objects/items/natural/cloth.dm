@@ -16,6 +16,7 @@
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
 	flags_ai_inventory = AI_ITEM_BANDAGE
+	item_weight = 12 GRAMS
 
 	var/datum/component/cleaner/cleaner_component = null
 	var/clean_speed = 0.4 SECONDS
@@ -209,7 +210,7 @@
 	if(affecting.bandage)
 		to_chat(user, "<span class='warning'>There is already a bandage.</span>")
 		return
-	var/used_time = bandage_speed * (1 - (H.get_skill_level(/datum/skill/misc/medicine, TRUE) * 0.15))
+	var/used_time = bandage_speed * (1 - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 0.15))
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 	if(!do_after(user, used_time, M))
 		return

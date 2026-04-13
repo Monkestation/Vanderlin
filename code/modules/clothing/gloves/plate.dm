@@ -12,8 +12,8 @@
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	anvilrepair = /datum/skill/craft/armorsmithing
-	sewrepair = FALSE
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 
 	armor_class = AC_HEAVY
@@ -23,7 +23,7 @@
 
 	grid_width = 64
 	grid_height = 32
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
 
@@ -55,11 +55,11 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	anvilrepair = /datum/skill/craft/blacksmithing
+	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
 	armor = ARMOR_PLATE_GOOD
-	item_weight = 7 * BLACKSTEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 /obj/item/clothing/gloves/plate/silver
@@ -68,7 +68,7 @@
 	icon_state = "silvergloves"
 	armor = ARMOR_PLATE_SILVER
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 12 * SILVER_MULTIPLIER
+	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
 /obj/item/clothing/gloves/plate/silver/Initialize(mapload)
@@ -103,3 +103,13 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
+
+//............... Gronnic gloves ............... //
+/obj/item/clothing/gloves/plate/iron/gronn
+	name = "osslandic iron gauntlets"
+	desc = "Tough iron gauntlets, simple and protective in design. A single punch is said to leave a dozen bruises."
+	icon_state = "gronnplategloves"
+	icon = 'icons/roguetown/clothing/special/gronn.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+

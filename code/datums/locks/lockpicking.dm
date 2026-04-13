@@ -25,7 +25,7 @@
 		to_chat(src, span_notice("I need a wedge in order to lockpick \the [P]."))
 		return FALSE
 
-	client.spawn_lockpicking_UI(P, src, L, the_wedge, difficulty, KL.get_string_difficulty(), get_skill_level(/datum/skill/misc/lockpicking))
+	client.spawn_lockpicking_UI(P, src, L, the_wedge, difficulty, KL.get_string_difficulty(), GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/lockpicking))
 	visible_message(span_warning("[src] starts to pick the lock of \the [P]!"), span_notice("I start to pick the lock of \the [P]..."))
 	return TRUE
 
@@ -49,9 +49,9 @@
 
 	playsound(src, 'sound/items/LPWin.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 
-	var/amt2raise = (user.STAINT / 2) * (20 / difficulty)
-	var/boon = user.get_learning_boon(/datum/skill/misc/lockpicking)
-	user.adjust_experience(/datum/skill/misc/lockpicking, amt2raise * boon)
+	var/amt2raise = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2) * (20 / difficulty)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/misc/lockpicking)
+	user.adjust_experience(/datum/attribute/skill/misc/lockpicking, amt2raise * boon)
 	return TRUE
 
 /obj/proc/finish_lockpicking(mob/living/user)
@@ -317,9 +317,9 @@
 				//one tenth of the usual boost for picking a lock
 				if(isliving(picker))
 					var/mob/living/picker_real = picker
-					var/amt2raise = ((picker_real.STAINT / 2) * (20 / difficulty)) / 10
-					var/boon = picker_real.get_learning_boon(/datum/skill/misc/lockpicking)
-					picker_real.adjust_experience(/datum/skill/misc/lockpicking, amt2raise * boon)
+					var/amt2raise = ((GET_MOB_ATTRIBUTE_VALUE(picker_real, STAT_INTELLIGENCE) / 2) * (20 / difficulty)) / 10
+					var/boon = picker_real.get_learning_boon(/datum/attribute/skill/misc/lockpicking)
+					picker_real.adjust_experience(/datum/attribute/skill/misc/lockpicking, amt2raise * boon)
 			if(picker.client?.prefs.showrolls)
 				to_chat(picker, span_notice("The chance to break was [break_prob]%!"))
 			break_checking_cooldown = world.time + (9 - (7 - difficulty)) SECONDS

@@ -26,6 +26,9 @@
 	init_faith()
 	if(has_reflection)
 		create_reflection()
+	if(fovangle)
+		LoadComponent(/datum/component/field_of_vision, FOV_90_DEGREES, get_fov_angle(FOV_90_DEGREES))
+		update_fov_angles()
 	recalculate_stats()
 
 /mob/living/Destroy()
@@ -106,20 +109,24 @@
 
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
 		return
+
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
-	if(movement_type & FLYING)
+
+	if(movement_type & (FLYING|FLOATING))
 		to_chat(src, span_info("You glide down to a more manageable height."))
 		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
 		return
-	var/dex_save = src.get_skill_level(/datum/skill/misc/climbing)
+
+	var/dex_save = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
 			to_chat(src, span_info("My dexterity allowed me to land on my feet unscathed!"))
 			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
+
 	var/points
 	for(var/i in 2 to levels)
 		i++
@@ -129,13 +136,15 @@
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
+
 	return ..()
 
 /mob/living/proc/ZImpactDamage(turf/T, levels)
-	if(!density) //lets cats and similar avoid death by falling
+	if(!density)
 		visible_message("<span class='notice'>The creature lands unharmed...</span>")
 		return
-	var/encumberance_multiplier = 0.5 * (get_encumbrance() + 1) // half base falling damage. scale up to 100% based on encumberance
+	// Sigmoid maps tiers to ~0.001-0.971, so range is ~0.5 to ~0.986 (was 0.5 to 1.0)
+	var/encumberance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5)
 	adjustBruteLoss(((levels * 10) * encumberance_multiplier) ** 1.5)
 	AdjustStun(levels * 2 SECONDS * encumberance_multiplier)
 	AdjustKnockdown(levels * 2 SECONDS * encumberance_multiplier)
@@ -240,7 +249,7 @@
 			if(!move_failed)
 				return TRUE
 
-	if(m_intent == MOVE_INTENT_RUN && dir == get_dir(src, M))
+	if((m_intent == MOVE_INTENT_RUN || HAS_TRAIT(src, TRAIT_STUMBLE)) && dir == get_dir(src, M))
 		if(isliving(M))
 			var/sprint_distance = sprinted_tiles
 			var/instafail = FALSE
@@ -248,8 +257,8 @@
 
 			var/mob/living/L = M
 
-			var/self_points = FLOOR((STACON + STASTR + get_skill_level(/datum/skill/misc/athletics))/2, 1)
-			var/target_points = FLOOR((L.STAEND + L.STASTR + L.get_skill_level(/datum/skill/misc/athletics))/2, 1)
+			var/self_points = FLOOR((GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION) + GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) + GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics))/2, 1)
+			var/target_points = FLOOR((GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) + GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) + GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/athletics))/2, 1)
 
 			switch(sprint_distance)
 				// Point blank
@@ -310,11 +319,11 @@
 		if(!(world.time % 5))
 			var/statchance = 50
 
-			if(STASTR > L.STASTR)
-				statchance = 50 + (STASTR - L.STASTR * 10)
+			if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) > GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
+				statchance = 50 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 10)
 
-			else if(STASTR < L.STASTR)
-				statchance = 50 - (L.STASTR - STASTR * 10)
+			else if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) < GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))
+				statchance = 50 - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) * 10)
 			if(statchance < 10)
 				statchance = 10
 			if(prob(statchance))
@@ -386,7 +395,7 @@
 	if(L == src)
 		return TRUE
 	var/CZ = FALSE
-	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
+	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if((L.body_position != LYING_DOWN) && (body_position != LYING_DOWN)) //we are both standing
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
@@ -394,12 +403,12 @@
 			else if(HAS_TRAIT(L, TRAIT_TINY) && !HAS_TRAIT(src, TRAIT_TINY)) //midget variant, allows neck no head
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 			else if(!HAS_TRAIT(L, TRAIT_TINY)) //we have a short/medium weapon, so allow hitting legs
-				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
+				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 		else
 			if(HAS_TRAIT(L, TRAIT_TINY) && !HAS_TRAIT(src, TRAIT_TINY)  && (!CZ)) //tiny punches
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
 			else if(!HAS_TRAIT(L, TRAIT_TINY) && (!CZ)) //we are punching, no legs
-				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
+				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 	else if(L.body_position == LYING_DOWN && (body_position != LYING_DOWN)) //we are prone, victim is standing
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
@@ -513,6 +522,7 @@
 			O.grabbee = src
 			O.limb_grabbed = BP
 			BP.grabbedby += O
+			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
 			if(item_override)
 				O.sublimb_grabbed = item_override
 			else
@@ -645,7 +655,7 @@
 
 /mob/living/stop_pulling(pulling_broke_free = FALSE)
 	if(pulling_broke_free && ismob(pulling))
-		var/wrestling_cooldown_reduction = 0.1 SECONDS * get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		var/wrestling_cooldown_reduction = 0.1 SECONDS * GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
 		TIMER_COOLDOWN_START(pulling, "broke_free", max(0, 1 SECONDS - wrestling_cooldown_reduction)) // BUFF: Reduced cooldown
 
 	for(var/obj/item/grabbing/grabber_item in held_items)
@@ -745,7 +755,7 @@
 		to_chat(src, "<span class='warning'>I am already sleeping!</span>")
 		return
 	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
+		if(tgui_alert(src, "You sure you want to sleep for a while?", "Sleep", list("Yes", "No")) == "Yes")
 			SetSleeping(400) //Short nap
 
 /mob/proc/get_contents()
@@ -846,14 +856,12 @@
 
 	if(iscarbon(src))
 		var/mob/living/carbon/getter_upper = src
-		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR) //grabs the item in your armorslot
-
+		var/obj/item/clothing/armor/got_armor = getter_upper.get_item_by_slot(ITEM_SLOT_ARMOR)
 		var/stand_speed_mult = 1
-		if(got_armor) //sanity checks so mult doesnt runtime
-			stand_speed_mult = (1 + getter_upper.get_encumbrance()) * got_armor.stand_speed_reduction
-
+		if(got_armor)
+			stand_speed_mult = (1 + ENCUMBRANCE_TO_SIGMOID(getter_upper.encumbrance)) * got_armor.stand_speed_reduction
 		var/proto_timer = 2 * stand_speed_mult
-		if(proto_timer >= timer) //sanity check so you can't stand up faster if you somehow get negative encumbrance
+		if(proto_timer >= timer)
 			timer = proto_timer
 
 	if(!instant && !do_after(src, timer SECONDS, src, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|IGNORE_USER_DIR_CHANGE), extra_checks = CALLBACK(src, TYPE_PROC_REF(/mob/living, rest_checks_callback)), interaction_key = DOAFTER_SOURCE_GETTING_UP))
@@ -988,7 +996,7 @@
 		SEND_SIGNAL(item, COMSIG_ITEM_WEARERCROSSED, AM, src)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(L.m_intent == MOVE_INTENT_RUN && body_position == LYING_DOWN && !buckle_lying)
+		if((L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE)) && body_position == LYING_DOWN && !buckle_lying)
 			L.visible_message("<span class='warning'>[L] trips over [src]!</span>","<span class='warning'>I trip over [src]!</span>")
 			L.Knockdown(10)
 			L.Immobilize(20)
@@ -1031,7 +1039,7 @@
 			if(heal_flags & ADMIN_HEAL_ALL)
 				qdel(wound)
 			else
-				wound.heal_wound(wound.whp, forced = TRUE)
+				wound.heal_wound(wound.whp, null, TRUE)
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
@@ -1112,8 +1120,8 @@
 
 	if(m_intent == MOVE_INTENT_RUN)
 		sprinted_tiles++
-		var/boon = get_learning_boon(/datum/skill/misc/athletics)
-		adjust_experience(/datum/skill/misc/athletics, (STAEND*0.05) * boon)
+		var/boon = get_learning_boon(/datum/attribute/skill/misc/athletics)
+		adjust_experience(/datum/attribute/skill/misc/athletics, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)*0.05) * boon)
 
 	if(wallpressed)
 		update_wallpress(T, newloc, direct)
@@ -1172,8 +1180,6 @@
 	..()
 	if(olddir != dir)
 		stop_looking()
-		if(client)
-			update_vision_cone()
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
 	var/blood_exists = FALSE
@@ -1278,7 +1284,7 @@
 	if(stat)
 		return
 	surrendering = 1
-	if(!alert(src, "Yield in surrender?",,"YES","NO") == "YES")
+	if(!tgui_alert(src, "Yield in surrender?","Yield", list("YES","NO")) == "YES")
 		return
 
 	record_round_statistic(STATS_YIELDS)
@@ -1333,13 +1339,13 @@
 	var/my_wrestling = 0
 	var/their_wrestling = 0
 	if(mind)
-		my_wrestling = get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		my_wrestling = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling)
 	if(pulledby.mind)
-		their_wrestling = pulledby.get_skill_level(/datum/skill/combat/wrestling, TRUE)
+		their_wrestling = GET_MOB_SKILL_VALUE_OLD(pulledby, /datum/attribute/skill/combat/wrestling)
 
 	var/break_chance = 15 // Base chance
 	break_chance += (my_wrestling - their_wrestling)
-	break_chance += (STASTR - pulledby.STASTR) * 0.4
+	break_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(pulledby, STAT_STRENGTH)) * 0.4
 
 	// Both parties get a chance to break free
 	if(prob(break_chance))
@@ -1386,12 +1392,12 @@
 
 	var/counter_chance = 20 // Base chance
 
-	counter_chance += get_skill_level(/datum/skill/combat/wrestling, TRUE) * 4
-	counter_chance += get_skill_level(/datum/skill/combat/unarmed, TRUE) * 4
+	counter_chance += GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling) * 4
+	counter_chance += GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/unarmed) * 4
 
 	// Stat differences
-	counter_chance += (STASTR - attacker.STASTR) * 2
-	counter_chance += (STASPD - attacker.STASPD) * 1.5
+	counter_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_STRENGTH)) * 2
+	counter_chance += (GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_SPEED)) * 1.5
 
 	// Positioning bonuses
 	// if(attacker.body_position == LYING_DOWN && body_position != LYING_DOWN)
@@ -1422,7 +1428,7 @@
 		apply_status_effect(/datum/status_effect/grab_counter_cd)
 
 		var/counter_type
-		if(get_skill_level(/datum/skill/combat/unarmed) >= 4)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/unarmed) >= 4)
 			counter_type = pickweight(list("knee" = 30, "elbow" = 70))
 		else
 			counter_type = pickweight(list("knee" = 60, "elbow" = 40))
@@ -1534,6 +1540,10 @@
 /mob/living/resist_grab(moving_resist)
 	. = TRUE
 
+	if(HAS_TRAIT(pulledby, TRAIT_PACIFISM))
+		pulledby.stop_pulling()
+		return FALSE
+
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		to_chat(src, span_warning("I'm restrained!"))
 		return
@@ -1554,8 +1564,8 @@
 	// Modifier of pulledby against the resisting src
 	var/positioning_modifier = L.get_positioning_modifier(src)
 
-	wrestling_diff += (get_skill_level(/datum/skill/combat/wrestling, TRUE))
-	wrestling_diff -= (L.get_skill_level(/datum/skill/combat/wrestling, TRUE))
+	wrestling_diff += (GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/wrestling))
+	wrestling_diff -= (GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/combat/wrestling))
 
 	if(has_status_effect(/datum/status_effect/buff/oiled))
 		var/obj/item/grabbing/grabbed = L.get_active_held_item()
@@ -1598,7 +1608,7 @@
 		if(G.chokehold)
 			combat_modifier -= 0.1 // BUFF: Reduced chokehold penalty (was 0.15)
 
-	resist_chance += ((((STASTR - L.STASTR)/3) + wrestling_diff) * 5)
+	resist_chance += ((((GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH))/3) + wrestling_diff) * 5)
 	resist_chance *= combat_modifier * stamina_factor * (1/positioning_modifier)
 	resist_chance = clamp(resist_chance, 5, 95)
 
@@ -2090,9 +2100,9 @@
 	C.Paralyze(40)
 
 /mob/living/ConveyorMove()
-	if((movement_type & FLYING) && !stat)
+	if((movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && !stat)
 		return
-	..()
+	return ..()
 
 /mob/living/can_be_pulled()
 	return ..() && !(buckled && buckled.buckle_prevents_pull)
@@ -2143,6 +2153,17 @@
 			registered_z = new_z
 		else
 			registered_z = null
+
+/mob/living/can_zFall(turf/source, levels = 1, turf/target, direction)
+	// Solely such that organ wings only allow you to fly up 1 Z level
+	if(!HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, WING_TRAIT) && !HAS_TRAIT_FROM(src, TRAIT_MOVE_FLYING, WING_TRAIT))
+		return ..()
+
+	var/turf/below = GET_TURF_BELOW(source)
+	if(isopenspace(below))
+		return TRUE
+
+	return ..()
 
 /mob/living/onTransitZ(old_z,new_z)
 	..()
@@ -2243,39 +2264,6 @@
 			AT.get_remote_view_fullscreens(src)
 		else
 			clear_fullscreen("remote_view", 0)
-
-/mob/living/vv_get_dropdown()
-	. = ..()
-	VV_DROPDOWN_OPTION("", "---------")
-	VV_DROPDOWN_OPTION(VV_HK_MODIFY_STATS, "Modify Stats")
-
-/mob/living/vv_do_topic(list/href_list)
-	. = ..()
-	if(href_list[VV_HK_MODIFY_STATS])
-		if(!check_rights(R_ADMIN))
-			return
-
-		switch(browser_alert(usr, "Add or remove?", "MODIFY STATS", list("ADD", "REMOVE")))
-			if("REMOVE")
-				if(!LAZYLEN(stat_modifiers))
-					return
-
-				var/source = browser_input_list(usr, "Source to Remove", "MODIFY STATS", stat_modifiers)
-				if(!source)
-					return
-
-				remove_stat_modifier(source)
-			if("ADD")
-				var/stat_key = browser_input_list(usr, "Stat to Add", "MODIFY STATS", MOBSTATS)
-				if(!stat_key)
-					return
-
-				var/amount = input(usr, "Stat amount", "MODIFY_STATS") as num|null
-				if(!amount)
-					return
-
-				set_stat_modifier(ADMIN_TRAIT, stat_key, amount)
-		return
 
 /mob/living/vv_edit_var(var_name, var_value)
 	switch(var_name)
@@ -2506,7 +2494,7 @@
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	if(m_intent != MOVE_INTENT_SNEAK)
 		visible_message(span_info("[src] looks around."), span_info("I look around."))
-	var/looktime = 5 SECONDS - (STAPER * 2)
+	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
 	if(do_after(src, looktime))
@@ -2517,9 +2505,9 @@
 				continue
 			if(HAS_TRAIT(M, TRAIT_IMPERCEPTIBLE)) // Check if the mob is affected by the invisibility spell
 				continue
-			var/probby = 3 * STAPER
+			var/probby = 3 * GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION)
 			if(M.mind)
-				probby -= (M.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 10)
+				probby -= (GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/sneaking) * 10)
 			probby = (max(probby, 5))
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")
@@ -2555,7 +2543,7 @@
 					accessor_trait = door.accessor_trait
 					hidden_dc = door.hidden_dc
 				var/bonuses = (HAS_TRAIT(src, TRAIT_THIEVESGUILD) || HAS_TRAIT(src, TRAIT_ASSASSIN)) ? 2 : 0
-				if(STAPER + bonuses >= hidden_dc || (accessor_trait && HAS_MIND_TRAIT(src, accessor_trait)))
+				if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) + bonuses >= hidden_dc || (accessor_trait && HAS_MIND_TRAIT(src, accessor_trait)))
 					found_ping(get_turf(O), client, "hidden")
 		for(var/obj/effect/skill_tracker/potential_track in orange(7, src)) //Can't use view because they're invisible by default.
 			if(!can_see(src, potential_track, 10))
@@ -2602,8 +2590,8 @@
 		return
 
 	var/ttime = 1 SECONDS
-	if(STAPER > 5)
-		ttime -= (STAPER - 5)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(ttime < 0)
 			ttime = 0
 
@@ -2625,6 +2613,16 @@
 			if("fog")
 				to_chat(src, span_warning("I can't see anything, the fog has set in."))
 				return
+		if(GLOB.tod == NIGHT)
+			var/briar_notice = FALSE
+			for(var/datum/wound/black_briar_curse/briar in get_wounds())
+				briar.infection += (briar.max_infection * 0.01) // 1% added for looking at the moon
+				if(briar.can_examine)
+					briar_notice = TRUE
+			if(briar_notice)
+				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				add_stress(/datum/stress_event/black_briar_noc)
+				return
 		to_chat(src, span_info("There is nothing special to say about this weather."))
 		do_time_change()
 
@@ -2640,24 +2638,24 @@
 	if(!istype(T))
 		return
 	changeNext_move(CLICK_CD_MELEE)
-
 	var/_x = T.x-loc.x
 	var/_y = T.y-loc.y
 	if(_x > 7 || _x < -7)
 		return
 	if(_y > 7 || _y < -7)
 		return
-	hide_cone()
-	var/ttime = 10
-	if(STAPER > 5)
-		ttime = 10 - (STAPER - 5)
-		if(ttime < 0)
-			ttime = 0
+	var/transition_time = 1 SECONDS
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		transition_time = 10 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
+		if(transition_time < 0)
+			transition_time = 0
 	if(m_intent != MOVE_INTENT_SNEAK)
-		visible_message("<span class='info'>[src] looks into the distance.</span>")
-	animate(client, pixel_x = world.icon_size*_x, pixel_y = world.icon_size*_y, ttime)
-//	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking))
-	update_cone_show()
+		visible_message(span_info("[src] looks into the distance."))
+	var/x_offset = world.icon_size*_x
+	var/y_offset = world.icon_size*_y
+	animate(client, pixel_x = x_offset, pixel_y = y_offset, transition_time)
+	hud_used?.fov_holder?.screen_loc = "1:[-x_offset],1:[-y_offset]"
+	//update_cone_show()
 
 /mob/proc/look_down(turf/T)
 	return
@@ -2680,8 +2678,8 @@
 	if(!OS)
 		return
 	var/ttime = 1 SECONDS
-	if(STAPER > 5)
-		ttime -= (STAPER - 5)
+	if(GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) > 5)
+		ttime -= (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) - 5)
 		if(ttime < 0)
 			ttime = 0
 
@@ -2696,13 +2694,12 @@
 //	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(stop_looking))
 
 /mob/living/proc/stop_looking()
-//	animate(client, pixel_x = 0, pixel_y = 0, 2, easing = SINE_EASING)
 	if(client)
-		client.pixel_x = 0
-		client.pixel_y = 0
+		animate(client, pixel_x = 0, pixel_y = 0, 2, easing = SINE_EASING)
+	hud_used?.fov_holder?.screen_loc = "1,1"
 	reset_perspective()
 	update_cone_show()
-//	UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE)
+
 
 /mob/living/set_stat(new_stat)
 	. = ..()
@@ -2784,21 +2781,6 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
 	return TRUE
-
-/mob/living/proc/get_carry_capacity()
-	return max(45, max(STAEND, STACON) * 12)
-
-///this is returned as decimal value between 0 and 1
-/mob/living/proc/get_encumbrance()
-	return 0
-
-/mob/living/proc/get_total_weight()
-	return 0
-
-/mob/living/proc/encumbrance_to_dodge()
-	return 1
-
-/mob/living/proc/encumbrance_to_speed()
 
 /// checks if this mob can do a dualwielding attack or defense
 /mob/living/proc/dual_wielding_check()
@@ -2925,7 +2907,9 @@
  * * points - amount of points to grant or reduce
  * * used_points - ajust used points
 */
-/mob/living/proc/adjust_spell_points(points, used_points = FALSE)
+/mob/proc/adjust_spell_points(points, used_points = FALSE)
+
+/mob/living/adjust_spell_points(points, used_points = FALSE)
 	if(QDELETED(src))
 		return
 
@@ -3064,3 +3048,8 @@
 	if(hud_used)
 		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_ICON)
+
+/// For updating swimming movement. Handled in [/datum/element/submerged]
+/mob/living/proc/set_swimming(swimming)
+	if(HAS_TRAIT(src, TRAIT_SUBMERGED))
+		SEND_SIGNAL(src, COMSIG_LIVING_SWIM, swimming)

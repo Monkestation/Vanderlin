@@ -12,7 +12,7 @@
 	probability = _probability
 	flags = _flags
 
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
 
 /datum/component/caltrop/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
@@ -40,7 +40,7 @@
 		if(!(flags & CALTROP_BYPASS_SHOES) && (H.shoes || feetCover))
 			return
 
-		if((H.movement_type & FLYING) || H.buckled)
+		if((H.movement_type & MOVETYPE_NOT_TOUCHING_GROUND) || H.buckled)
 			return
 
 		if(H.body_position == LYING_DOWN) //if were not standing we cant step on the caltrop

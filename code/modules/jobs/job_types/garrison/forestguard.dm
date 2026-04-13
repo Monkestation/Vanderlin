@@ -1,5 +1,5 @@
 /datum/job/forestguard
-	title = "Forest Guard"
+	title = JOB_FOREST_GUARD
 	tutorial = "You've been keeping the streets clean of neer-do-wells and taffers for most of your time in the garrison.\
 	You've been through the wringer - alongside soldiers in the short-lived Goblin Wars. \
 	The Wars were rough, the few who survived came back changed. Perhaps you'd agree. \
@@ -34,10 +34,9 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
-
-/datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -58,6 +57,32 @@
 /datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
+/datum/attribute_holder/sheet/job/forestguard/infantry
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 3,
+		STAT_CONSTITUTION = 3,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/lumberjacking = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30
+	)
+
 /datum/job/advclass/forestguard/infantry
 	title = "Forest Ravager"
 	tutorial = "In the goblin wars- you alone were deployed to the front lines, caving skulls and chopping legs - saving your family-at-arms through your reckless diversions. With your bloodied axe and flail, every swing and crack was another hatch on your tally. Now that the War's over, even with your indomitable spirit and tireless zeal - let's see if that still rings true."
@@ -66,33 +91,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 3,
-		STATKEY_CON = 3,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/lumberjacking = 1,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/infantry
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -115,6 +114,29 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
+/datum/attribute_holder/sheet/job/forestguard/ranger
+	raw_attribute_list = list(
+		STAT_STRENGTH = -3,
+		STAT_ENDURANCE = 1,
+		STAT_PERCEPTION = 3,
+		STAT_SPEED = 3,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/lumberjacking = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/wrestling = 10
+	)
+
 /datum/job/advclass/forestguard/ranger
 	title = "Forest Ranger"
 	tutorial = "In the Wars you were always one of the fastest, as well as one of the frailest in the platoon. Your trusty bow has served you well- of course, none you've set your sights on have found the tongue to disagree."
@@ -123,30 +145,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	jobstats = list(
-		STATKEY_STR = -3,
-		STATKEY_END = 1,
-		STATKEY_PER = 3,
-		STATKEY_SPD = 3
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/lumberjacking = 1,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/wrestling = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ranger
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -162,11 +161,33 @@
 	beltl = /obj/item/weapon/knife/cleaver/combat
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	armor = /obj/item/clothing/armor/leather/advanced/forrester
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	backr = /obj/item/gun/ballistic/bow/long
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1
+	)
+
+/datum/attribute_holder/sheet/job/forestguard/reaver
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/lumberjacking = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 30
 	)
 
 /datum/job/advclass/forestguard/reaver
@@ -177,29 +198,7 @@
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_CON = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/riding = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/lumberjacking = 1,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/reaver
 
 	traits = list(
 		TRAIT_DUALWIELDER,
@@ -224,6 +223,34 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
+/datum/attribute_holder/sheet/job/forestguard/ruffian
+	attribute_variance = list(
+		STAT_STRENGTH = list(-1, 1),
+		STAT_INTELLIGENCE = list(-2, 2),
+		STAT_CONSTITUTION = list(-1, 1),
+		STAT_ENDURANCE = list(-1, 1),
+		STAT_FORTUNE = list(-4, 4),
+	)
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30,
+		/datum/attribute/skill/craft/tanning = 20
+	)
+
 /datum/job/advclass/forestguard/ruffian
 	title = "Forest Ruffian"
 	tutorial = "For your terrible orphan pranks and antics in the city, you were rounded up by the city's Watch and put to work in the infamous forest garrison. \n\n A ruffian by circumstance, a proven listener of war stories - you might just become more than a troublemaker."
@@ -232,28 +259,7 @@
 	allowed_ages = list(AGE_CHILD)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	jobstats = list(
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/crossbows = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3,
-		/datum/skill/craft/tanning = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ruffian
 
 	traits = list(
 		TRAIT_FORAGER,
@@ -261,16 +267,38 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyellorphan
+	)
 
-/datum/job/advclass/forestguard/ruffian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, rand(-2, 2))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
+/datum/attribute_holder/sheet/job/forestguard/rat
+	attribute_variance = list(
+		STAT_STRENGTH = list(-1, 1),
+		STAT_INTELLIGENCE = list(-2, 2),
+		STAT_CONSTITUTION = list(-1, 1),
+		STAT_ENDURANCE = list(-1, 1),
+		STAT_FORTUNE = list(-4, 4),
+	)
 
-	add_verb(spawned, /mob/proc/haltyellorphan)
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/labor/butchering = 20,
+		/datum/attribute/skill/combat/bows = 10,
+		/datum/attribute/skill/combat/crossbows = 10,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 30,
+		/datum/attribute/skill/craft/tanning = 20
+	)
 
 /datum/job/advclass/forestguard/rat
 	title = "Forest Rat"
@@ -279,28 +307,7 @@
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	jobstats = list(
-		STATKEY_PER = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/labor/butchering = 2,
-		/datum/skill/combat/bows = 1,
-		/datum/skill/combat/crossbows = 1,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 3,
-		/datum/skill/craft/tanning = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/rat
 
 	traits = list(
 		TRAIT_FORAGER,
@@ -308,17 +315,9 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-/datum/job/advclass/forestguard/rat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, rand(-2, 2))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, rand(-1, 1))
-	spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_LCK, rand(-4, 4))
-
-	add_verb(spawned, /mob/proc/haltyellorphan)
-
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 
 /datum/outfit/forestguard/ruffian
@@ -328,7 +327,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	beltl = /obj/item/weapon/knife/dagger
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	armor = /obj/item/clothing/armor/leather
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,

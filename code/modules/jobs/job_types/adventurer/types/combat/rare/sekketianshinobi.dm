@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/sekketianshinobi
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_SPEED = 2, //they're basically ninjas.
+		STAT_STRENGTH = 1, //because they're mainly supposed to use blunt weapons.
+		STATKET_INT = -1,
+		STAT_PERCEPTION = -1,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/misc/lockpicking = 20, //these guys free slaves, they probably know how to disarm traps and unlock things
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+	)
+
 /datum/job/advclass/combat/sekketianshinobi
 	title = "Sekketian Shinobi"
 	tutorial = "You belong to the Shinobi's of Sekket. An elusive order of Xylixian freedom fighters originating from the Queendom of Lakkari. You have dedicated yourself to uplifting the enslaved and oppressed, and hope to continue doing so in the lands you travel."
@@ -16,35 +39,11 @@
 	cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 	outfit = /datum/outfit/adventurer/sekketianshinobi
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_SPD = 2, //they're basically ninjas.
-		STATKEY_STR = 1, //because they're mainly supposed to use blunt weapons.
-		STATKET_INT = -1,
-		STATKEY_PER = -1,
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/climbing = 5,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/lockpicking = 2, //these guys free slaves, they probably know how to disarm traps and unlock things
-		/datum/skill/misc/stealing = 2,
-		/datum/skill/craft/crafting = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/sekketianshinobi
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_MEDIUMARMOR, // so they can dodge wearing their mask, these guys dont actually spawn with medium armor, they have to EARN it.
-
 	)
 
 /datum/outfit/adventurer/sekketianshinobi

@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/bomb
 	abstract_type = /datum/repeatable_crafting_recipe/bomb
-	skillcraft = /datum/skill/craft/bombs
+	skillcraft = /datum/attribute/skill/craft/bombs
 	craftdiff = 2
 	minimum_skill_level = 1 // this is what locks the recipes to only bombcrafters
 	category = "Bombs"

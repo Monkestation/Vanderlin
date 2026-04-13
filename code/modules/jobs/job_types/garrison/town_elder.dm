@@ -1,5 +1,5 @@
 /datum/job/town_elder
-	title = "Town Elder"
+	title = JOB_TOWN_ELDER
 	tutorial = "You were once a wanderer, an unremarkable soul who, alongside your old adventuring party, carved your name into history.\
 	Now, the days of adventure are long past. You sit as the town's beloved elder; while the crown may rule from afar, the people\
 	look to you to settle disputes, mend rifts, and keep the true peace in town. Not every conflict must end in bloodshed,\
@@ -27,6 +27,10 @@
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_BARD = 300
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/townannouncement
+	)
+	forced_flaw = /datum/quirk/boon/folk_hero
 
 	traits = list(
 		TRAIT_OLDPARTY
@@ -36,10 +40,11 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/militia
 	)
 
-/datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+
+/datum/job/town_elder/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
-	var/instruments = list(
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -47,14 +52,10 @@
 		"Flute" = /obj/item/instrument/flute,
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola)
+		"Viola" = /obj/item/instrument/viola
+	)
 
-	var/instrument_choice = input(spawned, "Choose your instrument.", "XYLIX") as anything in instruments
-	var/spawn_instrument = instruments[instrument_choice]
-	if(!spawn_instrument)
-		spawn_instrument = /obj/item/instrument/lute
-	spawned.equip_to_slot_or_del(new spawn_instrument(spawned), ITEM_SLOT_BACK_R, TRUE)
-	spawned.add_quirk(/datum/quirk/boon/folk_hero)
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.", title = "XYLIX")
 
 /mob/living/carbon/human/proc/townannouncement()
 	set name = "Elder Announcement"
@@ -69,7 +70,7 @@
 		to_chat(src, "<span class='warning'>You must wait [time_left] more seconds before making another announcement.</span>")
 		return
 
-	var/inputty = input("Make an announcement", "VANDERLIN") as text|null
+	var/inputty = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(src, "Make an announcement to the townsfolk", "Elder Announcement", multiline = TRUE)))
 	if(inputty)
 		if(!istype(get_area(src), /area/indoors/town/tavern))
 			to_chat(src, "<span class='warning'>I need to do this from the tavern.</span>")
@@ -81,6 +82,42 @@
 
 /datum/job/advclass/town_elder
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+
+/datum/attribute_holder/sheet/job/town_elder/mayor
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_ENDURANCE = 1,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/labor/mathematics = 40,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/misc/music = 50
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/mayor/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_ENDURANCE = 1,
+		STAT_PERCEPTION = 3,
+		STAT_INTELLIGENCE = 3,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 50,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/misc/music = 50
+	)
 
 /datum/job/advclass/town_elder/mayor
 	title = "Mayor"
@@ -95,25 +132,8 @@
 	)
 	honorary = "Mayor"
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_END = 1,
-		STATKEY_PER = 2,
-		STATKEY_INT = 2
-	)
-
-	skills = list(
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/labor/mathematics = 4,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/misc/music = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/town_elder/mayor
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/town_elder/mayor/old
 
 	traits = list(
 		TRAIT_NOBLE_POWER,
@@ -124,15 +144,6 @@
 /datum/job/advclass/town_elder/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.inspiration = new /datum/inspiration(spawned)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/labor/mathematics, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 
 /datum/outfit/town_elder/mayor
 	name = "Mayor (Town Elder)"
@@ -151,68 +162,94 @@
 	backl = /obj/item/storage/backpack/satchel
 	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff
 
+/datum/attribute_holder/sheet/job/town_elder/master_of_crafts_and_labor
+	attribute_variance = list(
+		/datum/attribute/skill/labor/mining = list(20, 40),
+		/datum/attribute/skill/labor/lumberjacking = list(20, 40),
+		/datum/attribute/skill/craft/masonry = list(20, 40),
+		/datum/attribute/skill/craft/crafting = list(20, 40),
+		/datum/attribute/skill/craft/carpentry = list(20, 40),
+		/datum/attribute/skill/craft/engineering = list(20, 40),
+		/datum/attribute/skill/craft/smelting = list(20, 40),
+		/datum/attribute/skill/misc/sewing = list(20, 40),
+		/datum/attribute/skill/labor/farming = list(20, 40),
+		/datum/attribute/skill/misc/medicine = list(20, 40),
+		/datum/attribute/skill/craft/tanning = list(20, 40),
+		/datum/attribute/skill/labor/butchering = list(20, 40),
+		/datum/attribute/skill/labor/taming = list(20, 40),
+		/datum/attribute/skill/craft/alchemy = list(20, 40),
+		/datum/attribute/skill/craft/blacksmithing = list(20, 40),
+		/datum/attribute/skill/craft/armorsmithing = list(20, 40),
+		/datum/attribute/skill/craft/weaponsmithing = list(20, 40),
+		/datum/attribute/skill/craft/cooking = list(20, 40),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/music = 30
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/master_of_crafts_and_labor/old
+	attribute_variance = list(
+		/datum/attribute/skill/labor/mining = list(20, 50),
+		/datum/attribute/skill/labor/lumberjacking = list(20, 50),
+		/datum/attribute/skill/craft/masonry = list(20, 50),
+		/datum/attribute/skill/craft/crafting = list(20, 50),
+		/datum/attribute/skill/craft/carpentry = list(20, 50),
+		/datum/attribute/skill/craft/engineering = list(20, 50),
+		/datum/attribute/skill/craft/smelting = list(20, 50),
+		/datum/attribute/skill/misc/sewing = list(20, 50),
+		/datum/attribute/skill/labor/farming = list(20, 50),
+		/datum/attribute/skill/misc/medicine = list(20, 50),
+		/datum/attribute/skill/craft/tanning = list(20, 50),
+		/datum/attribute/skill/labor/butchering = list(20, 50),
+		/datum/attribute/skill/labor/taming = list(20, 50),
+		/datum/attribute/skill/craft/alchemy = list(20, 50),
+		/datum/attribute/skill/craft/blacksmithing = list(20, 50),
+		/datum/attribute/skill/craft/armorsmithing = list(20, 50),
+		/datum/attribute/skill/craft/weaponsmithing = list(20, 50),
+		/datum/attribute/skill/craft/cooking = list(20, 50),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 3,
+		STAT_INTELLIGENCE = 3,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/music = 30
+	)
+
 /datum/job/advclass/town_elder/master_of_crafts_and_labor //A Job meant to guide and help new players in multiple areas heavy RNG so it can range from Average to Master.
 	title = "Master of Crafts and Labor"
 	tutorial = "You were one of the hardest-working individuals in the city, there isn't a single job you haven't done. From farming and butchery to alchemy, blacksmithing, cooking, and even medicine, your vast knowledge made you a guiding light for the people. Yet amid your labors, it was your songs that bound the workers together: rhythmic chants in the forge, lullabies in the sick wards, ballads hummed in the fields. Your voice became a beacon of focus and unity. Recognizing both your wisdom and your spirit, the townsfolk turned to you for guidance. Now, as the Master of Crafts and Labor, you oversee and uplift all who contribute to the city's survival. Lead them well."
 	outfit = /datum/outfit/town_elder/master_of_crafts_and_labor
 	category_tags = list(CTAG_TOWN_ELDER)
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_INT = 2
-	)
+
 	honorary = "Foreman"
 
-	skills = list(
-		/datum/skill/misc/reading = 1,
-		/datum/skill/labor/mathematics = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/music = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/town_elder/master_of_crafts_and_labor
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/town_elder/master_of_crafts_and_labor/old
 
 	traits = list(
 		TRAIT_DEADNOSE,
 		TRAIT_SEEDKNOW,
 		TRAIT_MALUMFIRE
 	)
-
-/datum/job/advclass/town_elder/master_of_crafts_and_labor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	var/list/craft_skills = list(
-		/datum/skill/labor/mining,
-		/datum/skill/labor/lumberjacking,
-		/datum/skill/craft/masonry,
-		/datum/skill/craft/crafting,
-		/datum/skill/craft/carpentry,
-		/datum/skill/craft/engineering,
-		/datum/skill/craft/smelting,
-		/datum/skill/craft/sewing,
-		/datum/skill/labor/farming,
-		/datum/skill/misc/medicine,
-		/datum/skill/craft/tanning,
-		/datum/skill/labor/butchering,
-		/datum/skill/labor/taming,
-		/datum/skill/craft/alchemy,
-		/datum/skill/craft/blacksmithing,
-		/datum/skill/craft/armorsmithing,
-		/datum/skill/craft/weaponsmithing,
-		/datum/skill/craft/cooking
-	)
-
-	for(var/skill_type in craft_skills)
-		spawned.adjust_skillrank(skill_type, pick(2,3,4), TRUE)
-
-	if(spawned.age == AGE_OLD)
-		for(var/skill_type in craft_skills)
-			spawned.adjust_skillrank(skill_type, pick(0,0,1), TRUE)
-
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 
 /datum/outfit/town_elder/master_of_crafts_and_labor
 	name = "Master of Crafts and Labor (Town Elder)"
@@ -232,6 +269,92 @@
 		/obj/item/weapon/hammer/steel = 1
 	)
 
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/misc/music = 40
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 3,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 50,
+		/datum/attribute/skill/misc/music = 40
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/eora
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/music = 20
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/noc
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/mathematics = 20
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/pestra
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/alchemy = 10
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/dendor
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/labor/taming = 10
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/abyssor
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/fishing = 20,
+		/datum/attribute/skill/misc/swimming = 20
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/ravox
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 10
+	)
+	attribute_variance = list(
+		/datum/attribute/skill/combat/swords = list(10, 20),
+		/datum/attribute/skill/combat/whipsflails = list(10, 20),
+		/datum/attribute/skill/combat/axesmaces = list(0, 10)
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/xylix
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/misc/music = 30
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/malum
+	raw_attribute_list = list(
+		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/craft/armorsmithing = 10,
+		/datum/attribute/skill/craft/weaponsmithing = 10,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/craft/masonry = 10,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/advclass/town_elder/hearth_acolyte //An acolyte that left the church and now serve and help the town people.
 	title = "Hearth Acolyte"
 	tutorial = "As an Acolyte, you dedicated your life to faith and service, expecting nothing in return. When you saved a noble, they repaid you with a home and gold, but you accepted it as the will of the Ten. Though you stepped away from the Church, you found a new purpose, not in grand temples, but in the rhythm of the streets. Your voice, once raised in hymns and prayers, now carries through alleyways and taverns, offering solace in melody and verse. Whether through healing, wisdom, or song, your faith endures. Only now, your congregation is the town itself."
@@ -240,22 +363,8 @@
 	allowed_patrons = ALL_TEMPLE_PATRONS
 	//honorary = "STUPID DUMB CLASS WHICH I HATE"
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_INT = 1,
-		STATKEY_END = 2
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/misc/music = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/old
 
 	traits = list(
 		TRAIT_OLDPARTY
@@ -277,10 +386,10 @@
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
 			spawned.virginity = FALSE
-			spawned.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
+			spawned.adjust_skill_level(/datum/attribute/skill/labor/mathematics, 20)
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -310,46 +419,29 @@
 					)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/pestra)
-			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/pestra)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/dendor)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/abyssor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = rand(1,2)
-			var/whip_skill = rand(1,2)
-			var/axe_skill = rand(0,1)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, axe_skill, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/ravox)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/xylix)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/smelting, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/malum)
 			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 
 	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
+		spawned.adjust_skill_level(/datum/attribute/skill/magic/holy, 20)
+		spawned.adjust_stat_modifier(STATMOD_JOB, STAT_ENDURANCE, 1)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
@@ -399,32 +491,53 @@
 		else
 			neck = /obj/item/clothing/neck/psycross/silver
 
+/datum/attribute_holder/sheet/job/town_elder/lorekeeper
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_SPEED = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/music = 60,
+		/datum/attribute/skill/misc/athletics = 20
+	)
+
+/datum/attribute_holder/sheet/job/town_elder/lorekeeper/old
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 3,
+		STAT_SPEED = 1,
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/music = 60,
+		/datum/attribute/skill/misc/athletics = 20
+	)
+
 /datum/job/advclass/town_elder/lorekeeper
 	title = "Lorekeeper"
 	tutorial = "Your tales once lit up taverns, your ballads echoed through cities, and your curiosity led you across kingdoms. But the stage grows quiet, and your thirst for stories has shifted. Now, you collect history instead of applause, recording the town's past, preserving its legends, and guiding the present with the wisdom of ages. In a world where memory is power, you are its guardian."
 	outfit = /datum/outfit/town_elder/lorekeeper
 	category_tags = list(CTAG_TOWN_ELDER)
 
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_SPD = 1,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/music = 6,
-		/datum/skill/misc/athletics = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/town_elder/lorekeeper
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/town_elder/lorekeeper/old
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -439,12 +552,6 @@
 /datum/job/advclass/town_elder/lorekeeper/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.inspiration = new /datum/inspiration(spawned)
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
 
 /datum/outfit/town_elder/lorekeeper
 	name = "Lorekeeper (Town Elder)"

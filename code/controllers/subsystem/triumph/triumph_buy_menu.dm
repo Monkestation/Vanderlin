@@ -11,7 +11,7 @@
 /datum/triumph_buy_menu/New()
 	..()
 
-/datum/triumph_buy_menu/Destroy(force, ...)
+/datum/triumph_buy_menu/Destroy(force)
 	linked_client = null
 	. = ..()
 

@@ -51,6 +51,8 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 	abstract_type = /datum/quirk
 	///this is basically our apply order, if 0 we don't care, higher is better
 	var/apply_order = 0
+	/// Can this quirk be selected from the menu?
+	var/available = TRUE
 
 	/// The quirk's name shown to players
 	var/name = "Quirk"
@@ -155,6 +157,9 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 	if(!prefs)
 		return TRUE
 
+	if(!available)
+		return FALSE
+
 	// Check age restrictions
 	if(length(allowed_ages) && !(prefs.age in allowed_ages))
 		return FALSE
@@ -162,9 +167,9 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 		return FALSE
 
 	// Check species restrictions
-	if(length(allowed_species) && !(prefs.pref_species.type in allowed_species))
+	if(length(allowed_species) && !is_type_in_list(prefs.pref_species, allowed_species))
 		return FALSE
-	if(prefs.pref_species.type in blocked_species)
+	if(is_type_in_list(prefs.pref_species, blocked_species))
 		return FALSE
 
 	return TRUE
@@ -195,7 +200,7 @@ GLOBAL_LIST_EMPTY(quirk_points_by_type)
 			return TRUE
 	return FALSE
 
-/mob/living/proc/has_quirk(quirk_type)
+/mob/proc/has_quirk(quirk_type)
 	return
 
 /mob/living/carbon/human/has_quirk(quirk_type)

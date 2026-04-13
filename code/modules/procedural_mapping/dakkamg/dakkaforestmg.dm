@@ -58,7 +58,7 @@
 
 /datum/mapGeneratorModule/dforestwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
 	allowed_areas = list(/area/outdoors/wilderness)
 	spawnableAtoms = list(/obj/structure/flora/grass/water = 20,

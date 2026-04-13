@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/assassin
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/sneaking = 50,
+		/datum/attribute/skill/misc/stealing = 30,
+		/datum/attribute/skill/misc/lockpicking = 40,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/craft/traps = 30,
+		/datum/attribute/skill/misc/reading = 10,
+	)
+
 /datum/job/advclass/combat/assassin
 	title = "Assassin"
 	tutorial = "From a young age you have been drawn to blood, to hurting others. Eventually you found others like you, and a god who would bless your actions. Your cursed dagger has never led you astray, and with every stab you feel a little less empty."
@@ -26,30 +49,7 @@
 		/datum/job_pack/assassin/assassin_faceless,
 	)
 
-	skills = list(
-		/datum/skill/combat/knives = 4,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 5,
-		/datum/skill/misc/sneaking = 5,
-		/datum/skill/misc/stealing = 3,
-		/datum/skill/misc/lockpicking = 4,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/craft/traps = 3,
-		/datum/skill/misc/reading = 1,
-	)
-
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/assassin
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -72,11 +72,16 @@
 		else
 			spawned.dna.species.soundpack_f = new /datum/voicepack/female/assassin()
 
-/datum/job_pack/assassin/assassin_bard
-	name = "Bard"
+/datum/attribute_holder/sheet/job/pack/assassin_bard
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/music = 10,
+	)
 
-	pack_skills = list(
-		/datum/skill/misc/music = 1,
+/datum/job_pack/assassin/assassin_bard
+	name = JOB_BARD
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_bard
 	)
 
 	pack_contents = list(
@@ -114,7 +119,7 @@
 
 
 /datum/job_pack/assassin/assassin_beggar
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 	pack_contents = list(
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
@@ -134,11 +139,16 @@
 		var/obj/item/clothing/shirt/undershirt/colored/vagrant/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
 
-/datum/job_pack/assassin/assassin_fisher
-	name = "Fisher"
+/datum/attribute_holder/sheet/job/pack/assassin_fisher
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/fishing = 10,
+	)
 
-	pack_skills = list(
-		/datum/skill/labor/fishing = 1,
+/datum/job_pack/assassin/assassin_fisher
+	name = JOB_FISHER
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_fisher
 	)
 
 	pack_contents = list(
@@ -180,18 +190,23 @@
 		var/obj/item/clothing/head/fisherhat/head = new()
 		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
 
-/datum/job_pack/assassin/assassin_hunter
-	name = "Hunter"
+/datum/attribute_holder/sheet/job/pack/assassin_hunter
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = -20
+	)
 
-	pack_skills = list(
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = -2, // Trade-off
+/datum/job_pack/assassin/assassin_hunter
+	name = JOB_HUNTER
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_hunter
 	)
 
 	pack_contents = list(
 		/obj/item/clothing/cloak/raincloak/furcloak/colored/brown = ITEM_SLOT_CLOAK,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_R,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow = ITEM_SLOT_BACK_L,
+		/obj/item/gun/ballistic/bow = ITEM_SLOT_BACK_L,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/ammo_holder/quiver/arrows = ITEM_SLOT_BELT_R,
 		/obj/item/flashlight/flare/torch/lantern = ITEM_SLOT_BELT_L,
@@ -208,13 +223,18 @@
 		/obj/item/weapon/knife/hunting = 1,
 	)
 
-/datum/job_pack/assassin/assassin_miner
-	name = "Miner"
+/datum/attribute_holder/sheet/job/pack/assassin_miner
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/mining = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = -20, // Trade-off
+	)
 
-	pack_skills = list(
-		/datum/skill/labor/mining = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/swords = -2, // Trade-off
+/datum/job_pack/assassin/assassin_miner
+	name = JOB_MINER
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_miner
 	)
 
 	pack_contents = list(
@@ -236,7 +256,7 @@
 	)
 
 /datum/job_pack/assassin/assassin_noble
-	name = "Noble"
+	name = JOB_MINOR_NOBLE
 
 	pack_contents = list(
 		/obj/item/clothing/shoes/boots = ITEM_SLOT_SHOES,
@@ -262,7 +282,7 @@
 	picker.honorary = picker.pronouns == SHE_HER ? "Lady" : "Lord"
 
 	if(picker.gender == MALE)
-		picker.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+		picker.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
 
 		var/obj/item/clothing/pants/tights/colored/black/pants = new()
 		picker.equip_to_slot_or_del(pants, ITEM_SLOT_PANTS, TRUE)
@@ -272,15 +292,15 @@
 		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
 		var/obj/item/clothing/head/fancyhat/head = new()
 		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/backr = new()
+		var/obj/item/gun/ballistic/bow/backr = new()
 		picker.equip_to_slot_or_del(backr, ITEM_SLOT_BACK_R, TRUE)
 		var/obj/item/weapon/sword/rapier/dec/beltr = new()
 		picker.equip_to_slot_or_del(beltr, ITEM_SLOT_BELT_R, TRUE)
 		var/obj/item/ammo_holder/quiver/arrows/beltl = new()
 		picker.equip_to_slot_or_del(beltl, ITEM_SLOT_BELT_L, TRUE)
 	else
-		picker.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-		picker.adjust_skillrank(/datum/skill/combat/crossbows, -1, TRUE)
+		picker.adjust_skill_level(/datum/attribute/skill/combat/bows, 10)
+		picker.adjust_skill_level(/datum/attribute/skill/combat/crossbows, -10)
 
 		var/obj/item/clothing/shirt/dress/silkdress/colored/random/shirt = new()
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
@@ -288,18 +308,23 @@
 		picker.equip_to_slot_or_del(head, ITEM_SLOT_HEAD, TRUE)
 		var/obj/item/clothing/cloak/raincloak/furcloak/cloak = new()
 		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/backr = new()
+		var/obj/item/gun/ballistic/bow/backr = new()
 		picker.equip_to_slot_or_del(backr, ITEM_SLOT_BACK_R, TRUE)
 		var/obj/item/weapon/knife/dagger/steel/stiletto/beltr = new()
 		picker.equip_to_slot_or_del(beltr, ITEM_SLOT_BELT_R, TRUE)
 		var/obj/item/ammo_holder/quiver/arrows/beltl = new()
 		picker.equip_to_slot_or_del(beltl, ITEM_SLOT_BELT_L, TRUE)
 
+/datum/attribute_holder/sheet/job/pack/assassin_peasant
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/farming = 10,
+	)
+
 /datum/job_pack/assassin/assassin_peasant
 	name = "Peasant"
 
-	pack_skills = list(
-		/datum/skill/labor/farming = 1,
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_peasant
 	)
 
 	pack_contents = list(
@@ -338,12 +363,17 @@
 		picker.equip_to_slot_or_del(shirt, ITEM_SLOT_SHIRT, TRUE)
 		picker.equip_to_slot_or_del(null, ITEM_SLOT_PANTS, TRUE)
 
-/datum/job_pack/assassin/assassin_carpenter
-	name = "Carpenter"
+/datum/attribute_holder/sheet/job/pack/assassin_carpenter
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = -20, // Trade-off
+	)
 
-	pack_skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/swords = -2, // Trade-off
+/datum/job_pack/assassin/assassin_carpenter
+	name = JOB_CARPENTER
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_carpenter
 	)
 
 	pack_contents = list(
@@ -386,19 +416,24 @@
 		/obj/item/clothing/cloak/raincloak/colored/mortus = ITEM_SLOT_CLOAK,
 	)
 
+/datum/attribute_holder/sheet/job/pack/assassin_ranger
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = -20, // Trade-off
+	)
+
 /datum/job_pack/assassin/assassin_ranger
 	name = "Ranger"
 
-	pack_skills = list(
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = -2, // Trade-off
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_ranger
 	)
 
 	pack_contents = list(
 		/obj/item/clothing/wrists/bracers/leather = ITEM_SLOT_WRISTS,
 		/obj/item/storage/belt/leather/assassin = ITEM_SLOT_BELT,
 		/obj/item/clothing/armor/leather/hide = ITEM_SLOT_ARMOR,
-		/obj/item/gun/ballistic/revolver/grenadelauncher/bow = ITEM_SLOT_BACK_R,
+		/obj/item/gun/ballistic/bow = ITEM_SLOT_BACK_R,
 		/obj/item/storage/backpack/satchel = ITEM_SLOT_BACK_L,
 		/obj/item/flashlight/flare/torch/lantern = ITEM_SLOT_BELT_R,
 		/obj/item/ammo_holder/quiver/arrows = ITEM_SLOT_BELT_L,
@@ -441,13 +476,18 @@
 		var/obj/item/clothing/cloak/raincloak/colored/brown/cloak = new()
 		picker.equip_to_slot_or_del(cloak, ITEM_SLOT_CLOAK, TRUE)
 
-/datum/job_pack/assassin/assassin_servant
-	name = "Servant"
+/datum/attribute_holder/sheet/job/pack/assassin_servant
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 30,
+	)
 
-	pack_skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/cooking = 3,
+/datum/job_pack/assassin/assassin_servant
+	name = JOB_SERVANT
+
+	pack_sheets = list(
+		/datum/attribute_holder/sheet/job/pack/assassin_servant
 	)
 
 	pack_contents = list(

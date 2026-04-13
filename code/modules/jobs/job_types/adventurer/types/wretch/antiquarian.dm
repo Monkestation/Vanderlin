@@ -1,3 +1,23 @@
+/datum/attribute_holder/sheet/job/antiquarian
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
+		STAT_STRENGTH = -2, // These are all relatively low, the class requires cantrips to work around these.
+		/datum/attribute/skill/combat/axesmaces = 30, // Needed just for NPC's.
+		/datum/attribute/skill/misc/swimming = 50,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 40, // They're not meant to kill.
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/sneaking = 60,
+		/datum/attribute/skill/misc/stealing = 60,
+		/datum/attribute/skill/misc/lockpicking = 50,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/craft/bombs = 30 // To craft Smoke Bombs.
+	)
+
 /datum/job/advclass/wretch/antiquarian
 	title = "Antiquarian"
 	tutorial = "You're a professional. You've seen things. Many disturbing, and many strange - and it's all changed who you are. Your years of avoiding the watch of Heartfelt \
@@ -13,22 +33,6 @@
 	languages = list(/datum/language/thievescant)
 	allowed_patrons = list(/datum/patron/godless/defiant) // This one has seen too much. Matthiosans are not compatible with Heartfelt.
 
-	skills = list(
-		/datum/skill/combat/axesmaces = SKILL_LEVEL_JOURNEYMAN, // Needed just for NPC's.
-		/datum/skill/misc/swimming = SKILL_LEVEL_MASTER,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT, // They're not meant to kill.
-		/datum/skill/misc/climbing = SKILL_LEVEL_MASTER,
-		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/sneaking = SKILL_LEVEL_LEGENDARY,
-		/datum/skill/misc/stealing = SKILL_LEVEL_LEGENDARY,
-		/datum/skill/misc/lockpicking = SKILL_LEVEL_MASTER,
-		/datum/skill/craft/sewing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/bombs = SKILL_LEVEL_JOURNEYMAN // To craft Smoke Bombs.
-	)
-
 	traits = list(
 		TRAIT_DEADNOSE,
 		TRAIT_STINKY, // Flies gotta come from somewhere!
@@ -37,11 +41,7 @@
 		TRAIT_LIGHT_STEP
 	)
 
-	jobstats = list(
-		STATKEY_CON = -1,
-		STATKEY_END = -1,
-		STATKEY_STR = -2 // These are all relatively low, the class requires cantrips to work around these.
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/antiquarian
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/conjure_item/smoke_bomb,
@@ -112,7 +112,3 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 	)
 
-
-/datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	wretch_select_bounty(spawned)

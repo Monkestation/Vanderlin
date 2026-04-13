@@ -18,8 +18,6 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_NOSE)
 			zone = BODY_ZONE_HEAD
-		if(BODY_ZONE_PRECISE_MOUTH)
-			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_SKULL)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_EARS)
@@ -681,6 +679,7 @@
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
 		deltimer(cmode_timer)
 
+	SEND_SIGNAL(src, COMSIG_MOB_TOGGLE_CMODE, cmode)
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
 
@@ -1005,3 +1004,20 @@
 			return "Visitor"
 		used_title = job_datum.get_informed_title(src, ignore_pronouns)
 	return used_title
+
+/mob/living/proc/recoil_camera(duration, backtime_duration, strength, angle)
+	if(!client || duration < 1)
+		return
+
+	strength *= world.icon_size
+
+	var/client/my_client = client
+	var/oldx = my_client.pixel_x
+	var/oldy = my_client.pixel_y
+
+	//get pixels to move the camera in an angle
+	var/mpx = sin(angle) * strength
+	var/mpy = cos(angle) * strength
+
+	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
+	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)

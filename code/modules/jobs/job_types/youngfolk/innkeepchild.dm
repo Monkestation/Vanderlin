@@ -1,5 +1,20 @@
+/datum/attribute_holder/sheet/job/innkeep_son
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/stealing = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 10
+	)
+
 /datum/job/innkeep_son
-	title = "Innkeepers Son"
+	title = JOB_INNKEEP_SON
 	f_title = "Innkeepers Daughter"
 	tutorial = "One nite the Innkeeper took you in during a harsh winter, \
 	you've been thankful ever since."
@@ -16,29 +31,15 @@
 
 	outfit = /datum/outfit/innkeep_son
 	can_have_apprentices = FALSE
+	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_STR = -1,
-		STATKEY_CON = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/stealing = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep_son
 
 /datum/outfit/innkeep_son
-	name = "Inkeeper Son"
+	name = JOB_INNKEEP_SON
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/shortboots

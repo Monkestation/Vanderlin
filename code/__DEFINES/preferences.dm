@@ -167,11 +167,14 @@
 
 // Voice types
 
-#define VOICE_TYPE_MASC		"Masculine"
-#define VOICE_TYPE_FEM		"Feminine"
+#define VOICE_TYPE_MASC		"Masculine (Species)"
+#define VOICE_TYPE_MASC_FOP "Masculine (Humen, Foppish)"
+#define VOICE_TYPE_FEM		"Feminine (Species)"
+#define VOICE_TYPE_FEM_DAINTY "Feminine (Humen, Dainty)"
+#define VOICE_TYPE_FEM_HAUGHTY "Feminine (Humen, Haughty)"
 #define VOICE_TYPE_ANDRO	"Androgynous"
 
-#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)
+#define VOICE_TYPES_LIST list(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP, VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY, VOICE_TYPE_ANDRO)
 
 #define VOICE_TYPES_MASCANDRO list(VOICE_TYPE_MASC, VOICE_TYPE_ANDRO)
 #define VOICE_TYPES_FEMANDRO list(VOICE_TYPE_FEM, VOICE_TYPE_ANDRO)

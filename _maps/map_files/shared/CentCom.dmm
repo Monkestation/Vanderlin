@@ -501,9 +501,6 @@
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
-"bA" = (
-/turf/open/water/cleanshallow,
-/area/outdoors/woods_safe)
 "bB" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -718,9 +715,6 @@
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
-"cn" = (
-/turf/open/water/cleanshallow,
-/area/indoors/vampire_manor)
 "co" = (
 /obj/item/clothing/gloves/rare/elfplate/welfplate,
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate,
@@ -939,7 +933,6 @@
 /area/indoors/bandit_lair)
 "db" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -1209,6 +1202,12 @@
 "eh" = (
 /turf/closed/wall/mineral/decostone/moss/long,
 /area/indoors/lich)
+"ei" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/bandit_lair)
 "ep" = (
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/craftstone,
@@ -1643,6 +1642,12 @@
 /obj/structure/hotspring/border/three,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"hB" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "hC" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -1671,7 +1676,6 @@
 /area/outdoors/bog/inhumen_camp)
 "hJ" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,
@@ -1770,7 +1774,6 @@
 /area)
 "ik" = (
 /obj/structure/winch{
-	gid = "vamplordmanor";
 	redstone_id = "vamplordmanor"
 	},
 /turf/open/floor/blocks,
@@ -1785,12 +1788,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"io" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "ip" = (
 /obj/structure/mannequin/male/female,
 /obj/item/clothing/shoes/nobleboot,
@@ -1960,12 +1957,6 @@
 "js" = (
 /turf/closed/wall/mineral/tent,
 /area/indoors/bandit_lair)
-"jt" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "jv" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/chevron,
@@ -2342,6 +2333,12 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"mc" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "md" = (
 /turf/open/floor/carpet/stellar,
 /area/indoors/lich)
@@ -3054,12 +3051,6 @@
 "qO" = (
 /turf/open/floor/cobble,
 /area/indoors)
-"qP" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "qQ" = (
 /obj/item/clothing/shirt/dress/gen/colored/black,
 /obj/item/clothing/shirt/dress/gen/colored/black,
@@ -3229,6 +3220,10 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/dirt,
 /area/indoors/vampire_manor)
+"rP" = (
+/obj/structure/bars,
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "rQ" = (
 /turf/closed,
 /area)
@@ -3261,10 +3256,6 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors)
-"sa" = (
-/obj/machinery/light/fueled/wallfire/candle/weak/r,
-/turf/open/water/cleanshallow,
-/area/indoors/vampire_manor)
 "sb" = (
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
@@ -3941,7 +3932,6 @@
 /area/indoors/lich)
 "wb" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -3961,6 +3951,9 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"wj" = (
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "wk" = (
 /obj/item/clothing/shirt/undershirt,
 /obj/item/clothing/shirt/undershirt,
@@ -5359,7 +5352,6 @@
 /area/indoors/vampire_manor)
 "GC" = (
 /obj/structure/winch{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/churchbrick,
@@ -5436,6 +5428,10 @@
 /obj/structure/fluff/clock/zizoclock,
 /turf/open/floor/churchrough,
 /area/indoors/lich)
+"Hg" = (
+/obj/machinery/light/fueled/wallfire/candle/weak/r,
+/turf/open/water/clean,
+/area/indoors/vampire_manor)
 "Hi" = (
 /turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
@@ -7133,10 +7129,6 @@
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
-"Sh" = (
-/obj/structure/bars,
-/turf/open/water/cleanshallow,
-/area/indoors/vampire_manor)
 "Si" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -7680,7 +7672,6 @@
 /area/indoors/vampire_manor)
 "Vv" = (
 /obj/structure/gate/bars/preopen{
-	gid = "vamplordthrone";
 	redstone_id = "vamplordthrone"
 	},
 /turf/open/floor/carpet,
@@ -8228,6 +8219,9 @@
 /obj/item/plate,
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
+"YQ" = (
+/turf/open/water/clean,
+/area/outdoors/woods_safe)
 "YS" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -9919,7 +9913,7 @@ oI
 Sq
 Zh
 In
-qP
+ei
 NG
 yo
 yq
@@ -12144,8 +12138,8 @@ bz
 so
 xt
 Te
-bA
-bA
+YQ
+YQ
 Te
 BM
 so
@@ -12273,10 +12267,10 @@ Sy
 bz
 so
 xt
-bA
-bA
-bA
-bA
+YQ
+YQ
+YQ
+YQ
 Te
 so
 so
@@ -12403,9 +12397,9 @@ Sy
 so
 so
 Te
-bA
-bA
-bA
+YQ
+YQ
+YQ
 xt
 bz
 so
@@ -12534,7 +12528,7 @@ so
 so
 bz
 Te
-bA
+YQ
 xt
 xt
 so
@@ -14467,9 +14461,9 @@ yE
 cQ
 Ba
 MW
-jt
+hB
 jZ
-io
+mc
 yE
 bK
 cT
@@ -16702,7 +16696,7 @@ dH
 dH
 Qy
 Qy
-bA
+YQ
 Te
 bB
 Te
@@ -16829,11 +16823,11 @@ Tf
 dR
 yE
 bB
-bA
-bA
+YQ
+YQ
 Qy
-bA
-bA
+YQ
+YQ
 Te
 Te
 dH
@@ -16958,13 +16952,13 @@ zm
 cN
 dR
 yE
-bA
-bA
-bA
+YQ
+YQ
+YQ
 Qy
-bA
-bA
-bA
+YQ
+YQ
+YQ
 Te
 dH
 dI
@@ -17088,13 +17082,13 @@ cN
 cN
 yE
 yE
-bA
-bA
-bA
+YQ
+YQ
+YQ
 pf
-bA
-bA
-bA
+YQ
+YQ
+YQ
 Te
 dH
 dI
@@ -17218,13 +17212,13 @@ fS
 yE
 yE
 Te
-bA
-bA
+YQ
+YQ
 Av
 JF
 Av
-bA
-bA
+YQ
+YQ
 Te
 Te
 dI
@@ -17348,13 +17342,13 @@ cZ
 cZ
 yE
 Te
-bA
-bA
-bA
-bA
-bA
-bA
-bA
+YQ
+YQ
+YQ
+YQ
+YQ
+YQ
+YQ
 Te
 dH
 dI
@@ -17465,7 +17459,7 @@ Iw
 Iw
 Iw
 yE
-cn
+wj
 rO
 rw
 Ys
@@ -17479,12 +17473,12 @@ tB
 yE
 Zz
 bB
-bA
-bA
-bA
-bA
-bA
-bA
+YQ
+YQ
+YQ
+YQ
+YQ
+YQ
 Te
 Te
 dI
@@ -17594,8 +17588,8 @@ Iw
 Iw
 Iw
 Iw
-Sh
-cn
+rP
+wj
 dx
 qj
 rw
@@ -17610,10 +17604,10 @@ yE
 Zz
 Zz
 Te
-bA
-bA
-bA
-bA
+YQ
+YQ
+YQ
+YQ
 Te
 Zz
 Zz
@@ -17725,8 +17719,8 @@ Iw
 Iw
 Iw
 yE
-cn
-sa
+wj
+Hg
 dX
 cZ
 Su

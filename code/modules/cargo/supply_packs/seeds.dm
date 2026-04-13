@@ -129,3 +129,28 @@
 	name = "Piyata"
 	cost = 10
 	contains = /obj/item/neuFarm/seed/dragonfruit
+
+/datum/supply_pack/seeds/cocaudo
+	name = "Cocaudo"
+	cost = 10
+	contains = /obj/item/neuFarm/seed/cocaudo
+
+/datum/supply_pack/seeds/pompkaun
+	name = "Pompkaun"
+	cost = 8
+	contains = /obj/item/neuFarm/seed/pompkaun
+
+/datum/supply_pack/seeds/sunreed
+	name = "Sunreed"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/sunreed
+
+/datum/supply_pack/seeds/tamto
+	name = "Tamto"
+	cost = 5
+	contains = /obj/item/neuFarm/seed/tamto
+
+/datum/supply_pack/seeds/drowsbane
+	name = "Drowsbane"
+	cost = 15
+	contains = /obj/item/neuFarm/seed/spore/drowsbane

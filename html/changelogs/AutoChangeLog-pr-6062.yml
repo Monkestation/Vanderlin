@@ -1,0 +1,6 @@
+author: "flleeppyy"
+delete-after: True
+changes:
+  - config: "removed usewhitelist and useblacklist as they weren't used properly in the first place, and no jobs had support for it."
+  - config: "various unused config entries have been removed"
+  - rscdel: "removed agecheck and bypassage related code, as nothing uses it."

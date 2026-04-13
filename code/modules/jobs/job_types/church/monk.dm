@@ -1,5 +1,95 @@
+/datum/attribute_holder/sheet/job/acolyte
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/craft/cooking = 20
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/old
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/axesmaces = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 40,
+		/datum/attribute/skill/craft/cooking = 20
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/eora
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/music = 20
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/noc
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/mathematics = 20
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/pestra
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/alchemy = 10
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/dendor
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/labor/taming = 10
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/abyssor
+	raw_attribute_list = list(
+		/datum/attribute/skill/labor/fishing = 20,
+		/datum/attribute/skill/misc/swimming = 20
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/ravox
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/polearms = 10
+	)
+	attribute_variance = list(
+		/datum/attribute/skill/combat/swords = list(10, 20),
+		/datum/attribute/skill/combat/whipsflails = list(10, 20),
+		/datum/attribute/skill/combat/axesmaces = list(0, 10)
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/xylix
+	raw_attribute_list = list(
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/misc/music = 30
+	)
+
+/datum/attribute_holder/sheet/job/acolyte/patron/malum
+	raw_attribute_list = list(
+		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/craft/armorsmithing = 10,
+		/datum/attribute/skill/craft/weaponsmithing = 10,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/craft/masonry = 10,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/monk
-	title = "Acolyte"
+	title = JOB_ACOLYTE
 	tutorial = "Chores, exercise, prayer... and more chores. \
 	You are a humble acolyte at the temple in Vanderlin, \
 	not yet a trained guardian or an ordained priest. \
@@ -21,32 +111,13 @@
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-		STATKEY_PER = -1
-	)
-
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 3,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/axesmaces = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/craft/cooking = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/acolyte
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/acolyte/old
 
 	languages = list(/datum/language/celestial)
 
 /datum/job/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 
 	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
@@ -60,10 +131,10 @@
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
 			spawned.virginity = FALSE
-			spawned.adjust_skillrank(/datum/skill/misc/music, 2, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skillrank(/datum/skill/labor/mathematics, 2, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/noc)
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -93,40 +164,23 @@
 					)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/pestra)
-			spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/pestra)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.adjust_skillrank(/datum/skill/labor/farming, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/labor/taming, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/dendor)
 			ADD_TRAIT(spawned, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.adjust_skillrank(/datum/skill/labor/fishing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/abyssor)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			var/sword_skill = rand(1,2)
-			var/whip_skill = rand(1,2)
-			var/axe_skill = rand(0,1)
-			spawned.adjust_skillrank(/datum/skill/combat/swords, sword_skill, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/whipsflails, whip_skill, TRUE)
-			spawned.adjust_skillrank(/datum/skill/combat/axesmaces, axe_skill, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/ravox)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/xylix)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.adjust_skillrank(/datum/skill/craft/blacksmithing, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/smelting, 2, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/masonry, 1, TRUE)
-			spawned.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/malum)
 			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 
@@ -137,7 +191,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/monk
-	name = "Acolyte"
+	name = JOB_ACOLYTE
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church

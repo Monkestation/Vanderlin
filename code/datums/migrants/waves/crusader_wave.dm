@@ -3,6 +3,30 @@
 	greet_text = "These lands have forfeited Psydon. You have come to restore the True faith to these people and tear out the rot festering within."
 	migrant_job = /datum/job/migrant/specialinquisitor
 
+/datum/attribute_holder/sheet/job/migrant/specialinquisitor
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 2,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/combat/firearms = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/specialinquisitor
 	title = "Episcopal Inquisitor"
 	tutorial = "These lands have forfeited Psydon. You have come to restore the True faith to these people and tear out the rot festering within."
@@ -13,31 +37,7 @@
 	is_recognized = TRUE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
 
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_STR = 1,
-		STATKEY_PER = 2,
-		STATKEY_SPD = 2,
-		STATKEY_END = 1,
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/combat/firearms = 3,
-		/datum/skill/combat/knives = 3,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/specialinquisitor
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -92,6 +92,26 @@
 	greet_text = "Crusader of the true faith, you came from Grenzelhoft under the command of the Inquisitor. Obey them as they lead you to smite the heathens."
 	migrant_job = /datum/job/migrant/inquisition_crusader
 
+/datum/attribute_holder/sheet/job/migrant/inquisition_crusader
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/shields = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
 /datum/job/migrant/inquisition_crusader
 	title = "Episcopal Crusader"
 	tutorial = "Crusader of the true faith, you came from Grenzelhoft under the command of the Inquisitor. Obey them as they lead you to smite the heathens."
@@ -100,27 +120,8 @@
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	outfit = /datum/outfit/inquisition_crusader
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_CON = 2,
-		STATKEY_STR = 1,
-	)
 
-	skills = list(
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/shields = 2,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/craft/cooking = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/inquisition_crusader
 
 	traits = list(
 		TRAIT_STEELHEARTED,
@@ -138,11 +139,11 @@
 /datum/job/migrant/inquisition_crusader/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.gender == FEMALE)
-		spawned.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 10)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 10)
 	else
-		spawned.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		spawned.adjust_skillrank(/datum/skill/combat/shields, 1, TRUE)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+		spawned.adjust_skill_level(/datum/attribute/skill/combat/shields, 10)
 
 	if(!istype(spawned.patron, /datum/patron/psydon)) // don't overwrite extremist psydon
 		spawned.set_patron(/datum/patron/psydon)
@@ -177,7 +178,7 @@
 		head = /obj/item/clothing/head/helmet/heavy/crusader/t
 		cloak = /obj/item/clothing/cloak/stabard/crusader/t
 		backl = /obj/item/storage/backpack/satchel/black
-		backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+		backr = /obj/item/gun/ballistic/bow/cross
 		beltl = /obj/item/weapon/knife/dagger/silver
 		beltr = /obj/item/ammo_holder/quiver/bolts
 

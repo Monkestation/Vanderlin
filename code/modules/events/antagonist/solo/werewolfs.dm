@@ -3,23 +3,21 @@
 	tags = list(
 		TAG_DENDOR,
 		TAG_GRAGGAR,
+		TAG_BLOOD,
 		TAG_COMBAT,
-		TAG_HAUNTED,
 		TAG_VILLAIN,
 	)
 	roundstart = TRUE
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 55
-
 	base_antags = 1
 	maximum_antags = 2
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
+	denominator = LOWPOP_THRESHOLD * READYUP_AVG
 
 	weight = 12
-
 	earliest_start = 0 SECONDS
-	min_players = LOWPOP_THRESHOLD
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf
@@ -40,6 +38,11 @@
 		/datum/job/templar,
 		/datum/job/gmtemplar,
 		/datum/job/advclass/combat/assassin,
+		/datum/job/tomb_warden,
+		/datum/job/bogwitch,
+		/datum/job/bog_apprentice,
+		/datum/job/magician,
+		/datum/job/archivist,
 	)
 
 /datum/round_event_control/antagonist/solo/werewolf/valid_for_map()

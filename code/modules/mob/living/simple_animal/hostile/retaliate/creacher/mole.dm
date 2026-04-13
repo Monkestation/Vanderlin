@@ -24,6 +24,7 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 3,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 2,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/mole = 3,
 						/obj/item/alch/sinew = 2,

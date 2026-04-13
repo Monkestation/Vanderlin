@@ -1,5 +1,20 @@
+/datum/attribute_holder/sheet/job/merchant
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 1,
+		STAT_STRENGTH = -1,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/misc/sneaking = 20,
+		/datum/attribute/skill/misc/stealing = 60,
+		/datum/attribute/skill/misc/lockpicking = 20,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/labor/mathematics = 50
+	)
+
 /datum/job/merchant
-	title = "Merchant"
+	title = JOB_MERCHANT
 	tutorial = "Born a wastrel in the dirt, you clawed your way up. Either by luck or, gods forbid, effort to earn a place in the Merchant's Guild. \
 	Now, you are either a ruthless economist or a disgraced steward from distant lands. Where you came from no longer matters. \
 	What matters now is you make sure the fools around you keep buying what you sell. Everything has a price, and you shall be the beating heart of this economy."
@@ -21,30 +36,16 @@
 		EXP_TYPE_LIVING = 600,
 		EXP_TYPE_MERCHANT_COMPANY = 300,
 	)
+	max_apprentices = 2
 
-	jobstats = list(
-		STATKEY_INT = 2,
-		STATKEY_PER = 1,
-		STATKEY_STR = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/reading = 5,
-		/datum/skill/misc/sneaking = 2,
-		/datum/skill/misc/stealing = 6,
-		/datum/skill/misc/lockpicking = 2,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/labor/mathematics = 5
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/merchant
 
 	traits = list(
 		TRAIT_SEEPRICES
 	)
 
 /datum/outfit/merchant
-	name = "Merchant"
+	name = JOB_MERCHANT
 	neck = /obj/item/clothing/neck/mercator
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(

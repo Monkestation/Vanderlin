@@ -8,7 +8,7 @@
 	spell_flags = SPELL_RITUOS
 	cast_range = 1
 	point_cost = 3
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 	attunements = list(
 		/datum/attunement/death = 0.3,
 		/datum/attunement/blood = 0.2,

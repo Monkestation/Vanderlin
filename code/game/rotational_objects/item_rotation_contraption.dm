@@ -6,12 +6,16 @@
 	w_class =  WEIGHT_CLASS_SMALL
 	grid_height = 32
 	grid_width = 32
+	item_weight = 30 GRAMS
 
 	var/obj/structure/placed_type
 	var/in_stack = 1
 	var/can_stack = TRUE
 	var/place_behavior
 	var/resize_factor
+
+/obj/item/rotation_contraption/get_carry_weight(atom/carrier)
+	. = item_weight * in_stack
 
 /obj/item/rotation_contraption/Initialize()
 	. = ..()
@@ -84,7 +88,7 @@
 		if(!pipe)
 			return
 	visible_message("[user] starts placing down [src].", "You start to place [src].")
-	if(!do_after(user, 1.2 SECONDS - user.get_skill_level(/datum/skill/craft/engineering, TRUE), T))
+	if(!do_after(user, 1.2 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering), T))
 		return
 	var/obj/structure/structure = new placed_type(T)
 	if(place_behavior == PLACE_TOWARDS_USER)
@@ -127,6 +131,7 @@
 
 /obj/item/rotation_contraption/cog
 	placed_type = /obj/structure/rotation_piece/cog
+	item_weight = 55 GRAMS
 
 /obj/item/rotation_contraption/shaft
 	placed_type = /obj/structure/rotation_piece
@@ -134,12 +139,15 @@
 /obj/item/rotation_contraption/large_cog
 	placed_type = /obj/structure/rotation_piece/cog/large
 	resize_factor = 1.5
+	item_weight = 90 GRAMS
 
 /obj/item/rotation_contraption/horizontal
 	placed_type = /obj/structure/gearbox
+	item_weight = 300 GRAMS
 
 /obj/item/rotation_contraption/vertical
 	placed_type = /obj/structure/vertical_gearbox
+	item_weight = 300 GRAMS
 
 /obj/item/rotation_contraption/waterwheel
 	placed_type = /obj/structure/waterwheel
@@ -148,6 +156,7 @@
 	grid_width = 96
 
 	resize_factor = 1.5
+	item_weight = 4 KILOGRAMS
 
 /obj/item/rotation_contraption/minecart_rail
 	placed_type = /obj/structure/minecart_rail
@@ -160,9 +169,11 @@
 
 	grid_height = 64
 	grid_width = 32
+	item_weight = 130 GRAMS
 
 /obj/item/rotation_contraption/water_pipe
 	placed_type = /obj/structure/water_pipe
+	item_weight = 140 GRAMS
 
 /obj/item/rotation_contraption/pump
 	placed_type = /obj/structure/water_pump
@@ -172,6 +183,7 @@
 	grid_width = 96
 
 	place_behavior = PLACE_TOWARDS_USER
+	item_weight = 2.4 KILOGRAMS
 
 /obj/item/rotation_contraption/boiler
 	placed_type = /obj/structure/boiler
@@ -181,6 +193,7 @@
 	grid_width = 96
 
 	place_behavior = PLACE_TOWARDS_USER
+	item_weight = 6.3 KILOGRAMS
 
 /obj/item/rotation_contraption/steam_recharger
 	placed_type = /obj/structure/steam_recharger
@@ -190,6 +203,7 @@
 	grid_width = 96
 
 	place_behavior = PLACE_TOWARDS_USER
+	item_weight = 7.4 KILOGRAMS
 
 /obj/item/rotation_contraption/water_vent
 	placed_type = /obj/structure/water_vent
@@ -198,21 +212,26 @@
 	grid_width = 64
 
 	place_behavior = PLACE_TOWARDS_USER
+	item_weight = 200 GRAMS
 
 /obj/item/rotation_contraption/sprinkler
 	placed_type = /obj/structure/sprinkler
 	grid_height = 64
 
 	place_behavior = PLACE_ON_PIPE
+	item_weight = 750 GRAMS
 
 /obj/item/rotation_contraption/pressurizer
 	placed_type = /obj/structure/pressurizer
 	grid_height = 64
 
 	place_behavior = PLACE_ON_PIPE
+	item_weight = 300 GRAMS
 
 /obj/item/rotation_contraption/drain
 	placed_type = /obj/structure/fluid_drain
 	grid_height = 32
 
 	place_behavior = PLACE_ON_PIPE
+	item_weight = 125 GRAMS
+

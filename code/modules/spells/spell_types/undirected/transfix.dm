@@ -3,7 +3,7 @@
 	button_icon_state = "transfix"
 	has_visual_effects = FALSE
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 
 	spell_type = SPELL_BLOOD
 
@@ -62,7 +62,7 @@
 			return
 		targets = list(selected)
 
-	var/bloodskill = owner.get_skill_level(/datum/skill/magic/blood)
+	var/bloodskill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/magic/blood)
 	var/bloodroll = roll(bloodskill, blood_dice)
 	owner.say(message, forced = "spell ([name])")
 	if(powerful)
@@ -71,7 +71,7 @@
 	for(var/mob/living/carbon/human/target as anything in targets)
 		if(target.cmode)
 			will_dice++
-		var/willpower = round(target.STAINT / int_divisor, 1)
+		var/willpower = round(GET_MOB_ATTRIBUTE_VALUE(target, STAT_INTELLIGENCE) / int_divisor, 1)
 		var/willroll = roll(willpower, will_dice)
 
 		// If the vampire failed badly
@@ -115,8 +115,8 @@
 			continue
 
 		if(!powerful)
-			var/holypower = target.get_skill_level(/datum/skill/magic/holy)
-			var/magicpower = round(target.get_skill_level(/datum/skill/magic/arcane) * 0.6, 1)
+			var/holypower = GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/holy)
+			var/magicpower = round(GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/arcane) * 0.6, 1)
 			var/roll = roll(1 + holypower + magicpower, 5)
 			if(roll > bloodroll)
 				to_chat(target, "I feel like the unholy magic came from [owner]. I should use my magic or miracles on them.")

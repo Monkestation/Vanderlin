@@ -1,6 +1,9 @@
 /obj/item/paper/bsmith
 	info = "It's easy to smith. Put ores in the smelter. Put ingots on the anvil. Use your tongs to handle ingots. Hit them with the hammer. Quench hot ingots in the barrel (there must be water in it). Steel is an alloy from iron and coal, find the golden ratio"
 
+/obj/item/paper/sunlord
+	info = "Hello cave-dwellers, this item has been claimed by the Sunlord, it suits my abode better."
+
 /obj/item/paper/heartfelt/Initialize()
 	var/static/list/info = list(
 		"Negotiate trade agreements with merchants in Vanderlin to facilitate the exchange of goods and resources between the two realms.",

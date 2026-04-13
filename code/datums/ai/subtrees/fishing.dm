@@ -94,7 +94,7 @@
 							/obj/item/reagent_containers/food/snacks/fish/carp = 3,
 							/obj/item/reagent_containers/food/snacks/fish/shrimp = 1)
 		deepmod += 1
-	else if(istype(targeted, /turf/open/water/cleanshallow))
+	else if(istype(targeted, /turf/open/water/clean))
 		fishpicker = list(/obj/item/reagent_containers/food/snacks/fish/eel = 3,
 							/obj/item/reagent_containers/food/snacks/fish/carp = 5)
 	else if(istype(targeted, /turf/open/water/river))
@@ -109,8 +109,8 @@
 	var/list/raritypicker = list("com" = 95, "rare" = 5)
 	var/list/sizepicker = list("tiny" = 4, "small" = 4, "normal" = 4, "large" = 2)
 
-	if(fisher.STALUC > 10)
-		var/luckboost = fisher.STALUC - 10
+	if(GET_MOB_ATTRIBUTE_VALUE(fisher, STAT_FORTUNE) > 10)
+		var/luckboost = GET_MOB_ATTRIBUTE_VALUE(fisher, STAT_FORTUNE) - 10
 		var/luckrarity = list("com" = -1, "rare" = 1)
 		while(luckboost > 0)
 			raritypicker = pickweightmerge(raritypicker, luckrarity)
@@ -121,7 +121,7 @@
 	var/fishtype
 	var/fishsize
 
-	if(prob(16 - fisher.STALUC)) //you will always have a chance at this, legendary fishers got a 10% chance - their luck stat
+	if(prob(16 - GET_MOB_ATTRIBUTE_VALUE(fisher, STAT_FORTUNE))) //you will always have a chance at this, legendary fishers got a 10% chance - their luck stat
 		fishtype = pickweight(list(/obj/item/natural/fibers = 1, /obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/clothing/shoes/boots/leather = 1, /obj/structure/fermentation_keg = 1, /obj/item/clothing/head/fisherhat = 1))
 		trashfishing = TRUE
 
@@ -133,7 +133,7 @@
 		fishrarity = pickweightAllowZero(raritypicker)
 		fishtype = pickweightAllowZero(fishpicker)
 
-	var/fishchance = 25 + (fisher.STALUC * 3)
+	var/fishchance = 25 + (GET_MOB_ATTRIBUTE_VALUE(fisher, STAT_FORTUNE) * 3)
 	if(prob(fishchance))
 		playsound(fisher, 'sound/items/Fish_out.ogg', 100, TRUE)
 		var/obj/item/reagent_containers/food/snacks/fish/caughtfish = new fishtype(get_turf(fisher))

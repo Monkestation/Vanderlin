@@ -22,7 +22,7 @@
 		return
 	parent.AddElement(/datum/element/ai_held_item)
 
-/datum/pet_command/fetch/Destroy(force, ...)
+/datum/pet_command/fetch/Destroy(force)
 	var/mob/living/parent = weak_parent.resolve()
 	if(parent)
 		parent.RemoveElement(/datum/element/ai_held_item)

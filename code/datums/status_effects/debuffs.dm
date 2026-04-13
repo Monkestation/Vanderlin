@@ -624,7 +624,7 @@
 /datum/status_effect/debuff/hobbled
 	id = "hobbled"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hobbled
-	effectedstats = list(STATKEY_SPD = -2)
+	effectedstats = list(STAT_SPEED = -2)
 	duration = 8 SECONDS
 
 /atom/movable/screen/alert/status_effect/debuff/hobbled

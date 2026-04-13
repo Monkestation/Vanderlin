@@ -13,6 +13,10 @@
 	resistance_flags = FLAMMABLE
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
+	slot_equipment_priority = list(
+		ITEM_SLOT_ARMOR,
+		ITEM_SLOT_SHIRT,
+	)
 
 	armor = ARMOR_MINIMAL
 	prevent_crits = list(BCLASS_TWIST)
@@ -103,7 +107,7 @@
 	dropshrink = 0.8
 
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
-	if((user.job != "Priest") && (user.job != "Priestess"))
+	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
 		user.visible_message(span_reallybig("UNWORTHY HANDS TOUCH MY VISAGE, CEASE OR BE PUNISHED"))
 		playsound(user, 'sound/misc/gods/astrata_omen.ogg', 80, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 		spawn(30)
@@ -378,10 +382,19 @@
 
 /obj/item/clothing/shirt/robe/kimono
 	name = "kimono"
-	desc = "Worn by merchants of Zhongese."
+	desc = "A flowing garment worn by faraway merchants."
 	color = null
 	icon_state = "kimono"
 	item_state = "kimono"
 	sleeved = null
 	sleevetype = null
 	item_flags = ABSTRACT
+
+/obj/item/clothing/shirt/robe/bogwitch
+	name = "bog witch robe"
+	desc = "A robe of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	color = null
+	sleeved = null
+	sleevetype = null
+	misc_flags = CRAFTING_TEST_EXCLUDE

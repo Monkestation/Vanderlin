@@ -71,14 +71,14 @@
 					B.rotted = TRUE
 					findonerotten = TRUE
 					shouldupdate = TRUE
-					C.change_stat(STATKEY_CON, -8)
+					C.change_stat(STAT_CONSTITUTION, -8)
 			else
 				if(amount > 45 MINUTES)
 					if(!is_zombie)
 						B.skeletonize()
 						if(C.dna && C.dna.species)
 							C.dna.species.species_traits |= NOBLOOD
-						C.change_stat(STATKEY_CON, -99)
+						C.change_stat(STAT_CONSTITUTION, -99)
 						shouldupdate = TRUE
 				else
 					findonerotten = TRUE

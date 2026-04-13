@@ -73,6 +73,7 @@
 	name = "Facial Hair"
 	feature_slot = BODYPART_FEATURE_FACIAL_HAIR
 	body_zone = BODY_ZONE_HEAD
+	draw_on_skeleton = TRUE
 
 /datum/bodypart_feature/face_detail
 	name = "Face Detail"

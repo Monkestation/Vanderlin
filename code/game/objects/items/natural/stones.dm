@@ -141,6 +141,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	throwforce = 15
 	slot_flags = ITEM_SLOT_MOUTH
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 124 GRAMS
 	/// If our stone is magical, this lets us know -how- magical. Maximum is 15.
 	var/magic_power = 0
 	var/magicstone = FALSE
@@ -152,11 +153,15 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	stone_lore()
 
 /obj/item/natural/stone/on_consume(mob/living/eater)
+	eater.extra_mob_weight += get_carry_weight(eater)
 	if(!magic_power)
 		return
 	//eater.adjust_spell_points(magic_power * 0.1)
 	//eater.mana_pool?.adjust_mana(magic_power * 25)
 	//to_chat(eater, span_warning("I feel magic flowing from my stomach."))
+
+/obj/item/natural/stone/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
 
 /*
 	This right here is stone lore,
@@ -288,7 +293,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/item = user.get_inactive_held_item()
 	if(user.used_intent.type == /datum/intent/chisel && is_type_in_typecache(item, offhand_types))
 		user.changeNext_move(CLICK_CD_MELEE)
-		var/skill_level = user.get_skill_level(/datum/skill/craft/masonry, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
 		var/work_time = (4 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
@@ -303,7 +308,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				new /obj/effect/decal/cleanable/debris/stone(get_turf(src))
 			playsound(src, 'sound/foley/smash_rock.ogg', 100)
 			qdel(src)
-			user.mind.add_sleep_experience(/datum/skill/craft/masonry, (user.STAINT*0.2))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 		return TRUE
 	. = ..()
 
@@ -326,6 +331,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	max_integrity = 50
 	destroy_sound = 'sound/foley/smash_rock.ogg'
 	attacked_sound = 'sound/foley/hit_rock.ogg'
+	item_weight = 700 GRAMS
 
 /obj/item/natural/rock/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
@@ -339,7 +345,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 
 /obj/item/natural/rock/Crossed(mob/living/L)
 	if(istype(L) && !L.throwing)
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			L.visible_message(span_warning("[L] trips over the rock!"),span_warning("I trip over the rock!"))
 			L.Knockdown(10)
 			L.consider_ambush()
@@ -403,7 +409,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/list/offhand_types = typecacheof(list(/obj/item/weapon/hammer, /obj/item/natural/stone, /obj/item/natural/stoneblock))
 	var/item = user.get_inactive_held_item()
 	if(user.used_intent.type == /datum/intent/chisel && is_type_in_typecache(item, offhand_types))
-		var/skill_level = user.get_skill_level(/datum/skill/craft/masonry, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/masonry)
 		var/work_time = (10 SECONDS - (skill_level * 5))
 		if(istype(W, /obj/item/weapon/chisel))
 			var/obj/item/weapon/chisel/chisel = W
@@ -413,7 +419,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		if(do_after(user, work_time))
 			new /obj/item/natural/stoneblock(get_turf(src.loc))
 			take_damage(max_integrity/2)
-			user.mind.add_sleep_experience(/datum/skill/craft/masonry, (user.STAINT*0.2))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/masonry, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 		return TRUE
 	. = ..()
 
@@ -480,6 +486,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	w_class = WEIGHT_CLASS_SMALL
 	bundletype = /obj/item/natural/bundle/stoneblock
 	sellprice = 2
+	item_weight = 1.2 KILOGRAMS
 
 //................ Stone block stack	............... //
 /obj/item/natural/bundle/stoneblock

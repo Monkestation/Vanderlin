@@ -85,9 +85,6 @@
 /obj/structure/flora/tree/evil/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(controller)
-		controller.endvines()
-		controller = null
 	return ..()
 
 /obj/structure/flora/tree/wise
@@ -410,7 +407,14 @@
 	dir = pick(GLOB.cardinals)
 
 /datum/component/grass/Initialize()
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	if(!ismovableatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
+
+/datum/component/grass/Destroy(force)
+	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
+	return ..()
 
 /datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
@@ -473,7 +477,7 @@
 
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.atom_flags & Z_FALLING)
+		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.atom_flags & Z_FALLING || HAS_TRAIT(H, TRAIT_STUMBLE))
 		if(was_hard_collision)
 			var/obj/item/bodypart/BP = pick(H.bodyparts)
 			BP.receive_damage(10)
@@ -674,7 +678,7 @@
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
 	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))
@@ -712,7 +716,7 @@
 				L.apply_damage(5, BRUTE)
 				L.Immobilize(10)
 
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
 				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)
@@ -789,7 +793,7 @@
 		L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_WALK)
 			L.Immobilize(5)
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
 				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)
@@ -813,9 +817,9 @@
 	var/mob/living/L = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(src, "plantcross", 80, FALSE, -1)
-	prob2findstuff = prob2findstuff + ( user.STAPER * 4 )
-	prob2findgoodie = prob2findgoodie + ( user.STALUC * 2 ) + ( user.STAPER * 2 )
-	luckydouble = ( user.STALUC * 2 )
+	prob2findstuff = prob2findstuff + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 4 )
+	prob2findgoodie = prob2findgoodie + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 ) + ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION) * 2 )
+	luckydouble = ( GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) * 2 )
 	user.visible_message(span_smallnotice("[user] searches through [src]."))
 
 	if(do_after(L, rand(5 DECISECONDS, 2 SECONDS), src))

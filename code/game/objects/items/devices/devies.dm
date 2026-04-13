@@ -13,7 +13,7 @@
 	resistance_flags = FIRE_PROOF
 
 /obj/item/gem_device/attack_self(mob/living/user, list/modifiers)
-	var/alert = alert(user, "Do I want to use this? \n[usage_prompt]", "Enchanted Gem", "Yes", "No")
+	var/alert = tgui_alert(user, "Do I want to use this? \n[usage_prompt]", "Enchanted Gem", list("Yes", "No"))
 	if(alert != "Yes")
 		return
 	if(!on_use(user))

@@ -3,6 +3,25 @@
 	greet_text = "An Emir hailing from the Deshret, here on business for the Mercator's Guild."
 	migrant_job = /datum/job/migrant/zalad_migration/emir
 
+/datum/attribute_holder/sheet/job/migrant/emir
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/zalad_migration/emir
 	title = "Zalad Emir"
 	tutorial = "An Emir hailing from the Deshret, here on business for the Mercator's Guild."
@@ -13,26 +32,7 @@
 	honorary = "Emir"
 	honorary_f = "Amirah"
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-	)
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/emir
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/zalad
@@ -87,6 +87,25 @@
 	greet_text = "An Amirah hailing from Deshret, here on business for the Mercator's Guild to the Isle of the Enigma."
 	migrant_job = /datum/job/migrant/zalad_migration/amirah
 
+/datum/attribute_holder/sheet/job/migrant/amirah
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/zalad_migration/amirah
 	title = "Zalad Amirah"
 	tutorial = "An Amirah hailing from Deshret, here on business for the Mercator's Guild to the Isle of the Enigma."
@@ -95,30 +114,10 @@
 	allowed_races = RACES_PLAYER_ZALADIN
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_INT = 1,
-		STATKEY_END = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/amirah
 
 	honorary = "Emir"
 	honorary_f = "Amirah"
-
-
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/misc/reading = 4,
-		/datum/skill/misc/music = 1,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/labor/mathematics = 3,
-	)
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_bird/zalad
@@ -168,6 +167,29 @@
 	greet_text = "You are a furusiyya, pledged to the Emir and the Amirah. Make sure they come out alive of that place."
 	migrant_job = /datum/job/migrant/zalad_migration/furusiyya
 
+/datum/attribute_holder/sheet/job/migrant/furusiyya
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/zalad_migration/furusiyya
 	title = "Furusiyya"
 	tutorial = "You are a furusiyya, pledged to the Emir and the Amirah. Make sure they come out alive of that place."
@@ -176,30 +198,8 @@
 	allowed_races = RACES_PLAYER_ZALADIN
 	is_recognized = TRUE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 1,
-		STATKEY_INT = 2,
-		STATKEY_CON = 2,
-		STATKEY_END = 2,
-		STATKEY_SPD = -1,
-	)
 
-	skills = list(
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/furusiyya
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -254,6 +254,28 @@
 	greet_text = "You are a slave soldier from Deshret, sent as an escort to the emirs on a foreign land, do not fail them."
 	migrant_job = /datum/job/migrant/zalad_migration/zalad_guard
 
+/datum/attribute_holder/sheet/job/migrant/zalad_guard
+	attribute_variance = list(
+		/datum/attribute/skill/combat/shields = list(0, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/lockpicking = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+	)
+
 /datum/job/migrant/zalad_migration/zalad_guard
 	title = "Zalad Soldier"
 	tutorial = "You are a slave soldier from Deshret, sent as an escort to the emirs on a foreign land, do not fail them."
@@ -261,26 +283,8 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-	)
 
-	skills = list(
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/whipsflails = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/zalad_guard
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
@@ -291,7 +295,6 @@
 
 /datum/job/migrant/zalad_migration/zalad_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,1,1), TRUE)
 
 	if(spawned.dna?.species)
 		if(spawned.dna.species.id == SPEC_ID_HUMEN)
@@ -321,6 +324,27 @@
 	greet_text = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
 	migrant_job = /datum/job/migrant/zalad_migration/qatil
 
+/datum/attribute_holder/sheet/job/migrant/qatil
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_SPEED = 2,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sneaking = 40,
+		/datum/attribute/skill/misc/stealing = 20,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/craft/traps = 10,
+	)
+
 /datum/job/migrant/zalad_migration/qatil
 	title = "Qatil"
 	tutorial = "You are the Amirah's confident and most loyal protector, you shan't let them die in these wretched lands."
@@ -336,28 +360,7 @@
 		SPEC_ID_HALF_DROW,
 	)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_SPD = 2,
-		STATKEY_END = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 4,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/climbing = 4,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/sneaking = 4,
-		/datum/skill/misc/stealing = 2,
-		/datum/skill/misc/lockpicking = 3,
-		/datum/skill/craft/traps = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/qatil
 
 	traits = list(
 		TRAIT_DODGEEXPERT,

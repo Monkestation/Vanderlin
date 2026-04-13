@@ -1,3 +1,22 @@
+/datum/attribute_holder/sheet/job/sworddancer
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_SPEED = 2,
+		STAT_ENDURANCE = -1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/music = 40,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 40
+	)
+
 /datum/job/advclass/mercenary/sworddancer
 	title = "Sword Dancer"
 	tutorial = "You were a former bard, but when times got tough you picked up a blade to defend yourself. \
@@ -14,27 +33,7 @@
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
-
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_SPD = 2,
-		STATKEY_END = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/misc/music = 4,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/cooking = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/sworddancer
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -43,9 +42,14 @@
 
 /datum/job/advclass/mercenary/sworddancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
+	spawned.inspiration = new /datum/inspiration(spawned)
 	spawned.merctype = 9
 
-	spawned.select_equippable(player_client, list(
+/datum/job/advclass/mercenary/sworddancer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -54,12 +58,9 @@
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
 		"Viola" = /obj/item/instrument/viola
-		),
-		message = "Choose your instrument.",
-		title = "XYLIX"
 	)
 
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.",title = "XYLIX")
 
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"

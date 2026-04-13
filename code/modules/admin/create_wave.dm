@@ -34,7 +34,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	var/list/sexes_list = list(MALE,FEMALE)
 	var/list/races_list = RACES_PLAYER_ALL
 	var/list/ages_list = list(AGE_CHILD,AGE_ADULT,AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	var/list/stats_list = list(STATKEY_INT,STATKEY_STR,STATKEY_PER,STATKEY_SPD,STATKEY_CON,STATKEY_LCK)
+	var/list/stats_list = list(STAT_INTELLIGENCE,STAT_STRENGTH,STAT_PERCEPTION,STAT_SPEED,STAT_CONSTITUTION,STAT_FORTUNE)
 	var/list/skills_list = list()
 	var/list/languages_list = list()
 	var/list/traits_list = list()
@@ -128,7 +128,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 /datum/create_wave/New()
 
-	for(var/datum/skill/skill as anything in subtypesof(/datum/skill))
+	for(var/datum/attribute/skill/skill as anything in subtypesof(/datum/attribute/skill))
 		if(IS_ABSTRACT(skill))
 			continue
 		skills_list += skill
@@ -139,7 +139,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	for(var/trait in traits_list)
 		trait_options += "<option value='[trait]'>[trait]</option>"
 
-	for(var/datum/skill/skill_instance in skills_list)
+	for(var/datum/attribute/skill/skill_instance in skills_list)
 		skills_options += "<option value='[initial(skill_instance.type)]'>[initial(skill_instance.name)]</option>"
 
 	for(var/stat in stats_list)
@@ -308,7 +308,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		if(!check_rights(R_ADMIN))
 			return
 		var/skill = text2path(href_list["skill"])
-		var/datum/skill/S = new skill
+		var/datum/attribute/skill/S = new skill
 		var/level = text2num(href_list["level"])
 
 		if(level && level > 0 && level < 7)
@@ -337,7 +337,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		if(!check_rights(R_ADMIN))
 			return
 		var/skill_to_remove = text2path(href_list["skill"])
-		var/datum/skill/S_R = new skill_to_remove
+		var/datum/attribute/skill/S_R = new skill_to_remove
 
 		if(editing_job)
 			var/id = href_list["chosen_job_edit"]
@@ -931,7 +931,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<li>All Patrons are Allowed.</li>"
 	dat += "<h3>Skills:</h3><ul>"
 	if(length(J.skills))
-		for(var/datum/skill/S as anything in J.skills)
+		for(var/datum/attribute/skill/S as anything in J.skills)
 			var/level = J.skills[S]
 			dat += "<li>[initial(S.name)] (Level [level])</li>"
 	else
@@ -1178,7 +1178,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<h4>Added Skills:</h4><ul>"
 		for(var/skill_path in pending_skills)
 			var/level = pending_skills[skill_path]
-			var/datum/skill/S = new skill_path
+			var/datum/attribute/skill/S = new skill_path
 			dat += "<li>[S.name] (Level [level]) <button type='button' onclick='removeSkill(\"[skill_path]\")'>Remove</button></li>"
 			qdel(S)
 
@@ -1534,7 +1534,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		dat += "<h4>Added Skills:</h4><ul>"
 		for(var/skill_path in J.skills)
 			var/level = J.skills[skill_path]
-			var/datum/skill/S = new skill_path
+			var/datum/attribute/skill/S = new skill_path
 			dat += "<li>[S.name] (Level [level])"
 			qdel(S)
 			dat += {"<button type='button' onclick='

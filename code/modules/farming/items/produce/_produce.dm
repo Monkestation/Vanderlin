@@ -87,9 +87,12 @@
 	grind_results = list(/datum/reagent/flour = 10)
 	dropshrink = 0.9
 	mill_result = /obj/item/reagent_containers/powder/flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing wheat stalks", /obj/item/natural/chaff/wheat))
+	item_weight = 30 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	. += ..()
 	if(farminglvl >= 0)
 		. += "I can easily tell that these are wheat grains."
@@ -97,19 +100,39 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/oat
 	seed = /obj/item/neuFarm/seed/oat
 	name = "oat grain"
-	desc = "A staple grain. Used to create oatmeal, and to feed saigas and horses."
+	desc = "A staple grain. Used to create oatmeal, and to feed saigas."
 	icon_state = "oat"
 	gender = PLURAL
 	filling_color = "#b1d179"
 	bitesize_mod = 2
 	tastes = list("oat" = 1)
 	grind_results = list(/datum/reagent/flour = 10)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing oat stalks", /obj/item/natural/chaff/oat))
+	item_weight = 25 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/grain/oat/examine(mob/user)
-	var/farminglvl = user.get_skill_level(/datum/skill/labor/farming)
+	var/farminglvl = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
 	. += ..()
 	if(farminglvl >= 0)
 		. += "I can easily tell that these are oat groats."
+
+/obj/item/reagent_containers/food/snacks/produce/grain/sunreed
+	seed = /obj/item/neuFarm/seed/sunreed
+	name = "sunreed kernels"
+	desc = "Kernels so hard you could chip a tooth. Only the most desperate would use this in any sort of food."
+	icon_state = "maize"
+	faretype = FARE_IMPOVERISHED
+	gender = PLURAL
+	filling_color = "#b9a917"
+	bitesize_mod = 2
+	tastes = list("chipping a tooth" = 1)
+	grind_results = list(/datum/reagent/flour = 10)
+	dropshrink = 0.9
+	mill_result = /obj/item/reagent_containers/powder/sunreed_flour
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing ears of sunreed", /obj/item/natural/chaff/sunreed))
+	item_weight = 20 GRAMS
 
 // ^ PSA: next time you want to do this, make and run an updatepaths migration in tools/UpdatePaths
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple
@@ -127,6 +150,7 @@
 	worn_y_dimension = 64
 	rotprocess = SHELFLIFE_DECENT
 	sellprice = 0 // spoil too quickly to export
+	item_weight = 182 GRAMS
 	var/equippedloc = null
 	var/list/bitten_names = list()
 
@@ -164,7 +188,7 @@
 /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	seed = /obj/item/neuFarm/seed/strawberry
 	name = "strawberry"
-	desc = "A delectable strawberry."
+	desc = "Known to grow only in the wilds of Wintermere, a delicious cold weather treat."
 	icon_state = "strawberry"
 	tastes = list("strawberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -172,12 +196,13 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 12 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/raspberry
 	seed = /obj/item/neuFarm/seed/raspberry
 	name = "raspberry"
-	desc = "A delectable raspberry."
+	desc = "Delectable, though almost entirely extinct in the wild due to the invasive jacksberry."
 	icon_state = "raspberry"
 	tastes = list("raspberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -186,12 +211,13 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 4 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/blackberry
 	seed = /obj/item/neuFarm/seed/blackberry
 	name = "blackberry"
-	desc = "A delectable blackberry."
+	desc = "Delectable, though almost entirely extinct in the wild due to the invasive jacksberry."
 	icon_state = "blackberry"
 	tastes = list("blackberry" = 1)
 	faretype = FARE_NEUTRAL
@@ -200,6 +226,7 @@
 	rotprocess = SHELFLIFE_SHORT
 	sellprice = 0 // spoil too quickly to export
 	nutrition = BERRY_NUTRITION
+	item_weight = 5 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry
 	name = "jacksberries"
@@ -215,6 +242,7 @@
 	sellprice = 0 // spoil too quickly to export
 	var/poisonous = FALSE
 	nutrition = BERRY_NUTRITION
+	item_weight = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/Initialize()
 	. = ..()
@@ -262,7 +290,7 @@
 	. = ..()
 	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
 	if(!can_tell)
-		can_tell = user.skills ? user.get_skill_level(/datum/skill/labor/farming) : FALSE
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
 	if(can_tell)
 		if(poisonous)
 			. += span_warning("This berry looks suspicious. I sense it might be poisoned.")
@@ -284,6 +312,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
+	item_weight = 15 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	seed = null
@@ -298,6 +327,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = null
 	sellprice = 2
+	item_weight = 5 GRAMS
 
 
 /*	..................   Westleach leaf   ................... */
@@ -316,6 +346,7 @@
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
+	item_weight  = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	seed = null
@@ -330,7 +361,7 @@
 	rotprocess = null
 	sellprice = 1
 	nutrition = SNACK_WORST
-
+	item_weight = 5 GRAMS
 
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/cabbage
@@ -344,7 +375,9 @@
 	rotprocess = SHELFLIFE_LONG
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	chopping_sound = TRUE
+	item_weight = 900 GRAMS
 
 /*	..................   Onions   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion
@@ -355,11 +388,13 @@
 	dropshrink = 0.9
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/onion_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	tastes = list("onion" = 1)
 	filling_color = "#fdfaca"
 	bitesize = 2
 	chopping_sound = TRUE
 	rotprocess = SHELFLIFE_LONG
+	item_weight = 110 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable/onion/slice(accuracy, obj/item/W, mob/living/user) // ROGTODO watering eyes
 	var/datum/effect_system/smoke_spread/chem/transparent/S = new	//Since the onion is destroyed when it's sliced,
@@ -371,6 +406,33 @@
 		return TRUE
 	qdel(S)
 
+/*	..................   Cocaudo   ................... */
+
+/obj/item/natural/cocaudo //This doesn't use the produce subtype because it isn't edible. But it is still produce, so it goes here.
+	name = "cocaudo"
+	desc = "A strange and foreign vegetable that's near impossible to break into."
+	icon = 'icons/roguetown/items/produce.dmi'
+	icon_state = "cocaudo"
+	dropshrink = 0
+	throwforce = 25
+	throw_range = 2
+	force = 15
+	resistance_flags = FIRE_PROOF
+	obj_flags = CAN_BE_HIT
+	gripped_intents = list(INTENT_GENERIC)
+	w_class = WEIGHT_CLASS_NORMAL
+	blade_dulling = DULLING_BASH
+	max_integrity = 50
+	destroy_sound = 'sound/foley/smash_rock.ogg'
+	attacked_sound = 'sound/foley/hit_rock.ogg'
+	item_weight = 1 KILOGRAMS
+
+
+/obj/item/natural/cocaudo/deconstruct(disassembled = FALSE)
+	if(!disassembled)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
+	qdel(src)
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato
@@ -382,10 +444,12 @@
 	filling_color = "#d8d8b6"
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/potato_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	eat_effect = null
 	chopping_sound = TRUE
 	bitesize = 2
 	rotprocess = null
+	item_weight = 150 GRAMS
 
 /*	..................  Pear   ................... */ // for cider or eating raw
 /obj/item/reagent_containers/food/snacks/produce/fruit/pear
@@ -396,6 +460,7 @@
 	bitesize = 2
 	tastes = list("pear" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 178 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/lemon
 	name = "lemon"
@@ -405,6 +470,7 @@
 	bitesize = 2
 	tastes = list("lemon" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 84 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/lime
 	name = "lime"
@@ -414,6 +480,7 @@
 	bitesize = 2
 	tastes = list("lime" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 67 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/tangerine
 	name = "tangerine"
@@ -423,6 +490,7 @@
 	bitesize = 2
 	tastes = list("tangerine" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 88 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/plum
 	name = "plum"
@@ -432,6 +500,7 @@
 	bitesize = 2
 	tastes = list("plum" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 66 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/mango
 	name = "mangga"
@@ -445,6 +514,7 @@
 	chopping_sound = TRUE
 	tastes = list("mangga" = 1)
 	rotprocess = SHELFLIFE_SHORT
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/mangosteen
 	name = "mangosteen"
@@ -458,6 +528,7 @@
 	chopping_sound = TRUE
 	tastes = list("mangosteen" = 1)
 	rotprocess = SHELFLIFE_SHORT
+	item_weight = 80 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/avocado
 	name = "avocado"
@@ -471,6 +542,7 @@
 	chopping_sound = TRUE
 	tastes = list("avocado" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/dragonfruit
 	name = "piyata"
@@ -484,6 +556,7 @@
 	chopping_sound = TRUE
 	tastes = list("piyata" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/pineapple
 	name = "ananas"
@@ -498,6 +571,40 @@
 	chopping_sound = TRUE
 	tastes = list("ananas" = 1)
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 900 GRAMS
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto
+	name = "tamto"
+	seed = /obj/item/neuFarm/seed/tamto
+	desc = "A deliciously sweet berry that grows abundantly in the bogs of Daftmarsh."
+	icon_state = "mato"
+	bitesize = 2
+	dropshrink = 0.8
+	slice_path = /obj/item/reagent_containers/food/snacks/fruit/tamto_slice
+	slices_num = 1
+	chopping_sound = TRUE
+	tastes = list("sweet tamto" = 1)
+	rotprocess = SHELFLIFE_SHORT
+	item_weight = 90 GRAMS
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/tamto/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing) //funny
+	new /obj/effect/decal/cleanable/food/tomato_smudge(get_turf(src))
+	..()
+	qdel(src)
+
+/obj/item/reagent_containers/food/snacks/produce/fruit/pompkaun
+	name = "pompkaun"
+	seed = /obj/item/neuFarm/seed/pompkaun
+	desc = "This fruit is equal parts Dendorite and Pestran, carved in offering to the former, and collected by followers of the latter after the offerings rot."
+	icon_state = "pompkaun"
+	bitesize = 3
+	slices_num = 2
+	chopping_sound = TRUE
+	slice_path = /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo
+	tastes = list("pompkaun" = 1)
+	rotprocess = SHELFLIFE_DECENT
+	item_weight = 3 KILOGRAMS
+
 
 /*	..................   Turnip   ................... */ // only for veggie soup
 /obj/item/reagent_containers/food/snacks/produce/vegetable/turnip
@@ -509,10 +616,12 @@
 	bitesize = 1
 	slices_num = 1
 	slice_path = /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	foodtype = VEGETABLES
 	chopping_sound = TRUE
 	dropshrink = 0.9
 	rotprocess = SHELFLIFE_EXTREME
+	item_weight = 150 GRAMS
 
 /*	..................   Sunflower   ................... */
 /obj/item/reagent_containers/food/snacks/produce/sunflower
@@ -529,6 +638,7 @@
 	nutrition = 0
 	dropshrink = 0.8
 	rotprocess = null
+	item_weight = 50 GRAMS
 
 /*	..................   Sugarcane   ................... */
 /obj/item/reagent_containers/food/snacks/produce/sugarcane
@@ -547,6 +657,7 @@
 	rotprocess = null
 	foodtype = SUGAR
 	mill_result = /obj/item/reagent_containers/food/snacks/sugar
+	item_weight = 270 GRAMS
 
 /obj/item/reagent_containers/food/snacks/sugar
 	name = "sugar"
@@ -557,6 +668,7 @@
 	foodtype = SUGAR
 	list_reagents = list(/datum/reagent/consumable/sugar = 15)
 	nutrition = SUGAR_NUTRITION
+	item_weight = 150 GRAMS
 
 /*	..................   Fyritius Flower   ................... */ // some sort of funni fire flowers. Dunno just moving them here for consistency.
 /obj/item/reagent_containers/food/snacks/produce/fyritius
@@ -573,6 +685,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
+	item_weight = 10 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/fyritius/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -581,7 +694,7 @@
 		var/success
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(IND.cursedblood)
-				if(alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", "YES", "NO") != "NO")
+				if(tgui_alert(user, "DRENCH THE FYRITIUS?", "CURSED BLOOD", list("YES", "NO")) != "NO")
 					success = TRUE
 					IND.fullreset(user)
 				else
@@ -622,6 +735,7 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	body_parts_covered = NONE
 	alternate_worn_layer  = 8.9
+	item_weight = 5 GRAMS
 
 /* .......... Mushrooms ........ */
 /obj/item/reagent_containers/food/snacks/produce/mushroom/capillus
@@ -639,6 +753,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_EXTREME
 	eat_effect = /datum/status_effect/debuff/badmeal
+	item_weight = 8 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/waddle
 	name = "waddle"
@@ -652,6 +767,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 20 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/merkel
 	name = "merkel"
@@ -665,6 +781,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 15 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/caveweep
 	name = "caveweep"
@@ -678,6 +795,7 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 12 GRAMS
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
 	name = "borowiki"
@@ -691,6 +809,23 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
+	item_weight = 25 GRAMS
+
+/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane
+	name = "drowsbane"
+	desc = "Creates a burning sensation in the mouth of anyone who eats it, this lichen is particularly adept at warding off its consumption by any Subterra denizens. However, in a cruel twist of fate, Tieflings find it particularly delectable."
+	icon_state = "drowsbane"
+	seed = /obj/item/neuFarm/seed/spore/drowsbane
+	throwforce = 0
+	tastes = list("burning" = 1)
+	w_class = WEIGHT_CLASS_TINY
+	throw_speed = 1
+	throw_range = 3
+	dropshrink = 0.8
+	rotprocess = SHELFLIFE_DECENT
+	list_reagents = list(/datum/reagent/drowsbane = 5)
+	grind_results = list(/datum/reagent/drowsbane = 5)
+	item_weight = 10 GRAMS
 
 /* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later
 	name = "chanterelle"
@@ -723,11 +858,4 @@
 	grind_results = list(/datum/reagent/toxin/amanitin = 6)
 
 */
-
-/proc/display_shit()
-	var/list/list = subtypesof(/obj/item/alch)
-	var/type_list = ""
-	for(var/i in list)
-		type_list += "[i], "
-	usr << browse(list)
 

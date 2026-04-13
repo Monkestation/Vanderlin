@@ -15,7 +15,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	resistance_flags = FIRE_PROOF|LAVA_PROOF|ACID_PROOF // Nigh indestructible due to how important it is
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/attribute/skill/combat/axesmaces
 	smeltresult = null // No
 	melting_material = null
 	swingsound = BLUNTWOOSH_MED
@@ -25,6 +25,7 @@
 
 	grid_height = 96
 	grid_width = 32
+	item_weight = 800 GRAMS
 
 /datum/intent/lordbash
 	name = "bash"
@@ -130,6 +131,7 @@
 	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood)
 	var/static/list/rod_jobs_priest = null
 	COOLDOWN_DECLARE(staff)
+	item_weight = 1.2 KILOGRAMS
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -217,6 +219,7 @@
 	possible_item_intents = list(/datum/intent/mace/strike/stunner, /datum/intent/mace/smash/stunner)
 	gripped_intents = null
 	minstr = 5
+	item_weight = 1.2 KILOGRAMS
 	w_class = WEIGHT_CLASS_NORMAL
 	var/charge = 100
 	var/on = FALSE
@@ -247,7 +250,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
+/obj/item/weapon/mace/stunmace/funny_attack_effects(mob/living/target, mob/living/user)
 	. = ..()
 	if(on)
 		target.electrocute_act(5, src)
@@ -356,17 +359,19 @@
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
 	melting_material = /datum/material/steel
 	melt_amount = 75
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
 	name = "psydonian katar"
 	desc = "An exotic weapon taken from the hands of wandering monks, an esoteric design to the Grenzelhoftian nation. Special care was taken into account towards the user's knuckles: silver-tipped steel from tip to edges, and His holy cross reinforcing the heart of the weapon, with curved shoulders to allow its user to deflect incoming blows - provided they lead it in with the blade."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psykatar"
+	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver
@@ -377,6 +382,7 @@
 	desc = "A gift from a creature of the sea. The claw is sharpened to a wicked edge."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
+	item_weight = 350 GRAMS
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -419,14 +425,15 @@
 	parrysound = list('sound/combat/parry/pugilism/unarmparry (1).ogg','sound/combat/parry/pugilism/unarmparry (2).ogg','sound/combat/parry/pugilism/unarmparry (3).ogg')
 	sharpness = IS_BLUNT
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
-	associated_skill = /datum/skill/combat/unarmed
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
 
 	weapon_special = /datum/special_intent/upper_cut
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/getonmobprop(tag)
 	. = ..()
@@ -442,6 +449,7 @@
 	desc = "A simple piece of harm molded in a holy mixture of steel and silver, finished with three stumps - Psydon's crown - to crush the heretics' garments and armor into smithereens."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyknuckle"
+	item_weight = 200 GRAMS
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
@@ -453,3 +461,4 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eoraknuckle"
 	force = DAMAGE_KNUCKLES + 2
+	item_weight = 200 GRAMS

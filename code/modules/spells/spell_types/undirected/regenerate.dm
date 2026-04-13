@@ -7,8 +7,8 @@
 	antimagic_flags = NONE
 	spell_flags = SPELL_IGNORE_SPELLBLOCK
 
-	associated_skill = /datum/skill/combat/unarmed
-	associated_stat = STATKEY_CON
+	associated_skill = /datum/attribute/skill/combat/unarmed
+	associated_stat = STAT_CONSTITUTION
 
 	charge_required = FALSE
 	has_visual_effects = FALSE

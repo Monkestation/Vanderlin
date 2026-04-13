@@ -105,6 +105,7 @@
 #define ADMIN_PUNISHMENT_MEATPIE "Pie-ify"
 #define ADMIN_PUNISHMENT_GODHAND "God Hand"
 #define ADMIN_PUNISHMENT_FORCECOLLAR "Force Collar"
+#define ADMIN_PUNISHMENT_BLACK_BRIAR "Black Briar Blossom"
 
 #define AHELP_ACTIVE 1
 #define AHELP_CLOSED 2
@@ -174,3 +175,6 @@ GLOBAL_LIST_INIT(admin_categories, build_admin_categories())
 			final_build[clean_cat] += ckey(rank)
 
 	return final_build
+
+GLOBAL_VAR(join_motd)
+GLOBAL_VAR(current_tms)

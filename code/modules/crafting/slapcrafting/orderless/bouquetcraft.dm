@@ -2,7 +2,7 @@
 	name = "Flower Bouquet"
 	starting_item = /obj/item/natural/cloth
 	finishing_item = /obj/item/natural/fibers
-	related_skill = /datum/skill/craft/crafting
+	related_skill = /datum/attribute/skill/craft/crafting
 	skill_xp_gained = 5
 	action_time = 2.5 SECONDS
 	requirements = list(

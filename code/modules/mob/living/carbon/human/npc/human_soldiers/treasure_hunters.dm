@@ -9,6 +9,7 @@
 	ambushable = FALSE
 	dodgetime = 15
 	flee_in_pain = FALSE
+	headprice = 12
 
 /mob/living/carbon/human/species/human/northern/mad_touched_treasure_hunter/ambush
 	wander = TRUE
@@ -35,13 +36,30 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 40
+
+/datum/attribute_holder/sheet/job/npc/mad_touched_treasure_hunter
+	raw_attribute_list = list(
+		STAT_STRENGTH = 5,
+		STAT_SPEED = 5,
+		STAT_CONSTITUTION = 5,
+		STAT_ENDURANCE = 5,
+		STAT_PERCEPTION = 5,
+		STAT_INTELLIGENCE = 2,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/shields = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
 
 /datum/outfit/job/human/species/human/northern/mad_touched_treasure_hunter/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/bracers
 	mask = /obj/item/clothing/face/facemask/steel/mad_touched
-	armor = /obj/item/clothing/armor/leather/heavy
+	armor = /obj/item/clothing/armor/leather/jerkin
 	shirt = /obj/item/clothing/armor/gambeson
 	if(prob(20))
 		shirt = /obj/item/clothing/armor/gambeson/light
@@ -64,12 +82,7 @@
 
 	shoes = /obj/item/clothing/shoes/boots/leather
 	//carbon ai is still pretty dumb so making them a threat to players requires pretty crazy looking stats. don't think too hard about it.
-	H.base_strength = 15
-	H.base_speed = 15
-	H.base_constitution = 15
-	H.base_endurance = 15
-	H.base_perception = 15
-	H.base_intelligence = 12
+
 	H.set_eye_color("#27becc","#27becc")
 	H.set_hair_color("#61310f")
 	H.set_facial_hair_color(H.get_hair_color())
@@ -79,21 +92,14 @@
 		H.set_hair_style(/datum/sprite_accessory/hair/head/messy)
 		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/manly)
 
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/mad_touched_treasure_hunter)
 	H.real_name = pick(file2list("strings/rt/names/human/mad_touched_names.txt"))
 
 /obj/item/clothing/head/menacing/mad_touched_treasure_hunter //its here so it doesnt wind up on some class' loadout.
 	name = "sack hood"
 	desc = "A ragged hood of thick jute fibres. The itchiness is unbearable."
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
 	color = "#999999"
 	armor = ARMOR_LEATHER
 

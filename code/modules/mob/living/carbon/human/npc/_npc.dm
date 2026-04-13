@@ -119,7 +119,7 @@
 		cast_move = 0
 		UnarmedAttack(L,1)
 
-	var/adf = ((used_intent.clickcd + 8) - round((src.STASPD - 10) / 2) - attack_speed)
+	var/adf = ((used_intent.clickcd + 8) - round((GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) - 10) / 2) - attack_speed)
 	if(istype(rmb_intent, /datum/rmb_intent/aimed))
 		adf = round(adf * 1.4)
 	if(istype(rmb_intent, /datum/rmb_intent/swift))
@@ -130,23 +130,23 @@
 /mob/living/proc/npc_detect_sneak(mob/living/target, extra_prob = 0)
 	if (target.alpha > 0 || !target.rogue_sneaking)
 		return TRUE
-	var/probby = 4 * STAPER //this is 10 by default - npcs get an easier time to detect to slightly thwart cheese
+	var/probby = 4 * GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) //this is 10 by default - npcs get an easier time to detect to slightly thwart cheese
 	probby += extra_prob
 	var/sneak_bonus = 0
 	if(target.mind)
 		if(target.has_status_effect(/datum/status_effect/invisibility))
 			// we're invisible as per the spell effect, so use the highest of our arcane magic (or holy) skill instead of our sneaking
-			sneak_bonus = (max(target.get_skill_level(/datum/skill/magic/arcane, TRUE), target.get_skill_level(/datum/skill/magic/holy, TRUE)) * 10)
+			sneak_bonus = (max(GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/arcane), GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/magic/holy)) * 10)
 			probby -= 20 // also just a fat lump of extra difficulty for the npc since spells are hard, you know?
 		else
-			sneak_bonus = (target.get_skill_level(/datum/skill/misc/sneaking, TRUE) * 5)
+			sneak_bonus = (GET_MOB_SKILL_VALUE_OLD(target, /datum/attribute/skill/misc/sneaking) * 5)
 		probby -= sneak_bonus
 
-	probby += 100 * target.get_encumbrance()
-	if (target.stat_roll(STATKEY_LCK,5,10,TRUE))
-		probby += (10 - target.STALUC) * 5 // drop 5% chance for every bit of fortune we're missing
-	if (target.stat_roll(STATKEY_LCK,5,10))
-		probby -= (10 - target.STALUC) * 5 // make it 5% harder for every bit of fortune over 10 that we do have
+	probby += 100 * ENCUMBRANCE_TO_SIGMOID(target.encumbrance)
+	if (target.stat_roll(STAT_FORTUNE,5,10,TRUE))
+		probby += (10 - GET_MOB_ATTRIBUTE_VALUE(target, STAT_FORTUNE)) * 5 // drop 5% chance for every bit of fortune we're missing
+	if (target.stat_roll(STAT_FORTUNE,5,10))
+		probby -= (10 - GET_MOB_ATTRIBUTE_VALUE(target, STAT_FORTUNE)) * 5 // make it 5% harder for every bit of fortune over 10 that we do have
 
 	if (prob(probby))
 		// whoops it saw us

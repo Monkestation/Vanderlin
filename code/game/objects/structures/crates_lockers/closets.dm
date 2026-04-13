@@ -66,7 +66,7 @@
 		for(var/atom/movable/spawning_atom as anything in spawn_contents)
 			new spawning_atom(get_turf(src))
 	if(mapload && !opened)		// if closed, any item at the crate's loc is put in the contents
-		addtimer(CALLBACK(src, PROC_REF(take_contents)), 0)
+		addtimer(CALLBACK(src, PROC_REF(take_contents), TRUE), 0)
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE)
 	populate_contents()
@@ -130,8 +130,8 @@
 		return
 	for(var/atom/movable/AM in location)
 		if(AM != src && insert(AM, mapload) == LOCKER_FULL) // limit reached
-			if(mapload) // Yea, it's a mapping issue. Blame mappers.
-				log_mapping("Closet storage capacity of [type] exceeded on mapload at [AREACOORD(src)]")
+			//if(mapload) // Yea, it's a mapping issue. Blame mappers.
+			//	log_mapping("Closet storage capacity of [type] exceeded on mapload at [AREACOORD(src)]") // sorry cheffie but this wasn't even running as a mapload in the first place
 			break
 
 /obj/structure/closet/proc/open(mob/living/user)
@@ -199,7 +199,7 @@
 	take_contents()
 	playsound(src, close_sound, close_sound_volume, FALSE, -3)
 	opened = FALSE
-	density = TRUE
+	density = initial(density)
 	update_appearance(UPDATE_ICON_STATE)
 	return TRUE
 
@@ -231,6 +231,9 @@
 	if(opened)
 		if(user.transferItemToLoc(I, drop_location())) // so we put in unlit welder too
 			return TRUE
+
+/obj/structure/closet/pre_lock_interact(mob/living/user)
+	return ..() && !opened
 
 /obj/structure/closet/MouseDrop_T(atom/movable/O, mob/living/user)
 	if(!istype(O) || O.anchored || istype(O, /atom/movable/screen))

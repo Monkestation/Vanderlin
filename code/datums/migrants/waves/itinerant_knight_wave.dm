@@ -3,6 +3,29 @@
 	greet_text = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fulfill your knightly vows."
 	migrant_job = /datum/job/migrant/itinerant_knight
 
+/datum/attribute_holder/sheet/job/migrant/itinerant_knight
+	raw_attribute_list = list(
+		STAT_STRENGTH = 3,
+		STAT_PERCEPTION = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/riding = 40,
+		/datum/attribute/skill/labor/mathematics = 30,
+	)
+
 /datum/job/migrant/itinerant_knight
 	title = "Itinerant Knight"
 	tutorial = "You are an itinerant Knight, you have embarked alongside your squire on a voyage to fulfill your knightly vows."
@@ -10,32 +33,11 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_STR = 3,
-		STATKEY_PER = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 2,
-		STATKEY_END = 3,
-		STATKEY_SPD = -2,
-	)
+
 	honorary = "Sir"
 	honorary_f = "Dame"
 
-	skills = list(
-		/datum/skill/combat/polearms = 4,
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 4,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/combat/bows = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/misc/riding = 4,
-		/datum/skill/labor/mathematics = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/itinerant_knight
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -46,9 +48,6 @@
 	)
 	cmode_music = 'sound/music/cmode/nobility/CombatKnight.ogg'
 	voicepack_m = /datum/voicepack/male/knight
-
-/datum/job/migrant/itinerant_knight/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
 
 /datum/outfit/itinerant_knight
 	name = "Itinerant Knight (Migrant Wave)"
@@ -75,6 +74,27 @@
 	greet_text = "You are the squire of an itinerant knight, they have taken you under their custody as you have shown great talents, if you keep it on, you might become a knight yourself."
 	migrant_job = /datum/job/migrant/itinerant_squire
 
+/datum/attribute_holder/sheet/job/migrant/itinerant_squire
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_INTELLIGENCE = 1,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/craft/weaponsmithing = 20,
+		/datum/attribute/skill/craft/armorsmithing = 20,
+	)
+
 /datum/job/migrant/itinerant_squire
 	title = "Itinerant Squire"
 	tutorial = "You are the squire of an itinerant knight, they have taken you under their custody as you have shown great talents, if you keep it on, you might become a knight yourself."
@@ -82,28 +102,8 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_CON = 1,
-		STATKEY_INT = 1,
-		STATKEY_SPD = 2,
-	)
 
-	skills = list(
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = 2,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/craft/weaponsmithing = 2,
-		/datum/skill/craft/armorsmithing = 2,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/itinerant_squire
 
 	traits = list(TRAIT_DODGEEXPERT)
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
@@ -117,7 +117,7 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	armor = /obj/item/clothing/armor/leather/splint
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backr = /obj/item/storage/backpack/satchel

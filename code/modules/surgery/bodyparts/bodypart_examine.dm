@@ -168,7 +168,8 @@
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
-		wound_strings |= wound.get_check_name(user)
+		wound_strings |= wound.get_check_name(user, advanced)
+	wound_strings -= null
 	status += wound_strings
 
 	if(skeletonized)

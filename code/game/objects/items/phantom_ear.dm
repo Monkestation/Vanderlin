@@ -7,6 +7,7 @@
 	icon_state = "ear_ring"
 	invisibility = INVISIBILITY_LEYLINES
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 5 GRAMS
 	var/hear_radius = 2
 	var/muted = FALSE
 	var/datum/weakref/linked_living
@@ -107,7 +108,7 @@
 	if(!isliving(speaker))
 		return
 	var/mob/living/living_speaker = speaker
-	var/perception = living_speaker.STAPER
+	var/perception = GET_MOB_ATTRIBUTE_VALUE(living_speaker, STAT_PERCEPTION)
 	if(invisibility && !living_speaker.is_blind() && living_speaker != owner && perception > 13)
 		if(!prob(20 + ((perception - 14) * 5)))
 			return

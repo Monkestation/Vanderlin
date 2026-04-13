@@ -8,10 +8,6 @@
 		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
-	lord_verbs = list(
-		/mob/living/carbon/human/proc/demand_submission,
-		/mob/living/carbon/human/proc/punish_spawn
-	)
 	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Elder"
 

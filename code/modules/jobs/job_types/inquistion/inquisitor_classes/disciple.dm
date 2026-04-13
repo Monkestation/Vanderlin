@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/disciple
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 3,
+		STAT_INTELLIGENCE = -2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+	)
+
+/datum/attribute_holder/sheet/job/disciple/quarterstaff
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(30, 30)
+	)
+
 /datum/job/advclass/sacrestant/disciple
 	title = "Disciple"
 	tutorial = "Some train their steel, others train their wits. You have honed your body itself into a weapon, anointing it with faithful markings to fortify your soul. You serve and train under the Ordo Benetarus, and one day you will be among Psydon’s most dauntless warriors."
@@ -5,23 +31,8 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/disciple
 	category_tags = list(CTAG_INQUISITION)
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 3,
-		STATKEY_INT = -2,
-		STATKEY_SPD = -1
-	)
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
-	)
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/disciple
 
 	traits = list(
 		TRAIT_INQUISITION,
@@ -36,6 +47,7 @@
 
 /datum/job/advclass/sacrestant/disciple/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Disciple")
 
 	var/datum/species/species = spawned.dna?.species
@@ -43,22 +55,21 @@
 		species.native_language = "Old Psydonic"
 		species.accent_language = species.get_accent(species.native_language)
 
-	if(!spawned.mind)
-		return
+/datum/job/advclass/sacrestant/disciple/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	// I Hate
 	var/static/list/weapons = list(
-		"Discipline - Unarmed" = null,
+		"Discipline - Unarmed" = /obj/item/clothing/gloves/bandages/pugilist,
 		"Katar" = /obj/item/weapon/katar/psydon,
 		"Knuckledusters" = /obj/item/weapon/knuckles/psydon,
-		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff,
+		"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "TAKE UP PSYDON'S ARMS!")
-	var/obj/item/clothing/gloves/gloves_to_wear = /obj/item/clothing/gloves/bandages/weighted
+	spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/weighted, ITEM_SLOT_GLOVES, TRUE) // this will fail on the unarmed discipline
 	switch(weapon_choice)
 		if("Discipline - Unarmed")
-			gloves_to_wear = /obj/item/clothing/gloves/bandages/pugilist
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 4)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, JOB_TRAIT)
 		if("Katar")
@@ -66,10 +77,7 @@
 		if("Knuckledusters")
 			ADD_TRAIT(spawned, TRAIT_CRITICAL_RESISTANCE, JOB_TRAIT)
 		if("Quarterstaff")
-			spawned.clamped_adjust_skillrank(/datum/skill/combat/polearms, 3, 3)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, 1)
-			spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_INT, 1)
-	spawned.equip_to_slot_or_del(new gloves_to_wear, ITEM_SLOT_GLOVES, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/disciple/quarterstaff)
 
 /datum/outfit/disciple
 	name = "Disciple (Sacrestants)"
