@@ -36,13 +36,12 @@
 	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
 	belt = /obj/item/storage/belt/leather/townguard
 	gloves = /obj/item/clothing/gloves/leather
+	cloak = /obj/item/clothing/cloak/half/guard
 
 /datum/outfit/guardsman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	cloak = pick(/obj/item/clothing/cloak/half/guard, /obj/item/clothing/cloak/half/guardsecond)
-
 	if(equipped_human.dna && !(equipped_human.dna.species.id in RACES_PLAYER_NONDISCRIMINATED))
-		mask = /obj/item/clothing/face/shepherd
+		mask = /obj/item/clothing/face/shepherd/colored/guard
 
 /datum/outfit/guardsman/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	. = ..()
