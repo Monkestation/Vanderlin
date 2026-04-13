@@ -151,7 +151,7 @@
 			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), initial = TRUE)
 
 	// Enhancement selection
-	var/enhancements = list(
+	var/list/enhancements = list(
 		"Auxiliary Adrenal Glands - Pain Resist",
 		"Controlled Atrophy - Rapid Movement",
 		"Formikrag Liver - Reversed Toxin Damage",

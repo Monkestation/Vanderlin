@@ -94,7 +94,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
 
 	// Enhancement selection
-	var/enhancements = list(
+	var/list/enhancements = list(
 		"Auxiliary Adrenal Glands - Pain Resist",
 		"Controlled Atrophy - Rapid Movement",
 		"Formikrag Liver - Reversed Toxin Damage",
