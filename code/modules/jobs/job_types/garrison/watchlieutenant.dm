@@ -126,7 +126,7 @@
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(equipped_human.dna && !(equipped_human.dna.species.id in RACES_PLAYER_NONDISCRIMINATED))
-		var/obj/item/clothing/mask = new /obj/item/clothing/face/shepherd/colored/guard()
+		var/obj/item/clothing/mask = new /obj/item/clothing/face/shepherd/colored/guardsecond()
 		if(!equipped_human.equip_to_slot_if_possible(mask, ITEM_SLOT_MASK))
 			qdel(mask)
 
