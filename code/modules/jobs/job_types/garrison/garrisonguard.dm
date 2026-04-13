@@ -54,11 +54,10 @@
 /datum/attribute_holder/sheet/job/garrison/footman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
@@ -89,14 +88,14 @@
 	head = /obj/item/clothing/head/helmet/townbarbute
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/cuirass/iron
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/gambeson/colored/guard
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
-	beltr = /obj/item/weapon/sword/short/iron
-	beltl = /obj/item/weapon/mace/cudgel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	beltr = /obj/item/flashlight/flare/torch/metal
+	beltl = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/book/law/small = 1
 	)
 
 /datum/attribute_holder/sheet/job/garrison/archer
@@ -108,7 +107,6 @@
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -135,14 +133,15 @@
 /datum/outfit/guardsman/archer
 	name = "City Watch Archer"
 	head = /obj/item/clothing/head/helmet/townbarbute
-	neck = /obj/item/clothing/neck/chaincoif
-	armor = /obj/item/clothing/armor/gambeson/heavy
+	neck = /obj/item/clothing/neck/gorget
+	armor = /obj/item/clothing/armor/gambeson/heavy/colored/guard
 	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	beltl = /obj/item/weapon/mace/cudgel
+	beltl = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/book/law/small = 1
 	)
 
 /datum/outfit/guardsman/archer/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -153,10 +152,8 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
-		STAT_CONSTITUTION = 2,
-		STAT_SPEED = -1,
+		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -170,7 +167,7 @@
 
 /datum/job/advclass/garrison/pikeman
 	title = "City Watch Pikeman"
-	tutorial = "You are a pikeman in the City Watch. You are less fleet of foot compared to the rest, but you are burly and well practiced with spears, pikes, billhooks - all the various polearms for striking enemies from a distance."
+	tutorial = "You are a pikeman in the City Watch. You are burly and well practiced with spears, pikes, billhooks - all the various polearms for striking enemies from a distance."
 	outfit = /datum/outfit/guardsman/pikeman
 	category_tags = list(CTAG_GARRISON)
 
@@ -185,15 +182,15 @@
 	name = "City Watch Pikeman"
 	head = /obj/item/clothing/head/helmet/townbarbute
 	armor = /obj/item/clothing/armor/cuirass/iron
-	shirt = /obj/item/clothing/armor/gambeson
+	shirt = /obj/item/clothing/armor/gambeson/colored/guard
 	neck = /obj/item/clothing/neck/gorget
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
-	beltl = /obj/item/weapon/sword/short/iron
-	beltr = /obj/item/weapon/mace/cudgel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	beltl = /obj/item/flashlight/flare/torch/metal
+	beltr = /obj/item/weapon/mace/bludgeon
 	backpack_contents = list(
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/book/law/small = 1
 	)
 
 /mob/proc/haltyell()
