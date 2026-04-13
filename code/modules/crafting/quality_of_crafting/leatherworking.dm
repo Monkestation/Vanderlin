@@ -760,7 +760,7 @@
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/hunterboots
-	name = "hardened hunter boots"
+	name = "hunter boots"
 	output = /obj/item/clothing/shoes/boots/hunter
 	requirements = list(/obj/item/natural/hide/cured = 2,
 				/obj/item/natural/fur = 1,

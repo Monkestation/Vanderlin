@@ -186,7 +186,7 @@
 	max_integrity = INTEGRITY_STRONG
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 70, "slash" = 60, "stab" = 35, "piercing" = 25, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/head/roguehood/leather/masterwork
 	name = "masterwork leather hood"
@@ -194,7 +194,7 @@
 	max_integrity = INTEGRITY_STRONG + 100
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 45, "piercing" = 15, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
 	. = ..()
