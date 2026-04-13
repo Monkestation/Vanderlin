@@ -2,8 +2,8 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 2,
-		STAT_CONSTITUTION = 1,
-		STAT_SPEED = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/polearms = 10,
@@ -86,47 +86,47 @@
 		"Flail" = /obj/item/weapon/flail, \
 		"Spear" = /obj/item/weapon/polearm/spear, \
 		"Sword" = /obj/item/weapon/sword/iron, \
+		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "LIEUTENANT")
 	if(!choice)
 		return
 	switch(choice)
 		if("Flail")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/wood(), ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/flail)
 		if("Spear")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/tower/buckleriron(), ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/polearm)
 		if("Sword")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword(), ITEM_SLOT_BACK_L, TRUE)
+			spawned.put_in_hands(new /obj/item/weapon/scabbard/sword())
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lieutenant/sword)
+		if("Warhammer")
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/shield/heater(), ITEM_SLOT_BACK_R, TRUE)
 
 /datum/outfit/lieutenant
 	name = JOB_CITY_WATCH_LIEUTENANT
 	head = /obj/item/clothing/head/helmet/sargebarbute //veteran who won a nice helmet
-	wrists = /obj/item/clothing/wrists/bracers/jackchain
-	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather
+	shoes = /obj/item/clothing/shoes/boots/armor/ironmaille
+	belt = /obj/item/storage/belt/leather/townguardlt
 	shirt = /obj/item/clothing/armor/chainmail/iron
-	armor = /obj/item/clothing/armor/cuirass/iron
-	pants = /obj/item/clothing/pants/chainlegs/iron
+	armor = /obj/item/clothing/armor/cuirass
+	pants = /obj/item/clothing/pants/trou/leather/splint
 	gloves = /obj/item/clothing/gloves/chain/iron
 	neck = /obj/item/clothing/neck/chaincoif/iron
-	beltl = /obj/item/weapon/mace/bludgeon
+	cloak = /obj/item/clothing/cloak/half/guardsecond
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
-		/obj/item/storage/keyring/lieutenant = 1,
-		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/rope/chain = 1
+		/obj/item/rope/chain = 1,
+		/obj/item/book/law/small = 1,
+		/obj/item/weapon/mace/cudgel
 	)
 
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
-	cloak = pick(/obj/item/clothing/cloak/half/guard, /obj/item/clothing/cloak/half/guardsecond)
-
 	if(equipped_human.dna && !(equipped_human.dna.species.id in RACES_PLAYER_NONDISCRIMINATED))
-		var/obj/item/clothing/mask = new /obj/item/clothing/face/shepherd/clothmask()
+		var/obj/item/clothing/mask = new /obj/item/clothing/face/shepherd/colored/guard()
 		if(!equipped_human.equip_to_slot_if_possible(mask, ITEM_SLOT_MASK))
 			qdel(mask)
 
