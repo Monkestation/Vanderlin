@@ -432,6 +432,10 @@
 	color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
+/obj/item/clothing/face/shepherd/colored/guardsecond
+	color = CLOTHING_BLOOD_RED
+	uses_lord_coloring = LORD_SECONDARY
+
 /obj/item/clothing/face/shepherd/rag
 	icon_state = "ragmask"
 
