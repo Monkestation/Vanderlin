@@ -165,7 +165,7 @@
 		"Serpentine Glands - Thermal Vision and Venom",)
 	//only four options
 	enhancements = shuffle(enhancements)
-	enhancements = enhancements[0, 3]
+	enhancements.Cut(5, 0)
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
