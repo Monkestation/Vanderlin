@@ -112,3 +112,5 @@
 #define UPDATE_TRANSFORM_TRAIT "update_transform"
 /// Trait from [/datum/component/martyr_weapon]
 #define MARTYR_TRAIT "martyr"
+/// Trait from wings
+#define WING_TRAIT "wings"

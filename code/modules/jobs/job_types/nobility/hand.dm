@@ -37,6 +37,9 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
 /datum/outfit/hand
 	name = JOB_HAND
@@ -46,7 +49,6 @@
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_OMMER), 10 SECONDS)
 	// i know this sucks, but due to how job loading is, we can't just get the agents to load before the hand without some reworks
 	if(SSticker.current_state < GAME_STATE_PLAYING)

@@ -24,10 +24,9 @@
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 300
 	)
-
-/datum/job/guardsman/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/guardsman
 	name = "City Watchmen Base"

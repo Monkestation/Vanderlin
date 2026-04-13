@@ -1,4 +1,4 @@
-/datum/attribute_holder/sheet/job/puritan
+/datum/attribute_holder/sheet/job/monster_hunter
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
 		STAT_STRENGTH = 1,
@@ -19,30 +19,29 @@
 		/datum/attribute/skill/craft/cooking = 10,
 	)
 
-/datum/job/advclass/combat/puritan
+/datum/job/advclass/combat/monster_hunter
 	title = "Monster Hunter"
 	tutorial = "Monster Hunters dedicate their lives to the eradication of the varied evils infesting Psydonia. They know the vile sorcery of the necromancer, the insidious nature of the cultist and monstrousness of vampires and werevolfs. They also know how best to end them."
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	outfit = /datum/outfit/folkhero/puritan
+	outfit = /datum/outfit/monster_hunter
 	total_positions = 2
-	category_tags = list(CTAG_FOLKHEROES)
+	category_tags = list(CTAG_ADVENTURER)
+	roll_chance = 10
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	is_recognized = TRUE
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/puritan
+	attribute_sheet = /datum/attribute_holder/sheet/job/monster_hunter
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_STEELHEARTED,
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
-/datum/job/advclass/combat/puritan/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
-
-
-/datum/outfit/folkhero/puritan
-	name = "Monster Hunter (Folkhero)"
+/datum/outfit/monster_hunter
+	name = "Monster Hunter"
 	shirt = /obj/item/clothing/shirt/undershirt/puritan
 	belt = /obj/item/storage/belt/leather
 	shoes = /obj/item/clothing/shoes/boots
@@ -58,7 +57,7 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1)
 
-/datum/outfit/folkhero/puritan/pre_equip(mob/living/carbon/human/H, visuals_only)
+/datum/outfit/monster_hunter/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 	if(H.patron)
 		switch(H.patron.type)

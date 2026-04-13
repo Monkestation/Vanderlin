@@ -39,9 +39,6 @@
 				if(C.mob.mind)
 					if(C.mob.mind.special_role)
 						entry += " - <b><font color='red'>[C.mob.mind.special_role]</font></b>"
-			if(C.whitelisted())
-				wled++
-				entry += "(WL)"
 			entry += "</span>"
 			Lines += entry
 	else

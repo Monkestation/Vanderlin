@@ -138,9 +138,10 @@
 				emote("scream") // lifeweb reference ?? xd
 			take_bodypart_damage(10,check_armor = TRUE)
 			playsound(src,"genblunt",100,TRUE)
+
 	if(iscarbon(hit_atom) && hit_atom != src)
 		var/mob/living/carbon/victim = hit_atom
-		if(victim.movement_type & FLYING)
+		if(victim.movement_type & (FLYING|FLOATING))
 			return
 		if(hurt)
 			victim.take_bodypart_damage(10,check_armor = TRUE)
@@ -149,8 +150,7 @@
 				victim.Knockdown(30)
 			visible_message("<span class='danger'>[src] crashes into [victim]!",\
 				"<span class='danger'>I violently crash into [victim]!</span>")
-		playsound(src,"genblunt",100,TRUE)
-
+		playsound(src, "genblunt", 100, TRUE)
 
 //Throwing stuff
 /mob/living/carbon/proc/toggle_throw_mode()

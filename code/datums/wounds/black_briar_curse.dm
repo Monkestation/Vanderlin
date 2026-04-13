@@ -218,12 +218,10 @@
 
 /// somehow you've triggered your immunity to get lost, like getting more stacks added to you
 /datum/wound/black_briar_curse/proc/remove_immunity(mob/living/affected)
-	var/list/was_immune = GET_TRAIT_SOURCES(affected, TRAIT_BRIAR_HOST)
-	if(was_immune)
-		REMOVE_TRAIT(affected, TRAIT_BRIAR_HOST, was_immune)
+	affected.remove_quirk(/datum/quirk/black_briar)
 
 /datum/wound/black_briar_curse/proc/try_sprout()
-	if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST) && infection_percent >= BBC_STAGE_LATE)
+	if(!owner.has_quirk(/datum/quirk/black_briar) && infection_percent >= BBC_STAGE_LATE)
 		if(mob_overlay != infection_overlay)
 			mob_overlay = infection_overlay
 			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, 1000)
@@ -305,7 +303,7 @@
 				if(prob(25))
 					owner.drop_all_held_items(FALSE)
 
-		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST))
+		if(!owner.has_quirk(/datum/quirk/black_briar))
 			overlay = owner.overlay_fullscreen("briar", /atom/movable/screen/fullscreen/briar, round(lerp(0, 9, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID))))
 			if(COOLDOWN_FINISHED(src, next_limb_infection) && prob(3))
 				var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
