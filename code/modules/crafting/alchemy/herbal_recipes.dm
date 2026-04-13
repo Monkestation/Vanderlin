@@ -571,7 +571,7 @@
 
 /datum/reagent/poison/herbal/pain
 	name = "Souffrance"
-	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm."
+	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm. Very good for torture and interrogation."
 	reagent_state = LIQUID
 	color = "#8b0000"
 	metabolization_rate = 0.5
