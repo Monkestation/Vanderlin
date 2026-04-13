@@ -163,6 +163,9 @@
 		"Nightmare Ward - No Sleep and Fast Learning",
 		"Obfuscating Dermis - Beautiful and Face-changing",
 		"Serpentine Glands - Thermal Vision and Venom",)
+	//only four options
+	enhancements = shuffle(enhancements)
+	enhancements = enhancements[0, 3]
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)

@@ -106,6 +106,9 @@
 		"Nightmare Ward - No Sleep and Fast Learning",
 		"Obfuscating Dermis - Beautiful and Face-changing",
 		"Serpentine Glands - Thermal Vision and Venom",)
+	//only four options
+	enhancements = shuffle(enhancements)
+	enhancements = enhancements[0, 3]
 	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
 
 	switch(enhancement_choice)
@@ -158,7 +161,7 @@
 	shoes = /obj/item/clothing/shoes/otavan/inqboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backr =  /obj/item/storage/backpack/satchel/otavan
-	backl = /obj/item/gun/ballistic/bow/cross
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	beltr = /obj/item/ammo_holder/quiver/bolts
 	head = /obj/item/clothing/head/leather/inqhat
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
