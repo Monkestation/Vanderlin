@@ -104,6 +104,34 @@
 	desc = span_green("Down with the tyranny!")
 
 
+//Grave buffs.
+
+/datum/stress_event/saw_grave_1
+	stress_change = 0
+	desc = span_green("Better them than me.")
+	timer = 10 MINUTES
+
+/datum/stress_event/saw_grave_2
+	stress_change = -1
+	desc = span_green("It's good to see the dead treated with proper respect.")
+	timer = 10 MINUTES
+
+/datum/stress_event/saw_grave_3
+	stress_change = -2
+	desc = span_green("The dead rest easy here.")
+	timer = 10 MINUTES
+
+/datum/stress_event/saw_grave_4
+	stress_change = -3
+	desc = span_green("This grave is watched closely by Necra.")
+	timer = 15 MINUTES
+
+/datum/stress_event/saw_grave_5
+	stress_change = -4
+	desc = span_green("A resting place fit for a king!")
+	timer = 20 MINUTES
+
+
 //Hygiene
 
 /datum/stress_event/clean

@@ -1,7 +1,3 @@
-// These defines determine the level of consecration a grave has received. This helps determine the consequences of graverobbing.
-#define NOT_CONSECRATED 0
-#define CONSECRATED 1
-#define DOUBLY_CONSECRATED 2
 
 /obj/structure/closet/dirthole
 	name = "hole"
@@ -23,8 +19,8 @@
 	var/faildirt = 0
 	var/headstone
 	var/gravefence
-	var/gravequality = 0
-	var/is_consecrated = NOT_CONSECRATED // Has the "burial rites" miracle been used on this grave. 0 = No consecration. 1 = Simple consecration (you get cursed by Necra) 2 and above = Double consecration (you get cursed, and the clergy is alerted.)
+	var/gravequality = 0 //From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
+	var/is_consecrated // Has the "burial rites" miracle been used on this grave. True or false.
 
 
 /obj/structure/closet/dirthole/Initialize()
@@ -48,6 +44,41 @@
 			if(prob(23))
 				new /obj/item/natural/stone(T)
 	return ..()
+
+/obj/structure/closet/dirthole/examine(mob/user)
+	. = ..()
+	if(is_consecrated)
+		switch(gravequality)
+			if(0 to 2)
+				user.add_stress(/datum/stress_event/saw_grave_1)
+				user.remove_stress(/datum/stress_event/saw_grave_2)
+				user.remove_stress(/datum/stress_event/saw_grave_3)
+				user.remove_stress(/datum/stress_event/saw_grave_4)
+				user.remove_stress(/datum/stress_event/saw_grave_5)
+			if(3 to 4)
+				user.add_stress(/datum/stress_event/saw_grave_2)
+				user.remove_stress(/datum/stress_event/saw_grave_1)
+				user.remove_stress(/datum/stress_event/saw_grave_3)
+				user.remove_stress(/datum/stress_event/saw_grave_4)
+				user.remove_stress(/datum/stress_event/saw_grave_5)
+			if(5 to 6)
+				user.add_stress(/datum/stress_event/saw_grave_3)
+				user.remove_stress(/datum/stress_event/saw_grave_1)
+				user.remove_stress(/datum/stress_event/saw_grave_2)
+				user.remove_stress(/datum/stress_event/saw_grave_4)
+				user.remove_stress(/datum/stress_event/saw_grave_5)
+			if(7 to 8)
+				user.add_stress(/datum/stress_event/saw_grave_4)
+				user.remove_stress(/datum/stress_event/saw_grave_1)
+				user.remove_stress(/datum/stress_event/saw_grave_2)
+				user.remove_stress(/datum/stress_event/saw_grave_3)
+				user.remove_stress(/datum/stress_event/saw_grave_5)
+			if(9 to INFINITY)
+				user.add_stress(/datum/stress_event/saw_grave_5)
+				user.remove_stress(/datum/stress_event/saw_grave_1)
+				user.remove_stress(/datum/stress_event/saw_grave_2)
+				user.remove_stress(/datum/stress_event/saw_grave_3)
+				user.remove_stress(/datum/stress_event/saw_grave_4)
 
 /obj/structure/closet/dirthole/grave
 	stage = 3
@@ -117,16 +148,24 @@
 
 /obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
-		if(locate(/obj/structure/gravemarker) in get_turf(src))
-			to_chat(user, "<span class='warning'>This grave is already hallowed.</span>")
+		if(headstone)
+			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
+			return
 		if(stage != 4)
 			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
 
 		if(!do_after(user, 10 SECONDS, src))
 			return
 
-		var/obj/structure/gravemarker/marker = new /obj/structure/gravemarker(get_turf(src))
-		marker.OnCrafted(dir, user)
+		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', "gravemarker1", 2.91)
+		add_overlay(headstone_overlay)
+		gravequality += 1
+		headstone = attacking_item.type
+		if(pacify_coffin(src, user))
+			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
+			if(!src.is_consecrated)
+				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
+				record_round_statistic(STATS_GRAVES_CONSECRATED)
 		qdel(attacking_item)
 		return
 
@@ -139,12 +178,17 @@
 			return
 
 		var/obj/item/headstone/ourheadstone = attacking_item
-		if(!do_after(user, 10 SECONDS, src))
+		if(!do_after(user, 5 SECONDS, src))
 			return
 		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', ourheadstone.icon_state, 2.91)
 		add_overlay(headstone_overlay)
 		gravequality += ourheadstone.decorationquality
 		headstone = attacking_item.type
+		if(pacify_coffin(src, user))
+			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
+			if(!src.is_consecrated < 1) // You cannot double-consecrate a grave with just a marker.
+				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
+				record_round_statistic(STATS_GRAVES_CONSECRATED)
 		qdel(attacking_item)
 		return
 
@@ -157,7 +201,7 @@
 			return
 
 		var/obj/item/gravefence/ourfence = attacking_item
-		if(!do_after(user, 10 SECONDS, src))
+		if(!do_after(user, 5 SECONDS, src))
 			return
 		var/mutable_appearance/fence_overlay = mutable_appearance('icons/turf/floors.dmi', ourfence.icon_state, 2.9)
 		add_overlay(fence_overlay)
@@ -184,10 +228,12 @@
 			climb_offset = 10
 			close()
 			var/founds
-			if(/obj/structure/closet/crate/coffin in contents)
-				gravequality += 20
-			else if(/obj/structure/closet/burial_shroud in contents)
-				gravequality += 5
+			for(var/obj/structure/closet/crate/coffin/coffin in contents)
+				gravequality += 2
+				if(coffin.consecrated)
+					gravequality += 1
+			for(var/obj/structure/closet/burial_shroud/shroud in contents)
+				gravequality += 1
 			for(var/atom/A in contents)
 				founds = TRUE
 				break
@@ -242,7 +288,6 @@
 				return
 			stage = 3
 			climb_offset = 0
-			gravequality = 0
 			cut_overlays()
 			open()
 			if(headstone)
@@ -251,30 +296,33 @@
 			if(gravefence)
 				new gravefence(get_turf(src))
 				gravefence = null
-			switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
-				if(NOT_CONSECRATED) // not consecrated, proceed
-					return
-
-				if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
-					if(ishuman(user))
-						var/mob/living/L = user
-						if(L.patron?.type != /datum/patron/divine/necra) // non-necran get tagged as graverobbers in EOR stats.
-							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+			if(is_consecrated)	// Curses you if you don't have the graverobber trait, otherwise records you as a criminal and gives a special message.
+				if(ishuman(user))
+					var/mob/living/carbon/human/L = user
+					var/robbery_location = get_area_name(src)
+					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
+						var/robbing = TRUE
+						var/message = "I perform the secret rite of concealment, the Undermaiden won't know of my transgression here."
+						switch(L.patron?.type)
+							if(/datum/patron/divine/necra)
+								robbing = FALSE
+								message = "I perform the secret rite of exhumation, and so the Undermaiden overlooks my transgression."
+							if(/datum/patron/divine/pestra) //Special notices if you're of a particular faith.
+								message = "I perform the secret rite of concealment, Pestra shields me from divine gaze as I exhume this corpse for study."
+							if(/datum/patron/inhumen/matthios)
+								message = "I perform the secret rite of liberation, the Undermaiden is none the wiser as the occupant of this grave is freed."
+							if(/datum/patron/inhumen/zizo)
+								message = "I perform the secret rite of defilement, the Undermaiden can do nothing but watch as I undo the rites on this grave."
+						to_chat(user, span_info(message))
+						if(robbing)
+							record_featured_stat(FEATURED_STATS_CRIMINALS, user) //You aren't a Necran, even though you didn't get any consequences you're still a criminal.
 							record_round_statistic(STATS_GRAVES_ROBBED)
-						if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
-							to_chat(user, span_warning("Necra turns a blind eye to my deeds."))
-						else // the part where she curses you.
+							SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+					else
+						if(gravequality >= 2 && gravequality < 5)
 							to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
 							L.apply_status_effect(/datum/status_effect/debuff/cursed)
-					SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
-
-				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
-					if(ishuman(user))
-						var/mob/living/carbon/human/L = user
-						var/robbery_location = get_area_name(src)
-						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
-							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-							record_round_statistic(STATS_GRAVES_ROBBED)
+						else if(gravequality >= 5)
 							to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
 							L.apply_status_effect(/datum/status_effect/debuff/cursed)
 							for (var/mob/living/player in GLOB.player_list)
@@ -282,17 +330,16 @@
 									continue
 								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
 								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
-									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
-						else
-							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
-								to_chat(user, span_info("I speak the hallowed words of Necra, and she releases her grip over my soul.."))
-							else // Even Necrans get minorly cursed, but it's miles better than losing your lux or your arm
-								to_chat(user, span_warning("I mutter Necra's hallowed rites, and although my devotion is recognized, my trespass remains great, I am cursed!"))
-								L.apply_status_effect(/datum/status_effect/debuff/cursed)
+									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
+						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+						record_round_statistic(STATS_GRAVES_ROBBED)
+						SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+
 		stage_update()
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		is_consecrated = NOT_CONSECRATED // remove consecration levels
+		gravequality = 0
+		is_consecrated = null // Unconsecrate.
 
 
 
@@ -426,6 +473,3 @@
 	container_resist(user)
 
 
-#undef NOT_CONSECRATED
-#undef CONSECRATED
-#undef DOUBLY_CONSECRATED
