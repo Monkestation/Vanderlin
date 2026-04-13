@@ -15,12 +15,20 @@
 	lock = null
 	can_add_lock = FALSE
 	alternative_icon_handling = TRUE
+	///How big the hole is, at 3 you can bury a body, at 4 theres something buried.
 	var/stage = 1
+	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
 	var/faildirt = 0
+	///Type path of the present headstone. If this is empty, there isnt one.
 	var/headstone
+	///Type path of the present gravefence. If this is empty, there isnt one.
 	var/gravefence
-	var/gravequality = 0 //From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
-	var/is_consecrated // Has the "burial rites" miracle been used on this grave. True or false.
+	///From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
+	var/gravequality = 0
+	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
+	var/is_consecrated
+	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
+	var/bonusquality
 
 
 /obj/structure/closet/dirthole/Initialize()
@@ -159,17 +167,17 @@
 
 		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', "gravemarker1", 2.91)
 		add_overlay(headstone_overlay)
-		gravequality += 1
 		headstone = attacking_item.type
+		update_quality()
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
-			if(!src.is_consecrated)
+			if(!is_consecrated)
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 		qdel(attacking_item)
 		return
 
-	if(istype(attacking_item, /obj/item/headstone))
+	if(istype(attacking_item, /obj/item/gravedecor/headstone))
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
 			return
@@ -177,22 +185,22 @@
 			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
 			return
 
-		var/obj/item/headstone/ourheadstone = attacking_item
+		var/obj/item/gravedecor/headstone/ourheadstone = attacking_item
 		if(!do_after(user, 5 SECONDS, src))
 			return
 		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', ourheadstone.icon_state, 2.91)
 		add_overlay(headstone_overlay)
-		gravequality += ourheadstone.decorationquality
 		headstone = attacking_item.type
+		update_quality()
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
-			if(!src.is_consecrated < 1) // You cannot double-consecrate a grave with just a marker.
+			if(!is_consecrated)
 				SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 		qdel(attacking_item)
 		return
 
-	if(istype(attacking_item, /obj/item/gravefence))
+	if(istype(attacking_item, /obj/item/gravedecor/gravefence))
 		if(gravefence)
 			to_chat(user, "<span class='warning'>This grave already has a fence.</span>")
 			return
@@ -200,13 +208,13 @@
 			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
 			return
 
-		var/obj/item/gravefence/ourfence = attacking_item
+		var/obj/item/gravedecor/ourfence = attacking_item
 		if(!do_after(user, 5 SECONDS, src))
 			return
 		var/mutable_appearance/fence_overlay = mutable_appearance('icons/turf/floors.dmi', ourfence.icon_state, 2.9)
 		add_overlay(fence_overlay)
-		gravequality += ourfence.decorationquality
 		gravefence = attacking_item.type
+		update_quality()
 		qdel(attacking_item)
 		return
 
@@ -338,7 +346,7 @@
 		stage_update()
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		gravequality = 0
+		update_quality()
 		is_consecrated = null // Unconsecrate.
 
 
@@ -424,6 +432,35 @@
 		if(3)
 			can_buckle = TRUE
 	update_appearance(UPDATE_ICON | UPDATE_NAME)
+
+/obj/structure/closet/dirthole/proc/update_quality()
+	var/corpse_patron
+	gravequality = 0
+	if(bonusquality)
+		gravequality += bonusquality
+	if(stage == 4) //If it's an open grave, it should always be quality 0.
+		for(var/mob/living/corpse in contents)
+			corpse_patron = corpse.patron
+		if(headstone)
+			var/obj/item/gravedecor/headstone/I = headstone
+			var/heldquality = I.decorationquality
+			for(var/datum/patron/GravePatron in I.patron)
+   				if(GravePatron == corpse_patron)
+					heldquality += 3
+			gravequality += heldquality
+		if(gravefence)
+			var/obj/item/gravedecor/gravefence/I = gravefence
+			var/heldquality = I.decorationquality
+			for(var/datum/patron/GravePatron in I.patron)
+   				if(GravePatron == corpse_patron)
+					heldquality += 3
+			gravequality += heldquality
+		for(var/obj/structure/closet/crate/coffin/coffin in contents)
+			gravequality += 2
+			if(coffin.consecrated)
+				gravequality += 1
+		for(var/obj/structure/closet/burial_shroud/shroud in contents)
+			gravequality += 1
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()
