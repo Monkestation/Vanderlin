@@ -526,7 +526,7 @@
 	L.adjustFireLoss(20)
 	L.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.5)
 
-/datum/reagent/poison/herbal/death
+/datum/reagent/head_explosion
 	name = "Berry Juice"
 	description = "Berry juice. Totally will not make your head explode." 
 	reagent_state = LIQUID
@@ -534,8 +534,7 @@
 	metabolization_rate = 0.1
 	taste_description = "berry, with a hint of regret"
 
-/datum/reagent/poison/herbal/death/on_mob_life(mob/living/carbon/M)
-/datum/reagent/poison/herbal/death/on_mob_add(mob/living/L)
+/datum/reagent/head_explosion/on_mob_add(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
