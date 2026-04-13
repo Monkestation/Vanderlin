@@ -1,10 +1,15 @@
 // Cleric Holder Datums
 /datum/devotion
+	/// The mob that this devotion datum is attached to
 	var/mob/living/carbon/human/holder_mob = null
 
+	/// How much devotion the `holder_mob` can use
 	var/devotion = 0
+	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
+	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
 	var/max_progression = CLERIC_REQ_3
 
 	/// How much devotion is gained per process call
@@ -124,6 +129,40 @@
 
 	if(.)
 		check_progression()
+
+/// Updates `passive_devotion_gain` for mob, if it gets to 0 and `passive_progression_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_devotion_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_devotion(amount)
+	if(passive_devotion_gain == 0)
+		if(amount <= 0) //if already at 0 we can't go lower
+			return
+		else // must be an increase, start processing
+			passive_devotion_gain += amount
+			START_PROCESSING(SSprocessing, src)
+			return
+	else
+		passive_devotion_gain += amount
+		if(passive_devotion_gain < 0) //if we are now below 0, set it back to 0
+			passive_devotion_gain = 0
+
+		return
+
+/// Updates `passive_progression_gain` for mob, if it gets to 0 and `passive_devotion_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_progression_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_progression(amount)
+	if(passive_progression_gain == 0)
+		if(amount <= 0) //if already at 0 we can't go lower
+			return
+		else // must be an increase, start processing
+			passive_progression_gain += amount
+			START_PROCESSING(SSprocessing, src)
+			return
+	else
+		passive_progression_gain += amount
+		if(passive_progression_gain < 0) //if we are now below 0, set it back to 0
+			passive_progression_gain = 0
+
+		return
 
 /datum/devotion/proc/check_progression()
 	var/static/list/tiers = list(
