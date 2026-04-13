@@ -580,7 +580,7 @@
 
 /datum/reagent/poison/herbal/pain/on_mob_metabolize(mob/living/M)
 	. = ..()
-	M.apply_status_effect(/datum/status_effect/buff/alch/pain)
+	M.apply_status_effect(/datum/status_effect/debuff/alch/pain)
 	M.add_stress(/datum/stress_event/souffrance)
 
 /datum/reagent/poison/herbal/rajaijah //Goonstation my beloved
