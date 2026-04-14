@@ -7,13 +7,18 @@
 	possible_item_intents = list(INTENT_GENERIC)
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = FIRE_PROOF
-	///This applies a gravequality bonus when added to a grave. 1 means a CHEAP decoration, usually wood. 2 means a MODERATE decoration, usually masoned stone.
-	///3 means an EXPENSIVE decoration, usually forged.
+	/// This applies a gravequality bonus when added to a grave. 1 means a CHEAP decoration, usually wood. 2 means a MODERATE decoration, usually masoned stone.
+	/// 3 means an EXPENSIVE decoration, usually forged.
 	var/decorationquality
-	///Set this if this decoration is not crafted/doesn't have an item state, but instead is made by using a non decoration item on a grave.
+	/// Set this if this decoration is not crafted/doesn't have an item state, but instead is made by using a non decoration item on a grave. MUST BE TYPE
 	var/sourceitem
-	///Patrons associated with this grave decoration. Usually a headstone.
+	/// Patrons associated with this grave decoration. Usually a headstone.
 	var/list/patron
+
+/obj/item/gravedecor/New(loc, var/parent)
+	sourceitem = parent
+	. = ..()
+
 
 /obj/item/gravedecor/headstone
 	name = "peaked headstone"
@@ -24,8 +29,8 @@
 /obj/item/gravedecor/headstone/crude
 	name = "crude headstone"
 	desc = ""
-	sourceitem = /obj/item/grown/log/tree/stick
 	icon_state = "gravemarker1"
+	sourceitem = /obj/item/grown/log/tree/stick
 	decorationquality = 1
 
 /obj/item/gravedecor/headstone/psydon

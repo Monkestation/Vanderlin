@@ -158,13 +158,13 @@
 		return FALSE
 
 	// Time to actually remove the item
-	user.visible_message("[user] starts to remove \the [item_to_remove] from \the [src]", "You attempt to remove \the [item_to_remove] from \the [src]")
+	user.visible_message(span_info("[user] starts to remove \the <span class='bold'>[item_to_remove]</span> from \the [src]"), span_notice("You attempt to remove \the <span class='bold'>[item_to_remove]</span> from \the [src]"))
 	playsound(src, 'sound/items/dig_shovel.ogg', 100, FALSE)
 	if(!do_after(user, 5 SECONDS, src, progress = TRUE))
 		to_chat(user, span_warning("You fail to remove \the [item_to_remove]!"))
 		return FALSE
 	else
-		user.visible_message("[user] removes \the [item_to_remove] from \the [src]", "You remove \the [item_to_remove] from \the [src]")
+		user.visible_message(span_info("[user] removes \the <span class='bold'>[item_to_remove]</span> from \the [src]"), span_notice("You remove \the <span class='bold'>[item_to_remove]</span> from \the [src]"))
 
 		// Remove either headstone or gravestone
 		if(istype(item_to_remove, /obj/item/gravedecor/headstone))
@@ -228,7 +228,7 @@
 			return
 		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
 		if(istype(attacking_item, /obj/item/grown/log/tree/stick))
-			headstone = /obj/item/gravedecor/headstone/crude
+			headstone = new /obj/item/gravedecor/headstone/crude(parent = attacking_item.type)
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
