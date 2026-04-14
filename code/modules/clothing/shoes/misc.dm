@@ -201,3 +201,4 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
 	uses_lord_coloring = LORD_PRIMARY
+	wetable = FALSE
