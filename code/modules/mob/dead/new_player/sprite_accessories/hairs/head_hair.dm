@@ -1486,9 +1486,9 @@
 	gender = NEUTER
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
-/datum/sprite_accessory/hair/head/swirlybuns
-	name = "Swirly Buns"
-	icon_state = "swirlybuns"
+/datum/sprite_accessory/hair/head/nest
+	name = "Nest"
+	icon_state = "nest"
 	gender = NEUTER
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 

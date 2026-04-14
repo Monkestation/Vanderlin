@@ -355,7 +355,7 @@
 		/datum/sprite_accessory/hair/head/poofypoms,
 		/datum/sprite_accessory/hair/head/wolfcut,
 		/datum/sprite_accessory/hair/head/triplebuns,
-		/datum/sprite_accessory/hair/head/swirlybuns,
+		/datum/sprite_accessory/hair/head/nest,
 		/datum/sprite_accessory/hair/head/strand,
 		/datum/sprite_accessory/hair/head/sodden
 		)
