@@ -6,9 +6,9 @@
 	icon_state = "keyrack"
 	base_icon_state = "keyrack"
 	SET_BASE_PIXEL(0, 32)
-
 	anchored = TRUE
 	density = FALSE
+	lock = /datum/lock/key
 
 	var/opened = FALSE
 
@@ -23,8 +23,27 @@
 	if(opened)
 		update_appearance(UPDATE_OVERLAYS)
 
+/obj/structure/keyrack/pre_lock_interact(mob/living/user)
+	. = ..()
+	if(!.)
+		return
+
+	return !opened
+
+/obj/structure/keyrack/on_lock(mob/living/user, obj/item, silent)
+	. = ..()
+	atom_storage?.set_locked(STORAGE_SOFT_LOCKED)
+	atom_storage?.close_all_recursive()
+
+/obj/structure/keyrack/on_unlock(mob/living/user, obj/item, silent)
+	. = ..()
+	atom_storage?.set_locked(STORAGE_NOT_LOCKED)
+
 /obj/structure/keyrack/attack_hand(mob/living/user)
 	. = ..()
+	if(locked())
+		balloon_alert(user, "locked!")
+		return
 	opened = !opened
 	update_appearance(UPDATE_ICON)
 
