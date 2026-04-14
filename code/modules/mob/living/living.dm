@@ -1293,10 +1293,10 @@
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	var/mutable_appearance/flaggy = mutable_appearance('icons/effects/effects.dmi', "surrender", ABOVE_MOB_LAYER, appearance_flags = RESET_TRANSFORM|KEEP_APART)
 	flaggy.pixel_y = 12
-	flick_overlay_view(flaggy, 150)
+	flick_overlay_view(flaggy, 15 SECONDS)
 	drop_all_held_items()
 	Stun(15 SECONDS)
-	visible_message(span_bignotice("[src] yields!"), span_boldwarning("I yield!"))
+	visible_message(span_bignotice("<span class='bold'>[src]</span> yields!"), span_boldwarning("I yield!"))
 	playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
 	toggle_cmode()
 	addtimer(VARSET_CALLBACK(src, surrendering, FALSE), 15 SECONDS)
