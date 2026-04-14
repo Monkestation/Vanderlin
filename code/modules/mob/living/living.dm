@@ -1280,12 +1280,14 @@
 	set category = "IC.Interaction"
 
 	if(surrendering)
-		return
+		return FALSE
 	if(stat)
-		return
-	surrendering = 1
-	if(!tgui_alert(src, "Yield in surrender?","Yield", list("YES","NO")) == "YES")
-		return
+		return FALSE
+
+	if(tgui_alert(src, "Yield in surrender?","Beg for Mercy", list("YES","NO"), 15 SECONDS) != "YES" || surrendering) // Additional surrender check in case they try to hold multiple TGUI
+		return FALSE
+
+	surrendering = TRUE
 
 	record_round_statistic(STATS_YIELDS)
 	changeNext_move(CLICK_CD_EXHAUSTED)
@@ -1294,10 +1296,11 @@
 	flick_overlay_view(flaggy, 150)
 	drop_all_held_items()
 	Stun(15 SECONDS)
-	visible_message("<span class='notice'>[src] yields!</span>")
+	visible_message(span_bignotice("[src] yields!"), span_boldwarning("I yield!"))
 	playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
 	toggle_cmode()
 	addtimer(VARSET_CALLBACK(src, surrendering, FALSE), 15 SECONDS)
+	return TRUE
 
 /mob/proc/stop_attack(message = FALSE)
 	if(atkswinging)
