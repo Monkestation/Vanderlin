@@ -367,7 +367,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	sellprice = 20
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/storage/cloak
 
 /obj/item/clothing/armor/leather/jerkin/belted/long
 	icon_state = "roguearmor_coat"
