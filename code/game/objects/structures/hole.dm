@@ -159,6 +159,7 @@
 
 	// Time to actually remove the item
 	user.visible_message("[user] starts to remove \the [item_to_remove] from \the [src]", "You attempt to remove \the [item_to_remove] from \the [src]")
+	playsound(src, 'sound/items/dig_shovel.ogg', 100, FALSE)
 	if(!do_after(user, 5 SECONDS, src, progress = TRUE))
 		to_chat(user, span_warning("You fail to remove \the [item_to_remove]!"))
 		return FALSE
@@ -222,6 +223,7 @@
 		if(stage != 4)
 			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
 
+		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 		if(!do_after(user, 10 SECONDS, src))
 			return
 		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
@@ -246,6 +248,7 @@
 			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
 			return
 
+		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 		if(!do_after(user, 5 SECONDS, src))
 			return
 
@@ -269,6 +272,7 @@
 			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
 			return
 
+		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 		if(!do_after(user, 5 SECONDS, src))
 			return
 		gravefence = attacking_item
