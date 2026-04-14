@@ -5374,7 +5374,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains)
 "Ib" = (
-/obj/structure/ladder/unbreakable,
+/obj/structure/ladder,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "Id" = (
@@ -13818,7 +13818,7 @@ ge
 ge
 ge
 ge
-GP
+wf
 nF
 sG
 sG
@@ -14222,7 +14222,7 @@ ge
 ge
 ge
 ge
-GP
+wf
 nF
 sG
 sG
@@ -17643,7 +17643,7 @@ mr
 ZV
 aK
 ZV
-ZV
+YS
 Iz
 Iz
 Iz
