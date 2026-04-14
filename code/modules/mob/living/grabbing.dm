@@ -790,5 +790,5 @@
 	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, span_warning("Sigh. It's not bleeding."))
 		return
-	var/drink_amt = user.mind?.has_antag_datum(/datum/antagonist/vampire) ? 80 : 10
+	var/drink_amt = ((user in user.clan?.clan_members) && !(user in user.clan.non_vampire_members)) ? 80 : 10
 	user.drinksomeblood(grabbed, sublimb_grabbed, drink_amt)

@@ -13,7 +13,7 @@
 	)
 
 /datum/job/churchling
-	title = "Churchling"
+	title = JOB_CHURCHLING
 	tutorial = "Your family were zealots. \
 	They scolded you with a studded belt and prayed like sinners \
 	every waking hour of the day they weren’t toiling in the fields. \
@@ -51,7 +51,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/churchling
-	name = "Churchling"
+	name = JOB_CHURCHLING
 	neck = /obj/item/clothing/neck/psycross/silver/divine
 	armor = /obj/item/clothing/shirt/robe
 	shirt = /obj/item/clothing/shirt/undershirt

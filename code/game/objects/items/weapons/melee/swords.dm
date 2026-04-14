@@ -675,6 +675,8 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "eorarapier"
 	item_weight = 650 GRAMS
+	SET_BASE_PIXEL(0, 0)
+	bigboy = FALSE
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh

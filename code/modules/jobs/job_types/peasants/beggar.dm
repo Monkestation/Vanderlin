@@ -16,7 +16,7 @@
 	)
 
 /datum/job/vagrant
-	title = "Beggar"
+	title = JOB_BEGGAR
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, \
 	the glances of disgust and loathing others give you is just a friendly greeting; \
 	the only reason you've not been killed already is because volfs are known to be repelled by decaying flesh. \
@@ -55,7 +55,7 @@
 
 
 /datum/outfit/vagrant
-	name = "Beggar"
+	name = JOB_BEGGAR
 
 /datum/outfit/vagrant/pre_equip(mob/living/carbon/human/H)
 	. = ..()

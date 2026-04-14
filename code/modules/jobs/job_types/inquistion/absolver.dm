@@ -17,7 +17,7 @@
 	)
 
 /datum/job/absolver
-	title = "Absolver"
+	title = JOB_ABSOLVER
 	department_flag = INQUISITION
 	faction = "Station"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -68,6 +68,9 @@
 	exp_requirements = list(
 		EXP_TYPE_INQUISITION = 600
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/view_inquisition
+	)
 
 
 // REMEMBER FLAGELLANT? REMEMBER LASZLO? THIS IS HIM NOW. FEEL OLD YET?
@@ -75,8 +78,6 @@
 /datum/job/absolver/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Sanctae", 0, "Absolver")
-
-	add_verb(spawned, /mob/living/carbon/human/proc/view_inquisition)
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()
@@ -91,8 +92,14 @@
 	species.native_language = "Old Psydonic"
 	species.accent_language = species.get_accent(species.native_language)
 
+/datum/job/absolver/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.hud_used?.shutdown_bloodpool()
+		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+
 /datum/outfit/absolver
-	name = "Absolver"
+	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
 	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser

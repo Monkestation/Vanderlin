@@ -324,21 +324,18 @@
 /atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
 	if(!direction)
 		direction = DOWN
+
 	if(!source)
 		source = get_turf(src)
 		if(!source)
 			return FALSE
+
 	if(!target)
 		target = get_step_multiz(source, direction)
 		if(!target)
 			return FALSE
 
-	if((movement_type & FLYING) && HAS_TRAIT(src, TRAIT_HOLLOWBONES))
-		var/turf/below = GET_TURF_BELOW(source)
-		if(isopenspace(below))
-			return TRUE
-
-	return !(movement_type & FLYING) && !throwing
+	return !(movement_type & (FLYING|FLOATING)) && !throwing
 
 /atom/movable/proc/onZImpact(turf/impacted, levels)
 	var/atom/highest = impacted

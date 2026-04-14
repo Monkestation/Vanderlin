@@ -142,12 +142,13 @@
 	if(!isliving(owner))
 		return FALSE
 
-	// Only stop flight if there is somewhere to go
-	// This is so you can fly on the top Z level
-	var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
-	if(above_turf && (!isopenspace(above_turf) || !owner.can_zTravel(direction = UP)))
-		owner.balloon_alert(owner, "can't fly up!")
-		return FALSE
+	if(allows_z_rise)
+		// Only stop flight if there is somewhere to go
+		// This is so you can fly on the top Z level
+		var/turf/above_turf = GET_TURF_ABOVE(get_turf(owner))
+		if(above_turf && (!isopenspace(above_turf) || !owner.can_zTravel(direction = UP)))
+			owner.balloon_alert(owner, "can't fly up!")
+			return FALSE
 
 	return can_fly()
 
@@ -187,9 +188,9 @@
 	var/turf/turf = get_turf(owner)
 
 	if(!allows_z_rise)
-		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+		ADD_TRAIT(owner, TRAIT_MOVE_FLOATING, WING_TRAIT)
 	else
-		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+		ADD_TRAIT(owner, TRAIT_MOVE_FLYING, WING_TRAIT)
 
 		var/turf/above_turf = GET_TURF_ABOVE(turf)
 		if(owner.can_zTravel(direction = UP) && isopenspace(above_turf))
@@ -251,9 +252,9 @@
 
 /datum/action/item_action/organ_action/use/flight/proc/cancel_flight()
 	if(allows_z_rise)
-		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, ORGAN_TRAIT)
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLYING, WING_TRAIT)
 	else
-		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, ORGAN_TRAIT)
+		REMOVE_TRAIT(owner, TRAIT_MOVE_FLOATING, WING_TRAIT)
 
 	if(flight_timer)
 		deltimer(flight_timer)
@@ -307,29 +308,37 @@
 /datum/action/item_action/organ_action/use/flight/proc/check_movement(datum/source)
 	SIGNAL_HANDLER
 
-	if(owner.movement_type & FLYING)
-		if(!can_fly())
-			stop_flying(owner)
-			return
+	var/flying = (owner.movement_type & FLYING)
+	var/floating = (owner.movement_type & FLOATING)
 
-		if(!owner.adjust_stamina(-3))
-			to_chat(owner, span_warning("You're too exhausted to keep flying!"))
-			stop_flying(owner)
-			return
+	if(!flying && !floating)
+		return
 
-		var/turf/this_turf = get_turf(owner)
-		var/turf/below_turf = GET_TURF_BELOW(this_turf)
-		if(shadow)
-			if(!istransparentturf(this_turf))
-				shadow.alpha= 0
-			else
-				shadow.alpha = 255
+	if(!can_fly())
+		stop_flying(owner)
+		return
 
-			if(below_turf)
-				shadow.forceMove(below_turf)
+	if(!owner.adjust_stamina(-3))
+		to_chat(owner, span_warning("You're too exhausted to keep flying!"))
+		stop_flying(owner)
+		return
+
+	if(!flying)
+		return
+
+	var/turf/this_turf = get_turf(owner)
+	var/turf/below_turf = GET_TURF_BELOW(this_turf)
+	if(shadow)
+		if(!istransparentturf(this_turf))
+			shadow.alpha= 0
 		else
-			if(below_turf && istransparentturf(this_turf))
-				shadow = new /obj/effect/flyer_shadow(below_turf, owner)
+			shadow.alpha = 255
+
+		if(below_turf)
+			shadow.forceMove(below_turf)
+	else
+		if(below_turf && istransparentturf(this_turf))
+			shadow = new /obj/effect/flyer_shadow(below_turf, owner)
 
 /datum/action/item_action/organ_action/use/flight/proc/check_laying(datum/source, new_pos, old_pos)
 	SIGNAL_HANDLER

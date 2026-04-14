@@ -1,11 +1,11 @@
 
 /datum/antagonist/bandit
-	name = "Bandit"
+	name = ROLE_BANDIT
 	roundend_category = "Bandits"
-	antagpanel_category = "Bandit"
+	antagpanel_category = ROLE_BANDIT
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_BANDIT
-	antag_hud_name = "bandit"
+	antag_hud_name = ROLE_BANDIT
 	var/tri_amt
 	var/contrib
 	antag_flags = FLAG_ANTAG_CAP_IGNORE
@@ -35,7 +35,7 @@
 			return span_boldnotice("Fellow pardoned free man.")
 
 /datum/antagonist/bandit/on_gain()
-	owner.special_role = "Bandit"
+	owner.special_role = ROLE_BANDIT
 	owner.current?.purge_combat_knowledge()
 	move_to_spawnpoint()
 	owner.current.roll_mob_stats()
@@ -69,7 +69,7 @@
 
 	owner.forget_and_be_forgotten()
 
-	for(var/datum/mind/found_mind in get_minds("Bandit"))
+	for(var/datum/mind/found_mind in get_minds(ROLE_BANDIT))
 		owner.share_identities(found_mind)
 
 	return TRUE

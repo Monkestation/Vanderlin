@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(bum_aggro, file2list('strings/rt/bumaggrolines.txt'))
 
 /mob/living/carbon/human/species/human/northern/bum/after_creation()
 	..()
-	job = "Beggar"
+	job = JOB_BEGGAR
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/vagrant)
