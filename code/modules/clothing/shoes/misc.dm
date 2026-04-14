@@ -114,6 +114,7 @@
 	icon_state = "aasimarfeet"
 	item_state = "aasimarfeet"
 	sellprice = 20
+	wetable = FALSE
 
 /obj/item/clothing/shoes/shalal
 	name = "babouche"
