@@ -167,10 +167,16 @@
 
 		// Remove either headstone or gravestone
 		if(istype(item_to_remove, /obj/item/gravedecor/headstone))
-			user.put_in_active_hand(new item_to_remove.type())
+			if(item_to_remove.sourceitem)
+				user.put_in_active_hand(new item_to_remove.sourceitem())
+			else
+				user.put_in_active_hand(new item_to_remove.type())
 			headstone = null
 		else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
-			user.put_in_active_hand(new item_to_remove.type())
+			if(item_to_remove.sourceitem)
+				user.put_in_active_hand(new item_to_remove.sourceitem())
+			else
+				user.put_in_active_hand(new item_to_remove.type())
 			gravefence = null
 
 		update_quality()
@@ -207,6 +213,8 @@
 					QDEL_NULL(src)
 
 /obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+//If you want to add in more items that arent a gravedecor subtype but do have an associated gravedecoration, add them here.
+//In the future, an associated list can be made between any non-gravedecor items, and their associated decoration. We only have one such case, so that isnt necessary.
 	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
@@ -216,11 +224,9 @@
 
 		if(!do_after(user, 10 SECONDS, src))
 			return
-
-		// TODO this needs refactored so it spawns a subtype of `gravedecor/headstone` that tracks this stick but deletes it (restored if headstone removed)
-		var/mutable_appearance/headstone_overlay = mutable_appearance('icons/turf/floors.dmi', "gravemarker1", 2.91)
-		add_overlay(headstone_overlay)
-		headstone = attacking_item.type
+		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
+		if(istype(attacking_item, /obj/item/grown/log/tree/stick))
+			headstone = /obj/item/gravedecor/headstone/crude
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
@@ -228,7 +234,7 @@
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 
 		update_quality()
-		//update_appearance(UPDATE_ICON)
+		update_appearance(UPDATE_ICON)
 		qdel(attacking_item)
 		return
 
@@ -353,10 +359,16 @@
 			cut_overlays()
 			open()
 			if(headstone)
-				new headstone.type(get_turf(src))
+				if(headstone.sourceitem)
+					new headstone.sourceitem(get_turf(src))
+				else
+					new headstone.type(get_turf(src))
 				headstone = null
 			if(gravefence)
-				new gravefence.type(get_turf(src))
+				if(gravefence.sourceitem)
+					new gravefence.sourceitem(get_turf(src))
+				else
+					new gravefence.type(get_turf(src))
 				gravefence = null
 			if(is_consecrated)	// Curses you if you don't have the graverobber trait, otherwise records you as a criminal and gives a special message.
 				if(ishuman(user))
