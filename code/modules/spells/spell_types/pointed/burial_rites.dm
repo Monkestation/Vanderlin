@@ -30,12 +30,14 @@
 	if(pacify_coffin(cast_on, owner))
 		if(istype(cast_on, /obj/structure/closet/dirthole))
 			var/obj/structure/closet/dirthole/grave = cast_on // from this point on we know it is a grave subtype
+			if(grave.headstone)
+				find_names(grave)
 			if(!grave.is_consecrated)
 				grave.is_consecrated = TRUE
 				SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 				if(grave.gravequality >= 1 && grave.gravequality <= 4)
-					cast_on.add_overlay("graveconsecrated")ZZ
+					cast_on.add_overlay("graveconsecrated")
 					owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
 				else if(grave.gravequality >= 5)
 					cast_on.icon_state = "gravedoubleconsecrated"
@@ -45,19 +47,12 @@
 			return
 		to_chat(owner, span_warning("I failed to perform the rites."))
 
-/datum/action/cooldown/spell/burial_rites/proc/find_names(obj/cast_on)
+/datum/action/cooldown/spell/burial_rites/proc/find_names(var/obj/structure/closet/dirthole/grave)
 	var/list/names = list()
-	for(var/mob/living/carbon/human/corpse in grave)
-		names +=,
-		grave_names += [corpse.realname]
-		grave.associated_name = "Here lies: [grave_names]"
-	for(var/obj/item/bodypart/head/head in coffin)
-		if(!head.brainmob)
-			continue
-		if(pacify_corpse(head.brainmob, user))
-			success = TRUE
-	for(var/atom/movable/stuffing in coffin)
-			if(isliving(stuffing) || istype(stuffing, /obj/item/bodypart/head))
-				continue
-			if(pacify_coffin(stuffing, user, deep))
-				success = TRUE
+	for(var/mob/living/carbon/human/corpse in grave.contents)
+		names += corpse.real_name
+		owner.visible_message(span_rose("Names: [names[1]]"))
+	for(var/obj/item/bodypart/head/head in grave.contents)
+		names += head.real_name
+		owner.visible_message(span_rose("Names: [names[1]]"))
+	grave.associated_name = names

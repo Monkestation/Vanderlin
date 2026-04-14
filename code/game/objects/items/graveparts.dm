@@ -35,6 +35,27 @@
 	decorationquality = 2
 	patron = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
+/obj/item/gravedecor/headstone/astrata
+	name = "astratan headstone"
+	desc = "The golden cross of Astrata, nothing less for the Sun Tyrant."
+	icon_state = "headstone_astrata"
+	decorationquality = 3
+	patron = list(/datum/patron/divine/astrata)
+
+/obj/item/gravedecor/headstone/pestra
+	name = "pestran headstone"
+	desc = "Any grave this is on is practically begging to be robbed. Maybe that's the intent."
+	icon_state = "headstone_pestra"
+	decorationquality = 2
+	patron = list(/datum/patron/divine/pestra)
+
+/obj/item/gravedecor/headstone/abyssor
+	name = "abyssorite headstone"
+	desc = "Not a common sight, most corpses are lost to his briny embrace before they can see land."
+	icon_state = "headstone_abyssor"
+	decorationquality = 2
+	patron = list(/datum/patron/divine/abyssor)
+
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
 	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."

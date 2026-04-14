@@ -63,13 +63,13 @@
 	. = ..()
 
 /obj/structure/closet/dirthole/examine(mob/user)
-	. = ..()
-	inscription += span_big(user, "Here Lies <span class'bold'>[associated_name]</span>)\n\
-    \n\
-    \ test\n\
-    \n\
-    TEST"
-
+	if(headstone)
+		if(associated_name)
+			. += "Here lies: [associated_name]"
+		if(custom_message)
+			. += "[custom_message]"
+		if(custom_message)
+			. += "'[final_words]'"
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)
@@ -191,7 +191,7 @@
 			gravefence = null
 
 		update_quality()
-		update_overlays()
+		update_appearance(UPDATE_ICON)
 		return TRUE
 
 /obj/structure/closet/dirthole/insertion_allowed(atom/movable/AM)
@@ -291,7 +291,6 @@
 		update_quality()
 		update_appearance(UPDATE_ICON)
 		return
-
 	if(!istype(attacking_item, /obj/item/weapon/shovel))
 		if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
 			attemptwatermake(user, attacking_item)
@@ -309,13 +308,8 @@
 			stage = 4
 			climb_offset = 10
 			close()
+			update_quality()
 			var/founds
-			for(var/obj/structure/closet/crate/coffin/coffin in contents)
-				gravequality += 2
-				if(coffin.consecrated)
-					gravequality += 1
-			for(var/obj/structure/closet/burial_shroud/shroud in contents)
-				gravequality += 1
 			for(var/atom/A in contents)
 				founds = TRUE
 				break
@@ -519,7 +513,6 @@
         return
     if(bonusquality)
         gravequality += bonusquality
-
     for(var/mob/living/corpse in contents)
         corpse_patron = corpse.patron
     if(headstone)
@@ -527,19 +520,19 @@
         var/heldquality = Head.decorationquality
         for(var/datum/patron/GravePatron in Head.patron)
             if(GravePatron == corpse_patron)
-                heldquality += 3
+                heldquality = 3
         gravequality += heldquality
     if(gravefence)
         var/obj/item/gravedecor/gravefence/Fence = gravefence
         var/heldquality = Fence.decorationquality
         for(var/datum/patron/GravePatron in Fence.patron)
             if(GravePatron == corpse_patron)
-                heldquality += 3
+                heldquality = 3
         gravequality += heldquality
     for(var/obj/structure/closet/crate/coffin/coffin in contents)
-        gravequality += 2
+        gravequality += 1
         if(coffin.consecrated)
-            gravequality += 1
+            gravequality += 2
     for(var/obj/structure/closet/burial_shroud/shroud in contents)
         gravequality += 1
 
@@ -602,5 +595,3 @@
 			to_chat(user, "<span class='warning'>I'm trapped!</span>")
 		return
 	container_resist(user)
-
-
