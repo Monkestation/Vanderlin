@@ -31,6 +31,10 @@
 	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
 	var/is_consecrated
 
+	var/inscription
+	var/associated_name
+	var/custom_message
+	var/final_words
 
 /obj/structure/closet/dirthole/Initialize()
 	var/turf/open/floor/dirt/T = loc
@@ -60,6 +64,12 @@
 
 /obj/structure/closet/dirthole/examine(mob/user)
 	. = ..()
+	inscription += span_big(user, "Here Lies <span class'bold'>[associated_name]</span>)\n\
+    \n\
+    \ test\n\
+    \n\
+    TEST"
+
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)

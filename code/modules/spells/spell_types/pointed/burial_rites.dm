@@ -35,7 +35,7 @@
 				SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
 				record_round_statistic(STATS_GRAVES_CONSECRATED)
 				if(grave.gravequality >= 1 && grave.gravequality <= 4)
-					cast_on.add_overlay("graveconsecrated")
+					cast_on.add_overlay("graveconsecrated")ZZ
 					owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
 				else if(grave.gravequality >= 5)
 					cast_on.icon_state = "gravedoubleconsecrated"
@@ -44,3 +44,20 @@
 					owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on], though they don't seem to be particularly effective."))
 			return
 		to_chat(owner, span_warning("I failed to perform the rites."))
+
+/datum/action/cooldown/spell/burial_rites/proc/find_names(obj/cast_on)
+	var/list/names = list()
+	for(var/mob/living/carbon/human/corpse in grave)
+		names +=,
+		grave_names += [corpse.realname]
+		grave.associated_name = "Here lies: [grave_names]"
+	for(var/obj/item/bodypart/head/head in coffin)
+		if(!head.brainmob)
+			continue
+		if(pacify_corpse(head.brainmob, user))
+			success = TRUE
+	for(var/atom/movable/stuffing in coffin)
+			if(isliving(stuffing) || istype(stuffing, /obj/item/bodypart/head))
+				continue
+			if(pacify_coffin(stuffing, user, deep))
+				success = TRUE
