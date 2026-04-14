@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/pilgrim/mastercarpenter
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/craft/crafting = 40,
+		/datum/attribute/skill/craft/carpentry = 60,
+		/datum/attribute/skill/craft/engineering = 10,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/labor/lumberjacking = 40
+	)
+
 /datum/job/advclass/pilgrim/rare/mastercarpenter
 	title = "Master Carpenter"
 	tutorial = "A true artisan in the field of woodcrafting, your skills honed by years in a formal guild. \
@@ -11,30 +34,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_INT = 1,
-		STATKEY_CON = 1
-	)
-
-	skills = list(
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 1,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/craft/crafting = 4,
-		/datum/skill/craft/carpentry = 6,
-		/datum/skill/craft/engineering = 1,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/labor/lumberjacking = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/mastercarpenter
 
 /datum/outfit/pilgrim/mastercarpenter
 	name = "Master Carpenter (Pilgrim)"

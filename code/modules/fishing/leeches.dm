@@ -80,7 +80,7 @@
 		if(completely_silent)
 			used_time = 0
 		else
-			used_time = (7 SECONDS - (H.get_skill_level(/datum/skill/misc/medicine, TRUE) * 1 SECONDS))/2
+			used_time = (7 SECONDS - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 1 SECONDS))/2
 		if(!do_after(user, used_time, H))
 			return
 		if(!H)
@@ -100,6 +100,10 @@
 /obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
+	if(bodypart?.skeletonized || !bodypart?.is_organic_limb())
+		bodypart.remove_embedded_object(src)
+		return TRUE
+
 	if(giving)
 		var/blood_given = min(BLOOD_VOLUME_MAXIMUM - user.blood_volume, blood_storage, blood_sucking)
 		user.blood_volume += blood_given

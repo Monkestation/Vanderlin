@@ -178,7 +178,7 @@
 			var/cocoon = new /obj/structure/spider/cocoon(T)
 			target.forceMove(cocoon)
 			// Very gentle healing effect that restores a lot of bloodloss. Allows the target to break out later.
-			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, 0.25)
+			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, null, 0.25)
 			finish_action(controller, TRUE, target_key)
 
 /datum/ai_behavior/cocoon_target/finish_action(datum/ai_controller/controller, succeeded, target_key)
@@ -256,9 +256,9 @@
 	. = ..()
 	//The hardier you are, the more likely you are to recover from grievous wounds.
 	var/stat_bonus = 0
-	stat_bonus += ((owner.STACON - 10 ) * 0.05)
-	stat_bonus += ((owner.STASTR - 10 ) * 0.05)
-	stat_bonus += ((owner.STAEND - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_STRENGTH) - 10 ) * 0.05)
+	stat_bonus += ((GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 10 ) * 0.05)
 	if(stat_bonus > 0)
 		healing_on_tick += stat_bonus
 		blood_healing_on_tick += (stat_bonus * 10)

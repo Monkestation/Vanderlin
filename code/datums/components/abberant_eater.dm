@@ -2,21 +2,29 @@
 	var/list/extra_foods = list()
 	var/excluding_subtypes = FALSE
 	var/list/edible_turfs = list()
+	var/list/eaten_shit = list()
+	var/keeps_items = TRUE
 
-/datum/component/abberant_eater/Initialize(list/food_list, exclude_subtypes = FALSE, list/turf_list)
+/datum/component/abberant_eater/Destroy(force)
+	. = ..()
+	QDEL_LIST(eaten_shit)
+
+/datum/component/abberant_eater/Initialize(list/food_list, exclude_subtypes = FALSE, list/turf_list, _keeps_items = TRUE)
 	if(!length(food_list))
 		return COMPONENT_INCOMPATIBLE
 
 	excluding_subtypes = exclude_subtypes
 	extra_foods = excluding_subtypes ? typecacheof(food_list, only_root_path = TRUE) : food_list
 	edible_turfs = turf_list
+	keeps_items = keeps_items
 
 /datum/component/abberant_eater/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOB_ITEM_ATTACK, PROC_REF(try_eat))
 	RegisterSignal(parent, COMSIG_LIVING_POSTBITE_SELF, PROC_REF(eat_turf))
+	RegisterSignal(parent, COMSIG_LIVING_DISEMBOWELED, PROC_REF(drop_eaten_shit))
 
 /datum/component/abberant_eater/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_POSTBITE_SELF))
+	UnregisterSignal(parent, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_POSTBITE_SELF, COMSIG_LIVING_DISEMBOWELED))
 
 /datum/component/abberant_eater/proc/try_eat(mob/living/user, mob/living/M, obj/item/source)
 	if(user.cmode)
@@ -44,8 +52,19 @@
 	SEND_SIGNAL(source, COMSIG_FOOD_EATEN, M, user)
 	SEND_SIGNAL(user, COMSIG_MOB_FOOD_EAT, source)
 	source.on_consume(user)
-	qdel(source)
+	if(keeps_items)
+		source.forceMove(user)
+		eaten_shit |= source
+	else
+		qdel(source)
+
 	return TRUE
+
+/datum/component/abberant_eater/proc/drop_eaten_shit(mob/living/user)
+	for(var/obj/item/item as anything in eaten_shit)
+		item.forceMove(get_turf(user))
+		eaten_shit -= item
+		item.on_anti_consume(user)
 
 /datum/component/abberant_eater/proc/eat_turf(mob/living/user, turf/T, finished_attack_chain)
 	if(!length(edible_turfs))
@@ -56,7 +75,7 @@
 		return
 	var/count = 0
 	while(do_after(user, rand(2.5, 1.75) SECONDS, T, display_over_user = TRUE, extra_checks = CALLBACK(src, PROC_REF(turf_check), T)) && user.adjust_stamina(7))
-		var/damage = user.STASTR * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 30 : 15) * rand(0.8, 1.2)
+		var/damage = GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 30 : 15) * rand(0.8, 1.2)
 		T.take_damage(damage, BRUTE, "stab", FALSE)
 		playsound(T, 'sound/combat/hits/onstone/stonedeath.ogg', rand(50,75), TRUE)
 		playsound(user, 'sound/misc/eat.ogg', rand(50,75), TRUE)

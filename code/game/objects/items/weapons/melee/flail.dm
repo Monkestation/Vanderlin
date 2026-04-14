@@ -17,7 +17,7 @@
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/whipsflails
+	associated_skill = /datum/attribute/skill/combat/whipsflails
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -30,6 +30,7 @@
 	grid_height = 96
 
 	weapon_special = /datum/special_intent/flail_sweep
+	item_weight = 1.5 KILOGRAMS
 
 /obj/item/weapon/flail/getonmobprop(tag)
 	. = ..()
@@ -46,6 +47,7 @@
 	name = "militia flail"
 	desc = "A lucky hit from such a flail can squash a cheap helmet along with the wearer's skull."
 	icon_state = "militiaflail"
+	item_weight = 1.5 KILOGRAMS
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
@@ -60,6 +62,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	sellprice = 10
+	item_weight = 700 GRAMS
 
 
 //................ Steel Flail ............... //
@@ -73,17 +76,20 @@
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 35
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/sflail/ancient
 	name = "ancient flail"
 	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "aflail"
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
 	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
+	item_weight = 1.4 KILOGRAMS
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
@@ -98,6 +104,7 @@
 	melt_amount = 75
 	sellprice = 50
 	last_used = 0
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/flail/psydon/Initialize(mapload)
 	. = ..()
@@ -107,6 +114,7 @@
 	name = "Consecratia"
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
+	item_weight = 1.5 KILOGRAMS
 
 
 //................ Peasant Flail ............... // A little confusing still
@@ -129,6 +137,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	sellprice = 20
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/weapon/flail/peasant/getonmobprop(tag)
 	. = ..()
@@ -163,9 +172,10 @@
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = null
-	anvilrepair = /datum/skill/craft/carpentry
+	anvilrepair = /datum/attribute/skill/craft/carpentry
 	dropshrink = 0.9
 	resistance_flags = FLAMMABLE
+	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/flail/peasantwarflail/getonmobprop(tag)
 	. = ..()
@@ -187,7 +197,8 @@
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
 	max_integrity = INTEGRITY_STRONGEST
 	slot_flags = ITEM_SLOT_BACK
-	anvilrepair = /datum/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250
+	item_weight = 4 KILOGRAMS

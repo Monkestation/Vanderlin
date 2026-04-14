@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 	dodgetime = 30
 	flee_in_pain = TRUE
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
+	headprice = 11
 
 
 /mob/living/carbon/human/species/human/northern/searaider/ambush
@@ -40,7 +41,6 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 	var/beard = pick(list(/datum/sprite_accessory/hair/facial/viking,
 						/datum/sprite_accessory/hair/facial/manly,
 						/datum/sprite_accessory/hair/facial/pick))
-	head.sellprice = 30 // 50% More than gobbo
 
 	var/datum/bodypart_feature/hair/head/new_hair = new()
 	var/datum/bodypart_feature/hair/facial/new_facial = new()
@@ -80,6 +80,24 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 		real_name = pick(file2list("strings/rt/names/human/vikingm.txt"))
 	update_body()
 
+/datum/attribute_holder/sheet/job/npc/searaider
+	attribute_variance = list(
+		STAT_CONSTITUTION = list(0, 2)
+	)
+	raw_attribute_list = list(
+		STAT_SPEED = -1,
+		STAT_ENDURANCE = 5,
+		STAT_STRENGTH = 4,
+		STAT_INTELLIGENCE = -9,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+	)
 
 /datum/outfit/job/human/species/human/northern/searaider/pre_equip(mob/living/carbon/human/H)
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -111,17 +129,5 @@ GLOBAL_LIST_INIT(searaider_aggro, file2list("strings/rt/searaideraggrolines.txt"
 			r_hand = /obj/item/weapon/sword/long/greatsword
 
 	shoes = /obj/item/clothing/shoes/boots/leather
-	H.base_speed = 9
-	H.base_constitution = rand(10,12) //so their limbs no longer pop off like a skeleton
-	H.base_endurance = 15
-	H.base_perception = 10
-	H.base_intelligence = 1
-	H.base_strength = 14
-	H.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/searaider)

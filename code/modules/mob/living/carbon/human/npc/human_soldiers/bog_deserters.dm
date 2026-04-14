@@ -94,6 +94,7 @@
 	d_intent = INTENT_PARRY
 	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK)
 
+	headprice = 16
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 
 
@@ -122,8 +123,25 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 50 // Big sellprice for these guys since they're deserters
+
+/datum/attribute_holder/sheet/job/npc/bog_deserters
+	attribute_variance = list(
+		STAT_STRENGTH = list(2, 4),
+		STAT_CONSTITUTION = list(1, 3)
+	)
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 3,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/combat/axesmaces = 40, //NPCs do not get these skills unless a mind takes them over, hopefully in the future someone can fix
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/wrestling = 40,
+		/datum/attribute/skill/combat/unarmed = 40,
+		/datum/attribute/skill/misc/athletics = 30,
+	)
 
 /datum/outfit/job/human/northern/bog_deserters/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -137,23 +155,11 @@
 		H.set_hair_style(/datum/sprite_accessory/hair/head/messy)
 		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/manly)
 	//skill Stuff
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE) //NPCs do not get these skills unless a mind takes them over, hopefully in the future someone can fix
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.base_strength = rand(12,14)
-	H.base_speed = 11
-	H.base_constitution = rand(11,13)
-	H.base_endurance = 13
-	H.base_perception = 11
-	H.base_intelligence = 10
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/bog_deserters)
 	//Chest Gear
 	add_random_deserter_cloak(H)
 	shirt = /obj/item/clothing/armor/gambeson
@@ -182,6 +188,7 @@
 	a_intent = INTENT_HELP
 	d_intent = INTENT_PARRY
 	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK)
+	headprice = 20
 
 /mob/living/carbon/human/species/human/northern/bog_deserters/better_gear/ambush
 	wander = TRUE
@@ -199,8 +206,6 @@
 	if(organ_eyes)
 		organ_eyes.eye_color = pick("27becc", "35cc27", "000000")
 	update_body()
-	var/obj/item/bodypart/head/head = get_bodypart(BODY_ZONE_HEAD)
-	head.sellprice = 50 // Big sellprice for these guys since they're deserters
 
 /datum/outfit/job/human/northern/bog_deserters/better_gear/pre_equip(mob/living/carbon/human/H)
 	//Body Stuff
@@ -213,23 +218,10 @@
 		H.set_hair_style(/datum/sprite_accessory/hair/head/messy)
 		H.set_facial_hair_style(/datum/sprite_accessory/hair/facial/manly)
 	//skill Stuff
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE) //NPCs do not get these skills unless a mind takes them over, hopefully in the future someone can fix
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/shields, 3, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	H.base_strength = rand(12,14)
-	H.base_speed = 11
-	H.base_constitution = rand(11,13)
-	H.base_endurance = 13
-	H.base_perception = 11
-	H.base_intelligence = 10
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/npc/bog_deserters)
 	//Chest Gear
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
 	add_random_deserter_armor_hard(H)

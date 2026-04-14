@@ -31,8 +31,8 @@
 	RegisterSignal(new_owner, COMSIG_ATOM_ATTACKBY, PROC_REF(attacked_item))
 	RegisterSignal(new_owner, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attacked_hand))
 
-	RegisterSignal(new_owner, interrupt_signals, PROC_REF(cancel_clash))
-	RegisterSignal(new_owner, punishmment_signals, PROC_REF(cancel_punish_clash))
+	RegisterSignals(new_owner, interrupt_signals, PROC_REF(cancel_clash))
+	RegisterSignals(new_owner, punishmment_signals, PROC_REF(cancel_punish_clash))
 
 /datum/status_effect/buff/clash/on_apply()
 	. = ..()

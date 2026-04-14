@@ -1,3 +1,29 @@
+/datum/attribute_holder/sheet/job/boltslinger
+	attribute_variance = list(
+		/datum/attribute/skill/combat/crossbows = list(0, 10),
+	)
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/athletics = 30
+	)
+
 /datum/job/advclass/mercenary/boltslinger
 	title = "Boltslinger"
 	tutorial = "A cutthroat and a soldier of fortune, your mastery of the crossbow has brought you to many battlefields, all in pursuit of mammon."
@@ -6,30 +32,7 @@
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
 
-	jobstats = list(
-		STATKEY_PER = 2,
-		STATKEY_END = 1,
-		STATKEY_STR = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/polearms = 1,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/craft/tanning = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/boltslinger
 
 	traits = list(
 		TRAIT_MEDIUMARMOR
@@ -38,7 +41,6 @@
 /datum/job/advclass/mercenary/boltslinger/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 6
-	spawned.adjust_skillrank(/datum/skill/combat/shields, pick(0,0,1))
 
 /datum/outfit/mercenary/boltslinger
 	name = "Boltslinger (Mercenary)"
@@ -50,7 +52,7 @@
 	armor = /obj/item/clothing/armor/cuirass
 	beltr = /obj/item/weapon/sword/iron
 	beltl = /obj/item/ammo_holder/quiver/bolts
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backr = /obj/item/gun/ballistic/bow/cross
 	backl = /obj/item/storage/backpack/satchel
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	pants = /obj/item/clothing/pants/tights/colored/black

@@ -87,8 +87,7 @@
 	animate(src, time = 0.15 SECONDS, pixel_w = rand(10, 15) * pick(1, -1), pixel_z = rand(10, 20) * pick(1, -1), transform = src.transform.Turn(rand(10, 20)), easing = BOUNCE_EASING)
 	animate(time = 0.15 SECONDS, pixel_w = -rand(10, 20) * pick(1, -1), pixel_z = rand(10, 20) * pick(1, -1), transform = initial(src.transform):Turn(-rand(10, 20)), easing = BOUNCE_EASING)
 	animate(time = 0.2 SECONDS, pixel_w = 0, pixel_z = 0, transform = initial(src.transform), easing = BOUNCE_EASING)
-	add_movespeed_modifier("frenzy", priority = 1, override = TRUE, multiplicative_slowdown = -2)
-	update_vision_cone()
+	add_movespeed_modifier(MOVESPEED_ID_FRENZY, priority = 1, override = TRUE, multiplicative_slowdown = -2)
 	addtimer(CALLBACK(src, PROC_REF(frenzy_off)), FRENZY_DURATION)
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/make_frenzy_ready()
@@ -97,8 +96,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/frenzy_off()
 	remove_filter("frenzy_rays")
-	remove_movespeed_modifier("frenzy")
-	update_vision_cone()
+	remove_movespeed_modifier(MOVESPEED_ID_FRENZY)
 	addtimer(CALLBACK(src, PROC_REF(make_frenzy_ready), FRENZY_COOLDOWN))
 
 /datum/action/toggle_frenzy

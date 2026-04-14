@@ -4,7 +4,7 @@
 /obj/structure/spider/attacked_by(obj/item/I, mob/living/user) //Snipping action for webs, scissors turning webs into silk fast!
 	if(user.used_intent.type != /datum/intent/snip)
 		return ..()
-	var/sewing_skill = user.get_skill_level(/datum/skill/craft/sewing, TRUE)
+	var/sewing_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing)
 	var/snip_time = 5 SECONDS - (sewing_skill * 10)
 	var/amount = rand(1, 2)
 	if(!do_after(user, snip_time))
@@ -12,7 +12,7 @@
 	for(var/i in 1 to amount)
 		new /obj/item/natural/silk (get_turf(src))
 	user.visible_message(span_notice("[user] snips [src] up into silk."))
-	user.mind.add_sleep_experience(/datum/skill/craft/sewing, (user.STAINT / 2)) //We're getting experience for harvesting silk!
+	user.mind.add_sleep_experience(/datum/attribute/skill/misc/sewing, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2)) //We're getting experience for harvesting silk!
 	playsound(src, 'sound/items/flint.ogg', 100, TRUE)
 	qdel(src)
 	return TRUE

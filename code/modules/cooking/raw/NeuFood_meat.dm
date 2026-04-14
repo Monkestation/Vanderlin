@@ -29,6 +29,7 @@
 	var/list/cannibalism_for = list()
 	tastes = list("meat" = 1)
 	gender = PLURAL
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/on_consume(mob/living/eater)
 	var/reset_eat_effect = FALSE
@@ -51,6 +52,17 @@
 	slices_num = 2
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	slice_bclass = BCLASS_CHOP
+	item_weight = 250 GRAMS
+
+/*	.............   Ribs   ................ */
+/obj/item/reagent_containers/food/snacks/meat/ribs //This should be given to large vertebrates, usually on the perfect butcher result, unless they're especially meaty.
+	ingredient_size = 2
+	name = "raw ribs"
+	icon_state = "raw_ribs"
+	slices_num = 1
+	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
+	slice_bclass = BCLASS_CHOP
+	item_weight = 400 GRAMS
 
 /*	.............   Pigflesh, strange meat, birdmeat   ................ */
 /obj/item/reagent_containers/food/snacks/meat/fatty
@@ -60,12 +72,14 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/beef
 	chopping_sound = TRUE
 	tastes = list("meat" = 1, "fat" = 1)
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/strange // Low-nutrient, kind of gross. Survival food.
 	name = "strange meat"
 	icon_state = "strange_meat"
 	slice_path = null
 	slices_num = 0
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/poultry
 	name = "plucked bird"
@@ -76,6 +90,7 @@
 	slice_sound = TRUE
 	ingredient_size = 4
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/poultry
+	item_weight = 800 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet
 	name = "bird meat"
@@ -86,6 +101,7 @@
 	nutrition = RAWMEAT_NUTRITION
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/poultry
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/chickenleg
+	item_weight = 200 GRAMS
 
 /*	........   Fish sounds   ................ */
 /obj/item/reagent_containers/food/snacks/fish
@@ -111,6 +127,7 @@
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/fatty/dwarf
 	name = "fatty manflesh" // porky
@@ -120,6 +137,7 @@
 	foodtype = RAW | MEAT | GROSS
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/fatty/kobold
 	name = "raw wyrmflesh"
@@ -130,6 +148,7 @@
 	cannibalism_for = SPECIES_CANNIBALISM_KOBOLD
 	tastes = list("gamey meat" = 1, "crunchy bits" = 1, "ash" = 1)
 	transfers_tastes = TRUE
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy
 	name = "harpy cutlet"
@@ -137,6 +156,7 @@
 	grind_results = list(/datum/reagent/organpoison/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/triton
 	name = "deepflesh"
@@ -148,6 +168,7 @@
 	become_rot_type = null
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
+	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/strange/inhumen
 	name = "foul manflesh"
@@ -155,6 +176,7 @@
 	cannibalism_for = SPECIES_CANNIBAL_MEN
 	list_reagents = list(/datum/reagent/organpoison/human = 1)
 	grind_results = list(/datum/reagent/organpoison/human = 2)
+	item_weight = 150 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/meat/organ
@@ -169,6 +191,7 @@
 	rotprocess = SHELFLIFE_TINY
 	cannibalism = TRUE
 	cannibalism_for = ALL_RACES_LIST
+	item_weight = 150 GRAMS
 	var/obj/item/organ/organ_inside
 
 /obj/item/reagent_containers/food/snacks/meat/organ/on_consume(mob/living/eater)
@@ -186,6 +209,7 @@
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
+	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 	name = "lungs"
@@ -193,6 +217,7 @@
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/organ/liver
 	name = "liver"
@@ -200,6 +225,7 @@
 	list_reagents = list(/datum/reagent/organpoison = 1)
 	grind_results = list(/datum/reagent/organpoison = 2)
 	nutrition = RAWMEAT_NUTRITION
+	item_weight = 300 GRAMS
 
 /*	........   Cooked food template   ................ */ // No choppping double cooking etc prefixed
 /obj/item/reagent_containers/food/snacks/cooked
@@ -211,6 +237,7 @@
 	filling_color = "#8f433a"
 	foodtype = MEAT
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/meat
+	item_weight = 200 GRAMS
 
 /*-----------------------\
 | Mince & Sausage making |
@@ -227,6 +254,7 @@
 	rotprocess = SHELFLIFE_TINY
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/mince
 	nutrition = MINCE_NUTRITION
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/mince/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/mess(get_turf(src))
@@ -285,6 +313,7 @@
 	eat_effect = null
 	rotprocess = SHELFLIFE_TINY
 	faretype = FARE_POOR
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett/slice
 	name = "grenzel mett"
@@ -293,6 +322,7 @@
 	slices_num = FALSE
 	slice_path = FALSE
 	nutrition = (MINCE_NUTRITION + VEGGIE_NUTRITION) / 3
+	item_weight = 50 GRAMS
 
 /*	..................   Sausage & Wiener   ................... */
 /obj/item/reagent_containers/food/snacks/meat/sausage
@@ -301,9 +331,9 @@
 	ingredient_size = 1
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/sausage
 	nutrition = RAWMEAT_NUTRITION
+	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/sausage/wiener
 	name = "raw wiener"
 	nutrition = FATTYMEAT_NUTRITION
-
-
+	item_weight = 120 GRAMS

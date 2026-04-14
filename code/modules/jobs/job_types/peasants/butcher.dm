@@ -1,5 +1,22 @@
+/datum/attribute_holder/sheet/job/butcher
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = -1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/cooking = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/labor/taming = 50,
+		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/misc/riding = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/labor/butchering = 50
+	)
+
 /datum/job/butcher
-	title = "Butcher"
+	title = JOB_BUTCHER
 	tutorial = "Some say youre a strange individual, \
 	some say youre a cheat while some claim you are a savant in the art of sausage making. \
 	Without your skilled hands and knifework most of the livestock around the town would be wasted."
@@ -12,38 +29,20 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/butcher
 	outfit = /datum/outfit/beastmaster
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
-
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 2,
-		STATKEY_INT = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/cooking = 2,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/labor/taming = 5,
-		/datum/skill/craft/tanning = 2,
-		/datum/skill/misc/riding = 1,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/labor/butchering = 5
-	)
 
 	traits = list(
 		TRAIT_STEELHEARTED
 	)
 
 /datum/outfit/beastmaster
-	name = "Butcher"
+	name = JOB_BUTCHER
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/meatbag
 	beltl = /obj/item/key/butcher

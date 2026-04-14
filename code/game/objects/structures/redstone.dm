@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/obj/item/contraption/linker/multitool = I
 	if(!multitool.current_charge)
 		return
-	if(user.get_skill_level(/datum/skill/craft/engineering) < 1)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) < 1)
 		to_chat(user, span_warning("I have no idea how to use [multitool]!"))
 		return
 	user.visible_message("[user] starts tinkering with [src].", "You start tinkering with [src].")
@@ -77,6 +77,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 3000
+	// reduced by 1 second for each strength point
+	var/pulltime = 10 SECONDS
 	redstone_structure = TRUE
 	var/toggled = FALSE
 
@@ -84,7 +86,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = 10 SECONDS - (L.STASTR * 1 SECONDS)
+		var/used_time = pulltime - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		if(do_after(user, used_time))
@@ -102,7 +104,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		user.visible_message("<span class='warning'>[user] kicks the lever!</span>")
 		user.log_message("kicked the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-		if(prob(L.STASTR * 4))
+		if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 4))
 			for(var/obj/structure/structure in redstone_attached)
 				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 			trigger_wire_network(user)
@@ -136,7 +138,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/mob/living/L = user
 	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
-		if(L.STAPER + bonuses < hidden_dc)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
 	L.changeNext_move(CLICK_CD_MELEE)
 	user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
@@ -190,7 +192,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/repeater/attack_hand(mob/user)
 	. = ..()
-	if(user.get_skill_level(/datum/skill/craft/engineering) < 1)
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) < 1)
 		to_chat(user, span_warning("I have no idea how to use [src]!"))
 		return
 	if(user.used_intent.type == INTENT_HARM)
@@ -348,7 +350,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	return TRUE
 
 /obj/structure/activator/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!containment && (istype(I, /obj/item/gun/ballistic/revolver/grenadelauncher) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
+	if(!containment && (istype(I, /obj/item/gun/ballistic) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
 		if(!user.transferItemToLoc(I, src))
 			return ..()
 		containment = I
@@ -374,12 +376,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		var/turf/front = get_step(src, dir)
 		S.set_up(1, 1, front)
 		S.start()
-	if(istype(containment, /obj/item/gun/ballistic/revolver/grenadelauncher))
+	if(istype(containment, /obj/item/gun/ballistic))
 		if(!ammo)
 			return
 		if(ammo.ammo_list.len)
-			var/obj/item/gun/ballistic/revolver/grenadelauncher/B = containment
-			var/obj/item/ammo_box/gun_magazine = B.mag_type
+			var/obj/item/gun/ballistic/B = containment
+			var/obj/item/ammo_box/gun_magazine = B.accepted_magazine_type
 			var/obj/item/ammo_casing/caseless/gun_ammo = initial(gun_magazine?.ammo_type)
 			for(var/obj/item/ammo_casing/BT in ammo.ammo_list)
 				if(istype(BT, gun_ammo))
@@ -402,11 +404,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/togg = FALSE
 	var/base_state = "floorhatch"
 	resistance_flags = INDESTRUCTIBLE
-/*
+
 /obj/structure/floordoor/Initialize()
-	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)
+	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
-*/
+
 /obj/structure/floordoor/atom_break(damage_flag)
 	. = ..()
 	obj_flags = null
@@ -442,7 +445,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/delay2close = 0
 	resistance_flags = INDESTRUCTIBLE
 	no_over_text = TRUE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	redstone_structure = TRUE
 
 /obj/structure/floordoor/gatehatch/Initialize()
@@ -493,6 +496,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/changing_state = FALSE
 	layer = ABOVE_OPEN_TURF_LAYER
 	resistance_flags = INDESTRUCTIBLE
+	var/vol = 100
+
+/obj/structure/kybraxor/Initialize()
+	. = ..()
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 
 /obj/structure/kybraxor/redstone_triggered(mob/user)
 	if(changing_state)
@@ -502,13 +510,13 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	changing_state = TRUE
 	openn = !openn
 	if(openn)
-		playsound(src, 'sound/misc/kybraxorop.ogg', 100, FALSE)
+		playsound(src, 'sound/misc/kybraxorop.ogg', vol, FALSE)
 		flick("kybraxoropening",src)
 		sleep(40)
 		icon_state = "kybraxor0"
 		changing_state = FALSE
 	else
-		playsound(src, 'sound/misc/kybraxor.ogg', 100, FALSE)
+		playsound(src, 'sound/misc/kybraxor.ogg', vol, FALSE)
 		flick("kybraxorclosing",src)
 		sleep(40)
 		icon_state = "kybraxor1"

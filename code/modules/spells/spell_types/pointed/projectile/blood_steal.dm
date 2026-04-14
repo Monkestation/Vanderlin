@@ -4,7 +4,7 @@
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/vlightning.ogg'
 
-	associated_skill = /datum/skill/magic/blood
+	associated_skill = /datum/attribute/skill/magic/blood
 	attunements = list(
 		/datum/attunement/blood = 0.7,
 	)

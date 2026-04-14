@@ -1,5 +1,5 @@
 /datum/artificer_recipe
-	appro_skill = /datum/skill/craft/engineering
+	appro_skill = /datum/attribute/skill/craft/engineering
 
 // --------- GENERAL -----------
 
@@ -61,6 +61,7 @@
 /datum/artificer_recipe/general/locks
 	name = "5x Custom Locks"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/customlock
 	hammers_per_item = 5
 	craftdiff = 1
@@ -69,6 +70,7 @@
 /datum/artificer_recipe/general/keys
 	name = "5x Blank Custom Keys"
 	required_item = /obj/item/ingot/bronze
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	created_item = /obj/item/key/custom
 	hammers_per_item = 5
 	craftdiff = 1
@@ -114,6 +116,7 @@
 	name = "3x Lockpicks"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpick
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	created_amount = 3
 	craftdiff = 2
@@ -122,6 +125,7 @@
 	name = "Lockpick ring"
 	required_item = /obj/item/ingot/iron
 	created_item = /obj/item/lockpickring
+	appro_skill = /datum/attribute/skill/craft/locksmithing
 	hammers_per_item = 5
 	craftdiff = 2
 
@@ -142,7 +146,7 @@
 /datum/artificer_recipe/weapons/crossbow
 	name = "Crossbow (+1 Steel) (+2 Fibers)"
 	required_item = /obj/item/natural/wood/plank
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	created_item = /obj/item/gun/ballistic/bow/cross
 	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/natural/fibers = 2)
 	hammers_per_item = 7
 	craftdiff = 4
@@ -158,7 +162,7 @@
 /datum/artificer_recipe/weapons/airgun
 	name = "Airgun (+2 Cured Leather) (+3 Bronze) (+4 Metal Gear)"
 	required_item = /obj/item/ingot/steel
-	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/airgun
+	created_item = /obj/item/gun/ballistic/airgun
 	additional_items = list(/obj/item/natural/hide/cured = 2, /obj/item/ingot/bronze = 3, /obj/item/gear/metal = 4)
 	hammers_per_item = 10
 	craftdiff = 5

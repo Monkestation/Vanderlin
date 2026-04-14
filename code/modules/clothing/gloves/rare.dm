@@ -10,8 +10,8 @@
 	blocksound = PLATEHIT
 	body_parts_covered = HANDS
 	blade_dulling = DULLING_BASH
-	sewrepair = FALSE
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = null
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
 
@@ -28,13 +28,13 @@
 	desc = "Plate gauntlets of mystic dark elven alloy, lightweight yet incredibly protective. Typically worn by elite bladesingers."
 	icon_state = "elfhand"
 	allowed_race = RACES_PLAYER_ELF_ALL
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 /obj/item/clothing/gloves/rare/elfplate/welfplate
 	name = "elvish plate gauntlets"
 	desc = "Plate gauntlets of mystic elven alloy, lightweight yet incredibly protective. Typically worn by elite bladesingers."
 	icon_state = "welfhand"
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 /obj/item/clothing/gloves/rare/dwarfplate
 	name = "dwarvish plate gauntlets"
@@ -42,7 +42,7 @@
 	icon_state = "dwarfhand"
 	allowed_race = list(SPEC_ID_DWARF)
 	allowed_sex = list(MALE, FEMALE)
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 /obj/item/clothing/gloves/rare/grenzelplate
 	name = "grenzelhoftian plate gauntlets"
@@ -50,7 +50,7 @@
 	icon_state = "human_swordhand"
 	allowed_race = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	allowed_sex = list(MALE)
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS
 
 /obj/item/clothing/gloves/rare/zaladplate
 	name = "kataphractoe claw gauntlets"
@@ -58,4 +58,4 @@
 	icon_state = "human_spearhand"
 	allowed_race = list(SPEC_ID_HUMEN)
 	allowed_sex = list(MALE)
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 1.65 KILOGRAMS

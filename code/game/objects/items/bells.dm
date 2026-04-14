@@ -12,6 +12,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 5
 	hitsound = 'sound/items/bsmith1.ogg'
+	item_weight = 600 GRAMS
 	COOLDOWN_DECLARE(bell_ring)
 
 /obj/item/handheld_bell/attack_self(mob/user, list/modifiers)
@@ -149,6 +150,7 @@
 	dropshrink = 0.5
 	pickup_sound = SFX_JINGLE_BELLS
 	drop_sound = SFX_JINGLE_BELLS
+	item_weight = 100 GRAMS
 
 /obj/item/jingle_bells/Initialize()
 	. = ..()

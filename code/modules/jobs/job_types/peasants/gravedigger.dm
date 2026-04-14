@@ -1,5 +1,24 @@
+/datum/attribute_holder/sheet/job/undertaker
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 2,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		STAT_FORTUNE = -1,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20, //Wrestling the deadites
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/labor/mathematics = 20
+	)
+
 /datum/job/undertaker
-	title = "Gravetender"
+	title = JOB_GRAVETENDER
 	tutorial = "As a servant of Necra, you embody the sanctity of her domain, \
 	ensuring the dead rest peacefully within the earth. \
 	You are the bane of grave robbers and necromancers, \
@@ -19,31 +38,13 @@
 	outfit = /datum/outfit/undertaker
 	give_bank_account = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
+	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_INT = 2,
-		STATKEY_END = 2,
-		STATKEY_PER = -1,
-		STATKEY_LCK = -1
-	)
-
-	skills = list(
-		/datum/skill/craft/sewing = 2,
-		/datum/skill/misc/medicine = 2,
-		/datum/skill/combat/polearms = 2,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 2, //Wrestling the deadites
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/magic/holy = 3,
-		/datum/skill/labor/mathematics = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/undertaker
 
 	traits = list(
 		TRAIT_DEADNOSE,
@@ -63,7 +64,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/undertaker
-	name = "Gravetender"
+	name = JOB_GRAVETENDER
 	head = /obj/item/clothing/head/padded/deathshroud
 	neck = /obj/item/clothing/neck/psycross/silver/divine/necra
 	pants = /obj/item/clothing/pants/trou/leather/mourning

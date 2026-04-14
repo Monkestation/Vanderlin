@@ -7,7 +7,7 @@
 	if(!isliving(owner) || !owner.mind)
 		return
 
-	var/confirm = browser_alert(owner, "Are you ready to embrace death? You will not be able to be revived.", "Embrace Death", DEFAULT_INPUT_CHOICES)
+	var/confirm = tgui_alert(owner, "Are you ready to embrace death? You will not be able to be revived.", "Embrace Death", DEFAULT_INPUT_CHOICES)
 	if(QDELETED(src) || QDELETED(owner))
 		return
 

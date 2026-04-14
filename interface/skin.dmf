@@ -358,7 +358,7 @@ window "stonekeep_prefwin"
 		anchor2 = -1,-1
 		background-color = none
 		is-visible = false
-		saved-params = "pos;is-minimized;is-maximized"
+		saved-params = "pos"
 		statusbar = false
 		can-resize = true
 		icon = 'icons\\tg_32.png'
@@ -370,11 +370,12 @@ window "stonekeep_prefwin"
 		anchor2 = 75,100
 		background-color = none
 		saved-params = ""
+		zoom: 1
 	elem "character_preview_map"
 		type = MAP
 		pos = 30,155
 		size = 282x237
-		anchor1 = 50,100
+		anchor2 = 35,50
 		right-click = true
 		saved-params = "zoom;letterbox;zoom-mode"
 

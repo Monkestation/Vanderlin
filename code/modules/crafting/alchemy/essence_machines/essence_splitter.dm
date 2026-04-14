@@ -216,9 +216,9 @@
 
 	user.visible_message(span_info("The essence splitter sparks."))
 
-	var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
-	var/amt2raise = (user.STAINT * precursors.len) / 2
-	user.adjust_experience(/datum/skill/craft/alchemy, amt2raise * boon, FALSE)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+	var/amt2raise = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * precursors.len) / 2
+	user.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
 
 /obj/machinery/essence/splitter/examine(mob/user)
 	. = ..()

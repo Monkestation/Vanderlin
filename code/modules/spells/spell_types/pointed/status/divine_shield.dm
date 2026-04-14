@@ -12,7 +12,7 @@
 	cast_range = 3
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
 
 	self_cast_possible = FALSE
@@ -36,7 +36,7 @@
 	id = "divine_shield"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/divine_shield
 	duration = SHIELD_DURATION
-	effectedstats = list(STATKEY_CON = 3)
+	effectedstats = list(STAT_CONSTITUTION = 3)
 	var/static/mutable_appearance/shielded = mutable_appearance('icons/effects/effects.dmi', "shieldsparkles")
 	var/mob/living/carbon/protector_mob
 	COOLDOWN_DECLARE(message_cooldown)
@@ -91,7 +91,7 @@
 	id = "divine_shield_r"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/divine_shield
 	duration = SHIELD_DURATION
-	effectedstats = list(STATKEY_CON = -2)
+	effectedstats = list(STAT_CONSTITUTION = -2)
 
 /atom/movable/screen/alert/status_effect/debuff/divine_shield
 	name = "Divine Shield"

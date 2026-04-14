@@ -143,7 +143,7 @@
 		if("View Details")
 			project.show_details(user)
 		if("Cancel Project")
-			if(browser_alert(user, "Cancel [project.display_name]?<BR>All invested vitae will be refunded.", "CANCELLATION", list("Yes", "No")) == "Yes")
+			if(tgui_alert(user, "Cancel [project.display_name]?<BR>All invested vitae will be refunded.", "CANCELLATION", list("Yes", "No")) == "Yes")
 				cancel_project(project_type)
 
 /obj/structure/vampire/bloodpool/proc/complete_project(project_type)
@@ -196,7 +196,7 @@
 	return TRUE
 
 /datum/vampire_project/proc/confirm_start(mob/living/user)
-	return browser_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
+	return tgui_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
 
 /datum/vampire_project/proc/on_start(mob/living/user)
 	return
@@ -268,8 +268,15 @@
 		if(lord && !lord.ascended)
 			var/mob/living/carbon/human/lord_body = user
 			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-			for(var/S in MOBSTATS)
-				lord_body.change_stat(S, 2)
+			lord_body.set_stat_modifier("[type]", list(
+				STAT_CONSTITUTION = 2,
+				STAT_ENDURANCE = 2,
+				STAT_FORTUNE = 2,
+				STAT_INTELLIGENCE = 2,
+				STAT_PERCEPTION = 2,
+				STAT_SPEED = 2,
+				STAT_STRENGTH = 2,
+			))
 			lord_body.maxbloodpool += 1000
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth
 			bloodpool.available_project_types += /datum/vampire_project/power_growth_2
@@ -288,8 +295,15 @@
 		if(lord && !lord.ascended)
 			var/mob/living/carbon/human/lord_body = user
 			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-			for(var/S in MOBSTATS)
-				lord_body.change_stat(S, 2)
+			lord_body.set_stat_modifier("[type]", list(
+				STAT_CONSTITUTION = 2,
+				STAT_ENDURANCE = 2,
+				STAT_FORTUNE = 2,
+				STAT_INTELLIGENCE = 2,
+				STAT_PERCEPTION = 2,
+				STAT_SPEED = 2,
+				STAT_STRENGTH = 2,
+			))
 			lord_body.maxbloodpool += 1000
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth_2
 			bloodpool.available_project_types += /datum/vampire_project/power_growth_3
@@ -308,8 +322,17 @@
 		if(lord && !lord.ascended)
 			var/mob/living/carbon/human/lord_body = user
 			to_chat(user, span_greentext("My power grows through collective sacrifice."))
-			for(var/S in MOBSTATS)
-				lord_body.change_stat(S, 2)
+
+
+			lord_body.set_stat_modifier("[type]", list(
+				STAT_CONSTITUTION = 2,
+				STAT_ENDURANCE = 2,
+				STAT_FORTUNE = 2,
+				STAT_INTELLIGENCE = 2,
+				STAT_PERCEPTION = 2,
+				STAT_SPEED = 2,
+				STAT_STRENGTH = 2,
+			))
 			lord_body.maxbloodpool += 1000
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth_3
 			bloodpool.available_project_types += /datum/vampire_project/power_growth_4
@@ -327,8 +350,15 @@
 		var/datum/antagonist/vampire/lord/lord = user.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
 		if(lord && !lord.ascended)
 			var/mob/living/carbon/human/lord_body = user
-			for(var/S in MOBSTATS)
-				lord_body.change_stat(S, 2)
+			lord_body.set_stat_modifier("[type]", list(
+				STAT_CONSTITUTION = 2,
+				STAT_ENDURANCE = 2,
+				STAT_FORTUNE = 2,
+				STAT_INTELLIGENCE = 2,
+				STAT_PERCEPTION = 2,
+				STAT_SPEED = 2,
+				STAT_STRENGTH = 2,
+			))
 			lord_body.maxbloodpool += 1000
 			to_chat(user, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
 			lord.ascended = TRUE
@@ -338,8 +368,15 @@
 				if(!subordinate_body)
 					continue
 				subordinate_body.maxbloodpool += 1000
-				for(var/S in MOBSTATS)
-					subordinate_body.change_stat(S, 2)
+				subordinate_body.set_stat_modifier("[type]", list(
+					STAT_CONSTITUTION = 2,
+					STAT_ENDURANCE = 2,
+					STAT_FORTUNE = 2,
+					STAT_INTELLIGENCE = 2,
+					STAT_PERCEPTION = 2,
+					STAT_SPEED = 2,
+					STAT_STRENGTH = 2,
+				))
 			bloodpool.available_project_types -= /datum/vampire_project/power_growth_4
 			break
 /datum/vampire_project/amulet_crafting

@@ -117,6 +117,7 @@
 #define STATS_PEOPLE_MOCKED "people_mocked"
 #define STATS_CRITS_MADE "crits_made"
 #define STATS_SONGS_PLAYED "songs_played"
+#define STATS_CRUEL_PRANKS "cruel_pranks"
 
 // Malum
 #define STATS_MASTERWORKS_FORGED "masterworks_forged"
@@ -222,6 +223,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_GAMES_RIGGED = 0,
 	STATS_PEOPLE_MOCKED = 0,
 	STATS_CRITS_MADE = 0,
+	STATS_CRUEL_PRANKS = 0,
 	STATS_ROCKS_MINED = 0,
 	STATS_CRAFT_SKILLS = 0,
 	STATS_ABYSSOR_REMEMBERED = 0,

@@ -36,7 +36,7 @@
 
 /datum/objective/personal/abyssor_splash/reward_owner()
 	. = ..()
-	owner.current.adjust_stat_modifier(STATMOD_ABYSSOR_BLESSING, STATKEY_STR, 1)
+	owner.current.adjust_stat_modifier(STATMOD_ABYSSOR_BLESSING, list(STAT_STRENGTH =  1))
 
 /datum/objective/personal/abyssor_splash/update_explanation_text()
 	explanation_text = "Abyssor is RAGING! Splash some ingrate who forgot his name with a bucket full of water!"

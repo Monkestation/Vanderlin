@@ -287,3 +287,20 @@
 
 #undef SCRAMBLE_CACHE_LEN
 #undef SENTENCE_CACHE_LEN
+
+/obj/item/language_tester
+	name = "Speech calibration tool"
+	desc = "One press of this device will say a message in all known languages."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "multitool"
+	speech_span = null
+
+/obj/item/language_tester/attack_self(mob/user, list/modifiers)
+	. = ..()
+	for(var/datum/language/lang as anything in GLOB.all_languages)
+		lang = GLOB.language_datum_instances[lang]
+		say("This is [lang.name]!", spans = lang.spans, language = lang.type)
+
+/obj/item/language_tester/attack_self_secondary(mob/user, list/modifiers)
+	. = ..()
+	user.grant_all_languages()

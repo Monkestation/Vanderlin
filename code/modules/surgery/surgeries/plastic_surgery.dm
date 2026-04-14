@@ -20,8 +20,8 @@
 	possible_locs = list(BODY_ZONE_HEAD)
 	time = 6.4 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_EXPERT
+	skill_min = SKILL_RANK_APPRENTICE
+	skill_median = SKILL_RANK_EXPERT
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	user.visible_message(span_notice("[user] begins to alter [target]'s appearance."), span_notice("I begin to alter [target]'s appearance..."))

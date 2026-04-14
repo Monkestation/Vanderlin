@@ -87,6 +87,7 @@
 	//yes, we register the signal to the top atom too, this is intentional and ensures contained lighting updates properly
 	if(ismovable(new_atom_host) && new_atom_host == source_atom)
 		RegisterSignal(new_atom_host, COMSIG_MOVABLE_MOVED, PROC_REF(update_host_lights))
+	RegisterSignal(new_atom_host, COMSIG_TURF_NO_LONGER_BLOCK_LIGHT, PROC_REF(force_update))
 	return TRUE
 
 ///remove this light source from old_atom_host's light_sources list, unsetting movement registrations
@@ -97,6 +98,7 @@
 	LAZYREMOVE(old_atom_host.light_sources, src)
 	if(ismovable(old_atom_host) && old_atom_host == source_atom)
 		UnregisterSignal(old_atom_host, COMSIG_MOVABLE_MOVED)
+	UnregisterSignal(old_atom_host, COMSIG_TURF_NO_LONGER_BLOCK_LIGHT)
 	return TRUE
 
 ///signal handler for when our host atom moves and we need to update our effects

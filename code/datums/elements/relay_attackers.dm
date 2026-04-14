@@ -10,8 +10,8 @@
 	if (!HAS_TRAIT(target, TRAIT_RELAYING_ATTACKER))
 		// Boy this sure is a lot of ways to tell us that someone tried to attack us
 		RegisterSignal(target, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-		RegisterSignal(target, list(COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_ATTACK_PAW), PROC_REF(on_attack_generic))
-		RegisterSignal(target, list(COMSIG_ATOM_ATTACK_ANIMAL), PROC_REF(on_attack_npc))
+		RegisterSignals(target, list(COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_ATTACK_PAW), PROC_REF(on_attack_generic))
+		RegisterSignal(target, COMSIG_ATOM_ATTACK_ANIMAL, PROC_REF(on_attack_npc))
 		RegisterSignal(target, COMSIG_ATOM_BULLET_ACT, PROC_REF(on_bullet_act))
 		RegisterSignal(target, COMSIG_ATOM_HITBY, PROC_REF(on_hitby))
 	ADD_TRAIT(target, TRAIT_RELAYING_ATTACKER, REF(src))
@@ -26,6 +26,7 @@
 		COMSIG_ATOM_BULLET_ACT,
 		COMSIG_ATOM_HITBY,
 	))
+	REMOVE_TRAIT(source, TRAIT_RELAYING_ATTACKER, REF(src))
 
 /datum/element/relay_attackers/proc/on_attackby(atom/target, obj/item/weapon, mob/attacker, list/modifiers)
 	SIGNAL_HANDLER

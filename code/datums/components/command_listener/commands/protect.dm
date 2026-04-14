@@ -8,9 +8,15 @@
 	target_name = browser_input_text(issuer, "Enter the name of the person to protect:", "Protect Target", max_length = MAX_NAME_LEN)
 	if(!target_name)
 		return FALSE
+	if(!issuer.say("Protect [target_name]."))
+		return FALSE
+	if(!(automaton in get_hearers_in_view(DEFAULT_MESSAGE_RANGE, issuer)))
+		return FALSE
 	return TRUE
 
 /datum/follower_command/protect/execute(mob/living/carbon/human/automaton, mob/living/issuer)
+	playsound(automaton, 'sound/vo/automaton/commandreceived.ogg', 70)
+	automaton.say("COMMAND RECEIVED: Protecting target.", forced = TRUE)
 	update_overlays(automaton)
 	update_timer = addtimer(CALLBACK(src, PROC_REF(update_overlays), automaton), 5 SECONDS, TIMER_STOPPABLE | TIMER_LOOP)
 

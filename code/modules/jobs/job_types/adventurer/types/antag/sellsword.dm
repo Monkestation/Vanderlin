@@ -1,3 +1,27 @@
+/datum/attribute_holder/sheet/job/sellsword
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/craft/carpentry = 10,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+	)
+
 /datum/job/advclass/bandit/sellsword //Strength class, starts with axe or flails and medium armor training
 	title = "Sellsword"
 	tutorial = "Perhaps a mercenary, perhaps a deserter - at one time, you killed for a master in return for gold. Now you live with no such master over your head - and take what you please."
@@ -7,40 +31,17 @@
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 2,
-		STATKEY_END = 2,
-		STATKEY_CON = 1,
-		STATKEY_SPD = 1,
-	)
-
-	skills = list(
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/whipsflails = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 2,
-		/datum/skill/combat/crossbows = 3,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/craft/carpentry = 1,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/craft/sewing = 1,
-		/datum/skill/misc/medicine = 1,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/sellsword
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 	)
 
-/datum/job/advclass/bandit/sellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/bandit/sellsword/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/weapons = list(
-		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow),
+		"Spear & Crossbow" = list(/obj/item/weapon/polearm/spear/billhook,  /obj/item/gun/ballistic/bow/cross),
 		"Sword & Buckler" = list(/obj/item/weapon/sword , /obj/item/weapon/shield/tower/buckleriron)
 	)
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")

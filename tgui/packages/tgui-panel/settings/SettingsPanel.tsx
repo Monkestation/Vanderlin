@@ -43,7 +43,7 @@ export function SettingsPanel(props) {
           </Tabs>
         </Section>
       </Stack.Item>
-      <Stack.Item grow basis={0}>
+      <Stack.Item grow basis={0} minWidth={0}>
         {activeTab === 'general' && <SettingsGeneral />}
         {activeTab === 'chatPage' && <ChatPageSettings />}
         {activeTab === 'textHighlight' && <TextHighlightSettings />}

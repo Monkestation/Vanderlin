@@ -7,7 +7,7 @@
 	icon_state = "welly"
 	anchored = TRUE
 	density = TRUE
-	opacity = 0
+	opacity = FALSE
 	climb_time = 40
 	climbable = TRUE
 	layer = 2.91

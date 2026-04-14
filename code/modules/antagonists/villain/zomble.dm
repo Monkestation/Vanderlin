@@ -22,7 +22,7 @@
 	var/list/base_intents
 	var/datum/language_holder/prev_language
 	var/datum/patron/patron
-	var/stored_skills
+	var/datum/attribute_holder/stored_holder
 	var/stored_experience
 	/// Whether or not we have been turned
 	var/has_turned = FALSE
@@ -91,10 +91,16 @@
 	base_intents = zombie.base_intents
 	old_cmode_music = zombie.cmode_music
 	patron = zombie.patron
-	stored_skills = owner.current.ensure_skills().known_skills.Copy()
-	stored_experience = owner.current.skills?.skill_experience.Copy()
-	owner.current.skills?.known_skills = list()
-	owner.current.skills?.skill_experience = list()
+	stored_holder = owner.current.attributes
+	owner.current.attributes = new /datum/attribute_holder(owner.current)
+
+	var/list/stat_values = list()
+	for(var/attr in stored_holder.attribute_list)
+		if(!ispath(attr, STAT))
+			continue
+		stat_values[attr] = stored_holder.attribute_list[attr] - ATTRIBUTE_DEFAULT
+	owner.current.set_stat_modifier("stored_stats", stat_values)
+
 	zombie.cmode_music ='sound/music/cmode/combat_weird.ogg'
 	zombie.bloodpool = 0 // Deadites have no vitae to drain from
 	zombie.candodge = FALSE
@@ -131,15 +137,17 @@
 	zombie.set_patron(patron)
 	zombie.candodge = TRUE
 	zombie.canparry = TRUE
-	owner.current.skills?.known_skills = stored_skills
-	owner.current.skills?.skill_experience = stored_experience
+
+	qdel(owner.current.attributes)
+	owner.current.attributes = stored_holder
+
 	for(var/trait in traits_zombie)
 		REMOVE_TRAIT(zombie, trait, "[type]")
 	zombie.remove_client_colour(/datum/client_colour/monochrome)
 	if(has_turned && become_rotman)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STATKEY_CON, -5)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STATKEY_SPD, -5)
-		zombie.set_stat_modifier(TRAIT_ROTMAN, STATKEY_INT, -3)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_CONSTITUTION, -5)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_SPEED, -5)
+		zombie.set_stat_modifier(TRAIT_ROTMAN, STAT_INTELLIGENCE, -3)
 		for(var/trait in traits_rotman)
 			ADD_TRAIT(zombie, trait, "[type]")
 		to_chat(zombie, span_green("I no longer crave flesh... <i>But I still feel ill.</i>"))
@@ -219,10 +227,10 @@
 	for(var/datum/status_effect/effect in zombie.status_effects) //necessary to prevent exploits
 		zombie.remove_status_effect(effect)
 
-	zombie.modifier_set_stat_to("[type]", STATKEY_STR, 12)
-	zombie.modifier_set_stat_to("[type]", STATKEY_SPD, 1)
-	zombie.modifier_set_stat_to("[type]", STATKEY_INT, 1)
-	zombie.modifier_set_stat_to("[type]", STATKEY_CON, 15)
+	zombie.modifier_set_stat_to("[type]", STAT_STRENGTH, 12)
+	zombie.modifier_set_stat_to("[type]", STAT_SPEED, 1)
+	zombie.modifier_set_stat_to("[type]", STAT_INTELLIGENCE, 1)
+	zombie.modifier_set_stat_to("[type]", STAT_CONSTITUTION, 15)
 
 	zombie.bloodpool = 0 // Again, just in case.
 

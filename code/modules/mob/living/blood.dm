@@ -178,7 +178,7 @@
 	// For each CON above 10, we bleed slower.
 	// Consequently, for each CON under 10 we bleed faster.
 	var/con_modifier = 1
-	var/our_con = STACON
+	var/our_con = GET_MOB_ATTRIBUTE_VALUE(src, STAT_CONSTITUTION)
 	if(our_con != 10)
 		con_modifier = our_con - 10
 
@@ -336,6 +336,7 @@
 	splatter.transfer_mob_blood_dna(src)
 	splatter.update_appearance(UPDATE_ICON_STATE)
 	T?.pollute_turf(/datum/pollutant/metallic_scent, 30)
+	return TRUE
 
 /mob/living/proc/add_drip_floor(turf/T, amt)
 	if(!iscarbon(src))
@@ -379,7 +380,12 @@
 				var/obj/effect/decal/cleanable/blood/drip/splatter = new /obj/effect/decal/cleanable/blood/drip(T, blood.color)
 				splatter.transfer_mob_blood_dna(src)
 				splatter.update_appearance(UPDATE_ICON_STATE)
+	return TRUE
+
+/mob/living/carbon/human/add_splatter_floor(turf/T, amt)
+	if(!(NOBLOOD in dna.species.species_traits))
+		. = ..()
 
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
 	if(!(NOBLOOD in dna.species.species_traits))
-		..()
+		. = ..()

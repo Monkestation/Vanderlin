@@ -190,7 +190,7 @@
 	for(var/i = 1; i <= GLOB.player_list.len; i++)
 		var/mob/M = GLOB.player_list[i]
 		if(M && M.client)
-			if(alive_check && M.stat)
+			if(alive_check && M.stat == DEAD)
 				continue
 			else if(afk_check && M.client.is_afk())
 				continue
@@ -212,7 +212,7 @@
 	if(flashwindow)
 		window_flash(M.client)
 	var/options = ignore_category ? list(CHOICE_YES, CHOICE_NO, CHOICE_NEVER) : DEFAULT_INPUT_CHOICES
-	switch(browser_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
+	switch(tgui_alert(M, Question, "Please answer in [DisplayTimeText(poll_time)]!", options))
 		if(CHOICE_YES)
 			to_chat(M, "<span class='notice'>Choice registered: Yes.</span>")
 			if(time_passed + poll_time <= world.time)
@@ -258,6 +258,8 @@
 		for(var/mob/dead/new_player/G as anything in GLOB.new_player_list)
 			if(!G.client)
 				continue
+			if(!G.client.is_whitelisted(whitelist_type))
+				continue
 			candidates += G
 
 	return pollCandidates(Question, jobbanType, gametypeCheck, be_special_flag, poll_time, ignore_category, flashwindow, candidates)
@@ -287,7 +289,7 @@
 		if(!M.key || !M.client)
 			result -= M
 
-	listclearnulls(result)
+	list_clear_nulls(result)
 
 	return result
 
@@ -319,7 +321,7 @@
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	G_found.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()

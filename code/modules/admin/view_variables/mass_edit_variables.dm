@@ -14,28 +14,28 @@
 	src.massmodify_variables(A, var_name, method)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Mass Edit Variables") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/massmodify_variables(datum/O, var_name = "", method = 0)
+/client/proc/massmodify_variables(datum/target, var_name = "", strict_type = FALSE)
 	if(!check_rights(R_VAREDIT))
 		return
-	if(!istype(O))
+	if(!istype(target))
 		return
 
 	var/variable = ""
 	if(!var_name)
 		var/list/names = list()
-		for (var/V in O.vars)
+		for (var/V in target.vars)
 			names += V
 
 		names = sortList(names)
 
-		variable = input("Which var?", "Var") as null|anything in names
+		variable = input(src, "Which var?", "Var") as null|anything in names
 	else
 		variable = var_name
 
-	if(!variable || !O.can_vv_get(variable))
+	if(!variable || !target.can_vv_get(variable))
 		return
 	var/default
-	var/var_value = O.vars[variable]
+	var/var_value = target.vars[variable]
 
 	if(variable in GLOB.VVckey_edit)
 		to_chat(src, "It's forbidden to mass-modify ckeys. It'll crash everyone's client you dummy.")
@@ -49,7 +49,7 @@
 	if(variable in GLOB.VVpixelmovement)
 		if(!check_rights(R_DEBUG))
 			return
-		var/prompt = alert(src, "Editing this var may irreparably break tile gliding for the rest of the round. THIS CAN'T BE UNDONE", "DANGER", "ABORT ", "Continue", " ABORT")
+		var/prompt = tgui_alert(src, "Editing this var may irreparably break tile gliding for the rest of the round. THIS CAN'T BE UNDONE", "DANGER", list("ABORT ", "Continue", " ABORT"))
 		if (prompt != "Continue")
 			return
 
@@ -90,7 +90,7 @@
 	if (value["type"])
 		class = VV_NEW_TYPE
 
-	var/original_name = "[O]"
+	var/original_name = "[target]"
 
 	var/rejected = 0
 	var/accepted = 0
@@ -98,7 +98,7 @@
 	switch(class)
 		if(VV_RESTORE_DEFAULT)
 			to_chat(src, "Finding items...")
-			var/list/items = get_all_of_type(O.type, method)
+			var/list/items = get_all_of_type(target.type, strict_type)
 			to_chat(src, "Changing [items.len] items...")
 			for(var/thing in items)
 				if (!thing)
@@ -111,20 +111,20 @@
 				CHECK_TICK
 
 		if(VV_TEXT)
-			var/list/varsvars = vv_parse_text(O, new_value)
+			var/list/varsvars = vv_parse_text(target, new_value)
 			var/pre_processing = new_value
 			var/unique
-			if (varsvars && varsvars.len)
-				unique = alert(usr, "Process vars unique to each instance, or same for all?", "Variable Association", "Unique", "Same")
+			if (varsvars?.len)
+				unique = tgui_alert(src, "Process vars unique to each instance, or same for all?", "Variable Association", list("Unique", "Same"))
 				if(unique == "Unique")
 					unique = TRUE
 				else
 					unique = FALSE
 					for(var/V in varsvars)
-						new_value = replacetext(new_value,"\[[V]]","[O.vars[V]]")
+						new_value = replacetext(new_value,"\[[V]]","[target.vars[V]]")
 
 			to_chat(src, "Finding items...")
-			var/list/items = get_all_of_type(O.type, method)
+			var/list/items = get_all_of_type(target.type, strict_type)
 			to_chat(src, "Changing [items.len] items...")
 			for(var/thing in items)
 				if (!thing)
@@ -142,7 +142,7 @@
 				CHECK_TICK
 
 		if (VV_NEW_TYPE)
-			var/many = alert(src, "Create only one [value["type"]] and assign each or a new one for each thing", "How Many", "One", "Many", "Cancel")
+			var/many = tgui_alert(src, "Create only one [value["type"]] and assign each or a new one for each thing", "How Many", list("One", "Many", "Cancel"))
 			if (many == "Cancel")
 				return
 			if (many == "Many")
@@ -152,7 +152,7 @@
 
 			var/type = value["type"]
 			to_chat(src, "Finding items...")
-			var/list/items = get_all_of_type(O.type, method)
+			var/list/items = get_all_of_type(target.type, strict_type)
 			to_chat(src, "Changing [items.len] items...")
 			for(var/thing in items)
 				if (!thing)
@@ -170,7 +170,7 @@
 
 		else
 			to_chat(src, "Finding items...")
-			var/list/items = get_all_of_type(O.type, method)
+			var/list/items = get_all_of_type(target.type, strict_type)
 			to_chat(src, "Changing [items.len] items...")
 			for(var/thing in items)
 				if (!thing)
@@ -193,9 +193,9 @@
 	if (rejected)
 		to_chat(src, "[rejected] out of [count] objects rejected your edit")
 
-	log_world("### MassVarEdit by [src]: [O.type] (A/R [accepted]/[rejected]) [variable]=[html_encode("[O.vars[variable]]")]([list2params(value)])")
-	log_admin("[key_name(src)] mass modified [original_name]'s [variable] to [O.vars[variable]] ([accepted] objects modified)")
-	message_admins("[key_name_admin(src)] mass modified [original_name]'s [variable] to [O.vars[variable]] ([accepted] objects modified)")
+	log_world("### MassVarEdit by [src]: [target.type] (A/R [accepted]/[rejected]) [variable]=[html_encode("[target.vars[variable]]")]([list2params(value)])")
+	log_admin("[key_name(src)] mass modified [original_name]'s [variable] to [target.vars[variable]] ([accepted] objects modified)")
+	message_admins("[key_name_admin(src)] mass modified [original_name]'s [variable] to [target.vars[variable]] ([accepted] objects modified)")
 
 //not using global lists as vv is a debug function and debug functions should rely on as less things as possible.
 /proc/get_all_of_type(T, subtypes = TRUE)
@@ -203,9 +203,16 @@
 	typecache[T] = 1
 	if (subtypes)
 		typecache = typecacheof(typecache)
+
 	. = list()
 	if (ispath(T, /mob))
 		for(var/mob/thing in world)
+			if (typecache[thing.type])
+				. += thing
+			CHECK_TICK
+
+	else if (ispath(T, /obj/structure/door))
+		for(var/obj/structure/thing in world)
 			if (typecache[thing.type])
 				. += thing
 			CHECK_TICK

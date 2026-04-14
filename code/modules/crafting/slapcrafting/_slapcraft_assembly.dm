@@ -66,12 +66,12 @@
 	disassemble()
 
 // Most likely something gets teleported out of the assembly, or pulled out by other means
-/obj/item/slapcraft_assembly/Exited(atom/movable/gone, direction)
+/obj/item/slapcraft_assembly/Exited(atom/movable/gone, atom/new_loc)
 	. = ..()
 	items_to_place_in_result -= gone
 	disassemble()
 
-/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, direction)
+/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 

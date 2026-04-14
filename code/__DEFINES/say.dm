@@ -62,9 +62,11 @@
 #define MODE_SING "sing"
 
 #define SPAN_GEN "say"
+#define SPAN_GRONNIC "gronnic"
 #define SPAN_DWARF "dwarf"
 #define SPAN_ELF "elf"
-#define SPAN_OLDPSYDONIC "oldpsydonic"
+#define SPAN_PSYDON "psydonic"
+#define SPAN_PSYDON_OLD "psydonic_old"
 #define SPAN_ZALAD "zalad"
 #define SPAN_CELESTIAL "celestial"
 #define SPAN_DELF "delf"

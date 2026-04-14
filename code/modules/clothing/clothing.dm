@@ -92,12 +92,8 @@
 	if(hoodtype)
 		MakeHood()
 
-
-/obj/item/clothing/Initialize(mapload, ...)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
 	if(wetable)
 		wet = new(src)
-	return ..()
 
 /obj/item/clothing/Destroy()
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
@@ -206,7 +202,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(user.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				r_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))
@@ -233,7 +229,7 @@
 				return
 			if(!do_after(user, 2 SECONDS, user))
 				return
-			if(prob(user.STASTR * 8))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) * 8))
 				torn_sleeve_number += 1
 				l_sleeve_status = SLEEVE_TORN
 				user.visible_message(span_notice("[user] tears [src]."))

@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 		animation.blend_mode = blend
 	animation.icon = a_icon
 	animation.animate_movement = animate_movement
-	animation.mouse_opacity = 0
+	animation.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	if(!lay)
 		animation.layer = target:layer+1
 	else
@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(rune_appearances_cache)
 	layer = ABOVE_OPEN_TURF_LAYER
 	plane = GAME_PLANE
 
-	mouse_opacity = 1 //So we can actually click these
+	mouse_opacity = MOUSE_OPACITY_ICON //So we can actually click these
 
 	//Whether the rune is pulsating
 	var/animated = 0

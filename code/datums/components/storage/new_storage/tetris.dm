@@ -248,7 +248,8 @@
 	if(locked)
 		if(user && !stop_messages)
 			host.add_fingerprint(user)
-			to_chat(user, span_warning("[host] seems to be locked!"))
+			if(!silent)
+				to_chat(user, span_warning("[host] seems to be locked!"))
 		return FALSE
 	if(worn_check && !worn_check(parent, user))
 		host.add_fingerprint(user)
@@ -769,7 +770,7 @@
 	storing.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
 	if(ismovable(parent))
 		if(isliving(parent:loc))
-			parent:loc:encumbrance_to_speed()
+			parent:loc:update_carry_weight()
 	update_icon()
 	refresh_mob_views()
 	return TRUE

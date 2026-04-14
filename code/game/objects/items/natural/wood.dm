@@ -18,6 +18,7 @@
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
+	item_weight = 2.4 KILOGRAMS
 	var/quality = SMELTERY_LEVEL_NORMAL // For it not to ruin recipes that need it
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_alt
@@ -28,7 +29,7 @@
 
 /obj/item/grown/log/tree/attacked_by(obj/item/I, mob/living/user) //This serves to reward woodcutting
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -39,7 +40,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -51,7 +52,7 @@
 			new /obj/effect/decal/cleanable/debris/wood(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return TRUE
@@ -64,7 +65,7 @@
 		return
 
 	if(user.used_intent.blade_class == BCLASS_CHOP && lumber_amount && lumber_alt)
-		var/skill_level = user.get_skill_level(/datum/skill/labor/lumberjacking, TRUE)
+		var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/lumberjacking)
 		var/lumber_time = (4 SECONDS - (skill_level * 5))
 		var/minimum = 1
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
@@ -75,7 +76,7 @@
 		lumber_amount = rand(minimum, max(round(skill_level), minimum))
 		var/essence_sound_played = FALSE //This is here so the sound wont play multiple times if the essence itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + prob(CLAMP((user.STALUC - 10)*2,0,100))))
+			if(prob(skill_level + prob(CLAMP((GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE) - 10)*2,0,100))))
 				new /obj/item/grown/log/tree/essence(get_turf(src))
 				if(!essence_sound_played)
 					essence_sound_played = TRUE
@@ -85,7 +86,7 @@
 				new lumber_alt(get_turf(src))
 		if(!skill_level)
 			to_chat(user, span_info("My poor skill has me ruin some of the timber..."))
-		user.mind.add_sleep_experience(/datum/skill/labor/lumberjacking, (user.STAINT*0.5))
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/lumberjacking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 		playsound(src, destroy_sound, 100, TRUE)
 		qdel(src)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -135,6 +136,7 @@
 	lumber_amount = 2
 	grid_height = 64
 	grid_width = 64
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/grown/log/tree/small/apply_components()
 	return
@@ -157,6 +159,7 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	lumber_amount = 0
 	lumber = null
+	item_weight = 121 GRAMS
 
 /obj/item/grown/log/tree/stick/apply_components()
 	return
@@ -231,6 +234,7 @@
 	lumber = null
 	lumber_amount = 0
 	tool_behaviour = TOOL_IMPROVISED_RETRACTOR
+	item_weight = 95 GRAMS
 
 /obj/item/grown/log/tree/stake/apply_components()
 	return
@@ -247,6 +251,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/fertilizer/ash
 	bundletype = /obj/item/natural/bundle/plank
+	item_weight = 850 GRAMS
 
 /obj/item/natural/bundle/plank
 	name = "wooden planks"
@@ -287,3 +292,4 @@
 	lumber_amount = 0
 	grid_height = 64
 	grid_width = 64
+	item_weight = 100 GRAMS

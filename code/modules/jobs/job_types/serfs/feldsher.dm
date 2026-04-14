@@ -1,5 +1,44 @@
+/datum/attribute_holder/sheet/job/feldsher
+	attribute_variance = list(
+		/datum/attribute/skill/combat/wrestling = list(-10, 10)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 4,
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = -1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/medicine = 50,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/labor/farming = 30,
+	)
+
+/datum/attribute_holder/sheet/job/feldsher/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 4,
+		STAT_PERCEPTION = 1,
+		STAT_CONSTITUTION = -1,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/medicine = 60,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/labor/farming = 30,
+	)
+
 /datum/job/feldsher
-	title = "Feldsher"
+	title = JOB_FELDSHER
 	tutorial = "You have seen countless wounds over your time. \
 	Stitched the sores of blades, sealed honey over the bubous of plague. \
 	A thousand deaths stolen from the Carriagemen, yet these people will still call you a charlatan. \
@@ -13,32 +52,15 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	trainable_skills = list(/datum/skill/misc/medicine = 0.1)
+	trainable_skills = list(/datum/attribute/skill/misc/medicine = 0.1)
 	max_apprentices = 2
 	apprentice_name = "Feldsher-in-training"
 	can_have_apprentices = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_INT = 4,
-		STATKEY_PER = 1,
-		STATKEY_CON = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/craft/crafting = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/reading = 5,
-		/datum/skill/labor/mathematics = 3,
-		/datum/skill/craft/sewing = 3,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/medicine = 5,
-		/datum/skill/craft/alchemy = 3,
-		/datum/skill/labor/farming = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/feldsher
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/feldsher/old
 
 	traits = list(
 		TRAIT_EMPATH,
@@ -63,13 +85,6 @@
 		EXP_TYPE_MEDICAL = 300
 
 	)
-
-
-/datum/job/feldsher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 /datum/outfit/feldsher
 	shoes = /obj/item/clothing/shoes/shortboots

@@ -23,12 +23,14 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 2,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/volf = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 2)
 	head_butcher = /obj/item/natural/head/volf
 
+	indexed = TRUE
 	health = VOLF_HEALTH
 	maxHealth = VOLF_HEALTH
 	food_type = list(/obj/item/reagent_containers/food/snacks/meat,

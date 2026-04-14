@@ -42,7 +42,7 @@
 	cast_on.visible_message(span_warning("[cast_on.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
 	if(cast_on.ckey && !is_antag_banned(cast_on.ckey, ROLE_NECRO_SKELETON)) //player still inside body
-		var/offer = browser_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
+		var/offer = tgui_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
 
 		if(offer == CHOICE_YES)
 			to_chat(cast_on, span_danger("You rise as a minion."))
@@ -74,11 +74,11 @@
 		AddComponent(/datum/component/ai_aggro_system)
 		wander = TRUE
 
-	clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/crossbows, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/wrestling, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
 
 	mind.current.job = null
 	mind.add_antag_datum(/datum/antagonist/skeleton)

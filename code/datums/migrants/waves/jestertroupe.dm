@@ -3,22 +3,33 @@
 	greet_text = "You were once part of a glorious circus from Heartfelt. Long gone are the days of mirth. The tent having been set ablaze so many years ago, you and your lot have been wandering. Here is the perfect town to start the next act. The circus is in town!"
 	migrant_job = /datum/job/migrant/jestertroupe
 
+/datum/attribute_holder/sheet/job/migrant/jestertroupe
+	attribute_variance = list(
+		/datum/attribute/skill/combat/knives = list(20, 30),
+		/datum/attribute/skill/combat/swords = list(10, 20),
+		/datum/attribute/skill/misc/music = list(40, 60),
+		/datum/attribute/skill/combat/wrestling = list(10, 30),
+		/datum/attribute/skill/combat/unarmed = list(10, 30),
+		/datum/attribute/skill/misc/sneaking = list(20, 50),
+		/datum/attribute/skill/misc/stealing = list(30, 40),
+		/datum/attribute/skill/misc/lockpicking = list(20, 40),
+		/datum/attribute/skill/misc/climbing = list(40, 60)
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		STAT_SPEED = 1,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 30,
+	)
+
 /datum/job/migrant/jestertroupe
 	title = "Buffoon"
 	tutorial =  "You were once part of a glorious circus from Heartfelt. Long gone are the days of mirth. The tent having been set ablaze so many years ago, you and your lot have been wandering. Here is the perfect town to start the next act. The circus is in town!"
 	outfit = /datum/outfit/jestertroupe
 	allowed_races = RACES_PLAYER_ALL
 
-	jobstats = list(
-		STATKEY_STR = -1,
-		STATKEY_CON = -1,
-		STATKEY_SPD = 1,
-	)
-
-	skills = list(
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 3,
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/jestertroupe
 
 	traits = list(
 		TRAIT_EMPATH,
@@ -30,15 +41,6 @@
 
 /datum/job/migrant/jestertroupe/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	LAZYADDASSOC(skills, /datum/skill/combat/knives, pick(2,3))
-	LAZYADDASSOC(skills, /datum/skill/combat/swords, pick(1,2))
-	LAZYADDASSOC(skills, /datum/skill/misc/music, pick(4,5,5,6))
-	LAZYADDASSOC(skills, /datum/skill/combat/wrestling, pick(1,2,2,2,3))
-	LAZYADDASSOC(skills, /datum/skill/combat/unarmed, pick(1,2,2,2,3))
-	LAZYADDASSOC(skills, /datum/skill/misc/sneaking, pick(2,3,4,5))
-	LAZYADDASSOC(skills, /datum/skill/misc/stealing, pick(3,4))
-	LAZYADDASSOC(skills, /datum/skill/misc/lockpicking, pick(2,2,3,3,4))
-	LAZYADDASSOC(skills, /datum/skill/misc/climbing, pick(4,4,4,4,5))
 	add_verb(spawned, /mob/living/carbon/human/proc/ventriloquate)
 
 /datum/outfit/jestertroupe

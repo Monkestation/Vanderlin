@@ -16,6 +16,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/neck.dmi'
 	grid_width = 32
 	grid_height = 32
+	item_weight = 50 GRAMS
 	var/speaking = FALSE
 	var/fakename = "secret whisperer"
 
@@ -97,6 +98,7 @@
 	experimental_inhand = FALSE
 	grid_width = 32
 	grid_height = 32
+	item_weight = 80 GRAMS
 	var/label = null
 	var/inqdesc = null
 	var/hidden = FALSE
@@ -155,7 +157,7 @@
 	forceMove(M)
 	M.contents.Add(src)
 
-	if(M.STAPER > user.STASPD)
+	if(GET_MOB_ATTRIBUTE_VALUE(M, STAT_PERCEPTION) > GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED))
 		to_chat(M, span_hidden("I feel something brush against mine own self. It stings."))
 
 	..()

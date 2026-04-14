@@ -46,6 +46,5 @@
 	name = "flour"
 	desc = ""
 	icon_state = "flour"
-	mouse_opacity = 0
 	clean_type = CLEAN_TYPE_LIGHT_DECAL
 

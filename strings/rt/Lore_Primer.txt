@@ -181,6 +181,15 @@ While it's not required reading, leadership roles may find this information usef
 	</details>
 
 	<details>
+		<summary><strong> OSSLAND </strong></summary>
+		<br>
+		<em> The Hunters, The Cold North, Those Who Wear Skulls </em>
+		<br><br>
+		Originating in the frozen tundras to the furthest north, named for the bones that wash up on their shores. Their odd worship earns them suspicious glances from most folk, but they are known to be fiercely loyal to those who make it into their inner circle.
+		<br><br>
+	</details>
+
+	<details>
 		<summary><strong> ELVEN ENCLAVES </strong></summary>
 		<br>
 		<em> Keepers of Psydonia, Retreats of the Ancient Age, Forgotten Guides of Death </em>

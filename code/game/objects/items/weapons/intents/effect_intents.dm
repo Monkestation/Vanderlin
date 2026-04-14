@@ -29,7 +29,7 @@
 /datum/status_effect/debuff/dazed
 	id = "dazed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/dazed
-	effectedstats = list(STATKEY_PER = -2, STATKEY_INT = -2)
+	effectedstats = list(STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2)
 	duration = 15 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 

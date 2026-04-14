@@ -72,21 +72,21 @@
 			return key
 	return null
 
-/proc/is_human_part_visible(mob/living/carbon/human/human, flags_inv)
-	if(!istype(human))
+/proc/is_human_part_visible(mob/living/carbon/C, flags_inv) // tee-hee, I'm not a human at all!
+	if(!istype(C))
 		return TRUE
 	if(flags_inv == NONE)
 		return TRUE
-	var/list/worn_items = get_all_worn_items(human)
+	var/list/worn_items = get_all_worn_items(C)
 	for(var/obj/item/item as anything in worn_items)
 		if(item.flags_inv & flags_inv)
 			return FALSE
 	return TRUE
 
-/proc/get_all_worn_items(mob/living/carbon/human/human)
+/proc/get_all_worn_items(mob/living/carbon/C)
 	var/list/worn_items = list()
 	for(var/slot in DEFAULT_SLOT_PRIORITY)
-		var/obj/item/item = human.get_item_by_slot(slot)
+		var/obj/item/item = C.get_item_by_slot(slot)
 		if(!item)
 			continue
 		worn_items += item

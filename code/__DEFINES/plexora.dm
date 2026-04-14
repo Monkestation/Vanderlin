@@ -11,6 +11,7 @@
 #define PLEXORA_SHUTDOWN_HARD 1
 #define PLEXORA_SHUTDOWN_HARDEST 2
 #define PLEXORA_SHUTDOWN_KILLDD 3
+#define PLEXORA_SHUTDOWN_OOM 4
 
 // Client doesn't exist or isn't connected
 #define PLEXORA_ERROR_CLIENTNOTEXIST "plx_clientnotexist"

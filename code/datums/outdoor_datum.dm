@@ -94,7 +94,7 @@ Sunlight System
 	luminosity = GLOBAL_LIGHT_RANGE
 
 	for(var/turf/T in view(CEILING(GLOBAL_LIGHT_RANGE, 1), source_turf))
-		if(T.opacity) /* get_corners used to do opacity checks for arse */
+		if(IS_OPAQUE_TURF(T))
 			continue
 		if(!T.lighting_corners_initialised)
 			T.lighting_build_overlay()

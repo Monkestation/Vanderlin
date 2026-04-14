@@ -1,6 +1,6 @@
 /datum/repeatable_crafting_recipe/reading
 	abstract_type = /datum/repeatable_crafting_recipe/reading
-	skillcraft = /datum/skill/misc/reading
+	skillcraft = /datum/attribute/skill/misc/reading
 
 	tool_usage = list(
 		/obj/item/natural/feather = list("starts to write", "start writing", 'sound/items/wood_sharpen.ogg'),

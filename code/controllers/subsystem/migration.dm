@@ -308,7 +308,7 @@ SUBSYSTEM_DEF(migrants)
 
 	/// And back to non copy pasta code
 
-	to_chat(character, span_alertsyndie("I am a [role_instance.name]!"))
+	to_chat(character, span_alert("I am a [role_instance.name]!"))
 	to_chat(character, span_notice(wave.greet_text))
 	to_chat(character, span_notice(role_instance.greet_text))
 
@@ -677,8 +677,8 @@ SUBSYSTEM_DEF(migrants)
 
 /proc/get_spawn_turf_for_job(jobname)
 	var/list/landmarks = list()
-	for(var/obj/effect/landmark/start/sloc as anything in GLOB.start_landmarks_list)
-		if(!(jobname in sloc.jobspawn_override))
+	for(var/obj/effect/landmark/start/sloc as anything in GLOB.roundstart_landmarks)
+		if(!(jobname in sloc.jobs_to_spawn))
 			continue
 		landmarks += sloc
 	if(!length(landmarks))

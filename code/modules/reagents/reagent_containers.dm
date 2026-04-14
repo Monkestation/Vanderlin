@@ -110,6 +110,8 @@
 	if(labelled)
 		. += mutable_appearance(icon, "[icon_state]_label")
 	if(!reagents?.total_volume)
+		if(fill_icon_under_override)
+			underlays.Cut()
 		return
 	if(!fill_icon_thresholds)
 		return

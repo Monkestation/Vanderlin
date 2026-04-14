@@ -77,7 +77,9 @@
 		/datum/supply_pack/rawmats/tin,
 		/datum/supply_pack/rawmats/lumber,
 		/datum/supply_pack/rawmats/blocks,
-		/datum/supply_pack/rawmats/ash
+		/datum/supply_pack/rawmats/ash,
+		// Seed(s)
+		/datum/supply_pack/seeds/drowsbane
 	)
 	uncommon_pool = list(
 		// Better armor

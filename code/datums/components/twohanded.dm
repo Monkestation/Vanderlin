@@ -205,7 +205,6 @@
 		parent_item.force = force_wielded
 	// if(sharpened_increase)
 	// 	parent_item.force += sharpened_increase
-	parent_item.name += " (wielded)"
 	parent_item.update_appearance(UPDATE_ICON_STATE)
 
 	if(user.get_item_by_slot(ITEM_SLOT_BACK) == parent)
@@ -257,13 +256,6 @@
 		parent_item.force /= force_multiplier
 	else if(force_unwielded)
 		parent_item.force = force_unwielded
-
-	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, " (Wielded)", -10) // 10 == length(" (Wielded)")
-	if(sf)
-		parent_item.name = copytext(parent_item.name, 1, sf)
-	else
-		parent_item.name = "[initial(parent_item.name)]"
 
 	// Update icons
 	parent_item.update_appearance(UPDATE_ICON_STATE)

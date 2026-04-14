@@ -7,7 +7,7 @@
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "smoke"
 	SET_BASE_PIXEL(-32, -32)
-	opacity = 1
+	opacity = TRUE
 	layer = FLY_LAYER
 	plane = GAME_PLANE_UPPER
 	anchored = TRUE

@@ -86,10 +86,10 @@
 
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
-		var/final_str = STASTR
+		var/final_str = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
-		var/strength_diff = final_str - L.STASTR
+		var/strength_diff = final_str - GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH)
 		switch(strength_diff)
 			if(5 to INFINITY)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"

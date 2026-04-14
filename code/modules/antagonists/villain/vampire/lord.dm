@@ -1,3 +1,18 @@
+/datum/attribute_holder/sheet/job/vampire_lord
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+	raw_attribute_list = list(
+		/datum/attribute/skill/magic/blood = 10,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/axesmaces = 40,
+		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/misc/climbing = 50,
+	)
+
 /datum/antagonist/vampire/lord
 	name = "Vampire Lord"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
@@ -7,6 +22,7 @@
 		"I AM THE LAND!",
 		"FIRSTBORNE CHILD OF KAIN!",
 	)
+	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
 	var/patron = /datum/patron/godless/autotheist
@@ -14,6 +30,7 @@
 	var/ascended = FALSE
 	// thralls to set the clan of on creation
 	var/list/starting_thralls = list()
+	antag_flags = NONE
 
 /datum/antagonist/vampire/lord/on_gain()
 	var/mob/living/carbon/human/vampire = owner?.current
@@ -64,15 +81,7 @@
 
 /datum/outfit/vamplord/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.adjust_skillrank(/datum/skill/magic/blood, 1, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.clamped_adjust_skillrank(/datum/skill/combat/unarmed, 4, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
+	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/vampire_lord)
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shirt = /obj/item/clothing/shirt/vampire
 	belt = /obj/item/storage/belt/leather/plaquegold
@@ -104,7 +113,7 @@
 		to_chat(src, span_warning("[ruler] is still conscious."))
 		return
 
-	switch(alert(ruler, "Submit and Pledge Allegiance to [name]?", "SUBMISSION", "Yes", "No"))
+	switch(tgui_alert(ruler, "Submit and Pledge Allegiance to [name]?", "SUBMISSION", list("Yes", "No")))
 		if("Yes")
 			SSmapping.retainer.king_submitted = TRUE
 		if("No")
@@ -150,7 +159,7 @@
 
 /mob/proc/death_knight_spawn()
 	SEND_SOUND(src, sound('sound/misc/notice (2).ogg'))
-	if(alert(src, "A Vampire Lord is summoning you from the Underworld.", "Be Risen?", "Yes", "No") == "Yes")
+	if(tgui_alert(src, "A Vampire Lord is summoning you from the Underworld.", "Be Risen?", list("Yes", "No")) == "Yes")
 		if(!has_world_trait(/datum/world_trait/death_knight))
 			to_chat(src, span_warning("Another soul was chosen."))
 		returntolobby()

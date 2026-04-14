@@ -56,7 +56,7 @@
 		difficulty_malus = 0
 		if (get_dist(hearer, target) > 3)
 			difficulty_malus += 2
-		if (hearer.stat_roll(STATKEY_PER, 20 -( base_difficulty + difficulty_malus)))
+		if (hearer.stat_roll(STAT_PERCEPTION, 20 -( base_difficulty + difficulty_malus)))
 			if (masked)
 				to_chat(hearer, span_warning("[target]'s jaw isn't moving to match [target.p_their()] words."))
 			else

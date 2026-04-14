@@ -73,9 +73,9 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		switch(human_owner.voice_type)
-			if(VOICE_TYPE_MASC)
+			if(VOICE_TYPE_MASC, VOICE_TYPE_MASC_FOP)
 				blip_tone = BLIP_TONE_MASCULINE
-			if(VOICE_TYPE_FEM)
+			if(VOICE_TYPE_FEM, VOICE_TYPE_FEM_DAINTY, VOICE_TYPE_FEM_HAUGHTY)
 				blip_tone = BLIP_TONE_FEMININE
 
 	_extra_classes = extra_classes.Copy()

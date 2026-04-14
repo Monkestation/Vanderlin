@@ -24,6 +24,8 @@
 	var/bloodpool = 1500
 	var/maxbloodpool = 3000
 
+	var/extra_mob_weight = 0
+
 	COOLDOWN_DECLARE(detection_cooldown)
 	var/detections = 0
 
@@ -355,7 +357,7 @@
 		if(last_frenzy_check + 5 MINUTES < world.time)
 			rollfrenzy()
 
-/mob/living/carbon/human/proc/get_clan_hierarchy_examine(mob/living/carbon/human/examiner)
+/mob/living/proc/get_clan_hierarchy_examine(mob/living/examiner)
 	if(!clan || !clan_position || !examiner.clan)
 		return ""
 

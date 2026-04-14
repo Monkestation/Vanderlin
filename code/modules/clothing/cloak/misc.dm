@@ -74,7 +74,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
 	sellprice = 50
 	nodismemsleeves = TRUE
@@ -274,12 +273,36 @@
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
 	desc = "A cloak with a sinister aura set to bring about violence on the world."
-	icon_state = "graggarcloak"
-	icon_state = "graggarcloak"
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	icon_state = "graggarcloak"
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleevetype = "shirt"
+	nodismemsleeves = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 	sellprice = 0 // See above comment
+
+/obj/item/clothing/cloak/savage
+	name = "savage cloak"
+	desc = "A cloak covered in an predatory aura, it seeks to bring about the natural chaos of the wild to you, dripping in gore and bloodied fur."
+	icon = 'icons/roguetown/clothing/cloaks.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	icon_state = "savagecloak"
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+	sleevetype = "shirt"
+	nodismemsleeves = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
+	sellprice = 0
 
 /obj/item/clothing/cloak/silktabard
 	name = "fine silk tabard"
@@ -318,6 +341,9 @@
 	item_state = "poncho"
 	boobed = FALSE
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
+
+/obj/item/clothing/cloak/poncho/yellow
+	color = CLOTHING_MUSTARD_YELLOW
 
 /obj/item/clothing/cloak/pantheon
 	name = "pantheon cloak"

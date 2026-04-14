@@ -23,7 +23,7 @@
 			continue
 		if(!H.patron || !istype(H.patron, /datum/patron/divine/abyssor))
 			continue
-		if(H.get_skill_level(/datum/skill/labor/fishing) < 2)
+		if(GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/labor/fishing) < 2)
 			continue
 		return TRUE
 
@@ -37,7 +37,7 @@
 			continue
 		if(!H.patron || !istype(H.patron, /datum/patron/divine/abyssor))
 			continue
-		if(H.get_skill_level(/datum/skill/labor/fishing) < 2)
+		if(GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/labor/fishing) < 2)
 			continue
 		valid_targets += H
 

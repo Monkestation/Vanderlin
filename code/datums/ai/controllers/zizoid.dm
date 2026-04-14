@@ -33,7 +33,7 @@
 	var/list/possible_lurk_spots = list()
 
 	for(var/turf/open/T in orange(7, flesh))
-		if(T.opacity || (T.get_lumcount() < 0.5))
+		if(IS_OPAQUE_TURF(T) || (T.get_lumcount() < 0.5))
 			if(!flesh.CanReach(T))
 				continue
 			possible_lurk_spots += T

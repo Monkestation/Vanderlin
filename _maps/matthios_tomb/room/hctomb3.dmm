@@ -23,6 +23,12 @@
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/wet)
+"aJ" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom2"
+	},
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "aN" = (
 /obj/structure/table/stone_small,
 /obj/item/reagent_containers/glass/bowl/iron,
@@ -162,6 +168,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors)
+"fL" = (
+/obj/structure/roguerock,
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "fM" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -177,12 +187,6 @@
 /obj/structure/rack/shelf/notdense,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
-"gB" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom2"
-	},
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
 "hf" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -223,6 +227,12 @@
 	dir = 1
 	},
 /area/under/tomb/cave/spider)
+"if" = (
+/obj/structure/table/stone_small,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/blocks/stonered/tiny,
+/area/under/tomb/indoors)
 "iV" = (
 /obj/structure/bars,
 /turf/open/floor/metal/alt,
@@ -312,6 +322,9 @@
 /obj/structure/bars,
 /turf/open/floor/metal,
 /area/under/tomb)
+"lB" = (
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "lD" = (
 /obj/structure/chair/stool,
 /turf/open/floor/blocks/stonered,
@@ -371,12 +384,6 @@
 /obj/item/natural/rock/salt,
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/wet)
-"oh" = (
-/obj/structure/table/stone_small,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/blocks/stonered/tiny,
-/area/under/tomb/indoors)
 "ou" = (
 /turf/open/water/bath,
 /area/under/tomb)
@@ -702,12 +709,15 @@
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors)
+"zG" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom3"
+	},
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "zM" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave)
-"zR" = (
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
 "zV" = (
 /turf/closed/wall/mineral/decostone/long,
 /area/under/tomb/cave/spider)
@@ -791,6 +801,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors)
+"DC" = (
+/obj/structure/kneestingers,
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "Eg" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/churchrough,
@@ -1178,6 +1192,12 @@
 /obj/structure/roguerock,
 /turf/open/floor/cobblerock,
 /area/under/tomb/cave/wet)
+"Mq" = (
+/obj/structure/kneestingers{
+	icon_state = "glowshroom_A1"
+	},
+/turf/open/water/clean,
+/area/under/tomb/cave/wet)
 "Ms" = (
 /turf/open/water/river{
 	dir = 4
@@ -1351,24 +1371,10 @@
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/water/bath,
 /area/under/tomb)
-"Ss" = (
-/obj/structure/kneestingers,
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
-"SE" = (
-/obj/structure/roguerock,
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
 "SH" = (
 /obj/machinery/light/fueled/smelter/great,
 /turf/open/floor/church,
 /area/under/tomb/cave/spider)
-"Ti" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom3"
-	},
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
 "Tr" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/spider/cocoon,
@@ -1454,12 +1460,6 @@
 "Wd" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/tomb)
-"WC" = (
-/obj/structure/kneestingers{
-	icon_state = "glowshroom_A1"
-	},
-/turf/open/water/cleanshallow,
-/area/under/tomb/cave/wet)
 "WG" = (
 /turf/open/floor/herringbone,
 /area/under/tomb/cave)
@@ -1634,8 +1634,8 @@ YQ
 Vf
 OB
 EC
-zR
-zR
+lB
+lB
 WO
 WO
 WO
@@ -1665,8 +1665,8 @@ zM
 YQ
 fj
 OB
-zR
-zR
+lB
+lB
 jW
 jW
 Ms
@@ -1697,7 +1697,7 @@ YQ
 YQ
 zM
 EC
-Ss
+DC
 WO
 WO
 jW
@@ -2260,10 +2260,10 @@ WO
 WO
 WO
 WO
-zR
-zR
-zR
-zR
+lB
+lB
+lB
+lB
 EC
 WO
 WO
@@ -2291,11 +2291,11 @@ WO
 WO
 WO
 WO
-WC
-zR
-zR
-zR
-Ss
+Mq
+lB
+lB
+lB
+DC
 Jo
 EC
 WO
@@ -2322,13 +2322,13 @@ WO
 (24,1,1) = {"
 WO
 WO
-Ti
-zR
-zR
-SE
-zR
-zR
-zR
+zG
+lB
+lB
+fL
+lB
+lB
+lB
 WO
 WO
 Ms
@@ -2354,10 +2354,10 @@ WO
 (25,1,1) = {"
 WO
 WO
-zR
-zR
-zR
-zR
+lB
+lB
+lB
+lB
 aF
 aF
 aF
@@ -2386,9 +2386,9 @@ WO
 (26,1,1) = {"
 WO
 WO
-zR
-SE
-zR
+lB
+fL
+lB
 kt
 aF
 aF
@@ -2419,13 +2419,13 @@ WO
 WO
 WO
 WO
-zR
-Ti
-zR
-SE
-zR
-zR
-zR
+lB
+zG
+lB
+fL
+lB
+lB
+lB
 WO
 WO
 WO
@@ -2453,10 +2453,10 @@ WO
 WO
 WO
 WO
-gB
-zR
-zR
-zR
+aJ
+lB
+lB
+lB
 OR
 OR
 OR
@@ -3012,7 +3012,7 @@ Eo
 Eo
 ho
 Lr
-oh
+if
 ho
 ho
 ho

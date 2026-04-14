@@ -16,7 +16,7 @@
 
 /**
  * An element that enables and disables movetype bitflags whenever the relative traits are added or removed.
- * It also handles the +2/-2 pixel y anim loop typical of mobs possessing the FLYING or FLOATING movetypes.
+ * It also handles the +2/-2 pixel y anim loop typical of mobs possessing the FLYING, FLOATING or SWIMMING movetypes.
  * This element is necessary for the TRAIT_MOVE_ traits to work correctly, so make sure to attach this element
  * before adding them to non-living movables.
  */
@@ -32,13 +32,13 @@
 		return
 
 	var/atom/movable/movable_target = target
-	RegisterSignal(movable_target, GLOB.movement_type_addtrait_signals, PROC_REF(on_movement_type_trait_gain))
-	RegisterSignal(movable_target, GLOB.movement_type_removetrait_signals, PROC_REF(on_movement_type_trait_loss))
+	RegisterSignals(movable_target, GLOB.movement_type_addtrait_signals, PROC_REF(on_movement_type_trait_gain))
+	RegisterSignals(movable_target, GLOB.movement_type_removetrait_signals, PROC_REF(on_movement_type_trait_loss))
 	RegisterSignal(movable_target, SIGNAL_ADDTRAIT(TRAIT_NO_FLOATING_ANIM), PROC_REF(on_no_floating_anim_trait_gain))
 	RegisterSignal(movable_target, SIGNAL_REMOVETRAIT(TRAIT_NO_FLOATING_ANIM), PROC_REF(on_no_floating_anim_trait_loss))
 	attached_atoms[movable_target] = TRUE
 
-	if(movable_target.movement_type & (FLOATING|FLYING) && !HAS_TRAIT(movable_target, TRAIT_NO_FLOATING_ANIM))
+	if(movable_target.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND) && !HAS_TRAIT(movable_target, TRAIT_NO_FLOATING_ANIM))
 		DO_FLOATING_ANIM(movable_target)
 
 /datum/element/movetype_handler/Detach(datum/source)
@@ -62,7 +62,7 @@
 		return
 	var/old_state = source.movement_type
 	source.movement_type |= flag
-	if(!(old_state & (FLOATING|FLYING)) && (source.movement_type & (FLOATING|FLYING)) && !HAS_TRAIT(source, TRAIT_NO_FLOATING_ANIM))
+	if(!(old_state & (MOVETYPE_NOT_TOUCHING_GROUND)) && (source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)) && !HAS_TRAIT(source, TRAIT_NO_FLOATING_ANIM))
 		DO_FLOATING_ANIM(source)
 	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_ENABLED, flag, old_state)
 
@@ -74,7 +74,7 @@
 		return
 	var/old_state = source.movement_type
 	source.movement_type &= ~flag
-	if((old_state & (FLOATING|FLYING)) && !(source.movement_type & (FLOATING|FLYING)))
+	if((old_state & (MOVETYPE_NOT_TOUCHING_GROUND)) && !(source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND)))
 		STOP_FLOATING_ANIM(source)
 	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_DISABLED, flag, old_state)
 
@@ -86,7 +86,7 @@
 /// Called when the TRAIT_NO_FLOATING_ANIM trait is removed from the mob. Restarts the bobbing animation.
 /datum/element/movetype_handler/proc/on_no_floating_anim_trait_loss(atom/movable/source, trait)
 	SIGNAL_HANDLER
-	if(source.movement_type & (FLOATING|FLYING))
+	if(source.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND))
 		DO_FLOATING_ANIM(source)
 
 #undef DO_FLOATING_ANIM
