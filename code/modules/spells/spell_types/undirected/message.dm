@@ -1,4 +1,4 @@
-/// Spell that allows the caster to send a message to anyone they know. Can be sent Anonymously, but recipient can bypass it with high enough perceiption
+/// Spell that allows the caster to send a message to anyone they know. Can be sent Anonymously, but recipient can bypass it with high enough perception
 /datum/action/cooldown/spell/undirected/message
 	name = "Message"
 	desc = "Latch onto the mind of one who is familiar to you, whispering a message into their head."
