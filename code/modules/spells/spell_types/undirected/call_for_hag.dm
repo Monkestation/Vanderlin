@@ -30,7 +30,7 @@
 
 	matrons = list() //reset list
 	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		if(HL.job == "Matron" && !(HL in matrons) && HL.stat < UNCONSCIOUS) // Is a Matron and not unconscious or dead
+		if(HL.job == JOB_MATRON && !(HL in matrons) && HL.stat < UNCONSCIOUS) // Is a Matron and not unconscious or dead
 			matrons += HL
 
 /datum/action/cooldown/spell/undirected/call_for_hag/cast(atom/cast_on)

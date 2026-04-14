@@ -1,5 +1,5 @@
 /datum/round_event_control/antagonist/solo/lich
-	name = "Lich"
+	name = ROLE_LICH
 	tags = list(
 		TAG_ZIZO,
 		TAG_COMBAT,

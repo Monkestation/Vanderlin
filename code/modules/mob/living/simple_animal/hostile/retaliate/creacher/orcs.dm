@@ -163,7 +163,7 @@
 	minimum_distance = 5
 	ranged_cooldown_time = 60
 	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc2,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+			/obj/item/gun/ballistic/bow,
 			/obj/item/ammo_casing/caseless/arrow = 3,
 			/obj/effect/decal/cleanable/blood)
 	maxHealth = 100

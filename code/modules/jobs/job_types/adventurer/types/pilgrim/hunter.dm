@@ -43,7 +43,7 @@
 	)
 
 /datum/job/advclass/pilgrim/hunter
-	title = "Hunter"
+	title = JOB_HUNTER
 	f_title = "Huntress"
 	tutorial = "Peasants that thrive on the woods, hunting creechers for pelt and hide, \
 				or the boons of Dendor for their meat to sell, or consume."
@@ -62,7 +62,7 @@
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backl = /obj/item/gun/ballistic/bow
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag

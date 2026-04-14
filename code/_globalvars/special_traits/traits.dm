@@ -147,7 +147,7 @@
 
 /datum/special_trait/eagle_eyed/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/eagle_eyed)
-	character.mind.special_items["Crossbow"] = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	character.mind.special_items["Crossbow"] = /obj/item/gun/ballistic/bow/cross
 	character.mind.special_items["Bolts"] = /obj/item/ammo_holder/quiver/bolts
 
 /datum/attribute_holder/sheet/job/mule
@@ -661,7 +661,7 @@
 	weight = 100
 
 /datum/special_trait/wild_night/on_apply(mob/living/carbon/human/character, silent)
-	var/turf/location = get_spawn_turf_for_job("Pilgrim")
+	var/turf/location = get_spawn_turf_for_job(JOB_PILGRIM)
 	character.forceMove(location)
 	character.reagents.add_reagent(pick(/datum/reagent/ozium, /datum/reagent/moondust, /datum/reagent/druqks), 15)
 	character.reagents.add_reagent(/datum/reagent/consumable/ethanol/beer, 72)
@@ -1016,7 +1016,7 @@
 /datum/special_trait/black_biar
 	name = "Host of the Black Briar"
 	greet_text = span_briar("Bramble writhes beneath my skin... but it should not get worse. I hope.")
-	weight = 35
+	weight = 30
 
 /datum/special_trait/black_biar/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_BRIAR_HOST, BE_SPECIAL_TRAIT)
+	character.add_quirk(/datum/quirk/black_briar)

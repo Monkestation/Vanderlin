@@ -119,7 +119,7 @@
 /turf/closed/wall/mineral/stonebrick,
 /area/outdoors/wilderness)
 "bQ" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/cobble,
@@ -278,7 +278,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
 "eX" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
@@ -355,7 +355,7 @@
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "gi" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /obj/structure/chair/stool,
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
@@ -565,7 +565,7 @@
 /area/outdoors/wilderness)
 "lF" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
@@ -944,7 +944,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
 "ub" = (
-/obj/effect/landmark/start/adventurerlate,
+/obj/effect/landmark/start/outsider,
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "uf" = (
@@ -1360,7 +1360,7 @@
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
 "Cz" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
@@ -1555,7 +1555,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
 "Ho" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 1
 	},
 /turf/open/floor/grass,
@@ -1584,7 +1584,7 @@
 	},
 /area/outdoors/wilderness)
 "HB" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
@@ -1756,7 +1756,7 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
 "Lu" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 8
 	},
 /obj/structure/table/wood/treestump,
@@ -1823,7 +1823,7 @@
 /turf/open/floor/herringbone,
 /area/indoors)
 "MK" = (
-/obj/effect/landmark/start/adventurerlate{
+/obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/naturalstone,

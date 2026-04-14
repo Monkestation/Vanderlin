@@ -1146,7 +1146,7 @@
 /area/under/tomb/indoors)
 "Rq" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/ruinedwood/turned/darker,

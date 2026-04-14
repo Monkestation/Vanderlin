@@ -4,7 +4,7 @@
 /datum/ai_planning_subtree/retrieve_arrows/SelectBehaviors(datum/ai_controller/controller, delta_time)
 	if(!validate_archer_equipment(controller))
 		return
-	var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/bow = controller.blackboard[BB_ARCHER_NPC_BOW]
+	var/obj/item/gun/ballistic/bow/bow = controller.blackboard[BB_ARCHER_NPC_BOW]
 	var/obj/item/ammo_holder/quiver/Q = controller.blackboard[BB_ARCHER_NPC_QUIVER]
 
 	if(bow.chambered)

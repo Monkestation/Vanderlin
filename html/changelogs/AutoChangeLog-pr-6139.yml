@@ -1,0 +1,4 @@
+author: "Telvayne"
+delete-after: True
+changes:
+  - bugfix: "Westleach may now be submitted to the stockpile."

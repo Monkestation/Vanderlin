@@ -301,14 +301,14 @@
 			F.whp = 10
 
 	var/list/spawn_points = list()
-	for(var/obj/effect/landmark/start/adventurerlate/L in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/outsider/L in GLOB.latejoin_landmarks)
 		spawn_points += get_turf(L)
 
 	if(length(spawn_points))
 		var/turf/spawn_turf = pick(spawn_points)
 		H.forceMove(spawn_turf)
 	else
-		for(var/obj/effect/landmark/start/L in GLOB.start_landmarks_list)
+		for(var/obj/effect/landmark/start/L in GLOB.latejoin_landmarks)
 			spawn_points += get_turf(L)
 		if(length(spawn_points))
 			H.forceMove(pick(spawn_points))
@@ -332,7 +332,7 @@
 
 	// Move owner to vagrant spawn first
 	var/list/vagrant_spawns = list()
-	for(var/obj/effect/landmark/start/vagrant/V in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/vagrant/V in GLOB.roundstart_landmarks)
 		vagrant_spawns += get_turf(V)
 
 	if(length(vagrant_spawns))

@@ -370,6 +370,13 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	sellprice = 20
+	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+
+/obj/item/clothing/armor/leather/jerkin/belted/long
+	icon_state = "roguearmor_coat"
+	item_state = "roguearmor_coat"
+	body_parts_covered = COVERAGE_ALL_BUT_ARMS
+	sellprice = VALUE_LEATHER_ARMOR_LORD
 
 // gronnic subtype
 /obj/item/clothing/armor/leather/gronn
@@ -383,8 +390,3 @@
 	armor = ARMOR_GRONN_LIGHT
 	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
-/obj/item/clothing/armor/leather/jerkin/belted/long
-	icon_state = "roguearmor_coat"
-	item_state = "roguearmor_coat"
-	body_parts_covered = COVERAGE_ALL_BUT_ARMS
-	sellprice = VALUE_LEATHER_ARMOR_LORD

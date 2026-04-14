@@ -2505,7 +2505,7 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/decap)
 "DA" = (
-/obj/effect/landmark/latejoin,
+/obj/effect/landmark/backup_join,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "DD" = (
