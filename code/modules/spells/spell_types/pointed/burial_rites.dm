@@ -49,7 +49,6 @@
 					grave.headstone.inscription = null //Reset inscription
 					reset_spell_cooldown()
 					return . | SPELL_CANCEL_CAST
-				message_admins(grave.headstone.inscription)
 			if(!grave.is_consecrated)
 				grave.is_consecrated = TRUE
 				SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
