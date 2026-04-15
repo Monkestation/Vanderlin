@@ -1281,6 +1281,7 @@
 
 	if(surrendering)
 		return FALSE
+	
 	if(stat)
 		return FALSE
 
