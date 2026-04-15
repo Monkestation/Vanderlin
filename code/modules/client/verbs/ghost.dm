@@ -41,11 +41,11 @@
 			// Store the current time for the player
 			GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 
-	if(mind)
+	if(mind && !QDELETED(mind.current))
 		if(ishuman(mind.current))
 			var/mob/living/carbon/human/dead_hum = mind.current
 			if(!dead_hum.funeral)
-				var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest?", "Final Words (Optional)", max_length(75))
+				var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest?", "Final Words (Optional)", max_length=75)
 				if(final_words)
 					dead_hum.final_words = final_words
 
