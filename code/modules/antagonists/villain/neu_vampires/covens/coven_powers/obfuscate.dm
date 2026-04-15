@@ -154,8 +154,8 @@
 	old_dna = transformer.dna
 	old_hair = feature?.accessory_type
 	old_hair_color = transformer.get_hair_color()
-	old_eye_color = transformer.get_eye_color(TRUE)
-	old_second_color = transformer.get_eye_color(FALSE)
+	old_eye_color = transformer.get_eye_color(RIGHT_SIDE)
+	old_second_color = transformer.get_eye_color(LEFT_SIDE)
 	old_facial_hair_color = transformer.get_facial_hair_color()
 	old_facial_hair = facial?.accessory_type
 	old_gender = transformer.gender
@@ -207,9 +207,13 @@
 	var/datum/bodypart_feature/hair/target_feature = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
 	var/datum/bodypart_feature/hair/target_facial = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_FACIAL_HAIR)
 
-	var/datum/organ_dna/eyes/eye_dna = target.dna?.organ_dna[ORGAN_SLOT_EYES]
-	if(istype(eye_dna))
-		user.set_eye_color(eye_dna.eye_color, eye_dna.heterochromia ? eye_dna.second_color : eye_dna.eye_color)
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(target.eye_organs, 2)
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(target.eye_organs, 1)
+	if(right_eye || left_eye)
+		user.set_eye_color(
+			right_eye?.eye_color || "#FFFFFF",
+			left_eye?.eye_color || right_eye?.eye_color || "#FFFFFF"
+		)
 
 	user.set_hair_color(target.get_hair_color(), FALSE)
 	user.set_hair_style(target_feature?.accessory_type, FALSE)

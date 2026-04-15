@@ -1128,7 +1128,7 @@
 /area/under/mountains/anvil/dungeon/lower)
 "pw" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
+/obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/effect/spawner/map_spawner/loot/armor,
 /obj/item/alch/bone{
@@ -1540,7 +1540,7 @@
 /area/under/mountains/anvil/dungeon)
 "va" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
+/obj/item/gun/ballistic/bow/cross,
 /obj/item/clothing/armor/chainmail/iron,
 /obj/item/ammo_holder/quiver/bolts,
 /obj/item/ammo_casing/caseless/bolt/pyro,

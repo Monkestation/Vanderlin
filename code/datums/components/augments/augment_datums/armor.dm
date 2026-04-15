@@ -8,8 +8,10 @@
 	var/melee_damage = 0
 	var/shutdown_bonus = 0
 
-
 /datum/augment/armor/on_install(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	H.physiology?.armor = H.physiology.armor.attachArmor(getArmor(arglist(armor_values)))
 	H.skin_tone = finish
 	H.update_body()
@@ -21,8 +23,10 @@
 	sd?.shutdown_threshold += shutdown_bonus
 	H.updatehealth()
 
-
 /datum/augment/armor/on_remove(mob/living/carbon/human/H)
+	. = ..()
+	if(!.)
+		return
 	H.physiology?.armor = H.physiology.armor.detachArmor(getArmor(arglist(armor_values)))
 	H.skin_tone = null
 	H.update_body()
@@ -40,7 +44,7 @@
 	desc = "You might as well have lined it with thatch."
 	engineering_difficulty = SKILL_RANK_NONE
 	armor_values = ARMOR_MAILLE_IRON
-	finish = "D4AF37"
+	finish = "ABE8E6"
 	stability_cost = 15
 	engineering_difficulty = 0
 	shutdown_bonus = -25
@@ -90,7 +94,7 @@
 	desc = "Style over substance."
 	engineering_difficulty = SKILL_RANK_MASTER
 	armor_values = ARMOR_SCALE
-	finish = "D4AF37"
+	finish = "DBC70C"
 	stability_cost = -15
 	melee_damage = 7
 	shutdown_bonus = 50
@@ -100,7 +104,7 @@
 	desc = "A blodsucker wouldn't stand a chance against this... if it was put inside of it or something."
 	engineering_difficulty = SKILL_RANK_MASTER
 	armor_values = ARMOR_SCALE
-	finish = "98A4BD"
+	finish = "CBD6D4"
 	stability_cost = -20
 	melee_damage = 7
 	shutdown_bonus = 50

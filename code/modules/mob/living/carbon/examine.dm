@@ -162,7 +162,7 @@
 
 		// Outlaws
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
-			. += span_boldred(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
+			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
 		var/list/known_frumentarii = user.mind?.cached_frumentarii

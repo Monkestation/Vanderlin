@@ -11,16 +11,13 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 35
-
 	base_antags = 1
 	maximum_antags = 2
+	min_players = (LOWPOP_THRESHOLD+5) * READYUP_AVG
+	denominator = LOWPOP_THRESHOLD * READYUP_AVG
 
 	weight = 12
-	cost = 1
-
 	earliest_start = 0 SECONDS
-	min_players = LOWPOP_THRESHOLD+10
 
 	typepath = /datum/round_event/antagonist/solo/werewolf
 	antag_datum = /datum/antagonist/werewolf

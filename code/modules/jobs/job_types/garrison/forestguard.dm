@@ -1,5 +1,5 @@
 /datum/job/forestguard
-	title = "Forest Guard"
+	title = JOB_FOREST_GUARD
 	tutorial = "You've been keeping the streets clean of neer-do-wells and taffers for most of your time in the garrison.\
 	You've been through the wringer - alongside soldiers in the short-lived Goblin Wars. \
 	The Wars were rough, the few who survived came back changed. Perhaps you'd agree. \
@@ -34,10 +34,9 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
-
-/datum/job/forestguard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
@@ -162,7 +161,7 @@
 	beltl = /obj/item/weapon/knife/cleaver/combat
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	armor = /obj/item/clothing/armor/leather/advanced/forrester
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	backr = /obj/item/gun/ballistic/bow/long
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
@@ -268,10 +267,9 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-/datum/job/advclass/forestguard/ruffian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyellorphan)
+	verbs = list(
+		/mob/proc/haltyellorphan
+	)
 
 /datum/attribute_holder/sheet/job/forestguard/rat
 	attribute_variance = list(
@@ -317,11 +315,10 @@
 		TRAIT_BRUSHWALK,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
-/datum/job/advclass/forestguard/rat/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-
-	add_verb(spawned, /mob/proc/haltyellorphan)
 
 /datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
@@ -330,7 +327,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	beltl = /obj/item/weapon/knife/dagger
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	armor = /obj/item/clothing/armor/leather
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,

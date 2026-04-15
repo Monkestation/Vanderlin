@@ -28,7 +28,7 @@
 
 	accept_hand = TRUE
 	implements = list(
-		TOOL_BONESETTER = 10,
+		TOOL_BONESETTER = 100,
 		TOOL_HAND = 60,
 	)
 

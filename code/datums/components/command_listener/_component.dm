@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
+GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
 
 /datum/component/command_follower
 	var/datum/follower_command/current_command
@@ -22,7 +22,6 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		/datum/job/town_elder = 18,
 		/datum/job/guardsman = 19,
 		/datum/job/gatemaster = 19,
-		/datum/job/jailor = 19,
 		/datum/job/dungeoneer = 19,
 		/datum/job/men_at_arms = 20,
 		/datum/job/forestwarden = 20,
@@ -107,7 +106,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 /datum/component/command_follower/proc/receive_command(datum/source, datum/follower_command/new_command, mob/living/carbon/human/issuer)
 	if(!new_command || !issuer)
 		return FALSE
-	if(!owner.has_status_effect(/datum/status_effect/automaton_shackled))
+	if(owner.has_status_effect(/datum/status_effect/automaton_unshackled))
 		return
 
 	//if(current_command)

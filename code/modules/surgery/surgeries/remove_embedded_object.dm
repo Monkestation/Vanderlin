@@ -38,8 +38,8 @@
 		TOOL_IMPROVISED_HEMOSTAT = 75,
 		TOOL_HAND = 60,
 	)
-	time = 3.2 SECONDS
-	accept_hand = TRUE
+
+	time = 3.5 SECONDS
 
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'

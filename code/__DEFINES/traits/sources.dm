@@ -11,6 +11,7 @@
 #define SPECIES_TRAIT "species"
 #define ORGAN_TRAIT "organ"
 #define CRIT_TRAIT "crit"
+#define ASYSTOLE_TRAIT "no_pulse"
 /// Set on roundstart, not removed unless via admins
 #define ROUNDSTART_TRAIT "roundstart"
 #define JOB_TRAIT "job"
@@ -112,3 +113,5 @@
 #define UPDATE_TRANSFORM_TRAIT "update_transform"
 /// Trait from [/datum/component/martyr_weapon]
 #define MARTYR_TRAIT "martyr"
+/// Trait from wings
+#define WING_TRAIT "wings"

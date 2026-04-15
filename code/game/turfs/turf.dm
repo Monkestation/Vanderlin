@@ -277,15 +277,19 @@
 		flags |= thing.intercept_zImpact(falling_atom, levels)
 		if(flags & FALL_STOP_INTERCEPTING)
 			break
+
 	if(prev_turf && !(flags & FALL_NO_MESSAGE))
 		prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
+
 	if(flags & FALL_INTERCEPTED)
 		return
+
 	if(zFall(falling_atom, ++levels))
 		return FALSE
+
 	if(isliving(falling_atom))
 		var/mob/living/falling_mob = falling_atom
-		if(!((falling_mob.movement_type & FLYING) && isopenspace(src)))
+		if(!((falling_mob.movement_type & (FLYING|FLOATING)) && isopenspace(src)))
 			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
 			if(dex_save >= 5)
 				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
@@ -294,15 +298,18 @@
 				falling_mob.visible_message("<span class='danger'>[falling_mob] crashes into [src]!</span>")
 				if(falling_mob.fall_damage())
 					for(var/mob/living/crumpled_mob in contents)
-						visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+						visible_message("<span class='danger'>\The [falling_atom] falls on \the [crumpled_mob.name]!</span>")
 						crumpled_mob.Stun(1)
 						crumpled_mob.take_overall_damage(falling_mob.fall_damage(levels)*2)
-	if(falling_atom.fall_damage())
+
+	else if(falling_atom.fall_damage())
 		for(var/mob/living/crumpled_mob in contents)
-			visible_message("<span class='danger'>\The [src] falls on \the [crumpled_mob.name]!</span>")
+			visible_message("<span class='danger'>\The [falling_atom] falls on \the [crumpled_mob.name]!</span>")
 			crumpled_mob.Stun(1)
 			crumpled_mob.take_overall_damage(falling_atom.fall_damage(levels)*2)
+
 	falling_atom.onZImpact(src, levels)
+
 	if(isobj(falling_atom))
 		var/obj/falling_obj = falling_atom
 		for(var/mob/living/mob in falling_obj.contents)

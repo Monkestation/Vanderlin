@@ -1,5 +1,5 @@
 /datum/job/town_elder
-	title = "Town Elder"
+	title = JOB_TOWN_ELDER
 	tutorial = "You were once a wanderer, an unremarkable soul who, alongside your old adventuring party, carved your name into history.\
 	Now, the days of adventure are long past. You sit as the town's beloved elder; while the crown may rule from afar, the people\
 	look to you to settle disputes, mend rifts, and keep the true peace in town. Not every conflict must end in bloodshed,\
@@ -27,6 +27,10 @@
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_BARD = 300
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/townannouncement
+	)
+	forced_flaw = /datum/quirk/boon/folk_hero
 
 	traits = list(
 		TRAIT_OLDPARTY
@@ -36,10 +40,6 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/militia
 	)
 
-/datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
-	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/town_elder/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

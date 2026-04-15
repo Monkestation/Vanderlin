@@ -98,4 +98,7 @@
 			span_warning("[user] accidentally knocks out one of [target]'s teeth!"),
 			TRUE,
 		)
+
+	target.take_bodypart_damage(9, 0, required_status = BODYPART_ORGANIC)
+
 	return TRUE

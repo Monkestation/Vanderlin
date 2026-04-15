@@ -140,13 +140,13 @@
 			data[BLOODCOST_TOTAL] += data[BLOODCOST_AMOUNT_GRAB]
 			if (ishuman(data[BLOODCOST_TARGET_GRAB]))
 				var/mob/living/carbon/human/H = data[BLOODCOST_TARGET_GRAB]
-				H.blood_volume -= data[BLOODCOST_AMOUNT_GRAB]
+				H.adjust_bloodvolume(-data[BLOODCOST_AMOUNT_GRAB])
 				H.adjust_bloodpool(-data[BLOODCOST_AMOUNT_GRAB])
 				H.take_overall_damage(data[BLOODCOST_AMOUNT_GRAB] ? 0.1 : 0)
 		if (data[BLOODCOST_TARGET_BLEEDER])
 			data[BLOODCOST_TOTAL] += data[BLOODCOST_AMOUNT_BLEEDER]
 			var/mob/living/carbon/human/H = data[BLOODCOST_TARGET_BLEEDER]
-			H.blood_volume -= data[BLOODCOST_AMOUNT_BLEEDER]
+			H.adjust_bloodvolume(-data[BLOODCOST_AMOUNT_BLEEDER])
 			H.adjust_bloodpool(-data[BLOODCOST_AMOUNT_BLEEDER])
 			H.take_overall_damage(data[BLOODCOST_AMOUNT_BLEEDER] ? 0.1 : 0)
 		if (data[BLOODCOST_TARGET_HELD])
@@ -166,7 +166,7 @@
 			if (ishuman(user))
 				var/mob/living/carbon/human/H = user
 				var/blood_before = H.blood_volume
-				H.blood_volume -= data[BLOODCOST_AMOUNT_USER]
+				H.adjust_bloodvolume(-data[BLOODCOST_AMOUNT_USER])
 				H.adjust_bloodpool(-data[BLOODCOST_AMOUNT_USER])
 				var/blood_after = H.blood_volume
 				if (blood_before > BLOOD_VOLUME_SAFE && blood_after < BLOOD_VOLUME_SAFE)

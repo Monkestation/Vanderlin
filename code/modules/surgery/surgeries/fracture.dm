@@ -18,8 +18,8 @@
 		BODY_ZONE_L_LEG,
 	)
 
-	skill_min = SKILL_RANK_APPRENTICE
-	skill_median = SKILL_RANK_EXPERT
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/set_bone
 	name = "Set bones"

@@ -41,7 +41,7 @@
 	)
 
 /datum/job/servant
-	title = "Servant"
+	title = JOB_SERVANT
 	tutorial = "You are the faceless, nameless labor that keeps the royal court fed, washed, and attended to. \
 	You work your fingers to the bone nearly every dae, \
 	and have naught to show for it but boney fingers. \
@@ -69,7 +69,7 @@
 	)
 
 /datum/outfit/servant
-	name = "Servant"
+	name = JOB_SERVANT
 	neck = /obj/item/key/manor
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
@@ -117,7 +117,7 @@
 	)
 
 /datum/job/tapster
-	title = "Tapster"
+	title = JOB_TAPSTER
 	f_title = "Alemaid"
 	tutorial = "The Innkeeper needed waiters and extra hands. So here am I, serving the food and drinks while ensuring the tavern rooms are kept clean."
 	department_flag = APPRENTICES

@@ -323,7 +323,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_base_edible_reagents_to_add()
 	var/return_list = list(
 		/datum/reagent/consumable/nutriment = 2,
-		/datum/reagent/blood = 1,
 	)
 	if(required_fluid_type == FISH_FLUID_SALTWATER)
 		return_list[/datum/reagent/flour] = 0.4

@@ -1,7 +1,7 @@
 
 /datum/antagonist/skeleton
 	name = "Skeleton"
-	roundend_category = "Lich"
+	roundend_category = ROLE_LICH
 	job_rank = ROLE_NECRO_SKELETON
 	antagpanel_category = "Necromancy"
 	antag_hud_type = ANTAG_HUD_NECROMANCY

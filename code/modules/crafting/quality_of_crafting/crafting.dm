@@ -110,8 +110,7 @@
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom  = /obj/item/natural/fibers
-	allow_inverse_start = TRUE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	output = /obj/item/gun/ballistic/bow/short
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/crafting/bow
@@ -123,8 +122,7 @@
 
 	starting_atom = /obj/item/natural/bowstring
 	attacked_atom = /obj/item/natural/wood/plank
-	allow_inverse_start = TRUE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	output = /obj/item/gun/ballistic/bow
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/crafting/long_bow
@@ -136,8 +134,7 @@
 	)
 	attacked_atom = /obj/item/natural/wood/plank
 	starting_atom  = /obj/item/natural/bowstring
-	allow_inverse_start = TRUE
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	output = /obj/item/gun/ballistic/bow/long
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/crafting/bowstring
@@ -222,7 +219,7 @@
 	)
 	attacked_atom = /obj/item/grown/log/tree/small
 	starting_atom = /obj/item/weapon/knife
-	output = /obj/item/gun/ballistic/revolver/grenadelauncher/blowgun
+	output = /obj/item/gun/ballistic/blowgun
 
 /datum/repeatable_crafting_recipe/crafting/candle
 	name = "candle"

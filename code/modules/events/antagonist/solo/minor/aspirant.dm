@@ -31,8 +31,12 @@
 
 	base_antags = 1
 	maximum_antags = 1
+	min_players = (LOWPOP_THRESHOLD*0.8) * READYUP_AVG
+	cost = 0.8
 
 	earliest_start = 0 SECONDS
+	weight = 8
+
 	secondary_events = list(
 		/datum/round_event_control/antagonist/solo/rebel = 2, // paint the town red baby
 		/datum/round_event_control/antagonist/solo/wretch = 1,
@@ -42,10 +46,6 @@
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1,
 	)
-
-	min_players = 25
-	weight = 8
-	cost = 0.8
 
 	typepath = /datum/round_event/antagonist/solo/aspirant
 

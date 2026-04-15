@@ -235,6 +235,7 @@ interface Recipe {
   input_nodes?: NodeEntry[];
   output_nodes?: NodeEntry[];
   special_nodes?: NodeEntry[];
+  source_mobs?: { name: string; icon: string; icon_state: string; _path: string }[];
   // snack_processing
   mill_name?: string;
   mill_icon?: string;
@@ -268,6 +269,25 @@ interface Recipe {
   drops?: { name: string; icon: string; icon_state: string; _path: string; source_label: string }[];
   // pottery
   speed_sweetspot?: string | number;
+  // organ
+  zone?: string;
+  threshold_low?: number;
+  threshold_high?: number;
+  threshold_max?: number;
+  msg_bruised?: string;
+  msg_broken?: string;
+  msg_bruised_healed?: string;
+  msg_broken_healed?: string;
+  msg_failing?: string;
+  msg_fixed?: string;
+  healing_factor?: number;
+  healing_items?: ItemRef[];
+  healing_tools?: string[];
+  attaching_items?: ItemRef[];
+  blood_req?: number;
+  oxygen_req?: number;
+  nutriment_req?: number;
+  hydration_req?: number;
 }
 
 interface RecipeBookData {
@@ -364,7 +384,7 @@ const recipeTypeLabel = (type: string): string => {
     fish: 'Fish', slapcraft: 'Crafting', orderless_slapcraft: 'Crafting',
     snack_processing: 'Processing',
     obtained_from: 'Source',
-    source_page: 'Source',
+    source_page: 'Source', organ: 'Organ',
   };
   return labels[type] || type;
 };
@@ -469,6 +489,84 @@ const OutputBanner = (props: {
     </Box>
   );
 };
+
+const DetailOrgan = ({ r, lookup, pickerMap, allRecipes, essenceIndex, nav }: { r: Recipe; lookup: Map<string, Recipe>; pickerMap: Map<string, Recipe[]>; allRecipes: Recipe[]; essenceIndex: Map<string, Recipe[]>; nav: (r: Recipe) => void }) => (
+  <>
+    {r.zone && <Box className="RecipeBook__hint">Located in: <strong>{r.zone}</strong></Box>}
+
+    <SectionHead>Damage Thresholds</SectionHead>
+    <Box className="RecipeBook__step-block">
+      {r.threshold_low !== undefined && (
+        <Box className="RecipeBook__step-row" style={{ color: '#f0ad4e' }}>
+          Bruised: {r.threshold_low}
+          {r.msg_bruised && <Box className="RecipeBook__step-note" dangerouslySetInnerHTML={{ __html: r.msg_bruised }} />}
+        </Box>
+      )}
+      {r.threshold_high !== undefined && (
+        <Box className="RecipeBook__step-row" style={{ color: '#d9534f' }}>
+          Failing: {r.threshold_high}
+          {r.msg_broken && <Box className="RecipeBook__step-note" dangerouslySetInnerHTML={{ __html: r.msg_broken }} />}
+        </Box>
+      )}
+      {r.threshold_max !== undefined && (
+        <Box className="RecipeBook__step-row" style={{ color: '#880000' }}>
+          Destroyed: {r.threshold_max}
+          {r.msg_failing && <Box className="RecipeBook__step-note" dangerouslySetInnerHTML={{ __html: r.msg_failing }} />}
+        </Box>
+      )}
+    </Box>
+
+    {(r.msg_bruised_healed || r.msg_broken_healed || r.msg_fixed) && (
+      <>
+        <SectionHead>Recovery Messages</SectionHead>
+        <Box className="RecipeBook__step-block">
+          {r.msg_bruised_healed && <Box className="RecipeBook__step-row" dangerouslySetInnerHTML={{ __html: r.msg_bruised_healed }} />}
+          {r.msg_broken_healed && <Box className="RecipeBook__step-row" dangerouslySetInnerHTML={{ __html: r.msg_broken_healed }} />}
+          {r.msg_fixed && <Box className="RecipeBook__step-row" dangerouslySetInnerHTML={{ __html: r.msg_fixed }} />}
+        </Box>
+      </>
+    )}
+
+    <SectionHead>Healing</SectionHead>
+    <Box className="RecipeBook__step-block">
+      {r.healing_factor !== undefined && (
+        <Box className="RecipeBook__step-row">Passive healing: {r.healing_factor}/s</Box>
+      )}
+      {!!r.healing_tools?.length && (
+        <Box className="RecipeBook__step-row">Tools: {r.healing_tools.join(', ')}</Box>
+      )}
+    </Box>
+    {!!r.healing_items?.length && (
+      <>
+        <SectionHead>Healing Items</SectionHead>
+        {r.healing_items.map((item, i) => (
+          <ItemRow key={i} item={item} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} onNavigate={nav} />
+        ))}
+      </>
+    )}
+
+    {!!r.attaching_items?.length && (
+      <>
+        <SectionHead>Reattachment Items</SectionHead>
+        {r.attaching_items.map((item, i) => (
+          <ItemRow key={i} item={item} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} onNavigate={nav} />
+        ))}
+      </>
+    )}
+
+    {(r.blood_req || r.oxygen_req || r.nutriment_req || r.hydration_req) ? (
+      <>
+        <SectionHead>Body Requirements</SectionHead>
+        <Box className="RecipeBook__step-block">
+          {!!r.blood_req && <Box className="RecipeBook__step-row">Blood: {r.blood_req} ligulae a breath</Box>}
+          {!!r.oxygen_req && <Box className="RecipeBook__step-row">Oxygen: {r.oxygen_req} ligulae a breath</Box>}
+          {!!r.nutriment_req && <Box className="RecipeBook__step-row">Nutriment: {r.nutriment_req} ligulae a breath</Box>}
+          {!!r.hydration_req && <Box className="RecipeBook__step-row">Hydration: {r.hydration_req} ligulae a breath</Box>}
+        </Box>
+      </>
+    ) : null}
+  </>
+);
 
 const DetailRepeatable = ({ r, lookup, pickerMap, allRecipes, essenceIndex, nav }: { r: Recipe; lookup: Map<string, Recipe>; pickerMap: Map<string, Recipe[]>; allRecipes: Recipe[]; essenceIndex: Map<string, Recipe[]>; nav: (r: Recipe) => void }) => (
   <>
@@ -1066,7 +1164,7 @@ const DetailChimericNode = ({ r }: { r: Recipe }) => (
   </>
 );
 
-const DetailChimericTable = ({ r }: { r: Recipe }) => {
+const DetailChimericTable = ({ r, lookup, pickerMap, allRecipes, essenceIndex, nav }: { r: Recipe; lookup: Map<string, Recipe>; pickerMap: Map<string, Recipe[]>; allRecipes: Recipe[]; essenceIndex: Map<string, Recipe[]>; nav: (r: Recipe) => void }) => {
   const NodeList = ({ nodes, color }: { nodes?: NodeEntry[]; color: string }) => {
     if (!nodes?.length) return null;
     return (
@@ -1108,6 +1206,27 @@ const DetailChimericTable = ({ r }: { r: Recipe }) => {
       <SectionHead>Input Nodes</SectionHead><NodeList nodes={r.input_nodes} color="cyan" />
       <SectionHead>Output Nodes</SectionHead><NodeList nodes={r.output_nodes} color="orange" />
       <SectionHead>Special Nodes</SectionHead><NodeList nodes={r.special_nodes} color="purple" />
+      {!!r.source_mobs?.length && (
+        <>
+          <SectionHead>Blood Source Mobs</SectionHead>
+          <Box className="RecipeBook__step-block">
+            {r.source_mobs.map((mob, i) => (
+              <Box key={i} className="RecipeBook__step-row">
+                <Sprite icon={mob.icon} icon_state={mob.icon_state} />
+                <RecipeLink
+                  name={mob.name}
+                  path={mob._path}
+                  allRecipes={allRecipes}
+                  essenceIndex={essenceIndex}
+                  lookup={lookup}
+                  pickerMap={pickerMap}
+                  onNavigate={nav}
+                />
+              </Box>
+            ))}
+          </Box>
+        </>
+      )}
     </>
   );
 };
@@ -1401,13 +1520,14 @@ const RecipeDetail = (props: {
       case 'surgery':             return <DetailSurgery r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'wound':               return <DetailWound r={r} />;
       case 'chimeric_node':       return <DetailChimericNode r={r} />;
-      case 'chimeric_table':      return <DetailChimericTable r={r} />;
+      case 'chimeric_table': return <DetailChimericTable r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'fish':                return <DetailFish r={r} />;
       case 'snack_processing':    return <DetailSnackProcessing r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'obtained_from':       return <DetailObtainedFrom r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'source_page':         return <DetailSourcePage r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'slapcraft':           return <DetailSlapcraft r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       case 'orderless_slapcraft': return <DetailOrderlessSlapcraft r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
+      case 'organ':               return <DetailOrgan r={r} allRecipes={allRecipes} essenceIndex={essenceIndex} lookup={lookup} pickerMap={pickerMap} nav={onNavigate} />;
       default:
         return <Box className="RecipeBook__desc">No details available for type: {r.type}</Box>;
     }

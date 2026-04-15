@@ -110,13 +110,16 @@
 
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2))
 		return
+
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
 		if(levels <= 2)
 			return
-	if(movement_type & FLYING)
+
+	if(movement_type & (FLYING|FLOATING))
 		to_chat(src, span_info("You glide down to a more manageable height."))
 		playsound(src, 'sound/mobs/wingflap.ogg', 75, FALSE)
 		return
+
 	var/dex_save = GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)
 	if(dex_save >= 5) // Master climbers can fall down 2 levels without hurting themselves
 		if(levels <= 2)
@@ -124,6 +127,7 @@
 			if(m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't make a sound
 				playsound(src, 'sound/foley/bodyfall (1).ogg', 100, FALSE)
 			return
+
 	var/points
 	for(var/i in 2 to levels)
 		i++
@@ -133,6 +137,7 @@
 	if(!isgroundlessturf(T))
 		ZImpactDamage(T, levels)
 		record_round_statistic(STATS_MOAT_FALLERS)
+
 	return ..()
 
 /mob/living/proc/ZImpactDamage(turf/T, levels)
@@ -390,6 +395,7 @@
 /mob/living/carbon/proc/lying_attack_check(mob/living/L, obj/item/I)
 	if(L == src)
 		return TRUE
+
 	var/CZ = FALSE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if((L.body_position != LYING_DOWN) && (body_position != LYING_DOWN)) //we are both standing
@@ -730,10 +736,10 @@
 	return TRUE
 
 /mob/living/proc/InCritical()
-	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS))
+	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS || stat == HARD_CRIT))
 
 /mob/living/proc/InFullCritical()
-	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && stat == UNCONSCIOUS)
+	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && (stat == UNCONSCIOUS  || stat == HARD_CRIT))
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
@@ -974,6 +980,7 @@
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
+			human.update_eyes()
 
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
@@ -1536,6 +1543,10 @@
 /mob/living/resist_grab(moving_resist)
 	. = TRUE
 
+	if(HAS_TRAIT(pulledby, TRAIT_PACIFISM))
+		pulledby.stop_pulling()
+		return FALSE
+
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		to_chat(src, span_warning("I'm restrained!"))
 		return
@@ -2092,9 +2103,9 @@
 	C.Paralyze(40)
 
 /mob/living/ConveyorMove()
-	if((movement_type & FLYING) && !stat)
+	if((movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && !stat)
 		return
-	..()
+	return ..()
 
 /mob/living/can_be_pulled()
 	return ..() && !(buckled && buckled.buckle_prevents_pull)
@@ -2146,6 +2157,17 @@
 		else
 			registered_z = null
 
+/mob/living/can_zFall(turf/source, levels = 1, turf/target, direction)
+	// Solely such that organ wings only allow you to fly up 1 Z level
+	if(!HAS_TRAIT_FROM(src, TRAIT_MOVE_FLOATING, WING_TRAIT) && !HAS_TRAIT_FROM(src, TRAIT_MOVE_FLYING, WING_TRAIT))
+		return ..()
+
+	var/turf/below = GET_TURF_BELOW(source)
+	if(isopenspace(below))
+		return TRUE
+
+	return ..()
+
 /mob/living/onTransitZ(old_z,new_z)
 	..()
 	update_z(new_z)
@@ -2165,7 +2187,7 @@
 			if(G.grab_state == GRAB_AGGRESSIVE)
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
-		if(storage)
+		if(storage && !istype(storage, /datum/component/storage/concrete/organ))
 			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
@@ -2273,9 +2295,9 @@
 		if("eye_blind")
 			adjust_temp_blindness(var_value)
 		if("eye_damage")
-			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-			if(E)
-				E.setOrganDamage(var_value)
+			var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+				eyes.setOrganDamage(var_value)
 		if("maxHealth")
 			updatehealth()
 		if("resize")
@@ -2698,22 +2720,35 @@
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT)
 		if(UNCONSCIOUS)
 			cure_blind(UNCONSCIOUS_TRAIT)
+		if(HARD_CRIT)
+			if(stat != UNCONSCIOUS)
+				cure_blind(UNCONSCIOUS_TRAIT)
 	switch(stat) //Current stat.
 		if(CONSCIOUS)
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
-			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED), STAT_TRAIT)
+			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED, TRAIT_CRITICAL_CONDITION), STAT_TRAIT)
 			log_combat(src, src, "regained consciousness")
 		if(SOFT_CRIT)
 			if(pulledby)
 				ADD_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT) //adding trait sources should come before removing to avoid unnecessary updates
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
+			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			log_combat(src, src, "entered soft crit")
 		if(UNCONSCIOUS)
 			become_blind(UNCONSCIOUS_TRAIT)
 			log_combat(src, src, "lost consciousness")
+			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
+				ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			else
+				REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+		if(HARD_CRIT)
+			if(. != UNCONSCIOUS)
+				become_blind(UNCONSCIOUS_TRAIT)
+			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 		if(DEAD)
+			REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			log_combat(src, src, "died")
 	if(!can_hear())
 		stop_sound_channel(CHANNEL_AMBIENCE)

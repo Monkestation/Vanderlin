@@ -12,11 +12,11 @@
 
 	base_antags = 1
 	maximum_antags = 4
-
-	denominator = 25
-	min_players = LOWPOP_THRESHOLD
-	weight = 7
+	denominator = (LOWPOP_THRESHOLD*0.5) * READYUP_AVG
+	min_players = LOWPOP_THRESHOLD * READYUP_AVG
 	cost = 0.9
+
+	weight = 8
 
 	earliest_start = 0 SECONDS
 

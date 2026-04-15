@@ -1,5 +1,5 @@
 /datum/job/squire
-	title = "Squire"
+	title = JOB_SQUIRE
 	tutorial = "You've always had greater aspirations than the simple life of a peasant. \n\
 	You and your friends practiced the basics, swordfighting with sticks and loosing arrows into hay bale targets. \n\
 	The Captain took notice of your potential, and recruited you as a personal ward. \
@@ -29,7 +29,7 @@
 	can_be_apprentice = TRUE
 
 /datum/outfit/squire
-	name = "Squire"
+	name = JOB_SQUIRE
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
 	pants = /obj/item/clothing/pants/chainlegs/iron
 	shoes = /obj/item/clothing/shoes/boots
@@ -248,7 +248,7 @@
 	name = "Bowman Squire"
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	armor = /obj/item/clothing/armor/chainmail
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backl = /obj/item/gun/ballistic/bow/short
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	backr = /obj/item/storage/backpack/satchel

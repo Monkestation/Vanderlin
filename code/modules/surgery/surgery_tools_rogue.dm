@@ -220,7 +220,7 @@
 	if(!ishuman(interacting_with))
 		return NONE
 
-	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) < 1)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine) < 10)
 		return ITEM_INTERACT_BLOCKING
 
 	if(interacting_with == user)

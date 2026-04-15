@@ -53,7 +53,7 @@
 
 	// Stash held melee weapon if needed so both hands are free for the bow
 	for(var/obj/item/held in pawn.get_active_held_items())
-		if(istype(held, /obj/item/gun/ballistic/revolver/grenadelauncher/bow))
+		if(istype(held, /obj/item/gun/ballistic/bow))
 			continue
 		if(!held)
 			continue
@@ -68,14 +68,14 @@
 			controller.clear_blackboard_key(BB_ARCHER_NPC_QUIVER) //this is weird you might say? but it saves a memory slot since it cannot execute a bow shot without a quiver causing it to go on cooldown for 40 seconds.
 			return FALSE
 
-	var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/bow = null
+	var/obj/item/gun/ballistic/bow/bow = null
 	for(var/obj/item/held in pawn.get_active_held_items())
-		if(istype(held, /obj/item/gun/ballistic/revolver/grenadelauncher/bow))
+		if(istype(held, /obj/item/gun/ballistic/bow))
 			bow = held
 			break
 	if(!bow)
 		for(var/obj/item/worn in pawn.get_equipped_items())
-			if(istype(worn, /obj/item/gun/ballistic/revolver/grenadelauncher/bow))
+			if(istype(worn, /obj/item/gun/ballistic/bow))
 				pawn.put_in_active_hand(worn)
 				bow = worn
 				break
@@ -100,10 +100,10 @@
 		return FALSE
 
 	// For crossbows, ensure cocked
-	if(istype(bow, /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow))
-		var/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/xbow = bow
-		if(!xbow.cocked)
-			xbow.cocked = TRUE
+	if(istype(bow, /obj/item/gun/ballistic/bow/cross))
+		var/obj/item/gun/ballistic/bow/cross/xbow = bow
+		if(!xbow.string_pulled)
+			xbow.string_pulled = TRUE
 			xbow.update_appearance(UPDATE_ICON_STATE)
 
 	set_movement_target(controller, target)
@@ -128,9 +128,9 @@
 		finish_action(controller, FALSE, target_key)
 		return
 
-	var/obj/item/gun/ballistic/revolver/grenadelauncher/bow/bow = null
+	var/obj/item/gun/ballistic/bow/bow = null
 	for(var/obj/item/held in pawn.get_active_held_items())
-		if(istype(held, /obj/item/gun/ballistic/revolver/grenadelauncher/bow))
+		if(istype(held, /obj/item/gun/ballistic/bow))
 			bow = held
 			break
 	if(!bow || !bow.chambered)

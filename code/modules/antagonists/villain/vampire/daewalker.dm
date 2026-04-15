@@ -171,7 +171,7 @@
 	ring =  /obj/item/clothing/ring/active/nomag
 
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	backl = /obj/item/storage/backpack/satchel/otavan
 	backr = /obj/item/weapon/scabbard/sword/noble

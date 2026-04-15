@@ -8,6 +8,9 @@
 
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 
+	skill_min = SKILL_LEVEL_EXPERT
+	skill_median = SKILL_LEVEL_MASTER
+
 /datum/surgery/extract_tooth/surgery_valid(mob/living/surgeon, mob/living/carbon/patient, obj/item/implement)
 	. = ..()
 	if(!.)
@@ -23,8 +26,8 @@
 	name = "Extract tooth"
 
 	implements = list(
-		/obj/item/weapon/surgery/hemostat = 100,
-		/obj/item/weapon/tongs = 70,
+		/obj/item/weapon/tongs = 90,
+		/obj/item/weapon/surgery/hemostat = 70,
 	)
 
 	time = 3 SECONDS

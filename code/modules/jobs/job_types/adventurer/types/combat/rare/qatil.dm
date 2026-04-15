@@ -33,7 +33,7 @@
 	)
 	outfit = /datum/outfit/adventurer/qatil
 	total_positions = 1
-	roll_chance = 25
+	roll_chance = 10
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 

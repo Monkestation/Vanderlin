@@ -87,6 +87,15 @@
 	if(target.health > HALFWAYCRITDEATH)
 		target.adjustOxyLoss(target.health - HALFWAYCRITDEATH)
 
+	for(var/obj/item/organ/organs as anything in target.internal_organs)
+		if(organs.germ_level >= INFECTION_LEVEL_ONE * 0.2)
+			organs.set_germ_level(INFECTION_LEVEL_ONE * 0.2)
+		if(organs.organ_flags & ORGAN_DESTROYED)
+			organs.organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+			organs.scar_organ(20, 40)
+		if(organs.damage > organs.medium_threshold)
+			organs.applyOrganDamage(-organs.medium_threshold)
+
 	target.reagents.add_reagent(/datum/reagent/medicine/atropine, 3)
 	target.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	target.visible_message(span_notice("[target] is dragged back from Necra's hold!"), span_green("I awake from the void."))
