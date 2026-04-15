@@ -352,7 +352,7 @@
 	if (locate(/obj/structure/flora/field/euphorbia) in get_turf(L))
 		to_chat(L, span_warning("The spines hurt your feet"))
 
-	if (prob(20) && ishuman(L))
+	if (prob(2) && ishuman(L))
 		var/mob/living/carbon/human/H = L
 		var/obj/item/bodypart/BP = pick(H.bodyparts)
 		var/obj/item/natural/thorn/TH = new(get_turf(H))
