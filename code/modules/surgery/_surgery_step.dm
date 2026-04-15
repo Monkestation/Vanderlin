@@ -276,7 +276,7 @@
 		requirement += skill_delta
 
 	if(implements)
-		var/implement_type = tool_check(user, tool)
+		var/implement_type = is_implement(user, tool)
 		if(implement_type)
 			var/tool_chance = implements[implement_type] || 0
 			requirement += round((100 - tool_chance) / 100 * 6, 1)
