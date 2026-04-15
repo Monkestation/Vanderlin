@@ -1393,12 +1393,16 @@
 	var/mob/living/L = usr
 	if(!istype(L))
 		return
-	if(tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD")) != "TRACE BLOOD")
-		//Originally it was supposed to be a choice between looking at the mirror or the blood that fueled it. I wanted to add a way to sewer connection but changed my mind.
+	var/mob/living/target = null
+	var/input = tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD", "LOOK BACK"))
+	if(input == "TRACE BLOOD")
+		target = source.feeder?.resolve()
+	else if(input == "LOOK BACK")
+		target = source
+	else
 		return
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
-	var/mob/living/target = source.feeder?.resolve()
 	if(!target)
 		return
 	var/mob/dead/observer/screye/blackmirror/S = L.scry_ghost()
