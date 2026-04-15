@@ -40,10 +40,6 @@
 	if(pacify_coffin(cast_on, owner))
 		if(istype(cast_on, /obj/structure/closet/dirthole))
 			var/obj/structure/closet/dirthole/grave = cast_on // from this point on we know it is a grave subtype
-			if(grave.is_consecrated)
-				to_chat(owner, span_warning("You cannot perform burial rites on something that already was consecrated!"))
-				reset_spell_cooldown()
-				return . | SPELL_CANCEL_CAST
 			if(grave.headstone) //Inscriptions!
 				if(!generate_inscription(grave, grave.headstone))
 					grave.headstone.inscription = null //Reset inscription
