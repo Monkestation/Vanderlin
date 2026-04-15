@@ -478,6 +478,27 @@
 		else
 			to_chat(swimming_mob, forced ? span_warningbig("You sink downwards!") : span_notice("You swim downward."))
 
+/**
+ * Prepares a moving movable to be precipitated if Move() is successful.
+ * This is done in Enter() and not Entered() because there's no easy way to tell
+ * if the latter was called by Move() or forceMove() while the former is only called by Move().
+ */
+/turf/open/water/Enter(atom/movable/movable, atom/oldloc)
+	. = ..()
+	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
+		return
+	if(.)
+		//higher priority than CURRENTLY_Z_FALLING so the movable doesn't fall on Entered()
+		movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE)
+
+///Makes movables fall when forceMove()'d to this turf.
+/turf/open/openspace/Entered(atom/movable/movable)
+	. = ..()
+	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
+		return
+	if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING))
+		zFall(movable, falling_from_move = TRUE)
+
 /turf/open/water/zPassIn(direction)
 	if(direction == DOWN)
 		for(var/obj/contained_object in contents)
