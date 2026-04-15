@@ -80,7 +80,7 @@
 /**
  * Reagent container interactions clicked by
  *
- * Breaking eggs ?? yay?
+ * Submerging
  *
  * Labeling
  *
