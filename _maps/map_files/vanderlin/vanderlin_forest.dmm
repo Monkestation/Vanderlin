@@ -6968,6 +6968,7 @@
 	pixel_y = -1;
 	pixel_x = -5
 	},
+/obj/structure/bars/grille,
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
 "PZ" = (
@@ -8093,6 +8094,10 @@
 /obj/effect/mapping_helpers/access/keyset/thatchwood/farm,
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness/shop)
+"Wy" = (
+/obj/structure/bars/grille,
+/turf/open/openspace,
+/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Wz" = (
 /obj/effect/decal/remains/xeno/larva,
 /obj/effect/decal/cleanable/debris/stone,
@@ -65563,8 +65568,8 @@ PG
 TS
 PG
 YH
-VH
-VH
+Wy
+Wy
 DC
 JD
 JD
@@ -65765,9 +65770,9 @@ PG
 EH
 yo
 FJ
+Wy
 VH
-VH
-VH
+Wy
 DC
 JD
 JD
@@ -65967,9 +65972,9 @@ xz
 Ad
 gc
 FJ
-VH
-VH
-VH
+Wy
+Wy
+Wy
 DC
 JD
 JD
@@ -66574,9 +66579,9 @@ DC
 ru
 PG
 cd
+Wy
 VH
-VH
-VH
+Wy
 DC
 JD
 JD
@@ -66776,9 +66781,9 @@ DC
 DC
 ZO
 Tw
-VH
-VH
-VH
+Wy
+Wy
+Wy
 DC
 JD
 JD
