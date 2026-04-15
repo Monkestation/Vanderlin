@@ -1284,8 +1284,11 @@
 	if(stat)
 		return FALSE
 
-	if(tgui_alert(src, "Yield in surrender?","Beg for Mercy", list("YES","NO"), 15 SECONDS) != "YES" || surrendering) // Additional surrender check in case they try to hold multiple TGUI
+	if(tgui_alert(src, "Yield in surrender?","Beg for Mercy", list("YES","NO"), 15 SECONDS) != "YES") // Additional surrender check in case they try to hold multiple TGUI
 		return FALSE
+		
+	if(surrendering)
+		return
 
 	surrendering = TRUE
 
