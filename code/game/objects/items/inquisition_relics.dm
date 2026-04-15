@@ -1273,6 +1273,10 @@
 
 	playsound(src, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 
+	if(target.real_name == user.real_name) //prevents bugging the timer through looking at yourself
+		to_chat(user, span_danger("I see my reflection in the mirror... It is quite distorted, but what am I trying to achieve?"))
+		return
+
 	ADD_TRAIT(user, TRAIT_NOSSDINDICATOR, "blackmirror")
 
 	var/mob/dead/observer/screye/blackmirror/S = user.scry_ghost()
