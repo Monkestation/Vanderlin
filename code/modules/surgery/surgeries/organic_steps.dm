@@ -11,8 +11,6 @@
 
 	time = 1.6 SECONDS
 
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/simple_animal)
-
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/scalpel2.ogg'
 

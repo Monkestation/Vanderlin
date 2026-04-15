@@ -97,18 +97,18 @@
 		return NONE
 
 	if(is_open_container() && reagents.total_volume > 0 && !GetComponent(/datum/component/storage))
-		if(!istype(I, /obj/item/reagent_containers) && !istype(I, /obj/item/paper))
+		if(!istype(tool, /obj/item/reagent_containers) && !istype(tool, /obj/item/paper))
 			var/splash_amount = reagents.total_volume * 0.05
 			if(splash_amount < 1)
 				splash_amount = 1
 			var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
-			splash_holder.my_atom = I
+			splash_holder.my_atom = tool
 			reagents.trans_to(splash_holder, splash_amount, 4, 1, 1)
 			splash_holder.chem_temp = reagents.chem_temp
 			splash_holder.handle_reactions()
-			splash_holder.reaction(I, TOUCH, 1)
+			splash_holder.reaction(tool, TOUCH, 1)
 			qdel(splash_holder)
-			to_chat(user, span_notice("You submerge \the [I] into [src]."))
+			to_chat(user, span_notice("You submerge [tool] into [src]."))
 			return ITEM_INTERACT_SUCCESS
 
 	var/hotness = tool.get_temperature()

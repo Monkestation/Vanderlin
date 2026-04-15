@@ -9,7 +9,7 @@
 		/datum/surgery_step/infuse_lux,
 	)
 	possible_locs = list(BODY_ZONE_CHEST)
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	target_mobtypes = list(/mob/living/carbon/human)
 
 	skill_min = SKILL_LEVEL_EXPERT
 	skill_median = SKILL_LEVEL_MASTER
@@ -65,7 +65,7 @@
 		span_notice("[user] begins to something into [target]'s innards..."),
 	)
 
-/datum/surgery_step/infuse_lux/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
+/datum/surgery_step/infuse_lux/success(mob/living/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	if(!target.revive(excess_healing = 50))
 		return failure(user, target, target_zone, tool, surgery)
 
