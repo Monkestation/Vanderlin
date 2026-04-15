@@ -1280,15 +1280,15 @@
 	set category = "IC.Interaction"
 
 	if(surrendering)
-		return FALSE
-	
-	if(stat)
-		return FALSE
+		return
 
-	if(tgui_alert(src, "Yield in surrender?","Beg for Mercy", list("YES","NO"), 15 SECONDS) != "YES") // Additional surrender check in case they try to hold multiple TGUI
-		return FALSE
-		
-	if(surrendering)
+	if(stat)
+		return
+
+	if(tgui_alert(src, "Yield in surrender?","Beg for Mercy", list("YES","NO"), 15 SECONDS) != "YES")
+		return
+
+	if(surrendering)  // Additional surrender check in case they try to hold multiple TGUI
 		return
 
 	surrendering = TRUE
@@ -1304,7 +1304,6 @@
 	playsound(src, 'sound/misc/surrender.ogg', 100, FALSE, -1)
 	toggle_cmode()
 	addtimer(VARSET_CALLBACK(src, surrendering, FALSE), 15 SECONDS)
-	return TRUE
 
 /mob/proc/stop_attack(message = FALSE)
 	if(atkswinging)
