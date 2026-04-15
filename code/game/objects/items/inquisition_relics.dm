@@ -1399,8 +1399,6 @@
 		target = source.feeder?.resolve()
 	else if(input == "LOOK BACK")
 		target = source
-	else
-		return
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
 	if(!target)
