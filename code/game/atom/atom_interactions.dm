@@ -106,7 +106,7 @@
 		for(var/datum/surgery/operation as anything in surgeries)
 			if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
 				continue
-			if(!(operation.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+			if(operation.surgery_flags & SURGERY_NOT_SELF_OPERABLE && (user == src))
 				continue
 			if(operation.next_step(user, modifiers))
 				return ITEM_INTERACT_SUCCESS
@@ -118,7 +118,7 @@
 	for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
 		if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
 			continue
-		if(!(operation.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+		if(operation.surgery_flags & SURGERY_NOT_SELF_OPERABLE && (user == src))
 			continue
 		if(!operation.can_next_step(user, modifiers))
 			continue
