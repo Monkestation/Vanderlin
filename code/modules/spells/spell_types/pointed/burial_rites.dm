@@ -90,41 +90,51 @@
 	// We have the names of the mobs we buried, now we grab the mobs themselves and prepare a list of final_words
 	var/list/their_final_words = list()
 
-	to_chat(owner, span_warning("Energy flows into \the [src] from my hands, I must stand by \the [src] or risk failing the rites..."))
-	for(var/mob/mob in GLOB.mob_list)
-		if(ishuman(mob))
-			var/living/carbon/human/human = mob
-			if(human.real_name in names)
-				//Check if final_words set (already moved on)
-				if(human.final_words)
-					their_final_words[name] = pick(animal.speak)
-				//Find their observer if it exists, if no words given, we make one up
-				var/my_final_words
-				// Find the observer
-				for(var/mob/dead/observer/Ghost in GLOB.player_list)
-					if(!Ghost.mind || QDELETED(Ghost.mind.current))
-						continue
-					else if(ishuman(Ghost.mind.current))
-						if((!Ghost.mind.current == human))
+	to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
+	for(var/name in names) //We need them in order
+		var/found = FALSE
+		for(var/mob/mob in GLOB.mob_list)
+			if(found)
+				break
+			if(ishuman(mob))
+				var/mob/living/carbon/human/human = mob
+				if(human.real_name == name)
+					//Check if final_words set (already moved on)
+					if(human.final_words)
+						their_final_words += human.final_words
+					//Find their observer if it exists, if no words given, we make one up
+					var/my_final_words
+					// Find the observer
+					for(var/mob/dead/observer/Ghost in GLOB.player_list)
+						if(!Ghost.mind || QDELETED(Ghost.mind.current))
 							continue
-						else
-							my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one.", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
-							their_final_words[name] = my_final_words
-							break
-				if(!my_final_words) //No Observers, pick a random one
-					their_final_words[name] = pick(LIST_FINAL_WORDS)
-		else if(isanimal(mob))
-			if(mob.name in names)
-				var/mob/living/simple_animal/animal
-				their_final_words[name] = pick(animal.speak)
+						else if(ishuman(Ghost.mind.current))
+							if((!Ghost.mind.current == human))
+								continue
+							else
+								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one.", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
+								their_final_words += my_final_words
+								break
+					if(!my_final_words) //No Observers, pick a random one
+						their_final_words += pick(LIST_FINAL_WORDS)
+
+					found = TRUE
+					break
+			else if(isanimal(mob))
+				if(mob.name == name)
+					var/mob/living/simple_animal/animal
+					their_final_words[name] = pick(animal.speak)
+					found = TRUE
 
 		// Final words acquired, display them once we verified the caster did not move
-		if(!(owner.Adjacent(cast_on))) // Caster left the area, rite FAILED
-			to_chat(user, span_warning("I feel the energy around \the [src] dissipate, I need to stand by \the [src] and try again..."))
+		if(!(owner.Adjacent(grave))) // Caster left the area, rite FAILED
+			to_chat(owner, span_warning("I feel the energy around \the [grave] dissipate, I need to stand by \the [grave] and try again..."))
 			return FALSE
 
-		//for(var/final_word in their_final_words)
+		for(var/final_words in their_final_words)
+			headstone.inscription += SPAN_GOD_NECRA("\n[final_words]")
 
+		grave.say(pick(their_final_words)) //pick a random final words to say
 
 	return TRUE
 
