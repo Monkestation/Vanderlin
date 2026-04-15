@@ -317,8 +317,9 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
-/// Factor at which mob hydration decreases
+/// Base factor at which mob nutrition decreases. Think of it as the nutrient drain from your cells excluding organs.
+#define HUNGER_FACTOR		0.05
+/// Base Factor at which mob hydration decreases. Think of it as the nutrient drain from your cells excluding organs.
 #define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases

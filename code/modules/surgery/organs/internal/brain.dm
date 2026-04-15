@@ -31,8 +31,8 @@
 	current_blood = 100
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 5
-	hydration_req = 2.5
+	nutriment_req = 3
+	hydration_req = 1.5
 
 	/// This is stuff
 	var/damage_threshold_value = BRAIN_DAMAGE_DEATH/10
