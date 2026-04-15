@@ -529,51 +529,45 @@ All foods are distributed among various categories. Use common sense.
 			to_chat(user, "<span class='warning'>[eater] doesn't seem to have a mouth!</span>")
 			return
 
-	if(reagents)
+	if(!reagents?.total_volume)
 		if(eater.satiety > -200)
 			eater.satiety -= junkiness
-		playsound(eater,'sound/misc/eat.ogg', rand(30,60), TRUE)
-		if(reagents.total_volume)
-			var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
-			if(iscarbon(eater))
-				var/obj/item/bodypart/jaw = eater.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
-				if(jaw)
-					jaw_efficiency = jaw.limb_efficiency
-			if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
-				to_chat(user, span_warning("[eater == user ? "Your" : "[eater]'s"] jaw is far too inefficient to take a bite."))
-				return FALSE
-
-			if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
-				var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
-				if(!do_after(eater == user ? user : eater, chew_time, eater))
-					return FALSE
-
-			SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
-			SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
-			var/fraction = min(bitesize / reagents.total_volume, 1)
-			var/amt2take = reagents.total_volume / (bitesize - bitecount)
-			if((bitecount >= bitesize) || (bitesize == 1))
-				amt2take = reagents.total_volume
-
-			reagents.trans_to(eater, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
-
-	user.changeNext_move(CLICK_CD_FAST)
-
-	if(!reagents?.total_volume)
+		playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+		user.changeNext_move(CLICK_CD_FAST)
 		qdel(src)
 		return ITEM_INTERACT_SUCCESS
 
+	var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
+
+	var/obj/item/bodypart/jaw = eater.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(jaw)
+		jaw_efficiency = jaw.limb_efficiency
+	else
+		jaw_efficiency = LIMB_EFFICIENCY_DISABLING
+
+	if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
+		to_chat(user, span_warning("[eater == user ? "Your" : "[eater]'s"] jaw disabled and can't bite!"))
+		return FALSE
+
+	if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
+		var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
+		if(!do_after(eater == user ? user : eater, chew_time, eater))
+			return FALSE
+
+	if(eater.satiety > -200)
+		eater.satiety -= junkiness
+	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+	user.changeNext_move(CLICK_CD_FAST)
+
+	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
+	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
+
 	var/fraction = min(bitesize / reagents.total_volume, 1)
 	var/amt2take = reagents.total_volume / (bitesize - bitecount)
-	if((bitecount >= bitesize) || (bitesize == 1))
+	if(bitecount >= bitesize || bitesize == 1)
 		amt2take = reagents.total_volume
 
-	reagents.trans_to(eater, amt2take, transfered_by = user, method = INGEST)
-
-	if(naturalist && eater.has_quirk(/datum/quirk/boon/naturalist))
-		for(var/datum/reagent/R in reagents.reagent_list)
-			var/bonus_amount = (R.volume / reagents.total_volume) * amt2take * 0.5
-			eater.reagents.add_reagent(R.type, bonus_amount)
+	reagents.trans_to(eater, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
 
 	bitecount++
 
