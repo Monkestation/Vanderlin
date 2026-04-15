@@ -21,7 +21,7 @@
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!istype(H) || H.stat == DEAD || !H.client)
 			continue
-		if(H.job == "Beggar" || istype(H.mind?.assigned_role, /datum/job/vagrant))
+		if(H.job == JOB_BEGGAR || istype(H.mind?.assigned_role, /datum/job/vagrant))
 			beggar_count++
 			if(beggar_count >= 2)
 				break

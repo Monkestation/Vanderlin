@@ -582,7 +582,7 @@
 			visible_message(span_warning("[src] draws from [M]!"))
 			playsound(M, 'sound/combat/hits/bladed/genstab (1).ogg', 30, FALSE, -1)
 			timestaken++
-			M.blood_volume = max(M.blood_volume-30, 0)
+			M.adjust_bloodvolume(-30)
 			M.handle_blood()
 			if(M.mind)
 				if(M.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE))
@@ -1317,7 +1317,7 @@
 		playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
 		attacked.flash_fullscreen("redflash3")
 		attacked.adjustBruteLoss(40)
-		attacked.blood_volume = max(attacked.blood_volume - 240, 0)
+		attacked.adjust_bloodpool(-240)
 		attacked.handle_blood()
 		feeder = WEAKREF(attacked)
 		openstate = "bloody"

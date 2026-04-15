@@ -350,7 +350,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	return TRUE
 
 /obj/structure/activator/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!containment && (istype(I, /obj/item/gun/ballistic/revolver/grenadelauncher) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
+	if(!containment && (istype(I, /obj/item/gun/ballistic) || istype(I, /obj/item/explosive/bottle) || istype(I, /obj/item/flint)))
 		if(!user.transferItemToLoc(I, src))
 			return ..()
 		containment = I
@@ -376,12 +376,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		var/turf/front = get_step(src, dir)
 		S.set_up(1, 1, front)
 		S.start()
-	if(istype(containment, /obj/item/gun/ballistic/revolver/grenadelauncher))
+	if(istype(containment, /obj/item/gun/ballistic))
 		if(!ammo)
 			return
 		if(ammo.ammo_list.len)
-			var/obj/item/gun/ballistic/revolver/grenadelauncher/B = containment
-			var/obj/item/ammo_box/gun_magazine = B.mag_type
+			var/obj/item/gun/ballistic/B = containment
+			var/obj/item/ammo_box/gun_magazine = B.accepted_magazine_type
 			var/obj/item/ammo_casing/caseless/gun_ammo = initial(gun_magazine?.ammo_type)
 			for(var/obj/item/ammo_casing/BT in ammo.ammo_list)
 				if(istype(BT, gun_ammo))

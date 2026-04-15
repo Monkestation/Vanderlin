@@ -582,8 +582,23 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 
 	types = list(
 		/datum/book_entry/grims_guide,
+		/datum/book_entry/cavity_access,
+		/datum/book_entry/organ_surgery,
+		/datum/book_entry/lobotomy,
+		/datum/book_entry/pestran_chimeric,
 		/datum/chimeric_table,
 		/datum/chimeric_node,
 		/datum/wound,
 		/datum/surgery,
+		/obj/item/organ/heart,
+		/obj/item/organ/spleen,
+		/obj/item/organ/stomach,
+		/obj/item/organ/lungs,
+		/obj/item/organ/eyes,
+		/obj/item/organ/ears,
+		/obj/item/organ/liver,
+		/obj/item/organ/tail,
+		/obj/item/organ/brain,
+		/obj/item/organ/tongue,
+		/obj/item/organ/appendix,
 	)

@@ -374,7 +374,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Ok, it's not a xeno or a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	var/datum/data/record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something

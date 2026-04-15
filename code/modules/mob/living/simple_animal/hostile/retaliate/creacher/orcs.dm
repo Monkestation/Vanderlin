@@ -29,6 +29,7 @@
 	attack_sound = 'sound/blank.ogg'
 	canparry = TRUE
 	d_intent = INTENT_PARRY
+	animal_type = /datum/blood_type/human/corrupted/orc
 	speak_emote = list("grunts")
 	speak = list("WAAAGH!", "KRUSH AND KILL!", "Never should have come here!", "Slaughter them all!", "Kill everything!", "Hahaha! Die!")
 	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc,
@@ -163,7 +164,7 @@
 	minimum_distance = 5
 	ranged_cooldown_time = 60
 	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc2,
-			/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+			/obj/item/gun/ballistic/bow,
 			/obj/item/ammo_casing/caseless/arrow = 3,
 			/obj/effect/decal/cleanable/blood)
 	maxHealth = 100

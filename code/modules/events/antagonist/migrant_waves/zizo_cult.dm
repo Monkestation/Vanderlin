@@ -3,7 +3,7 @@
 	wave_type = /datum/migrant_wave/zizo_cultist
 
 	weight = 8
-	min_players = HIGHPOP_THRESHOLD
+	min_players = MIDPOP_THRESHOLD
 	earliest_start = 25 MINUTES
 	max_occurrences = 1
 	shared_occurence_type = SHARED_HIGH_THREAT

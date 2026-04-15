@@ -35,7 +35,7 @@
 
 	)
 /datum/job/apothecary
-	title = "Apothecary"
+	title = JOB_APOTHECARY
 	tutorial = "You know every plant growing on these grounds and in the woods like the back of your hand. \
 	You are tasked with mixing tinctures and supplying the town and Feldsher with medicine. \
 	Some seek you out for your expertise in poisons or hedonistic pleasure. \
@@ -82,7 +82,7 @@
 		ADD_TRAIT(spawned, TRAIT_POISON_RESILIENCE, TRAIT_GENERIC)
 
 /datum/outfit/apothecary
-	name = "Apothecary"
+	name = JOB_APOTHECARY
 	armor = /obj/item/clothing/armor/gambeson/apothecary
 	shoes = /obj/item/clothing/shoes/apothboots
 	shirt = /obj/item/clothing/shirt/apothshirt

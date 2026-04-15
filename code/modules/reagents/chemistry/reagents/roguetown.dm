@@ -6,12 +6,12 @@
 	taste_description = "ugly"
 	metabolization_rate = 1
 
-/datum/reagent/miasmagas/on_mob_life(mob/living/carbon/M)
+/datum/reagent/miasmagas/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M, TRAIT_DEADNOSE))
 		if(M.has_quirk(/datum/quirk/vice/maniac))
 			M.add_stress(/datum/stress_event/miasmagasmaniac)
 		else
-			M.add_nausea(3)
+			M.add_nausea(3 * efficiency)
 			M.add_stress(/datum/stress_event/miasmagas)
 	return ..()
 

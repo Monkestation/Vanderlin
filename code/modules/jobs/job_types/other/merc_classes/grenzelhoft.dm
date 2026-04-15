@@ -78,7 +78,7 @@
 		H.dna.species.native_language = "Old Psydonic"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 
-/datum/job/advclass/mercenary/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/mercenary/grenzelhoft/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list("Zweihander", "Musket", "Halberd")
 	var/weapon_choice = tgui_input_list(player_client,"CHOOSE YOUR WEAPON.", "GO EARN SOME COIN.", weapons)
@@ -90,7 +90,7 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/grenzelhoft/zwei)
 		if("Musket")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket, ITEM_SLOT_BACK_R, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/powder/musket, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/bullet/bullets, ITEM_SLOT_BELT_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/storage/backpack/satchel/musketeer, ITEM_SLOT_BACK_L, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/sabre/dec, ITEM_SLOT_BELT_L, TRUE)

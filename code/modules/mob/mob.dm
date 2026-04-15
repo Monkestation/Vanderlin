@@ -447,6 +447,13 @@ GLOBAL_VAR_INIT(mobids, 1)
 		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
+	var/flags = SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, examinify)
+	if(flags & COMPONENT_NO_EXAMINATE)
+		return
+	else if(flags & COMPONENT_EXAMINATE_BLIND)
+		to_chat(src, span_warning("Something is there but i can't see it!"))
+		return
+
 	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
 		face_atom(examinify)
 		if(m_intent != MOVE_INTENT_SNEAK)
@@ -464,6 +471,13 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 	var/list/result = examinify.examine(src)
 	if(LAZYLEN(result))
+		var/list/mechanics_result = examinify.get_mechanics_examine(src)
+		if(length(mechanics_result))
+			var/mechanics_result_str = "<details><summary>Mechanics</summary>"
+			for(var/line in mechanics_result)
+				mechanics_result_str += " - " + span_blue(line) + "\n"
+			mechanics_result_str += "</details>"
+			result += mechanics_result_str
 		for(var/i in 1 to (length(result) - 1))
 			result[i] += "\n"
 		to_chat(src, examine_block("<span class='infoplain'>[result.Join()]</span>"))
@@ -745,7 +759,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(client)
 		if(world.time < client.last_turn)
 			return FALSE
-	if(stat == DEAD || stat == UNCONSCIOUS)
+	if(stat == DEAD || stat == UNCONSCIOUS || stat == HARD_CRIT)
 		return FALSE
 	if(anchored)
 		return FALSE

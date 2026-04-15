@@ -629,6 +629,7 @@
 
 	var/static/list/body_zones = list(
 		BODY_ZONE_HEAD,
+		BODY_ZONE_PRECISE_MOUTH,
 		BODY_ZONE_CHEST,
 		BODY_ZONE_L_ARM,
 		BODY_ZONE_R_ARM,

@@ -94,6 +94,10 @@
 		return TRUE
 
 	var/turf/location = C.loc
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(location)
+		cavity_items -= item
+
 	if(istype(location))
 		C.add_splatter_floor(location)
 	var/direction = pick(GLOB.cardinals)
@@ -134,11 +138,10 @@
 		O.add_mob_blood(C)
 		organ_spilled = 1
 		. += O
-	if(cavity_item)
-		cavity_item.forceMove(T)
-		. += cavity_item
-		cavity_item = null
-		organ_spilled = 1
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(drop_location())
+		cavity_items -= item
+	organ_spilled = 1
 
 	if(organ_spilled)
 		C.visible_message("<span class='danger'><B>[C] spills [C.p_their()] guts!</B></span>")
@@ -219,7 +222,10 @@
 
 /obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	if(istype(LB))
-		LB.eyes = src
+		if(side == RIGHT_SIDE)
+			LB.eyes_right = src
+		if(side == LEFT_SIDE)
+			LB.eyes_left = src
 	return ..()
 
 /obj/item/organ/ears/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
@@ -362,7 +368,7 @@
 				continue
 			C.surgeries -= body_zone
 
-	for(var/obj/item/organ/stored_organ as anything in src)
+	for(var/obj/item/organ/stored_organ in src)
 		stored_organ.Insert(C)
 
 	for(var/datum/wound/wound as anything in wounds)
@@ -393,8 +399,10 @@
 		tongue = null
 	if(ears)
 		ears = null
-	if(eyes)
-		eyes = null
+	if(eyes_left)
+		eyes_left = null
+	if(eyes_right)
+		eyes_right = null
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C

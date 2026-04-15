@@ -113,8 +113,13 @@
 
 /// The concrete number for what is considered "lowpop" on Vanderlin
 #define LOWPOP_THRESHOLD 35
+/// The difference between highpop and lowpop
+#define MIDPOP_THRESHOLD (0.5 * (HIGHPOP_THRESHOLD+LOWPOP_THRESHOLD))
 /// What is high pop on Vanderlin?
 #define HIGHPOP_THRESHOLD 70
+
+/// Data yielded from a poll on player behavior regarding when they queue up for a round. This is used to tweak storyteller values for roundstart event checks
+#define READYUP_AVG 0.66
 
 #define MUNDANE_POINT_THRESHOLD 20
 #define MODERATE_POINT_THRESHOLD 35
@@ -166,7 +171,7 @@
 #define ROUNDSTART_MAJOR_BASE 35
 #define ROUNDSTART_MAJOR_GAIN 1.5
 
-#define ROUNDSTART_ROLESET_BASE 45
+#define ROUNDSTART_ROLESET_BASE 50
 #define ROUNDSTART_ROLESET_GAIN 2.5
 
 #define ROUNDSTART_OBJECTIVES_BASE 40

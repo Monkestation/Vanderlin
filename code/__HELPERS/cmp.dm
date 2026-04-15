@@ -113,3 +113,9 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 
 /proc/cmp_wound_severity_dsc(datum/wound/A, datum/wound/B)
 	return B.severity - A.severity
+
+/proc/cmp_triumphs_asc(key_a, key_b)
+	return SStriumphs.triumph_leaderboard[key_a] - SStriumphs.triumph_leaderboard[key_b]
+
+/proc/cmp_triumphs_dsc(key_a, key_b)
+	return SStriumphs.triumph_leaderboard[key_b] - SStriumphs.triumph_leaderboard[key_a]
