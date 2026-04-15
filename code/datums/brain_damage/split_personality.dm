@@ -161,7 +161,7 @@
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	to_chat(src, span_notice("As a split personality, you cannot do anything but observe. However, you will eventually gain control of my body, switching places with the current personality."))
+	to_chat(src, span_notice("As a split personality, you cannot do anything but observe. However, you will eventually gain control of the body, switching places with the current personality."))
 	to_chat(src, span_boldwarning("Do not commit suicide or put the body in a deadly position. Behave like you care about it as much as the owner."))
 
 /mob/living/split_personality/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
