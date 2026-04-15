@@ -454,6 +454,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
+/// This mob can't have a split personality
+#define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"
