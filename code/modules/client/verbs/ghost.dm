@@ -41,11 +41,17 @@
 			// Store the current time for the player
 			GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 
-	if(ishuman(src))
-		var/mob/living/carbon/human/dead_hum = src
-		if(dead_hum.buried && dead_hum.funeral)
-			dead_hum.returntolobby()
-			return TRUE
+	if(mind)
+		if(ishuman(mind.current))
+			var/mob/living/carbon/human/dead_hum = mind.current
+			if(!dead_hum.funeral)
+				var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest?", "Final Words (Optional)", max_length(75))
+				if(final_words)
+					dead_hum.final_words = final_words
+
+			if(dead_hum.buried && dead_hum.funeral)
+				dead_hum.returntolobby()
+				return TRUE
 
 	var/turf/spawn_loc = pick(GLOB.underworldspiritspawns)
 	var/mob/living/carbon/spirit/live_spirit = new /mob/living/carbon/spirit(spawn_loc)
