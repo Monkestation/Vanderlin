@@ -317,7 +317,7 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-#define HUNGER_FACTOR		0.2	//factor at which mob nutrition decreases
+#define HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
 /// Factor at which mob hydration decreases
 #define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
