@@ -1541,6 +1541,9 @@
 /atom/movable/screen/backhudl/empty
 	icon_state = "empty"
 
+/atom/movable/screen/backhudl/empty_border
+	icon_state = "empty_border"
+
 /atom/movable/screen/aim
 	name = ""
 	icon = 'icons/mob/roguehud.dmi'
