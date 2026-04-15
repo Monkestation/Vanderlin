@@ -119,7 +119,8 @@
 			else if(isanimal(mob))
 				if(mob.name == name)
 					var/mob/living/simple_animal/animal
-					their_final_words[name] = pick(animal.speak)
+					if(animal.speak)
+						their_final_words[name] = pick(animal.speak)
 					found = TRUE
 
 		// Final words acquired, display them once we verified the caster did not move
