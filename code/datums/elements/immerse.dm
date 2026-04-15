@@ -159,6 +159,8 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 /// EXPERIMENTAL: Prevent thrown things from falling through water like openspace
 /datum/element/immerse/proc/on_try_z_move(atom/movable/source, turf/start, turf/destination)
 	SIGNAL_HANDLER
+	if(HAS_TRAIT(source, TRAIT_IMMERSE_STOPPED))
+		return
 	// This works because when throwing mobs enter the turf they only get immersed when they stop being thrown.
 	if(iswaterturf(start) && iswaterturf(destination))
 		if(HAS_TRAIT(source, TRAIT_MOVE_SWIMMING))

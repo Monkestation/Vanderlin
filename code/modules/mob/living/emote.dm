@@ -39,7 +39,7 @@
 
 /datum/emote/living/pray/proc/async_pray(mob/living/carbon/follower, datum/patron/patron)
 
-	var/prayer = tgui_input_text(user, "Whisper your Prayer", "Prayer", multiline = TRUE)
+	var/prayer = tgui_input_text(follower, "Whisper your Prayer", "Prayer", multiline = TRUE)
 	if(!prayer)
 		return
 
