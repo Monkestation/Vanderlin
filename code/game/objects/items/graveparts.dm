@@ -45,7 +45,7 @@
 
 /obj/item/gravedecor/headstone/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/chisel) || (I.wlength == WLENGTH_SHORT)) // Chisel or dagger
-		if(I.wlength == WLENGTH_SHORT && !(held_item.get_sharpness())) // If dagger but not sharp
+		if(I.wlength == WLENGTH_SHORT && !(I.get_sharpness())) // If dagger but not sharp
 			to_chat(user, span_warning("\The [I] is not sharp enough to engrave \the [src]!"))
 			return
 

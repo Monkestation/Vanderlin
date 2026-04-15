@@ -60,20 +60,20 @@
 	// SECTION 1: Here Lies X
 	var/list/names = find_names(grave)
 	if(!names)
-		// Something has gone terribly wrong is this happens.alist
+		// Something has gone terribly wrong if this happens.
 		return FALSE
 	else if(length(names) == 1) // One name, easy!
 		headstone.inscription = span_big("Here lies <span class 'bold'>[names[1]]</span>")
 	else // Multiple names
-		headstone.inscription = "<span class 'big>Here lies <span class 'bold'>[names[1]]"
-	 	for(var/i = 2 to length(names)) // may not work, need to test and recall how to do forloop for string lists
+		headstone.inscription = "<span class 'big'>Here lies <span class 'bold'>[names[1]]"
+		for(var/i=2 to length(names)) // may not work, need to test and recall how to do forloop for string lists
 			headstone.inscription += ", [names[i]]"
 		headstone.inscription += "</span></span>"
 
 	// SECTION 2: Custom Message (Optional)
 	if(headstone.custom_message)
 		headstone.inscription += span_italics("\n\
-		[custom_message]")
+		[headstone.custom_message]")
 
 	// SECTION 3: Final Words TODO
 

@@ -21,9 +21,9 @@
 	var/faildirt = 0
 
 	/// Present headstone. If this is empty, there isnt one.
-	var/obj/item/gravedecor/headstone
+	var/obj/item/gravedecor/headstone/headstone
 	/// Present gravefence. If this is empty, there isnt one.
-	var/obj/item/gravedecor/gravefence
+	var/obj/item/gravedecor/gravefence/gravefence
 	/// From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
 	var/gravequality = 0
 	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
@@ -60,7 +60,7 @@
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
 		if(headstone.inscription)
-			. += inscription
+			. += headstone.inscription
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)
