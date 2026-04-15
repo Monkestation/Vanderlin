@@ -72,3 +72,9 @@
 	desc = "A gravefence of blocks to be embedded in the earth, made to deliniate a grave exactly."
 	icon_state = "gravefence_block"
 	decorationquality = 2
+
+/obj/item/gravedecor/gravefence/iron
+	name = "iron gravefence"
+	desc = "A wrought iron grave fence. Ominous."
+	icon_state = "gravefence_iron"
+	decorationquality = 3

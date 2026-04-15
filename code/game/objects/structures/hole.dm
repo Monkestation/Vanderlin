@@ -401,18 +401,53 @@
 							record_round_statistic(STATS_GRAVES_ROBBED)
 							SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 					else
-						if(gravequality >= 2 && gravequality < 5)
-							to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
-							L.apply_status_effect(/datum/status_effect/debuff/cursed)
-						else if(gravequality >= 5)
-							to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
-							L.apply_status_effect(/datum/status_effect/debuff/cursed)
-							for (var/mob/living/player in GLOB.player_list)
-								if (player.stat == DEAD || isbrain(player))
-									continue
-								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
-								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
-									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
+						//Logic thread for curses.
+						switch(gravequality)
+							if(0 to 3)
+								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I can feel myself age a little...</span>", \
+								"<span class='hear'>I hear a loud whoosh!</span>")
+								L.apply_status_effect(/datum/status_effect/debuff/cursed)
+							if(4 to 6)
+								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I feel myself age a few years...</span>", \
+								"<span class='hear'>I hear a loud whoosh!</span>")
+								L.apply_status_effect(/datum/status_effect/debuff/cursed/tier2)
+							if(7 to 9)
+								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
+								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
+								"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+								L.Stun(5 SECONDS)
+								L.apply_status_effect(/datum/status_effect/debuff/cursed/tier3)
+							if(10)
+								var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
+								var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
+								if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
+									L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place and whispers of alarm flutter out in every direction.</span>", \
+									"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms age as whispers of alarm go out in every direction! Obviously that second part doesn't matter much.</span>", \
+									"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+								else
+									L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as their arms wither to bone, and whispers of alarm flutter out in every direction.</span>", \
+									"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms wither to bone as whispers of alarm go out in every direction!</span>", \
+									"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+									if(left_arm)
+										var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_L_ARM)
+										part_to_bonify.skeletonize(FALSE)
+									if(right_arm)
+										var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_R_ARM)
+										part_to_bonify.skeletonize(FALSE)
+									L.update_body_parts()
+								L.Stun(10 SECONDS)
+								L.apply_status_effect(/datum/status_effect/debuff/cursed/tier4)
+							else if(gravequality >= 5)
+								to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
+								L.apply_status_effect(/datum/status_effect/debuff/cursed)
+								for (var/mob/living/player in GLOB.player_list)
+									if (player.stat == DEAD || isbrain(player))
+										continue
+									// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
+									if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+										to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
 						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 						record_round_statistic(STATS_GRAVES_ROBBED)
 						SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)

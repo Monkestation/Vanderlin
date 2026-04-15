@@ -595,10 +595,25 @@
 /datum/status_effect/debuff/cursed
 	id = "cursed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed
-	effectedstats = list(STAT_FORTUNE = -5) // More severe so that the permanent debuff from having the perk makes it actually worth it.
-	duration = 10 MINUTES
+	effectedstats = list(STAT_FORTUNE = -3)
+	duration = 5 MINUTES
+
+/datum/status_effect/debuff/cursed/tier2
+	id = "heavily cursed"
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	duration = 10 MINUTES //Double the time, this grave had effort put in.
+
+/datum/status_effect/debuff/cursed/tier3
+	id = "deeply cursed"
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	duration = 20 MINUTES
+
+/datum/status_effect/debuff/cursed/tier4
+	id = "eternally cursed"
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	duration = 60 MINUTES
 
 /atom/movable/screen/alert/status_effect/debuff/cursed
 	name = "Cursed"
-	desc = "Necra has punished me by my blasphemous deeds with terribly bad luck."
+	desc = "The Undermaiden has punished me for my blasphemous deeds, and now I feel like I've aged a decade..."
 	icon_state = "debuff"
