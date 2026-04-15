@@ -31,17 +31,17 @@
 	/// Modified by by a chisel or short sharp object, allows for a small message to be added to inscription
 	var/custom_message
 
-
-/obj/item/gravedecor/headstone/examine(mob/user)
+/obj/item/gravedecor/headstone/examine(mob/user) //TODO how do I have custom_message and inscription to chat AFTER the examine?
 	. = ..()
 
 	if(inscription)
-		. += inscription //Should already be formatted
-		. += span_warning("Shouldn't this be attached to a grave?")
+		to_chat(user, inscription) //Should already be formatted
+		to_chat(user, span_warning("Shouldn't this be attached to a grave?"))
 	else if(custom_message) // Not inscribed, but there is a custom_message
-		. += span_info("There is a message carved into the middle of \the [src], stating <span class 'italics'>[custom_message]</span>.")
+		. += span_info("There is a message carved into the middle of \the [src]...")
+		to_chat(user, span_italics("[custom_message]"))
 	else if(!custom_message) // No custome message, send message that it can be done, they can change custom_message even if already set but we imply there is 'space'
-		. += span_info("There appears to be space to inscribe a message on \the [src], I can probably do this with a chisel or other short, sharp object...")
+		. += span_info("There appears to be space to inscribe a message, I can probably do this with a chisel or other short, sharp object...")
 
 /obj/item/gravedecor/headstone/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/chisel) || (I.wlength == WLENGTH_SHORT)) // Chisel or dagger
@@ -49,11 +49,11 @@
 			to_chat(user, span_warning("\The [I] is not sharp enough to engrave \the [src]!"))
 			return
 
-		var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [src]?", "[src] Custom Message", custom_message, 150, TRUE)
+		var/new_message = tgui_input_text(user, "What would you like to be inscribed on \the [src]?", "Custom Inscription", custom_message, 150, TRUE)
 		if(!new_message || new_message == custom_message)
 			return
 
-		user.visible_message(span_info("[user] begins to engrave a message into \the [src] with \a [I]."), span_info("You begin to engrave a message into \the [src]"), span_info("You hear someone cutting into stone"))
+		user.visible_message(span_info("[user] begins to engrave a message into \the [src] with \a [I]."), span_info("You begin to engrave a message into \the [src]."), span_info("You hear someone cutting into stone."))
 		if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
 			return
 		else

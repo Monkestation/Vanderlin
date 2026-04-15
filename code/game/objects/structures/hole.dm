@@ -60,7 +60,7 @@
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
 		if(headstone.inscription)
-			. += headstone.inscription
+			to_chat(user, headstone.inscription) // We do it this way because the examine code dislikes some of the formatting we do here
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)
@@ -172,7 +172,11 @@
 			if(item_to_remove.sourceitem)
 				user.put_in_active_hand(new item_to_remove.sourceitem())
 			else
-				user.put_in_active_hand(new item_to_remove.type())
+				// We need to perserve custom_message and inscription
+				var/obj/item/gravedecor/headstone/replacement = new item_to_remove.type()
+				replacement.inscription = headstone.inscription
+				replacement.custom_message = headstone.custom_message
+				user.put_in_active_hand(replacement)
 			headstone = null
 		else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
 			if(item_to_remove.sourceitem)
@@ -361,7 +365,10 @@
 				if(headstone.sourceitem)
 					new headstone.sourceitem(get_turf(src))
 				else
-					new headstone.type(get_turf(src))
+					// We need to perserve custom_message and inscription
+					var/obj/item/gravedecor/headstone/replacement = new headstone.type(get_turf(src))
+					replacement.inscription = headstone.inscription
+					replacement.custom_message = headstone.custom_message
 				headstone = null
 			if(gravefence)
 				if(gravefence.sourceitem)

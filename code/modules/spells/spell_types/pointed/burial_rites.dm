@@ -15,11 +15,19 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
-	cooldown_time = 10 SECONDS
-	spell_cost = 15
+	cooldown_time = 2 SECONDS //DEBUG ONLY, CHANGE BEFORE PR!!!!!
+	spell_cost = 0 //DEBUG ONLY, CHANGE BEFORE PR!!!!!
 
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
-	return istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane) || isobj(cast_on)
+	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane))
+		return TRUE
+	else if(istype(cast_on, /obj/structure/closet/dirthole))
+		var/obj/structure/closet/dirthole/grave = cast_on
+		if(grave.is_consecrated) // No double dipping
+			to_chat(owner, span_warning("You cannot perform burial rites on something that already was consecrated!"))
+			return FALSE
+		else
+			return TRUE
 
 /datum/action/cooldown/spell/burial_rites/cast(obj/cast_on)
 	. = ..()
@@ -39,6 +47,7 @@
 					grave.headstone.inscription = null //Reset inscription
 					reset_spell_cooldown()
 					return . | SPELL_CANCEL_CAST
+				message_admins(grave.headstone.inscription)
 			if(!grave.is_consecrated)
 				grave.is_consecrated = TRUE
 				SEND_SIGNAL(owner, COMSIG_GRAVE_CONSECRATED, cast_on)
@@ -63,16 +72,16 @@
 		// Something has gone terribly wrong if this happens.
 		return FALSE
 	else if(length(names) == 1) // One name, easy!
-		headstone.inscription = span_big("Here lies <span class 'bold'>[names[1]]</span>")
+		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names[1]]</span>"
 	else // Multiple names
-		headstone.inscription = "<span class 'big'>Here lies <span class 'bold'>[names[1]]"
+		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names[1]]"
 		for(var/i=2 to length(names)) // may not work, need to test and recall how to do forloop for string lists
 			headstone.inscription += ", [names[i]]"
-		headstone.inscription += "</span></span>"
+		headstone.inscription += "</span>"
 
 	// SECTION 2: Custom Message (Optional)
 	if(headstone.custom_message)
-		headstone.inscription += span_italics("\n\
+		headstone.inscription += span_italics("\n\n\
 		[headstone.custom_message]")
 
 	// SECTION 3: Final Words TODO
@@ -85,26 +94,26 @@
 /// Returns a list
 /datum/action/cooldown/spell/burial_rites/proc/find_names(obj/structure/closet/dirthole/grave)
 	var/list/names = list()
-	for(var/mob/living/simple_animal/animal in grave.contents) // For those that bury their cabbits
-		if(!(animal.name in names))
-			names += animal.name
 	for(var/mob/living/carbon/human/corpse in grave.contents)
 		if(!(corpse.real_name in names))
 			names += corpse.real_name
 	for(var/obj/item/bodypart/head/head in grave.contents)
 		if(!(head.real_name in names))
 			names += head.real_name
+	for(var/mob/living/simple_animal/animal in grave.contents) // For those that bury their cabbits
+		if(!(animal.name in names))
+			names += animal.name
 
 	// We now check for any containers for bodies, we could technically refactor this to be done recursively, but for now will assume that the mob is within any container
 	for(var/obj/structure/closet/container in grave.contents)
-		for(var/mob/living/simple_animal/animal in grave.contents)
-			if(!(animal.name in names))
-				names += animal.name
-		for(var/mob/living/carbon/human/corpse in grave.contents)
+		for(var/mob/living/carbon/human/corpse in container.contents)
 			if(!(corpse.real_name in names))
 				names += corpse.real_name
-		for(var/obj/item/bodypart/head/head in grave.contents)
+		for(var/obj/item/bodypart/head/head in container.contents)
 			if(!(head.real_name in names))
 				names += head.real_name
+		for(var/mob/living/simple_animal/animal in container.contents)
+			if(!(animal.name in names))
+				names += animal.name
 
 	return names
