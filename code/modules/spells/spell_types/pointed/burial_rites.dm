@@ -1,4 +1,4 @@
-#define LIST_FINAL_WORDS list("Goodbye!", "Finally, peace...", "I wonder if I can find Ravox...", "Undermaiden here I come!", "Hopefully next time is better...")
+#define LIST_FINAL_WORDS list("Goodbye!", "Finally, peace...", "I wonder if I can find Ravox...", "The Undermaiden calls for me...", "Hopefully next time is better...")
 
 /datum/action/cooldown/spell/burial_rites
 	name = "Burial Rites"
@@ -112,7 +112,7 @@
 							if((!Ghost.mind.current == human))
 								continue
 							else
-								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one.", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
+								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
 								log_say("[Ghost] put [my_final_words] for their final words.")
 								their_final_words += my_final_words
 								break
