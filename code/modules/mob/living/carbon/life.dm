@@ -36,7 +36,7 @@
 		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
 				if(oxyloss)
-					adjustOxyLoss(-5)
+					adjustOxyLoss(-2)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE
