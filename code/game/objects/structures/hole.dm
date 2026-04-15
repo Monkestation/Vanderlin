@@ -31,11 +31,6 @@
 	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
 	var/is_consecrated
 
-	var/inscription
-	var/associated_name
-	var/custom_message
-	var/final_words
-
 /obj/structure/closet/dirthole/Initialize()
 	var/turf/open/floor/dirt/T = loc
 	if(!istype(T))
@@ -64,12 +59,8 @@
 
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
-		if(associated_name)
-			. += "Here lies: [associated_name]"
-		if(custom_message)
-			. += "[custom_message]"
-		if(custom_message)
-			. += "'[final_words]'"
+		if(headstone.inscription)
+			. += inscription
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)

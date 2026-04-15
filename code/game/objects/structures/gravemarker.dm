@@ -1,4 +1,4 @@
-/obj/structure/gravemarker
+/obj/structure/gravemarker //TODO WE NEED TO REMOVE THIS, FILE AND ALL!!!
 	name = "grave marker"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "gravemarker1"
