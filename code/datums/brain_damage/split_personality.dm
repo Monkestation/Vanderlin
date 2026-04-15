@@ -84,8 +84,8 @@
 		return
 
 	current_backseat.log_message("assumed control of [key_name(owner)] due to [src]. (Original owner: [current_controller == OWNER ? owner.key : current_backseat.key])", LOG_GAME)
-	to_chat(owner, span_userdanger("You feel your control being taken away... your other personality is in charge now!"))
-	to_chat(current_backseat, span_userdanger("You manage to take control of your body!"))
+	to_chat(owner, span_userdanger("I feel my control being taken away... my other personality is in charge now!"))
+	to_chat(current_backseat, span_userdanger("I manage to take control of my body!"))
 
 	//Body to backseat
 
@@ -161,12 +161,13 @@
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	to_chat(src, "<span class='notice'>As a split personality, you cannot do anything but observe. However, you will eventually gain control of my body, switching places with the current personality.</span>")
-	to_chat(src, "<span class='warning'><b>Do not commit suicide or put the body in a deadly position. Behave like you care about it as much as the owner.</b></span>")
+	to_chat(src, span_notice("As a split personality, you cannot do anything but observe. However, you will eventually gain control of my body, switching places with the current personality."))
+	to_chat(src, span_boldwarning("Do not commit suicide or put the body in a deadly position. Behave like you care about it as much as the owner."))
 
 /mob/living/split_personality/try_speak(message, ignore_spam, forced, filterproof)
 	SHOULD_CALL_PARENT(FALSE)
-	to_chat(src, span_warning("You cannot speak, your other self is controlling your body!"))
+
+	to_chat(src, span_warning("I cannot speak, my other self is controlling my body!"))
 
 	return FALSE
 
