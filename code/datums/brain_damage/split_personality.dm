@@ -5,8 +5,8 @@
 	name = "Split Personality"
 	desc = "Patient's brain is split into two personalities, which randomly switch control of the body."
 	scan_desc = ""
-	gain_text = span_warning("You feel like your mind was split in two.")
-	lose_text = span_notice("You feel alone again.")
+	gain_text = span_warning("I feel like my mind was split in two.")
+	lose_text = span_notice("I feel alone again.")
 	var/current_controller = OWNER
 	var/initialized = FALSE //to prevent personalities deleting themselves while we wait for ghosts
 	var/mob/living/split_personality/stranger_backseat //there's two so they can swap without overwriting
