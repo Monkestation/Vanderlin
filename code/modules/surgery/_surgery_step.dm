@@ -106,24 +106,7 @@
 	surgery.step_in_progress = TRUE
 
 	var/overall_mod = (get_location_modifier(target) * get_skill_modifier(user, surgery))
-	var/speed_mod = 1
-
-	var/fail_prob = 0
-	var/implement_speed_mod = 1
-	if(implement_type)
-		var/implement_value = LAZYACCESS(implements, implement_type)
-		if(implement_value)
-			fail_prob = (100 - implement_value) / overall_mod
-			implement_speed_mod = (implement_value / 100) * overall_mod
-
-	if(tool)
-		speed_mod = tool.toolspeed
-
-	speed_mod /= implement_speed_mod
-
-	var/modded_time = time * speed_mod
-
-	fail_prob = clamp(fail_prob, 0, 95)
+	var/modded_time = time * overall_mod
 
 	if(!do_after(user, modded_time, target, interaction_key = interaction_key))
 		return FALSE
@@ -152,14 +135,14 @@
 	var/was_critical = (roll_result == DICE_CRIT_FAILURE) || (roll_result = DICE_CRIT_SUCCESS)
 
 	switch(roll_result)
-		if(DICE_FAILURE)
+		if(DICE_FAILURE, DICE_CRIT_FAILURE)
 			if(failure(user, target, target_zone, tool, surgery))
 				play_failure_sound(user, target, target_zone, tool, surgery)
 				display_roll(user, "[was_critical ? "CRIT " : ""]FAILURE", roll_requirement)
 				advance = TRUE
 			if(was_critical)
 				crit_failure(user, target, target_zone, tool, surgery)
-		if(DICE_SUCCESS)
+		if(DICE_SUCCESS, DICE_CRIT_SUCCESS)
 			if(success(user, target, target_zone, tool, surgery))
 				play_success_sound(user, target, target_zone, tool, surgery)
 				display_roll(user, "[was_critical ? "CRIT " : ""]SUCCESS", roll_requirement)
@@ -295,7 +278,7 @@
 	if(implements)
 		var/implement_type = tool_check(user, tool)
 		if(implement_type)
-			var/tool_chance = implements[implement_type] || 100
+			var/tool_chance = implements[implement_type] || 0
 			requirement += round((100 - tool_chance) / 100 * 6, 1)
 
 	var/loc_mod = get_location_modifier(target)
