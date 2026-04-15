@@ -26,8 +26,8 @@
 
 	accept_hand = TRUE
 	implements = list(
-		TOOL_BONESETTER = 100,
-		TOOL_HAND = 60,
+		TOOL_BONESETTER = 80,
+		TOOL_HAND = 50,
 	)
 
 	time = 6.4 SECONDS

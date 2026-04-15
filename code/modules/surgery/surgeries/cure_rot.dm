@@ -16,8 +16,8 @@
 	name = "burn rot"
 
 	implements = list(
-		TOOL_CAUTERY = 100,
-		/obj/item/clothing/neck/psycross/silver = 80,
+		TOOL_CAUTERY = 80,
+		/obj/item/clothing/neck/psycross/silver = 60,
 		/obj/item = 45,
 	)
 

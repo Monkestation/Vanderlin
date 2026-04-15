@@ -26,8 +26,8 @@
 	name = "Extract tooth"
 
 	implements = list(
-		/obj/item/weapon/tongs = 90,
-		/obj/item/weapon/surgery/hemostat = 70,
+		/obj/item/weapon/tongs = 80,
+		/obj/item/weapon/surgery/hemostat = 65,
 	)
 
 	time = 3 SECONDS

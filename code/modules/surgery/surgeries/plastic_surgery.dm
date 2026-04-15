@@ -18,9 +18,8 @@
 	name = "Reshape face"
 
 	implements = list(
-		TOOL_SCALPEL = 100,
-		TOOL_WIRECUTTER = 65,
-		/obj/item = 45,
+		TOOL_SCALPEL = 80,
+		/obj/item = 55,
 	)
 
 	time = 6.4 SECONDS

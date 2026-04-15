@@ -17,7 +17,7 @@
 	name = "Infuse Lux"
 
 	implements = list(
-		/obj/item/reagent_containers/lux = 100,
+		/obj/item/reagent_containers/lux = 80,
 		/obj/item/reagent_containers/lux_tainted = 50,
 	)
 

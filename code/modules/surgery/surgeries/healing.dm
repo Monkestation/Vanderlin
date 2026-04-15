@@ -50,7 +50,7 @@
 	name = "Repair body"
 
 	implements = list(
-		TOOL_SUTURE = 100,
+		TOOL_SUTURE = 85,
 		TOOL_HEMOSTAT = 75,
 		TOOL_IMPROVISED_HEMOSTAT = 60,
 	)

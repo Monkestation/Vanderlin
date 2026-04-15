@@ -5,8 +5,8 @@
 	name = "Incise"
 
 	implements = list(
-		TOOL_SCALPEL = 100,
-		/obj/item = 80,
+		TOOL_SCALPEL = 90,
+		/obj/item = 75,
 	)
 
 	time = 1.6 SECONDS
@@ -48,8 +48,8 @@
 	name = "Clamp bleeders"
 
 	implements = list(
-		TOOL_HEMOSTAT = 100,
-		TOOL_IMPROVISED_HEMOSTAT = 70,
+		TOOL_HEMOSTAT = 85,
+		TOOL_IMPROVISED_HEMOSTAT = 65,
 	)
 
 	time = 2.4 SECONDS
@@ -81,8 +81,8 @@
 	name = "Retract incision"
 
 	implements = list(
-		TOOL_RETRACTOR = 100,
-		TOOL_IMPROVISED_RETRACTOR = 75,
+		TOOL_RETRACTOR = 85,
+		TOOL_IMPROVISED_RETRACTOR = 65,
 	)
 
 	time = 2.4 SECONDS
@@ -114,9 +114,9 @@
 	name = "Cauterize wounds"
 
 	implements = list(
-		TOOL_CAUTERY = 100,
-		TOOL_WELDER = 70,
-		/obj/item = 35,
+		TOOL_CAUTERY = 85,
+		TOOL_WELDER = 65,
+		/obj/item = 40,
 	)
 
 	time = 2.4 SECONDS
@@ -156,10 +156,10 @@
 	name = "Saw bone"
 
 	implements = list(
-		TOOL_SAW = 100,
-		TOOL_IMPROVISED_SAW = 75,
-		/obj/item/weapon/shovel = 50,
-		/obj/item = 25,
+		TOOL_SAW = 85,
+		TOOL_IMPROVISED_SAW = 65,
+		/obj/item/weapon/shovel = 40,
+		/obj/item = 30,
 	)
 
 	preop_sound = 'sound/surgery/scalpel1.ogg'

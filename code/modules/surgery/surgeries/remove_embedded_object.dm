@@ -34,9 +34,9 @@
 /datum/surgery_step/remove_object
 	name = "Remove embedded objects"
 	implements = list(
-		TOOL_HEMOSTAT = 100,
-		TOOL_IMPROVISED_HEMOSTAT = 75,
-		TOOL_HAND = 60,
+		TOOL_HEMOSTAT = 80,
+		TOOL_IMPROVISED_HEMOSTAT = 65,
+		TOOL_HAND = 55,
 	)
 
 	time = 3.5 SECONDS

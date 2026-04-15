@@ -24,7 +24,7 @@
 	name = "Insert Teeth"
 
 	implements = list(
-		/obj/item/natural/teeth = 100,
+		/obj/item/natural/teeth = 85,
 		/obj/item/natural/bundle/teeth = 75,
 	)
 

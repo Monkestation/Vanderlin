@@ -39,9 +39,9 @@
 	name = "Extract Lux"
 
 	implements = list(
-		TOOL_SCALPEL = 100,
-		/obj/item = 75,
-		/obj/item/kitchen/spoon = 40,
+		TOOL_SCALPEL = 80,
+		/obj/item = 55,
+		/obj/item/kitchen/spoon = 35,
 	)
 
 	time = 8 SECONDS
