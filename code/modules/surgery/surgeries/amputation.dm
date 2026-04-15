@@ -32,7 +32,6 @@
 		BODY_ZONE_L_LEG,
 	)
 	target_mobtypes = list(/mob/living/carbon/human)
-	time = 6.4 SECONDS
 	minimum_time = 5.4 SECONDS
 	maximum_time = 7.4 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_BROKEN
