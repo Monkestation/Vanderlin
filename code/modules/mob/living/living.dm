@@ -3072,3 +3072,17 @@
 /mob/living/proc/set_swimming(swimming)
 	if(HAS_TRAIT(src, TRAIT_SUBMERGED))
 		SEND_SIGNAL(src, COMSIG_LIVING_SWIM, swimming)
+
+/**
+ * Check if the passed body zone is covered by some clothes
+ *
+ * * location: body zone to check
+ * ([BODY_ZONE_CHEST], [BODY_ZONE_HEAD], etc)
+ * * exluded_equipment_slots: equipment slots to ignore when checking coverage
+ * (for example, if you want to ignore helmets, pass [ITEM_SLOT_HEAD])
+ *
+ * Returns TRUE if the location is accessible (not covered)
+ * Returns FALSE if the location is covered by something
+ */
+/mob/living/proc/is_location_accessible(location, exluded_equipment_slots = NONE)
+	return TRUE

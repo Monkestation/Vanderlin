@@ -125,12 +125,31 @@
 	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
 	var/limb_flags = BODYPART_HAS_ARTERY
 
-/obj/item/bodypart/Initialize()
+	var/biological_state = (BIO_FLESH|BIO_BLOODED)
+
+	/// What state is the bodypart in for determining surgery availability
+	VAR_FINAL/surgery_state = NONE
+
+/obj/item/bodypart/Initialize(mapload)
 	. = ..()
+
 	create_base_organs()
+
 	if(can_be_disabled)
 		RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_gain))
 		RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_loss))
+
+	var/innate_state = NONE
+	if(!LIMB_HAS_SKIN(src))
+		innate_state |= SKINLESS_SURGERY_STATES
+	if(!LIMB_HAS_BONES(src))
+		innate_state |= BONELESS_SURGERY_STATES
+	if(!LIMB_HAS_VESSELS(src))
+		innate_state |= VESSELLESS_SURGERY_STATES
+
+	if(innate_state)
+		add_surgical_state(innate_state)
+
 	update_HP()
 
 /obj/item/bodypart/Destroy()
@@ -868,7 +887,7 @@
 /obj/item/bodypart/proc/get_organs()
 	if(!owner)
 		. = list()
-		for(var/thing in contents)
+		for(var/atom/thing as anything in contents)
 			if(isorgan(thing))
 				. |= thing
 		return
@@ -1274,12 +1293,10 @@
 	animal_origin = MONKEY_BODYPART
 	px_y = 4
 
-
 /obj/item/bodypart/r_leg/devil
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
-
 
 /**
  * Get a random organ object from the bodypart matching the passed in typepath
@@ -1294,7 +1311,7 @@
 				return thing
 	else
 		var/list/organs = list()
-		for(var/thing in src)
+		for(var/atom/thing as anything in get_organs())
 			if(istype(thing, typepath))
 				organs |= thing
 		if(length(organs))
@@ -1313,7 +1330,7 @@
 			if(istype(thing, typepath))
 				organs |= thing
 	else
-		for(var/thing in src)
+		for(var/atom/thing as anything in get_organs())
 			if(istype(thing, typepath))
 				organs |= thing
 	return organs
@@ -1332,7 +1349,7 @@
 				return organ
 	else
 		var/list/organs = list()
-		for(var/obj/item/organ/organ in src)
+		for(var/obj/item/organ/organ in get_organs())
 			if(slot in organ.organ_efficiency)
 				organs |= organ
 		if(length(organs))
@@ -1353,7 +1370,7 @@
 			if(check_zone(organ.current_zone) == body_zone)
 				organs |= organ
 	else
-		for(var/obj/item/organ/organ in src)
+		for(var/obj/item/organ/organ in get_organs())
 			if(slot in organ.organ_efficiency)
 				organs |= organ
 	return organs
@@ -1368,7 +1385,7 @@
 		return owner.getorganslotefficiencyzone(slot, body_zone)
 	else
 		. = null
-		for(var/obj/item/organ/organ in src)
+		for(var/obj/item/organ/organ in get_organs())
 			. += organ.get_slot_efficiency(slot)
 
 /// Returns the volume of organs and cavity items for the organ storage component to use
@@ -1378,7 +1395,6 @@
 		. += organ.organ_volume
 	for(var/obj/item/item as anything in cavity_items)
 		. += item.w_class
-
 
 /obj/item/bodypart/proc/artery_needed()
 	return CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY)
@@ -1404,18 +1420,62 @@
 /obj/item/bodypart/proc/get_incision(strict = FALSE, ignore_gauze = FALSE)
 	if(ignore_gauze && (bandage))
 		return
-	var/datum/wound/incision
-	for(var/datum/wound/slash/slash in wounds)
+
+	var/datum/wound/slash/incision/incision = locate() in wounds
+	if(!incision?.is_sewn())
+		return incision
+
+	for(var/datum/wound/dynamic/slash/slash in wounds)
 		if(slash.is_sewn())
 			continue
-		incision = slash
-		break
+		return slash
 
-	if(!incision)
-		for(var/datum/wound/dynamic/slash/slash in wounds)
-			if(slash.is_sewn())
-				continue
-			incision = slash
-			break
+/// Add one or multiple surgical states to the bodypart
+/obj/item/bodypart/proc/add_surgical_state(new_states)
+	if(!new_states)
+		CRASH("add_surgical_state called with no new states to add")
 
-	return incision
+	if((surgery_state & new_states) == new_states)
+		return
+
+	var/old_states = surgery_state
+	surgery_state |= new_states
+	update_surgical_state(old_states, new_states)
+
+/// Remove one or multiple surgical states from the bodypart
+/obj/item/bodypart/proc/remove_surgical_state(removing_states)
+	if(!removing_states)
+		CRASH("remove_surgical_state called with no states to remove")
+
+	if(!(surgery_state & removing_states))
+		return
+
+	// inherent to the biostate, don't remove them
+	if(!LIMB_HAS_SKIN(src))
+		removing_states &= ~SKINLESS_SURGERY_STATES
+	if(!LIMB_HAS_BONES(src))
+		removing_states &= ~BONELESS_SURGERY_STATES
+	if(!LIMB_HAS_VESSELS(src))
+		removing_states &= ~VESSELLESS_SURGERY_STATES
+
+	if(!removing_states)
+		return
+
+	var/old_states = surgery_state
+	surgery_state &= ~removing_states
+	update_surgical_state(old_states, removing_states)
+
+/// Called when surgical state changes so we can react to it
+/obj/item/bodypart/proc/update_surgical_state(old_state, changed_states)
+	if(isnull(owner))
+		return
+
+	SEND_SIGNAL(owner, COMSIG_LIVING_UPDATING_SURGERY_STATE, old_state, surgery_state, changed_states)
+
+/obj/item/bodypart/vv_edit_var(vname, vval)
+	if(vname != NAMEOF(src, surgery_state))
+		return ..()
+
+	var/old_state = surgery_state
+	. = ..()
+	update_surgical_state(old_state, surgery_state ^ old_state)

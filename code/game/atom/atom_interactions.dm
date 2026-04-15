@@ -89,78 +89,14 @@
 
 /mob/living/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
-		return ..()
-
-	// Surgery and such happens very high up in the interaction chain, before parent call
-	var/attempt_tending = item_tending(user, tool, modifiers)
-	if(attempt_tending & ITEM_INTERACT_ANY_BLOCKER)
-		return attempt_tending
-
-	return ..() | attempt_tending
-
-/// Handles any use of using a surgical tool or item on a mob to tend to them.
-/// The sole reason this is a separate proc is so carbons can tend wounds AFTER the check for surgery.
-/mob/living/proc/item_tending(mob/living/user, obj/item/tool, list/modifiers)
-	// If a surgery is happening try continue it
-	if(length(surgeries))
-		for(var/datum/surgery/operation as anything in surgeries)
-			if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
-				continue
-			if(operation.surgery_flags & SURGERY_NOT_SELF_OPERABLE && (user == src))
-				continue
-			if(operation.next_step(user, modifiers))
-				return ITEM_INTERACT_SUCCESS
-
-		return ITEM_INTERACT_BLOCKING
-
-	// If a surgery isn't happening try start one
-	var/list/available_surgeries = list()
-	for(var/datum/surgery/operation as anything in GLOB.surgeries_list)
-		if(IS_IN_INVALID_SURGICAL_POSITION(src, operation))
-			continue
-		if(operation.surgery_flags & SURGERY_NOT_SELF_OPERABLE && (user == src))
-			continue
-		if(!operation.can_next_step(user, modifiers))
-			continue
-
-		available_surgeries += operation
-
-	var/surgeries_count = length(available_surgeries)
-	if(!surgeries_count)
 		return NONE
 
-	var/datum/surgery/operation
-	if(surgeries_count > 1)
-		operation = browser_input_list(user, "Start which surgery?", "PESTRA", available_surgeries)
-	else
-		operation = available_surgeries[1]
+	if(HAS_TRAIT(src, TRAIT_READY_TO_OPERATE))
+		var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
+		if(surgery_ret)
+			return surgery_ret
 
-	if(!operation || QDELETED(src) || QDELETED(user))
-		return ITEM_INTERACT_BLOCKING
-
-	if(!user.Adjacent(src))
-		return ITEM_INTERACT_BLOCKING
-
-	if(tool.loc != user)
-		return ITEM_INTERACT_BLOCKING
-
-	if(!operation.can_next_step(user, modifiers))
-		return ITEM_INTERACT_BLOCKING
-
-	if(!operation.can_start(user, src, tool))
-		return ITEM_INTERACT_BLOCKING
-
-	var/selected_zone = user.zone_selected
-
-	var/obj/item/bodypart/affecting = get_bodypart(check_zone(selected_zone))
-
-	var/datum/surgery/procedure = new operation.type(src, selected_zone, affecting)
-
-	balloon_alert(user, "starting \"[LOWER_TEXT(procedure.name)]\"")
-
-	procedure.next_step(user, modifiers)
-
-	return ITEM_INTERACT_SUCCESS
+	return NONE
 
 /mob/living/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)

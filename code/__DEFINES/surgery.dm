@@ -1,29 +1,70 @@
 #define ORGAN_ORGANIC 1
 #define ORGAN_ROBOTIC 2
-
 #define BODYPART_ORGANIC 1
 #define BODYPART_ROBOTIC 2
 
-/// Return value when the surgery step fails :(
-#define SURGERY_STEP_FAIL -1
+/// Checks if the mob is lying down if they can lie down, otherwise always passes
+#define IS_LYING_OR_CANNOT_LIE(mob) ((mob.mobility_flags & MOBILITY_LIEDOWN) ? (mob.body_position == LYING_DOWN) : TRUE)
 
-// Flags for surgery_flags on surgery datums
-/// Will allow the surgery to bypass clothes
-#define SURGERY_IGNORE_CLOTHES (1<<0)
-/// Will disallow the surgery to be performed by the user on themselves.
-#define SURGERY_NOT_SELF_OPERABLE (1<<1)
-/// Will allow the surgery to work on mobs that aren't lying down.
-#define SURGERY_REQUIRE_RESTING (1<<2)
-/// Will allow the surgery to work only if there's a limb.
-#define SURGERY_REQUIRE_LIMB (1<<3)
-/// Will allow the surgery to work only if there's a real (eg. not pseudopart) limb.
-#define SURGERY_REQUIRES_REAL_LIMB (1<<4)
-/**
- * Instead of checking if the tool used is an actual surgery tool to avoid accidentally whacking patients with the wrong tool,
- * it'll check if it has a defined tool behaviour instead. Useful for surgeries that use mechanical tools instead of medical ones,
- * like hardware manipulation.
- */
-#define SURGERY_CHECK_TOOL_BEHAVIOUR (1<<5)
+/// Applies moodlets after the surgical operation is complete
+#define OPERATION_AFFECTS_MOOD (1<<0)
+/// Notable operations are specially logged and also leave memories
+#define OPERATION_NOTABLE (1<<1)
+/// Operation will automatically repeat until it can no longer be performed
+#define OPERATION_LOOPING (1<<2)
+/// Not innately available to doctors, must be added via COMSIG_MOB_ATTEMPT_SURGERY to show up
+#define OPERATION_LOCKED (1<<3)
+/// A surgeon cannot perform this operation on themselves
+#define OPERATION_NOT_SELF_OPERABLE (1<<4)
+/// Operation can be performed on standing patients - note: mobs that cannot lie down are *always* considered lying down for surgery
+#define OPERATION_STANDING_ALLOWED (1<<5)
+/// Some traits may cause operations to be infalliable - this flag disables that behavior, always allowing it to be failed
+#define OPERATION_ALWAYS_FAILABLE (1<<6)
+/// If set, the operation will ignore clothing when checking for access to the target body part.
+#define OPERATION_IGNORE_CLOTHES (1<<7)
+/// This operation should be prioritized as the next step in a surgery sequence. (In the operating computer it will flash red)
+#define OPERATION_PRIORITY_NEXT_STEP (1<<8)
+/// Operation is a mechanic / robotic surgery
+#define OPERATION_MECHANIC (1<<9)
 
-///Return true if target is not in a valid body position for the surgery
-#define IS_IN_INVALID_SURGICAL_POSITION(target, surgery) ((surgery.surgery_flags & SURGERY_REQUIRE_RESTING) && (target.mobility_flags & MOBILITY_LIEDOWN && target.body_position != LYING_DOWN))
+DEFINE_BITFIELD(operation_flags, list(
+	"AFFECTS MOOD" = OPERATION_AFFECTS_MOOD,
+	"NOTABLE" = OPERATION_NOTABLE,
+	"LOOPING" = OPERATION_LOOPING,
+	"LOCKED" = OPERATION_LOCKED,
+	"NOT SELF OPERABLE" = OPERATION_NOT_SELF_OPERABLE,
+	"STANDING ALLOWED" = OPERATION_STANDING_ALLOWED,
+	"ALWAYS FAILABLE" = OPERATION_ALWAYS_FAILABLE,
+	"IGNORE CLOTHES" = OPERATION_IGNORE_CLOTHES,
+	"PRIORITY NEXT STEP" = OPERATION_PRIORITY_NEXT_STEP,
+	"MECHANIC" = OPERATION_MECHANIC,
+))
+
+/// All of these equipment slots are ignored when checking for clothing coverage during surgery
+#define IGNORED_OPERATION_CLOTHING_SLOTS (ITEM_SLOT_NECK)
+
+// Surgery related mood defines
+#define SURGERY_STATE_STARTED "surgery_started"
+#define SURGERY_STATE_FAILURE "surgery_failed"
+#define SURGERY_STATE_SUCCESS "surgery_success"
+#define SURGERY_MOOD_CATEGORY "surgery"
+
+/// Dummy "tool" for surgeries which use hands
+#define IMPLEMENT_HAND "hands"
+
+// Operation argument indexes
+/// Total speed/failure modifier applied to the operation
+#define OPERATION_SPEED "speed_modifier"
+/// The action being performed, simply "default" for 95% of surgeries
+#define OPERATION_ACTION "action"
+/// Whether the operation should automatically fail
+#define OPERATION_FORCE_FAIL "force_fail"
+/// The body zone being targeted by the operation
+#define OPERATION_TARGET_ZONE "target_zone"
+/// The specific target of the operation, usually a bodypart or organ, generally redundant
+#define OPERATION_TARGET "target"
+// For tend wounds - only reason these aren't local is we use them in unit testing
+#define OPERATION_BRUTE_HEAL "brute_heal"
+#define OPERATION_BURN_HEAL "burn_heal"
+#define OPERATION_BRUTE_MULTIPLIER "brute_multiplier"
+#define OPERATION_BURN_MULTIPLIER "burn_multiplier"

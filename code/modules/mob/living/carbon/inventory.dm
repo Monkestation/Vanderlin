@@ -228,3 +228,48 @@
 			most_expensive = atom
 			price = atom.sellprice
 	return most_expensive
+
+///Returns a list of all body_zones covered by clothing
+/mob/living/carbon/proc/get_covered_body_zones()
+	RETURN_TYPE(/list)
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	return cover_flags2body_zones(get_all_covered_flags())
+
+///Returns a bitfield of all zones covered by clothing
+/mob/living/carbon/proc/get_all_covered_flags()
+	SHOULD_NOT_OVERRIDE(TRUE)
+
+	var/covered_flags = NONE
+	for(var/obj/item/worn_item in get_equipped_items())
+		covered_flags |= worn_item.body_parts_covered
+
+	return covered_flags
+
+/mob/living/carbon/is_location_accessible(location, exluded_equipment_slots = NONE)
+	switch(location)
+		// Snowflake checks for these precise zones
+		if(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_R_EYE)
+			if(is_eyes_covered(~exluded_equipment_slots))
+				return FALSE
+		if(BODY_ZONE_PRECISE_MOUTH)
+			if(is_mouth_covered(~exluded_equipment_slots))
+				return FALSE
+
+	var/covered_flags = NONE
+	for(var/obj/item/worn_item in get_equipped_items())
+		if(worn_item.slot_flags & exluded_equipment_slots)
+			continue
+		covered_flags |= worn_item.body_parts_covered
+
+	// NB: we have to convert covered_flags via cover_flags2body_zones here
+	// instead of converting location via body_zones2cover_flags
+	//
+	// our coverage might look something like GROIN|LEGS, which would convert to list(BODY_ZONE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	// so if we were checking "is BODY_ZONE_CHEST accessible", we would pass - this is correct!
+	//
+	// however, if we convert the location to body zone, we would get CHEST|GROIN
+	// then we would check (CHEST|GROIN) & (GROIN|LEGS) and return FALSE - which is incorrect, the chest is perfectly accessible!
+	// checking for ((CHEST|GROIN) & (GROIN|LEGS)) == (CHEST|GROIN) would also be incorrect,
+	// as it would imply your chest is accessible from lacking groin coverage
+	return !(location in cover_flags2body_zones(covered_flags))
