@@ -25,8 +25,6 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	var/atom/movable/screen/blobpwrdisplay
 
 	var/atom/movable/screen/act_intent/rogintent/action_intent
-	var/atom/movable/screen/scannies
-	var/atom/movable/screen/act_intent/rogintent/magic/spell_intent
 	var/atom/movable/screen/zone_sel/zone_select
 	var/atom/movable/screen/pull_icon
 	var/atom/movable/screen/rest_icon
