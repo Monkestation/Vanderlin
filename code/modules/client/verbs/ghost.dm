@@ -48,6 +48,7 @@
 				var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest?", "Final Words (Optional)", max_length=75)
 				if(final_words)
 					dead_hum.final_words = final_words
+					log_say("[src] put [final_words] for their final words.")
 
 			if(dead_hum.buried && dead_hum.funeral)
 				dead_hum.returntolobby()

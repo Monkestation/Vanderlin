@@ -113,6 +113,7 @@
 								continue
 							else
 								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one.", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
+								log_say("[Ghost] put [my_final_words] for their final words.")
 								their_final_words += my_final_words
 								break
 					if(!my_final_words) //No Observers, pick a random one
