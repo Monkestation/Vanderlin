@@ -88,13 +88,8 @@
 	return FALSE
 
 /datum/surgery_step/proc/initiate(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
-	var/interaction_key = DOAFTER_SOURCE_SURGERY
 	if(DOING_INTERACTION(user, DOAFTER_SOURCE_SURGERY))
 		user.balloon_alert(user, "already doing surgery!")
-		return FALSE
-
-	if(!chem_check(target))
-		user.balloon_alert(user, "missing [LOWER_TEXT(get_chem_list())]!")
 		return FALSE
 
 	var/preop_result = preop(user, target, target_zone, tool, surgery)
@@ -108,7 +103,8 @@
 	var/overall_mod = (get_location_modifier(target) * get_skill_modifier(user, surgery))
 	var/modded_time = time * overall_mod
 
-	if(!do_after(user, modded_time, target, interaction_key = interaction_key))
+	if(!do_after(user, modded_time, target, interaction_key = DOAFTER_SOURCE_SURGERY))
+		surgery.step_in_progress = FALSE
 		return FALSE
 
 	var/roll_result = NONE
@@ -188,6 +184,7 @@
 				break
 	else
 		sound_file_use = preop_sound
+
 	if(!sound_file_use)
 		return
 
@@ -214,7 +211,7 @@
 
 	return TRUE
 
-/// When we roll good and succeed very well
+/// Do something when we criticially succeed
 /datum/surgery_step/proc/crit_success(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	return
 
@@ -241,6 +238,7 @@
 
 	return FALSE
 
+/// Do something when we criticially fail
 /datum/surgery_step/proc/crit_failure(mob/living/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	return
 
@@ -326,7 +324,8 @@
 	var/datum/attribute/skill/skill_used = surgery.skill_used
 	if(!skill_used)
 		return 1
-	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, skill_used)
+
+	var/skill_level = GET_MOB_SKILL_VALUE(user, skill_used)
 
 	var/difference = surgery.skill_median - skill_level
 
@@ -334,10 +333,10 @@
 		return 1
 
 	if(difference > 0)
-		return (1 - (0.15 * difference))
+		return (1 - (0.015 * difference))
 
 	if(difference < 0)
-		return (1 + (0.1 * difference))
+		return (1 + (0.01 * difference))
 
 	return 1
 
