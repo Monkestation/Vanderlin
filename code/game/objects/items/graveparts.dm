@@ -16,7 +16,8 @@
 	var/list/patron
 
 /obj/item/gravedecor/New(loc, var/parent)
-	sourceitem = parent
+	if(parent)
+		sourceitem = parent
 	. = ..()
 
 
