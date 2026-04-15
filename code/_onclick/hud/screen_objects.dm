@@ -1538,8 +1538,8 @@
 /atom/movable/screen/backhudl/obscured
 	icon_state = "obscured"
 
-/atom/movable/screen/backhudl/observer
-	icon_state = "observer"
+/atom/movable/screen/backhudl/empty
+	icon_state = "empty"
 
 /atom/movable/screen/aim
 	name = ""

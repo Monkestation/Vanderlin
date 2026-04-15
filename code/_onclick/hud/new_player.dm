@@ -10,7 +10,7 @@
 	if (!owner?.client)
 		return
 
-	var/atom/movable/screen/using = new /atom/movable/screen/backhudl/observer(null, src)
+	var/atom/movable/screen/using = new /atom/movable/screen/backhudl/empty(null, src)
 	static_inventory += using
 
 	var/list/buttons = subtypesof(/atom/movable/screen/lobby)

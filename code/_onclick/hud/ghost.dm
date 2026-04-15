@@ -78,7 +78,7 @@
 		using =  new /atom/movable/screen/backhudl/ghost(null, src)
 		static_inventory += using
 	else
-		using = new /atom/movable/screen/backhudl/observer(null, src)
+		using = new /atom/movable/screen/backhudl/empty(null, src)
 		static_inventory += using
 
 	using = new /atom/movable/screen/ghost/orbit(null, src)
