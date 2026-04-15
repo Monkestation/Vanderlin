@@ -171,7 +171,7 @@
 
 	return FALSE
 
-/mob/living/split_personality/emote(act, type_override = NONE, message = null, intentional = FALSE, force_silence = FALSE, forced = FALSE)
+/mob/living/split_personality/emote(act, m_type, message, intentional, forced, targetted, custom_me)
 	return FALSE
 
 #undef OWNER
