@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/toggles = TOGGLES_DEFAULT
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
 	var/toggles_maptext = NONE
+	var/toggles_gameplay = NONE
 	var/ghost_form = "ghost"
 	var/ghost_orbit = GHOST_ORBIT_CIRCLE
 	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
@@ -1492,7 +1493,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	else if(href_list["preference"] == "toggles")
 		var/list/toggles_list = list(
 			"Default Toggles" = list("toggles_default", toggles),
-			"Maptext Toggles" = list("toggles_maptext", toggles_maptext)
+			"Maptext Toggles" = list("toggles_maptext", toggles_maptext),
+			"Gameplay Toggles" = list("toggles_gameplay", toggles_gameplay),
 		)
 		var/toggle_type = browser_input_list(user, title = "Toggle Select", items = toggles_list)
 		if(!toggle_type)
@@ -1502,26 +1504,29 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		var/prefs_variable = toggles_data[2]
 		var/new_toggles = input_bitfield(user, toggle_type, bitfield, prefs_variable, nheight = 500)
 		if(!isnull(new_toggles))
-			if(toggle_type == "Default Toggles")
-				// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
-				// And don't want to override them
-				for(var/field in GLOB.bitfields[bitfield])
-					toggles &= ~GLOB.bitfields[bitfield][field]
-				toggles ^= new_toggles
-				if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
-					user.client.playtitlemusic()
-				else
-					user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+			switch(toggle_type)
+				if("Default Toggles")
+					// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
+					// And don't want to override them
+					for(var/field in GLOB.bitfields[bitfield])
+						toggles &= ~GLOB.bitfields[bitfield][field]
+					toggles ^= new_toggles
+					if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
+						user.client.playtitlemusic()
+					else
+						user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 
-				if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
-					user.refresh_looping_ambience()
-				else
-					user.cancel_looping_ambience()
+					if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
+						user.refresh_looping_ambience()
+					else
+						user.cancel_looping_ambience()
 
-				user.client?.update_ambience_pref()
+					user.client?.update_ambience_pref()
+				if("Maptext Toggles")
+					toggles_maptext = new_toggles
 
-			else if(toggle_type == "Maptext Toggles")
-				toggles_maptext = new_toggles
+				if("Gameplay Toggles")
+					toggles_gameplay = new_toggles
 
 	switch(href_list["task"])
 		if("change_customizer")

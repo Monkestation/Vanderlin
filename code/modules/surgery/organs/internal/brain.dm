@@ -397,16 +397,17 @@
 /obj/item/organ/brain/proc/can_gain_trauma(datum/brain_trauma/trauma, resilience, natural_gain = FALSE)
 	if(!ispath(trauma))
 		trauma = trauma.type
+
 	if(!initial(trauma.can_gain))
 		return FALSE
+
 	if(!resilience)
 		resilience = initial(trauma.resilience)
 
 	var/resilience_tier_count = 0
-	for(var/X in traumas)
-		if(istype(X, trauma))
+	for(var/datum/brain_trauma/existing_trauma as anything in traumas)
+		if(istype(existing_trauma, trauma))
 			return FALSE
-		var/datum/brain_trauma/existing_trauma = X
 		if(resilience == existing_trauma.resilience)
 			resilience_tier_count++
 
@@ -427,6 +428,7 @@
 
 	if(natural_gain && resilience_tier_count >= max_traumas)
 		return FALSE
+
 	return TRUE
 
 /obj/item/organ/brain/proc/gain_trauma(datum/brain_trauma/trauma, resilience, ...)
@@ -449,7 +451,7 @@
 		actual_trauma = trauma
 
 	if(actual_trauma.brain) //we don't accept used traumas here
-		WARNING("gain_trauma was given an already active trauma.")
+		stack_trace("gain_trauma was given an already active trauma.")
 		return
 
 	traumas += actual_trauma
@@ -462,23 +464,38 @@
 	. = actual_trauma
 	SSblackbox.record_feedback("tally", "traumas", 1, actual_trauma.type)
 
-/obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience, natural_gain = FALSE)
+/**
+ * Completely randomly give a brain trauma from the selected type subtypes these should be defines
+ * from [_DEFINES/mob.dm]
+ *
+ * Arguments
+ * * brain_trauma_type - Type to poll for subtypes
+ * * resilience - How hard the trauma is to remove
+ * * natural_gain - Counts towards trauma limit
+ * * force_split_personality - Ignore split personality preference, though you should just use gain_trauma if you want to give it
+ */
+/obj/item/organ/brain/proc/gain_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience = NONE, natural_gain = FALSE, force_split_personality = FALSE)
 	var/list/datum/brain_trauma/possible_traumas = list()
-	for(var/trauma_type in subtypesof(brain_trauma_type))
-		var/datum/brain_trauma/brain_trauma = trauma_type
-		if(can_gain_trauma(brain_trauma, resilience, natural_gain) && initial(brain_trauma.random_gain))
+	for(var/datum/brain_trauma/brain_trauma as anything in subtypesof(brain_trauma_type))
+		if(IS_ABSTRACT(brain_trauma))
+			continue
+		if(!initial(brain_trauma.random_gain))
+			continue
+		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
+			if(!force_split_personality && owner?.client.prefs.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+				continue
+		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma
 
-	if(!LAZYLEN(possible_traumas))
+	if(!length(possible_traumas))
 		return
 
 	var/trauma_type = pick(possible_traumas)
 	return gain_trauma(trauma_type, resilience)
 
-
 /obj/item/organ/brain/proc/cure_trauma_type(brain_trauma_type = /datum/brain_trauma, resilience = TRAUMA_RESILIENCE_BASIC)
 	var/list/traumas = get_traumas_type(brain_trauma_type, resilience)
-	if(LAZYLEN(traumas))
+	if(length(traumas))
 		qdel(pick(traumas))
 
 /obj/item/organ/brain/proc/cure_all_traumas(resilience = TRAUMA_RESILIENCE_BASIC)
