@@ -50,19 +50,19 @@
 	if(istype(exposed_carbon) && (NOBLOOD in exposed_carbon.dna?.species?.species_traits))
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
-	if(method & INJECT)
+	if(methods & INJECT)
 		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
-		if(L.stat >= DEAD)
+		if(exposed_mob.stat >= DEAD)
 			modifier = 20
-		if(L.blood_volume <= BLOOD_VOLUME_MAXIMUM)
-			L.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
+		if(exposed_mob.blood_volume <= BLOOD_VOLUME_MAXIMUM)
+			exposed_mob.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
 		return
-	if(method & INGEST)
-		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER))))
-			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
-				L.adjust_hydration(reac_volume * 0.2)
-			if(L.blood_volume < BLOOD_VOLUME_NORMAL)
-				L.adjust_bloodvolume(reac_volume * 0.2)
+	if(methods & INGEST)
+		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(exposed_mob, TRAIT_BLOODDRINKER) || HAS_TRAIT(exposed_mob, TRAIT_NASTY_EATER))))
+			if(!HAS_TRAIT(exposed_mob, TRAIT_NOHUNGER))
+				exposed_mob.adjust_hydration(reac_volume * 0.2)
+			if(exposed_mob.blood_volume < BLOOD_VOLUME_NORMAL)
+				exposed_mob.adjust_bloodvolume(reac_volume * 0.2)
 			return
 		var/tox = toxicity * reac_volume
 		if(HAS_TRAIT(exposed_carbon, TRAIT_POISON_RESILIENCE))
@@ -102,11 +102,11 @@
 	glass_desc = ""
 	toxicity = 3
 
-/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 10)
+/datum/reagent/fuel/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((methods & TOUCH) || (methods & VAPOR))
+		exposed_mob.adjust_fire_stacks(reac_volume / 10)
 		return
-	..()
 
 /datum/reagent/blood/fuel/add_to_member(obj/effect/abstract/liquid_turf/adder)
 	. = ..()

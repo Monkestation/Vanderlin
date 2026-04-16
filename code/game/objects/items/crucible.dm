@@ -9,7 +9,6 @@
 	grid_width = 32
 	grid_height = 64
 
-	tool_flags = TOOL_USAGE_TONGS
 	item_weight = 2 KILOGRAMS
 
 	var/crucible_temperature = 300

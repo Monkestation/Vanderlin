@@ -46,5 +46,5 @@
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
 	smeltresult = /obj/item/ingot/bronze
-	time_multiplier = 1.2
+	toolspeed = 1.2
 	item_weight = 245 GRAMS
