@@ -1583,6 +1583,13 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
+"jQ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fake_machine/mail/l{
+	mailtag = "Gallowband Gate"
+	},
+/turf/open/floor/cobble,
+/area/indoors/wilderness/gallowband/garrison/gatehouse)
 "jS" = (
 /obj/structure/bookcase,
 /turf/open/floor/sandstone_tile/five,
@@ -13653,7 +13660,7 @@ tS
 ih
 gr
 ZV
-gr
+tk
 kJ
 An
 An
@@ -14259,7 +14266,7 @@ ZV
 gr
 ZV
 gr
-tk
+gr
 An
 An
 An
@@ -14462,7 +14469,7 @@ ZV
 ZV
 ZV
 gr
-tk
+gr
 IA
 Gs
 Gs
@@ -14662,7 +14669,7 @@ Iz
 Iz
 Iz
 ZV
-tk
+gr
 gr
 An
 Gs
@@ -15877,7 +15884,7 @@ ZV
 ZV
 gr
 gr
-gr
+tk
 An
 An
 An
@@ -16282,7 +16289,7 @@ gr
 gr
 gr
 ZV
-gr
+tk
 gr
 An
 An
@@ -22945,7 +22952,7 @@ wm
 Ql
 uX
 wm
-uX
+jQ
 DC
 ZV
 Iz
@@ -28634,9 +28641,9 @@ Jz
 Jz
 Jz
 Jz
-Jz
-Jz
-Jz
+fQ
+fQ
+fQ
 Jz
 vx
 vx
