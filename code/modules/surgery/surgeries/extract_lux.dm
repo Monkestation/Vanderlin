@@ -20,10 +20,11 @@
 		/obj/item/kitchen/spoon = 40
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 8 SECONDS
+	minimum_time = 7.2 SECONDS
+	maximum_time = 9.5 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED | SURGERY_BROKEN
-	skill_min = SKILL_RANK_JOURNEYMAN
-	skill_median = SKILL_RANK_EXPERT
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 	preop_sound = 'sound/surgery/organ2.ogg'
 	success_sound = 'sound/surgery/organ1.ogg'
 

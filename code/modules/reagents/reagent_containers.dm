@@ -47,6 +47,8 @@
 	/// Auto label with proc [apply_initial_label] of course requires an override.
 	var/auto_label = FALSE
 
+	var/obj/item/soaking_item = null
+
 	COOLDOWN_DECLARE(weather_act_cooldown)
 
 /obj/item/reagent_containers/Initialize(mapload, vol)
@@ -70,6 +72,9 @@
 /obj/item/reagent_containers/Destroy()
 	if(is_open_container())
 		GLOB.weather_act_upon_list -= src
+	if(soaking_item)
+		soaking_item.forceMove(drop_location())
+		soaking_item = null
 	return ..()
 
 /obj/item/reagent_containers/weather_act_on(weather_trait, severity)
@@ -137,9 +142,77 @@
 	var/datum/reagent/master = reagents.get_master_reagent()
 	if(master?.glows)
 		. += emissive_appearance(filling.icon, filling.icon_state, alpha = filling.alpha)
+	if(!soaking_item)
+		return
+	var/mutable_appearance/item_overlay = mutable_appearance()
+	item_overlay.appearance = soaking_item.appearance
+	item_overlay.pixel_y += 4
+	item_overlay.layer = FLOAT_LAYER
+	item_overlay.plane = FLOAT_PLANE
+	item_overlay.transform = item_overlay.transform.Scale(0.5, 0.5)
+	. += item_overlay
+
+/obj/item/reagent_containers/attackby_secondary(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	if(GetComponent(/datum/component/storage))
+		return
+	if(!is_open_container() || !reagents || !reagents.total_volume)
+		to_chat(user, span_warning("\The [src] needs to be open and have reagents to soak something in."))
+		return
+	if(soaking_item)
+		to_chat(user, span_warning("There's already something soaking in \the [src]."))
+		return
+	if(I.w_class > WEIGHT_CLASS_NORMAL)
+		to_chat(user, span_warning("\The [I] is too large to fit in \the [src]."))
+		return
+	if(!user.transferItemToLoc(I, src))
+		return
+	soaking_item = I
+	update_icon()
+	START_PROCESSING(SSobj, src)
+	to_chat(user, span_notice("You submerge \the [I] in \the [src]."))
+
+/obj/item/reagent_containers/attack_hand_secondary(mob/living/user, list/modifiers)
+	. = ..()
+	if(!soaking_item)
+		return
+	var/obj/item/returning = soaking_item
+	soaking_item = null
+	update_icon()
+	returning.forceMove(get_turf(src))
+	user.put_in_hands(returning)
+	STOP_PROCESSING(SSobj, src)
+	to_chat(user, span_notice("You retrieve \the [returning] from \the [src]."))
+
+/obj/item/reagent_containers/process()
+	if(!soaking_item || !reagents || !reagents.total_volume)
+		return
+	var/splash_amount = max(0.2, reagents.total_volume * 0.01) //we lose 1% volume per process or 0.2 unit and multiply this by 10 on application so a preserving basin lasts atleast 500 seconds
+	var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
+	splash_holder.my_atom = soaking_item
+	reagents.trans_to(splash_holder, splash_amount, 10, 1, 1)
+	splash_holder.chem_temp = reagents.chem_temp
+	splash_holder.handle_reactions()
+	splash_holder.reaction(soaking_item, TOUCH, 1)
+	qdel(splash_holder)
 
 /obj/item/reagent_containers/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
+	if(is_open_container() && reagents && reagents.total_volume > 0 && !GetComponent(/datum/component/storage))
+		if(!istype(I, /obj/item/reagent_containers) && !istype(I, /obj/item/paper))
+			var/splash_amount = reagents.total_volume * 0.05
+			if(splash_amount < 1)
+				splash_amount = 1
+			var/datum/reagents/splash_holder = new /datum/reagents(splash_amount)
+			splash_holder.my_atom = I
+			reagents.trans_to(splash_holder, splash_amount, 4, 1, 1)
+			splash_holder.chem_temp = reagents.chem_temp
+			splash_holder.handle_reactions()
+			splash_holder.reaction(I, TOUCH, 1)
+			qdel(splash_holder)
+			to_chat(user, span_notice("You submerge \the [I] into [src]."))
+			return
+
 	if(!can_label_container || !(istype(I, /obj/item/paper) && !istype(I, /obj/item/paper/scroll)))
 		return
 	if(labelled)

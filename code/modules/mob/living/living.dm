@@ -394,6 +394,7 @@
 /mob/living/carbon/proc/lying_attack_check(mob/living/L, obj/item/I)
 	if(L == src)
 		return TRUE
+
 	var/CZ = FALSE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if((L.body_position != LYING_DOWN) && (body_position != LYING_DOWN)) //we are both standing
@@ -734,10 +735,10 @@
 	return TRUE
 
 /mob/living/proc/InCritical()
-	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS))
+	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS || stat == HARD_CRIT))
 
 /mob/living/proc/InFullCritical()
-	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && stat == UNCONSCIOUS)
+	return ((health <= HEALTH_THRESHOLD_FULLCRIT) && (stat == UNCONSCIOUS  || stat == HARD_CRIT))
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
@@ -978,6 +979,7 @@
 		if(ishuman(src))
 			var/mob/living/carbon/human/human = src
 			human.funeral = FALSE
+			human.update_eyes()
 
 		if(excess_healing)
 			INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp")
@@ -2184,7 +2186,7 @@
 			if(G.grab_state == GRAB_AGGRESSIVE)
 				return
 		var/datum/component/storage = over.GetComponent(/datum/component/storage)
-		if(storage)
+		if(storage && !istype(storage, /datum/component/storage/concrete/organ))
 			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
@@ -2292,9 +2294,9 @@
 		if("eye_blind")
 			adjust_temp_blindness(var_value)
 		if("eye_damage")
-			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-			if(E)
-				E.setOrganDamage(var_value)
+			var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+				eyes.setOrganDamage(var_value)
 		if("maxHealth")
 			updatehealth()
 		if("resize")
@@ -2717,22 +2719,35 @@
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT)
 		if(UNCONSCIOUS)
 			cure_blind(UNCONSCIOUS_TRAIT)
+		if(HARD_CRIT)
+			if(stat != UNCONSCIOUS)
+				cure_blind(UNCONSCIOUS_TRAIT)
 	switch(stat) //Current stat.
 		if(CONSCIOUS)
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
-			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED), STAT_TRAIT)
+			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED, TRAIT_CRITICAL_CONDITION), STAT_TRAIT)
 			log_combat(src, src, "regained consciousness")
 		if(SOFT_CRIT)
 			if(pulledby)
 				ADD_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT) //adding trait sources should come before removing to avoid unnecessary updates
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
+			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			log_combat(src, src, "entered soft crit")
 		if(UNCONSCIOUS)
 			become_blind(UNCONSCIOUS_TRAIT)
 			log_combat(src, src, "lost consciousness")
+			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
+				ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			else
+				REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+		if(HARD_CRIT)
+			if(. != UNCONSCIOUS)
+				become_blind(UNCONSCIOUS_TRAIT)
+			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 		if(DEAD)
+			REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
 			log_combat(src, src, "died")
 	if(!can_hear())
 		stop_sound_channel(CHANNEL_AMBIENCE)

@@ -11,6 +11,7 @@
 #define SPECIES_TRAIT "species"
 #define ORGAN_TRAIT "organ"
 #define CRIT_TRAIT "crit"
+#define ASYSTOLE_TRAIT "no_pulse"
 /// Set on roundstart, not removed unless via admins
 #define ROUNDSTART_TRAIT "roundstart"
 #define JOB_TRAIT "job"

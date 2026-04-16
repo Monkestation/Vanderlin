@@ -12,7 +12,7 @@
 	QDEL_NULL(fly)
 	return ..()
 
-/obj/item/organ/wings/flight/Insert(mob/living/carbon/M, special, drop_if_replaced)
+/obj/item/organ/wings/flight/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
 	. = ..()
 	if(length(flight_for_species) && !(M.dna?.species.id in flight_for_species))
 		return

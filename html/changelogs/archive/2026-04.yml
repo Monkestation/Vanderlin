@@ -220,3 +220,16 @@
   - refactor: Prayers now use TGUI
   Wrench-1:
   - rscdel: Halflings can no longer be Grandmaster Templars
+2026-04-15:
+  Ben10083:
+  - rscadd: 'Adds new T2 Dwarf only Miracle from Malum: MALUM''S ANVIL. Granting CON
+      buff and SPD malus, and makes you unstoppable for the duration (13 seconds)'
+  Boltersam:
+  - rscadd: You may now optionally convert to Graggar if you are transformed into
+      a half-orc.
+  KevinfromHP:
+  - bugfix: Fixed various bugs related to Change Position Monarch command.
+  Telvayne:
+  - bugfix: Westleach may now be submitted to the stockpile.
+  realforest2001:
+  - admin: PlayerPanel Cryo now requires confirmation.

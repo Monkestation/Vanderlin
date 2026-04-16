@@ -1,4 +1,4 @@
-/mob/living/carbon/Life()
+/mob/living/carbon/Life(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
@@ -20,7 +20,7 @@
 		. = ..()
 	else
 		//Reagent processing needs to come before breathing, to prevent edge cases.
-		handle_organs()
+		handle_organs(delta_time, times_fired)
 
 		. = ..()
 
@@ -30,20 +30,18 @@
 		handle_lingering_pain()
 		handle_wounds()
 		handle_embedded_objects()
-		handle_blood()
 		handle_roguebreath()
 		update_stress()
 		handle_nausea()
 		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
 				if(oxyloss)
-					adjustOxyLoss(-1.6)
+					adjustOxyLoss(-5)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE
 
 		handle_sleep()
-		handle_brain_damage()
 
 	check_cremation()
 
@@ -61,7 +59,6 @@
 		return
 	handle_wounds()
 	handle_embedded_objects()
-	handle_blood()
 
 	check_cremation()
 
@@ -211,7 +208,7 @@
 	var/react_volume = 2
 	var/react_type = TOUCH
 	var/is_laying = (body_position == LYING_DOWN)
-	var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
+	var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 20 : 15) : 10
 	if(!is_laying)
 		if(W.water_height < WATER_HEIGHT_SHALLOW)
 			return
@@ -219,7 +216,7 @@
 			var/swimdrain = max(10 - GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/swimming), 1)
 			if(swimdrain < maximum_stamina - stamina)
 				adjust_stamina(swimdrain, "drown")
-				adjustOxyLoss(2)
+				adjustOxyLoss(7 + drown_damage)
 			else
 				adjustOxyLoss(drown_damage)
 				emote("drown")
@@ -574,13 +571,40 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_organs()
-	if(stat != DEAD)
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_life()
+/mob/living/carbon/proc/handle_organs(delta_time, times_fired)
+	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
+		return
+	if(stat < DEAD)
+		var/list/already_processed_life = list()
+		var/list/organlist
+		var/obj/item/organ/organ
+		for(var/organ_slot in GLOB.organ_process_order)
+			if(QDELETED(src))
+				break
+			organlist = LAZYACCESS(internal_organs_slot, organ_slot)
+			for(var/thing in organlist)
+				if(QDELETED(src))
+					break
+				organ = thing
+				// This exists mostly because reagent metabolization can cause organ shuffling
+				if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
+					if(organ.needs_processing)
+						organ.on_life(delta_time, times_fired)
+					already_processed_life[organ] = TRUE
+		var/datum/organ_process/organ_process
+		for(var/thing in GLOB.organ_process_datum_order)
+			if(QDELETED(src))
+				break
+			organ_process = GLOB.organ_processes_by_slot[thing]
+			if(organ_process.needs_process(src))
+				organ_process.handle_process(src, delta_time, times_fired)
 	else
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_death() //Needed so organs decay while inside the body.
+		var/obj/item/organ/organ
+		for(var/thing in internal_organs)
+			organ = thing
+			//Needed so organs decay while inside the body
+			organ.on_death(delta_time, times_fired)
+
 
 /mob/living/carbon/handle_embedded_objects()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -715,30 +739,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 	return fullness
 
-/////////
-//LIVER//
-/////////
-
-///Decides if the liver is failing or not.
-/mob/living/carbon/proc/handle_liver()
-	if(!dna)
-		return
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(!liver)
-		liver_failure()
-
-/mob/living/carbon/proc/undergoing_liver_failure()
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(liver && (liver.organ_flags & ORGAN_FAILING))
-		return TRUE
-
-/mob/living/carbon/proc/liver_failure()
-	reagents.end_metabolization(src, keep_liverless = TRUE) //Stops trait-based effects on reagents, to prevent permanent buffs
-	reagents.metabolize(src, can_overdose=FALSE, liverless = TRUE)
-	if(HAS_TRAIT(src, TRAIT_NOMETABOLISM))
-		return
-	adjustToxLoss(4, TRUE,  TRUE)
-
 
 /////////////
 //CREMATION//
@@ -863,11 +863,26 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!can_heartattack())
 		return FALSE
 
-	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!istype(heart))
-		return
+	var/list/hearts = getorganslotlist(ORGAN_SLOT_HEART)
+	if(status)
+		pulse = PULSE_NONE
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Stop()
+	else
+		pulse = PULSE_NORM
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Restart()
 
-	heart.beating = !status
+/// Brain is poopy (hardcrit)
+/mob/living/proc/undergoing_nervous_system_failure()
+	return FALSE
+
+/mob/living/carbon/undergoing_nervous_system_failure()
+	var/obj/item/organ/brain/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!brain)
+		return TRUE
+	if(brain.is_failing())
+		return TRUE
 
 /// Handles sleep. Mobs with no_sleep trait cannot sleep.
 /*
@@ -908,7 +923,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			adjust_energy(sleepy_mod * (max_energy * 0.004))
 		if(hydration > 0 || yess)
 			if(!bleed_rate)
-				blood_volume = min(blood_volume + (4 * sleepy_mod), BLOOD_VOLUME_NORMAL)
+				adjust_bloodvolume(4 * sleepy_mod, BLOOD_VOLUME_NORMAL)
 			for(var/obj/item/bodypart/affecting as anything in bodyparts)
 				//for context, it takes 5 small cuts (0.4 x 5) or 3 normal cuts (0.8 x 3) for a bodypart to not be able to heal itself
 				if(affecting.get_bleed_rate() >= 2)

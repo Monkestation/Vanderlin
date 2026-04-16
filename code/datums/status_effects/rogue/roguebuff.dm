@@ -456,6 +456,31 @@
 	desc = span_notice("I am inspired to create!")
 	icon_state = "malum_buff"
 
+/datum/status_effect/buff/malum_anvil
+	id = "anvil_buff_malum"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
+	duration = 13 SECONDS
+	effectedstats = list(STAT_CONSTITUTION = 3, STAT_SPEED = -1) // Anvils do not move that fast
+
+/datum/status_effect/buff/malum_anvil/on_apply()
+	. = ..()
+	owner.apply_status_effect(/datum/status_effect/light_buff/malum_anvil, src.duration)
+	ADD_TRAIT(owner, TRAIT_NOSLIPALL, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_NOPAINSTUN, TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/buff/malum_anvil/on_remove()
+	. = ..()
+	owner.remove_status_effect(/datum/status_effect/light_buff/malum_anvil)
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPALL, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_NOPAINSTUN, TRAIT_STATUS_EFFECT(id))
+
+/atom/movable/screen/alert/status_effect/buff/malum_anvil
+	name = "Malum's Anvil"
+	desc = span_notice("READY for TOIL!")
+	icon_state = "malum_anvil"
+
 /*-----------------\
 |   Hunt Miracles |
 \-----------------*/

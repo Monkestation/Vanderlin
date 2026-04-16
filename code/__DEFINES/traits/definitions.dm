@@ -1,8 +1,10 @@
 /*
 Remember to update _globalvars/traits.dm if you're adding/removing/renaming traits.
 */
+#define OBESITY "obesity"
 
 // ************* atom traits
+#define EAR_DAMAGE "ear_damage"
 
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
@@ -114,6 +116,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
 /// This human is immune to the effects of being exploded. (ex_act)
 #define TRAIT_BOMBIMMUNE "bomb_immunity"
+/// Immunity against germs and viruses crippled
+#define TRAIT_IMMUNITY_CRIPPLED "immunity_crippled"
 /// Immune to radiation
 #define TRAIT_RADIMMUNE "rad_immunity"
 /// Skin is not possible to pierce (needles, embeds)
@@ -142,6 +146,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOLIMBDISABLE	"no_limb_disable"
 /// Limbs have lower damage thresholds
 #define TRAIT_EASYLIMBDISABLE "easy_limb_disable"
+/// In some kind of critical condition. Is able to succumb.
+#define TRAIT_CRITICAL_CONDITION "critical-condition"
+/// In softcrit
+#define TRAIT_SOFT_CRITICAL_CONDITION "soft_critical_condition"
 /// Toxin damage heals, toxin healing does damage
 #define TRAIT_TOXINLOVER "toxinlover"
 /// Doesn't need to breathe
@@ -206,6 +214,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_LANGUAGE_BARRIER "language-barrier"
 /// Immunity to flash effects
 #define TRAIT_NOFLASH "noflash"
+/// Suffering heart attack, can succumb
+#define TRAIT_DEATHS_DOOR "deaths_door"
 /// Immunity to pain
 #define TRAIT_NOPAIN "no_pain"
 /// Stumbling, can smash into things
@@ -216,6 +226,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BURIED_COIN_GIVEN "buried_coin_given"
 /// can bleed, but will never die from blood loss
 #define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune"
+/// regardless of organs the blood requirements will be default
+#define TRAIT_NORMALIZED_BLOOD "blood_normalized"
 /// you are a rotman and need occasional maintenance
 #define TRAIT_ROTMAN "rotman"
 /// immune to zombie infection
@@ -283,6 +295,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_REJECTED_BY_TECHNOLOGY "rejected_by_technology"
 /// Doesn't cast a reflection
 #define TRAIT_NO_REFLECTION "no_reflection"
+///doesn't process organs
+#define TRAIT_NO_ORGAN_PROCESS "no_organs"
 /// Vampire cannot drink from anyone who doesn't consent to it
 #define TRAIT_CONSENSUAL_FEEDING_ONLY "consensual_feeding_only"
 #define TRAIT_COVEN_BANE "coven_bane"
@@ -362,6 +376,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Doesn't consume stamina
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep
+#define TRAIT_FAT "Obese"
 #define TRAIT_NOSLEEP "Fatal Insomnia"
 #define TRAIT_FASTSLEEP "Fast Sleeper"
 #define TRAIT_NUDIST "Nudist" //you can't wear most clothes
@@ -432,7 +447,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BEAUTIFUL "Beautiful"
 #define TRAIT_UGLY "Ugly"
 #define TRAIT_FISHFACE "Fishface"
-#define TRAIT_FAT "Obese"
 #define TRAIT_SCHIZO_FLAW "Schizophrenic"
 #define TRAIT_TORPOR "Endless Slumber"
 #define TRAIT_SATE "SATE"
@@ -440,6 +454,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
+/// This mob can't have a split personality
+#define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"

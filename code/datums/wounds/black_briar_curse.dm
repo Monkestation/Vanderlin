@@ -422,13 +422,13 @@
 	var/mob/living/carbon/C = owner
 	if(infection_percent >= BBC_STAGE_MID)
 		if(QDELETED(concussion))
-			concussion = C.gain_trauma_type(/datum/brain_trauma/mild/concussion, TRAUMA_RESILIENCE_ABSOLUTE)
+			concussion = C.gain_trauma(/datum/brain_trauma/mild/concussion, TRAUMA_RESILIENCE_ABSOLUTE)
 	else if(!QDELETED(concussion))
 		qdel(concussion)
 
 	if(infection_percent >= BBC_STAGE_LATE)
 		if(QDELETED(impediment))
-			impediment = C.gain_trauma_type(/datum/brain_trauma/mild/speech_impediment, TRAUMA_RESILIENCE_ABSOLUTE)
+			impediment = C.gain_trauma(/datum/brain_trauma/mild/speech_impediment, TRAUMA_RESILIENCE_ABSOLUTE)
 	else if(!QDELETED(impediment))
 		qdel(impediment)
 

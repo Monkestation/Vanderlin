@@ -202,17 +202,17 @@
 	name = "blessed water"
 	description = "A gift of Devotion. Very slightly heals wounds."
 
-/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/blessed/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	if (M.mob_biotypes & MOB_UNDEAD)
-		M.adjustFireLoss(0.5*REM)
+		M.adjustFireLoss(0.5*REM * efficiency)
 	else
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
 
@@ -232,27 +232,27 @@
 	name = "cursed water"
 	description = "A gift of Devotion. Very slightly heals wounds of the dead and the enlightened."
 
-/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/cursed/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	if((M.mob_biotypes & MOB_UNDEAD))
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
 	else
-		M.adjustBruteLoss(-0.1*REM)
-		M.adjustFireLoss(-0.1*REM)
-		M.adjustOxyLoss(-0.1, 0)
+		M.adjustBruteLoss(-0.1*REM * efficiency)
+		M.adjustFireLoss(-0.1*REM * efficiency)
+		M.adjustOxyLoss(-0.1 * efficiency, 0)
 		var/list/our_wounds = M.get_wounds()
 		if (LAZYLEN(our_wounds))
-			var/upd = M.heal_wounds(1)
+			var/upd = M.heal_wounds(1 * efficiency)
 			if (upd)
 				M.update_damage_overlays()
-		M.adjust_stamina(0.5*REM)
+		M.adjust_stamina(0.5*REM * efficiency)
 
 /atom/movable/screen/alert/status_effect/thaumaturgy
 	name = "Thaumaturgical Voice"
@@ -330,6 +330,17 @@
 	to_chat(owner, span_notice("The miraculous light surrounding me has fled..."))
 	owner.remove_filter("blessing_of_light")
 	remove_light(owner)
+
+/// Similar to orison light but called when under the status effect `Malum's Anvil`
+/// Duration is handled by the status_effect that calls this
+/datum/status_effect/light_buff/malum_anvil
+	id = "malum_light_buff"
+	alert_type = null
+
+	outline_colour = "#cf991a"
+
+/datum/status_effect/light_buff/malum_anvil/get_examine_text()
+	return "SUBJECTPRONOUN is surrounded by an aura of warm light similar to heated metal."
 
 #undef ORISON_FILL
 #undef ORISON_TOUCH
