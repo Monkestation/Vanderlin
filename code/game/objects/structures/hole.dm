@@ -540,21 +540,21 @@
 
 /// Proc to update `quality`, should be called when `headstone` or `gravefence` is modified, and other cases where the condition of the grave has changed
 /obj/structure/closet/dirthole/proc/update_quality()
-    var/corpse_patron
     gravequality = 0
     if(stage != 4) // If not a complete grave, no quality
         return
     if(bonusquality)
         gravequality += bonusquality
-    for(var/mob/living/corpse in contents)
-        corpse_patron = corpse.patron
+
     if(headstone)
         var/obj/item/gravedecor/headstone/Head = headstone
         var/heldquality = Head.decorationquality
-        for(var/datum/patron/GravePatron in Head.patron)
-            if(GravePatron == corpse_patron)
+        for(var/mob/living/corpse in contents)
+            if(corpse.patron in headstone.patron)
                 heldquality = 3
+				break
         gravequality += heldquality
+
     if(gravefence)
         var/obj/item/gravedecor/gravefence/Fence = gravefence
         var/heldquality = Fence.decorationquality
