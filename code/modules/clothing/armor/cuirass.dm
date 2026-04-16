@@ -55,7 +55,7 @@
 	armor = ARMOR_PLATE_BAD
 	body_parts_covered = COVERAGE_VEST
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 KILOGRAMS
+	item_weight = 6.5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/rust
@@ -91,7 +91,7 @@
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
 	max_integrity = INTEGRITY_POOR
-	item_weight = 6.4 KILOGRAMS
+	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/vampire
 	name = "ancient plate"

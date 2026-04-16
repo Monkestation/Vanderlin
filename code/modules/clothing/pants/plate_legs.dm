@@ -26,7 +26,7 @@
 	armor = ARMOR_PLATE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 3.95 KILOGRAMS
+	item_weight = 5.2 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
 
@@ -43,7 +43,7 @@
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.95 KILOGRAMS
+	item_weight = 5.2 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"
