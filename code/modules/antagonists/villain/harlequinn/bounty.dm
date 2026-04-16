@@ -1538,7 +1538,10 @@
 			var/mob/living/living_harlequinn = harlequinn
 			// Remove curse status if they have the graverobber trait (blessed burial)
 			if(HAS_TRAIT(living_harlequinn, TRAIT_GRAVEROBBER))
-				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
+				living_harlequinn.remove_status_effect(/datum/status_effect/debuff/cursed_t4)
 				to_chat(harlequinn, span_notice("Necra smiles upon this proper burial. Any curses are lifted."))
 			else
 				to_chat(harlequinn, span_notice("The proper burial brings peace to the departed soul."))
