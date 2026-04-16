@@ -10779,7 +10779,7 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "aZg" = (
-/obj/structure/fluff/traveltile/exit_vampire,
+/obj/effect/spawner/traveltile_spawner/horizontal/vampire,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "aZh" = (
