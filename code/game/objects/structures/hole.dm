@@ -21,20 +21,15 @@
 	var/faildirt = 0
 
 	/// Present headstone. If this is empty, there isnt one.
-	var/obj/item/gravedecor/headstone
+	var/obj/item/gravedecor/headstone/headstone
 	/// Present gravefence. If this is empty, there isnt one.
-	var/obj/item/gravedecor/gravefence
+	var/obj/item/gravedecor/gravefence/gravefence
 	/// From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
 	var/gravequality = 0
 	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
 	var/bonusquality
 	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
 	var/is_consecrated
-
-	var/inscription
-	var/associated_name
-	var/custom_message
-	var/final_words
 
 /obj/structure/closet/dirthole/Initialize()
 	var/turf/open/floor/dirt/T = loc
@@ -64,12 +59,8 @@
 
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
-		if(associated_name)
-			. += "Here lies: [associated_name]"
-		if(custom_message)
-			. += "[custom_message]"
-		if(custom_message)
-			. += "'[final_words]'"
+		if(headstone.inscription)
+			to_chat(user, headstone.inscription) // We do it this way because the examine code dislikes some of the formatting we do here
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 2)
@@ -181,7 +172,11 @@
 			if(item_to_remove.sourceitem)
 				user.put_in_active_hand(new item_to_remove.sourceitem())
 			else
-				user.put_in_active_hand(new item_to_remove.type())
+				// We need to perserve custom_message and inscription
+				var/obj/item/gravedecor/headstone/replacement = new item_to_remove.type()
+				replacement.inscription = headstone.inscription
+				replacement.custom_message = headstone.custom_message
+				user.put_in_active_hand(replacement)
 			headstone = null
 		else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
 			if(item_to_remove.sourceitem)
@@ -370,7 +365,10 @@
 				if(headstone.sourceitem)
 					new headstone.sourceitem(get_turf(src))
 				else
-					new headstone.type(get_turf(src))
+					// We need to perserve custom_message and inscription
+					var/obj/item/gravedecor/headstone/replacement = new headstone.type(get_turf(src))
+					replacement.inscription = headstone.inscription
+					replacement.custom_message = headstone.custom_message
 				headstone = null
 			if(gravefence)
 				if(gravefence.sourceitem)
