@@ -1,5 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "Fixed split personality triggering on clientless mobs"
-  - rscadd: "Added an option to disable random gain of split personality from brain damage"

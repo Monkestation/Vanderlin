@@ -1,0 +1,6 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - qol: "Yielding message more obvious"
+  - bugfix: "Surrender prompt now cares about if you accept to surrender"
+  - bugfix: "You can no longer stack tgui prompts to bypass surrender cooldowns"

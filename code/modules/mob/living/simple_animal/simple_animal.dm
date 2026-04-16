@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	maxHealth = 20
 	gender = PLURAL //placeholder
 	living_flags = MOVES_ON_ITS_OWN
+	hud_type = /datum/hud/simple
 
 	status_flags = CANPUSH|CANSLOWDOWN|CANSTUN
 

@@ -233,3 +233,9 @@
   - bugfix: Westleach may now be submitted to the stockpile.
   realforest2001:
   - admin: PlayerPanel Cryo now requires confirmation.
+2026-04-16:
+  CheffieGithub:
+  - bugfix: Fixed split personality triggering on clientless mobs
+  - rscadd: Added an option to disable random gain of split personality from brain
+      damage
+  - rscdel: Disabled Peasant Rebel

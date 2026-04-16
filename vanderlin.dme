@@ -399,6 +399,7 @@
 #include "code\_onclick\hud\radial.dm"
 #include "code\_onclick\hud\radial_persistent.dm"
 #include "code\_onclick\hud\screen_objects.dm"
+#include "code\_onclick\hud\simple.dm"
 #include "code\_onclick\hud\spirit.dm"
 #include "code\_onclick\hud\rendering\blockers.dm"
 #include "code\_onclick\hud\rendering\plane_master.dm"
