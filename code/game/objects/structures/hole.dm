@@ -546,22 +546,24 @@
     if(bonusquality)
         gravequality += bonusquality
 
+	//TODO UNCOMMENTING THIS CODE FREAKS OUT BECAUSE OF 'indentation', other procs with this code works fine? wtf
+	//var/area/area = get_area(src)
+	//if(area.burial_grounds)
+		//gravequality += 1
+
     if(headstone)
-        var/obj/item/gravedecor/headstone/Head = headstone
-        var/heldquality = Head.decorationquality
+        var/headquality = headstone.decorationquality
         for(var/mob/living/corpse in contents)
             if(corpse.patron in headstone.patron)
-                heldquality = 3
-				break
-        gravequality += heldquality
+                headquality = 3
+        gravequality += headquality
 
     if(gravefence)
-        var/obj/item/gravedecor/gravefence/Fence = gravefence
-        var/heldquality = Fence.decorationquality
-        for(var/datum/patron/GravePatron in Fence.patron)
-            if(GravePatron == corpse_patron)
-                heldquality = 3
-        gravequality += heldquality
+        var/fencequality = gravefence.decorationquality
+        for(var/mob/living/corpse in contents)
+            if(corpse.patron in gravefence.patron)
+                fencequality = 3
+        gravequality += fencequality
     for(var/obj/structure/closet/crate/coffin/coffin in contents)
         gravequality += 1
         if(coffin.consecrated)
