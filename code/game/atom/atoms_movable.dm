@@ -438,9 +438,8 @@
 			return FALSE
 	if(SEND_SIGNAL(src, COMSIG_CAN_Z_MOVE, start, destination) & COMPONENT_CANT_Z_MOVE)
 		return FALSE
-	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & (FLYING|FLOATING))))
-		if(HAS_TRAIT(src, TRAIT_MOVE_FLYING) || HAS_TRAIT_NOT_FROM(src, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)) // EXPERIMENTAL: Harpies decend upon moving
-			return FALSE
+	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & MOVETYPES_NOT_TOUCHING_GROUND)))
+		return FALSE
 	if(z_move_flags & ZMOVE_WATER_CHECKS && !iswaterturf(destination))
 		return FALSE
 	// if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & (FLYING|FLOATING)))

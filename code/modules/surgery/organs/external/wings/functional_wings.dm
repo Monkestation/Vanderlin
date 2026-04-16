@@ -1,3 +1,6 @@
+
+#define FLIGHT_DRAIN_AMOUNT 3
+
 /obj/item/organ/wings/flight
 	/// Flight datum
 	var/datum/action/item_action/organ_action/use/flight/fly
@@ -46,6 +49,7 @@
 	if(!can_fly(FALSE))
 		stop_flying(carbon_owner, drop_flyer = TRUE)
 		return FALSE
+	carbon_owner.adjust_energy(-FLIGHT_DRAIN_AMOUNT)
 	return TRUE
 
 /// Check if we're still eligible for flight
@@ -55,7 +59,7 @@
 	if(!location)
 		return FALSE
 
-	if(!flier.energy)
+	if(!flier.check_energy(1))
 		if(feedback)
 			flier.balloon_alert(flier, "no energy!")
 		return FALSE
@@ -180,7 +184,7 @@
 /obj/item/organ/wings/flight/proc/check_movement(datum/source)
 	SIGNAL_HANDLER
 
-	if(!owner.adjust_stamina(-3))
+	if(!owner.adjust_stamina(FLIGHT_DRAIN_AMOUNT))
 		to_chat(owner, span_warning("You're too exhausted to keep flying!"))
 		stop_flying(owner, TRUE)
 		return
@@ -198,6 +202,11 @@
 	else
 		if(below_turf && istransparentturf(this_turf))
 			shadow = new /obj/effect/flyer_shadow(below_turf, owner)
+
+	if(isopenspace(below_turf))
+		if(owner.zMove(dir = DOWN, z_move_flags = ZMOVE_CHECK_PULLS))
+			to_chat(owner, span_info("I glide down to a more manageable height!"))
+			playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
 
 // Fall out the sky like a brick, no animation
 /obj/item/organ/wings/flight/proc/fall(datum/source)
@@ -295,3 +304,5 @@
 
 /datum/action/item_action/organ_action/use/flight/is_action_active(atom/movable/screen/movable/action_button/current_button)
 	return HAS_TRAIT_FROM(owner, TRAIT_MOVE_FLOATING, SPECIES_FLIGHT_TRAIT)
+
+#undef FLIGHT_DRAIN_AMOUNT
