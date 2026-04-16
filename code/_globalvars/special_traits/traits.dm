@@ -14,6 +14,7 @@
 	var/list/allowed_ages
 	var/list/allowed_patrons
 	var/list/allowed_jobs
+	var/list/allowed_ctags
 	var/list/restricted_traits
 	var/list/restricted_races
 	var/list/restricted_jobs
@@ -849,7 +850,7 @@
 /datum/special_trait/skeleton
 	name = "Skeleton"
 	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
-	allowed_jobs = list(/datum/job/pilgrim)
+	allowed_ctags = list(CTAG_PILGRIM)
 	req_text = "Be a Pilgrim."
 	weight = 20
 

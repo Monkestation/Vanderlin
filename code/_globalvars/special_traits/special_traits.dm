@@ -110,6 +110,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 			return FALSE
 		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
 			return FALSE
+	if(istype(job, /datum/job/advclass))
+		var/datum/job/advclass/advjob = job
+		if(!isnull(special.allowed_ctags) && !length(advjob?.category_tags & special.allowed_ctags))
+			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
 		return FALSE
 	if(!isnull(special.restricted_jobs) && parent_job && (parent_job.type in special.restricted_jobs))
