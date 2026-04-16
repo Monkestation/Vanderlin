@@ -1033,3 +1033,10 @@
 /datum/special_trait/augmentable/on_apply(mob/living/carbon/human/character, silent)
 	character.LoadComponent(/datum/component/augmentable)
 	character.clamped_adjust_skill_level(/datum/attribute/skill/craft/engineering, 20, 20, TRUE)
+
+/datum/special_trait/obese
+	name = "Fat"
+	weight = 70
+
+/datum/special_trait/obese/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_FAT, BE_SPECIAL_TRAIT)
