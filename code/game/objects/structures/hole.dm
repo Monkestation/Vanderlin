@@ -546,10 +546,10 @@
     if(bonusquality)
         gravequality += bonusquality
 
-	//TODO UNCOMMENTING THIS CODE FREAKS OUT BECAUSE OF 'indentation', other procs with this code works fine? wtf
-	//var/area/area = get_area(src)
-	//if(area.burial_grounds)
-		//gravequality += 1
+    // Check if area is fit for burials
+    var/area/A = get_area(src)
+    if(A.burial_grounds)
+        gravequality += 1
 
     if(headstone)
         var/headquality = headstone.decorationquality
@@ -571,7 +571,7 @@
     for(var/obj/structure/closet/burial_shroud/shroud in contents)
         gravequality += 1
 
-    return max(gravequality, 10)
+	return max(gravequality, 10)
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()
