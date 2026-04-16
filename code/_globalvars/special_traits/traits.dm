@@ -118,16 +118,6 @@
 /datum/special_trait/night_owl/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_NIGHT_OWL, "[type]")
 
-/datum/special_trait/beautiful
-	name = "Beautiful"
-	greet_text = span_notice("My face is a work of art")
-	weight = 100
-
-/datum/special_trait/beautiful/on_apply(mob/living/carbon/human/character, silent)
-	REMOVE_TRAIT(character, TRAIT_UGLY, BE_SPECIAL_TRAIT)
-	REMOVE_TRAIT(character, TRAIT_FISHFACE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_BEAUTIFUL, "[type]")
-
 //positive
 
 /datum/attribute_holder/sheet/job/eagle_eyed
@@ -595,15 +585,6 @@
 /datum/special_trait/nimrod/on_apply(mob/living/carbon/human/character, silent)
 	character.change_stat(STAT_INTELLIGENCE, -4)
 	character.set_hair_style(/datum/sprite_accessory/hair/head/nimrod, FALSE)
-
-/datum/special_trait/ugly
-	name = "Ugly"
-	greet_text = span_notice("People find me repulsive.")
-	weight = 100
-
-/datum/special_trait/ugly/on_apply(mob/living/carbon/human/character, silent)
-	ADD_TRAIT(character, TRAIT_UGLY, "[type]")
-	REMOVE_TRAIT(character, TRAIT_BEAUTIFUL, BE_SPECIAL_TRAIT)
 
 /datum/special_trait/nopouch
 	name = "No Pouch"
