@@ -336,6 +336,8 @@
 	..()
 	if(infection_percent < BBC_STAGE_LATE)
 		return
+	if(owner.stat == DEAD)
+		return
 	var/mob/living/carbon/C = owner
 	var/organic_bodyparts = 0
 	for(var/obj/item/bodypart/BP in C.bodyparts)
@@ -378,6 +380,8 @@
 		return
 	if(affected.loc != T)
 		affected.forceMove(T)
+	if(affected.buckled)
+		affected.buckled.unbuckle_mob(affected, TRUE)
 	var/list/uninfected_zones = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG) - root_network
 	for(var/zone in uninfected_zones)
 		var/wound_type = get_black_briar_wound_type(zone)
@@ -391,7 +395,7 @@
 		tumor.infection = tumor.max_infection
 		tumor.infection_percent = 1
 		tumor.try_sprout()
-		if(prob(25))
+		if(prob(50))
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
 	if(!bodypart_owner.skeletonized)
 		playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
