@@ -519,6 +519,7 @@
  */
 /datum/surgery_operation/proc/try_perform(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args = list())
 	SHOULD_NOT_OVERRIDE(TRUE)
+
 	var/mob/living/patient = get_patient(operating_on)
 
 	if(!check_availability(patient, operating_on, surgeon, tool, operation_args[OPERATION_TARGET_ZONE]))
@@ -527,7 +528,6 @@
 	if(!start_operation(operating_on, surgeon, tool, operation_args))
 		return ITEM_INTERACT_BLOCKING
 
-	var/was_sleeping = (patient.stat != DEAD && HAS_TRAIT(patient, TRAIT_KNOCKEDOUT))
 	var/result = NONE
 
 	SEND_SIGNAL(patient, COMSIG_LIVING_SURGERY_STARTED, src, operating_on, tool)
@@ -623,6 +623,7 @@
  */
 /datum/surgery_operation/proc/pre_preop(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
 	PROTECTED_PROC(TRUE)
+
 	return TRUE
 
 /// Used to display messages to the surgeon and patient
@@ -830,7 +831,7 @@
 	/// The zone we are expected to be working on, even if the target is a non-carbon mob
 	var/target_zone = BODY_ZONE_CHEST
 	/// When working on carbons, what bodypart are we working on? Keep it representative of the required biotype
-	var/required_bodytype = ~BODYPART_ROBOTIC
+	var/required_bodytype = BODYPART_ORGANIC
 
 /datum/surgery_operation/basic/all_required_strings()
 	. = list()
@@ -864,7 +865,7 @@
 		return FALSE
 	if(!HAS_TRAIT(carbon_part, TRAIT_READY_TO_OPERATE))
 		return FALSE
-	if(required_bodytype && !(carbon_part.status & required_bodytype))
+	if(required_bodytype && !(carbon_part.status == required_bodytype))
 		return FALSE
 	return ..()
 
@@ -899,9 +900,9 @@
 
 /datum/surgery_operation/limb/all_blocked_strings()
 	. = ..()
-	if(required_bodytype & BODYPART_ROBOTIC)
+	if(required_bodytype == BODYPART_ROBOTIC)
 		. += "the limb must not be organic"
-	else if(required_bodytype & BODYPART_ORGANIC)
+	else if(required_bodytype == BODYPART_ORGANIC)
 		. += "the limb must not be prostetic"
 
 /datum/surgery_operation/limb/get_operation_target(mob/living/patient, body_zone)
@@ -913,8 +914,10 @@
 	// targeting groin will redirect you to the chest
 	if(limb.body_zone != deprecise_zone(operated_zone))
 		return FALSE
-	if(required_bodytype && !(limb.status & required_bodytype))
+
+	if(required_bodytype && !(limb.status == required_bodytype))
 		return FALSE
+
 	if(!HAS_TRAIT(limb, TRAIT_READY_TO_OPERATE))
 		return FALSE
 

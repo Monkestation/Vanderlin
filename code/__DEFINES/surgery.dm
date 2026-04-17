@@ -1,34 +1,30 @@
 #define ORGAN_ORGANIC 1
 #define ORGAN_ROBOTIC 2
+
 #define BODYPART_ORGANIC 1
 #define BODYPART_ROBOTIC 2
 
 /// Checks if the mob is lying down if they can lie down, otherwise always passes
 #define IS_LYING_OR_CANNOT_LIE(mob) ((mob.mobility_flags & MOBILITY_LIEDOWN) ? (mob.body_position == LYING_DOWN) : TRUE)
 
-/// Applies moodlets after the surgical operation is complete
-#define OPERATION_AFFECTS_MOOD (1<<0)
 /// Notable operations are specially logged and also leave memories
-#define OPERATION_NOTABLE (1<<1)
+#define OPERATION_NOTABLE (1<<0)
 /// Operation will automatically repeat until it can no longer be performed
-#define OPERATION_LOOPING (1<<2)
+#define OPERATION_LOOPING (1<<1)
 /// Not innately available to doctors, must be added via COMSIG_MOB_ATTEMPT_SURGERY to show up
-#define OPERATION_LOCKED (1<<3)
+#define OPERATION_LOCKED (1<<2)
 /// A surgeon cannot perform this operation on themselves
-#define OPERATION_NOT_SELF_OPERABLE (1<<4)
+#define OPERATION_NOT_SELF_OPERABLE (1<<3)
 /// Operation can be performed on standing patients - note: mobs that cannot lie down are *always* considered lying down for surgery
-#define OPERATION_STANDING_ALLOWED (1<<5)
+#define OPERATION_STANDING_ALLOWED (1<<4)
 /// Some traits may cause operations to be infalliable - this flag disables that behavior, always allowing it to be failed
-#define OPERATION_ALWAYS_FAILABLE (1<<6)
+#define OPERATION_ALWAYS_FAILABLE (1<<5)
 /// If set, the operation will ignore clothing when checking for access to the target body part.
-#define OPERATION_IGNORE_CLOTHES (1<<7)
-/// This operation should be prioritized as the next step in a surgery sequence. (In the operating computer it will flash red)
-#define OPERATION_PRIORITY_NEXT_STEP (1<<8)
+#define OPERATION_IGNORE_CLOTHES (1<<6)
 /// Operation is a mechanic / robotic surgery
-#define OPERATION_MECHANIC (1<<9)
+#define OPERATION_MECHANIC (1<<7)
 
 DEFINE_BITFIELD(operation_flags, list(
-	"AFFECTS MOOD" = OPERATION_AFFECTS_MOOD,
 	"NOTABLE" = OPERATION_NOTABLE,
 	"LOOPING" = OPERATION_LOOPING,
 	"LOCKED" = OPERATION_LOCKED,
@@ -36,7 +32,6 @@ DEFINE_BITFIELD(operation_flags, list(
 	"STANDING ALLOWED" = OPERATION_STANDING_ALLOWED,
 	"ALWAYS FAILABLE" = OPERATION_ALWAYS_FAILABLE,
 	"IGNORE CLOTHES" = OPERATION_IGNORE_CLOTHES,
-	"PRIORITY NEXT STEP" = OPERATION_PRIORITY_NEXT_STEP,
 	"MECHANIC" = OPERATION_MECHANIC,
 ))
 
