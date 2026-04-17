@@ -57,6 +57,7 @@
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				else //Your grave fucking sucks vro.
 					owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_warning("My funeral rites have been performed on [cast_on], though they don't seem to be particularly effective..."))
+			grave.adjust_grave_necra_devotion()
 			return
 		to_chat(owner, span_warning("I failed to perform the rites."))
 

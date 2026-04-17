@@ -32,7 +32,7 @@
 	/// From 0-10. You shouldn't be able to get more than 10 quality. This is affected by the headstone, gravefence, location of burial, and if you used a winding sheet / coffin.
 	var/gravequality = 0
 	/// For debug/administrative purposes. Set this if you want it to apply next time we call update_quality.
-	var/bonusquality
+	var/bonusquality = 0
 	/// Has the "burial rites" miracle been used on this grave. TRUE or FALSE.
 	var/is_consecrated = FALSE
 
@@ -63,6 +63,9 @@
 
 // TODO: When we implement more systems, such as passive devotion, we ensure it is removed before we delete
 /obj/structure/closet/dirthole/Destroy()
+	// Remove passive devotion
+	is_consecrated = FALSE
+	adjust_grave_necra_devotion()
 	. = ..()
 
 /obj/structure/closet/dirthole/examine(mob/user)
@@ -473,8 +476,9 @@
 		stage_update()
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+		is_consecrated = FALSE // Unconsecrate.
 		update_quality()
-		is_consecrated = null // Unconsecrate.
+		adjust_grave_necra_devotion()
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
@@ -493,9 +497,9 @@
 	if(!isturf(O.loc))
 		return
 
-	var/actuallyismob = 0
+	var/actuallyismob = FALSE
 	if(isliving(O))
-		actuallyismob = 1
+		actuallyismob = TRUE
 	else if(!isitem(O))
 		return
 	add_fingerprint(user)
@@ -591,7 +595,7 @@
 	for(var/obj/structure/closet/burial_shroud/shroud in contents)
 		gravequality += 1
 
-	gravequality = max(gravequality, 10)
+	gravequality = min(gravequality, 10)
 	adjust_grave_necra_devotion()
 	return
 
@@ -601,7 +605,7 @@
 	var/change = 0
 
 	// Step 1: Calculate new_devotion
-	if(gravequality >= 7) // T3 and higher graves get devotion, otherwise is 0
+	if(gravequality >= 7 && is_consecrated) // T3 and higher graves get devotion, otherwise is 0
 		new_devotion = GRAVE_DEVOTION_INCREMENT * (gravequality - 6) // For each level of quality above 6, increment.
 
 	// Step 2: Compare new_devotion with necra_devotion_gain to find change.
@@ -659,7 +663,7 @@
 	else if(stage == 3)
 		. += mutable_appearance(icon, "grave_above", ABOVE_MOB_LAYER)
 
-	// handle gravedecor overlays
+	// handle gravedecor overlays TODO doesnt this bug? Needs fixed!!!
 	if(headstone)
 		. += mutable_appearance('icons/turf/floors.dmi', headstone.icon_state, 2.91)
 	if(gravefence)
