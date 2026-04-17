@@ -3,7 +3,6 @@
 /// Absolute max passive devotion Necrans can get from all graves.
 #define GRAVE_DEVOTION_GLOBAL_MAX 0.5
 
-
 /obj/structure/closet/dirthole
 	name = "hole"
 	icon_state = "hole1"
@@ -668,6 +667,8 @@
 		. += mutable_appearance('icons/turf/floors.dmi', headstone.icon_state, 2.91)
 	if(gravefence)
 		. += mutable_appearance('icons/turf/floors.dmi', gravefence.icon_state, 2.9)
+
+	//TODO sprites for levels of 'blessing' for graves (there are four)
 
 	// handle consecrate overlay
 	//if(is_consecrated >= CONSECRATED)
