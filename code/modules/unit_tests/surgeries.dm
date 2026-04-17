@@ -195,14 +195,6 @@
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_VESSELS_CLAMPED), "Sawing bones removed the vessels clamped surgical state unexpectedly")
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Sawing bones removed the skin open surgical state unexpectedly")
 
-	var/datum/surgery_operation/limb/incise_organs/osurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
-	UNLINT(osurgery.success(chest, surgeon, scalpel, list()))
-
-	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_ORGANS_CUT), "Incising organs did not apply the organs incision surgical state")
-	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_BONE_SAWED), "Incising organs removed the bone sawed surgical state unexpectedly")
-	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_VESSELS_CLAMPED), "Incising organs removed the vessels clamped surgical state unexpectedly")
-	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Incising organs removed the skin open surgical state unexpectedly")
-
 	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	UNLINT(msurgery.success(chest, surgeon, cautery, list()))
 

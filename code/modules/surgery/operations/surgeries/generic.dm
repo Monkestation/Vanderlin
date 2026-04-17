@@ -15,8 +15,8 @@
 
 	time = 1.6 SECONDS
 
-	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
-	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
+	preop_sound = 'sound/surgery/scalpel1.ogg'
+	success_sound = 'sound/surgery/scalpel2.ogg'
 
 	any_surgery_states_blocked = ALL_SURGERY_SKIN_STATES
 
@@ -62,17 +62,16 @@
 	desc = "Retract the patient's skin to access their internal organs. \
 		Causes \"skin open\" surgical state."
 
+
 	implements = list(
 		TOOL_RETRACTOR = 1,
-		TOOL_SCREWDRIVER = 2.25,
-		TOOL_WIRECUTTER = 2.85,
-		/obj/item/stack/rods = 2.85,
+		TOOL_IMPROVISED_RETRACTOR = 1.5,
 	)
 
 	time = 2.4 SECONDS
 
-	preop_sound = 'sound/items/handling/surgery/retractor1.ogg'
-	success_sound = 'sound/items/handling/surgery/retractor2.ogg'
+	preop_sound = 'sound/surgery/retractor1.ogg'
+	success_sound = 'sound/surgery/retractor2.ogg'
 
 	all_surgery_states_required = SURGERY_SKIN_CUT
 
@@ -163,14 +162,12 @@
 
 	implements = list(
 		TOOL_HEMOSTAT = 1,
-		TOOL_WIRECUTTER = 1.67,
-		/obj/item/stack/package_wrap = 2.85,
-		/obj/item/stack/cable_coil = 6.67,
+		TOOL_IMPROVISED_HEMOSTAT = 1.5,
 	)
 
 	time = 2.4 SECONDS
 
-	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
+	preop_sound = 'sound/surgery/hemostat1.ogg'
 
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_UNCLAMPED
 
@@ -203,14 +200,12 @@
 
 	implements = list(
 		TOOL_HEMOSTAT = 1,
-		TOOL_WIRECUTTER = 1.67,
-		/obj/item/stack/package_wrap = 2.85,
-		/obj/item/stack/cable_coil = 6.67,
+		TOOL_IMPROVISED_HEMOSTAT = 1.5,
 	)
 
 	time = 2.4 SECONDS
 
-	preop_sound = 'sound/items/handling/surgery/hemostat1.ogg'
+	preop_sound = 'sound/surgery/hemostat1.ogg'
 	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
 
 /datum/surgery_operation/limb/unclamp_bleeders/get_default_radial_image()
@@ -362,58 +357,57 @@
 	limb.remove_surgical_state(SURGERY_BONE_SAWED)
 	limb.heal_damage(40)
 
-/datum/surgery_operation/limb/incise_organs
-	name = "incise organs"
-	desc = "Make an incision in patient's internal organ tissue to allow for manipulation or repair. \
-		Causes \"organs cut\" surgical state."
+// /datum/surgery_operation/limb/incise_organs
+// 	name = "incise organs"
+// 	desc = "Make an incision in patient's internal organ tissue to allow for manipulation or repair. \
+// 		Causes \"organs cut\" surgical state."
 
-	implements = list(
-		TOOL_SCALPEL = 1,
-		/obj/item/weapon/knife = 1.5,
-		/obj/item/natural/glass/shard = 2.25,
-		/obj/item/pen = 5,
-		/obj/item = 3.33,
-	)
+// 	implements = list(
+// 		TOOL_SCALPEL = 1,
+// 		/obj/item/weapon/knife = 1.5,
+// 		/obj/item/natural/glass/shard = 2.25,
+// 		/obj/item = 3.33,
+// 	)
 
-	time = 2.4 SECONDS
+// 	time = 2.4 SECONDS
 
-	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
-	success_sound = 'sound/items/handling/surgery/organ1.ogg'
+// 	preop_sound = 'sound/surgery/scalpel1.ogg'
+// 	success_sound = 'sound/surgery/organ1.ogg'
 
-	all_surgery_states_required = SURGERY_SKIN_OPEN
-	any_surgery_states_blocked = SURGERY_ORGANS_CUT
+// 	all_surgery_states_required = SURGERY_SKIN_OPEN
+// 	any_surgery_states_blocked = SURGERY_ORGANS_CUT
 
-/datum/surgery_operation/limb/incise_organs/get_any_tool()
-	return "Any sharp edged item"
+// /datum/surgery_operation/limb/incise_organs/get_any_tool()
+// 	return "Any sharp edged item"
 
-/datum/surgery_operation/limb/incise_organs/get_default_radial_image()
-	return image(/obj/item/weapon/surgery/scalpel)
+// /datum/surgery_operation/limb/incise_organs/get_default_radial_image()
+// 	return image(/obj/item/weapon/surgery/scalpel)
 
-/datum/surgery_operation/limb/incise_organs/tool_check(obj/item/tool)
-	// Require edged sharpness OR a tool behavior match. Also saws are a no-go, you'll rip up the organs!
-	return ((tool.get_sharpness() >= IS_SHARP) || implements[tool.tool_behaviour]) && tool.tool_behaviour != TOOL_SAW
+// /datum/surgery_operation/limb/incise_organs/tool_check(obj/item/tool)
+// 	// Require edged sharpness OR a tool behavior match. Also saws are a no-go, you'll rip up the organs!
+// 	return ((tool.get_sharpness() >= IS_SHARP) || implements[tool.tool_behaviour]) && tool.tool_behaviour != TOOL_SAW
 
-/datum/surgery_operation/limb/incise_organs/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	display_results(
-		surgeon,
-		limb.owner,
-		span_notice("You begin to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]..."),
-		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
-	)
-	display_pain(limb.owner, "You feel a stabbing in your [parse_zone(limb.body_zone)].")
+// /datum/surgery_operation/limb/incise_organs/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+// 	display_results(
+// 		surgeon,
+// 		limb.owner,
+// 		span_notice("You begin to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+// 		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
+// 		span_notice("[surgeon] begins to make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
+// 	)
+// 	display_pain(limb.owner, "You feel a stabbing in your [parse_zone(limb.body_zone)].")
 
-/datum/surgery_operation/limb/incise_organs/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	. = ..()
-	limb.add_surgical_state(SURGERY_ORGANS_CUT)
-	limb.receive_damage(10)
+// /datum/surgery_operation/limb/incise_organs/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+// 	. = ..()
+// 	limb.add_surgical_state(SURGERY_ORGANS_CUT)
+// 	limb.receive_damage(10)
 
-	display_results(
-		surgeon,
-		limb.owner,
-		span_notice("You make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]!"),
-		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]!"),
-	)
+// 	display_results(
+// 		surgeon,
+// 		limb.owner,
+// 		span_notice("You make an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]."),
+// 		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]!"),
+// 		span_notice("[surgeon] makes an incision in the organs within [limb.owner]'s [parse_zone(limb.body_zone)]!"),
+// 	)
 
-	display_pain(limb.owner, "You feel a sharp pain from inside your [parse_zone(limb.body_zone)]!")
+// 	display_pain(limb.owner, "You feel a sharp pain from inside your [parse_zone(limb.body_zone)]!")

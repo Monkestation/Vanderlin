@@ -15,8 +15,8 @@
 
 	operation_flags = OPERATION_NOTABLE | OPERATION_NOT_SELF_OPERABLE
 
-	preop_sound = 'sound/items/handling/surgery/scalpel1.ogg'
-	success_sound = 'sound/items/handling/surgery/scalpel2.ogg'
+	preop_sound = 'sound/surgery/scalpel1.ogg'
+	success_sound = 'sound/surgery/scalpel2.ogg'
 
 	all_surgery_states_required = SURGERY_SKIN_OPEN
 

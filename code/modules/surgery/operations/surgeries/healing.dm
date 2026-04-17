@@ -21,8 +21,8 @@
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 
-	success_sound = 'sound/items/handling/surgery/retractor2.ogg'
-	failure_sound = 'sound/items/handling/surgery/organ2.ogg'
+	success_sound = 'sound/surgery/retractor2.ogg'
+	failure_sound = 'sound/surgery/organ2.ogg'
 
 	required_biotype = MOB_ORGANIC|MOB_HUMANOID
 	required_bodytype = NONE
