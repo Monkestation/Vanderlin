@@ -24,7 +24,6 @@
 	//two variables necessary for calculating whether we get a brain trauma or not
 	var/damage_delta = 0
 
-
 	var/list/datum/brain_trauma/traumas = list()
 
 /obj/item/organ/brain/Insert(mob/living/carbon/C, special = FALSE, drop_if_replaced = FALSE, no_id_transfer = FALSE)
@@ -181,42 +180,40 @@
 		owner.death()
 		brain_death = TRUE
 
-/obj/item/organ/brain/check_damage_thresholds(mob/M)
+/obj/item/organ/brain/check_damage_thresholds()
 	. = ..()
+	if(!owner)
+		return
+
 	//if we're not more injured than before, return without gambling for a trauma
 	if(damage <= prev_damage)
 		return
+
 	damage_delta = damage - prev_damage
-	if(damage > BRAIN_DAMAGE_MILD)
-		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_MILD)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1% //learn how to do your bloody math properly goddamnit
+
+	if(damage >= (BRAIN_DAMAGE_MILD + 40))
+		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_MILD) / 100))))
 			gain_trauma_type(BRAIN_TRAUMA_MILD)
-	if(damage > BRAIN_DAMAGE_SEVERE)
-		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE)/100)))) //Base chance is the hit damage; for every point of damage past the threshold the chance is increased by 1%
-			if(prob(20))
+
+	if(damage >= (BRAIN_DAMAGE_SEVERE + 40))
+		if(prob(damage_delta * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE) / 100))))
+			if(prob(5))
 				gain_trauma_type(BRAIN_TRAUMA_SPECIAL)
 			else
 				gain_trauma_type(BRAIN_TRAUMA_SEVERE)
 
-	if (owner)
-		if(owner.stat < UNCONSCIOUS) //conscious or soft-crit
-			var/brain_message
-			if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
-				brain_message = "<span class='warning'>I feel lightheaded.</span>"
-			else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
-				brain_message = "<span class='warning'>I feel less in control of your thoughts.</span>"
-			else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20))
-				brain_message = "<span class='warning'>I can feel your mind flickering on and off...</span>"
+	var/brain_message
+	if(prev_damage < BRAIN_DAMAGE_MILD && damage >= BRAIN_DAMAGE_MILD)
+		brain_message = "<span class='warning'>I feel lightheaded.</span>"
+	else if(prev_damage < BRAIN_DAMAGE_SEVERE && damage >= BRAIN_DAMAGE_SEVERE)
+		brain_message = "<span class='warning'>I feel less in control of your thoughts.</span>"
+	else if(prev_damage < (BRAIN_DAMAGE_DEATH - 20) && damage >= (BRAIN_DAMAGE_DEATH - 20))
+		brain_message = "<span class='warning'>I can feel your mind flickering on and off...</span>"
 
-			if(.)
-				. += "\n[brain_message]"
-			else
-				return brain_message
-
-/obj/item/organ/brain/alien
-	name = "alien brain"
-	desc = ""
-	icon_state = "brain-x"
-
+	if(.)
+		. += "\n[brain_message]"
+	else
+		return brain_message
 
 ////////////////////////////////////TRAUMAS////////////////////////////////////////
 
