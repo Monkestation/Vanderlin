@@ -389,7 +389,6 @@
 			if(is_consecrated)	// Curses you if you don't have the graverobber trait, otherwise records you as a criminal and gives a special message.
 				if(ishuman(user))
 					var/mob/living/carbon/human/L = user
-					var/robbery_location = get_area_name(get_turf(src))
 					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
 						var/robbing = TRUE
 						var/message = "I perform the secret rite of concealment, the Undermaiden won't know of my transgression here."
@@ -408,6 +407,7 @@
 							record_featured_stat(FEATURED_STATS_CRIMINALS, user) //You aren't a Necran, even though you didn't get any consequences you're still a criminal.
 							record_round_statistic(STATS_GRAVES_ROBBED)
 							SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+							addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
 					else
 						//Logic thread for curses.
 						switch(gravequality)
@@ -433,13 +433,8 @@
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4))
 									L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
-								for (var/mob/living/player in GLOB.player_list)
-									if (player.stat == DEAD || isbrain(player))
-										continue
-									// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
-									if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
-										to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
-							if(10)
+								robbery_alert() // Now the entire church knows what you done!
+							if(10) // Max curse...
 								var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
 								var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
 								if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
@@ -463,11 +458,7 @@
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
 								L.apply_status_effect(/datum/status_effect/debuff/cursed_t4)
-								for (var/mob/living/player in GLOB.player_list)
-									if (player.stat == DEAD || isbrain(player))
-										continue
-									if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
-										to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
+								robbery_alert() // Now the entire church knows what you done!
 						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 						record_round_statistic(STATS_GRAVES_ROBBED)
 						SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
@@ -478,6 +469,18 @@
 		is_consecrated = FALSE // Unconsecrate.
 		update_quality()
 		adjust_grave_necra_devotion()
+
+/// Alerts all clergy (except non-necran acoyltes) of a robbery!
+/obj/structure/closet/dirthole/proc/robbery_alert(mob/robber, var/delay = FALSE)
+	var/robbery_location = get_area_name(get_turf(src))
+	if(robber) // Graverobbers get a delay before the alert, to give them time to leave
+		to_chat(robber, span_warning("The rites I performed on \the [src] have bought me time, but the whispers of the disturbed dead were eventually able to break through... I need to get out of here!!"))
+
+	for (var/mob/living/player in GLOB.player_list)
+		if (player.stat == DEAD || isbrain(player))
+			continue
+		if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+			to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
