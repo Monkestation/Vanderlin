@@ -170,7 +170,7 @@
 // ~simple list of organs that come in pairs
 #define PAIRED_ORGAN_SLOTS list(ORGAN_SLOT_EYES, ORGAN_SLOT_EARS, ORGAN_SLOT_HORNS)
 
-#define GET_EFFECTIVE_BLOOD_VOL(num, total_blood_req) (max(num - DEFAULT_TOTAL_BLOOD_REQ + total_blood_req, 0))
+#define GET_EFFECTIVE_BLOOD_VOL(num, total_blood_req) (max(num + DEFAULT_TOTAL_BLOOD_REQ - total_blood_req, 0))
 
 //The contant in the rate of reagent transfer on life ticks
 #define STOMACH_METABOLISM_CONSTANT 0.25
@@ -211,11 +211,11 @@
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll
 #define TRAUMA_ROLL_THRESHOLD 4.5
 /// Brainloss caused by mildly low blood oxygenation
-#define BRAIN_DAMAGE_LOW_OXYGENATION 1.5
+#define BRAIN_DAMAGE_LOW_OXYGENATION 1.25
 /// Brainloss caused by lower than low blood oxygenation
-#define BRAIN_DAMAGE_LOWER_OXYGENATION 3
+#define BRAIN_DAMAGE_LOWER_OXYGENATION 2.5
 /// Brainloss caused by a complete lack of oxygen flow
-#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4.5
+#define BRAIN_DAMAGE_LOWEST_OXYGENATION 3.75
 
 // ~pulse levels, very simplified.
 #define PULSE_NONE 0   // So !M.pulse checks would be possible.
