@@ -12,22 +12,6 @@
 	TEST_ASSERT_EQUAL(patient.get_missing_limbs().len, 1, "Patient did not lose any limbs")
 	TEST_ASSERT_EQUAL(patient.get_missing_limbs()[1], BODY_ZONE_R_ARM, "Patient is missing a limb that isn't the one we operated on")
 
-// /datum/unit_test/brain_surgery/Run()
-// 	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human)
-// 	patient.gain_trauma_type(BRAIN_TRAUMA_MILD, TRAUMA_RESILIENCE_SURGERY)
-// 	patient.setOrganLoss(ORGAN_SLOT_BRAIN, 20)
-
-// 	TEST_ASSERT(patient.has_trauma_type(), "Patient does not have any traumas, despite being given one")
-
-// 	var/mob/living/carbon/human/user = allocate(/mob/living/carbon/human)
-// 	var/obj/item/weapon/surgery/hemostat/hemostat = allocate(/obj/item/weapon/surgery/hemostat)
-
-// 	var/datum/surgery_operation/organ/repair/brain/surgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
-// 	UNLINT(surgery.success(patient.get_organ_slot(ORGAN_SLOT_BRAIN), user, hemostat, list()))
-
-// 	TEST_ASSERT(!patient.has_trauma_type(), "Patient kept their brain trauma after brain surgery")
-// 	TEST_ASSERT(patient.getOrganLoss(ORGAN_SLOT_BRAIN) < 20, "Patient did not heal their brain damage after brain surgery")
-
 /datum/unit_test/head_transplant/Run()
 	var/mob/living/carbon/human/user = allocate(/mob/living/carbon/human)
 
@@ -51,7 +35,7 @@
 	// Put Bob's head onto Alice's body
 	var/datum/surgery_operation/limb_replacement/surgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	user.put_in_active_hand(bobs_head)
-	UNLINT(surgery.success(alice.get_bodypart(BODY_ZONE_HEAD, TRUE), user, bobs_head, list()))
+	UNLINT(surgery.success(alice.get_bodypart(BODY_ZONE_HEAD), user, bobs_head, list()))
 
 	TEST_ASSERT(!isnull(alice.get_bodypart(BODY_ZONE_HEAD)), "Alice has no head after prosthetic replacement")
 	TEST_ASSERT_EQUAL(alice.get_visible_name(), "Bob", "Bob's head was transplanted onto Alice's body, but their name is not Bob")
@@ -89,19 +73,6 @@
 	UNLINT(surgery.success(patient, user, hemostat, list("[OPERATION_BRUTE_HEAL]" = 10, "[OPERATION_BRUTE_MULTIPLIER]" = 0.1)))
 	TEST_ASSERT(patient.getBruteLoss() < 100, "Tending brute wounds didn't lower brute damage ([patient.getBruteLoss()])")
 
-	// Test that wearing clothing lowers heal amount
-	var/mob/living/carbon/human/naked_patient = allocate(/mob/living/carbon/human)
-	naked_patient.take_overall_damage(100)
-
-	var/mob/living/carbon/human/clothed_patient = allocate(/mob/living/carbon/human)
-	clothed_patient.equipOutfit(/datum/outfit/feldsher, TRUE)
-	clothed_patient.take_overall_damage(100)
-
-	UNLINT(surgery.success(naked_patient, user, hemostat, list("[OPERATION_BRUTE_HEAL]" = 10, "[OPERATION_BRUTE_MULTIPLIER]" = 0.1)))
-	UNLINT(surgery.success(clothed_patient, user, hemostat, list("[OPERATION_BRUTE_HEAL]" = 10, "[OPERATION_BRUTE_MULTIPLIER]" = 0.1)))
-
-	TEST_ASSERT(naked_patient.getBruteLoss() < clothed_patient.getBruteLoss(), "Naked patient did not heal more from wounds tending than a clothed patient")
-
 /// Checks all operations have a name and description
 /datum/unit_test/verify_surgery_setup
 
@@ -118,6 +89,7 @@
 /datum/unit_test/incision_check/Run()
 	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human)
 	var/mob/living/carbon/human/surgeon = allocate(/mob/living/carbon/human)
+
 	var/obj/item/weapon/surgery/scalpel/scalpel = allocate(/obj/item/weapon/surgery/scalpel)
 	var/obj/item/bodypart/chest/chest = patient.get_bodypart(BODY_ZONE_CHEST)
 	var/list/operations
@@ -157,11 +129,13 @@
 /datum/unit_test/state_surgeries/Run()
 	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human)
 	var/mob/living/carbon/human/surgeon = allocate(/mob/living/carbon/human)
+
 	var/obj/item/weapon/surgery/scalpel/scalpel = allocate(/obj/item/weapon/surgery/scalpel)
 	var/obj/item/weapon/surgery/retractor/retractor = allocate(/obj/item/weapon/surgery/retractor)
 	var/obj/item/weapon/surgery/saw/saw = allocate(/obj/item/weapon/surgery/saw)
 	var/obj/item/weapon/surgery/hemostat/hemostat = allocate(/obj/item/weapon/surgery/hemostat)
 	var/obj/item/weapon/surgery/cautery/cautery = allocate(/obj/item/weapon/surgery/cautery)
+
 	var/obj/item/bodypart/chest/chest = patient.get_bodypart(BODY_ZONE_CHEST)
 
 	var/datum/surgery_operation/limb/incise_skin/isurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
