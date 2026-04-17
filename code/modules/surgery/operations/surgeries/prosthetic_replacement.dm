@@ -1,5 +1,6 @@
 /datum/surgery_operation/limb_replacement
 	name = "Limb Replacement"
+	desc = "Replace a patient's missing limb with a new one."
 
 	implements = list(
 		/obj/item/bodypart = 1,
@@ -14,6 +15,7 @@
 
 /datum/surgery_operation/limb_replacement/prosthetic
 	name = "Prosthetic Replacement"
+	desc = "Replace a patient's limb with a prosthetic."
 
 	skill_used = /datum/attribute/skill/craft/engineering
 

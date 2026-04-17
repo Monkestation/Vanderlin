@@ -1,5 +1,6 @@
 /datum/surgery_operation/basic/extract_tooth
 	name = "Extract Tooth"
+	desc = "Pull a tooth from the patient's jaw."
 
 	implements = list(
 		/obj/item/weapon/tongs = 1.2,

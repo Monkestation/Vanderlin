@@ -62,7 +62,6 @@
 	desc = "Retract the patient's skin to access their internal organs. \
 		Causes \"skin open\" surgical state."
 
-
 	implements = list(
 		TOOL_RETRACTOR = 1,
 		TOOL_IMPROVISED_RETRACTOR = 1.5,

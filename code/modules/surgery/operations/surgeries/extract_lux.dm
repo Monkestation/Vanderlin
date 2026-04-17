@@ -1,5 +1,7 @@
 /datum/surgery_operation/basic/extract_lux
 	name = "Lux Extraction"
+	desc = "Sever ones divine link by extracting the lux from their heart."
+
 	category = "Pestran"
 
 	implements = list(

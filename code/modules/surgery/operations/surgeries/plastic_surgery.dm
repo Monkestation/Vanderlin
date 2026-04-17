@@ -2,6 +2,7 @@
 
 /datum/surgery_operation/limb/plastic_surgery
 	name = "Plastic Surgery"
+	desc = "Reshape a patient's face to fix disfigurement or make them a new person."
 
 	implements = list(
 		TOOL_SCALPEL = 1,

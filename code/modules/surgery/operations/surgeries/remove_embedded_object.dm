@@ -1,5 +1,7 @@
 /datum/surgery_operation/limb/embedded_removal
 	name = "Removal of embedded objects"
+	desc = "Remove any object's embedded in a patient's limb."
+
 	operation_flags = OPERATION_STANDING_ALLOWED
 
 	implements = list(

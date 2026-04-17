@@ -1,5 +1,6 @@
 /datum/surgery_operation/basic/restore_lux
 	name = "Restore Lux"
+	desc = "Grant a patient a dosage of lux to restore their own."
 
 	implements = list(
 		/obj/item/reagent_containers/lux = 1.15,
@@ -23,6 +24,9 @@
 	return image(/obj/item/reagent_containers/lux)
 
 /datum/surgery_operation/basic/restore_lux/snowflake_check_availability(mob/living/patient, mob/living/surgeon, tool, operated_zone)
+	if(!patient.getorganslot(ORGAN_SLOT_HEART))
+		return FALSE
+
 	if(patient.get_lux_status() == LUX_HAS_LUX)
 		return FALSE
 

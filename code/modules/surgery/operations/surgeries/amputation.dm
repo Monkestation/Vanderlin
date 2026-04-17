@@ -1,6 +1,7 @@
 
 /datum/surgery_operation/limb/amputate
 	name = "Amputate Limb"
+	desc = "Cut a limb off from a patient."
 
 	implements = list(
 		TOOL_SAW = 1,
@@ -65,6 +66,8 @@
 
 /datum/surgery_operation/limb/amputate/pegleg
 	name = "Detach wooden limb"
+	desc = "Saw off a patient's wooden leg."
+
 	required_bodytype = BODYPART_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 

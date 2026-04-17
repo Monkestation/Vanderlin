@@ -1,5 +1,6 @@
 /datum/surgery_operation/basic/insert_teeth
 	name = "Insert Teeth"
+	desc = "Insert a tooth or teeth into the patient's jaw."
 
 	implements = list(
 		/obj/item/natural/teeth = 1,

@@ -1,5 +1,6 @@
 /datum/surgery_operation/limb/cure_rot
 	name = "Cure Rot"
+	desc = "Cleanse a limb of rot, lethal to deadites when performed on the chest."
 
 	implements = list(
 		TOOL_CAUTERY = 1.2,

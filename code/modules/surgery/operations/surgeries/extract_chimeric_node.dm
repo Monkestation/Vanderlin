@@ -1,5 +1,7 @@
 /datum/surgery_operation/basic/extract_chimeric_node
 	name = "Extract Humors"
+	desc = "Extract humors from an animals organs for augmentation."
+
 	category = "Pestran"
 	heretical = TRUE
 

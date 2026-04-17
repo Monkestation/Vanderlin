@@ -1,5 +1,7 @@
 /datum/surgery_operation/basic/revival
 	name = "Revive"
+	desc = "Bring someone back to the world of the living through a dosage of Lux."
+
 	category = "Pestran"
 
 	implements = list(
@@ -35,6 +37,9 @@
 
 /datum/surgery_operation/basic/revival/state_check(mob/living/patient)
 	if(patient.stat != DEAD)
+		return FALSE
+
+	if(!patient.getorganslot(ORGAN_SLOT_HEART))
 		return FALSE
 
 	if(patient.mob_biotypes & MOB_UNDEAD)
