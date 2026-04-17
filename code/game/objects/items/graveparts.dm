@@ -1,7 +1,7 @@
 /obj/item/gravedecor
 	name = "grave decoration"
 	desc = "If you're seeing this, yell at coders."
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/roguetown/items/graveitems.dmi'
 	icon_state = "headstone_basic"
 	gripped_intents = null
 	possible_item_intents = list(INTENT_GENERIC)
