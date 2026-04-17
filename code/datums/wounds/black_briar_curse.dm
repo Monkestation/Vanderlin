@@ -224,7 +224,7 @@
 	if(!owner.has_quirk(/datum/quirk/black_briar) && infection_percent >= BBC_STAGE_LATE)
 		if(mob_overlay != infection_overlay)
 			mob_overlay = infection_overlay
-			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, 1000)
+			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, list(CRIT_MOD_CHANCE = -100))
 			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
 			bodypart_owner.lingering_pain += 20
 			owner.update_damage_overlays()
@@ -365,12 +365,12 @@
 	if(!COOLDOWN_FINISHED(src, blossom))
 		return
 	COOLDOWN_START(src, blossom,  rand(5, 10) MINUTES)
-	if(!QDELETED(affected.buckled) && istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
+	if(!QDELETED(owner.buckled) && istype(owner.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
 		return
 	blossoms++
 	if(infection_percent >= BBC_STAGE_MID)
-		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
-		playsound(affected, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
+		addtimer(CALLBACK(src, PROC_REF(die_in_agony), owner), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
+		playsound(owner, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
 	if(QDELETED(affected))

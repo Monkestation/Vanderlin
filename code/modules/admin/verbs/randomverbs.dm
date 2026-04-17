@@ -881,6 +881,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			wound.infection_percent = 1
 			target.death()
 
+
 	punish_log(target, punishment)
 
 /client/proc/heart_attack(mob/living/carbon/target as mob)
