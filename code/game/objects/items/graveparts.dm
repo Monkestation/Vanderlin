@@ -54,6 +54,7 @@
 			return
 
 		user.visible_message(span_info("[user] begins to engrave a message into \the [src] with \a [I]."), span_info("You begin to engrave a message into \the [src]."), span_info("You hear someone cutting into stone."))
+		playsound(src, pick('sound/combat/hits/onrock/onrock (1).ogg', 'sound/combat/hits/onrock/onrock (2).ogg', 'sound/combat/hits/onrock/onrock (3).ogg', 'sound/combat/hits/onrock/onrock (4).ogg'), 100)
 		if(!do_after(user, 5 SECONDS, src, progress=TRUE, display_over_user=TRUE))
 			return
 		else
@@ -74,7 +75,7 @@
 /obj/item/gravedecor/headstone/psydon
 	name = "psydonic headstone"
 	desc = "A psycross shaped headstone, may be considered heretical by some, but to disturb the graves it lies upon even more so."
-	icon_state = "headstone_psycross"
+	icon_state = "headstone_psydon"
 	decorationquality = 2
 	patron = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
@@ -102,7 +103,7 @@
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
 	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."
-	icon_state = "gravefence_basic"
+	icon_state = "gravefence_stone"
 	decorationquality = 1
 
 /obj/item/gravedecor/gravefence/block

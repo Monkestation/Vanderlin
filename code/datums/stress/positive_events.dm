@@ -122,11 +122,6 @@
 	timer = 10 MINUTES
 
 /datum/stress_event/saw_grave_4
-	stress_change = -3
-	desc = span_green("This grave is watched closely by Necra.")
-	timer = 15 MINUTES
-
-/datum/stress_event/saw_grave_5
 	stress_change = -4
 	desc = span_green("A resting place fit for a king!")
 	timer = 20 MINUTES
