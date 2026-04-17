@@ -746,6 +746,8 @@
 	if(was_critical)
 		on_crit_success(operating_on, surgeon, tool, operation_args)
 
+	surgeon.mind?.add_sleep_experience(skill_used, GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE) * (skill_min / 3))
+
 /// Used to customize behavior when the operation is successful
 /datum/surgery_operation/proc/on_success(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
 	PROTECTED_PROC(TRUE)
@@ -782,6 +784,8 @@
 
 	if(was_critical)
 		on_crit_failure(operating_on, surgeon, tool, operation_args)
+
+	surgeon.mind?.add_sleep_experience(skill_used, GET_MOB_ATTRIBUTE_VALUE(surgeon, STAT_INTELLIGENCE) * (skill_min / 6))
 
 /// Used to customize behavior when the operation fails
 /datum/surgery_operation/proc/on_failure(atom/movable/operating_on, mob/living/surgeon, tool, list/operation_args)
