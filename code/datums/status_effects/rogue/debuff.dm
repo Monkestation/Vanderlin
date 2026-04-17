@@ -613,7 +613,7 @@
 /datum/status_effect/debuff/cursed_t4
 	id = "necra_rage"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/curse_t4
-	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -1)
+	effectedstats = list(STAT_FORTUNE = -3, STAT_SPEED = -2, STAT_CONSTITUTION = -2)
 	duration = -1
 
 /atom/movable/screen/alert/status_effect/debuff/curse_t1
