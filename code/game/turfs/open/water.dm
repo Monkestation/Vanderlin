@@ -1000,10 +1000,10 @@
 	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
 		..()
 
-/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.adjust_hydration(-hydration)  //saltwater dehydrates more than it hydrates
-		M.adjustToxLoss(0.25) // Slightly toxic
-		M.add_nausea(2)
+		H.adjust_hydration(-hydration * efficiency)  //saltwater dehydrates more than it hydrates
+		M.adjustToxLoss(0.25 * efficiency) // Slightly toxic
+		M.add_nausea(2 * efficiency)
 	..()

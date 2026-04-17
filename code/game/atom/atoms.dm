@@ -159,6 +159,11 @@
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
 
+	/**
+	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
+	 */
+	var/germ_level = GERM_LEVEL_AMBIENT
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -525,6 +530,9 @@
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
+/atom/proc/get_mechanics_examine(mob/user)
+	return list()
+
 /**
  * Updates the appearence of the icon
  *
@@ -887,6 +895,13 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
+
+/// Force set the germ level
+/atom/proc/set_germ_level(germs)
+	var/delta = (germs - germ_level)
+	return adjust_germ_level(delta)
 
 ///Resets the atom's color to null, and then sets it to the highest priority colour available
 /atom/proc/update_atom_colour()

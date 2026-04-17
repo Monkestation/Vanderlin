@@ -121,9 +121,9 @@
 	blend_mode = 0
 	show_when_dead = FALSE
 
-/datum/reagent/druqks/on_mob_life(mob/living/carbon/M)
+/datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	M.set_drugginess(30 SECONDS)
+	M.set_drugginess(30 SECONDS * efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
 	if(prob(5))
 		if(M.gender == FEMALE)
@@ -173,7 +173,7 @@
 	overdose_threshold = 16
 	metabolization_rate = 0.2
 
-/datum/reagent/ozium/on_mob_life(mob/living/carbon/M)
+/datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
@@ -214,7 +214,7 @@
 	M.remove_status_effect(/datum/status_effect/buff/moondust)
 	animate(M.client)
 
-/datum/reagent/moondust/on_mob_life(mob/living/carbon/M)
+/datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust_purest))
 		M.Sleeping(40, 0)
@@ -260,10 +260,10 @@
 	M.clear_fullscreen("purest_kaif")
 	M.remove_status_effect(/datum/status_effect/buff/moondust_purest)
 
-/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M)
+/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust))
-		M.Sleeping(40, 0)
+		M.Sleeping(40 * efficiency, 0)
 	if(M.has_quirk(/datum/quirk/vice/junkie))
 		M.sate_addiction(/datum/quirk/vice/junkie)
 	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)

@@ -878,6 +878,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				to_chat(usr, span_warning("Invalid target!"))
 				return
 			wound.infection = BBC_TIME_MAX
+			wound.infection_percent = 1
 			target.death()
 
 	punish_log(target, punishment)

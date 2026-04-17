@@ -207,6 +207,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// List of organs this species has.
 	var/list/organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -217,6 +218,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
+	///this is basically a list of organs we might not have IE hollowkin horns or tails
+	var/list/optional_organ_slots = list()
 
 	/// List of descriptor choices this species gets in preferences customization
 	var/list/descriptor_choices = list(
@@ -559,10 +562,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
 			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
-
 	//what should be put in if there is no mutantorgan (brains handled seperately)
 	var/list/slot_mutantorgans = organs
-
 	var/list/slots_to_iterate = list()
 	for(var/slot in C.dna.organ_dna)
 		slots_to_iterate |= slot
@@ -570,10 +571,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(!is_organ_slot_allowed(C, slot))
 			continue
 		slots_to_iterate |= slot
-
 	// Remove the organs from the slots they should have nothing in
 	for(var/obj/item/organ/organ in C.internal_organs)
 		if(organ.slot in slots_to_iterate)
+			continue
+		if(istype(organ, /obj/item/organ/artery)) ///these are children of the limbs not to be messed with
 			continue
 		organ.Remove(C, TRUE)
 		QDEL_NULL(organ)
@@ -581,9 +583,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	for(var/slot in slots_to_iterate)
 		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
 		var/obj/item/organ/neworgan
-
+		var/datum/organ_dna/organ_dna
 		if(C.dna.organ_dna[slot])
-			var/datum/organ_dna/organ_dna = C.dna.organ_dna[slot]
+			organ_dna = C.dna.organ_dna[slot]
 			if(organ_dna.can_create_organ())
 				neworgan = organ_dna.create_organ(species = src)
 				if(slot_mutantorgans[slot])
@@ -598,13 +600,15 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			if(new_type)
 				neworgan = new new_type()
 				neworgan.build_colors_for_accessory(source_key_list)
-
 		var/used_neworgan = FALSE
 		var/should_have
 		if(neworgan)
 			should_have = neworgan.get_availability(src)
 		else
 			should_have = TRUE
+
+		if((slot in optional_organ_slots) && !C.dna.organ_dna[slot])
+			should_have = FALSE
 
 		if(oldorgan && (!should_have || replace_current) && !(oldorgan.zone in excluded_zones))
 			if(slot == ORGAN_SLOT_BRAIN)
@@ -614,21 +618,33 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					QDEL_NULL(brain)
 					oldorgan = null //now deleted
 			else
-				oldorgan.Remove(C,TRUE)
-				QDEL_NULL(oldorgan) //we cannot just tab this out because we need to skip the deleting if it is a decoy brain.
-
-
+				for(var/obj/item/organ/old_paired in C.getorganslotlist(slot))
+					old_paired.Remove(C, TRUE)
+					QDEL_NULL(old_paired)
+				oldorgan = null
 		if(oldorgan)
 			oldorgan.setOrganDamage(0)
 		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
 			if(neworgan)
 				neworgan.Insert(C, TRUE, FALSE)
-
+				if(slot in PAIRED_ORGAN_SLOTS)
+					var/obj/item/organ/paired_organ = new neworgan.type()
+					paired_organ.switch_side(neworgan.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+					if(organ_dna)
+						organ_dna.imprint_organ(paired_organ, species = src)
+					else
+						paired_organ.build_colors_for_accessory(source_key_list)
+					if(pref_load)
+						pref_load.customize_organ(paired_organ)
+					if(!(initial(paired_organ.zone) in excluded_zones))
+						paired_organ.Insert(C, TRUE, FALSE)
+					else
+						qdel(paired_organ)
 		if(!used_neworgan)
 			if(neworgan)
 				qdel(neworgan)
-		else if (!C.dna.organ_dna[slot] && neworgan)
+		else if(!C.dna.organ_dna[slot] && neworgan)
 			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
 			C.dna.organ_dna[slot] = new_dna
 
@@ -811,6 +827,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		apply_customizers_to_character(C)
 
 	on_gender_update(C)
+	C.update_organ_requirements() //post species trait gains
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
@@ -1233,60 +1250,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 ////////
 
 /datum/species/proc/handle_digestion(mob/living/carbon/human/H)
-	if(HAS_TRAIT(H, TRAIT_NOHUNGER))
-		return //hunger is for BABIES
-
-	// nutrition decrease and satiety
-	if(H.nutrition > 0 && H.stat != DEAD)
-		var/hunger_rate = (HUNGER_FACTOR * nutrition_mod)
-		H.adjust_nutrition(-hunger_rate)
-
-	if(H.hydration > 0 && H.stat != DEAD)
-		var/hunger_rate = HUNGER_FACTOR
-		H.adjust_hydration(-hunger_rate)
-
-	if(H.nutrition > NUTRITION_LEVEL_FULL && H.overeatduration < 600)
-		H.overeatduration++ //capped so people don't take forever to unfat
-	else if(H.overeatduration > 1)
-		H.overeatduration -= 2 //doubled the unfat rate
-
-	switch(H.nutrition)
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt2)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(0 to NUTRITION_LEVEL_STARVING)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			if(CONFIG_GET(flag/starvation_death))
-				H.apply_status_effect(/datum/status_effect/debuff/hungryt4)
-			if(prob(3))
-				playsound(H, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
-
-	switch(H.hydration)
-		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
-		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt2)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
-		if(0 to HYDRATION_LEVEL_DEHYDRATED)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			if(CONFIG_GET(flag/dehydration_death))
-				H.apply_status_effect(/datum/status_effect/debuff/thirstyt4)
+	return
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
@@ -1357,21 +1321,14 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 //	if(!((target.health < 0 || HAS_TRAIT(target, TRAIT_FAKEDEATH)) && !(target.mobility_flags & MOBILITY_STAND)))
-	if(target.body_position == LYING_DOWN)
+	if(!(istype(user.rmb_intent, /datum/rmb_intent/weak)) && target.body_position == LYING_DOWN)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")
 		return TRUE
-/*	else
-		var/we_breathe = !HAS_TRAIT(user, TRAIT_NOBREATH)
-		var/we_lung = user.getorganslot(ORGAN_SLOT_LUNGS)
-
-		if(we_breathe && we_lung)
-			user.do_cpr(target)
-		else if(we_breathe && !we_lung)
-			to_chat(user, "<span class='warning'>I have no lungs to breathe with, so you cannot perform CPR!</span>")
-		else
-			to_chat(user, "<span class='warning'>I do not breathe, so you cannot perform CPR!</span>")*/
+	else if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (target.body_position == LYING_DOWN) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
+		user.do_cpr(target, user.zone_selected == BODY_ZONE_CHEST ? CPR_CHEST : CPR_MOUTH)
+		return TRUE
 
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(target.check_block() || target.has_status_effect(/datum/status_effect/buff/malum_anvil))

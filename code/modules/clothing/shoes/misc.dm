@@ -10,6 +10,7 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/nobleboot/apply_components()
 	. = ..()
@@ -21,6 +22,7 @@
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
+	wetable = FALSE
 
 /obj/item/clothing/shoes/shortboots
 	name = "shortboots"
@@ -32,6 +34,7 @@
 	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/ridingboots
 	name = "riding boots"
@@ -90,6 +93,7 @@
 	item_state = "gladiator"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/sandals
 	name = "sandals"
@@ -99,6 +103,7 @@
 	item_state = "sandals"
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
+	wetable = FALSE
 
 /obj/item/clothing/shoes/rare
 	abstract_type = /obj/item/clothing/shoes/rare
@@ -109,6 +114,7 @@
 	icon_state = "aasimarfeet"
 	item_state = "aasimarfeet"
 	sellprice = 20
+	wetable = FALSE
 
 /obj/item/clothing/shoes/shalal
 	name = "babouche"
@@ -162,6 +168,7 @@
 	desc = "The steel-lined heels click."
 	icon_state = "inqboots"
 	item_state = "inqboots"
+	wetable = FALSE
 
 //Valorian Duelist Merc - On par with grenzelhoftian's stats.
 /obj/item/clothing/shoes/nobleboot/duelboots
@@ -174,6 +181,7 @@
 	color = "#d5c2aa"
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
+	wetable = FALSE
 
 /obj/item/clothing/shoes/courtphysician
 	name = "sanguine shoes"
@@ -194,3 +202,4 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
 	uses_lord_coloring = LORD_PRIMARY
+	wetable = FALSE

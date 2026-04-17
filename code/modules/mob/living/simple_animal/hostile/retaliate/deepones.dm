@@ -34,7 +34,7 @@
 	speak_emote = list("burbles")
 	faction = list("deepone")
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
-
+	animal_type = /datum/blood_type/human/triton
 
 
 

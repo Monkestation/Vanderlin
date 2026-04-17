@@ -131,7 +131,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	slot_flags = ITEM_SLOT_MOUTH
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/mouth_items.dmi'
 	icon = 'icons/roguetown/items/lighting.dmi'
-	heat = 1000
+	heat = 570
 	spitoutmouth = FALSE
 
 	grid_width = 32

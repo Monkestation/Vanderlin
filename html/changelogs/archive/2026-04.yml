@@ -220,3 +220,38 @@
   - refactor: Prayers now use TGUI
   Wrench-1:
   - rscdel: Halflings can no longer be Grandmaster Templars
+2026-04-15:
+  Ben10083:
+  - rscadd: 'Adds new T2 Dwarf only Miracle from Malum: MALUM''S ANVIL. Granting CON
+      buff and SPD malus, and makes you unstoppable for the duration (13 seconds)'
+  Boltersam:
+  - rscadd: You may now optionally convert to Graggar if you are transformed into
+      a half-orc.
+  KevinfromHP:
+  - bugfix: Fixed various bugs related to Change Position Monarch command.
+  Telvayne:
+  - bugfix: Westleach may now be submitted to the stockpile.
+  realforest2001:
+  - admin: PlayerPanel Cryo now requires confirmation.
+2026-04-16:
+  CheffieGithub:
+  - bugfix: Fixed split personality triggering on clientless mobs
+  - rscadd: Added an option to disable random gain of split personality from brain
+      damage
+  - rscdel: Disabled Peasant Rebel
+2026-04-17:
+  Ben10083:
+  - qol: Yielding message more obvious
+  - bugfix: Surrender prompt now cares about if you accept to surrender
+  - bugfix: You can no longer stack tgui prompts to bypass surrender cooldowns
+  CheffieGithub:
+  - rscdel: Removed CRT setting
+  - bugfix: Fixed Interface issues by giving proper hud to aghosts, new players and
+      simple animals
+  - bugfix: Enabled mouse icon opacity for the HUD, if this blocks the inventory somewhere
+      please report it
+  Telvayne:
+  - qol: Corrected the waterproof status of several boots and sandals.
+  ta3754859-max:
+  - bugfix: Fixes inqusition black mirror, changes few buttons
+  - qol: Red tallows can be now melted when used over a static light source

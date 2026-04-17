@@ -355,46 +355,136 @@
 		// Might need re-wording.
 		to_chat(user, "<span class='alert'>There is no exposed flesh or thin material [above_neck(target_zone) ? "on [p_their()] head" : "on [p_their()] body"].</span>")
 
-/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
-	CHECK_DNA_AND_SPECIES(C)
-
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
-		to_chat(src, "<span class='warning'>[C.name] is dead!</span>")
+/// Performs CPR on the target after a delay.
+/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/target, cpr_type = CPR_CHEST)
+	if(target == src)
 		return
-	if(is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove your mask first!</span>")
-		return 0
-	if(C.is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove [p_their()] mask first!</span>")
-		return 0
 
-	if(C.cpr_time < world.time + 30)
-		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-						"<span class='notice'>I try to perform CPR on [C.name]... Hold still!</span>")
-		if(!do_after(src, 3 SECONDS, C))
-			to_chat(src, "<span class='warning'>I fail to perform CPR on [C]!</span>")
-			return 0
+	CHECK_DNA_AND_SPECIES(target)
 
-		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
-		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
+	var/obj/item/bodypart/mouth/jaw = target.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	var/obj/item/bodypart/chest/chest = target.get_bodypart(BODY_ZONE_CHEST)
+	var/medical_skill = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/medicine)
 
-		if(C.health > C.crit_threshold)
-			return
+	if(DOING_INTERACTION_WITH_TARGET(src, target))
+		return FALSE
 
-		src.visible_message("<span class='notice'>[src] performs CPR on [C.name]!</span>", "<span class='notice'>I perform CPR on [C.name].</span>")
-		add_stress(/datum/stress_event/perform_cpr)
-		C.cpr_time = world.time
-		log_combat(src, C, "CPRed")
+	target.add_fingerprint(src)
+	switch(cpr_type)
+		if(CPR_MOUTH)
+			if(is_mouth_covered())
+				to_chat(src, span_warning("I need to uncover my mouth first!"))
+				return FALSE
 
-		if(they_breathe && they_lung)
-			var/suff = min(C.getOxyLoss(), 7)
-			C.adjustOxyLoss(-suff)
-			C.updatehealth()
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air enter your lungs... It feels good...</span>")
-		else if(they_breathe && !they_lung)
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... but you don't feel any better...</span>")
-		else
-			to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... which is a sensation you don't recognise...</span>")
+			if(target.is_mouth_covered())
+				to_chat(src, span_warning("I need to uncover [p_their()] mouth first!"))
+				return FALSE
+
+			if(!jaw)
+				to_chat(src, span_warning("I have no mouth!"))
+				return FALSE
+
+			if(HAS_TRAIT(src, TRAIT_NOBREATH))
+				to_chat(src, span_warning("I can't breathe!"))
+				return FALSE
+
+			if(!getorganslot(ORGAN_SLOT_LUNGS))
+				to_chat(src, span_warning("I have no lungs!"))
+				return FALSE
+
+			if(world.time >= target.last_mtom + M2M_COOLDOWN)
+				if(!do_after(src, M2M_TIME, target))
+					return
+				var/they_breathe = !HAS_TRAIT(target, TRAIT_NOBREATH)
+				var/obj/item/organ/lungs/they_lung = target.getorganslot(ORGAN_SLOT_LUNGS)
+				visible_message(span_notice("<b>[src]</b> performs mouth to mouth on <b>[target]</b>!"), \
+								span_notice("I perform mouth to mouth on <b>[target]</b>."),
+								span_hear("I hear loud breathing."),
+								vision_distance = COMBAT_MESSAGE_RANGE,
+								ignored_mobs = target)
+				target.last_mtom = world.time
+				log_combat(src, target, "M2Med")
+				if(they_breathe && they_lung)
+					var/epinephrine_mod = 0
+					if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+						epinephrine_mod += 5
+					target.adjustOxyLoss(-((medical_skill * 0.2) + epinephrine_mod))
+					target.updatehealth()
+					to_chat(target, span_unconscious("I feel a breath of fresh air enter my lungs... It feels good..."))
+				else if(they_breathe && !they_lung)
+					to_chat(target, span_unconscious("I feel a breath of fresh air... But i don't feel any better..."))
+				else
+					to_chat(target, span_unconscious("I feel a breath of fresh air... Which is a sensation i don't recognise..."))
+		if(CPR_CHEST)
+			var/mob/living/carbon/human/humie = target
+			if(istype(humie))
+				var/obj/item/clothing/suit = humie.wear_armor
+				var/obj/item/clothing/under = humie.wear_shirt
+				if(istype(under) && CHECK_BITFIELD(under.clothing_flags, THICKMATERIAL))
+					to_chat(src, span_warning("I need to take [humie.p_their()] [under] off!"))
+					return
+				else if(istype(suit) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
+					to_chat(src, span_warning("I need to take [humie.p_their()] [suit] off!"))
+					return
+
+			if(world.time >= target.last_cpr + CPR_COOLDOWN)
+				var/compression_time = CPR_TIME
+				compression_time *= GENERAL_SKILL_TIME_MULITPLIER(src, /datum/attribute/skill/misc/medicine)
+				if(!do_after(src, min(compression_time, 4 SECONDS), target))
+					return
+				var/they_beat = !HAS_TRAIT(target, TRAIT_STABLEHEART)
+				var/obj/item/organ/heart/they_heart = target.getorganslot(ORGAN_SLOT_HEART)
+				var/heart_exposed_mod = 0
+				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
+					heart_exposed_mod += 5
+					visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
+								span_notice("I massage <b>[target]</b>'s [they_heart]."), \
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
+				else
+					visible_message(span_notice("<b>[src]</b> performs chest compressions on <b>[target]</b>!"), \
+								span_notice("I perform chest compressions on <b>[target]</b>."), \
+								vision_distance = COMBAT_MESSAGE_RANGE, \
+								ignored_mobs = target)
+				target.last_cpr = world.time
+				log_combat(src, target, "CPRed")
+				if(they_beat && they_heart)
+					to_chat(target, span_unconscious("I feel my heart being pumped..."))
+				else if(they_beat && !they_heart)
+					to_chat(target, span_unconscious("I feel my chest being pumped... But i don't feel any better..."))
+				else
+					to_chat(target, span_unconscious("I feel my chest being pushed on..."))
+				var/epinephrine_mod = 0
+				if(target.reagents?.get_reagent_amount(/datum/reagent/adrenaline) >= 1)
+					epinephrine_mod +=  3
+
+				var/diceroll = diceroll(medical_skill+heart_exposed_mod+epinephrine_mod, dice_num = 8, context = DICE_CONTEXT_PHYSICAL)
+				if((diceroll >= DICE_SUCCESS) || !attributes)
+					if(prob(35) || (diceroll >= DICE_SUCCESS))
+						target?.pump_heart(src)
+						target.set_heartattack(FALSE)
+						if(GETBRAINLOSS(target) >= 100)
+							SETBRAINLOSS(target, 99)
+						if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
+							to_chat(target, span_warning("Necra holds tight to this one."))
+							return FALSE
+						if(diceroll >= DICE_CRIT_SUCCESS)
+							if(target.revive())
+								target.grab_ghost(TRUE)
+								target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
+												span_userdanger("My muscles spasm as i am brought back to life!"))
+								target.emote("breathgasp")
+								target.adjust_jitter(100 SECONDS)
+								target.apply_status_effect(/datum/status_effect/debuff/revive)
+								target.remove_client_colour(/datum/client_colour/monochrome/death)
+								record_round_statistic(STATS_CPR_REVIVALS, 1)
+				else
+					if(diceroll <= DICE_CRIT_FAILURE)
+						visible_message(span_danger("<b>[src]</b> botches the chest compressions, cracking <b>[target]</b>'s  ribs!"), \
+									span_danger("I botch the chest compressions, cracking <b>[target]</b>'s ribs!"),
+									span_hear("I hear a loud crack!"),
+									ignored_mobs = target)
+						to_chat(target, span_userdanger("<b>[src]</b> botches the chest compressions and cracks my ribs!"))
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())
@@ -723,6 +813,7 @@
 			//Second check to make sure they're still valid to be carried
 			if(can_be_firemanned(target) && !incapacitated(IGNORE_GRAB))
 				buckle_mob(target, TRUE, TRUE, 90, 0, 0)
+				update_carry_weight()
 				return
 	to_chat(src, "<span class='warning'>I fail to carry [target].</span>")
 
@@ -793,25 +884,13 @@
 	. = ..()
 	. *= physiology?.do_after_speed
 
-/mob/living/carbon/human/updatehealth(amount)
-	. = ..()
-	dna?.species.spec_updatehealth(src)
-	if(HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
-		return
-	var/health_deficiency = max((maxHealth - health), 0)
-	if(health_deficiency >= 80)
-		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN, override = TRUE, multiplicative_slowdown = (health_deficiency / 75), blacklisted_movetypes = FLOATING|FLYING)
-		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING, override = TRUE, multiplicative_slowdown = (health_deficiency / 25), movetypes = FLOATING)
-	else
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
-		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
-
 /mob/living/carbon/human/proc/skele_look()
 	dna.species.go_bald()
 	update_body_parts(redraw = TRUE)
 	underwear = "Nude"
+
+/mob/living/carbon/human/post_unbuckle_mob()
+	update_carry_weight()
 
 /mob/living/carbon/human/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
@@ -1053,3 +1132,54 @@
 		for(var/mob/living/carbon/human/target as anything in nobles)
 			if(!target.has_stress_type(/datum/stress_event/noble_seen_servant_work))
 				target.add_stress(/datum/stress_event/noble_seen_servant_work)
+
+//OVERRIDE IGNORING PARENT RETURN VALUE
+/mob/living/carbon/human/updatehealth(amount)
+	if(status_flags & GODMODE)
+		return
+	var/total_burn	= 0
+//	var/total_brute	= 0
+	var/total_tox = getToxLoss()
+	var/total_oxy = getOxyLoss()
+	var/used_damage = 0
+	var/static/list/lethal_zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+	)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts) //hardcoded to streamline things a bit
+		if(!(bodypart.body_zone in lethal_zones))
+			continue
+		var/my_burn = abs((bodypart.burn_dam / bodypart.max_damage) * DAMAGE_THRESHOLD_FIRE_CRIT)
+		total_burn = max(total_burn, my_burn)
+		used_damage = max(used_damage, my_burn)
+	if(used_damage < total_tox)
+		used_damage = total_tox
+	if(used_damage < total_oxy)
+		used_damage = total_oxy
+	set_health(maxHealth - GETBRAINLOSS(src))
+	update_stat()
+
+	if(stat == SOFT_CRIT)
+		add_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE, multiplicative_slowdown = SOFTCRIT_ADD_SLOWDOWN)
+	else
+		remove_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE)
+	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
+
+	dna?.species.spec_updatehealth(src)
+	if(HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
+		return
+	var/health_deficiency = max((maxHealth - health), 0)
+	if(health_deficiency >= 80)
+		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN, override = TRUE, multiplicative_slowdown = (health_deficiency / 75), blacklisted_movetypes = FLOATING|FLYING)
+		add_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING, override = TRUE, multiplicative_slowdown = (health_deficiency / 25), movetypes = FLOATING)
+	else
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN)
+		remove_movespeed_modifier(MOVESPEED_ID_DAMAGE_SLOWDOWN_FLYING)
+
+/mob/living/carbon/human/getMaxHealth()
+	var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	if(brain)
+		return brain.maxHealth
+	return BRAIN_DAMAGE_DEATH

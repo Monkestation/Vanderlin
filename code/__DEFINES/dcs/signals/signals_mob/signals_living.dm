@@ -122,5 +122,3 @@
 
 /// From [mob/living/MiddleClickOn] before a middle mouse intent is performed
 #define COMSIG_MOB_PRE_SPECIAL_MIDDLE "pre_special_middle"
-
-#define COMSIG_LIVING_DISEMBOWELED "living_disemboweled"
