@@ -374,7 +374,7 @@
 	requirement += round((loc_mod - 1) * 8, 1)
 
 	var/overseer_bonus = get_overseer_bonus(surgeon)
-	if(overseer_bonus > 0)
+	if(overseer_bonus > 1)
 		requirement += overseer_bonus
 		to_chat(surgeon, span_notice("You feel more confident with an experienced eye watching over you."))
 

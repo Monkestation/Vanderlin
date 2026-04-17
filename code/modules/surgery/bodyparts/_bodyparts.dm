@@ -125,7 +125,7 @@
 	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
 	var/limb_flags = BODYPART_HAS_ARTERY
 
-	var/biological_state = (BIO_FLESH|BIO_BLOODED)
+	var/biological_state = BIO_STANDARD_JOINTED
 
 	/// What state is the bodypart in for determining surgery availability
 	VAR_FINAL/surgery_state = NONE
