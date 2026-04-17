@@ -8,6 +8,7 @@
 	organ_efficiency = list(ORGAN_SLOT_EARS = 100)
 	gender = PLURAL
 	side = RIGHT_SIDE
+	sellprice = DEFAULT_ORGAN_VALUE/2
 
 	healing_factor = STANDARD_ORGAN_HEALING
 
