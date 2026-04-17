@@ -162,7 +162,7 @@
 
 // ~organ requirements
 /// Normally 50% of the default blood volume (230cl)
-#define DEFAULT_TOTAL_BLOOD_REQ	BLOOD_VOLUME_NORMAL * 0.5
+#define DEFAULT_TOTAL_BLOOD_REQ	BLOOD_VOLUME_NORMAL * 0.33
 #define DEFAULT_TOTAL_OXYGEN_REQ 50
 #define DEFAULT_TOTAL_NUTRIMENT_REQ	HUNGER_FACTOR
 #define DEFAULT_TOTAL_HYDRATION_REQ THIRST_FACTOR
@@ -170,7 +170,7 @@
 // ~simple list of organs that come in pairs
 #define PAIRED_ORGAN_SLOTS list(ORGAN_SLOT_EYES, ORGAN_SLOT_EARS, ORGAN_SLOT_HORNS)
 
-#define GET_EFFECTIVE_BLOOD_VOL(num, total_blood_req) (max(num + DEFAULT_TOTAL_BLOOD_REQ - total_blood_req, 0))
+#define GET_EFFECTIVE_BLOOD_VOL(num, total_blood_req) (max(num - DEFAULT_TOTAL_BLOOD_REQ + total_blood_req, 0))
 
 //The contant in the rate of reagent transfer on life ticks
 #define STOMACH_METABOLISM_CONSTANT 0.25
