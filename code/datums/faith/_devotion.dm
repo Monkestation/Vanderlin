@@ -12,9 +12,9 @@
 	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
 	var/max_progression = CLERIC_REQ_3
 
-	/// How much devotion is gained per process call
+	/// How much devotion is gained per process call. Update this variable using `update_passive_devotion`
 	var/passive_devotion_gain = 0
-	/// How much progression is gained per process call
+	/// How much progression is gained per process call. Update this variable using `update_passive_progression`
 	var/passive_progression_gain = 0
 	/// How much devotion is gained per prayer cycle
 	var/prayer_effectiveness = 2
