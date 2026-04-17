@@ -321,7 +321,7 @@
 		if(damage >= BRAIN_DAMAGE_SEVERE)
 			// Base chance is the hit damage, plus intelligence mod; for every point of damage past the threshold the chance is increased by 1%
 			if(prob((damage_delta + intelligence_modifier) * (1 + max(0, (damage - BRAIN_DAMAGE_SEVERE) / 100))))
-				if(prob(20 - (intelligence_modifier * 2)))
+				if(prob(max(1, 10 - (intelligence_modifier / 2))))
 					gain_trauma_type(BRAIN_TRAUMA_SPECIAL, natural_gain = TRUE)
 				else
 					gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
@@ -358,6 +358,7 @@
 
 	prev_damage = damage
 	damage = clamp(damage + amount, 0, maximum)
+
 	if(!owner)
 		return
 

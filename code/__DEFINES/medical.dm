@@ -209,7 +209,7 @@
 
 //~brain damage related defines
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll
-#define TRAUMA_ROLL_THRESHOLD 4.5
+#define TRAUMA_ROLL_THRESHOLD 6
 /// Brainloss caused by mildly low blood oxygenation
 #define BRAIN_DAMAGE_LOW_OXYGENATION 1.5
 /// Brainloss caused by lower than low blood oxygenation
