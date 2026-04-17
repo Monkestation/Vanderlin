@@ -263,6 +263,7 @@
 /// "All requirements" are formatted as "All of the following must be true:"
 /datum/surgery_operation/proc/all_required_strings()
 	SHOULD_CALL_PARENT(TRUE)
+
 	. = bitfield_to_list(all_surgery_states_required, SURGERY_STATE_GUIDES("must"))
 	if(!(operation_flags & OPERATION_STANDING_ALLOWED))
 		. += "the patient must be lying down"
