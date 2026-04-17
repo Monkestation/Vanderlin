@@ -3,7 +3,7 @@
 	operation_flags = OPERATION_STANDING_ALLOWED
 
 	implements = list(
-		TOOL_BONESET = 1,
+		TOOL_BONESETTER = 1,
 		IMPLEMENT_HAND = 3,
 	)
 

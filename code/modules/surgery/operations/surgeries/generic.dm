@@ -308,10 +308,10 @@
 /datum/surgery_operation/limb/fix_bones
 	name = "fix limb bone"
 	desc = "Repair a patient's cut or broken bones. \
-		Clears \"bone sawed\" surgical state."
+		Clears \"bone sawed\" surgical state and repairs fractures."
 
 	implements = list(
-		TOOL_BONESET = 1,
+		TOOL_BONESETTER = 1,
 		IMPLEMENT_HAND = 3,
 	)
 
