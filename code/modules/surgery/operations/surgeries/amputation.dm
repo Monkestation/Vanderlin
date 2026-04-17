@@ -65,7 +65,7 @@
 
 /datum/surgery_operation/limb/amputate/pegleg
 	name = "Detach wooden limb"
-	required_bodytype = BODYPART_ORGANIC
+	required_bodytype = BODYPART_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
 
 	implements = list(

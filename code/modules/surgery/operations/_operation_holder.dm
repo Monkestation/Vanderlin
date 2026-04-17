@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 
 	for(var/datum/surgery_operation/operation_type as anything in subtypesof(/datum/surgery_operation))
 		if(IS_ABSTRACT(operation_type))
-			return
+			continue
 
 		var/datum/surgery_operation/operation = new operation_type()
 		if(isnull(operation.name))

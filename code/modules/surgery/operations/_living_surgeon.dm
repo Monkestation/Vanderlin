@@ -25,10 +25,6 @@
 		// for surgical tools specifically, we have some special handling
 		if(!(realtool.item_flags & SURGICAL_TOOL))
 			return NONE
-		// if the targeted limb isn't prepped for surgery, i suppose we can allow an attack
-		var/obj/item/bodypart/operating = patient.get_bodypart(operating_zone)
-		if(operating && !HAS_TRAIT(operating, TRAIT_READY_TO_OPERATE))
-			return NONE
 		// at this point we can be relatively sure they messed up so let's give a feedback message...
 		if(!patient.is_location_accessible(operating_zone, IGNORED_OPERATION_CLOTHING_SLOTS))
 			patient.balloon_alert(src, "operation site is obstructed!")

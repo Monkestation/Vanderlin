@@ -19,14 +19,18 @@
 
 	required_replacement = BODYPART_ROBOTIC
 
-/datum/surgery_operation/limb_replacement/tool_check(obj/item/bodypart/tool)
-	if(tool.item_flags & (ABSTRACT | DROPDEL))
+/datum/surgery_operation/limb_replacement/tool_check(obj/item/tool)
+	if(!istype(tool, /obj/item/bodypart))
 		return FALSE
 
-	if(tool.animal_origin)
+	var/obj/item/bodypart/limb = tool
+	if(limb.item_flags & (ABSTRACT | DROPDEL))
 		return FALSE
 
-	return (tool.status == required_replacement)
+	if(limb.animal_origin)
+		return FALSE
+
+	return (limb.status == required_replacement)
 
 /datum/surgery_operation/limb_replacement/snowflake_check_availability(atom/movable/operating_on, mob/living/surgeon, tool, operated_zone)
 	if(!isliving(operating_on))

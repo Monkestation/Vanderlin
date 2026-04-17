@@ -66,9 +66,7 @@
 
 	patient.set_body_position(LYING_DOWN)
 
-	ADD_TRAIT(patient, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
 	var/obj/item/bodypart/chest/patient_chest = patient.get_bodypart(BODY_ZONE_CHEST)
-	ADD_TRAIT(patient_chest, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
 
 	var/datum/surgery_operation/basic/tend_wounds/surgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	TEST_ASSERT(!surgery.check_availability(patient, patient, user, hemostat, BODY_ZONE_CHEST), "Tend wounds surgery was available on an undamaged, unoperated patient")
@@ -123,9 +121,6 @@
 	var/obj/item/weapon/surgery/scalpel/scalpel = allocate(/obj/item/weapon/surgery/scalpel)
 	var/obj/item/bodypart/chest/chest = patient.get_bodypart(BODY_ZONE_CHEST)
 	var/list/operations
-
-	ADD_TRAIT(patient, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
-	ADD_TRAIT(chest, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
 
 	surgeon.put_in_active_hand(scalpel)
 	operations = surgeon.get_available_operations(patient, scalpel, BODY_ZONE_CHEST)

@@ -326,23 +326,7 @@
  * Returns what icon this surgery uses by default on the radial wheel if it does not implement its own radial options
  */
 /datum/surgery_operation/proc/get_default_radial_image()
-	return image(icon = 'icons/effects/random_spawners.dmi', icon_state = "questionmark")
-
-/// Helper to get a generic limb radial image based on body zone
-/datum/surgery_operation/proc/get_generic_limb_radial_image(body_zone)
-	SHOULD_NOT_OVERRIDE(TRUE)
-	PROTECTED_PROC(TRUE)
-
-	if(body_zone == BODY_ZONE_HEAD || body_zone == BODY_ZONE_CHEST || (body_zone in BODY_ZONES_EYES) || body_zone == BODY_ZONE_PRECISE_MOUTH)
-		return image(icon = 'icons/obj/medical/surgery_ui.dmi', icon_state = "surgery_[body_zone]")
-
-	if(body_zone == BODY_ZONE_L_ARM || body_zone == BODY_ZONE_R_ARM)
-		return image(icon = 'icons/obj/medical/surgery_ui.dmi', icon_state = "surgery_arms")
-
-	if(body_zone == BODY_ZONE_L_LEG || body_zone == BODY_ZONE_R_LEG)
-		return image(icon = 'icons/obj/medical/surgery_ui.dmi', icon_state = "surgery_legs")
-
-	return get_default_radial_image()
+	return image(icon = 'icons/obj/structures_spawners.dmi', icon_state = "questionmark")
 
 /**
  * Helper for constructing overlays to apply to a radial image
@@ -853,20 +837,20 @@
 
 	if(target_zone && target_zone != operated_zone)
 		return FALSE
-	if(!HAS_TRAIT(patient, TRAIT_READY_TO_OPERATE))
-		return FALSE
+
 	if(required_biotype && !(patient.mob_biotypes & required_biotype))
 		return FALSE
+
 	if(!patient.has_limbs || !target_zone)
 		return ..()
 
 	var/obj/item/bodypart/carbon_part = patient.get_bodypart(target_zone)
 	if(isnull(carbon_part))
 		return FALSE
-	if(!HAS_TRAIT(carbon_part, TRAIT_READY_TO_OPERATE))
-		return FALSE
+
 	if(required_bodytype && !(carbon_part.status == required_bodytype))
 		return FALSE
+
 	return ..()
 
 /datum/surgery_operation/basic/has_surgery_state(mob/living/patient, state)
@@ -916,9 +900,6 @@
 		return FALSE
 
 	if(required_bodytype && !(limb.status == required_bodytype))
-		return FALSE
-
-	if(!HAS_TRAIT(limb, TRAIT_READY_TO_OPERATE))
 		return FALSE
 
 	return ..()

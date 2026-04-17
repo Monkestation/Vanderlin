@@ -91,10 +91,9 @@
 	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
 		return NONE
 
-	if(HAS_TRAIT(src, TRAIT_READY_TO_OPERATE))
-		var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
-		if(surgery_ret)
-			return surgery_ret
+	var/surgery_ret = user.perform_surgery(src, tool, LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(surgery_ret)
+		return surgery_ret
 
 	return NONE
 
