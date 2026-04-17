@@ -551,28 +551,30 @@
 
 /// Proc to update `quality`, should be called when `headstone` or `gravefence` is modified, and other cases where the condition of the grave has changed
 /obj/structure/closet/dirthole/proc/update_quality()
-    var/corpse_patron
     gravequality = 0
     if(stage != 4) // If not a complete grave, no quality
         return
     if(bonusquality)
         gravequality += bonusquality
-    for(var/mob/living/corpse in contents)
-        corpse_patron = corpse.patron
+
+    // Check if area is fit for burials
+    var/area/A = get_area(src)
+    if(A.burial_grounds)
+        gravequality += 1
+
     if(headstone)
-        var/obj/item/gravedecor/headstone/Head = headstone
-        var/heldquality = Head.decorationquality
-        for(var/datum/patron/GravePatron in Head.patron)
-            if(GravePatron == corpse_patron)
-                heldquality = 3
-        gravequality += heldquality
+        var/headquality = headstone.decorationquality
+        for(var/mob/living/corpse in contents)
+            if(corpse.patron in headstone.patron)
+                headquality = 3
+        gravequality += headquality
+
     if(gravefence)
-        var/obj/item/gravedecor/gravefence/Fence = gravefence
-        var/heldquality = Fence.decorationquality
-        for(var/datum/patron/GravePatron in Fence.patron)
-            if(GravePatron == corpse_patron)
-                heldquality = 3
-        gravequality += heldquality
+        var/fencequality = gravefence.decorationquality
+        for(var/mob/living/corpse in contents)
+            if(corpse.patron in gravefence.patron)
+                fencequality = 3
+        gravequality += fencequality
     for(var/obj/structure/closet/crate/coffin/coffin in contents)
         gravequality += 1
         if(coffin.consecrated)
@@ -580,7 +582,7 @@
     for(var/obj/structure/closet/burial_shroud/shroud in contents)
         gravequality += 1
 
-    return max(gravequality, 10)
+	return max(gravequality, 10)
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()

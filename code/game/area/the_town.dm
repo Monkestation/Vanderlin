@@ -98,12 +98,14 @@
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/churchnight.ogg'
 	converted_type = /area/outdoors/exposed/church
+	burial_grounds = TRUE
 
 /area/outdoors/exposed/church
 	icon_state = "church"
 	background_track = 'sound/music/area/church.ogg'
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/churchnight.ogg'
+	burial_grounds = TRUE
 
 /area/indoors/town/church/chapel
 	name = "prayer hall"
