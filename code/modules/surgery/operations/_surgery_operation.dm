@@ -538,11 +538,19 @@
 		else
 			surgeon.add_mob_blood(patient)
 
+		var/force_fail = operation_args[OPERATION_FORCE_FAIL]
+
+		var/failure_message = "intentional failure"
+		if(!force_fail && (GET_MOB_SKILL_VALUE(surgeon, skill_used) < skill_min))
+			force_fail = TRUE
+			failure_message = "lack of skill"
+
 		var/roll_result = NONE
 		var/roll_requirement = 0
-		var/force_fail = operation_args[OPERATION_FORCE_FAIL]
+
 		if(force_fail)
 			roll_result = DICE_FAILURE
+			display_roll(surgeon, "[uppertext(failure_message)]", null)
 		else
 			roll_requirement = get_roll_requirement(operating_on, surgeon, tool)
 			roll_result = surgeon.diceroll(
