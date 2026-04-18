@@ -61,20 +61,21 @@
 		if(sew_item(interacting_with, user))
 			return ITEM_INTERACT_SUCCESS
 
-/obj/item/needle/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/natural/fibers))
-		if(maxstring - stringamt < 5)
-			to_chat(user, span_warning("Not enough room for more thread!"))
-			return
-		else
-			to_chat(user, "I begin threading the needle with additional fibers...")
-			if(do_after(user, 6 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing), I))
-				stringamt += 5
-				to_chat(user, "I replenish the needle's thread!")
-				qdel(I)
-				update_appearance(UPDATE_OVERLAYS)
-			return
-	return ..()
+/obj/item/needle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/natural/fibers))
+		return NONE
+
+	if(maxstring - stringamt < 5)
+		to_chat(user, span_warning("Not enough room for more thread!"))
+		return ITEM_INTERACT_BLOCKING
+
+	to_chat(user, "I begin threading the needle with additional fibers...")
+	if(do_after(user, 6 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing), tool))
+		stringamt += 5
+		to_chat(user, "I replenish the needle's thread!")
+		qdel(tool)
+		update_appearance(UPDATE_OVERLAYS)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/needle/proc/sew_item(obj/item/I, mob/living/user)
 	if(!(I.obj_flags & CAN_BE_HIT) && !istype(I, /obj/item/storage)) // to preserve old attack_obj behavior

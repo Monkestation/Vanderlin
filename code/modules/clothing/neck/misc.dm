@@ -434,10 +434,9 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, list/modifiers)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
+/obj/item/clothing/neck/gorget/explosive/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/collar_detonator))
+		return NONE
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
@@ -445,6 +444,7 @@
 	else
 		to_chat(user, "Collar is already unlocked!")
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER

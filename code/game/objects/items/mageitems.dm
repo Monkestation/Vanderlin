@@ -90,13 +90,12 @@
 	. = ..()
 	desc += "It has [amount] uses left."
 
-/obj/item/chalk/attackby(obj/item/M, mob/user, list/modifiers)
-	if(istype(M,/obj/item/ore/cinnabar))
+/obj/item/chalk/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/ore/cinnabar))
 		if(amount < 8)
 			amount = 8
-			to_chat(user, span_notice("I press arcyne magic into \the [M] and the red crystals within melt into quicksilver, quickly sinking into the [src]."))
-	else
-		return ..()
+			to_chat(user, span_notice("I press arcyne magic into \the [tool/name] and the red crystals within melt into quicksilver, quickly sinking into \the [name]."))
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/chalk/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(!isarcyne(user))//We'll set up other items for other types of rune rituals

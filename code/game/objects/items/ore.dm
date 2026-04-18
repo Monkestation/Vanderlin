@@ -164,17 +164,22 @@
 	else
 		. += span_info("Its thorns have been trimmed.")
 
-/obj/item/ore/cursedrosa/attackby(obj/item/I, mob/living/user, params)
-	if(!user.cmode && istype(I, /obj/item/weapon/knife))
-		var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
-		if(QDELETED(thorns))
-			to_chat(user, span_warning("It has no thorns to trim."))
-		else
-			user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
-			playsound(I, 'sound/items/flint.ogg', 100, TRUE)
-			qdel(thorns)
-		return
-	return ..()
+/obj/item/ore/cursedrosa/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/weapon/knife))
+		return NONE
+
+	var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)
+	if(QDELETED(thorns))
+		to_chat(user, span_warning("It has no thorns to trim."))
+	else
+		user.visible_message(span_notice("[user] trims the thorns from [src]."), span_notice("I trim the thorns from [src]."))
+		playsound(tool, 'sound/items/flint.ogg', 100, TRUE)
+		qdel(thorns)
+
+	return ITEM_INTERACT_SUCCESS
 
 /* ............Ingots............ */
 /obj/item/ingot
@@ -205,18 +210,24 @@
 	metal_calc.apply_smelt_to_ingot(src, recipe_quality, TRUE)
 	qdel(metal_calc)
 
-/obj/item/ingot/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, /obj/item/weapon/tongs))
-		return ..()
-	var/obj/item/weapon/tongs/T = I
+/obj/item/ingot/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/tongs))
+		return NONE
+
+	var/obj/item/weapon/tongs/T = tool
 	if(!T.held_item)
-		if(item_flags & IN_STORAGE)
-			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE))
-				return ..()
-		forceMove(T)
-		T.held_item = src
-		T.hott = null
-		T.update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_BLOCKING
+
+	if(item_flags & IN_STORAGE)
+		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE))
+			return ITEM_INTERACT_BLOCKING
+
+	forceMove(T)
+	T.held_item = src
+	T.hott = null
+	T.update_appearance(UPDATE_ICON_STATE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/ingot/attack_hand_secondary(mob/user, list/modifiers)
 	if(currecipe)

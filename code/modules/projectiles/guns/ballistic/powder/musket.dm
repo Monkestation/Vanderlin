@@ -51,13 +51,16 @@
 	. = ..()
 	icon_state = "[base_icon_state][cocked ? "_cocked" : ""][ramrod ? "_ramrod" : ""][bayonet ? "_bayonet" : ""]" // God weeps
 
-/obj/item/gun/ballistic/powder/musket/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	. = ..()
-	if(!bayonet && istype(attacking_item, /obj/item/weapon/knife/dagger/bayonet))
+/obj/item/gun/ballistic/powder/musket/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(bayonet)
+		return NONE
+
+	if(istype(tool, /obj/item/weapon/knife/dagger/bayonet))
 		balloon_alert(user, "attached!")
-		user.transferItemToLoc(attacking_item, src)
-		bayonet = attacking_item
+		user.transferItemToLoc(tool, src)
+		bayonet = tool
 		update_appearance(UPDATE_ICON_STATE)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/powder/musket/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

@@ -77,9 +77,8 @@
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/canvas/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(istype(I, /obj/item/natural/feather))
+/obj/item/canvas/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/feather))
 		author = browser_input_text(user, "Who's the author of this painting?", "NAME YOURSELF", max_length = MAX_NAME_LEN)
 		author_ckey = user.ckey
 		SEND_SIGNAL(user, COMSIG_ART_CREATED)
@@ -89,15 +88,18 @@
 		if(author)
 			desc = "Painted by: [author]."
 
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(!istype(I, /obj/item/paint_brush))
-		return
+	if(!istype(tool, /obj/item/paint_brush))
+		return NONE
+
 	if(user in showers)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user?.client.screen += used_canvas
 	showers |= user
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_showers()
 	for(var/mob/mob in showers)

@@ -26,39 +26,40 @@
 	name = "Reliquary Key"
 	desc = "The single use key with which to unleash woe. Choose wisely."
 
-/obj/structure/reliquarybox/attackby(obj/item/W, mob/user, list/modifiers)
-	if(ishuman(user))
-		if(istype(W, /obj/item/key/psydonkey))
-			if(opened)
-				to_chat(user, span_info("The reliquary box has already been opened..."))
-				return
-			qdel(W)
-			to_chat(user, span_info("The reliquary lock takes my key as it opens, I take a moment to ponder what power was delivered to us..."))
-			playsound(src, 'sound/foley/doors/woodlock.ogg', 60)
-			to_chat(user,)
-			var/relics = list("Melancholic Crankbox - Antimagic", "Daybreak - Silver Whip", "Sanctum - Silver Halberd", "Crusade - Silver Greatsword", "Censer of Penitence")
-			var/relicchoice = input(user, "Choose your tool", "RELICS") as anything in relics
-			var/obj/choice
-			switch(relicchoice)
-				if("Melancholic Crankbox - Antimagic")
-					choice = /obj/item/psydonmusicbox
-				if("Daybreak - Silver Whip")
-					choice = /obj/item/weapon/whip/psydon/relic
-				if("Sanctum - Silver Halberd")
-					choice = /obj/item/weapon/polearm/halberd/psydon/relic
-					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)	//We make sure the weapon is usable by the Inquisitor.
-				if("Crusade - Silver Greatsword")
-					choice = /obj/item/weapon/sword/long/greatsword/psydon
-					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)		//Ditto.
-				if("Censer of Penitence")
-					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
-			to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
-			var/obj/structure/closet/crate/chest/inqreliquary/realchest = new /obj/structure/closet/crate/chest/inqreliquary(get_turf(src))
-			realchest.populate_contents()
-			choice = new choice(realchest)
-			qdel(src)
+/obj/structure/reliquarybox/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/key/psydonkey))
+		return NONE
 
+	if(opened)
+		to_chat(user, span_info("The reliquary box has already been opened..."))
+		return ITEM_INTERACT_BLOCKING
 
+	qdel(tool)
+	to_chat(user, span_info("The reliquary lock takes my key as it opens, I take a moment to ponder what power was delivered to us..."))
+	playsound(src, 'sound/foley/doors/woodlock.ogg', 60)
+	to_chat(user,)
+	var/relics = list("Melancholic Crankbox - Antimagic", "Daybreak - Silver Whip", "Sanctum - Silver Halberd", "Crusade - Silver Greatsword", "Censer of Penitence")
+	var/relicchoice = tgui_input_list(user, "Choose your tool", "RELICS", relics)
+	var/obj/choice
+	switch(relicchoice)
+		if("Melancholic Crankbox - Antimagic")
+			choice = /obj/item/psydonmusicbox
+		if("Daybreak - Silver Whip")
+			choice = /obj/item/weapon/whip/psydon/relic
+		if("Sanctum - Silver Halberd")
+			choice = /obj/item/weapon/polearm/halberd/psydon/relic
+			user.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)	//We make sure the weapon is usable by the Inquisitor.
+		if("Crusade - Silver Greatsword")
+			choice = /obj/item/weapon/sword/long/greatsword/psydon
+			user.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)		//Ditto.
+		if("Censer of Penitence")
+			choice = /obj/item/flashlight/flare/torch/lantern/psycenser
+	to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
+	var/obj/structure/closet/crate/chest/inqreliquary/realchest = new /obj/structure/closet/crate/chest/inqreliquary(get_turf(src))
+	realchest.populate_contents()
+	choice = new choice(realchest)
+	qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
 // Soul Churner - Music box which applies magic resistance to Inquisition members, greatly mood debuffs everyone not a Psydon worshipper.
 /obj/item/psydonmusicbox

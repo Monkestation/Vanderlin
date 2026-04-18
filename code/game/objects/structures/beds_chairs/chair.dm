@@ -29,13 +29,6 @@
 /obj/structure/chair/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/structure/chair/attackby(obj/item/W, mob/user, list/modifiers)
-	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
-		W.play_tool_sound(src)
-		deconstruct()
-	else
-		return ..()
-
 /obj/structure/chair/proc/handle_rotation(direction)
 	handle_layer()
 	if(has_buckled_mobs())

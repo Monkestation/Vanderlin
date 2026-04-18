@@ -94,11 +94,10 @@
 	if(!current_charge)
 		addtimer(CALLBACK(src, PROC_REF(battery_collapse), A, user), 5)
 
-/obj/item/contraption/attackby(obj/item/I, mob/user, list/modifiers)
-	var/datum/effect_system/spark_spread/S = new()
-	var/turf/front = get_turf(src)
-	if(istype(I, /obj/item/gear/wood) && special_cog)
-		var/obj/item/gear/wood/cog = I
+/obj/item/contraption/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/gear/wood) && special_cog)
+		var/turf/front = get_turf(src)
+		var/obj/item/gear/wood/cog = tool
 		if(cog.misfire_modification)
 			misfire_chance = CLAMP(misfire_chance + cog.misfire_modification, 0, 100)
 		if(cog.name_prefix)
@@ -108,27 +107,33 @@
 		qdel(cog)
 		playsound(src, pick('sound/combat/hits/onwood/fence_hit1.ogg', 'sound/combat/hits/onwood/fence_hit2.ogg', 'sound/combat/hits/onwood/fence_hit3.ogg'), 100, FALSE)
 		shake_camera(user, 1, 1)
+		var/datum/effect_system/spark_spread/S = new()
 		S.set_up(1, 1, front)
 		S.start()
-		to_chat(user, "<span class='warning'>I use [cog] to modify [src]!</span>")
-		return
-	if(istype(I, accepted_power_source))
+		to_chat(user, "<span class='warning'>tool use [cog] to modify [src]!</span>")
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, accepted_power_source))
+		var/turf/front = get_turf(src)
 		user.changeNext_move(CLICK_CD_FAST)
+		var/datum/effect_system/spark_spread/S = new()
 		S.set_up(1, 1, front)
 		S.start()
 		if(current_charge)
-			to_chat(user, span_info("I try to insert the [I.name] but there's already \a [initial(accepted_power_source.name)] inside!"))
+			to_chat(user, span_info("I try to insert the [tool.name] but there's already \a [initial(accepted_power_source.name)] inside!"))
 			playsound(src, 'sound/combat/hits/blunt/woodblunt (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
 		else
-			to_chat(user, span_info("I insert the [I.name] and the [name] starts ticking."))
+			to_chat(user, span_info("I insert the [tool.name] and the [name] starts ticking."))
 			current_charge = charge_per_source
 			playsound(src, 'sound/combat/hits/blunt/woodblunt (2).ogg', 100, TRUE)
-			qdel(I)
+			qdel(tool)
 			addtimer(CALLBACK(src, PROC_REF(play_clock_sound)), 5)
-	if(istype(I, /obj/item/weapon/hammer))
-		hammer_action(I, user)
-	..()
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/weapon/hammer))
+		hammer_action(tool, user)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/contraption/proc/hammer_action(obj/item/I, mob/user)
 	user.changeNext_move(CLICK_CD_FAST)

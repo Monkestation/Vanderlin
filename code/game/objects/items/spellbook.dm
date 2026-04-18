@@ -296,46 +296,51 @@
 	icon_state = "spellbook_unfinished"
 	desc = "A fully bound tome of scroll paper. It's lacking a certain arcyne energy."
 
-/obj/item/natural/hide/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	var/found_table = locate(/obj/structure/table) in (loc)
-	if(istype(P, /obj/item/paper/scroll))
-		if(isturf(loc)&& (found_table))
-			var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
-			if(do_after(user, crafttime, target = src))
-				playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
-				to_chat(user, span_notice("I add the first few pages to the leather cover..."))
-				new /obj/item/spellbook_unfinished(loc)
-				qdel(P)
-				qdel(src)
-		else
-			to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
-	else
-		return ..()
+/obj/item/natural/hide/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return NONE
 
-/obj/item/spellbook_unfinished/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	var/found_table = locate(/obj/structure/table) in (loc)
-	if(istype(P, /obj/item/paper/scroll))
-		if(isturf(loc)&& (found_table))
-			var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
-			if(do_after(user, crafttime, target = src))
-				if(pages_left > 0)
-					playsound(src, 'sound/items/book_page.ogg', 100, TRUE)
-					pages_left -= 1
-					to_chat(user, span_notice("[pages_left+1] left..."))
-					qdel(P)
-				else
-					playsound(src, 'sound/items/book_open.ogg', 100, TRUE)
-					if(isarcyne(user))
-						to_chat(user, span_notice("The book is bound. I must find a catalyst to channel the arcyne into it now."))
-					else
-						to_chat(user, span_notice("I've made an empty book of thick, useless scroll paper. I can't even thumb through it!"))
-					new /obj/item/spellbook_unfinished/pre_arcyne(loc)
-					qdel(P)
-					qdel(src)
+	if(!isturf(loc) || !(locate(/obj/structure/table) in loc))
+		to_chat(user, span_warning("You need to put \the [name] on a table to work on it."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/crafttime = (100 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
+	if(do_after(user, crafttime, target = src))
+		playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
+		to_chat(user, span_notice("I add the first few pages to the leather cover..."))
+		new /obj/item/spellbook_unfinished(loc)
+		qdel(tool)
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/spellbook_unfinished/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return NONE
+
+	if(!isturf(loc) || !(locate(/obj/structure/table) in loc))
+		to_chat(user, span_warning("You need to put \the [name] on a table to work on it."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
+	if(do_after(user, crafttime, target = src))
+		if(pages_left > 0)
+			playsound(src, 'sound/items/book_page.ogg', 100, TRUE)
+			pages_left -= 1
+			to_chat(user, span_notice("[pages_left+1] left..."))
+			qdel(tool)
 		else
-			to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
-	else
-		return ..()
+			playsound(src, 'sound/items/book_open.ogg', 100, TRUE)
+			if(isarcyne(user))
+				to_chat(user, span_notice("The book is bound. I must find a catalyst to channel the arcyne into it now."))
+			else
+				to_chat(user, span_notice("I've made an empty book of thick, useless scroll paper. I can't even thumb through it!"))
+			new /obj/item/spellbook_unfinished/pre_arcyne(loc)
+			qdel(tool)
+			qdel(src)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/item/spellbook_unfinished/pre_arcyne/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	return NONE // Not touching the shit below fuck that
 
 /obj/item/spellbook_unfinished/pre_arcyne/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
@@ -547,28 +552,30 @@
 
 
 
-/obj/item/book/granter/spellbook/attackby(obj/item/P, mob/living/carbon/human/user, list/modifiers)
-	if(istype(P, /obj/item/gem))
-		if(!stored_gem)
-			if(isarcyne(user))
-				var/obj/item/gem/gem = P
-				var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
-				if(do_after(user, crafttime, target = src))
-					playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
-					to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))
-					stored_gem = gem.arcyne_potency
-					stored_attunement = gem.attuned
-					qdel(P)
-			else
-				to_chat(user, span_notice("Why am I jamming a gem into a book? I must look like a fool!"))
-		else
-			to_chat(user, span_notice("This tome is already coursing with arcyne energies..."))
-	else
-		return ..()
+/obj/item/book/granter/spellbook/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!isarcyne(user))
+		return NONE
 
+	if(!istype(tool, /obj/item/gem))
+		return NONE
+
+	if(stored_gem)
+		to_chat(user, span_notice("This tome is already coursing with arcyne energies..."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/gem/gem = tool
+
+	var/crafttime = (60 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane))*5))
+	if(do_after(user, crafttime, target = src))
+		playsound(src, 'sound/magic/glass.ogg', 100, TRUE)
+		to_chat(user, span_notice("Running my arcyne energy through this crystal, I imbue the tome with my natural essence, attuning it to my state of mind..."))
+		stored_gem = gem.arcyne_potency
+		stored_attunement = gem.attuned
+		qdel(tool)
+
+	return ITEM_INTERACT_SUCCESS
 
 // helper proc
-
 
 /obj/item/book/granter/spellbook/magician/Initialize()
 	. = ..()

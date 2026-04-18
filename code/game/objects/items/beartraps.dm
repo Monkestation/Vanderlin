@@ -85,17 +85,16 @@
 	..()
 
 /obj/item/restraints/legcuffs/beartrap/attackby(obj/item/W, mob/user, list/modifiers)
-	if(W.force && armed)
-		user.visible_message("<span class='warning'>[user] triggers \the [src] with [W].</span>", \
-				"<span class='danger'>I trigger \the [src] with [W]!</span>")
-		W.take_damage(20)
-		close_trap(user, W)
-		if(isliving(user))
-			var/mob/living/L = user
-			L.update_sneak_invis(TRUE)
-			L.consider_ambush()
-		return
-	..()
+	if(!armed || !W.force)
+		return ..()
+	user.visible_message("<span class='warning'>[user] triggers \the [src] with [W].</span>", \
+			"<span class='danger'>I trigger \the [src] with [W]!</span>")
+	W.take_damage(20)
+	close_trap(user, W)
+	if(isliving(user))
+		var/mob/living/L = user
+		L.update_sneak_invis(TRUE)
+		L.consider_ambush()
 
 /obj/item/restraints/legcuffs/beartrap/armed
 	armed = TRUE

@@ -272,38 +272,26 @@
 	var/pile = null
 	var/clod_type = null
 
-/obj/item/natural/clod/attackby(obj/item/W, mob/user, list/modifiers)
-	if(istype(W, /obj/item/weapon/shovel))
-		var/obj/item/weapon/shovel/S = W
-		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
-			if(!(src.item_flags & IN_STORAGE))
-				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-				src.forceMove(S)
-				S.heldclod = src
-				W.update_appearance(UPDATE_ICON_STATE)
-				return
-	return ..()
+/obj/item/natural/clod/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/weapon/shovel))
+		return NONE
 
-/obj/item/natural/clod/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
-	..()
-	if((!throwing || throwing.target_turf == loc) && isturf(loc) && old_loc != loc)
-		var/turf/T = loc
-		for(var/obj/structure/fluff/clodpile/C in T)
-			if(C == pile)
-				C.dirtamt = min(C.dirtamt+1, 5)
-				qdel(src)
-				return
-		var/dirtcount = 1
-		var/list/dirts = list()
-		for(var/obj/item/natural/clod/D in T)
-			if(D.clod_type == clod_type)
-				dirtcount++
-				dirts += D
-		if(dirtcount >=5)
-			for(var/obj/item/I in dirts)
-				qdel(I)
-			qdel(src)
-			new pile(T)
+	if(item_flags & IN_STORAGE)
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/shovelscoop))
+		return NONE
+
+	var/obj/item/weapon/shovel/S = tool
+	if(S.heldclod)
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+
+	forceMove(S)
+	S.heldclod = src
+	tool.update_appearance(UPDATE_ICON_STATE)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/clod/attack_self(mob/living/user, params)
 	user.visible_message("<span class='warning'>[user] scatters [src].</span>")
