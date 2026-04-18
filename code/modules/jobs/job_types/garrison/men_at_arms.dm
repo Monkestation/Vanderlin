@@ -31,7 +31,7 @@
 		EXP_TYPE_GARRISON = 600
 	)
 	verbs = list(
-		/mob/living/carbon/human/proc/torture_victim
+		/mob/proc/haltyell
 	)
 
 /datum/outfit/watchman
