@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /mob/dead/observer/screye
 	sight = 0
 	see_in_dark = 0
-	hud_type = /datum/hud/obs
+	hud_type = /datum/hud/obscured
 	can_reenter_corpse = FALSE
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST

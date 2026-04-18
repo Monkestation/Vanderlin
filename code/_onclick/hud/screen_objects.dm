@@ -1518,23 +1518,31 @@
 //Roguehud objects
 
 /atom/movable/screen/backhudl
+	abstract_type = /atom/movable/screen/backhudl
+	name = ""
 	icon = 'icons/mob/roguehudback2.dmi'
 	icon_state = ""
-	name = " "
 	screen_loc = ui_backhudl
 	plane = FULLSCREEN_PLANE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = MOUSE_OPACITY_ICON // Not really ideal
 
 /atom/movable/screen/backhudl/Click()
 	return
 
+/atom/movable/screen/backhudl/human
+	icon_state = "human"
+
 /atom/movable/screen/backhudl/ghost
 	icon_state = "dead"
-	icon = 'icons/mob/roguehudbackghost.dmi'
 
-/atom/movable/screen/backhudl/obs
-	icon_state = "obs"
-	icon = 'icons/mob/roguehudbackghost.dmi'
+/atom/movable/screen/backhudl/obscured
+	icon_state = "obscured"
+
+/atom/movable/screen/backhudl/empty
+	icon_state = "empty"
+
+/atom/movable/screen/backhudl/empty_border
+	icon_state = "empty_border"
 
 /atom/movable/screen/aim
 	name = ""
@@ -1834,16 +1842,6 @@
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
 	plane = ABOVE_HUD_PLANE
-
-/atom/movable/screen/scannies
-	icon = 'icons/mob/roguehudback2.dmi'
-	icon_state = "crt"
-	name = ""
-	screen_loc = ui_backhudl
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	alpha = 0
-	plane = HUD_PLANE
-	blend_mode = BLEND_MULTIPLY
 
 /atom/movable/screen/char_preview
 	name = "Me."

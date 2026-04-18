@@ -700,6 +700,19 @@
 			ring.tallowed = TRUE
 			ring.update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/inqarticles/tallowpot/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+	//Both static light sources and torches/lanterns have on bool so this invalid cast... it just works yeah
+	var/obj/machinery/light/fueled/F = target
+
+	if((istype(target, /obj/machinery/light/fueled) || istype(target, /obj/item/flashlight/flare/torch)) && F.on)
+		heatedup = 28
+		visible_message(span_info("[user] warms [src] using [target]."))
+		update_appearance(UPDATE_ICON_STATE)
+
+
 /obj/item/inqarticles/tallowpot/update_icon_state()
 	. = ..()
 	if(tallow)
@@ -1223,30 +1236,27 @@
 		return
 
 	if(!active)
-		var/input = tgui_alert(user, "WHAT DO YOU SEEK?", "THE PRICE IS PAID", list("BLOOD", "FIXATION"))
+		var/mob/living/carbon/human/target = fixation?.resolve()
+		var/input
+		if(!target)
+			input = "FIXATION" //skips through the tgui alert if target isn't set
+		else
+			input = tgui_alert(user, "THE MIRROR IS FIXATED ON [uppertext(target.real_name)]. WILL YOU REVEAL YOUR GAZE?", "THE PRICE IS PAID", list("STALK BLOOD", "FIXATION"))
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
-
-		var/mob/living/carbon/human/target
-
 		if(input == "FIXATION")
-			var/name = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
+			var/name = html_decode(browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID"))
 			if(!name)
 				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(HL.real_name == name)
+				if(lowertext(HL.real_name) == lowertext(name))
 					fixation = WEAKREF(HL)
 					target = HL
-					break
-			playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-			to_chat(user, span_warning("[src] makes a grating sound."))
+					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+					to_chat(user, span_warning("[src] makes a grating sound."))
+					return
+			to_chat(user, span_warning("The mirror makes no sound... It could not locate a person of such name."))
 			return
-		else if(input == "BLOOD")
-			target = feeder?.resolve()
-
-		if(!target)
-			return
-
 		active = TRUE
 		openstate = "active"
 		update_appearance(UPDATE_ICON_STATE)
@@ -1271,6 +1281,10 @@
 		return
 
 	playsound(src, 'sound/items/blackmirror_use.ogg', 100, FALSE)
+
+	if(target.real_name == user.real_name) //prevents bugging the timer through looking at yourself
+		to_chat(user, span_danger("I see my reflection in the mirror... It is quite distorted, but what am I trying to achieve?"))
+		return
 
 	ADD_TRAIT(user, TRAIT_NOSSDINDICATOR, "blackmirror")
 
@@ -1343,7 +1357,6 @@
 /obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
-
 /obj/item/inqarticles/bmirror/proc/openorshut(mob/user)
 	if(active)
 		to_chat(user, span_warning("I cannot close the mirror while it's active."))
@@ -1393,12 +1406,12 @@
 	var/mob/living/L = usr
 	if(!istype(L))
 		return
-
-	var/atom/movable/target = null
-	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
-		target = source
-	else
+	var/mob/living/target = null
+	var/input = tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD", "LOOK BACK"))
+	if(input == "TRACE BLOOD")
 		target = source.feeder?.resolve()
+	else if(input == "LOOK BACK")
+		target = source
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
 	if(!target)

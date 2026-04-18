@@ -435,6 +435,7 @@
 												span_userdanger("My muscles spasm as i am brought back to life!"))
 								target.emote("breathgasp")
 								target.adjust_jitter(100 SECONDS)
+								add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
 								target.apply_status_effect(/datum/status_effect/debuff/revive)
 								target.remove_client_colour(/datum/client_colour/monochrome/death)
 								record_round_statistic(STATS_CPR_REVIVALS, 1)
