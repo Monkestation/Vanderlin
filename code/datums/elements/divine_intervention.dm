@@ -1,6 +1,6 @@
 /datum/element/divine_intervention
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	var/datum/stress_event/stress_event
 	var/datum/patron/patron
 	var/allows_pantheon

@@ -37,10 +37,6 @@
 	//End positions
 	#define COMPONENT_EXNAME_CHANGED 1
 #define COMSIG_ATOM_SMOOTHED_ICON "atom_smooth_icon"
-#define COMSIG_ATOM_ENTERED "atom_entered"                      //from base of atom/Entered(): (atom/movable/entering, /atom)
-#define COMSIG_ATOM_EXIT "atom_exit"							//from base of atom/Exit(): (/atom/movable/exiting, /atom/newloc)
-	#define COMPONENT_ATOM_BLOCK_EXIT 1
-#define COMSIG_ATOM_EXITED "atom_exited"						//from base of atom/Exited(): (atom/movable/exiting, atom/newloc)
 #define COMSIG_ATOM_BUMPED "atom_bumped"						//from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_EX_ACT "atom_ex_act"						//from base of atom/ex_act(): (severity, target)
 #define COMSIG_ATOM_FIRE_ACT "atom_fire_act"					//from base of atom/fire_act(): (added, maxstacks)
@@ -69,20 +65,8 @@
 	#define COMPONENT_BLOCK_TELEPORT 1
 #define COMSIG_ATOM_ORBIT_BEGIN "atom_orbit_begin"           //called when an atom starts orbiting another atom: (atom)
 #define COMSIG_ATOM_ORBIT_STOP "atom_orbit_stop"           //called when an atom stops orbiting another atom: (atom)
-/////////////////
-//This signal return value bitflags can be found in __DEFINES/misc.dm
-#define COMSIG_ATOM_INTERCEPT_Z_FALL "movable_intercept_z_impact"	//called for each movable in a turf contents on /turf/zImpact(): (atom/movable/A, levels)
-#define COMSIG_ATOM_FALL_INTERACT "atom_fall_interact"
-#define COMSIG_MOB_FALL_IMPACT	"mob_fall_impact"
 
 /////////////////
-
-#define COMSIG_ENTER_AREA "enter_area" 						//from base of area/Entered(): (/area)
-#define COMSIG_EXIT_AREA "exit_area" 							//from base of area/Exited(): (/area)
-
-// /area signals
-#define COMSIG_AREA_ENTERED "area_entered" 						//from base of area/Entered(): (atom/movable/M)
-#define COMSIG_AREA_EXITED "area_exited" 							//from base of area/Exited(): (atom/movable/M)
 
 // /turf signals
 #define COMSIG_TURF_CHANGE "turf_change"						//from base of turf/ChangeTurf(): (path, list/new_baseturfs, flags, list/transferring_comps)
@@ -92,7 +76,6 @@
 
 // /mob signals
 #define COMSIG_MOB_BREAK_SNEAK "mob_break_sneak"
-#define COMSIG_MOB_DEATH "mob_death"							//from base of mob/death(): (gibbed)
 
 #define COMSIG_MOB_TRY_BARK "try_bark"
 #define COMSIG_MOB_TRY_EMOTE "try_emote"
@@ -112,7 +95,7 @@
 #define COMSIG_MOB_ATTACK_HAND "mob_attack_hand"				//from base of
 #define COMSIG_MOB_ITEM_ATTACK "mob_item_attack"				//from base of /obj/item/attack(): (mob/M, mob/user)
 	#define COMPONENT_ITEM_NO_ATTACK 1
-#define COMSIG_MOB_APPLY_DAMGE	"mob_apply_damage"				//from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone)
+#define COMSIG_MOB_APPLY_DAMAGE	"mob_apply_damage"				//from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone)
 #define COMSIG_MOB_ITEM_AFTERATTACK "mob_item_afterattack"		//from base of obj/item/afterattack(): (atom/target, mob/user, proximity_flag, click_parameters)
 #define COMSIG_MOB_ITEM_ATTACK_QDELETED "mob_item_attack_qdeleted"	//from base of obj/item/attack_qdeleted(): (atom/target, mob/user, proxiumity_flag, click_parameters)
 #define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"			//from base of mob/RangedAttack(): (atom/A, params)
@@ -312,8 +295,11 @@
 #define ARCH_MAXDROP "max_drop_amount"				//each item's max drop amount
 
 //Ouch my toes!
-#define CALTROP_BYPASS_SHOES 1
-#define CALTROP_IGNORE_WALKERS 2
+#define CALTROP_BYPASS_SHOES (1 << 0)
+#define CALTROP_IGNORE_WALKERS (1 << 1)
+#define CALTROP_SILENT (1 << 2)
+#define CALTROP_NOSTUN (1 << 3)
+#define CALTROP_NOCRAWL (1 << 4)
 
 //Xenobio hotkeys
 #define COMSIG_XENO_SLIME_CLICK_CTRL "xeno_slime_click_ctrl"				//from slime CtrlClickOn(): (/mob)

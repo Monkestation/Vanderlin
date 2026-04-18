@@ -22,40 +22,71 @@
 		for(var/thing in speech_modifiers)
 			qdel(thing) // Lazylist
 
-/mob/living/carbon/ZImpactDamage(turf/T, levels)
-	var/obj/item/bodypart/affecting
-	if(prob(66))
-		affecting = get_bodypart("[pick("r","l")]_leg")
-		to_chat(src, "<span class='warning'>I land on my leg!</span>")
-		if(affecting && apply_damage((levels * 10), BRUTE, affecting))		// 100 brute damage
-			update_damage_overlays()
-	else
-		switch(rand(1,3))
-			if(1)
-				affecting = get_bodypart("[pick("r","l")]_arm")
-				to_chat(src, "<span class='warning'>I land on my arm!</span>")
-				if(affecting && apply_damage((levels * 10), BRUTE, affecting))		// 100 brute damage
-					update_damage_overlays()
-			if(2)
-				affecting = get_bodypart("chest")
-				to_chat(src, "<span class='warning'>I land on my chest!</span>")
-				adjustOxyLoss(50)
-				emote("breathgasp")
-				if(affecting && apply_damage((levels * 10), BRUTE, affecting))		// 100 brute damage
-					update_damage_overlays()
-			if(3)
-				affecting = get_bodypart("head")
-				to_chat(src, "<span class='warning'>I land on my head!</span>")
-				if(levels > 2)
-					AdjustUnconscious(levels * 100)
-					if(affecting && apply_damage((levels * 10), BRUTE, affecting))		// 100 brute damage
-						update_damage_overlays()
-				else
-					if(affecting && apply_damage((levels * 10), BRUTE, affecting))		// 100 brute damage
-						update_damage_overlays()
+/mob/living/carbon/onZImpact(turf/impacted_turf, levels, impact_flags)
+	if(istype(impacted_turf, /turf/open/water))
+		record_round_statistic(STATS_MOAT_FALLERS)
+	. = ..()
 
-	AdjustStun(levels * 20)
-	AdjustKnockdown(levels * 20)
+/mob/living/carbon/ZImpactDamage(turf/T, levels)
+	. = ..()
+	if(. & ZIMPACT_CANCEL_DAMAGE)
+		return
+
+	add_stress(/datum/stress_event/felldown)
+	record_round_statistic(STATS_ANKLES_BROKEN)
+	var/chat_message
+	var/obj/item/bodypart/affecting
+	if(body_position == STANDING_UP)
+		switch(rand(1, 9))
+			if(1 to 5)
+				affecting = get_bodypart(pick(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+				chat_message = span_danger("I fall on my [parse_zone(affecting)]!")
+			if(6, 7)
+				affecting = get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
+				chat_message = span_danger("I fall on my [parse_zone(affecting)]!")
+			if(8)
+				affecting = get_bodypart(BODY_ZONE_CHEST)
+				chat_message = span_danger("I fall flat on my chest! I'm winded!")
+				emote("gasp")
+				adjustOxyLoss(50)
+			if(9)
+				affecting = get_bodypart(BODY_ZONE_HEAD)
+				chat_message = span_danger("I fall on my head!")
+				if(levels > 2)
+					AdjustUnconscious(levels * 10 SECONDS)
+	else
+		switch(rand(1,4))
+			if(1)
+				affecting = get_bodypart(pick(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+				chat_message = span_danger("I fall on my [parse_zone(affecting)]!")
+			if(2)
+				affecting = get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
+				chat_message = span_danger("I fall on my [parse_zone(affecting)]!")
+			if(3)
+				affecting = get_bodypart(BODY_ZONE_CHEST)
+				chat_message = span_danger("I fall flat on my chest! I'm winded!")
+				emote("gasp")
+				adjustOxyLoss(50)
+			if(4)
+				affecting = get_bodypart(BODY_ZONE_HEAD)
+				chat_message = span_danger("I fall on my head!")
+				if(levels > 2)
+					AdjustUnconscious(levels * 10 SECONDS)
+
+	var/encumbrance_multiplier = 0.7 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.3) // 0 encumberance = 30% damage reduction to base falling damage
+	AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
+	AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
+
+	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
+	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
+	damage *= skill_modifier
+	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT)))
+		if(levels > 1)
+			//absurd damage to guarantee a crit
+			affecting.try_crit(BCLASS_TWIST, 300)
+
+	if(chat_message)
+		to_chat(src, chat_message)
 
 /mob/living/carbon/swap_hand(held_index)
 	if(!held_index)

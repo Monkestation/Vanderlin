@@ -256,8 +256,8 @@
 		var/turf/open/water/W = T
 		if(!LAZYLEN(W.children))
 			W.water_reagent = blood.reagent_type // this is dumb, but it works for now
-			W.mapped = FALSE // no infinite vitae glitch
-			W.water_volume = 10
+			W.volume_status = WATER_VOLUME_NORMAL // no infinite vitae glitch
+			W.water_volume = MINIMUM_WATER_VOLUME
 
 		return
 	var/obj/effect/decal/cleanable/blood/splatter/splatter = new /obj/effect/decal/cleanable/blood/splatter(T, blood.color)
@@ -281,9 +281,9 @@
 		if(istype(T, /turf/open/water))
 			var/turf/open/water/W = T
 			W.water_reagent = blood.reagent_type // this is dumb, but it works for now
-			W.mapped = FALSE // no infinite vitae glitch
-			W.water_maximum = 10
-			W.water_volume = 10
+			W.volume_status = WATER_VOLUME_NORMAL // no infinite vitae glitch
+			W.water_volume_maximum = MINIMUM_WATER_VOLUME
+			W.water_volume = MINIMUM_WATER_VOLUME
 			return
 
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)

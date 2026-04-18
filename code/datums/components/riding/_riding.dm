@@ -1,3 +1,9 @@
+
+/// Offsets applied for people riding something
+#define RIDING_SOURCE "riding"
+/// Offsets applied for something being ridden
+#define BEING_RIDDEN_SOURCE "being_ridden"
+
 /datum/component/riding
 	var/last_vehicle_move = 0 //used for move delays
 	var/last_move_diagonal = FALSE
@@ -34,6 +40,7 @@
 	RegisterSignal(parent, COMSIG_MOVABLE_BUCKLE, PROC_REF(vehicle_mob_buckle))
 	RegisterSignal(parent, COMSIG_MOVABLE_UNBUCKLE, PROC_REF(vehicle_mob_unbuckle))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(vehicle_moved))
+	RegisterSignal(parent, COMSIG_BUCKLED_CAN_Z_MOVE, PROC_REF(riding_can_z_move))
 
 /datum/component/riding/proc/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
 	var/atom/movable/AM = parent
@@ -83,59 +90,63 @@
 		AM.unbuckle_mob(M)
 	return TRUE
 
+#define GET_X_OFFSET(offsets) (length(offsets) >= 1 ? offsets[1] : 0)
+#define GET_Y_OFFSET(offsets) (length(offsets) >= 2 ? offsets[2] : 0)
+#define GET_LAYER(offsets, default) (length(offsets) >= 3 ? offsets[3] : default)
+
+/datum/component/riding/proc/update_rider_layer_and_offsets(dir, passindex, mob/living/rider, animate = FALSE)
+	if(rider.dir != dir)
+		rider.setDir(dir)
+
+	var/list/diroffsets = get_rider_offsets_and_layers(passindex, rider)?["[dir]"]
+	var/x_offset = GET_X_OFFSET(diroffsets)
+	var/y_offset = GET_Y_OFFSET(diroffsets)
+	var/layer = GET_LAYER(diroffsets, rider.layer)
+
+	// if they are intended to be buckled, offset their existing offset
+	var/atom/movable/seat = parent
+	if(seat.buckle_lying && rider.body_position == LYING_DOWN)
+		y_offset += (-1 * PIXEL_Y_OFFSET_LYING)
+
+	// Rider uses pixel_z offsets as they're above the turf, not up north on the turf
+	rider.add_offsets(RIDING_SOURCE, x_add = x_offset, z_add = y_offset, animate = animate)
+	rider.layer = layer
+
+#undef GET_X_OFFSET
+#undef GET_Y_OFFSET
+#undef GET_LAYER
+
 /datum/component/riding/proc/force_dismount(mob/living/M)
 	var/atom/movable/AM = parent
 	AM.unbuckle_mob(M)
 
 /datum/component/riding/proc/handle_vehicle_offsets()
-	var/atom/movable/AM = parent
-	var/AM_dir = "[AM.dir]"
+	var/atom/movable/seat = parent
+	if(!seat.has_buckled_mobs())
+		return
+
 	var/passindex = 0
-	if(AM.has_buckled_mobs())
-		for(var/m in AM.buckled_mobs)
-			passindex++
-			var/mob/living/buckled_mob = m
-			var/list/offsets = get_offsets(passindex)
-			var/rider_dir = get_rider_dir(passindex)
-
-			// Only setDir if it actually changed
-			if(buckled_mob.dir != rider_dir)
-				buckled_mob.setDir(rider_dir)
-
-			dir_loop:
-				for(var/offsetdir in offsets)
-					if(offsetdir == AM_dir)
-						var/list/diroffsets = offsets[offsetdir]
-						var/x2off = diroffsets[1]
-						var/y2off = (diroffsets.len >= 2) ? diroffsets[2] : null
-						var/new_layer = (diroffsets.len == 3) ? diroffsets[3] : null
-
-						// Only update layer if it changed
-						if(!isnull(new_layer) && buckled_mob.layer != new_layer)
-							buckled_mob.layer = new_layer
-
-						// Only call set_mob_offsets if values actually differ
-						var/list/current_offsets = buckled_mob.mob_offsets["riding"]
-						if(!current_offsets || current_offsets["x"] != x2off || current_offsets["y"] != y2off)
-							buckled_mob.set_mob_offsets("riding", _x = x2off, _y = y2off)
-
-						break dir_loop
+	for(var/mob/living/buckled_mob as anything in seat.buckled_mobs)
+		passindex++
+		update_rider_layer_and_offsets(get_rider_dir(passindex), passindex, buckled_mob)
 
 /datum/component/riding/proc/set_vehicle_dir_offsets(dir, x, y)
 	directional_vehicle_offsets["[dir]"] = list(x, y)
 
-//Override this to set my vehicle's various pixel offsets
-/datum/component/riding/proc/get_offsets(pass_index) // list(dir = x, y, layer)
-	. = list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 0), TEXT_EAST = list(0, 0), TEXT_WEST = list(0, 0))
-	if(riding_offsets["[pass_index]"])
-		. = riding_offsets["[pass_index]"]
-	else if(riding_offsets["[RIDING_OFFSET_ALL]"])
-		. = riding_offsets["[RIDING_OFFSET_ALL]"]
-
-/datum/component/riding/proc/set_riding_offsets(index, list/offsets)
-	if(!islist(offsets))
-		return FALSE
-	riding_offsets["[index]"] = offsets
+/**
+ * Determines where riders get offset while riding
+ *
+ * * pass_index: The index of the rider in the list of buckled mobs
+ * * mob/offsetter: The mob that is being offset
+ */
+/datum/component/riding/proc/get_rider_offsets_and_layers(pass_index, mob/offsetter) as /list // list(dir = x, y, layer)
+	RETURN_TYPE(/list)
+	return list(
+		TEXT_NORTH = list(0, 0),
+		TEXT_SOUTH = list(0, 0),
+		TEXT_EAST =  list(0, 0),
+		TEXT_WEST =  list(0, 0),
+	)
 
 //Override this to set the passengers/riders dir based on which passenger they are.
 //ie: rider facing the vehicle's dir, but passenger 2 facing backwards, etc.
@@ -146,7 +157,7 @@
 //BUCKLE HOOKS
 /datum/component/riding/proc/restore_position(mob/living/buckled_mob)
 	if(buckled_mob)
-		buckled_mob.reset_offsets("riding")
+		buckled_mob.remove_offsets("riding")
 		if(buckled_mob.client)
 			buckled_mob.client.view_size.resetToDefault()
 
@@ -234,6 +245,11 @@
 			qdel(O)
 	return TRUE
 
+/// Extra checks before buckled.can_z_move can be called in mob/living/can_z_move()
+/datum/component/riding/proc/riding_can_z_move(atom/movable/movable_parent, direction, turf/start, turf/destination, z_move_flags, mob/living/rider)
+	SIGNAL_HANDLER
+	return COMPONENT_RIDDEN_ALLOW_Z_MOVE
+
 /obj/item/riding_offhand
 	name = "offhand"
 	icon = 'icons/obj/items_and_weapons.dmi'
@@ -261,3 +277,6 @@
 		if(rider in AM.buckled_mobs)
 			AM.unbuckle_mob(rider)
 	. = ..()
+
+#undef RIDING_SOURCE
+#undef BEING_RIDDEN_SOURCE

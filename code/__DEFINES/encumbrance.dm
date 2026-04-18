@@ -14,5 +14,5 @@
 
 #define FALL_DAMAGE_SCALE 0.1
 
-// you could say i'm sonewhat of a sigmoid myself
+// you could say i'm sonewhat of a sigmoid myself. tier = 0 => 0.00252. tier = 4 => 0.982
 #define ENCUMBRANCE_TO_SIGMOID(tier) (1 / (1 + (2.71 ** -(((tier / 4.0) - 0.6)) * 10)))

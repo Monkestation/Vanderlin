@@ -74,7 +74,7 @@
 	)
 	if(target.health > HALFWAYCRITDEATH)
 		target.adjustOxyLoss(target.health - HALFWAYCRITDEATH)
-
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_REVIVE, 1)
 	for(var/obj/item/organ/organs as anything in target.internal_organs)
 		if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
 			organs.set_germ_level(INFECTION_LEVEL_ONE*0.2)

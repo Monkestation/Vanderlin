@@ -404,9 +404,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/togg = FALSE
 	var/base_state = "floorhatch"
 	resistance_flags = INDESTRUCTIBLE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
 
 /obj/structure/floordoor/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
 
@@ -425,6 +427,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(togg)
 		icon_state = "[base_state]0"
 		obj_flags = null
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/atom/movable/M in loc)
@@ -432,6 +435,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	else
 		icon_state = "[base_state]1"
 		obj_flags = BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	if(user)
 		log_game("[user] triggered [src] at [x], [y], [z]. REDSTONE ID: [redstone_id]")
 
@@ -463,6 +467,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		sleep(delay2open)
 		icon_state = "[base_state]0"
 		obj_flags = null
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/atom/movable/M in loc)
@@ -473,6 +478,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		sleep(delay2close)
 		icon_state = "[base_state]1"
 		obj_flags = BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		sleep(40-delay2close)
 		changing_state = FALSE
 

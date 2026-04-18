@@ -173,6 +173,7 @@
 	base_state = "wallcandleb"
 
 /obj/machinery/light/fueled/wallfire/candle/blue/extinguish()
+	. = ..()
 	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/blue/burn_out()
@@ -190,6 +191,7 @@
 	base_state = "skullwallcandle"
 
 /obj/machinery/light/fueled/wallfire/candle/skull/extinguish()
+	. = ..()
 	return FALSE
 
 /obj/machinery/light/fueled/wallfire/candle/skull/burn_out()
@@ -382,6 +384,10 @@
 	crossfire = FALSE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
+
+/obj/machinery/light/fueled/chand/Initialize()
+	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/machinery/light/fueled/chand/attack_hand(mob/user)
 	if(isliving(user) && on)
@@ -582,12 +588,12 @@
 
 /obj/machinery/light/fueled/campfire/pyre/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 10)
+	M.add_offsets(type, x_add = 0, y_add = 10)
 	M.setDir(SOUTH)
 
 /obj/machinery/light/fueled/campfire/pyre/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/machinery/light/fueled/campfire/longlived
 	fueluse = 180 MINUTES

@@ -26,10 +26,12 @@
 	. = ..()
 	to_chat(owner, span_notice("My steps feel lighter than normal."))
 	ADD_TRAIT(owner, TRAIT_LIGHT_STEP, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/inspiration/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_LIGHT_STEP, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/buff/song/furtive_fortissimo
 	name = "Furtive Fortissimo"

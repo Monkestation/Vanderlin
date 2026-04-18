@@ -295,7 +295,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	for(var/datum/mind/M in owners)
 		if(considered_alive(M))
 			return FALSE
-		if(M.current?.suiciding) //killing myself ISN'T glorious.
+		if(HAS_TRAIT(M.current, TRAIT_SUICIDED)) //killing myself ISN'T glorious.
 			return FALSE
 	return TRUE
 

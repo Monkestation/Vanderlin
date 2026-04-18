@@ -186,7 +186,7 @@
 	for(var/slot in organ_efficiency)
 		if(organ_efficiency[slot] <= cap)
 			continue
-		organ_efficiency[slot] = max(cap, organ_efficiency - amount)
+		organ_efficiency[slot] = max(cap, organ_efficiency[slot] - amount)
 
 /obj/item/organ/proc/scarred_below(value)
 	for(var/slot in organ_efficiency)

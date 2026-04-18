@@ -369,8 +369,7 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/human/C = owner
-		C.resize = 1.2
-		C.update_transform()
+		C.update_transform(resize = 1.2)
 		C.RemoveElement(/datum/element/footstep, C.footstep_type, 1, -6)
 		C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
 
@@ -383,8 +382,7 @@
 		to_chat(C, span_warning("Dendor's transformation fades, flesh shrinking back. My body aches..."))
 		C.adjustBruteLoss(10)
 		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)
-		C.resize = (1/1.2)
-		C.update_transform()
+		C.update_transform(resize = 1/1.2)
 		C.RemoveElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
 		C.AddElement(/datum/element/footstep, C.footstep_type, 1, -6)
 
