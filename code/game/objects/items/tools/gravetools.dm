@@ -250,20 +250,18 @@
 /obj/item/burial_shroud/attack_self(mob/user, list/modifiers)
 	deploy_bodybag(user, user.loc)
 
-/obj/item/burial_shroud/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(proximity)
-		if(isopenturf(target))
-			deploy_bodybag(user, target)
+/obj/item/burial_shroud/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(isopenturf(interacting_with))
+		deploy_bodybag(user, interacting_with)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/burial_shroud/proc/deploy_bodybag(mob/user, atom/location)
-	var/obj/structure/closet/body_bag/R = new unfoldedbag_path(location)
+	var/obj/structure/closet/burial_shroud/R = new unfoldedbag_path(location)
 	R.open(user)
 	R.add_fingerprint(user)
 	R.foldedbag_instance = src
 	moveToNullspace()
 	user.update_a_intents()
-
 
 /obj/structure/closet/burial_shroud
 	name = "winding sheet"
@@ -283,9 +281,7 @@
 	drag_slowdown = 0
 	horizontal = TRUE
 	var/foldedbag_path = /obj/item/burial_shroud
-	var/obj/item/bodybag/foldedbag_instance = null
-
-
+	var/obj/item/burial_shroud/foldedbag_instance = null
 
 /obj/structure/closet/burial_shroud/Destroy()
 	// If we have a stored bag, and it's in nullspace (not in someone's hand), delete it.
@@ -313,94 +309,6 @@
 			to_chat(usr, "<span class='warning'>There are too many things inside of [src] to fold it up!</span>")
 			return
 		visible_message("<span class='notice'>[usr] folds up [src].</span>")
-		var/obj/item/bodybag/B = foldedbag_instance || new foldedbag_path
-		usr.put_in_hands(B)
-		qdel(src)
-
-/obj/item/bodybag
-	name = "body bag"
-	desc = ""
-	icon = 'icons/obj/bodybag.dmi'
-	icon_state = "bodybag_folded"
-	w_class = WEIGHT_CLASS_SMALL
-	item_weight = 184 GRAMS
-	var/unfoldedbag_path = /obj/structure/closet/body_bag
-
-/obj/item/bodybag/attack_self(mob/user, list/modifiers)
-	deploy_bodybag(user, user.loc)
-
-/obj/item/bodybag/afterattack(atom/target, mob/user, proximity, list/modifiers)
-	. = ..()
-	if(proximity)
-		if(isopenturf(target))
-			deploy_bodybag(user, target)
-
-/obj/item/bodybag/proc/deploy_bodybag(mob/user, atom/location)
-	var/obj/structure/closet/body_bag/R = new unfoldedbag_path(location)
-	R.open(user)
-	R.add_fingerprint(user)
-	R.foldedbag_instance = src
-	moveToNullspace()
-
-/obj/item/bodybag/suicide_act(mob/user)
-	if(isopenturf(user.loc))
-		user.visible_message("<span class='suicide'>[user] is crawling into [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		var/obj/structure/closet/body_bag/R = new unfoldedbag_path(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
-		user.forceMove(R)
-		playsound(src, 'sound/blank.ogg', 15, TRUE, -3)
-		return (OXYLOSS)
-	..()
-
-
-/obj/structure/closet/body_bag
-	name = "body bag"
-	desc = ""
-	icon = 'icons/obj/bodybag.dmi'
-	icon_state = "bodybag"
-	density = FALSE
-	mob_storage_capacity = 2
-	open_sound = 'sound/blank.ogg'
-	close_sound = 'sound/blank.ogg'
-	open_sound_volume = 15
-	close_sound_volume = 15
-	integrity_failure = 0
-	anchorable = FALSE
-	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-	drag_slowdown = 0
-	var/foldedbag_path = /obj/item/bodybag
-	var/obj/item/bodybag/foldedbag_instance = null
-
-/obj/structure/closet/body_bag/Destroy()
-	// If we have a stored bag, and it's in nullspace (not in someone's hand), delete it.
-	if (foldedbag_instance && !foldedbag_instance.loc)
-		QDEL_NULL(foldedbag_instance)
-	return ..()
-
-/obj/structure/closet/body_bag/open(mob/living/user)
-	. = ..()
-	if(.)
-		mouse_drag_pointer = MOUSE_INACTIVE_POINTER
-
-/obj/structure/closet/body_bag/close()
-	. = ..()
-	if(.)
-		density = FALSE
-		mouse_drag_pointer = MOUSE_ACTIVE_POINTER
-
-/obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
-	. = ..()
-	if(over_object == usr && Adjacent(usr) && (in_range(src, usr) || usr.contents.Find(src)))
-		if(!ishuman(usr))
-			return
-		if(opened)
-			to_chat(usr, "<span class='warning'>I wrestle with [src], but it won't fold while unzipped.</span>")
-			return
-		if(contents.len)
-			to_chat(usr, "<span class='warning'>There are too many things inside of [src] to fold it up!</span>")
-			return
-		visible_message("<span class='notice'>[usr] folds up [src].</span>")
-		var/obj/item/bodybag/B = foldedbag_instance || new foldedbag_path
+		var/obj/item/burial_shroud/B = foldedbag_instance || new foldedbag_path
 		usr.put_in_hands(B)
 		qdel(src)

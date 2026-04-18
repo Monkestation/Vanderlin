@@ -106,24 +106,29 @@
 			if("onbelt")
 				return list("shrink" = 0.4,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/thresher/afterattack(obj/target, mob/user, proximity, list/modifiers)
-	if(user.used_intent.type == /datum/intent/flailthresh)
-		if(!proximity)
-			return
-		if(isturf(target.loc))
-			var/turf/T = target.loc
-			var/found = FALSE
-			for(var/obj/item/natural/chaff/C in T)
-				found = TRUE
-				C.thresh()
-			if(found)
-				playsound(src,"plantcross", 90, FALSE)
-				playsound(src,"smashlimb", 35, FALSE)
-				apply_farming_fatigue(user, 10)
-				user.visible_message(span_notice("[user] threshes the stalks!"), \
-									span_notice("I thresh the stalks."))
-		return
-	..()
+/obj/item/weapon/thresher/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/flailthresh))
+		return NONE
+
+	var/turf/target_turf = get_turf(interacting_with)
+
+	var/found
+	for(var/obj/item/natural/chaff/C in target_turf)
+		found = TRUE
+		C.thresh()
+
+	if(found)
+		playsound(src,"plantcross", 90, FALSE)
+		playsound(src,"smashlimb", 35, FALSE)
+		apply_farming_fatigue(user, 10)
+		user.visible_message(
+			span_notice("[user] threshes the stalks!"), \
+			span_notice("I thresh the stalks.")
+			)
+		return ITEM_INTERACT_SUCCESS
 
 /*---------\
 |  Sickle  |
@@ -429,18 +434,24 @@
 	misscost = 0
 	no_attack = TRUE
 
-/obj/item/weapon/pitchfork/afterattack(obj/target, mob/user, proximity, list/modifiers)
-	if((!proximity) || (!HAS_TRAIT(src, TRAIT_WIELDED)))
-		return ..()
-	if(isopenturf(target))
-		if(forked.len)
-			for(var/obj/item/I in forked)
-				I.forceMove(target)
-				forked -= I
-			to_chat(user, span_warning("I dump the stalks."))
-		update_appearance(UPDATE_ICON_STATE)
-		return
-	return ..()
+/obj/item/weapon/pitchfork/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
+		return NONE
+
+	if(!isopenturf(interacting_with))
+		return NONE
+
+	if(!length(forked))
+		return NONE
+
+	for(var/obj/item/I in forked)
+		I.forceMove(interacting_with)
+		forked -= I
+
+	to_chat(user, span_warning("I dump the stalks."))
+	update_appearance(UPDATE_ICON_STATE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/pitchfork/on_unwield(obj/item/source, mob/living/carbon/user)
 	. = ..()

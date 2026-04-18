@@ -3,44 +3,47 @@
 	desc = "A decorative piece of cloth meant to be used as a saddle decoration. This one fits on a Saiga."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "caparison"
+	gender = NEUTER
+	item_weight = 500 GRAMS
+
 	var/caparison_icon = 'icons/roguetown/mob/monster/saiga.dmi'
 	var/caparison_state = "caparison"
 	var/detail_state
 	var/list/detail_types
 	var/list/symbol_types
 	var/female_caparison_state = "caparison-f"
-	gender = NEUTER
-	item_weight = 500 GRAMS
 	var/list/valid_animal_types = list(/mob/living/simple_animal/hostile/retaliate/saiga)
 
-/obj/item/caparison/attack(mob/living/M, mob/living/user)
-	if(!istype(M, /mob/living/simple_animal))
-		to_chat(user, span_warning("\The [src] can only be used on animals!"))
-		return
-	if(!is_type_in_list(M, valid_animal_types))
-		to_chat(user, span_warning("\The [src] cannot be used on [M]! It is only meant for specific animals."))
-		return
+/obj/item/caparison/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /mob/living/simple_animal))
+		return NONE
 
-	var/mob/living/simple_animal/animal = M
+	if(!is_type_in_list(interacting_with, valid_animal_types))
+		to_chat(user, span_warning("\The [src] cannot be used on [interacting_with]! It is only meant for specific animals."))
+		return ITEM_INTERACT_BLOCKING
+
+	var/mob/living/simple_animal/animal = interacting_with
 	if(animal.adult_growth)
 		to_chat(user, span_warning("[animal] is a juvenile and cannot wear a caparison!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(animal.ccaparison)
 		to_chat(user, span_warning("[animal] is already wearing a caparison!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(!animal.ssaddle)
 		to_chat(user, span_warning("[animal] needs to be saddled before you can fit a caparison onto it!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_notice("[user] is fitting a caparison onto [animal]..."), span_notice("I start fitting a caparison onto [animal]..."))
 	if(!do_after(user, 5 SECONDS, animal))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	animal.ccaparison = src
 	forceMove(animal)
-	animal.update_icon()
+	animal.update_appearance(UPDATE_ICON)
 	user.visible_message(span_notice("[user] fits a caparison onto [animal]."), span_notice("I fit a caparison onto [animal]."))
-
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/caparison/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
