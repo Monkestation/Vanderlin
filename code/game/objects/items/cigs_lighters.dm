@@ -69,6 +69,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/match/extinguish()
+	. = ..()
 	matchburnout()
 
 /obj/item/match/dropped(mob/user)
@@ -229,6 +230,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		playsound(src, 'sound/items/light_cig.ogg', 100, TRUE)
 
 /obj/item/clothing/face/cigarette/extinguish()
+	. = ..()
 	if(!lit)
 		return
 	attack_verb = null
@@ -547,6 +549,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/lighter/extinguish()
+	. = ..()
 	set_lit(FALSE)
 
 /obj/item/lighter/attack_self(mob/living/user, list/modifiers)

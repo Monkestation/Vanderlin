@@ -10,6 +10,12 @@
 ///from base of mob/living/set_buckled(): (new_buckled)
 #define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
 
+/// From /mob/living/update_offsets(animate) : (new_x, new_y, new_w, new_z, animate)
+#define COMSIG_LIVING_UPDATE_OFFSETS "living_update_offsets"
+
+///from base of mob/update_transform()
+#define COMSIG_LIVING_POST_UPDATE_TRANSFORM "living_post_update_transform"
+
 ///Signal sent when a keybind is deactivated
 #define DEACTIVATE_KEYBIND(A) "[A]_DEACTIVATED"
 #define COMSIG_KB_LIVING_VIEW_PET_COMMANDS "keybinding_living_view_pet_commands"
@@ -73,6 +79,14 @@
 #define COMSIG_LIVING_BEFRIENDED "living_befriended"
 /// From /mob/living/unfriend() : (mob/living/old_friend)
 #define COMSIG_LIVING_UNFRIENDED "living_unfriended"
+///From base of mob/living/ZImpactDamage() (mob/living, levels, turf/t)
+#define COMSIG_LIVING_Z_IMPACT "living_z_impact"
+	/// Just for the signal return, does not run normal living handing of z fall damage for mobs
+	#define ZIMPACT_CANCEL_DAMAGE (1<<0)
+	/// Do not show default z-impact message
+	#define ZIMPACT_NO_MESSAGE (1<<1)
+	/// Do not do the spin animation when landing
+	#define ZIMPACT_NO_SPIN (1<<2)
 
 ///from base of mob/living/set_body_position(): (new_position, old_position)
 #define COMSIG_LIVING_SET_BODY_POSITION  "living_set_body_position"
@@ -117,8 +131,6 @@
 
 #define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
 #define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
-/// From /mob/living/proc/set_swimming(): (swimming)
-#define COMSIG_LIVING_SWIM	"living_swim"
 
 /// From [mob/living/MiddleClickOn] before a middle mouse intent is performed
 #define COMSIG_MOB_PRE_SPECIAL_MIDDLE "pre_special_middle"

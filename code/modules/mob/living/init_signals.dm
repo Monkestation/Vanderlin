@@ -30,6 +30,8 @@
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_ENABLED, PROC_REF(on_movement_type_flag_enabled))
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_DISABLED, PROC_REF(on_movement_type_flag_disabled))
 
+	RegisterSignal(src, COMSIG_MOVABLE_EDIT_UNIQUE_IMMERSE_OVERLAY, PROC_REF(edit_immerse_overlay))
+
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_DEAF), PROC_REF(on_hearing_loss))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_DEAF), PROC_REF(on_hearing_regain))
 
@@ -206,6 +208,11 @@
 /mob/living/proc/on_movement_type_flag_disabled(datum/source, trait)
 	SIGNAL_HANDLER
 	update_movespeed(FALSE)
+
+/mob/living/proc/edit_immerse_overlay(datum/source, atom/movable/immerse_mask/effect_relay)
+	SIGNAL_HANDLER
+	effect_relay.transform = effect_relay.transform.Scale(1 / current_size)
+	effect_relay.transform = effect_relay.transform.Turn(-lying_angle)
 
 ///Called when [TRAIT_DEAF] is added to the mob
 /mob/living/proc/on_hearing_loss()

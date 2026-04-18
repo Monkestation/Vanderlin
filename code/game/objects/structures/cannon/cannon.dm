@@ -92,7 +92,7 @@
 			loaded_thing.throw_at(target, blast_range, 3, force = MOVE_FORCE_OVERPOWERING)
 			if(isliving(loaded_thing))
 				var/mob/living/loaded_living = loaded_thing
-				loaded_living.reset_offsets("structure_climb")
+				loaded_living.remove_offsets("structure_climb")
 
 	throw_at(get_step(src, REVERSE_DIR(dir)), 1, 3, spin = FALSE)
 

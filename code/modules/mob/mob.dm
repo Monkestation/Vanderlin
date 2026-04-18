@@ -457,7 +457,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
 		face_atom(examinify)
 		if(m_intent != MOVE_INTENT_SNEAK)
-			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]"))
+			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]."))
 		else if(isliving(examinify))
 			var/mob/living/examaniee = examinify
 			if(examaniee.peek_examine_check(src))
@@ -755,7 +755,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * no transform not set
  * * we are not restrained
  */
-/mob/proc/canface(atom/A)
+/mob/proc/canface(atom/atom_to_face)
 	if(client)
 		if(world.time < client.last_turn)
 			return FALSE
@@ -767,46 +767,16 @@ GLOBAL_VAR_INIT(mobids, 1)
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		return FALSE
-	if( buckled || stat != CONSCIOUS)
-		return FALSE
+	if( buckled || stat != CONSCIOUS || !atom_to_face || !x || !y || !atom_to_face.x || !atom_to_face.y )
+		return
 	return TRUE
 
 ///Checks mobility move as well as parent checks
-/mob/living/canface(atom/A)
+/mob/living/canface(atom/atom_to_face)
 	if(HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(world.time < last_dir_change + 5)
-		return
-	if(A && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE) //the reason this isn't a mobility_flags check is because you want them to be able to change dir if you're passively grabbing them
-		// get_cardinal_dir is inconsistent, reuse face_atom code
-		var/dx = A.x - src.x
-		var/dy = A.y - src.y
-		var/dir
-		if(!dx && !dy) // Wall items are graphically shifted but on the floor
-			if(A.pixel_y > 16)
-				dir = NORTH
-			else if(A.pixel_y < -16)
-				dir = SOUTH
-			else if(A.pixel_x > 16)
-				dir = EAST
-			else if(A.pixel_x < -16)
-				dir = WEST
-		else
-			if(abs(dx) < abs(dy))
-				if(dy > 0)
-					dir = NORTH
-				else
-					dir = SOUTH
-			else
-				if(dx > 0)
-					dir = EAST
-				else
-					dir = WEST
-		if(dir == pulledby.dir) // can never face away from the person grabbing you
-			return FALSE
-		for(var/obj/item/grabbing/G in grabbedby) // only chokeholds prevent turning
-			if(G.chokehold)
-				return FALSE
+		return FALSE
 	if(IsImmobilized())
 		return FALSE
 	return ..()

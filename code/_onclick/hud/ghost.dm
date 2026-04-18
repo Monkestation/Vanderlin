@@ -36,7 +36,7 @@
 
 /atom/movable/screen/ghost/ghost_up/Click()
 	var/mob/dead/observer/G = usr
-	G.ghost_up()
+	G.up()
 
 /atom/movable/screen/ghost/ghost_down
 	name = "Ghost Down"
@@ -45,7 +45,7 @@
 
 /atom/movable/screen/ghost/ghost_down/Click()
 	var/mob/dead/observer/G = usr
-	G.ghost_down()
+	G.down()
 
 /atom/movable/screen/ghost/after_life
 	name = "AFTERLIFE"

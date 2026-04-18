@@ -514,6 +514,7 @@
 	say("#[message]", bubble_type, spans, sanitize, language, ignore_spam, forced)
 
 /mob/living/get_language_holder(shadow=TRUE)
+	RETURN_TYPE(/datum/language_holder)
 	if(mind && shadow)
 		// Mind language holders shadow mob holders.
 		. = mind.get_language_holder()

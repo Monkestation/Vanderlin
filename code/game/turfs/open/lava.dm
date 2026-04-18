@@ -67,11 +67,11 @@
 		if(ishuman(arrived))
 			playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
 
-/turf/open/lava/Exited(atom/movable/gone, atom/new_loc)
+/turf/open/lava/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(isliving(gone))
+	if(isliving(gone) && !islava(gone.loc))
 		var/mob/living/L = gone
-		if(!islava(new_loc) && !L.on_fire)
+		if(!L.on_fire)
 			L.update_fire()
 
 /turf/open/lava/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
@@ -104,7 +104,7 @@
 /// Burns the target and makes the turf process (depending on the return value of do_burn()).
 #define LAVA_BE_BURNING 2
 
-/turf/open/lava/can_traverse_safely(atom/movable/traveler)
+/turf/open/lava/can_cross_safely(atom/movable/traveler)
 	return ..() && !can_burn_stuff(traveler) // can traverse safely if you won't burn in it
 
 ///Proc that sets on fire something or everything on the turf that's not immune to lava. Returns TRUE to make the turf start processing.

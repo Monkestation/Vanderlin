@@ -255,3 +255,12 @@
   ta3754859-max:
   - bugfix: Fixes inqusition black mirror, changes few buttons
   - qol: Red tallows can be now melted when used over a static light source
+2026-04-18:
+  KevinfromHP:
+  - admin: Fixes the Black Briar Admin Smite
+  - rscdel: Removed Ugly/Beautiful Be Special as these are granted by quirks now.
+  - rscadd: Adds "king" Be Special
+  - rscadd: Adds "Chippin' In" Be Special
+  - rscadd: Adds "Fat" Be Special
+  - bugfix: Black Briar should properly apply to Adv class selection.
+  - bugfix: Skeleton Be Special should work slightly better.

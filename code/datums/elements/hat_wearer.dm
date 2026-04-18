@@ -3,7 +3,7 @@
  */
 /datum/element/hat_wearer
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	///offsets of hats we will wear
 	var/list/offsets
 

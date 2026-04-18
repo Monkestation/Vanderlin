@@ -5,6 +5,7 @@
 	icon = 'icons/effects/alphacolors.dmi'
 	icon_state = "white"
 	alpha = 0 // Keep parent invisible
+	plane = ABOVE_LIGHTING_PLANE
 	invisibility = 100 /// on_hover still triggers on no alpha objects
 	anchored = TRUE
 	density = FALSE

@@ -137,7 +137,7 @@
 	// Register client who owns this message
 	owned_by = owner.client
 	RegisterSignal(owned_by, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
-	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMGE, PROC_REF(on_parent_take_damage))
+	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
 	// Clip message
 	var/maxlen = owned_by.prefs.max_chat_length

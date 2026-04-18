@@ -77,7 +77,7 @@
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	refresh_keys()
 
-/obj/item/storage/keyring/Exited(atom/movable/gone, atom/new_loc)
+/obj/item/storage/keyring/Exited(atom/movable/gone, direction)
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
 	refresh_keys()
