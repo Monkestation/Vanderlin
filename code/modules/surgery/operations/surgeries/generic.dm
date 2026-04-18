@@ -45,7 +45,6 @@
 
 /datum/surgery_operation/limb/incise_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..() // default success message
-	limb.add_surgical_state(SURGERY_SKIN_CUT|SURGERY_VESSELS_UNCLAMPED) // ouch, cuts the vessels
 	limb.add_wound(/datum/wound/slash/incision)
 
 	display_results(
@@ -87,10 +86,10 @@
 	)
 	display_pain(limb.owner, "You feel a severe stinging pain spreading across your [parse_zone(limb.body_zone)] as the skin is pulled back.")
 
-/datum/surgery_operation/limb/retract_skin/on_success(obj/item/bodypart/limb)
+/datum/surgery_operation/limb/retract_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
-	limb.add_surgical_state(SURGERY_SKIN_OPEN)
-	limb.remove_surgical_state(SURGERY_SKIN_CUT)
+
+	limb.add_embedded_object(tool)
 
 /// Closes the skin
 /datum/surgery_operation/limb/close_skin
@@ -183,53 +182,13 @@
 	)
 	display_pain(limb.owner, "You feel a pinch as the bleeding in your [parse_zone(limb.body_zone)] is slowed.")
 
-/datum/surgery_operation/limb/clamp_bleeders/on_success(obj/item/bodypart/limb)
+/datum/surgery_operation/limb/clamp_bleeders/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
 	// free brute healing if you do it after sawing bones
 	if(LIMB_HAS_SURGERY_STATE(limb, SURGERY_BONE_SAWED))
 		limb.heal_damage(20)
-	limb.add_surgical_state(SURGERY_VESSELS_CLAMPED)
-	limb.remove_surgical_state(SURGERY_VESSELS_UNCLAMPED)
-
-/// Unclamps blood vessels to allow blood flow again
-/datum/surgery_operation/limb/unclamp_bleeders
-	name = "unclamp bleeders"
-	desc = "Unclamp blood vessels in the patient's body to allow blood flow again. \
-		Clears \"vessels clamped\" surgical state."
-
-	implements = list(
-		TOOL_HEMOSTAT = 1,
-		TOOL_IMPROVISED_HEMOSTAT = 1.5,
-	)
-
-	time = 2.4 SECONDS
-
-	preop_sound = 'sound/surgery/hemostat1.ogg'
-	all_surgery_states_required = SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED
-
-/datum/surgery_operation/limb/unclamp_bleeders/get_default_radial_image()
-	return image(/obj/item/weapon/surgery/hemostat)
-
-/datum/surgery_operation/limb/unclamp_bleeders/all_required_strings()
-	return ..() + list("the limb must have blood vessels")
-
-/datum/surgery_operation/limb/unclamp_bleeders/state_check(obj/item/bodypart/limb)
-	return LIMB_HAS_VESSELS(limb)
-
-/datum/surgery_operation/limb/unclamp_bleeders/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	display_results(
-		surgeon,
-		limb.owner,
-		span_notice("You begin to unclamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
-		span_notice("[surgeon] begins to unclamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] begins to unclamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-	)
-	display_pain(limb.owner, "You feel a pressure release as blood starts flowing in your [parse_zone(limb.body_zone)] again.")
-
-/datum/surgery_operation/limb/unclamp_bleeders/on_success(obj/item/bodypart/limb)
-	. = ..()
-	limb.add_surgical_state(SURGERY_VESSELS_UNCLAMPED)
-	limb.remove_surgical_state(SURGERY_VESSELS_CLAMPED)
+	limb.add_embedded_object(tool)
+	limb.update_disabled()
 
 /// Saws through bones to access organs
 /datum/surgery_operation/limb/saw_bones
@@ -275,7 +234,6 @@
 /datum/surgery_operation/limb/saw_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
 
-	limb.add_surgical_state(SURGERY_BONE_SAWED)
 	limb.receive_damage(50)
 
 	if(!limb.has_wound(/datum/wound/fracture))

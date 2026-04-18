@@ -41,14 +41,6 @@
 	if(passive_healing)
 		. += " <span class='green'>(set)</span>"
 
-/datum/wound/fracture/on_bodypart_gain(obj/item/bodypart/affected)
-	. = ..()
-	affected.add_surgical_state(SURGERY_BONE_SAWED)
-
-/datum/wound/fracture/remove_from_bodypart()
-	bodypart_owner?.remove_surgical_state(SURGERY_BONE_SAWED)
-	return ..()
-
 /datum/wound/fracture/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/fracture) && (type == other.type))
 		return FALSE

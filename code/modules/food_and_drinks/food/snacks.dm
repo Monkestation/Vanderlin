@@ -448,6 +448,9 @@ All foods are distributed among various categories. Use common sense.
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/reagent_containers/food/snacks/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode || !istype(user.used_intent, INTENT_FEED))
+		return NONE
+
 	if(isanimal(interacting_with))
 		var/mob/living/simple_animal/animal = interacting_with
 		if(!animal.eat_food(src))
@@ -734,29 +737,6 @@ All foods are distributed among various categories. Use common sense.
 				if(sattisfaction_text)
 					M.emote("me", 1, "[sattisfaction_text]")
 				qdel(src)
-
-/obj/item/reagent_containers/food/snacks/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!dunkable)
-		return NONE
-
-	if(istype(interacting_with, /obj/item/reagent_containers/glass))	//you can dunk dunkable snacks into beakers or drinks
-		if(!interacting_with.is_drainable())
-			to_chat(user, span_warning("[interacting_with] is unable to be dunked in!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(!interacting_with.reagents.total_volume)
-			to_chat(user, span_warning("\The [interacting_with.name] is empty!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(reagents.holder_full())
-			to_chat(user, span_warning("\The [name] is full!"))
-			return ITEM_INTERACT_BLOCKING
-
-		if(interacting_with.reagents.trans_to(src, dunk_amount, transfered_by = user))	//if reagents were transfered, show the message
-			to_chat(user, span_notice("I dunk \the [name] into \the [interacting_with.name]."))
-			return ITEM_INTERACT_SUCCESS
-
-		return ITEM_INTERACT_BLOCKING
 
 /obj/item/reagent_containers/food/snacks/MouseDrop(atom/over)
 	var/turf/T = get_turf(src)

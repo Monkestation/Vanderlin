@@ -53,14 +53,14 @@
 				qdel(src)
 
 /obj/item/reagent_containers/food/snacks/produce/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!isturf(loc))
-		return NONE
-
 	if(user.cmode)
 		return NONE
 
-	if(user.used_intent.blade_class != BCLASS_BLUNT || user.used_intent.noaa)
+	if(!isturf(loc))
 		return NONE
+
+	if(user.used_intent.blade_class != BCLASS_BLUNT || user.used_intent.noaa)
+		return ..()
 
 	playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
 

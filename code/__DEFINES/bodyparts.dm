@@ -67,9 +67,9 @@ DEFINE_BITFIELD(surgery_state, list(
 /// Checks if the input surgery state has any of the bitflags passed
 #define HAS_ANY_SURGERY_STATE(input_state, check_state) ((input_state & (check_state)))
 /// Checks if the limb has all of the bitflags passed
-#define LIMB_HAS_SURGERY_STATE(limb, check_state) HAS_SURGERY_STATE(limb?.surgery_state, check_state)
+#define LIMB_HAS_SURGERY_STATE(limb, check_state) HAS_SURGERY_STATE(limb?.return_surgical_state(), check_state)
 /// Checks if the limb has any of the bitflags passed
-#define LIMB_HAS_ANY_SURGERY_STATE(limb, check_state) HAS_ANY_SURGERY_STATE(limb?.surgery_state, check_state)
+#define LIMB_HAS_ANY_SURGERY_STATE(limb, check_state) HAS_ANY_SURGERY_STATE(limb?.return_surgical_state(), check_state)
 
 /// All states that concern itself with the skin
 #define ALL_SURGERY_SKIN_STATES (SURGERY_SKIN_CUT|SURGERY_SKIN_OPEN)

@@ -137,8 +137,8 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
-	var/surgery_flags = get_surgery_flags()
-	if(surgery_flags & SURGERY_CLAMPED)
+	var/our_state = return_surgical_state()
+	if(our_state & SURGERY_VESSELS_CLAMPED)
 		bleed_rate = min(bleed_rate, 0.5)
 	switch(burn_dam/max_damage)
 		if(0.75 to INFINITY)
@@ -710,40 +710,3 @@
 	if(owner)
 		update_disabled()
 	return TRUE
-
-/// Returns surgery flags applicable to this bodypart
-/obj/item/bodypart/proc/get_surgery_flags()
-	var/returned_flags = NONE
-	if(can_bloody_wound())
-		returned_flags |= SURGERY_BLOODY
-	for(var/datum/wound/slash/incision/incision in wounds)
-		if(incision.is_sewn())
-			continue
-		returned_flags |= SURGERY_INCISED
-		break
-	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR,
-		TOOL_CROWBAR,
-		TOOL_IMPROVISED_RETRACTOR,
-	)
-	var/static/list/clamping_behaviors = list(
-		TOOL_HEMOSTAT,
-		TOOL_WIRECUTTER,
-		TOOL_IMPROVISED_HEMOSTAT,
-	)
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
-			returned_flags |= SURGERY_RETRACTED
-		if((embedded.tool_behaviour in clamping_behaviors) || embedded.embedding?.clamp_limbs)
-			returned_flags |= SURGERY_CLAMPED
-	if(has_wound(/datum/wound/dislocation))
-		returned_flags |= SURGERY_DISLOCATED
-	if(has_wound(/datum/wound/fracture))
-		returned_flags |= SURGERY_BROKEN
-	for(var/datum/wound/puncture/drilling/drilling in wounds)
-		if(drilling.is_sewn())
-			continue
-		returned_flags |= SURGERY_DRILLED
-	if(skeletonized)
-		returned_flags |= SURGERY_INCISED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
-	return returned_flags

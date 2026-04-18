@@ -68,12 +68,10 @@
 
 // Check if we are accessible
 /datum/component/storage/concrete/organ/proc/is_accessible()
-	. = FALSE
 	if(bodypart_affected)
-		var/surgery_flags = bodypart_affected.get_surgery_flags()
-		return CHECK_MULTIPLE_BITFIELDS(surgery_flags, SURGERY_INCISED|SURGERY_RETRACTED)
-	else
-		return TRUE
+		return CHECK_MULTIPLE_BITFIELDS(bodypart_affected.return_surgical_state(), SURGERY_SKIN_OPEN|SURGERY_VESSELS_CLAMPED|SURGERY_BONE_SAWED)
+
+	return TRUE
 
 /datum/component/storage/concrete/organ/on_move()
 	var/atom/A = parent

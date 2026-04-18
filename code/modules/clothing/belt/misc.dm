@@ -366,6 +366,7 @@
 		/obj/item/weapon/surgery/scalpel,
 		/obj/item/weapon/surgery/saw,
 		/obj/item/weapon/surgery/hemostat,
+		/obj/item/weapon/surgery/hemostat,
 		/obj/item/weapon/surgery/retractor,
 		/obj/item/weapon/surgery/bonesetter,
 		/obj/item/weapon/surgery/cautery,

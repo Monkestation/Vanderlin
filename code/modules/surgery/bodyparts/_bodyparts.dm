@@ -505,8 +505,8 @@
 		return set_disabled(BODYPART_DISABLED_WOUND)
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return set_disabled(BODYPART_DISABLED_PARALYSIS)
-	var/surgery_flags = get_surgery_flags()
-	if(surgery_flags & SURGERY_CLAMPED)
+	var/our_state = return_surgical_state()
+	if(our_state & SURGERY_VESSELS_CLAMPED)
 		return set_disabled(BODYPART_DISABLED_CLAMPED)
 	var/total_dam = get_damage()
 	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
@@ -1464,6 +1464,44 @@
 	var/old_states = surgery_state
 	surgery_state &= ~removing_states
 	update_surgical_state(old_states, removing_states)
+
+/obj/item/bodypart/proc/return_surgical_state()
+	var/base_state = surgery_state
+
+	if(!(base_state & SURGERY_SKIN_CUT))
+		for(var/datum/wound/slash in wounds)
+			if(slash.is_clotted() || slash.is_sewn())
+				continue
+			base_state |= (SURGERY_SKIN_CUT|SURGERY_VESSELS_UNCLAMPED)
+			break
+
+	if(!(base_state & SURGERY_SKIN_OPEN) || !(base_state & SURGERY_VESSELS_CLAMPED))
+		var/static/list/retracting_behaviors = list(
+			TOOL_RETRACTOR,
+			TOOL_CROWBAR,
+			TOOL_IMPROVISED_RETRACTOR,
+		)
+		var/static/list/clamping_behaviors = list(
+			TOOL_HEMOSTAT,
+			TOOL_WIRECUTTER,
+			TOOL_IMPROVISED_HEMOSTAT,
+		)
+		for(var/obj/item/embedded as anything in embedded_objects)
+			if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
+				base_state |= SURGERY_SKIN_OPEN
+				base_state &= ~SURGERY_SKIN_CUT
+			if((embedded.tool_behaviour in clamping_behaviors) || embedded.embedding?.clamp_limbs)
+				base_state |= SURGERY_VESSELS_CLAMPED
+				base_state &= ~SURGERY_VESSELS_UNCLAMPED
+
+	if(!(base_state & SURGERY_BONE_SAWED))
+		if(has_wound(/datum/wound/fracture))
+			base_state |= SURGERY_BONE_SAWED
+
+	if(skeletonized)
+		base_state |= SKINLESS_SURGERY_STATES
+
+	return base_state
 
 /// Called when surgical state changes so we can react to it
 /obj/item/bodypart/proc/update_surgical_state(old_state, changed_states)

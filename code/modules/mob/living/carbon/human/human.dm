@@ -396,7 +396,7 @@
 				var/they_beat = !HAS_TRAIT(target, TRAIT_STABLEHEART)
 				var/obj/item/organ/heart/they_heart = target.getorganslot(ORGAN_SLOT_HEART)
 				var/heart_exposed_mod = 0
-				if(CHECK_MULTIPLE_BITFIELDS(chest.get_surgery_flags(), SURGERY_INCISED|SURGERY_RETRACTED|SURGERY_BROKEN) && istype(they_heart))
+				if(istype(they_heart) && CHECK_MULTIPLE_BITFIELDS(chest.return_surgical_state(), SURGERY_SKIN_OPEN|SURGERY_BONE_SAWED))
 					heart_exposed_mod += 5
 					visible_message(span_notice("<b>[src]</b> massages <b>[target]</b>'s [they_heart]!"), \
 								span_notice("I massage <b>[target]</b>'s [they_heart]."), \

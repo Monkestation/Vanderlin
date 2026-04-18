@@ -52,6 +52,7 @@
 			hingot.forceMove(T)
 			T.held_item = hingot
 			hingot = null
+			update_appearance(UPDATE_OVERLAYS)
 			T.update_appearance(UPDATE_ICON_STATE)
 			return ITEM_INTERACT_SUCCESS
 		else if(T.hott && istype(T.held_item, /obj/item/ingot))
@@ -113,16 +114,17 @@
 
 				return ITEM_INTERACT_SUCCESS
 
-		// No repair target or tongs not hot, place as hingot normally
-		T.held_item.forceMove(src)
-		hingot = T.held_item
-		T.held_item = null
-		hott = T.hott
-		if(hott)
-			START_PROCESSING(SSmachines, src)
-		T.update_appearance(UPDATE_ICON_STATE)
-		update_appearance(UPDATE_OVERLAYS)
-		return ITEM_INTERACT_SUCCESS
+		if(T.held_item)
+			// No repair target or tongs not hot, place as hingot normally
+			T.held_item.forceMove(src)
+			hingot = T.held_item
+			T.held_item = null
+			hott = T.hott
+			if(hott)
+				START_PROCESSING(SSmachines, src)
+			T.update_appearance(UPDATE_ICON_STATE)
+			update_appearance(UPDATE_OVERLAYS)
+			return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/ingot))
 		if(hingot)

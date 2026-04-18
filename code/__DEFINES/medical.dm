@@ -62,15 +62,6 @@
 #define BODYPART_FEATURE_FACE_DETAIL "facedetail"
 #define BODYPART_FEATURE_BRAND "brand"
 
-//flags for requirements for a surgery step
-#define SURGERY_BLOODY (1<<0)
-#define SURGERY_INCISED (1<<1)
-#define SURGERY_RETRACTED (1<<2)
-#define SURGERY_CLAMPED	(1<<3)
-#define SURGERY_DISLOCATED (1<<4)
-#define SURGERY_BROKEN (1<<5)
-#define SURGERY_DRILLED (1<<6)
-
 // ~flags for the limb_flags var on /obj/item/bodypart
 /// Can suffer artery wounds
 #define	BODYPART_HAS_ARTERY	(1<<0)
