@@ -538,7 +538,7 @@
 			to_chat(user, "<span class='warning'>[tool] is full.</span>")
 			return ITEM_INTERACT_BLOCKING
 
-		if(water_volume < MINIMUM_WATER_VOLUME)
+		if(water_volume < MINIMUM_WATER_VOLUME || volume_status == WATER_VOLUME_DRY)
 			return ITEM_INTERACT_BLOCKING
 
 		if(!do_after(user, 8 DECISECONDS, src))
@@ -582,7 +582,7 @@
 	if(user.cmode)
 		return NONE
 
-	if(volume_status == WATER_VOLUME_DRY)
+	if(water_volume < MINIMUM_WATER_VOLUME || volume_status == WATER_VOLUME_DRY)
 		return ITEM_INTERACT_BLOCKING
 
 	// This should just be reagent interactions :(
