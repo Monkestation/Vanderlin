@@ -580,6 +580,11 @@
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
 
+	// ensures the floating animation doesn't mess with our animation
+	if(movement_type & (MOVETYPES_FLOATING_ANIMATION))
+		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
+		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
+
 	if(adjust_stamina(min(jadded,100)))
 		if(do_a_flip)
 			var/flip_angle = flip_direction ? 120 : -120

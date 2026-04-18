@@ -108,7 +108,7 @@
 	moving.set_glide_size(MOVEMENT_ADJUSTED_GLIDE_SIZE(delay, visual_delay))
 
 ///Handles the actual move, overriden by children
-///Returns FALSE if nothing happen, TRUE otherwise
+///Any return value that isn't MOVELOOP_SUCCESS makes nothing happen
 /datum/move_loop/proc/move()
 	return MOVELOOP_FAILURE
 
@@ -177,7 +177,7 @@
 /datum/move_loop/move/move_to/move()
 	var/atom/old_loc = moving.loc
 	step_to(moving, get_step(moving, direction))
-	return old_loc != moving.loc
+	return old_loc != moving.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 
 /**

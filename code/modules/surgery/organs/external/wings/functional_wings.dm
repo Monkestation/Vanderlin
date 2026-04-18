@@ -203,7 +203,7 @@
 		if(below_turf && istransparentturf(this_turf))
 			shadow = new /obj/effect/flyer_shadow(below_turf, owner)
 
-	if(isopenspace(below_turf))
+	if(!owner.throwing && isopenspace(below_turf))
 		if(owner.zMove(dir = DOWN, z_move_flags = ZMOVE_CHECK_PULLS))
 			to_chat(owner, span_info("I glide down to a more manageable height!"))
 			playsound(owner, 'sound/mobs/wingflap.ogg', 75, FALSE)
