@@ -329,9 +329,6 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/stone/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(user.cmode)
-		return NONE
-
 	if(isitem(interacting_with))
 		var/obj/item/sharpening = interacting_with
 		if(!sharpening.max_blade_int)
