@@ -215,7 +215,7 @@
 		return NONE
 
 	var/obj/item/weapon/tongs/T = tool
-	if(!T.held_item)
+	if(T.held_item)
 		return ITEM_INTERACT_BLOCKING
 
 	if(item_flags & IN_STORAGE)
