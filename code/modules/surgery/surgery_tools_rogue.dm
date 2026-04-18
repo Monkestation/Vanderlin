@@ -228,7 +228,7 @@
 	else
 		user.visible_message("<span class='info'>[user] begins to smack [interacting_with] with a small hammer.</span>")
 
-	if(do_after(user, 2.5 SECONDS, interacting_with))
+	if(!do_after(user, 2.5 SECONDS, interacting_with))
 		return ITEM_INTERACT_BLOCKING
 
 	interacting_with.visible_message("<span class='info'>[interacting_with] jerks their knee after the hammer strikes!</span>")
