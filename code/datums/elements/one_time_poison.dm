@@ -1,5 +1,5 @@
 /datum/element/one_time_poison
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 /datum/element/one_time_poison/Attach(atom/movable/target, list/reagent_list)
 	. = ..()

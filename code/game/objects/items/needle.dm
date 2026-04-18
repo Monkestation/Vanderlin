@@ -185,38 +185,53 @@
 		user.mind.add_sleep_experience(I.sewrepair, amt2raise)
 		return TRUE
 	return ..()
-
 /obj/item/needle/proc/sew_wounds(mob/living/carbon/target, mob/living/user)
 	if(!istype(user) || !istype(target))
 		return FALSE
-
 	if(stringamt < 1)
 		to_chat(user, span_warning("The needle has no thread left!"))
 		return FALSE
-
 	var/mob/living/doctor = user
 	var/mob/living/carbon/patient = target
-
 	if(!get_location_accessible(patient, check_zone(doctor.zone_selected)))
 		to_chat(doctor, span_warning("Something is in the way."))
 		return FALSE
-
-	var/list/sewable
 	var/obj/item/bodypart/affecting = patient.get_bodypart(check_zone(doctor.zone_selected))
 	if(!affecting)
 		to_chat(doctor, span_warning("That limb is missing."))
 		return FALSE
-
 	if(affecting.bandage)
 		to_chat(doctor, span_warning("There is a bandage in the way."))
 		return FALSE
 
-	sewable = affecting.get_sewable_wounds()
-
+	if(affecting.get_incision(FALSE))
+		if(affecting.is_artery_torn())
+			var/time = 5 SECONDS
+			time *= (ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_PERCEPTION), 1))
+			playsound(patient, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+			if(!do_after(doctor, time, patient))
+				to_chat(doctor, span_warning("I must stand still!"))
+				return FALSE
+			if(stringamt < 1)
+				to_chat(doctor, span_warning("The needle has no thread left!"))
+				return FALSE
+			if(doctor.diceroll(GET_MOB_SKILL_VALUE(doctor, /datum/attribute/skill/misc/medicine)-1, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
+				to_chat(doctor, span_warning("My hand slips!"))
+				return FALSE
+			doctor.visible_message(
+				span_green("<b>[doctor]</b> sutures <b>[patient]</b>'s [affecting.name] arteries with \the [src]."),
+				span_green("I suture <b>[patient]</b>'s [affecting.name] arteries with \the [src].")
+			)
+			use(1)
+			for(var/obj/item/organ/artery in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
+				if(artery.damage)
+					artery.applyOrganDamage(-min(artery.maxHealth/2, 50))
+					return TRUE
+			return TRUE
+	var/list/sewable = affecting.get_sewable_wounds()
 	if(!length(sewable))
 		to_chat(doctor, span_warning("There aren't any wounds to be sewn."))
 		return FALSE
-
 	var/datum/wound/target_wound
 	if(length(sewable) > 1)
 		target_wound = browser_input_list(doctor, "Which wound?", "WOUND CRAFT", sewable)
@@ -224,10 +239,8 @@
 		target_wound = sewable[1]
 	if(!target_wound || QDELETED(target_wound) || QDELETED(src) || QDELETED(doctor) || QDELETED(user))
 		return FALSE
-
 	if(!target_wound.do_sewing_step(doctor, src))
 		return FALSE
-
 	return TRUE
 
 /obj/item/needle/thorn

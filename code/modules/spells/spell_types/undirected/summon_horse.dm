@@ -14,14 +14,13 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 	if(GLOB.nya_catmodder_go)
 		spawned.add_spell(/datum/action/cooldown/spell/undirected/choose_riding_virtue_mount)
 
-/datum/component/riding/equestria/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 0), TEXT_SOUTH = list(0, 4), TEXT_EAST = list(0, 4), TEXT_WEST = list(0, 4)))
-	set_vehicle_dir_layer(SOUTH, ABOVE_MOB_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
-
+/datum/component/riding/equestria/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return list(
+		TEXT_NORTH = list(0, 0, OBJ_LAYER),
+		TEXT_SOUTH = list(0, 4, ABOVE_MOB_LAYER),
+		TEXT_EAST = list(0, 4, OBJ_LAYER),
+		TEXT_WEST = list(0, 4, OBJ_LAYER)
+	)
 
 /mob/living/simple_animal/hostile/retaliate/honse/equestria
 	generate_genetics = FALSE
@@ -65,7 +64,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 		return COMPONENT_INCOMPATIBLE
 
 	owner = WEAKREF(the_owner)
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(precious_died))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(precious_died))
 
 /datum/component/precious_creature/proc/precious_died()
 	var/mob/living/our_owner = owner.resolve()

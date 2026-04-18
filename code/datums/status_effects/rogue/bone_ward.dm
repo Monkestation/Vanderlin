@@ -54,10 +54,10 @@
 
 /datum/status_effect/debuff/bone_ward/on_apply()
 	. = ..()
-	RegisterSignal(source_mob, COMSIG_MOB_DEATH, PROC_REF(on_source_death))
+	RegisterSignal(source_mob, COMSIG_LIVING_DEATH, PROC_REF(on_source_death))
 
 /datum/status_effect/debuff/bone_ward/on_remove()
-	UnregisterSignal(source_mob, COMSIG_MOB_DEATH)
+	UnregisterSignal(source_mob, COMSIG_LIVING_DEATH)
 	return ..()
 
 /datum/status_effect/debuff/bone_ward/proc/on_source_death()

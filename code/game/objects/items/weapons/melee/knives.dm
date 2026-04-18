@@ -514,18 +514,23 @@
 				user.adjust_triumphs(1)
 				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/target, mob/user)
+/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/victim, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 	record_round_statistic(STATS_ASSASSINATIONS)
-	var/mob/dead/observer/profane/S = new /mob/dead/observer/profane(src)
-	S.AddComponent(/datum/component/profaned, src)
-	S.name = "soul of [target.real_name]"
-	S.real_name = "soul of [target.real_name]"
-	S.deadchat_name = target.real_name
-	S.ManualFollow(src)
-	S.key = target.key
-	S.language_holder = target.language_holder.copy(S)
-	target.visible_message("<span class='danger'>[target]'s soul is pulled from their body and sucked into the profane dagger!</span>", "<span class='danger'>My soul is trapped within the profane dagger. Damnation!</span>")
+
+	var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
+	soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
+	soulstone_spirit.name = "soul of [victim.real_name]"
+	soulstone_spirit.real_name = "soul of [victim.real_name]"
+	soulstone_spirit.PossessByPlayer(victim.key)
+	victim.language_holder?.copy(soulstone_spirit)
+	if(user)
+		soulstone_spirit.language_holder?.copy_known_languages_from(user)
+	soulstone_spirit.get_language_holder().omnitongue = TRUE //Grants omnitongue
+
+	soulstone_spirit.cancel_camera()
+
+	victim.visible_message(span_danger("[victim]'s soul is pulled from their body and sucked into the profane dagger!"), span_danger("My soul is trapped within the profane dagger. Damnation!"))
 	playsound(src, 'sound/magic/soulsteal.ogg', 100, extrarange = 5)
 	blade_int = max_blade_int // Stealing a soul successfully sharpens the blade.
 	repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
@@ -545,28 +550,17 @@
 	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls(mob/user) // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
+/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls() // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
 	var/freed_souls = 0
-	for(var/mob/dead/observer/profane/A in src) // for every trapped soul in the dagger, whether they have left the game or not
-		to_chat(A, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
-		A.returntolobby() //Send the trapped soul back to the lobby
-		user.visible_message("<span class='warning'>The [A.name] flows out from the profane dagger, finally free of its grasp.</span>")
+	for(var/mob/living/simple_animal/shade/shade in contents) // for every trapped soul in the dagger, whether they have left the game or not
+		to_chat(shade, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")
 		freed_souls += 1
-	user.visible_message("<span class='warning'>The profane dagger shatters into putrid smoke!</span>")
+		shade.returntolobby()
+		qdel(shade)
+		visible_message(span_warning("The [shade.name] flows out from the profane dagger, finally free of its grasp."))
+	visible_message(span_warning("The profane dagger shatters into putrid smoke!"))
 	qdel(src) // Delete the dagger. Forevermore.
 	return freed_souls
-
-/datum/component/profaned
-	var/atom/movable/container
-
-/datum/component/profaned/Initialize(atom/movable/container)
-	if(!istype(parent, /mob/dead/observer/profane))
-		return COMPONENT_INCOMPATIBLE
-	var/mob/dead/observer/profane/S = parent
-
-	src.container = container
-
-	S.forceMove(container)
 
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone

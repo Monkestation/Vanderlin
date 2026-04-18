@@ -199,6 +199,11 @@
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/fullscreen/blind
+	icon_state = "impairedoverlay2"
+	layer = BLIND_LAYER
+	plane = FULLSCREEN_PLANE
+
+/atom/movable/screen/fullscreen/blind/sleeper
 	icon_state = "blind"
 	layer = BLIND_LAYER
 	plane = FULLSCREEN_PLANE

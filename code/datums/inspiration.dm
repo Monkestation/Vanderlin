@@ -179,4 +179,4 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		add_verb(src, /mob/living/carbon/human/proc/picksongs)
+		remove_verb(src, /mob/living/carbon/human/proc/picksongs)

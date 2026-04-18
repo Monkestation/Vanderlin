@@ -46,6 +46,7 @@
 		TRAIT_CABAL,
 		TRAIT_BLOODDRINKER,
 		TRAIT_NASTY_EATER,
+		TRAIT_NOMETABOLISM,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -115,6 +116,8 @@
 
 	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
 	zombie.AddComponent(/datum/component/ai_aggro_system)
+	zombie.status_flags &= ~BLEEDOUT
+	zombie.adjustOrganLoss(ORGAN_SLOT_BRAIN, -200)
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
@@ -233,6 +236,7 @@
 	zombie.modifier_set_stat_to("[type]", STAT_CONSTITUTION, 15)
 
 	zombie.bloodpool = 0 // Again, just in case.
+	zombie.adjustOrganLoss(ORGAN_SLOT_BRAIN, -200)
 
 	zombie.ghostize()
 

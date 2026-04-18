@@ -12,7 +12,7 @@
 			var/datum/material_trait/new_trait = GLOB.material_traits[trait]
 			new_trait.on_consume(M, reac_volume)
 
-/datum/reagent/molten_metal/on_mob_life(mob/living/carbon/M)
+/datum/reagent/molten_metal/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	M.adjustFireLoss(5)
 	to_chat(M, span_danger("[src] is burning up insides!"))

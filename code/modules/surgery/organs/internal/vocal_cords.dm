@@ -3,9 +3,17 @@
 	icon_state = "vocal_cords"
 	zone = BODY_ZONE_PRECISE_MOUTH
 	slot = ORGAN_SLOT_VOICE
+	organ_efficiency = list(ORGAN_SLOT_VOICE = 100)
 	gender = PLURAL
-	decay_factor = 0	//we don't want decaying vocal cords to somehow matter or appear on scanners since they don't do anything damaged
 	healing_factor = 0
+
+	organ_volume = 1
+	max_blood_storage = 10
+	current_blood = 10
+	blood_req = 2
+	oxygen_req = 2.5
+	nutriment_req = 2.5
+
 	var/list/spans = null
 
 /obj/item/organ/vocal_cords/proc/can_speak_with() //if there is any limitation to speaking with these cords
@@ -28,7 +36,7 @@
 	. = ..()
 	vocals = new(src)  //okay, i think it'll be tied to the organ
 
-/obj/item/organ/vocal_cords/harpy/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+/obj/item/organ/vocal_cords/harpy/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, new_zone = null)
 	. = ..()
 	M.adjust_skill_level(/datum/attribute/skill/misc/music, 10)
 

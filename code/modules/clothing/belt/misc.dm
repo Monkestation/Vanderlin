@@ -313,13 +313,12 @@
 	new /obj/item/needle/blessed(src)
 	new /obj/item/weapon/surgery/scalpel(src)
 	new /obj/item/weapon/surgery/saw(src)
-	new /obj/item/weapon/surgery/hemostat(src)
-	new /obj/item/weapon/surgery/hemostat(src)
 	new /obj/item/weapon/surgery/retractor(src)
 	new /obj/item/weapon/surgery/bonesetter(src)
 	new /obj/item/weapon/surgery/cautery(src)
 	new /obj/item/natural/worms/leech/parasite(src)
 	new /obj/item/weapon/surgery/hammer(src)
+	new /obj/item/reagent_containers/syringe(src)
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"

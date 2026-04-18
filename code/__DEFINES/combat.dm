@@ -62,6 +62,7 @@
 #define CANPUSH			(1<<3)
 #define CANSLOWDOWN		(1<<4)
 #define GODMODE			(1<<5)
+#define BLEEDOUT (1<<6)
 
 //Health Defines
 #define HEALTH_THRESHOLD_CRIT 0

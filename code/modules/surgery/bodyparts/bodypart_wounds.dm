@@ -74,8 +74,10 @@
 	return healed_any
 
 /// Adds a wound to this bodypart, applying any necessary effects
-/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || !owner || (owner.status_flags & GODMODE))
+/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !owner)
+		return
+	if(!forced && (owner.status_flags & GODMODE))
 		return
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
@@ -90,6 +92,9 @@
 	if(!wound.apply_to_bodypart(src, silent, crit_message))
 		qdel(wound)
 		return
+	if(owner && COOLDOWN_FINISHED(owner, adrenaline_burst))
+		COOLDOWN_START(owner, adrenaline_burst, 45 SECONDS)
+		owner.reagents?.add_reagent(/datum/reagent/adrenaline, 12)
 	return wound
 
 /// Removes a wound from this bodypart, removing any associated effects
@@ -740,5 +745,5 @@
 			continue
 		returned_flags |= SURGERY_DRILLED
 	if(skeletonized)
-		returned_flags |= SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
+		returned_flags |= SURGERY_INCISED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
 	return returned_flags

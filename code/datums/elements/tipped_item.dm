@@ -1,5 +1,5 @@
 /datum/element/tipped_item
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/max_reagents = 1
 	var/dip_amount = 0.5
 	var/inject_amount = 1

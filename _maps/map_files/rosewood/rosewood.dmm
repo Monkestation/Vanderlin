@@ -17241,15 +17241,6 @@
 	},
 /turf/open/floor/twig,
 /area/under/cave)
-"isi" = (
-/obj/effect/overlay/water{
-	pixel_y = 5;
-	pixel_x = 16
-	},
-/turf/open/water/river{
-	dir = 4
-	},
-/area/under/cavewet)
 "isj" = (
 /obj/structure/table/wood/fancy/blue,
 /turf/open/floor/cobblerock,
@@ -177752,9 +177743,9 @@ qJl
 qJl
 qJl
 sey
-isi
-isi
-isi
+jpK
+jpK
+jpK
 sey
 sey
 qJl

@@ -9,6 +9,7 @@
 	throwforce = 1
 	slot_flags = ITEM_SLOT_HIP
 	item_weight = 740 GRAMS
+	contents_tag = "item"
 
 /obj/item/storage/fancy/ifak/populate_contents()
 	new /obj/item/reagent_containers/syringe(src)
@@ -27,14 +28,6 @@
 			icon_state = "ifak_open"
 	else
 		icon_state = "ifak"
-
-/obj/item/storage/fancy/ifak/examine(mob/user)
-	. = ..()
-	if(is_open)
-		if(length(contents) == 1)
-			. += "There is one item left."
-		else
-			. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] items left."
 
 /obj/item/storage/fancy/ifak/attack_self(mob/user, list/modifiers)
 	. = ..()

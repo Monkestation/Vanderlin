@@ -9,6 +9,7 @@ GLOBAL_LIST_EMPTY(poi_list)					//list of points of interest for observe/follow
 GLOBAL_LIST_EMPTY(pinpointer_list)			//list of all pinpointers. Used to change stuff they are pointing to all at once.
 GLOBAL_LIST_EMPTY(zombie_infection_list) 		// A list of all zombie_infection organs, for any mass "animation"
 GLOBAL_LIST_EMPTY(ladders)
+GLOBAL_LIST_EMPTY(stairs)
 GLOBAL_LIST_EMPTY(trophy_cases)
 
 GLOBAL_LIST_EMPTY(mob_spawners) 		    // All mob_spawn objects

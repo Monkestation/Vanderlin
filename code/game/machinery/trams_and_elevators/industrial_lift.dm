@@ -84,6 +84,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	if(fake)
 		alpha = 0
 		obj_flags = CAN_BE_HIT
+	else
+		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 	//since lift_master datums find all connected platforms when an industrial lift first creates it and then
 	//sets those platforms' lift_master_datum to itself, this check will only evaluate to true once per tram platform
@@ -104,7 +106,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 ///set the movement registrations to our current turf(s) so contents moving out of our tile(s) are removed from our movement lists
 /obj/structure/industrial_lift/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
-		RegisterSignal(turf_loc, COMSIG_TURF_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
+		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
 		RegisterSignals(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
@@ -128,10 +130,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	SIGNAL_HANDLER
 	if(!(potential_rider in lift_load))
 		return
-	/*
 	if(isliving(potential_rider) && HAS_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED))
 		REMOVE_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load -= potential_rider
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
@@ -144,16 +144,14 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 /obj/structure/industrial_lift/proc/AddItemOnLift(datum/source, atom/movable/new_lift_contents)
 	SIGNAL_HANDLER
-	var/static/list/blacklisted_types = typecacheof(list(/obj/effect/decal/cleanable, /atom/movable/outdoor_effect, /obj/structure/industrial_lift, /mob/camera, /obj/effect/overlay/water, /atom/movable/lighting_object))
+	var/static/list/blacklisted_types = typecacheof(list(/obj/effect/decal/cleanable, /atom/movable/outdoor_effect, /obj/structure/industrial_lift, /mob/camera, /atom/movable/lighting_object))
 	if(is_type_in_typecache(new_lift_contents, blacklisted_types) || new_lift_contents.invisibility == INVISIBILITY_ABSTRACT) //prevents the tram from stealing things like landmarks
 		return FALSE
 	if(new_lift_contents in lift_load)
 		return FALSE
 
-	/*
 	if(isliving(new_lift_contents) && !HAS_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED))
 		ADD_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load += new_lift_contents
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))

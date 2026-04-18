@@ -43,6 +43,10 @@
 	. = ..()
 	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
 
+/datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
+	. = ..()
+	O.adjust_germ_level(-boozepwr * reac_volume)
+
 /datum/reagent/consumable/ethanol/proc/age_beer()
 	var/old_volume = volume
 	var/datum/reagents/old_holder = holder
@@ -67,10 +71,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 91-100: Dangerously toxic - swift death
 */
 
-/datum/reagent/consumable/ethanol/on_mob_life(mob/living/carbon/C)
-	if(C.drunkenness < volume * boozepwr * ALCOHOL_THRESHOLD_MODIFIER || boozepwr < 0)
+/datum/reagent/consumable/ethanol/on_mob_life(mob/living/carbon/C, efficiency)
+	if(C.drunkenness < volume * boozepwr * ALCOHOL_THRESHOLD_MODIFIER * efficiency || boozepwr < 0)
 		var/booze_power = boozepwr
-		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * ALCOHOL_RATE)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
+		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * ALCOHOL_RATE * efficiency)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
 	return ..()
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
@@ -574,9 +578,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "hints of questionable choices--a bouquet of murkwater and pure ethanol"
 	color = "#4b1e00"
 
-/datum/reagent/consumable/ethanol/murkwine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/murkwine/on_mob_life(mob/living/carbon/M, efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/murkwine)
-	M.adjust_stamina(0.1)
+	M.adjust_stamina(0.1 * efficiency)
 	..()
 	. = 1
 
@@ -591,12 +595,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_NICE
 
 
-/datum/reagent/consumable/ethanol/nocshine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/nocshine/on_mob_life(mob/living/carbon/M, efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/nocshine)
 	if(HAS_TRAIT(M, TRAIT_CRACKHEAD))
-		M.adjustToxLoss(0.1, 0)
+		M.adjustToxLoss(0.1 * efficiency, 0)
 	else
-		M.adjustToxLoss(0.75, 0)
+		M.adjustToxLoss(0.75 * efficiency, 0)
 	..()
 	. = 1
 
@@ -612,11 +616,11 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_VERYGOOD // good stuff!
 	age_path = /datum/reagent/consumable/ethanol/luxwine/aged
 
-/datum/reagent/consumable/ethanol/luxwine/on_mob_life(mob/living/carbon/M) // stolen healthpot code. i am shameless.
+/datum/reagent/consumable/ethanol/luxwine/on_mob_life(mob/living/carbon/M, efficiency) // stolen healthpot code. i am shameless.
 	M.apply_status_effect(/datum/status_effect/buff/lux_drank)
 	if(volume > 0.99) // i have no clue if this works.
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
+		M.adjustBruteLoss(-1*REM * efficiency, 0)
+		M.adjustFireLoss(-1*REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/M)
@@ -630,11 +634,11 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_VERYGOOD
 	age_path = /datum/reagent/consumable/ethanol/luxwine/delectable
 
-/datum/reagent/consumable/ethanol/luxwine/aged/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/luxwine/aged/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.05*REM)
-		M.adjustBruteLoss(-2*REM, 0)
-		M.adjustFireLoss(-2*REM, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.05*REM * efficiency)
+		M.adjustBruteLoss(-2*REM * efficiency, 0)
+		M.adjustFireLoss(-2*REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/luxwine/delectable
@@ -645,14 +649,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_FANTASTIC
 	age_path = null
 
-/datum/reagent/consumable/ethanol/luxwine/delectable/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/luxwine/delectable/on_mob_life(mob/living/carbon/M, efficiency)
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
 		M.heal_wounds(3) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
 	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM)
-		M.adjustBruteLoss(-5*REM, 0)
-		M.adjustFireLoss(-5*REM, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM * efficiency)
+		M.adjustBruteLoss(-5*REM * efficiency, 0)
+		M.adjustFireLoss(-5*REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/whipwine // dont ask

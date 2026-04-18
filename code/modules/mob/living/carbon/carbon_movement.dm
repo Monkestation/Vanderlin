@@ -1,5 +1,5 @@
 /mob/living/carbon/slip(knockdown_amount, obj/O, lube, paralyze, force_drop)
-	if(movement_type & MOVETYPE_NOT_TOUCHING_GROUND)
+	if(movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 		return 0
 
 	if(!(lube & SLIDE_ICE))
