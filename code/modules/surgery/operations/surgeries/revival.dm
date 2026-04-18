@@ -63,6 +63,8 @@
 	if(!patient.revive(excess_healing = 50))
 		return on_failure(patient, surgeon, tool, operation_args)
 
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_REVIVE, 1)
+
 	if(patient.get_lux_tainted_status() && istype(tool, /obj/item/reagent_containers/lux_tainted))
 		display_results(
 			surgeon,
