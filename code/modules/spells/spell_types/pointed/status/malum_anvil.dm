@@ -14,7 +14,7 @@
 	invocation = "I am the ANVIL on which the HAMMER of creation STRIKES!!"
 	invocation_type = INVOCATION_SHOUT
 
-	charge_time = 4 SECONDS
+	charge_time = 2 SECONDS
 	cooldown_time = 1 MINUTES
 	spell_cost = 55
 
