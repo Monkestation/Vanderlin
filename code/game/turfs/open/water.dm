@@ -132,8 +132,9 @@
 		check_surrounding_water()
 
 /turf/open/water/Destroy()
-	. = ..()
+	UnregisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
 	dry_up(TRUE)
+	return ..()
 
 /turf/open/water/get_slowdown(mob/user)
 	. = ..()
