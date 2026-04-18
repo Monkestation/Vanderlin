@@ -1018,10 +1018,10 @@
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()
-	var/atom/L = loc
-	if(!L)
+	var/atom/location = loc
+	if(!location)
 		return null
-	return L.AllowDrop() ? L : L.drop_location()
+	return location.AllowDrop() ? location : location.drop_location()
 
 /atom/proc/vv_auto_rename(newname)
 	name = newname

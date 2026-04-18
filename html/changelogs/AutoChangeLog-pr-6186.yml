@@ -1,0 +1,9 @@
+author: "KevinfromHP"
+delete-after: True
+changes:
+  - rscdel: "Removed Ugly/Beautiful Be Special as these are granted by quirks now."
+  - rscadd: "Adds \"king\" Be Special"
+  - rscadd: "Adds \"Chippin' In\" Be Special"
+  - rscadd: "Adds \"Fat\" Be Special"
+  - bugfix: "Black Briar should properly apply to Adv class selection."
+  - bugfix: "Skeleton Be Special should work slightly better."

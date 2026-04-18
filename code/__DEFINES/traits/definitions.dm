@@ -452,6 +452,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
+/// This mob can't have a split personality
+#define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -561,6 +563,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // ************* Debug traits
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
+
+/// This atom is a secluded location, which is counted as out of bounds.
+/// Anything that enters this atom's contents should react if it wants to stay in bounds.
+#define TRAIT_SECLUDED_LOCATION "secluded_loc"
 
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
