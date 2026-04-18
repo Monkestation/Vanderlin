@@ -188,7 +188,8 @@
 	if(LIMB_HAS_SURGERY_STATE(limb, SURGERY_BONE_SAWED))
 		limb.heal_damage(20)
 	limb.add_embedded_object(tool)
-	limb.update_disabled()
+	if(limb.can_be_disabled)
+		limb.update_disabled()
 
 /// Saws through bones to access organs
 /datum/surgery_operation/limb/saw_bones
