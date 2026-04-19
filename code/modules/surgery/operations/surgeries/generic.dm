@@ -147,8 +147,8 @@
 
 /datum/surgery_operation/limb/close_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
-	if(LIMB_HAS_SURGERY_STATE(limb, SURGERY_BONE_SAWED))
-		limb.heal_damage(40)
+	if(tool.get_temperature())
+		limb.receive_damage(burn = 20)
 	limb.remove_wound(/datum/wound/slash/incision)
 	limb.remove_surgical_state(ALL_SURGERY_STATES_UNSET_ON_CLOSE)
 
@@ -184,10 +184,9 @@
 
 /datum/surgery_operation/limb/clamp_bleeders/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
-	// free brute healing if you do it after sawing bones
-	if(LIMB_HAS_SURGERY_STATE(limb, SURGERY_BONE_SAWED))
-		limb.heal_damage(20)
+
 	limb.add_embedded_object(tool)
+
 	if(limb.can_be_disabled)
 		limb.update_disabled()
 
@@ -234,8 +233,6 @@
 
 /datum/surgery_operation/limb/saw_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
-
-	limb.receive_damage(50)
 
 	if(!limb.has_wound(/datum/wound/fracture))
 		var/fracture_type = /datum/wound/fracture
@@ -313,4 +310,3 @@
 		bone.set_bone()
 
 	limb.remove_surgical_state(SURGERY_BONE_SAWED)
-	limb.heal_damage(40)

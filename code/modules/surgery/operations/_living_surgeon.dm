@@ -45,10 +45,11 @@
 		user = src,
 		anchor = patient,
 		choices = radial_operations,
-		require_near = TRUE,
-		autopick_single_option = TRUE,
-		radius = 56,
+		radius = 35,
 		custom_check = CALLBACK(src, PROC_REF(surgery_check), potential_tool, patient),
+		require_near = TRUE,
+		radial_slice_icon = "radial_thaum",
+		autopick_single_option = TRUE,
 	)
 	if(isnull(picked))
 		return ITEM_INTERACT_BLOCKING
