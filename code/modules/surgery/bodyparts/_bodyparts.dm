@@ -1469,8 +1469,8 @@
 	var/base_state = surgery_state
 
 	if(!(base_state & SURGERY_SKIN_CUT))
-		for(var/datum/wound/slash in wounds)
-			if(slash.is_clotted() || slash.is_sewn())
+		for(var/datum/wound/slash/cut in wounds)
+			if(cut.is_clotted() || cut.is_sewn())
 				continue
 			base_state |= (SURGERY_SKIN_CUT|SURGERY_VESSELS_UNCLAMPED)
 			break
@@ -1495,8 +1495,11 @@
 				base_state &= ~SURGERY_VESSELS_UNCLAMPED
 
 	if(!(base_state & SURGERY_BONE_SAWED))
-		if(has_wound(/datum/wound/fracture))
+		for(var/datum/wound/fracture/bone in wounds)
+			if(bone.bone_set)
+				continue
 			base_state |= SURGERY_BONE_SAWED
+			break
 
 	if(skeletonized)
 		base_state |= SKINLESS_SURGERY_STATES

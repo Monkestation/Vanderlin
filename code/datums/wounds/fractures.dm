@@ -33,6 +33,8 @@
 	werewolf_infection_probability = 0
 	/// Whether or not we can be surgically set
 	var/can_set = TRUE
+	/// If we have been set
+	var/bone_set = FALSE
 	/// Emote we use when applied
 	var/gain_emote = "paincrit"
 
@@ -54,13 +56,13 @@
 	shake_camera(affected, 2, 2)
 
 /datum/wound/fracture/proc/set_bone()
-	if(!can_set)
+	if(!can_set || bone_set)
 		return FALSE
+	bone_set = TRUE
 	bleed_rate = set_bleed_rate
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
 	heal_wound(initial(whp)/1.6) //heal a little more than of maximum fracture
-	can_set = FALSE
 	return TRUE
 
 /datum/wound/fracture/head
