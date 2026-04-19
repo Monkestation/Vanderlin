@@ -30,9 +30,10 @@
 	/// If false makes CanPass call CanPassThrough on this type instead of using default behaviour
 	var/generic_canpass = TRUE
 	var/moving_diagonally = 0 //0: not doing a diagonal move. 1 and 2: doing the first/second step of the diagonal move
+	/// attempt to resume grab after moving instead of before.
+	var/atom/movable/moving_from_pull
 	var/lastcardinal = 0
 	var/lastcardpress = 0
-	var/atom/movable/moving_from_pull		//attempt to resume grab after moving instead of before.
 	var/list/acted_explosions	//for explosion dodging
 	glide_size = 6
 	appearance_flags = TILE_BOUND|PIXEL_SCALE
@@ -50,6 +51,10 @@
 	var/grab_state = 0
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting
+
+	///is the mob currently ascending or descending through z levels?
+	var/currently_z_moving
+
 	/// Either [EMISSIVE_BLOCK_NONE], [EMISSIVE_BLOCK_GENERIC], or [EMISSIVE_BLOCK_UNIQUE]
 	var/blocks_emissive = EMISSIVE_BLOCK_NONE
 	///Internal holder for emissive blocker object, do not use directly use blocks_emissive
@@ -64,6 +69,9 @@
 	///only the last container of a client eye has this list assuming no movement since SSparallax's last fire
 	var/list/client_mobs_in_contents
 	var/spatial_grid_key
+
+	/// Whether a user will face atoms on entering them with a mouse. Despite being a mob variable, it is here for performance reasons
+	var/face_mouse = FALSE
 
 /mutable_appearance/emissive_blocker
 
@@ -177,7 +185,7 @@
 	if(length(vis_contents))
 		vis_contents.Cut()
 
-/atom/movable/Exited(atom/movable/gone, atom/new_loc)
+/atom/movable/Exited(atom/movable/gone, direction)
 	. = ..()
 
 	if(!LAZYLEN(gone.important_recursive_contents))
@@ -318,56 +326,135 @@
 		overlays.Insert(1, emissive_block)
 	return overlays
 
-/atom/movable/proc/can_safely_descend(turf/target)
+/**
+ * When the falling atom stops moving and impacts the turf.
+ * To reach here from /turf/proc/zImpact, intercept_zImpact() flags must not have included FALL_INTERCEPTED.
+*/
+/atom/movable/proc/onZImpact(turf/impacted_turf, levels, impact_flags = NONE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(!(impact_flags & ZIMPACT_NO_MESSAGE))
+		visible_message(
+			span_danger("[src] crashes into [impacted_turf]!"),
+			span_userdanger("You crash into [impacted_turf]!"),
+		)
+	if(!(impact_flags & ZIMPACT_NO_SPIN))
+		INVOKE_ASYNC(src, PROC_REF(do_spin_animation), 0.2 SECONDS, 1)
+
+	SEND_SIGNAL(src, COMSIG_ATOM_ON_Z_IMPACT, impacted_turf, levels)
 	return TRUE
 
-/atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
-	if(!direction)
-		direction = DOWN
+/*
+ * Attempts to move using zMove if direction is UP or DOWN, step if not
+ *
+ * Args:
+ * direction: The direction to go
+ * z_move_flags: bitflags used for checks in zMove and can_z_move
+*/
+/atom/movable/proc/try_step_multiz(direction, z_move_flags = ZMOVE_FLIGHT_FLAGS)
+	if(direction == UP || direction == DOWN)
+		return zMove(direction, null, z_move_flags)
+	return step(src, direction)
 
-	if(!source)
-		source = get_turf(src)
-		if(!source)
-			return FALSE
-
+/*
+ * The core multi-z movement proc. Used to move a movable through z levels.
+ * If target is null, it'll be determined by the can_z_move proc, which can potentially return null if
+ * conditions aren't met (see z_move_flags defines in __DEFINES/movement.dm for info) or if dir isn't set.
+ * Bear in mind you don't need to set both target and dir when calling this proc, but at least one or two.
+ * This will set the currently_z_moving to CURRENTLY_Z_MOVING_GENERIC if unset, and then clear it after
+ * Forcemove().
+ *
+ *
+ * Args:
+ * * dir: the direction to go, UP or DOWN, only relevant if target is null.
+ * * target: The target turf to move the src to. Set by can_z_move() if null.
+ * * z_move_flags: bitflags used for various checks in both this proc and can_z_move(). See __DEFINES/movement.dm.
+ */
+/atom/movable/proc/zMove(dir, turf/target, z_move_flags = ZMOVE_FLIGHT_FLAGS)
 	if(!target)
-		target = get_step_multiz(source, direction)
+		target = can_z_move(dir, get_turf(src), null, z_move_flags)
 		if(!target)
+			set_currently_z_moving(FALSE, TRUE)
 			return FALSE
 
-	return !(movement_type & (FLYING|FLOATING)) && !throwing
+	var/list/moving_movs = get_z_move_affected(z_move_flags)
 
-/atom/movable/proc/onZImpact(turf/impacted, levels)
-	var/atom/highest = impacted
-	for(var/atom/A as anything in impacted)
-		if(!A.density)
-			continue
-		if(isobj(A) || ismob(A))
-			if(A.layer > highest.layer)
-				highest = A
-//	INVOKE_ASYNC(src, PROC_REF(SpinAnimation), 5, 2)
-	throw_impact(highest)
+	for(var/atom/movable/movable as anything in moving_movs)
+		movable.currently_z_moving = currently_z_moving || CURRENTLY_Z_MOVING_GENERIC
+		movable.forceMove(target)
+		movable.set_currently_z_moving(FALSE, TRUE)
+	// This is run after ALL movables have been moved, so pulls don't get broken unless they are actually out of range.
+	if(z_move_flags & ZMOVE_CHECK_PULLS)
+		for(var/atom/movable/moved_mov as anything in moving_movs)
+			if(z_move_flags & ZMOVE_CHECK_PULLEDBY && moved_mov.pulledby && (moved_mov.z != moved_mov.pulledby.z || get_dist(moved_mov, moved_mov.pulledby) > 1))
+				moved_mov.pulledby.stop_pulling()
+			if(z_move_flags & ZMOVE_CHECK_PULLING)
+				moved_mov.check_pulling(TRUE)
 	return TRUE
 
-//For physical constraints to travelling up/down.
-/atom/movable/proc/can_zTravel(turf/destination, direction, override_source)
-	var/turf/current_turf = get_turf(src)
-	if(override_source)
-		current_turf = override_source
-	if(!current_turf)
-		return FALSE
+/// Returns a list of movables that should also be affected when src moves through zlevels, and src.
+/atom/movable/proc/get_z_move_affected(z_move_flags)
+	. = list(src)
+	if(buckled_mobs)
+		. |= buckled_mobs
+	if(!(z_move_flags & ZMOVE_INCLUDE_PULLED))
+		return
+	for(var/mob/living/buckled as anything in buckled_mobs)
+		if(buckled.pulling)
+			. |= buckled.pulling
+	if(pulling)
+		. |= pulling
+		if (pulling.buckled_mobs)
+			. |= pulling.buckled_mobs
+
+		//makes conga lines work with ladders and flying up and down; checks if the guy you are pulling is pulling someone,
+		//then uses recursion to run the same function again
+		if (pulling.pulling)
+			. |= pulling.pulling.get_z_move_affected(z_move_flags)
+
+/**
+ * Checks if the destination turf is elegible for z movement from the start turf to a given direction and returns it if so.
+ * Args:
+ * * direction: the direction to go, UP or DOWN, only relevant if target is null.
+ * * start: Each destination has a starting point on the other end. This is it. Most of the times the location of the source.
+ * * z_move_flags: bitflags used for various checks. See __DEFINES/movement.dm.
+ * * rider: A living mob in control of the movable. Only non-null when a mob is riding a vehicle through z-levels.
+ */
+/atom/movable/proc/can_z_move(direction, turf/start, turf/destination, z_move_flags = ZMOVE_FLIGHT_FLAGS, mob/living/rider)
+	if(!start)
+		start = get_turf(src)
+		if(!start)
+			return FALSE
 	if(!direction)
 		if(!destination)
 			return FALSE
-		direction = get_dir(current_turf, destination)
+		direction = get_dir_multiz(start, destination)
 	if(direction != UP && direction != DOWN)
 		return FALSE
 	if(!destination)
-		destination = get_step_multiz(current_turf, direction)
+		destination = get_step_multiz(start, direction)
 		if(!destination)
+			if(z_move_flags & ZMOVE_FEEDBACK)
+				to_chat(rider || src, span_warning("There's nowhere to go in that direction!"))
 			return FALSE
-	if(current_turf.zPassOut(src, direction, destination) && destination.zPassIn(src, direction, current_turf))
-		return TRUE
+	if(SEND_SIGNAL(src, COMSIG_CAN_Z_MOVE, start, destination) & COMPONENT_CANT_Z_MOVE)
+		return FALSE
+	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & MOVETYPES_NOT_TOUCHING_GROUND)))
+		return FALSE
+	if(z_move_flags & ZMOVE_WATER_CHECKS && !iswaterturf(destination))
+		return FALSE
+	// if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & (FLYING|FLOATING)))
+	if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & FLYING)) // EXPERIMENTAL: Floating doesn't let you fly up and down
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			if(rider)
+				to_chat(rider, span_warning("[src] [p_are()] incapable of flight."))
+			else
+				to_chat(src, span_warning("I'm incapable of flight."))
+		return FALSE
+	if((!(z_move_flags & ZMOVE_IGNORE_OBSTACLES) && !(start.zPassOut(direction) && destination.zPassIn(direction))) || (!(z_move_flags & ZMOVE_ALLOW_ANCHORED) && anchored))
+		if(z_move_flags & ZMOVE_FEEDBACK)
+			to_chat(rider || src, span_warning("I can't move there!"))
+		return FALSE
+	return destination //used by some child types checks and zMove()
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	var/static/list/banned_edits = list("step_x" = TRUE, "step_y" = TRUE, "step_size" = TRUE, "bounds" = TRUE)
@@ -400,9 +487,9 @@
 				admin_teleport(var_value)
 				return TRUE
 			return FALSE
-		// if(NAMEOF(src, anchored))
-		// 	set_anchored(var_value)
-		// 	. = TRUE
+		if(NAMEOF(src, anchored))
+			set_anchored(var_value)
+			. = TRUE
 		if(NAMEOF(src, pulledby))
 			set_pulledby(var_value)
 			. = TRUE
@@ -495,23 +582,22 @@
 		return
 	set_pull_offsets(pulling, grab_state)
 
-/atom/movable/proc/check_pulling()
+/**
+ * Checks if the pulling and pulledby should be stopped because they're out of reach.
+ * If z_allowed is TRUE, the z level of the pulling will be ignored.This is to allow things to be dragged up and down stairs.
+ */
+/atom/movable/proc/check_pulling(only_pulling = FALSE, z_allowed = FALSE)
 	if(pulling)
-		var/atom/movable/pullee = pulling
-		if(pullee && get_dist(src, pullee) > 1)
+		if(get_dist(src, pulling) > 1 || (z != pulling.z && !z_allowed))
 			stop_pulling()
-			return
-		if(!isturf(loc))
+		else if(!isturf(loc))
 			stop_pulling()
-			return
-		if(pullee && !isturf(pullee.loc) && pullee.loc != loc) //to be removed once all code that changes an object's loc uses forceMove().
-			log_game("DEBUG:[src]'s pull on [pullee] wasn't broken despite [pullee] being in [pullee.loc]. Pull stopped manually.")
+		else if(pulling && !isturf(pulling.loc) && pulling.loc != loc) //to be removed once all code that changes an object's loc uses forceMove().
+			log_game("DEBUG:[src]'s pull on [pulling] wasn't broken despite [pulling] being in [pulling.loc]. Pull stopped manually.")
 			stop_pulling()
-			return
-		if(pulling.anchored || pulling.move_resist > move_force)
+		else if(pulling.anchored || pulling.move_resist > move_force)
 			stop_pulling()
-			return
-	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1)		//separated from our puller and not in the middle of a diagonal move.
+	if(!only_pulling && pulledby && moving_diagonally != FIRST_DIAG_STEP && (get_dist(src, pulledby) > 1 || (z != pulledby.z && !z_allowed))) //separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
 
 /atom/movable/proc/set_glide_size(target = 0)
@@ -536,7 +622,7 @@
 	if(!direction)
 		direction = get_dir(src, newloc)
 
-	if(!(atom_flags & NO_DIR_CHANGE_ON_MOVE) && !throwing && dir != direction && update_dir)
+	if(!face_mouse && !throwing && dir != direction && update_dir)
 		setDir(direction)
 
 	var/is_multi_tile_object = is_multi_tile_object(src)
@@ -545,9 +631,9 @@
 	if(is_multi_tile_object && isturf(loc))
 		old_locs = locs // locs is a special list, this is effectively the same as .Copy() but with less steps
 		for(var/atom/exiting_loc as anything in old_locs)
-			if(!exiting_loc.Exit(src, newloc))
+			if(!exiting_loc.Exit(src, direction))
 				return
-	else if(!loc.Exit(src, newloc))
+	else if(!loc.Exit(src, direction))
 		return
 
 	var/list/new_locs
@@ -582,12 +668,11 @@
 
 	if(old_locs) // This condition will only be true if it is a multi-tile object.
 		for(var/atom/exited_loc as anything in (old_locs - new_locs))
-			exited_loc.Exited(src, newloc)
+			exited_loc.Exited(src, direction)
 	else // Else there's just one loc to be exited.
-		oldloc.Exited(src, newloc)
-
+		oldloc.Exited(src, direction)
 	if(oldarea != newarea)
-		oldarea.Exited(src, newloc)
+		oldarea.Exited(src, direction)
 
 	for(var/atom/movable/thing as anything in oldloc)
 		if(thing == src)
@@ -599,7 +684,6 @@
 			entered_loc.Entered(src, oldloc, old_locs)
 	else
 		newloc.Entered(src, oldloc, old_locs)
-
 	if(oldarea != newarea)
 		newarea.Entered(src, oldarea)
 
@@ -617,7 +701,7 @@
 	var/turf/current_turf = loc
 
 	if(!moving_from_pull)
-		check_pulling()
+		check_pulling(z_allowed = TRUE)
 
 	if(!loc || !newloc)
 		return FALSE
@@ -746,25 +830,34 @@
 
 	if(!loc || (loc == oldloc && oldloc != newloc))
 		last_move = 0
+		set_currently_z_moving(FALSE, TRUE)
 		return
 
 	if(. && pulling && pulling == pullee && pulling != moving_from_pull) //we were pulling a thing and didn't lose it during our move.
 		if(pulling.anchored)
 			stop_pulling()
 		else
-			var/pull_dir = get_dir(src, pulling)
-			//puller and pullee more than one tile away or in diagonal position
-			if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
-				pulling.moving_from_pull = src
-				var/pulling_update_dir = TRUE
-				for(var/obj/item/grabbing/G in pulling.grabbedby) // only chokeholds prevent turning
-					if(G.chokehold)
-						pulling_update_dir = FALSE
-						break
-				pulling.Move(current_turf, get_dir(pulling, current_turf), glide_size, pulling_update_dir) //the pullee tries to reach our previous position
-				pulling.after_being_moved_by_pull(src)
-				pulling.moving_from_pull = null
-			check_pulling()
+			//puller and pullee more than one tile away or in diagonal position and whatever the pullee is pulling isn't already moving from a pull as it'll most likely result in an infinite loop a la ouroborus.
+			if(!pulling.pulling?.moving_from_pull)
+				var/pull_dir = get_dir(pulling, src)
+				var/target_turf = current_turf
+
+				// Pulling things down/up stairs. zMove() has flags for check_pulling and stop_pulling calls.
+				// You may wonder why we're not just forcemoving the pulling movable and regrabbing it.
+				// The answer is simple. forcemoving and regrabbing is ugly and breaks conga lines.
+				if(pulling.z != z)
+					target_turf = get_step(pulling, get_dir(pulling, current_turf))
+
+				if(target_turf != current_turf || (moving_diagonally != SECOND_DIAG_STEP && ISDIAGONALDIR(pull_dir)) || get_dist(src, pulling) > 1)
+					pulling.move_from_pull(src, target_turf, glide_size)
+			if (pulledby)
+				if (pulledby.currently_z_moving)
+					check_pulling(z_allowed = TRUE)
+				//don't call check_pulling() here at all if there is a pulledby that is not currently z moving
+				//because it breaks stair conga lines, for some fucking reason.
+				//it's fine because the pull will be checked when this whole proc is called by the mob doing the pulling anyways
+			else
+				check_pulling()
 
 	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
 	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
@@ -772,13 +865,27 @@
 		set_glide_size(glide_size_override)
 
 	last_move = direction_to_move
-	if(!(atom_flags & NO_DIR_CHANGE_ON_MOVE) && !throwing && dir != direction_to_move && update_dir)
+
+	if(!face_mouse && !throwing && dir != direction_to_move && update_dir)
 		setDir(direction_to_move)
-
 	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direction_to_move, glide_size_override)) //movement failed due to buckled mob(s)
-		return FALSE
+		. = FALSE
 
-	return TRUE
+	if(. && pulledby && moving_diagonally != FIRST_DIAG_STEP) // EXPERIMENTAL: Fix grabs not breaking when pulling is moved by something else
+		pulledby.check_pulling(only_pulling = TRUE, z_allowed = TRUE)
+
+	if(currently_z_moving)
+		if(. && loc == newloc)
+			var/turf/pitfall = get_turf(src)
+			pitfall.zFall(src, falling_from_move = TRUE)
+		else
+			set_currently_z_moving(FALSE, TRUE)
+
+/// Called when src is being moved to a target turf because another movable (puller) is moving around.
+/atom/movable/proc/move_from_pull(atom/movable/puller, turf/target_turf, glide_size_override)
+	moving_from_pull = puller
+	Move(target_turf, get_dir(src, target_turf), glide_size_override)
+	moving_from_pull = null
 
 /**
  * Called after a successful Move(). By this point, we've already moved.
@@ -793,6 +900,13 @@
 
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(src)
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
+
+	if(old_loc)
+		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
+	if(loc)
+		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
 
 	if(HAS_SPATIAL_GRID_CONTENTS(src))
 		if(old_turf && new_turf && (old_turf.z != new_turf.z \
@@ -810,8 +924,6 @@
 
 	for(var/datum/light_source/L in light_sources) // Cycle through the light sources on this atom and tell them to update.
 		L.source_atom?.update_light()
-
-	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs)
 
 	return TRUE
 
@@ -865,6 +977,26 @@
 			return
 	A.Bumped(src)
 
+///Sets the anchored var and returns if it was successfully changed or not.
+/atom/movable/proc/set_anchored(anchorvalue)
+	SHOULD_CALL_PARENT(TRUE)
+	if(anchored == anchorvalue)
+		return
+	. = anchored
+	anchored = anchorvalue
+	if(anchored && pulledby)
+		pulledby.stop_pulling()
+	SEND_SIGNAL(src, COMSIG_MOVABLE_SET_ANCHORED, anchorvalue)
+
+/// Sets the currently_z_moving variable to a new value. Used to allow some zMovement sources to have precedence over others.
+/atom/movable/proc/set_currently_z_moving(new_z_moving_value, forced = FALSE)
+	if(forced)
+		currently_z_moving = new_z_moving_value
+		return TRUE
+	var/old_z_moving_value = currently_z_moving
+	currently_z_moving = max(currently_z_moving, new_z_moving_value)
+	return currently_z_moving > old_z_moving_value
+
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
 	if(QDELING(src))
@@ -886,7 +1018,8 @@
 	SET_ACTIVE_MOVEMENT(oldloc, NONE, TRUE, null)
 
 	if(destination)
-		if(pulledby)
+		///zMove already handles whether a pull from another movable should be broken.
+		if(pulledby && !currently_z_moving)
 			pulledby.stop_pulling()
 
 		var/same_loc = oldloc == destination
@@ -1040,7 +1173,7 @@
 			if(istype(above, /turf/open/openspace))
 				forceMove(above)
 	if(spin)
-		SpinAnimation(5, 1)
+		do_spin_animation(5, 1)
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, TT, spin)
 	SSthrowing.processing[src] = TT
@@ -1050,8 +1183,8 @@
 
 /atom/movable/proc/handle_buckled_mob_movement(newloc, direction, glide_size_override)
 	for(var/mob/living/buckled_mob as anything in buckled_mobs)
-		if(!buckled_mob.Move(newloc, direction, glide_size_override))
-			forceMove(buckled_mob.loc)
+		if(!buckled_mob.Move(newloc, direction, glide_size_override)) //If a mob buckled to us can't make the same move as us
+			Move(buckled_mob.loc, direction) //Move back to its location
 			last_move = buckled_mob.last_move
 			inertia_dir = last_move
 			buckled_mob.inertia_dir = last_move
@@ -1486,12 +1619,6 @@
 
 	H.selected_default_language = .
 	. = chosen_langtype
-
-/* End language procs */
-/atom/movable/proc/ConveyorMove(movedir)
-	set waitfor = FALSE
-	if(!anchored)
-		step(src, movedir)
 
 //Returns an atom's power cell, if it has one. Overload for individual items.
 /atom/movable/proc/get_cell()

@@ -50,7 +50,7 @@
 
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(!(L.movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && L.mob_size >= MOB_SIZE_HUMAN)
+		if(!(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && L.mob_size >= MOB_SIZE_HUMAN)
 			start_collapse()
 
 /obj/structure/stone_tile/proc/start_collapse()

@@ -644,9 +644,9 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		organ.Remove(target)
 		organ.forceMove(drop_location)
 	var/obj/item/bodypart/chest/cavity = target.get_bodypart(BODY_ZONE_CHEST)
-	if(cavity.cavity_item)
-		cavity.cavity_item.forceMove(drop_location)
-		cavity.cavity_item = null
+	for(var/atom/movable/item as anything in cavity.cavity_items)
+		item.forceMove(drop_location)
+		cavity.cavity_items -= item
 	for(var/obj/item/bodypart/part as anything in target.bodyparts)
 		part.drop_limb()
 

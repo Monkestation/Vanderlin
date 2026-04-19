@@ -7,7 +7,7 @@
 
 
 /turf/open/water/proc/set_parent(turf/open/water/incoming)
-	if(mapped)
+	if(volume_status == WATER_VOLUME_INFINITE)
 		return
 	if(source_originate && incoming.source_originate)
 		if(source_originate != incoming.source_originate)
@@ -17,14 +17,14 @@
 	source_originate = incoming.source_originate
 	if(istype(incoming, /turf/open/water/river/creatable))
 		var/turf/open/water/river/creatable/river = incoming
-		if(!river.river_processes)
+		if(!river.river_current)
 			source_originate = incoming
 	if(!source_originate)
 		source_originate = incoming
 	parent?.remove_child(src)
 	parent = incoming
 	parent.add_child(src)
-	water_volume = parent.water_volume - 10
+	water_volume = parent.water_volume - MINIMUM_WATER_VOLUME
 	water_reagent = parent.water_reagent
 	if(istype(src, /turf/open/water/river/creatable))
 		dir = get_dir(src, parent)
@@ -42,7 +42,7 @@
 /turf/open/water/proc/try_set_parent(turf/open/water/incoming)
 	if(!incoming)
 		return
-	if(incoming.water_volume < 10)
+	if(incoming.volume_status == WATER_VOLUME_DRY)
 		return
 	set_parent(incoming)
 
@@ -57,13 +57,13 @@
 		if(!istype(water))
 			continue
 		if(!reassess)
-			if(water.water_volume > (water_volume - 10))
+			if(water.water_volume > (water_volume - MINIMUM_WATER_VOLUME))
 				continue
 		addtimer(CALLBACK(water, PROC_REF(try_set_parent), src), 0.2 SECONDS)
 		//water.try_set_parent(src)
 
 /turf/open/water/proc/recursive_clear_icon()
-	dryup()
+	dry_up(TRUE)
 	check_surrounding_water()
 	for(var/turf/open/water/child in children)
 		addtimer(CALLBACK(child, PROC_REF(recursive_clear_icon)), 0.25 SECONDS)
@@ -71,7 +71,7 @@
 		var/turf/open/water/river/creatable/water = get_step(src, direction)
 		if(!istype(water))
 			continue
-		if(water.water_volume < 0)
+		if(water.volume_status == WATER_VOLUME_DRY)
 			continue
 		water.check_surrounding_water()
 

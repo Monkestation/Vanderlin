@@ -60,7 +60,7 @@
 	use_skintones = TRUE
 
 	species_traits = list(NO_UNDERWEAR, HAIR, FACEHAIR, OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_WATER_BREATHING, TRAIT_GOOD_SWIM, TRAIT_FISHFACE)
+	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_NODROWN, TRAIT_SWIMMER, TRAIT_FISHFACE)
 	inherent_traits_f = list(TRAIT_STRONGBITE)
 	inherent_sheet = /datum/attribute_holder/sheet/job/species/triton
 
@@ -130,6 +130,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/triton,

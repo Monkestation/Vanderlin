@@ -155,16 +155,23 @@
 			headdy.icon = 'icons/roguetown/mob/monster/orc.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
 	src.grant_language(/datum/language/common)
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
+
+	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
+
+	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+	LE.switch_side(LEFT_SIDE)
+
+	LE.Insert(src)
+	RE.Insert(src)
+
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
-	update_body()
+	update_eyes()
 	faction = list(FACTION_ORCS)
 	var/turf/turf = get_turf(src)
 	if(SSterrain_generation.get_island_at_location(turf))

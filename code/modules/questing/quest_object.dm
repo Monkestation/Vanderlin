@@ -20,7 +20,7 @@
 		if(is_mob)
 			var/mob/M = parent
 			M.add_filter(outline_filter_id, 2, list("type" = "outline", "color" = "#ff0000", "size" = 0.5))
-			RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_target_death))
+			RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_target_death))
 			RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_mob_examine))
 		else
 			var/obj/item/I = parent

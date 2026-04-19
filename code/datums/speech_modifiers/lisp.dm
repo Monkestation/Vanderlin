@@ -23,7 +23,7 @@
 
 /datum/speech_modifier/lisp/proc/update_lisp()
 	var/obj/item/bodypart/mouth/jaw = affected_mob?.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
-	if(jaw)
+	if(istype(jaw))
 		lisp_power = (1 - jaw.get_teeth_amount()/jaw.max_teeth) * 100
 	else
 		lisp_power = 100

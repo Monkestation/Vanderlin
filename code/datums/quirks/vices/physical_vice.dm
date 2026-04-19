@@ -48,8 +48,7 @@
 		QDEL_NULL(H.wear_mask)
 		H.put_in_hands(new type(get_turf(H)))
 	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/right/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_RIGHT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/cyclops_left
@@ -66,8 +65,7 @@
 		QDEL_NULL(H.wear_mask)
 		H.put_in_hands(new type(get_turf(H)))
 	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch/left(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_LEFT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/tongueless

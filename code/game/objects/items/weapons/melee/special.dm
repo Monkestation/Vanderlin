@@ -305,6 +305,7 @@
 		playsound(src, pick('sound/items/stunmace_toggle (1).ogg','sound/items/stunmace_toggle (2).ogg','sound/items/stunmace_toggle (3).ogg'), 100, TRUE)
 
 /obj/item/weapon/mace/stunmace/extinguish()
+	. = ..()
 	if(on)
 		var/mob/living/user = loc
 		if(istype(user))

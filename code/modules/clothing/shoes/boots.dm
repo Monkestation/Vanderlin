@@ -11,6 +11,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	max_integrity = INTEGRITY_STANDARD
+	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/armor
 	name = "plated boots"
@@ -113,6 +114,7 @@
 	max_integrity = INTEGRITY_STANDARD + 50
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch
 	name = "watch boots"
@@ -120,6 +122,7 @@
 	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
+	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch/Initialize()
 	. = ..()
@@ -131,6 +134,7 @@
 	max_integrity = INTEGRITY_STANDARD + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
 	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/masterwork/Initialize()
 	. = ..()
