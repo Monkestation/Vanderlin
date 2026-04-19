@@ -272,26 +272,33 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/reagent_containers/food/snacks/fish/pre_attack_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+/obj/item/reagent_containers/food/snacks/fish/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!HAS_TRAIT(interacting_with, TRAIT_CATCH_AND_RELEASE))
-		return ..()
+		return NONE
+
 	if(HAS_TRAIT(src, TRAIT_NODROP))
 		balloon_alert(user, "[p_theyre()] stuck to your hand!")
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ITEM_INTERACT_BLOCKING
+
 	balloon_alert(user, "releasing fish...")
 	if(!do_after(user, 3 SECONDS, interacting_with))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ITEM_INTERACT_BLOCKING
+
 	balloon_alert(user, "fish released")
 	var/goodbye_text = ""
 	if(status == FISH_DEAD)
 		goodbye_text = "[src] sinks motionlessly into [interacting_with]..."
 	else
 		goodbye_text = "[src] dives into [interacting_with]!"
-	user.visible_message(span_notice("[user] releases [src] into [interacting_with]. [goodbye_text]"), \
+
+	user.visible_message(
+		span_notice("[user] releases [src] into [interacting_with]. [goodbye_text]"), \
 		span_notice("You release [src] into [interacting_with]. [goodbye_text]"), \
-		span_notice("You hear a splash."))
+		span_notice("You hear a splash.")
+	)
+
 	released(interacting_with, user)
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
 	playsound(location, 'sound/effects/splash.ogg', 50)
