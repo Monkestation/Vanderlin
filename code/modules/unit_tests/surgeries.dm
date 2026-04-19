@@ -135,6 +135,7 @@
 	var/obj/item/weapon/surgery/saw/saw = allocate(/obj/item/weapon/surgery/saw)
 	var/obj/item/weapon/surgery/hemostat/hemostat = allocate(/obj/item/weapon/surgery/hemostat)
 	var/obj/item/weapon/surgery/cautery/cautery = allocate(/obj/item/weapon/surgery/cautery)
+	var/obj/item/weapon/surgery/bonesetter/bonesetter = allocate(/obj/item/weapon/surgery/bonesetter)
 
 	var/obj/item/bodypart/chest/chest = patient.get_bodypart(BODY_ZONE_CHEST)
 
@@ -163,6 +164,11 @@
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_BONE_SAWED), "Sawing bones did not apply the bone sawed surgical state")
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_VESSELS_CLAMPED), "Sawing bones removed the vessels clamped surgical state unexpectedly")
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Sawing bones removed the skin open surgical state unexpectedly")
+
+	var/datum/surgery_operation/limb/fix_bones/bsurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	UNLINT(bsurgery.success(chest, surgeon, bonesetter, list()))
+
+	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_BONE_SAWED), "Fixing bones did not remove the bone sawn surgery state")
 
 	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	UNLINT(msurgery.success(chest, surgeon, cautery, list()))
