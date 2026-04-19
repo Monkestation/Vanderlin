@@ -155,9 +155,10 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/obj/effect/temp_visual/target/meteor,
 		/obj/structure/meatvine/papameat,
 		/obj/effect/meatvine_controller,
+		/obj/effect/bombard_zone,
 	)
 	///this does some wonky things that we don't want in a test area
-	ignore += typesof(/obj/structure/stockpile_storage,)
+	ignore += typesof(/obj/structure/stockpile_storage)
 	//these are VERY situational and need info passed
 	ignore += typesof(/obj/effect/abstract)
 	//needs a lich passed
