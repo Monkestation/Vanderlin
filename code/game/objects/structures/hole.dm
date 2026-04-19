@@ -359,7 +359,6 @@
 				return
 			stage = 3
 			climb_offset = 0
-			cut_overlays()
 			open()
 			if(headstone)
 				if(headstone.sourceitem)
@@ -418,7 +417,8 @@
 								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
 								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
 								"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-								L.Stun(5 SECONDS)
+								var/turf/T = get_turf(src)
+								new /obj/effect/timestop(T, null, 5 SECONDS, null)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4))
@@ -443,7 +443,8 @@
 										part_to_bonify.skeletonize(FALSE)
 									L.emote("painscream")
 									L.update_body_parts()
-								L.Stun(10 SECONDS)
+								var/turf/T = get_turf(src)
+								new /obj/effect/timestop(T, null, 15 SECONDS, null)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
@@ -457,6 +458,7 @@
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		is_consecrated = FALSE // Unconsecrate.
+		cut_overlays()
 		update_quality()
 		adjust_grave_necra_devotion()
 

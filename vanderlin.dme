@@ -1680,6 +1680,7 @@
 #include "code\game\objects\effects\portals.dm"
 #include "code\game\objects\effects\step_triggers.dm"
 #include "code\game\objects\effects\stun_indicator.dm"
+#include "code\game\objects\effects\timestop.dm"
 #include "code\game\objects\effects\tracker_effect.dm"
 #include "code\game\objects\effects\waterfall_effect.dm"
 #include "code\game\objects\effects\decals\carpets.dm"
