@@ -98,7 +98,7 @@
 	return NONE
 
 /mob/living/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
-	if(user.cmode)
+	if(user.cmode || !user.item_offering)
 		return NONE
 
 	if(tool.item_flags & ABSTRACT)

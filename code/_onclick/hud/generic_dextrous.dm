@@ -188,7 +188,7 @@
 	inv_box.slot_id = ITEM_SLOT_MOUTH
 	static_inventory += inv_box
 
-	using = new /atom/movable/screen/drop(null, src)
+	using = new /atom/movable/screen/give(null, src)
 	using.icon = ui_style
 	using.screen_loc = rogueui_drop
 	static_inventory += using

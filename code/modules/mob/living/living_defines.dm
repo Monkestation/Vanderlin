@@ -268,3 +268,7 @@
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+
+	// BAD change to allow for more mmb options
+	/// Mob is currently able to offer items with right click
+	var/item_offering = FALSE

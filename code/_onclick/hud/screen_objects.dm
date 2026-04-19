@@ -349,17 +349,37 @@
 		user.swap_hand(held_index)
 	return TRUE
 
-/atom/movable/screen/drop
-	name = "drop"
-	icon_state = "act_drop"
+/atom/movable/screen/give
+	name = "give"
+	icon_state = "give_item"
 	plane = HUD_PLANE
 
-/atom/movable/screen/drop/Click()
-	if(ismob(usr))
-		var/mob/M = usr
-		M.playsound_local(M, 'sound/misc/click.ogg', 100)
-	if(usr.stat == CONSCIOUS)
-		usr.dropItemToGround(usr.get_active_held_item(), silent = FALSE)
+/atom/movable/screen/give/Click()
+	if(!isliving(usr))
+		return
+
+	var/mob/living/L = usr
+
+	if(L.incapacitated(IGNORE_GRAB))
+		return
+
+	L.playsound_local(L, 'sound/misc/click.ogg', 100)
+
+	if(L.item_offering)
+		L.cancel_offering_item()
+
+	L.item_offering = !L.item_offering
+	update_appearance(UPDATE_ICON_STATE)
+
+/atom/movable/screen/give/update_icon_state()
+	. = ..()
+
+	if(!isliving(hud?.mymob))
+		return
+
+	var/mob/living/living_hud_owner = hud.mymob
+
+	icon_state = "give_item[living_hud_owner.item_offering ? "_active" : ""]"
 
 /atom/movable/screen/act_intent
 	name = "intent"
@@ -911,10 +931,12 @@
 
 /atom/movable/screen/throw_catch/update_icon_state()
 	. = ..()
-	if(!ismob(usr))
+
+	if(!hud || !hud.mymob || !isliving(hud.mymob))
 		return
-	var/mob/M = usr
-	if(M.get_active_held_item())
+
+	var/mob/living/living_hud_owner = hud.mymob
+	if(living_hud_owner.get_active_held_item())
 		icon_state = "throw[throwy]"
 	else
 		icon_state = "catch[throwy]"
