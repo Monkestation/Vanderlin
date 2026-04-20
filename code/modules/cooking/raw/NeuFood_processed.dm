@@ -39,20 +39,21 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/reagent_containers/food/snacks/fat/attackby(obj/item/I, mob/living/user, list/modifiers)
+/obj/item/reagent_containers/food/snacks/fat/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
-	var/obj/item/reagent_containers/glass/R = I
+	var/obj/item/reagent_containers/glass/R = tool
 	if(user.mind)
-		long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*15))
+		long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 15))
+
 	if(isturf(loc)&& (found_table))
 		if(!istype(R))
-			return ..()
+			return NONE
 		if(!R.reagents.has_reagent(/datum/reagent/consumable/sugar, 30))
 			to_chat(user, span_notice("Needs more sugar to work it."))
-			return TRUE
+			return ITEM_INTERACT_BLOCKING
 		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
 			to_chat(user, span_warning("Gelatine is much too strange for you."))
-			return
+			return ITEM_INTERACT_BLOCKING
 		to_chat(user, span_notice("Congealing the sugar..."))
 		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
 		if(do_after(user, long_cooktime, src))
