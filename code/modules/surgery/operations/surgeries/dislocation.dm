@@ -30,7 +30,7 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("I begin to set the bone in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to relocate the bone in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to relocate the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to relocate the bone in [limb.owner]'s [parse_zone(limb.body_zone)].")
 	)

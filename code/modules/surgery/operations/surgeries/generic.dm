@@ -255,7 +255,7 @@
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 	)
-	display_pain(limb.owner, "It feels like something just broke in your [parse_zone(limb.body_zone)]!")
+	display_pain(limb.owner, "Something just broke in your [parse_zone(limb.body_zone)]!")
 
 	limb.owner.emote("scream")
 
@@ -291,9 +291,9 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to fix the bones in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
-		span_notice("[surgeon] begins to fix the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] begins to fix the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("You begin to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("[surgeon] begins to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("[surgeon] begins to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
 	display_pain(limb.owner, "You feel a grinding sensation in your [parse_zone(limb.body_zone)] as the bones are set back in place.")
 
@@ -301,12 +301,10 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("I successfully relocate the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]!"),
-		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]!"),
+		span_notice("I successfully set the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
 
 	for(var/datum/wound/fracture/bone in limb.wounds)
 		bone.set_bone()
-
-	limb.remove_surgical_state(SURGERY_BONE_SAWED)

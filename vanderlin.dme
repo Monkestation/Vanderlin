@@ -3927,6 +3927,7 @@
 #include "code\modules\surgery\operations\surgeries\extract_tooth.dm"
 #include "code\modules\surgery\operations\surgeries\fix_teeth.dm"
 #include "code\modules\surgery\operations\surgeries\generic.dm"
+#include "code\modules\surgery\operations\surgeries\generic_basic.dm"
 #include "code\modules\surgery\operations\surgeries\healing.dm"
 #include "code\modules\surgery\operations\surgeries\plastic_surgery.dm"
 #include "code\modules\surgery\operations\surgeries\prosthetic_replacement.dm"
