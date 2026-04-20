@@ -1111,6 +1111,7 @@
 	req_bar = /obj/item/ingot/gold
 	craftdiff = 3 // harder to work with. mostly jewelry
 	abstract_type = /datum/anvil_recipe/armor/gold
+
 ///////////////////////////////////////////////
 
 /datum/anvil_recipe/armor/gold/mask

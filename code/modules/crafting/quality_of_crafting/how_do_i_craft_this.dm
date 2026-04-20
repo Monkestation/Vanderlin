@@ -392,7 +392,10 @@
 		qdel(recipe)
 
 /datum/recipe_tree_interface/proc/scan_anvil_recipes()
-	for(var/recipe_path in subtypesof(/datum/anvil_recipe))
+	for(var/datum/anvil_recipe/recipe_type as anything in subtypesof(/datum/anvil_recipe))
+		if(IS_ABSTRACT(recipe_type))
+			continue
+
 		var/datum/anvil_recipe/recipe = new recipe_path()
 
 		if(!recipe.created_item)
@@ -410,7 +413,7 @@
 
 		add_recipe_to_cache(
 			recipe.created_item,
-			recipe_path,
+			recipe_type,
 			"anvil",
 			recipe.recipe_name || recipe.name,
 			ingredients,
