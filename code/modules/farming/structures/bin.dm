@@ -159,6 +159,8 @@
 		return ITEM_INTERACT_SUCCESS
 
 	if(isitem(tool))
+		if(isreagentcontainer(tool))
+			return NONE // special snowflake
 		var/obj/item/item = tool
 		if(istype(tool, /obj/item/weapon/tongs))
 			var/obj/item/weapon/tongs/tongs = tool
