@@ -396,7 +396,7 @@
 		if(IS_ABSTRACT(recipe_type))
 			continue
 
-		var/datum/anvil_recipe/recipe = new recipe_path()
+		var/datum/anvil_recipe/recipe = new recipe_type()
 
 		if(!recipe.created_item)
 			qdel(recipe)
