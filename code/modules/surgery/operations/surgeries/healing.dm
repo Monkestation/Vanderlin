@@ -131,7 +131,7 @@
 		span_notice("[surgeon] attempts to patch some of [patient]'s [woundtype]."),
 		span_notice("[surgeon] attempts to patch some of [patient]'s [woundtype]."),
 	)
-	display_pain(patient, "Your [woundtype] sting like hell!")
+	display_pain(patient, "My [woundtype] sting like hell!")
 
 #define CONDITIONAL_DAMAGE_MESSAGE(brute, burn, combo_msg, brute_msg, burn_msg) "[(brute > 0 && burn > 0) ? combo_msg : (brute > 0 ? brute_msg : burn_msg)]"
 

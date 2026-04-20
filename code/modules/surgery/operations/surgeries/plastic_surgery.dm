@@ -60,7 +60,7 @@
 		span_notice("[surgeon] begins to alter [limb.owner]'s appearance."),
 		span_notice("[surgeon] begins to make an incision in [limb.owner]'s face."),
 	)
-	display_pain(limb.owner, "You feel a slicing pain across your face!")
+	display_pain(limb.owner, "I feel a slicing pain across your face!")
 
 /datum/surgery_operation/limb/plastic_surgery/on_success(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
 	if(!istype(limb))
@@ -75,7 +75,7 @@
 			span_notice("[surgeon] successfully restores [limb.owner]'s appearance!"),
 			span_notice("[surgeon] finishes the operation on [limb.owner]'s face."),
 		)
-		display_pain(limb.owner, "The pain fades, your face feels normal again!")
+		display_pain(limb.owner, "The pain fades, my face feels normal again!")
 		return
 
 	var/oldname = limb.owner.real_name
@@ -88,7 +88,7 @@
 		span_notice("[surgeon] alters [oldname]'s appearance completely, [limb.owner.p_they()] is now [operation_args[OPERATION_NEW_NAME]]!"),
 		span_notice("[surgeon] finishes the operation on [limb.owner ? "[limb.owner]'s face." : limb]."),
 	)
-	display_pain(limb.owner, "The pain fades, your face feels new and unfamiliar!")
+	display_pain(limb.owner, "The pain fades, my face feels new and unfamiliar!")
 
 /datum/surgery_operation/limb/plastic_surgery/on_failure(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
@@ -98,7 +98,7 @@
 		span_warning("[surgeon] screws up, disfiguring [limb.owner]'s appearance!"),
 		span_notice("[surgeon] finishes the operation on [limb.owner]'s face.")
 	)
-	display_pain(limb.owner, "Your face feels horribly scarred and deformed!")
+	display_pain(limb.owner, "My face feels horribly scarred and deformed!")
 
 	limb.add_wound(/datum/wound/facial/disfigurement)
 	limb.owner.emote("scream")

@@ -43,11 +43,11 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You begin to make an incision in [patient]..."),
+		span_notice("I begin to make an incision in [patient]..."),
 		span_notice("[surgeon] begins to make an incision in [patient]."),
 		span_notice("[surgeon] begins to make an incision in [patient]."),
 	)
-	display_pain(patient, "You feel a sharp stabbing sensation!")
+	display_pain(patient, "I feel a sharp stabbing sensation!")
 
 /datum/surgery_operation/basic/incise_skin/on_success(mob/living/patient, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -94,11 +94,11 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You begin to saw through [patient]'s bones..."),
+		span_notice("I begin to saw through [patient]'s bones..."),
 		span_notice("[surgeon] begins to saw through [patient]'s bones."),
 		span_notice("[surgeon] begins to saw through [patient]'s bones."),
 	)
-	display_pain(patient, "You feel a horrid ache spread through your insides!")
+	display_pain(patient, "I feel a horrid ache spread through my insides!")
 
 /datum/surgery_operation/basic/saw_bone/on_success(mob/living/patient, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -106,7 +106,7 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You saw [patient] open."),
+		span_notice("I saw [patient] open."),
 		span_notice("[surgeon] saws [patient] open!"),
 		span_notice("[surgeon] saws [patient] open!"),
 	)
@@ -161,11 +161,11 @@
 	display_results(
 		surgeon,
 		patient,
-		span_notice("You begin to mend the incision in [patient]..."),
+		span_notice("I begin to mend the incision in [patient]..."),
 		span_notice("[surgeon] begins to mend the incision in [patient]."),
 		span_notice("[surgeon] begins to mend the incision in [patient]."),
 	)
-	display_pain(patient, "You are being [istype(tool, /obj/item/needle) ? "pinched" : "burned"]!")
+	display_pain(patient, "I am being [istype(tool, /obj/item/needle) ? "pinched" : "burned"]!")
 
 /datum/surgery_operation/basic/close_skin/on_success(mob/living/patient, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()

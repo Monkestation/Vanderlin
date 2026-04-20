@@ -51,7 +51,7 @@
 		span_notice("[surgeon] begins to sever [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to sever [limb.owner]'s [parse_zone(limb.body_zone)] with [tool]."),
 	)
-	display_pain(limb.owner, "You feel a gruesome pain in your [parse_zone(limb.body_zone)]'s joint!")
+	display_pain(limb.owner, "I feel a gruesome pain in my [parse_zone(limb.body_zone)]'s joint!")
 
 /datum/surgery_operation/limb/amputate/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
@@ -61,7 +61,7 @@
 		span_notice("[surgeon] successfully amputates [limb.owner]'s [parse_zone(limb.body_zone)]!"),
 		span_notice("[surgeon] finishes severing [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "You can no longer feel your [parse_zone(limb.body_zone)]!")
+	display_pain(limb.owner, "I can no longer feel my [parse_zone(limb.body_zone)]!")
 	limb.drop_limb()
 
 /datum/surgery_operation/limb/amputate/pegleg

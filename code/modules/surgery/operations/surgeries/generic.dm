@@ -37,11 +37,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to make an incision in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to make an incision in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to make an incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to make an incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "You feel a stabbing in your [parse_zone(limb.body_zone)].")
+	display_pain(limb.owner, "I feel a stabbing in my [parse_zone(limb.body_zone)].")
 
 /datum/surgery_operation/limb/incise_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..() // default success message
@@ -80,11 +80,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to retract the skin in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to retract the skin in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to retract the skin in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to retract the skin in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "You feel a severe stinging pain spreading across your [parse_zone(limb.body_zone)] as the skin is pulled back.")
+	display_pain(limb.owner, "I feel a severe stinging pain spreading across my [parse_zone(limb.body_zone)] as the skin is pulled back.")
 
 /datum/surgery_operation/limb/retract_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -139,11 +139,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to mend the incision in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to mend the incision in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to mend the incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to mend the incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "Your [parse_zone(limb.body_zone)] is being [istype(tool, /obj/item/needle) ? "pinched" : "burned"]!")
+	display_pain(limb.owner, "My [parse_zone(limb.body_zone)] is being [istype(tool, /obj/item/needle) ? "pinched" : "burned"]!")
 
 /datum/surgery_operation/limb/close_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -176,11 +176,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to clamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to clamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to clamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to clamp bleeders in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "You feel a pinch as the bleeding in your [parse_zone(limb.body_zone)] is slowed.")
+	display_pain(limb.owner, "I feel a pinch as the bleeding in my [parse_zone(limb.body_zone)] is slowed.")
 
 /datum/surgery_operation/limb/clamp_bleeders/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -225,11 +225,11 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You begin to saw through the bone in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
+		span_notice("I begin to saw through the bone in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
 		span_notice("[surgeon] begins to saw through the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("[surgeon] begins to saw through the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
-	display_pain(limb.owner, "You feel a horrid ache spread through the inside of your [parse_zone(limb.body_zone)]!")
+	display_pain(limb.owner, "I feel a horrid ache spread through the inside of my [parse_zone(limb.body_zone)]!")
 
 /datum/surgery_operation/limb/saw_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()
@@ -255,56 +255,6 @@
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 	)
-	display_pain(limb.owner, "Something just broke in your [parse_zone(limb.body_zone)]!")
+	display_pain(limb.owner, "Something just broke in my [parse_zone(limb.body_zone)]!")
 
 	limb.owner.emote("scream")
-
-/// Fixes sawed bones back together
-/datum/surgery_operation/limb/fix_bones
-	name = "fix limb bone"
-	desc = "Repair a patient's cut or broken bones. \
-		Clears \"bone sawed\" surgical state and repairs fractures."
-
-	implements = list(
-		TOOL_BONESETTER = 1,
-		IMPLEMENT_HAND = 3,
-	)
-
-	time = 6.4 SECONDS
-
-	skill_min = SKILL_LEVEL_APPRENTICE
-	skill_median = SKILL_LEVEL_JOURNEYMAN
-
-	all_surgery_states_required = SURGERY_SKIN_OPEN
-	any_surgery_states_required = SURGERY_BONE_SAWED
-
-/datum/surgery_operation/limb/fix_bones/get_default_radial_image()
-	return image(/obj/item/weapon/surgery/bonesetter)
-
-/datum/surgery_operation/limb/fix_bones/all_required_strings()
-	return ..() + list("the limb must have bones")
-
-/datum/surgery_operation/limb/fix_bones/state_check(obj/item/bodypart/limb)
-	return LIMB_HAS_BONES(limb)
-
-/datum/surgery_operation/limb/fix_bones/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	display_results(
-		surgeon,
-		limb.owner,
-		span_notice("You begin to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]..."),
-		span_notice("[surgeon] begins to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] begins to set the bones in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-	)
-	display_pain(limb.owner, "You feel a grinding sensation in your [parse_zone(limb.body_zone)] as the bones are set back in place.")
-
-/datum/surgery_operation/limb/fix_bones/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	display_results(
-		surgeon,
-		limb.owner,
-		span_notice("I successfully set the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("[surgeon] successfully sets the bone in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-	)
-
-	for(var/datum/wound/fracture/bone in limb.wounds)
-		bone.set_bone()
