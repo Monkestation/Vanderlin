@@ -1,7 +1,7 @@
 /obj/effect/timestop //Ported from Monkestation 2.0 (https://github.com/Monkestation/Monkestation2.0)
 	anchored = TRUE
 	name = "chronofield"
-	desc = "Necra's petrifying gaze..."
+	desc = "A field where all time seems frozen..."
 	icon = 'icons/effects/160x160.dmi'
 	icon_state = "time"
 	layer = FLY_LAYER
@@ -9,19 +9,26 @@
 	pixel_x = -64
 	pixel_y = -64
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	var/list/immune = list() // the one who creates the timestop is immune, which includes wizards and the dead slime you murdered to make this chronofield
-	var/turf/target
-	var/freezerange = 2
-	var/duration = 140
-	var/datum/proximity_monitor/advanced/timestop/chronofield
 	alpha = 125
-	var/antimagic_flags = MAGIC_RESISTANCE_HOLY
-	///if true, immune atoms moving ends the timestop instead of duration.
+	/// The one who creates the timestop is immune, or if they have `TRAIT_TIME_STOP_IMMUNE`
+	var/list/immune = list()
+	/// Center turf where timestop will expand from
+	var/turf/target
+	/// How wide the area of effect will be from `target`
+	/// Default is 2 tiles away from `target` (5x5)
+	var/freezerange = 2
+	/// How long the effect will last
+	var/duration = 14 SECONDS
+	var/datum/proximity_monitor/advanced/timestop/chronofield
+	/// If person in range is resistant to specified Magic, added to `immune`
+	/// Should be set to what the magick source of the effect is
+	var/antimagic_flags = MAGIC_RESISTANCE
+	/// If true, immune atoms moving ends the timestop instead of duration.
 	var/channelled = FALSE
-	/// hides time icon effect and mutes sound
+	/// Hides time icon effect and mutes sound
 	var/hidden = FALSE
 
-/obj/effect/timestop/Initialize(mapload, radius, time, list/immune_atoms, start = TRUE, silent = FALSE) //Immune atoms assoc list atom = TRUE
+/obj/effect/timestop/Initialize(mapload, radius, time, list/immune_atoms, magic_source, start = TRUE, silent = FALSE)
 	. = ..()
 	if(!isnull(time))
 		duration = time
@@ -30,6 +37,8 @@
 	if(silent)
 		hidden = TRUE
 		alpha = 0
+	if(magic_source)
+		antimagic_flags = magic_source
 	for(var/A in immune_atoms)
 		immune[A] = TRUE
 	for(var/mob/living/to_check in GLOB.player_list)
@@ -52,7 +61,7 @@
 	if(!channelled)
 		QDEL_IN(src, duration)
 
-///indefinite version, but only if no immune atoms move.
+/// Indefinite version, but only if no immune atoms move.
 /obj/effect/timestop/channelled
 	channelled = TRUE
 
@@ -60,11 +69,14 @@
 	edge_is_a_field = TRUE
 	var/list/immune = list()
 	var/list/frozen_things = list()
-	var/list/frozen_mobs = list() //cached separately for processing
-	var/list/frozen_structures = list() //Also machinery, and only frozen aestethically
-	var/list/frozen_turfs = list() //Only aesthetically
+	/// Cached separately for processing
+	var/list/frozen_mobs = list()
+	/// Also machinery, and only frozen aestethically
+	var/list/frozen_structures = list()
+	/// Only aesthetically
+	var/list/frozen_turfs = list()
 	var/antimagic_flags = NONE
-	///if true, this doesn't time out after a duration but rather when an immune atom inside moves.
+	/// If TRUE, this doesn't time out after a duration but rather when an immune atom inside moves.
 	var/channelled = FALSE
 
 	var/static/list/global_frozen_atoms = list()
@@ -229,8 +241,10 @@
 	)
 
 /datum/status_effect/time_stopped/on_apply()
+	. = ..()
 	owner.add_traits(timestop_traits, TRAIT_STATUS_EFFECT(id))
 	return TRUE
 
 /datum/status_effect/time_stopped/on_remove()
+	. = ..()
 	owner.remove_traits(timestop_traits, TRAIT_STATUS_EFFECT(id))

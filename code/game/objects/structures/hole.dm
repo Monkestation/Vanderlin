@@ -418,7 +418,7 @@
 								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
 								"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
 								var/turf/T = get_turf(src)
-								new /obj/effect/timestop(T, null, 5 SECONDS, null)
+								new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4))
@@ -444,7 +444,7 @@
 									L.emote("painscream")
 									L.update_body_parts()
 								var/turf/T = get_turf(src)
-								new /obj/effect/timestop(T, null, 15 SECONDS, null)
+								new /obj/effect/timestop(T, 2, 15 SECONDS, null, MAGIC_RESISTANCE_HOLY)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
@@ -572,14 +572,14 @@
 	if(headstone)
 		var/headquality = headstone.decorationquality
 		for(var/mob/living/corpse in contents)
-			if(corpse.patron in headstone.patron)
+			if(corpse.patron.type in headstone.patrons)
 				headquality = 3
 		gravequality += headquality
 
 	if(gravefence)
 		var/fencequality = gravefence.decorationquality
 		for(var/mob/living/corpse in contents)
-			if(corpse.patron in gravefence.patron)
+			if(corpse.patron.type in gravefence.patrons)
 				fencequality = 3
 		gravequality += fencequality
 	for(var/obj/structure/closet/crate/coffin/coffin in contents)
