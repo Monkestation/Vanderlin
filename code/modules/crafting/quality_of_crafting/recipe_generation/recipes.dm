@@ -510,70 +510,39 @@
 		data["output_state"] = "[initial(produce_type.icon_state)]"
 	return data
 
-/datum/surgery/return_recipe_data()
-	return
-	// var/list/data = list()
-	// data["type"] = "surgery"
-	// data["name"] = name
-	// data["category"] = category
-	// data["desc"] = desc
-	// data["heretical"] = heretical
-	// data["req_bodypart"] = requires_bodypart
-	// data["req_missing_bodypart"] = requires_missing_bodypart
-	// data["req_real_bodypart"] = requires_real_bodypart
+/datum/surgery_operation/return_recipe_data()
+	var/list/data = list()
 
-	// var/list/steps_out = list()
-	// for(var/datum/surgery_step/step_type as anything in steps)
-	// 	var/datum/surgery_step/S = new step_type()
+	data["type"] = "surgery"
+	data["name"] = name
+	data["desc"] = desc
+	data["category"] = category
+	data["heretical"] = heretical
 
-	// 	var/list/tools = list()
-	// 	for(var/atom/tool as anything in S.implements)
-	// 		var/tool_name = ispath(tool) ? initial(tool.name) : "any [tool]"
-	// 		tools += list(list("name" = tool_name, "chance" = S.implements[tool]))
+	var/list/tools = list()
+	for(var/obj/item/implement as anything in implements)
+		var/tool_name = ispath(implement) ? capitalize(format_text(implement::name)) : "[capitalize(implement)]"
+		tools += list(list("name" = tool_name, "modifier" = implements[implement]))
 
-	// 	var/list/step_e = list(
-	// 		"name" = initial(S.name),
-	// 		"desc" = S.desc,
-	// 		"tools" = tools,
-	// 		"accept_hand" = S.accept_hand,
-	// 		"accept_any" = S.accept_any_item,
-	// 		"self_operable" = S.self_operable,
-	// 		"lying_required" = S.lying_required,
-	// 		"repeating" = S.repeating,
-	// 		"ignore_clothes" = S.ignore_clothes,
-	// 	)
+	data["implements"] = tools
 
-	// 	if(S.skill_used && S.skill_min)
-	// 		step_e["skill_name"] = initial(S.skill_used.name)
-	// 		step_e["skill_min"] = SSskills.level_names[S.skill_min]
-	// 		step_e["skill_median"] = SSskills.level_names[S.skill_median]
+	var/list/raw_reqs = get_requirements()
+	if(length(raw_reqs[2]) == 1)
+		raw_reqs[1] += raw_reqs[2]
+		raw_reqs[2] = list()
 
-	// 	if(length(S.chems_needed))
-	// 		step_e["chems"] = S.get_chem_string()
+	data["hard_requirements"] = raw_reqs[1]
+	data["soft_requirements"] = raw_reqs[2]
+	data["optional_requirements"] = raw_reqs[3]
+	data["blocker_requirements"] = raw_reqs[4]
 
-	// 	if(length(S.required_organs))
-	// 		step_e["organs"] = S.required_organs.Copy()
+	data["skill_name"] = skill_used.name
+	data["min_skill"] = skill_min
+	data["median_skill"] = skill_median
 
-	// 	var/list/flags = list()
-	// 	if(S.surgery_flags & SURGERY_INCISED)
-	// 		flags += "Requires incision"
-	// 	if(S.surgery_flags & SURGERY_RETRACTED)
-	// 		flags += "Requires retraction"
-	// 	if(S.surgery_flags & SURGERY_CLAMPED)
-	// 		flags += "Requires clamping"
-	// 	if(S.surgery_flags & SURGERY_DISLOCATED)
-	// 		flags += "Requires dislocation"
-	// 	if(S.surgery_flags & SURGERY_BROKEN)
-	// 		flags += "Requires broken bodypart"
-	// 	if(S.surgery_flags & SURGERY_DRILLED)
-	// 		flags += "Requires drilling"
-	// 	step_e["flags"] = flags
+	data["looping"] = (operation_flags & OPERATION_LOOPING)
 
-	// 	steps_out += list(step_e)
-	// 	qdel(S)
-
-	// data["steps"] = steps_out
-	// return data
+	return data
 
 /datum/wound/return_recipe_data()
 	var/list/data = list()

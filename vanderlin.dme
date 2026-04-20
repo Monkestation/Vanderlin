@@ -377,7 +377,6 @@
 #include "code\_globalvars\lists\poll_ignore.dm"
 #include "code\_globalvars\lists\slapcrafting.dm"
 #include "code\_globalvars\lists\speech.dm"
-#include "code\_globalvars\lists\surgery.dm"
 #include "code\_globalvars\lists\typecache.dm"
 #include "code\_globalvars\lists\wounds.dm"
 #include "code\_globalvars\special_traits\special_traits.dm"

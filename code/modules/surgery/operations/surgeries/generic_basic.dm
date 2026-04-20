@@ -1,7 +1,7 @@
 // Some operations that mirror basic carbon state-moving operations but for basic mobs
 /// Incision of skin for basic mobs
 /datum/surgery_operation/basic/incise_skin
-	name = "make incision"
+	name = "make incision (basic)"
 	desc = "Make an incision in the patient's skin to access internals. \
 		Causes \"cut skin\" surgical state."
 
@@ -54,7 +54,7 @@
 	patient.apply_status_effect(/datum/status_effect/basic_surgery_state, SURGERY_SKIN_OPEN)
 
 /datum/surgery_operation/basic/saw_bone
-	name = "saw bone"
+	name = "saw bone (basic)"
 	desc = "Saw through the patient's bones to access their internal organs. \
 		Causes \"bone sawed\" surgical state."
 
@@ -114,7 +114,7 @@
 
 // Closing of skin for basic mobs
 /datum/surgery_operation/basic/close_skin
-	name = "mend incision"
+	name = "mend incision (basic)"
 	desc = "Mend the incision in the patient's skin, closing it up. \
 		Clears most surgical states."
 

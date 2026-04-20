@@ -843,7 +843,7 @@
 	if(required_biotype & MOB_ROBOTIC)
 		. += "the patient must not be organic"
 	else if(required_biotype)
-		. += "the patient must not be robotic"
+		. += "the patient must not be metallic"
 
 /datum/surgery_operation/basic/is_available(mob/living/patient, operated_zone)
 	SHOULD_NOT_OVERRIDE(TRUE)

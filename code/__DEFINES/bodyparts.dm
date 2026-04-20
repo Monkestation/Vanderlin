@@ -55,7 +55,7 @@ DEFINE_BITFIELD(surgery_state, list(
 	"the blood vessels [must_must_not] be clamped" = SURGERY_VESSELS_CLAMPED, \
 	"the organs [must_must_not] be cut" = SURGERY_ORGANS_CUT, \
 	"the bone [must_must_not] be drilled" = SURGERY_BONE_DRILLED, \
-	"the bone [must_must_not] be sawed" = SURGERY_BONE_SAWED, \
+	"the bone [must_must_not] be broken" = SURGERY_BONE_SAWED, \
 	"plastic [must_must_not] be applied" = SURGERY_PLASTIC_APPLIED, \
 	"the prosthetic [must_must_not] be unsecured" = SURGERY_PROSTHETIC_UNSECURED, \
 	"the chest cavity [must_must_not] be opened wide" = SURGERY_CAVITY_WIDENED, \
