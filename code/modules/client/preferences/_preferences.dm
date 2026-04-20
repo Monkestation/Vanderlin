@@ -1913,12 +1913,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_ooccolor)
-						ooccolor = sanitize_ooccolor(new_ooccolor)
+						ooccolor = sanitize_color(new_ooccolor)
 
 				if("asaycolor")
 					var/new_asaycolor = input(user, "Choose your ASAY color:", "Game Preference", asaycolor) as color|null
 					if(new_asaycolor)
-						asaycolor = sanitize_ooccolor(new_asaycolor)
+						asaycolor = sanitize_color(new_asaycolor)
 				if ("clientfps")
 					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
 					if (!isnull(desiredfps))

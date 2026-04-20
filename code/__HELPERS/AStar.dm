@@ -181,7 +181,7 @@ Actual Adjacent procs :
 /turf/proc/reachableTurftest(atom/movable/requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
 	if(!T || T.density)
 		return FALSE
-	if(!T.can_traverse_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
+	if(!T.can_cross_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
 		return FALSE
 
 	var/z_distance = abs(T.z - z)

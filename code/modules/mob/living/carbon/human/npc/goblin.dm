@@ -253,7 +253,7 @@
 
 	for(var/slot in internal_organs_slot)
 		for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
-			organ.sellprice = 5
+			organ.sellprice = max(initial(organ.sellprice) / 2, 1)
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()

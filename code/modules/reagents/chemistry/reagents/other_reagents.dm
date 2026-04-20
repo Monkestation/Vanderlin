@@ -159,7 +159,7 @@
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
 	..()
-	if(HAS_TRAIT(M, TRAIT_NASTY_EATER )) // lets orcs and goblins drink bogwater
+	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
 	M.adjustToxLoss(1 * efficiency)
 	M.add_nausea(12 * efficiency) //Over 8 units will cause puking

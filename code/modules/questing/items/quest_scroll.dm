@@ -135,6 +135,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 	return // Immune to fire
 
 /obj/item/paper/scroll/quest/extinguish()
+	. = ..()
 	return // No fire to extinguish
 
 /obj/item/paper/scroll/quest/read(mob/user)

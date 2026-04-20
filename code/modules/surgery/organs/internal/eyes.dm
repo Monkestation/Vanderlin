@@ -6,6 +6,7 @@
 	zone = BODY_ZONE_PRECISE_R_EYE
 	slot = ORGAN_SLOT_EYES
 	side = RIGHT_SIDE
+	sellprice = DEFAULT_ORGAN_VALUE/2
 
 	visible_organ = TRUE
 

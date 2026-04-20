@@ -131,3 +131,11 @@ SUBSYSTEM_DEF(elastic)
 
 	add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_GAINED, 0)
 	add_abstract_elastic_data(ELASCAT_ECONOMY, ELASDATA_MAMMONS_SPENT, 0)
+
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ANASTASIS_REVIVE, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ABSOLVE_REVIVE, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ULTIMATE_REVIVE, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_REVIVE, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_EXTRACT, 0)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_EXTRACT_PLAYER, 0)

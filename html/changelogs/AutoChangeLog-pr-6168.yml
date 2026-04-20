@@ -1,6 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - rscdel: "Removed CRT setting"
-  - bugfix: "Fixed Interface issues by giving proper hud to aghosts, new players and simple animals"
-  - bugfix: "Enabled mouse icon opacity for the HUD, if this blocks the inventory somewhere please report it"

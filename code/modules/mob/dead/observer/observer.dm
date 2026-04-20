@@ -116,12 +116,6 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	invisibility = INVISIBILITY_GHOST
 	see_invisible = SEE_INVISIBLE_GHOST
 
-/mob/dead/observer/profane/Move(n, direct)
-	return
-
-/mob/dead/observer/profane/canZMove(direction, turf/target)
-	return
-
 /mob/dead/observer/Initialize()
 	set_invisibility(GLOB.observer_default_invisibility)
 
@@ -164,7 +158,8 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 		mind?.current_ghost = src
 
-		set_suicide(body.suiciding) // Transfer whether they committed suicide.
+		if(HAS_TRAIT_FROM_ONLY(body, TRAIT_SUICIDED, REF(body))) // transfer if the body was killed due to suicide
+			ADD_TRAIT(src, TRAIT_SUICIDED, REF(body))
 
 		if(draw_icon)
 			if(ishuman(body))

@@ -72,4 +72,8 @@
 		SEND_SIGNAL(user, COMSIG_LUX_EXTRACTED, target)
 		record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 		record_round_statistic(STATS_LUX_HARVESTED)
+		if(target.client)
+			add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_EXTRACT_PLAYER, 1)
+		else
+			add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_EXTRACT, 1)
 	return TRUE

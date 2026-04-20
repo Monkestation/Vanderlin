@@ -364,7 +364,7 @@
 		return
 	RegisterSignal(arrived, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
 
-/area/underworld/Exited(atom/movable/gone, atom/new_loc)
+/area/underworld/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(!iscarbon(gone))
 		return

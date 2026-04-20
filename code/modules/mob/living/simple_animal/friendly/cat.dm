@@ -68,6 +68,7 @@
 			list(/mob/living/simple_animal/pet/cat/kitten = 100),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
+	add_traits(list(TRAIT_NOFALLDAMAGE2), INNATE_TRAIT)
 
 /mob/living/simple_animal/pet/cat/proc/drop_held_item()
 	held_item.forceMove(get_turf(src))

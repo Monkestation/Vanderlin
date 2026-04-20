@@ -29,7 +29,7 @@
 	if(!isnull(emote_chance))
 		src.emote_chance = emote_chance
 
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_death))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 	RegisterSignal(parent, COMSIG_AI_BLACKBOARD_KEY_SET(BB_BASIC_MOB_CURRENT_TARGET), PROC_REF(on_target_acquired))
 	RegisterSignal(parent, COMSIG_MOB_TRY_BARK, PROC_REF(try_combat_bark))
 	RegisterSignal(parent, COMSIG_MOB_TRY_EMOTE, PROC_REF(try_combat_emote))
@@ -39,7 +39,7 @@
 /datum/component/combat_vocalizer/Destroy(force)
 	. = ..()
 	UnregisterSignal(parent, list(
-		COMSIG_MOB_DEATH,
+		COMSIG_LIVING_DEATH,
 		COMSIG_AI_BLACKBOARD_KEY_SET(BB_BASIC_MOB_CURRENT_TARGET),
 	))
 

@@ -1,5 +1,0 @@
-author: "ta3754859-max"
-delete-after: True
-changes:
-  - bugfix: "Fixes inqusition black mirror, changes few buttons"
-  - qol: "Red tallows can be now melted when used over a static light source"

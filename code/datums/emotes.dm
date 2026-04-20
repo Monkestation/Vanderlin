@@ -59,20 +59,9 @@
 	if(only_forced_audio && intentional)
 		return FALSE
 	if(targetted)
-		var/list/mobsadjacent = list()
-		var/mob/chosenmob
-		for(var/mob/living/target_mob in view(user, 2))
-			if(target_mob == user)
-				continue
-			if(target_mob.rogue_sneaking) // No detecting sneaky people.
-				continue
-			mobsadjacent += target_mob
-		if(length(mobsadjacent))
-			chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
-		if(istype(chosenmob))
-			if(user.Adjacent(chosenmob))
-				params = chosenmob.name
-				adjacentaction(user, chosenmob)
+		INVOKE_ASYNC(src, PROC_REF(async_targetted_emote), user, params, type_override, intentional)
+		return
+
 	var/raw_msg = select_message_type(user, intentional)
 	var/msg = raw_msg
 	if(params && message_param)
@@ -116,6 +105,21 @@
 			user.audible_message(msg, runechat_message = runechat_msg_to_use)
 		else
 			user.visible_message(msg, runechat_message = runechat_msg_to_use)
+
+/datum/emote/proc/async_targetted_emote(mob/user, params, type_override, intentional)
+	var/list/mobsadjacent = list()
+	var/mob/chosenmob
+	for(var/mob/living/target_mob in view(user, 2))
+		if(target_mob.rogue_sneaking) // No detecting sneaky people.
+			continue
+		mobsadjacent += target_mob
+	if(length(mobsadjacent))
+		chosenmob = browser_input_list(user, "[key] who?", "XYLIX", mobsadjacent)
+	if(istype(chosenmob))
+		if(user.Adjacent(chosenmob))
+			params = chosenmob.name
+			adjacentaction(user, chosenmob)
+			run_emote(user, params, type_override, intentional, FALSE)
 
 /mob/living/proc/get_emote_pitch()
 	return clamp(voice_pitch, 0.5, 2)

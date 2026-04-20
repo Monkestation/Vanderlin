@@ -74,8 +74,10 @@
 	return healed_any
 
 /// Adds a wound to this bodypart, applying any necessary effects
-/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || !owner || (owner.status_flags & GODMODE))
+/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !owner)
+		return
+	if(!forced && (owner.status_flags & GODMODE))
 		return
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]

@@ -680,7 +680,7 @@
 			UntargetMob()
 		targetting = target
 		if(!fixedeye) //If fixedeye isn't already enabled, we need to set this var
-			atom_flags |= NO_DIR_CHANGE_ON_MOVE
+			face_mouse = TRUE
 		tempfixeye = TRUE //Change icon to 'target' red eye
 		targeti = image('icons/mouseover.dmi', targetting.loc, "target")
 		var/icon/I = icon(icon, icon_state, dir)
@@ -703,7 +703,7 @@
 	targetting = null
 	tempfixeye = FALSE
 	if(!fixedeye)
-		atom_flags &= ~NO_DIR_CHANGE_ON_MOVE
+		face_mouse = FALSE
 	src.client.images -= targeti
 	//clear hud icon
 	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
@@ -745,7 +745,7 @@
 	temptarget = TRUE
 	targetting = swingtarget
 	if(!fixedeye)
-		atom_flags |= NO_DIR_CHANGE_ON_MOVE
+		face_mouse = TRUE
 	tempfixeye = TRUE
 	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_appearance(UPDATE_ICON)
