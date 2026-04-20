@@ -100,6 +100,7 @@
 /datum/proximity_monitor/advanced/timestop/field_turf_crossed(atom/movable/movable, turf/old_location, turf/new_location)
 	freeze_atom(movable)
 
+/// Proc that runs checks to determine which version of freezing we will do
 /datum/proximity_monitor/advanced/timestop/proc/freeze_atom(atom/movable/A)
 	if(global_frozen_atoms[A] || !istype(A))
 		return FALSE
@@ -197,9 +198,11 @@
 		freeze_atom(i)
 	freeze_turf(target)
 
+/// Proc that forces the projectile to not move while effect active
 /datum/proximity_monitor/advanced/timestop/proc/freeze_projectile(obj/projectile/proj)
 	proj.paused = TRUE
 
+/// Undoes `freeze_protectile()` for affected projectiles.
 /datum/proximity_monitor/advanced/timestop/proc/unfreeze_projectile(obj/projectile/proj)
 	proj.paused = FALSE
 
@@ -212,15 +215,15 @@
 	victim.remove_status_effect(/datum/status_effect/time_stopped)
 	frozen_mobs -= victim
 
-//you don't look quite right, is something the matter?
+/// Modified color palate of atom to be negative
 /datum/proximity_monitor/advanced/timestop/proc/into_the_negative_zone(atom/A)
 	A.add_atom_colour(list(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,1, 1,1,1,0), TEMPORARY_COLOUR_PRIORITY)
 
-//let's put some colour back into your cheeks
+/// Reverts color palate change of atom caused by `into_the_negative_zone()`
 /datum/proximity_monitor/advanced/timestop/proc/escape_the_negative_zone(atom/A)
 	A.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 
-//signal fired when an immune atom moves in the time freeze zone
+/// Signal fired when an immune atom moves in the time freeze zone
 /datum/proximity_monitor/advanced/timestop/proc/atom_broke_channel(datum/source)
 	SIGNAL_HANDLER
 	qdel(host)
