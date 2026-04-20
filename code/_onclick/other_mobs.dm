@@ -87,6 +87,12 @@
 
 	A.attack_hand(src, modifiers)
 
+/mob/living/attack_hand(mob/living/user, list/modifiers)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return ..()
+
+	user.perform_surgery(src, null, LAZYACCESS(modifiers, RIGHT_CLICK))
+
 /mob/living/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
