@@ -271,4 +271,4 @@
 
 	// BAD change to allow for more mmb options
 	/// Mob is currently able to offer items with right click
-	var/item_offering = FALSE
+	var/item_offering = TRUE

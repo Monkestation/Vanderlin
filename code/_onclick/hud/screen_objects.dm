@@ -354,6 +354,10 @@
 	icon_state = "give_item"
 	plane = HUD_PLANE
 
+/atom/movable/screen/give/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	update_appearance(UPDATE_ICON_STATE)
+
 /atom/movable/screen/give/Click()
 	if(!isliving(usr))
 		return
