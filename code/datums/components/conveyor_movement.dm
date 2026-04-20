@@ -48,5 +48,5 @@
 	if(!HAS_TRAIT(moving_parent, TRAIT_IMMERSED))
 		return MOVELOOP_SKIP_STEP
 	if(HAS_TRAIT(moving_parent, TRAIT_SWIMMER)) // more time to swim against the current
-		source.delay += 0.5 SECONDS
+		source.delay *= 2
 	return ..()
