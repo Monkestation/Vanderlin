@@ -282,6 +282,7 @@
 	wbalance = VERY_HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	minstr = 6
+	w_class = WEIGHT_CLASS_NORMAL
 	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/mace/bludgeon/getonmobprop(tag)
