@@ -13,7 +13,7 @@
 	/// Set this if this decoration is not crafted/doesn't have an item state, but instead is made by using a non decoration item on a grave. MUST BE TYPE
 	var/sourceitem
 	/// Patrons associated with this grave decoration. Usually a headstone.
-	var/list/patron
+	var/list/patrons
 
 /obj/item/gravedecor/New(loc, var/parent)
 	if(parent)
@@ -77,28 +77,28 @@
 	desc = "A psycross shaped headstone, may be considered heretical by some, but to disturb the graves it lies upon even more so."
 	icon_state = "headstone_psydon"
 	decorationquality = 2
-	patron = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
+	patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
 /obj/item/gravedecor/headstone/astrata
 	name = "astratan headstone"
 	desc = "The golden cross of Astrata, nothing less for the Sun Tyrant."
 	icon_state = "headstone_astrata"
 	decorationquality = 3
-	patron = list(/datum/patron/divine/astrata)
+	patrons = list(/datum/patron/divine/astrata)
 
 /obj/item/gravedecor/headstone/pestra
 	name = "pestran headstone"
 	desc = "Any grave this is on is practically begging to be robbed. Maybe that's the intent."
 	icon_state = "headstone_pestra"
 	decorationquality = 2
-	patron = list(/datum/patron/divine/pestra)
+	patrons = list(/datum/patron/divine/pestra)
 
 /obj/item/gravedecor/headstone/abyssor
 	name = "abyssorite headstone"
 	desc = "Not a common sight, most corpses are lost to his briny embrace before they can see land."
 	icon_state = "headstone_abyssor"
 	decorationquality = 2
-	patron = list(/datum/patron/divine/abyssor)
+	patrons = list(/datum/patron/divine/abyssor)
 
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
