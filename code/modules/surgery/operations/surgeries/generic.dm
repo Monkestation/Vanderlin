@@ -239,7 +239,7 @@
 		//yes we ignore crit resist here because this is a proper surgical procedure, not a crit
 		switch(limb.body_zone)
 			if(BODY_ZONE_HEAD)
-				fracture_type = /datum/wound/fracture/head
+				fracture_type = /datum/wound/fracture/head/surgical
 			if(BODY_ZONE_PRECISE_NECK)
 				fracture_type = /datum/wound/fracture/neck
 			if(BODY_ZONE_CHEST)

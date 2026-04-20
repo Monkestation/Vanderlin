@@ -84,6 +84,9 @@
 	var/paralysis = FALSE
 	var/knockout = 15 SECONDS
 
+/datum/wound/fracture/head/surgical
+	knockout = 0
+
 /datum/wound/fracture/head/on_mob_gain(mob/living/affected)
 	. = ..()
 	if(knockout)
