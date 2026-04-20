@@ -135,6 +135,8 @@
 		container.reagents.trans_to(src, transfer_amount)
 		return ITEM_INTERACT_SUCCESS
 
+	return ..()
+
 /obj/item/gun/ballistic/powder/proc/do_ram(obj/item/ramrod/rod, mob/living/user)
 	if(!istype(rod))
 		return

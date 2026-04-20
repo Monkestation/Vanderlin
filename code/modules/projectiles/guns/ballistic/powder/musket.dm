@@ -53,14 +53,16 @@
 
 /obj/item/gun/ballistic/powder/musket/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(bayonet)
-		return NONE
+		return ..()
 
-	if(istype(tool, /obj/item/weapon/knife/dagger/bayonet))
-		balloon_alert(user, "attached!")
-		user.transferItemToLoc(tool, src)
-		bayonet = tool
-		update_appearance(UPDATE_ICON_STATE)
-		return ITEM_INTERACT_SUCCESS
+	if(!istype(tool, /obj/item/weapon/knife/dagger/bayonet))
+		return ..()
+
+	balloon_alert(user, "attached!")
+	user.transferItemToLoc(tool, src)
+	bayonet = tool
+	update_appearance(UPDATE_ICON_STATE)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/powder/musket/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
