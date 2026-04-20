@@ -206,7 +206,7 @@
 	// Momentary snowflake for organ storage with null locs
 	if(isitem(clicked_atom))
 		var/obj/item/item_atom = clicked_atom
-		if(item_atom.stored_in && item_atom.loc == null)
+		if(item_atom.stored_in)
 			if(held_item)
 				held_item.melee_attack_chain(src, clicked_atom, modifiers)
 			else
