@@ -288,7 +288,7 @@
 
 	if(istype(T, /turf/open/floor/grass))
 		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(!do_after(user, 3 SECONDS * time_multiplier, src))
+		if(!do_after(user, 3 SECONDS * time_multiplier, T))
 			return ITEM_INTERACT_BLOCKING
 
 		apply_farming_fatigue(user, 10)
@@ -299,7 +299,7 @@
 
 	if(istype(T, /turf/open/floor/dirt))
 		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
-		if(!do_after(user, 2 SECONDS * time_multiplier, src))
+		if(!do_after(user, 2 SECONDS * time_multiplier, T))
 			return ITEM_INTERACT_BLOCKING
 
 		playsound(T,'sound/items/dig_shovel.ogg', 100, TRUE)
