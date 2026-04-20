@@ -178,7 +178,7 @@
 
 	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_VESSELS_CLAMPED), "Removing hemostat did not remove the clamped surgical state")
 
-	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__)
+	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	UNLINT(msurgery.success(chest, surgeon, cautery, list()))
 
 	TEST_ASSERT(!LIMB_HAS_ANY_SURGERY_STATE(chest, ALL), "Closing surgery did not remove all surgical states applied during surgery")
