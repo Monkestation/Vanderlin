@@ -30,7 +30,7 @@
 	)
 
 /datum/job/shophand
-	title = "Shophand"
+	title = JOB_SHOPHAND
 	tutorial = "You work under the greedy eyes of the Merchant who has shackled you to the drudgery of employment. \
 	Tasked with handling customers, organizing shelves, and taking inventory, your work is mind-numbing and repetitive. \
 	Despite its mundanity however, it keeps a roof over your head and teaches you the art of mercantilism. \

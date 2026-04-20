@@ -316,7 +316,7 @@
 /datum/stock/stockpile/westleach
 	name = "Westleach Leaves"
 	desc = "A common, strong-smelling leaf that is often dried and smoked."
-	item_type = /obj/item/reagent_containers/food/snacks/produce/swampweed
+	item_type = /obj/item/reagent_containers/food/snacks/produce/westleach
 	held_items = 2
 	payout_price = 2
 	withdraw_price = 5

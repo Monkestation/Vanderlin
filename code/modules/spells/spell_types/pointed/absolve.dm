@@ -50,6 +50,7 @@
 			// Revive the target
 			H.revive(HEAL_ALL)
 			H.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
+			add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ABSOLVE_REVIVE, 1)
 			H.emote("breathgasp")
 			H.adjust_jitter(100 SECONDS)
 			H.update_body()

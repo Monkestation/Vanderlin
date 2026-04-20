@@ -114,3 +114,159 @@
 2026-04-09:
   YellowHarlequin:
   - spellcheck: Added a space after "drow"
+2026-04-10:
+  KevinfromHP:
+  - rscadd: Xylix's Cruel Prank now informs everyone in the game you were killed by
+      it. It also gives them a moodbuff!
+  Rockslp:
+  - balance: Buffs the dwarven bombardier loadout and attributes.
+  The-Hotline-System:
+  - bugfix: Whitelisted vessels will no longer prompt unwhitelisted players to join.
+  realforest2001:
+  - code_imp: Rewrites how job spawn landmarks work, providing proper latespawn capacity.
+  - code_imp: Removed two unused job files.
+  - map: Maps in the changes.
+2026-04-11:
+  CheffieGithub:
+  - rscadd: You can now under/overload blackpowder guns. Underloading reduces power,
+      overloading increases it and damages the gun.
+  - rscadd: Inspecting a gun will now very safely look down the barrel and tell you
+      about the projectile, powder, hammer and wheel status.
+  - rscadd: Slightly changed puffer operation see PR for full details.
+  - bugfix: Fixed muskets and puffers having no sound for the striker.
+  - balance: Powder for the musket increased to 10 from 5.
+  - balance: Slurbow fits in bags 2x2.
+  - bugfix: Fixed formikrag wings not allowing you to float over gaps
+  Draggeru:
+  - bugfix: finishes some Wintermare and Ossland Accent touch ups
+  - bugfix: fixes some of the longer swear replacements for the halfling accent
+  - bugfix: Fixes some jank with the grenzel accent
+  - rscadd: Replaces the old grenzel accent with a more conlang version.
+  - rscadd: Adds the grenzel accent to the dwarf accent selection pool
+  - rscadd: Adds Grenzel and Ossland accents to the humen accent pool
+  KevinfromHP:
+  - rscadd: Folk Heroes were moved back to rare adventurers.
+  - balance: Rebalanced the Paladin's to lower qualities
+  - balance: Vaquero has received some buffs
+  - balance: Swashbuckler has received some buffs
+  - bugfix: various issues related to Wretches and other antag roles keeping some
+      job things upon transfer to an antag.
+  Monkeke2:
+  - rscadd: Hand gives leadership hours (experience)
+2026-04-12:
+  Archeonan:
+  - balance: 'Replaced psydonian templar fluted cuirass with psydonian cuirass
+
+      :cl:
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  CheffieGithub:
+  - bugfix: Fixed bayonet
+  KevinfromHP:
+  - refactor: Black Briar mechanically operates as a flaw instead of a trait.
+  - rscdel: Removes the Call
+  MissyNym:
+  - map: Fixed the fences in Malum's Anvil and added some additional ones to account
+      for adventurer/pilgrim spawns.
+  - map: Widened the "main path" in Malum's Anvil for travel into town.
+  - map: Added grass and bushes to Malum's Anvil so people can at least scrounge up
+      basic materials.
+  - map: Added a sleeping area for adepts to the Anvil Inquisition base, since they
+      did not previously have one.
+  - map: Further blocked off the Vanderlin Old Church.
+  SmokingCrackForChrist:
+  - sound: Adds three new endround stings.
+2026-04-13:
+  Ben10083:
+  - balance: If grabbed by a pacifist, their grab can be broken instantly (like passive
+      grabs when out of combat)
+  - bugfix: Pacifists can no longer slit throats, after a study has determined that
+      it is a harmful act
+  Monkeke2:
+  - bugfix: Zizo skeletons no longer show up in actors list
+  SSensum13:
+  - bugfix: fixed warhammer's display config
+  flleeppyy:
+  - config: removed usewhitelist and useblacklist as they weren't used properly in
+      the first place, and no jobs had support for it.
+  - config: various unused config entries have been removed
+  - rscdel: removed agecheck and bypassage related code, as nothing uses it.
+  - rscadd: Plexora OOM shutdown type
+  - server: bumped rustg to 6.1.0
+2026-04-14:
+  Ben10083:
+  - refactor: Prayers now use TGUI
+  Wrench-1:
+  - rscdel: Halflings can no longer be Grandmaster Templars
+2026-04-15:
+  Ben10083:
+  - rscadd: 'Adds new T2 Dwarf only Miracle from Malum: MALUM''S ANVIL. Granting CON
+      buff and SPD malus, and makes you unstoppable for the duration (13 seconds)'
+  Boltersam:
+  - rscadd: You may now optionally convert to Graggar if you are transformed into
+      a half-orc.
+  KevinfromHP:
+  - bugfix: Fixed various bugs related to Change Position Monarch command.
+  Telvayne:
+  - bugfix: Westleach may now be submitted to the stockpile.
+  realforest2001:
+  - admin: PlayerPanel Cryo now requires confirmation.
+2026-04-16:
+  CheffieGithub:
+  - bugfix: Fixed split personality triggering on clientless mobs
+  - rscadd: Added an option to disable random gain of split personality from brain
+      damage
+  - rscdel: Disabled Peasant Rebel
+2026-04-17:
+  Ben10083:
+  - qol: Yielding message more obvious
+  - bugfix: Surrender prompt now cares about if you accept to surrender
+  - bugfix: You can no longer stack tgui prompts to bypass surrender cooldowns
+  CheffieGithub:
+  - rscdel: Removed CRT setting
+  - bugfix: Fixed Interface issues by giving proper hud to aghosts, new players and
+      simple animals
+  - bugfix: Enabled mouse icon opacity for the HUD, if this blocks the inventory somewhere
+      please report it
+  Telvayne:
+  - qol: Corrected the waterproof status of several boots and sandals.
+  ta3754859-max:
+  - bugfix: Fixes inqusition black mirror, changes few buttons
+  - qol: Red tallows can be now melted when used over a static light source
+2026-04-18:
+  KevinfromHP:
+  - admin: Fixes the Black Briar Admin Smite
+  - rscdel: Removed Ugly/Beautiful Be Special as these are granted by quirks now.
+  - rscadd: Adds "king" Be Special
+  - rscadd: Adds "Chippin' In" Be Special
+  - rscadd: Adds "Fat" Be Special
+  - bugfix: Black Briar should properly apply to Adv class selection.
+  - bugfix: Skeleton Be Special should work slightly better.
+2026-04-19:
+  Ben10083:
+  - bugfix: Men-at-Arms and Royal Knights now have the correct verbs
+  PotatoTomahto:
+  - refactor: z movement
+  - refactor: water in general

@@ -1,5 +1,5 @@
 /datum/job/men_at_arms
-	title = "Men-at-arms"
+	title = JOB_MAN_AT_ARMS
 	tutorial = "Chosen by the Captain and King, you're not like those shit stinking City Watchmen. \
 	Like a hound on a leash, you stand vigilant for your masters. \
 	You live better than the rest of the taffers in this kingdom-- \
@@ -30,10 +30,9 @@
 	exp_requirements = list(
 		EXP_TYPE_GARRISON = 600
 	)
-
-/datum/job/men_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
@@ -202,10 +201,10 @@
 	var/weapontypec = pickweight(list("Bow" = 6, "Crossbow" = 4))
 	switch(weapontypec)
 		if("Bow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backl = /obj/item/gun/ballistic/bow/long
 			backr = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backl = /obj/item/gun/ballistic/bow/cross
 			backr = /obj/item/ammo_holder/quiver/bolts
 
 /datum/attribute_holder/sheet/job/menatarms/swordsman

@@ -48,8 +48,7 @@
 		QDEL_NULL(H.wear_mask)
 		H.put_in_hands(new type(get_turf(H)))
 	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/right/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_RIGHT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/cyclops_left
@@ -66,8 +65,7 @@
 		QDEL_NULL(H.wear_mask)
 		H.put_in_hands(new type(get_turf(H)))
 	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch/left(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_LEFT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/tongueless
@@ -301,14 +299,14 @@
 			F.whp = 10
 
 	var/list/spawn_points = list()
-	for(var/obj/effect/landmark/start/adventurerlate/L in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/outsider/L in GLOB.latejoin_landmarks)
 		spawn_points += get_turf(L)
 
 	if(length(spawn_points))
 		var/turf/spawn_turf = pick(spawn_points)
 		H.forceMove(spawn_turf)
 	else
-		for(var/obj/effect/landmark/start/L in GLOB.start_landmarks_list)
+		for(var/obj/effect/landmark/start/L in GLOB.latejoin_landmarks)
 			spawn_points += get_turf(L)
 		if(length(spawn_points))
 			H.forceMove(pick(spawn_points))
@@ -332,7 +330,7 @@
 
 	// Move owner to vagrant spawn first
 	var/list/vagrant_spawns = list()
-	for(var/obj/effect/landmark/start/vagrant/V in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/vagrant/V in GLOB.roundstart_landmarks)
 		vagrant_spawns += get_turf(V)
 
 	if(length(vagrant_spawns))

@@ -282,7 +282,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 /datum/mind/proc/transfer_to(mob/new_character, force_key_move = 0)
 	if(current)	// remove ourself from our old body's mind variable
 		current.mind = null
-		UnregisterSignal(current, COMSIG_MOB_DEATH)
+		UnregisterSignal(current, COMSIG_LIVING_DEATH)
 		SStgui.on_transfer(current, new_character)
 
 	if(!language_holder)
@@ -313,7 +313,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_martial_arts(current)
 
-	RegisterSignal(current, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
+	RegisterSignal(current, COMSIG_LIVING_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		current.key = key		//now transfer the key to link the client to our new body
 	current.update_fov_angles()

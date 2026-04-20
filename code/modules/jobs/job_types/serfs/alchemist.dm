@@ -15,7 +15,7 @@
 	)
 
 /datum/job/alchemist
-	title = "Alchemist"
+	title = JOB_ALCHEMIST
 	tutorial = "You came to Vanderlin either to seek knowledge or riches."
 	department_flag = SERFS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -35,7 +35,7 @@
 
 
 /datum/outfit/alchemist
-	name = "Alchemist"
+	name = JOB_ALCHEMIST
 	pants = /obj/item/clothing/pants/trou
 	shoes = /obj/item/clothing/shoes/boots/leather
 	shirt = /obj/item/clothing/shirt/shortshirt

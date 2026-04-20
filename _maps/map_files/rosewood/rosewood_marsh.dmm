@@ -1590,7 +1590,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/lich)
 "ir" = (
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
@@ -4549,7 +4549,7 @@
 /obj/structure/chair/wood/alt{
 	dir = 1
 	},
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/alt,
@@ -7284,7 +7284,7 @@
 	pixel_x = 0;
 	pixel_y = -11
 	},
-/obj/effect/landmark/start/bogwitch_apprentice,
+/obj/effect/landmark/start/bogwitch,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
 "MR" = (
@@ -9395,7 +9395,7 @@
 /area/indoors/lich)
 "YJ" = (
 /obj/structure/chair/stool,
-/obj/effect/landmark/start/bogwitch_apprentice{
+/obj/effect/landmark/start/bogwitch{
 	dir = 8
 	},
 /turf/open/floor/cobblerock,

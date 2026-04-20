@@ -31,7 +31,7 @@
 	)
 
 /datum/job/jester
-	title = "Jester"
+	title = JOB_JESTER
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. \
 	You command a position of a fool, envious of the position your superiors have upon you. \
 	Your cheap tricks and illusions of intelligence will only work for so long, \
@@ -63,6 +63,11 @@
 		TRAIT_ZJUMP,
 		TRAIT_SHAKY_SPEECH
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/ventriloquate,
+		/mob/living/carbon/human/proc/ear_trick,
+	)
+
 
 /datum/job/jester/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -72,11 +77,8 @@
 	else
 		spawned.cmode_music = pick('sound/music/cmode/nobility/CombatJester1.ogg', 'sound/music/cmode/nobility/CombatJester2.ogg')
 
-	add_verb(spawned, /mob/living/carbon/human/proc/ventriloquate)
-	add_verb(spawned, /mob/living/carbon/human/proc/ear_trick)
-
 /datum/outfit/jester
-	name = "Jester"
+	name = JOB_JESTER
 	shoes = /obj/item/clothing/shoes/jester
 	pants = /obj/item/clothing/pants/tights
 	armor = /obj/item/clothing/shirt/jester

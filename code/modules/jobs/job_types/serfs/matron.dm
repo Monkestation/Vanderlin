@@ -42,7 +42,7 @@
 	)
 
 /datum/job/matron
-	title = "Matron"
+	title = JOB_MATRON
 	tutorial = "You are the Matron of the orphanage, once a cunning rogue who walked the shadows alongside legends. \
 		Time has softened your edge but not your wit, thanks to your unlikely kinship with your old adventuring party. \
 		Now, you guide the orphans with both a firm and gentle hand, ensuring they grow up sharp, swift, and self-sufficient. \
@@ -99,7 +99,7 @@
 	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/outfit/matron
-	name = "Matron"
+	name = JOB_MATRON
 	shirt = /obj/item/clothing/shirt/dress/gen/colored/black
 	armor = /obj/item/clothing/armor/leather/vest/colored/black
 	pants = /obj/item/clothing/pants/trou/beltpants

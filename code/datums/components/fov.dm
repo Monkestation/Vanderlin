@@ -563,29 +563,7 @@
  * WHOS PLAYING TRICKS ON ME
  */
 /datum/component/field_of_vision/proc/object_permanence_update()
-	var/mob/parent_mob = parent
-	if(!parent_mob.client || parent_mob.is_blind())
-		return
-	var/has_alpha = fov_holder?.alpha
-	for(var/mob/living/visible_mob in view(world.view, parent_mob))
-		if((visible_mob.plane != GAME_PLANE_FOV_HIDDEN) || (visible_mob == parent_mob))
-			continue
-		if(visible_mob.rogue_sneaking)
-			continue
-		var/turf/mob_turf = get_turf(visible_mob)
-		if(!istype(mob_turf))
-			continue
-		if(has_alpha)
-			FOV_ANGLE_CHECK(parent_mob, visible_mob, continue, continue)
-		var/datum/weakref/mob_ref = WEAKREF(visible_mob)
-		var/image/ghost = image('icons/hud/screen_gen.dmi', mob_turf, "whoswatchingme", FLOAT_LAYER)
-		ghost.plane = GAME_PLANE_OBJECT_PERMANENCE
-		//Scrub previous image if there is one
-		parent_mob.client.images -= object_permanence_images[mob_ref]
-		//Create new image based on updated turf
-		object_permanence_images[mob_ref] = ghost
-		//Add image to client, if it needs to be hidden it will be
-		parent_mob.client.images += ghost
+	return
 
 /datum/component/field_of_vision/proc/on_examinate(mob/living/source, atom/target)
 	SIGNAL_HANDLER

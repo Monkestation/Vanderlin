@@ -7,6 +7,7 @@
 GLOBAL_LIST_EMPTY(obtained_from_reverse)
 GLOBAL_VAR_INIT(obtained_from_built, FALSE)
 GLOBAL_LIST_EMPTY(mob_source_paths) // list of "[mob_typepath]" keys that have butcher drops
+GLOBAL_LIST_EMPTY(chimeric_mob_sources) // "[chimeric_table_path]" -> list of mob icon entries
 
 /proc/build_obtained_from_reverse()
 	var/list/list = list()
@@ -87,6 +88,34 @@ GLOBAL_LIST_EMPTY(mob_source_paths) // list of "[mob_typepath]" keys that have b
 			GLOB.mob_source_paths["[mob_type]"] = TRUE
 
 		qdel(new_mob)
+
+	var/static/list/blacklisted_types = list(
+		/mob/living/simple_animal/hostile/retaliate/banker,
+		/mob/living/simple_animal/hostile/retaliate/blacksmith,
+		/mob/living/simple_animal/hostile/retaliate/voiddragon/red/tsere,
+		/mob/living/simple_animal/hostile/retaliate/minotaur/axe,
+		/mob/living/simple_animal/hostile/retaliate/minotaur/axe/female,
+		/mob/living/simple_animal/hostile/dragon_clone,
+
+	)
+	for(var/mob/living/mob_type as anything in subtypesof(/mob/living/simple_animal) - typesof(/mob/living/simple_animal/hostile/skeleton) - typesof(/mob/living/simple_animal/hostile/retaliate/trader) - blacklisted_types)
+		if(IS_ABSTRACT(mob_type))
+			continue
+		var/blood_path = initial(mob_type.animal_type) || /datum/blood_type/animal
+		if(!blood_path)
+			continue
+		var/datum/blood_type/BT = GLOB.blood_types[blood_path]
+		if(!BT?.used_table)
+			continue
+		var/table_key = "[BT.used_table.type]"
+		if(!GLOB.chimeric_mob_sources[table_key])
+			GLOB.chimeric_mob_sources[table_key] = list()
+		GLOB.chimeric_mob_sources[table_key] += list(list(
+			"name"       = initial(mob_type.name),
+			"icon"       = "[initial(mob_type.icon)]",
+			"icon_state" = "[initial(mob_type.icon_state)]",
+			"_path"      = "[mob_type]",
+		))
 
 	GLOB.obtained_from_built = TRUE
 	return list

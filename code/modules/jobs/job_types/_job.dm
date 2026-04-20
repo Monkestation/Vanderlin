@@ -124,6 +124,8 @@
 	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
 	VAR_FINAL/list/skills
 
+	var/list/verbs
+
 	/// Associative list of skill - base multiplier to set for skill_holder
 	var/list/skill_multipliers = list()
 
@@ -138,8 +140,6 @@
 
 	/// Lower number of attunemnets to grant
 	var/attunements_min
-
-	var/whitelist_req = FALSE //!
 
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
@@ -213,6 +213,7 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/skeleton/zizoid,
 	)
 
 	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
@@ -300,6 +301,9 @@
 	for(var/datum/language/to_learn as anything in languages)
 		if(!spawned.has_language(to_learn))
 			spawned.grant_language(to_learn)
+
+	if(length(verbs))
+		add_verb(spawned, verbs)
 
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
@@ -420,6 +424,83 @@
 	if(ishuman(spawned))
 		var/mob/living/carbon/human/H = spawned
 		H.pick_job_packs(src)
+
+
+/// this "mostly" removes the existence of a job from someone.
+/// the unfortunately reality is that even this is still a flawed removal
+/datum/job/proc/remove_job(mob/living/carbon/human/spawned)
+	if(QDELETED(spawned))
+		return
+	if(!ishuman(spawned))
+		return
+
+	. = TRUE
+
+	if(!QDELETED(spawned.cleric))
+		qdel(spawned.cleric)
+	spawned.honorary = null
+	spawned.honorary_suffix = null
+	if(antag_role && spawned.mind)
+		spawned.mind.remove_antag_datum(antag_role)
+
+	if(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.remove_quirk(flaw)
+
+	if(give_bank_account)
+		SStreasury.remove_bank_account(spawned)
+		if(noble_income)
+			SStreasury.noble_incomes -= spawned
+
+	if(cmode_music)
+		spawned.cmode_music = initial(spawned.cmode_music)
+
+	if(spawned.mind)
+		for(var/X in peopleknowme)
+			for(var/datum/mind/found_mind in get_minds(X))
+				spawned.mind.forget_source_identity(found_mind)
+
+		for(var/X in peopleiknow)
+			for(var/datum/mind/found_mind in get_minds(X))
+				found_mind.forget_source_identity(spawned.mind)
+
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, 1)
+
+	for(var/datum/attribute/skill/skill as anything in skills)
+		var/amount_or_list = skills[skill]
+		if(islist(amount_or_list))
+			spawned.clamped_adjust_skill_level(skill, -amount_or_list[1], amount_or_list[2], TRUE)
+		else
+			spawned.adjust_skillrank(skill, -amount_or_list, TRUE)
+
+	spawned.adjust_spell_points(-spell_points)
+	remove_spells(spawned)
+	spawned.remove_stat_modifier(STATMOD_JOB)
+
+	if(length(verbs))
+		remove_verb(spawned, verbs)
+
+	if(is_foreigner)
+		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
+	if(is_recognized)
+		REMOVE_TRAIT(spawned, TRAIT_RECOGNIZED, TRAIT_GENERIC)
+
+	//for(var/datum/language/to_lose as anything in languages)
+	//	if(spawned.has_language(to_lose)) // this is gonna cause issues in certain cases until languages have sources...
+	//		spawned.remove_language(to_lose)
+
+	REMOVE_TRAITS_IN(spawned, JOB_TRAIT)
+	if(spawned.mind)
+		REMOVE_TRAITS_IN(spawned.mind, JOB_TRAIT)
+	if(magic_user)
+		spawned.mana_pool.set_intrinsic_recharge(spawned.mana_pool.intrinsic_recharge_sources & ~MANA_ALL_LEYLINES)
+
+	if(parent_job)
+		return parent_job.remove_job(spawned)
 
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
@@ -554,8 +635,6 @@
 
 /// Returns an atom where the mob should spawn in.
 /datum/job/proc/get_roundstart_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
 	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point()
 	if(!spawn_point) //if there isn't a spawnpoint send them to latejoin, if there's no latejoin go yell at your mapper
 		return get_latejoin_spawn_point()
@@ -563,8 +642,8 @@
 
 /// Handles finding and picking a valid roundstart effect landmark spawn point, in case no uncommon different spawning events occur.
 /datum/job/proc/get_default_roundstart_spawn_point()
-	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != title)
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.roundstart_landmarks)
+		if(!(title in spawn_point.jobs_to_spawn))
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
@@ -574,25 +653,15 @@
 	if(!.)
 		log_world("Couldn't find a round start spawn point for [title]")
 
-/datum/job/proc/get_job_special_late_point()
-	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != "[title]late")
-			continue
-		. = spawn_point
-		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
-			continue
-		spawn_point.used = TRUE
-		break
-
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
-	var/obj/effect/landmark/start/spawn_point = get_job_special_late_point()
-	if(spawn_point)
-		return spawn_point
-	if(length(SSjob.latejoin_trackers))
-		return pick(SSjob.latejoin_trackers)
+	var/list/possible_spawns = list()
+	for(var/obj/effect/landmark/start/latepoint as anything in GLOB.latejoin_landmarks)
+		if(title in latepoint.jobs_to_spawn)
+			possible_spawns += latepoint
+	if(length(possible_spawns))
+		return pick(possible_spawns)
+
 	return SSjob.get_last_resort_spawn_points()
 
 

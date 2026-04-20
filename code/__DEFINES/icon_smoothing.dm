@@ -42,37 +42,39 @@ DEFINE_BITFIELD(smooth, list(
 
 #define S_TURF(num) (#num + ",")
 
-#define SMOOTH_GROUP_OPEN S_TURF(0) //!turf/open
-#define SMOOTH_GROUP_OPEN_FLOOR S_TURF(1) //!turf/open/floor
-
+#define SMOOTH_GROUP_TURF_OPEN S_TURF(0) //!turf/open
+#define SMOOTH_GROUP_TURF_CHASM S_TURF(1) ///turf/open/chasm, /turf/open/floor/fakepit
 #define SMOOTH_GROUP_FLOOR_LIQUID S_TURF(2) //!turf/open/water, /turf/open/lava
-#define SMOOTH_GROUP_FLOOR_OPEN_SPACE S_TURF(3) //!turf/open/openspace
 
-#define SMOOTH_GROUP_FLOOR_CARPET S_TURF(4) //!turf/open/floor/carpet
-#define SMOOTH_GROUP_FLOOR_DIRT S_TURF(5)
-#define SMOOTH_GROUP_FLOOR_DIRT_ROAD S_TURF(6)
-#define SMOOTH_GROUP_FLOOR_GRASS S_TURF(7)
-#define SMOOTH_GROUP_FLOOR_SNOW S_TURF(8)
-#define SMOOTH_GROUP_FLOOR_STONE S_TURF(9)
-#define SMOOTH_GROUP_FLOOR_WOOD S_TURF(10)
+#define SMOOTH_GROUP_OPEN_FLOOR S_TURF(3) //!turf/open/floor
 
-#define SMOOTH_GROUP_CLOSED S_TURF(11) //!/turf/closed
-#define SMOOTH_GROUP_CLOSED_WALL S_TURF(12) //!/turf/closed/wall
+#define SMOOTH_GROUP_FLOOR_OPEN_SPACE S_TURF(4) //!turf/open/openspace
 
-#define SMOOTH_GROUP_MINERAL_WALLS S_TURF(13) //!turf/closed/mineral, /turf/closed/mineral/turf/random, /closed/indestructible
+#define SMOOTH_GROUP_FLOOR_CARPET S_TURF(5) //!turf/open/floor/carpet
+#define SMOOTH_GROUP_FLOOR_DIRT S_TURF(6)
+#define SMOOTH_GROUP_FLOOR_DIRT_ROAD S_TURF(7)
+#define SMOOTH_GROUP_FLOOR_GRASS S_TURF(8)
+#define SMOOTH_GROUP_FLOOR_SNOW S_TURF(9)
+#define SMOOTH_GROUP_FLOOR_STONE S_TURF(10)
+#define SMOOTH_GROUP_FLOOR_WOOD S_TURF(11)
 
-#define SMOOTH_GROUP_WALLS_STONE S_TURF(14) //!turf/closed/wall/mineral/stone (and moss)
-#define SMOOTH_GROUP_WALLS_STONE_CRAFT S_TURF(15) //!turf/closed/wall/mineral/craftstone
-#define SMOOTH_GROUP_WALLS_STONE_BRICK S_TURF(16) //!turf/closed/wall/mineral/stonebrick
-#define SMOOTH_GROUP_WALLS_STONE_DECO S_TURF(17) //!turf/closed/wall/mineral/decorstone (and moss)
-#define SMOOTH_GROUP_WALLS_PIPE S_TURF(18) //!turf/closed/wall/mineral/pipe
-#define SMOOTH_GROUP_WALLS_EREBUS S_TURF(19) //!turf/closed/wall/mineral/underbrick
-#define SMOOTH_GROUP_WALLS_WOOD S_TURF(20) //!turf/closed/wall/mineral/wood
+#define SMOOTH_GROUP_CLOSED S_TURF(12) //!/turf/closed
+#define SMOOTH_GROUP_CLOSED_WALL S_TURF(13) //!/turf/closed/wall
 
-#define SMOOTH_GROUP_FLOOR_FLESH S_TURF(21)
-#define SMOOTH_GROUP_MUSHROOM S_TURF(22)
+#define SMOOTH_GROUP_MINERAL_WALLS S_TURF(14) //!turf/closed/mineral, /turf/closed/mineral/turf/random, /closed/indestructible
 
-#define MAX_S_TURF 22 //Always match this value with the one above it.
+#define SMOOTH_GROUP_WALLS_STONE S_TURF(15) //!turf/closed/wall/mineral/stone (and moss)
+#define SMOOTH_GROUP_WALLS_STONE_CRAFT S_TURF(16) //!turf/closed/wall/mineral/craftstone
+#define SMOOTH_GROUP_WALLS_STONE_BRICK S_TURF(17) //!turf/closed/wall/mineral/stonebrick
+#define SMOOTH_GROUP_WALLS_STONE_DECO S_TURF(18) //!turf/closed/wall/mineral/decorstone (and moss)
+#define SMOOTH_GROUP_WALLS_PIPE S_TURF(19) //!turf/closed/wall/mineral/pipe
+#define SMOOTH_GROUP_WALLS_EREBUS S_TURF(20) //!turf/closed/wall/mineral/underbrick
+#define SMOOTH_GROUP_WALLS_WOOD S_TURF(21) //!turf/closed/wall/mineral/wood
+
+#define SMOOTH_GROUP_FLOOR_FLESH S_TURF(22)
+#define SMOOTH_GROUP_MUSHROOM S_TURF(23)
+
+#define MAX_S_TURF 23 //Always match this value with the one above it.
 
 /* /obj included */
 

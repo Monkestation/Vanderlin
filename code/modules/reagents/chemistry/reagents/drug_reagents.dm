@@ -10,8 +10,8 @@
 	color = "#60A584" // rgb: 96, 165, 132
 	overdose_threshold = 30
 
-/datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M)
-	M.set_drugginess(30 SECONDS)
+/datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/M, efficiency)
+	M.set_drugginess(30 SECONDS * efficiency)
 	if(prob(5))
 		if(M.gender == FEMALE)
 			M.emote(pick("twitch_s","giggle"))
@@ -75,7 +75,7 @@
 	V.add_stress(/datum/stress_event/pweed)
 	..()
 
-/datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/M, efficiency)
 	if(M.has_quirk(/datum/quirk/vice/smoker))
 		M.sate_addiction(/datum/quirk/vice/smoker)
 	..()

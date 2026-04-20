@@ -33,7 +33,7 @@
 	)
 
 /datum/job/fisher
-	title = "Fisher"
+	title = JOB_FISHER
 	tutorial = "Abyssor is angry. Neglected and shunned, his boons yet shy from your hook. \
 	Alone, in the stillness of nature, your bag is empty, and yet you fish. Pluck the children of god from their trance, \
 	and stare into the water to see the reflection of a drowned body in the making."
@@ -57,7 +57,7 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/fisher/old
 
 /datum/outfit/fisher
-	name = "Fisher"
+	name = JOB_FISHER
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	armor = /obj/item/clothing/armor/gambeson/light/striped
 	head = /obj/item/clothing/head/fisherhat
