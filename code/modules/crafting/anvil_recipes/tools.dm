@@ -294,6 +294,12 @@
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/surgeontoolspawner
 
+/datum/anvil_recipe/tools/iron/gravefence_iron
+	name = "Iron Gravefence"
+	recipe_name = "iron Gravefence"
+	created_item = /obj/item/gravedecor/gravefence/iron
+	category = "Gravefences"
+
 // --------- STEEL -----------
 
 /datum/anvil_recipe/tools/steel
@@ -389,3 +395,9 @@
 	name = "2x Platters (gold)"
 	created_item = /obj/item/plate/gold
 	craftdiff = 2
+
+/datum/anvil_recipe/tools/gold/headstone_astrata
+	name = "Golden Astratan Headstone"
+	recipe_name = "an Astratan Headstone"
+	created_item = /obj/item/gravedecor/headstone/astrata
+	category = "Headstones"

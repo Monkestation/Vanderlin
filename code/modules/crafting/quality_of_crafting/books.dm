@@ -964,3 +964,15 @@
 		/datum/wound,
 		/datum/surgery,
 	)
+
+/obj/item/recipe_book/gravemaking
+	name = "The Undertaker's Codex: Burials, Exhumations, and Unwanted Guests"
+	desc = "Penned by Jan Ditchdigger"
+	icon_state ="book5_0"
+	base_icon_state = "book5"
+
+	types = list(
+		/datum/anvil_recipe/tools/gold/headstone_astrata,
+		/datum/anvil_recipe/tools/iron/gravefence_iron,
+		/datum/repeatable_crafting_recipe/gravemaking,
+	)

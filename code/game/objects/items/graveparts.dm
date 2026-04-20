@@ -76,6 +76,7 @@
 	name = "psydonic headstone"
 	desc = "A psycross shaped headstone, may be considered heretical by some, but to disturb the graves it lies upon even more so."
 	icon_state = "headstone_psydon"
+	dropshrink = 0.8
 	decorationquality = 2
 	patron = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
@@ -83,6 +84,7 @@
 	name = "astratan headstone"
 	desc = "The golden cross of Astrata, nothing less for the Sun Tyrant."
 	icon_state = "headstone_astrata"
+	dropshrink = 0.8
 	decorationquality = 3
 	patron = list(/datum/patron/divine/astrata)
 
@@ -90,6 +92,7 @@
 	name = "pestran headstone"
 	desc = "Any grave this is on is practically begging to be robbed. Maybe that's the intent."
 	icon_state = "headstone_pestra"
+	dropshrink = 0.8
 	decorationquality = 2
 	patron = list(/datum/patron/divine/pestra)
 
@@ -97,23 +100,35 @@
 	name = "abyssorite headstone"
 	desc = "Not a common sight, most corpses are lost to his briny embrace before they can see land."
 	icon_state = "headstone_abyssor"
+	dropshrink = 0.8
 	decorationquality = 2
 	patron = list(/datum/patron/divine/abyssor)
+
+/obj/item/gravedecor/headstone/hunt
+	name = "skull headstone"
+	desc = "An uncommon sight in these lands, though it can barely be called a headstone, it is prestigious for those who earn it."
+	icon_state = "headstone_hunt"
+	dropshrink = 0.8
+	decorationquality = 1
+	patron = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
 
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
 	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."
 	icon_state = "gravefence_stone"
+	dropshrink = 0.8
 	decorationquality = 1
 
 /obj/item/gravedecor/gravefence/block
 	name = "chiseled gravefence"
 	desc = "A gravefence of blocks to be embedded in the earth, made to deliniate a grave exactly."
 	icon_state = "gravefence_block"
+	dropshrink = 0.8
 	decorationquality = 2
 
 /obj/item/gravedecor/gravefence/iron
 	name = "iron gravefence"
 	desc = "A wrought iron grave fence. Ominous."
 	icon_state = "gravefence_iron"
+	dropshrink = 0.8
 	decorationquality = 3
