@@ -5252,9 +5252,24 @@
 /area/under/town/sewer)
 "cAD" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/paper,
 /obj/item/candle/yellow{
 	pixel_x = 12
+	},
+/obj/item/plate{
+	pixel_x = -3;
+	pixel_y = 6
+	},
+/obj/item/kitchen/fork{
+	pixel_x = -12
+	},
+/obj/item/reagent_containers/glass/cup/silver{
+	pixel_x = 12;
+	list_reagents = list(/datum/reagent/consumable/sugar/molasses = 10);
+	pixel_y = 17
+	},
+/obj/item/reagent_containers/food/snacks/stale_bread/raisin{
+	pixel_x = -2;
+	pixel_y = 12
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
@@ -6752,6 +6767,10 @@
 /turf/open/floor/concrete,
 /area/indoors/town/clocktower)
 "dhc" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/bedsheet/wool{
+	pixel_y = 14
+	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "dhu" = (
@@ -7622,9 +7641,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
-"dDx" = (
-/turf/open/floor/ruinedwood,
-/area/indoors/town/keep/guest/guest2)
 "dDD" = (
 /obj/structure/bars,
 /turf/open/floor/tile/kitchen,
@@ -8294,6 +8310,9 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/item/clothing/pants/tights/colored/black,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 1
+	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "dUm" = (
@@ -8898,6 +8917,7 @@
 /area/indoors/town/steward)
 "eiW" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest1)
 "ejc" = (
@@ -12106,6 +12126,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
 "fLn" = (
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "fLt" = (
@@ -13343,6 +13364,9 @@
 /area/under/town/sewer)
 "gtm" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/chair/wood/alt/chair_noble/red{
+	dir = 8
+	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "gtn" = (
@@ -18386,9 +18410,24 @@
 /area/indoors/town/keep/knight)
 "iLm" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/paper,
 /obj/item/candle/yellow{
 	pixel_x = -11
+	},
+/obj/item/plate{
+	pixel_y = 6;
+	pixel_x = 3
+	},
+/obj/item/reagent_containers/food/snacks/stale_bread{
+	pixel_x = 4;
+	pixel_y = 12
+	},
+/obj/item/kitchen/fork{
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/glass/cup/silver{
+	pixel_x = -12;
+	list_reagents = list(/datum/reagent/consumable/sugar/molasses = 10);
+	pixel_y = 17
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
@@ -20884,6 +20923,10 @@
 /area/indoors/town/keep/guest/meeting)
 "jTa" = (
 /obj/structure/closet/crate/chest,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "jTc" = (
@@ -21409,6 +21452,11 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/steward)
 "kgQ" = (
+/obj/item/bedsheet/wool{
+	pixel_y = 22;
+	pixel_x = -4
+	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest1)
 "khd" = (
@@ -22133,7 +22181,7 @@
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/cell)
 "kxN" = (
-/obj/structure/chair/wood/alt/chair_noble/red,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "kyi" = (
@@ -22270,7 +22318,7 @@
 /area/indoors/town/keep/guest/guest1)
 "kBS" = (
 /obj/structure/bed/inn,
-/obj/item/bedsheet/wool,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest1)
 "kCc" = (
@@ -29306,6 +29354,9 @@
 /area/indoors/town/keep/throne)
 "nSa" = (
 /obj/structure/closet/crate/drawer,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/paper,
+/obj/effect/spawner/map_spawner/loot/coin/low,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "nSd" = (
@@ -29935,7 +29986,10 @@
 /turf/open/water/sewer,
 /area/under/town/basement)
 "ohG" = (
-/obj/structure/chair/wood/alt/chair_noble/red,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair/wood/alt/chair_noble/red{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "ohQ" = (
@@ -33443,6 +33497,10 @@
 /area/under/town/basement)
 "pHI" = (
 /obj/structure/closet/crate/drawer,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/obj/item/paper,
+/obj/effect/spawner/map_spawner/loot/coin/low,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest1)
 "pHM" = (
@@ -36052,6 +36110,7 @@
 /area/indoors/town/keep/phys)
 "qUe" = (
 /obj/structure/closet/crate/chest,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "qUs" = (
@@ -37314,6 +37373,7 @@
 /obj/structure/fake_machine/mail/l{
 	mailtag = "Keep Guest Room 1"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "ryj" = (
@@ -38607,6 +38667,7 @@
 /obj/structure/fake_machine/mail/r{
 	mailtag = "Keep Guest Room 2"
 	},
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "saC" = (
@@ -48279,7 +48340,7 @@
 /area/indoors/town/keep/library)
 "wtI" = (
 /obj/structure/bed/inn,
-/obj/item/bedsheet/wool,
+/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
 "wuc" = (
@@ -52099,8 +52160,8 @@
 	},
 /obj/item/natural/clod/dirt,
 /obj/item/plate{
-	pixel_x = 4;
-	pixel_y = 6
+	pixel_y = 6;
+	pixel_x = 4
 	},
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison{
 	pixel_x = 5;
@@ -157937,7 +157998,7 @@ hni
 rld
 wtI
 dhc
-dDx
+kxN
 saB
 otj
 iqm
