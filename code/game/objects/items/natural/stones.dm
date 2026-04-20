@@ -334,9 +334,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		if(!sharpening.max_blade_int)
 			return NONE
 		playsound(src, pick('sound/items/sharpen_long1.ogg','sound/items/sharpen_long2.ogg'), 100)
-		user.visible_message("<span class='notice'>[user] sharpens [interacting_with]!</span>")
-		degrade_bintegrity(1)
-		add_bintegrity(max_blade_int * 0.1, user)
+		user.visible_message("<span class='notice'>[user] sharpens [sharpening]!</span>")
+		sharpening.degrade_bintegrity(1)
+		sharpening.add_bintegrity(max_blade_int * 0.1, user)
 		if(prob(35))
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_step(user,user.dir)
