@@ -490,16 +490,6 @@ All foods are distributed among various categories. Use common sense.
 				qdel(particle_spewer)
 			plate_check.update_appearance(UPDATE_OVERLAYS)
 
-	if(eater.satiety > -200)
-		eater.satiety -= junkiness
-
-	playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
-
-	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
-	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
-
-	on_consume(eater)
-
 	if(eater == user)
 		switch(eater.nutrition)
 			if(NUTRITION_LEVEL_FAT to INFINITY)
@@ -535,6 +525,7 @@ All foods are distributed among various categories. Use common sense.
 	if(!reagents?.total_volume)
 		if(eater.satiety > -200)
 			eater.satiety -= junkiness
+		on_consume(eater)
 		playsound(eater,'sound/misc/eat.ogg', rand(30, 60), TRUE)
 		user.changeNext_move(CLICK_CD_FAST)
 		qdel(src)
@@ -564,6 +555,8 @@ All foods are distributed among various categories. Use common sense.
 
 	SEND_SIGNAL(src, COMSIG_FOOD_EATEN, eater, user)
 	SEND_SIGNAL(eater, COMSIG_MOB_FOOD_EAT, src)
+
+	on_consume(eater)
 
 	var/fraction = min(bitesize / reagents.total_volume, 1)
 	var/amt2take = reagents.total_volume / (bitesize - bitecount)
