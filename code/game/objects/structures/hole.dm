@@ -112,35 +112,40 @@
 					playsound(W, 'sound/foley/waterenter.ogg', 100, FALSE)
 					QDEL_NULL(src)
 
-/obj/structure/closet/dirthole/attackby(obj/item/attacking_item, mob/user, list/modifiers)
-	if(istype(attacking_item, /obj/item/grown/log/tree/stick))
+/obj/structure/closet/dirthole/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/grown/log/tree/stick))
 		if(locate(/obj/structure/gravemarker) in get_turf(src))
 			to_chat(user, "<span class='warning'>This grave is already hallowed.</span>")
+			return ITEM_INTERACT_BLOCKING
+
 		if(stage != 4)
 			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
+			return ITEM_INTERACT_BLOCKING
 
 		if(!do_after(user, 10 SECONDS, src))
-			return
+			return ITEM_INTERACT_BLOCKING
 
 		var/obj/structure/gravemarker/marker = new /obj/structure/gravemarker(get_turf(src))
 		marker.OnCrafted(dir, user)
-		qdel(attacking_item)
-		return
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
 
-	if(!istype(attacking_item, /obj/item/weapon/shovel))
-		if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
-			attemptwatermake(user, attacking_item)
-			return
-		return ..()
-	var/obj/item/weapon/shovel/attacking_shovel = attacking_item
+	if(istype(tool, /obj/item/reagent_containers/glass/bucket))
+		attemptwatermake(user, tool)
+		return ITEM_INTERACT_SUCCESS
+
+	if(!istype(tool, /obj/item/weapon/shovel))
+		return NONE
+
+	var/obj/item/weapon/shovel/attacking_shovel = tool
 	if(user.used_intent.type != /datum/intent/shovelscoop)
-		return
+		return NONE
 
 	if(attacking_shovel.heldclod)
 		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
 		if(stage == 3) //close grave
 			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) //can't have nice things can we
-				return
+				return ITEM_INTERACT_BLOCKING
 			stage = 4
 			climb_offset = 10
 			close()
@@ -161,95 +166,98 @@
 				qdel(src)
 		QDEL_NULL(attacking_shovel.heldclod)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		return
-	else
-		if(stage == 3)
-			var/turf/our_turf = get_turf(src)
-			var/turf/under_turf = GET_TURF_BELOW(our_turf)
-			if(under_turf && our_turf && isopenturf(under_turf))
-				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-				user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
-				if(!do_after(user, 10 SECONDS * attacking_shovel.time_multiplier, src))
-					return TRUE
-				attacking_shovel.heldclod = new(attacking_shovel)
-				attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-				playsound(our_turf,'sound/items/dig_shovel.ogg', 100, TRUE)
-				our_turf.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-				qdel(src)
-				return
-			to_chat(user, "<span class='warning'>I think that's deep enough.</span>")
-			return
-		playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
-		var/used_str = 10
-		if(iscarbon(user))
-			var/mob/living/carbon/C = user
-			if(C.domhand)
-				used_str = C.get_str_arms(C.used_hand)
-			C.adjust_stamina(max(60 - (used_str * 5), 1))
-		if(stage < 3)
-			if(faildirt < 2)
-				if(prob(used_str * 5))
-					stage++
-				else
-					faildirt++
-			else
+		return ITEM_INTERACT_SUCCESS
+
+	if(stage == 3)
+		var/turf/our_turf = get_turf(src)
+		var/turf/under_turf = GET_TURF_BELOW(our_turf)
+		if(under_turf && our_turf && isopenturf(under_turf))
+			playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+			user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
+			if(!do_after(user, 10 SECONDS * attacking_shovel.time_multiplier, src))
+				return ITEM_INTERACT_BLOCKING
+			attacking_shovel.heldclod = new(attacking_shovel)
+			attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+			playsound(our_turf,'sound/items/dig_shovel.ogg', 100, TRUE)
+			our_turf.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
+			qdel(src)
+			return ITEM_INTERACT_SUCCESS
+		to_chat(user, "<span class='warning'>I think that's deep enough.</span>")
+		return ITEM_INTERACT_SUCCESS
+
+	playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+	var/used_str = 10
+	if(iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(C.domhand)
+			used_str = C.get_str_arms(C.used_hand)
+		C.adjust_stamina(max(60 - (used_str * 5), 1))
+	if(stage < 3)
+		if(faildirt < 2)
+			if(prob(used_str * 5))
 				stage++
-		if(stage == 4)
-			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
-				return
-			stage = 3
-			climb_offset = 0
-			open()
-			switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
-				if(NOT_CONSECRATED) // not consecrated, proceed
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
-					return
+			else
+				faildirt++
+		else
+			stage++
 
-				if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
-					if(ishuman(user))
-						var/mob/living/L = user
-						if(L.patron?.type != /datum/patron/divine/necra) // non-necran get tagged as graverobbers in EOR stats.
-							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-							record_round_statistic(STATS_GRAVES_ROBBED)
-						if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
-							to_chat(user, span_warning("Necra turns a blind eye to my deeds."))
-						else // the part where she curses you.
-							to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
+	if(stage == 4)
+		if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
+			return
+		stage = 3
+		climb_offset = 0
+		open()
+		switch(is_consecrated) // this is where we handle folks being cursed by Necra for graverobbing.
+			if(NOT_CONSECRATED) // not consecrated, proceed
+				for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+					qdel(G)
+				return ITEM_INTERACT_SUCCESS
+
+			if(CONSECRATED) // consecrated, if you're not necran clergy or a treasure hunter, you get cursed.
+				if(ishuman(user))
+					var/mob/living/L = user
+					if(L.patron?.type != /datum/patron/divine/necra) // non-necran get tagged as graverobbers in EOR stats.
+						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+						record_round_statistic(STATS_GRAVES_ROBBED)
+					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
+						to_chat(user, span_warning("Necra turns a blind eye to my deeds."))
+					else // the part where she curses you.
+						to_chat(user, span_warning("Necra shuns my blasphemous deeds!"))
+						L.apply_status_effect(/datum/status_effect/debuff/cursed)
+				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+				for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+					qdel(G)
+
+			if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
+				if(ishuman(user))
+					var/mob/living/carbon/human/L = user
+					var/robbery_location = get_area_name(src)
+					if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
+						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+						record_round_statistic(STATS_GRAVES_ROBBED)
+						to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
+						L.apply_status_effect(/datum/status_effect/debuff/cursed)
+						for (var/mob/living/player in GLOB.player_list)
+							if (player.stat == DEAD || isbrain(player))
+								continue
+							// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
+							if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
+								to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
+					else
+						if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
+							to_chat(user, span_info("I speak the hallowed words of Necra, and she releases her grip over my soul.."))
+						else // Even Necrans get minorly cursed, but it's miles better than losing your lux or your arm
+							to_chat(user, span_warning("I mutter Necra's hallowed rites, and although my devotion is recognized, my trespass remains great, I am cursed!"))
 							L.apply_status_effect(/datum/status_effect/debuff/cursed)
-					SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
+				for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
+					qdel(G)
 
-				if(DOUBLY_CONSECRATED to INFINITY) // if double-consecrated (2 or higher), you better be a Necran, or an alarm is tripped.
-					if(ishuman(user))
-						var/mob/living/carbon/human/L = user
-						var/robbery_location = get_area_name(src)
-						if(L.patron?.type != /datum/patron/divine/necra) // non-necran trigger an alarm and get cursed.
-							record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-							record_round_statistic(STATS_GRAVES_ROBBED)
-							to_chat(user, span_warning("Necra shuns my blasphemous deeds! Worse, whispers flutter in every direction, someone has been warned of my actions!"))
-							L.apply_status_effect(/datum/status_effect/debuff/cursed)
-							for (var/mob/living/player in GLOB.player_list)
-								if (player.stat == DEAD || isbrain(player))
-									continue
-								// When the alarm is tripped, the priest, templars, and necran clergy (gravekeepers + acolytes whose patron is Necra) get alerted.
-								if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/undertaker))
-									to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a twice-consecrated grave is being robbed in [robbery_location], this cannot go unpunished!"))
-						else
-							if(HAS_TRAIT(L, TRAIT_GRAVEROBBER)) // this typically means you're a gravetender or cleric
-								to_chat(user, span_info("I speak the hallowed words of Necra, and she releases her grip over my soul.."))
-							else // Even Necrans get minorly cursed, but it's miles better than losing your lux or your arm
-								to_chat(user, span_warning("I mutter Necra's hallowed rites, and although my devotion is recognized, my trespass remains great, I am cursed!"))
-								L.apply_status_effect(/datum/status_effect/debuff/cursed)
-					for(var/obj/structure/gravemarker/G in loc) // remove gravemarkers
-						qdel(G)
-		stage_update()
-		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
-		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
-		is_consecrated = NOT_CONSECRATED // remove consecration levels
+	stage_update()
+	attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
+	attacking_shovel.update_appearance(UPDATE_ICON_STATE)
+	is_consecrated = NOT_CONSECRATED // remove consecration levels
 
-
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)

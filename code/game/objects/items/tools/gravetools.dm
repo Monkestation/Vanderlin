@@ -23,7 +23,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/clod/heldclod
+	var/obj/item/natural/clod/dirt/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	associated_skill = /datum/attribute/skill/combat/polearms
@@ -92,25 +92,18 @@
 	if(!isturf(interacting_with))
 		return NONE
 
+	if(!isturf(user.loc))
+		return ITEM_INTERACT_ANY_BLOCKER
+
 	var/turf/turf = interacting_with
 
 	var/datum/intent/used_intent = user.used_intent
 
 	if(istype(used_intent, /datum/intent/shovelscoop))
-		if(!istype(turf, /turf/open/floor/dirt) && !istype(turf, /turf/open/floor/sand))
-			if(istype(turf, /turf/open/water))
-				qdel(heldclod)
-			else
-				heldclod.forceMove(turf)
-			heldclod = null
-			playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
-			update_appearance(UPDATE_ICON_STATE)
-			return ITEM_INTERACT_SUCCESS
-
 		var/obj/structure/closet/dirthole/holie = locate() in turf
 		if(!heldclod)
 			if(holie)
-				interact_with_atom(holie, user)
+				holie.item_interaction(user, src, modifiers)
 			else if(istype(turf, /turf/open/floor/sand))
 				new /obj/item/natural/clod/sand(src)
 				playsound(turf, 'sound/items/dig_shovel.ogg', 100, TRUE)
@@ -125,17 +118,26 @@
 				update_appearance(UPDATE_ICON_STATE)
 			return ITEM_INTERACT_SUCCESS
 
-		if(holie && holie.stage < 4)
-			holie.attackby(src, user)
-		else
-			if(istype(turf, /turf/open/floor/dirt/road))
+		if(!istype(turf, /turf/open/floor/dirt) && !istype(turf, /turf/open/floor/sand))
+			if(istype(turf, /turf/open/water))
 				qdel(heldclod)
-				turf.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
 			else
 				heldclod.forceMove(turf)
 			heldclod = null
 			playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
 			update_appearance(UPDATE_ICON_STATE)
+			return ITEM_INTERACT_SUCCESS
+
+		if(holie && holie.stage < 4)
+			holie.item_interaction(user, src, modifiers)
+		else if(istype(turf, /turf/open/floor/dirt/road))
+			qdel(heldclod)
+			turf.ChangeTurf(/turf/open/floor/dirt, flags = CHANGETURF_INHERIT_AIR)
+		else
+			heldclod.forceMove(turf)
+		heldclod = null
+		playsound(turf, 'sound/items/empty_shovel.ogg', 100, TRUE)
+		update_appearance(UPDATE_ICON_STATE)
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(used_intent, /datum/intent/irrigate))
