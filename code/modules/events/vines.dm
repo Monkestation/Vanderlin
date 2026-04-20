@@ -378,7 +378,7 @@
 	. = ..()
 	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)
 
-/obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force)
+/obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force, can_fall)
 	if(!permanent_buckle || force)
 		. = ..()
 

@@ -91,7 +91,7 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/railing/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 
 	if(dir in CORNERDIRS)
@@ -100,7 +100,7 @@
 	if(isobserver(leaving))
 		return
 
-	if(get_dir(leaving.loc, new_location) != dir)
+	if(direction != dir)
 		return
 
 	if(leaving.movement_type & (FLOATING|FLYING))
@@ -287,15 +287,18 @@
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
 	redstone_structure = TRUE
 	var/togg = FALSE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
 
 /obj/structure/bars/grille/atom_break(damage_flag)
 	. = ..()
 	obj_flags = CAN_BE_HIT
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/bars/grille/redstone_triggered(mob/user)
 	if(obj_broken)
@@ -305,6 +308,7 @@
 	if(togg)
 		icon_state = "floorgrilleopen"
 		obj_flags = CAN_BE_HIT
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/mob/living/M in loc)
@@ -312,7 +316,7 @@
 	else
 		icon_state = "floorgrille"
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
-
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 
 /obj/structure/plank
 	name = "plank"
@@ -325,6 +329,10 @@
 	damage_deflection = 5
 	blade_dulling = DULLING_BASHCHOP
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+
+/obj/structure/plank/Initialize()
+	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
@@ -343,7 +351,7 @@
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
-
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"
@@ -443,9 +451,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/clock/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -675,9 +683,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/statue/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1108,12 +1116,12 @@
 
 /obj/structure/fluff/psycross/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 2)
+	M.add_offsets(type, x_add = 0, y_add = 2)
 	M.setDir(SOUTH)
 
 /obj/structure/fluff/psycross/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -1121,9 +1129,9 @@
 		return
 	return TRUE
 
-/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 

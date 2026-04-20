@@ -256,7 +256,7 @@
 	else if (isliving(AM))
 		var/mob/living/L = AM
 		if(liquid_group.slippery)
-			if(prob(7) && !(L.movement_type & MOVETYPE_NOT_TOUCHING_GROUND) && L.body_position != LYING_DOWN)
+			if(prob(7) && !(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && L.body_position != LYING_DOWN)
 				L.slip(30, T, NO_SLIP_WHEN_WALKING, 0, TRUE)
 
 	if(fire_state)

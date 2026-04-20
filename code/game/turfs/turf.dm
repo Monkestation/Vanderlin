@@ -162,8 +162,8 @@
 
 	return FALSE
 
-/turf/proc/can_traverse_safely(atom/movable/traveler)
-	return TRUE
+/turf/proc/can_cross_safely(atom/movable/traveler)
+	return !HAS_TRAIT(src, TRAIT_AI_AVOID_TURF)
 
 /// WARNING WARNING
 /// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
@@ -248,13 +248,14 @@
 			return TRUE
 	return FALSE
 
-//zPassIn doesn't necessarily pass an atom!
-//direction is direction of travel of air
-/turf/proc/zPassIn(atom/movable/A, direction, turf/source)
+//The zpass procs exist to be overridden, not directly called
+//use can_z_pass for that
+///If we'd allow anything to travel into us
+/turf/proc/zPassIn(direction)
 	return FALSE
 
-//direction is direction of travel of air
-/turf/proc/zPassOut(atom/movable/A, direction, turf/destination)
+///If we'd allow anything to travel out of us
+/turf/proc/zPassOut(direction)
 	return FALSE
 
 //direction is direction of travel of air
@@ -265,93 +266,57 @@
 /turf/proc/zAirOut(direction, turf/source)
 	return FALSE
 
-/turf/proc/zImpact(atom/movable/falling_atom, levels = 1, turf/prev_turf)
-	if(levels == 1 && falling_atom.ai_controller)
-		for(var/obj/structure/stairs/S in contents)
-			return FALSE
+/// Precipitates a movable (plus whatever buckled to it) to lower z levels if possible and then calls zImpact()
+/turf/proc/zFall(atom/movable/falling, levels = 1, force = FALSE, falling_from_move = FALSE)
+	var/direction = DOWN
+	var/turf/target = get_step_multiz(src, direction)
+	if(!target)
+		return FALSE
+	var/isliving = isliving(falling)
+	if(!isliving && !isobj(falling))
+		return
+	if(isliving)
+		var/mob/living/falling_living = falling
+		//relay this mess to whatever the mob is buckled to.
+		if(falling_living.buckled)
+			falling = falling_living.buckled
+	if(!falling_from_move && falling.currently_z_moving)
+		return
+	if(!force && !falling.can_z_move(direction, src, target, ZMOVE_FALL_FLAGS))
+		falling.set_currently_z_moving(FALSE, TRUE)
+		return FALSE
 
-	var/flags = NONE
-	var/mov_name = falling_atom.name
-	flags |= SEND_SIGNAL(falling_atom, COMSIG_ATOM_FALL_INTERACT, levels)
-	for(var/atom/thing as anything in contents)
-		flags |= thing.intercept_zImpact(falling_atom, levels)
+	// So it doesn't trigger other zFall calls. Cleared on zMove.
+	falling.set_currently_z_moving(CURRENTLY_Z_FALLING)
+
+	falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
+	target.zImpact(falling, levels, src)
+	return TRUE
+
+///Called each time the target falls down a z level possibly making their trajectory come to a halt. see __DEFINES/movement.dm.
+/turf/proc/zImpact(atom/movable/falling, levels = 1, turf/prev_turf, flags = NONE)
+	var/list/falling_movables = falling.get_z_move_affected()
+	var/list/falling_mov_names = list()
+	for(var/atom/movable/falling_mov as anything in falling_movables)
+		falling_mov_names += falling_mov.name
+	for(var/i in contents)
+		var/atom/thing = i
+		flags |= thing.intercept_zImpact(falling_movables, levels)
 		if(flags & FALL_STOP_INTERCEPTING)
 			break
 
 	if(prev_turf && !(flags & FALL_NO_MESSAGE))
-		prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
-
-	if(flags & FALL_INTERCEPTED)
-		return
-
-	if(zFall(falling_atom, ++levels))
+		for(var/mov_name in falling_mov_names)
+			prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
+	if(!(flags & FALL_INTERCEPTED) && zFall(falling, levels + 1))
 		return FALSE
-
-	if(isliving(falling_atom))
-		var/mob/living/falling_mob = falling_atom
-		if(!((falling_mob.movement_type & (FLYING|FLOATING)) && isopenspace(src)))
-			var/dex_save = GET_MOB_SKILL_VALUE_OLD(falling_mob, /datum/attribute/skill/misc/climbing)
-			if(dex_save >= 5)
-				if(falling_mob.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
-					falling_mob.visible_message("<span class='danger'>[falling_mob] gracefully lands on top of [src]!</span>")
-			else
-				falling_mob.visible_message("<span class='danger'>[falling_mob] crashes into [src]!</span>")
-				if(falling_mob.fall_damage())
-					for(var/mob/living/crumpled_mob in contents)
-						visible_message("<span class='danger'>\The [falling_atom] falls on \the [crumpled_mob.name]!</span>")
-						crumpled_mob.Stun(1)
-						crumpled_mob.take_overall_damage(falling_mob.fall_damage(levels)*2)
-
-	else if(falling_atom.fall_damage())
-		for(var/mob/living/crumpled_mob in contents)
-			visible_message("<span class='danger'>\The [falling_atom] falls on \the [crumpled_mob.name]!</span>")
-			crumpled_mob.Stun(1)
-			crumpled_mob.take_overall_damage(falling_atom.fall_damage(levels)*2)
-
-	falling_atom.onZImpact(src, levels)
-
-	if(isobj(falling_atom))
-		var/obj/falling_obj = falling_atom
-		for(var/mob/living/mob in falling_obj.contents)
-			falling_obj.on_fall_impact(mob, levels * 0.75)
-
-	return TRUE
-
-/atom/movable/proc/fall_damage(fall_distance)
-	return 0
-
-/obj/item/fall_damage(fall_distance)
-	var/mass_kg = get_carry_weight()
-	var/fall_factor = sqrt(max(fall_distance, 1))
-	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
-
-
-/mob/living/fall_damage(fall_distance)
-	var/mass_kg = carry_weight + get_mob_weight()
-	var/fall_factor = sqrt(max(fall_distance, 1))
-	return mass_kg * fall_factor * FALL_DAMAGE_SCALE
-
-/obj/structure/fall_damage(fall_distance)
-	if(w_class == WEIGHT_CLASS_TINY)
-		return 0
-	if(w_class == WEIGHT_CLASS_GIGANTIC)
-		return 300
-	var/bsc = 3**(w_class-1)
-	return bsc
-
-/turf/proc/can_zFall(atom/movable/A, levels = 1, turf/target)
-	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
-
-/turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = GET_TURF_BELOW(src)
-	if(!target || (!isobj(A) && !ismob(A)))
-		return FALSE
-	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
-		return FALSE
-	A.atom_flags |= Z_FALLING
-	A.forceMove(target)
-	A.atom_flags &= ~Z_FALLING
-	target.zImpact(A, levels, src)
+	for(var/atom/movable/falling_mov as anything in falling_movables)
+		if(!(flags & FALL_RETAIN_PULL))
+			falling_mov.stop_pulling()
+		if(!(flags & FALL_INTERCEPTED))
+			falling_mov.onZImpact(src, levels)
+		if(falling_mov.pulledby && (falling_mov.z != falling_mov.pulledby.z || get_dist(falling_mov, falling_mov.pulledby) > 1))
+			falling_mov.pulledby.stop_pulling()
 	return TRUE
 
 //There's a lot of QDELETED() calls here if someone can figure out how to optimize this but not runtime when something gets deleted by a Bump/CanPass/Cross call, lemme know or go ahead and fix this mess - kevinz000
@@ -386,18 +351,8 @@
 		return CHECK_BITFIELD(mover.movement_type, PHASING)
 	return TRUE
 
-/turf/Exit(atom/movable/mover, atom/newloc)
-	. = ..()
-	if(!. || QDELETED(mover))
-		return FALSE
-	for(var/i in contents)
-		if(i == mover)
-			continue
-		if(QDELETED(mover))
-			return FALSE		//We were deleted.
-
 /turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	..()
+	. = ..()
 	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
 	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
@@ -405,17 +360,12 @@
 		arrived.ex_act(explosion_level)
 
 /turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	..()
+	. = ..()
 	//melting
 	if(isobj(arrived) && temperature > 273.15)
 		var/obj/O = arrived
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()
-	if(!(arrived.atom_flags & Z_FALLING))
-		zFall(arrived)
-
-/turf/proc/is_plasteel_floor()
-	return FALSE
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)
@@ -555,13 +505,16 @@
 
 /turf/proc/burn_tile()
 
-/turf/proc/is_shielded()
+/// Checks if this turf is protected from an explosion by something
+/// Return TRUE to stop the explosion from affecting this turf
+/turf/proc/is_explosion_shielded(severity)
+	return FALSE
 
 /turf/contents_explosion(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
 	var/affecting_level
 	if(severity == 1)
 		affecting_level = 1
-	else if(is_shielded())
+	else if(is_explosion_shielded(severity))
 		affecting_level = 3
 	else if(intact)
 		affecting_level = 2

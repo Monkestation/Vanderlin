@@ -422,11 +422,11 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /**
  * Called when an atom exits an area
  *
- * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
+ * Sends signals COMSIG_AREA_EXITED and COMSIG_MOVABLE_EXITED_AREA (to the atom)
  */
-/area/Exited(atom/movable/gone, atom/new_loc)
-	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, new_loc)
-	SEND_SIGNAL(gone, COMSIG_EXIT_AREA, src, new_loc) //The atom that exits the area
+/area/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_EXITED_AREA, src, direction)
 
 /**
  * Reset the played var to false on the client

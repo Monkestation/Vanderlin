@@ -1,6 +1,6 @@
 /datum/sprite_accessory/eyes
 	abstract_type = /datum/sprite_accessory/eyes
-	color_keys = 2
+	color_keys = 1
 	color_key_names = list("First Eye", "Second Eye")
 	icon = 'icons/mob/sprite_accessory/eyes/eyes.dmi'
 
@@ -10,6 +10,9 @@
 	if(NOEYESPRITES in owner.dna?.species?.species_traits)
 		return FALSE
 	return is_human_part_visible(owner, HIDEEYES)
+
+/datum/sprite_accessory/eyes/get_icon_state(obj/item/organ/eyes/eyes, ...)
+	return (eyes.side == RIGHT_SIDE) ? "[icon_state]_1" : "[icon_state]_2"
 
 /datum/sprite_accessory/eyes/adjust_appearance_list(list/appearance_list, obj/item/organ/eyes/eyes, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	generic_gender_feature_adjust(appearance_list, eyes, bodypart, owner, OFFSET_FACE)

@@ -19,7 +19,6 @@
 	set category = "Emotes.Silent"
 
 	emote("pray", intentional = TRUE)
-	SEND_SIGNAL(src, COMSIG_PRAYER_COMPLETED)
 
 /datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
 	if(HAS_TRAIT(user, TRAIT_ATHEISM_CURSE))
@@ -36,18 +35,24 @@
 	if(!in_literal_hell && !patron?.can_pray(follower))
 		return
 
-	var/prayer = tgui_input_text(user, "Whisper your Prayer", "Prayer", multiline = TRUE)
+	INVOKE_ASYNC(src, PROC_REF(async_pray), user, patron)
+
+/datum/emote/living/pray/proc/async_pray(mob/living/carbon/follower, datum/patron/patron)
+
+	var/prayer = tgui_input_text(follower, "Whisper your Prayer", "Prayer", multiline = TRUE)
 	if(!prayer)
 		return
 
 	/* admin stuff */
 	send_prayer(follower, prayer, patron.name)
-	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
+	follower.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
 
 	follower.whisper(prayer)
 
 	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
+
+	SEND_SIGNAL(follower, COMSIG_PRAYER_COMPLETED)
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
@@ -809,9 +814,12 @@
 		if(!COOLDOWN_FINISHED(user, schizohelp_cooldown))
 			to_chat(user, span_warning("I need to wait before meditating again."))
 			return
-		var/msg = input("Say your meditation:", "Voices in your head") as text|null
-		if(msg)
-			user.schizohelp(msg)
+		INVOKE_ASYNC(src, PROC_REF(async_meditate), user)
+
+/datum/emote/living/meditate/proc/async_meditate(mob/user)
+	var/msg = input("Say your meditation:", "Voices in your head") as text|null
+	if(msg)
+		user.schizohelp(msg)
 
 // ............... N ..................
 /datum/emote/living/nod
