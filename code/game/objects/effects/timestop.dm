@@ -23,7 +23,7 @@
 	/// If person in range is resistant to specified Magic, added to `immune`
 	/// Should be set to what the magick source of the effect is
 	var/antimagic_flags = MAGIC_RESISTANCE
-	/// If true, immune atoms moving ends the timestop instead of duration.
+	/// If `TRUE`, immune atoms moving ends the timestop instead of duration.
 	var/channelled = FALSE
 	/// Hides time icon effect and mutes sound
 	var/hidden = FALSE
@@ -76,7 +76,7 @@
 	/// Only aesthetically
 	var/list/frozen_turfs = list()
 	var/antimagic_flags = NONE
-	/// If TRUE, this doesn't time out after a duration but rather when an immune atom inside moves.
+	/// If `TRUE`, this doesn't time out after a duration but rather when an immune atom inside moves.
 	var/channelled = FALSE
 
 	var/static/list/global_frozen_atoms = list()
