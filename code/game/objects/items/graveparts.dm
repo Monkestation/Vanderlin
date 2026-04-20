@@ -110,7 +110,7 @@
 	icon_state = "headstone_hunt"
 	dropshrink = 0.8
 	decorationquality = 1
-	patron = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
+	patrons = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
 
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"

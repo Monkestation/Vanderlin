@@ -967,7 +967,7 @@
 
 /obj/item/recipe_book/gravemaking
 	name = "The Undertaker's Codex: Burials, Exhumations, and Unwanted Guests"
-	desc = "Penned by Jan Ditchdigger"
+	desc = "Penned by Chem E. Terry"
 	icon_state ="book5_0"
 	base_icon_state = "book5"
 
