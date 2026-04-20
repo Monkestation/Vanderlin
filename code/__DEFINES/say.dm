@@ -73,6 +73,7 @@
 #define SPAN_HELL "hellspeak"
 #define SPAN_ORC "orc"
 #define SPAN_BEAST "beast"
+#define SPAN_KOBOLD "kobold"
 #define SPAN_DEEPSPEAK "deepspeak"
 #define SPAN_UNDEAD "undead"
 
