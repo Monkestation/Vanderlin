@@ -13,7 +13,7 @@
 	/// Set this if this decoration is not crafted/doesn't have an item state, but instead is made by using a non decoration item on a grave. MUST BE TYPE
 	var/sourceitem
 	/// Patrons associated with this grave decoration. Usually a headstone.
-	var/list/patron
+	var/list/patrons
 
 /obj/item/gravedecor/New(loc, var/parent)
 	if(parent)
@@ -78,7 +78,7 @@
 	icon_state = "headstone_psydon"
 	dropshrink = 0.8
 	decorationquality = 2
-	patron = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
+	patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 
 /obj/item/gravedecor/headstone/astrata
 	name = "astratan headstone"
@@ -86,7 +86,7 @@
 	icon_state = "headstone_astrata"
 	dropshrink = 0.8
 	decorationquality = 3
-	patron = list(/datum/patron/divine/astrata)
+	patrons = list(/datum/patron/divine/astrata)
 
 /obj/item/gravedecor/headstone/pestra
 	name = "pestran headstone"
@@ -94,7 +94,7 @@
 	icon_state = "headstone_pestra"
 	dropshrink = 0.8
 	decorationquality = 2
-	patron = list(/datum/patron/divine/pestra)
+	patrons = list(/datum/patron/divine/pestra)
 
 /obj/item/gravedecor/headstone/abyssor
 	name = "abyssorite headstone"
@@ -102,7 +102,7 @@
 	icon_state = "headstone_abyssor"
 	dropshrink = 0.8
 	decorationquality = 2
-	patron = list(/datum/patron/divine/abyssor)
+	patrons = list(/datum/patron/divine/abyssor)
 
 /obj/item/gravedecor/headstone/hunt
 	name = "skull headstone"
