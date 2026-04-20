@@ -44,15 +44,31 @@
 	display_pain(limb.owner, "I feel a stabbing in my [parse_zone(limb.body_zone)].")
 
 /datum/surgery_operation/limb/incise_skin/on_success(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
-	. = ..() // default success message
+	if(!limb.bleeds)
+		return ..()
+
 	limb.add_wound(/datum/wound/slash/incision)
 
 	display_results(
 		surgeon,
 		limb.owner,
+		span_notice("I make an incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("Blood pools around the incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
 		span_notice("Blood pools around the incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
-		span_notice("Blood pools around the incision in [limb.owner]'s [parse_zone(limb.body_zone)]."),
+	)
+
+/datum/surgery_operation/limb/incise_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
+	if(!limb.bleeds)
+		return ..()
+
+	limb.add_wound(/datum/wound/slash)
+
+	display_results(
+		surgeon,
+		limb.owner,
+		span_notice("I make a messy cut on [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("Blood pools around the cut on [limb.owner]'s [parse_zone(limb.body_zone)]."),
+		span_notice("Blood pools around the cut on [limb.owner]'s [parse_zone(limb.body_zone)]."),
 	)
 
 /// Pulls the skin back to access internals
@@ -91,6 +107,11 @@
 
 	limb.add_embedded_object(tool)
 
+/datum/surgery_operation/limb/retract_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
+	. = ..()
+
+	limb.receive_damage(5)
+
 /// Closes the skin
 /datum/surgery_operation/limb/close_skin
 	name = "mend skin incision"
@@ -99,7 +120,7 @@
 
 	implements = list(
 		TOOL_CAUTERY = 1,
-		/obj/item/needle = 1,
+		/obj/item/needle = 1.4,
 		/obj/item = 3.33,
 	)
 
@@ -150,7 +171,13 @@
 	if(tool.get_temperature())
 		limb.receive_damage(burn = 20)
 	limb.remove_wound(/datum/wound/slash/incision)
-	limb.remove_surgical_state(ALL_SURGERY_STATES_UNSET_ON_CLOSE)
+
+/datum/surgery_operation/limb/close_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
+	. = ..()
+	if(tool.get_temperature())
+		limb.receive_damage(burn = 15)
+	else
+		limb.receive_damage(10)
 
 /// Clamps bleeding blood vessels to prevent blood loss
 /datum/surgery_operation/limb/clamp_bleeders
@@ -237,7 +264,7 @@
 	if(!limb.has_wound(/datum/wound/fracture))
 		var/fracture_type = /datum/wound/fracture
 		//yes we ignore crit resist here because this is a proper surgical procedure, not a crit
-		switch(limb.body_zone)
+		switch(surgeon.zone_selected)
 			if(BODY_ZONE_HEAD)
 				fracture_type = /datum/wound/fracture/head/surgical
 			if(BODY_ZONE_PRECISE_NECK)
@@ -251,10 +278,23 @@
 	display_results(
 		surgeon,
 		limb.owner,
-		span_notice("You saw [limb.owner]'s [parse_zone(limb.body_zone)] open."),
+		span_notice("I saw [limb.owner]'s [parse_zone(limb.body_zone)] open."),
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 		span_notice("[surgeon] saws [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
 	)
 	display_pain(limb.owner, "Something just broke in my [parse_zone(limb.body_zone)]!")
 
-	limb.owner.emote("scream")
+	limb.owner.emote("scream", forced = "surgery")
+
+/datum/surgery_operation/limb/saw_bones/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
+	display_results(
+		surgeon,
+		limb.owner,
+		span_warning("I fail to saw [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
+		span_warning("[surgeon] fails to saw [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
+		span_warning("[surgeon] fails to saw [limb.owner]'s [parse_zone(limb.body_zone)] open!"),
+	)
+	display_pain(limb.owner, "I feel my bones ache and crack in my [parse_zone(limb.body_zone)]!")
+
+	limb.receive_damage(30)
+	limb.owner.emote("scream", forced = "surgery")
