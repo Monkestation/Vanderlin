@@ -170,7 +170,15 @@
 
 	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_BONE_SAWED), "Fixing bones did not remove the bone sawn surgery state")
 
-	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	chest.remove_embedded_object(retractor)
+
+	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Removing retractor did not remove the open surgical state")
+
+	chest.remove_embedded_object(hemostat)
+
+	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_VESSELS_CLAMPED), "Removing hemostat did not remove the clamped surgical state")
+
+	var/datum/surgery_operation/limb/close_skin/msurgery = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__)
 	UNLINT(msurgery.success(chest, surgeon, cautery, list()))
 
 	TEST_ASSERT(!LIMB_HAS_ANY_SURGERY_STATE(chest, ALL), "Closing surgery did not remove all surgical states applied during surgery")
