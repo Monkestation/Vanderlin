@@ -33,7 +33,7 @@
 
 	SEND_SIGNAL(target, COMSIG_ELEMENT_ATTACH, src)
 	if(element_flags & ELEMENT_DETACH_ON_HOST_DESTROY)
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(OnTargetDelete), override = TRUE)
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(OnTargetDelete), override = TRUE)
 
 /datum/element/proc/OnTargetDelete(datum/source)
 	SIGNAL_HANDLER

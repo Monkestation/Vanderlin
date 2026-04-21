@@ -221,7 +221,6 @@
 #include "code\__DEFINES\dcs\helpers.dm"
 #include "code\__DEFINES\dcs\signals\signals_action.dm"
 #include "code\__DEFINES\dcs\signals\signals_ai.dm"
-#include "code\__DEFINES\dcs\signals\signals_area.dm"
 #include "code\__DEFINES\dcs\signals\signals_beam.dm"
 #include "code\__DEFINES\dcs\signals\signals_client.dm"
 #include "code\__DEFINES\dcs\signals\signals_coven_powers.dm"
