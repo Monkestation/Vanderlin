@@ -353,7 +353,7 @@
 	var/mob/living/L = owner
 	if (!L) return
 	check_field_presence()
-	L.adjustBruteLoss(5)
+	L.adjustBruteLoss(2)
 
 	if (locate(/obj/structure/flora/field/euphorbia) in get_turf(L))
 		to_chat(L, span_warning("The spines hurt your feet"))
