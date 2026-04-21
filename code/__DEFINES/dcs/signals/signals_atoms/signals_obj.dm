@@ -52,3 +52,28 @@
 #define COMSIG_GUN_CHAMBER_PROCESSED "gun_chamber_processed"
 ///called in /obj/item/gun/ballistic/after_firing (casing)
 #define COMSIG_CASING_EJECTED "casing_ejected"
+
+/// from base of obj/deconstruct(): (disassembled)
+#define COMSIG_OBJ_DECONSTRUCT "obj_deconstruct"
+/// from base of /obj/structure/setAnchored(): (value)
+#define COMSIG_OBJ_SETANCHORED "obj_setanchored"
+/// from base of code/game/machinery
+#define COMSIG_OBJ_DEFAULT_UNFASTEN_WRENCH "obj_default_unfasten_wrench"
+/// From /obj/item/multitool/remove_buffer(): (buffer)
+#define COMSIG_MULTITOOL_REMOVE_BUFFER "multitool_remove_buffer"
+
+/// from /obj/proc/unfreeze()
+#define COMSIG_OBJ_UNFREEZE "obj_unfreeze"
+/// from /obj/machinery/obj_break(damage_flag): (damage_flag)
+#define COMSIG_MACHINERY_BROKEN "machinery_broken"
+/// from base power_change() when power is lost
+#define COMSIG_MACHINERY_POWER_LOST "machinery_power_lost"
+/// from base power_change() when power is restored
+#define COMSIG_MACHINERY_POWER_RESTORED "machinery_power_restored"
+
+// /obj/item/clothing signals
+/// from base of obj/item/clothing/shoes/proc/step_action(): ()
+#define COMSIG_CLOTHING_STEP_ACTION "clothing_step_action"
+
+/// from base of obj/item/reagent_containers/food/snacks/attack(): (mob/living/eater, mob/feeder)
+#define COMSIG_FOOD_EATEN "food_eaten"

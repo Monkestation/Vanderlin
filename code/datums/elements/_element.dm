@@ -16,12 +16,12 @@
 	if(type == /datum/element)
 		return ELEMENT_INCOMPATIBLE
 	if(element_flags & ELEMENT_DETACH)
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(Detach), override = TRUE)
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(Detach), override = TRUE)
 
 /// Deactivates the functionality defines by the element on the given datum
 /datum/element/proc/Detach(datum/source, ...)
 	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 
 /datum/element/Destroy(force)
 	if(!force)

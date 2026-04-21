@@ -33,7 +33,7 @@
 
 	//The wrap-up. Anything else we need to do before we start spanning things, we do it here.
 	//Note that this also sends a copy of our subjective pronouns.
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_sections, P)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, examine_sections, P)
 
 
 	// round any decimal sections up to the rest of the group

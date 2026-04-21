@@ -28,14 +28,14 @@
 	. = ..()
 	RegisterSignal(parent, COMSIG_HUMAN_LIFE, PROC_REF(handle_disguise_upkeep))
 	RegisterSignal(parent, COMSIG_DISGUISE_STATUS, PROC_REF(disguise_status))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	var/mob/living/carbon/human/H = parent
 	if(H.client)
 		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 
 /datum/component/vampire_disguise/UnregisterFromParent()
 	. = ..()
-	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_ATOM_EXAMINE))
 	var/mob/living/carbon/human/H = parent
 	if(H.client)
 		add_verb(H, /mob/living/carbon/human/proc/disguise_button)

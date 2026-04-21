@@ -29,11 +29,6 @@
 /obj/structure/chair/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/structure/chair/narsie_act()
-	var/obj/structure/chair/wood/W = new/obj/structure/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
-
 /obj/structure/chair/attackby(obj/item/W, mob/user, list/modifiers)
 	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
 		W.play_tool_sound(src)
@@ -80,10 +75,6 @@
 	buildstackamount = 0
 	item_chair = /obj/item/chair/wood
 	anchored = FALSE
-
-/obj/structure/chair/wood/narsie_act()
-	return
-//Stool
 
 /obj/structure/chair/stool
 	name = "stool"
@@ -166,11 +157,6 @@
 	playsound(src,hitsound,50,TRUE)
 	return BRUTELOSS
 
-/obj/item/chair/narsie_act()
-	var/obj/item/chair/wood/W = new/obj/item/chair/wood(get_turf(src))
-	W.setDir(dir)
-	qdel(src)
-
 /obj/item/chair/attack_self(mob/user, list/modifiers)
 	plant(user)
 
@@ -221,16 +207,10 @@
 	item_state = "barstool"
 	origin_type = /obj/structure/chair/stool/bar
 
-/obj/item/chair/stool/narsie_act()
-	return //sturdy enough to ignore a god
-
 /obj/item/chair/wood
 	name = "wooden chair"
 	origin_type = /obj/structure/chair/wood
 	break_chance = 50
-
-/obj/item/chair/wood/narsie_act()
-	return
 
 /obj/structure/chair/mime
 	name = "invisible chair"

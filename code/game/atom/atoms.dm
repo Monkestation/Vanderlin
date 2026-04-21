@@ -469,7 +469,7 @@
  * Default behaviour is to get the name and icon of the object and it's reagents where
  * the TRANSPARENT flag is set on the reagents holder
  *
- * Produces a signal COMSIG_PARENT_EXAMINE
+ * Produces a signal COMSIG_ATOM_EXAMINE
  */
 /atom/proc/examine(mob/user)
 	var/examine_string = get_examine_string(user, thats = TRUE)
@@ -523,7 +523,7 @@
 							full_reagents += "[lowertext(R.name)]"
 					if(length(full_reagents))
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /**
  * Updates the appearence of the icon
@@ -715,22 +715,6 @@
  */
 /atom/proc/acid_act(acidpwr, acid_volume)
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
-
-/**
- * Respond to an emag being used on our atom
- *
- * Default behaviour is to send COMSIG_ATOM_EMAG_ACT and return
- */
-/atom/proc/emag_act(mob/user)
-	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user)
-
-/**
- * Respond to narsie eating our atom
- *
- * Default behaviour is to send COMSIG_ATOM_NARSIE_ACT and return
- */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
 
 /**
  * Implement the behaviour for when a user click drags a storage object to your atom
