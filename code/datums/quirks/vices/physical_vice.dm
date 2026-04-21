@@ -40,8 +40,7 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	H.put_in_hands(new /obj/item/clothing/face/eyepatch())
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/right/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_RIGHT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/cyclops_left
@@ -54,8 +53,7 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	H.put_in_hands(new /obj/item/clothing/face/eyepatch/left())
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
+	ADD_TRAIT(H, TRAIT_CYCLOPS_LEFT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/tongueless
