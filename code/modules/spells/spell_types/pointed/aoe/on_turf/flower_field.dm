@@ -171,7 +171,7 @@
 				L.emote("agony")
 			L.Stun(2 SECONDS)
 	if (!HAS_TRAIT(L, TRAIT_PIERCEIMMUNE))
-		L.adjustBruteLoss(40)
+		L.adjustBruteLoss(35)
 		if (prob(25) && ishuman(L))
 			var/mob/living/carbon/human/H = L
 			var/obj/item/bodypart/BP = pick(H.bodyparts)
