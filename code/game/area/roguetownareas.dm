@@ -362,13 +362,13 @@
 	. = ..()
 	if(!iscarbon(arrived))
 		return
-	RegisterSignal(arrived, COMSIG_CARBON_PRAY, PROC_REF(on_underworld_prayer))
+	RegisterSignal(arrived, COMSIG_EMOTE_PRAY, PROC_REF(on_underworld_prayer))
 
 /area/underworld/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(!iscarbon(gone))
 		return
-	UnregisterSignal(gone, COMSIG_CARBON_PRAY)
+	UnregisterSignal(gone, COMSIG_EMOTE_PRAY)
 
 /area/underworld/proc/on_underworld_prayer(mob/living/carbon/damned, message)
 	// Who do the underworld spirits pray to? Good question

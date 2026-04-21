@@ -226,7 +226,7 @@
 		offhand_item.name = "[parent_item.name] - offhand"
 		offhand_item.desc = "Your second grip on [parent_item]."
 		RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
-		RegisterSignal(offhand_item, COMSIG_PARENT_QDELETING, PROC_REF(on_destroy))
+		RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))
 		user.put_in_inactive_hand(offhand_item)
 
 	to_chat(user, span_notice("I wield [parent] with both hands."))
@@ -283,7 +283,7 @@
 
 	// Remove the object in the offhand
 	if(offhand_item)
-		UnregisterSignal(offhand_item, list(COMSIG_ITEM_DROPPED, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(offhand_item, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING))
 		qdel(offhand_item)
 	// Clear any old refrence to an item that should be gone now
 	offhand_item = null

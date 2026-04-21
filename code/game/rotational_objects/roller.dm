@@ -1,4 +1,3 @@
-
 /obj/structure/roller
 	name = "roller"
 	desc = "A rotating roller that moves items in one direction. Can be powered by rotation from the sides."

@@ -12,8 +12,8 @@
 	current_blood = 5
 	blood_req = 1
 	oxygen_req = 0.5
-	nutriment_req = 0.5
-	hydration_req = 1
+	nutriment_req = 0.3
+	hydration_req = 0.6
 
 	var/list/languages_possible
 	var/say_mod = null

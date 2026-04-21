@@ -264,3 +264,9 @@
   - rscadd: Adds "Fat" Be Special
   - bugfix: Black Briar should properly apply to Adv class selection.
   - bugfix: Skeleton Be Special should work slightly better.
+2026-04-19:
+  Ben10083:
+  - bugfix: Men-at-Arms and Royal Knights now have the correct verbs
+  PotatoTomahto:
+  - refactor: z movement
+  - refactor: water in general

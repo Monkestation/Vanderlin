@@ -108,12 +108,12 @@
 	blade.grant_language(/datum/language/oldpsydonic)
 	blade.add_quirk(/datum/quirk/vice/godfearing)
 
-	RegisterSignal(blade, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/antagonist/vampire/lord/daewalker/on_removal()
 	if(owner.current)
 		owner.current.remove_stat_modifier("[type]")
-		UnregisterSignal(owner.current, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(owner.current, COMSIG_ATOM_EXAMINE)
 	. = ..()
 
 /datum/antagonist/vampire/lord/daewalker/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)

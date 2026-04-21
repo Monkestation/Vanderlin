@@ -70,7 +70,6 @@
 	anchored = FALSE
 
 //Stool
-
 /obj/structure/chair/stool
 	name = "stool"
 	desc = ""

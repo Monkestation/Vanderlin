@@ -6,6 +6,7 @@
 	zone = BODY_ZONE_PRECISE_R_EYE
 	slot = ORGAN_SLOT_EYES
 	side = RIGHT_SIDE
+	sellprice = DEFAULT_ORGAN_VALUE/2
 
 	visible_organ = TRUE
 
@@ -32,8 +33,8 @@
 	current_blood = 5
 	blood_req = 1
 	oxygen_req = 0.5
-	nutriment_req = 0.25
-	hydration_req = 0.25
+	nutriment_req = 0.15
+	hydration_req = 0.15
 
 	var/sight_flags = 0
 	var/see_in_dark = 8

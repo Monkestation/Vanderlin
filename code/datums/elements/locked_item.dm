@@ -13,12 +13,12 @@
 
 	allowed_factions = factions || list("ambush", "quest")
 	RegisterSignal(target, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equipped))
-	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/element/faction_restricted_equip/Detach(datum/target)
 	. = ..()
 	UnregisterSignal(target, COMSIG_ITEM_EQUIPPED)
-	UnregisterSignal(target, COMSIG_PARENT_EXAMINE)
+	UnregisterSignal(target, COMSIG_ATOM_EXAMINE)
 
 /datum/element/faction_restricted_equip/proc/on_examine(datum/source, mob/user, list/examine_text)
 	examine_text += span_danger("This item has engraved runes preventing it from being worn.")

@@ -17,17 +17,14 @@
 	udder.add_features(parent, on_generate_callback, reagent_produced_typepath)
 	src.on_milk_callback = on_milk_callback
 
-/datum/component/udder/Destroy(force)
-	QDEL_NULL(udder)
-	on_milk_callback = null
-	return ..()
-
 /datum/component/udder/RegisterWithParent()
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interaction))
 
 /datum/component/udder/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_PARENT_EXAMINE, COMSIG_ATOM_ITEM_INTERACTION))
+	QDEL_NULL(udder)
+	on_milk_callback = null
+	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ATOM_ITEM_INTERACTION))
 
 ///signal called on parent being examined
 /datum/component/udder/proc/on_examine(datum/source, mob/user, list/examine_list)

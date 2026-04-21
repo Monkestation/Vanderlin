@@ -34,16 +34,8 @@
 #define COMSIG_MOB_ACTIVE_PERCEPTION "comsig_mob_active_perception"	//sent from mob/living/proc/look_around(): (mob/living/source)
 #define COMSIG_LIVING_WOUND_GAINED "wound_gained"
 
-// Client
-/// sent when a mob/login() finishes: (client)
-#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
-/// from base of client/MouseDown(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDOWN "client_mousedown"
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEUP "client_mouseup"
-	#define COMPONENT_CLIENT_MOUSEUP_INTERCEPT (1<<0)
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDRAG "client_mousedrag"
+/// From base of /obj/item/reagent_containers/food/snacks/attack: (mob/living/M, mob/living/user, list/modifiers)
+#define COMSIG_MOB_FOOD_EAT "mob_food_ate"
 
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 ///from base of mob/living/OffBalance() (amount, ignore_canstun)

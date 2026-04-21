@@ -22,7 +22,8 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 		astype(parent, /atom).balloon_alert_to_viewers("This vessel awaits a soul...")
 		if(!GLOB.active_ghost_vessels[vessel_id])
 			GLOB.active_ghost_vessels[vessel_id] = list()
-		GLOB.active_ghost_vessels[vessel_id] += parent
+		GLOB.active_ghost_vessels[vessel_id] += parent  // store the mob, not the component
+		return
 
 /datum/component/ghost_vessel/Destroy()
 	if(vessel_id && GLOB.active_ghost_vessels[vessel_id])
@@ -39,7 +40,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 
 	if(!vessel_item_type)
 		RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interaction))
-		RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
+		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_deleted))
 
 /datum/component/ghost_vessel/UnregisterFromParent()
 	REMOVE_TRAIT(parent, TRAIT_STASIS, REF(src))
