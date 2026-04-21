@@ -98,6 +98,10 @@
 
 	if(is_open_container() && reagents.total_volume > 0 && !GetComponent(/datum/component/storage))
 		if(!istype(tool, /obj/item/reagent_containers) && !istype(tool, /obj/item/paper))
+			if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
+				return NONE // special snowflake
+			if(tool.w_class > WEIGHT_CLASS_NORMAL || tool.w_class > w_class)
+				return NONE
 			var/splash_amount = reagents.total_volume * 0.05
 			if(splash_amount < 1)
 				splash_amount = 1
@@ -108,7 +112,7 @@
 			splash_holder.handle_reactions()
 			splash_holder.reaction(tool, TOUCH, 1)
 			qdel(splash_holder)
-			to_chat(user, span_notice("You submerge [tool] into [src]."))
+			to_chat(user, span_notice("I submerge \the [tool.name] into \the [name]."))
 			return ITEM_INTERACT_SUCCESS
 
 	var/hotness = tool.get_temperature()
@@ -124,15 +128,17 @@
 	if(GetComponent(/datum/component/storage))
 		return NONE
 
-	if(!is_open_container() || !reagents || !reagents.total_volume)
-		to_chat(user, span_warning("\The [name] needs to be open and have reagents to soak something in."))
-		return ITEM_INTERACT_BLOCKING
+	if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
+		return NONE // special snowflake
+
+	if(!is_open_container() || !reagents?.total_volume)
+		return NONE
 
 	if(soaking_item)
 		to_chat(user, span_warning("There's already something soaking in \the [name]."))
 		return ITEM_INTERACT_BLOCKING
 
-	if(tool.w_class > WEIGHT_CLASS_NORMAL)
+	if(tool.w_class > WEIGHT_CLASS_NORMAL || tool.w_class > w_class)
 		to_chat(user, span_warning("\The [tool.name] is too large to fit in \the [name]."))
 		return ITEM_INTERACT_BLOCKING
 

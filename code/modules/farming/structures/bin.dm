@@ -158,23 +158,26 @@
 		qdel(src)
 		return ITEM_INTERACT_SUCCESS
 
-	if(isitem(tool))
-		if(isreagentcontainer(tool))
-			return NONE // special snowflake
-		var/obj/item/item = tool
-		if(istype(tool, /obj/item/weapon/tongs))
-			var/obj/item/weapon/tongs/tongs = tool
-			if(tongs.held_item)
-				item = tongs.held_item
+	if(is_type_in_list(user.used_intent, list(INTENT_SOAK, INTENT_WRING)))
+		return NONE // special snowflake
 
-		if(HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
-			if(!quench(item, user))
-				return ITEM_INTERACT_BLOCKING
-			return ITEM_INTERACT_SUCCESS
+	if(isreagentcontainer(tool))
+		return NONE // special snowflake
 
-		if(!try_wash(item, user))
+	var/obj/item/item = tool
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
+		if(tongs.held_item)
+			item = tongs.held_item
+
+	if(HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
+		if(!quench(item, user))
 			return ITEM_INTERACT_BLOCKING
 		return ITEM_INTERACT_SUCCESS
+
+	if(!try_wash(item, user))
+		return ITEM_INTERACT_BLOCKING
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/bin/proc/quench(obj/item/tool, mob/living/user)
 	var/removereg = /datum/reagent/water

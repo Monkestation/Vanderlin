@@ -62,7 +62,7 @@
 	if(user.used_intent.blade_class != BCLASS_BLUNT || user.used_intent.noaa)
 		return ..()
 
-	playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
+	playsound(src, 'sound/items/seedextract.ogg', 100, FALSE)
 
 	user.changeNext_move(CLICK_CD_FAST)
 

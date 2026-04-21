@@ -40,30 +40,32 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/fat/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	var/found_table = locate(/obj/structure/table) in (loc)
-	var/obj/item/reagent_containers/glass/R = tool
-	if(user.mind)
-		long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 15))
+	if(!istype(tool, /obj/item/reagent_containers/glass))
+		return ..()
 
-	if(isturf(loc)&& (found_table))
-		if(!istype(R))
-			return NONE
-		if(!R.reagents.has_reagent(/datum/reagent/consumable/sugar, 30))
-			to_chat(user, span_notice("Needs more sugar to work it."))
-			return ITEM_INTERACT_BLOCKING
-		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
-			to_chat(user, span_warning("Gelatine is much too strange for you."))
-			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("Congealing the sugar..."))
-		playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
-		if(do_after(user, long_cooktime, src))
-			new /obj/item/reagent_containers/food/snacks/jellycake_base(loc)
-			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
-			qdel(src)
-			R.reagents.remove_reagent(/datum/reagent/consumable/sugar, 30)
-			user.nobles_seen_servant_work()
-	else
+	if(!isturf(loc) || !(locate(/obj/structure/table) in loc))
 		to_chat(user, span_warning("You need to put [src] on a table to work on it."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(!tool.reagents.has_reagent(/datum/reagent/consumable/sugar, 30))
+		to_chat(user, span_notice("Needs more sugar to work it."))
+		return ITEM_INTERACT_BLOCKING
+
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking) <= 3) // cooks with less than 3 skill don´t know this recipe
+		to_chat(user, span_warning("Gelatine is much too strange for you."))
+		return ITEM_INTERACT_BLOCKING
+
+	long_cooktime = (90 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 15))
+	to_chat(user, span_notice("Congealing the sugar..."))
+	playsound(user, 'sound/foley/splishy.ogg', 100, TRUE, -1)
+	if(do_after(user, long_cooktime, src))
+		new /obj/item/reagent_containers/food/snacks/jellycake_base(loc)
+		user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+		qdel(src)
+		tool.reagents.remove_reagent(/datum/reagent/consumable/sugar, 30)
+		user.nobles_seen_servant_work()
+
+	return ITEM_INTERACT_SUCCESS
 
 // TALLOW is used as an intermediate crafting ingredient for other recipes.
 /obj/item/reagent_containers/food/snacks/tallow

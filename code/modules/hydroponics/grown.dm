@@ -52,7 +52,7 @@
 		return NONE
 
 	if(user.used_intent.blade_class != BCLASS_BLUNT || user.used_intent.noaa)
-		return NONE
+		return ..()
 
 	playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
 

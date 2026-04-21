@@ -654,12 +654,13 @@
 	if(modified || !istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
 		return ..()
 
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/item/reagent_containers/food/snacks/S = tool
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
@@ -775,12 +776,12 @@
 		/obj/item/reagent_containers/food/snacks/fruit/tamto_slice)))
 		return ..()
 
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/foley/chopping_block.ogg', 40, TRUE, -1)
 	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/item/reagent_containers/food/snacks/S = tool
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 
 	modified = TRUE
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5))

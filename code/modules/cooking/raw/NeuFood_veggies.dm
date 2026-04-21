@@ -78,13 +78,10 @@
 	item_weight = 450 GRAMS
 
 /obj/item/reagent_containers/food/snacks/veg/cocaudo_half/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
-
 	if(!istype(tool, /obj/item/kitchen/spoon))
 		return ..()
 
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
 	playsound(user, 'sound/items/wood_sharpen.ogg', 100, TRUE, -1)
 	to_chat(user, span_notice("Scooping out the [src]..."))
 	if(do_after(user, short_cooktime, src))
