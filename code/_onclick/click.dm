@@ -238,7 +238,7 @@
 	if(held_item)
 		held_item.afterattack(clicked_atom, src, 0, modifiers) // 0: not Adjacent
 	else if(LAZYACCESS(modifiers, RIGHT_CLICK))
-		ranged_secondary_attack(clicked_atom, modifiers)
+		ranged_attack_secondary(clicked_atom, modifiers)
 	else
 		ranged_attack(clicked_atom, modifiers)
 
@@ -378,7 +378,7 @@
  * instead initialized via a right click, this will trigger instead.
  * Useful for mobs that have their abilities mapped to right click.
  */
-/mob/proc/ranged_secondary_attack(atom/target, modifiers)
+/mob/proc/ranged_attack_secondary(atom/target, modifiers)
 	if(SEND_SIGNAL(src, COMSIG_MOB_ATTACK_RANGED_SECONDARY, target, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 

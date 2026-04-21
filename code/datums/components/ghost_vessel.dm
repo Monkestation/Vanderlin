@@ -48,7 +48,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 	REMOVE_TRAIT(parent, TRAIT_HANDS_BLOCKED, SOULSTONE_TRAIT)
 
 	if(!vessel_item_type)
-		UnregisterSignal(parent, list(COMSIG_ATOM_ITEM_INTERACTION, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(parent, list(COMSIG_ATOM_ITEM_INTERACTION, COMSIG_QDELETING))
 
 /datum/component/ghost_vessel/proc/on_parent_deleted(datum/source)
 	return
