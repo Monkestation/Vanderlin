@@ -569,6 +569,30 @@
 	if(A.burial_grounds)
 		gravequality += 1
 
+	// Calculate damage to buried bodies and provide malus if too damaged.
+	var/bodyquality = 0
+	for(var/mob/living/carbon/human/corpse in contents) // We only care about humans
+		// No head? -1 point
+		if(!(corpse.get_bodypart(BODY_ZONE_HEAD)))
+			bodyquality -= 1
+
+		// Too much brute or burn damage? -1 point
+		if(corpse.getBruteLoss() >= 75 || corpse.getFireLoss() >= 75)
+			bodyquality -= 1
+
+	// Check for container and bodies in container, do same as above
+	for(var/obj/structure/closet/container in contents)
+		for(var/mob/living/carbon/human/corpse in container.contents)
+			// No head? -1 point
+			if(!(corpse.get_bodypart(BODY_ZONE_HEAD)))
+				bodyquality -= 1
+
+			// Too much brute or burn damage? -1 point
+			if(corpse.getBruteLoss() >= 75 || corpse.getFireLoss() >= 75)
+				bodyquality -= 1
+
+	gravequality += bodyquality
+
 	if(headstone)
 		var/headquality = headstone.decorationquality
 		for(var/mob/living/corpse in contents)
@@ -589,7 +613,7 @@
 	for(var/obj/structure/closet/burial_shroud/shroud in contents)
 		gravequality += 1
 
-	gravequality = min(gravequality, 10)
+	gravequality = clamp(gravequality, 0, 10)
 	adjust_grave_necra_devotion()
 	return
 
