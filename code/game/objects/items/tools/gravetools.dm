@@ -260,7 +260,7 @@
 
 /obj/item/weapon/shovel/necran
 	name = "necran battle shovel"
-	desc = "This great-shovel is granted for the completion of a gravetenders final initiation rites, for the wielder of this shovel shall rise no more, and with it in hand, neither shall their quarry."
+	desc = "This polearm esque great-shovel is granted for the completion of a gravetenders final initiation rites, for the wielder of this shovel shall rise no more, and with it in hand, neither shall their quarry."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "battleshovel"
 	SET_BASE_PIXEL(-16, -16)

@@ -112,6 +112,14 @@
 	decorationquality = 1
 	patrons = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
 
+/obj/item/gravedecor/headstone/necra
+	name = "necran headstone"
+	desc = "This one's time is up. Perhaps they never had any. Does it really matter?"
+	icon_state = "headstone_necra"
+	dropshrink = 0.8
+	decorationquality = 2
+	patrons = list(/datum/patron/divine/necra)
+
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
 	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."

@@ -33,7 +33,8 @@
 
 /datum/attribute_holder/sheet/job/templar/patron/necra
 	raw_attribute_list = list(
-		/datum/attribute/skill/combat/whipsflails = 40
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/craft/masonry = 20
 	)
 
 /datum/attribute_holder/sheet/job/templar/patron/pestra

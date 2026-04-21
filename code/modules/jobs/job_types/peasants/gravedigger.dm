@@ -14,6 +14,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/craft/masonry = 30, //Crafting grave decorations
 		/datum/attribute/skill/labor/mathematics = 20
 	)
 

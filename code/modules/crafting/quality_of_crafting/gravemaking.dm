@@ -69,6 +69,17 @@
 	skillcraft = /datum/attribute/skill/craft/crafting
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/gravemaking/necran_headstone
+	name = "necran headstone"
+	requirements = list(
+		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/glass = 1,
+	)
+	attacked_atom = /obj/item/natural/stoneblock
+	starting_atom  = /obj/item/weapon/chisel
+	output = /obj/item/gravedecor/headstone/necra
+	craftdiff = 3
+
 // Gravefences
 /datum/repeatable_crafting_recipe/gravemaking/crude_gravefence
 	name = "crude gravefence"
