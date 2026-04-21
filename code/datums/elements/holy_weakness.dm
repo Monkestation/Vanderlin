@@ -7,7 +7,7 @@
  * "holy areas" means churches.
  */
 /datum/element/holy_weakness
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/list/entered = list()
 
 /datum/element/holy_weakness/Attach(datum/target)

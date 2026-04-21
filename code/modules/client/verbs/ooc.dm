@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 	set hidden = FALSE
 	if(!holder)
 		return
-	GLOB.OOC_COLOR = sanitize_ooccolor(newColor)
+	GLOB.OOC_COLOR = sanitize_color(newColor)
 	if(!check_rights(0))
 		return
 

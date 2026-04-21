@@ -27,7 +27,7 @@
 /datum/component/magnetic_catch/proc/entered_react(datum/source, atom/movable/thing, atom/oldloc)
 	RegisterSignal(thing, COMSIG_MOVABLE_PRE_THROW, PROC_REF(throw_react), TRUE)
 
-/datum/component/magnetic_catch/proc/exited_react(datum/source, atom/movable/thing, atom/newloc)
+/datum/component/magnetic_catch/proc/exited_react(datum/source, atom/movable/thing, direction)
 	UnregisterSignal(thing, COMSIG_MOVABLE_PRE_THROW)
 
 /datum/component/magnetic_catch/proc/throw_react(datum/source, list/arguments)

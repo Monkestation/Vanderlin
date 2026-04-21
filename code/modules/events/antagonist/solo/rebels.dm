@@ -6,6 +6,9 @@
 		TAG_COMBAT,
 		TAG_VILLAIN,
 	)
+
+	max_occurrences = 0
+
 	roundstart = TRUE
 	antag_flag = ROLE_PREBEL
 	shared_occurence_type = SHARED_HIGH_THREAT

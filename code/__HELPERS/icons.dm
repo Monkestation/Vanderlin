@@ -1496,6 +1496,24 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 		stack_trace("State [state] in file [file] does not exist.")
 	return FALSE
 
+#define CACHED_WIDTH_INDEX "width"
+#define CACHED_HEIGHT_INDEX "height"
+
+/atom/proc/get_cached_width()
+	if (isnull(icon))
+		return 0
+	var/list/dimensions = get_icon_dimensions(icon)
+	return dimensions[CACHED_WIDTH_INDEX]
+
+/atom/proc/get_cached_height()
+	if (isnull(icon))
+		return 0
+	var/list/dimensions = get_icon_dimensions(icon)
+	return dimensions[CACHED_HEIGHT_INDEX]
+
+#undef CACHED_WIDTH_INDEX
+#undef CACHED_HEIGHT_INDEX
+
 /// Returns a list containing the width and height of an icon file
 /proc/get_icon_dimensions(icon_path)
 	if (isnull(GLOB.icon_dimensions[icon_path]))

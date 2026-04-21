@@ -18,7 +18,7 @@
 	/// Type of organ DNA that this organ will create.
 	var/organ_dna_type = /datum/organ_dna
 	/// Draw icon as overlays from the acessory or bodypart icons
-	var/use_mob_sprite_as_obj_sprite = TRUE
+	var/use_mob_sprite_as_obj_sprite = FALSE
 
 /// Gets organ description for when its attached to a bodypart.
 /obj/item/organ/proc/get_bodypart_desc()
@@ -95,14 +95,6 @@
  */
 /obj/item/organ/proc/get_availability(datum/species/owner_species)
 	return slot in owner_species.organs
-
-/// Called before organs are replaced in regenerate_organs with new ones
-/obj/item/organ/proc/before_organ_replacement(obj/item/organ/replacement)
-	SHOULD_CALL_PARENT(TRUE)
-
-	// If we're being replace with an identical type we should take organ damage
-	if(replacement.type == type)
-		replacement.setOrganDamage(damage)
 
 /// Sets an accessory type and optionally colors too.
 /obj/item/organ/proc/set_accessory_type(new_accessory_type, colors)

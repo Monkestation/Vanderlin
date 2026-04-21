@@ -333,6 +333,7 @@
  *
  * If you don't care about crits, just count them as being the same as normal successes/failures.
  *
+ * Dice rolling works inversely to how you'd think so if you have a requirement of 30 it needs to be BELOW 30
  * Example:
  * Single stat (baseline)
  * diceroll(requirement = 10, crit = 10, dice_num = 3, dice_sides = 6)

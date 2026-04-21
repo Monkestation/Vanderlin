@@ -354,7 +354,7 @@
 		return FALSE
 
 	pawn.tempfixeye = TRUE
-	pawn.atom_flags |= NO_DIR_CHANGE_ON_MOVE
+	pawn.face_mouse = TRUE
 	var/was_fixedeye = pawn.fixedeye
 	if(!was_fixedeye)
 		pawn.fixedeye = TRUE
@@ -368,7 +368,7 @@
 
 	var/turf/juke_turf = pick(candidates)
 	pawn.Move(juke_turf, get_dir(pawn, juke_turf), pawn.cached_multiplicative_slowdown)
-	pawn.atom_flags &= ~NO_DIR_CHANGE_ON_MOVE
+	pawn.face_mouse = FALSE
 	pawn.face_atom(target)
 
 	pawn.ai_controller.set_blackboard_key(BB_HUMAN_NPC_JUKE_COOLDOWN, world.time + 1.5 SECONDS)

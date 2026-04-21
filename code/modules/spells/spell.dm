@@ -751,7 +751,7 @@
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
 	UnregisterSignal(owner.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
-	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOB_DEATH, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_LIVING_DEATH, COMSIG_MOVABLE_MOVED))
 	currently_charging = FALSE
 	charge_started_at = null
 	charge_target_time = null
@@ -1059,7 +1059,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignals(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_LIVING_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 

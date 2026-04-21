@@ -13,12 +13,10 @@
 
 	var/list/missing_bodyparts_zones = get_missing_limbs()
 
-	var/obj/item/cavity_object
-
 	var/obj/item/bodypart/chest/CH = get_bodypart(BODY_ZONE_CHEST)
-	if(CH.cavity_item)
-		cavity_object = CH.cavity_item
-		CH.cavity_item = null
+	for(var/atom/movable/item as anything in CH.cavity_items)
+		item.forceMove(CH.drop_location())
+		CH.cavity_items -= item
 
 	if(tr_flags & TR_KEEPITEMS)
 		var/Itemlist = get_equipped_items(TRUE)
@@ -47,8 +45,7 @@
 	reset_limb_fingerprints()
 	O.updateappearance(icon_update=0)
 
-	if(suiciding)
-		O.set_suicide(suiciding)
+	O.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(hellbound)
 		O.hellbound = hellbound
 	O.a_intent = INTENT_HARM
@@ -77,11 +74,6 @@
 
 		for(var/obj/item/organ/I as anything in int_organs)
 			I.Insert(O, 1)
-
-	var/obj/item/bodypart/chest/torso = O.get_bodypart(BODY_ZONE_CHEST)
-	if(cavity_object)
-		torso.cavity_item = cavity_object //cavity item is given to the new chest
-		cavity_object.forceMove(O)
 
 	for(var/missing_zone in missing_bodyparts_zones)
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)
@@ -135,12 +127,10 @@
 
 	var/list/missing_bodyparts_zones = get_missing_limbs()
 
-	var/obj/item/cavity_object
-
 	var/obj/item/bodypart/chest/CH = get_bodypart(BODY_ZONE_CHEST)
-	if(CH.cavity_item)
-		cavity_object = CH.cavity_item
-		CH.cavity_item = null
+	for(var/atom/movable/item as anything in CH.cavity_items)
+		item.forceMove(drop_location())
+		CH.cavity_items -= item
 
 	//now the rest
 	if (tr_flags & TR_KEEPITEMS)
@@ -180,8 +170,7 @@
 		O.real_name = O.dna.real_name
 	O.name = O.real_name
 
-	if(suiciding)
-		O.set_suicide(suiciding)
+	O.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(hellbound)
 		O.hellbound = hellbound
 
@@ -207,12 +196,6 @@
 
 		for(var/obj/item/organ/I as anything in int_organs)
 			I.Insert(O, 1)
-
-
-	var/obj/item/bodypart/chest/torso = get_bodypart(BODY_ZONE_CHEST)
-	if(cavity_object)
-		torso.cavity_item = cavity_object //cavity item is given to the new chest
-		cavity_object.forceMove(O)
 
 	for(var/missing_zone in missing_bodyparts_zones)
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)

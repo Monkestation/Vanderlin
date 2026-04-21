@@ -51,8 +51,11 @@
 /*******Non-Signal Component Related Defines*******/
 
 //Ouch my toes!
-#define CALTROP_BYPASS_SHOES 1
-#define CALTROP_IGNORE_WALKERS 2
+#define CALTROP_BYPASS_SHOES (1 << 0)
+#define CALTROP_IGNORE_WALKERS (1 << 1)
+#define CALTROP_SILENT (1 << 2)
+#define CALTROP_NOSTUN (1 << 3)
+#define CALTROP_NOCRAWL (1 << 4)
 
 #define COMSIG_IMPREGNATE "comsig_mob_impregnate"
 

@@ -4,7 +4,8 @@
 		/obj/item/natural/bundle/teeth = 80,
 		/obj/item/natural/teeth = 70,
 	)
-	time = 3 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags = SURGERY_INCISED
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 	requires_bodypart_type = BODYPART_ORGANIC
@@ -67,12 +68,9 @@
 	return TRUE
 
 /datum/surgery_step/insert_teeth/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
-	var/obj/item/bodypart/mouth/jaw = target.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
-	if(jaw && jaw.get_teeth_amount())
-		jaw.knock_out_teeth(rand(1, 3))
-		display_results(user, target,
-			"<span class='warning'>I accidentally knock out some of [target]'s teeth!</span>",
-			"<span class='warning'>[user] accidentally knocks out some of [target]'s teeth!</span>",
-			"<span class='warning'>[user] accidentally knocks out some of [target]'s teeth!</span>",
-			TRUE)
+	display_results(user, target, "<span class='warning'>I screwed up!</span>",
+		"<span class='warning'>[user] screws up!</span>",
+		"<span class='notice'>[user] trys putting [target]'s teeth back in.</span>", TRUE)
+	target.take_bodypart_damage(9, 0, required_status = BODYPART_ORGANIC)
 	return TRUE
+

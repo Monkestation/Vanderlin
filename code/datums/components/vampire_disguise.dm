@@ -43,11 +43,10 @@
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	cache_eyes = eyes.eye_color
-	cache_eye_secondary = eyes.second_color
-	cache_hetero = FALSE
-
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(H.eye_organs, 2)
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(H.eye_organs, 1)
+	cache_eyes = right_eye?.eye_color || "#FFFFFF"
+	cache_eye_secondary = left_eye?.eye_color || cache_eyes
 	cache_hair = H.get_hair_color()
 
 /datum/component/vampire_disguise/proc/handle_disguise_upkeep(mob/living/carbon/human/source)
@@ -85,9 +84,7 @@
 	H.set_hair_color(cache_hair, FALSE)
 	H.set_facial_hair_color(cache_hair, FALSE)
 
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		H.set_eye_color(cache_eye_secondary, cache_eye_secondary, FALSE)
+	H.set_eye_color(cache_eye_secondary, cache_eye_secondary, FALSE)
 
 
 	H.update_organ_colors()

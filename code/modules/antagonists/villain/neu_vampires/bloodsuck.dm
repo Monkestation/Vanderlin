@@ -63,7 +63,7 @@
 		clan?.handle_bloodsuck(src, blood_data?["preferences"])
 		adjust_bloodpool(used_vitae)
 		victim.adjust_bloodpool(-used_vitae)
-	victim.blood_volume = max(victim.blood_volume - drink_amt, 0)
+	victim.adjust_bloodvolume(-drink_amt)
 
 	playsound(src, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
 
@@ -106,7 +106,7 @@
 			to_chat(sire, span_warning("[src] has refused your blessing."))
 		return
 	grab_ghost(TRUE, TRUE)
-	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS), 500, TRUE)
+	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
 	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
 	set_bloodpool(500)
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))

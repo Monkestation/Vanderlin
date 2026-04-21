@@ -88,7 +88,7 @@
 
 /datum/component/hostage/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(move_react))
-	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMGE, PROC_REF(flinch))
+	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(flinch))
 	RegisterSignal(parent, COMSIG_MOB_ATTACK_HAND, PROC_REF(check_shove))
 	RegisterSignal(parent, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(check_deescalate))
 	RegisterSignals(parent, list(COMSIG_LIVING_START_PULL, COMSIG_MOVABLE_BUMP), PROC_REF(check_bump))
@@ -97,7 +97,7 @@
 /datum/component/hostage/UnregisterFromParent()
 	UnregisterSignal(parent, \
 		list(COMSIG_MOVABLE_MOVED, \
-		COMSIG_MOB_APPLY_DAMGE, \
+		COMSIG_MOB_APPLY_DAMAGE, \
 		COMSIG_MOB_ATTACK_HAND,
 		COMSIG_MOB_UPDATE_SIGHT, \
 		COMSIG_LIVING_START_PULL, \

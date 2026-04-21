@@ -72,10 +72,10 @@
 		var/fy = round(target_turf.y + FLANK_RADIUS * sin(my_angle))
 		flank_turf = locate(clamp(fx, 1, world.maxx), clamp(fy, 1, world.maxy), target_turf.z)
 		var/search_attempts = 0
-		while(flank_turf && (!flank_turf.can_traverse_safely(pawn) || flank_turf.density) && search_attempts < FLANK_RADIUS)
+		while(flank_turf && (!flank_turf.can_cross_safely(pawn) || flank_turf.density) && search_attempts < FLANK_RADIUS)
 			flank_turf = get_step_towards(flank_turf, target_turf)
 			search_attempts++
-		if(!flank_turf || !flank_turf.can_traverse_safely(pawn))
+		if(!flank_turf || !flank_turf.can_cross_safely(pawn))
 			return
 		controller.set_blackboard_key(BB_HUMAN_NPC_FLANK_ANGLE, my_angle)
 		controller.set_blackboard_key(BB_HUMAN_NPC_FLANK_TARGET, flank_turf)

@@ -112,6 +112,8 @@
 	dismemberable = FALSE
 	bleeds = FALSE
 
+	artery_type = ARTERY_MOUTH
+
 	/// Maximum amount of teeth this limb can hae
 	var/max_teeth = 32
 	/// Lisp modifier for when this limb is missing teeth

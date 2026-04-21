@@ -35,6 +35,8 @@
 	retreat_health = 0
 	food_max = 250
 
+	animal_type = /datum/blood_type/putrid
+
 	dodgetime = 20
 	aggressive = TRUE
 //	stat_attack = UNCONSCIOUS

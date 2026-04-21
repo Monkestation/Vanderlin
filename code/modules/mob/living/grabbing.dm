@@ -97,13 +97,10 @@
 	var/sublimb_grabbed		//ref to what precise (sublimb) we are grabbing (if any) (text)
 	var/bleed_suppressing = 0.75 //multiplier for how much we suppress bleeding, can accumulate so two grabs means 25% bleeding
 	var/chokehold = FALSE
+	var/delete_from_stop_pull
 
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
-
-/obj/item/grabbing/Initialize()
-	. = ..()
-	START_PROCESSING(SSfastprocess, src)
 
 /obj/item/grabbing/process()
 	if(valid_check())
@@ -113,19 +110,16 @@
 			chokehold = FALSE
 
 /obj/item/grabbing/proc/valid_check()
+	// Mouth grabs aren't actual grabs and as such can't be handled by stop_pulling()
 	if(QDELETED(grabbee) || QDELETED(grabbed))
 		qdel(src)
 		return FALSE
-	// We should be conscious to do this, first of all...
-	if(grabbee.stat < UNCONSCIOUS)
-		// Mouth grab while we're adjacent is good
-		if(grabbee.mouth == src && grabbee.Adjacent(grabbed))
-			return TRUE
-		// Other grab requires adjacency and pull status, unless we're grabbing ourselves
-		if(grabbee.Adjacent(grabbed) && (grabbee.pulling == grabbed || grabbee == grabbed))
-			return TRUE
-	qdel(src)
-	return FALSE
+	// Mouth grab is only good while we're adjacent
+	if(grabbee.mouth == src && !grabbee.Adjacent(grabbed))
+		qdel(src)
+		return FALSE
+	// Otherwise we're depending on check_pulling() to handle broken grabs
+	return TRUE
 
 /obj/item/grabbing/Click(location, control, params)
 	if(!valid_check())
@@ -155,12 +149,43 @@
 			else
 				C.l_grab = src
 
+/obj/item/grabbing/proc/set_grabber(mob/living/pulledby)
+	if(!istype(pulledby))
+		return
+	grabbee = pulledby
+	RegisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(upon_stop_pulling))
+	if(ismob(grabbed))
+		RegisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE, PROC_REF(on_tried_turn))
+	START_PROCESSING(SSfastprocess, src)
+
+/obj/item/grabbing/proc/upon_stop_pulling(datum/source, atom/movable/old_pulling)
+	SIGNAL_HANDLER
+	UnregisterSignal(grabbee, COMSIG_ATOM_NO_LONGER_PULLING)
+	delete_from_stop_pull = TRUE // don't call stop_pulling() again in Destroy()
+	qdel(src)
+
+/obj/item/grabbing/proc/on_tried_turn(mob/source, old_dir, new_dir)
+	SIGNAL_HANDLER
+
+	if(!istype(source) || !source.pulledby || source.pulledby == source)
+		return
+
+	if(grab_state < GRAB_AGGRESSIVE || source.pulledby.body_position == LYING_DOWN)
+		return
+
+	if(chokehold) // chokeholds prevent any turning
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
+	if(new_dir == source.pulledby.dir) // can never face away from the person grabbing you
+		return COMPONENT_ATOM_BLOCK_DIR_CHANGE
+
 /obj/item/grabbing/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
 		I.grabbedby -= src
 	if(ismob(grabbed))
+		UnregisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE)
 		var/mob/M = grabbed
 		M.grabbedby -= src
 		if(iscarbon(M) && sublimb_grabbed)
@@ -190,10 +215,10 @@
 			grabbee.l_grab = null
 
 		if(stop_pull)
-			grabbee.stop_pulling()
-			for(var/mob/M as anything in grabbee.buckled_mobs)
-				if(M == grabbed)
-					grabbee.unbuckle_mob(M, force = TRUE)
+			if(grabbed in grabbee.buckled_mobs)
+				grabbee.unbuckle_mob(grabbed, force = TRUE)
+			if(!delete_from_stop_pull)
+				grabbee.stop_pulling()
 
 /obj/item/grabbing/attack(mob/living/M, mob/living/user, list/modifiers)
 	if(!valid_check() || !istype(M))
@@ -592,7 +617,8 @@
 		return
 	grab_state = max(GRAB_PASSIVE, grab_state - 1)
 	grabbee.setGrabState(max(grabbee.r_grab?.grab_state, grabbee.l_grab?.grab_state))
-	grabbee.set_pull_offsets(grabbed, grabbee.grab_state)
+	if(grabbee != grabbed)
+		grabbee.set_pull_offsets(grabbed, grabbee.grab_state)
 	update_grab_intents()
 	if(!silent)
 		grabbee.visible_message(span_warning("[grabbee] loosens [grabbee.p_their()] grip on [grabbed]'s [limb_grabbed.name]."),\

@@ -23,3 +23,8 @@
 #define COMSIG_SPECIES_GAIN "species_gain"
 /// from datum/species/on_species_loss(): (datum/species/lost_species)
 #define COMSIG_SPECIES_LOSS "species_loss"
+
+/// fires on the target datum when an element is attached to it (/datum/element)
+#define COMSIG_ELEMENT_ATTACH "element_attach"
+/// fires on the target datum when an element is detached from it (/datum/element)
+#define COMSIG_ELEMENT_DETACH "element_detach"
