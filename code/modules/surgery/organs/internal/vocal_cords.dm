@@ -12,7 +12,7 @@
 	current_blood = 10
 	blood_req = 2
 	oxygen_req = 2.5
-	nutriment_req = 2.5
+	nutriment_req = 1.5
 
 	var/list/spans = null
 

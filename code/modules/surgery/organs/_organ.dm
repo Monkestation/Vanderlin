@@ -90,9 +90,9 @@
 	var/blood_req = 0
 	/// If oxygen reqs are not satisfied, get debuffs and brain starts taking damage
 	var/oxygen_req = 0
-	/// Controls passive nutriment loss
+	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
 	var/nutriment_req = 0
-	/// Controls passive hydration loss
+	/// Controls passive hydration loss. Units are nutriment_req/100 per second
 	var/hydration_req = 0
 
 	/// The space we occupy inside a limb - unaffected by w_class for balance reasons

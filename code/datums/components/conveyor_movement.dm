@@ -47,4 +47,6 @@
 	var/atom/movable/moving_parent = parent
 	if(!HAS_TRAIT(moving_parent, TRAIT_IMMERSED))
 		return MOVELOOP_SKIP_STEP
+	if(HAS_TRAIT(moving_parent, TRAIT_SWIMMER)) // more time to swim against the current
+		source.delay *= 2
 	return ..()

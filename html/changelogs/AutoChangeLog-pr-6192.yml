@@ -1,0 +1,4 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - bugfix: "The random traveltile to the vampire mansion should be gone and replaced with a traveltile spawner."
