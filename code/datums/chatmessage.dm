@@ -136,7 +136,8 @@
 	var/static/list/language_icons
 	// Register client who owns this message
 	owned_by = owner.client
-	RegisterSignal(owned_by, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_qdel))
+
+	RegisterSignal(owned_by, COMSIG_QDELETING, PROC_REF(on_parent_qdel))
 	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
 	// Clip message

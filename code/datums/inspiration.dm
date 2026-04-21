@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 /datum/inspiration/New(mob/living/carbon/human/holder, bard_tier_override)
 	. = ..()
 	src.holder = holder
-	RegisterSignal(holder, COMSIG_PARENT_QDELETING, PROC_REF(on_holder_qdel))
+	RegisterSignal(holder, COMSIG_QDELETING, PROC_REF(on_holder_qdel))
 	RegisterSignal(holder, COMSIG_SKILL_RANK_CHANGE, PROC_REF(on_skill_change))
 	add_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience))
 	set_inspiration_tier(bard_tier_override)
@@ -33,7 +33,7 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 		holder.inspiration = null
 	remove_verb(holder, list(/mob/living/carbon/human/proc/setaudience, /mob/living/carbon/human/proc/clearaudience, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/picksongs))
 	holder.remove_spells(source = src)
-	UnregisterSignal(holder, list(COMSIG_PARENT_QDELETING, COMSIG_SKILL_RANK_CHANGE))
+	UnregisterSignal(holder, list(COMSIG_QDELETING, COMSIG_SKILL_RANK_CHANGE))
 	holder = null
 	. = ..()
 

@@ -169,13 +169,13 @@
 	if(!default_bundle)
 		default_bundle = new default_tooth(src)
 		teeth += default_bundle
-		RegisterSignal(default_bundle, COMSIG_PARENT_QDELETING, PROC_REF(remove_this))
+		RegisterSignal(default_bundle, COMSIG_QDELETING, PROC_REF(remove_this))
 	default_bundle.amount = max_teeth
 	return TRUE
 
 /obj/item/bodypart/mouth/proc/remove_this(datum/source)
 	teeth -= source
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 
 /obj/item/bodypart/mouth/inspect_limb(mob/user)
 	. = ..()

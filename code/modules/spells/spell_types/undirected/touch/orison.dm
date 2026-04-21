@@ -313,10 +313,10 @@
 /datum/status_effect/light_buff/proc/add_light(mob/living/source)
 	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = source.mob_light(_power = potency)
 	LAZYSET(mobs_affected, source, mob_light_obj)
-	RegisterSignal(source, COMSIG_PARENT_QDELETING, PROC_REF(on_living_holder_deletion))
+	RegisterSignal(source, COMSIG_QDELETING, PROC_REF(on_living_holder_deletion))
 
 /datum/status_effect/light_buff/proc/remove_light(mob/living/source)
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = LAZYACCESS(mobs_affected, source)
 	LAZYREMOVE(mobs_affected, source)
 	if(mob_light_obj)

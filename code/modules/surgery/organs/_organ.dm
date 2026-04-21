@@ -90,9 +90,9 @@
 	var/blood_req = 0
 	/// If oxygen reqs are not satisfied, get debuffs and brain starts taking damage
 	var/oxygen_req = 0
-	/// Controls passive nutriment loss
+	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
 	var/nutriment_req = 0
-	/// Controls passive hydration loss
+	/// Controls passive hydration loss. Units are nutriment_req/100 per second
 	var/hydration_req = 0
 
 	/// The space we occupy inside a limb - unaffected by w_class for balance reasons
@@ -312,7 +312,7 @@
 		update_organ_efficiency(slot)
 	var/checked_zone = check_zone(current_zone)
 	LAZYADD(M.organs_by_zone[checked_zone], src)
-	RegisterSignal(owner, COMSIG_PARENT_EXAMINE, PROC_REF(on_owner_examine))
+	RegisterSignal(owner, COMSIG_ATOM_EXAMINE, PROC_REF(on_owner_examine))
 	for(var/datum/action/A as anything in actions)
 		A.Grant(M)
 	update_accessory_colors()
@@ -330,7 +330,7 @@
 	if(!M)
 		return
 	SEND_SIGNAL(src, COMSIG_ORGAN_REMOVED, M)
-	UnregisterSignal(owner, COMSIG_PARENT_EXAMINE)
+	UnregisterSignal(owner, COMSIG_ATOM_EXAMINE)
 	var/initial_zone = current_zone
 	owner = null
 	current_zone = zone

@@ -19,7 +19,7 @@
 	var/atom/movable/moving_parent = parent
 	var/datum/move_loop/loop = SSmove_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags = move_loop_flags)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(should_move))
-	RegisterSignal(loop, COMSIG_PARENT_QDELETING, PROC_REF(loop_ended))
+	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(loop_ended))
 
 /datum/component/convey/proc/should_move(datum/move_loop/source)
 	SIGNAL_HANDLER
@@ -47,4 +47,6 @@
 	var/atom/movable/moving_parent = parent
 	if(!HAS_TRAIT(moving_parent, TRAIT_IMMERSED))
 		return MOVELOOP_SKIP_STEP
+	if(HAS_TRAIT(moving_parent, TRAIT_SWIMMER)) // more time to swim against the current
+		source.delay *= 2
 	return ..()

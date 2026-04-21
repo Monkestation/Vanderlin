@@ -65,13 +65,13 @@
 	. = ..()
 	if(lockids && islist(lockids))
 		lockid_list = lockids
-	RegisterSignal(holder, COMSIG_PARENT_EXAMINE, PROC_REF(examine))
+	RegisterSignal(holder, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
 	RegisterSignal(holder, COMSIG_ATOM_ATTACKBY, PROC_REF(key_act_left))
 	if(requires_turning)
 		RegisterSignal(holder, COMSIG_ATOM_ATTACKBY_SECONDARY, PROC_REF(key_act_right))
 
 /datum/lock/key/Destroy()
-	UnregisterSignal(holder, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(holder, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_EXAMINE))
 	if(requires_turning)
 		UnregisterSignal(holder, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
 	return ..()

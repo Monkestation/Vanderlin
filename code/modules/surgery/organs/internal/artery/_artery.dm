@@ -18,8 +18,8 @@
 	max_blood_storage = 100
 	current_blood = 100
 	oxygen_req = 0.25
-	nutriment_req = 0.15
-	hydration_req = 0.05
+	nutriment_req = 0.09
+	hydration_req = 0.03
 
 	/// How much blood we gush when torn
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
