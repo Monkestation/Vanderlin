@@ -33,6 +33,8 @@
 #define HIGH_SIGIL_LAYER 2.56
 
 #define BELOW_OPEN_DOOR_LAYER 2.6
+///Anything below this layer is to be considered completely (visually) under water by the immerse layer.
+#define WATER_LEVEL_LAYER 2.61
 #define BLASTDOOR_LAYER 2.65
 #define OPEN_DOOR_LAYER 2.7
 #define DOOR_HELPER_LAYER 2.71 //! keep this above OPEN_DOOR_LAYER
@@ -53,7 +55,9 @@
 
 #define BELOW_MOB_LAYER 3.7
 #define LYING_MOB_LAYER 3.8
+#define MOB_BELOW_PIGGYBACK_LAYER 3.94
 //#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define
+#define MOB_ABOVE_PIGGYBACK_LAYER 4.06
 #define ABOVE_MOB_LAYER 4.1
 #define WALL_OBJ_LAYER 4.25
 #define EDGED_TURF_LAYER 4.3
@@ -93,18 +97,17 @@
 #define WEATHER_OVERLAY_PLANE -80
 #define WEATHER_RENDER_TARGET "*WEATHER_RENDER_TARGET"
 
-#define OPENSPACE_PLANE -13 //! Openspace plane below all turfs
-#define OPENSPACE_BACKDROP_PLANE -12 //! Black square just over openspace plane to guaranteed cover all in openspace turf
+#define OPENSPACE_PLANE -14 //! Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -13 //! Black square just over openspace plane to guaranteed cover all in openspace turf
 
-#define TRANSPARENT_FLOOR_PLANE -11
-
-#define FLOOR_PLANE -10
+#define FLOOR_PLANE -11
 #define FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE_RENDER_TARGET"
-#define REFLECTION_PLANE -9
+#define REFLECTION_PLANE -10
 
-#define GAME_PLANE -8
+#define GAME_PLANE -9
 #define GAME_PLANE_RENDER_TARGET "GAME_PLANE_RENDER_TARGET"
-#define GAME_PLANE_FOV_HIDDEN -7
+#define GAME_PLANE_FOV_HIDDEN -8
+#define GAME_PLANE_OBJECT_PERMANENCE -7
 #define GAME_PLANE_UPPER -6
 
 #define SEETHROUGH_PLANE -5
@@ -113,6 +116,11 @@
 #define STRATEGY_PLANE -3
 #define LEYLINE_PLANE -2
 //#define FLOAT_PLANE -1 // byond record keeping
+
+/// Yeah, FoV does require quite a few planes to work with 513 filters to a decent degree.
+#define FIELD_OF_VISION_MASK_PLANE -1
+#define FIELD_OF_VISION_MASK_RENDER_TARGET "FIELD_OF_VISION_MASK_PLANE"
+#define FIELD_OF_VISION_MASK_LAYER 20
 
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 #define BLACKNESS_PLANE_RENDER_TARGET "BLACKNESS_RENDER_TARGET"
@@ -193,9 +201,21 @@
 #define ECHO_LAYER 7
 #define BACKHUD_LAYER 8
 
+//-------------------- Rendering ---------------------
+#define RENDER_PLANE_GAME 990
+#define RENDER_PLANE_GAME_RENDER_TARGET "RENDER_PLANE_GAME"
+#define RENDER_PLANE_GAME_PROCESSING 991
+#define RENDER_PLANE_GAME_POST_PROCESSING 992
+#define RENDER_PLANE_NON_GAME 995
+#define RENDER_PLANE_NON_GAME_RENDER_TARGET "RENDER_PLANE_NON_GAME"
+#define RENDER_PLANE_NON_GAME_PROCESSING 996
+#define RENDER_PLANE_NON_GAME_POST_PROCESSING 997
+#define RENDER_PLANE_MASTER 999
+
 //-------------------- HUD ---------------------
 //HUD layer defines
 #define HUD_PLANE 1000
+#define VISUAL_HUD_PLANE 1001
 #define HUD_RENDER_TARGET "HUD_RENDER_TARGET"
 
 #define ABOVE_HUD_PLANE 1100
@@ -216,8 +236,7 @@
 #define LOBBY_BOTTOM_BUTTON_LAYER 6
 
 ///Plane of the "splash" icon used that shows on the lobby screen. Nothing should ever be above this.
-#define SPLASHSCREEN_PLANE 9999
-#define SPLASHSCREEN_RENDER_TARGET "SPLASHSCREEN_RENDER_TARGET"
+#define SPLASHSCREEN_PLANE 9900
 
 ///Plane master controller keys
 #define PLANE_MASTERS_GAME "plane_masters_game"

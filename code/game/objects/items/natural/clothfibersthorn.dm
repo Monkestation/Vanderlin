@@ -14,6 +14,32 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/fibers
+	item_flags = OBTAINED_DATA
+	obtained_from = list(
+		list("From foraging in bushes.", /obj/structure/flora/grass/bush_meagre),
+		list("From cutting grass.", /obj/structure/flora/grass),
+		list("From cutting leafy mushrooms.", /obj/structure/flora/grass/mushroom),
+		list("From cutting herbal flowers.", /obj/structure/flora/grass/herb/atropa),
+		list("From Threshing Chaff.", /obj/item/natural/chaff/wheat)
+	)
+	item_weight = 1 GRAMS
+
+/obj/item/natural/fibers/sinew
+	name = "sinew fiber"
+	desc = "Sinew fiber. Made from butchered animals sinew, commonly used by hunters for leatherworking and bowcrafting."
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	color = "#b7a87c"
+	firefuel = 2 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	bundletype = /obj/item/natural/bundle/fibers/sinew
 
 /obj/item/natural/silk
 	name = "silk"
@@ -31,6 +57,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/silk
+	item_weight = 1 GRAMS
 
 #ifdef TESTSERVER
 
@@ -60,6 +87,8 @@
 	embedding = list("embedded_unsafe_removal_time" = 20, "embedded_pain_chance" = 10, "embedded_pain_multiplier" = 1, "embed_chance" = 35, "embedded_fall_chance" = 0)
 	resistance_flags = FLAMMABLE
 	max_integrity = 20
+	item_weight = 3 GRAMS
+
 /obj/item/natural/thorn/attack_self(mob/living/user, list/modifiers)
 	user.visible_message("<span class='warning'>[user] snaps [src].</span>")
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
@@ -104,6 +133,26 @@
 	. = ..()
 	amount = maxamount
 	update_bundle()
+
+/obj/item/natural/bundle/fibers/sinew
+	name = "sinew fiber bundle"
+	desc = "Sinewy fibers, tightly bound together."
+	icon_state = "fibersroll1"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	maxamount = 9
+	color = "#b7a87c"
+	firemod =  2 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	stacktype = /obj/item/natural/fibers/sinew
+	icon1step = 3
+	icon2step = 6
 
 /obj/item/natural/bundle/silk
 	name = "silken weave"
@@ -171,13 +220,13 @@
 	icon3 = "stickbundle3"
 
 /obj/item/natural/bowstring
-	name = "fibre bowstring"
+	name = "bowstring"
 	desc = "A simple cord of bowstring."
 	icon_state = "fibers"
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
 	throwforce = 0
-	color = COLOR_BEIGE
+	color = "#e9dfc2"
 	firefuel = 5 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH

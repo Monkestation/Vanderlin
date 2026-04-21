@@ -89,8 +89,10 @@
 		cast_on.adjustOxyLoss(cast_on.health - HALFWAYCRITDEATH)
 	cast_on.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	record_round_statistic(STATS_ASTRATA_REVIVALS)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_ANASTASIS_REVIVE, 1)
 	cast_on.emote("breathgasp")
 	cast_on.adjust_jitter(100 SECONDS)
+	cast_on.adjust_bloodvolume(BLOOD_VOLUME_OKAY, BLOOD_VOLUME_OKAY)
 	cast_on.visible_message(span_notice("[cast_on] is revived by holy light!"), span_green("I awake from the void."))
 	cast_on.apply_status_effect(/datum/status_effect/debuff/revive)
 	cast_on.remove_client_colour(/datum/client_colour/monochrome/death)

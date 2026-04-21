@@ -1,61 +1,144 @@
+/**
+ * Caltrop element; for hurting people when they walk over this.
+ *
+ * Used for broken glass, cactuses and four sided dice.
+ */
 /datum/component/caltrop
+	///Minimum damage done when crossed
 	var/min_damage
+
+	///Maximum damage done when crossed
 	var/max_damage
+
+	///Probability of actually "firing", stunning and doing damage
 	var/probability
+
+	///Amount of time the spike will paralyze
+	var/paralyze_duration
+
+	///Miscelanous caltrop flags; shoe bypassing, walking interaction, silence
 	var/flags
 
-	var/cooldown = 0
+	///The sound that plays when a caltrop is triggered.
+	var/soundfile
 
-/datum/component/caltrop/Initialize(_min_damage = 0, _max_damage = 0, _probability = 100,  _flags = NONE)
-	min_damage = _min_damage
-	max_damage = max(_min_damage, _max_damage)
-	probability = _probability
-	flags = _flags
+	///given to connect_loc to listen for something moving over target
+	var/static/list/crossed_connections = list(
+		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
+	)
 
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	///So we can update ant damage
+	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 
-/datum/component/caltrop/proc/Crossed(datum/source, atom/movable/AM)
-	var/atom/A = parent
+/datum/component/caltrop/Initialize(min_damage = 0, max_damage = 0, probability = 100, paralyze_duration = 2 SECONDS, flags = NONE, soundfile = null)
+	. = ..()
+	if(!isatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	src.min_damage = min_damage
+	src.max_damage = max(min_damage, max_damage)
+	src.probability = probability
+	src.paralyze_duration = paralyze_duration
+	src.flags = flags
+	src.soundfile = soundfile
+
+	if(ismovable(parent))
+		AddComponent(/datum/component/connect_loc_behalf, parent, crossed_connections)
+	else
+		RegisterSignal(get_turf(parent), COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
+
+// Inherit the new values passed to the component
+/datum/component/caltrop/InheritComponent(datum/component/caltrop/new_comp, original, min_damage, max_damage, probability, flags, soundfile)
+	if(!original)
+		return
+	if(min_damage)
+		src.min_damage = min_damage
+	if(max_damage)
+		src.max_damage = max_damage
+	if(probability)
+		src.probability = probability
+	if(flags)
+		src.flags = flags
+	if(soundfile)
+		src.soundfile = soundfile
+
+/datum/component/caltrop/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SIGNAL_HANDLER
 
 	if(!prob(probability))
 		return
 
-	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
-		if(HAS_TRAIT(H, TRAIT_PIERCEIMMUNE))
+	if(!ishuman(arrived))
+		return
+
+	var/mob/living/carbon/human/digitigrade_fan = arrived
+	if(HAS_TRAIT(digitigrade_fan, TRAIT_PIERCEIMMUNE))
+		return
+
+	if((flags & CALTROP_IGNORE_WALKERS) && digitigrade_fan.m_intent == MOVE_INTENT_WALK)
+		return
+
+	if(digitigrade_fan.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) //check if they are able to pass over us
+		return
+
+	if(digitigrade_fan.buckled) //if they're buckled to something, that something should be checked instead.
+		return
+
+	if(digitigrade_fan.body_position == LYING_DOWN && !(flags & CALTROP_NOCRAWL)) //if we're not standing we cant step on the caltrop
+		return
+
+	var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+	var/obj/item/bodypart/leg = digitigrade_fan.get_bodypart(picked_def_zone)
+	if(!istype(leg))
+		return
+
+	if(!leg.is_organic_limb())
+		return
+
+	if(!(flags & CALTROP_BYPASS_SHOES))
+		var/feetCover = (digitigrade_fan.wear_armor && (digitigrade_fan.wear_armor.body_parts_covered & FEET)) || (digitigrade_fan.wear_pants && (digitigrade_fan.wear_pants.body_parts_covered & FEET))
+		if(digitigrade_fan.shoes || feetCover)
 			return
 
-		if((flags & CALTROP_IGNORE_WALKERS) && H.m_intent == MOVE_INTENT_WALK)
-			return
+	var/damage = rand(min_damage, max_damage)
+	if(HAS_TRAIT(digitigrade_fan, TRAIT_LIGHT_STEP))
+		damage *= 0.75
 
-		var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
-		var/obj/item/bodypart/O = H.get_bodypart(picked_def_zone)
-		if(!istype(O))
-			return
-		if(O.status == BODYPART_ROBOTIC)
-			return
+	if(!(flags & CALTROP_SILENT) && !digitigrade_fan.has_status_effect(/datum/status_effect/caltropped))
+		digitigrade_fan.apply_status_effect(/datum/status_effect/caltropped)
+		digitigrade_fan.visible_message(
+			span_danger("[digitigrade_fan] steps on [parent]."),
+			span_userdanger("You step on [parent]!")
+		)
 
-		var/feetCover = (H.wear_armor && (H.wear_armor.body_parts_covered & FEET)) || (H.wear_pants && (H.wear_pants.body_parts_covered & FEET))
+	digitigrade_fan.apply_damage(damage, BRUTE, picked_def_zone)
 
-		if(!(flags & CALTROP_BYPASS_SHOES) && (H.shoes || feetCover))
-			return
+	if(!(flags & CALTROP_NOSTUN)) // Won't set off the paralysis.
+		if(!HAS_TRAIT(digitigrade_fan, TRAIT_LIGHT_STEP))
+			digitigrade_fan.Paralyze(paralyze_duration)
+		else
+			digitigrade_fan.Knockdown(paralyze_duration)
+	if(!soundfile)
+		return
+	playsound(digitigrade_fan, soundfile, 15, TRUE, -3)
 
-		if((H.movement_type & FLYING) || H.buckled)
-			return
+/datum/component/caltrop/UnregisterFromParent()
+	if(ismovable(parent))
+		qdel(GetComponent(/datum/component/connect_loc_behalf))
 
-		if(H.body_position == LYING_DOWN) //if were not standing we cant step on the caltrop
-			return
+/*
+ * A status effect used for preventing caltrop message spam
+ *
+ * While a mob has this status effect, they won't receive any messages about
+ * stepping on caltrops. But they will be stunned and damaged regardless.
+ *
+ * The status effect itself has no effect, other than to disappear after
+ * a second.
+ */
+/datum/status_effect/caltropped
+	id = "caltropped"
+	duration = 1 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	status_type = STATUS_EFFECT_REFRESH
+	alert_type = null
 
-		var/damage = rand(min_damage, max_damage)
-		H.apply_damage(damage, BRUTE, picked_def_zone)
-
-		if(cooldown < world.time - 10) //cooldown to avoid message spam.
-			if(!H.incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB))
-				H.visible_message("<span class='danger'>[H] steps on [A].</span>", \
-						"<span class='danger'>I step on [A]!</span>")
-			else
-				H.visible_message("<span class='danger'>[H] slides on [A]!</span>", \
-						"<span class='danger'>I slide on [A]!</span>")
-
-			cooldown = world.time
-		H.Paralyze(60)

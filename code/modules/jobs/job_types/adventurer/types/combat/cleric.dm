@@ -108,7 +108,10 @@
 		devotion.make_cleric()
 		devotion.grant_to(spawned)
 
-	var/list/selectableweapon = list(
+/datum/job/advclass/combat/cleric/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/selectableweapon = list(
 		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
 		"Axe" = /obj/item/weapon/axe/iron,
 		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/warhammer, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
@@ -154,7 +157,6 @@
 		if(!spawned.equip_to_appropriate_slot(shield))
 			qdel(shield)
 
-
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
 	head = /obj/item/clothing/head/helmet/skullcap
@@ -166,7 +168,6 @@
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	belt = /obj/item/storage/belt/leather/adventurer
 	backl = /obj/item/storage/backpack/satchel
-	r_hand = /obj/item/flashlight/flare/torch/prelit
 	cloak = /obj/item/clothing/cloak/tabard/crusader
 	wrists = /obj/item/clothing/neck/psycross/silver
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)

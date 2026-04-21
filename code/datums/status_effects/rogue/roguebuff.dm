@@ -369,8 +369,7 @@
 	. = ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/human/C = owner
-		C.resize = 1.2
-		C.update_transform()
+		C.update_transform(resize = 1.2)
 		C.RemoveElement(/datum/element/footstep, C.footstep_type, 1, -6)
 		C.AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
 
@@ -383,8 +382,7 @@
 		to_chat(C, span_warning("Dendor's transformation fades, flesh shrinking back. My body aches..."))
 		C.adjustBruteLoss(10)
 		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)
-		C.resize = (1/1.2)
-		C.update_transform()
+		C.update_transform(resize = 1/1.2)
 		C.RemoveElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)
 		C.AddElement(/datum/element/footstep, C.footstep_type, 1, -6)
 
@@ -456,6 +454,31 @@
 	desc = span_notice("I am inspired to create!")
 	icon_state = "malum_buff"
 
+/datum/status_effect/buff/malum_anvil
+	id = "anvil_buff_malum"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/malum_anvil
+	duration = 13 SECONDS
+	effectedstats = list(STAT_CONSTITUTION = 3, STAT_SPEED = -1) // Anvils do not move that fast
+
+/datum/status_effect/buff/malum_anvil/on_apply()
+	. = ..()
+	owner.apply_status_effect(/datum/status_effect/light_buff/malum_anvil, src.duration)
+	ADD_TRAIT(owner, TRAIT_NOSLIPALL, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
+	ADD_TRAIT(owner, TRAIT_NOPAINSTUN, TRAIT_STATUS_EFFECT(id))
+
+/datum/status_effect/buff/malum_anvil/on_remove()
+	. = ..()
+	owner.remove_status_effect(/datum/status_effect/light_buff/malum_anvil)
+	REMOVE_TRAIT(owner, TRAIT_NOSLIPALL, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, TRAIT_STATUS_EFFECT(id))
+	REMOVE_TRAIT(owner, TRAIT_NOPAINSTUN, TRAIT_STATUS_EFFECT(id))
+
+/atom/movable/screen/alert/status_effect/buff/malum_anvil
+	name = "Malum's Anvil"
+	desc = span_notice("READY for TOIL!")
+	icon_state = "malum_anvil"
+
 /*-----------------\
 |   Hunt Miracles |
 \-----------------*/
@@ -501,8 +524,9 @@
 	duration = 15 SECONDS
 
 /datum/status_effect/buff/bloodrage/on_creation(mob/living/carbon/new_owner, duration_override, ...)
-	var/holyskill = GET_MOB_SKILL_VALUE_OLD(new_owner, /datum/attribute/skill/magic/holy)
-	duration = ((15 SECONDS) * holyskill)
+	var/holyskill = GET_MOB_SKILL_VALUE(new_owner, /datum/attribute/skill/magic/holy)
+	duration = (holyskill SECONDS)
+	new_owner.add_stun_absorption("Graggar's rage", duration, 2, "doesn't even flinch as rage courses through them!", "You shrug off the stun!", " glowing with a blazing red aura!")
 	if(holyskill >= SKILL_LEVEL_APPRENTICE)
 		effectedstats = list(STAT_STRENGTH = 2)
 	else
@@ -518,7 +542,7 @@
 /datum/status_effect/buff/bloodrage/on_remove()
 	. = ..()
 	owner.visible_message(span_warning("[owner] wavers, their rage simmering down."))
-	owner.OffBalance(3 SECONDS)
+	owner.OffBalance(5 SECONDS)
 	owner.remove_filter(BLOODRAGE_FILTER)
 	owner.emote("breathgasp", forced = TRUE)
 	owner.Slowdown(3)

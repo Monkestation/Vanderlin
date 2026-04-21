@@ -27,7 +27,7 @@
 	)
 
 /datum/job/blacksmith
-	title = "Blacksmith"
+	title = JOB_BLACKSMITH
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Blacksmith, \
 	a trade that certainly has seen a boom in revenue in recent times with many a bannerlord \
 	seeing the importance in maintaining a well-equipped army."
@@ -59,7 +59,7 @@
 
 
 /datum/outfit/blacksmith
-	name = "Blacksmith"
+	name = JOB_BLACKSMITH
 	head = /obj/item/clothing/head/hatfur
 	ring = /obj/item/clothing/ring/silver/makers_guild
 	backl = /obj/item/weapon/hammer/sledgehammer

@@ -63,7 +63,7 @@
 	/// At that point we know that there are target turfs
 	var/immobilize_user = FALSE
 
-/datum/special_intent/Destroy(force, ...)
+/datum/special_intent/Destroy(force)
 	starting_loc = null
 	return ..()
 

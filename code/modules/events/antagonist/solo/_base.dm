@@ -1,6 +1,6 @@
 /datum/round_event_control/antagonist/solo
 	typepath = /datum/round_event/antagonist/solo
-	max_occurrences = 2
+	max_occurrences = 1
 	/// How many baseline antags do we spawn
 	var/base_antags = 1
 	/// How many maximum antags can we spawn
@@ -17,7 +17,11 @@
 	/// Can either be normal list or a weighted list.
 	var/list/extra_spawned_events
 	/// Similar to extra_spawned_events however these are only used by roundstart events and will only try and run if we have the points to do so
-	var/list/preferred_events
+	var/list/preferred_events = list(
+		/datum/round_event_control/antagonist/solo/wretch = 1.5,
+		/datum/round_event_control/antagonist/solo/aspirant = 1,
+		/datum/round_event_control/antagonist/solo/maniac = 1,
+	)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
@@ -173,7 +177,7 @@
 
 	var/mob/living/carbon/human/new_character = new(create_at)
 	if(!create_at)
-		SSjob.SendToLateJoin(new_character)
+		SSjob.SendToBackupPoint(new_character)
 
 	old_mob.client.prefs.apply_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
@@ -238,11 +242,11 @@
 
 	//First we spawn a dude.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	var/spawn_point = get_spawn_turf_for_job("Adventurer")
+	var/spawn_point = get_spawn_turf_for_job(JOB_ADVENTURER)
 	if(spawn_point)
 		new_character.forceMove(spawn_point)
 	else
-		SSjob.SendToLateJoin(new_character)
+		SSjob.SendToBackupPoint(new_character)
 
 	if(transfer_prefs)
 		ghost_player.client.prefs.safe_transfer_prefs_to(new_character)

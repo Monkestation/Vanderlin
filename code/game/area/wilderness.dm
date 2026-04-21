@@ -9,7 +9,7 @@
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/forestnight.ogg'
 	soundenv = 15
-	ambush_times = list("night","dawn","dusk","day")
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/grass)
 
@@ -29,7 +29,7 @@
 	first_time_text = "THE MURDERWOOD"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 	converted_type = /area/indoors/shelter/woods
-	threat_region = THREAT_REGION_OUTER_GROVE
+	threat_region = THREAT_REGION_WOODS
 
 /area/outdoors/wilderness/outpost
 	icon_state = "outpost"

@@ -52,7 +52,9 @@
 				return
 		if(HEALING_DIVINE, HEALING_HUNT)
 			if(cast_on.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-				if(!(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) && vampire_disguise?.disguised)) //vampire disguises are handled later
+				// might seem weird we need to do this but Bloodsucker wretch does not have vampire antag datum
+				var/we_are_vampire = cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) || (cast_on in (cast_on.clan?.clan_members - cast_on.clan?.non_vampire_members))
+				if(!(we_are_vampire && vampire_disguise?.disguised)) //vampire disguises are handled later
 					if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 						cast_on.visible_message(span_warning("[cast_on] overpowers being burned!"), span_greentext("I overpower being burned!"))
 						return
@@ -95,13 +97,13 @@
 			if(/datum/patron/divine/astrata)
 				cast_on.visible_message(span_info("A wreath of gentle light passes over [cast_on]!"), span_notice("I'm bathed in holy light!"))
 				// during the day, heal 10 more (basic as fuck)
-				if(GLOB.tod == "day")
+				if(GLOB.tod == DAY)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/noc)
 				cast_on.visible_message(span_info("A shroud of soft moonlight falls upon [cast_on]!"), span_notice("I'm shrouded in gentle moonlight!"))
 				// during the night, heal 10 more (i wish this was more interesting but they're twins so whatever)
-				if(GLOB.tod == "night")
+				if(GLOB.tod == NIGHT)
 					conditional_buff = TRUE
 
 			if(/datum/patron/divine/dendor)
@@ -253,7 +255,7 @@
 	SEND_SIGNAL(owner, COMSIG_LIVING_HEALED_OTHER, amount_healed)
 	cast_on.adjustToxLoss(-amount_healed)
 	cast_on.adjustOxyLoss(-amount_healed)
-	cast_on.blood_volume = max(cast_on.blood_volume, min(cast_on.blood_volume + blood_restoration + situational_blood, BLOOD_VOLUME_NORMAL))
+	cast_on.adjust_bloodvolume(blood_restoration + situational_blood, BLOOD_VOLUME_NORMAL)
 	if(!iscarbon(cast_on))
 		cast_on.adjustBruteLoss(-amount_healed)
 		cast_on.adjustFireLoss(-amount_healed)
@@ -263,8 +265,18 @@
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
 	if(affecting)
 		affecting.heal_damage(amount_healed, amount_healed)
-		affecting.heal_wounds(amount_healed * wound_modifier)
+		affecting.heal_wounds(amount_healed * wound_modifier, src)
 		C.update_damage_overlays()
+
+	for(var/obj/item/organ/possible_organ in affecting.getorganlist(/obj/item/organ))
+		if(possible_organ.scarred_below(40))
+			to_chat(owner, span_danger("[cast_on]'s \the [possible_organ] is too scarred for my powers."))
+			continue
+		if(possible_organ.organ_flags & ORGAN_DESTROYED)
+			possible_organ.organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+			possible_organ.scar_organ(20, 40)
+		if(possible_organ.damage > possible_organ.medium_threshold)
+			possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
 
 /datum/action/cooldown/spell/healing/profane
 	name = "Corrupt Lesser Miracle"

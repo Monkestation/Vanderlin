@@ -12,8 +12,8 @@
 	#define ELASCAT_CRAFTING "crafting"
 	#define ELASCAT_ECONOMY "economy"
 	#define ELASCAT_STORYTELLER "storyteller"
-
-	#define ELASCAT_RUNTIMES "runtimes"
+	#define ELASCAT_BALANCE "balance"
+	#define ELASCAT_MEDICAL "medical"
 
 /* Abstract Data */
 	/* Combat */
@@ -29,3 +29,12 @@
 	/* Economy */
 		#define ELASDATA_MAMMONS_GAINED "mammons_gained"
 		#define ELASDATA_MAMMONS_SPENT "mammons_spent"
+
+	/* Medical */
+		#define ELASDATA_ANASTASIS_REVIVE "anastasis"
+		#define ELASDATA_CPR_REVIVE "cpr"
+		#define ELASDATA_ABSOLVE_REVIVE "absolve"
+		#define ELASDATA_ULTIMATE_REVIVE "ultimate_sacrifice"
+		#define ELASDATA_LUX_REVIVE "lux_revive"
+		#define ELASDATA_LUX_EXTRACT "lux_extract_npc"
+		#define ELASDATA_LUX_EXTRACT_PLAYER "lux_extract_player"

@@ -39,6 +39,7 @@
 	"Am I reading? Are these words, symbols or inane scribbles? I cannot be sure, yet with each one my eyes glaze over, I can feel the arcyne pulse within me...",
 	"A mystery is revealed before my very eyes. I do not read it, yet I am aware. Gems are the Root's natural arcyne energy, manifest. Perhaps I can use them to better my conceptualization...")
 	oneuse = FALSE
+	item_weight = 547 GRAMS
 	var/owner = null
 	var/list/allowed_readers = list()
 	var/stored_gem = FALSE
@@ -125,7 +126,7 @@
 	if(!picked)
 		var/list/designlist = list("green", "yellow", "brown")
 		var/mob/living/carbon/human/gamer = user
-		if(gamer.job == "Court Magician")
+		if(gamer.job == JOB_COURT_MAGE)
 			designlist = list("steel", "gem", "skin", "mimic")
 		var/the_time = world.time
 		var/design = input(user, "Select a design.","Spellbook Design") as null|anything in designlist

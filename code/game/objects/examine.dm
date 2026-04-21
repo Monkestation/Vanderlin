@@ -21,6 +21,23 @@
 					. += "<span class='warning'>It's damaged.</span>"
 				if(80 to 99)
 					. += "<span class='warning'>It's a little damaged.</span>"
+		if(max_integrity < initial(max_integrity))
+			var/lost_percent = round((1 - (max_integrity / initial(max_integrity))) * 100, 1)
+			if(lost_percent >= 50)
+				. += "<span class='warning'>It has been beaten and repaired so many times that it is a shadow of what it once was.</span>"
+			else if(lost_percent >= 25)
+				. += "<span class='warning'>The metal bears the memory of old damage. It is weaker than it was made.</span>"
+			else
+				. += "<span class='warning'>There are signs of old repairs. It has lost some of its original strength.</span>"
+
+		if(integrity_restores > 0)
+			if(integrity_restores >= 3)
+				. += "<span class='notice'>New material has been worked into it many times. It drinks in no more.</span>"
+			else if(integrity_restores == 2)
+				. += "<span class='notice'>New material has been worked into it more than once. It accepts further restoration poorly.</span>"
+			else
+				. += "<span class='notice'>New material has been worked into it. A skilled eye can see where the materials meet.</span>"
+
 
 //	if(has_inspect_verb || (obj_integrity < max_integrity))
 //		. += "<span class='notice'><a href='byond://?src=[REF(src)];inspect=1'>Inspect</a></span>"
@@ -43,5 +60,10 @@
 	for(var/datum/examine_effect/E in examine_effects)
 		E.trigger(user)
 
-	if(item_weight || get_stored_weight())
-		. += "It weighs around [round(item_weight + get_stored_weight(), 0.1)]KG."
+	var/weight = get_carry_weight()
+	if(!weight)
+		return
+	if(weight < 1)
+		. += "It weighs around [round(weight * 1000, 1)]g."
+		return
+	. += "It weighs around [round(weight, 0.01)]kg."

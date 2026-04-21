@@ -7,7 +7,7 @@
 	color = "#DDF"
 	alpha = 175
 	//For being on fire
-	light_range = 0
+	light_outer_range = 0
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
 
@@ -256,7 +256,7 @@
 	else if (isliving(AM))
 		var/mob/living/L = AM
 		if(liquid_group.slippery)
-			if(prob(7) && !(L.movement_type & FLYING) && L.body_position != LYING_DOWN)
+			if(prob(7) && !(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND) && L.body_position != LYING_DOWN)
 				L.slip(30, T, NO_SLIP_WHEN_WALKING, 0, TRUE)
 
 	if(fire_state)

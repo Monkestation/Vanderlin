@@ -25,7 +25,7 @@
 	)
 
 /datum/job/clinicapprentice
-	title = "Clinic Apprentice"
+	title = JOB_CLINIC_APP
 	tutorial = "You've been taken under as an apprentice by the Feldsher and Apothecary. \
 	You're both an assistant and student, helping the two of them in the more menial tasks. \
 	You hope to one dae open a Clinic of your own. \
@@ -73,7 +73,7 @@
 
 
 /datum/outfit/clinicapprentice
-	name = "Clinic Apprentice"
+	name = JOB_CLINIC_APP
 	head = /obj/item/clothing/head/roguehood/colored/black
 	backl = /obj/item/storage/backpack/satchel/surgbag/shit
 	shoes = /obj/item/clothing/shoes/simpleshoes

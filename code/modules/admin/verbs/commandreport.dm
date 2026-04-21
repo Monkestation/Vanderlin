@@ -58,7 +58,7 @@
 
 	build_ui(user)
 
-/datum/command_report_menu/Destroy(force, ...)
+/datum/command_report_menu/Destroy(force)
 	ui.close()
 	qdel(ui)
 	return ..()

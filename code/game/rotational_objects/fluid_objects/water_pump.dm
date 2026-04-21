@@ -158,10 +158,10 @@
 
 	if(istype(pipe_turf, /turf/open/water))
 		var/turf/open/water/water = pipe_turf
-		if(water.mapped)
+		if(water.volume_status == WATER_VOLUME_INFINITE)
 			return
 		use_water_pressure(rotations_per_minute)
-		water.water_volume = min(water.water_volume + rotations_per_minute, water.water_maximum)
+		water.water_volume = min(water.water_volume + rotations_per_minute, water.water_volume_maximum)
 
 /obj/structure/water_pump/proc/stop_spray()
 	cut_overlay(water_spray)

@@ -11,9 +11,6 @@
 #define COMSIG_DO_AFTER_ENDED "mob_do_after_ended"
 #define COMSIG_PHASE_CHANGE "phase_change"
 
-///from /datum/element/footstep/prepare_step(): (list/steps)
-#define COMSIG_MOB_PREPARE_STEP_SOUND "override_mob_stepsound"
-
 ///from base of mob/can_cast_magic(): (mob/user, magic_flags, charge_cost)
 #define COMSIG_MOB_RESTRICT_MAGIC "mob_cast_magic"
 ///from base of mob/can_block_magic(): (mob/user, casted_magic_flags, charge_cost)
@@ -32,3 +29,6 @@
 	#define COMPONENT_BLOCK_MOB_CHANGE (1<<0)
 /// from /mob/proc/change_mob_type_unchecked() : ()
 #define COMSIG_MOB_CHANGED_TYPE "mob_changed_type"
+
+/// from /mob/toggle_cmode(): (mob/user, new_state)
+#define COMSIG_MOB_TOGGLE_CMODE "mob_toggle_cmode"

@@ -19,6 +19,7 @@
 	drop_sound = 'sound/foley/dropsound/food_drop.ogg'
 	bundletype = /obj/item/natural/bundle/worms
 	bait_flag = MEAT
+	item_weight = 4 GRAMS
 
 /obj/item/natural/worms/Initialize()
 	. = ..()

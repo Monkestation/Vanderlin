@@ -1,5 +1,5 @@
 // basic tea, utilises adjusted soup code
-/datum/reagent/consumable/tea/
+/datum/reagent/consumable/tea
 	name = "Generic tea"
 	description = "If you see this, stop using moondust"
 	reagent_state = LIQUID
@@ -12,10 +12,13 @@
 	quality = 1
 	alpha = 153
 
-/datum/reagent/consumable/tea/on_mob_life(mob/living/carbon/M)
-	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_NORMAL)
-	..()
+/datum/reagent/consumable/tea/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
+
+/datum/reagent/consumable/tea/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/consumable/tea/taraxamint
 	name = "Taraxacum-Mentha tea"
@@ -27,16 +30,16 @@
 	taste_mult = 3
 	quality = 1
 
-/datum/reagent/consumable/tea/taraxamint/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tea/taraxamint/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/taraxamint, 2) //No overhealing.
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
-		M.heal_wounds(0.4) // Equals to 24 woundhealing distributed when you drink entire 20 units. Slow and not too much, but just enough to give you time to crawl to somewhere safe (lets be real, even the streets are a gamble)
+		M.heal_wounds(0.4 * efficiency) // Equals to 24 woundhealing distributed when you drink entire 20 units. Slow and not too much, but just enough to give you time to crawl to somewhere safe (lets be real, even the streets are a gamble)
 	if(volume > 0.99)
-		M.adjustFireLoss(-0.75*REM, 0)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1*REM)
-		M.adjustToxLoss(-1, 0)
+		M.adjustFireLoss(-0.75 * REM * efficiency, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1 * REM * efficiency)
+		M.adjustToxLoss(-1 * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/tea/utricasalvia
@@ -49,14 +52,14 @@
 	taste_mult = 2
 	quality = 3
 
-/datum/reagent/consumable/tea/utricasalvia/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tea/utricasalvia/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/utricasalvia, 2)
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
-		M.heal_wounds(2) // 40 woundhealing distributed on all wounds, not too much to balance innate healing below, but works faster
-		M.adjustBruteLoss(-1.1*REM, 0)
-		M.adjustFireLoss(-1.1*REM, 0)
+		M.heal_wounds(2 * efficiency) // 40 woundhealing distributed on all wounds, not too much to balance innate healing below, but works faster
+		M.adjustBruteLoss(-1.1 * REM * efficiency, 0)
+		M.adjustFireLoss(-1.1 * REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/tea/badidea
@@ -70,14 +73,14 @@
 	hydration_factor = 0
 	quality = 0
 
-/datum/reagent/consumable/tea/badidea/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tea/badidea/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 5)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
-			M.add_nausea(1)
-			M.adjustToxLoss(0.5)
+			M.add_nausea(1 * efficiency)
+			M.adjustToxLoss(0.5 * efficiency)
 		else
-			M.add_nausea(2) // You didn't think it was a good idea, did you?
-			M.adjustToxLoss(2)
+			M.add_nausea(2 * efficiency) // You didn't think it was a good idea, did you?
+			M.adjustToxLoss(2 * efficiency)
 	return ..()
 
 /datum/reagent/consumable/tea/fourtwenty
@@ -91,9 +94,9 @@
 	hydration_factor = 2
 	quality = 1
 
-/datum/reagent/consumable/tea/fourtwenty/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tea/fourtwenty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 10)
-		M.reagents.add_reagent(/datum/reagent/drug/space_drugs, 2)
+		M.reagents.add_reagent(/datum/reagent/drug/space_drugs, 2 * efficiency)
 	return ..()
 
 /datum/reagent/consumable/tea/manabloom
@@ -106,13 +109,13 @@
 	taste_mult = 2
 	hydration_factor = 2
 
-/datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tea/manabloom/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 20)
 		M.reagents.remove_reagent(/datum/reagent/consumable/tea/manabloom, 2) //No powerchuging for you, mage lad.
-		M.add_nausea(1)
+		M.add_nausea(1 * efficiency)
 		to_chat(M, "<span class='danger'>It feels as if someone just conjured fireball in my stomach!</span>")
 	if(volume > 0.99)
-		M.mana_pool.adjust_mana(0.25) //it's very weak, but works longer (0.25 mana per metab, 1.25 mana per 1 unit of tea, 24 mana per 20 units drank, 320% weaker than standart manapot)
+		M.mana_pool.adjust_mana(0.25 * efficiency) //it's very weak, but works longer (0.25 mana per metab, 1.25 mana per 1 unit of tea, 24 mana per 20 units drank, 320% weaker than standart manapot)
 	..()
 
 /datum/reagent/consumable/tea/compot

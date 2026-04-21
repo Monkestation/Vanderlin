@@ -10,6 +10,7 @@
 	light_color = LIGHT_COLOR_FIRE
 	dropshrink = 0.8
 	heat = 1000
+	item_weight = 224 GRAMS
 	var/wax = 1000
 	var/lit = FALSE
 	var/infinite = FALSE
@@ -114,7 +115,6 @@
 	icon_state = "skullcandle"
 	base_icon_state = "skullcandle"
 	infinite = TRUE
-	light_power = 3
 	light_color = "#670086"
 
 /obj/item/candle/skull/lit
@@ -146,7 +146,7 @@
 
 /obj/item/candle/yellow/lit/infinite
 	light_power = 1
-	light_range =  4
+	light_outer_range =  4
 	start_lit = TRUE
 	infinite = TRUE
 	icon_state = "candle1_lit"
@@ -154,10 +154,9 @@
 
 /obj/item/candle/yellow/lit/infinite/strong
 	light_power = 2
-	light_range =  4
+	light_outer_range =  4
 
 /obj/item/candle/yellow/lit/infinite/strong/skull
-	base_icon_state = "skullcandle"
 	icon_state = "skullcandle_lit"
 
 /obj/item/candle/scandelabra

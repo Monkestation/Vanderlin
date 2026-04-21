@@ -847,7 +847,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 10
 	max_integrity = 800
 
@@ -931,7 +930,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 16
 	max_integrity = 1400
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
@@ -1028,6 +1026,7 @@
 	icon_state = "abysstile-3"
 
 /turf/open/floor/sandstone
+	icon = 'icons/turf/constructed/stone.dmi'
 	icon_state = "sandstone"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT

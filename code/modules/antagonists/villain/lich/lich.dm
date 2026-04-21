@@ -23,9 +23,9 @@
 	)
 
 /datum/antagonist/lich
-	name = "Lich"
-	roundend_category = "Lich"
-	antagpanel_category = "Lich"
+	name = ROLE_LICH
+	roundend_category = ROLE_LICH
+	antagpanel_category = ROLE_LICH
 	job_rank = ROLE_LICH
 	antag_hud_type = ANTAG_HUD_NECROMANCY
 	antag_hud_name = "necromancer"
@@ -160,7 +160,7 @@
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
 	H.ambushable = FALSE
 
-	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "LICH"), 5 SECONDS)
+	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_LICH), 5 SECONDS)
 
 /datum/outfit/lich/post_equip(mob/living/carbon/human/H)
 	..()
@@ -250,7 +250,7 @@
 	layer = HIGH_OBJ_LAYER
 	w_class = WEIGHT_CLASS_TINY
 	light_system = MOVABLE_LIGHT
-	light_range = 3
+	light_outer_range = 3
 	light_color = "#003300"
 	var/datum/antagonist/lich/possessor
 

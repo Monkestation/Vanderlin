@@ -130,6 +130,6 @@
 				mask = /obj/item/clothing/face/spectacles/sglasses
 				cloak = /obj/item/clothing/cloak/raincloak/colored/purple
 				backpack_contents = list(/obj/item/reagent_containers/glass/bottle/poison = 1, /obj/item/reagent_containers/glass/bottle/stampoison = 1)
-				backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+				backr = /obj/item/gun/ballistic/bow/cross
 				beltl = /obj/item/ammo_holder/quiver/bolts
 				beltr = /obj/item/weapon/knife/dagger/steel

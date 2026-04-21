@@ -99,13 +99,13 @@
 					new output(get_turf(src))
 			var/bonus_modifier = 1
 			switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
-				if(SKILL_LEVEL_JOURNEYMAN)
+				if(SKILL_RANK_JOURNEYMAN)
 					bonus_modifier = 1.4
-				if(SKILL_LEVEL_EXPERT)
+				if(SKILL_RANK_EXPERT)
 					bonus_modifier = 1.6
-				if(SKILL_LEVEL_MASTER)
+				if(SKILL_RANK_MASTER)
 					bonus_modifier = 1.8
-				if(SKILL_LEVEL_LEGENDARY)
+				if(SKILL_RANK_LEGENDARY)
 					bonus_modifier = 2
 			if(foundrecipe.bonus_chance_outputs.len > 0)
 				for(var/i in 1 to foundrecipe.bonus_chance_outputs.len)

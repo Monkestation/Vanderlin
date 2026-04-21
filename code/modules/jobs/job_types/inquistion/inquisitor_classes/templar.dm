@@ -42,7 +42,11 @@
 
 /datum/job/advclass/sacrestant/psydoniantemplar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Templar")
+
+/datum/job/advclass/sacrestant/psydoniantemplar/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 
 	var/static/list/helmets = list(
 		"Barbute" = /obj/item/clothing/head/helmet/heavy/psydonbarbute,
@@ -54,7 +58,7 @@
 
 	var/static/list/armors = list(
 		"Hauberk" = /obj/item/clothing/armor/chainmail/hauberk/fluted,
-		"Cuirass" = /obj/item/clothing/armor/cuirass/fluted,
+		"Cuirass" = /obj/item/clothing/armor/cuirass/ornate,
 	)
 	spawned.select_equippable(player_client, armors, message = "Choose your ARMOR.", title = "TAKE UP PSYDON'S MANTLE.")
 

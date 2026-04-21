@@ -4,6 +4,7 @@
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "connector"
 	w_class = WEIGHT_CLASS_SMALL
+	item_weight = 340 GRAMS
 	var/obj/machinery/essence/source_device = null
 	var/connecting = FALSE
 	slot_flags = ITEM_SLOT_HIP
@@ -244,4 +245,4 @@
 /obj/effect/temp_visual/essence_sparkle/Initialize(mapload, spark_color = "#4A90E2")
 	. = ..()
 	color = spark_color
-	set_light(1, 1, l_color = spark_color)
+	set_light(1, 1, 1,  l_color = spark_color)

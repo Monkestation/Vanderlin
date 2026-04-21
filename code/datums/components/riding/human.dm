@@ -46,13 +46,23 @@
 	else
 		AM.layer = MOB_LAYER
 
-/datum/component/riding/human/get_offsets(pass_index)
-	var/mob/living/carbon/human/H = parent
-	if(H.buckle_lying)
-		return list(TEXT_NORTH = list(0, 6), TEXT_SOUTH = list(0, 6), TEXT_EAST = list(0, 6), TEXT_WEST = list(0, 6))
-	else
-		return list(TEXT_NORTH = list(0, 6), TEXT_SOUTH = list(0, 6), TEXT_EAST = list(-6, 4), TEXT_WEST = list( 6, 4))
-
+/datum/component/riding/creature/human/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	var/mob/living/carbon/human/seat = parent
+	// fireman carry
+	if(seat.buckle_lying)
+		return list(
+			TEXT_NORTH = list(0, 6, MOB_ABOVE_PIGGYBACK_LAYER),
+			TEXT_SOUTH = list(0, 6, MOB_BELOW_PIGGYBACK_LAYER),
+			TEXT_EAST =  list(0, 6, MOB_BELOW_PIGGYBACK_LAYER),
+			TEXT_WEST =  list(0, 6, MOB_BELOW_PIGGYBACK_LAYER),
+		)
+	// piggyback
+	return list(
+		TEXT_NORTH = list( 0, 8, MOB_ABOVE_PIGGYBACK_LAYER),
+		TEXT_SOUTH = list( 0, 8, MOB_BELOW_PIGGYBACK_LAYER),
+		TEXT_EAST =  list(-6, 8, MOB_BELOW_PIGGYBACK_LAYER),
+		TEXT_WEST =  list( 6, 8, MOB_BELOW_PIGGYBACK_LAYER),
+	)
 
 /datum/component/riding/human/force_dismount(mob/living/user)
 	var/atom/movable/AM = parent

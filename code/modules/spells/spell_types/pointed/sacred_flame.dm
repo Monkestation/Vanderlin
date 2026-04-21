@@ -43,3 +43,4 @@
 	playsound(heretic, 'sound/items/flint.ogg', 150, FALSE)
 	heretic.adjust_divine_fire_stacks(stacks_to_add)
 	heretic.IgniteMob()
+	heretic.adjust_hygiene(100)

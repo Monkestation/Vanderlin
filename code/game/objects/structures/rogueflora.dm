@@ -85,9 +85,6 @@
 /obj/structure/flora/tree/evil/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(controller)
-		controller.endvines()
-		controller = null
 	return ..()
 
 /obj/structure/flora/tree/wise
@@ -288,11 +285,11 @@
 
 /obj/structure/chair/bench/ancientlog/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 5)
+	M.add_offsets(type, x_add = 0, y_add = 5)
 
 /obj/structure/chair/bench/ancientlog/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 //newbushes
 /obj/structure/flora/grass
@@ -410,7 +407,14 @@
 	dir = pick(GLOB.cardinals)
 
 /datum/component/grass/Initialize()
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED), PROC_REF(Crossed))
+	if(!ismovableatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(Crossed))
+
+/datum/component/grass/Destroy(force)
+	UnregisterSignal(parent, COMSIG_MOVABLE_CROSSED)
+	return ..()
 
 /datum/component/grass/proc/Crossed(datum/source, atom/movable/AM)
 	var/atom/A = parent
@@ -465,7 +469,7 @@
 	if(L.m_intent == MOVE_INTENT_RUN)
 		L.visible_message(span_warning("[L] crashes into \a [src]!"), span_danger("I run into \a [src]."))
 		log_combat(L, src, "ran into")
-	else if(L.atom_flags & Z_FALLING)
+	else if(L.currently_z_moving)
 		L.visible_message(span_warning("[L] falls onto \a [src]!"), span_danger("I fall onto \a [src]."))
 		log_combat(L, src, "ran into")
 	else
@@ -473,7 +477,7 @@
 
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.atom_flags & Z_FALLING)
+		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
 		if(was_hard_collision)
 			var/obj/item/bodypart/BP = pick(H.bodyparts)
 			BP.receive_damage(10)
@@ -609,9 +613,9 @@
 		return
 	return TRUE
 
-/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -712,7 +716,7 @@
 				L.apply_damage(5, BRUTE)
 				L.Immobilize(10)
 
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
 				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)
@@ -789,7 +793,7 @@
 		L.Immobilize(5)
 		if(L.m_intent == MOVE_INTENT_WALK)
 			L.Immobilize(5)
-		if(L.m_intent == MOVE_INTENT_RUN)
+		if(L.m_intent == MOVE_INTENT_RUN || HAS_TRAIT(L, TRAIT_STUMBLE))
 			if(!ishuman(L))
 				to_chat(L, span_warning("I'm cut on a thorn!"))
 				L.apply_damage(5, BRUTE)

@@ -1,5 +1,5 @@
 /datum/job/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You owe everything to your liege. \
 	You are the most trusted of the ruler- their sibling, in fact. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, \
@@ -21,7 +21,7 @@
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600,
 		EXP_TYPE_NOBLE = 300,
@@ -37,15 +37,18 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/torture_victim
+	)
 
-/*/datum/outfit/hand
-	name = "Hand"
-	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
-	belt = /obj/item/storage/belt/leather/steel*/
+/datum/outfit/hand
+	name = JOB_HAND
+	belt = /obj/item/storage/belt/leather/black
+	beltr = /obj/item/storage/keyring/hand
+
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/torture_victim)
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_OMMER), 10 SECONDS)
 	// i know this sucks, but due to how job loading is, we can't just get the agents to load before the hand without some reworks
 	if(SSticker.current_state < GAME_STATE_PLAYING)
@@ -88,7 +91,7 @@
 	)
 
 /datum/job/advclass/hand/hand
-	title = "Hand"
+	title = JOB_HAND
 	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
@@ -108,13 +111,12 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
 	armor = /obj/item/clothing/armor/leather/jacket/handjacket
 	pants = /obj/item/clothing/pants/tights/colored/black
 	belt = /obj/item/storage/belt/leather/steel
-	beltr = /obj/item/weapon/sword/rapier/dec
+	beltl = /obj/item/weapon/sword/rapier/dec
 	scabbards = list(/obj/item/weapon/scabbard/sword/royal)
 	shoes = /obj/item/clothing/shoes/nobleboot/thighboots
 
@@ -167,14 +169,12 @@
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
-	belt = /obj/item/storage/belt/leather/black
-	beltl =  /obj/item/weapon/knife/dagger/steel/hand
-	beltr = /obj/item/weapon/knife/dagger/steel/hand/parry
+	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
 	shoes = /obj/item/clothing/shoes/boots
 	backpack_contents = list(
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/lockpickring/mundane = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1
+		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/weapon/knife/dagger/steel/hand = 1,
 	)
 
 /datum/outfit/hand/spymaster/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -246,13 +246,11 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/storage/keyring/hand = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
 		/obj/item/paper/scroll/frumentarii/roundstart = 1
 	)
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/boots
-	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	scabbards = list(/obj/item/weapon/scabbard/cane/hand)

@@ -509,6 +509,7 @@
 	M.client.screen |= boxes
 	M.client.screen |= closer
 	M.client.screen |= real_location.contents
+	M.hud_used.inventory_screens = list(boxes, closer) + real_location.contents
 	M.active_storage = src
 	LAZYOR(is_using, M)
 	return TRUE
@@ -525,6 +526,7 @@
 	M.client.screen -= boxes
 	M.client.screen -= closer
 	M.client.screen -= real_location.contents
+	M.hud_used.inventory_screens = list()
 	if(M.active_storage == src)
 		M.active_storage = null
 	LAZYREMOVE(is_using, M)
@@ -728,6 +730,12 @@
 /obj/item/proc/StorageBlock(obj/item/I, mob/user)
 	return FALSE
 
+/datum/component/storage/proc/get_carry_weight(atom/carrier)
+	. = 0
+	//we do need a typecheck here
+	for(var/obj/item/stored in contents())
+		. += stored.get_carry_weight(carrier)
+
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
 /datum/component/storage/proc/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)
@@ -876,9 +884,6 @@
 	for(var/i in 1 to amount)
 		if(!handle_item_insertion(new type(real_location), TRUE))
 			return i > 1 //return TRUE only if at least one insertion has been successful.
-		if(CHECK_TICK)
-			if(QDELETED(src))
-				return TRUE
 	return TRUE
 
 /datum/component/storage/proc/on_attack_hand(datum/source, mob/user)

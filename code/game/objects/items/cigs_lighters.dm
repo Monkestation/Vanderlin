@@ -25,6 +25,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/smoketime = 15 // 10 seconds
 	w_class = WEIGHT_CLASS_TINY
 	heat = 1000
+	item_weight = 2 GRAMS
 
 /obj/item/match/process()
 	smoketime--
@@ -68,6 +69,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/match/extinguish()
+	. = ..()
 	matchburnout()
 
 /obj/item/match/dropped(mob/user)
@@ -130,11 +132,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	slot_flags = ITEM_SLOT_MOUTH
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/mouth_items.dmi'
 	icon = 'icons/roguetown/items/lighting.dmi'
-	heat = 1000
+	heat = 570
 	spitoutmouth = FALSE
 
 	grid_width = 32
 	grid_height = 32
+	item_weight = 3 GRAMS
 
 	var/dragtime = 100
 	var/nextdragtime = 0
@@ -201,9 +204,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		e.start()
 		qdel(src)
 		return
-	if(reagents.get_reagent_amount(/datum/reagent/fuel)) // the fuel explodes, too, but much less violently
+	if(reagents.get_reagent_amount(/datum/reagent/blood/fuel)) // the fuel explodes, too, but much less violently
 		var/datum/effect_system/reagents_explosion/e = new()
-		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/fuel) / 5, 1), get_turf(src), 0, 0)
+		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/blood/fuel) / 5, 1), get_turf(src), 0, 0)
 		e.start()
 		qdel(src)
 		return
@@ -225,6 +228,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		playsound(src, 'sound/items/light_cig.ogg', 100, TRUE)
 
 /obj/item/clothing/face/cigarette/extinguish()
+	. = ..()
 	if(!lit)
 		return
 	attack_verb = null
@@ -540,6 +544,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/lighter/extinguish()
+	. = ..()
 	set_lit(FALSE)
 
 /obj/item/lighter/attack_self(mob/living/user, list/modifiers)

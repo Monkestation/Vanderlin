@@ -139,7 +139,7 @@
 				return SUBTREE_RETURN_FINISH_PLANNING
 
 	var/mob/living/simple_animal/hostile/mirespider_lurker/lurker = controller.pawn
-	if (lurker)
+	if (istype(lurker))
 		lurker.clear_followers_if_any()
 
 	controller.queue_behavior(ranged_attack_behavior, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETTING_DATUM, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)
@@ -178,7 +178,7 @@
 			var/cocoon = new /obj/structure/spider/cocoon(T)
 			target.forceMove(cocoon)
 			// Very gentle healing effect that restores a lot of bloodloss. Allows the target to break out later.
-			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, 0.25)
+			target.apply_status_effect(/datum/status_effect/buff/healing/spider_cocoon, null, 0.25)
 			finish_action(controller, TRUE, target_key)
 
 /datum/ai_behavior/cocoon_target/finish_action(datum/ai_controller/controller, succeeded, target_key)

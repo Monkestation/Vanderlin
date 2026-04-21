@@ -58,12 +58,12 @@
 /obj/structure/chair/post_buckle_mob(mob/living/M)
 	. = ..()
 	handle_layer()
-	M.set_mob_offsets("chair", _x = pixel_x, _y = pixel_y)
+	M.add_offsets(type, x_add = pixel_x, y_add = pixel_y)
 
 /obj/structure/chair/post_unbuckle_mob(mob/living/M)
 	. = ..()
 	handle_layer()
-	M.reset_offsets("chair")
+	M.remove_offsets(type)
 
 /obj/structure/chair/setDir(newdir)
 	..()

@@ -19,8 +19,10 @@
 	resistance_flags = NONE
 	max_integrity = 300
 
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	dyeable = TRUE
 	fiber_salvage = TRUE
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
-	carry_multiplier = 0.75
+
+	item_weight = 1.8 KILOGRAMS

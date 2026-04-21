@@ -71,7 +71,7 @@
 	items_to_place_in_result -= gone
 	disassemble()
 
-/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, direction)
+/obj/item/slapcraft_assembly/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
 	update_appearance(UPDATE_OVERLAYS)
 

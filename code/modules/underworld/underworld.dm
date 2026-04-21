@@ -38,14 +38,13 @@
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/flare/torch/lantern/shrunken
 	name = "shrunken lamp"
-	desc = "A beacon."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "shrunkenlamp"
 	item_state = "shrunkenlamp"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
-
-	light_range = 3.5
+	desc = "A beacon."
+	light_outer_range = 3.5			// luminosity when on
 	light_power = 20
 	light_color = LIGHT_COLOR_LIGHT_CYAN
 
@@ -63,7 +62,7 @@
 
 /obj/structure/underworld/carriageman/Initialize()
 	. = ..()
-	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)
 
 /obj/structure/underworld/carriageman/attack_hand(mob/living/carbon/spirit/user)
 	if(!user.paid)
@@ -113,7 +112,7 @@
 
 /obj/structure/underworld/carriage/Initialize()
 	. = ..()
-	set_light(4, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 3, 30, l_color = LIGHT_COLOR_BLUE)
 
 /obj/structure/underworld/carriage/attack_hand(mob/living/carbon/spirit/user)
 	if(user.paid)

@@ -12,6 +12,7 @@
 
 	grid_height = 32
 	grid_width = 32
+	item_weight = 50 GRAMS
 	var/flintcd = 0
 
 /obj/item/flint/attack_self(mob/living/user, list/modifiers)

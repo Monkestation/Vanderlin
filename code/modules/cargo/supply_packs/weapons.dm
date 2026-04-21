@@ -281,12 +281,12 @@
 /datum/supply_pack/weapons/ranged/puffer
 	name = "Smuggled Püffer"
 	cost = 500
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+	contains = /obj/item/gun/ballistic/powder/wheellock/puffer
 
 /datum/supply_pack/weapons/ranged/musket
 	name = "Smuggled Musket"
 	cost = 750 //needs balancing
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol/musket
+	contains = /obj/item/gun/ballistic/powder/musket
 
 /datum/supply_pack/weapons/ranged/cannon
 	name = "Cannon"
@@ -296,27 +296,27 @@
 /datum/supply_pack/weapons/ranged/crossbow
 	name = "Crossbow"
 	cost = 50
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	contains = /obj/item/gun/ballistic/bow/cross
 
 /datum/supply_pack/weapons/ranged/slurbow
 	name = "Slurbow"
 	cost = 150
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow/slurbow
+	contains = /obj/item/gun/ballistic/bow/cross/slur
 
 /datum/supply_pack/weapons/ranged/bow
 	name = "Hunting Bow"
 	cost = 20
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	contains = /obj/item/gun/ballistic/bow
 
 /datum/supply_pack/weapons/ranged/longbow
 	name = "Longbow"
 	cost = 30
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+	contains = /obj/item/gun/ballistic/bow/long
 
 /datum/supply_pack/weapons/ranged/shortbow
 	name = "Imported Short Bow"
 	cost = 40
-	contains = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	contains = /obj/item/gun/ballistic/bow/short
 
 /datum/supply_pack/weapons/ranged/tossbladeiron
 	name = "Iron Tossblade Belt"

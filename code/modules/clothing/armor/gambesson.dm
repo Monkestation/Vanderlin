@@ -10,7 +10,10 @@
 	pickup_sound = 'sound/foley/equip/cloak_take_off.ogg'
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 //	nodismemsleeves = FALSE gambesson being ripped by hand to bandages makes no sense. OTOH it can go into shirt slot asnd its kinda fun so maybe?
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
@@ -22,6 +25,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
 	material_category = ARMOR_MAT_FABRIC
+	item_weight = 4.7 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
@@ -32,6 +36,7 @@
 
 	armor = ARMOR_PADDED_BAD
 	prevent_crits = MINOR_CRITICALS
+	item_weight = 3.1 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light/steppe
 	name = "steppe robes"
@@ -51,6 +56,7 @@
 	sellprice = VALUE_HEAVY_GAMBESSON
 
 	armor = ARMOR_PADDED_GOOD
+	item_weight = 5.6 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -65,7 +71,10 @@
 	max_integrity = INTEGRITY_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 
 	armor = ARMOR_PADDED_GOOD
 

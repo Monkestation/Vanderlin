@@ -18,6 +18,7 @@
 	obj_flags = CAN_BE_HIT
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
+	item_weight = 2.4 KILOGRAMS
 	var/quality = SMELTERY_LEVEL_NORMAL // For it not to ruin recipes that need it
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_alt
@@ -135,6 +136,7 @@
 	lumber_amount = 2
 	grid_height = 64
 	grid_width = 64
+	item_weight = 1.4 KILOGRAMS
 
 /obj/item/grown/log/tree/small/apply_components()
 	return
@@ -157,6 +159,7 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	lumber_amount = 0
 	lumber = null
+	item_weight = 121 GRAMS
 
 /obj/item/grown/log/tree/stick/apply_components()
 	return
@@ -231,6 +234,7 @@
 	lumber = null
 	lumber_amount = 0
 	tool_behaviour = TOOL_IMPROVISED_RETRACTOR
+	item_weight = 95 GRAMS
 
 /obj/item/grown/log/tree/stake/apply_components()
 	return
@@ -247,6 +251,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/fertilizer/ash
 	bundletype = /obj/item/natural/bundle/plank
+	item_weight = 850 GRAMS
 
 /obj/item/natural/bundle/plank
 	name = "wooden planks"
@@ -287,3 +292,4 @@
 	lumber_amount = 0
 	grid_height = 64
 	grid_width = 64
+	item_weight = 100 GRAMS

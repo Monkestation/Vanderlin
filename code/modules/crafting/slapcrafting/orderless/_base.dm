@@ -27,7 +27,7 @@
 	hosted_source = _source
 	RegisterSignal(hosted_source, COMSIG_PARENT_QDELETING, PROC_REF(early_end))
 
-/datum/orderless_slapcraft/Destroy(force, ...)
+/datum/orderless_slapcraft/Destroy(force)
 	. = ..()
 	UnregisterSignal(hosted_source, COMSIG_PARENT_QDELETING)
 	hosted_source?.in_progress_slapcraft = null
@@ -124,7 +124,7 @@
 
 /datum/orderless_slapcraft/proc/try_finish(mob/user)
 	user.adjust_experience(related_skill, skill_xp_gained)
-	if(related_skill == /datum/attribute/skill/craft/cooking)
+	if(ispath(related_skill, /datum/attribute/skill/craft/cooking))
 		user.nobles_seen_servant_work()
 	var/turf/source_turf = get_turf(hosted_source)
 	if(output_item)
@@ -170,91 +170,3 @@
 		return list()
 
 	return passed_recipes
-
-/datum/orderless_slapcraft/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-	var/html = {"
-		<!DOCTYPE html>
-		<html lang="en">
-		<meta charset='UTF-8'>
-		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'/>
-		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap');
-			body {
-				font-family: "Charm", cursive;
-				font-size: 1.2em;
-				text-align: center;
-				margin: 20px;
-				background-color: #f4efe6;
-				color: #3e2723;
-				background-color: rgb(31, 20, 24);
-				background:
-					url('[SSassets.transport.get_asset_url("try4_border.png")]'),
-					url('book.png');
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-size: 100% 100%;
-
-			}
-			h1 {
-				text-align: center;
-				font-size: 2em;
-				border-bottom: 2px solid #3e2723;
-				padding-bottom: 10px;
-				margin-bottom: 10px;
-			}
-			.icon {
-				width: 64px;
-				height: 64px;
-				vertical-align: middle;
-				margin-right: 10px;
-			}
-		</style>
-		<body>
-		  <div>
-		    <h1>[name]</h1>
-		    <div>
-		"}
-	html += "<strong>With the use of [related_skill.name] skill:</strong><br>"
-	html += "[icon2html(new starting_item, user)] <strong class=class='scroll'>Start the process with [initial(starting_item.name)]</strong><br>"
-	html += "<strong> then add </strong> <br><hr>"
-	for(var/atom/path as anything in requirements)
-		var/count = requirements[path]
-		if(islist(path))
-			var/first = TRUE
-			var/list/paths = path
-			html += "up to [count] of<br>"
-			for(var/atom/sub_path as anything in paths)
-				if(!first)
-					html += "or <br>"
-				html += "[icon2html(new sub_path, user)] any [initial(sub_path.name)]<br>"
-				first = FALSE
-		else
-			html += "[icon2html(new path, user)] [count] of any [initial(path.name)]<br>"
-		html += "<hr>"
-
-	html += {"
-		</div>
-		<div>
-		"}
-
-	if(finishing_item)
-		html += "[icon2html(new finishing_item, user)] <strong class=class='scroll'>finish with any [initial(finishing_item.name)]</strong> <br>"
-
-
-	html += {"
-		</div>
-		</div>
-	</body>
-	</html>
-	"}
-	return html
-
-/datum/orderless_slapcraft/proc/show_menu(mob/user)
-	user << browse(generate_html(user),"window=recipe;size=500x810")

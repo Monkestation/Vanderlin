@@ -13,6 +13,7 @@
 	experimental_onhip = TRUE
 	smeltresult = /obj/item/ingot/copper
 	time_multiplier = 0.5
+	item_weight = 852 GRAMS
 
 /obj/item/weapon/sickle/copper
 	name = "copper sickle"
@@ -20,6 +21,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "csickle"
 	smeltresult = /obj/item/ingot/copper
+	item_weight = 354 GRAMS
 
 /obj/item/weapon/pitchfork/copper
 	name = "copper fork"
@@ -32,6 +34,7 @@
 	experimental_onback = TRUE
 	experimental_onhip = TRUE
 	smeltresult = /obj/item/ingot/copper
+	item_weight = 1.74 KILOGRAMS
 
 /obj/item/weapon/pitchfork/copper/getonmobprop(tag)
 	. = ..()
