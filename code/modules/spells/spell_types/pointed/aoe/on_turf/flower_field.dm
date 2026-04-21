@@ -171,7 +171,13 @@
 				L.emote("agony")
 			L.Stun(2 SECONDS)
 	if (!HAS_TRAIT(L, TRAIT_PIERCEIMMUNE))
-		L.adjustBruteLoss(10)
+		L.adjustBruteLoss(40)
+		if (prob(25) && ishuman(L))
+			var/mob/living/carbon/human/H = L
+			var/obj/item/bodypart/BP = pick(H.bodyparts)
+			var/obj/item/natural/thorn/TH = new(get_turf(H))
+			BP.add_embedded_object(TH, silent = TRUE)
+			to_chat(H, span_danger("A thorn embeds into your [BP.name]!"))
 		to_chat(L, span_danger("Thorns rip into you as you push through!"))
 	apply_flower_effect(L, /datum/status_effect/debuff/euphorbia_thorns)
 
@@ -347,17 +353,10 @@
 	var/mob/living/L = owner
 	if (!L) return
 	check_field_presence()
-	L.adjustBruteLoss(10)
+	L.adjustBruteLoss(5)
 
 	if (locate(/obj/structure/flora/field/euphorbia) in get_turf(L))
 		to_chat(L, span_warning("The spines hurt your feet"))
-
-	if (prob(20) && ishuman(L))
-		var/mob/living/carbon/human/H = L
-		var/obj/item/bodypart/BP = pick(H.bodyparts)
-		var/obj/item/natural/thorn/TH = new(get_turf(H))
-		BP.add_embedded_object(TH, silent = TRUE)
-		to_chat(H, span_danger("A thorn embeds into your [BP.name]!"))
 
 /atom/movable/screen/alert/status_effect/debuff/euphorbia_thorns
 	name = "Spiny Terrain"
