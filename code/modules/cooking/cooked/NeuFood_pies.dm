@@ -17,6 +17,7 @@
 	dropshrink = 0.9
 	nutrition = (BUTTERDOUGHSLICE_NUTRITION) * COOK_MOD
 	foodtype = GRAIN | RAW
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/raw_pie
 	name = "uncooked pie"
@@ -27,6 +28,7 @@
 	var/pie_roof = FALSE
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	nutrition = PIEDOUGH_NUTRITION
+	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/raw_pie/Initialize()
 	. = ..()
@@ -127,6 +129,7 @@
 	foodtype = GRAIN | DAIRY
 	chopping_sound = TRUE
 	dropshrink = 0.8
+	item_weight = 500 GRAMS
 
 
 /obj/item/reagent_containers/food/snacks/pie/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -173,6 +176,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_FINE
 	portable = FALSE
+	item_weight = 80 GRAMS
 
 // ------ UNIQUE SPRITE PIE SLICES -----
 
@@ -424,6 +428,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	dropshrink = 0.8
 	transfers_tastes = TRUE
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/handpieraw/mushroom
 	w_class = WEIGHT_CLASS_NORMAL
@@ -464,6 +469,7 @@
 	tastes = list("dry dough" = 1)
 	dropshrink = 0.8
 	faretype = FARE_FINE
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/handpie/good
 	desc = "The dwarven take on pies, called pierogi in their dialect. A fistful of food to stand the test of time."
@@ -496,6 +502,8 @@
 	dropshrink = 0.9
 	nutrition = TARTCRUST_NUTRITION
 	foodtype = GRAIN | DAIRY | FRUIT | RAW
+	item_weight = 200 GRAMS
+
 
 /obj/item/reagent_containers/food/snacks/raw_tart
 	name = "uncooked tart"
@@ -505,6 +513,7 @@
 	var/glaze_state = "tartuncooked_glaze"
 	var/glaze_color = "#ffffff"
 	nutrition = FRUITTART_NUTRITION
+	item_weight = 300 GRAMS
 
 /obj/item/reagent_containers/food/snacks/raw_tart/Initialize()
 	. = ..()
@@ -568,6 +577,7 @@
 	dropshrink = 0.9
 	nutrition = FRUITTART_NUTRITION
 	eat_effect = /datum/status_effect/buff/foodbuff
+	item_weight = 350 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tart/cooked/avocado
 	name = "avocado tart"
@@ -623,6 +633,7 @@
 	portable = FALSE
 	nutrition = FRUITTART_NUTRITION * 0.25
 	eat_effect = /datum/status_effect/buff/foodbuff
+	item_weight = 90 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tartslice/avocado
 	name = "avocado tart slice"

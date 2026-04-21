@@ -19,7 +19,6 @@
 	set category = "Emotes.Silent"
 
 	emote("pray", intentional = TRUE)
-	SEND_SIGNAL(src, COMSIG_PRAYER_COMPLETED)
 
 /datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
 	if(HAS_TRAIT(user, TRAIT_ATHEISM_CURSE))
@@ -36,18 +35,24 @@
 	if(!in_literal_hell && !patron?.can_pray(follower))
 		return
 
-	var/prayer = input("Whisper your prayer:", "Prayer") as text|null
+	INVOKE_ASYNC(src, PROC_REF(async_pray), user, patron)
+
+/datum/emote/living/pray/proc/async_pray(mob/living/carbon/follower, datum/patron/patron)
+
+	var/prayer = tgui_input_text(follower, "Whisper your Prayer", "Prayer", multiline = TRUE)
 	if(!prayer)
 		return
 
 	/* admin stuff */
 	send_prayer(follower, prayer, patron.name)
-	user.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
+	follower.log_message("(follower of [patron]) prays: [prayer]", LOG_GAME)
 
 	follower.whisper(prayer)
 
 	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
+
+	SEND_SIGNAL(follower, COMSIG_PRAYER_COMPLETED)
 
 	for(var/mob/living/crit_guy in hearers(2, follower)) //as of writing succumb_timer does literally nothing btw
 		crit_guy.succumb_timer = world.time
@@ -55,7 +60,7 @@
 /proc/send_prayer(mob/living/follower, prayer, patron_name)
 	var/ident_string = "[follower.key]/([follower.real_name]) (follower of [patron_name])"
 	var/bigger = FALSE
-	if((follower.job == "Priest") || (follower.job == "Priestess"))
+	if((follower.job == JOB_PRIEST) || (follower.job == JOB_PRIEST_FEM))
 		ident_string += "[SPAN_GOD_ASTRATA("(PRIEST)")]"
 		bigger = TRUE
 	if(follower.has_quirk(/datum/quirk/vice/godfearing))
@@ -294,6 +299,30 @@
 	set name = "Cough"
 	set category = "Emotes.Noises"
 	emote("cough", intentional = TRUE)
+
+/datum/emote/living/sickcough
+	key = "sickcough"
+	key_third_person = "sickcoughs"
+	message = "coughs."
+	message_muffled = "makes a muffled noise."
+	emote_type = EMOTE_AUDIBLE
+
+/datum/emote/living/sickcough/run_emote(mob/user, params, type_override, intentional, targetted)
+	. = ..()
+	if(!.)
+		return
+	for(var/mob/living/carbon/human/witness in hearers(user)) // yes, you can proc your own cough!
+		if(HAS_ANY_OF_TRAITS(witness, list(TRAIT_NOBREATH, TRAIT_NOMOOD, TRAIT_TOXIMMUNE, TRAIT_DISEASE_RESISTANCE)))
+			continue
+		var/cough_prob = 2
+		if(witness.has_quirk(/datum/quirk/vice/paranoid))
+			cough_prob += 2 // hypochondriac
+		if(witness.has_quirk(/datum/quirk/vice/weak_heart))
+			cough_prob += 2
+		if(!prob(cough_prob))
+			continue
+		var/p_emote = prob(50) ? pick("yawn", "cough", "clearthroat") : "sickcough"
+		addtimer(CALLBACK(witness, TYPE_PROC_REF(/mob, emote), p_emote), rand(12 SECONDS, 2 MINUTES), TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /datum/emote/living/clearthroat
 	key = "clearthroat"
@@ -785,9 +814,12 @@
 		if(!COOLDOWN_FINISHED(user, schizohelp_cooldown))
 			to_chat(user, span_warning("I need to wait before meditating again."))
 			return
-		var/msg = input("Say your meditation:", "Voices in your head") as text|null
-		if(msg)
-			user.schizohelp(msg)
+		INVOKE_ASYNC(src, PROC_REF(async_meditate), user)
+
+/datum/emote/living/meditate/proc/async_meditate(mob/user)
+	var/msg = input("Say your meditation:", "Voices in your head") as text|null
+	if(msg)
+		user.schizohelp(msg)
 
 // ............... N ..................
 /datum/emote/living/nod

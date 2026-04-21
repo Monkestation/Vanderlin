@@ -2,6 +2,8 @@
 	var/list/lord_spells = list(
 	)
 	var/list/lord_verbs = list(
+		/mob/living/carbon/human/proc/demand_submission,
+		/mob/living/carbon/human/proc/punish_spawn
 	)
 	var/list/lord_traits = list()
 	var/lord_title = "Lord"

@@ -27,7 +27,7 @@
 	icon_state = ""
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = 22.1
-	plane = 22
+	plane = HUD_PLANE
 	alpha = 230
 
 /atom/movable/screen/action_bar/clickdelay/update_to_mob(mob/living/L)

@@ -1,7 +1,7 @@
-/datum/component/riding/saiga/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 8), TEXT_SOUTH = list(0, 8), TEXT_EAST = list(-2, 8), TEXT_WEST = list(2, 8)))
-	set_vehicle_dir_layer(SOUTH, ABOVE_MOB_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
+/datum/component/riding/saiga/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return list(
+		TEXT_NORTH = list(0, 8, OBJ_LAYER),
+		TEXT_SOUTH = list(0, 8, ABOVE_MOB_LAYER),
+		TEXT_EAST = list(-2, 8, OBJ_LAYER),
+		TEXT_WEST = list(2, 8, OBJ_LAYER)
+	)

@@ -1,18 +1,18 @@
 
 /mob/living/proc/get_dodging_score(modifier = 0)
 	var/basic_speed = GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
-	var/encumberance = get_encumbrance()
 	if(!HAS_TRAIT(src, TRAIT_DODGEEXPERT))
 		encumbrance *= 1.5
 	var/encumbrance_penalty = 0
-	if(encumberance >= 1.0)
-		encumbrance_penalty = 4
-	else if(encumberance >= 0.75)
-		encumbrance_penalty = 3
-	else if(encumberance >= 0.5)
-		encumbrance_penalty = 2
-	else if(encumberance >= 0.25)
-		encumbrance_penalty = 1
+	switch(encumbrance)
+		if(ENCUMBRANCE_LIGHT)
+			encumbrance_penalty = 1
+		if(ENCUMBRANCE_MEDIUM)
+			encumbrance_penalty = 2
+		if(ENCUMBRANCE_HEAVY)
+			encumbrance_penalty = 3
+		if(ENCUMBRANCE_EXTREME)
+			encumbrance_penalty = 4
 
 	var/stun_penalty = 0
 	if(incapacitated())
@@ -102,8 +102,7 @@
 	var/dodge_speed = floor(GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED) / 2)
 
 	// fast attackers raise the threshold (mirror of parry system)
-	// STAT_SPEED on 0-~30 range; divide by 5 for ~0-6 opposition impact
-	var/attacker_opposition = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) / 5)
+	var/attacker_opposition = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) / 4)
 
 	if(istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src
@@ -124,7 +123,7 @@
 		if(time_since_last < 2 SECONDS)
 			drained += 5
 
-		if((H.get_encumbrance() > 0.7) || H.legcuffed)
+		if((H.encumbrance >= ENCUMBRANCE_HEAVY) || H.legcuffed)
 			H.Knockdown(1)
 			return FALSE
 

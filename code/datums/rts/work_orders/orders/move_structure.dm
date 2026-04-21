@@ -22,7 +22,7 @@
 	set_movement_target(get_turf(structure_to_move))
 	RegisterSignal(structure_to_move, COMSIG_PARENT_QDELETING, PROC_REF(stop_work))
 
-/datum/work_order/move_structure/Destroy(force, ...)
+/datum/work_order/move_structure/Destroy(force)
 	. = ..()
 	if(target_structure)
 		UnregisterSignal(target_structure, COMSIG_PARENT_QDELETING)

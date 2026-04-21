@@ -121,6 +121,19 @@
 	category = "Structures"
 
 
+/datum/blueprint_recipe/structure/curtain
+	name = "Curtain"
+	desc = "A long-draped curtain."
+	result_type = /obj/structure/curtain/bounty
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+
 /datum/blueprint_recipe/structure/bed
 	name = "Bed"
 	desc = "A simple wooden bed with fiber bedding."

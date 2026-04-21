@@ -110,7 +110,7 @@
 /obj/structure/window/openclose/update_icon_state()
 	. = ..()
 	var/icon
-	if(GLOB.tod == "night")
+	if(GLOB.tod == NIGHT)
 		icon += "w-"
 	icon += initial(icon_state)
 	if(obj_broken)
@@ -162,6 +162,7 @@
 	climbable = TRUE
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)
+	pass_flags_self |= LETPASSTHROW
 
 /obj/structure/window/proc/close_up(mob/user)
 	if(user)
@@ -170,6 +171,7 @@
 	climbable = FALSE
 	update_appearance(UPDATE_ICON_STATE)
 	air_update_turf(TRUE)
+	pass_flags_self &= ~LETPASSTHROW
 
 /obj/structure/window/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()

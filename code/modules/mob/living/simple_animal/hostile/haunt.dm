@@ -180,7 +180,7 @@
 
 /mob/living/simple_animal/hostile/haunt/Initialize()
 	. = ..()
-	set_light(2, 2, l_color = "#c0523f")
+	set_light(2, 2, 2, l_color = "#c0523f")
 	ADD_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
 
@@ -191,10 +191,6 @@
 		slavepile.spawn_haunt()
 		slavepile = null
 	. = ..()
-
-/mob/living/simple_animal/hostile/haunt/death(gibbed)
-	emote("death")
-	..()
 
 /mob/living/simple_animal/hostile/haunt/Life()
 	. = ..()

@@ -58,3 +58,27 @@
 
 /datum/patron/alternate/great_hunt/proven/preference_accessible(datum/preferences/prefs)
 	return FALSE
+
+/datum/patron/alternate/black_briar
+	name = "The Black Briar"
+	desc = "The Briar is not worshipped, it is joined. Roots in the body connect the consciousnesses of those afflicted into a Gestalt. During assimilation, many Afflicted desire to spread from their infection point."
+	domain = "The Black Briar"
+	flaws = "...really?"
+	worshippers = "The Gestalt"
+	sins = "Denying Your Beauty, Resisting the Gestalt"
+	boons = "Beauty of the Umbral Rosa"
+
+	confess_lines = list(
+		"WE ARE BEAUTIFUL!",
+		"LISTEN TO OUR SONG!",
+		"CUT MY FLESH SO I MAY SPROUT!",
+		"OH NOC, SWEET NOC, YOUR GAZE IS THE NECTAR IN WHICH I DRINK!",
+	)
+
+/datum/patron/alternate/black_briar/on_gain(mob/living/pious)
+	. = ..()
+	pious.add_quirk(/datum/quirk/black_briar)
+
+//todo: unique prayer system?
+/datum/patron/alternate/black_briar/preference_accessible(datum/preferences/prefs)
+	return FALSE

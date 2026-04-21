@@ -148,7 +148,8 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	deconstruct(FALSE)
 
 ///Called when the obj is no longer on fire.
-/obj/proc/extinguish()
+/obj/extinguish()
+	. = ..()
 	if(resistance_flags & ON_FIRE)
 		resistance_flags &= ~ON_FIRE
 		cut_overlay(GLOB.fire_overlay, TRUE)
@@ -206,7 +207,3 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 ///returns how much the object blocks an explosion. Used by subtypes.
 /obj/proc/GetExplosionBlock()
 	CRASH("Unimplemented GetExplosionBlock()")
-
-/obj/proc/on_fall_impact(mob/living/impactee, fall_speed)
-	SHOULD_CALL_PARENT(TRUE)
-	return

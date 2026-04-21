@@ -9,3 +9,4 @@
 	sharpness = IS_BLUNT
 	//dropshrink = 0.8
 	slot_flags = null
+	item_weight = 23 GRAMS

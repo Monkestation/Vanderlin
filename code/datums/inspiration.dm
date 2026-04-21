@@ -67,11 +67,11 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 		target_tier = tier_override
 	else
 		switch(floor(GET_MOB_SKILL_VALUE_OLD(holder, /datum/attribute/skill/misc/music)))
-			if(SKILL_LEVEL_EXPERT)
+			if(SKILL_RANK_EXPERT)
 				target_tier = 1
-			if(SKILL_LEVEL_MASTER)
+			if(SKILL_RANK_MASTER)
 				target_tier = 2
-			if(SKILL_LEVEL_LEGENDARY to INFINITY)
+			if(SKILL_RANK_LEGENDARY to INFINITY)
 				target_tier = 3
 
 	LAZYINITLIST(available_song_tiers)
@@ -179,4 +179,4 @@ GLOBAL_LIST_INIT(inspiration_songs, list(\
 	add_spell(item, source = inspiration)
 	inspiration.available_song_tiers -= chosensongtier
 	if(!length(inspiration.available_song_tiers))
-		add_verb(src, /mob/living/carbon/human/proc/picksongs)
+		remove_verb(src, /mob/living/carbon/human/proc/picksongs)

@@ -66,7 +66,7 @@
 	antag_flags = FLAG_FAKE_ANTAG
 	clan_selected = TRUE
 	default_clan = /datum/clan/daewalker
-
+	allow_preference_switching = FALSE
 
 /datum/antagonist/vampire/lord/daewalker/on_gain()
 	var/mob/living/carbon/human/blade = owner.current
@@ -94,6 +94,7 @@
 
 	. = ..()
 
+	owner.special_role = "Daewalker"
 	blade.attributes?.add_sheet(/datum/attribute_holder/sheet/job/daewalker)
 
 	blade.maxbloodpool = 5000
@@ -170,7 +171,7 @@
 	ring =  /obj/item/clothing/ring/active/nomag
 
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
-	beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/pistol
+	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	backl = /obj/item/storage/backpack/satchel/otavan
 	backr = /obj/item/weapon/scabbard/sword/noble

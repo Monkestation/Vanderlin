@@ -30,6 +30,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/isgoodguy = FALSE // Some "antagonist" datums are granted to not inherently bad guys, this is to differentiate for the sake of bardic buffs.
 	/// Did the owner mob have pacifism as a character flaw
 	var/was_pacifist = FALSE
+	/// Does this allow you to swap your character's preferences for a new one before fully applying?
+	var/allow_preference_switching = FALSE
 
 	///flags used by storytellers
 	var/antag_flags = NONE
@@ -114,20 +116,24 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 //Proc called when the datum is given to a mind.
 /datum/antagonist/proc/on_gain()
-	if(owner && owner.current)
-		if(!silent)
-			greet()
-		apply_innate_effects()
-		add_antag_hud(antag_hud_type, antag_hud_name)
-		give_antag_stress()
-		if(owner.current.has_quirk(/datum/quirk/vice/pacifist))
-			var/mob/living/carbon/human/human_user = owner.current
-			human_user.remove_quirk(/datum/quirk/vice/pacifist)
-			was_pacifist = TRUE
-		if(is_banned(owner.current) && replace_banned)
-			replace_banned_player()
-		else if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.toggles & DEADMIN_ANTAGONIST))
-			owner.current.client.holder.auto_deadmin()
+	if(!owner?.current)
+		return
+	if(!silent)
+		greet()
+	apply_innate_effects()
+	add_antag_hud(antag_hud_type, antag_hud_name)
+	give_antag_stress()
+	if(owner.current.has_quirk(/datum/quirk/vice/pacifist))
+		var/mob/living/carbon/human/human_user = owner.current
+		human_user.remove_quirk(/datum/quirk/vice/pacifist)
+		was_pacifist = TRUE
+	if(is_banned(owner.current) && replace_banned)
+		replace_banned_player()
+		return
+	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.toggles & DEADMIN_ANTAGONIST))
+		owner.current.client.holder.auto_deadmin()
+	if(allow_preference_switching && owner.current.client?.prefs?.path)
+		switch_prefs(owner.current)
 
 /datum/antagonist/proc/is_banned(mob/M)
 	if(!M)
@@ -140,7 +146,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 /datum/antagonist/proc/replace_banned_player()
 	set waitfor = FALSE
 
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a [name]?", "[name]", null, job_rank, 50, owner.current)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a [name]?", "[name]", null, job_rank, 10 SECONDS, owner.current)
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		to_chat(owner, "Your mob has been taken over by a ghost! Appeal your job ban if you want to avoid this in the future!")
@@ -282,6 +288,37 @@ GLOBAL_LIST_EMPTY(antagonists)
 		return
 	antag_memory = new_memo
 
+/datum/antagonist/proc/switch_prefs(mob/user)
+	var/choice_start = tgui_alert(user, "This role allows you to use a different character slot. Would you like to do so?", "YOU", DEFAULT_INPUT_CONFIRMATIONS, 30 SECONDS)
+	if(choice_start != CHOICE_CONFIRM)
+		return
+	var/datum/preferences/prefs = user.client?.prefs
+	if(!prefs?.path)
+		return // Safety checks just in case something anomalous happened in 30 seconds
+	var/savefile/S = new /savefile(prefs.path)
+	if(!S)
+		return
+	var/list/choices = list()
+	for(var/i=1, i<=prefs.max_save_slots, i++)
+		var/name
+		S.cd = "/character[i]"
+		S["real_name"] >> name
+		if(name)
+			choices[name] = i
+	if(!choices.len)
+		return
+	var/choice = browser_input_list(user, "WHO IS YOUR VILLAIN?", "NECRA AWAITS", choices, null, 45 SECONDS)
+	if(!choice || QDELETED(user))
+		return
+	if(choice == user.real_name)
+		return
+	choice = choices[choice]
+	if(!choice || !prefs?.load_character(choice))
+		to_chat(user, span_alertwarning("Unable to load character. Make a bug report of the circumstances."))
+		return
+	prefs.safe_transfer_prefs_to(user) // the antag check on transfer prefs is actually for randomizing a character. we do not want that.
+
+
 /// makes the owner's role unassigned and reopens their job slot
 /datum/antagonist/proc/remove_job()
 	var/mob/living/carbon/human/dude = owner.current
@@ -289,6 +326,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 		return
 	if(dude.job)
 		var/datum/job/J = SSjob.GetJob(owner.current.job)
+		J.remove_job(dude)
 		J.adjust_current_positions(-1)
 		owner.current.job = null
 	owner?.set_assigned_role(SSjob.GetJobType(/datum/job/unassigned))

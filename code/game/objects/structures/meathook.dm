@@ -137,7 +137,7 @@
 	src.visible_message(span_danger("[M] falls free of [src]!"))
 	unbuckle_mob(M,force=1)
 	M.set_lying_angle(pick(90,270))
-	M.emote("painscream")
+	INVOKE_ASYNC(M, TYPE_PROC_REF(/mob, emote), "painscream")
 	M.AdjustParalyzed(20)
 	draining_blood = FALSE
 

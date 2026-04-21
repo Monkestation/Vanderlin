@@ -6,11 +6,6 @@
 
 #define CORNERDIRS			list(SOUTHWEST,NORTHWEST,SOUTHEAST,NORTHEAST)
 
-#define TEXT_NORTH			"[NORTH]"
-#define TEXT_SOUTH			"[SOUTH]"
-#define TEXT_EAST			"[EAST]"
-#define TEXT_WEST			"[WEST]"
-
 /// Use male sprites
 #define MALE_SPRITES 	0
 /// Use female sprites only
@@ -471,12 +466,6 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define BAD_ART 12.5
 #define GOOD_ART 25
 #define GREAT_ART 50
-
-// possible bitflag return values of intercept_zImpact(atom/movable/AM, levels = 1) calls
-#define FALL_INTERCEPTED		(1<<0) //Stops the movable from falling further and crashing on the ground
-#define FALL_NO_MESSAGE			(1<<1) //Used to suppress the "[A] falls through [old_turf]" messages where it'd make little sense at all, like going downstairs.
-#define FALL_STOP_INTERCEPTING	(1<<2) //Used in situations where halting the whole "intercept" loop would be better, like supermatter dusting (and thus deleting) the atom.
-
 
 // Improvement on holding storage
 // Use this instead of directly setting STR.can_hold to reduce unnecessary typecacheof calls.

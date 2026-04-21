@@ -19,7 +19,8 @@
 		TOOL_SCREWDRIVER = 50,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 4 SECONDS
+	minimum_time = 3.5 SECONDS
+	maximum_time = 5.1 SECONDS
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED

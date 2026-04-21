@@ -6,63 +6,52 @@
 	category = TRIUMPH_CAT_CHARACTER
 	visible_on_active_menu = TRUE
 	manual_activation = TRUE
-
-/datum/triumph_buy/pick_any_class/on_buy()
-	. = ..()
-
-	if(!SSrole_class_handler.special_session_queue[ckey_of_buyer])
-		SSrole_class_handler.special_session_queue[ckey_of_buyer] = list()
-
-	var/datum/job/advclass/pick_everything/turbo_slop
-	if(!SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id])
-		turbo_slop = new()
-		turbo_slop.total_positions = 1
-		SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id] = turbo_slop
-	else
-		turbo_slop = SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id]
-		turbo_slop.total_positions += 1
-
-/datum/triumph_buy/pick_any_class/on_removal()
-	. = ..()
-	if(SSrole_class_handler.special_session_queue[ckey_of_buyer])
-		SSrole_class_handler.special_session_queue[ckey_of_buyer].Remove(triumph_buy_id)
+	allow_multiple_buys = FALSE
 
 /datum/job/advclass/pick_everything
-	title = "Pick-Classes"
+	title = "Triumph Classes"
 	tutorial = "This will open up another menu when you spawn allowing you to pick from any class as long as it's not disabled."
 	allowed_races = ALL_RACES_LIST
-	total_positions = 0
+	total_positions = -1
+	var/list/invalid_ctags = list(
+		CTAG_WRETCH,
+		CTAG_INQUISITION,
+		CTAG_PURITAN,
+		CTAG_ARCHIVIST,
+		CTAG_BANDIT,
+		CTAG_HAND,
+		CTAG_HEIR,
+		CTAG_CONSORT,
+		CTAG_TOWN_ELDER,
+		CTAG_ROYALKNIGHT,
+	)
 
-/datum/job/advclass/pick_everything/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pick_everything/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/list/possible_classes = list()
 	for(var/datum/job/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(!length(CHECKS.category_tags))
 			continue
-		if(CTAG_WRETCH in CHECKS.category_tags)
+		if(length(invalid_ctags & CHECKS.category_tags) && !length(parent_job?.advclass_cat_rolls & CHECKS.category_tags))
 			continue
-		if(CTAG_INQUISITION in CHECKS.category_tags)
-			continue
-		if(CTAG_PURITAN in CHECKS.category_tags)
-			continue
-		if(CTAG_ARCHIVIST in CHECKS.category_tags)
+		if(!CHECKS.check_requirements(spawned))
 			continue
 		possible_classes += CHECKS
 
+	if(!length(possible_classes))
+		spawned.returntolobby()
+		message_admins("[player_client?.ckey] had 0 advanced class selections in the All-Class Triumph buy. They were returned to the lobby.")
+		to_chat(player_client, span_danger("You had 0 advanced class selections for some reason. Admins were informed. This is likely a bug."))
+		return
+
 	var/list/class_titles = list()
 	for(var/datum/job/advclass/C in possible_classes)
-		class_titles += C.title
+		class_titles[C.title] = C
 
-	var/chosen_title = browser_input_list(spawned, "What is my class?", "Adventure", class_titles)
-
-	var/datum/job/advclass/class
-	if(chosen_title)
-		for(var/datum/job/advclass/C in possible_classes)
-			if(C.title == chosen_title)
-				class = C
-				break
-	else
-		class = pick(possible_classes)
+	var/chosen_title = tgui_input_list(spawned, "What is my class?", "Adventure", class_titles)
+	if(!chosen_title)
+		chosen_title = pick(class_titles)
+	var/datum/job/advclass/class = class_titles[chosen_title]
 
 	SSjob.EquipRank(spawned, class, player_client)
-	SSrole_class_handler.special_session_queue[spawned.ckey].Remove(TRIUMPH_BUY_ANY_CLASS)

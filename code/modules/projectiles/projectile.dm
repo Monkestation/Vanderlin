@@ -181,11 +181,11 @@
 		if(arcshot && isopenspace(current))
 			// If this is null something is VERY wrong
 			var/turf/below = GET_TURF_BELOW(current)
-			if(current.can_zFall(src, 1, below))
+			if(can_z_move(DOWN, current, below, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 				var/turf/target
 				while(!target)
 					var/turf/potential = GET_TURF_BELOW(below)
-					if(!potential || !below.can_zFall(src, 1, potential))
+					if(!potential || !can_z_move(DOWN, below, potential, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 						target = below
 					else
 						below = potential
@@ -546,7 +546,7 @@
  * Scan turf we're now in for anything we can/should hit. This is useful for hitting non dense objects the user
  * directly clicks on, as well as for PHASING projectiles to be able to hit things at all as they don't ever Bump().
  */
-/obj/projectile/Moved(atom/OldLoc, Dir)
+/obj/projectile/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!fired)
 		return
@@ -882,7 +882,7 @@
 		M.Turn(original_angle)
 		thing.transform = M
 		thing.color = color
-		thing.set_light(muzzle_flash_range, muzzle_flash_intensity, l_color = muzzle_flash_color_override? muzzle_flash_color_override : color)
+		thing.set_light(muzzle_flash_range,muzzle_flash_range, muzzle_flash_intensity, l_color = muzzle_flash_color_override? muzzle_flash_color_override : color)
 		QDEL_IN(thing, duration)
 	if(impacting && impact_type && duration > 0)
 		var/datum/point/p = beam_segments[beam_segments[beam_segments.len]]
@@ -892,7 +892,7 @@
 		M.Turn(Angle)
 		thing.transform = M
 		thing.color = color
-		thing.set_light(impact_light_range, impact_light_intensity, l_color = impact_light_color_override? impact_light_color_override : color)
+		thing.set_light(impact_light_range, impact_light_range, impact_light_intensity, l_color = impact_light_color_override? impact_light_color_override : color)
 		QDEL_IN(thing, duration)
 	if(cleanup)
 		cleanup_beam_segments()

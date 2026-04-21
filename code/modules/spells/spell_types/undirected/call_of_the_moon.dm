@@ -15,7 +15,7 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 	// only usable at night
-	if (!GLOB.tod == "night")
+	if (!GLOB.tod == NIGHT)
 		to_chat(owner, span_warning("I must wait for the hidden moon to rise before I may call upon it."))
 		return . | SPELL_CANCEL_CAST
 

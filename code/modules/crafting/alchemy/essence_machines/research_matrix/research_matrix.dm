@@ -163,7 +163,7 @@
 	matrix = M
 	user = U
 
-/datum/research_interface/Destroy(force, ...)
+/datum/research_interface/Destroy(force)
 	matrix = null
 	user = null
 	window = null

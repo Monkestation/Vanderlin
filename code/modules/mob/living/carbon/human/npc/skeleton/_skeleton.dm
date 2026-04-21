@@ -5,7 +5,7 @@
 	race = /datum/species/human/northern
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
-					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
+					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)
 	faction = list(FACTION_UNDEAD)
 	var/skel_outfit = /datum/outfit/npc/skeleton
 	ambushable = FALSE
@@ -71,6 +71,7 @@
 	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NO_ORGAN_PROCESS, TRAIT_GENERIC)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)

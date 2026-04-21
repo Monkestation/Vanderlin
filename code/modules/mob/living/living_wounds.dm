@@ -56,20 +56,22 @@
 		return wound
 
 /// Loops through our list of wounds healing them until we run out of healing or all wounds are healed
-/mob/living/proc/heal_wounds(heal_amount)
+/mob/living/proc/heal_wounds(heal_amount, datum/source)
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in get_wounds())
 		if(heal_amount <= 0)
 			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
+		var/amount_healed = wound.heal_wound(heal_amount, source)
 		if(amount_healed)
 			heal_amount -= amount_healed
 			healed_any = TRUE
 	return healed_any
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
-/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]

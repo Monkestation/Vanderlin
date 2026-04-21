@@ -22,6 +22,12 @@
 	var/body_part = 0 //bitflag used to check which clothes cover this bodypart
 	var/held_index = 0 //are we a hand? if so, which one!
 
+	// Cavity item + organ stuff
+	/// Maximum item size to be inserted in the cavity
+	var/max_cavity_item_size = WEIGHT_CLASS_NORMAL
+	/// Maximum combined volume of organs and cavity items (item volume is w_class)
+	var/max_cavity_volume = 2.5
+
 	/// If disabled, limb is as good as missing
 	var/bodypart_disabled = BODYPART_NOT_DISABLED
 	/// Controls whether bodypart_disabled makes sense or not for this limb.
@@ -32,6 +38,9 @@
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/max_damage = 0
+
+	/// How efficient this limb is at performing... whatever it performs
+	var/limb_efficiency = 100
 
 	var/cremation_progress = 0 //Gradually increases while burning when at full damage, destroys the limb when at 100
 
@@ -48,6 +57,7 @@
 	var/mutation_color = ""
 	var/no_update = 0
 	var/species_icon = ""
+	var/should_render = TRUE
 
 	var/animal_origin = 0 //for nonhuman bodypart (e.g. monkey)
 	var/dismemberable = 1 //whether it can be dismembered with a weapon.
@@ -92,6 +102,9 @@
 	/// Visual features of the bodypart, such as hair and accessories
 	var/list/bodypart_features
 
+	/// Non-organ and non-limb items currently inserted inside this limb
+	var/list/obj/item/cavity_items
+
 	grid_width = 32
 	grid_height = 64
 
@@ -106,8 +119,15 @@
 	var/chronic_pain_type = null
 	var/last_severe_injury_time = 0
 
+	/// artery organ base type
+	var/artery_type = /obj/item/organ/artery
+
+	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
+	var/limb_flags = BODYPART_HAS_ARTERY
+
 /obj/item/bodypart/Initialize()
 	. = ..()
+	create_base_organs()
 	if(can_be_disabled)
 		RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_gain))
 		RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_loss))
@@ -123,9 +143,25 @@
 		qdel(wound)
 	if(bandage)
 		QDEL_NULL(bandage)
+
 	embedded_objects = null
 	original_owner = null
 	return ..()
+
+/obj/item/bodypart/proc/create_artery()
+	if(ispath(artery_type))
+		var/obj/item/organ/artery = new artery_type(src)
+		if(owner)
+			artery.Insert(owner)
+	if(islist(artery_type))
+		for(var/artery_path in artery_type)
+			var/obj/item/organ/artery = new artery_path(src)
+			if(owner)
+				artery.Insert(owner)
+
+/obj/item/bodypart/proc/create_base_organs()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY))
+		create_artery()
 
 /obj/item/bodypart/grabbedintents(mob/living/user, atom/grabbed, precise)
 	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
@@ -205,7 +241,7 @@
 		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
 		if(!do_after(user, used_time, src))
 			return
-		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_LEVEL_LEGENDARY))
+		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_RANK_LEGENDARY))
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
 		for(var/i in 1 to drops)
 			var/choose_type = pickweight(food_type)
@@ -258,7 +294,7 @@
 		if(owner)
 			bloodcolor = owner.get_blood_type().color
 		else if(original_owner)
-			bloodcolor = original_owner.get_blood_type().color
+			bloodcolor = original_owner.get_blood_type()?.color || COLOR_BLOOD
 		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
 
 //empties the bodypart from its organs and other things inside it
@@ -268,6 +304,9 @@
 		playsound(T, 'sound/blank.ogg', 50, TRUE, -1)
 	for(var/obj/item/I in src)
 		I.forceMove(T)
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(drop_location())
+		cavity_items -= item
 
 /obj/item/bodypart/proc/skeletonize(lethal = TRUE)
 	if(bandage)
@@ -294,7 +333,7 @@
 	if(!is_organic_limb() || !owner)
 		return
 	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10)
+	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
 	if(new_max_damage != old_max_damage)
 		max_damage = new_max_damage
 
@@ -356,6 +395,23 @@
 			last_severe_injury_time = world.time
 
 	return update_bodypart_damage_state() || .
+
+/obj/item/bodypart/proc/add_pain(amount)
+	if(!amount || !owner)
+		return
+	if(owner.status_flags & GODMODE)
+		return
+	lingering_pain += amount
+	var/current_damage_percent = ((brute_dam + burn_dam) / max_damage) * 100
+	if(current_damage_percent > 60)
+		last_severe_injury_time = world.time
+	if(owner.stat < DEAD)
+		if(amount < 10)
+			owner.flash_fullscreen("redflash1")
+		else if(amount < 20)
+			owner.flash_fullscreen("redflash2")
+		else
+			owner.flash_fullscreen("redflash3")
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
@@ -503,6 +559,21 @@
 				))
 		set_disabled(FALSE)
 
+//Updates limb efficiency based on tendons, nerves and arteries
+/obj/item/bodypart/proc/update_limb_efficiency()
+	var/divisor = 0
+	limb_efficiency = 0
+	if(divisor)
+		limb_efficiency /= divisor
+	// no tendon, nerve nor artery!
+	else
+		limb_efficiency = 100
+	// wounds decrease limb efficiency
+	for(var/datum/wound/hurty as anything in wounds)
+		limb_efficiency -= hurty.limb_efficiency_reduction
+	limb_efficiency = max(0, CEILING(limb_efficiency, 1))
+
+
 ///Called when TRAIT_PARALYSIS is added to the limb.
 /obj/item/bodypart/proc/on_paralysis_trait_gain(obj/item/bodypart/source)
 	SIGNAL_HANDLER
@@ -560,6 +631,8 @@
 //we inform the bodypart of the changes that happened to the owner, or give it the informations from a source mob.
 /obj/item/bodypart/proc/update_limb(dropping_limb, mob/living/carbon/source)
 	var/mob/living/carbon/C
+	if(!should_render)
+		return
 	if(source)
 		C = source
 		if(!original_owner)
@@ -634,6 +707,8 @@
 
 //Gives you a proper icon appearance for the dismembered limb
 /obj/item/bodypart/proc/get_limb_icon(dropped, hideaux = FALSE)
+	if(!should_render)
+		return
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
@@ -684,33 +759,20 @@
 
 	var/skel = skeletonized ? "_s" : ""
 
-	if(is_organic_limb() || (is_species(owner, /datum/species/automaton) && species_icon))//fuck this stupid rendering system
+	if(is_organic_limb() || (species_id == SPEC_ID_AUTOMATON && species_icon))//fuck this stupid rendering system
 		if(should_draw_greyscale)
 			limb.icon = species_icon
-			if(should_draw_gender)
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
-			else
-				limb.icon_state = "[body_zone][skel]"
-				if(wound_icon_state || acid_damage_intensity)
-					var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
-					skeleton.icon = species_icon
-					skeleton.icon_state = "[body_zone]_s"
-					if(wound_icon_state)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
-					if(acid_damage_intensity)
-						skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
-					skeleton.dir = image_dir
-					. += skeleton
+			limb.icon_state = "[body_zone][skel]"
+			if(wound_icon_state || acid_damage_intensity)
+				var/mutable_appearance/skeleton = mutable_appearance(layer = -(BODY_LAYER))
+				skeleton.icon = species_icon
+				skeleton.icon_state = "[body_zone]_s"
+				if(wound_icon_state)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', wound_icon_state))
+				if(acid_damage_intensity)
+					skeleton.filters += alpha_mask_filter(icon=icon('icons/effects/wounds.dmi', "[body_zone]_acid[acid_damage_intensity]"))
+				skeleton.dir = image_dir
+				. += skeleton
 		else
 			limb.icon = 'icons/mob/human_parts.dmi'
 			if(should_draw_gender)
@@ -770,7 +832,7 @@
 				. += organ_appearance
 
 	// Feature overlays
-	if(!skeletonized && draw_bodypart_features)
+	if(draw_bodypart_features)
 		for(var/datum/bodypart_feature/feature as anything in bodypart_features)
 			var/overlays = feature.get_bodypart_overlay(src)
 			if(!overlays)
@@ -789,18 +851,13 @@
 ///since organs aren't actually stored in the bodypart themselves while attached to a person, we have to query the owner for what we should have
 /obj/item/bodypart/proc/get_organs()
 	if(!owner)
-		return FALSE
+		. = list()
+		for(var/thing in contents)
+			if(isorgan(thing))
+				. |= thing
+		return
 
-	var/list/bodypart_organs
-	for(var/obj/item/organ/organ_check as anything in owner.internal_organs) //internal organs inside the dismembered limb are dropped.
-		if(check_zone(organ_check.zone) == body_zone)
-			LAZYADD(bodypart_organs, organ_check) // this way if we don't have any, it'll just return null
-
-	for(var/obj/item/organ/organ_check in contents)
-		if(check_zone(organ_check.zone) == body_zone)
-			LAZYADD(bodypart_organs, organ_check) // this way if we don't have any, it'll just return null
-
-	return bodypart_organs
+	return LAZYACCESS(owner.organs_by_zone, body_zone)
 
 /obj/item/bodypart/deconstruct(disassembled = TRUE)
 	drop_organs()
@@ -814,7 +871,6 @@
 	body_part = CHEST
 	px_x = 0
 	px_y = 0
-	var/obj/item/cavity_item
 	aux_zone = "boob"
 	aux_layer = BODYPARTS_LAYER
 	subtargets = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN)
@@ -822,8 +878,13 @@
 	offset = OFFSET_ARMOR
 	dismemberable = FALSE
 
+	max_cavity_item_size = WEIGHT_CLASS_BULKY
+	max_cavity_volume = 10
+
 	grid_width = 64
 	grid_height = 96
+
+	artery_type = ARTERY_CHEST
 
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()
@@ -834,14 +895,7 @@
 			to_chat(owner, "<span class='warning'>I feel a sharp pain in my back!</span>")
 
 /obj/item/bodypart/chest/Destroy()
-	QDEL_NULL(cavity_item)
 	return ..()
-
-/obj/item/bodypart/chest/drop_organs(mob/user, violent_removal)
-	if(cavity_item)
-		cavity_item.forceMove(drop_location())
-		cavity_item = null
-	..()
 
 /obj/item/bodypart/chest/monkey
 	icon = 'icons/mob/animal_parts.dmi'
@@ -872,6 +926,8 @@
 	offset = OFFSET_GLOVES
 	dismember_wound = /datum/wound/dismemberment/l_arm
 	can_be_disabled = TRUE
+
+	artery_type = ARTERY_L_ARM
 
 /obj/item/bodypart/l_arm/set_owner(new_owner)
 	. = ..()
@@ -966,6 +1022,8 @@
 	dismember_wound = /datum/wound/dismemberment/r_arm
 	can_be_disabled = TRUE
 
+	artery_type = ARTERY_R_ARM
+
 /obj/item/bodypart/r_arm/set_owner(new_owner)
 	. = ..()
 	if(. == FALSE)
@@ -1056,6 +1114,8 @@
 	dismember_wound = /datum/wound/dismemberment/l_leg
 	can_be_disabled = TRUE
 
+	artery_type = ARTERY_L_LEG
+
 /obj/item/bodypart/l_leg/set_owner(new_owner)
 	. = ..()
 	if(. == FALSE)
@@ -1138,6 +1198,8 @@
 	dismember_wound = /datum/wound/dismemberment/r_leg
 	can_be_disabled = TRUE
 
+	artery_type = ARTERY_R_LEG
+
 /obj/item/bodypart/r_leg/set_owner(new_owner)
 	. = ..()
 	if(. == FALSE)
@@ -1201,3 +1263,143 @@
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
+
+
+/**
+ * Get a random organ object from the bodypart matching the passed in typepath
+ *
+ * Arguments:
+ * * typepath The typepath of the organ to get
+ */
+/obj/item/bodypart/proc/getorgan(typepath)
+	if(owner)
+		for(var/thing in shuffle(owner.getorganszone(body_zone)))
+			if(istype(thing, typepath))
+				return thing
+	else
+		var/list/organs = list()
+		for(var/thing in src)
+			if(istype(thing, typepath))
+				organs |= thing
+		if(length(organs))
+			return pick(organs)
+
+/**
+ * Get a list of organ objects from the bodypart matching the passed in typepath
+ *
+ * Arguments:
+ * * typepath The typepath of the organ to get
+ */
+/obj/item/bodypart/proc/getorganlist(typepath)
+	var/list/organs = list()
+	if(owner)
+		for(var/thing in owner.getorganszone(body_zone))
+			if(istype(thing, typepath))
+				organs |= thing
+	else
+		for(var/thing in src)
+			if(istype(thing, typepath))
+				organs |= thing
+	return organs
+
+/**
+ * Returns a random organ out of all organs in specified slot inside of the bodypart
+ *
+ * Arguments:
+ * * slot Slot to get the organ from
+ */
+/obj/item/bodypart/proc/getorganslot(slot)
+	if(owner)
+		for(var/thing in shuffle(owner.getorganslotlist(slot)))
+			var/obj/item/organ/organ = thing
+			if(organ.current_zone == body_zone)
+				return organ
+	else
+		var/list/organs = list()
+		for(var/obj/item/organ/organ in src)
+			if(slot in organ.organ_efficiency)
+				organs |= organ
+		if(length(organs))
+			return pick(shuffle(organs))
+
+/**
+ * Returns a list of all organs in the specified slot inside this limb, if there are any
+ *
+ * Arguments:
+ * * slot Slot to get the list
+ */
+/obj/item/bodypart/proc/getorganslotlist(slot)
+	var/list/organs = list()
+	if(owner)
+		var/obj/item/organ/organ
+		for(var/thing in owner.getorganslotlist(slot))
+			organ = thing
+			if(check_zone(organ.current_zone) == body_zone)
+				organs |= organ
+	else
+		for(var/obj/item/organ/organ in src)
+			if(slot in organ.organ_efficiency)
+				organs |= organ
+	return organs
+
+/**
+ * Returns the organ efficiency in a specific limb
+ * Arguments:
+ * * slot Slot to get the efficiency from
+ */
+/obj/item/bodypart/proc/getorganslotefficiency(slot)
+	if(owner)
+		return owner.getorganslotefficiencyzone(slot, body_zone)
+	else
+		. = null
+		for(var/obj/item/organ/organ in src)
+			. += organ.get_slot_efficiency(slot)
+
+/// Returns the volume of organs and cavity items for the organ storage component to use
+/obj/item/bodypart/proc/get_cavity_volume()
+	. = 0
+	for(var/obj/item/organ/organ as anything in get_organs())
+		. += organ.organ_volume
+	for(var/obj/item/item as anything in cavity_items)
+		. += item.w_class
+
+
+/obj/item/bodypart/proc/artery_needed()
+	return CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY)
+
+/obj/item/bodypart/proc/no_artery()
+	return (!getorganslot(ORGAN_SLOT_ARTERY))
+
+/obj/item/bodypart/proc/artery_missing()
+	return (artery_needed() && no_artery())
+
+/obj/item/bodypart/proc/is_artery_torn()
+	. = FALSE
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(artery.is_bruised())
+			return TRUE
+
+/obj/item/bodypart/proc/is_artery_dissected()
+	. = FALSE
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(artery.is_broken())
+			return TRUE
+
+/obj/item/bodypart/proc/get_incision(strict = FALSE, ignore_gauze = FALSE)
+	if(ignore_gauze && (bandage))
+		return
+	var/datum/wound/incision
+	for(var/datum/wound/slash/slash in wounds)
+		if(slash.is_sewn())
+			continue
+		incision = slash
+		break
+
+	if(!incision)
+		for(var/datum/wound/dynamic/slash/slash in wounds)
+			if(slash.is_sewn())
+				continue
+			incision = slash
+			break
+
+	return incision

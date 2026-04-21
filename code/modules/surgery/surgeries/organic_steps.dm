@@ -8,7 +8,8 @@
 		TOOL_SHARP = 60,
 	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/simple_animal)
-	time = 1.6 SECONDS
+	minimum_time = 1.2 SECONDS
+	maximum_time = 1.5 SECONDS
 	surgery_flags = SURGERY_BLOODY
 	surgery_flags_blocked = SURGERY_INCISED
 	skill_min = SKILL_LEVEL_NOVICE
@@ -38,7 +39,8 @@
 		TOOL_WIRECUTTER = 60,
 		TOOL_IMPROVISED_HEMOSTAT = 38,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 2.5 SECONDS
 	surgery_flags_blocked = SURGERY_CLAMPED
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
@@ -67,7 +69,8 @@
 		TOOL_IMPROVISED_RETRACTOR = 38,
 		TOOL_WIRECUTTER = 35,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags_blocked = SURGERY_RETRACTED
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
@@ -95,7 +98,8 @@
 		TOOL_WELDER = 70,
 		TOOL_HOT = 35,
 	)
-	time = 2.4 SECONDS
+	minimum_time = 2.2 SECONDS
+	maximum_time = 3.5 SECONDS
 	surgery_flags = SURGERY_BLOODY
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_APPRENTICE
@@ -148,7 +152,8 @@
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_PRECISE_L_FOOT,
 	)
-	time = 5 SECONDS
+	minimum_time = 4.2 SECONDS
+	maximum_time = 5.5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
 	surgery_flags_blocked = SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_NOVICE

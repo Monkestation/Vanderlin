@@ -378,7 +378,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(findtext(G_found.real_name,"monkey"))
 			if(tgui_alert(usr, "This character appears to have been a monkey. Would you like to respawn them as such?", "Confirm", list("Yes","No")) == "Yes")
 				var/mob/living/carbon/monkey/new_monkey = new
-				SSjob.SendToLateJoin(new_monkey)
+				SSjob.SendToBackupPoint(new_monkey)
 				G_found.mind.transfer_to(new_monkey)	//be careful when doing stuff like this! I've already checked the mind isn't in use
 				new_monkey.key = G_found.key
 				to_chat(new_monkey, "You have been fully respawned. Enjoy the game.")
@@ -390,7 +390,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Ok, it's not a xeno or a monkey. So, spawn a human.
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
-	SSjob.SendToLateJoin(new_character)
+	SSjob.SendToBackupPoint(new_character)
 
 	var/datum/data/record/record_found			//Referenced to later to either randomize or not randomize the character.
 	if(G_found.mind && !G_found.mind.active)	//mind isn't currently in use by someone/something
@@ -557,7 +557,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	else
 		return
 
-/client/proc/cmd_admin_gib(mob/M in GLOB.mob_list)
+/client/proc/cmd_admin_gib(mob/living/M in GLOB.mob_list)
 	set category = "GameMaster.Fun"
 	set name = "Gib"
 
@@ -587,12 +587,15 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Gibself"
 	set category = "GameMaster.Fun"
 
+	if(!isliving(mob))
+		return
 	var/confirm = tgui_alert(src, "You sure?", "Confirm", list("Yes", "No"))
 	if(confirm == "Yes")
 		log_admin("[key_name(usr)] used gibself.")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] used gibself.</span>")
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Gib Self") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		mob.gib(1, 1, 1)
+		var/mob/living/living_mob = mob
+		living_mob.gib(1, 1, 1)
 
 /client/proc/cmd_admin_check_contents(mob/living/M in GLOB.mob_list)
 	set category = "GameMaster.Equipping"
@@ -763,6 +766,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		ADMIN_PUNISHMENT_GODHAND,
 		ADMIN_PUNISHMENT_FORCECOLLAR,
 		ADMIN_PUNISHMENT_PSYDON,
+		ADMIN_PUNISHMENT_BLACK_BRIAR,
 	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
@@ -870,6 +874,16 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			ADD_TRAIT(created_collar, TRAIT_NODROP, "adminabuse")
 			to_chat(target, span_userdanger("A ring of darkness restrains my neck, and a collar is made manifest!"))
 			H.add_stress(/datum/stress_event/collarcurse)
+		if(ADMIN_PUNISHMENT_BLACK_BRIAR)
+			var/obj/item/bodypart/chest/chest = target.get_bodypart()
+			var/datum/wound/black_briar_curse/chest/wound = chest?.add_wound(/datum/wound/black_briar_curse/chest)
+			if(!istype(wound))
+				to_chat(usr, span_warning("Invalid target!"))
+				return
+			wound.infection = BBC_TIME_MAX
+			wound.infection_percent = 1
+			target.death()
+
 
 	punish_log(target, punishment)
 

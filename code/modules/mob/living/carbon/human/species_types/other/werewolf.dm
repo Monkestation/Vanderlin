@@ -1,9 +1,6 @@
 /mob/living/carbon/human/species/werewolf
 	race = /datum/species/werewolf
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	base_strength = 15
-	base_constitution = 15
-	base_endurance = 15
 
 	cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 	limb_destroyer = TRUE
@@ -66,6 +63,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/werewolf,

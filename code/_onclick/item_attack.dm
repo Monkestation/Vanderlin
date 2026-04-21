@@ -298,8 +298,6 @@
 		return
 	if(!user.CanReach(M,src))
 		return
-	if(user.get_active_held_item() != src)
-		return
 	if(user.incapacitated(IGNORE_GRAB))
 		return
 	if((M.body_position != LYING_DOWN))

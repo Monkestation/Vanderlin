@@ -10,13 +10,12 @@
 		return "FFFFFF"
 	return feature.hair_color
 
-/mob/living/carbon/human/proc/get_eye_color(primary=TRUE)
-	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	if(!eyes)
+/mob/living/carbon/human/proc/get_eye_color(side = RIGHT_SIDE)
+	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
+	var/obj/item/organ/eyes/eye = LAZYACCESS(eye_organs, sight_index)
+	if(!eye)
 		return "#FFFFFF"
-	if(eyes.heterochromia && !primary)
-		return eyes.second_color
-	return eyes.eye_color
+	return eye.eye_color || "#FFFFFF"
 
 /mob/living/carbon/human/proc/get_chest_color()
 	var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
@@ -55,25 +54,26 @@
 	if(updates_body)
 		update_body_parts()
 
-/mob/living/carbon/proc/set_eye_color(new_color, new_secondary_color, updates_body = TRUE, updates_dna = FALSE)
-	var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		if(new_color)
-			eyes.eye_color = new_color
-		eyes.second_color = new_secondary_color || new_color || "#FFFFFF" // more as a catch case, you gotta be really weird to use this proc to do this
-		eyes.heterochromia = new_secondary_color && new_secondary_color != new_color
-		if(updates_body)
-			update_body_parts(TRUE)
-		eyes.update_accessory_colors()
-
+/mob/living/carbon/proc/set_eye_color(new_right_color, new_left_color, updates_body = TRUE, updates_dna = FALSE)
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(eye_organs, 2)
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(eye_organs, 1)
+	if(right_eye && new_right_color)
+		right_eye.eye_color = new_right_color
+		right_eye.update_accessory_colors()
+	if(left_eye)
+		left_eye.eye_color = new_left_color || new_right_color || "#FFFFFF"
+		left_eye.update_accessory_colors()
+	if(updates_body)
+		update_body_parts(TRUE)
+	if(hud_used)
+		var/atom/movable/screen/eye_intent/eyet = locate() in hud_used.static_inventory
+		eyet?.update_appearance(UPDATE_OVERLAYS)
 	if(updates_dna)
 		var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
 		if(istype(eye_dna))
-			if(new_color)
-				eye_dna.eye_color = new_color
-			eye_dna.second_color = new_secondary_color || new_color || "#FFFFFF"
-			eye_dna.heterochromia = new_secondary_color && new_secondary_color != new_color
-
+			if(new_right_color)
+				eye_dna.eye_color = new_right_color
+			eye_dna.second_color = new_left_color || new_right_color || "#FFFFFF"
 
 /mob/living/carbon/human/proc/set_hair_style(datum/sprite_accessory/hair/head/style, updates_body = TRUE)
 	if(!ispath(style) && !istype(style))

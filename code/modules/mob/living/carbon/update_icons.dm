@@ -1,58 +1,16 @@
 
-
-//IMPORTANT: Multiple animate() calls do not stack well, so try to do them all at once if you can.
-/mob/living/carbon/update_transform()
-	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
-	var/final_pixel_y = pixel_y
-	var/final_dir = dir
-	var/changed = 0
-	if(lying_angle != lying_prev && rotate_on_lying)
-		changed++
-		ntransform.TurnTo(lying_prev , lying_angle)
-		if(!lying_angle) //Lying to standing
-			final_pixel_y = get_standard_pixel_y_offset()
-		else //if(lying != 0)
-			if(lying_prev == 0) //Standing to lying
-				pixel_y = get_standard_pixel_y_offset()
-				final_pixel_y =  get_standard_pixel_y_offset()
-				if(dir & (EAST|WEST)) //Facing east or west
-					final_dir = pick(NORTH, SOUTH) //So you fall on your side rather than your face or ass
-	if(resize != RESIZE_DEFAULT_SIZE)
-		changed++
-		ntransform.Scale(resize)
-		resize = RESIZE_DEFAULT_SIZE
-
-	if(changed)
-		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
-		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
-		pixel_x = get_standard_pixel_x_offset()
-		pixel_y = final_pixel_y
-		animate(src, transform = ntransform, time = (lying_prev == 0 || !resting) ? 2 : 0, pixel_y = final_pixel_y, dir = final_dir, easing = (EASE_IN|EASE_OUT))
-		client?.pixel_x = pixel_x
-		client?.pixel_y = pixel_y
-		dir = final_dir
-		update_vision_cone()
-	else
-		animate(src, time = 0.2 SECONDS, pixel_x = get_standard_pixel_x_offset(), pixel_y = get_standard_pixel_y_offset())
-		client?.pixel_x = pixel_x
-		client?.pixel_y = pixel_y
-
 /mob/living
 	var/list/overlays_standing[TOTAL_LAYERS]
 
 /mob/living/proc/apply_overlay(cache_index)
 	if((. = overlays_standing[cache_index]))
 		add_overlay(.)
-	if(client)
-		update_vision_cone()
 
 /mob/living/proc/remove_overlay(cache_index)
 	var/I = overlays_standing[cache_index]
 	if(I)
 		cut_overlay(I)
 		overlays_standing[cache_index] = null
-	if(client)
-		update_vision_cone()
 
 /mob/living/carbon/regenerate_icons()
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))

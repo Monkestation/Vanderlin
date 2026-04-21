@@ -5,6 +5,8 @@
 	var/list/obj/item/embedded_objects = list()
 	/// Bandage, if this ever hard dels thats fucking dumb lol
 	var/obj/item/natural/cloth/bandage
+	///are we able to bleed?
+	var/bleeds = TRUE
 
 /// Checks if we have any embedded objects whatsoever
 /obj/item/bodypart/proc/has_embedded_objects()
@@ -59,21 +61,23 @@
 	return returned_wounds
 
 /// Heals wounds on this bodypart by the specified amount
-/obj/item/bodypart/proc/heal_wounds(heal_amount)
+/obj/item/bodypart/proc/heal_wounds(heal_amount, datum/source, forced = FALSE)
 	if(!length(wounds))
 		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in wounds)
 		if(heal_amount <= 0)
 			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
+		var/amount_healed = wound.heal_wound(heal_amount, source, forced)
 		heal_amount -= amount_healed
 		healed_any = TRUE
 	return healed_any
 
 /// Adds a wound to this bodypart, applying any necessary effects
-/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
-	if(!wound || !owner || (owner.status_flags & GODMODE))
+/obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
+	if(!wound || !owner)
+		return
+	if(!forced && (owner.status_flags & GODMODE))
 		return
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
@@ -88,6 +92,9 @@
 	if(!wound.apply_to_bodypart(src, silent, crit_message))
 		qdel(wound)
 		return
+	if(owner && COOLDOWN_FINISHED(owner, adrenaline_burst))
+		COOLDOWN_START(owner, adrenaline_burst, 45 SECONDS)
+		owner.reagents?.add_reagent(/datum/reagent/adrenaline, 12)
 	return wound
 
 /// Removes a wound from this bodypart, removing any associated effects
@@ -114,6 +121,8 @@
 /obj/item/bodypart/proc/get_bleed_rate()
 	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return 0
+	if(!bleeds)
+		return 0
 	var/bleed_rate = 0
 	if(bandage && !GET_ATOM_BLOOD_DNA_LENGTH(bandage))
 		return 0
@@ -139,7 +148,7 @@
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
-		return FALSE
+		return
 
 	if(dam < 5)
 		return
@@ -377,10 +386,9 @@
 
 /obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
 	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
-	var/static/list/tonguestab_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/static/list/nosestab_zones = list(BODY_ZONE_PRECISE_NOSE)
 	var/static/list/earstab_zones = list(BODY_ZONE_PRECISE_EARS)
-	var/static/list/knockout_zones = list(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_MOUTH)
+	var/static/list/knockout_zones = list(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 
 	if(dam < 5)
 		return FALSE
@@ -452,9 +460,6 @@
 			else if(zone_precise == BODY_ZONE_PRECISE_NOSE)
 				fracture_type = /datum/wound/fracture/head/nose
 				necessary_damage = 0.7
-			else if(zone_precise == BODY_ZONE_PRECISE_MOUTH)
-				fracture_type = /datum/wound/fracture/mouth
-				necessary_damage = 0.7
 			else if(zone_precise == BODY_ZONE_PRECISE_NECK)
 				fracture_type = /datum/wound/fracture/neck
 				dislocation_type = /datum/wound/dislocation/neck
@@ -493,12 +498,6 @@
 								LAZYADD(attempted_wounds, /datum/wound/facial/eyes/right)
 							else if(zone_precise == BODY_ZONE_PRECISE_L_EYE)
 								LAZYADD(attempted_wounds, /datum/wound/facial/eyes/left)
-					else if(zone_precise in tonguestab_zones)
-						var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
-						if(!tongue_up_my_asshole || has_wound(/datum/wound/facial/tongue))
-							LAZYADD(attempted_wounds, /datum/wound/fracture/mouth)
-						else
-							LAZYADD(attempted_wounds, /datum/wound/facial/tongue)
 					else if(zone_precise in nosestab_zones)
 						if(has_wound(/datum/wound/facial/disfigurement/nose))
 							LAZYADD(attempted_wounds, /datum/wound/fracture/head/nose)
@@ -506,6 +505,70 @@
 							LAZYADD(attempted_wounds, /datum/wound/facial/disfigurement/nose)
 					else if(zone_precise in knockout_zones)
 						LAZYADD(attempted_wounds, /datum/wound/fracture/head/brain)
+
+	if(!attempted_wounds)
+		return FALSE
+
+	for(var/wound_type in shuffle(attempted_wounds))
+		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
+		if(applied)
+			if(user?.client)
+				record_round_statistic(STATS_CRITS_MADE)
+			return applied
+
+	return FALSE
+
+/obj/item/bodypart/mouth/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
+	if(dam < 5)
+		return FALSE
+
+	var/list/crit_classes
+	if(bclass in GLOB.fracture_bclasses)
+		LAZYADD(crit_classes, "fracture")
+	if(bclass in GLOB.artery_bclasses)
+		LAZYADD(crit_classes, "artery")
+
+	if(!crit_classes)
+		return FALSE
+
+	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
+		dam += 10
+
+	var/used = modifiers[CRIT_MOD_CHANCE]
+	var/damage_dividend = (get_damage() / max_damage)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
+	var/list/attempted_wounds
+
+	switch(pick(crit_classes))
+		if("fracture")
+			if(HAS_TRAIT(src, TRAIT_BRITTLE))
+				dam += 20
+			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
+				dam += 10
+			used += round(damage_dividend * 20 + (dam / 6), 1)
+			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
+				used -= 10
+			if(prob(used) && (damage_dividend >= 0.7))
+				LAZYADD(attempted_wounds, /datum/wound/fracture/mouth)
+				LAZYADD(attempted_wounds, /datum/wound/teeth)
+		if("artery")
+			if(user)
+				if(bclass == BCLASS_CHOP && istype(user.rmb_intent, /datum/rmb_intent/strong))
+					dam += 10
+				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+					dam += 10
+			used += round(damage_dividend * 20 + (dam / 6), 1)
+			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
+				used -= 10
+			if(prob(used))
+				LAZYADD(attempted_wounds, /datum/wound/artery)
+				if((bclass in GLOB.stab_bclasses) && !resistance)
+					var/obj/item/organ/tongue/tongue = owner.getorganslot(ORGAN_SLOT_TONGUE)
+					if(!tongue || has_wound(/datum/wound/facial/tongue))
+						LAZYADD(attempted_wounds, /datum/wound/fracture/mouth)
+					else
+						LAZYADD(attempted_wounds, /datum/wound/facial/tongue)
+					LAZYADD(attempted_wounds, /datum/wound/teeth)
 
 	if(!attempted_wounds)
 		return FALSE
@@ -682,5 +745,5 @@
 			continue
 		returned_flags |= SURGERY_DRILLED
 	if(skeletonized)
-		returned_flags |= SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
+		returned_flags |= SURGERY_INCISED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
 	return returned_flags

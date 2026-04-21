@@ -17,8 +17,8 @@ SUBSYSTEM_DEF(death_arena)
 	var/fight_force_end = null
 
 /datum/controller/subsystem/death_arena/fire(resumed = 0)
-	listclearnulls(waiting_fighters)
-	listclearnulls(tollless_clients)
+	list_clear_nulls(waiting_fighters)
+	list_clear_nulls(tollless_clients)
 
 	for(var/client as anything in tollless_clients)
 		if(world.time > tollless_clients[client])
@@ -227,4 +227,4 @@ SUBSYSTEM_DEF(death_arena)
 
 /obj/structure/underworld/necra/Initialize()
 	. = ..()
-	set_light(5, 30, l_color = LIGHT_COLOR_BLUE)
+	set_light(5, 4, 30, l_color = LIGHT_COLOR_BLUE)

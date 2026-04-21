@@ -16,7 +16,7 @@
 	pickup_sound = "rustle" // Sound list define strings are in code/game/sound.dm
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	drop_sound = 'sound/foley/dropsound/mace_drop.ogg'
-	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
+	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
@@ -45,7 +45,7 @@
 		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
-	if(weapon_special)
+	if(istype(weapon_special))
 		QDEL_NULL(weapon_special)
 	return ..()
 

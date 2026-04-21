@@ -20,8 +20,8 @@
 
 	return armor
 
-
-/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling)
+//simulate will cause no damage and play no sound
+/mob/living/proc/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	return 0
 
 //this returns the mob's protection against eye damage (number between -1 and 2) from bright lights

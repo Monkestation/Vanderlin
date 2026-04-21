@@ -39,11 +39,12 @@
 		TRAIT_DODGEEXPERT,
 	)
 
-/datum/job/advclass/bandit/knave/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/bandit/knave/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/weapons = list(
-		"Crossbow & Dagger" = list(/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow, /obj/item/weapon/knife/dagger/steel),
-		"Bow & Sword" = list(/obj/item/gun/ballistic/revolver/grenadelauncher/bow, /obj/item/weapon/sword/short/iron),
+		"Crossbow & Dagger" = list(/obj/item/gun/ballistic/bow/cross, /obj/item/weapon/knife/dagger/steel),
+		"Bow & Sword" = list(/obj/item/gun/ballistic/bow, /obj/item/weapon/sword/short/iron),
 	)
 
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")

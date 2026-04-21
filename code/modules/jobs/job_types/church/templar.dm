@@ -84,7 +84,7 @@
 	)
 
 /datum/job/templar
-	title = "Templar"
+	title = JOB_TEMPLAR
 	tutorial = "Templars are warriors who have forsaken wealth and station in the service of the church, either from fervent zeal or remorse for past sins.\
 	They are vigilant sentinels, guarding priest and altar, steadfast against heresy and shadow-beasts that creep in darkness. \
 	But in the quiet of troubled sleep, there is a question left. Does the blood they spill sanctify them, or stain them forever? If service ever demanded it, whose blood would be the price?"
@@ -123,6 +123,19 @@
 
 /datum/job/templar/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
+	var/holder = spawned.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_templar()
+		devotion.grant_to(spawned)
+
+	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
+		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+
+/datum/job/templar/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/astrata)
@@ -184,17 +197,8 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/xylix)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 
-	var/holder = spawned.patron?.devotion_holder
-	if(holder)
-		var/datum/devotion/devotion = new holder()
-		devotion.make_templar()
-		devotion.grant_to(spawned)
-
-	if(spawned.dna?.species?.id == SPEC_ID_HUMEN && spawned.gender == MALE)
-		spawned.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-
 /datum/outfit/templar
-	name = "Templar"
+	name = JOB_TEMPLAR
 	head = /obj/item/clothing/head/helmet/heavy/necked
 	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	armor = /obj/item/clothing/armor/brigandine
@@ -240,6 +244,7 @@
 			beltl = /obj/item/weapon/knife/dagger/steel/pestrasickle
 		if(/datum/patron/divine/eora)
 			head = /obj/item/clothing/head/helmet/sallet/eoran
+			mask = /obj/item/clothing/head/roguehood/eora
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/eora
 			cloak = /obj/item/clothing/cloak/stabard/templar/eora
 		if(/datum/patron/divine/ravox)

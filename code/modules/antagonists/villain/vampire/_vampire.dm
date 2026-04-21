@@ -20,6 +20,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
+	antag_flags = FLAG_ANTAG_CAP_TEAM
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
@@ -47,6 +48,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "vamplesser"
+
+	clan_selected = TRUE
+	default_clan = /datum/clan/caitiff
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
@@ -211,8 +215,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // LANDMARKS
 /obj/effect/landmark/start/vampirelord
 	name = "Vampire Lord"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirelord/Initialize()
 	. = ..()
@@ -220,8 +224,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampirespawn
 	name = "Vampire Spawn"
-	icon_state = "arrow"
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	custom_handling = TRUE
 
 /obj/effect/landmark/start/vampirespawn/Initialize()
 	. = ..()
@@ -229,9 +233,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/landmark/start/vampireknight
 	name = "Death Knight"
-	icon_state = "arrow"
-	jobspawn_override = list("Death Knight")
-	delete_after_roundstart = FALSE
+	icon_state = "arrow_purple"
+	jobs_to_spawn = list("Death Knight")
+	custom_handling = TRUE
 
 /obj/effect/landmark/vteleport
 	name = "Teleport Destination"

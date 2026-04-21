@@ -1067,7 +1067,7 @@
 	priest_job?.add_spells(M)
 	priest_job?.assign_honorary_titles(M)
 	M.mind.set_assigned_role(/datum/job/priest)
-	M.job = "Priest"
+	M.job = JOB_PRIEST
 	M.set_patron(/datum/patron/divine/astrata)
 	var/holder = M.patron?.devotion_holder
 	if(holder)
@@ -1119,6 +1119,8 @@
 
 	for(var/client/client as anything in GLOB.clients)
 		client.mob.adjust_triumphs(amount, reason = reason, override_bonus = TRUE)
+
+	log_game("TRIUMPHS: [key_name(user)] gave everyone [amount] triumphs.")
 
 /datum/admins/proc/change_skill_exp_modifier()
 	set name = "Change Skill Experience Gain"

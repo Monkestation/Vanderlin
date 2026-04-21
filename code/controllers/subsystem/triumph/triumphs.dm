@@ -592,8 +592,6 @@ SUBSYSTEM_DEF(triumphs)
 
 	triumph_leaderboard = json_decode(file2text(json_file))
 
-	sort_leaderboard()
-
 /datum/controller/subsystem/triumphs/proc/adjust_leaderboard(user_key)
 	var/triumph_total = triumph_amount_cache[ckey(user_key)]
 
@@ -606,23 +604,12 @@ SUBSYSTEM_DEF(triumphs)
 
 /// Sort the leaderboard so the highest are on top
 /datum/controller/subsystem/triumphs/proc/sort_leaderboard()
-	if(length(triumph_leaderboard) <= 1)
+	if(!length(triumph_leaderboard))
 		return
 
-	var/list/sorted_list = list()
-	for(var/cache_key in triumph_leaderboard)
-		for(var/sorted_key in sorted_list)
-			var/their_triumphs = sorted_list[sorted_key]
-			var/our_triumphs = triumph_leaderboard[cache_key]
-			if(our_triumphs >= their_triumphs)
-				sorted_list.Insert(sorted_list.Find(sorted_key), cache_key)
-				sorted_list[cache_key] = triumph_leaderboard[cache_key]
-				break
+	triumph_leaderboard = sortList(triumph_leaderboard, GLOBAL_PROC_REF(cmp_triumphs_dsc))
 
-		if(!sorted_list.Find(cache_key))
-			sorted_list[cache_key] = triumph_leaderboard[cache_key]
-
-	triumph_leaderboard = sorted_list
+	return triumph_leaderboard
 
 /// Called when an admin disables a Triumph Buy. Refunds all current owners of that Triumph Buy and deactive it.
 /datum/controller/subsystem/triumphs/proc/refund_from_admin_toggle(datum/triumph_buy/TB)

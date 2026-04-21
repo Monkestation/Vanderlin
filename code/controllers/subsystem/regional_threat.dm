@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(regionthreat)
 
 /datum/controller/subsystem/regionthreat/fire(resumed)
 	var/player_count = length(GLOB.player_list)
-	var/ishighpop = player_count >= LOWPOP_THRESHOLD
+	var/ishighpop = player_count >= HIGHPOP_THRESHOLD
 	for(var/datum/threat_region/TR as anything in threat_regions)
 		if(ishighpop)
 			TR.increase_latent_ambush(TR.highpop_tick)

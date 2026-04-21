@@ -47,14 +47,18 @@
 		return
 	//if it's non-toxic, drink up, otherwise, you need the blooddrinker trait and it has to be a blood you're compatible with or you need to be a nasty eater
 	if(method & INJECT)
-		L.blood_volume = min(L.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM)
+		var/modifier = 1 //TODO: Borbop ~ Once we get a proper transfusion system this will become unneeded basically means instead of 5 units we inject 100 units which is 4 injections to suriving level. This is 100% blood duping but like... its this or 80 syringes of blood to get someone restarted
+		if(L.stat >= DEAD)
+			modifier = 20
+		if(L.blood_volume <= BLOOD_VOLUME_MAXIMUM)
+			L.adjust_bloodvolume(round(reac_volume, 0.1) * modifier)
 		return
 	if(method & INGEST)
 		if(!drinking_self && (toxicity <= 0 || (HAS_TRAIT(L, TRAIT_BLOODDRINKER) || HAS_TRAIT(L, TRAIT_NASTY_EATER))))
 			if(!HAS_TRAIT(L, TRAIT_NOHUNGER))
 				L.adjust_hydration(reac_volume * 0.2)
 			if(L.blood_volume < BLOOD_VOLUME_NORMAL)
-				L.blood_volume = min(L.blood_volume + reac_volume * 0.2 , BLOOD_VOLUME_NORMAL)
+				L.adjust_bloodvolume(reac_volume * 0.2)
 			return
 		var/tox = toxicity * reac_volume
 		if(HAS_TRAIT(L, TRAIT_POISON_RESILIENCE))
@@ -81,6 +85,33 @@
 	if(data["blood_DNA"])
 		B.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
 
+/datum/reagent/blood/reaction_obj(obj/O, volume)
+	. = ..()
+	if(!.)
+		O.adjust_germ_level(GERM_PER_UNIT_BLOOD * volume)
+
+/datum/reagent/blood/fuel
+	name = "Oil"
+	color = "#1C1C1C"
+	taste_description = "gross metal"
+	glass_desc = ""
+	toxicity = 3
+
+/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
+	if((method & TOUCH) || (method & VAPOR))
+		M.adjust_fire_stacks(reac_volume / 10)
+		return
+	..()
+
+/datum/reagent/blood/fuel/add_to_member(obj/effect/abstract/liquid_turf/adder)
+	. = ..()
+	if(!adder.GetComponent(/datum/component/slippery))
+		adder.AddComponent(/datum/component/slippery, 50)
+
+/datum/reagent/blood/fuel/remove_from_member(obj/effect/abstract/liquid_turf/remover)
+	. = ..()
+	var/datum/component/slipComp = remover.GetComponent(/datum/component/slippery)
+	slipComp?.Destroy()
 
 /datum/reagent/water
 	name = "Water"
@@ -93,6 +124,7 @@
 	glass_desc = ""
 	shot_glass_icon_state = "shotglassclear"
 	var/hydration = 12
+	var/sanitization = SANITIZATION_PER_UNIT_WATER
 	alpha = 100
 	taste_mult = 0.1
 
@@ -102,29 +134,35 @@
 	results = list(/datum/reagent/water/gross = 2)
 	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
 
+/datum/reagent/water/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOODRESTORE, 0.1, "[type]")
 
-/datum/reagent/water/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect("[type]")
+
+/datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_hydration(hydration)
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_NORMAL)
+			H.adjust_hydration(hydration * efficiency)
 	..()
 
 /datum/reagent/water/gross
 	taste_description = "lead"
 	color = "#98934bc6"
+	sanitization = -SANITIZATION_PER_UNIT_WATER
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
 
-/datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
+/datum/reagent/water/gross/on_mob_life(mob/living/carbon/M, efficiency)
 	..()
-	if(HAS_TRAIT(M, TRAIT_NASTY_EATER )) // lets orcs and goblins drink bogwater
+	if(HAS_TRAIT(M, TRAIT_NASTY_EATER)) // lets orcs and goblins drink bogwater
 		return
-	M.adjustToxLoss(1)
-	M.add_nausea(12) //Over 8 units will cause puking
+	M.adjustToxLoss(1 * efficiency)
+	M.add_nausea(12 * efficiency) //Over 8 units will cause puking
 
 
 /*
@@ -184,6 +222,7 @@
 	O.extinguish()
 	O.acid_level = 0
 
+	O.adjust_germ_level(-reac_volume * sanitization)
 	if(istype(O, /obj/item/bin))
 		var/obj/item/bin/RB = O
 		if(!RB.kover)
@@ -223,12 +262,12 @@
 	color = "#484848" // rgb: 72, 72, 72A
 	taste_mult = 0 // apparently tasteless.
 
-/datum/reagent/mercury/on_mob_life(mob/living/carbon/M)
+/datum/reagent/mercury/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M, TRAIT_IMMOBILIZED))
 		step(M, pick(GLOB.cardinals))
 	if(prob(5))
 		M.emote(pick("twitch","drool","moan"))
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN * efficiency, 1)
 	..()
 
 /datum/reagent/yuck
@@ -242,31 +281,11 @@
 	can_synth = FALSE
 	metabolization_rate = REAGENTS_METABOLISM * 0.3
 
-/datum/reagent/yuck/on_mob_life(mob/living/carbon/C)
+/datum/reagent/yuck/on_mob_life(mob/living/carbon/C, efficiency)
 	if(HAS_TRAIT(C, TRAIT_NOHUNGER) || HAS_TRAIT(C, TRAIT_NASTY_EATER) || HAS_TRAIT(C, TRAIT_ROT_EATER)) //they can't puke
 		return ..()
-	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 : 5)
+	C.add_nausea(HAS_TRAIT(C, TRAIT_DEADNOSE) ? 2.5 * efficiency : 5 * efficiency)
 	return ..()
-
-/datum/reagent/fuel
-	name = "Lighter fuel"
-	description = "Lighter fluids."
-	color = "#660000" // rgb: 102, 0, 0
-	taste_description = "gross metal"
-	glass_icon_state = "dr_gibb_glass"
-	glass_name = "glass of lighter fuel"
-	glass_desc = ""
-
-/datum/reagent/fuel/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with welding fuel to make them easy to ignite!
-	if((method & TOUCH) || (method & VAPOR))
-		M.adjust_fire_stacks(reac_volume / 10)
-		return
-	..()
-
-/datum/reagent/fuel/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(1, 0)
-	..()
-	return TRUE
 
 /datum/reagent/ash
 	name = "Ash"
@@ -289,7 +308,7 @@
 	alpha = 100
 	taste_mult = 2 // yuck!
 
-/datum/reagent/soap/on_mob_life(mob/living/carbon/M)
+/datum/reagent/soap/on_mob_life(mob/living/carbon/M, efficiency)
 	..()
 	if(ishuman(M))
 		M.add_stress(/datum/stress_event/mouthsoap)
@@ -323,7 +342,7 @@
 	glows = TRUE
 	overdose_threshold = 11
 
-/datum/reagent/devour/on_mob_life(mob/living/carbon/M)
+/datum/reagent/devour/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	SEND_SIGNAL(M, COMSIG_DEVOUR_OVERDRIVE)
 

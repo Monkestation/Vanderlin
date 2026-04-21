@@ -4,8 +4,7 @@
 
 	if(!isobserver(usr))
 		return
-
-	ghost_up()
+	up()
 
 /mob/dead/observer/verb/ghost_downward()
 	set name = "Ghost Down"
@@ -13,9 +12,7 @@
 
 	if(!isobserver(usr))
 		return
-
-	ghost_down()
-
+	down()
 
 /mob/verb/descend_to_underworld()
 	set name = "Journey to the Underworld"

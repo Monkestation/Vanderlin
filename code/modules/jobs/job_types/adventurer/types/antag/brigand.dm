@@ -41,15 +41,15 @@
 		TRAIT_MEDIUMARMOR,
 	)
 
-/datum/job/advclass/bandit/brigand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/bandit/brigand/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/weapons = list(
 		"Battleaxe & Cudgel" = list(/obj/item/weapon/axe/battle, /obj/item/weapon/mace/cudgel),
 		"Flail & Shield" = list(/obj/item/weapon/shield/wood, /obj/item/weapon/flail),
 	)
 
 	spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")
-
 
 /datum/outfit/bandit/brigand
 	name = "Brigand (Bandit)"

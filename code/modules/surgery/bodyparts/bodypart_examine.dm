@@ -25,8 +25,10 @@
 		. += "<span class='info'>It seems completely devoid of life.</span>"
 	*/
 
-	if(!eyes)
-		head_status += "<span class='warning'>The eyes appear are missing.</span>"
+	if(!eyes_left)
+		head_status += "<span class='warning'>The left eye is missing.</span>"
+	if(!eyes_right)
+		head_status += "<span class='warning'>The right eye is missing.</span>"
 
 	if(!ears)
 		head_status += "<span class='warning'>The ears are missing.</span>"
@@ -168,8 +170,16 @@
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
-		wound_strings |= wound.get_check_name(user)
+		wound_strings |= wound.get_check_name(user, advanced)
+	wound_strings -= null
 	status += wound_strings
+
+	for(var/obj/item/organ/possible_artery in shuffle(getorganslotlist(ORGAN_SLOT_ARTERY)))
+		if(possible_artery.is_bruised())
+			if(get_incision())
+				status += "<span class='bloody'>[possible_artery.name]'s been cut.</span>"
+			else
+				status += "<span class='bloody'>spreading bruises underneath the [parse_zone(possible_artery.zone)].</span>"
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"

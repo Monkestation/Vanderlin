@@ -29,15 +29,15 @@
 	START_PROCESSING(SSaggro, src)
 	// Register signals
 	RegisterSignal(parent, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_death))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
-/datum/component/ai_aggro_system/Destroy(force, silent)
+/datum/component/ai_aggro_system/Destroy(force)
 	STOP_PROCESSING(SSaggro, src)
 
 	// Unregister signals
 	UnregisterSignal(parent, list(
 		COMSIG_ATOM_WAS_ATTACKED,
-		COMSIG_MOB_DEATH
+		COMSIG_LIVING_DEATH
 	))
 
 	return ..()

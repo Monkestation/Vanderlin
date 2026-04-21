@@ -14,7 +14,7 @@
 	)
 
 /datum/job/innkeep_son
-	title = "Innkeepers Son"
+	title = JOB_INNKEEP_SON
 	f_title = "Innkeepers Daughter"
 	tutorial = "One nite the Innkeeper took you in during a harsh winter, \
 	you've been thankful ever since."
@@ -39,7 +39,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep_son
 
 /datum/outfit/innkeep_son
-	name = "Inkeeper Son"
+	name = JOB_INNKEEP_SON
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/shortboots
