@@ -93,7 +93,7 @@ GLOBAL_LIST_INIT(footstep, list(
 		'sound/foley/footsteps/FTGRA_A3.ogg',
 		'sound/foley/footsteps/FTGRA_A4.ogg'), 15, 0),
 	FOOTSTEP_WATER = list(list(
-		'sound/foley/waterenter.ogg'), 100, FALSE),
+		'sound/foley/waterenter.ogg'), 50, FALSE),
 	FOOTSTEP_SHALLOW = list(list(
 		'sound/foley/watermove (1).ogg',
 		'sound/foley/watermove (2).ogg'), 100, FALSE),
@@ -109,7 +109,7 @@ GLOBAL_LIST_INIT(footstep, list(
 		'sound/foley/footsteps/FTMUD (2).ogg',
 		'sound/foley/footsteps/FTMUD (3).ogg',
 		'sound/foley/footsteps/FTMUD (4).ogg',
-		'sound/foley/footsteps/FTMUD (5).ogg'), 80, 0),
+		'sound/foley/footsteps/FTMUD (5).ogg'), 60, 0),
 	FOOTSTEP_CATWALK = list(list(
 		'sound/foley/footsteps/catwalk1.ogg',
 		'sound/foley/footsteps/catwalk2.ogg',
@@ -129,7 +129,7 @@ GLOBAL_LIST_INIT(barefootstep, list(
 		'sound/foley/footsteps/softbarefoot (2).ogg',
 		'sound/foley/footsteps/softbarefoot (3).ogg'), 50, 0),
 	FOOTSTEP_WATER = list(list(
-		'sound/foley/waterenter.ogg'), 100, FALSE),
+		'sound/foley/waterenter.ogg'), 50, FALSE),
 	FOOTSTEP_SHALLOW = list(list(
 		'sound/foley/watermove (1).ogg',
 		'sound/foley/watermove (2).ogg'), 100, FALSE),
@@ -164,7 +164,7 @@ GLOBAL_LIST_INIT(clawfootstep, list(
 	FOOTSTEP_GRASS = list(list(
 		'sound/blank.ogg'), 25, 0),
 	FOOTSTEP_WATER = list(list(
-		'sound/foley/waterenter.ogg'), 100, FALSE),
+		'sound/foley/waterenter.ogg'), 50, FALSE),
 	FOOTSTEP_SHALLOW = list(list(
 		'sound/foley/watermove (1).ogg',
 		'sound/foley/watermove (2).ogg'), 100, FALSE),
@@ -180,7 +180,7 @@ GLOBAL_LIST_INIT(heavyfootstep, list(
 		'sound/foley/footsteps/bigwalk (3).ogg',
 		'sound/foley/footsteps/bigwalk (4).ogg'), 100, 0),
 	FOOTSTEP_WATER = list(list(
-		'sound/foley/waterenter.ogg'), 100, FALSE),
+		'sound/foley/waterenter.ogg'), 50, FALSE),
 	FOOTSTEP_SHALLOW = list(list(
 		'sound/foley/watermove (1).ogg',
 		'sound/foley/watermove (2).ogg'), 100, FALSE),
@@ -200,7 +200,7 @@ GLOBAL_LIST_INIT(metalfootstep, list(
 		'sound/foley/footsteps/armor/powerarmor (2).ogg',
 		'sound/foley/footsteps/armor/powerarmor (3).ogg',), 100, 0),
 	FOOTSTEP_WATER = list(list(
-		'sound/foley/waterenter.ogg'), 100, FALSE),
+		'sound/foley/waterenter.ogg'), 50, FALSE),
 	FOOTSTEP_SHALLOW = list(list(
 		'sound/foley/watermove (1).ogg',
 		'sound/foley/watermove (2).ogg'), 100, FALSE),

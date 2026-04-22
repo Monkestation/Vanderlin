@@ -15,8 +15,8 @@
 	current_blood = 20
 	blood_req = 4
 	oxygen_req = 4
-	nutriment_req = 2.5
-	hydration_req = 2
+	nutriment_req = 1.5
+	hydration_req = 1.2
 
 	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
 	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain. I can hardly stomach the idea of food right now!</span>"

@@ -118,7 +118,7 @@
 	var/mob/living/simple_animal/hostile/kraken_tentacle/tentacle = new tentacle_type(spawn_turf)
 	tentacle.parent_kraken = src
 	active_tentacles += tentacle
-	RegisterSignal(tentacle, COMSIG_PARENT_QDELETING, PROC_REF(on_tentacle_death))
+	RegisterSignal(tentacle, COMSIG_QDELETING, PROC_REF(on_tentacle_death))
 
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken/proc/on_tentacle_death(datum/source)
 	SIGNAL_HANDLER

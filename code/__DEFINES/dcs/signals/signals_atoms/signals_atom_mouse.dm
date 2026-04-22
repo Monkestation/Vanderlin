@@ -38,3 +38,6 @@
 
 ///from base of mob/MouseWheelOn(): (/atom, delta_x, delta_y, params)
 #define COMSIG_MOUSE_SCROLL_ON "mousescroll_on"
+
+/// signal sent when a mouse is hovering over us, sent by atom/proc/on_mouse_entered
+#define COMSIG_ATOM_MOUSE_ENTERED "mouse_entered"

@@ -26,14 +26,14 @@
 		qdel(src)
 		return INITIALIZE_HINT_QDEL
 
-	RegisterSignal(floor_vine, COMSIG_PARENT_QDELETING, PROC_REF(on_floor_destroyed))
+	RegisterSignal(floor_vine, COMSIG_QDELETING, PROC_REF(on_floor_destroyed))
 
 	update_spike_visuals()
 	return .
 
 /obj/structure/meatvine/tentacle_spike/Destroy()
 	if(floor_vine)
-		UnregisterSignal(floor_vine, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(floor_vine, COMSIG_QDELETING)
 	floor_vine = null
 
 	QDEL_LIST(spike_visuals)
