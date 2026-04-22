@@ -284,10 +284,10 @@ GLOBAL_LIST_EMPTY(created_sound_groups)
 /// A simple proc to change who our parent is set to, also handling registering and unregistering the QDELETING signals on the parent.
 /datum/looping_sound/proc/set_parent(new_parent)
 	if(parent)
-		UnregisterSignal(parent, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(parent, COMSIG_QDELETING)
 	parent = new_parent
 	if(parent)
-		RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(handle_parent_del))
+		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(handle_parent_del))
 
 /// A simple proc to handle the deletion of the parent, so that it does not force it to hard-delete.
 /datum/looping_sound/proc/handle_parent_del(datum/source)

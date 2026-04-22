@@ -45,11 +45,6 @@
 		QUEUE_SMOOTH(src)
 		QUEUE_SMOOTH_NEIGHBORS(src)
 
-/obj/structure/table/narsie_act()
-	var/atom/A = loc
-	qdel(src)
-	new /obj/structure/table/wood(A)
-
 /obj/structure/table/attack_paw(mob/user)
 	return attack_hand(user)
 

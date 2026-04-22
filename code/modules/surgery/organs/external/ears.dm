@@ -17,8 +17,8 @@
 	current_blood = 2.5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.25
-	hydration_req = 0.25
+	nutriment_req = 0.15
+	hydration_req = 0.15
 
 	low_threshold_passed = "<span class='info'>My ears begin to resonate with an internal ring sometimes.</span>"
 	now_failing = "<span class='warning'>I am unable to hear at all!</span>"

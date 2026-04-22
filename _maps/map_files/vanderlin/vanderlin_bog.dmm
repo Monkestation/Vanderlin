@@ -7988,13 +7988,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/east)
-"gts" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest";
-	aportalid = "vanderlin-forest_bog-bog"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/north/west)
 "guq" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/shelter/bog)
@@ -9386,8 +9379,8 @@
 /area/outdoors/bog/south/west)
 "hPr" = (
 /obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_town-town";
-	aportalid = "vanderlin-bog_town-bog"
+	aportalgoesto = "vanderlin-forest_bog-forest";
+	aportalid = "vanderlin-forest_bog-bog"
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/north)
@@ -9624,13 +9617,6 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
-"ihu" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest2";
-	aportalid = "vanderlin-forest_bog-bog2"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/south/west)
 "ihX" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -25264,9 +25250,9 @@ pNu
 pNu
 pNu
 pNu
-gts
-gts
-gts
+cNF
+cNF
+cNF
 pNu
 pNu
 pNu
@@ -25360,9 +25346,9 @@ wFG
 wFG
 wFG
 wFG
-ihu
-ihu
-ihu
+krA
+krA
+krA
 wFG
 wFG
 wFG

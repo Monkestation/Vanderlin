@@ -137,7 +137,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
 	changed_gliders -= potential_rider
 
-	UnregisterSignal(potential_rider, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_MOVABLE_TURF_EXITED))
+	UnregisterSignal(potential_rider, list(COMSIG_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_MOVABLE_TURF_EXITED))
 
 	if(!length(held_cargo))
 		SEND_SIGNAL(src, COMSIG_TRAM_EMPTY)
@@ -155,7 +155,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 	lift_load += new_lift_contents
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))
-	RegisterSignal(new_lift_contents, COMSIG_PARENT_QDELETING, PROC_REF(RemoveItemFromLift))
+	RegisterSignal(new_lift_contents, COMSIG_QDELETING, PROC_REF(RemoveItemFromLift))
 	RegisterSignal(new_lift_contents, COMSIG_MOVABLE_TURF_EXITED, PROC_REF(UncrossedAtomRemoveItemFromLift))
 
 	return TRUE

@@ -27,7 +27,7 @@
 	src.controller = controller
 	src.extra_info = extra_info
 	if(extra_info)
-		RegisterSignal(extra_info, COMSIG_PARENT_QDELETING, PROC_REF(info_deleted))
+		RegisterSignal(extra_info, COMSIG_QDELETING, PROC_REF(info_deleted))
 	src.moving = moving
 	src.priority = priority
 	src.flags = flags
@@ -221,7 +221,7 @@
 	target = chasing
 
 	if(!isturf(target))
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
 
 /datum/move_loop/has_target/Destroy()
 	target = null

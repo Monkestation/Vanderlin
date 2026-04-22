@@ -641,7 +641,7 @@ SUBSYSTEM_DEF(job)
 	if(job.parent_job)
 		equipping.job_type = job.parent_job.type
 
-	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
+	SEND_SIGNAL(equipping, COMSIG_HUMAN_JOB_RECEIVED, job)
 
 	equipping.mind?.set_assigned_role(job)
 	job.pre_outfit_equip(equipping, player_client) // sigh

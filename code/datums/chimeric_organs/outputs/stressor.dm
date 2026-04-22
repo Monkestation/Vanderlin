@@ -9,8 +9,8 @@
 		return
 
 	unregister_listeners()
-	registered_signals += COMSIG_MOB_ADD_STRESS
-	RegisterSignal(target, COMSIG_MOB_ADD_STRESS, PROC_REF(on_stress_add))
+	registered_signals += COMSIG_CARBON_ADD_STRESS
+	RegisterSignal(target, COMSIG_CARBON_ADD_STRESS, PROC_REF(on_stress_add))
 
 /datum/chimeric_node/output/stressor/trigger_effect(multiplier)
 	. = ..()

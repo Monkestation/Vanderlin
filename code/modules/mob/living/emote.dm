@@ -49,7 +49,7 @@
 
 	follower.whisper(prayer)
 
-	if(SEND_SIGNAL(follower, COMSIG_CARBON_PRAY, prayer) & CARBON_PRAY_CANCEL)
+	if(SEND_SIGNAL(follower, COMSIG_EMOTE_PRAY, prayer) & CARBON_PRAY_CANCEL)
 		return
 
 	SEND_SIGNAL(follower, COMSIG_PRAYER_COMPLETED)

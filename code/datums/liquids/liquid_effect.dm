@@ -108,7 +108,7 @@
 	if(!SSliquids)
 		CRASH("Liquid Turf created with the liquids sybsystem not yet initialized!")
 	RegisterSignal(my_turf, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
-	RegisterSignal(my_turf, COMSIG_PARENT_EXAMINE, PROC_REF(examine_turf))
+	RegisterSignal(my_turf, COMSIG_ATOM_EXAMINE, PROC_REF(examine_turf))
 
 	for(var/direction in GLOB.cardinals)
 		var/turf/cardinal_turf = get_step(src, direction)
@@ -126,7 +126,7 @@
 			turf.liquids.update_appearance(UPDATE_ICON)
 
 /obj/effect/abstract/liquid_turf/Destroy(force)
-	UnregisterSignal(my_turf, list(COMSIG_ATOM_ENTERED, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(my_turf, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXAMINE))
 	if(!isnull(my_turf))
 		liquid_group?.remove_from_group(my_turf)
 		SSliquids.evaporation_queue -= my_turf
@@ -293,7 +293,7 @@
 	RegisterSignal(my_turf, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
 
 /**
- * Handles COMSIG_PARENT_EXAMINE for the turf.
+ * Handles COMSIG_ATOM_EXAMINE for the turf.
  *
  * Adds reagent info to examine text.
  * Arguments:

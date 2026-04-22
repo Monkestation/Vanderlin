@@ -153,7 +153,7 @@
 	else
 		to_chat(box_owner, span_warning("You can't remember who knows the passcode..."))
 
-	RegisterSignal(mystery_box, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine), TRUE)
+	RegisterSignal(mystery_box, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine), TRUE)
 
 /datum/quirk/peculiarity/mystery_box/proc/on_examine(datum/source, mob/user, list/examine_list)
 	if(user == keeper)
@@ -185,7 +185,7 @@
 
 /datum/quirk/peculiarity/mystery_box/on_remove()
 	if(mystery_box)
-		UnregisterSignal(mystery_box, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(mystery_box, COMSIG_ATOM_EXAMINE)
 		qdel(mystery_box)
 
 /obj/item/mystery
