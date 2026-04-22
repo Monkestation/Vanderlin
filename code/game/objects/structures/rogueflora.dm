@@ -112,20 +112,20 @@
 	for(var/obj/structure/flora/tree/normal_tree in range(5, src))
 		if(normal_tree != src && !istype(normal_tree, /obj/structure/flora/tree/wise))
 			RegisterSignal(normal_tree, COMSIG_ATOM_ATTACKBY, TYPE_PROC_REF(/obj/structure/flora/tree/wise, protect_nearby_trees))
-			RegisterSignal(normal_tree, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
+			RegisterSignal(normal_tree, COMSIG_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
 	for(var/obj/structure/flora/newtree/new_tree in range(5, src))
 		if(!new_tree.burnt)
 			RegisterSignal(new_tree, COMSIG_ATOM_ATTACKBY, TYPE_PROC_REF(/obj/structure/flora/tree/wise, protect_nearby_trees))
-			RegisterSignal(new_tree, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
+			RegisterSignal(new_tree, COMSIG_QDELETING, TYPE_PROC_REF(/obj/structure/flora/tree/wise, cleanup_tree))
 
 /obj/structure/flora/tree/wise/proc/cleanup_tree(datum/source)
-	UnregisterSignal(source, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(source, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 
 /obj/structure/flora/tree/wise/Destroy()
 	for(var/obj/structure/flora/tree/normal_tree in range(5, src))
-		UnregisterSignal(normal_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(normal_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 	for(var/obj/structure/flora/newtree/new_tree in range(5, src))
-		UnregisterSignal(new_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(new_tree, list(COMSIG_ATOM_ATTACKBY, COMSIG_QDELETING))
 	return ..()
 
 /obj/structure/flora/tree/wise/proc/protect_nearby_trees(datum/source, obj/item/I, mob/user)
@@ -285,11 +285,11 @@
 
 /obj/structure/chair/bench/ancientlog/post_buckle_mob(mob/living/M)
 	..()
-	M.set_mob_offsets("bed_buckle", _x = 0, _y = 5)
+	M.add_offsets(type, x_add = 0, y_add = 5)
 
 /obj/structure/chair/bench/ancientlog/post_unbuckle_mob(mob/living/M)
 	..()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 //newbushes
 /obj/structure/flora/grass
@@ -469,7 +469,7 @@
 	if(L.m_intent == MOVE_INTENT_RUN)
 		L.visible_message(span_warning("[L] crashes into \a [src]!"), span_danger("I run into \a [src]."))
 		log_combat(L, src, "ran into")
-	else if(L.atom_flags & Z_FALLING)
+	else if(L.currently_z_moving)
 		L.visible_message(span_warning("[L] falls onto \a [src]!"), span_danger("I fall onto \a [src]."))
 		log_combat(L, src, "ran into")
 	else
@@ -477,7 +477,7 @@
 
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.atom_flags & Z_FALLING || HAS_TRAIT(H, TRAIT_STUMBLE))
+		var/was_hard_collision = (H.m_intent == MOVE_INTENT_RUN || H.throwing || H.currently_z_moving || HAS_TRAIT(H, TRAIT_STUMBLE))
 		if(was_hard_collision)
 			var/obj/item/bodypart/BP = pick(H.bodyparts)
 			BP.receive_damage(10)
@@ -613,9 +613,9 @@
 		return
 	return TRUE
 
-/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/flora/shroom_tree/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(get_dir(leaving.loc, new_location) == dir)
+	if(direction == dir)
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 

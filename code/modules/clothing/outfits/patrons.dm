@@ -99,8 +99,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester cloak"

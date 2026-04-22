@@ -57,3 +57,5 @@
 #define CE_ENERGETIC "energetic"
 /// Lowers the subject's voice to a whisper
 #define	CE_VOICELOSS "whispers"
+///increases targets immunity
+#define CE_ANTIBIOTIC "antibiotic"

@@ -8,6 +8,7 @@
 	body_parts_covered = RIGHT_EYE
 	resistance_flags = FLAMMABLE
 	salvage_amount = 1
+	item_weight = 20 GRAMS
 
 /obj/item/clothing/face/eyepatch/left
 	desc = "An eyepatch, fitted for the left eye."

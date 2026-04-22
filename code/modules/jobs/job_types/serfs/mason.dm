@@ -20,7 +20,7 @@
 	)
 
 /datum/job/mason
-	title = "Mason"
+	title = JOB_MASON
 	tutorial = "This city's walls have a memory, and you are their confidant. You work pavement, polish marble, and carve statues for the vainglory of your overlord. \
 	Your true liege, however, is this town's stone. Treat it well, and when your foolish master inevitably gets overthrown, all you have maintained shall in turn protect you."
 	department_flag = PEASANTS
@@ -48,7 +48,7 @@
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
 
 /datum/outfit/mason
-	name = "Mason"
+	name = JOB_MASON
 	head = /obj/item/clothing/head/hatfur
 	armor = /obj/item/clothing/armor/leather/vest
 	cloak = /obj/item/clothing/cloak/apron/waist/colored/brown

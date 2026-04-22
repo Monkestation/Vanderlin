@@ -38,7 +38,7 @@
 
 	grid_width = 64
 	grid_height = 32
-	item_weight = 4
+	item_weight = 300 GRAMS
 
 	var/transfer_prints = FALSE
 	abstract_type = /obj/item/clothing/gloves

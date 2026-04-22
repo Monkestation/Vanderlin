@@ -68,6 +68,24 @@
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/tongue/permanent)
 
+/datum/quirk/vice/mute
+	name = "Mute"
+	desc = "I am entirely unable to speak, and must rely on gestures or writing to communicate. (Being mute is not an excuse to forego roleplay. Use of custom emotes is recommended. This quirk may inhibit spellcasting.)"
+	point_value = 6
+	incompatible_quirks = list(
+		/datum/quirk/vice/tongueless
+	)
+
+/datum/quirk/vice/mute/on_spawn()
+	if(!owner)
+		return
+	ADD_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
+/datum/quirk/vice/mute/on_remove()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_MUTE, QUIRK_TRAIT)
+
 /datum/quirk/vice/wooden_arm_right
 	name = "Wooden Arm (R)"
 	desc = "I lost my right arm long ago, but the wooden arm doesn't bleed as much."
@@ -269,14 +287,14 @@
 			F.whp = 10
 
 	var/list/spawn_points = list()
-	for(var/obj/effect/landmark/start/adventurerlate/L in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/outsider/L in GLOB.latejoin_landmarks)
 		spawn_points += get_turf(L)
 
 	if(length(spawn_points))
 		var/turf/spawn_turf = pick(spawn_points)
 		H.forceMove(spawn_turf)
 	else
-		for(var/obj/effect/landmark/start/L in GLOB.start_landmarks_list)
+		for(var/obj/effect/landmark/start/L in GLOB.latejoin_landmarks)
 			spawn_points += get_turf(L)
 		if(length(spawn_points))
 			H.forceMove(pick(spawn_points))
@@ -300,7 +318,7 @@
 
 	// Move owner to vagrant spawn first
 	var/list/vagrant_spawns = list()
-	for(var/obj/effect/landmark/start/vagrant/V in GLOB.start_landmarks_list)
+	for(var/obj/effect/landmark/start/vagrant/V in GLOB.roundstart_landmarks)
 		vagrant_spawns += get_turf(V)
 
 	if(length(vagrant_spawns))
@@ -410,3 +428,19 @@
 		if(in_darkness)
 			in_darkness = FALSE
 			to_chat(owner, span_notice("Finally, light! I can breathe again..."))
+
+/datum/quirk/vice/missing_teeth
+	name = "Missing Teeth"
+	desc = "Years of brawling, bad luck, or bad hygiene have cost you several teeth. You lisp noticeably."
+	point_value = 2
+
+/datum/quirk/vice/missing_teeth/on_spawn()
+	if(!ishuman(owner))
+		return
+	var/mob/living/carbon/human/H = owner
+	var/obj/item/bodypart/mouth/jaw = H.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(!jaw)
+		return
+	var/to_remove = rand(6, 8)
+	jaw.remove_teeth(to_remove)
+	to_chat(H, span_warning("You run your tongue across the gaps where your teeth used to be."))

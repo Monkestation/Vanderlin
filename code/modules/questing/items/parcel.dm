@@ -24,7 +24,7 @@
 			for(var/datum/job/job as anything in allowed_jobs)
 				job_names |= initial(job.title)
 
-			RegisterSignal(courier_quest, COMSIG_PARENT_QDELETING, PROC_REF(on_quest_component_deleted))
+			RegisterSignal(courier_quest, COMSIG_QDELETING, PROC_REF(on_quest_component_deleted))
 
 	invisibility = INVISIBILITY_OBSERVER
 	proximity_monitor = new(src, 5)

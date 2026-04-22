@@ -230,7 +230,7 @@
 /obj/machinery/proc/can_be_overridden()
 	. = 1
 
-/obj/machinery/Exited(atom/movable/gone, atom/new_loc)
+/obj/machinery/Exited(atom/movable/gone, direction)
 	. = ..()
 	if (gone == occupant)
 		occupant = null
@@ -248,14 +248,14 @@
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+			user.add_offsets("structure_climb", x_add = 0, y_add = climb_offset)
 
 /obj/machinery/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.reset_offsets("structure_climb")
+			user.remove_offsets("structure_climb")
 
 /obj/machinery/MouseDrop_T(atom/movable/O, mob/user)
 	. = ..()

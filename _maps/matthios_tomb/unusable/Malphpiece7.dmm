@@ -40,7 +40,7 @@
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/sewer)
 "v" = (
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
+/obj/item/gun/ballistic/bow/short,
 /obj/item/ammo_holder/quiver/arrows,
 /obj/item/clothing/head/rare/elfplate/welfplate,
 /obj/item/clothing/cloak/raincloak/colored/green,

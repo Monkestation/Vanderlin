@@ -60,6 +60,8 @@
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
 
+/datum/job/advclass/puritan/preceptor/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
 	var/static/list/gear = list(
 		"Knuckleduster and Knuckleduster",
 		"Katar and Katar",
@@ -73,14 +75,15 @@
 			spawned.put_in_hands(new /obj/item/weapon/katar/psydon(get_turf(spawned)), TRUE)
 			spawned.put_in_hands(new /obj/item/weapon/katar/psydon(get_turf(spawned)), TRUE)
 
-/datum/outfit/job/preceptor/pre_equip(mob/living/carbon/human/H)
-	..()
+/datum/outfit/job/preceptor
 	name = "Preceptor (Herr Prafekt)"
 	shoes = /obj/item/clothing/shoes/psydonboots
 	armor = /obj/item/clothing/armor/regenerating/skin/disciple
 	backl = /obj/item/storage/backpack/satchel/otavan
-	backpack_contents = list(/obj/item/storage/keyring/inquisitor = 1,
-	/obj/item/paper/inqslip/arrival/inq = 1)
+	backpack_contents = list(
+		/obj/item/storage/keyring/inquisitor = 1,
+		/obj/item/paper/inqslip/arrival/inq = 1,
+	)
 	belt = /obj/item/storage/belt/leather/rope/dark
 	pants = /obj/item/clothing/pants/tights/colored/black
 	cloak = /obj/item/clothing/cloak/cape/inquisitor

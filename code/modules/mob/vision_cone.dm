@@ -93,20 +93,24 @@
 	if(!client)
 		return
 	SEND_SIGNAL(src, COMSIG_FOV_SHOW)
-	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
-	PM?.backdrop(src)
 
 /mob/proc/hide_cone()
 	if(!client)
 		return
 	SEND_SIGNAL(src, COMSIG_FOV_HIDE)
-	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
-	PM?.backdrop(src)
 
 /mob/proc/update_fov_angles()
 	fovangle = initial(fovangle)
 	if(ishuman(src) && fovangle)
 		var/mob/living/carbon/human/H = src
+		var/obj/item/organ/eyes/LE = LAZYACCESS(H.eye_organs, 1)
+		var/obj/item/organ/eyes/RE = LAZYACCESS(H.eye_organs, 2)
+		var/left_damage = (LE ? LE.get_eye_damage_level() : 3)
+		var/right_damage = (RE ? RE.get_eye_damage_level() : 3)
+		if(left_damage >= 3)
+			fovangle |= FOV_LEFT
+		if(right_damage >= 3)
+			fovangle |= FOV_RIGHT
 		if(H.head?.block2add)
 			fovangle |= H.head.block2add
 		if(H.wear_mask?.block2add)
@@ -156,3 +160,34 @@
 		new_angle = 0
 
 	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
+
+/atom/movable/screen/fullscreen/impaired/left
+	icon_state = "impairedoverlay_left"
+
+/atom/movable/screen/fullscreen/impaired/right
+	icon_state = "impairedoverlay_right"
+
+/mob/living/carbon/proc/update_eyes()
+	if(!client)
+		return
+	var/obj/item/organ/eyes/LE = LAZYACCESS(eye_organs, 1)
+	var/obj/item/organ/eyes/RE = LAZYACCESS(eye_organs, 2)
+	var/left_damage = (LE ? LE.get_eye_damage_level() : 3)
+	var/right_damage = (RE ? RE.get_eye_damage_level() : 3)
+	if((left_damage >= 3) && (right_damage >= 3))
+		become_blind(EYE_DAMAGE)
+		return TRUE
+	else
+		cure_blind(EYE_DAMAGE)
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(!fov)
+		if(left_damage in 1 to 2)
+			overlay_fullscreen("left_eye_damage", /atom/movable/screen/fullscreen/impaired/left, left_damage)
+		else
+			clear_fullscreen("left_eye_damage")
+		if(right_damage in 1 to 2)
+			overlay_fullscreen("right_eye_damage", /atom/movable/screen/fullscreen/impaired/right, right_damage)
+		else
+			clear_fullscreen("right_eye_damage")
+	update_fov_angles()
+	return TRUE

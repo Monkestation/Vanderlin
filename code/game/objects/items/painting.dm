@@ -8,6 +8,7 @@
 	static_price = TRUE
 	sellprice = 20
 	icon = 'icons/roguetown/misc/decoration.dmi'
+	item_weight = 1.5 KILOGRAMS
 	var/deployed_structure = /obj/structure/fluff/walldeco/painting
 
 /obj/item/painting/attack_atom(atom/attacked_atom, mob/living/user)

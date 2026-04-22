@@ -10,7 +10,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
-	item_weight = 4
+	item_weight = 800 GRAMS
 
 /obj/item/clothing/gloves/angle/grenzel
 	name = "grenzelhoft gloves"
@@ -23,9 +23,9 @@
 	name = "osslandic fur-lined leather gloves"
 	desc = "Thick, padded gloves made for the harshest of climates and the wildest of beasts encountered in the untamed north."
 	icon_state = "gronnleathergloves"
-	item_state = "gronnleathergloves"
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	color = "#ffffff"
 
 /obj/item/clothing/gloves/angle/gronnfur
@@ -34,9 +34,9 @@
 			and the back of the hand, offering superior protection against\
 			the claws of beasts and plants alike. Commonly worn by gatherers."
 	icon_state = "gronnfurgloves"
-	item_state = "gronnfurgloves"
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	unarmed_bonus = 1.25
 	max_integrity = 250
 	color = "#ffffff"

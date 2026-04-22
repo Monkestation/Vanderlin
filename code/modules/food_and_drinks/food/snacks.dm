@@ -42,6 +42,7 @@ All foods are distributed among various categories. Use common sense.
 	foodtype = GRAIN
 	list_reagents = list()
 	var/nutrition = 1
+	var/vitamin = 0.25
 	w_class = WEIGHT_CLASS_SMALL
 	var/transfers_tastes = FALSE
 	var/bitesize = 3 // how many times you need to bite to consume it fully
@@ -328,7 +329,11 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(nutrition)
-		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
+		if(vitamin)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition * (1-vitamin), length(tastes) ? list("tastes" = tastes) : null)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, nutrition * vitamin, length(tastes) ? list("tastes" = tastes) : null)
+		else
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
 	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
@@ -478,7 +483,7 @@ All foods are distributed among various categories. Use common sense.
 						qdel(particle_spewer)
 					plate_check.update_appearance(UPDATE_OVERLAYS)
 
-		if(M == user)								//If you're eating it myself.
+		if(M == user)
 			switch(M.nutrition)
 				if(NUTRITION_LEVEL_FAT to INFINITY)
 					user.visible_message("<span class='notice'>[user] forces [M.p_them()]self to eat \the [src].</span>", "<span class='notice'>I force myself to eat \the [src].</span>")
@@ -488,7 +493,7 @@ All foods are distributed among various categories. Use common sense.
 					user.visible_message("<span class='notice'>[user] hungrily [eatverb]s \the [src], gobbling it down!</span>", "<span class='notice'>I hungrily [eatverb] \the [src], gobbling it down!</span>")
 					M.changeNext_move(CLICK_CD_MELEE * 0.5)
 		else
-			if(!isbrain(M))		//If you're feeding it to someone else.
+			if(!isbrain(M))
 				if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
 					M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
 										"<span class='warning'>[user] cannot force any more of [src] down your throat!</span>")
@@ -510,11 +515,25 @@ All foods are distributed among various categories. Use common sense.
 				to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
 				return
 
-		if(reagents)								//Handle ingestion of the reagent.
+		if(reagents)
 			if(M.satiety > -200)
 				M.satiety -= junkiness
 			playsound(M,'sound/misc/eat.ogg', rand(30,60), TRUE)
 			if(reagents.total_volume)
+				var/jaw_efficiency = LIMB_EFFICIENCY_OPTIMAL
+				if(iscarbon(M))
+					var/obj/item/bodypart/jaw = M.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+					if(jaw)
+						jaw_efficiency = jaw.limb_efficiency
+				if(jaw_efficiency <= LIMB_EFFICIENCY_DISABLING)
+					to_chat(user, span_warning("[M == user ? "Your" : "[M]'s"] jaw is far too inefficient to take a bite."))
+					return FALSE
+
+				if(jaw_efficiency < LIMB_EFFICIENCY_OPTIMAL)
+					var/chew_time = lerp(3 SECONDS, 1 SECONDS, jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL)
+					if(!do_after(M == user ? user : M, chew_time, M))
+						return FALSE
+
 				SEND_SIGNAL(src, COMSIG_FOOD_EATEN, M, user)
 				SEND_SIGNAL(M, COMSIG_MOB_FOOD_EAT, src)
 				var/fraction = min(bitesize / reagents.total_volume, 1)
@@ -522,7 +541,7 @@ All foods are distributed among various categories. Use common sense.
 				if((bitecount >= bitesize) || (bitesize == 1))
 					amt2take = reagents.total_volume
 
-				reagents.trans_to(M, amt2take, transfered_by = user, method = INGEST)
+				reagents.trans_to(M, CEILING(amt2take * (jaw_efficiency / LIMB_EFFICIENCY_OPTIMAL), 1), transfered_by = user, method = INGEST)
 
 				if(M.has_quirk(/datum/quirk/boon/naturalist) && naturalist)
 					for(var/datum/reagent/R in reagents.reagent_list)

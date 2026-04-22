@@ -194,7 +194,7 @@
 		stressors += new_event
 		adjust_stress(new_event.get_stress(src))
 		new_event.on_apply(src)
-	SEND_SIGNAL(src, COMSIG_MOB_ADD_STRESS, new_event)
+	SEND_SIGNAL(src, COMSIG_CARBON_ADD_STRESS, new_event)
 
 /// Accepts stress typepaths or a list of stress typepaths to remove.
 /mob/living/carbon/remove_stress(event_to_remove)

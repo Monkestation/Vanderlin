@@ -20,6 +20,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	grid_height = 64
 	grid_width = 32
+	item_weight = 560 GRAMS
 
 	flags_ai_inventory = AI_ITEM_GRENADE
 

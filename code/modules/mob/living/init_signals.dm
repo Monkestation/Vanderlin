@@ -30,8 +30,16 @@
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_ENABLED, PROC_REF(on_movement_type_flag_enabled))
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_DISABLED, PROC_REF(on_movement_type_flag_disabled))
 
+	RegisterSignal(src, COMSIG_MOVABLE_EDIT_UNIQUE_IMMERSE_OVERLAY, PROC_REF(edit_immerse_overlay))
+
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_DEAF), PROC_REF(on_hearing_loss))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_DEAF), PROC_REF(on_hearing_regain))
+
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_LEPROSY), PROC_REF(on_leprosy_trait_gain))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_LEPROSY), PROC_REF(on_leprosy_trait_loss))
+
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_CRATEMOVER), PROC_REF(on_cratemover_trait_gain))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_CRATEMOVER), PROC_REF(on_cratemover_trait_loss))
 
 ///Called when TRAIT_KNOCKEDOUT is added to the mob.
 /mob/living/proc/on_knockedout_trait_gain(datum/source)
@@ -179,22 +187,6 @@
 		attributes?.subtract_sheet(/datum/attribute_holder/sheet/job/leper_vice)
 	remove_stat_modifier(TRAIT_LEPROSY)
 
-///Called when TRAIT_BRIAR_HOST is added to the mob.
-/mob/living/proc/on_black_briar_trait_gain(datum/source)
-	SIGNAL_HANDLER
-	if(!iscarbon(src))
-		return
-	var/datum/wound/black_briar_curse/chest/root = has_wound(/datum/wound/black_briar_curse/chest)
-	if(root) // we already had a root, so remove the traits that even gave us this
-		root.remove_immunity(src)
-		return
-	var/obj/item/bodypart/bp = get_bodypart() // defaults to chest
-	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
-	root?.infection = root.max_infection * BBC_STAGE_LATE
-	root?.infection_percent = BBC_STAGE_LATE
-
-//nothing happens when we remove it so we don't need a remove
-
 ///Called when TRAIT_CRATEMOVER is added to the mob.
 /mob/living/proc/on_cratemover_trait_gain(datum/source)
 	SIGNAL_HANDLER
@@ -216,6 +208,11 @@
 /mob/living/proc/on_movement_type_flag_disabled(datum/source, trait)
 	SIGNAL_HANDLER
 	update_movespeed(FALSE)
+
+/mob/living/proc/edit_immerse_overlay(datum/source, atom/movable/immerse_mask/effect_relay)
+	SIGNAL_HANDLER
+	effect_relay.transform = effect_relay.transform.Scale(1 / current_size)
+	effect_relay.transform = effect_relay.transform.Turn(-lying_angle)
 
 ///Called when [TRAIT_DEAF] is added to the mob
 /mob/living/proc/on_hearing_loss()

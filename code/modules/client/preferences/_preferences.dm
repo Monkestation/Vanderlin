@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/toggles = TOGGLES_DEFAULT
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
 	var/toggles_maptext = NONE
+	var/toggles_gameplay = NONE
 	var/ghost_form = "ghost"
 	var/ghost_orbit = GHOST_ORBIT_CIRCLE
 	var/ghost_accs = GHOST_ACCS_DEFAULT_OPTION
@@ -814,7 +815,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
 
-/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list("Captain", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 400, height = 620)
+/datum/preferences/proc/set_choices(mob/user, limit = 15, list/splitJobs = list(JOB_GUARD_CAPTAIN, JOB_PRIEST, JOB_MERCHANT, JOB_BUTLER, "Village Elder"), widthPerColumn = 400, height = 620)
 	if(!SSjob)
 		return
 
@@ -1027,10 +1028,6 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 						var/available_in_days = job.available_in_days(user.client)
 						category_html += "[used_name]</td><td><font color=red> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
 						continue
-					if(CONFIG_GET(flag/usewhitelist))
-						if(job.whitelist_req && (!user.client.whitelisted()))
-							category_html += "<font color=#6183a5>[used_name]</font></td><td> </td></tr>"
-							continue
 					var/lock_html = get_job_lock_html(job, user, used_name)
 					if(lock_html)
 						category_html += lock_html
@@ -1496,7 +1493,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	else if(href_list["preference"] == "toggles")
 		var/list/toggles_list = list(
 			"Default Toggles" = list("toggles_default", toggles),
-			"Maptext Toggles" = list("toggles_maptext", toggles_maptext)
+			"Maptext Toggles" = list("toggles_maptext", toggles_maptext),
+			"Gameplay Toggles" = list("toggles_gameplay", toggles_gameplay),
 		)
 		var/toggle_type = browser_input_list(user, title = "Toggle Select", items = toggles_list)
 		if(!toggle_type)
@@ -1506,26 +1504,29 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		var/prefs_variable = toggles_data[2]
 		var/new_toggles = input_bitfield(user, toggle_type, bitfield, prefs_variable, nheight = 500)
 		if(!isnull(new_toggles))
-			if(toggle_type == "Default Toggles")
-				// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
-				// And don't want to override them
-				for(var/field in GLOB.bitfields[bitfield])
-					toggles &= ~GLOB.bitfields[bitfield][field]
-				toggles ^= new_toggles
-				if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
-					user.client.playtitlemusic()
-				else
-					user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+			switch(toggle_type)
+				if("Default Toggles")
+					// Reset all fields we touch to 0 first because we don't use a full set to do toggles = X
+					// And don't want to override them
+					for(var/field in GLOB.bitfields[bitfield])
+						toggles &= ~GLOB.bitfields[bitfield][field]
+					toggles ^= new_toggles
+					if((prefs_variable & SOUND_LOBBY) && user.client && isnewplayer(user))
+						user.client.playtitlemusic()
+					else
+						user.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 
-				if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
-					user.refresh_looping_ambience()
-				else
-					user.cancel_looping_ambience()
+					if((prefs_variable & SOUND_SHIP_AMBIENCE) && user.client && !isnewplayer(user))
+						user.refresh_looping_ambience()
+					else
+						user.cancel_looping_ambience()
 
-				user.client?.update_ambience_pref()
+					user.client?.update_ambience_pref()
+				if("Maptext Toggles")
+					toggles_maptext = new_toggles
 
-			else if(toggle_type == "Maptext Toggles")
-				toggles_maptext = new_toggles
+				if("Gameplay Toggles")
+					toggles_gameplay = new_toggles
 
 	switch(href_list["task"])
 		if("change_customizer")
@@ -1912,12 +1913,12 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_ooccolor)
-						ooccolor = sanitize_ooccolor(new_ooccolor)
+						ooccolor = sanitize_color(new_ooccolor)
 
 				if("asaycolor")
 					var/new_asaycolor = input(user, "Choose your ASAY color:", "Game Preference", asaycolor) as color|null
 					if(new_asaycolor)
-						asaycolor = sanitize_ooccolor(new_asaycolor)
+						asaycolor = sanitize_color(new_asaycolor)
 				if ("clientfps")
 					var/desiredfps = input(user, "Choose your desired fps. (0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
 					if (!isnull(desiredfps))

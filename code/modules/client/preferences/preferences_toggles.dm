@@ -479,7 +479,7 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 		return
 	var/new_asaycolor = input(src, "Please select your ASAY color.", "ASAY color", prefs.asaycolor) as color|null
 	if(new_asaycolor)
-		prefs.asaycolor = sanitize_ooccolor(new_asaycolor)
+		prefs.asaycolor = sanitize_color(new_asaycolor)
 		prefs.save_preferences()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set ASAY Color")
 	return
@@ -536,7 +536,7 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 
 	var/new_ooccolor = input(src, "Please select your OOC color.", "OOC color", prefs.ooccolor) as color|null
 	if(new_ooccolor)
-		prefs.ooccolor = sanitize_ooccolor(new_ooccolor)
+		prefs.ooccolor = sanitize_color(new_ooccolor)
 		prefs.save_preferences()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set personal admin OOC color")
 	return

@@ -18,6 +18,7 @@
 	resistance_flags = FLAMMABLE
 	grid_height = 32
 	grid_width = 32
+	item_weight = 200 GRAMS
 
 /obj/item/bait/Initialize()
 	. = ..()
@@ -111,6 +112,7 @@
 							/mob/living/simple_animal/hostile/retaliate/saigabuck = 20,
 							/mob/living/simple_animal/hostile/retaliate/wolf = 10)
 
+	item_weight = 200 GRAMS
 
 /obj/item/bait/bloody
 	name = "bag of bloodbait"
@@ -122,6 +124,7 @@
 						/mob/living/simple_animal/hostile/retaliate/troll/axe = 5,
 						/mob/living/simple_animal/hostile/retaliate/troll/bog = 5,
 						/mob/living/simple_animal/hostile/retaliate/troll/caerbannog = 2.5)
+	item_weight = 250 GRAMS
 
 /obj/item/bait/forestdelight
 	name = "meat wrapped in strange herbs"
@@ -129,3 +132,4 @@
 	icon_state = "baitbriar"
 	attracted_types = list (/mob/living/simple_animal/hostile/retaliate/mole/briars = 50,
 						/mob/living/simple_animal/pet/cat/cabbit = 5) // cause get rabbited
+	item_weight = 150 GRAMS

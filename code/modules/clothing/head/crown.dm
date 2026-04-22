@@ -5,11 +5,13 @@
 	sewrepair = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	abstract_type = /obj/item/clothing/head/crown
+	item_weight = 2.23 KILOGRAMS //the weight of the crown or something thematic
 
 /obj/item/clothing/head/crown/circlet
 	name = "golden circlet"
 	icon_state = "goldcirclet"
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 600 GRAMS
 
 /obj/item/clothing/head/crown/circlet/golddiadem
 	name = "gold diadem"
@@ -30,12 +32,14 @@
 	name = "zenarii headdress"
 	desc = "A fancy headdress made out of zenarii. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_g"
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/crown/circlet/silverheaddress
 	name = "ziliquae headdress"
 	desc = "A fancy headdress made out of ziliquae. Light and fashionable, it's worn by the noble ladies of The Zaladin Dynasty."
 	icon_state = "headdress_s"
 	sellprice = VALUE_SILVER_ITEM
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/crown/circlet/silverheaddress/Initialize()
 	. = ..()
@@ -132,6 +136,7 @@
 	desc = "Winner of tournaments, bask in Ravox's glory."
 	icon_state = "sparrowcrown"
 	sellprice = VALUE_GOLD_ITEM
+	item_weight = 125 GRAMS
 
 /*obj/item/clothing/head/crown/hemhem
 	name = "hemhem crown"

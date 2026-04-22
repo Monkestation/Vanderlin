@@ -59,9 +59,10 @@
 		H.underwear_color = CLOTHING_SOOT_BLACK
 		H.update_body()
 
-/datum/job/advclass/mercenary/gloryhound/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/mercenary/gloryhound/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/weapons = list("Sword", "Polehammer", "Mace")
+
+	var/static/list/weapons = list("Sword", "Polehammer", "Mace")
 	var/weapon_choice = tgui_input_list(player_client, "TAKE UP ARMS", "FOR FORTUNE AND GLORY!", weapons)
 	switch(weapon_choice)
 		if("Sword")

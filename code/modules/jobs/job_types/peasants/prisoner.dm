@@ -40,7 +40,7 @@
 	)
 
 /datum/job/prisoner
-	title = "Prisoner"
+	title = JOB_PRISONER
 	tutorial = "For a crime, or false allegation; as a hostage against another, \
 	or held for ransom: your fate until this day has been ill-starred save its first. \
 	Perhaps your story, which none but you recall, \
@@ -72,11 +72,13 @@
 		TRAIT_BANDITCAMP
 	)
 
-/datum/job/prisoner/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/prisoner/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/prisonertype = "Commoner" //If you're Tiefling, Hollowkin, or Medicator, this is your only option.
 	if(spawned.dna?.species?.id in RACES_PLAYER_FOREIGNNOBLE)
-		prisonertype = browser_input_list(player_client, "What kind of prisoner are you?", "Filthy Criminal", list("Noble", "Commoner"))
+		prisonertype = tgui_input_list(player_client, "What kind of prisoner are you?", "Filthy Criminal", list("Noble", "Commoner"))
+
 	if(prisonertype == "Noble")
 		SStreasury.create_bank_account(spawned, 173)
 		spawned?.attributes.add_sheet(/datum/attribute_holder/sheet/job/noble_prisoner)
@@ -84,12 +86,7 @@
 	else
 		spawned?.attributes.add_sheet(/datum/attribute_holder/sheet/job/commoner_prisoner)
 
-	if(spawned.wear_mask)
-		var/obj/I = spawned.wear_mask
-		spawned.dropItemToGround(spawned.wear_mask, TRUE)
-		qdel(I)
-
 /datum/outfit/prisoner
-	name = "Prisoner"
+	name = JOB_PRISONER
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
 	mask = /obj/item/clothing/face/facemask/prisoner

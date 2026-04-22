@@ -13,6 +13,7 @@
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	possible_item_intents = list(/datum/intent/food, /datum/intent/splash, /datum/intent/use)
 	nutrition = FAT_NUTRITION
+	item_weight = 230 GRAMS
 
 /obj/item/reagent_containers/food/snacks/fat/attack(mob/living/M, mob/user, list/modifiers)
 	if(user.used_intent.type == /datum/intent/food)
@@ -62,6 +63,7 @@
 	nutrition = FAT_NUTRITION
 	bitesize = 1
 	dropshrink = 0.75
+	item_weight = 270 GRAMS
 
 /obj/item/reagent_containers/food/snacks/tallow/red
 	name = "redtallow"
@@ -106,7 +108,7 @@
 	nutrition = SUGAR_NUTRITION
 	foodtype = SUGAR | RAW
 	list_reagents = list(/datum/reagent/blood/tiefling = 11)
-
+	item_weight = 150 GRAMS
 
 // -------------- CHOCOLATE -----------------
 /obj/item/reagent_containers/food/snacks/chocolate
@@ -123,6 +125,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/chocolate/chunk
 	eat_effect = /datum/status_effect/buff/foodbuff
 	foodtype = SUGAR | JUNKFOOD
+	item_weight = 225 GRAMS //this is just the weight of the bakers chocolate bar I had in my pantry
 
 /obj/item/reagent_containers/food/snacks/chocolate/chunk
 	eat_effect = null
@@ -134,6 +137,7 @@
 	tastes = list("chocolate" = 1)
 	faretype = FARE_NEUTRAL
 	foodtype = SUGAR | JUNKFOOD
+	item_weight = 70 GRAMS
 
 
 // -------------- SALUMOI (dwarven smoked sausage) -----------------
@@ -152,6 +156,7 @@
 	slice_sound = TRUE
 	faretype = FARE_POOR
 	foodtype = MEAT
+	item_weight = 325 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/salami/update_icon_state()
 	if(slices_num)
@@ -183,6 +188,7 @@
 	tastes = list("salted meat" = 1)
 	faretype = FARE_NEUTRAL
 	foodtype = MEAT
+	item_weight = 55 GRAMS
 
 // -------------- COPPIETTE (dried meat) -----------------
 /obj/item/reagent_containers/food/snacks/cooked/coppiette
@@ -197,6 +203,7 @@
 	nutrition = RAWMEAT_NUTRITION*DRIED_MOD
 	faretype = FARE_POOR
 	foodtype = MEAT
+	item_weight = 175 GRAMS
 
 
 // -------------- SALTFISH -----------------
@@ -214,6 +221,7 @@
 	dropshrink = 0.6
 	faretype = FARE_POOR
 	foodtype = MEAT
+	item_weight = 175 GRAMS
 
 /obj/item/reagent_containers/food/snacks/saltfish/CheckParts(list/parts_list)
 	for(var/obj/item/reagent_containers/food/snacks/M in parts_list)
@@ -259,6 +267,7 @@
 	slice_path = FALSE
 	nutrition = (FAT_NUTRITION*2*DRIED_MOD) * 0.25
 	foodtype = MEAT
+	item_weight = 30 GRAMS
 
 /*------------\
 | Dried Fruit |
@@ -277,6 +286,7 @@
 	tastes = list("dried fruit" = 1)
 	foodtype = FRUIT
 	faretype = FARE_POOR
+	item_weight = 5 GRAMS
 
 /obj/item/reagent_containers/food/snacks/raisins/CheckParts(list/parts_list)
 	..()
@@ -302,6 +312,7 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 	nutrition = DRIEDFRUIT_NUTRITION
+	item_weight = 6 GRAMS
 
 // -------------- TANGERINE -----------------
 
@@ -315,6 +326,7 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 	nutrition = DRIEDFRUIT_NUTRITION
+	item_weight = 44 GRAMS
 
 // -------------- PLUM -----------------
 
@@ -328,6 +340,7 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 	nutrition = DRIEDFRUIT_NUTRITION
+	item_weight = 33 GRAMS
 
 // -------------- APPLE -----------------
 
@@ -341,6 +354,7 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 	nutrition = DRIEDFRUIT_NUTRITION
+	item_weight = 91 GRAMS
 
 // -------------- PEAR -----------------
 
@@ -354,6 +368,7 @@
 	foodtype = FRUIT
 	faretype = FARE_NEUTRAL
 	nutrition = DRIEDFRUIT_NUTRITION
+	item_weight = 86 GRAMS
 
 /***************** Mushrooms *****************/
 
@@ -369,6 +384,7 @@
 	faretype = FARE_POOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	nutrition = VEGGIE_NUTRITION*DRIED_MOD
+	item_weight = 7 GRAMS
 
 /*------------\
 | Salted milk |
@@ -430,6 +446,7 @@
 	slice_sound = TRUE
 	tastes = list("butter" = 1)
 	faretype = FARE_IMPOVERISHED
+	item_weight = 150 GRAMS
 
 /obj/item/reagent_containers/food/snacks/butter/update_icon_state()
 	if(slices_num)
@@ -462,6 +479,7 @@
 	tastes = list("butter" = 1)
 	bitesize = 1
 	faretype = FARE_IMPOVERISHED
+	item_weight = 25 GRAMS
 
 /*	............   Pestran Stick   ................ */
 
@@ -475,6 +493,7 @@
 	foodtype = DAIRY
 	bitesize = 3
 	faretype = FARE_POOR
+	item_weight = 240 GRAMS
 
 /*-------\
 | Cheese |
@@ -532,6 +551,7 @@
 	do_random_pixel_offset = FALSE
 	grid_height = 32
 	grid_width = 96
+	item_weight = 2.2 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_start/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
@@ -556,6 +576,7 @@
 	do_random_pixel_offset = FALSE
 	grid_height = 32
 	grid_width = 96
+	item_weight = 2.5 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_two/attackby(obj/item/I, mob/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
@@ -580,6 +601,7 @@
 	do_random_pixel_offset = FALSE
 	grid_height = 32
 	grid_width = 96
+	item_weight = 2.7 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/foodbase/cheesewheel_three/attackby(obj/item/I, mob/living/user, list/modifiers)
 	var/found_table = locate(/obj/structure/table) in (loc)
@@ -622,6 +644,7 @@
 	become_rot_type = null
 	slice_path = null
 	faretype = FARE_POOR
+	item_weight = 224 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheese/gote
 	name = "fresh gote cheese"
@@ -644,6 +667,7 @@
 	grid_height = 32
 	grid_width = 96
 	foodtype = DAIRY
+	item_weight = 3 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/cheddar/aged
 	name = "wheel of aged cheese"
@@ -653,6 +677,7 @@
 	rotprocess = null
 	sellprice = 60
 	faretype = FARE_FINE
+	item_weight = 3 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/cheese_wedge
 	name = "wedge of cheese"
@@ -673,6 +698,7 @@
 					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 					/obj/item/reagent_containers/food/snacks/fish/angler = 1,
 					/obj/item/reagent_containers/food/snacks/fish/shrimp = 3)
+	item_weight = 500 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheese_wedge/aged
 	name = "wedge of aged cheese"
@@ -703,6 +729,7 @@
 					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 					/obj/item/reagent_containers/food/snacks/fish/shrimp = 3)
 	faretype = FARE_FINE
+	item_weight = 155 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheddarslice/aged
 	name = "slice of aged cheese"
@@ -734,6 +761,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_POOR
+	item_weight = 950 GRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_base
 	name = "plain gelatine slice"
@@ -748,6 +776,7 @@
 	rotprocess = null
 	faretype = FARE_POOR
 	nutrition = (SUGAR_NUTRITION*2 + FAT_NUTRITION) * 0.25
+	item_weight = 950 GRAMS
 
 
 // -------------- Apple Gelatine -----------------
@@ -769,6 +798,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_FINE
+	item_weight = 1 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_apple
 	name = "apple gelatine slice"
@@ -782,6 +812,7 @@
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
+	item_weight = 250 GRAMS
 
 // -------------- Tangeringe Gelatine -----------------
 
@@ -802,6 +833,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_FINE
+	item_weight = 1 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_tangerine
 	name = "tangerine gelatine slice"
@@ -815,7 +847,7 @@
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
-
+	item_weight = 250 GRAMS
 
 // -------------- Plum Gelatine -----------------
 
@@ -836,6 +868,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_FINE
+	item_weight = 1 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_plum
 	name = "plum gelatine slice"
@@ -849,6 +882,8 @@
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
+	item_weight = 250 GRAMS
+
 
 // -------------- Lime Gelatine -----------------
 
@@ -869,6 +904,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_FINE
+	item_weight = 1 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_lime
 	name = "lime gelatine slice"
@@ -882,6 +918,7 @@
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
+	item_weight = 250 GRAMS
 
 // -------------- Pear Gelatine -----------------
 
@@ -902,6 +939,7 @@
 	rotprocess = null
 	bitesize = 4
 	faretype = FARE_FINE
+	item_weight = 1 KILOGRAMS
 
 /obj/item/reagent_containers/food/snacks/jellyslice_pear
 	name = "pear gelatine slice"
@@ -915,3 +953,4 @@
 	foodtype = MEAT | SUGAR | FRUIT
 	rotprocess = null
 	faretype = FARE_FINE
+	item_weight = 250 GRAMS

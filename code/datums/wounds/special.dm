@@ -53,12 +53,6 @@
 	can_cauterize = FALSE
 	critical = TRUE
 
-/datum/wound/facial/eyes/can_apply_to_mob(mob/living/affected)
-	. = ..()
-	if(!.)
-		return
-	return affected.getorganslot(ORGAN_SLOT_EYES)
-
 /datum/wound/facial/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Stun(10)
@@ -73,24 +67,34 @@
 		"The right eye is destroyed!",
 	)
 
+/datum/wound/facial/eyes/right/can_apply_to_mob(mob/living/carbon/affected)
+	. = ..()
+	if(!.)
+		return
+	if(!istype(affected))
+		return
+	var/obj/item/organ/eyes/RE = LAZYACCESS(affected.eye_organs, 2)
+	return RE
+
 /datum/wound/facial/eyes/right/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial/eyes/right))
 		return FALSE
 	return TRUE
 
-/datum/wound/facial/eyes/right/on_mob_gain(mob/living/affected)
+/datum/wound/facial/eyes/right/on_mob_gain(mob/living/carbon/affected)
 	. = ..()
-	ADD_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
+	var/obj/item/organ/eyes/RE = LAZYACCESS(affected.eye_organs, 2)
+	RE.applyOrganDamage(30)
 	affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
-		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
-		if(my_eyes)
-			my_eyes.Remove(affected)
-			my_eyes.forceMove(affected.drop_location())
+		var/list/eye_list = affected.eye_organs
+		for(var/obj/item/organ/eyes/my_eyes as anything in eye_list)
+			if(my_eyes)
+				my_eyes.Remove(affected)
+				my_eyes.forceMove(affected.drop_location())
 
 /datum/wound/facial/eyes/right/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_RIGHT, "[type]")
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/right/permanent
@@ -109,24 +113,34 @@
 		"The left eye is destroyed!",
 	)
 
+/datum/wound/facial/eyes/left/can_apply_to_mob(mob/living/carbon/affected)
+	. = ..()
+	if(!.)
+		return
+	if(!istype(affected))
+		return
+	var/obj/item/organ/eyes/LE = LAZYACCESS(affected.eye_organs, 1)
+	return LE
+
 /datum/wound/facial/eyes/left/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/facial/eyes/left))
 		return FALSE
 	return TRUE
 
-/datum/wound/facial/eyes/left/on_mob_gain(mob/living/affected)
+/datum/wound/facial/eyes/left/on_mob_gain(mob/living/carbon/affected)
 	. = ..()
-	ADD_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
+	var/obj/item/organ/eyes/LE = LAZYACCESS(affected.eye_organs, 1)
+	LE.applyOrganDamage(30)
 	affected.update_fov_angles()
 	if(affected.has_wound(/datum/wound/facial/eyes/left) && affected.has_wound(/datum/wound/facial/eyes/right))
-		var/obj/item/organ/my_eyes = affected.getorganslot(ORGAN_SLOT_EYES)
-		if(my_eyes)
-			my_eyes.Remove(affected)
-			my_eyes.forceMove(affected.drop_location())
+		var/list/eye_list = affected.eye_organs
+		for(var/obj/item/organ/eyes/my_eyes as anything in eye_list)
+			if(my_eyes)
+				my_eyes.Remove(affected)
+				my_eyes.forceMove(affected.drop_location())
 
 /datum/wound/facial/eyes/left/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_CYCLOPS_LEFT, "[type]")
 	affected.update_fov_angles()
 
 /datum/wound/facial/eyes/left/permanent
@@ -227,6 +241,14 @@
 	disabling = TRUE
 	critical = TRUE
 	mortal = TRUE
+
+/datum/wound/cbt/can_apply_to_mob(mob/living/affected)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/bodypart/chest/chest = affected.get_bodypart(BODY_ZONE_CHEST)
+	return chest && chest.status == BODYPART_ORGANIC
+
 
 /datum/wound/cbt/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/cbt))

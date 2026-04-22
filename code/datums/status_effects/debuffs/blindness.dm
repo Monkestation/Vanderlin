@@ -79,8 +79,14 @@
 
 /datum/status_effect/grouped/blindness/tick()
 	. = ..()
+	// if(owner.stat == CONSCIOUS && !owner.has_status_effect(STATUS_EFFECT_SLEEPING))
+	// 	owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind)
+	// else if(owner.has_status_effect(STATUS_EFFECT_SLEEPING))
+	// 	owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind/sleeper)
+	// else
+	// 	owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blackimageoverlay)
 	if(owner.stat == CONSCIOUS || owner.has_status_effect(STATUS_EFFECT_SLEEPING))
-		owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind)
+		owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blind/sleeper)
 	else
 		owner.overlay_fullscreen(id, /atom/movable/screen/fullscreen/blackimageoverlay)
 

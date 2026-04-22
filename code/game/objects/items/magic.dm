@@ -16,6 +16,7 @@
 
 	grid_height = 32
 	grid_width = 32
+	item_weight = 400 GRAMS
 
 	var/mob/current_owner
 	var/last_scry
@@ -27,13 +28,15 @@
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
 	cooldown = 5 MINUTES
+	item_weight = 200 GRAMS
 
 /obj/item/scrying/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(world.time < last_scry + cooldown)
 		to_chat(user, span_warning("I look into [src] but only see inky smoke. Maybe I should wait."))
 		return
-	var/input = stripped_input(user, "Who are you looking for?", "Scrying Orb")
+	var/input = SANITIZE_HEAR_MESSAGE(html_decode(tgui_input_text(user, "Who are you looking for?", "Scrying Orb")))
+
 	if(!input)
 		return
 	if(!user.key)
@@ -51,7 +54,7 @@
 			if(!T)
 				continue
 			if(HAS_TRAIT(HL, TRAIT_ANTISCRYING))
-				to_chat(user, span_warning("I peer into [src], but an impenetrable fog shrouds [input]."))
+				to_chat(user, span_warning("I peer into [src], but an impenetrable fog shrouds [HL.real_name]."))
 				to_chat(HL, span_warning("My magical shrouding reacted to something."))
 				return
 			log_game("SCRYING: [user.real_name] ([user.ckey]) has used the scrying orb to leer at [HL.real_name] ([HL.ckey])")

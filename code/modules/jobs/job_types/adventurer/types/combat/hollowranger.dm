@@ -53,7 +53,7 @@
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/bow/short
 	backl = /obj/item/storage/backpack/satchel
 	beltl = /obj/item/ammo_holder/quiver/arrows
 	beltr = /obj/item/weapon/knife/cleaver/combat

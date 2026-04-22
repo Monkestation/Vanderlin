@@ -549,6 +549,16 @@
 	stress_change = 1
 	desc = span_red("That voice.. That old thief is calling for me, what is it now?")
 
+/datum/stress_event/orphan_calling
+	timer = 30 SECONDS
+	stress_change = 1
+	desc = span_red("That voice.. One of those brats are calling for me, what is it for this time?")
+
+/datum/stress_event/orphan_calling_help
+	timer = 1 MINUTES
+	stress_change = 2
+	desc = span_red("One of my brats are calling for help! Another mess I have to clean up no doubt...")
+
 /datum/stress_event/night_owl_dawn
 	desc = span_warning("I don't like the dae..")
 	stress_change = 1
