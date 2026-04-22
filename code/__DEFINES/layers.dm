@@ -33,6 +33,8 @@
 #define HIGH_SIGIL_LAYER 2.56
 
 #define BELOW_OPEN_DOOR_LAYER 2.6
+///Anything below this layer is to be considered completely (visually) under water by the immerse layer.
+#define WATER_LEVEL_LAYER 2.61
 #define BLASTDOOR_LAYER 2.65
 #define OPEN_DOOR_LAYER 2.7
 #define DOOR_HELPER_LAYER 2.71 //! keep this above OPEN_DOOR_LAYER
@@ -53,7 +55,9 @@
 
 #define BELOW_MOB_LAYER 3.7
 #define LYING_MOB_LAYER 3.8
+#define MOB_BELOW_PIGGYBACK_LAYER 3.94
 //#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define
+#define MOB_ABOVE_PIGGYBACK_LAYER 4.06
 #define ABOVE_MOB_LAYER 4.1
 #define WALL_OBJ_LAYER 4.25
 #define EDGED_TURF_LAYER 4.3
@@ -95,8 +99,6 @@
 
 #define OPENSPACE_PLANE -14 //! Openspace plane below all turfs
 #define OPENSPACE_BACKDROP_PLANE -13 //! Black square just over openspace plane to guaranteed cover all in openspace turf
-
-#define TRANSPARENT_FLOOR_PLANE -12
 
 #define FLOOR_PLANE -11
 #define FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE_RENDER_TARGET"

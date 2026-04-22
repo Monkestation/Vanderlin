@@ -10,6 +10,7 @@
 	var/list/symbol_types
 	var/female_caparison_state = "caparison-f"
 	gender = NEUTER
+	item_weight = 500 GRAMS
 	var/list/valid_animal_types = list(/mob/living/simple_animal/hostile/retaliate/saiga)
 
 /obj/item/caparison/attack(mob/living/M, mob/living/user)
@@ -130,3 +131,4 @@
 	color = COLOR_WHITE
 	detail_types = list("Quad" = "quad")
 	symbol_types = list("Psycross" = "psycross", "Astrata" = "astrata")
+	item_weight = 700 GRAMS

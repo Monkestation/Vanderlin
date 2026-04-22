@@ -30,7 +30,7 @@
 	allowed_race = RACES_PLAYER_ELF_ALL
 	color = null
 	blocksound = PLATEHIT
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate
 	name = "elvish plated boots"
@@ -53,7 +53,7 @@
 	item_state = "dwarfshoe"
 	color = null
 	blocksound = PLATEHIT
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/rare/grenzelplate
 	name = "grenzelhoft \"Elvenbane\" sabatons"
@@ -67,7 +67,7 @@
 	item_state = "human_swordshoes"
 	color = null
 	blocksound = PLATEHIT
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.1 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/rare/zaladplate
 	name = "Zaladin segmented plate boots"
@@ -81,4 +81,4 @@
 	item_state = "human_spearshoe"
 	color = null
 	blocksound = PLATEHIT
-	item_weight = 7 * STEEL_MULTIPLIER
+	item_weight = 2.25 KILOGRAMS

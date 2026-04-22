@@ -218,15 +218,13 @@
 
 /// somehow you've triggered your immunity to get lost, like getting more stacks added to you
 /datum/wound/black_briar_curse/proc/remove_immunity(mob/living/affected)
-	var/list/was_immune = GET_TRAIT_SOURCES(affected, TRAIT_BRIAR_HOST)
-	if(was_immune)
-		REMOVE_TRAIT(affected, TRAIT_BRIAR_HOST, was_immune)
+	affected.remove_quirk(/datum/quirk/black_briar)
 
 /datum/wound/black_briar_curse/proc/try_sprout()
-	if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST) && infection_percent >= BBC_STAGE_LATE)
+	if(!owner.has_quirk(/datum/quirk/black_briar) && infection_percent >= BBC_STAGE_LATE)
 		if(mob_overlay != infection_overlay)
 			mob_overlay = infection_overlay
-			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, 1000)
+			bodypart_owner.bodypart_attacked_by(BCLASS_CUT, 50, null, bodypart_owner.body_zone, TRUE, FALSE, list(CRIT_MOD_CHANCE = -100))
 			playsound(owner, pick('sound/gore/flesh_eat_01.ogg', 'sound/gore/flesh_eat_02.ogg'), 70, FALSE, -1)
 			bodypart_owner.lingering_pain += 20
 			owner.update_damage_overlays()
@@ -305,7 +303,7 @@
 				if(prob(25))
 					owner.drop_all_held_items(FALSE)
 
-		if(!HAS_TRAIT(owner, TRAIT_BRIAR_HOST))
+		if(!owner.has_quirk(/datum/quirk/black_briar))
 			overlay = owner.overlay_fullscreen("briar", /atom/movable/screen/fullscreen/briar, round(lerp(0, 9, (infection_percent - BBC_STAGE_MID) / (1 - BBC_STAGE_MID))))
 			if(COOLDOWN_FINISHED(src, next_limb_infection) && prob(3))
 				var/list/uninfected_bodyparts = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
@@ -338,6 +336,8 @@
 	..()
 	if(infection_percent < BBC_STAGE_LATE)
 		return
+	if(owner.stat == DEAD)
+		return
 	var/mob/living/carbon/C = owner
 	var/organic_bodyparts = 0
 	for(var/obj/item/bodypart/BP in C.bodyparts)
@@ -365,12 +365,12 @@
 	if(!COOLDOWN_FINISHED(src, blossom))
 		return
 	COOLDOWN_START(src, blossom,  rand(5, 10) MINUTES)
-	if(!QDELETED(affected.buckled) && istype(affected.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
+	if(!QDELETED(owner.buckled) && istype(owner.buckled, /obj/structure/vine/black_briar)) // we're still a signpost, dwbi and try again in another cooldown
 		return
 	blossoms++
 	if(infection_percent >= BBC_STAGE_MID)
-		addtimer(CALLBACK(src, PROC_REF(die_in_agony), affected), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
-		playsound(affected, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
+		addtimer(CALLBACK(src, PROC_REF(die_in_agony), owner), 5 SECONDS, (TIMER_UNIQUE|TIMER_DELETE_ME))
+		playsound(owner, 'sound/misc/briarcursewood.ogg', 150, FALSE, 1)
 
 /datum/wound/black_briar_curse/chest/proc/die_in_agony(mob/living/affected)
 	if(QDELETED(affected))
@@ -380,6 +380,8 @@
 		return
 	if(affected.loc != T)
 		affected.forceMove(T)
+	if(affected.buckled)
+		affected.buckled.unbuckle_mob(affected, TRUE)
 	var/list/uninfected_zones = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG) - root_network
 	for(var/zone in uninfected_zones)
 		var/wound_type = get_black_briar_wound_type(zone)
@@ -393,7 +395,7 @@
 		tumor.infection = tumor.max_infection
 		tumor.infection_percent = 1
 		tumor.try_sprout()
-		if(prob(25))
+		if(prob(50))
 			tumor.bodypart_owner?.add_embedded_object(new /obj/item/ore/cursedrosa(), TRUE)
 	if(!bodypart_owner.skeletonized)
 		playsound(affected, 'sound/gore/briarcursegore.ogg', 150, TRUE, 1)
@@ -424,13 +426,13 @@
 	var/mob/living/carbon/C = owner
 	if(infection_percent >= BBC_STAGE_MID)
 		if(QDELETED(concussion))
-			concussion = C.gain_trauma_type(/datum/brain_trauma/mild/concussion, TRAUMA_RESILIENCE_ABSOLUTE)
+			concussion = C.gain_trauma(/datum/brain_trauma/mild/concussion, TRAUMA_RESILIENCE_ABSOLUTE)
 	else if(!QDELETED(concussion))
 		qdel(concussion)
 
 	if(infection_percent >= BBC_STAGE_LATE)
 		if(QDELETED(impediment))
-			impediment = C.gain_trauma_type(/datum/brain_trauma/mild/speech_impediment, TRAUMA_RESILIENCE_ABSOLUTE)
+			impediment = C.gain_trauma(/datum/brain_trauma/mild/speech_impediment, TRAUMA_RESILIENCE_ABSOLUTE)
 	else if(!QDELETED(impediment))
 		qdel(impediment)
 

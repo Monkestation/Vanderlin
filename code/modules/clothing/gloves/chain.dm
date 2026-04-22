@@ -18,7 +18,7 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
 	sewrepair = null
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 50
@@ -38,7 +38,7 @@
 	desc = "Gauntlets made out of interwoven iron chains. Decent melee protection, but are better suited to stop arrows than blades."
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 7 * IRON_MULTIPLIER
+	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
@@ -48,12 +48,12 @@
 	desc = "Gauntlets with gilded fingers fashioned into talons. The tips are all too dull to be of harm."
 	icon_state = "shadowgauntlets"
 	allowed_race = RACES_PLAYER_ELF_ALL
-	item_weight = 6 * STEEL_MULTIPLIER
+	item_weight = 1.55 KILOGRAMS
 
 /obj/item/clothing/gloves/chain/gronn
 	name = "osslandic chain gloves"
 	desc = "A pair of leather gloves with chain to protects the wrists and back of the hand."
+	icon_state = "gronnchaingloves"
 	icon = 'icons/roguetown/clothing/special/gronn.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
-	icon_state = "gronnchaingloves"
-	item_state = "gronnchaingloves"
+	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'

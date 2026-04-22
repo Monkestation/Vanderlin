@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 1,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = 1, // +3 statline 
+		STAT_SPEED = 1, // +3 statline
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/knives = 10,
@@ -42,7 +42,7 @@
 	shoes = /obj/item/clothing/shoes/boots
 	cloak = /obj/item/clothing/cloak/raincloak
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/short
+	backr = /obj/item/gun/ballistic/bow/short
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/weapon/sword/short/iron

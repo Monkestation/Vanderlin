@@ -18,6 +18,7 @@
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_OLDWOOD)
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
 	AddElement(/datum/element/connect_loc, loc_connections)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 	// Shift sprite down when going east/west so that people properly walk on the bridge
 	if(dir == EAST || dir == WEST)
 		pixel_y = base_pixel_y - 7
@@ -67,11 +68,10 @@
 	if(direction != dir && direction != REVERSE_DIR(dir))
 		return FALSE
 
-/obj/structure/bridge/proc/on_exit(datum/source, atom/movable/leaving, atom/new_location)
+/obj/structure/bridge/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
 	if(istype(leaving, /mob/camera))
 		return
-	var/direction = get_dir(loc, new_location)
 	if(direction != dir && direction != REVERSE_DIR(dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
@@ -86,6 +86,7 @@
 	if(obj_broken)
 		obj_broken = FALSE  // Not obj_broken anymore
 		obj_flags = initial(obj_flags)  // so we set back initial flags
+		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 		update_appearance(UPDATE_ICON_STATE)
 
 /// Stakes at the end of a makeshift bridge

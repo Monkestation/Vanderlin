@@ -15,6 +15,7 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	item_weight = 300 GRAMS
 	var/legcuff_multiplicative_slowdown = 3
 
 /obj/item/rope/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning, bypass_equip_delay_self)
@@ -153,6 +154,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 40
 	firefuel = null
+	item_weight = 1.2 KILOGRAMS
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 
 /obj/item/rope/net
@@ -168,6 +170,7 @@
 	gender = NEUTER
 	var/knockdown = 2 SECONDS
 	legcuff_multiplicative_slowdown = 2
+	item_weight = 500 GRAMS
 
 /obj/item/rope/net/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
 	. = ..()
@@ -289,16 +292,16 @@
 /obj/structure/noose/post_buckle_mob(mob/living/M)
 	if(has_buckled_mobs())
 		START_PROCESSING(SSobj, src)
-		M.set_mob_offsets("bed_buckle", _x = 0, _y = 10)
+		M.add_offsets(type, x_add = 0, y_add = 10)
 
 /obj/structure/noose/gallows/post_buckle_mob(mob/living/M)
 	if(has_buckled_mobs())
 		START_PROCESSING(SSobj, src)
-		M.set_mob_offsets("bed_buckle", _x = 6, _y = 16)
+		M.add_offsets(type, x_add = 6, y_add = 16)
 
 /obj/structure/noose/post_unbuckle_mob(mob/living/M)
 	STOP_PROCESSING(SSobj, src)
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 
 /obj/structure/noose/process()
 	if(!has_buckled_mobs())

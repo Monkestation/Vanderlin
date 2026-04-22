@@ -4,3 +4,5 @@
 #define COMSIG_DEVOUR_OVERDRIVE "devour_overdrive"
 #define COMSIG_HANDLE_INFUSION "handle_infusion"
 #define COMSIG_CHIMERIC_ORGAN_TRIGGER "chimeric_organ_trigger"
+
+#define COMSIG_BODYPART_WOUND_REMOVED "bodypart_wound_removed"

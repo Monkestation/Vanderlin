@@ -2,14 +2,16 @@
 	var/list/extra_foods = list()
 	var/excluding_subtypes = FALSE
 	var/list/edible_turfs = list()
+	var/keeps_items = TRUE
 
-/datum/component/abberant_eater/Initialize(list/food_list, exclude_subtypes = FALSE, list/turf_list)
+/datum/component/abberant_eater/Initialize(list/food_list, exclude_subtypes = FALSE, list/turf_list, _keeps_items = TRUE)
 	if(!length(food_list))
 		return COMPONENT_INCOMPATIBLE
 
 	excluding_subtypes = exclude_subtypes
 	extra_foods = excluding_subtypes ? typecacheof(food_list, only_root_path = TRUE) : food_list
 	edible_turfs = turf_list
+	keeps_items = keeps_items
 
 /datum/component/abberant_eater/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOB_ITEM_ATTACK, PROC_REF(try_eat))
@@ -44,7 +46,15 @@
 	SEND_SIGNAL(source, COMSIG_FOOD_EATEN, M, user)
 	SEND_SIGNAL(user, COMSIG_MOB_FOOD_EAT, source)
 	source.on_consume(user)
-	qdel(source)
+	if(keeps_items)
+		var/mob/living/carbon/human/human = parent
+		var/obj/item/bodypart/bodypart_affected = human.get_bodypart(BODY_ZONE_CHEST)
+		if(bodypart_affected)
+			source.forceMove(bodypart_affected)
+			LAZYADD(bodypart_affected.cavity_items, source)
+	else
+		qdel(source)
+
 	return TRUE
 
 /datum/component/abberant_eater/proc/eat_turf(mob/living/user, turf/T, finished_attack_chain)

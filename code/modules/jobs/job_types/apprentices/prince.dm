@@ -1,6 +1,6 @@
 /datum/job/prince
-	title = "Prince"
-	f_title = "Princess"
+	title = JOB_PRINCE
+	f_title = JOB_PRINCE_FEM
 	tutorial = "You've never felt the gnawing of the winter, \
 	never known the bite of hunger and certainly have never known a honest day's work. \
 	You are as free as any bird in the sky, \

@@ -53,6 +53,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// How much pain this wound causes while on a mob
 	var/woundpain = 0
 
+	/// How much this reduces the limb's efficiency
+	var/limb_efficiency_reduction = 0
+
 	/// If TRUE, this wound can be sewn
 	var/can_sew = FALSE
 	/// Sewing progress, because sewing wounds is snowflakey
@@ -208,6 +211,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/obj/item/bodypart/was_bodypart = bodypart_owner
 	var/mob/living/was_owner = owner
 	LAZYREMOVE(bodypart_owner.wounds, src)
+	SEND_SIGNAL(was_bodypart, COMSIG_BODYPART_WOUND_REMOVED, src)
 	bodypart_owner = null //honestly shouldn't be nulling the owner before calling on loss procs
 	owner = null
 	on_bodypart_loss(was_bodypart, was_owner)

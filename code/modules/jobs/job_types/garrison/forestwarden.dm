@@ -25,7 +25,7 @@
 
 
 /datum/job/forestwarden
-	title = "Forest Warden"
+	title = JOB_FOREST_WARDEN
 	tutorial = "You were born in the forest. Alone, you've always felt home in the woods. \
 	In your tenure with the garrison, you've cleaved through the wildlife-- \
 	and for your service in the short-lived Goblin War, the king has granted you nobility. \
@@ -65,13 +65,12 @@
 		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER
 	)
-
-/datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/forestwarden
-	name = "Forest Warden"
+	name = JOB_FOREST_WARDEN
 	cloak = /obj/item/clothing/cloak/wardencloak
 	armor = /obj/item/clothing/armor/plate
 	shirt = /obj/item/clothing/armor/chainmail
@@ -90,5 +89,5 @@
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/key/forrestgarrison = 1,
-		/obj/item/signal_horn = 1
+		/obj/item/signal_horn/ambush = 1
 	)

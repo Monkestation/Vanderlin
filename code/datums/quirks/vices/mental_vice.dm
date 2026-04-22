@@ -429,12 +429,11 @@
 				break
 
 	if(prob(2))
-		var/encumbrance = H.get_encumbrance()
-		if(encumbrance >= 0.5)
+		if(H.encumbrance >= ENCUMBRANCE_MEDIUM)
 			for(var/obj/item/bodypart/BP in H.bodyparts)
 				if(BP.body_zone == BODY_ZONE_CHEST)
 					var/pain_amount = rand(8, 15)
-					if(encumbrance >= 0.8)
+					if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 						pain_amount = rand(15, 25)
 						to_chat(H, span_warning("Your heavy gear puts severe strain on your already painful back!"))
 					else

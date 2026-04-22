@@ -17,8 +17,8 @@ SUBSYSTEM_DEF(death_arena)
 	var/fight_force_end = null
 
 /datum/controller/subsystem/death_arena/fire(resumed = 0)
-	listclearnulls(waiting_fighters)
-	listclearnulls(tollless_clients)
+	list_clear_nulls(waiting_fighters)
+	list_clear_nulls(tollless_clients)
 
 	for(var/client as anything in tollless_clients)
 		if(world.time > tollless_clients[client])
@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(death_arena)
 		return
 	waiting_fighters += fighter
 	tollless_clients[fighter.client.key] = (world.time + 8 MINUTES) - (time_of_death == 0 ? 0 : (world.time - time_of_death))
-	RegisterSignal(fighter, COMSIG_PARENT_QDELETING, PROC_REF(remove_fighter), fighter)
+	RegisterSignal(fighter, COMSIG_QDELETING, PROC_REF(remove_fighter), fighter)
 
 /datum/controller/subsystem/death_arena/proc/remove_fighter(mob/living/fighter)
 	waiting_fighters -= fighter

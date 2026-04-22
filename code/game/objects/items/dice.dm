@@ -25,6 +25,7 @@
 		/obj/item/dice/d12,
 		/obj/item/dice/d20,
 	)
+	item_weight = 150 GRAMS
 
 /obj/item/storage/pill_bottle/dice/suicide_act(mob/user)
 	user.visible_message(span_suicide("[user] is gambling with death! It looks like [user.p_theyre()] trying to commit suicide!"))
@@ -38,6 +39,7 @@
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "d6"
 	w_class = WEIGHT_CLASS_TINY
+	item_weight = 15 GRAMS
 	var/sides = 6
 	var/result = null
 	var/list/special_faces = list() //entries should match up to sides var if used
@@ -105,10 +107,12 @@
 	name = "d4"
 	icon_state = "d4"
 	sides = 4
+	item_weight = 10 GRAMS
 
 /obj/item/dice/d4/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/caltrop, 1, 4) //1d4 damage
+	// 1d4 damage
+	AddComponent(/datum/component/caltrop, min_damage = 1, max_damage = 4)
 
 /obj/item/dice/d6
 	name = "d6"
@@ -146,32 +150,39 @@
 	name = "d8"
 	icon_state = "d8"
 	sides = 8
+	item_weight = 15 GRAMS
 
 /obj/item/dice/d10
 	name = "d10"
 	icon_state = "d10"
 	sides = 10
+	item_weight = 15 GRAMS
 
 /obj/item/dice/d00
 	name = "d00"
 	icon_state = "d00"
 	sides = 10
+	item_weight = 15 GRAMS
+
 
 /obj/item/dice/d12
 	name = "d12"
 	icon_state = "d12"
 	sides = 12
+	item_weight = 15 GRAMS
 
 /obj/item/dice/d20
 	name = "d20"
 	icon_state = "d20"
 	sides = 20
+	item_weight = 20 GRAMS
 
 /obj/item/dice/d100
 	name = "d100"
 	icon_state = "d100"
 	w_class = WEIGHT_CLASS_SMALL
 	sides = 100
+	item_weight = 25 GRAMS
 
 /obj/item/dice/d100/Initialize(mapload, ...)
 	AddElement(/datum/element/update_icon_blocker)

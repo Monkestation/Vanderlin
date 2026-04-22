@@ -25,7 +25,8 @@
 
 /datum/surgery_step/relocate_bone
 	name = "Relocate bones"
-	time = 6.4 SECONDS
+	minimum_time = 5 SECONDS
+	maximum_time = 7 SECONDS
 	accept_hand = TRUE
 	implements = list(
 		TOOL_BONESETTER = 90,
@@ -34,8 +35,8 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_DISLOCATED
 	ignore_clothes = TRUE
-	skill_min = SKILL_RANK_APPRENTICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 
 /datum/surgery_step/relocate_bone/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()

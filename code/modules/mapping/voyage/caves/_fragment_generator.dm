@@ -217,7 +217,7 @@ GLOBAL_LIST_INIT(island_ascents, list())
 		if(!do_after(user, 3 SECONDS, src))
 			return
 
-	movable_travel_z_level(user, get_turf(linked_ascent))
+	user.zMove(target = get_turf(linked_ascent), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/structure/island_descent/proc/attempt_descent(mob/user, is_ghost = FALSE)
 	if(!is_ghost && !can_descend)
@@ -328,7 +328,7 @@ GLOBAL_LIST_INIT(island_ascents, list())
 		if(!do_after(user, 3 SECONDS, src))
 			return
 
-	movable_travel_z_level(user, get_turf(linked_descent))
+	user.zMove(target = get_turf(linked_descent), z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/structure/island_ascent/proc/attempt_ascent(mob/user, is_ghost = FALSE)
 	if(!is_ghost && !can_ascend)

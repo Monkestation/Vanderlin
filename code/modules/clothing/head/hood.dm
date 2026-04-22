@@ -45,8 +45,10 @@
 	var/default_hidden = null
 
 	body_parts_covered = NECK
+	var/hooded_body_parts_covered = HEAD_EXCEPT_FACE | NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -89,7 +91,7 @@
 			if(toggle_icon_state)
 				icon_state = "[initial(icon_state)]_t"
 			flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-			body_parts_covered = NECK|HAIR|EARS|HEAD
+			body_parts_covered = hooded_body_parts_covered
 			if(ishuman(user))
 				var/mob/living/carbon/H = user
 				H.update_inv_head()
@@ -102,6 +104,7 @@
 /obj/item/clothing/head/roguehood/ResetAdjust(mob/user)
 	. = ..()
 	flags_inv = default_hidden
+	body_parts_covered = initial(body_parts_covered)
 	if(iscarbon(user))
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
@@ -174,6 +177,7 @@
 	Protects from the eventual stabbing, but not much more."
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
-	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = MINOR_CRITICALS
 	armor = ARMOR_LEATHER
 	blocksound = SOFTUNDERHIT
+	item_weight = 145 GRAMS

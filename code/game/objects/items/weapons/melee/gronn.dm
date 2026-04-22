@@ -13,6 +13,7 @@
 
 	grid_width = 32
 	grid_height = 96
+	item_weight = 1.2 KILOGRAMS
 
 /datum/intent/sword/cut/militia
 	penfactor = 10
@@ -45,6 +46,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	grid_height = 96
 	grid_width = 32
+	item_weight = 800 GRAMS
 
 /obj/item/weapon/handclaw/steel
 	name = "Steel Mantis Claws"
@@ -58,6 +60,7 @@
 	max_blade_int = 250
 	max_integrity = INTEGRITY_STRONG
 	melting_material = /datum/material/iron
+	item_weight = 900 GRAMS
 
 /obj/item/weapon/handclaw/gronn
 	name = "Ossland Beast Claws"
@@ -68,6 +71,7 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
 	wbalance = HARD_TO_DODGE
+	item_weight = 750 GRAMS
 
 
 /obj/item/weapon/handclaw/getonmobprop(tag)
@@ -148,6 +152,7 @@
 	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE
+	item_weight = 6 KILOGRAMS
 
 //Intents for the mauls.
 /datum/intent/effect/hobble

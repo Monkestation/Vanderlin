@@ -1,17 +1,18 @@
 // simple is_type and similar inline helpers
 
-
 #define in_range(source, user) (get_dist(source, user) <= 1 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
 
 #define in_range_loose(source, user) (get_dist(source, user) <= 2 && (get_step(source, 0)?:z) == (get_step(user, 0)?:z))
 
-
 #define ismovableatom(A) ismovable(A)
-
 
 #define isatom(A) (isloc(A))
 
 #define isweakref(D) (istype(D, /datum/weakref))
+
+// The filters list has the same ref type id as a filter, but isnt one and also isnt a list, so we have to check if the thing has Cut() instead
+GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
+#define isfilter(thing) (!hascall(thing, "Cut") && TYPEID(thing) == GLOB.refid_filter)
 
 #define isdatum(D) (istype(D, /datum))
 //Turfs
@@ -49,7 +50,9 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isplatingturf(A) (istype(A, /turf/open/floor/plating))
 
-#define istransparentturf(A) (HAS_TRAIT(A, TRAIT_Z_TRANSPARENT))
+#define istransparentturf(A) (HAS_TRAIT(A, TURF_Z_TRANSPARENT_TRAIT))
+
+#define iswaterturf(A) (istype(A, /turf/open/water))
 
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
@@ -135,6 +138,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isfuse(A) (istype(A, /obj/item/fuse))
 
 #define isscabbard(A) (istype(A, /obj/item/weapon/scabbard))
+
+#define isammocasing(A) (istype(A, /obj/item/ammo_casing))
 
 #define isstructure(A) (istype(A, /obj/structure))
 

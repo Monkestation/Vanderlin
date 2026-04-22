@@ -19,7 +19,7 @@
 		water = get_turf(src)
 	if(!istype(water))
 		return
-	if(water.water_volume < 10)
+	if(water.volume_status == WATER_VOLUME_DRY)
 		return
 	var/wheel_rotation_dir = water.dir
 	if(!(wheel_rotation_dir & ALL_CARDINALS))

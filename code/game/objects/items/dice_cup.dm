@@ -15,9 +15,15 @@
 	sellprice = 1
 	melting_material = /datum/material/iron
 	melt_amount = 25
+	item_weight = 200 GRAMS
 	var/max_dice = 8
 	var/list/dice_list = list()
 	var/list/last_roll = list()
+
+/obj/item/dice_cup/get_carry_weight(atom/carrier)
+	. = item_weight
+	for(var/obj/item/item as anything in dice_list)
+		. += item.item_weight
 
 //done so we can have pre-filled dice cups
 /obj/item/dice_cup/Initialize()
@@ -120,6 +126,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	metalizer_result = /obj/item/dice_cup
+	item_weight = 100 GRAMS
 
 //a basic setup for liars dice, each player has 5 dice
 /obj/item/dice_cup/wooden/liars_dice

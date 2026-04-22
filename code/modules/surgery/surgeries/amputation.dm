@@ -32,11 +32,12 @@
 		BODY_ZONE_L_LEG,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 6.4 SECONDS
+	minimum_time = 5.4 SECONDS
+	maximum_time = 7.4 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_BROKEN
 	requires_bodypart_type = NONE
-	skill_min = SKILL_RANK_APPRENTICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	preop_sound = 'sound/surgery/scalpel1.ogg'
 	success_sound = 'sound/surgery/organ2.ogg'
 

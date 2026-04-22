@@ -10,15 +10,13 @@
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	min_players = LOWPOP_THRESHOLD
-	weight = 12
-
-	denominator = 30
-
 	base_antags = 2
 	maximum_antags = 4
+	min_players = LOWPOP_THRESHOLD  * READYUP_AVG
+	denominator = (LOWPOP_THRESHOLD-5) * READYUP_AVG
 	cost = 0.9
 
+	weight = 12
 	earliest_start = 0 SECONDS
 
 	typepath = /datum/round_event/antagonist/solo/vampire

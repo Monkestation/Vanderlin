@@ -8,11 +8,18 @@
 	target_name = browser_input_text(issuer, "Enter the name of the target to eliminate:", "Kill Target", max_length = MAX_NAME_LEN)
 	if(!target_name)
 		return FALSE
+	if(!issuer.say("Kill [target_name]."))
+		return FALSE
+	if(!(automaton in get_hearers_in_view(DEFAULT_MESSAGE_RANGE, issuer)))
+		return FALSE
 	return TRUE
 
 /datum/follower_command/kill/execute(mob/living/carbon/human/automaton, mob/living/issuer)
 	update_overlays(automaton)
 	update_timer = addtimer(CALLBACK(src, PROC_REF(update_overlays), automaton), 5 SECONDS, TIMER_STOPPABLE | TIMER_LOOP)
+	playsound(automaton, 'sound/vo/automaton/executingorders.ogg', 70)
+	automaton.say("EXECUTING: Kill [target_name].", forced = TRUE)
+	automaton.toggle_cmode()
 
 /datum/follower_command/kill/terminate(mob/living/carbon/human/automaton)
 	if(update_timer)

@@ -50,8 +50,9 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/barbrage
 	)
-/datum/job/advclass/combat/barbarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/combat/barbarian/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
+
 	var/static/list/selectableweapon = list(
 		"Axe" = /obj/item/weapon/axe/iron,
 		"Mace" = /obj/item/weapon/mace/spiked,

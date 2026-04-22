@@ -60,6 +60,7 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559E"
 #define COLOR_ASSEMBLY_PURPLE  "#6F6192"
 
+#define DEFAULT_HEX_COLOR_LEN 6
 
 //roguetown
 // Expensive dyes ==========================

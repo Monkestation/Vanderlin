@@ -14,7 +14,7 @@
 	)
 
 /datum/job/merchant
-	title = "Merchant"
+	title = JOB_MERCHANT
 	tutorial = "Born a wastrel in the dirt, you clawed your way up. Either by luck or, gods forbid, effort to earn a place in the Merchant's Guild. \
 	Now, you are either a ruthless economist or a disgraced steward from distant lands. Where you came from no longer matters. \
 	What matters now is you make sure the fools around you keep buying what you sell. Everything has a price, and you shall be the beating heart of this economy."
@@ -45,7 +45,7 @@
 	)
 
 /datum/outfit/merchant
-	name = "Merchant"
+	name = JOB_MERCHANT
 	neck = /obj/item/clothing/neck/mercator
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(

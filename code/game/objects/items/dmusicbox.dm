@@ -25,6 +25,7 @@
 	force = 20
 	throwforce = 20
 	throw_range = 2
+	item_weight = 5 KILOGRAMS
 	var/datum/looping_sound/dmusloop/soundloop
 	var/curfile
 	var/playing = FALSE

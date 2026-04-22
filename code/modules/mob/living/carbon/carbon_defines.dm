@@ -16,7 +16,35 @@
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	var/obj/item/legcuffed = null  //Same as handcuffs but for legs. Bear traps use this.
 
+	COOLDOWN_DECLARE(adrenaline_burst)
+	/// Last time we got mouth to mouthed
+	COOLDOWN_DECLARE(last_mtom)
+	/// Last time we got CPR'd
+	COOLDOWN_DECLARE(last_cpr)
+
+	/// Pulse can't be handled on an organ-by-organ basis, since we can have multiple hearts
+	var/pulse = PULSE_NORM
+	/// Used to handle the heartbeat sounds
+	var/heartbeat_sound = BEAT_NONE
+	/// How long effectively a pump lasts
+	var/heart_pump_duration = 5 SECONDS
+	/// Used by CPR and blood circulation - Time of the pumping associated with "effectiveness", from 0 to 1
+	var/list/recent_heart_pump
+
+	/// Current immune system strength
+	var/immunity = 100
+	/// It will regenerate to this value
+	var/default_immunity = 100
+
 	var/disgust = 0
+
+	/// Speech modifiers
+	var/list/datum/speech_modifier/speech_modifiers
+
+	/// List of carry_weight modifiers applying to this mob
+	var/list/carry_weight_modification //Lazy list, see carry_weight_modifier.dm
+	/// List of carry_weight modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/carry_weight_mod_immunities //Lazy list, see carry_weight_modifier.dm
 
 //inventory slots
 	var/obj/item/backr = null
@@ -46,12 +74,12 @@
 
 	var/gib_type = /obj/effect/decal/cleanable/blood/gibs
 
-	var/rotate_on_lying = 1
+	rotate_on_lying = TRUE
 
 	var/tinttotal = 0	// Total level of visualy impairing items
 
 	var/list/bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
-					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg)
+					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)
 	//Gets filled up in create_bodyparts()
 
 	var/list/hand_bodyparts = list() //a collection of arms (or actually whatever the fug /bodyparts you monsters use to wreck my systems)
@@ -77,6 +105,21 @@
 
 	var/datum/party/current_party
 	var/list/party_hud_elements = list()
+
+	/// To reduce processing, this list is used to associate body zone with all organs inside that zone
+	var/list/organs_by_zone = list()
+
+	/// A collection of organs (eyes) used to see
+	var/list/eye_organs = list()
+
+	/// Total sum of organ and bodypart blood requirement
+	var/total_blood_req = DEFAULT_TOTAL_BLOOD_REQ
+	/// Total sum of organ and bodypart oxygen requirement
+	var/total_oxygen_req = DEFAULT_TOTAL_OXYGEN_REQ
+	/// Total sum of organ and bodypart nutriment requirement
+	var/total_nutriment_req = DEFAULT_TOTAL_NUTRIMENT_REQ
+	/// Total sum of organ and bodypart hydration requirement
+	var/total_hydration_req  = DEFAULT_TOTAL_HYDRATION_REQ
 
 	/// if they get a mana pool
 	has_initial_mana_pool = TRUE
