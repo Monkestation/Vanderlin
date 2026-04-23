@@ -120,6 +120,14 @@
 	decorationquality = 2
 	patrons = list(/datum/patron/divine/necra)
 
+/obj/item/gravedecor/headstone/malum
+	name = "malumite headstone"
+	desc = "It's a toil to even install this."
+	icon_state = "headstone_malum"
+	dropshrink = 0.8
+	decorationquality = 3
+	patrons = list(/datum/patron/divine/malum)
+
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
 	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."

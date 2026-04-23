@@ -216,6 +216,12 @@
 	name = "lavender"
 	icon_state = "lavender"
 
+/obj/item/alch/herb/necralily
+	name = "necran lily"
+	desc = "The un-initiated are forbidden from picking this holy flower, which is said to watch over the graves near where it blooms."
+	dropshrink = 0.75
+	icon_state = "necralily"
+
 /obj/item/alch/thaumicdust
 	name = "thaumic iron dust"
 	icon_state = "thaumicirondust"

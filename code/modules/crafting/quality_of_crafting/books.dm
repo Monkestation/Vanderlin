@@ -604,13 +604,14 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	)
 
 /obj/item/recipe_book/gravemaking
-	name = "The Undertaker's Codex: Burials, Exhumations, and Unwanted Guests"
-	desc = "Penned by Chem E. Terry"
-	icon_state ="book5_0"
-	base_icon_state = "book5"
+	name = "The Gravetender's Guide: Burials, Exhumations, and Unwanted Guests"
+	desc = "Penned by Chem and Terry Ditchdigger."
+	icon_state ="book6_0"
+	base_icon_state = "book6"
 
 	types = list(
+		/datum/book_entry/undertaker_manual,
 		/datum/anvil_recipe/tools/gold/headstone_astrata,
 		/datum/anvil_recipe/tools/iron/gravefence_iron,
-		/datum/repeatable_crafting_recipe/gravemaking,
+		/datum/repeatable_crafting_recipe/gravemaking
 	)

@@ -2667,6 +2667,7 @@
 #include "code\modules\crafting\book_entries\medical.dm"
 #include "code\modules\crafting\book_entries\repair.dm"
 #include "code\modules\crafting\book_entries\stress.dm"
+#include "code\modules\crafting\book_entries\undertaker_manual.dm"
 #include "code\modules\crafting\book_entries\water_pressure.dm"
 #include "code\modules\crafting\book_entries\farming\basics.dm"
 #include "code\modules\crafting\book_entries\farming\families.dm"
