@@ -169,22 +169,26 @@
 // If we want specific dieties, make new helpers!
 
 /obj/effect/mapping_helpers/structure/grave_spawner/t2
+	name = "grave spawner (T2)"
+	icon_state = "grave_spawner_t2"
 	decor_quality = 2
 	spawn_headstone = TRUE
 
 /obj/effect/mapping_helpers/structure/grave_spawner/t3
+	name = "grave spawner (T3)"
+	icon_state = "grave_spawner_t3"
 	decor_quality = 3
 	spawn_headstone = TRUE
 	spawn_gravefence = TRUE
 
 // TENNITE
-/obj/effect/mapping_helpers/structure/grave_spawner/tennite
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite
 	patrons_allowed = UNDIVIDED_TEMPLE_PATRONS
 
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/tennite
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite
 	patrons_allowed = UNDIVIDED_TEMPLE_PATRONS
 
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/tennite
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite
 	patrons_allowed = UNDIVIDED_TEMPLE_PATRONS
 
 // PSYDON
