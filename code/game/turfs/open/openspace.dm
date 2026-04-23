@@ -41,7 +41,7 @@
 ///Makes movables fall when forceMove()'d to this turf.
 /turf/open/openspace/Entered(atom/movable/movable)
 	. = ..()
-	if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING))
+	if(movable.set_currently_z_moving(CURRENTLY_Z_FALLING, TRUE))
 		zFall(movable, falling_from_move = TRUE)
 /**
  * Drops movables spawned on this turf after they are successfully initialized.
