@@ -1,4 +1,3 @@
-#define LIST_GRAVE_MESSAGES list("Looked down the barrel of a musket to check if it was loaded. It was.", "'What is the worst that could happen?'", "Betrayed their Kingdom, paid the price.", "Fought bravely in the Goblin Wars.", "Now serves in death, as they did in life.", "Never was the same after they took an arrow to the knee.", "Always wanted to pet a volf, got their wish.", "Fought a troll. Lost.", "Was facing the wrong side of a cannon.", "Made a good point, worth little to a drunken brawler.", "Drank one too many cups at the inn.")
 // HOW GRAVE SPAWNER WORKS
 // Works in Tiers, the higher the tier, the better the grave will be decorated and loot (body and other things), later determined by decor_quality
 // T1: chance for Headstone, chance for gravefence. LOOT: Corpse of a beggar or other lowborn
@@ -120,10 +119,11 @@
 
 	// Generate inscription
 	if(to_be_interred && grave.headstone)
+		var/custom_messages = file2list("strings/grave_messages.txt")
 		grave.headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[to_be_interred.real_name]</span>\
 		\n\
 		\n\
-		<span class='italics'>[pick(LIST_GRAVE_MESSAGES)]</span>"
+		<span class='italics'>[pick(custom_messages)]</span>"
 
 	//Update Grave
 	grave.update_quality()
@@ -211,5 +211,3 @@
 
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/great_hunt
 	patrons_allowed = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
-
-#undef LIST_GRAVE_MESSAGES
