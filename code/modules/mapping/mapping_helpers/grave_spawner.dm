@@ -9,7 +9,7 @@
 /// MUST be placed ontop of a `obj/structure/closet/dirthole/closed`.
 /obj/effect/mapping_helpers/structure/grave_spawner
 	name = "grave spawner"
-	icon_state = ""
+	icon_state = "grave_spawner"
 
 	/// `obj/structure/closet/dirthole/closed` that is used by this marker. Set on `payload()`
 	var/obj/structure/closet/dirthole/closed/grave
