@@ -109,31 +109,6 @@
 	icon_state = "gravecovered"
 	opened = FALSE
 
-/obj/structure/closet/dirthole/closed/loot/Initialize()
-	. = ..()
-	lootroll = rand(1,4)
-
-/obj/structure/closet/dirthole/closed/loot
-	var/looted = FALSE
-	var/lootroll = 0
-
-/obj/structure/closet/dirthole/closed/loot/open()
-	if(!looted)
-		looted = TRUE
-		switch(lootroll)
-			if(1)
-				new /mob/living/carbon/human/species/skeleton/npc(get_turf(src))
-				new /obj/structure/closet/crate/chest/lootbox(get_turf(src))
-			if(2)
-				new /obj/structure/closet/crate/chest/lootbox(get_turf(src))
-	..()
-
-/obj/structure/closet/dirthole/closed/loot/examine(mob/user)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
-		if(lootroll == 1)
-			. += "<span class='warning'>Better let this one sleep.</span>"
-
 /// Alt clicking allows you to remove grave decorations if the grave has not been consecrated yet
 /obj/structure/closet/dirthole/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user) || stage != 4)
