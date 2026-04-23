@@ -70,7 +70,7 @@
 
 			qdel(potential_head)
 
-		if(length(headstone_spawn_list)) //TODO, when T3 generic headstone made, we remake this to cancel and send debug if helper cannot find a fence/headstone
+		if(length(headstone_spawn_list))
 			var/obj/item/gravedecor/headstone/new_headstone = pick(headstone_spawn_list)
 			grave.headstone = new new_headstone.type
 		else
