@@ -1140,8 +1140,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "aCC" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "aDo" = (
@@ -3980,8 +3980,8 @@
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
 "bUC" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt/road,
 /area/under/town/sewer)
 "bUE" = (
@@ -4296,9 +4296,9 @@
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/s)
 "cbU" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /obj/item/clothing/head/peaceflower,
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "cck" = (
@@ -6678,10 +6678,6 @@
 /obj/effect/decal/carpet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
-"deP" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt/road,
-/area/under/town/sewer)
 "deS" = (
 /obj/structure/fake_machine/scomm,
 /turf/open/floor/tile/diamond/purple,
@@ -7506,6 +7502,7 @@
 /area/indoors/town/keep/halls/e)
 "dAA" = (
 /obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/recipe_book/gravemaking,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
@@ -16709,6 +16706,7 @@
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
 	},
+/obj/item/recipe_book/gravemaking,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
 "iaD" = (
@@ -23775,8 +23773,8 @@
 /turf/open/floor/grass,
 /area/outdoors/farm)
 "llX" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church)
 "lmd" = (
@@ -24448,10 +24446,7 @@
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
 "lEK" = (
-/obj/structure/gravemarker{
-	name = "Pet Cemetary"
-	},
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = -7;
 	pixel_y = -4
@@ -24464,6 +24459,7 @@
 	pixel_x = 12;
 	pixel_y = -10
 	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
 "lFc" = (
@@ -26752,9 +26748,9 @@
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/steward)
 "mGG" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt/road,
 /area/under/town/sewer)
 "mGN" = (
@@ -27443,7 +27439,8 @@
 /turf/open/floor/cobble,
 /area/indoors/town/smithy)
 "mWC" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "mWN" = (
@@ -38509,8 +38506,9 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "rYW" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/natural/stone,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "rYX" = (
@@ -39319,8 +39317,8 @@
 /turf/closed/wall/mineral/wooddark,
 /area/under/cave)
 "ssk" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "ssl" = (
@@ -47268,6 +47266,7 @@
 /obj/structure/bookcase/random,
 /obj/item/recipe_book/medical,
 /obj/item/recipe_book/sewing,
+/obj/item/recipe_book/gravemaking,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "vUs" = (
@@ -47476,11 +47475,6 @@
 /obj/structure/bars/grille,
 /turf/open/openspace,
 /area/indoors/town/garrison)
-"vZL" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/dirt/road,
-/area/under/town/sewer)
 "wam" = (
 /obj/structure/roguerock{
 	icon_state = "rock3"
@@ -89953,7 +89947,7 @@ fny
 hDX
 nvP
 dLs
-deP
+bUC
 hDX
 vxF
 rov
@@ -90768,7 +90762,7 @@ rov
 nIq
 fny
 hDX
-vZL
+nvP
 dLs
 bUC
 hDX
@@ -130567,7 +130561,7 @@ owf
 iKJ
 ebu
 oSl
-ssk
+mWC
 qFx
 qFx
 qFx
@@ -130962,7 +130956,7 @@ qFx
 qFx
 qFx
 qFx
-ssk
+mWC
 oSl
 oSl
 owf

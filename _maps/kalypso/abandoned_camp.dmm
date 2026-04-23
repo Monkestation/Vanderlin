@@ -3,8 +3,8 @@
 /turf/template_noop,
 /area/template_noop)
 "i" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/template_noop,
 /area/template_noop)
 "q" = (

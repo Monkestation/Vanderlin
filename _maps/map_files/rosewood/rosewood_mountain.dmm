@@ -3308,7 +3308,8 @@
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/upper)
 "AZ" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/ambush,
 /area/under/mountains/anvil/lower)
 "Ba" = (
@@ -3743,6 +3744,7 @@
 /obj/item/reagent_containers/glass/bottle/elfblue,
 /obj/item/reagent_containers/glass/bottle/elfblue,
 /obj/item/reagent_containers/glass/bottle/elfred,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/upper)
 "EI" = (
@@ -5054,6 +5056,7 @@
 /area/under/mountains/anvil/lower)
 "Ox" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt/ambush,
 /area/under/mountains/anvil/lower)
 "Oy" = (
@@ -6048,6 +6051,7 @@
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/statue/gold,
 /obj/item/statue/gold/loot,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/grass/red,
 /area/under/mountains/anvil/dungeon/lower)
 "Wj" = (

@@ -1996,6 +1996,8 @@
 /area/indoors/town/clinic_large/apothecary)
 "blq" = (
 /obj/structure/closet/crate/crafted_closet/dark,
+/obj/item/recipe_book/gravemaking,
+/obj/item/recipe_book/gravemaking,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
@@ -5178,6 +5180,11 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
+"dke" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "dkz" = (
 /obj/structure/window/solid,
 /turf/open/floor/blocks,
@@ -5582,6 +5589,7 @@
 /area/indoors/town/steward)
 "dwN" = (
 /obj/structure/table/wood/plain_alt,
+/obj/item/recipe_book/gravemaking,
 /obj/item/key/graveyard{
 	pixel_x = 5;
 	pixel_y = -6
@@ -13807,8 +13815,9 @@
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "ixW" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/obj/item/clothing/head/peaceflower,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "ixZ" = (
@@ -16296,9 +16305,9 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/soilsons)
 "kia" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "kii" = (
@@ -21664,7 +21673,7 @@
 /area/indoors/town/keep/halls/w)
 "nGC" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "nGJ" = (
@@ -27950,7 +27959,7 @@
 "rPH" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "rPX" = (
@@ -31670,11 +31679,11 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/clinic_large/apothecary)
 "ulA" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
 	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "ulC" = (
@@ -34095,6 +34104,12 @@
 	},
 /turf/open/water/clean,
 /area/under/town/basement)
+"vRC" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/carbon/human/species/skeleton/npc/warrior,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "vRF" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -119972,7 +119987,7 @@ tqI
 leC
 rQD
 leC
-rPH
+vRC
 leC
 rQD
 wUg
@@ -120166,7 +120181,7 @@ tqI
 tqI
 leC
 leC
-rPH
+vRC
 wUg
 wUg
 tqI
@@ -120787,7 +120802,7 @@ tqI
 tqI
 wUg
 wUg
-nGC
+dke
 leC
 rQD
 leC
@@ -121380,7 +121395,7 @@ leC
 wUg
 wUg
 leC
-nGC
+dke
 leC
 wUg
 tqI
@@ -121781,9 +121796,9 @@ gQc
 fHb
 fHb
 leC
-nGC
+dke
 leC
-rPH
+vRC
 leC
 leC
 wUg
