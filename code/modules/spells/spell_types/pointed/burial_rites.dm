@@ -1,5 +1,3 @@
-#define LIST_FINAL_WORDS list("Goodbye!", "Finally, peace...", "I wonder if I can find Ravox...", "The Undermaiden calls for me...", "Hopefully next time is better...")
-
 /datum/action/cooldown/spell/burial_rites
 	name = "Burial Rites"
 	desc = ""
@@ -17,8 +15,8 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
-	cooldown_time = 2 SECONDS //DEBUG ONLY, CHANGE BEFORE PR!!!!!
-	spell_cost = 0 //DEBUG ONLY, CHANGE BEFORE PR!!!!!
+	cooldown_time = 2 SECONDS //TODO DEBUG ONLY, CHANGE BEFORE PR!!!!!
+	spell_cost = 0 //TODO DEBUG ONLY, CHANGE BEFORE PR!!!!!
 
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
 	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane))
@@ -60,6 +58,7 @@
 				if(grave.gravequality == 10)
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will feel the Undermaiden's full wrath!"))
 			grave.adjust_grave_necra_devotion()
+			grave.stasis()
 			return
 		to_chat(owner, span_warning("I failed to perform the rites."))
 
@@ -87,7 +86,7 @@
 	// SECTION 3: Final Words
 	// We have the names of the mobs we buried, now we grab the mobs themselves and prepare a list of final_words
 	var/list/their_final_words = list()
-
+	var/list/premade_final_words = file2list("strings/grave_final_words.txt")
 	to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
 	for(var/name in names) //We need them in order
 		var/found = FALSE
@@ -110,13 +109,13 @@
 							if((!Ghost.mind.current == human))
 								continue
 							else
-								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(LIST_FINAL_WORDS), 50, timeout = 20 SECONDS)
+								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
 								log_say("[Ghost] put [my_final_words] for their final words.")
 								human.final_words = my_final_words // They won't be prompted again
 								their_final_words += my_final_words
 								break
 					if(!my_final_words) //No Observers, pick a random one
-						their_final_words += pick(LIST_FINAL_WORDS)
+						their_final_words += pick(premade_final_words)
 
 					found = TRUE
 					break
@@ -167,5 +166,3 @@
 				names += animal.name
 
 	return names
-
-#undef LIST_FINAL_WORDS

@@ -42,7 +42,7 @@
 	var/turf/open/floor/dirt/T = loc
 	if(!istype(T))
 		return INITIALIZE_HINT_QDEL
-	if(T.muddy)
+	if(T.muddy && stage != 4)
 		if(!(locate(/obj/item/natural/worms) in T))
 			if(prob(40))
 				if(prob(10))
@@ -58,6 +58,7 @@
 		if(!(locate(/obj/item/natural/stone) in T))
 			if(prob(23))
 				new /obj/item/natural/stone(T)
+	stage_update()
 	return ..()
 
 // TODO: When we implement more systems, such as passive devotion, we ensure it is removed before we delete
@@ -454,6 +455,8 @@
 						record_round_statistic(STATS_GRAVES_ROBBED)
 						SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 
+			unstasis() // if no longer stage 4, unfreeze the bodies
+
 		stage_update()
 		attacking_shovel.heldclod = new /obj/item/natural/clod/dirt(attacking_shovel)
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
@@ -473,6 +476,42 @@
 			continue
 		if (is_priest_job(player.mind.assigned_role) || (is_monk_job(player.mind.assigned_role) && player.patron?.type == /datum/patron/divine/necra) || istype(player.mind.assigned_role, /datum/job/templar) || istype(player.mind.assigned_role, /datum/job/gmtemplar) || istype(player.mind.assigned_role, /datum/job/undertaker))
 			to_chat(player, span_crit("Veiled whispers hiss of great blasphemy, a highly blessed grave is being robbed in [robbery_location], this cannot go unpunished!"))
+
+/// All bodies buried as 'frozen' in time, Necra's gift to ensure their bodies cease to decay
+/obj/structure/closet/dirthole/proc/stasis()
+	for(var/mob/living/carbon/human/corpse in contents)
+		if(corpse.stat == DEAD)
+			ADD_TRAIT(corpse, TRAIT_STASIS, "Necra")
+	for(var/mob/living/simple_animal/animal in contents)
+		if(animal.stat == DEAD)
+			ADD_TRAIT(animal, TRAIT_STASIS, "Necra")
+
+	// Same as above but incase they are in a coffin
+	for(var/obj/structure/closet/container in contents)
+		for(var/mob/living/carbon/human/corpse in container.contents)
+			if(corpse.stat == DEAD)
+				ADD_TRAIT(corpse, TRAIT_STASIS, "Necra")
+		for(var/mob/living/simple_animal/animal in container.contents)
+			if(animal.stat == DEAD)
+				ADD_TRAIT(animal, TRAIT_STASIS, "Necra")
+
+/// Reverse of `statis()`
+/obj/structure/closet/dirthole/proc/unstasis()
+	for(var/mob/living/carbon/human/corpse in contents)
+		if(corpse.stat == DEAD)
+			REMOVE_TRAIT(corpse, TRAIT_STASIS, "Necra")
+	for(var/mob/living/simple_animal/animal in contents)
+		if(animal.stat == DEAD)
+			REMOVE_TRAIT(animal, TRAIT_STASIS, "Necra")
+
+	// Same as above but incase they are in a coffin
+	for(var/obj/structure/closet/container in contents)
+		for(var/mob/living/carbon/human/corpse in container.contents)
+			if(corpse.stat == DEAD)
+				REMOVE_TRAIT(corpse, TRAIT_STASIS, "Necra")
+		for(var/mob/living/simple_animal/animal in container.contents)
+			if(animal.stat == DEAD)
+				REMOVE_TRAIT(animal, TRAIT_STASIS, "Necra")
 
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
