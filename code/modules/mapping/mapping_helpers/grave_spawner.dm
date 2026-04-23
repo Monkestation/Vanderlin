@@ -4,8 +4,7 @@
 // T2: Headstone and chance for gravefence, both higher quality. LOOT: Corpse of someone who actually matters in life, such as a craftsman or member of a Garrison
 // T3: Best Headstones and gravefence. LOOT: Corpse of a Noble or Merchant, or other person of privledge.
 
-/// Determines loot and
-/// MUST be placed ontop of a `obj/structure/closet/dirthole/closed`.
+/// Determines loot and gravedecor spawned on a `obj/structure/closet/dirthole/closed`.
 /obj/effect/mapping_helpers/structure/grave_spawner
 	name = "grave spawner"
 	icon_state = "grave_spawner"
