@@ -57,4 +57,5 @@
 		Sadly, many other sects of both Inhumen and Tennite worship have their own rites, which they may likewise use to similar but more nefarious effect.<br>
 		Therefore, it is in your best interest to keep your graves holy and tended, as those shown significant deference will alert you of any transgressions passed against them.<br>
 		Of course, woe betide those who disturb your graves without knowing any rites. For they will be on the receiving end of the Undermaiden's greatest wrath.
+		</div>
 	"}

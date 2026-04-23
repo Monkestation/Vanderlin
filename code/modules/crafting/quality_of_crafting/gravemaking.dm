@@ -56,6 +56,28 @@
 	output = /obj/item/gravedecor/headstone/abyssor
 	craftdiff = 3
 
+/datum/repeatable_crafting_recipe/gravemaking/necran_headstone
+	name = "necran headstone"
+	requirements = list(
+		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/glass = 1,
+	)
+	attacked_atom = /obj/item/natural/stoneblock
+	starting_atom  = /obj/item/weapon/chisel
+	output = /obj/item/gravedecor/headstone/necra
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/gravemaking/malumite_headstone
+	name = "malumite headstone"
+	requirements = list(
+		/obj/item/natural/stoneblock = 3,
+		/obj/item/ingot/iron = 1,
+	)
+	attacked_atom = /obj/item/natural/stoneblock
+	starting_atom  = /obj/item/weapon/chisel
+	output = /obj/item/gravedecor/headstone/malum
+	craftdiff = 3
+
 /datum/repeatable_crafting_recipe/gravemaking/hunt_headstone
 	name = "skull headstone"
 	allow_inverse_start = TRUE
@@ -68,17 +90,6 @@
 	output = /obj/item/gravedecor/headstone/hunt
 	skillcraft = /datum/attribute/skill/craft/crafting
 	craftdiff = 2
-
-/datum/repeatable_crafting_recipe/gravemaking/necran_headstone
-	name = "necran headstone"
-	requirements = list(
-		/obj/item/natural/stoneblock = 3,
-		/obj/item/natural/glass = 1,
-	)
-	attacked_atom = /obj/item/natural/stoneblock
-	starting_atom  = /obj/item/weapon/chisel
-	output = /obj/item/gravedecor/headstone/necra
-	craftdiff = 3
 
 // Gravefences
 /datum/repeatable_crafting_recipe/gravemaking/crude_gravefence
