@@ -1934,7 +1934,6 @@
 #include "code\game\objects\structures\fireaxe.dm"
 #include "code\game\objects\structures\fluff.dm"
 #include "code\game\objects\structures\gate.dm"
-#include "code\game\objects\structures\gravemarker.dm"
 #include "code\game\objects\structures\grindwheel.dm"
 #include "code\game\objects\structures\guillotine.dm"
 #include "code\game\objects\structures\handcart.dm"
