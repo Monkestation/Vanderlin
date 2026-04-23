@@ -63,7 +63,6 @@
 	stage_update()
 	return ..()
 
-// TODO: When we implement more systems, such as passive devotion, we ensure it is removed before we delete
 /obj/structure/closet/dirthole/Destroy()
 	// Remove passive devotion
 	is_consecrated = FALSE
@@ -699,7 +698,6 @@
 	else if(stage == 3)
 		. += mutable_appearance(icon, "grave_above", ABOVE_MOB_LAYER)
 
-	// handle gravedecor overlays TODO doesnt this bug? Needs fixed!!!
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
@@ -714,12 +712,6 @@
 		. += mutable_appearance('icons/turf/floors.dmi', headstone.icon_state, 2.91)
 	if(gravefence)
 		. += mutable_appearance('icons/turf/floors.dmi', gravefence.icon_state, 2.9)
-
-	//TODO sprites for levels of 'blessing' for graves (there are four)
-
-	// handle consecrate overlay
-	//if(is_consecrated >= CONSECRATED)
-		//. += mutable_appearance(icon, "graveconsecrated")
 
 /obj/structure/closet/dirthole/update_name(updates)
 	. = ..()
