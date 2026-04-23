@@ -362,8 +362,10 @@
 /obj/item/proc/attack_atom(atom/attacked_atom, mob/living/user)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_OBJ, attacked_atom, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
+
 	if(item_flags & NOBLUDGEON)
-		return TRUE
+		return FALSE
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(attacked_atom.attacked_by(src, user) && !isopenturf(attacked_atom)) // this check is due to attack animations in /obj/item/proc/afterattack()
 		user.do_attack_animation(attacked_atom, used_item = src, used_intent = user.used_intent)

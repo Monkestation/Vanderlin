@@ -86,8 +86,7 @@
 	if(isobj(interacting_with))
 		if(try_dissolve(interacting_with, user))
 			return ITEM_INTERACT_SKIP_TO_ATTACK
-
-		return ITEM_INTERACT_BLOCKING
+		return NONE // attack, afterattack cleaning :(
 
 	if(!ishuman(interacting_with))
 		return NONE
