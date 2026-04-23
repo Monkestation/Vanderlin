@@ -324,6 +324,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		var/turf/front = get_step(user, user.dir)
 		S.set_up(1, 1, front)
 		S.start()
+
 	user.changeNext_move(CLICK_CD_FAST)
 
 	return ITEM_INTERACT_SUCCESS
@@ -342,6 +343,8 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			var/turf/front = get_step(user,user.dir)
 			S.set_up(1, 1, front)
 			S.start()
+
+		user.changeNext_move(CLICK_CD_FAST)
 
 		return ITEM_INTERACT_SUCCESS
 
