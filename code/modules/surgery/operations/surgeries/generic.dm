@@ -47,7 +47,8 @@
 	if(!limb.bleeds)
 		return ..()
 
-	limb.add_wound(/datum/wound/slash/incision)
+	if(!limb.has_wound(/datum/wound/slash/incision, TRUE))
+		limb.add_wound(/datum/wound/slash/incision)
 
 	display_results(
 		surgeon,
@@ -155,6 +156,9 @@
 		return TRUE
 
 	return tool.get_temperature() > 0
+
+/datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
+	return limb.has_wound(/datum/wound/slash/incision)
 
 /datum/surgery_operation/limb/close_skin/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
