@@ -3205,6 +3205,8 @@
 #include "code\modules\mapping\kalypso\features\watering_hole.dm"
 #include "code\modules\mapping\kalypso\features\wishtree.dm"
 #include "code\modules\mapping\mapping_helpers\access_helper.dm"
+#include "code\modules\mapping\mapping_helpers\grave_spawner.dm"
+#include "code\modules\mapping\mapping_helpers\grave_spawner_loot.dm"
 #include "code\modules\mapping\mapping_helpers\structure_helper.dm"
 #include "code\modules\mapping\space_management\multiz_helpers.dm"
 #include "code\modules\mapping\space_management\space_level.dm"

@@ -1507,7 +1507,6 @@
 			// Create a new dirthole for burial
 			grave_hole = new /obj/structure/closet/dirthole(burial_turf)
 			grave_hole.stage = 3 // Set to pit stage for burial
-			grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
 
 		// Ensure the hole is at the right stage for burial
 		if(grave_hole.stage < 3)
@@ -1519,19 +1518,17 @@
 
 		// Place the corpse in the grave
 		target_corpse.forceMove(burial_turf)
-		grave_hole.user_buckle_mob(target_corpse, harlequinn)
 
-		// Close and bless the grave
+		// Close the grave
+		grave_hole.stage = 4
+		grave_hole.climb_offset = 10
 		grave_hole.close()
 
-		// Set the buried flag properly
-		if(istype(target_corpse, /mob/living/carbon/human))
-			var/mob/living/carbon/human/buried_human = target_corpse
-			buried_human.buried = TRUE
-
-		// Create a grave marker for the blessed burial
-		var/obj/structure/gravemarker/marker = new(burial_turf)
-		marker.name = "grave of [target_corpse.real_name]"
+		// Create a grave marker for the blessed burial, and bless.
+		grave_hole.headstone = new /obj/item/gravedecor/headstone/crude()
+		grave_hole.update_quality()
+		grave_hole.is_consecrated = TRUE
+		grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
 
 		// Bless the burial - remove any curses and provide protection
 		if(harlequinn && isliving(harlequinn))
