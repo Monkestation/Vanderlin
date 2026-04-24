@@ -494,7 +494,7 @@
 	for(var/turf/T in range(1, src))
 		var/turf/foundturf = T
 		if(istype(foundturf, /turf/open/floor/dirt || /turf/open/floor/dirt/road || /turf/open/floor/grass))
-			if(!locate(/obj/structure/flora/grass/herb/necralily && /obj/structure/closet/dirthole) in foundturf)
+			if(!locate(/obj/structure) in foundturf)
 				new /obj/structure/flora/grass/herb/necralily(foundturf)
 				break
 

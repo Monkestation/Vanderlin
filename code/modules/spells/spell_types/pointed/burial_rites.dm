@@ -53,11 +53,13 @@
 					owner.add_stress(/datum/stress_event/bad_grave) //Terrible grave.
 				if(grave.gravequality >= 4 && grave.gravequality <= 6)
 					owner.visible_message(span_rose("[owner] consecrates [cast_on]."), span_rose("My funeral rites have been performed on [cast_on]."))
+					grave.grow_lily()
 				if(grave.gravequality >= 7 && grave.gravequality <= 9)
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
+					grave.grow_lily()
 				if(grave.gravequality == 10)
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will feel the Undermaiden's full wrath!"))
-			grave.grow_lily()
+					grave.grow_lily()
 			grave.adjust_grave_necra_devotion()
 			grave.stasis()
 			return

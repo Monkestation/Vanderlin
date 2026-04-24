@@ -22,7 +22,7 @@
 		<b>Simultaneously:</b> Ensure the body has endured no great damage to its exterior, the interior is of no relevance. In this, the Pestrans may find some small use.<br>
 		<br>
 		<b>Next:</b> Bring the body to your holy yard, and place them over the pit in which you shall bury them. Place a copper coin in their mouth, so that they may retrieve it for their toll.<br>
-		Without this toll, the spirit will be eternally lost to the fields of the Undermaiden. Even should you consider the deceased heretical or criminal, allow them at least to re-enter the cycle.<br>
+		Without this toll, the spirit risks an eternity seeking an alternative for the Ferryman. Even should you consider the deceased heretical or criminal, allow them at least to re-enter the cycle.<br>
 		<br>
 		<b>If You Wish:</b> Place the body within a winding sheet or coffin, to shield it from the elements. A coffin sealed with red-tallow works the best of all.<br>
 		<br>
@@ -30,7 +30,8 @@
 		<br>
 		<b>HOWEVER:</b> You may, before the previous step is complete, place upon the grave a headstone, in addition to a fence. Herein this book lie recipes to a variety of such decorations.<br>
 		Should the decorations be of high make, or representative of the deceased's patron, the spirit present will hold them in higher regard.<br>
-		Please note, though, that while we have documented them for the sake of completion, you should under no circumstances construct headstones that venerate any but the Ten. To do so is heresy.<br>
+		Please note, though, that while we have documented them for the sake of completion, you should under no circumstances construct headstones that venerate any but the Ten.<br>
+		To do so is heresy, but to disturb a grave in order to remove one of these pieces is not a decision made lightly, and should likely only be done if its presence defiles hallowed ground.<br>
 		Additionally, a present headstone will be inscribed by the Undermaiden upon casting of one's rites. You may also add a short passage with a chisel or knife.<br>
 		<br>
 		The use of all previous steps are ideal, though you may pick and choose which one's you wish to follow. The ultimate result, however, will improve with more deference showed to the deceased.<br>
