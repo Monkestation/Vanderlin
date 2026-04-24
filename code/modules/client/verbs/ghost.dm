@@ -47,10 +47,6 @@
 					dead_hum.final_words = final_words
 					log_say("[src] put [final_words] for their final words.")
 
-			if(dead_hum.buried && dead_hum.funeral)
-				dead_hum.returntolobby()
-				return TRUE
-
 	var/turf/spawn_loc = pick(GLOB.underworldspiritspawns)
 	var/mob/living/carbon/spirit/live_spirit = new /mob/living/carbon/spirit(spawn_loc)
 	live_spirit.livingname = real_name

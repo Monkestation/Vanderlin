@@ -17,6 +17,9 @@
 	/// Decor with patrons supported NOT in list, is skipped. If empty, only general headstones are allowed. General headstones can STILL be picked regardless
 	var/list/patrons_allowed = list()
 
+	/// If TRUE, the grave will always be 'blessed', otherwise will only be blessed in areas with `burial_ground` = TRUE
+	var/force_consecrate = FALSE
+
 	/// If set to TRUE, picks a random Headstone, factors to affect this done in `payload()`. If FALSE, `payload()` will roll a random chance if a headstone is spawned or not
 	var/spawn_headstone = FALSE
 	/// If set to TRUE, picks a random Gravefence, factors to affect this done in `payload()`. If FALSE, `payload()` will roll random chance to spawn one anyways if `decor_quality` is 2 or above.
@@ -67,7 +70,7 @@
 
 			qdel(potential_head)
 
-		if(length(headstone_spawn_list)) //TODO, when T3 generic headstone made, we remake this to cancel and send debug if helper cannot find a fence/headstone
+		if(length(headstone_spawn_list))
 			var/obj/item/gravedecor/headstone/new_headstone = pick(headstone_spawn_list)
 			grave.headstone = new new_headstone.type
 		else
@@ -127,9 +130,14 @@
 		<span class='italics'>[pick(custom_messages)]</span>"
 
 	//Update Grave
+	grave.no_devotion = TRUE // No devotion from these graves
 	grave.update_quality()
 
-	grave.is_consecrated = TRUE
+	// Check if area is fit for burials
+	var/area/A = get_area(grave)
+	if(A.burial_grounds || force_consecrate)
+		grave.is_consecrated = TRUE
+
 	grave.update_appearance(UPDATE_ICON)
 
 /// Proc that generates a body and/or loot for grave, and returns a list

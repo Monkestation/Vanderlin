@@ -712,7 +712,8 @@
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "cm" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
 "co" = (
@@ -1465,7 +1466,8 @@
 /turf/open/floor/cobble,
 /area/indoors)
 "gd" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "ge" = (
@@ -2268,7 +2270,8 @@
 /area/outdoors/bog/inhumen_camp)
 "lG" = (
 /obj/structure/flora/ausbushes/ywflowers,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "lH" = (
@@ -3993,6 +3996,7 @@
 /area/outdoors/bog/inhumen_camp)
 "ws" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "wz" = (
@@ -4582,6 +4586,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/ausbushes/sparsegrass,
 /mob/living/carbon/human/species/skeleton/npc,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "AN" = (
@@ -4669,6 +4674,7 @@
 "Bq" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "Bv" = (
@@ -5058,11 +5064,6 @@
 /obj/item/painting/skull,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/vampire_manor)
-"Ek" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "El" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven{
@@ -5886,7 +5887,8 @@
 /area/indoors/lich)
 "Jy" = (
 /obj/structure/flora/ausbushes/brflowers,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "JF" = (
@@ -6458,6 +6460,7 @@
 "NL" = (
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "NM" = (
@@ -7045,6 +7048,11 @@
 /obj/structure/maniac_return_machine,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
+"RJ" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "RK" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/scabbard/sword,
@@ -7411,6 +7419,11 @@
 /obj/item/weapon/flail,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"TJ" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "TM" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
@@ -7698,6 +7711,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/item/weapon/shovel,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "VF" = (
@@ -7732,10 +7746,6 @@
 	layer = 2
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/outdoors/bog/inhumen_camp)
-"VP" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "VQ" = (
 /obj/structure/table/wood/plain_alt,
@@ -9656,7 +9666,7 @@ QZ
 jW
 Sq
 Ok
-Ek
+gd
 UX
 xt
 Sn
@@ -13446,7 +13456,7 @@ Te
 Te
 cm
 Te
-cm
+RJ
 Te
 dG
 Te
@@ -13964,7 +13974,7 @@ bD
 Te
 xt
 bB
-cm
+RJ
 Te
 dG
 Te
@@ -22267,7 +22277,7 @@ Ae
 GZ
 VC
 GZ
-VP
+TJ
 VB
 Zt
 lH
@@ -22527,13 +22537,13 @@ Ae
 GZ
 NL
 GZ
-VP
+TJ
 Gt
 wi
 uS
 mX
 GZ
-ws
+TJ
 GZ
 kL
 VB

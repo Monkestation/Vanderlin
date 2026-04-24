@@ -1191,8 +1191,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "aCC" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "aCY" = (
@@ -4431,8 +4431,8 @@
 /area/indoors/town/keep/halls/s)
 "cbU" = (
 /obj/item/clothing/head/peaceflower,
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "cck" = (
@@ -24529,8 +24529,8 @@
 /turf/open/floor/grass,
 /area/outdoors/farm)
 "llX" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church)
 "lma" = (
@@ -25285,10 +25285,7 @@
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
 "lEK" = (
-/obj/structure/gravemarker{
-	name = "Pet Cemetary"
-	},
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/clothing/head/peaceflower{
 	pixel_x = -7;
 	pixel_y = -4
@@ -25301,6 +25298,7 @@
 	pixel_x = 12;
 	pixel_y = -10
 	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
 "lFc" = (
@@ -25469,11 +25467,6 @@
 /obj/item/paper/sunlord,
 /turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
-"lJb" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/under/sewer)
 "lJe" = (
 /obj/effect/decal/borderfall,
 /obj/structure/fluff/clock,
@@ -26239,8 +26232,8 @@
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town/noble_manor/red)
 "lZi" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/under/sewer)
 "lZq" = (
@@ -28412,7 +28405,8 @@
 /turf/open/floor/cobble,
 /area/indoors/town/smithy)
 "mWC" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "mWN" = (
@@ -38868,9 +38862,9 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
 "rwa" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/under/sewer)
 "rwn" = (
@@ -40134,8 +40128,9 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "rYW" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/item/natural/stone,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "rYX" = (
@@ -40955,8 +40950,8 @@
 /turf/closed/wall/mineral/wooddark,
 /area/under/cave)
 "ssk" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "ssl" = (
@@ -41514,10 +41509,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
-"sHn" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/under/sewer)
 "sHs" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -207542,7 +207533,7 @@ oSl
 owf
 oSl
 nAk
-mWC
+ssk
 iKJ
 oSl
 aRu
@@ -209361,7 +209352,7 @@ oSl
 owf
 qVo
 owf
-mWC
+ssk
 oUP
 qVo
 oSl
@@ -209964,7 +209955,7 @@ wgG
 oSl
 oSl
 oSl
-ssk
+mWC
 iKJ
 gEF
 oSl
@@ -213406,7 +213397,7 @@ owf
 iKJ
 ebu
 oSl
-ssk
+mWC
 qFx
 qFx
 qFx
@@ -213801,7 +213792,7 @@ qFx
 qFx
 qFx
 qFx
-ssk
+mWC
 oSl
 oSl
 owf
@@ -253594,7 +253585,7 @@ ngZ
 gTT
 iea
 vwQ
-sHn
+lZi
 gTT
 pMR
 bpg
@@ -254409,7 +254400,7 @@ bpg
 hbI
 ngZ
 gTT
-lJb
+iea
 vwQ
 lZi
 gTT
