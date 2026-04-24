@@ -1115,10 +1115,6 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
-"gl" = (
-/obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "gm" = (
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/ruinedwood/darker,
@@ -1136,6 +1132,9 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/cave)
+"gs" = (
+/turf/open/water/hotspring,
+/area/indoors/lich)
 "gt" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 8
@@ -1588,12 +1587,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/lich)
-"ir" = (
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 1
-	},
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/witch)
 "is" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
@@ -1657,10 +1650,6 @@
 "iO" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/churchbrick,
-/area/outdoors/bog)
-"iR" = (
-/obj/structure/flora/hotspring_rocks/grassy,
-/turf/open/water/hotspring,
 /area/outdoors/bog)
 "iT" = (
 /obj/structure/fluff/railing/wood{
@@ -1993,6 +1982,9 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
+"kO" = (
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "kP" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/clothing/armor/leather/hide/orc,
@@ -3187,6 +3179,14 @@
 "rB" = (
 /turf/open/floor/naturalstone,
 /area/indoors/mountains)
+"rC" = (
+/obj/effect/decal/carpet/square/black{
+	pixel_x = 0;
+	pixel_y = -11
+	},
+/obj/effect/landmark/start/bogwitch,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/shelter/bog/witch)
 "rD" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -3605,10 +3605,6 @@
 /obj/item/rope/chain,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
-"tP" = (
-/obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "tQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4021,6 +4017,13 @@
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
 /area/outdoors/bog)
+"vK" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bogwitch{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/shelter/bog/witch)
 "vL" = (
 /turf/open/floor/churchmarble,
 /area/outdoors/bog)
@@ -4345,6 +4348,10 @@
 	},
 /turf/open/floor/dirt,
 /area/indoors/lich)
+"xl" = (
+/obj/structure/flora/hotspring_rocks/small,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "xo" = (
 /obj/effect/temp_visual/cult,
 /obj/structure/flora/hotspring_rocks/small,
@@ -4538,19 +4545,6 @@
 	},
 /turf/open/floor/tile/masonic/single,
 /area/indoors/lich)
-"yp" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/obj/structure/chair/wood/alt{
-	dir = 1
-	},
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned/alt,
-/area/indoors/shelter/bog/witch)
 "yt" = (
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 4;
@@ -4595,6 +4589,10 @@
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/ruinedwood,
 /area/indoors/lich)
+"yG" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "yI" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -4775,6 +4773,10 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
+"zC" = (
+/obj/structure/flora/hotspring_rocks/small/four,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "zE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/recipe_book/alchemy,
@@ -4831,6 +4833,10 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
+"zR" = (
+/obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "zU" = (
 /obj/structure/spider/stickyweb{
 	dir = 4
@@ -5009,9 +5015,6 @@
 /obj/item/plate,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
-"Az" = (
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "AB" = (
 /obj/structure/table/church,
 /obj/item/reagent_containers/glass/cup/silver,
@@ -5352,6 +5355,12 @@
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/churchrough/rust,
+/area/indoors/shelter/bog/witch)
+"Cn" = (
+/obj/effect/landmark/start/bogwitch{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
 /area/indoors/shelter/bog/witch)
 "Co" = (
 /obj/effect/decal/shadow_floor{
@@ -5725,16 +5734,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
-"Ek" = (
-/obj/structure/flora/hotspring_rocks/small/four,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
-"El" = (
-/mob/living/simple_animal/hostile/retaliate/infernal/imp{
-	faction = list("Undead")
-	},
-/turf/open/water/hotspring,
-/area/indoors/lich)
 "En" = (
 /obj/structure/bridge{
 	dir = 4
@@ -5988,6 +5987,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/lich)
+"FL" = (
+/obj/structure/flora/hotspring_rocks/small/three,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "FO" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/grass/cold,
@@ -6995,6 +6998,12 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
+"Lh" = (
+/mob/living/simple_animal/hostile/retaliate/infernal/imp{
+	faction = list("Undead")
+	},
+/turf/open/water/hotspring,
+/area/indoors/lich)
 "Lj" = (
 /obj/item/rope/chain,
 /obj/effect/decal/cleanable/blood,
@@ -7011,10 +7020,6 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobble,
 /area/indoors/lich)
-"Ls" = (
-/obj/structure/flora/hotspring_rocks/small/three,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "Lv" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/bog/witch)
@@ -7137,9 +7142,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/bog)
-"Mg" = (
-/turf/open/water/hotspring,
-/area/indoors/lich)
 "Mh" = (
 /obj/structure/spider/stickyweb{
 	dir = 4
@@ -7266,14 +7268,6 @@
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
-"MP" = (
-/obj/effect/decal/carpet/square/black{
-	pixel_x = 0;
-	pixel_y = -11
-	},
-/obj/effect/landmark/start/bogwitch_apprentice,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog/witch)
 "MR" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -7336,10 +7330,6 @@
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/cobble,
 /area/indoors/lich)
-"Nn" = (
-/obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "Np" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -7653,6 +7643,10 @@
 	},
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/bog)
+"OR" = (
+/obj/structure/flora/hotspring_rocks/small/five,
+/turf/open/water/hotspring,
+/area/outdoors/bog)
 "OT" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -7723,10 +7717,6 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/outdoors/bog)
-"Pt" = (
-/mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
-/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Px" = (
 /obj/structure/toilet,
@@ -7846,10 +7836,6 @@
 	},
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
-"Qb" = (
-/obj/structure/flora/hotspring_rocks/small,
-/turf/open/water/hotspring,
-/area/outdoors/bog)
 "Qc" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood/darker,
@@ -8191,6 +8177,10 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
+/area/outdoors/bog)
+"Ss" = (
+/obj/structure/flora/hotspring_rocks,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "St" = (
 /obj/effect/temp_visual/curse{
@@ -8614,6 +8604,10 @@
 	},
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/naturalstone,
+/area/outdoors/bog)
+"Uy" = (
+/mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
+/turf/open/water/hotspring,
 /area/outdoors/bog)
 "Uz" = (
 /obj/structure/bookcase,
@@ -9323,6 +9317,19 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
+"Yq" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/chair/wood/alt{
+	dir = 1
+	},
+/obj/effect/landmark/start/bogwitch{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned/alt,
+/area/indoors/shelter/bog/witch)
 "Ys" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -9373,13 +9380,6 @@
 /obj/structure/innocent_bush,
 /turf/open/floor/grass/cold,
 /area/indoors/lich)
-"YJ" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/shelter/bog/witch)
 "YK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/cobble,
@@ -27039,11 +27039,11 @@ lh
 Lv
 kG
 lF
-ir
+Cn
 aN
 XP
 Xv
-MP
+rC
 Dv
 kG
 Ne
@@ -66230,7 +66230,7 @@ NC
 ry
 pG
 Mr
-yp
+Yq
 Gb
 Gb
 gh
@@ -67642,8 +67642,8 @@ mY
 NC
 sN
 aN
-YJ
-YJ
+vK
+vK
 aN
 Os
 Uk
@@ -69108,7 +69108,7 @@ dE
 Tz
 xC
 wG
-Mg
+gs
 QA
 dE
 Fn
@@ -69309,8 +69309,8 @@ YR
 dE
 dE
 sL
-El
-Mg
+Lh
+gs
 QA
 aa
 Fn
@@ -91031,20 +91031,20 @@ IC
 yn
 dr
 ji
-Az
-Az
-iR
-Az
+kO
+kO
+zR
+kO
 qS
 Yl
 Yl
 Yl
 th
-gl
-Az
-Ls
-Az
-Az
+Ss
+kO
+FL
+kO
+kO
 gz
 mf
 IC
@@ -91231,12 +91231,12 @@ IC
 IC
 yn
 ji
-Ek
-Az
-Az
-Az
-Az
-Az
+zC
+kO
+kO
+kO
+kO
+kO
 qS
 Yl
 Xe
@@ -91244,10 +91244,10 @@ Yl
 nW
 tU
 BB
-Az
-Az
-Pt
-tP
+kO
+kO
+Uy
+OR
 qS
 IC
 IC
@@ -91432,13 +91432,13 @@ IC
 IC
 yn
 ji
-Pt
-Az
+Uy
+kO
 bj
 tU
 tU
 BB
-Nn
+yG
 qS
 Yl
 Xe
@@ -91447,9 +91447,9 @@ Xe
 Yl
 nW
 BB
-Az
-iR
-Az
+kO
+zR
+kO
 qS
 IC
 IC
@@ -91633,9 +91633,9 @@ IC
 IC
 IC
 th
-Az
-Az
-Az
+kO
+kO
+kO
 qS
 Yl
 Yl
@@ -91650,8 +91650,8 @@ Xe
 Yl
 id
 BB
-Az
-Az
+kO
+kO
 gz
 mf
 IC
@@ -91835,9 +91835,9 @@ IC
 IC
 Yl
 gg
-Az
-gl
-Az
+kO
+Ss
+kO
 qS
 Yl
 Xe
@@ -91852,9 +91852,9 @@ Xe
 Xe
 Yl
 th
-Az
-Az
-Nn
+kO
+kO
+yG
 qS
 IC
 IC
@@ -92038,8 +92038,8 @@ IC
 IC
 id
 BB
-Az
-Az
+kO
+kO
 gz
 mf
 Xe
@@ -92054,8 +92054,8 @@ Xe
 Xe
 Yl
 th
-Az
-Az
+kO
+kO
 bj
 bb
 IC
@@ -92241,8 +92241,8 @@ IC
 IC
 id
 BB
-Az
-Ls
+kO
+FL
 qS
 Xe
 Xe
@@ -92256,7 +92256,7 @@ bD
 Xe
 Yl
 th
-Qb
+xl
 bj
 bb
 IC
@@ -92443,8 +92443,8 @@ IC
 IC
 IC
 th
-Az
-Az
+kO
+kO
 qS
 Xe
 bD
@@ -92645,8 +92645,8 @@ IC
 IC
 tY
 ji
-iR
-Az
+zR
+kO
 qS
 Xe
 Xe
@@ -92846,8 +92846,8 @@ IC
 IC
 yn
 ji
-Qb
-Az
+xl
+kO
 bj
 bb
 Xe

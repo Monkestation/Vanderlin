@@ -140,7 +140,7 @@
 			return
 		if(L.status_flags & GODMODE)
 			return
-		if(L.buckling)
+		if(L.buckled)
 			return // Something else is buckling them, maybe another maneater even
 		if(!L.client)
 			return

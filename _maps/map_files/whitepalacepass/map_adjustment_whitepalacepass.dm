@@ -7,7 +7,6 @@
 /datum/map_adjustment/whitepalacepass
 	map_file_name = "WhitePalacePass.dmm"
 	blacklist = list(
-		/datum/job/jailor,
 		/datum/job/adept,
 		/datum/job/advclass/mercenary/grenzelhoft,
 		/datum/job/advclass/pilgrim/rare/grenzelhoft,

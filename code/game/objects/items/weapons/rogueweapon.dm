@@ -45,7 +45,7 @@
 		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
-	if(weapon_special)
+	if(istype(weapon_special))
 		QDEL_NULL(weapon_special)
 	return ..()
 

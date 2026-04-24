@@ -122,6 +122,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/tool_behaviour = NONE
 	var/toolspeed = 1
 
+	/// Organ storage component requires this
+	var/atom/stored_in
+
 	var/block_chance = 0
 	//If you want to have something unrelated to blocking/armour piercing etc. Maybe not needed, but trying to think ahead/allow more freedom
 	var/hit_reaction_chance = 0
@@ -293,111 +296,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
-
-	var/toggle_state // Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
-
-/obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
-	else
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
-
-/obj/item/update_overlays()
-	. = ..()
-	//details tags for items/clothes
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
-		. += pic
-
-	// Add quality overlay to the food item
-	if(recipe_quality <= 0 || !ismob(loc))
-		return
-	var/list/quality_icons = list(
-		null, // Regular has no overlay
-		// "bronze",
-		"silver",
-		"gold",
-		"diamond",
-	)
-	if(recipe_quality <= length(quality_icons) && quality_icons[recipe_quality])
-		. += mutable_appearance('icons/effects/crop_quality.dmi', quality_icons[recipe_quality])
-
-/**
- * Handles adding components to the item. Added in Initialize()
- *
- * Added as a seperate proc to allow for specific behavior
- */
-/obj/item/proc/apply_components()
-	if(force_wielded || gripped_intents)
-		var/wielded_force = force_wielded ? force_wielded : force
-		AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = wielded_force, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), wield_block_offhand = wield_block)
-
-/obj/item/proc/get_detail_tag() //this is for extra layers on clothes or items
-	return detail_tag
-
-/obj/item/proc/get_detail_color() //this is for extra layers on clothes or items
-	return detail_color
-
-/// Handles sprite changes and decals
-/obj/item/proc/update_transform()
-	transform = null
-	if(dropshrink)
-		if(isturf(loc))
-			var/matrix/M = matrix()
-			M.Scale(dropshrink,dropshrink)
-			transform = M
-	if(ismob(loc))
-		if(altgripped)
-			if(gripsprite)
-				icon_state = "[initial(icon_state)]1"
-				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
-				if(B)
-					B.remove()
-					B.generate_appearance()
-					B.apply()
-			return
-		if(HAS_TRAIT(src, TRAIT_WIELDED))
-			if(gripsprite)
-				icon_state = "[initial(icon_state)]1"
-				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
-				if(B)
-					B.remove()
-					B.generate_appearance()
-					B.apply()
-			if(toggle_state)
-				icon_state = "[toggle_state]1" // Stupid thing needed for Grandmaster/Martyr weapons, if theres a better way to accomplish this tell me. I'm stupid.
-			if(gripspriteonmob)
-				item_state = "[initial(icon_state)]_wield"
-				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
-				if(B)
-					B.remove()
-					B.generate_appearance()
-					B.apply()
-			return
-		if(gripsprite)
-			if(toggle_state) // See above comment
-				icon_state ="[toggle_state]"
-			else
-				icon_state = initial(icon_state)
-			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
-			if(B)
-				B.remove()
-				B.generate_appearance()
-				B.apply()
-		if(gripspriteonmob)
-			item_state = initial(icon_state)
-			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
-			if(B)
-				B.remove()
-				B.generate_appearance()
-				B.apply()
+	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
+	var/toggle_state
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -493,6 +393,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	else if(get_detail_color()) // Lord color does this
 		update_appearance(UPDATE_OVERLAYS)
 
+	if(slot_flags)
+		AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
+
 	update_transform()
 	apply_components()
 
@@ -521,6 +424,100 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		A.update_appearance(UPDATE_OVERLAYS)
 	return ..()
 
+
+/obj/item/update_overlays()
+	. = ..()
+	//details tags for items/clothes
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		. += pic
+
+	// Add quality overlay to the food item
+	if(recipe_quality <= 0 || !ismob(loc))
+		return
+	var/list/quality_icons = list(
+		null, // Regular has no overlay
+		// "bronze",
+		"silver",
+		"gold",
+		"diamond",
+	)
+	if(recipe_quality <= length(quality_icons) && quality_icons[recipe_quality])
+		. += mutable_appearance('icons/effects/crop_quality.dmi', quality_icons[recipe_quality])
+
+/**
+ * Handles adding components to the item. Added in Initialize()
+ *
+ * Added as a seperate proc to allow for specific behavior
+ */
+/obj/item/proc/apply_components()
+	if(force_wielded || gripped_intents)
+		var/wielded_force = force_wielded ? force_wielded : force
+		AddComponent(/datum/component/two_handed, force_unwielded = force, force_wielded = wielded_force, wield_callback = CALLBACK(src, PROC_REF(on_wield)), unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), wield_block_offhand = wield_block)
+
+/obj/item/proc/get_detail_tag() //this is for extra layers on clothes or items
+	return detail_tag
+
+/obj/item/proc/get_detail_color() //this is for extra layers on clothes or items
+	return detail_color
+
+/// Handles sprite changes and decals
+/obj/item/proc/update_transform()
+	transform = null
+	if(dropshrink)
+		if(isturf(loc))
+			var/matrix/M = matrix()
+			M.Scale(dropshrink,dropshrink)
+			transform = M
+	if(ismob(loc))
+		if(altgripped)
+			if(gripsprite)
+				icon_state = "[initial(icon_state)]1"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			return
+		if(HAS_TRAIT(src, TRAIT_WIELDED))
+			if(gripsprite)
+				icon_state = "[initial(icon_state)]1"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			if(toggle_state)
+				icon_state = "[toggle_state]1" // Stupid thing needed for Grandmaster/Martyr weapons, if theres a better way to accomplish this tell me. I'm stupid.
+			if(gripspriteonmob)
+				item_state = "[initial(icon_state)]_wield"
+				var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+				if(B)
+					B.remove()
+					B.generate_appearance()
+					B.apply()
+			return
+		if(gripsprite)
+			if(toggle_state) // See above comment
+				icon_state ="[toggle_state]"
+			else
+				icon_state = initial(icon_state)
+			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+			if(B)
+				B.remove()
+				B.generate_appearance()
+				B.apply()
+		if(gripspriteonmob)
+			item_state = initial(icon_state)
+			var/datum/component/decal/blood/B = GetComponent(/datum/component/decal/blood)
+			if(B)
+				B.remove()
+				B.generate_appearance()
+				B.apply()
+
 /// Called when an action associated with our item is deleted
 /obj/item/proc/on_action_deleted(datum/source)
 	SIGNAL_HANDLER
@@ -544,7 +541,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		CRASH("item add_item_action got a type or instance of something that wasn't an action.")
 
 	LAZYADD(actions, action)
-	RegisterSignal(action, COMSIG_PARENT_QDELETING, PROC_REF(on_action_deleted))
+	RegisterSignal(action, COMSIG_QDELETING, PROC_REF(on_action_deleted))
 	if(ismob(loc))
 		// We're being held or are equipped by someone while adding an action?
 		// Then they should also probably be granted the action, given it's in a correct slot
@@ -558,7 +555,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!action)
 		return
 
-	UnregisterSignal(action, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(action, COMSIG_QDELETING)
 	LAZYREMOVE(actions, action)
 	qdel(action)
 
@@ -718,22 +715,34 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
 
-	if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-		return
+	if(stored_in)
+		if(SEND_SIGNAL(stored_in, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
+	else
+		if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
 
 	if(!ontable() && isturf(loc))
-		if(!do_after(user, 3 DECISECONDS, src))
-			return
+		if(stored_in)
+			if(!do_after(user, 3 DECISECONDS, stored_in))
+				return
+		else
+			if(!do_after(user, 3 DECISECONDS, src))
+				return
 
 	//If the item is in a storage item, take it out
 	var/outside_storage = !(item_flags & IN_STORAGE)
 	var/turf/storage_turf
-	if(!outside_storage)
+	if(!outside_storage || stored_in)
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
-			return
+		if(stored_in)
+			if(!SEND_SIGNAL(stored_in, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
+		else
+			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
 		return
 
@@ -1416,20 +1425,26 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			to_chat(user, span_notice("I wield [src] normally."))
 
-/obj/item/on_fall_impact(mob/living/impactee, fall_speed)
+/obj/item/onZImpact(turf/impacted_turf, levels, impact_flags)
 	. = ..()
-	if(!item_weight)
+
+	var/mass_kg = get_carry_weight()
+	if(!mass_kg)
+		return
+
+	var/mob/living/carbon/human/impactee = locate(/mob/living/carbon/human) in impacted_turf
+	if (isnull(impactee))
 		return
 
 	var/target_zone = BODY_ZONE_HEAD
-	/*
-	if(impactee.lying)
+	if(impactee.body_position == LYING_DOWN)
 		target_zone = BODY_ZONE_CHEST
-	*/
-	playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	// playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	add_blood_DNA(GET_ATOM_BLOOD_DNA(impactee))
-	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("A [src] hits you in your [target_zone]!"))
-	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
+	var/fall_factor = sqrt(max(levels, 1))
+	var/impact_damage = mass_kg * fall_factor * FALL_DAMAGE_SCALE
+	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("[src] hits you in your [target_zone]!"))
+	impactee.apply_damage(impact_damage, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt"))
 
 /obj/item/proc/on_consume(mob/living/eater)
 	return
@@ -1467,6 +1482,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(ismob(loc))
 		update_slot_icon()
+	if(clean_types & CLEAN_WASH)
+		set_germ_level(GERM_LEVEL_STERILE)
 
 /obj/item/proc/do_pickup_animation(atom/target, turf/source)
 	set waitfor = FALSE
@@ -1575,6 +1592,16 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
+/obj/item/proc/set_quality(quality)
+	recipe_quality = clamp(quality, 0, 4)
+	update_appearance(UPDATE_OVERLAYS)
+	if(recipe_quality >= 3) // gold tier and above
+		AddComponent(/datum/component/particle_spewer/sparkle)
+	else
+		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
+		if(particle_spewer)
+			particle_spewer.RemoveComponent()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()

@@ -5,6 +5,11 @@
 "ab" = (
 /turf/closed/wall/mineral/stone,
 /area/under/cave)
+"ac" = (
+/obj/structure/flora/hotspring_rocks/small/five,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "ae" = (
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/wilderness)
@@ -118,12 +123,6 @@
 "bO" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/outdoors/wilderness)
-"bQ" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/cobble,
-/area/under/cave)
 "bW" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 30
@@ -262,10 +261,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
-"eR" = (
-/obj/structure/flora/hotspring_rocks/small,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "eV" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/flora/hotspring_rocks/small/three,
@@ -276,15 +271,13 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
-"eX" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
 "eY" = (
 /obj/item/book/tales1,
 /turf/open/floor/cobble,
+/area/outdoors/wilderness)
+"eZ" = (
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "fh" = (
 /obj/structure/table/wood/treestump,
@@ -353,11 +346,6 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"gi" = (
-/obj/effect/landmark/start/adventurerlate,
-/obj/structure/chair/stool,
-/turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
 "gj" = (
 /obj/structure/stairs{
 	dir = 4
@@ -379,12 +367,6 @@
 "gA" = (
 /turf/open/openspace,
 /area/indoors/cave)
-"gF" = (
-/obj/effect/falling_sakura,
-/obj/effect/lily_petal,
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "gK" = (
 /turf/open/openspace,
 /area/indoors)
@@ -408,6 +390,9 @@
 	pixel_y = 8
 	},
 /turf/open/floor/naturalstone,
+/area/outdoors/wilderness)
+"hq" = (
+/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "hu" = (
 /obj/structure/wild_plant/nospread/poppy,
@@ -459,11 +444,6 @@
 /obj/structure/flora/grass/herb/urtica,
 /mob/living/simple_animal/hostile/retaliate/fae/glimmerwing,
 /turf/open/floor/snow,
-/area/outdoors/wilderness)
-"iD" = (
-/obj/effect/falling_sakura,
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "iR" = (
 /obj/effect/falling_sakura,
@@ -560,13 +540,6 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
-"lF" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "lN" = (
 /obj/structure/flora/tree,
 /obj/effect/falling_sakura,
@@ -637,10 +610,21 @@
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/snow,
 /area/outdoors/wilderness)
+"nd" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "nk" = (
 /obj/effect/falling_sakura,
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
+"nn" = (
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "no" = (
 /turf/closed/wall/mineral/stone,
@@ -652,10 +636,6 @@
 "ny" = (
 /obj/structure/flora/hotspring_rocks/grassy,
 /turf/open/floor/snow/rough,
-/area/outdoors/wilderness)
-"nG" = (
-/obj/structure/flora/hotspring_rocks,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "nL" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -678,6 +658,12 @@
 "oc" = (
 /turf/open/floor/metal,
 /area/outdoors/mountains)
+"og" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/outdoors/wilderness)
 "oo" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -763,11 +749,6 @@
 "pY" = (
 /turf/open/floor/snow,
 /area/under/cave)
-"pZ" = (
-/obj/effect/lily_petal,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "qf" = (
 /turf/open/water/river,
 /area/outdoors/wilderness)
@@ -783,20 +764,9 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
-"qo" = (
-/obj/structure/flora/hotspring_rocks/small/two,
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "qs" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
-"qC" = (
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "qG" = (
 /turf/closed/mineral/random,
@@ -804,6 +774,11 @@
 "qH" = (
 /turf/closed/mineral,
 /area/under/cave)
+"qK" = (
+/obj/effect/lily_petal/two,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "qL" = (
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
@@ -856,20 +831,11 @@
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/turned,
 /area/indoors)
-"sr" = (
-/obj/effect/lily_petal/two,
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "ss" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/snow,
-/area/outdoors/wilderness)
-"sv" = (
-/obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "sA" = (
 /obj/structure/wild_plant/nospread/manabloom,
@@ -901,6 +867,12 @@
 "tk" = (
 /turf/open/floor/wood/nosmooth/saiga,
 /area/indoors)
+"tl" = (
+/obj/effect/falling_sakura,
+/obj/effect/lily_petal,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "tn" = (
 /mob/living/simple_animal/hostile/retaliate/fae/dryad,
 /turf/open/floor/grass/cold,
@@ -929,12 +901,14 @@
 /obj/structure/hotspring/border,
 /turf/open/floor/naturalstone,
 /area/outdoors/wilderness)
-"ub" = (
-/obj/effect/landmark/start/adventurerlate,
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "uf" = (
 /obj/structure/roguerock,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
+"um" = (
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
 "uo" = (
@@ -943,11 +917,12 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors)
-"us" = (
-/obj/effect/lily_petal/two,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
+"up" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "uB" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
@@ -1005,6 +980,11 @@
 "vE" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/mountains)
+"wd" = (
+/obj/effect/falling_sakura,
+/obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "wq" = (
 /turf/open/floor/dirt,
 /area/indoors/shelter/woods)
@@ -1046,10 +1026,6 @@
 /obj/effect/falling_sakura,
 /obj/effect/falling_sakura,
 /turf/open/floor/snow/patchy,
-/area/outdoors/wilderness)
-"xb" = (
-/obj/effect/lily_petal/two,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "xn" = (
 /obj/item/natural/rock{
@@ -1145,14 +1121,6 @@
 	},
 /turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
-"yJ" = (
-/obj/structure/flora/hotspring_rocks/small/two,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
-"yM" = (
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "yQ" = (
 /turf/open/floor/rooftop{
 	dir = 4
@@ -1174,6 +1142,11 @@
 /turf/open/water/river{
 	dir = 4
 	},
+/area/outdoors/wilderness)
+"yX" = (
+/obj/effect/lily_petal/two,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "zh" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
@@ -1220,9 +1193,8 @@
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/snow/patchy,
 /area/outdoors/wilderness)
-"zW" = (
-/obj/effect/falling_sakura,
-/obj/structure/flora/hotspring_rocks/grassy,
+"zX" = (
+/obj/effect/lily_petal/two,
 /turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "Ac" = (
@@ -1231,12 +1203,22 @@
 	},
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/indoors)
+"Ag" = (
+/obj/effect/falling_sakura,
+/obj/structure/flora/hotspring_rocks,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Aj" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 6
 	},
 /turf/open/floor/woodturned/nosmooth/saiga,
 /area/indoors)
+"Aq" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "At" = (
 /turf/open/water/river{
 	dir = 8
@@ -1246,6 +1228,10 @@
 /obj/structure/chair/stool,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"AE" = (
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "AS" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/knife/villager{
@@ -1278,10 +1264,21 @@
 	},
 /turf/open/floor/grass/cold,
 /area/indoors)
+"Bp" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/obj/effect/lily_petal/three,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Bq" = (
 /obj/structure/roguerock,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Bt" = (
+/obj/effect/landmark/start/outsider{
+	dir = 4
+	},
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "By" = (
 /obj/structure/flora/hotspring_rocks,
 /turf/open/floor/naturalstone,
@@ -1333,18 +1330,6 @@
 "Cv" = (
 /turf/closed/wall/mineral/stone/window,
 /area/indoors)
-"Cy" = (
-/obj/structure/flora/hotspring_rocks/small,
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
-"Cz" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
 "CH" = (
 /obj/structure/stairs{
 	dir = 4
@@ -1365,11 +1350,6 @@
 "CV" = (
 /turf/open/floor/cobblerock,
 /area/under/cave)
-"CW" = (
-/obj/structure/flora/hotspring_rocks/small/three,
-/obj/effect/lily_petal/three,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "De" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
@@ -1395,6 +1375,10 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
+"Ea" = (
+/obj/structure/flora/hotspring_rocks,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Ed" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass/cold,
@@ -1408,9 +1392,6 @@
 "Eg" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
-"Em" = (
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "Ew" = (
 /obj/structure/flora/newtree/snow,
@@ -1428,11 +1409,6 @@
 "EE" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
-"EG" = (
-/obj/structure/flora/hotspring_rocks/small/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "EO" = (
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
@@ -1442,6 +1418,11 @@
 /obj/effect/spawner/traveltile_spawner/horizontal/jarosite,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"EY" = (
+/obj/effect/lily_petal,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Fj" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -1455,10 +1436,6 @@
 /obj/structure/flora/hotspring_rocks/small/three,
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/naturalstone,
-/area/outdoors/wilderness)
-"FF" = (
-/obj/structure/flora/hotspring_rocks/small/five,
-/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "FG" = (
 /obj/structure/flora/newtree/snow,
@@ -1476,6 +1453,11 @@
 	dir = 8
 	},
 /area/outdoors/mountains)
+"Gr" = (
+/obj/structure/flora/hotspring_rocks/small,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Gt" = (
 /obj/structure/flora/grass/herb/urtica,
 /turf/open/floor/grass/cold,
@@ -1508,12 +1490,6 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/openspace,
 /area/outdoors/mountains)
-"Hb" = (
-/obj/effect/falling_sakura,
-/obj/structure/flora/hotspring_rocks,
-/obj/item/reagent_containers/food/snacks/produce/manabloom,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "Hi" = (
 /obj/item/natural/stoneblock,
 /turf/open/floor/grass/cold,
@@ -1528,12 +1504,6 @@
 	dir = 1
 	},
 /turf/open/floor/snow/patchy,
-/area/outdoors/wilderness)
-"Ho" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
-/turf/open/floor/grass,
 /area/outdoors/wilderness)
 "Hp" = (
 /obj/structure/fluff/railing/border{
@@ -1558,12 +1528,6 @@
 	dir = 1
 	},
 /area/outdoors/wilderness)
-"HB" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
 "HH" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -1576,9 +1540,8 @@
 "HR" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness)
-"HV" = (
-/obj/structure/flora/hotspring_rocks/small/five,
-/obj/effect/falling_sakura,
+"HZ" = (
+/obj/structure/flora/hotspring_rocks/small,
 /turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "In" = (
@@ -1659,6 +1622,10 @@
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood,
 /area/outdoors/wilderness)
+"JN" = (
+/obj/effect/lily_petal,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "JS" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -1711,6 +1678,11 @@
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow,
 /area/outdoors/wilderness)
+"KG" = (
+/obj/structure/flora/hotspring_rocks,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "KQ" = (
 /turf/open/water/river{
 	dir = 1
@@ -1719,6 +1691,13 @@
 "La" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/snow/patchy,
+/area/outdoors/wilderness)
+"Lg" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/obj/structure/table/wood/treestump,
+/turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
 "Lp" = (
 /obj/effect/falling_sakura,
@@ -1729,19 +1708,16 @@
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/grass/cold,
 /area/outdoors/wilderness)
-"Lu" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 8
-	},
-/obj/structure/table/wood/treestump,
-/turf/open/floor/grass/cold,
-/area/outdoors/wilderness)
 "LB" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
+"LI" = (
+/obj/effect/landmark/start/outsider,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "LJ" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1796,12 +1772,6 @@
 /obj/structure/rack,
 /turf/open/floor/herringbone,
 /area/indoors)
-"MK" = (
-/obj/effect/landmark/start/adventurerlate{
-	dir = 4
-	},
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "MQ" = (
 /obj/structure/hotspring/border/six,
 /turf/open/floor/snow/rough,
@@ -1857,6 +1827,11 @@
 	dir = 1
 	},
 /area/outdoors/mountains)
+"NQ" = (
+/obj/structure/flora/hotspring_rocks/small/three,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "NU" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains)
@@ -1867,6 +1842,10 @@
 /obj/structure/bed/sleepingbag,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Ok" = (
+/obj/effect/lily_petal/three,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "Om" = (
 /obj/item/fertilizer/ash,
 /turf/open/floor/grass/cold,
@@ -1936,11 +1915,6 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
-"Qv" = (
-/obj/structure/flora/hotspring_rocks/small,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "Qz" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 10
@@ -1970,8 +1944,10 @@
 "QU" = (
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
-"QX" = (
-/obj/effect/lily_petal,
+"QY" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
 /turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "Ra" = (
@@ -2000,6 +1976,11 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors)
+"Rw" = (
+/obj/effect/falling_sakura,
+/obj/item/reagent_containers/food/snacks/produce/manabloom,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "RB" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
@@ -2157,13 +2138,13 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/snow,
 /area/outdoors/wilderness)
-"UH" = (
-/turf/open/water,
-/area/outdoors/wilderness)
-"UI" = (
-/obj/structure/flora/hotspring_rocks/small/two,
+"Uu" = (
+/obj/structure/flora/hotspring_rocks/small/three,
 /obj/effect/lily_petal/three,
 /turf/open/water/hotspring,
+/area/outdoors/wilderness)
+"UH" = (
+/turf/open/water,
 /area/outdoors/wilderness)
 "UO" = (
 /obj/structure/stairs{
@@ -2188,13 +2169,14 @@
 /obj/structure/flora/grass/bush/tundra,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
-"Vb" = (
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "Vj" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/outdoors/mountains)
+"Vo" = (
+/obj/effect/landmark/start/outsider,
+/obj/structure/chair/stool,
+/turf/open/floor/grass/cold,
+/area/outdoors/wilderness)
 "Vs" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
@@ -2240,11 +2222,6 @@
 "VZ" = (
 /turf/open/water/swamp,
 /area/outdoors/wilderness)
-"Wb" = (
-/obj/structure/flora/hotspring_rocks,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors/wilderness)
 "Wk" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/outdoors/wilderness)
@@ -2253,6 +2230,13 @@
 /turf/open/water/swamp,
 /area/outdoors/wilderness)
 "Wr" = (
+/turf/open/floor/naturalstone,
+/area/under/cave)
+"Ww" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/outsider{
+	dir = 1
+	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Wy" = (
@@ -2330,6 +2314,12 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors)
+"XP" = (
+/obj/effect/landmark/start/outsider{
+	dir = 8
+	},
+/turf/open/floor/cobble,
+/area/under/cave)
 "XQ" = (
 /obj/structure/flora/newtree/snow,
 /obj/effect/falling_sakura,
@@ -2342,6 +2332,12 @@
 "Ye" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/cobble,
+/area/outdoors/wilderness)
+"Yf" = (
+/obj/structure/flora/hotspring_rocks/small,
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
 /area/outdoors/wilderness)
 "Ym" = (
 /obj/structure/wild_plant/nospread/poppy,
@@ -2381,6 +2377,10 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/grass/cold,
 /area/indoors)
+"YY" = (
+/obj/structure/flora/hotspring_rocks/small/five,
+/turf/open/water/hotspring,
+/area/outdoors/wilderness)
 "YZ" = (
 /obj/effect/falling_sakura,
 /turf/closed/wall/mineral/decowood,
@@ -35534,7 +35534,7 @@ HR
 pE
 pE
 pE
-Ho
+og
 aa
 "}
 (165,1,1) = {"
@@ -35736,7 +35736,7 @@ pE
 pE
 HR
 pE
-Ho
+og
 aa
 "}
 (166,1,1) = {"
@@ -35938,7 +35938,7 @@ lv
 HR
 pE
 pE
-Ho
+og
 aa
 "}
 (167,1,1) = {"
@@ -42499,9 +42499,9 @@ id
 id
 id
 id
-bQ
-bQ
-bQ
+XP
+XP
+XP
 id
 id
 id
@@ -58346,7 +58346,7 @@ Sr
 Sr
 Sr
 Wr
-MK
+up
 Wr
 jE
 jE
@@ -58751,7 +58751,7 @@ Wr
 Wr
 fX
 Wr
-lF
+Ww
 Sr
 Sr
 Sr
@@ -58949,7 +58949,7 @@ Wr
 Wr
 Wr
 Wr
-ub
+LI
 Wr
 Wr
 Wr
@@ -59152,7 +59152,7 @@ Wr
 Wr
 Wr
 Ax
-eX
+nd
 EE
 EE
 Wr
@@ -63177,7 +63177,7 @@ EE
 EE
 EE
 EE
-HB
+Bt
 EE
 pb
 pb
@@ -63779,7 +63779,7 @@ pb
 pb
 pb
 EE
-gi
+Vo
 EE
 EE
 EE
@@ -63989,7 +63989,7 @@ IB
 EE
 EE
 EE
-Cz
+um
 EE
 qH
 qH
@@ -64591,7 +64591,7 @@ pb
 pb
 pb
 EE
-Lu
+Lg
 EE
 EE
 EE
@@ -85795,9 +85795,9 @@ cQ
 zJ
 zJ
 Po
-us
-Wb
-sv
+yX
+KG
+Ok
 uJ
 tV
 qH
@@ -85997,10 +85997,10 @@ cQ
 cQ
 ny
 Po
-eR
-qC
-iD
-yJ
+HZ
+nn
+Rw
+Aq
 uJ
 tV
 vl
@@ -86200,10 +86200,10 @@ cQ
 zJ
 fK
 wA
-FF
-Vb
-qC
-xb
+YY
+AE
+nn
+zX
 zs
 vl
 qH
@@ -86403,9 +86403,9 @@ zJ
 vl
 fK
 wA
-sv
-Vb
-eR
+Ok
+AE
+HZ
 zs
 qH
 qH
@@ -87211,7 +87211,7 @@ zJ
 zJ
 Px
 VQ
-FF
+YY
 zs
 vl
 vl
@@ -87412,8 +87412,8 @@ cQ
 cQ
 zJ
 Po
-qo
-QX
+QY
+JN
 Ft
 Yn
 tV
@@ -87614,10 +87614,10 @@ cQ
 cQ
 zJ
 di
-iD
-Vb
-us
-Em
+Rw
+AE
+yX
+hq
 uJ
 Jh
 an
@@ -87816,11 +87816,11 @@ cQ
 cQ
 cQ
 di
-nG
-qC
-Vb
-iD
-eR
+Ea
+nn
+AE
+Rw
+HZ
 ef
 eY
 xW
@@ -88019,10 +88019,10 @@ cQ
 cQ
 MQ
 PN
-xb
-Vb
-Vb
-sv
+zX
+AE
+AE
+Ok
 ef
 kl
 WB
@@ -88222,8 +88222,8 @@ cQ
 cQ
 MQ
 SW
-EG
-xb
+NQ
+zX
 hP
 bF
 Xh
@@ -89033,7 +89033,7 @@ zJ
 zJ
 vl
 Po
-Cy
+Yf
 uJ
 tV
 vl
@@ -89235,8 +89235,8 @@ zJ
 ny
 vl
 ft
-us
-Em
+yX
+hq
 zs
 vl
 vl
@@ -89437,8 +89437,8 @@ zJ
 vl
 vl
 Po
-iD
-Vb
+Rw
+AE
 uJ
 tV
 vl
@@ -89640,8 +89640,8 @@ IN
 vl
 fK
 da
-us
-Qv
+yX
+Gr
 zs
 vl
 vl
@@ -90250,9 +90250,9 @@ vl
 vl
 Px
 VQ
-UI
-pZ
-Em
+Bp
+EY
+hq
 fR
 tV
 qH
@@ -90451,11 +90451,11 @@ qH
 vl
 vl
 Po
-us
-Em
-Vb
-HV
-yM
+yX
+hq
+AE
+ac
+eZ
 zs
 cx
 qH
@@ -90653,11 +90653,11 @@ qH
 cx
 vl
 Po
-Cy
-iD
-nG
-us
-qC
+Yf
+Rw
+Ea
+yX
+nn
 zs
 bA
 qH
@@ -90856,9 +90856,9 @@ qH
 qH
 fK
 wA
-CW
-us
-Qv
+Uu
+yX
+Gr
 bC
 BL
 qH
@@ -98692,7 +98692,7 @@ bI
 WW
 kv
 Po
-Hb
+Ag
 yS
 Yu
 SD
@@ -98894,8 +98894,8 @@ Lp
 pb
 td
 VQ
-QX
-Em
+JN
+hq
 uJ
 Yu
 WW
@@ -99098,7 +99098,7 @@ Mg
 bC
 hh
 wA
-sr
+qK
 zs
 pb
 WW
@@ -99295,12 +99295,12 @@ cQ
 cQ
 Lp
 eV
-Em
-Em
+hq
+hq
 wK
 zj
 Po
-Em
+hq
 eW
 Lp
 cQ
@@ -99497,12 +99497,12 @@ cQ
 pb
 td
 kN
-Vb
-Em
+AE
+hq
 wK
 WS
 Kk
-Em
+hq
 lZ
 eQ
 cQ
@@ -99698,14 +99698,14 @@ pb
 pb
 pb
 jC
-gF
-Em
-Em
+tl
+hq
+hq
 gY
 Yn
 Pj
-Em
-gF
+hq
+tl
 eW
 Lp
 cQ
@@ -99900,14 +99900,14 @@ pb
 KE
 Vs
 jC
-zW
+wd
 bC
 GN
 GN
 GN
 GN
 wA
-FF
+YY
 zs
 Lp
 Lp

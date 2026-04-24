@@ -34,7 +34,7 @@
 	projectilesound = 'sound/combat/wooshes/punch/punchwoosh (1).ogg'
 	patron = /datum/patron/divine/abyssor
 
-
+	animal_type = /datum/blood_type/human/triton
 	stat_attack = SOFT_CRIT
 	loot = list(/obj/item/weapon/mace/goden/deepduke)
 	ai_controller = /datum/ai_controller/fishboss

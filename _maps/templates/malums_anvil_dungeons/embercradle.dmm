@@ -633,13 +633,6 @@
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/twig,
 /area/under/mountains/anvil/dungeon)
-"jZ" = (
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/item/bin,
-/turf/open/floor/cobblerock,
-/area/under/mountains/anvil/dungeon)
 "ka" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bonepile,
@@ -787,6 +780,12 @@
 "ls" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/cobblerock,
+/area/under/mountains/anvil/dungeon)
+"lv" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "ly" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -949,6 +948,9 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/grass,
 /area/under/mountains/anvil/dungeon/lower)
+"ny" = (
+/turf/open/water/clean,
+/area/under/mountains/anvil/dungeon/lower)
 "nM" = (
 /obj/structure/rack,
 /obj/item/clothing/head/helmet/leather/minershelm,
@@ -1049,6 +1051,15 @@
 /obj/item/weapon/shovel,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon/lower)
+"oH" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fluff/signage{
+	name = "Tips Please"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/dungeon)
 "oJ" = (
 /obj/structure/rack/shelf/big,
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
@@ -1254,15 +1265,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
-"rm" = (
-/obj/structure/table/wood{
-	dir = 10;
-	icon_state = "largetable"
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
 "ro" = (
 /obj/machinery/artificer_table,
 /obj/item/scrying,
@@ -1394,13 +1396,6 @@
 /obj/item/reagent_containers/glass/bottle/elfblue,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
-"sD" = (
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/machinery/light/fueled/firebowl/standing,
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
 "sE" = (
 /obj/structure/rack,
 /obj/item/coin/silver/pile,
@@ -1881,6 +1876,15 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
+"zQ" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/structure/fluff/buysign{
+	name = "The Grave Tunes"
+	},
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "zU" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/reagent_containers/food/snacks/smallrat,
@@ -2085,6 +2089,17 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
+"CD" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "CO" = (
 /turf/closed/wall/mineral/wood,
 /area/under/mountains/anvil/dungeon)
@@ -2561,15 +2576,6 @@
 /obj/item/reagent_containers/glass/bottle/elfred,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
-"IB" = (
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/structure/fluff/buysign{
-	name = "The Grave Tunes"
-	},
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
 "IG" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -2642,15 +2648,6 @@
 "Jd" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
-/area/under/mountains/anvil/dungeon)
-"Jm" = (
-/obj/effect/decal/borderfall{
-	dir = 1
-	},
-/obj/structure/fluff/signage{
-	name = "Tips Please"
-	},
-/turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "Js" = (
 /obj/structure/fluff/railing/tall/palisade{
@@ -2795,12 +2792,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
-	},
-/turf/open/floor/cobble,
-/area/under/mountains/anvil/dungeon)
-"KZ" = (
-/obj/effect/decal/borderfall{
-	dir = 1
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
@@ -3296,9 +3287,6 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
-"RR" = (
-/turf/open/water/clean,
-/area/under/mountains/anvil/dungeon/lower)
 "Sa" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/cobblerock,
@@ -3466,19 +3454,15 @@
 /obj/item/clothing/neck/psycross/silver/divine/noc,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
-"Uo" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
+"Ui" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
-"Uq" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
+"Uo" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
 "Ur" = (
@@ -3691,6 +3675,15 @@
 	},
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon)
+"WV" = (
+/obj/structure/table/wood{
+	dir = 10;
+	icon_state = "largetable"
+	},
+/obj/item/gun/ballistic/bow/cross,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/cobble,
+/area/under/mountains/anvil/dungeon)
 "WW" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/cobble,
@@ -3884,6 +3877,13 @@
 	redstone_id = "minotaur_pit"
 	},
 /turf/closed/wall/mineral/stonebrick,
+/area/under/mountains/anvil/dungeon)
+"Zk" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/obj/item/bin,
+/turf/open/floor/cobblerock,
 /area/under/mountains/anvil/dungeon)
 "Zn" = (
 /obj/structure/rack,
@@ -4286,13 +4286,13 @@ Xc
 Xc
 Vz
 ul
-RR
-RR
-RR
-RR
-RR
-RR
-RR
+ny
+ny
+ny
+ny
+ny
+ny
+ny
 ul
 Vz
 Xc
@@ -4352,13 +4352,13 @@ Xc
 Xc
 Vz
 ot
-RR
+ny
 IK
 nr
 GG
 nr
 IK
-RR
+ny
 ot
 Vz
 Xc
@@ -4418,13 +4418,13 @@ Xc
 Xc
 Vz
 Io
-RR
+ny
 vD
 vD
 vD
 vD
 vD
-RR
+ny
 Io
 Vz
 Xc
@@ -4484,13 +4484,13 @@ Xc
 Xc
 Vz
 xC
-RR
+ny
 cT
 cT
 Qk
 cT
 cT
-RR
+ny
 xC
 Vz
 Xc
@@ -4550,13 +4550,13 @@ Xc
 Xc
 Vz
 kn
-RR
+ny
 cT
 cT
 UD
 cT
 cT
-RR
+ny
 kn
 Vz
 Xc
@@ -4616,13 +4616,13 @@ Xc
 Xc
 Vz
 Io
-RR
+ny
 Tj
 Tj
 lO
 Tj
 Tj
-RR
+ny
 Io
 Vz
 Xc
@@ -4682,13 +4682,13 @@ Xc
 Xc
 Vz
 Ht
-RR
+ny
 Tj
 Tj
 HG
 Tj
 Tj
-RR
+ny
 Ht
 Vz
 Xc
@@ -4748,13 +4748,13 @@ Xc
 Xc
 Vz
 ul
-RR
+ny
 Tj
 Tj
 HG
 Tj
 Tj
-RR
+ny
 ul
 Vz
 Xc
@@ -4812,17 +4812,17 @@ Xc
 Xc
 Xc
 Xc
-RR
-RR
-RR
+ny
+ny
+ny
 Tj
 wg
 HG
 wg
 Tj
-RR
-RR
-RR
+ny
+ny
+ny
 Xc
 Xc
 Xc
@@ -5784,7 +5784,7 @@ Xc
 ag
 XJ
 XJ
-RR
+ny
 XJ
 Xc
 "}
@@ -5849,8 +5849,8 @@ Xc
 Xc
 Xc
 Nc
-RR
-RR
+ny
+ny
 XJ
 Xc
 "}
@@ -5914,8 +5914,8 @@ Xc
 Xc
 Xc
 Oi
-RR
-RR
+ny
+ny
 Ja
 XJ
 Xc
@@ -6312,7 +6312,7 @@ Xc
 Xc
 Xc
 ag
-RR
+ny
 ag
 Xc
 "}
@@ -6378,8 +6378,8 @@ Xc
 Xc
 TG
 ag
-RR
-RR
+ny
+ny
 Xc
 "}
 (38,1,1) = {"
@@ -6443,9 +6443,9 @@ Xc
 Xc
 rQ
 ag
-RR
+ny
 ag
-RR
+ny
 Xc
 "}
 (39,1,1) = {"
@@ -10820,7 +10820,7 @@ OQ
 BR
 BR
 qT
-sD
+Ui
 eC
 gW
 Jd
@@ -10886,7 +10886,7 @@ kZ
 xn
 Jd
 cd
-KZ
+lv
 SI
 pa
 hS
@@ -10952,7 +10952,7 @@ FQ
 iQ
 rR
 cd
-IB
+zQ
 iC
 sh
 pa
@@ -10980,7 +10980,7 @@ jQ
 bY
 bY
 Cb
-Uq
+CD
 bY
 wL
 fH
@@ -11018,7 +11018,7 @@ gj
 qZ
 Jd
 cd
-KZ
+lv
 eC
 Jd
 Ci
@@ -11084,7 +11084,7 @@ DP
 st
 eC
 cd
-KZ
+lv
 eC
 eC
 eC
@@ -11150,7 +11150,7 @@ kZ
 iQ
 vz
 cd
-Jm
+oH
 OC
 pa
 pa
@@ -11216,7 +11216,7 @@ Va
 nP
 Jd
 bQ
-jZ
+Zk
 iC
 sh
 sh
@@ -11282,7 +11282,7 @@ Tx
 me
 cV
 qo
-sD
+Ui
 Ci
 Ub
 Jd
@@ -11311,7 +11311,7 @@ oR
 Nn
 fH
 oR
-rm
+WV
 kZ
 oR
 oR

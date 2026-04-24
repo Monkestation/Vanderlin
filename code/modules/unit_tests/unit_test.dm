@@ -153,11 +153,14 @@ GLOBAL_LIST_EMPTY(required_map_items)
 		/obj/effect/fuse,
 		///shit that calls explosion() should probably not be called in empty space
 		/obj/effect/temp_visual/target/meteor,
-		/obj/structure/meatvine/papameat,
 		/obj/effect/meatvine_controller,
 	)
+	/// ???
+	ignore += typesof(/obj/effect/bombard_zone)
+	/// Spawns a lot of shit
+	ignore += typesof(/obj/structure/meatvine)
 	///this does some wonky things that we don't want in a test area
-	ignore += typesof(/obj/structure/stockpile_storage,)
+	ignore += typesof(/obj/structure/stockpile_storage)
 	//these are VERY situational and need info passed
 	ignore += typesof(/obj/effect/abstract)
 	//needs a lich passed

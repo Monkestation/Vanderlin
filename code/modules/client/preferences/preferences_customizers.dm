@@ -197,12 +197,11 @@
 	else
 		return "FFFFFF"
 
-/datum/preferences/proc/get_eye_color()
+/datum/preferences/proc/get_eye_color(side = RIGHT_SIDE)
 	var/datum/customizer_entry/organ/eyes/entry = get_customizer_entry_of_type(/datum/customizer_entry/organ/eyes)
-	if(entry)
-		return entry.eye_color
-	else
+	if(!entry)
 		return "FFFFFF"
+	return (side == RIGHT_SIDE) ? entry.right_eye_color : entry.left_eye_color
 
 /datum/preferences/proc/get_chest_color()
 	var/list/zone_list = body_markings[BODY_ZONE_CHEST]

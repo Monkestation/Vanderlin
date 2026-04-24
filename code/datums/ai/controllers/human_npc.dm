@@ -45,6 +45,7 @@
 		/datum/ai_planning_subtree/loot,
 	)
 	idle_behavior = /datum/idle_behavior/idle_random_walk
+	ai_traits = STOP_MOVING_WHEN_PULLED
 
 /datum/ai_controller/human_npc/TryPossessPawn(atom/new_pawn)
 	. = ..()
@@ -64,11 +65,3 @@
 /datum/ai_controller/human_npc/proc/update_movespeed(mob/living/pawn)
 	SIGNAL_HANDLER
 	movement_delay = pawn.cached_multiplicative_slowdown
-
-/datum/ai_controller/human_npc/can_move()
-	. = ..()
-	if(!.)
-		return FALSE
-	var/mob/living/living_pawn = pawn
-	if(living_pawn.pulledby)
-		return FALSE

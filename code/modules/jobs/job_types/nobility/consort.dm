@@ -1,5 +1,5 @@
 /datum/job/consort
-	title = "Consort"
+	title = JOB_CONSORT
 	tutorial = "Yours was a marriage of political convenience rather than love, \
 	yet you have remained the ruling monarch's good friend and confidant throughout your marriage. \
 	But your love and loyalty will be tested, for daggers are equally pointed at your throat."
@@ -16,11 +16,11 @@
 	outfit = /datum/outfit/consort
 	advclass_cat_rolls = list(CTAG_CONSORT = 20)
 	give_bank_account = 500
-	apprentice_name = "Servant"
+	apprentice_name = JOB_SERVANT
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	noble_income = 22
 
-	honorary = "Consort"
+	honorary = JOB_CONSORT
 
 	job_bitflag = BITFLAG_ROYALTY
 
@@ -54,7 +54,7 @@
 		spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
 /datum/outfit/consort
-	name = "Consort"
+	name = JOB_CONSORT
 	head = /obj/item/clothing/head/crown/nyle/consortcrown
 	shoes = /obj/item/clothing/shoes/boots
 	ring = /obj/item/clothing/ring/silver

@@ -25,6 +25,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/datum/reagents/holder = null
 	var/reagent_state = LIQUID
 	var/list/data
+	///A list of causes why this chem should skip being removed, if the length is 0 it will be removed from holder naturally, if this is >0 it will not be removed from the holder.
+	var/list/reagent_removal_skip_list = list()
 	var/current_cycle = 0
 	var/volume = 0									//pretend this is moles
 	var/color = "#000000" // rgb: 0, 0, 0
@@ -62,6 +64,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/recipe_quality = 1
 	/// Base quality for newly created reagents of this type
 	var/base_quality = 1
+	var/dead_head = TRUE
+	///if we are false we don't apply the liver efficiency to our metabolization
+	var/liver_chemical = TRUE
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()
@@ -102,18 +107,19 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	SHOULD_CALL_PARENT(FALSE)
 	on_mob_life(M)
 
-/datum/reagent/proc/on_mob_life(mob/living/carbon/M)
+/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
+	SHOULD_CALL_PARENT(TRUE)
 	current_cycle++
 	if(holder)
 		var/adjusted_metabolization_rate = metabolization_rate
 		if(istype(src, /datum/reagent/consumable/ethanol) && has_world_trait(/datum/world_trait/baotha_revelry))
 			adjusted_metabolization_rate = adjusted_metabolization_rate * (is_ascendant(BAOTHA) ? 0.33 : 0.5)
 
-		// Apply quality modifier to metabolization
 		var/quality_modifier = get_quality_metabolization_modifier()
-		adjusted_metabolization_rate = adjusted_metabolization_rate / quality_modifier // Higher quality lasts longer
 
-		holder.remove_reagent(type, adjusted_metabolization_rate) //By default it slowly disappears.
+		adjusted_metabolization_rate = (adjusted_metabolization_rate / quality_modifier) * (efficiency)
+
+		holder.remove_reagent(type, adjusted_metabolization_rate)
 		if(M.client)
 			if(!istype(src, /datum/reagent/drug) && reagent_state == LIQUID)
 				record_featured_object_stat(FEATURED_STATS_DRINKS, name, adjusted_metabolization_rate)
@@ -168,6 +174,15 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 // Called when this reagent stops being metabolized by a liver
 /datum/reagent/proc/on_mob_end_metabolize(mob/living/L)
 	return
+
+/// Called when a reagent is inside of a mob when they are dead
+/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, delta_time)
+	if(!dead_head)
+		return
+	current_cycle++
+	if(length(reagent_removal_skip_list))
+		return
+	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * delta_time)
 
 /datum/reagent/proc/on_move(mob/M)
 	return

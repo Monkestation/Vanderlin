@@ -81,9 +81,6 @@ SUBSYSTEM_DEF(role_class_handler)
 	if(!H)
 		CRASH("setup_class_handler was called without a passed mob in args!")
 
-	if(H.client.has_triumph_buy(TRIUMPH_BUY_ANY_CLASS))
-		H.client.activate_triumph_buy(TRIUMPH_BUY_ANY_CLASS)
-
 	// insure they somehow aren't closing the datum they got and opening a new one w rolls
 	var/datum/class_select_handler/class_select = class_select_handlers[H.client.ckey]
 	if(class_select)
@@ -103,6 +100,9 @@ SUBSYSTEM_DEF(role_class_handler)
 		var/datum/job/job_datum = SSjob.GetJob(H.job)
 		if(length(job_datum.advclass_cat_rolls))
 			class_select.class_cat_alloc_attempts = job_datum.advclass_cat_rolls
+	if(H.client.has_triumph_buy(TRIUMPH_BUY_ANY_CLASS, TRUE))
+		LAZYADD(class_select.forced_class_additions, /datum/job/advclass/pick_everything)
+		H.client.activate_triumph_buy(TRIUMPH_BUY_ANY_CLASS)
 
 	if(used_key in special_session_queue)
 		class_select.special_session_queue = list()

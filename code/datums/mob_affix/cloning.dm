@@ -10,7 +10,7 @@
 	var/combat_duration = 10 SECONDS // How long combat mode lasts after being hit
 
 /datum/mob_affix/mirror_images/apply_affix(mob/living/simple_animal/hostile/retaliate/target)
-	RegisterSignal(target, COMSIG_MOB_APPLY_DAMGE, PROC_REF(on_damaged))
+	RegisterSignal(target, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_damaged))
 
 /datum/mob_affix/mirror_images/proc/on_damaged(mob/living/simple_animal/hostile/retaliate/target)
 	SIGNAL_HANDLER
@@ -50,7 +50,7 @@
 			QDEL_IN(clone, 5 SECONDS) // Clones disappear after 5 seconds
 
 /datum/mob_affix/mirror_images/cleanup_affix(mob/living/simple_animal/hostile/retaliate/target)
-	UnregisterSignal(target, COMSIG_MOB_APPLY_DAMGE)
+	UnregisterSignal(target, COMSIG_MOB_APPLY_DAMAGE)
 	deltimer(clone_timer)
 	deltimer(combat_duration_timer)
 	in_combat = FALSE

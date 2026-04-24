@@ -47,18 +47,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
-"ai" = (
-/obj/effect/lily_petal,
-/obj/effect/lily_petal/three{
-	pixel_y = -14;
-	pixel_x = -2
-	},
-/obj/effect/lily_petal/two{
-	pixel_y = 13;
-	pixel_x = 11
-	},
-/turf/open/water/hotspring,
-/area/outdoors)
 "aj" = (
 /obj/structure/hotspring/border/five,
 /obj/structure/bridge{
@@ -70,9 +58,6 @@
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/woodturned,
 /area/indoors)
-"al" = (
-/turf/open/water/hotspring,
-/area/outdoors)
 "am" = (
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/dirt/road,
@@ -1779,12 +1764,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"io" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "ip" = (
 /obj/structure/mannequin/male/female,
 /obj/item/clothing/shoes/nobleboot,
@@ -1951,12 +1930,6 @@
 "js" = (
 /turf/closed/wall/mineral/tent,
 /area/indoors/bandit_lair)
-"jt" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "jv" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/chevron,
@@ -3003,6 +2976,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"qr" = (
+/obj/effect/lily_petal,
+/turf/open/water/hotspring,
+/area/outdoors)
 "qs" = (
 /turf/open/water/swamp,
 /area/outdoors/woods_safe)
@@ -3053,12 +3030,6 @@
 "qO" = (
 /turf/open/floor/cobble,
 /area/indoors)
-"qP" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "qQ" = (
 /obj/item/clothing/shirt/dress/gen/colored/black,
 /obj/item/clothing/shirt/dress/gen/colored/black,
@@ -3094,6 +3065,18 @@
 /obj/item/book/tales1,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"qX" = (
+/obj/effect/lily_petal,
+/obj/effect/lily_petal/three{
+	pixel_y = -14;
+	pixel_x = -2
+	},
+/obj/effect/lily_petal/two{
+	pixel_y = 13;
+	pixel_x = 11
+	},
+/turf/open/water/hotspring,
+/area/outdoors)
 "qZ" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -3285,11 +3268,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
-"sl" = (
-/obj/effect/lily_petal/three,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors)
 "sm" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -3365,13 +3343,6 @@
 /obj/structure/flora/ausbushes/reedbush,
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
-"sD" = (
-/obj/effect/lily_petal/three,
-/obj/structure/flora/sakura{
-	pixel_y = -13
-	},
-/turf/open/water/hotspring,
-/area/outdoors)
 "sE" = (
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -3411,6 +3382,12 @@
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
 /area/indoors)
+"sW" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/gun/ballistic/bow,
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "sZ" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
@@ -4583,6 +4560,13 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/tile/checker_green,
 /area/indoors)
+"AZ" = (
+/obj/effect/lily_petal/three,
+/obj/structure/flora/sakura{
+	pixel_y = -13
+	},
+/turf/open/water/hotspring,
+/area/outdoors)
 "Ba" = (
 /turf/open/floor/metal/barograte,
 /area/indoors/vampire_manor)
@@ -5101,6 +5085,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"ES" = (
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "EU" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -5367,11 +5355,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
-"GP" = (
-/obj/effect/lily_petal/two,
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors)
 "GQ" = (
 /obj/structure/door{
 	lockid = "mansionvampire"
@@ -5881,6 +5864,11 @@
 /obj/structure/closet/dirthole/closed/loot,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"JA" = (
+/obj/effect/lily_petal/two,
+/obj/effect/falling_sakura,
+/turf/open/water/hotspring,
+/area/outdoors)
 "JD" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/shirt/robe/dendor,
@@ -5954,6 +5942,9 @@
 "Ke" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/dirt/road,
+/area/outdoors)
+"Kf" = (
+/turf/open/water/hotspring,
 /area/outdoors)
 "Kg" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -6150,10 +6141,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
-"LE" = (
-/obj/effect/falling_sakura,
-/turf/open/water/hotspring,
-/area/outdoors)
 "LG" = (
 /obj/structure/flora/grass/herb/random,
 /obj/structure/flora/grass,
@@ -6513,6 +6500,12 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"Oe" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "Og" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/cloak/raincloak/furcloak,
@@ -6873,6 +6866,12 @@
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/vampire_manor)
+"QR" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/bandit_lair)
 "QS" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/water/blood,
@@ -7498,8 +7497,9 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors)
-"Uw" = (
-/obj/effect/lily_petal/two,
+"Uu" = (
+/obj/effect/lily_petal/three,
+/obj/effect/falling_sakura,
 /turf/open/water/hotspring,
 /area/outdoors)
 "Ux" = (
@@ -7555,10 +7555,6 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
-"UR" = (
-/obj/effect/lily_petal,
-/turf/open/water/hotspring,
-/area/outdoors)
 "UU" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
 /obj/item/clothing/shoes/shortboots,
@@ -7935,6 +7931,10 @@
 /obj/item/ore/iron,
 /turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
+"Xl" = (
+/obj/effect/lily_petal/two,
+/turf/open/water/hotspring,
+/area/outdoors)
 "Xp" = (
 /obj/structure/table/wood{
 	dir = 5;
@@ -9905,7 +9905,7 @@ oI
 Sq
 Zh
 In
-qP
+QR
 NG
 yo
 yq
@@ -11027,8 +11027,8 @@ yF
 bX
 bX
 Ke
-al
-UR
+Kf
+qr
 Mw
 WW
 JJ
@@ -11157,8 +11157,8 @@ yF
 bX
 bX
 Ke
-al
-al
+Kf
+Kf
 kF
 Cp
 Vd
@@ -11287,9 +11287,9 @@ yF
 bX
 bX
 Ke
-sD
-LE
-LE
+AZ
+ES
+ES
 kF
 Cp
 iH
@@ -11417,8 +11417,8 @@ yF
 bX
 bX
 Ke
-LE
-GP
+ES
+JA
 Kd
 ab
 kF
@@ -11547,8 +11547,8 @@ yF
 bX
 bX
 Ke
-al
-sl
+Kf
+Uu
 xM
 aY
 am
@@ -11556,7 +11556,7 @@ bn
 am
 am
 Rm
-ai
+qX
 fi
 am
 am
@@ -12606,7 +12606,7 @@ aq
 bp
 xO
 iE
-Uw
+Xl
 Mw
 bp
 hN
@@ -14453,9 +14453,9 @@ yE
 cQ
 Ba
 MW
-jt
+Oe
 jZ
-io
+sW
 yE
 bK
 cT

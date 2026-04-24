@@ -151,26 +151,27 @@ SUBSYSTEM_DEF(plexora)
 			active_requests -= request
 			qdel(request)
 
-/datum/controller/subsystem/plexora/proc/_Shutdown(hard = FALSE, requestedby)
+/datum/controller/subsystem/plexora/proc/notify_shutdown(restart_type_override)
 	var/static/server_restart_sent = FALSE
 
-	if (server_restart_sent)
+	if(server_restart_sent)
 		return
+
 	server_restart_sent = TRUE
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "servershutdown",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
 		"round_timer" = ROUND_TIME(),
 		"map" = SSmapping.config?.map_name,
 		"playercount" = length(GLOB.clients),
-		"restart_type" = restart_type,
+		"restart_type" = isnull(restart_type_override) ? restart_type : restart_type_override,
 		"requestedby" = usr?.ckey,
 		"requestedby_stealthed" = usr?.client?.holder?.fakekey,
-	), mark_active = FALSE)
+	))
 
 /datum/controller/subsystem/plexora/proc/serverstarted()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "serverstart",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -179,7 +180,7 @@ SUBSYSTEM_DEF(plexora)
 	))
 
 /datum/controller/subsystem/plexora/proc/serverinitdone(time)
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "serverinitdone",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -190,7 +191,7 @@ SUBSYSTEM_DEF(plexora)
 
 // This DOES get called, refer to init proc, it uses a signal.
 /datum/controller/subsystem/plexora/proc/roundstarted()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "roundstart",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -199,7 +200,7 @@ SUBSYSTEM_DEF(plexora)
 	))
 
 /datum/controller/subsystem/plexora/proc/roundended()
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "roundend",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -229,7 +230,7 @@ SUBSYSTEM_DEF(plexora)
 		return json_body["alive_likely"]
 
 /datum/controller/subsystem/plexora/proc/relay_admin_say(client/user, message)
-	http_basicasync("relay_admin_say", list(
+	http_fireandforget("relay_admin_say", list(
 		"key" = user.key,
 		"message" = message,
 		"icon_b64" = icon2base64(getFlatIcon(user.mob, SOUTH, no_anim = TRUE)),
@@ -238,7 +239,7 @@ SUBSYSTEM_DEF(plexora)
 // note: recover_all_SS_and_recreate_master to force mc shit
 
 /datum/controller/subsystem/plexora/proc/mc_alert(alert, level = 5)
-	http_basicasync("serverupdates", list(
+	http_fireandforget("serverupdates", list(
 		"type" = "mcalert",
 		"timestamp" = rustg_unix_timestamp(),
 		"roundid" = GLOB.round_id,
@@ -252,19 +253,19 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/new_note(list/note)
 	// note["replay_pass"] = CONFIG_GET(string/replay_password)
-	http_basicasync("noteupdates", note)
+	http_fireandforget("noteupdates", note)
 
 /datum/controller/subsystem/plexora/proc/new_ban(list/ban)
 	// TODO: It might be easier to just send off a ban ID to Plexora, but oh well.
 	// list values are in sql_ban_system.dm
 	// ban["replay_pass"] = CONFIG_GET(string/replay_password)
-	http_basicasync("banupdates", ban)
+	http_fireandforget("banupdates", ban)
 
 // Maybe we should consider that, if theres no admin_ckey when creating a new ticket,
 // This isnt a bwoink. Other wise if it does exist, it is a bwoink.
 /datum/controller/subsystem/plexora/proc/aticket_new(datum/admin_help/ticket, msg_raw, is_bwoink, urgent, admin_ckey = null)
 	if(!enabled) return
-	http_basicasync("atickets/new", list(
+	http_fireandforget("atickets/new", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"round_timer" = ROUND_TIME(),
@@ -283,7 +284,7 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/aticket_closed(datum/admin_help/ticket, closed_by, close_type = AHELP_CLOSETYPE_CLOSE, close_reason = AHELP_CLOSEREASON_NONE)
 	if(!enabled) return
-	http_basicasync("atickets/close", list(
+	http_fireandforget("atickets/close", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"closed_by" = closed_by,
@@ -295,7 +296,7 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/aticket_reopened(datum/admin_help/ticket, reopened_by)
 	if(!enabled) return
-	http_basicasync("atickets/reopen", list(
+	http_fireandforget("atickets/reopen", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"time_reopened" = rustg_unix_timestamp(),
@@ -316,7 +317,7 @@ SUBSYSTEM_DEF(plexora)
 
 	if (admin_ckey)	body["admin_ckey"] = admin_ckey
 
-	http_basicasync("atickets/pm", list(
+	http_fireandforget("atickets/pm", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"message" = message,
@@ -327,7 +328,7 @@ SUBSYSTEM_DEF(plexora)
 	if(!ticket)
 		return
 	if(!enabled) return
-	http_basicasync("atickets/connection_notice", list(
+	http_fireandforget("atickets/connection_notice", list(
 		"id" = ticket.id,
 		"roundid" = GLOB.round_id,
 		"is_disconnect" = is_disconnect,
@@ -336,10 +337,23 @@ SUBSYSTEM_DEF(plexora)
 
 /datum/controller/subsystem/plexora/proc/topic_listener_response(token, data)
 	if(!enabled) return
-	http_basicasync("topic_emitter", list(
+	http_fireandforget("topic_emitter", list(
 		"token" = token,
 		"data" = data,
 	))
+
+/datum/controller/subsystem/plexora/proc/http_fireandforget(path, list/body, ignore_enabled = FALSE)
+	if(!enabled && !ignore_enabled)
+		return
+
+	var/datum/http_request/request = new(
+		RUSTG_HTTP_METHOD_POST,
+		"[base_url]/[path]",
+		json_encode(body),
+		default_headers,
+		"tmp/response.json"
+	)
+	request.fire_and_forget()
 
 /datum/controller/subsystem/plexora/proc/http_basicasync(path, list/body, mark_active = TRUE)
 	RETURN_TYPE(/datum/http_request)
