@@ -290,3 +290,17 @@
       instead. The eastern travel-point to the Mountain remains unchanged.
   - bugfix: The random traveltile to the vampire mansion should be gone and replaced
       with a traveltile spawner.
+2026-04-24:
+  Ben10083:
+  - spellcheck: Announcement for new decrees no longer uses 'the' twice
+  - refactor: Refactor of SScommunication
+  - balance: Malum's Anvil miracle now only takes 2 seconds to cast.
+  - bugfix: Ensured that Malum's Anvil miracle can only be self-cast.
+  - qol: Encode Thought spell now uses TGUI
+  - image: Sprite added for Encode Thought spell
+  Spitegremlin:
+  - rscadd: Added new hardened and masterwork items
+  - rscadd: Added new pair of boots, can be used to sheath knifes
+  - balance: rebalanced leather item armor values
+  - image: added new boots, called the hunter boots. Has item and onmob sprites
+  - spellcheck: fixed typos to do with the tanning rack
