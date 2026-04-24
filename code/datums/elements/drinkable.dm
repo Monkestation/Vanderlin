@@ -1,7 +1,7 @@
 /// Allows something to be drank from unconditionally, apply sparingly to non-turfs
 /datum/element/drinkable
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	var/datum/reagent/reagent_type
 	var/drink_time
 	var/drink_amount

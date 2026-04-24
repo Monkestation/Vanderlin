@@ -22,11 +22,11 @@
 	turf_flags = TURF_NO_LIQUID_SPREAD
 	shine = SHINE_MATTE
 	no_over_text = TRUE
+
 	smoothing_flags = NONE
 	smoothing_groups = NONE
 	smoothing_list = NONE
 
-	uses_water_overlays = FALSE
 	bottle_spawner = FALSE
 
 /turf/open/water/hotspring/Initialize(mapload)
