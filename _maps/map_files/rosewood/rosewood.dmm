@@ -1569,6 +1569,7 @@
 /area/indoors/town/church)
 "aPC" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/town/sewer)
 "aPG" = (
@@ -9495,8 +9496,9 @@
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "eCR" = (
@@ -14063,10 +14065,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep)
-"gOP" = (
-/obj/structure/closet/dirthole/closed,
-/turf/open/floor/dirt/road,
-/area/indoors/town/church)
 "gOQ" = (
 /obj/structure/hotspring/border/eleven,
 /turf/open/floor/cobblerock/alt,
@@ -15592,8 +15590,8 @@
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep)
 "hAl" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "hAo" = (
@@ -18193,6 +18191,8 @@
 /obj/structure/bookcase/random/myths,
 /obj/item/book/necra,
 /obj/item/book/necra,
+/obj/item/recipe_book/gravemaking,
+/obj/item/recipe_book/gravemaking,
 /turf/open/floor/blocks,
 /area/outdoors/exposed/church)
 "iSz" = (
@@ -18395,7 +18395,8 @@
 /turf/open/floor/dirt,
 /area/outdoors/basin)
 "iVP" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "iWf" = (
@@ -31590,6 +31591,11 @@
 /obj/structure/closet/crate/chest/crafted,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"pmp" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "pmz" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobblerock/snow,
@@ -31643,8 +31649,8 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "poc" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/town/sewer)
 "poh" = (
@@ -33343,6 +33349,12 @@
 /obj/structure/bars/bent,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"qkN" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "qkO" = (
 /obj/structure/bookcase/random/legends,
 /obj/structure/fluff/walldeco/customflag{
@@ -35263,6 +35275,7 @@
 	pixel_y = -3
 	},
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church)
 "riA" = (
@@ -41077,9 +41090,9 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/town)
 "tVg" = (
-/obj/structure/closet/dirthole/closed/loot,
-/obj/structure/gravemarker,
+/obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "tVu" = (
@@ -42118,6 +42131,7 @@
 /obj/structure/bookcase/random/myths,
 /obj/item/book/necra,
 /obj/item/book/vownecrapage,
+/obj/item/recipe_book/gravemaking,
 /turf/open/floor/blocks,
 /area/outdoors/exposed/church)
 "uCF" = (
@@ -58180,15 +58194,15 @@ woz
 uoF
 pRa
 woz
-aPC
+poc
 pRa
 woz
-aPC
+poc
 pRa
 woz
 wzs
 pRa
-poc
+aPC
 woz
 pRa
 poc
@@ -59187,7 +59201,7 @@ tbq
 rbI
 rbI
 woz
-aPC
+poc
 wzs
 woz
 byF
@@ -106927,7 +106941,7 @@ wlF
 wlF
 aWp
 tls
-hAl
+pmp
 tWQ
 tWQ
 tWQ
@@ -108137,7 +108151,7 @@ qTS
 qTS
 eGN
 eGN
-tVg
+qkN
 tWQ
 fBV
 fBV
@@ -110382,7 +110396,7 @@ rPG
 fCb
 qJl
 rvu
-gOP
+iVP
 tOZ
 sdI
 sdI
@@ -110764,7 +110778,7 @@ wSG
 lRK
 lRK
 aWp
-tVg
+qkN
 tWQ
 tWQ
 tWQ
@@ -111576,7 +111590,7 @@ jiz
 jiz
 jiz
 uGb
-hAl
+pmp
 tWQ
 tWQ
 vZC

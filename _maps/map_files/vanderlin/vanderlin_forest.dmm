@@ -634,6 +634,9 @@
 /area/indoors/dungeon)
 "hV" = (
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon{
+	force_consecrate = 1
+	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "ia" = (
@@ -1022,11 +1025,6 @@
 "lU" = (
 /turf/open/floor/grass,
 /area/indoors/wilderness/tavern)
-"lW" = (
-/obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "lY" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/dirt,
@@ -1222,8 +1220,7 @@
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/town/garrison)
 "oD" = (
-/obj/structure/gravemarker,
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass/maneater/real,
 /obj/item/alch/herb/rosa,
 /turf/open/floor/dirt,
@@ -1448,10 +1445,6 @@
 /obj/structure/stone_tile/center/burnt,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
-"rb" = (
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "rc" = (
 /obj/structure/flora/grass/water/reeds,
 /mob/living/simple_animal/hostile/retaliate/gator,
@@ -1653,8 +1646,11 @@
 /turf/open/floor/cobble,
 /area/outdoors/mountains)
 "th" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon{
+	force_consecrate = 1
+	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "tj" = (
@@ -1859,7 +1855,10 @@
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
 "vy" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite{
+	force_consecrate = 1
+	},
 /turf/open/floor/dirt,
 /area/outdoors/mountains)
 "vz" = (
@@ -1978,6 +1977,13 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"wM" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite{
+	force_consecrate = 1
+	},
+/turf/open/floor/dirt,
+/area/outdoors/mountains)
 "wN" = (
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -3949,11 +3955,6 @@
 "Sk" = (
 /turf/open/floor/carpet/red,
 /area/indoors/dungeon)
-"Sn" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/peasant,
-/turf/open/floor/dirt,
-/area/outdoors/wilderness)
 "St" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate/chest,
@@ -11122,7 +11123,7 @@ gr
 gr
 ZV
 ZV
-lW
+ar
 ZV
 Nf
 Nf
@@ -39883,7 +39884,7 @@ ZV
 gr
 ZV
 gr
-Sn
+th
 ZV
 gr
 ar
@@ -40281,7 +40282,7 @@ gz
 gr
 ZV
 gr
-Sn
+th
 gr
 gr
 ZV
@@ -41090,14 +41091,14 @@ VQ
 gz
 gr
 ZV
-rb
+hV
 ZV
 gr
 ZV
 ar
 ZV
 ZV
-Sn
+th
 Iz
 sx
 Iz
@@ -41906,7 +41907,7 @@ ZV
 ZV
 gr
 ZV
-rb
+hV
 EF
 JI
 gr
@@ -68410,7 +68411,7 @@ vz
 SJ
 lt
 ZL
-vy
+wM
 Xt
 Xt
 kw
@@ -68822,7 +68823,7 @@ Xt
 Xt
 Xt
 kw
-vy
+wM
 lC
 lC
 vz
@@ -69216,7 +69217,7 @@ Gi
 kN
 lC
 lC
-vy
+wM
 Xt
 kw
 Za
@@ -70634,7 +70635,7 @@ lt
 SJ
 lt
 lt
-vy
+wM
 lC
 lC
 lC
@@ -74467,7 +74468,7 @@ Gi
 Gi
 vz
 kw
-vy
+wM
 kw
 kw
 Xt

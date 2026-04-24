@@ -31,7 +31,7 @@
 	/// Modified by by a chisel or short sharp object, allows for a small message to be added to inscription
 	var/custom_message
 
-/obj/item/gravedecor/headstone/examine(mob/user) //TODO how do I have custom_message and inscription to chat AFTER the examine?
+/obj/item/gravedecor/headstone/examine(mob/user)
 	. = ..()
 
 	if(inscription)

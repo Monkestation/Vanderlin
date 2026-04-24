@@ -843,7 +843,6 @@
 /area/under/tomb/indoors/magic)
 "arp" = (
 /obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
 /turf/open/floor/grass,
 /area/outdoors/bog/central)
 "arE" = (
@@ -1813,6 +1812,8 @@
 /obj/structure/bonepile,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
 /turf/open/floor/blocks,
 /area/indoors/shelter/bog)
 "aLe" = (
@@ -2946,8 +2947,8 @@
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog/inhumen_camp)
 "bzb" = (
-/obj/structure/gravemarker,
 /obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/grass,
 /area/outdoors/bog/central)
 "bzq" = (
@@ -10936,7 +10937,6 @@
 /area/under/cavewet)
 "jsB" = (
 /obj/structure/closet/dirthole/grave,
-/obj/structure/gravemarker,
 /turf/open/floor/dirt,
 /area/outdoors/bog/central)
 "jsZ" = (
@@ -16804,6 +16804,8 @@
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
 	},
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
 /turf/open/floor/blocks,
 /area/indoors/shelter/bog)
 "pEK" = (
@@ -19399,9 +19401,9 @@
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/west)
 "sIA" = (
-/obj/structure/gravemarker,
 /obj/structure/closet/dirthole/closed,
 /mob/living/simple_animal/hostile/retaliate/gator,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/grass,
 /area/outdoors/bog/central)
 "sIL" = (
