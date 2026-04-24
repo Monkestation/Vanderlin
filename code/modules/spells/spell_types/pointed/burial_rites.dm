@@ -57,6 +57,7 @@
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will pay a dire toll."))
 				if(grave.gravequality == 10)
 					owner.visible_message(span_rose("The air gets colder as [owner] consecrates [cast_on], woe betide any graverobber."), span_rose("Necra's gaze turns over to [cast_on] as I consecrate it. Any who would rob this grave will feel the Undermaiden's full wrath!"))
+			grave.grow_lily()
 			grave.adjust_grave_necra_devotion()
 			grave.stasis()
 			return

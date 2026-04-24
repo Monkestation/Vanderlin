@@ -20,6 +20,41 @@
 		sourceitem = parent
 	. = ..()
 
+/obj/item/gravedecor/examine(mob/user) //TODO how do I have custom_message and inscription to chat AFTER the examine?
+	. = ..()
+
+	if(decorationquality == 1)
+		. += span_info("This is a crude decoration.")
+	if(decorationquality == 2)
+		. += span_info("This is a middling decoration.")
+	if(decorationquality == 3)
+		. += span_info("This decoration is of the highest quality.")
+	if(patrons)
+		if(/datum/patron/divine/astrata in patrons)
+			. += span_info("This decoration venerates Astrata, the Sun Tyrant.")
+		if(/datum/patron/divine/noc in patrons)
+			. += span_info("This decoration venerates Noc, the Moon Prince.")
+		if(/datum/patron/divine/abyssor in patrons)
+			. += span_info("This decoration venerates Abyssor, Lord of the Deep.")
+		if(/datum/patron/divine/dendor in patrons)
+			. += span_info("This decoration venerates Dendor, the Beastfather.")
+		if(/datum/patron/divine/necra in patrons)
+			. += span_info("This decoration venerates Necra, the Undermaiden.")
+		if(/datum/patron/divine/ravox in patrons)
+			. += span_info("This decoration venerates Ravox, the Embodiment of Justice.")
+		if(/datum/patron/divine/xylix in patrons)
+			. += span_info("This decoration venerates Xylix, the Silvertongued.")
+		if(/datum/patron/divine/pestra in patrons)
+			. += span_info("This decoration venerates Pestra, the Plaguebearer.")
+		if(/datum/patron/divine/malum in patrons)
+			. += span_info("This decoration venerates Malum, the Great Artisan.")
+		if(/datum/patron/divine/eora in patrons)
+			. += span_info("This decoration venerates Eora, the Patron of Love.")
+		if((/datum/patron/alternate/great_hunt ||  /datum/patron/alternate/great_hunt/proven) in patrons)
+			. += span_info("This decoration venerates the Great Hunt")
+		if((/datum/patron/psydon || /datum/patron/psydon/extremist) in patrons)
+			. += span_info("This decoration venerates the Psydon, the Dead.")
+
 /obj/item/gravedecor/headstone
 	name = "peaked headstone"
 	desc = "A headstone with a sharp peak, and plenty of room for an inscription."
@@ -94,7 +129,7 @@
 	icon_state = "headstone_pestra"
 	dropshrink = 0.8
 	decorationquality = 2
-	patrons = list(/datum/patron/divine/pestra)
+	patrons = list(/datum/patron/divine/pestra, /datum/patron/alternate/wurm)
 
 /obj/item/gravedecor/headstone/abyssor
 	name = "abyssorite headstone"

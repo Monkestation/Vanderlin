@@ -513,6 +513,15 @@
 			if(animal.stat == DEAD)
 				REMOVE_TRAIT(animal, TRAIT_STASIS, "Necra")
 
+/// Proc that looks for valid turf and puts a necran lily on it.
+/obj/structure/closet/dirthole/proc/grow_lily()
+	for(var/turf/T in range(1, src))
+		var/turf/foundturf = T
+		if(istype(foundturf, /turf/open/floor/dirt || /turf/open/floor/dirt/road || /turf/open/floor/grass))
+			if(!locate(/obj/structure/flora/grass/herb/necralily && /obj/structure/closet/dirthole) in foundturf)
+				new /obj/structure/flora/grass/herb/necralily(foundturf)
+				break
+
 /obj/structure/closet/dirthole/MouseDrop_T(atom/movable/O, mob/living/user)
 	var/turf/T = get_turf(src)
 	if(istype(O, /obj/structure/closet/crate/coffin))
