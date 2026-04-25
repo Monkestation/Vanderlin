@@ -2540,14 +2540,6 @@
 /obj/item/reagent_containers/glass/bottle/beer,
 /turf/open/floor/sand,
 /area/outdoors/wilderness)
-"pV" = (
-/obj/structure/closet/dirthole/grave,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/mineral/wooddark/horizontal,
-/area/indoors/wilderness/gallowband/ship)
 "pY" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
@@ -15112,7 +15104,7 @@ oT
 oT
 oT
 oT
-pV
+oT
 oT
 nF
 Xa
