@@ -28,6 +28,16 @@
 	/// The body that will be spawned, set by `generate_body()`, used to make inscription on a headstone if there is one.
 	var/mob/living/carbon/human/to_be_interred
 
+/obj/effect/mapping_helpers/structure/grave_spawner/LateInitialize()
+	var/list/valid = typesof(/obj/structure/closet/dirthole/closed)
+	for(var/obj/structure/S in loc)
+		if(is_type_in_list(S, valid))
+			payload(S)
+			qdel(src)
+			return
+	log_mapping("[src] failed to find target at [AREACOORD(src)]")
+	qdel(src)
+
 /obj/effect/mapping_helpers/structure/grave_spawner/payload(obj/structure/payload)
 	if(QDELETED(payload))
 		return
