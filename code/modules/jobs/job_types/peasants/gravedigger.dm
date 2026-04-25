@@ -72,9 +72,10 @@
 	armor = /obj/item/clothing/shirt/robe/necra
 	shoes = /obj/item/clothing/shoes/boots
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/storage/keyring/gravetender
+	beltl = /obj/item/weapon/hammer/iron
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backr = /obj/item/weapon/shovel/necran
+	wrists = /obj/item/storage/keyring/gravetender
 	backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red, /obj/item/recipe_book/gravemaking, /obj/item/weapon/chisel/iron) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
 
 /datum/outfit/undertaker/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

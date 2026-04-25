@@ -105,6 +105,13 @@
 	sourceitem = /obj/item/grown/log/tree/stick
 	decorationquality = 1
 
+/obj/item/gravedecor/headstone/obelisk
+	name = "headstone obelisk"
+	desc = "A tall headstone with iron inlay, so your works are never forgotten."
+	icon_state = "headstone_obelisk"
+	dropshrink = 0.8
+	decorationquality = 3
+
 /obj/item/gravedecor/headstone/psydon
 	name = "psydonic headstone"
 	desc = "A psycross shaped headstone, may be considered heretical by some, but to disturb the graves it lies upon even more so."
@@ -161,7 +168,7 @@
 	decorationquality = 3
 	patrons = list(/datum/patron/divine/malum)
 
-/obj/item/gravedecor/headstone/eota
+/obj/item/gravedecor/headstone/eora
 	name = "eoran headstone"
 	desc = "Made for those TRULY dear departed."
 	icon_state = "headstone_eora"

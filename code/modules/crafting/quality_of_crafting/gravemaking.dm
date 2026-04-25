@@ -16,6 +16,17 @@
 	output = /obj/item/gravedecor/headstone
 	craftdiff = 2
 
+/datum/repeatable_crafting_recipe/gravemaking/peaked_headstone
+	name = "headstone obelisk"
+	requirements = list(
+		/obj/item/natural/stoneblock = 3,
+		/obj/item/ingot/iron = 1,
+	)
+	attacked_atom = /obj/item/natural/stoneblock
+	starting_atom  = /obj/item/weapon/chisel
+	output = /obj/item/gravedecor/headstone/obelisk
+	craftdiff = 3
+
 /datum/repeatable_crafting_recipe/gravemaking/psydonic_headstone
 	name = "psydonic headstone"
 	requirements = list(
@@ -76,6 +87,16 @@
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
 	output = /obj/item/gravedecor/headstone/malum
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/gravemaking/eoran_headstone
+	name = "eoran headstone"
+	requirements = list(
+		/obj/item/natural/stoneblock = 3,
+	)
+	attacked_atom = /obj/item/natural/stoneblock
+	starting_atom  = /obj/item/weapon/chisel
+	output = /obj/item/gravedecor/headstone/eora
 	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/gravemaking/hunt_headstone
