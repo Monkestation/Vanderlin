@@ -352,7 +352,12 @@
 		/datum/sprite_accessory/hair/head/farmday,
 		/datum/sprite_accessory/hair/head/curlybob,
 		/datum/sprite_accessory/hair/head/snowdriftbangs,
-		/datum/sprite_accessory/hair/head/poofypoms
+		/datum/sprite_accessory/hair/head/poofypoms,
+		/datum/sprite_accessory/hair/head/wolfcut,
+		/datum/sprite_accessory/hair/head/triplebuns,
+		/datum/sprite_accessory/hair/head/nest,
+		/datum/sprite_accessory/hair/head/strand,
+		/datum/sprite_accessory/hair/head/sodden
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton

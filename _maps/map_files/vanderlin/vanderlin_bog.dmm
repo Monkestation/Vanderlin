@@ -841,10 +841,6 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
-"arp" = (
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "arE" = (
 /obj/structure/flora/ocean_plants,
 /mob/living/simple_animal/hostile/retaliate/shark{
@@ -1109,6 +1105,14 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
+"awy" = (
+/obj/structure/bonepile,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
+/turf/open/floor/blocks,
+/area/indoors/shelter/bog)
 "awG" = (
 /mob/living/simple_animal/hostile/deepone{
 	faction = list("Hostile");
@@ -1808,14 +1812,6 @@
 /obj/structure/flora/pillar,
 /turf/open/water/ocean,
 /area/under/cavewet)
-"aKT" = (
-/obj/structure/bonepile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/item/gravedecor/headstone,
-/obj/item/gravedecor/gravefence/block,
-/turf/open/floor/blocks,
-/area/indoors/shelter/bog)
 "aLe" = (
 /obj/structure/stairs/stone/church{
 	color = "#7D9BAE"
@@ -2946,11 +2942,6 @@
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt/road,
 /area/indoors/shelter/bog/inhumen_camp)
-"bzb" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "bzq" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/twig,
@@ -7989,13 +7980,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/east)
-"gts" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest";
-	aportalid = "vanderlin-forest_bog-bog"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/north/west)
 "guq" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/shelter/bog)
@@ -8297,6 +8281,11 @@
 	color = "#547285"
 	},
 /area/under/tomb/indoors/magic)
+"gJS" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "gJZ" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/bog/south/east)
@@ -9385,13 +9374,6 @@
 /obj/structure/flora/tree,
 /turf/open/floor/grass,
 /area/outdoors/bog/south/west)
-"hPr" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_town-town";
-	aportalid = "vanderlin-bog_town-bog"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/north)
 "hPD" = (
 /obj/structure/flora/driftwood,
 /turf/open/water/ocean/abyss,
@@ -9625,13 +9607,6 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
-"ihu" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest2";
-	aportalid = "vanderlin-forest_bog-bog2"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/south/west)
 "ihX" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -10935,10 +10910,6 @@
 	},
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
-"jsB" = (
-/obj/structure/closet/dirthole/grave,
-/turf/open/floor/dirt,
-/area/outdoors/bog/central)
 "jsZ" = (
 /obj/structure/flora/grass/water/reeds,
 /obj/structure/flora/grass/water,
@@ -12447,6 +12418,12 @@
 	dir = 8
 	},
 /area/outdoors/bog/lich)
+"kNY" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/simple_animal/hostile/retaliate/gator,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "kOg" = (
 /obj/machinery/light/fueled/lanternpost,
 /turf/open/floor/dirt,
@@ -13612,6 +13589,16 @@
 "lYI" = (
 /mob/living/carbon/human/species/orc/tribal,
 /turf/open/floor/ruinedwood/darker,
+/area/indoors/shelter/bog)
+"lZa" = (
+/obj/structure/inert_bonepile,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 4
+	},
+/obj/item/gravedecor/headstone,
+/obj/item/gravedecor/gravefence/block,
+/turf/open/floor/blocks,
 /area/indoors/shelter/bog)
 "lZg" = (
 /obj/structure/fluff/nest,
@@ -16798,16 +16785,6 @@
 /obj/structure/spider/cocoon,
 /turf/open/floor/wood,
 /area/indoors/ship)
-"pDQ" = (
-/obj/structure/inert_bonepile,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/dirt/cobweb{
-	dir = 4
-	},
-/obj/item/gravedecor/headstone,
-/obj/item/gravedecor/gravefence/block,
-/turf/open/floor/blocks,
-/area/indoors/shelter/bog)
 "pEK" = (
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass,
@@ -19400,12 +19377,6 @@
 /obj/effect/spawner/traveltile_spawner/vertical/vampire,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/west)
-"sIA" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/simple_animal/hostile/retaliate/gator,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
-/area/outdoors/bog/central)
 "sIL" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/twig,
@@ -22178,6 +22149,10 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/sand,
 /area/outdoors/bog/beach/west)
+"vww" = (
+/obj/structure/closet/dirthole/grave,
+/turf/open/floor/grass,
+/area/outdoors/bog/central)
 "vwx" = (
 /obj/structure/fluff/walldeco/vinez,
 /obj/structure/fluff/walldeco/vinez,
@@ -22435,6 +22410,10 @@
 	},
 /turf/open/floor/dirt,
 /area/under/cavewet)
+"vLh" = (
+/obj/structure/closet/dirthole/grave,
+/turf/open/floor/dirt,
+/area/outdoors/bog/central)
 "vLi" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -23808,6 +23787,13 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"xdF" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-forest_bog-forest";
+	aportalid = "vanderlin-forest_bog-bog"
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/north)
 "xdI" = (
 /obj/item/reagent_containers/powder/salt{
 	pixel_x = 0;
@@ -25266,9 +25252,9 @@ pNu
 pNu
 pNu
 pNu
-gts
-gts
-gts
+cNF
+cNF
+cNF
 pNu
 pNu
 pNu
@@ -25362,9 +25348,9 @@ wFG
 wFG
 wFG
 wFG
-ihu
-ihu
-ihu
+krA
+krA
+krA
 wFG
 wFG
 wFG
@@ -43296,11 +43282,11 @@ jsZ
 vlh
 iCl
 iCl
-arp
+vww
 hvj
-sIA
+kNY
 hvj
-jsB
+vLh
 hvj
 iCl
 hvj
@@ -43902,11 +43888,11 @@ vlh
 iCl
 mUM
 iCl
-bzb
+gJS
 hvj
-jsB
+vLh
 hvj
-arp
+vww
 hvj
 hvj
 vlh
@@ -44915,7 +44901,7 @@ iCl
 gaq
 lyu
 iLz
-pDQ
+lZa
 khM
 iCl
 iCl
@@ -45317,7 +45303,7 @@ iCl
 iCl
 iCl
 lnv
-aKT
+awy
 dQH
 agQ
 pHJ
@@ -46655,7 +46641,7 @@ thx
 "}
 (108,1,1) = {"
 bdA
-hPr
+xdF
 xXx
 syJ
 vpX
@@ -46857,7 +46843,7 @@ thx
 "}
 (109,1,1) = {"
 bdA
-hPr
+xdF
 xXx
 syJ
 rhz
@@ -47059,7 +47045,7 @@ thx
 "}
 (110,1,1) = {"
 bdA
-hPr
+xdF
 xXx
 jgP
 syJ

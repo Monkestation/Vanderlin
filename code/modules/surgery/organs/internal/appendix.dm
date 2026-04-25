@@ -19,8 +19,8 @@
 	current_blood = 2.5
 	blood_req = 0.5
 	oxygen_req = 0.25
-	nutriment_req = 0.5
-	hydration_req = 0.25
+	nutriment_req = 0.3
+	hydration_req = 0.15
 
 	var/inflamation_stage = 0
 

@@ -136,11 +136,11 @@
 
 /datum/quirk/vice/godfearing/on_spawn()
 	. = ..()
-	RegisterSignal(owner, COMSIG_CARBON_PRAY, PROC_REF(on_owner_pray))
+	RegisterSignal(owner, COMSIG_EMOTE_PRAY, PROC_REF(on_owner_pray))
 
 /datum/quirk/vice/godfearing/on_remove()
 	. = ..()
-	UnregisterSignal(owner, COMSIG_CARBON_PRAY)
+	UnregisterSignal(owner, COMSIG_EMOTE_PRAY)
 
 /datum/quirk/vice/godfearing/proc/on_owner_pray(datum/source, prayer)
 	SIGNAL_HANDLER

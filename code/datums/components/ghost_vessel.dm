@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(active_ghost_vessels)
 		return
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_deleted))
 
 /datum/component/ghost_vessel/Destroy()
 	if(vessel_id && GLOB.active_ghost_vessels[vessel_id])
