@@ -11420,7 +11420,7 @@
 /obj/effect/spawner/map_spawner/loot/coin/med,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "dRX" = (
 /obj/effect/landmark/start/late/adept,
@@ -11546,7 +11546,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "eIO" = (
 /obj/structure/water_pipe,
@@ -11953,7 +11953,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "hdP" = (
 /obj/structure/table/stone_small,
@@ -12850,11 +12850,6 @@
 /obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
-"maE" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/peak)
 "mfz" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/grass/cold,
@@ -13244,7 +13239,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "ozZ" = (
 /turf/open/lava/acid,
@@ -13849,11 +13844,6 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
-"sqM" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass/cold,
-/area/outdoors/mountains/anvil/peak)
 "ssn" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10
@@ -14462,7 +14452,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "vyU" = (
 /obj/structure/fluff/railing/wood,
@@ -14580,7 +14570,7 @@
 /obj/effect/spawner/map_spawner/loot/weapon,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "whV" = (
 /obj/structure/closet/crate/chest/neu_fancy,
@@ -14650,7 +14640,7 @@
 /obj/effect/spawner/map_spawner/loot/coin/med,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/cobble,
+/turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "wKh" = (
 /obj/structure/stairs/stone,
@@ -113289,7 +113279,7 @@ wAI
 vqN
 sKc
 lDl
-sqM
+ihD
 lDl
 lDl
 vqN
@@ -114505,7 +114495,7 @@ vqN
 lDl
 lDl
 vqN
-maE
+voX
 lDl
 vqN
 waD
@@ -117732,7 +117722,7 @@ wAI
 wAI
 lDl
 lDl
-maE
+voX
 vqN
 vqN
 vqN
@@ -117937,7 +117927,7 @@ lDl
 vqN
 vqN
 vqN
-maE
+voX
 lDl
 vqN
 lDl
@@ -118741,7 +118731,7 @@ lDl
 vqN
 vqN
 vqN
-sqM
+ihD
 lDl
 lDl
 dyp

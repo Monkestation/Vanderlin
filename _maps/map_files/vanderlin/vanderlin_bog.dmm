@@ -8284,7 +8284,7 @@
 "gJS" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/outdoors/bog/central)
 "gJZ" = (
 /turf/closed/wall/mineral/wooddark,
@@ -12422,7 +12422,7 @@
 /obj/structure/closet/dirthole/closed,
 /mob/living/simple_animal/hostile/retaliate/gator,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/outdoors/bog/central)
 "kOg" = (
 /obj/machinery/light/fueled/lanternpost,
