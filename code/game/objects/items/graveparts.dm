@@ -50,7 +50,7 @@
 			. += SPAN_GOD_MALUM("This decoration venerates Malum, the Great Artisan.")
 		if(/datum/patron/divine/eora in patrons)
 			. += SPAN_GOD_EORA("This decoration venerates Eora, the Patron of Love.")
-		if((/datum/patron/alternate/great_hunt ||  /datum/patron/alternate/great_hunt/proven) in patrons)
+		if((/datum/patron/alternate/great_hunt || /datum/patron/alternate/great_hunt/proven) in patrons)
 			. += SPAN_GOD_GREATHUNT("This decoration venerates the Great Hunt")
 		if((/datum/patron/psydon || /datum/patron/psydon/extremist) in patrons)
 			. += SPAN_GOD_PSYDON("This decoration venerates Psydon, the Old God.")
@@ -160,6 +160,14 @@
 	dropshrink = 0.8
 	decorationquality = 3
 	patrons = list(/datum/patron/divine/malum)
+
+/obj/item/gravedecor/headstone/eota
+	name = "eoran headstone"
+	desc = "Made for those TRULY dear departed."
+	icon_state = "headstone_eora"
+	dropshrink = 0.8
+	decorationquality = 3
+	patrons = list(/datum/patron/divine/eora)
 
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
