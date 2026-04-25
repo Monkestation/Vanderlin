@@ -1,4 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "fixed ghosthud not getting a border"
