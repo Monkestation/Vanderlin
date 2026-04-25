@@ -135,8 +135,6 @@
 	RegisterSignal(A, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(unfreeze_atom))
 	RegisterSignal(A, COMSIG_ITEM_PICKUP, PROC_REF(unfreeze_atom))
 
-	SEND_SIGNAL(A, COMSIG_ATOM_TIMESTOP_FREEZE, src)
-
 	return TRUE
 
 /datum/proximity_monitor/advanced/timestop/proc/unfreeze_all()
@@ -156,8 +154,6 @@
 
 	UnregisterSignal(A, COMSIG_MOVABLE_PRE_MOVE)
 	UnregisterSignal(A, COMSIG_ITEM_PICKUP)
-
-	SEND_SIGNAL(A, COMSIG_ATOM_TIMESTOP_UNFREEZE, src)
 
 	escape_the_negative_zone(A)
 	A.move_resist = frozen_things[A]
