@@ -3745,7 +3745,7 @@
 /obj/item/reagent_containers/glass/bottle/elfblue,
 /obj/item/reagent_containers/glass/bottle/elfred,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/grass/red,
+/turf/open/floor/dirt,
 /area/under/mountains/anvil/upper)
 "EI" = (
 /obj/structure/rack/shelf/biggest,
@@ -6052,7 +6052,7 @@
 /obj/item/statue/gold,
 /obj/item/statue/gold/loot,
 /obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/grass/red,
+/turf/open/floor/dirt,
 /area/under/mountains/anvil/dungeon/lower)
 "Wj" = (
 /obj/effect/spawner/map_spawner/loot/potion_ingredient,
