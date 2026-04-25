@@ -5,7 +5,7 @@
 "i" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/template_noop,
+/turf/open/floor/dirt,
 /area/template_noop)
 "q" = (
 /obj/structure/table/wood/treestump,
