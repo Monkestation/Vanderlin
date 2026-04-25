@@ -51,7 +51,7 @@
 		if(/datum/patron/divine/eora in patrons)
 			. += SPAN_GOD_EORA("This decoration venerates Eora, the Patron of Love.")
 		if((/datum/patron/alternate/great_hunt || /datum/patron/alternate/great_hunt/proven) in patrons)
-			. += SPAN_GOD_GREATHUNT("This decoration venerates the Great Hunt")
+			. += SPAN_GOD_GREATHUNT("This decoration venerates the Great Hunt.")
 		if((/datum/patron/psydon || /datum/patron/psydon/extremist) in patrons)
 			. += SPAN_GOD_PSYDON("This decoration venerates Psydon, the Old God.")
 
