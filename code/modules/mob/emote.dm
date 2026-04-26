@@ -149,15 +149,6 @@
 		user.set_dizzy_if_lower(BEYBLADE_DIZZINESS_DURATION)
 		user.adjust_confusion_up_to(BEYBLADE_CONFUSION_INCREMENT, BEYBLADE_CONFUSION_LIMIT)
 
-	// if(iscyborg(user) && user.has_buckled_mobs())
-	// 	var/mob/living/silicon/robot/R = user
-	// 	var/datum/component/riding/riding_datum = R.GetComponent(/datum/component/riding)
-	// 	if(riding_datum)
-	// 		for(var/mob/M in R.buckled_mobs)
-	// 			riding_datum.force_dismount(M)
-	// 	else
-	// 		R.unbuckle_all_mobs()
-
 #undef BEYBLADE_PUKE_THRESHOLD
 #undef BEYBLADE_PUKE_NUTRIENT_LOSS
 #undef BEYBLADE_DIZZINESS_PROBABILITY
