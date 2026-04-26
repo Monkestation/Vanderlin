@@ -304,3 +304,6 @@
   - balance: rebalanced leather item armor values
   - image: added new boots, called the hunter boots. Has item and onmob sprites
   - spellcheck: fixed typos to do with the tanning rack
+2026-04-25:
+  CheffieGithub:
+  - bugfix: fixed ghosthud not getting a border
