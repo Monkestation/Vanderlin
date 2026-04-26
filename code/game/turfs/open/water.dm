@@ -495,7 +495,7 @@
 		movable.set_currently_z_moving(CURRENTLY_Z_FALLING_FROM_MOVE)
 
 ///Makes movables fall when forceMove()'d to this turf.
-/turf/open/openspace/Entered(atom/movable/movable)
+/turf/open/water/Entered(atom/movable/movable)
 	. = ..()
 	if(!HAS_TRAIT(src, TRAIT_IMMERSE_STOPPED))
 		return

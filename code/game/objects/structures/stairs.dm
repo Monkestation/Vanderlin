@@ -40,7 +40,7 @@
 	)
 
 	AddElement(/datum/element/connect_loc, exit_connections)
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/stairs/Destroy()
 	if(directly_above)

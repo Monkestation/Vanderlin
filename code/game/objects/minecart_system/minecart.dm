@@ -245,7 +245,7 @@
 		return
 
 	obj_flags |= BLOCK_Z_OUT_DOWN
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	var/movedir = bumped_atom.dir
 	var/turf/next_turf = get_step(src, movedir)
 	if(!can_travel_on_turf(next_turf, movedir))
@@ -290,7 +290,7 @@
 		stack_trace("Mine cart moving on 0 momentum!")
 		SSmove_manager.stop_looping(src, SSminecarts)
 		obj_flags &= ~BLOCK_Z_OUT_DOWN
-		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 		momentum = 0
 		return MOVELOOP_SKIP_STEP
 	// Forced to not move
@@ -345,7 +345,7 @@
 	// Can't go straight and cant turn = STOP
 	SSmove_manager.stop_looping(src, SSminecarts)
 	obj_flags &= ~BLOCK_Z_OUT_DOWN
-	RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	if(momentum >= 12)
 		visible_message(span_warning("[src] comes to a violent halt!"))
 		throw_contents()
@@ -367,7 +367,7 @@
 				visible_message(span_notice("[src] comes to a stop."))
 			SSmove_manager.stop_looping(src, SSminecarts)
 			obj_flags &= ~BLOCK_Z_OUT_DOWN
-			RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+			RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 			momentum = 0
 			return
 		check_powered()
@@ -377,7 +377,7 @@
 	if(momentum <= 0)
 		SSmove_manager.stop_looping(src, SSminecarts)
 		obj_flags &= ~BLOCK_Z_OUT_DOWN
-		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 		momentum = 0
 		visible_message(span_notice("[src] comes to a slow stop."))
 		return

@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		alpha = 0
 		obj_flags = CAN_BE_HIT
 	else
-		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 	//since lift_master datums find all connected platforms when an industrial lift first creates it and then
 	//sets those platforms' lift_master_datum to itself, this check will only evaluate to true once per tram platform

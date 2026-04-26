@@ -38,7 +38,7 @@
 
 /obj/structure/ice_bridge/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	propagate_temp_change(-20, 8, 0.5, 2) // Cooling effect
 
 /obj/structure/ice_bridge/Destroy()

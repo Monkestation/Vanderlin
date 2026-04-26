@@ -28,6 +28,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
 ///generic atom traits
+///Chasms will be safe to cross while they've this trait.
+#define TRAIT_CHASM_STOPPED "chasm_stopped"
 /// If this movable is currently considered to be treading in a turf with the immerse element.
 #define TRAIT_IMMERSED "immersed"
 ///The effects of the immerse element will be halted while this trait is present.
