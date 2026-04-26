@@ -1,6 +1,7 @@
 /datum/language/kobold
 	name = "Utterances"
 	desc = ""
+	icon_state = "beastial"
 	spans = list(SPAN_KOBOLD)
 	speech_verb = "hisses"
 	ask_verb = "growls"

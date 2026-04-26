@@ -4062,6 +4062,7 @@
 #include "interface\fonts\datums\pixelify_sans.dm"
 #include "interface\fonts\datums\pterra.dm"
 #include "interface\fonts\datums\riddler.dm"
+#include "interface\fonts\datums\synetactile.dm"
 #include "interface\fonts\datums\underwater_love.dm"
 #include "interface\fonts\datums\vaticanus.dm"
 #include "interface\fonts\datums\wernicke.dm"
