@@ -213,6 +213,9 @@
 
 	var/datum/focus //What receives our keyboard inputs. src by default
 
+	/// Used for tracking last uses of emotes for cooldown purposes
+	var/list/emotes_used
+
 	//Whether the mob is updating glide size when movespeed updates or not
 	var/updating_glide_size = TRUE
 
@@ -248,8 +251,6 @@
 
 	var/last_dodge = 0
 	var/last_parry = 0
-	var/next_emote = 0
-	var/next_me_emote = 0
 	var/lastpoint = 0
 
 	var/mobid = 0 //incremented on spawn

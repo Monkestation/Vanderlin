@@ -43,14 +43,14 @@
 			return
 		ADD_TRAIT(human_user, TRAIT_NO_TRANSFORM, REF(src))
 		human_user.flash_fullscreen("redflash3")
-		INVOKE_ASYNC(human_user, TYPE_PROC_REF(/mob, emote), "agony", null, null, FALSE, TRUE)
+		human_user.emote("agony", forced = TRUE)
 		to_chat(human_user, span_userdanger("UNIMAGINABLE PAIN!"))
 		human_user.Stun(5.1 SECONDS, ignore_canstun = TRUE)
 		human_user.Knockdown(5.1 SECONDS, ignore_canstun = TRUE)
 		addtimer(CALLBACK(src, PROC_REF(begin_transform), null, 2), 2.5 SECONDS, TIMER_DELETE_ME)
 
 	if(stage == 2)
-		INVOKE_ASYNC(human_user, TYPE_PROC_REF(/mob, emote), "agony", null, null, FALSE, TRUE)
+		human_user.emote("agony", forced = TRUE)
 		addtimer(CALLBACK(src, PROC_REF(begin_transform), null, 3), 2.5 SECONDS, TIMER_DELETE_ME)
 
 	if(stage == 3)
@@ -143,7 +143,7 @@
 	for(var/obj/item/dropped_item in werewolf_user)
 		werewolf_user.dropItemToGround(dropped_item, silent = TRUE)
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
-	INVOKE_ASYNC(werewolf_user, TYPE_PROC_REF(/mob, emote), "scream", null, null, FALSE, TRUE)
+	werewolf_user.emote("scream", forced = TRUE)
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)

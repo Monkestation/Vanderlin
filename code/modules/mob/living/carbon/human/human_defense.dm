@@ -4,7 +4,7 @@
 
 	if(def_zone)
 		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
-		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
+		//If a specific bodypart is targeted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL my bodyparts for protection, and averages out the values
 	for(var/obj/item/bodypart/BP as anything in bodyparts)

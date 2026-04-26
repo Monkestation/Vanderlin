@@ -210,7 +210,7 @@
 	return isnull(target) ? null : "signals [living_pet] to breed with [target]!"
 
 /**
- * # Pet Command: Targetted Ability
+ * # Pet Command: targeted Ability
  * Tells a pet to use some kind of ability on the next thing you point at
  */
 /datum/pet_command/use_ability

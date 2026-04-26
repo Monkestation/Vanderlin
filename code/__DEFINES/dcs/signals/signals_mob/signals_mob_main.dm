@@ -23,6 +23,17 @@
 #define COMSIG_MOB_SWAPPING_HANDS "mob_swapping_hands"
 	#define COMPONENT_BLOCK_SWAP (1<<0)
 
+///Mob is trying to emote, from /datum/emote/proc/run_emote(): (key, params, type_override, intentional, emote)
+#define COMSIG_MOB_PRE_EMOTED "mob_pre_emoted"
+	#define COMPONENT_CANT_EMOTE (1<<0)
+///from /mob/living/emote(): ()
+#define COMSIG_MOB_EMOTE "mob_emote"
+#define COMSIG_MOB_EMOTED(emote_key) "mob_emoted_[emote_key]"
+///from /mob/living/check_cooldown(): ()
+#define COMSIG_MOB_EMOTE_COOLDOWN_CHECK "mob_emote_cd"
+	/// make a wild guess
+	#define COMPONENT_EMOTE_COOLDOWN_BYPASS (1<<0)
+
 /// from mob/get_status_tab_items(): (list/items)
 #define COMSIG_MOB_GET_STATUS_TAB_ITEMS "mob_get_status_tab_items"
 
@@ -38,7 +49,6 @@
 #define COMSIG_MOB_BREAK_SNEAK "mob_break_sneak"
 
 #define COMSIG_MOB_TRY_BARK "try_bark"
-#define COMSIG_MOB_TRY_EMOTE "try_emote"
 #define COMSIG_MOB_MODIFY_AGGRO_LINES "comsig_mob_modify_aggro_lines"
 #define COMSIG_MOB_MODIFY_DEATH_LINES "comsig_mob_modify_death_lines"
 

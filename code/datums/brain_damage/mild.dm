@@ -140,9 +140,9 @@
 		if(prob(12))
 			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
 			owner.Immobilize(20)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 6)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 12)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough", null, null, FALSE, TRUE), 18)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 6)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 12)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 18)
 	..()
 
 /datum/brain_trauma/mild/expressive_aphasia
