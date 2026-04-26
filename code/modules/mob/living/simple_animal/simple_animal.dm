@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	maxHealth = 20
 	gender = PLURAL //placeholder
 	living_flags = MOVES_ON_ITS_OWN
+	hud_type = /datum/hud/simple
 
 	status_flags = CANPUSH|CANSLOWDOWN|CANSTUN
 
@@ -756,18 +757,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	else
 		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
 	return ..()
-
-/mob/living/simple_animal/update_transform()
-	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
-	var/changed = FALSE
-
-	if(resize != RESIZE_DEFAULT_SIZE)
-		changed = TRUE
-		ntransform.Scale(resize)
-		resize = RESIZE_DEFAULT_SIZE
-
-	if(changed)
-		animate(src, transform = ntransform, time = 2, easing = EASE_IN|EASE_OUT)
 
 /mob/living/simple_animal/update_sight()
 	if(!client)

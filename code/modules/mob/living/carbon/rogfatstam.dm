@@ -144,9 +144,13 @@
 	return TRUE
 
 /mob/living/check_energy(has_amount)
-	if(!has_amount || has_amount > max_energy)
-		return FALSE
-	if((max_energy - energy) < has_amount)
+	///this trait affects both stamina and energy since they are part of the same system.
+	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
+		return TRUE
+	///This trait specifically affect energy.
+	if(HAS_TRAIT(src, TRAIT_NOENERGY))
+		return TRUE
+	if(has_amount > max_energy || has_amount > energy)
 		return FALSE
 	return TRUE
 

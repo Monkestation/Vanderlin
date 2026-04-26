@@ -14,7 +14,7 @@
 	if(isturf(loc))
 		if(ismob(AM))
 			var/mob/MM = AM
-			if(!(MM.movement_type & FLYING))
+			if(!(MM.movement_type & MOVETYPES_NOT_TOUCHING_GROUND))
 				triggermine(AM)
 		else
 			triggermine(AM)

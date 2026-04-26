@@ -211,6 +211,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/obj/item/bodypart/was_bodypart = bodypart_owner
 	var/mob/living/was_owner = owner
 	LAZYREMOVE(bodypart_owner.wounds, src)
+	SEND_SIGNAL(was_bodypart, COMSIG_BODYPART_WOUND_REMOVED, src)
 	bodypart_owner = null //honestly shouldn't be nulling the owner before calling on loss procs
 	owner = null
 	on_bodypart_loss(was_bodypart, was_owner)

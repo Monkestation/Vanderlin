@@ -70,7 +70,7 @@ GLOBAL_LIST_EMPTY(street_lamp_lights)
 		src.visible_message(span_danger("\The [deadthing] vanishes in a violent flash on contact with \The [src]!"))
 		deadthing.Destroy()
 
-/obj/structure/astratanshard/proc/send_to_necra(mob/fool,visible_message,mob_message,cause)
+/obj/structure/astratanshard/proc/send_to_necra(mob/living/fool,visible_message,mob_message,cause)
 	if(isdead(fool))
 		return
 	if(!visible_message)

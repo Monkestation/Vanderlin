@@ -27,6 +27,10 @@
 		EXP_TYPE_LIVING = 1200,
 		EXP_TYPE_BARD = 300
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/townannouncement
+	)
+	forced_flaw = /datum/quirk/boon/folk_hero
 
 	traits = list(
 		TRAIT_OLDPARTY
@@ -36,10 +40,6 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/militia
 	)
 
-/datum/job/town_elder/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/living/carbon/human/proc/townannouncement)
-	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 /datum/job/town_elder/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

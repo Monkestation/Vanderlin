@@ -186,7 +186,7 @@
 /obj/item/weapon/surgery/hammer/pre_attack(atom/A, mob/living/user, list/modifiers)
 	if(!istype(user.a_intent, INTENT_USE))
 		return ..()
-	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/medicine) < 1)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine) < 10)
 		return ..()
 	if(ishuman(A))
 		if(A == user)

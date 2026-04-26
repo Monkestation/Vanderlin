@@ -28,14 +28,14 @@
 	. = ..()
 	RegisterSignal(parent, COMSIG_HUMAN_LIFE, PROC_REF(handle_disguise_upkeep))
 	RegisterSignal(parent, COMSIG_DISGUISE_STATUS, PROC_REF(disguise_status))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	var/mob/living/carbon/human/H = parent
 	if(H.client)
 		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
 
 /datum/component/vampire_disguise/UnregisterFromParent()
 	. = ..()
-	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(parent, list(COMSIG_HUMAN_LIFE, COMSIG_DISGUISE_STATUS, COMSIG_ATOM_EXAMINE))
 	var/mob/living/carbon/human/H = parent
 	if(H.client)
 		add_verb(H, /mob/living/carbon/human/proc/disguise_button)
@@ -43,11 +43,10 @@
 
 /datum/component/vampire_disguise/proc/cache_original_appearance(mob/living/carbon/human/H)
 	cache_skin = H.skin_tone
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	cache_eyes = eyes.eye_color
-	cache_eye_secondary = eyes.second_color
-	cache_hetero = FALSE
-
+	var/obj/item/organ/eyes/right_eye = LAZYACCESS(H.eye_organs, 2)
+	var/obj/item/organ/eyes/left_eye = LAZYACCESS(H.eye_organs, 1)
+	cache_eyes = right_eye?.eye_color || "#FFFFFF"
+	cache_eye_secondary = left_eye?.eye_color || cache_eyes
 	cache_hair = H.get_hair_color()
 
 /datum/component/vampire_disguise/proc/handle_disguise_upkeep(mob/living/carbon/human/source)
@@ -85,9 +84,7 @@
 	H.set_hair_color(cache_hair, FALSE)
 	H.set_facial_hair_color(cache_hair, FALSE)
 
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		H.set_eye_color(cache_eye_secondary, cache_eye_secondary, FALSE)
+	H.set_eye_color(cache_eye_secondary, cache_eye_secondary, FALSE)
 
 
 	H.update_organ_colors()

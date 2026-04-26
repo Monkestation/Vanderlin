@@ -68,7 +68,7 @@
 			var/turf/cardinal_turf = get_step(src, direction)
 			if(istype(cardinal_turf, /turf/open/water))
 				var/turf/open/water/water = cardinal_turf
-				if(water.water_volume < 10)
+				if(water.volume_status == WATER_VOLUME_DRY)
 					continue
 				if(water.blocked_flow_directions & get_dir(water, src))
 					continue
@@ -96,7 +96,7 @@
 		if(water_reagent != water_parent.water_reagent)
 			water_reagent = water_parent.water_reagent
 			update_appearance(UPDATE_OVERLAYS)
-		if(water_parent.water_volume >= 10)
+		if(water_parent.volume_status != WATER_VOLUME_DRY)
 			return
 		water_logged = FALSE
 		update_appearance(UPDATE_OVERLAYS)

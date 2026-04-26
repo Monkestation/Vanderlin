@@ -69,8 +69,6 @@
 					if(part)
 						part.add_wound(/datum/wound/slash/small)
 					adjustToxLoss(10)
-		handle_heart()
-		handle_liver()
 		update_stamina()
 		update_energy()
 		handle_environment()
@@ -102,7 +100,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/human/DeadLife()
+/mob/living/carbon/human/DeadLife(delta_time, times_fired)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -114,6 +112,7 @@
 
 	. = ..()
 	name = get_visible_name()
+	handle_organs(delta_time, times_fired)
 
 /mob/living/carbon/human/proc/on_daypass()
 	if(stat < 3) //not dead
@@ -393,18 +392,6 @@
 		if(CH.clothing_flags & BLOCK_GAS_SMOKE_EFFECT)
 			return TRUE
 	return ..()
-
-/mob/living/carbon/human/proc/handle_heart()
-	var/we_breath = !HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT)
-
-	if(!undergoing_cardiac_arrest())
-		return
-
-	if(we_breath)
-		adjustOxyLoss(8)
-		Unconscious(80)
-	// Tissues die without blood circulation
-	adjustBruteLoss(2)
 
 /mob/living/carbon/human/proc/handle_vamp_dreams()
 	if(!HAS_TRAIT(src, TRAIT_VAMP_DREAMS))

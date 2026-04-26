@@ -372,6 +372,7 @@
 		/obj/item/weapon/surgery/cautery,
 		/obj/item/natural/worms/leech/parasite,
 		/obj/item/weapon/surgery/hammer,
+		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
 

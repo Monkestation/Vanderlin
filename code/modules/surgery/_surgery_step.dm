@@ -11,11 +11,11 @@
 	var/accept_hand = FALSE
 	/// Does the surgery step accept any item? If true, ignores implements. Compatible with accept_hand.
 	var/accept_any_item = FALSE
-	/// Silicons will ignore the probability of success and always succeed
-	var/silicons_obey_prob = FALSE
 
-	/// How long does the step take for someone with average skill and an average tool?
-	var/time = 1 SECONDS
+	/// Best case scenario time for this step
+	var/minimum_time = 10
+	/// Worst case scenario time for this step
+	var/maximum_time = 20
 	/// Random surgery flags that mostly indicate additional requirements
 	var/surgery_flags = SURGERY_BLOODY | SURGERY_INCISED
 	/// Random surgery flags blocking certain flags
@@ -53,27 +53,18 @@
 	/// Skill used to perform this surgery step
 	var/datum/attribute/skill/skill_used = /datum/attribute/skill/misc/medicine
 	/// Necessary skill MINIMUM to perform this surgery step, of skill_used
-	var/skill_min = SKILL_RANK_NOVICE
+	var/skill_min = SKILL_LEVEL_NOVICE
 	/// Skill median used to apply success and speed bonuses
-	var/skill_median = SKILL_RANK_JOURNEYMAN
-	/// Modifiers to success chance when you're above the median
-	var/list/skill_bonuses = list(
-		0.2,
-		0.4,
-		0.6,
-		0.8,
-		1,
-		2,
-	)
-	/// Modifiers to success chance when you're below the median
-	var/list/skill_maluses = list(
-		-0.2,
-		-0.4,
-		-0.6,
-		-0.8,
-		-1,
-		-2,
-	)
+	var/skill_median = SKILL_LEVEL_JOURNEYMAN
+
+	/// Requirement threshold for the diceroll as a baseline
+	var/dice_requirement = 25
+	/// Crit window for the diceroll
+	var/dice_crit = 8
+	/// Number of dice rolled
+	var/dice_num = 3
+	/// Sides per die
+	var/dice_sides = 20
 
 	/**
 	 * type; doesn't show up if this type exists.
@@ -112,7 +103,7 @@
 				break
 		if(!found_intent)
 			return FALSE
-	if(skill_used && skill_min && (GET_MOB_SKILL_VALUE_OLD(user, skill_used) < skill_min))
+	if(skill_used && skill_min && (GET_MOB_SKILL_VALUE(user, skill_used) < skill_min))
 		return FALSE
 	return TRUE
 
@@ -251,38 +242,145 @@
 		LAZYREMOVE(target.surgeries, target_zone)
 		return FALSE
 
-	play_preop_sound(user, target, target_zone, tool) // Here because most steps overwrite preop
+	play_preop_sound(user, target, target_zone, tool)
 
 	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent)
-	var/success_prob = max(get_success_probability(user, target, target_zone, tool, intent), 0)
 
-	var/modded_time = round(time * speed_mod, 1)
-	if(!do_after(user, modded_time, target))
+	var/modded_min = round(minimum_time * speed_mod, 1)
+	var/modded_max = round(maximum_time * speed_mod, 1)
+	var/final_time = rand(modded_min, modded_max)
+
+	if(!do_after(user, final_time, target))
 		LAZYREMOVE(target.surgeries, target_zone)
 		return FALSE
 
 	LAZYREMOVE(target.surgeries, target_zone)
-	var/success = !try_to_fail && (prob(success_prob)) && chem_check(target)
-	if(success && success(user, target, target_zone, tool, intent))
-		if(ishuman(user))
-			var/mob/living/carbon/human/doctor = user
-			user.mind.add_sleep_experience(/datum/attribute/skill/misc/medicine, GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * (skill_min/3))
-		play_success_sound(user, target, target_zone, tool)
-		if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
-			initiate(user, target, target_zone, tool, intent, try_to_fail)
-		return TRUE
-	else if(failure(user, target, target_zone, tool, intent, success_prob))
-		play_failure_sound(user, target, target_zone, tool)
-		if(user.client?.prefs.showrolls)
-			if(try_to_fail)
-				to_chat(user, span_warning("Intentional surgery fail, the chance to succeed was [success_prob]%"))
-			else
-				to_chat(user, span_warning("Surgery fail, the chance to succeed was [success_prob]%"))
-		if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
-			initiate(user, target, target_zone, tool, intent, try_to_fail)
-		return FALSE
 
-	return FALSE
+	var/roll_result = DICE_FAILURE
+	var/roll_requirement
+	if(!try_to_fail)
+		roll_requirement = get_roll_requirement(user, target, target_zone, tool, intent)
+		roll_result = user.diceroll(
+			requirement = roll_requirement,
+			crit = dice_crit,
+			dice_num = dice_num,
+			dice_sides = dice_sides,
+		)
+
+	var/chem_ok = chem_check(target)
+
+	switch(roll_result)
+		if(DICE_CRIT_SUCCESS)
+			if(!chem_ok)
+				// chems missing: degrade to normal failure path even on crit
+				if(failure(user, target, target_zone, tool, intent))
+					play_failure_sound(user, target, target_zone, tool)
+					display_roll(user, "CRIT SUCCESS (chem fail)", roll_requirement)
+					if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+						initiate(user, target, target_zone, tool, intent, try_to_fail)
+				return FALSE
+			if(crit_success(user, target, target_zone, tool, intent))
+				add_surgery_xp(user)
+				play_success_sound(user, target, target_zone, tool)
+				display_roll(user, "CRIT SUCCESS", roll_requirement)
+				if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+					initiate(user, target, target_zone, tool, intent, try_to_fail)
+				return TRUE
+			return FALSE
+
+		if(DICE_SUCCESS)
+			if(!chem_ok)
+				if(failure(user, target, target_zone, tool, intent))
+					play_failure_sound(user, target, target_zone, tool)
+					display_roll(user, "SUCCESS (chem fail)", roll_requirement)
+					if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+						initiate(user, target, target_zone, tool, intent, try_to_fail)
+				return FALSE
+			if(success(user, target, target_zone, tool, intent))
+				add_surgery_xp(user)
+				play_success_sound(user, target, target_zone, tool)
+				display_roll(user, "SUCCESS", roll_requirement)
+				if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+					initiate(user, target, target_zone, tool, intent, try_to_fail)
+				return TRUE
+			return FALSE
+
+		if(DICE_CRIT_FAILURE)
+			if(crit_failure(user, target, target_zone, tool, intent))
+				play_failure_sound(user, target, target_zone, tool)
+				display_roll(user, "CRIT FAILURE", roll_requirement)
+				if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+					initiate(user, target, target_zone, tool, intent, try_to_fail)
+			return FALSE
+
+		else // DICE_FAILURE or try_to_fail
+			if(failure(user, target, target_zone, tool, intent))
+				play_failure_sound(user, target, target_zone, tool)
+				display_roll(user, try_to_fail ? "INTENTIONAL FAIL" : "FAILURE", try_to_fail ? null : roll_requirement)
+				if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+					initiate(user, target, target_zone, tool, intent, try_to_fail)
+			return FALSE
+
+/datum/surgery_step/proc/get_roll_requirement(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	var/requirement = dice_requirement
+
+	if(skill_used)
+		var/skill_level = GET_MOB_SKILL_VALUE(user, skill_used) || 0
+		var/skill_delta = (skill_level - skill_median) * 0.5
+		requirement += skill_delta
+
+	if(implements)
+		var/implement_type = tool_check(user, tool)
+		if(implement_type)
+			var/tool_chance = implements[implement_type] || 100
+			requirement += round((100 - tool_chance) / 100 * 6, 1)
+
+	var/loc_mod = get_location_modifier(target)
+	requirement += round((loc_mod - 1) * 8, 1)
+
+	var/overseer_bonus = get_overseer_bonus(user, target, target_zone)
+	requirement += overseer_bonus
+	if(overseer_bonus > 0)
+		to_chat(user, span_notice("You feel more confident with an experienced eye watching over you."))
+
+	return FLOOR(clamp(requirement, dice_num, dice_num * dice_sides), 1)
+
+/datum/surgery_step/proc/get_overseer_bonus(mob/user, mob/living/target, target_zone)
+	var/best_bonus = 0
+	for(var/mob/living/carbon/human/nearby in view(3, user))
+		if(nearby == user)
+			continue
+		if(nearby.stat != CONSCIOUS)
+			continue
+		var/overseer_skill = GET_MOB_SKILL_VALUE(nearby, /datum/attribute/skill/misc/medicine)
+		if(overseer_skill <= skill_median)
+			continue
+		if(overseer_skill <= GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine))
+			continue
+		var/bonus = (overseer_skill - skill_median) * 0.25
+		if(bonus > best_bonus)
+			best_bonus = bonus
+	return best_bonus
+
+/datum/surgery_step/proc/add_surgery_xp(mob/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/doctor = user
+	user.mind.add_sleep_experience(/datum/attribute/skill/misc/medicine, GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * (skill_min / 3))
+
+/datum/surgery_step/proc/display_roll(mob/user, result_label, requirement)
+	if(!user.client?.prefs.showrolls)
+		return
+	if(requirement != null)
+		to_chat(user, span_warning("[result_label] (requirement was [requirement]/[dice_num * dice_sides])"))
+	else
+		to_chat(user, span_warning("[result_label]"))
+
+/datum/surgery_step/proc/crit_success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return success(user, target, target_zone, tool, intent)
+
+/datum/surgery_step/proc/crit_failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	return failure(user, target, target_zone, tool, intent)
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to perform surgery on [target]...</span>",
@@ -345,31 +443,6 @@
 	speed_mod *= get_location_modifier(target)
 
 	return speed_mod
-
-/datum/surgery_step/proc/get_success_probability(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	var/success_prob = 100
-	if(implements)
-		var/implement_type = tool_check(user, tool)
-		if(implement_type)
-			success_prob *= (implements[implement_type]/100) || 1
-	success_prob *= get_location_modifier(target)
-	success_prob *= get_skill_modifier(user, target, target_zone, tool, intent)
-
-	return success_prob
-
-/datum/surgery_step/proc/get_skill_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	if(!skill_used)
-		return 1
-	var/modifier = 1
-	var/skill_level = floor(GET_MOB_SKILL_VALUE_OLD(user, skill_used)) || 0
-	var/skill_difference = skill_level - skill_median
-	if((skill_difference > 0) && length(skill_bonuses))
-		skill_difference = clamp(abs(skill_difference), 0, skill_bonuses.len)
-		modifier += skill_bonuses[skill_difference]
-	else if((skill_difference < 0) && length(skill_maluses))
-		skill_difference = clamp(abs(skill_difference), 0, skill_maluses.len)
-		modifier += skill_maluses[skill_difference]
-	return max(modifier, 0)
 
 /datum/surgery_step/proc/get_location_modifier(mob/living/target)
 	var/turf/patient_turf = get_turf(target)

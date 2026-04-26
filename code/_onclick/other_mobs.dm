@@ -195,7 +195,7 @@
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
 		BP.grabbedby += B
 		B.grabbed = src
-		B.grabbee = user
+		B.grabbee = user // don't use set_grabber() since bites aren't actually pulls
 		B.limb_grabbed = BP
 		B.sublimb_grabbed = used_limb
 		SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, user) // black briar uses this for triggering infection on grabbers
@@ -502,7 +502,7 @@
 		changeNext_move(mmb_intent.clickcd)
 
 /mob/living/proc/jump_action(atom/A)
-	if(istype(get_turf(src), /turf/open/water))
+	if(HAS_TRAIT(src, TRAIT_IMMERSED))
 		to_chat(src, span_warning("I can't jump while floating."))
 		return
 
@@ -547,13 +547,13 @@
 
 	if(m_intent == MOVE_INTENT_RUN)
 		emote("leap", forced = TRUE)
-		OffBalance(30)
+		OffBalance(2 SECONDS)
 		jadded = 45
 		jrange = 3
 		jextra = TRUE
 	else
 		emote("jump", forced = TRUE)
-		OffBalance(20)
+		OffBalance(1 SECONDS)
 		jadded = 20
 		jrange = 2
 
@@ -579,6 +579,11 @@
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
+
+	// ensures the floating animation doesn't mess with our animation
+	if(movement_type & (MOVETYPES_FLOATING_ANIMATION))
+		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
+		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
 
 	if(adjust_stamina(min(jadded,100)))
 		if(do_a_flip)

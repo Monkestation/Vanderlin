@@ -28,7 +28,7 @@
 		qdel(src)
 		return INITIALIZE_HINT_QDEL
 
-	RegisterSignal(floor_vine, COMSIG_PARENT_QDELETING, PROC_REF(on_floor_destroyed))
+	RegisterSignal(floor_vine, COMSIG_QDELETING, PROC_REF(on_floor_destroyed))
 	AddComponent(/datum/component/aura_healing, \
 		range = heal_range, \
 		requires_visibility = TRUE, \
@@ -47,7 +47,7 @@
 
 /obj/structure/meatvine/healing_well/Destroy()
 	if(floor_vine)
-		UnregisterSignal(floor_vine, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(floor_vine, COMSIG_QDELETING)
 	floor_vine = null
 	return ..()
 

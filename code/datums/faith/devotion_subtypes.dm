@@ -122,6 +122,10 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/hammer_fall,
 		CLERIC_T3 = /datum/action/cooldown/spell/heat_metal,
 	)
+	favored_species = list(SPEC_ID_DWARF)
+	favored_miracles = list(
+		CLERIC_T2 = /datum/action/cooldown/spell/status/malum_anvil
+	)
 	viable_tasks = list(
 		/datum/devotion_task/malum_craft,
 		/datum/devotion_task/malum_smelt,

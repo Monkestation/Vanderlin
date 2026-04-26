@@ -23,7 +23,7 @@
 /datum/component/squeak/Initialize(custom_sounds, volume_override, chance_override, step_delay_override, use_delay_override, extrarange, falloff_exponent, fallof_distance)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignals(parent, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_BLOB_ACT, COMSIG_ATOM_ATTACKBY), PROC_REF(play_squeak))
+	RegisterSignals(parent, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_ATTACKBY), PROC_REF(play_squeak))
 	if(ismovableatom(parent))
 		RegisterSignals(parent, list(COMSIG_MOVABLE_BUMP, COMSIG_MOVABLE_IMPACT), PROC_REF(play_squeak))
 		RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, PROC_REF(play_squeak_crossed))
@@ -75,7 +75,7 @@
 				return
 	if(istype(AM, /obj/effect/dummy/phased_mob)) //don't squeek if they're in a phased/jaunting container.
 		return
-	if(AM.movement_type & (MOVETYPE_NOT_TOUCHING_GROUND))
+	if(AM.movement_type & (MOVETYPES_NOT_TOUCHING_GROUND))
 		return
 	if(ismob(AM) && !AM.density) // Prevents 10 overlapping mice from making an unholy sound while moving
 		return

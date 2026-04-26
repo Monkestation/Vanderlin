@@ -152,7 +152,7 @@
  */
 /datum/attribute_holder/proc/set_parent(mob/new_parent)
 	if(parent)
-		UnregisterSignal(parent, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_SHARE_APPRENTICE_XP, COMSIG_PARENT_QDELETING))
+		UnregisterSignal(parent, list(COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, COMSIG_SHARE_APPRENTICE_XP, COMSIG_QDELETING))
 		parent.attributes = null
 
 	parent = new_parent
@@ -160,7 +160,7 @@
 		parent.attributes = src
 		RegisterSignal(parent, COMSIG_SHARE_APPRENTICE_XP, PROC_REF(onshare_apprentice_xp))
 		RegisterSignal(parent, COMSIG_MOB_MIND_TRANSFERRED_OUT_OF, PROC_REF(upon_mind_transfer))
-		RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_deleted))
+		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_owner_deleted))
 	update_attributes()
 
 /datum/attribute_holder/proc/on_owner_deleted()
@@ -333,6 +333,7 @@
  *
  * If you don't care about crits, just count them as being the same as normal successes/failures.
  *
+ * Dice rolling works inversely to how you'd think so if you have a requirement of 30 it needs to be BELOW 30
  * Example:
  * Single stat (baseline)
  * diceroll(requirement = 10, crit = 10, dice_num = 3, dice_sides = 6)

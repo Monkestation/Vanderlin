@@ -93,6 +93,7 @@
 #define STATS_ANIMALS_BRED "animals_bred"
 #define STATS_FOOD_ROTTED "food_rotted"
 #define STATS_LUX_REVIVALS "lux_revivals"
+#define STATS_CPR_REVIVALS "cpr_revivals"
 #define STATS_ALIVE_MEDICATORS "alive_medicators"
 
 // Dendor

@@ -58,13 +58,13 @@
 
 	if(show_preview)
 		create_preview()
-		RegisterSignal(owner, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
+		RegisterSignal(owner, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 		RegisterSignal(owner, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
 /datum/action/cooldown/meatvine/unset_click_ability(mob/on_who, refund_cooldown = TRUE)
 	if(show_preview)
 		clear_preview()
-		UnregisterSignal(owner, COMSIG_USER_MOUSE_ENTERED)
+		UnregisterSignal(owner, COMSIG_MOB_MOUSE_ENTERED)
 		UnregisterSignal(owner, COMSIG_ATOM_MOUSE_ENTERED)
 
 	return ..()

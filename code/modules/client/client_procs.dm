@@ -750,7 +750,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 
 		// Yes this is the same as what's found in qdel(). Yes it does need to be here
 		// Get off my back
-		SEND_SIGNAL(src, COMSIG_PARENT_QDELETING, TRUE)
+		SEND_SIGNAL(src, COMSIG_QDELETING, TRUE)
 		Destroy() //Clean up signals and timers.
 	return ..()
 
@@ -1353,16 +1353,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	if(mob)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
-
-/client/proc/whitelisted()
-	if(whitelisted != 2)
-		return whitelisted
-	else
-		if(check_whitelist(ckey))
-			whitelisted = 1
-		else
-			whitelisted = 0
-		return whitelisted
 
 /client/proc/has_triumph_buy(triumph_id, unactivated_check = FALSE)
 	if(!triumph_id)

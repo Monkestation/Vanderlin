@@ -69,16 +69,16 @@
 	switch(dir2wall)
 		if(NORTH)
 			user.setDir(SOUTH)
-			user.set_mob_offsets("wall_press", _x = 0, _y = 20)
+			user.add_offsets("wall_press", x_add = 0, y_add = 20)
 		if(SOUTH)
 			user.setDir(NORTH)
-			user.set_mob_offsets("wall_press", _x = 0, _y = -10)
+			user.add_offsets("wall_press", x_add = 0, y_add = -10)
 		if(EAST)
 			user.setDir(WEST)
-			user.set_mob_offsets("wall_press", _x = 12, _y = 0)
+			user.add_offsets("wall_press", x_add = 12, y_add = 0)
 		if(WEST)
 			user.setDir(EAST)
-			user.set_mob_offsets("wall_press", _x = -12, _y = 0)
+			user.add_offsets("wall_press", x_add = -12, y_add = 0)
 
 /turf/closed/proc/wallshove(mob/living/user)
 	if(user.wallpressed)
@@ -93,16 +93,16 @@
 	switch(dir2wall)
 		if(NORTH)
 			user.setDir(NORTH)
-			user.set_mob_offsets("wall_press", _x = 0, _y = 20)
+			user.add_offsets("wall_press", x_add = 0, y_add = 20)
 		if(SOUTH)
 			user.setDir(SOUTH)
-			user.set_mob_offsets("wall_press", _x = 0, _y = -10)
+			user.add_offsets("wall_press", x_add = 0, y_add = -10)
 		if(EAST)
 			user.setDir(EAST)
-			user.set_mob_offsets("wall_press", _x = 12, _y = 0)
+			user.add_offsets("wall_press", x_add = 12, y_add = 0)
 		if(WEST)
 			user.setDir(WEST)
-			user.set_mob_offsets("wall_press", _x = -12, _y = 0)
+			user.add_offsets("wall_press", x_add = -12, y_add = 0)
 
 /mob/living/proc/update_wallpress_slowdown()
 	if(wallpressed)
@@ -152,69 +152,51 @@
 	return attack_hand(user)
 
 /turf/closed/attack_hand(mob/user)
-	if(wallclimb)
-		if(isliving(user))
-			var/turf/user_turf = get_turf(user)
-			var/mob/living/L = user
-			var/climbsound = 'sound/foley/climb.ogg'
-			if(L.stat != CONSCIOUS)
+	. = ..()
+	if(.)
+		return
+	if(wallclimb && isliving(user))
+		. = TRUE
+		if(DOING_INTERACTION(user, DOAFTER_SOURCE_CLIMBING_LADDER))
+			return
+		if(!user.can_z_move(UP, start = get_turf(user), z_move_flags = Z_MOVE_CLIMBING_FLAGS))
+			return
+		var/turf/target = GET_TURF_ABOVE(src)
+		if(!target || !istype(target, /turf/open))
+			to_chat(user, span_warning("I can't climb here."))
+			return
+		for(var/obj/structure/F in target)
+			if(F && (F.density && !F.climbable))
+				to_chat(user, span_warning("I can't climb here."))
 				return
-			var/turf/target = GET_TURF_ABOVE(user_turf)
-			if(!istype(target, /turf/open/openspace))
-				to_chat(user, "<span class='warning'>I can't climb here.</span>")
-				return
-			if(!L.can_zTravel(target, UP))
-				to_chat(user, "<span class='warning'>I can't climb there.</span>")
-				return
-			target = GET_TURF_ABOVE(src)
-			if(!target || istype(target, /turf/closed) || istype(target, /turf/open/openspace))
-				target = GET_TURF_ABOVE(user_turf)
-				if(!target || !istype(target, /turf/open/openspace))
-					to_chat(user, "<span class='warning'>I can't climb here.</span>")
-					return
-			for(var/obj/structure/F in target)
-				if(F && (F.density && !F.climbable))
-					to_chat(user, "<span class='warning'>I can't climb here.</span>")
-					return
-			var/used_time = 0
-			var/amt2raise = 0
-			var/boon = 0
-			if(L.mind)
-				var/myskill = GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/misc/climbing)
-				amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)/2)
-				boon = L.get_learning_boon(/datum/attribute/skill/misc/climbing)
-				var/obj/structure/table/TA = locate() in L.loc
-				if(TA)
-					myskill += 1
-				else
-					var/obj/structure/chair/CH = locate() in L.loc
-					if(CH)
-						myskill += 1
-					var/obj/structure/wallladder/WL = locate() in L.loc
-					if(WL)
-						if(get_dir(WL.loc,src) == WL.dir)
-							myskill += 8
-							climbsound = 'sound/foley/ladder.ogg'
+		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, UP)
 
-				if(myskill < climbdiff)
-					to_chat(user, "<span class='warning'>I'm not capable of climbing this.</span>")
-					return
-				used_time = max(70 - (myskill * 10) - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 3), 30)
-			if(user.m_intent != MOVE_INTENT_SNEAK)
-				playsound(user, climbsound, 100, TRUE)
-			user.visible_message("<span class='warning'>[user] starts to climb [src].</span>", "<span class='warning'>I start to climb [src]...</span>")
-			if(do_after(L, used_time, src))
-				var/pulling = user.pulling
-				if(ismob(pulling))
-					user.pulling.forceMove(target)
-				user.forceMove(target)
-				user.start_pulling(pulling,suppress_message = TRUE)
-				if(user.m_intent != MOVE_INTENT_SNEAK)
-					playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
-				if(L.mind)
-					L.adjust_experience(/datum/attribute/skill/misc/climbing, floor(amt2raise * boon), FALSE)
-	else
-		..()
+/turf/closed/proc/start_traveling(mob/living/user, direction)
+	var/turf/target = get_step_multiz(src, direction)
+	var/climbsound = 'sound/foley/climb.ogg'
+	var/myskill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/climbing)
+	if(locate(/obj/structure/table) in user.loc)
+		myskill += 1
+	if(locate(/obj/structure/chair) in user.loc)
+		myskill += 1
+	var/obj/structure/wallladder/found_wallladder = locate() in user.loc
+	if(found_wallladder)
+		if(get_dir(found_wallladder.loc, src) == found_wallladder.dir)
+			myskill += 8
+			climbsound = 'sound/foley/ladder.ogg'
+
+	if(myskill < climbdiff)
+		to_chat(user, span_warning("I'm not capable of climbing this."))
+		return
+	var/used_time = max(70 - (myskill * 10) - (GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED) * 3), 30)
+	if(user.m_intent != MOVE_INTENT_SNEAK)
+		playsound(user, climbsound, 100, TRUE)
+	user.visible_message(span_warning("[user] starts to climb [src]."), span_warning("I start to climb [src]..."))
+	if(do_after(user, used_time, src, display_over_user = TRUE, interaction_key = DOAFTER_SOURCE_CLIMBING_LADDER))
+		user.zMove(target = target, z_move_flags = Z_MOVE_CLIMBING_FLAGS)
+		if(user.m_intent != MOVE_INTENT_SNEAK)
+			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
+		user.adjust_experience(/datum/attribute/skill/misc/climbing, floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/attribute/skill/misc/climbing), FALSE)
 
 /turf/closed/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

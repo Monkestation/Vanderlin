@@ -33,11 +33,9 @@
 		TRAIT_STEELHEARTED,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-
-/datum/job/gatemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/gatemaster
 	name = "Gatemaster Base"

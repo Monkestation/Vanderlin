@@ -127,7 +127,7 @@
 
 		living_particles |= spawned
 
-		RegisterSignal(spawned, COMSIG_PARENT_QDELETING, PROC_REF(particle_qdeleting))
+		RegisterSignal(spawned, COMSIG_QDELETING, PROC_REF(particle_qdeleting))
 		animate_particle(spawned)
 
 ///this is the proc that gets overridden when we create new particle spewers that control its movements
@@ -142,7 +142,7 @@
 
 /datum/component/particle_spewer/proc/particle_qdeleting(obj/effect/abstract/particle/spawned)
 	living_particles -= spawned
-	UnregisterSignal(spawned, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(spawned, COMSIG_QDELETING)
 
 /datum/component/particle_spewer/proc/handle_equip_offsets(datum/source, mob/equipper, slot)
 	SIGNAL_HANDLER

@@ -63,6 +63,11 @@
 		TRAIT_ZJUMP,
 		TRAIT_SHAKY_SPEECH
 	)
+	verbs = list(
+		/mob/living/carbon/human/proc/ventriloquate,
+		/mob/living/carbon/human/proc/ear_trick,
+	)
+
 
 /datum/job/jester/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -71,9 +76,6 @@
 		spawned.cmode_music = 'sound/music/cmode/nobility/CombatJesterSTR.ogg'
 	else
 		spawned.cmode_music = pick('sound/music/cmode/nobility/CombatJester1.ogg', 'sound/music/cmode/nobility/CombatJester2.ogg')
-
-	add_verb(spawned, /mob/living/carbon/human/proc/ventriloquate)
-	add_verb(spawned, /mob/living/carbon/human/proc/ear_trick)
 
 /datum/outfit/jester
 	name = JOB_JESTER
