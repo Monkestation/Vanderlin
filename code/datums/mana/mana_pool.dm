@@ -345,7 +345,7 @@
 
 	target_pool.incoming_transfer_start(src)
 
-	RegisterSignal(target_pool, COMSIG_PARENT_QDELETING, PROC_REF(stop_transfer), override = TRUE)
+	RegisterSignal(target_pool, COMSIG_QDELETING, PROC_REF(stop_transfer), override = TRUE)
 
 	if (force_process)
 		transferring_to[target_pool] |= MANA_POOL_SKIP_NEXT_TRANSFER
@@ -362,7 +362,7 @@
 	transferring_to -= target_pool
 	target_pool.incoming_transfer_end(src)
 
-	UnregisterSignal(target_pool, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(target_pool, COMSIG_QDELETING)
 
 	return MANA_POOL_TRANSFER_STOP
 

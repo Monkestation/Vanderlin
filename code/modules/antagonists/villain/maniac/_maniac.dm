@@ -136,6 +136,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.remove_curse(/datum/curse/zizo)
 			dreamer.AddComponent(/datum/component/theme_music)
 		//	dreamer.remove_client_colour(/datum/client_colour/maniac_marked)
+		RegisterSignal(owner.current, COMSIG_EMOTE_PRAY, PROC_REF(on_owner_pray))
 		owner.current.refresh_looping_ambience()
 		hallucinations = owner.current.overlay_fullscreen("maniac", /atom/movable/screen/fullscreen/maniac)
 	LAZYINITLIST(owner.learned_recipes)
@@ -147,9 +148,24 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		owner.announce_objectives()
 	START_PROCESSING(SSobj, src)
 
+/datum/antagonist/maniac/proc/on_owner_pray(mob/living/follower, message)
+	SIGNAL_HANDLER
+	if(text2num(message) == sum_keys)
+		INVOKE_ASYNC(src, PROC_REF(wake_up))
+
+/datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)
+	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
+	if(!dreamer)
+		return FALSE
+	if(text2num(message) == dreamer.sum_keys)
+		INVOKE_ASYNC(dreamer, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
+		return TRUE
+	. = ..()
+
 /datum/antagonist/maniac/on_removal()
 	STOP_PROCESSING(SSobj, src)
 	if(owner.current)
+		UnregisterSignal(owner.current, COMSIG_EMOTE_PRAY)
 		if(!silent)
 			to_chat(owner.current,span_danger("I am no longer a MANIAC!"))
 		if(ishuman(owner.current))

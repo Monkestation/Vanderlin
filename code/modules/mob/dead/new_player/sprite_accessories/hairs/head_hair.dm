@@ -1474,6 +1474,36 @@
 	gender = NEUTER
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
 
+/datum/sprite_accessory/hair/head/wolfcut
+	name = "Wolfcut"
+	icon_state = "wolfcut"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/triplebuns
+	name = "Triple Buns"
+	icon_state = "triplebuns"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/nest
+	name = "Nest"
+	icon_state = "nest"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/strand
+	name = "Strand"
+	icon_state = "strand"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
+/datum/sprite_accessory/hair/head/sodden
+	name = "Sodden"
+	icon_state = "sodden"
+	gender = NEUTER
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF, SPEC_ID_AASIMAR, SPEC_ID_TIEFLING, SPEC_ID_HALF_ORC)
+
 /datum/sprite_accessory/hair/head/triton
 	name = "Base Triton"
 	abstract_type = /datum/sprite_accessory/hair/head/triton

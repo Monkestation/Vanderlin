@@ -1,10 +1,4 @@
-#define COMSIG_MOVABLE_PRE_MOVE "movable_pre_move"					//from base of atom/movable/Moved(): (/atom)
-	#define COMPONENT_MOVABLE_BLOCK_PRE_MOVE 1
-#define COMSIG_MOVABLE_MOVED "movable_moved"					//from base of atom/movable/Moved(): (/atom, dir)
-#define COMSIG_MOVABLE_CROSS "movable_cross"					//from base of atom/movable/Cross(): (/atom/movable)
-#define COMSIG_MOVABLE_CROSSED "movable_crossed"                //from base of atom/movable/Crossed(): (/atom/movable)
-#define COMSIG_MOVABLE_UNCROSSED "movable_uncrossed"            //from base of atom/movable/Uncrossed(): (/atom/movable)
-#define COMSIG_MOVABLE_BUMP "movable_bump"						//from base of atom/movable/Bump(): (/atom)
+
 #define COMSIG_MOVABLE_IMPACT "movable_impact"					//from base of atom/movable/throw_impact(): (/atom/hit_atom, /datum/thrownthing/throwingdatum)
 #define COMSIG_MOVABLE_IMPACT_ZONE "item_impact_zone"			//from base of mob/living/hitby(): (mob/living/target, hit_zone)
 #define COMSIG_MOVABLE_PRE_THROW "movable_pre_throw"			//from base of atom/movable/throw_at(): (list/args)
@@ -40,6 +34,41 @@
 #define COMSIG_MOVABLE_SET_ANCHORED "movable_set_anchored"
 ///from base of atom/movable/setGrabState(): (newstate)
 #define COMSIG_MOVABLE_SET_GRAB_STATE "living_set_grab_state"
+
+///from base of atom/movable/buckle_mob(): (mob, force)
+#define COMSIG_MOVABLE_BUCKLE "buckle"
+///from base of atom/movable/unbuckle_mob(): (mob, force)
+#define COMSIG_MOVABLE_UNBUCKLE "unbuckle"
+
+///from /atom/movable/proc/buckle_mob(): (mob/living/M, force, check_loc, buckle_mob_flags)
+#define COMSIG_MOVABLE_PREBUCKLE "prebuckle" // this is the last chance to interrupt and block a buckle before it finishes
+	#define COMPONENT_BLOCK_BUCKLE (1<<0)
+
+///from /atom/movable/proc/buckle_mob(): (buckled_movable)
+#define COMSIG_MOB_BUCKLED "mob_buckle"
+///from /atom/movable/proc/unbuckle_mob(): (buckled_movable)
+#define COMSIG_MOB_UNBUCKLED "mob_unbuckle"
+
+///from /obj/vehicle/proc/driver_move, caught by the riding component to check and execute the driver trying to drive the vehicle
+#define COMSIG_RIDDEN_DRIVER_MOVE "driver_move"
+	#define COMPONENT_DRIVER_BLOCK_MOVE (1<<0)
+
+
+#define COMSIG_MOB_OVERLAY_FORCE_REMOVE "mob_overlay_force_remove"
+#define COMSIG_MOB_OVERLAY_FORCE_UPDATE "mob_overlay_force_update"
+
+// /datum/element/movetype_handler signals
+/// Called when the floating anim has to be temporarily stopped and restarted later: (timer)
+#define COMSIG_PAUSE_FLOATING_ANIM "pause_floating_anim"
+/// From base of datum/element/movetype_handler/on_movement_type_trait_gain: (flag, old_movement_type)
+#define COMSIG_MOVETYPE_FLAG_ENABLED "movetype_flag_enabled"
+/// From base of datum/element/movetype_handler/on_movement_type_trait_loss: (flag, old_movement_type)
+#define COMSIG_MOVETYPE_FLAG_DISABLED "movetype_flag_disabled"
+
+/// From base of /turf/Entered: (atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+#define COMSIG_MOVABLE_TURF_ENTERED "movable_turf_entered"
+/// From base of /turf/Exited: (atom/movable/gone, atom/new_loc)
+#define COMSIG_MOVABLE_TURF_EXITED "movable_turf_exited"
 
 /// from /mob/living/can_z_move, sent to whatever the mob is buckled to. Only ridable movables should be ridden up or down btw.
 #define COMSIG_BUCKLED_CAN_Z_MOVE "ridden_pre_can_z_move"

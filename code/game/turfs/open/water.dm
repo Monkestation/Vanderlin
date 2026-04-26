@@ -60,7 +60,7 @@
 	/// Whether the tile has a current and moves atoms that enter the tile
 	var/river_current = FALSE
 	/// The time between movements of the tile. Base of 0.5 seconds
-	var/current_speed = 0.5
+	var/current_speed = 0.5 SECONDS
 	/// The actual direction that stuff moves. Defaults to dir.
 	var/movedir
 
@@ -353,7 +353,9 @@
 		return
 	var/datum/move_loop/move/moving_loop = SSmove_manager.processing_on(moving, SSconveyors)
 	var/current_direction = movedir || dir
-	var/speed = current_speed * 1 SECONDS
+	var/speed = current_speed
+	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
+		speed *= 2
 	if(moving_loop)
 		moving_loop.direction = current_direction
 		moving_loop.delay = speed
@@ -645,6 +647,10 @@
 	water_height = WATER_HEIGHT_SHALLOW
 	slowdown = 15
 	cleanliness_factor = 5
+	footstep = FOOTSTEP_SHALLOW
+	barefootstep = FOOTSTEP_SHALLOW
+	clawfootstep = FOOTSTEP_SHALLOW
+	heavyfootstep = FOOTSTEP_SHALLOW
 	water_reagent = /datum/reagent/water
 	stamina_entry_cost = 1
 	ticking_stamina_cost = 0

@@ -14,7 +14,7 @@
 
 /datum/organ_process/lungs/proc/handle_oxygenation(mob/living/carbon/owner, delta_time, times_fired)
 	var/lung_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LUNGS)
-	var/effective_oxygenation = ((100 - owner.getOxyLoss()) * (lung_efficiency/optimal_threshold))
+	var/effective_oxygenation = ((130 - owner.getOxyLoss()) * (lung_efficiency/optimal_threshold))
 	if(effective_oxygenation < owner.total_oxygen_req)
 		if(DT_PROB(0.5, delta_time))
 			if(owner.body_position != LYING_DOWN)
