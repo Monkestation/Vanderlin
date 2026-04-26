@@ -18,7 +18,7 @@
 	return TRUE
 
 /turf/open/dungeon_trap/can_cross_safely(atom/movable/traveler)
-	return HAS_TRAIT(src, TRAIT_CHASM_STOPPED) || traveler.movement_type & MOVETYPES_NOT_TOUCHING_GROUND
+	return HAS_TRAIT(src, TRAIT_CHASM_STOPPED) || (traveler.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 
 ///Makes movables fall when forceMove()'d to this turf.
 /turf/open/dungeon_trap/Entered(atom/movable/movable)
