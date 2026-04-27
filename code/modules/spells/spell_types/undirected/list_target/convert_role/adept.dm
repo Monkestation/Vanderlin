@@ -15,9 +15,15 @@
 	..()
 	if(HAS_TRAIT(cast_on, TRAIT_RECRUITED))
 		cast_on.add_traits(list(TRAIT_INQUISITION, TRAIT_KNOW_INQUISITION_DOORS))
-		if(cast_on.mind.has_antag_datum(/datum/antagonist/assassin)) //assassins cannot change their faith
+
+		if(cast_on.mind.has_antag_datum(/datum/antagonist/bandit)) //ex-bandits cannot just metagame their old buddies through disguise and vice-versa
+			cast_on.mind.remove_antag_datum(/datum/antagonist/bandit)
+
+		if(cast_on.mind.has_antag_datum(/datum/antagonist/assassin) || cast_on.mind.has_antag_datum(/datum/antagonist/zizocultist) || cast_on.mind.has_antag_datum(/datum/antagonist/maniac))
+		//graggar/zizo cultist cannot be converted
 			to_chat(cast_on, span_boldnotice("My creed must not be abandoned. I will use this as an opportunity."))
 			return
+
 		var/alert
 		if(cast_on.mind.has_antag_datum(/datum/antagonist/vampire)) //SOUL
 			alert = tgui_alert(cast_on, "Eating my wings to make me tame", "Bird of Hermes is my name", list("PSYDON ENDURES!", "I still cling to the ways of old"))
@@ -25,6 +31,7 @@
 			alert = tgui_alert(cast_on, "Will you embrace the faith of your captors?", "BAPTISM", list("PSYDON ENDURES!", "I still cling to the ways of old"))
 		if(alert != "I still cling to the ways of old")
 			cast_on.set_patron(/datum/patron/psydon)
+
 			to_chat(cast_on, span_boldnotice("A new chapter begins. Show your zeal. Endure."))
 		else
 			to_chat(cast_on, span_boldnotice("I lie to have my life spared. I hope they won't find out I'm a snake in the grass."))
