@@ -449,28 +449,17 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user, use_article=TRUE)
-	if(use_article)
-		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
-	return "<b>[name]</b>"
-
-///Generate the full examine string of this atom (including icon for goonchat)
-/atom/proc/get_examine_string(mob/user, thats = FALSE)
-	. = get_examine_name(user)
-	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
-	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
-
-//Used for using alternative names when examining a person (Such as inquisition items etc.)
-/atom/proc/get_examine_display_name(mob/user, use_article=TRUE)
-	var/display_name = examine_name ? examine_name : name
+/atom/proc/get_examine_name(mob/user, use_article = TRUE, examine_list = FALSE)
+	var/display_name = name
+	if(examine_list)
+		display_name = examine_name ? examine_name : name
 	if(use_article)
 		return article ? "[article] <b>[display_name]</b>" : gender == PLURAL ? "some <b>[display_name]</b>" : "\a <b>[display_name]</b>"
-	return "<b>[name]</b>"
+	return "<b>[display_name]</b>"
 
-/atom/proc/get_examine_list_string(mob/user, thats = FALSE)
-	. = get_examine_display_name(user)
+///Generate the full examine string of this atom (including icon for goonchat)
+/atom/proc/get_examine_string(mob/user, thats = FALSE, examine_list = FALSE)
+	. = get_examine_name(user, TRUE, examine_list)
 	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
 	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 		. = override.Join("")
