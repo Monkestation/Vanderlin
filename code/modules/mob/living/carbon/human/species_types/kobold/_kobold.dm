@@ -63,7 +63,7 @@
 
 	changesource_flags = WABBAJACK
 
-	native_language = "Gutter"
+	native_language = "Utterances"
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/kobold.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/kobold.dmi'
@@ -137,6 +137,8 @@
 	if(hungry_hungry_kobold)
 		C.AddComponent(/datum/component/abberant_eater, DIET_KOBOLD, FALSE, DIET_TURF_KOBOLD, _keeps_items = TRUE)
 	C.grant_language(/datum/language/common)
+	C.grant_language(/datum/language/kobold)
+	to_chat(C, "<span class='info'>I can speak Utterances with ,k before my speech.</span>")
 
 /datum/species/kobold/on_species_loss(mob/living/carbon/C)
 	. = ..()
@@ -146,6 +148,7 @@
 			abberant_eater.RemoveComponent()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
+	C.remove_language(/datum/language/kobold)
 
 /datum/species/kobold/check_roundstart_eligible()
 	return TRUE

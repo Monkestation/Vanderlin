@@ -18,16 +18,24 @@
 	var/list/mob_type_allowed_typecache = /mob //Types that are allowed to use that emote
 	var/list/mob_type_blacklist_typecache //Types that are NOT allowed to use that emote
 	var/list/mob_type_ignore_stat_typecache
+	/// Trait that is required to use this emote.
+	var/trait_required
+	/// In which state can you use this emote? (Check stat.dm for a full list of them)
 	var/stat_allowed = CONSCIOUS
 	var/sound //Sound to play when emote is called
 	var/vary = FALSE	//used for the honk borg emote
 	var/only_forced_audio = FALSE //can only code call this event instead of the player.
+	/// The cooldown between the uses of the emote.
+	var/cooldown = 0.8 SECONDS
+	/// Blocks any intentional emote use for this time.
+	var/mute_time = 3 SECONDS
+	/// Ignore emote block applied from mute_time. cooldown is still respected
+	var/ignore_mute_time
 	var/nomsg = FALSE
 	var/soundping = TRUE
 	var/ignore_silent = FALSE
 	var/snd_vol = 100
 	var/snd_range = -1
-	var/mute_time = 30//time after where someone can't do another emote
 	// Whether this should show on runechat
 	var/show_runechat = TRUE
 	// Explicitly defined runechat message, if it's not defined and `show_runechat` is TRUE then it will use `message` instaed
@@ -52,14 +60,14 @@
 /datum/emote/proc/adjacentaction(mob/user, mob/target)
 	return
 
-/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targetted = FALSE)
+/datum/emote/proc/run_emote(mob/user, params, type_override, intentional = FALSE, targeted = FALSE)
 	. = TRUE
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
 	if(only_forced_audio && intentional)
 		return FALSE
-	if(targetted)
-		INVOKE_ASYNC(src, PROC_REF(async_targetted_emote), user, params, type_override, intentional)
+	if(targeted)
+		INVOKE_ASYNC(src, PROC_REF(async_targeted_emote), user, params, type_override, intentional)
 		return
 
 	var/raw_msg = select_message_type(user, intentional)
@@ -106,7 +114,10 @@
 		else
 			user.visible_message(msg, runechat_message = runechat_msg_to_use)
 
-/datum/emote/proc/async_targetted_emote(mob/user, params, type_override, intentional)
+	// SEND_SIGNAL(user, COMSIG_MOB_EMOTE, src, key, type_override, message, intentional)
+	// SEND_SIGNAL(user, COMSIG_MOB_EMOTED(key))
+
+/datum/emote/proc/async_targeted_emote(mob/user, params, type_override, intentional)
 	var/list/mobsadjacent = list()
 	var/mob/chosenmob
 	for(var/mob/living/target_mob in view(user, 2))
@@ -119,7 +130,7 @@
 		if(user.Adjacent(chosenmob))
 			params = chosenmob.name
 			adjacentaction(user, chosenmob)
-			run_emote(user, params, type_override, intentional, FALSE)
+			run_emote(user, params, type_override, intentional, targeted = FALSE)
 
 /mob/living/proc/get_emote_pitch()
 	return clamp(voice_pitch, 0.5, 2)
@@ -231,7 +242,8 @@
 	return replacetext(message_param, "%t", params)
 
 /datum/emote/proc/can_run_emote(mob/user, status_check = TRUE, intentional = FALSE)
-	. = TRUE
+	if(trait_required && !HAS_TRAIT(user, trait_required))
+		return FALSE
 	if(!is_type_in_typecache(user, mob_type_allowed_typecache))
 		return FALSE
 	if(is_type_in_typecache(user, mob_type_blacklist_typecache))
@@ -240,31 +252,53 @@
 		if(user.stat > stat_allowed)
 			if(!intentional)
 				return FALSE
-/*			switch(user.stat)
+			switch(user.stat)
 				if(SOFT_CRIT)
-					to_chat(user, "<span class='warning'>I cannot [key] while dying!</span>")
-				if(UNCONSCIOUS)
-					to_chat(user, "<span class='warning'>I cannot [key] while unconscious!</span>")
+					to_chat(user, span_warning("I cannot [key] while in a critical condition!"))
+				if(UNCONSCIOUS, HARD_CRIT)
+					to_chat(user, span_warning("I cannot [key] while unconscious!"))
 				if(DEAD)
-					to_chat(user, "<span class='warning'>I cannot [key] while dead!</span>")*/
+					to_chat(user, span_warning("I cannot [key] while dead!"))
 			return FALSE
 		if(restraint_check && HAS_TRAIT(user, TRAIT_RESTRAINED))
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='warning'>I cannot [key] while restrained!</span>")
+			to_chat(user, span_warning("I cannot [key] while restrained!"))
 			return FALSE
 		if(hands_use_check && HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
 			if(!intentional)
 				return FALSE
-			to_chat(user, "<span class='warning'>I cannot use my hands to [key] right now!</span>")
+			to_chat(user, span_warning("I cannot use my hands to [key] right now!"))
 			return FALSE
 		if(incapacitated_check && HAS_TRAIT(user, TRAIT_INCAPACITATED))
 			if(!intentional)
 				return FALSE
-			// to_chat(user, "<span class='warning'>You cannot use your hands to [key] right now!</span>")
+			to_chat(user, span_warning("I cannot use your hands to [key] right now!"))
 			return FALSE
 
-	if(isliving(user))
-		var/mob/living/L = user
-		if(HAS_TRAIT(L, TRAIT_EMOTEMUTE))
+	if(HAS_TRAIT(user, TRAIT_EMOTEMUTE))
+		return FALSE
+
+	return TRUE
+
+/**
+ * Check to see if the user should play a sound when performing the emote.
+ *
+ * Arguments:
+ * * user - Person that is doing the emote.
+ * * intentional - Bool that says whether the emote was forced (FALSE) or not (TRUE).
+ *
+ * Returns a bool about whether or not the user should play a sound when performing the emote.
+ */
+/datum/emote/proc/should_play_sound(mob/user, intentional = FALSE)
+	if(emote_type & EMOTE_AUDIBLE && !hands_use_check)
+		if(HAS_TRAIT(user, TRAIT_MUTE))
 			return FALSE
+		if(ishuman(user))
+			var/mob/living/carbon/human/loud_mouth = user
+			if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
+				return FALSE
+
+	if(only_forced_audio && intentional)
+		return FALSE
+	return TRUE

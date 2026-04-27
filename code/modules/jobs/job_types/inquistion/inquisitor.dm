@@ -197,20 +197,29 @@
 		return
 	mind.recall_targets(src, type="Ordos")
 
+#define RESIST_TORTURE "RESIST!!"
+#define CONFESS_SINS "CONFESS!!"
+
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag", mob/living/carbon/human/user)
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 10 SECONDS, TIMER_STOPPABLE)
-	var/static/list/options = list("RESIST!!", "CONFESS!!")
-	var/responsey = browser_input_list(src, "Resist torture?", "TEST OF PAIN", options)
+	var/responsey = tgui_input_list(src, "Resist torture?", "TEST OF PAIN", list(RESIST_TORTURE, CONFESS_SINS), RESIST_TORTURE)
 
 	if(SStimer.timer_id_dict[timerid])
 		deltimer(timerid)
 	else
 		to_chat(src, span_warning("Too late..."))
 		return
-	if(responsey == "RESIST!!")
-		confess_sins(confession_type, resist=TRUE, interrogator=user)
-	else
-		confess_sins(confession_type, resist=FALSE, interrogator=user)
+
+	if(responsey == CONFESS_SINS)
+		var/confirm = tgui_alert(src, "Are you certain you wish to confess?", "CONFIRM CONFESSION", DEFAULT_INPUT_CHOICES, 10 SECONDS)
+		if(confirm != CHOICE_YES)
+			responsey = RESIST_TORTURE
+
+	var/resistance = (responsey == RESIST_TORTURE)
+	confess_sins(confession_type, resist=resistance, interrogator=user)
+
+#undef RESIST_TORTURE
+#undef CONFESS_SINS
 
 /mob/living/carbon/human/proc/confess_sins(confession_type = "antag", resist, mob/living/carbon/human/interrogator, torture=TRUE, obj/item/paper/inqslip/confession/confession_paper, false_result)
 	if(stat == DEAD)

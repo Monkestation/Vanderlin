@@ -307,3 +307,12 @@
 2026-04-25:
   CheffieGithub:
   - bugfix: fixed ghosthud not getting a border
+2026-04-27:
+  ModDownloading:
+  - rscadd: Kobolds can now speak in Utterances, their own unique language-substitute,
+      with the key 'k'.
+  realforest2001:
+  - rscadd: Double confirmation now required to confess sins.
+  ta3754859-max:
+  - bugfix: Fixes cyclops and short sighted removing masks from advanced classes
+  - bugfix: Fixes wrong vision cone getting blocked with the eyepatch/cyclops trait

@@ -701,7 +701,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(dextrous)
 		drop_all_held_items()
 	if(!gibbed)
-		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "death", null, null, null, TRUE)
+		emote("death", forced = TRUE)
 	layer = layer-0.1
 	if(del_on_death)
 		..()
