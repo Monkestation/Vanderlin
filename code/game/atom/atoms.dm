@@ -168,6 +168,8 @@
 	 */
 	var/germ_level = GERM_LEVEL_AMBIENT
 
+	var/examine_name = null
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *
@@ -455,6 +457,20 @@
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
 	. = get_examine_name(user)
+	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+		. = override.Join("")
+	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
+
+//Used for using alternative names when examining a person (Such as inquisition items etc.)
+/atom/proc/get_examine_display_name(mob/user, use_article=TRUE)
+	var/display_name = examine_name ? examine_name : name
+	if(use_article)
+		return article ? "[article] <b>[display_name]</b>" : gender == PLURAL ? "some <b>[display_name]</b>" : "\a <b>[display_name]</b>"
+	return "<b>[name]</b>"
+
+/atom/proc/get_examine_list_string(mob/user, thats = FALSE)
+	. = get_examine_display_name(user)
 	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
 	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 		. = override.Join("")

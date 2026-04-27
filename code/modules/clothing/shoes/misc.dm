@@ -177,6 +177,7 @@
 
 /obj/item/clothing/shoes/psydonboots
 	name = "enduring boots"
+	examine_name = "boots"
 	desc = "A reliable pair of dark leather boots. Seems like they could endure the world!"
 	color = "#d5c2aa"
 	icon_state = "psydonboots"
