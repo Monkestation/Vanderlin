@@ -164,6 +164,8 @@
 
 	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	jaw.replace_teeth(/obj/item/natural/bundle/teeth/fang)
+	var/datum/action/innate/bioluminescence/action = new(C)
+	action.Grant(C)
 
 /datum/species/triton/after_creation(mob/living/carbon/C)
 	. = ..()
@@ -211,4 +213,32 @@
 		"Photic" = HAIR_COLOR_PHOTIC,
 		"Turtle Egg" = HAIR_COLOR_TURTLE,
 	)
+
+/datum/action/innate/bioluminescence
+	name = "Bioluminescence"
+	desc = "Toggle a bright bioluminescent light from your body, moving with you."
+	button_icon_state = "shieldsparkles"
+
+	var/obj/effect/dummy/lighting_obj/moblight/our_light
+
+/datum/action/innate/bioluminescence/Activate()
+	. = ..()
+	if(!owner)
+		return FALSE
+	if(our_light)
+		return FALSE
+	our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
+	owner.visible_message(span_notice("[owner]'s body begins to glow with a deep blue bioluminescent light!"))
+	active = TRUE
+
+/datum/action/innate/bioluminescence/Deactivate()
+	. = ..()
+	if(!owner)
+		return FALSE
+	if(our_light)
+		qdel(our_light)
+		our_light = null
+	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
+	active = FALSE
+
 
