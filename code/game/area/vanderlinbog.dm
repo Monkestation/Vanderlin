@@ -9,7 +9,7 @@
 	background_track = 'sound/music/area/bog.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
+	/*ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
 				/turf/open/floor/dirt,
 				/turf/open/water)
@@ -23,7 +23,7 @@
 				new /datum/ambush_config/mirespiders_ambush = 110,
 				new /datum/ambush_config/mirespiders_crawlers = 25,
 				new /datum/ambush_config/mirespiders_aragn = 10,
-				new /datum/ambush_config/mirespiders_unfair = 5)
+				new /datum/ambush_config/mirespiders_unfair = 5)*/
 
 	first_time_text = "THE TERRORBOG"
 	custom_area_sound = 'sound/misc/stings/BogSting.ogg'

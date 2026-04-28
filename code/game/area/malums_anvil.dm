@@ -16,7 +16,7 @@
 	name = "malum's anvil under lower caves"
 	icon_state = "lowercavemalum"
 	first_time_text = "MALUM'S ANVIL"
-	ambush_types = list(
+	/*ambush_types = list(
 				/turf/open/floor/dirt,
 				/turf/open/floor/cobblerock)
 	ambush_mobs = list(
@@ -24,18 +24,18 @@
 				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 30,
 				/mob/living/carbon/human/species/rousman/ambush = 30,
 				/mob/living/carbon/human/species/orc/ambush = 20,
-				/mob/living/simple_animal/hostile/retaliate/troll/cave = 10)
+				/mob/living/simple_animal/hostile/retaliate/troll/cave = 10)*/
 
 /area/under/mountains/anvil/upper
 	name = "malum's anvil under upper caves"
 	icon_state = "uppercavemalum"
-	ambush_types = list(
+	/*ambush_types = list(
 				/turf/open/floor/naturalstone)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/mole = 60,
 				/mob/living/carbon/human/species/rousman/ambush = 20,
 				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 30,
-				/mob/living/simple_animal/hostile/retaliate/troll/cave = 5)
+				/mob/living/simple_animal/hostile/retaliate/troll/cave = 5)*/
 
 /area/under/mountains/anvil/lower/building
 	name = "malum's anvil cave building"
@@ -92,14 +92,14 @@
 	background_track = 'sound/music/area/decap.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_types = list(
+	/*ambush_types = list(
 				/turf/open/floor/grass/cold,
 				/turf/open/floor/snow/patchy)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/wolf = 40,
 				/mob/living/carbon/human/species/goblin/npc/ambush = 30,
 				/mob/living/carbon/human/species/rousman/ambush = 20,
-				/mob/living/carbon/human/species/orc/ambush = 20)
+				/mob/living/carbon/human/species/orc/ambush = 20)*/
 
 /area/outdoors/mountains/anvil/castle
 	name = "malum's anvil castle"
@@ -107,12 +107,12 @@
 	background_track = 'sound/music/area/decap.ogg'
 	background_track_dusk = null
 	background_track_night = null
-	ambush_types = list(
+	/*ambush_types = list(
 				/turf/open/floor/cobblerock)
 	ambush_mobs = list(
 				/mob/living/carbon/human/species/goblin/npc/ambush = 30,
 				/mob/living/carbon/human/species/rousman/ambush = 20,
-				/mob/living/carbon/human/species/orc/ambush = 20)
+				/mob/living/carbon/human/species/orc/ambush = 20)*/
 
 /area/outdoors/mountains/anvil/grove
 	name = "malum's anvil hidden grove"

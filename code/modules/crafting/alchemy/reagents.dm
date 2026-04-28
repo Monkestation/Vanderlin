@@ -388,7 +388,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.add_nausea(10 * (1 - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) / 20) * efficiency)
 		M.adjustToxLoss(0.5 * efficiency)
-	if(ishuman(M) && !ishalforc(M))
+/*	if(ishuman(M) && !ishalforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
 		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
 		if(istype(H))
@@ -428,7 +428,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
 					INVOKE_ASYNC(graggar_lover, TYPE_PROC_REF(/mob/living/carbon/human, graggar_baptize))
-					H.graggometer = 0
+					H.graggometer = 0*/
 	return ..()
 
 /mob/living/carbon/human/proc/graggar_baptize()
