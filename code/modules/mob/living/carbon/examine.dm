@@ -271,6 +271,8 @@
 	. = list()
 	var/list/unobscured = get_unobscured_items(FALSE)
 	for(var/obj/item/I as anything in unobscured)
+		if(istype(I, /obj/item/clothing/armor/regenerating/skin)) //disciple skin and similiar no longer show up on examining
+			continue
 		var/slot_title = null
 		switch(unobscured[I]) // this could probably be abstracted into its own proc at some point
 			if(ITEM_SLOT_SHIRT, ITEM_SLOT_ARMOR, ITEM_SLOT_PANTS, ITEM_SLOT_CLOAK, ITEM_SLOT_SHOES)
