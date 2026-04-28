@@ -461,9 +461,6 @@
 		. = override.Join("")
 	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
 
-/atom/proc/get_examine_list_string(mob/user)
-	return get_examine_string(user)
-
 /atom/proc/get_examine_desc(mob/user)
 	return desc
 

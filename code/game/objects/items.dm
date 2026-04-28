@@ -1604,15 +1604,15 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(particle_spewer)
 			particle_spewer.RemoveComponent()
 
-/obj/item/get_examine_list_string(mob/user, thats = FALSE)
-	if(examine_name)
+/obj/item/get_examine_string(mob/user, thats = FALSE, examine_list_bool = FALSE)
+	if(examine_name && examine_list_bool)
 		var/display_name = article ? "[article] <b>[examine_name]</b>" : gender == PLURAL ? "some <b>[examine_name]</b>" : "\a <b>[examine_name]</b>"
 		var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
 		if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
 			display_name = override.Join("")
 		return "[thats ? ismob(src) ? "This is " : "That's " : ""][display_name]"
 	else
-		return get_examine_string(user)
+		return ..()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()
