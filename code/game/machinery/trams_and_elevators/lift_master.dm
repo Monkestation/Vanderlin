@@ -575,10 +575,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		platform.horizontal_speed = 0.1
 		base_horizontal_speed = 0.1
 		horizontal_speed = 0.1
-		if(!platform.fake)
-			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
-			platform.alpha = 0
+
 		for(var/atom/movable/movable in platform.lift_load)
 			if(ismob(movable))
 				platform.RemoveItemFromLift(movable)
@@ -589,12 +586,17 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.density = FALSE
 			movable.alpha = 0
 
+		if(!platform.fake)
+			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
+			platform.RemoveElement(/datum/element/give_turf_traits, string_list(platform.turf_traits))
+			platform.alpha = 0
+
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 0.1
 			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			moving_platform.RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
+			moving_platform.RemoveElement(/datum/element/give_turf_traits, string_list(moving_platform.turf_traits))
 			moving_platform.alpha = 0
 
 /datum/lift_master/tram/proc/show_tram()
@@ -605,7 +607,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		horizontal_speed = 4
 		if(!platform.fake)
 			platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
+			platform.AddElement(/datum/element/give_turf_traits, string_list(platform.turf_traits))
 			platform.alpha = 255
 		for(var/atom/movable/movable in objects_pre_alpha)
 			movable.alpha = objects_pre_alpha[movable]
@@ -618,7 +620,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				continue
 			moving_platform.horizontal_speed = 4
 			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
+			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(moving_platform.turf_traits))
 			moving_platform.alpha = 255
 
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
