@@ -63,6 +63,8 @@
 	if(!patient.revive(excess_healing = 50))
 		return on_failure(patient, surgeon, tool, operation_args)
 
+	patient.reagents.add_reagent(/datum/reagent/medicine/atropine, 25)
+
 	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_LUX_REVIVE, 1)
 
 	if(patient.get_lux_tainted_status() && istype(tool, /obj/item/reagent_containers/lux_tainted))
@@ -98,7 +100,6 @@
 			if(organs.damage > organs.medium_threshold)
 				organs.applyOrganDamage(-organs.medium_threshold)
 
-	patient.reagents.add_reagent(/datum/reagent/medicine/atropine, 3)
 	patient.grab_ghost(force = TRUE, grab_spirit = TRUE) // even suicides
 	patient.visible_message(span_notice("[patient] is dragged back from Necra's hold!"), span_green("I awake from the void."))
 

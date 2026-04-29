@@ -24,7 +24,7 @@
 	return image(/obj/item/weapon/surgery/cautery)
 
 /datum/surgery_operation/limb/cure_rot/state_check(obj/item/bodypart/limb)
-	if(!limb.rotted)
+	if(!HAS_TRAIT(limb, TRAIT_ROTTEN))
 		return FALSE
 
 	return TRUE
@@ -59,7 +59,8 @@
 		limb_owner.mind.remove_antag_datum(/datum/antagonist/zombie)
 		limb_owner.death()
 
-	limb.rotted = FALSE
+	limb.revive_limb()
+	limb.germ_level = 0
 
 	// I would rather not have this but afaik this is the only way to reduce this outside of the cure rot miracle
 	var/datum/component/rot/rot = limb_owner?.GetComponent(/datum/component/rot)

@@ -1613,11 +1613,8 @@
 	var/base_state = surgery_state
 
 	if(!(base_state & SURGERY_SKIN_CUT))
-		for(var/datum/wound/slash/cut in wounds)
-			if(cut.is_clotted() || cut.is_sewn())
-				continue
+		if(get_incision())
 			base_state |= (SURGERY_SKIN_CUT|SURGERY_VESSELS_UNCLAMPED)
-			break
 
 	if(!(base_state & SURGERY_SKIN_OPEN) || !(base_state & SURGERY_VESSELS_CLAMPED))
 		var/static/list/retracting_behaviors = list(

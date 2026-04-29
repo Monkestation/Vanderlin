@@ -47,8 +47,7 @@
 	if(!limb.bleeds)
 		return ..()
 
-	if(!limb.has_wound(/datum/wound/slash/incision, TRUE))
-		limb.add_wound(/datum/wound/slash/incision)
+	limb.create_injury(WOUND_SLASH, 49, surgical = TRUE)
 
 	display_results(
 		surgeon,
@@ -62,7 +61,7 @@
 	if(!limb.bleeds)
 		return ..()
 
-	limb.add_wound(/datum/wound/slash)
+	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
 
 	display_results(
 		surgeon,
@@ -158,7 +157,7 @@
 	return tool.get_temperature() > 0
 
 /datum/surgery_operation/limb/close_skin/state_check(obj/item/bodypart/limb)
-	return limb.has_wound(/datum/wound/slash/incision)
+	return limb.get_incision()
 
 /datum/surgery_operation/limb/close_skin/on_preop(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	display_results(
@@ -174,7 +173,10 @@
 	. = ..()
 	if(tool.get_temperature())
 		limb.receive_damage(burn = 20)
-	limb.remove_wound(/datum/wound/slash/incision)
+
+	var/datum/injury/incision = limb.get_incision()
+	if(incision)
+		qdel(incision)
 
 /datum/surgery_operation/limb/close_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, obj/item/tool, list/operation_args)
 	. = ..()

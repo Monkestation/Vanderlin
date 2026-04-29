@@ -167,7 +167,7 @@
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
-	if(parent_bodypart.is_retracted())
+	if(parent_bodypart.return_surgical_state() & SURGERY_VESSELS_CLAMPED)
 		return FALSE
 	if(germ_level > INFECTION_LEVEL_ONE)
 		return FALSE

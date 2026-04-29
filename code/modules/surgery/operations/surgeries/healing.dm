@@ -43,7 +43,17 @@
 	return ..() + list("the patient must have brute or burn damage")
 
 /datum/surgery_operation/basic/tend_wounds/state_check(mob/living/patient)
-	return patient.getBruteLoss() > 0 || patient.getFireLoss() > 0
+	if(!iscarbon(patient))
+		return patient.getBruteLoss() > 0 || patient.getFireLoss() > 0
+
+	var/mob/living/carbon/carbon_patient = patient
+	for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+		if(injury.damage_type in list(WOUND_BLUNT, WOUND_INTERNAL_BRUISE, WOUND_LASH))
+			return TRUE
+		if(injury.damage_type == WOUND_BURN)
+			return TRUE
+
+	return FALSE
 
 /datum/surgery_operation/basic/tend_wounds/get_default_radial_image()
 	return image(/obj/item/natural/cloth)
@@ -196,7 +206,17 @@
 	brute_healed += round(patient.getBruteLoss() * brute_multiplier, DAMAGE_PRECISION)
 	burn_healed += round(patient.getFireLoss() * burn_multiplier, DAMAGE_PRECISION)
 
-	patient.heal_bodypart_damage(brute_healed, burn_healed)
+	if(!iscarbon(patient))
+		patient.heal_bodypart_damage(brute_healed, burn_healed)
+	else
+		var/mob/living/carbon/carbon_patient = patient
+		for(var/datum/injury/injury as anything in carbon_patient.all_injuries)
+			if(injury.required_status != BODYPART_ORGANIC)
+				continue
+			if(injury.damage_type == WOUND_BURN)
+				injury.heal_damage(brute_healed)
+			if(brute_healed && (injury.damage_type in list(WOUND_BLUNT, WOUND_LASH, WOUND_INTERNAL_BRUISE)))
+				injury.heal_damage(brute_healed)
 
 	user_msg += get_progress(surgeon, patient, brute_healed, burn_healed)
 
@@ -226,7 +246,17 @@
 	brute_dealt += round(patient.getBruteLoss() * brute_multiplier, DAMAGE_PRECISION)
 	burn_dealt += round(patient.getFireLoss() * burn_multiplier, DAMAGE_PRECISION)
 
-	patient.take_bodypart_damage(brute_dealt, burn_dealt)
+	if(!iscarbon(patient))
+		patient.take_bodypart_damage(brute_dealt, burn_dealt)
+		return
+
+	var/mob/living/carbon/carbon_patient = patient
+	var/list/obj/item/bodypart/parts = carbon_patient.get_damageable_bodyparts(BODYPART_ORGANIC)
+	if(!length(parts))
+		return
+
+	var/obj/item/bodypart/picked = pick(parts)
+	picked.bodypart_attacked_by(BCLASS_CUT, burn_dealt + brute_dealt, surgeon, modifiers = list(CRIT_MOD_CHANCE = -100))
 
 /datum/surgery_operation/basic/tend_wounds/combo
 	name = "Advanced Tend Wounds"
