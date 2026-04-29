@@ -241,4 +241,3 @@
 	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
 	active = FALSE
 
-
