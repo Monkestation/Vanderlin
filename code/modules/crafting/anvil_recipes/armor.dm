@@ -1,5 +1,5 @@
 /datum/anvil_recipe/armor
-	appro_skill = /datum/skill/craft/armorsmithing
+	appro_skill = /datum/attribute/skill/craft/armorsmithing
 	i_type = "Armor"
 	craftdiff = 1
 	abstract_type = /datum/anvil_recipe/armor
@@ -291,7 +291,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/pegasusknighthelm
-	name = "Lakkarian Pegasus Knight Helm (+Cloth)"
+	name = "Coifed Helmet (+Cloth)"
 	recipe_name = "a pegasus knight's helmet"
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/head/helmet/pegasusknight
@@ -338,7 +338,7 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot
 
 /datum/anvil_recipe/armor/iron/lakkariancap
-	name = "Lakkarian Cap (+ Gold Bar)"
+	name = "Crowned Cap (+ Gold Bar)"
 	recipe_name = "a sturdy lakkarian cap"
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold)
@@ -454,6 +454,12 @@
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/armor/leather/splint
 	createditem_extra = 1
+
+/datum/anvil_recipe/armor/iron/brigandine/light
+	name = "Lightweight Brigandine (+cloth)"
+	recipe_name = "a lightweight brigandine"
+	additional_items = list(/obj/item/natural/cloth)
+	created_item = /obj/item/clothing/armor/brigandine/light
 
 ///////////////////////////////////////////////
 // --------- STEEL -----------
@@ -756,6 +762,18 @@
 	created_item = (/obj/item/clothing/head/helmet/visored/hounskull)
 	craftdiff = 4
 
+/datum/anvil_recipe/armor/steel/barding
+	name = "Saiga Barding, Chainmail (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/chain
+
+/datum/anvil_recipe/armor/steel/barding/honse
+	name = "Honse Barding, Chainmail (+1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/barding/honse/chain
+
 /*
 /datum/anvil_recipe/armor/steel/warden_helm
 	name = "Warden Helmet (+Bar)"
@@ -1054,6 +1072,12 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/helmet/visored/silver
 
+/datum/anvil_recipe/armor/silver/armet
+	name = "Silver Armet (+Steel Bar x2)"
+	recipe_name = "a silver bascinet"
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/visored/silver/armet
+
 /datum/anvil_recipe/armor/silver/plateleg
 	name = "Silver Plate Chausses (+Steel Bar x2)"
 	recipe_name = "a pair of Silver Plate Chausses"
@@ -1065,6 +1089,20 @@
 	recipe_name = "a Full-Plate Silver Armor"
 	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/plate/full/silver
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/gauntlet
+	name = "Silver Gauntlets"
+	recipe_name = "a pair of Silver Gauntlets"
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/gloves/plate/silver
+	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/boots
+	name = "Silver Boots"
+	recipe_name = "a pair of Silver Boots"
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/clothing/shoes/boots/armor/silver
 	craftdiff = 4
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -1203,7 +1241,7 @@
 /datum/anvil_recipe/armor/blacksteel/graggar_helm
 	name = "Vicious Helmet (+Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/graggar
+	created_item = /obj/item/clothing/head/helmet/heavy/graggar
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_helm

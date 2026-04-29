@@ -67,7 +67,7 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
+/obj/item/natural/worms/leech/attack(mob/living/M, mob/user, list/modifiers)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
@@ -80,7 +80,7 @@
 		if(completely_silent)
 			used_time = 0
 		else
-			used_time = (7 SECONDS - (H.get_skill_level(/datum/skill/misc/medicine) * 1 SECONDS))/2
+			used_time = (7 SECONDS - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 1 SECONDS))/2
 		if(!do_after(user, used_time, H))
 			return
 		if(!H)
@@ -100,9 +100,13 @@
 /obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
+	if(bodypart?.skeletonized || !bodypart?.is_organic_limb())
+		bodypart.remove_embedded_object(src)
+		return TRUE
+
 	if(giving)
-		var/blood_given = min(BLOOD_VOLUME_MAXIMUM - user.blood_volume, blood_storage, blood_sucking)
-		user.blood_volume += blood_given
+		var/blood_given = min(BLOOD_VOLUME_NORMAL - user.blood_volume, blood_storage, blood_sucking)
+		user.adjust_bloodvolume(blood_given)
 		blood_storage = max(blood_storage - blood_given, 0)
 		if((blood_storage <= 0) || (user.blood_volume >= BLOOD_VOLUME_MAXIMUM))
 			if(bodypart)
@@ -116,7 +120,7 @@
 		var/blood_extracted = min(blood_maximum - blood_storage, user.blood_volume, blood_sucking) * modifier
 		if(HAS_TRAIT(user, TRAIT_LEECHIMMUNE))
 			blood_extracted *= 0.05 // 95% drain reduction
-		user.blood_volume = max(user.blood_volume - blood_extracted, 0)
+		user.adjust_bloodvolume(-blood_extracted)
 		blood_storage += blood_extracted
 		if((blood_storage >= blood_maximum) || (user.blood_volume <= 0))
 			if(bodypart)
@@ -216,7 +220,7 @@
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
-/obj/item/natural/worms/leech/parasite/attack_self(mob/user, params)
+/obj/item/natural/worms/leech/parasite/attack_self(mob/user, list/modifiers)
 	. = ..()
 	giving = !giving
 	if(giving)

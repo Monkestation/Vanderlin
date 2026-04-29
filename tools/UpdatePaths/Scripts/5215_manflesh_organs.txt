@@ -1,0 +1,13 @@
+/obj/item/reagent_containers/food/snacks/meat/human : /obj/item/reagent_containers/food/snacks/meat/steak/human
+/obj/item/reagent_containers/food/snacks/toxicshrooms : /obj/item/reagent_containers/food/snacks/truffles/toxic
+/obj/item/reagent_containers/food/snacks/organ : /obj/item/reagent_containers/food/snacks/meat/organ
+/obj/item/reagent_containers/food/snacks/breadslice/raisin_poison : /obj/item/reagent_containers/food/snacks/breadslice/raisin/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/biscuit_poison : /obj/item/reagent_containers/food/snacks/biscuit/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/griddlecake/berry_poison : /obj/item/reagent_containers/food/snacks/griddlecake/berry/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/cheesecake_poison_slice : /obj/item/reagent_containers/food/snacks/cheesecake_slice/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked : /obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/chescake_poison_ready : /obj/item/reagent_containers/food/snacks/chescake_ready/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/pie/cooked/poison : /obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/pie/cooked/poison/good : /obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/pieslice/good/poison : /obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison{@OLD}
+/obj/item/reagent_containers/food/snacks/meat/sausage/wiener : /obj/item/reagent_containers/food/snacks/meat/sausage/wiener{@OLD}

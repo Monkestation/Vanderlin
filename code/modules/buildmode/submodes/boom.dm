@@ -34,8 +34,7 @@
 	if(hotspots == null)
 		hotspots = -1
 
-/datum/buildmode_mode/boom/handle_click(client/c, params, obj/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode_mode/boom/handle_click(client/c, list/modifiers, obj/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 
 	if(left_click)

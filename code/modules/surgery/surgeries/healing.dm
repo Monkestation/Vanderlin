@@ -19,11 +19,12 @@
 		TOOL_SCREWDRIVER = 50,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 4 SECONDS
+	minimum_time = 3.5 SECONDS
+	maximum_time = 5.1 SECONDS
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED
-	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 	success_sound = 'sound/surgery/retractor2.ogg'
 	failure_sound = 'sound/surgery/organ2.ogg'
@@ -60,16 +61,7 @@
 /datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
 	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
-	var/healing_multiplier = 1
-	switch(user.get_skill_level(skill_used))
-		if(SKILL_LEVEL_JOURNEYMAN)
-			healing_multiplier = 1.1
-		if(SKILL_LEVEL_EXPERT)
-			healing_multiplier = 1.3
-		if(SKILL_LEVEL_MASTER)
-			healing_multiplier = 1.4
-		if(SKILL_LEVEL_LEGENDARY)
-			healing_multiplier = 1.5
+	var/healing_multiplier = 0.7 + GET_MOB_SKILL_VALUE_OLD(user, skill_used) * 0.1
 	var/urhealedamt_brute = brutehealing * healing_multiplier
 	var/urhealedamt_burn = burnhealing * healing_multiplier
 	if(missinghpbonus)
@@ -85,6 +77,7 @@
 		umsg += " as best as you can while they have clothing on"
 		tmsg += " as best as they can while [target] has clothing on"
 	target.heal_bodypart_damage(urhealedamt_brute,urhealedamt_burn, required_status = BODYPART_ORGANIC)
+	SEND_SIGNAL(user, COMSIG_LIVING_HEALED_OTHER, urhealedamt_brute + urhealedamt_burn)
 	display_results(user, target, "<span class='notice'>[umsg].</span>",
 		"[tmsg].",
 		"[tmsg].")

@@ -77,14 +77,17 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		if(do_after(usr, time_taken, src))
 			if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
 				return
-			L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-			usr.put_in_hands(I)
+			var/damage = 10 || (I?.embedding?.embedded_unsafe_removal_pain_multiplier * I?.w_class)
+			L.receive_damage(damage)//It hurts to rip it out, get surgery you dingus.
+			if(!QDELETED(I))
+				usr.put_in_hands(I)
 			emote("pain", TRUE)
-			playsound(loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+			playsound(src, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
+			var/subject = QDELETED(I) ? "something" : I
 			if(usr == src)
-				usr.visible_message(span_notice("[usr] rips [I] out of [usr.p_their()] [L.name]!"), span_notice("I successfully remove [I] from my [L.name]."))
+				usr.visible_message(span_notice("[usr] rips [subject] out of [usr.p_their()] [L.name]!"), span_notice("I successfully remove [subject] from my [L.name]."))
 			else
-				usr.visible_message(span_notice("[usr] rips [I] out of [src]'s [L.name]!"), span_notice("I successfully remove [I] from [src]'s [L.name]."))
+				usr.visible_message(span_notice("[usr] rips [subject] out of [src]'s [L.name]!"), span_notice("I successfully remove [subject] from [src]'s [L.name]."))
 
 	if(href_list["bandage"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		var/obj/item/bodypart/L = locate(href_list["bandaged_limb"]) in bodyparts
@@ -93,11 +96,13 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		var/obj/item/I = L.bandage
 		if(!I)
 			return
+
+		var/time_to_unbandage = 5 SECONDS * (1 - (GET_MOB_SKILL_VALUE_OLD(usr, /datum/attribute/skill/misc/medicine) * 0.15))
 		if(usr == src)
 			usr.visible_message(span_warning("[usr] starts unbandaging [usr.p_their()] [L.name]."),span_warning("I start unbandaging [L.name]..."))
 		else
 			usr.visible_message(span_warning("[usr] starts unbandaging [src]'s [L.name]."),span_warning("I start unbandaging [src]'s [L.name]..."))
-		if(do_after(usr, 5 SECONDS, src))
+		if(do_after(usr, time_to_unbandage, src))
 			if(QDELETED(I) || QDELETED(L) || (L.bandage != I))
 				return
 			L.remove_bandage()
@@ -107,6 +112,13 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		var/slot = text2num(href_list["item"])
 		if(slot & check_obscured_slots(TRUE))
 			to_chat(usr, span_warning("I can't reach that! Something is covering it."))
+			return
+
+	if(href_list["remove_briar"])
+		var/datum/wound/black_briar_curse/wound = locate(href_list["remove_briar"]) in get_wounds()
+		var/remove = tgui_alert(usr, "Remove this briar?", "BLACK BRIAR", DEFAULT_INPUT_CONFIRMATIONS)
+		if(remove == CHOICE_CONFIRM && !QDELETED(wound) && istype(wound))
+			qdel(wound)
 			return
 
 	if(href_list["undiesthing"]) //canUseTopic check for this is handled by mob/Topic()
@@ -144,11 +156,11 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 /mob/living/proc/soul_examine(mob/user)
 	var/list/message = list()
 	if(stat >= DEAD)
-		if(suiciding)
-			message += span_deadsay("[p_they(TRUE)] commited suicide... Nothing can be done...")
+		if(HAS_TRAIT(user, TRAIT_SUICIDED))
+			message += span_suicide("[p_they(TRUE)] commited suicide... Nothing can be done...")
 		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
 			if(!key && !get_ghost(TRUE))
-				message += span_deadsay("[p_their(TRUE)] soul has departed for the Underworld.")
+				message += span_suicide("[p_their(TRUE)] soul has departed for the Underworld.")
 			else
-				message += span_deadsay("[p_they(TRUE)] [p_are()] still earthbound.")
+				message += span_suicide("[p_they(TRUE)] [p_are()] still earthbound.")
 	return message

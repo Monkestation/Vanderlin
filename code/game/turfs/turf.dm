@@ -3,6 +3,7 @@
 	level = 1
 	hover_color = "#607d65"
 	uses_integrity = TRUE
+	luminosity = 1
 
 	var/intact = 1
 
@@ -11,7 +12,7 @@
 	// A list will be created in initialization that figures out the baseturf's baseturf etc.
 	// In the case of a list it is sorted from bottom layer to top.
 	// This shouldn't be modified directly, use the helper procs.
-	var/list/baseturfs = /turf/open/transparent/openspace
+	var/list/baseturfs = /turf/open/openspace
 
 	var/temperature = 293.15
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
@@ -49,6 +50,21 @@
 
 	///The typepath we use for lazy fishing on turfs, to save on world init time.
 	var/fish_source
+
+	var/dynamic_lighting = TRUE
+
+	var/tmp/lighting_corners_initialised = FALSE
+
+	///List of light sources affecting this turf.
+	var/tmp/list/datum/light_source/affecting_lights
+	///Our lighting object.
+	var/tmp/atom/movable/lighting_object/lighting_object
+	var/tmp/list/datum/lighting_corner/corners
+
+	///Which directions does this turf block the vision of, taking into account both the turf's opacity and the movable opacity_sources.
+	var/directional_opacity = NONE
+	///Lazylist of movable atoms providing opacity sources.
+	var/list/atom/movable/opacity_sources
 
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
@@ -95,16 +111,14 @@
 	var/turf/T = GET_TURF_ABOVE(src)
 	if(T)
 		T.multiz_turf_new(src, DOWN)
-		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, DOWN)
 	T = GET_TURF_BELOW(src)
 	if(T)
 		T.multiz_turf_new(src, UP)
-		SEND_SIGNAL(T, COMSIG_TURF_MULTIZ_NEW, src, UP)
 	if(!mapload)
 		reassess_stack()
 
 	if (opacity)
-		has_opaque_atom = TRUE
+		directional_opacity = ALL_CARDINALS
 
 	if(shine)
 		make_shiny(shine)
@@ -148,26 +162,28 @@
 
 	return FALSE
 
-/turf/proc/can_traverse_safely(atom/movable/traveler)
-	return TRUE
+/turf/proc/can_cross_safely(atom/movable/traveler)
+	return !HAS_TRAIT(src, TRAIT_AI_AVOID_TURF)
 
 /// WARNING WARNING
 /// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
 /// It's possible because turfs are fucked, and if you have one in a list and it's replaced with another one, the list ref points to the new turf
 /// We do it because moving signals over was needlessly expensive, and bloated a very commonly used bit of code
-/turf/clear_signal_refs()
+/turf/_clear_signal_refs()
 	return
 
 /turf/attack_hand(mob/user)
 	. = ..()
 	if(.)
 		return
-	user.Move_Pulled(src)
+	// user.Move_Pulled(src)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
+	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)
 	reassess_stack()
 
 /turf/proc/multiz_turf_new(turf/T, dir)
+	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_NEW, T, dir)
 	reassess_stack()
 
 
@@ -232,13 +248,14 @@
 			return TRUE
 	return FALSE
 
-//zPassIn doesn't necessarily pass an atom!
-//direction is direction of travel of air
-/turf/proc/zPassIn(atom/movable/A, direction, turf/source)
+//The zpass procs exist to be overridden, not directly called
+//use can_z_pass for that
+///If we'd allow anything to travel into us
+/turf/proc/zPassIn(direction)
 	return FALSE
 
-//direction is direction of travel of air
-/turf/proc/zPassOut(atom/movable/A, direction, turf/destination)
+///If we'd allow anything to travel out of us
+/turf/proc/zPassOut(direction)
 	return FALSE
 
 //direction is direction of travel of air
@@ -249,82 +266,57 @@
 /turf/proc/zAirOut(direction, turf/source)
 	return FALSE
 
-/turf/proc/zImpact(atom/movable/A, levels = 1, turf/prev_turf)
-	if(levels == 1 && A.ai_controller)
-		for(var/obj/structure/stairs/S in contents)
-			return FALSE
-
-	var/flags = NONE
-	var/mov_name = A.name
-	flags |= SEND_SIGNAL(A, COMSIG_ATOM_FALL_INTERACT, levels)
-	for(var/atom/thing as anything in contents)
-		flags |= thing.intercept_zImpact(A, levels)
-		if(flags & FALL_STOP_INTERCEPTING)
-			break
-	if(prev_turf && !(flags & FALL_NO_MESSAGE))
-		prev_turf.visible_message("<span class='danger'>\The [mov_name] falls through [prev_turf]!</span>")
-	if(flags & FALL_INTERCEPTED)
-		return
-	if(zFall(A, ++levels))
+/// Precipitates a movable (plus whatever buckled to it) to lower z levels if possible and then calls zImpact()
+/turf/proc/zFall(atom/movable/falling, levels = 1, force = FALSE, falling_from_move = FALSE)
+	var/direction = DOWN
+	var/turf/target = get_step_multiz(src, direction)
+	if(!target)
 		return FALSE
-	if(isliving(A))
-		var/mob/living/O = A
-		var/dex_save = O.get_skill_level(/datum/skill/misc/climbing)
-		if(dex_save >= 5)
-			if(O.m_intent != MOVE_INTENT_SNEAK) // If we're sneaking, don't show a message to anybody, shhh!
-				O.visible_message("<span class='danger'>[A] gracefully lands on top of [src]!</span>")
-		else
-			A.visible_message("<span class='danger'>[A] crashes into [src]!</span>")
-			if(A.fall_damage())
-				for(var/mob/living/M in contents)
-					visible_message("<span class='danger'>\The [src] falls on \the [M.name]!</span>")
-					M.Stun(1)
-					M.take_overall_damage(A.fall_damage()*2)
-	if(A.fall_damage())
-		for(var/mob/living/M in contents)
-			visible_message("<span class='danger'>\The [src] falls on \the [M.name]!</span>")
-			M.Stun(1)
-			M.take_overall_damage(A.fall_damage()*2)
-	A.onZImpact(src, levels)
-	if(isobj(A))
-		var/obj/O = A
-		for(var/mob/living/mob in O.contents)
-			O.on_fall_impact(mob, levels * 0.75)
+	var/isliving = isliving(falling)
+	if(!isliving && !isobj(falling))
+		return
+	if(isliving)
+		var/mob/living/falling_living = falling
+		//relay this mess to whatever the mob is buckled to.
+		if(falling_living.buckled)
+			falling = falling_living.buckled
+	if(!falling_from_move && falling.currently_z_moving)
+		return
+	if(!force && !falling.can_z_move(direction, src, target, ZMOVE_FALL_FLAGS))
+		falling.set_currently_z_moving(FALSE, TRUE)
+		return FALSE
 
+	// So it doesn't trigger other zFall calls. Cleared on zMove.
+	falling.set_currently_z_moving(CURRENTLY_Z_FALLING)
+
+	falling.zMove(null, target, ZMOVE_CHECK_PULLEDBY)
+	target.zImpact(falling, levels, src)
 	return TRUE
 
-/atom/movable/proc/fall_damage()
-	return 0
+///Called each time the target falls down a z level possibly making their trajectory come to a halt. see __DEFINES/movement.dm.
+/turf/proc/zImpact(atom/movable/falling, levels = 1, turf/prev_turf, flags = NONE)
+	var/list/falling_movables = falling.get_z_move_affected()
+	var/list/falling_mov_names = list()
+	for(var/atom/movable/falling_mov as anything in falling_movables)
+		falling_mov_names += falling_mov.name
+	for(var/i in contents)
+		var/atom/thing = i
+		flags |= thing.intercept_zImpact(falling_movables, levels)
+		if(flags & FALL_STOP_INTERCEPTING)
+			break
 
-/obj/item/fall_damage()
-	if(w_class == WEIGHT_CLASS_TINY)
-		return 0
-	if(w_class == WEIGHT_CLASS_GIGANTIC)
-		return 300
-	var/bsc = 3**(w_class-1)
-	return bsc
-
-/obj/structure/fall_damage()
-	if(w_class == WEIGHT_CLASS_TINY)
-		return 0
-	if(w_class == WEIGHT_CLASS_GIGANTIC)
-		return 300
-	var/bsc = 3**(w_class-1)
-	return bsc
-
-/turf/proc/can_zFall(atom/movable/A, levels = 1, turf/target)
-	return zPassOut(A, DOWN, target) && target.zPassIn(A, DOWN, src)
-
-/turf/proc/zFall(atom/movable/A, levels = 1, force = FALSE)
-	var/turf/target = GET_TURF_BELOW(src)
-	if(!target || (!isobj(A) && !ismob(A)))
+	if(prev_turf && !(flags & FALL_NO_MESSAGE))
+		for(var/mov_name in falling_mov_names)
+			prev_turf.visible_message(span_danger("\The [mov_name] falls through [prev_turf]!"))
+	if(!(flags & FALL_INTERCEPTED) && zFall(falling, levels + 1))
 		return FALSE
-	if(!force && (!can_zFall(A, levels, target) || !A.can_zFall(src, levels, target, DOWN)))
-		return FALSE
-	A.atom_flags |= Z_FALLING
-	A.forceMove(target)
-	A.atom_flags &= ~Z_FALLING
-	target.zImpact(A, levels, src)
+	for(var/atom/movable/falling_mov as anything in falling_movables)
+		if(!(flags & FALL_RETAIN_PULL))
+			falling_mov.stop_pulling()
+		if(!(flags & FALL_INTERCEPTED))
+			falling_mov.onZImpact(src, levels)
+		if(falling_mov.pulledby && (falling_mov.z != falling_mov.pulledby.z || get_dist(falling_mov, falling_mov.pulledby) > 1))
+			falling_mov.pulledby.stop_pulling()
 	return TRUE
 
 //There's a lot of QDELETED() calls here if someone can figure out how to optimize this but not runtime when something gets deleted by a Bump/CanPass/Cross call, lemme know or go ahead and fix this mess - kevinz000
@@ -359,41 +351,21 @@
 		return CHECK_BITFIELD(mover.movement_type, PHASING)
 	return TRUE
 
-/turf/Exit(atom/movable/mover, atom/newloc)
+/turf/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	. = ..()
-	if(!. || QDELETED(mover))
-		return FALSE
-	for(var/i in contents)
-		if(i == mover)
-			continue
-		if(QDELETED(mover))
-			return FALSE		//We were deleted.
+	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_MOVABLE_TURF_ENTERED, src)
 
-/turf/Entered(atom/movable/AM)
-	..()
-	SEND_SIGNAL(src, COMSIG_TURF_ENTERED, AM)
-	SEND_SIGNAL(AM, COMSIG_MOVABLE_TURF_ENTERED, src)
+	if(explosion_level && arrived.ex_check(explosion_id))
+		arrived.ex_act(explosion_level)
 
-	if(explosion_level && AM.ex_check(explosion_id))
-		AM.ex_act(explosion_level)
-
-	// If an opaque movable atom moves around we need to potentially update visibility.
-	if (AM.opacity)
-		has_opaque_atom = TRUE // Make sure to do this before reconsider_lights(), incase we're on instant updates. Guaranteed to be on in this case.
-		reconsider_lights()
-
-/turf/open/Entered(atom/movable/AM)
-	..()
+/turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
 	//melting
-	if(isobj(AM) && temperature > 273.15)
-		var/obj/O = AM
+	if(isobj(arrived) && temperature > 273.15)
+		var/obj/O = arrived
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()
-	if(!(AM.atom_flags & Z_FALLING))
-		zFall(AM)
-
-/turf/proc/is_plasteel_floor()
-	return FALSE
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)
@@ -533,13 +505,16 @@
 
 /turf/proc/burn_tile()
 
-/turf/proc/is_shielded()
+/// Checks if this turf is protected from an explosion by something
+/// Return TRUE to stop the explosion from affecting this turf
+/turf/proc/is_explosion_shielded(severity)
+	return FALSE
 
 /turf/contents_explosion(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
 	var/affecting_level
 	if(severity == 1)
 		affecting_level = 1
-	else if(is_shielded())
+	else if(is_explosion_shielded(severity))
 		affecting_level = 3
 	else if(intact)
 		affecting_level = 2
@@ -554,14 +529,6 @@
 					continue
 			A.ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
 			CHECK_TICK
-
-/turf/narsie_act(force, ignore_mobs, probability = 20)
-	. = (prob(probability) || force)
-	for(var/atom/A as anything in src)
-		if(ignore_mobs && ismob(A))
-			continue
-		if(ismob(A) || .)
-			A.narsie_act()
 
 /turf/proc/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	underlay_appearance.icon = icon
@@ -622,21 +589,25 @@
 		return
 	// Make toxins and blazaam vomit look different
 	if(toxvomit == VOMIT_PURPLE)
-		V.icon_state = "vomitpurp_[pick(1,4)]"
+		V.icon_state = "vomitpurp_[rand(1,4)]"
 	else if (toxvomit == VOMIT_TOXIC)
-		V.icon_state = "vomittox_[pick(1,4)]"
+		V.icon_state = "vomittox_[rand(1,4)]"
 	if (iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.reagents)
-			clear_reagents_to_vomit_pool(C,V)
+			C.clear_reagents_to_vomit_pool(V)
 
-/proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V)
-	M.reagents.trans_to(V, M.reagents.total_volume / 10, transfered_by = M)
-	for(var/datum/reagent/R in M.reagents.reagent_list)                //clears the stomach of anything that might be digested as food
-		if(istype(R, /datum/reagent/consumable))
-			var/datum/reagent/consumable/nutri_check = R
-			if(nutri_check.nutriment_factor >0)
-				M.reagents.remove_reagent(R.type, min(R.volume, 10))
+/mob/living/carbon/proc/clear_reagents_to_vomit_pool(obj/effect/decal/cleanable/vomit/V, purge = FALSE)
+	var/obj/item/organ/stomach/belly = getorganslot(ORGAN_SLOT_STOMACH)
+	if(!belly)
+		return
+	var/chemicals_lost = belly.reagents.total_volume * 0.1
+	if(purge)
+		chemicals_lost = belly.reagents.total_volume * 0.67 //For detoxification surgery, we're manually pumping the stomach out of chemcials, so it's far more efficient.
+	belly.reagents.trans_to(V, chemicals_lost, transfered_by = src)
+	//clear the stomach of anything even not food
+	for(var/datum/reagent/reagent as anything in belly.reagents.reagent_list)
+		belly.reagents.remove_reagent(reagent.type, min(reagent.volume, 10))
 
 //Whatever happens after high temperature fire dies out or thermite reaction works.
 //Should return new turf

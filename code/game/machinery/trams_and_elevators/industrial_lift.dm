@@ -13,13 +13,13 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 /obj/structure/industrial_lift
 	name = "lift platform"
 	desc = "A lightweight lift platform. It moves up and down."
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/wood.dmi'
 	icon_state = "weird1"
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 50
 	layer = LYING_MOB_LAYER //under pipes
-	plane = GAME_PLANE
+	plane = FLOOR_PLANE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
 	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER //no TILE_BOUND since we're potentially multitile
 
@@ -84,6 +84,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	if(fake)
 		alpha = 0
 		obj_flags = CAN_BE_HIT
+	else
+		AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 
 	//since lift_master datums find all connected platforms when an industrial lift first creates it and then
 	//sets those platforms' lift_master_datum to itself, this check will only evaluate to true once per tram platform
@@ -104,8 +106,8 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 ///set the movement registrations to our current turf(s) so contents moving out of our tile(s) are removed from our movement lists
 /obj/structure/industrial_lift/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
-		RegisterSignal(turf_loc, COMSIG_TURF_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
-		RegisterSignal(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
+		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(UncrossedRemoveItemFromLift), TRUE)
+		RegisterSignals(turf_loc, list(COMSIG_TURF_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift), TRUE)
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
 /obj/structure/industrial_lift/proc/unset_movement_registrations(list/turfs_to_unset)
@@ -114,12 +116,12 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		UnregisterSignal(turf_loc, registrations)
 
 
-/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, direction)
+/obj/structure/industrial_lift/proc/UncrossedRemoveItemFromLift(datum/source, atom/movable/gone, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
 
-/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, direction)
+/obj/structure/industrial_lift/proc/UncrossedAtomRemoveItemFromLift(atom/movable/gone, turf/source, atom/new_loc)
 	SIGNAL_HANDLER
 	if(!(gone.loc in locs))
 		RemoveItemFromLift(gone)
@@ -128,41 +130,32 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	SIGNAL_HANDLER
 	if(!(potential_rider in lift_load))
 		return
-	/*
 	if(isliving(potential_rider) && HAS_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED))
 		REMOVE_TRAIT(potential_rider, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load -= potential_rider
-	potential_rider.plane = initial(potential_rider.plane)
-	potential_rider.layer -= 2
 	REMOVE_TRAIT(potential_rider, TRAIT_TRAM_MOVER, REF(src))
 	changed_gliders -= potential_rider
 
-	UnregisterSignal(potential_rider, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_MOVABLE_TURF_EXITED))
+	UnregisterSignal(potential_rider, list(COMSIG_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, COMSIG_MOVABLE_TURF_EXITED))
 
 	if(!length(held_cargo))
 		SEND_SIGNAL(src, COMSIG_TRAM_EMPTY)
 
 /obj/structure/industrial_lift/proc/AddItemOnLift(datum/source, atom/movable/new_lift_contents)
 	SIGNAL_HANDLER
-	var/static/list/blacklisted_types = typecacheof(list(/obj/effect/decal/cleanable, /atom/movable/outdoor_effect, /obj/structure/industrial_lift, /mob/camera, /obj/effect/overlay/water, /atom/movable/lighting_object))
+	var/static/list/blacklisted_types = typecacheof(list(/obj/effect/decal/cleanable, /atom/movable/outdoor_effect, /obj/structure/industrial_lift, /mob/camera, /atom/movable/lighting_object))
 	if(is_type_in_typecache(new_lift_contents, blacklisted_types) || new_lift_contents.invisibility == INVISIBILITY_ABSTRACT) //prevents the tram from stealing things like landmarks
 		return FALSE
 	if(new_lift_contents in lift_load)
 		return FALSE
 
-	/*
 	if(isliving(new_lift_contents) && !HAS_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED))
 		ADD_TRAIT(new_lift_contents, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
-	*/
 
 	lift_load += new_lift_contents
-	if(!iseffect(new_lift_contents))
-		new_lift_contents.plane = 3
-		new_lift_contents.layer += 2
 	ADD_TRAIT(new_lift_contents, TRAIT_TRAM_MOVER, REF(src))
-	RegisterSignal(new_lift_contents, COMSIG_PARENT_QDELETING, PROC_REF(RemoveItemFromLift))
+	RegisterSignal(new_lift_contents, COMSIG_QDELETING, PROC_REF(RemoveItemFromLift))
 	RegisterSignal(new_lift_contents, COMSIG_MOVABLE_TURF_EXITED, PROC_REF(UncrossedAtomRemoveItemFromLift))
 
 	return TRUE
@@ -671,7 +664,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		return FALSE
 	return TRUE
 
-/obj/structure/industrial_lift/attack_hand(mob/user, params)
+/obj/structure/industrial_lift/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -696,7 +689,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 	return open_lift_radial(user)
 
-/obj/structure/industrial_lift/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/industrial_lift/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(!radial_travel)
 		return ..()
 
@@ -779,7 +772,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	lift_id = TRAM_LIFT_ID
 	lift_master_type = /datum/lift_master/tram
 	radial_travel = FALSE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 	/// Set by the tram control console in late initialize
 	var/travelling = FALSE

@@ -7,8 +7,8 @@
 	invocation_type = INVOCATION_SHOUT
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/dendor)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	attunements = list(/datum/attunement/earth = 0.5)
 	charge_time = 1 SECONDS
 	charge_drain = 1
@@ -130,7 +130,7 @@
 	icon_state = "falconing"
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 	var/mob/living/owner_mob
 	var/cycle_count = 0
@@ -177,8 +177,8 @@
 /obj/effect/falcon_strike_fx/proc/do_strike()
 	if(QDELETED(owner_mob))
 		owner_mob.adjustBruteLoss(10)
-		owner_mob.adjust_blindness(0.2)
-		owner_mob.Jitter(1)
+		owner_mob.adjust_temp_blindness(0.4 SECONDS)
+		owner_mob.adjust_jitter(2 SECONDS)
 		to_chat(owner_mob, span_danger("the falcon scratches your face!"))
 		playsound(src, 'sound/vo/mobs/bird/CROW_02.ogg', 70, TRUE)
 

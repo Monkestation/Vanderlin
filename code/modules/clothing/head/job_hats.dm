@@ -6,6 +6,7 @@
 			Thou wilt be alone on these barren lands."
 	icon_state = "fisherhat"
 	max_heat_protection_temperature = 60
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/stewardtophat
 	name = "top hat"
@@ -16,16 +17,19 @@
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64x64.dmi'
 	bloody_icon_state = "helmetblood_big"
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/strawhat
 	name = "crude straw hat"
 	desc = "Welcome to the grain fields, thou plowerer of the fertile."
 	icon_state = "strawhat"
 	salvage_result = /obj/item/natural/fibers
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/articap
 	desc = "A sporting cap with a small gear adornment. Popular fashion amongst Heartfelt engineers."
 	icon_state = "articap"
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/articap/porter
 	desc = "A cap with a small adornment."
@@ -37,34 +41,40 @@
 	icon_state = "chef"
 	item_state = "chef"
 	flags_inv = HIDEEARS
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/nun
 	name = "nun's habit"
 	desc = "Habits worn by nuns of the pantheon's faith."
 	icon_state = "nun"
 	allowed_race = RACES_PLAYER_ALL
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/fancyhat
 	name = "fancy hat"
 	icon_state = "fancyhat"
 	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/courtierhat
 	name = "fancy hat"
 	icon_state = "courtier"
 	flags_inv = HIDEEARS
 	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/bardhat
 	name = "plumed hat"
 	desc = "A simple leather hat with a fancy plume on top. A corny attempt at appearing regal \
 			despite one's status. Typically worn by travelling minstrels of all kinds."
 	icon_state = "bardhat"
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/jester
 	name = "jester's hat"
 	desc = "Just remember that the last laugh is on you."
 	icon_state = "jester"
+	item_weight = 155 GRAMS
 
 /obj/item/clothing/head/jester/Initialize()
 	. = ..()
@@ -77,6 +87,7 @@
 	name = "teller's hat"
 	icon_state = "tophat"
 	color = CLOTHING_SOOT_BLACK
+	item_weight = 100 GRAMS
 
 /obj/item/clothing/head/wizhat
 	name = "wizard hat"
@@ -91,6 +102,7 @@
 	body_parts_covered = null
 
 	prevent_crits =  MINOR_CRITICALS
+	item_weight = 125 GRAMS
 
 /obj/item/clothing/head/wizhat/Initialize()
 	. = ..()
@@ -111,6 +123,15 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/wizhat/bogwitch
+	name = "bog witch hat"
+	desc = "A hat of unusual design, derived from Osslandic attire, it has become something unique to a hermit in the terrorbog."
+	icon_state = "bogwitch"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 48
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/head/wizhat/gen
 	icon_state = "wizardhatgen"
 
@@ -122,7 +143,9 @@
 	desc = "A wide-brimmed leather hat, adorned with a crimson-dyed feather. Death has come to your little town."
 	icon_state = "inqhat"
 	item_state = "inqhat"
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
 
 /obj/item/clothing/head/leather/inqhat/vigilante
 	name = "fancy hat"
@@ -133,6 +156,7 @@
 	icon_state = "physicianhat"
 	item_state = "physicianhat"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	item_weight = 112 GRAMS
 
 /obj/item/clothing/head/courtphysician
 	name = "court physician's beret"
@@ -141,12 +165,30 @@
 	item_state = "courthat"
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
+	item_weight = 112 GRAMS
+
+/obj/item/clothing/head/courtphysician/male
+	name = "sanguine hat"
+	desc = "A hat for keeping the splattered blood out of your face, for when your trade is required."
+	icon_state = "dochat1"
+	item_state = "dochat1"
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/head/courtphysician/female
+	name = "sanguine cap"
+	desc = "A cap for keeping the splattered blood out of your hair, for when your trade is required."
+	icon_state = "dochat2"
+	item_state = "dochat2"
+	detail_tag = "_detail"
+	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/head/maidband
 	name = "maid headband"
 	desc = "A pleated cloth headband. It has gained widespread popularity from Valorian nobles travelling with their servants."
 	icon_state = "maidband"
 	body_parts_covered = NONE
+	item_weight = 42 GRAMS
 
 /obj/item/clothing/head/maidband/Initialize(mapload, ...)
 	. = ..()
@@ -154,9 +196,26 @@
 	AddComponent(
 		/datum/component/equipment_stress/job_specific, \
 		/datum/stress_event/maidband, \
-		list(TRAIT_VILLAIN = null, TRAIT_NOBLE = /datum/stress_event/maidband/noble), \
+		list(TRAIT_VILLAIN = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
 		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
 		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
 		inverse = TRUE, \
 	)
+
+/obj/item/clothing/head/gnomecap
+	name = "dwarven tallhat"
+	desc = "A warm, tall hat, made for colder climates."
+	icon_state = "gnomecap"
+	item_state = "gnomecap"
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
+	worn_x_dimension = 32
+	worn_y_dimension = 32
+	max_integrity = INTEGRITY_STANDARD
+	allowed_race = list(SPEC_ID_HALFLING, SPEC_ID_DWARF)  //Something malicious is brewing
+	min_cold_protection_temperature = -20
+	item_weight = 95 GRAMS
+
+/obj/item/clothing/head/gnomecap/Initialize()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)

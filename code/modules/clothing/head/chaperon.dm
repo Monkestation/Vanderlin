@@ -3,6 +3,7 @@
 	icon_state = "chaperon"
 	flags_inv = HIDEEARS
 	sellprice = VALUE_FINE_CLOTHING
+	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/chaperon/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

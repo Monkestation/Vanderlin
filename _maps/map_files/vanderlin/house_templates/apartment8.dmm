@@ -1,0 +1,215 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/abstract/property_noop{
+	property_id = "apartment_eight"
+	},
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"d" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"e" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town)
+"f" = (
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/turf/closed/wall/mineral/wood/window,
+/area/indoors/town)
+"g" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wood,
+/area/indoors/town)
+"h" = (
+/obj/structure/chair/wood/alt{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"k" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"m" = (
+/obj/structure/door{
+	lockid = "apartment3";
+	name = "Apartment III"
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"t" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"v" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/key/apartments/apartment3,
+/turf/open/floor/wood,
+/area/indoors/town)
+"x" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"z" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/storage/sack,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"B" = (
+/turf/closed/wall/mineral/wood,
+/area/indoors/town)
+"C" = (
+/obj/structure/chair/wood/alt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/landmark/start/hunter,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"D" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/storage/sack,
+/turf/open/floor/wood,
+/area/indoors/town)
+"E" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot{
+	pixel_y = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"J" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/wood,
+/area/indoors/town)
+"M" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"Q" = (
+/obj/structure/chair/wood/alt,
+/obj/effect/landmark/start/hunter,
+/turf/open/floor/wood,
+/area/indoors/town)
+"R" = (
+/obj/effect/landmark/start/hunter,
+/turf/open/floor/wood,
+/area/indoors/town)
+"S" = (
+/obj/structure/door{
+	lockid = "apartment3";
+	name = "Apartment III"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"T" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/candle/yellow,
+/turf/open/floor/wood,
+/area/indoors/town)
+"U" = (
+/obj/structure/closet/crate/chest/crafted,
+/obj/item/coin/copper/pile,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Y" = (
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = 32
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/bed/wool,
+/turf/open/floor/wood,
+/area/indoors/town)
+
+(1,1,1) = {"
+B
+t
+M
+c
+B
+Y
+k
+d
+d
+Q
+J
+B
+"}
+(2,1,1) = {"
+S
+x
+x
+x
+m
+d
+d
+R
+d
+d
+D
+B
+"}
+(3,1,1) = {"
+g
+C
+z
+c
+B
+U
+e
+v
+h
+d
+d
+B
+"}
+(4,1,1) = {"
+B
+B
+f
+B
+B
+B
+B
+B
+B
+d
+d
+B
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+B
+E
+T
+B
+"}
+(6,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+B
+B
+B
+B
+"}

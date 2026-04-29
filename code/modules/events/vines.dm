@@ -13,7 +13,8 @@
 		for(var/i in 1 to rand(5, maxi))
 			var/turf/T = pick_n_take(turfs)
 			message_admins("VINES at [ADMIN_VERBOSEJMP(T)]")
-			new /datum/vine_controller(T, event = src) //spawn a controller at turf
+			var/obj/structure/flora/tree/evil/root = new(T)
+			root.AddComponent(/datum/component/vine_controller, event = src) //spawn a controller component
 
 /datum/vine_mutation
 	var/name = ""
@@ -197,11 +198,13 @@
 		. = expected_damage
 
 // SPACE VINES (Note that this code is very similar to Biomass code)
+
 /obj/structure/vine
 	name = "weepvine"
 	desc = ""
 	icon = 'icons/effects/spacevines.dmi'
 	icon_state = "Light1"
+	base_icon_state = ""
 	anchored = TRUE
 	density = FALSE
 	layer = SPACEVINE_LAYER
@@ -212,28 +215,49 @@
 	damage_deflection = 5
 	blade_dulling = DULLING_CUT
 	var/energy = 0
-	var/datum/vine_controller/master = null
+	var/max_energy = 2
 	var/list/mutations = list()
 	break_sound = "plantcross"
 	destroy_sound = null
 	attacked_sound = 'sound/misc/woodhit.ogg'
+	var/current_state = "Light"
+	/// how many icon states does this have per growth level?
+	var/variance = 2
 
 /obj/structure/vine/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
-	icon_state = "Light[rand(1,2)]"
 	add_atom_colour("#ffffff", FIXED_COLOUR_PRIORITY)
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/vine/Destroy()
 	for(var/datum/vine_mutation/SM in mutations)
 		SM.on_death(src)
-	if(master)
-		master.VineDestroyed(src)
 	mutations = list()
 	set_opacity(0)
 	if(has_buckled_mobs())
 		unbuckle_all_mobs(force=1)
 	return ..()
+
+/obj/structure/vine/update_icon_state()
+	. = ..()
+	if(energy < 0)
+		icon_state = "[current_state]d"
+		mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+		set_opacity(0)
+		return
+	var/num_state = max(1, rand(1, variance))
+	switch(energy)
+		if(0)
+			current_state = "Light[num_state]"
+			set_opacity(0)
+		if(1)
+			current_state = "Med[num_state]"
+			set_opacity(0)
+		else
+			current_state = "Hvy[num_state]"
+			set_opacity(1)
+	icon_state = "[base_icon_state][current_state]"
 
 /obj/structure/vine/proc/on_chem_effect(datum/reagent/R)
 	var/override = 0
@@ -247,26 +271,17 @@
 	if(!override)
 		qdel(src)
 
-/obj/structure/vine/attacked_by(obj/item/I, mob/living/user)
-	..()
-//	var/damage_dealt = I.force
-//	if(I.get_sharpness())
-//		damage_dealt *= 4
-//	if(I.damtype == BURN)
-//		damage_dealt *= 4
-
-//	for(var/datum/vine_mutation/SM in mutations)
-//		damage_dealt = SM.on_hit(src, user, I, damage_dealt) //on_hit now takes override damage as arg and returns new value for other mutations to permutate further
-//	take_damage(damage_dealt, I.damtype, "melee", 1)
-
 /obj/structure/vine/Crossed(mob/crosser)
+	. = ..()
+	if(crosser.m_intent != MOVE_INTENT_SNEAK)
+		playsound(src,'sound/items/seedextract.ogg', 80, TRUE, -1)
 	if(isliving(crosser))
 		for(var/datum/vine_mutation/SM in mutations)
 			SM.on_cross(src, crosser)
 	if(prob(23) && istype(crosser) && !isvineimmune(crosser))
 		var/mob/living/M = crosser
 		M.adjustBruteLoss(5)
-		to_chat(M, "<span class='warning'>I nick myself on the thorny vines.</span>")
+		to_chat(M, span_warning("I nick myself on the thorny vines."))
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/structure/vine/attack_hand(mob/user)
@@ -277,150 +292,29 @@
 /obj/structure/vine/attack_paw(mob/living/user)
 	return attack_hand(user)
 
-/datum/vine_controller
-	var/list/obj/structure/vine/vines
-	var/obj/structure/flora/tree/evil/tree
-	var/list/growth_queue
-	var/spread_multiplier = 1
-	var/spread_cap = 4
-	var/list/vine_mutations_list
-	var/mutativeness = 1
-
-/datum/vine_controller/New(turf/location, list/muts, potency, production, datum/round_event/event = null)
-	vines = list()
-	growth_queue = list()
-	var/obj/structure/vine/SV = spawn_spacevine_piece(location, null, muts)
-	if (event)
-		event.announce_to_ghosts(SV)
-	START_PROCESSING(SSobj, src)
-	vine_mutations_list = list()
-	init_subtypes(/datum/vine_mutation/, vine_mutations_list)
-	if(potency != null)
-		mutativeness = potency / 10
-//	if(production != null)
-//		spread_cap *= production / 5
-//		spread_multiplier /= production / 5
-	tree = new /obj/structure/flora/tree/evil(location)
-	tree.controller = src
-
-/datum/vine_controller/vv_get_dropdown()
-	. = ..()
-	VV_DROPDOWN_OPTION(VV_HK_SPACEVINE_PURGE, "Delete Vines")
-
-/datum/vine_controller/vv_do_topic(href_list)
-	. = ..()
-	if(href_list[VV_HK_SPACEVINE_PURGE])
-		if(alert(usr, "Are you sure you want to delete this spacevine cluster?", "Delete Vines", "Yes", "No") == "Yes")
-			DeleteVines()
-
-/datum/vine_controller/proc/DeleteVines()	//this is kill
-	QDEL_LIST(vines)	//this will also qdel us
-
-/datum/vine_controller/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	tree = null
-	vines = null
-	return ..()
-
-/datum/vine_controller/proc/spawn_spacevine_piece(turf/location, obj/structure/vine/parent, list/muts)
-	var/obj/structure/vine/SV = new(location)
-	growth_queue += SV
-	vines += SV
-	SV.master = src
-	if(muts && muts.len)
-		for(var/datum/vine_mutation/M in muts)
-			M.add_mutation_to_vinepiece(SV)
-		return
-	if(parent)
-		SV.mutations |= parent.mutations
-		var/parentcolor = parent.atom_colours[FIXED_COLOUR_PRIORITY]
-		SV.add_atom_colour(parentcolor, FIXED_COLOUR_PRIORITY)
-//		if(prob(mutativeness))
-//			var/datum/vine_mutation/randmut = pick(vine_mutations_list - SV.mutations)
-//			randmut.add_mutation_to_vinepiece(SV)
-
-	for(var/datum/vine_mutation/SM in SV.mutations)
-		SM.on_birth(SV)
-	location.Entered(SV)
-	return SV
-
-/datum/vine_controller/proc/endvines()
-	for(var/obj/structure/vine/V as anything in vines)
-		V.dieepic()
-	qdel(src)
-
-/datum/vine_controller/proc/VineDestroyed(obj/structure/vine/S)
-	S.master = null
-	vines -= S
-	growth_queue -= S
-	if(!vines.len)
-		qdel(src)
-
-/datum/vine_controller/process()
-	if(!LAZYLEN(vines))
-		if(!tree)
-			qdel(src) //space vines exterminated. Remove the controller
-			return
-		else
-			spawn_spacevine_piece(tree.loc, null)
-	if(!growth_queue)
-		qdel(src) //Sanity check
-		return
-
-	var/length = 0
-
-//	length = min( spread_cap , max( 1 , vines.len / spread_multiplier ) )
-	length = 20
-	var/i = 0
-	var/list/obj/structure/vine/queue_end = list()
-
-	for(var/obj/structure/vine/SV in growth_queue)
-		if(QDELETED(SV))
-			continue
-		i++
-		queue_end += SV
-		growth_queue -= SV
-		for(var/datum/vine_mutation/SM in SV.mutations)
-			SM.process_mutation(SV)
-		if(SV.energy < 2) //If tile isn't fully grown
-			if(prob(20))
-				SV.grow()
-		else //If tile is fully grown
-			SV.entangle_mob()
-		if(vines.len > 25)
-			break
-		SV.spread()
-		if(i >= length)
-			break
-
-	growth_queue = growth_queue + queue_end
-
 /obj/structure/vine/proc/dieepic()
-	icon_state = "[icon_state]d"
+	energy = -1
 	modify_max_integrity(1, can_break = FALSE)
 	update_integrity(1)
 	destroy_sound = 'sound/foley/breaksound.ogg'
+	update_appearance(UPDATE_ICON_STATE)
+	unbuckle_all_mobs(TRUE)
 
 /obj/structure/vine/proc/grow()
-	if(!energy)
-		src.icon_state = pick("Med1", "Med2")
-		energy = 1
-		set_opacity(1)
-	else
-		src.icon_state = pick("Hvy1", "Hvy2")
-		energy = 2
-//		density = TRUE
-
+	if(energy < 0)
+		return
+	energy = min(energy + 1, max_energy)
+	update_appearance(UPDATE_ICON_STATE)
 	for(var/datum/vine_mutation/SM in mutations)
 		SM.on_grow(src)
 
 /obj/structure/vine/proc/entangle_mob()
-	if(!has_buckled_mobs() && prob(25))
-		for(var/mob/living/V in src.loc)
-			entangle(V)
-			if(has_buckled_mobs())
-				break //only capture one mob at a time
-
+	if(has_buckled_mobs() || prob(75))
+		return
+	for(var/mob/living/V in get_turf(src))
+		entangle(V)
+		if(has_buckled_mobs())
+			break //only capture one mob at a time
 
 /obj/structure/vine/proc/entangle(mob/living/V)
 	if(!V || isvineimmune(V))
@@ -428,20 +322,20 @@
 	for(var/datum/vine_mutation/SM in mutations)
 		SM.on_buckle(src, V)
 	if((V.stat != DEAD) && (V.buckled != src)) //not dead or captured
-		to_chat(V, "<span class='danger'>The vines [pick("wind", "tangle", "tighten")] around me!</span>")
+		to_chat(V, span_danger("The vines [pick("wind", "tangle", "tighten")] around me!"))
 		buckle_mob(V, 1)
 	V.adjustOxyLoss(10)
 
-/obj/structure/vine/proc/spread()
+/obj/structure/vine/proc/find_spread()
 	var/direction = pick(GLOB.cardinals)
 	var/turf/stepturf = get_step(src,direction)
-	if (stepturf.Enter(src))
-		for(var/datum/vine_mutation/SM in mutations)
-			SM.on_spread(src, stepturf)
-			stepturf = get_step(src,direction) //in case turf changes, to make sure no runtimes happen
-		if(!locate(/obj/structure/vine, stepturf))
-			if(master)
-				master.spawn_spacevine_piece(stepturf, src)
+	if(!stepturf.Enter(src))
+		return
+	for(var/datum/vine_mutation/SM in mutations)
+		SM.on_spread(src, stepturf)
+		stepturf = get_step(src,direction) //in case turf changes, to make sure no runtimes happen
+	if(!locate(/obj/structure/vine, stepturf))
+		return stepturf
 
 /obj/structure/vine/ex_act(severity, target)
 	if(istype(target, type)) //if its agressive spread vine dont do anything
@@ -464,9 +358,39 @@
 	if(isvineimmune(mover))
 		return TRUE
 
+/obj/structure/vine/black_briar
+	name = "\proper black briar"
+	desc = span_briar("Some victories come at a horrible price.")
+	icon_state = "BriarLight1"
+	base_icon_state = "Briar"
+	buckle_prevents_pull = TRUE
+	buckle_lying = STANDING_UP
+	var/permanent_buckle = FALSE
+	variance = 1
+	max_energy = 1
+
+	max_integrity = 300
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+
+/obj/structure/vine/black_briar/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)
+
+/obj/structure/vine/black_briar/unbuckle_mob(mob/living/buckled_mob, force, can_fall)
+	if(!permanent_buckle || force)
+		. = ..()
+
+/obj/structure/vine/black_briar/dieepic()
+	. = ..()
+	var/comp = GetComponent(/datum/component/cursedrosa)
+	if(comp)
+		qdel(comp)
+
 /proc/isvineimmune(atom/A)
 	. = FALSE
 	if(isliving(A))
 		var/mob/living/M = A
-		if((FACTION_VINES in M.faction) || (FACTION_PLANTS in M.faction))
+		if((FACTION_VINES in M.faction) || (FACTION_PLANTS in M.faction) || HAS_TRAIT(M, TRAIT_KNEESTINGER_IMMUNITY))
 			. = TRUE

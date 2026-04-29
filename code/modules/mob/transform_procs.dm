@@ -1,3 +1,9 @@
+#define TRANSFORMATION_DURATION 22
+/// Will be removed once the transformation is complete.
+#define TEMPORARY_TRANSFORMATION_TRAIT "temporary_transformation"
+/// Considered "permanent" since we'll be deleting the old mob and the client will be inserted into a new one (without this trait)
+#define PERMANENT_TRANSFORMATION_TRAIT "permanent_transformation"
+
 /mob/living/carbon/proc/monkeyize(tr_flags = (TR_KEEPITEMS | TR_KEEPVIRUS | TR_KEEPSTUNS | TR_KEEPREAGENTS | TR_DEFAULTMSG))
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
@@ -7,12 +13,10 @@
 
 	var/list/missing_bodyparts_zones = get_missing_limbs()
 
-	var/obj/item/cavity_object
-
 	var/obj/item/bodypart/chest/CH = get_bodypart(BODY_ZONE_CHEST)
-	if(CH.cavity_item)
-		cavity_object = CH.cavity_item
-		CH.cavity_item = null
+	for(var/atom/movable/item as anything in CH.cavity_items)
+		item.forceMove(CH.drop_location())
+		CH.cavity_items -= item
 
 	if(tr_flags & TR_KEEPITEMS)
 		var/Itemlist = get_equipped_items(TRUE)
@@ -38,10 +42,10 @@
 
 	//handle DNA and other attributes
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(icon_update=0)
 
-	if(suiciding)
-		O.set_suicide(suiciding)
+	O.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(hellbound)
 		O.hellbound = hellbound
 	O.a_intent = INTENT_HARM
@@ -58,8 +62,7 @@
 
 	//re-add organs to new mob. this order prevents moving the mind to a brain at any point
 	if(tr_flags & TR_KEEPORGANS)
-		for(var/X in O.internal_organs)
-			var/obj/item/organ/I = X
+		for(var/obj/item/organ/I as anything in O.internal_organs)
 			I.Remove(O, 1)
 
 		if(mind)
@@ -72,17 +75,11 @@
 		for(var/obj/item/organ/I as anything in int_organs)
 			I.Insert(O, 1)
 
-	var/obj/item/bodypart/chest/torso = O.get_bodypart(BODY_ZONE_CHEST)
-	if(cavity_object)
-		torso.cavity_item = cavity_object //cavity item is given to the new chest
-		cavity_object.forceMove(O)
-
 	for(var/missing_zone in missing_bodyparts_zones)
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)
 		BP.drop_limb(1)
 		if(!(tr_flags & TR_KEEPORGANS)) //we didn't already get rid of the organs of the newly spawned mob
-			for(var/X in O.internal_organs)
-				var/obj/item/organ/G = X
+			for(var/obj/item/organ/G as anything in O.internal_organs)
 				if(BP.body_zone == check_zone(G.zone))
 					qdel(G) //we lose the organs in the missing limbs
 		qdel(BP)
@@ -130,12 +127,10 @@
 
 	var/list/missing_bodyparts_zones = get_missing_limbs()
 
-	var/obj/item/cavity_object
-
 	var/obj/item/bodypart/chest/CH = get_bodypart(BODY_ZONE_CHEST)
-	if(CH.cavity_item)
-		cavity_object = CH.cavity_item
-		CH.cavity_item = null
+	for(var/atom/movable/item as anything in CH.cavity_items)
+		item.forceMove(drop_location())
+		CH.cavity_items -= item
 
 	//now the rest
 	if (tr_flags & TR_KEEPITEMS)
@@ -165,6 +160,7 @@
 		O.equip_to_appropriate_slot(C)
 
 	dna.transfer_identity(O)
+	reset_limb_fingerprints()
 	O.updateappearance(mutcolor_update=1)
 
 	if(cmptext("monkey",copytext(O.dna.real_name,1,7)))
@@ -174,8 +170,7 @@
 		O.real_name = O.dna.real_name
 	O.name = O.real_name
 
-	if(suiciding)
-		O.set_suicide(suiciding)
+	O.set_suicide(HAS_TRAIT(src, TRAIT_SUICIDED))
 	if(hellbound)
 		O.hellbound = hellbound
 
@@ -190,8 +185,7 @@
 		O.updatehealth()
 
 	if(tr_flags & TR_KEEPORGANS)
-		for(var/X in O.internal_organs)
-			var/obj/item/organ/I = X
+		for(var/obj/item/organ/I as anything in O.internal_organs)
 			I.Remove(O, 1)
 
 		if(mind)
@@ -203,18 +197,11 @@
 		for(var/obj/item/organ/I as anything in int_organs)
 			I.Insert(O, 1)
 
-
-	var/obj/item/bodypart/chest/torso = get_bodypart(BODY_ZONE_CHEST)
-	if(cavity_object)
-		torso.cavity_item = cavity_object //cavity item is given to the new chest
-		cavity_object.forceMove(O)
-
 	for(var/missing_zone in missing_bodyparts_zones)
 		var/obj/item/bodypart/BP = O.get_bodypart(missing_zone)
 		BP.drop_limb(1)
 		if(!(tr_flags & TR_KEEPORGANS)) //we didn't already get rid of the organs of the newly spawned mob
-			for(var/X in O.internal_organs)
-				var/obj/item/organ/G = X
+			for(var/obj/item/organ/G as anything in O.internal_organs)
 				if(BP.body_zone == check_zone(G.zone))
 					qdel(G) //we lose the organs in the missing limbs
 		qdel(BP)
@@ -318,3 +305,7 @@
 
 	//Not in here? Must be untested!
 	return 0
+
+#undef PERMANENT_TRANSFORMATION_TRAIT
+#undef TEMPORARY_TRANSFORMATION_TRAIT
+#undef TRANSFORMATION_DURATION

@@ -1,6 +1,9 @@
 #define CTYPE_GOLD "g"
 #define CTYPE_SILV "s"
 #define CTYPE_COPP "c"
+#define CTYPE_INQU "i"
+#define CTYPE_ANCI "a"
+#define CTYPE_WOOD "w"
 #define MAX_COIN_STACK_SIZE 20
 
 /obj/item/coin
@@ -15,7 +18,9 @@
 	sellprice = 0
 	static_price = TRUE
 	simpleton_price = TRUE
-	var/flip_cd
+	item_weight = 23 GRAMS
+
+	COOLDOWN_DECLARE(flip_cd)
 	var/heads_tails = TRUE
 	var/last_merged_heads_tails = TRUE
 	var/base_type //used for compares
@@ -23,9 +28,17 @@
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
 
+/obj/item/coin/get_carry_weight(atom/carrier)
+	. = item_weight * quantity
+
 /obj/item/coin/on_consume(mob/living/eater)
 	. = ..()
+	eater.extra_mob_weight += get_carry_weight(eater)
 	eater.sellprice += quantity * sellprice
+
+/obj/item/coin/on_anti_consume(mob/living/eater)
+	eater.extra_mob_weight -= get_carry_weight(eater)
+	eater.sellprice -= quantity * sellprice
 
 /obj/item/coin/Initialize(mapload, coin_amount)
 	. = ..()
@@ -39,7 +52,7 @@
 	return list("shrink" = 0.10, "sx" = -6, "sy" = 6, "nx" = 6, "ny" = 7, "wx" = 0, "wy" = 5, "ex" = -1, "ey" = 7, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -50, "sturn" = 40, "wturn" = 50, "eturn" = -50, "nflip" = 0, "sflip" = 8, "wflip" = 8, "eflip" = 0)
 
 /obj/item/coin/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 	scatter(get_turf(src))
 	..()
 
@@ -64,8 +77,16 @@
 						spawned_type = /obj/item/coin/gold
 					if(CTYPE_SILV)
 						spawned_type = /obj/item/coin/silver
-					else
+					if(CTYPE_COPP)
 						spawned_type = /obj/item/coin/copper
+					if(CTYPE_INQU)
+						spawned_type = /obj/item/coin/inqcoin
+					if(CTYPE_ANCI)
+						spawned_type = /obj/item/coin/copper
+					if(CTYPE_WOOD)
+						spawned_type = /obj/item/coin/wood
+					else
+						return // Don't destroy coins into copper
 
 			var/obj/item/coin/new_coin = new spawned_type
 			new_coin.forceMove(T)
@@ -108,9 +129,10 @@
 			. += span_info("[quantity_to_words(quantity)] coins.")
 		return
 
-	var/intelligence = user.mind?.current.STAINT
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
+		return
 
 	var/list/skill_data = coin_skill(user, quantity)
 	var/fuzzy_quantity = CLAMP(quantity + skill_data["error"], 1,  (quantity > 20) ? INFINITY : 20) // Cap at 20 only for small stacks)
@@ -174,15 +196,15 @@
 		set_quantity(quantity - intended)
 
 		user.put_in_hands(new_coins)
-		playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 		return
 	. = ..()
 
 /obj/item/coin/proc/coin_skill(mob/user, intended)		// Coin counting and splitting
-	var/intelligence = user.mind?.current.STAINT
-	var/perception = user.mind?.current.STAPER
-	var/speed = user.mind?.current.STASPD
-	var/mathematics_skill = user.get_skill_level(/datum/skill/labor/mathematics) || 0
+	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
+	var/perception = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_PERCEPTION)
+	var/speed = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_SPEED)
+	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers
@@ -263,10 +285,10 @@
 	G.rigged_outcome = 0
 	if(G.quantity <= 0)
 		qdel(G)
-	playsound(loc, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+	playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
 
 /obj/item/coin/proc/rig_coin(mob/user)
-	var/outcome = alert(user, "What will you rig the next coin flip to?","XYLIX","Heads","Tails","Play fair")
+	var/outcome = tgui_alert(user, "What will you rig the next coin flip to?","XYLIX", list("Heads","Tails","Play fair"))
 	if(QDELETED(src) || !user.is_holding(src))
 		return
 	switch(outcome)
@@ -279,7 +301,7 @@
 		if("Play fair")
 			rigged_outcome = 0
 
-/obj/item/coin/attack_self_secondary(mob/user, params)
+/obj/item/coin/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -287,7 +309,7 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return TRUE
 
-/obj/item/coin/attack_hand_secondary(mob/user, params)
+/obj/item/coin/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -297,15 +319,30 @@
 			INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return
 
-	user.put_in_active_hand(new type(user.loc, 1))
-	set_quantity(quantity - 1)
+	var/spawned_type
+	if(base_type)
+		switch(base_type)
+			if(CTYPE_GOLD)
+				spawned_type = /obj/item/coin/gold
+			if(CTYPE_SILV)
+				spawned_type = /obj/item/coin/silver
+			if(CTYPE_INQU)
+				spawned_type = /obj/item/coin/inqcoin
+			if(CTYPE_WOOD)
+				spawned_type = /obj/item/coin/wood
+			else
+				spawned_type = /obj/item/coin/copper
+	if(spawned_type)
+		user.put_in_active_hand(new spawned_type(user.loc, 1))
+		set_quantity(quantity - 1)
 
-/obj/item/coin/attack_self(mob/living/user, params)
+/obj/item/coin/attack_self(mob/living/user, list/modifiers)
 	if(quantity > 1 || !base_type)
 		return
-	if(world.time < flip_cd + 30)
+	if(!COOLDOWN_FINISHED(src, flip_cd))
 		return
-	flip_cd = world.time
+	COOLDOWN_START(src, flip_cd, 3 SECONDS)
+
 	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
 	var/flip_outcome = rigged_outcome ? rigged_outcome : prob(50)
 	if(rigged_outcome)
@@ -351,8 +388,10 @@
 	. = ..()
 	if(quantity == 1)
 		name = initial(name)
+		gender = NEUTER
 	else
 		name = plural_name
+		gender = PLURAL
 
 /obj/item/coin/update_desc()
 	. = ..()
@@ -361,7 +400,7 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user)
+/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/coin))
 		var/obj/item/coin/G = I
 		if(item_flags & IN_STORAGE)
@@ -379,6 +418,7 @@
 	sellprice = 10
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
+	item_weight = 9 GRAMS
 
 
 // SILVER
@@ -389,6 +429,8 @@
 	sellprice = 5
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
+	item_weight = 11 GRAMS
+
 
 // COPPER
 /obj/item/coin/copper
@@ -421,17 +463,12 @@
 	. = ..()
 	set_quantity(rand(6,9))
 
-#undef CTYPE_GOLD
-#undef CTYPE_SILV
-#undef CTYPE_COPP
-#undef MAX_COIN_STACK_SIZE
-
 /obj/item/coin/inqcoin
 	name = "oratorium marque"
 	desc = "A blessed silver coin finished with a unique wash of black dye, bearing the post-kingdom Psycross. Kingsfield has denied the existence of such a coin when queried, as such coinage is rumoured to be used internally by the Oratorium Throni Vacui."
 	icon_state = "i1"
 	sellprice = 0
-	base_type = "i"
+	base_type = CTYPE_INQU
 	plural_name = "oratorium marques"
 
 /obj/item/coin/inqcoin/pile/Initialize()
@@ -441,9 +478,9 @@
 /obj/item/coin/inqcoin/attack_self(mob/living/user)
 	if(quantity > 1 || !base_type)
 		return
-	if(world.time < flip_cd + 30)
+	if(!COOLDOWN_FINISHED(src, flip_cd))
 		return
-	flip_cd = world.time
+	COOLDOWN_START(src, flip_cd, 3 SECONDS)
 	playsound(user, 'sound/foley/coinphy (1).ogg', 100, FALSE)
 	if(prob(50))
 		user.visible_message(span_info("[user] flips the coin. ENDURE!"))
@@ -451,4 +488,26 @@
 	else
 		user.visible_message(span_info("[user] flips the coin. LIVE!"))
 		heads_tails = FALSE
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/coin/wood
+	name = "chip"
+	icon = 'icons/obj/orphanage.dmi'
+	icon_state = "w1"
+	sellprice = 0
+	base_type = CTYPE_WOOD
+	plural_name = "chips"
+	item_weight = 3 GRAMS
+
+/obj/item/coin/wood/pile/Initialize(mapload, coin_amount)
+	. = ..()
+	if(!coin_amount)
+		set_quantity(rand(4,14))
+
+#undef CTYPE_GOLD
+#undef CTYPE_SILV
+#undef CTYPE_COPP
+#undef CTYPE_INQU
+#undef CTYPE_ANCI
+#undef CTYPE_WOOD
+#undef MAX_COIN_STACK_SIZE

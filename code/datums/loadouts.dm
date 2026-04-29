@@ -1,4 +1,12 @@
-GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
+GLOBAL_LIST_INIT(loadout_items, init_loadout_items())
+
+/proc/init_loadout_items()
+	. = list()
+	for(var/datum/loadout_item/item as anything in subtypesof(/datum/loadout_item))
+		if(IS_ABSTRACT(item))
+			continue
+		.[item] = new item()
+	return .
 
 /datum/loadout_item
 	abstract_type = /datum/loadout_item
@@ -8,6 +16,26 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 	var/description
 	/// Path to the item to spawn
 	var/item_path
+	/// Typepath of a /datum/award that must be unlocked to use this loadout item. Null = no requirement.
+	var/required_award = null
+
+/// Returns TRUE if the given client has satisfied this loadout item's award requirement.
+/datum/loadout_item/proc/is_unlocked_for(client/C)
+	if(!required_award)
+		return TRUE
+	if(!C?.player_details?.achievements)
+		return FALSE
+	var/datum/award/A = SSachievements.awards[required_award]
+	if(!A)
+		return FALSE
+	if(istype(A, /datum/award/achievement/progress))
+		var/datum/award/achievement/progress/PA = A
+		return C.player_details.achievements.get_achievement_status(required_award) >= PA.required_progress
+	if(istype(A, /datum/award/achievement))
+		return C.player_details.achievements.get_achievement_status(required_award) == TRUE
+	if(istype(A, /datum/award/score))
+		return C.player_details.achievements.get_achievement_status(required_award) > 0
+	return FALSE
 
 //Miscellaneous
 
@@ -38,6 +66,22 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 /datum/loadout_item/natural_cane
 	name = "Natural Wooden Cane"
 	item_path = /obj/item/weapon/mace/cane/natural
+
+/datum/loadout_item/wooden_sword
+	name = "Training Sword"
+	item_path = /obj/item/weapon/mace/woodclub/train_sword
+
+/datum/loadout_item/keyring
+	name = "Key Ring"
+	item_path = /obj/item/storage/keyring
+
+/datum/loadout_item/soap
+	name = "Bar of Soap"
+	item_path = /obj/item/soap
+
+/datum/loadout_item/servant_bell
+	name = "Unbound Servant Bell"
+	item_path = /obj/item/servant_bell
 
 //HATS
 /datum/loadout_item/zalad
@@ -76,6 +120,9 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 	name = "Fur Hat"
 	item_path = /obj/item/clothing/head/hatfur
 
+/datum/loadout_item/tallhat
+	name = "Tallhat (Dwarf + Halfling only)"
+	item_path = /obj/item/clothing/head/gnomecap
 
 /datum/loadout_item/headband
 	name = "Headband"
@@ -125,6 +172,14 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 /datum/loadout_item/vest
 	name = "Cloth Vest"
 	item_path = /obj/item/clothing/shirt/clothvest/colored/random
+
+/datum/loadout_item/wicker
+	name = "Wicker Cloak"
+	item_path = /obj/item/clothing/cloak/wickercloak
+
+/datum/loadout_item/shredded
+	name = "Shredded Cloak"
+	item_path = /obj/item/clothing/cloak/shredded
 
 //SHOES
 
@@ -181,6 +236,10 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 /datum/loadout_item/nun_habit
 	name = "Nun Habit"
 	item_path = /obj/item/clothing/shirt/robe/nun
+
+/datum/loadout_item/corset
+	name = "Corset"
+	item_path = /obj/item/clothing/armor/corset
 
 //PANTS
 /datum/loadout_item/tights
@@ -244,3 +303,14 @@ GLOBAL_LIST_INIT(loadout_items, subtypesof(/datum/loadout_item))
 /datum/loadout_item/jestershoes
 	name = "Jester's Shoes"
 	item_path = /obj/item/clothing/shoes/jester
+
+//FACE
+
+/datum/loadout_item/ragmask
+	name = "Halfmask"
+	item_path = /obj/item/clothing/face/shepherd/rag
+
+/datum/loadout_item/pocket_rous
+	name = "Pocket Rous"
+	item_path = /obj/item/reagent_containers/food/snacks/smallrat
+	required_award = /datum/award/achievement/progress/rat_genocide

@@ -14,7 +14,7 @@
 
 /datum/round_event/wild_crops/start()
 	. = ..()
-	var/list/turfs = get_area_turfs(/area/outdoors/woods, subtypes = TRUE)
+	var/list/turfs = get_area_turfs(/area/outdoors/wilderness, subtypes = TRUE)
 	for(var/i = 1 to rand(2, 12))
 		var/failing = TRUE
 		while(failing)

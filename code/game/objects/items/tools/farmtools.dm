@@ -1,27 +1,27 @@
 //copper tools
 
 /obj/item/weapon/hoe/copper
-	experimental_inhand = TRUE
-	experimental_onback = TRUE
-	experimental_onhip = TRUE
-	force = DAMAGE_STAFF
-	force_wielded = DAMAGE_STAFF_WIELD
-	possible_item_intents = list(/datum/intent/pick)
-	gripped_intents = list(/datum/intent/pick,POLEARM_BASH,TILL_INTENT)
 	name = "copper hoe"
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "choe"
+	force = DAMAGE_STAFF
+	force_wielded = DAMAGE_STAFF_WIELD
+	possible_item_intents = list(INTENT_USE)
+	experimental_inhand = TRUE
+	experimental_onback = TRUE
+	experimental_onhip = TRUE
 	smeltresult = /obj/item/ingot/copper
 	time_multiplier = 0.5
+	item_weight = 852 GRAMS
 
 /obj/item/weapon/sickle/copper
-	possible_item_intents = list(DAGGER_CUT)
 	name = "copper sickle"
 	desc = ""
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "csickle"
 	smeltresult = /obj/item/ingot/copper
+	item_weight = 354 GRAMS
 
 /obj/item/weapon/pitchfork/copper
 	name = "copper fork"
@@ -29,12 +29,12 @@
 	icon_state = "cpitchfork"
 	item_state = "pitchfork"
 	force_wielded = DAMAGE_SPEAR
+	wdefense = AVERAGE_PARRY
 	experimental_inhand = TRUE
 	experimental_onback = TRUE
 	experimental_onhip = TRUE
-	wdefense = 2
 	smeltresult = /obj/item/ingot/copper
-	associated_skill = /datum/skill/combat/polearms
+	item_weight = 1.74 KILOGRAMS
 
 /obj/item/weapon/pitchfork/copper/getonmobprop(tag)
 	. = ..()

@@ -52,11 +52,11 @@
 	RegisterSignal(parent, COMSIG_MOB_CLICKON, PROC_REF(on_click))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equipped))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_dropped))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examines))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examines))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(on_ctrl_click))
 
 /datum/component/callouts/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_MOB_CLICKON, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED, COMSIG_PARENT_EXAMINE, COMSIG_CLICK_CTRL))
+	UnregisterSignal(parent, list(COMSIG_MOB_CLICKON, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED, COMSIG_ATOM_EXAMINE, COMSIG_CLICK_CTRL))
 
 /datum/component/callouts/proc/on_ctrl_click(datum/source, mob/living/user)
 	SIGNAL_HANDLER
@@ -89,9 +89,8 @@
 	if (!isnull(examine_text))
 		examine_list += examine_text
 
-/datum/component/callouts/proc/on_click(mob/user, atom/clicked_atom, params)
+/datum/component/callouts/proc/on_click(mob/user, atom/clicked_atom, list/modifiers)
 	SIGNAL_HANDLER
-	var/list/modifiers = params2list(params)
 
 	if (!LAZYACCESS(modifiers, SHIFT_CLICKED) || !LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return

@@ -11,9 +11,9 @@
 	var/toxpwr = 1.5
 	var/silent_toxin = FALSE //won't produce a pain message when processed by liver/life() if there isn't another non-silent toxin present.
 
-/datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/on_mob_life(mob/living/carbon/M, efficiency)
 	if(toxpwr)
-		M.adjustToxLoss(toxpwr*REM, 0)
+		M.adjustToxLoss(toxpwr*REM * efficiency, 0)
 	return ..()
 
 /datum/reagent/toxin/amatoxin
@@ -33,7 +33,7 @@
 	toxpwr = 3
 
 /datum/reagent/toxin/plasma/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with plasma is stronger than fuel!
-	if(method == TOUCH || method == VAPOR)
+	if((method & TOUCH) || (method & VAPOR))
 		M.adjust_fire_stacks(reac_volume / 5)
 		return
 	..()
@@ -65,16 +65,15 @@
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	alpha = 225
 
-/datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M)
-	M.confused += 1
-	M.dizziness += 1
-	M.adjust_energy(-25)
+/datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjust_confusion(2 SECONDS * efficiency)
+	M.adjust_dizzy(2 SECONDS * efficiency)
+	M.adjust_energy(-25 * efficiency)
 	if(M.stamina > 75)
-		M.adjust_drowsiness(4 SECONDS)
+		M.adjust_drowsiness(4 SECONDS * efficiency)
 	else
-		M.adjust_stamina(15)
+		M.adjust_stamina(15 * efficiency)
 	..()
-	. = 1
 
 /datum/reagent/toxin/venom
 	name = "Venom"
@@ -84,8 +83,8 @@
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 	toxpwr = 0
 
-/datum/reagent/toxin/venom/on_mob_life(mob/living/carbon/M)
-	toxpwr = 0.2*volume
+/datum/reagent/toxin/venom/on_mob_life(mob/living/carbon/M, efficiency)
+	toxpwr = 0.2*volume * efficiency
 	. = 1
 	..()
 
@@ -97,14 +96,14 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 0
 
-/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3*REM, 150)
+/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3*REM * efficiency, 150)
 	if(M.toxloss <= 60)
-		M.adjustToxLoss(1*REM, 0)
+		M.adjustToxLoss(1*REM * efficiency, 0)
 	if(current_cycle >= 4)
 		M.add_stress(/datum/stress_event/narcotic_heavy)
 	if(current_cycle >= 18)
-		M.Sleeping(40, 0)
+		M.Sleeping(40 * efficiency, 0)
 	..()
 	return TRUE
 
@@ -116,10 +115,10 @@
 	metabolization_rate = 0.01
 	toxpwr = 0
 
-/datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M, efficiency)
 	//testing("Someone was poisoned") // This is too gold to remove
 	if(volume > 0.95)
-		M.adjustToxLoss(10, 0)
+		M.adjustToxLoss(10 * efficiency, 0)
 	return ..()
 
 /datum/reagent/toxin/bad_food
@@ -128,7 +127,7 @@
 	reagent_state = LIQUID
 	color = "#d6d6d8"
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
-	toxpwr = 0.5
+	toxpwr = 0.25
 	taste_description = "bad cooking"
 
 
@@ -163,15 +162,15 @@
 	if(!istype(C))
 		return
 	reac_volume = round(reac_volume,0.1)
-	if(method == INGEST)
+	if(method & INGEST)
 		C.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr))
 		return
-	if(method == INJECT)
+	if(method & INJECT)
 		C.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr))
 		return
 	C.acid_act(acidpwr, reac_volume)
 
-	if(method == TOUCH)
+	if(method & TOUCH)
 		C.try_skin_burn(reac_volume)
 
 /datum/reagent/toxin/acid/reaction_obj(obj/O, reac_volume)
@@ -201,11 +200,11 @@
 
 	L.mana_pool.halt_mana_disperse("manabloom")
 
-/datum/reagent/toxin/manabloom_juice/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/manabloom_juice/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
 	if(!M.mana_pool)
 		return
-	M.mana_pool.adjust_mana(volume)
+	M.mana_pool.adjust_mana(volume * efficiency)
 
 /datum/reagent/toxin/manabloom_juice/on_mob_end_metabolize(mob/living/L)
 	. = ..()
@@ -213,3 +212,57 @@
 		return
 
 	L.mana_pool.restore_mana_disperse("manabloom")
+
+
+/datum/reagent/toxin/spidervenom_paralytic
+	name = "Aragn Essence"
+	description = "A strong neurotoxin that makes muscles stiffen up and spasm."
+	silent_toxin = TRUE
+	reagent_state = SOLID
+	color = "#99005e"
+	toxpwr = 0
+	taste_description = "raspberry"
+	metabolization_rate = 0.01
+	var/venom_resistance
+
+/obj/item/reagent_containers/glass/bottle/spidervenom_paralytic
+	list_reagents = list(/datum/reagent/toxin/spidervenom_paralytic = 1)
+	desc = "An ominous vial, filled with venom of the deadly Aragn spider. Feels hot to the touch."
+
+/datum/reagent/toxin/spidervenom_paralytic/on_mob_metabolize(mob/living/L)
+	..()
+	venom_resistance += ((GET_MOB_ATTRIBUTE_VALUE(L, STAT_CONSTITUTION) - 10) * 5)
+	venom_resistance += ((GET_MOB_ATTRIBUTE_VALUE(L, STAT_ENDURANCE) - 10) * 3)
+	venom_resistance += ((GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) - 10) * 2)
+	venom_resistance += (GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE))
+
+	if(venom_resistance <= 0)
+		venom_resistance = 0
+		venom_resistance += (GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) * 5)
+
+/datum/reagent/toxin/spidervenom_paralytic/on_mob_end_metabolize(mob/living/L)
+	..()
+
+/datum/reagent/toxin/spidervenom_paralytic/on_mob_life(mob/living/carbon/M, efficiency)
+	..()
+	if(!(current_cycle % 5) && !(prob(venom_resistance / 5)))
+		M.Paralyze(50 * efficiency)
+	if(current_cycle >= 60 && !(current_cycle % 5) && prob(venom_resistance))
+		M.reagents.remove_reagent(/datum/reagent/toxin/spidervenom_paralytic, 100)
+
+/datum/reagent/toxin/spidervenom_inert
+	name = "Inert Aragn Essence"
+	description = "Without the spider, the venom has weakened. It must be strengthened with a binding catalyst first."
+	silent_toxin = TRUE
+	reagent_state = SOLID
+	color = "#003d99"
+	toxpwr = 0
+	taste_description = "blueberry"
+	metabolization_rate = 10
+
+/obj/item/reagent_containers/spidervenom_inert
+	list_reagents = list(/datum/reagent/toxin/spidervenom_inert = 10)
+	name = "Pale spider gland"
+	desc = "A squishy pale gland, filled to the brim with venom of the deadly Aragn spider. Feels cold to the touch."
+	icon = 'icons/obj/webbing.dmi'
+	icon_state = "gland"

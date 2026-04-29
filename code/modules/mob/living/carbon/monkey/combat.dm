@@ -103,7 +103,7 @@
 		monkeyDrop(get_item_by_slot(C)) // remove the existing item if worn
 		addtimer(CALLBACK(src, PROC_REF(equip_to_appropriate_slot), C), 5)
 
-/mob/living/carbon/monkey/resist_restraints()
+/mob/living/carbon/monkey/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	if(handcuffed)
 		I = handcuffed
@@ -360,7 +360,7 @@
 		retaliate(L)
 	return ..()
 
-/mob/living/carbon/monkey/attackby(obj/item/W, mob/user, params)
+/mob/living/carbon/monkey/attackby(obj/item/W, mob/user, list/modifiers)
 	..()
 	if((W.force) && (!target) && (W.damtype != STAMINA) )
 		retaliate(user)

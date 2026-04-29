@@ -149,7 +149,7 @@
 	if(swallowed_mob)
 		return
 	visible_message(span_notice("[src] grabs [L] and swallows them."))
-	playsound(loc, 'sound/misc/eat.ogg', 25, TRUE)
+	playsound(src, 'sound/misc/eat.ogg', 25, TRUE)
 	L.forceMove(src)
 	swallowed_mob = L
 	health_at_swallow = health
@@ -158,7 +158,7 @@
 /mob/living/simple_animal/hostile/retaliate/headless/proc/SpitUp()
 	if(swallowed_mob)
 		visible_message(span_notice("[src] vomits a disheveled [swallowed_mob]."))
-		playsound(loc, 'sound/vo/vomit.ogg', 25, TRUE)
+		playsound(src, 'sound/vo/vomit.ogg', 25, TRUE)
 		swallowed_mob.forceMove(get_turf(src))
 		swallowed_mob = null
 		body_eater = TRUE

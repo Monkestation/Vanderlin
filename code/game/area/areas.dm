@@ -6,11 +6,11 @@
 /area
 	level = null
 	name = "unknown"
-	icon = 'icons/turf/areas.dmi'
+	icon = 'icons/turf/areas/areas.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
 	//Keeping this on the default plane, GAME_PLANE, will make area overlays fail to render on FLOOR_PLANE.
-	plane = BLACKNESS_PLANE
+	plane = AREA_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
 	flags_1 = CAN_BE_DIRTY_1 | CULT_PERMITTED_1
@@ -87,6 +87,9 @@
 	var/list/ambush_times
 
 	var/converted_type
+
+	var/threat_region = "" // Key used to look up threat region this area belongs to
+
 	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
 
@@ -332,20 +335,20 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  *
  * If the area has ambience, then it plays some ambience music to the ambience channel
  */
-/area/Entered(atom/movable/M, atom/old_loc)
+/area/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	set waitfor = FALSE
-	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, M)
-	SEND_SIGNAL(M, COMSIG_ENTER_AREA, src) //The atom that enters the area
-	if(!isliving(M))
+
+	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, arrived)
+	SEND_SIGNAL(arrived, COMSIG_ENTER_AREA, src) //The atom that enters the area
+
+	if(!isliving(arrived))
 		return
 
-	var/mob/living/L = M
+	var/mob/living/L = arrived
 	if(!L.ckey || L.stat == DEAD)
 		return
 
-	if(ismob(M))
-		var/mob/mob = M
-		mob.update_ambience_area(src)
+	L.update_ambience_area(src)
 
 	if(first_time_text)
 		L.intro_area(src)
@@ -365,7 +368,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	client.screen += T
 	T.maptext = MAPTEXT_BLACKMOOR("<span class='center' style='vertical-align:top; color: #820000;\
 		text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;'>[A.first_time_text]</span>")
-	T.maptext_width = 205
+	T.maptext_width = 230
 	T.maptext_height = 209
 	T.maptext_x = 12
 	T.maptext_y = 64
@@ -419,11 +422,11 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /**
  * Called when an atom exits an area
  *
- * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
+ * Sends signals COMSIG_AREA_EXITED and COMSIG_MOVABLE_EXITED_AREA (to the atom)
  */
-/area/Exited(atom/movable/M)
-	SEND_SIGNAL(src, COMSIG_AREA_EXITED, M)
-	SEND_SIGNAL(M, COMSIG_EXIT_AREA, src) //The atom that exits the area
+/area/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, direction)
+	SEND_SIGNAL(gone, COMSIG_MOVABLE_EXITED_AREA, src, direction)
 
 /**
  * Reset the played var to false on the client

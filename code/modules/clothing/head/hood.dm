@@ -10,7 +10,7 @@
 	connectedc = null
 	return ..()
 
-/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, params)
+/obj/item/clothing/head/hooded/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -45,8 +45,10 @@
 	var/default_hidden = null
 
 	body_parts_covered = NECK
+	var/hooded_body_parts_covered = HEAD_EXCEPT_FACE | NECK
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/cloth
+	item_weight = 90 GRAMS
 
 /obj/item/clothing/head/roguehood/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -89,7 +91,7 @@
 			if(toggle_icon_state)
 				icon_state = "[initial(icon_state)]_t"
 			flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
-			body_parts_covered = NECK|HAIR|EARS|HEAD
+			body_parts_covered = hooded_body_parts_covered
 			if(ishuman(user))
 				var/mob/living/carbon/H = user
 				H.update_inv_head()
@@ -102,6 +104,7 @@
 /obj/item/clothing/head/roguehood/ResetAdjust(mob/user)
 	. = ..()
 	flags_inv = default_hidden
+	body_parts_covered = initial(body_parts_covered)
 	if(iscarbon(user))
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
@@ -167,3 +170,34 @@
 /obj/item/clothing/head/roguehood/faceless
 	icon_state = "facelesshood" //Credit goes to Cre
 	color = CLOTHING_SOOT_BLACK
+
+/obj/item/clothing/head/roguehood/leather
+	name = "leather hood"
+	desc = "A simple if foreboding hood made out of leather. Worn by street thug and honest yeoman both. \
+	Protects from the eventual stabbing, but not much more."
+	icon_state = "leatherhood"
+	item_state = "leatherhood"
+	prevent_crits = MINOR_CRITICALS
+	armor = ARMOR_LEATHER
+	blocksound = SOFTUNDERHIT
+	item_weight = 145 GRAMS
+
+/obj/item/clothing/head/roguehood/leather/advanced
+	name = "hardened leather hood"
+	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
+	max_integrity = INTEGRITY_STRONG
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 70, "slash" = 60, "stab" = 35, "piercing" = 25, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/head/roguehood/leather/masterwork
+	name = "masterwork leather hood"
+	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
+	max_integrity = INTEGRITY_STRONG + 100
+	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 45, "piercing" = 15, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))

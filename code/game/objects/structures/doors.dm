@@ -49,7 +49,7 @@
 	// See repairable component in repairable.dm for what these variables do
 	var/list/repair_thresholds = list(/obj/item/grown/log/tree/small = 1)
 	var/obj/item/broken_repair = /obj/item/grown/log/tree/small
-	var/repair_skill = /datum/skill/craft/carpentry
+	var/repair_skill = /datum/attribute/skill/craft/carpentry
 	metalizer_result = /obj/structure/door/iron
 	/// Handle bolting on right click
 	var/has_bolt = FALSE
@@ -113,32 +113,32 @@
 	if(obj_broken || switching_states)
 		return
 	if(door_opened)
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] shut!"), \
 			span_notice("I kick [src] shut!"))
 		force_closed()
 		return
 	if(!locked())
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src] open!"), \
 			span_notice("I kick [src] open!"))
 		force_open(user)
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STASTR < initial(kickthresh))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) < initial(kickthresh))
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks [src]! It's not effective."), \
 			span_notice("I kick [src]! It's not effective."))
 			return
-		if((prob(L.STASTR * 0.5) || kickthresh-- == 0))
-			playsound(get_turf(src), pick(attacked_sound), 100)
+		if((prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 0.5) || kickthresh-- == 0))
+			playsound(src, pick(attacked_sound), 100)
 			user.visible_message(span_warning("[user] kicks open [src]!"), \
 				span_notice("I kick open [src]!"))
 			unlock()
 			force_open(user)
 			return
-		playsound(get_turf(src), pick(attacked_sound), 100)
+		playsound(src, pick(attacked_sound), 100)
 		user.visible_message(span_warning("[user] kicks [src]!"), \
 			span_notice("I kick [src]!"))
 
@@ -181,14 +181,14 @@
 		return FALSE
 	return ..()
 
-/obj/structure/door/attackby(obj/item/I, mob/user)
+/obj/structure/door/attackby(obj/item/I, mob/user, list/modifiers)
 	if(switching_states)
 		return
 	if(I.can_lock_interact())
 		return (..() || attack_hand(user))
 	return ..()
 
-/obj/structure/door/attack_hand_secondary(mob/user, params)
+/obj/structure/door/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -333,7 +333,7 @@
 /obj/structure/door/proc/Open(silent = FALSE, mob/user)
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), open_sound, 90)
+		playsound(src, open_sound, 90)
 	if(!windowed)
 		set_opacity(FALSE)
 	flick("[initial(icon_state)]opening",src)
@@ -368,7 +368,7 @@
 		return
 	switching_states = TRUE
 	if(!silent)
-		playsound(get_turf(src), close_sound, 90)
+		playsound(src, close_sound, 90)
 	if(!windowed)
 		set_opacity(TRUE)
 	flick("[initial(icon_state)]closing", src)
@@ -486,7 +486,7 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 	repair_thresholds = list(/obj/item/ingot/iron = 1)
 	broken_repair = /obj/item/ingot/iron
-	repair_skill = /datum/skill/craft/blacksmithing
+	repair_skill = /datum/attribute/skill/craft/blacksmithing
 	metalizer_result = null
 
 /obj/structure/door/iron/bars
@@ -512,7 +512,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 
@@ -532,7 +532,7 @@
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
 	broken_repair = /obj/item/natural/stone
-	repair_skill = /datum/skill/craft/masonry
+	repair_skill = /datum/attribute/skill/craft/masonry
 	smeltresult = null
 	metalizer_result = null
 

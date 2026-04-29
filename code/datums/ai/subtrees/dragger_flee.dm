@@ -18,8 +18,8 @@
 		if(length(possible_turfs))
 			var/turf/escape_turf = pick(possible_turfs)
 			new /obj/effect/temp_visual/dir_setting/wraith_phase_out(get_turf(dragger_pawn), dragger_pawn.dir)
-			playsound(get_turf(dragger_pawn), 'sound/magic/ethereal_exit.ogg', 50, TRUE)
+			playsound(dragger_pawn, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
 			dragger_pawn.forceMove(escape_turf)
 			new /obj/effect/temp_visual/dir_setting/wraith_phase_in(get_turf(dragger_pawn), dragger_pawn.dir)
-			playsound(get_turf(dragger_pawn), 'sound/magic/ethereal_enter.ogg', 50, TRUE)
+			playsound(dragger_pawn, 'sound/magic/ethereal_enter.ogg', 50, TRUE)
 			controller.blackboard[BB_DRAGGER_HUNTING_COOLDOWN] = world.time + 30 SECONDS

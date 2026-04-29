@@ -1,5 +1,5 @@
 /client/proc/play_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -20,7 +20,7 @@
 	admin_sound.status = SOUND_STREAM
 	admin_sound.volume = vol
 
-	var/res = alert(usr, "Show the title of this song to the players?",, "Yes","No", "Cancel")
+	var/res = tgui_alert(usr, "Show the title of this song to the players?","Show Name", list("Yes","No", "Cancel"))
 	switch(res)
 		if("Yes")
 			to_chat(world, "<span class='boldannounce'>An admin played: [S]</span>")
@@ -40,7 +40,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Global Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/change_music_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeMusicPower"
 
 	if(prefs)
@@ -69,7 +69,7 @@
 
 
 /client/verb/show_rolls()
-	set category = "Options"
+	set category = "Preferences.Options"
 	set name = "ShowRolls"
 
 	if(prefs)
@@ -81,7 +81,7 @@
 			to_chat(src, "ShowRolls Disabled")
 
 /client/verb/change_master_vol()
-	set category = "Options"
+	set category = "Preferences.Sound"
 	set name = "ChangeVolPower"
 
 	if(prefs)
@@ -96,18 +96,18 @@
 		mob.update_channel_volume(CHANNEL_AMBIENCE, prefs.mastervol)
 
 /client/proc/play_local_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUND))
 		return
 
 	log_admin("[key_name(src)] played a local sound [S]")
 	message_admins("[key_name_admin(src)] played a local sound [S]")
-	playsound(get_turf(src.mob), S, 50, FALSE, FALSE)
+	playsound(src.mob, S, 50, FALSE, FALSE)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Local Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/play_web_sound()
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Play Internet Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -152,7 +152,7 @@
 					music_extra_data["start"] = data["start_time"]
 					music_extra_data["end"] = data["end_time"]
 
-					var/res = alert(usr, "Show the title of and link to this song to the players?\n[title]",, "No", "Yes", "Cancel")
+					var/res = tgui_alert(usr, "Show the title of and link to this song to the players?\n[title]", "Show title", list("No", "Yes", "Cancel"))
 					switch(res)
 						if("Yes")
 							to_chat(world, "<span class='boldannounce'>An admin played: [webpage_url]</span>")
@@ -177,19 +177,20 @@
 			to_chat(src, "<span class='warning'>The media provider returned a content URL that isn't using the HTTP or HTTPS protocol</span>")
 			return
 		if(web_sound_url || stop_web_sounds)
-			for(var/m in GLOB.player_list)
-				var/mob/M = m
+			for(var/mob/M as anything in GLOB.player_list)
 				var/client/C = M.client
-				if((C.prefs.toggles & SOUND_MIDI) && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
+				if((C.prefs.toggles & SOUND_MIDI))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_LOBBYMUSIC))
+					SEND_SOUND(C, sound(null, channel = CHANNEL_ADMIN))
 					if(!stop_web_sounds)
-						C.chatOutput.sendMusic(web_sound_url, music_extra_data)
+						C.tgui_panel?.play_music(web_sound_url, music_extra_data)
 					else
-						C.chatOutput.stopMusic()
+						C.tgui_panel?.stop_music()
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
 
 /client/proc/set_round_end_sound(S as sound)
-	set category = "Fun"
+	set category = "GameMaster.Sound"
 	set name = "Set Round End Sound"
 	if(!check_rights(R_SOUND))
 		return
@@ -201,7 +202,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set Round End Sound") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/stop_sounds()
-	set category = "Debug"
+	set category = "GameMaster.Sound"
 	set name = "Stop All Playing Sounds"
 	if(!src.holder)
 		return
@@ -211,6 +212,5 @@
 	for(var/mob/M in GLOB.player_list)
 		SEND_SOUND(M, sound(null))
 		var/client/C = M.client
-		if(C && C.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
-			C.chatOutput.stopMusic()
+		C.tgui_panel?.stop_music()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop All Playing Sounds") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

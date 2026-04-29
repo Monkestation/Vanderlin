@@ -76,12 +76,12 @@
 ///setter used to set our new hud
 /atom/movable/screen/proc/set_new_hud(datum/hud/hud_owner)
 	if(hud)
-		UnregisterSignal(hud, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(hud, COMSIG_QDELETING)
 	if(isnull(hud_owner))
 		hud = null
 		return
 	hud = hud_owner
-	RegisterSignal(hud, COMSIG_PARENT_QDELETING, PROC_REF(on_hud_delete))
+	RegisterSignal(hud, COMSIG_QDELETING, PROC_REF(on_hud_delete))
 
 /atom/movable/screen/proc/on_hud_delete(datum/source)
 	SIGNAL_HANDLER
@@ -123,7 +123,7 @@
 
 	if(!mob.fixedeye) //If fixedeye isn't already enabled, we need to set this var
 		mob.tempfixeye = TRUE //Change icon to 'target' red eye
-		mob.atom_flags |= NO_DIR_CHANGE_ON_MOVE
+		mob.face_mouse = TRUE
 
 	for(var/atom/movable/screen/eye_intent/eyet in mob.hud_used.static_inventory)
 		eyet.update_appearance(UPDATE_ICON)
@@ -176,13 +176,6 @@
 			else
 				mouse_pointer_icon = 'icons/effects/mousemice/human_attack.dmi'
 
-/mob
-	var/obj/effect/spell_rune/spell_rune
-	var/datum/intent/curplaying
-	var/accent = ACCENT_DEFAULT
-	var/cmode_timer
-	var/monitor_key
-
 /client/MouseUp(object, location, control, params)
 	if(!control)
 		return
@@ -207,7 +200,7 @@
 
 	if(!mob.fixedeye)
 		mob.tempfixeye = FALSE
-		mob.atom_flags &= ~NO_DIR_CHANGE_ON_MOVE
+		mob.face_mouse = FALSE
 
 	if(mob.hud_used)
 		for(var/atom/movable/screen/eye_intent/eyet in mob.hud_used.static_inventory)

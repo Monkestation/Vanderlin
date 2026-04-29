@@ -222,7 +222,7 @@
 "yc" = (
 /obj/machinery/light/fueled/chand,
 /obj/item/clothing/ring/silver,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "ye" = (
 /obj/structure/fluff/railing/border{
@@ -231,7 +231,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "yH" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "AX" = (
 /turf/closed/wall/mineral/decowood/vert,
@@ -287,7 +287,7 @@
 	},
 /area/under/tomb)
 "Ft" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "GU" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -482,7 +482,7 @@
 /area/under/tomb/indoors)
 "Zt" = (
 /obj/machinery/light/fueled/chand,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors)
 "Zv" = (
 /obj/effect/dungeon_directional_helper/south,

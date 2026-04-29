@@ -12,7 +12,7 @@
 
 /obj/item/clothing/climbing_gear/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
-	playsound(loc, 'sound/items/garrotegrab.ogg', 100, TRUE)
+	playsound(src, 'sound/items/garrotegrab.ogg', 100, TRUE)
 
 /obj/item/clothing/wall_grab
 	name = "wall"
@@ -33,6 +33,6 @@
 	var/turf/openspace = user.loc
 	openspace.zFall(user) // slop?
 
-/obj/item/clothing/wall_grab/intercept_zImpact(atom/movable/AM, levels = 1) // with this shit it doesn't generate "X falls through open space". thank u guppyluxx
+/obj/item/clothing/wall_grab/intercept_zImpact(list/falling_movables, levels = 1) // with this shit it doesn't generate "X falls through open space". thank u guppyluxx
     . = ..()
     . |= FALL_NO_MESSAGE

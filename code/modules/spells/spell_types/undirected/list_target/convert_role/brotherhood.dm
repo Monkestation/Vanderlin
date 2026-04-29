@@ -8,7 +8,7 @@
 	accept_message = "All for one and one for all!"
 	refuse_message = "I refuse."
 
-/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/on_conversion(mob/living/cast_on)
+/datum/action/cooldown/spell/undirected/list_target/convert_role/brotherhood/on_conversion(mob/living/cast_on)
 	. = ..()
 	if(cast_on.gender == FEMALE)
 		new_role = "Sister"

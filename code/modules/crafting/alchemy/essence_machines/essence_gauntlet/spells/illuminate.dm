@@ -10,7 +10,7 @@
 /datum/action/cooldown/spell/essence/illuminate/cast(atom/cast_on)
 	. = ..()
 	owner.visible_message(span_notice("[owner] creates a small orb of light."))
-	//playsound(get_turf(owner), 'sound/magic/staff_healing.ogg', 30, TRUE)
+	//playsound(owner, 'sound/magic/staff_healing.ogg', 30, TRUE)
 
 	// Create temporary light
 	var/obj/effect/temp_visual/light_orb/orb = new(get_turf(owner))

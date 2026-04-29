@@ -40,7 +40,7 @@
 	if(!direction)
 		return
 	var/turf/T = get_step(src, direction)
-	if(istype(T, /turf/open/transparent/openspace))
+	if(istype(T, /turf/open/openspace))
 		return
 	if(world.time < can_move)
 		return
@@ -56,7 +56,7 @@
 	animate(pixel_y = old_y - 3, transform = T2, time = 1)
 	animate(pixel_y = old_y, transform = null, time = 1)
 
-	step(src, direction)
+	try_step_multiz(direction)
 	return 1
 
 /obj/effect/dummy/bush_disguise/proc/on_attacked(atom/attacker, damage)

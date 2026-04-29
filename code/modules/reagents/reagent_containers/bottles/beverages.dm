@@ -6,55 +6,55 @@
 /obj/item/reagent_containers/glass/bottle/beer
 	name = "bottle of beer"
 	desc = "A bottle that contains a generic housebrewed small-beer. It has an improvised cork-seal made of hardened clay."
-	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 75)
 	fancy = TRUE
 	auto_label = TRUE
 
 /obj/item/reagent_containers/glass/bottle/beer/spottedhen
 	desc = "A bottle with the spotted-hen cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/spottedhen = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/spottedhen = 75)
 	auto_label_name = "spotted hen"
 	auto_label_desc = "An extremely cheap lager hailing from a local brewery."
 
 /obj/item/reagent_containers/glass/bottle/beer/blackgoat
 	desc = "A bottle with the black goat kriek cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/blackgoat = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/blackgoat = 75)
 	auto_label_name = "black goat"
 	auto_label_desc = "A fruit-sour beer brewed with jacksberries for a tangy taste."
 
 /obj/item/reagent_containers/glass/bottle/beer/ratkept
 	desc = "A bottle with surprisingly no cork-seal. On the glass is carved the word \"ONI-N\", the 'O' seems to have been scratched out completely. Dubious."
-	list_reagents = list(/datum/reagent/consumable/ethanol/onion = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/onion = 75)
 	auto_label_name = "\"ONI-N\""
 	auto_label_desc = "The parchment depicts an illustration; rats guarding a cellar filled with bottles, against a hoard of beggars."
 
 /obj/item/reagent_containers/glass/bottle/beer/hagwoodbitter
 	desc = "A bottle with the hagwood bitters cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/hagwoodbitter = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/hagwoodbitter = 75)
 	auto_label_name = "hagwood bitters"
-	auto_label_desc = "The least bitter thing to be exported from the Grenzelhoft occupied state of Zorn."
+	auto_label_desc = "Allegedly the least bitter thing to be exported from Grenzelhoft."
 
 /obj/item/reagent_containers/glass/bottle/beer/aurorian
 	desc = "A bottle with the aurorian brewhouse cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/aurorian = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/aurorian = 75)
 	auto_label_name = "the aurorian"
 	auto_label_desc = "An Elvish beer brewed from an herbal gruit."
 
 /obj/item/reagent_containers/glass/bottle/beer/fireleaf
 	desc = "A bottle with a generic leaf cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/fireleaf= 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/fireleaf= 75)
 	auto_label_name = "fireleaf"
 	auto_label_desc = "An Elvish beer formed by distilling cabbages."
 
 /obj/item/reagent_containers/glass/bottle/beer/butterhairs
 	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/butterhairs = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/butterhairs = 75)
 	auto_label_name = "butter hairs"
 	auto_label_desc = "This beer is widely considered one of the greatest exported by the Dwarves."
 
 /obj/item/reagent_containers/glass/bottle/beer/stonebeardreserve
 	desc = "A bottle with the House Stoutenson cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/stonebeards = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/stonebeards = 75)
 	auto_label_name = "stonebeard's reserve"
 	auto_label_desc = "Stonebeards Reserve is one of the most legendary beers in existence, with only a few hundred barrels made every year."
 
@@ -68,37 +68,37 @@
 /obj/item/reagent_containers/glass/bottle/wine
 	name = "bottle of wine"
 	desc = "A bottle that contains a generic red-wine, likely from Zaladin. It has a red-clay cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/wine = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/wine = 75)
 	fancy = TRUE
 	auto_label = TRUE
 
 /obj/item/reagent_containers/glass/bottle/wine/sourwine
 	desc = "A bottle with a black ink cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/sourwine = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/sourwine = 75)
 	auto_label_name = "black eagle sour"
 	auto_label_desc = "A Grenzelhoft classic, extremely sour wine that is watered down with mineral water."
 
 /obj/item/reagent_containers/glass/bottle/redwine
 	desc = "A bottle with the Valorian Merchant Guild cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/redwine = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/redwine = 75)
 	auto_label_name = "young valorian red"
-	auto_label_desc = "This one appears to be labelled as a relatively young red-wine from the coinlord state."
+	auto_label_desc = "This one appears to be labelled as a relatively young red-wine from the Valorian city-states."
 
 /obj/item/reagent_containers/glass/bottle/whitewine
 	desc = "A bottle with the Valorian Merchant Guild cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/whitewine = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/whitewine = 75)
 	auto_label_name = "sweet valorian white"
 	auto_label_desc = "This one appears to be labelled as a sweet wine from the colder northern regions."
 
 /obj/item/reagent_containers/glass/bottle/elfred
 	desc = "A bottle gilded with a silver cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/elfred = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/elfred = 75)
 	auto_label_name = "valorian red"
 	auto_label_desc = "An Elvish red wine from Valoria. Likely worth more than what an entire village makes!"
 
 /obj/item/reagent_containers/glass/bottle/elfblue
 	desc = "A bottle gilded with a golden cork-seal."
-	list_reagents = list(/datum/reagent/consumable/ethanol/elfblue = 70)
+	list_reagents = list(/datum/reagent/consumable/ethanol/elfblue = 75)
 	auto_label_name = "valmora blue"
 	auto_label_desc = "This is the legendary Valmora Blue from the Vineyard of Valmora, headed by a sainted Dark-Elf swordsmaster. This bottle would swoon Gods over!"
 
@@ -120,22 +120,22 @@
 	auto_label_desc = "A cider from the Grenzelhoftian town of Apfelweinheim. Well received for its addition of pear, alongside crisp apples."
 
 /obj/item/reagent_containers/glass/bottle/rtoper
-	desc = "A bottle with the Lirvas-crest cork-seal."
+	desc = "A bottle with a regenwald-crest cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/rtoper = 48)
-	auto_label_name = "larvas cider"
-	auto_label_desc = "An especially tart cider from the petty kingdom of Lirvas. Rumor has it the brewers let the barrels age in the bog, which results in that especially strong flavour."
+	auto_label_name = "deshret cider"
+	auto_label_desc = "An especially tart cider from the Grenzelhoftian regenwald. Rumor has it the brewers let the barrels age in the bog, which results in that especially strong flavour."
 
 /obj/item/reagent_containers/glass/bottle/nred
-	desc = "A bottle with the City of Norwandine cork-seal."
+	desc = "A bottle with the Aurum Clan cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/nred = 48)
 	auto_label_name = "molten gold"
-	auto_label_desc = "A red ale brewed to perfection in the lands of Hammerhold."
+	auto_label_desc = "A red ale brewed to perfection in the lands of the aurum dwarves."
 
 /obj/item/reagent_containers/glass/bottle/gronnmead
-	desc = "A bottle with a Shieldmaiden Brewery cork-seal."
+	desc = "A bottle with a Huntsmen Brewery cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/gronnmead = 48)
-	auto_label_name = "gronn mead"
-	auto_label_desc = "A deep red honey-wine, refined with the red berries native to Gronns highlands."
+	auto_label_name = "ossland mead"
+	auto_label_desc = "A deep red honey-wine, refined with the red berries native to Ossland's highlands."
 
 /obj/item/reagent_containers/glass/bottle/avarmead
 	desc = "A bottle with a simple cork-seal."
@@ -158,26 +158,26 @@
 /obj/item/reagent_containers/glass/bottle/kgunlager
 	desc = "A bottle with a Yamaguchi Brewery cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunlager = 48)
-	auto_label_name = "kazengun lager"
-	auto_label_desc = "A pale lager brewed in the far-away lands of Kazengun, refined with green tea for an unique flavour-profile. Even lighter than elven-brew!"
+	auto_label_name = "tea lager"
+	auto_label_desc = "A pale lager brewed in the far-away lands, refined with green tea for an unique flavour-profile. Even lighter than elven-brew!"
 
 /obj/item/reagent_containers/glass/bottle/kgunsake
 	desc = "A bottle with a Golden Swan cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunsake = 48)
-	auto_label_name = "kazengun sake"
-	auto_label_desc = "A translucent, pale-blue liquid made from rice. A favourite drink of the warlords and nobles of Kazengun."
+	auto_label_name = "sake"
+	auto_label_desc = "A translucent, pale-blue liquid made from rice. A favourite drink of the warlords and nobles in far off lands."
 
 /obj/item/reagent_containers/glass/bottle/kgunplum
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunplum = 48)
 	desc = "A bottle with a Golden Swan cork-seal."
-	auto_label_name = "kazengun fruit brandy"
-	auto_label_desc = "A reddish-golden alcohol made from a fruit commonly found on the Kazengun-isles. A favourite of the commoners."
+	auto_label_name = "fruit brandy"
+	auto_label_desc = "A reddish-golden alcohol made from a fruit commonly found in distant lands. A favourite of the commoners."
 
 /obj/item/reagent_containers/glass/bottle/kgunshochu
 	desc = "A bottle with a Golden Swan cork-seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/kgunshochu = 48)
-	auto_label_name = "kazengun shochu"
-	auto_label_desc = "A clean alcohol made by distilling rice. With a dry and clean finish. Popular amongst the warrior caste of Kazengun."
+	auto_label_name = "shochu"
+	auto_label_desc = "A clean alcohol made by distilling rice. With a dry and clean finish. Popular amongst the warrior castes in far off countries."
 
 // Zhongese Drinks
 /obj/item/reagent_containers/glass/bottle/black/huangjiu
@@ -196,13 +196,13 @@
 	desc = "A bottle with a red seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/yaojiu = 48)
 	auto_label_name = "yaojiu"
-	auto_label_desc = "A strong, sweet rice wine infused with medicinal herbs, including Ginseng. Often prescribed as a medicine on the Zhongese mainland."
+	auto_label_desc = "A strong, sweet rice wine infused with medicinal herbs, including Ginseng. Often prescribed as a medicine in remote regions."
 
 /obj/item/reagent_containers/glass/bottle/black/shejiu
 	desc = "A bottle with a red seal."
 	list_reagents = list(/datum/reagent/consumable/ethanol/shejiu = 48)
 	auto_label_name = "shejiu"
-	auto_label_desc = "A strong rice wine with a dead snake inside. In the land of Zhong, It is believed that drinking this will improve one's virility and blood circulation."
+	auto_label_desc = "A strong rice wine with a dead snake inside. It is believed that drinking this will improve one's virility and blood circulation."
 
 /obj/item/reagent_containers/glass/bottle/black/murkwine
 	desc = "A bottle with a Possumtail Brewery mark."
@@ -226,4 +226,4 @@
 	desc = "A dusty, ancient bottle with a red-ochre coloring."
 	list_reagents = list(/datum/reagent/consumable/ethanol/komuchisake = 48)
 	auto_label_name = "komuchisake"
-	auto_label_desc = "It bears an intricately detailed golden skull seal, and the markings on it are clearly of the Shogunate. It looks to be filled with herbs inside."
+	auto_label_desc = "It bears an intricately detailed golden skull seal. It looks to be filled with herbs inside."

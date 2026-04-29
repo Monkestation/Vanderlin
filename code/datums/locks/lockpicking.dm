@@ -25,7 +25,7 @@
 		to_chat(src, span_notice("I need a wedge in order to lockpick \the [P]."))
 		return FALSE
 
-	client.spawn_lockpicking_UI(P, src, L, the_wedge, difficulty, KL.get_string_difficulty(), get_skill_level(/datum/skill/misc/lockpicking))
+	client.spawn_lockpicking_UI(P, src, L, the_wedge, difficulty, KL.get_string_difficulty(), GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/lockpicking))
 	visible_message(span_warning("[src] starts to pick the lock of \the [P]!"), span_notice("I start to pick the lock of \the [P]..."))
 	return TRUE
 
@@ -37,7 +37,7 @@
 	var/break_prob = clamp(60 - (skill_level * 10) + (6 - difficulty * 10), 0, 100)
 	if(prob(break_prob))
 		to_chat(user, span_notice("My \the [lockpick_used] broke!"))
-		playsound(loc, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+		playsound(src, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 		qdel(lockpick_used)
 
 	if(user.client?.prefs.showrolls)
@@ -47,11 +47,11 @@
 		lock.locked = FALSE
 		lock.tampered = TRUE
 
-	playsound(loc, 'sound/items/LPWin.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+	playsound(src, 'sound/items/LPWin.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 
-	var/amt2raise = (user.STAINT / 2) * (20 / difficulty)
-	var/boon = user.get_learning_boon(/datum/skill/misc/lockpicking)
-	user.adjust_experience(/datum/skill/misc/lockpicking, amt2raise * boon)
+	var/amt2raise = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) / 2) * (20 / difficulty)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/misc/lockpicking)
+	user.adjust_experience(/datum/attribute/skill/misc/lockpicking, amt2raise * boon)
 	return TRUE
 
 /obj/proc/finish_lockpicking(mob/living/user)
@@ -166,7 +166,7 @@
 	linked_lock.icon_state = "lock"
 	linked_lock.plane = FLOAT_PLANE
 	linked_lock.layer = 2
-	linked_lock.mouse_opacity = 0
+	linked_lock.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	vis_contents += linked_lock
 
 	linked_wedge = new(src)
@@ -212,7 +212,7 @@
 	RegisterSignal(clicker, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
 	RegisterSignal(clicker, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 	RegisterSignal(picker, COMSIG_MOVABLE_MOVED, PROC_REF(close_lockpick))
-	RegisterSignal(picker, COMSIG_PARENT_EXAMINE, PROC_REF(mob_detection))
+	RegisterSignal(picker, COMSIG_ATOM_EXAMINE, PROC_REF(mob_detection))
 
 	//checks both for each just incase they switch hands for no reason mid lockpick
 	var/obj/item/held_lockmain = picker.get_active_held_item()
@@ -312,21 +312,21 @@
 			var/break_prob = clamp(10 - skill_level + (6 - difficulty) * 2, 0, 100)
 			if(prob(break_prob))
 				to_chat(picker, span_notice("My \the [the_lockpick] broke!"))
-				playsound(loc, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+				playsound(src, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 				qdel(the_lockpick)
 				//one tenth of the usual boost for picking a lock
 				if(isliving(picker))
 					var/mob/living/picker_real = picker
-					var/amt2raise = ((picker_real.STAINT / 2) * (20 / difficulty)) / 10
-					var/boon = picker_real.get_learning_boon(/datum/skill/misc/lockpicking)
-					picker_real.adjust_experience(/datum/skill/misc/lockpicking, amt2raise * boon)
+					var/amt2raise = ((GET_MOB_ATTRIBUTE_VALUE(picker_real, STAT_INTELLIGENCE) / 2) * (20 / difficulty)) / 10
+					var/boon = picker_real.get_learning_boon(/datum/attribute/skill/misc/lockpicking)
+					picker_real.adjust_experience(/datum/attribute/skill/misc/lockpicking, amt2raise * boon)
 			if(picker.client?.prefs.showrolls)
 				to_chat(picker, span_notice("The chance to break was [break_prob]%!"))
 			break_checking_cooldown = world.time + (9 - (7 - difficulty)) SECONDS
 			//break check cooldown at highest difficulty is 3 seconds, at lowest its 8
 
 		lock_angle -= 20
-		playsound(picker.loc, pick('sound/items/LPtry.ogg', 'sound/items/LPtry2.ogg'), min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+		playsound(picker, pick('sound/items/LPtry.ogg', 'sound/items/LPtry2.ogg'), min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 	if(lock_angle >= 1 && !failing && !playing_lock_sound)
 		play_turn_sound()
 		playing_lock_sound = TRUE
@@ -346,7 +346,7 @@
 	return TRUE
 
 /atom/movable/screen/movable/snap/lockpicking/proc/play_turn_sound(timerd)
-	//playsound(picker.loc, pick('sound/items/LPTurn1.ogg', 'sound/items/LPTurn2.ogg'), (100 - (15 * skill_level)) * 0.5)
+	//playsound(picker, pick('sound/items/LPTurn1.ogg', 'sound/items/LPTurn2.ogg'), (100 - (15 * skill_level)) * 0.5)
 	addtimer(CALLBACK(src, PROC_REF(turn_sound_reset)), 0.7 SECONDS) //stops the spam
 
 /atom/movable/screen/movable/snap/lockpicking/proc/turn_sound_reset()

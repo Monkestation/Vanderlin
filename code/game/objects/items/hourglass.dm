@@ -3,6 +3,7 @@
 /obj/item/hourglass
 	name = "hourglass"
 	desc = ""
+	item_weight = 300 GRAMS
 	var/obj/effect/countdown/hourglass/countdown
 	var/time = 1 MINUTES
 	var/finish_time //So countdown doesn't need to fiddle with timers
@@ -15,18 +16,20 @@
 	. = ..()
 	countdown = new(src)
 
-/obj/item/hourglass/attack_self(mob/user, params)
+/obj/item/hourglass/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(hand_activated)
 		toggle(user)
 
 /obj/item/hourglass/proc/toggle(mob/user)
+	if(!countdown)
+		countdown = new(src)
 	if(!timing_id)
-		to_chat(user,"<span class='notice'>I flip the [src].</span>")
+		to_chat(user, span_notice("I flip \the [src]."))
 		start()
 		flick("hourglass_flip",src)
 	else
-		to_chat(user,"<span class='notice'>I stop the [src].</span>") //Sand magically flows back because that's more convinient to use.
+		to_chat(user, span_notice("I stop \the [src].")) //Sand magically flows back because that's more convinient to use.
 		stop()
 
 /obj/item/hourglass/update_icon_state()

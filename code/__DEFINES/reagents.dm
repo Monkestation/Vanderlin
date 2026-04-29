@@ -25,11 +25,18 @@
 /// You can transfer reagents to and from with a syringe
 #define SYRINGE_TRANSFER (INJECTABLE | DRAWABLE)
 
-#define TOUCH			1	// splashing
-#define INGEST			2	// ingestion
-#define VAPOR			3	// foam, spray, blob attack
-#define PATCH			4	// patches
-#define INJECT			5	// injection
+/// Used for splashing.
+#define TOUCH (1<<0)
+/// Used for ingesting the reagents. Food, drinks, inhaling smoke.
+#define INGEST (1<<1)
+/// Used by foams, sprays, and blob attacks.
+#define VAPOR (1<<2)
+/// Used by medical patches and gels.
+#define PATCH (1<<3)
+/// Used for direct injection of reagents.
+#define INJECT (1<<4)
+/// Used for direct snorting of reagents
+#define SNORT (1<<5)
 
 
 //defines passed through to the on_reagent_change proc

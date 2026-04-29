@@ -1,7 +1,3 @@
-// ===============================
-// GNOME HOMUNCULUS MOB
-// ===============================
-
 /mob/living/simple_animal/hostile/gnome_homunculus
 	name = "gnome homunculus"
 	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy, and it seems eager to help with menial tasks."
@@ -11,6 +7,8 @@
 	icon_dead = "gnome_dead"
 
 	pass_flags = PASSMOB
+
+	animal_type = /datum/blood_type/putrid
 
 	maxHealth = 50
 	health = 50
@@ -188,7 +186,7 @@
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_EMOTION_STORE, throwingdatum?.thrower, EMOTION_SCARED, "[throwingdatum.thrower] throw thing at me!", 0)
 
-/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, params)
+/mob/living/simple_animal/hostile/gnome_homunculus/attackby(obj/item/item, mob/living/user, list/modifiers)
 	// Check what kind of item interaction this is
 	if(istype(item, /obj/item/reagent_containers/food))
 		handle_food_gift(item, user)

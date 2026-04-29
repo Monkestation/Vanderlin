@@ -23,12 +23,14 @@
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 1)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 2,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 						/obj/item/natural/hide = 2,
 						/obj/item/natural/fur/volf = 3,
 						/obj/item/alch/sinew = 2,
 						/obj/item/alch/bone = 2)
 	head_butcher = /obj/item/natural/head/volf
 
+	indexed = TRUE
 	health = VOLF_HEALTH
 	maxHealth = VOLF_HEALTH
 	food_type = list(/obj/item/reagent_containers/food/snacks/meat,
@@ -89,6 +91,11 @@
 	AddComponent(/datum/component/ai_aggro_system)
 	AddElement(/datum/element/ai_flee_while_injured, 0.75, retreat_health)
 
+	var/color = pick("brown", "black", "white")
+	icon_state = "volf_[color]"
+	icon_living = "volf_[color]"
+	icon_dead = "volf_[color]_dead"
+
 	gender = MALE
 	if(prob(33))
 		gender = FEMALE
@@ -103,7 +110,7 @@
 	. = ..()
 	if(stat == DEAD)
 		return
-	. += emissive_appearance(icon, "vve")
+	. += emissive_appearance(icon, "volf_eyes")
 
 /mob/living/simple_animal/hostile/retaliate/wolf/get_sound(input)
 	switch(input)
@@ -123,43 +130,4 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/wolf/simple_limb_hit(zone)
-	if(!zone)
-		return ""
-	switch(zone)
-		if(BODY_ZONE_PRECISE_R_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_L_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_NOSE)
-			return "nose"
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return "mouth"
-		if(BODY_ZONE_PRECISE_SKULL)
-			return "head"
-		if(BODY_ZONE_PRECISE_EARS)
-			return "head"
-		if(BODY_ZONE_PRECISE_NECK)
-			return "neck"
-		if(BODY_ZONE_PRECISE_L_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_R_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_STOMACH)
-			return "stomach"
-		if(BODY_ZONE_PRECISE_GROIN)
-			return "tail"
-		if(BODY_ZONE_HEAD)
-			return "head"
-		if(BODY_ZONE_R_LEG)
-			return "leg"
-		if(BODY_ZONE_L_LEG)
-			return "leg"
-		if(BODY_ZONE_R_ARM)
-			return "foreleg"
-		if(BODY_ZONE_L_ARM)
-			return "foreleg"
 	return ..()

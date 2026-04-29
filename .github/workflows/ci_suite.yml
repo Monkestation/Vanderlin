@@ -3,10 +3,10 @@ name: BYOND Build
 on:
   pull_request:
     branches:
-    - main
+      - main
   merge_group:
     branches:
-    - main
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -35,13 +35,8 @@ jobs:
           key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
           restore-keys: |
             ${{ runner.os }}-spacemandmm-
-      - name: Restore Node cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.nvm
-          key: ${{ runner.os }}-node-${{ hashFiles('dependencies.sh') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Setup Bun
+        uses: ./.github/actions/setup_bun
       - name: Restore Bootstrap cache
         uses: actions/cache@v4
         with:
@@ -71,10 +66,13 @@ jobs:
           tools/bootstrap/python -c ''
       - name: Give Linters A Go
         id: linter-setup
-        run: ':'
+        run: ":"
       - name: Run Grep Checks
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: bash tools/ci/check_grep.sh
+      - name: Check unescaped brackets
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: tools/bootstrap/python tools/catch_unescaped_brackets.py
       - name: Ticked File Enforcement
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: |
@@ -111,23 +109,10 @@ jobs:
 
   compile_all_maps:
     name: Compile Maps
-    runs-on: ubuntu-22.04
     needs: collect_data
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Restore BYOND from cache
-        uses: ./.github/actions/restore_or_install_byond
-      - name: Compile All Maps
-        run: |
-          source $HOME/BYOND/byond/bin/byondsetup
-          python3 tools/ci/template_dm_generator.py
-          DreamMaker -DCIBUILDING -DCITESTING -DALL_MAPS vanderlin.dme
-      - name: Check client Compatibility
-        uses: tgstation/byond-client-compatibility-check@v3
-        with:
-          dmb-location: vanderlin.dmb
-          max-required-client-version: ${{needs.collect_data.outputs.max_required_byond_client}}
+    uses: ./.github/workflows/compile_all_maps.yml
+    with:
+      max_required_byond_client: ${{ needs.collect_data.outputs.max_required_byond_client }}
 
   collect_data:
     name: Collect data and setup caches for other tasks
@@ -141,10 +126,17 @@ jobs:
       - name: Find Maps
         id: map_finder
         run: |
-          echo "$(ls -mw0 _maps/*.json)" > maps_output.txt
-          sed -i -e s+_maps/+\"+g -e s+.json+\"+g maps_output.txt
-          echo "Maps: $(cat maps_output.txt)"
-          echo "maps={\"paths\":[$(cat maps_output.txt)]}" >> $GITHUB_OUTPUT
+          > maps_output.txt
+          for file in _maps/*.json; do
+            if ! jq -e '.exclude_from_ci == true' "$file" >/dev/null 2>&1; then
+              echo "\"$(basename "$file" .json)\"" >> maps_output.txt
+            else
+              echo "Excluded: $file"
+            fi
+          done
+          map_list=$(paste -sd, maps_output.txt)
+          echo "Maps: $map_list"
+          echo "maps={\"paths\":[$map_list]}" >> "$GITHUB_OUTPUT"
       - name: Collect byond client version configuration
         id: max_required_byond_client
         #the regex here does not filter out non-numbers because error messages about no input are less helpful then error messages about bad input (which includes the bad input)
@@ -179,7 +171,7 @@ jobs:
       - name: Compile and run tests
         run: |
           source $HOME/BYOND/byond/bin/byondsetup
-          DreamMaker -DCIBUILDING vanderlin.dme
+          tools/build/build.sh --ci dm -DCIBUILDING -I"loop_checks"
           bash tools/ci/run_server.sh ${{ matrix.map }}
       - name: Check client Compatibility
         uses: tgstation/byond-client-compatibility-check@v3

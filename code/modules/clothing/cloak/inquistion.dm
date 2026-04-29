@@ -40,7 +40,7 @@
 			flags_inv =HIDEBOOB
 			open_wear = FALSE
 			to_chat(usr, span_warning("Now wearing normally!"))
-	update_icon()
+
 	if(user)
 		if(ishuman(user))
 			var/mob/living/carbon/H = user

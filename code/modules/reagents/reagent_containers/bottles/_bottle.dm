@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
+GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"
@@ -7,7 +7,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_bottle1"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5,10)
-	volume = 70
+	volume = 75
 	fill_icon_thresholds = list(0, 10, 25, 50, 75, 100)
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/paper/scroll))
 		if(reagents?.total_volume)
 			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
@@ -79,16 +79,17 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(closed)
 		. += "[icon_state]cork"
 
-/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	toggle_cork(user)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user)
+/obj/item/reagent_containers/glass/bottle/proc/toggle_cork(mob/user, modify_nextmove = TRUE)
 	closed = !closed
-	user.changeNext_move(CLICK_CD_RAPID)
+	if(modify_nextmove)
+		user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
@@ -100,7 +101,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		balloon_alert(user, "I thumb off the cork.")
 		spillable = TRUE
 		GLOB.weather_act_upon_list |= src
@@ -154,8 +155,8 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	list_reagents = list(/datum/reagent/toxin/acid = 30)
 
 /obj/item/reagent_containers/glass/bottle/welding_fuel
-	name = "naphta bottle"
-	list_reagents = list(/datum/reagent/fuel = 30)
+	name = "oil bottle"
+	list_reagents = list(/datum/reagent/blood/fuel = 30)
 
 // message in a bootl
 
@@ -174,11 +175,11 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	contained = pp
 	pp.info = pick(GLOB.wisdoms)
 
-/obj/item/bottlemessage/attack_self_secondary(mob/user, params)
+/obj/item/bottlemessage/attack_self_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+	playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 	if(!contained)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	var/obj/item/reagent_containers/glass/bottle/btle = new
@@ -199,7 +200,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_vial1"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5)
-	volume = 30
+	volume = 25
 	fill_icon_thresholds = list(0, 10, 25, 50, 75, 100)
 	dropshrink = 0.8
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_MOUTH
@@ -220,7 +221,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	icon_state = "clear_vial1"
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, params)
+/obj/item/reagent_containers/glass/bottle/vial/attack_self_secondary(mob/user, list/modifiers)
 	closed = !closed
 	user.changeNext_move(CLICK_CD_RAPID)
 	if(closed)
@@ -233,7 +234,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		balloon_alert(user, "I thumb off the cork.")
-		playsound(user.loc,'sound/items/uncork.ogg', 100, TRUE)
+		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		desc = "An open vial, easy to drink quickly."
 		spillable = TRUE
 	update_appearance(UPDATE_OVERLAYS)
@@ -250,3 +251,7 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	. = ..()
 	icon_state = "blackbottle"
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/reagent_containers/glass/bottle/black/cheese_soup
+	name = "pot of cheese soup"
+	list_reagents = list(/datum/reagent/consumable/soup/cheese = 75)

@@ -25,8 +25,8 @@
 	spawned.name = "goblin"
 	spawned.real_name = "goblin"
 
-	if(spawned.charflaw)
-		QDEL_NULL(spawned.charflaw)
+	if(length(spawned.quirks))
+		spawned.clear_quirks()
 
 	spawned.remove_all_languages()
 	spawned.grant_language(/datum/language/hellspeak)

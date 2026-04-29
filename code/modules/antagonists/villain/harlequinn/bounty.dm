@@ -12,7 +12,7 @@
 	var/last_harlequin_spawn = 0
 	COOLDOWN_DECLARE(bounty_marker)
 
-/obj/structure/bounty_board/attack_hand_secondary(mob/user, params)
+/obj/structure/bounty_board/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -72,13 +72,7 @@
 		if(50 to INFINITY)
 			return "Legendary"
 
-/obj/structure/bounty_board/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
-	ui_interact(user)
-
-/obj/structure/bounty_board/ui_interact(mob/user)
+/obj/structure/bounty_board/interact(mob/user)
 	var/html = get_bounty_board_html(user)
 	user << browse(html, "window=bounty_board;size=900x700;titlebar=1;can_minimize=1;can_resize=1")
 	onclose(user, "bounty_board")
@@ -1144,7 +1138,7 @@
 	if(selected_target)
 		selected_target.mark_as_used()
 		to_chat(user, span_notice("Target: [selected_target.target_name] has been assigned to this contract."))
-	ui_interact(user)
+	interact(user)
 
 /// This proc should be called when significant actions happen (death, theft, etc.) basically this is the check completion proc
 /obj/structure/bounty_board/proc/check_target_action(mob/actor, mob/target, action_type)
@@ -1255,7 +1249,7 @@
 		spawn_contraband_for_contract(contract, user)
 
 	to_chat(user, span_notice("Contract accepted! Good hunting."))
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/get_required_reputation(contract_type)
 	switch(contract_type)
@@ -1290,7 +1284,7 @@
 	contract.complete_contract(src)
 	modify_reputation(user, 5) // Gain reputation for completing contracts
 	to_chat(user, span_notice("Contract completed!"))
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/request_contract_verification(mob/user, contract_id)
 	var/datum/bounty_contract/contract = find_contract_by_id(contract_id)
@@ -1310,7 +1304,7 @@
 			to_chat(M, span_notice("Contract verification requested for '[contract.target_name]'. Check the bounty board to verify."))
 			break
 
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/verify_contract_completion(mob/user, contract_id, success)
 	var/datum/bounty_contract/contract = find_contract_by_id(contract_id)
@@ -1344,7 +1338,7 @@
 				break
 		to_chat(user, span_notice("Contract marked as failed."))
 
-	ui_interact(user)
+	interact(user)
 
 /obj/structure/bounty_board/proc/find_contract_by_id(contract_id)
 	for(var/datum/bounty_contract/contract in active_contracts)
@@ -1788,7 +1782,7 @@
 	var/list/marked_targets = list()
 	var/max_targets = 5 // Maximum number of targets that can be marked
 
-/obj/item/bounty_marker/attack_self(mob/user, params)
+/obj/item/bounty_marker/attack_self(mob/user, list/modifiers)
 	if(!marked_targets.len)
 		to_chat(user, span_warning("No targets have been marked with this device."))
 		return
@@ -1803,7 +1797,7 @@
 		marked_targets = list()
 		return
 
-/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/bounty_marker/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!proximity_flag && get_dist(user, target) > 7)
 		return
@@ -1870,42 +1864,49 @@
 	if(!target || mammons_to_add <= 0)
 		return FALSE
 
-	var/static/list/coins_types = typecacheof(/obj/item/coin)
 	var/remaining_mammons = mammons_to_add
 
+	// First, try to add to existing coin stacks
 	for(var/obj/item/coin/existing_coin in target.contents)
-		if(coins_types[existing_coin.type] && remaining_mammons > 0)
-			var/can_add = min(remaining_mammons / existing_coin.sellprice, 999 - existing_coin.quantity) // Assuming max stack of 999
-			if(can_add > 0)
-				existing_coin.quantity += can_add
-				remaining_mammons -= can_add * existing_coin.sellprice
-				existing_coin.update_appearance(UPDATE_ICON_STATE | UPDATE_NAME | UPDATE_DESC)
+		if(!existing_coin.base_type || remaining_mammons <= 0)
+			continue
 
-	// If we still have mammons to add, create new coins
+		var/space_in_stack = 20 - existing_coin.quantity // MAX_COIN_STACK_SIZE = 20
+		if(space_in_stack <= 0)
+			continue
+
+		var/coins_to_add = min(floor(remaining_mammons / existing_coin.sellprice), space_in_stack)
+		if(coins_to_add > 0)
+			existing_coin.set_quantity(existing_coin.quantity + coins_to_add)
+			remaining_mammons -= coins_to_add * existing_coin.sellprice
+
+	// Create new coin stacks for remaining mammons
 	while(remaining_mammons > 0)
-		// Determine best coin type to create (highest value that fits)
-		var/best_coin_type = null
-		var/best_value = 0
+		var/coin_type_to_create = null
+		var/coin_value = 0
 
-		for(var/coin_type in coins_types)
-			var/obj/item/coin/temp_coin = coin_type
-			var/coin_value = initial(temp_coin.sellprice)
-			if(coin_value <= remaining_mammons && coin_value > best_value)
-				best_coin_type = coin_type
-				best_value = coin_value
+		// Determine best coin denomination
+		if(remaining_mammons >= 10)
+			coin_type_to_create = /obj/item/coin/gold
+			coin_value = 10
+		else if(remaining_mammons >= 5)
+			coin_type_to_create = /obj/item/coin/silver
+			coin_value = 5
+		else if(remaining_mammons >= 1)
+			coin_type_to_create = /obj/item/coin/copper
+			coin_value = 1
+		else
+			break // Less than 1 mammon remaining
 
-		if(!best_coin_type)
-			break // Can't create any more coins
+		var/coins_to_create = min(floor(remaining_mammons / coin_value), 20)
+		var/obj/item/coin/new_coin = new coin_type_to_create(get_turf(target), coins_to_create)
 
-		var/obj/item/coin/new_coin = new best_coin_type(get_turf(target))
 		if(ismob(target))
-			target.put_in_hand(new_coin)
+			target.put_in_hands(new_coin)
 		else
 			new_coin.forceMove(target)
-		var/quantity_to_add = min(remaining_mammons / best_value, 20) // Max stack
-		new_coin.quantity = quantity_to_add
-		remaining_mammons -= quantity_to_add * best_value
-		new_coin.update_appearance(UPDATE_ICON_STATE | UPDATE_NAME | UPDATE_DESC)
+
+		remaining_mammons -= coins_to_create * coin_value
 
 	return mammons_to_add - remaining_mammons // Return actual amount added
 

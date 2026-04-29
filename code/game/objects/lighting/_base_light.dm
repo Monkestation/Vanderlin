@@ -120,22 +120,22 @@
 			CO = color
 		if(nightshift_enabled)
 			switch(nightshift_enabled)
-				if("night")
+				if(NIGHT)
 					BR = nightshift_brightness
 					PO = nightshift_light_power
 					if(!color)
 						CO = nightshift_light_color
-				if("dusk")
+				if(DUSK)
 					BR = duskshift_brightness
 					PO = duskshift_light_power
 					if(!color)
 						CO = duskshift_light_color
-				if("dawn")
+				if(DAWN)
 					BR = dawnshift_brightness
 					PO = dawnshift_light_power
 					if(!color)
 						CO = dawnshift_light_color
-				if("day")
+				if(DAY)
 					BR = brightness
 					PO = bulb_power
 					CO = bulb_colour
@@ -239,7 +239,7 @@
 
 	if(!skip_sound_and_sparks)
 		if(status == LIGHT_OK || status == LIGHT_BURNED)
-			playsound(src.loc, 'sound/blank.ogg', 75, TRUE)
+			playsound(src, 'sound/blank.ogg', 75, TRUE)
 		if(on)
 			do_sparks(3, TRUE, src)
 	status = LIGHT_BROKEN

@@ -27,9 +27,10 @@
 							/obj/item/natural/rock = 30,
 							/obj/item/natural/stone = 30,
 							/obj/structure/flora/grass/swampweed = 30,
+							/obj/structure/wild_plant/nospread/tamto = 5,
 							/obj/item/grown/log/tree/stick = 3,
 							/obj/structure/flora/grass/maneater/real = 2,
-							/obj/structure/essence_node = 0.1,
+							/obj/structure/essence_node = 1,
 							/obj/structure/innocent_bush = 1,
 							/obj/structure/wild_plant/nospread/mushroom/merkel = 0.5,
 							)

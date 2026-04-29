@@ -65,7 +65,7 @@
 			span_warning("The frost ray fizzles on contact with [victim]!"),
 			span_warning("The frost ray fizzles on contact with me!"),
 		)
-		playsound(get_turf(victim), 'sound/magic/magic_nulled.ogg', 100)
+		playsound(victim, 'sound/magic/magic_nulled.ogg', 100)
 		return
 
 	victim.adjustFireLoss(round(20))
@@ -73,7 +73,7 @@
 
 	new /obj/effect/temp_visual/snap_freeze(get_turf(victim))
 
-	playsound(get_turf(victim), 'sound/items/stonestone.ogg', 100)
+	playsound(victim, 'sound/items/stonestone.ogg', 100)
 	victim.visible_message(
 		span_danger("[victim] is struck by the ray of frost!"),
 		span_userdanger("I'm struck by the ray of frost!"),)

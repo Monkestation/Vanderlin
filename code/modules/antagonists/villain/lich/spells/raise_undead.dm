@@ -41,8 +41,8 @@
 
 	cast_on.visible_message(span_warning("[cast_on.real_name]'s body is engulfed by dark energy..."), runechat_message = TRUE)
 
-	if(cast_on.ckey) //player still inside body
-		var/offer = browser_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
+	if(cast_on.ckey && !is_antag_banned(cast_on.ckey, ROLE_NECRO_SKELETON)) //player still inside body
+		var/offer = tgui_alert(cast_on, "Do you wish to be reanimated as a minion?", "RAISED BY NECROMANCER", DEFAULT_INPUT_CHOICES, 5 SECONDS)
 
 		if(offer == CHOICE_YES)
 			to_chat(cast_on, span_danger("You rise as a minion."))
@@ -52,7 +52,7 @@
 		else
 			to_chat(cast_on, span_danger("Another soul will take over."))
 
-	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", null, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
+	var/list/candidates = pollCandidatesForMob("Do you want to play as a Necromancer's minion?", ROLE_NECRO_SKELETON, null, null, 100, cast_on, POLL_IGNORE_NECROMANCER_SKELETON)
 	if(length(candidates))
 		var/mob/C = pick(candidates)
 		cast_on.turn_to_minion(owner, C.ckey)
@@ -65,7 +65,7 @@
 	if(!master)
 		return FALSE
 
-	revive(TRUE, TRUE)
+	revive(ADMIN_HEAL_ALL)
 
 	if(ckey) //player
 		ckey = ckey
@@ -74,13 +74,14 @@
 		AddComponent(/datum/component/ai_aggro_system)
 		wander = TRUE
 
-	clamped_adjust_skillrank(/datum/skill/combat/axesmaces, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/crossbows, 2, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/wrestling, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/unarmed, 1, 3, TRUE)
-	clamped_adjust_skillrank(/datum/skill/combat/swords, 2, 3, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 20, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30, TRUE)
+	clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
 
 	mind.current.job = null
+	mind.add_antag_datum(/datum/antagonist/skeleton)
 
 	dna.species.species_traits |= NOBLOOD
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
@@ -106,8 +107,8 @@
 	skele_look()
 	grant_undead_eyes()
 
-	if(charflaw)
-		QDEL_NULL(charflaw)
+	if(length(quirks))
+		clear_quirks()
 
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)

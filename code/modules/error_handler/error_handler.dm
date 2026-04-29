@@ -45,6 +45,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	// Proc calls are allowed past this point
 	else if(copytext(E.name, 1, 18) == "Out of resources!")//18 == length() of that string + 1
 		log_world("BYOND out of memory. Restarting ([E?.file]:[E?.line])")
+		SSplexora.notify_shutdown(PLEXORA_SHUTDOWN_OOM)
 		TgsEndProcess()
 		. = ..()
 		Reboot(reason = 1)
@@ -137,6 +138,10 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 				desclines += ("  " + line) // Pad any unpadded lines, so they look pretty
 			else
 				desclines += line
+			if(findtext(line, "src:") && isdatum(caller.src)) // append qdel info after this line
+				// jank
+				var/datum/caller_src = caller.src
+				desclines += "  src.gc_destroyed: [caller_src.gc_destroyed]"
 	if(usrinfo) //If this info isn't null, it hasn't been added yet
 		desclines.Add(usrinfo)
 	if(silencing)

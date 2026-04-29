@@ -200,7 +200,7 @@
 	. += "<BR><B>Belt:</B> <A href='byond://?src=[REF(src)];command=item_placement;item_slot=[BODY_ZONE_PRECISE_GROIN]'>[makeStrippingButton(clothing[SLOT_MANNEQUIN_BELT])]</A>"
 	. += "<BR><B>Ring:</B> <A href='byond://?src=[REF(src)];command=item_placement;item_slot=[SLOT_MANNEQUIN_RING]'>[makeStrippingButton(clothing[SLOT_MANNEQUIN_RING])]</A>" //No direct slot to equip.
 
-/obj/structure/mannequin/attackby(obj/item/I, mob/user)
+/obj/structure/mannequin/attackby(obj/item/I, mob/user, list/modifiers)
 	if(user.cmode || user.a_intent == INTENT_HARM || user.a_intent == INTENT_DISARM)
 		if(!tipped_over)
 			TipOver()
@@ -527,7 +527,7 @@
 
 //For knocking the mannequin over whenever it is hit by a hostile.
 /obj/structure/mannequin/proc/TipOver()
-	playsound(get_turf(src), 'sound/foley/dropsound/wooden_drop.ogg', 50, TRUE)
+	playsound(src, 'sound/foley/dropsound/wooden_drop.ogg', 50, TRUE)
 	density = FALSE
 	tipped_over = TRUE
 	DropAll()
@@ -540,7 +540,7 @@
 	for(var/obj/structure/mannequin/O in get_turf(src))
 		if(O.density && !O.tipped_over)
 			return
-	playsound(get_turf(src), 'sound/foley/woodclimb.ogg', 50, TRUE)
+	playsound(src, 'sound/foley/woodclimb.ogg', 50, TRUE)
 	density = TRUE
 	tipped_over = FALSE
 	var/matrix/mat = transform

@@ -4,7 +4,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "aP" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb)
 "bW" = (
 /obj/structure/fluff/statue/evil,
@@ -320,7 +320,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Rl" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "RK" = (
 /obj/structure/dungeon_exit,

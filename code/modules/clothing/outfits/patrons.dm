@@ -99,8 +99,6 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-
 
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester cloak"
@@ -205,7 +203,10 @@
 	toggle_icon_state = TRUE
 	blocksound = SOFTHIT
 	max_integrity = 100
-	sewrepair = TRUE
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 0
+	salvage_result = /obj/item/natural/cloth
+	dyeable = TRUE
 	adjustable = CAN_CADJUST
 
 /obj/item/clothing/head/veiled/update_overlays()
@@ -328,7 +329,7 @@
 		detail_tag = "_detail"
 		user.visible_message(span_warning("[user] adds [W] to [src]."))
 		user.transferItemToLoc(W, src, FALSE, FALSE)
-		update_icon()
+		update_appearance(UPDATE_OVERLAYS)
 		if(loc == user && ishuman(user))
 			var/mob/living/carbon/H = user
 			H.update_inv_head()

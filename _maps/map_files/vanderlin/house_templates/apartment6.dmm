@@ -1,0 +1,258 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/abstract/property_noop{
+	property_id = "apartment_six"
+	},
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/key/apartments/apartment1,
+/obj/item/broom,
+/obj/item/natural/cloth,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"e" = (
+/obj/effect/landmark/start/villager,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"f" = (
+/obj/structure/door{
+	lockid = "apartment1";
+	name = "Apartment I"
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"g" = (
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/indoors/town)
+"i" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"j" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"m" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"o" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 4
+	},
+/area/indoors/town)
+"p" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/apartment1,
+/turf/open/floor/wood,
+/area/indoors/town)
+"q" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town)
+"r" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"u" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/indoors/town)
+"v" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/wood,
+/area/indoors/town)
+"A" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 8
+	},
+/area/indoors/town)
+"D" = (
+/obj/structure/door{
+	lockid = "apartment1";
+	name = "Apartment I"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"E" = (
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"G" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/indoors/town)
+"H" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/wallfire/candle/l{
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"J" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town)
+"L" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"M" = (
+/obj/structure/chair/wood/alt{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"N" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/town)
+"O" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/fueled/wallfire/candle/l{
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"P" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/cloth,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Q" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"R" = (
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/obj/structure/window/solid,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"V" = (
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/wood,
+/area/indoors/town)
+"W" = (
+/obj/structure/table/wood{
+	dir = 6;
+	icon_state = "largetable"
+	},
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+
+(1,1,1) = {"
+a
+a
+a
+a
+N
+N
+u
+G
+N
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+A
+v
+L
+p
+A
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+J
+L
+L
+H
+J
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+o
+P
+L
+V
+o
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+N
+u
+f
+G
+N
+"}
+(6,1,1) = {"
+D
+i
+i
+E
+W
+i
+i
+O
+A
+"}
+(7,1,1) = {"
+q
+Q
+e
+i
+Q
+Q
+i
+M
+J
+"}
+(8,1,1) = {"
+o
+d
+Q
+i
+j
+i
+i
+m
+o
+"}
+(9,1,1) = {"
+N
+u
+r
+g
+g
+g
+R
+G
+N
+"}

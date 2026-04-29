@@ -271,7 +271,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors/royal)
 "DM" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/wilds)
 "Ev" = (
 /obj/structure/spider/cocoon,
@@ -330,7 +330,7 @@
 /area/under/tomb/indoors/royal)
 "JH" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "JY" = (
 /obj/structure/inert_bonepile,
@@ -432,7 +432,7 @@
 /turf/closed/wall/mineral/decostone/moss,
 /area/under/tomb/indoors/royal)
 "UC" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "UI" = (
 /obj/effect/decal/cleanable/dirt/dust,

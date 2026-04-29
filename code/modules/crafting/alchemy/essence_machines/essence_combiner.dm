@@ -73,7 +73,7 @@
 			qdel(essence)
 
 
-/obj/machinery/essence/combiner/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/combiner/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)
@@ -155,7 +155,7 @@
 		return TRUE
 	..()
 
-/obj/machinery/essence/combiner/attack_hand(mob/user, params)
+/obj/machinery/essence/combiner/attack_hand(mob/user, list/modifiers)
 	if(processing)
 		to_chat(user, span_warning("The combiner is currently processing."))
 		return
@@ -226,7 +226,7 @@
 		var/datum/essence_combination/recipe = find_matching_combination(available_essences)
 		if(!recipe)
 			break
-		if(user.get_skill_level(/datum/skill/craft/alchemy) < recipe.skill_required)
+		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/alchemy) < recipe.skill_required)
 			qdel(recipe)
 			break
 		var/can_make = TRUE
@@ -302,9 +302,9 @@
 		production_report += "[essence_name] ([produced_essences[essence_name]] units)"
 
 	user.visible_message(span_info("The essence combiner completes bulk processing, producing: [jointext(production_report, ", ")]"))
-	var/boon = user.get_learning_boon(/datum/skill/craft/alchemy)
-	var/amt2raise = user.STAINT * recipes.len
-	user.adjust_experience(/datum/skill/craft/alchemy, amt2raise * boon, FALSE)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * recipes.len
+	user.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
 
 
 /obj/machinery/essence/combiner/proc/find_matching_combination(list/available_essences)

@@ -3,7 +3,7 @@
 
 /datum/proc/find_references(references_to_clear = INFINITY)
 	if(usr?.client)
-		if(browser_alert(usr,"Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", list("Yes", "No")) != "Yes")
+		if(tgui_alert(usr,"Running this will lock everything up for about 5 minutes.  Would you like to begin the search?", "Find References", list("Yes", "No")) != "Yes")
 			return
 
 	src.references_to_clear = references_to_clear
@@ -61,6 +61,13 @@
 	log_reftracker("Finished searching clients")
 	if(src.references_to_clear == 0)
 		return
+#endif
+
+	// this is evil. don't do this. it is extremely slow. i just really hate harddels
+#ifndef REFERENCE_DOING_IT_LIVE
+	for(var/list/some_list) // ALL LISTS EVER
+		// only show the first 4 items
+		DoSearchVar(some_list, "Lists -> [length(some_list) < 5 ? json_encode(some_list) : json_encode(some_list.Copy(1, 5))]", starting_time)
 #endif
 
 	log_reftracker("Completed search for references to a [type].")

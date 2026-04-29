@@ -25,6 +25,12 @@
 		else
 			mob.control_object.forceMove(get_step(mob.control_object,direct))
 
+/atom/movable
+	var/facepull = TRUE
+
+/mob
+	facepull = FALSE
+
 /**
  * Move a client in a direction
  *
@@ -36,7 +42,7 @@
  * Things that stop you moving as a mob:
  * * world time being less than your next move_delay
  * * not being in a mob, or that mob not having a loc
- * * missing the n and direction parameters
+ * * missing the new_loc and direction parameters
  * * being in remote control of an object (calls Moveobject instead)
  * * being dead (it ghosts you instead)
  *
@@ -61,46 +67,41 @@
  * (if you ask me, this should be at the top of the move so you don't dance around)
  *
  */
-/atom/movable
-	var/facepull = TRUE
-
-/mob
-	facepull = FALSE
-
-/client/Move(n, direct)
+/client/Move(atom/new_loc, direct)
 	if(world.time < move_delay) //do not move anything ahead of this check please
 		return FALSE
+
 	next_move_dir_add = 0
 	next_move_dir_sub = 0
 	var/old_move_delay = move_delay
 	move_delay = world.time + world.tick_lag //this is here because Move() can now be called mutiple times per tick
-	if(!mob || !mob.loc)
+
+	if(!direct || !new_loc)
 		return FALSE
-	if(!n || !direct)
+
+	if(!mob?.loc)
 		return FALSE
+
 	if(HAS_TRAIT(mob, TRAIT_NO_TRANSFORM))
 		return FALSE	//This is sota the goto stop mobs from moving var
+
 	if(mob.control_object)
 		return Move_object(direct)
+
 	if(!isliving(mob))
-		return mob.Move(n, direct)
-	else
-		if (HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
-			return FALSE
+		move_delay += mob.cached_multiplicative_slowdown
+		return mob.Move(new_loc, direct)
+
+	if(HAS_TRAIT(mob, TRAIT_IN_FRENZY) || HAS_TRAIT(mob, TRAIT_MOVEMENT_BLOCKED))
+		return FALSE
 
 	if(mob.stat == DEAD)
-#ifdef TESTSERVER
-		mob.ghostize()
-		return FALSE
-#endif
 		if(MOBTIMER_FINISHED(mob, MT_LASTDIED, 60 SECONDS))
 			mob.ghostize()
-		else
-			if(!world.time%5)
-				to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
+		else if(!world.time % 5)
+			to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
-	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, n, direct) & COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE)
-		return FALSE
+
 	if(mob.force_moving)
 		return FALSE
 
@@ -118,12 +119,15 @@
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)
 
-	if(HAS_TRAIT(L, TRAIT_IMMOBILIZED))
+	if(!(L.mobility_flags & MOBILITY_MOVE))
 		return FALSE
 
-	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
-		var/atom/O = mob.loc
-		return O.relaymove(mob, direct)
+	if(ismovable(mob.loc)) //Inside an object, tell it we moved
+		var/atom/loc_atom = mob.loc
+		return loc_atom.relaymove(mob, direct)
+
+	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_MOVE, args) & COMSIG_MOB_CLIENT_BLOCK_PRE_MOVE)
+		return FALSE
 
 	//We are now going to move
 	var/add_delay = mob.cached_multiplicative_slowdown
@@ -135,37 +139,24 @@
 	else
 		move_delay = world.time
 
-	if(L.confused)
-		var/newdir = 0
-		if(L.confused > 40)
-			newdir = pick(GLOB.alldirs)
-		else if(prob(L.confused * 1.5))
-			newdir = angle2dir(dir2angle(direct) + pick(90, -90))
-		else if(prob(L.confused * 3))
-			newdir = angle2dir(dir2angle(direct) + pick(45, -45))
-		if(newdir)
-			direct = newdir
-			n = get_step(L, direct)
-
-	var/target_dir = get_dir(L, n)
+	var/target_dir = get_dir(L, new_loc)
 
 	//backpedal and strafe slowdown for quick intent
-	if(L.fixedeye || L.tempfixeye)
-		if(L.dir != target_dir)
+	if(L.dir != target_dir)
+		if(L.fixedeye || L.tempfixeye)
 			add_delay += 2
 			if(L.m_intent == MOVE_INTENT_RUN)
 				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
-	else
-		if(L.dir != target_dir)
-			// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
-			if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
-				L.toggle_rogmove_intent(MOVE_INTENT_WALK)
+
+		// Remove sprint intent if we change direction, but only if we sprinted at least 1 tile
+		if(L.m_intent == MOVE_INTENT_RUN && L.sprinted_tiles > 0)
+			L.toggle_rogmove_intent(MOVE_INTENT_WALK)
 
 	var/old_direct = mob.dir
 
 	. = ..()
 
-	if((direct & (direct - 1)) && mob.loc == n) //moved diagonally successfully
+	if((direct & (direct - 1)) && mob.loc == new_loc) //moved diagonally successfully
 		add_delay *= sqrt(2)
 
 	var/after_glide = 0
@@ -221,6 +212,7 @@
  */
 /client/proc/Process_Grab()
 	if(mob.pulledby && mob.pulledby != mob)
+		var/mob/mob_puller = mob.pulledby
 		if(HAS_TRAIT(mob, TRAIT_INCAPACITATED))
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I can't move!"))
@@ -229,26 +221,42 @@
 			COOLDOWN_START(src, move_delay, 1 SECONDS)
 			to_chat(src, span_warning("I'm restrained! I can't move!"))
 			return TRUE
-		else if(mob.pulledby != mob.pulling || mob.pulledby.grab_state > GRAB_PASSIVE || mob.cmode || mob.pulledby.cmode)	//Don't autoresist passive grabs if we're grabbing them too.
+		else if(mob_puller != mob.pulling || mob_puller.grab_state > GRAB_PASSIVE || mob.cmode || mob_puller.cmode)	//Don't autoresist passive grabs if we're grabbing them too.
 			return mob.resist_grab(TRUE)
+		/*
+		//Don't autoresist passive grabs if we're grabbing them too.
+		else if(mob_puller == mob.pulling) // START: If we are grabbing each other,
+			if(mob_puller.grab_state > mob.grab_state) // COND 1: and our grabber has a stronger grab state,
+				return mob.resist_grab(TRUE) // END 1: attempt to break the grab.
+			if(isliving(mob) && mob_puller.cmode) // COND 2: and they are hostile,
+				// END 2: we roll to try to move.
+				var/mob/living/living_mob = mob
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STAT_STRENGTH, STAT_CONSTITUTION)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			// END 3: we can move freely.
+		else
+			var/mob/living/living_mob = mob
+			if(mob_puller.grab_state == GRAB_PASSIVE && mob_puller.cmode)
+				if(!prob(clamp(30 + (living_mob.stat_compare(mob_puller, STAT_STRENGTH, STAT_CONSTITUTION)*10), 5, 95)))
+					COOLDOWN_START(src, move_delay, 1 SECONDS)
+					to_chat(src, span_warning("I'm restrained! I can't move!"))
+					return TRUE
+			else
+				return living_mob.resist_grab(TRUE)
+		*/
 
 	if(mob.pulling && isliving(mob.pulling))
 		var/mob/living/L = mob.pulling
 		var/mob/living/M = mob
 		// If passive grab and trying to pull someone who doesn't want to be pulled
-		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !HAS_TRAIT(L, TRAIT_INCAPACITATED))
+		if(M.grab_state == GRAB_PASSIVE && !isanimal(L) && L.cmode && L.body_position != LYING_DOWN && !L.incapacitated(IGNORE_GRAB))
 			// Reuse shove check probability
-			if(!prob(clamp(30 + (M.stat_compare(L, STATKEY_STR, STATKEY_CON)*10),0,100)))
+			if(!prob(clamp(30 + (M.stat_compare(L, STAT_STRENGTH, STAT_CONSTITUTION)*10),0,100)))
 				COOLDOWN_START(src, move_delay, 1 SECONDS)
 				to_chat(src, span_warning("[L]'s footing is too sturdy!"))
 				return TRUE
-
-	var/mob/living/simple_animal/bound = mob.pulling
-	if(istype(bound))
-		if(bound?.binded)
-			COOLDOWN_START(src, move_delay, 1 SECONDS)
-			to_chat(src, span_warning("[bound] is bound in a summoning circle. I can't move them!"))
-			return TRUE
 
 	return FALSE
 
@@ -364,8 +372,8 @@
 	var/next_in_line
 	switch(mob.zone_selected)
 		if(BODY_ZONE_HEAD)
-			next_in_line = BODY_ZONE_PRECISE_R_EYE
-		if(BODY_ZONE_PRECISE_R_EYE)
+			next_in_line = BODY_ZONE_PRECISE_SKULL
+		if(BODY_ZONE_PRECISE_SKULL)
 			next_in_line = BODY_ZONE_PRECISE_NOSE
 		if(BODY_ZONE_PRECISE_NOSE)
 			next_in_line = BODY_ZONE_PRECISE_MOUTH
@@ -405,6 +413,8 @@
 	switch(mob.zone_selected)
 		if(BODY_ZONE_PRECISE_R_EYE)
 			next_in_line = BODY_ZONE_PRECISE_L_EYE
+		if(BODY_ZONE_PRECISE_L_EYE)
+			next_in_line = BODY_ZONE_PRECISE_EARS
 		else
 			next_in_line = BODY_ZONE_PRECISE_R_EYE
 
@@ -534,30 +544,6 @@
 /mob/proc/update_sneak_invis(reset = FALSE)
 	return
 
-//* Updates a mob's sneaking status, rendering them invisible or visible in accordance to their status. TODO:Fix people bypassing the sneak fade by turning, and add a proc var to have a timer after resetting visibility.
-/mob/living/update_sneak_invis(reset = FALSE) //Why isn't this in mob/living/living_movements.dm? Why, I'm glad you asked!
-	if(!reset && HAS_TRAIT(src, TRAIT_IMPERCEPTIBLE)) // Check if the mob is affected by the invisibility spell
-		rogue_sneaking = TRUE
-		return
-	var/turf/T = get_turf(src)
-	var/light_amount = T?.get_lumcount()
-	var/used_time = 50
-
-	if(rogue_sneaking) //If sneaking, check if they should be revealed
-		if((stat > SOFT_CRIT) || IsSleeping() || !MOBTIMER_FINISHED(src, MT_FOUNDSNEAK, 30 SECONDS) || !T || reset || (m_intent != MOVE_INTENT_SNEAK) || light_amount >= rogue_sneaking_light_threshhold)
-			used_time = round(clamp((50 - (used_time*1.75)), 5, 50),1)
-			animate(src, alpha = initial(alpha), time =	used_time) //sneak skill makes you reveal slower but not as drastic as disappearing speed
-			spawn(used_time) regenerate_icons()
-			rogue_sneaking = FALSE
-			return
-
-	else //not currently sneaking, check if we can sneak
-		if(light_amount < rogue_sneaking_light_threshhold && m_intent == MOVE_INTENT_SNEAK)
-			animate(src, alpha = 0, time = used_time)
-			spawn(used_time + 5) regenerate_icons()
-			rogue_sneaking = TRUE
-	return
-
 /mob/proc/toggle_rogmove_intent(intent, silent = FALSE)
 	// If we're becoming sprinting from non-sprinting, reset the counter
 	if(!(m_intent == MOVE_INTENT_RUN && intent == MOVE_INTENT_RUN))
@@ -577,7 +563,7 @@
 					return
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L
-					if(H.get_encumbrance() >= 0.5)
+					if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 						to_chat(H, span_info("You are too heavy to run!"))
 						return
 			m_intent = MOVE_INTENT_RUN
@@ -591,76 +577,137 @@
 	if(fixedeye)
 		fixedeye = 0
 		if(!tempfixeye)
-			atom_flags &= ~NO_DIR_CHANGE_ON_MOVE
+			face_mouse = FALSE
 	else
 		fixedeye = 1
-		atom_flags |= NO_DIR_CHANGE_ON_MOVE
+		face_mouse = TRUE
 
 	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_appearance(UPDATE_ICON)
 	playsound_local(src, 'sound/misc/click.ogg', 100)
 
-/client/proc/hearallasghost()
-	set category = "GameMaster"
-	set name = "HearAllAsAdmin"
+/client/proc/ghostears()
+	set category = "Admin.Ghost"
+	set name = "Hear Speech"
 	if(!holder)
 		return
 	if(!prefs)
 		return
 	prefs.chat_toggles ^= CHAT_GHOSTEARS
-//	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
-	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
 	prefs.save_preferences()
 	if(prefs.chat_toggles & CHAT_GHOSTEARS)
-		to_chat(src, "<span class='notice'>I will hear all now.</span>")
+		to_chat(src, span_info("I will hear all now."))
 	else
-		to_chat(src, "<span class='info'>I will hear like a mortal.</span>")
+		to_chat(src, span_info("I will hear like a mortal."))
+
+/client/proc/ghostwhispers()
+	set category = "Admin.Ghost"
+	set name = "Hear Whispers"
+	if(!holder)
+		return
+	if(!prefs)
+		return
+	prefs.chat_toggles ^= CHAT_GHOSTWHISPER
+	prefs.save_preferences()
+	if(prefs.chat_toggles & CHAT_GHOSTWHISPER)
+		to_chat(src, span_info("I will hear all whispers now."))
+	else
+		to_chat(src, span_info("I will hear like a mortal."))
+
+/client/proc/ghosteyes()
+	set category = "Admin.Ghost"
+	set name = "See Emotes"
+	if(!holder)
+		return
+	if(!prefs)
+		return
+	prefs.chat_toggles ^= CHAT_GHOSTSIGHT
+	prefs.save_preferences()
+	if(prefs.chat_toggles & CHAT_GHOSTSIGHT)
+		to_chat(src, span_info("I will see all whispers now."))
+	else
+		to_chat(src, span_info("I will see like a mortal."))
 
 
 /client/proc/ghost_up()
-	set category = "GameMaster"
+	set category = "Admin.Ghost"
 	set name = "GhostUp"
 	if(!holder)
 		return
 	. = TRUE
 	if(isobserver(mob))
-		mob.ghost_up()
+		mob.up()
 
 /client/proc/ghost_down()
-	set category = "GameMaster"
+	set category = "Admin.Ghost"
 	set name = "GhostDown"
 	if(!holder)
 		return
 	. = TRUE
 	if(isobserver(mob))
-		mob.ghost_down()
+		mob.down()
 
 ///Moves a mob upwards in z level
-/mob/proc/ghost_up()
-	if(zMove(UP, TRUE))
-		to_chat(src, "<span class='notice'>I move upwards.</span>")
+/mob/verb/up()
+	set name = "Move Upwards"
+	set category = "IC"
+
+	if(remote_control)
+		return remote_control.relaymove(src, UP)
+
+	var/turf/current_turf = get_turf(src)
+
+	if(ismovable(loc)) //Inside an object, tell it we moved
+		var/atom/loc_atom = loc
+		return loc_atom.relaymove(src, UP)
+
+	var/obj/structure/ladder/current_ladder = locate() in current_turf
+	if(current_ladder)
+		current_ladder.use(src, TRUE)
+		return
+
+	if(iswaterturf(current_turf) && HAS_TRAIT(src, TRAIT_MOVE_SWIMMING))
+		var/turf/open/water/water_turf = current_turf
+		water_turf.try_z_swim(src, TRUE)
+		return
+
+	if(!can_z_move(UP, current_turf, null, ZMOVE_CAN_FLY_CHECKS|ZMOVE_FEEDBACK))
+		return
+	balloon_alert(src, "moving up...")
+	if(!do_after(src, 1 SECONDS, hidden = TRUE))
+		return
+	if(zMove(UP, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK))
+		to_chat(src, span_notice("You move upwards."))
 
 ///Moves a mob down a z level
-/mob/proc/ghost_down()
-	if(zMove(DOWN, TRUE))
-		to_chat(src, "<span class='notice'>I move down.</span>")
+/mob/verb/down()
+	set name = "Move Downwards"
+	set category = "IC"
 
-///Move a mob between z levels, if it's valid to move z's on this turf
-/mob/proc/zMove(dir, feedback = FALSE)
-	if(dir != UP && dir != DOWN)
-		return FALSE
-	var/turf/target = get_step_multiz(src, dir)
-	if(!target)
-		if(feedback)
-			to_chat(src, "<span class='warning'>There's nothing in that direction!</span>")
-		return FALSE
-	if(!canZMove(dir, target))
-		if(feedback)
-			to_chat(src, "<span class='warning'>I couldn't move there!</span>")
-		return FALSE
-	forceMove(target)
-	return TRUE
+	if(remote_control)
+		return remote_control.relaymove(src, DOWN)
 
-/// Can this mob move between z levels
-/mob/proc/canZMove(direction, turf/target)
+	var/turf/current_turf = get_turf(src)
+
+	if(ismovable(loc)) //Inside an object, tell it we moved
+		var/atom/loc_atom = loc
+		return loc_atom.relaymove(src, DOWN)
+
+	var/obj/structure/ladder/current_ladder = locate() in current_turf
+	if(current_ladder)
+		current_ladder.use(src, FALSE)
+		return
+
+	if(iswaterturf(current_turf) && HAS_TRAIT(src, TRAIT_MOVE_SWIMMING))
+		var/turf/open/water/water_turf = current_turf
+		water_turf.try_z_swim(src, FALSE)
+		return
+
+	if(!can_z_move(DOWN, current_turf, null, ZMOVE_CAN_FLY_CHECKS|ZMOVE_FEEDBACK))
+		return
+	balloon_alert(src, "moving down...")
+	if(!do_after(src, 1 SECONDS, hidden = TRUE))
+		return
+	if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK))
+		to_chat(src, span_notice("You move downwards."))
 	return FALSE

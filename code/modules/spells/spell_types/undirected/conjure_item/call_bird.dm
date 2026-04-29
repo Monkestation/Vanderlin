@@ -8,7 +8,7 @@
 
 	has_visual_effects = FALSE
 	charge_required = FALSE
-	experience_modifer = 0
+	experience_modifier = 0
 
 	attunements = list(
 		/datum/attunement/light = 0.3,
@@ -71,7 +71,7 @@
 		return
 	if(!bird_called)
 		bird_called = TRUE
-		playsound(get_turf(cast_on), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+		playsound(cast_on, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 		owned_bird = new(get_turf(cast_on))
 		owned_bird.source_spell = WEAKREF(src)
 		cast_on.put_in_hands(owned_bird)
@@ -81,7 +81,7 @@
 		owner.add_stress(/datum/stress_event/dead_bird)
 		return
 	bird_called = FALSE
-	playsound(get_turf(owned_bird), 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
+	playsound(owned_bird, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
 	owned_bird.visible_message(span_notice("The messenger bird flies away!"))
 	owned_bird = null
 
@@ -90,8 +90,8 @@
 	desc = "A small bird, used by nobles to send messages beyond the borders of this city. It has a small pouch on its leg for carrying notes."
 	icon_state = "messenger"
 	icon = 'icons/roguetown/mob/monster/messenger.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	obj_flags = CAN_BE_HIT
@@ -109,7 +109,7 @@
 	desc = "A fried messenger bird. Poor thing."
 	icon_state = "fcrow"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	eat_effect = null
@@ -169,12 +169,12 @@
 		qdel(src)
 
 
-/obj/item/reagent_containers/food/snacks/messenger_bird/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/messenger_bird/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user
 			var/datum/action/cooldown/spell/undirected/call_bird/spell = source_spell.resolve()
-			if(prob(L.STASPD * 2) || spell.owner == user)
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2) || spell.owner == user)
 				if(istype(I, /obj/item/paper) && spell.owner == user)
 					var/obj/item/paper/P = I
 					if(length(P.info) > 0)

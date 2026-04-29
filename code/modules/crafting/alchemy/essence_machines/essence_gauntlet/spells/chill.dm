@@ -14,7 +14,7 @@
 	target = get_turf(target)
 
 	owner.visible_message(span_notice("[owner] gestures, creating a small patch of frost around [target]."))
-	//playsound(get_turf(target), 'sound/magic/whiff.ogg', 50, TRUE)
+	//playsound(target, 'sound/magic/whiff.ogg', 50, TRUE)
 
 	var/obj/structure/ice_zone/zone = new(get_turf(target))
 	QDEL_IN(zone, 45 MINUTES)
@@ -31,6 +31,7 @@
 
 /obj/structure/ice_zone/Initialize()
 	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
 	propagate_temp_change(-30, 8, 0.9, 2) // Cooling effect
 
 /obj/structure/ice_zone/Destroy()

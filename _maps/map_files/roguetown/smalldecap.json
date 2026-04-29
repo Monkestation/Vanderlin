@@ -1,6 +1,0 @@
-{
-    "map_name": "smalldecap",
-    "map_path": "map_files/roguetown",
-    "map_file": "smalldecap.dmm",
-    "traits": [{"Up": true}, {"Up": true, "Down": true}, {"Down": true}]
-}

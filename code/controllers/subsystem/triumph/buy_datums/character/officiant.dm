@@ -11,5 +11,5 @@
 
 /datum/triumph_buy/secret_officiant/on_after_spawn(mob/living/carbon/human/H)
 	. = ..()
-	ADD_TRAIT(H, TRAIT_SECRET_OFFICIANT, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_SECRET_OFFICIANT, TRIUMPH_TRAIT)
 	on_activate()

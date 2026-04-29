@@ -24,7 +24,7 @@
 
 /datum/action/cooldown/spell/blindness/cast(mob/living/cast_on)
 	. = ..()
-	cast_on.blind_eyes(3)
+	cast_on.adjust_temp_blindness(6 SECONDS)
 	cast_on.visible_message(span_warning("[owner] points at [cast_on]'s eyes!"), span_warning("My eyes are covered in darkness!"))
 
 /datum/action/cooldown/spell/blindness/miracle
@@ -33,8 +33,8 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/noc)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)
 
 	invocation = "Noc blinds thee of thy sins!"
 	invocation_type = INVOCATION_SHOUT

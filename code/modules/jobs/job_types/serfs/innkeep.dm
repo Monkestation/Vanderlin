@@ -1,5 +1,19 @@
+/datum/attribute_holder/sheet/job/innkeep
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/labor/mathematics = 20
+	)
+
 /datum/job/innkeep
-	title = "Innkeep"
+	title = JOB_INNKEEP
 	tutorial = "Liquor, lodging, and lavish meals... your business is the beating heart of Vanderlin. \
 		You're the one who provides the hardworking townsfolk with a place to eat and drink their sorrows away, \
 		and accommodations for weary travelers passing through."
@@ -11,7 +25,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONEXOTIC
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/innkeep
 	give_bank_account = 60
@@ -19,20 +33,7 @@
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/cooking = 3,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/combat/swords = 2,
-		/datum/skill/labor/mathematics = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep
 
 	traits = list(
 		TRAIT_BOOZE_SLIDER
@@ -45,7 +46,7 @@
 	)
 
 /datum/outfit/innkeep
-	name = "Innkeep"
+	name = JOB_INNKEEP
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/shortboots
@@ -54,6 +55,7 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat
 	neck = /obj/item/storage/keyring/innkeep
 	cloak = /obj/item/clothing/cloak/apron/waist
+	backl = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(
 		/obj/item/recipe_book/cooking,
@@ -69,9 +71,3 @@
 		belt = /obj/item/storage/belt/leather
 		beltl = /obj/item/storage/keyring/innkeep
 		beltr = /obj/item/reagent_containers/glass/bottle/beer/blackgoat
-
-/datum/job/innkeep/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	if(spawned.gender == FEMALE)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_STR, -1)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_CON, 1)

@@ -17,7 +17,7 @@
  * * ignore_walls - Whether or not the sound can pass through walls.
  * * falloff_distance - Distance at which falloff_exponent begins. Sound is at peak volume (in regards to falloff_exponent) aslong as it is in this range.
  */
-/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel, pressure_affected = FALSE, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, soundping = FALSE, repeat)
+/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel, pressure_affected = FALSE, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, soundping = FALSE, repeat, environment_override = -1)
 	if(isarea(source))
 		CRASH("playsound(): source is an area")
 
@@ -40,7 +40,10 @@
 
 	var/maxdistance = SOUND_RANGE + extrarange
 	var/source_z = turf_source.z
-	var/list/listeners = SSmobs.clients_by_zlevel[source_z].Copy()
+	if(vary && !frequency)
+		frequency = get_rand_frequency() // skips us having to do it per-sound later. should just make this a macro tbh
+
+	var/list/listeners
 
 	var/turf/above_turf = GET_TURF_ABOVE(turf_source)
 	var/turf/below_turf = GET_TURF_BELOW(turf_source)
@@ -50,31 +53,31 @@
 	if(soundping)
 		ping_sound(source)
 
-	var/list/muffled_listeners = list() //this is very rudimentary list of muffled listeners above and below to mimic sound muffling (this is done through modifying the playsounds for them)
-	if(!ignore_walls) //these sounds don't carry through walls or vertically
-		listeners = listeners & hearers(audible_distance,turf_source)
-	else
-		if(above_turf)
-			listeners += SSmobs.clients_by_zlevel[above_turf.z]
-			listeners += SSmobs.dead_players_by_zlevel[above_turf.z]
 
-		if(below_turf)
-			listeners += SSmobs.clients_by_zlevel[below_turf.z]
-			listeners += SSmobs.dead_players_by_zlevel[below_turf.z]
+	if(ignore_walls)
+		listeners = get_hearers_in_range(audible_distance, turf_source, RECURSIVE_CONTENTS_CLIENT_MOBS)
+		if(above_turf && istransparentturf(above_turf))
+			listeners += get_hearers_in_range(audible_distance, above_turf, RECURSIVE_CONTENTS_CLIENT_MOBS)
 
-	listeners += SSmobs.dead_players_by_zlevel[source_z]
-	. = list()
+		if(below_turf && istransparentturf(turf_source))
+			listeners += get_hearers_in_range(audible_distance, below_turf, RECURSIVE_CONTENTS_CLIENT_MOBS)
 
-	for(var/mob/M as anything in listeners)
-		if(get_dist(M, turf_source) <= audible_distance)
-			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, max_distance = maxdistance, falloff_distance = falloff_distance, repeat = repeat))
-				. += M
+	else //these sounds don't carry through walls
+		listeners = get_hearers_in_view(audible_distance, turf_source, RECURSIVE_CONTENTS_CLIENT_MOBS)
 
-	for(var/mob/M as anything in muffled_listeners)
-		if(get_dist(M, turf_source) <= audible_distance)
-			if(M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, max_distance = maxdistance, falloff_distance = falloff_distance, repeat = repeat, muffled = TRUE))
-				. += M
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_SOUND_PLAYED, source, soundin)
+		if(above_turf && istransparentturf(above_turf))
+			listeners += get_hearers_in_view(audible_distance, above_turf, RECURSIVE_CONTENTS_CLIENT_MOBS)
+
+		if(below_turf && istransparentturf(turf_source))
+			listeners += get_hearers_in_view(audible_distance, below_turf, RECURSIVE_CONTENTS_CLIENT_MOBS)
+		for(var/mob/listening_ghost as anything in SSmobs.dead_players_by_zlevel[source_z])
+			if(get_dist(listening_ghost, turf_source) <= audible_distance)
+				listeners += listening_ghost
+
+	for(var/mob/listening_mob in listeners)//had nulls sneak in here, hence the typecheck
+		listening_mob.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, max_distance = maxdistance, falloff_distance = falloff_distance, repeat = repeat, environment_override=environment_override)
+
+	return listeners
 
 /proc/ping_sound(atom/A)
 	var/image/I = image(icon = 'icons/effects/effects.dmi', loc = A, icon_state = "emote", layer = ABOVE_MOB_LAYER)
@@ -85,7 +88,7 @@
 	flick_overlay(I, GLOB.clients, 6)
 
 
-/mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled)
+/mob/proc/playsound_local(atom/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, repeat, muffled, environment_override = -1)
 	if(!client || !can_hear())
 		return FALSE
 
@@ -113,10 +116,13 @@
 
 	S.volume = vol2use
 
-	var/area/A = get_area(src)
-	if(A)
-		if(A.soundenv != -1)
-			S.environment = A.soundenv
+	if(environment_override != -1)
+		S.environment = environment_override
+	else
+		var/area/A = get_area(src)
+		if(A)
+			if(A.soundenv != -1)
+				S.environment = A.soundenv
 
 	if(vary)
 		S.frequency = get_rand_frequency()

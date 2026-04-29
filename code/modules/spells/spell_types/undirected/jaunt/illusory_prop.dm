@@ -8,8 +8,8 @@
 	invocation_type = INVOCATION_WHISPER
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/xylix)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/xylix)
 	cooldown_time = 2 MINUTES
 	spell_cost = 25
 	has_visual_effects = FALSE
@@ -104,7 +104,7 @@
 		to_chat(cast_on, span_notice("Your illusion shatters."))
 		new /obj/effect/temp_visual/chronophase_revert(get_turf(cast_on))
 		cast_on.Immobilize(0.7 SECONDS)
-		playsound(get_turf(cast_on), 'sound/magic/crystal.ogg', 50, TRUE)
+		playsound(cast_on, 'sound/magic/crystal.ogg', 50, TRUE)
 
 /datum/action/cooldown/spell/undirected/jaunt/illusory_prop/on_jaunt_exited(obj/effect/dummy/phased_mob/jaunt, mob/living/unjaunter)
 	..()

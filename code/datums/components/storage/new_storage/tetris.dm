@@ -231,12 +231,12 @@
 												silent = FALSE,
 												force = FALSE,
 												worn_check = FALSE,
-												params)
-	if((!force && !can_be_inserted(storing, TRUE, user, worn_check, params = params)) || (storing == parent))
+												list/modifiers)
+	if((!force && !can_be_inserted(storing, TRUE, user, worn_check, modifiers = modifiers)) || (storing == parent))
 		return FALSE
-	return handle_item_insertion(storing, silent, user, params = params, storage_click = FALSE)
+	return handle_item_insertion(storing, silent, user, modifiers = modifiers, storage_click = FALSE)
 
-/datum/component/storage/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check = FALSE, params, storage_click = FALSE)
+/datum/component/storage/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check = FALSE, list/modifiers, storage_click = FALSE)
 	if(!istype(storing) || (storing.item_flags & ABSTRACT))
 		return FALSE //Not an item
 	if(storing == parent)
@@ -248,7 +248,8 @@
 	if(locked)
 		if(user && !stop_messages)
 			host.add_fingerprint(user)
-			to_chat(user, span_warning("[host] seems to be locked!"))
+			if(!silent)
+				to_chat(user, span_warning("[host] seems to be locked!"))
 		return FALSE
 	if(worn_check && !worn_check(parent, user))
 		host.add_fingerprint(user)
@@ -318,9 +319,9 @@
 	var/datum/component/storage/concrete/master = master()
 	if(!istype(master))
 		return FALSE
-	return master.slave_can_insert_object(src, storing, stop_messages, user, params = params, storage_click = storage_click)
+	return master.slave_can_insert_object(src, storing, stop_messages, user, modifiers = modifiers, storage_click = storage_click)
 
-/datum/component/storage/handle_item_insertion(obj/item/storing, prevent_warning = FALSE, mob/user, datum/component/storage/remote, params, storage_click = FALSE)
+/datum/component/storage/handle_item_insertion(obj/item/storing, prevent_warning = FALSE, mob/user, datum/component/storage/remote, list/modifiers, storage_click = FALSE)
 	var/atom/parent = src.parent
 	var/datum/component/storage/concrete/master = master()
 	if(!istype(master))
@@ -329,7 +330,7 @@
 		prevent_warning = TRUE
 	if(user)
 		parent.add_fingerprint(user)
-	return master.handle_item_insertion_from_slave(src, storing, prevent_warning, user, params = params, storage_click = storage_click)
+	return master.handle_item_insertion_from_slave(src, storing, prevent_warning, user, modifiers = modifiers, storage_click = storage_click)
 
 /datum/component/storage/handle_mass_item_insertion(list/things, datum/component/storage/src_object, mob/user, datum/progressbar/progress)
 	var/atom/source_real_location = src_object.real_location()
@@ -404,22 +405,23 @@
 /datum/component/storage/proc/should_block_user_take(obj/item/stored, mob/user, worn_check = FALSE, no_message = FALSE)
 	if(worn_check && !worn_check(parent, user, no_message))
 		return TRUE
-	var/atom/real_location = real_location()
-	var/atom/recursive_loc = real_location?.loc
-	var/depth = 0
-	while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
-		var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
-		if(biggerfish)
-			depth++
-			if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-			else if(biggerfish.maximum_depth <= depth)
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-		recursive_loc = recursive_loc.loc
+	if(!istype(src, /datum/component/storage/concrete/organ))
+		var/atom/real_location = real_location()
+		var/atom/recursive_loc = real_location?.loc
+		var/depth = 0
+		while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
+			var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
+			if(biggerfish && !istype(biggerfish, /datum/component/storage/concrete/organ))
+				depth++
+				if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+				else if(biggerfish.maximum_depth < depth)
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+			recursive_loc = recursive_loc.loc
 	return FALSE
 
 /datum/component/storage/proc/update_closer(rows = 0, cols = 0)
@@ -644,10 +646,9 @@
 	grid_remove_item(item)
 	grid_add_item(item, "[coordinate_x],[coordinate_y]")
 
-/datum/component/storage/concrete/slave_can_insert_object(datum/component/storage/slave, obj/item/storing, stop_messages = FALSE, mob/user, params, storage_click = FALSE)
+/datum/component/storage/concrete/slave_can_insert_object(datum/component/storage/slave, obj/item/storing, stop_messages = FALSE, mob/user, modifiers, storage_click = FALSE)
 	//This is where the pain begins
 	if(grid)
-		var/list/modifiers = params2list(params)
 		var/coordinates = LAZYACCESS(modifiers, SCREEN_LOC)
 		var/grid_box_ratio = (world.icon_size/grid_box_size)
 
@@ -690,7 +691,7 @@
 	return TRUE
 
 //Remote is null or the slave datum
-/datum/component/storage/concrete/handle_item_insertion(obj/item/storing, prevent_warning = FALSE, mob/user, datum/component/storage/remote, params, storage_click = FALSE)
+/datum/component/storage/concrete/handle_item_insertion(obj/item/storing, prevent_warning = FALSE, mob/user, datum/component/storage/remote, list/modifiers, storage_click = FALSE)
 	var/datum/component/storage/concrete/master = master()
 	var/atom/parent = src.parent
 	var/moved = FALSE
@@ -728,7 +729,6 @@
 			if(!prevent_warning)
 				mob_item_insertion_feedback(usr, user, storing)
 	if(grid)
-		var/list/modifiers = params2list(params)
 		var/coordinates = LAZYACCESS(modifiers, SCREEN_LOC)
 		var/grid_box_ratio = (world.icon_size/grid_box_size)
 
@@ -771,13 +771,13 @@
 	storing.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
 	if(ismovable(parent))
 		if(isliving(parent:loc))
-			parent:loc:encumbrance_to_speed()
+			parent:loc:update_carry_weight()
 	update_icon()
 	refresh_mob_views()
 	return TRUE
 
-/datum/component/storage/concrete/handle_item_insertion_from_slave(datum/component/storage/slave, obj/item/storing, prevent_warning = FALSE, mob/user, params, storage_click = FALSE)
-	. = handle_item_insertion(storing, prevent_warning, user, slave, params = params, storage_click = storage_click)
+/datum/component/storage/concrete/handle_item_insertion_from_slave(datum/component/storage/slave, obj/item/storing, prevent_warning = FALSE, mob/user, modifiers, storage_click = FALSE)
+	. = handle_item_insertion(storing, prevent_warning, user, slave, modifiers = modifiers, storage_click = storage_click)
 	if(. && !prevent_warning)
 		slave.mob_item_insertion_feedback(usr, user, storing)
 
@@ -932,7 +932,7 @@
 	var/coordinates = storage_master.screen_loc_to_grid_coordinates(screen_loc)
 	if(!coordinates)
 		return
-	if(storage_master.can_be_inserted(held_item, stop_messages = TRUE, user = usr, worn_check = TRUE, params = params, storage_click = TRUE))
+	if(storage_master.can_be_inserted(held_item, stop_messages = TRUE, user = usr, worn_check = TRUE, modifiers = modifiers, storage_click = TRUE))
 		hovering.color = COLOR_ASSEMBLY_GOLD
 	else
 		hovering.color = COLOR_RED_LIGHT
@@ -956,7 +956,7 @@
 
 	usr.client.screen |= hovering
 
-/atom/movable/screen/storage/proc/update_hovering(location, control, params)
+/atom/movable/screen/storage/proc/update_hovering(location, control, list/modifiers)
 	if(!usr.client)
 		return
 	usr.client.screen -= hovering
@@ -969,12 +969,11 @@
 	storage_master = storage_master.master()
 	if(!storage_master.grid)
 		return
-	var/list/modifiers = params2list(params)
 	var/screen_loc = LAZYACCESS(modifiers, SCREEN_LOC)
 	var/coordinates = storage_master.screen_loc_to_grid_coordinates(screen_loc)
 	if(!coordinates)
 		return
-	if(storage_master.can_be_inserted(held_item, stop_messages = TRUE, user = usr, worn_check = TRUE, params = params, storage_click = TRUE))
+	if(storage_master.can_be_inserted(held_item, stop_messages = TRUE, user = usr, worn_check = TRUE, modifiers = modifiers, storage_click = TRUE))
 		hovering.color = COLOR_ASSEMBLY_GOLD
 	else
 		hovering.color = COLOR_RED_LIGHT

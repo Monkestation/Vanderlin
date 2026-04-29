@@ -35,7 +35,7 @@
 		if(!on)
 			if(torchy.fuel > 0)
 				torchy.spark_act()
-				playsound(src.loc, 'sound/items/firelight.ogg', 100)
+				playsound(src, 'sound/items/firelight.ogg', 100)
 				on = TRUE
 				update()
 				update_appearance(UPDATE_ICON_STATE)
@@ -75,14 +75,14 @@
 		on = FALSE
 		update()
 		update_appearance(UPDATE_ICON_STATE)
-		playsound(src.loc, 'sound/foley/torchfixturetake.ogg', 100)
+		playsound(src, 'sound/foley/torchfixturetake.ogg', 100)
 
 /obj/machinery/light/fueled/lanternpost/burn_out()
 	if(torchy?.on)
 		torchy.turn_off()
 	..()
 
-/obj/machinery/light/fueled/lanternpost/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/lanternpost/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/flashlight/flare/torch))
 		var/obj/item/flashlight/flare/torch/LR = W
 		if(torchy)
@@ -93,7 +93,7 @@
 				else
 					torchy.spark_act()
 					user.visible_message("<span class='info'>[user] lights [src].</span>")
-					playsound(src.loc, 'sound/items/firelight.ogg', 100)
+					playsound(src, 'sound/items/firelight.ogg', 100)
 					on = TRUE
 					update()
 					update_appearance(UPDATE_ICON_STATE)
@@ -114,14 +114,14 @@
 				LR.forceMove(src)
 				torchy = LR
 				update_appearance(UPDATE_ICON_STATE)
-			playsound(src.loc, 'sound/foley/torchfixtureput.ogg', 100)
+			playsound(src, 'sound/foley/torchfixtureput.ogg', 100)
 		return
 	if(istype(W, /obj/item/rope)&&!istype(W, /obj/item/rope/chain))
 		if(!torchy)
 			user.visible_message(span_notice("[user] begins to tie a noose on [src]..."), span_notice("I begin to tie a noose on [src]..."))
 			if(do_after(user, 2 SECONDS, src))
 				new /obj/structure/noose/gallows(loc)
-				playsound(src.loc, 'sound/foley/noose_idle.ogg', 100)
+				playsound(src, 'sound/foley/noose_idle.ogg', 100)
 				qdel(W)
 				qdel(src)
 		else

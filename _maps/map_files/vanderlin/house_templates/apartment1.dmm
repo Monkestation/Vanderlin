@@ -1,0 +1,197 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/wood,
+/area/indoors/town)
+"b" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/indoors/town)
+"d" = (
+/obj/structure/door{
+	lockid = "apartment8";
+	name = "Apartment VIII"
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"e" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town)
+"g" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/chair/wood/alt{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"h" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/apartment8,
+/turf/open/floor/wood,
+/area/indoors/town)
+"j" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town)
+"m" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"n" = (
+/obj/structure/door{
+	lockid = "apartment8";
+	name = "Apartment VIII"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"r" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"t" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"u" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"w" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"y" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"D" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/town)
+"E" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/cloth,
+/turf/open/floor/wood,
+/area/indoors/town)
+"F" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"G" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town)
+"H" = (
+/obj/structure/table/wood/plain_alt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/natural/cloth,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"O" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 4
+	},
+/area/indoors/town)
+"R" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/indoors/town)
+"V" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 8
+	},
+/area/indoors/town)
+"W" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/chair/wood/alt{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"Y" = (
+/obj/structure/table/wood/plain_alt,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Z" = (
+/obj/machinery/light/fueled/oven{
+	pixel_y = 31
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+
+(1,1,1) = {"
+D
+R
+b
+D
+R
+b
+D
+"}
+(2,1,1) = {"
+t
+h
+w
+d
+u
+F
+V
+"}
+(3,1,1) = {"
+V
+a
+e
+D
+u
+y
+m
+"}
+(4,1,1) = {"
+j
+e
+w
+j
+Z
+u
+G
+"}
+(5,1,1) = {"
+j
+w
+g
+j
+W
+u
+n
+"}
+(6,1,1) = {"
+O
+E
+Y
+j
+H
+r
+O
+"}
+(7,1,1) = {"
+D
+R
+b
+D
+R
+m
+D
+"}

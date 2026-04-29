@@ -3,6 +3,21 @@
 	explanation_text = "FOLLOWING my HEART shall be the WHOLE of the law."
 	flavor = "Dream"
 
+/datum/attribute_holder/sheet/job/maniac
+	raw_attribute_list = list(
+		STAT_STRENGTH = 6,
+		STAT_CONSTITUTION = 6,
+		STAT_ENDURANCE = 6,
+
+		/datum/attribute/skill/combat/knives = 60,
+		/datum/attribute/skill/combat/wrestling = 50,
+		/datum/attribute/skill/combat/unarmed = 50,
+		/datum/attribute/skill/misc/climbing = 50,
+		/datum/attribute/skill/misc/athletics = 40,
+		/datum/attribute/skill/misc/medicine = 40
+
+	)
+
 /datum/antagonist/maniac
 	name = "Maniac"
 	roundend_category = "Maniacs"
@@ -80,6 +95,19 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/datum/antagonist/maniac/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
+	. = ..()
+	if(!istype(examined))
+		return
+	var/obj/item/organ/heart/heart = examined.getorganslot(ORGAN_SLOT_HEART)
+	if(!heart)
+		return
+
+	var/inscryption_key = LAZYACCESS(heart.inscryption_keys, src) // SPECIFICALLY the key that WE wrote
+	if(inscryption_key && (inscryption_key in key_nums))
+		. += span_danger("[P[THEY]] know[examined.p_s()] [inscryption_key], I AM SURE OF IT!")
+
+
 /datum/antagonist/maniac/on_gain()
 	. = ..()
 	SSfake_world.should_bother = TRUE
@@ -93,20 +121,12 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.set_patron(/datum/patron/inhumen/graggar_zizo)
 			old_cm = dreamer.cmode_music
 			dreamer.cmode_music = 'sound/music/cmode/antag/combat_maniac.ogg'
-			dreamer.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
-			dreamer.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-			dreamer.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-			dreamer.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-			dreamer.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			dreamer.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 			phy.bleed_mod *= 0.5
 			for(var/datum/status_effect/effect in dreamer.status_effects) //necessary to prevent exploits
 				dreamer.remove_status_effect(effect)
-			dreamer.modifier_set_stat_to("[type]", STATKEY_STR, 16)
-			dreamer.modifier_set_stat_to("[type]", STATKEY_CON, 16)
-			dreamer.modifier_set_stat_to("[type]", STATKEY_END, 16)
+			dreamer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/maniac)
 			var/obj/item/organ/heart/heart = dreamer.getorganslot(ORGAN_SLOT_HEART)
-			dreamer.remove_stat_modifier(STATMOD_AGE)
+			dreamer.update_age_stats(dreamer.age, TRUE)
 			if(heart) // clear any inscryptions, in case of being made maniac midround
 				heart.inscryptions = list()
 				heart.inscryption_keys = list()
@@ -116,6 +136,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			dreamer.remove_curse(/datum/curse/zizo)
 			dreamer.AddComponent(/datum/component/theme_music)
 		//	dreamer.remove_client_colour(/datum/client_colour/maniac_marked)
+		RegisterSignal(owner.current, COMSIG_EMOTE_PRAY, PROC_REF(on_owner_pray))
 		owner.current.refresh_looping_ambience()
 		hallucinations = owner.current.overlay_fullscreen("maniac", /atom/movable/screen/fullscreen/maniac)
 	LAZYINITLIST(owner.learned_recipes)
@@ -127,9 +148,24 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		owner.announce_objectives()
 	START_PROCESSING(SSobj, src)
 
+/datum/antagonist/maniac/proc/on_owner_pray(mob/living/follower, message)
+	SIGNAL_HANDLER
+	if(text2num(message) == sum_keys)
+		INVOKE_ASYNC(src, PROC_REF(wake_up))
+
+/datum/patron/inhumen/graggar_zizo/hear_prayer(mob/living/follower, message)
+	var/datum/antagonist/maniac/dreamer = follower.mind.has_antag_datum(/datum/antagonist/maniac)
+	if(!dreamer)
+		return FALSE
+	if(text2num(message) == dreamer.sum_keys)
+		INVOKE_ASYNC(dreamer, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
+		return TRUE
+	. = ..()
+
 /datum/antagonist/maniac/on_removal()
 	STOP_PROCESSING(SSobj, src)
 	if(owner.current)
+		UnregisterSignal(owner.current, COMSIG_EMOTE_PRAY)
 		if(!silent)
 			to_chat(owner.current,span_danger("I am no longer a MANIAC!"))
 		if(ishuman(owner.current))
@@ -265,26 +301,26 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		trey_liam.SetSleeping(25 SECONDS)
 		trey_liam.add_stress(/datum/stress_event/maniac_woke_up)
 		sleep(1.5 SECONDS)
-		to_chat(trey_liam, span_deadsay("<span class='reallybig'>... WHERE AM I? ...</span>"))
+		to_chat(trey_liam, span_userdanger("<span class='reallybig'>... WHERE AM I? ...</span>"))
 		sleep(1.5 SECONDS)
 		var/static/list/slop_lore = list(
-			span_deadsay("... Rockhill? Vanderlin? No ... They don't exist ..."),
-			span_deadsay("... My name is Trey. Trey Liam, Scientific Overseer ..."),
-			span_deadsay("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
-			span_deadsay("... Launched into the stars, preserving their memories ... Their personalities ..."),
-			span_deadsay("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
-			span_deadsay("... There is no hope left. Only the program lets me live through the avatars ..."),
-			span_deadsay("... What have I done?! ..."),
+			span_userdanger("... Rockhill? Vanderlin? No ... They don't exist ..."),
+			span_userdanger("... My name is Trey. Trey Liam, Scientific Overseer ..."),
+			span_userdanger("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
+			span_userdanger("... Launched into the stars, preserving their memories ... Their personalities ..."),
+			span_userdanger("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
+			span_userdanger("... There is no hope left. Only the program lets me live through the avatars ..."),
+			span_userdanger("... What have I done?! ..."),
 		)
 		for(var/slop in slop_lore)
 			to_chat(trey_liam, slop)
 			sleep(3 SECONDS)
-		to_chat(trey_liam, span_big(span_deadsay("I have to go back, I have to go back, I have to go back to Vanderlin.")))
+		to_chat(trey_liam, span_big(span_userdanger("I have to go back, I have to go back, I have to go back to Vanderlin.")))
 	else
 		INVOKE_ASYNC(src, GLOBAL_PROC_REF(cant_wake_up), dreamer)
 		cull_competitors(dreamer)
 	// sleep(15 SECONDS)
-	// to_chat(world, span_deadsay("<span class='reallybig'>The Maniac has TRIUMPHED!</span>"))
+	// to_chat(world, span_userdanger("<span class='reallybig'>The Maniac has TRIUMPHED!</span>"))
 	// SSticker.declare_completion()
 
 /proc/cant_wake_up(mob/living/target)
@@ -292,11 +328,11 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		return
 	ADD_TRAIT(target, TRAIT_SHAKY_SPEECH, TRAIT_GENERIC)
 	target.Knockdown(10 SECONDS)
-	to_chat(target, span_deadsay("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
+	to_chat(target, span_userdanger("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
 	target.say("I CAN'T WAKE UP!", spans = list("reallybig"), ignore_spam = TRUE)
 	sleep(2 SECONDS)
 	for(var/i in 1 to 10)
-		to_chat(target, span_deadsay("<span class='reallybig'>ICANTWAKEUP</span>"))
+		to_chat(target, span_userdanger("<span class='reallybig'>ICANTWAKEUP</span>"))
 		target.say("ICANTWAKEUP!!", spans = list("reallybig"), ignore_spam = TRUE)
 		sleep(0.5 SECONDS)
 	var/obj/item/organ/brain/brain = target.getorganslot(ORGAN_SLOT_BRAIN)

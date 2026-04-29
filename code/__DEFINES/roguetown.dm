@@ -1,9 +1,12 @@
 #define ALL_TEMPLE_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
+#define UNDIVIDED_TEMPLE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/divine/centrist)
 #define ALL_CLERIC_PATRONS 		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
-#define ALL_PALADIN_PATRONS 	list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora)
 #define ALL_TEMPLAR_PATRONS 	list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/eora, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/pestra, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/malum, /datum/patron/divine/xylix)
 #define ALL_PROFANE_PATRONS 	list(/datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ICONOCLAST_PATRONS  list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
+
+#define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar")
+#define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
 
 GLOBAL_LIST_INIT(curse_names, list())
 
@@ -95,246 +98,38 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define STRESS_GOOD 1
 #define STRESS_VGOOD -4
 
-/*	........   Nutrition defines   ................ */
-#define MEAL_FILLING 30
-#define MEAL_GOOD 24
-#define MEAL_AVERAGE 18
-#define MEAL_MEAGRE 15
-#define SNACK_CHUNKY 12
-#define SNACK_NUTRITIOUS 9
-#define SNACK_DECENT 6
-#define SNACK_POOR 3
-
-
-#define MEATPIE_NUTRITION (MINCE_NUTRITION * 3) + BUTTERDOUGH_NUTRITION
-#define FRUITPIE_NUTRITION (SNACK_POOR * 3) + BUTTERDOUGH_NUTRITION
-#define BREADSLICE_NUTRITION SNACK_POOR
-#define DOUGH_NUTRITION BREADSLICE_NUTRITION * 6
-#define SMALLDOUGH_NUTRITION (MEAL_MEAGRE / 2)
-#define BUTTERDOUGH_NUTRITION DOUGH_NUTRITION + BUTTER_NUTRITION
-#define BUTTERDOUGHSLICE_NUTRITION (BUTTERDOUGH_NUTRITION / 2)
-#define BUTTER_NUTRITION SNACK_POOR
-#define RAWMEAT_NUTRITION SNACK_DECENT
-#define COOKED_MEAT_NUTRITION SNACK_NUTRITIOUS
-#define MINCE_NUTRITION SNACK_DECENT
-#define SAUSAGE_NUTRITION MINCE_NUTRITION + COOKED_FAT_NUTRITION
-#define CHEESE_NUTRITION SNACK_DECENT
-#define EGG_NUTRITION SNACK_DECENT
-#define FRYVEGGIE_NUTRITION SNACK_POOR
-#define COOKED_FAT_NUTRITION SNACK_DECENT
-
-/*	........   Rotting Food defines   ................ */
-#define SHELFLIFE_EXTREME 90 MINUTES
-#define SHELFLIFE_LONG 50 MINUTES
-#define SHELFLIFE_DECENT 30 MINUTES
-#define SHELFLIFE_SHORT 20 MINUTES
-#define SHELFLIFE_TINY 12 MINUTES
-#define SHELFLIFE_MINISCULE 5 MINUTES
-
 /*
 	Formerly bitflags, now we are strings
 	Currently used for classes, I could have used these for drifters tho
 */
 
-#define CTAG_ALLCLASS		"CAT_ALLCLASS"		// jus a define for allclass to not deal with actively typing strings
-#define CTAG_PILGRIM 		"CAT_PILGRIM"  		// Pilgrim classes
-#define CTAG_ADVENTURER 	"CAT_ADVENTURER"  	// Adventurer classes
-#define CTAG_TOWNER 		"CAT_TOWNER"  		// Villager class - Villagers can use it
-#define CTAG_ANTAG 			"CAT_ANTAG"  		// Antag class - results in an antag
-#define CTAG_BANDIT			"CAT_BANDIT"		// Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
-#define CTAG_CHALLENGE 		"CAT_CHALLENGE"  	// Challenge class - Meant to be free for everyone
-#define CTAG_MERCENARY		"CAT_MERCENARY"
-#define CTAG_GARRISON		"CAT_GARRISON"
-#define CTAG_FORGARRISON	"CAT_FORGARRISON"
-#define CTAG_ADEPT			"CAT_ADEPT" // Used for Adept class selection
-#define CTAG_SQUIRE 		"CAT_SQUIRE" // Squire Love, Classes, as above.
-#define CTAG_MAGIE			"CAT_MAGIE" //for Mage Associate
-#define CTAG_HEIR			"CAT_HEIR"
-#define CTAG_HAND			"CAT_HAND"			// Hand class - Handles Hand class selector
-#define CTAG_CONSORT 		"CAT_CONSORT" 		// Consort classes
-#define CTAG_VETERAN		"CAT_VETERAN"		// Veteran class - Handles Veteran class selector
-#define CTAG_TOWN_ELDER		"CAT_TOWN_ELDER"		// Town Elder class - Handles Town Elder class selector
-#define CTAG_ROYALKNIGHT	"CAT_ROYAL_KNIGHT"
-#define CTAG_MENATARMS		"CAT_MENATARMS"
-#define CTAG_SERVANT		"CAT_SERVANT" 		// Servant class - 4 type of servant to fill in someplace.
-#define CTAG_GATEMASTER		"CAT_GATEMASTER"
-#define CTAG_WRETCH			"CAT_WRETCH"
-#define CTAG_INQUISITION	"CAT_INQUISITION"	// For Orthodoxist subclasses
+#define CTAG_ALLCLASS "CAT_ALLCLASS" // just a define for allclass to not deal with actively typing strings
+#define CTAG_PILGRIM "CAT_PILGRIM"  // Pilgrim classes
+#define CTAG_ADVENTURER "CAT_ADVENTURER" // Adventurer classes
+#define CTAG_TOWNER "CAT_TOWNER" // Villager class - Villagers can use it
+#define CTAG_ANTAG "CAT_ANTAG" // Antag class - results in an antag
+#define CTAG_BANDIT	"CAT_BANDIT" // Bandit class - Tied to the bandit antag really	<- Disabled; bandits got stuck with class selection
+#define CTAG_CHALLENGE "CAT_CHALLENGE" // Challenge class - Meant to be free for everyone
+#define CTAG_MERCENARY "CAT_MERCENARY"
+#define CTAG_GARRISON "CAT_GARRISON"
+#define CTAG_FORGARRISON "CAT_FORGARRISON"
+#define CTAG_ADEPT "CAT_ADEPT" // Used for Adept class selection
+#define CTAG_SQUIRE "CAT_SQUIRE" // Squire Love, Classes, as above.
+#define CTAG_MAGIE "CAT_MAGIE" //for Mage Associate
+#define CTAG_HEIR "CAT_HEIR"
+#define CTAG_HAND "CAT_HAND" // Hand class - Handles Hand class selector
+#define CTAG_CONSORT "CAT_CONSORT" // Consort classes
+#define CTAG_VETERAN "CAT_VETERAN" // Veteran class - Handles Veteran class selector
+#define CTAG_TOWN_ELDER "CAT_TOWN_ELDER" // Town Elder class - Handles Town Elder class selector
+#define CTAG_ROYALKNIGHT "CAT_ROYAL_KNIGHT"
+#define CTAG_ARCHIVIST "CAT_ARCHIVIST"
+#define CTAG_MENATARMS "CAT_MENATARMS"
+#define CTAG_SERVANT "CAT_SERVANT" // Servant class - 4 type of servant to fill in someplace.
+#define CTAG_GATEMASTER "CAT_GATEMASTER"
+#define CTAG_WRETCH "CAT_WRETCH"
+#define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
-
-// Character category and its buys
-#define TRIUMPH_CAT_CHARACTER "CHARACTER"
-
-#define TRIUMPH_BUY_RACE_ALL "race_all"
-#define TRIUMPH_BUY_ANY_CLASS "pick_any"
-#define TRIUMPH_BUY_ADOPTION "adoption"
-#define TRIUMPH_BUY_FART "fart"
-#define TRIUMPH_BUY_SECRET_OFFICIANT "secret_officiant"
-
-// Character category and its buys
-#define TRIUMPH_CAT_CHALLENGES "CHALLENGES"
-
-#define TRIUMPH_BUY_LEPROSY "leprosy"
-#define TRIUMPH_BUY_CURSE "curse"
-
-// Storyteller category and its buys
-#define TRIUMPH_CAT_STORYTELLER "STORYTELLER"
-
-#define TRIUMPH_BUY_ASTRATA_INFLUENCE "astrata_influence"
-#define TRIUMPH_BUY_NOC_INFLUENCE "noc_influence"
-#define TRIUMPH_BUY_RAVOX_INFLUENCE "ravox_influence"
-#define TRIUMPH_BUY_ABYSSOR_INFLUENCE "abyssor_influence"
-#define TRIUMPH_BUY_XYLIX_INFLUENCE "xylix_influence"
-#define TRIUMPH_BUY_NECRA_INFLUENCE "necra_influence"
-#define TRIUMPH_BUY_PESTRA_INFLUENCE "pestra_influence"
-#define TRIUMPH_BUY_MALUM_INFLUENCE "malum_influence"
-#define TRIUMPH_BUY_EORA_INFLUENCE "eora_influence"
-#define TRIUMPH_BUY_DENDOR_INFLUENCE "dendor_influence"
-#define TRIUMPH_BUY_ZIZO_INFLUENCE "zizo_influence"
-#define TRIUMPH_BUY_BAOTHA_INFLUENCE "baotha_influence"
-#define TRIUMPH_BUY_GRAGGAR_INFLUENCE "graggar_influence"
-#define TRIUMPH_BUY_MATTHIOS_INFLUENCE "matthios_influence"
-
-#define TRIUMPH_BUY_MATTHIOS_INFLUENCE_REDUCTION "matthios_influence_reduction"
-#define TRIUMPH_BUY_GRAGGAR_INFLUENCE_REDUCTION "graggar_influence_reduction"
-#define TRIUMPH_BUY_BAOTHA_INFLUENCE_REDUCTION "baotha_influence_reduction"
-#define TRIUMPH_BUY_ZIZO_INFLUENCE_REDUCTION "zizo_influence_reduction"
-#define TRIUMPH_BUY_DENDOR_INFLUENCE_REDUCTION "dendor_influence_reduction"
-#define TRIUMPH_BUY_EORA_INFLUENCE_REDUCTION "eora_influence_reduction"
-#define TRIUMPH_BUY_MALUM_INFLUENCE_REDUCTION "malum_influence_reduction"
-#define TRIUMPH_BUY_PESTRA_INFLUENCE_REDUCTION "pestra_influence_reduction"
-#define TRIUMPH_BUY_NECRA_INFLUENCE_REDUCTION "necra_influence_reduction"
-#define TRIUMPH_BUY_XYLIX_INFLUENCE_REDUCTION "xylix_influence_reduction"
-#define TRIUMPH_BUY_ABYSSOR_INFLUENCE_REDUCTION "abyssor_influence_reduction"
-#define TRIUMPH_BUY_RAVOX_INFLUENCE_REDUCTION "ravox_influence_reduction"
-#define TRIUMPH_BUY_NOC_INFLUENCE_REDUCTION "noc_influence_reduction"
-#define TRIUMPH_BUY_ASTRATA_INFLUENCE_REDUCTION "astrata_influence_reduction"
-
-// Misc category and its buys
-#define TRIUMPH_CAT_MISC "MISC"
-
-#define TRIUMPH_BUY_PSYDON_FAVOURITE "psydon_favourite"
-
-// Misc category and its buys
-#define TRIUMPH_CAT_COMMUNAL "COMMUNAL"
-
-#define TRIUMPH_BUY_PSYDON_RETIREMENT "psydon_retirement"
-#define TRIUMPH_BUY_ORPHANAGE_RENOVATION "orphanage_renovation"
-#define TRIUMPH_BUY_LONGER_WEEK "longer_week"
-#define TRIUMPH_BUY_EXOTIC_TASTES "exotic_tastes"
-
-// Bought triumph buys category
-#define TRIUMPH_CAT_ACTIVE_DATUMS "BOUGHT"
-
-// .............. SELLPRICE/VALUE DEFINES ..................... //
-// Basicallly material cost + work cost will be the value from now on. Needs work to value these things in comparison but its a simple way to get some consistency to it
-// The material cost, work cost and bonus value should mostly be a under the hood thing so its easy to parse. Adjusting them will obviously affect end user costs.
-// Keep values divisible by 2 and 3 and 4 without fractions, lets avoid money fractions guys.
-
-// Material costs.
-// theres two parts of what a material is worth, how hard is it to find it and how painful is it to collect, and how useful is it.
-#define VALUE_OF_A_SIMPLE_MEAL 6	// some sort of base value, usually whats charged for a basic meal in the inn. Good measure to work from. Its comically low valued when looking at the actual invested material + effort vs smithing or crafting though
-#define VALUE_OF_A_MUG_OF_ALE 2
-#define M_MISC		1	// random stuff like stones or fibres I guess
-#define M_WOOD		2	// one small log.
-#define M_CLOTH		2	// one cloth piece
-#define M_GRAIN		1	// one threshed wheat grain
-#define M_FUR		M_CLOTH * 2
-#define M_SILK		M_CLOTH * 2	// one silk thread
-#define M_SALT		4	// one salt, or raw ore, or coal
-#define M_LEATHER	M_CLOTH * 2 // one hide
-#define M_IRON		12	// one iron bar  Twelve is a good number for it can be halved, cut in three and four without fractions. Multiples of 6
-#define M_STEEL		M_IRON+W_MODERATE	// one steel bar
-#define M_SILVER	M_IRON*3	// one silver bar
-#define M_GOLD		M_IRON*5	// one gold bar
-
-// Skill costs - a rarity value add, items requiring a high skill to produce are rarer and has more intrinsic value. So craftsmen can make a profit.
-#define SKILL_1		2
-#define SKILL_2		4
-#define SKILL_3		6
-#define SKILL_4		8
-#define SKILL_5		10
-
-// Work costs - valued VERY low compared to raw materials, this is a problem but at least its systemic and visible now and can be adjusted. Very rough, time to gather stuff, refine it etc etc as well as crafting time itself.
-#define W_MINOR		2				// Less than 10 seconds of work
-#define W_MODERATE	W_MINOR * 3		// Less than 1 minute of work, high skill required
-#define W_MAJOR		W_MINOR * 6		// Less than 3 minutes of work
-
-// Bonus value - totally arbitrary bonus slapped on. For magic items, unique stuff you want people to steal/plunder etc
-#define BONUS_VALUE_TINY		6
-#define BONUS_VALUE_SMALL		12
-#define BONUS_VALUE_MODEST		BONUS_VALUE_SMALL * 2
-#define BONUS_VALUE_BIG			BONUS_VALUE_SMALL * 4
-
-#define GREED_SMALL_POTATO		BONUS_VALUE_TINY	// to get some profit margin to the offmap trading company and make economy make sense
-#define GREEDY_TRADER			BONUS_VALUE_SMALL	// slap this on most stuff the trader imports (its the markup they pay their supplier, or just double value for stuff you want to keep rare)
-
-/*--------------\
-| VALUE DEFINES |	- If you find this confusing focus on this bit. Just use the value define below you think seems reasonable, done.
-\--------------*/
-// TINY is 1/3 of a bar, SMALL is 1/2
-#define NO_MARKET_VALUE			null
-#define VALUE_CHEAP_CLOTHING	M_CLOTH+W_MINOR
-#define VALUE_FINE_CLOTHING		M_CLOTH+M_SILK+W_MINOR
-#define VALUE_FANCY_HAT			M_SILK+W_MINOR+BONUS_VALUE_SMALL
-#define VALUE_IRON_SMALL_ITEM	VALUE_IRON_ITEM/2
-#define VALUE_IRON_ITEM			M_IRON+W_MINOR
-#define VALUE_STEEL_SMALL_ITEM	VALUE_STEEL_ITEM/2
-#define VALUE_STEEL_ITEM		M_STEEL+W_MINOR
-#define VALUE_SILVER_TINY_ITEM	M_SILVER/3+W_MODERATE/3
-#define VALUE_SILVER_ITEM		M_SILVER+W_MODERATE
-#define VALUE_GOLD_TINY_ITEM	M_GOLD/3+W_MODERATE/3
-#define VALUE_GOLD_ITEM			M_GOLD+W_MODERATE
-#define VALUE_GOLD_RARE_ITEM	VALUE_GOLD_ITEM+BONUS_VALUE_MODEST
-
-#define VALUE_PADDED_DRESS			M_SILK*5+W_MODERATE+BONUS_VALUE_TINY
-#define VALUE_SMALL_LEATHER			M_LEATHER+W_MINOR
-#define VALUE_MEDIUM_LEATHER		M_LEATHER*2+W_MINOR
-#define VALUE_BIG_LEATHER			M_LEATHER*3+W_MINOR
-#define VALUE_SMALL_FUR				M_FUR+M_MISC*2+W_MINOR
-
-#define VALUE_LIGHT_GAMBESSON		M_CLOTH*2+M_MISC+W_MINOR
-#define VALUE_GAMBESSON				M_CLOTH*4+M_MISC+W_MINOR
-#define VALUE_HEAVY_GAMBESSON		M_CLOTH*6+M_MISC*4+W_MODERATE
-#define VALUE_FUR_ARMOR				M_LEATHER*2+M_FUR+W_MINOR
-#define VALUE_LEATHER_ARMOR			M_LEATHER*2+W_MINOR
-#define VALUE_LEATHER_ARMOR_FUR		VALUE_LEATHER_ARMOR+M_SALT
-#define VALUE_LEATHER_ARMOR_PLUS	VALUE_STEEL_SMALL_ITEM+M_LEATHER
-#define VALUE_LEATHER_ARMOR_LORD	VALUE_LEATHER_ARMOR+BONUS_VALUE_MODEST
-#define VALUE_IRON_ARMOR			VALUE_IRON_ITEM
-#define VALUE_IRON_ARMOR_UNUSUAL	VALUE_IRON_ITEM+BONUS_VALUE_TINY
-#define VALUE_STEEL_ARMOR			VALUE_STEEL_ITEM
-#define VALUE_STEEL_ARMOR_FINE		VALUE_STEEL_ITEM+BONUS_VALUE_TINY
-#define VALUE_SILVER_ARMOR			VALUE_SILVER_ITEM
-#define VALUE_BRIGANDINE			VALUE_STEEL_ITEM*2+M_CLOTH+BONUS_VALUE_TINY
-#define VALUE_FULL_PLATE			VALUE_STEEL_ITEM*3
-#define VALUE_SNOWFLAKE_STEEL		VALUE_STEEL_ARMOR+BONUS_VALUE_MODEST
-
-#define VALUE_LEATHER_HELMET		M_LEATHER*2+W_MINOR
-#define VALUE_CHEAP_IRON_HELMET		VALUE_IRON_SMALL_ITEM
-#define VALUE_IRON_HELMET			VALUE_IRON_ITEM
-#define VALUE_CHEAP_STEEL_HELMET 	VALUE_STEEL_SMALL_ITEM
-#define VALUE_STEEL_HELMET			VALUE_STEEL_ITEM
-#define VALUE_SILVER_RING			VALUE_SILVER_TINY_ITEM
-#define VALUE_GOLD_RING				VALUE_GOLD_TINY_ITEM
-#define VALUE_MUSC_INSTRUMENT		VALUE_COMMON_GOODS
-#define VALUE_RARE_MUSIC_INSTRUMENT	VALUE_COSTLY_THING
-
-
-// Generic values - a lot of items lack materials for the above calculations so this is a super basic template to assign value to misc items
-#define VALUE_DIRT_CHEAP	6
-#define VALUE_COMMON_GOODS	VALUE_DIRT_CHEAP * 2		// so 12
-#define VALUE_COSTLY_THING	VALUE_COMMON_GOODS * 3		// 36
-#define VALUE_LUXURY_THING	VALUE_COSTLY_THING * 2		// and 72
-#define VALUE_EXTREME		VALUE_LUXURY_THING * 4		// and 288
-
-#define VALUE_MAGIC_ITEM_WEAK	VALUE_COSTLY_THING+BONUS_VALUE_MODEST
-#define VALUE_MAGIC_ITEM_STRONG	VALUE_MAGIC_ITEM_WEAK+BONUS_VALUE_BIG
-
-
-
-
-
+#define CTAG_ORPHAN "CAT_ORPHAN" // For Orphan subclasses
 
 /*--------------------\
 | ARMOR BASIC CONCEPT |
@@ -373,21 +168,22 @@ Thing can move up or down an armor class by significant changes to coverage & cr
 \--------------------*/
 
 // Light AC
+#define ARMOR_NONE			list("blunt" = 0, "slash" = 0, "stab" = 0, "piercing" = 0, "fire" = 0, "acid" = 0)
 #define ARMOR_MINIMAL		list("blunt" = 5, "slash" = 5, "stab" = 5, "piercing" = 0, "fire" = 0, "acid" = 0)
 #define ARMOR_WEAK			list("blunt" = 10, "slash" = 10, "stab" = 10, "piercing" = 5, "fire" = 0, "acid" = 0)
 
 #define ARMOR_PADDED_BAD	list("blunt" = 15, "slash" = 15, "stab" = 15, "piercing" = 15, "fire" = 0, "acid" = 0)
-#define ARMOR_PADDED		list("blunt" = 25, "slash" = 25, "stab" = 25, "piercing" = 30, "fire" = 0, "acid" = 0)
-#define ARMOR_PADDED_GOOD	list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 35, "fire" = 0, "acid" = 0)
+#define ARMOR_PADDED		list("blunt" = 35, "slash" = 25, "stab" = 25, "piercing" = 30, "fire" = 0, "acid" = 0)
+#define ARMOR_PADDED_GOOD	list("blunt" = 45, "slash" = 30, "stab" = 30, "piercing" = 35, "fire" = 0, "acid" = 0)
 
 #define ARMOR_LEATHER_BAD	list("blunt" = 30, "slash" = 30, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
 #define ARMOR_LEATHER		list("blunt" = 35, "slash" = 35, "stab" = 35, "piercing" = 15, "fire" = 0, "acid" = 0)
 #define	ARMOR_LEATHER_GOOD	list("blunt" = 40, "slash" = 40, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
 
 // Medium AC
-#define ARMOR_MAILLE_IRON	list("blunt" = 45, "slash" = 45, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
-#define ARMOR_MAILLE		list("blunt" = 55, "slash" = 55, "stab" = 55, "piercing" = 40, "fire" = 0, "acid" = 0)
-#define ARMOR_MAILLE_GOOD	list("blunt" = 60, "slash" = 60, "stab" = 60, "piercing" = 45, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE_IRON	list("blunt" = 30, "slash" = 45, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE		list("blunt" = 45, "slash" = 55, "stab" = 55, "piercing" = 40, "fire" = 0, "acid" = 0)
+#define ARMOR_MAILLE_GOOD	list("blunt" = 55, "slash" = 60, "stab" = 60, "piercing" = 45, "fire" = 0, "acid" = 0)
 #define ARMOR_SCALE			list("blunt" = 65, "slash" = 65, "stab" = 65, "piercing" = 65, "fire" = 0, "acid" = 0)
 #define ARMOR_BRIGANDINE	list("blunt" = 70, "slash" = 70, "stab" = 70, "piercing" = 50, "fire" = 0, "acid" = 0)
 
@@ -674,7 +470,9 @@ BCLASS_TWIST)
 #define SKULLMET_ICONS list(\
 		"volf"="skullmet_volf",\
 		"bear"="skullmet_bear",\
-		"gote"="skullmet_goat")
+		"gote"="skullmet_goat",\
+		"rous"="skullmet_ruffian",\
+		"bobcat"="skullmet_bobcat")
 
 #define DENDOR_TAME_PROB_NONE 0
 #define DENDOR_TAME_PROB_LOW 25

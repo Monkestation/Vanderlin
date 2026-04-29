@@ -71,9 +71,9 @@
 			if(1)
 				owner.vomit()
 			if(2,3)
-				owner.dizziness += 10
+				owner.adjust_dizzy(10 SECONDS)
 			if(4,5)
-				owner.confused += 10
+				owner.adjust_confusion(10 SECONDS)
 				owner.set_eye_blur_if_lower(20 SECONDS)
 			if(6 to 9)
 				owner.slurring += 30
@@ -135,14 +135,14 @@
 	lose_text = "<span class='notice'>My throat stops itching.</span>"
 
 /datum/brain_trauma/mild/nervous_cough/on_life()
-	if(prob(12) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
-		if(prob(5))
-			to_chat(owner, "<span notice='warning'>[pick("You have a coughing fit!", "You can't stop coughing!")]</span>")
+	if(prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
+		owner.emote("cough", forced = TRUE)
+		if(prob(12))
+			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
 			owner.Immobilize(20)
-			owner.emote("cough")
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 6)
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 12)
-		owner.emote("cough")
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 18)
 	..()
 
 /datum/brain_trauma/mild/expressive_aphasia
@@ -152,7 +152,7 @@
 	gain_text = "<span class='warning'>I lose my grasp on complex words.</span>"
 	lose_text = "<span class='notice'>I feel my vocabulary returning to normal again.</span>"
 
-	var/static/list/common_words = world.file2list("strings/1000_most_common.txt")
+	var/static/list/common_words = file2list("strings/1000_most_common.txt")
 
 /datum/brain_trauma/mild/expressive_aphasia/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]

@@ -7,7 +7,7 @@
 	sound = 'sound/items/dig_shovel.ogg'
 
 	antimagic_flags = NONE
-	associated_stat = STATKEY_CON
+	associated_stat = STAT_CONSTITUTION
 	spell_type = SPELL_STAMINA
 	has_visual_effects = FALSE
 	charge_time = 2 SECONDS
@@ -15,7 +15,7 @@
 	charge_slowdown = 1.3
 	cooldown_time = 3 MINUTES
 	spell_cost = 30
-	associated_skill = /datum/skill/magic/druidic
+	associated_skill = /datum/attribute/skill/magic/druidic
 
 	summon_amount = 3
 	summon_type = list(/mob/living/simple_animal/hostile/retaliate/bigrat)

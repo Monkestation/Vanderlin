@@ -10,6 +10,12 @@
 ///from base of mob/living/set_buckled(): (new_buckled)
 #define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
 
+/// From /mob/living/update_offsets(animate) : (new_x, new_y, new_w, new_z, animate)
+#define COMSIG_LIVING_UPDATE_OFFSETS "living_update_offsets"
+
+///from base of mob/update_transform()
+#define COMSIG_LIVING_POST_UPDATE_TRANSFORM "living_post_update_transform"
+
 ///Signal sent when a keybind is deactivated
 #define DEACTIVATE_KEYBIND(A) "[A]_DEACTIVATED"
 #define COMSIG_KB_LIVING_VIEW_PET_COMMANDS "keybinding_living_view_pet_commands"
@@ -28,16 +34,8 @@
 #define COMSIG_MOB_ACTIVE_PERCEPTION "comsig_mob_active_perception"	//sent from mob/living/proc/look_around(): (mob/living/source)
 #define COMSIG_LIVING_WOUND_GAINED "wound_gained"
 
-// Client
-/// sent when a mob/login() finishes: (client)
-#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
-/// from base of client/MouseDown(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDOWN "client_mousedown"
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEUP "client_mouseup"
-	#define COMPONENT_CLIENT_MOUSEUP_INTERCEPT (1<<0)
-/// from base of client/MouseUp(): (/client, object, location, control, params)
-#define COMSIG_CLIENT_MOUSEDRAG "client_mousedrag"
+/// From base of /obj/item/reagent_containers/food/snacks/attack: (mob/living/M, mob/living/user, list/modifiers)
+#define COMSIG_MOB_FOOD_EAT "mob_food_ate"
 
 //ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
 ///from base of mob/living/OffBalance() (amount, ignore_canstun)
@@ -57,15 +55,30 @@
 ///from base of mob/living/Sleeping() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_SLEEP "living_sleeping"
 	#define COMPONENT_NO_STUN 1			//For all of them
+///from base of mob/living/Stumble(): (amount, update, ignore)
+#define COMSIG_LIVING_STATUS_STUMBLE "living_stumble"
+///from base of mob/living/Concussion(): (amount, update, ignore)
+#define COMSIG_LIVING_STATUS_CONCUSSION "living_concussion"
+///from end of fully_heal(): (heal_flags)
+#define COMSIG_LIVING_POST_FULLY_HEAL "living_post_fully_heal"
 ///from base of /mob/living/can_track(): (mob/user)
 #define COMSIG_LIVING_CAN_TRACK "mob_cantrack"
 	#define COMPONENT_CANT_TRACK 1
 ///from base of mob/living/death(): (gibbed)
 #define COMSIG_LIVING_DEATH "living_death"
+#define COMSIG_LIVING_TRY_ENTER_AFTERLIFE "try_enter_afterlife"
 /// From /mob/living/befriend() : (mob/living/new_friend)
 #define COMSIG_LIVING_BEFRIENDED "living_befriended"
 /// From /mob/living/unfriend() : (mob/living/old_friend)
 #define COMSIG_LIVING_UNFRIENDED "living_unfriended"
+///From base of mob/living/ZImpactDamage() (mob/living, levels, turf/t)
+#define COMSIG_LIVING_Z_IMPACT "living_z_impact"
+	/// Just for the signal return, does not run normal living handing of z fall damage for mobs
+	#define ZIMPACT_CANCEL_DAMAGE (1<<0)
+	/// Do not show default z-impact message
+	#define ZIMPACT_NO_MESSAGE (1<<1)
+	/// Do not do the spin animation when landing
+	#define ZIMPACT_NO_SPIN (1<<2)
 
 ///from base of mob/living/set_body_position(): (new_position, old_position)
 #define COMSIG_LIVING_SET_BODY_POSITION  "living_set_body_position"
@@ -74,9 +87,6 @@
 #define COMSIG_LIVING_MANA_CHANGED "living_mana_changed"
 /// from base of [datum/devotion/cleric_holder/update_devotion()]
 #define COMSIG_LIVING_DEVOTION_CHANGED "living_devotion_changed"
-#define COMSIG_LIVING_RAGE_CHANGED "living_devotion_changed"
-#define COMSIG_RAGE_BOTTOMED "living_rage_bottomed"
-#define COMSIG_RAGE_OVERRAGE "living_rage_over"
 
 ///from base of
 #define COMSIG_LIVING_DREAM_END  "living_sleep_advancement_end"
@@ -104,5 +114,15 @@
 
 /// Updating a mob's movespeed when lacking limbs. (list/modifiers)
 #define COMSIG_LIVING_LIMBLESS_MOVESPEED_UPDATE "living_get_movespeed_modifiers"
+///From living/Life(). (deltatime, times_fired)
+#define COMSIG_LIVING_LIFE "living_life"
+	/// Block the Life() proc from proceeding... this should really only be done in some really wacky situations.
+	#define COMPONENT_LIVING_CANCEL_LIFE_PROCESSING (1<<0)
 
 #define COMSIG_LIVING_ADJUSTED "living_damage_adjusted"
+
+#define COMSIG_LIVING_PREBITE_SELF  "living_prebite"
+#define COMSIG_LIVING_POSTBITE_SELF "living_postbite"
+
+/// From [mob/living/MiddleClickOn] before a middle mouse intent is performed
+#define COMSIG_MOB_PRE_SPECIAL_MIDDLE "pre_special_middle"

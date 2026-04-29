@@ -31,7 +31,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "O" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "Y" = (
 /obj/structure/kneestingers,

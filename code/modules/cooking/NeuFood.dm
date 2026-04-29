@@ -11,7 +11,7 @@
 \---------------*/
 
 /obj/item/reagent_containers/food/snacks/foodbase // root item for uncooked food thats disgusting when raw
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition = SNACK_VPOOR
 	eat_effect = /datum/status_effect/debuff/uncookedfood
 	do_random_pixel_offset = FALSE // disables the random placement on creation for this object
 
@@ -45,6 +45,7 @@
 	desc = "A vile decaying morsel, its last hope is to become food for the soil."
 	color = "#6c6897"
 	eat_effect = /datum/status_effect/debuff/rotfood
+	list_reagents = list(/datum/reagent/yuck = 5)
 
 /obj/item/reagent_containers/food/snacks/rotten/Initialize()
 	var/mutable_appearance/rotflies = mutable_appearance('icons/roguetown/mob/rotten.dmi', "rotten")
@@ -57,7 +58,7 @@
 	icon_state = "meat"
 
 /obj/item/reagent_containers/food/snacks/rotten/bacon
-	name = "rotten pigflesh"
+	name = "rotten flesh"
 	icon_state = "pigflesh"
 
 /obj/item/reagent_containers/food/snacks/rotten/sausage
@@ -95,7 +96,7 @@
 
 /obj/item/reagent_containers/food/snacks/rotten/mince/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/mess/rotting/get_turf(src)
-	playsound(get_turf(src), 'sound/foley/meatslap.ogg', 100, TRUE, -1)
+	playsound(src, 'sound/foley/meatslap.ogg', 100, TRUE, -1)
 	..()
 	qdel(src)
 
@@ -157,7 +158,7 @@
 	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "bowl"
 	fill_icon_thresholds = list(0, 30, 50, 100)
-	reagent_flags = TRANSFERABLE | AMOUNT_VISIBLE
+	reagent_flags = OPENCONTAINER
 	force = 5
 	throwforce = 5
 	amount_per_transfer_from_this = 5
@@ -171,6 +172,7 @@
 	fillsounds = list('sound/items/fillcup.ogg')
 	metalizer_result = /obj/item/reagent_containers/glass/bowl/iron
 	smeltresult = /obj/item/fertilizer/ash
+	var/salad
 	var/max_usages = 5
 	var/usages = 0
 	var/dirty = FALSE
@@ -213,7 +215,7 @@
 		. += filling
 		. += mutable_appearance(icon, "steam")
 
-/obj/item/reagent_containers/glass/bowl/attackby(obj/item/I, mob/user, params) // lets you eat with a spoon from a bowl
+/obj/item/reagent_containers/glass/bowl/attackby(obj/item/I, mob/user, list/modifiers) // lets you eat with a spoon from a bowl
 	if(reagents.total_volume == 0 && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		if(dirty)
 			var/obj/item/natural/cloth/cloth_check = I
@@ -238,6 +240,22 @@
 		else
 			to_chat(user, span_notice("This platter is already clean."))
 			return
+	if(reagents.total_volume == 0 && istype(I, /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced))
+		to_chat(user, span_warning("Tossing up a salad..."))
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+		if(do_after(user, short_cooktime, src))
+			var/obj/item/reagent_containers/food/snacks/salad/salad = new /obj/item/reagent_containers/food/snacks/salad(get_turf(src))
+			salad.set_quality(recipe_quality)
+			salad.icon_state = src.icon_state
+			salad.trash = src.type
+			salad.drop_sound = src.drop_sound
+			salad.add_overlay("salad_base")
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(I)
+			qdel(src)
+		return
 	if(reagents.total_volume > 0 && istype(I, /obj/item/natural/cloth) && user?.used_intent?.type == INTENT_USE)
 		to_chat(user, span_warning("You can't clean the [src] while it has something inside of it!"))
 		return
@@ -262,7 +280,7 @@
 		if(particle_spewer)
 			qdel(particle_spewer)
 		update_appearance(UPDATE_OVERLAYS)
-	playsound(get_turf(src), 'sound/misc/eat.ogg', rand(30, 60), TRUE)
+	playsound(src, 'sound/misc/eat.ogg', rand(30, 60), TRUE)
 	user.visible_message(span_info("[user] eats from [src]."), \
 			span_notice("I swallow a gulp of [src]."))
 	addtimer(CALLBACK(reagents, TYPE_PROC_REF(/datum/reagents, trans_to), user, min(amount_per_transfer_from_this, 5), TRUE, TRUE, FALSE, user, FALSE, INGEST), 5 DECISECONDS)
@@ -374,7 +392,7 @@
 
 /obj/item/reagent_containers/glass/bowl/clay/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/shreds/clay(get_turf(src))
-	playsound(get_turf(src), 'sound/foley/break_clay.ogg', 90, TRUE)
+	playsound(src, 'sound/foley/break_clay.ogg', 90, TRUE)
 	..()
 	qdel(src)
 
@@ -394,13 +412,19 @@
 	name = "soup"
 	var/hydration = 5
 
-/datum/reagent/consumable/soup/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/soup/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
+
+/datum/reagent/consumable/soup/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
+
+/datum/reagent/consumable/soup/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_hydration(hydration)
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+6, BLOOD_VOLUME_NORMAL)
+			H.adjust_hydration(hydration * efficiency)
 	..()
 
 /datum/reagent/consumable/soup/oatmeal
@@ -414,6 +438,11 @@
 	taste_mult = 3
 	hydration = 2
 
+/datum/reagent/consumable/soup/oatmeal/sunreed
+	name = "sweet-reed"
+	color = "#aa9539"
+	taste_description = "sweet and soft sunreed kernels"
+
 /datum/reagent/consumable/soup/veggie
 	name = "vegetable soup"
 	description = ""
@@ -425,6 +454,10 @@
 /datum/reagent/consumable/soup/veggie/potato
 	color = "#869256"
 	taste_description = "potato broth"
+
+/datum/reagent/consumable/soup/veggie/pompkaun
+	color = "#df7d0e"
+	taste_description = "pompkaun soup"
 
 /datum/reagent/consumable/soup/veggie/onion
 	color = "#a6b457"
@@ -438,11 +471,24 @@
 	color = "#becf9d"
 	taste_description = "boiled turnip"
 
+
+/datum/reagent/consumable/soup/veggie/tamto
+	name = "tamto soup"
+	color = "#e2461f"
+	taste_description = "tamto soup"
+
 /datum/reagent/consumable/soup/egg
 	name = "egg soup"
 	color = "#dedbaf"
 	taste_description = "egg soup"
 	nutriment_factor = 12
+
+/datum/reagent/consumable/soup/bone
+	name = "bone broth"
+	color = "#978e0d"
+	taste_description = "Savory, and deeply rich."
+	nutriment_factor = 12
+	taste_mult = 4
 
 /datum/reagent/consumable/soup/cheese // A thicker soup, almost on the level of old oatmeal. But less hydration than other soups
 	name = "cheese soup"
@@ -460,6 +506,16 @@
 	reagent_state = LIQUID
 	nutriment_factor = 11
 	taste_mult = 4
+
+/datum/reagent/consumable/soup/stew/sinew
+	color = "#6e6116"
+	taste_description = "bone broth"
+
+
+/datum/reagent/consumable/soup/stew/bone
+	color = "#8a770c"
+	taste_description = "bone broth"
+
 
 /datum/reagent/consumable/soup/stew/chicken
 	color = "#baa21c"
@@ -496,23 +552,23 @@
 	taste_description = "something gross"
 	metabolization_rate = 0.3
 
-/datum/reagent/consumable/soup/stew/gross/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/soup/stew/gross/on_mob_life(mob/living/carbon/M, efficiency)
 	if(is_vagrant_job(M.mind.assigned_role)) // beggars gets revitalized, a little
-		M.adjustBruteLoss(-0.1)
-		M.adjustFireLoss(-0.1)
-		M.adjust_energy(2)
+		M.adjustBruteLoss(-0.1 * efficiency)
+		M.adjustFireLoss(-0.1 * efficiency)
+		M.adjust_energy(2 * efficiency)
 		return
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER))
 		return
-	if(prob(8))
+	if(prob(8 * efficiency))
 		to_chat(M, span_danger(pick(
 			"I feel bile rising...", \
 			"I feel nauseous...", \
 			"My breath smells terrible...", \
 			"My stomach churns...")))
-	if(prob(8))
+	if(prob(8 * efficiency))
 		M.emote("gag")
-		M.add_nausea(9)
+		M.add_nausea(9 * efficiency)
 	..()
 	. = TRUE
 
@@ -523,22 +579,20 @@
 	taste_description = "something truly vile"
 	metabolization_rate = 0.2
 
-/datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M)
+/datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M, efficiency)
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER ))
-		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-			M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_MAXIMUM)
-		M.adjustBruteLoss(-0.2, 0)
-		M.adjustFireLoss(-0.2, 0)
-		M.adjust_energy(5)
+		M.adjustBruteLoss(-0.2 * efficiency, 0)
+		M.adjustFireLoss(-0.2 * efficiency, 0)
+		M.adjust_energy(5 * efficiency)
 		return
 	else
-		if(prob(12))
+		if(prob(12 * efficiency))
 			M.emote("gag")
-			M.add_nausea(9)
+			M.add_nausea(9 * efficiency)
 			if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
-				M.adjustToxLoss(2)
+				M.adjustToxLoss(2 * efficiency)
 			else
-				M.adjustToxLoss(5)
+				M.adjustToxLoss(5 * efficiency)
 	..()
 	. = TRUE
 
@@ -564,9 +618,9 @@
 	description = ""
 	color = "#FFFFFF" // rgb: 96, 165, 132
 
-/datum/reagent/flour/on_mob_life(mob/living/carbon/M)
-	if(prob(30))
-		M.confused = max(M.confused + 3, 0)
+/datum/reagent/flour/on_mob_life(mob/living/carbon/M, efficiency)
+	if(prob(30 * efficiency))
+		M.adjust_confusion(6 SECONDS * efficiency)
 	M.emote(pick("cough"))
 	..()
 
@@ -575,7 +629,7 @@
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/powder/flour/attackby(obj/item/I, mob/living/user, params)
+/obj/item/reagent_containers/powder/flour/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	var/found_table = locate(/obj/structure/table) in (loc)
 	var/obj/item/reagent_containers/glass/R = I
@@ -598,18 +652,66 @@
 
 /obj/item/reagent_containers/powder/flour/attack_hand(mob/living/user)
 	if(water_added)
-		short_cooktime = (40 - ((user.get_skill_level(/datum/skill/craft/cooking))*5))
+		short_cooktime = (40 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*5))
 		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
 		if(do_after(user, short_cooktime, src))
 			var/obj/item/reagent_containers/food/snacks/dough_base/base = new /obj/item/reagent_containers/food/snacks/dough_base(get_turf(src))
 			base.set_quality(recipe_quality)
-			user.mind.add_sleep_experience(/datum/skill/craft/cooking, (user.STAINT*0.5))
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
 			user.nobles_seen_servant_work()
 			qdel(src)
 	else
 		..()
 
+// -------------- Sunreed Powder -----------------
+/obj/item/reagent_containers/powder/sunreed_flour
+	name = "sunreed powder"
+	desc = "Desperation breeds innovation."
+	gender = PLURAL
+	icon_state = "maize_flour"
+	list_reagents = list(/datum/reagent/flour = 1)
+	volume = 1
+	sellprice = 0
+	var/water_added
 
+/obj/item/reagent_containers/powder/sunreed_flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
+	new /obj/effect/decal/cleanable/food/flour(get_turf(src))
+	..()
+	qdel(src)
+
+/obj/item/reagent_containers/powder/sunreed_flour/attackby(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	var/found_table = locate(/obj/structure/table) in (loc)
+	var/obj/item/reagent_containers/glass/R = I
+	if(isturf(loc)&& (found_table))
+		if(!istype(R) || (water_added))
+			return ..()
+		if(!R.reagents.has_reagent(/datum/reagent/water, 10))
+			to_chat(user, span_notice("Needs more water to work it."))
+			return TRUE
+		to_chat(user, span_notice("Adding water, now it's time to knead it..."))
+		playsound(get_turf(user), 'sound/foley/splishy.ogg', 100, TRUE, -1)
+		if(do_after(user, 1.5 SECONDS, src))
+			name = "wet sunreed powder"
+			desc = "All that's left is to invent."
+			R.reagents.remove_reagent(/datum/reagent/water, 10)
+			water_added = TRUE
+			icon_state = "maize_flour_wet"
+	else
+		to_chat(user, span_warning("Put [src] on a table before working it!"))
+
+/obj/item/reagent_containers/powder/sunreed_flour/attack_hand(mob/living/user)
+	if(water_added)
+		short_cooktime = (40 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+		playsound(get_turf(user), 'sound/foley/kneading_alt.ogg', 90, TRUE, -1)
+		if(do_after(user, short_cooktime, src))
+			var/obj/item/reagent_containers/food/snacks/masa_base/base = new /obj/item/reagent_containers/food/snacks/masa_base(get_turf(src))
+			base.set_quality(recipe_quality)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+			user.nobles_seen_servant_work()
+			qdel(src)
+	else
+		..()
 
 // -------------- SALT -----------------
 /obj/item/reagent_containers/powder/salt

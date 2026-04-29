@@ -11,6 +11,10 @@
 	var/datum/job/parent_job
 	/// When joining the round, this text will be shown to the player.
 	var/tutorial = null
+	/// Whether this job is intended to give quests
+	var/is_quest_giver = FALSE
+	/// How many quests this job can take at once
+	var/max_active_quests = 3
 	/// Id for the Job.
 	var/id
 	//Bitflags for the job
@@ -100,6 +104,9 @@
 	// Change values
 	/// Patrons allowed for this job, sets to a random one in this list if list has values
 	var/list/allowed_patrons
+	/// Patrons explicitly not allowed for this job, rather than having to set allowed to EVERYTHING but X
+	var/list/banned_patrons = list(/datum/patron/alternate/great_hunt/proven)
+
 	/// Default patron in case the patron is not allowed
 	var/datum/patron/default_patron
 
@@ -108,14 +115,19 @@
 	/// Voicepack to grant to females
 	var/datum/voicepack/voicepack_f
 
-	/// Stats given to the job in the form of list(STA_X = value)
-	var/list/jobstats
+	/// Stats given to the job in the form of list(STA_X = value) DEPRECIATED DO NOT USE
+	VAR_FINAL/list/jobstats
 
 	/// Skill levels granted at roundstart.
 	/// Possibly modified by species.
-	/// Basic format is list(/datum/skill/foo = value).
-	/// Supports (/datum/skill/bar = list(value, clamp)).
-	var/list/skills
+	/// Basic format is list(/datum/attribute/skill/foo = value).
+	/// Supports (/datum/attribute/skill/bar = list(value, clamp)). DEPRECIATED DO NOT USE
+	VAR_FINAL/list/skills
+
+	var/list/verbs
+
+	/// Associative list of skill - base multiplier to set for skill_holder
+	var/list/skill_multipliers = list()
 
 	/// Innate spells that get removed when the job is removed
 	var/list/spells
@@ -128,8 +140,6 @@
 
 	/// Lower number of attunemnets to grant
 	var/attunements_min
-
-	var/whitelist_req = FALSE //!
 
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
@@ -166,7 +176,7 @@
 
 	var/is_recognized = FALSE // For foreigners who are recognized.
 
-	var/datum/charflaw/forced_flaw
+	var/list/forced_flaw
 
 	var/shows_in_list = TRUE
 
@@ -178,10 +188,19 @@
 	var/max_apprentices = 1
 	/// if this is set its the name bestowed to the new apprentice otherwise its just name the [job_name] apprentice.
 	var/apprentice_name
+	/// Can we be an apprentice to someone?
+	var/can_be_apprentice = FALSE
 	/// do we magic?
 	var/magic_user = FALSE
 	/// Do we get passive income every day from our noble estates?
 	var/noble_income = FALSE
+
+	/// Honorary titles appended to names. Based off pronouns
+	var/honorary
+	var/honorary_f
+	/// Same as above, but for suffixes. See Khan
+	var/honorary_suffix
+	var/honorary_suffix_f
 
 	/// Antagonist role to grant with this job
 	var/datum/antagonist/antag_role
@@ -194,12 +213,21 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/skeleton/zizoid,
 	)
+
+	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
+	var/list/whitelisted_ckeys = list()
 
 	///list of job packs we select from during job setup
 	var/list/job_packs
 	var/pack_title = "JOB PACKS"
 	var/pack_message = "Choose a job pack"
+
+	var/attribute_sheet
+	var/attribute_sheet_old
+	var/attribute_sheet_child
+	var/attribute_sheet_adult
 
 /datum/job/New()
 	. = ..()
@@ -232,6 +260,11 @@
 			peopleiknow += X
 			peopleknowme += X
 
+/datum/job/vv_edit_var(var_name, var_value)
+	if(var_name == "whitelisted_ckeys")
+		return FALSE
+	return ..()
+
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
 
@@ -245,10 +278,14 @@
 
 /// Executes after the mob has been spawned in the map.
 /// Client might not be yet in the mob, and is thus a separate variable.
-/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/proc/after_spawn(mob/living/carbon/human/spawned, client/player_client, clear_job_stats = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE) // Don't sleep ticker
+
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_SPAWN, src, spawned, player_client)
 
+	if(spawned.attributes)
+		assign_attributes(spawned, player_client)
 	if(!ishuman(spawned))
 		return
 
@@ -265,6 +302,9 @@
 		if(!spawned.has_language(to_learn))
 			spawned.grant_language(to_learn)
 
+	if(length(verbs))
+		add_verb(spawned, verbs)
+
 	if(is_foreigner)
 		ADD_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
 
@@ -280,33 +320,29 @@
 	spawned.adjust_spell_points(spell_points)
 	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
-	if(!parent_job) // Prevent the advclass job from removing the parent job stats.
-		spawned.remove_stat_modifier(STATMOD_JOB) // Reset so no inf stat
-	spawned.adjust_stat_modifier_list(STATMOD_JOB, jobstats)
+	// When we have sourced skill mods (praying, add to this as well)
+	if(clear_job_stats) // Reset for most non-advclasses
+		spawned.remove_stat_modifier(STATMOD_JOB)
 
-	for(var/datum/skill/skill as anything in skills)
+	spawned.adjust_stat_modifier(STATMOD_JOB, jobstats)
+
+	for(var/datum/attribute/skill/skill as anything in skills)
 		var/amount_or_list = skills[skill]
 		if(islist(amount_or_list))
-			spawned.clamped_adjust_skillrank(skill, amount_or_list[1], amount_or_list[2], TRUE)
+			spawned.clamped_adjust_skill_level(skill, amount_or_list[1], amount_or_list[2], TRUE)
 		else
 			spawned.adjust_skillrank(skill, amount_or_list, TRUE)
 
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, skill_multipliers[skill_type])
+
 	for(var/X in peopleknowme)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.person_knows_me(MF)
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.give_source_identity(found_mind)
 
 	for(var/X in peopleiknow)
-		for(var/datum/mind/MF in get_minds(X))
-			spawned.mind.i_know_person(MF)
-
-	// Ready up bonus
-	if(!spawned.islatejoin)
-		spawned.adjust_triumphs(1)
-		spawned.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		spawned.hydration = 800 // Set higher hydration
-		spawned.nutrition = 800
-		to_chat(spawned, span_notice("Rising early, you made sure to eat a hearty meal before starting your dae. A true TRIUMPH!"))
-
+		for(var/datum/mind/found_mind in get_minds(X))
+			spawned.mind.learn_target_identity(found_mind)
 
 	var/used_title = get_informed_title(spawned)
 	if(spawned.islatejoin && (job_flags & JOB_ANNOUNCE_ARRIVAL)) //to be moved somewhere more appropriate
@@ -334,10 +370,11 @@
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
-		spawned.set_flaw(forced_flaw)
-
-	if(spawned.charflaw)
-		spawned.charflaw.after_spawn(spawned, player_client)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.add_quirk(flaw)
 
 	if(antag_role && spawned.mind)
 		spawned.mind.add_antag_datum(antag_role)
@@ -348,6 +385,7 @@
 	if(voicepack_f)
 		spawned.dna?.species.soundpack_f = new voicepack_f()
 
+	assign_honorary_titles(spawned)
 	/// WHY WAS THIS ON OUTFIT??? It shouldn't be HERE either
 	if(spawned.familytree_pref != FAMILY_NONE && !spawned.family_datum)
 		SSfamilytree.AddLocal(spawned, spawned.familytree_pref)
@@ -356,6 +394,9 @@
 	for(var/datum/triumph_buy/T in owned_triumph_buys)
 		if(!T.activated)
 			T.on_after_spawn(spawned)
+
+	if(spawned.culture)
+		spawned.culture.on_after_spawn(spawned)
 
 	if(length(advclass_cat_rolls))
 		spawned.hugboxify_for_class_selection()
@@ -376,6 +417,91 @@
 	if(job_flags & JOB_SHOW_IN_CREDITS)
 		START_PROCESSING(SScrediticons, player_client)
 
+/// Callback for anything that sleeps, called after roundstart or async during EquipRank
+/datum/job/proc/on_roundstart(mob/living/spawned, client/player_client)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(ishuman(spawned))
+		var/mob/living/carbon/human/H = spawned
+		H.pick_job_packs(src)
+
+
+/// this "mostly" removes the existence of a job from someone.
+/// the unfortunately reality is that even this is still a flawed removal
+/datum/job/proc/remove_job(mob/living/carbon/human/spawned)
+	if(QDELETED(spawned))
+		return
+	if(!ishuman(spawned))
+		return
+
+	. = TRUE
+
+	if(!QDELETED(spawned.cleric))
+		qdel(spawned.cleric)
+	spawned.honorary = null
+	spawned.honorary_suffix = null
+	if(antag_role && spawned.mind)
+		spawned.mind.remove_antag_datum(antag_role)
+
+	if(forced_flaw)
+		if(!islist(forced_flaw))
+			forced_flaw = list(forced_flaw)
+		for(var/flaw as anything in forced_flaw)
+			if(ispath(flaw, /datum/quirk))
+				spawned.remove_quirk(flaw)
+
+	if(give_bank_account)
+		SStreasury.remove_bank_account(spawned)
+		if(noble_income)
+			SStreasury.noble_incomes -= spawned
+
+	if(cmode_music)
+		spawned.cmode_music = initial(spawned.cmode_music)
+
+	if(spawned.mind)
+		for(var/X in peopleknowme)
+			for(var/datum/mind/found_mind in get_minds(X))
+				spawned.mind.forget_source_identity(found_mind)
+
+		for(var/X in peopleiknow)
+			for(var/datum/mind/found_mind in get_minds(X))
+				found_mind.forget_source_identity(spawned.mind)
+
+	for(var/skill_type in skill_multipliers)
+		spawned.set_skill_exp_multiplier(skill_type, 1)
+
+	for(var/datum/attribute/skill/skill as anything in skills)
+		var/amount_or_list = skills[skill]
+		if(islist(amount_or_list))
+			spawned.clamped_adjust_skill_level(skill, -amount_or_list[1], amount_or_list[2], TRUE)
+		else
+			spawned.adjust_skillrank(skill, -amount_or_list, TRUE)
+
+	spawned.adjust_spell_points(-spell_points)
+	remove_spells(spawned)
+	spawned.remove_stat_modifier(STATMOD_JOB)
+
+	if(length(verbs))
+		remove_verb(spawned, verbs)
+
+	if(is_foreigner)
+		REMOVE_TRAIT(spawned, TRAIT_FOREIGNER, TRAIT_GENERIC)
+	if(is_recognized)
+		REMOVE_TRAIT(spawned, TRAIT_RECOGNIZED, TRAIT_GENERIC)
+
+	//for(var/datum/language/to_lose as anything in languages)
+	//	if(spawned.has_language(to_lose)) // this is gonna cause issues in certain cases until languages have sources...
+	//		spawned.remove_language(to_lose)
+
+	REMOVE_TRAITS_IN(spawned, JOB_TRAIT)
+	if(spawned.mind)
+		REMOVE_TRAITS_IN(spawned.mind, JOB_TRAIT)
+	if(magic_user)
+		spawned.mana_pool.set_intrinsic_recharge(spawned.mana_pool.intrinsic_recharge_sources & ~MANA_ALL_LEYLINES)
+
+	if(parent_job)
+		return parent_job.remove_job(spawned)
+
 /datum/job/proc/adjust_patron(mob/living/carbon/human/spawned)
 	if(!length(allowed_patrons))
 		return
@@ -386,11 +512,11 @@
 
 	var/list/datum/patron/all_gods = list()
 	var/list/datum/patron/pantheon_gods = list()
-	for(var/god in GLOB.patronlist)
+	for(var/god in GLOB.patrons_by_type)
 		if(!(god in allowed_patrons))
 			continue
 		all_gods |= god
-		var/datum/patron/P = GLOB.patronlist[god]
+		var/datum/patron/P = GLOB.patrons_by_type[god]
 		if(P.associated_faith == old_patron.associated_faith) //Prioritize choosing a possible patron within our pantheon
 			pantheon_gods |= god
 
@@ -408,6 +534,19 @@
 /datum/job/proc/special_check_latejoin(client/C)
 	return TRUE
 
+/datum/job/proc/assign_attributes(mob/living/spawned, client/player_client)
+	if(!ishuman(spawned))
+		return
+	var/mob/living/carbon/human/spawned_human = spawned
+	if(attribute_sheet_old && spawned_human.age == AGE_OLD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_old)
+	else if(attribute_sheet_child && spawned_human.age == AGE_CHILD)
+		spawned_human.attributes?.add_sheet(attribute_sheet_child)
+	else if(attribute_sheet_adult && spawned_human.age == AGE_ADULT)
+		spawned_human.attributes?.add_sheet(attribute_sheet_adult)
+	else if(attribute_sheet)
+		spawned_human.attributes?.add_sheet(attribute_sheet)
+
 /datum/job/proc/GetAntagRep()
 	. = CONFIG_GET(keyed_list/antag_rep)[lowertext(title)]
 	if(. == null)
@@ -418,7 +557,6 @@
 
 /mob/living/carbon/human/on_job_equipping(datum/job/equipping)
 	dress_up_as_job(equipping)
-	pick_job_packs(equipping)
 
 /mob/living/carbon/human/proc/pick_job_packs(datum/job/equipping)
 	if(!length(equipping.job_packs))
@@ -442,15 +580,16 @@
 				continue
 			reals |= real_pack
 		if(!length(reals))
+			message_admins("ERROR: [key_name_admin(src)] failed job pack selection.")
 			return
 
 		var/datum/job_pack/picked_pack
-		if(!client)
-			picked_pack = GLOB.job_pack_singletons[pick(reals)]
-		else
-			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 20 SECONDS)
+		if(client)
+			picked_pack = browser_input_list(src, equipping.pack_title, equipping.pack_message, reals, timeout = 40 SECONDS)
 			if(QDELETED(src))
 				return
+		if(!picked_pack)
+			picked_pack = pick(reals)
 
 		if(picked_pack.type)
 			previous_picked_types |= picked_pack.type
@@ -496,8 +635,6 @@
 
 /// Returns an atom where the mob should spawn in.
 /datum/job/proc/get_roundstart_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
 	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point()
 	if(!spawn_point) //if there isn't a spawnpoint send them to latejoin, if there's no latejoin go yell at your mapper
 		return get_latejoin_spawn_point()
@@ -505,8 +642,8 @@
 
 /// Handles finding and picking a valid roundstart effect landmark spawn point, in case no uncommon different spawning events occur.
 /datum/job/proc/get_default_roundstart_spawn_point()
-	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
-		if(spawn_point.name != title)
+	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.roundstart_landmarks)
+		if(!(title in spawn_point.jobs_to_spawn))
 			continue
 		. = spawn_point
 		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
@@ -518,10 +655,13 @@
 
 /// Finds a valid latejoin spawn point, checking for events and special conditions.
 /datum/job/proc/get_latejoin_spawn_point()
-	if(length(GLOB.jobspawn_overrides[title]))
-		return pick(GLOB.jobspawn_overrides[title])
-	if(length(SSjob.latejoin_trackers))
-		return pick(SSjob.latejoin_trackers)
+	var/list/possible_spawns = list()
+	for(var/obj/effect/landmark/start/latepoint as anything in GLOB.latejoin_landmarks)
+		if(title in latepoint.jobs_to_spawn)
+			possible_spawns += latepoint
+	if(length(possible_spawns))
+		return pick(possible_spawns)
+
 	return SSjob.get_last_resort_spawn_points()
 
 
@@ -588,17 +728,28 @@
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
 
-/datum/job/proc/get_informed_title(mob/mob)
+/datum/job/proc/get_informed_title(mob/mob, ignore_pronouns = FALSE)
 	if(mob.admin_title)
 		return mob.admin_title
 
 	if(title_override)
 		return title_override
 
-	if(mob.pronouns == SHE_HER && f_title)
-		return f_title
+	if(f_title)
+		if(ignore_pronouns && mob.gender == FEMALE || !ignore_pronouns && mob.pronouns == SHE_HER)
+			return f_title
 
 	return title
+
+/datum/job/proc/assign_honorary_titles(mob/living/carbon/grantee)
+	if(honorary)
+		grantee.honorary = honorary
+	if(honorary_f && grantee.pronouns == SHE_HER)
+		grantee.honorary = honorary_f
+	if(honorary_suffix)
+		grantee.honorary_suffix = honorary_suffix
+	if(honorary_suffix_f && grantee.pronouns == SHE_HER)
+		grantee.honorary_suffix = honorary_suffix_f
 
 /datum/job/proc/set_spawn_and_total_positions(count)
 	return spawn_positions
@@ -800,5 +951,28 @@
 		else
 			outfit = data["outfit"]
 
+
+	return TRUE
+
+/// Multi check using prefs for reuse, remove when datum/preference is a thing
+/datum/job/proc/prefs_species_check(datum/preferences/prefs)
+	if(!prefs)
+		return FALSE
+
+	var/datum/species/species = prefs.pref_species
+
+	var/job_used_id = species.id_override ? species.id_override : species.id
+
+	if(length(allowed_races) && !(job_used_id in allowed_races))
+		return FALSE
+
+	if(length(blacklisted_species) && (job_used_id in blacklisted_species))
+		return FALSE
+
+	// Subterran dwarves can only be outsiders if they follow the wurm
+	if(species.id == SPEC_ID_DWARF_SUBTERRAN && istype(prefs.selected_patron, /datum/patron/alternate/wurm))
+		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src // FUCK ADVCLASSES!
+		if(!(tested.department_flag & OUTSIDERS))
+			return FALSE
 
 	return TRUE

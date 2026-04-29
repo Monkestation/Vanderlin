@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 /proc/build_zizo_rituals()
 	. = list()
 	for(var/datum/ritual/ritual as anything in subtypesof(/datum/ritual))
-		if(is_abstract(ritual))
+		if(IS_ABSTRACT(ritual))
 			continue
 		.[ritual.name] = new ritual
 
@@ -45,11 +45,14 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	if(!target.client)
 		return
+	if(is_antag_banned(target.ckey, ROLE_ZIZOIDCULTIST))
+		to_chat(span_danger("This one is unworthy of her aiding her ascension."))
+		return
 	if(istype(target.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(target.wear_wrists, /obj/item/clothing/neck/psycross/silver) )
 		to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
 		return
 	var/datum/antagonist/zizocultist/PR = user.mind.has_antag_datum(/datum/antagonist/zizocultist)
-	var/alert = browser_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
+	var/alert = tgui_alert(target, "YOU WILL BE SHOWN THE TRUTH. DO YOU RESIST?", "???", list("Yield", "Resist"))
 	target.Immobilize(3 SECONDS)
 	if(alert == "Yield")
 		to_chat(target, span_notice("I see the truth now! It all makes so much sense! They aren't HERETICS! They want the BEST FOR US!"))
@@ -88,54 +91,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_userdanger("I am returned to serve. I will obey, so that I may return to rest."))
 	to_chat(target, span_userdanger("My master is [user]."))
 
-/datum/ritual/servantry/thecall
-	name = "The Call"
-	center_requirement = /obj/item/bedsheet
-
-	w_req = /obj/item/bodypart/l_leg
-	e_req = /obj/item/bodypart/r_leg
-
-/datum/ritual/servantry/thecall/invoke(mob/living/user, turf/center)
-	var/obj/item/paper/P = locate() in center
-	if(!P)
-		to_chat(user, span_warning("The ritual requires a parchment with a name."))
-		return
-	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
-	if(!user.mind?.do_i_know(name = paper_name))
-		to_chat(user, span_warning("I don't know anyone by that name."))
-		return
-	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
-		if(HL.real_name != paper_name)
-			continue
-		if(HL == SSticker.rulermob)
-			break
-		if(HL.mind?.assigned_role.title in GLOB.church_positions)
-			to_chat(HL, span_warning("I sense an unholy presence loom near my soul."))
-			to_chat(user, span_danger("They are protected..."))
-			break
-		if(istype(HL.wear_neck, /obj/item/clothing/neck/psycross/silver) || istype(HL.wear_wrists, /obj/item/clothing/neck/psycross/silver))
-			to_chat(user, span_danger("They are wearing silver, it resists the dark magick!"))
-			break
-		if(!HAS_TRAIT(HL, TRAIT_NOSLEEP))
-			to_chat(HL, span_userdanger("I'm so sleepy..."))
-			HL.SetSleeping(5 SECONDS)
-		else
-			to_chat(HL, span_userdanger("My eyes close on their own!"))
-			HL.set_eyes_closed(TRUE)
-		addtimer(CALLBACK(src, PROC_REF(kidnap), HL, center), 3 SECONDS)
-		qdel(P)
-		break
-
-/datum/ritual/servantry/thecall/proc/kidnap(mob/living/victim, turf/to_go)
-	if(QDELETED(victim))
-		return
-	if(to_go.is_blocked_turf(TRUE))
-		return
-	victim.SetSleeping(0)
-	to_chat(victim, span_warning("This isn't my bed... Where am I?!"))
-	victim.playsound_local(victim, pick('sound/misc/jumphumans (1).ogg','sound/misc/jumphumans (2).ogg','sound/misc/jumphumans (3).ogg'), 100)
-	victim.forceMove(to_go)
-
 /datum/ritual/servantry/falseappearance
 	name = "Falsified Appearance"
 	center_requirement = /mob/living/carbon/human
@@ -173,11 +128,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	icon_state = "heart-on"
 	w_class =  WEIGHT_CLASS_SMALL
 
-/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, params)
+/obj/item/corruptedheart/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
 		return
 	if(istype(target.patron, /datum/patron/inhumen/zizo))
-		target.blood_volume = BLOOD_VOLUME_MAXIMUM
+		target.blood_volume = BLOOD_VOLUME_NORMAL
 		to_chat(target, span_notice("My elixir of life is stagnant once again."))
 		qdel(src)
 		return
@@ -188,7 +143,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.Stun(10 SECONDS)
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		carbon_target.silent += 30
+		carbon_target.adjust_silence(30 SECONDS)
 	qdel(src)
 
 /datum/ritual/servantry/darksunmark
@@ -200,34 +155,36 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!P)
 		to_chat(user, span_warning("The ritual requires a parchment with a name."))
 		return
-	var/obj/item/weapon/knife/dagger/D = locate() in center.contents
-	if(!D)
-		to_chat(user, span_warning("A dagger is required as a sacrifice."))
-		return
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
 	if(!user.mind || !user.mind.do_i_know(name = paper_name))
 		to_chat(user, span_warning("I don't know anyone by that name."))
 		return
 	var/mob/living/carbon/human/target
 	var/assassin_found = FALSE
-	for(var/mob/living/carbon/human/HL in GLOB.human_list)
-		if(HL.stat != DEAD)
+	for(var/mob/living/carbon/human/HL as anything in GLOB.human_list)
+		if(HL.stat == DEAD)
 			continue
 		if(HL.real_name == paper_name)
 			target = HL
-		else if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
+			continue
+		if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
 			assassin_found = TRUE
 			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
-				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [target.real_name]!\"</span>")
+				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)
 		to_chat(user, span_warning("There has been no answer to your call to the Dark Sun. It seems his servants are far from here..."))
 		return
-	ADD_TRAIT(target, TRAIT_ZIZOID_HUNTED, TRAIT_GENERIC) // Gives the victim a trait to track that they are wanted dead.
-	log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
-	to_chat(target, span_danger("My hair stands on end. Has someone just said my name? I should watch my back."))
-	to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
-	qdel(D)
+	if(!target.get_quirk(/datum/quirk/vice/hunted))
+		target.add_quirk(/datum/quirk/vice/hunted)
+		var/datum/quirk/vice/hunted/quirk = target.get_quirk(/datum/quirk/vice/hunted)
+		quirk.desc = "You have been marked for death. You will be hunted and have assassination attempts made against you without any escalation."
+		quirk.customization_value = "Marked for death by the terrible Zizo."
+		to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
+		to_chat(target, span_warningbig("My hair stands on end. Has someone just said my name? I should watch my back."))
+		log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
+	else
+		to_chat(user, span_warning("Your target is already hunted by the Dark Sun's assassins."))
 	qdel(P)
 	target.playsound_local(target, 'sound/magic/marked.ogg', 100)
 
@@ -311,7 +268,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/obj/item/paper/P = locate() in center.contents
 	if(!P)
 		return
-	var/info = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
+	var/info = strip_html_full(P.info, MAX_NAME_LEN)
 	var/input = browser_input_text(user, "To whom do we send this message?", "ZIZO")
 	if(!input)
 		return
@@ -335,7 +292,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/rope/chain(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonneant
 	name = "Summon Neant"
@@ -356,7 +313,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/weapon/polearm/neant(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonarmor
 	name = "Summon Darksteel Armor"
@@ -386,7 +343,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/clothing/gloves/plate/zizo(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonweapon
 	name = "Summon Weapons"
@@ -405,7 +362,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
 	new /obj/item/weapon/mace/steel(center)
 
-	playsound(get_turf(center), pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 // FLESH CRAFTING
 /datum/ritual/fleshcrafting
@@ -428,18 +385,48 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(target, TRAIT_ZJUMP, TRAIT_GENERIC)
 	to_chat(target, span_notice("I feel like my legs have become stronger."))
 
+
 /datum/ritual/fleshcrafting/fleshmend
 	name = "Fleshmend"
 	center_requirement = /mob/living/carbon/human
+	var/heal_tick = 3
 	n_req =  /obj/item/reagent_containers/food/snacks/meat
+	s_req = /obj/item/reagent_containers/food/snacks/meat
+
+/datum/ritual/fleshcrafting/fleshmend/greater
+	name = "Greater Fleshmend"
+	is_cultist_ritual = TRUE
+	heal_tick = 10
+	e_req =  /obj/item/reagent_containers/food/snacks/meat
+	w_req = /obj/item/reagent_containers/food/snacks/meat
 
 /datum/ritual/fleshcrafting/fleshmend/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
 	target.playsound_local(target, 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
-	target.fully_heal()
-	to_chat(target, span_notice("ZIZO EMPOWERS ME!"))
+	target.apply_status_effect(/datum/status_effect/buff/healing/fleshmend, null, heal_tick)
+	to_chat(target, span_red("Zizo empowers me."))
+
+/datum/status_effect/buff/healing/fleshmend
+	id = "fleshmend"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/fleshmend
+	visual_type = /obj/effect/temp_visual/heal_rogue/fleshmend
+	outline_alpha = 160
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_REPLACE
+
+/datum/status_effect/buff/healing/fleshmend/get_examine_text(mob/user, list/P)
+	return span_danger("[P[THEYRE]] bathed in an ominous aura.")
+
+/atom/movable/screen/alert/status_effect/buff/fleshmend
+	name = "Fleshmend"
+	desc = "Forbidden magick restores my ailments."
+	icon_state = "bloodheal"
+
+/obj/effect/temp_visual/heal_rogue/fleshmend
+	icon_state = "heal_psycross_invert"
+
 
 /datum/ritual/fleshcrafting/darkeyes
 	name = "Darkened Eyes"
@@ -490,7 +477,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(!(mage.mana_pool?.intrinsic_recharge_sources & MANA_ALL_LEYLINES))
 		return
 	mage.gib()
-	cultist.adjust_skillrank(/datum/skill/magic/arcane, 4, TRUE)
+
+	cultist.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 40))
 	cultist.adjust_spell_points(18)
 	cultist.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	cultist.generate_random_attunements(rand(6, 8))
@@ -502,8 +490,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 
     w_req = /obj/item/alch/sinew
     e_req = /obj/item/alch/sinew
-    n_req = /obj/item/natural/fur/volf
-    s_req = /obj/item/natural/fur/volf
+    n_req = /obj/item/natural/fur
+    s_req = /obj/item/natural/fur
 
 /datum/ritual/fleshcrafting/curse/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
@@ -518,19 +506,39 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(target, span_warning("The curse doesn't take hold!"))
 		return
-	to_chat(target, span_warning("My very being, body, soul, and mind is contorted and twisted violently into a ball of flesh and fur, until I am reshaped anew as an abomination!"))
+	if(target.get_lux_status() != LUX_HAS_LUX)
+		to_chat(target, span_warning("The curse requires lux!"))
+		return
+	if(target.stat == DEAD)
+		return
+	to_chat(target, span_warning("You can feel part of your soul burn away, as you are reshaped painfully into an abomination! You have no recollection of who you once were and what you did, but still have innate skills and personality."))
 	addtimer(CALLBACK(src, PROC_REF(get_hollowed), target, center), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/curse/proc/get_hollowed(mob/living/victim, turf/place)
-    if(QDELETED(victim))
-        return
-    if(place != get_turf(victim))
-        return
-    if(!victim.mind)
-        return
-    var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
-    victim.mind.transfer_to(wll)
-    victim.gib()
+	if(QDELETED(victim))
+		return
+	if(place != get_turf(victim))
+		return
+	if(!victim.mind)
+		return
+	if(victim.mob_biotypes & MOB_UNDEAD)
+		to_chat(victim, span_warning("The curse doesn't take hold, for they are blessed by Zizo!"))
+		return
+	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
+		to_chat(victim, span_warning("The curse doesn't take hold, for they already are damned!"))
+		return
+	if(victim.get_lux_status() != LUX_HAS_LUX)
+		to_chat(victim, span_warning("The curse fails, due to a lack of lux to burn!"))
+		return
+	if(victim.stat == DEAD)
+		return
+	victim.Knockdown(5 SECONDS)
+	victim.emote("agony", forced = TRUE)
+	var/mob/living/wll = new /mob/living/carbon/human/species/demihuman(place)
+	victim.mind.transfer_to(wll)
+	wll.set_patron(/datum/patron/godless/naivety)
+	victim.gib()
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "NEW FACE NEW LIFE"), 5 SECONDS)
 
 /datum/ritual/fleshcrafting/nopain
 	name = "Painless Battle"
@@ -546,8 +554,8 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
-	target.change_stat(STATKEY_STR, -2)
-	target.change_stat(STATKEY_CON, -3)
+	target.change_stat(STAT_STRENGTH, -2)
+	target.change_stat(STAT_CONSTITUTION, -3)
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
@@ -576,9 +584,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_STR, -3)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_SPD, -4)
-	target.adjust_stat_modifier(STATMOD_ABOM, STATKEY_END, -4)
+	target.adjust_stat_modifier(STATMOD_ABOM, list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	))
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)
@@ -634,9 +644,9 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		organ.Remove(target)
 		organ.forceMove(drop_location)
 	var/obj/item/bodypart/chest/cavity = target.get_bodypart(BODY_ZONE_CHEST)
-	if(cavity.cavity_item)
-		cavity.cavity_item.forceMove(drop_location)
-		cavity.cavity_item = null
+	for(var/atom/movable/item as anything in cavity.cavity_items)
+		item.forceMove(drop_location)
+		cavity.cavity_items -= item
 	for(var/obj/item/bodypart/part as anything in target.bodyparts)
 		part.drop_limb()
 
@@ -682,7 +692,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/trl = new /mob/living/simple_animal/hostile/retaliate/blood/ascended(center)
 	cultist.mind?.transfer_to(trl)
 	cultist.gib()
-	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_scream.ogg')
+	priority_announce("The sky blackens, a dark day for Psydonia.", "Ascension", 'sound/misc/gods/astrata_omen.ogg')
 	for(var/mob/living/carbon/human/V in GLOB.human_list)
 		if(V.mind in SSmapping.retainer.cultists)
 			V.add_stress(/datum/stress_event/lovezizo)

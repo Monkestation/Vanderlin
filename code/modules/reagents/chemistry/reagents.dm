@@ -25,6 +25,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/datum/reagents/holder = null
 	var/reagent_state = LIQUID
 	var/list/data
+	///A list of causes why this chem should skip being removed, if the length is 0 it will be removed from holder naturally, if this is >0 it will not be removed from the holder.
+	var/list/reagent_removal_skip_list = list()
 	var/current_cycle = 0
 	var/volume = 0									//pretend this is moles
 	var/color = "#000000" // rgb: 0, 0, 0
@@ -62,6 +64,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/recipe_quality = 1
 	/// Base quality for newly created reagents of this type
 	var/base_quality = 1
+	var/dead_head = TRUE
+	///if we are false we don't apply the liver efficiency to our metabolization
+	var/liver_chemical = TRUE
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()
@@ -70,7 +75,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
 	if(!istype(M))
 		return 0
-	if(method == VAPOR) //smoke, foam, spray
+	if(method & VAPOR) //smoke, foam, spray
 		if(M.reagents)
 			var/modifier = CLAMP((1 - touch_protection), 0, 1)
 			var/amount = round(reac_volume*modifier, 0.1)
@@ -86,6 +91,9 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				M.reagents.add_reagent(type, amount, new_reagent.data)
 	return 1
 
+/datum/reagent/proc/add_data(data_name, data_value)
+	LAZYADDASSOC(data, data_name, data_value)
+
 /datum/reagent/proc/reaction_obj(obj/O, volume)
 	return
 
@@ -95,18 +103,23 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/reaction_turf(turf/T, volume)
 	return
 
-/datum/reagent/proc/on_mob_life(mob/living/carbon/M)
+/datum/reagent/proc/on_bodypart_absorb(obj/item/bodypart, mob/living/carbon/M, amount_to_transfer)
+	SHOULD_CALL_PARENT(FALSE)
+	on_mob_life(M)
+
+/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
+	SHOULD_CALL_PARENT(TRUE)
 	current_cycle++
 	if(holder)
 		var/adjusted_metabolization_rate = metabolization_rate
 		if(istype(src, /datum/reagent/consumable/ethanol) && has_world_trait(/datum/world_trait/baotha_revelry))
 			adjusted_metabolization_rate = adjusted_metabolization_rate * (is_ascendant(BAOTHA) ? 0.33 : 0.5)
 
-		// Apply quality modifier to metabolization
 		var/quality_modifier = get_quality_metabolization_modifier()
-		adjusted_metabolization_rate = adjusted_metabolization_rate / quality_modifier // Higher quality lasts longer
 
-		holder.remove_reagent(type, adjusted_metabolization_rate) //By default it slowly disappears.
+		adjusted_metabolization_rate = (adjusted_metabolization_rate / quality_modifier) * (efficiency)
+
+		holder.remove_reagent(type, adjusted_metabolization_rate)
 		if(M.client)
 			if(!istype(src, /datum/reagent/drug) && reagent_state == LIQUID)
 				record_featured_object_stat(FEATURED_STATS_DRINKS, name, adjusted_metabolization_rate)
@@ -162,13 +175,22 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/on_mob_end_metabolize(mob/living/L)
 	return
 
+/// Called when a reagent is inside of a mob when they are dead
+/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, delta_time)
+	if(!dead_head)
+		return
+	current_cycle++
+	if(length(reagent_removal_skip_list))
+		return
+	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * delta_time)
+
 /datum/reagent/proc/on_move(mob/M)
 	return
 
 // Called after add_reagents creates a new reagent.
-/datum/reagent/proc/on_new(data)
-	if(data && data["quality"])
-		recipe_quality = data["quality"]
+/datum/reagent/proc/on_new(list/incoming_data)
+	if(incoming_data && incoming_data["quality"])
+		recipe_quality = incoming_data["quality"]
 	else
 		recipe_quality = base_quality
 	recipe_quality = CLAMP(recipe_quality, 1, 4)
@@ -176,13 +198,25 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	if(!data)
 		data = list()
 	data["quality"] = recipe_quality
+	for(var/data_item in incoming_data)
+		if(data_item == "quality") //special handling for this
+			continue
+		data[data_item] = incoming_data[data_item]
+	if("custom_name" in data)
+		name = data["custom_name"]
+	if("custom_scent" in data)
+		scent_description = data["custom_scent"]
+	if("custom_tastes" in data)
+		taste_description = data["custom_tastes"]
 	return
 
 // Called when two reagents of the same are mixing.
-/datum/reagent/proc/on_merge(data, other_volume)
+/datum/reagent/proc/on_merge(list/incoming_data, other_volume)
 	SHOULD_CALL_PARENT(TRUE)
-	if(data && data["quality"])
-		var/other_quality = data["quality"]
+	if(!length(incoming_data))
+		return
+	if("quality" in incoming_data)
+		var/other_quality = incoming_data["quality"]
 
 		var/total_volume = volume + other_volume
 		var/weighted_average = ((recipe_quality * volume) + (other_quality * other_volume)) / total_volume
@@ -193,6 +227,16 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 		if(!data)
 			data = list()
 		data["quality"] = recipe_quality
+	for(var/data_item in incoming_data)
+		if(data_item == "quality") //special handling for this
+			continue
+		data[data_item] = incoming_data[data_item]
+	if("custom_name" in data)
+		name = data["custom_name"]
+	if("custom_scent" in data)
+		scent_description = data["custom_scent"]
+	if("custom_tastes" in data)
+		taste_description = data["custom_tastes"]
 	return
 
 /datum/reagent/proc/get_quality_metabolization_modifier()

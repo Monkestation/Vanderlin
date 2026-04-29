@@ -70,7 +70,7 @@
 
 		unbuckle_all_mobs()
 
-/obj/structure/guillotine/attack_hand_secondary(mob/user, params)
+/obj/structure/guillotine/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -169,7 +169,7 @@
 	blade_status = GUILLOTINE_BLADE_DROPPED
 	icon_state = "guillotine"
 
-/obj/structure/guillotine/attackby(obj/item/W, mob/user, params)
+/obj/structure/guillotine/attackby(obj/item/W, mob/user, list/modifiers)
 	if (istype(W, /obj/item/natural/stone))
 		add_fingerprint(user)
 		if (blade_status == GUILLOTINE_BLADE_SHARPENING)
@@ -234,7 +234,7 @@
 			if (istype(S))
 				H.cut_overlays()
 				H.update_body_parts_head_only()
-				H.set_mob_offsets("bed_buckle", _x = 0, _y = -GUILLOTINE_HEAD_OFFSET)
+				H.add_offsets(type, x_add = 0, y_add = -GUILLOTINE_HEAD_OFFSET)
 				H.layer += GUILLOTINE_LAYER_DIFF
 			else
 				unbuckle_all_mobs()
@@ -247,7 +247,7 @@
 
 /obj/structure/guillotine/post_unbuckle_mob(mob/living/M)
 	M.regenerate_icons()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 	M.layer -= GUILLOTINE_LAYER_DIFF
 	..()
 

@@ -19,7 +19,7 @@
 #define TOOL_SCALPEL		"scalpel"
 #define TOOL_SAW			"saw"
 #define TOOL_BONESETTER		"bonesetter"
-#define TOOL_SUTURE			"suture"
+#define TOOL_SUTURE			"needle"
 #define TOOL_IMPROVISED_RETRACTOR "improvised_retractor"
 #define TOOL_IMPROVISED_HEMOSTAT "improvised_hemostat"
 #define TOOL_IMPROVISED_SAW	"improvsaw"

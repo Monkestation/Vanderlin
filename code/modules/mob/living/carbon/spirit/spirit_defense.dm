@@ -28,7 +28,7 @@
 			grabbedby(M)
 		if(INTENT_HARM)
 			if(HAS_TRAIT(M, TRAIT_PACIFISM))
-				playsound(loc, 'sound/combat/shove.ogg', 100, TRUE, -1)
+				playsound(src, 'sound/combat/shove.ogg', 100, TRUE, -1)
 				M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 				visible_message("<span class='warning'>[M]'s punch goes through [name]!</span>", \
 								"<span class='warning'>[M]'s punch goes through you!</span>", "<span class='hear'>I hear the sound of scuffling of the damned!</span>", COMBAT_MESSAGE_RANGE, M)
@@ -40,7 +40,7 @@
 								"<span class='danger'>[M] punches you!</span>", "<span class='hear'>I hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
 				to_chat(M, "<span class='danger'>I punch [name]!</span>")
 
-				playsound(loc, "punch", 25, TRUE, -1)
+				playsound(src, "punch", 25, TRUE, -1)
 				var/damage = rand(5, 10)
 				if(prob(40))
 					damage = rand(10, 15)
@@ -56,13 +56,13 @@
 				log_combat(M, src, "attacked")
 
 			else
-				playsound(loc, 'sound/blank.ogg', 25, TRUE, -1)
+				playsound(src, 'sound/blank.ogg', 25, TRUE, -1)
 				visible_message("<span class='danger'>[M]'s punch misses [name]!</span>", \
 								"<span class='danger'>I avoid [M]'s punch!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
 				to_chat(M, "<span class='warning'>My punch misses [name]!</span>")
 		if(INTENT_DISARM)
 			if(HAS_TRAIT(M, TRAIT_PACIFISM))
-				playsound(loc, 'sound/combat/shove.ogg', 100, TRUE, -1)
+				playsound(src, 'sound/combat/shove.ogg', 100, TRUE, -1)
 				M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 				visible_message("<span class='warning'>[M]'s shove goes through [name]!</span>", \
 								"<span class='warning'>[M]'s shove goes through you!</span>", "<span class='hear'>I hear the sound scuffling of the damned!</span>", COMBAT_MESSAGE_RANGE, M)
@@ -71,7 +71,7 @@
 				M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 				if (prob(25))
 					Paralyze(40)
-					playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+					playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 					log_combat(M, src, "pushed")
 					visible_message("<span class='danger'>[M] pushes [src] down!</span>", \
 									"<span class='danger'>[M] pushes you down!</span>", "<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", null, M)

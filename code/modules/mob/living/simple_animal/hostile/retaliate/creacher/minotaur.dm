@@ -12,7 +12,8 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/minotaur_unarmed)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 10,
-						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2)
+						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2,
+						/obj/item/reagent_containers/food/snacks/meat/ribs = 3)
 	faction = list("caves")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 1500
@@ -85,45 +86,6 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/minotaur/simple_limb_hit(zone)
-	if(!zone)
-		return ""
-	switch(zone)
-		if(BODY_ZONE_PRECISE_R_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_L_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_NOSE)
-			return "nose"
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return "mouth"
-		if(BODY_ZONE_PRECISE_SKULL)
-			return "head"
-		if(BODY_ZONE_PRECISE_EARS)
-			return "head"
-		if(BODY_ZONE_PRECISE_NECK)
-			return "neck"
-		if(BODY_ZONE_PRECISE_L_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_R_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_STOMACH)
-			return "stomach"
-		if(BODY_ZONE_PRECISE_GROIN)
-			return "tail"
-		if(BODY_ZONE_HEAD)
-			return "head"
-		if(BODY_ZONE_R_LEG)
-			return "leg"
-		if(BODY_ZONE_L_LEG)
-			return "leg"
-		if(BODY_ZONE_R_ARM)
-			return "foreleg"
-		if(BODY_ZONE_L_ARM)
-			return "foreleg"
 	return ..()
 
 /datum/intent/simple/minotaur_unarmed
@@ -207,14 +169,14 @@
 	transform = matrix() * 0.5 // Start small
 	animate(src, alpha = 200, color = "#ff5500", transform = matrix(), time = 1 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(activate)), 1.5 SECONDS)
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 25, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 25, TRUE)
 
 /obj/effect/temp_visual/minotaur_fury_zone/proc/activate()
 	active = TRUE
 	color = "#ff0000" // Red active color
 	alpha = 230
 	icon_state = "fire"
-	playsound(get_turf(src), 'sound/misc/bamf.ogg', 50, TRUE)
+	playsound(src, 'sound/misc/bamf.ogg', 50, TRUE)
 
 	START_PROCESSING(SSobj, src)
 

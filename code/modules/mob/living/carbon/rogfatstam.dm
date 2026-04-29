@@ -1,12 +1,7 @@
 /mob/living/proc/update_stamina() //update hud and regen after last_fatigued delay on taking
-	var/athletics_skill = 0
-	if(mind)
-		athletics_skill = get_skill_level(/datum/skill/misc/athletics)
-	maximum_stamina = (STAEND + athletics_skill) * 10 //This here is the calculation for max STAMINA / GREEN
-
-	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && GLOB.tod == "day") ? 11 : 20
+	var/delay = (HAS_TRAIT(src, TRAIT_APRICITY) && (GLOB.tod == DAWN || GLOB.tod == DAY)) ? 11 : 20
 	if(world.time > last_fatigued + delay) //regen fatigue
-		var/added = energy / max_energy
+		var/added = max(1, energy) / max(max_energy, 1)
 		added = round(-10+ (added*-40))
 		if(HAS_TRAIT(src, TRAIT_MISSING_NOSE))
 			added = round(added * 0.5, 1)
@@ -20,16 +15,105 @@
 
 	update_health_hud(TRUE)
 
-/mob/living/proc/update_energy()
-	///this is kinda weird and not at the same time for energy being tied to this,
-	/// since energy is both a magical and physical system
-	var/athletics_skill = 0
+/mob/living/proc/update_stamina_modifiers()
+	. = base_max_stamina
+
+	var/list/conflict_tracker = list()
+
+	for(var/key in get_stamina_modifiers())
+		var/datum/stamina_modifier/stamina_mod = stamina_modification[key]
+		var/conflict = stamina_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < stamina_mod.priority)
+				conflict_tracker[conflict] = stamina_mod.priority
+			else
+				continue
+
+		. += stamina_mod.stamina_add
+
+	maximum_stamina = .
+	stamina = clamp(stamina, 0, maximum_stamina)
+
+/mob/living/carbon/proc/update_endurance_stamina_modifier()
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+
+	var/athletics = 0
 	if(mind)
-		athletics_skill = get_skill_level(/datum/skill/misc/athletics)
-	max_energy = (STAEND + athletics_skill) * 100 // ENERGY / BLUE (Average of 1000)
-	if(cmode)
-		if(!HAS_TRAIT(src, TRAIT_BREADY))
-			adjust_energy(-2)
+		athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics) / 10
+
+	var/base = endurance * 15
+	var/bonus = athletics * 5
+
+	bonus = min(bonus, 50)
+
+	var/total_stamina = max(base + bonus, 10)
+
+	var/stamina_modification = total_stamina - base_max_stamina
+
+	var/desc = span_info("Stamina.")
+	if(total_stamina > base_max_stamina)
+		desc = span_green("High stamina.")
+	else if(total_stamina < base_max_stamina)
+		desc = span_alert("Low stamina.")
+
+	add_or_update_variable_stamina_modifier(
+		/datum/stamina_modifier/endurance,
+		TRUE,
+		stamina_modification,
+		desc
+	)
+
+/mob/living/proc/update_energy()
+	if(cmode && !HAS_TRAIT(src, TRAIT_BREADY))
+		adjust_energy(-2)
+
+/mob/living/proc/update_energy_modifiers()
+	. = base_max_energy
+
+	var/list/conflict_tracker = list()
+
+	for(var/key in get_fatigue_modifiers())
+		var/datum/fatigue_modifier/fatigue_mod = fatigue_modification[key]
+		var/conflict = fatigue_mod.conflicts_with
+
+		if(conflict)
+			if(conflict_tracker[conflict] < fatigue_mod.priority)
+				conflict_tracker[conflict] = fatigue_mod.priority
+			else
+				continue
+
+		. += fatigue_mod.fatigue_add
+
+	max_energy = .
+	energy = clamp(energy, 0, max_energy)
+
+/mob/living/carbon/proc/update_endurance_fatigue_modifier()
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+	var/athletics = 0
+	if(mind)
+		athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics)
+
+	var/athletics_bonus
+	if(athletics >= 0)
+		athletics_bonus = sqrt(athletics / 60.0) * 300  // +300 max at 60, ~378 at 100
+	else
+		athletics_bonus = -(sqrt(-athletics / 60.0) * 300)  // mirrors negative side
+
+	var/base = endurance * 100
+	var/total_energy = max(base + athletics_bonus, 100)
+	var/fatigue_modification = total_energy - base_max_energy
+	var/desc = span_info("Endurance.")
+	if(total_energy > base_max_energy)
+		desc = span_green("High endurance.")
+	else if(total_energy < base_max_energy)
+		desc = span_alert("Low endurance.")
+	add_or_update_variable_fatigue_modifier(
+		/datum/fatigue_modifier/endurance,
+		TRUE,
+		fatigue_modification,
+		desc
+	)
 
 /mob/proc/adjust_energy(added as num)
 	return
@@ -60,9 +144,13 @@
 	return TRUE
 
 /mob/living/check_energy(has_amount)
-	if(!has_amount || has_amount > max_energy)
-		return FALSE
-	if((max_energy - energy) < has_amount)
+	///this trait affects both stamina and energy since they are part of the same system.
+	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
+		return TRUE
+	///This trait specifically affect energy.
+	if(HAS_TRAIT(src, TRAIT_NOENERGY))
+		return TRUE
+	if(has_amount > max_energy || has_amount > energy)
 		return FALSE
 	return TRUE
 
@@ -73,9 +161,6 @@
 /mob/living/adjust_stamina(added as num, emote_override, force_emote = TRUE, internal_regen = TRUE) //call update_stamina here and set last_fatigued, return false when not enough fatigue left
 	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
 		return TRUE
-	if(m_intent == MOVE_INTENT_RUN)
-		var/boon = get_learning_boon(/datum/skill/misc/athletics)
-		adjust_experience(/datum/skill/misc/athletics, (STAINT*0.1) * boon)
 	stamina = CLAMP(stamina+added, 0, maximum_stamina)
 	SEND_SIGNAL(src, COMSIG_LIVING_ADJUSTED, -added, STAMINA)
 	if(internal_regen && added < 0)
@@ -95,9 +180,9 @@
 		if(m_intent == MOVE_INTENT_RUN) //can't sprint at full fatigue
 			toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 		if(!emote_override)
-			emote("fatigue", forced = force_emote)
+			INVOKE_ASYNC(src, PROC_REF(emote), "fatigue", forced = force_emote)
 		else
-			emote(emote_override, forced = force_emote)
+			INVOKE_ASYNC(src, PROC_REF(emote), emote_override, forced = force_emote)
 		set_eye_blur_if_lower(4 SECONDS)
 		last_fatigued = world.time + 30 //extra time before fatigue regen sets in
 		stop_attack()
@@ -140,7 +225,7 @@
 	if(!heart_attacking)
 		var/mob/living/carbon/C = src
 		C.visible_message(C, "<span class='danger'>[C] clutches at [C.p_their()] chest!</span>") // Other people know something is wrong.
-		emote("breathgasp", forced = TRUE)
+		INVOKE_ASYNC(src, PROC_REF(emote), "breathgasp", forced = TRUE)
 		shake_camera(src, 1, 3)
 		set_eye_blur_if_lower(80 SECONDS)
 		var/stuffy = list("ZIZO GRABS MY WEARY HEART!","ARGH! MY HEART BEATS NO MORE!","NO... MY HEART HAS BEAT IT'S LAST!","MY HEART HAS GIVEN UP!","MY HEART BETRAYS ME!","THE METRONOME OF MY LIFE STILLS!")
@@ -164,11 +249,14 @@
 	flash_fullscreen("stressflash")
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	add_stress(/datum/stress_event/freakout)
-	if(stress >= 30)
+	var/heart_value = 30
+	if(HAS_TRAIT(src, TRAIT_WEAK_HEART))
+		heart_value *= 0.5
+	if(stress >= heart_value)
 		heart_attack()
 	else
 		emote("fatigue", forced = TRUE)
-		if(stress > 15)
+		if(stress > 10)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/mob, do_freakout_scream)), rand(30,50))
 	if(hud_used)
 		var/matrix/skew = matrix()

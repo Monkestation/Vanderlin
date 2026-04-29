@@ -62,7 +62,7 @@
 	spawning = 2
 	velocity = list(0, 0.25, 0)
 
-/particles/smoke/steam/water_pipe
+/particles/smoke/steam/water_vent
 	name = "water_pipe"
 	icon_state = list("steam_1" = 1, "smoke_1" = 1, "smoke_2" = 1, "smoke_3" = 1)
 	spawning = 2
@@ -95,6 +95,19 @@
 	scale = 0.75
 	spawning = 1
 	friction = 0.75
+
+/particles/smoke/cig/big/steam
+	name = "cig_big"
+	icon_state = list("steam_1" = 1, "steam_2" = 2, "steam_3" = 2)
+	gravity = list(0, 0.5, 0)
+	velocity = list(0, 0.1, 0)
+	lifespan = generator(GEN_NUM, 1 SECONDS, 3.5 SECONDS)
+	fade = 1 SECONDS
+	grow = 0.1
+	scale = 0.75
+	spawning = 1
+	friction = 0.75
+	position = generator(GEN_VECTOR, list(-6, -6, 0), list(6, 6, 0), NORMAL_RAND)
 
 /particles/smoke/ash
 	name = "cig_ash"
@@ -138,3 +151,21 @@
 	gravity = list(1, 1)
 	color = COLOR_WHITE
 	transform = list(1,0,0,0, 0,1,0,0, 0,0,1,1/5, 0,0,0,1)
+
+// PARTICLE PORTED FROM LC13, BY TaculoTaculo
+/particles/particle_song
+	name = "song"
+	icon = 'icons/effects/particles/song.dmi'
+	icon_state = list("song_small" = 1,"song_medium" = 1,"song_large" = 1)
+	width = 128
+	height = 128
+	count = 30
+	spawning = 2
+	lifespan = 12
+	fadein = 6
+	fade = 6
+	velocity = generator(GEN_CIRCLE, -5, 5, NORMAL_RAND)
+	rotation = generator(GEN_NUM, -120, 120)
+	spin = generator(GEN_NUM, -20, 20)
+	grow = list(0.2, 0.2)
+	friction = 0.6

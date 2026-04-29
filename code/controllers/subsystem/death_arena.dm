@@ -17,8 +17,8 @@ SUBSYSTEM_DEF(death_arena)
 	var/fight_force_end = null
 
 /datum/controller/subsystem/death_arena/fire(resumed = 0)
-	listclearnulls(waiting_fighters)
-	listclearnulls(tollless_clients)
+	list_clear_nulls(waiting_fighters)
+	list_clear_nulls(tollless_clients)
 
 	for(var/client as anything in tollless_clients)
 		if(world.time > tollless_clients[client])
@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(death_arena)
 		return
 	waiting_fighters += fighter
 	tollless_clients[fighter.client.key] = (world.time + 8 MINUTES) - (time_of_death == 0 ? 0 : (world.time - time_of_death))
-	RegisterSignal(fighter, COMSIG_PARENT_QDELETING, PROC_REF(remove_fighter), fighter)
+	RegisterSignal(fighter, COMSIG_QDELETING, PROC_REF(remove_fighter), fighter)
 
 /datum/controller/subsystem/death_arena/proc/remove_fighter(mob/living/fighter)
 	waiting_fighters -= fighter
@@ -156,13 +156,13 @@ SUBSYSTEM_DEF(death_arena)
 
 /datum/controller/subsystem/death_arena/proc/open_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.open()
 
 /datum/controller/subsystem/death_arena/proc/close_death_gate()
 	for(var/obj/structure/gate/G in GLOB.biggates)
-		if(G.gid != "death")
+		if(G.redstone_id != "death")
 			continue
 		G.close()
 
@@ -177,8 +177,8 @@ SUBSYSTEM_DEF(death_arena)
 /datum/outfit/arena_skeleton/pre_equip(mob/living/carbon/human/H, visuals_only)
 	..()
 
-	H.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	H.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, TRUE)
+	H.adjust_skill_level(/datum/attribute/skill/combat/swords, 20, TRUE)
 
 	r_hand = /obj/item/weapon/mace/steel
 	l_hand = /obj/item/weapon/shield/wood

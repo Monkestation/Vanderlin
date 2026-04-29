@@ -59,8 +59,8 @@
 	desc = span_green("I feel soothed.")
 
 /datum/stress_event/triumph
-	timer = 60 MINUTES
-	stress_change = -10
+	timer = 7 MINUTES
+	stress_change = -5
 	desc = span_green("I remember a TRIUMPH.")
 
 /datum/stress_event/drunk
@@ -148,18 +148,18 @@
 	desc = span_green("This music is divine.")
 
 /datum/stress_event/beautiful
-	timer = 2 MINUTES
-	stress_change = -2
-	desc = span_green("Their face is a work of art!")
+	timer = 1 MINUTES
+	stress_change = -1
+	desc = span_green("There is beauty in this world.")
 
 /datum/stress_event/self_fishface
 	timer = 2 MINUTES
-	stress_change = -1
+	stress_change = 0
 	desc = span_green("I don't know what others are on about, I look perfectly fine if I do say so myself.")
 
 /datum/stress_event/fellow_fishface
 	timer = 2 MINUTES
-	stress_change = -2
+	stress_change = 0
 	desc = span_green("A fellow Triton, looking good!")
 
 /datum/stress_event/eora
@@ -414,3 +414,18 @@
 	stress_change = -2
 	desc = span_green("The servants are working well as they should.. what a great place.")
 	timer = 10 MINUTES
+
+/datum/stress_event/poohit_nice
+	stress_change = -1
+	desc = span_green("Someone gave me a good pie-ing.")
+	timer = 3 MINUTES
+
+/datum/stress_event/black_briar_noc
+	timer = 5 MINUTES
+	stress_change = -5
+	desc = span_briar("I stare at Noc, and He stares back...")
+
+/datum/stress_event/xylix_laughed
+	timer = 10 MINUTES
+	stress_change = -5
+	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")

@@ -20,7 +20,7 @@
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableAtoms = list(/obj/structure/roguerock = 5,
 							/obj/item/natural/stone = 10,
-							/obj/structure/essence_node = 0.2,
+							/obj/structure/essence_node = 2.5,
 							/obj/item/natural/rock = 3,
 							/obj/item/natural/rock/random = 0.5)
 	spawnableTurfs = list(/turf/open/floor/cobblerock = 25,
@@ -53,7 +53,7 @@
 
 /datum/mapGeneratorModule/rosewoodcave/wet
 	clusterCheckFlags = CLUSTER_CHECK_NONE
-	allowed_turfs = list(/turf/open/water/cleanshallow)
+	allowed_turfs = list(/turf/open/water/clean)
 	excluded_turfs = list()
 	spawnableAtoms = list(/obj/structure/kneestingers = 3,
 							/obj/structure/flora/grass/water = 4,

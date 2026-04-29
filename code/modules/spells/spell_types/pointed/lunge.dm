@@ -3,10 +3,12 @@
 	desc = "Spring at your target to grapple them without warning, or tear the dead's heart out. Attacks from concealment or the rear may even knock them down if strong enough."
 
 	spell_type = SPELL_RAGE
+	associated_skill = null
 	has_visual_effects = FALSE
 	charge_required = FALSE
 	cooldown_time = 45 SECONDS
 	spell_cost = 30
+	self_cast_possible = FALSE
 	var/target_range = 6
 
 /datum/action/cooldown/spell/lunge/can_cast_spell(feedback)
@@ -15,28 +17,27 @@
 		return FALSE
 	// Are we being grabbed?
 	if(!QDELETED(owner.pulledby) && owner.pulledby.grab_state >= GRAB_AGGRESSIVE)
+		return FALSE
+	if(!QDELETED(owner.pulling))
+		return FALSE
+	return TRUE
+
+// Called when the on-screen button is clicked
+/datum/action/cooldown/spell/lunge/PreActivate(atom/target)
+	if(!QDELETED(owner.pulledby) && owner.pulledby.grab_state >= GRAB_AGGRESSIVE)
 		owner.balloon_alert(owner, "grabbed!")
 		return FALSE
 	if(!QDELETED(owner.pulling))
 		owner.balloon_alert(owner, "grabbing someone!")
 		return FALSE
-	return TRUE
+	. = ..()
 
 /// Check: Are we lunging at a person?
 /datum/action/cooldown/spell/lunge/is_valid_target(atom/target_atom)
 	. = ..()
 	if(!.)
 		return FALSE
-
-	if(isliving(target_atom))
-		var/mob/living/turf_target = target_atom
-		if(!isturf(turf_target.loc))
-			return FALSE
-		var/mob/living/user = owner
-		if(user.body_position == LYING_DOWN || HAS_TRAIT(owner, TRAIT_IMMOBILIZED))
-			return FALSE
-		return TRUE
-
+	return isliving(target_atom)
 
 /datum/action/cooldown/spell/lunge/cast(atom/target_atom)
 	. = ..()
@@ -68,7 +69,7 @@
 		var/y_offset = base_y + rand(-3, 3)
 		animate(pixel_x = x_offset, pixel_y = y_offset, time = 1)
 
-	if(!do_after(owner, 2 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, TYPE_PROC_REF(/datum/action/cooldown/spell/lunge, CheckCanTarget), target_atom), hidden = TRUE))
+	if(!do_after(owner, 1.5 SECONDS, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_SLOWDOWNS), extra_checks = CALLBACK(src, TYPE_PROC_REF(/datum/action/cooldown/spell/lunge, CheckCanTarget), target_atom), hidden = TRUE))
 		end_target_lunge(base_x, base_y)
 
 		return FALSE

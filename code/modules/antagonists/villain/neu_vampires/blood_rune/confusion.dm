@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(confusion_victims, list())
 	icon_state = ""
 	SET_BASE_PIXEL(-16, -16)
 	plane = ABOVE_LIGHTING_PLANE
-	mouse_opacity = 0
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	var/duration = 5
 	var/hallucination_radius = 25
 

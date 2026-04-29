@@ -5,7 +5,7 @@
 	sound = 'sound/misc/stings/generic.ogg'
 	cast_range = 1
 
-	associated_skill = /datum/skill/magic/arcane
+	associated_skill = /datum/attribute/skill/magic/arcane
 	attunements = list(
 		/datum/attunement/dark = 0.3,
 		/datum/attunement/polymorph = 1.0,
@@ -25,6 +25,8 @@
 	var/old_gender
 	var/old_voice
 	var/transformed = FALSE
+	var/old_honorary
+	var/old_honorary_s
 
 	var/transformation_stability = 100 // Decreases over time
 
@@ -47,6 +49,8 @@
 	old_facial_hair_color = transformer.get_facial_hair_color()
 	old_facial_hair = facial?.accessory_type
 	old_gender = transformer.gender
+	old_honorary = transformer.honorary
+	old_honorary_s = transformer.honorary_suffix
 
 /datum/action/cooldown/spell/enhanced_mimicry/is_valid_target(atom/cast_on)
 	. = ..()
@@ -74,10 +78,14 @@
 
 	// Complete transformation
 	target.dna.transfer_identity(transformer)
+	transformer.reset_limb_fingerprints()
 	transformer.updateappearance(mutcolor_update = TRUE)
 	transformer.real_name = target.dna.real_name
 	transformer.name = target.get_visible_name()
 	transformer.gender = target.gender
+	transformer.honorary = target.honorary
+	transformer.honorary_suffix = target.honorary_suffix
+
 
 	// Copy physical features with high accuracy
 	var/datum/bodypart_feature/hair/target_feature = target.get_bodypart_feature_of_slot(BODYPART_FEATURE_HAIR)
@@ -130,9 +138,12 @@
 
 	var/datum/dna/old_dna = dna_ref.resolve()
 	old_dna.transfer_identity(transformer)
+	transformer.reset_limb_fingerprints()
 	transformer.real_name = old_dna.real_name
 	transformer.name = transformer.get_visible_name()
 	transformer.gender = old_gender
+	transformer.honorary = old_honorary
+	transformer.honorary_suffix = old_honorary_s
 
 	var/obj/item/organ/eyes/eyes = transformer.getorganslot(ORGAN_SLOT_EYES)
 	eyes.eye_color = old_eye_color

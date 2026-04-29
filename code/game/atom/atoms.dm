@@ -67,8 +67,6 @@
 	///Last fingerprints to touch this atom
 	var/fingerprintslast
 
-	var/list/filter_data //For handling persistent filters
-
 	///Economy cost of item
 	var/custom_price
 	///Economy cost of item in premium vendor
@@ -89,10 +87,16 @@
 	///AI controller that controls this atom. type on init, then turned into an instance during runtime
 	var/datum/ai_controller/ai_controller
 
+	// Use SET_BASE_PIXEL(x, y) to set these in typepath definitions, it'll handle pixel_x and y for you
 	///Default pixel x shifting for the atom's icon.
 	var/base_pixel_x = 0
 	///Default pixel y shifting for the atom's icon.
 	var/base_pixel_y = 0
+	// Use SET_BASE_VISUAL_PIXEL(x, y) to set these in typepath definitions, it'll handle pixel_w and z for you
+	///Default pixel w shifting for the atom's icon.
+	var/base_pixel_w = 0
+	///Default pixel z shifting for the atom's icon.
+	var/base_pixel_z = 0
 	///Used for changing icon states for different base sprites.
 	var/base_icon_state
 
@@ -158,6 +162,11 @@
 	var/attacked_sound
 
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
+
+	/**
+	 *  Basically the level of dirtiness on an atom, which will spread to wounds and stuff and cause infections
+	 */
+	var/germ_level = GERM_LEVEL_AMBIENT
 
 /**
  * Called when an atom is created in byond (built in engine proc)
@@ -235,10 +244,6 @@
 
 	if(light_system == STATIC_LIGHT && light_power && (light_inner_range || light_outer_range))
 		update_light()
-
-	if(opacity && isturf(loc))
-		var/turf/T = loc
-		T.has_opaque_atom = TRUE // No need to recalculate it in this case, it's guaranteed to be on afterwards anyways.
 
 	SETUP_SMOOTHING()
 
@@ -377,10 +382,6 @@
 /obj/item/CheckParts(list/parts_list)
 	..()
 
-///Hook for multiz???
-/atom/proc/update_multiz(prune_on_fail = FALSE)
-	return FALSE
-
 ///Check if this atoms eye is still alive (probably)
 /atom/proc/check_eye(mob/user)
 	return
@@ -446,18 +447,24 @@
  * You can override what is returned from this proc by registering to listen for the
  * COMSIG_ATOM_GET_EXAMINE_NAME signal
  */
-/atom/proc/get_examine_name(mob/user)
-	. = "\a <b>[src]</b>"
-	var/list/override = list(gender == PLURAL ? "some" : "a", " ", "[name]")
-	if(article)
-		. = "[article] <b>[src]</b>"
-		override[EXAMINE_POSITION_ARTICLE] = article
-	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
-		. = override.Join("")
+/atom/proc/get_examine_name(mob/user, use_article=TRUE)
+	if(use_article)
+		return article ? "[article] <b>[name]</b>" : gender == PLURAL ? "some <b>[name]</b>" : "\a <b>[name]</b>"
+	return "<b>[name]</b>"
 
 ///Generate the full examine string of this atom (including icon for goonchat)
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
-	return "[thats? "That's ":""][get_examine_name(user)]"
+	. = get_examine_name(user)
+	var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+	if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+		. = override.Join("")
+	return "[thats ? ismob(src) ? "This is " : "That's " : ""][.]"
+
+/atom/proc/get_examine_desc(mob/user)
+	return desc
+
+/atom/proc/get_examine_icon(mob/user)
+	return ma2html(src, user)
 
 /atom/proc/get_inspect_button()
 	return ""
@@ -471,7 +478,7 @@
  * Default behaviour is to get the name and icon of the object and it's reagents where
  * the TRANSPARENT flag is set on the reagents holder
  *
- * Produces a signal COMSIG_PARENT_EXAMINE
+ * Produces a signal COMSIG_ATOM_EXAMINE
  */
 /atom/proc/examine(mob/user)
 	var/examine_string = get_examine_string(user, thats = TRUE)
@@ -480,8 +487,9 @@
 	else
 		. = list()
 
-	if(desc)
-		. += "<span class='info'>[desc]</span>"
+	var/examine_desc = get_examine_desc(user)
+	if(examine_desc)
+		. += "<span class='info'>[examine_desc]</span>"
 
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)
@@ -524,7 +532,10 @@
 							full_reagents += "[lowertext(R.name)]"
 					if(length(full_reagents))
 						. += span_notice("I can identity this smell as [full_reagents.Join(", ")].")
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
+
+/atom/proc/get_mechanics_examine(mob/user)
+	return list()
 
 /**
  * Updates the appearence of the icon
@@ -631,7 +642,7 @@
 /atom/proc/relaymove(mob/living/user, direction)
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 50
-		to_chat(user, "<span class='warning'>I should try resisting.</span>")
+		to_chat(user, span_warning("I should try resisting."))
 	return
 
 /// Handle what happens when your contents are exploded by a bomb
@@ -716,22 +727,6 @@
  */
 /atom/proc/acid_act(acidpwr, acid_volume)
 	SEND_SIGNAL(src, COMSIG_ATOM_ACID_ACT, acidpwr, acid_volume)
-
-/**
- * Respond to an emag being used on our atom
- *
- * Default behaviour is to send COMSIG_ATOM_EMAG_ACT and return
- */
-/atom/proc/emag_act(mob/user)
-	SEND_SIGNAL(src, COMSIG_ATOM_EMAG_ACT, user)
-
-/**
- * Respond to narsie eating our atom
- *
- * Default behaviour is to send COMSIG_ATOM_NARSIE_ACT and return
- */
-/atom/proc/narsie_act()
-	SEND_SIGNAL(src, COMSIG_ATOM_NARSIE_ACT)
 
 /**
  * Implement the behaviour for when a user click drags a storage object to your atom
@@ -819,8 +814,15 @@
  * Not recommended to use, listen for the COMSIG_ATOM_DIR_CHANGE signal instead (sent by this proc)
  */
 /atom/proc/setDir(newdir)
+	SHOULD_CALL_PARENT(TRUE)
+	if (SEND_SIGNAL(src, COMSIG_ATOM_PRE_DIR_CHANGE, dir, newdir) & COMPONENT_ATOM_BLOCK_DIR_CHANGE)
+		newdir = dir
+		return
 	SEND_SIGNAL(src, COMSIG_ATOM_DIR_CHANGE, dir, newdir)
+	var/olddir = dir
+	. = dir != newdir
 	dir = newdir
+	SEND_SIGNAL(src, COMSIG_ATOM_POST_DIR_CHANGE, olddir, newdir)
 
 /**
  * Wash this atom
@@ -885,6 +887,13 @@
 	atom_colours[colour_priority] = null
 	update_atom_colour()
 
+/atom/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
+
+/// Force set the germ level
+/atom/proc/set_germ_level(germs)
+	var/delta = (germs - germ_level)
+	return adjust_germ_level(delta)
 
 ///Resets the atom's color to null, and then sets it to the highest priority colour available
 /atom/proc/update_atom_colour()
@@ -937,6 +946,8 @@
 	VV_DROPDOWN_OPTION(VV_HK_ADD_REAGENT, "Add Reagent")
 	VV_DROPDOWN_OPTION(VV_HK_TRIGGER_EXPLOSION, "Explosion")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
+	if(greyscale_colors)
+		VV_DROPDOWN_OPTION(VV_HK_MODIFY_GREYSCALE, "Modify greyscale colors")
 
 /atom/vv_do_topic(list/href_list)
 	. = ..()
@@ -948,7 +959,7 @@
 
 		if(reagents)
 			var/chosen_id
-			switch(alert(usr, "Choose a method.", "Add Reagents", "Search", "Choose from a list", "I'm feeling lucky"))
+			switch(tgui_alert(usr, "Choose a method.", "Add Reagents", list("Search", "Choose from a list", "I'm feeling lucky")))
 				if("Search")
 					var/valid_id
 					while(!valid_id)
@@ -1015,10 +1026,10 @@
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()
-	var/atom/L = loc
-	if(!L)
+	var/atom/location = loc
+	if(!location)
 		return null
-	return L.AllowDrop() ? L : L.drop_location()
+	return location.AllowDrop() ? location : location.drop_location()
 
 /atom/proc/vv_auto_rename(newname)
 	name = newname
@@ -1026,21 +1037,22 @@
 /**
  * An atom has entered this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_ENTERED
+ * Default behaviour is to send the [COMSIG_ATOM_ENTERED]
  */
-/atom/Entered(atom/movable/AM, atom/oldLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, AM, oldLoc)
+/atom/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, arrived, old_loc, old_locs)
+	SEND_SIGNAL(arrived, COMSIG_ATOM_ENTERING, src, old_loc, old_locs)
 
 /**
  * An atom is attempting to exit this atom's contents
  *
- * Default behaviour is to send the COMSIG_ATOM_EXIT
+ * Default behaviour is to send the [COMSIG_ATOM_EXIT]
  */
-/atom/Exit(atom/movable/AM, atom/newLoc)
+/atom/Exit(atom/movable/leaving, direction)
 	// Don't call `..()` here, otherwise `Uncross()` gets called.
 	// See the doc comment on `Uncross()` to learn why this is bad.
 
-	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, AM, newLoc) & COMPONENT_ATOM_BLOCK_EXIT)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, leaving, direction) & COMPONENT_ATOM_BLOCK_EXIT)
 		return FALSE
 
 	return TRUE
@@ -1050,8 +1062,8 @@
  *
  * Default behaviour is to send the COMSIG_ATOM_EXITED
  */
-/atom/Exited(atom/movable/AM, atom/newLoc)
-	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, newLoc)
+/atom/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, gone, direction)
 
 /**
  *Tool behavior procedure. Redirects to tool-specific procs by default.
@@ -1255,60 +1267,9 @@
 	defender.log_message(message, LOG_ATTACK, color="red")
 	attacker.log_message(reverse_message, LOG_ATTACK, "red", FALSE) // log it in the attacker's personal log too, but not log globally because it was already done.
 
-/atom/movable/proc/add_filter(name, priority, list/params)
-	if(!filter_data)
-		filter_data = list()
-	var/list/p = params.Copy()
-	p["priority"] = priority
-	filter_data[name] = p
-	update_filters()
-
-/atom/movable/proc/remove_filter(name_or_names)
-	if(!filter_data)
-		return
-
-	var/list/names = islist(name_or_names) ? name_or_names : list(name_or_names)
-
-	. = FALSE
-	for(var/name in names)
-		if(filter_data[name])
-			filter_data -= name
-			. = TRUE
-
-	if(.)
-		update_filters()
-	return .
-
-/atom/movable/proc/clear_filters()
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	filter_data = null
-	atom_cast.filters = null
-
-/proc/cmp_filter_data_priority(list/A, list/B)
-	return A["priority"] - B["priority"]
-
-/atom/movable/proc/update_filters()
-	filters = null
-	var/atom/atom_cast = src // filters only work with images or atoms.
-	atom_cast.filters = null
-	sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
-	for(var/filter_raw in filter_data)
-		var/list/data = filter_data[filter_raw]
-		var/list/arguments = data.Copy()
-		arguments -= "priority"
-		atom_cast.filters += filter(arglist(arguments))
-	UNSETEMPTY(filter_data)
-
-/obj/item/update_filters()
-	. = ..()
-	update_item_action_buttons()
-
-/atom/movable/proc/get_filter(name)
-	if(filter_data && filter_data[name])
-		return filters[filter_data.Find(name)]
-
-/atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
-	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, AM, levels)
+/atom/proc/intercept_zImpact(list/falling_movables, levels = 1)
+	SHOULD_CALL_PARENT(TRUE)
+	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, falling_movables, levels)
 
 /obj/proc/propagate_temp_change(value, weight, falloff = 0.5, max_depth = 3)
 	var/key = REF(src)
@@ -1361,11 +1322,6 @@
 	base_pixel_y = new_value
 	pixel_y = pixel_y + base_pixel_y - .
 
-/// Returns the indice in filters of the given filter name.
-/// If it is not found, returns null.
-/atom/proc/get_filter_index(name)
-	return filter_data?.Find(name)
-
 /atom/proc/do_alert_effect()
 	var/mutable_appearance/alert = mutable_appearance('icons/effects/32x48.dmi', "alert_effect")
 	var/atom/movable/flick_visual/exclamation = flick_overlay_view(alert, 1 SECONDS)
@@ -1380,3 +1336,33 @@
 /atom/proc/forget_alert(atom/movable/flick_visual/alert)
 	animate(alert, time = 0.5 SECONDS, alpha = 0)
 	QDEL_IN(alert, 0.5 SECONDS)
+
+///Passes Stat Browser Panel clicks to the game and calls client click on an atom
+/atom/Topic(href, list/href_list)
+	. = ..()
+	if(!usr?.client)
+		return
+	var/client/usr_client = usr.client
+	var/list/paramslist = list()
+
+	if(href_list["statpanel_item_click"])
+		switch(href_list["statpanel_item_click"])
+			if("left")
+				paramslist[LEFT_CLICK] = "1"
+			if("right")
+				paramslist[RIGHT_CLICK] = "1"
+			if("middle")
+				paramslist[MIDDLE_CLICK] = "1"
+			else
+				return
+
+		if(href_list["statpanel_item_shiftclick"])
+			paramslist[SHIFT_CLICKED] = "1"
+		if(href_list["statpanel_item_ctrlclick"])
+			paramslist[CTRL_CLICKED] = "1"
+		if(href_list["statpanel_item_altclick"])
+			paramslist[ALT_CLICKED] = "1"
+
+		var/mouseparams = list2params(paramslist)
+		usr_client.Click(src, loc, null, mouseparams)
+		return TRUE

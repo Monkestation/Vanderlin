@@ -1,5 +1,5 @@
 /datum/ai_controller/volf
-	movement_delay = 0.4 SECONDS
+	movement_delay = 0.3 SECONDS
 
 	ai_movement = /datum/ai_movement/hybrid_pathing
 

@@ -1,5 +1,26 @@
+/datum/attribute_holder/sheet/job/bard
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_SPEED = 2,
+		STAT_STRENGTH = -1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/riding = 30,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/stealing = 10,
+		/datum/attribute/skill/misc/lockpicking = 10,
+		/datum/attribute/skill/misc/music = 41,
+		/datum/attribute/skill/misc/athletics = 20
+	)
+
 /datum/job/bard
-	title = "Bard"
+	title = JOB_BARD
 	tutorial = "Bards make up one of the largest populations of registered adventurers in Vanderlin, \
 	mostly because they are the last ones in a party to die. \
 	Their wish is to experience the greatest adventures of the age and write amazing songs \
@@ -10,6 +31,7 @@
 	faction = FACTION_TOWN
 	total_positions = 4
 	spawn_positions = 4
+	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/bard
@@ -18,31 +40,10 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/vicious_mockery,
-		/datum/action/cooldown/spell/bardic_inspiration
+		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
-	jobstats = list(
-		STATKEY_PER = 1,
-		STATKEY_SPD = 2,
-		STATKEY_STR = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 2,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/riding = 3,
-		/datum/skill/misc/sewing = 1,
-		/datum/skill/misc/reading = 3,
-		/datum/skill/craft/cooking = 1,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/stealing = 1,
-		/datum/skill/misc/lockpicking = 1,
-		/datum/skill/misc/music = 4,
-		/datum/skill/misc/athletics = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/bard
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -51,7 +52,16 @@
 
 /datum/job/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.select_equippable(player_client, list(
+
+	spawned.inspiration = new /datum/inspiration(spawned)
+
+	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
+		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+
+/datum/job/bard/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/instruments = list(
 		"Harp" = /obj/item/instrument/harp,
 		"Lute" = /obj/item/instrument/lute,
 		"Accordion" = /obj/item/instrument/accord,
@@ -59,20 +69,13 @@
 		"Flute" = /obj/item/instrument/flute,
 		"Drum" = /obj/item/instrument/drum,
 		"Hurdy-Gurdy" = /obj/item/instrument/hurdygurdy,
-		"Viola" = /obj/item/instrument/viola
-		),
-		message = "Choose your instrument.",
-		title = "XYLIX"
+		"Viola" = /obj/item/instrument/viola,
 	)
-	var/datum/inspiration/I = new /datum/inspiration(spawned)
-	I.grant_inspiration(spawned, bard_tier = BARD_T3)
-	spawned.clamped_adjust_skillrank(/datum/skill/misc/music, 4, 4, TRUE) //Due to Harpy's innate music skill giving them legendary
 
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
-		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
+	spawned.select_equippable(player_client, instruments, message = "Choose your instrument.",title = "XYLIX")
 
 /datum/outfit/bard
-	name = "Bard"
+	name = JOB_BARD
 	head = /obj/item/clothing/head/bardhat
 	shoes = /obj/item/clothing/shoes/boots
 	pants = /obj/item/clothing/pants/tights/colored/random

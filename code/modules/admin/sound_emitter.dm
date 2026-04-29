@@ -45,7 +45,7 @@
 		return
 	edit_emitter(user)
 
-/obj/effect/sound_emitter/AltClick(mob/user)
+/obj/effect/sound_emitter/AltClick(mob/user, list/modifiers)
 	if(check_rights_for(user.client, R_SOUND))
 		activate(user)
 		to_chat(user, "<span class='notice'>Sound emitter activated.</span>")

@@ -14,6 +14,7 @@
 	. = ..()
 	update_observing_turf()
 	register_observation_signals()
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/structure/redstone/observer/Destroy()
 	unregister_observation_signals()
@@ -41,12 +42,12 @@
 		return
 	RegisterSignal(observing_turf, COMSIG_TURF_CHANGE, PROC_REF(on_observed_change))
 	RegisterSignal(observing_turf, COMSIG_TURF_ENTERED, PROC_REF(on_observed_change))
-	RegisterSignal(observing_turf, COMSIG_TURF_EXITED, PROC_REF(on_observed_change))
+	RegisterSignal(observing_turf, COMSIG_ATOM_EXITED, PROC_REF(on_observed_change))
 
 /obj/structure/redstone/observer/proc/unregister_observation_signals()
 	if(!observing_turf)
 		return
-	UnregisterSignal(observing_turf, list(COMSIG_TURF_CHANGE, COMSIG_ATOM_ENTERED, COMSIG_TURF_EXITED))
+	UnregisterSignal(observing_turf, list(COMSIG_TURF_CHANGE, COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXITED))
 
 /obj/structure/redstone/observer/proc/get_turf_state(turf/T)
 	if(!T)
@@ -80,22 +81,23 @@
 	pulsing = TRUE
 	power_level = 15
 	schedule_network_update()
-	update_appearance(UPDATE_OVERLAYS)
+	update_appearance(UPDATE_ICON_STATE)
+
 	spawn(pulse_length * 10)
 		pulsing = FALSE
 		power_level = 0
 		schedule_network_update()
-		update_appearance(UPDATE_OVERLAYS)
+		update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/redstone/observer/update_icon()
+/obj/structure/redstone/observer/update_icon_state()
 	. = ..()
-	icon_state = pulsing ? "comparator" : "comparator"
+	icon_state = pulsing ? "comparator_pulse" : "comparator"
 
-/obj/structure/redstone/observer/AltClick(mob/user)
+/obj/structure/redstone/observer/AltClick(mob/user, list/modifiers)
 	if(!Adjacent(user))
 		return
 	dir = turn(dir, 90)
 	update_observing_turf()
 	register_observation_signals()
-	update_icon()
+	update_appearance(UPDATE_ICON_STATE)
 	to_chat(user, "<span class='notice'>You rotate the [name].</span>")

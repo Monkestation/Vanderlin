@@ -1,5 +1,6 @@
 //Cat
 /mob/living/simple_animal/pet/cat
+	abstract_type = /mob/living/simple_animal/pet/cat
 	name = "parent roguecat"
 	desc = "If you're seeing this, someone forgot to set a mob desc or it spawned the parent mob. Report to the Creators."
 	icon = 'icons/roguetown/mob/monster/pets.dmi'
@@ -59,7 +60,7 @@
 	if(prob(50))
 		gender = FEMALE
 	AddElement(/datum/element/ai_retaliate)
-	verbs += /mob/living/proc/lay_down
+	add_verb(src, /mob/living/proc/lay_down)
 	AddComponent(\
 			/datum/component/breed,\
 			list(/mob/living/simple_animal/pet/cat),\
@@ -67,6 +68,7 @@
 			list(/mob/living/simple_animal/pet/cat/kitten = 100),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
+	add_traits(list(TRAIT_NOFALLDAMAGE2), INNATE_TRAIT)
 
 /mob/living/simple_animal/pet/cat/proc/drop_held_item()
 	held_item.forceMove(get_turf(src))
@@ -157,9 +159,6 @@
 	matrix.Scale(0.5, 0.5)
 	transform = matrix
 
-/mob/living/simple_animal/pet/cat/proc/after_birth(mob/living/simple_animal/pet/cat/kitten/baby, mob/living/partner)
-	return
-
 /mob/living/simple_animal/pet/cat/proc/wuv(change, mob/M)
 	if(change)
 		if(change > 0)
@@ -179,10 +178,10 @@
 		// Handle racist reaction if enabled
 		if(ai_controller.blackboard[BB_CAT_RACISM])
 			if((isdarkelf(M)) || ishalforc(M) || istiefling(M) || (M.mind && M.mind.has_antag_datum(/datum/antagonist/vampire)))
-				visible_message("<span class='notice'>\The [src] hisses at [M] and recoils in disgust.</span>")
+				// visible_message("<span class='notice'>\The [src] hisses at [M] and recoils in disgust.</span>")
 				icon_state = "[icon_living]"
 				set_resting(FALSE)
-				playsound(get_turf(src), 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
+				playsound(src, 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
 				dir = pick(GLOB.alldirs)
 				step(src, dir)
 				personal_space()

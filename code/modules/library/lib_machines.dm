@@ -15,7 +15,7 @@
 
 	var/static/list/manuel_name_to_path = list()
 
-/obj/machinery/printingpress/attackby(obj/item/O, mob/user, params)
+/obj/machinery/printingpress/attackby(obj/item/O, mob/user, list/modifiers)
 	if(printing)
 		to_chat(user, span_warning("[src] is currently printing. Please wait."))
 		return
@@ -28,7 +28,7 @@
 			to_chat(user, span_notice("This canvas isn't signed."))
 			return
 		// Prompt the user to upload the manuscript
-		var/choice = input(user, "Do you want to add the painting to the archive?") in list("Yes", "No")
+		var/choice = tgui_alert(user, "Do you want to add the painting to the archive?", "Confirm", list("Yes", "No"))
 		if(choice == "Yes")
 			upload_painting(user, M)
 			to_chat(user, span_notice("The painting has been uploaded."))
@@ -42,7 +42,7 @@
 			to_chat(user, span_notice("This manuscript has yet to be authored and titled. You'll need to do so before uploading it."))
 			return
 		// Prompt the user to upload the manuscript
-		var/choice = input(user, "Do you want to add the manuscript to the archive?") in list("Yes", "No")
+		var/choice = tgui_alert(user, "Do you want to add the manuscript to the archive?", "Confirm", list("Yes", "No"))
 		if(choice == "Yes")
 			upload_manuscript(user, M)
 			// // Optionally delete the manuscript after uploading
@@ -92,7 +92,7 @@
 		to_chat(user, span_warning("[src] is empty."))
 		return
 
-/obj/machinery/printingpress/attack_hand_secondary(mob/user, params)
+/obj/machinery/printingpress/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -132,7 +132,7 @@
 	printing = TRUE
 	src.icon_state = "Ppress_Printing"
 	to_chat(user, span_warning("[src] starts printing..."))
-	playsound(src.loc, 'sound/misc/ppress.ogg', 100, FALSE)
+	playsound(src, 'sound/misc/ppress.ogg', 100, FALSE)
 	// Delete the blank paper as it's consumed during printing
 	if(loaded_paper)
 		qdel(loaded_paper)

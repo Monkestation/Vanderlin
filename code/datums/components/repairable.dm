@@ -35,7 +35,7 @@
 	repair_skill_level = _repair_skill_level
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attempt_repair))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_FIX, PROC_REF(on_parent_fix))
 	RegisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
 	RegisterSignal(parent, COMSIG_ATOM_BREAK, PROC_REF(on_parent_break))
@@ -43,10 +43,12 @@
 		RegisterSignal(parent, COMSIG_TURF_CHANGE, PROC_REF(on_turf_changed))
 
 /datum/component/repairable/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_PARENT_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
+	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_FIX, COMSIG_ATOM_TAKE_DAMAGE, COMSIG_ATOM_BREAK, COMSIG_TURF_CHANGE))
 
-/datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, params)
-	if(repair_skill && user.get_skill_level(repair_skill) < repair_skill_level)
+/datum/component/repairable/proc/attempt_repair(datum/source, obj/item/attacking_item, mob/user, list/modifiers)
+	SIGNAL_HANDLER
+
+	if(repair_skill && GET_MOB_SKILL_VALUE_OLD(user, repair_skill) < repair_skill_level)
 		return
 
 	var/atom/atom_parent = parent
@@ -55,24 +57,7 @@
 			return
 
 		. = COMPONENT_NO_AFTERATTACK
-		if(repair_sound)
-			playsound(parent, repair_sound, 100, TRUE)
-		user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
-		var/repair_time = 10 SECONDS
-		if(repair_skill)
-			repair_time = 30 SECONDS / max(user.get_skill_level(repair_skill), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
-		interrupt_repair = FALSE
-		if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
-			interrupt_repair = FALSE
-			return
-		interrupt_repair = FALSE
-		if(repair_sound)
-			playsound(parent, repair_sound, 100, TRUE)
-		user.visible_message(span_notice("[user] finishes repairing [parent]."), span_notice("I finished repairing [parent]."))
-
-		var/repair_amount = (atom_parent.integrity_failure * atom_parent.max_integrity) - atom_parent.get_integrity() + 1
-		atom_parent.repair_damage(repair_amount)
-		qdel(attacking_item)
+		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers)
 	else
 		var/parent_integrity = atom_parent.get_integrity() / atom_parent.max_integrity
 
@@ -88,23 +73,31 @@
 			return
 
 		. = COMPONENT_NO_AFTERATTACK
-		if(repair_sound)
-			playsound(parent, repair_sound, 100, TRUE)
-		user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
-		var/repair_time = 10 SECONDS
-		if(repair_skill)
-			repair_time = 30 SECONDS / user.get_skill_level(repair_skill) // 1 skill = 30 secs, 2 skill = 15 secs etc.
-		interrupt_repair = FALSE
-		if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
-			interrupt_repair = FALSE
-			return
-		interrupt_repair = FALSE
-		if(repair_sound)
-			playsound(parent, repair_sound, 100, TRUE)
-		user.visible_message(span_notice("[user] finishes repairing [parent]."), span_notice("I finished repairing [parent]."))
+		INVOKE_ASYNC(src, PROC_REF(async_start), source, attacking_item, user, modifiers, repair_value)
 
-		atom_parent.repair_damage(repair_value - atom_parent.get_integrity())
-		qdel(attacking_item)
+/datum/component/repairable/proc/async_start(datum/source, obj/item/attacking_item, mob/user, list/modifiers, repair_threshold_value)
+	var/atom/atom_parent = parent
+	if(repair_sound)
+		playsound(parent, repair_sound, 100, TRUE)
+	user.visible_message(span_notice("[user] starts repairing [parent]."), span_notice("I start repairing [parent]."))
+	var/repair_time = 10 SECONDS
+	if(repair_skill)
+		repair_time = 30 SECONDS / max(GET_MOB_SKILL_VALUE_OLD(user, repair_skill), 1)  // 1 skill = 30 secs, 2 skill = 15 secs etc.
+	interrupt_repair = FALSE
+	if(!do_after(user, repair_time, parent, extra_checks = CALLBACK(src, PROC_REF(can_repair), user)))
+		interrupt_repair = FALSE
+		return
+	interrupt_repair = FALSE
+	if(repair_sound)
+		playsound(parent, repair_sound, 100, TRUE)
+	user.visible_message(span_notice("[user] finishes repairing [parent]."), span_notice("I finished repairing [parent]."))
+	qdel(attacking_item)
+
+	if(broken_parent)
+		var/repair_amount = (atom_parent.integrity_failure * atom_parent.max_integrity) - atom_parent.get_integrity() + 1
+		atom_parent.repair_damage(repair_amount)
+	else
+		atom_parent.repair_damage(repair_threshold_value - atom_parent.get_integrity())
 
 /datum/component/repairable/proc/can_repair(mob/user)
 	if(interrupt_repair)

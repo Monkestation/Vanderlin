@@ -1,40 +1,31 @@
+/datum/attribute_holder/sheet/job/duelist
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_SPEED = 2,
+		STAT_PERCEPTION = 2,
+		STAT_STRENGTH = -1,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/craft/cooking = 30
+	)
+
 /datum/job/advclass/mercenary/duelist
 	title = "Duelist"
 	tutorial = "A swordsman from Valoria, wielding a rapier with deadly precision and driven by honor and a thirst for coin, they duel with unmatched precision, seeking glory and wealth."
-	allowed_races = list(\
-		SPEC_ID_HUMEN,\
-		SPEC_ID_ELF,\
-		SPEC_ID_TIEFLING,\
-		SPEC_ID_HALF_ELF,\
-		SPEC_ID_HALF_DROW,\
-		SPEC_ID_AASIMAR,\
-		SPEC_ID_HALF_ORC,\
-	) //Yes, Horcs get to be Duelists, Not Drows though.
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	outfit = /datum/outfit/mercenary/duelist
-	category_tags = list(CTAG_MERCENARY)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg' //Placeholder music since apparently i can't use one from the internet...
-	total_positions = 5
+	total_positions = 2
 
-	jobstats = list(
-		STATKEY_END = 2,
-		STATKEY_SPD = 2,
-		STATKEY_PER = 2,
-		STATKEY_STR = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/swords = 4,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/misc/swimming = 3,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/sneaking = 3,
-		/datum/skill/misc/athletics = 4,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/craft/cooking = 3
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/duelist
 
 	traits = list(
 		TRAIT_DODGEEXPERT
@@ -54,17 +45,7 @@
 	pants = /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	shoes = /obj/item/clothing/shoes/nobleboot/duelboots
 	belt = /obj/item/storage/belt/leather/mercenary
+	beltl = /obj/item/weapon/sword/rapier/dec
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/storage/belt/pouch/coins/mid = 1)
+	beltr = /obj/item/storage/belt/pouch/coins/mid
 	scabbards = list(/obj/item/weapon/scabbard/sword)
-
-/datum/outfit/mercenary/duelist/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
-	. = ..()
-	var/rando = rand(1,6)
-	switch(rando)
-		if(1 to 2)
-			beltl = /obj/item/weapon/sword/rapier
-		if(3 to 4)
-			beltl = /obj/item/weapon/sword/rapier/silver //Correct, They have a chance to receive a silver rapier, due to them being from Valoria.
-		if(5 to 6)
-			beltl = /obj/item/weapon/sword/rapier/dec

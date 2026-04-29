@@ -9,7 +9,7 @@
 	var/bundletype = null
 	var/quality = SMELTERY_LEVEL_NORMAL // To not ruin blacksmith recipes
 
-/obj/item/natural/attackby(obj/item/W, mob/living/user)
+/obj/item/natural/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/natural/bundle))
 		if(item_flags & IN_STORAGE)
 			to_chat(user, span_warning("It's hard to find [src] in my bag."))
@@ -27,7 +27,7 @@
 			return
 	return ..()
 
-/obj/item/natural/pre_attack_secondary(atom/A, mob/living/user, params)
+/obj/item/natural/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -62,14 +62,18 @@
 	var/icon2 = "fibersroll2"
 	var/icon2step = 6
 	var/icon3 = null
-	var/stacktype = /obj/item/natural/fibers
+	var/obj/item/stacktype = /obj/item/natural/fibers
 	var/stackname = "fibers"
+	var/bundle_verb = "bundle"
 	var/items_per_increase = 5
 
 	var/base_width = 32
 	var/base_height = 32
 
-/obj/item/natural/bundle/attackby(obj/item/W, mob/living/user)
+/obj/item/natural/bundle/get_carry_weight(atom/carrier)
+	. = initial(stacktype.item_weight) * amount
+
+/obj/item/natural/bundle/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(amount <= 0) //how did you manage to do this
 		qdel(src)
 		return
@@ -106,7 +110,7 @@
 		return
 	return ..()
 
-/obj/item/natural/bundle/attack_hand_secondary(mob/user, params)
+/obj/item/natural/bundle/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -145,9 +149,9 @@
 
 /obj/item/natural/bundle/examine(mob/user)
 	. = ..()
-	. += span_notice("There are [amount] [stackname] in this bundle.")
+	. += span_notice("There are [amount] [stackname] in this [bundle_verb].")
 
-/obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, params)
+/obj/item/natural/bundle/pre_attack_secondary(atom/A, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -220,6 +224,93 @@
 		storage.update_item(src)
 		storage.orient2hud()
 
+/obj/item/natural/clod
+	name = "generic clod"
+	desc = "A handful of nothing."
+	icon_state = "clod1"
+	dropshrink = 0
+	throwforce = 0
+	w_class = WEIGHT_CLASS_TINY
+	var/pile = null
+	var/clod_type = null
+
+/obj/item/natural/clod/attackby(obj/item/W, mob/user, list/modifiers)
+	if(istype(W, /obj/item/weapon/shovel))
+		var/obj/item/weapon/shovel/S = W
+		if(!S.heldclod && user.used_intent.type == /datum/intent/shovelscoop)
+			if(!(src.item_flags & IN_STORAGE))
+				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+				src.forceMove(S)
+				S.heldclod = src
+				W.update_appearance(UPDATE_ICON_STATE)
+				return
+	return ..()
+
+/obj/item/natural/clod/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
+	..()
+	if((!throwing || throwing.target_turf == loc) && isturf(loc) && old_loc != loc)
+		var/turf/T = loc
+		for(var/obj/structure/fluff/clodpile/C in T)
+			if(C == pile)
+				C.dirtamt = min(C.dirtamt+1, 5)
+				qdel(src)
+				return
+		var/dirtcount = 1
+		var/list/dirts = list()
+		for(var/obj/item/natural/clod/D in T)
+			if(D.clod_type == clod_type)
+				dirtcount++
+				dirts += D
+		if(dirtcount >=5)
+			for(var/obj/item/I in dirts)
+				qdel(I)
+			qdel(src)
+			new pile(T)
+
+/obj/item/natural/clod/attack_self(mob/living/user, params)
+	user.visible_message("<span class='warning'>[user] scatters [src].</span>")
+	qdel(src)
+
+/obj/structure/fluff/clodpile
+	name = "mystery pile"
+	desc = "There is no telling what this is or why it exists. In fact, it shouldn't."
+	icon = 'icons/roguetown/items/natural.dmi'
+	icon_state = "clodpile"
+	var/dirtamt = 5
+	climbable = FALSE
+	density = FALSE
+	climb_offset = 10
+	var/dirt_type = null
+
+/obj/structure/fluff/clodpile/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)
+
+/obj/structure/fluff/clodpile/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/weapon/shovel))
+		var/obj/item/weapon/shovel/S = W
+		if(user.used_intent.type == /datum/intent/shovelscoop)
+			if(!S.heldclod)
+				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
+				var/obj/item/J = new dirt_type(S)
+				S.heldclod = J
+				W.update_appearance(UPDATE_ICON_STATE)
+				dirtamt--
+				if(dirtamt <= 0)
+					qdel(src)
+				return
+			else
+				playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
+				var/obj/item/I = S.heldclod
+				S.heldclod = null
+				qdel(I)
+				W.update_appearance(UPDATE_ICON_STATE)
+				dirtamt++
+				if(dirtamt > 5)
+					dirtamt = 5
+				return
+	return ..()
+
 /obj/item/natural/infernalash//T1 mage summon loot
 	name = "infernal ash"
 	icon_state = "infernalash"
@@ -233,6 +324,7 @@
 		/datum/attunement/death = 0.05,
 		/datum/attunement/life = -0.05,
 	)
+	item_weight = 30 GRAMS
 
 /obj/item/natural/hellhoundfang//T2 mage summon loot
 	name = "hellhound fang"
@@ -248,6 +340,7 @@
 		/datum/attunement/death = 0.05,
 		/datum/attunement/life = -0.05,
 	)
+	item_weight = 40 GRAMS
 
 /obj/item/natural/moltencore// T3 mage summon loot
 	name = "molten core"
@@ -263,6 +356,7 @@
 		/datum/attunement/death = 0.1,
 		/datum/attunement/life = -0.1,
 	)
+	item_weight = 80 GRAMS
 
 /obj/item/natural/abyssalflame//T4 mage summon loot
 	name = "abyssal flame"
@@ -278,6 +372,7 @@
 		/datum/attunement/death = 0.15,
 		/datum/attunement/life = -0.15,
 	)
+	item_weight = 50 GRAMS
 
 //FAIRY
 /obj/item/natural/fairydust	//T1 mage summon loot
@@ -295,6 +390,9 @@
 		/datum/attunement/life = 0.05,
 		/datum/attunement/death = -0.05,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 10 GRAMS
 
 /obj/item/natural/iridescentscale	//T2 mage summon loot
 	name = "iridescent scales"
@@ -311,6 +409,9 @@
 		/datum/attunement/life = 0.1,
 		/datum/attunement/death = -0.1,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 15 GRAMS
 
 /obj/item/natural/heartwoodcore	//T3 mage summon loot
 	name = "heartwood core"
@@ -326,6 +427,9 @@
 		/datum/attunement/life = 0.1,
 		/datum/attunement/death = -0.1,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 60 GRAMS
 
 /obj/item/natural/sylvanessence	//T4 mage summon loot
 	name = "sylvan essence"
@@ -341,6 +445,9 @@
 		/datum/attunement/life = 0.15,
 		/datum/attunement/death = -0.15,
 	)
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Killing a Sylph", /mob/living/simple_animal/hostile/retaliate/fae/sylph))
+	item_weight = 40 GRAMS
 
 //ELEMENTAL
 /obj/item/natural/elementalmote
@@ -359,6 +466,7 @@
 
 		/datum/attunement/earth = -0.1,
 	)
+	item_weight = 20 GRAMS
 
 /obj/item/natural/elementalshard
 	name = "elemental shard"
@@ -376,6 +484,7 @@
 
 		/datum/attunement/earth = -0.2,
 	)
+	item_weight = 30 GRAMS
 
 /obj/item/natural/elementalfragment
 	name = "elemental fragment"
@@ -393,6 +502,7 @@
 
 		/datum/attunement/earth = -0.15,
 	)
+	item_weight = 25 GRAMS
 
 /obj/item/natural/elementalrelic
 	name = "elemental relic"
@@ -410,6 +520,7 @@
 
 		/datum/attunement/earth = -0.1,
 	)
+	item_weight = 35 GRAMS
 
 //Nullmagic
 /obj/item/natural/voidstone
@@ -427,3 +538,4 @@
 		/datum/attunement/dark = 0.2,
 		/datum/attunement/illusion = 0.2,
 	)
+	item_weight = 60 GRAMS

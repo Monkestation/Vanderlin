@@ -1,0 +1,309 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 4
+	},
+/area/indoors/town)
+"b" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/reagent_containers/glass/bottle/redwine{
+	pixel_x = 7;
+	pixel_y = -2
+	},
+/obj/item/clothing/shoes/boots{
+	pixel_x = -7;
+	pixel_y = -3
+	},
+/obj/item/key/tailor{
+	pixel_x = -5;
+	pixel_y = 2
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"c" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/indoors/town)
+"f" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = -15
+	},
+/obj/structure/carpet/purple,
+/turf/open/floor/wood,
+/area/indoors/town)
+"h" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/fancy/purple,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"l" = (
+/obj/structure/curtain/bounty/dir{
+	dir = 8
+	},
+/obj/structure/window/solid,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"m" = (
+/obj/structure/carpet/purple,
+/turf/open/floor/wood,
+/area/indoors/town)
+"n" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/indoors/town)
+"p" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town)
+"r" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/candle/yellow,
+/obj/item/candle/yellow,
+/obj/item/candle/yellow,
+/obj/item/candle/yellow,
+/obj/item/candle/yellow,
+/obj/item/candle/yellow,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"s" = (
+/obj/structure/carpet/purple,
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 4
+	},
+/obj/effect/landmark/start/tailor{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"t" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/bookcase/random{
+	pixel_y = 18;
+	density = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"u" = (
+/obj/structure/carpet/purple,
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"w" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/town)
+"x" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"z" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 8
+	},
+/area/indoors/town)
+"A" = (
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/door{
+	name = "Tailor's Appartment"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tailor,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"B" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/abstract/property_noop{
+	property_id = "tailor"
+	},
+/turf/template_noop,
+/area/template_noop)
+"C" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/carpet/purple,
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/wood,
+/area/indoors/town)
+"E" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"F" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"H" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"K" = (
+/obj/structure/carpet/purple,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"L" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty/dir{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"N" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/cloth,
+/obj/structure/carpet/purple,
+/obj/structure/rack/shelf,
+/obj/item/clothing/head/crown/circlet/goldheaddress{
+	sellprice = 1;
+	name = "gold headdress";
+	desc = "A fancy headdress made out of a cheaper gold knock off material.";
+	pixel_x = -1;
+	pixel_y = 32
+	},
+/obj/effect/landmark/start/tailor,
+/turf/open/floor/wood,
+/area/indoors/town)
+"O" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/table/wood/fancy/purple,
+/obj/structure/carpet/purple,
+/obj/item/bouquet/rosa,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"P" = (
+/obj/effect/abstract/property_noop{
+	property_id = "tailor"
+	},
+/turf/template_noop,
+/area/template_noop)
+"Q" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/rack/shelf,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"S" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/indoors/town)
+"V" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty/dir{
+	dir = 1
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"X" = (
+/obj/structure/bookcase/random{
+	pixel_y = 18;
+	density = 0
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"Z" = (
+/obj/structure/door{
+	name = "Tailor's Appartment"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/tailor,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+
+(1,1,1) = {"
+P
+P
+P
+P
+P
+c
+n
+w
+P
+"}
+(2,1,1) = {"
+P
+C
+H
+H
+z
+r
+E
+w
+w
+"}
+(3,1,1) = {"
+P
+N
+m
+p
+Z
+x
+x
+b
+z
+"}
+(4,1,1) = {"
+P
+f
+H
+H
+a
+Q
+x
+h
+a
+"}
+(5,1,1) = {"
+P
+c
+n
+w
+w
+S
+x
+n
+w
+"}
+(6,1,1) = {"
+P
+P
+P
+z
+X
+x
+x
+s
+z
+"}
+(7,1,1) = {"
+P
+B
+P
+A
+F
+F
+K
+O
+V
+"}
+(8,1,1) = {"
+P
+P
+P
+a
+t
+x
+F
+u
+a
+"}
+(9,1,1) = {"
+P
+P
+P
+w
+c
+L
+l
+n
+w
+"}

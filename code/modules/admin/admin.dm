@@ -14,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(mob/M in GLOB.mob_list)
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -44,7 +44,7 @@
 	body += "html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden;}"
 	body += "#container { display: flex; flex-direction: row; align-items: flex-start; width: 100%; overflow-x: hidden; flex-wrap: nowrap;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#left { flex: 2; padding-right: 10px; min-width: 0; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]}"
-	body += "#skills-section, #languages-section, #stats-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
+	body += "#quirks-section, #languages-section { display: none; background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border: 1px solid black; padding: 10px; width: 100%; box-sizing: border-box; max-width: 100%; overflow-x: hidden; word-wrap: break-word; }"
 	body += "#right { flex: 1; border-left: 2px solid black; padding-left: 10px; max-height: 500px; overflow-y: auto; width: 250px; min-width: 250px; box-sizing: border-box; position: relative;background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""] }"
 	body += "#right-header { display: flex; justify-content: space-around; padding: 5px; background: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-bottom: 2px solid black; position: sticky; top: 0; z-index: 10; }"
 	body += "#right-header button { flex: 1; margin: 2px; padding: 5px; cursor: pointer; font-weight: bold; border: none; background-color: background: [dark_ui ? "#121212" : "white"]; [dark_ui ? "color: #f0f0f0" : ""]; border-radius: 5px; }"
@@ -55,9 +55,8 @@
 	body += "<script>"
 	body += "function toggleSection(section) {"
 	body += "    localStorage.setItem('activeSection', section);"
-	body += "    document.getElementById('skills-section').style.display = (section === 'skills') ? 'block' : 'none';"
 	body += "    document.getElementById('languages-section').style.display = (section === 'languages') ? 'block' : 'none';"
-	body += "	 document.getElementById('stats-section').style.display = (section === 'stats') ? 'block' : 'none';"
+	body += "	 document.getElementById('quirks-section').style.display = (section === 'quirks') ? 'block' : 'none';"
 	body += "}"
 
 	body += "function refreshAndKeepSection(section) {"
@@ -113,22 +112,23 @@
 		body += "<a href='?_src_=holder;[HrefToken()];showtriumphs=add;mob=[REF(M)]'>\[Check Triumphs\]</a> "
 		body += "<br>"
 		body += "<a href='?_src_=holder;[HrefToken()];roleban=add;mob=[REF(M)]'>\[Role Ban Panel\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_whitelist_panel=[REF(M)]'>\[Whitelists\]</a> "
+		body += "<a href='?_src_=holder;[HrefToken()];open_boost_panel=[REF(M)]'>\[JOB BOOST\]</a> "
+		if(M.attributes)
+			body += "<a href='byond://?_src_=holder;[HrefToken()];attributes=[REF(M)]'>\[GURPS\]</a> "
 
 		var/patron = ""
 		if(isliving(M))
 			var/mob/living/living = M
 			patron = initial(living.patron.name)
-		var/flaw = ""
 		var/curse_string = ""
 		var/job = ""
 		if(ishuman(M))
 			var/mob/living/carbon/human/human_mob = M
-			flaw = human_mob.charflaw
 			curse_string = human_mob.curses.Join(", ")
 			job = human_mob?.mind.assigned_role.title
 
 		body += "<br><br>Current Patron: <a href='?_src_=holder;[HrefToken()];changepatron=add;mob=[REF(M)]'>\[[patron ? patron : "NA"]\]</a>"
-		body += "<br>Current Flaw: <a href='?_src_=holder;[HrefToken()];changeflaw=add;mob=[REF(M)]'>\[[flaw ? flaw : "NA"]\]</a>"
 		body += "<br>Current Curses: <a href='?_src_=holder;[HrefToken()];modifycurses=add;mob=[REF(M)]'>\[[curse_string ? curse_string : "NA"]\]</a>"
 		body += "<br>Current Job: <a href='?_src_=holder;[HrefToken()];setjob=add;mob=[REF(M)]'>\[[job ? job : "NA"]\]</a>"
 
@@ -190,24 +190,9 @@
 
 	body += "<div id='right'>"
 	body += "<div id='right-header'>"
-	body += "<button onclick=\"toggleSection('skills')\">Skills</button>"
 	body += "<button onclick=\"toggleSection('languages')\">Languages</button>"
-	body += "<button onclick=\"toggleSection('stats')\">Stats</button>"
+	body += "<button onclick=\"toggleSection('quirks')\">Quirks</button>"
 	body += "</div>"
-
-
-	body += "<div id='skills-section'>"
-	body += "<h3>Skills</h3><ul>"
-	if(M.mind)
-		for(var/skill_type in SSskills.all_skills)
-			var/datum/skill/skill = GetSkillRef(skill_type)
-			if(skill in M.skills?.known_skills)
-				body += "<li>[initial(skill.name)]: [M.skills?.known_skills[skill]] "
-			else
-				body += "<li>[initial(skill.name)]: 0"
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];increase_skill=[REF(M)];skill=[skill.type]'>+</a> "
-			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];decrease_skill=[REF(M)];skill=[skill.type]'>-</a></li>"
-	body += "</ul></div>"
 
 	body += "<div id='languages-section'>"
 	body += "<h3>Languages</h3><ul>"
@@ -219,47 +204,61 @@
 			body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_language=[REF(M)];language=[ld]'>Grant</a></li>"
 	body += "</ul></div>"
 
-	body += "<div id='stats-section'>"
-	body += "<h3>Stats</h3><ul>"
-	if(isliving(M))
-		var/mob/living/living = M
-		body += "<li>Strength: [living.STASTR] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_STR]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_STR]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_STR]'> Bulk Change</a></li>"
+	body += "<div id='quirks-section'>"
+	body += "<h3>Quirks</h3><ul>"
 
-		body += "<li>Perception: [living.STAPER] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_PER]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_PER]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_PER]'> Bulk Change</a></li>"
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
 
-		body += "<li>Endurance: [living.STAEND] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_END]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_END]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_END]'> Bulk Change</a></li>"
+		// Display current quirks
+		if(length(H.quirks))
+			body += "<h4>Current Quirks:</h4><ul>"
+			for(var/datum/quirk/Q in H.quirks)
+				body += "<li>[initial(Q.name)] ([Q.point_value] pts) "
+				body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];remove_quirk=[REF(M)];quirk=[Q.type]'>Remove</a></li>"
+			body += "</ul>"
+		else
+			body += "<p><i>No quirks</i></p>"
 
-		body += "<li>Constitution: [living.STACON] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_CON]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_CON]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_CON]'> Bulk Change</a></li>"
+		// Add new quirk dropdown
+		body += "<h4>Add Quirk:</h4>"
+		body += "<select id='quirk-select'>"
+		body += "<option value=''>-- Select Quirk --</option>"
 
-		body += "<li>Intelligence: [living.STAINT] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_INT]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_INT]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_INT]'> Bulk Change</a></li>"
+		// Group quirks by category
+		for(var/category in list(QUIRK_BOON, QUIRK_VICE, QUIRK_PECULIARITY))
+			var/category_name = ""
+			switch(category)
+				if(QUIRK_BOON)
+					category_name = "Boons"
+				if(QUIRK_VICE)
+					category_name = "Vices"
+				if(QUIRK_PECULIARITY)
+					category_name = "Peculiarities"
 
-		body += "<li>Speed: [living.STASPD] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_SPD]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_SPD]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_SPD]'> Bulk Change</a></li>"
+			body += "<optgroup label='[category_name]'>"
+			for(var/quirk_data in GLOB.quirk_points_by_type[category])
+				var/quirk_type = quirk_data["type"]
+				var/quirk_name = quirk_data["name"]
+				var/quirk_points = quirk_data["value"]
+				body += "<option value='[quirk_type]'>[quirk_name] ([quirk_points] pts)</option>"
+			body += "</optgroup>"
 
-		body += "<li>Luck: [living.STALUC] "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];add_stat=[REF(M)];stat=[STATKEY_LCK]'>+</a> "
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];lower_stat=[REF(M)];stat=[STATKEY_LCK]'>-</a>"
-		body += "<a class='skill-btn' href='?_src_=holder;[HrefToken()];bulk_change=[REF(M)];stat=[STATKEY_LCK]'> Bulk Change</a></li>"
+		body += "</select>"
+		body += " <button class='skill-btn' onclick='addQuirk()'>Add</button>"
+
+		// JavaScript for adding quirks
+		body += "<script>"
+		body += "function addQuirk() {"
+		body += "    var select = document.getElementById('quirk-select');"
+		body += "    var quirkType = select.value;"
+		body += "    if(quirkType) {"
+		body += "        window.location.href = '?_src_=holder;[HrefToken()];add_quirk=[REF(M)];quirk=' + encodeURIComponent(quirkType);"
+		body += "    }"
+		body += "}"
+		body += "</script>"
 
 	body += "</ul></div>"
-
 
 	body += "</div>"
 	body += "</div>"
@@ -275,18 +274,32 @@
 /datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
 	set name = "Heal Mob"
 	set desc = "Heal a mob to full health"
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 
 	if(!check_rights())
 		return
-	M.revive(TRUE, TRUE)
+	M.revive(ADMIN_HEAL_ALL)
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
 	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
+
+/datum/admins/proc/prompt_subclass(mob/living/mob in GLOB.mob_list)
+	set name = "Trigger Subclass Menu"
+	set desc = "Triggers the subclass menu of a mob."
+	set category = "Admin.Jobs"
+
+	if(!check_rights())
+		return
+	if(tgui_alert(usr, "This will trigger a no adv class restriction triumph if the player has bought it.", "Confirm", list("Proceed", "Cancel")) != "Proceed")
+		return FALSE
+
+	SSrole_class_handler.setup_class_handler(mob)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] triggered the subclass menu on [key_name_admin(mob)]!</span>")
+	log_admin("[key_name(usr)] triggered the subclass menu on [key_name(mob)].")
 
 /datum/admins/proc/admin_curse(mob/living/carbon/human/M in GLOB.mob_list)
 	set name = "Curse"
 	set desc = "Curse or lift a curse from a character"
-	set category = "GameMaster"
+	set category = "GameMaster.Gods"
 	if(!check_rights())
 		return FALSE
 
@@ -348,7 +361,7 @@
 /datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
 	set name = "Toggle Sleeping"
 	set desc = "Toggle a mob's sleeping state"
-	set category = "GameMaster"
+	set category = "Admin.Admin"
 
 	if(!check_rights())
 		return
@@ -365,7 +378,7 @@
 /datum/admins/proc/start_vote()
 	set name = "Start Vote"
 	set desc = "Start a vote"
-	set category = "Server"
+	set category = "GameMaster.Fun"
 
 	if(!check_rights(R_POLL))
 		to_chat(usr, "<span class='warning'>You do not have the rights to start a vote.</span>")
@@ -473,14 +486,14 @@
 #define HARDEST_RESTART "Hardest Restart (No actions, just reboot)"
 #define TGS_RESTART "Server Restart (Kill and restart DD)"
 /datum/admins/proc/restart()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set name = "Reboot World"
 	set desc = "Restarts the world immediately"
 	if(!check_rights(R_SERVER))
 		return
 
 	if(SSticker.admin_delay_notice)
-		if(alert(usr, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Are you sure? An admin has already delayed the round end for the following reason: [SSticker.admin_delay_notice]", "Confirmation", list("Yes", "No")) != "Yes")
 			return FALSE
 
 	var/list/options = list(REGULAR_RESTART, REGULAR_RESTART_DELAYED, HARD_RESTART, HARDEST_RESTART)
@@ -526,13 +539,13 @@
 #undef TGS_RESTART
 
 /datum/admins/proc/end_round()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set name = "End Round"
 	set desc = ""
 
 	if (!usr.client.holder)
 		return
-	var/confirm = alert("End the round and restart the game world?", "End Round", "Yes", "Cancel")
+	var/confirm = tgui_alert(usr, "End the round and restart the game world?", "End Round", list("Yes", "Cancel"))
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
@@ -541,8 +554,8 @@
 
 
 /datum/admins/proc/announce()
-	set category = "Special"
-	set name = "Announce"
+	set category = "GameMaster"
+	set name = "OOC Announcement"
 	set desc="Announce your desires to the world"
 	if(!check_rights(0))
 		return
@@ -559,7 +572,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Announce") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/set_admin_notice()
-	set category = "Special"
+	set category = "GameMaster"
 	set name = "Set Admin Notice"
 	set desc ="Set an announcement that appears to everyone who joins the server. Only lasts this round"
 	if(!check_rights(0))
@@ -582,7 +595,7 @@
 	return
 
 /datum/admins/proc/toggleooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle OOC"
 	toggle_ooc()
@@ -592,7 +605,7 @@
 
 
 /datum/admins/proc/togglelooc()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle LOOC"
 	toggle_looc()
@@ -601,7 +614,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle LOOC", "[GLOB.ooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleoocdead()
-	set category = "Server"
+	set category = "OOC.Admin"
 	set desc="Toggle dis bitch"
 	set name="Toggle Dead OOC"
 	toggle_dooc()
@@ -611,7 +624,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Dead OOC", "[GLOB.dooc_allowed ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/startnow()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(SSticker.current_state == GAME_STATE_PREGAME || SSticker.current_state == GAME_STATE_STARTUP)
@@ -631,7 +644,7 @@
 	return 0
 
 /datum/admins/proc/toggleenter()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="People can't enter"
 	set name="Toggle Entering"
 	GLOB.enter_allowed = !( GLOB.enter_allowed )
@@ -674,7 +687,7 @@
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Respawn", "[!new_nores ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Delay the game start"
 	set name="Delay pre-game"
 
@@ -694,7 +707,7 @@
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Delay Game Start") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/accelerate_or_delay_round_end()
-	set category = "Server"
+	set category = "Server.Round Control"
 	set desc="Delay / Accelerate the round ending or vote time"
 	set name="Delay / Accelerate the round ending or vote time"
 
@@ -734,21 +747,10 @@
 				SSgamemode.round_ends_at += number
 				SSblackbox.record_feedback("tally", "admin_verb", 1, "Time until round ends triggered.")
 
-/datum/admins/proc/unprison(mob/M in GLOB.mob_list)
-	set category = "Admin"
-	set name = "Unprison"
-	if (is_centcom_level(M.z))
-		SSjob.SendToLateJoin(M)
-		message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]")
-		log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
-	else
-		alert("[M.name] is not prisoned.")
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Unprison") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
 /datum/admins/proc/spawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set desc = ""
 	set name = "Spawn"
 
@@ -778,7 +780,7 @@
 	return initial(chosen.name)
 
 /datum/admins/proc/podspawn_atom(object as text)
-	set category = "Debug"
+	set category = "Debug.Spawn"
 	set desc = ""
 	set name = "Podspawn"
 
@@ -802,7 +804,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Podspawn Atom") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/show_traitor_panel(mob/M in GLOB.mob_list)
-	set category = "Admin"
+	set category = "GameMaster.Antags"
 	set desc = ""
 	set name = "Show Traitor Panel"
 
@@ -815,20 +817,6 @@
 
 	M.mind.traitor_panel()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Traitor Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
-/datum/admins/proc/toggletintedweldhelmets()
-	set category = "Debug"
-	set desc="Reduces view range when wearing welding helmets"
-	set name="Toggle tinted welding helmes"
-	GLOB.tinted_weldhelh = !( GLOB.tinted_weldhelh )
-	if (GLOB.tinted_weldhelh)
-		to_chat(world, "<B>The tinted_weldhelh has been enabled!</B>")
-	else
-		to_chat(world, "<B>The tinted_weldhelh has been disabled!</B>")
-	log_admin("[key_name(usr)] toggled tinted_weldhelh.")
-	message_admins("[key_name_admin(usr)] toggled tinted_weldhelh.")
-	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Tinted Welding Helmets", "[GLOB.tinted_weldhelh ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleguests()
 	set category = "Server"
@@ -857,8 +845,7 @@
 
 	dat += "<table>"
 
-	for(var/j in SSjob.joinable_occupations)
-		var/datum/job/job = j
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		count++
 		var/J_title = html_encode(job.title)
 		var/J_opPos = html_encode(job.total_positions - (job.total_positions - job.current_positions))
@@ -932,7 +919,7 @@
 		question = "This mob already has a user ([tomob.key]) in control of it! "
 	question += "Are you sure you want to place [frommob.name]([frommob.key]) in control of [tomob.name]?"
 
-	var/ask = alert(question, "Place ghost in control of mob?", "Yes", "No")
+	var/ask = tgui_alert(usr, question, "Place ghost in control of mob?", list("Yes", "No"))
 	if (ask != "Yes")
 		return 1
 
@@ -971,7 +958,7 @@
 	H.returntolobby()
 
 /client/proc/spawn_liquid()
-	set category = "GameMaster"
+	set category = "Debug.Spawn"
 	set name = "Spawn Liquid"
 	set desc = "Spawns an amount of chosen liquid at your current location."
 
@@ -1005,7 +992,7 @@
 
 /client/proc/remove_liquid()
 	set name = "Remove Liquids"
-	set category = "GameMaster"
+	set category = "GameMaster.Fun"
 	set desc = "Fixes air in specified radius."
 	var/turf/epicenter = get_turf(mob)
 
@@ -1027,7 +1014,7 @@
 	mob.hud_used?.plane_masters_update()
 
 /client/proc/spawn_pollution()
-	set category = "GameMaster"
+	set category = "Debug.Spawn"
 	set name = "Spawn Pollution"
 	set desc = "Spawns an amount of chosen pollutant at your current location."
 
@@ -1044,7 +1031,7 @@
 	log_admin("[key_name(usr)] spawned pollution at [epicenter.loc] ([choice] - [amount_choice]).")
 
 /datum/admins/proc/anoint_priest(mob/living/carbon/human/M in GLOB.human_list)
-	set category = "GameMaster"
+	set category = "GameMaster.Interactions"
 	set name = "Anoint New Priest"
 	set desc = "Choose a new priest. The previous one will be excommunicated."
 
@@ -1056,7 +1043,7 @@
 		return
 	if(is_priest_job(M.mind.assigned_role))
 		return
-	var/appointment_type = browser_alert(usr, "Are you sure you want to anoint [M.real_name] as the new Priest?", "Confirmation", DEFAULT_INPUT_CHOICES)
+	var/appointment_type = tgui_alert(usr, "Are you sure you want to anoint [M.real_name] as the new Priest?", "Confirmation", DEFAULT_INPUT_CHOICES)
 	if(appointment_type == CHOICE_NO)
 		return
 
@@ -1071,28 +1058,23 @@
 			HL.mind.set_assigned_role(/datum/job/villager)
 			HL.job = "Ex-Priest"
 
-
-			HL.verbs -= /mob/living/carbon/human/proc/coronate_lord
-			HL.verbs -= /mob/living/carbon/human/proc/churchexcommunicate
-			HL.verbs -= /mob/living/carbon/human/proc/churchcurse
-			HL.verbs -= /mob/living/carbon/human/proc/churchannouncement
+			HL.remove_priest_verbs()
 			priest_job?.remove_spells(HL)
 			GLOB.excommunicated_players |= HL.real_name
 			HL.cleric?.excommunicate()
+			HL.honorary = null
 
 	priest_job?.add_spells(M)
+	priest_job?.assign_honorary_titles(M)
 	M.mind.set_assigned_role(/datum/job/priest)
-	M.job = "Priest"
+	M.job = JOB_PRIEST
 	M.set_patron(/datum/patron/divine/astrata)
 	var/holder = M.patron?.devotion_holder
 	if(holder)
 		var/datum/devotion/devotion = new holder()
 		devotion.make_priest()
 		devotion.grant_to(M)
-	M.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	M.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	M.verbs |= /mob/living/carbon/human/proc/churchcurse
-	M.verbs |= /mob/living/carbon/human/proc/churchannouncement
+	M.give_priest_verbs()
 	removeomen(OMEN_NOPRIEST)
 	priority_announce("Astrata has anointed [M.real_name] as the new head of the Church of the Ten!", title = "Astrata Shines!", sound = 'sound/misc/bell.ogg')
 
@@ -1117,14 +1099,14 @@
 		QDEL_NULL(user.client.holder.path_debug)
 
 /datum/admins/proc/give_all_triumphs()
-	set category = "GameMaster"
+	set category = "GameMaster.Triumphs"
 	set desc = "Triumph Giver"
 	set name = "Give All Triumphs"
 
 	var/mob/user = usr
 	if(!user.client.holder)
 		return
-	var/answer = input(user, "ARE YOU ABSOLUTELY SURE? THIS WILL GIVE TRIUMPHS TO EVERYONE CONNECTED.", "TRIUMPHS") as anything in list("Yes", "No")
+	var/answer = tgui_alert(user, "ARE YOU ABSOLUTELY SURE? THIS WILL GIVE TRIUMPHS TO EVERYONE CONNECTED.", "TRIUMPHS", list("Yes", "No"))
 	if(answer != "Yes")
 		return
 	var/amount = input(user, "Choose the amount of triumphs", "Triumph Giver") as num|null
@@ -1133,10 +1115,12 @@
 	if(amount < 0)
 		return
 
-	var/reason = input(user, "Choose a reason", "Triumph Giver") as text|null
+	var/reason = tgui_input_text(user, "Choose a reason", "Triumph Giver")
 
 	for(var/client/client as anything in GLOB.clients)
 		client.mob.adjust_triumphs(amount, reason = reason, override_bonus = TRUE)
+
+	log_game("TRIUMPHS: [key_name(user)] gave everyone [amount] triumphs.")
 
 /datum/admins/proc/change_skill_exp_modifier()
 	set name = "Change Skill Experience Gain"
@@ -1145,17 +1129,17 @@
 
 	var/list/options = list("Adjust Experience Modifier", "Sleep Experience Modifier", "Both")
 
-	var/type = browser_input_list(usr, "Change which modifier? \n The current value of adjust_experience_modifier is [GLOB.adjust_experience_modifier] \n The current value of sleep_experience_modifier is [GLOB.sleep_experience_modifier].", "Change Skill Experience Gain", options, "Both")
+	var/type = browser_input_list(usr, "Change which modifier? \n The current value of adjust_experience_modifier is [GLOB.skill_xp_modifier] \n The current value of sleep_experience_modifier is [GLOB.sleep_experience_modifier].", "Change Skill Experience Gain", options, "Both")
 	var/modifier = input(usr, "Enter what the modifier should be, default is 1", "Change Skill Experience Gain", 1) as num
 	switch(type)
 		if("Adjust Experience Modifier")
-			GLOB.adjust_experience_modifier = modifier
+			GLOB.skill_xp_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of adjust_experience_modifier to [modifier].")
 		if("Sleep Experience Modifier")
 			GLOB.sleep_experience_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of sleep_experience_modifier to [modifier].")
 		if("Both")
-			GLOB.adjust_experience_modifier = modifier
+			GLOB.skill_xp_modifier = modifier
 			GLOB.sleep_experience_modifier = modifier
 			message_admins("[key_name_admin(usr)] set the value of both adjust_experience_modifier and sleep_experience_modifier to [modifier].")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Change Skill Experience Gain")

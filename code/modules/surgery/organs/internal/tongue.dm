@@ -4,7 +4,17 @@
 	icon_state = "tongue"
 	zone = BODY_ZONE_PRECISE_MOUTH
 	slot = ORGAN_SLOT_TONGUE
+	organ_efficiency = list(ORGAN_SLOT_TONGUE = 100)
 	attack_verb = list("licked", "slobbered", "slapped", "frenched", "tongued")
+
+	organ_volume = 0.5
+	max_blood_storage = 5
+	current_blood = 5
+	blood_req = 1
+	oxygen_req = 0.5
+	nutriment_req = 0.3
+	hydration_req = 0.6
+
 	var/list/languages_possible
 	var/say_mod = null
 	var/taste_sensitivity = 15 // lower is more sensitive.
@@ -14,15 +24,19 @@
 		/datum/language/dwarvish,
 		/datum/language/elvish,
 		/datum/language/oldpsydonic,
+		/datum/language/newpsydonic,
 		/datum/language/zalad,
 		/datum/language/celestial,
 		/datum/language/hellspeak,
 		/datum/language/beast,
+		/datum/language/kobold,
+		/datum/language/rousman,
 		/datum/language/thievescant,
 		/datum/language/orcish,
 		/datum/language/deepspeak,
 		/datum/language/undead,
-		/datum/language/halfling
+		/datum/language/halfling,
+		/datum/language/gronnic,
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
@@ -31,7 +45,7 @@
 
 /obj/item/organ/tongue/proc/handle_speech(datum/source, list/speech_args)
 
-/obj/item/organ/tongue/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+/obj/item/organ/tongue/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, new_zone = null)
 	. = ..()
 	if(say_mod && M.dna && M.dna.species)
 		M.dna.species.say_mod = say_mod
@@ -88,58 +102,6 @@
 		message = fly_buzz.Replace(message, "zzz")
 		message = fly_buZZ.Replace(message, "ZZZ")
 	speech_args[SPEECH_MESSAGE] = message
-
-/obj/item/organ/tongue/abductor
-	name = "superlingual matrix"
-	desc = ""
-	icon_state = "tongueayylmao"
-	say_mod = "gibbers"
-	taste_sensitivity = 101 // ayys cannot taste anything.
-	modifies_speech = TRUE
-	var/mothership
-
-/obj/item/organ/tongue/abductor/attack_self(mob/living/carbon/human/H)
-	if(!istype(H))
-		return
-
-	var/obj/item/organ/tongue/abductor/T = H.getorganslot(ORGAN_SLOT_TONGUE)
-	if(!istype(T))
-		return
-
-	if(T.mothership == mothership)
-		to_chat(H, "<span class='notice'>[src] is already attuned to the same channel as my own.</span>")
-
-	H.visible_message("<span class='notice'>[H] holds [src] in their hands, and concentrates for a moment.</span>", "<span class='notice'>I attempt to modify the attunement of [src].</span>")
-	if(do_after(H, 1.5 SECONDS, src))
-		to_chat(H, "<span class='notice'>I attune [src] to my own channel.</span>")
-		mothership = T.mothership
-
-/obj/item/organ/tongue/abductor/examine(mob/M)
-	. = ..()
-	if(HAS_TRAIT(M, TRAIT_ABDUCTOR_TRAINING) || HAS_TRAIT(M.mind, TRAIT_ABDUCTOR_TRAINING) || isobserver(M))
-		if(!mothership)
-			. += "<span class='notice'>It is not attuned to a specific mothership.</span>"
-		else
-			. += "<span class='notice'>It is attuned to [mothership].</span>"
-
-/obj/item/organ/tongue/abductor/handle_speech(datum/source, list/speech_args)
-	//Hacks
-	var/message = speech_args[SPEECH_MESSAGE]
-	var/mob/living/carbon/human/user = usr
-	var/rendered = "<span class='abductor'><b>[user.real_name]:</b> [message]</span>"
-	user.log_talk(message, LOG_SAY, tag="abductor")
-	for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
-		var/obj/item/organ/tongue/abductor/T = H.getorganslot(ORGAN_SLOT_TONGUE)
-		if(!istype(T))
-			continue
-		if(mothership == T.mothership)
-			to_chat(H, rendered)
-
-	for(var/mob/M in GLOB.dead_mob_list)
-		var/link = FOLLOW_LINK(M, user)
-		to_chat(M, "[link] [rendered]")
-
-	speech_args[SPEECH_MESSAGE] = ""
 
 /obj/item/organ/tongue/zombie
 	name = "rotting tongue"

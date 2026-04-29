@@ -1,11 +1,10 @@
-/datum/component/riding/gator/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 25), TEXT_SOUTH = list(2, 25), TEXT_EAST = list(8, 20), TEXT_WEST = list(0, 20)))
-	set_vehicle_dir_layer(SOUTH, OBJ_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
-
+/datum/component/riding/gator/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return  list(
+		TEXT_NORTH = list(0, 25, OBJ_LAYER),
+		TEXT_SOUTH = list(2, 25, OBJ_LAYER),
+		TEXT_EAST = list(8, 20, OBJ_LAYER),
+		TEXT_WEST = list(0, 20, OBJ_LAYER)
+	)
 
 /mob/living/simple_animal/hostile/retaliate/gator
 	icon = 'icons/mob/gator.dmi'
@@ -82,6 +81,7 @@
 	if(prob(33))
 		gender = FEMALE
 	update_appearance(UPDATE_OVERLAYS)
+	add_traits(list(TRAIT_NODROWN, TRAIT_SWIMMER), INNATE_TRAIT)
 
 /mob/living/simple_animal/hostile/retaliate/gator/tamed(mob/user)
 	. = ..()
@@ -110,43 +110,7 @@
 			return pick('sound/vo/mobs/gator/gatoridle1.ogg')
 
 /mob/living/simple_animal/hostile/retaliate/gator/simple_limb_hit(zone)
-	if(!zone)
-		return ""
 	switch(zone)
-		if(BODY_ZONE_PRECISE_R_EYE)
-			return "head"
-		if(BODY_ZONE_PRECISE_L_EYE)
-			return "head"
 		if(BODY_ZONE_PRECISE_NOSE)
 			return "snout"
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return "mouth"
-		if(BODY_ZONE_PRECISE_SKULL)
-			return "head"
-		if(BODY_ZONE_PRECISE_EARS)
-			return "head"
-		if(BODY_ZONE_PRECISE_NECK)
-			return "neck"
-		if(BODY_ZONE_PRECISE_L_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_R_HAND)
-			return "foreleg"
-		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "leg"
-		if(BODY_ZONE_PRECISE_STOMACH)
-			return "stomach"
-		if(BODY_ZONE_PRECISE_GROIN)
-			return "tail"
-		if(BODY_ZONE_HEAD)
-			return "head"
-		if(BODY_ZONE_R_LEG)
-			return "leg"
-		if(BODY_ZONE_L_LEG)
-			return "leg"
-		if(BODY_ZONE_R_ARM)
-			return "foreleg"
-		if(BODY_ZONE_L_ARM)
-			return "foreleg"
 	return ..()

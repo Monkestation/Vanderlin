@@ -24,7 +24,7 @@
 		for(var/mob/living/L in .)
 			if(!L.can_see_cone(LI))
 				. -= L
-			if(HAS_TRAIT(L, TRAIT_BLIND))
+			if(L.is_blind())
 				. -= L
 
 /mob/living/carbon/human/death(gibbed)
@@ -63,19 +63,20 @@
 				zombie_check()
 
 	stop_sound_channel(CHANNEL_HEARTBEAT)
-	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
-	if(H)
-		H.beat = BEAT_NONE
+	pulse = PULSE_NONE
+	for(var/thing in getorganslotlist(ORGAN_SLOT_HEART))
+		var/obj/item/organ/heart/heart = thing
+		heart.Stop()
 
-	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
-		MOBTIMER_SET(src, MT_DEATHDIED)
-		if(H in SStreasury.bank_accounts)
-			for(var/obj/structure/fake_machine/camera/C in view(7, src))
-				var/area_name = A.name
-				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
-				texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
-				SSroguemachine.death_queue += texty
-				break
+		if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
+			MOBTIMER_SET(src, MT_DEATHDIED)
+			if(heart in SStreasury.bank_accounts)
+				for(var/obj/structure/fake_machine/camera/C in view(7, src))
+					var/area_name = A.name
+					var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
+					texty += "[real_name] perished in front of face #[C.number] ([area_name]) at [station_time_timestamp("hh:mm")]."
+					SSroguemachine.death_queue += texty
+					break
 
 		var/yeae = TRUE //! TRUE if we were killed on a cross and socially rejected
 		if(buckled)
@@ -98,23 +99,20 @@
 
 		if(!gibbed && yeae)
 			for(var/mob/living/carbon/human/HU in viewers(7, src))
-				if(HU != src && !HAS_TRAIT(HU, TRAIT_BLIND))
+				if(HU != src && !HU.is_blind())
 					if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
 						if(HU.dna?.species && dna?.species)
 							if(HU.dna.species.id == dna.species.id)
 								var/mob/living/carbon/D = HU
-								if(D.has_flaw(/datum/charflaw/addiction/maniac))
+								if(D.has_quirk(/datum/quirk/vice/maniac))
 									D.add_stress(/datum/stress_event/viewdeathmaniac)
-									D.sate_addiction()
+									D.sate_addiction(/datum/quirk/vice/maniac)
 								else
 									D.add_stress(/datum/stress_event/viewdeath)
 
 	dna.species.spec_death(gibbed, src) // parent call deletes dna
 
 	. = ..()
-
-	dizziness = 0
-	jitteriness = 0
 
 	if(SSticker.HasRoundStarted())
 		SSblackbox.ReportDeath(src)
@@ -128,32 +126,36 @@
 		return zombie
 	if(mind.has_antag_datum(/datum/antagonist/vampire))
 		return
-	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+	if(IS_WEREWOLF(src))
 		return
 	if(mind.has_antag_datum(/datum/antagonist/skeleton))
 		return
 	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
+		return
+	var/obj/item/bodypart/chest/c = get_bodypart()
+	if(c?.has_wound(/datum/wound/black_briar_curse/chest))
 		return
 	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	record_round_statistic(STATS_PEOPLE_GIBBED)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))
-		if(CA != src && !HAS_TRAIT(CA, TRAIT_BLIND))
+		if(CA != src && !CA.is_blind())
 			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 				continue
 			var/mob/living/carbon/V = CA
-			if(V.has_flaw(/datum/charflaw/addiction/maniac))
+			if(V.has_quirk(/datum/quirk/vice/maniac))
 				V.add_stress(/datum/stress_event/viewgibmaniac)
-				V.sate_addiction()
+				V.sate_addiction(/datum/quirk/vice/maniac)
 				continue
 			V.add_stress(/datum/stress_event/viewgib)
 	. = ..()
 
-/mob/living/carbon/human/revive(full_heal, admin_revive)
+/mob/living/carbon/human/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
 	if(!.)
 		return
+	pump_heart(forced_pump = 1.3)
 	var/datum/job/human_job = SSjob.GetJob(job)
 	if(human_job)
 		switch(human_job.type)

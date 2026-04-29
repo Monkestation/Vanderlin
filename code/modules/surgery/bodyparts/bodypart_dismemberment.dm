@@ -22,7 +22,8 @@
 //Dismember a limb
 /obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise)
 	. = ..()
-	add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
+	if(owner?.client)
+		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
 
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
@@ -35,6 +36,8 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+	if(SEND_SIGNAL(src, COMSIG_CARBON_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
+		return FALSE //signal handled the dropping
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		var/obj/item/clothing/checked_armor = human_owner.check_crit_armor(zone_precise, bclass)
@@ -53,7 +56,8 @@
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")
 	else
 		C.visible_message("<span class='danger'><B>The [src.name] is [pick("torn off", "sundered", "severed", "separated", "unsewn")]!</B></span>")
-	C.emote("painscream")
+	if(!HAS_TRAIT(C, TRAIT_NOPAIN))
+		C.emote("painscream")
 	src.add_mob_blood(C)
 	C.add_stress(/datum/stress_event/dismembered)
 	C.add_stress(/datum/stress_event/dismembered)
@@ -70,13 +74,13 @@
 				stress2give = null
 	if(stress2give)
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
-			if(CA != C && !HAS_TRAIT(CA, TRAIT_BLIND))
+			if(CA != C && !CA.is_blind())
 				if(stress2give == /datum/stress_event/viewdismember)
 					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue
-					if(CA.has_flaw(/datum/charflaw/addiction/maniac))
+					if(CA.has_quirk(/datum/quirk/vice/maniac))
 						CA.add_stress(/datum/stress_event/viewdismembermaniac)
-						CA.sate_addiction()
+						CA.sate_addiction(/datum/quirk/vice/maniac)
 						continue
 					if(CA.gender == FEMALE)
 						CA.add_stress(/datum/stress_event/fviewdismember)
@@ -91,6 +95,10 @@
 		return TRUE
 
 	var/turf/location = C.loc
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(location)
+		cavity_items -= item
+
 	if(istype(location))
 		C.add_splatter_floor(location)
 	var/direction = pick(GLOB.cardinals)
@@ -122,8 +130,7 @@
 	C.add_splatter_floor(T)
 	playsound(C, 'sound/combat/crit2.ogg', 100, FALSE, 5)
 	C.emote("painscream")
-	for(var/X in C.internal_organs)
-		var/obj/item/organ/O = X
+	for(var/obj/item/organ/O as anything in C.internal_organs)
 		var/org_zone = check_zone(O.zone)
 		if(org_zone != BODY_ZONE_CHEST)
 			continue
@@ -131,12 +138,11 @@
 		O.forceMove(T)
 		O.add_mob_blood(C)
 		organ_spilled = 1
-		. += X
-	if(cavity_item)
-		cavity_item.forceMove(T)
-		. += cavity_item
-		cavity_item = null
-		organ_spilled = 1
+		. += O
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(drop_location())
+		cavity_items -= item
+	organ_spilled = 1
 
 	if(organ_spilled)
 		C.visible_message("<span class='danger'><B>[C] spills [C.p_their()] guts!</B></span>")
@@ -217,7 +223,10 @@
 
 /obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	if(istype(LB))
-		LB.eyes = src
+		if(side == RIGHT_SIDE)
+			LB.eyes_right = src
+		if(side == LEFT_SIDE)
+			LB.eyes_left = src
 	return ..()
 
 /obj/item/organ/ears/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
@@ -360,7 +369,7 @@
 				continue
 			C.surgeries -= body_zone
 
-	for(var/obj/item/organ/stored_organ as anything in src)
+	for(var/obj/item/organ/stored_organ in src)
 		stored_organ.Insert(C)
 
 	for(var/datum/wound/wound as anything in wounds)
@@ -391,8 +400,10 @@
 		tongue = null
 	if(ears)
 		ears = null
-	if(eyes)
-		eyes = null
+	if(eyes_left)
+		eyes_left = null
+	if(eyes_right)
+		eyes_right = null
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
@@ -405,32 +416,32 @@
 
 	return ..()
 
-
-//Regenerates all limbs. Returns amount of limbs regenerated
-/mob/living/proc/regenerate_limbs(noheal, excluded_limbs)
-	return 0
-
-/mob/living/carbon/regenerate_limbs(noheal, list/excluded_limbs)
+/// Restores lost limbs. Does not heal existing limbs.
+/mob/living/carbon/proc/regenerate_limbs(list/excluded_zones = list())
+	SEND_SIGNAL(src, COMSIG_CARBON_REGENERATE_LIMBS, excluded_zones)
 	var/list/limb_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-	if(excluded_limbs)
-		limb_list -= excluded_limbs
-	for(var/Z in limb_list)
-		. += regenerate_limb(Z, noheal)
+	if(excluded_zones)
+		limb_list -= excluded_zones
+	var/list/generated_limbs = list()
+	for(var/limb_zone in limb_list)
+		var/obj/item/bodypart/limb = regenerate_limb(limb_zone)
+		if(limb)
+			generated_limbs += limb
+	return generated_limbs
 
-/mob/living/proc/regenerate_limb(limb_zone, noheal)
-	return
+/// Restore a limb. Pass with no args to choose a random missing one.
+/mob/living/carbon/proc/regenerate_limb(limb_zone, silent=TRUE)
+	if(!limb_zone)
+		limb_zone = safepick(get_missing_limbs())
+		if(!limb_zone)
+			return
 
-/mob/living/carbon/regenerate_limb(limb_zone, noheal)
-	var/obj/item/bodypart/L
+	var/obj/item/bodypart/limb
 	if(get_bodypart(limb_zone))
-		return 0
-	L = newBodyPart(limb_zone, 0, 0)
-	if(L)
-		if(!noheal)
-			L.brute_dam = 0
-			L.burn_dam = 0
-			L.brutestate = 0
-			L.burnstate = 0
-
-		L.attach_limb(src, 1)
-		return 1
+		return
+	limb = newBodyPart(limb_zone, 0, 0)
+	if(limb)
+		limb.attach_limb(src, TRUE)
+		if(!silent)
+			visible_message(span_green("[src]'s [limb] regenerates!"), span_green("My [limb] regenerates!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		return limb

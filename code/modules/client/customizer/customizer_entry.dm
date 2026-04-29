@@ -6,3 +6,5 @@
 	var/accessory_type
 	var/accessory_colors
 	var/disabled = FALSE
+	///if we show the visual dropdown
+	var/show_dropdown = FALSE

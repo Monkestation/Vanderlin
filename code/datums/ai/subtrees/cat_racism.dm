@@ -44,13 +44,13 @@
 				slap = TRUE
 
 		if(should_hiss)
-			cat_pawn.visible_message("<span class='notice'>\The [cat_pawn] hisses at [M] and recoils in disgust.</span>")
+			cat_pawn.visible_message(span_notice("\The [cat_pawn] hisses at [M] and slashes in disgust!"))
 			cat_pawn.icon_state = "[cat_pawn.icon_living]"
 			cat_pawn.set_resting(FALSE)
-			playsound(get_turf(cat_pawn), 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
+			playsound(cat_pawn, 'sound/vo/mobs/cat/cathiss.ogg', 80, TRUE, -1)
 			if(slap)
 				playsound(M, "smallslash", 100, TRUE, -1)
-				M.do_attack_animation(cat_pawn, "claw")
+				cat_pawn.do_attack_animation(M, "claw")
 				M.adjustBruteLoss(1)
 
 			cat_pawn.dir = pick(GLOB.alldirs)

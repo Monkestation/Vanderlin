@@ -21,11 +21,11 @@
 				hidden_toxicshrooms = FALSE
 			return
 
-/turf/open/floor/dirt/attackby(obj/item/W, mob/user, params)
+/turf/open/floor/dirt/attackby(obj/item/W, mob/user, list/modifiers)
 	if(hidden_truffles)
 		if(istype(W, /obj/item/weapon/shovel))
 			if(user.used_intent.type == /datum/intent/shovelscoop)
-				playsound(get_turf(src),'sound/items/dig_shovel.ogg', 70, TRUE)
+				playsound(src,'sound/items/dig_shovel.ogg', 70, TRUE)
 				if(do_after(user, 3 SECONDS, src))
 					new /obj/item/reagent_containers/food/snacks/truffles(get_turf(src))
 					hidden_truffles = FALSE
@@ -33,9 +33,9 @@
 	if(hidden_toxicshrooms)
 		if(istype(W, /obj/item/weapon/shovel))
 			if(user.used_intent.type == /datum/intent/shovelscoop)
-				playsound(get_turf(src),'sound/items/dig_shovel.ogg', 70, TRUE)
+				playsound(src,'sound/items/dig_shovel.ogg', 70, TRUE)
 				if(do_after(user, 3 SECONDS, src))
-					new /obj/item/reagent_containers/food/snacks/toxicshrooms(get_turf(src))
+					new /obj/item/reagent_containers/food/snacks/truffles/toxic(get_turf(src))
 					hidden_toxicshrooms = FALSE
 				return TRUE
 	return ..()
@@ -46,12 +46,28 @@
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
+	nutrition = VEGGIE_NUTRITION
 	color = "#ab7d6f"
 	tastes = list("mushroom" = 1)
 	sellprice = 30
 	rotprocess = null
-	biting = TRUE
+	var/poisonous = FALSE
+
+/obj/item/reagent_containers/food/snacks/truffles/examine(mob/user)
+	. = ..()
+	var/can_tell = HAS_TRAIT(user, TRAIT_FORAGER) || isobserver(user)
+	if(!can_tell)
+		can_tell = user.attributes ? GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming) : FALSE
+	if(can_tell)
+		if(poisonous)
+			. += span_warning("This truffle looks suspicious. I sense it might be poisoned.")
+		else
+			. += span_notice("This truffle looks safe to eat.")
+
+/obj/item/reagent_containers/food/snacks/truffles/toxic
+	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
+	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
+	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle
 	name = "cooked truffles"
@@ -59,30 +75,11 @@
 	icon_state = "mushroom1_full"
 	base_icon_state = "mushroom1_full"
 	eat_effect = /datum/status_effect/buff/foodbuff
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_DECENT)
+	nutrition = COOKED_VEGGIE_NUTRITION+1
 	color = "#835b4f"
 	tastes = list("delicious truffles" = 2)
 	biting = TRUE
 
-/obj/item/reagent_containers/food/snacks/toxicshrooms
-	name = "truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 5)
-	color = "#ab7d6f"
-	tastes = list("mushroom" = 1)
-	biting = TRUE
-
-/obj/item/reagent_containers/food/snacks/cooked/truffle_toxic
-	name = "cooked truffles"
-	icon = 'icons/roguetown/items/produce.dmi'
-	icon_state = "mushroom1_full"
-	base_icon_state = "mushroom1_full"
-	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/berrypoison = 6)
-	color = "#835b4f"
-	tastes = list("off-putting" = 2)
-	biting = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	gender = FEMALE
@@ -128,6 +125,7 @@
 							/obj/item/reagent_containers/food/snacks/fat = 2,
 							/obj/item/natural/hide = 2)
 	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/fatty = 5,
+							/obj/item/reagent_containers/food/snacks/meat/ribs = 1,
 							/obj/item/reagent_containers/food/snacks/fat = 3,
 							/obj/item/natural/hide = 3)
 
@@ -157,6 +155,7 @@
 	can_saddle = TRUE
 
 	ai_controller = /datum/ai_controller/pig
+	indexed = TRUE
 
 
 
@@ -175,6 +174,7 @@
 		)
 
 	happy_funtime_mob = TRUE
+	generate_genetics = TRUE
 	var/hangry_meter = 0
 	var/random_gender = TRUE
 	var/can_breed = TRUE
@@ -192,9 +192,6 @@
 			list(/mob/living/simple_animal/hostile/retaliate/trufflepig/piglet = 90, /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/boy = 10),\
 			CALLBACK(src, PROC_REF(after_birth)),\
 		)
-
-/mob/living/simple_animal/hostile/retaliate/trufflepig/proc/after_birth(mob/living/simple_animal/hostile/retaliate/cow/cowlet/baby, mob/living/partner)
-	return
 
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/get_sound(input)
@@ -243,10 +240,10 @@
 	hangry_meter += 1
 	if(hangry_meter > 9)
 		to_chat(M, "<span class='notice'>The pig squeals in anger. It's sulking and refusing to work until it gets delicious truffles.</span>")
-		playsound(get_turf(src), 'sound/vo/mobs/pig/hangry.ogg', 120, TRUE, -1)
+		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 120, TRUE, -1)
 		return
 	if(M.used_intent.type == INTENT_HELP)
-		playsound(get_turf(src), pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
+		playsound(src, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
 		dir = pick(GLOB.cardinals)
 		step(src, dir)
 		playsound(src, 'sound/items/sniff.ogg', 60, FALSE)
@@ -256,24 +253,24 @@
 		playsound(src, 'sound/items/sniff.ogg', 60, FALSE)
 		sleep(10)
 		dir = pick(GLOB.cardinals)
-		playsound(get_turf(src), pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
+		playsound(src, pick('sound/vo/mobs/pig/grunt (1).ogg','sound/vo/mobs/pig/grunt (2).ogg'), 100, TRUE, -1)
 		var/turf/t = get_turf(src)
 		trufflesearch(t, 5)
 
-/mob/living/simple_animal/hostile/retaliate/trufflepig/attackby(obj/item/O, mob/user, params)
+/mob/living/simple_animal/hostile/retaliate/trufflepig/attackby(obj/item/O, mob/user, list/modifiers)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles))
 		visible_message("<span class='notice'>The pig munches the truffles, looking happy.</span>")
 		hangry_meter = 0
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)
 
-	if(istype(O, /obj/item/reagent_containers/food/snacks/toxicshrooms))
+	if(istype(O, /obj/item/reagent_containers/food/snacks/truffles/toxic))
 		visible_message("<span class='notice'>The pig munches the truffles reluctantly.</span>")
 		playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 		qdel(O)
-		playsound(get_turf(src), 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
 		sleep(20)
-		playsound(get_turf(src), 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
+		playsound(src, 'sound/vo/mobs/pig/hangry.ogg', 100, TRUE, -1)
 		visible_message("<span class='notice'>The pig shivers.</span>")
 		sleep(10)
 		death()
@@ -308,6 +305,7 @@
 	name = "truffle piglet"
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/trufflepig/female
 	can_breed = FALSE
+	generate_genetics = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/piglet/Initialize()
 	. = ..()

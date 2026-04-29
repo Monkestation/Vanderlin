@@ -133,7 +133,7 @@
 	var/turf/T = get_turf(src)
 	var/list/B = explosionSize //Mostly because B is more readable than explosionSize :p
 	if (landingSound)
-		playsound(get_turf(src), landingSound, soundVolume, FALSE, FALSE)
+		playsound(src, landingSound, soundVolume, FALSE, FALSE)
 	for (var/mob/living/M in T)
 		if (effectLimb && iscarbon(M)) //If effectLimb is true (which means we pop limbs off when we hit people):
 			var/mob/living/carbon/CM = M
@@ -188,14 +188,14 @@
 		if (M.key && !forced && !broken) //If we are player controlled, then we shouldnt open unless the opening is manual, or if it is due to being destroyed (represented by the "broken" parameter)
 			return
 	if (openingSound)
-		playsound(get_turf(holder), openingSound, soundVolume, FALSE, FALSE) //Special admin sound to play
+		playsound(holder, openingSound, soundVolume, FALSE, FALSE) //Special admin sound to play
 	INVOKE_ASYNC(holder, PROC_REF(setOpened)) //Use the INVOKE_ASYNC proc to call setOpened() on whatever the holder may be, without giving the atom/movable base class a setOpened() proc definition
 	if (style == STYLE_SEETHROUGH)
 		update_appearance(UPDATE_OVERLAYS)
 	for (var/atom/movable/O in holder.contents) //Go through the contents of the holder
 		O.forceMove(T) //move everything from the contents of the holder to the turf of the holder
 	if (!effectQuiet && !openingSound && style != STYLE_SEETHROUGH) //If we aren't being quiet, play the default pod open sound
-		playsound(get_turf(holder), open_sound, 15, TRUE, -3)
+		playsound(holder, open_sound, 15, TRUE, -3)
 	if (broken) //If the pod is opening because it's been destroyed, we end here
 		return
 	if (style == STYLE_SEETHROUGH)
@@ -206,7 +206,7 @@
 
 /obj/structure/closet/supplypod/proc/depart(atom/movable/holder)
 	if (leavingSound)
-		playsound(get_turf(holder), leavingSound, soundVolume, FALSE, FALSE)
+		playsound(holder, leavingSound, soundVolume, FALSE, FALSE)
 	if (reversing) //If we're reversing, we call the close proc. This sends the pod back up to centcom
 		close(holder)
 	else if (bluespace) //If we're a bluespace pod, then delete ourselves (along with our holder, if a seperate holder exists)
@@ -228,7 +228,7 @@
 		holder = src
 
 	if (leavingSound)
-		playsound(get_turf(holder), leavingSound, soundVolume, FALSE, FALSE)
+		playsound(holder, leavingSound, soundVolume, FALSE, FALSE)
 
 	handleReturningClose(holder, FALSE)
 

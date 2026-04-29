@@ -70,11 +70,6 @@
 	cost = 15
 	contains = /obj/item/clothing/head/helmet/leather/tricorn
 
-/datum/supply_pack/apparel/henhelm
-	name = "Henhelm"
-	cost = 200
-	contains = /obj/item/clothing/head/crown/hemhem
-
 /datum/supply_pack/apparel/easternhat
 	name = "Eastern Hat"
 	cost = 60

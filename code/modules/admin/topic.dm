@@ -36,6 +36,26 @@
 	else if(href_list["ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowseTickets(text2num(href_list["ahelp_tickets"]))
 
+	else if(href_list["attributes"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		if(!SSticker.HasRoundStarted())
+			tgui_alert(usr,"The game hasn't started yet!")
+			return
+
+		var/target = locate(href_list["attributes"])
+		var/datum/attribute_holder/attribute_holder
+		if(ismob(target))
+			var/mob/target_mob = target
+			attribute_holder = target_mob.attributes
+		else if(istype(target, /datum/attribute_holder))
+			attribute_holder = target
+		else
+			to_chat(usr, "This can only be used on instances of type /mob and /datum/attribute_holder")
+			return
+		usr.client?.open_attribute_editor(attribute_holder)
+
 	else if(href_list["getplaytimewindow"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -63,7 +83,7 @@
 			var/datum/round_event/event = E.runEvent()
 			if(event.announceWhen>0)
 				event.processing = FALSE
-				var/prompt = alert(usr, "Would you like to alert the crew?", "Alert", "Yes", "No", "Cancel")
+				var/prompt = tgui_alert(usr, "Would you like to alert the crew?", "Alert", list("Yes", "No", "Cancel"))
 				switch(prompt)
 					if("Yes")
 						event.announceChance = 100
@@ -103,20 +123,28 @@
 	else if(href_list["delay_round_end"])
 		if(!check_rights(R_SERVER))
 			return
+
 		if(!SSticker.delay_end)
 			SSticker.admin_delay_notice = input(usr, "Enter a reason for delaying the round end", "Round Delay Reason") as null|text
 			if(isnull(SSticker.admin_delay_notice))
 				return
 		else
-			if(alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", "Yes", "No") != "Yes")
+			if(tgui_alert(usr, "Really cancel current round end delay? The reason for the current delay is: \"[SSticker.admin_delay_notice]\"", "Undelay round end", list("Yes", "No")) != "Yes")
 				return
 			SSticker.admin_delay_notice = null
+
 		SSticker.delay_end = !SSticker.delay_end
+
 		var/reason = SSticker.delay_end ? "for reason: [SSticker.admin_delay_notice]" : "."//laziness
 		var/msg = "[SSticker.delay_end ? "delayed" : "undelayed"] the round end [reason]"
+
 		log_admin("[key_name(usr)] [msg]")
 		message_admins("[key_name_admin(usr)] [msg]")
-		if(SSticker.ready_for_reboot && !SSticker.delay_end) //we undelayed after standard reboot would occur
+
+		if(SSticker.delay_end)
+			if(SSticker.reboot_timer)
+				SSticker.cancel_reboot(usr)
+		else if(SSticker.ready_for_reboot)
 			SSticker.standard_reboot()
 
 	else if(href_list["end_round"])
@@ -124,8 +152,8 @@
 			return
 
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] is considering ending the round.</span>")
-		if(alert(usr, "This will end the round, are you SURE you want to do this?", "Confirmation", "Yes", "No") == "Yes")
-			if(alert(usr, "Final Confirmation: End the round NOW?", "Confirmation", "Yes", "No") == "Yes")
+		if(tgui_alert(usr, "This will end the round, are you SURE you want to do this?", "Confirmation", list("Yes", "No")) == "Yes")
+			if(tgui_alert(usr, "Final Confirmation: End the round NOW?", "Confirmation", list("Yes", "No")) == "Yes")
 				message_admins("<span class='adminnotice'>[key_name_admin(usr)] has ended the round.</span>")
 				SSticker.force_ending = 1 //Yeah there we go APC destroyed mission accomplished
 				return
@@ -145,7 +173,7 @@
 
 		var/delmob = TRUE
 		if(!isobserver(M))
-			switch(alert("Delete old mob?","Message","Yes","No","Cancel"))
+			switch(tgui_alert(usr, "Delete old mob?","Message", list("Yes","No","Cancel")))
 				if("Cancel")
 					return
 				if("No")
@@ -176,7 +204,7 @@
 			if(!check_if_greater_rights_than(M.client))
 				to_chat(usr, "<span class='danger'>Error: They have more rights than you do.</span>")
 				return
-			if(alert(usr, "Kick [key_name(M)]?", "Confirm", "Yes", "No") != "Yes")
+			if(tgui_alert(usr, "Kick [key_name(M)]?", "Confirm", list("Yes", "No")) != "Yes")
 				return
 			if(!M)
 				to_chat(usr, "<span class='danger'>Error: [M] no longer exists!</span>")
@@ -230,7 +258,7 @@
 	else if(href_list["deletemessage"])
 		if(!check_rights(R_ADMIN))
 			return
-		var/safety = alert("Delete message/note?",,"Yes","No");
+		var/safety = tgui_alert(usr, "Delete message/note?","Confirm", list("Yes","No"));
 		if (safety == "Yes")
 			var/message_id = href_list["deletemessage"]
 			delete_message(message_id)
@@ -238,7 +266,7 @@
 	else if(href_list["deletemessageempty"])
 		if(!check_rights(R_ADMIN))
 			return
-		var/safety = alert("Delete message/note?",,"Yes","No");
+		var/safety = tgui_alert(usr, "Delete message/note?", "Confirm", list("Yes","No"));
 		if (safety == "Yes")
 			var/message_id = href_list["deletemessageempty"]
 			delete_message(message_id, browse = TRUE)
@@ -360,7 +388,7 @@
 			return
 
 		if (SSticker.HasRoundStarted())
-			if(browser_alert(usr, "The game has already started. Would you like to save this as the default mode effective next round?", "Save mode", DEFAULT_INPUT_CHOICES) == CHOICE_YES)
+			if(tgui_alert(usr, "The game has already started. Would you like to save this as the default mode effective next round?", "Save mode", DEFAULT_INPUT_CHOICES) == CHOICE_YES)
 				SSticker.save_mode(href_list["c_mode2"])
 			HandleCMode()
 			return
@@ -369,7 +397,7 @@
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] set the mode as [GLOB.master_mode].</span>")
 		to_chat(world, "<span class='adminnotice'><b>The mode is now: [GLOB.master_mode]</b></span>")
 		Game() // updates the main game menu
-		if(browser_alert(usr, "Would you like to save this as the default mode for the server?", "Save mode", DEFAULT_INPUT_CHOICES) == CHOICE_YES)
+		if(tgui_alert(usr, "Would you like to save this as the default mode for the server?", "Save mode", DEFAULT_INPUT_CHOICES) == CHOICE_YES)
 			SSticker.save_mode(GLOB.master_mode)
 		HandleCMode()
 
@@ -378,9 +406,9 @@
 			return
 
 		if(SSticker.HasRoundStarted())
-			return alert(usr, "The game has already started.", null, null, null, null)
+			return alert(usr, "The game has already started.")
 		if(GLOB.master_mode != "secret")
-			return alert(usr, "The game mode has to be secret!", null, null, null, null)
+			return alert(usr, "The game mode has to be secret!")
 		GLOB.secret_force_mode = href_list["f_secret2"]
 		log_admin("[key_name_admin(usr)] set the forced secret mode as [GLOB.secret_force_mode].")
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] set the forced secret mode as [GLOB.secret_force_mode].</span>")
@@ -438,7 +466,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob.")
 			return
 
-		if(alert(usr, "Send [key_name(M)] to Prison?", "Message", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Send [key_name(M)] to Prison?", "Message", list("Yes", "No")) != "Yes")
 			return
 
 		M.forceMove(pick(GLOB.prisonwarp))
@@ -453,11 +481,11 @@
 
 		var/mob/M = locate(href_list["sendbacktolobby"])
 
-		if(alert(usr, "Send [key_name(M)] back to Lobby?", "Message", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Send [key_name(M)] back to Lobby?", "Message", list("Yes", "No")) != "Yes")
 			return
 		var/living = isliving(M)
 		if(living)
-			if(alert(usr, "[key_name(M)] is a LIVING MOB. Are you sure you want to send him back?", "Message", "Yes", "No") != "Yes")
+			if(tgui_alert(usr, "[key_name(M)] is a LIVING MOB. Are you sure you want to send him back?", "Message", list("Yes", "No")) != "Yes")
 				return
 		if(!M.client)
 			to_chat(usr, "<span class='warning'>[M] doesn't seem to have an active client.</span>")
@@ -468,7 +496,7 @@
 		var/mob/dead/new_player/NP = new()
 		NP.ckey = M.ckey
 		if(living)
-			if(alert(usr, "Would you like to also delete the living mob [key_name(M)]?", "Message", "Yes", "No") == "Yes")
+			if(tgui_alert(usr, "Would you like to also delete the living mob [key_name(M)]?", "Message", list("Yes", "No")) == "Yes")
 				log_admin("[key_name(usr)] has chosen to delete \the [M] mob while sending the client to lobby.")
 				qdel(M)
 		else
@@ -477,8 +505,11 @@
 	else if(href_list["cryomob"])
 		if(!check_rights(R_ADMIN))
 			return
-
 		var/mob/M = locate(href_list["cryomob"])
+
+		if(tgui_alert(usr, "Are you sure you want to cryo [key_name(M)]?", "Message", list("Yes", "No")) != "Yes")
+			return
+
 		usr.client.send_to_cryo(M)
 
 	else if(href_list["revive"])
@@ -490,7 +521,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob/living.")
 			return
 
-		L.revive(full_heal = TRUE, admin_revive = TRUE)
+		L.revive(ADMIN_HEAL_ALL)
 		message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(L)]!</span>")
 		log_admin("[key_name(usr)] healed / Revived [key_name(L)].")
 
@@ -620,6 +651,85 @@
 		to_chat(src.owner, "[special_role_description]")
 		to_chat(src.owner, ADMIN_FULLMONTY_NONAME(M))
 
+	else if(href_list["add_quirk"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/mob/living/carbon/human/H = locate(href_list["add_quirk"])
+		if(!ishuman(H))
+			to_chat(usr, "<span class='warning'>This can only be used on human mobs.</span>")
+			return
+
+		var/quirk_type = text2path(href_list["quirk"])
+		if(!ispath(quirk_type, /datum/quirk))
+			to_chat(usr, "<span class='warning'>Invalid quirk type.</span>")
+			return
+
+		// Check if they already have this quirk
+		if(H.has_quirk(quirk_type))
+			to_chat(usr, "<span class='warning'>[H] already has this quirk.</span>")
+			return
+
+		// Get the quirk singleton for customization check
+		var/datum/quirk/singleton = GLOB.quirk_singletons[quirk_type]
+		var/custom_value = null
+
+		// Handle customization if the quirk has options
+		if(length(singleton.customization_options))
+			var/list/options = singleton.return_customization(H.client?.prefs)
+			if(length(options))
+				var/selected = input(usr, "Select [singleton.customization_label]:", "Quirk Customization") as null|anything in options
+				if(selected)
+					custom_value = selected
+				else
+					to_chat(usr, "<span class='warning'>Quirk addition cancelled - no option selected.</span>")
+					return
+
+		// Add the quirk - this calls New() which calls on_spawn()
+		if(H.add_quirk(quirk_type, custom_value))
+			// Now trigger after_job_spawn() since the quirk is already spawned
+			var/datum/quirk/new_quirk = H.get_quirk(quirk_type)
+			if(new_quirk)
+				new_quirk.after_job_spawn()
+
+			log_admin("[key_name_admin(usr)] added quirk [initial(singleton.name)] to [key_name_admin(H)].")
+			message_admins("[key_name_admin(usr)] added quirk [initial(singleton.name)] to [key_name_admin(H)].")
+			to_chat(usr, "<span class='notice'>Added quirk [initial(singleton.name)] to [H].</span>")
+		else
+			to_chat(usr, "<span class='warning'>Failed to add quirk to [H].</span>")
+
+		show_player_panel_next(H, "quirks")
+
+	else if(href_list["remove_quirk"])
+		if(!check_rights(R_ADMIN))
+			return
+
+		var/mob/living/carbon/human/H = locate(href_list["remove_quirk"])
+		if(!ishuman(H))
+			to_chat(usr, "<span class='warning'>This can only be used on human mobs.</span>")
+			return
+
+		var/quirk_type = text2path(href_list["quirk"])
+		if(!ispath(quirk_type, /datum/quirk))
+			to_chat(usr, "<span class='warning'>Invalid quirk type.</span>")
+			return
+
+		var/datum/quirk/Q = H.get_quirk(quirk_type)
+		if(!Q)
+			to_chat(usr, "<span class='warning'>[H] doesn't have this quirk.</span>")
+			return
+
+		var/quirk_name = initial(Q.name)
+
+		if(H.remove_quirk(quirk_type))
+			log_admin("[key_name_admin(usr)] removed quirk [quirk_name] from [key_name_admin(H)].")
+			message_admins("[key_name_admin(usr)] removed quirk [quirk_name] from [key_name_admin(H)].")
+			to_chat(usr, "<span class='notice'>Removed quirk [quirk_name] from [H].</span>")
+		else
+			to_chat(usr, "<span class='warning'>Failed to remove quirk from [H].</span>")
+
+		show_player_panel_next(H, "quirks")
+
 	else if(href_list["addjobslot"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -730,27 +840,6 @@
 
 		usr.client.smite(H)
 
-	else if(href_list["CentComReply"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["CentComReply"])
-		usr.client.admin_headset_message(M, RADIO_CHANNEL_CENTCOM)
-
-	else if(href_list["SyndicateReply"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["SyndicateReply"])
-		usr.client.admin_headset_message(M, RADIO_CHANNEL_SYNDICATE)
-
-	else if(href_list["HeadsetMessage"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = locate(href_list["HeadsetMessage"])
-		usr.client.admin_headset_message(M)
-
 	else if(href_list["jumpto"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))
 			return
@@ -762,24 +851,10 @@
 		if(!check_rights(R_ADMIN))
 			return
 
-		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
+		if(tgui_alert(usr, "Confirm?", "Message", list("Yes", "No")) != "Yes")
 			return
 		var/mob/M = locate(href_list["getmob"])
 		usr.client.Getmob(M)
-
-	else if(href_list["increase_skill"])
-		var/mob/M = locate(href_list["increase_skill"])
-		var/datum/skill/skill = href_list["skill"]
-		M.adjust_skillrank(text2path(skill), 1)
-		log_admin("[key_name_admin(usr)] increased [key_name_admin(M)]'s [initial(skill.name)] skill.")
-		show_player_panel_next(M, "skills")
-
-	else if(href_list["decrease_skill"])
-		var/mob/M = locate(href_list["decrease_skill"])
-		var/datum/skill/skill = href_list["skill"]
-		M.adjust_skillrank(text2path(skill), -1)
-		log_admin("[key_name_admin(usr)] decreased [key_name_admin(M)]'s [initial(skill.name)] skill.")
-		show_player_panel_next(M, "skills")
 
 	else if(href_list["add_language"])
 		var/mob/M = locate(href_list["add_language"])
@@ -1054,7 +1129,7 @@
 			return
 		if(SSticker.IsRoundInProgress())
 			var/afkonly = text2num(href_list["afkonly"])
-			if(alert("Are you sure you want to kick all [afkonly ? "AFK" : ""] clients from the lobby??","Message","Yes","Cancel") != "Yes")
+			if(tgui_alert(usr, "Are you sure you want to kick all [afkonly ? "AFK" : ""] clients from the lobby??","Message", list("Yes","Cancel")) != "Yes")
 				to_chat(usr, "Kick clients from lobby aborted")
 				return
 			var/list/listkicked = kick_clients_in_lobby("<span class='danger'>I were kicked from the lobby by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"].</span>", afkonly)
@@ -1122,7 +1197,7 @@
 		else if(response.status_code != 200)
 			dat += "<br>Failed to connect to CentCom. Status code: [response.status_code]"
 		else
-			if(response.body == "[]")
+			if(response.body == "\[]")
 				dat += "<center><b>0 bans detected for [ckey]</b></center>"
 			else
 				bans = json_decode(response.body)
@@ -1224,7 +1299,7 @@
 		if(!ishuman(M))
 			return
 
-		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patronlist)
+		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patrons_by_type)
 		if(!patron_to_change_to)
 			return
 
@@ -1234,30 +1309,6 @@
 		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s patron from [being_changed.patron] to [patron_to_change_to]")
 
 		being_changed.set_patron(patron_to_change_to)
-
-	else if(href_list["changeflaw"])
-		if(!check_rights(R_ADMIN))
-			return
-
-		var/mob/M = (locate(href_list["mob"]) in GLOB.mob_list)
-
-		if(!ishuman(M))
-			return
-
-		var/list/flawslist = GLOB.character_flaws.Copy()
-		var/flaw_to_change_to = browser_input_list(usr, "Change to what flaw?", "EVERYONE HAS A VICE", flawslist)
-
-		if(!flaw_to_change_to)
-			return
-
-		flaw_to_change_to = flawslist[flaw_to_change_to]
-
-		var/mob/living/carbon/human/being_changed = M
-
-		message_admins("[key_name_admin(usr)] changed [key_name_admin(M)]'s flaw from [being_changed.charflaw ? being_changed.charflaw : "NA"] to [flaw_to_change_to]")
-		log_admin("[key_name_admin(usr)] changed [key_name_admin(M)]'s flaw from [being_changed.charflaw ? being_changed.charflaw : "NA"] to [flaw_to_change_to]")
-
-		being_changed.set_flaw(flaw_to_change_to)
 
 	else if(href_list["modifycurses"])
 
@@ -1287,6 +1338,18 @@
 
 		mind_of_mob.set_assigned_role(new_job)
 
+	else if(href_list["open_whitelist_panel"])
+		var/mob/M = locate(href_list["open_whitelist_panel"])
+		if(!M?.ckey)
+			return
+		WP.show_ui(usr, ckey(M.ckey))
+
+	if(href_list["open_boost_panel"])
+		var/mob/M = locate(href_list["open_boost_panel"])
+		if(!M?.ckey)
+			return
+		BP.show_ui(usr, ckey(M.ckey))
+
 	else if(href_list["roleban"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1300,7 +1363,7 @@
 		var/answer = href_list["slowquery"]
 		if(answer == "yes")
 			log_query_debug("[usr.key] | Reported a server hang")
-			if(alert(usr, "Had you just press any admin buttons?", "Query server hang report", "Yes", "No") == "Yes")
+			if(tgui_alert(usr, "Had you just press any admin buttons?", "Query server hang report", list("Yes", "No")) == "Yes")
 				var/response = input(usr,"What were you just doing?","Query server hang report") as null|text
 				if(response)
 					log_query_debug("[usr.key] | [response]")
@@ -1310,7 +1373,7 @@
 	else if(href_list["rebootworld"])
 		if(!check_rights(R_ADMIN))
 			return
-		var/confirm = alert("Are you sure you want to reboot the server?", "Confirm Reboot", "Yes", "No")
+		var/confirm = tgui_alert(usr, "Are you sure you want to reboot the server?", "Confirm Reboot", list("Yes", "No"))
 		if(confirm == "No")
 			return
 		if(confirm == "Yes")
@@ -1530,12 +1593,18 @@
 		return
 
 	if(SSticker.HasRoundStarted())
-		return alert(usr, "The game has already started.", null, null, null, null)
+		return alert(usr, "The game has already started.")
 	if(GLOB.master_mode != "secret")
-		return alert(usr, "The game mode has to be secret!", null, null, null, null)
+		return alert(usr, "The game mode has to be secret!")
 	var/dat = {"<B>What game mode do you want to force secret to be? Use this if you want to change the game mode, but want the players to believe it's secret. This will only work if the current game mode is secret.</B><HR>"}
 	for(var/mode in config.modes)
 		dat += {"<A href='byond://?src=[REF(src)];[HrefToken()];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
 	dat += {"<A href='byond://?src=[REF(src)];[HrefToken()];f_secret2=secret'>Random (default)</A><br>"}
 	dat += {"Now: [GLOB.secret_force_mode]"}
 	usr << browse(dat, "window=f_secret")
+
+/client/proc/open_attribute_editor(datum/attribute_holder/attributes)
+	if(!holder)
+		return
+	var/datum/attribute_editor/attribute_editor = new /datum/attribute_editor(attributes)
+	attribute_editor.ui_interact(mob)

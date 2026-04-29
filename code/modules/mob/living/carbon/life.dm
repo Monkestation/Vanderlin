@@ -1,4 +1,4 @@
-/mob/living/carbon/Life()
+/mob/living/carbon/Life(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
@@ -20,7 +20,7 @@
 		. = ..()
 	else
 		//Reagent processing needs to come before breathing, to prevent edge cases.
-		handle_organs()
+		handle_organs(delta_time, times_fired)
 
 		. = ..()
 
@@ -30,20 +30,18 @@
 		handle_lingering_pain()
 		handle_wounds()
 		handle_embedded_objects()
-		handle_blood()
 		handle_roguebreath()
 		update_stress()
 		handle_nausea()
 		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
 				if(oxyloss)
-					adjustOxyLoss(-1.6)
+					adjustOxyLoss(-5)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE
 
 		handle_sleep()
-		handle_brain_damage()
 
 	check_cremation()
 
@@ -61,47 +59,34 @@
 		return
 	handle_wounds()
 	handle_embedded_objects()
-	handle_blood()
 
 	check_cremation()
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return
+
+	// Pain tolerance system - builds up to prevent infinite stunning
+	// High endurance characters build tolerance faster and lose it slower
+	var/tolerance_gain_rate = 1 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25) // More endurance = faster adaptation
+	var/tolerance_decay_rate = max(1, 3 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.1)) // More endurance = slower decay
+
+	if(world.time - last_major_pain_time < 30 SECONDS)
+		pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // Higher max tolerance with endurance
+	else
+		pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
+
 	if(stat < UNCONSCIOUS)
-		// Calculate current shock level
 		var/current_shock = calculate_shock_stage()
-		var/raw_pain = get_complex_pain()
-
-		// Shock reduces pain perception (adrenaline effect)
-		if(current_shock >= 60)
-			var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
-			raw_pain *= (1.0 - shock_reduction)
-
-		// Base pain calculation - endurance affects how much pain you feel from damage
-		var/painpercent = raw_pain / (STAEND * 13)
-		painpercent = painpercent * 100
-
-		// Pain tolerance system - builds up to prevent infinite stunning
-		// High endurance characters build tolerance faster and lose it slower
-		var/tolerance_gain_rate = 1 + (STAEND * 0.25) // More endurance = faster adaptation
-		var/tolerance_decay_rate = max(1, 3 - (STAEND * 0.1)) // More endurance = slower decay
-
-		if(world.time - last_major_pain_time < 30 SECONDS)
-			pain_tolerance = min(pain_tolerance + tolerance_gain_rate, 60 + (STAEND * 1)) // Higher max tolerance with endurance
-		else
-			pain_tolerance = max(pain_tolerance - tolerance_decay_rate, 0)
-
-		// Apply pain tolerance to reduce effective pain
-		var/effective_pain = painpercent * (1.0 - (pain_tolerance * 0.01))
+		var/effective_pain = get_pain_percent() * 100
 
 		// Endurance-based pain threshold - higher endurance means higher pain threshold
-		var/pain_threshold = 55 + (STAEND * 1) // 1% higher threshold per endurance point
+		var/pain_threshold = 55 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1) // 1% higher threshold per endurance point
 		if(world.time > mob_timers[MT_PAINSTUN])
 			mob_timers[MT_PAINSTUN] = world.time + 10 SECONDS
 
 			// Base stun probability - endurance makes you much more resistant
-			var/probby = max(5, 50 - (STAEND * 1)) // 1% reduction per endurance point, minimum 5%
+			var/probby = max(5, 50 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)) // 1% reduction per endurance point, minimum 5%
 
 			// Reduce stun probability based on shock stage and pain tolerance
 			if(current_shock >= 160)
@@ -132,25 +117,25 @@
 
 						// Endurance affects stun duration - tougher people recover faster
 						var/base_stun = 6 SECONDS
-						var/endurance_stun_reduction = STAEND * 1 // 2 deciseconds per endurance point
+						var/endurance_stun_reduction = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1 // 2 deciseconds per endurance point
 						var/stun_duration = max(30, base_stun - endurance_stun_reduction)
 
 						var/base_immobilize = 1 SECONDS
-						var/immobilize_duration = max(2, base_immobilize - (STAEND * 0.05))
+						var/immobilize_duration = max(2, base_immobilize - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.05))
 
 						Immobilize(immobilize_duration)
 						emote("painscream")
-						stuttering += max(1, 5 - STAEND) // Less stuttering with high endurance
+						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)) // Less stuttering with high endurance
 						addtimer(CALLBACK(src, PROC_REF(Stun), stun_duration), immobilize_duration)
 						addtimer(CALLBACK(src, PROC_REF(Knockdown), stun_duration), immobilize_duration)
 
-						mob_timers[MT_PAINSTUN] = world.time + (10 SECONDS + (STAEND * 0.25))
+						mob_timers[MT_PAINSTUN] = world.time + (10 SECONDS + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 0.25))
 					else
 						emote("painmoan")
-						stuttering += max(1, 5 - STAEND)
+						stuttering += max(1, 5 - GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE))
 				else
 					// Lower threshold for minor pain with high endurance
-					var/minor_pain_threshold = 35 + (STAEND * 1)
+					var/minor_pain_threshold = 35 + (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 1)
 					if(effective_pain >= minor_pain_threshold)
 						if(prob(probby * 0.5)) // Reduced chance for minor pain reactions
 							emote("painmoan")
@@ -159,8 +144,31 @@
 		if(effective_pain >= pain_threshold)
 			if(current_shock < 160) // Only add stress if not in shock-induced numbness
 				// High endurance characters are less stressed by pain
-				if(prob(max(20, 100 - (STAEND * 2)))) // 2% less likely per endurance point (40% at 20 )
+				if(prob(max(20, 100 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)))) // 2% less likely per endurance point (40% at 20 )
 					add_stress(/datum/stress_event/painmax)
+
+/// Returns the pain percent between 0 and 1.
+/mob/living/carbon/proc/get_pain_percent()
+	if(HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+		return 0
+
+	// Calculate current shock level
+	var/raw_pain = get_complex_pain()
+	var/current_shock = calculate_shock_stage()
+
+	// Shock reduces pain perception (adrenaline effect)
+	if(current_shock >= 60)
+		var/shock_reduction = min(0.3, current_shock * 0.001) // Max 30% reduction
+		raw_pain *= (1.0 - shock_reduction)
+
+	// Max pain scales on endurance
+	var/painpercent = (raw_pain / max(GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 13, 1)) * 100
+
+	// Apply pain tolerance to reduce effective pain
+	painpercent *= (1 - (pain_tolerance * 0.01))
+
+	// Return normalized value between 0 and 1
+	return clamp(painpercent/100, 0, 1)
 
 /mob/living/carbon/proc/handle_roguebreath()
 	return
@@ -185,44 +193,6 @@
 				next_smell = world.time + 30 SECONDS
 				T.pollution.smell_act(src)
 
-/mob/living/proc/handle_inwater(turf/open/water/W)
-	if(body_position == LYING_DOWN || W.water_level == 3)
-		SoakMob(FULL_BODY)
-	else if(W.water_level == 2)
-		SoakMob(BELOW_CHEST)
-
-/mob/living/carbon/handle_inwater(turf/open/water/W)
-	. = ..()
-	if(stat == DEAD)
-		return
-	if(W.water_volume < 10 || !W.water_reagent)
-		return
-	var/react_volume = 2
-	var/react_type = TOUCH
-	var/is_laying = (body_position == LYING_DOWN)
-	if(!is_laying && W.water_level < 2)
-		return
-	if(is_laying && !(HAS_TRAIT(src, TRAIT_WATER_BREATHING) || HAS_TRAIT(src, TRAIT_NOBREATH)))
-		var/drown_damage = has_world_trait(/datum/world_trait/abyssor_rage) ? (is_ascendant(ABYSSOR) ? 15 : 10) : 5
-		adjustOxyLoss(drown_damage)
-		if(stat == DEAD && client)
-			record_round_statistic(STATS_PEOPLE_DROWNED)
-			return
-		emote("drown")
-		react_volume = 5
-		react_type = INGEST
-	var/datum/reagents/reagents = new()
-	reagents.add_reagent(W.water_reagent, react_volume)
-	reagents.reaction(src, react_type, W.level / 2)
-
-/mob/living/carbon/human/handle_inwater()
-	. = ..()
-	if(body_position != LYING_DOWN)
-		if(istype(loc, /turf/open/water/bath))
-			if(!wear_armor && !wear_shirt && !wear_pants)
-				var/mob/living/carbon/V = src
-				V.add_stress(/datum/stress_event/bathwater)
-
 /mob/living/carbon/proc/get_complex_pain()
 	var/total_pain = 0
 
@@ -239,8 +209,7 @@
 
 		// Wound-specific pain (can be higher intensity)
 		var/wound_pain = 0
-		for(var/W in BP.wounds)
-			var/datum/wound/WO = W
+		for(var/datum/wound/WO as anything in BP.wounds)
 			if(WO.woundpain > 0)
 				wound_pain += WO.woundpain
 
@@ -422,14 +391,14 @@
 	// Check for pain medications in bloodstream
 	if(reagents)
 		// Ozium
-		if(reagents.has_reagent(/datum/reagent/ozium))
+		if(has_reagent(/datum/reagent/ozium))
 			multiplier *= 0.6 // 40% pain reduction
 
-		if(reagents.has_reagent(/datum/reagent/buff/herbal/battle_stim))
+		if(has_reagent(/datum/reagent/buff/herbal/battle_stim))
 			multiplier *= 0.8 // 20% pain reduction
 
 		// Alcohol (mild pain relief)
-		if(reagents.has_reagent(/datum/reagent/consumable/ethanol))
+		if(has_reagent(/datum/reagent/consumable/ethanol))
 			var/alcohol_amount = reagents.get_reagent_amount(/datum/reagent/consumable/ethanol)
 			multiplier *= max(0.8, 1.0 - (alcohol_amount * 0.01)) // Diminishing returns
 
@@ -508,7 +477,7 @@
 	if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT - 3)
 		breath_effect_prob = min(breath_effect_prob + 50, 100)
 		if(prob(15) && !is_mouth_covered())
-			visible_message(span_notice("[src]'s breath comes out in heavy puffs of vapor."))
+			to_chat(src, span_warning("Your breath comes out in heavy puffs of vapor."))
 
 	if(prob(breath_effect_prob) && !is_mouth_covered())
 		emit_breath_particle(/particles/fog/breath)
@@ -555,13 +524,40 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_organs()
-	if(stat != DEAD)
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_life()
+/mob/living/carbon/proc/handle_organs(delta_time, times_fired)
+	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
+		return
+	if(stat < DEAD)
+		var/list/already_processed_life = list()
+		var/list/organlist
+		var/obj/item/organ/organ
+		for(var/organ_slot in GLOB.organ_process_order)
+			if(QDELETED(src))
+				break
+			organlist = LAZYACCESS(internal_organs_slot, organ_slot)
+			for(var/thing in organlist)
+				if(QDELETED(src))
+					break
+				organ = thing
+				// This exists mostly because reagent metabolization can cause organ shuffling
+				if(!QDELETED(organ) && !already_processed_life[organ_slot] && (organ.owner == src))
+					if(organ.needs_processing)
+						organ.on_life(delta_time, times_fired)
+					already_processed_life[organ] = TRUE
+		var/datum/organ_process/organ_process
+		for(var/thing in GLOB.organ_process_datum_order)
+			if(QDELETED(src))
+				break
+			organ_process = GLOB.organ_processes_by_slot[thing]
+			if(organ_process.needs_process(src))
+				organ_process.handle_process(src, delta_time, times_fired)
 	else
-		for(var/obj/item/organ/O as anything in internal_organs)
-			O.on_death() //Needed so organs decay while inside the body.
+		var/obj/item/organ/organ
+		for(var/thing in internal_organs)
+			organ = thing
+			//Needed so organs decay while inside the body
+			organ.on_death(delta_time, times_fired)
+
 
 /mob/living/carbon/handle_embedded_objects()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -601,23 +597,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/handle_status_effects()
 	..()
 
-	var/restingpwr = 1 + 4 * resting
-
 	// These should all be real status effects :)))))))))
-
-	//Dizziness
-	if(dizziness)
-		dizziness = max(dizziness - restingpwr, 0)
-		if(client)
-			handle_dizziness()
-
-	//Jitteriness
-	if(jitteriness)
-		do_jitter_animation(jitteriness)
-		jitteriness = max(jitteriness - restingpwr, 0)
-		add_stress(/datum/stress_event/jittery)
-	else
-		remove_stress(/datum/stress_event/jittery)
 
 	if(stuttering)
 		stuttering = max(stuttering-1, 0)
@@ -628,21 +608,16 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(cultslurring)
 		cultslurring = max(cultslurring-1, 0)
 
-	if(silent)
-		silent = max(silent-1, 0)
-
-	if(druggy)
-		adjust_drugginess(-1)
-
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
-			if(has_flaw(/datum/charflaw/addiction/alcoholic))
-				sate_addiction()
+			SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+			if(has_quirk(/datum/quirk/vice/alcoholic))
+				sate_addiction(/datum/quirk/vice/alcoholic)
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
-			jitteriness = max(jitteriness - 3, 0)
+			adjust_jitter(-6 SECONDS)
 			apply_status_effect(/datum/status_effect/buff/drunk)
 		else
 			remove_stress(/datum/stress_event/drunk)
@@ -650,15 +625,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			slurring += 1.2
 		if(drunkenness >= 41)
 			if(prob(25))
-				confused += 2
-			Dizzy(10)
+				adjust_confusion(4 SECONDS)
+			set_dizzy(10 SECONDS)
 
 		if(drunkenness >= 51)
 			adjustToxLoss(1)
 			if(prob(3))
-				confused += 15
+				adjust_confusion(15 SECONDS)
 				vomit() // vomiting clears toxloss, consider this a blessing
-			Dizzy(25)
+			set_dizzy(25 SECONDS)
 
 		if(drunkenness >= 61)
 			adjustToxLoss(1)
@@ -684,51 +659,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 101)
 			adjustToxLoss(5) //Let's be honest you shouldn't be alive by now
 
-/mob/living/carbon/proc/handle_dizziness()
-	// How strong the dizziness effect is on us.
-	// If we're resting, the effect is 5x as strong, but also decays 5x fast.
-	// Meaning effectively, 1 tick is actually dizziness_strength ticks of duration
-	var/dizziness_strength = resting ? 5 : 1
-
-	// How much time will be left, in seconds, next tick
-	var/next_amount = max((dizziness - (dizziness_strength * 0.1)), 0)
-
-	// Now we can do the actual dizzy effects.
-	// Don't bother animating if they're clientless.
-	if(!client)
-		return
-
-	// Want to be able to offset things by the time the animation should be "playing" at
-	var/time = world.time
-	var/delay = 0
-	var/pixel_x_diff = 0
-	var/pixel_y_diff = 0
-
-	// This shit is annoying at high strengthvar/pixel_x_diff = 0
-	var/list/view_range_list = getviewsize(client.view)
-	var/view_range = view_range_list[1]
-	var/amplitude = dizziness * (sin(dizziness * (time)) + 1)
-	var/x_diff = clamp(amplitude * sin(dizziness * time), -view_range, view_range)
-	var/y_diff = clamp(amplitude * cos(dizziness * time), -view_range, view_range)
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	// Brief explanation. We're basically snapping between different pixel_x/ys instantly, with delays between
-	// Doing this with relative changes. This way we don't override any existing pixel_x/y values
-	// We use EASE_OUT here for similar reasons, we want to act at the end of the delay, not at its start
-	// Relative animations are weird, so we do actually need this
-	animate(client, pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-	delay += 0.3 SECONDS // This counts as a 0.3 second wait, so we need to shift the sine wave by that much
-
-	x_diff = amplitude * sin(next_amount * (time + delay))
-	y_diff = amplitude * cos(next_amount * (time + delay))
-	pixel_x_diff += x_diff
-	pixel_y_diff += y_diff
-	animate(pixel_x = x_diff, pixel_y = y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
-	// Now we reset back to our old pixel_x/y, since these animates are relative
-	animate(pixel_x = -pixel_x_diff, pixel_y = -pixel_y_diff, 3, easing = JUMP_EASING | EASE_OUT, flags = ANIMATION_RELATIVE)
-
-
 //used in human and monkey handle_environment()
 /mob/living/carbon/proc/natural_bodytemperature_stabilization()
 	var/body_temperature_difference = BODYTEMP_NORMAL - bodytemperature
@@ -742,31 +672,26 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
 			return min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 
-/////////
-//LIVER//
-/////////
+///////////
+//Stomach//
+///////////
 
-///Decides if the liver is failing or not.
-/mob/living/carbon/proc/handle_liver()
-	if(!dna)
-		return
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(!liver)
-		liver_failure()
+/mob/living/carbon/get_fullness()
+	var/fullness = nutrition
 
-/mob/living/carbon/proc/undergoing_liver_failure()
-	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(liver && (liver.organ_flags & ORGAN_FAILING))
-		return TRUE
+	var/obj/item/organ/stomach/belly = getorganslot(ORGAN_SLOT_STOMACH)
+	if(!belly) //nothing to see here if we do not have a stomach
+		return fullness
 
-/mob/living/carbon/proc/liver_failure()
-	reagents.end_metabolization(src, keep_liverless = TRUE) //Stops trait-based effects on reagents, to prevent permanent buffs
-	reagents.metabolize(src, can_overdose=FALSE, liverless = TRUE)
-	if(HAS_TRAIT(src, TRAIT_NOMETABOLISM))
-		return
-	adjustToxLoss(4, TRUE,  TRUE)
-//	if(prob(30))
-//		to_chat(src, "<span class='warning'>I feel a stabbing pain in your abdomen!</span>")
+	for(var/datum/reagent/bits as anything in belly.reagents.reagent_list)
+		if(istype(bits, /datum/reagent/consumable))
+			var/datum/reagent/consumable/goodbit = bits
+			fullness += goodbit.nutriment_factor * goodbit.volume / goodbit.metabolization_rate
+			continue
+		fullness += 0.6 * bits.volume / bits.metabolization_rate //not food takes up space
+
+	return fullness
+
 
 /////////////
 //CREMATION//
@@ -847,8 +772,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 ////////////////
 
 /mob/living/carbon/proc/handle_brain_damage()
-	for(var/T in get_traumas())
-		var/datum/brain_trauma/BT = T
+	for(var/datum/brain_trauma/BT as anything in get_traumas())
 		BT.on_life()
 
 /////////////////////////////////////
@@ -866,7 +790,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /mob/living/carbon/proc/needs_heart()
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return FALSE
-	if(dna && dna.species && (NOBLOOD in dna.species.species_traits)) //not all carbons have species!
+	if(NOBLOOD in dna?.species?.species_traits) //not all carbons have species!
 		return FALSE
 	return TRUE
 
@@ -892,11 +816,26 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!can_heartattack())
 		return FALSE
 
-	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!istype(heart))
-		return
+	var/list/hearts = getorganslotlist(ORGAN_SLOT_HEART)
+	if(status)
+		pulse = PULSE_NONE
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Stop()
+	else
+		pulse = PULSE_NORM
+		for(var/obj/item/organ/heart/heart in hearts)
+			heart.Restart()
 
-	heart.beating = !status
+/// Brain is poopy (hardcrit)
+/mob/living/proc/undergoing_nervous_system_failure()
+	return FALSE
+
+/mob/living/carbon/undergoing_nervous_system_failure()
+	var/obj/item/organ/brain/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	if(!brain)
+		return TRUE
+	if(brain.is_failing())
+		return TRUE
 
 /// Handles sleep. Mobs with no_sleep trait cannot sleep.
 /*
@@ -937,7 +876,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			adjust_energy(sleepy_mod * (max_energy * 0.004))
 		if(hydration > 0 || yess)
 			if(!bleed_rate)
-				blood_volume = min(blood_volume + (4 * sleepy_mod), BLOOD_VOLUME_NORMAL)
+				adjust_bloodvolume(4 * sleepy_mod, BLOOD_VOLUME_NORMAL)
 			for(var/obj/item/bodypart/affecting as anything in bodyparts)
 				//for context, it takes 5 small cuts (0.4 x 5) or 3 normal cuts (0.8 x 3) for a bodypart to not be able to heal itself
 				if(affecting.get_bleed_rate() >= 2)

@@ -1,3 +1,45 @@
+/datum/attribute_holder/sheet/job/sellmage
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = -1,
+		STAT_PERCEPTION = -1,
+		STAT_STRENGTH = -2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 40
+	)
+
+/datum/attribute_holder/sheet/job/sellmage/old
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2,
+		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = -1,
+		STAT_PERCEPTION = -2,
+		STAT_STRENGTH = -2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/misc/reading = 40
+	)
+
 /datum/job/advclass/mercenary/sellmage
 	//a mage noble selling his services.
 	title = "Sellmage"
@@ -24,30 +66,11 @@
 	magic_user = TRUE
 	spell_points = 8 //less than courtmagician, more than an adventurer wizard
 
-	jobstats = list(
-		STATKEY_END = 1,
-		STATKEY_INT = 4,
-		STATKEY_CON = -1,
-		STATKEY_PER = -1,
-		STATKEY_STR = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 1,
-		/datum/skill/combat/wrestling = 1,
-		/datum/skill/magic/arcane = 4,
-		/datum/skill/combat/polearms = 3,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/swimming = 1,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/medicine = 1,
-		/datum/skill/misc/reading = 4
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/sellmage
+	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old
 
 	traits = list(
-		TRAIT_NOBLE
+		TRAIT_NOBLE_BLOOD
 	)
 
 /datum/job/advclass/mercenary/sellmage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -57,14 +80,9 @@
 	if(prob(1)) //extremely rare just like court mage
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 
-	// Age-based stat adjustments
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_END, 1) //to counteract the innate endurance loss
-		spawned.adjust_stat_modifier(STATMOD_JOB, STATKEY_PER, -1)  //instead they lose some perception
-
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
-	shirt = /obj/item/clothing/armor/chainmail/iron //intended, iron chainmail underneath the robe to stop knives
+	shirt = /obj/item/clothing/armor/gambeson
 	ring = /obj/item/clothing/ring/silver
 	gloves = /obj/item/clothing/gloves/leather
 	belt = /obj/item/storage/belt/leather/mercenary

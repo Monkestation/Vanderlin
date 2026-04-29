@@ -16,7 +16,7 @@
 
 /datum/particle_weather/snow_gentle
 	name = "Gentle Snow"
-	desc = "Gentle Rain, la la description."
+	desc = "Gentle Snow, la la description."
 	particleEffectType = /particles/weather/snow
 
 	scale_vol_with_severity = TRUE
@@ -41,7 +41,7 @@
 
 /datum/particle_weather/snow_storm
 	name = "Snow Storm"
-	desc = "Gentle Rain, la la description."
+	desc = "Snow Storm, la la description."
 	particleEffectType = /particles/weather/snow
 
 	scale_vol_with_severity = TRUE
@@ -68,6 +68,8 @@
 	probability = 40
 
 /datum/weather_effect/snow/effect_affect(turf/target_turf)
+	if(isgroundlessturf(target_turf))
+		return // snow cannot accumulate here
 	if(!target_turf.snow)
 		new /obj/structure/snow(target_turf, 1)
 	else
@@ -78,13 +80,6 @@
 
 /datum/particle_weather/snow_storm/weather_act(mob/living/L)
 	L.snow_shiver = world.time + 10 SECONDS
-
-
-/datum/weather_effect/snow_storm/effect_affect(turf/target_turf)
-	if(!target_turf.snow)
-		new /obj/structure/snow(target_turf, 1)
-	else
-		target_turf.snow.weathered(src)
 
 /particles/fog
 	icon = 'icons/effects/particles/smoke.dmi'
@@ -113,8 +108,8 @@
 	effect.effect_affect(src)
 
 /obj/structure/snow
-	name = "Snow"
-	desc = "Big pile of snow"
+	name = "snow"
+	desc = "A big pile of snow."
 	icon = 'icons/effects/snow.dmi'
 	icon_state = MAP_SWITCH("blank", "snow_1")
 	var/icon_prefix = "snow"
@@ -149,10 +144,6 @@
 	for(var/atom/movable/movable in get_turf(src))
 		if(movable.get_filter("mob_moving_effect_mask"))
 			animate(movable.get_filter("mob_moving_effect_mask"), y = -32, time = 0)
-			if(ismob(movable))
-				movable:update_vision_cone()
-			for(var/mob/living/carbon/human/human in view(movable, 7))
-				human.update_vision_cone()
 
 	STOP_PROCESSING(SSslowobj, src)
 	snowed_turf.snow = null
@@ -379,7 +370,5 @@
 
 
 /turf/Exited(atom/movable/gone, direction)
-	if(!istype(gone))
-		return
-	SEND_SIGNAL(src, COMSIG_TURF_EXITED, gone, direction)
+	. = ..()
 	SEND_SIGNAL(gone, COMSIG_MOVABLE_TURF_EXITED, src, direction)

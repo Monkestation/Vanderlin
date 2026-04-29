@@ -1,7 +1,7 @@
 #define AFFECTED_VLORD 1
 #define AFFECTED 2
 #define SILVER_BANE_MAX_STACKS 6
-#define SILVER_BANE_COOLDOWN (5 SECONDS)
+#define SILVER_BANE_COOLDOWN (3 SECONDS)
 
 /datum/enchantment/silver
 	enchantment_name = "Nightlurkers Bane"
@@ -25,13 +25,13 @@
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
-	var/datum/antagonist/werewolf/wolf_datum = target.mind.has_antag_datum(/datum/antagonist/werewolf)
+	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/lord_datum = vamp_datum
 		return (!lord_datum.ascended) ? AFFECTED_VLORD : UNAFFECTED
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
-	if(HAS_TRAIT(target, TRAIT_WEREWOLF_RAGE) || vamp_datum)
+	if(wolf_datum?.transformed || vamp_datum)
 		return AFFECTED
 	return UNAFFECTED
 
@@ -87,12 +87,22 @@
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
+/datum/enchantment/silver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
+	var/affected = affected_by_bane(user)
+	if(!affected)
+		return FALSE
+	to_chat(user, span_userdanger("They wear my BANE!"))
+	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
+	if(affected != AFFECTED_VLORD)
+		user.Paralyze(1 SECONDS)
+	return TRUE
+
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane
-	duration = 30 SECONDS
+	duration = 15 SECONDS
 	tick_interval = -1 // No ticking needed
-	effectedstats = list(STATKEY_STR = -2, STATKEY_PER = -2, STATKEY_INT = -2, STATKEY_CON = -2, STATKEY_END = -2, STATKEY_SPD = -2, STATKEY_LCK = -2)
+	effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
 	var/stacks = 0
 	var/max_stacks = SILVER_BANE_MAX_STACKS
 	var/affected_type = AFFECTED // Will be set on application
@@ -109,13 +119,13 @@
 	. = ..()
 	stacks = 1
 	update_alert()
-	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(wolf_datum)
+	if(owner.stat != DEAD && IS_WEREWOLF(owner))
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 	return TRUE
 
 /datum/status_effect/debuff/silver_bane/on_remove()
+	to_chat(owner, span_notice("The silver's overwhelming curse fades..."))
 	REMOVE_TRAIT(owner, TRAIT_COVEN_BANE, VAMPIRE_TRAIT)
 	. = ..()
 
@@ -134,10 +144,9 @@
 		trigger_stun()
 	else
 		update_alert()
-	var/datum/antagonist/werewolf/wolf_datum = owner.mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(wolf_datum)
+	if(owner.stat != DEAD && IS_WEREWOLF(owner))
 		var/mob/living/carbon/human/human = owner
-		human.rage_datum.update_rage(15)
+		human.rage_datum.update_rage(-5)
 
 /datum/status_effect/debuff/silver_bane/proc/trigger_stun()
 	if(!owner || is_stunned)
@@ -149,7 +158,7 @@
 	if(affected_type == AFFECTED_VLORD)
 		// Vampire lords get lighter punishment
 		owner.Knockdown(30)
-		owner.Paralyze(15)
+		owner.Stun(15)
 	else
 		// Normal creatures get full punishment
 		owner.Immobilize(45)
@@ -157,15 +166,7 @@
 
 	update_alert()
 
-	addtimer(CALLBACK(src, PROC_REF(end_stun)), 8 SECONDS)
-
-/datum/status_effect/debuff/silver_bane/proc/end_stun()
-	if(!owner)
-		qdel(src)
-		return
-
-	to_chat(owner, span_notice("The silver's overwhelming curse fades..."))
-	qdel(src)
+	QDEL_IN(src, 8 SECONDS)
 
 /datum/status_effect/debuff/silver_bane/proc/update_alert()
 	if(!owner)
@@ -176,7 +177,8 @@
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	name = "Silver's Bane"
-	desc = ""
+	desc = "My BANE!"
+	icon_state = "hunger4"
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)

@@ -32,7 +32,7 @@
 	///Sound to make while doing a retalitory attack
 	var/ranged_attack_sound = 'sound/combat/Ranged/flatbow-shot-01.ogg'
 	///Weapon path, for visuals
-	var/held_weapon_visual = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	var/held_weapon_visual = /obj/item/gun/ballistic/bow
 
 	///Type path for the banker datum to use for retrieving the bankers wares, speech, etc
 	var/banker_data_path = /datum/banker_data

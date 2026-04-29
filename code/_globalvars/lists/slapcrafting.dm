@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(slapcraft_recipes)
 /proc/init_slapcraft_recipes()
 	var/list/recipe_list = GLOB.slapcraft_recipes
 	for(var/datum/type as anything in typesof(/datum/slapcraft_recipe))
-		if(is_abstract(type))
+		if(IS_ABSTRACT(type))
 			continue
 		var/datum/slapcraft_recipe/recipe = new type()
 		recipe_list[type] = recipe
@@ -23,7 +23,7 @@ GLOBAL_LIST_EMPTY(slapcraft_recipes)
 /proc/init_molten_recipes()
 	var/list/recipe_list = GLOB.molten_recipes
 	for(var/datum/type as anything in typesof(/datum/molten_recipe))
-		if(is_abstract(type))
+		if(IS_ABSTRACT(type))
 			continue
 		var/datum/molten_recipe/recipe = new type()
 		recipe_list |= recipe
@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(slapcraft_recipes)
 /proc/init_slapcraft_steps()
 	var/list/step_list = GLOB.slapcraft_steps
 	for(var/datum/type as anything in typesof(/datum/slapcraft_step))
-		if(is_abstract(type))
+		if(IS_ABSTRACT(type))
 			continue
 		step_list[type] = new type()
 
@@ -80,26 +80,30 @@ GLOBAL_LIST_EMPTY(slapcraft_recipes)
 
 	return all_hints
 
-GLOBAL_LIST_EMPTY(orderless_slapcraft_recipes)
+GLOBAL_LIST_INIT(orderless_slapcraft_recipes, init_orderless_slapcraft_recipes())
+
 /proc/init_orderless_slapcraft_recipes()
-	var/list/recipe_list = GLOB.orderless_slapcraft_recipes
+	var/list/recipe_list = list()
 	for(var/datum/type as anything in typesof(/datum/orderless_slapcraft))
-		if(is_abstract(type))
+		if(IS_ABSTRACT(type))
 			continue
 		var/datum/orderless_slapcraft/recipe = new type()
 		///this is so we can easily get a list of all recipes from the attacked_item
 		if(!(recipe.starting_item in recipe_list))
 			recipe_list[recipe.starting_item] = list()
 		recipe_list[recipe.starting_item] |= recipe
+	return recipe_list
 
-GLOBAL_LIST_EMPTY(repeatable_crafting_recipes)
+GLOBAL_LIST_INIT(repeatable_crafting_recipes, init_crafting_repeatable_recipes())
+
 /proc/init_crafting_repeatable_recipes()
-	var/list/recipe_list = GLOB.repeatable_crafting_recipes
+	var/list/recipe_list = list()
 	for(var/datum/type as anything in typesof(/datum/repeatable_crafting_recipe))
-		if(is_abstract(type))
+		if(IS_ABSTRACT(type))
 			continue
 		var/datum/repeatable_crafting_recipe/recipe = new type()
 		///this is so we can easily get a list of all recipes from the attacked_item
 		if(!(recipe.starting_atom in recipe_list))
 			recipe_list[recipe.starting_atom] = list()
 		recipe_list[recipe.starting_atom] |= recipe
+	return recipe_list

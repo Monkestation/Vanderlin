@@ -47,6 +47,7 @@
 		var/mob/living/carbon/C = src
 		var/mob/living/carbon/D = M
 		C.dna.transfer_identity(D)
+		D.reset_limb_fingerprints()
 		D.updateappearance(mutcolor_update=1, mutations_overlay_update=1)
 	else if(ishuman(M))
 		var/mob/living/carbon/human/H = M

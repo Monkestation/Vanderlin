@@ -64,16 +64,16 @@
 	var/takes_all_items = FALSE
 
 /proc/isarcyne(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/arcane) > SKILL_LEVEL_NONE)	//checks if person has arcane skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/arcane) > SKILL_LEVEL_NONE)	//checks if person has arcane skill
 
 /proc/isdivine(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/holy) > SKILL_LEVEL_NONE)	//checks if person has holy/divine skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/holy) > SKILL_LEVEL_NONE)	//checks if person has holy/divine skill
 
 /proc/isdruid(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/druidic) > SKILL_LEVEL_NONE)	//checks if person has druidic skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/druidic) > SKILL_LEVEL_NONE)	//checks if person has druidic skill
 
 /proc/isblood(mob/living/carbon/human/A)
-	return istype(A) && A.mind && (A.get_skill_level(/datum/skill/magic/blood) > SKILL_LEVEL_NONE)		//checks if person has blood magic skill
+	return istype(A) && A.mind && (GET_MOB_SKILL_VALUE(A, /datum/attribute/skill/magic/blood) > SKILL_LEVEL_NONE)		//checks if person has blood magic skill
 
 GLOBAL_LIST_INIT(rune_types, generate_rune_types())
 GLOBAL_LIST_INIT(t1rune_types, generate_t1rune_types())
@@ -155,6 +155,7 @@ GLOBAL_LIST(teleport_runes)
 	color = rgb(255, 0, 0)
 	animate(src, color = oldcolor, time = 5)
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 0.5 SECONDS)
+	rune_in_use = FALSE
 
 /obj/effect/decal/cleanable/roguerune/attack_hand(mob/living/user)
 	if(rune_in_use)
@@ -742,11 +743,10 @@ GLOBAL_LIST(teleport_runes)
 
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/Destroy()
 	if(summoning)
-		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
+		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)	//can't kill while planar bound.
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE
@@ -759,11 +759,10 @@ GLOBAL_LIST(teleport_runes)
 		do_invoke_glow()
 		sleep(20)
 		animate(summoned_mob, color = null,time = 5)
-		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
+		REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)	//can't kill while planar bound.
 		summoned_mob.status_flags -= GODMODE//remove godmode
 		summoned_mob.candodge = TRUE
 		summoned_mob.binded = FALSE
-		summoned_mob.move_resist = MOVE_RESIST_DEFAULT
 		summoned_mob.SetParalyzed(0)
 		summoned_mob = null
 		summoning = FALSE

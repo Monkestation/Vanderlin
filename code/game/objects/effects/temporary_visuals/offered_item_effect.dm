@@ -34,7 +34,7 @@
 	RegisterSignal(offered_to, COMSIG_MOVABLE_MOVED, PROC_REF(someone_moved))
 	RegisterSignal(offerer, COMSIG_LIVING_STOPPED_OFFERING_ITEM, PROC_REF(stopped_offering))
 	RegisterSignal(offered_thing, COMSIG_OBJ_HANDED_OVER, PROC_REF(handover))
-	RegisterSignal(offerer, COMSIG_PARENT_QDELETING, PROC_REF(timed_out))
+	RegisterSignal(offerer, COMSIG_QDELETING, PROC_REF(timed_out))
 	calculate_offset()
 
 /obj/effect/temp_visual/offered_item_effect/timed_out()
@@ -44,7 +44,7 @@
 	if(offerer)
 		offerer.stop_offering_item()
 
-/obj/effect/temp_visual/offered_item_effect/attackby(obj/item/I, mob/living/user, params)
+/obj/effect/temp_visual/offered_item_effect/attackby(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(I == offered_thing_weak_ref.resolve())
 		user.cancel_offering_item(stealthy)

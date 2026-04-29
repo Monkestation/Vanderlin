@@ -8,7 +8,7 @@
 /turf/open/floor/grass/red,
 /area/template_noop)
 "e" = (
-/obj/item/ash,
+/obj/item/fertilizer/ash,
 /turf/open/floor/naturalstone,
 /area/template_noop)
 "f" = (
@@ -55,7 +55,7 @@
 /turf/open/floor/grass/red,
 /area/template_noop)
 "B" = (
-/obj/item/ash,
+/obj/item/fertilizer/ash,
 /turf/open/floor/dirt,
 /area/template_noop)
 "E" = (
@@ -68,12 +68,12 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "N" = (
-/obj/item/ash,
+/obj/item/fertilizer/ash,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
 /area/template_noop)
 "O" = (
-/obj/item/ash,
+/obj/item/fertilizer/ash,
 /turf/open/floor/grass/red,
 /area/template_noop)
 "Q" = (

@@ -2,6 +2,7 @@
 	id = "silent"
 	alert_type = null
 	duration = 10 SECONDS
+	remove_on_fullheal = TRUE
 
 /datum/status_effect/silenced/on_apply()
 	. = ..()

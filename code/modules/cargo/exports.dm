@@ -58,8 +58,7 @@
 
 	var/newbudget = 0
 	// We go backwards, so it'll be innermost objects sold first
-	for(var/i in reverseRange(contents))
-		var/atom/movable/thing = i
+	for(var/atom/movable/thing as anything in reverseRange(contents))
 		var/sold = FALSE
 		if(QDELETED(thing))
 			continue

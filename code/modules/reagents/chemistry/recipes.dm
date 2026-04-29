@@ -36,7 +36,7 @@
 		message_admins(message, 0, 1)
 		log_game("[reaction_name] chemical mob spawn reaction occuring at [AREACOORD(T)] carried by [key_name(M)] with last fingerprint [A.fingerprintslast? A.fingerprintslast : "N/A"]")
 
-		playsound(get_turf(holder.my_atom), 'sound/blank.ogg', 100, TRUE)
+		playsound(holder.my_atom, 'sound/blank.ogg', 100, TRUE)
 
 		for(var/mob/living/carbon/C in viewers(get_turf(holder.my_atom), null))
 			C.flash_act()

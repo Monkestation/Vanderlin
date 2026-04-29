@@ -11,7 +11,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "s" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/cave)
 "t" = (
 /obj/structure/stairs/stone{

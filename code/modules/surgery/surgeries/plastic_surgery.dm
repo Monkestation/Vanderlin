@@ -18,7 +18,8 @@
 		TOOL_SHARP = 35,
 	)
 	possible_locs = list(BODY_ZONE_HEAD)
-	time = 6.4 SECONDS
+	minimum_time = 4.5 SECONDS
+	maximum_time = 8.6 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_EXPERT

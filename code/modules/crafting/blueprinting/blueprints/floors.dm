@@ -15,7 +15,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloor_turned
@@ -29,7 +29,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloor_dark
@@ -43,7 +43,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodplatform
@@ -58,7 +58,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 
@@ -73,7 +73,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 0
 
 /datum/blueprint_recipe/floor/stonefloor/alt
@@ -92,7 +92,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 0
 
 /datum/blueprint_recipe/floor/stonefloor_cobblestone/alt
@@ -105,7 +105,7 @@
 	required_materials = list(
 		/obj/item/natural/stone = 1,
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 1
+		/obj/item/natural/clod/dirt = 1
 	)
 
 /datum/blueprint_recipe/floor/stonefloor_blocks
@@ -119,7 +119,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_newstone
@@ -133,7 +133,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_bluestone
@@ -147,7 +147,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_herringbone
@@ -161,7 +161,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/stonefloor_hexstone
@@ -175,7 +175,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 
@@ -191,7 +191,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 
@@ -227,7 +227,7 @@
 	result_type = /turf/open/floor/dirt/road
 	required_materials = list(
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 3
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -239,7 +239,7 @@
 	result_type = /turf/open/floor/dirt
 	required_materials = list(
 		/obj/item/natural/fibers = 1,
-		/obj/item/natural/dirtclod = 3
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -257,7 +257,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/tile
@@ -272,7 +272,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/tile_green
@@ -287,7 +287,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/masonic
@@ -301,7 +301,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/masonic/single
@@ -328,7 +328,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/brick/brown
@@ -346,7 +346,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/diamond_blue
@@ -359,7 +359,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/diamond_purple
@@ -372,7 +372,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/bath
@@ -385,7 +385,20 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
+	craftdiff = 2
+
+/datum/blueprint_recipe/floor/bath/pool
+	name = "Pool Edge Tile"
+	desc = "Clean bathroom-style tiling made of stone blocks."
+	result_type = /turf/open/floor/tile/bath/pool
+	required_materials = list(
+		/obj/item/natural/stoneblock = 2
+	)
+	construct_tool = /obj/item/weapon/hammer
+	category = "Floors"
+	floor_object = TRUE
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/bfloorz
@@ -398,7 +411,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/tilerg
@@ -411,7 +424,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/checker
@@ -424,7 +437,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/checkeralt
@@ -437,7 +450,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/church
@@ -450,7 +463,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 /datum/blueprint_recipe/floor/church_purple
@@ -463,7 +476,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 /datum/blueprint_recipe/floor/marble_church
@@ -476,7 +489,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 4
 
 /datum/blueprint_recipe/floor/churchbrick
@@ -489,7 +502,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 /datum/blueprint_recipe/floor/roughchurch
@@ -502,7 +515,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/roughchurch_purple
@@ -515,7 +528,7 @@
 	construct_tool = /obj/item/weapon/hammer
 	category = "Floors"
 	floor_object = TRUE
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/grass
@@ -525,7 +538,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -538,7 +551,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -551,7 +564,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -564,7 +577,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -577,7 +590,20 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 2,
 		/obj/item/neuFarm/seed = 1,
-		/obj/item/natural/dirtclod = 2
+		/obj/item/natural/clod/dirt = 2
+	)
+	construct_tool = /obj/item/weapon/shovel
+	category = "Floors"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/floor/grasshealthy
+	name = "Healthy Grass"
+	desc = "A bit of extra fertilizer makes the difference."
+	result_type = /turf/open/floor/grass/healthy
+	required_materials = list(
+		/obj/item/natural/fibers = 3,
+		/obj/item/neuFarm/seed = 1,
+		/obj/item/natural/clod/dirt = 3
 	)
 	construct_tool = /obj/item/weapon/shovel
 	category = "Floors"
@@ -590,7 +616,7 @@
 	required_materials = list(
 		/obj/item/natural/fibers = 3,
 		/obj/item/natural/chaff = 2,
-		/obj/item/natural/dirtclod = 1
+		/obj/item/natural/clod/dirt = 1
 	)
 	construct_tool = /obj/item/weapon/pitchfork
 	category = "Floors"
@@ -607,7 +633,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloortwo
@@ -621,7 +647,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloorturned
@@ -635,7 +661,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloorturnedalt
@@ -649,7 +675,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/woodfloorturned
@@ -663,7 +689,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/ruinedspiral
@@ -677,7 +703,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/ruinedspiralfade
@@ -691,7 +717,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/ruinedchevron
@@ -705,7 +731,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/ruineddark
@@ -719,7 +745,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/ruineddarkturned
@@ -733,7 +759,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/roof
@@ -748,7 +774,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/roof_green
@@ -763,7 +789,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/stonefloor_blocksred
@@ -777,7 +803,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_blocksgreen
@@ -791,7 +817,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_blocksredtiny
@@ -805,7 +831,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/stonefloor_newblue
@@ -819,7 +845,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/paving
@@ -833,7 +859,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/pavingvertical
@@ -847,7 +873,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 2
 
 /datum/blueprint_recipe/floor/greenstone
@@ -861,7 +887,7 @@
 	category = "Floors"
 	floor_object = TRUE
 
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 1
 
 /datum/blueprint_recipe/floor/greenstone/runed
@@ -871,7 +897,7 @@
 		/obj/item/gem/amethyst = 1,
 	)
 	craftdiff = 3
-	skillcraft = /datum/skill/magic/arcane
+	skillcraft = /datum/attribute/skill/magic/arcane
 	result_type = /turf/open/floor/greenstone/runed
 
 /datum/blueprint_recipe/floor/greenstone/glyph
@@ -881,7 +907,7 @@
 		/obj/item/gem/amethyst = 1,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/magic/arcane
+	skillcraft = /datum/attribute/skill/magic/arcane
 	result_type = /turf/open/floor/greenstone/glyph1
 
 /datum/blueprint_recipe/floor/greenstone/glyph/two
@@ -907,8 +933,8 @@
 		/obj/item/natural/glass = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/carpentry
-	result_type = /turf/open/transparent/glass
+	skillcraft = /datum/attribute/skill/craft/carpentry
+	result_type = /turf/open/glass
 
 /datum/blueprint_recipe/floor/concrete
 	name = "Concrete Floor"
@@ -917,7 +943,7 @@
 		/obj/item/natural/stone = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/masonry
+	skillcraft = /datum/attribute/skill/craft/masonry
 	result_type = /turf/open/floor/concrete
 
 /datum/blueprint_recipe/floor/metal
@@ -927,7 +953,7 @@
 		/obj/item/ingot/iron = 2,
 	)
 	craftdiff = 2
-	skillcraft = /datum/skill/craft/blacksmithing
+	skillcraft = /datum/attribute/skill/craft/blacksmithing
 	result_type = /turf/open/floor/metal
 
 /datum/blueprint_recipe/floor/metal/alt

@@ -1,8 +1,11 @@
+GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
+
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = ""
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "floor1"
+	color = COLOR_BLOOD
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6")
 	blood_state = BLOOD_STATE_HUMAN
 	bloodiness = BLOOD_AMOUNT_PER_DECAL
@@ -14,9 +17,7 @@
 	clean_type = CLEAN_TYPE_BLOOD
 
 	var/blood_timer
-	var/wash_precent = 0
 	var/glows = FALSE
-	COOLDOWN_DECLARE(wash_cooldown)
 
 
 /obj/effect/decal/cleanable/blood/add_blood_DNA(list/blood_DNA_to_add, no_visuals = FALSE)
@@ -50,16 +51,7 @@
 		H.bloody_hands++
 		H.update_inv_gloves()
 
-/obj/effect/decal/cleanable/blood/weather_act_on(weather_trait, severity)
-	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, wash_cooldown))
-		return
-	wash_precent += min(25, severity / 2)
-	alpha = 255 *((100 - wash_precent) * 0.01)
-	if(wash_precent >= 100)
-		qdel(src)
-	COOLDOWN_START(src, wash_cooldown, 7.5 SECONDS)
-
-/obj/effect/decal/cleanable/blood/Initialize(mapload)
+/obj/effect/decal/cleanable/blood/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
@@ -69,6 +61,10 @@
 	pixel_y = base_pixel_y + rand(5,5)
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,15 MINUTES), TIMER_STOPPABLE)
 	GLOB.weather_act_upon_list += src
+	if(override_color)
+		color = override_color
+		add_atom_colour(color, COLOUR_PRIORITY_AMOUNT)
+	update_appearance(UPDATE_ICON)
 
 
 /obj/effect/decal/cleanable/blood/proc/become_dry()
@@ -76,7 +72,7 @@
 		return
 	qdel(reagents)
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	bloodiness = 0
 
 /obj/effect/decal/cleanable/blood/lazy_init_reagents()
@@ -102,7 +98,6 @@
 		C.alpha = initial(alpha)
 		C.bloodiness = initial(bloodiness)
 		C.name = initial(name)
-		C.color = initial(color)
 
 /obj/effect/decal/cleanable/blood/Destroy()
 	deltimer(blood_timer)
@@ -128,13 +123,13 @@
 
 /obj/effect/decal/cleanable/blood/splatter/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/splatter/P = C
-		P.drips++
-		if(P.drips > 2)
+		var/obj/effect/decal/cleanable/blood/splatter/previous = C
+		previous.drips++
+		if(previous.drips > 2)
 			var/turf/T = loc
 			if(istype(T))
-				new /obj/effect/decal/cleanable/blood(T)
-				qdel(P)
+				new /obj/effect/decal/cleanable/blood(T, previous.color)
+				qdel(previous)
 		return TRUE
 
 
@@ -155,11 +150,13 @@
 	appearance_flags = NO_CLIENT_COLOR
 	var/blood_timer
 
-/obj/effect/decal/cleanable/trail_holder/Initialize(mapload)
+/obj/effect/decal/cleanable/trail_holder/Initialize(mapload, override_color)
 	. = ..()
 	if(. == INITIALIZE_HINT_QDEL)
 		return .
 	blood_timer = addtimer(CALLBACK(src, PROC_REF(become_dry)), rand(5 MINUTES,8 MINUTES), TIMER_STOPPABLE)
+	if(override_color)
+		color = override_color
 
 /obj/effect/decal/cleanable/trail_holder/Destroy()
 	deltimer(blood_timer)
@@ -170,7 +167,7 @@
 	if(QDELETED(src))
 		return
 	name = "dry [initial(name)]"
-	color = "#967c69"
+	color = color_matrix2color_hex(color_matrix_multiply(color_hex2color_matrix(color), GLOB.dryblood_colormatrix))
 	alpha = 100
 	bloodiness = 0
 
@@ -196,7 +193,7 @@
 	for(var/i in 0 to rand(1,3))
 		sleep(2)
 		if(i > 0)
-			new /obj/effect/decal/cleanable/blood/splatter(loc, diseases)
+			new /obj/effect/decal/cleanable/blood/splatter(loc, color)
 		if(!step_to(src, get_step(src, direction), 0))
 			break
 
@@ -263,21 +260,21 @@
 		if(istype(T))
 			var/obj/effect/decal/cleanable/blood/puddle/PUD = locate() in T
 			if(!PUD)
-				PUD = new(T)
+				PUD = new(T, color)
 				PUD.blood_vol = blood_vol
 
 /obj/effect/decal/cleanable/blood/drip/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/drip/P = C
-		P.drips++
-		if(P.drips > 5)
+		var/obj/effect/decal/cleanable/blood/drip/previous = C
+		previous.drips++
+		if(previous.drips > 5)
 			var/turf/T = loc
 			if(istype(T))
-				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T)
+				var/obj/effect/decal/cleanable/blood/puddle/PUD = new(T, previous.color)
 				PUD.blood_vol = blood_vol
-				qdel(P)
+				qdel(previous)
 		else
-			P.update_appearance(UPDATE_ICON_STATE)
+			previous.update_appearance(UPDATE_ICON_STATE)
 		return TRUE
 
 /obj/effect/decal/cleanable/blood/puddle
@@ -305,9 +302,10 @@
 
 /obj/effect/decal/cleanable/blood/puddle/replace_decal(obj/effect/decal/cleanable/C) // Returns true if we should give up in favor of the pre-existing decal
 	if(..())
-		var/obj/effect/decal/cleanable/blood/puddle/P = C
-		P.blood_vol += 10
-		P.update_appearance(UPDATE_ICON_STATE)
+		var/obj/effect/decal/cleanable/blood/puddle/previous = C
+		previous.blood_vol += 10
+		previous.update_appearance(UPDATE_ICON_STATE)
+		previous.color = color
 		return TRUE
 
 
@@ -401,7 +399,7 @@
 	. = ..()
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.STAINT < 12)
+		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) < 12)
 			return
 	if(shoe_types.len)
 		. += "You recognise the footprints as belonging to:\n"

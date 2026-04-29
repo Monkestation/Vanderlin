@@ -249,7 +249,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += print_culinary_page(user)
 	var/datum/browser/popup = new(user, "culinary_customization", "<div align='center'>Culinary Preferences</div>", 360, 365)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/apply_culinary_preferences(mob/living/carbon/human/character)
 	if(!culinary_preferences)
@@ -279,13 +279,12 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/food_with_faretypes = list()
-	for(var/food_type in GLOB.selectable_foods)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in GLOB.selectable_foods)
 		var/food_faretype = initial(food_instance.faretype)
 		var/food_name = initial(food_instance.name)
-		food_with_faretypes += list(list("type" = food_type, "faretype" = food_faretype, "name" = food_name))
+		food_with_faretypes += list(list("type" = food_instance, "faretype" = food_faretype, "name" = food_name))
 
-	food_with_faretypes = sortTim(food_with_faretypes, /proc/cmp_food_by_faretype_and_name)
+	food_with_faretypes = sortTim(food_with_faretypes, GLOBAL_PROC_REF(cmp_food_by_faretype_and_name))
 
 	for(var/list/food_data in food_with_faretypes)
 		var/food_type = food_data["type"]
@@ -299,7 +298,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_FOOD) ? "Select Favourite Food" : "Select Hated Food"
 	var/datum/browser/popup = new(user, "food_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /datum/preferences/proc/show_drink_selection_ui(mob/user, preference_type)
 	if(culinary_preferences[CULINARY_RANDOM_PREFERENCES])
@@ -315,11 +314,10 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	dat += "</style>"
 
 	var/list/drink_with_qualities = list()
-	for(var/drink_type in GLOB.selectable_drinks)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in GLOB.selectable_drinks)
 		var/drink_quality = initial(drink_instance.quality)
 		var/drink_name = initial(drink_instance.name)
-		drink_with_qualities += list(list("type" = drink_type, "quality" = drink_quality, "name" = drink_name))
+		drink_with_qualities += list(list("type" = drink_instance, "quality" = drink_quality, "name" = drink_name))
 
 	drink_with_qualities = sortTim(drink_with_qualities, /proc/cmp_drink_by_quality_and_name)
 
@@ -335,7 +333,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/title = (preference_type == CULINARY_FAVOURITE_DRINK) ? "Select Favourite Drink" : "Select Hated Drink"
 	var/datum/browser/popup = new(user, "drink_selection", "<div align='center'>[title]</div>", 400, 600)
 	popup.set_content(dat.Join())
-	popup.open(FALSE)
+	popup.open(use_onclose = FALSE)
 
 /proc/cmp_food_by_faretype_and_name(list/a, list/b)
 	var/faretype_a = a["faretype"]
@@ -373,6 +371,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/meat,
 		/obj/item/reagent_containers/food/snacks/veg,
 		/obj/item/reagent_containers/food/snacks/store,
+		/obj/item/reagent_containers/food/snacks/truffles/toxic,
 		/obj/item/reagent_containers/food/snacks/grown,
 		/obj/item/reagent_containers/food/snacks/zybcake,
 		/obj/item/reagent_containers/food/snacks/zybcake_ready,
@@ -384,9 +383,6 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/crimsoncake_ready,
 		/obj/item/reagent_containers/food/snacks/chescake,
 		/obj/item/reagent_containers/food/snacks/chescake_ready,
-		/obj/item/reagent_containers/food/snacks/chescake_poison,
-		/obj/item/reagent_containers/food/snacks/chescake_poison_ready,
-		/obj/item/reagent_containers/food/snacks/cheesecake_poison_cooked,
 		/obj/item/reagent_containers/food/snacks/cake,
 		/obj/item/reagent_containers/food/snacks/piedough,
 		/obj/item/reagent_containers/food/snacks/raisindough,
@@ -394,7 +390,7 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/dough_slice,
 		/obj/item/reagent_containers/food/snacks/butterdough,
 		/obj/item/reagent_containers/food/snacks/butterdough_slice,
-		/obj/item/reagent_containers/food/snacks/meat/wiener,
+		/obj/item/reagent_containers/food/snacks/meat/sausage/wiener,
 		/obj/item/reagent_containers/food/snacks/meat/sausage,
 		/obj/item/reagent_containers/food/snacks/meat/fatty,
 		/obj/item/reagent_containers/food/snacks/rotten/sausage,
@@ -425,18 +421,27 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 		/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 		/obj/item/reagent_containers/food/snacks/produce/manabloom,
 		/obj/item/reagent_containers/food/snacks/produce/poppy,
-		/obj/item/reagent_containers/food/snacks/meat/human,
+		/obj/item/reagent_containers/food/snacks/meat/steak/human,
 		/obj/item/reagent_containers/food/snacks/crow,
 		/obj/item/reagent_containers/food/snacks/crow/dead,
 		/obj/item/reagent_containers/food/snacks/smallrat,
 		/obj/item/reagent_containers/food/snacks/smallrat/dead,
 		/obj/item/reagent_containers/food/snacks/messenger_bird,
 		/obj/item/reagent_containers/food/snacks/messenger_bird/dead,
+		/obj/item/reagent_containers/food/snacks/griddlecake/berry/poison,
+		/obj/item/reagent_containers/food/snacks/biscuit/poison,
+		/obj/item/reagent_containers/food/snacks/chescake_ready/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison,
+		/obj/item/reagent_containers/food/snacks/cheesecake_slice/poison,
+		/obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison,
+		/obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison,
+		/obj/item/reagent_containers/food/snacks/bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
+		/obj/item/reagent_containers/food/snacks/breadslice/raisin/poison,
 	)
 
 	var/list/slice_paths = list()
-	for(var/food_type in subtypesof(/obj/item/reagent_containers/food/snacks))
-		var/obj/item/reagent_containers/food/snacks/F = food_type
+	for(var/obj/item/reagent_containers/food/snacks/F as anything in subtypesof(/obj/item/reagent_containers/food/snacks))
 		var/slice_path = initial(F.slice_path)
 		if(slice_path)
 			slice_paths |= slice_path
@@ -446,19 +451,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_food_types = list()
 	var/list/name_to_type = list()
 
-	for(var/food_type in food_types)
-		var/obj/item/reagent_containers/food/snacks/food_instance = food_type
+	for(var/obj/item/reagent_containers/food/snacks/food_instance as anything in food_types)
 		var/food_name = initial(food_instance.name)
 
 		if(!name_to_type[food_name])
-			name_to_type[food_name] = food_type
-			filtered_food_types += food_type
+			name_to_type[food_name] = food_instance
+			filtered_food_types += food_instance
 		else
 			var/existing_type = name_to_type[food_name]
-			if(ispath(existing_type, food_type))
-				name_to_type[food_name] = food_type
+			if(ispath(existing_type, food_instance))
+				name_to_type[food_name] = food_instance
 				filtered_food_types -= existing_type
-				filtered_food_types += food_type
+				filtered_food_types += food_instance
 
 	return filtered_food_types
 
@@ -482,19 +486,18 @@ GLOBAL_LIST_EMPTY(cached_drink_flat_icons)
 	var/list/filtered_drink_types = list()
 	var/list/name_to_type = list()
 
-	for(var/drink_type in drink_types)
-		var/datum/reagent/consumable/drink_instance = drink_type
+	for(var/datum/reagent/consumable/drink_instance as anything in drink_types)
 		var/drink_name = initial(drink_instance.name)
 
 		if(!name_to_type[drink_name])
-			name_to_type[drink_name] = drink_type
-			filtered_drink_types += drink_type
+			name_to_type[drink_name] = drink_instance
+			filtered_drink_types += drink_instance
 		else
 			var/existing_type = name_to_type[drink_name]
-			if(ispath(existing_type, drink_type))
-				name_to_type[drink_name] = drink_type
+			if(ispath(existing_type, drink_instance))
+				name_to_type[drink_name] = drink_instance
 				filtered_drink_types -= existing_type
-				filtered_drink_types += drink_type
+				filtered_drink_types += drink_instance
 
 	return filtered_drink_types
 

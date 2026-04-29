@@ -18,8 +18,6 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_NOSE)
 			zone = BODY_ZONE_HEAD
-		if(BODY_ZONE_PRECISE_MOUTH)
-			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_SKULL)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_EARS)
@@ -44,6 +42,19 @@
 			zone = BODY_ZONE_L_ARM
 
 	return zone
+
+///Returns a TRUE / FALSE if the zone is a FACE coverage subzone. Used mainly by accuracy_check & bait.
+/proc/check_face_subzone(zone)
+	if(!zone)
+		return FALSE
+	var/list/zones = list(
+		BODY_ZONE_PRECISE_R_EYE,
+		BODY_ZONE_PRECISE_L_EYE,
+		BODY_ZONE_PRECISE_MOUTH,
+		BODY_ZONE_PRECISE_NOSE,
+		BODY_ZONE_PRECISE_EARS,
+	)
+	return (zone in zones)
 
 /**
  * Return the zone or randomly, another valid zone
@@ -395,8 +406,7 @@
 /proc/findname(msg)
 	if(!istext(msg))
 		msg = "[msg]"
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
+	for(var/mob/M as anything in GLOB.mob_list)
 		if(M.real_name == msg)
 			return M
 	return 0
@@ -667,25 +677,26 @@
 		cmode = TRUE
 		playsound_local(src, 'sound/misc/combon.ogg', 100)
 		ADD_TRAIT(src, TRAIT_BLOCKED_DIAGONAL, "combat")
-		if(cmode_timer)
-			deltimer(cmode_timer)
+		deltimer(cmode_timer)
 
+	SEND_SIGNAL(src, COMSIG_MOB_TOGGLE_CMODE, cmode)
 	refresh_looping_ambience()
 	hud_used?.cmode_button?.update_appearance(UPDATE_ICON_STATE)
-
-/mob
-	var/last_aimhchange = 0
-	var/aimheight = 11
-	var/cmode_music = 'sound/music/cmode/combat.ogg'
 
 /mob/proc/aimheight_change(input)
 	var/old_zone = zone_selected
 	if(isnum(input))
 		aimheight = input
-	if(input == "up")
-		aimheight = min(aimheight+1, 19)
-	if(input == "down")
-		aimheight = max(aimheight-1, 1)
+	else
+		if(input == "up")
+			aimheight++
+		else if(input == "down")
+			aimheight--
+		//im too stupid to get the modular division to make this not an if statement
+		if(aimheight < 1)
+			aimheight = 19
+		else if(aimheight > 19)
+			aimheight = 1
 
 	switch(aimheight)
 		if(19)
@@ -777,11 +788,6 @@
 			aimheight = 2
 		if(BODY_ZONE_PRECISE_L_FOOT)
 			aimheight = 1
-
-/mob/proc/is_blind()
-	if(HAS_TRAIT(src, TRAIT_BLIND))
-		return TRUE
-	return eye_blind
 
 // moved out of admins.dm because things other than admin procs were calling this.
 /**
@@ -966,21 +972,6 @@
 /mob/proc/can_hear()
 	. = TRUE
 
-/**
- * Examine text for traits shared by multiple types.
- *
- * I wish examine was less copypasted. (oranges say, be the change you want to see buddy)
- */
-/mob/proc/common_trait_examine()
-	if(HAS_TRAIT(src, TRAIT_DISSECTED))
-		var/dissectionmsg = ""
-		if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Extraterrestrial Dissection"))
-			dissectionmsg = " via Extraterrestrial Dissection. It is no longer worth experimenting on"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Experimental Dissection"))
-			dissectionmsg = " via Experimental Dissection"
-		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Thorough Dissection"))
-			dissectionmsg = " via Thorough Dissection"
-		. += "<span class='notice'>This body has been dissected and analyzed[dissectionmsg].</span><br>"
 
 /**
  * Get the list of keywords for policy config
@@ -1001,13 +992,32 @@
 /mob/proc/can_see_reagents()
 	return stat == DEAD || has_unlimited_silicon_privilege //Dead guys and silicons can always see reagents
 
-/mob/living/carbon/human/proc/get_role_title()
+/mob/living/carbon/human/proc/get_role_title(ignore_pronouns = FALSE, steward_check = FALSE)
 	var/used_title
-	if(job)
-		var/datum/job/J = SSjob.GetJob(job)
-		if(!J)
-			return job
-		used_title = J.get_informed_title(src)
 	if(is_apprentice())
 		used_title = return_our_apprentice_name()
+	else if(job)
+		var/datum/job/job_datum = SSjob.GetJob(job)
+		if(QDELETED(job_datum))
+			return job
+		if(steward_check && (job_datum.department_flag & OUTSIDERS))
+			return "Visitor"
+		used_title = job_datum.get_informed_title(src, ignore_pronouns)
 	return used_title
+
+/mob/living/proc/recoil_camera(duration, backtime_duration, strength, angle)
+	if(!client || duration < 1)
+		return
+
+	strength *= world.icon_size
+
+	var/client/my_client = client
+	var/oldx = my_client.pixel_x
+	var/oldy = my_client.pixel_y
+
+	//get pixels to move the camera in an angle
+	var/mpx = sin(angle) * strength
+	var/mpy = cos(angle) * strength
+
+	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
+	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)

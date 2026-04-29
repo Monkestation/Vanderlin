@@ -10,9 +10,10 @@
 	throw_speed = 0.75
 	grid_width = 32
 	grid_height = 64
+	item_weight = 274 GRAMS
 	var/datum_to_spread = /datum/effect_system/smoke_spread
 
-/obj/item/smokebomb/attack(mob/living/M, mob/living/user, params)
+/obj/item/smokebomb/attack_self(mob/user, list/modifiers)
 	. = ..()
 	explode()
 
@@ -30,7 +31,7 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	playsound(src.loc, 'sound/items/smokebomb.ogg' , 50)
+	playsound(src, 'sound/items/smokebomb.ogg' , 50)
 	var/radius = 3
 	var/datum/effect_system/smoke_spread/S = new datum_to_spread
 	S.set_up(radius, T)
@@ -94,13 +95,13 @@
 			return
 		scripture_wanted = scripture_required[scripture_heard++]
 
-/obj/item/holy_grenade/attack_self(mob/user, params)
+/obj/item/holy_grenade/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(scripture_heard < length(scripture_required))
 		to_chat(user, span_notice("I pull the holy pin... but it doesn't release! Bring forth the Book of Armaments!"))
 		return
 	to_chat(user, span_userdanger("I pull the holy pin! Count to three!"))
-	playsound(get_turf(user), 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
+	playsound(user, 'sound/foley/industrial/clunk.ogg', 40, FALSE, -1)
 	icon_state = "[icon_state]_armed"
 	primed = TRUE
 	START_PROCESSING(SSfastprocess, src)

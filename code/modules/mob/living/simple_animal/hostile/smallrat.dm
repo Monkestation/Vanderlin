@@ -3,8 +3,8 @@
 	desc = ""
 	icon_state = "srat"
 	icon = 'icons/roguetown/mob/monster/rat.dmi'
-	list_reagents = list(/datum/reagent/consumable/nutriment = 5)
-	foodtype = RAW
+	nutrition = MINCE_NUTRITION
+	foodtype = RAW | MEAT
 	verb_say = "squeaks"
 	verb_yell = "squeaks"
 	pass_flags = PASSDOORS
@@ -15,36 +15,38 @@
 	sellprice = 0
 	rotprocess = null
 
-/obj/item/reagent_containers/food/snacks/smallrat/onbite(mob/living/carbon/human/user)
-	if(loc == user)
-		if(user.clan)
-			if(do_after(user, 3 DECISECONDS, src))
-				user.visible_message("<span class='warning'>[user] drinks from [src]!</span>",\
-				"<span class='warning'>I drink from [src].</span>")
-				playsound(user.loc, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
-
-				user.adjust_bloodpool(50)
-				var/blood_handle = BLOOD_PREFERENCE_RATS
-				if(dead)
-					blood_handle |= BLOOD_PREFERENCE_DEAD
-				else
-					blood_handle |= BLOOD_PREFERENCE_LIVING
-				user.clan.handle_bloodsuck(user, blood_handle)
-				playsound(get_turf(user), 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
-				if(dead)
-					qdel(src)
-					return
-				icon_state = "srat1"
-				rotprocess = SHELFLIFE_SHORT
-				dead = TRUE
-			return
-	return ..()
+/obj/item/reagent_containers/food/snacks/smallrat/onbite(mob/living/user)
+	. = ..()
+	if(.)
+		return
+	if(loc != user)
+		return TRUE
+	if(!user.clan)
+		return TRUE
+	if(!do_after(user, 3 DECISECONDS, src))
+		return TRUE
+	user.visible_message(span_warning("[user] drinks from [src]!"),\
+	span_warning("I drink from [src]."))
+	playsound(user, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
+	var/blood_handle = BLOOD_PREFERENCE_RATS
+	if(dead)
+		blood_handle |= BLOOD_PREFERENCE_DEAD
+	else
+		blood_handle |= BLOOD_PREFERENCE_LIVING
+	user.adjust_bloodpool(user.clan.handle_bloodsuck(user, blood_handle, 150))
+	playsound(user, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
+	if(dead)
+		qdel(src)
+		return TRUE
+	icon_state = "srat1"
+	rotprocess = SHELFLIFE_SHORT
+	dead = TRUE
 
 /obj/item/reagent_containers/food/snacks/friedrat
 	name = "fried rat"
 	icon_state = "cookedrat"
 	bitesize = 2
-	list_reagents = list(/datum/reagent/consumable/nutriment = 4)
+	nutrition = MINCE_NUTRITION * COOK_MOD
 	w_class = WEIGHT_CLASS_TINY
 	tastes = list("burnt flesh" = 1)
 	rotprocess = SHELFLIFE_SHORT
@@ -94,7 +96,7 @@
 		if(!isturf(loc))
 			if(isliving(user))
 				var/mob/living/L = user
-				if(prob(L.STASPD * 1.5))
+				if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 1.5))
 					..()
 				else
 					if(item_flags & IN_STORAGE)
@@ -143,11 +145,11 @@
 		return 1
 	return ..()
 
-/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, params)
+/obj/item/reagent_containers/food/snacks/smallrat/attackby(obj/item/I, mob/user, list/modifiers)
 	if(!dead)
 		if(isliving(user))
 			var/mob/living/L = user
-			if(prob(L.STASPD * 2))
+			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
 				..()
 			else
 				if(isturf(loc))

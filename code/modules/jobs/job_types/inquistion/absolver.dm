@@ -1,11 +1,29 @@
+/datum/attribute_holder/sheet/job/absolver
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 3,
+		STAT_SPEED = -2,
+		STAT_CONSTITUTION = 7,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 30,
+		/datum/attribute/skill/labor/fishing = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/craft/crafting = 30,
+		/datum/attribute/skill/magic/holy = 20
+	)
+
 /datum/job/absolver
-	title = "Absolver"
+	title = JOB_ABSOLVER
 	department_flag = INQUISITION
 	faction = "Station"
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1
-	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
+	allowed_races = list(SPEC_ID_HUMEN)
 	//You MUST have a Psydonite character to start. Just so people don't get japed into Oops Suddenly Psydon!
 	allowed_patrons = list(/datum/patron/psydon) // no e. psydon, according to ook
 	tutorial = "The Oratorium claims you are naught more than a 'cleric', but you know the truth; you are a sacrificial lamb. Your hands, unmarred through prayer and pacifism, have been gifted with the power to manipulate blood - to siphon away the wounds of others, so that you may endure in their stead. Let your censer's light shepherd the Inquisitor's retinue forth, lest they're led astray by wrath and temptation."
@@ -17,6 +35,11 @@
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
+	job_bitflag = BITFLAG_CHURCH
+
+	mind_traits = list(
+		TRAIT_KNOW_INQUISITION_DOORS
+	)
 	traits = list(
 		TRAIT_NOPAINSTUN,
 		TRAIT_PACIFISM,
@@ -30,38 +53,23 @@
 		TRAIT_FOREIGNER,
 	)
 
-	jobstats = list(
-		STATKEY_END = 3,
-		STATKEY_SPD = -2,
-		STATKEY_CON = 7,
-	)
-
 	spells = list(
 		/datum/action/cooldown/spell/psydonlux_tamper,
 		/datum/action/cooldown/spell/psydonabsolve,
 		/datum/action/cooldown/spell/diagnose,
 	)
 
-	skills = list(
-		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
-		/datum/skill/misc/sewing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
-		/datum/skill/misc/medicine = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/cooking = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/labor/fishing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/magic/holy = SKILL_LEVEL_APPRENTICE, // they need this so Psydon's Grace works
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/absolver
 
-	languages = list(/datum/language/oldpsydonic)
+	languages = list(/datum/language/oldpsydonic, /datum/language/newpsydonic)
 
 	exp_type = list(EXP_TYPE_INQUISITION)
 	exp_types_granted = list(EXP_TYPE_INQUISITION)
 	exp_requirements = list(
 		EXP_TYPE_INQUISITION = 600
+	)
+	verbs = list(
+		/mob/living/carbon/human/proc/view_inquisition
 	)
 
 
@@ -70,8 +78,6 @@
 /datum/job/absolver/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Sanctae", 0, "Absolver")
-
-	spawned.verbs |= /mob/living/carbon/human/proc/view_inquisition
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()
@@ -86,8 +92,14 @@
 	species.native_language = "Old Psydonic"
 	species.accent_language = species.get_accent(species.native_language)
 
+/datum/job/absolver/remove_job(mob/living/carbon/human/spawned)
+	. = ..()
+	if(.)
+		spawned.hud_used?.shutdown_bloodpool()
+		spawned.maxbloodpool = initial(spawned.maxbloodpool)
+
 /datum/outfit/absolver
-	name = "Absolver"
+	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
 	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser

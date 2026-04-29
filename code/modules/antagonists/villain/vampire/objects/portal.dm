@@ -71,7 +71,7 @@
 /obj/structure/vampire/portal/Initialize()
 	. = ..()
 	set_light(3, 2, 20, l_color = LIGHT_COLOR_BLOOD_MAGIC)
-	playsound(loc, 'sound/misc/portalopen.ogg', 100, FALSE, pressure_affected = FALSE)
+	playsound(src, 'sound/misc/portalopen.ogg', 100, FALSE, pressure_affected = FALSE)
 
 	addtimer(CALLBACK(src, PROC_REF(delete)), 60 SECONDS)
 
@@ -83,7 +83,7 @@
 	. = ..()
 	if(isliving(AM))
 		for(var/obj/effect/landmark/vteleport/dest in GLOB.landmarks_list)
-			playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			playsound(src, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
 			AM.forceMove(dest.loc)
 			break
 
@@ -126,6 +126,7 @@
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
 	var/uses = 3
+	var/can_local_portal = FALSE
 
 /obj/item/clothing/neck/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
@@ -135,10 +136,11 @@
 	GLOB.vampire_objects -= src
 	return ..()
 
-/* DISABLED FOR NOW
-/obj/item/clothing/neck/portalamulet/attack_self(mob/user, params)
+/obj/item/clothing/neck/portalamulet/attack_self(mob/user, list/modifiers)
 	. = ..()
-	if(alert(user, "Create a portal?", "PORTAL GEM", "Yes", "No") == "Yes")
+	if(!can_local_portal)
+		return
+	if(tgui_alert(user, "Create a portal?", "PORTAL GEM", list("Yes", "No")) == "Yes")
 		uses -= 1
 		var/obj/effect/landmark/vteleportdestination/Vamp = new(loc)
 		Vamp.amuletname = name
@@ -148,4 +150,4 @@
 		if(uses <= 0)
 			visible_message("[src] shatters!")
 			qdel(src)
-*/
+

@@ -202,7 +202,7 @@
 ///The volume of the grind results is multiplied by the fish' weight and divided by this.
 #define FISH_GRIND_RESULTS_WEIGHT_DIVISOR 500
 ///The number of fillets is multiplied by the fish' size and divided by this.
-#define FISH_FILLET_NUMBER_SIZE_DIVISOR 60
+#define FISH_FILLET_NUMBER_SIZE_DIVISOR 30
 
 ///The slowdown of the fish when carried begins at this value
 #define FISH_WEIGHT_SLOWDOWN 2100
@@ -395,6 +395,8 @@
 #define TRAIT_FISHING_SPOT "fishing_spot"
 ///This trait gets you a list of fishes that can be caught when examining a fishing spot.
 #define TRAIT_EXAMINE_FISHING_SPOT "examine_fishing_spot"
+/// Atoms with this trait can be right-clicked with a fish to release them, presumably back in the fishing spot they were caught from.
+#define TRAIT_CATCH_AND_RELEASE "catch_and_release"
 
 ///coming from a fish trait datum.
 #define FISH_TRAIT_DATUM "fish_trait_datum"

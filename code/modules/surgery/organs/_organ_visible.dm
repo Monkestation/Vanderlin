@@ -18,7 +18,7 @@
 	/// Type of organ DNA that this organ will create.
 	var/organ_dna_type = /datum/organ_dna
 	/// Draw icon as overlays from the acessory or bodypart icons
-	var/use_mob_sprite_as_obj_sprite = TRUE
+	var/use_mob_sprite_as_obj_sprite = FALSE
 
 /// Gets organ description for when its attached to a bodypart.
 /obj/item/organ/proc/get_bodypart_desc()
@@ -82,8 +82,19 @@
 /obj/item/organ/proc/bodypart_overlays(mutable_appearance/standing)
 	return
 
+/** get_availability
+ * returns whether the species should innately have this organ.
+ *
+ * regenerate organs works with generic organs, so we need to get whether it can accept certain organs just by what this returns.
+ * This is set to return true or false, depending on if a species has a trait that would nulify the purpose of the organ.
+ * For example, lungs won't be given if you have NO_BREATH, stomachs check for NO_HUNGER, and livers check for NO_METABOLISM.
+ * If you want a carbon to have a trait that normally blocks an organ but still want the organ. Attach the trait to the organ using the organ_traits var
+ * Arguments:
+ * owner_species - species, needed to return the mutant slot as true or false. stomach set to null means it shouldn't have one.
+ * owner_mob - for more specific checks, like nightmares.
+ */
 /obj/item/organ/proc/get_availability(datum/species/owner_species)
-	return TRUE
+	return slot in owner_species.organs
 
 /// Sets an accessory type and optionally colors too.
 /obj/item/organ/proc/set_accessory_type(new_accessory_type, colors)

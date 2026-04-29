@@ -33,7 +33,7 @@
 	for(var/mob/living/L in range(ensnare_radius, victim))
 		if(L.can_block_magic(MAGIC_RESISTANCE))
 			victim.visible_message(span_warning("The tendrils of force can't seem to latch onto [L] "))
-			playsound(get_turf(L), 'sound/magic/magic_nulled.ogg', 100)
+			playsound(L, 'sound/magic/magic_nulled.ogg', 100)
 			return
 		L.Immobilize(duration)
 		L.OffBalance(duration)

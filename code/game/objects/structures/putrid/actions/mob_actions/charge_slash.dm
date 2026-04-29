@@ -99,7 +99,7 @@
 
 	RegisterSignal(new_loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
 	RegisterSignal(new_loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
-	RegisterSignal(new_loop, COMSIG_PARENT_QDELETING, PROC_REF(charge_end))
+	RegisterSignal(new_loop, COMSIG_QDELETING, PROC_REF(charge_end))
 
 	sleep(time_to_hit + charge_speed)
 	charger.setDir(dir)
@@ -180,7 +180,7 @@
 	)
 	living_target.Knockdown(0.6 SECONDS)
 	living_target.apply_damage(damage_dealt, BRUTE)
-	playsound(get_turf(living_target),  pick('sound/combat/hits/bladed/genslash (1).ogg','sound/combat/hits/bladed/genslash (2).ogg','sound/combat/hits/bladed/genslash (3).ogg'), 75, TRUE)
+	playsound(living_target,  pick('sound/combat/hits/bladed/genslash (1).ogg','sound/combat/hits/bladed/genslash (2).ogg','sound/combat/hits/bladed/genslash (3).ogg'), 75, TRUE)
 
 /datum/action/cooldown/meatvine/personal/charge_slash/proc/enter_slash_ready_state()
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/user = owner

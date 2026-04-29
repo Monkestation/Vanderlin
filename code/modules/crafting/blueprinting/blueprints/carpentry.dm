@@ -1,7 +1,7 @@
 
 /datum/blueprint_recipe/carpentry
 	abstract_type = /datum/blueprint_recipe/carpentry
-	skillcraft = /datum/skill/craft/carpentry
+	skillcraft = /datum/attribute/skill/craft/carpentry
 	category = "Carpentry"
 	construct_tool = /obj/item/weapon/hammer
 	craftsound = 'sound/foley/Building-01.ogg'
@@ -32,6 +32,18 @@
 	required_materials = list(/obj/item/grown/log/tree/small = 2)
 	supports_directions = TRUE
 	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/fish_mount
+	name = "Fish Mount"
+	desc = "Wooden mount to showoff your fish."
+	result_type = /obj/structure/fish_mount
+	required_materials = list(/obj/item/grown/log/tree/small = 2)
+	category = "Wall Fixtures"
+	floor_object = FALSE
+	check_adjacent_wall = TRUE
+	supports_directions = TRUE
+	place_on_wall = TRUE
+
 
 /datum/blueprint_recipe/carpentry/deadbolt_door
 	name = "wooden door (deadbolt)"
@@ -467,16 +479,6 @@
 	)
 	craftdiff = 1
 
-/datum/blueprint_recipe/carpentry/noose
-	name = "noose"
-	desc = "hangs from the ceiling."
-	result_type = /obj/structure/noose
-	required_materials = list(
-		/obj/item/rope = 1
-	)
-	build_time = 4 SECONDS
-	requires_ceiling = TRUE
-
 /datum/blueprint_recipe/carpentry/apiary
 	name = "Apiary"
 	desc = "A home for bees."
@@ -498,3 +500,12 @@
 	)
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/keyrack
+	name = "key rack"
+	desc = "A cupboard for securing keys."
+	result_type = /obj/structure/closet/keyrack
+	required_materials = list(
+		/obj/item/natural/wood/plank = 2,
+		/obj/item/ingot/iron = 1
+	)
+	craftdiff = 2

@@ -14,7 +14,6 @@
 	var/already_restored = FALSE
 	/// Do we keep the caster's skill levels and experience for the mob?
 	var/keep_skills = TRUE
-	var/datum/skill_holder/stored_skills
 
 /datum/status_effect/shapechange_mob/on_creation(mob/living/new_owner, mob/living/caster, keep_skills = TRUE)
 	// If any type or subtype of shapeshift mob is on the new_owner already throw an error and self-delete
@@ -37,23 +36,25 @@
 	. = ..()
 	owner.gender = caster_mob.gender
 	owner.regenerate_icons()
-	caster_mob.mind?.transfer_to(owner)
+
+	var/datum/attribute_holder/temporary_holder
+	if(!keep_skills)
+		temporary_holder = caster_mob.attributes
+		temporary_holder?.set_parent(null)
+	caster_mob.mind?.transfer_to(owner) // attribute_holder will try to set new parent upon mind transfer
+	if(temporary_holder)
+		temporary_holder.set_parent(caster_mob)
+
 	caster_mob.forceMove(owner)
 	ADD_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
-	owner.flags_1 |= PREVENT_CONTENTS_EXPLOSION_1
+	ADD_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
 	caster_mob.apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
 
 	RegisterSignal(owner, COMSIG_LIVING_PRE_WABBAJACKED, PROC_REF(on_pre_wabbajack))
 	RegisterSignal(owner, COMSIG_PRE_MOB_CHANGED_TYPE, PROC_REF(on_pre_type_change))
 	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_shape_death))
 	RegisterSignal(caster_mob, COMSIG_LIVING_DEATH, PROC_REF(on_caster_death))
-	RegisterSignal(caster_mob, COMSIG_PARENT_QDELETING, PROC_REF(on_caster_deleted))
-
-	if(!keep_skills)
-		stored_skills = owner.ensure_skills()
-		stored_skills.current = null
-		owner.skills = null
-		owner.ensure_skills() // reset owner's skill holder
+	RegisterSignal(caster_mob, COMSIG_QDELETING, PROC_REF(on_caster_deleted))
 
 	SEND_SIGNAL(caster_mob, COMSIG_LIVING_SHAPESHIFTED, owner)
 	return TRUE
@@ -99,16 +100,18 @@
 
 	already_restored = TRUE
 	UnregisterSignal(owner, list(COMSIG_LIVING_PRE_WABBAJACKED, COMSIG_LIVING_DEATH))
-	UnregisterSignal(caster_mob, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH))
+	UnregisterSignal(caster_mob, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH))
 
 	caster_mob.forceMove(owner.loc)
 	REMOVE_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, id)
+	REMOVE_TRAIT(caster_mob, TRAIT_BOMBIMMUNE, id)
 	caster_mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
-	owner.mind?.transfer_to(caster_mob)
 
+	// We aren't keeping skills, so trash the owner's skills. Don't qdel in case we're caching the owner's skill holder for some reason.
 	if(!keep_skills)
-		stored_skills.set_current(caster_mob)
-		stored_skills = null
+		owner.attributes?.set_parent(null)
+
+	owner.mind?.transfer_to(caster_mob)
 
 	if(kill_caster_after)
 		caster_mob.death()
@@ -150,7 +153,7 @@
 	else
 		owner.death()
 
-/// Signal proc for [COMSIG_PARENT_QDELETING] from our caster, delete us / our owner if we get deleted
+/// Signal proc for [COMSIG_QDELETING] from our caster, delete us / our owner if we get deleted
 /datum/status_effect/shapechange_mob/proc/on_caster_deleted(datum/source)
 	SIGNAL_HANDLER
 
@@ -215,12 +218,14 @@
 	if(QDELETED(source_spell) || !source_spell.convert_damage)
 		return
 
-	// if(caster_mob.stat != DEAD)
-	// 	caster_mob.revive(full_heal = TRUE)
+	if(caster_mob.stat != DEAD)
+		caster_mob.revive(HEAL_DAMAGE|HEAL_BLOOD)
 
-	// var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
-	var/damage_to_apply = (owner.maxHealth - owner.health)
-	caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE)
+		var/damage_to_apply = caster_mob.maxHealth * ((owner.maxHealth - owner.health) / owner.maxHealth)
+		caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE)
+
+	if(iscarbon(owner))
+		caster_mob.blood_volume = owner.blood_volume
 
 /datum/status_effect/shapechange_mob/from_spell/on_shape_death(datum/source, gibbed)
 	var/datum/action/cooldown/spell/undirected/shapeshift/source_spell = source_weakref.resolve()
@@ -272,4 +277,3 @@
 		return
 
 	restore_caster(TRUE)
-

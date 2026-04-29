@@ -7,32 +7,41 @@
 
 /obj/item/reagent_containers/food/snacks/veg
 	faretype = FARE_POOR
+	nutrition = VEGGIE_NUTRITION
 
 /*	..................   Onion slice   ................... */
 /obj/item/reagent_containers/food/snacks/veg/onion_sliced
 	name = "sliced onion"
 	icon_state = "onion_sliced"
 	slices_num = 0
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
 	name = "shredded cabbage"
 	icon_state = "cabbage_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 300 GRAMS
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/veg/potato_sliced
 	name = "potato cuts"
 	icon_state = "potato_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 /*	..................   Turnip   ................... */
 /obj/item/reagent_containers/food/snacks/veg/turnip_sliced
 	name = "cleaned turnip"
 	icon_state = "turnip_sliced"
+	slice_skill = /datum/attribute/skill/craft/cooking/preparation
+	item_weight = 70 GRAMS
 
 
 /*	..................		Roasted seeds		................... */
 /obj/item/reagent_containers/food/snacks/roastseeds
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR - 1)
+	nutrition = BERRY_NUTRITION * COOK_MOD
 	tastes = list("roasted seeds" = 1)
 	name = "roasted seeds"
 	desc = "Treats for both rats and humens."
@@ -41,12 +50,12 @@
 	color = "#e5b175"
 	foodtype = VEGETABLES
 	rotprocess = null
-	eat_effect = /datum/status_effect/buff/foodbuff
 	faretype = FARE_POOR
+	item_weight = 5 GRAMS
 
 /*	..................		Salted seeds		................... */
 /obj/item/reagent_containers/food/snacks/saltseeds
-	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_POOR)
+	nutrition =  (BERRY_NUTRITION+1) * COOK_MOD
 	tastes = list("salted roasted seeds" = 1)
 	name = "salted roasted seeds"
 	desc = "Too salty for rats, delectable for humens."
@@ -57,3 +66,31 @@
 	rotprocess = null
 	eat_effect = /datum/status_effect/buff/foodbuff
 	faretype = FARE_NEUTRAL
+	item_weight = 5 GRAMS
+
+/*	..................	Cocaudo Half	................... */
+
+/obj/item/reagent_containers/food/snacks/veg/cocaudo_half
+	name = "cocaudo half"
+	icon_state = "cocaudo_split"
+	tastes = list("savory goo" = 1)
+	trash = /obj/item/reagent_containers/glass/cup/cocaudo_husk
+	item_weight = 450 GRAMS
+
+/obj/item/reagent_containers/food/snacks/veg/cocaudo_half/attackby(obj/item/I, mob/living/user, list/modifiers)
+	. = ..()
+	if(.)
+		return
+	if(user.mind)
+		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8))
+	if(istype(I, /obj/item/kitchen/spoon))
+		playsound(user, 'sound/items/wood_sharpen.ogg', 100, TRUE, -1)
+		to_chat(user, span_notice("Scooping out the [src]..."))
+		if(do_after(user, short_cooktime, src))
+			new /obj/item/reagent_containers/glass/cup/cocaudo_husk(loc)
+			new /obj/item/neuFarm/seed/cocaudo(loc)
+			new /obj/item/neuFarm/seed/cocaudo(loc)
+			new /obj/item/reagent_containers/food/snacks/cocaumole(loc)
+			user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
+			user.nobles_seen_servant_work()
+			qdel(src)

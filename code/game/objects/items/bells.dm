@@ -12,13 +12,14 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 5
 	hitsound = 'sound/items/bsmith1.ogg'
+	item_weight = 600 GRAMS
 	COOLDOWN_DECLARE(bell_ring)
 
-/obj/item/handheld_bell/attack_self(mob/user, params)
+/obj/item/handheld_bell/attack_self(mob/user, list/modifiers)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, bell_ring))
 		return
-	playsound(src.loc, 'sound/misc/handbell.ogg', 50, 1)
+	playsound(src, 'sound/misc/handbell.ogg', 50, 1)
 
 	user.visible_message("<span class='notice'>[user] rings [src].</span>", span_notice("You ring [src]."))
 	for(var/mob/M in view(10, src.loc))
@@ -125,7 +126,7 @@
 			new /obj/structure/bell_barrier(adjacent_turf)
 */
 
-/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user)
+/obj/structure/stationary_bell/attackby(obj/item/used_item, mob/user, list/modifiers)
 	if(istype(used_item, /obj/item/weapon/mace/church))
 		if(!COOLDOWN_FINISHED(src, bell_ring))
 			return
@@ -149,6 +150,7 @@
 	dropshrink = 0.5
 	pickup_sound = SFX_JINGLE_BELLS
 	drop_sound = SFX_JINGLE_BELLS
+	item_weight = 100 GRAMS
 
 /obj/item/jingle_bells/Initialize()
 	. = ..()

@@ -1,5 +1,5 @@
 /datum/job/gatemaster
-	title = "Gatemaster"
+	title = JOB_GATEMASTER
 	tutorial = "Tales speak of the Gatemaster's legendary ability to stand still at a gate and ask people questions. \
 	Some may mock you as lazy sitting on your comfy chair all day, \
 	but the lord themself entrusted you with who is and isn't allowed behind those gates. \
@@ -12,7 +12,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/gatemaster
 	advclass_cat_rolls = list(CTAG_GATEMASTER = 20)
@@ -27,16 +27,15 @@
 		EXP_TYPE_LIVING = 300,
 		EXP_TYPE_GARRISON = 300
 	)
+	honorary = JOB_GATEMASTER
 
 	traits = list(
 		TRAIT_STEELHEARTED,
-		TRAIT_KNOWBANDITS
 	)
-
-
-/datum/job/gatemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.verbs |= /mob/proc/haltyell
+	mind_traits = list(TRAIT_KNOWBANDITS)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/gatemaster
 	name = "Gatemaster Base"
@@ -56,6 +55,25 @@
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
+/datum/attribute_holder/sheet/job/gatemaster/whip
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/sneaking = 10
+	)
+
 /datum/job/advclass/gatemaster/gatemaster_whip
 	title = "Chainguard Gatemaster"
 	tutorial = "Metal chimes in your hands, their skin rough from those heavy chains you pull. \
@@ -65,24 +83,7 @@
 	outfit = /datum/outfit/gatemaster/whip
 	category_tags = list(CTAG_GATEMASTER)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_END = 2,
-		STATKEY_PER = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/whipsflails = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/misc/sneaking = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gatemaster/whip
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -96,11 +97,30 @@
 	armor = /obj/item/clothing/armor/leather/jacket/gatemaster_jacket/armored
 	beltr = /obj/item/weapon/mace/cudgel
 	beltl = /obj/item/weapon/whip/chain
+	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/keyring/manorguard = 1,
 		/obj/item/weapon/knife/dagger/steel/special = 1,
 		/obj/item/rope/chain = 1
+	)
+
+/datum/attribute_holder/sheet/job/gatemaster/mace
+	raw_attribute_list = list(
+		STAT_STRENGTH = 2,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_SPEED = -1,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/crafting = 10
 	)
 
 /datum/job/advclass/gatemaster/gatemaster_mace
@@ -112,23 +132,7 @@
 	outfit = /datum/outfit/gatemaster/mace
 	category_tags = list(CTAG_GATEMASTER)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 2,
-		STATKEY_SPD = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/axesmaces = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 1,
-		/datum/skill/misc/athletics = 3,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/crafting = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gatemaster/mace
 
 	traits = list(
 		TRAIT_MEDIUMARMOR
@@ -148,6 +152,24 @@
 		/obj/item/rope/chain = 1
 	)
 
+/datum/attribute_holder/sheet/job/gatemaster/bow
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/craft/crafting = 10
+	)
+
 /datum/job/advclass/gatemaster/gatemaster_bow
 	title = "Archer Gatemaster"
 	tutorial = "Many may try to sneak past your post, thinking you wont see them. \
@@ -156,25 +178,7 @@
 	outfit = /datum/outfit/gatemaster/bow
 	category_tags = list(CTAG_GATEMASTER)
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_PER = 2,
-		STATKEY_END = -1
-	)
-
-	skills = list(
-		/datum/skill/combat/axesmaces = 2,
-		/datum/skill/combat/knives = 2,
-		/datum/skill/combat/bows = 4,
-		/datum/skill/combat/crossbows = 4,
-		/datum/skill/combat/wrestling = 3,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/climbing = 3,
-		/datum/skill/misc/athletics = 2,
-		/datum/skill/misc/reading = 2,
-		/datum/skill/craft/crafting = 1
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/gatemaster/bow
 
 	traits = list(
 		TRAIT_DODGEEXPERT
@@ -198,8 +202,8 @@
 	var/weapontypec = pickweight(list("Bow" = 4, "Crossbow" = 6))
 	switch(weapontypec)
 		if("Bow")
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backr = /obj/item/gun/ballistic/bow/long
 			beltl = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backr = /obj/item/gun/ballistic/bow/cross
 			beltl = /obj/item/ammo_holder/quiver/bolts

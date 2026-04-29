@@ -20,17 +20,17 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 	var/list/talismans = list()
 	var/current_page = PAGE_FOREWORD
 
-/obj/item/tome/New()
-	..()
-	GLOB.arcane_tomes.Add(src)
+/obj/item/tome/Initialize(mapload)
+	. = ..()
+	GLOB.arcane_tomes |= src
+
+/obj/item/tome/Destroy()
+	GLOB.arcane_tomes -= src
+	QDEL_LIST(talismans)
+	return ..()
 
 /obj/item/tome/salt_act()
 	fire_act(1000, 200)
-
-/obj/item/tome/Destroy()
-	GLOB.arcane_tomes.Remove(src)
-	QDEL_LIST(talismans)
-	. = ..()
 
 /obj/item/tome/proc/tome_text()
 	var/page_data=null
@@ -143,7 +143,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 
 	usr << browse(tome_text(), "window=arcanetome;size=900x600")
 
-/obj/item/tome/attack(mob/living/M, mob/living/user)
+/obj/item/tome/attack(mob/living/M, mob/living/user, list/modifiers)
 	/*
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
@@ -167,7 +167,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 /obj/item/tome/attack_hand(mob/living/user)
 	if(!user.clan && state == TOME_OPEN)
 		to_chat(user, span_warning("As you reach to pick up \the [src], you feel a searing heat inside of you!") )
-		playsound(loc, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
 		user.Knockdown(5)
 		user.Stun(5)
 		flick("tome-stun", src)
@@ -187,7 +187,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 /obj/item/tome/attack_self(mob/living/user)
 	if(!user.clan)//Too dumb to live.
 		to_chat(user, span_warning("You try to peek inside \the [src], only to feel a discharge of energy and a searing heat inside of you!") )
-		playsound(loc, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1, 0, 0, 0)
 		user.Knockdown(5)
 		user.Stun(5)
 		if (state == TOME_OPEN)
@@ -223,7 +223,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 		else
 			to_chat(user, span_warning("You need to get closer to interact with the pages.") )
 
-/obj/item/tome/attackby(obj/item/I, mob/user)
+/obj/item/tome/attackby(obj/item/I, mob/user, list/modifiers)
 	if (..())
 		return
 	if (istype(I, /obj/item/talisman))
@@ -237,7 +237,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 		else
 			to_chat(user, span_warning("This tome cannot contain any more talismans. Use or remove some first.") )
 
-/obj/item/tome/AltClick(mob/user)
+/obj/item/tome/AltClick(mob/user, list/modifiers)
 	var/list/choices=list()
 	var/datum/rune_spell/instance
 	var/list/choice_to_talisman=list()

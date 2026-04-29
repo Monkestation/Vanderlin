@@ -29,7 +29,7 @@
 /datum/chimeric_node/input/gluttony/organ
 	name = "graggerite"
 	weight = 5
-	triggered_food_types = list(/obj/item/reagent_containers/food/snacks/organ)
+	triggered_food_types = list(/obj/item/reagent_containers/food/snacks/meat/organ)
 
 /datum/chimeric_node/input/gluttony/cheese
 	name = "rous"

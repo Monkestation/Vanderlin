@@ -44,7 +44,7 @@
 	target_soil.bless_soil()
 	new /obj/effect/temp_visual/bless_swirl(get_turf(target_soil))
 	agrio.visible_message(span_greentext("[agrio] blesses [target_soil]."))
-	playsound(get_turf(agrio), 'sound/items/gem.ogg', 60, TRUE)
+	playsound(agrio, 'sound/items/gem.ogg', 60, TRUE)
 	addtimer(CALLBACK(agrio, TYPE_PROC_REF(/mob/living/simple_animal/hostile/retaliate/fae/agriopylon, change_agriopylon_state), AGRIOPYLON_STATE_IDLE), 2 SECONDS)
 
 	controller.set_blackboard_key(BB_AGRIOPYLON_BLESS_COOLDOWN, world.time + cooldown)

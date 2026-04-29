@@ -33,7 +33,7 @@
 	for(var/mob/living/carbon/human/child in GLOB.player_list)
 		if(child.age != AGE_CHILD || child.stat == DEAD || !child.client)
 			continue
-		if(!child.family_datum && (child.job == "Orphan" && istype(child.mind?.assigned_role, /datum/job/orphan)))
+		if(!child.family_datum && (child.job == JOB_ORPHAN && istype(child.mind?.assigned_role, /datum/job/orphan)))
 			orphans++
 		else if(!child.family_datum || !length(child.family_member_datum?.parents))
 			potential_orphans++
@@ -60,7 +60,7 @@
 	for(var/mob/living/carbon/human/child in GLOB.player_list)
 		if(child.age != AGE_CHILD || child.stat == DEAD || !child.client)
 			continue
-		if(!child.family_datum && (child.job == "Orphan" && istype(child.mind?.assigned_role, /datum/job/orphan)))
+		if(!child.family_datum && (child.job == JOB_ORPHAN && istype(child.mind?.assigned_role, /datum/job/orphan)))
 			orphans++
 		else if(!child.family_datum || !length(child.family_member_datum?.parents))
 			potential_orphans++

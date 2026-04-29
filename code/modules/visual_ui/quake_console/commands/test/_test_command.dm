@@ -35,7 +35,7 @@
 /datum/console_command/tester/proc/generate_testing_datums()
 	testing_vars = list()
 	for(var/datum/test_situation/test as anything  in subtypesof(/datum/test_situation))
-		if(is_abstract(test))
+		if(IS_ABSTRACT(test))
 			continue
 		var/datum/test_situation/testing = new test
 		testing_vars[testing.start] = testing

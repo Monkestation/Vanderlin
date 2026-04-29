@@ -42,6 +42,6 @@
 				L.OffBalance(2.5 SECONDS)
 				to_chat(L, span_warning("Chaotic energy disrupts your coordination!"))
 			if(5)
-				L.confused += 2 SECONDS
+				L.adjust_confusion(2 SECONDS)
 				to_chat(L, span_warning("Chaotic energy scrambles your thoughts!"))
 	last_used = world.time

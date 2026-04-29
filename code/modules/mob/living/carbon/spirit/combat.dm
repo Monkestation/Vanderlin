@@ -96,7 +96,7 @@
 		monkeyDrop(get_item_by_slot(C)) // remove the existing item if worn
 		addtimer(CALLBACK(src, PROC_REF(equip_to_appropriate_slot), C), 5)
 
-/mob/living/carbon/spirit/resist_restraints()
+/mob/living/carbon/spirit/resist_restraints(instant = FALSE)
 	var/obj/item/I = null
 	if(handcuffed)
 		I = handcuffed

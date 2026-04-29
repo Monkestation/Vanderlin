@@ -6,7 +6,7 @@
 
 /datum/mob_affix/reflective/apply_affix(mob/living/simple_animal/hostile/retaliate/target)
 	description = "Reflects [round(30 * intensity)]% damage back to attackers"
-	RegisterSignal(target, COMSIG_MOB_APPLY_DAMGE, PROC_REF(reflective_damaged))
+	RegisterSignal(target, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(reflective_damaged))
 
 /datum/mob_affix/reflective/proc/reflective_damaged(mob/living/simple_animal/hostile/retaliate/source, damage, damagetype, def_zone)
 	SIGNAL_HANDLER

@@ -65,7 +65,7 @@
 	if (user.clan)
 		trigger(user)
 
-/obj/item/talisman/attack(mob/living/target, mob/living/user)
+/obj/item/talisman/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(user.clan && spell_type)
 		var/datum/rune_spell/instance = spell_type
 		if (initial(instance.touch_cast))

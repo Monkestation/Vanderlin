@@ -15,7 +15,7 @@
 		to_chat(user, "<span class='notice'>The salt circle has been damaged...</span>")
 		return
 	if(H.virginity)
-		playsound(get_turf(user), 'sound/magic/timestop.ogg', 100, TRUE, -1)
+		playsound(user, 'sound/magic/timestop.ogg', 100, TRUE, -1)
 		new wall_type(get_step(src, EAST),user)
 		new wall_type(get_step(src, WEST),user)
 		new wall_type(get_step(src, NORTH),user)
@@ -31,7 +31,7 @@
 	else
 		to_chat(user, "<span class='notice'>The magick forces are beyond your control.</span>")
 
-/obj/structure/circle_protection/attackby(obj/item/I, mob/user, params)
+/obj/structure/circle_protection/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/powder/salt))
 		to_chat(user, "<span class='notice'>Restoring the salt lines...</span>")
 		if(do_after(user, 10 SECONDS, src))

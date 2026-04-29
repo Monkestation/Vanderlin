@@ -94,10 +94,9 @@
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	feel_turf(user)
 	add_fingerprint(user)
 
-/turf/closed/wall/attackby(obj/item/W, mob/user, params)
+/turf/closed/wall/attackby(obj/item/W, mob/user, list/modifiers)
 	user.changeNext_move(CLICK_CD_MELEE)
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>I don't have the dexterity to do this!</span>")

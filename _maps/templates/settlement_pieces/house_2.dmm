@@ -39,7 +39,7 @@
 /turf/open/floor/cobblerock,
 /area/template_noop)
 "J" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/template_noop)
 "R" = (
 /obj/machinery/light/fueled/campfire,

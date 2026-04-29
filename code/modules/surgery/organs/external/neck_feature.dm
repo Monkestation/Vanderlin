@@ -5,6 +5,7 @@
 
 	zone = BODY_ZONE_PRECISE_NECK
 	slot = ORGAN_SLOT_NECK_FEATURE
+	organ_efficiency = list(ORGAN_SLOT_NECK_FEATURE = 100)
 
 /obj/item/organ/neck_feature/medicator
 	name = "medicator fluff"

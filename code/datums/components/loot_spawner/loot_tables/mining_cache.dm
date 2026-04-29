@@ -1,7 +1,7 @@
 /datum/loot_table/mining_cache
 	name = "mining cache"
 	loot_table = list(
-		/datum/skill/labor/mining = list(
+		/datum/attribute/skill/labor/mining = list(
 			/obj/item/gem = 5,
 			/obj/item/ore/silver = 8,
 			3, // requires level 3 mining for gold ore

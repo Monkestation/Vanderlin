@@ -50,6 +50,7 @@
 #define ADMIN_PP(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];adminplayeropts=[REF(user)]'>PP</a>)"
 #define ADMIN_VV(atom) "(<a href='?_src_=vars;[HrefToken(TRUE)];Vars=[REF(atom)]'>VV</a>)"
 #define ADMIN_SM(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];subtlemessage=[REF(user)]'>SM</a>)"
+#define ADMIN_NRT(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];narrateto=[REF(user)]'>NRT</a>)"
 #define ADMIN_TP(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];traitor=[REF(user)]'>TP</a>)"
 #define ADMIN_KICK(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];boot2=[REF(user)]'>KICK</a>)"
 #define ADMIN_CENTCOM_REPLY(user) "(<a href='?_src_=holder;[HrefToken(TRUE)];CentComReply=[REF(user)]'>RPLY</a>)"
@@ -104,6 +105,7 @@
 #define ADMIN_PUNISHMENT_MEATPIE "Pie-ify"
 #define ADMIN_PUNISHMENT_GODHAND "God Hand"
 #define ADMIN_PUNISHMENT_FORCECOLLAR "Force Collar"
+#define ADMIN_PUNISHMENT_BLACK_BRIAR "Black Briar Blossom"
 
 #define AHELP_ACTIVE 1
 #define AHELP_CLOSED 2
@@ -136,3 +138,43 @@
 
 //How many things you can spawn at once with spawn verb/create panel
 #define ADMIN_SPAWN_CAP 100
+
+/// for [/proc/check_asay_links], if there are any actionable refs in the asay message, this index in the return list contains the new message text to be printed
+#define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"
+/// for [/proc/check_asay_links], if there are any admin pings in the asay message, this index in the return list contains a list of admins to ping
+#define ASAY_LINK_PINGED_ADMINS_INDEX "!pinged_admins"
+
+GLOBAL_LIST_INIT(admin_categories, build_admin_categories())
+
+#define ADMIN_CATEGORY_ADMIN "ADMIN"
+#define ADMIN_CATEGORY_MAINT "MAINT"
+
+/proc/build_admin_categories()
+	var/list/final_build = list()
+
+	var/list/lines = file2list("config/rank_categories.txt")
+	for(var/line in lines)
+		if(!length(line))
+			continue
+		if(copytext(line,1,2) == "#")
+			continue
+
+		//Split the line at every "-"
+		var/list/List = splittext(line, "-")
+		if(!length(List))
+			continue
+
+		var/rank = List[1]
+		var/list/categories = List.Copy(2)
+		for(var/category in categories)
+			var/clean_cat = uppertext(ckey(category))
+
+			if(!(clean_cat in final_build))
+				final_build[clean_cat] = list()
+
+			final_build[clean_cat] += ckey(rank)
+
+	return final_build
+
+GLOBAL_VAR(join_motd)
+GLOBAL_VAR(current_tms)

@@ -76,5 +76,5 @@
 				to_chat(L, "<span class='danger'>The whirlpool's currents slice into you!</span>")
 
 			// Slow down movement
-			L.add_movespeed_modifier("whirlpool", 1.5)
-			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, remove_movespeed_modifier), "whirlpool"), 1 SECONDS)
+			L.add_movespeed_modifier(MOVESPEED_ID_WHIRLPOOL, multiplicative_slowdown = 1.5)
+			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, remove_movespeed_modifier), MOVESPEED_ID_WHIRLPOOL), 1 SECONDS)

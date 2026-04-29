@@ -3,7 +3,7 @@
 	set invisibility = 0
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
-	if(!loc)
+	if(isnull(loc) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 	. = ..()
 	handle_emp_damage()
@@ -29,9 +29,3 @@
 
 /mob/living/brain/handle_status_effects()
 	return
-
-/mob/living/brain/handle_traits()
-	return
-
-
-

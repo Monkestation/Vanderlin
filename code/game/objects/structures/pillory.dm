@@ -17,11 +17,23 @@
 	var/latched = FALSE
 	var/base_icon = "pillory_single"
 
+/obj/structure/pillory/church
+	desc = "To keep the heretics locked!"
+	lock = /datum/lock/key/pillory/church
+
 /obj/structure/pillory/double
 	icon_state = "pillory_double"
 	base_icon = "pillory_double"
 
 /obj/structure/pillory/reinforced
+	icon_state = "pillory_reinforced"
+	base_icon = "pillory_reinforced"
+
+/obj/structure/pillory/church/double
+	icon_state = "pillory_double"
+	base_icon = "pillory_double"
+
+/obj/structure/pillory/church/reinforced
 	icon_state = "pillory_reinforced"
 	base_icon = "pillory_reinforced"
 
@@ -35,7 +47,7 @@
 	if(lock)
 		. += span_info("It is [locked() ? "locked" : "unlocked"].")
 
-/obj/structure/pillory/attack_hand_secondary(mob/living/user, params)
+/obj/structure/pillory/attack_hand_secondary(mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -66,7 +78,7 @@
 	user.visible_message( \
 		span_warning("[user] [latched ? "latches" : "unlatches"] \the [src]."), \
 		span_notice("I [latched ? "latch" : "unlatch"] \the [src]."))
-	playsound(get_turf(src), 'sound/foley/lock.ogg', 100)
+	playsound(src, 'sound/foley/lock.ogg', 100)
 
 /obj/structure/pillory/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
 	if (!anchored)
@@ -107,7 +119,7 @@
 				density = FALSE
 				switch(H.dna.species.id)
 					if (SPEC_ID_DWARF, SPEC_ID_GOBLIN)
-						H.set_mob_offsets("bed_buckle", _x = 0, _y = PILLORY_HEAD_OFFSET)
+						H.add_offsets(type, x_add = 0, y_add = PILLORY_HEAD_OFFSET)
 				icon_state = "[base_icon]-over"
 			else
 				unbuckle_all_mobs()
@@ -120,13 +132,13 @@
 
 /obj/structure/pillory/post_unbuckle_mob(mob/living/M)
 	M.regenerate_icons()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 	icon_state = "[base_icon]"
 	..()
 
 /obj/structure/pillory/user_unbuckle_mob(mob/living/buckled_mob, mob/living/user)
 	if(latched)
-		if(isliving(user) && user.STASTR >= 18)
+		if(isliving(user) && GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) >= 18)
 			if(do_after(user, 2.5 SECONDS))
 				user.visible_message(span_warning("[user] breaks [src] open!"))
 				unlock()

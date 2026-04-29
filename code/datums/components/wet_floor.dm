@@ -70,7 +70,7 @@
 
 /datum/component/wet_floor/proc/AfterSlip(mob/living/L)
 	if(highest_strength == TURF_WET_LUBE)
-		L.confused = max(L.confused, 8)
+		L.set_confusion_if_lower(0.8 SECONDS)
 
 /datum/component/wet_floor/proc/update_flags()
 	var/intensity

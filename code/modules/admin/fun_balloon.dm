@@ -28,14 +28,14 @@
 
 /obj/effect/fun_balloon/proc/pop()
 	visible_message("<span class='notice'>[src] pops!</span>")
-	playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
+	playsound(src, 'sound/blank.ogg', 50, TRUE, -1)
 	qdel(src)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/fun_balloon/attack_ghost(mob/user)
 	if(!user.client || !user.client.holder || popped)
 		return
-	var/confirmation = alert("Pop [src]?","Fun Balloon","Yes","No")
+	var/confirmation = tgui_alert(user, "Pop [src]?","Fun Balloon", list("Yes","No"))
 	if(confirmation == "Yes" && !popped)
 		popped = TRUE
 		effect()

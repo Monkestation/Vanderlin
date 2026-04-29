@@ -23,7 +23,7 @@
 							/obj/structure/closet/dirthole/closed/loot=6,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
 	spawnableTurfs = list(/turf/open/floor/dirt/road=5)
-	allowed_areas = list(/area/outdoors/rtfield)
+	allowed_areas = list(/area/outdoors/basin)
 
 /datum/mapGeneratorModule/dakkatownfield/road
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -31,11 +31,11 @@
 	excluded_turfs = list()
 	spawnableAtoms = list(/obj/item/natural/stone = 8,
 							/obj/item/grown/log/tree/stick = 3)
-	allowed_areas = list(/area/outdoors/rtfield)
+	allowed_areas = list(/area/outdoors/basin)
 
 /datum/mapGeneratorModule/dakkatownfield/grass
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	allowed_turfs = list(/turf/open/floor/dirt)
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableTurfs = list(/turf/open/floor/grass = 15)
-	allowed_areas = list(/area/outdoors/rtfield)
+	allowed_areas = list(/area/outdoors/basin)

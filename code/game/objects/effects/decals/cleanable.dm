@@ -8,6 +8,8 @@
 	var/beauty = 0
 	///The type of cleaning required to clean the decal. See __DEFINES/cleaning.dm for the options
 	var/clean_type = CLEAN_TYPE_LIGHT_DECAL
+	var/wash_precent = 0
+	COOLDOWN_DECLARE(wash_cooldown)
 
 /obj/effect/decal/cleanable/Initialize(mapload)
 	. = ..()
@@ -40,7 +42,7 @@
 	if(mergeable_decal)
 		return TRUE
 
-/obj/effect/decal/cleanable/attackby(obj/item/W, mob/user, params)
+/obj/effect/decal/cleanable/attackby(obj/item/W, mob/user, list/modifiers)
 	lazy_init_reagents()
 	if(!reagents)
 		return ..()
@@ -114,3 +116,12 @@
 		qdel(src)
 		return TRUE
 	return .
+
+/obj/effect/decal/cleanable/weather_act_on(weather_trait, severity)
+	if(weather_trait != PARTICLEWEATHER_RAIN || !COOLDOWN_FINISHED(src, wash_cooldown))
+		return
+	COOLDOWN_START(src, wash_cooldown, 7.5 SECONDS)
+	wash_precent += min(25, severity / 2)
+	alpha = 255 *((100 - wash_precent) * 0.01)
+	if(wash_precent >= 100)
+		wash(CLEAN_WASH)

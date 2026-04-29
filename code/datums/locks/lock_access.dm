@@ -42,7 +42,7 @@
 /// Shake a bit make a noise
 /obj/proc/rattle(silent = FALSE)
 	if(!silent && rattle_sound)
-		playsound(get_turf(src), rattle_sound, 100)
+		playsound(src, rattle_sound, 100)
 	var/oldx = pixel_x
 	animate(src, pixel_x = oldx + 1, time = 0.5)
 	animate(pixel_x = oldx - 1, time = 0.5)
@@ -52,7 +52,7 @@
 /obj/proc/on_lock(mob/living/user, obj/item, silent = FALSE)
 	user.lock_unlock_animation(src, item)
 	if(!silent && lock_sound)
-		playsound(get_turf(src), lock_sound, 50)
+		playsound(src, lock_sound, 50)
 		user.visible_message(span_notice("[user] locks \the [src]."), span_notice("I lock \the [src]."), span_notice("I hear a click."))
 		return
 	to_chat(user, span_notice("I lock \the [src]."))
@@ -61,7 +61,7 @@
 /obj/proc/on_unlock(mob/living/user, obj/item, silent = FALSE)
 	user.lock_unlock_animation(src, item)
 	if(!silent && unlock_sound)
-		playsound(get_turf(src), unlock_sound, 50)
+		playsound(src, unlock_sound, 50)
 		user.visible_message(span_notice("[user] unlocks \the [src]."), span_notice("I unlock \the [src]."), span_notice("I hear a click."))
 		return
 	to_chat(user, span_notice("I unlock \the [src]."))

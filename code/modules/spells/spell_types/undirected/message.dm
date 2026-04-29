@@ -1,3 +1,4 @@
+/// Spell that allows the caster to send a message to anyone they know. Can be sent Anonymously, but recipient can bypass it with high enough perception
 /datum/action/cooldown/spell/undirected/message
 	name = "Message"
 	desc = "Latch onto the mind of one who is familiar to you, whispering a message into their head."
@@ -8,6 +9,7 @@
 	charge_required = FALSE
 	spell_cost = 30
 	cooldown_time = 1 MINUTES
+	spell_flags = SPELL_RITUOS
 
 	/// Ref to cliented mob we are sending to
 	var/datum/weakref/recipient_ref
@@ -15,9 +17,8 @@
 	var/message
 	/// If we try to hide our identity
 	var/anonymous = FALSE
-	spell_flags = SPELL_RITUOS
 
-/datum/action/cooldown/spell/undirected/message/Destroy(force, ...)
+/datum/action/cooldown/spell/undirected/message/Destroy(force)
 	recipient_ref = null
 	return ..()
 
@@ -39,7 +40,7 @@
 	if(!LAZYLEN(owner.mind?.known_people))
 		to_chat(owner, span_warning("I don't know anyone!"))
 		return . | SPELL_CANCEL_CAST
-	var/recipient = browser_input_text(owner, "Who are you trying to contact?", "BEYOND THE VEIL")
+	var/recipient = tgui_input_text(owner, "Who are you trying to contact?", "BEYOND THE VEIL", encode=FALSE)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(!recipient)
@@ -58,13 +59,13 @@
 	if(!recipient_ref)
 		to_chat(owner, span_warning("I seek a mental connection, but can't find [recipient]."))
 		return . | SPELL_CANCEL_CAST
-	message = browser_input_text(owner, "You make a connecton, what are you trying to say?", "BEYOND THE VEIL")
+	message = tgui_input_text(owner, "You make a connecton, what are you trying to say?", "BEYOND THE VEIL", max_length = 150)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(!message)
 		reset_cooldown()
 		return . | SPELL_CANCEL_CAST
-	var/answer = browser_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
+	var/answer = tgui_alert(owner, "Send anonymously?", "BEYOND THE VEIL", DEFAULT_INPUT_CHOICES)
 	if(QDELETED(src) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 	if(answer == CHOICE_CONFIRM)
@@ -78,9 +79,12 @@
 		return
 	if(!recipient.mind)
 		return
-	if(anonymous && (recipient.STAPER >= 15))
-		if(recipient.mind?.do_i_know(name = owner.real_name))
-			to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into [owner]'s voice: <font color=#7246ff>[message]</font>")
+	if(recipient.mind?.do_i_know(name = owner.real_name)) // No point being anonymous if the recipient doesnt even know your voice in the first place
+		if(!anonymous)
+			to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into <span class='bold'>[owner]</span>'s voice: <font color=#7246ff>[message]</font>")
+			return
+		else if(GET_MOB_ATTRIBUTE_VALUE(recipient, STAT_PERCEPTION) >= 15)
+			to_chat(recipient, "Arcyne whispers fill the back of my head, and <span class='warning'>although attempts were made to hide it, you can still discern that it is </span><span class='bold'>[owner]</span>'s voice... <font color=#7246ff>[message]</font>")
 			return
 	to_chat(recipient, "Arcyne whispers fill the back of my head, resolving into an unknown [owner.gender == FEMALE ? "woman" : "man"]'s voice: <font color=#7246ff>[message]</font>")
 

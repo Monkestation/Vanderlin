@@ -35,6 +35,7 @@
 	var/firelevel = 1 //RTD new firehotspot mechanics
 
 /obj/effect/hotspot/extinguish()
+	. = ..()
 	if(isturf(loc))
 		new /obj/effect/temp_visual/small_smoke(src.loc)
 	qdel(src)
@@ -151,8 +152,8 @@
 		return
 
 	for(var/mob/living/carbon/human/H in view(2, src))
-		if(H.has_flaw(/datum/charflaw/addiction/pyromaniac))
-			H.sate_addiction()
+		if(H.has_quirk(/datum/quirk/vice/pyromaniac))
+			H.sate_addiction(/datum/quirk/vice/pyromaniac)
 
 	perform_exposure()
 	return
@@ -205,7 +206,7 @@
 			change_firelevel(min(3, firelevel+1))
 
 		if(burn_power)
-			for(var/turf/ranged_floor in range(1, src))
+			for(var/turf/ranged_floor as anything in RANGE_TURFS(1, src))
 				var/falling = FALSE
 				if(isopenspace(ranged_floor))
 					falling = TRUE

@@ -10,14 +10,14 @@ SUBSYSTEM_DEF(early_assets)
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/early_assets/Initialize(start_timeofday)
-	for (var/datum/asset/asset_type as anything in subtypesof(/datum/asset))
-		if (initial(asset_type._abstract) == asset_type)
+	for(var/datum/asset/asset_type as anything in subtypesof(/datum/asset))
+		if(IS_ABSTRACT(asset_type))
 			continue
 
-		if (!initial(asset_type.early))
+		if(!initial(asset_type.early))
 			continue
 
-		if (!load_asset_datum(asset_type))
+		if(!load_asset_datum(asset_type))
 			stack_trace("Could not initialize early asset [asset_type]!")
 
 		CHECK_TICK

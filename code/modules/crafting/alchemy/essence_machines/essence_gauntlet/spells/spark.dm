@@ -14,7 +14,7 @@
 	target = get_turf(target)
 
 	owner.visible_message(span_notice("[owner] creates a small spark near [target]."))
-	playsound(get_turf(target), 'sound/magic/fireball.ogg', 30, TRUE)
+	playsound(target, 'sound/magic/fireball.ogg', 30, TRUE)
 
 	for(var/obj/item/item in target.contents)
 		if(istype(item, /obj/item/candle))

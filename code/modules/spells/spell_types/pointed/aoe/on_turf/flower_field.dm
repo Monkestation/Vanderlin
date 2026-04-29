@@ -20,8 +20,6 @@
 	spell_flags = SPELL_RITUOS
 	aoe_radius = 3
 	ignore_openspace = TRUE
-	staggered = TRUE
-	stagger_delay = 0.5 SECONDS
 
 	var/obj/structure/flora/field/flowers
 
@@ -97,7 +95,7 @@
 			return
 		if (L.m_intent == MOVE_INTENT_SNEAK)
 			return
-		playsound(src.loc, "plantcross", 90, FALSE, -1)
+		playsound(src, "plantcross", 90, FALSE, -1)
 		var/oldx = pixel_x
 		animate(src, pixel_x = oldx + 1, time = 0.5)
 		animate(pixel_x = oldx - 1, time = 0.5)
@@ -317,7 +315,7 @@
 	check_field_presence()
 	tick_counter++
 	L.Stun(3)
-	L.Jitter(2)
+	L.adjust_jitter(4 SECONDS)
 	L.emote(pick("spin", "dance"), forced=TRUE)
 	L.emote(pick("laugh", "giggle"), forced=TRUE)
 	if (tick_counter >= 4)
@@ -373,7 +371,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/calendula_sedation
 	duration = -1
 	tick_interval = 10
-	effectedstats = list(STATKEY_SPD = -2, STATKEY_STR = -1, STATKEY_END = 1)
+	effectedstats = list(STAT_SPEED = -2, STAT_STRENGTH = -1, STAT_ENDURANCE = 1)
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "calendula_overlay"
 	field_path = /obj/structure/flora/field/calendula
@@ -450,7 +448,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/matricaria_remedy
 	duration = -1
 	tick_interval = 10
-	effectedstats = list(STATKEY_SPD = -3)
+	effectedstats = list(STAT_SPEED = -3)
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "matricaria_overlay"
 	field_path = /obj/structure/flora/field/matricaria
@@ -459,7 +457,7 @@
 	var/mob/living/M = owner
 	if (!M || M.stat != CONSCIOUS) return
 	check_field_presence()
-	M.confused = max(M.confused, 5)
+	M.set_confusion_if_lower(0.5 SECONDS)
 	if (prob(15) && !M.has_status_effect(/datum/status_effect/frost_trap))
 		M.apply_status_effect(/datum/status_effect/frost_trap)
 		M.adjustFireLoss(-8)
@@ -479,7 +477,7 @@
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "poppy_overlay"
 	field_path = /obj/structure/flora/field/poppy
-	effectedstats = list(STATKEY_STR = 1, STATKEY_END = -2, STATKEY_PER = -2, STATKEY_INT = -2)
+	effectedstats = list(STAT_STRENGTH = 1, STAT_ENDURANCE = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2)
 
 /datum/status_effect/debuff/poppy_arena/on_apply()
 	. = ..()

@@ -159,7 +159,7 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "vx" = (
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/magic)
 "vI" = (
 /obj/item/natural/rock,
@@ -240,7 +240,7 @@
 /area/under/tomb/indoors/magic)
 "Fr" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/turf/open/transparent/openspace,
+/turf/open/openspace,
 /area/under/tomb/indoors/magic)
 "FF" = (
 /turf/open/floor/ruinedwood/darker,

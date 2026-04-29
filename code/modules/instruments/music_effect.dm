@@ -17,7 +17,7 @@
 /atom/movable/screen/alert/status_effect/buff/playing_music
 	name = "Playing Music"
 	desc = "Let the world hear my craft."
-	icon_state = "buff"
+	icon_state = "play_music"
 
 /datum/status_effect/buff/playing_music
 	id = "play_music"
@@ -25,6 +25,7 @@
 	var/effect_color
 	var/datum/stress_event/stress_to_apply
 	tick_interval = 10
+	duration = 5 SECONDS
 
 /datum/status_effect/buff/playing_music/on_creation(mob/living/new_owner, stress, colour)
 	stress_to_apply = stress
@@ -39,10 +40,7 @@
 			continue
 		if(!H.can_hear())
 			continue
-		if (!H.has_stress_type(stress_to_apply))
-			H.add_stress(stress_to_apply)
-			if (prob(50))
-				to_chat(H, stress_to_apply.desc)
+		H.add_stress(stress_to_apply)
 
 /obj/effect/temp_visual/songs
 	name = "songs"
@@ -50,7 +48,6 @@
 	duration = 15
 	plane = GAME_PLANE_UPPER
 	layer = ABOVE_ALL_MOB_LAYER
-
 
 /obj/effect/temp_visual/songs/Initialize(mapload)
 	. = ..()
@@ -60,31 +57,3 @@
 	var/matrix/m = matrix()
 	m.Scale(0.75, 0.75)
 	transform = m
-
-
-/obj/effect/temp_visual/songs/inspiration_dirget1
-	icon_state = "dirge_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget2
-	icon_state = "dirge_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_dirget3
-	icon_state = "dirge_t3_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt1
-	icon_state = "melody_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt2
-	icon_state = "melody_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_melodyt3
-	icon_state = "melody_t3_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt1
-	icon_state = "bardsong_t1_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt2
-	icon_state = "bardsong_t2_base"
-
-/obj/effect/temp_visual/songs/inspiration_bardsongt3
-	icon_state = "bardsong_t3_base"

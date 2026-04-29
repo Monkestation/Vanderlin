@@ -130,7 +130,7 @@
 		for(var/mob/living/L as anything in souls)
 			if(L.stat != DEAD && L.mind)
 				L.mind.transfer_to(soulowner)
-				soulowner.revive(full_heal = TRUE, admin_revive = TRUE)
+				soulowner.revive(ADMIN_HEAL_ALL)
 				L.death(FALSE)
 
 //Lose your claim to the throne!

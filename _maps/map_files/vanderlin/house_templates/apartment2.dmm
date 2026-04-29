@@ -1,0 +1,194 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/decowood,
+/area/indoors/town)
+"b" = (
+/obj/structure/chair/wood/alt/chair3,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"c" = (
+/obj/structure/door{
+	name = "Apartment XV";
+	lockids = "apartment15"
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"d" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/apartment15,
+/turf/open/floor/wood,
+/area/indoors/town)
+"h" = (
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"m" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"n" = (
+/obj/structure/chair/stool{
+	pixel_y = 5
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"o" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/decowood,
+/area/indoors/town)
+"u" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"w" = (
+/obj/machinery/light/fueled/hearth,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"z" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/wood,
+/area/indoors/town)
+"D" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"E" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/landmark/start/lumberjack,
+/turf/open/floor/wood,
+/area/indoors/town)
+"F" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"I" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/broom,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"L" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty{
+	color = "grey"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"O" = (
+/obj/structure/chair/wood/alt/chair3{
+	dir = 8
+	},
+/turf/open/floor/wood,
+/area/indoors/town)
+"P" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/pelt,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Q" = (
+/obj/structure/table/wood/plain_alt,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"R" = (
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/town)
+"U" = (
+/turf/open/floor/wood,
+/area/indoors/town)
+"V" = (
+/obj/structure/door{
+	name = "Apartment XV";
+	lockids = "apartment15"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/town)
+"X" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood,
+/area/indoors/town)
+"Y" = (
+/obj/structure/table/wood/reinforced_alter,
+/obj/item/candle/yellow,
+/turf/open/floor/wood,
+/area/indoors/town)
+
+(1,1,1) = {"
+R
+a
+a
+a
+R
+a
+a
+a
+a
+R
+"}
+(2,1,1) = {"
+a
+Y
+X
+z
+a
+u
+F
+h
+I
+a
+"}
+(3,1,1) = {"
+a
+O
+U
+U
+c
+h
+D
+D
+m
+a
+"}
+(4,1,1) = {"
+a
+U
+X
+X
+a
+n
+h
+h
+Q
+a
+"}
+(5,1,1) = {"
+a
+E
+P
+d
+a
+w
+D
+b
+u
+a
+"}
+(6,1,1) = {"
+R
+a
+a
+a
+R
+a
+V
+o
+L
+R
+"}

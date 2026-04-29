@@ -56,7 +56,11 @@
 
 /mob/living/simple_animal/hostile/retaliate/elemental/behemoth/death(gibbed)
 	var/turf/deathspot = get_turf(src)
+	new /obj/item/natural/melded/t1(deathspot)
 	new /obj/item/natural/elementalfragment(deathspot)
+	new /obj/item/natural/elementalfragment(deathspot)
+	new /obj/item/natural/elementalshard(deathspot)
+	new /obj/item/natural/elementalshard(deathspot)
 	new /obj/item/natural/elementalmote(deathspot)
 	new /obj/item/natural/elementalmote(deathspot)
 	spill_embedded_objects()

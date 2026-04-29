@@ -205,8 +205,3 @@ DEFINE_BITFIELD(spell_requirements, list(
  * as it encompasses more states in which a mob may be "incorporeal from magic"
  */
 #define is_jaunting(atom) (istype(atom.loc, /obj/effect/dummy/phased_mob))
-
-#define RAGE_LEVEL_LOW "25"
-#define RAGE_LEVEL_MEDIUM "50"
-#define RAGE_LEVEL_HIGH "75"
-#define RAGE_LEVEL_CRITICAL "90"

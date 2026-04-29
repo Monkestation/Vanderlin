@@ -19,7 +19,7 @@
 	fueluse = 30 MINUTES
 	crossfire = FALSE
 
-/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/light/fueled/smelter/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/weapon/tongs))
 		if(!actively_smelting) // Prevents an exp gain exploit. - Foxtrot
 			var/obj/item/weapon/tongs/T = W
@@ -31,10 +31,11 @@
 				if(user.mind && isliving(user) && T.held_item?:smeltresult) // Prevents an exploit with coal and runtimes with everything else
 					if(!istype(T.held_item, /obj/item/ore) && T.held_item?:smelted) // Burning items to ash won't level smelting.
 						var/mob/living/L = user
-						var/boon = user.get_learning_boon(/datum/skill/craft/smelting)
-						var/amt2raise = L.STAINT*2 // Smelting is already a timesink, this is justified to accelerate levelling
+						var/boon = user.get_learning_boon(/datum/attribute/skill/craft/smelting)
+						var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)*2 // Smelting is already a timesink, this is justified to accelerate levelling
 						if(amt2raise > 0)
-							user.adjust_experience(/datum/skill/craft/smelting, amt2raise * boon, FALSE)
+							user.adjust_experience(/datum/attribute/skill/craft/smelting, amt2raise * boon, FALSE)
+							SEND_SIGNAL(user, COMSIG_ITEM_SMELTED)
 				user.visible_message("<span class='info'>[user] retrieves [I] from [src].</span>")
 				if(on)
 					var/tyme = world.time
@@ -61,8 +62,8 @@
 			to_chat(user, "<span class='warning'>\The [src] is currently smelting. Wait for it to finish, or douse it with water to retrieve items from it.</span>")
 			return
 
-	if(istype(W, /obj/item/ore/coal))
-		if(alert(usr, "Fuel \the [src] with [W]?", "VANDERLIN", "Fuel", "Smelt") == "Fuel")
+	if(W.firefuel)
+		if(tgui_alert(usr, "Fuel \the [src] with [W]?", "Fuel", list("Fuel", "Smelt")) == "Fuel")
 			return ..()
 
 	if(istype(W, /obj/item/storage/crucible))
@@ -79,7 +80,7 @@
 			if(!isliving(user) || !user.mind)
 				ore[W] = SMELTERY_LEVEL_SPOIL
 			else
-				var/smelter_exp = user.get_skill_level(/datum/skill/craft/smelting) // 0 to 6
+				var/smelter_exp = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/smelting) // 0 to 6
 				if(smelter_exp < 6)
 					ore[W] = floor(rand(smelter_exp*15, max(63, smelter_exp*25))/25) // Math explained below
 				else
@@ -112,7 +113,7 @@
 	return ..()
 
 // Gaining experience from just retrieving bars with your hands would be a hard-to-patch exploit.
-/obj/machinery/light/fueled/smelter/attack_hand(mob/user, params)
+/obj/machinery/light/fueled/smelter/attack_hand(mob/user, list/modifiers)
 	if(on)
 		to_chat(user, "<span class='warning'>It's too hot to retrieve bars with your hands.</span>")
 		return
@@ -130,24 +131,26 @@
 	..()
 	if(maxore > 1)
 		return
-	if(on)
-		if(ore.len)
-			if(cooking < 20)
-				cooking++
-				playsound(src.loc,'sound/misc/smelter_sound.ogg', 50, FALSE)
-				actively_smelting = TRUE
-			else
-				if(cooking == 20)
-					for(var/obj/item/I in ore)
-						if(I.smeltresult)
-							var/obj/item/R = new I.smeltresult(src, ore[I])
-							ore -= I
-							ore += R
-							qdel(I)
-					playsound(src,'sound/misc/smelter_fin.ogg', 100, FALSE)
-					visible_message("<span class='notice'>\The [src] finished smelting.</span>")
-					cooking = 21
-					actively_smelting = FALSE
+	if(!on)
+		return
+	if(!length(ore))
+		return
+	if(cooking < 20)
+		cooking++
+		playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
+		actively_smelting = TRUE
+		return
+	if(cooking == 20)
+		for(var/obj/item/I in ore)
+			if(I.smeltresult)
+				var/obj/item/R = new I.smeltresult(src, ore[I])
+				ore -= I
+				ore += R
+				qdel(I)
+		playsound(src,'sound/misc/smelter_fin.ogg', 100, FALSE)
+		visible_message(span_notice("[src] finished smelting."))
+		cooking = 21
+		actively_smelting = FALSE
 
 /obj/machinery/light/fueled/smelter/burn_out()
 	cooking = 0
@@ -173,7 +176,7 @@
 		if(ore.len)
 			if(cooking < 30)
 				cooking++
-				playsound(src.loc,'sound/misc/smelter_sound.ogg', 50, FALSE)
+				playsound(src,'sound/misc/smelter_sound.ogg', 50, FALSE)
 				actively_smelting = TRUE
 			else
 				if(cooking == 30)

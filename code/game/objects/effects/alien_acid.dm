@@ -4,7 +4,7 @@
 	desc = ""
 	icon_state = "acid"
 	density = FALSE
-	opacity = 0
+	opacity = FALSE
 	anchored = TRUE
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	layer = ABOVE_NORMAL_TURF_LAYER
@@ -38,7 +38,7 @@
 		return 0
 
 	if(prob(5))
-		playsound(loc, 'sound/blank.ogg', 100, TRUE)
+		playsound(src, 'sound/blank.ogg', 100, TRUE)
 
 	for(var/obj/O in target)
 		if(prob(20) && !(resistance_flags & UNACIDABLE))
@@ -55,7 +55,7 @@
 /obj/effect/acid/Crossed(AM as mob|obj)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(L.movement_type & FLYING)
+		if(L.movement_type & MOVETYPES_NOT_TOUCHING_GROUND)
 			return
 		if(L.m_intent != MOVE_INTENT_WALK && prob(40))
 			var/acid_used = min(acid_level*0.05, 20)

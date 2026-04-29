@@ -56,10 +56,12 @@ Actual Adjacent procs :
 /proc/HeapPathWeightCompare(list/a, list/b)
 	return b[TOTAL_COST_F] - a[TOTAL_COST_F]
 
-/proc/get_path_to(requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+/proc/get_path_to(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/l = SSpathfinder.mobs.getfree(requester)
 	while (!l)
 		stoplag(3)
+		if(QDELETED(requester)) // check if we've stopped existing, since we slept
+			return list() // no path, we got deleted
 		l = SSpathfinder.mobs.getfree(requester)
 	var/list/path = AStar(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
 	SSpathfinder.mobs.found(l)
@@ -67,7 +69,7 @@ Actual Adjacent procs :
 		path = list()
 	return path
 
-/proc/AStar(requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+/proc/AStar(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
 	var/turf/start = get_turf(requester)
 	if (!start || !end)
@@ -84,22 +86,21 @@ Actual Adjacent procs :
 	var/list/openc = new()  // turf -> node mapping for nodes in open list
 	var/list/closed = new()  // turf -> bitmask of blocked directions
 	var/list/path = null
-	var/const/ALL_DIRS = NORTH|SOUTH|EAST|WEST
 
 	// Create initial node
-	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_DIRS)
+	var/list/cur = ASTAR_NODE(start, 0, start.Distance3D(end), null, 0, ALL_CARDINALS)
 	var/list/insert_item = list(cur)
 	BINARY_INSERT_DEFINE_REVERSE(insert_item, open, SORT_VAR_NO_TYPE, cur, SORT_TOTAL_COST_F, COMPARE_KEY)
 	openc[start] = cur
 
-	while (requester && open.len && !path)
+	while (!QDELETED(requester) && open.len && !path)
 		// Pop from end (highest priority in reverse sorted list)
 		cur = open[open.len]
 		open.len--
 
 		var/turf/cur_turf = cur[ATURF]
 		openc -= cur_turf
-		closed[cur_turf] = ALL_DIRS
+		closed[cur_turf] = ALL_CARDINALS
 
 		// Destination check - must be exact match or valid closeenough on same Z-level
 		var/is_destination = (cur_turf == end)
@@ -162,7 +163,7 @@ Actual Adjacent procs :
 					BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
 			else
 				// Not in open list, create new node
-				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_DIRS^reverse)
+				CN = ASTAR_NODE(T, newg, call(T, dist)(end, requester), cur, cur[NODE_TURN] + 1, ALL_CARDINALS^reverse)
 				var/list/new_item = list(CN)
 				BINARY_INSERT_DEFINE_REVERSE(new_item, open, SORT_VAR_NO_TYPE, CN, SORT_TOTAL_COST_F, COMPARE_KEY)
 				openc[T] = CN
@@ -177,10 +178,10 @@ Actual Adjacent procs :
 	closed = null
 	return path
 
-/turf/proc/reachableTurftest(requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
+/turf/proc/reachableTurftest(atom/movable/requester, turf/T, ID, simulated_only = TRUE, check_z_levels = TRUE)
 	if(!T || T.density)
 		return FALSE
-	if(!T.can_traverse_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
+	if(!T.can_cross_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
 		return FALSE
 
 	var/z_distance = abs(T.z - z)

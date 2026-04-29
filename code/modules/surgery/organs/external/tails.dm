@@ -2,10 +2,11 @@
 /obj/item/organ/tail
 	name = "tail"
 	desc = "A severed tail. What did you cut this off of?"
-	icon_state = "severedtail"
+	icon_state = "tail-lizard"
 	visible_organ = TRUE
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_TAIL
+	organ_efficiency = list(ORGAN_SLOT_TAIL = 100)
 	var/can_wag = TRUE
 	var/wagging = FALSE
 
@@ -16,6 +17,10 @@
 
 /obj/item/organ/tail/cat
 	name = "cat tail"
+
+/obj/item/organ/tail/demihuman
+	name = "hollowkin tail"
+	icon_state = "tail-furry"
 
 /obj/item/organ/tail/harpy
 	name = "harpy plumage"
@@ -32,7 +37,7 @@
 		QDEL_NULL(stillness)
 	return ..()
 
-/obj/item/organ/tail/medicator/Insert(mob/living/carbon/M, special, drop_if_replaced)
+/obj/item/organ/tail/medicator/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
 	. = ..()
 	if(!istype(owner, /mob/living/carbon/human/dummy))
 		stillness = owner.AddComponent(/datum/component/stillness_timer, 25 SECONDS, null, CALLBACK(src, PROC_REF(do_goop)))
@@ -64,6 +69,9 @@
 /obj/item/organ/tail/kobold
 	name = "small lizard tail"
 	accessory_type = /datum/sprite_accessory/tail/kobold
+
+/obj/item/organ/tail/kobold/round
+	accessory_type = /datum/sprite_accessory/tail/kobold/round
 
 /obj/item/organ/tail/triton
 	name = "triton bell"

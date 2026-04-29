@@ -13,7 +13,7 @@
 			return weighted_nodes
 
 	for(var/datum/chimeric_node/node_type as anything in node_types)
-		if(is_abstract(node_type))
+		if(IS_ABSTRACT(node_type))
 			continue
 		var/tier = initial(node_type.tier)
 		if(tier > max_tier)
@@ -74,42 +74,6 @@
 
 	return TRUE
 
-/datum/chimeric_node/proc/try_consume_blood(datum/component/blood_stability/blood_stab, delta_time)
-	var/blood_needed = base_blood_cost * delta_time
-
-	for(var/blood_type in preferred_blood_types)
-		var/adjusted_cost = blood_needed * (1 - preferred_blood_bonus)
-		if(blood_stab.consume_stability(blood_type, adjusted_cost))
-			return TRUE
-
-	if(length(compatible_blood_types))
-		for(var/blood_type in compatible_blood_types)
-			if(blood_stab.consume_stability(blood_type, blood_needed))
-				return TRUE
-	else
-		for(var/blood_type in blood_stab.blood_stability)
-			if(blood_type in incompatible_blood_types)
-				continue
-			if(blood_stab.consume_stability(blood_type, blood_needed))
-				return TRUE
-
-	for(var/blood_type in incompatible_blood_types)
-		var/adjusted_cost = blood_needed * (1 + incompatible_blood_penalty)
-		if(blood_stab.consume_stability(blood_type, adjusted_cost))
-			damage_from_incompatible_blood()
-			return TRUE
-
-	return FALSE
-
-/datum/chimeric_node/proc/damage_from_incompatible_blood()
-	if(!hosted_carbon)
-		return
-
-	if(prob(10))
-		to_chat(hosted_carbon, span_danger("Your grafted flesh rejects the incompatible blood!"))
-		attached_organ.applyOrganDamage(1)
-
-
 /datum/chimeric_node/proc/setup()
 	return
 
@@ -133,76 +97,6 @@
 	src.tier = tier
 
 	set_ranges()
-
-/datum/chimeric_node/proc/generate_html(mob/user)
-	var/client/client = user
-	if(!istype(client))
-		client = user.client
-	SSassets.transport.send_assets(client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
-	user << browse_rsc('html/book.png')
-
-	var/html = {"
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<link rel="stylesheet" type="text/css" href="slop_menustyle2.css">
-		</head>
-		<body>
-			<div class='book'>
-				<div class='page'>
-					<h1>[name]</h1>
-					<div class='info'>
-						<p class='desc'>[desc]</p>
-	"}
-
-	var/slot_name = "Unknown"
-	var/slot_color = "white"
-	switch(slot)
-		if(INPUT_NODE)
-			slot_name = "Input Node"
-			slot_color = "cyan"
-		if(OUTPUT_NODE)
-			slot_name = "Output Node"
-			slot_color = "orange"
-		if(SPECIAL_NODE)
-			slot_name = "Special Node"
-			slot_color = "purple"
-
-	html += "<div class='brew-time' style='color: [slot_color];'><b>Type: [slot_name]</b></div>"
-
-	if(is_special)
-		html += "<div style='color: purple;'><b>SPECIAL NODE</b></div>"
-
-	html += "</div>"
-
-	html += "<div class='section'><h2>Installation Requirements</h2>"
-
-	if(length(allowed_organ_slots))
-		html += "<div style='color: cyan;'><b>Can ONLY be installed in:</b><br>"
-		for(var/organ_slot in allowed_organ_slots)
-			html += "• [organ_slot]<br>"
-		html += "</div>"
-	else if(length(forbidden_organ_slots))
-		html += "<div style='color: orange;'><b>Can be installed in any organ EXCEPT:</b><br>"
-		for(var/organ_slot in forbidden_organ_slots)
-			html += "• [organ_slot]<br>"
-		html += "</div>"
-	else
-		html += "<div style='color: green;'><b>✓ Can be installed in any organ</b></div>"
-
-	html += "</div>"
-
-	html += {"
-				</div>
-			</div>
-		</body>
-		</html>
-	"}
-
-	return html
-
-/datum/chimeric_node/proc/show_menu(mob/user)
-	user << browse(generate_html(user), "window=chimeric_node;size=600x900")
 
 /proc/cmp_chimeric_node_tier_asc(datum/chimeric_node/a, datum/chimeric_node/b)
 	return a.tier - b.tier

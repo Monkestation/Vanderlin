@@ -1,11 +1,11 @@
-GLOBAL_LIST_INIT(special_traits, build_special_traits())
-
 #define SPECIAL_TRAIT(trait_type) GLOB.special_traits[trait_type]
+
+GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/type in typesof(/datum/special_trait))
-		if(is_abstract(type))
+	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(type))
 			continue
 		.[type] = new type()
 	return .
@@ -47,6 +47,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 	if(!player)
 		player = character.client
 	apply_prefs_special(character, player)
+	apply_voicepacks(character, player)
 
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -60,6 +61,16 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return
 	apply_special_trait_if_able(character, player, trait_type)
 	player.prefs.next_special_trait = null
+
+/proc/apply_voicepacks(mob/living/carbon/human/character, client/player)
+	switch(player.prefs.voice_type)
+		if(VOICE_TYPE_MASC_FOP)
+			character.dna.species.soundpack_m = new /datum/voicepack/male/foppish()
+		if(VOICE_TYPE_FEM_DAINTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/dainty()
+		if(VOICE_TYPE_FEM_HAUGHTY)
+			character.dna.species.soundpack_f = new /datum/voicepack/female/haughty()
+	return
 
 /proc/apply_loadouts(mob/living/carbon/human/character, client/player)
 	if(!player)
@@ -92,15 +103,20 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/charactet_eligible_for_trait(mob/living/carbon/human/character, client/player, trait_type)
 	var/datum/special_trait/special = SPECIAL_TRAIT(trait_type)
-	var/datum/job/job
-	if(character.job)
-		job = SSjob.name_occupations[character.job]
+	var/datum/job/job = character?.mind.assigned_role
+	var/datum/job/parent_job = job?.parent_job
 	if(!isnull(special.allowed_jobs))
 		if(!job)
 			return FALSE
-		if(!(job.type in special.allowed_jobs))
+		if(!(job.type in special.allowed_jobs) && !(parent_job?.type in special.allowed_jobs))
+			return FALSE
+	if(istype(job, /datum/job/advclass))
+		var/datum/job/advclass/advjob = job
+		if(!isnull(special.allowed_ctags) && !length(advjob?.category_tags & special.allowed_ctags))
 			return FALSE
 	if(!isnull(special.restricted_jobs) && job && (job.type in special.restricted_jobs))
+		return FALSE
+	if(!isnull(special.restricted_jobs) && parent_job && (parent_job.type in special.restricted_jobs))
 		return FALSE
 	if(!isnull(special.allowed_races) && !(character.dna.species.id in special.allowed_races))
 		return FALSE
@@ -112,7 +128,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		return FALSE
 	if(!isnull(special.allowed_patrons) && !(character.patron.type in special.allowed_patrons))
 		return FALSE
-	if(!isnull(special.allowed_flaw) && !character.has_flaw(special.allowed_flaw))
+	if(!isnull(special.allowed_flaw) && !character.has_quirk(special.allowed_flaw))
 		return FALSE
 	if(!isnull(special.restricted_traits))
 		var/has_trait

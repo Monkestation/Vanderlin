@@ -181,11 +181,11 @@
 		if(arcshot && isopenspace(current))
 			// If this is null something is VERY wrong
 			var/turf/below = GET_TURF_BELOW(current)
-			if(current.can_zFall(src, 1, below))
+			if(can_z_move(DOWN, current, below, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 				var/turf/target
 				while(!target)
 					var/turf/potential = GET_TURF_BELOW(below)
-					if(!potential || !below.can_zFall(src, 1, potential))
+					if(!potential || !can_z_move(DOWN, below, potential, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 						target = below
 					else
 						below = potential
@@ -266,7 +266,7 @@
 			var/volume = clamp(vol_by_damage() + 20, 0, 100)
 			if(suppressed)
 				volume = 5
-			playsound(loc, hitsound_wall, volume, TRUE, -1)
+			playsound(src, hitsound_wall, volume, TRUE, -1)
 		return BULLET_ACT_HIT
 
 	var/mob/living/L = target
@@ -276,7 +276,7 @@
 			var/splatter_dir = dir
 			if(starting)
 				splatter_dir = get_dir(starting, target_loca)
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir, L.get_blood_type())
 			if(prob(33))
 				L.add_splatter_floor(target_loca)
 
@@ -546,7 +546,7 @@
  * Scan turf we're now in for anything we can/should hit. This is useful for hitting non dense objects the user
  * directly clicks on, as well as for PHASING projectiles to be able to hit things at all as they don't ever Bump().
  */
-/obj/projectile/Moved(atom/OldLoc, Dir)
+/obj/projectile/Moved(atom/old_loc, movement_dir, forced, list/old_locs)
 	. = ..()
 	if(!fired)
 		return
@@ -794,26 +794,26 @@
 		homing_offset_y = -homing_offset_y
 
 //Spread is FORCED!
-/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, params, spread = 0)
+/obj/projectile/proc/preparePixelProjectile(atom/target, atom/source, list/modifiers, spread = 0)
 	var/turf/curloc = get_turf(source)
 	var/turf/targloc = get_turf(target)
 	if(targloc && curloc)
 		if(targloc.z > curloc.z)
 			var/turf/above = GET_TURF_ABOVE(curloc)
-			if(istype(above, /turf/open/transparent/openspace))
+			if(istype(above, /turf/open/openspace))
 				curloc = above
 	trajectory_ignore_forcemove = TRUE
 	forceMove(get_turf(source))
 	trajectory_ignore_forcemove = FALSE
 	starting = get_turf(source)
 	original = target
-	if(targloc || !params)
+	if(targloc || !modifiers)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
 		setAngle(get_angle(src, targloc) + spread)
 
-	if(isliving(source) && params)
-		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, params)
+	if(isliving(source) && length(modifiers))
+		var/list/calculated = calculate_projectile_angle_and_pixel_offsets(source, modifiers)
 		p_x = calculated[2]
 		p_y = calculated[3]
 
@@ -826,11 +826,10 @@
 		stack_trace("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 
-/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, params)
+/proc/calculate_projectile_angle_and_pixel_offsets(mob/user, list/modifiers)
 	var/p_x = 0
 	var/p_y = 0
 	var/angle = 0
-	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, ICON_X))
 		p_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	if(LAZYACCESS(modifiers, ICON_Y))

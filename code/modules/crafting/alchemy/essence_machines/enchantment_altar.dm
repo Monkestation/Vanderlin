@@ -67,6 +67,70 @@
 	var/mutable_appearance/crystal = mutable_appearance(icon, "crystal")
 	. += crystal
 
+/obj/machinery/essence/enchantment_altar/return_storage()
+	return altar_storage
+
+/obj/machinery/essence/enchantment_altar/is_essence_allowed(essence_type)
+	if(!selected_recipe)
+		return FALSE // No recipe selected, accept anything
+
+	if(!(essence_type in selected_recipe.essence_recipe))
+		return FALSE // Not needed for recipe
+
+	var/needed = selected_recipe.essence_recipe[essence_type]
+	var/current = altar_storage.get_essence_amount(essence_type)
+	var/remaining_needed = needed - current
+
+	if(remaining_needed <= 0)
+		return FALSE // Already have enough
+
+	return TRUE
+
+/obj/machinery/essence/enchantment_altar/can_target_accept_essence(target, essence_type)
+	return is_essence_allowed(essence_type)
+
+/obj/machinery/essence/enchantment_altar/process()
+	if(!connection_processing || !selected_recipe || enchanting)
+		return
+
+	// Pull essences from connected sources if recipe isn't complete
+	if(recipe_is_complete())
+		return
+
+	var/list/recipe = selected_recipe.essence_recipe
+
+	for(var/datum/essence_connection/connection in input_connections)
+		if(!connection.active || !connection.source)
+			continue
+
+		var/obj/machinery/essence/source = connection.source
+		var/datum/essence_storage/source_storage = source.return_storage()
+
+		if(!source_storage)
+			continue
+
+		// Check what essences we need
+		for(var/essence_type in recipe)
+			var/required = recipe[essence_type]
+			var/current = altar_storage.get_essence_amount(essence_type)
+			var/needed = required - current
+
+			if(needed <= 0)
+				continue
+
+			var/available = source_storage.get_essence_amount(essence_type)
+			if(available <= 0)
+				continue
+
+			var/to_transfer = min(needed, available, connection.transfer_rate)
+			var/transferred = source_storage.transfer_to(altar_storage, essence_type, to_transfer)
+
+			if(transferred > 0)
+				create_essence_transfer_effect(source, essence_type, transferred)
+				update_recipe_progress()
+				update_appearance(UPDATE_OVERLAYS)
+				return // Only transfer one essence type per process tick
+
 /obj/machinery/essence/enchantment_altar/proc/get_dominant_essence_color()
 	var/highest_amount = 0
 	var/dominant_color = "#FFFFFF"
@@ -81,7 +145,7 @@
 
 	return dominant_color
 
-/obj/machinery/essence/enchantment_altar/attackby(obj/item/I, mob/user, params)
+/obj/machinery/essence/enchantment_altar/attackby(obj/item/I, mob/user, list/modifiers)
 	if(istype(I, /obj/item/essence_vial))
 		var/obj/item/essence_vial/vial = I
 		if(!vial.contained_essence || vial.essence_amount <= 0)

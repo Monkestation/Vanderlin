@@ -4,24 +4,23 @@
 	icon = 'icons/roguetown/misc/herbfoliage.dmi'
 	icon_state = "spritemeplz"
 	num_random_icons = 0
-	var/res_replenish
 	max_integrity = 10
 	climbable = FALSE
 	dir = SOUTH
-	var/list/looty = list()
 	var/herbtype
 	var/obj/effect/skill_tracker/alchemy_plants/alchemy_effect
 	var/obj/item/reagent_containers/food/snacks/spiderhoney/honey/honey_type
 
 	var/timerid
 	var/harvested = FALSE
+	var/can_replenish = TRUE
 
 /obj/structure/flora/grass/herb/Initialize()
 	. = ..()
 	desc = "A herb. This one looks like [name]."
 	alchemy_effect = new(get_turf(src), src)
 	GLOB.herb_locations |= src
-	loot_replenish()
+	loot_replenish(TRUE)
 
 /obj/structure/flora/grass/herb/Destroy()
 	GLOB.harvested_herbs -= src
@@ -29,13 +28,14 @@
 	return ..()
 
 
-/obj/structure/flora/grass/herb/attack_hand(mob/user)
+/obj/structure/flora/grass/herb/interact(mob/user)
+	. = ..()
 	if(harvested)
 		to_chat(user, span_warning("Picked clean; but looks healthy. I should try again later."))
 	if(isliving(user))
 		var/mob/living/L = user
 		user.changeNext_move(CLICK_CD_MELEE)
-		playsound(src.loc, "plantcross", 80, FALSE, -1)
+		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(3,5) DECISECONDS ,src))
 			if(!looty.len)
 				return
@@ -46,13 +46,16 @@
 					user.put_in_hands(B)
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					harvested = TRUE
-					timerid = addtimer(CALLBACK(src, PROC_REF(loot_replenish)), 8 MINUTES, flags = TIMER_STOPPABLE)
+					if(can_replenish)
+						timerid = addtimer(CALLBACK(src, PROC_REF(loot_replenish)), 8 MINUTES, flags = TIMER_STOPPABLE)
 					add_filter("picked", 1, alpha_mask_filter(icon = icon('icons/effects/picked_overlay.dmi', "picked_overlay_[rand(1,3)]"), flags = MASK_INVERSE))
 					GLOB.harvested_herbs |= src
 					return
 			user.visible_message(span_notice("[user] searches through [src]."))
 
-/obj/structure/flora/grass/herb/proc/loot_replenish()
+/obj/structure/flora/grass/herb/proc/loot_replenish(forced=FALSE)
+	if(!(can_replenish || forced))
+		return
 	if(herbtype)
 		looty += herbtype
 	harvested = FALSE
@@ -181,3 +184,18 @@
 	icon_state = "euphorbia2"
 
 	herbtype = /obj/item/alch/herb/euphorbia
+
+/obj/structure/flora/grass/herb/cursedrosa
+	name = "black briar rosa"
+	icon_state = "cursedrosa2"
+	herbtype = /obj/item/ore/cursedrosa
+	can_replenish = FALSE
+	max_integrity = 300
+	resistance_flags = FIRE_PROOF
+	armor = list("blunt" = 15, "slash" = 15, "stab" = 15,  "piercing" = 15, "fire" = 15, "acid" = 0)
+	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+
+
+/obj/structure/flora/grass/herb/cursedrosa/Initialize()
+	. = ..()
+	AddComponent(/datum/component/cursedrosa, TRUE, TRUE)

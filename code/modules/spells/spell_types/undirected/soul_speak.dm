@@ -6,8 +6,8 @@
 
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/necra)
+	associated_skill = /datum/attribute/skill/magic/holy
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
 
 	invocation = "Undermaiden grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = INVOCATION_WHISPER
@@ -95,7 +95,7 @@
 	for(var/I in itemstore)
 		soul.put_in_hands(new I())
 	soul.beingmoved = FALSE
-	soul.fully_heal(FALSE)
+	soul.fully_heal()
 	soul.invisibility = initial(soul.invisibility)
 	soul.status_flags &= ~GODMODE
 	soul.update_cone()

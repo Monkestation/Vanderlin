@@ -14,6 +14,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	maxHealth = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
 
@@ -26,6 +27,7 @@
 	var/detail_color = "000"
 
 	var/skin_tone = "caucasian1"	//Skin tone
+	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 	var/lip_color = "white"
@@ -64,8 +66,6 @@
 	var/worn_armor_class = ARMOR_CLASS_NONE
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
-
-	var/name_override //For temporary visible name changes
 
 	var/datum/physiology/physiology
 
@@ -137,7 +137,7 @@
 	var/voice_type = null //  defines what sound pack we use. keep this null so mobs resort to their typical gender typing - preferences set this
 
 	blocks_emissive = NONE
-	var/datum/charflaw/charflaw
+	var/list/datum/quirk/quirks = list()
 
 	/// Assoc list of culinary preferences of the mob
 	var/list/culinary_preferences = list()

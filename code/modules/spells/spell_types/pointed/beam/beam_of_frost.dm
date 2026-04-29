@@ -56,7 +56,7 @@
 			span_warning("The frost ray fizzles on contact with [victim]!"),
 			span_warning("The frost ray fizzles on contact with me!"),
 		)
-		playsound(get_turf(victim), 'sound/magic/magic_nulled.ogg', 100)
+		playsound(victim, 'sound/magic/magic_nulled.ogg', 100)
 		qdel(active)
 		return
 
@@ -67,7 +67,7 @@
 
 	new /obj/effect/temp_visual/snap_freeze(get_turf(victim))
 
-	playsound(get_turf(victim), 'sound/items/stonestone.ogg', 100)
+	playsound(victim, 'sound/items/stonestone.ogg', 100)
 	victim.visible_message(
 		span_danger("[victim] is struck by the ray of frost!"),
 		span_userdanger("I'm struck by the ray of frost!"),
@@ -77,7 +77,7 @@
 	id = "frostbite"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/frostbite
 	duration = 10 SECONDS
-	effectedstats = list(STATKEY_SPD = -2)
+	effectedstats = list(STAT_SPEED = -2)
 	var/atom_color = "#88BFFF"
 	var/strength_multiplier = 1
 	var/static/mutable_appearance/frost = mutable_appearance('icons/roguetown/mob/coldbreath.dmi', "breath_m", ABOVE_ALL_MOB_LAYER)
@@ -87,7 +87,7 @@
 	return ..()
 
 /datum/status_effect/debuff/frostbite/on_apply()
-	effectedstats = list(STATKEY_SPD = round(-2 * strength_multiplier))
+	effectedstats = list(STAT_SPEED = round(-2 * strength_multiplier))
 	. = ..()
 	owner.add_overlay(frost)
 	owner.add_atom_colour(atom_color, TEMPORARY_COLOUR_PRIORITY)

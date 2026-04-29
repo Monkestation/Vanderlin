@@ -1,3 +1,26 @@
+/datum/attribute_holder/sheet/job/persistant/caravanguard
+	attribute_variance = list(
+		STAT_STRENGTH = list(0, 1),
+		STAT_CONSTITUTION = list(0, 1),
+		STAT_ENDURANCE = list(0, 1),
+	)
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/shields = 30,
+		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/craft/crafting = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/athletics = 20
+	)
+
 /datum/job/persistence/caravanguard
 	title = "Caravan Guard"
 	tutorial = "You're a caravan guard, ensure the settlers aren't killed and maimed by whatever lurks in here."
@@ -7,25 +30,7 @@
 	outfit = /datum/outfit/caravanguard
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
-	jobstats = list(
-		STATKEY_STR = 1,
-		STATKEY_CON = 1,
-		STATKEY_END = 1
-	)
-
-	skills = list(
-		/datum/skill/combat/knives = 1,
-		/datum/skill/combat/unarmed = 3,
-		/datum/skill/combat/wrestling = 2,
-		/datum/skill/combat/swords = 3,
-		/datum/skill/combat/shields = 3,
-		/datum/skill/combat/axesmaces = 3,
-		/datum/skill/misc/reading = 1,
-		/datum/skill/craft/crafting = 1,
-		/datum/skill/misc/climbing = 2,
-		/datum/skill/misc/swimming = 2,
-		/datum/skill/misc/athletics = 2
-	)
+	attribute_sheet = /datum/attribute_holder/sheet/job/persistant/caravanguard
 
 	traits = list(
 		TRAIT_MEDIUMARMOR

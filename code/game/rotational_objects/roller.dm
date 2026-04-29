@@ -1,41 +1,3 @@
-//Make a component to do things like gravity/flying checks
-///Manages the loop caused by being on a conveyor belt
-///Prevents movement while you're floating, etc
-///Takes the direction to move, delay between steps, and time before starting to move as arguments
-/datum/component/convey
-	var/living_parent = FALSE
-	var/speed
-
-/datum/component/convey/Initialize(direction, speed, start_delay)
-	if(!ismovable(parent))
-		return COMPONENT_INCOMPATIBLE
-
-	living_parent = isliving(parent)
-	src.speed = speed
-	if(!start_delay)
-		start_delay = speed
-	var/atom/movable/moving_parent = parent
-	var/datum/move_loop/loop = SSmove_manager.move(moving_parent, direction, delay = start_delay, subsystem = SSconveyors, flags=MOVEMENT_LOOP_IGNORE_PRIORITY)
-	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(should_move))
-	RegisterSignal(loop, COMSIG_PARENT_QDELETING, PROC_REF(loop_ended))
-
-/datum/component/convey/proc/should_move(datum/move_loop/source)
-	SIGNAL_HANDLER
-	source.delay = speed //We use the default delay
-	if(living_parent)
-		var/mob/living/moving_mob = parent
-		if((moving_mob.movement_type & FLYING) && !moving_mob.stat)
-			return MOVELOOP_SKIP_STEP
-	var/atom/movable/moving_parent = parent
-	if(moving_parent.anchored)
-		return MOVELOOP_SKIP_STEP
-
-/datum/component/convey/proc/loop_ended(datum/source)
-	SIGNAL_HANDLER
-	if(QDELETED(src))
-		return
-	qdel(src)
-
 /obj/structure/roller
 	name = "roller"
 	desc = "A rotating roller that moves items in one direction. Can be powered by rotation from the sides."
@@ -56,6 +18,8 @@
 /obj/structure/roller/Initialize(mapload)
 	. = ..()
 	movedir = dir
+	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_CONVEYOR_PRIORITY)
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_TURF_IGNORE_SLOWDOWN)))
 
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
@@ -195,13 +159,13 @@
 		return
 	SSmove_manager.stop_looping(thing, SSconveyors)
 
-/obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, turf/exit_turf)
+/obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, direction)
 	SIGNAL_HANDLER
 
 	if(!ismovable(exiting_atom))
 		return
 
-	var/obj/structure/roller/next_roller = locate(/obj/structure/roller) in exit_turf
+	var/obj/structure/roller/next_roller = locate(/obj/structure/roller) in get_step(src, direction)
 
 	// Stop conveying if no operating roller in exit direction
 	if(!next_roller || !next_roller.operating)
@@ -272,7 +236,7 @@
 	sort_direction = text2dir(user_choice)
 	visible_message("[src] clicks, updating its sorting direction!")
 
-/obj/structure/roller_sorter/AltClick(mob/user)
+/obj/structure/roller_sorter/AltClick(mob/user, list/modifiers)
 	. = ..()
 	visible_message("[src] beeps, resetting its sorting list!")
 	sorting_list = list()
@@ -303,7 +267,7 @@
 	build_roller_chain()
 	return TRUE
 
-/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, params)
+/obj/structure/roller/attackby(obj/item/attacking_item, mob/user, list/modifiers)
 	if(istype(attacking_item, /obj/item/roller_sorter_lister))
 		var/obj/structure/roller_sorter/new_sorter = new(get_turf(src))
 		new_sorter.parent_roller = src
@@ -347,7 +311,7 @@
 	. += span_notice("Attack items to add them to the sorting list.")
 	. += span_notice("Alt-Click to reset the sorting list.")
 
-/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
 	if(target == src || !proximity_flag)
 		return ..()
 
@@ -365,7 +329,7 @@
 	current_sort += target.type
 	to_chat(user, span_notice("[target] has been added to the sorting list."))
 
-/obj/item/roller_sorter_lister/AltClick(mob/user)
+/obj/item/roller_sorter_lister/AltClick(mob/user, list/modifiers)
 	. = ..()
 	visible_message("The sorting list has been reset!")
 	current_sort = list()

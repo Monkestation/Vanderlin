@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	mode.enter_mode(src)
 	current_category = BM_CATEGORY_TURF
 	open_item_browser()
-	RegisterSignal(holder.mob, COMSIG_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
+	RegisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 	RegisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
 /**
@@ -82,7 +82,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 		item_browser.close()
 		item_browser = null
 	if(holder?.mob)
-		UnregisterSignal(holder.mob, COMSIG_MOUSE_ENTERED)
+		UnregisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED)
 		UnregisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED)
 
 	qdel(src)
@@ -317,20 +317,19 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
  * @param {atom} object - The object clicked on
  * @return {bool} - Whether the click was handled
  */
-/datum/buildmode/proc/InterceptClickOn(mob/user, params, atom/object)
-	var/list/modifiers = params2list(params)
+/datum/buildmode/proc/InterceptClickOn(mob/user, list/modifiers, atom/object)
 	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
 	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
 
 	if(selected_item && !istype(mode, /datum/buildmode_mode/advanced))
 		if(left_click)
-			place_object(get_turf(object), user, params)
+			place_object(get_turf(object), user, modifiers)
 			return TRUE
 
 		if(right_click)
 			clear_selection()
 			return TRUE
-	return mode.handle_click(user.client, params, object)
+	return mode.handle_click(user.client, modifiers, object)
 
 /**
  * New buildmode category button
@@ -380,7 +379,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	var/datum/buildmode/parent_buildmode
 	var/skip = FALSE
 
-/atom/movable/buildmode_pixel_dummy/New(loc, datum/buildmode/bm)
+/atom/movable/buildmode_pixel_dummy/Initialize(mapload, datum/buildmode/bm)
 	. = ..()
 	parent_buildmode = bm
 

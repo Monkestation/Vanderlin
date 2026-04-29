@@ -22,7 +22,7 @@
 		output.remove_provider(/datum/reagent/steam, stored_steam)
 	. = ..()
 
-/obj/structure/boiler/attack_hand(mob/user, params)
+/obj/structure/boiler/attack_hand(mob/user, list/modifiers)
 	var/new_output = input(user, "Set the steam output pressure.", "boiler") as num|null
 	if(!new_output)
 		return

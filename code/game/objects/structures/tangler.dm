@@ -91,7 +91,7 @@
 		return
 	if(isliving(user))
 		var/mob/living/L = user
-		var/time2mount = CLAMP((L.STASTR * 2), 1, 99)
+		var/time2mount = CLAMP((GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 2), 1, 99)
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(user != M)
 			if(prob(time2mount))
@@ -114,7 +114,7 @@
 		return
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
-		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNE))
+		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNITY))
 			return
 		if(FACTION_PLANTS in L.faction)
 			return
@@ -129,7 +129,7 @@
 		if(!HAS_TRAIT(L, TRAIT_NOPAIN))
 			L.emote("painscream", forced = FALSE)
 		src.visible_message("<span class='danger'>[src] snatches [L]!</span>")
-		playsound(src.loc, "plantcross", 100, FALSE, -1)
+		playsound(src, "plantcross", 100, FALSE, -1)
 	else if(istype(AM, /obj/item))
 		if(is_type_in_list(AM, eatablez))
 			aggroed = world.time

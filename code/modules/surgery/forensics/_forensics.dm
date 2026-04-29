@@ -66,7 +66,7 @@
 		src.fibers = LAZY_LISTS_OR(src.fibers, fibers)
 	check_blood()
 
-/datum/forensics/Destroy(force, ...)
+/datum/forensics/Destroy(force)
 	var/atom/parent_atom = parent.resolve()
 	if (!isnull(parent_atom))
 		UnregisterSignal(parent_atom, list(COMSIG_COMPONENT_CLEAN_ACT))
@@ -123,7 +123,10 @@
 			if(!ignoregloves)
 				human_suspect.gloves.add_fingerprint(human_suspect, ignoregloves = TRUE) //ignoregloves = TRUE to avoid infinite loop.
 				return
-		var/full_print = md5(human_suspect.dna.unique_identity)
+		var/obj/item/bodypart/hand = human_suspect.hand_bodyparts[human_suspect.active_hand_index]
+		var/full_print = hand ? hand.fingerprint : md5(human_suspect.dna.unique_identity)
+		if(!full_print) // including inorganic hands
+			return
 		LAZYSET(fingerprints, full_print, full_print)
 	return TRUE
 
