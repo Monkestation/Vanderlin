@@ -207,6 +207,15 @@
 		"Sea Foam" = HAIR_COLOR_SEA_FOAM,
 	)
 
+/datum/species/triton/get_oldhc_list()
+	return list(
+		"Fog" = HAIR_COLOR_SEA_FOG,
+		"Gravel" = HAIR_COLOR_GRAVEL,
+		"Mist" = HAIR_COLOR_MIST,
+		"Photic" = HAIR_COLOR_PHOTIC,
+		"Turtle Egg" = HAIR_COLOR_TURTLE,
+	)
+
 /datum/action/innate/bioluminescence
 	name = "Bioluminescence"
 	desc = "Toggle a bright bioluminescent light from your body, moving with you."
