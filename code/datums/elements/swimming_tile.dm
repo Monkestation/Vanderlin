@@ -155,8 +155,8 @@
 	if(!HAS_TRAIT(owner, TRAIT_SWIMMER) && COOLDOWN_FINISHED(src, ticking_stamina_pity))
 		var/effective_stamina_per_interval = stamina_per_interval
 
-		var/athletics_skill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/swimming)
-		var/final_stamina_cost = effective_stamina_per_interval - athletics_skill
+		var/swimming_skill = GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/swimming)
+		var/final_stamina_cost = effective_stamina_per_interval - swimming_skill
 
 		if(final_stamina_cost > 0 && !owner.adjust_stamina(final_stamina_cost, "drown"))
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living, Knockdown), 3 SECONDS), 1 SECONDS)

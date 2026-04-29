@@ -51,7 +51,7 @@
 		if(victim == user)
 			continue
 
-		if(user.faction_check_mob(victim))
+		if(user.faction_check_atom(victim))
 			continue // Don't crush allies
 
 		crush_victim(victim, user)
@@ -63,7 +63,7 @@
 			if(target == user)
 				continue
 
-			if(user.faction_check_mob(target))
+			if(user.faction_check_atom(target))
 				continue // Don't affect allies
 
 			apply_shockwave(target, user, affected_turf, epicenter)
@@ -127,13 +127,13 @@
 
 	// Check for crush target (same tile)
 	for(var/mob/living/potential_crush in user_turf)
-		if(potential_crush != user && !user.faction_check_mob(potential_crush))
+		if(potential_crush != user && !user.faction_check_atom(potential_crush))
 			crushed_target = TRUE
 			break
 
 	// Count nearby enemies
 	for(var/mob/living/enemy in range(slam_range, user))
-		if(enemy != user && !user.faction_check_mob(enemy))
+		if(enemy != user && !user.faction_check_atom(enemy))
 			nearby_enemies++
 
 	// Very high priority if we can crush someone

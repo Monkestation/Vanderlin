@@ -53,6 +53,8 @@
 
 	ai_controller = /datum/ai_controller/cat
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
+
 	var/obj/item/held_item
 
 /mob/living/simple_animal/pet/cat/Initialize()

@@ -211,7 +211,7 @@
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	SET_BASE_PIXEL(0, 10)
 	icon_state = "noose"
-	can_buckle = 1
+	can_buckle = TRUE
 	layer = 4.26
 	max_integrity = 10
 	buckle_lying = FALSE

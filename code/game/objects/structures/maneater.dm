@@ -121,7 +121,7 @@
 		playsound(M, 'sound/combat/grabstruggle.ogg', 75)
 
 
-/obj/structure/flora/grass/maneater/real/user_buckle_mob(mob/living/M, mob/living/user) //Don't want them getting put on the rack other than by spiking
+/obj/structure/flora/grass/maneater/real/user_buckle_mob(mob/living/M, mob/living/user, check_loc) //Don't want them getting put on the rack other than by spiking
 	return
 
 /obj/structure/flora/grass/maneater/real/HasProximity(atom/movable/AM)

@@ -324,7 +324,7 @@
 
 	// Apply effects to mobs
 	for(var/mob/living/L in range(radius, boss))
-		if(L != boss && !L.faction_check_mob(boss))
+		if(L != boss && !L.faction_check_atom(boss))
 			// Closer targets take more damage
 			var/distance = get_dist(boss, L)
 			var/damage = 30 - (distance * 5)

@@ -49,6 +49,13 @@
 	var/rarity_mod = 0
 
 	vis_flags = VIS_INHERIT_PLANE
+
+	/// The sound this obj makes when something is buckled to it
+	var/buckle_sound = null
+
+	/// The sound this obj makes when something is unbuckled from it
+	var/unbuckle_sound = null
+
 	uses_integrity = TRUE
 
 	// See /code/datums/locks

@@ -151,7 +151,6 @@
 /datum/quirk/boon/pet/on_remove()
 	// Don't delete the pet when quirk is removed, just release it
 	if(pet_mob && !QDELETED(pet_mob))
-		pet_mob.owner = null
 		pet_mob.tame = FALSE
 		pet_mob = null
 

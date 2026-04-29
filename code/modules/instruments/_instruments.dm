@@ -123,7 +123,7 @@
 				continue
 			else if(user.inspiration.check_in_audience(listener))
 				bypass_checks = TRUE
-		if(!bypass_checks && !user.faction_check_mob(listener))
+		if(!bypass_checks && !user.faction_check_atom(listener))
 			continue
 		listener.apply_status_effect(instrument_buff)
 

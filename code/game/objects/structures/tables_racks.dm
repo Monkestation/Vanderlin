@@ -502,7 +502,7 @@
 	desc = ""
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "optable"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = NO_BUCKLE_LYING
 	buckle_requires_restraints = 1
 	var/mob/living/carbon/human/patient = null

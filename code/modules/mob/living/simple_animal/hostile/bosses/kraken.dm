@@ -26,7 +26,6 @@
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 
 	faction = list("kraken")
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	deaggroprob = 0
 	del_on_deaggro = FALSE
