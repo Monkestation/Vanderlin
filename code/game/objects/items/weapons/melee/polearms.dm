@@ -662,6 +662,36 @@
 	. = ..()
 	AddElement(/datum/element/walking_stick)
 
+/obj/item/weapon/sickle/scythe/steelscythe
+	name = "steel scythe"
+	desc = "A steel scythe used to cut down crops and enemies alike."
+	icon = 'icons/roguetown/weapons/64/polearms.dmi'
+	icon_state = "scythe"
+	force = 15
+	force_wielded = 25
+	possible_item_intents = list(SPEAR_CUT) //same as iron scythe
+	gripped_intents = list(SPEAR_CUT)
+	SET_BASE_PIXEL(-16, -16)
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	bigboy = TRUE
+	gripsprite = TRUE
+	wlength = WLENGTH_GREAT
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK
+	resistance_flags = FLAMMABLE // Weapon still made mostly of wood
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONGEST //Steel integrity
+	minstr = 8 //Steel is heavier
+	melting_material = /datum/material/steel
+	melt_amount = 100
+	associated_skill = /datum/skill/combat/polearms
+	blade_dulling = DULLING_BASHCHOP
+	wdefense = 3 //Has a better grip, and a larger blade
+	thrown_bclass = BCLASS_CUT
+	throwforce = 15
+	sellprice = 40 //A bit more expensive due to better materials
+
 /obj/item/weapon/polearm/spear/bonespear
 	name = "bone spear"
 	desc = "A spear made of bones."
