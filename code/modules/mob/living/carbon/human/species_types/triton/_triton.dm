@@ -176,7 +176,9 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/deepspeak)
-
+	for(var/datum/action/innate/bioluminescence/action in C.actions)
+		action.Remove(C)
+		break
 /datum/species/triton/check_roundstart_eligible()
 	return TRUE
 
@@ -205,15 +207,6 @@
 		"Sea Foam" = HAIR_COLOR_SEA_FOAM,
 	)
 
-/datum/species/triton/get_oldhc_list()
-	return list(
-		"Fog" = HAIR_COLOR_SEA_FOG,
-		"Gravel" = HAIR_COLOR_GRAVEL,
-		"Mist" = HAIR_COLOR_MIST,
-		"Photic" = HAIR_COLOR_PHOTIC,
-		"Turtle Egg" = HAIR_COLOR_TURTLE,
-	)
-
 /datum/action/innate/bioluminescence
 	name = "Bioluminescence"
 	desc = "Toggle a bright bioluminescent light from your body, moving with you."
@@ -225,9 +218,12 @@
 	. = ..()
 	if(!owner)
 		return FALSE
-	if(our_light)
-		return FALSE
-	our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
+	if(our_light && !QDELETED(our_light)) {
+		our_light.set_light_on(TRUE)
+		our_light.update_light()
+	} else {
+		our_light = new /obj/effect/dummy/lighting_obj/moblight(owner, "#66ddff", 7, 1)
+	}
 	owner.visible_message(span_notice("[owner]'s body begins to glow with a deep blue bioluminescent light!"))
 	active = TRUE
 
@@ -236,9 +232,12 @@
 	if(!owner)
 		return FALSE
 	if(our_light)
-		qdel(our_light)
-		our_light = null
+		our_light.set_light_on(FALSE)
+		our_light.update_light()
 	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
 	active = FALSE
 
-
+/datum/action/innate/bioluminescence/Remove(mob/removed_from)
+	qdel(our_light)
+	active = FALSE
+	return ..()
