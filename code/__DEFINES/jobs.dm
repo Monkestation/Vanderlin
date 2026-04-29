@@ -26,6 +26,40 @@
 /// Whether the job can be displayed on the actors list
 #define JOB_SHOW_IN_ACTOR_LIST (1<<4)
 
+#define ALL_FACTIONS list( \
+	FACTION_NONE, \
+	FACTION_NEUTRAL, \
+	FACTION_HOSTILE, \
+	FACTION_TOWN, \
+	FACTION_FOREIGNERS, \
+	FACTION_MIGRANTS, \
+	FACTION_UNDEAD, \
+	FACTION_PLANTS, \
+	FACTION_VINES, \
+	FACTION_CABAL, \
+	FACTION_RATS, \
+	FACTION_ORCS, \
+	FACTION_BUMS, \
+	FACTION_VIKINGS, \
+	FACTION_MATTHIOS \
+)
+
+#define FACTION_NONE		"None"
+#define FACTION_NEUTRAL		"Neutral"
+#define FACTION_HOSTILE		"Hostile"
+#define FACTION_TOWN		"Town"
+#define FACTION_FOREIGNERS  "Foreigners"
+#define FACTION_MIGRANTS  	"Migrants"
+#define FACTION_UNDEAD		"Undead"
+#define FACTION_PLANTS		"Plants"
+#define FACTION_VINES		"Vines" //Seemingly unused
+#define FACTION_CABAL		"Cabal"
+#define FACTION_RATS		"Rats"
+#define FACTION_ORCS		"Orcs"
+#define FACTION_BUMS		"Bums"
+#define FACTION_MATTHIOS	"Matthios"
+#define FACTION_VIKINGS     "Vikings"
+
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
 #define CHURCHMEN		(1<<2)
