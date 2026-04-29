@@ -347,6 +347,14 @@
 	created_item = /obj/item/weapon/polearm/eaglebeak/lucerne
 	craftdiff = 2
 
+/datum/anvil_recipe/weapons/iron/scythe
+	name = "Iron Scythe (+Small Log)"
+	recipe_name = "a iron scythe"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/sickle/scythe
+	craftdiff = 2
+
 /datum/anvil_recipe/weapons/iron/sledgehammer
 	name = "Sledgehammer (+Small Log)"
 	recipe_name = "a big hammer"
@@ -459,6 +467,14 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/mace/goden
+	craftdiff = 2
+
+/datum/anvil_recipe/weapons/iron/spiked
+	name = "Spiked Club (+Small Log, +Iron Bar)"
+	recipe_name = "a Spiked Iron Club"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/iron)
+	created_item = /obj/item/weapon/mace/spiked
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/iron/zweihander
@@ -587,6 +603,12 @@
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/mace/steel/rungu
 
+/datum/anvil_recipe/weapons/steel/morningstar
+	name = "Steel Morningstar (+Small Log, +Steel Bar)"
+	recipe_name = "a Steel Morningstar"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/mace/steel/morningstar
 
 /datum/anvil_recipe/weapons/steel/sledgehammer
 	name = "Steel Sledgehammer (+Small Log)"
@@ -626,6 +648,14 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/billhook
 	craftdiff = 3
+
+/datum/anvil_recipe/weapons/steel/steelscythe
+	name = "Steel Scythe (+Small Log)"
+	recipe_name = "a steel scythe"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/sickle/steelscythe
+	craftdiff = 2
 
 /datum/anvil_recipe/weapons/steel/cutlass_steel
 	name = "Cutlass"
@@ -897,6 +927,20 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/elvenclub/steel
+
+/datum/anvil_recipe/weapons/steel/katar
+	name = "Katar"
+	recipe_name = "a steel Katar"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/katar
+	craftdiff = 3 //Dont want every bozo being able to make fist weapons
+
+/datum/anvil_recipe/weapons/steel/knuckles
+	name = "Steel Knuckles"
+	recipe_name = "a steel knuckle duster"
+	appro_skill = /datum/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/knuckles
+	craftdiff = 4 //Knuckles are harder to make due to the intricate grip.
 
 // --------- SILVER ------------  Harder to craft, does less damage and has less durability than steel, but banes undead.
 
