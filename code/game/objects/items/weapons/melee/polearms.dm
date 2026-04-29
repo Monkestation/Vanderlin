@@ -685,7 +685,7 @@
 	minstr = 8 //Steel is heavier
 	melting_material = /datum/material/steel
 	melt_amount = 100
-	associated_skill = /datum/skill/combat/polearms
+	associated_skill = /datum/attribute/skill/combat/polearms
 	blade_dulling = DULLING_BASHCHOP
 	wdefense = 3 //Has a better grip, and a larger blade
 	thrown_bclass = BCLASS_CUT

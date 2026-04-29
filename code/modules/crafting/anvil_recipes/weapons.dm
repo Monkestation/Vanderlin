@@ -654,7 +654,7 @@
 	recipe_name = "a steel scythe"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/grown/log/tree/small)
-	created_item = /obj/item/weapon/sickle/steelscythe
+	created_item = /obj/item/weapon/sickle/scythe/steelscythe
 	craftdiff = 2
 
 /datum/anvil_recipe/weapons/steel/cutlass_steel
