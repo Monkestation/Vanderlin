@@ -67,7 +67,7 @@
 /datum/ai_behavior/basic_melee_attack/gator_attack/proc/perform_death_roll(datum/ai_controller/controller, mob/living/simple_animal/hostile/retaliate/gator/gator_pawn, mob/living/target)
 	gator_pawn.visible_message("<span class='danger'>[gator_pawn] grabs [target] and performs a vicious death roll!</span>")
 
-	target.apply_damage(death_roll_damage, BRUTE, "chest")
+	target.apply_damage(death_roll_damage, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_BITE)
 	target.Paralyze(3 SECONDS)
 	var/matrix/M = matrix()
 	for(var/i in 1 to 3)

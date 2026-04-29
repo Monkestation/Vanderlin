@@ -163,10 +163,10 @@
 		return
 	reac_volume = round(reac_volume,0.1)
 	if(method & INGEST)
-		C.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr))
+		C.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
 	if(method & INJECT)
-		C.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr))
+		C.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
 	C.acid_act(acidpwr, reac_volume)
 

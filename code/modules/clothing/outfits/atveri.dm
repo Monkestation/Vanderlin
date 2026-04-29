@@ -15,17 +15,75 @@
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 
+/obj/item/clothing/armor/leather/atgervi/advanced
+	name = "hardened shaman's coat"
+	desc = "A thick, furred protective coat, often made by hand expertly from a beast killed in the bearer's hunt."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/atgervi/masterwork
+	name = "masterwork shaman's coat"
+	desc = "This coat was masterfully hand crafted with dendors blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/atgervi/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+
 /obj/item/clothing/pants/trou/leather/atgervi
 	name = "fur pants"
 	desc = "Thick fur pants made to endure the coldest winds, offering a share of protection from fang and claw of beast or men alike."
 	icon_state = "atgervi_pants"
 	item_state = "atgervi_pants"
 
+/obj/item/clothing/pants/trou/leather/atgervi/advanced
+	name = "hardened fur chausses"
+	desc = "Expertly made thick fur pants made to endure the coldest winds, offering a measure of protection from fang and claw of beast or men alike."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+
+/obj/item/clothing/pants/trou/leather/atgervi/masterwork
+	name = "masterwork fur chausses"
+	desc = "Masterfully made thick fur pants made to endure extreme winter winds, offering a reliable amount of protection from fang, and claw of beast or men alike."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/pants/trou/leather/atgervi/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
+
 /obj/item/clothing/gloves/angle/atgervi
 	name = "fur-lined leather gloves"
 	desc = "Thick, padded gloves made for the harshest of climates, and wildest of beasts encountered in the untamed lands."
 	icon_state = "atgervi_raider_gloves"
 	item_state = "atgervi_raider_gloves"
+
+/obj/item/clothing/gloves/angle/atgervi/advanced
+	name = "hardened fur-lined leather gloves"
+	desc = "Thick, well padded gloves made for the harshest of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
+	icon_state = "atgervi_raider_gloves"
+	item_state = "atgervi_raider_gloves"
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+
+/obj/item/clothing/gloves/angle/atgervi/masterwork
+	name = "masterwork fur-lined leather gloves"
+	desc = "Thick, masterfully padded gloves made for the harshest, most extreme of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 20, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/gloves/angle/atgervi/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/gloves/plate/atgervi
 	name = "beast claws"

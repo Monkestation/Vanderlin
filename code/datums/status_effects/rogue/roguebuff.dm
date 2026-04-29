@@ -380,7 +380,7 @@
 		C.emote("pain", forced = TRUE)
 		playsound(C, 'sound/gore/flesh_eat_03.ogg', 100, TRUE)
 		to_chat(C, span_warning("Dendor's transformation fades, flesh shrinking back. My body aches..."))
-		C.adjustBruteLoss(10)
+		C.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 		C.apply_status_effect(/datum/status_effect/debuff/barbfalter)
 		C.update_transform(resize = 1/1.2)
 		C.RemoveElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY, 1, -2)

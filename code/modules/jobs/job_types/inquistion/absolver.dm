@@ -78,6 +78,7 @@
 /datum/job/absolver/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_school(spawned, "Sanctae", 0, "Absolver")
+	spawned.add_chem_effect(CE_PAINKILLER, 10, "[type]")
 
 	spawned.hud_used?.shutdown_bloodpool()
 	spawned.hud_used?.initialize_bloodpool()

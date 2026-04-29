@@ -137,7 +137,7 @@
 			if(isliving(A) && A != boss)
 				var/mob/living/M = A
 				M.Knockdown(2 SECONDS)
-				M.adjustBruteLoss(20)
+				M.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
 				M.throw_at(get_edge_target_turf(boss, direction), 4, 1)
 				playsound(M, pick('sound/combat/hits/punch/punch_hard (1).ogg','sound/combat/hits/punch/punch_hard (2).ogg','sound/combat/hits/punch/punch_hard (3).ogg'), 50, TRUE)
 
@@ -152,7 +152,7 @@
 	for(var/mob/living/L in orange(1, boss))
 		if(L != boss)
 			L.Knockdown(1 SECONDS)
-			L.adjustBruteLoss(10)
+			L.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 
 	new /obj/effect/temp_visual/minotaur_impact(get_turf(boss))
 	qdel(boss.GetComponent(/datum/component/after_image))
@@ -263,7 +263,7 @@
 			for(var/mob/living/L in front_turf)
 				if(L != boss)
 					L.Knockdown(2 SECONDS)
-					L.adjustBruteLoss(15)
+					L.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 
 	finish_action(controller, TRUE)
 
@@ -329,7 +329,7 @@
 			var/distance = get_dist(boss, L)
 			var/damage = 30 - (distance * 5)
 			if(damage > 0)
-				L.adjustBruteLoss(damage)
+				L.adjustBruteLoss(damage, damage_type = BCLASS_BLUNT)
 
 			// Knockdown based on distance
 			if(distance <= 3)

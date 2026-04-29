@@ -120,9 +120,9 @@
 			fovangle |= FOV_RIGHT
 		else
 			if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
-				fovangle |= FOV_LEFT
-			if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
 				fovangle |= FOV_RIGHT
+			if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
+				fovangle |= FOV_LEFT
 
 	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
 	if(!fov)

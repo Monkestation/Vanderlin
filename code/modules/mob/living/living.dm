@@ -131,7 +131,7 @@
 		visible_message("[src] falls on top of [crumpled_mob]!")
 		crumpled_mob.Stun(1)
 		crumpled_mob.AdjustKnockdown(levels * 20)
-		crumpled_mob.take_overall_damage(impact_damage)
+		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)
 
 	return ..()
 
@@ -154,7 +154,7 @@
 	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!iscarbon(src)) // carbons need to do their own damage calculations based on bodyparts
 		var/encumbrance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5) // half base falling damage. scale up to 100% based on encumbrance
-		adjustBruteLoss(((levels * 10) * encumbrance_multiplier) ** 1.5)
+		adjustBruteLoss(((levels * 10) * encumbrance_multiplier) ** 1.5, damage_type = BCLASS_BLUNT)
 		AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
 		AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 	return .
@@ -938,7 +938,24 @@
 		if(blood_volume <= 0)
 			set_health(NONE)
 	update_stat()
+	update_pain()
+	update_shock()
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE, amount)
+
+/// Updates pain value
+/mob/living/proc/update_pain()
+	painloss = getPainLoss()
+	return painloss
+
+/// Updates shock value
+/mob/living/proc/update_shock()
+	traumatic_shock = getShock(TRUE)
+	return traumatic_shock
+
+/// Can this mob get affected by shock?
+/mob/living/proc/can_feel_pain()
+	return FALSE
+
 
 /**
  * Proc used to resuscitate a mob, bringing them back to life.
@@ -1078,7 +1095,7 @@
 /mob/living/carbon/human/can_be_revived()
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(!istype(H) || H.rotted || H.skeletonized)
+	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
 		return FALSE
 	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
 	if(!istype(B) || B.brain_death)
@@ -1635,13 +1652,6 @@
 
 	if(moving_resist) //we resisted by trying to move
 		client?.move_delay = world.time + 50
-
-	var/pain_factor = 1
-	if(istype(pulledby, /mob/living/carbon))
-		var/mob/living/carbon/C = pulledby
-		pain_factor += C.get_pain_percent() * 0.5
-
-	resist_chance *= pain_factor
 
 	adjust_stamina(rand(2,5))
 	pulledby.adjust_stamina(rand(2,5))

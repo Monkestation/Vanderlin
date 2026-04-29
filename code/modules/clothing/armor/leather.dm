@@ -30,16 +30,17 @@
 /obj/item/clothing/armor/leather/advanced
 	name = "hardened leather armor"
 	desc = "Sturdy, durable, flexible. Will keep you alive."
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_STRONG
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+
 
 /obj/item/clothing/armor/leather/masterwork
 	name = "masterwork leather armor"
 	desc = "This leather armor is a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STANDARD + 100
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
 	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/armor/leather/masterwork/Initialize()
@@ -56,6 +57,24 @@
 	armor = ARMOR_LEATHER
 	salvage_result = /obj/item/natural/hide/cured
 
+/obj/item/clothing/armor/leather/hide/advanced
+	name = "hardened hide armor"
+	desc = "A leather armor with additional thick internal padding of creacher fur. Offers higher integrity and comfort."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/hide/masterwork
+	name = "masterwork hide armor"
+	desc = "A leather armor with a large amount of thick internal padding of the best creacher fur. Offers much higher integrity and comfort."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/hide/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
+
 /obj/item/clothing/armor/leather/hide/steppe
 	name = "steppe hide armor"
 	desc = "Worn by riders of the steppe, this leather armor is padded with beast fur for warmth and comfort"
@@ -66,6 +85,24 @@
 	body_parts_covered = COVERAGE_FULL
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 4.5 KILOGRAMS
+
+/obj/item/clothing/armor/leather/hide/steppe/advanced
+	name = "hardened steppe hide armor"
+	desc = "Worn by riders of the steppe, this stiffened leather armor is padded with thick beast fur for warmth and comfort."
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor = list("blunt" = 75, "slash" = 60, "stab" = 30, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/hide/steppe/masterwork
+	name = "masterwork steppe hide armor"
+	desc = "Worn by veteran riders of the steppe, this stiffened leather armor is padded with the best, and most dangerous, thick beast fur for warmth and comfort."
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor = list("blunt" = 100, "slash" = 70, "stab" = 40, "piercing" = 10, "fire" = 0, "acid" = 0)
+
+/obj/item/clothing/armor/leather/hide/steppe/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 //................ Splint Mail ............... //
 /obj/item/clothing/armor/leather/splint

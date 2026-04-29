@@ -22,3 +22,58 @@
 /// Standard humanoid limbs - can bleed and suffer all flesh/bone wounds. Can also bleed, and be dislocated. Think human arms and legs
 #define BIO_STANDARD_JOINTED (BIO_STANDARD_UNJOINTED|BIO_JOINTED)
 
+#define FRACTURE_BCLASSES list(\
+	BCLASS_BLUNT,\
+	BCLASS_SMASH,\
+	BCLASS_CHOP,\
+	BCLASS_PICK,\
+	BCLASS_PUNCH,\
+	BCLASS_SHOT,\
+)
+#define NO_KNOCKOUT_BCLASSES list(\
+	BCLASS_CHOP,\
+	BCLASS_SHOT,\
+	BCLASS_PICK,\
+)
+#define DISLOCATION_BCLASSES list(\
+	BCLASS_TWIST,\
+)
+#define CBT_BCLASSES list(\
+	BCLASS_BLUNT,\
+	BCLASS_SMASH,\
+	BCLASS_CHOP,\
+	BCLASS_PICK,\
+	BCLASS_PUNCH,\
+	BCLASS_TWIST,\
+)
+#define STAB_BCLASSES list(\
+	BCLASS_STAB,\
+	BCLASS_SHOT,\
+	BCLASS_PICK,\
+	BCLASS_PIERCE,\
+)
+#define ARTERY_BCLASSES list(\
+	BCLASS_CUT,\
+	BCLASS_CHOP,\
+	BCLASS_STAB,\
+	BCLASS_PICK,\
+	BCLASS_BITE,\
+	BCLASS_SHOT,\
+	BCLASS_PIERCE,\
+)
+#define ARTERY_STRONG_BCLASSES list(\
+	BCLASS_CHOP,\
+	BCLASS_PICK,\
+	BCLASS_SHOT,\
+)
+#define ARTERY_HEART_BCLASSES list(\
+	BCLASS_PICK,\
+	BCLASS_SHOT,\
+	BCLASS_PIERCE,\
+)
+#define CHARRING_BCLASSES list(\
+	BCLASS_BURN,\
+)
+#define WHIPPING_BCLASSES list(\
+	BCLASS_LASHING,\
+)

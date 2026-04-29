@@ -264,8 +264,11 @@
 	var/mob/living/carbon/C = cast_on
 	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(owner.zone_selected))
 	if(affecting)
-		affecting.heal_damage(amount_healed, amount_healed)
 		affecting.heal_wounds(amount_healed * wound_modifier, src)
+		for(var/datum/injury/injury as anything in affecting.injuries)
+			if(injury.damage_type == WOUND_DIVINE)
+				continue
+			injury.heal_damage(amount_healed)
 		C.update_damage_overlays()
 
 	for(var/obj/item/organ/possible_organ in affecting.getorganlist(/obj/item/organ))

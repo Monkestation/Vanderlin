@@ -238,7 +238,7 @@
 		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
-			buckled_mob.adjustBruteLoss(10)
+			buckled_mob.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 			buckled_mob.Knockdown(60)
 	return ..()
 

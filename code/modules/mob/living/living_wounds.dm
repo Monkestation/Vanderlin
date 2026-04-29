@@ -180,9 +180,9 @@
 			dam += 10
 
 	var/list/crit_classes
-	if(bclass in GLOB.fracture_bclasses)
+	if(bclass in FRACTURE_BCLASSES)
 		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
+	if(bclass in ARTERY_BCLASSES)
 		LAZYADD(crit_classes, "artery")
 
 	if(!LAZYLEN(crit_classes))
@@ -201,7 +201,7 @@
 				LAZYADD(attempted_wounds, fracture_type)
 		if("artery")
 			if(user)
-				if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
+				if((bclass in ARTERY_STRONG_BCLASSES) && istype(user.rmb_intent, /datum/rmb_intent/strong))
 					dam += 30
 				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30

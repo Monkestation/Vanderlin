@@ -193,7 +193,7 @@
 	if(dmg)
 		dmg = apply_damage(dmg, BRUTE, def_zone, run_armor_check(user.zone_selected, "stab", blade_dulling=BCLASS_BITE), user)
 		if(dmg)
-			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE)
+			affecting.bodypart_attacked_by(BCLASS_BITE, dmg, user, user.zone_selected, crit_message = TRUE, incoming_germ = 50)
 			playsound(src, "smallslash", 100, TRUE, -1)
 			if(HAS_TRAIT(user, TRAIT_POISONBITE) && src.reagents)
 				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
@@ -577,7 +577,7 @@
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.get_complex_pain() / 50
+		jadded += H.getPainLoss() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1

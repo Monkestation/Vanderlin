@@ -40,7 +40,7 @@
 			var/mob/living/carbon/human/H = AM
 			if(H.dir == get_dir(H,src) && H.m_intent == MOVE_INTENT_RUN && H.body_position != LYING_DOWN)
 				H.Immobilize(10)
-				H.apply_damage(15, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 15))
+				H.apply_damage(15, BRUTE, BODY_ZONE_CHEST, H.run_armor_check("chest", "blunt", damage = 15), damage_type = BCLASS_BLUNT)
 				H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 				playsound(src, "genblunt", 100, TRUE)
 				H.visible_message("<span class='warning'>[H] runs into [src]!</span>", "<span class='warning'>I run into [src]!</span>")
@@ -178,4 +178,4 @@
 		visible_message(span_danger("[src] falls on [crumpled_mob.name]!"))
 		crumpled_mob.Stun(1)
 		crumpled_mob.AdjustKnockdown(levels * 20)
-		crumpled_mob.take_overall_damage(impact_damage)
+		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)

@@ -355,7 +355,7 @@ GLOBAL_LIST_INIT(immerse_ignored_movable, typecacheof(list(
 		return
 
 	if (animate)
-		source.transition_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z), time = UPDATE_TRANSFORM_ANIMATION_TIME)
+		source.transition_filter("immerse_mask", UPDATE_TRANSFORM_ANIMATION_TIME, list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z))
 	else
 		source.modify_filter("immerse_mask", list("y" = -floor((source.get_cached_height() - ICON_SIZE_Y) / 2) - new_z))
 

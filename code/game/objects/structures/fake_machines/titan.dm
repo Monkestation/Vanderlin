@@ -276,8 +276,8 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		reset_mode()
 		return FALSE
 
-	message = SANITIZE_HEAR_MESSAGE(html_decode(message)) // Announcement has protections
-	priority_announce(user.treat_message(message), "[user.real_name], The [user.get_role_title()] Speaks", 'sound/misc/alert.ogg', "Captain")
+	message = SANITIZE_HEAR_MESSAGE(message)
+	SScommunications.make_announcement(user, FALSE, message)
 	reset_mode()
 	return TRUE
 

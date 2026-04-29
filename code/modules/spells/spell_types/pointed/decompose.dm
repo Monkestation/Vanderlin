@@ -46,6 +46,9 @@
 	if(!ishuman(cast_on))
 		return
 	var/mob/living/carbon/human/target = cast_on
+	for(var/datum/injury/injury in target.all_injuries)
+		injury.adjust_germ_level(250)
+
 	if(target.stat == DEAD)
 		var/datum/antagonist/zombie/z_check = target.zombie_check() //why is this called zombie check when it makes you a zombie...
 		if(!z_check)

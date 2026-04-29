@@ -1,7 +1,0 @@
-author: "MissyNym"
-delete-after: True
-changes:
-  - map: "The Murderwood has been completely redone with a focus on the Gallowband controlling/guarding the main path to Vanderlin. A side-path exists for daring folks that either want to take on a jump puzzle or a caveful of spiders on top of a townful of goblins. The southernmost travel-point leads to the Bog, while a southeastern travel-point leads to Malum's Anvil. A southwestern road also exists for when the Coast is implemented."
-  - map: "Travelers from Vanderlin must pass through the Murderwood to reach Malum's Anvil and the Terrorbog, and vice-versa."
-  - map: "Travel-points to other locations have been deleted from Vanderlin, with the Forest travel-point being reoriented towards the South side, past the Rous Tower."
-  - map: "The Bog's travel-points have been updated to remove the secondary forest travel-point and to change the northernmost travel-point to go to the Forest instead. The eastern travel-point to the Mountain remains unchanged."

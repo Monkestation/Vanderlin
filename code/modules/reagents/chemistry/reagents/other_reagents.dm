@@ -31,6 +31,9 @@
 
 /datum/reagent/blood/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
 	. = ..()
+	if(method & TOUCH)
+		L.adjust_germ_level(GERM_PER_UNIT_BLOOD * reac_volume * 0.1)
+
 	if(!(. && method & (INJECT|INGEST)))
 		return
 	SEND_SIGNAL(L, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
@@ -140,7 +143,7 @@
 
 /datum/reagent/water/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.remove_chem_effect("[type]")
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
@@ -153,6 +156,11 @@
 	taste_description = "lead"
 	color = "#98934bc6"
 	sanitization = -SANITIZATION_PER_UNIT_WATER
+
+/datum/reagent/water/gross/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
+	BP.undisinfect_limb()
+	for(var/datum/injury/injury in BP.injuries)
+		injury.adjust_germ_level(SANITIZATION_PER_UNIT_WATER)
 
 /datum/reagent/water/gross/on_aeration(volume, turf/turf)
 	turf.pollute_turf(/datum/pollutant/rot/sewage, volume * 3)
@@ -253,6 +261,7 @@
 		if(!istype(turf_check, /turf/open/water))
 			M.adjust_fire_stacks(-(reac_volume / 10))
 			M.SoakMob(FULL_BODY)
+		M.adjust_germ_level(-reac_volume * sanitization * 0.1)
 	return ..()
 
 

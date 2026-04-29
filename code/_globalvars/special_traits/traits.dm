@@ -963,7 +963,7 @@
 	message = "burps gluttonously!"
 	snd_range = 4
 	snd_vol = 200
-	mute_time = 100 // little less spammable
+	cooldown = 10 SECONDS // little less spammable
 
 /mob/living/carbon/human/proc/emote_burp_loud()
 	set name = "Gluttonous Burp"

@@ -119,9 +119,9 @@
 
 	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(leashed_examine))
 	if(istype(firer))
-		target.apply_damage(15, BRUTE, firer.zone_selected)
+		target.apply_damage(15, BRUTE, firer.zone_selected, damage_type = BCLASS_PIERCE)
 	else
-		target.apply_damage(15, BRUTE, BODY_ZONE_CHEST)
+		target.apply_damage(15, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_PIERCE)
 
 /obj/item/harpoon_gun/proc/leashed_examine(datum/source, mob/user, list/examine_list)
 	examine_list += "<a href='byond://?src=[REF(src)];pull_harpoon=1'>embedded harpoon</a>"
@@ -244,7 +244,7 @@
 	if(!istype(victim))
 		return
 
-	victim.apply_damage(20)
+	victim.apply_damage(20, damage_type = BCLASS_PIERCE)
 	var/turf/target_turf = get_ranged_target_turf(victim, source.dir, 3)
 	if(isnull(target_turf))
 		return

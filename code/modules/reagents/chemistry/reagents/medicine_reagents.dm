@@ -22,9 +22,9 @@
 	if(!iscarbon(L))
 		return
 	var/mob/living/carbon/C = L
-	//var/numbing = min(50, CEILING(C.getShock(TRUE)/2, 1))
+	var/numbing = min(50, CEILING(C.getShock(TRUE)/2, 1))
 	C.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
-	//C.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
+	C.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
 	C.add_chem_effect(CE_STABLE, 1, "[type]")
 	if(C.undergoing_cardiac_arrest() || C.undergoing_nervous_system_failure())
 		C.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
@@ -33,7 +33,7 @@
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_ORGAN_REGEN, "[type] ")
-	//L.remove_chem_effect(CE_PAINKILLER, "[type]")
+	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 	L.remove_chem_effect(CE_TOXIN, "[type]")
 	L.remove_chem_effect(CE_BLOCKAGE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")

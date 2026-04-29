@@ -18,6 +18,12 @@
 	var/age_time = 10 MINUTES
 	var/age_timer
 
+/datum/reagent/consumable/ethanol/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
+	BP.disinfect_limb(boozepwr)
+	for(var/datum/injury/injury in BP.injuries)
+		injury.adjust_germ_level(-boozepwr * 0.5)
+	BP.adjust_germ_level(-boozepwr * 0.1)
+
 /datum/reagent/consumable/ethanol/New()
 	. = ..()
 	if(age_path && holder)
@@ -37,11 +43,11 @@
 
 /datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
 
 /datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
 	. = ..()

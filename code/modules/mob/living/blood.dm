@@ -119,7 +119,7 @@
 		record_featured_stat(FEATURED_STATS_BLEEDERS, src)
 	record_round_statistic(STATS_BLOOD_SPILT, amt / 100)
 
-	if(amt > 0.5)
+	if(amt > 1)
 		if(isturf(loc)) // Blood loss still happens in locker, floor stays clean
 			add_drip_floor(get_turf(src), amt)
 
