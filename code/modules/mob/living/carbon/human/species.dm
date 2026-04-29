@@ -829,8 +829,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		C.reagents.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+		C.add_faction(inherent_factions)
 
 	soundpack_m = new soundpack_m()
 	soundpack_f = new soundpack_f()
@@ -882,8 +881,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction -= i
+		C.remove_faction(inherent_factions)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 

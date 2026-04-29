@@ -36,6 +36,6 @@
 	AddComponent(spawner_type, mob_types, spawn_time, faction, spawn_text, max_mobs)
 
 /obj/structure/spawner/attack_animal(mob/living/simple_animal/M)
-	if(faction_check(faction, M.faction, FALSE)&&!M.client)
+	if(faction_check_atom(M) && !M.client)
 		return
 	..()

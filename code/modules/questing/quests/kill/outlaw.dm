@@ -30,7 +30,7 @@
 			continue
 		var/obj/effect/quest_spawn/spawn_effect = new /obj/effect/quest_spawn(spawn_turf)
 		var/mob/living/goon = new /mob/living/carbon/human/species/human/northern/highwayman/dk_goon(spawn_effect)
-		goon.faction |= "quest"
+		goon.add_faction("quest")
 		spawn_effect.contained_atom = goon
 		spawn_effect.AddComponent(/datum/component/quest_object/mob_spawner, src)
 		ADD_TRAIT(goon, TRAIT_FRESHSPAWN, "[type]")

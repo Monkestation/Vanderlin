@@ -79,7 +79,7 @@
 			mob_gender = pick(MALE, FEMALE)
 		M.gender = mob_gender
 	if(faction)
-		M.faction = list(faction)
+		M.set_faction(get_faction())
 	if(death)
 		M.death(1) //Kills the new mob
 

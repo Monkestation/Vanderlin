@@ -116,7 +116,7 @@
 		var/mob/living/L = AM
 		if(HAS_TRAIT(L, TRAIT_ENTANGLER_IMMUNITY))
 			return
-		if(FACTION_PLANTS in L.faction)
+		if(L.has_faction(FACTION_PLANTS))
 			return
 		if(!aggroed)
 			if(L.m_intent != MOVE_INTENT_RUN)

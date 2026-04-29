@@ -1,9 +1,7 @@
 
-
 /atom/movable
 	/// The list of factions this atom belongs to (used for cacheable faction strings - these tend to not change very often)
-	// VAR_PROTECTED/list/faction
-	var/list/faction
+	VAR_PROTECTED/list/faction
 	/// The list of allies this atom has (used for anything too dynamic for string_list() - typically mob refs, each mob starts with themselves as an ally)
 	var/list/allies
 

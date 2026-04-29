@@ -1,6 +1,6 @@
 /datum/reagent/blood
 	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
-	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=null, "vitae"=0)
+	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"quirks"=null,"preferences"=null, "vitae"=0)
 	name = "Blood"
 	color = COLOR_BLOOD
 	metabolization_rate = 20 //SUPER fast
