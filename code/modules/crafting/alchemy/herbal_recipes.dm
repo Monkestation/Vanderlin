@@ -572,7 +572,6 @@
 /datum/reagent/poison/herbal/ghoulpowder/overdose_start(mob/living/M)
 	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
 	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
-
 /datum/reagent/poison/herbal/pain
 	name = "Souffrance"
 	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm. Very good for torture and interrogation."
