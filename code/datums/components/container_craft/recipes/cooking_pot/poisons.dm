@@ -117,7 +117,6 @@
 	crafting_time = 15 SECONDS
 	finished_smell = /datum/pollutant/food/bitter
 	complete_message = "The fumes from the pot smell of rot and stillness..."
-
 /datum/container_craft/cooking/herbal_tea/rajaijah
 	name = "Shine of the Dark Sun"
 	created_reagent = /datum/reagent/poison/herbal/rajaijah
