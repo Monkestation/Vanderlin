@@ -247,7 +247,3 @@
 	owner.visible_message(span_notice("[owner]'s bioluminescent glow fades away."))
 	active = FALSE
 
-/datum/action/innate/bioluminescence/Remove(mob/removed_from)
-	qdel(our_light)
-	active = FALSE
-	return ..()
