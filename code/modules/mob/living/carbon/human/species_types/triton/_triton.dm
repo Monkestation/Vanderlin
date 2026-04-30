@@ -176,9 +176,10 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/deepspeak)
-	for(var/datum/action/innate/bioluminescence/action in C.actions)
-		action.Remove(C)
-		break
+	var/datum/action/innate/bioluminescence/action = locate() in C.actions
+	if(action)
+		qdel(action)
+		
 /datum/species/triton/check_roundstart_eligible()
 	return TRUE
 
