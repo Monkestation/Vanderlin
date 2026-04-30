@@ -227,6 +227,7 @@
 /datum/action/innate/bioluminescence/Destroy(force)
 	QDEL_NULL(our_light)
 	return ..()
+
 /datum/action/innate/bioluminescence/Activate()
 	. = ..()
 	if(!owner)
