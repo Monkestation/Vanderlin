@@ -105,13 +105,14 @@
 					//Find their observer if it exists, if no words given, we make one up
 					var/my_final_words
 					// Find the observer
-					if(human.last_mind?current)
+					if(human.last_mind?.current)
 						var/mob/ghost = human.last_mind.current
 
 						my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
-						log_say("[ghost] put [my_final_words] for their final words.")
-						human.final_words = my_final_words // They won't be prompted again
-						their_final_words += my_final_words
+						if(my_final_words)
+							log_say("[ghost] put [my_final_words] for their final words.")
+							human.final_words = my_final_words // They won't be prompted again
+							their_final_words += my_final_words
 
 					if(!my_final_words) //No Observers, pick a random one
 						their_final_words += pick(premade_final_words)
@@ -149,7 +150,7 @@
 			if(!(corpse.real_name in names))
 				names += corpse.real_name
 			continue
-		else if(istype(buried, obj/item/bodypart/head))
+		else if(istype(buried, /obj/item/bodypart/head))
 			var/obj/item/bodypart/head/head = buried
 			if(!(head.real_name in names))
 				names += head.real_name
