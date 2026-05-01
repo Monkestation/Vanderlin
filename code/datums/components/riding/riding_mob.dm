@@ -122,7 +122,7 @@
 		modified_move_delay = FLOOR(modified_move_delay * sqrt(2), world.tick_lag)
 	COOLDOWN_START(src, vehicle_move_cooldown, modified_move_delay)
 
-	user.adjust_experience(/datum/attribute/skill/misc/riding, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_ENDURANCE)*0.05) * user.get_learning_boon(/datum/attribute/skill/misc/riding))
+	user.adjust_experience(/datum/attribute/skill/misc/riding, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_ENDURANCE)*0.02) * user.get_learning_boon(/datum/attribute/skill/misc/riding))
 
 	return ..(movable_parent, user, direction, actual_move_delay = modified_move_delay)
 
