@@ -635,6 +635,7 @@
 	name = "Necra's Rage"
 	desc = "The Undermaiden's hateful gaze falls upon me, I've enraged her, and she will torment me till the day I enter her embrace!"
 	icon_state = "curse_necra_4"
+
 /datum/status_effect/debuff/cursed
 	id = "cursed"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/cursed

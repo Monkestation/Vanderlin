@@ -121,13 +121,9 @@
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
-	var/current_mob = owner?.current
-	if(!current_mob)
+	var/mob/living/carbon/human/zombie = owner?.current
+	if(!istype(zombie))
 		return
-	else if(!ishuman(current_mob))
-		return
-
-	var/mob/living/carbon/human/zombie = current_mob
 
 	zombie.cut_overlay(rotflies)
 	remove_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)

@@ -38,14 +38,10 @@
 			// Store the current time for the player
 			GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 
+	var/mob/living/carbon/human/dead_hum
 	if(mind && !QDELETED(mind.current))
 		if(ishuman(mind.current))
-			var/mob/living/carbon/human/dead_hum = mind.current
-			if(!dead_hum.funeral && !dead_hum.final_words)
-				var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest? (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "Final Words (Optional)", max_length=75)
-				if(final_words)
-					dead_hum.final_words = final_words
-					log_say("[src] put [final_words] for their final words.")
+			dead_hum = mind.current // We use this later since we will give a prompt, and we dont want the rest of the code to sleep
 
 	var/turf/spawn_loc = pick(GLOB.underworldspiritspawns)
 	var/mob/living/carbon/spirit/live_spirit = new /mob/living/carbon/spirit(spawn_loc)
@@ -62,6 +58,14 @@
 	var/area/underworld/underworld = get_area(spawn_loc)
 
 	underworld.Entered(live_spirit, null)
+
+	// If ghost was human, allow them to pick last words if they did not before.
+	if(dead_hum)
+		if(!dead_hum.funeral && !dead_hum.final_words)
+			var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest? (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "Final Words (Optional)", max_length=75)
+			if(final_words)
+				dead_hum.final_words = final_words
+				log_say("[src] put [final_words] for their final words.")
 
 /mob/proc/can_enter_underworld()
 	if(stat < DEAD && !mind.has_antag_datum(/datum/antagonist/zombie))

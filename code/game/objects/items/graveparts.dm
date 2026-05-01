@@ -29,7 +29,7 @@
 		. += span_info("This is a middling decoration.")
 	if(decorationquality == 3)
 		. += span_info("This decoration is of the highest quality.")
-	if(patrons)
+	if(length(patrons))
 		if(/datum/patron/divine/astrata in patrons)
 			. += SPAN_GOD_ASTRATA("This decoration venerates Astrata, the Sun Tyrant.")
 		if(/datum/patron/divine/noc in patrons)
