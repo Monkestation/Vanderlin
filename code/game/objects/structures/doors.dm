@@ -73,13 +73,7 @@
 		AddComponent(/datum/component/repairable, repair_thresholds, broken_repair, 'sound/misc/wood_saw.ogg', repair_skill)
 
 	// Click on the floor to close doors
-	AddComponent(/datum/component/redirect_attack_hand_from_turf, interact_check = CALLBACK(src, PROC_REF(drag_check)))
-
-// if dragging, block 'Click on the floor to close airlocks'
-/obj/structure/door/proc/drag_check(mob/user)
-	if(user.pulling)
-		return FALSE
-	return TRUE
+	AddComponent(/datum/component/redirect_attack_hand_from_turf)
 
 /obj/structure/door/Destroy()
 	. = ..()
