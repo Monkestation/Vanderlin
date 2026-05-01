@@ -340,11 +340,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	tame = TRUE
 	tame_chance = initial(tame_chance)
-	if(user)
-		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 55)
-		befriend(user)
-		record_round_statistic(STATS_ANIMALS_TAMED)
-		SEND_SIGNAL(user, COMSIG_ANIMAL_TAMED, src)
 
 	if(!previous_tame_status)
 		pet_passive = TRUE
@@ -367,6 +362,12 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				)
 				if(!GetComponent(/datum/component/obeys_commands))
 					AddComponent(/datum/component/obeys_commands, pet_commands)
+
+	if(user)
+		SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 55)
+		befriend(user)
+		record_round_statistic(STATS_ANIMALS_TAMED)
+		SEND_SIGNAL(user, COMSIG_ANIMAL_TAMED, src)
 
 	update_appearance()
 	return previous_tame_status

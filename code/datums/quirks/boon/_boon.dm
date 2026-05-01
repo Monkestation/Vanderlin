@@ -135,12 +135,6 @@
 	pet_mob.tamed(H)
 	ADD_TRAIT(pet_mob, TRAIT_TINY, "[type]")
 
-	// Set a name if the pet doesn't have a unique one
-	if(pet_mob.name == initial(pet_mob.name))
-		var/new_name = stripped_input(H, "What is your pet's name?", "Pet Name", initial(pet_mob.name), MAX_NAME_LEN)
-		if(new_name)
-			pet_mob.fully_replace_character_name(null, new_name)
-
 	var/datum/component/obeys_commands/command_component = pet_mob.GetComponent(/datum/component/obeys_commands)
 	if(command_component)
 		var/datum/pet_command/follow/follow_command = command_component.available_commands["Follow"]
