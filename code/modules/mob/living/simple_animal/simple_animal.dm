@@ -321,12 +321,15 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/realchance = tame_chance
 	realchance += (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/taming) * 20)
 	realchance += additional_tame_chance
+
+	var/gained_xp = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+	gained_xp *= user.get_learning_boon(/datum/attribute/skill/labor/taming)
 	if(prob(realchance))
 		tamed(user)
-		var/gained_xp = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 10 * user.get_learning_boon(/datum/attribute/skill/labor/taming)
-		user.adjust_experience(/datum/attribute/skill/labor/taming, gained_xp)
+		user.adjust_experience(/datum/attribute/skill/labor/taming, gained_xp * 10)
 		return TRUE
 
+	user.adjust_experience(/datum/attribute/skill/labor/taming, gained_xp)
 	tame_chance += bonus_tame_chance
 	return FALSE
 
