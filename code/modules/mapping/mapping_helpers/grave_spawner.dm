@@ -138,8 +138,8 @@
 	if(to_be_interred && grave.headstone)
 		var/custom_messages = file2list("strings/grave_messages.txt")
 		grave.headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[to_be_interred.real_name]</span>\
-		\n\
-		\n\
+		<br>\
+		<br>\
 		<span class='italics'>[pick(custom_messages)]</span>"
 
 	//Update Grave

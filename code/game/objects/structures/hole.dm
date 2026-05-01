@@ -72,7 +72,7 @@
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
 		if(headstone.inscription)
-			to_chat(user, headstone.inscription) // We do it this way because the examine code dislikes some of the formatting we do here
+			to_chat(user, headstone.inscription) // We do it this way since dirthole doesnt have an examine usually, so we have it just displayed.
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
@@ -108,8 +108,8 @@
 	icon_state = "gravecovered"
 	opened = FALSE
 
-/// Alt clicking allows you to remove grave decorations if the grave has not been consecrated yet
-/obj/structure/closet/dirthole/AltClick(mob/user, list/modifiers)
+/// Right clicking with hand allows you to remove grave decorations if the grave has not been consecrated yet
+/obj/structure/closet/dirthole/attack_hand_secondary(mob/user, list/modifiers)
 	if(!Adjacent(user) || stage != 4)
 		return FALSE
 
@@ -461,27 +461,15 @@
 
 /// All bodies buried as 'frozen' in time, Necra's gift to ensure their bodies cease to decay
 /obj/structure/closet/dirthole/proc/stasis()
-	for(var/mob/living/corpse in contents)
+	for(var/mob/living/corpse in get_all_contents())
 		if(corpse.stat == DEAD)
 			ADD_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
-	// Same as above but incase they are in a coffin
-	for(var/obj/structure/closet/container in contents)
-		for(var/mob/living/corpse in container.contents)
-			if(corpse.stat == DEAD)
-				ADD_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
-
 /// Reverse of `statis()`
 /obj/structure/closet/dirthole/proc/unstasis()
-	for(var/mob/living/corpse in contents)
+	for(var/mob/living/corpse in get_all_contents())
 		if(corpse.stat == DEAD)
 			REMOVE_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
-
-	// Same as above but incase they are in a coffin
-	for(var/obj/structure/closet/container in contents)
-		for(var/mob/living/corpse in container.contents)
-			if(corpse.stat == DEAD)
-				REMOVE_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
 /// Proc that looks for valid turf and puts a necran lily on it.
 /obj/structure/closet/dirthole/proc/grow_lily()
@@ -588,7 +576,7 @@
 
 	// Calculate damage to buried bodies and provide malus if too damaged.
 	var/bodyquality = 0
-	for(var/mob/living/carbon/human/corpse in contents) // We only care about humans
+	for(var/mob/living/carbon/human/corpse in get_all_contents()) // We only care about humans
 		// No head? -1 point
 		if(!(corpse.get_bodypart(BODY_ZONE_HEAD)))
 			bodyquality -= 1
@@ -596,17 +584,6 @@
 		// Too much brute or burn damage? -1 point
 		if(corpse.getBruteLoss() >= 75 || corpse.getFireLoss() >= 75)
 			bodyquality -= 1
-
-	// Check for container and bodies in container, do same as above
-	for(var/obj/structure/closet/container in contents)
-		for(var/mob/living/carbon/human/corpse in container.contents)
-			// No head? -1 point
-			if(!(corpse.get_bodypart(BODY_ZONE_HEAD)))
-				bodyquality -= 1
-
-			// Too much brute or burn damage? -1 point
-			if(corpse.getBruteLoss() >= 75 || corpse.getFireLoss() >= 75)
-				bodyquality -= 1
 
 	gravequality += bodyquality
 
