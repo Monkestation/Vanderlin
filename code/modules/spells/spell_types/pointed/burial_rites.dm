@@ -83,7 +83,7 @@
 
 	// SECTION 2: Custom Message (Optional)
 	if(headstone.custom_message)
-		headstone.inscription += span_italics("\n\n\
+		headstone.inscription += span_italics("<br><br>\
 		[headstone.custom_message]")
 
 	// SECTION 3: Final Words
@@ -135,7 +135,7 @@
 			return FALSE
 
 		for(var/final_words in their_final_words)
-			headstone.inscription += SPAN_GOD_NECRA("\n[final_words]")
+			headstone.inscription += SPAN_GOD_NECRA("<br>[final_words]")
 
 		grave.say(pick(their_final_words)) //pick a random final words to say
 

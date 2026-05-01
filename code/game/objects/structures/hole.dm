@@ -72,7 +72,7 @@
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone)
 		if(headstone.inscription)
-			to_chat(user, headstone.inscription) // We do it this way because the examine code dislikes some of the formatting we do here
+			to_chat(user, headstone.inscription) // We do it this way since dirthole doesnt have an examine usually, so we have it just displayed.
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
