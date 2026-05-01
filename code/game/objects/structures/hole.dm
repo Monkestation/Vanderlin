@@ -338,6 +338,8 @@
 			else
 				stage++
 		if(stage == 4)
+			if(gravequality == 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
+				to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if something <span class='god_necra'>ancient</span> is watching you... are you prepared to face the consequences if you continue?"))
 			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
 				return
 			stage = 3
@@ -404,7 +406,7 @@
 								new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
 								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
-								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4))
+								if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
 									L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
 								robbery_alert() // Now the entire church knows what you done!
 							if(10) // Max curse...
