@@ -609,11 +609,6 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			platform.obj_flags |= BLOCK_Z_OUT_DOWN
 			platform.AddElement(/datum/element/give_turf_traits, string_list(platform.turf_traits))
 			platform.alpha = 255
-		for(var/atom/movable/movable in objects_pre_alpha)
-			movable.alpha = objects_pre_alpha[movable]
-			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
-			objects_pre_alpha -= movable
-			movable.density = initial(movable.density)
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
@@ -622,6 +617,12 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
 			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(moving_platform.turf_traits))
 			moving_platform.alpha = 255
+
+		for(var/atom/movable/movable in objects_pre_alpha)
+			movable.alpha = objects_pre_alpha[movable]
+			REMOVE_TRAIT(movable, TRAIT_I_AM_INVISIBLE_ON_A_BOAT, REF(src))
+			objects_pre_alpha -= movable
+			movable.density = initial(movable.density)
 
 /datum/lift_master/tram/proc/try_process_order(fence = FALSE)
 	var/total_coin_value = 0
