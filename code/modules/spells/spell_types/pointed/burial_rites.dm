@@ -143,25 +143,18 @@
 /// Returns a list
 /datum/action/cooldown/spell/burial_rites/proc/find_names(obj/structure/closet/dirthole/grave)
 	var/list/names = list()
-	for(var/mob/living/carbon/human/corpse in grave.contents)
-		if(!(corpse.real_name in names))
-			names += corpse.real_name
-	for(var/obj/item/bodypart/head/head in grave.contents)
-		if(!(head.real_name in names))
-			names += head.real_name
-	for(var/mob/living/simple_animal/animal in grave.contents) // For those that bury their cabbits
-		if(!(animal.name in names))
-			names += animal.name
-
-	// We now check for any containers for bodies, we could technically refactor this to be done recursively, but for now will assume that the mob is within any container
-	for(var/obj/structure/closet/container in grave.contents)
-		for(var/mob/living/carbon/human/corpse in container.contents)
+	for(var/buried in grave.get_all_contents())
+		if(ishuman(buried))
+			var/mob/living/carbon/human/corpse = buried
 			if(!(corpse.real_name in names))
 				names += corpse.real_name
-		for(var/obj/item/bodypart/head/head in container.contents)
+			continue
+		else if(istype(buried, obj/item/bodypart/head))
+			var/obj/item/bodypart/head/head = buried
 			if(!(head.real_name in names))
 				names += head.real_name
-		for(var/mob/living/simple_animal/animal in container.contents)
+		else if(isanimal(buried)) // For those that bury their cabbits
+			var/mob/living/simple_animal/animal = buried
 			if(!(animal.name in names))
 				names += animal.name
 
