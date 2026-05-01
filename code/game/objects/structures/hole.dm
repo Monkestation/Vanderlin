@@ -108,8 +108,8 @@
 	icon_state = "gravecovered"
 	opened = FALSE
 
-/// Alt clicking allows you to remove grave decorations if the grave has not been consecrated yet
-/obj/structure/closet/dirthole/AltClick(mob/user, list/modifiers)
+/// Right clicking with hand allows you to remove grave decorations if the grave has not been consecrated yet
+/obj/structure/closet/dirthole/attack_hand_secondary(mob/user, list/modifiers)
 	if(!Adjacent(user) || stage != 4)
 		return FALSE
 

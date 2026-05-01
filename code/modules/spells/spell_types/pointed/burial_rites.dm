@@ -105,23 +105,20 @@
 					//Find their observer if it exists, if no words given, we make one up
 					var/my_final_words
 					// Find the observer
-					for(var/mob/dead/observer/Ghost in GLOB.player_list)
-						if(!Ghost.mind || QDELETED(Ghost.mind.current))
-							continue
-						else if(ishuman(Ghost.mind.current))
-							if((!Ghost.mind.current == human))
-								continue
-							else
-								my_final_words = tgui_input_text(Ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
-								log_say("[Ghost] put [my_final_words] for their final words.")
-								human.final_words = my_final_words // They won't be prompted again
-								their_final_words += my_final_words
-								break
+					if(human.last_mind?current)
+						var/mob/ghost = human.last_mind.current
+
+						my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
+						log_say("[ghost] put [my_final_words] for their final words.")
+						human.final_words = my_final_words // They won't be prompted again
+						their_final_words += my_final_words
+
 					if(!my_final_words) //No Observers, pick a random one
 						their_final_words += pick(premade_final_words)
 
 					found = TRUE
 					break
+
 			else if(isanimal(mob))
 				if(mob.name == name)
 					var/mob/living/simple_animal/animal
