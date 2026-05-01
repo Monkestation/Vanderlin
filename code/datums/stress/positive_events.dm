@@ -126,7 +126,6 @@
 	desc = span_green("A resting place fit for a king!")
 	timer = 20 MINUTES
 
-
 //Hygiene
 
 /datum/stress_event/clean

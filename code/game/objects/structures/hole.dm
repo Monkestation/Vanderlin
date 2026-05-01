@@ -117,20 +117,20 @@
 		to_chat(user, span_warning("I cannot modify a grave that has been already consecrated..."))
 		return FALSE
 
-	var/list/GraveDecorations = list()
+	var/list/grave_decorations = list()
 	if(headstone)
-		GraveDecorations += headstone
+		grave_decorations += headstone
 	if(gravefence)
-		GraveDecorations += gravefence
+		grave_decorations += gravefence
 
 	// List formed, handle if empty, only one, or both
 	var/obj/item/gravedecor/item_to_remove
-	if(!GraveDecorations)
+	if(!grave_decorations)
 		return FALSE
-	else if(length(GraveDecorations) != 1)
-		item_to_remove = tgui_input_list(user, "Which decoration do you want to remove?", "Grave Decor Removal", GraveDecorations)
+	else if(length(grave_decorations) != 1)
+		item_to_remove = tgui_input_list(user, "Which decoration do you want to remove?", "Grave Decor Removal", grave_decorations)
 	else
-		item_to_remove = GraveDecorations[1] // only one item
+		item_to_remove = grave_decorations[1] // only one item
 
 	if(!item_to_remove)
 		return FALSE
@@ -141,30 +141,28 @@
 	if(!do_after(user, 5 SECONDS, src, progress = TRUE))
 		to_chat(user, span_warning("You fail to remove \the [item_to_remove]!"))
 		return FALSE
-	else
-		user.visible_message(span_info("[user] removes \the <span class='bold'>[item_to_remove]</span> from \the [src]"), span_notice("You remove \the <span class='bold'>[item_to_remove]</span> from \the [src]"))
 
-		// Remove either headstone or gravestone
-		if(istype(item_to_remove, /obj/item/gravedecor/headstone))
-			if(item_to_remove.sourceitem)
-				user.put_in_active_hand(new item_to_remove.sourceitem())
-			else
-				// We need to perserve custom_message and inscription
-				var/obj/item/gravedecor/headstone/replacement = new item_to_remove.type()
-				replacement.inscription = headstone.inscription
-				replacement.custom_message = headstone.custom_message
-				user.put_in_active_hand(replacement)
-			headstone = null
-		else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
-			if(item_to_remove.sourceitem)
-				user.put_in_active_hand(new item_to_remove.sourceitem())
-			else
-				user.put_in_active_hand(new item_to_remove.type())
-			gravefence = null
-
-		update_quality()
-		update_appearance(UPDATE_ICON)
-		return TRUE
+	user.visible_message(span_info("[user] removes \the <span class='bold'>[item_to_remove]</span> from \the [src]"), span_notice("You remove \the <span class='bold'>[item_to_remove]</span> from \the [src]"))
+	// Remove either headstone or gravestone
+	if(istype(item_to_remove, /obj/item/gravedecor/headstone))
+		if(item_to_remove.sourceitem)
+			user.put_in_active_hand(new item_to_remove.sourceitem())
+		else
+			// We need to perserve custom_message and inscription
+			var/obj/item/gravedecor/headstone/replacement = new item_to_remove.type()
+			replacement.inscription = headstone.inscription
+			replacement.custom_message = headstone.custom_message
+			user.put_in_active_hand(replacement)
+		headstone = null
+	else if(istype(item_to_remove, /obj/item/gravedecor/gravefence))
+		if(item_to_remove.sourceitem)
+			user.put_in_active_hand(new item_to_remove.sourceitem())
+		else
+			user.put_in_active_hand(new item_to_remove.type())
+		gravefence = null
+	update_quality()
+	update_appearance(UPDATE_ICON)
+	return TRUE
 
 /obj/structure/closet/dirthole/insertion_allowed(atom/movable/AM)
 	if(istype(AM, /obj/structure/closet/crate/chest) || istype(AM, /obj/structure/closet/burial_shroud) || istype(AM, /obj/structure/closet/crate/coffin))
@@ -178,7 +176,7 @@
 /obj/structure/closet/dirthole/toggle(mob/living/user)
 	return
 
-/obj/structure/closet/dirthole/proc/attemptwatermake(mob/living/user, obj/item/reagent_containers/bucket)
+/obj/structure/closet/dirthole/proc/attemptwatermake(obj/item/reagent_containers/bucket, mob/living/user)
 	if(user.used_intent.type == /datum/intent/splash)
 		if(bucket.reagents)
 			var/datum/reagent/master_reagent = bucket.reagents.get_master_reagent()
@@ -222,6 +220,17 @@
 		qdel(attacking_item)
 		return
 
+	if(istype(attacking_item, /obj/item/gravedecor))
+		attack_decor(attacking_item, user)
+	else if(istype(attacking_item, /obj/item/weapon/shovel))
+		attack_shovel(attacking_item, user)
+	else if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
+		attemptwatermake(attacking_item, user)
+	else
+		return ..()
+
+/// Called by `attackby()`, handles interactions with gravedecor objects
+/obj/structure/closet/dirthole/proc/attack_decor(obj/item/gravedecor/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/gravedecor/headstone))
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
@@ -263,12 +272,9 @@
 		update_quality()
 		update_appearance(UPDATE_ICON)
 		return
-	if(!istype(attacking_item, /obj/item/weapon/shovel))
-		if(istype(attacking_item, /obj/item/reagent_containers/glass/bucket))
-			attemptwatermake(user, attacking_item)
-			return
-		return ..()
-	var/obj/item/weapon/shovel/attacking_shovel = attacking_item
+
+/// Called by `attackby()`. Handles interactions with shovels.
+/obj/structure/closet/dirthole/proc/attack_shovel(obj/item/weapon/shovel/attacking_shovel, mob/user)
 	if(user.used_intent.type != /datum/intent/shovelscoop)
 		return
 
@@ -455,44 +461,31 @@
 
 /// All bodies buried as 'frozen' in time, Necra's gift to ensure their bodies cease to decay
 /obj/structure/closet/dirthole/proc/stasis()
-	for(var/mob/living/carbon/human/corpse in contents)
+	for(var/mob/living/corpse in contents)
 		if(corpse.stat == DEAD)
-			ADD_TRAIT(corpse, TRAIT_STASIS, "Necra")
-	for(var/mob/living/simple_animal/animal in contents)
-		if(animal.stat == DEAD)
-			ADD_TRAIT(animal, TRAIT_STASIS, "Necra")
+			ADD_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
 	// Same as above but incase they are in a coffin
 	for(var/obj/structure/closet/container in contents)
-		for(var/mob/living/carbon/human/corpse in container.contents)
+		for(var/mob/living/corpse in container.contents)
 			if(corpse.stat == DEAD)
-				ADD_TRAIT(corpse, TRAIT_STASIS, "Necra")
-		for(var/mob/living/simple_animal/animal in container.contents)
-			if(animal.stat == DEAD)
-				ADD_TRAIT(animal, TRAIT_STASIS, "Necra")
+				ADD_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
 /// Reverse of `statis()`
 /obj/structure/closet/dirthole/proc/unstasis()
-	for(var/mob/living/carbon/human/corpse in contents)
+	for(var/mob/living/corpse in contents)
 		if(corpse.stat == DEAD)
-			REMOVE_TRAIT(corpse, TRAIT_STASIS, "Necra")
-	for(var/mob/living/simple_animal/animal in contents)
-		if(animal.stat == DEAD)
-			REMOVE_TRAIT(animal, TRAIT_STASIS, "Necra")
+			REMOVE_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
 	// Same as above but incase they are in a coffin
 	for(var/obj/structure/closet/container in contents)
-		for(var/mob/living/carbon/human/corpse in container.contents)
+		for(var/mob/living/corpse in container.contents)
 			if(corpse.stat == DEAD)
-				REMOVE_TRAIT(corpse, TRAIT_STASIS, "Necra")
-		for(var/mob/living/simple_animal/animal in container.contents)
-			if(animal.stat == DEAD)
-				REMOVE_TRAIT(animal, TRAIT_STASIS, "Necra")
+				REMOVE_TRAIT(corpse, TRAIT_STASIS, GRAVE_TRAIT)
 
 /// Proc that looks for valid turf and puts a necran lily on it.
 /obj/structure/closet/dirthole/proc/grow_lily()
-	for(var/turf/T in range(1, src))
-		var/turf/foundturf = T
+	for(var/turf/foundturf in range(1, src))
 		if(istype(foundturf, /turf/open/floor/dirt || /turf/open/floor/dirt/road || /turf/open/floor/grass)) //Turf the lily can grow on.
 			if(!locate(/obj/structure) in foundturf)
 				new /obj/structure/flora/grass/herb/necralily(foundturf)
@@ -700,7 +693,6 @@
 			icon_state = "gravecovered"
 
 /obj/structure/closet/dirthole/update_overlays()
-	cut_overlays()
 	. = ..()
 	if(stage < 3)
 		return
