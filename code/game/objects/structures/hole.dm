@@ -338,7 +338,7 @@
 			else
 				stage++
 		if(stage == 4)
-			if(gravequality >= 3 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
+			if(gravequality == 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
 				to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if someone <span class='god_necra'>powerful</span> is watching you... am I prepared to face the consequences if I continue further?"))
 			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
 				return
