@@ -76,19 +76,19 @@
 	var/progress_to_add = 100
 	switch(craftdiff)
 		if(0)
-			progress_to_add /= 2
+			progress_to_add /= 3
 		if(1)
-			progress_to_add /= 2
+			progress_to_add /= 3
 		if(2)
-			progress_to_add /= 3
+			progress_to_add /= 4
 		if(3)
-			progress_to_add /= 3
+			progress_to_add /= 4
 		if(4)
-			progress_to_add /= 4
-		if(5)
-			progress_to_add /= 4
-		if(6)
 			progress_to_add /= 5
+		if(5)
+			progress_to_add /= 5
+		if(6)
+			progress_to_add /= 6
 	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
 	progress_to_add *= LAZYLEN(additional_items)+1
 	progress += progress_to_add

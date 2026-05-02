@@ -944,9 +944,10 @@
 	taste_description = "salt"
 	color = "#3e7459"
 
-/datum/reagent/water/salty/expose_mob(mob/living/L, method=TOUCH, reac_volume)
-	if(method & INGEST) // Make sure you DRANK the salty water before losing hydration
-		..()
+/datum/reagent/water/salty/expose_mob(mob/living/exposed_mob, methods, reac_volume)
+	if(!(methods & INGEST)) // Make sure you DRANK the salty water before losing hydration
+		return
+	. = ..()
 
 /datum/reagent/water/salty/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))

@@ -216,7 +216,7 @@
 
 	if(steelalloy == 7)
 		max_contained_items = 3
-		alloy = /obj/item/ingot/steel_slag
+		alloy = /obj/item/ingot/steel
 	else if(bronzealloy == 7)
 		alloy = /obj/item/ingot/bronze
 	else if(blacksteelalloy == 7)

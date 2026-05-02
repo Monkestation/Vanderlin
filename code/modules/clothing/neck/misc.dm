@@ -254,7 +254,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN

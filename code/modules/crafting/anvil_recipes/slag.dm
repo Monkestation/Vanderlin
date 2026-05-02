@@ -5,7 +5,7 @@
 
 /datum/anvil_recipe/slag/handle_creation(obj/item/recipe_output, obj/item/initial_material)
 	var/average_performance = accumulated_quality / numberofhits
-	if(average_performance >= 40) // Did you even try?
+	if(average_performance >= 30) // Did you even try?
 		recipe_output.set_quality(initial_material.recipe_quality)
 
 /datum/anvil_recipe/slag/steel

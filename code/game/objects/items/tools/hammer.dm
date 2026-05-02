@@ -109,25 +109,22 @@
 		// At skill 0: ~65% max_integrity loss
 		// At skill -20: ~85% max_integrity loss
 		// At skill -60+: ~99% max_integrity loss (clamped)
+		attacked_item.repair_damage(attacked_item.max_integrity * repair_percent)
 		if(was_broken)
 			var/integrity_penalty
 			integrity_penalty = 0.65 - ((skill_value / SKILL_MASTER) * 0.60)
 			integrity_penalty = clamp(integrity_penalty, 0.05, 0.99)
 
 			var/integrity_loss = round(attacked_item.max_integrity * integrity_penalty)
-			attacked_item.max_integrity = max(1, attacked_item.max_integrity - integrity_loss)
-			attacked_item.obj_broken = FALSE
-			attacked_item.repair_damage(max(attacked_item.max_integrity * repair_percent, 10))
+			attacked_item.atom_fix()
+			attacked_item.modify_max_integrity(max(1, attacked_item.max_integrity - integrity_loss), FALSE)
 
-			to_chat(user, span_warning("You manage to repair [attacked_item], but the damage has left its mark — it will never be quite as strong as it once was."))
-			if(skill_value < SKILL_MIDDLING) // 30
-				to_chat(user, span_warning("Your inexperience made things worse. The repair is rough."))
-		else
-			attacked_item.repair_damage(attacked_item.max_integrity * repair_percent)
+			to_chat(user, span_warning("I manage to repair [attacked_item], but its integrity has been permanently damaged."))
+		else if(repair_percent)
 			user.visible_message(span_info("[user] repairs [attacked_item]!"))
 
 		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
-		if(repair_percent <= 0)
+		if(!repair_percent)
 			amt2raise *= 0.25
 		blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
 		playsound(src, 'sound/items/bsmithfail.ogg', 40, FALSE)

@@ -162,10 +162,10 @@
 	if(!istype(exposed_mob))
 		return
 	reac_volume = round(reac_volume,0.1)
-	if(method & INGEST)
+	if(methods & INGEST)
 		exposed_mob.adjustBruteLoss(min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
-	if(method & INJECT)
+	if(methods & INJECT)
 		exposed_mob.adjustBruteLoss(1.5 * min(6*toxpwr, reac_volume * toxpwr), damage_type = WOUND_INTERNAL_BRUISE)
 		return
 	exposed_mob.acid_act(acidpwr, reac_volume)

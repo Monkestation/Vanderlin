@@ -287,7 +287,7 @@
 	name = "steel bar"
 	desc = "A bar of alloyed steel."
 	icon_state = "ingotsteel"
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 40
 	melting_material = /datum/material/steel
 	item_weight = 5 KILOGRAMS

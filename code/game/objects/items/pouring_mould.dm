@@ -107,6 +107,7 @@
 	if(amt2raise > 0)
 		user.adjust_experience(/datum/attribute/skill/craft/blacksmithing, amt2raise * boon, FALSE)
 
+	to_chat(user, span_notice("I pour [metal_amount] [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
 	fufilled_metal += metal_amount
 	if(fufilled_metal >= required_metal_amount)
 		start_cooling()
@@ -130,6 +131,7 @@
 	. += MA
 
 /obj/item/mould/proc/start_cooling()
+	visible_message(span_info("[src] begins to cool."), vision_distance = COMBAT_MESSAGE_RANGE)
 	cooling = TRUE
 	START_PROCESSING(SSobj, src)
 
@@ -156,6 +158,13 @@
 		qdel(metal_calc)
 
 	reset_state()
+
+/obj/item/mould/attack_self(mob/user, list/modifiers)
+	. = TRUE
+	if(cooling)
+		return
+	reset_state()
+	to_chat(user, span_notice("I reset the state of [src]."))
 
 /obj/item/mould/proc/reset_state()
 	// Reset all variables

@@ -67,6 +67,9 @@
 			start_minigame(user, attacking_item)
 			return
 
+		if(try_restore_material(actual_attacking_item, user))
+			return TRUE
+
 		if(tongs_used && !tongs_used.held_item)
 			tongs_used.set_held_item(working_material)
 			return TRUE
@@ -91,6 +94,64 @@
 			return TRUE
 
 	return FALSE
+
+/obj/machinery/anvil/proc/try_restore_material(obj/item/item, mob/living/user)
+	if(!istype(item, /obj/item/ingot))
+		return FALSE
+	if(!working_material || !working_material.anvilrepair || !working_material.uses_integrity)
+		return FALSE
+
+	if(working_material.max_integrity >= initial(working_material.max_integrity))
+		to_chat(user, span_warning("[working_material] does not need to be restored."))
+		return FALSE
+
+	var/skill_value = GET_MOB_SKILL_VALUE(user, working_material.anvilrepair)
+	if(skill_value <= 0)
+		to_chat(user, span_warning("You don't know enough about this craft to restore [working_material]."))
+		return FALSE
+
+	var/expected_ingot_type
+	if(working_material.melting_material)
+		var/datum/material/mat = GET_ATTRIBUTE_DATUM(working_material.melting_material)
+		expected_ingot_type = mat?.ingot_type
+	else if(working_material.smeltresult)
+		if(istype(working_material.smeltresult, /obj/item/ingot))
+			expected_ingot_type = working_material.smeltresult
+	if(!expected_ingot_type || !istype(item, expected_ingot_type))
+		to_chat(user, span_warning("This isn't the right material to restore [working_material]."))
+		return FALSE
+
+	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+		to_chat(item, span_warning("[working_material] needs to be heated first to be mended!"))
+		return FALSE
+	if(!HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
+		to_chat(item, span_warning("[item] needs to be heated first to be used as mending material!"))
+		return FALSE
+
+	var/restores_done = working_material.integrity_restores
+	var/base_restore = (skill_value / SKILL_MASTER) * 0.20
+	var/diminish_factor = max(0.1, 1.0 - (restores_done * 0.30))
+	var/restore_amount = round(working_material.max_integrity * base_restore * diminish_factor)
+
+	if(restore_amount <= 0)
+		to_chat(user, span_warning("[working_material] has been restored too many times. It no longer accepts new material."))
+		return FALSE
+
+	var/new_max_integrity = min(working_material.max_integrity + restore_amount, initial(working_material.max_integrity))
+
+	working_material.modify_max_integrity(new_max_integrity, FALSE)
+	working_material.integrity_restores++
+
+	qdel(item)
+
+	var/datum/mind/smith_mind = user.mind
+	var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+	smith_mind.add_sleep_experience(working_material.anvilrepair, amt2raise)
+
+	playsound(src, 'sound/items/bsmith3.ogg', 100, FALSE)
+	user.visible_message(span_info("[user] works new material into [working_material], restoring its maximum integrity."))
+
+	return TRUE
 
 /obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
 	if(!working_material || !working_material.currecipe)
@@ -139,7 +200,7 @@
 		return
 
 	if(quality_score >= 80)
-		user.visible_message(span_deadsay("[user] deftly strikes the bar!"))
+		user.visible_message(span_greentext("[user] deftly strikes the bar!"))
 		var/datum/effect_system/spark_spread/sparks = new()
 		var/turf/front = get_turf(src)
 		sparks.set_up(1, 1, front)
@@ -148,6 +209,8 @@
 		user.visible_message(span_info("[user] strikes the bar!"))
 	else
 		user.visible_message(span_warning("[user] fumbles the bar!"))
+
+	user.adjust_stamina(user.maximum_stamina / 4)
 
 	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
 		complete_recipe(user, quality_score)
@@ -220,12 +283,12 @@
 	if(!QDELETED(working_material))
 		UnregisterSignal(working_material, list(\
 			SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH), \
-			COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+			COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	working_material = new_material
 	if(working_material)
 		working_material.forceMove(src)
 		RegisterSignal(working_material, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_overlay_upon_signal))
-		RegisterSignal(working_material, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_material_on_signal))
+		RegisterSignal(working_material, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_material_on_signal))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/anvil/proc/update_overlay_upon_signal(datum/source, trait)

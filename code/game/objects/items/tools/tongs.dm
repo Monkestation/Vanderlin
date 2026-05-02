@@ -76,12 +76,12 @@
 	if(!QDELETED(held_item))
 		UnregisterSignal(held_item, list(\
 			SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH), \
-			COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
+			COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	held_item = new_held_item
 	if(held_item)
 		held_item.forceMove(src)
 		RegisterSignal(held_item, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_icon_state_upon_signal))
-		RegisterSignal(held_item, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_item_on_signal))
+		RegisterSignal(held_item, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_item_on_signal))
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/weapon/tongs/proc/unset_item_on_signal(datum/source)
