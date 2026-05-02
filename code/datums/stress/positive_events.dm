@@ -123,7 +123,7 @@
 
 /datum/stress_event/saw_grave_4
 	stress_change = -2
-	desc = span_green("A resting place fit for a king!")
+	desc = span_green("Whoever lies here must have been truly beloved...")
 	timer = 10 MINUTES
 
 //Hygiene
