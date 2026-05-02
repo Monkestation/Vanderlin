@@ -467,7 +467,7 @@
 "gJ" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "gN" = (
 /obj/structure/table/stone_small,
@@ -836,7 +836,7 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "lr" = (
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -1638,7 +1638,7 @@
 /obj/structure/flora/grass,
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "wT" = (
 /obj/structure/spider/stickyweb,
@@ -3061,7 +3061,7 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/psydon,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "RQ" = (
 /obj/structure/bars,

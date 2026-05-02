@@ -577,7 +577,7 @@
 "uK" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/grass/cold,
+/turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "uM" = (
 /obj/structure/kneestingers,
@@ -820,7 +820,7 @@
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/grass/cold,
+/turf/open/floor/dirt,
 /area/outdoors/exposed/church)
 "Hh" = (
 /obj/effect/spawner/map_spawner/loot,
