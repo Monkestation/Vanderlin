@@ -269,7 +269,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
-// lord variant with no armor, just drip.
+// variant with no armor, just drip.
 /obj/item/clothing/shoes/boots/armor/matthios/lord
 	name = "lordly boots"
 	desc = "Boots terribly befitting of that of a tyrannical lord. Has a fake metal veneer to strike fear into the hearts of peasants."
