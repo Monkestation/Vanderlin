@@ -99,7 +99,7 @@
 "jQ" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "jS" = (
 /obj/structure/fluff/railing/wood,
@@ -108,7 +108,7 @@
 "lK" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "lX" = (
 /obj/effect/decal/remains/human{
@@ -275,7 +275,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "Ay" = (
 /obj/effect/spawner/map_spawner/treeorstump,
@@ -368,7 +368,7 @@
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass,
 /obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "Jm" = (
 /turf/closed/mineral/bedrock,

@@ -68,7 +68,7 @@
 /obj/effect/spawner/map_spawner/loot/common,
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/grass,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "kl" = (
 /obj/structure/flora/grass,
