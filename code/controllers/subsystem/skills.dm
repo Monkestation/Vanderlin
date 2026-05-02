@@ -19,13 +19,13 @@ SUBSYSTEM_DEF(skills)
 		span_greentext("Legendary"))//This list is already in the right order, due to indexing
 	/// All level plain names without span
 	var/static/alist/level_names_plain = alist(
-		SKILL_LEVEL_NONE = "None",
-		SKILL_LEVEL_NOVICE = "Weak",
-		SKILL_LEVEL_APPRENTICE = "Average",
-		SKILL_LEVEL_JOURNEYMAN = "Skilled",
-		SKILL_LEVEL_EXPERT = "Expert",
-		SKILL_LEVEL_MASTER = "Master",
-		SKILL_LEVEL_LEGENDARY = "Legendary",
+		SKILL_RANK_NONE = "None",
+		SKILL_RANK_NOVICE = "Weak",
+		SKILL_RANK_APPRENTICE = "Average",
+		SKILL_RANK_JOURNEYMAN = "Skilled",
+		SKILL_RANK_EXPERT = "Expert",
+		SKILL_RANK_MASTER = "Master",
+		SKILL_RANK_LEGENDARY = "Legendary",
 	)
 
 /datum/controller/subsystem/skills/Initialize(timeofday)

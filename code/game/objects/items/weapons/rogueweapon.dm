@@ -38,6 +38,9 @@
 	if(!destroy_message)
 		destroy_message = span_warning("[pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")]")
 
+	if(weapon_special)
+		weapon_special = new weapon_special
+
 /obj/item/weapon/equipped(mob/user, slot, initial)
 	. = ..()
 	if(initial && randomize_blade_int)
@@ -64,7 +67,7 @@
 /obj/item/weapon/examine(mob/user)
 	. = ..()
 
-	if(weapon_special)
+	if(istype(weapon_special))
 		. += weapon_special.get_examine()
 
 /obj/item/weapon/get_dismemberment_chance(obj/item/bodypart/affecting, mob/user)

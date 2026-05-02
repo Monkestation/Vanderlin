@@ -287,8 +287,8 @@
 	working_material = new_material
 	if(working_material)
 		working_material.forceMove(src)
-		RegisterSignal(working_material, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_overlay_upon_signal))
-		RegisterSignal(working_material, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_material_on_signal))
+		RegisterSignals(working_material, list(SIGNAL_ADDTRAIT(TRAIT_NEEDS_QUENCH), SIGNAL_REMOVETRAIT(TRAIT_NEEDS_QUENCH)), PROC_REF(update_overlay_upon_signal))
+		RegisterSignals(working_material, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED), PROC_REF(unset_material_on_signal))
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/anvil/proc/update_overlay_upon_signal(datum/source, trait)
