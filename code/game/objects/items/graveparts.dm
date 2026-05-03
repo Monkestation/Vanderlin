@@ -15,12 +15,13 @@
 	/// Patrons associated with this grave decoration. Usually a headstone.
 	var/list/patrons
 
-/obj/item/gravedecor/New(loc, var/parent)
+/obj/item/gravedecor/Initialize(mapload, var/parent)
+	. = ..()
 	if(parent)
 		sourceitem = parent
 	. = ..()
 
-/obj/item/gravedecor/examine(mob/user) //TODO how do I have custom_message and inscription to chat AFTER the examine?
+/obj/item/gravedecor/examine(mob/user)
 	. = ..()
 
 	if(decorationquality == 1)
@@ -67,14 +68,14 @@
 	var/custom_message
 
 /obj/item/gravedecor/headstone/examine(mob/user)
-	. = ..()
-
 	if(inscription)
 		. += "<br>[inscription]"
 		. += span_warning("Wait... shouldn't this be attached to a grave?")
 	else if(custom_message) // Not inscribed, but there is a custom_message
 		. += span_info("There is a message carved into the middle of \the [src]...<br>")
 		. += span_italics("[custom_message]")
+
+	return ..()
 
 /obj/item/gravedecor/headstone/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/weapon/chisel) || (I.wlength == WLENGTH_SHORT)) // Chisel or dagger

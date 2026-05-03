@@ -91,41 +91,34 @@
 	var/list/their_final_words = list()
 	var/list/premade_final_words = file2list("strings/grave_final_words.txt")
 	to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
-	for(var/name in names) //We need them in order
-		var/found = FALSE
-		for(var/mob/mob in GLOB.mob_list)
-			if(found)
-				break
-			if(ishuman(mob))
-				var/mob/living/carbon/human/human = mob
-				if(human.real_name == name)
-					//Check if final_words set (already moved on)
-					if(human.final_words)
-						their_final_words += human.final_words
-					//Find their observer if it exists, if no words given, we make one up
-					var/my_final_words
-					// Find the observer
-					if(human.last_mind?.current)
-						var/mob/ghost = human.last_mind.current
 
-						my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
-						if(my_final_words)
-							log_say("[ghost] put [my_final_words] for their final words.")
-							human.final_words = my_final_words // They won't be prompted again
-							their_final_words += my_final_words
+	for(var/buried in grave.get_all_contents())
+		if(ishuman(buried))
+			var/mob/living/carbon/human/corpse = buried
+			if(corpse.final_words) // Already have their final words, no need to find them to ask.
+				their_final_words += corpse.final_words
+				continue
 
-					if(!my_final_words) //No Observers, pick a random one
-						their_final_words += pick(premade_final_words)
+			//Find their observer if it exists, if no words given, we make one up
+			var/my_final_words
+			// Find the observer
+			if(corpse.last_mind?.current)
+				var/mob/ghost = corpse.last_mind.current
 
-					found = TRUE
-					break
+				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
+				if(my_final_words)
+					log_say("[ghost] put [my_final_words] for their final words.")
+					corpse.final_words = my_final_words // They won't be prompted again
 
-			else if(isanimal(mob))
-				if(mob.name == name)
-					var/mob/living/simple_animal/animal
-					if(animal.speak)
-						their_final_words[name] = pick(animal.speak)
-					found = TRUE
+			if(!my_final_words) //No Observers, pick a random one
+				corpse.final_words = pick(premade_final_words)
+
+			their_final_words += my_final_words
+
+		else if(isanimal(buried)) // For those that bury their cabbits
+			var/mob/living/simple_animal/animal = buried
+			if(animal.speak)
+				their_final_words += pick(animal.speak)
 
 		// Final words acquired, display them once we verified the caster did not move
 		if(!(owner.Adjacent(grave))) // Caster left the area, rite FAILED
