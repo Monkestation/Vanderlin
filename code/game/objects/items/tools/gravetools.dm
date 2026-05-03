@@ -18,7 +18,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	max_integrity = INTEGRITY_STRONG
-	sharpness = IS_BLUNT
+	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
@@ -236,6 +236,7 @@
 	wdefense = BAD_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE)
+	sharpness = IS_BLUNT
 	max_blade_int = 0
 
 	dropshrink = 1

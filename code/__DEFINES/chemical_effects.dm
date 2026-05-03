@@ -57,3 +57,8 @@
 #define CE_ENERGETIC "energetic"
 /// Lowers the subject's voice to a whisper
 #define	CE_VOICELOSS "whispers"
+///increases targets immunity
+#define CE_ANTIBIOTIC "antibiotic"
+
+///negative because of how it works ie 10 stimulant is a -1 action speed or everything multiplied by 0.01 so faster
+#define STIMULANT_ACTIONSPEED_INCREASE -0.1

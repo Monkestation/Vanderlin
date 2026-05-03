@@ -292,8 +292,9 @@
 		var/mob/living/carbon/human/human_victim = victim
 		var/obj/item/bodypart/affecting = human_victim.get_bodypart(damage_zone)
 		var/armor_block = human_victim.run_armor_check(damage_zone, damage_type, damage = damage)
-		if(human_victim.apply_damage(damage, damage_type, affecting, armor_block))
-			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = -100))
+		var/real_damage = human_victim.apply_damage(damage, damage_type, affecting, armor_block)
+		if(real_damage)
+			affecting?.bodypart_attacked_by(damage_class, real_damage, user, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = -100), incoming_germ = weapon.germ_level, pre_applied = TRUE)
 			message += "<b> It pierces through to their flesh!</b>"
 			playsound(human_victim, weapon.hitsound, 80, TRUE)
 

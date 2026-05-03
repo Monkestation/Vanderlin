@@ -28,12 +28,13 @@
 		BODY_ZONE_R_LEG,
 		BODY_ZONE_HEAD,
 	)
-	time = 3 SECONDS
+	minimum_time = 2 SECONDS
+	maximum_time = 4 SECONDS
 	requires_bodypart = FALSE //need a missing limb
 	requires_missing_bodypart = TRUE
 	requires_bodypart_type = NONE
-	skill_min = SKILL_RANK_APPRENTICE
-	skill_median = SKILL_RANK_JOURNEYMAN
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 	var/bodypart_status = BODYPART_ORGANIC
 
 /datum/surgery_step/add_prosthetic/tool_check(mob/user, obj/item/tool)
@@ -127,11 +128,12 @@
 		BODY_ZONE_R_LEG,
 		BODY_ZONE_L_LEG,
 	)
-	time = 15 SECONDS
+	minimum_time = 14 SECONDS
+	maximum_time = 18 SECONDS
 	requires_bodypart = TRUE
 	requires_bodypart_type = BODYPART_ROBOTIC
-	skill_min = SKILL_RANK_NOVICE
-	skill_median = SKILL_RANK_EXPERT
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_EXPERT
 	surgery_flags = NONE
 	preop_sound = 'sound/foley/sewflesh.ogg'
 	success_sound = 'sound/items/wood_sharpen.ogg'

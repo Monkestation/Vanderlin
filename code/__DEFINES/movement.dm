@@ -36,5 +36,83 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define MOVEMENT_LOOP_START_FAST (1<<0)
 ///Do we not use the priority system?
 #define MOVEMENT_LOOP_IGNORE_PRIORITY (1<<1)
+///Should we override the loop's glide?
+#define MOVEMENT_LOOP_IGNORE_GLIDE (1<<3)
+///Should we not update our movables dir on move?
+#define MOVEMENT_LOOP_NO_DIR_UPDATE (1<<4)
+///Is the loop moving the movable outside its control, like it's an external force? e.g. footsteps won't play if enabled.
+#define MOVEMENT_LOOP_OUTSIDE_CONTROL (1<<5)
+///Was this Move() called because of the process() of move_loop? Allows for checking whether a move was made from a movement loop.
+#define MOVEMENT_LOOP_CALLED_MOVE (1<<6)
 
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS
+
+/**
+ * Returns a bitfield containing flags both present in `flags` arg and the `processing_move_loop_flags` move_packet variable.
+ * Has no use outside of procs called within the movement proc chain.
+ */
+#define CHECK_MOVE_LOOP_FLAGS(movable, flags) (movable.move_packet ? (movable.move_packet.processing_move_loop_flags & (flags)) : NONE)
+
+/**
+ * currently_z_moving defines. Higher numbers mean higher priority.
+ * This one is for falling down open space from stuff such as deleted tile, pit grate...
+ */
+#define CURRENTLY_Z_FALLING 1
+/// currently_z_moving is set to this in zMove() if 0.
+#define CURRENTLY_Z_MOVING_GENERIC 2
+/// This one is for falling down open space from movement.
+#define CURRENTLY_Z_FALLING_FROM_MOVE 3
+/// This one is for going upstairs.
+#define CURRENTLY_Z_ASCENDING 4
+
+/// possible bitflag return values of [atom/proc/intercept_zImpact] calls
+/// Stops the movable from falling further and crashing on the ground. Example: stairs.
+#define FALL_INTERCEPTED (1<<0)
+/// Suppresses the "[movable] falls through [old_turf]" message because it'd make little sense in certain contexts like climbing stairs.
+#define FALL_NO_MESSAGE (1<<1)
+/// Used when the whole intercept_zImpact forvar loop should be stopped. For example: when someone falls into the supermatter and becomes dust.
+#define FALL_STOP_INTERCEPTING (1<<2)
+/// Used when the grip on a pulled object shouldn't be broken.
+#define FALL_RETAIN_PULL (1<<3)
+
+/// Runs check_pulling() by the end of [/atom/movable/proc/zMove] for every movable that's pulling something. Should be kept enabled unless you know what you are doing.
+#define ZMOVE_CHECK_PULLING (1<<0)
+/// Checks if pulledby is nearby. if not, stop being pulled.
+#define ZMOVE_CHECK_PULLEDBY (1<<1)
+/// flags for different checks done in [/atom/movable/proc/can_z_move]. Should be self-explainatory.
+#define ZMOVE_FALL_CHECKS (1<<2)
+#define ZMOVE_CAN_FLY_CHECKS (1<<3)
+#define ZMOVE_INCAPACITATED_CHECKS (1<<4)
+#define ZMOVE_LYING_CHECKS (1<<5)
+/// Doesn't call zPassIn() and zPassOut()
+#define ZMOVE_IGNORE_OBSTACLES (1<<6)
+/// Gives players chat feedbacks if they're unable to move through z levels.
+#define ZMOVE_FEEDBACK (1<<7)
+/// Whether we check the movable (if it exists) the living mob is buckled on or not.
+#define ZMOVE_ALLOW_BUCKLED (1<<8)
+/// Includes movables that're either pulled by the source or mobs buckled to it in the list of moving movables.
+#define ZMOVE_INCLUDE_PULLED (1<<9)
+/// Skips check for whether the moving atom is anchored or not.
+#define ZMOVE_ALLOW_ANCHORED (1<<10)
+/// Checks whether the destination is a water turf
+#define ZMOVE_WATER_CHECKS (1<<11)
+
+#define ZMOVE_CHECK_PULLS (ZMOVE_CHECK_PULLING|ZMOVE_CHECK_PULLEDBY)
+
+/// Flags used in "Move Upwards" and "Move Downwards" verbs.
+#define ZMOVE_FLIGHT_FLAGS (ZMOVE_CAN_FLY_CHECKS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
+/// Used when walking upstairs.
+#define ZMOVE_STAIRS_FLAGS (ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED)
+/// Used when using ladders.
+#define ZMOVE_LADDER_FLAGS (ZMOVE_CHECK_PULLEDBY|ZMOVE_ALLOW_BUCKLED|ZMOVE_INCLUDE_PULLED)
+/// Used when climbing things that requires effort.
+#define Z_MOVE_CLIMBING_FLAGS (ZMOVE_LADDER_FLAGS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_LYING_CHECKS)
+/// Used for falling down open space.
+#define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)
+/// Used when swimming
+#define ZMOVE_SWIM_FLAGS (ZMOVE_WATER_CHECKS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED)
+
+///Return values for moveloop Move()
+#define MOVELOOP_FAILURE 0
+#define MOVELOOP_SUCCESS 1
+#define MOVELOOP_NOT_READY 2

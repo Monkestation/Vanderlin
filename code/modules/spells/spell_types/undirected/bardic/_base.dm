@@ -47,7 +47,7 @@
 /datum/status_effect/stacking/playing_inspiration
 	id = "play_inspiration" // subtypes must share the same id to block stacking multiple melodies
 	alert_type = /atom/movable/screen/alert/status_effect/buff/inspiration
-	delay_before_decay = 2
+	// delay_before_decay = 2
 	tick_interval = 5 // 0.5 second ticks
 	stack_decay = 2 // decay at twice the speed of buildup (5 seconds max)
 	stack_threshold = 20 // by default after 10 seconds

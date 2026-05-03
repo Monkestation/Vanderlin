@@ -106,7 +106,7 @@
 	zipline = user.Beam(bullet, icon_state = "chain", max_distance = 9, time = INFINITY)
 	retracted_hook = FALSE
 	RegisterSignal(bullet, COMSIG_PROJECTILE_SELF_ON_HIT, PROC_REF(on_grapple_hit))
-	RegisterSignal(bullet, COMSIG_PARENT_PREQDELETED, PROC_REF(on_grapple_fail))
+	RegisterSignal(bullet, COMSIG_PREQDELETED, PROC_REF(on_grapple_fail))
 	harpooner = WEAKREF(user)
 	update_appearance(UPDATE_ICON_STATE)
 
@@ -117,11 +117,11 @@
 	leashed = TRUE
 	leash_target = target
 
-	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(leashed_examine))
+	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(leashed_examine))
 	if(istype(firer))
-		target.apply_damage(15, BRUTE, firer.zone_selected)
+		target.apply_damage(15, BRUTE, firer.zone_selected, damage_type = BCLASS_PIERCE)
 	else
-		target.apply_damage(15, BRUTE, BODY_ZONE_CHEST)
+		target.apply_damage(15, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_PIERCE)
 
 /obj/item/harpoon_gun/proc/leashed_examine(datum/source, mob/user, list/examine_list)
 	examine_list += "<a href='byond://?src=[REF(src)];pull_harpoon=1'>embedded harpoon</a>"
@@ -136,7 +136,7 @@
 			return
 		QDEL_NULL(leash)
 		leashed = FALSE
-		UnregisterSignal(leash_target, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(leash_target, COMSIG_ATOM_EXAMINE)
 		leash_target = null
 		retracted_hook = TRUE
 
@@ -145,19 +145,19 @@
 	if(leash.distance == 1)
 		QDEL_NULL(leash)
 		leashed = FALSE
-		UnregisterSignal(leash_target, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(leash_target, COMSIG_ATOM_EXAMINE)
 		leash_target = null
 		return
 
 /obj/item/harpoon_gun/proc/break_callback()
 	QDEL_NULL(leash)
 	leashed = FALSE
-	UnregisterSignal(leash_target, COMSIG_PARENT_EXAMINE)
+	UnregisterSignal(leash_target, COMSIG_ATOM_EXAMINE)
 	leash_target = null
 
 /obj/item/harpoon_gun/proc/on_grapple_hit(datum/source, atom/movable/firer, atom/target, Angle)
 	SIGNAL_HANDLER
-	UnregisterSignal(source, list(COMSIG_PROJECTILE_SELF_ON_HIT, COMSIG_PARENT_PREQDELETED))
+	UnregisterSignal(source, list(COMSIG_PROJECTILE_SELF_ON_HIT, COMSIG_PREQDELETED))
 	QDEL_NULL(zipline)
 	var/mob/living/user = harpooner?.resolve()
 	if(isnull(user) || isnull(target))
@@ -169,7 +169,7 @@
 		return
 
 	zipline = user.Beam(target, icon_state = "chain", max_distance = 9, time = INFINITY)
-	RegisterSignal(zipline, COMSIG_PARENT_PREQDELETED, PROC_REF(on_zipline_break))
+	RegisterSignal(zipline, COMSIG_PREQDELETED, PROC_REF(on_zipline_break))
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(determine_distance))
 	RegisterSignal(user, COMSIG_MOVABLE_PRE_THROW, PROC_REF(apply_throw_traits))
 	stored_launch = target
@@ -244,7 +244,7 @@
 	if(!istype(victim))
 		return
 
-	victim.apply_damage(20)
+	victim.apply_damage(20, damage_type = BCLASS_PIERCE)
 	var/turf/target_turf = get_ranged_target_turf(victim, source.dir, 3)
 	if(isnull(target_turf))
 		return

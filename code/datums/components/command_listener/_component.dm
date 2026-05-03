@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
+GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
 
 /datum/component/command_follower
 	var/datum/follower_command/current_command
@@ -22,7 +22,6 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 		/datum/job/town_elder = 18,
 		/datum/job/guardsman = 19,
 		/datum/job/gatemaster = 19,
-		/datum/job/jailor = 19,
 		/datum/job/dungeoneer = 19,
 		/datum/job/men_at_arms = 20,
 		/datum/job/forestwarden = 20,
@@ -58,10 +57,10 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list("Artificer", "Supreme Artificer"))
 
 	create_hud_element()
 	RegisterSignal(parent, COMSIG_MOB_LOGIN, PROC_REF(on_login))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(on_parent_deleted))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_deleted))
 	RegisterSignal(parent, COMSIG_PARENT_COMMAND_RECEIVED, PROC_REF(receive_command))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(on_ctrl_click))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/command_follower/Destroy()
 	clear_command()

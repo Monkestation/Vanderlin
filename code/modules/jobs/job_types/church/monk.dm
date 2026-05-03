@@ -89,7 +89,7 @@
 	)
 
 /datum/job/monk
-	title = "Acolyte"
+	title = JOB_ACOLYTE
 	tutorial = "Chores, exercise, prayer... and more chores. \
 	You are a humble acolyte at the temple in Vanderlin, \
 	not yet a trained guardian or an ordained priest. \
@@ -191,7 +191,7 @@
 		devotion.grant_to(spawned)
 
 /datum/outfit/monk
-	name = "Acolyte"
+	name = JOB_ACOLYTE
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church

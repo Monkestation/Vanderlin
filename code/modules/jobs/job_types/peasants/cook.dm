@@ -29,7 +29,7 @@
 	)
 
 /datum/job/cook
-	title = "Cook"
+	title = JOB_COOK
 	tutorial = "Slice, chop, and into the pot... \
 	you work closely with the innkeep to prepare meals for all the hungry mouths of Vanderlin. \
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
@@ -55,7 +55,7 @@
 
 
 /datum/outfit/cook
-	name = "Cook"
+	name = JOB_COOK
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/key/tavern
 	beltr = /obj/item/weapon/knife/villager

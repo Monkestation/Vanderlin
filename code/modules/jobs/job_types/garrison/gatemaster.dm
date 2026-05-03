@@ -1,5 +1,5 @@
 /datum/job/gatemaster
-	title = "Gatemaster"
+	title = JOB_GATEMASTER
 	tutorial = "Tales speak of the Gatemaster's legendary ability to stand still at a gate and ask people questions. \
 	Some may mock you as lazy sitting on your comfy chair all day, \
 	but the lord themself entrusted you with who is and isn't allowed behind those gates. \
@@ -27,17 +27,15 @@
 		EXP_TYPE_LIVING = 300,
 		EXP_TYPE_GARRISON = 300
 	)
-	honorary = "Gatemaster"
+	honorary = JOB_GATEMASTER
 
 	traits = list(
 		TRAIT_STEELHEARTED,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
-
-
-/datum/job/gatemaster/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	add_verb(spawned, /mob/proc/haltyell)
+	verbs = list(
+		/mob/proc/haltyell
+	)
 
 /datum/outfit/gatemaster
 	name = "Gatemaster Base"
@@ -204,8 +202,8 @@
 	var/weapontypec = pickweight(list("Bow" = 4, "Crossbow" = 6))
 	switch(weapontypec)
 		if("Bow")
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/long
+			backr = /obj/item/gun/ballistic/bow/long
 			beltl = /obj/item/ammo_holder/quiver/arrows
 		if("Crossbow")
-			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			backr = /obj/item/gun/ballistic/bow/cross
 			beltl = /obj/item/ammo_holder/quiver/bolts

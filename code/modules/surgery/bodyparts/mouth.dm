@@ -112,6 +112,8 @@
 	dismemberable = FALSE
 	bleeds = FALSE
 
+	artery_type = ARTERY_MOUTH
+
 	/// Maximum amount of teeth this limb can hae
 	var/max_teeth = 32
 	/// Lisp modifier for when this limb is missing teeth
@@ -167,13 +169,13 @@
 	if(!default_bundle)
 		default_bundle = new default_tooth(src)
 		teeth += default_bundle
-		RegisterSignal(default_bundle, COMSIG_PARENT_QDELETING, PROC_REF(remove_this))
+		RegisterSignal(default_bundle, COMSIG_QDELETING, PROC_REF(remove_this))
 	default_bundle.amount = max_teeth
 	return TRUE
 
 /obj/item/bodypart/mouth/proc/remove_this(datum/source)
 	teeth -= source
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(source, COMSIG_QDELETING)
 
 /obj/item/bodypart/mouth/inspect_limb(mob/user)
 	. = ..()
@@ -313,8 +315,10 @@
 	else
 		damage = 12
 
+	/*
 	if(human.mind?.has_antag_datum(/datum/antagonist/werewolf))
 		damage *= 2
+	*/
 
 	if(used_con >= 11)
 		damage = max(damage * (1 + ((used_con - 10) * 0.03)), 1)

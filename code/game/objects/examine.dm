@@ -6,6 +6,17 @@
 
 /obj/item/examine(mob/user) //This might be spammy. Remove?
 	. = ..()
+	var/p_They = p_they(TRUE)
+	var/p_are = p_are()
+
+	switch(germ_level)
+		if(GERM_LEVEL_DIRTY to GERM_LEVEL_FILTHY)
+			. += "[p_They] [p_are] a bit dirty."
+		if(GERM_LEVEL_FILTHY to GERM_LEVEL_SMASHPLAYER)
+			. += span_warning("[p_They] [p_are] filthy.")
+		if(GERM_LEVEL_SMASHPLAYER to INFINITY)
+			. += span_warning("[p_They] [p_are] <b>foul</b>.")
+
 	var/price_text = get_displayed_price(user)
 	if(uses_integrity)
 		if(atom_integrity < max_integrity)

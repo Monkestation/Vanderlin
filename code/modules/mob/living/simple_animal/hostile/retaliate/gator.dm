@@ -1,11 +1,10 @@
-/datum/component/riding/gator/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 25), TEXT_SOUTH = list(2, 25), TEXT_EAST = list(8, 20), TEXT_WEST = list(0, 20)))
-	set_vehicle_dir_layer(SOUTH, OBJ_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
-
+/datum/component/riding/gator/get_rider_offsets_and_layers(pass_index, mob/offsetter)
+	return  list(
+		TEXT_NORTH = list(0, 25, OBJ_LAYER),
+		TEXT_SOUTH = list(2, 25, OBJ_LAYER),
+		TEXT_EAST = list(8, 20, OBJ_LAYER),
+		TEXT_WEST = list(0, 20, OBJ_LAYER)
+	)
 
 /mob/living/simple_animal/hostile/retaliate/gator
 	icon = 'icons/mob/gator.dmi'
@@ -82,6 +81,7 @@
 	if(prob(33))
 		gender = FEMALE
 	update_appearance(UPDATE_OVERLAYS)
+	add_traits(list(TRAIT_NODROWN, TRAIT_SWIMMER), INNATE_TRAIT)
 
 /mob/living/simple_animal/hostile/retaliate/gator/tamed(mob/user)
 	. = ..()

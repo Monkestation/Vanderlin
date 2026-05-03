@@ -71,7 +71,7 @@
 	src.break_callback = break_callback
 	src.duration = duration
 
-	RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(remove_leash))
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(remove_leash))
 
 	var/static/list/container_connections = list(
 		COMSIG_MOVABLE_MOVED = PROC_REF(on_moved),

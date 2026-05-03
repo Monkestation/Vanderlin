@@ -69,9 +69,6 @@
 
 	handle_typing_indicator()
 
-	if(istype(loc, /turf/open/water))
-		handle_inwater(loc)
-
 	if(!client && (world.time - last_island_check) > 20 SECONDS)
 		last_island_check = world.time
 		update_island_cache()

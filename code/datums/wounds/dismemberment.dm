@@ -16,6 +16,7 @@
 	can_cauterize = TRUE
 	critical = TRUE
 	sleep_healing = 0
+	can_roll = FALSE
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dismemberment) && (type == other.type))

@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(job)
 	var/initial_players_to_assign = 0
 
 	var/list/prioritized_jobs = list()
-	var/list/latejoin_trackers = list()
+	var/list/backup_join_landmarks = list()
 
 	var/list/level_order = list(JP_HIGH,JP_MEDIUM,JP_LOW)
 	/// Map of jobs indexed by the experience type they grant.
@@ -159,11 +159,6 @@ SUBSYSTEM_DEF(job)
 	if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
 		JobDebug("Eligibility failed: lunatic, Player: [player], Job: [job.title]")
 		return FALSE
-
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!player.client.whitelisted()))
-			JobDebug("Eligibility failed: whitelist, Player: [player], Job: [job.title]")
-			return FALSE
 
 	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		JobDebug("Eligibility failed: age, Player: [player], Job: [job.title]")
@@ -460,9 +455,6 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(!job.enabled)
 			continue
-		if(CONFIG_GET(flag/usewhitelist))
-			if(job.whitelist_req && (!player.client.whitelisted()))
-				continue
 		if(!((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
 			continue
 
@@ -649,7 +641,7 @@ SUBSYSTEM_DEF(job)
 	if(job.parent_job)
 		equipping.job_type = job.parent_job.type
 
-	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
+	SEND_SIGNAL(equipping, COMSIG_HUMAN_JOB_RECEIVED, job)
 
 	equipping.mind?.set_assigned_role(job)
 	job.pre_outfit_equip(equipping, player_client) // sigh
@@ -809,27 +801,30 @@ SUBSYSTEM_DEF(job)
 		return
 	..()
 
-/datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
+/datum/controller/subsystem/job/proc/SendToBackupPoint(mob/M, buckle = TRUE)
 	var/atom/destination
-	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
-		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
-		destination.JoinPlayerHere(M, FALSE)
-		return
 
-	if(length(latejoin_trackers))
-		destination = pick(latejoin_trackers)
+	if(length(backup_join_landmarks))
+		destination = pick(backup_join_landmarks)
 		destination.JoinPlayerHere(M, buckle)
 		return
 
 	destination = get_last_resort_spawn_points()
 	destination.JoinPlayerHere(M, buckle)
 
-/datum/controller/subsystem/proc/get_last_resort_spawn_points()
+/datum/controller/subsystem/job/proc/get_last_resort_spawn_points()
 	//bad mojo
 
-	stack_trace("Unable to find last resort spawn point.")
 	//fuck you
-	return pick(world.contents)
+	if(length(backup_join_landmarks))
+		return pick(backup_join_landmarks)
+
+	if(length(GLOB.latejoin_landmarks))
+		return pick(GLOB.latejoin_landmarks)
+
+	if(length(GLOB.roundstart_landmarks))
+		return pick(GLOB.roundstart_landmarks)
+	stack_trace("Unable to find last resort spawn point.")
 	//return GET_ERROR_ROOM
 
 /datum/controller/subsystem/job/proc/CanPickJob(mob/living/player, datum/job/job)
@@ -866,10 +861,6 @@ SUBSYSTEM_DEF(job)
 
 	if(job.banned_lunatic && is_misc_banned(player.client.ckey, BAN_MISC_LUNATIC))
 		return
-
-	if(CONFIG_GET(flag/usewhitelist))
-		if(job.whitelist_req && (!player.client.whitelisted()))
-			return
 
 	if(length(job.allowed_ages) && !(player_prefs.age in job.allowed_ages))
 		return

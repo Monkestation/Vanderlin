@@ -70,9 +70,6 @@
 
 /mob/living/carbon
 	has_initial_mana_pool = TRUE
-	var/shock_stage = 0
-	var/pain_tolerance = 0  // Builds up to prevent infinite stunning
-	var/last_major_pain_time = 0
 
 /mob/living/carbon/get_initial_mana_pool_type()
 	return /datum/mana_pool/mob

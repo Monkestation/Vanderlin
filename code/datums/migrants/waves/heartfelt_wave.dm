@@ -119,7 +119,7 @@
 	head = /obj/item/clothing/head/hennin
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	cloak = /obj/item/clothing/cloak/heartfelt
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	backr = /obj/item/gun/ballistic/bow
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/ammo_holder/quiver/arrows

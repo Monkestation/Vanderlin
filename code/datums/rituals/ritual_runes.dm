@@ -40,7 +40,7 @@
 	/// If a rune provides a bonus to a spell, or spellbook reading.
 	var/spellbonus = 0
 	/// Hhow much damage you take doing it
-	var/scribe_damage = 0.1
+	var/scribe_damage = 5
 	/// How much damage invokers take when invoking it
 	var/invoke_damage = 0
 	/// If the rune requires a keyword when scribed

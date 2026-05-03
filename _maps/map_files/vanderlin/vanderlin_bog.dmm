@@ -3167,6 +3167,15 @@
 	color = "#547285"
 	},
 /area/under/cavewet)
+"bJj" = (
+/obj/structure/rack/underworld{
+	color = "#7D9BAE"
+	},
+/obj/item/gun/ballistic/bow/long,
+/turf/open/floor/abyss_tile/two{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "bJG" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -4992,16 +5001,6 @@
 	dir = 8
 	},
 /area/outdoors/bog/lich)
-"dCA" = (
-/obj/structure/rack,
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
-	pixel_x = -5
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow{
-	pixel_x = 3
-	},
-/turf/open/floor/concrete,
-/area/indoors/shelter/bog)
 "dCB" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -5248,6 +5247,16 @@
 /obj/structure/kneestingers,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/north/west)
+"dPK" = (
+/obj/structure/rack/underworld{
+	color = "#7D9BAE"
+	},
+/obj/item/gun/ballistic/bow/short,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/abyss_tile/two{
+	color = "#547285"
+	},
+/area/under/cavewet)
 "dQa" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp,
@@ -5418,6 +5427,23 @@
 /obj/item/essence_connector,
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
+"dXX" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/gem/onyxa,
+/obj/item/gem/onyxa,
+/obj/structure/fluff/walldeco/vinez/red{
+	icon = 'icons/turf/flesh_tile.dmi';
+	icon_state = "flesh_tile-0";
+	layer = 1.9;
+	pixel_x = -17;
+	pixel_y = -18
+	},
+/obj/item/clothing/head/helmet/heavy/zizo,
+/obj/item/ingot/gold,
+/obj/item/ingot/silverblessed,
+/obj/item/gun/ballistic/airgun/prefilled,
+/turf/open/floor/tile/diamond/purple,
+/area/indoors/shelter/bog/lich)
 "dYk" = (
 /obj/item/paper,
 /obj/structure/carpet/blue,
@@ -5648,19 +5674,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/south/east)
-"ehE" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/obj/structure/chair/wood/alt{
-	dir = 1
-	},
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/turned/alt,
-/area/outdoors/bog/witch)
 "ehI" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -5868,6 +5881,12 @@
 "eqe" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/church/rust,
+/area/indoors/shelter/bog/witch)
+"erO" = (
+/obj/effect/landmark/start/bogwitch{
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
 /area/indoors/shelter/bog/witch)
 "esc" = (
 /obj/item/natural/stone,
@@ -7262,10 +7281,6 @@
 /obj/structure/fake_machine/camera/left,
 /turf/open/floor/metal/barograte,
 /area/indoors/shelter/bog/lich)
-"fKK" = (
-/obj/effect/landmark/start/bogwitchlate,
-/turf/open/floor/grass,
-/area/outdoors/bog/north)
 "fKT" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/food/snacks/chescake,
@@ -7973,13 +7988,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/east)
-"gts" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest";
-	aportalid = "vanderlin-forest_bog-bog"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/north/west)
 "guq" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/shelter/bog)
@@ -9371,8 +9379,8 @@
 /area/outdoors/bog/south/west)
 "hPr" = (
 /obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_town-town";
-	aportalid = "vanderlin-bog_town-bog"
+	aportalgoesto = "vanderlin-forest_bog-forest";
+	aportalid = "vanderlin-forest_bog-bog"
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/north)
@@ -9609,13 +9617,6 @@
 	color = "#29404E"
 	},
 /area/under/cavewet)
-"ihu" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest2";
-	aportalid = "vanderlin-forest_bog-bog2"
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/south/west)
 "ihX" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -10358,6 +10359,14 @@
 "iQn" = (
 /turf/open/floor/twig,
 /area/outdoors/bog/north/west)
+"iQA" = (
+/obj/effect/decal/carpet/square/black{
+	pixel_x = 0;
+	pixel_y = -11
+	},
+/obj/effect/landmark/start/bogwitch,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/shelter/bog/witch)
 "iRi" = (
 /obj/structure/stairs/stone/church{
 	dir = 8;
@@ -11227,16 +11236,6 @@
 	dir = 1
 	},
 /turf/open/water/ocean,
-/area/under/cavewet)
-"jIh" = (
-/obj/structure/rack/underworld{
-	color = "#7D9BAE"
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/short,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/abyss_tile/two{
-	color = "#547285"
-	},
 /area/under/cavewet)
 "jIA" = (
 /obj/machinery/light/fueled/torchholder{
@@ -13380,6 +13379,19 @@
 /obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
 /turf/open/floor/dirt,
 /area/outdoors/bog/north/west)
+"lNR" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/chair/wood/alt{
+	dir = 1
+	},
+/obj/effect/landmark/start/bogwitch{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/turned/alt,
+/area/outdoors/bog/witch)
 "lNS" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/woodturned,
@@ -13515,12 +13527,6 @@
 "lWg" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/under/cavewet)
-"lWn" = (
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 1
-	},
-/turf/open/floor/carpet/royalblack,
-/area/indoors/shelter/bog/witch)
 "lXp" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass,
@@ -16763,6 +16769,11 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"pBH" = (
+/obj/item/gun/ballistic/bow,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/twig,
+/area/outdoors/bog/e_highroad)
 "pCA" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/shelter/bog/e_highroad_camp)
@@ -17443,13 +17454,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/shelter/bog/lich)
-"qwv" = (
-/obj/structure/chair/stool,
-/obj/effect/landmark/start/bogwitch_apprentice{
-	dir = 8
-	},
-/turf/open/floor/cobblerock,
-/area/indoors/shelter/bog/witch)
 "qwH" = (
 /mob/living/simple_animal/hostile/deepone{
 	faction = list("Hostile");
@@ -17590,14 +17594,6 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
 /area/outdoors/bog/south/west)
-"qFK" = (
-/obj/effect/decal/carpet/square/black{
-	pixel_x = 0;
-	pixel_y = -11
-	},
-/obj/effect/landmark/start/bogwitch_apprentice,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/shelter/bog/witch)
 "qFL" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -18685,10 +18681,6 @@
 /obj/item/reagent_containers/glass/bowl/clay,
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
-"rMD" = (
-/obj/effect/landmark/start/bogwitch_apprenticelate,
-/turf/open/floor/dirt,
-/area/outdoors/bog/north)
 "rMQ" = (
 /obj/item/candle/scandelabra/lit{
 	pixel_y = 10
@@ -19269,15 +19261,6 @@
 /obj/structure/flora/rock/water,
 /turf/open/floor/sand,
 /area/outdoors/bog/beach/west)
-"sBX" = (
-/obj/structure/rack/underworld{
-	color = "#7D9BAE"
-	},
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow/long,
-/turf/open/floor/abyss_tile/two{
-	color = "#547285"
-	},
-/area/under/cavewet)
 "sCu" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -19800,23 +19783,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/concrete,
 /area/outdoors/bog/e_highroad)
-"tkM" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/gem/onyxa,
-/obj/item/gem/onyxa,
-/obj/structure/fluff/walldeco/vinez/red{
-	icon = 'icons/turf/flesh_tile.dmi';
-	icon_state = "flesh_tile-0";
-	layer = 1.9;
-	pixel_x = -17;
-	pixel_y = -18
-	},
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/ingot/gold,
-/obj/item/ingot/silverblessed,
-/obj/item/gun/ballistic/revolver/grenadelauncher/airgun/prefilled,
-/turf/open/floor/tile/diamond/purple,
-/area/indoors/shelter/bog/lich)
 "tkT" = (
 /obj/structure/ladder,
 /turf/open/floor/twig,
@@ -21248,11 +21214,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/shelter/bog/lich)
-"uCD" = (
-/obj/item/gun/ballistic/revolver/grenadelauncher/bow,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/twig,
-/area/outdoors/bog/e_highroad)
 "uDn" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp/deep,
@@ -23495,6 +23456,13 @@
 "wKK" = (
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/central)
+"wLc" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bogwitch{
+	dir = 8
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/shelter/bog/witch)
 "wLl" = (
 /turf/open/floor/grass,
 /area/outdoors/bog/north/west)
@@ -24775,6 +24743,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/bog/beach/east)
+"xXx" = (
+/obj/effect/landmark/start/late/bogwitch,
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/north)
 "xYb" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -24986,6 +24958,16 @@
 	color = "#314C5D"
 	},
 /area/under/cavewet)
+"yko" = (
+/obj/structure/rack,
+/obj/item/gun/ballistic/bow{
+	pixel_x = -5
+	},
+/obj/item/gun/ballistic/bow{
+	pixel_x = 3
+	},
+/turf/open/floor/concrete,
+/area/indoors/shelter/bog)
 "ykw" = (
 /obj/structure/inert_bonepile,
 /obj/structure/fluff/walldeco/church/line{
@@ -25268,9 +25250,9 @@ pNu
 pNu
 pNu
 pNu
-gts
-gts
-gts
+cNF
+cNF
+cNF
 pNu
 pNu
 pNu
@@ -25364,9 +25346,9 @@ wFG
 wFG
 wFG
 wFG
-ihu
-ihu
-ihu
+krA
+krA
+krA
 wFG
 wFG
 wFG
@@ -45092,11 +45074,11 @@ bKe
 plD
 mIn
 uYT
-lWn
+erO
 crc
 mPz
 cgB
-qFK
+iQA
 htC
 mIn
 cwA
@@ -46456,7 +46438,7 @@ thx
 (107,1,1) = {"
 bdA
 xVa
-fKK
+eVP
 mBE
 syJ
 mBE
@@ -46658,7 +46640,7 @@ thx
 (108,1,1) = {"
 bdA
 hPr
-syJ
+xXx
 syJ
 vpX
 vpX
@@ -46860,7 +46842,7 @@ thx
 (109,1,1) = {"
 bdA
 hPr
-syJ
+xXx
 syJ
 rhz
 rhz
@@ -47062,7 +47044,7 @@ thx
 (110,1,1) = {"
 bdA
 hPr
-syJ
+xXx
 jgP
 syJ
 mBE
@@ -47264,7 +47246,7 @@ thx
 (111,1,1) = {"
 bdA
 xVa
-rMD
+mBE
 hyA
 mBE
 mBE
@@ -84283,7 +84265,7 @@ wjd
 dDs
 ajb
 fPb
-ehE
+lNR
 oHK
 oHK
 eXi
@@ -84414,7 +84396,7 @@ ndt
 ndt
 aqR
 aqR
-jIh
+dPK
 aqR
 gmS
 aqR
@@ -85628,7 +85610,7 @@ aqR
 aqR
 sPJ
 aqR
-sBX
+bJj
 aqR
 aqR
 ndt
@@ -85695,8 +85677,8 @@ wjd
 wjd
 ola
 crc
-qwv
-qwv
+wLc
+wLc
 crc
 hmA
 cAg
@@ -126881,7 +126863,7 @@ aFR
 gXN
 kZg
 ffH
-dCA
+yko
 oZl
 dvb
 toD
@@ -134790,7 +134772,7 @@ eiA
 exc
 tqO
 yag
-uCD
+pBH
 tzU
 xBw
 xBw
@@ -143022,7 +143004,7 @@ hUr
 hUr
 hUr
 tqr
-tkM
+dXX
 whe
 whe
 whe

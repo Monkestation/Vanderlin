@@ -42,6 +42,7 @@ All foods are distributed among various categories. Use common sense.
 	foodtype = GRAIN
 	list_reagents = list()
 	var/nutrition = 1
+	var/vitamin = 0.25
 	w_class = WEIGHT_CLASS_SMALL
 	var/transfers_tastes = FALSE
 	var/bitesize = 3 // how many times you need to bite to consume it fully
@@ -328,7 +329,11 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/add_initial_reagents()
 	if(nutrition)
-		reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
+		if(vitamin)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition * (1-vitamin), length(tastes) ? list("tastes" = tastes) : null)
+			reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, nutrition * vitamin, length(tastes) ? list("tastes" = tastes) : null)
+		else
+			reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrition, length(tastes) ? list("tastes" = tastes) : null)
 	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)

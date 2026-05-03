@@ -87,11 +87,10 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	for(var/obj/item/bodypart/BP in H.bodyparts)
-		if(BP.body_zone == BODY_ZONE_HEAD)
-			BP.chronic_pain = rand(17.5, 27.5)
-			BP.chronic_pain_type = CHRONIC_NERVE_DAMAGE
-			break
+	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_HEAD)
+	BP?.add_pain(rand(17.5, 27.5))
+	BP?.limb_flags |= BODYPART_CHRONIC_MIGRAINE
+	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
 
 /datum/quirk/vice/chronic_migraine/on_life(mob/living/user)
@@ -315,7 +314,7 @@
 
 	var/turf/T
 	if(!H || QDELETED(H))
-		T = get_turf(pick(SSjob.latejoin_trackers))
+		T = get_turf(pick(SSjob.backup_join_landmarks))
 	else
 		T = get_turf(H)
 	if(!T)

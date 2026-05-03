@@ -105,8 +105,8 @@
 		return TRUE
 
 	if(giving)
-		var/blood_given = min(BLOOD_VOLUME_MAXIMUM - user.blood_volume, blood_storage, blood_sucking)
-		user.blood_volume += blood_given
+		var/blood_given = min(BLOOD_VOLUME_NORMAL - user.blood_volume, blood_storage, blood_sucking)
+		user.adjust_bloodvolume(blood_given)
 		blood_storage = max(blood_storage - blood_given, 0)
 		if((blood_storage <= 0) || (user.blood_volume >= BLOOD_VOLUME_MAXIMUM))
 			if(bodypart)
@@ -115,12 +115,12 @@
 				user.simple_remove_embedded_object(src)
 			return TRUE
 	else
-		var/modifier = bodypart.has_wound(/datum/wound/slash/incision) ? 1.5 : 1
+		var/modifier = bodypart.get_incision() ? 1.5 : 1
 		user.adjustToxLoss(-1 * toxin_healing * modifier)
 		var/blood_extracted = min(blood_maximum - blood_storage, user.blood_volume, blood_sucking) * modifier
 		if(HAS_TRAIT(user, TRAIT_LEECHIMMUNE))
 			blood_extracted *= 0.05 // 95% drain reduction
-		user.blood_volume = max(user.blood_volume - blood_extracted, 0)
+		user.adjust_bloodvolume(-blood_extracted)
 		blood_storage += blood_extracted
 		if((blood_storage >= blood_maximum) || (user.blood_volume <= 0))
 			if(bodypart)

@@ -405,22 +405,23 @@
 /datum/component/storage/proc/should_block_user_take(obj/item/stored, mob/user, worn_check = FALSE, no_message = FALSE)
 	if(worn_check && !worn_check(parent, user, no_message))
 		return TRUE
-	var/atom/real_location = real_location()
-	var/atom/recursive_loc = real_location?.loc
-	var/depth = 0
-	while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
-		var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
-		if(biggerfish)
-			depth++
-			if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-			else if(biggerfish.maximum_depth <= depth)
-				if(!no_message)
-					to_chat(user, span_warning("[recursive_loc] is in the way!"))
-				return TRUE
-		recursive_loc = recursive_loc.loc
+	if(!istype(src, /datum/component/storage/concrete/organ))
+		var/atom/real_location = real_location()
+		var/atom/recursive_loc = real_location?.loc
+		var/depth = 0
+		while(isatom(recursive_loc) && !isturf(recursive_loc) && !isarea(recursive_loc))
+			var/datum/component/storage/biggerfish = recursive_loc.GetComponent(/datum/component/storage)
+			if(biggerfish && !istype(biggerfish, /datum/component/storage/concrete/organ))
+				depth++
+				if(!biggerfish.worn_check(biggerfish.parent, user, TRUE))
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+				else if(biggerfish.maximum_depth < depth)
+					if(!no_message)
+						to_chat(user, span_warning("[recursive_loc] is in the way!"))
+					return TRUE
+			recursive_loc = recursive_loc.loc
 	return FALSE
 
 /datum/component/storage/proc/update_closer(rows = 0, cols = 0)

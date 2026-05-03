@@ -2,7 +2,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration, 30 SECONDS)
 GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 /datum/job/adventurer
-	title = "Adventurer"
+	title = JOB_ADVENTURER
 	tutorial = "Hero of nothing, adventurer by trade. \
 	Whatever led you to this fate is up to the wind to decide, \
 	and you've never fancied yourself for much other than the thrill. \

@@ -8,57 +8,39 @@
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LIVER
 	desc = ""
-
+	organ_efficiency = list(ORGAN_SLOT_LIVER = 100)
 	maxHealth = STANDARD_ORGAN_THRESHOLD
 	healing_factor = STANDARD_ORGAN_HEALING
-	decay_factor = STANDARD_ORGAN_DECAY
 
-	var/alcohol_tolerance = ALCOHOL_RATE//affects how much damage the liver takes from alcohol
-	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE//maximum amount of toxins the liver can just shrug off
-	var/toxLethality = LIVER_DEFAULT_TOX_LETHALITY//affects how much damage toxins do to the liver
-	var/filterToxins = FALSE //whether to filter toxins
+	organ_volume = 2
+	max_blood_storage = 25
+	current_blood = 25
+	blood_req = 4
+	oxygen_req = 4
+	nutriment_req = 1.2
+	hydration_req = 1.2
 
+	var/alcohol_tolerance = ALCOHOL_RATE        //affects how much damage the liver takes from alcohol
+	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE  //maximum amount of toxins the liver can just shrug off
+	var/toxLethality = LIVER_DEFAULT_TOX_LETHALITY  //affects how much damage toxins do to the liver
+	var/filterToxins = FALSE                    //whether to filter toxins
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/liver
 
-#define HAS_SILENT_TOXIN 0 //don't provide a feedback message if this is the only toxin present
-#define HAS_NO_TOXIN 1
-#define HAS_PAINFUL_TOXIN 2
+/obj/item/organ/liver/on_owner_examine(datum/source, mob/user, list/examine_list)
+	if(!ishuman(owner) || !is_failing())
+		return
 
-/obj/item/organ/liver/on_life()
-	var/mob/living/carbon/C = owner
-	..()	//perform general on_life()
-	if(istype(C))
-		if(!(organ_flags & ORGAN_FAILING) && !HAS_TRAIT(C, TRAIT_NOMETABOLISM))//can't process reagents with a failing liver
-
-			var/provide_pain_message = HAS_NO_TOXIN
-			var/obj/belly = C.getorganslot(ORGAN_SLOT_STOMACH)
-			if(filterToxins && !HAS_TRAIT(owner, TRAIT_TOXINLOVER))
-				//handle liver toxin filtration
-				for(var/datum/reagent/toxin/T in C.reagents.reagent_list)
-					var/thisamount = C.reagents.get_reagent_amount(T.type)
-					if(belly)
-						thisamount += belly.reagents.get_reagent_amount(T.type)
-					if (thisamount && thisamount <= toxTolerance)
-						C.reagents.remove_reagent(T.type, 1)
-					else
-						damage += (thisamount*toxLethality)
-						if(provide_pain_message != HAS_PAINFUL_TOXIN)
-							provide_pain_message = T.silent_toxin ? HAS_SILENT_TOXIN : HAS_PAINFUL_TOXIN
-
-			//metabolize reagents
-			C.reagents.metabolize(C, can_overdose=TRUE)
-
-			if(provide_pain_message && damage > 10 && prob(damage/3))//the higher the damage the higher the probability
-				to_chat(C, "<span class='warning'>I feel a dull pain in my abdomen.</span>")
-
-		else	//for when our liver's failing
-			C.liver_failure()
-
-	if(damage > maxHealth)//cap liver damage
-		damage = maxHealth
+	var/mob/living/carbon/human/humie_owner = owner
+	if(!humie_owner.getorganslot(ORGAN_SLOT_EYES) || humie_owner.is_eyes_covered())
+		return
+	var/eyes_amount = LAZYLEN(humie_owner.getorganslotlist(ORGAN_SLOT_EYES))
+	switch(failure_time)
+		if(0 to 3 * LIVER_FAILURE_STAGE_SECONDS - 1)
+			examine_list += span_notice("<b>[owner]</b>'s eye[eyes_amount > 1 ? "s" : ""] [eyes_amount > 1 ? "are" : "is"] slightly yellow.")
+		if(3 * LIVER_FAILURE_STAGE_SECONDS to 4 * LIVER_FAILURE_STAGE_SECONDS - 1)
+			examine_list += span_notice("<b>[owner]</b>'s eye[eyes_amount > 1 ? "s" : ""] [eyes_amount > 1 ? "are" : "is"] completely yellow.")
+		if(4 * LIVER_FAILURE_STAGE_SECONDS to INFINITY)
+			examine_list += span_danger("<b>[owner]</b>'s eye[eyes_amount > 1 ? "s" : ""] [eyes_amount > 1 ? "are" : "is"] completely yellow and swelling with pus.")
 
 #undef LIVER_DEFAULT_TOX_TOLERANCE
 #undef LIVER_DEFAULT_TOX_LETHALITY
-#undef HAS_SILENT_TOXIN
-#undef HAS_NO_TOXIN
-#undef HAS_PAINFUL_TOXIN

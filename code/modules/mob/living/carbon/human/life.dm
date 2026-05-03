@@ -67,10 +67,8 @@
 					MOBTIMER_SET(src, MT_LEPERBLEED)
 					var/obj/item/bodypart/part = pick(bodyparts)
 					if(part)
-						part.add_wound(/datum/wound/slash/small)
+						part.create_injury(WOUND_SLASH, 5, TRUE)
 					adjustToxLoss(10)
-		handle_heart()
-		handle_liver()
 		update_stamina()
 		update_energy()
 		handle_environment()
@@ -124,7 +122,7 @@
 			playsound(src, mask_sound, 90, FALSE, 4, 0)
 			return
 
-/mob/living/carbon/human/DeadLife()
+/mob/living/carbon/human/DeadLife(delta_time, times_fired)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -136,6 +134,8 @@
 
 	. = ..()
 	name = get_visible_name()
+	handle_organs(delta_time, times_fired)
+	handle_bodyparts(delta_time, times_fired)
 
 /mob/living/carbon/human/proc/on_daypass()
 	if(stat < 3) //not dead
@@ -251,6 +251,10 @@
 
 /mob/living/carbon/human/SoakMob(locations, dirty_water = FALSE, rain = FALSE)
 	var/coverhead
+	if(dirty_water)
+		var/list/bodyzones = bodyparts_from_coverage(locations)
+		adjust_germ_level_directed(10, body_zone = bodyzones)
+
 	//add belt slots to this for rusting
 	var/list/body_parts = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, wear_ring)
 	for(var/bp in body_parts)
@@ -415,18 +419,6 @@
 		if(CH.clothing_flags & BLOCK_GAS_SMOKE_EFFECT)
 			return TRUE
 	return ..()
-
-/mob/living/carbon/human/proc/handle_heart()
-	var/we_breath = !HAS_TRAIT_FROM(src, TRAIT_NOBREATH, SPECIES_TRAIT)
-
-	if(!undergoing_cardiac_arrest())
-		return
-
-	if(we_breath)
-		adjustOxyLoss(8)
-		Unconscious(80)
-	// Tissues die without blood circulation
-	adjustBruteLoss(2)
 
 /mob/living/carbon/human/proc/handle_vamp_dreams()
 	if(!HAS_TRAIT(src, TRAIT_VAMP_DREAMS))

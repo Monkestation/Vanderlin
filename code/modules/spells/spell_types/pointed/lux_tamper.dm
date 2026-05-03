@@ -55,6 +55,8 @@
 			var/obj/item/bodypart/t_BP = C_target.get_bodypart(targetwound.bodypart_owner.body_zone)
 			t_BP.remove_wound(targetwound.type)
 
+		for(var/datum/injury/injury in C_target.all_injuries)
+			injury.transfer_injury(C_caster)
 
 	// Visual effects
 	user.visible_message(span_danger("[user] shoulders [H]'s wounds!"))

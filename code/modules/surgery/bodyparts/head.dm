@@ -17,9 +17,16 @@
 	grid_width = 64
 	grid_height = 64
 
+	max_cavity_item_size = WEIGHT_CLASS_BULKY
+	max_cavity_volume = 8
+
+	artery_type = list(ARTERY_HEAD, ARTERY_NECK)
+	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
+
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
-	var/obj/item/organ/eyes/eyes
+	var/obj/item/organ/eyes/eyes_right
+	var/obj/item/organ/eyes/eyes_left
 	var/obj/item/organ/ears/ears
 	var/obj/item/organ/tongue/tongue
 
@@ -41,6 +48,26 @@
 /obj/item/bodypart/head/Initialize()
 	. = ..()
 	randomize_price()
+
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
+	if(length(contents) && I.get_sharpness() && !user.cmode)
+		add_fingerprint(user)
+		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
+		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
+			"<span class='notice'>You begin to cut open [src]...</span>")
+		if(do_after(user, 5 SECONDS, src))
+			drop_organs(user)
+			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
+				"<span class='notice'>You finish cutting [src] open.</span>")
+		return
+	return ..()
+
+/obj/item/bodypart/head/skeletonize(lethal = TRUE)
+	. = ..()
+
+	sellprice = round((sellprice || 0) * 0.2)
+	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
+		owner.death()
 
 /obj/item/bodypart/head/grabbedintents(mob/living/user, atom/grabbed, precise)
 	var/used_limb = precise
@@ -68,7 +95,8 @@
 /obj/item/bodypart/head/Destroy()
 	QDEL_NULL(brainmob) //order is sensitive, see warning in handle_atom_del() below
 	QDEL_NULL(brain)
-	QDEL_NULL(eyes)
+	QDEL_NULL(eyes_left)
+	QDEL_NULL(eyes_right)
 	QDEL_NULL(ears)
 	QDEL_NULL(tongue)
 	return ..()
@@ -82,8 +110,11 @@
 			log_game("Brainmob: ([key_name(brainmob)]) was left stranded in [src] at [AREACOORD(src)] without a brain!")
 	if(A == brainmob)
 		brainmob = null
-	if(A == eyes)
-		eyes = null
+	if(A == eyes_left)
+		eyes_left = null
+		update_icon_dropped()
+	if(A == eyes_right)
+		eyes_right = null
 		update_icon_dropped()
 	if(A == ears)
 		ears = null
@@ -111,7 +142,8 @@
 			update_icon_dropped()
 		else
 			I.forceMove(T)
-	eyes = null
+	eyes_right = null
+	eyes_left = null
 	ears = null
 	tongue = null
 	sellprice = 0
@@ -174,13 +206,24 @@
 			. += lips_overlay
 
 		// eyes
-		var/image/eyes_overlay = image('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER, SOUTH)
-		. += eyes_overlay
-		if(eyes)
-			eyes_overlay.icon_state = eyes.eye_icon_state
 
-			if(eyes.eye_color)
-				eyes_overlay.color = eyes.eye_color
+		var/mutable_appearance/left_overlay
+		left_overlay = image('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER, SOUTH)
+		. += left_overlay
+		if(eyes_left)
+			left_overlay.icon_state = eyes_left.eye_icon_state
+
+			if(eyes_left.eye_color)
+				left_overlay.color = eyes_left.eye_color
+
+		var/mutable_appearance/right_overlay
+		right_overlay = image('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER, SOUTH)
+		. += right_overlay
+		if(eyes_right)
+			right_overlay.icon_state = eyes_right.eye_icon_state
+
+			if(eyes_right.eye_color)
+				right_overlay.color = eyes_right.eye_color
 
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'
