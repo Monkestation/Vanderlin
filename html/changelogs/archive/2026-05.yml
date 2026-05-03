@@ -1,3 +1,15 @@
 2026-05-01:
   realforest2001:
   - bugfix: Fixes inability to ban people for days
+2026-05-03:
+  Archeonan:
+  - balance: Changed the weights of numerous armors across the board to feel more
+      balanced instead of being based on 'realism'
+  HeWhoBe:
+  - balance: Made Atropa Death Draught's Metabolisation rate slower to make it a viable
+      poison
+  Monkeke2:
+  - rscadd: Added an ability that makes triton glow with a blue color.
+  Sulaboy:
+  - bugfix: Shovel, Godendag, and Psydonian Greatmace intents that required sharpness
+      work now.
