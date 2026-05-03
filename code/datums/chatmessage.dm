@@ -36,7 +36,7 @@
 	/// if we finished typing up all our letters.
 	var/finished_typing = FALSE
 	var/font_size = 8
-	var/tgt_color
+	var/tgt_color = null
 	var/list/_extra_classes
 	var/text
 	var/list/remaining_strings
@@ -87,8 +87,9 @@
 	if((length(text) > 1) && ((text[length(text)] == "!") && (text[length(text) - 1] == "!")))
 		exclaimed = TRUE
 
-	// We dim italicized text to make it more distinguishable from regular text
-	tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
+	if(!tgt_color)
+		// We dim italicized text to make it more distinguishable from regular text
+		tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
 	INVOKE_ASYNC(src, PROC_REF(generate_image), text, target, owner, language, extra_classes, lifespan)
 
@@ -149,13 +150,15 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.voice_color && (target.chat_color != H.voice_color))
-			target.chat_color = "#[H.voice_color]"
+			target.chat_color = "#[H.voice_color]" // Preferences santitises this
 			target.chat_color_darkened = target.chat_color
 			target.chat_color_name = target.name
+
 	if(!target.chat_color)
 		target.chat_color = colorize_string(target.name)
 		target.chat_color_darkened = colorize_string(target.name, 0.85, 0.85)
 		target.chat_color_name = target.name
+
 	if(target.voicecolor_override)
 		target.chat_color = "#[target.voicecolor_override]"
 		target.chat_color_darkened = target.chat_color
@@ -200,14 +203,17 @@
 	WXH_TO_HEIGHT(owned_by.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH), mheight)
 	if(!VERB_SHOULD_YIELD)
 		return finish_image_generation(mheight, target, owner, complete_text, lifespan)
+
 	var/datum/callback/our_callback = CALLBACK(src, PROC_REF(finish_image_generation), mheight, target, owner, complete_text, lifespan)
 	SSrunechat.message_queue += our_callback
 
 /datum/chatmessage/proc/finish_image_generation(mheight, atom/target, mob/owner, complete_text, lifespan)
 	if(!owned_by || QDELETED(owned_by))
 		return qdel(src)
+
 	if(!target || QDELETED(target))
 		return qdel(src)
+
 	approx_lines = max(1, mheight / CHAT_MESSAGE_APPROX_LHEIGHT)
 	message_loc = isturf(target) ? target : get_atom_on_turf(target)
 
