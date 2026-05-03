@@ -236,7 +236,7 @@
 			color = key_source_list[used_define]
 		if(!color)
 			color = "#FFFFFF"
-		color = sanitize_hexcolor(color, 6, TRUE)
+		color = sanitize_hexcolor(color)
 		color_list += color
 	return color_list_to_string(color_list)
 

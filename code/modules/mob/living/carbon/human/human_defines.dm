@@ -26,7 +26,7 @@
 
 	var/detail_color = "000"
 
-	var/skin_tone = "caucasian1"	//Skin tone
+	var/skin_tone = SKIN_COLOR_CONTINENTAL
 	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
