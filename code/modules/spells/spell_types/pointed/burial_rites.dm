@@ -26,6 +26,14 @@
 		if(grave.is_consecrated) // No double dipping
 			to_chat(owner, span_warning("You cannot perform burial rites on something that already was consecrated!"))
 			return FALSE
+		var/has_dead = FALSE
+		for(var/mob/mob in grave.get_all_contents())
+			if(mob.stat == DEAD)
+				has_dead = TRUE
+				break
+		if(!has_dead)
+			to_chat(owner, span_warning("You sense that there is no souls seeking rest in \the [grave]..."))
+			return FALSE
 		else
 			return TRUE
 
@@ -92,7 +100,7 @@
 	var/list/premade_final_words = file2list("strings/grave_final_words.txt")
 	to_chat(owner, span_warning("Energy flows into \the [grave] from my hands, I must stand by \the [grave] or risk failing the rites..."))
 
-	for(var/buried in grave.get_all_contents())
+	for(var/mob/buried in grave.get_all_contents())
 		if(ishuman(buried))
 			var/mob/living/carbon/human/corpse = buried
 			if(corpse.final_words) // Already have their final words, no need to find them to ask.

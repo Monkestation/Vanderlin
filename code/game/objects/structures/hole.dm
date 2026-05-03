@@ -63,16 +63,15 @@
 	stage_update()
 	return ..()
 
-/obj/structure/closet/dirthole/Destroy()
+/obj/structure/closet/dirthole/Destroy(force)
 	// Remove passive devotion
 	is_consecrated = FALSE
 	adjust_grave_necra_devotion()
-	. = ..()
+	return ..()
 
 /obj/structure/closet/dirthole/examine(mob/user)
-	if(headstone)
-		if(headstone.inscription)
-			to_chat(user, headstone.inscription) // We do it this way since dirthole doesnt have an examine usually, so we have it just displayed.
+	if(headstone?.inscription)
+		. += "<br>[headstone.inscription]"
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
@@ -360,84 +359,8 @@
 				else
 					new gravefence.type(get_turf(src))
 				gravefence = null
-			if(is_consecrated)	// Curses you if you don't have the graverobber trait, otherwise records you as a criminal and gives a special message.
-				if(ishuman(user))
-					var/mob/living/carbon/human/L = user
-					if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
-						var/robbing = TRUE
-						var/message = "I perform the secret rite of concealment, the Undermaiden won't know of my transgression here."
-						switch(L.patron?.type)
-							if(/datum/patron/divine/necra)
-								robbing = FALSE
-								message = "I perform the secret rite of exhumation, and so the Undermaiden overlooks my transgression."
-							if(/datum/patron/divine/pestra) //Special notices if you're of a particular faith.
-								message = "I perform the secret rite of concealment, Pestra shields me from divine gaze as I exhume this corpse for study."
-							if(/datum/patron/inhumen/matthios)
-								message = "I perform the secret rite of liberation, the Undermaiden is none the wiser as the occupant of this grave is freed."
-							if(/datum/patron/inhumen/zizo)
-								message = "I perform the secret rite of defilement, the Undermaiden can do nothing but watch as I undo the rites on this grave."
-						to_chat(user, span_info(message))
-						if(robbing)
-							record_featured_stat(FEATURED_STATS_CRIMINALS, user) //You aren't a Necran, even though you didn't get any consequences you're still a criminal.
-							record_round_statistic(STATS_GRAVES_ROBBED)
-							SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
-							addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
-					else
-						//Logic thread for curses.
-						switch(gravequality)
-							if(0 to 3)
-								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
-								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I can feel myself age a little...</span>", \
-								"<span class='hear'>I hear a loud whoosh!</span>")
-								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t2))
-									L.apply_status_effect(/datum/status_effect/debuff/cursed_t1)
-							if(4 to 6)
-								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
-								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I feel myself age a few years...</span>", \
-								"<span class='hear'>I hear a loud whoosh!</span>")
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-								if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3))
-									L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
-							if(7 to 9)
-								L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
-								"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
-								"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-								var/turf/T = get_turf(src)
-								new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
-								if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
-									L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
-								robbery_alert() // Now the entire church knows what you done!
-							if(10) // Max curse...
-								var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
-								var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
-								if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
-									L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place and whispers of alarm flutter out in every direction.</span>", \
-									"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms age as whispers of alarm go out in every direction!</span>", \
-									"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-								else
-									L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as their arms wither to bone, and whispers of alarm flutter out in every direction.</span>", \
-									"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! </span>\n\ <span class='warning big'>While it freezes me in place, I can feel my arms wither to bone as whispers of alarm go out in every direction!</span>", \
-									"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
-									if(left_arm)
-										var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_L_ARM)
-										part_to_bonify.skeletonize(FALSE)
-									if(right_arm)
-										var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_R_ARM)
-										part_to_bonify.skeletonize(FALSE)
-									L.emote("painscream")
-									L.update_body_parts()
-								var/turf/T = get_turf(src)
-								new /obj/effect/timestop(T, 2, 15 SECONDS, null, MAGIC_RESISTANCE_HOLY)
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
-								L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
-								L.apply_status_effect(/datum/status_effect/debuff/cursed_t4)
-								robbery_alert() // Now the entire church knows what you done!
-						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-						record_round_statistic(STATS_GRAVES_ROBBED)
-						SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+			if(is_consecrated)
+				handle_curse(user)
 
 			unstasis() // if no longer stage 4, unfreeze the bodies
 
@@ -449,11 +372,91 @@
 		update_quality()
 		adjust_grave_necra_devotion()
 
+/// A blessed grave curses you if you don't have the graverobber trait, otherwise just sends alarms after a delay
+/obj/structure/closet/dirthole/proc/handle_curse(mob/user)
+	if(ishuman(user))
+		var/mob/living/carbon/human/L = user
+		if(HAS_TRAIT(L, TRAIT_GRAVEROBBER))
+			var/robbing = TRUE
+			var/message = "I perform the secret rite of concealment, the Undermaiden won't know of my transgression here."
+			switch(L.patron?.type)
+				if(/datum/patron/divine/necra)
+					robbing = FALSE
+					message = "I perform the secret rite of exhumation, and so the Undermaiden overlooks my transgression."
+				if(/datum/patron/divine/pestra) //Special notices if you're of a particular faith.
+					message = "I perform the secret rite of concealment, Pestra shields me from divine gaze as I exhume this corpse for study."
+				if(/datum/patron/inhumen/matthios)
+					message = "I perform the secret rite of liberation, the Undermaiden is none the wiser as the occupant of this grave is freed."
+				if(/datum/patron/inhumen/zizo)
+					message = "I perform the secret rite of defilement, the Undermaiden can do nothing but watch as I undo the rites on this grave."
+			to_chat(user, span_info(message))
+			if(robbing)
+				record_featured_stat(FEATURED_STATS_CRIMINALS, user) //You aren't a Necran, even though you didn't get any consequences you're still a criminal.
+				record_round_statistic(STATS_GRAVES_ROBBED)
+				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/closet/dirthole, robbery_alert), L), rand(20,90) SECONDS) // Delayed alert
+			//Logic thread for curses.
+		else
+			switch(gravequality)
+				if(0 to 3)
+					L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+					"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I can feel myself age a little...</span>", \
+					"<span class='hear'>I hear a loud whoosh!</span>")
+					if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t2))
+						L.apply_status_effect(/datum/status_effect/debuff/cursed_t1)
+				if(4 to 6)
+					L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time!</span>", \
+					"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! I feel myself age a few years...</span>", \
+					"<span class='hear'>I hear a loud whoosh!</span>")
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+					if(!L.has_status_effect(/datum/status_effect/debuff/cursed_t4) && !L.has_status_effect(/datum/status_effect/debuff/cursed_t3))
+						L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
+				if(7 to 9)
+					L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as whispers of alarm flutter out in every direction.</span>", \
+					"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can hear whispers of alarm go out in every direction!</span>", \
+					"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+					var/turf/T = get_turf(src)
+					new /obj/effect/timestop(T, 2, 5 SECONDS, null, MAGIC_RESISTANCE_HOLY)
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+					if(!(L.has_status_effect(/datum/status_effect/debuff/cursed_t4)))
+						L.apply_status_effect(/datum/status_effect/debuff/cursed_t3)
+					robbery_alert() // Now the entire church knows what you done!
+				if(10) // Max curse...
+					var/obj/item/bodypart/left_arm = L.get_bodypart(BODY_ZONE_L_ARM)
+					var/obj/item/bodypart/right_arm = L.get_bodypart(BODY_ZONE_R_ARM)
+					if(((!left_arm || left_arm.skeletonized) && (!right_arm || right_arm.skeletonized)))
+						L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place and whispers of alarm flutter out in every direction.</span>", \
+						"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! \n\ While it freezes me in place, I can feel my arms age as whispers of alarm go out in every direction!</span>", \
+						"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+					else
+						L.visible_message("<span class='warning'>As [L] opens the grave, the stasis held on it breaks, releasing all the stored time! \n\ [L] freezes in place, as their arms wither to bone, and whispers of alarm flutter out in every direction.</span>", \
+						"<span class='warning'>As soon as I dig up the grave, all the stored time within is released! </span>\n\ <span class='warning big'>While it freezes me in place, I can feel my arms wither to bone as whispers of alarm go out in every direction!</span>", \
+						"<span class='hear'>I hear a loud whoosh, then a cacophony of whispers!</span>")
+						if(left_arm)
+							var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_L_ARM)
+							part_to_bonify.skeletonize(FALSE)
+						if(right_arm)
+							var/obj/item/bodypart/part_to_bonify = L.get_bodypart(BODY_ZONE_R_ARM)
+							part_to_bonify.skeletonize(FALSE)
+						L.emote("painscream")
+						L.update_body_parts()
+					var/turf/T = get_turf(src)
+					new /obj/effect/timestop(T, 2, 15 SECONDS, null, MAGIC_RESISTANCE_HOLY)
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t1)
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t2)
+					L.remove_status_effect(/datum/status_effect/debuff/cursed_t3)
+					L.apply_status_effect(/datum/status_effect/debuff/cursed_t4)
+					robbery_alert() // Now the entire church knows what you done!
+			record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+			record_round_statistic(STATS_GRAVES_ROBBED)
+			SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
+
 /// Alerts all clergy (except non-necran acoyltes) of a robbery!
 /obj/structure/closet/dirthole/proc/robbery_alert(mob/robber, var/delay = FALSE)
 	var/robbery_location = get_area_name(get_turf(src))
 	if(robber) // Graverobbers get a delay before the alert, to give them time to leave
-		to_chat(robber, span_warning("The rites I performed on \the [src] have bought me time, but the whispers of the disturbed dead were eventually able to break through... I need to get out of here!!"))
+		to_chat(robber, span_warning("The rites I performed on \the [src] have bought me time, but the whispers of the disturbed dead were eventually able to break through..."))
 
 	for (var/mob/living/player in GLOB.player_list)
 		if (player.stat == DEAD || isbrain(player))
@@ -611,7 +614,6 @@
 
 	gravequality = clamp(gravequality, 0, 10)
 	adjust_grave_necra_devotion()
-	return
 
 /// Proc that adjusts every necran's devotion passive gain based on grave quality, up to global max
 /obj/structure/closet/dirthole/proc/adjust_grave_necra_devotion()
@@ -657,7 +659,6 @@
 				devotion_change = GRAVE_DEVOTION_GLOBAL_MAX - current_passive_gain
 
 			devotion.update_passive_devotion(devotion_change)
-	return
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()

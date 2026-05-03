@@ -39,7 +39,7 @@
 			GLOB.job_respawn_delays[src.ckey] = world.time + target_job.same_job_respawn_delay
 
 	var/mob/living/carbon/human/dead_hum
-	if(mind && !QDELETED(mind.current))
+	if(!QDELETED(mind.current))
 		if(ishuman(mind.current))
 			dead_hum = mind.current // We use this later since we will give a prompt, and we dont want the rest of the code to sleep
 

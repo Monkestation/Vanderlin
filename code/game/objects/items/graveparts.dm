@@ -15,11 +15,10 @@
 	/// Patrons associated with this grave decoration. Usually a headstone.
 	var/list/patrons
 
-/obj/item/gravedecor/Initialize(mapload, var/parent)
+/obj/item/gravedecor/Initialize(mapload, parent)
 	. = ..()
 	if(parent)
 		sourceitem = parent
-	. = ..()
 
 /obj/item/gravedecor/examine(mob/user)
 	. = ..()
@@ -51,9 +50,9 @@
 			. += SPAN_GOD_MALUM("This decoration venerates Malum, the Great Artisan.")
 		if(/datum/patron/divine/eora in patrons)
 			. += SPAN_GOD_EORA("This decoration venerates Eora, the Patron of Love.")
-		if((/datum/patron/alternate/great_hunt || /datum/patron/alternate/great_hunt/proven) in patrons)
+		if(/datum/patron/alternate/great_hunt in patrons)
 			. += SPAN_GOD_GREATHUNT("This decoration venerates the Great Hunt.")
-		if((/datum/patron/psydon || /datum/patron/psydon/extremist) in patrons)
+		if(/datum/patron/psydon in patrons)
 			. += SPAN_GOD_PSYDON("This decoration venerates Psydon, the Old God.")
 
 /obj/item/gravedecor/headstone
@@ -96,7 +95,7 @@
 			custom_message = new_message
 			return
 
-	. = ..()
+	return ..()
 
 
 /obj/item/gravedecor/headstone/crude
