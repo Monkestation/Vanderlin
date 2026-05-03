@@ -79,7 +79,7 @@
 	if(.) // was already tamed
 		return
 	if(can_buckle)
-		AddElement(/datum/element/ridable, /datum/component/riding/gator)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gator)
 
 /mob/living/simple_animal/hostile/retaliate/gator/death(gibbed)
 	..()

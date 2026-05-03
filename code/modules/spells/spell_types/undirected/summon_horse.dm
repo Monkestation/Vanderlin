@@ -33,7 +33,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 	if(.) // was already tamed
 		return
 	if(can_buckle)
-		AddElement(/datum/element/ridable, /datum/component/riding/equestria)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/equestria)
 
 /datum/status_effect/buff/healing/saddleborn
 	healing_on_tick = 0.25

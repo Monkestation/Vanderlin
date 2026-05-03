@@ -221,7 +221,7 @@
 	if(.) // was already tamed
 		return
 	if(can_buckle)
-		AddElement(/datum/element/ridable, /datum/component/riding/pig)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/pig)
 
 
 /mob/living/simple_animal/hostile/retaliate/trufflepig/Life()

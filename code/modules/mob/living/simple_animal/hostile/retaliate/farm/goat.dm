@@ -110,7 +110,7 @@
 	if(.) // was already tamed
 		return
 	if(can_buckle)
-		AddElement(/datum/element/ridable, /datum/component/riding/gote)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /// Called when we attack something in order to piece together the intent of the AI/user and provide desired behavior. The element might be okay here but I'd rather the fluff.
 /// Goats are really good at beating up plants by taking bites out of them, but we use the default attack for everything else
@@ -248,7 +248,7 @@
 	if(.) // was already tamed
 		return
 	if(can_buckle)
-		AddElement(/datum/element/ridable, /datum/component/riding/gote)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gote)
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/get_sound(input)
 	switch(input)

@@ -909,39 +909,6 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
 	return ..()
 
-/*
-/mob/living/simple_animal/hostile/user_buckle_mob(mob/living/M, mob/user)
-	if(user != M)
-		return
-	var/datum/component/riding/riding_datum = GetComponent(/datum/component/riding)
-	if(riding_datum)
-		var/time2mount = 12
-		riding_datum.vehicle_move_delay = move_to_delay
-		if(M.mind)
-			var/amt = GET_MOB_SKILL_VALUE_OLD(M, /datum/attribute/skill/misc/riding)
-			if(amt)
-				if(amt <= 3)
-					time2mount = 50 - (amt * 10)
-				else
-					time2mount = 0 // Instant at Master and above
-			else
-				time2mount = 50
-
-		if(!do_after(M, time2mount, src))
-			return
-		if(user.incapacitated())
-			return
-//		for(var/atom/movable/A in get_turf(src))
-//			if(A != src && A != M && A.density)
-//				return
-		M.forceMove(get_turf(src))
-		M.adjust_experience(/datum/attribute/skill/misc/riding, GET_MOB_ATTRIBUTE_VALUE(M, STAT_INTELLIGENCE), FALSE)
-		if(ssaddle)
-			playsound(src, 'sound/foley/saddlemount.ogg', 100, TRUE)
-	..()
-	update_appearance(UPDATE_OVERLAYS)
-*/
-
 /mob/living/simple_animal/hostile
 	var/do_footstep = FALSE
 
