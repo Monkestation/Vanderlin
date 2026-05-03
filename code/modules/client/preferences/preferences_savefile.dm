@@ -357,6 +357,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["setspouse"] >> setspouse
 	S["selected_accent"] >> selected_accent
 
+	voice_color = sanitize_hexcolor(voice_color)
+
 	// We load our list, but override everything to FALSE to stop a "tainted" save from making it random again.
 	randomise[RANDOM_BODY] = FALSE
 	randomise[RANDOM_BODY_ANTAG] = FALSE
