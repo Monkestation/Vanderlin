@@ -522,7 +522,7 @@
 		if(!initial(brain_trauma.random_gain))
 			continue
 		if(ispath(brain_trauma, /datum/brain_trauma/severe/split_personality))
-			if(!force_split_personality && owner?.client.prefs.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
+			if(!force_split_personality && owner?.client?.prefs?.toggles_gameplay & DISABLE_SPLIT_PERSONALITY)
 				continue
 		if(can_gain_trauma(brain_trauma, resilience, natural_gain))
 			possible_traumas += brain_trauma

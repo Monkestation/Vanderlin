@@ -1759,12 +1759,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
-"ie" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 32
-	},
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "ij" = (
 /obj/item/clothing/shirt/dress/gen/colored/maid,
 /obj/item/clothing/shoes/shortboots,
@@ -1902,12 +1896,6 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobble,
 /area/indoors/lich)
-"je" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 1
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "jf" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -7543,12 +7531,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
-"UH" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 8
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -17180,8 +17162,8 @@ ag
 NW
 NW
 NW
-NW
-NW
+XB
+XB
 fJ
 NW
 NW
@@ -17570,8 +17552,8 @@ ag
 ag
 NW
 NW
-NW
-UH
+XB
+vK
 vK
 NW
 NW
@@ -17699,9 +17681,9 @@ ag
 ag
 NW
 NW
-NW
-NW
-NW
+XB
+XB
+XB
 vK
 NW
 NW
@@ -18357,7 +18339,7 @@ XB
 vK
 vK
 vK
-je
+vK
 NW
 NW
 NW
@@ -18865,7 +18847,7 @@ ag
 ag
 NW
 NW
-ie
+fJ
 fJ
 vK
 VZ
@@ -19264,7 +19246,7 @@ XB
 XB
 XB
 vK
-UH
+vK
 vK
 NW
 NW
@@ -19529,7 +19511,7 @@ NW
 NW
 iG
 fJ
-NW
+XB
 NW
 NW
 HZ
@@ -19659,7 +19641,7 @@ NW
 NW
 NW
 fJ
-NW
+XB
 NW
 NW
 HZ
@@ -19783,8 +19765,8 @@ fJ
 fJ
 fJ
 NW
-NW
-NW
+XB
+XB
 NW
 NW
 BO
@@ -19912,9 +19894,9 @@ NW
 NW
 NW
 fJ
-NW
-NW
-NW
+XB
+XB
+XB
 NW
 NW
 NW
@@ -20171,8 +20153,8 @@ NW
 NW
 fJ
 vK
-UH
-NW
+vK
+XB
 vK
 NW
 NW
@@ -20301,8 +20283,8 @@ NW
 NW
 Zj
 NW
-NW
-NW
+XB
+XB
 vK
 fJ
 Zj

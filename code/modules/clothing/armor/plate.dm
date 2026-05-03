@@ -18,7 +18,7 @@
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
 	stand_speed_reduction = 1.2
-	item_weight = 8.4 KILOGRAMS
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/plate/Initialize()
 	. = ..()

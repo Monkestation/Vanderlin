@@ -322,6 +322,7 @@
 	destroy_sound = 'sound/foley/breaksound.ogg'
 	update_appearance(UPDATE_ICON_STATE)
 	unbuckle_all_mobs(TRUE)
+	qdel(src)
 
 /obj/structure/vine/proc/grow()
 	if(energy < 0)

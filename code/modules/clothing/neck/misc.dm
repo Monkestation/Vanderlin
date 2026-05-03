@@ -265,7 +265,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
-	item_weight = 2.3 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 

@@ -25,7 +25,7 @@
 	armor = ARMOR_MAILLE
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
-	item_weight = 5.2 KILOGRAMS
+	item_weight = 3.95 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -40,7 +40,7 @@
 	smeltresult = /obj/item/ingot/iron
 	armor = ARMOR_MAILLE_IRON
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 5.2 KILOGRAMS
+	item_weight = 3.95 KILOGRAMS
 
 /obj/item/clothing/pants/chainlegs/kilt
 	name = "steel chain kilt"
