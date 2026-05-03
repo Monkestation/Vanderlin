@@ -93,34 +93,6 @@
 	BP?.update_chronic()
 	to_chat(H, span_warning("You feel the familiar pressure building behind your eyes."))
 
-/datum/quirk/vice/chronic_migraine/on_life(mob/living/user)
-	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/H = user
-
-	if(prob(2))
-		for(var/obj/item/bodypart/BP in H.bodyparts)
-			if(BP.body_zone == BODY_ZONE_HEAD)
-				BP.lingering_pain += rand(25, 40)
-				break
-
-		if(prob(30))
-			H.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
-			to_chat(H, span_boldwarning("A severe migraine strikes! Your vision blurs and your head pounds!"))
-		else
-			to_chat(H, span_warning("A migraine headache begins to build."))
-
-	if(prob(1))
-		var/obj/item/bodypart/head = null
-		for(var/obj/item/bodypart/BP in H.bodyparts)
-			if(BP.body_zone == BODY_ZONE_HEAD)
-				head = BP
-				break
-
-		if(head && head.lingering_pain > 20 && H.loc && H.loc.luminosity > 2)
-			head.lingering_pain += rand(5, 10)
-			to_chat(H, span_warning("The flickering flames make your migraine worse!"))
-
 /datum/quirk/vice/unlucky
 	name = "Unlucky"
 	desc = "It has never, ever, been your dae. -5 to -9 Fortune."
