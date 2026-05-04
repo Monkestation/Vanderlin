@@ -30,12 +30,13 @@
 		data["preferences"] &= ~(BLOOD_PREFERENCE_LIVING|BLOOD_PREFERENCE_SLEEPING)
 	. = ..()
 
-/datum/reagent/blood/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
+/datum/reagent/blood/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()
+
 	if(methods & TOUCH)
 		exposed_mob.adjust_germ_level(GERM_PER_UNIT_BLOOD * reac_volume * 0.1)
 
-	if(!(. && (methods & (INJECT|INGEST))))
+	if(!(methods & (INJECT|INGEST)))
 		return
 	SEND_SIGNAL(exposed_mob, COMSIG_HANDLE_INFUSION, data["blood_type"], reac_volume)
 	var/datum/dna/exposed_mob_dna = exposed_mob.has_dna()
