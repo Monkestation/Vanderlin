@@ -107,6 +107,13 @@
 	icon_state = "gravecovered"
 	opened = FALSE
 
+/// Same as parent, but we force the tile to be dirt if it wasnt already
+/obj/structure/closet/dirthole/closed/Initialize()
+	var/turf/T = loc
+	if(!istype(T, /turf/open/floor/dirt))
+		T.ChangeTurf(/turf/open/floor/dirt)
+	return ..()
+
 /// Right clicking with hand allows you to remove grave decorations if the grave has not been consecrated yet
 /obj/structure/closet/dirthole/attack_hand_secondary(mob/user, list/modifiers)
 	if(!Adjacent(user) || stage != 4)
