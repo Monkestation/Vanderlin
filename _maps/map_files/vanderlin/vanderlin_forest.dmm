@@ -1538,14 +1538,6 @@
 /obj/item/chair/stool/bar,
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/wilderness/tavern)
-"jR" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/skull{
-	pixel_x = 11;
-	pixel_y = -7
-	},
-/turf/open/floor/grass,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "jS" = (
 /obj/structure/bookcase,
 /turf/open/floor/sandstone_tile/five,
@@ -21571,7 +21563,7 @@ Ew
 sg
 vJ
 sg
-jR
+vJ
 AI
 Ym
 dF
@@ -22377,7 +22369,7 @@ Ew
 Ew
 UV
 UV
-jR
+vJ
 UV
 vJ
 UV
@@ -44868,7 +44860,7 @@ gz
 SY
 gr
 ZV
-ar
+nw
 gr
 gr
 bV
@@ -45072,7 +45064,7 @@ VQ
 gz
 gr
 ZV
-nw
+ar
 ZV
 gr
 ZV
