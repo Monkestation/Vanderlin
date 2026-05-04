@@ -29,9 +29,9 @@
 	var/mob/living/carbon/human/to_be_interred
 
 /obj/effect/mapping_helpers/structure/grave_spawner/LateInitialize()
-	var/turf/open/floor/dirt/T = get_turf(loc)
+	var/turf/open/floor/dirt/T = loc
 	if(!istype(T))
-		log_mapping("[src] at [AREACOORD(src)] was not placed on a turf/open/floor/dirt or it's subtypes, this will cause any dirtholes to be deleted on init!")
+		log_mapping("[src] at [AREACOORD(src)] was not placed on a turf/open/floor/dirt or it's subtypes, and instead placed on a [T.type] this will cause any dirtholes to be deleted on init!")
 		return
 	var/obj/structure/closet/dirthole/closed/target = locate() in loc
 	if(target)
