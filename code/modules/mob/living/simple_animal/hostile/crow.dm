@@ -16,7 +16,7 @@
 	rotprocess = null
 
 /obj/item/reagent_containers/food/snacks/atom_deconstruct(disassembled)
-	new /obj/item/natural/feather(loc)
+	new /obj/item/natural/feather(drop_location())
 
 /obj/item/reagent_containers/food/snacks/friedcrow
 	name = "fried zad"

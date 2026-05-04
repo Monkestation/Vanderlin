@@ -80,17 +80,19 @@
 		if(1)
 			progress_to_add /= 3
 		if(2)
-			progress_to_add /= 4
+			progress_to_add /= 3
 		if(3)
 			progress_to_add /= 4
 		if(4)
-			progress_to_add /= 5
+			progress_to_add /= 4
 		if(5)
 			progress_to_add /= 5
 		if(6)
-			progress_to_add /= 6
+			progress_to_add /= 5
 	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
 	progress_to_add *= LAZYLEN(additional_items)+1
+	if(quality_score < 15) // Did you even try?
+		progress /= 2 //screw you for not trying
 	progress += progress_to_add
 
 	if(progress >= 100)
@@ -128,11 +130,14 @@
 
 	for(var/i in 1 to output_amount)
 		var/obj/item/output_item = new created_item(output_location)
+		handle_output(output_item)
 		output_item.OnCrafted(user.dir, user)
-		quality_calc.apply_quality_to_item(output_item, TRUE)
-		output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
 
 	qdel(quality_calc)
+
+/datum/anvil_recipe/proc/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
+	quality_calculator.apply_quality_to_item(output_item, TRUE)
+	output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
 
 /datum/anvil_recipe/proc/is_recipe_available(mob/user)
 	if(has_world_trait(/datum/world_trait/delver))

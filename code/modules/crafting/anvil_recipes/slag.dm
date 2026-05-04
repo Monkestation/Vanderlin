@@ -3,10 +3,10 @@
 	abstract_type = /datum/anvil_recipe/slag
 	category = "Slag"
 
-/datum/anvil_recipe/slag/handle_creation(obj/item/recipe_output, obj/item/initial_material)
+/datum/anvil_recipe/slag/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
 	var/average_performance = accumulated_quality / numberofhits
 	if(average_performance >= 30) // Did you even try?
-		recipe_output.set_quality(initial_material.recipe_quality)
+		output_item.set_quality(material_quality / num_of_materials)
 
 /datum/anvil_recipe/slag/steel
 	name = "Steel Ingot"

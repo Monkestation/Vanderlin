@@ -104,7 +104,7 @@
 	var/datum/weakref/source_spell
 
 /obj/item/reagent_containers/food/snacks/messenger_bird/atom_deconstruct(disassembled)
-	new /obj/item/natural/feather(loc)
+	new /obj/item/natural/feather(drop_location())
 
 /obj/item/reagent_containers/food/snacks/friedmessenger
 	name = "fried messenger"

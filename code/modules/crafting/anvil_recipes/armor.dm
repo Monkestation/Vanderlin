@@ -504,7 +504,6 @@
 
 /datum/anvil_recipe/armor/steel/templar/helmet_abyssor
 	name = "Abyssor Helmet (+Bronze Bar)"
-	recipe_name = "an abyssor helmet"
 	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
 	additional_items = list(/obj/item/ingot/bronze)
 
