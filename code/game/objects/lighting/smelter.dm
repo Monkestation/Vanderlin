@@ -23,7 +23,7 @@
 	var/smelting_progress = 0
 	/// How high smelting_progress needs to reach before smelting an ore
 	var/smelting_threshold = 20
-	var/max_crucible_temperature = 1850
+	var/max_crucible_temperature = 1500
 
 /obj/machinery/light/fueled/smelter/examine(mob/user, params)
 	. = ..()

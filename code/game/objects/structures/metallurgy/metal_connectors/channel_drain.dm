@@ -136,5 +136,5 @@
 				appearance_flags = (RESET_COLOR | KEEP_APART),
 			)
 
-			if(initial(largest.red_hot) && input.group_reagents.chem_temp > initial(largest.melting_point))
+			if(initial(largest.show_as_filling) && input.group_reagents.chem_temp > initial(largest.melting_point))
 				. += emissive_appearance(icon, "drain_flow", alpha = 100)

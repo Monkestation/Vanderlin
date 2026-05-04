@@ -108,7 +108,7 @@
 	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
 	var/datum/material/largest = metal?.largest_metal
 
-	if(initial(largest?.red_hot) && reagents.chem_temp > initial(largest.melting_point))
+	if(initial(largest?.show_as_filling) && reagents.chem_temp > initial(largest.melting_point))
 		. += emissive_appearance(icon, "filling", alpha = used_alpha)
 
 /obj/item/storage/crucible/proc/melt_item(obj/item/item)

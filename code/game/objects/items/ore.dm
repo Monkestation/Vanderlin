@@ -96,6 +96,8 @@
 	icon_state = "orecoal1"
 	firefuel = 10 MINUTES
 	smeltresult = /obj/item/ore/coal
+	melting_material = /datum/material/coke
+	melt_amount = 100
 	sellprice = 1
 	item_weight = 1.8 KILOGRAMS
 

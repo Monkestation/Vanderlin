@@ -113,7 +113,7 @@
 	var/expected_ingot_type
 	if(working_material.melting_material)
 		var/datum/material/mat = GET_ATTRIBUTE_DATUM(working_material.melting_material)
-		expected_ingot_type = mat?.ingot_type
+		expected_ingot_type = mat?.solid_form
 	else if(working_material.smeltresult)
 		if(istype(working_material.smeltresult, /obj/item/ingot))
 			expected_ingot_type = working_material.smeltresult
@@ -175,7 +175,7 @@
 
 	var/datum/anvil_recipe/recipe = working_material.currecipe
 
-	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
+	if(quality_score >= 15) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
 		var/boon = user.get_learning_boon(recipe_skill)

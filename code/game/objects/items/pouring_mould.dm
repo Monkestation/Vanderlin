@@ -14,18 +14,18 @@
 
 	var/cooling = FALSE
 	var/cooling_progress = 0
-	var/cooling_multiplier = 1
+	var/cooling_amount = 7.5
 
 	/// Average quality weighted by molten metal reagent amount
 	var/average_quality = 0
 	/// Average skill level of pourers weighted by molten metal reagent amount
 	var/average_skill = 0
 
-/obj/item/mould/Initialize()
+/obj/item/mould/Initialize(mapload)
 	. = ..()
-	main_material = pick(typesof(/datum/material/clay))
-	set_material_information()
-	update_appearance(UPDATE_OVERLAYS)
+	if(mapload)
+		main_material = pick(typesof(/datum/material/clay))
+		set_material_information()
 
 /obj/item/mould/set_material_information()
 	. = ..()
@@ -49,10 +49,13 @@
 	. = ..()
 	if(!istype(attacking_item, /obj/item/storage/crucible))
 		return
+
+	try_filling(attacking_item, user)
+	return TRUE
+
+/obj/item/mould/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
 	if(cooling)
 		return
-
-	var/obj/item/storage/crucible/crucible = attacking_item
 	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
@@ -136,7 +139,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/mould/process()
-	cooling_progress += 7.5 * cooling_multiplier
+	cooling_progress += cooling_amount
 	update_appearance(UPDATE_OVERLAYS)
 	if(cooling_progress >= 100)
 		STOP_PROCESSING(SSobj, src)
@@ -190,7 +193,7 @@
 	item_weight = 650 GRAMS
 
 /obj/item/mould/ingot/create_item()
-	output_atom = initial(filling_metal.ingot_type)
+	output_atom = initial(filling_metal.solid_form)
 	if(output_atom == /obj/item/ingot/blacksteel)
 		record_round_statistic(STATS_BLACKSTEEL_SMELTED)
 
@@ -203,4 +206,10 @@
 /obj/item/mould/ingot/advanced
 	name = "advanced ingot mould"
 	desc = "An ingot mould that utilizes water for faster cooling."
-	cooling_multiplier = 2
+	cooling_amount = 15
+
+/obj/item/mould/customizable
+	name = "custom mould"
+	desc = "A blank mould that is ready to have its shape set by steady hands."
+	icon_state = "base_large_mould"
+	filling_icon_state = "large-mould-filling"
