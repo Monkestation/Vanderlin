@@ -36,7 +36,8 @@
 	if(length(melting_pot))
 		for(var/obj/item/atom in melting_pot)
 			var/datum/material/material = atom.melting_material
-			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / atom.melt_amount) * 100, 1)]% Melted"
+			var/total_amount = atom.melt_amount || 100
+			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / total_amount) * 100, 1)]% Melted"
 	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
