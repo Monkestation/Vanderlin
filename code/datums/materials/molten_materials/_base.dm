@@ -71,29 +71,32 @@
 			data |= material
 			data[material] += recipe.output[material] * multiplier
 
+	find_largest_metal()
+
+/datum/reagent/molten_metal/proc/find_largest_metal()
+	var/largest
 	var/name_found = FALSE
+	var/total_volume = 0
 	for(var/datum/material/material_type as anything in data)
 		if(!ispath(material_type))
 			continue
+
+		total_volume += data[material_type]
+
 		if(!name_found)
 			name = "Molten [initial(material_type.name)]"
 			name_found = TRUE
 		else
 			name = "Molten Metals"
-			break
 
-	find_largest_metal()
-
-/datum/reagent/molten_metal/proc/find_largest_metal()
-	var/largest
-	for(var/datum/material/material as anything in data)
-		if(!ispath(material))
-			continue
 		if(!largest)
-			largest = material
+			largest = material_type
 			continue
-		if(data[material] > data[largest])
-			largest = material
+		if(data[material_type] > data[largest])
+			largest = material_type
 
 	largest_metal = largest
 	color = initial(largest_metal.color)
+
+	volume = total_volume
+	holder.update_total()

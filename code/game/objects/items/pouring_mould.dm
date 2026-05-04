@@ -110,7 +110,7 @@
 	if(amt2raise > 0)
 		user.adjust_experience(/datum/attribute/skill/craft/blacksmithing, amt2raise * boon, FALSE)
 
-	to_chat(user, span_notice("I pour [metal_amount] [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
+	to_chat(user, span_notice("I pour [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
 	fufilled_metal += metal_amount
 	if(fufilled_metal >= required_metal_amount)
 		start_cooling()

@@ -26,6 +26,11 @@
 	created_item = /obj/item/kitchen/fork/pewter
 	output_amount = 2
 
+/datum/anvil_recipe/tools/tin/bowl
+	name = "Bowl (tin)"
+	created_item = /obj/item/reagent_containers/glass/bowl/pewter
+	output_amount = 2
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper
@@ -259,6 +264,11 @@
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/surgeontoolspawner
 
+/datum/anvil_recipe/tools/iron/bowl
+	name = "Bowl (iron)"
+	created_item = /obj/item/reagent_containers/glass/bowl/iron
+	output_amount = 2
+
 // --------- STEEL -----------
 
 /datum/anvil_recipe/tools/steel
@@ -346,3 +356,34 @@
 	name = "Platters (gold)"
 	created_item = /obj/item/plate/gold
 	craftdiff = 2
+
+// --------- CASTING TOOLS -----------
+/datum/anvil_recipe/tools/casting
+	category = "Casting"
+	craftdiff = SKILL_RANK_JOURNEYMAN
+	abstract_type = /datum/anvil_recipe/tools/casting
+
+/datum/anvil_recipe/tools/casting/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
+	output_item.main_material = required_material
+	output_item.set_material_information()
+
+/datum/anvil_recipe/tools/casting/crucible
+	name = "Crucible"
+	required_material = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/storage/crucible
+
+/datum/anvil_recipe/tools/casting/ingot_mould
+	name = "Ingot mould (steel)"
+	required_material = /obj/item/ingot/steel
+	created_item = /obj/item/mould/ingot
+
+/datum/anvil_recipe/tools/casting/ingot_mould/iron
+	name = "Ingot mould (iron) (+Iron)"
+	required_material = /obj/item/ingot/iron
+	additional_items = list(/obj/item/ingot/iron)
+
+/datum/anvil_recipe/tools/casting/generic_mould
+	name = "Customizable mould"
+	required_material = /obj/item/ingot/steel
+	created_item = /obj/item/mould/customizable

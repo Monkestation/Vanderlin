@@ -130,7 +130,7 @@
 
 	for(var/i in 1 to output_amount)
 		var/obj/item/output_item = new created_item(output_location)
-		handle_output(output_item)
+		handle_output(output_item, quality_calc)
 		output_item.OnCrafted(user.dir, user)
 
 	qdel(quality_calc)

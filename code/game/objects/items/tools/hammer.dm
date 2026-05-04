@@ -40,7 +40,10 @@
 	if(isbodypart(attacked_atom))
 		. = TRUE
 		var/obj/item/bodypart/attacked_prosthetic = attacked_atom
-		if(!attacked_prosthetic.anvilrepair || !isturf(attacked_prosthetic.loc))
+		if(!attacked_prosthetic.anvilrepair)
+			return
+		if(!attacked_atom.ontable() && !istype(attacked_atom.loc, /obj/machinery/anvil))
+			to_chat(user, span_warning("I should put [attacked_atom] on a table or an anvil first."))
 			return
 		if(attacked_prosthetic.get_integrity() >= attacked_prosthetic.max_integrity && attacked_prosthetic.brute_dam == 0 && attacked_prosthetic.burn_dam == 0 && attacked_prosthetic.wounds == null && attacked_prosthetic.bodypart_disabled == BODYPART_NOT_DISABLED) //A mouthful
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
@@ -75,7 +78,7 @@
 	if(isitem(attacked_atom))
 		. = TRUE
 		var/obj/item/attacked_item = attacked_atom
-		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
+		if(!attacked_item.anvilrepair || !attacked_item.max_integrity)
 			to_chat(user, span_warning("[attacked_item] cannot be repaired."))
 			return
 
