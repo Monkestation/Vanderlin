@@ -69,7 +69,7 @@
 			freeze.duration = unfreeze_mob_duration
 
 	if(on_freeze_brute_damage || on_freeze_burn_damage)
-		target_mob.take_overall_damage(on_freeze_brute_damage, on_freeze_burn_damage)
+		target_mob.take_overall_damage(on_freeze_brute_damage, on_freeze_burn_damage, damage_type = BCLASS_BLUNT)
 
 	to_chat(target_mob, span_userdanger("You feel a bitter cold!"))
 

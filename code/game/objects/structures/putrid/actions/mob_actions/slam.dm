@@ -91,7 +91,7 @@
 		if(crushed_part)
 			to_chat(victim, span_userdanger("Your [crushed_part.name] is crushed!"))
 
-	victim.apply_damage(crush_damage, BRUTE, target_zone)
+	victim.apply_damage(crush_damage, BRUTE, target_zone, damage_type = BCLASS_BLUNT)
 	victim.Paralyze(4 SECONDS)
 	victim.add_splatter_floor()
 
@@ -113,7 +113,7 @@
 	target.balloon_alert(target, "knocked down!")
 
 	var/shockwave_damage = max(5, 15 - (distance * 3))
-	target.apply_damage(shockwave_damage, BRUTE, spread_damage = TRUE)
+	target.apply_damage(shockwave_damage, BRUTE, spread_damage = TRUE, damage_type = BCLASS_BLUNT)
 
 /datum/action/cooldown/meatvine/personal/ground_slam/evaluate_ai_score(datum/ai_controller/controller)
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/user = owner

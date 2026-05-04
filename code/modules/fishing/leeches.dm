@@ -115,7 +115,7 @@
 				user.simple_remove_embedded_object(src)
 			return TRUE
 	else
-		var/modifier = bodypart.has_wound(/datum/wound/slash/incision) ? 1.5 : 1
+		var/modifier = bodypart.get_incision() ? 1.5 : 1
 		user.adjustToxLoss(-1 * toxin_healing * modifier)
 		var/blood_extracted = min(blood_maximum - blood_storage, user.blood_volume, blood_sucking) * modifier
 		if(HAS_TRAIT(user, TRAIT_LEECHIMMUNE))

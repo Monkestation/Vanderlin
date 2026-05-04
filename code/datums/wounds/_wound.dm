@@ -53,8 +53,26 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// How much pain this wound causes while on a mob
 	var/woundpain = 0
 
+	/// How much this wound increases the damage on organ damage rolls
+	var/organ_damage_increase = 0
+	/// How much this wound reduces organ_damage_minimum in /obj/item/bodypart/damage_internal_organs()
+	var/organ_minimum_reduction = 0
+	/// How much this wound reduces organ_damaged_required in /obj/item/bodypart/damage_internal_organs()
+	var/organ_required_reduction = 0
+
+	/// Will apply this amount of damage to attached organs if set
+	var/apply_organ_damage = 0
+	/// How much this reduces an attached organ's efficiency, if it does it at all
+	var/list/organ_efficiency_reduction
+
 	/// How much this reduces the limb's efficiency
 	var/limb_efficiency_reduction = 0
+	/// Using this limb in a do_after interaction will multiply the length by this duration (arms and hands)
+	var/interaction_efficiency_penalty = 1
+	/// Incoming damage on this limb will be multiplied by this, to simulate tenderness and vulnerability
+	var/damage_multiplier_penalty = 1.25
+	/// If set and this wound is applied to a leg/foot, we take this many deciseconds extra per step on this leg/foot
+	var/limp_slowdown = 0
 
 	/// If TRUE, this wound can be sewn
 	var/can_sew = FALSE
@@ -106,6 +124,30 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Primary use is for wound application
 	var/list/associated_bclasses = list()
 
+	///list of viable zones for this
+	var/list/viable_zones = ALL_BODYPARTS
+
+	/// These are effectively try_crit moved onto the wound
+
+	/// Minimum damage required to attempt this wound
+	var/min_damage = 5
+	/// Minimum damage_dividend (current/max) required
+	var/min_damage_dividend = 0
+	/// Base probability modifier added to the rolled chance
+	var/base_prob_weight = 0
+	/// If TRUE, strong RMB intent adds +10 dam before prob calc
+	var/strong_intent_bonus = FALSE
+	/// If TRUE, aimed RMB intent adds +10 dam before prob calc
+	var/aimed_intent_bonus = FALSE
+	/// If TRUE, TRAIT_BRITTLE adds +10 dam
+	var/brittle_bonus = FALSE
+	///if we are able to roll natively
+	var/can_roll = TRUE
+	///how much we multiply our dividend by for odds
+	var/dividend_multi = 20
+	///how much we divide our calculated damage by for odds
+	var/damage_divisor = 6
+
 /datum/wound/Destroy(force)
 	. = ..()
 	if(bodypart_owner)
@@ -133,6 +175,22 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/get_check_name(mob/user, advanced)
 	return check_name
 
+/datum/wound/proc/apply_organ_modifications()
+	if(!bodypart_owner || !length(organ_efficiency_reduction))
+		return
+
+	for(var/organ_slot as anything in organ_efficiency_reduction)
+		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
+		organ?.apply_efficiency_modification(organ_efficiency_reduction[organ_slot], organ_slot, src)
+
+/datum/wound/proc/remove_organ_modifications()
+	if(!bodypart_owner || !length(organ_efficiency_reduction))
+		return
+
+	for(var/organ_slot as anything in organ_efficiency_reduction)
+		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
+		organ?.remove_efficiency_modification(organ_slot, src)
+
 /// Crit message that should be appended when this wound is applied in combat
 /datum/wound/proc/get_crit_message(mob/living/affected, obj/item/bodypart/affected_bodypart)
 	if(!length(crit_message))
@@ -151,6 +209,38 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(critical)
 		final_message = "<span class='crit'><b>Critical hit!</b> [final_message]</span>"
 	return final_message
+
+/datum/wound/proc/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
+	if(!can_roll)
+		return 0
+	if(!(bclass in associated_bclasses))
+		return 0
+	if(dam < min_damage)
+		return 0
+	if(damage_dividend < min_damage_dividend)
+		if(!(brittle_bonus && HAS_TRAIT(affected, TRAIT_BRITTLE))) // brittle skips the dividend gate
+			return 0
+	if(length(viable_zones) && !(zone_precise in viable_zones) && viable_zones != ALL_BODYPARTS)
+		return 0
+
+	var/used = base_prob_weight + (modifiers?[CRIT_MOD_CHANCE] || 0)
+	var/calc_dam = dam
+
+	if(strong_intent_bonus && user && istype(user.rmb_intent, /datum/rmb_intent/strong))
+		calc_dam += 10
+	if(aimed_intent_bonus && user && istype(user.rmb_intent, /datum/rmb_intent/aimed))
+		calc_dam += 10
+	if(brittle_bonus && HAS_TRAIT(affected, TRAIT_BRITTLE))
+		calc_dam += 10
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_RESISTANCE))
+		used -= 10
+
+	used += round(damage_dividend * dividend_multi + (calc_dam / damage_divisor), 1)
+	return used
+
+/// Override per wound to add post-application effects
+/datum/wound/proc/on_crit_applied(obj/item/bodypart/affected, mob/living/user, zone_precise, list/modifiers)
+	return
 
 /// Sound that plays when this wound is applied to a mob
 /datum/wound/proc/get_sound_effect(mob/living/affected, obj/item/bodypart/affected_bodypart)
@@ -181,8 +271,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		remove_from_bodypart()
 	else if(owner)
 		remove_from_mob()
+	apply_organ_modifications()
 	LAZYADD(affected.wounds, src)
 	sortTim(affected.wounds, GLOBAL_PROC_REF(cmp_wound_severity_dsc))
+	affected.update_wounds(FALSE)
+	affected.update_limb_efficiency()
 	bodypart_owner = affected
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
@@ -208,6 +301,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/remove_from_bodypart()
 	if(!bodypart_owner)
 		return FALSE
+	remove_organ_modifications()
 	var/obj/item/bodypart/was_bodypart = bodypart_owner
 	var/mob/living/was_owner = owner
 	LAZYREMOVE(bodypart_owner.wounds, src)
@@ -216,6 +310,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	owner = null
 	on_bodypart_loss(was_bodypart, was_owner)
 	on_mob_loss(was_owner)
+	was_bodypart.update_wounds(FALSE)
+	was_bodypart.update_limb_efficiency()
 	return TRUE
 
 /// Effects when a wound is lost on a bodypart
@@ -240,6 +336,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		remove_from_bodypart()
 	else if(owner)
 		remove_from_mob()
+
 	LAZYADD(affected.simple_wounds, src)
 	sortTim(affected.simple_wounds, GLOBAL_PROC_REF(cmp_wound_severity_dsc))
 	owner = affected
@@ -462,187 +559,3 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!embedder.can_embed())
 		return FALSE
 	return prob(embed_chance)
-
-/// Basis for dynamic wounds that increase in severity with damage
-/datum/wound/dynamic
-	abstract_type = /datum/wound/dynamic
-	clotting_rate = 0.4
-	/// Has reached the maximum level
-	var/is_maxed = FALSE
-	/// Has reached the maximum level clamped by armor
-	var/is_armor_maxed = FALSE
-	/// Assoc list, name to severity ie ("lethal" = 15) by default uses bleed rate but can be overriden
-	var/list/severity_names = list()
-
-	// Upgrade vars
-	// Damage is used to increase each value by a multiplier
-	/// Multiplier that bleeding is increased by possibly clamped by bleed_clamp and bleed_clamp_armor
-	var/upgrade_bleed_rate = 0
-	/// Bleeding clamp upgrade per level
-	var/upgrade_bleed_clamp = null
-	/// Bleeding clamp when armored per level
-	var/upgrade_bleed_clamp_armor = null
-	/// Full clamp to bleed when effective armour is on the wounded limb
-	var/protected_bleed_clamp = null
-
-	/// Multiplier that whp increased by
-	var/upgrade_whp = 0
-	/// Multiplier that sew threshold is increased by
-	var/upgrade_sew_threshold = 0
-	/// Multiplier that wound pain is increased by
-	var/upgrade_pain = 0
-
-/datum/wound/dynamic/heal_wound(heal_amount, datum/source, forced)
-	. = ..()
-	if(!. || QDELETED(src))
-		return
-	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
-	var/healing_amount = round(heal_amount, DAMAGE_PRECISION) * 0.01 * healing_multiplier
-
-	downgrade(healing_amount)
-
-/datum/wound/dynamic/sew_wound()
-	if(!can_sew)
-		return FALSE
-	sewn_bleed_rate = round(bleed_rate * 0.05, DAMAGE_PRECISION)
-	sewn_whp = round(whp * 0.45, DAMAGE_PRECISION)
-	sewn_clotting_rate = round(clotting_rate * 1.2, DAMAGE_PRECISION)
-	sewn_clotting_threshold = round(clotting_threshold * 0.45, DAMAGE_PRECISION)
-	sewn_woundpain = round(woundpain * 0.4, DAMAGE_PRECISION)
-	return ..()
-
-/datum/wound/dynamic/sewing_step_complete(mob/living/doctor)
-	if(!doctor)
-		return
-
-	// Inverse, bigger wound = less heal
-	// BUT only effects value reduction not sewing progress
-	var/healing_multiplier = clamp(1 / get_relevant_increase(), 0.5, 1.5)
-	// Reduces the upgrade values by this percentage, can never fully deplete the said values
-	var/healing_power = 0.03 * healing_multiplier * ((GET_MOB_SKILL_VALUE_OLD(doctor, /datum/attribute/skill/misc/medicine) + 1) * 1.4) // Vibe numbers...
-
-	downgrade(healing_power)
-
-	return ..()
-
-/// Get the increase multiplier of the relevant upgrade value (bleed_rate by default)
-/datum/wound/dynamic/proc/get_relevant_increase()
-	if(!bleed_rate || !initial(bleed_rate))
-		return 1
-	return bleed_rate / initial(bleed_rate)
-
-/// Update name based on severity
-/datum/wound/dynamic/proc/update_name()
-	var/prefix
-	for(var/sevname in severity_names)
-		if(severity_names[sevname] <= bleed_rate)
-			prefix = sevname
-	name = "[prefix ? "[prefix] " : ""][initial(name)]"	//[adjective] [name], aka, "gnarly slash" or "slash"
-
-#define CLOT_THRESHOLD_INCREASE_PER_HIT 0.1	//This raises the MINIMUM bleed the wound can clot to.
-#define CLOT_DECREASE_PER_HIT 0.05	//This reduces the amount of clotting the wound has.
-
-/// Upgrades a wound's stats based on damage dealt.
-/datum/wound/dynamic/proc/upgrade(bclass, damage)
-	SHOULD_CALL_PARENT(TRUE)
-
-	if(is_maxed || is_sewn())
-		return FALSE
-
-	var/obj/item/clothing/armor
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		armor = human_owner.check_crit_armor(src, bclass)
-
-	// Ass code we need diseases
-	if(!armor && werewolf_infection_timer)
-		deltimer(werewolf_infection_timer)
-		werewolf_infection_timer = null
-		werewolf_infect_attempt()
-
-	var/upper_clamp = ARTERY_LIMB_BLEEDRATE
-	if(armor && upgrade_bleed_clamp_armor)
-		upper_clamp = upgrade_bleed_clamp_armor
-	else if(upgrade_bleed_clamp)
-		upper_clamp = upgrade_bleed_clamp
-	bleed_rate += clamp(damage * upgrade_bleed_rate, 0.1, upper_clamp)
-	whp += damage * upgrade_whp
-	sew_threshold += damage * upgrade_sew_threshold
-	woundpain += damage * upgrade_pain
-
-	if(armor_check(armor))
-		return FALSE
-
-	if(maxed_check())
-		is_maxed = TRUE
-		return TRUE
-
-	update_name()
-
-	if(clotting_rate)
-		clotting_rate = max(0.01, (clotting_rate - CLOT_DECREASE_PER_HIT))
-	if(clotting_threshold)
-		clotting_threshold += CLOT_THRESHOLD_INCREASE_PER_HIT
-
-	return TRUE
-
-#undef CLOT_THRESHOLD_INCREASE_PER_HIT
-#undef CLOT_DECREASE_PER_HIT
-
-/// Like upgrade() but takes a multipler as percentage to decrease values by instead
-/datum/wound/dynamic/proc/downgrade(multiplier)
-	if(is_sewn())
-		return // All these values get changed at this point so additional modifiers aren't required
-
-	whp = max(whp - (whp * multiplier), initial(whp))
-
-	if(sew_threshold > 0)
-		sew_threshold = max(sew_threshold - (sew_threshold * multiplier), initial(sew_threshold))
-	if(woundpain > 0)
-		woundpain = max(woundpain - (woundpain * multiplier), initial(woundpain))
-	if(bleed_rate > 0)
-		var/clamp = initial(bleed_rate)
-		if(!isnull(clotting_threshold) && clotting_threshold < clamp)
-			clamp = clotting_threshold
-		bleed_rate = max(bleed_rate - (bleed_rate * multiplier), clamp)
-
-	update_name()
-
-#define CLOT_RATE_ARTERY 0	//Artery exceptions. Essentially overrides the clotting threshold.
-#define CLOT_THRESHOLD_ARTERY 2
-
-/// Check if the wound is maxed out, by default uses bleeding rate but something like a hemotoma might want to change that
-/datum/wound/dynamic/proc/maxed_check()
-	if(bleed_rate < ARTERY_LIMB_BLEEDRATE)
-		return FALSE
-	bleed_rate = ARTERY_LIMB_BLEEDRATE
-	clotting_rate = CLOT_RATE_ARTERY
-	clotting_threshold = CLOT_THRESHOLD_ARTERY
-	playsound(owner, 'sound/combat/wound_tear.ogg', 100, TRUE)
-	owner.visible_message(
-		span_crit("The wound gushes open from [bodypart_owner.owner]'s \
-		<b>[bodypart_owner]</b>, nicking an artery!")
-	)
-	update_name()
-	return TRUE
-
-#undef CLOT_RATE_ARTERY
-#undef CLOT_THRESHOLD_ARTERY
-
-/datum/wound/dynamic/proc/armor_check(obj/item/clothing/armor)
-	if(!armor || isnull(protected_bleed_clamp))
-		is_armor_maxed = FALSE
-		return FALSE
-	if(bleed_rate < protected_bleed_clamp)
-		return FALSE
-	bleed_rate = protected_bleed_clamp
-	if(is_armor_maxed)
-		return TRUE
-	playsound(owner, 'sound/combat/armored_wound.ogg', 100, TRUE)
-	owner.visible_message(
-		span_crit("The wound tears open from [bodypart_owner.owner]'s \
-		<b>[bodypart_owner]</b>, but [bodypart_owner.p_their()] [armor] won't let it go any further!")
-	)
-	is_armor_maxed = TRUE
-	update_name()
-	return TRUE

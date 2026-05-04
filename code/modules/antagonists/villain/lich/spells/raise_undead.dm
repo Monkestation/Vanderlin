@@ -104,8 +104,12 @@
 	candodge = FALSE
 
 	skeletonize(FALSE)
+
 	skele_look()
 	grant_undead_eyes()
+
+	for(var/obj/item/organ/organ as anything in internal_organs)
+		organ.setOrganDamage(0)
 
 	if(length(quirks))
 		clear_quirks()

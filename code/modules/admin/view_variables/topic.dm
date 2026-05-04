@@ -82,7 +82,7 @@
 		var/newamt
 		switch(Text)
 			if("brute")
-				L.adjustBruteLoss(amount, forced = TRUE)
+				L.adjustBruteLoss(amount, forced = TRUE, damage_type = WOUND_DIVINE, true_heal = TRUE)
 				newamt = L.getBruteLoss()
 			if("fire")
 				L.adjustFireLoss(amount, forced = TRUE)

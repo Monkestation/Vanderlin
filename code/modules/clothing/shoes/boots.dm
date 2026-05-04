@@ -57,7 +57,7 @@
 	max_integrity = 200 //meant to be weaker than iron plated boots, better options are out there waiting at the smith
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
-	item_weight = 2.7 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 75

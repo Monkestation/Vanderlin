@@ -66,9 +66,9 @@
 	var/shouldupdate = FALSE
 	for(var/obj/item/bodypart/B in C.bodyparts)
 		if(!B.skeletonized && B.is_organic_limb())
-			if(!B.rotted)
+			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
 				if(amount > 25 MINUTES)
-					B.rotted = TRUE
+					B.kill_limb()
 					findonerotten = TRUE
 					shouldupdate = TRUE
 					C.change_stat(STAT_CONSTITUTION, -8)

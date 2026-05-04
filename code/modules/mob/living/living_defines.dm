@@ -102,7 +102,6 @@
 
 	var/bubble_icon = "default" //what icon the mob uses for speechbubbles
 
-	var/last_bumped = 0
 	var/unique_name = 0 //if a mob's name should be appended with an id when created e.g. Mob (666)
 
 	var/list/butcher_results = null //these will be yielded from butchering with a probability chance equal to the butcher item's effectiveness
@@ -265,6 +264,21 @@
 	var/list/status_modifiers
 
 	var/datum/blood_type/animal_type
+
+	/// Pain (pain not taking other damage types into account) damage, generally a side effect of other types of damage
+	var/painloss = 0
+	/// Shock (pain taking into account other types of damage) damage
+	var/traumatic_shock = 0
+	/// Shock stage, as in how much our crit has progressed
+	var/shock_stage = 0
+	/// Last pain related message we have received - Used to prevent spam
+	var/last_pain_message = ""
+	/// Next time we are able to trigger custom_pain()
+	var/next_pain_time = 0
+	/// Next time we are able to send a custom_pain() chat message
+	var/next_pain_message_time = 0
+	/// Next time we are able to emote from pain
+	var/next_pain_emote_time = 0
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)

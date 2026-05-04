@@ -76,11 +76,11 @@
 // BRONZE HELMET
 
 /datum/anvil_recipe/armor/bronze/helmet
-	name = "Abyssor Helmet (+Bronze Bar)"
-	recipe_name = "an abyssor helmet"
+	name = "Deep Abyssor Helmet (+Bronze Bar)"
+	recipe_name = "an deep abyssor helmet"
 	req_bar = /obj/item/ingot/bronze
 	additional_items = list(/obj/item/ingot/bronze)
-	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/deepabyssor
 	craftdiff = 3
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -587,6 +587,12 @@
 	recipe_name = "a xylixian helmet"
 	created_item = /obj/item/clothing/head/helmet/heavy/necked/xylix
 	additional_items = list(/obj/item/ingot/iron)
+
+/datum/anvil_recipe/armor/steel/templar/helmet_abyssor
+	name = "Abyssor Helmet (+Bronze Bar)"
+	recipe_name = "an abyssor helmet"
+	created_item = /obj/item/clothing/head/helmet/heavy/necked/abyssor
+	additional_items = list(/obj/item/ingot/bronze)
 
 /datum/anvil_recipe/armor/steel/chainleg
 	name = "Chain Chausses"

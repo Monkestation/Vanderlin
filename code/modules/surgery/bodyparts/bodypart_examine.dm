@@ -2,6 +2,37 @@
 	. = ..()
 	. += inspect_limb(user)
 
+/obj/item/bodypart/proc/get_injury_types()
+	var/list/untreated_types = list()
+	for(var/datum/injury/injury in injuries)
+		if(injury.germ_level >= INFECTION_LEVEL_ONE)
+			untreated_types |= "germs"
+		var/auto_heal = injury.can_autoheal()
+		if(auto_heal)
+			untreated_types |= "self_heal"
+			continue
+		if(injury.is_treated())
+			continue
+		untreated_types |= injury.damage_type
+	return untreated_types
+
+/obj/item/bodypart/get_mechanics_examine(mob/user)
+	. = ..()
+	var/list/untreated_types = get_injury_types()
+
+	for(var/wound_type in untreated_types)
+		switch(wound_type)
+			if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
+			if(WOUND_BLUNT, WOUND_LASH)
+				. += "Bandage bruises and lashes to allow them to heal."
+			if(WOUND_BURN)
+				. += "Disinfect and salve burns to allow them to heal."
+			if("germs")
+				. += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
+			if("self_heal")
+				. += "Small injuries will heal on their own."
+
 /obj/item/bodypart/head/examine(mob/user)
 	. = ..()
 	if(owner)
@@ -9,21 +40,6 @@
 	var/list/head_status = list()
 	if(!brain)
 		head_status += "<span class='dead'>The brain is missing.</span>"
-	/*
-	else if(brain.suicided || brainmob?.suiciding)
-		. += "<span class='info'>There's a pretty dumb expression on [real_name]'s face; they must have really hated life. There is no hope of recovery.</span>"
-	else if(brain.brain_death || brainmob?.health <= HEALTH_THRESHOLD_DEAD)
-		. += "<span class='info'></span>"
-	else if(brainmob)
-		if(brainmob.get_ghost(FALSE, TRUE))
-			. += "<span class='info'>Its muscles are still twitching slightly... It still seems to have a bit of life left to it.</span>"
-		else
-			. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
-	else if(brain?.decoy_override)
-		. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
-	else
-		. += "<span class='info'>It seems completely devoid of life.</span>"
-	*/
 
 	if(!eyes_left)
 		head_status += "<span class='warning'>The left eye is missing.</span>"
@@ -66,7 +82,7 @@
 	if(observer_privilege || location_accessible)
 		if(skeletonized)
 			bodypart_status += "[src] is skeletonized."
-		else if(rotted)
+		else if(HAS_TRAIT(src, TRAIT_ROTTEN))
 			bodypart_status += "[src] is necrotic."
 
 		var/brute = brute_dam
@@ -102,6 +118,16 @@
 				for(var/datum/wound/wound as anything in wounds)
 					bodypart_status += wound.get_visible_name(user)
 
+		if(bandage || length(injuries))
+			bodypart_status += "<B>Injuries:</B>"
+			if(bandage)
+				var/usedclass = "notice"
+				if(GET_ATOM_BLOOD_DNA(bandage))
+					usedclass = "bloody"
+				bodypart_status += "<a href='byond://?src=[owner_ref];bandage=[REF(bandage)];bandaged_limb=[REF(src)]' class='[usedclass]'>Bandaged</a>"
+			if(!bandage || observer_privilege)
+				bodypart_status += get_injuries_desc()
+
 	if(length(bodypart_status) <= 1)
 		bodypart_status += "[src] is healthy."
 
@@ -112,7 +138,21 @@
 
 	return bodypart_status
 
-/obj/item/bodypart/proc/check_for_injuries(mob/user, advanced = FALSE)
+/obj/item/bodypart/proc/get_chronic_status(mob/user, advanced = FALSE)
+	var/list/chronic_types = list()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
+		chronic_types += "poorly healed fracture"
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
+		chronic_types += "chronic arthritis"
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
+		chronic_types += "chronic migraines"
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_SCAR))
+		chronic_types += "permanent scarring"
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_NERVE_DAMAGE))
+		chronic_types += "nerve damage"
+	return chronic_types
+
+/obj/item/bodypart/proc/check_for_injuries(mob/user, advanced = FALSE, should_mechanical = FALSE)
 	var/examination = "<span class='info'>"
 	examination += "☼ [capitalize(src.name)]: "
 
@@ -121,6 +161,20 @@
 		examination += "<span class='green'>OK</span>"
 	else
 		examination += status.Join(" | ")
+
+	if(should_mechanical)
+		var/list/result = list()
+		var/list/mechanics_result = get_mechanics_examine(src)
+		if(length(mechanics_result))
+			var/mechanics_result_str = "<details><summary>Mechanics</summary>"
+			for(var/line in mechanics_result)
+				mechanics_result_str += " - " + span_blue(line) + "\n"
+			mechanics_result_str += "</details>"
+			result += mechanics_result_str
+		for(var/i in 1 to (length(result) - 1))
+			result[i] += "\n"
+
+		examination += result.Join()
 
 	examination += "</span>"
 	return examination
@@ -171,6 +225,10 @@
 		if(!wound.check_name)
 			continue
 		wound_strings |= wound.get_check_name(user, advanced)
+
+	status += get_chronic_status(user, advanced)
+
+	status += get_injuries_desc()
 	wound_strings -= null
 	status += wound_strings
 
@@ -183,8 +241,24 @@
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"
-	else if(rotted)
+	else if(HAS_TRAIT(src, TRAIT_ROTTEN))
 		status += "<span class='necrosis'>NECROSIS</span>"
+	else
+		switch(germ_level)
+			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
+				status += span_infection("Light Infection")
+			if(INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
+				status += span_infection("Medium Infection+")
+			if(INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_TWO)
+				status += span_infection("Serious Infection")
+			if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3))
+				status += span_infection("<b>Acute Infection</b>")
+			if(INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3) to INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3))
+				status += span_infection("<b>Acute Infection+</b>")
+			if(INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3) to INFECTION_LEVEL_THREE)
+				status += span_infection("<b>Acute Infection++</b>")
+			if(INFECTION_LEVEL_THREE to INFINITY)
+				status += span_necrosis("<b>Septic</b>")
 
 	var/owner_ref = owner ? REF(owner) : REF(src)
 	for(var/obj/item/embedded as anything in embedded_objects)
@@ -204,209 +278,76 @@
 
 	return status
 
-/*
-	for(var/body_zone in body_zones)
-		var/self_aware = FALSE
-		if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
-			self_aware = TRUE
-		var/max_damage = max_damage
-		var/status = ""
-		var/brutedamage = brute_dam
-		var/burndamage = burn_dam
-		if(hallucination)
-			if(prob(30))
-				brutedamage += rand(30,40)
-			if(prob(30))
-				burndamage += rand(30,40)
 
-		if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
-			status = "[brutedamage] brute damage and [burndamage] burn damage"
-			if(!brutedamage && !burndamage)
-				status = "no damage"
-
-		else
-			if(brutedamage > 0)
-				status = light_brute_msg
-			if(brutedamage > max_damage * 0.4))
-				status = medium_brute_msg
-			if(brutedamage > max_damage * 0.8))
-				status = heavy_brute_msg
-			if(brutedamage > 0 && burndamage > 0)
-				examination += " and "
-
-			if(burndamage > max_damage * 0.8))
-				examination += heavy_burn_msg
-			else if(burndamage > max_damage * 0.2))
-				examination += medium_burn_msg
-			else if(burndamage > 0)
-				examination += light_burn_msg
-
-			if(status == "")
-				status = "OK"
-		var/no_damage
-		if(status == "OK" || status == "no damage")
-			no_damage = TRUE
-		var/isdisabled = " "
-		if(is_disabled())
-			isdisabled = " is disabled "
-			if(no_damage)
-				isdisabled += " but otherwise "
+/obj/item/bodypart/proc/get_injuries_desc()
+	var/list/flavor_text = list()
+	var/list/injury_descriptors = list()
+	for(var/thing in injuries)
+		var/datum/injury/injury = thing
+		var/this_injury_desc = injury.get_desc(TRUE)
+		if(!this_injury_desc)
+			continue
+		if(injury.can_autoheal() && (injury.current_stage >= length(injury.stages)) && (injury.damage < 5))
+			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY];'>[this_injury_desc]</span>"
+		if(injury.is_bleeding())
+			if(is_artery_torn())
+				this_injury_desc = "<b><i><span class='artery'>blood-gushing</span></i></b> [this_injury_desc]"
+			//Completely arbitrary value
+			else if(injury.get_bleed_rate() > 1)
+				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
 			else
-				isdisabled += " and "
-		to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [name][isdisabled][self_aware ? " has " : " is "][status].</span>")
+				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
+		if(injury.is_clamped())
+			this_injury_desc = "<span style='color: [COLOR_SILVER]'>clamped</span> [this_injury_desc]"
+		if(injury.is_sutured())
+			this_injury_desc = "<span style='color: [COLOR_SILVER]'>sutured</span> [this_injury_desc]"
+		if(injury.is_bandaged())
+			this_injury_desc = "<span style='color: [COLOR_ASSEMBLY_WHITE]'>bandaged</span> [this_injury_desc]"
+		if(injury.is_salved())
+			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
+		if(injury.is_disinfected())
+			this_injury_desc = "<span style='color: [COLOR_BLUE_LIGHT]'>disinfected</span> [this_injury_desc]"
 
-		for(var/obj/item/I in embedded_objects)
-			to_chat(src, "\t <a href='byond://?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]' class='warning'>There is \a [I] in my [name]!</a>")
+		if(injury.germ_level >= INFECTION_LEVEL_TWO)
+			this_injury_desc = "<span class='necrosis'><b>pus-ridden</b></span> [this_injury_desc]"
+		else if(injury.germ_level >= INFECTION_LEVEL_ONE)
+			this_injury_desc = "<span class='infection'>inflamed</span> [this_injury_desc]"
 
-	for(var/t in missing)
-		to_chat(src, "<span class='boldannounce'>My [parse_zone(t)] is missing!</span>")
+		if(length(injury.embedded_objects))
+			var/list/embed_strings = list()
+			for(var/obj/item/embedded_item as anything in injury.embedded_objects)
+				embed_strings += "\a [embedded_item]"
+			this_injury_desc += " with [english_list(embed_strings)] poking out of [injury.amount > 1 ? "them" : "it"]"
 
-	if(bleed_rate)
-		to_chat(src, "<span class='danger'>I am bleeding!</span>")
-	if(getStaminaLoss())
-		if(getStaminaLoss() > 30)
-			to_chat(src, "<span class='info'>You're completely exhausted.</span>")
+		if(injury_descriptors[this_injury_desc])
+			injury_descriptors[this_injury_desc] += injury.amount
 		else
-			to_chat(src, "<span class='info'>I feel fatigued.</span>")
-	if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
-		if(toxloss)
-			if(toxloss > 10)
-				to_chat(src, "<span class='danger'>I feel sick.</span>")
-			else if(toxloss > 20)
-				to_chat(src, "<span class='danger'>I feel nauseated.</span>")
-			else if(toxloss > 40)
-				to_chat(src, "<span class='danger'>I feel very unwell!</span>")
-		if(oxyloss)
-			if(oxyloss > 10)
-				to_chat(src, "<span class='danger'>I feel lightheaded.</span>")
-			else if(oxyloss > 20)
-				to_chat(src, "<span class='danger'>My thinking is clouded and distant.</span>")
-			else if(oxyloss > 30)
-				to_chat(src, "<span class='danger'>You're choking!</span>")
+			injury_descriptors[this_injury_desc] = injury.amount
 
-	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
-		switch(nutrition)
-			if(NUTRITION_LEVEL_FULL to INFINITY)
-				to_chat(src, "<span class='info'>You're completely stuffed!</span>")
-			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				to_chat(src, "<span class='info'>You're well-fed!</span>")
-			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				to_chat(src, "<span class='info'>You're not hungry.</span>")
-			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				to_chat(src, "<span class='info'>I could use a bite to eat.</span>")
-			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				to_chat(src, "<span class='info'>I feel quite hungry.</span>")
-			if(0 to NUTRITION_LEVEL_STARVING)
-				to_chat(src, "<span class='danger'>You're starving!</span>")
-
-	//Compiles then shows the list of damaged organs and broken organs
-	var/list/broken = list()
-	var/list/damaged = list()
-	var/broken_message
-	var/damaged_message
-	var/broken_plural
-	var/damaged_plural
-	//Sets organs into their proper list
-	for(var/obj/item/organ/organ as anything in internal_organs)
-		if(organ.organ_flags & ORGAN_FAILING)
-			if(broken.len)
-				broken += ", "
-			broken += organ.name
-		else if(organ.damage > organ.low_threshold)
-			if(damaged.len)
-				damaged += ", "
-			damaged += organ.name
-	//Checks to enforce proper grammar, inserts words as necessary into the list
-	if(broken.len)
-		if(broken.len > 1)
-			broken.Insert(broken.len, "and ")
-			broken_plural = TRUE
-		else
-			var/holder = broken[1]	//our one and only element
-			if(holder[length(holder)] == "s")
-				broken_plural = TRUE
-		//Put the items in that list into a string of text
-		for(var/B in broken)
-			broken_message += B
-		to_chat(src, "<span class='warning'>My [broken_message] [broken_plural ? "are" : "is"] non-functional!</span>")
-	if(damaged.len)
-		if(damaged.len > 1)
-			damaged.Insert(damaged.len, "and ")
-			damaged_plural = TRUE
-		else
-			var/holder = damaged[1]
-			if(holder[length(holder)] == "s")
-				damaged_plural = TRUE
-		for(var/D in damaged)
-			damaged_message += D
-		to_chat(src, "<span class='info'>My [damaged_message] [damaged_plural ? "are" : "is"] hurt.</span>")
-
-
-	var/max_damage = FB.max_damage
-	var/status = ""
-	var/brutedamage = FB.brute_dam
-	var/burndamage = FB.burn_dam
-	var/wounddamage = 0
-	for(var/datum/wound/wound as anything in FB.wounds)
-		wounddamage = wounddamage + wound.woundpain
-	if(hallucination)
-		if(prob(30))
-			brutedamage += rand(30,40)
-		if(prob(30))
-			burndamage += rand(30,40)
-
-	if(brutedamage > 0)
-		status = FB.light_brute_msg
-	if(brutedamage > max_damage * 0.4))
-		status = FB.medium_brute_msg
-	if(brutedamage > max_damage * 0.8))
-		status = FB.heavy_brute_msg
-	if(brutedamage > 0)
-		if(burndamage > 0 && wounddamage > 0)
-			examination += ", "
-		else if(burndamage > 0 || wounddamage > 0)
-			examination += " and "
-
-	if(burndamage > max_damage * 0.8))
-		examination += FB.heavy_burn_msg
-	else if(burndamage > max_damage * 0.2))
-		examination += FB.medium_burn_msg
-	else if(burndamage > 0)
-		examination += FB.light_burn_msg
-	if(burndamage > 0)
-		if(brutedamage > 0 && wounddamage > 0)
-			examination += ", and "
-		else if(wounddamage > 0)
-			examination += " and "
-
-	if(wounddamage > 0)
-		if(wounddamage > 80)
-			examination += "has incredibly painful wounds."
-		else if(wounddamage > 40)
-			examination += "has painful wounds."
-		else
-			examination += "has light wounds."
-
-	if(status == "")
-		status = "is OK."
-	var/no_damage
-	if(status == "is OK." || status == "no damage")
-		no_damage = TRUE
-	var/isdisabled = ""
-	switch(FB.is_disabled())
-		if(BODYPART_DISABLED_WOUND)
-			isdisabled = "broken "
-		if(BODYPART_DISABLED_DAMAGE)
-			isdisabled = "numb "
-		if(BODYPART_DISABLED_PARALYSIS)
-			isdisabled = "limp "
-		if(BODYPART_DISABLED_ROT)
-			if(FB.skeletonized)
-				isdisabled = "skeletonized "
+	for(var/injury in injury_descriptors)
+		var/final_text = ""
+		var/clean_final = ""
+		final_text += injury
+		clean_final = injury
+		if(injury_descriptors[injury] > 1)
+			if(findtext(final_text, "[COLOR_PALE_RED_GRAY];"))
+				final_text += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
+				clean_final += "<span style='color: [COLOR_PALE_RED_GRAY];'>s</span>"
 			else
-				isdisabled = "rotting "
-	to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [isdisabled][FB.name] [status].</span>")
-
-	for(var/obj/item/I in FB.embedded_objects)
-		to_chat(src, "\t <a href='byond://?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(FB)]' class='warning'>There is \a [I] in my [FB.name]!</a>")
-*/
+				final_text += "s"
+				clean_final += "s"
+		switch(injury_descriptors[injury])
+			if(-INFINITY to 1)
+				final_text = ""
+				final_text += "[clean_final]"
+			if(2)
+				final_text = ""
+				final_text += "pair of [clean_final]"
+			if(3 to 5)
+				final_text = ""
+				final_text += "several [clean_final]"
+			if(6 to INFINITY)
+				final_text = ""
+				final_text += "ton of [clean_final]"
+		flavor_text += final_text
+	return flavor_text

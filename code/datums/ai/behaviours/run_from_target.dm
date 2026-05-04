@@ -10,6 +10,8 @@
  * * offset - Angle offset, 180 input would make the returned target turf be in the opposite direction
  */
 /proc/get_ranged_target_turf_direct(atom/starting_atom, atom/target, range, offset)
+	if(!starting_atom)
+		return
 	var/angle = ATAN2(target.x - starting_atom.x, target.y - starting_atom.y)
 	if(offset)
 		angle += offset

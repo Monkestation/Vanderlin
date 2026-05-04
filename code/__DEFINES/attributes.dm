@@ -6,7 +6,7 @@
 #define GET_MOB_SKILL_VALUE_RAW_OLD(mob, skill_path) mob.attributes?.return_raw_effective_skill(skill_path) * 0.1
 #define GET_MOB_SKILL_VALUE_OLD(mob, skill_path) mob.attributes?.return_effective_skill(skill_path) * 0.1
 
-#define GENERAL_SKILL_TIME_MULITPLIER(mob, skill_path) ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(mob, STAT_PERCEPTION), 1)
+#define GENERAL_SKILL_TIME_MULITPLIER(mob, skill_path) ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(mob, skill_path), 1)
 
 #define SKILL /datum/attribute/skill
 #define STAT /datum/attribute/stat

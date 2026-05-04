@@ -50,6 +50,8 @@
 #define COMSIG_AI_BLACKBOARD_KEY_SET(blackboard_key) "ai_blackboard_key_set_[blackboard_key]"
 #define COMSIG_AI_BLACKBOARD_KEY_CLEARED(blackboard_key) "ai_blackboard_key_clear_[blackboard_key]"
 
+#define COMSIG_AI_PATHING_FAILED "ai_pathing_failed"
+
 ///sent from ai controllers when they pick behaviors: (list/datum/ai_behavior/old_behaviors, list/datum/ai_behavior/new_behaviors)
 #define COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS "ai_controller_picked_behaviors"
 ///sent from ai controllers when a behavior is inserted into the queue: (list/new_arguments)
@@ -282,6 +284,7 @@
 #define BB_FLESH_CONSUMED_BODIES "flesh_consumed_bodies"
 
 #define BB_GNOME_WAYPOINT_A "bb_gnome_waypoint_a"
+#define BB_GNOME_SPLITTER_SOURCE "bb_gnome_split_source"
 #define BB_GNOME_WAYPOINT_B "bb_gnome_waypoint_b"
 #define BB_GNOME_TARGET_ITEM "bb_gnome_target_item"
 #define BB_GNOME_HOME_TURF "bb_gnome_home_turf"
@@ -294,17 +297,28 @@
 #define BB_GNOME_TRANSPORT_SOURCE "bb_gnome_source"
 #define BB_GNOME_TRANSPORT_DEST "bb_gnome_dest"
 #define BB_GNOME_SPLITTER_MODE "gnome_splitter_mode"
+#define BB_GNOME_EXTRACTOR_MODE "gnome_extractor_mode"
 #define BB_GNOME_TARGET_SPLITTER "gnome_target_splitter"
+#define BB_GNOME_TARGET_EXTRACTOR "gnome_target_extractor"
 #define BB_GNOME_CROP_MODE "bb_gnome_crop_mode"
 #define BB_GNOME_WATER_SOURCE "gnome_water_source"
 #define BB_GNOME_COMPOST_SOURCE "gnome_compost_source"
 #define BB_GNOME_SEED_SOURCE "gnome_seed_source"
 #define BB_GNOME_SEARCH_RANGE "gnome_search_range"
+#define BB_GNOME_PRIORITY_OVERRIDES "priority_mappings"
 #define BB_ACTION_STATE_MANAGER "action_state_manager"
+
+#define GNOME_PRIORITY_NONE 0
+#define GNOME_PRIORITY_LOW 10
+#define GNOME_PRIORITY_NORMAL 50
+#define GNOME_PRIORITY_HIGH 80
+#define GNOME_PRIORITY_CRITICAL 100
+#define GNOME_PRIORITY_USER_STEP 4
 
 #define BB_GNOME_ALCHEMY_MODE "alch_mode"
 #define BB_GNOME_TARGET_CAULDRON "target_cauldron"
 #define BB_GNOME_TARGET_WELL "well_target"
+#define BB_FARMING_TARGET_WELL "farm_well_target" //why the distinction? because gnomes can support literally everything
 #define BB_GNOME_CURRENT_RECIPE "current_potion"
 #define BB_GNOME_ALCHEMY_STATE "alch_state"
 #define BB_GNOME_ESSENCE_STORAGE "essence_storage"

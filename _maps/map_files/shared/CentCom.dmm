@@ -711,11 +711,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"cm" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
-/area/outdoors/woods_safe)
 "co" = (
 /obj/item/clothing/gloves/rare/elfplate/welfplate,
 /obj/item/clothing/shoes/boots/rare/elfplate/welfplate,
@@ -1465,11 +1460,6 @@
 /obj/item/weapon/polearm/halberd/bardiche,
 /turf/open/floor/cobble,
 /area/indoors)
-"gd" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "ge" = (
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/dirt,
@@ -1761,12 +1751,6 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
-"ie" = (
-/obj/machinery/light/fueled/torchholder{
-	pixel_y = 32
-	},
-/turf/open/floor/naturalstone,
-/area/under/cavelava/acid)
 "ij" = (
 /obj/item/clothing/shirt/dress/gen/colored/maid,
 /obj/item/clothing/shoes/shortboots,
@@ -1904,12 +1888,6 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobble,
 /area/indoors/lich)
-"je" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 1
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "jf" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
@@ -2268,12 +2246,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
-"lG" = (
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "lH" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
@@ -2495,6 +2467,11 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/bandit_lair)
+"nk" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "nl" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
@@ -2623,6 +2600,12 @@
 /obj/item/clothing/armor/gambeson/arming,
 /turf/open/floor/carpet,
 /area/indoors)
+"nT" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/flora/grass,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "nV" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 9
@@ -3131,6 +3114,12 @@
 /obj/item/clothing/neck/psycross/silver/divine/ravox,
 /turf/open/floor/wood,
 /area/indoors)
+"rg" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "ri" = (
 /obj/structure/fluff/walldeco/painting/skull{
 	pixel_y = 32
@@ -3154,6 +3143,13 @@
 /obj/item/rope/chain,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
+"rm" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/weapon/shovel,
+/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "ro" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -3994,11 +3990,6 @@
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"ws" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "wz" = (
 /obj/structure/chair/bench/church,
 /obj/structure/fluff/walldeco/painting/skull{
@@ -4018,6 +4009,11 @@
 /obj/effect/landmark/start/new_player,
 /turf/open/floor/blocks,
 /area/start)
+"wD" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "wH" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/structure/chair/bench/coucha/redleft,
@@ -4582,13 +4578,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/green,
 /area/indoors/lich)
-"AM" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/flora/ausbushes/sparsegrass,
-/mob/living/carbon/human/species/skeleton/npc,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "AN" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt/road,
@@ -4670,12 +4659,6 @@
 	dir = 1
 	},
 /turf/open/floor/grass/yel,
-/area/outdoors/bog/inhumen_camp)
-"Bq" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "Bv" = (
 /obj/item/natural/wood/plank,
@@ -5056,10 +5039,6 @@
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
-"Ef" = (
-/obj/structure/overlord_portal,
-/turf/open/floor/churchbrick,
-/area/overlord_lair)
 "Ei" = (
 /obj/item/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -5293,6 +5272,12 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/lich)
+"Ga" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "Gb" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/armor/plate/orc,
@@ -5572,6 +5557,11 @@
 "HZ" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/inhumen_camp)
+"Ib" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Id" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 6
@@ -5885,12 +5875,6 @@
 /obj/item/clothing/cloak/raincloak/colored/purple,
 /turf/open/floor/church,
 /area/indoors/lich)
-"Jy" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "JF" = (
 /obj/structure/healingfountain,
 /turf/open/floor/concrete,
@@ -5988,6 +5972,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
+"Kv" = (
+/obj/structure/pocket_portal,
+/turf/open/floor/churchbrick,
+/area/overlord_lair)
 "Kx" = (
 /obj/structure/bars/cemetery,
 /obj/structure/fluff/walldeco/maidendrape{
@@ -6457,12 +6445,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/bandit_lair)
-"NL" = (
-/obj/structure/closet/dirthole/closed,
-/obj/structure/flora/grass,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "NM" = (
 /obj/machinery/light/fueled/oven/south,
 /turf/open/floor/tile/checker_green,
@@ -6491,6 +6473,11 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/lich)
+"NY" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "Oc" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -6984,6 +6971,13 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/herringbone,
 /area/overlord_lair)
+"Rv" = (
+/obj/structure/closet/dirthole/closed,
+/obj/structure/flora/ausbushes/sparsegrass,
+/mob/living/carbon/human/species/skeleton/npc,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "Rw" = (
 /obj/structure/window/solid,
 /turf/open/floor/wood,
@@ -7048,11 +7042,6 @@
 /obj/structure/maniac_return_machine,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
-"RJ" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/woods_safe)
 "RK" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/weapon/scabbard/sword,
@@ -7288,6 +7277,12 @@
 /obj/item/clothing/head/roguehood/eora,
 /turf/open/floor/wood,
 /area)
+"SX" = (
+/obj/structure/closet/dirthole/closed,
+/mob/living/carbon/human/species/skeleton/npc,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
+/area/outdoors/bog/inhumen_camp)
 "Te" = (
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
@@ -7419,11 +7414,6 @@
 /obj/item/weapon/flail,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
-"TJ" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
 "TM" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
@@ -7556,12 +7546,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
-"UH" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 8
-	},
-/turf/open/floor/volcanic,
-/area/under/cavelava/acid)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -7658,6 +7642,11 @@
 /obj/item/reagent_containers/glass/cup/silver,
 /turf/open/floor/dirt/road,
 /area/indoors)
+"Vk" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Vl" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood/gibs,
@@ -7705,13 +7694,6 @@
 /turf/closed/splashscreen,
 /area/start)
 "VB" = (
-/turf/open/floor/dirt,
-/area/outdoors/bog/inhumen_camp)
-"VC" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/weapon/shovel,
-/mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "VF" = (
@@ -9407,7 +9389,7 @@ mv
 Sq
 vL
 xt
-gd
+wD
 xt
 Sn
 Sy
@@ -9666,7 +9648,7 @@ QZ
 jW
 Sq
 Ok
-gd
+wD
 UX
 xt
 Sn
@@ -13454,9 +13436,9 @@ bD
 bI
 Te
 Te
-cm
+Ib
 Te
-RJ
+Vk
 Te
 dG
 Te
@@ -13718,7 +13700,7 @@ dG
 Te
 dG
 Te
-cm
+Ib
 Te
 kX
 Fh
@@ -13974,7 +13956,7 @@ bD
 Te
 xt
 bB
-RJ
+Vk
 Te
 dG
 Te
@@ -17190,8 +17172,8 @@ ag
 NW
 NW
 NW
-NW
-NW
+XB
+XB
 fJ
 NW
 NW
@@ -17580,8 +17562,8 @@ ag
 ag
 NW
 NW
-NW
-UH
+XB
+vK
 vK
 NW
 NW
@@ -17709,9 +17691,9 @@ ag
 ag
 NW
 NW
-NW
-NW
-NW
+XB
+XB
+XB
 vK
 NW
 NW
@@ -18367,7 +18349,7 @@ XB
 vK
 vK
 vK
-je
+vK
 NW
 NW
 NW
@@ -18875,7 +18857,7 @@ ag
 ag
 NW
 NW
-ie
+fJ
 fJ
 vK
 VZ
@@ -19274,7 +19256,7 @@ XB
 XB
 XB
 vK
-UH
+vK
 vK
 NW
 NW
@@ -19539,7 +19521,7 @@ NW
 NW
 iG
 fJ
-NW
+XB
 NW
 NW
 HZ
@@ -19669,7 +19651,7 @@ NW
 NW
 NW
 fJ
-NW
+XB
 NW
 NW
 HZ
@@ -19793,8 +19775,8 @@ fJ
 fJ
 fJ
 NW
-NW
-NW
+XB
+XB
 NW
 NW
 BO
@@ -19922,9 +19904,9 @@ NW
 NW
 NW
 fJ
-NW
-NW
-NW
+XB
+XB
+XB
 NW
 NW
 NW
@@ -20181,8 +20163,8 @@ NW
 NW
 fJ
 vK
-UH
-NW
+vK
+XB
 vK
 NW
 NW
@@ -20311,8 +20293,8 @@ NW
 NW
 Zj
 NW
-NW
-NW
+XB
+XB
 vK
 fJ
 Zj
@@ -22015,15 +21997,15 @@ ag
 HZ
 Ae
 GZ
-lG
+Ga
 GZ
-Bq
+SX
 tD
 yD
 fg
 qA
 wV
-Jy
+rg
 GZ
 kL
 mX
@@ -22275,17 +22257,17 @@ ag
 HZ
 Ae
 GZ
-VC
+rm
 GZ
-TJ
+nk
 VB
 Zt
 lH
 yD
 YV
-ws
+NY
 GZ
-AM
+Rv
 VB
 li
 VB
@@ -22535,15 +22517,15 @@ ag
 HZ
 Ae
 GZ
-NL
+nT
 GZ
-TJ
+nk
 Gt
 wi
 uS
 mX
 GZ
-TJ
+nk
 GZ
 kL
 VB
@@ -22728,7 +22710,7 @@ oB
 oB
 oB
 oB
-Ef
+Kv
 oB
 oB
 hZ

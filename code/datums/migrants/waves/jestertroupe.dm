@@ -36,7 +36,7 @@
 		TRAIT_ZJUMP,
 	)
 
-	spells = list(/datum/action/cooldown/spell/vicious_mockery)
+	spells = list(/datum/action/cooldown/spell/projectile/vicious_mockery)
 	cmode_music = 'sound/music/cmode/nobility/CombatJester2.ogg'
 
 /datum/job/migrant/jestertroupe/after_spawn(mob/living/carbon/human/spawned, client/player_client)

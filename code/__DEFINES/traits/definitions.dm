@@ -81,6 +81,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IGNOREDAMAGESLOWDOWN "ignoredamageslowdown"
 /// Causes death-like unconsciousness
 #define TRAIT_DEATHCOMA	"deathcoma"
+// ~BODYPART TRAITS
+/// Rotten beyond salvation
+#define TRAIT_ROTTEN "rotten"
+/// Genetically deformed beyond salvation
+#define TRAIT_DEFORMED "deformed"
 /// ??? should be a signal?
 #define TRAIT_SANGUINE "sanguine"
 #define TRAIT_FRESHSPAWN "freshspawn"
@@ -227,6 +232,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOFLASH "noflash"
 /// Suffering heart attack, can succumb
 #define TRAIT_DEATHS_DOOR "deaths_door"
+/// Halved basic speed
+#define TRAIT_BASIC_SPEED_HALVED "basic_speed_halved"
 /// Immunity to pain
 #define TRAIT_NOPAIN "no_pain"
 /// Stumbling, can smash into things

@@ -1,4 +1,3 @@
-
 /obj/item/pestle
 	name = "pestle"
 	desc = ""
@@ -22,126 +21,168 @@
 	grid_height = 32
 	grid_width = 64
 	dropshrink = 0.9
-	var/obj/item/to_grind
+	soaker = FALSE
+	var/list/to_grind = list()
+	// total w_class units allowed
+	var/max_grind_capacity = 13
 
 /obj/item/reagent_containers/glass/mortar/Destroy()
-	if(!QDELETED(to_grind))
-		to_grind.forceMove(get_turf(src))
+	for(var/obj/item/I in to_grind)
+		if(!QDELETED(I))
+			I.forceMove(get_turf(src))
 	to_grind = null
 	return ..()
 
 /obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, list/modifiers)
-	if(!to_grind)
+	if(!to_grind.len)
 		return ..()
 
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	var/obj/item/N = to_grind
-	N.forceMove(get_turf(user))
-	to_grind = null
-	balloon_alert(user, "I remove \an [to_grind].")
+	for(var/obj/item/I in to_grind)
+		I.forceMove(get_turf(user))
+	to_grind.Cut()
+	balloon_alert(user, "I remove all items from [src].")
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/reagent_containers/glass/mortar/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(istype(weapon, /obj/item/pestle))
-		if(!to_grind)
-			to_chat(user, span_warning("There's nothing to grind."))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if((!to_grind.grind_results && !to_grind.juice_results))
-			to_chat(user, span_warning("I cannot juice this ingredient."))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		to_chat(user, span_notice("I start grinding..."))
-		if((do_after(user, 2.5 SECONDS, src)) && to_grind)
-			if(to_grind.juice_results) //prioritize juicing
-				to_grind.on_juice()
-				reagents.add_reagent_list(to_grind.juice_results)
-				to_chat(user, span_notice("I juice [to_grind] into a fine liquid."))
-				if(to_grind.reagents) //food and pills
-					to_grind.reagents.trans_to(src, to_grind.reagents.total_volume, transfered_by = user)
-				QDEL_NULL(to_grind)
-				return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-			to_grind.on_grind()
-			reagents.add_reagent_list(to_grind.grind_results)
-			to_chat(user, span_notice("I break [to_grind] into powder."))
-			QDEL_NULL(to_grind)
+	if(!istype(weapon, /obj/item/pestle))
+		return
+	if(!to_grind.len)
+		to_chat(user, span_warning("There's nothing to grind."))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	// Check all items can actually be juiced/ground
+	for(var/obj/item/I in to_grind)
+		if(!I.grind_results && !I.juice_results || !I.reagents.total_volume)
+			to_chat(user, span_warning("I cannot process [I] this way."))
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+	var/grind_time = (2.5 SECONDS) + (grind_load() * 3.5)
+	grind_time *= min(2, GENERAL_SKILL_TIME_MULITPLIER(user, /datum/attribute/skill/craft/alchemy))
+	to_chat(user, span_notice("I start grinding..."))
+	if(!do_after(user, grind_time, src))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	for(var/obj/item/I in to_grind)
+		if(QDELETED(I))
+			continue
+		if(length(I.juice_results))
+			I.on_juice()
+			reagents.add_reagent_list(I.juice_results)
+			to_chat(user, span_notice("I juice [I] into a fine liquid."))
+			if(I.reagents)
+				I.reagents.trans_to(src, I.reagents.total_volume, transfered_by = user)
+		else if(length(I.grind_results))
+			I.on_grind()
+			reagents.add_reagent_list(I.grind_results)
+			to_chat(user, span_notice("I break [I] into powder."))
+		else
+			to_chat(user, span_notice("I grind [I] into a fine liquid."))
+			if(I.reagents)
+				I.reagents.trans_to(src, I.reagents.total_volume, transfered_by = user)
+		qdel(I)
+	to_grind.Cut()
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/reagent_containers/glass/mortar/proc/grind_load()
+	var/total = 0
+	for(var/obj/item/I in to_grind)
+		total += I.w_class
+	return total
 
 /obj/item/reagent_containers/glass/mortar/AltClick(mob/user, list/modifiers)
-	if(to_grind)
-		to_grind.forceMove(drop_location())
-		to_grind = null
-		to_chat(user, span_notice("I eject the item inside."))
+	for(var/obj/item/I in to_grind)
+		I.forceMove(get_turf(user))
+	to_grind.Cut()
 
 /obj/item/reagent_containers/glass/mortar/attackby(obj/item/I, mob/living/carbon/human/user, list/modifiers)
-	if(istype(I,/obj/item/pestle))
-		if(!to_grind)
+	if(istype(I, /obj/item/pestle))
+		if(!to_grind.len)
 			if(user.try_recipes(src, I, user))
 				user.changeNext_move(CLICK_CD_FAST)
 				return TRUE
 			to_chat(user, span_warning("There's nothing to grind."))
 			return
 
-		// Check for alchemical recipe first
-		var/datum/alch_grind_recipe/foundrecipe = find_recipe()
-		if(!foundrecipe)
-			to_chat(user, span_warning("I don't think that will work!"))
-			return
-		// Process alchemical recipe
-		user.visible_message(span_info("[user] begins grinding up [I]."))
+		// Validate all items have a recipe before starting
+		var/list/recipes = list()
+		for(var/obj/item/G in to_grind)
+			var/datum/alch_grind_recipe/found = find_recipe(G)
+			if(!found)
+				to_chat(user, span_warning("[G] doesn't seem to work in here!"))
+				return
+			recipes[G] = found
+
+		user.visible_message(span_info("[user] begins grinding up the contents of [src]."))
 		playsound(src, 'sound/foley/mortarpestle.ogg', 100, FALSE)
-		if(do_after(user, 1 SECONDS, src))
+
+		var/grind_time = (2 SECONDS) + (grind_load() * 3)
+		grind_time *= min(2, GENERAL_SKILL_TIME_MULITPLIER(user, /datum/attribute/skill/craft/alchemy))
+		if(!do_after(user, grind_time, src))
+			return
+
+		var/bonus_modifier = 1
+		switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
+			if(SKILL_RANK_JOURNEYMAN)
+				bonus_modifier = 1.4
+			if(SKILL_RANK_EXPERT)
+				bonus_modifier = 1.6
+			if(SKILL_RANK_MASTER)
+				bonus_modifier = 1.8
+			if(SKILL_RANK_LEGENDARY)
+				bonus_modifier = 2
+
+		var/did_flash = FALSE
+		for(var/obj/item/G in to_grind)
+			if(QDELETED(G))
+				continue
+			var/datum/alch_grind_recipe/foundrecipe = recipes[G]
 			for(var/output in foundrecipe.valid_outputs)
 				for(var/i in 1 to foundrecipe.valid_outputs[output])
 					new output(get_turf(src))
-			var/bonus_modifier = 1
-			switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
-				if(SKILL_RANK_JOURNEYMAN)
-					bonus_modifier = 1.4
-				if(SKILL_RANK_EXPERT)
-					bonus_modifier = 1.6
-				if(SKILL_RANK_MASTER)
-					bonus_modifier = 1.8
-				if(SKILL_RANK_LEGENDARY)
-					bonus_modifier = 2
 			if(foundrecipe.bonus_chance_outputs.len > 0)
 				for(var/i in 1 to foundrecipe.bonus_chance_outputs.len)
 					if((foundrecipe.bonus_chance_outputs[foundrecipe.bonus_chance_outputs[i]] * bonus_modifier) >= roll(1,100))
 						var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
 						new bonusduck(get_turf(src))
-			if(istype(to_grind,/obj/item/ore) || istype(to_grind,/obj/item/ingot))
-				user.flash_fullscreen("whiteflash")
-				var/datum/effect_system/spark_spread/S = new()
-				var/turf/front = get_turf(src)
-				S.set_up(1, 1, front)
-				S.start()
-			QDEL_NULL(to_grind)
-			if(user.mind)
-				user.adjust_experience(/datum/attribute/skill/craft/alchemy, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * user.get_learning_boon(/datum/attribute/skill/craft/alchemy), FALSE)
+			if(!did_flash && (istype(G, /obj/item/ore) || istype(G, /obj/item/ingot)))
+				did_flash = TRUE
+			QDEL_NULL(G)
+
+		if(did_flash)
+			user.flash_fullscreen("whiteflash")
+			var/datum/effect_system/spark_spread/S = new()
+			S.set_up(1, 1, get_turf(src))
+			S.start()
+
+		to_grind.Cut()
+
+		if(user.mind)
+			user.adjust_experience(/datum/attribute/skill/craft/alchemy, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * user.get_learning_boon(/datum/attribute/skill/craft/alchemy), FALSE)
 		return
 
-	if(to_grind)
-		to_chat(user, span_warning("[src] is full!"))
+	if((grind_load() + I.w_class) > max_grind_capacity)
+		to_chat(user, span_warning("[src] is too full to fit [I]!"))
 		return
-	if(!user.transferItemToLoc(I,src))
+	if(!user.transferItemToLoc(I, src))
 		to_chat(user, span_warning("[I] is stuck to my hand!"))
+		. = ..()
 		return
-	if(!to_grind && user.transferItemToLoc(I,src))
-		to_chat(user, span_warning("I add [I] to [src]."))
-		to_grind = I
-		return
-	. = ..()
+	to_grind += I
+	to_chat(user, span_notice("I add [I] to [src]."))
+	return
 
 // Looks through all the alch grind recipes to find what it should create, returns the correct one.
-/obj/item/reagent_containers/glass/mortar/proc/find_recipe()
+/obj/item/reagent_containers/glass/mortar/proc/find_recipe(obj/item/target)
 	for(var/datum/alch_grind_recipe/grindRec in GLOB.alch_grind_recipes)
 		if(grindRec.picky)
-			if(to_grind.type == grindRec.valid_input)
+			if(target.type == grindRec.valid_input)
 				return grindRec
 		else
-			if(istype(to_grind,grindRec.valid_input))
+			if(istype(target, grindRec.valid_input))
 				return grindRec
 	return null

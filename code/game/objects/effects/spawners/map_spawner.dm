@@ -212,6 +212,10 @@
 	icon_state = "lootstatpot"
 	loot_table_type = /datum/loot_table/potion_stats
 
+/obj/effect/spawner/map_spawner/loot/potion_skills
+	icon_state = "lootstatpot"
+	loot_table_type = /datum/loot_table/potion_skills
+
 /obj/effect/spawner/map_spawner/sewerencounter
 	icon_state = "srat"
 	icon = 'icons/roguetown/mob/monster/rat.dmi'

@@ -1,0 +1,8 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - refactor: "all code pertaining to apothecary has been refactored\nadd; you can hover over essence machinery to see their links with a connector"
+  - bugfix: "gave gnomes back their frontal lobe"
+  - bugfix: "essence dupe"
+  - balance: "reduced the cost of all research"
+  - balance: "reduced the time for infusing"

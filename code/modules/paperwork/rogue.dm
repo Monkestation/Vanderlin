@@ -375,6 +375,9 @@
 
 /obj/item/paper/inqslip/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/clothing/ring/signet))
+		if(waxed)
+			to_chat(user, span_warning("[src] has already been marked."))
+			return
 		var/obj/item/clothing/ring/signet/S = I
 		if(S.tallowed && sealed)
 			waxed = TRUE

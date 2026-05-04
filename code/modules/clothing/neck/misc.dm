@@ -265,7 +265,7 @@
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
-	item_weight = 2.3 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -446,7 +446,7 @@
 		to_chat(user, "Collar is already unlocked!")
 
 
-/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(force, atom/newloc, no_move, invdrop, silent)
+/obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
 
 	if(!ismob(loc))

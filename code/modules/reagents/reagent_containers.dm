@@ -37,6 +37,8 @@
 	var/short_cooktime = FALSE
 	/// Long cooktime, when low cooking skill
 	var/long_cooktime = FALSE
+	///can we soak?
+	var/soaker = TRUE
 
 	/// Can be labelled by parchment
 	var/can_label_container = FALSE
@@ -156,7 +158,7 @@
 	. = ..()
 	if(GetComponent(/datum/component/storage))
 		return
-	if(!is_open_container() || !reagents || !reagents.total_volume)
+	if(!is_open_container() || !reagents || !reagents.total_volume && soaker)
 		to_chat(user, span_warning("\The [src] needs to be open and have reagents to soak something in."))
 		return
 	if(soaking_item)

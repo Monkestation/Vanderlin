@@ -539,6 +539,9 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/normal_count = 0
 	var/bonus_count = 0 // Track bonus items from happiness
 
+	if(HAS_TRAIT(src, TRAIT_POISONBITE))
+		butcher_results += /obj/item/reagent_containers/food/snacks/poisonglands
+		butcher_results[/obj/item/reagent_containers/food/snacks/poisonglands] = 1
 	for(var/path in butcher_results)
 		var/amount = max(1, round(butcher_results[path] * genetic_butcher_scale, 1))
 		if(!do_after(user, time_per_cut, target = src))
@@ -701,7 +704,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	if(dextrous)
 		drop_all_held_items()
 	if(!gibbed)
-		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "death", null, null, null, TRUE)
+		emote("death", forced = TRUE)
 	layer = layer-0.1
 	if(del_on_death)
 		..()

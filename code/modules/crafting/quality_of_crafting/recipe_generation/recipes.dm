@@ -429,7 +429,7 @@
 
 	return data
 
-/datum/essence_infusion_recipe/return_recipe_data()
+/datum/infusion_recipe/return_recipe_data()
 	var/list/data = list()
 	data["type"] = "essence_infusion"
 	data["name"] = name
@@ -544,7 +544,7 @@
 
 		if(S.skill_used && S.skill_min)
 			step_e["skill_name"] = initial(S.skill_used.name)
-			step_e["skill_min"] = SSskills.level_names[S.skill_min]
+			step_e["skill_min"] = SSskills.level_names[FLOOR(S.skill_min * 0.1, 1)]
 			step_e["skill_median"] = SSskills.level_names[S.skill_median]
 
 		if(length(S.chems_needed))
@@ -564,8 +564,6 @@
 			flags += "Requires dislocation"
 		if(S.surgery_flags & SURGERY_BROKEN)
 			flags += "Requires broken bodypart"
-		if(S.surgery_flags & SURGERY_DRILLED)
-			flags += "Requires drilling"
 		step_e["flags"] = flags
 
 		steps_out += list(step_e)

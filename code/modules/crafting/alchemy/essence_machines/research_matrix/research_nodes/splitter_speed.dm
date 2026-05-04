@@ -19,7 +19,7 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/splitter_speed)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 25,
+		/datum/thaumaturgical_essence/motion = 20,
 		/datum/thaumaturgical_essence/energia = 20,
 		/datum/thaumaturgical_essence/cycle = 15,
 	)
@@ -34,9 +34,9 @@
 	icon_state = "node"
 	prerequisites = list(/datum/thaumic_research_node/splitter_speed/two)
 	required_essences = list(
-		/datum/thaumaturgical_essence/motion = 50,
-		/datum/thaumaturgical_essence/energia = 40,
-		/datum/thaumaturgical_essence/cycle = 30,
+		/datum/thaumaturgical_essence/motion = 25,
+		/datum/thaumaturgical_essence/energia = 25,
+		/datum/thaumaturgical_essence/cycle = 25,
 		/datum/thaumaturgical_essence/magic = 20,
 	)
 	node_x = 580

@@ -238,6 +238,7 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 /mob/proc/do_after_coefficent() // This gets added to the delay on a do_after, default 1
 	. = 1
+	. *= cached_multiplicative_actions_slowdown
 	return
 
 /// Returns the total amount of do_afters this mob is taking part in

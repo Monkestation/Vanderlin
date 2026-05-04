@@ -2,7 +2,8 @@
 	name = "Dental Avulsion"
 	desc = "Patient's teeth have been violently ripped off due to blunt trauma."
 	severity = WOUND_SEVERITY_LIGHT
-	//sound_effect = list('sound/combat/teef1.ogg','sound/combat/teef2.ogg','sound/combat/teef3.ogg')
+	associated_bclasses = FRACTURE_BCLASSES
+	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 
 /datum/wound/teeth/can_apply_to_bodypart(obj/item/bodypart/mouth/affected)
 	. = ..()

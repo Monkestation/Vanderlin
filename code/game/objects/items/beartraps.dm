@@ -51,7 +51,7 @@
 			BP.add_wound(/datum/wound/fracture)
 			if(BP.can_be_disabled)
 				BP.update_disabled()
-			C.apply_damage(trap_damage, BRUTE, def_zone, C.run_armor_check(def_zone, "stab", damage = trap_damage))
+			C.apply_damage(trap_damage, BRUTE, def_zone, C.run_armor_check(def_zone, "stab", damage = trap_damage), damage_type = BCLASS_BITE)
 			C.update_sneak_invis(TRUE)
 			C.consider_ambush()
 			return FALSE
@@ -78,7 +78,7 @@
 				BP.add_wound(/datum/wound/fracture)
 				if(BP.can_be_disabled)
 					BP.update_disabled()
-				C.apply_damage(trap_damage, BRUTE, def_zone, C.run_armor_check(def_zone, "stab", damage = trap_damage))
+				C.apply_damage(trap_damage, BRUTE, def_zone, C.run_armor_check(def_zone, "stab", damage = trap_damage), damage_type = BCLASS_BITE)
 				C.update_sneak_invis(TRUE)
 				C.consider_ambush()
 				return FALSE
@@ -187,7 +187,7 @@
 				close_trap(cross_mob)
 				cross_mob.visible_message(span_danger("[cross_mob] triggers \the [src]."), \
 						span_danger("I trigger \the [src]!"))
-				if(cross_mob.apply_damage(trap_damage, BRUTE, def_zone, cross_mob.run_armor_check(def_zone, "stab", damage = trap_damage)))
+				if(cross_mob.apply_damage(trap_damage, BRUTE, def_zone, cross_mob.run_armor_check(def_zone, "stab", damage = trap_damage), damage_type = BCLASS_BITE))
 					cross_mob.Stun(80)
 				cross_mob.consider_ambush()
 	..()

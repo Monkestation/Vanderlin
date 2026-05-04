@@ -13,10 +13,17 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	liquid_fire_power = 10
 	hydration_factor = 10
+	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	var/datum/reagent/age_path
 	var/age_time = 10 MINUTES
 	var/age_timer
+
+/datum/reagent/consumable/ethanol/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
+	BP.disinfect_limb(boozepwr)
+	for(var/datum/injury/injury in BP.injuries)
+		injury.adjust_germ_level(-boozepwr * 0.5)
+	BP.adjust_germ_level(-boozepwr * 0.1)
 
 /datum/reagent/consumable/ethanol/New()
 	. = ..()
@@ -37,11 +44,11 @@
 
 /datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
 
 /datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/2, "[type]")
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
 	. = ..()

@@ -80,7 +80,7 @@
 	var/skill_modifier = 1 - (floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing)) * 0.15) //13% damage reduction per level
 	var/damage = ((levels * rand(20, 40)) * encumbrance_multiplier) ** 1.5
 	damage *= skill_modifier
-	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT)))
+	if(damage && apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, BLUNT), damage_type = BCLASS_BLUNT))
 		if(levels > 1)
 			//absurd damage to guarantee a crit
 			affecting.try_crit(BCLASS_TWIST, 300)
@@ -113,6 +113,12 @@
 		H = hud_used.action_intent
 
 	update_a_intents()
+
+	var/obj/item/new_held_item = src.get_active_held_item()
+	if(item_in_hand)
+		SEND_SIGNAL(item_in_hand, COMSIG_ITEM_NOLONGER_ACTIVE, src)
+	if(new_held_item)
+		SEND_SIGNAL(new_held_item, COMSIG_ITEM_NOW_ACTIVE, src)
 
 	return TRUE
 
@@ -641,7 +647,8 @@
 			adjust_nutrition(-lost_nutrition)
 			adjust_hydration(-lost_nutrition)
 	if(harm)
-		adjustBruteLoss(3)
+		var/obj/item/bodypart/stomach = getorganslot(ORGAN_SLOT_STOMACH)
+		stomach?.take_damage(3)
 
 	for(var/i=0 to distance)
 		if(blood)
@@ -671,7 +678,7 @@
 
 	var/turf/floor = get_turf(src)
 	var/obj/effect/decal/cleanable/vomit/spew = new(floor)
-	bite.reagents.trans_to(spew, amount, transfered_by = src)
+	bite?.reagents.trans_to(spew, amount, transfered_by = src)
 
 /mob/living/carbon/proc/spew_organ(power = 5, amt = 1)
 	for(var/i in 1 to amt)
@@ -724,6 +731,8 @@
 		used_damage = total_oxy
 	set_health(round(maxHealth - used_damage, DAMAGE_PRECISION))
 	update_stat()
+	update_pain()
+	update_shock()
 
 	if(stat == SOFT_CRIT)
 		add_movespeed_modifier(MOVESPEED_ID_CARBON_SOFTCRIT, TRUE, multiplicative_slowdown = SOFTCRIT_ADD_SLOWDOWN)
@@ -922,7 +931,7 @@
 	else
 		clear_fullscreen("oxy")
 
-	var/hurtdamage = ((get_complex_pain() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
+	var/hurtdamage = ((getPainLoss() / max(1, (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))) * 100) //what percent out of 100 to max pain
 	if(hurtdamage)
 		var/severity = 0
 		switch(hurtdamage)
@@ -1045,8 +1054,10 @@
 		regenerate_limbs()
 		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
 			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-				bodypart.rotted = FALSE
+				bodypart.revive_limb()
+				bodypart.germ_level = 0
 				bodypart.skeletonized = FALSE
+				bodypart.remove_pain(bodypart.pain_dam)
 
 	if(heal_flags & (HEAL_REFRESH_ORGANS|HEAL_ORGANS))
 		// regenerate_organs(regenerate_existing = (heal_flags & HEAL_REFRESH_ORGANS))

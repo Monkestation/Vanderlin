@@ -4,7 +4,7 @@
 
 	if(def_zone)
 		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
-		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
+		//If a specific bodypart is targeted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL my bodyparts for protection, and averages out the values
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
@@ -19,6 +19,8 @@
 	if(isbodypart(def_zone))
 		var/obj/item/bodypart/CBP = def_zone
 		def_zone = CBP.body_zone
+		if(def_zone == BODY_ZONE_PRECISE_MOUTH)
+			def_zone = BODY_ZONE_HEAD
 	var/protection = 0
 	var/obj/item/clothing/used
 	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, wear_ring)
@@ -345,7 +347,7 @@
 			nodmg = TRUE
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone, crit_message = TRUE)
+			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone, crit_message = TRUE, pre_applied = TRUE)
 		visible_message(
 			"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] [src]![next_attack_msg.Join()]</span>", \
 			"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
@@ -400,7 +402,7 @@
 			if(bomb_armor)
 				brute_loss = (10 * (2 - round(bomb_armor*0.01, 0.05)) * ldist) - ((10 * (2 - round(bomb_armor*0.01, 0.05))) * fodist)
 				damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
-	take_overall_damage(brute_loss,burn_loss)
+	take_overall_damage(brute_loss,burn_loss, damage_type = BCLASS_BLUNT)
 
 	//attempt to dismember bodyparts
 	if(severity <= 2)
@@ -636,12 +638,42 @@
 		BODY_ZONE_L_LEG,
 		BODY_ZONE_R_LEG,
 	)
+	var/list/all_untreated = list()
 	for(var/body_zone in body_zones)
 		var/obj/item/bodypart/bodypart = get_bodypart(body_zone)
 		if(!bodypart)
 			examination += "<span class='info'>☼ [capitalize(parse_zone(body_zone))]: <span class='deadsay'><b>MISSING</b></span></span>"
 			continue
 		examination += bodypart.check_for_injuries(user, deep_examination)
+		all_untreated |= bodypart.get_injury_types()
+
+	if(length(all_untreated))
+		var/list/mechanics_result = list()
+		for(var/wound_type in all_untreated)
+			switch(wound_type)
+				if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
+				if(WOUND_BLUNT, WOUND_LASH)
+					mechanics_result += "Bandage bruises and lashes to allow them to heal."
+				if(WOUND_BURN)
+					mechanics_result += "Disinfect and salve burns to allow them to heal."
+				if("germs")
+					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
+				if("self_heal")
+					mechanics_result += "Small injuries will heal on their own."
+
+		var/list/result = list()
+		if(length(mechanics_result))
+			var/mechanics_result_str = "<details><summary>Mechanics</summary>"
+			for(var/line in mechanics_result)
+				mechanics_result_str += " - " + span_blue(line) + "\n"
+			mechanics_result_str += "</details>"
+			result += mechanics_result_str
+		for(var/i in 1 to (length(result) - 1))
+			result[i] += "\n"
+
+		examination += result.Join()
+
 	if(additional)
 		examination += span_info(span_green("[getToxLoss()] TOXIN"))
 		examination += span_info(span_blue("[getOxyLoss()] OXYGEN"))
@@ -665,7 +697,7 @@
 
 	var/obj/item/bodypart/examined_part = get_bodypart(choice)
 	if(examined_part)
-		examination += examined_part.check_for_injuries(user, deep_examination)
+		examination += examined_part.check_for_injuries(user, deep_examination, TRUE)
 	else
 		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><B>MISSING</B></span></span>"
 	examination += "ø ------------ ø</span>"
@@ -727,3 +759,16 @@
 
 	for(var/obj/item/I in torn_items)
 		I.take_damage(damage_amount, damage_type, damage_flag, 0)
+
+///Get all the clothing on a specific body part
+/mob/living/carbon/human/proc/clothingonpart(obj/item/bodypart/def_zone)
+	var/list/covering_part = list()
+	var/list/clothing_slots = list(head, wear_mask, wear_wrists, wear_shirt, wear_neck, cloak, wear_armor, wear_pants, backr, backl, gloves, shoes, belt, wear_ring)
+	for(var/bp in clothing_slots)
+		if(!bp)
+			continue
+		if(bp && istype(bp , /obj/item/clothing))
+			var/obj/item/clothing/C = bp
+			if(C.body_parts_covered & def_zone.body_part)
+				covering_part += C
+	return covering_part
