@@ -187,12 +187,12 @@
 
 /// What happens when a mob tumbles down the stairs
 /obj/structure/stairs/proc/on_fall(mob/living/falling)
-	falling.AdjustParalyzed(1 SECONDS)
-	falling.OffBalance(1 SECONDS)
-	falling.AdjustKnockdown(2.5 SECONDS)
+	falling.AdjustParalyzed(0.5 SECONDS)
+	falling.OffBalance(0.5 SECONDS)
+	falling.AdjustKnockdown(1.25 SECONDS)
 	falling.spin(1 SECONDS, 0.25 SECONDS)
 	falling.apply_damage(rand(4, 8), BRUTE, spread_damage = TRUE)
-	SSmove_manager.move_towards(falling, get_ranged_target_turf(src, REVERSE_DIR(dir), 2), delay = 0.4 SECONDS, timeout = 1 SECONDS)
+	SSmove_manager.move_towards(falling, get_ranged_target_turf(src, REVERSE_DIR(dir), 2), delay = 0.2 SECONDS, timeout = 0.5 SECONDS)
 
 /obj/structure/stairs/proc/isTerminator() //If this is the last stair in a chain and should move mobs up
 	if(terminator_mode != STAIR_TERMINATOR_AUTOMATIC)
