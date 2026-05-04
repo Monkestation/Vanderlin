@@ -267,9 +267,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/grid_height
 	///this is used to see how many times we've been repaired via melding
 	var/integrity_restores = 0
-	///our melting material, basically if exists this is what we melt into in a crucible
+	/// Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/datum/material/melting_material
-	///our metling amount
+	/// The melting amount. Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/melt_amount = 0
 	///our current in progress slapcraft
 	var/datum/orderless_slapcraft/in_progress_slapcraft
@@ -1215,7 +1215,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = get_turf(src)
 		var/ash_type = /obj/item/fertilizer/ash
 		if(w_class == WEIGHT_CLASS_HUGE || w_class == WEIGHT_CLASS_GIGANTIC)
-			ash_type = /obj/item/fertilizer/ash
+			ash_type = /obj/item/fertilizer/ash/large
 		var/obj/item/fertilizer/ash/A = new ash_type(T)
 		A.desc += "\nLooks like this used to be \an [name] some time ago."
 		..()

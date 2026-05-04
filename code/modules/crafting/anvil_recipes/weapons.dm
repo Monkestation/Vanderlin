@@ -358,6 +358,7 @@
 /datum/anvil_recipe/weapons/iron/shortsword_iron
 	name = "Short Sword"
 	created_item = /obj/item/weapon/sword/short/iron
+	craftdiff = 0
 
 /datum/anvil_recipe/weapons/iron/ida
 	name = "Ida"
@@ -380,7 +381,6 @@
 	name = "Sword"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/iron
-	craftdiff = 0
 
 /datum/anvil_recipe/weapons/iron/sword_iron
 	name = "Estoc"
