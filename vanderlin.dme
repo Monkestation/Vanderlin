@@ -2747,7 +2747,6 @@
 #include "code\modules\crafting\quality_of_crafting\fishing.dm"
 #include "code\modules\crafting\quality_of_crafting\generic.dm"
 #include "code\modules\crafting\quality_of_crafting\gravemaking.dm"
-#include "code\modules\crafting\quality_of_crafting\how_do_i_craft_this.dm"
 #include "code\modules\crafting\quality_of_crafting\leatherworking.dm"
 #include "code\modules\crafting\quality_of_crafting\living_start.dm"
 #include "code\modules\crafting\quality_of_crafting\narcotics.dm"
