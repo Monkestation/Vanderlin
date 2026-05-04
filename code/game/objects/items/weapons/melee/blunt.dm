@@ -438,6 +438,8 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_HVYSTRIKE)
 	gripped_intents = list(MACE_HVYSMASH, MACE_THRUST)
+	sharpness = IS_SHARP
+	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONG
 	minstr = 10
 
@@ -486,6 +488,7 @@
 	icon_state = "polemace"
 	gripped_intents = list(MACE_HVYSMASH) // It's a 2h flanged mace, not a goedendag.
 	wbalance = DODGE_CHANCE_NORMAL
+	sharpness = IS_BLUNT
 	max_integrity = INTEGRITY_STRONGEST
 
 	resistance_flags = FIRE_PROOF
