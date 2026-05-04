@@ -48,21 +48,21 @@
 	live_spirit.livingname = real_name
 	live_spirit.ckey = ckey
 	ADD_TRAIT(live_spirit, TRAIT_PACIFISM, TRAIT_GENERIC)
-	live_spirit.set_patron(client.prefs.selected_patron)
+
+	live_spirit.set_patron(live_spirit.client.prefs.selected_patron)
 	SSdeath_arena.add_fighter(live_spirit, mind?.last_death)
 
 	if(HAS_TRAIT(mind?.current, TRAIT_BURIED_COIN_GIVEN))
 		live_spirit.paid = TRUE
-		to_chat(client, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
+		to_chat(live_spirit.client, span_biginfo("Necra has guaranteed your passage to the next life. Your toll has been already paid."))
 
 	var/area/underworld/underworld = get_area(spawn_loc)
-
 	underworld.Entered(live_spirit, null)
 
 	// If ghost was human, allow them to pick last words if they did not before.
 	if(dead_hum)
 		if(!dead_hum.funeral && !dead_hum.final_words)
-			var/final_words = tgui_input_text(src, "Any final words you want to have imparted if your old body ever finds rest? (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "Final Words (Optional)", max_length=75)
+			var/final_words = tgui_input_text(live_spirit, "Any final words you want to have imparted if your old body ever finds rest? (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "Final Words (Optional)", max_length=75)
 			if(final_words)
 				dead_hum.final_words = final_words
 				log_say("[src] put [final_words] for their final words.")
