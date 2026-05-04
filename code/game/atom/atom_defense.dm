@@ -21,7 +21,7 @@
 
 	var/previous_atom_integrity = atom_integrity
 
-	update_integrity(atom_integrity - damage_amount)
+	update_integrity(atom_integrity - damage_amount, damage_flag = damage_flag)
 
 	var/integrity_failure_amount = integrity_failure * max_integrity
 

@@ -382,7 +382,7 @@
 	fueluse = 0
 	soundloop = null
 	crossfire = FALSE
-	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	obj_flags = parent_type::obj_flags | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	temperature_change = 5
 
 /obj/machinery/light/fueled/chand/Initialize()

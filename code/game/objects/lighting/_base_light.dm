@@ -22,6 +22,7 @@
 	desc = ""
 	layer = WALL_OBJ_LAYER
 	max_integrity = 100
+	obj_flags = CAN_BE_HIT | NO_DEBRIS_AFTER_DECONSTRUCTION
 	var/on = FALSE					// 1 if on, 0 if off
 	var/on_gs = FALSE
 	var/static_power_used = 0
@@ -190,9 +191,6 @@
 /obj/machinery/light/proc/seton(s)
 	on = (s && status == LIGHT_OK)
 	update()
-
-/obj/machinery/light/deconstruct(disassembled = TRUE)
-	qdel(src)
 
 /obj/machinery/light/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1)
 	. = ..()

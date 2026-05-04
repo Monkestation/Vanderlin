@@ -12,7 +12,6 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	destroy_sound = 'sound/misc/woodhit.ogg'
 	climbable = FALSE
-	static_debris = list(/obj/item/grown/log/tree = 1)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP | BLOCK_Z_OUT_DOWN
 	max_integrity = 300
 	var/burnt = FALSE
@@ -92,9 +91,12 @@
 	if(.)
 		burn_tree()
 
-/obj/structure/flora/newtree/deconstruct()
+/obj/structure/flora/newtree/handle_deconstruct(disassembled)
 	FellTree()
 	return ..()
+
+/obj/structure/flora/newtree/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree(loc)
 
 /obj/structure/flora/newtree/proc/burn_tree()
 	name = "burnt tree"
@@ -377,7 +379,6 @@
 	base_icon_state = "branch-end"
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
-	static_debris = list(/obj/item/grown/log/tree/stick = 1)
 	max_integrity = 30
 	num_random_icons = 2
 	var/underlay_base = "center-leaf"
@@ -404,6 +405,9 @@
 	mutable.dir = dir
 	. += mutable
 
+/obj/structure/flora/newbranch/atom_deconstruct(disassembled)
+	new /obj/item/grown/log/tree/stick(loc)
+
 /obj/structure/flora/newbranch/snow
 	underlay_base = "center-leaf-cold"
 	num_underlay_icons = 1
@@ -416,7 +420,9 @@
 	icon_state = "branchburnt-end1"
 	base_icon_state = "branchburnt-end"
 	desc = "Cracked and hardened from a terrible fire."
-	static_debris = null
+
+/obj/structure/flora/newbranch/leafless/scorched/atom_deconstruct(disassembled)
+	return
 
 /obj/structure/flora/newbranch/connector
 	icon_state = "branch-extend"

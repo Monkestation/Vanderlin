@@ -1412,8 +1412,11 @@
 
 	return LAZYACCESS(owner.organs_by_zone, body_zone)
 
-/obj/item/bodypart/deconstruct(disassembled = TRUE)
+/obj/item/bodypart/atom_deconstruct(disassembled = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+
 	drop_organs()
+
 	return ..()
 
 
