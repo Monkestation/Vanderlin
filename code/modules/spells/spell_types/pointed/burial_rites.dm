@@ -119,7 +119,8 @@
 					corpse.final_words = my_final_words // They won't be prompted again
 
 			if(!my_final_words) //No Observers, pick a random one
-				corpse.final_words = pick(premade_final_words)
+				my_final_words = pick(premade_final_words)
+				corpse.final_words = my_final_words
 
 			their_final_words += my_final_words
 

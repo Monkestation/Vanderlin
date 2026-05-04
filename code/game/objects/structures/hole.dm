@@ -207,7 +207,7 @@
 			return
 		//We're checking this istype twice in case any other headstone without the gravedecor path is added.
 		if(istype(attacking_item, /obj/item/grown/log/tree/stick))
-			headstone = new /obj/item/gravedecor/headstone/crude(parent = attacking_item.type)
+			headstone = new /obj/item/gravedecor/headstone/crude(null, attacking_item.type)
 		if(pacify_coffin(src, user))
 			user.visible_message(span_rose("[user] consecrates [src]."), span_rose("I consecrate [src]."))
 			if(!is_consecrated)
