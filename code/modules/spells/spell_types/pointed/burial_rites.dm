@@ -129,15 +129,15 @@
 			if(animal.speak)
 				their_final_words += pick(animal.speak)
 
-		// Final words acquired, display them once we verified the caster did not move
-		if(!(owner.Adjacent(grave))) // Caster left the area, rite FAILED
-			to_chat(owner, span_warning("I feel the energy around \the [grave] dissipate, I need to stand by \the [grave] and try again..."))
-			return FALSE
+	// Final words acquired, display them once we verified the caster did not move
+	if(!(owner.Adjacent(grave))) // Caster left the area, rite FAILED
+		to_chat(owner, span_warning("I feel the energy around \the [grave] dissipate, I need to stand by \the [grave] and try again..."))
+		return FALSE
 
-		for(var/final_words in their_final_words)
-			headstone.inscription += SPAN_GOD_NECRA("<br>[final_words]")
+	for(var/final_words in their_final_words)
+		headstone.inscription += SPAN_GOD_NECRA("<br>[final_words]")
 
-		grave.say(pick(their_final_words)) //pick a random final words to say
+	grave.say(pick(their_final_words)) //pick a random final words to say
 
 	return TRUE
 
