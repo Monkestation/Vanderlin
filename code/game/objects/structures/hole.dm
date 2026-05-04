@@ -6,7 +6,7 @@
 /obj/structure/closet/dirthole
 	name = "hole"
 	icon_state = "hole1"
-	icon = 'icons/turf/floors.dmi'
+	icon = 'icons/turf/constructed/grave.dmi'
 	mob_storage_capacity = 3
 	allow_dense = TRUE
 	opened = TRUE
@@ -682,17 +682,17 @@
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
-				. += mutable_appearance('icons/turf/floors.dmi', "consecration1", 2.92)
+				. += mutable_appearance('icons/turf/constructed/grave.dmi', "consecration1", 2.92)
 			if(4 to 6)
-				. += mutable_appearance('icons/turf/floors.dmi', "consecration2", 2.92)
+				. += mutable_appearance('icons/turf/constructed/grave.dmi', "consecration2", 2.92)
 			if(7 to 9)
-				. += mutable_appearance('icons/turf/floors.dmi', "consecration3", 2.92)
+				. += mutable_appearance('icons/turf/constructed/grave.dmi', "consecration3", 2.92)
 			if(10)
-				. += mutable_appearance('icons/turf/floors.dmi', "consecration4", 2.92)
+				. += mutable_appearance('icons/turf/constructed/grave.dmi', "consecration4", 2.92)
 	if(headstone)
-		. += mutable_appearance('icons/turf/floors.dmi', headstone.icon_state, 2.91)
+		. += mutable_appearance('icons/turf/constructed/grave.dmi', headstone.icon_state, 2.91)
 	if(gravefence)
-		. += mutable_appearance('icons/turf/floors.dmi', gravefence.icon_state, 2.9)
+		. += mutable_appearance('icons/turf/constructed/grave.dmi', gravefence.icon_state, 2.9)
 
 /obj/structure/closet/dirthole/update_name(updates)
 	. = ..()

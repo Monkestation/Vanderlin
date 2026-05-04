@@ -101,7 +101,7 @@
 /obj/item/gravedecor/headstone/crude
 	name = "crude headstone"
 	desc = ""
-	icon_state = "gravemarker1"
+	icon_state = "headstone_crude"
 	sourceitem = /obj/item/grown/log/tree/stick
 	decorationquality = 1
 
