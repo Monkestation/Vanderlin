@@ -32,7 +32,7 @@
 				has_dead = TRUE
 				break
 		if(!has_dead)
-			to_chat(owner, span_warning("You sense that there is no souls seeking rest in \the [grave]..."))
+			to_chat(owner, span_warning("You sense that there are no souls seeking rest in \the [grave]..."))
 			return FALSE
 		else
 			return TRUE

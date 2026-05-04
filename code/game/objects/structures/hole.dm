@@ -71,7 +71,7 @@
 
 /obj/structure/closet/dirthole/examine(mob/user)
 	if(headstone?.inscription)
-		. += "<br>[headstone.inscription]"
+		to_chat(user, headstone.inscription)
 	if(is_consecrated)
 		switch(gravequality)
 			if(0 to 3)
