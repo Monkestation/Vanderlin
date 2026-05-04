@@ -665,6 +665,16 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 		return FALSE
 	return TRUE
 
+/obj/structure/industrial_lift/proc/show_lift()
+	obj_flags |= BLOCK_Z_OUT_DOWN
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 255
+
+/obj/structure/industrial_lift/proc/hide_lift()
+	obj_flags &= ~BLOCK_Z_OUT_DOWN
+	RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
+	alpha = 0
+
 /obj/structure/industrial_lift/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)

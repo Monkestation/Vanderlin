@@ -587,17 +587,13 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 			movable.alpha = 0
 
 		if(!platform.fake)
-			platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			platform.RemoveElement(/datum/element/give_turf_traits, string_list(platform.turf_traits))
-			platform.alpha = 0
+			platform.hide_lift()
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 0.1
-			moving_platform.obj_flags &= ~BLOCK_Z_OUT_DOWN
-			moving_platform.RemoveElement(/datum/element/give_turf_traits, string_list(moving_platform.turf_traits))
-			moving_platform.alpha = 0
+			moving_platform.hide_lift()
 
 /datum/lift_master/tram/proc/show_tram()
 	ignore_pathing_obstacles = FALSE
@@ -606,17 +602,13 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 		base_horizontal_speed = 4
 		horizontal_speed = 4
 		if(!platform.fake)
-			platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			platform.AddElement(/datum/element/give_turf_traits, string_list(platform.turf_traits))
-			platform.alpha = 255
+			platform.show_lift()
 
 		for(var/obj/structure/industrial_lift/tram/moving_platform in platform.moving_lifts)
 			if(moving_platform.fake)
 				continue
 			moving_platform.horizontal_speed = 4
-			moving_platform.obj_flags |= BLOCK_Z_OUT_DOWN
-			moving_platform.AddElement(/datum/element/give_turf_traits, string_list(moving_platform.turf_traits))
-			moving_platform.alpha = 255
+			moving_platform.show_lift()
 
 		for(var/atom/movable/movable in objects_pre_alpha)
 			movable.alpha = objects_pre_alpha[movable]
