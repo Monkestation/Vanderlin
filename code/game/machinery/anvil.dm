@@ -175,7 +175,7 @@
 
 	var/datum/anvil_recipe/recipe = working_material.currecipe
 
-	if(quality_score >= 15) // Did you even try?
+	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
 		var/boon = user.get_learning_boon(recipe_skill)

@@ -91,8 +91,8 @@
 			progress_to_add /= 5
 	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
 	progress_to_add *= LAZYLEN(additional_items)+1
-	if(quality_score < 15) // Did you even try?
-		progress /= 2 //screw you for not trying
+	if(quality_score < MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
+		progress /= 2
 	progress += progress_to_add
 
 	if(progress >= 100)

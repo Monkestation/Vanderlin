@@ -220,8 +220,8 @@
 	desc = "A bar of glittering gold."
 	icon_state = "ingotgold"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 100
 	melting_material = /datum/material/gold
+	sellprice = 100
 	item_weight = 12.25 KILOGRAMS
 
 /obj/item/ingot/iron
@@ -229,8 +229,8 @@
 	desc = "A bar of wrought iron."
 	icon_state = "ingotiron"
 	smeltresult = /obj/item/ingot/iron
-	sellprice = 25
 	melting_material = /datum/material/iron
+	sellprice = 25
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/thaumic
@@ -239,8 +239,8 @@
 	icon_state = "infused_iron"
 	icon = 'icons/roguetown/misc/alchemy.dmi'
 	smeltresult = /obj/item/ingot/thaumic
-	sellprice = 25
 	melting_material = /datum/material/thaumic_iron
+	sellprice = 25
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/copper
@@ -248,8 +248,8 @@
 	desc = "A bar of copper."
 	icon_state = "ingotcop"
 	smeltresult = /obj/item/ingot/copper
-	sellprice = 10
 	melting_material = /datum/material/copper
+	sellprice = 10
 	item_weight = 5.7 KILOGRAMS
 
 /obj/item/ingot/tin
@@ -257,8 +257,8 @@
 	desc = "An ingot of strangely soft and malleable essence."
 	icon_state = "ingottin"
 	smeltresult = /obj/item/ingot/tin
-	sellprice = 15
 	melting_material = /datum/material/tin
+	sellprice = 15
 	item_weight = 4.6 KILOGRAMS
 
 /obj/item/ingot/bronze
@@ -266,8 +266,8 @@
 	desc = "A hard and durable alloy favored by engineers and followers of Malum alike."
 	icon_state = "ingotbronze"
 	smeltresult = /obj/item/ingot/bronze
-	sellprice = 30
 	melting_material = /datum/material/bronze
+	sellprice = 30
 	item_weight = 5.55 KILOGRAMS
 
 /obj/item/ingot/silver
@@ -275,8 +275,8 @@
 	desc = "A bar of glistening silver. The bane of nitewalkers."
 	icon_state = "ingotsilv"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 60
 	melting_material = /datum/material/silver
+	sellprice = 60
 	item_weight = 6.65 KILOGRAMS
 
 /obj/item/ingot/silver/Initialize(mapload)
@@ -287,24 +287,26 @@
 	name = "steel bar"
 	desc = "A bar of alloyed steel."
 	icon_state = "ingotsteel"
-	smeltresult = /obj/item/ingot/steel_slag
-	sellprice = 40
+	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
+	sellprice = 40
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/steelholy
 	name = "holy steel bar"
 	desc = "This ingot of steel has been touched by Malum. It radiates heat, even when outside a forge."
 	icon_state = "ingotsteelholy"
+	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel //Smelting it removes the blessing
-	sellprice = 20
+	sellprice = 60
 	item_weight = 5 KILOGRAMS
 
 /obj/item/ingot/silverblessed
 	name = "blessed silver bar"
 	desc = "This bar radiates a divine purity that is treasured by the Psydonic faith. The Psycross and holy liturgies are transcribed on the surface."
 	icon_state = "ingotsilvblessed"
-	melting_material = /datum/material/silver
+	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver //Smelting it removes the blessing
 	sellprice = 100
 	item_weight = 6.65 KILOGRAMS
 
@@ -312,8 +314,8 @@
 	name = "blacksteel bar"
 	desc = "Sacrificing the holy elements of silver for raw strength, this strange and powerful ingot's origin carries dark rumors..."
 	icon_state = "ingotblacksteel"
-	smeltresult = /obj/item/ingot/blacksteel
 	sellprice = 90
+	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
 
@@ -321,7 +323,7 @@
 	name = "steel slag"
 	desc = "Slag containing steel, the result of blooming iron and coal."
 	icon_state = "steel_slag"
-	smeltresult = /obj/item/ingot/steel_slag
-	sellprice = 90
+	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
+	sellprice = 40
 	item_weight = 5.5 KILOGRAMS

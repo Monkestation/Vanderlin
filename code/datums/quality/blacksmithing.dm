@@ -45,7 +45,11 @@
 	*/
 	var/skill_component = (avg_skill / 6) * (-BLACKSMITH_QUALITY_SPOILED + BLACKSMITH_QUALITY_FLAWLESS)
 	var/material_component = ((avg_material - SMELTERY_QUALITY_NORMAL) / SMELTERY_QUALITY_NORMAL) * 6
-	var/performance_component = (avg_performance / 100) * 3
+	var/performance_component
+	if(avg_performance >= MINIMUM_ANVIL_MINIGAME_SCORE)
+		performance_component = (avg_performance / 100) * 3
+	else
+		performance_component = (avg_performance - MINIMUM_ANVIL_MINIGAME_SCORE) * 3
 	var/difficulty_penalty = difficulty_modifier * 0.3
 
 	var/final_quality = skill_component + material_component + performance_component - difficulty_penalty
