@@ -135,7 +135,9 @@
 	LAZYSET(data, "tastes", taste_amounts)
 
 /datum/reagent/consumable/nutriment/get_taste_description(mob/living/taster)
-	return data["tastes"]
+	if(length(data))
+		return data["tastes"]
+	return ..()
 
 /datum/reagent/consumable/nutriment/vitamin
 	name = "Vitamin"

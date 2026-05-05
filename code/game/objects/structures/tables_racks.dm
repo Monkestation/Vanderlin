@@ -183,7 +183,7 @@
 
 	if(frame)
 		new frame(target_turf)
-	else
+	else if(framestack)
 		new framestack(get_turf(src), framestackamount)
 
 /*
