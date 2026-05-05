@@ -119,7 +119,7 @@ GLOBAL_REAL(Master, /datum/controller/master)
 	set desc = "View the current states of the Subsystem Controllers."
 	set category = "Debug"
 
-	if(!check_rights(R_ADMIN|R_DEBUG))
+	if(!check_rights(R_SERVER|R_DEBUG))
 		return
 
 	Master.ui_interact(usr)
