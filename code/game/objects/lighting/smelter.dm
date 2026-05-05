@@ -101,7 +101,10 @@
 		if(crucible_count >= max_crucible_amount)
 			to_chat(user, span_warning("[src] cannot hold any more crucibles!"))
 			return FALSE
-		smelting_item.forceMove(src)
+		if(smelting_item.loc == user)
+			user.transferItemToLoc(smelting_item, src)
+		else
+			smelting_item.forceMove(src)
 		user.visible_message("[user] loads [smelting_item] into [src].", "You load [smelting_item] into [src].")
 		return TRUE
 
