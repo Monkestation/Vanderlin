@@ -124,7 +124,7 @@
 /datum/anvil_recipe/tools/iron/lockpicks
 	name = "Lockpicks"
 	created_item = /obj/item/lockpick
-	output_amount = 3
+	output_amount = 5
 	craftdiff = 1
 
 /datum/anvil_recipe/tools/iron/lockpickring
