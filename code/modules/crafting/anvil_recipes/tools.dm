@@ -364,8 +364,10 @@
 	abstract_type = /datum/anvil_recipe/tools/casting
 
 /datum/anvil_recipe/tools/casting/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
-	output_item.main_material = required_material
-	output_item.set_material_information()
+	if(istype(required_material, /obj/item/ingot))
+		var/obj/item/ingot/ingot_material = required_material
+		output_item.main_material = ingot_material.melting_material
+		output_item.set_material_information()
 
 /datum/anvil_recipe/tools/casting/crucible
 	name = "Crucible"

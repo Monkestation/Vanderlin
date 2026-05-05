@@ -1,5 +1,6 @@
 #define BASE_NUMBER_NOTES 5
 #define EASY_DIFFICULTY_THRESHOLD 3
+#define CLICK_TIME_WINDOW 0.2 SECONDS
 
 /datum/anvil_challenge
 	var/start_time
@@ -95,8 +96,8 @@
 	if(user.client)
 		average_ping = user.client.avgping * 0.01
 
-	var/upper_range = anvil_presses[choice] + 0.2 SECONDS + average_ping
-	var/lower_range = anvil_presses[choice] - 0.2 SECONDS - average_ping
+	var/upper_range = anvil_presses[choice] + CLICK_TIME_WINDOW + average_ping
+	var/lower_range = anvil_presses[choice] - CLICK_TIME_WINDOW - average_ping
 
 	var/list/modifiers = params2list(params)
 
@@ -133,12 +134,12 @@
 			// 		player.playsound_local(player_turf, null, 100, 1, get_rand_frequency(), falloff_exponent = 5, S = far_smith_sound)
 
 		else
-			if(REALTIMEOFDAY > anvil_presses[choice] + 0.2 SECONDS + average_ping)
-				off_time += REALTIMEOFDAY - (anvil_presses[choice] + 0.2 SECONDS + average_ping)
+			if(REALTIMEOFDAY > anvil_presses[choice] + CLICK_TIME_WINDOW + average_ping)
+				off_time += REALTIMEOFDAY - (anvil_presses[choice] + CLICK_TIME_WINDOW + average_ping)
 				failed_notes++
 				good_hit = FALSE
-			else if(REALTIMEOFDAY < anvil_presses[choice] - 0.2 SECONDS - average_ping)
-				off_time += (anvil_presses[choice] + 0.2 SECONDS + average_ping) - REALTIMEOFDAY
+			else if(REALTIMEOFDAY < anvil_presses[choice] - CLICK_TIME_WINDOW - average_ping)
+				off_time += (anvil_presses[choice] + CLICK_TIME_WINDOW + average_ping) - REALTIMEOFDAY
 				failed_notes++
 				good_hit = FALSE
 
@@ -182,12 +183,9 @@
 	host_anvil.smithing = FALSE
 
 	if(completed)
-		if(host_anvil.always_perfect)
-			success = 100
-		else
+		if(!host_anvil.always_perfect)
 			// Calculate quality score based on performance
-			success = min(max(0, round(success - ((100 * (failed_notes / total_notes)) + 1 * (off_time * 2)))), \
-				100)
+			success = clamp(0, 100, success - ((100 * (failed_notes / total_notes)) + (off_time * 2)))
 
 		host_anvil.process_minigame_result(success, user)
 
@@ -273,5 +271,6 @@
 			return TRUE
 	return FALSE
 
+#undef CLICK_TIME_WINDOW
 #undef BASE_NUMBER_NOTES
 #undef EASY_DIFFICULTY_THRESHOLD

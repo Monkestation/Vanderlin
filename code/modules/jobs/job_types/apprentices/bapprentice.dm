@@ -9,7 +9,7 @@
 		/datum/attribute/skill/craft/blacksmithing = 20,
 		/datum/attribute/skill/craft/armorsmithing = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
-		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 20
 	)

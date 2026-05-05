@@ -28,8 +28,8 @@
 	name = "raw gold"
 	icon_state = "oregold1"
 	smeltresult = /obj/item/ingot/gold
-	sellprice = 10
 	melting_material = /datum/material/gold
+	sellprice = 10
 	item_weight = 10.1 KILOGRAMS
 	mill_result = /obj/item/ore/dust/gold
 
@@ -41,8 +41,8 @@
 	name = "raw silver"
 	icon_state = "oresilv1"
 	smeltresult = /obj/item/ingot/silver
-	sellprice = 8
 	melting_material = /datum/material/silver
+	sellprice = 8
 	item_weight = 5.5 KILOGRAMS
 	mill_result = /obj/item/ore/dust/silver
 
@@ -55,8 +55,8 @@
 	name = "raw iron"
 	icon_state = "oreiron1"
 	smeltresult = /obj/item/ingot/iron
-	sellprice = 5
 	melting_material = /datum/material/iron
+	sellprice = 5
 	item_weight = 4.15 KILOGRAMS
 	mill_result = /obj/item/ore/dust/iron
 
@@ -68,8 +68,8 @@
 	name = "raw copper"
 	icon_state = "orecop1"
 	smeltresult = /obj/item/ingot/copper
-	sellprice = 2
 	melting_material = /datum/material/copper
+	sellprice = 2
 	item_weight = 4.7 KILOGRAMS
 	mill_result = /obj/item/ore/dust/copper
 
@@ -82,8 +82,8 @@
 	desc = "A mass of soft, almost malleable white ore."
 	icon_state = "oretin1"
 	smeltresult = /obj/item/ingot/tin
-	sellprice = 4
 	melting_material = /datum/material/tin
+	sellprice = 4
 	item_weight = 3.8 KILOGRAMS
 	mill_result = /obj/item/ore/dust/tin
 

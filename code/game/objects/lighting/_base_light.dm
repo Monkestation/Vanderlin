@@ -177,8 +177,7 @@
 			if(fueluse == 0)
 				burn_out()
 	else
-		return PROCESS_KILL
-
+		return ..()
 
 /obj/machinery/light/proc/burn_out()
 	if(on)
