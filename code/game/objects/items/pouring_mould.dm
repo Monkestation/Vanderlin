@@ -104,11 +104,11 @@
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
 
-	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/blacksmithing)
+	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/smelting)
 	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2 // Smelting is already a timesink, this is justified to accelerate levelling
 	amt2raise *= (metal_amount / required_metal_amount)
 	if(amt2raise > 0)
-		user.adjust_experience(/datum/attribute/skill/craft/blacksmithing, amt2raise * boon, FALSE)
+		user.adjust_experience(/datum/attribute/skill/craft/smelting, amt2raise * boon, FALSE)
 
 	to_chat(user, span_notice("I pour [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
 	fufilled_metal += metal_amount
