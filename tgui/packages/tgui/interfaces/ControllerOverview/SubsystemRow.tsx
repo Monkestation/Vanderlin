@@ -33,7 +33,6 @@ export function SubsystemRow(props: Props) {
   let tooltip = 'Operational';
   if (!initialized) {
     icon = 'circle-exclamation';
-    color = 'darkgreen';
     tooltip = 'Not initialized';
   } else if (doesnt_fire) {
     icon = 'check';
