@@ -3,8 +3,8 @@
 	name = "Blacksmithing Quality"
 
 	quality_descriptors = alist(
-		BLACKSMITH_QUALITY_SPOILED = list("name_prefix" = "ruined", "modifier" = 0.3),
-		BLACKSMITH_QUALITY_AWFUL = list("name_prefix" = "awful", "modifier" = 0.5),
+		BLACKSMITH_QUALITY_SPOILED = list("name_prefix" = "ruined", "modifier" = 0.6),
+		BLACKSMITH_QUALITY_AWFUL = list("name_prefix" = "awful", "modifier" = 0.7),
 		BLACKSMITH_QUALITY_CRUDE = list("name_prefix" = "crude", "modifier" = 0.8),
 		BLACKSMITH_QUALITY_ROUGH = list("name_prefix" = "rough", "modifier" = 0.9),
 		BLACKSMITH_QUALITY_COMPETENT = list("name_prefix" = "", "modifier" = 1.0),
