@@ -8,17 +8,6 @@
 		selected_instrument_buffs = list()
 	return selected_instrument_buffs
 
-/mob/living/carbon/human/proc/get_max_instrument_buff_slots()
-	var/music_level = floor(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/music))
-	switch(music_level)
-		if(1 to 3)
-			return 1
-		if(4 to 5)
-			return 2
-		if(6 to INFINITY)
-			return 3
-	return 1
-
 /datum/buff_picker_ui
 	var/mob/living/carbon/human/owner
 
@@ -41,7 +30,7 @@
 
 /datum/buff_picker_ui/ui_data(mob/user)
 	var/list/data = list()
-	data["buff_slots_max"] = owner.get_max_instrument_buff_slots()
+	data["buff_slots_max"] = 1
 
 	var/music_level = floor(GET_MOB_SKILL_VALUE_OLD(owner, /datum/attribute/skill/misc/music))
 	var/list/available_buffs = list()
@@ -104,7 +93,7 @@
 			if(path_str in selected)
 				selected.Remove(path_str)
 			else
-				if(selected.len >= owner.get_max_instrument_buff_slots())
+				if(selected.len >= 1)
 					return TRUE
 				selected += path_str
 			return TRUE
