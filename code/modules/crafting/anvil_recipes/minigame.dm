@@ -63,7 +63,7 @@
 	var/list/new_notes = list()
 
 	var/last_note_time = REALTIMEOFDAY + 1 SECONDS
-	for(var/i = 1 to min(rand(1,5), notes_left))
+	for(var/i = 1 to min(rand(2,5), notes_left))
 		notes_left--
 		var/atom/movable/screen/hud_note/hud_note = new(null, null, src)
 		var/time = rand(5, 10)
