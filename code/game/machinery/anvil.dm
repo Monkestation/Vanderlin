@@ -55,6 +55,7 @@
 			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
 				if(working_material.currecipe)
 					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
+					return
 				else
 					return working_material.attackby(attacking_item, user, modifiers)
 
@@ -178,12 +179,13 @@
 	if(quality_score >= 15) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
-		var/boon = user.get_learning_boon(recipe_skill)
-		if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
-			amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
-			user.mind.add_sleep_experience(recipe_skill, amt2raise * boon, FALSE)
-		else if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
+		amt2raise *= (1 + recipe.craftdiff)
+		amt2raise *= user.get_learning_boon(recipe_skill)
+		if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
 			user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
+		else if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
+			amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
+			user.mind.add_sleep_experience(recipe_skill, amt2raise , FALSE)
 
 		// Breakthrough system for RNG success
 		if(quality_score != 100)
