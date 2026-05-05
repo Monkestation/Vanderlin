@@ -28,6 +28,7 @@
 /datum/anvil_recipe/armor/copper/mask
 	name = "Copper mask"
 	created_item = /obj/item/clothing/face/facemask/copper
+	output_amount = 2
 
 // NECK ARMOR
 /datum/anvil_recipe/armor/copper/gorget
@@ -101,7 +102,6 @@
 	created_item = /obj/item/clothing/shoes/boots/armor/ironmaille
 	output_amount = 2
 
-
 /datum/anvil_recipe/armor/iron/cuirass
 	name = "Iron Cuirass"
 	created_item = /obj/item/clothing/armor/cuirass/iron
@@ -114,7 +114,6 @@
 	name = "Iron Face Masks"
 	created_item = /obj/item/clothing/face/facemask
 	output_amount = 2
-	craftdiff = 0
 
 // IRON CHAIN ARMOR
 /datum/anvil_recipe/armor/iron/chainmail
@@ -411,14 +410,17 @@
 /datum/anvil_recipe/armor/steel/platemask
 	name = "Steel Mask"
 	created_item = /obj/item/clothing/face/facemask/steel
+	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/steppemask
 	name = "Steppe War Mask"
 	created_item = /obj/item/clothing/face/facemask/steel/steppe
+	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/maskbeast
 	name = "Steppe Beast Mask"
 	created_item = /obj/item/clothing/face/facemask/steel/steppebeast
+	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/cuirass
 	name = "Steel Cuirass"

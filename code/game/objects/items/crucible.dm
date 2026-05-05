@@ -1,15 +1,16 @@
 /obj/item/storage/crucible
 	name = "crucible"
-	desc = "A crucible in which metal items can be molten down."
+	desc = "A large crucible in which metal items can be molten down."
 	layer = ABOVE_ALL_MOB_LAYER
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
 	icon_state = "crucible"
 	component_type = /datum/component/storage/concrete/grid/crucible
-	grid_width = 32
-	grid_height = 64
+	grid_width = 64
+	grid_height = 96
 
 	item_weight = 2 KILOGRAMS
+	w_class = WEIGHT_CLASS_BULKY
 
 	var/crucible_temperature = 300
 

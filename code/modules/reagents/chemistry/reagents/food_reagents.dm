@@ -121,7 +121,7 @@
 
 	var/list/taste_amounts = list()
 	var/list/taste_data = data?["tastes"]
-	if(!length(taste_data))
+	if(taste_data)
 		taste_amounts = taste_data.Copy()
 
 	counterlist_scale(taste_amounts, volume)

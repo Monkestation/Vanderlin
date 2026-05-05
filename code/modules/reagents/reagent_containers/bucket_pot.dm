@@ -71,6 +71,8 @@
 	fill_icon_state = "pote"
 	force = 10
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
+	grid_width = 96
+	grid_height = 96
 	melting_material = /datum/material/iron
 	melt_amount = 80
 	var/processing_amount = 0 ///we use this to "reserve" reagents
