@@ -87,10 +87,6 @@
 	if((length(text) > 1) && ((text[length(text)] == "!") && (text[length(text) - 1] == "!")))
 		exclaimed = TRUE
 
-	if(!tgt_color)
-		// We dim italicized text to make it more distinguishable from regular text
-		tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
-
 	INVOKE_ASYNC(src, PROC_REF(generate_image), text, target, owner, language, extra_classes, lifespan)
 
 
@@ -162,6 +158,10 @@
 	if(target.voicecolor_override)
 		target.chat_color = "#[target.voicecolor_override]"
 		target.chat_color_darkened = target.chat_color
+
+	if(!tgt_color) // False when using emotes
+		// We dim italicized text to make it more distinguishable from regular text
+		tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
 	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
