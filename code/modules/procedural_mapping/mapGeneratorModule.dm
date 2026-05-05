@@ -50,10 +50,8 @@
 
 	// Check if an excluded atom is present. Excluded atoms are atoms that rely on turf to remain the same, and should not be modified by mapgen.
 	// For now, only `obj/structure/closet/dirthole` is included. If we find more examples, we should refactor this to be a global atom list that is checked.
-	if(T.loc)
-		var/obj/structure/closet/dirthole/exclude = locate() in T.loc
-		if(exclude)
-			return
+	if(locate(/obj/structure/closet/dirthole) in src)
+		return
 
 	// cache these as local (non-datum) vars
 	var/list/spawnableTurfs = src.spawnableTurfs
