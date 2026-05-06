@@ -376,6 +376,7 @@
 	reagents.reaction(target, TOUCH)
 	chem_splash(target.loc, 2, list(reagents))
 	log_combat(user, target, "splashed", reagent_text)
+	reagents.clear_reagents()
 
 	return TRUE
 
