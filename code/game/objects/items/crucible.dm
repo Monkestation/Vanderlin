@@ -119,9 +119,11 @@
 	var/datum/material/material = item.melting_material
 	var/melty = item.melt_amount
 	if(!material)
-		var/obj/item/ingot/ingot = item.smeltresult
+		var/obj/item/ingot = item.smeltresult
 		material = initial(ingot.melting_material)
 		melty = 100
+	if(!material)
+		return
 
 	data[material] = melty
 

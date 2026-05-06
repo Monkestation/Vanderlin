@@ -364,10 +364,9 @@
 	abstract_type = /datum/anvil_recipe/tools/casting
 
 /datum/anvil_recipe/tools/casting/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
-	if(istype(required_material, /obj/item/ingot))
-		var/obj/item/ingot/ingot_material = required_material
-		output_item.main_material = ingot_material.melting_material
-		output_item.set_material_information()
+	var/obj/item/ingot_material = required_material
+	output_item.main_material = initial(ingot_material.melting_material)
+	output_item.set_material_information()
 
 /datum/anvil_recipe/tools/casting/crucible
 	name = "Crucible"
@@ -383,7 +382,6 @@
 /datum/anvil_recipe/tools/casting/ingot_mould/iron
 	name = "Ingot mould (iron) (+Iron)"
 	required_material = /obj/item/ingot/iron
-	additional_items = list(/obj/item/ingot/iron)
 
 /datum/anvil_recipe/tools/casting/generic_mould
 	name = "Customizable mould"

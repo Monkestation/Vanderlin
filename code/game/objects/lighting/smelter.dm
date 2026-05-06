@@ -51,10 +51,19 @@
 
 	return ..()
 
-/obj/machinery/light/fueled/smelter/proc/try_retrieve_item(mob/user, obj/item/weapon/tongs/tongs_used)
+/obj/machinery/light/fueled/smelter/proc/try_retrieve_item(mob/living/user, obj/item/weapon/tongs/tongs_used)
 	. = FALSE
 	var/obj/item/retrieved_item
-	if(length(contained_items))
+	if(!. && tongs_used && !tongs_used.held_item)
+		for(var/obj/item/storage/crucible/crucible in contents)
+			user.visible_message("[user] starts removing a crucible from [src].", "You start removing a crucible from [src].")
+			if(!do_after(user, 1.5 SECONDS, src))
+				return
+			tongs_used.set_held_item(crucible)
+			retrieved_item = crucible
+			. = TRUE
+
+	if(!. && length(contained_items))
 		retrieved_item = contained_items[contained_items.len]
 		if(tongs_used)
 			tongs_used.set_held_item(retrieved_item)
@@ -71,15 +80,6 @@
 		contained_items -= retrieved_item
 		. = TRUE
 
-	if(tongs_used && !tongs_used.held_item)
-		for(var/obj/item/storage/crucible/crucible in contents)
-			user.visible_message("[user] starts removing a crucible from [src]!", "You start removing a crucible from [src].")
-			if(!do_after(user, 1.5 SECONDS, src))
-				return
-			tongs_used.set_held_item(crucible)
-			retrieved_item = crucible
-			. = TRUE
-
 	if(.)
 		if(HAS_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED))
 			var/mob/living/living_user = user
@@ -89,6 +89,8 @@
 				living_user.adjust_experience(/datum/attribute/skill/craft/smelting, amt2raise * boon, FALSE)
 				SEND_SIGNAL(living_user, COMSIG_ITEM_SMELTED)
 			REMOVE_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED, TRAIT_GENERIC)
+
+	user.adjust_stamina(user.maximum_stamina / 20)
 
 /obj/machinery/light/fueled/smelter/proc/try_add_item(obj/item/smelting_item, mob/living/user, obj/item/weapon/tongs/tongs_used)
 	if(!istype(user))

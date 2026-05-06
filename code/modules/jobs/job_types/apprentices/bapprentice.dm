@@ -6,7 +6,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/blacksmithing = 30,
 		/datum/attribute/skill/craft/armorsmithing = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
 		/datum/attribute/skill/craft/smelting = 30,
@@ -18,7 +18,7 @@
 	title = JOB_SMITHY_APP
 	tutorial = "Long hours and back-breaking work wouldnt even describe a quarter of what you do in a day for your Master. \
 	Its exhausting, filthy and you dont get much freetime: \
-	but someday youll get your own smithy, and youll have TWICE as many apprentices as your master does."
+	but someday you will get your own smithy and have TWICE as many apprentices as your master does."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN

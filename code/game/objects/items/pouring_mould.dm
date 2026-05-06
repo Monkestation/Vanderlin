@@ -3,9 +3,8 @@
 	desc = "You shouldn't be seeing this one."
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
-	icon_state = "flat-mold"
 	item_weight = 500 GRAMS
-	var/filling_icon_state = ""
+	var/fill_icon_state = ""
 
 	var/atom/output_atom
 	var/required_metal_amount
@@ -14,7 +13,7 @@
 
 	var/cooling = FALSE
 	var/cooling_progress = 0
-	var/cooling_amount = 7.5
+	var/cooling_amount = 3.75
 
 	/// Average quality weighted by molten metal reagent amount
 	var/average_quality = 0
@@ -29,28 +28,35 @@
 
 /obj/item/mould/set_material_information()
 	. = ..()
-	name = "[initial(main_material.name)] [initial(name)]"
+	name = lowertext("[initial(main_material.name)] [initial(name)]")
 
 /obj/item/mould/examine(mob/user)
 	. = ..()
 	if(cooling)
-		. += "[src] is hardening."
+		. += "[src] is hardening and is [PERCENT(cooling_progress / 100)]% completed."
 		return
+	return custom_examine(.)
 
+/obj/item/mould/proc/custom_examine(list/examine_list)
 	if(fufilled_metal)
 		var/reagent_color = initial(filling_metal.color)
-		. += "[src] has [UNIT_FORM_STRING(fufilled_metal)] of <font color=[reagent_color]> Molten [initial(filling_metal.name)]</font> out of [UNIT_FORM_STRING(required_metal_amount)].</font>"
+		examine_list += "[src] has [UNIT_FORM_STRING(fufilled_metal)] of <font color=[reagent_color]> Molten [initial(filling_metal.name)]</font> out of [UNIT_FORM_STRING(required_metal_amount)].</font>"
 		if(average_quality > 0)
-			. += "The metal quality appears to be [average_quality]."
+			examine_list += "The metal quality appears to be [average_quality]."
 	else
-		. += "[src] requires [UNIT_FORM_STRING(required_metal_amount)] of Molten Metal to form.</font>"
+		examine_list += "[src] requires [UNIT_FORM_STRING(required_metal_amount)] of Molten Metal to form.</font>"
+	return examine_list
 
 /obj/item/mould/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	. = ..()
-	if(!istype(attacking_item, /obj/item/storage/crucible))
+	interact_with_atom(attacking_item, user, modifiers)
+	return TRUE
+
+/obj/item/mould/proc/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/item/storage/crucible))
 		return
 
-	try_filling(attacking_item, user)
+	try_filling(interacting_with, user)
 	return TRUE
 
 /obj/item/mould/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
@@ -79,13 +85,10 @@
 				continue
 			filling_metal = material
 			break
-		if(!filling_metal)
-			return
-	else
-		if(!(filling_metal in metal.data))
-			return
 
 	if(cooling)
+		return
+	if(!filling_metal || !(filling_metal in metal.data))
 		return
 	var/metal_amount = metal.data[filling_metal]
 	if(metal_amount > required_metal_amount - fufilled_metal)
@@ -104,16 +107,30 @@
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
 
-	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/smelting)
 	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2 // Smelting is already a timesink, this is justified to accelerate levelling
 	amt2raise *= (metal_amount / required_metal_amount)
+	amt2raise *= user.get_learning_boon(/datum/attribute/skill/craft/smelting)
 	if(amt2raise > 0)
-		user.adjust_experience(/datum/attribute/skill/craft/smelting, amt2raise * boon, FALSE)
+		user.mind.add_sleep_experience(/datum/attribute/skill/craft/smelting, amt2raise)
 
 	to_chat(user, span_notice("I pour [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
 	fufilled_metal += metal_amount
+	update_appearance(UPDATE_OVERLAYS)
+	check_start_conditions()
+
+/obj/item/mould/proc/check_start_conditions()
 	if(fufilled_metal >= required_metal_amount)
 		start_cooling()
+		return TRUE
+	return FALSE
+
+/obj/item/mould/update_icon_state()
+	. = ..()
+	if(!base_icon_state)
+		return
+
+	icon_state = "[base_icon_state]_mould"
+	fill_icon_state = "[base_icon_state]_filling"
 
 /obj/item/mould/update_overlays()
 	. = ..()
@@ -121,12 +138,12 @@
 		return
 	. += mutable_appearance(
 		icon,
-		filling_icon_state,
+		fill_icon_state,
 		color = initial(filling_metal.color),
 		alpha = (255 * (fufilled_metal / required_metal_amount)),
 		appearance_flags = RESET_COLOR | KEEP_APART,
 	)
-	var/mutable_appearance/MA = emissive_appearance(icon, filling_icon_state)
+	var/mutable_appearance/MA = emissive_appearance(icon, fill_icon_state)
 	if(cooling)
 		MA.alpha = 255 * round((1 - (cooling_progress / 100)),0.1)
 	else
@@ -138,28 +155,14 @@
 	cooling = TRUE
 	START_PROCESSING(SSobj, src)
 
-/obj/item/mould/process()
-	cooling_progress += cooling_amount
+/obj/item/mould/process(delta_time)
+	cooling_progress += cooling_amount * delta_time
 	update_appearance(UPDATE_OVERLAYS)
 	if(cooling_progress >= 100)
 		STOP_PROCESSING(SSobj, src)
 		create_item()
 
-/obj/item/mould/proc/on_reagent_change(datum/reagents/holder, ...)
-	SIGNAL_HANDLER
-	update_appearance(UPDATE_OVERLAYS)
-
 /obj/item/mould/proc/create_item()
-	if(output_atom)
-		var/obj/item/new_item = new output_atom(get_turf(src))
-
-		var/datum/quality_calculator/metallurgy/metal_calc = new(
-			mat_qual = average_quality, // Use the stored weighted average quality
-			skill_qual = average_skill
-		)
-		metal_calc.apply_quality_to_item(new_item, TRUE)
-		qdel(metal_calc)
-
 	reset_state()
 
 /obj/item/mould/attack_self(mob/user, list/modifiers)
@@ -183,8 +186,8 @@
 	name = "ingot mould"
 	desc = "A clay mould for making metal ingots."
 
-	icon_state = "ingot-mold"
-	filling_icon_state = "ingot-mold-color"
+	icon_state = "ingot_mould"
+	fill_icon_state = "ingot_filling"
 
 	required_metal_amount = 100
 
@@ -197,7 +200,17 @@
 	if(output_atom == /obj/item/ingot/blacksteel)
 		record_round_statistic(STATS_BLACKSTEEL_SMELTED)
 
-	. = ..()
+	if(output_atom)
+		var/obj/item/new_item = new output_atom(get_turf(src))
+
+		var/datum/quality_calculator/metallurgy/metal_calc = new(
+			mat_qual = average_quality, // Use the stored weighted average quality
+			skill_qual = average_skill
+		)
+		metal_calc.apply_quality_to_item(new_item, TRUE)
+		qdel(metal_calc)
+
+	return ..()
 
 /obj/item/mould/ingot/reset_state()
 	. = ..()
@@ -206,10 +219,198 @@
 /obj/item/mould/ingot/advanced
 	name = "advanced ingot mould"
 	desc = "An ingot mould that utilizes water for faster cooling."
-	cooling_amount = 15
+	cooling_amount = 7.5
 
+// --------- CUSTOMIZABLE -----------
 /obj/item/mould/customizable
-	name = "custom mould"
+	name = "custom casting mould"
 	desc = "A blank mould that is ready to have its shape set by steady hands."
 	icon_state = "base_large_mould"
-	filling_icon_state = "large-mould-filling"
+	fill_icon_state = "base_large_filling"
+	smeltresult = /obj/item/mould/customizable // melt it down to reset it
+	var/datum/anvil_recipe/moulded_recipe
+	cooling_amount = 1
+
+	// We are bascially going to fake the anvil recipe
+	var/list/metals_needed = list()
+	var/list/additional_items = list()
+
+/obj/item/mould/customizable/custom_examine(list/examine_list)
+	if(!moulded_recipe)
+		examine_list += span_info("Use an item with an anvil recipe to set the shape of the mould.")
+	else
+		var/list/metal_examine = list()
+		for(var/datum/material/material as anything in metals_needed)
+			metal_examine += "[metals_needed[material]] [material.name]"
+		if(length(metal_examine))
+			examine_list += span_info("Needs [metal_examine.Join(", ")]")
+
+		var/list/item_examine = list()
+		for(var/atom/thing as anything in additional_items)
+			item_examine += "[thing.name]"
+		if(length(item_examine))
+			examine_list += span_info("Needs [item_examine.Join(", ")]")
+	return examine_list
+
+/obj/item/mould/customizable/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return
+
+	if(!moulded_recipe)
+		set_recipe(interacting_with, user)
+	else if(istype(interacting_with, /obj/item/storage/crucible))
+		try_filling(interacting_with, user)
+	else
+		try_adding(interacting_with, user)
+	return TRUE
+
+/obj/item/mould/customizable/proc/set_recipe(obj/item/attacking_item, mob/living/user)
+	if(moulded_recipe)
+		return
+
+	var/item_type = attacking_item.type
+	var/datum/anvil_recipe/found_recipe = GLOB.anvil_recipes_atom[item_type]
+	if(!found_recipe)
+		return
+
+	var/confirmation = tgui_alert(user, "Do you want to set the mould cast to [found_recipe.name]?", "[name]", DEFAULT_INPUT_CHOICES)
+	if(!confirmation || confirmation != CHOICE_YES)
+		return
+	if(moulded_recipe)
+		return
+
+	moulded_recipe = new found_recipe()
+	if(ispath(item_type, /obj/item/weapon/pick))
+		base_icon_state = "pick"
+	else if(ispath(item_type, /obj/item/weapon/polearm))
+		base_icon_state = "polearm"
+	else if(ispath(item_type, /obj/item/weapon/sword))
+		base_icon_state = "sword"
+	else if(ispath(item_type, /obj/item/weapon/axe))
+		base_icon_state = "axe"
+	else if(ispath(item_type, /obj/item/weapon/mace))
+		base_icon_state = "mace"
+	else if(ispath(item_type,  /obj/item/weapon/knife))
+		base_icon_state = "knife"
+	else if(ispath(item_type, /obj/item/clothing/armor))
+		base_icon_state = "plate"
+	else
+		base_icon_state = "plate"
+
+	name = lowertext("[moulded_recipe.name] mould")
+	desc = "Hollowed out and ready to accept liquid metal for casting."
+	update_appearance(UPDATE_ICON_STATE)
+	find_recipe_requirements()
+
+/obj/item/mould/customizable/proc/find_recipe_requirements()
+	metals_needed = list()
+	additional_items = list()
+	var/obj/item/item_of_interest = moulded_recipe.required_material
+	var/datum/material/material = initial(item_of_interest.melting_material)
+	var/melty = initial(item_of_interest.melt_amount)
+	if(!material)
+		var/obj/item/ingot = initial(item_of_interest.smeltresult)
+		material = initial(ingot.melting_material)
+		melty = 100
+	if(material && !ispath(material, /datum/material/coke))
+		metals_needed[material] += melty
+	else
+		additional_items += item_of_interest
+
+	for(var/obj/item/item_path as anything in moulded_recipe.additional_items)
+		material = initial(item_path.melting_material)
+		melty = initial(item_path.melt_amount)
+		if(!material)
+			var/obj/item/ingot = initial(item_path.smeltresult)
+			material = initial(ingot.melting_material)
+			melty = 100
+		if(material && !ispath(material, /datum/material/coke))
+			metals_needed[material] += melty
+		else
+			additional_items += item_path
+
+	var/biggest_metal
+	var/highest = 0
+	for(var/path in metals_needed)
+		var/metal_amount = metals_needed[path]
+		if(metal_amount > highest)
+			biggest_metal = path
+			highest = metal_amount
+		required_metal_amount += metal_amount
+
+	filling_metal = biggest_metal
+
+/obj/item/mould/customizable/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
+	if(cooling)
+		return
+	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
+	if(!metal)
+		return
+
+	for(var/datum/material/material as anything in metal.data)
+		if(!ispath(material))
+			continue
+		if(crucible.reagents.chem_temp < initial(material.melting_point))
+			continue
+		if(!(material in metals_needed))
+			continue
+
+		var/metal_amount = min(metal.data[material], metals_needed[material])
+
+		metal.data[material] -= metal_amount
+		if(!metal.data[material])
+			metal.data -= material
+		crucible.reagents.remove_reagent(/datum/reagent/molten_metal, metal_amount)
+		if(!QDELETED(metal))
+			metal.find_largest_metal()
+
+		metals_needed[material] -= metal_amount
+		if(!metals_needed[material])
+			metals_needed -= material
+
+		to_chat(user, span_notice("I pour [UNIT_FORM_STRING(metal_amount)] of [material.name] into [src]."))
+		fufilled_metal += metal_amount
+
+	update_appearance(UPDATE_OVERLAYS)
+	check_start_conditions(user)
+
+/obj/item/mould/customizable/proc/try_adding(atom/interacting_with, mob/living/user)
+	if(cooling)
+		return
+
+	if(interacting_with.type in additional_items)
+		additional_items -= interacting_with.type
+		to_chat(user, span_notice("I add [interacting_with] to [src]."))
+		qdel(interacting_with)
+
+	check_start_conditions(user)
+
+/obj/item/mould/customizable/reset_state()
+	. = ..()
+	find_recipe_requirements()
+
+/obj/item/mould/customizable/check_start_conditions(mob/living/user)
+	if(!length(metals_needed) && !length(additional_items))
+		start_cooling()
+		if(user)
+			var/recipe_skill = moulded_recipe.appro_skill
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+			amt2raise *= user.get_learning_boon(recipe_skill)
+			if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
+				user.mind.add_sleep_experience(recipe_skill, amt2raise)
+			else if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
+				amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
+				user.mind.add_sleep_experience(recipe_skill, amt2raise)
+		return TRUE
+
+	return FALSE
+
+/obj/item/mould/customizable/create_item()
+	moulded_recipe.accumulated_quality = 1
+	moulded_recipe.num_of_materials = 1
+	moulded_recipe.numberofhits = 1
+	moulded_recipe.accumulated_quality = MINIMUM_ANVIL_MINIGAME_SCORE
+	moulded_recipe.material_quality = SMELTERY_QUALITY_NORMAL
+	moulded_recipe.skill_quality = 3.5
+	moulded_recipe.handle_creation(get_turf(src))
+	return ..()

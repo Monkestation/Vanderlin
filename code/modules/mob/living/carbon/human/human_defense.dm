@@ -660,7 +660,7 @@
 				if("germs")
 					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
 				if("self_heal")
-					mechanics_result += "Small injuries will heal on their own."
+					mechanics_result += "Small injuries will heal on their own. Bandage to stop the bleed."
 
 		var/list/result = list()
 		if(length(mechanics_result))

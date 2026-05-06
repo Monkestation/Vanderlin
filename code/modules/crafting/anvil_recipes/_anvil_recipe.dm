@@ -9,8 +9,8 @@
 	var/num_of_materials = 1
 	/// The skill that will be taken into account when crafting.
 	var/appro_skill = /datum/attribute/skill/craft/blacksmithing
-	/// The typepath of the materialwe need to start the recipe.
-	var/atom/required_material
+	/// The typepath of the material we need to start the recipe.
+	var/obj/item/required_material
 	/// The item created when the recipe is fulfilled. SHOULD BE A TYPEPATH
 	var/atom/created_item
 	/// How much of the item does this recipe create?
@@ -131,7 +131,7 @@
 	for(var/i in 1 to output_amount)
 		var/obj/item/output_item = new created_item(output_location)
 		handle_output(output_item, quality_calc)
-		output_item.OnCrafted(user.dir, user)
+		output_item.OnCrafted(user?.dir, user)
 
 	qdel(quality_calc)
 

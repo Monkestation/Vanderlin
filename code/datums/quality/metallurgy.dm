@@ -20,7 +20,7 @@
 			"description" = "It shows signs of careful refinement.",
 		),
 		SMELTERY_QUALITY_GREAT = list(
-			"name_prefix" = list("high-grade", "superior", "fine"),
+			"name_prefix" = list("high-grade", "superior"),
 			"description" = list(
 				"It gleams with exceptional purity.",
 				"The metal structure appears flawless.",
@@ -28,7 +28,7 @@
 			),
 		),
 		SMELTERY_QUALITY_EXCELLENT = list(
-			"name_prefix" = list("pristine", "flawless", "legendary"),
+			"name_prefix" = list("pristine", "legendary"),
 			"description" = list(
 				"It represents the pinnacle of metallurgical perfection.",
 				"The metal seems to shine with inner light.",

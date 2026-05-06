@@ -53,7 +53,7 @@
 	var/difficulty_penalty = difficulty_modifier * 0.3
 
 	var/final_quality = skill_component + material_component + performance_component - difficulty_penalty
-	final_quality += BLACKSMITH_QUALITY_SPOILED
+	final_quality -= 7
 
 	return clamp(final_quality, BLACKSMITH_QUALITY_SPOILED, BLACKSMITH_QUALITY_LEGENDARY)
 
