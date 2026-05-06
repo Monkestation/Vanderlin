@@ -411,6 +411,6 @@
 	moulded_recipe.numberofhits = 1
 	moulded_recipe.accumulated_quality = MINIMUM_ANVIL_MINIGAME_SCORE
 	moulded_recipe.material_quality = SMELTERY_QUALITY_NORMAL
-	moulded_recipe.skill_quality = 3.5
+	moulded_recipe.skill_quality = 3
 	moulded_recipe.handle_creation(get_turf(src))
 	return ..()
