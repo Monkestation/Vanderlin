@@ -140,7 +140,7 @@
 		return
 
 	var/skill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms)
-	if(skill < 10)
+ 	if(skill < 10)
 		balloon_alert(user, "don't know how!")
 		return
 

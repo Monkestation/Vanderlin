@@ -8,3 +8,10 @@
 	flag =  "piercing"
 	hitsound_wall = "ricochet"
 	impact_effect_type = /obj/effect/temp_visual/impact_effect
+
+/obj/projectile/bullet/pellet
+	name = "pellet"
+	damage = 15
+	armor_penetration = 100
+	speed = 0.6
+	woundclass = BCLASS_SHOT

@@ -10,6 +10,22 @@
 	force = DAMAGE_KNIFE - 7
 	item_weight = 75 GRAMS
 
+/obj/item/ammo_casing/caseless/pelletshot
+	name = "pelletshot"
+	desc = "A handful of pellet shots, made to punch many holes into a packed bunch of enemies."
+	projectile_type = /obj/projectile/bullet/pellet
+	caliber = "pelletshot" //shotgun variant of lead balls essentially
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "pellets"
+	dropshrink = 0.5
+	possible_item_intents = list(INTENT_USE)
+	pellets = 6
+	variance = 10
+	randomspread = TRUE
+
+	force = DAMAGE_KNIFE - 7
+	item_weight = 75 GRAMS
+
 /obj/item/ammo_casing/caseless/cball
 	name = "large cannonball"
 	desc = "A round lead ball. Complex and still spherical."

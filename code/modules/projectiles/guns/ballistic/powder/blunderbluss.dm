@@ -1,9 +1,9 @@
-/obj/item/gun/ballistic/powder/musket
-	name = "musket"
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss
+	name = "blunderbuss"
 	desc = "The current peak of Grenzelholfian firearms. It uses a much less complex firing mechanism than previous weapons."
 	icon = 'icons/roguetown/weapons/64/guns.dmi'
-	icon_state = "musket"
-	base_icon_state = "musket"
+	icon_state = "blunderbuss"
+	base_icon_state = "blunderbuss"
 	experimental_inhand = TRUE
 	experimental_onback = TRUE
 	bigboy = TRUE
@@ -16,42 +16,44 @@
 	sellprice = 400
 	item_weight = 4.5 KILOGRAMS
 
-	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH)
+	possible_item_intents = list(/datum/intent/shoot/musket, /datum/intent/shoot/musket/arc, POLEARM_BASH) //TODO: CHECK THIS
 	force = 10
 	can_parry = TRUE
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shotgun
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shotgun
 	weapon_weight = WEAPON_HEAVY
 	recoil = 10
 	randomspread = 2
 	spread = 2
 	projectile_damage_multiplier = 3.5
 
-	ramrod_type = /obj/item/ramrod/musket
+	ramrod_type = /obj/item/ramrod/blunderbuss
 	powder_required = 10
 	/// The bayonet if affixed
 	var/obj/item/weapon/knife/dagger/bayonet/bayonet = null
 
-/obj/item/gun/ballistic/powder/musket/Initialize(mapload)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/Initialize(mapload)
 	bayonet = new(src)
 	return ..()
 
-/obj/item/gun/ballistic/powder/musket/Destroy(force)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/Destroy(force)
 	if(!QDELETED(bayonet))
 		QDEL_NULL(bayonet)
 	return ..()
 
-/obj/item/gun/ballistic/powder/musket/Exited(atom/movable/exited, atom/newLoc)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/Exited(atom/movable/exited, atom/newLoc)
 	. = ..()
 	if(exited == bayonet)
 		bayonet = null
 
-/obj/item/gun/ballistic/powder/musket/update_icon_state()
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state][cocked ? "_cocked" : "_uncocked"][ramrod ? "_ramrod" : ""][bayonet ? "_bayonet" : ""]" // God weeps
 
-/obj/item/gun/ballistic/powder/musket/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
 	. = ..()
 	if(!bayonet && istype(attacking_item, /obj/item/weapon/knife/dagger/bayonet))
 		balloon_alert(user, "attached!")
@@ -59,7 +61,7 @@
 		bayonet = attacking_item
 		update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/powder/musket/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -73,13 +75,18 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/gun/ballistic/powder/musket/pre_attack(atom/target, mob/living/user, list/modifiers)
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/pre_attack(atom/target, mob/living/user, list/modifiers)
 	. = ..()
 	if(bayonet && user.cmode) // Bayonet acts as a proxy attacker if present
 		INVOKE_ASYNC(bayonet, TYPE_PROC_REF(/obj/item, melee_attack_chain), user, target, modifiers - RIGHT_CLICK)
 		return TRUE
 
-/obj/item/gun/ballistic/powder/musket/getonmobprop(tag)
+/obj/item/ramrod/blunderbuss
+	name = "blunderbuss ramrod"
+	icon_state = "ramrod_musket"
+	item_weight = 300 GRAMS
+
+/obj/item/gun/ballistic/powder/wheellock/blunderbuss/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -155,17 +162,3 @@
 					"eastabove" = 0,
 					"westabove" = 0
 				)
-
-/obj/item/weapon/knife/dagger/bayonet
-	name = "bayonet"
-	force = DAMAGE_KNIFE+2
-	wdefense = GOOD_PARRY
-	wlength = WLENGTH_LONG
-	blade_dulling = DULLING_BASHCHOP
-	max_blade_int = 100
-	item_weight = 300 GRAMS
-
-/obj/item/ramrod/musket
-	name = "musket ramrod"
-	icon_state = "ramrod_musket"
-	item_weight = 300 GRAMS
