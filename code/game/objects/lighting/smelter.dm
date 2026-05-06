@@ -256,5 +256,5 @@
 
 	max_contained_items = initial(max_contained_items)
 	playsound(src,'sound/misc/smelter_fin.ogg', 100, FALSE)
-	visible_message(span_notice("\The [src] finished smelting."))
+	visible_message(span_notice("[src] finished smelting."))
 	smelting_progress = smelting_threshold + 1
