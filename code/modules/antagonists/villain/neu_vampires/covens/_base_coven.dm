@@ -405,6 +405,8 @@
 		if("roleplay")
 			// Encourage roleplay with XP
 			final_amount = amount * 0.8
+		if("buttonadd")
+			final_amount = amount * 0.5
 
 	// Apply level-based diminishing returns for power use
 	if(source == "power_use" && power_used)
@@ -421,6 +423,20 @@
 /**
  * XP gain triggers for various game events
  */
+
+//Used in the interface button
+/datum/coven/proc/addButtonExp(amount)
+	if(!amount || amount <= 0)
+		return
+
+	if(owner.bloodpool < amount)
+		to_chat(owner, span_warning("You don't have enough vitae to spend"))
+		return
+	owner.adjust_bloodpool(-amount)
+	gain_experience_from_source(amount, "buttonadd") // exp gain from this is halved so a vampire cannot just insta buy t5 on spawn
+
+	if(owner)
+		to_chat(owner, span_boldnotice("You have spent [amount] vitae in [src.name]."))
 
 // Called when a power is successfully used
 /datum/coven/proc/on_power_use_success(datum/coven_power/power, is_critical = FALSE, exp_multiplier = 1, vitae_spent = 0)
