@@ -380,7 +380,7 @@
 	created_item = /obj/item/mould/ingot
 
 /datum/anvil_recipe/tools/casting/ingot_mould/iron
-	name = "Ingot mould (iron) (+Iron)"
+	name = "Ingot mould (iron)"
 	required_material = /obj/item/ingot/iron
 
 /datum/anvil_recipe/tools/casting/generic_mould

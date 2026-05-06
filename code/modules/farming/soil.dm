@@ -676,7 +676,7 @@
 
 	var/total_potential_time = plant.maturation_time + plant.produce_time + (20 MINUTES)
 	var/max_quality_points = 30 * (total_potential_time / (6 MINUTES))
-	var/progress_percent = round((quality_points / max_quality_points) * 100, 1)
+	var/progress_percent = PERCENT(quality_points / max_quality_points)
 
 	var/quality_name = "Regular"
 	switch(crop_quality)
@@ -687,7 +687,7 @@
 		if(CROP_QUALITY_DIAMOND)
 			quality_name = "Diamond"
 
-	return "Current Quality: [quality_name] ([progress_percent]% of maximum potential)"
+	return "Current Quality: [quality_name] ([total_potential_time], [max_quality_points], [progress_percent]% of maximum potential)"
 
 // Calculate quality modifier based on NPK balance
 /obj/structure/soil/proc/calculate_npk_quality_modifier()

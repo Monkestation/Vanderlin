@@ -107,11 +107,11 @@
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
 
-	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2 // Smelting is already a timesink, this is justified to accelerate levelling
+	var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1)
 	amt2raise *= (metal_amount / required_metal_amount)
 	amt2raise *= user.get_learning_boon(/datum/attribute/skill/craft/smelting)
-	if(amt2raise > 0)
-		user.mind.add_sleep_experience(/datum/attribute/skill/craft/smelting, amt2raise)
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/smelting, amt2raise)
+	SEND_SIGNAL(user, COMSIG_ITEM_SMELTED)
 
 	to_chat(user, span_notice("I pour [UNIT_FORM_STRING(metal_amount)] of [filling_metal.name] into [src]."))
 	fufilled_metal += metal_amount
@@ -305,6 +305,8 @@
 /obj/item/mould/customizable/proc/find_recipe_requirements()
 	metals_needed = list()
 	additional_items = list()
+	if(!moulded_recipe)
+		return
 	var/obj/item/item_of_interest = moulded_recipe.required_material
 	var/datum/material/material = initial(item_of_interest.melting_material)
 	var/melty = initial(item_of_interest.melt_amount)
@@ -394,7 +396,7 @@
 		start_cooling()
 		if(user)
 			var/recipe_skill = moulded_recipe.appro_skill
-			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+			var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1)
 			amt2raise *= user.get_learning_boon(recipe_skill)
 			if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
 				user.mind.add_sleep_experience(recipe_skill, amt2raise)
@@ -411,6 +413,6 @@
 	moulded_recipe.numberofhits = 1
 	moulded_recipe.accumulated_quality = MINIMUM_ANVIL_MINIGAME_SCORE
 	moulded_recipe.material_quality = SMELTERY_QUALITY_NORMAL
-	moulded_recipe.skill_quality = 3
+	moulded_recipe.skill_quality = 3.5
 	moulded_recipe.handle_creation(get_turf(src))
 	return ..()

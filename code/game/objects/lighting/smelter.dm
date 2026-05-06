@@ -83,11 +83,10 @@
 	if(.)
 		if(HAS_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED))
 			var/mob/living/living_user = user
-			var/boon = living_user.get_learning_boon(/datum/attribute/skill/craft/smelting)
-			var/amt2raise =  GET_MOB_ATTRIBUTE_VALUE(living_user, STAT_INTELLIGENCE) * 2 // Smelting is already a timesink, this is justified to accelerate levelling
-			if(amt2raise > 0)
-				living_user.adjust_experience(/datum/attribute/skill/craft/smelting, amt2raise * boon, FALSE)
-				SEND_SIGNAL(living_user, COMSIG_ITEM_SMELTED)
+			var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1)
+			amt2raise *= living_user.get_learning_boon(/datum/attribute/skill/craft/smelting)
+			living_user.mind.add_sleep_experience(/datum/attribute/skill/craft/smelting, amt2raise, FALSE)
+			SEND_SIGNAL(living_user, COMSIG_ITEM_SMELTED)
 			REMOVE_TRAIT(retrieved_item, TRAIT_NEWLY_SMELTED, TRAIT_GENERIC)
 
 	user.adjust_stamina(user.maximum_stamina / 20)

@@ -196,6 +196,7 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_CHOP)
 	alt_intents = null
 	item_weight = 1.2 KILOGRAMS
+	smeltresult = /obj/item/ingot/steel_slag
 
 /obj/item/weapon/sword/kaskara/iron
 	name = "iron kaskara"

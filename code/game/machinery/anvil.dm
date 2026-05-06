@@ -188,14 +188,13 @@
 			user.mind.add_sleep_experience(recipe_skill, amt2raise , FALSE)
 
 		// Breakthrough system for RNG success
-		if(quality_score != 100)
-			var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
-			var/total_chance = GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) * GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)/10
-			if(istype(hammer))
-				total_chance += (1 / hammer.toolspeed)
-			if(prob((1 + total_chance)))
-				user.flash_fullscreen("whiteflash")
-				quality_score = 100
+		var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
+		var/total_chance = GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) * GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)/10
+		if(istype(hammer))
+			total_chance += (1 / hammer.toolspeed)
+		if(prob((1 + total_chance)))
+			user.flash_fullscreen("whiteflash")
+			quality_score = 100
 
 	var/success = recipe.advance(user, quality_score)
 	if(!success)
@@ -203,15 +202,15 @@
 
 	if(quality_score >= 80)
 		user.visible_message(span_greentext("[user] deftly strikes the bar!"))
-		var/datum/effect_system/spark_spread/sparks = new()
-		var/turf/front = get_turf(src)
-		sparks.set_up(1, 1, front)
-		sparks.start()
 	else if(quality_score >= 40)
 		user.visible_message(span_info("[user] strikes the bar!"))
 	else
 		user.visible_message(span_warning("[user] fumbles the bar!"))
 
+	var/datum/effect_system/spark_spread/sparks = new()
+	var/turf/front = get_turf(src)
+	sparks.set_up(1, 1, front)
+	sparks.start()
 	user.adjust_stamina(user.maximum_stamina / 4)
 
 	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)

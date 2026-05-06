@@ -5,7 +5,7 @@
 
 /datum/anvil_recipe/slag/handle_output(obj/item/output_item, datum/quality_calculator/blacksmithing/quality_calculator)
 	var/average_performance = accumulated_quality / numberofhits
-	if(average_performance >= 30) // Did you even try?
+	if(average_performance >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		output_item.set_quality(material_quality / num_of_materials)
 
 /datum/anvil_recipe/slag/steel

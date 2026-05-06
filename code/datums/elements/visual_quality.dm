@@ -31,7 +31,7 @@
 		RegisterSignal(target, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_overlay_on_signal))
 		target_item.update_appearance(UPDATE_OVERLAYS)
 
-	if(quality >= CROP_QUALITY_GOLD) // I'd rather be shiny
+	if(quality >= CROP_QUALITY_DIAMOND) // I'd rather be shiny
 		target_item.AddComponent(/datum/component/particle_spewer/sparkle/turf_only)
 
 /datum/element/visual_quality/Detach(datum/source, ...)
