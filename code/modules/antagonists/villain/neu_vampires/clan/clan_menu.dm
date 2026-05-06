@@ -40,7 +40,7 @@
 /datum/clan_menu_interface/proc/generate_welcome_screen_html()
 	var/clan_downside = "burn in sunlight"
 	var/blood_preference = "any blood"
-	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Drain someone's blood to critical levels to gain the option to embrace them as a new vampire.</div>"}
+	var/reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> Bite someone's neck and then their blood to critical levels to gain the option to embrace them as a new vampire using the "sire mortal" verb.</div>"}
 	if(!user.clan_position?.can_assign_positions)
 		reproduce_string = {"<div class="tip-item"><strong>Creating Progeny:</strong> You are unable to sire new vampires.</div>"}
 
@@ -54,7 +54,8 @@
 
 		<div class="intro-section">
 			<p>Select a coven from the sidebar to view its research tree and manage your powers.
-			Each coven represents a different aspect of your vampiric abilities.</p>
+			Each coven represents a different aspect of your vampiric abilities.
+			You can input a number of vitae you wish to spend under a coven to increase the experience on it. Any vitae amount will be divived in half.</p>
 		</div>
 
 		<div class="vampire-mechanics">
@@ -101,7 +102,7 @@
 			<div class="coven-progress">
 				<div class="coven-progress-fill" style="width: [experience_percent]%"></div>
 			</div>
-			<input class='exp-input' type="number" id="xp_input_[coven_name]" value="" min="10" step="10" onclick="event.stopPropagation();">
+			<input class='exp-input' type="number" id="xp_input_[coven_name]" value="" min="10" step="10" max="[coven.experience_needed * 2]" onclick="event.stopPropagation();">
 			<button class='exp-button' onclick="addXP('[coven_name]')">+</button>
 		</li>
 		"}
