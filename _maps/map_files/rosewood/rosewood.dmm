@@ -37356,6 +37356,26 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/magician)
+"sfO" = (
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/cobblerock,
+/area/indoors/town/keep)
 "sgg" = (
 /obj/item/reagent_containers/food/snacks/crow,
 /obj/structure/fluff/nest,
@@ -190630,7 +190650,7 @@ wGD
 tAa
 bdB
 dRe
-xRI
+sfO
 oTc
 wGD
 iaY
