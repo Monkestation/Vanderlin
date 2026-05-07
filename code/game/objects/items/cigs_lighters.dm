@@ -369,6 +369,43 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	pixel_x = base_pixel_x + rand(-5, 5)
 	pixel_y = base_pixel_y + rand(-5, 5)
 
+//Cigars
+
+/obj/item/clothing/face/cigarette/zigar
+	name = "zigar"
+	desc = "A strong, manly verison of the common zig, this isnt your average smokers treat- No, this is for the humble, the wise, the ones 'in' on it. You know who you are."
+	icon_state = "zigaroff"
+	icon_on = "zigaron"
+	type_butt = "zigarbutt"
+	throw_speed = 0.5
+	item_state = "spliffoff"
+	smoketime = 180
+	chem_volume = 120
+	list_reagents = list(/datum/reagent/drug/nicotine = 120)
+	muteinmouth = FALSE
+	abstract_type = /obj/item/clothing/face/cigarette/zigar
+
+/obj/item/clothing/face/cigarette/zigar/Initialize()
+	. = ..()
+	pixel_x = base_pixel_x + rand(-5, 5)
+	pixel_y = base_pixel_y + rand(-5, 5)
+
+/obj/item/zigarbutt
+	name = "zigar butt"
+	desc = ""
+	icon = 'icons/roguetown/items/lighting.dmi'
+	icon_state = "roach"
+	w_class = WEIGHT_CLASS_TINY
+	throwforce = 0
+	slot_flags = ITEM_SLOT_MOUTH
+	spitoutmouth = TRUE
+	resistance_flags = FLAMMABLE
+
+/obj/item/zigarbutt/Initialize()
+	. = ..()
+	pixel_x = base_pixel_x + rand(-5, 5)
+	pixel_y = base_pixel_y + rand(-5, 5)
+
 /////////////////
 //SMOKING PIPES//
 /////////////////

@@ -27,6 +27,10 @@
 	created_item = /obj/item/kitchen/fork/pewter
 	createditem_extra = 1
 
+/datum/anvil_recipe/tools/tin/zig
+	name = "tin zigbox"
+	created_item = /obj/item/storage/fancy/cigarettes/tinzig/empty
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper
