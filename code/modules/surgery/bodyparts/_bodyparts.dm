@@ -849,6 +849,10 @@
 		multiplier *= 0.75
 	if(multiplier <= 0)
 		return 0
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.dna?.species)
+			multiplier *= human_owner.dna?.species.pain_mod
 	var/constant_pain = 0
 	constant_pain += SHOCK_MOD_BRUTE * brute_dam
 	constant_pain += SHOCK_MOD_BURN * burn_dam
