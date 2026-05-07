@@ -22,7 +22,7 @@
 	if(unique_name)
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
-	faction += "[REF(src)]"
+	add_ally(src)
 	GLOB.mob_living_list += src
 	AddElement(/datum/element/movetype_handler)
 	init_faith()
@@ -130,7 +130,7 @@
 		visible_message("[src] falls on top of [crumpled_mob]!")
 		crumpled_mob.Stun(1)
 		crumpled_mob.AdjustKnockdown(levels * 20)
-		crumpled_mob.take_overall_damage(impact_damage)
+		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)
 
 	return ..()
 
@@ -153,7 +153,7 @@
 	playsound(src, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!iscarbon(src)) // carbons need to do their own damage calculations based on bodyparts
 		var/encumbrance_multiplier = 0.5 + (ENCUMBRANCE_TO_SIGMOID(encumbrance) * 0.5) // half base falling damage. scale up to 100% based on encumbrance
-		adjustBruteLoss(((levels * 10) * encumbrance_multiplier) ** 1.5)
+		adjustBruteLoss(((levels * 10) * encumbrance_multiplier) ** 1.5, damage_type = BCLASS_BLUNT)
 		AdjustStun(levels * 2 SECONDS * encumbrance_multiplier)
 		AdjustKnockdown(levels * 2 SECONDS * encumbrance_multiplier)
 	return .
@@ -171,6 +171,10 @@
 		var/mob/M = A
 		if(MobBump(M))
 			return
+	if(isturf(A))
+		var/turf/bump_turf = A
+		if(TurfBump(bump_turf))
+			return
 	if(isobj(A))
 		var/obj/O = A
 		if(ObjBump(O))
@@ -180,9 +184,6 @@
 		if(PushAM(AM, move_force))
 			return
 
-/mob/living/Bumped(atom/movable/AM)
-	..()
-	last_bumped = world.time
 
 //Called when we bump onto a mob
 /mob/living/proc/MobBump(mob/M)
@@ -191,6 +192,16 @@
 
 	if(now_pushing)
 		return TRUE
+
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [M]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(M, src))
+		var/atom/throw_target_mob = get_edge_target_turf(M, get_dir(src, M))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
+		if(get_chem_effect(CE_BOUNCY) > 5)
+			M.throw_at(throw_target_mob, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
+
 
 	var/they_can_move = TRUE
 	if(isliving(M))
@@ -348,7 +359,19 @@
 				return
 //Called when we bump onto an obj
 /mob/living/proc/ObjBump(obj/O)
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [O]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(O, src))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
 	return
+
+/mob/living/proc/TurfBump(turf/T)
+	if(get_chem_effect(CE_BOUNCY))
+		visible_message("<span class='warning'>[src] bounces off [T]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(T, src))
+
+		src.throw_at(throw_target, get_chem_effect(CE_BOUNCY) * 5, 3, force = 0)
 
 //Called when we want to push an atom/movable
 /mob/living/proc/PushAM(atom/movable/AM, force = move_force)
@@ -904,6 +927,12 @@
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
 	remove_offsets(LYING_DOWN_TRAIT)
 
+/mob/living/proc/update_density()
+	if(HAS_TRAIT(src, TRAIT_UNDENSE))
+		set_density(FALSE)
+	else
+		set_density(TRUE)
+
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
 	var/list/ret = list()
@@ -937,7 +966,24 @@
 		if(blood_volume <= 0)
 			set_health(NONE)
 	update_stat()
+	update_pain()
+	update_shock()
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE, amount)
+
+/// Updates pain value
+/mob/living/proc/update_pain()
+	painloss = getPainLoss()
+	return painloss
+
+/// Updates shock value
+/mob/living/proc/update_shock()
+	traumatic_shock = getShock(TRUE)
+	return traumatic_shock
+
+/// Can this mob get affected by shock?
+/mob/living/proc/can_feel_pain()
+	return FALSE
+
 
 /**
  * Proc used to resuscitate a mob, bringing them back to life.
@@ -1077,7 +1123,7 @@
 /mob/living/carbon/human/can_be_revived()
 	. = ..()
 	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(!istype(H) || H.rotted || H.skeletonized)
+	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
 		return FALSE
 	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
 	if(!istype(B) || B.brain_death)
@@ -1163,9 +1209,12 @@
 	// 			pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
 	// 			pulledby.moving_from_pull = null
 
-	if(moving_diagonally != FIRST_DIAG_STEP && isliving(pulledby))
-		var/mob/living/puller = pulledby
-		puller.set_pull_offsets(src, puller.grab_state)
+	if(moving_diagonally != FIRST_DIAG_STEP)
+		if(isliving(pulledby))
+			var/mob/living/puller = pulledby
+			puller.set_pull_offsets(src, puller.grab_state)
+		else if(isliving(pulling)) // EXPERIMENTAL: Set pulled person offsets when puller moves
+			set_pull_offsets(pulling, grab_state)
 
 //	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
 	if(active_storage)
@@ -1634,13 +1683,6 @@
 
 	if(moving_resist) //we resisted by trying to move
 		client?.move_delay = world.time + 50
-
-	var/pain_factor = 1
-	if(istype(pulledby, /mob/living/carbon))
-		var/mob/living/carbon/C = pulledby
-		pain_factor += C.get_pain_percent() * 0.5
-
-	resist_chance *= pain_factor
 
 	adjust_stamina(rand(2,5))
 	pulledby.adjust_stamina(rand(2,5))
@@ -2755,10 +2797,9 @@
 /// Proc for giving a mob a new 'friend', generally used for AI control and targeting. Returns false if already friends.
 /mob/living/proc/befriend(mob/living/new_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(new_friend)
-	if (faction.Find(friend_ref))
+	if (has_ally(new_friend))
 		return FALSE
-	faction |= friend_ref
+	add_ally(new_friend)
 	ai_controller?.insert_blackboard_key_lazylist(BB_FRIENDS_LIST, new_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
@@ -2773,10 +2814,9 @@
 /// Proc for removing a friend you added with the proc 'befriend'. Returns true if you removed a friend.
 /mob/living/proc/unfriend(mob/living/old_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(old_friend)
-	if (!faction.Find(friend_ref))
+	if (!has_ally(old_friend))
 		return FALSE
-	faction -= friend_ref
+	remove_ally(old_friend)
 	ai_controller?.remove_thing_from_blackboard_key(BB_FRIENDS_LIST, old_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
@@ -2791,9 +2831,6 @@
 	return
 
 /mob/proc/taunted(mob/user)
-	for(var/mob/living/simple_animal/hostile/retaliate/A in view(7,src))
-		if(A.owner == user)
-			A.emote("aggro")
 	return
 
 /mob/proc/shood(mob/user)

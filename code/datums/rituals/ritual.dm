@@ -321,7 +321,7 @@ GLOBAL_LIST_INIT(t2buffrunerituallist, generate_t2buff_rituallist())
 		summoned = mob_to_summon
 	else
 		summoned = new mob_to_summon(loc)
-		ADD_TRAIT(summoned, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
+		ADD_TRAIT(summoned, TRAIT_PACIFISM, MAGIC_TRAIT)	//can't kill while planar bound.
 		summoned.status_flags += GODMODE//It's not meant to be killable until released from its planar binding.
 		summoned.binded = TRUE	//No auto movement, no moving to targets
 		summoned.SetParalyzed(90 SECONDS)

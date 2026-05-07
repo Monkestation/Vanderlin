@@ -9,6 +9,10 @@
 	icon = 'icons/mob/human_parts.dmi'
 	icon_state = ""
 	layer = BELOW_MOB_LAYER //so it isn't hidden behind objects when on the floor
+
+	germ_level = GERM_LEVEL_STERILE
+
+	var/disinfects_in
 	var/mob/living/carbon/owner
 	var/mob/living/carbon/original_owner
 	/// a cache of the original owner's DNA unique identifier. only gets updated from shit like changeling absorb so it carries between owners
@@ -21,6 +25,9 @@
 	var/aux_layer
 	var/body_part = 0 //bitflag used to check which clothes cover this bodypart
 	var/held_index = 0 //are we a hand? if so, which one!
+
+	/// Needs to get processed on next life() tick
+	var/needs_processing = FALSE
 
 	// Cavity item + organ stuff
 	/// Maximum item size to be inserted in the cavity
@@ -38,6 +45,9 @@
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/max_damage = 0
+
+	/// Our current stored wound damage multiplier
+	var/damage_multiplier = 1
 
 	/// How efficient this limb is at performing... whatever it performs
 	var/limb_efficiency = 100
@@ -91,7 +101,6 @@
 	var/list/subtargets = list()		//these are subtargets that can be attacked with weapons (crits)
 	var/list/grabtargets = list()		//these are subtargets that can be grabbed
 
-	var/rotted = FALSE
 	var/skeletonized = FALSE
 
 	var/fingers = TRUE
@@ -114,10 +123,11 @@
 
 	var/punch_modifier = 1 // for modifying arm punching damage
 	var/acid_damage_intensity = 0
-	var/lingering_pain = 0
-	var/chronic_pain = 0
-	var/chronic_pain_type = null
-	var/last_severe_injury_time = 0
+
+	/// How damaged the limb needs to be to start taking internal organ damage
+	var/organ_damage_requirement
+	/// How much damage an attack needs to do, at the very least, to damage internal organs
+	var/organ_damage_hit_minimum
 
 	/// artery organ base type
 	var/artery_type = /obj/item/organ/artery
@@ -125,12 +135,51 @@
 	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
 	var/limb_flags = BODYPART_HAS_ARTERY
 
+	/// Multiplier of the limb's pain damage that gets applied to the mob
+	var/pain_damage_coeff = 1
+	/// How much pain this limb is feeling
+	var/pain_dam = 0
+	/// Subtracted to pain the limb feels
+	var/pain_reduction = 0
+	/// Multiplier for incoming pain damage
+	var/incoming_pain_mult = 1
+	/// Amount of pain damage we heal per on_life() tick
+	var/pain_heal_tick = 1
+	/// How much we multiply pain_heal_tick by if the owner is lying down
+	var/pain_heal_rest_multiplier = 3
+	/// Point at which the limb is disabled due to pain
+	var/pain_disability_threshold
+	/// Maximum amount of pain this limb can feel at once
+	var/max_pain_damage
+
+	/// This stupid variable is used by two game mechanics - Brain spilling, gut spilling
+	var/spilled = FALSE
+	/// Represents the icon we use when spilled == TRUE
+	var/spilled_overlay = "brain_busted"
+
+	/// How many injuries we have in this bodypart - NOT always equal to the length of injuries list!
+	var/number_injuries = 0
+	/// The (Bay-style) wound datums currently afflicting this bodypart
+	var/list/datum/injury/injuries
+	/// The last injury to have afflicted this bodypart
+	var/datum/injury/last_injury
+
 /obj/item/bodypart/Initialize()
 	. = ..()
 	create_base_organs()
+	if(isnull(max_pain_damage))
+		max_pain_damage = max_damage * 1.5
+	if(isnull(organ_damage_requirement))
+		organ_damage_requirement = max_damage * 0.2
+	if(isnull(organ_damage_hit_minimum))
+		organ_damage_hit_minimum = ORGAN_MINIMUM_DAMAGE
+
 	if(can_be_disabled)
 		RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_gain))
 		RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS), PROC_REF(on_paralysis_trait_loss))
+
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
 	update_HP()
 
 /obj/item/bodypart/Destroy()
@@ -141,6 +190,11 @@
 		remove_embedded_object(I)
 	for(var/datum/wound/wound as anything in wounds)
 		qdel(wound)
+	for(var/injury in injuries)
+		qdel(injury) // injuries is a lazylist, and each injury removes itself from it on deletion.
+	if(LAZYLEN(injuries))
+		stack_trace("[type] qdeleted with [LAZYLEN(injuries)] uncleared injuries!")
+		injuries.Cut()
 	if(bandage)
 		QDEL_NULL(bandage)
 
@@ -159,100 +213,513 @@
 			if(owner)
 				artery.Insert(owner)
 
+/obj/item/bodypart/proc/is_robotic_limb()
+	return (status == BODYPART_ROBOTIC)
+
+/obj/item/bodypart/proc/is_dead()
+	return (limb_flags & BODYPART_DEAD)
+
+/obj/item/bodypart/proc/is_deformed()
+	return (limb_flags & BODYPART_DEFORMED)
+
+/obj/item/bodypart/proc/remove_chronic()
+	if(owner)
+		UnregisterSignal(owner, list(COMSIG_LIVING_LIFE))
+
+///you might wonder why this isn't in life? this saves a metric ton of time since its situational as hell
+/obj/item/bodypart/proc/update_chronic()
+	if(owner)
+		if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE|BODYPART_CHRONIC_ARTHRITIS|BODYPART_CHRONIC_MIGRAINE))
+			RegisterSignal(owner, COMSIG_LIVING_LIFE, PROC_REF(on_owner_life), override = TRUE)
+	update_wounds()
+	update_pain_coeff()
+
+/obj/item/bodypart/proc/on_owner_life()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
+		on_chronic_fracture_life()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
+		on_arthritis_life()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
+		on_migraine_life()
+
+/obj/item/bodypart/proc/on_chronic_fracture_life()
+	if(!prob(2))
+		return
+	if(owner.encumbrance >= ENCUMBRANCE_HEAVY)
+		var/pain_amount = rand(8, 15)
+		if(owner.encumbrance >= ENCUMBRANCE_EXTREME)
+			pain_amount = rand(15, 25)
+			to_chat(owner, span_warning("Your heavy gear puts severe strain on your [name]!"))
+		else
+			to_chat(owner, span_warning("The weight of your equipment aggravates your chronic [name] pain!"))
+		add_pain(pain_amount)
+
+/obj/item/bodypart/proc/on_arthritis_life()
+	if(prob(2))
+		add_pain(rand(7, 14))
+		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
+							"A sharp ache shoots through your [name]!",
+							"Your [name] feels stiff and painful!")
+		to_chat(owner, span_warning(pain_msg))
+
+	if(prob(1) && owner.loc)
+		if(SSParticleWeather.runningWeather && SSParticleWeather.runningWeather.can_weather(owner))
+			add_pain(rand(5, 10))
+			to_chat(owner, span_warning("The weather makes your arthritis act up."))
+
+/obj/item/bodypart/proc/on_migraine_life()
+	if(prob(2))
+		add_pain(rand(5, 15))
+
+		if(prob(30))
+			owner.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))
+			to_chat(owner, span_boldwarning("A severe migraine strikes! Your vision blurs and your head pounds!"))
+		else
+			to_chat(owner, span_warning("A migraine headache begins to build."))
+
+	if(prob(1))
+		if(pain_dam > 20 && owner.loc?.luminosity > 2)
+			add_pain(rand(5, 10))
+			to_chat(owner, span_warning("The flickering flames make your migraine worse!"))
+
+/obj/item/bodypart/proc/update_pain_coeff()
+	var/pain_power = initial(pain_damage_coeff)
+	if(BODYPART_CHRONIC_NERVE_DAMAGE in limb_flags)
+		pain_power += 0.25
+	pain_damage_coeff = pain_power
+
+/// Can this bodypart rot or get infected?
+/obj/item/bodypart/proc/can_decay()
+	if(isreagentcontainer(loc))
+		return FALSE /// preserving ah.
+	check_cold()
+	if(CHECK_BITFIELD(limb_flags, BODYPART_FROZEN|BODYPART_DEAD|BODYPART_NO_INFECTION))
+		return FALSE
+	return TRUE
+
+/obj/item/bodypart/proc/check_cold()
+	var/local_temp
+	if(!owner)
+		//Only concern is adding an organ to a freezer when the area around it is cold.
+		if(isturf(loc))
+			var/turf/turf_loc = loc
+			local_temp = turf_loc?.return_temperature()
+		else if(ismob(loc))
+			var/mob/holder = loc
+			var/turf/turf_loc = holder.loc
+			local_temp = turf_loc?.return_temperature()
+	else
+		local_temp = owner.bodytemperature
+
+	// Shouldn't happen but just in case
+	if(isnull(local_temp))
+		return (limb_flags & BODYPART_FROZEN)
+	//you get some leeway...
+	if(local_temp < 15)
+		limb_flags |= BODYPART_FROZEN
+		return (limb_flags & BODYPART_FROZEN)
+
+	limb_flags &= ~BODYPART_FROZEN
+	return (limb_flags & BODYPART_FROZEN)
+
+/**
+ * update_wounds() is called whenever a wound is gained or lost on this bodypart, as well as if there's a change of some kind on a bone wound possibly changing disabled status
+ *
+ * Covers tabulating the damage multipliers we have from wounds (burn specifically), as well as deleting our gauze wrapping if we don't have any wounds that can use bandaging
+ *
+ * Arguments:
+ * * replaced- If true, this is being called from the remove_wound() of a wound that's being replaced, so the bandage that already existed is still relevant, but the new wound hasn't been added yet
+ */
+/obj/item/bodypart/proc/update_wounds(replaced = FALSE)
+	var/dam_mul = initial(damage_multiplier)
+
+	if(BODYPART_CHRONIC_SCAR in limb_flags)
+		dam_mul += 0.20
+	// we can (normally) only have one wound per type, but remember there's multiple types (smites like :B:loodless can generate multiple cuts on a limb)
+	for(var/datum/wound/iter_wound as anything in wounds)
+		dam_mul *= iter_wound.damage_multiplier_penalty
+
+	damage_multiplier = dam_mul
+
+
+/obj/item/bodypart/proc/kill_limb()
+	if(!can_decay())
+		return
+	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+	if(!already_rot)
+		ADD_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+	if(owner && !already_rot)
+		owner.update_body()
+	else
+		update_icon_dropped()
+
+/obj/item/bodypart/proc/revive_limb()
+	var/already_rot = HAS_TRAIT_FROM(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+	if(already_rot)
+		REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
+	if(owner && already_rot)
+		owner.update_body()
+	else
+		update_icon_dropped()
+
+/// Adding/removing germs
+/obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = GERM_LEVEL_MAXIMUM)
+	. = ..()
+	if(germ_level >= INFECTION_LEVEL_THREE && !CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+		kill_limb()
+		if(owner && owner.stat < DEAD)
+			to_chat(owner, span_userdanger("I can't feel my [name] anymore..."))
+	consider_processing()
+
+///Called when TRAIT_ROTTEN is added to the limb.
+/obj/item/bodypart/proc/on_rotten_trait_gain(obj/item/bodypart/source)
+	SIGNAL_HANDLER
+
+	germ_level = INFECTION_LEVEL_THREE
+	limb_flags |= BODYPART_DEAD
+	update_limb(!owner, owner)
+	update_limb_efficiency()
+
+///Called when TRAIT_ROTTEN is removed from the limb.
+/obj/item/bodypart/proc/on_rotten_trait_loss(obj/item/bodypart/source)
+	SIGNAL_HANDLER
+
+	limb_flags &= ~BODYPART_DEAD
+	update_limb(!owner, owner)
+	update_limb_efficiency()
+
+/// Return TRUE to get whatever mob this is in to update health.
+/obj/item/bodypart/proc/on_life(delta_time, times_fired)
+	if(pain_heal_tick && (pain_dam >= DAMAGE_PRECISION))
+		var/multiplier = 1
+		if(owner.body_position == LYING_DOWN)
+			multiplier *= pain_heal_rest_multiplier
+		remove_pain(amount = (pain_heal_tick * multiplier * (0.5 * delta_time)), updating_health = FALSE)
+	if(can_decay())
+		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
+			update_germs(delta_time, times_fired)
+	if(number_injuries)
+		update_injuries(delta_time, times_fired)
+
+/// Check if we need to run on_life()
+/obj/item/bodypart/proc/consider_processing()
+	. = FALSE
+	//else if.. else if.. so on.
+	if(pain_dam >= DAMAGE_PRECISION)
+		. = TRUE
+	else if(number_injuries)
+		. = TRUE
+	else if(can_decay() && germ_level)
+		. = TRUE
+	else if(getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY)
+		. = TRUE
+	needs_processing = .
+
+
+/// Proc for damaging organs inside a limb based on damage values
+/obj/item/bodypart/proc/damage_internal_organs(wounding_type = WOUND_BLUNT, amount = 0, organ_bonus = 0, bare_organ_bonus = 0, forced = FALSE, wound_messages = TRUE)
+	. = FALSE
+	if(organ_bonus == CANT_ORGAN)
+		return
+	var/list/internal_organs = list()
+	internal_organs |= get_organs()
+	//damaging face organs = also damaging head organs
+	var/list/extra_parts = list()
+	if(body_zone == BODY_ZONE_HEAD)
+		extra_parts |= owner.get_bodypart(BODY_ZONE_PRECISE_L_EYE)
+		extra_parts |= owner.get_bodypart(BODY_ZONE_PRECISE_R_EYE)
+	for(var/obj/item/bodypart/extra_part in extra_parts)
+		internal_organs |= extra_part.get_organs()
+	for(var/obj/item/organ/organ as anything in internal_organs)
+		internal_organs -= organ
+		if(!istype(organ))
+			continue
+		if(organ.damage < organ.maxHealth && \
+			(organ.organ_volume * 10 >= 1) && \
+			!CHECK_BITFIELD(organ.organ_flags, ORGAN_NO_VIOLENT_DAMAGE))
+			// Multiply by 10 because pickweight doesn't play nice with decimals
+			internal_organs[organ] = CEILING(organ.organ_volume * 10, 1)
+	if(!LAZYLEN(internal_organs))
+		return
+
+	if(ishuman(owner) && bare_organ_bonus)
+		var/mob/living/carbon/human/human_owner = owner
+		for(var/obj/item/clothing/clothes_check as anything in human_owner.clothingonpart(src))
+			if(clothes_check.armor.getRating(WOUND))
+				bare_organ_bonus = 0
+				break
+
+	var/cur_damage = brute_dam+burn_dam
+	var/damage_amt = amount+organ_bonus+bare_organ_bonus
+	var/organ_damage_minimum = organ_damage_hit_minimum
+	var/organ_damaged_required = organ_damage_requirement
+	switch(wounding_type)
+		// Piercing damage is more likely to damage internal organs
+		if(WOUND_PIERCE)
+			organ_damage_minimum *= 0.5
+		// Slashing damage is *slightly* more likely to damage internal organs
+		if(WOUND_SLASH)
+			organ_damage_minimum *= 0.75
+		// Burn damage is unlikely to damage organs
+		if(WOUND_BURN)
+			organ_damage_minimum *= 1.5
+		// Organ damage minimum is assumed to be the case for blunt anyway
+		else
+			organ_damage_hit_minimum *= 1
+
+	// Wounds can alter our odds of harming organs
+	for(var/datum/wound/oof as anything in wounds)
+		damage_amt += oof.organ_damage_increase
+		organ_damage_minimum = max(1, organ_damage_minimum - oof.organ_minimum_reduction)
+		organ_damaged_required = max(1, organ_damaged_required - oof.organ_required_reduction)
+
+	// Set this to the maximum considered amount if we exceed it
+	damage_amt = min(MAX_CONSIDERED_ORGAN_DAMAGE_ROLL, CEILING(damage_amt, 1))
+	organ_damaged_required = CEILING(organ_damaged_required, 1)
+	organ_damage_minimum = CEILING(organ_damage_minimum, 1)
+	// We haven't hit one or more of the tresholds
+	if(!forced && (!(cur_damage >= organ_damaged_required) || !(damage_amt >= organ_damage_minimum)))
+		return FALSE
+
+	var/organ_hit_chance = 30 * (damage_amt/organ_damage_minimum)
+	// Bones getting in the way aaaaah
+	var/modifier = 1
+
+	organ_hit_chance *= modifier
+	organ_hit_chance = clamp(CEILING(organ_hit_chance, 1), 0, 100)
+	if(!prob(organ_hit_chance) && !forced)
+		return FALSE
+
+	var/obj/item/organ/victim = pickweight(internal_organs)
+	damage_amt = max(0, CEILING((damage_amt * victim.internal_damage_modifier) - victim.internal_damage_reduction, 1))
+	if(damage_amt >= 1)
+		victim.applyOrganDamage(damage_amt)
+	if(owner)
+		if(damage_amt >= 15)
+			owner.custom_pain("<b>MY [uppertext(victim.name)] HURTS!</b>", rand(25, 35), affecting = src, nopainloss = TRUE)
+	return TRUE
+
+/// Creates an injury on the bodypart
+/obj/item/bodypart/proc/create_injury(injury_type = WOUND_BLUNT, damage = 0, surgical = FALSE, wound_messages = TRUE)
+	. = FALSE
+	if(!surgical)
+		var/can_inflict = max_damage - get_damage()
+		damage = min(can_inflict, damage)
+
+	if(damage <= 0)
+		return
+
+	// First check whether we can widen an existing wound
+	if(damage >= 5 && !surgical && length(injuries) && prob(clamp(50 + (number_injuries-1 * 10), 50, 90)))
+		// Piercing injuries cannot "open" into one
+		// Small ass damage should create a new wound entirely
+		var/list/compatible_injuries = list()
+		for(var/thing in injuries)
+			var/datum/injury/candidate_for_widening = thing
+			if(candidate_for_widening.can_worsen(injury_type, damage))
+				compatible_injuries |= candidate_for_widening
+		if(length(compatible_injuries))
+			var/datum/injury/compatible_injury = pick(compatible_injuries)
+			compatible_injury.open_injury(damage)
+			last_injury = compatible_injury
+			. = compatible_injury
+
+	// Creating NEW injury
+	if(!.)
+		var/new_injury_type = get_injury_type(injury_type, damage)
+		if(new_injury_type)
+			var/datum/injury/new_injury = new new_injury_type()
+			// Check whether we can add the wound to an existing wound
+			if(surgical)
+				new_injury.autoheal_cutoff = 0
+				new_injury.injury_flags |= INJURY_SURGICAL
+			else
+				for(var/datum/injury/other in injuries)
+					if(other.can_merge(new_injury))
+						other.merge_injury(new_injury)
+						return other
+			// Apply the injury
+			new_injury.apply_injury(damage, src)
+			last_injury = new_injury
+			. = new_injury
+
+/// Deal with injury healing and other updates
+/obj/item/bodypart/proc/update_injuries(delta_time, times_fired)
+	var/toxins = 0
+	if(owner)
+		toxins = owner.get_chem_effect(CE_TOXIN)
+		//the dylovenal is mightier than the cyanide
+		if(owner?.get_chem_effect(CE_ANTITOX) >= 10)
+			toxins = 0
+		//broken heart
+		if(owner?.getorganslotefficiency(ORGAN_SLOT_HEART) < ORGAN_FAILING_EFFICIENCY)
+			toxins = max(toxins, 1)
+	for(var/datum/injury/injury as anything in injuries)
+		if(injury.damage <= 0)
+			qdel(injury)
+			continue
+
+		// Slow healing
+		var/heal_amt = 0
+
+		if(!toxins && injury.can_autoheal())
+			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.01)
+			if(owner?.IsSleeping())
+				heal_amt *= 4
+
+		if(heal_amt)
+			injury.heal_damage(heal_amt * (0.5 * delta_time))
+
+		// Bleeding
+		if(owner)
+			injury.bleed_timer = max(0, injury.bleed_timer - (0.5 * delta_time))
+
+	// Sync the limb's damage with its injuries
+	update_damages()
+	// Also update efficiency
+	update_limb_efficiency()
+	owner.update_damage_overlays()
+
+/// Updates brute_damn and burn_damn from injuries
+/obj/item/bodypart/proc/update_damages()
+	number_injuries = 0
+	brute_dam = 0
+	burn_dam = 0
+	for(var/datum/injury/injury as anything in injuries)
+		if(injury.damage <= 0)
+			continue
+
+		if(injury.damage_type == WOUND_BURN)
+			burn_dam += injury.damage
+		else
+			brute_dam += injury.damage
+
+		number_injuries += injury.amount
+
+/// General handling of infections
+/obj/item/bodypart/proc/update_germs(delta_time, times_fired)
+	//Cryo stops germs from moving and doing their bad stuffs
+	if(owner.bodytemperature <= -15)
+		return
+	handle_germ_sync(delta_time, times_fired)
+	handle_germ_effects(delta_time, times_fired)
+	handle_antibiotics(delta_time, times_fired)
+
+/// Try to sync wound/inuries etc with our germ level
+/obj/item/bodypart/proc/handle_germ_sync(delta_time, times_fired)
+	// If we have no wounds, nor injuries, nor germ level, no point in trying to update
+	if(!length(wounds) && !length(injuries) && (germ_level <= 0))
+		return
+
+	var/turf/open/floor/open_turf = get_turf(owner)
+	var/owner_germ_level = 2*owner.germ_level
+	for(var/obj/item/embeddies in embedded_objects)
+		owner_germ_level += (embeddies.germ_level/20)
+
+	// Open injuries can become infected, regardless of antibiotics
+	if(istype(open_turf))
+		for(var/datum/injury/injury as anything in injuries)
+			if(injury.infection_check(delta_time, times_fired) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
+				injury.adjust_germ_level(injury.infection_rate * (0.5 * delta_time))
+
+	// If we have sufficient antibiotics, then skip over this stuff, the infection is going away
+	var/antibiotics = owner.get_antibiotics()
+	if(antibiotics >= 10)
+		return
+
+	for(var/datum/injury/injury as anything in injuries)
+		//Infected injuries raise the bodypart's germ level
+		if(injury.germ_level > germ_level || DT_PROB(CEILING(min(injury.germ_level/5, 40)/2, 1), delta_time))
+			adjust_germ_level(injury.infection_rate * (0.5 * delta_time))
+			break	//limit increase to a maximum of one injury infection increase per 2 seconds
+
+
+/// Handle infection effects
+/obj/item/bodypart/proc/handle_germ_effects(delta_time, times_fired)
+	var/immunity = owner.virus_immunity()
+	var/immunity_weakness = owner.immunity_weakness()
+	var/antibiotics = owner.get_antibiotics()
+	var/arterial_efficiency = getorganslotefficiency(ORGAN_SLOT_ARTERY)
+
+	// Being properly oxygenated
+	if(!artery_needed() || (arterial_efficiency >= ORGAN_FAILING_EFFICIENCY))
+		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && DT_PROB(immunity*0.3, delta_time))
+			adjust_germ_level(-1 * (0.5 * delta_time))
+			return
+	// Dry gangrene
+	else
+		adjust_germ_level(1 * (0.5 * delta_time))
+
+	if(germ_level >= INFECTION_LEVEL_ONE/2)
+		//Warn the user that they're a bit fucked
+		if(germ_level <= INFECTION_LEVEL_ONE && (owner.stat < DEAD) && DT_PROB(2, delta_time))
+			owner.custom_pain("My [src.name] feels a bit warm and swollen...", 6, FALSE, src)
+		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
+		if(antibiotics < 5 && DT_PROB(FLOOR(germ_level/6 * immunity_weakness * 0.005, 1), delta_time))
+			if(immunity > 0)
+				//Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
+				adjust_germ_level(clamp(FLOOR(1/immunity, 1), 1, 10) * (0.5 * delta_time))
+			else
+				//Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
+				adjust_germ_level(10 * (0.5 * delta_time))
+
+	if(germ_level >= INFECTION_LEVEL_ONE && (antibiotics < 20))
+		if(DT_PROB(3, delta_time) && (owner.stat < DEAD) && germ_level <= INFECTION_LEVEL_TWO)
+			owner.custom_pain("My [src.name] feels hotter than normal...", 12, FALSE, src)
+		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5) * min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
+		owner.adjust_bodytemperature(clamp((fever_temperature - 2)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature))
+
+	// Spread the infection to internal organs, child and parent bodyparts
+	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < 25)
+		// Chance to cause pain, while also informing the owner
+		if(owner && (owner.stat < DEAD) && DT_PROB(4, delta_time))
+			owner.custom_pain("My [src.name] starts leaking some pus...", 16, FALSE, src)
+
+		// Make internal organs become infected one at a time instead of all at once
+		var/obj/item/organ/target_organ
+		var/obj/item/organ/organ
+		var/list/candidate_organs = list()
+		for(var/thing in get_organs())
+			organ = thing
+			if(organ.germ_level <= germ_level)
+				candidate_organs |= organ
+		if(length(candidate_organs))
+			target_organ = pick(candidate_organs)
+
+		// Infect the target organ
+		if(target_organ)
+			target_organ.adjust_germ_level(1 * (0.5 * delta_time))
+
+		// Spread the infection to child and parent organs
+		var/zones = list()
+		zones |= body_zone
+		if(LAZYLEN(zones))
+			for(var/zone in zones)
+				var/obj/item/bodypart/bodypart = owner.get_bodypart(zone)
+				if(bodypart && (bodypart.germ_level < germ_level))
+					if(bodypart.germ_level < INFECTION_LEVEL_TWO || DT_PROB(15, delta_time))
+						bodypart.adjust_germ_level(1 * (0.5 * delta_time))
+
+/// Handle the antibiotic chem effect
+/obj/item/bodypart/proc/handle_antibiotics(delta_time, times_fired)
+	if(!owner || (owner.stat >= DEAD) || (germ_level <= 0))
+		return
+
+	var/antibiotics = owner.get_antibiotics()
+	if(antibiotics <= 0)
+		return
+
+	if((germ_level < INFECTION_LEVEL_ONE) && (antibiotics >= 20))
+		if(getorganslotefficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY)
+			set_germ_level(0) //cure instantly
+	else
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * (0.5 * delta_time))	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		if(owner?.body_position == LYING_DOWN)
+			adjust_germ_level(-SANITIZATION_LYING * (0.5 * delta_time))
+
 /obj/item/bodypart/proc/create_base_organs()
 	if(CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY))
 		create_artery()
-
-/obj/item/bodypart/grabbedintents(mob/living/user, atom/grabbed, precise)
-	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
-
-/obj/item/bodypart/l_arm/grabbedintents(mob/living/user, atom/grabbed, precise)
-	var/used_limb = precise
-	if(user == grabbed)
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
-	if(used_limb == BODY_ZONE_PRECISE_L_HAND)
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/disarm)
-	else
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/armdrag)
-
-/obj/item/bodypart/r_arm/grabbedintents(mob/living/user, atom/grabbed, precise)
-	var/used_limb = precise
-	if(user == grabbed)
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
-	if(used_limb == BODY_ZONE_PRECISE_R_HAND)
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/disarm)
-	else
-		return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash, /datum/intent/grab/armdrag)
-
-/obj/item/bodypart/chest/grabbedintents(mob/living/user, atom/grabbed, precise)
-	if(precise == BODY_ZONE_PRECISE_GROIN)
-		if(user == grabbed)
-			return list(/datum/intent/grab/move, /datum/intent/grab/twist)
-		else
-			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/shove)
-	if(user == grabbed)
-		return list(/datum/intent/grab/move)
-	else
-		return list(/datum/intent/grab/move, /datum/intent/grab/shove)
-
-/obj/item/bodypart/onbite(mob/living/user)
-	. = ..()
-	if(!.)
-		return
-	if(status != BODYPART_ORGANIC)
-		return TRUE
-	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || is_species(/datum/species/werewolf))
-		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
-			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
-			return TRUE
-		if(!do_after(user, 5 SECONDS, src))
-			return TRUE
-		user.visible_message(span_warning("[user] consumes [src]!"),\
-						span_notice("I consume [src]!"))
-		playsound(user, pick(dismemsound), 100, FALSE, -1)
-		new /obj/effect/gibspawner/generic(get_turf(src), user)
-		user.reagents.add_reagent(/datum/reagent/medicine/healthpot, 30)
-		qdel(src)
-
-/obj/item/bodypart/MiddleClick(mob/living/user, list/modifiers)
-	if(status != BODYPART_ORGANIC)
-		return ..()
-	if(skeletonized || !length(food_type))
-		to_chat(user, span_warning("[src] has no meat to eat."))
-		return
-	var/bloodcolor = COLOR_BLOOD
-	if(owner)
-		bloodcolor = owner.get_blood_type().color
-	else if(original_owner)
-		bloodcolor = original_owner.get_blood_type().color
-	var/obj/item/held_item = user.get_active_held_item()
-	if(isanimal(user))
-		visible_message("[user] begins to eat \the [src].")
-		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-		if(!do_after(user, 5 SECONDS, src))
-			return
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
-		qdel(src)
-		return
-	else if(held_item?.get_sharpness() && held_item.wlength == WLENGTH_SHORT)
-		var/used_time = 21 SECONDS
-		used_time -= (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) * 3 SECONDS)
-		visible_message("[user] begins to butcher \the [src].")
-		playsound(src, 'sound/foley/gross.ogg', 100, FALSE)
-		if(!do_after(user, used_time, src))
-			return
-		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_RANK_LEGENDARY))
-		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
-		for(var/i in 1 to drops)
-			var/choose_type = pickweight(food_type)
-			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
-			if(rotted)
-				food.become_rotten()
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
-		user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
-		qdel(src)
-		return
-	..()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
 	if(ishuman(C))
@@ -268,19 +735,6 @@
 				user.temporarilyRemoveItemFromInventory(src, TRUE)
 				attach_limb(C)
 				return
-	return ..()
-
-/obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
-	if(length(contents) && I.get_sharpness() && !user.cmode)
-		add_fingerprint(user)
-		playsound(src, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
-		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
-			"<span class='notice'>You begin to cut open [src]...</span>")
-		if(do_after(user, 5 SECONDS, src))
-			drop_organs(user)
-			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
-				"<span class='notice'>You finish cutting [src] open.</span>")
-		return
 	return ..()
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
@@ -322,13 +776,6 @@
 	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
-/obj/item/bodypart/head/skeletonize(lethal = TRUE)
-	. = ..()
-
-	sellprice = round((sellprice || 0) * 0.2)
-	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
-		owner.death()
-
 /obj/item/bodypart/proc/update_HP()
 	if(!is_organic_limb() || !owner)
 		return
@@ -336,6 +783,90 @@
 	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
 	if(new_max_damage != old_max_damage)
 		max_damage = new_max_damage
+
+
+/// Returns whether or not the bodypart can feel pain
+/obj/item/bodypart/proc/can_feel_pain()
+	. = FALSE
+	/*
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CUT_AWAY|BODYPART_DEAD))
+		return
+	*/
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
+		return
+	if(HAS_TRAIT(src, TRAIT_NOPAIN))
+		return
+	return owner?.can_feel_pain()
+
+/// Add pain_dam to a bodypart
+/obj/item/bodypart/proc/add_pain(amount = 0, updating_health = TRUE, required_status = null)
+	if(required_status && (status != required_status))
+		return
+	if(!can_feel_pain())
+		return
+	var/can_inflict = max_pain_damage - pain_dam
+	amount *= CONFIG_GET(number/damage_multiplier)
+	amount -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	amount = min(can_inflict, amount)
+	pain_dam = round(pain_dam + max(amount, 0), DAMAGE_PRECISION)
+	if(updating_health)
+		owner.update_shock()
+	if(can_be_disabled)
+		update_disabled()
+	return TRUE
+
+/// Remove pain_dam from a bodypart
+/obj/item/bodypart/proc/remove_pain(amount = 0, updating_health = TRUE, required_status = null)
+	if(required_status && (status != required_status))
+		return
+	if(amount > pain_dam)
+		amount = pain_dam
+	pain_dam = FLOOR(pain_dam - max(abs(amount), 0), DAMAGE_PRECISION)
+	if(updating_health)
+		owner?.update_shock()
+	if(can_be_disabled)
+		update_disabled()
+	return TRUE
+
+/// Make total pain equal amount
+/obj/item/bodypart/proc/set_pain(amount = 0, updating_health = TRUE, required_status = null)
+	if(required_status && (status != required_status))
+		return
+	var/diff = amount - pain_dam
+	if(diff >= 0)
+		return add_pain(abs(diff), updating_health, required_status)
+	else
+		return remove_pain(abs(diff), updating_health, required_status)
+
+/// Returns how much pain we are dealing with right now, taking other damage types into account
+/obj/item/bodypart/proc/get_shock(painkiller_included = FALSE, nerve_included = TRUE)
+	if(!can_feel_pain())
+		return 0
+	//Multiply our total pain damage by this
+	var/multiplier = 1
+	if(LAZYLEN(grabbedby))
+		//Being grasped lowers the pain just a bit
+		multiplier *= 0.75
+	if(multiplier <= 0)
+		return 0
+	var/constant_pain = 0
+	constant_pain += SHOCK_MOD_BRUTE * brute_dam
+	constant_pain += SHOCK_MOD_BURN * burn_dam
+	var/datum/wound/wound
+	for(var/thing in wounds)
+		wound = thing
+		constant_pain += wound.woundpain
+	var/obj/item/organ/organ
+	for(var/thing in get_organs())
+		organ = thing
+		constant_pain += organ.get_shock(FALSE)
+	var/obj/item/item
+	for(var/thing in embedded_objects)
+		item = thing
+		constant_pain += 3 * item.w_class
+	if(painkiller_included)
+		constant_pain -= owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	return clamp(FLOOR((pain_dam + constant_pain) * multiplier, DAMAGE_PRECISION), 0, max_pain_damage)
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
@@ -352,13 +883,21 @@
 		return FALSE
 
 	var/dmg_mlt = CONFIG_GET(number/damage_multiplier) * hit_percent
-	brute = round(max(brute * dmg_mlt, 0),DAMAGE_PRECISION)
-	burn = round(max(burn * dmg_mlt, 0),DAMAGE_PRECISION)
+	brute = round(max(brute * dmg_mlt * damage_multiplier, 0),DAMAGE_PRECISION)
+	burn = round(max(burn * dmg_mlt * damage_multiplier, 0),DAMAGE_PRECISION)
 	brute = max(0, brute - brute_reduction)
 	burn = max(0, burn - burn_reduction)
 
 	if(!brute && !burn)
 		return FALSE
+
+	var/owner_endurance = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE)
+
+	// We get the pain values before we scale damage down
+	// Pain does not care about your feelings, nor if your limb was already damaged
+	// to it's maximum
+	var/painkiller_mod = owner?.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR
+	var/pain = min((SHOCK_MOD_BRUTE * brute) + (SHOCK_MOD_BURN * burn) - painkiller_mod, max_pain_damage-pain_dam)
 
 	//cap at maxdamage
 	if(brute_dam + brute > max_damage)
@@ -378,60 +917,68 @@
 		else if((brute + burn) >= 20)
 			owner.flash_fullscreen("redflash3")
 
+	// Now we add pain proper
+	if(owner && pain && add_pain(pain, FALSE))
+		if(prob(pain*0.5))
+			INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob/living, emote), "scream")
+		//owner.flash_pain(pain)
+		var/shock_penalty = min(SHOCK_PENALTY_CAP, FLOOR(pain/owner_endurance, 1))
+		if(shock_penalty)
+			owner.update_shock_penalty(shock_penalty)
+
+
 	if(owner)
 		if(can_be_disabled)
 			update_disabled()
+		update_limb_efficiency()
 		if(updating_health)
 			owner.updatehealth()
 
-	// Add new lingering pain when taking significant damage
-	var/current_damage_percent = ((brute_dam + burn_dam) / max_damage) * 100
-	if(current_damage_percent > 40) // Only significant injuries cause lingering pain
-		var/new_lingering = (current_damage_percent - 40) * 0.5 // Scale factor
-		lingering_pain += max(0, (new_lingering - lingering_pain) / 4)
+			if(get_shock(FALSE, TRUE) >= DAMAGE_PRECISION)
+				owner.update_shock()
+				. = TRUE
 
-		// Track severe injuries for chronic pain development
-		if(current_damage_percent > 60)
-			last_severe_injury_time = world.time
-
+	update_damages()
+	consider_processing()
 	return update_bodypart_damage_state() || .
-
-/obj/item/bodypart/proc/add_pain(amount)
-	if(!amount || !owner)
-		return
-	if(owner.status_flags & GODMODE)
-		return
-	lingering_pain += amount
-	var/current_damage_percent = ((brute_dam + burn_dam) / max_damage) * 100
-	if(current_damage_percent > 60)
-		last_severe_injury_time = world.time
-	if(owner.stat < DEAD)
-		if(amount < 10)
-			owner.flash_fullscreen("redflash1")
-		else if(amount < 20)
-			owner.flash_fullscreen("redflash2")
-		else
-			owner.flash_fullscreen("redflash3")
 
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
-/obj/item/bodypart/proc/heal_damage(brute, burn, required_status, updating_health = TRUE)
+/obj/item/bodypart/proc/heal_damage(brute, burn, required_status, updating_health = TRUE, true_heal = FALSE)
 	update_HP()
 	if(required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
+
+
+	for(var/thing in injuries)
+		if((brute <= 0) && (burn <= 0))
+			break
+		var/datum/injury/injury = thing
+		var/list/heal_list = list(WOUND_SLASH, WOUND_PIERCE, WOUND_BLUNT, WOUND_INTERNAL_BRUISE)
+		if(true_heal)
+			heal_list |= list(WOUND_BITE, WOUND_BLUNT, WOUND_DIVINE, WOUND_LASH)
+		if(injury.damage_type in heal_list)
+			brute = injury.heal_damage(brute)
+		else if(injury.damage_type == WOUND_BURN)
+			burn = injury.heal_damage(burn)
+
+	update_damages()
 
 	if(brute)
 		set_brute_dam(round(max(brute_dam - brute, 0), DAMAGE_PRECISION))
 	if(burn)
 		set_burn_dam(round(max(burn_dam - burn, 0), DAMAGE_PRECISION))
 
+	update_damages()
+
 	if(owner)
+		update_limb_efficiency()
 		if(can_be_disabled)
 			update_disabled()
 		if(updating_health)
 			owner.updatehealth()
-	//cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
+	consider_processing()
 	return update_bodypart_damage_state()
 
 ///Proc to hook behavior associated to the change of the brute_dam variable's value.
@@ -462,7 +1009,7 @@
 		CRASH("update_disabled called with can_be_disabled false")
 
 	//yes this does mean vampires can use rotten limbs
-	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
+	if((HAS_TRAIT(src, TRAIT_ROTTEN) || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
 		return set_disabled(BODYPART_DISABLED_ROT)
 	for(var/datum/wound/ouchie as anything in wounds)
 		if(!ouchie.disabling)
@@ -841,7 +1388,7 @@
 
 	if(should_draw_greyscale && !skeletonized)
 		var/draw_color =  mutation_color || species_color || skin_tone
-		if(rotted || (owner && HAS_TRAIT(owner, TRAIT_ROTMAN)))
+		if(HAS_TRAIT(src, TRAIT_ROTTEN) || (owner && HAS_TRAIT(owner, TRAIT_ROTMAN)))
 			draw_color = SKIN_COLOR_ROT
 		if(draw_color)
 			limb.color = "#[draw_color]"
@@ -862,407 +1409,6 @@
 /obj/item/bodypart/deconstruct(disassembled = TRUE)
 	drop_organs()
 	return ..()
-/obj/item/bodypart/chest
-	name = "chest"
-	desc = ""
-	icon_state = "default_human_chest"
-	max_damage = 200
-	body_zone = BODY_ZONE_CHEST
-	body_part = CHEST
-	px_x = 0
-	px_y = 0
-	aux_zone = "boob"
-	aux_layer = BODYPARTS_LAYER
-	subtargets = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN)
-	grabtargets = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_GROIN)
-	offset = OFFSET_ARMOR
-	dismemberable = FALSE
-
-	max_cavity_item_size = WEIGHT_CLASS_BULKY
-	max_cavity_volume = 10
-
-	grid_width = 64
-	grid_height = 96
-
-	artery_type = ARTERY_CHEST
-
-/obj/item/bodypart/chest/set_disabled(new_disabled)
-	. = ..()
-	if(!.)
-		return
-	if(bodypart_disabled == BODYPART_DISABLED_DAMAGE || bodypart_disabled == BODYPART_DISABLED_WOUND)
-		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='warning'>I feel a sharp pain in my back!</span>")
-
-/obj/item/bodypart/chest/Destroy()
-	return ..()
-
-/obj/item/bodypart/chest/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_chest"
-	animal_origin = MONKEY_BODYPART
-
-/obj/item/bodypart/chest/devil
-	dismemberable = 0
-	max_damage = 5000
-	animal_origin = DEVIL_BODYPART
-
-/obj/item/bodypart/l_arm
-	name = "left arm"
-	desc = ""
-	icon_state = "default_human_l_arm"
-	attack_verb = list("slapped", "punched")
-	max_damage = 100
-	body_zone = BODY_ZONE_L_ARM
-	body_part = ARM_LEFT
-	aux_zone = BODY_ZONE_PRECISE_L_HAND
-	aux_layer = HANDS_PART_LAYER
-	body_damage_coeff = 1
-	held_index = 1
-	px_x = -6
-	px_y = 0
-	subtargets = list(BODY_ZONE_PRECISE_L_HAND)
-	grabtargets = list(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM)
-	offset = OFFSET_GLOVES
-	dismember_wound = /datum/wound/dismemberment/l_arm
-	can_be_disabled = TRUE
-
-	artery_type = ARTERY_L_ARM
-
-/obj/item/bodypart/l_arm/set_owner(new_owner)
-	. = ..()
-	if(. == FALSE)
-		return
-	if(.)
-		var/mob/living/carbon/old_owner = .
-		if(HAS_TRAIT(old_owner, TRAIT_PARALYSIS_L_ARM))
-			UnregisterSignal(old_owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_ARM))
-			if(!owner || !HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))
-				REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_ARM)
-		else
-			UnregisterSignal(old_owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_ARM))
-	if(owner)
-		if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))
-			ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_ARM)
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_ARM), PROC_REF(on_owner_paralysis_loss))
-		else
-			REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_ARM)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_ARM), PROC_REF(on_owner_paralysis_gain))
-
-///Proc to react to the owner gaining the TRAIT_PARALYSIS_L_ARM trait.
-/obj/item/bodypart/l_arm/proc/on_owner_paralysis_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_ARM)
-	UnregisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_ARM))
-	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_ARM), PROC_REF(on_owner_paralysis_loss))
-
-///Proc to react to the owner losing the TRAIT_PARALYSIS_L_ARM trait.
-/obj/item/bodypart/l_arm/proc/on_owner_paralysis_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_ARM)
-	UnregisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_ARM))
-	RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_ARM), PROC_REF(on_owner_paralysis_gain))
-
-/obj/item/bodypart/l_arm/set_disabled(new_disabled)
-	. = ..()
-	if(isnull(.) || !owner)
-		return
-	// if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='boldwarning'>I can no longer move my [name]!</span>")
-	// 	if(held_index)
-	// 		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
-	// else if(disabled == BODYPART_DISABLED_PARALYSIS)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
-	if(!.)
-		if(bodypart_disabled)
-			owner.set_usable_hands(owner.usable_hands - 1)
-			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, "<span class='userdanger'>You lose control of your [name]!</span>")
-			if(held_index)
-				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
-	else if(!bodypart_disabled)
-		owner.set_usable_hands(owner.usable_hands + 1)
-
-	if(owner.hud_used)
-		var/atom/movable/screen/inventory/hand/hand_screen_object = owner.hud_used.hand_slots["[held_index]"]
-		hand_screen_object?.update_appearance(UPDATE_OVERLAYS)
-
-/obj/item/bodypart/l_arm/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_l_arm"
-	animal_origin = MONKEY_BODYPART
-	px_x = -5
-	px_y = -3
-
-
-/obj/item/bodypart/l_arm/devil
-	dismemberable = 0
-	max_damage = 5000
-	animal_origin = DEVIL_BODYPART
-
-/obj/item/bodypart/r_arm
-	name = "right arm"
-	desc = ""
-	icon_state = "default_human_r_arm"
-	attack_verb = list("slapped", "punched")
-	max_damage = 100
-	body_zone = BODY_ZONE_R_ARM
-	body_part = ARM_RIGHT
-	aux_zone = BODY_ZONE_PRECISE_R_HAND
-	aux_layer = HANDS_PART_LAYER
-	body_damage_coeff = 1
-	held_index = 2
-	px_x = 6
-	px_y = 0
-	subtargets = list(BODY_ZONE_PRECISE_R_HAND)
-	grabtargets = list(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_R_ARM)
-	offset = OFFSET_GLOVES
-	dismember_wound = /datum/wound/dismemberment/r_arm
-	can_be_disabled = TRUE
-
-	artery_type = ARTERY_R_ARM
-
-/obj/item/bodypart/r_arm/set_owner(new_owner)
-	. = ..()
-	if(. == FALSE)
-		return
-	if(.)
-		var/mob/living/carbon/old_owner = .
-		if(HAS_TRAIT(old_owner, TRAIT_PARALYSIS_R_ARM))
-			UnregisterSignal(old_owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_ARM))
-			if(!owner || !HAS_TRAIT(owner, TRAIT_PARALYSIS_R_ARM))
-				REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_ARM)
-		else
-			UnregisterSignal(old_owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_ARM))
-	if(owner)
-		if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_ARM))
-			ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_ARM)
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_ARM), PROC_REF(on_owner_paralysis_loss))
-		else
-			REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_ARM)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_ARM), PROC_REF(on_owner_paralysis_gain))
-
-///Proc to react to the owner gaining the TRAIT_PARALYSIS_R_ARM trait.
-/obj/item/bodypart/r_arm/proc/on_owner_paralysis_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_ARM)
-	UnregisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_ARM))
-	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_ARM), PROC_REF(on_owner_paralysis_loss))
-
-///Proc to react to the owner losing the TRAIT_PARALYSIS_R_ARM trait.
-/obj/item/bodypart/r_arm/proc/on_owner_paralysis_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_ARM)
-	UnregisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_ARM))
-	RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_ARM), PROC_REF(on_owner_paralysis_gain))
-
-/obj/item/bodypart/r_arm/set_disabled(new_disabled)
-	. = ..()
-	if(isnull(.) || !owner)
-		return
-	// if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
-	// 	if(held_index)
-	// 		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
-	// else if(disabled == BODYPART_DISABLED_PARALYSIS)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
-	if(!.)
-		if(bodypart_disabled)
-			owner.set_usable_hands(owner.usable_hands - 1)
-			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, "<span class='userdanger'>You lose control of your [name]!</span>")
-			if(held_index)
-				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
-	else if(!bodypart_disabled)
-		owner.set_usable_hands(owner.usable_hands + 1)
-
-	if(owner.hud_used)
-		var/atom/movable/screen/inventory/hand/hand_screen_object = owner.hud_used.hand_slots["[held_index]"]
-		hand_screen_object?.update_appearance(UPDATE_OVERLAYS)
-
-/obj/item/bodypart/r_arm/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_r_arm"
-	animal_origin = MONKEY_BODYPART
-	px_x = 5
-	px_y = -3
-
-/obj/item/bodypart/r_arm/devil
-	dismemberable = 0
-	max_damage = 5000
-	animal_origin = DEVIL_BODYPART
-
-/obj/item/bodypart/l_leg
-	name = "left leg"
-	desc = ""
-	icon_state = "default_human_l_leg"
-	attack_verb = list("kicked", "stomped")
-	max_damage = 100
-	body_zone = BODY_ZONE_L_LEG
-	body_part = LEG_LEFT
-	body_damage_coeff = 1
-	px_x = -2
-	px_y = 12
-	aux_zone = "l_leg_above"
-	aux_layer = LEG_PART_LAYER
-	subtargets = list(BODY_ZONE_PRECISE_L_FOOT)
-	grabtargets = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_L_LEG)
-	dismember_wound = /datum/wound/dismemberment/l_leg
-	can_be_disabled = TRUE
-
-	artery_type = ARTERY_L_LEG
-
-/obj/item/bodypart/l_leg/set_owner(new_owner)
-	. = ..()
-	if(. == FALSE)
-		return
-	if(.)
-		var/mob/living/carbon/old_owner = .
-		if(HAS_TRAIT(old_owner, TRAIT_PARALYSIS_L_LEG))
-			UnregisterSignal(old_owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_LEG))
-			if(!owner || !HAS_TRAIT(owner, TRAIT_PARALYSIS_L_LEG))
-				REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_LEG)
-		else
-			UnregisterSignal(old_owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_LEG))
-	if(new_owner)
-		if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_LEG))
-			ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_LEG)
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_LEG), PROC_REF(on_owner_paralysis_loss))
-		else
-			REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_LEG)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_LEG), PROC_REF(on_owner_paralysis_gain))
-
-///Proc to react to the owner gaining the TRAIT_PARALYSIS_L_LEG trait.
-/obj/item/bodypart/l_leg/proc/on_owner_paralysis_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_LEG)
-	UnregisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_LEG))
-	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_LEG), PROC_REF(on_owner_paralysis_loss))
-
-///Proc to react to the owner losing the TRAIT_PARALYSIS_L_LEG trait.
-/obj/item/bodypart/l_leg/proc/on_owner_paralysis_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_L_LEG)
-	UnregisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_L_LEG))
-	RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_L_LEG), PROC_REF(on_owner_paralysis_gain))
-
-/obj/item/bodypart/l_leg/set_disabled(new_disabled)
-	. = ..()
-	if(isnull(.) || !owner)
-		return
-	// if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
-	// else if(disabled == BODYPART_DISABLED_PARALYSIS)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
-	if(!.)
-		if(bodypart_disabled)
-			owner.set_usable_legs(owner.usable_legs - 1)
-			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, "<span class='userdanger'>You lose control of your [name]!</span>")
-	else if(!bodypart_disabled)
-		owner.set_usable_legs(owner.usable_legs + 1)
-
-/obj/item/bodypart/l_leg/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_l_leg"
-	animal_origin = MONKEY_BODYPART
-	px_y = 4
-
-/obj/item/bodypart/l_leg/devil
-	dismemberable = 0
-	max_damage = 5000
-	animal_origin = DEVIL_BODYPART
-
-/obj/item/bodypart/r_leg
-	name = "right leg"
-	desc = ""
-	// alternative spellings of 'pokey' are availible
-	icon_state = "default_human_r_leg"
-	attack_verb = list("kicked", "stomped")
-	max_damage = 100
-	body_zone = BODY_ZONE_R_LEG
-	body_part = LEG_RIGHT
-	body_damage_coeff = 1
-	px_x = 2
-	px_y = 12
-	aux_zone = "r_leg_above"
-	aux_layer = LEG_PART_LAYER
-	subtargets = list(BODY_ZONE_PRECISE_R_FOOT)
-	grabtargets = list(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_R_LEG)
-	dismember_wound = /datum/wound/dismemberment/r_leg
-	can_be_disabled = TRUE
-
-	artery_type = ARTERY_R_LEG
-
-/obj/item/bodypart/r_leg/set_owner(new_owner)
-	. = ..()
-	if(. == FALSE)
-		return
-	if(.)
-		var/mob/living/carbon/old_owner = .
-		if(HAS_TRAIT(old_owner, TRAIT_PARALYSIS_R_LEG))
-			UnregisterSignal(old_owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_LEG))
-			if(!owner || !HAS_TRAIT(owner, TRAIT_PARALYSIS_R_LEG))
-				REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_LEG)
-		else
-			UnregisterSignal(old_owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_LEG))
-	if(owner)
-		if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_LEG))
-			ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_LEG)
-			RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_LEG), PROC_REF(on_owner_paralysis_loss))
-		else
-			REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_LEG)
-			RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_LEG), PROC_REF(on_owner_paralysis_gain))
-
-///Proc to react to the owner gaining the TRAIT_PARALYSIS_R_LEG trait.
-/obj/item/bodypart/r_leg/proc/on_owner_paralysis_gain(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	ADD_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_LEG)
-	UnregisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_LEG))
-	RegisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_LEG), PROC_REF(on_owner_paralysis_loss))
-
-///Proc to react to the owner losing the TRAIT_PARALYSIS_R_LEG trait.
-/obj/item/bodypart/r_leg/proc/on_owner_paralysis_loss(mob/living/carbon/source)
-	SIGNAL_HANDLER
-	REMOVE_TRAIT(src, TRAIT_PARALYSIS, TRAIT_PARALYSIS_R_LEG)
-	UnregisterSignal(owner, SIGNAL_REMOVETRAIT(TRAIT_PARALYSIS_R_LEG))
-	RegisterSignal(owner, SIGNAL_ADDTRAIT(TRAIT_PARALYSIS_R_LEG), PROC_REF(on_owner_paralysis_gain))
-
-/obj/item/bodypart/r_leg/set_disabled(new_disabled)
-	. = ..()
-	if(isnull(.) || !owner)
-		return
-	// if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
-	// else if(disabled == BODYPART_DISABLED_PARALYSIS)
-	// 	if(owner.stat < DEAD)
-	// 		to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
-	if(!.)
-		if(bodypart_disabled)
-			owner.set_usable_legs(owner.usable_legs - 1)
-			if(owner.stat < UNCONSCIOUS)
-				to_chat(owner, "<span class='userdanger'>You lose control of your [name]!</span>")
-	else if(!bodypart_disabled)
-		owner.set_usable_legs(owner.usable_legs + 1)
-
-/obj/item/bodypart/r_leg/monkey
-	icon = 'icons/mob/animal_parts.dmi'
-	icon_state = "default_monkey_r_leg"
-	animal_origin = MONKEY_BODYPART
-	px_y = 4
-
-
-/obj/item/bodypart/r_leg/devil
-	dismemberable = 0
-	max_damage = 5000
-	animal_origin = DEVIL_BODYPART
 
 
 /**
@@ -1376,7 +1522,7 @@
 /obj/item/bodypart/proc/is_artery_torn()
 	. = FALSE
 	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
-		if(artery.is_bruised())
+		if(artery.damage)
 			return TRUE
 
 /obj/item/bodypart/proc/is_artery_dissected()
@@ -1396,10 +1542,89 @@
 		break
 
 	if(!incision)
-		for(var/datum/wound/dynamic/slash/slash in wounds)
-			if(slash.is_sewn())
+		var/datum/injury/internal_incision
+		for(var/datum/injury/slash/slash in injuries)
+			if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
 				continue
-			incision = slash
-			break
-
+			if(strict && !slash.is_surgical()) //We don't need dirty ones
+				continue
+			if(!internal_incision)
+				internal_incision = slash
+				continue
+			if(slash.is_surgical() && internal_incision.is_surgical()) //If they're both dirty or both are surgical, just get bigger one
+				if(slash.damage > internal_incision.damage)
+					internal_incision = slash
+					break
+			else if(slash.is_surgical()) //otherwise surgical one takes priority
+				internal_incision = slash
+				break
+		return internal_incision
 	return incision
+
+
+/obj/item/bodypart/proc/is_bandaged()
+	. = TRUE
+	for(var/datum/injury/injury in injuries)
+		if(!injury.is_bandaged())
+			return FALSE
+
+/obj/item/bodypart/proc/is_salved()
+	. = TRUE
+	for(var/datum/injury/injury in injuries)
+		if(!injury.is_salved())
+			return FALSE
+
+/obj/item/bodypart/proc/is_disinfected()
+	. = TRUE
+	for(var/datum/injury/injury in injuries)
+		if(!injury.is_disinfected())
+			return FALSE
+
+
+/obj/item/bodypart/proc/is_clamped()
+	. = TRUE
+	for(var/datum/injury/injury in injuries)
+		if(!injury.is_clamped())
+			return FALSE
+
+/obj/item/bodypart/proc/clamp_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.clamp_injury()
+
+/obj/item/bodypart/proc/unclamp_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.unclamp_injury()
+
+/obj/item/bodypart/proc/suture_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.suture_injury()
+
+/obj/item/bodypart/proc/unsuture_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.unsuture_injury()
+
+/obj/item/bodypart/proc/salve_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.salve_injury()
+
+/obj/item/bodypart/proc/unsalve_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.unsalve_injury()
+
+/obj/item/bodypart/proc/disinfect_limb(time)
+	for(var/datum/injury/injury as anything in injuries)
+		injury.disinfect_injury()
+	if(time)
+		disinfects_in = addtimer(CALLBACK(src, PROC_REF(undisinfect_limb)), time, TIMER_STOPPABLE)
+
+/obj/item/bodypart/proc/undisinfect_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.undisinfect_injury()
+
+/obj/item/bodypart/proc/bandage_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.bandage_injury()
+
+/obj/item/bodypart/proc/unbandage_limb()
+	for(var/datum/injury/injury as anything in injuries)
+		injury.unbandage_injury()

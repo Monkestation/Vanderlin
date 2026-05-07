@@ -31,9 +31,8 @@
 	if(slot == ITEM_SLOT_HANDS)
 		return
 
-	for(var/faction in allowed_factions)
-		if(faction in user.faction)
-			return
+	if(user.has_faction(allowed_factions))
+		return
 
 	user.temporarilyRemoveItemFromInventory(source)
 	if(!user.put_in_hands(source))

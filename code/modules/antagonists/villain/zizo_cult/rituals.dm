@@ -457,7 +457,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
-	target.faction = list(FACTION_UNDEAD)
+	target.set_faction(FACTION_UNDEAD)
 	target.add_spell(/datum/action/cooldown/spell/gravemark)
 	target.add_spell(/datum/action/cooldown/spell/control_undead)
 	target.add_spell(/datum/action/cooldown/spell/decompose)
@@ -637,7 +637,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	if(target.stat != DEAD)
 		return
-	target.take_overall_damage(500)
+	target.take_overall_damage(500, damage_type = BCLASS_PIERCE)
 	center.visible_message(span_danger("[target] is lifted up into the air and multiple scratches, incisions and deep cuts start etching themselves into their skin as all of their internal organs spill on the floor below!"))
 	var/atom/drop_location = target.drop_location()
 	for(var/obj/item/organ/organ as anything in target.internal_organs)

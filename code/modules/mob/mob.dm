@@ -95,6 +95,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
 	attribute_initialize()
 	. = ..()
+	initialize_actionspeed()
 	update_config_movespeed()
 	update_movespeed(TRUE)
 	become_hearing_sensitive()
@@ -189,7 +190,7 @@ GLOBAL_VAR_INIT(mobids, 1)
  * * vision_distance (optional) define how many tiles away the message can be seen.
  * * ignored_mob (optional) doesn't show any message to a given mob if TRUE.
  */
-/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, visible_message_flags = NONE)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -223,7 +224,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			M.create_chat_message(src, raw_message = runechat_message, spans = list("emote"))
 
 ///Adds the functionality to self_message.
-/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, log_seen = NONE, log_seen_msg = null)
+/mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, runechat_message = null, visible_message_flags = NONE)
 	. = ..()
 	if(self_message)
 		show_message(self_message, MSG_VISUAL, blind_message, MSG_AUDIBLE)
@@ -890,43 +891,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 
 /**
- * Buckle to another mob
+ * Buckle a living mob to this mob. Also turns you to face the other mob
  *
  * You can buckle on mobs if you're next to them since most are dense
- *
- * Turns you to face the other mob too
  */
-/mob/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
+/mob/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE, buckle_mob_flags= NONE)
 	if(M.buckled)
-		return 0
-	var/turf/T = get_turf(src)
-	if(M.loc != T)
-		var/old_density = density
-		density = FALSE
-		var/can_step = step_towards(M, T)
-		density = old_density
-		if(!can_step)
-			return 0
-	return ..()
-
-///Call back post buckle to a mob to offset your visual height
-/mob/post_buckle_mob(mob/living/M)
-	var/height = M.get_mob_buckling_height(src)
-	M.pixel_y = M.base_pixel_y + height
-	if(M.layer < layer)
-		M.layer = layer + 0.1
-///Call back post unbuckle from a mob, (reset your visual height here)
-/mob/post_unbuckle_mob(mob/living/M)
-	M.layer = initial(M.layer)
-	M.pixel_y = M.base_pixel_y
-
-///returns the height in pixel the mob should have when buckled to another mob.
-/mob/proc/get_mob_buckling_height(mob/seat)
-	if(isliving(seat))
-		var/mob/living/L = seat
-		if(L.mob_size <= MOB_SIZE_SMALL) //being on top of a small mob doesn't put you very high.
-			return 0
-	return 9
+		return FALSE
+	return ..(M, force, check_loc, buckle_mob_flags)
 
 ///can the mob be buckled to something by default?
 /mob/proc/can_buckle()
@@ -962,42 +934,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 ///Can this mob use storage
 /mob/proc/canUseStorage()
 	return FALSE
-/**
- * Check if the other mob has any factions the same as us
- *
- * If exact match is set, then all our factions must match exactly
- */
-/atom/movable/proc/faction_check_mob(mob/target, exact_match)
-
-/mob/faction_check_mob(mob/target, exact_match)
-	if(exact_match) //if we need an exact match, we need to do some bullfuckery.
-		var/list/faction_src = faction.Copy()
-		var/list/faction_target = target.faction.Copy()
-		if(!("[REF(src)]" in faction_target)) //if they don't have our ref faction, remove it from our factions list.
-			faction_src -= "[REF(src)]" //if we don't do this, we'll never have an exact match.
-		if(!("[REF(target)]" in faction_src))
-			faction_target -= "[REF(target)]" //same thing here.
-		return faction_check(faction_src, faction_target, TRUE)
-	var/list/faction2use = target.faction.Copy()
-	faction2use += target.name
-	return faction_check(faction, faction2use, FALSE)
-/*
- * Compare two lists of factions, returning true if any match
- *
- * If exact match is passed through we only return true if both faction lists match equally
- */
-/proc/faction_check(list/faction_A, list/faction_B, exact_match)
-	var/list/match_list
-	if(exact_match)
-		match_list = faction_A&faction_B //only items in both lists
-		var/length = LAZYLEN(match_list)
-		if(length)
-			return (length == LAZYLEN(faction_A)) //if they're not the same len(gth) or we don't have a len, then this isn't an exact match.
-	else
-		match_list = faction_A&faction_B
-		return LAZYLEN(match_list)
-	return FALSE
-
 
 /**
  * Fully update the name of a mob

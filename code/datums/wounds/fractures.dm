@@ -31,6 +31,13 @@
 	ignore_bloody = TRUE
 
 	werewolf_infection_probability = 0
+	associated_bclasses = FRACTURE_BCLASSES
+	viable_zones = GENERIC_FRACTURE_BODYPARTS
+
+	min_damage_dividend = 0.6
+	strong_intent_bonus = TRUE
+	brittle_bonus = TRUE
+
 	/// Whether or not we can be surgically set
 	var/can_set = TRUE
 	/// Emote we use when applied
@@ -78,6 +85,7 @@
 	clotting_threshold = null
 
 	mortal = TRUE
+	viable_zones = list(BODY_ZONE_HEAD)
 	/// Brain case fractures (Depressed Cranium, Temporal) cause paralysis
 	var/paralysis = FALSE
 	var/knockout = 15 SECONDS
@@ -123,6 +131,8 @@
 	bleed_rate = 4.6
 	paralysis = TRUE
 	knockout = 25 SECONDS
+	min_damage_dividend = 0.95
+	viable_zones = list(BODY_ZONE_PRECISE_SKULL)
 
 /datum/wound/fracture/head/brain/on_life()
 	. = ..()
@@ -136,6 +146,7 @@
 		"The orbital bone is fractured!",
 		"The orbital bone is cracked!",
 	)
+	viable_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 
 /datum/wound/fracture/head/eyes/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -155,6 +166,7 @@
 	)
 	paralysis = TRUE
 	knockout = 25 SECONDS
+	viable_zones = list(BODY_ZONE_PRECISE_EARS)
 
 /datum/wound/fracture/head/nose
 	name = "nasal fracture"
@@ -164,6 +176,8 @@
 	)
 	mortal = FALSE
 	knockout = 10 SECONDS
+	min_damage_dividend = 0.7
+	viable_zones = list(BODY_ZONE_PRECISE_NOSE)
 
 /datum/wound/fracture/head/nose/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -187,6 +201,7 @@
 	bleed_rate = 1.6
 	clotting_threshold = 0.4
 	clotting_rate = 0.04
+	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 
 /datum/wound/fracture/mouth/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -209,6 +224,9 @@
 	)
 	whp = 150
 	mortal = TRUE
+	min_damage_dividend = 1.0
+	viable_zones = list(BODY_ZONE_PRECISE_NECK)
+	brittle_bonus = TRUE
 
 /datum/wound/fracture/neck/can_apply_to_mob(mob/living/affected)
 	if(QDELETED(affected) || istype(affected, /mob/living/carbon/human/species/skeleton/death_arena))
@@ -243,6 +261,7 @@
 	bleed_rate = 23.1
 	clotting_threshold = 0.8
 	clotting_rate = 1.25
+	viable_zones = list(BODY_ZONE_CHEST)
 
 /datum/wound/fracture/chest/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -262,6 +281,7 @@
 	bleed_rate = 3.1
 	clotting_threshold = 1.2
 	clotting_rate = 0.04
+	viable_zones = list(BODY_ZONE_PRECISE_GROIN)
 
 /datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
 	. = ..()

@@ -1192,6 +1192,7 @@
 	pixel_y = 10
 	},
 /obj/structure/table/stone_small,
+/obj/item/essence_node_jar,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "fQ" = (
@@ -1452,7 +1453,7 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "ke" = (
-/mob/living/carbon/human/species/automaton/prefilled_vessel,
+/obj/machinery/essence/test_tube,
 /turf/open/floor/wood,
 /area/indoors/town/keep)
 "ki" = (
@@ -1473,6 +1474,10 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"kD" = (
+/obj/machinery/essence/harvester,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "kF" = (
 /obj/structure/roller{
 	dir = 1
@@ -1666,7 +1671,6 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep)
 "oQ" = (
-/obj/machinery/light/fueled/torchholder/r,
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
@@ -1748,6 +1752,10 @@
 /obj/item/clothing/shirt/robe/magus,
 /obj/item/clothing/gloves/essence_gauntlet,
 /obj/item/clothing/shoes/nobleboot/thighboots,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
+"qu" = (
+/obj/machinery/essence/divider,
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
 "qF" = (
@@ -1916,6 +1924,10 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"tq" = (
+/obj/machinery/essence/extractor,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "tA" = (
 /turf/closed,
 /area/outdoors)
@@ -2103,6 +2115,10 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"wZ" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/churchbrick,
+/area/indoors/town/keep)
 "xh" = (
 /obj/structure/waterwheel,
 /turf/open/water/river{
@@ -16290,7 +16306,7 @@ QN
 Wr
 Wr
 zg
-zg
+tq
 vD
 Ui
 oQ
@@ -16548,10 +16564,10 @@ Wr
 tL
 zg
 zg
-XS
-zg
-zg
-zg
+wZ
+vD
+vD
+Md
 zg
 yW
 Nb
@@ -16806,9 +16822,9 @@ QN
 zg
 ke
 GB
-vD
-vD
-Md
+kD
+qu
+Ui
 zg
 ui
 Sx
@@ -17065,7 +17081,7 @@ AT
 GB
 vD
 vD
-vD
+Ui
 zg
 zg
 HY

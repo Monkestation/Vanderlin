@@ -17,7 +17,7 @@
 
 		var/obj/effect/quest_spawn/spawn_effect = new /obj/effect/quest_spawn(spawn_turf)
 		var/mob/living/new_mob = new target_mob_type(spawn_effect)
-		new_mob.faction |= "quest"
+		new_mob.add_faction("quest")
 		new_mob.AddComponent(/datum/component/quest_object/kill, src)
 		ADD_TRAIT(new_mob, TRAIT_FRESHSPAWN, "[type]")
 		addtimer(TRAIT_CALLBACK_REMOVE(new_mob, TRAIT_FRESHSPAWN, "[type]"), 60 SECONDS)

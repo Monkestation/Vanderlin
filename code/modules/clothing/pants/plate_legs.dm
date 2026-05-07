@@ -43,7 +43,7 @@
 
 	armor = ARMOR_PLATE_BAD
 	max_integrity = INTEGRITY_STRONG
-	item_weight = 3.95 KILOGRAMS
+	item_weight = 5.2 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/captain
 	name = "captain's chausses"

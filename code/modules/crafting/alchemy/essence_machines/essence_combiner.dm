@@ -1,361 +1,373 @@
+#define COMBINER_MODE_GENERIC 1
+#define COMBINER_MODE_MANUAL  2
+#define COMBINER_MODE_AUTO    3
 
 /obj/machinery/essence/combiner
 	name = "essence combiner"
-	desc = "An agitating element within a simple glass container, designed to blend essences together. Can handle multiple combination recipes simultaneously."
+	desc = "Fuses multiple alchemical essences into a unified compound."
 	icon = 'icons/roguetown/misc/splitter.dmi'
-	icon_state = "combiner"
-	density = TRUE
-	anchored = TRUE
-	processing_priority = 3
+	icon_state = "splitter"
+	network_priority = 4
 
+	/// Separate output storage so combined product doesn't mix with raw input
+	var/datum/essence_storage/output_storage
+	var/combining = FALSE
 	var/max_concurrent_recipes = 3
 
+	/// Current operating mode: COMBINER_MODE_GENERIC, COMBINER_MODE_MANUAL, or COMBINER_MODE_AUTO
+	var/mode = COMBINER_MODE_GENERIC
+	/// Locked recipe path when in manual mode
+	var/datum/essence_combination/manual_recipe_path = null
 
 /obj/machinery/essence/combiner/Initialize()
 	. = ..()
-	input_storage = new /datum/essence_storage(src)
-	input_storage.max_total_capacity = 150
-	input_storage.max_essence_types = 8
-
+	storage.max_total = 500
+	storage.max_types = 10
 	output_storage = new /datum/essence_storage(src)
-	output_storage.max_total_capacity = 100
-	output_storage.max_essence_types = 6
+	output_storage.max_total = 500
+	output_storage.max_types = 10
+	START_PROCESSING(SSobj, src)
+
+/obj/machinery/essence/combiner/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	if(output_storage)
+		qdel(output_storage)
+	return ..()
+
+/obj/machinery/essence/combiner/push_to_linked(datum/essence_storage/from_storage)
+	// Input storage: only push surplus (anything no recipe can use)
+	if(from_storage == storage)
+		push_surplus_to_linked(from_storage)
+		return
+	// Output storage: push everything, it's all product meant to leave
+	..()
+
+/obj/machinery/essence/combiner/build_allowed_types()
+	var/room = storage.space()
+	if(room <= 0)
+		return list()
+
+	switch(mode)
+		if(COMBINER_MODE_MANUAL)
+			if(!manual_recipe_path)
+				return list()
+			var/list/result = list()
+			var/datum/essence_combination/recipe = new manual_recipe_path
+			for(var/etype in recipe.inputs)
+				result[etype] = room
+			qdel(recipe)
+			return result
+
+		if(COMBINER_MODE_AUTO)
+			var/list/demand = build_network_demand()
+			var/datum/essence_combination/best = null
+			var/best_score = 0
+			for(var/rpath in subtypesof(/datum/essence_combination))
+				var/datum/essence_combination/recipe = new rpath
+				var/score = demand[recipe.output_type] || 0
+				if(score > best_score)
+					if(best)
+						qdel(best)
+					best = recipe
+					best_score = score
+				else
+					qdel(recipe)
+			if(!best)
+				return list()
+			var/list/result = list()
+			for(var/etype in best.inputs)
+				// Only request exactly what one batch needs, minus what we already have
+				var/need = best.inputs[etype] - storage.get(etype)
+				if(need > 0)
+					result[etype] = need
+			qdel(best)
+			return result
+
+		else
+			var/list/result = list()
+			for(var/rpath in subtypesof(/datum/essence_combination))
+				var/datum/essence_combination/recipe = new rpath
+				for(var/etype in recipe.inputs)
+					if(!(etype in result))
+						result[etype] = room
+				qdel(recipe)
+			return result
 
 /obj/machinery/essence/combiner/process()
-	if(!connection_processing)
-		return
-	var/list/prioritized_connections = sort_connections_by_priority(output_connections)
-	for(var/datum/essence_connection/connection in prioritized_connections)
-		if(!connection.active || !connection.target)
-			continue
-		var/datum/essence_storage/target_storage = get_target_storage(connection.target)
-		if(!target_storage)
-			continue
-		for(var/essence_type in output_storage.stored_essences)
-			var/available = output_storage.get_essence_amount(essence_type)
-			if(available > 0)
-				if(!can_target_accept_essence(connection.target, essence_type))
-					continue
+	// Pull raw essences from inbound links into input storage
+	pull_from_linked(storage)
+	// Push combined output through outbound links
+	push_to_linked(output_storage)
 
-				var/to_transfer = min(available, connection.transfer_rate)
-				var/transferred = output_storage.transfer_to(target_storage, essence_type, to_transfer)
-				if(transferred > 0)
-					create_essence_transfer_effect(connection.target, essence_type, transferred)
-					break
-
-/obj/machinery/essence/combiner/update_overlays()
+/obj/machinery/essence/combiner/on_storage_changed(essence_type, amount, added)
 	. = ..()
-
-	var/essence_percent = (output_storage.get_total_stored() + input_storage.get_total_stored()) / (input_storage.max_total_capacity + output_storage.max_total_capacity)
-	if(!essence_percent)
+	if(!added || combining)
 		return
-	var/level = clamp(CEILING(essence_percent * 7, 1), 1, 7)
+	if(mode == COMBINER_MODE_MANUAL || mode == COMBINER_MODE_AUTO)
+		attempt_combination_auto()
 
-	. += mutable_appearance(icon, "liquid_[level]", color = calculate_mixture_color())
-	. += emissive_appearance(icon, "liquid_[level]", alpha = src.alpha)
+/obj/machinery/essence/combiner/proc/attempt_combination_auto()
+	if(!storage.contents.len)
+		return
 
-	if(processing)
-		. += mutable_appearance(icon, "combining", layer = src.layer + 0.01)
+	var/list/queued = list()
+	var/list/available = storage.snapshot()
+	var/efficiency = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_output)
+
+	while(queued.len < max_concurrent_recipes)
+		var/datum/essence_combination/recipe = find_matching_combination(available)
+		if(!recipe)
+			break
+		// No skill check, machine operates autonomously
+		for(var/etype in recipe.inputs)
+			available[etype] -= recipe.inputs[etype]
+			if(available[etype] <= 0)
+				available -= etype
+		queued += recipe
+
+	if(!queued.len)
+		return
+
+	var/total_out = 0
+	for(var/datum/essence_combination/r in queued)
+		total_out += round(r.output_amount * efficiency, 1)
+
+	if(output_storage.space() < total_out)
+		for(var/datum/essence_combination/r in queued)
+			qdel(r)
+		return
+
+	begin_bulk_combination(null, queued)
+
+/obj/machinery/essence/combiner/attack_hand(mob/living/user)
+	if(combining)
+		to_chat(user, span_warning("A combination is already in progress."))
+		return
+	attempt_combination(user)
+
+/obj/machinery/essence/combiner/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	show_mode_menu(user)
+
+/obj/machinery/essence/combiner/proc/show_mode_menu(mob/user)
+	var/list/choices = list(
+		"Generic (try any recipe)" = COMBINER_MODE_GENERIC,
+		"Manual (locked recipe)"   = COMBINER_MODE_MANUAL,
+		"Automatic (network demand)" = COMBINER_MODE_AUTO
+	)
+	var/choice = input(user, "Select combiner mode", "Combiner Mode") as null|anything in choices
+	if(!choice || !Adjacent(user))
+		return
+
+	var/new_mode = choices[choice]
+	if(new_mode == COMBINER_MODE_MANUAL)
+		var/list/recipe_options = list()
+		for(var/rpath in subtypesof(/datum/essence_combination))
+			var/datum/essence_combination/recipe = new rpath
+			recipe_options[initial(recipe.name)] = rpath
+			qdel(recipe)
+		var/recipe_choice = input(user, "Select a recipe to lock to", "Manual Recipe") as null|anything in recipe_options
+		if(!recipe_choice || !Adjacent(user))
+			return
+		manual_recipe_path = recipe_options[recipe_choice]
+		mode = COMBINER_MODE_MANUAL
+		to_chat(user, span_info("Combiner locked to: [recipe_choice]"))
+	else
+		manual_recipe_path = null
+		mode = new_mode
+		switch(mode)
+			if(COMBINER_MODE_GENERIC)
+				to_chat(user, span_info("Combiner set to generic mode."))
+			if(COMBINER_MODE_AUTO)
+				to_chat(user, span_info("Combiner set to automatic network demand mode."))
+
+	if(network)
+		network.invalidate_cache()
 
 /obj/machinery/essence/combiner/examine(mob/user)
 	. = ..()
-	. += span_notice("Input Storage: [input_storage.get_total_stored()]/[input_storage.max_total_capacity] units")
-	. += span_notice("Output Storage: [output_storage.get_total_stored()]/[output_storage.max_total_capacity] units")
-
-	if(input_storage.stored_essences.len > 0)
-		. += span_notice("Ready to combine:")
-		for(var/essence_type in input_storage.stored_essences)
-			var/datum/thaumaturgical_essence/essence = new essence_type
-			if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-				. += span_notice("Contains [input_storage.stored_essences[essence_type]] units of [essence.name].")
+	switch(mode)
+		if(COMBINER_MODE_GENERIC)
+			. += span_notice("Mode: Generic, will attempt any matching recipe.")
+		if(COMBINER_MODE_MANUAL)
+			if(manual_recipe_path)
+				var/datum/essence_combination/recipe = new manual_recipe_path
+				. += span_notice("Mode: Manual: locked to [initial(recipe.name)].")
+				qdel(recipe)
 			else
-				. += span_notice("Contains [input_storage.stored_essences[essence_type]] units of essence smelling of [essence.smells_like].")
-			qdel(essence)
+				. += span_warning("Mode: Manual: no recipe selected.")
+		if(COMBINER_MODE_AUTO)
+			. += span_notice("Mode: Automatic: prioritises recipes matching network demand.")
 
-
-/obj/machinery/essence/combiner/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/essence_vial))
-		var/obj/item/essence_vial/vial = I
-		if(!vial.contained_essence || vial.essence_amount <= 0)
-			// Check if we should extract from output or input storage
-			var/list/extraction_options = list()
-			if(length(output_storage.stored_essences))
-				extraction_options["Extract from Output"] = "output"
-			if(length(input_storage.stored_essences))
-				extraction_options["Extract from Input"] = "input"
-
-			if(!length(extraction_options))
-				to_chat(user, span_warning("No essences available for extraction."))
-				return
-
-			var/storage_choice
-			if(length(extraction_options) == 1)
-				storage_choice = extraction_options[extraction_options[1]]
-			else
-				var/choice = input(user, "Extract from which storage?", "Storage Selection") in extraction_options
-				if(!choice)
-					return
-				storage_choice = extraction_options[choice]
-
-			var/datum/essence_storage/target_storage = (storage_choice == "output") ? output_storage : input_storage
-
-			// Create radial menu for essence selection
-			var/list/radial_options = list()
-			var/list/essence_mapping = list()
-			for(var/essence_type in target_storage.stored_essences)
-				var/datum/thaumaturgical_essence/essence = new essence_type
-				var/display_name
-				if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-					display_name = essence.name
-				else
-					display_name = "Essence smelling of [essence.smells_like]"
-				var/option_key = "[display_name] ([target_storage.stored_essences[essence_type]] units)"
-				var/datum/radial_menu_choice/choice = new()
-				var/image/image = image(icon = 'icons/roguetown/misc/alchemy.dmi', icon_state = "essence")
-				image.color = essence.color
-				choice.image = image
-				choice.name = display_name
-				if(HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST))
-					choice.info = "Extract [essence.name] essence. Smells of [essence.smells_like]."
-				else
-					choice.info = "Extract unknown essence. Smells of [essence.smells_like]."
-				radial_options[option_key] = choice
-				essence_mapping[option_key] = essence_type
-				qdel(essence)
-			var/choice = show_radial_menu(user, src, radial_options, custom_check = CALLBACK(src, PROC_REF(check_menu_validity), user, vial), radial_slice_icon = "radial_thaum")
-			if(!choice || !essence_mapping[choice])
-				return
-			var/essence_type = essence_mapping[choice]
-			var/max_extract = min(target_storage.get_essence_amount(essence_type), vial.max_essence)
-			var/amount_to_extract = min(max_extract, vial.extract_amount)
-			if(amount_to_extract <= 0)
-				to_chat(user, span_warning("Cannot extract any essence with current vial settings."))
-				return
-			var/extracted = target_storage.remove_essence(essence_type, amount_to_extract)
-			if(extracted > 0)
-				vial.contained_essence = new essence_type
-				vial.essence_amount = extracted
-				vial.update_appearance(UPDATE_OVERLAYS)
-				to_chat(user, span_info("You extract [extracted] units of essence from the [storage_choice == "output" ? "output" : "input"]."))
-				update_overlays()
-			return
-		if(processing)
-			to_chat(user, span_warning("The combiner is currently processing."))
-			return
-		var/essence_type = vial.contained_essence.type
-		var/amount = vial.essence_amount
-		if(!input_storage.add_essence(essence_type, amount))
-			to_chat(user, span_warning("The input storage cannot accept this essence (capacity or type limit reached)."))
-			return
-		to_chat(user, span_info("You pour the [vial.contained_essence.name] into the combiner's input."))
-		vial.contained_essence = null
-		vial.essence_amount = 0
-		vial.update_appearance(UPDATE_OVERLAYS)
-		update_overlays()
-		return TRUE
-	..()
-
-/obj/machinery/essence/combiner/attack_hand(mob/user, list/modifiers)
-	if(processing)
-		to_chat(user, span_warning("The combiner is currently processing."))
+/obj/machinery/essence/combiner/proc/attempt_combination(mob/living/user)
+	if(!storage.contents.len)
+		to_chat(user, span_warning("No essences loaded."))
 		return
 
-	var/choice = input(user, "What would you like to do?", "Essence Combiner") in list("Start Combining", "View Storage", "Clear Input", "Cancel")
+	var/list/queued = list()
+	var/list/available = storage.snapshot()
+	var/efficiency = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_output)
 
-	switch(choice)
-		if("Start Combining")
-			attempt_combination(user)
-		if("View Storage")
-			show_storage_status(user)
-		if("Clear Input")
-			clear_input_storage(user)
+	var/batch_limit = (mode == COMBINER_MODE_AUTO) ? 1 : max_concurrent_recipes
 
-/obj/machinery/essence/combiner/proc/show_storage_status(mob/user)
-	var/list/status_text = list()
-	status_text += "=== Essence Combiner Status ==="
-	status_text += ""
-	status_text += "INPUT STORAGE:"
-	status_text += "Capacity: [input_storage.get_total_stored()]/[input_storage.max_total_capacity] units"
-
-	if(input_storage.stored_essences.len > 0)
-		for(var/essence_type in input_storage.stored_essences)
-			var/datum/thaumaturgical_essence/essence = new essence_type
-			status_text += "- [essence.name]: [input_storage.stored_essences[essence_type]] units"
-			qdel(essence)
-	else
-		status_text += "- Empty"
-
-	status_text += ""
-	status_text += "OUTPUT STORAGE:"
-	status_text += "Capacity: [output_storage.get_total_stored()]/[output_storage.max_total_capacity] units"
-
-	if(output_storage.stored_essences.len > 0)
-		for(var/essence_type in output_storage.stored_essences)
-			var/datum/thaumaturgical_essence/essence = new essence_type
-			status_text += "- [essence.name]: [output_storage.stored_essences[essence_type]] units"
-			qdel(essence)
-	else
-		status_text += "- Empty"
-
-	to_chat(user, span_info(jointext(status_text, "\n")))
-
-/obj/machinery/essence/combiner/proc/clear_input_storage(mob/user)
-	if(length(input_storage.stored_essences) == 0)
-		to_chat(user, span_warning("Input storage is already empty."))
-		return
-	for(var/essence_type in input_storage.stored_essences)
-		var/amount = input_storage.stored_essences[essence_type]
-		var/obj/item/essence_vial/new_vial = new(get_turf(src))
-		new_vial.contained_essence = new essence_type
-		new_vial.essence_amount = amount
-		new_vial.update_appearance(UPDATE_OVERLAYS)
-
-	input_storage.stored_essences = list()
-	to_chat(user, span_info("You clear the input storage, creating vials for each essence."))
-
-/obj/machinery/essence/combiner/proc/attempt_combination(mob/user)
-	if(!length(input_storage.stored_essences))
-		to_chat(user, span_warning("No essences loaded for combination."))
-		return
-
-	var/list/possible_recipes = list()
-	var/list/available_essences = input_storage.stored_essences.Copy()
-	var/efficiency_bonus = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_output)
-
-	while(possible_recipes.len < max_concurrent_recipes)
-		var/datum/essence_combination/recipe = find_matching_combination(available_essences)
+	while(queued.len < batch_limit)
+		var/datum/essence_combination/recipe = find_matching_combination(available)
 		if(!recipe)
 			break
 		if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/alchemy) < recipe.skill_required)
 			qdel(recipe)
 			break
-		var/can_make = TRUE
-		for(var/essence_type in recipe.inputs)
-			var/required = recipe.inputs[essence_type]
-			var/have = available_essences[essence_type] || 0
-			if(have < required)
-				can_make = FALSE
-				break
+		for(var/etype in recipe.inputs)
+			available[etype] -= recipe.inputs[etype]
+			if(available[etype] <= 0)
+				available -= etype
+		queued += recipe
 
-		if(!can_make)
-			qdel(recipe)
-			break
-
-		for(var/essence_type in recipe.inputs)
-			var/required = recipe.inputs[essence_type]
-			available_essences[essence_type] -= required
-			if(available_essences[essence_type] <= 0)
-				available_essences -= essence_type
-
-		possible_recipes += recipe
-
-	if(!possible_recipes.len)
-		to_chat(user, span_warning("No combinations can be performed with current essences."))
+	if(!queued.len)
+		to_chat(user, span_warning("No valid combinations can be made with current essences."))
 		return
 
-	var/total_output = 0
-	for(var/datum/essence_combination/recipe in possible_recipes)
-		total_output += round(recipe.output_amount * efficiency_bonus, 1)
+	var/total_out = 0
+	for(var/datum/essence_combination/r in queued)
+		total_out += round(r.output_amount * efficiency, 1)
 
-	if(output_storage.get_available_space() < total_output)
-		to_chat(user, span_warning("Not enough space in output storage for bulk combination."))
-		for(var/datum/essence_combination/recipe in possible_recipes)
-			qdel(recipe)
+	if(output_storage.space() < total_out)
+		to_chat(user, span_warning("Not enough output space for [queued.len] recipe(s)."))
+		for(var/datum/essence_combination/r in queued)
+			qdel(r)
 		return
 
-	begin_bulk_combination(user, possible_recipes)
-
+	begin_bulk_combination(user, queued)
 
 /obj/machinery/essence/combiner/proc/begin_bulk_combination(mob/living/user, list/recipes)
-	processing = TRUE
-	user.visible_message(span_info("[user] activates the essence combiner for bulk processing ([recipes.len] recipes)."))
-	update_overlays()
-
-	var/speed_divide = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_speed)
-	var/process_time = (5 SECONDS + (recipes.len * 2 SECONDS)) / speed_divide
-	addtimer(CALLBACK(src, PROC_REF(finish_bulk_combination), user, recipes), process_time)
+	combining = TRUE
+	if(user)
+		user.visible_message(span_info("[user] activates [src] for bulk processing ([recipes.len] recipe(s))."))
+	else
+		visible_message(span_info("[src] begins automated combination ([recipes.len] recipe(s))."))
+	update_appearance(UPDATE_OVERLAYS)
+	var/speed = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_speed)
+	var/time = (5 SECONDS + (recipes.len * 2 SECONDS)) / speed
+	addtimer(CALLBACK(src, PROC_REF(finish_bulk_combination), user, recipes), time)
 
 /obj/machinery/essence/combiner/proc/finish_bulk_combination(mob/living/user, list/recipes)
-	var/list/produced_essences = list()
-	var/efficiency_bonus = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_output)
-
+	var/list/report = list()
+	var/efficiency = GLOB.thaumic_research.get_research_bonus(/datum/thaumic_research_node/combiner_output)
 	for(var/datum/essence_combination/recipe in recipes)
-		for(var/essence_type in recipe.inputs)
-			var/required_amount = recipe.inputs[essence_type]
-			input_storage.remove_essence(essence_type, required_amount)
+		for(var/etype in recipe.inputs)
+			storage.remove(etype, recipe.inputs[etype])
+		var/out_amount = round(recipe.output_amount * efficiency, 1)
+		output_storage.add(recipe.output_type, out_amount)
+		var/datum/thaumaturgical_essence/e = new recipe.output_type
+		report["[e.name]"] = (report["[e.name]"] || 0) + out_amount
+		qdel(e)
+		qdel(recipe)
+	combining = FALSE
 
-		output_storage.add_essence(recipe.output_type, round(recipe.output_amount * efficiency_bonus, 1))
+	if(network)
+		network.invalidate_cache()
 
-		var/datum/thaumaturgical_essence/output_essence = new recipe.output_type
-		if(produced_essences[output_essence.name])
-			produced_essences[output_essence.name] += round(recipe.output_amount * efficiency_bonus, 1)
+	update_appearance(UPDATE_OVERLAYS)
+	var/list/parts = list()
+	for(var/label in report)
+		parts += "[label] ([report[label]] units)"
+	visible_message(span_info("[src] finishes: [jointext(parts, ", ")]."))
+	if(user)
+		var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+		var/xp = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * recipes.len
+		user.adjust_experience(/datum/attribute/skill/craft/alchemy, xp * boon, FALSE)
+	if(mode == COMBINER_MODE_MANUAL || mode == COMBINER_MODE_AUTO)
+		attempt_combination_auto()
+
+/**
+ * Finds the best matching recipe given [available] essence snapshot.
+ * In auto mode, scores recipes by how much their output is demanded
+ * by downstream machines on the network, preferring the most-wanted first.
+ * In manual mode, only considers the locked recipe.
+ * In generic mode, returns the first matching recipe as before.
+ */
+/obj/machinery/essence/combiner/proc/find_matching_combination(list/available)
+	switch(mode)
+		if(COMBINER_MODE_MANUAL)
+			if(!manual_recipe_path)
+				return null
+			var/datum/essence_combination/recipe = new manual_recipe_path
+			var/ok = TRUE
+			for(var/etype in recipe.inputs)
+				if((available[etype] || 0) < recipe.inputs[etype])
+					ok = FALSE
+					break
+			if(ok)
+				return recipe
+			qdel(recipe)
+			return null
+
+		if(COMBINER_MODE_AUTO)
+			// Build a demand map from the network: output_type -> total units wanted
+			var/list/demand = build_network_demand()
+			var/datum/essence_combination/best_recipe = null
+			var/best_score = 0
+			for(var/rpath in subtypesof(/datum/essence_combination))
+				var/datum/essence_combination/recipe = new rpath
+				var/ok = TRUE
+				for(var/etype in recipe.inputs)
+					if((available[etype] || 0) < recipe.inputs[etype])
+						ok = FALSE
+						break
+				if(!ok)
+					qdel(recipe)
+					continue
+				var/score = demand[recipe.output_type] || 0
+				if(score > best_score)
+					if(best_recipe)
+						qdel(best_recipe)
+					best_recipe = recipe
+					best_score = score
+				else
+					qdel(recipe)
+			return best_recipe // null if nothing matched
+
 		else
-			produced_essences[output_essence.name] = round(recipe.output_amount * efficiency_bonus, 1)
-		qdel(output_essence)
-		qdel(recipe)
+			for(var/rpath in subtypesof(/datum/essence_combination))
+				var/datum/essence_combination/recipe = new rpath
+				var/ok = TRUE
+				for(var/etype in recipe.inputs)
+					if((available[etype] || 0) < recipe.inputs[etype])
+						ok = FALSE
+						break
+				if(ok)
+					return recipe
+				qdel(recipe)
+			return null
 
-	processing = FALSE
-	update_overlays()
+/**
+ * Surveys every machine on the network (except ourselves) and sums up
+ * how many units of each essence type they currently want.
+ * Returns assoc list: [essence_type] = total_units_wanted
+ */
+/obj/machinery/essence/combiner/proc/build_network_demand()
+	if(!network)
+		return list()
+	return network.get_demand(list(/obj/machinery/essence/reservoir, type))
 
-	var/list/production_report = list()
-	for(var/essence_name in produced_essences)
-		production_report += "[essence_name] ([produced_essences[essence_name]] units)"
+/obj/machinery/essence/combiner/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("=== Output ===")
+	if(output_storage.contents.len)
+		for(var/etype in output_storage.contents)
+			var/datum/thaumaturgical_essence/e = new etype
+			var/label = HAS_TRAIT(user, TRAIT_LEGENDARY_ALCHEMIST) \
+				? e.name : "essence smelling of [e.smells_like]"
+			. += span_notice("  - [label]: [output_storage.contents[etype]] units")
+			qdel(e)
+	else
+		. += span_notice("  (empty)")
+	if(combining)
+		. += span_warning("Combination in progress…")
 
-	user.visible_message(span_info("The essence combiner completes bulk processing, producing: [jointext(production_report, ", ")]"))
-	var/boon = user.get_learning_boon(/datum/attribute/skill/craft/alchemy)
-	var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * recipes.len
-	user.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
-
-
-/obj/machinery/essence/combiner/proc/find_matching_combination(list/available_essences)
-	for(var/recipe_path in subtypesof(/datum/essence_combination))
-		var/datum/essence_combination/recipe = new recipe_path
-		var/matches = TRUE
-		for(var/essence_type in recipe.inputs)
-			var/required_amount = recipe.inputs[essence_type]
-			var/available_amount = available_essences[essence_type] || 0
-			if(available_amount < required_amount)
-				matches = FALSE
-				break
-
-		if(matches)
-			return recipe
-		qdel(recipe)
-
-	return null
-
-/obj/machinery/essence/combiner/proc/calculate_mixture_color()
-	var/list/essence_contents = list()
-
-	essence_contents |= input_storage.stored_essences
-	essence_contents |= output_storage.stored_essences
-
-	if(!length(essence_contents))
-		return "#4A90E2"
-
-	var/total_weight = 0
-	var/r = 0, g = 0, b = 0
-
-	for(var/essence_type in essence_contents)
-		var/datum/thaumaturgical_essence/essence = new essence_type
-		var/amount = essence_contents[essence_type]
-		var/weight = amount * (essence.tier + 1) // Higher tier essences have more color influence
-
-		total_weight += weight
-		var/color_val = hex2num(copytext(essence.color, 2, 4))
-		r += color_val * weight
-		color_val = hex2num(copytext(essence.color, 4, 6))
-		g += color_val * weight
-		color_val = hex2num(copytext(essence.color, 6, 8))
-		b += color_val * weight
-
-		qdel(essence)
-
-	if(total_weight == 0)
-		return "#4A90E2"
-
-	r = FLOOR(r / total_weight, 1)
-	g = FLOOR(g / total_weight, 1)
-	b = FLOOR(b / total_weight, 1)
-
-	return rgb(r, g, b)
+#undef COMBINER_MODE_GENERIC
+#undef COMBINER_MODE_MANUAL
+#undef COMBINER_MODE_AUTO

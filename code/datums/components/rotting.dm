@@ -66,9 +66,9 @@
 	var/shouldupdate = FALSE
 	for(var/obj/item/bodypart/B in C.bodyparts)
 		if(!B.skeletonized && B.is_organic_limb())
-			if(!B.rotted)
+			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
 				if(amount > 25 MINUTES)
-					B.rotted = TRUE
+					B.kill_limb()
 					findonerotten = TRUE
 					shouldupdate = TRUE
 					C.change_stat(STAT_CONSTITUTION, -8)
@@ -84,7 +84,7 @@
 					findonerotten = TRUE
 	if(findonerotten)
 		var/turf/open/T = C.loc
-		if(istype(T) && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+		if(istype(T) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 			T.pollute_turf(/datum/pollutant/rot, 9)
 			if(soundloop && soundloop.stopped && !is_zombie)
 				soundloop.start()
@@ -117,7 +117,7 @@
 		if(soundloop && soundloop.stopped)
 			soundloop.start()
 		var/turf/open/T = get_turf(L)
-		if(istype(T)  && amount < 16 MINUTES && !(FACTION_MATTHIOS in L.faction))
+		if(istype(T)  && amount < 16 MINUTES && !L.has_faction(FACTION_MATTHIOS))
 			T.pollute_turf(/datum/pollutant/rot, 9)
 	if(amount > 20 MINUTES)
 		qdel(R)

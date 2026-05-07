@@ -193,7 +193,7 @@
 		user.visible_message(span_warning("[user] cuts open [user.p_their()] palm!"), \
 			span_cult("I slice open my palm!"))
 		if(user.blood_volume)
-			user.apply_damage(pickrune.scribe_damage, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+			user.apply_damage(pickrune.scribe_damage, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM), damage_type = BCLASS_CUT)
 		is_bled = TRUE
 	var/crafttime = (10 SECONDS - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane)) * 5))
 

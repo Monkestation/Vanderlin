@@ -54,7 +54,7 @@
 	var/time = 3 SECONDS
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
 
-	//owner.custom_pain("OH GOD! There is something ripping me from inside!", 30, FALSE, owner.get_bodypart(current_zone))
+	owner.custom_pain("OH GOD! There is something ripping me from inside!", 30, FALSE, owner.get_bodypart(current_zone))
 	if(!do_after(user, time, owner))
 		to_chat(user, span_warning("I must stand still!"))
 		return
@@ -85,7 +85,7 @@
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
 
 	if(owner)
-		//owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
+		owner.custom_pain("OH GOD! There are needles inside my [src]!", 30, FALSE, owner.get_bodypart(current_zone))
 		if(!do_after(user, time, owner))
 			to_chat(user, span_warning("I must stand still!"))
 			return
@@ -108,7 +108,7 @@
 	user.visible_message(span_notice("<b>[user]</b> starts severing \the [src] from \the [owner]..."), \
 					span_notice("I start severing \the [src] from \the [owner]..."), \
 					vision_distance = COMBAT_MESSAGE_RANGE)
-	//owner.custom_pain("OH GOD! My [src] is being STABBED!", 30, FALSE, owner.get_bodypart(current_zone))
+	owner.custom_pain("OH GOD! My [src] is being STABBED!", 30, FALSE, owner.get_bodypart(current_zone))
 
 	var/time = 6 SECONDS
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))
@@ -129,7 +129,7 @@
 	if(!germ_level)
 		to_chat(user, span_notice("\The [src] is free of miasma."))
 		return
-	//owner.custom_pain("OH GOD! My [src] is being STABBED!", 30, FALSE, owner.get_bodypart(current_zone))
+	owner.custom_pain("OH GOD! My [src] is being STABBED!", 30, FALSE, owner.get_bodypart(current_zone))
 
 	var/time = 6 SECONDS
 	time *= (SKILL_MIDDLING/max(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine), 1))

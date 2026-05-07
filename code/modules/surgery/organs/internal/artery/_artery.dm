@@ -101,12 +101,12 @@
 		if(wound.bleed_rate)
 			open_wound = TRUE
 			break
-	/*
+
 	for(var/datum/injury/injury as anything in limb.injuries)
 		if(injury.is_bleeding())
 			open_wound = TRUE
 			break
-	*/
+
 	var/unrestricted_flow = TRUE
 	if(LAZYLEN(limb.grabbedby) || limb.bandage)
 		unrestricted_flow = FALSE

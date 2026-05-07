@@ -5,6 +5,7 @@
 	cast_range = 3
 	point_cost = 7
 	attunements = list(/datum/attunement/ice, /datum/attunement/blood)
+	essences = list(/datum/thaumaturgical_essence/frost, /datum/thaumaturgical_essence/water)
 
 /datum/action/cooldown/spell/essence/ice_bridge/cast(atom/cast_on)
 	. = ..()

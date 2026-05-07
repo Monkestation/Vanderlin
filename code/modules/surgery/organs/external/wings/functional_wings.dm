@@ -1,5 +1,5 @@
 
-#define FLIGHT_DRAIN_AMOUNT 3
+#define FLIGHT_DRAIN_AMOUNT 1.5
 
 /obj/item/organ/wings/flight
 	/// Flight datum

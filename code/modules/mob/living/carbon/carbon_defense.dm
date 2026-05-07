@@ -223,6 +223,21 @@
 				if(G.limb_grabbed == BP)
 					return G
 
+/mob/living/carbon/proc/adjust_germ_level_directed(add_germs, minimum_germs, maximum_germs, body_zone)
+	var/list/bodypart_zone = ALL_BODYPARTS
+	if(body_zone)
+		if(!islist(body_zone))
+			bodypart_zone = list(body_zone)
+		else
+			bodypart_zone = body_zone
+
+	for(var/zone in bodypart_zone)
+		var/obj/item/bodypart/part = get_bodypart(deprecise_zone(zone))
+		for(var/datum/injury/injury in part?.injuries)
+			injury.adjust_germ_level(add_germs, minimum_germs, maximum_germs)
+
+/mob/living/carbon/adjust_germ_level(add_germs, minimum_germs, maximum_germs)
+	adjust_germ_level_directed(add_germs, minimum_germs, maximum_germs)
 
 /mob/living/carbon/attacked_by(obj/item/I, mob/living/user)
 	var/useder = user.zone_selected
@@ -253,9 +268,11 @@
 	if(!statforce)
 		return TRUE
 
-	affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce, crit_message = TRUE)
+	var/real_damage = apply_damage(statforce, I.damtype, affecting)
 
-	apply_damage(statforce, I.damtype, affecting)
+	if(real_damage)
+		affecting.bodypart_attacked_by(user.used_intent.blade_class, real_damage, crit_message = TRUE, pre_applied = TRUE)
+
 
 	if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
 		if(prob(statforce))

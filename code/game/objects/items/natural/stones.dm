@@ -153,6 +153,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	stone_lore()
 
 /obj/item/natural/stone/on_consume(mob/living/eater)
+	. = ..()
 	eater.extra_mob_weight += get_carry_weight(eater)
 	if(!magic_power)
 		return

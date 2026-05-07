@@ -14,6 +14,7 @@
 	#define ELASCAT_STORYTELLER "storyteller"
 	#define ELASCAT_BALANCE "balance"
 	#define ELASCAT_MEDICAL "medical"
+	#define ELASCAT_ENCHANTING "enchanting"
 
 /* Abstract Data */
 	/* Combat */

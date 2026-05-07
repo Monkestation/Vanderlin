@@ -83,3 +83,13 @@
 	)
 	supports_directions = TRUE
 	craftdiff = 3
+
+/datum/blueprint_recipe/alchemy/separator
+	name = "Alembic"
+	desc = "A device for seperating liquids from eachother through distillation."
+	result_type = /obj/structure/chem_separator
+	required_materials = list(
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/glass = 1
+	)
+	craftdiff = 1

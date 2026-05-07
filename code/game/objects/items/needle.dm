@@ -48,8 +48,11 @@
 /obj/item/needle/use(used)
 	if(infinite)
 		return TRUE
+	if(used > stringamt)
+		return FALSE
 	stringamt = stringamt - used
 	update_appearance(UPDATE_OVERLAYS)
+	return TRUE
 //	if(stringamt <= 0)
 //		qdel(src)
 
@@ -204,7 +207,7 @@
 		to_chat(doctor, span_warning("There is a bandage in the way."))
 		return FALSE
 
-	if(affecting.get_incision(FALSE))
+	if(affecting.get_incision())
 		if(affecting.is_artery_torn())
 			var/time = 5 SECONDS
 			time *= (ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_PERCEPTION), 1))
@@ -215,9 +218,12 @@
 			if(stringamt < 1)
 				to_chat(doctor, span_warning("The needle has no thread left!"))
 				return FALSE
+			var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE)
 			if(doctor.diceroll(GET_MOB_SKILL_VALUE(doctor, /datum/attribute/skill/misc/medicine)-1, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
 				to_chat(doctor, span_warning("My hand slips!"))
+				user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * 0.2 * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine))
 				return FALSE
+			user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine))
 			doctor.visible_message(
 				span_green("<b>[doctor]</b> sutures <b>[patient]</b>'s [affecting.name] arteries with \the [src]."),
 				span_green("I suture <b>[patient]</b>'s [affecting.name] arteries with \the [src].")
@@ -228,9 +234,44 @@
 					artery.applyOrganDamage(-min(artery.maxHealth/2, 50))
 					return TRUE
 			return TRUE
+
+	var/injury_healed = FALSE
+	for(var/thing in affecting.injuries)
+		var/datum/injury/injury = thing
+		if(!(injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)) || (injury.damage_per_injury() <= injury.autoheal_cutoff))
+			continue
+		var/time = 2 SECONDS + (injury.damage * 0.5)
+		time *= min(time * 1.5, (ATTRIBUTE_MIDDLING/max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION), 1)))
+		playsound(target, 'sound/foley/sewflesh.ogg', 65, FALSE)
+		if(!do_after(user, time, target))
+			to_chat(user, span_warning("I must stand still!"))
+			return
+		if(!use(1))
+			to_chat(user, span_warning("All used up..."))
+			return
+		//pretty easy
+		if(user.diceroll(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/medicine)+3, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
+			//to_chat(user, span_warning(fail_msg()))
+			continue
+		injury.heal_damage(10)
+		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE)
+		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine))
+		affecting.update_damages()
+		if(affecting.update_bodypart_damage_state())
+			target.update_damage_overlays()
+		if(injury.damage_per_injury() > injury.autoheal_cutoff)
+			user.visible_message(span_green("<b>[user]</b> partially stitches \a [injury.get_desc()] on <b>[target]</b>'s [affecting.name] with \the [src]."), \
+								span_green("I partially stitch \a [injury.get_desc()] on \the [affecting.name] with \the [src]."))
+		else
+			user.visible_message(span_green("<b>[user]</b> stitches \a [injury.get_desc()] shut on <b>[target]</b>'s [affecting.name] with \the [src]."), \
+								span_green("I stitch \a [injury.get_desc()] shut on \the [affecting.name] with \the [src]."))
+		injury.suture_injury()
+		injury_healed = TRUE
+
 	var/list/sewable = affecting.get_sewable_wounds()
 	if(!length(sewable))
-		to_chat(doctor, span_warning("There aren't any wounds to be sewn."))
+		if(!injury_healed)
+			to_chat(doctor, span_warning("There aren't any wounds to be sewn."))
 		return FALSE
 	var/datum/wound/target_wound
 	if(length(sewable) > 1)

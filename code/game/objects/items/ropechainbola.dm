@@ -211,7 +211,7 @@
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	SET_BASE_PIXEL(0, 10)
 	icon_state = "noose"
-	can_buckle = 1
+	can_buckle = TRUE
 	layer = 4.26
 	max_integrity = 10
 	buckle_lying = FALSE
@@ -238,7 +238,7 @@
 		for(var/mob/living/buckled_mob as anything in buckled_mobs)
 			buckled_mob.visible_message("<span class='danger'>[buckled_mob] falls over and hits the ground!</span>")
 			to_chat(buckled_mob, "<span class='userdanger'>You fall over and hit the ground!</span>")
-			buckled_mob.adjustBruteLoss(10)
+			buckled_mob.adjustBruteLoss(10, damage_type = BCLASS_BLUNT)
 			buckled_mob.Knockdown(60)
 	return ..()
 

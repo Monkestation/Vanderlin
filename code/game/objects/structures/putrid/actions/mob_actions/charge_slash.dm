@@ -179,7 +179,7 @@
 		span_userdanger("[source] charges through you!")
 	)
 	living_target.Knockdown(0.6 SECONDS)
-	living_target.apply_damage(damage_dealt, BRUTE)
+	living_target.apply_damage(damage_dealt, BRUTE, damage_type = BCLASS_CUT)
 	playsound(living_target,  pick('sound/combat/hits/bladed/genslash (1).ogg','sound/combat/hits/bladed/genslash (2).ogg','sound/combat/hits/bladed/genslash (3).ogg'), 75, TRUE)
 
 /datum/action/cooldown/meatvine/personal/charge_slash/proc/enter_slash_ready_state()
@@ -251,7 +251,7 @@
 				span_userdanger("You're caught in [user]'s slashing fury!")
 			)
 
-			victim.apply_damage(slash_damage, BRUTE)
+			victim.apply_damage(slash_damage, BRUTE, damage_type = BCLASS_CUT)
 			victim.add_splatter_floor()
 			playsound(victim, pick('sound/combat/hits/bladed/genslash (1).ogg','sound/combat/hits/bladed/genslash (2).ogg','sound/combat/hits/bladed/genslash (3).ogg'), 75, TRUE)
 

@@ -128,6 +128,11 @@
 		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += (wound.bleed_rate * owner.dna.species.bleed_mod)
+
+	for(var/datum/injury/injury as anything in injuries)
+		if(injury.is_bleeding())
+			bleed_rate += injury.get_bleed_rate()
+
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
@@ -145,16 +150,32 @@
 			bleed_rate += 5
 	return bleed_rate
 
-/// Called after a bodypart is attacked so that wounds and critical effects can be applied
-/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
+/obj/item/bodypart/proc/skeletonized_mod(bclass)
+	if(!skeletonized)
+		return 1
+	switch(bclass)
+		if(WOUND_BLUNT)
+			return 1.25
+		if(WOUND_SLASH)
+			return 0.7
+		if(WOUND_BITE)
+			return 1.1
+		if(WOUND_PIERCE)
+			return 0.8
+		else
+			return 1
+
+/// Called in two cases, as an override to an attack after IE apply_damage on a zone. Or After an attack to return a wound.
+/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list(), incoming_germ, organ_bonus, pre_applied = FALSE)
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return
-
+	dam *= damage_multiplier
 	if(dam < 5)
-		return
+		if(CEILING(dam, 1) < 5)
+			return
+		dam = CEILING(dam, 1)
 
 	var/do_crit = (modifiers[CRIT_MOD_CHANCE] <= -100) ? FALSE : TRUE
-
 	if(do_crit && ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		if(human_owner.check_crit_armor(zone_precise, bclass))
@@ -166,421 +187,130 @@
 		if(ispath(user.rmb_intent?.type, /datum/rmb_intent/weak))
 			do_crit = FALSE
 
+	var/wounding_type = WOUND_NONE
+	if(isnum(bclass))
+		wounding_type = bclass
+	else
+		switch(bclass)
+			if(BCLASS_BLUNT, BCLASS_SMASH, BCLASS_PUNCH)
+				wounding_type = WOUND_BLUNT
+			if(BCLASS_DRILL, BCLASS_PICK, BCLASS_PIERCE, BCLASS_SHOT)
+				wounding_type = WOUND_PIERCE
+			if(BCLASS_CUT, BCLASS_CHOP)
+				wounding_type = WOUND_SLASH
+			if(BCLASS_STAB)
+				wounding_type = WOUND_PIERCE
+			if(BCLASS_TWIST)
+				wounding_type = WOUND_BLUNT
+			if(BCLASS_BITE)
+				wounding_type = WOUND_BITE
+			if(BCLASS_BURN)
+				wounding_type = WOUND_BURN
+			if(BCLASS_LASHING)
+				wounding_type = WOUND_LASH
+
+	dam *= skeletonized_mod(wounding_type)
+
+	if(wounding_type == WOUND_NONE)
+		return
+
+	if((zone_precise in list(BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_L_EYE)) && wounding_type == WOUND_PIERCE)
+		organ_bonus = CANT_ORGAN
+
+	if(organ_bonus != CANT_ORGAN)
+		damage_internal_organs(wounding_type, dam, organ_bonus, 0, wound_messages = TRUE)
+
+	for(var/datum/injury/iter_injury as anything in injuries)
+		iter_injury.receive_damage(dam, 0, wounding_type)
+
+	var/datum/injury/injury = create_injury(wounding_type, dam)
+	//if(!istype(injury))
+		//stack_trace("spec_attacked_by failed to create injury with [dam] damage and [wounding_type] wounding type!")
+
+	if(incoming_germ && injury)
+		injury.adjust_germ_level(incoming_germ * 0.1)
+
+	update_damages()
+
+	/*
+	for(var/datum/wound/iter_wound as anything in wounds)
+		iter_wound.receive_damage(wounding_type, dam, 0)
+	*/
+
 	if(do_crit)
 		var/crit_attempt = try_crit(bclass, dam, user, zone_precise, silent, crit_message, modifiers)
 		if(crit_attempt)
 			return crit_attempt
 
-	return manage_dynamic_wound(bclass, dam)
-
-/// Add or upgrade a dynamic wound, returns the wound if added or upgraded
-/obj/item/bodypart/proc/manage_dynamic_wound(bclass, damage)
-	var/datum/wound/wound_type
-
-	for(var/type in GLOB.primordial_wounds)
-		// :(
-		if(!ispath(type, /datum/wound/dynamic))
-			continue
-		var/datum/wound/dynamic/dynwound = GLOB.primordial_wounds[type]
-		if(!length(dynwound.associated_bclasses))
-			continue
-		if(bclass in dynwound.associated_bclasses)
-			wound_type = dynwound.type
-			break
-
-	if(!wound_type)
-		return
-
-	var/datum/wound/dynamic/changed_wound
-	// We do this to get the first unsewn dynamic wound
-	for(var/datum/wound/wound as anything in get_all_wounds_type(wound_type))
-		if(wound.is_sewn()) // Sewn dynamic wounds are DONE because im LAZY no wound re-opening
-			continue
-		changed_wound = wound
-
-	if(!changed_wound)
-		changed_wound = add_wound(wound_type)
-
-	changed_wound?.upgrade(bclass, damage)
-
-	return changed_wound
-
-/// Behemoth of a proc used to apply a wound after a bodypart is damaged in an attack
 /obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
-	if(!bclass || !dam || (owner.status_flags & GODMODE))
+	if(!bclass || isnum(bclass) || !dam || (owner.status_flags & GODMODE))
 		return FALSE
-
 	if(dam < 5)
 		return FALSE
 
-	var/list/crit_classes
-	if(bclass in GLOB.dislocation_bclasses)
-		LAZYADD(crit_classes, "dislocation")
-	if(bclass in GLOB.fracture_bclasses)
-		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
-		LAZYADD(crit_classes, "artery")
-	if(bclass in GLOB.whipping_bclasses)
-		LAZYADD(crit_classes, "scarring")
+	var/damage_dividend = get_damage() / max_damage
 
-	if(!crit_classes)
+	// Collect candidate wounds valid for this bodypart zone
+	var/list/candidates = list()
+	for(var/wound_type in GLOB.primordial_wounds)
+		var/datum/wound/primordial = GLOB.primordial_wounds[wound_type]
+		if(IS_ABSTRACT(primordial))
+			continue
+		if(!primordial.can_roll)
+			continue
+		var/chance = primordial.get_crit_prob(bclass, dam, damage_dividend, user, src, zone_precise, modifiers)
+		if(chance <= 0)
+			continue
+		if(!primordial.can_apply_to_bodypart(src))
+			continue
+		if(prob(chance))
+			candidates += wound_type
+
+	if(!length(candidates))
 		return FALSE
 
-	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
-		dam += 10
-
-	var/used = modifiers[CRIT_MOD_CHANCE]
-	var/damage_dividend = (get_damage() / max_damage)
-	var/list/attempted_wounds
-	switch(pick(crit_classes))
-		if("dislocation")
-			if(damage_dividend < 0.4)
-				return
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				if(HAS_TRAIT(src, TRAIT_BRITTLE))
-					LAZYADD(attempted_wounds, /datum/wound/fracture)
-				else
-					LAZYADD(attempted_wounds, /datum/wound/dislocation)
-		if("fracture")
-			if(damage_dividend < 0.3)
-				return
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			if(HAS_TRAIT(src, TRAIT_BRITTLE))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				if(damage_dividend >= 0.6)
-					LAZYADD(attempted_wounds, /datum/wound/fracture)
-				else
-					LAZYADD(attempted_wounds, /datum/wound/dislocation)
-		if("artery")
-			if(user)
-				if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 10
-				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/artery)
-		if("scarring")
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			used = round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/scarring)
-
-	if(!attempted_wounds)
-		return FALSE
-
-	for(var/wound_type in shuffle(attempted_wounds))
+	for(var/wound_type in shuffle(candidates))
 		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
 		if(applied)
+			applied.on_crit_applied(src, user, zone_precise, modifiers)
 			if(user?.client)
 				record_round_statistic(STATS_CRITS_MADE)
 			return applied
 
 	return FALSE
 
-/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
-	if(!bclass || !dam || (owner.status_flags & GODMODE))
-		return FALSE
+/obj/item/bodypart/chest/try_crit(bclass, dam, mob/living/user, zone_precise, silent, crit_message, list/modifiers)
+	if(zone_precise == BODY_ZONE_PRECISE_GROIN && (bclass in CBT_BCLASSES))
+		var/cbt_multiplier = (user && HAS_TRAIT(user, TRAIT_NUTCRACKER)) ? 2 : 1
+		if(prob(dam * cbt_multiplier))
+			owner.emote("groin", TRUE)
+			owner.Stun(10)
+	return ..()
 
-	if(dam < 5)
-		return FALSE
-
-	var/list/crit_classes
-	if(bclass in GLOB.cbt_classes)
-		LAZYADD(crit_classes, "cbt")
-	if(bclass in GLOB.fracture_bclasses)
-		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
-		LAZYADD(crit_classes, "artery")
-	if(bclass in GLOB.whipping_bclasses)
-		LAZYADD(crit_classes, "scarring")
-
-	if(!crit_classes)
-		return FALSE
-
-	if(user?.stat_roll(STAT_FORTUNE,2,10))
-		dam += 10
-
-	var/used = modifiers[CRIT_MOD_CHANCE]
-	var/damage_dividend = (get_damage() / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
-	var/list/attempted_wounds
-	switch(pick(crit_classes))
-		if("cbt")
-			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-				var/cbt_multiplier = 1
-				if(user && HAS_TRAIT(user, TRAIT_NUTCRACKER))
-					cbt_multiplier = 2
-				if(!resistance && prob(round(dam/5) * cbt_multiplier))
-					LAZYADD(attempted_wounds, /datum/wound/cbt)
-				if(prob(dam * cbt_multiplier))
-					owner.emote("groin", TRUE)
-					owner.Stun(10)
-		if("fracture")
-			if(zone_precise != BODY_ZONE_PRECISE_STOMACH)
-				if(damage_dividend < 0.4)
-					return
-				if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 10
-				if(HAS_TRAIT(src, TRAIT_BRITTLE))
-					dam += 10
-				used += round(damage_dividend * 20 + (dam / 6), 1)
-				if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-					used -= 10
-				var/fracture_type = /datum/wound/fracture/chest
-				if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-					if(damage_dividend >= 0.7) // Lower body paralysis
-						fracture_type = /datum/wound/fracture/groin
-				if(prob(used))
-					LAZYADD(attempted_wounds, fracture_type)
-		if("artery")
-			if(user && (bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			else if(user && istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				if((zone_precise == BODY_ZONE_PRECISE_STOMACH) && !resistance)
-					LAZYADD(attempted_wounds, /datum/wound/slash/disembowel)
-				if(owner.has_wound(/datum/wound/fracture/chest) || (bclass in GLOB.artery_heart_bclasses))
-					LAZYADD(attempted_wounds, /datum/wound/artery/chest)
-				else
-					LAZYADD(attempted_wounds, /datum/wound/artery)
-		if("scarring")
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/scarring)
-
-	if(!attempted_wounds)
-		return FALSE
-
-	for(var/wound_type in shuffle(attempted_wounds))
-		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
-		if(applied)
-			if(user?.client)
-				record_round_statistic(STATS_CRITS_MADE)
-			return applied
-
-	return FALSE
-
-/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
-	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
-	var/static/list/nosestab_zones = list(BODY_ZONE_PRECISE_NOSE)
-	var/static/list/earstab_zones = list(BODY_ZONE_PRECISE_EARS)
+/obj/item/bodypart/head/try_crit(bclass, dam, mob/living/user, zone_precise, silent, crit_message, list/modifiers)
 	var/static/list/knockout_zones = list(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 
-	if(dam < 5)
-		return FALSE
+	if(!owner.stat && (zone_precise in knockout_zones) && !(bclass in NO_KNOCKOUT_BCLASSES) && (bclass in FRACTURE_BCLASSES))
+		var/damage_dividend = get_damage() / max_damage
+		var/calc_dam = dam
+		if(HAS_TRAIT(src, TRAIT_BRITTLE))
+			calc_dam += 20
+		if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
+			calc_dam += 10
+		var/used = round(damage_dividend * 20 + (calc_dam / 6), 1) + (modifiers[CRIT_MOD_CHANCE] || 0) + (modifiers[CRIT_MOD_KNOCKOUT_CHANCE] || 0)
+		if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
+			used -= 10
+		if(prob(used))
+			var/from_behind = user && (owner.dir == REVERSE_DIR(get_dir(owner, user)))
+			owner.next_attack_msg += " [span_crit("<b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!")]"
+			owner.flash_fullscreen("whiteflash3")
+			owner.Unconscious(15 SECONDS + (from_behind * 15 SECONDS))
+			if(owner.client)
+				winset(owner.client, "outputwindow.output", "max-lines=1")
+				winset(owner.client, "outputwindow.output", "max-lines=100")
+			return TRUE // short circuit, no wound applied
 
-	var/list/crit_classes
-	if(bclass in GLOB.dislocation_bclasses)
-		LAZYADD(crit_classes, "dislocation")
-	if(bclass in GLOB.fracture_bclasses)
-		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
-		LAZYADD(crit_classes, "artery")
-
-	if(!crit_classes)
-		return FALSE
-
-	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
-		dam += 10
-
-	var/from_behind = FALSE
-	if(user)
-		if((owner.dir == REVERSE_DIR(get_dir(owner, user))))
-			from_behind = TRUE
-
-	var/used = modifiers[CRIT_MOD_CHANCE]
-	var/damage_dividend = (get_damage() / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
-	var/list/attempted_wounds
-	switch(pick(crit_classes))
-		if("dislocation")
-			if(damage_dividend >= 1)
-				used += round(damage_dividend * 20 + (dam / 6), 1)
-				if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-					used -= 10
-				if(prob(used))
-					if(HAS_TRAIT(src, TRAIT_BRITTLE))
-						LAZYADD(attempted_wounds, /datum/wound/fracture/neck)
-					else
-						LAZYADD(attempted_wounds, /datum/wound/dislocation/neck)
-		if("fracture")
-			if(HAS_TRAIT(src, TRAIT_BRITTLE))
-				dam += 20
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(!owner.stat && (zone_precise in knockout_zones) && !(bclass in GLOB.no_knockout_bclasses))
-				var/knockout_chance = used + modifiers[CRIT_MOD_KNOCKOUT_CHANCE]
-				if(prob(knockout_chance))
-					owner.next_attack_msg += " [span_crit("<b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!")]"
-					owner.flash_fullscreen("whiteflash3")
-					owner.Unconscious(15 SECONDS + (from_behind * 15 SECONDS))
-					if(owner.client)
-						winset(owner.client, "outputwindow.output", "max-lines=1")
-						winset(owner.client, "outputwindow.output", "max-lines=100")
-					return
-			var/dislocation_type
-			var/fracture_type = /datum/wound/fracture/head
-			var/necessary_damage = 0.95
-			if(resistance)
-				fracture_type = /datum/wound/fracture
-			else if(zone_precise == BODY_ZONE_PRECISE_SKULL)
-				fracture_type = /datum/wound/fracture/head/brain
-			else if(zone_precise == BODY_ZONE_PRECISE_EARS)
-				fracture_type = /datum/wound/fracture/head/ears
-			else if(zone_precise == BODY_ZONE_PRECISE_R_EYE || zone_precise == BODY_ZONE_PRECISE_L_EYE)
-				fracture_type = /datum/wound/fracture/head/eyes
-				necessary_damage = 0.9
-			else if(zone_precise == BODY_ZONE_PRECISE_NOSE)
-				fracture_type = /datum/wound/fracture/head/nose
-				necessary_damage = 0.7
-			else if(zone_precise == BODY_ZONE_PRECISE_NECK)
-				fracture_type = /datum/wound/fracture/neck
-				dislocation_type = /datum/wound/dislocation/neck
-			if(prob(used) && (damage_dividend >= necessary_damage))
-				if(dislocation_type)
-					LAZYADD(attempted_wounds, dislocation_type)
-				LAZYADD(attempted_wounds, fracture_type)
-		if("artery")
-			if(user)
-				if(bclass == BCLASS_CHOP && istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 10
-				else
-					if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-						dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				var/artery_type = /datum/wound/artery
-				if(zone_precise == BODY_ZONE_PRECISE_NECK)
-					artery_type = /datum/wound/artery/neck
-				LAZYADD(attempted_wounds, artery_type)
-				if((bclass in GLOB.stab_bclasses) && !resistance)
-					if(zone_precise in earstab_zones)
-						var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
-						if(!my_ears || has_wound(/datum/wound/facial/ears))
-							LAZYADD(attempted_wounds, /datum/wound/fracture/head/ears)
-						else
-							LAZYADD(attempted_wounds, /datum/wound/facial/ears)
-					else if(zone_precise in eyestab_zones)
-						var/obj/item/organ/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
-						if(!my_eyes || (has_wound(/datum/wound/facial/eyes/left) && has_wound(/datum/wound/facial/eyes/right)))
-							LAZYADD(attempted_wounds, /datum/wound/fracture/head/eyes)
-						else if(my_eyes)
-							if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
-								LAZYADD(attempted_wounds, /datum/wound/facial/eyes/right)
-							else if(zone_precise == BODY_ZONE_PRECISE_L_EYE)
-								LAZYADD(attempted_wounds, /datum/wound/facial/eyes/left)
-					else if(zone_precise in nosestab_zones)
-						if(has_wound(/datum/wound/facial/disfigurement/nose))
-							LAZYADD(attempted_wounds, /datum/wound/fracture/head/nose)
-						else
-							LAZYADD(attempted_wounds, /datum/wound/facial/disfigurement/nose)
-					else if(zone_precise in knockout_zones)
-						LAZYADD(attempted_wounds, /datum/wound/fracture/head/brain)
-
-	if(!attempted_wounds)
-		return FALSE
-
-	for(var/wound_type in shuffle(attempted_wounds))
-		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
-		if(applied)
-			if(user?.client)
-				record_round_statistic(STATS_CRITS_MADE)
-			return applied
-
-	return FALSE
-
-/obj/item/bodypart/mouth/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
-	if(dam < 5)
-		return FALSE
-
-	var/list/crit_classes
-	if(bclass in GLOB.fracture_bclasses)
-		LAZYADD(crit_classes, "fracture")
-	if(bclass in GLOB.artery_bclasses)
-		LAZYADD(crit_classes, "artery")
-
-	if(!crit_classes)
-		return FALSE
-
-	if(user?.stat_roll(STAT_FORTUNE, 2, 10))
-		dam += 10
-
-	var/used = modifiers[CRIT_MOD_CHANCE]
-	var/damage_dividend = (get_damage() / max_damage)
-	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
-	var/list/attempted_wounds
-
-	switch(pick(crit_classes))
-		if("fracture")
-			if(HAS_TRAIT(src, TRAIT_BRITTLE))
-				dam += 20
-			if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used) && (damage_dividend >= 0.7))
-				LAZYADD(attempted_wounds, /datum/wound/fracture/mouth)
-				LAZYADD(attempted_wounds, /datum/wound/teeth)
-		if("artery")
-			if(user)
-				if(bclass == BCLASS_CHOP && istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 10
-				else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					dam += 10
-			used += round(damage_dividend * 20 + (dam / 6), 1)
-			if(HAS_TRAIT(src, TRAIT_CRITICAL_RESISTANCE))
-				used -= 10
-			if(prob(used))
-				LAZYADD(attempted_wounds, /datum/wound/artery)
-				if((bclass in GLOB.stab_bclasses) && !resistance)
-					var/obj/item/organ/tongue/tongue = owner.getorganslot(ORGAN_SLOT_TONGUE)
-					if(!tongue || has_wound(/datum/wound/facial/tongue))
-						LAZYADD(attempted_wounds, /datum/wound/fracture/mouth)
-					else
-						LAZYADD(attempted_wounds, /datum/wound/facial/tongue)
-					LAZYADD(attempted_wounds, /datum/wound/teeth)
-
-	if(!attempted_wounds)
-		return FALSE
-
-	for(var/wound_type in shuffle(attempted_wounds))
-		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
-		if(applied)
-			if(user?.client)
-				record_round_statistic(STATS_CRITS_MADE)
-			return applied
-
-	return FALSE
+	return ..() // fall through to generic try_crit
 
 /// Embeds an object in this bodypart
 /obj/item/bodypart/proc/add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
@@ -594,6 +324,16 @@
 	embedder.is_embedded = TRUE
 	embedder.forceMove(src)
 	embedder.embedded(owner, src)
+
+	var/static/list/clamping_behaviors = list(
+		TOOL_HEMOSTAT,
+		TOOL_WIRECUTTER,
+		TOOL_IMPROVISED_HEMOSTAT,
+	)
+
+	if((embedder.tool_behaviour in clamping_behaviors))
+		clamp_limb()
+
 	if(owner)
 		embedder.add_mob_blood(owner)
 		if(!silent)
@@ -616,6 +356,16 @@
 	LAZYREMOVE(embedded_objects, embedder)
 	embedder.is_embedded = FALSE
 	embedder.unembedded(owner)
+
+	var/static/list/clamping_behaviors = list(
+		TOOL_HEMOSTAT,
+		TOOL_WIRECUTTER,
+		TOOL_IMPROVISED_HEMOSTAT,
+	)
+
+	if((embedder.tool_behaviour in clamping_behaviors))
+		unclamp_limb()
+
 	if(!QDELETED(embedder))
 		var/drop_location = owner?.drop_location() || drop_location()
 		if(drop_location)
@@ -634,6 +384,7 @@
 	if(!new_bandage)
 		return FALSE
 	bandage = new_bandage
+	bandage_limb()
 	new_bandage.forceMove(src)
 	return TRUE
 
@@ -686,6 +437,7 @@
 	else
 		qdel(bandage)
 	bandage = null
+	unbandage_limb()
 	owner?.update_damage_overlays()
 	return TRUE
 
@@ -716,8 +468,9 @@
 	var/returned_flags = NONE
 	if(can_bloody_wound())
 		returned_flags |= SURGERY_BLOODY
-	for(var/datum/wound/slash/incision/incision in wounds)
-		if(incision.is_sewn())
+
+	for(var/datum/injury/slash/slash in injuries)
+		if(slash.is_bandaged() || slash.current_stage > slash.max_bleeding_stage) // Shit's unusable
 			continue
 		returned_flags |= SURGERY_INCISED
 		break
@@ -740,10 +493,18 @@
 		returned_flags |= SURGERY_DISLOCATED
 	if(has_wound(/datum/wound/fracture))
 		returned_flags |= SURGERY_BROKEN
-	for(var/datum/wound/puncture/drilling/drilling in wounds)
-		if(drilling.is_sewn())
-			continue
-		returned_flags |= SURGERY_DRILLED
 	if(skeletonized)
-		returned_flags |= SURGERY_INCISED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
+		returned_flags |= SURGERY_INCISED //ehh... we have access to whatever organ is there
 	return returned_flags
+
+/obj/item/bodypart/proc/is_retracted()
+	var/static/list/retracting_behaviors = list(
+		TOOL_RETRACTOR,
+		TOOL_CROWBAR,
+		TOOL_IMPROVISED_RETRACTOR,
+	)
+
+	for(var/obj/item/embedded as anything in embedded_objects)
+		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
+			return TRUE
+	return FALSE

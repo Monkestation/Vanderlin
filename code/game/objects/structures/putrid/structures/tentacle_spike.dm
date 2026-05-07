@@ -72,10 +72,10 @@
 	. = ..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(("meat" in L.faction))
+		if(L.has_faction("meat"))
 			return
 		var/damage = 5 * spike_count
-		L.adjustBruteLoss(damage)
+		L.adjustBruteLoss(damage, damage_type = BCLASS_PIERCE)
 		to_chat(L, "<span class='userdanger'>You are impaled by [src]!</span>")
 
 		for(var/obj/effect/spike_visual/spike in spike_visuals)

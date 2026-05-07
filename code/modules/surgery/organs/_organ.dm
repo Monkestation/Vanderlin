@@ -561,7 +561,7 @@
 		if(status == ORGAN_ROBOTIC)
 			. += span_warning("[src] seems to be broken.")
 			return
-		. += span_warning("[src] has decayed for too long, and has turned a sickly color. Only Pestra herself could restore its functionality.")
+		. += span_warning("[src] has decayed for too long, and has turned a sickly color. Only a skilled physican could restore this.")
 		return
 
 	if(damage >= high_threshold)
@@ -629,10 +629,10 @@
 	if(maximum < damage)
 		return
 	damage = CLAMP(damage + d, 0, maximum)
-//	var/mess = check_damage_thresholds(owner)
+	var/mess = check_damage_thresholds(owner)
 	prev_damage = damage
-//	if(mess && owner)
-//		to_chat(owner, mess)
+	if(mess && owner)
+		to_chat(owner, mess)
 
 ///SETS an organ's damage to the amount "d", and in doing so clears or sets the failing flag, good for when you have an effect that should fix an organ if broken
 /obj/item/organ/proc/setOrganDamage(d)	//use mostly for admin heals
@@ -673,12 +673,21 @@
 	if(delta < 0)
 		if(prev_damage >= low_threshold && damage < low_threshold)
 			organ_flags &= ~ORGAN_FAILING
+			if(organ_flags & ORGAN_DESTROYED)
+				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+				scar_organ(10, 60)
 			return low_threshold_cleared
 		if(prev_damage >= medium_threshold && damage < medium_threshold)
 			organ_flags &= ~ORGAN_FAILING
+			if(organ_flags & ORGAN_DESTROYED)
+				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+				scar_organ(10, 60)
 			return medium_threshold_cleared
 		if(prev_damage >= high_threshold && damage < high_threshold)
 			organ_flags &= ~ORGAN_FAILING
+			if(organ_flags & ORGAN_DESTROYED)
+				organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
+				scar_organ(10, 60)
 			return high_threshold_cleared
 		if(prev_damage >= maxHealth && damage < maxHealth)
 			return now_fixed
@@ -751,6 +760,33 @@
 	// heal ears after healing traits, since ears check TRAIT_DEAF trait
 	// when healing.
 	restoreEars()
+
+/**
+ * Robotic organs do not feel pain, simply for balancing reasons
+ * Thus lowering the shock of IPCs and other synths is easier, as
+ * they don't have many painkillers
+ */
+/obj/item/organ/proc/can_feel_pain()
+	. = FALSE
+	if(pain_multiplier <= 0)
+		return FALSE
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY | ORGAN_DEAD))
+		return FALSE
+	if(HAS_TRAIT(src, TRAIT_NOPAIN))
+		return FALSE
+	if(owner?.can_feel_pain())
+		return TRUE
+
+/obj/item/organ/proc/get_shock(painkiller_included = FALSE)
+	if(!can_feel_pain())
+		return 0
+	// Failing organs always cause maxHealth pain if possible
+	if(is_failing())
+		return round(maxHealth * pain_multiplier, DAMAGE_PRECISION)
+	var/constant_pain = damage
+	if(painkiller_included)
+		constant_pain -= (owner.get_chem_effect(CE_PAINKILLER)/PAINKILLER_DIVISOR)
+	return max(FLOOR(constant_pain * pain_multiplier, DAMAGE_PRECISION), 0)
 
 GLOBAL_LIST_INIT(all_organ_slots, get_all_slots())
 

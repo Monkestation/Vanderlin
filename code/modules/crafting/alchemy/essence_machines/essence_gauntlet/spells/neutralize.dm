@@ -1,10 +1,11 @@
 /datum/action/cooldown/spell/essence/neutralize
 	name = "Neutralize"
 	desc = "Removes harmful toxins and poisons from objects or creatures."
-	button_icon_state = "neutralize"
+	button_icon_state = "borrowtime"
 	cast_range = 1
 	point_cost = 4
 	attunements = list(/datum/attunement/life)
+	essences = list(/datum/thaumaturgical_essence/poison)
 
 /datum/action/cooldown/spell/essence/neutralize/cast(atom/cast_on)
 	. = ..()

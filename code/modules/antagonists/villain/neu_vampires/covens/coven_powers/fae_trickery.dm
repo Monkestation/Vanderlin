@@ -110,7 +110,8 @@
 /obj/item/clothing/face/goblin_mask/attack_hand(mob/user)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.adjustBruteLoss(5)
+		var/obj/item/bodypart/head = C.get_bodypart(BODY_ZONE_HEAD)
+		head.bodypart_attacked_by(BCLASS_BITE, 5, incoming_germ = 500)
 		to_chat(user, span_warning("[src] bites!"))
 		return
 	if((stat == CONSCIOUS))
@@ -237,7 +238,7 @@
 	if(iscarbon(loc))
 		var/mob/living/carbon/C = loc
 		to_chat(C, span_warning("[src] is eating your face!"))
-		C.apply_damage(5, BRUTE)
+		C.apply_damage(5, BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BITE)
 
 /datum/action/fae_trickery
 	name = "Mytherceria Traps"
@@ -285,7 +286,7 @@
 			if(!unique)
 				var/mob/living/L = AM
 				var/atom/throw_target = get_edge_target_turf(AM, get_dir(src, AM))
-				L.apply_damage(30, BRUTE)
+				L.apply_damage(30, BRUTE, damage_type = BCLASS_BLUNT)
 				AM.throw_at(throw_target, rand(8,10), 14, owner)
 				qdel(src)
 

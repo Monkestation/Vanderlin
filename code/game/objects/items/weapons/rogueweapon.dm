@@ -105,7 +105,7 @@
 	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
 		probability *= 0.5
 	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
-	var/easy_dismember = affecting.rotted || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
+	var/easy_dismember = HAS_TRAIT(affecting, TRAIT_ROTTEN) || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
 	if(affecting.owner)
 		if(!hard_dismember)
 			hard_dismember = HAS_TRAIT(affecting.owner, TRAIT_HARDDISMEMBER)

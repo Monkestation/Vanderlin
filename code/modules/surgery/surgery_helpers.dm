@@ -20,6 +20,42 @@
 				return FALSE
 	return TRUE
 
+/proc/bodyparts_from_coverage(coverage)
+	var/list/zones = list()
+
+	if(coverage & HEAD)
+		zones += BODY_ZONE_HEAD
+	if(coverage & CHEST)
+		zones += BODY_ZONE_CHEST
+	if(coverage & GROIN)
+		zones += BODY_ZONE_PRECISE_GROIN
+	if(coverage & NECK)
+		zones += BODY_ZONE_PRECISE_NECK
+	if(coverage & LEG_LEFT)
+		zones += BODY_ZONE_L_LEG
+	if(coverage & LEG_RIGHT)
+		zones += BODY_ZONE_R_LEG
+	if(coverage & FOOT_LEFT)
+		zones += BODY_ZONE_PRECISE_L_FOOT
+	if(coverage & FOOT_RIGHT)
+		zones += BODY_ZONE_PRECISE_R_FOOT
+	if(coverage & ARM_LEFT)
+		zones += BODY_ZONE_L_ARM
+	if(coverage & ARM_RIGHT)
+		zones += BODY_ZONE_R_ARM
+	if(coverage & HAND_LEFT)
+		zones += BODY_ZONE_PRECISE_L_HAND
+	if(coverage & HAND_RIGHT)
+		zones += BODY_ZONE_PRECISE_R_HAND
+	if(coverage & MOUTH)
+		zones += BODY_ZONE_PRECISE_MOUTH
+	if(coverage & LEFT_EYE)
+		zones += BODY_ZONE_PRECISE_L_EYE
+	if(coverage & RIGHT_EYE)
+		zones += BODY_ZONE_PRECISE_R_EYE
+
+	return zones
+
 /proc/zone2covered(location, covered_locations)
 	switch(location)
 		if(BODY_ZONE_HEAD)

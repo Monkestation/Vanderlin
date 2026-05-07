@@ -288,3 +288,6 @@
 			highest_ac = clothes.armor_class
 
 	return highest_ac
+
+/mob/living/carbon/human/proc/grant_inspiration(tier)
+	inspiration = new /datum/inspiration(src, tier)

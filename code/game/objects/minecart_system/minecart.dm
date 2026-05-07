@@ -95,7 +95,7 @@
  */
 /obj/structure/closet/crate/miningcar/proc/smack(mob/living/smacked, damage_mod = 8, momentum_mod = 1.5)
 	ASSERT(momentum_mod >= 1)
-	if(!smacked.apply_damage(damage_mod * momentum, BRUTE, BODY_ZONE_CHEST))
+	if(!smacked.apply_damage(damage_mod * momentum, BRUTE, BODY_ZONE_CHEST, damage_type = BCLASS_BLUNT))
 		return
 	if(atom_integrity <= max_integrity * 0.05)
 		smacked.visible_message(

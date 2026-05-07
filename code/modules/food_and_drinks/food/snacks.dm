@@ -56,6 +56,7 @@ All foods are distributed among various categories. Use common sense.
 	var/eatverb
 	var/dried_type = null
 	var/dry = 0
+	var/should_dry = FALSE
 	var/dunkable = FALSE // for dunkable food, make true
 	var/dunk_amount = 10 // how much reagent is transferred per dunk
 	var/filling_color = "#FFFFFF" //color to use when added to custom food.
@@ -253,7 +254,7 @@ All foods are distributed among various categories. Use common sense.
 				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
 
 		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in get_turf(src)
-		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack) || !istype(loc, /obj/structure/closet/crate/chest/magical))
+		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack))
 			var/obj/structure/table/located = locate(/obj/structure/table) in loc
 			if(located || vendor || chest)
 				warming -= 4 * temp_modifier
@@ -337,6 +338,7 @@ All foods are distributed among various categories. Use common sense.
 	..()
 
 /obj/item/reagent_containers/food/snacks/on_consume(mob/living/eater)
+	. = ..()
 	if(!eater)
 		return
 
@@ -818,3 +820,18 @@ All foods are distributed among various categories. Use common sense.
 			name = "nice [name]"
 	filling_color = filling_color
 	update_snack_overlays(src)
+
+/obj/item/reagent_containers/food/snacks/poisonglands
+	name = "venom sac"
+	desc = "A swollen venom sac drawn from a foul beast, heavy with bitter humors. Its contents are sought by alchemists for the brewing of deadly draughts."
+	icon_state = "venomgland"
+	nutrition = SNACK_POOR
+	list_reagents = list(
+		/datum/reagent/toxin/venom = 20,
+		/datum/reagent/medicine/soporpot = 20,
+		)
+	filling_color = "#8B4513"
+	faretype = FARE_IMPOVERISHED
+	foodtype = GROSS
+	burntime = 0
+	cooktime = 0

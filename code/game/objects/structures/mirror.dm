@@ -154,7 +154,7 @@
 			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 				var/new_eyes = input(user, "Choose your character's eye color:", "Character Preference",eyes.eye_color) as color|null
 				if(new_eyes)
-					eyes.eye_color = sanitize_hexcolor(new_eyes, 6, TRUE, "#FFFFFF")
+					eyes.eye_color = sanitize_hexcolor(new_eyes, default = "#1753a8")
 					should_update = TRUE
 
 	if(should_update)
