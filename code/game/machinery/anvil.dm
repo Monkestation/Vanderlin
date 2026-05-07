@@ -146,7 +146,7 @@
 	qdel(item)
 
 	var/datum/mind/smith_mind = user.mind
-	var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+	var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 0.25
 	smith_mind.add_sleep_experience(working_material.anvilrepair, amt2raise)
 
 	playsound(src, 'sound/items/bsmith3.ogg', 100, FALSE)
@@ -176,16 +176,12 @@
 
 	var/datum/anvil_recipe/recipe = working_material.currecipe
 
-	if(quality_score >= 15) // Did you even try?
+	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
-		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) // It would be impossible to level up otherwise
-		amt2raise *= (1 + recipe.craftdiff)
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.5 // It would be impossible to level up otherwise
 		amt2raise *= user.get_learning_boon(recipe_skill)
-		if(HAS_TRAIT(user, TRAIT_MALUMFIRE))// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
+		if(HAS_TRAIT(user, TRAIT_MALUMFIRE) || GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
 			user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
-		else if(GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
-			amt2raise /= 2 // Let's not get out of hand it's for lower levels with high chances of failure
-			user.mind.add_sleep_experience(recipe_skill, amt2raise , FALSE)
 
 		// Breakthrough system for RNG success
 		var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
