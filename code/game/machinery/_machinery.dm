@@ -34,7 +34,7 @@
 	if(!armor)
 		armor = list("blunt" = 25, "slash" = 25, "stab" = 25,  "piercing" = 10, "fire" = 50, "acid" = 70)
 	. = ..()
-	GLOB.machines += src
+	SSmachines.register_machine(src)
 
 	if(!speed_process)
 		START_PROCESSING(SSmachines, src)
@@ -47,16 +47,13 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/Destroy()
-	GLOB.machines.Remove(src)
+	SSmachines.unregister_machine(src)
 	if(!speed_process)
 		STOP_PROCESSING(SSmachines, src)
 	else
 		STOP_PROCESSING(SSfastprocess, src)
 
 	return ..()
-
-/obj/machinery/proc/locate_machinery()
-	return
 
 /obj/machinery/process()//If you dont use process or power why are you here
 	return PROCESS_KILL
