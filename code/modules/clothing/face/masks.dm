@@ -498,7 +498,8 @@
 	experimental_onhip = TRUE
 	sewrepair = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
+	melt_amount = 50
 	item_weight = 945 GRAMS
 
 //................ Druids Mask ............... //

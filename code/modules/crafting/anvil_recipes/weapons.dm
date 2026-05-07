@@ -717,7 +717,7 @@
 /datum/anvil_recipe/weapons/steel/kiteshield
 	name = "Kite Shield (+Bar, +Hide)"
 	appro_skill = /datum/attribute/skill/craft/armorsmithing
-	additional_items = list(/obj/item/ingot/steel,/obj/item/natural/hide)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/hide)
 	created_item = /obj/item/weapon/shield/tower/metal
 	craftdiff = 3
 

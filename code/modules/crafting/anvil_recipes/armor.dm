@@ -577,7 +577,6 @@
 	craftdiff = 1
 	output_amount = 2
 
-
 /datum/anvil_recipe/armor/steel/gallowglass
 	name = "Gallowglass Helmet"
 	created_item = /obj/item/clothing/head/helmet/gallowglass
