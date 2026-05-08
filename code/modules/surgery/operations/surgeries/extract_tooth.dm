@@ -34,8 +34,8 @@
 	display_results(
 		surgeon,
 		patient,
-		span_danger("I start removing [target]'s tooth."),
-		span_danger("[user] start removing <b>[target]</b>'s tooth."),
+		span_danger("I start removing [patient]'s tooth."),
+		span_danger("[surgeon] start removing <b>[patient]</b>'s tooth."),
 		span_warning("[surgeon] begins performing an extraction in [patient]'s mouth."),
 	)
 

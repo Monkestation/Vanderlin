@@ -537,8 +537,8 @@
 	data["blocker_requirements"] = raw_reqs[4]
 
 	data["skill_name"] = skill_used::name
-	data["min_skill"] = SSskills.level_names[FLOOR(S.skill_min * 0.1, 1)]
-	data["median_skill"] = SSskills.level_names[S.skill_median]
+	data["min_skill"] = SSskills.level_names[FLOOR(skill_min * 0.1, 1)]
+	data["median_skill"] = SSskills.level_names[skill_median]
 
 	data["looping"] = (operation_flags & OPERATION_LOOPING)
 

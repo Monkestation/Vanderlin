@@ -58,7 +58,7 @@
 		return NONE
 
 	if(!istype(tool, /obj/item/pestle)) // Make this storage based
-		if((grind_load() + I.w_class) > max_grind_capacity)
+		if((grind_load() + tool.w_class) > max_grind_capacity)
 			balloon_alert(user, "full!")
 			return ITEM_INTERACT_BLOCKING
 		if(!user.transferItemToLoc(tool, src))
@@ -75,11 +75,13 @@
 		balloon_alert(user, "nothing to grind!")
 		return ITEM_INTERACT_BLOCKING
 
-	// Check for alchemical recipe first
-	var/datum/alch_grind_recipe/foundrecipe = find_recipe()
-	if(!foundrecipe)
-		balloon_alert(user, "can't grind!")
-		return ITEM_INTERACT_BLOCKING
+	var/list/recipes = list()
+	for(var/obj/item/grinding as anything in to_grind)
+		var/datum/alch_grind_recipe/found_recipe = find_recipe(grinding)
+		if(!found_recipe)
+			balloon_alert(user, "can't grind!")
+			return ITEM_INTERACT_BLOCKING
+		recipes[grinding] = found_recipe
 
 	// Process alchemical recipe
 	balloon_alert(user, "grinding...")
@@ -103,7 +105,7 @@
 
 	var/did_flash = FALSE
 	for(var/obj/item/grinding as anything in to_grind)
-		var/datum/alch_grind_recipe/foundrecipe = recipes[G]
+		var/datum/alch_grind_recipe/foundrecipe = recipes[grinding]
 		for(var/output in foundrecipe.valid_outputs)
 			for(var/i in 1 to foundrecipe.valid_outputs[output])
 				new output(get_turf(src))
@@ -115,7 +117,7 @@
 					var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
 					new bonusduck(get_turf(src))
 
-		if(!did_flash && (istype(G, /obj/item/ore) || istype(G, /obj/item/ingot)))
+		if(!did_flash && (istype(grinding, /obj/item/ore) || istype(grinding, /obj/item/ingot)))
 			did_flash = TRUE
 
 		qdel(grinding)

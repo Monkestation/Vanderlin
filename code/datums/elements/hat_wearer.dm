@@ -80,7 +80,7 @@
 
 	if(istype(source, /mob/living/simple_animal))
 		var/mob/living/simple_animal/mob = source
-		if(!mob.has_ally(attacker))
+		if(!mob.has_ally(user))
 			return NONE
 
 	INVOKE_ASYNC(src, PROC_REF(place_hat), source, user, tool)
