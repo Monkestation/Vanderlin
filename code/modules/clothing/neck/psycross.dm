@@ -5,8 +5,99 @@
 	icon_state = "psycross_wood"
 	//dropshrink = 0.75
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
-	sellprice = 10
+	sellprice = 5
 	experimental_onhip = TRUE
+
+/obj/item/clothing/neck/psycross/wood
+	name = "unfinished amulet"
+	desc = "Free your God's emblem from this chunk of lumber."
+	icon_state = "unfinished_wood"
+
+/obj/item/clothing/neck/psycross/wood/attack_self(mob/user)
+	if(!user) return
+
+	var/list/options = list(
+		"Undivided" = /obj/item/clothing/neck/psycross/wood/divine,
+		"Astrata" = /obj/item/clothing/neck/psycross/wood/divine/astrata,
+		"Noc" = /obj/item/clothing/neck/psycross/wood/divine/noc,
+		"Dendor" = /obj/item/clothing/neck/psycross/wood/divine/dendor,
+		"Abyssor" = /obj/item/clothing/neck/psycross/wood/divine/abyssor,
+		"Necra" = /obj/item/clothing/neck/psycross/wood/divine/necra,
+		"Ravox" = /obj/item/clothing/neck/psycross/wood/divine/ravox,
+		"Xylix" = /obj/item/clothing/neck/psycross/wood/divine/xylix,
+		"Eora" = /obj/item/clothing/neck/psycross/wood/divine/eora,
+		"Pestra" = /obj/item/clothing/neck/psycross/wood/divine/pestra,
+		"Malum" = /obj/item/clothing/neck/psycross/wood/divine/malum,
+		"Psydon" = /obj/item/clothing/neck/psycross
+	)
+
+	var/choice = input(user, "Choose what to carve:", "Amulet Crafting") as null|anything in options
+	if(!choice) return
+
+	var/typepath = options[choice]
+	var/obj/item/new_item = new typepath(user.loc)
+
+	if(!user.put_in_hands(new_item))
+		new_item.loc = get_turf(user)
+
+	qdel(src)
+
+/obj/item/clothing/neck/psycross/wood/divine
+	name = "wooden amulet of the Ten"
+	desc = "The Ten eternal, strength in unity. Stalwart for centuries against the darkness."
+	icon_state = "undivided_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/astrata
+	name = "wooden amulet of Astrata"
+	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
+	icon_state = "astrata_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/noc
+	name = "wooden amulet of Noc"
+	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
+	icon_state = "noc_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/dendor
+	name = "wooden amulet of Dendor"
+	desc = "Nature is a body of which we are but its entrails."
+	icon_state = "dendor_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/abyssor
+	name = "wooden amulet of Abyssor"
+	desc = "Oceanshaper and guardian of the seas, make them remember his name."
+	icon_state = "abyssor_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/necra
+	name = "wooden amulet of Necra"
+	desc = "Where, grave, thy victory? I triumph still while the Veiled Lady abides by me."
+	icon_state = "necra_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/ravox
+	name = "wooden amulet of Ravox"
+	desc = "Struggle. Challenge. And rise to struggle again. That is the sword of he who yet lives to fight again."
+	icon_state = "ravox_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/xylix
+	name = "wooden amulet of Xylix"
+	desc = "Be not fooled, and be not afraid to."
+	icon_state = "xylix_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/eora
+	name = "wooden amulet of Eora"
+	desc = "And I love thee because thou art love."
+	icon_state = "eora_wood"
+
+/obj/item/clothing/neck/psycross/wood/divine/pestra
+	name = "wooden amulet of Pestra"
+	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate."
+	icon_state = "pestra_wood"
+
+
+/obj/item/clothing/neck/psycross/wood/divine/malum
+	name = "wooden amulet of Malum"
+	desc = "Blessed be our works, made in His name."
+	icon_state = "malum_wood"
+
 
 // Hunt
 /obj/item/clothing/neck/psycross/great_hunt

@@ -521,18 +521,19 @@
 	starting_atom  = /obj/item/natural/fibers
 	output = /obj/item/broom
 
-/datum/repeatable_crafting_recipe/crafting/wpsycross
-	name = "wooden psycross"
+/datum/repeatable_crafting_recipe/crafting/unfinishedamulet
+	name = "unfinished amulet"
 	requirements = list(
-		/obj/item/grown/log/tree/small= 1,
+		/obj/item/grown/log/tree/stick= 3,
+		/obj/item/natural/fibers = 2,
 	)
 	tool_usage = list(
 		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
 	)
-	attacked_atom = /obj/item/grown/log/tree/small
+	attacked_atom = /obj/item/grown/log/tree/stick
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
-	output = /obj/item/clothing/neck/psycross
+	output = /obj/item/clothing/neck/psycross/wood
 	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/crafting/bone_amulet
