@@ -10,9 +10,9 @@ export const DetailSurgery = ({ r, lookup, pickerMap, allRecipes, essenceIndex, 
     <>
       {!!r.heretical && <WarnFlag color="#cc3333">HERETICAL RESEARCH</WarnFlag>}
       {r.desc && <Box className="RecipeBook__desc" dangerouslySetInnerHTML={{ __html: r.desc }} />}
-      {!!r.req_bodypart && <WarnFlag color="#ffaaaa">Requires bodypart to be present</WarnFlag>}
-      {!!r.req_missing_bodypart && <WarnFlag color="#ffaaaa">Requires bodypart to be MISSING</WarnFlag>}
-      {!!r.req_real_bodypart && <WarnFlag color="#ffaaaa">Cannot be performed on prosthetics</WarnFlag>}
+      {!!r.req_bodypart && <WarnFlag color="#b22222">Requires bodypart to be present</WarnFlag>}
+      {!!r.req_missing_bodypart && <WarnFlag color="#b22222">Requires bodypart to be MISSING</WarnFlag>}
+      {!!r.req_real_bodypart && <WarnFlag color="#b22222">Cannot be performed on prosthetics</WarnFlag>}
       <SectionHead>Procedure</SectionHead>
       {steps?.map((s, i) => (
         <Box key={i} className="RecipeBook__surgery-step">
