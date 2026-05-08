@@ -47,7 +47,7 @@
 	. = ..()
 	if(Adjacent(user))
 		if(fueluse > 0)
-			var/minsleft = fueluse / 1 MINUTES
+			var/minsleft = fueluse / (1 MINUTES)
 			minsleft = round(minsleft)
 			if(minsleft <= 1)
 				minsleft = "less than a minute"

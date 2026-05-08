@@ -4,6 +4,7 @@
 	baseturfs = /turf/open/dungeon_trap
 	icon = 'icons/turf/floors/chasms.dmi'
 	icon_state = "chasms-255"
+	smoothing_icon = "chasms"
 	base_icon_state = "chasms"
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_BORDER
 	smoothing_groups = SMOOTH_GROUP_TURF_OPEN + SMOOTH_GROUP_TURF_CHASM
