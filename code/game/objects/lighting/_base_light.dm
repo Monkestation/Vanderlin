@@ -61,8 +61,6 @@
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
 
-	var/fueluse = -1 // How much fuel the machinery starts with. At -1, it is never turned off with the passing of time.
-
 	var/obj/effect/fog_parter/fog_parter_effect = /obj/effect/fog_parter // set to null to remove fog parter
 
 /obj/machinery/light/Move()
@@ -170,14 +168,8 @@
 		addtimer(CALLBACK(src, PROC_REF(broken_sparks)), delay, TIMER_UNIQUE | TIMER_NO_HASH_WAIT)
 
 /obj/machinery/light/process()
-	if(on)
-		if(initial(fueluse) > 0)
-			if(fueluse > 0)
-				fueluse = max(fueluse - 10, 0)
-			if(fueluse == 0)
-				burn_out()
-	else
-		return ..()
+	if(!on)
+		return PROCESS_KILL
 
 /obj/machinery/light/proc/burn_out()
 	if(on)
