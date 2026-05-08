@@ -7,6 +7,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 5
 	experimental_onhip = TRUE
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/neck/psycross/wood
 	name = "unfinished amulet"
