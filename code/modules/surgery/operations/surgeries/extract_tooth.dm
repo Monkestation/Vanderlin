@@ -34,18 +34,18 @@
 	display_results(
 		surgeon,
 		patient,
-		span_danger("I start pulling [patient]'s tooth out!"),
-		span_warning("[surgeon] shoves [tool] into [patient]'s mouth!"),
-		span_warning("[surgeon] begins performing an extraction on [patient]'s mouth."),
+		span_danger("I start removing [target]'s tooth."),
+		span_danger("[user] start removing <b>[target]</b>'s tooth."),
+		span_warning("[surgeon] begins performing an extraction in [patient]'s mouth."),
 	)
 
 /datum/surgery_operation/basic/extract_tooth/on_success(mob/living/patient, mob/living/surgeon, tool, list/operation_args)
 	display_results(
 		surgeon,
 		patient,
-		span_danger("I pull [patient]'s tooth out!"),
-		span_danger("[surgeon] pulls a tooth out of [patient]'s mouth!"),
-		span_danger("[surgeon] pulls a tooth out of [patient]'s mouth!"),
+		span_danger("I remove [patient]'s tooth!"),
+		span_danger("[surgeon] removes a tooth from [patient]'s mouth!"),
+		span_danger("[surgeon] removes a tooth from [patient]'s mouth!"),
 		TRUE,
 	)
 

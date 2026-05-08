@@ -78,7 +78,7 @@
 	// Check for alchemical recipe first
 	var/datum/alch_grind_recipe/foundrecipe = find_recipe()
 	if(!foundrecipe)
-		balloon_alert(user, "can't grind [to_grind]!")
+		balloon_alert(user, "can't grind!")
 		return ITEM_INTERACT_BLOCKING
 
 	// Process alchemical recipe

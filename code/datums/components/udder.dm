@@ -91,7 +91,7 @@
 
 /obj/item/udder/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	UnregisterSignal(udder_mob, list(COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_ATOM_ITEM_INTERACTION))
+	UnregisterSignal(udder_mob, list(COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_MOB_FEED))
 	udder_mob = null
 	on_generate_callback = null
 	return ..()
@@ -105,7 +105,7 @@
 	if(isnull(require_consume_type))
 		return
 	RegisterSignal(udder_mob, COMSIG_HOSTILE_ATTACKINGTARGET, PROC_REF(on_mob_consume))
-	RegisterSignal(udder_mob, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_mob_feed))
+	RegisterSignal(udder_mob, COMSIG_MOB_FEED, PROC_REF(on_mob_feed))
 
 /obj/item/udder/proc/on_mob_consume(datum/source, atom/feed)
 	SIGNAL_HANDLER
@@ -115,13 +115,13 @@
 	INVOKE_ASYNC(src, PROC_REF(handle_consumption), feed)
 	return
 
-/obj/item/udder/proc/on_mob_feed(datum/source, mob/living/user, obj/item/tool)
+/obj/item/udder/proc/on_mob_feed(datum/source, obj/item/feed, amount, mob/living/user)
 	SIGNAL_HANDLER
 
-	if(!istype(tool, require_consume_type))
+	if(!istype(feed, require_consume_type))
 		return NONE
 
-	INVOKE_ASYNC(src, PROC_REF(handle_consumption), tool, user)
+	INVOKE_ASYNC(src, PROC_REF(handle_consumption), feed, user)
 
 	return ITEM_INTERACT_SUCCESS
 

@@ -297,19 +297,19 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 
 	return ITEM_INTERACT_SUCCESS
 
-/mob/living/simple_animal/proc/attempt_feed(obj/item/feed, mob/living/carbon/human/user)
+/mob/living/simple_animal/proc/attempt_feed(mob/living/user, obj/item/feed)
 	if(stat >= UNCONSCIOUS)
 		return FALSE
 
-	. = TRUE
-	qdel(O)
 	user.visible_message(span_info("[user] hand-feeds [feed] to [src]."), span_notice("I hand-feed [feed] to [src]."))
 	playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
 
 	SEND_SIGNAL(src, COMSIG_MOB_FEED, feed, 30, user)
 	SEND_SIGNAL(src, COMSIG_FRIENDSHIP_CHANGE, user, 10)
 
+	qdel(feed)
 	try_tame(user)
+	return TRUE
 
 /mob/living/simple_animal/proc/try_tame(mob/user, additional_tame_chance)
 	if(has_ally(user))
