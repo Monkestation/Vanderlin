@@ -15,6 +15,8 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	grid_height = 64
+	grid_width = 32
 	item_weight = 300 GRAMS
 	var/legcuff_multiplicative_slowdown = 3
 
