@@ -230,13 +230,24 @@
 	cooldown_length = 30 SECONDS
 
 /datum/coven_power/quietus/dagons_call/activate()
-	. = ..()
+
 	var/mob/living/lastattacker = owner.lastattacker_weakref?.resolve()
-	if(isliving(lastattacker))
-		lastattacker.adjust_stamina(-80)
-		lastattacker.fire_act(6, 6)
-		lastattacker.adjustFireLoss(10)
-		to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
-	else
+
+	if(!isliving(lastattacker))
 		to_chat(owner, "You don't seem to have last attacked soul earlier...")
+		owner.adjust_bloodpool(vitae_cost)
 		return
+
+	. = ..()
+
+	for(var/atom/I in lastattacker.get_equipped_items())
+		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
+		if(ench)
+			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
+			return
+
+
+	lastattacker.adjust_stamina(-80)
+	lastattacker.fire_act(6, 6)
+	lastattacker.adjustFireLoss(10)
+	to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
