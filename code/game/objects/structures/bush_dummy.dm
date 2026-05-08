@@ -17,12 +17,7 @@
 	AddElement(/datum/element/relay_attackers)
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
 
-	if(M.buckled)
-		var/datum/component/riding/ride = M.buckled.GetComponent(/datum/component/riding)
-		if(ride)
-			ride.force_dismount(M)
-		else
-			M.buckled.unbuckle_mob(M, force = TRUE)
+	M.buckled?.unbuckle_mob(M, force = TRUE)
 
 	M.forceMove(src)
 	src.original_name = M.name

@@ -13,6 +13,7 @@
 
 //The code execution of the emote datum is located at code/datums/emotes.dm
 /mob/proc/emote(act, type_override = NONE, message = null, intentional = FALSE, force_silence = FALSE, forced = FALSE, targeted = FALSE)
+	var/original_act = act
 	var/param = message
 	var/custom_param = findchar(act, " ")
 	if(custom_param)
@@ -23,9 +24,11 @@
 	var/list/key_emotes = GLOB.emote_list[act]
 
 	if(!length(key_emotes))
-		if(intentional && !force_silence)
-			to_chat(src, span_notice("'[act]' emote does not exist. Say *help for a list."))
-		return FALSE
+		// if(intentional && !force_silence)
+		// 	to_chat(src, span_notice("'[act]' emote does not exist. Say *help for a list."))
+		// return FALSE
+		key_emotes = GLOB.emote_list["me"]
+		param = original_act
 	var/silenced = FALSE
 	for(var/datum/emote/emote in key_emotes)
 		if(!emote.check_cooldown(src, intentional))

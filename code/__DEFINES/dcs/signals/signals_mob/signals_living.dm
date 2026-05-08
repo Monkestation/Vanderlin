@@ -13,6 +13,9 @@
 /// From /mob/living/update_offsets(animate) : (new_x, new_y, new_w, new_z, animate)
 #define COMSIG_LIVING_UPDATE_OFFSETS "living_update_offsets"
 
+///Called when movement intent is toggled.
+#define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
+
 ///from base of mob/update_transform()
 #define COMSIG_LIVING_POST_UPDATE_TRANSFORM "living_post_update_transform"
 

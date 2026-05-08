@@ -31,10 +31,11 @@
 #define IMMUTABLE_SLOW			(1<<10) // When players should not be able to change the slowdown of the item (Speed potions, etc)
 #define IN_STORAGE				(1<<11) //is this item in the storage item, such as backpack? used for tooltips
 #define SURGICAL_TOOL			(1<<12)	//Tool commonly used for surgery: won't attack targets in an active surgical operation on help intent (in case of mistakes)
-#define SHRINK_ENCHANT			(1<<13)
-#define ITEM_ONLY_BREAK 		(1<<14)
-#define HIGH_VALUE (1<<15)
-#define OBTAINED_DATA (1<<16)
+#define HAND_ITEM				(1<<13) // If an item is just your hand (circled hand, slapper) and shouldn't block things like riding
+#define SHRINK_ENCHANT			(1<<14)
+#define ITEM_ONLY_BREAK 		(1<<15)
+#define HIGH_VALUE (1<<16)
+#define OBTAINED_DATA (1<<17)
 
 // Flags for the clothing_flags var on /obj/item/clothing
 

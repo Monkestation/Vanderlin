@@ -829,8 +829,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		C.reagents.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+		C.add_faction(inherent_factions)
 
 	soundpack_m = new soundpack_m()
 	soundpack_f = new soundpack_f()
@@ -882,8 +881,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction -= i
+		C.remove_faction(inherent_factions)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
@@ -1497,6 +1495,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(!nodmg)
 			playsound(target, user.used_intent.hitsound, 100, FALSE)
 
+		var/obj/item/clothing/gloves = user.get_item_by_slot(ITEM_SLOT_GLOVES)
+		if(gloves)
+			SEND_SIGNAL(gloves, COMSIG_GLOVES_POST_ATTACK_HAND, target, user, damage)
+
+
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return
@@ -1884,7 +1887,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier), incoming_germ = I.germ_level, pre_applied = TRUE)
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
-	if(bodypart_wound?.should_embed(I))
+	if(istype(bodypart_wound) && bodypart_wound?.should_embed(I))
 		var/can_impale = TRUE
 		if(!affecting)
 			can_impale = FALSE

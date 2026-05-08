@@ -13,6 +13,7 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	liquid_fire_power = 10
 	hydration_factor = 10
+	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	var/datum/reagent/age_path
 	var/age_time = 10 MINUTES

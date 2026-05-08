@@ -27,7 +27,7 @@
 		to_chat(owner, span_warning("That target is already dead!"))
 		return FALSE
 
-	if(consumed.faction_check_mob(living_target))
+	if(consumed.faction_check_atom(living_target))
 		to_chat(owner, span_warning("You cannot mark allies!"))
 		return FALSE
 
@@ -53,7 +53,7 @@
 	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(!isliving(target) || target.stat == DEAD)
 		return 0
-	if(consumed.faction_check_mob(target))
+	if(consumed.faction_check_atom(target))
 		return 0
 
 	// Calculate distance to target

@@ -163,7 +163,9 @@
 	return (damage/amount)
 
 /datum/injury/proc/can_autoheal()
-	if(parent_mob.stat == DEAD)
+	if(!parent_mob)
+		return FALSE
+	if(parent_mob?.stat == DEAD)
 		return FALSE
 	if(required_status != BODYPART_ORGANIC)
 		return FALSE
@@ -365,6 +367,8 @@
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
 	if(is_bandaged() || is_clamped() || is_sutured())
+		return FALSE
+	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
 	return ((bleed_timer > 0 || damage_per_injury() > bleed_threshold) && current_stage <= max_bleeding_stage)
 

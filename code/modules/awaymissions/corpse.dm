@@ -13,7 +13,6 @@
 	var/roundstart = TRUE //fires on initialize
 	var/instant = FALSE	//fires on New
 	var/flavour_text = "The mapper forgot to set this!"
-	var/faction = null
 	var/permanent = FALSE	//If true, the spawner will not disappear upon running out of uses.
 	var/random = FALSE		//Don't set a name or gender, just go random
 	var/antagonist_type
@@ -27,6 +26,11 @@
 	var/show_flavour = TRUE
 	var/banType = ROLE_NECRO_SKELETON
 	var/ghost_usable = TRUE
+
+/obj/effect/mob_spawn/Initialize(mapload)
+	. = ..()
+	if(faction)
+		faction = string_list(faction)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/mob_spawn/attack_ghost(mob/user)
@@ -79,7 +83,7 @@
 			mob_gender = pick(MALE, FEMALE)
 		M.gender = mob_gender
 	if(faction)
-		M.faction = list(faction)
+		M.set_faction(faction)
 	if(death)
 		M.death(1) //Kills the new mob
 

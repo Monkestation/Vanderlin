@@ -46,7 +46,7 @@
 	)
 
 /datum/outfit/job/human/species/human/northern/militia/pre_equip(mob/living/carbon/human/H)
-	if(H.faction && ("viking" in H.faction))
+	if(H.has_faction("viking"))
 		cloak = /obj/item/clothing/cloak/stabard/mercenary
 	else
 		cloak = /obj/item/clothing/cloak/stabard/guard

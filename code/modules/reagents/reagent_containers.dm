@@ -37,6 +37,8 @@
 	var/short_cooktime = FALSE
 	/// Long cooktime, when low cooking skill
 	var/long_cooktime = FALSE
+	///can we soak?
+	var/soaker = TRUE
 
 	/// Can be labelled by parchment
 	var/can_label_container = FALSE

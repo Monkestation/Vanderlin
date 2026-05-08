@@ -629,6 +629,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	reagent_state = LIQUID
 	color = "#ffc400"
 	metabolization_rate = 0.5
+	boiling_point = T0C + 95
 
 /datum/reagent/toxin/fyritiusnectar/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.49 && prob(33))

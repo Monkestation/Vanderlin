@@ -579,7 +579,7 @@
 	fueluse = 30 MINUTES
 	layer = BELOW_MOB_LAYER
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	dir = NORTH
 	buckle_requires_restraints = 1

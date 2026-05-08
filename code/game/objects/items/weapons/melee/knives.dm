@@ -371,7 +371,7 @@
 
 /obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/baothagift)
+	enchant(/datum/enchantment/on_hit/baothagift)
 
 
 //................ Silver Dagger ............... //

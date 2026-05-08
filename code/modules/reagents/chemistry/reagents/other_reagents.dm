@@ -1,6 +1,6 @@
 /datum/reagent/blood
 	// vitae is not the actual amount of vitae in the blood, it's a multiplier for how much vitae is in each unit of blood.
-	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"factions"=null,"quirks"=null,"preferences"=null, "vitae"=0)
+	data = list("donor"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null,"mind"=null,"ckey"=null,"gender"=null,"real_name"=null,"cloneable"=null,"quirks"=null,"preferences"=null, "vitae"=0)
 	name = "Blood"
 	color = COLOR_BLOOD
 	metabolization_rate = 20 //SUPER fast
@@ -302,6 +302,26 @@
 	reagent_state = LIQUID
 	color = "#515151"
 	taste_description = "ash"
+
+/datum/reagent/tree_sap
+	name = "Tree Sap"
+	description = "A thick substance left behind by dendor's blessed creations."
+	reagent_state = LIQUID
+	color = "#b85900"
+	taste_description = "sap"
+
+/datum/reagent/thorn_essence
+	name = "Thorn Essence"
+	description = "A component used in further refinement, sourced from thorns."
+	color = "#26490e"
+	taste_description = "the bog"
+
+/datum/reagent/caveweep
+	name = "Psydonian Tears"
+	description = "Tears from a caveweep. It has its uses in modern alchemy."
+	taste_description = "everything"
+	color = "#334274"
+	boiling_point = T0C + 150
 
 /datum/reagent/soap
 	name = "Soap"

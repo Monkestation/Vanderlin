@@ -1,11 +1,3 @@
-/datum/component/riding/direbear/get_rider_offsets_and_layers(pass_index, mob/offsetter)
-	return list(
-		TEXT_NORTH = list(16, 14, OBJ_LAYER),
-		TEXT_SOUTH = list(12, 8, OBJ_LAYER),
-		TEXT_EAST = list(7, 12, OBJ_LAYER),
-		TEXT_WEST = list(14, 12, OBJ_LAYER)
-	)
-
 /datum/status_effect/debuff/staggered
 	id = "staggered"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/staggered
@@ -124,7 +116,6 @@
 	remains_type = /obj/effect/decal/remains/bear
 	attack_sound = list('sound/vo/mobs/direbear/direbear_attack1.wav','sound/vo/mobs/direbear/direbear_attack2.wav','sound/vo/mobs/direbear/direbear_attack3.wav')
 	dodgetime = 30
-	aggressive = 1
 	stat_attack = UNCONSCIOUS	//You falling unconcious won't save you, little one..
 	ai_controller = /datum/ai_controller/direbear
 	can_buckle = TRUE
@@ -135,8 +126,10 @@
 
 /mob/living/simple_animal/hostile/retaliate/direbear/tamed(mob/user)
 	. = ..()
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/direbear)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/direbear)
 
 /mob/living/simple_animal/hostile/retaliate/direbear/get_sound(input)
 	switch(input)

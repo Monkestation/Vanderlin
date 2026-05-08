@@ -32,6 +32,8 @@
 
 	RegisterSignal(src, COMSIG_MOVABLE_EDIT_UNIQUE_IMMERSE_OVERLAY, PROC_REF(edit_immerse_overlay))
 
+	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_UNDENSE), SIGNAL_REMOVETRAIT(TRAIT_UNDENSE)), PROC_REF(undense_changed))
+
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_DEAF), PROC_REF(on_hearing_loss))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_DEAF), PROC_REF(on_hearing_regain))
 
@@ -213,6 +215,11 @@
 	SIGNAL_HANDLER
 	effect_relay.transform = effect_relay.transform.Scale(1 / current_size)
 	effect_relay.transform = effect_relay.transform.Turn(-lying_angle)
+
+/// Called when [TRAIT_UNDENSE] is gained or lost
+/mob/living/proc/undense_changed(datum/source)
+	SIGNAL_HANDLER
+	update_density()
 
 ///Called when [TRAIT_DEAF] is added to the mob
 /mob/living/proc/on_hearing_loss()

@@ -47,7 +47,6 @@
 	retreat_health = 0.4
 
 	dodgetime = 30
-	aggressive = 1
 	body_eater = FALSE
 
 	ai_controller = /datum/ai_controller/lycan

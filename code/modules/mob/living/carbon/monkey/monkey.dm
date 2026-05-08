@@ -105,4 +105,3 @@
 	return 1
 
 /mob/living/carbon/monkey/angry
-	aggressive = TRUE

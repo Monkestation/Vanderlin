@@ -1,11 +1,3 @@
-/datum/component/riding/gator/get_rider_offsets_and_layers(pass_index, mob/offsetter)
-	return  list(
-		TEXT_NORTH = list(0, 25, OBJ_LAYER),
-		TEXT_SOUTH = list(2, 25, OBJ_LAYER),
-		TEXT_EAST = list(8, 20, OBJ_LAYER),
-		TEXT_WEST = list(0, 20, OBJ_LAYER)
-	)
-
 /mob/living/simple_animal/hostile/retaliate/gator
 	icon = 'icons/mob/gator.dmi'
 	name = "gator"
@@ -52,7 +44,6 @@
 	defdrain = 5
 	retreat_health = 0.2
 
-	aggressive = TRUE
 	stat_attack = UNCONSCIOUS
 	body_eater = TRUE
 	can_buckle = TRUE
@@ -85,8 +76,10 @@
 
 /mob/living/simple_animal/hostile/retaliate/gator/tamed(mob/user)
 	. = ..()
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/gator)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/gator)
 
 /mob/living/simple_animal/hostile/retaliate/gator/death(gibbed)
 	..()

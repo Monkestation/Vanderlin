@@ -45,13 +45,15 @@
 	for(var/obj/item/organ/possible_artery in shuffle(affected.getorganslotlist(ORGAN_SLOT_ARTERY)))
 		if(!possible_artery)
 			continue
-		if(possible_artery.damage >= possible_artery.maxHealth)
+		if(possible_artery.damage >= possible_artery?.maxHealth)
 			continue
 		if(artery_type_override && !istype(possible_artery, artery_type_override))
 			continue
 		artery = possible_artery
 		break
-	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || (artery?.damage >= (artery.maxHealth * 0.5))
+	if(!artery)
+		return
+	var/dissection = (severity >= WOUND_SEVERITY_CRITICAL) || (artery?.damage >= (artery?.maxHealth * 0.5))
 	if(artery)
 		if(dissection)
 			artery.dissect()

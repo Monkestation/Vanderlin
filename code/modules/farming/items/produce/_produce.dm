@@ -327,6 +327,7 @@
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
 	item_weight = 15 GRAMS
+	should_dry = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	seed = null
@@ -361,6 +362,7 @@
 	rotprocess = SHELFLIFE_LONG
 	sellprice = 0 // only dried has value
 	item_weight  = 10 GRAMS
+	should_dry = TRUE
 
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	seed = null
@@ -810,6 +812,7 @@
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
 	item_weight = 12 GRAMS
+	grind_results = list(/datum/reagent/caveweep = 5)
 
 /obj/item/reagent_containers/food/snacks/produce/mushroom/borowiki
 	name = "borowiki"

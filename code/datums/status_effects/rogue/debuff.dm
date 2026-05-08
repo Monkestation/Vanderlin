@@ -200,6 +200,7 @@
 	effectedstats = null
 	duration = 4 SECONDS
 	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"

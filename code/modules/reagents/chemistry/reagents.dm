@@ -67,6 +67,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/dead_head = TRUE
 	///if we are false we don't apply the liver efficiency to our metabolization
 	var/liver_chemical = TRUE
+	/// Boiling point in Kelvin. Used by chem_separator to determine distillation order.
+	var/boiling_point = T0C + 100
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()

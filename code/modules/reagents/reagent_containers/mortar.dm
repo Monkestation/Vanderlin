@@ -1,4 +1,3 @@
-
 /obj/item/pestle
 	name = "pestle"
 	desc = ""
@@ -22,41 +21,54 @@
 	grid_height = 32
 	grid_width = 64
 	dropshrink = 0.9
-	var/obj/item/to_grind
+	soaker = FALSE
+	var/list/obj/item/to_grind = list()
+	// total w_class units allowed
+	var/max_grind_capacity = 13
 
 /obj/item/reagent_containers/glass/mortar/Destroy()
-	if(!QDELETED(to_grind))
-		to_grind.forceMove(get_turf(src))
+	for(var/obj/item/I in to_grind)
+		if(!QDELETED(I))
+			I.forceMove(get_turf(src))
 	to_grind = null
 	return ..()
 
+/obj/item/reagent_containers/glass/mortar/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone in to_grind)
+		to_grind -= gone
+
 /obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, list/modifiers)
-	if(!to_grind)
+	if(!length(to_grind))
 		return ..()
 
-	var/obj/item/thing = to_grind
+	balloon_alert(user, "removing items...")
+	if(!do_after(user, (grind_load() / 2) SECONDS, src))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	thing.forceMove(get_turf(user))
-	user.put_in_hands(thing)
+	for(var/obj/item/I as anything in to_grind)
+		I.forceMove(get_turf(user))
 
-	balloon_alert(user, "I remove \an [to_grind].")
-
-	to_grind = null
+	balloon_alert(user, "items removed.")
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/reagent_containers/glass/mortar/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(!istype(tool, /obj/item/pestle)) // Make this storage based
-		if(user.cmode)
-			return NONE
+		if((grind_load() + I.w_class) > max_grind_capacity)
+			balloon_alert(user, "full!")
+			return ITEM_INTERACT_BLOCKING
 		if(!user.transferItemToLoc(tool, src))
 			balloon_alert(user, "stuck!")
 			return ITEM_INTERACT_BLOCKING
 		balloon_alert(user, "added [tool].")
-		to_grind = tool
+		to_grind += tool
 		return ITEM_INTERACT_SUCCESS
 
-	if(!to_grind)
+	if(!length(to_grind))
 		if(user.try_recipes(src, tool))
 			user.changeNext_move(CLICK_CD_FAST)
 			return ITEM_INTERACT_SUCCESS
@@ -70,38 +82,48 @@
 		return ITEM_INTERACT_BLOCKING
 
 	// Process alchemical recipe
-	balloon_alert(user, "i start grinding.")
+	balloon_alert(user, "grinding...")
 	playsound(src, 'sound/foley/mortarpestle.ogg', 100, FALSE)
 
-	if(!do_after(user, 1 SECONDS, src))
+	var/grind_time = (2 SECONDS) + (grind_load() * 3)
+	grind_time *= min(2, GENERAL_SKILL_TIME_MULITPLIER(user, /datum/attribute/skill/craft/alchemy))
+	if(!do_after(user, grind_time, src))
 		return ITEM_INTERACT_BLOCKING
-
-	for(var/output in foundrecipe.valid_outputs)
-		for(var/i in 1 to foundrecipe.valid_outputs[output])
-			new output(get_turf(src))
 
 	var/bonus_modifier = 1
 	switch(user.get_learning_boon(/datum/attribute/skill/craft/alchemy))
-		if(SKILL_LEVEL_JOURNEYMAN)
+		if(SKILL_RANK_JOURNEYMAN)
 			bonus_modifier = 1.4
-		if(SKILL_LEVEL_EXPERT)
+		if(SKILL_RANK_EXPERT)
 			bonus_modifier = 1.6
-		if(SKILL_LEVEL_MASTER)
+		if(SKILL_RANK_MASTER)
 			bonus_modifier = 1.8
-		if(SKILL_LEVEL_LEGENDARY)
+		if(SKILL_RANK_LEGENDARY)
 			bonus_modifier = 2
 
-	if(foundrecipe.bonus_chance_outputs.len > 0)
-		for(var/i in 1 to foundrecipe.bonus_chance_outputs.len)
-			if((foundrecipe.bonus_chance_outputs[foundrecipe.bonus_chance_outputs[i]] * bonus_modifier) >= roll(1,100))
-				var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
-				new bonusduck(get_turf(src))
+	var/did_flash = FALSE
+	for(var/obj/item/grinding as anything in to_grind)
+		var/datum/alch_grind_recipe/foundrecipe = recipes[G]
+		for(var/output in foundrecipe.valid_outputs)
+			for(var/i in 1 to foundrecipe.valid_outputs[output])
+				new output(get_turf(src))
 
-	if(istype(to_grind,/obj/item/ore) || istype(to_grind,/obj/item/ingot))
+		var/bonus = length(foundrecipe.bonus_chance_outputs)
+		if(bonus)
+			for(var/i in 1 to bonus)
+				if((foundrecipe.bonus_chance_outputs[foundrecipe.bonus_chance_outputs[i]] * bonus_modifier) >= roll(1, 100))
+					var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
+					new bonusduck(get_turf(src))
+
+		if(!did_flash && (istype(G, /obj/item/ore) || istype(G, /obj/item/ingot)))
+			did_flash = TRUE
+
+		qdel(grinding)
+
+	if(did_flash)
 		user.flash_fullscreen("whiteflash")
 		var/datum/effect_system/spark_spread/S = new()
-		var/turf/front = get_turf(src)
-		S.set_up(1, 1, front)
+		S.set_up(1, 1, get_turf(src))
 		S.start()
 
 	QDEL_NULL(to_grind)
@@ -114,42 +136,49 @@
 	if(!istype(tool, /obj/item/pestle))
 		return ..()
 
-	if(!to_grind)
+	if(!length(to_grind))
 		balloon_alert(user, "nothing to grid!")
 		return ITEM_INTERACT_BLOCKING
 
-	if(!length(to_grind.grind_results) && !length(to_grind.juice_results))
-		balloon_alert(user, "can't grind [to_grind]!")
+	balloon_alert(user, "grinding...")
+
+	playsound(src, 'sound/foley/mortarpestle.ogg', 100, FALSE)
+
+	var/grind_time = (2.5 SECONDS) + (grind_load() * 3.5)
+	grind_time *= min(2, GENERAL_SKILL_TIME_MULITPLIER(user, /datum/attribute/skill/craft/alchemy))
+	if(!do_after(user, grind_time, src))
 		return ITEM_INTERACT_BLOCKING
 
-	balloon_alert(user, "i start grinding.")
+	for(var/obj/item/grinding as anything in to_grind)
+		if(length(grinding.juice_results))
+			grinding.on_juice()
+			reagents.add_reagent_list(grinding.juice_results)
+		else if(length(grinding.grind_results))
+			grinding.on_grind()
+			reagents.add_reagent_list(grinding.grind_results)
+		else if(!grinding.reagents?.total_volume)
+			continue
 
-	if(!do_after(user, 2.5 SECONDS, src))
-		return ITEM_INTERACT_BLOCKING
+		if(grinding.reagents) //food and pills
+			grinding.reagents.trans_to(src, grinding.reagents.total_volume, transfered_by = user)
 
-	if(to_grind.juice_results) //prioritize juicing
-		to_grind.on_juice()
-		reagents.add_reagent_list(to_grind.juice_results)
-	else
-		to_grind.on_grind()
-		reagents.add_reagent_list(to_grind.grind_results)
-
-	balloon_alert(user, "i grind [to_grind].")
-
-	if(to_grind.reagents) //food and pills
-		to_grind.reagents.trans_to(src, to_grind.reagents.total_volume, transfered_by = user)
-
-	QDEL_NULL(to_grind)
+		qdel(grinding)
 
 	return ITEM_INTERACT_SUCCESS
 
+/obj/item/reagent_containers/glass/mortar/proc/grind_load()
+	var/total = 0
+	for(var/obj/item/I in to_grind)
+		total += I.w_class
+	return total
+
 // Looks through all the alch grind recipes to find what it should create, returns the correct one.
-/obj/item/reagent_containers/glass/mortar/proc/find_recipe()
+/obj/item/reagent_containers/glass/mortar/proc/find_recipe(obj/item/target)
 	for(var/datum/alch_grind_recipe/grindRec in GLOB.alch_grind_recipes)
 		if(grindRec.picky)
-			if(to_grind.type == grindRec.valid_input)
+			if(target.type == grindRec.valid_input)
 				return grindRec
 		else
-			if(istype(to_grind,grindRec.valid_input))
+			if(istype(target, grindRec.valid_input))
 				return grindRec
 	return null

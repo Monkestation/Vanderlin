@@ -19,6 +19,8 @@ GLOBAL_LIST_INIT(artificer_recipes, init_subtypes(/datum/artificer_recipe, list(
 GLOBAL_LIST_INIT(alch_grind_recipes, init_subtypes(/datum/alch_grind_recipe, list()))
 GLOBAL_LIST_INIT(alch_cauldron_recipes, init_subtypes(/datum/alch_cauldron_recipe, list()))
 
+GLOBAL_LIST_INIT(distillation_recipes, setup_distillation_recipes())
+
 /* COLORS */
 GLOBAL_LIST_INIT(peasant_dyes, list(
 	"Linen" = CLOTHING_LINEN,

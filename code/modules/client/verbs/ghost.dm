@@ -49,7 +49,7 @@
 	live_spirit.livingname = real_name
 	live_spirit.ckey = ckey
 	ADD_TRAIT(live_spirit, TRAIT_PACIFISM, TRAIT_GENERIC)
-	live_spirit.set_patron(client.prefs.selected_patron)
+	live_spirit.set_patron(client?.prefs.selected_patron)
 	SSdeath_arena.add_fighter(live_spirit, mind?.last_death)
 
 	if(HAS_TRAIT(mind?.current, TRAIT_BURIED_COIN_GIVEN))

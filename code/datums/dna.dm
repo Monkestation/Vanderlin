@@ -66,7 +66,7 @@
 	if(ishuman(holder))
 		var/mob/living/carbon/human/H = holder
 		L[DNA_SKIN_TONE_BLOCK] = H.skin_tone
-		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), default="FFFFFF")
+		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.get_eye_color(), include_crunch = FALSE, default="FFFFFF")
 
 	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
 		if(L[i])
@@ -91,9 +91,9 @@
 	var/mob/living/carbon/human/H = holder
 	switch(blocknumber)
 		if(DNA_SKIN_TONE_BLOCK)
-			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.skin_tone))
+			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.skin_tone, include_crunch = TRUE))
 		if(DNA_EYE_COLOR_BLOCK)
-			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.get_eye_color()))
+			setblock(unique_identity, blocknumber, sanitize_hexcolor(H.get_eye_color(), include_crunch = TRUE))
 		if(DNA_GENDER_BLOCK)
 			switch(H.gender)
 				if(MALE)

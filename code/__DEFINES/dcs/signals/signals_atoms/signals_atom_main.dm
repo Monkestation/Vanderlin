@@ -20,6 +20,9 @@
 /// Called on [/atom/SpinAnimation()] : (speed, loops, segments, angle)
 #define COMSIG_ATOM_SPIN_ANIMATION "atom_spin_animation"
 
+/// From /atom/proc/set_density(new_value) for when an atom changes density
+#define COMSIG_ATOM_DENSITY_CHANGED "atom_density_change"
+
 /// from base of [/atom/proc/extinguish]
 #define COMSIG_ATOM_EXTINGUISH "atom_extinguish"
 

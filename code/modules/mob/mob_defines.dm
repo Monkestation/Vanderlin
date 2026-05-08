@@ -164,8 +164,7 @@
 	var/job = null//Living
 	var/datum/job/job_type
 
-	/// A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
-	var/list/faction = list(FACTION_NEUTRAL)
+	faction = list(FACTION_NEUTRAL)
 
 	///The last mob/living/carbon to push/drag/grab this mob (exclusively used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null

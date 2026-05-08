@@ -295,7 +295,7 @@
 
 /obj/item/bodypart/proc/on_migraine_life()
 	if(prob(2))
-		add_pain(rand(25, 40))
+		add_pain(rand(5, 15))
 
 		if(prob(30))
 			owner.set_eye_blur_if_lower(rand(6 SECONDS, 12 SECONDS))

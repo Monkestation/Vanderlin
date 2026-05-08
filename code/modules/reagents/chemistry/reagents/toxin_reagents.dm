@@ -22,10 +22,11 @@
 	color = "#792300" // rgb: 121, 35, 0
 	toxpwr = 2.5
 	taste_description = "mushroom"
+	boiling_point = T0C + 120
 
 /datum/reagent/toxin/plasma
-	name = "Plasma"
-	description = "Plasma in its liquid form."
+	name = "Purple Aetherium"
+	description = "A strange liquid, it seems almost... alive."
 	taste_description = "bitterness"
 	specific_heat = SPECIFIC_HEAT_PLASMA
 	taste_mult = 1.5
@@ -52,8 +53,6 @@
 	color = "#7F8400" // rgb: 127, 132, 0
 	toxpwr = 0.1
 	taste_description = "green tea"
-
-
 
 /datum/reagent/medicine/soporpot
 	name = "Soporific Poison"
@@ -266,3 +265,292 @@
 	desc = "A squishy pale gland, filled to the brim with venom of the deadly Aragn spider. Feels cold to the touch."
 	icon = 'icons/obj/webbing.dmi'
 	icon_state = "gland"
+
+/datum/reagent/poison/mirelung_brew
+	name = "Mirelung Brew"
+	description = "A vile lung-coating poison used by swamp brigands. It causes the victim to experience respiratory failure over time, as their airways flood with a thick, viscous film mimicking drowning."
+	reagent_state = LIQUID
+	color = "#3B5323"
+	taste_description = "swamp water and bile"
+	scent_description = "stagnant water"
+	harmful = TRUE
+	metabolization_rate = 0.4 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/mirelung_brew/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustOxyLoss(4 * efficiency, 0)
+	M.adjustToxLoss(1 * REM * efficiency, 0)
+	if(current_cycle > 6)
+		M.adjust_dizzy(3 SECONDS * efficiency)
+	. = ..()
+
+/datum/reagent/poison/heatcramp_oil
+	name = "Heatcramp Oil"
+	description = "Rendered fat, mixed with capsaicin extract. Induces severe involuntary muscle spasms and cramps on absorption, making coordinated movement extremely difficult without dealing significant direct damage."
+	reagent_state = LIQUID
+	color = "#FF6347"
+	taste_description = "unbearable burning"
+	scent_description = "cooking flesh and pepper"
+	harmful = TRUE
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/heatcramp_oil/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH))
+		M.set_jitter(10 SECONDS)
+
+/datum/reagent/poison/heatcramp_oil/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjust_jitter(4 SECONDS * efficiency)
+	if(!HAS_TRAIT(M, TRAIT_NOSTAMINA))
+		M.adjust_stamina(3 * efficiency)
+	M.adjustToxLoss(0.75 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/blinding_spore
+	name = "Blinding Spore"
+	description = "Powder from the eyeblight mushroom. Contact with skin or mucous membranes induces temporary blindness and severe eye irritation. Not lethal, but profoundly incapacitating in a fight."
+	reagent_state = SOLID
+	color = "#F5DEB3"
+	taste_description = "choking dust"
+	scent_description = "dry fungal spores"
+	harmful = TRUE
+
+/datum/reagent/poison/blinding_spore/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		if(reac_volume >= 3)
+			M.adjust_eye_blur(5)
+			M.adjust_dizzy(15 SECONDS)
+			if(show_message)
+				M.visible_message(span_danger("[M] staggers, clutching at their eyes!"), span_userdanger("Your eyes burn and your vision whites out!"))
+
+/datum/reagent/poison/blinding_spore/on_mob_life(mob/living/carbon/M, efficiency)
+	M.set_eye_blur_if_lower(4 * efficiency)
+	M.adjust_dizzy(2 SECONDS * efficiency)
+	M.adjustToxLoss(0.5 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/soulbane_ichor
+	name = "Soulbane Ichor"
+	description = "Black fluid extracted from the remains of a creature that died twice. It is profoundly hostile to the living, dealing damage across all categories simultaneously while interfering with natural healing. Extremely dangerous."
+	reagent_state = LIQUID
+	color = "#0D0D0D"
+	taste_description = "oblivion"
+	scent_description = "nothing and death"
+	harmful = TRUE
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/soulbane_ichor/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_PULSE, -1, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, - 2, "[type]")
+
+/datum/reagent/poison/soulbane_ichor/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_PULSE, "[type]")
+	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
+
+/datum/reagent/poison/soulbane_ichor/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustBruteLoss(2 * REM * efficiency, 0)
+	M.adjustFireLoss(2 * REM * efficiency, 0)
+	M.adjustToxLoss(3 * REM * efficiency, 0)
+	M.adjustOxyLoss(1.5 * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/ironblight
+	name = "Ironblight"
+	description = "A black liquid that corrodes metal and is devastating against armored targets. Against living flesh it deals modest brute damage, but against those wearing metal armor its vapors eat through joints and fastenings particularly useful against knights."
+	reagent_state = LIQUID
+	color = "#1C1C1C"
+	taste_description = "sharp metal"
+	scent_description = "acid and rust"
+	harmful = TRUE
+
+/datum/reagent/poison/ironblight/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		M.adjustBruteLoss(reac_volume * 0.5, 0, damage_type = BCLASS_BLUNT)
+		for(var/obj/item/clothing/clothes in get_all_worn_items(M))
+			if(!clothes.smeltresult && !clothes.melting_material)
+				continue
+			if(!ispath(clothes.smeltresult, /obj/item/ingot))
+				continue
+			clothes.take_damage(reac_volume * 0.25)
+
+/datum/reagent/poison/ironblight/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustBruteLoss(1.5 * REM * efficiency, 0)
+	M.adjustToxLoss(1 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/quietdeath
+	name = "Quietdeath"
+	description = "A slow, tasteless, colorless poison beloved of conspirators and the patient. It provides no warning to the victim, metabolizing silently over hours before delivering a sudden catastrophic organ shutdown."
+	reagent_state = LIQUID
+	color = "#FFFAFA"
+	taste_description = "nothing"
+	scent_description = "nothing"
+	harmful = TRUE
+	metabolization_rate = 0.1 * REAGENTS_METABOLISM
+	boiling_point = T0C + 100
+
+/datum/reagent/poison/quietdeath/on_mob_life(mob/living/carbon/M, efficiency)
+	// Silent until it detonates
+	if(current_cycle < 20)
+		return .()
+	M.adjustToxLoss(current_cycle * 0.3 * REM * efficiency, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1 * REM * efficiency, 150)
+	. = ..()
+
+/datum/reagent/poison/quietdeath/on_mob_delete(mob/living/M)
+	if(current_cycle >= 10)
+		M.adjustToxLoss(current_cycle * 0.5)
+	. = ..()
+
+/datum/reagent/poison/mirrorwaste
+	name = "Mirrorwaste"
+	description = "A reflective silvery fluid left over from failed scrying rituals. It does nothing to normal flesh. But against creatures sustained by magic or undeath, it disrupts their essential coherence, dealing significant damage."
+	reagent_state = LIQUID
+	color = "#C0C0C0"
+	taste_description = "metallic nothing"
+	scent_description = "still air"
+	harmful = TRUE
+	boiling_point = T0C + 120
+
+/datum/reagent/poison/mirrorwaste/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if(M.mob_biotypes & MOB_UNDEAD)
+		M.adjustBruteLoss(reac_volume * 1.5, 0, damage_type = BCLASS_LASHING)
+		M.adjustFireLoss(reac_volume * 1.5, 0)
+		if(show_message)
+			M.visible_message(span_danger("[M] writhes as the silvery liquid disrupts their form!"), span_userdanger("The liquid tears at your very existence!"))
+
+/datum/reagent/poison/mirrorwaste/on_mob_life(mob/living/carbon/M, efficiency)
+	if(M.mob_biotypes & MOB_UNDEAD)
+		M.adjustBruteLoss(4 * REM * efficiency, 0)
+		M.adjustToxLoss(3 * REM * efficiency, 0)
+	else
+		// Minor toxic reaction in normal creatures
+		M.adjustToxLoss(0.5 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/hexblood_poison
+	name = "Hexblood Poison"
+	description = "Brewed from cursed blood and wychwood ash. It seeps into wounds on contact, rapidly delivering trauma as it inflames tissue and causes internal hemorrhage. Popular with assassins."
+	reagent_state = LIQUID
+	color = "#8B0000"
+	taste_description = "iron and char"
+	scent_description = "burnt copper"
+	harmful = TRUE
+	metabolization_rate = 0.75 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/hexblood_poison/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		var/mob/living/carbon/carbon = M
+		if(istype(carbon))
+			if(!length(carbon.all_injuries))
+				return
+			for(var/datum/injury/injury as anything in carbon.all_injuries)
+				injury.open_injury(reac_volume * 0.25)
+				injury.adjust_germ_level(reac_volume)
+		else
+			M.adjustBruteLoss(reac_volume * 3, 0)
+
+/datum/reagent/poison/rotwater
+	name = "Rotwater"
+	description = "Contaminated water drawn from a corpse-pit. Drinking it introduces rapidly multiplying bacteria into the bloodstream. It poisons slowly at first, then accelerates the infection compounds upon itself over time."
+	reagent_state = LIQUID
+	color = "#5D4037"
+	taste_description = "fetid water"
+	scent_description = "rot and swamp"
+	harmful = TRUE
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/rotwater/on_mob_metabolize(mob/living/L)
+	. = ..()
+	L.add_chem_effect(CE_ANTIBIOTIC, -10, "[type]")
+	ADD_TRAIT(L, TRAIT_IMMUNITY_CRIPPLED, "[type]")
+
+/datum/reagent/poison/rotwater/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
+	REMOVE_TRAIT(L, TRAIT_IMMUNITY_CRIPPLED, "[type]")
+
+/datum/reagent/poison/rotwater/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		var/mob/living/carbon/carbon = M
+		if(istype(carbon))
+			if(!length(carbon.all_injuries))
+				return
+			for(var/datum/injury/injury as anything in carbon.all_injuries)
+				if(injury.damage_type == WOUND_DIVINE)
+					continue
+				injury.adjust_germ_level(reac_volume * 4)
+
+/datum/reagent/poison/rotwater/on_mob_life(mob/living/carbon/M, efficiency)
+	var/compound_rate = min(0.5 + (current_cycle * 0.15), 4)
+	M.adjustToxLoss(compound_rate * REM * efficiency, 0)
+	M.add_nausea(1 * efficiency)
+	if(current_cycle > 8)
+		M.add_chem_effect(CE_ANTIBIOTIC, -5, "[type]")
+	. = ..()
+
+/datum/reagent/poison/gloomvenom
+	name = "Gloomvenom"
+	description = "Distilled from the glands of gloom-spiders that dwell in lightless caverns. Unlike common venoms it acts on the mind rather than the body, inducing escalating confusion and disorientation before finally causing paralytic toxin buildup."
+	reagent_state = LIQUID
+	color = "#4A235A"
+	taste_description = "musty sweetness"
+	scent_description = "damp caves"
+	harmful = TRUE
+	metabolization_rate = 0.3 * REAGENTS_METABOLISM
+	boiling_point = T0C + 110
+
+/datum/reagent/poison/gloomvenom/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjust_confusion(4 SECONDS * efficiency)
+	M.adjust_dizzy(3 SECONDS * efficiency)
+	if(current_cycle > 5)
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1.5 * REM * efficiency, 150)
+	if(current_cycle > 10)
+		M.adjustToxLoss(1.5 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/ashfall_dust
+	name = "Ashfall Dust"
+	description = "Powdered remains of a creature scorched by magical fire. Suspended in air or splashed across flesh, the fine particles ignite on contact with warmth, inflicting persistent burn injury. Its touch lingers."
+	reagent_state = SOLID
+	color = "#696969"
+	taste_description = "choking ash"
+	scent_description = "burning hair and char"
+	harmful = TRUE
+
+/datum/reagent/poison/ashfall_dust/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		M.adjust_fire_stacks(reac_volume * 0.5)
+		M.adjustFireLoss(reac_volume, 0)
+
+/datum/reagent/poison/ashfall_dust/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustFireLoss(2 * REM * efficiency, 0)
+	. = ..()
+
+/datum/reagent/poison/blistergall
+	name = "Blistergall"
+	description = "A caustic secretion harvested from acid-slugs that nest near hot springs. On contact with flesh it erupts into suppurating blisters, causing severe burn damage. Internal ingestion causes intense toxic damage."
+	reagent_state = LIQUID
+	color = "#ADFF2F"
+	taste_description = "burning acid"
+	scent_description = "acidic rot"
+	harmful = TRUE
+
+/datum/reagent/poison/blistergall/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
+	. = ..()
+	if((method & TOUCH) || (method & VAPOR))
+		M.adjustFireLoss(reac_volume * 1.5, 0)
+		if(show_message)
+			M.visible_message(span_danger("[M]'s skin erupts in blistering welts!"), span_userdanger("Your skin erupts in boiling blisters!"))
+
+/datum/reagent/poison/blistergall/on_mob_life(mob/living/carbon/M, efficiency)
+	M.adjustFireLoss(3 * REM * efficiency, 0)
+	M.adjustToxLoss(2 * REM * efficiency, 0)
+	. = ..()

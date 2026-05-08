@@ -539,7 +539,7 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/alch_cauldron_recipe,
 		/datum/essence_combination,
 		/datum/natural_precursor,
-		/datum/essence_infusion_recipe,
+		/datum/infusion_recipe,
 		/datum/container_craft/cooking/herbal_salve,
 		/datum/container_craft/cooking/herbal_tea,
 		/datum/container_craft/cooking/herbal_oil,

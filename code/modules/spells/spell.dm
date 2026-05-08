@@ -107,6 +107,8 @@
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
+	///list of essences we can use as a sub for cost
+	var/list/essences
 	/// Value summed from caster and spell attunements to adjust some spell effects.
 	var/attuned_strength
 
@@ -926,12 +928,12 @@
 			if(QDELETED(target) || !istype(target))
 				stack_trace("Essence spell checking cost without being assigned to an essence gauntlet!")
 				return FALSE
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
 				return FALSE
 			// Ditto
 			if(!length(gaunt.stored_vials))
 				return FALSE
-			if(!gaunt.can_consume_essence(used_cost, attunements))
+			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
 					owner.balloon_alert(owner, "Not enough essence!")
 				return FALSE
@@ -996,7 +998,11 @@
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt?.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
+				return
+
+			if(!gaunt.can_consume_essence(used_cost, essences))
+				owner.balloon_alert(owner, "not enough essence!")
 				return
 
 			gaunt.consume_essence(used_cost, attunements)

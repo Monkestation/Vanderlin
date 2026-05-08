@@ -16910,9 +16910,7 @@
 "pNt" = (
 /obj/fae_trickery_trap/disorient,
 /turf/open/floor/abyss_tile/three{
-	color = "#29404E";
-	pixel_x = 0;
-	pixel_y = 0
+	color = "#29404E"
 	},
 /area/indoors/wilderness/magic)
 "pNu" = (
@@ -19001,9 +18999,6 @@
 /obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid{
 	pixel_x = -18;
 	pixel_y = -16
-	},
-/mob/living/simple_animal/hostile/retaliate/elemental/warden{
-	faction = list("Hostile")
 	},
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
@@ -123148,7 +123143,7 @@ psq
 dey
 beb
 apu
-ltt
+fkm
 eet
 qRB
 sSY

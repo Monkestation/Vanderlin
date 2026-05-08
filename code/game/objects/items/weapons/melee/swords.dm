@@ -929,7 +929,7 @@
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/vampiric)
+	enchant(/datum/enchantment/on_hit/vampiric)
 
 /obj/item/weapon/sword/long/vlord/getonmobprop(tag)
 	. = ..()

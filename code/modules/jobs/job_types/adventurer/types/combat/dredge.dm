@@ -488,7 +488,7 @@
 			In the dark corners of every room I see him. I can't sleep without a light-source.")
 			)
 		if("Bard")
-			spawned.inspiration = new /datum/inspiration(spawned)
+			spawned.grant_inspiration()
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/music, 3, TRUE)
 			spawned.change_stat(STAT_INTELLIGENCE, 1)
 			spawned.change_stat(STAT_ENDURANCE, 1)

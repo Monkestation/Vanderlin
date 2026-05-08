@@ -198,9 +198,9 @@
 
 	donation_budget_this_tick = (max_donation_rate_per_second)
 
-	if (ethereal_recharge_rate != 0 && (amount < get_softcap()))
+	if (ethereal_recharge_rate != 0 && (amount < get_safe_softcap()))
 		adjust_mana(ethereal_recharge_rate, attunements_to_generate)
-	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_softcap())
+	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_safe_softcap())
 		var/list/leylines = list()
 		for(var/obj/effect/ebeam/beam in range(3, get_turf(parent)))
 			if(!beam.owner.mana_pool)
@@ -475,6 +475,18 @@
 
 	maximum_mana_capacity = new_max
 
+	if(parent && ismob(parent))
+		var/mob/holder = parent
+		var/datum/hud/human/hud_used = holder.hud_used
+		if(hud_used?.mana)
+			var/filled = round((src.amount / get_softcap()) * 100, 10)
+			if(filled < 10)
+				return
+			filled = clamp(filled, 0, 120)
+			hud_used.mana.icon_state = "mana[filled]"
+		holder.mana_overload_threshold = maximum_mana_capacity * 0.9
+
+
 /datum/mana_pool/proc/get_percent_to_max()
 	SHOULD_BE_PURE(TRUE)
 
@@ -493,6 +505,14 @@
 
 	var/skill_level = max(1, GET_MOB_SKILL_VALUE_OLD(L, /datum/attribute/skill/magic/arcane))
 	return softcap + (skill_level * 100)
+
+/datum/mana_pool/proc/get_safe_softcap()
+	var/softcap = get_softcap()
+	if(ismob(parent))
+		var/mob/holder = parent
+		return min(softcap, holder.mana_overload_threshold-10)
+	else
+		return softcap
 
 ///this is how a mana pool responds to backlash for most pools this is just taking damage
 /datum/mana_pool/proc/mana_backlash(backlash_intensity)

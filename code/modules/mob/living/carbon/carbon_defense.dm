@@ -240,7 +240,7 @@
 
 	for(var/zone in bodypart_zone)
 		var/obj/item/bodypart/part = get_bodypart(deprecise_zone(zone))
-		for(var/datum/injury/injury in part.injuries)
+		for(var/datum/injury/injury in part?.injuries)
 			injury.adjust_germ_level(add_germs, minimum_germs, maximum_germs)
 
 /mob/living/carbon/adjust_germ_level(add_germs, minimum_germs, maximum_germs)
