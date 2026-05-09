@@ -84,7 +84,7 @@
 	else if(length(names) == 1) // One name, easy!
 		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names[1]]</span>"
 	else // Multiple names
-		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'[names.Join(", ")]</span>"
+		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names.Join(", ")]</span>"
 
 	// SECTION 2: Custom Message (Optional)
 	if(headstone.custom_message)
