@@ -46,7 +46,16 @@
 				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
 				log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
 				to_chat(src, span_danger("I have consumed my kindred!"))
+				to_chat(victim, span_userdanger("One of the kindred have consumed me! I share part of their mind now."))
 				victim.death()
+				//copied from the profane dagger
+				var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
+				soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
+				soulstone_spirit.name = "soul of [victim.real_name]"
+				soulstone_spirit.real_name = victim.real_name
+				soulstone_spirit.PossessByPlayer(victim.key)
+				soulstone_spirit.cancel_camera()
+				src.maxbloodpool += 500 //increase bloodpool from diablerism
 				return 0
 			else
 				to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
