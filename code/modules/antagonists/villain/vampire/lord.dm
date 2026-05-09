@@ -39,8 +39,9 @@
 	vampire.reset_and_reroll_stats()
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
-	vampire.grant_undead_eyes()
 	. = ..()
+	vampire.grant_undead_eyes()
+
 	if(!forced)
 		if(clan_selected)
 			vampire.set_clan(default_clan)

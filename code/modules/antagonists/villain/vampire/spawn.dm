@@ -6,6 +6,7 @@
 		"MY MASTER COMMANDS!",
 		"THE SUN IS THE ANATHEMA OF OUR MASTER!",
 	)
+	allow_preference_switching = TRUE
 
 /datum/antagonist/vampire/lords_spawn/on_gain()
 	var/mob/living/carbon/human/vampire = owner.current
