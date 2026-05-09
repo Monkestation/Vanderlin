@@ -305,6 +305,8 @@ And it also helps for the character set panel
 	var/list/spells_to_remove = list(
 		/datum/action/clan_menu,
 		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
+		/datum/action/cooldown/spell/enslave_mortal,
+		/datum/action/cooldown/spell/undirected/transfix
 	)
 	for(var/spell_type in spells_to_remove)
 		var/datum/action/spell_instance = locate(spell_type) in vampire.actions

@@ -1,10 +1,8 @@
-
 /datum/clan_leader/eoran
 	lord_spells = list(
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/frog,
 		/datum/action/cooldown/spell/charm/vampire,
-		/datum/action/cooldown/spell/undirected/transfix,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
@@ -53,9 +51,7 @@
 /datum/clan/eoran/apply_clan_components(mob/living/carbon/human/H)
 	H.AddComponent(/datum/component/vampire_disguise)
 
-
-
-
-
-
-
+/datum/clan/eoran/setup_vampire_abilities(mob/living/carbon/human/H)
+	..()
+	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
+	transfix.Grant(H)
