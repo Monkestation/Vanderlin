@@ -118,5 +118,6 @@
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
 	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
 	set_bloodpool(500)
+	grant_undead_eyes()
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))
