@@ -21,21 +21,21 @@
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
 	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane))
 		return TRUE
-	else if(istype(cast_on, /obj/structure/closet/dirthole))
-		var/obj/structure/closet/dirthole/grave = cast_on
-		if(grave.is_consecrated) // No double dipping
-			to_chat(owner, span_warning("You cannot perform burial rites on something that already was consecrated!"))
-			return FALSE
-		var/has_dead = FALSE
-		for(var/mob/mob in grave.get_all_contents())
-			if(mob.stat == DEAD)
-				has_dead = TRUE
-				break
-		if(!has_dead)
-			to_chat(owner, span_warning("You sense that there are no souls seeking rest in \the [grave]..."))
-			return FALSE
-		else
-			return TRUE
+	else if(!istype(cast_on, /obj/structure/closet/dirthole))
+		return FALSE
+	var/obj/structure/closet/dirthole/grave = cast_on
+	if(grave.is_consecrated) // No double dipping
+		to_chat(owner, span_warning("You cannot perform burial rites on something that already was consecrated!"))
+		return FALSE
+	var/has_dead = FALSE
+	for(var/mob/mob in grave.get_all_contents())
+		if(mob.stat == DEAD)
+			has_dead = TRUE
+			break
+	if(!has_dead)
+		to_chat(owner, span_warning("You sense that there are no souls seeking rest in \the [grave]..."))
+		return FALSE
+	return TRUE
 
 /datum/action/cooldown/spell/burial_rites/cast(obj/cast_on)
 	. = ..()
@@ -84,10 +84,7 @@
 	else if(length(names) == 1) // One name, easy!
 		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names[1]]</span>"
 	else // Multiple names
-		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'>[names[1]]"
-		for(var/i=2 to length(names)) // may not work, need to test and recall how to do forloop for string lists
-			headstone.inscription += ", [names[i]]"
-		headstone.inscription += "</span>"
+		headstone.inscription = "<span class='big'>Here lies </span><span class='big bold'[names.Join(", ")]</span>"
 
 	// SECTION 2: Custom Message (Optional)
 	if(headstone.custom_message)
@@ -113,7 +110,7 @@
 			if(corpse.last_mind?.current)
 				var/mob/ghost = corpse.last_mind.current
 
-				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 20 SECONDS)
+				my_final_words = tgui_input_text(ghost, "You feel your body being put to rest, any final words? Leave blank for a random one. (DO NOT USE THIS TO STATE WHO ATTACKED YOU)", "(OPTIONAL) Final Words", pick(premade_final_words), 50, timeout = 10 SECONDS)
 				if(my_final_words)
 					log_say("[ghost] put [my_final_words] for their final words.")
 					corpse.final_words = my_final_words // They won't be prompted again
