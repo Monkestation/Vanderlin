@@ -520,7 +520,7 @@
 	opened = TRUE
 	dump_contents()
 	update_appearance(UPDATE_ICON | UPDATE_NAME)
-	return 1
+	return TRUE
 
 /// Proc to update `quality`, should be called when `headstone` or `gravefence` is modified, and other cases where the condition of the grave has changed
 /obj/structure/closet/dirthole/proc/update_quality()
