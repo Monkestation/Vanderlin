@@ -40,6 +40,7 @@ And it also helps for the character set panel
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
+		TRAIT_VAMP_OFFERED
 	)
 	var/silent_join = FALSE
 
@@ -303,7 +304,7 @@ And it also helps for the character set panel
 
 	var/list/spells_to_remove = list(
 		/datum/action/clan_menu,
-		/datum/action/cooldown/spell/undirected/transfix,
+		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
 	)
 	for(var/spell_type in spells_to_remove)
 		var/datum/action/spell_instance = locate(spell_type) in vampire.actions
@@ -382,8 +383,10 @@ And it also helps for the character set panel
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/clan)
 	H.update_age_stats(H.age, TRUE)
-	var/datum/action/cooldown/spell/undirected/transfix/transfix = new(H.mind)
-	transfix.Grant(H)
+	var/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire/encode_thoughts = new(H.mind)
+	encode_thoughts.Grant(H)
+	var/datum/action/cooldown/spell/enslave_mortal/enslave_mortal = new(H.mind)
+	enslave_mortal.Grant(H)
 
 
 /datum/clan/proc/apply_vampire_look(mob/living/carbon/human/H)

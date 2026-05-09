@@ -19,7 +19,7 @@
 	if(!(victim.ckey || ckey(victim.last_mind?.key)))
 		to_chat(src, span_warning("[victim.p_theyre(TRUE)] too simple to be sired."))
 		return
-	if(HAS_TRAIT(victim, "offered_vampirism"))
+	if(HAS_TRAIT(victim, TRAIT_VAMP_OFFERED))
 		to_chat(src, span_warning("[victim.p_theyve(TRUE)] already been offered a blessing."))
 		return
 	var/obj/item/organ/brain/victim_brain = victim.getorgan(/obj/item/organ/brain)
@@ -35,9 +35,11 @@
 	var/datum/antagonist/zombie/Z = victim.mind.has_antag_datum(/datum/antagonist/zombie)
 	if(Z?.revived)
 		to_chat(src, span_warning("The dead already walk. This one is the Dark Lady's servant."))
-	if(victim.clan || victim.mind.has_antag_datum(/datum/antagonist/vampire))
-		to_chat(src, span_warning("[victim] has already been sired."))
-		return
+	//Handled by TRAIT_VAMP_OFFERED, to allow ghouls for proper conversion
+	// if((victim.clan || victim.mind.has_antag_datum(/datum/antagonist/vampire)))
+	// 	if(victim.coven)
+	// 	to_chat(src, span_warning("[victim] has already been sired."))
+	// 	return
 	if(victim.mind.has_antag_datum(/datum/antagonist/werewolf))
 		to_chat(src, span_warning("[victim] tastes of beast. [victim.p_they()] will not sire."))
 		return

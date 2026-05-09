@@ -1,11 +1,10 @@
 
 /datum/clan_leader/eoran
 	lord_spells = list(
-		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/frog,
 		/datum/action/cooldown/spell/charm/vampire,
-		/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire,
+		/datum/action/cooldown/spell/undirected/transfix,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
 	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
@@ -34,6 +33,7 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_DARKVISION,
 		TRAIT_LIMBATTACHMENT,
+		TRAIT_VAMP_OFFERED
 	)
 
 	clan_covens = list(

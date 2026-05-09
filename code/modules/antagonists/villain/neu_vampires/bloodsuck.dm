@@ -51,7 +51,7 @@
 				//copied from the profane dagger
 				var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
 				soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
-				soulstone_spirit.name = "soul of [victim.real_name]"
+				soulstone_spirit.name = src.real_name //To imitate a vampire going insane through diablerism, the spirit of the consumed can still speak out loud
 				soulstone_spirit.real_name = victim.real_name
 				soulstone_spirit.PossessByPlayer(victim.key)
 				soulstone_spirit.cancel_camera()
@@ -83,7 +83,7 @@
 	return drink_amt
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
-	if(HAS_TRAIT(src, "offered_vampirism"))
+	if(HAS_TRAIT(src, TRAIT_VAMP_OFFERED))
 		return // my testing allowed to double up the prompts, so just incase
 	if(!istype(sire?.mind?.has_antag_datum(/datum/antagonist/vampire), /datum/antagonist/vampire) || !sire.clan)
 		return
@@ -97,7 +97,7 @@
 				to_chat(sire, span_warning("[src]'s soul is beyond your grasp."))
 				return
 
-	ADD_TRAIT(src, "offered_vampirism", INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_VAMP_OFFERED, INNATE_TRAIT)
 	if(is_antag_banned(client_victim.ckey, ROLE_VAMPIRE))
 		to_chat(sire, span_warning("[src] could not be sired."))
 		return
