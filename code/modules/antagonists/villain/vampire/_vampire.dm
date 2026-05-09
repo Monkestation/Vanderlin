@@ -146,11 +146,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		finalize_custom_clan(vampdude)
 		return
 
-	// Select first coven
-	var/first_choice = input(vampdude, "Choose your first coven:", "Coven Selection") as null|anything in coven_options
-	if(first_choice)
-		selected_covens += coven_options[first_choice]
-		coven_options -= first_choice
+	// Forces first coven to be bloodheal (seen too much newbies not pick it)
+	selected_covens += coven_options["Bloodheal"]
+	coven_options -= "Bloodheal"
 
 	// Select second coven
 	if(length(coven_options))
