@@ -37,25 +37,25 @@
 	owner.update_sight()
 
 
-// PSYCHIC PROJECTION
-/datum/coven_power/auspex/psychic_projection
-	name = "Psychic Projection"
-	desc = "Leave your body behind and fly across the land."
+//PSYCHIC PROJECTION
+// /datum/coven_power/auspex/psychic_projection
+// 	name = "Psychic Projection"
+// 	desc = "Leave your body behind and fly across the land."
 
-	level = 2
-	check_flags = COVEN_CHECK_CONSCIOUS
-	vitae_cost = 250
-	violates_masquerade = TRUE
+// 	level = 2
+// 	check_flags = COVEN_CHECK_CONSCIOUS
+// 	vitae_cost = 250
+// 	violates_masquerade = TRUE
 
-/datum/coven_power/auspex/psychic_projection/activate()
-	. = ..()
-	var/obj/effect/blood_rune/rune = write_full_rune(get_turf(owner), /datum/rune_spell/astraljourney)
-	rune.trigger(owner)
+// /datum/coven_power/auspex/psychic_projection/activate()
+// 	. = ..()
+// 	var/obj/effect/blood_rune/rune = write_full_rune(get_turf(owner), /datum/rune_spell/astraljourney)
+// 	rune.trigger(owner)
 
 /mob
 	var/obj/effect/blood_rune/ajourn
 
-// ////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 GLOBAL_LIST_INIT(astral_projections, list())
 
 /datum/action/cooldown/spell/undirected/astral_return
