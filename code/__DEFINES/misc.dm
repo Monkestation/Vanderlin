@@ -489,3 +489,13 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define IGNORE_USER_DOING (1<<6)
 
 #define MESSAGE_ADMINS_ROLES list(/datum/job/lord, /datum/job/priest)
+
+//Grave Stages
+/// Stage 1 for dirtholes
+#define DIRTHOLE_SHALLOW 1
+/// Stage 2 for dirtholes
+#define DIRTHOLE_DEEP 2
+/// Stage 3 for dirtholes. Bodies and other large objects can be buried at this stage
+#define DIRTHOLE_PIT 3
+/// Stage 4 for dirtholes. Now a 'grave' and the hole is covered by dirt (something buried)
+#define DIRTHOLE_GRAVE 4

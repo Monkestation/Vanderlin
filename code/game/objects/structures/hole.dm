@@ -3,16 +3,6 @@
 /// Absolute max passive devotion Necrans can get from all graves.
 #define GRAVE_DEVOTION_GLOBAL_MAX 0.5
 
-//Grave Stages
-/// Stage 1 for dirtholes
-#define DIRTHOLE_SHALLOW 1
-/// Stage 2 for dirtholes
-#define DIRTHOLE_DEEP 2
-/// Stage 3 for dirtholes. Bodies and other large objects can be buried at this stage
-#define DIRTHOLE_PIT 3
-/// Stage 4 for dirtholes. Now a 'grave' and the hole is covered by dirt (something buried)
-#define DIRTHOLE_GRAVE 4
-
 /obj/structure/closet/dirthole
 	name = "hole"
 	icon_state = "hole1"
@@ -29,8 +19,8 @@
 	lock = null
 	can_add_lock = FALSE
 	alternative_icon_handling = TRUE
-	/// How big the hole is, at 3 you can bury a body, at 4 theres something buried.
-	var/stage = 1
+	/// How big the hole is, at 3 you can bury a body, at 4 theres something buried. Global defines in `misc.dm`
+	var/stage = DIRTHOLE_SHALLOW
 	/// Chance for attempt to increase `stage` fails, while still spawning dirt. Increments each fail and is skipped once it reaches 3
 	var/faildirt = 0
 
@@ -54,7 +44,7 @@
 	var/turf/open/floor/dirt/T = loc
 	if(!istype(T))
 		return INITIALIZE_HINT_QDEL
-	if(T.muddy && stage != 4)
+	if(T.muddy && stage != DIRTHOLE_GRAVE)
 		if(!(locate(/obj/item/natural/worms) in T))
 			if(prob(40))
 				if(prob(10))
@@ -108,12 +98,12 @@
 				user.remove_stress(/datum/stress_event/saw_grave_3)
 
 /obj/structure/closet/dirthole/grave
-	stage = 3
+	stage = DIRTHOLE_PIT
 	faildirt = 3
 	icon_state = "grave"
 
 /obj/structure/closet/dirthole/closed
-	stage = 4
+	stage = DIRTHOLE_GRAVE
 	faildirt = 3
 	climb_offset = 10
 	icon_state = "gravecovered"
@@ -125,7 +115,7 @@
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 
-	if(stage != 4)
+	if(stage != DIRTHOLE_GRAVE)
 		return
 
 	var/list/grave_decorations = list()
@@ -211,7 +201,7 @@
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
 			return
-		if(stage != 4)
+		if(stage != DIRTHOLE_GRAVE)
 			to_chat(user, "<span class='warning'>I can't tie a grave marker on an open grave.</span>")
 
 		playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
@@ -246,7 +236,7 @@
 		if(headstone)
 			to_chat(user, "<span class='warning'>This grave already has a headstone.</span>")
 			return
-		if(stage != 4)
+		if(stage != DIRTHOLE_GRAVE)
 			to_chat(user, "<span class='warning'>I can't put a headstone on an open grave.</span>")
 			return
 
@@ -270,7 +260,7 @@
 		if(gravefence)
 			to_chat(user, "<span class='warning'>This grave already has a fence.</span>")
 			return
-		if(stage != 4)
+		if(stage != DIRTHOLE_GRAVE)
 			to_chat(user, "<span class='warning'>I can't put a gravefence on an open grave.</span>")
 			return
 
@@ -290,10 +280,10 @@
 
 	if(attacking_shovel.heldclod)
 		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
-		if(stage == 3) //close grave
+		if(stage == DIRTHOLE_PIT) //close grave
 			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) //can't have nice things can we
 				return
-			stage = 4
+			stage = DIRTHOLE_GRAVE
 			climb_offset = 10
 			close()
 			update_quality()
@@ -302,11 +292,11 @@
 				founds = TRUE
 				break
 			if(!founds)
-				stage = 2
+				stage = DIRTHOLE_DEEP
 				climb_offset = 0
 				open()
 			update_appearance(UPDATE_ICON | UPDATE_NAME)
-		else if(stage < 4)
+		else if(stage < DIRTHOLE_GRAVE)
 			stage--
 			climb_offset = 0
 			update_appearance(UPDATE_ICON | UPDATE_NAME)
@@ -316,7 +306,7 @@
 		attacking_shovel.update_appearance(UPDATE_ICON_STATE)
 		return
 	else
-		if(stage == 3)
+		if(stage == DIRTHOLE_PIT)
 			var/turf/our_turf = get_turf(src)
 			var/turf/under_turf = GET_TURF_BELOW(our_turf)
 			if(under_turf && our_turf && isopenturf(under_turf))
@@ -339,7 +329,7 @@
 			if(C.domhand)
 				used_str = C.get_str_arms(C.used_hand)
 			C.adjust_stamina(max(60 - (used_str * 5), 1))
-		if(stage < 3)
+		if(stage < DIRTHOLE_PIT)
 			if(faildirt < 2)
 				if(prob(used_str * 5))
 					stage++
@@ -347,12 +337,12 @@
 					faildirt++
 			else
 				stage++
-		if(stage == 4)
+		if(stage == DIRTHOLE_GRAVE)
 			if(gravequality == 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
 				to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if something <span class='god_necra'>ancient</span> is watching you... are you prepared to face the consequences if you continue?"))
 			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
 				return
-			stage = 3
+			stage = DIRTHOLE_PIT
 			climb_offset = 0
 			open()
 			if(headstone)
@@ -524,8 +514,8 @@
 /obj/structure/closet/dirthole/open(mob/living/user)
 	if(opened)
 		return
-	if(stage == 4)
-		stage = 3
+	if(stage == DIRTHOLE_GRAVE)
+		stage = DIRTHOLE_PIT
 		climb_offset = 0
 	opened = TRUE
 	dump_contents()
@@ -535,7 +525,7 @@
 /// Proc to update `quality`, should be called when `headstone` or `gravefence` is modified, and other cases where the condition of the grave has changed
 /obj/structure/closet/dirthole/proc/update_quality()
 	gravequality = 0
-	if(stage != 4) // If not a complete grave, no quality
+	if(stage != DIRTHOLE_GRAVE) // If not a complete grave, no quality
 		return
 	if(bonusquality)
 		gravequality += bonusquality
@@ -629,20 +619,20 @@
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()
 	switch(stage)
-		if(1)
+		if(DIRTHOLE_SHALLOW)
 			icon_state = "hole1"
-		if(2)
+		if(DIRTHOLE_DEEP)
 			icon_state = "hole2"
-		if(3)
+		if(DIRTHOLE_PIT)
 			icon_state = "grave"
-		if(4)
+		if(DIRTHOLE_GRAVE)
 			icon_state = "gravecovered"
 
 /obj/structure/closet/dirthole/update_overlays()
 	. = ..()
-	if(stage < 3)
+	if(stage < DIRTHOLE_PIT)
 		return
-	else if(stage == 3)
+	else if(stage == DIRTHOLE_PIT)
 		. += mutable_appearance(icon, "grave_above", ABOVE_MOB_LAYER)
 
 	if(is_consecrated)
@@ -663,11 +653,11 @@
 /obj/structure/closet/dirthole/update_name(updates)
 	. = ..()
 	switch(stage)
-		if(1, 2)
+		if(DIRTHOLE_SHALLOW, DIRTHOLE_DEEP)
 			name = "hole"
-		if(3)
+		if(DIRTHOLE_PIT)
 			name = "pit"
-		if(4)
+		if(DIRTHOLE_GRAVE)
 			name = "grave"
 
 /obj/structure/closet/dirthole/relaymove(mob/user)

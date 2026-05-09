@@ -1506,11 +1506,11 @@
 		if(!grave_hole)
 			// Create a new dirthole for burial
 			grave_hole = new /obj/structure/closet/dirthole(burial_turf)
-			grave_hole.stage = 3 // Set to pit stage for burial
+			grave_hole.stage = DIRTHOLE_PIT // Set to pit stage for burial
 
 		// Ensure the hole is at the right stage for burial
-		if(grave_hole.stage < 3)
-			grave_hole.stage = 3
+		if(grave_hole.stage < DIRTHOLE_PIT)
+			grave_hole.stage = DIRTHOLE_PIT
 			grave_hole.update_appearance(UPDATE_NAME | UPDATE_ICON)
 		// Open the grave if it's closed
 		if(!grave_hole.opened)
@@ -1520,7 +1520,7 @@
 		target_corpse.forceMove(burial_turf)
 
 		// Close the grave
-		grave_hole.stage = 4
+		grave_hole.stage = DIRTHOLE_GRAVE
 		grave_hole.climb_offset = 10
 		grave_hole.close()
 
