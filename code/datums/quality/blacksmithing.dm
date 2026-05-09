@@ -3,14 +3,14 @@
 	name = "Blacksmithing Quality"
 
 	quality_descriptors = alist(
-		BLACKSMITH_QUALITY_SPOILED = list("name_prefix" = "ruined", "modifier" = 0.6),
-		BLACKSMITH_QUALITY_AWFUL = list("name_prefix" = "awful", "modifier" = 0.7),
-		BLACKSMITH_QUALITY_CRUDE = list("name_prefix" = "crude", "modifier" = 0.8),
-		BLACKSMITH_QUALITY_ROUGH = list("name_prefix" = "rough", "modifier" = 0.9),
-		BLACKSMITH_QUALITY_COMPETENT = list("name_prefix" = "", "modifier" = 1.0),
-		BLACKSMITH_QUALITY_FINE = list("name_prefix" = "fine", "modifier" = 1.1),
-		BLACKSMITH_QUALITY_FLAWLESS = list("name_prefix" = "flawless", "modifier" = 1.2),
-		BLACKSMITH_QUALITY_LEGENDARY = list("name_prefix" = "masterwork", "modifier" = 1.3)
+		BLACKSMITH_QUALITY_SPOILED = list("name_prefix" = "ruined", "modifier" = 0.6, "price_modifier" = 0.6),
+		BLACKSMITH_QUALITY_AWFUL = list("name_prefix" = "awful", "modifier" = 0.7, "price_modifier" = 0.7),
+		BLACKSMITH_QUALITY_CRUDE = list("name_prefix" = "crude", "modifier" = 0.8, "price_modifier" = 0.8),
+		BLACKSMITH_QUALITY_ROUGH = list("name_prefix" = "rough", "modifier" = 0.9, "price_modifier" = 0.9),
+		BLACKSMITH_QUALITY_COMPETENT = list("name_prefix" = "", "modifier" = 1.0, "price_modifier" = 1.0),
+		BLACKSMITH_QUALITY_FINE = list("name_prefix" = "fine", "modifier" = 1.1, "price_modifier" = 1.1),
+		BLACKSMITH_QUALITY_FLAWLESS = list("name_prefix" = "flawless", "modifier" = 1.2, "price_modifier" = 1.2),
+		BLACKSMITH_QUALITY_LEGENDARY = list("name_prefix" = "masterwork", "modifier" = 1.3, "price_modifier" = 1.3)
 	)
 
 	var/performance_quality = 0
@@ -67,8 +67,6 @@
 	var/modifier = quality_data["modifier"]
 	// Apply basic modifiers
 	target.modify_max_integrity(target.max_integrity * modifier, can_break = FALSE)
-	if(target.sellprice)
-		target.sellprice *= modifier
 
 	// Lockpicks - make them better at their job
 	if(istype(target, /obj/item/lockpick))
