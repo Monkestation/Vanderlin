@@ -2871,7 +2871,7 @@
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "IM" = (
-/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/reagent_containers/glass/bucket,
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "IS" = (
