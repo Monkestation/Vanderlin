@@ -31,6 +31,10 @@
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
 		M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
+	for(var/datum/injury/injury in M.all_injuries)
+		if(!injury.can_heal())
+			continue
+		injury.heal_damage(1/10 * efficiency)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-1.75*REM * efficiency, 0)
 		M.adjustFireLoss(-1.75*REM * efficiency, 0)
@@ -70,6 +74,10 @@
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
 	M.heal_wounds(6 * efficiency) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
+	for(var/datum/injury/injury in M.all_injuries)
+		if(!injury.can_heal())
+			continue
+		injury.heal_damage(2/10 * efficiency)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-7*REM * efficiency, 0)
 		M.adjustFireLoss(-7*REM * efficiency, 0)
