@@ -10050,7 +10050,6 @@
 /area/indoors/town/keep/halls)
 "eNl" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/clothing/head/priestmask,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/church)
 "eNE" = (
@@ -15416,6 +15415,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/undershirt/priest,
 /obj/item/clothing/shirt/robe/priest,
+/obj/item/clothing/head/roguehood/priest,
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/church)
 "hyQ" = (
