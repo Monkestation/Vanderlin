@@ -250,7 +250,9 @@
 	if(!forced && (TIMER_COOLDOWN_CHECK(src, COOLDOWN_CARBON_ENDORPHINATION) || (diceroll(endurance, context = DICE_CONTEXT_MENTAL) <= DICE_FAILURE)))
 		return
 
+	var/current_body_amount = reagents.get_reagent_amount(/datum/reagent/medicine/endorphin)
 	var/endorphin_amount = clamp(endurance, 5, 29)
+	endorphin_amount = min(endorphin_amount, 30 - current_body_amount)
 	reagents?.add_reagent(/datum/reagent/medicine/endorphin, endorphin_amount)
 	TIMER_COOLDOWN_START(src, COOLDOWN_CARBON_ENDORPHINATION, HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) ? ENDORPHINATION_COOLDOWN_DURATION * 0.75 : ENDORPHINATION_COOLDOWN_DURATION)
 	if(!silent)

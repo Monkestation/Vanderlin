@@ -15,12 +15,12 @@
 			continue
 		injury.heal_damage(1)
 
-/datum/reagent/medicine/healthpot/healthpot/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
 	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 
-/datum/reagent/medicine/healthpot/healthpot/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
