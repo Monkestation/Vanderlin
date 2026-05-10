@@ -32,7 +32,7 @@
 #define PAIN_NO_SPEAK 250
 
 /// Divisor used in several pain calculations
-#define PAINKILLER_DIVISOR 4
+#define PAINKILLER_DIVISOR 2
 
 #define PAIN_KNOCKDOWN_MESSAGE "<span class='bolddanger'>gives in to the pain!</span>"
 #define PAIN_KNOCKDOWN_MESSAGE_SELF "<span class='animatedpain'>I give in to the pain!</span>"
