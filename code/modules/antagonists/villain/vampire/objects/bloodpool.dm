@@ -196,7 +196,7 @@
 	return TRUE
 
 /datum/vampire_project/proc/confirm_start(mob/living/user)
-	return tgui_alert(user, "Begin [display_name]?<BR>[description]<BR>Total Cost: [total_cost]<BR>You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
+	return tgui_alert(user, "[description] Total Cost: [total_cost]. You can contribute vitae over time.", "PROJECT START", list("Yes", "No")) == "Yes"
 
 /datum/vampire_project/proc/on_start(mob/living/user)
 	return
