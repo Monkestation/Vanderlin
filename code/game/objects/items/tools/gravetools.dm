@@ -31,7 +31,6 @@
 	grid_width = 32
 	grid_height = 96
 	item_weight = 1.54 KILOGRAMS
-	var/time_multiplier = 1 //multipler to do_after times
 
 /obj/item/weapon/shovel/pre_attack(atom/A, mob/living/user, list/modifiers)
 	. = ..()
@@ -117,7 +116,7 @@
 		if(istype(T, /turf/open/floor/dirt))
 			var/turf/open/floor/dirt/D = T
 			user.visible_message("[user] starts digging an irrigation channel.", "You start digging an irrigation channel.")
-			if(!do_after(user, 5 SECONDS * time_multiplier, D))
+			if(!do_after(user, 5 SECONDS * toolspeed, D))
 				return
 			new /obj/structure/irrigation_channel(D)
 			return TRUE
@@ -244,7 +243,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_height = 64
-	time_multiplier = 2
+	toolspeed = 2
 	smeltresult = null
 	item_weight = 792 GRAMS
 

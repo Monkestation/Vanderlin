@@ -7,7 +7,6 @@
 	grid_width = 32
 	grid_height = 32
 	var/bundletype = null
-	var/quality = SMELTERY_LEVEL_NORMAL // To not ruin blacksmith recipes
 
 /obj/item/natural/attackby(obj/item/W, mob/living/user, list/modifiers)
 	if(istype(W, /obj/item/natural/bundle))

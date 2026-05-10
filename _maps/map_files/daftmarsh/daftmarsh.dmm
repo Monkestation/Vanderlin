@@ -17016,7 +17016,7 @@
 /turf/closed/wall/mineral/stone/window,
 /area/indoors/town/church/chapel)
 "oLi" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "oLy" = (

@@ -14,6 +14,15 @@
 	registered_signals += COMSIG_GLOVES_POST_ATTACK_HAND
 	RegisterSignal(item, COMSIG_GLOVES_POST_ATTACK_HAND, PROC_REF(on_attackhand_delegate))
 
+	registered_signals += COMSIG_PROJECTILE_ON_HIT
+	RegisterSignal(item, COMSIG_PROJECTILE_ON_HIT, PROC_REF(on_projectile_delegate))
+
+/datum/enchantment/on_hit/proc/on_projectile_delegate(obj/item/source, mob/living/attacker, mob/living/attacked, angle, def_zone, damage)
+	if(ishuman(attacked))
+		on_human_attack(source, attacked, attacker, attacker.get_bodypart(def_zone), damage)
+	else
+		on_simple_attack(source, attacked, attacker, damage)
+
 /datum/enchantment/on_hit/proc/on_attackhand_delegate(obj/item/source, mob/living/attacked, mob/living/attacker, damage)
 	if(ishuman(attacked))
 		var/zone_hit = attacker.zone_selected

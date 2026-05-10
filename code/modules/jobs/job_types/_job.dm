@@ -229,6 +229,9 @@
 	var/attribute_sheet_child
 	var/attribute_sheet_adult
 
+	///this is our book path given on middle clicking ui
+	var/obj/item/recipe_book/book_type = /obj/item/recipe_book/survival
+
 /datum/job/New()
 	. = ..()
 	if(give_bank_account)

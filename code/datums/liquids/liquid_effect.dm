@@ -313,7 +313,7 @@
 
 	var/liquid_state_template = liquid_state_messages["[liquid_group.group_overlay_state]"]
 
-	examine_list +=  "<hr>"
+	examine_list += "<hr>"
 
 	if(examiner.can_see_reagents())
 		examine_list +=  "<hr>"

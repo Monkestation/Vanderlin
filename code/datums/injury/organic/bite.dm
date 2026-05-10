@@ -1,6 +1,7 @@
 /** BITES **/
 /datum/injury/bite
 	bleed_threshold = 5
+	bleed_rate = 2
 	damage_type = WOUND_BITE
 
 /datum/injury/bite/small

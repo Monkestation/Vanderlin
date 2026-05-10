@@ -63,6 +63,8 @@
 			continue
 		if(S.spell_flags & SPELL_TEMPORARY)
 			continue
+		if(S.spell_flags & SPELL_UNETCHABLE)
+			continue
 		eligible[S.name] = S
 
 	if(!eligible.len)

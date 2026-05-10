@@ -57,7 +57,7 @@
 
 	// Check all items can actually be juiced/ground
 	for(var/obj/item/I in to_grind)
-		if(!I.grind_results && !I.juice_results || !I.reagents.total_volume)
+		if(!I.grind_results && !I.juice_results && !I.reagents?.total_volume)
 			to_chat(user, span_warning("I cannot process [I] this way."))
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 

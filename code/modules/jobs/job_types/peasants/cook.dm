@@ -52,7 +52,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/cook
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/cook/old
-
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/cook
 	name = JOB_COOK

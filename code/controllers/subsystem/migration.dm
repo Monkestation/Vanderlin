@@ -264,7 +264,7 @@ SUBSYSTEM_DEF(migrants)
 			continue
 		if(islava(turf))
 			continue
-		if(is_blocked_turf(turf))
+		if(turf.is_blocked_turf())
 			continue
 		turfs += turf
 	turfs = shuffle(turfs)

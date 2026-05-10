@@ -35,3 +35,16 @@
   - refactor: buckling and riding code refactored
   - rscadd: animals can be fireman carried
   - balance: riding speed
+2026-05-09:
+  ta3754859-max:
+  - bugfix: Getting a kill in the normal world properly makes you fight your way out
+      of the underworld
+2026-05-10:
+  Sulaboy:
+  - balance: Rope/Chain grid size 2x2->1x2
+  - balance: Resize keys to 1x1
+  dwasint:
+  - balance: minimum damage required to hit organs has been doubled
+  - balance: organ pain has been reduced by around 45%
+  - balance: organs can only be damaged after the bodypart is above 40% of its total
+      damage from 20%

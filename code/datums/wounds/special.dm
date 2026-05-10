@@ -178,7 +178,7 @@
 	can_cauterize = FALSE
 	critical = TRUE
 	associated_bclasses = ARTERY_BCLASSES
-	viable_zones = list(BODY_ZONE_HEAD)
+	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
 	var/permanent = FALSE
 
 /datum/wound/facial/tongue/can_apply_to_mob(mob/living/affected)
@@ -197,6 +197,7 @@
 			qdel(tongue_loss)
 		else
 			tongue_loss.forceMove(affected.drop_location())
+	qdel(src)
 
 /datum/wound/facial/tongue/permanent
 	show_in_book = FALSE

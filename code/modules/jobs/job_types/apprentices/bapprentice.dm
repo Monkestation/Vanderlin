@@ -6,10 +6,10 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/craft/blacksmithing = 20,
+		/datum/attribute/skill/craft/blacksmithing = 30,
 		/datum/attribute/skill/craft/armorsmithing = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
-		/datum/attribute/skill/craft/smelting = 20,
+		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 20
 	)
@@ -18,7 +18,7 @@
 	title = JOB_SMITHY_APP
 	tutorial = "Long hours and back-breaking work wouldnt even describe a quarter of what you do in a day for your Master. \
 	Its exhausting, filthy and you dont get much freetime: \
-	but someday youll get your own smithy, and youll have TWICE as many apprentices as your master does."
+	but someday you will get your own smithy and have TWICE as many apprentices as your master does."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	faction = FACTION_TOWN
@@ -44,11 +44,13 @@
 	)
 
 	skill_multipliers = list(/datum/attribute/skill/craft/blacksmithing = 1.25, /datum/attribute/skill/craft/armorsmithing = 1.25, /datum/attribute/skill/craft/weaponsmithing = 1.25)
+	book_type = /obj/item/recipe_book/blacksmithing
 
 /datum/outfit/bapprentice
 	name = JOB_SMITHY_APP
 	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/key/blacksmith
+	beltl = /obj/item/weapon/hammer/iron
 	backr = /obj/item/storage/backpack/satchel
 
 /datum/outfit/bapprentice/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

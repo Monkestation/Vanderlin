@@ -429,12 +429,11 @@
 	attacked_sound = 'sound/foley/hit_rock.ogg'
 	item_weight = 1 KILOGRAMS
 
-
-/obj/item/natural/cocaudo/deconstruct(disassembled = FALSE)
+/obj/item/natural/cocaudo/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
 	if(!disassembled)
-		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
-		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(src.loc)
-	qdel(src)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(drop_loc)
+		new /obj/item/reagent_containers/food/snacks/veg/cocaudo_half(drop_loc)
 
 /*	..................   Potato   ................... */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato

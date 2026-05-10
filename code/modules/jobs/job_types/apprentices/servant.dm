@@ -67,6 +67,7 @@
 	mind_traits = list(
 		TRAIT_ROYALSERVANT
 	)
+	book_type = /obj/item/recipe_book/cooking
 
 /datum/outfit/servant
 	name = JOB_SERVANT

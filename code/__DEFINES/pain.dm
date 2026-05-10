@@ -6,14 +6,14 @@
 #define PAIN_LEVEL_4 70
 
 // ~shock stages
-#define SHOCK_STAGE_1 30
-#define SHOCK_STAGE_2 90
-#define SHOCK_STAGE_3 120
-#define SHOCK_STAGE_4 180 // "Softcrit"
-#define SHOCK_STAGE_5 240
-#define SHOCK_STAGE_6 360 // "Hardcrit"
-#define SHOCK_STAGE_7 450
-#define SHOCK_STAGE_8 600
+#define SHOCK_STAGE_1 10
+#define SHOCK_STAGE_2 30
+#define SHOCK_STAGE_3 40
+#define SHOCK_STAGE_4 60 // "Softcrit"
+#define SHOCK_STAGE_5 80
+#define SHOCK_STAGE_6 120 // "Hardcrit"
+#define SHOCK_STAGE_7 150
+#define SHOCK_STAGE_8 200
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
 // ~shock modifiers

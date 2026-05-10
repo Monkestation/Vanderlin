@@ -33423,7 +33423,7 @@
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/halls/w)
 "vuv" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/retaliate/elemental/warden,
 /turf/open/floor/blocks,
 /area/under/town/basement)

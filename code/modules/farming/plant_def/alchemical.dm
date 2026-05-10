@@ -36,10 +36,6 @@
 	seed_identity = "atropa seeds"
 	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
-/datum/plant_def/alchemical/atropa/set_genetic_tendencies(datum/plant_genetics/base_genetics)
-	..()
-	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Highly toxic = very pest resistant
-
 /datum/plant_def/alchemical/matricaria
 	name = "matricaria"
 	icon_state = "matricaria"
@@ -87,10 +83,6 @@
 	phosphorus_requirement = 15
 	potassium_requirement = 20
 	seed_identity = "urtica seeds"
-
-/datum/plant_def/alchemical/urtica/set_genetic_tendencies(datum/plant_genetics/base_genetics)
-	..()
-	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Stinging = pest resistant
 
 /datum/plant_def/alchemical/calendula
 	name = "calendula"
@@ -145,10 +137,6 @@
 	seed_identity = "paris seeds"
 	honey_type = /obj/item/reagent_containers/food/snacks/spiderhoney/honey/toxic
 
-/datum/plant_def/alchemical/paris/set_genetic_tendencies(datum/plant_genetics/base_genetics)
-	..()
-	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Very toxic
-
 /datum/plant_def/alchemical/artemisia
 	name = "artemisia"
 	icon_state = "artemisia"
@@ -181,4 +169,3 @@
 /datum/plant_def/alchemical/euphorbia/set_genetic_tendencies(datum/plant_genetics/base_genetics)
 	..()
 	base_genetics.water_efficiency = TRAIT_GRADE_GOOD  // Succulent
-	base_genetics.disease_resistance = TRAIT_GRADE_GOOD  // Toxic latex

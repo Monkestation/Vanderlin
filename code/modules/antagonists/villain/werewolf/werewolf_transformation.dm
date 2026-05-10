@@ -63,6 +63,7 @@
 	if(!try_transform_checks()) return
 
 	var/mob/living/carbon/human/human_user = owner.current
+	human_user.buckled?.unbuckle_mob(human_user, TRUE)
 
 	if(human_user.cmode)
 		human_user.toggle_cmode()
@@ -147,8 +148,8 @@
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-	caster_mob.Knockdown(30)
-	caster_mob.Stun(30)
+	caster_mob.Knockdown(1.5 SECONDS)
+	caster_mob.Stun(1.5 SECONDS)
 	caster_mob.rage_datum.remove_secondary()
 	caster_mob.rage_datum.rage_change_on_life += transformed_rage_decay
 	caster_mob.apply_status_effect(/datum/status_effect/debuff/barbfalter/werewolf_untransform)
