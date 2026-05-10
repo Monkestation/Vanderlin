@@ -4,7 +4,7 @@
 	icon = 'icons/obj/chairs.dmi'
 	icon_state = "chair"
 	anchored = FALSE
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0 //you sit in a chair, not lay
 	resistance_flags = NONE
 	max_integrity = 250
@@ -19,22 +19,17 @@
 	. = ..()
 	AddComponent(/datum/component/simple_rotation)
 
-/obj/structure/chair/deconstruct()
-	// If we have materials, and don't have the NOCONSTRUCT flag
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(buildstacktype)
-			new buildstacktype(loc,buildstackamount)
-	..()
-
 /obj/structure/chair/attack_paw(mob/user)
 	return attack_hand(user)
 
-/obj/structure/chair/attackby(obj/item/W, mob/user, list/modifiers)
-	if(W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1))
-		W.play_tool_sound(src)
-		deconstruct()
-	else
-		return ..()
+/obj/structure/chair/atom_deconstruct(disassembled)
+	if(buildstacktype)
+		new buildstacktype(loc, buildstackamount)
+
+/obj/structure/chair/wrench_act(mob/living/user, obj/item/I)
+	. = ..()
+	I.play_tool_sound(src)
+	deconstruct(TRUE)
 
 /obj/structure/chair/proc/handle_rotation(direction)
 	handle_layer()
@@ -94,7 +89,7 @@
 /obj/structure/chair/MouseDrop(over_object, src_location, over_location)
 	. = ..()
 	if(over_object == usr && Adjacent(usr))
-		if(QDELETED(src) || !item_chair || !usr.can_hold_items() || has_buckled_mobs() || src.flags_1 & NODECONSTRUCT_1)
+		if(QDELETED(src) || !item_chair || !usr.can_hold_items() || has_buckled_mobs())
 			return
 		if(!usr.can_perform_action(src, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH))
 			return
@@ -219,7 +214,7 @@
 	icon_state = null
 	buildstacktype = null
 	item_chair = null
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = parent_type::obj_flags | NO_DEBRIS_AFTER_DECONSTRUCTION
 	alpha = 0
 
 /obj/structure/chair/mime/post_buckle_mob(mob/living/M)

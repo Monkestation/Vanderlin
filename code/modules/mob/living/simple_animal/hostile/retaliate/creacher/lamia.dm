@@ -40,7 +40,6 @@
 	retreat_health = 0.1
 
 	dodgetime = 15
-	aggressive = 1
 	remains_type = null
 
 	ai_controller = /datum/ai_controller/lamia

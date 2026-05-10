@@ -4,6 +4,12 @@
 #define AI_STATUS_OFF		"ai_off"
 #define AI_STATUS_IDLE      "ai_idle"
 
+//Flags returned by get_able_to_run()
+///pauses AI processing
+#define AI_UNABLE_TO_RUN (1<<1)
+///bypass canceling our actions on set_ai_status()
+#define AI_PREVENT_CANCEL_ACTIONS (1<<2)
+
 ///Carbon checks
 #define SHOULD_RESIST(source) (source.on_fire || source.buckled || HAS_TRAIT(source, TRAIT_RESTRAINED) || (source.pulledby && (source.pulledby != source) && source.pulledby.grab_state > GRAB_PASSIVE))
 #define SHOULD_STAND(source) (source.resting)

@@ -183,6 +183,7 @@
 
 	if((shock_stage >= SHOCK_STAGE_3) && (previous_shock_stage < SHOCK_STAGE_3))
 		custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", 40, nopainloss = TRUE)
+		add_stress(/datum/stress_event/painmax)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))
 		emote("becomes limp.")
@@ -208,13 +209,11 @@
 	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
 		if(DT_PROB(1, delta_time))
 			if(!IsUnconscious())
-				custom_pain("[pick("I black out", "I feel like i could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
+				custom_pain("[pick("I black out", "I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Unconscious(1 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage < SHOCK_STAGE_7))
-		if(body_position != LYING_DOWN)
-			emote("can no longer stand, collapsing!")
 		emote("gargle")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Paralyze(5 SECONDS)

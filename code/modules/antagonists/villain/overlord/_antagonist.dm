@@ -112,7 +112,7 @@
 	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	if(prob(10))
 		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.faction = list(FACTION_UNDEAD)
+	L.set_faction(FACTION_UNDEAD)
 	if(length(L.quirks))
 		L.clear_quirks()
 	L.mob_biotypes |= MOB_UNDEAD
@@ -174,7 +174,7 @@
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)
-	overlord_mob.faction = list(FACTION_UNDEAD, "overlord")
+	overlord_mob.add_faction(list(FACTION_UNDEAD, "overlord"))
 	if(length(overlord_mob.quirks))
 		overlord_mob.clear_quirks()
 	overlord_mob.mob_biotypes |= MOB_UNDEAD

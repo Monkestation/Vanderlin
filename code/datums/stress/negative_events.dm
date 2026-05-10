@@ -650,7 +650,7 @@
 	timer = 3 MINUTES
 
 /datum/stress_event/slipped
-	desc = "<span class='warning'>I slipped. I should be more careful next timer...</span>\n"
+	desc = "<span class='warning'>I slipped. I should be more careful next time...</span>\n"
 	stress_change = 2
 	timer = 3 MINUTES
 

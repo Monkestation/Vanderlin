@@ -373,9 +373,13 @@
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
+/// Possible value of [/atom/movable/buckle_dir]. If set to a different (positive-or-zero) value than this, the buckling thing will force a dir on the buckled.
+#define BUCKLE_MATCH_DIR -1
 
 /// Simple mob trait, indicating it may follow continuous move actions controlled by code instead of by user input.
 #define MOVES_ON_ITS_OWN (1<<0)
+/// Simple mob trait, can be fireman carried
+#define CAN_BE_FIREMANNED (1<<1)
 
 // Body position defines.
 /// Mob is standing up, usually associated with lying_angle value of 0.

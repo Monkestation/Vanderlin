@@ -132,8 +132,6 @@
 
 	var/list/implants = null
 
-	var/datum/riding/riding_datum
-
 	var/datum/language/selected_default_language
 
 	var/last_words	//used for database logging
@@ -144,6 +142,9 @@
 	var/losebreath = 0
 
 	var/slowed_by_drag = TRUE //Whether the mob is slowed down when dragging another prone mob
+
+	/// Is this mob allowed to be buckled/unbuckled to/from things?
+	var/can_buckle_to = TRUE
 
 	///The height offset of a mob's maptext due to their current size.
 	var/body_maptext_height_offset = 0

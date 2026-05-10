@@ -143,7 +143,7 @@
 				continue
 			else if(user.inspiration.check_in_audience(listener))
 				bypass_checks = TRUE
-		if(!bypass_checks && !user.faction_check_mob(listener))
+		if(!bypass_checks && !user.faction_check_atom(listener))
 			continue
 		for(var/buff in active_buffs)
 			listener.apply_status_effect(text2path(buff))

@@ -254,7 +254,7 @@
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/iron
 	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
@@ -378,7 +378,6 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
 	smeltresult = /obj/item/ingot/iron
-	melting_material = /datum/material/iron
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY

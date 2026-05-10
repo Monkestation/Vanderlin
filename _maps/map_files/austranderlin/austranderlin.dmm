@@ -1190,11 +1190,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"aCC" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/dirt/road,
-/area/indoors/town/church)
 "aCY" = (
 /obj/structure/stairs{
 	dir = 1
@@ -2510,6 +2505,11 @@
 /obj/item/clothing/wrists/goldbracelet,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
+"blk" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt/road,
+/area/outdoors/exposed/church)
 "bll" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/churchmarble,
@@ -4429,12 +4429,6 @@
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/s)
-"cbU" = (
-/obj/item/clothing/head/peaceflower,
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/turf/open/floor/dirt/road,
-/area/indoors/town/church)
 "cck" = (
 /obj/structure/bookcase/random_recipes,
 /turf/open/floor/wood,
@@ -11959,6 +11953,11 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchbrick,
 /area/outdoors/exposed/under/sewer)
+"fBK" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "fBV" = (
 /obj/structure/closet/keyrack{
 	pixel_y = 0;
@@ -13088,6 +13087,11 @@
 	},
 /turf/open/floor/blocks/paving,
 /area/indoors/town)
+"gdb" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt/road,
+/area/outdoors/exposed/under/sewer)
 "gdc" = (
 /turf/open/floor/grass,
 /area/outdoors/farm)
@@ -24194,6 +24198,11 @@
 "ldL" = (
 /turf/open/floor/tile/brownbrick,
 /area/indoors/town/merc_guild)
+"ldY" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "lec" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
@@ -24528,11 +24537,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/grass,
 /area/outdoors/farm)
-"llX" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/church)
 "lma" = (
 /turf/open/water/clean,
 /area/under/cave)
@@ -25284,23 +25288,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
-"lEK" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/clothing/head/peaceflower{
-	pixel_x = -7;
-	pixel_y = -4
-	},
-/obj/structure/flora/hotspring_rocks/small/five{
-	pixel_x = 10;
-	pixel_y = -3
-	},
-/obj/structure/flora/hotspring_rocks/small/three{
-	pixel_x = 12;
-	pixel_y = -10
-	},
-/obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep)
 "lFc" = (
 /turf/closed/wall/mineral/roofwall/innercorner,
 /area/indoors/town/keep)
@@ -26231,11 +26218,6 @@
 "lZc" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town/noble_manor/red)
-"lZi" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/under/sewer)
 "lZq" = (
 /obj/item/recipe_book/cooking{
 	pixel_x = -4;
@@ -28404,11 +28386,6 @@
 "mWB" = (
 /turf/open/floor/cobble,
 /area/indoors/town/smithy)
-"mWC" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "mWN" = (
 /obj/structure/chair/bench/church/smallbench{
 	pixel_y = 10
@@ -29010,6 +28987,23 @@
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
+"niG" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/clothing/head/peaceflower{
+	pixel_x = -7;
+	pixel_y = -4
+	},
+/obj/structure/flora/hotspring_rocks/small/five{
+	pixel_x = 10;
+	pixel_y = -3
+	},
+/obj/structure/flora/hotspring_rocks/small/three{
+	pixel_x = 12;
+	pixel_y = -10
+	},
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt,
+/area/outdoors/town/keep)
 "niH" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
@@ -32540,10 +32534,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town/roofs)
-"oKx" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
-/turf/open/floor/cobblerock,
-/area/indoors/town/keep/magician)
 "oKG" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/blocks,
@@ -33115,6 +33105,12 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"oXc" = (
+/obj/structure/closet/dirthole/closed,
+/obj/item/natural/stone,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "oXl" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/fueled/wallfire/candle/blue{
@@ -35457,6 +35453,10 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
 /area/outdoors/town/noble_manor/blue)
+"pZT" = (
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
+/turf/open/floor/cobblerock,
+/area/indoors/town/keep/magician)
 "pZU" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/water/reeds,
@@ -36076,6 +36076,12 @@
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/tile,
 /area/indoors/town/clinic_large/feldsher)
+"qqu" = (
+/obj/item/clothing/head/peaceflower,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt/road,
+/area/indoors/town/church)
 "qqF" = (
 /obj/effect/landmark/start/servant{
 	dir = 4
@@ -37361,6 +37367,12 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
+"qRm" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt/road,
+/area/outdoors/exposed/under/sewer)
 "qRr" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -38861,12 +38873,6 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
-"rwa" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/dirt/road,
-/area/outdoors/exposed/under/sewer)
 "rwn" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
@@ -40127,12 +40133,6 @@
 /obj/effect/landmark/start/villager,
 /turf/open/floor/wood,
 /area/indoors/town)
-"rYW" = (
-/obj/structure/closet/dirthole/closed,
-/obj/item/natural/stone,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "rYX" = (
 /obj/structure/chair/stool/crafted,
 /obj/effect/landmark/start/woodsman,
@@ -40949,11 +40949,6 @@
 "ssf" = (
 /turf/closed/wall/mineral/wooddark,
 /area/under/cave)
-"ssk" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
-/turf/open/floor/dirt,
-/area/outdoors/exposed/church)
 "ssl" = (
 /obj/structure/bed/shit,
 /obj/effect/decal/cleanable/blood,
@@ -42759,6 +42754,11 @@
 	},
 /turf/open/floor/plank/h,
 /area/outdoors/town)
+"thn" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/turf/open/floor/dirt/road,
+/area/indoors/town/church)
 "thv" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/keep/lord_appt)
@@ -190891,7 +190891,7 @@ gur
 gur
 nQT
 nQT
-lEK
+niG
 vso
 pXi
 hHG
@@ -207525,7 +207525,7 @@ qFx
 qFx
 pHt
 owf
-ssk
+ldY
 fNm
 oSl
 oSl
@@ -207533,7 +207533,7 @@ oSl
 owf
 oSl
 nAk
-ssk
+ldY
 iKJ
 oSl
 aRu
@@ -207742,7 +207742,7 @@ oSl
 oSl
 wgG
 iKJ
-mWC
+fBK
 dmO
 qFx
 qFx
@@ -208345,7 +208345,7 @@ oUP
 oUP
 oUP
 iKJ
-ssk
+ldY
 oSl
 iKJ
 owf
@@ -208562,7 +208562,7 @@ myB
 lYj
 idA
 aNn
-aCC
+thn
 lYj
 bvL
 qFx
@@ -209352,7 +209352,7 @@ oSl
 owf
 qVo
 owf
-ssk
+ldY
 oUP
 qVo
 oSl
@@ -209955,7 +209955,7 @@ wgG
 oSl
 oSl
 oSl
-mWC
+fBK
 iKJ
 gEF
 oSl
@@ -210368,7 +210368,7 @@ iKJ
 oSl
 oSl
 iKJ
-rYW
+oXc
 jPn
 idA
 vHf
@@ -210767,7 +210767,7 @@ pjq
 oSl
 gor
 fAc
-mWC
+fBK
 gor
 gEF
 iKJ
@@ -210780,7 +210780,7 @@ bvL
 bvL
 nik
 fxs
-cbU
+qqu
 lYj
 nik
 fxs
@@ -213386,7 +213386,7 @@ qFx
 qFx
 qFx
 qFx
-llX
+blk
 iKJ
 iKJ
 owf
@@ -213397,7 +213397,7 @@ owf
 iKJ
 ebu
 oSl
-mWC
+fBK
 qFx
 qFx
 qFx
@@ -213792,14 +213792,14 @@ qFx
 qFx
 qFx
 qFx
-mWC
+fBK
 oSl
 oSl
 owf
 owf
 iKJ
 iKJ
-ssk
+ldY
 qFx
 qFx
 qFx
@@ -231302,7 +231302,7 @@ qRG
 dVG
 ner
 tbW
-oKx
+pZT
 tbW
 ner
 ner
@@ -249341,7 +249341,7 @@ bpg
 hbI
 pMR
 gTT
-lZi
+gdb
 pbY
 sTk
 wZc
@@ -249360,7 +249360,7 @@ bpg
 mTN
 mTN
 cjT
-lZi
+gdb
 hyI
 mTN
 roM
@@ -250158,7 +250158,7 @@ dMK
 dMK
 sTk
 pbY
-lZi
+gdb
 vwQ
 iea
 gTT
@@ -250949,7 +250949,7 @@ qFx
 qFx
 qFx
 vwQ
-lZi
+gdb
 gTT
 ngZ
 hbI
@@ -250966,9 +250966,9 @@ cWT
 xye
 xtV
 eMz
-lZi
+gdb
 vwQ
-lZi
+gdb
 gTT
 ngZ
 hbI
@@ -252775,7 +252775,7 @@ bpg
 hbI
 pMR
 gTT
-lZi
+gdb
 vwQ
 iea
 gTT
@@ -252784,7 +252784,7 @@ hbI
 hbI
 pMR
 gTT
-rwa
+qRm
 vwQ
 iea
 gTT
@@ -252794,7 +252794,7 @@ bpg
 hbI
 pMR
 gTT
-lZi
+gdb
 vwQ
 qFx
 qFx
@@ -253585,14 +253585,14 @@ ngZ
 gTT
 iea
 vwQ
-lZi
+gdb
 gTT
 pMR
 bpg
 hbI
 pMR
 gTT
-lZi
+gdb
 vwQ
 iea
 gTT
@@ -254383,7 +254383,7 @@ qFx
 qFx
 qFx
 vwQ
-lZi
+gdb
 gTT
 ngZ
 hbI
@@ -254402,7 +254402,7 @@ ngZ
 gTT
 iea
 vwQ
-lZi
+gdb
 gTT
 ngZ
 hbI

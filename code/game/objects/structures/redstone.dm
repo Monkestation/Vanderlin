@@ -404,7 +404,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/togg = FALSE
 	var/base_state = "floorhatch"
 	resistance_flags = INDESTRUCTIBLE
-	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/floordoor/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)

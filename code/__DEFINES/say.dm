@@ -110,6 +110,8 @@
 #define MSG_VISUAL (1<<0)
 #define MSG_AUDIBLE (1<<1)
 
-// USE ABOVE INSTEAD?
-#define EMOTE_VISIBLE 1
-#define EMOTE_AUDIBLE 2
+// Bitflags for emotes, used in var/emote_type of the emote datum
+/// Is the emote audible
+#define EMOTE_AUDIBLE (1<<0)
+/// Is the emote visible
+#define EMOTE_VISIBLE (1<<1)

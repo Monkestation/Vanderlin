@@ -416,5 +416,5 @@
 	. = FALSE
 	if(isliving(A))
 		var/mob/living/M = A
-		if((FACTION_VINES in M.faction) || (FACTION_PLANTS in M.faction) || HAS_TRAIT(M, TRAIT_KNEESTINGER_IMMUNITY))
+		if(M.has_faction(list(FACTION_VINES, FACTION_PLANTS)) || HAS_TRAIT(M, TRAIT_KNEESTINGER_IMMUNITY))
 			. = TRUE

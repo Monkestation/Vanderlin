@@ -287,7 +287,7 @@
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')
 	redstone_structure = TRUE
 	var/togg = FALSE
-	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED)
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
@@ -332,7 +332,7 @@
 
 /obj/structure/plank/Initialize()
 	. = ..()
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe
 	name = "bronze pipe"
@@ -351,7 +351,7 @@
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
-	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED)))
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
 	name = "bronze pipe"
@@ -1096,7 +1096,7 @@
 	max_integrity = 100
 	sellprice = 40
 	buckleverb = "crucifie"
-	can_buckle = 1
+	can_buckle = TRUE
 	buckle_lying = 0
 	breakoutextra = 10 MINUTES
 	dir = NORTH

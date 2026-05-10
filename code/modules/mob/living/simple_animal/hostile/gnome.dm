@@ -123,15 +123,11 @@
 
 	// Collect friends before dying - PROPERLY using befriended_refs
 	var/list/my_friends = list()
-	var/datum/component/friendship_container/friendships = GetComponent(/datum/component/friendship_container)
-	if(friendships)
-		// Get friends from the befriended_refs list
-		for(var/datum/weakref/friend_ref in friendships.befriended_refs)
-			if(QDELETED(friend_ref))
-				continue
-			var/mob/living/friend_mob = friend_ref.resolve()
-			if(friend_mob && !QDELETED(friend_mob))
-				my_friends += friend_mob
+
+	for(var/datum/friend as anything in ai_controller?.blackboard?[BB_FRIENDS_LIST])
+		if(QDELETED(friend))
+			continue
+		my_friends |= friend
 
 	// Create death message for nearby gnomes to remember
 	var/death_message = pick(

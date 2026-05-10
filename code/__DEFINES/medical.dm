@@ -135,7 +135,7 @@ DEFINE_BITFIELD(organ_flags, list(
 /// Max damage we consider for damage_organs()
 #define MAX_CONSIDERED_ORGAN_DAMAGE_ROLL 75
 /// ditto but for internal organ damage
-#define ORGAN_MINIMUM_DAMAGE 12.5
+#define ORGAN_MINIMUM_DAMAGE 25
 
 //wound severities for /datum/wound
 /// Wounds that are either surgically induced or too minor to matter
@@ -268,11 +268,11 @@ DEFINE_BITFIELD(organ_flags, list(
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll
 #define TRAUMA_ROLL_THRESHOLD 4.5
 /// Brainloss caused by mildly low blood oxygenation
-#define BRAIN_DAMAGE_LOW_OXYGENATION 1.1
+#define BRAIN_DAMAGE_LOW_OXYGENATION 1.5
 /// Brainloss caused by lower than low blood oxygenation
-#define BRAIN_DAMAGE_LOWER_OXYGENATION 2.2
+#define BRAIN_DAMAGE_LOWER_OXYGENATION 3
 /// Brainloss caused by a complete lack of oxygen flow
-#define BRAIN_DAMAGE_LOWEST_OXYGENATION 3.3
+#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4.5
 
 // ~pulse levels, very simplified.
 #define PULSE_NONE 0   // So !M.pulse checks would be possible.
@@ -308,7 +308,7 @@ DEFINE_BITFIELD(organ_flags, list(
 
 // ~arteries
 #define ARTERY_MAX_HEALTH 100
-#define ARTERIAL_BLOOD_FLOW 3
+#define ARTERIAL_BLOOD_FLOW 10
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth

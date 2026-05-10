@@ -281,7 +281,7 @@
 	if(attacking_shovel.heldclod)
 		playsound(src,'sound/items/empty_shovel.ogg', 100, TRUE)
 		if(stage == DIRTHOLE_PIT) //close grave
-			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) //can't have nice things can we
+			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) //can't have nice things can we
 				return
 			stage = DIRTHOLE_GRAVE
 			climb_offset = 10
@@ -312,7 +312,7 @@
 			if(under_turf && our_turf && isopenturf(under_turf))
 				playsound(src,'sound/items/dig_shovel.ogg', 100, TRUE)
 				user.visible_message("[user] starts digging out the bottom of [src]", "I start digging out the bottom of [src].")
-				if(!do_after(user, 10 SECONDS * attacking_shovel.time_multiplier, src))
+				if(!do_after(user, 10 SECONDS * attacking_shovel.toolspeed, src))
 					return TRUE
 				attacking_shovel.heldclod = new(attacking_shovel)
 				attacking_shovel.update_appearance(UPDATE_ICON_STATE)
@@ -340,7 +340,7 @@
 		if(stage == DIRTHOLE_GRAVE)
 			if(gravequality == 10 && !HAS_TRAIT(user, TRAIT_GRAVEROBBER)) // Are you sure you want to do this?
 				to_chat(user, span_boldwarning("You feel a chill as you begin to dig at the grave, as if something <span class='god_necra'>ancient</span> is watching you... are you prepared to face the consequences if you continue?"))
-			if(!do_after(user, 5 SECONDS * attacking_shovel.time_multiplier, src)) // WE CANT HAVE NICE THINGS CAN WE
+			if(!do_after(user, 5 SECONDS * attacking_shovel.toolspeed, src)) // WE CANT HAVE NICE THINGS CAN WE
 				return
 			stage = DIRTHOLE_PIT
 			climb_offset = 0

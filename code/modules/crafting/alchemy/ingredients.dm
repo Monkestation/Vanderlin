@@ -93,11 +93,8 @@
 		/datum/attunement/life = -0.1,
 		/datum/attunement/light = -0.1,
 	)
-
-/obj/item/alch/bone/Initialize(mapload)
-	. = ..()
-	create_reagents(20)
-	reagents.add_reagent(/datum/reagent/consumable/nutriment/bone_marrow, 20)
+	grind_results = list(/datum/reagent/consumable/nutriment/bone_marrow = 20)
+	indexed = TRUE
 
 /obj/item/alch/horn
 	name = "troll horn"

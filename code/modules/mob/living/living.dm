@@ -22,7 +22,7 @@
 	if(unique_name)
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
-	faction += "[REF(src)]"
+	add_ally(src)
 	GLOB.mob_living_list += src
 	AddElement(/datum/element/movetype_handler)
 	init_faith()
@@ -141,7 +141,7 @@
 	var/can_brace_fall = (!incapacitated(IGNORE_RESTRAINTS) && body_position == STANDING_UP)
 	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE2) && can_brace_fall)
 		return . | ZIMPACT_CANCEL_DAMAGE
-	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels <= 2)
+	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1) && can_brace_fall && levels < 2)
 		return . | ZIMPACT_CANCEL_DAMAGE
 
 	if(can_brace_fall && GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/climbing) >= 5) // Master climbers can fall down 2 levels without hurting themselves
@@ -927,6 +927,12 @@
 	density = initial(density) // We were prone before, so we become dense and things can bump into us again.
 	remove_offsets(LYING_DOWN_TRAIT)
 
+/mob/living/proc/update_density()
+	if(HAS_TRAIT(src, TRAIT_UNDENSE))
+		set_density(FALSE)
+	else
+		set_density(TRUE)
+
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
 	var/list/ret = list()
@@ -1203,9 +1209,12 @@
 	// 			pulledby.Move(T, get_dir(pulledby, T), glide_size) //the pullee tries to reach our previous position
 	// 			pulledby.moving_from_pull = null
 
-	if(moving_diagonally != FIRST_DIAG_STEP && isliving(pulledby))
-		var/mob/living/puller = pulledby
-		puller.set_pull_offsets(src, puller.grab_state)
+	if(moving_diagonally != FIRST_DIAG_STEP)
+		if(isliving(pulledby))
+			var/mob/living/puller = pulledby
+			puller.set_pull_offsets(src, puller.grab_state)
+		else if(isliving(pulling)) // EXPERIMENTAL: Set pulled person offsets when puller moves
+			set_pull_offsets(pulling, grab_state)
 
 //	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
 	if(active_storage)
@@ -2334,6 +2343,9 @@
 			OXY:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
 			CLONE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
 			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
+			PAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=pain' id='pain'>[getPainLoss()]</a>
+			SHOCK:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock' id='shock'>[getShock()]</a>
+			SHOCK STAGE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock_stage' id='shock'>[getShockStage()]</a>
 		</font>
 	"}
 
@@ -2788,10 +2800,9 @@
 /// Proc for giving a mob a new 'friend', generally used for AI control and targeting. Returns false if already friends.
 /mob/living/proc/befriend(mob/living/new_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(new_friend)
-	if (faction.Find(friend_ref))
+	if (has_ally(new_friend))
 		return FALSE
-	faction |= friend_ref
+	add_ally(new_friend)
 	ai_controller?.insert_blackboard_key_lazylist(BB_FRIENDS_LIST, new_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
@@ -2806,10 +2817,9 @@
 /// Proc for removing a friend you added with the proc 'befriend'. Returns true if you removed a friend.
 /mob/living/proc/unfriend(mob/living/old_friend)
 	SHOULD_CALL_PARENT(TRUE)
-	var/friend_ref = REF(old_friend)
-	if (!faction.Find(friend_ref))
+	if (!has_ally(old_friend))
 		return FALSE
-	faction -= friend_ref
+	remove_ally(old_friend)
 	ai_controller?.remove_thing_from_blackboard_key(BB_FRIENDS_LIST, old_friend)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_UNFRIENDED, old_friend)
@@ -2824,9 +2834,6 @@
 	return
 
 /mob/proc/taunted(mob/user)
-	for(var/mob/living/simple_animal/hostile/retaliate/A in view(7,src))
-		if(A.owner == user)
-			A.emote("aggro")
 	return
 
 /mob/proc/shood(mob/user)

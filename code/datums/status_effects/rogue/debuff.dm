@@ -200,6 +200,7 @@
 	effectedstats = null
 	duration = 4 SECONDS
 	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 
 /atom/movable/screen/alert/status_effect/debuff/uncookedfood
 	name = "Raw Food!"
@@ -515,8 +516,7 @@
 
 /datum/status_effect/debuff/stinky_person/on_remove()
 	. = ..()
-	var/datum/component/stinky_component = GetComponent(/datum/component/rot/stinky_person)
-	stinky_component?.RemoveComponent()
+	qdel(GetComponent(/datum/component/rot/stinky_person))
 
 /datum/status_effect/debuff/tainted_lux
 	id = "tainted_lux"

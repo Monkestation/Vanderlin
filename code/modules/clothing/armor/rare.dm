@@ -5,8 +5,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/onmob_racial.dmi'
 	sleevetype = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	sellprice = VALUE_SNOWFLAKE_STEEL

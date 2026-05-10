@@ -158,9 +158,8 @@
 	else
 		if(!was_i_undead)
 			zombie.mob_biotypes &= ~MOB_UNDEAD
-		zombie.faction -= FACTION_UNDEAD
-		zombie.faction += FACTION_TOWN
-		zombie.faction += FACTION_NEUTRAL
+		zombie.remove_faction(FACTION_UNDEAD)
+		zombie.add_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
 		zombie.regenerate_organs()
 		if(has_turned)
 			to_chat(zombie, span_green("I no longer crave flesh..."))
@@ -216,9 +215,8 @@
 	zombie.ambushable = FALSE
 
 	zombie.mob_biotypes |= MOB_UNDEAD
-	zombie.faction += FACTION_UNDEAD
-	zombie.faction -= FACTION_TOWN
-	zombie.faction -= FACTION_NEUTRAL
+	zombie.add_faction(FACTION_UNDEAD)
+	zombie.remove_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
 	add_verb(zombie, /mob/living/carbon/human/proc/zombie_seek)
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!HAS_TRAIT(zombie_part, TRAIT_ROTTEN) && !zombie_part.skeletonized)
