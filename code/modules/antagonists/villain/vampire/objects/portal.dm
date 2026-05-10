@@ -8,7 +8,6 @@
 
 	. = TRUE
 
-	var/list/choices = list("RETURN", "SENDING", CHOICE_CANCEL)
 	if(sending)
 		to_chat(user, "A portal is already active!")
 		return
