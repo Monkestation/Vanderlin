@@ -266,7 +266,6 @@
 
 /datum/anvil_recipe/tools/iron/gravefence_iron
 	name = "Iron Gravefence"
-	recipe_name = "iron Gravefence"
 	created_item = /obj/item/gravedecor/gravefence/iron
 	category = "Gravefences"
 
@@ -365,7 +364,6 @@
 
 /datum/anvil_recipe/tools/gold/headstone_astrata
 	name = "Golden Astratan Headstone"
-	recipe_name = "an Astratan Headstone"
 	created_item = /obj/item/gravedecor/headstone/astrata
 	category = "Headstones"
 
