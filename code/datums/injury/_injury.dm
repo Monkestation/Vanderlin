@@ -393,7 +393,6 @@
 			bad_embeddies += 1
 	return max(0.1, (bleed_rate * damage)/10 + bad_embeddies)
 
-
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))
 		return TRUE

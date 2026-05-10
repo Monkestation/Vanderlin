@@ -1570,7 +1570,6 @@
 		return internal_incision
 	return incision
 
-
 /obj/item/bodypart/proc/get_cut(strict = FALSE, ignore_gauze = FALSE)
 	if(ignore_gauze && (bandage))
 		return

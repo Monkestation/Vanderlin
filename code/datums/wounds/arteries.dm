@@ -5,12 +5,6 @@
 						'sound/gore/artery3.ogg')
 	severity = WOUND_SEVERITY_SEVERE
 	critical = TRUE
-	mortal = FALSE
-	can_sew = TRUE
-	can_cauterize = TRUE
-	embed_chance = 0
-	werewolf_infection_probability = 50
-	sleep_healing = 0
 	associated_bclasses = ARTERY_BCLASSES
 	min_damage = 5
 	min_damage_dividend = 0
@@ -59,9 +53,10 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	artery_type_override = /obj/item/organ/artery/neck
 	can_roll = FALSE //snowflake used for neck slit
+	show_in_book = FALSE
 
 /datum/wound/artery/heart
-	name = "aortic dissection"
+	name = "Aortic Dissection"
 	severity = WOUND_SEVERITY_FATAL
 	artery_type_override = /obj/item/organ/artery/chest
 	associated_bclasses = ARTERY_HEART_BCLASSES

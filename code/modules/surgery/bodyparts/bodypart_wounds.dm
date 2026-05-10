@@ -119,13 +119,14 @@
 
 /// Returns the total bleed rate on this bodypart
 /obj/item/bodypart/proc/get_bleed_rate(artifical = FALSE)
-	if(NOBLOOD in owner?.dna?.species?.species_traits)
+	var/datum/species/physiology = owner?.dna?.species
+	if(NOBLOOD in physiology?.species_traits)
 		return 0
 	if(!bleeds)
 		return 0
 	var/bleed_rate = 0
 	for(var/datum/wound/wound as anything in wounds)
-		bleed_rate += (wound.bleed_rate * owner.dna.species.bleed_mod)
+		bleed_rate += wound.bleed_rate
 
 	for(var/datum/injury/injury as anything in injuries)
 		if(!artifical)
@@ -138,6 +139,8 @@
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
+	if(physiology)
+		bleed_rate *= physiology.bleed_mod
 	if(bandage)
 		bleed_rate *= bandage?.bandage_effectiveness
 	for(var/obj/item/grabbing/grab in grabbedby)
