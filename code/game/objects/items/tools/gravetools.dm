@@ -284,7 +284,7 @@
 	gripped_intents = list(SHOVEL_SCOOP, SHOVEL_IRRIGATE, SHOVEL_STRIKE, POLEARM_CHOP)
 	grid_height = 96
 	grid_width = 64
-	time_multiplier = 0.8
+	toolspeed = 0.8
 	smeltresult = null
 
 /obj/item/weapon/shovel/necran/Initialize()
