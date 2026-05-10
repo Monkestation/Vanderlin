@@ -1,9 +1,5 @@
 // ~pain levels when using the custom_pain proc and shit
 #define PAIN_EMOTE_MINIMUM 10
-#define PAIN_LEVEL_1 0
-#define PAIN_LEVEL_2 10
-#define PAIN_LEVEL_3 40
-#define PAIN_LEVEL_4 70
 
 // ~shock stages
 #define SHOCK_STAGE_1 10
@@ -47,4 +43,4 @@
 #define SHOCK_PENALTY_COOLDOWN_DURATION 5 SECONDS
 #define COOLDOWN_CARBON_ENDORPHINATION "carbon_endorphination"
 /// Cooldown before our body endorphinates itself again
-#define ENDORPHINATION_COOLDOWN_DURATION 2 MINUTES
+#define ENDORPHINATION_COOLDOWN_DURATION 1 MINUTES

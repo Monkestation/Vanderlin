@@ -772,3 +772,8 @@
 			if(C.body_parts_covered & def_zone.body_part)
 				covering_part += C
 	return covering_part
+
+/mob/living/carbon/human/getShock(painkiller_included)
+	. = ..()
+	if(dna?.species)
+		return . * dna?.species.pain_mod

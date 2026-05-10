@@ -48,6 +48,6 @@
 	for(var/datum/injury/injury in human.all_injuries)
 		if(!healing_on_tick)
 			break
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
+			if(!injury.can_heal())
+				continue
 		healing_on_tick = injury.heal_damage(healing_on_tick)

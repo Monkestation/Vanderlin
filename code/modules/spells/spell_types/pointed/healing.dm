@@ -266,7 +266,7 @@
 	if(affecting)
 		affecting.heal_wounds(amount_healed * wound_modifier, src)
 		for(var/datum/injury/injury as anything in affecting.injuries)
-			if(injury.damage_type == WOUND_DIVINE)
+			if(!injury.can_heal())
 				continue
 			injury.heal_damage(amount_healed)
 		C.update_damage_overlays()

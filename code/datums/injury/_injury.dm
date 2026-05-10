@@ -248,6 +248,11 @@
 		return FALSE
 	return CEILING(get_bleed_rate() * 0.2, 0.1)
 
+/datum/injury/proc/can_heal()
+	if(damage_type == WOUND_DIVINE)
+		return FALSE
+	return TRUE
+
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
 /datum/injury/proc/heal_damage(amount_heal)

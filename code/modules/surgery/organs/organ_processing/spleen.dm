@@ -11,13 +11,13 @@
 	var/nutrition_ratio = 0
 	switch(owner.nutrition)
 		if(0 to NUTRITION_LEVEL_STARVING)
-			nutrition_ratio = 0.2
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
 			nutrition_ratio = 0.4
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
+		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
 			nutrition_ratio = 0.6
-		if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
+		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
 			nutrition_ratio = 0.8
+		if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
+			nutrition_ratio = 1
 		else
 			nutrition_ratio = 1
 	if(owner.satiety > 80)
@@ -29,13 +29,14 @@
 	for(var/thing in spleens)
 		var/obj/item/organ/spleen/spleen = thing
 		blood_regen += (spleen.get_slot_efficiency(ORGAN_SLOT_SPLEEN) * spleen.blood_regen_factor)
-		combined_nutrition_requirement += (spleen.nutriment_req/20)
-	blood_regen *= (1 + owner.get_chem_effect(CE_BLOODRESTORE))
-	combined_nutrition_requirement *= (1 + (owner.get_chem_effect(CE_BLOODRESTORE) * 0.5))
+		combined_nutrition_requirement += (spleen.nutriment_req/40)
+	var/blood_restore_multiplier = owner.get_chem_effect(CE_BLOODRESTORE)
+	blood_regen *= (1 + blood_restore_multiplier)
+	combined_nutrition_requirement *= (1 + (blood_restore_multiplier * 0.5))
 	if(!blood_regen)
 		return
-	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * 0.5 * delta_time)
-	owner.adjust_bloodvolume(CEILING(blood_regen * nutrition_ratio * 0.5 * delta_time, 0.1))
+	owner.adjust_nutrition(-combined_nutrition_requirement * nutrition_ratio * delta_time)
+	owner.adjust_bloodvolume(CEILING(blood_regen * nutrition_ratio * delta_time, 0.1))
 	return TRUE
 
 /// Blood volume adjust proc

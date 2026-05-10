@@ -173,8 +173,6 @@
 
 	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage < SHOCK_STAGE_2))
 		emote("is having trouble keeping [p_their()] eyes open.")
-		//Attempt to inject combat cocktail for the first time
-		endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_2) && (previous_shock_stage >= SHOCK_STAGE_2))
 		if(DT_PROB(3, delta_time))
@@ -189,14 +187,14 @@
 		emote("becomes limp.")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Immobilize(rand(2, 3) SECONDS)
-		//Attempt to inject combat cocktail a second time
-		endorphinate()
+			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
 		if(DT_PROB(1, delta_time))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Knockdown(2 SECONDS)
+				endorphinate()
 		if(DT_PROB(2, delta_time))
 			emote("gasp")
 
@@ -205,6 +203,7 @@
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "My whole body is going numb")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Paralyze(5 SECONDS)
+				endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_6) && (previous_shock_stage >= SHOCK_STAGE_6))
 		if(DT_PROB(1, delta_time))
@@ -212,29 +211,32 @@
 				custom_pain("[pick("I black out", "I feel like I could die at any moment now", "I'm about to lose consciousness")]!", shock_stage, nopainloss = TRUE)
 			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 				Unconscious(1 SECONDS)
+				endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage < SHOCK_STAGE_7))
 		emote("gargle")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Paralyze(5 SECONDS)
-		//Attempt to inject combat cocktail, even though at this point it won't help much
-		endorphinate()
+			//Attempt to inject combat cocktail, even though at this point it won't help much
+			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Paralyze(5 SECONDS)
+			endorphinate()
 		if(DT_PROB(1, delta_time))
 			Unconscious(5)
+			endorphinate()
 		if(DT_PROB(4, delta_time))
 			emote("gargle")
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8))
-		//Attempt to inject combat cocktail - ONE FINAL TIME
-		endorphinate()
 		//Death is near...
 		emote("scream")
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(10 SECONDS)
+			//Attempt to inject combat cocktail - ONE FINAL TIME
+			endorphinate()
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage >= SHOCK_STAGE_8))
 		//How the fuck are we still alive?
@@ -244,3 +246,4 @@
 			//death_rattle()
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(15 SECONDS)
+			endorphinate()

@@ -32,6 +32,6 @@
 	if(!iscarbon(owner))
 		return
 	for(var/datum/injury/injury as anything in carbon.all_injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+		if(!injury.can_heal())
 			continue
 		injury.heal_damage(0.1)

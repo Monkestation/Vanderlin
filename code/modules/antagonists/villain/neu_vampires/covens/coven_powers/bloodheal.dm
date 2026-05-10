@@ -55,7 +55,7 @@
 	for(var/datum/injury/injury in owner.all_injuries)
 		if(!bashing_lethal_heal && !aggravated_heal)
 			break
-		if(injury.damage_type == WOUND_DIVINE)
+		if(!injury.can_heal())
 			continue
 		if(injury.damage_type == WOUND_BURN)
 			aggravated_heal = injury.heal_damage(aggravated_heal)

@@ -109,6 +109,9 @@
 	/// The above, but for tool behaviors
 	var/list/healing_tools = list(TOOL_SUTURE)
 
+	/// Thresholds organs can naturally heal down to
+	var/self_heal_thresholds = list(0.3, 0.6, 0.9)
+
 /obj/item/organ/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
@@ -507,7 +510,7 @@
 
 	// Damage decrements by a percent of maxhealth
 	if(can_heal(delta_time, times_fired) && damage)
-		handle_healing(delta_time, times_fired)
+		handle_self_healing(delta_time, times_fired)
 
 ///Organs don't die instantly, and neither should you when you get fucked up
 /obj/item/organ/proc/handle_failing_organ(delta_time, times_fired)
@@ -517,7 +520,6 @@
 	failure_time += delta_time
 	organ_failure(delta_time)
 
-
 /// healing checks
 /obj/item/organ/proc/can_heal(delta_time, times_fired)
 	. = TRUE
@@ -525,8 +527,8 @@
 		return FALSE
 	if(healing_factor <= 0)
 		return FALSE
-	if((damage > maxHealth/5) && !owner.get_chem_effect(CE_ORGAN_REGEN))
-		return FALSE
+	if(owner.get_chem_effect(CE_ORGAN_REGEN))
+		return TRUE
 	if(is_dead())
 		return FALSE
 	if(current_blood <= 0)
@@ -536,10 +538,26 @@
 	if(owner.get_chem_effect(CE_TOXIN))
 		return FALSE
 
-/obj/item/organ/proc/handle_healing(delta_time, times_fired)
+/obj/item/organ/proc/handle_self_healing(delta_time, times_fired)
 	if(damage <= 0)
 		return
-	applyOrganDamage(-healing_factor * delta_time, damage)
+
+	///Damage decrements by a percent of its maxhealth
+	var/healing_amount = healing_factor * delta_time * maxHealth
+	///Damage decrements again by a percent of its maxhealth, depending on the owner's health
+	healing_amount += (owner.satiety > 0) ? (healing_factor * (owner.satiety / MAX_SATIETY)) : 0
+
+	var/max_healing_amount = 0
+	for(var/i in self_heal_thresholds)
+		var/limit = i * maxHealth
+		if(damage >= limit)
+			max_healing_amount = damage - limit
+	if(max_healing_amount)
+		healing_amount = min(max_healing_amount, healing_amount)
+
+	if(healing_amount <= 0)
+		return
+	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
 	owner.adjust_nutrition(-nutriment_req/100 * (0.5 * delta_time))
 	owner.adjust_hydration(-hydration_req/100 * (0.5 * delta_time))

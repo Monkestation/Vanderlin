@@ -21,7 +21,7 @@
 	nutriment_req = 2.5
 	hydration_req = 1
 
-	var/blood_regen_factor = 0.01 // how much blood the spleen regenerates per efficiency point, per 2 seconds
+	var/blood_regen_factor = BLOOD_REGEN_FACTOR // how much blood the spleen regenerates per efficiency point, per 2 seconds
 
 /obj/item/organ/spleen/on_owner_examine(datum/source, mob/user, list/examine_list)
 	if(!ishuman(owner))

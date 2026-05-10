@@ -255,7 +255,8 @@
 	var/list/candidates = list()
 	for(var/wound_type in GLOB.primordial_wounds)
 		var/datum/wound/primordial = GLOB.primordial_wounds[wound_type]
-		if(IS_ABSTRACT(primordial))
+		var/datum/primoridial_type = primordial.type
+		if(IS_ABSTRACT(primoridial_type))
 			continue
 		if(!primordial.can_roll)
 			continue

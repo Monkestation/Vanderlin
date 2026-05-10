@@ -32,6 +32,9 @@
 #define BLOOD_VOLUME_BLEEDOUT_PASSOUT BLOOD_VOLUME_NORMAL * 0.25
 #define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
 
+/// How efficiently humans regenerate blood.
+#define BLOOD_REGEN_FACTOR 0.01
+
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
 #define MOB_SIZE_SMALL 1

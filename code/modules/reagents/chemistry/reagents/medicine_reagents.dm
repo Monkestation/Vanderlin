@@ -169,7 +169,9 @@
 
 /datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE || injury.damage_type == WOUND_BURN)
+		if(!injury.can_heal())
+			continue
+		if(injury.damage_type == WOUND_BURN)
 			continue
 		injury.heal_damage(2)
 
@@ -275,7 +277,7 @@
 
 /datum/reagent/medicine/woundwrack_oil/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+		if(!injury.can_heal())
 			continue
 		injury.heal_damage(2)
 		injury.salve_injury()
@@ -407,7 +409,7 @@
 
 /datum/reagent/medicine/witchknit_paste/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
 	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+		if(!injury.can_heal())
 			continue
 		injury.heal_damage(1.5)
 		injury.salve_injury()
