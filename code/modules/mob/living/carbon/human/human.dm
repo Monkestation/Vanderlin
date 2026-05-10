@@ -17,7 +17,7 @@
 				if(do_after(user, 5 SECONDS, src))
 					var/obj/item/bodypart/part = src.get_bodypart(BODY_ZONE_PRECISE_NECK)
 					part.add_wound(/datum/wound/slash)
-					part.add_wound(/datum/wound/artery/neck)
+					part.add_wound(/datum/wound/artery/neck_slice)
 
 	else if(held_item && (user.zone_selected == BODY_ZONE_PRECISE_SKULL))
 		if(held_item.get_sharpness() && held_item.wlength == WLENGTH_SHORT)

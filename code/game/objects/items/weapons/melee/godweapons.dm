@@ -75,7 +75,7 @@
 	if(check_zone(user.zone_selected) != BODY_ZONE_CHEST)
 		return
 	var/mob/living/carbon/human/H = target
-	var/heart_crit = H.has_wound(/datum/wound/artery/chest)
+	var/heart_crit = H.has_wound(/datum/wound/artery/heart)
 	var/dead = H.stat == DEAD
 	if((H.health < H.crit_threshold) || heart_crit || dead)
 		var/fast = heart_crit || dead

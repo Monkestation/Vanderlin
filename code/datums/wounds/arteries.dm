@@ -19,19 +19,12 @@
 	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	var/artery_type_override
 
-/datum/wound/artery/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
-	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
-		return 0
-	return ..()
-
 /datum/wound/artery/can_apply_to_bodypart(obj/item/bodypart/affected)
-	. = ..()
 	if(affected.status == BODYPART_ROBOTIC)
 		return FALSE
 	if(!affected.get_cut())
 		return FALSE
-	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
-		return FALSE
+	return ..()
 
 /datum/wound/artery/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/artery) && (type == other.type))
@@ -62,18 +55,21 @@
 			artery.tear()
 	qdel(src)
 
-/datum/wound/artery/neck
+/datum/wound/artery/neck_slice
+	severity = WOUND_SEVERITY_CRITICAL
 	artery_type_override = /obj/item/organ/artery/neck
 	can_roll = FALSE //snowflake used for neck slit
 
-/datum/wound/artery/chest
+/datum/wound/artery/heart
+	name = "aortic dissection"
+	severity = WOUND_SEVERITY_FATAL
 	artery_type_override = /obj/item/organ/artery/chest
 	associated_bclasses = ARTERY_HEART_BCLASSES
 	viable_zones = list(BODY_ZONE_CHEST)
+	mortal = TRUE
 
-/datum/wound/artery/dissect
-	severity = WOUND_SEVERITY_CRITICAL
+/datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected)
+	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
+		return FALSE
+	return ..()
 
-/datum/wound/artery/dissect/neck
-	artery_type_override = /obj/item/organ/artery/neck
-	can_roll = FALSE //snowflake used for neck slit

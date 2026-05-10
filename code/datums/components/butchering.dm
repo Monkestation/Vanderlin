@@ -74,7 +74,7 @@
 		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD) // easy tiger, we'll get to that in a sec
 		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		if(slit_throat)
-			slit_throat.add_wound(/datum/wound/artery/dissect/neck)
+			slit_throat.add_wound(/datum/wound/artery/neck_slice)
 
 /datum/component/butchering/proc/Butcher(mob/living/butcher, mob/living/meat)
 	var/turf/T = meat.drop_location()
