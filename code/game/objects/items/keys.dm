@@ -1,5 +1,6 @@
 /obj/item/key
 	name = "old key"
+	examine_name = "key"
 	desc = "A simple key of simple uses."
 	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
