@@ -65,7 +65,7 @@
 	else
 		apparent_blood_volume = BLOOD_VOLUME_NORMAL
 
-	var/apparent_blood_volume_mod = max(0, 1 - (getOxyLoss() * 0.1) /max(maxHealth, 1))
+	var/apparent_blood_volume_mod = max(0, 1 - getOxyLoss() / max(maxHealth, 1))
 	var/oxygenated = get_chem_effect(CE_OXYGENATED)
 	if(oxygenated == 1) // Tirimol
 		apparent_blood_volume_mod += 0.5

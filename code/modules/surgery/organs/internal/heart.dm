@@ -137,7 +137,7 @@
 			if(heart.beating)
 				deathsdoor = FALSE
 		if(deathsdoor)
-			to_chat(owner, span_danger("I'm knocking on death's door!"))
+			to_chat(owner, span_danger("I'm knocking on Necra's door!"))
 	return TRUE
 
 /obj/item/organ/heart/proc/Restart()
