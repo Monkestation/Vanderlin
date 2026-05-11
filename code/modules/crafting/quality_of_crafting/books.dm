@@ -640,5 +640,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/undertaker_manual,
 		/datum/anvil_recipe/tools/gold/headstone_astrata,
 		/datum/anvil_recipe/tools/iron/gravefence_iron,
-		/datum/repeatable_crafting_recipe/gravemaking
+		/datum/repeatable_crafting_recipe/gravemaking,
+		/datum/container_craft/pan/fat_render,
+		/datum/repeatable_crafting_recipe/tallow/red
+
 	)
