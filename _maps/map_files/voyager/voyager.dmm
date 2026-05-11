@@ -936,10 +936,23 @@
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/vault)
 "ga" = (
-/obj/structure/table/wood/reinforced_alt{
-	dir = 8
-	},
-/obj/item/storage/belt/pouch/coins/poor,
+/obj/structure/closet/crate/crafted_closet/lord,
+/obj/item/clothing/face/spectacles/sglasses,
+/obj/item/clothing/face/spectacles,
+/obj/item/clothing/face/exoticsilkmask,
+/obj/item/clothing/armor/gambeson/arming,
+/obj/item/clothing/cloak/eastcloak2,
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/head/courtierhat,
+/obj/item/clothing/shoes/ridingboots,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/face/spectacles/inqglasses,
+/obj/item/clothing/shirt/undershirt/eastshirt2,
+/obj/item/clothing/head/hatfur,
+/obj/item/clothing/armor/basiceast/crafteast,
+/obj/item/clothing/pants/trou/shadowpants,
+/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/head/helmet/leather/tricorn,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
 "gc" = (
@@ -5178,6 +5191,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/storage/belt/pouch/coins/poor,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/nobledeck)
 "IZ" = (

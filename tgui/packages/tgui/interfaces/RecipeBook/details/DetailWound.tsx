@@ -21,7 +21,7 @@ export const DetailWound = ({ r }: { r: Recipe }) => (
         <Box className="RecipeBook__step-row">Sleep healing: {r.sleep_healing}/beat</Box>
       )}
     </Box>
-    {(r.can_sew || r.can_cauterize) && (
+    {(!!r.can_sew || !!r.can_cauterize) && (
       <>
         <SectionHead>Treatment</SectionHead>
         <Box className="RecipeBook__step-block">

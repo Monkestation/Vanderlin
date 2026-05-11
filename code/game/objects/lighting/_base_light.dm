@@ -148,9 +148,9 @@
 					explode()
 			else
 				set_light(BR, light_inner_range, PO, l_color = CO)
-		START_PROCESSING(SSmachines, src)
 	else
 		emergency_mode = TRUE
+		START_PROCESSING(SSmachines, src)
 	if(should_update_light)
 		update_light()
 	update_appearance(UPDATE_ICON_STATE)
