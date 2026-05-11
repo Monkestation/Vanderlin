@@ -139,9 +139,6 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
-	var/surgery_flags = get_surgery_flags()
-	if(surgery_flags & SURGERY_CLAMPED)
-		bleed_rate = min(bleed_rate, 0.5)
 	return bleed_rate
 
 /obj/item/bodypart/proc/skeletonized_mod(bclass)

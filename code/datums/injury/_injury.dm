@@ -375,7 +375,7 @@
 		var/obj/item/item = thing
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
-	if(is_bandaged() || is_clamped() || is_sutured())
+	if(is_bandaged() || is_sutured())
 		return FALSE
 	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
@@ -390,12 +390,13 @@
 	for(var/obj/item/item in embedded_objects)
 		if((item.w_class < WEIGHT_CLASS_SMALL))
 			bad_embeddies += 1
-	return max(0.1, (bleed_rate * (damage/BLEED_DAMAGE_RATIO)) + bad_embeddies)
+	var/bleed_modifier = damage/BLEED_DAMAGE_RATIO
+	if(is_clamped())
+		bleed_modifier *= (BLEED_DAMAGE_RATIO/200)
+	return max(0.1, (bleed_rate * bleed_modifier) + bad_embeddies)
 
 /datum/injury/proc/is_surgical()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SURGICAL)
 
 /datum/injury/proc/is_disinfected()
 	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && (germ_level <= 0))
@@ -403,23 +404,15 @@
 	return FALSE
 
 /datum/injury/proc/is_salved()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SALVED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SALVED)
 
 /datum/injury/proc/is_clamped()
-	if(CHECK_BITFIELD(injury_flags, INJURY_CLAMPED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_CLAMPED)
 
 /datum/injury/proc/is_sutured()
-	if(CHECK_BITFIELD(injury_flags, INJURY_SUTURED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_SUTURED)
 
 /datum/injury/proc/is_bandaged()
-	if(CHECK_BITFIELD(injury_flags, INJURY_BANDAGED))
-		return TRUE
-	return FALSE
+	return CHECK_BITFIELD(injury_flags, INJURY_BANDAGED)
 
 #undef BLEED_DAMAGE_RATIO

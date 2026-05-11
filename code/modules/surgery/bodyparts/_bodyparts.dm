@@ -563,7 +563,7 @@
 		if(!toxins && injury.can_autoheal())
 			heal_amt += (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) * 0.01)
 			if(owner?.IsSleeping())
-				heal_amt *= 4
+				heal_amt *= 2
 
 		if(heal_amt)
 			injury.heal_damage(heal_amt * (0.5 * delta_time))
