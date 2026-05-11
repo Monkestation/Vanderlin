@@ -157,7 +157,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define LIMB_EFFICIENCY_DISABLING 50
 
 /// This is used as a reference point for dynamic wounds, so it's better off as a define.
-#define ARTERY_LIMB_BLEEDRATE 25
+#define ARTERY_LIMB_BLEEDRATE 12.5
 
 /// Multiplier applied to reagents in blood when factoring in total volume for "purity"
 #define BLOODLETTING_MULT 5

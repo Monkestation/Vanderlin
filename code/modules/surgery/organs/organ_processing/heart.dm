@@ -157,7 +157,7 @@
 	var/temp_bleed = 0
 	var/bleed_mod = 1
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
-		var/true_bleed = bleed_part.get_bleed_rate() * 0.5 * delta_time
+		var/true_bleed = bleed_part.get_bleed_rate() * delta_time
 		switch(owner.pulse)
 			if(PULSE_SLOW)
 				true_bleed *= 0.8

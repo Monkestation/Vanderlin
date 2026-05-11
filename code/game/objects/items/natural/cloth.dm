@@ -27,7 +27,7 @@
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
 	///How much you can bleed into the bandage until it needs to be changed (Blood loss is measured in 50% of the health)
-	var/bandage_health = 150
+	var/bandage_health = 300
 	obj_flags = CAN_BE_HIT //enables splashing on by containers
 
 /obj/item/natural/cloth/Initialize(mapload, vol)

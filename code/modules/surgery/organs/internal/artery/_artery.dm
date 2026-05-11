@@ -46,6 +46,10 @@
 		bleed_mod *= grab.bleed_suppressing
 	if(limb.bandage)
 		bleed_mod *= limb.bandage.bandage_effectiveness
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.physiology)
+			bleed_mod *= human_owner.physiology.bleed_mod
 	switch(owner.pulse)
 		if(PULSE_NONE)
 			bleed_mod *= 0

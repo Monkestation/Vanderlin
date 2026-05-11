@@ -20,7 +20,7 @@
 
 	// Limbs hemorrhage but clot quickly
 	// Lose 164.3 blood over 19 ticks then clot
-	bleed_rate = 16.3
+	bleed_rate = 4.1
 	clotting_threshold = 0.6
 	clotting_rate = 0.85
 
@@ -81,7 +81,7 @@
 	)
 	sound_effect = "headcrush"
 	whp = 80
-	bleed_rate = 3.2
+	bleed_rate = 1.6
 	clotting_threshold = null
 
 	mortal = TRUE
@@ -128,7 +128,7 @@
 		"The cranium is shattered!",
 	)
 	whp = 150
-	bleed_rate = 4.6
+	bleed_rate = 2.3
 	paralysis = TRUE
 	knockout = 25 SECONDS
 	min_damage_dividend = 0.95
@@ -198,7 +198,7 @@
 	)
 	whp = 50
 
-	bleed_rate = 1.6
+	bleed_rate = 0.8
 	clotting_threshold = 0.4
 	clotting_rate = 0.04
 	viable_zones = list(BODY_ZONE_PRECISE_MOUTH)
@@ -258,7 +258,7 @@
 	)
 	whp = 50
 	// Lose 224.6 blood over 18 ticks then clot
-	bleed_rate = 23.1
+	bleed_rate = 5.8
 	clotting_threshold = 0.8
 	clotting_rate = 1.25
 	viable_zones = list(BODY_ZONE_CHEST)
@@ -278,7 +278,7 @@
 	)
 	whp = 50
 	gain_emote = "groin"
-	bleed_rate = 3.1
+	bleed_rate = 1.6
 	clotting_threshold = 1.2
 	clotting_rate = 0.04
 	viable_zones = list(BODY_ZONE_PRECISE_GROIN)

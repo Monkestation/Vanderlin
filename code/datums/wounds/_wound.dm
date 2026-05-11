@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	/// How many "health points" this wound has, AKA how hard it is to heal
 	var/whp = 60
-	/// How much this wound bleeds
+	/// How much this wound bleeds. Remember this is multiplied by delta_time
 	var/bleed_rate = 0
 	/// Some wounds clot over time, reducing bleeding - This is the rate at which they do so
 	var/clotting_rate = 0.01

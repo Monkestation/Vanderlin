@@ -1,4 +1,4 @@
-#define BLEED_DAMAGE_RATIO 10
+#define BLEED_DAMAGE_RATIO 20
 
 //This is basically the baystation wound datum, which i thought would synergize well with the TG wounds
 /****************************************************

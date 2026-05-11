@@ -23,7 +23,7 @@
 		"The eardrums are ruptured!",
 	)
 	woundpain = 50
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = TRUE
 	critical = TRUE
 	associated_bclasses = STAB_BCLASSES
@@ -59,7 +59,7 @@
 		"The eye is destroyed!",
 	)
 	woundpain = 30
-	bleed_rate = 8
+	bleed_rate = 4
 	can_cauterize = FALSE
 	critical = TRUE
 	viable_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
@@ -174,7 +174,7 @@
 		"The tongue flies off in an arc!"
 	)
 	woundpain = 8
-	bleed_rate = 5
+	bleed_rate = 2.5
 	can_cauterize = FALSE
 	critical = TRUE
 	associated_bclasses = ARTERY_BCLASSES
