@@ -19,7 +19,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/obelisk_headstone
 	name = "headstone obelisk"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 		/obj/item/ingot/iron = 1,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
@@ -30,7 +30,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/psydonic_headstone
 	name = "psydonic headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
@@ -40,7 +40,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/pestra_headstone
 	name = "pestran headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
@@ -50,7 +50,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/abyssorite_headstone
 	name = "abyssorite headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
@@ -60,7 +60,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/necran_headstone
 	name = "necran headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 		/obj/item/natural/glass = 1,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
@@ -71,7 +71,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/malumite_headstone
 	name = "malumite headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 		/obj/item/ingot/iron = 1,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
@@ -82,7 +82,7 @@
 /datum/repeatable_crafting_recipe/gravemaking/eoran_headstone
 	name = "eoran headstone"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
@@ -107,7 +107,7 @@
 	name = "crude gravefence"
 	category = "Gravefences"
 	requirements = list(
-		/obj/item/natural/stone = 3,
+		/obj/item/natural/stone = 2,
 		/obj/item/rope = 1,
 	)
 	attacked_atom = /obj/item/natural/stone
@@ -119,7 +119,7 @@
 	name = "chiseled gravefence"
 	category = "Gravefences"
 	requirements = list(
-		/obj/item/natural/stoneblock = 3,
+		/obj/item/natural/stoneblock = 2,
 	)
 	attacked_atom = /obj/item/natural/stoneblock
 	starting_atom  = /obj/item/weapon/chisel
