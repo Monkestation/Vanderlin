@@ -95,24 +95,6 @@
 	if(!reagents?.total_volume)
 		to_chat(user, span_danger("[src] is empty!"))
 		return
-	if(user.used_intent.type == INTENT_SPLASH)
-		var/R
-		M.visible_message(span_danger("[user] splashes the contents of [src] onto [M]!"), \
-						span_danger("[user] splashes the contents of [src] onto you!"))
-		if(reagents)
-			for(var/datum/reagent/A as anything in reagents.reagent_list)
-				R += "[A] ([num2text(A.volume)]),"
-
-		if(reagents?.reagent_list && user)
-			log_combat(user, M, "splashed (thrown) [english_list(reagents.reagent_list)]")
-			message_admins("[ADMIN_LOOKUPFLW(user)] splashed (thrown) [english_list(reagents.reagent_list)] on [M] at [ADMIN_VERBOSEJMP(M)].")
-
-		SEND_SIGNAL(user, COMSIG_SPLASHED_MOB, M, reagents.reagent_list)
-		reagents.reaction(M, TOUCH)
-		chem_splash(M.loc, 2, list(reagents))
-		playsound(M, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg', 'sound/foley/water_land3.ogg'), 100, FALSE)
-		log_combat(user, M, "splashed", R)
-		return
 	if(user.used_intent.type == INTENT_POUR)
 		if(!canconsume(M, user))
 			return
@@ -140,9 +122,7 @@
 					bowl_check.usages += 1
 				if(bowl_check.usages >= bowl_check.max_usages && !bowl_check.dirty)
 					bowl_check.dirty = TRUE
-					var/datum/component/particle_spewer = bowl_check.GetComponent(/datum/component/particle_spewer/sparkle)
-					if(particle_spewer)
-						qdel(particle_spewer)
+					qdel(bowl_check.GetComponent(/datum/component/particle_spewer/sparkle/turf_only))
 					bowl_check.update_appearance(UPDATE_OVERLAYS)
 				if(human_user.is_noble()) // egads we're an unmannered SLOB
 					human_user.add_stress(/datum/stress_event/noble_bad_manners)

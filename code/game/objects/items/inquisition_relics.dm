@@ -360,7 +360,7 @@
 /datum/component/psyblessed/Initialize(preblessed = FALSE, force, blade_int, int, makesilver)
 	if(!istype(parent, /obj/item/weapon))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	pre_blessed = preblessed
 	added_force = force
 	added_blade_int = blade_int
@@ -582,7 +582,7 @@
 			visible_message(span_warning("[src] draws from [M]!"))
 			playsound(M, 'sound/combat/hits/bladed/genstab (1).ogg', 30, FALSE, -1)
 			timestaken++
-			M.blood_volume = max(M.blood_volume-30, 0)
+			M.adjust_bloodvolume(-30)
 			M.handle_blood()
 			if(M.mind)
 				if(M.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE))
@@ -700,6 +700,19 @@
 			ring.tallowed = TRUE
 			ring.update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/inqarticles/tallowpot/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
+	. = ..()
+	if(!proximity_flag)
+		return
+	//Both static light sources and torches/lanterns have on bool so this invalid cast... it just works yeah
+	var/obj/machinery/light/fueled/F = target
+
+	if((istype(target, /obj/machinery/light/fueled) || istype(target, /obj/item/flashlight/flare/torch)) && F.on)
+		heatedup = 28
+		visible_message(span_info("[user] warms [src] using [target]."))
+		update_appearance(UPDATE_ICON_STATE)
+
+
 /obj/item/inqarticles/tallowpot/update_icon_state()
 	. = ..()
 	if(tallow)
@@ -755,7 +768,7 @@
 	throwforce = 15
 	force_wielded = 0
 	force = 0
-	obj_flags = CAN_BE_HIT
+	obj_flags = CAN_BE_HIT | NO_DEBRIS_AFTER_DECONSTRUCTION
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	experimental_inhand = TRUE
 	max_integrity = 400
@@ -814,9 +827,6 @@
 	. = ..()
 	update_appearance()
 
-/obj/item/inqarticles/garrote/deconstruct(disassembled)
-	return
-
 /obj/item/inqarticles/garrote/update_name(updates)
 	. = ..()
 	if(obj_broken)
@@ -847,7 +857,7 @@
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(garrote_victim)
 		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
-	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING))
 	victim = null
 
 	var/mob/living/last_garrote_user = lastuser?.resolve()
@@ -944,7 +954,7 @@
 	active = TRUE
 	ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
 	RegisterSignal(target, COMSIG_LIVING_RESIST_GRAB, PROC_REF(on_victim_resist))
-	RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(reset_garrote))
+	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(reset_garrote))
 	RegisterSignal(user, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(reset_garrote))
 	victim = WEAKREF(target)
 	lastuser = WEAKREF(user)
@@ -1223,30 +1233,27 @@
 		return
 
 	if(!active)
-		var/input = tgui_alert(user, "WHAT DO YOU SEEK?", "THE PRICE IS PAID", list("BLOOD", "FIXATION"))
+		var/mob/living/carbon/human/target = fixation?.resolve()
+		var/input
+		if(!target)
+			input = "FIXATION" //skips through the tgui alert if target isn't set
+		else
+			input = tgui_alert(user, "THE MIRROR IS FIXATED ON [uppertext(target.real_name)]. WILL YOU REVEAL YOUR GAZE?", "THE PRICE IS PAID", list("STALK BLOOD", "FIXATION"))
 		if(!input || QDELETED(user) || QDELETED(src))
 			return
-
-		var/mob/living/carbon/human/target
-
 		if(input == "FIXATION")
-			var/name = browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID")
+			var/name = html_decode(browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID"))
 			if(!name)
 				return
 			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(HL.real_name == name)
+				if(lowertext(HL.real_name) == lowertext(name))
 					fixation = WEAKREF(HL)
 					target = HL
-					break
-			playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-			to_chat(user, span_warning("[src] makes a grating sound."))
+					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
+					to_chat(user, span_warning("[src] makes a grating sound."))
+					return
+			to_chat(user, span_warning("The mirror makes no sound... It could not locate a person of such name."))
 			return
-		else if(input == "BLOOD")
-			target = feeder?.resolve()
-
-		if(!target)
-			return
-
 		active = TRUE
 		openstate = "active"
 		update_appearance(UPDATE_ICON_STATE)
@@ -1271,6 +1278,10 @@
 		return
 
 	playsound(src, 'sound/items/blackmirror_use.ogg', 100, FALSE)
+
+	if(target.real_name == user.real_name) //prevents bugging the timer through looking at yourself
+		to_chat(user, span_danger("I see my reflection in the mirror... It is quite distorted, but what am I trying to achieve?"))
+		return
 
 	ADD_TRAIT(user, TRAIT_NOSSDINDICATOR, "blackmirror")
 
@@ -1316,8 +1327,8 @@
 	if(do_after(user, time_taken, attacked))
 		playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
 		attacked.flash_fullscreen("redflash3")
-		attacked.adjustBruteLoss(40)
-		attacked.blood_volume = max(attacked.blood_volume - 240, 0)
+		attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE)
+		attacked.adjust_bloodpool(-240)
 		attacked.handle_blood()
 		feeder = WEAKREF(attacked)
 		openstate = "bloody"
@@ -1343,7 +1354,6 @@
 /obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
-
 /obj/item/inqarticles/bmirror/proc/openorshut(mob/user)
 	if(active)
 		to_chat(user, span_warning("I cannot close the mirror while it's active."))
@@ -1393,12 +1403,12 @@
 	var/mob/living/L = usr
 	if(!istype(L))
 		return
-
-	var/atom/movable/target = null
-	if(tgui_alert(L, "KEEP LOOKING, WHAT WILL YOU FIND?", "BLACK EYED GAZE", list("BLOOD", "MIRROR")) != "BLOOD")
-		target = source
-	else
+	var/mob/living/target = null
+	var/input = tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD", "LOOK BACK"))
+	if(input == "TRACE BLOOD")
 		target = source.feeder?.resolve()
+	else if(input == "LOOK BACK")
+		target = source
 	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
 	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
 	if(!target)

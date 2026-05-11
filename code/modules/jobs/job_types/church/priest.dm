@@ -104,7 +104,7 @@
 /datum/outfit/priest
 	name = JOB_PRIEST
 	neck = /obj/item/clothing/neck/psycross/silver/divine/astrata
-	head = /obj/item/clothing/head/priestmask
+	head = /obj/item/clothing/head/roguehood/priest
 	shirt = /obj/item/clothing/shirt/undershirt/priest
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/shortboots

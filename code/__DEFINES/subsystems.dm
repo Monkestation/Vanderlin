@@ -167,6 +167,7 @@
 #define FIRE_PRIORITY_RESEARCH 10
 #define FIRE_PRIORITY_VIS 10
 #define FIRE_PRIORITY_AMBIENCE 10
+#define FIRE_PRIORITY_PARTICLE_SPEWERS 10
 #define FIRE_PRIORITY_GARBAGE 15
 #define FIRE_PRIORITY_INCONE 19
 #define FIRE_PRIORITY_MOUSECHARGE 20
@@ -240,3 +241,5 @@
 	* * flags flags for this timer, see: code\__DEFINES\subsystems.dm
 */
 #define addtimer(args...) _addtimer(args, file = __FILE__, line = __LINE__)
+
+#define SSMOBS_DT (SSmobs.wait/10)

@@ -1,7 +1,0 @@
-/datum/component/riding/mole/Initialize()
-	. = ..()
-	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(6, 25), TEXT_SOUTH = list(12, 25), TEXT_EAST = list(15, 25), TEXT_WEST = list(30, 25)))
-	set_vehicle_dir_layer(SOUTH, ABOVE_MOB_LAYER)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)

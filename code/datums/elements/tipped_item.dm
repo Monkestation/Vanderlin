@@ -1,5 +1,5 @@
 /datum/element/tipped_item
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 	var/max_reagents = 1
 	var/dip_amount = 0.5
 	var/inject_amount = 1
@@ -17,14 +17,14 @@
 	show_examine = _show_examine
 	if(!target.reagents)
 		target.create_reagents(max_reagents)
-	RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(target, COMSIG_ITEM_ATTACK_OBJ, PROC_REF(check_dip))
 	RegisterSignal(target, COMSIG_ITEM_PRE_ATTACK, PROC_REF(check_dip))
 	RegisterSignal(target, COMSIG_ITEM_SPEC_ATTACKEDBY, PROC_REF(try_inject))
 
 /datum/element/tipped_item/Detach(datum/source)
 	. = ..()
-	UnregisterSignal(source, list(COMSIG_PARENT_EXAMINE, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_SPEC_ATTACKEDBY))
+	UnregisterSignal(source, list(COMSIG_ATOM_EXAMINE, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_SPEC_ATTACKEDBY))
 
 /datum/element/tipped_item/proc/check_dip(obj/item/dipper, obj/item/reagent_containers/attacked_container, mob/living/attacker, list/modifiers)
 	SIGNAL_HANDLER

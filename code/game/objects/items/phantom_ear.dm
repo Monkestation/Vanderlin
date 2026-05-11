@@ -34,7 +34,7 @@
 		linked.emote("painscream")
 		linked.Immobilize(10)
 		linked.Knockdown(10)
-		linked.apply_damage(15, BRUTE, "head")
+		linked.apply_damage(15, BRUTE, BODY_ZONE_HEAD)
 
 /obj/item/phantom_ear/proc/reset_visibility()
 	if(!isturf(loc))

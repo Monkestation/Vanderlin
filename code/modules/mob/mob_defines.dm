@@ -25,6 +25,13 @@
 	var/datum/mind/mind
 	var/static/next_mob_id = 0
 
+	/// List of action speed modifiers applying to this mob
+	var/list/actionspeed_modification //Lazy list, see mob_movespeed.dm
+	/// List of action speed modifiers ignored by this mob. List -> List (id) -> List (sources)
+	var/list/actionspeed_mod_immunities //Lazy list, see mob_movespeed.dm
+	/// The calculated mob action speed slowdown based on the modifiers list
+	var/cached_multiplicative_actions_slowdown
+
 	///Cursor icon used when holding shift over things
 	var/examine_cursor_icon = 'icons/effects/mousemice/human_looking.dmi'
 
@@ -122,10 +129,8 @@
 	/// The last known IP of the client who was in this mob
 	var/lastKnownIP = null
 
-	/// movable atoms buckled to this mob
-	var/atom/movable/buckled = null//Living
 	/// movable atom we are buckled to
-	var/atom/movable/buckling
+	var/atom/movable/buckled = null//Living
 
 	//Hands
 	///What hand is the active hand
@@ -159,8 +164,7 @@
 	var/job = null//Living
 	var/datum/job/job_type
 
-	/// A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
-	var/list/faction = list(FACTION_NEUTRAL)
+	faction = list(FACTION_NEUTRAL)
 
 	///The last mob/living/carbon to push/drag/grab this mob (exclusively used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
@@ -215,6 +219,9 @@
 
 	var/datum/focus //What receives our keyboard inputs. src by default
 
+	/// Used for tracking last uses of emotes for cooldown purposes
+	var/list/emotes_used
+
 	//Whether the mob is updating glide size when movespeed updates or not
 	var/updating_glide_size = TRUE
 
@@ -250,8 +257,6 @@
 
 	var/last_dodge = 0
 	var/last_parry = 0
-	var/next_emote = 0
-	var/next_me_emote = 0
 	var/lastpoint = 0
 
 	var/mobid = 0 //incremented on spawn

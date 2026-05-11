@@ -62,7 +62,7 @@
 		spawned.clear_quirks()
 	spawned.update_body()
 	spawned.mob_biotypes = MOB_UNDEAD
-	spawned.faction = list(FACTION_UNDEAD)
+	spawned.set_faction(FACTION_UNDEAD)
 
 
 

@@ -258,7 +258,6 @@
 			backr = /obj/item/weapon/hammer/sledgehammer/war/malum
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/helmet/heavy/necked/abyssor
-			armor = /obj/item/clothing/armor/brigandine/abyssor
 			wrists = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 			cloak = /obj/item/clothing/cloak/stabard/templar/abyssor
 		if(/datum/patron/divine/xylix)

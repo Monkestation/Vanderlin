@@ -6,6 +6,8 @@
 	var/cached_island_id = null
 	var/last_island_check = 0
 
+	var/last_scale_number = 1
+
 	var/mob/living/walk_to_target
 	var/walk_to_duration = 0
 	var/walk_to_steps_taken = 0
@@ -327,9 +329,14 @@
 		heal_overall_damage(5, 5)
 		adjustToxLoss(-5)
 		heal_wounds(25)
+		for(var/obj/item/organ/artery/artery in getorganslotlist(ORGAN_SLOT_ARTERY))
+			artery.applyOrganDamage(-5)
 		if(prob(3))
 			regenerate_limb(silent=FALSE)
-		blood_volume = max(blood_volume, min(BLOOD_VOLUME_SAFE, blood_volume + 10))
+		if(blood_volume <= BLOOD_VOLUME_NORMAL)
+			if(blood_volume < BLOOD_VOLUME_SAFE)
+				blood_volume = BLOOD_VOLUME_SAFE
+			adjust_bloodvolume(10)
 		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 5)))
 	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!InCritical() || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)

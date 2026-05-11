@@ -45,10 +45,8 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	base_endurance = 15
 	pixel_x = -8
 	attack_sound = list('sound/vo/mobs/saiga/attack (1).ogg','sound/vo/mobs/saiga/attack (2).ogg')
-	can_buckle = TRUE
 	buckle_lying = 0
 	can_saddle = TRUE
-	aggressive = TRUE
 	remains_type = /obj/effect/decal/remains/saiga
 	ai_controller = /datum/ai_controller/saiga
 	generate_genetics = TRUE
@@ -69,7 +67,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 		)
 
 /mob/living/simple_animal/hostile/retaliate/honse/tame
-	tame = TRUE
+	start_tamed = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/honse/tame/saddled/Initialize()
 	. = ..()
@@ -109,8 +107,10 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 /mob/living/simple_animal/hostile/retaliate/honse/tamed()
 	..()
 	deaggroprob = 20
+	if(.) // was already tamed
+		return
 	if(can_buckle)
-		AddComponent(/datum/component/riding/saiga)
+		AddElement(/datum/element/ridable, /datum/component/riding/creature/saiga)
 
 /mob/living/simple_animal/hostile/retaliate/honse/death()
 	unbuckle_all_mobs()
@@ -168,15 +168,15 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 
 /mob/living/simple_animal/hostile/retaliate/honse/post_buckle_mob(mob/living/M)
 	. = ..()
-	RegisterSignal(M, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+	RegisterSignal(M, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 	if(!has_buckled_mobs())
-		RegisterSignal(src, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+		RegisterSignal(src, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 
 /mob/living/simple_animal/hostile/retaliate/honse/post_unbuckle_mob(mob/living/M)
 	. = ..()
-	UnregisterSignal(M, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+	UnregisterSignal(M, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 	if(!has_buckled_mobs())
-		UnregisterSignal(src, COMSIG_MOB_APPLY_DAMGE, PROC_REF(check_sprint_dismount))
+		UnregisterSignal(src, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(check_sprint_dismount))
 
 /obj/effect/decal/remains/honse
 	name = "remains"
@@ -190,7 +190,7 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	gender = MALE
 
 /mob/living/simple_animal/hostile/retaliate/honse/male/tame
-	tame = TRUE
+	start_tamed = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/honse/male/tame/saddled/Initialize()
 	. = ..()
@@ -221,10 +221,9 @@ GLOBAL_LIST_INIT(valid_honse_colors, list("White" = COLOR_WHITE, "Gray" = COLOR_
 	base_strength = 5
 	base_speed = 5
 	adult_growth = /mob/living/simple_animal/hostile/retaliate/honse
-	tame = TRUE
+	start_tamed = TRUE
 	can_buckle = FALSE
 	can_saddle = FALSE
-	aggressive = TRUE
 	ai_controller = /datum/ai_controller/saiga_kid
 	can_breed = FALSE
 	generate_genetics = FALSE

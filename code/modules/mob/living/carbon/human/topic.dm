@@ -156,7 +156,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 /mob/living/proc/soul_examine(mob/user)
 	var/list/message = list()
 	if(stat >= DEAD)
-		if(suiciding)
+		if(HAS_TRAIT(user, TRAIT_SUICIDED))
 			message += span_suicide("[p_they(TRUE)] commited suicide... Nothing can be done...")
 		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
 			if(!key && !get_ghost(TRUE))

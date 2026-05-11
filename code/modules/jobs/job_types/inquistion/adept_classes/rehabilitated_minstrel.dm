@@ -39,7 +39,7 @@
 		TRAIT_PSYDONITE,
 	)
 
-	spells = list(/datum/action/cooldown/spell/vicious_mockery)
+	spells = list(/datum/action/cooldown/spell/projectile/vicious_mockery)
 
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
@@ -47,7 +47,7 @@
 	. = ..()
 
 	GLOB.inquisition.add_member_to_school(spawned, "Order of the Venatari", 0, "Psyaltrist")
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 
 /datum/job/advclass/adept/psyaltrist/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

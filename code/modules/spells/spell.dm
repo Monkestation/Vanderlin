@@ -61,6 +61,9 @@
 	/// Cost to cast based on [spell_type].
 	var/spell_cost = 0
 
+	///this is purely for etching
+	var/spell_tier = 1
+
 	/// The sound played on cast.
 	var/sound = 'sound/magic/whiteflame.ogg'
 
@@ -107,6 +110,8 @@
 
 	/// Assoc list of [datum/attunement] to value.
 	var/list/attunements
+	///list of essences we can use as a sub for cost
+	var/list/essences
 	/// Value summed from caster and spell attunements to adjust some spell effects.
 	var/attuned_strength
 
@@ -751,7 +756,7 @@
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
 	UnregisterSignal(owner.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
-	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_MOB_DEATH, COMSIG_MOVABLE_MOVED))
+	UnregisterSignal(owner, list(COMSIG_MOB_LOGOUT, COMSIG_LIVING_DEATH, COMSIG_MOVABLE_MOVED))
 	currently_charging = FALSE
 	charge_started_at = null
 	charge_target_time = null
@@ -926,12 +931,12 @@
 			if(QDELETED(target) || !istype(target))
 				stack_trace("Essence spell checking cost without being assigned to an essence gauntlet!")
 				return FALSE
-			if(!gaunt.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
 				return FALSE
 			// Ditto
 			if(!length(gaunt.stored_vials))
 				return FALSE
-			if(!gaunt.can_consume_essence(used_cost, attunements))
+			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
 					owner.balloon_alert(owner, "Not enough essence!")
 				return FALSE
@@ -996,7 +1001,11 @@
 
 		if(SPELL_ESSENCE)
 			var/obj/item/clothing/gloves/essence_gauntlet/gaunt = target
-			if(!gaunt?.check_gauntlet_validity(owner))
+			if(!gaunt.is_worn_by(owner))
+				return
+
+			if(!gaunt.can_consume_essence(used_cost, essences))
+				owner.balloon_alert(owner, "not enough essence!")
 				return
 
 			gaunt.consume_essence(used_cost, attunements)
@@ -1059,7 +1068,7 @@
 
 	// Register here because the mouse up can get triggered before the mouse down otherwise
 	RegisterSignal(source, COMSIG_CLIENT_MOUSEUP, PROC_REF(try_casting))
-	RegisterSignals(owner, list(COMSIG_MOB_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
+	RegisterSignals(owner, list(COMSIG_LIVING_DEATH, COMSIG_MOB_LOGOUT), PROC_REF(signal_cancel))
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
 		RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(signal_cancel), TRUE)
 

@@ -344,7 +344,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/outsider/Initialize(mapload)
 	. = ..()
 	GLOB.roundstart_landmarks += src
-	GLOB.latejoin_landmarks +=src
+	GLOB.latejoin_landmarks += src
+
+/obj/effect/landmark/start/late/gallowband
 
 /obj/effect/landmark/start/feldsher
 	name = JOB_FELDSHER

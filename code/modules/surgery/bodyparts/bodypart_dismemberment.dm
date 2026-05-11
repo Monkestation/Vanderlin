@@ -22,7 +22,8 @@
 //Dismember a limb
 /obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise)
 	. = ..()
-	add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
+	if(owner?.client)
+		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)
 
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
@@ -35,7 +36,7 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
-	if(SEND_SIGNAL(src, COMSIG_MOB_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
+	if(SEND_SIGNAL(src, COMSIG_CARBON_DISMEMBER, src) & COMPONENT_CANCEL_DISMEMBER)
 		return FALSE //signal handled the dropping
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
@@ -94,6 +95,10 @@
 		return TRUE
 
 	var/turf/location = C.loc
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(location)
+		cavity_items -= item
+
 	if(istype(location))
 		C.add_splatter_floor(location)
 	var/direction = pick(GLOB.cardinals)
@@ -134,11 +139,10 @@
 		O.add_mob_blood(C)
 		organ_spilled = 1
 		. += O
-	if(cavity_item)
-		cavity_item.forceMove(T)
-		. += cavity_item
-		cavity_item = null
-		organ_spilled = 1
+	for(var/atom/movable/item as anything in cavity_items)
+		item.forceMove(drop_location())
+		cavity_items -= item
+	organ_spilled = 1
 
 	if(organ_spilled)
 		C.visible_message("<span class='danger'><B>[C] spills [C.p_their()] guts!</B></span>")
@@ -150,6 +154,7 @@
 		return FALSE
 	var/atom/drop_location = owner.drop_location()
 	var/mob/living/carbon/was_owner = owner
+	remove_chronic()
 	update_limb(TRUE, owner)
 
 	if(length(wounds))
@@ -168,12 +173,17 @@
 		was_owner.surgeries -= body_zone
 	for(var/obj/item/embedded in embedded_objects)
 		remove_embedded_object(embedded)
+
+	for(var/datum/injury/injury as anything in injuries)
+		injury.remove_from_mob()
+
 	if(bandage)
 		if(drop_location)
 			bandage.forceMove(drop_location)
 		else
 			qdel(bandage)
 		bandage = null
+		unbandage_limb()
 
 	if(!special)
 		for(var/obj/item/organ/organ as anything in was_owner.internal_organs) //internal organs inside the dismembered limb are dropped.
@@ -190,6 +200,9 @@
 	update_icon_dropped()
 	was_owner.update_health_hud() //update the healthdoll
 	was_owner.update_body()
+
+	if(CHECK_BITFIELD(limb_flags, BODYPART_VITAL))
+		was_owner.death()
 
 	// drop_location = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 	if(!drop_location)
@@ -219,7 +232,10 @@
 
 /obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	if(istype(LB))
-		LB.eyes = src
+		if(side == RIGHT_SIDE)
+			LB.eyes_right = src
+		if(side == LEFT_SIDE)
+			LB.eyes_left = src
 	return ..()
 
 /obj/item/organ/ears/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
@@ -342,6 +358,8 @@
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special)
 	moveToNullspace()
 	set_owner(C)
+	update_chronic()
+
 	C.add_bodypart(src)
 	if(held_index)
 		if(held_index > C.hand_bodyparts.len)
@@ -362,12 +380,17 @@
 				continue
 			C.surgeries -= body_zone
 
-	for(var/obj/item/organ/stored_organ as anything in src)
+	for(var/obj/item/organ/stored_organ in src)
 		stored_organ.Insert(C)
 
 	for(var/datum/wound/wound as anything in wounds)
 		wounds -= wound
 		wound.apply_to_bodypart(src, silent = TRUE, crit_message = FALSE)
+
+	//Add injuries to the owner's injury list
+	for(var/datum/injury/injury as anything in injuries)
+		injury.parent_mob = C
+		LAZYADD(C.all_injuries, injury)
 
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	if(affecting && dismember_wound)
@@ -393,8 +416,10 @@
 		tongue = null
 	if(ears)
 		ears = null
-	if(eyes)
-		eyes = null
+	if(eyes_left)
+		eyes_left = null
+	if(eyes_right)
+		eyes_right = null
 
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C

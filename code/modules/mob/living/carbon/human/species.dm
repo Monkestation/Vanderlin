@@ -207,6 +207,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	/// List of organs this species has.
 	var/list/organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
@@ -217,6 +218,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
 	)
+	///this is basically a list of organs we might not have IE hollowkin horns or tails
+	var/list/optional_organ_slots = list()
 
 	/// List of descriptor choices this species gets in preferences customization
 	var/list/descriptor_choices = list(
@@ -272,6 +275,20 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		OFFSET_UNDIES = list(0,0),\
 	)
 
+	/// List of emotes caused by pain, indexed by pain amount
+	var/list/pain_emote_by_power = list(
+		"100" = "agonyscream",
+		"90" = "whimper",
+		"80" = "moan",
+		"70" = "cry",
+		"60" = "gargle",
+		"50" = "moan",
+		"40" = "moan",
+		"30" = "groan",
+		"20" = "groan",
+		"10" = "grunt",
+	) //Below 10 pain, we shouldn't emote
+
 	/// Amount of times we got autocorrected?? why is this a thing?
 	var/amtfail = 0
 
@@ -312,7 +329,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			return strings("accents/halforc_replacement.json", "halforc")
 		if("Halfling")
 			return strings("accents/halfling_replacement.json", "halfling")
-		if("Gutter")
+		if("Utterances")
 			return strings("accents/kobold_replacement.json", "kobold")
 		if("Rous")
 			return strings("accents/rousman_replacement.json", "rous")
@@ -323,6 +340,14 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if("Zizo Chant")
 			return
 	return
+
+/datum/species/proc/get_pain_emote(power)
+	if(power < PAIN_EMOTE_MINIMUM)
+		return
+	power = FLOOR(min(100, power), 10)
+	var/emote_string
+	emote_string = LAZYACCESS(pain_emote_by_power, "[power]")
+	return emote_string
 
 /datum/species/proc/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
@@ -559,10 +584,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
 			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
-
 	//what should be put in if there is no mutantorgan (brains handled seperately)
 	var/list/slot_mutantorgans = organs
-
 	var/list/slots_to_iterate = list()
 	for(var/slot in C.dna.organ_dna)
 		slots_to_iterate |= slot
@@ -570,10 +593,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(!is_organ_slot_allowed(C, slot))
 			continue
 		slots_to_iterate |= slot
-
 	// Remove the organs from the slots they should have nothing in
 	for(var/obj/item/organ/organ in C.internal_organs)
 		if(organ.slot in slots_to_iterate)
+			continue
+		if(istype(organ, /obj/item/organ/artery)) ///these are children of the limbs not to be messed with
 			continue
 		organ.Remove(C, TRUE)
 		QDEL_NULL(organ)
@@ -581,9 +605,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 	for(var/slot in slots_to_iterate)
 		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
 		var/obj/item/organ/neworgan
-
+		var/datum/organ_dna/organ_dna
 		if(C.dna.organ_dna[slot])
-			var/datum/organ_dna/organ_dna = C.dna.organ_dna[slot]
+			organ_dna = C.dna.organ_dna[slot]
 			if(organ_dna.can_create_organ())
 				neworgan = organ_dna.create_organ(species = src)
 				if(slot_mutantorgans[slot])
@@ -598,13 +622,15 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			if(new_type)
 				neworgan = new new_type()
 				neworgan.build_colors_for_accessory(source_key_list)
-
 		var/used_neworgan = FALSE
 		var/should_have
 		if(neworgan)
 			should_have = neworgan.get_availability(src)
 		else
 			should_have = TRUE
+
+		if((slot in optional_organ_slots) && !C.dna.organ_dna[slot])
+			should_have = FALSE
 
 		if(oldorgan && (!should_have || replace_current) && !(oldorgan.zone in excluded_zones))
 			if(slot == ORGAN_SLOT_BRAIN)
@@ -614,21 +640,33 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					QDEL_NULL(brain)
 					oldorgan = null //now deleted
 			else
-				oldorgan.Remove(C,TRUE)
-				QDEL_NULL(oldorgan) //we cannot just tab this out because we need to skip the deleting if it is a decoy brain.
-
-
+				for(var/obj/item/organ/old_paired in C.getorganslotlist(slot))
+					old_paired.Remove(C, TRUE)
+					QDEL_NULL(old_paired)
+				oldorgan = null
 		if(oldorgan)
 			oldorgan.setOrganDamage(0)
 		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
 			if(neworgan)
 				neworgan.Insert(C, TRUE, FALSE)
-
+				if(slot in PAIRED_ORGAN_SLOTS)
+					var/obj/item/organ/paired_organ = new neworgan.type()
+					paired_organ.switch_side(neworgan.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+					if(organ_dna)
+						organ_dna.imprint_organ(paired_organ, species = src)
+					else
+						paired_organ.build_colors_for_accessory(source_key_list)
+					if(pref_load)
+						pref_load.customize_organ(paired_organ)
+					if(!(initial(paired_organ.zone) in excluded_zones))
+						paired_organ.Insert(C, TRUE, FALSE)
+					else
+						qdel(paired_organ)
 		if(!used_neworgan)
 			if(neworgan)
 				qdel(neworgan)
-		else if (!C.dna.organ_dna[slot] && neworgan)
+		else if(!C.dna.organ_dna[slot] && neworgan)
 			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
 			C.dna.organ_dna[slot] = new_dna
 
@@ -791,8 +829,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		C.reagents.end_metabolization(src, keep_liverless = TRUE)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction += i //Using +=/-= for this in case you also gain the faction from a different source.
+		C.add_faction(inherent_factions)
 
 	soundpack_m = new soundpack_m()
 	soundpack_f = new soundpack_f()
@@ -811,6 +848,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		apply_customizers_to_character(C)
 
 	on_gender_update(C)
+	C.update_organ_requirements() //post species trait gains
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
@@ -843,8 +881,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			C.attributes?.subtract_sheet(statsheet_female)
 
 	if(inherent_factions)
-		for(var/i in inherent_factions)
-			C.faction -= i
+		C.remove_faction(inherent_factions)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
 
@@ -1233,60 +1270,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 ////////
 
 /datum/species/proc/handle_digestion(mob/living/carbon/human/H)
-	if(HAS_TRAIT(H, TRAIT_NOHUNGER))
-		return //hunger is for BABIES
-
-	// nutrition decrease and satiety
-	if(H.nutrition > 0 && H.stat != DEAD)
-		var/hunger_rate = (HUNGER_FACTOR * nutrition_mod)
-		H.adjust_nutrition(-hunger_rate)
-
-	if(H.hydration > 0 && H.stat != DEAD)
-		var/hunger_rate = HUNGER_FACTOR
-		H.adjust_hydration(-hunger_rate)
-
-	if(H.nutrition > NUTRITION_LEVEL_FULL && H.overeatduration < 600)
-		H.overeatduration++ //capped so people don't take forever to unfat
-	else if(H.overeatduration > 1)
-		H.overeatduration -= 2 //doubled the unfat rate
-
-	switch(H.nutrition)
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt2)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(0 to NUTRITION_LEVEL_STARVING)
-			H.apply_status_effect(/datum/status_effect/debuff/hungryt3)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			H.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			if(CONFIG_GET(flag/starvation_death))
-				H.apply_status_effect(/datum/status_effect/debuff/hungryt4)
-			if(prob(3))
-				playsound(H, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
-
-	switch(H.hydration)
-		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
-		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt2)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
-		if(0 to HYDRATION_LEVEL_DEHYDRATED)
-			H.apply_status_effect(/datum/status_effect/debuff/thirstyt3)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			H.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			if(CONFIG_GET(flag/dehydration_death))
-				H.apply_status_effect(/datum/status_effect/debuff/thirstyt4)
+	return
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
@@ -1357,24 +1341,17 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 //	if(!((target.health < 0 || HAS_TRAIT(target, TRAIT_FAKEDEATH)) && !(target.mobility_flags & MOBILITY_STAND)))
-	if(target.body_position == LYING_DOWN)
+	if(!(istype(user.rmb_intent, /datum/rmb_intent/weak)) && target.body_position == LYING_DOWN)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaken")
 		return TRUE
-/*	else
-		var/we_breathe = !HAS_TRAIT(user, TRAIT_NOBREATH)
-		var/we_lung = user.getorganslot(ORGAN_SLOT_LUNGS)
-
-		if(we_breathe && we_lung)
-			user.do_cpr(target)
-		else if(we_breathe && !we_lung)
-			to_chat(user, "<span class='warning'>I have no lungs to breathe with, so you cannot perform CPR!</span>")
-		else
-			to_chat(user, "<span class='warning'>I do not breathe, so you cannot perform CPR!</span>")*/
+	else if(istype(user.rmb_intent, /datum/rmb_intent/weak) && (target.body_position == LYING_DOWN) && (user.zone_selected in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_MOUTH)))
+		user.do_cpr(target, user.zone_selected == BODY_ZONE_CHEST ? CPR_CHEST : CPR_MOUTH)
+		return TRUE
 
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.check_block())
+	if(target.check_block() || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 		target.visible_message("<span class='warning'>[target] blocks [user]'s grab!</span>", \
 						"<span class='danger'>I block [user]'s grab!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>My grab at [target] was blocked!</span>")
@@ -1467,12 +1444,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		target.next_attack_msg.Cut()
 
 		var/nodmg = FALSE
-		var/actual_damage = target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block)
+		var/actual_damage = target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block, skip_dtype = TRUE)
 		if(!actual_damage)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone, crit_message = TRUE)
+			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone, crit_message = TRUE, pre_applied = TRUE)
 			if(affecting.body_zone == BODY_ZONE_HEAD)
 				SEND_SIGNAL(user, COMSIG_HEAD_PUNCHED, target)
 		log_combat(user, target, "punched")
@@ -1480,7 +1457,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 		if(!nodmg)
 			if(user.limb_destroyer)
-				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || affecting.rotted
+				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || HAS_TRAIT(affecting, TRAIT_ROTTEN)
 				if(prob(damage/2) || (easy_dismember && prob(damage/2))) //try twice
 					if(affecting.brute_dam > 0)
 						affecting.dismember()
@@ -1518,12 +1495,17 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		if(!nodmg)
 			playsound(target, user.used_intent.hitsound, 100, FALSE)
 
+		var/obj/item/clothing/gloves = user.get_item_by_slot(ITEM_SLOT_GLOVES)
+		if(gloves)
+			SEND_SIGNAL(gloves, COMSIG_GLOVES_POST_ATTACK_HAND, target, user, damage)
+
+
 
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.check_block())
+	if(target.check_block() || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 		target.visible_message("<span class='warning'>[user]'s shove is blocked by [target]!</span>", \
 						"<span class='danger'>I block [user]'s shove!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='warning'>My shove at [target] was blocked!</span>")
@@ -1691,7 +1673,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 						target.visible_message("<span class='danger'>[user] puts their foot on [target]'s neck!</span>", \
 										"<span class='danger'>I get my throat stepped on by [user]! I can't breathe!</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
 					else
-						affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE)
+						affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE, pre_applied = TRUE)
 						target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
 										"<span class='danger'>I'm stomped by [user]![target.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening kick!</span>", COMBAT_MESSAGE_RANGE, user)
 						to_chat(user, "<span class='danger'>I stomp on [target]![target.next_attack_msg.Join()]</span>")
@@ -1721,7 +1703,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 		var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
 
 		target_collateral_mob = locate(/mob/living) in target_shove_turf.contents
-		if(target_collateral_mob)
+		if(target_collateral_mob || target.has_status_effect(/datum/status_effect/buff/malum_anvil))
 			if(stander)
 				shove_blocked = TRUE
 		else
@@ -1892,7 +1874,7 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
 	var/weakness = H.check_weakness(I, user)
-	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H)
+	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H, skip_dtype = TRUE)
 	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
 
 	if(!actual_damage)
@@ -1902,10 +1884,10 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 			I.take_damage(1, BRUTE, I.damage_type)
 		return TRUE
 
-	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier))
+	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier), incoming_germ = I.germ_level, pre_applied = TRUE)
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
-	if(bodypart_wound?.should_embed(I))
+	if(istype(bodypart_wound) && bodypart_wound?.should_embed(I))
 		var/can_impale = TRUE
 		if(!affecting)
 			can_impale = FALSE
@@ -1982,8 +1964,8 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 
 	return TRUE
 
-/datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, flashes = TRUE)
-	SEND_SIGNAL(H, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
+/datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, flashes = TRUE, damage_type, skip_dtype, can_crit = TRUE)
+	SEND_SIGNAL(H, COMSIG_MOB_APPLY_DAMAGE, damage, damagetype, def_zone)
 	var/hit_percent = 1
 	damage = max(damage - (blocked),0)
 	hit_percent = (hit_percent * (100-H.physiology.damage_resistance))/100
@@ -2002,6 +1984,9 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				BP = H.bodyparts[1]
 
 	var/damage_amount = damage
+	var/list/mods = list()
+	if(!can_crit)
+		mods = list(CRIT_MOD_CHANCE = -100)
 	switch(damagetype)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
@@ -2029,8 +2014,12 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 					else if(damage_amount >= 20)
 						H.flash_fullscreen("redflash3")
 			if(BP)
-				if(BP.receive_damage(damage_amount, 0))
+				if(damage_type)
+					BP.bodypart_attacked_by(damage_type, damage_amount, modifiers = mods)
 					H.update_damage_overlays()
+				else
+					if(BP.receive_damage(damage_amount, 0))
+						H.update_damage_overlays()
 			else//no bodypart, we deal damage with a more general method.
 				H.adjustBruteLoss(damage_amount)
 
@@ -2047,7 +2036,11 @@ GLOBAL_LIST_EMPTY(roundstart_species)
 				else if(damage_amount >= 20)
 					H.flash_fullscreen("redflash3")
 			if(BP)
-				if(BP.receive_damage(0, damage_amount, flashes = flashes))
+				if(skip_dtype)
+					if(BP.receive_damage(0, damage_amount, flashes = flashes))
+						H.update_damage_overlays()
+				else
+					BP.bodypart_attacked_by(BCLASS_BURN, damage_amount, modifiers = list(CRIT_MOD_CHANCE = -100)) // burns can't crit
 					H.update_damage_overlays()
 			else
 				H.adjustFireLoss(damage_amount)

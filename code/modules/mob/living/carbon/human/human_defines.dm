@@ -9,11 +9,11 @@
 	hud_type = /datum/hud/human
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE, INTENT_GIVE)
-	can_buckle = TRUE
 	buckle_lying = 0
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 	ambushable = TRUE //! DEPRECATED VAR, USE TRAIT_NOAMBUSH
+	maxHealth = BRAIN_DAMAGE_DEATH
 
 	voice_pitch = 1
 
@@ -25,7 +25,7 @@
 
 	var/detail_color = "000"
 
-	var/skin_tone = "caucasian1"	//Skin tone
+	var/skin_tone = SKIN_COLOR_CONTINENTAL
 	var/datum/culture/culture = /datum/culture/universal/ambiguous
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
@@ -70,7 +70,6 @@
 
 	var/list/datum/bioware = list()
 
-	var/static/list/can_ride_typecache = typecacheof(list(/mob/living/carbon/human))
 	var/lastpuke = 0
 	var/last_fire_update
 	var/account_id //! DEPRECATED
@@ -103,6 +102,7 @@
 
 	var/datum/devotion/cleric = null // Used for cleric_holder for priests
 	var/datum/inspiration/inspiration = null
+	var/list/selected_instrument_buffs
 	var/datum/rage/rage_datum = null //teehee
 
 	var/headshot_link = null

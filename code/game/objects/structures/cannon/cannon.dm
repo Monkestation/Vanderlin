@@ -92,7 +92,7 @@
 			loaded_thing.throw_at(target, blast_range, 3, force = MOVE_FORCE_OVERPOWERING)
 			if(isliving(loaded_thing))
 				var/mob/living/loaded_living = loaded_thing
-				loaded_living.reset_offsets("structure_climb")
+				loaded_living.remove_offsets("structure_climb")
 
 	throw_at(get_step(src, REVERSE_DIR(dir)), 1, 3, spin = FALSE)
 
@@ -134,9 +134,9 @@
 
 	sync_with_fuse()
 	calculate_offsets()
-	RegisterSignal(cannon, COMSIG_PARENT_QDELETING, PROC_REF(on_deletion))
+	RegisterSignal(cannon, COMSIG_QDELETING, PROC_REF(on_deletion))
 	RegisterSignal(cannon, COMSIG_ATOM_DIR_CHANGE, PROC_REF(calculate_offsets))
-	RegisterSignal(fuse, COMSIG_PARENT_QDELETING, PROC_REF(on_deletion))
+	RegisterSignal(fuse, COMSIG_QDELETING, PROC_REF(on_deletion))
 	RegisterSignal(fuse, COMSIG_FUSE_LIT, PROC_REF(on_status_change))
 	RegisterSignal(fuse, COMSIG_FUSE_EXTINGUISHED, PROC_REF(on_status_change))
 	AddElement(/datum/element/no_mouse_drop)
@@ -145,9 +145,9 @@
 	. = ..()
 	cannon = null
 	fuse = null
-	UnregisterSignal(cannon, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(cannon, COMSIG_QDELETING)
 	UnregisterSignal(cannon, COMSIG_ATOM_DIR_CHANGE)
-	UnregisterSignal(fuse, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(fuse, COMSIG_QDELETING)
 	UnregisterSignal(fuse, COMSIG_FUSE_LIT)
 	UnregisterSignal(fuse, COMSIG_FUSE_EXTINGUISHED)
 
@@ -227,13 +227,13 @@
 		return FALSE
 
 	src.cannon = cannon
-	RegisterSignal(cannon, COMSIG_PARENT_PREQDELETED, PROC_REF(remove_from_cannon))
+	RegisterSignal(cannon, COMSIG_PREQDELETED, PROC_REF(remove_from_cannon))
 	loc = null
 	new /obj/effect/fuse (get_turf(cannon), cannon, src)
 	return TRUE
 
 /obj/item/fuse/proc/remove_from_cannon()
-	UnregisterSignal(cannon, COMSIG_PARENT_PREQDELETED)
+	UnregisterSignal(cannon, COMSIG_PREQDELETED)
 	loc = get_turf(cannon)
 	cannon?.inserted_fuse = null
 	cannon = null

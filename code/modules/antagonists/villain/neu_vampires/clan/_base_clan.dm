@@ -105,7 +105,7 @@ And it also helps for the character set panel
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
-	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
+	RegisterSignal(H, COMSIG_QDELETING, PROC_REF(on_lose))
 	RegisterSignal(H, COMSIG_MOB_EXAMINATE_CARBON, PROC_REF(examine_target))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
@@ -272,7 +272,7 @@ And it also helps for the character set panel
  */
 /datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -533,7 +533,8 @@ And it also helps for the character set panel
 	. = ..()
 	if(.)
 		owner.add_stress(/datum/stress_event/bad_blood)
-		owner.adjustBruteLoss(5)
+		var/obj/item/organ/stomach = owner.getorganslot(ORGAN_SLOT_STOMACH)
+		stomach?.take_damage(5)
 
 /datum/status_effect/debuff/blood_disgust/on_remove()
 	. = ..()

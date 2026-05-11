@@ -119,4 +119,4 @@
 		. += span_notice("Genetic traits: [english_list(genetics.get_gene_names())].")
 
 	. += "ᛉ ------------ ᛉ</span>"
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)

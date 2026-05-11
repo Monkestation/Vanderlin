@@ -154,7 +154,7 @@
 			for(var/mob/M in viewers(src, 7))
 				M.add_stress(/datum/stress_event/viewexecution)
 		else
-			H.apply_damage(30 * blade_sharpness, BRUTE, head)
+			H.apply_damage(30 * blade_sharpness, BRUTE, head, damage_type = BCLASS_CUT)
 			log_combat(user, H, "dropped the blade on", src, " non-fatally")
 			H.emote("scream")
 			// Executor has failed and was ashamed
@@ -234,7 +234,7 @@
 			if (istype(S))
 				H.cut_overlays()
 				H.update_body_parts_head_only()
-				H.set_mob_offsets("bed_buckle", _x = 0, _y = -GUILLOTINE_HEAD_OFFSET)
+				H.add_offsets(type, x_add = 0, y_add = -GUILLOTINE_HEAD_OFFSET)
 				H.layer += GUILLOTINE_LAYER_DIFF
 			else
 				unbuckle_all_mobs()
@@ -247,7 +247,7 @@
 
 /obj/structure/guillotine/post_unbuckle_mob(mob/living/M)
 	M.regenerate_icons()
-	M.reset_offsets("bed_buckle")
+	M.remove_offsets(type)
 	M.layer -= GUILLOTINE_LAYER_DIFF
 	..()
 

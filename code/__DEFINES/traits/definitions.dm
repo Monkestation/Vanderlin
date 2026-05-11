@@ -1,8 +1,10 @@
 /*
 Remember to update _globalvars/traits.dm if you're adding/removing/renaming traits.
 */
+#define OBESITY "obesity"
 
 // ************* atom traits
+#define EAR_DAMAGE "ear_damage"
 
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
@@ -25,6 +27,18 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
 
+///generic atom traits
+///Chasms will be safe to cross while they've this trait.
+#define TRAIT_CHASM_STOPPED "chasm_stopped"
+/// If this movable is currently considered to be treading in a turf with the immerse element.
+#define TRAIT_IMMERSED "immersed"
+///The effects of the immerse element will be halted while this trait is present.
+#define TRAIT_IMMERSE_STOPPED "immerse_stopped"
+/// Indicates the movable is in water without a bottom or underwater
+#define TRAIT_SUBMERGED	"submerged"
+/// Prevents floating in water and swimming up. Will move downward if in open water.
+#define TRAIT_SINKING "sinking"
+
 // ************* mob traits
 
 /// Prevents voluntary movement.
@@ -41,6 +55,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_UI_BLOCKED "uiblocked"
 /// Inability to pull things. Turned into a trait from [MOBILITY_PULL] to be able to track sources.
 #define TRAIT_PULL_BLOCKED "pullblocked"
+/// Apply this to make a mob not dense, and remove it when you want it to no longer make them undense, other sources of undesity will still apply. Always define a unique source when adding a new instance of this!
+#define TRAIT_UNDENSE "undense"
 /// Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.
 #define TRAIT_RESTRAINED "restrained"
 /// Generically incapacitated, cannot interact
@@ -69,6 +85,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IGNOREDAMAGESLOWDOWN "ignoredamageslowdown"
 /// Causes death-like unconsciousness
 #define TRAIT_DEATHCOMA	"deathcoma"
+// ~BODYPART TRAITS
+/// Rotten beyond salvation
+#define TRAIT_ROTTEN "rotten"
+/// Genetically deformed beyond salvation
+#define TRAIT_DEFORMED "deformed"
 /// ??? should be a signal?
 #define TRAIT_SANGUINE "sanguine"
 #define TRAIT_FRESHSPAWN "freshspawn"
@@ -114,6 +135,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
 /// This human is immune to the effects of being exploded. (ex_act)
 #define TRAIT_BOMBIMMUNE "bomb_immunity"
+/// Immunity against germs and viruses crippled
+#define TRAIT_IMMUNITY_CRIPPLED "immunity_crippled"
 /// Immune to radiation
 #define TRAIT_RADIMMUNE "rad_immunity"
 /// Skin is not possible to pierce (needles, embeds)
@@ -142,6 +165,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOLIMBDISABLE	"no_limb_disable"
 /// Limbs have lower damage thresholds
 #define TRAIT_EASYLIMBDISABLE "easy_limb_disable"
+/// In some kind of critical condition. Is able to succumb.
+#define TRAIT_CRITICAL_CONDITION "critical-condition"
+/// In softcrit
+#define TRAIT_SOFT_CRITICAL_CONDITION "soft_critical_condition"
 /// Toxin damage heals, toxin healing does damage
 #define TRAIT_TOXINLOVER "toxinlover"
 /// Doesn't need to breathe
@@ -196,6 +223,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BOOZE_SLIDER "booze-slider"
 /// Unused
 #define TRAIT_QUICK_CARRY "quick-carry"
+#define TRAIT_PASSTABLE "passtable"
 /// Unused
 #define TRAIT_QUICKER_CARRY "quicker-carry"
 /// Prevents the overlay from nearsighted
@@ -206,6 +234,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_LANGUAGE_BARRIER "language-barrier"
 /// Immunity to flash effects
 #define TRAIT_NOFLASH "noflash"
+/// Suffering heart attack, can succumb
+#define TRAIT_DEATHS_DOOR "deaths_door"
+/// Halved basic speed
+#define TRAIT_BASIC_SPEED_HALVED "basic_speed_halved"
 /// Immunity to pain
 #define TRAIT_NOPAIN "no_pain"
 /// Stumbling, can smash into things
@@ -216,6 +248,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BURIED_COIN_GIVEN "buried_coin_given"
 /// can bleed, but will never die from blood loss
 #define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune"
+/// regardless of organs the blood requirements will be default
+#define TRAIT_NORMALIZED_BLOOD "blood_normalized"
 /// you are a rotman and need occasional maintenance
 #define TRAIT_ROTMAN "rotman"
 /// immune to zombie infection
@@ -245,11 +279,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Can't move diagonally
 #define TRAIT_BLOCKED_DIAGONAL "blocked_diagonals"
 /// Can swim ignoring water flow and slowdown
-#define TRAIT_GOOD_SWIM "Good Swim"
-/// Indicates the mob is in water without a bottom or underwater
-#define TRAIT_SUBMERGED	"submerged"
-/// Prevents floating in water and swimming up. Will move downward if in open water.
-#define TRAIT_SINKING "sinking"
+#define TRAIT_SWIMMER "Good Swimmer"
+///can we ride the lightning
+#define TRAIT_PYLON_RIDER "Pylon Rider"
 /// trait determines if this mob can breed given by /datum/component/breeding
 #define TRAIT_MOB_BREEDER "mob_breeder"
 /// can't be perceived in any way, likely due to invisibility
@@ -283,6 +315,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_REJECTED_BY_TECHNOLOGY "rejected_by_technology"
 /// Doesn't cast a reflection
 #define TRAIT_NO_REFLECTION "no_reflection"
+///doesn't process organs
+#define TRAIT_NO_ORGAN_PROCESS "no_organs"
 /// Vampire cannot drink from anyone who doesn't consent to it
 #define TRAIT_CONSENSUAL_FEEDING_ONLY "consensual_feeding_only"
 #define TRAIT_COVEN_BANE "coven_bane"
@@ -314,6 +348,23 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ANTIMAGIC_NO_SELFBLOCK "anti_magic_no_selfblock"
 /// makes your footsteps completely silent
 #define TRAIT_SILENT_FOOTSTEPS "silent_footsteps"
+/// Prevents a mob from being unbuckled, currently only used to prevent people from falling over on the tram
+#define TRAIT_CANNOT_BE_UNBUCKLED "cannot_be_unbuckled"
+/// Prevents mob from riding mobs when buckled onto something
+#define TRAIT_CANT_RIDE "cant_ride"
+
+/// trait that prevents AI controllers from planning detached from ai_status to prevent weird state stuff.
+#define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"
+///trait that stops our ai controlled mob from moving at all due to ai planning
+#define TRAIT_AI_MOVEMENT_HALTED "ai_movement_halted"
+
+/// Trait given to a living mob and any observer mobs that stem from them if they suicide.
+/// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
+#define TRAIT_SUICIDED "committed_suicide"
+
+/// Given to a mob that can throw to make them not able to throw
+#define TRAIT_NO_THROWING "no_throwing"
+
 /// Hides the SSD indicator. Used with scrying.
 #define TRAIT_NOSSDINDICATOR "nossdindicator"
 /// Instant grabs on someone else.
@@ -348,7 +399,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
-#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -362,6 +412,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Doesn't consume stamina
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep
+#define TRAIT_FAT "Obese"
 #define TRAIT_NOSLEEP "Fatal Insomnia"
 #define TRAIT_FASTSLEEP "Fast Sleeper"
 #define TRAIT_NUDIST "Nudist" //you can't wear most clothes
@@ -396,7 +447,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_HOLLOWBONES "Hollow Bones"
 #define TRAIT_AMAZING_BACK "Light Load"
 #define TRAIT_KITTEN_MOM "Loved By Kittens"
-#define TRAIT_WATER_BREATHING "Waterbreathing"
+#define TRAIT_NODROWN "Waterbreathing"
 #define TRAIT_MOONWATER_ELIXIR "Moonwater Elixir"
 #define TRAIT_FLOWERFIELD_IMMUNITY "Flower Strider"
 #define TRAIT_SECRET_OFFICIANT "Secret Officiant"
@@ -432,7 +483,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BEAUTIFUL "Beautiful"
 #define TRAIT_UGLY "Ugly"
 #define TRAIT_FISHFACE "Fishface"
-#define TRAIT_FAT "Obese"
 #define TRAIT_SCHIZO_FLAW "Schizophrenic"
 #define TRAIT_TORPOR "Endless Slumber"
 #define TRAIT_SATE "SATE"
@@ -440,6 +490,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
+/// This mob can't have a split personality
+#define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 
 /// applied to orphans
 #define TRAIT_ORPHAN "Orphan"
@@ -456,6 +508,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BETTER_SLEEP "Better Sleep" //Recover more energy (blue bar) when sleeping
 #define TRAIT_EXTEROCEPTION	"Exteroception" //See others' hunger and thirst
 #define TRAIT_TUTELAGE "Tutelage" //Slightly more sleep xp to you and xp to apprentices
+#define TRAIT_ARCANE_KNOWLEDGE "Arcane Knowledge"
 #define TRAIT_APRICITY "Apricity" //Decreased stamina regen time during DAY
 #define TRAIT_BLACKLEG "Blackleg" //Rig coin, dice, cards in your favor
 #define TRAIT_INQUISITION "Member of the Oratorium Throni Vacui"
@@ -519,6 +572,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The limb has no fingies
 #define TRAIT_FINGERLESS "fingerless"
 
+///Turf slowdown will be ignored when this trait is added to a turf.
+#define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
+
+///every hearing sensitive atom has this trait
+#define TRAIT_HEARING_SENSITIVE "hearing_sensitive"
+
 // **** item traits
 /// Can't drop
 #define TRAIT_NODROP "nodrop"
@@ -526,7 +585,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOEMBED "noembed"
 /// Can't be teleported
 #define TRAIT_NO_TELEPORT "no-teleport" //you just can't
+/// Item is too hot to pick up by hands, must use tongs.
 #define TRAIT_NEEDS_QUENCH "Needs Quenching"
+/// Item has been recently smelted and should give XP when retrieved
+#define TRAIT_NEWLY_SMELTED "newly_smelted"
 /// Properly wielded two handed item
 #define TRAIT_WIELDED "wielded"
 /// The items needs two hands to be carried
@@ -534,14 +596,21 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This item can't be pickpocketed
 #define TRAIT_HARD_TO_STEAL "hard_to_steal"
 
-// ************* turf traits
-/// Turf trait for when a turf is transparent
-#define TRAIT_Z_TRANSPARENT "turf_z_transparent"
+/// Turf is one that ai mobs will generally avoid pathing through
+/// Doesn't need to be applied to any turfs that override can_cross_safely
+#define TRAIT_AI_AVOID_TURF "warning_turf"
 
 // ************* Debug traits
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
+/// This atom is a secluded location, which is counted as out of bounds.
+/// Anything that enters this atom's contents should react if it wants to stay in bounds.
+#define TRAIT_SECLUDED_LOCATION "secluded_loc"
+
+/// Generic atom traits
+/// Stops someone from splashing their reagent_container on an object with this trait
+#define TRAIT_DO_NOT_SPLASH "do_not_splash"
 
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"

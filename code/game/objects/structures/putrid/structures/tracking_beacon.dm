@@ -25,7 +25,7 @@
 		qdel(src)
 		return INITIALIZE_HINT_QDEL
 
-	RegisterSignal(floor_vine, COMSIG_PARENT_QDELETING, PROC_REF(on_floor_destroyed))
+	RegisterSignal(floor_vine, COMSIG_QDELETING, PROC_REF(on_floor_destroyed))
 
 	monitor = new(src, tracking_range, FALSE)
 	monitor.beacon = src
@@ -38,7 +38,7 @@
 
 /obj/structure/meatvine/tracking_beacon/Destroy()
 	if(floor_vine)
-		UnregisterSignal(floor_vine, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(floor_vine, COMSIG_QDELETING)
 	floor_vine = null
 
 	QDEL_NULL(monitor)

@@ -102,7 +102,7 @@
 					if(owner.pixelshift_x >= -maximum_pixel_shift)
 						owner.pixelshift_x--
 						owner.pixelshifted = TRUE
-			owner.set_mob_offsets("pixel_shift", _x = owner.pixelshift_x, _y = owner.pixelshift_y)
+			owner.add_offsets("pixel_shift", x_add = owner.pixelshift_x, y_add = owner.pixelshift_y)
 
 #undef SHIFTING_PARENT
 #undef SHIFTING_ITEMS

@@ -209,15 +209,14 @@
 	else
 		return open(user)
 
-/obj/structure/closet/deconstruct(disassembled = TRUE)
-	if(ispath(material_drop) && material_drop_amount && !(flags_1 & NODECONSTRUCT_1))
+/obj/structure/closet/atom_deconstruct(disassembled)
+	if(ispath(material_drop) && material_drop_amount)
 		new material_drop(loc, material_drop_amount)
-	qdel(src)
 
 /obj/structure/closet/atom_break(damage_flag)
-	if(!obj_broken && !(flags_1 & NODECONSTRUCT_1))
-		bust_open()
 	. = ..()
+	if(!obj_broken)
+		bust_open()
 
 /obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
 	if(user in src)
@@ -306,9 +305,9 @@
 // Objects that try to exit a locker by stepping were doing so successfully,
 // and due to an oversight in turf/Enter() were going through walls.  That
 // should be independently resolved, but this is also an interesting twist.
-/obj/structure/closet/Exit(atom/movable/AM)
+/obj/structure/closet/Exit(atom/movable/leaving, direction)
 	open()
-	if(AM.loc == src)
+	if(leaving.loc == src)
 		return 0
 	return 1
 

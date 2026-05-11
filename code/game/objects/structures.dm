@@ -40,7 +40,7 @@
 			var/mob/living/carbon/human/H = AM
 			if(H.dir == get_dir(H,src) && H.m_intent == MOVE_INTENT_RUN && H.body_position != LYING_DOWN)
 				H.Immobilize(10)
-				H.apply_damage(15, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 15))
+				H.apply_damage(15, BRUTE, BODY_ZONE_CHEST, H.run_armor_check("chest", "blunt", damage = 15), damage_type = BCLASS_BLUNT)
 				H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
 				playsound(src, "genblunt", 100, TRUE)
 				H.visible_message("<span class='warning'>[H] runs into [src]!</span>", "<span class='warning'>I run into [src]!</span>")
@@ -50,7 +50,7 @@
 	if(isturf(loc))
 		for(var/mob/living/user in loc)
 			if(climb_offset)
-				user.reset_offsets("structure_climb")
+				user.remove_offsets("structure_climb")
 	if(redstone_id)
 		for(var/obj/structure/O in redstone_attached)
 			O.redstone_attached -= src
@@ -77,14 +77,14 @@
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+			user.add_offsets("structure_climb", x_add = 0, y_add = climb_offset)
 
 /obj/structure/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.reset_offsets("structure_climb")
+			user.remove_offsets("structure_climb")
 
 /obj/structure/ui_act(action, params)
 	..()
@@ -155,8 +155,27 @@
 		var/healthpercent = (atom_integrity / max_integrity) * 100
 		switch(healthpercent)
 			if(50 to 99)
-				return  "It looks slightly damaged."
+				return "It looks slightly damaged."
 			if(25 to 50)
-				return  "It appears heavily damaged."
+				return "It appears heavily damaged."
 			if(1 to 25)
-				return  "<span class='warning'>It's falling apart!</span>"
+				return span_warning("It's falling apart!")
+
+/obj/structure/onZImpact(turf/impacted_turf, levels, impact_flags)
+	. = ..()
+
+	var/impact_damage
+	if(w_class == WEIGHT_CLASS_TINY)
+		impact_damage = 0
+	else if(w_class == WEIGHT_CLASS_GIGANTIC)
+		impact_damage = 300
+	else
+		impact_damage = 3**(w_class-1)
+	if(!impact_damage)
+		return
+
+	for(var/mob/living/crumpled_mob in contents)
+		visible_message(span_danger("[src] falls on [crumpled_mob.name]!"))
+		crumpled_mob.Stun(1)
+		crumpled_mob.AdjustKnockdown(levels * 20)
+		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)

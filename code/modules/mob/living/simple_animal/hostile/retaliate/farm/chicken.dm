@@ -60,8 +60,10 @@
 	base_constitution = 1
 	base_strength = 1
 	base_speed = 5
-	tame = TRUE
+	start_tamed = TRUE
 	indexed = TRUE
+
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	var/production = 0
 
@@ -200,7 +202,7 @@
 	icon_state = "nest"
 	density = FALSE
 	anchored = TRUE
-	can_buckle = 1
+	can_buckle = TRUE
 	layer = 2.8
 	max_integrity = 40
 //  removed to prevent infinite fiber farming

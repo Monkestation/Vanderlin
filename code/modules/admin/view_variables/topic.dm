@@ -82,7 +82,7 @@
 		var/newamt
 		switch(Text)
 			if("brute")
-				L.adjustBruteLoss(amount, forced = TRUE)
+				L.adjustBruteLoss(amount, forced = TRUE, damage_type = WOUND_DIVINE, true_heal = TRUE)
 				newamt = L.getBruteLoss()
 			if("fire")
 				L.adjustFireLoss(amount, forced = TRUE)
@@ -96,6 +96,15 @@
 			if("brain")
 				L.adjustOrganLoss(ORGAN_SLOT_BRAIN, amount)
 				newamt = L.getOrganLoss(ORGAN_SLOT_BRAIN)
+			if("pain")
+				L.adjustPainLoss(amount)
+				newamt = L.getPainLoss()
+			if("shock")
+				L.adjustPainLoss(amount)
+				newamt = L.getShock()
+			if("shock_stage")
+				L.adjustShockStage(amount)
+				newamt = L.getShockStage()
 			else
 				to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]")
 				return

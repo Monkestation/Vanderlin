@@ -181,11 +181,11 @@
 		if(arcshot && isopenspace(current))
 			// If this is null something is VERY wrong
 			var/turf/below = GET_TURF_BELOW(current)
-			if(current.can_zFall(src, 1, below))
+			if(can_z_move(DOWN, current, below, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 				var/turf/target
 				while(!target)
 					var/turf/potential = GET_TURF_BELOW(below)
-					if(!potential || !below.can_zFall(src, 1, potential))
+					if(!potential || !can_z_move(DOWN, below, potential, z_move_flags = ZMOVE_ALLOW_ANCHORED))
 						target = below
 					else
 						below = potential
@@ -237,7 +237,7 @@
  */
 /obj/projectile/proc/on_hit(atom/target, blocked = FALSE, pierce_hit)
 	if(fired_from)
-		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle)
+		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle, def_zone, damage)
 		SEND_SIGNAL(src, COMSIG_PROJECTILE_SELF_ON_HIT, firer, target, Angle)
 	var/turf/target_loca = get_turf(target)
 

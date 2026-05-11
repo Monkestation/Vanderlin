@@ -54,6 +54,9 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 /proc/cmp_subsystem_priority(datum/controller/subsystem/a, datum/controller/subsystem/b)
 	return a.priority - b.priority
 
+/proc/cmp_filter_data_priority(list/A, list/B)
+	return A["priority"] - B["priority"]
+
 /proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
 	return a.timeToRun - b.timeToRun
 
@@ -94,6 +97,9 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 
 /proc/cmp_reagents_asc(datum/reagent/a, datum/reagent/b)
 	return sorttext(initial(b.name),initial(a.name))
+
+/proc/cmp_reagents_boiling_asc(datum/reagent/a, datum/reagent/b)
+    return initial(a.boiling_point) - initial(b.boiling_point)
 
 /proc/cmp_typepaths_asc(A, B)
 	return sorttext("[B]","[A]")

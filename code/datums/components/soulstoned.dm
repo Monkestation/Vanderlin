@@ -3,29 +3,27 @@
 	var/atom/movable/container
 
 /datum/component/soulstoned/Initialize(atom/movable/container)
-	if(!isanimal(parent))
+	if(!isliving(parent))
 		return COMPONENT_INCOMPATIBLE
-	var/mob/living/simple_animal/S = parent
+	var/mob/living/stoned = parent
 
 	src.container = container
 
-	S.forceMove(container)
+	stoned.forceMove(container)
+	stoned.fully_heal()
+	stoned.add_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), SOULSTONE_TRAIT)
+	stoned.status_traits |= GODMODE
 
-	S.status_flags |= GODMODE
-	ADD_TRAIT(S, TRAIT_IMMOBILIZED, SOULSTONE_TRAIT)
-	ADD_TRAIT(S, TRAIT_HANDS_BLOCKED, SOULSTONE_TRAIT)
-	S.set_health(S.maxHealth)
-	S.bruteloss = 0
-
-	RegisterSignal(S, COMSIG_MOVABLE_MOVED, PROC_REF(free_prisoner))
+	RegisterSignal(stoned, COMSIG_MOVABLE_MOVED, PROC_REF(free_prisoner))
 
 /datum/component/soulstoned/proc/free_prisoner()
-	var/mob/living/simple_animal/S = parent
-	if(S.loc != container)
+	SIGNAL_HANDLER
+
+	var/mob/living/stoned = parent
+	if(stoned.loc != container)
 		qdel(src)
 
 /datum/component/soulstoned/UnregisterFromParent()
-	var/mob/living/simple_animal/S = parent
-	S.status_flags &= ~GODMODE
-	REMOVE_TRAIT(S, TRAIT_IMMOBILIZED, SOULSTONE_TRAIT)
-	REMOVE_TRAIT(S, TRAIT_HANDS_BLOCKED, SOULSTONE_TRAIT)
+	var/mob/living/stoned = parent
+	stoned.remove_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), SOULSTONE_TRAIT)
+	stoned.status_traits &= ~GODMODE

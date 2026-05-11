@@ -33,7 +33,7 @@
 
 	//The wrap-up. Anything else we need to do before we start spanning things, we do it here.
 	//Note that this also sends a copy of our subjective pronouns.
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, examine_sections, P)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, examine_sections, P)
 
 
 	// round any decimal sections up to the rest of the group
@@ -504,7 +504,7 @@
 	// Health statuses
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
-		if(suiciding)
+		if(HAS_TRAIT(src, TRAIT_SUICIDED))
 			. += span_red("[P[THEY]] appear[pl] to have committed suicide... there is no hope of recovery.")
 		if(hellbound)
 			. += span_red("[P[THEIR]] soul seems to have been ripped out of [P[THEIR]] body. Revival is impossible.")

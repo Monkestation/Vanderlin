@@ -15,11 +15,7 @@
 	var/mob/living/carbon/human/H = owner
 	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
 
-	if(H.wear_mask)
-		var/type = H.wear_mask.type
-		qdel(H.wear_mask)
-		H.put_in_hands(new type())
-	H.equip_to_slot_or_del(new /obj/item/clothing/face/spectacles(H), ITEM_SLOT_MASK)
+	H.put_in_hands(new /obj/item/clothing/face/spectacles())
 	H.become_nearsighted(type)
 
 /datum/quirk/vice/bad_sight/on_remove()
@@ -43,13 +39,8 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	if(H.wear_mask)
-		var/type = H.wear_mask.type
-		QDEL_NULL(H.wear_mask)
-		H.put_in_hands(new type(get_turf(H)))
-	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/right/permanent)
+	H.put_in_hands(new /obj/item/clothing/face/eyepatch())
+	ADD_TRAIT(H, TRAIT_CYCLOPS_RIGHT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/cyclops_left
@@ -61,13 +52,8 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	if(H.wear_mask)
-		var/type = H.wear_mask.type
-		QDEL_NULL(H.wear_mask)
-		H.put_in_hands(new type(get_turf(H)))
-	H.equip_to_slot_or_del(new /obj/item/clothing/face/eyepatch/left(H), ITEM_SLOT_MASK)
-	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
-	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
+	H.put_in_hands(new /obj/item/clothing/face/eyepatch/left())
+	ADD_TRAIT(H, TRAIT_CYCLOPS_LEFT, QUIRK_TRAIT)
 	H.update_fov_angles()
 
 /datum/quirk/vice/tongueless
@@ -287,7 +273,8 @@
 	if(H.reagents)
 		H.reagents.add_reagent(/datum/reagent/drug/space_drugs, 15)
 
-	H.adjustBruteLoss(40)
+	for(var/i = 1 to 4)
+		H.adjustBruteLoss(rand(9, 14), damage_type = BCLASS_BLUNT)
 	var/obj/item/bodypart/l_leg/left = H.get_bodypart(BODY_ZONE_L_LEG)
 	var/obj/item/bodypart/r_leg/right = H.get_bodypart(BODY_ZONE_R_LEG)
 

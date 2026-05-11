@@ -2,6 +2,9 @@
 	..()
 	var/atom/movable/screen/using
 
+	backhudl = new /atom/movable/screen/backhudl/empty_border(null, src)
+	static_inventory += backhudl
+
 	action_intent = new /atom/movable/screen/act_intent/rogintent(null, src)
 	action_intent.icon = ui_style
 	action_intent.icon_state = mymob.used_intent.name

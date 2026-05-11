@@ -9,7 +9,7 @@
 	. = ..()
 	if(!.)
 		return
-	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMGE, PROC_REF(on_attacked))
+	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_attacked))
 	cube = icon('icons/effects/freeze.dmi', "spike")
 	ADD_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
 	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, TRAIT_STATUS_EFFECT(id))
@@ -28,7 +28,7 @@
 	REMOVE_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
 	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, TRAIT_STATUS_EFFECT(id))
 	owner.cut_overlay(cube)
-	UnregisterSignal(owner,COMSIG_MOB_APPLY_DAMGE)
+	UnregisterSignal(owner,COMSIG_MOB_APPLY_DAMAGE)
 	playsound(owner, 'sound/magic/icicle.ogg', 100, TRUE)
 	var/mob/living/M = owner
 	if (M)
