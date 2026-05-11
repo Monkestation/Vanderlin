@@ -425,7 +425,7 @@
 						if(GETBRAINLOSS(target) >= 100)
 							SETBRAINLOSS(target, 99)
 						if(HAS_TRAIT(target, TRAIT_NECRA_CURSE))
-							to_chat(target, span_warning("Necra holds tight to this one."))
+							to_chat(src, span_warning("Necra holds tight to this one."))
 							return FALSE
 						if(diceroll >= DICE_CRIT_SUCCESS)
 							if(target.revive())
@@ -437,14 +437,16 @@
 								add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
 								target.apply_status_effect(/datum/status_effect/debuff/revive)
 								target.remove_client_colour(/datum/client_colour/monochrome/death)
+								chest.add_wound(/datum/wound/fracture/chest)
 								record_round_statistic(STATS_CPR_REVIVALS, 1)
+							else
+								to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 				else
 					if(diceroll <= DICE_CRIT_FAILURE)
-						visible_message(span_danger("<b>[src]</b> botches the chest compressions, cracking <b>[target]</b>'s  ribs!"), \
-									span_danger("I botch the chest compressions, cracking <b>[target]</b>'s ribs!"),
-									span_hear("I hear a loud crack!"),
+						visible_message(span_danger("<b>[src]</b> botches the chest compressions!"), \
+									span_danger("I botch the chest compressions!"),
+									span_hear("I hear frantic pressing!"),
 									ignored_mobs = target)
-						to_chat(target, span_userdanger("<b>[src]</b> botches the chest compressions and cracks my ribs!"))
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
 	if(..())

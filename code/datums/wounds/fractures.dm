@@ -20,7 +20,7 @@
 
 	// Limbs hemorrhage but clot quickly
 	// Lose 164.3 blood over 19 ticks then clot
-	bleed_rate = 4.1
+	bleed_rate = 2.3
 	clotting_threshold = 0.6
 	clotting_rate = 0.85
 
@@ -128,7 +128,7 @@
 		"The cranium is shattered!",
 	)
 	whp = 150
-	bleed_rate = 2.3
+	bleed_rate = 5.8
 	paralysis = TRUE
 	knockout = 25 SECONDS
 	min_damage_dividend = 0.95
@@ -258,7 +258,7 @@
 	)
 	whp = 50
 	// Lose 224.6 blood over 18 ticks then clot
-	bleed_rate = 5.8
+	bleed_rate = 1.6
 	clotting_threshold = 0.8
 	clotting_rate = 1.25
 	viable_zones = list(BODY_ZONE_CHEST)
