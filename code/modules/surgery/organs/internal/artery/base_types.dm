@@ -42,6 +42,11 @@
 	)
 	to_chat(owner, "<span class='userdanger'>[pick(heartaches)]</span>")
 
+/obj/item/organ/artery/chest/dissect()
+	. = ..()
+	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+		owner.death()
+
 /obj/item/organ/artery/neck
 	name = "carotid artery"
 	zone = BODY_ZONE_PRECISE_NECK

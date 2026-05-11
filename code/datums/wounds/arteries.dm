@@ -61,7 +61,6 @@
 	artery_type_override = /obj/item/organ/artery/chest
 	associated_bclasses = ARTERY_HEART_BCLASSES
 	viable_zones = list(BODY_ZONE_CHEST)
-	mortal = TRUE
 
 /datum/wound/artery/heart/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(affected.limb_flags & BODYPART_BONE_ENCASED && !affected.has_wound(/datum/wound/fracture))
