@@ -37,7 +37,7 @@
 	output = /obj/item/gravedecor/headstone/psydon
 	craftdiff = 3
 
-/datum/repeatable_crafting_recipe/gravemaking/pestran_headstone
+/datum/repeatable_crafting_recipe/gravemaking/pestra_headstone
 	name = "pestran headstone"
 	requirements = list(
 		/obj/item/natural/stoneblock = 3,
@@ -47,17 +47,7 @@
 	output = /obj/item/gravedecor/headstone/pestra
 	craftdiff = 3
 
-/datum/repeatable_crafting_recipe/gravemaking/pestran_headstone
-	name = "abyssorite headstone"
-	requirements = list(
-		/obj/item/natural/stoneblock = 3,
-	)
-	attacked_atom = /obj/item/natural/stoneblock
-	starting_atom  = /obj/item/weapon/chisel
-	output = /obj/item/gravedecor/headstone/abyssor
-	craftdiff = 3
-
-/datum/repeatable_crafting_recipe/gravemaking/pestran_headstone
+/datum/repeatable_crafting_recipe/gravemaking/abyssorite_headstone
 	name = "abyssorite headstone"
 	requirements = list(
 		/obj/item/natural/stoneblock = 3,
