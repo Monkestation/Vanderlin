@@ -73,7 +73,7 @@
 		. += "<br>[inscription]"
 		. += span_warning("Wait... shouldn't this be attached to a grave?")
 	else if(custom_message) // Not inscribed, but there is a custom_message
-		. += span_info("There is a message carved into the middle of \the [src]...<br>")
+		. += span_info("There is a message carved onto \the [src]...<br>")
 		. += span_italics("[custom_message]")
 
 
