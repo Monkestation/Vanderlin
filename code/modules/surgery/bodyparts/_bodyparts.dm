@@ -419,7 +419,7 @@
 
 
 /// Proc for damaging organs inside a limb based on damage values
-/obj/item/bodypart/proc/damage_internal_organs(wounding_type = WOUND_BLUNT, amount = 0, organ_bonus = 0, bare_organ_bonus = 0, forced = FALSE, wound_messages = TRUE)
+/obj/item/bodypart/proc/damage_internal_organs(wounding_type, amount = 0, organ_bonus = 0, bare_organ_bonus = 0, forced = FALSE, wound_messages = TRUE)
 	. = FALSE
 	if(organ_bonus == CANT_ORGAN)
 		return
@@ -456,16 +456,12 @@
 	var/organ_damage_minimum = organ_damage_hit_minimum
 	var/organ_damaged_required = organ_damage_requirement
 	switch(wounding_type)
-		// Piercing damage is more likely to damage internal organs
-		if(WOUND_PIERCE)
-			organ_damage_minimum *= 0.5
-		// Slashing damage is *slightly* more likely to damage internal organs
-		if(WOUND_SLASH)
+		// Penetrating and blunt injuries are more likely to damage internal organs
+		if(WOUND_PIERCE, WOUND_BLUNT)
 			organ_damage_minimum *= 0.75
 		// Burn damage is unlikely to damage organs
 		if(WOUND_BURN)
 			organ_damage_minimum *= 1.5
-		// Organ damage minimum is assumed to be the case for blunt anyway
 		else
 			organ_damage_hit_minimum *= 1
 
