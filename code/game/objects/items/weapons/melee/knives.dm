@@ -320,7 +320,7 @@
 	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/hand
-	name = "\proper faervor"
+	name = "\proper fervor"
 	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
